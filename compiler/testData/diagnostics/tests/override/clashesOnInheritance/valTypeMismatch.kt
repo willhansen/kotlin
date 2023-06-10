@@ -1,18 +1,18 @@
 // FIR_IDENTICAL
 open class A {
-    open val foo: Boolean = true
+    open konst foo: Boolean = true
 }
 
 interface IA {
-    val foo: String
+    konst foo: String
 }
 
 interface IAA {
-    val foo: Int
+    konst foo: Int
 }
 
 interface IGA<T> {
-    val foo: T
+    konst foo: T
 }
 
 <!PROPERTY_TYPE_MISMATCH_ON_INHERITANCE!>class B1<!>: A(), IA

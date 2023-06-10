@@ -38,7 +38,7 @@ internal class LLFirCombinedJavaSymbolProvider private constructor(
     session: FirSession,
     project: Project,
     providers: List<JavaSymbolProvider>,
-    private val javaClassFinder: JavaClassFinder,
+    private konst javaClassFinder: JavaClassFinder,
 ) : LLFirSelectingCombinedSymbolProvider<JavaSymbolProvider>(session, project, providers) {
     /**
      * The purpose of this cache is to avoid index access for frequently accessed `ClassId`s, including failures. Because Java symbol
@@ -48,9 +48,9 @@ internal class LLFirCombinedJavaSymbolProvider private constructor(
      * resulted in less time spent in [computeClassLikeSymbolByClassId] in local benchmarks. Cache sizes of 5000 and 10000 were tried in
      * performance tests, but didn't affect performance. A cache size of 2500 is a good middle ground with a small memory footprint.
      */
-    private val classCache: NullableCaffeineCache<ClassId, FirRegularClassSymbol> = NullableCaffeineCache { it.maximumSize(2500) }
+    private konst classCache: NullableCaffeineCache<ClassId, FirRegularClassSymbol> = NullableCaffeineCache { it.maximumSize(2500) }
 
-    override val symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProviderWithoutCallables() {
+    override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProviderWithoutCallables() {
         override fun getTopLevelClassifierNamesInPackage(packageFqName: FqName): Set<String>? = null
         override fun mayHaveTopLevelClassifier(classId: ClassId): Boolean = true
     }
@@ -59,11 +59,11 @@ internal class LLFirCombinedJavaSymbolProvider private constructor(
         classCache.get(classId) { computeClassLikeSymbolByClassId(it) }
 
     private fun computeClassLikeSymbolByClassId(classId: ClassId): FirRegularClassSymbol? {
-        val javaClasses = javaClassFinder.findClasses(classId)
+        konst javaClasses = javaClassFinder.findClasses(classId)
             .filterNot { javaClass -> javaClass.annotations.any { it.isResolvedTo(JvmAnnotationNames.METADATA_FQ_NAME) } }
         if (javaClasses.isEmpty()) return null
 
-        val (javaClass, provider) = selectFirstElementInClasspathOrder(javaClasses) { javaClass ->
+        konst (javaClass, provider) = selectFirstElementInClasspathOrder(javaClasses) { javaClass ->
             // `JavaClass` doesn't know anything about PSI, but we can be sure that `findClasses` returns a `JavaClassImpl` because it's
             // using `KotlinJavaPsiFacade`. The alternative to this hack would be to change the interface of either `JavaClass` (yet the
             // module should hardly depend on PSI), or to have `KotlinJavaPsiFacade` and `JavaClassFinderImpl` return `JavaClassImpl` and to
@@ -92,8 +92,8 @@ internal class LLFirCombinedJavaSymbolProvider private constructor(
     companion object {
         fun merge(session: FirSession, project: Project, providers: List<LLFirJavaSymbolProvider>): FirSymbolProvider? =
             if (providers.size > 1) {
-                val combinedScope = GlobalSearchScope.union(providers.map { it.searchScope })
-                val javaClassFinder = project.createJavaClassFinder(combinedScope)
+                konst combinedScope = GlobalSearchScope.union(providers.map { it.searchScope })
+                konst javaClassFinder = project.createJavaClassFinder(combinedScope)
                 LLFirCombinedJavaSymbolProvider(session, project, providers, javaClassFinder)
             } else providers.singleOrNull()
     }

@@ -9,17 +9,17 @@ import org.jetbrains.kotlin.descriptors.annotations.KotlinTarget
 import org.jetbrains.kotlin.name.FqName
 
 data class OptInDescription(
-    val annotationFqName: FqName,
-    val severity: Severity,
-    val message: String?,
-    val subclassesOnly: Boolean,
+    konst annotationFqName: FqName,
+    konst severity: Severity,
+    konst message: String?,
+    konst subclassesOnly: Boolean,
 ) {
     enum class Severity { WARNING, ERROR, FUTURE_ERROR }
 
     companion object {
-        val DEFAULT_SEVERITY = Severity.ERROR
+        konst DEFAULT_SEVERITY = Severity.ERROR
 
-        val WRONG_TARGETS_FOR_MARKER = setOf(
+        konst WRONG_TARGETS_FOR_MARKER = setOf(
             KotlinTarget.EXPRESSION,
             KotlinTarget.FILE,
             KotlinTarget.TYPE,

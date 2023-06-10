@@ -56,7 +56,7 @@ enum class KotlinPlatformType: Named, Serializable {
     }
 
     companion object {
-        val attribute = Attribute.of(
+        konst attribute = Attribute.of(
             "org.jetbrains.kotlin.platform.type",
             KotlinPlatformType::class.java
         )

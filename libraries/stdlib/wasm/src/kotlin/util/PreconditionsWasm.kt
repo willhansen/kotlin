@@ -13,12 +13,12 @@ import kotlin.contracts.contract
 
 @PublishedApi
 @kotlin.internal.InlineOnly
-internal inline fun check(value: Boolean, lazyMessage: () -> String): Unit {
+internal inline fun check(konstue: Boolean, lazyMessage: () -> String): Unit {
     contract {
-        returns() implies value
+        returns() implies konstue
     }
-    if (!value) {
-        val message = lazyMessage()
+    if (!konstue) {
+        konst message = lazyMessage()
         throw IllegalStateException(message)
     }
 }

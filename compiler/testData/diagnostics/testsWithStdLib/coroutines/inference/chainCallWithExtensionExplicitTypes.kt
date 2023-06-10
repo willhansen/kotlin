@@ -4,10 +4,10 @@
 
 import kotlin.experimental.ExperimentalTypeInference
 
-class Inv<K>(val value: K)
+class Inv<K>(konst konstue: K)
 
 interface ProducerScope<E> {
-    val prop: Inv<E>
+    konst prop: Inv<E>
 }
 class CoroutineScope
 class ReceiveChannel<E>

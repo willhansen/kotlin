@@ -20,7 +20,7 @@ object TypeOfChecker : CallChecker {
 
         for ((_, argument) in resolvedCall.typeArguments) {
             if (argument.contains { type ->
-                    val descriptor = type.constructor.declarationDescriptor
+                    konst descriptor = type.constructor.declarationDescriptor
                     descriptor is TypeParameterDescriptor && !descriptor.isReified
                 }) {
                 context.trace.report(Errors.UNSUPPORTED.on(reportOn, "'typeOf' with non-reified type parameters is not supported"))
@@ -30,6 +30,6 @@ object TypeOfChecker : CallChecker {
 
     fun isTypeOf(descriptor: CallableDescriptor): Boolean =
         descriptor.name.asString() == "typeOf" &&
-                descriptor.valueParameters.isEmpty() &&
+                descriptor.konstueParameters.isEmpty() &&
                 (descriptor.containingDeclaration as? PackageFragmentDescriptor)?.fqName == KOTLIN_REFLECT_FQ_NAME
 }

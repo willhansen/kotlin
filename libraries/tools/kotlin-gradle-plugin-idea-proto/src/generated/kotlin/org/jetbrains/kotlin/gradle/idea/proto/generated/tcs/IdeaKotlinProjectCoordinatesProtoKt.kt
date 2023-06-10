@@ -10,7 +10,7 @@ object IdeaKotlinProjectCoordinatesProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectCoordinatesProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectCoordinatesProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKotlinProjectCoordinatesProtoKt {
       @JvmName("getBuildId")
       get() = _builder.getBuildId()
       @JvmName("setBuildId")
-      set(value) {
-        _builder.setBuildId(value)
+      set(konstue) {
+        _builder.setBuildId(konstue)
       }
     /**
      * <code>optional string build_id = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKotlinProjectCoordinatesProtoKt {
       @JvmName("getProjectPath")
       get() = _builder.getProjectPath()
       @JvmName("setProjectPath")
-      set(value) {
-        _builder.setProjectPath(value)
+      set(konstue) {
+        _builder.setProjectPath(konstue)
       }
     /**
      * <code>optional string project_path = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKotlinProjectCoordinatesProtoKt {
       @JvmName("getProjectName")
       get() = _builder.getProjectName()
       @JvmName("setProjectName")
-      set(value) {
-        _builder.setProjectName(value)
+      set(konstue) {
+        _builder.setProjectName(konstue)
       }
     /**
      * <code>optional string project_name = 3;</code>

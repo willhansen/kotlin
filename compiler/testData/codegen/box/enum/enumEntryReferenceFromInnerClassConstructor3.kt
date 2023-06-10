@@ -12,7 +12,7 @@ enum class Test : IFoo, IBar {
         // in delegate initializer
         inner class Inner : IFoo by FOO
 
-        val z = Inner()
+        konst z = Inner()
 
         override fun foo() = "OK"
 

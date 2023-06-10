@@ -19,13 +19,13 @@ interface C<T> {
 open class B : C<Int>, A()
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     if (b.size != 56) return "fail 1"
 
     b.size = 55
     if (b.size != 55) return "fail 2"
 
-    val c: C<Int> = b
+    konst c: C<Int> = b
     if (c.size != 55) return "fail 3"
 
     c.size = 57

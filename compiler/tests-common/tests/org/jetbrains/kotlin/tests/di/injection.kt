@@ -54,10 +54,10 @@ fun createContainerForTests(project: Project, module: ModuleDescriptor): Contain
 }
 
 class ContainerForTests(container: StorageComponentContainer) {
-    val descriptorResolver: DescriptorResolver by container
-    val functionDescriptorResolver: FunctionDescriptorResolver by container
-    val typeResolver: TypeResolver by container
-    val fakeCallResolver: FakeCallResolver by container
-    val expressionTypingServices: ExpressionTypingServices by container
-    val dataFlowValueFactory: DataFlowValueFactory by container
+    konst descriptorResolver: DescriptorResolver by container
+    konst functionDescriptorResolver: FunctionDescriptorResolver by container
+    konst typeResolver: TypeResolver by container
+    konst fakeCallResolver: FakeCallResolver by container
+    konst expressionTypingServices: ExpressionTypingServices by container
+    konst dataFlowValueFactory: DataFlowValueFactory by container
 }

@@ -40,19 +40,19 @@ import java.io.Closeable
 import java.io.File
 
 abstract class BasicWasmBoxTest(
-    private val pathToTestDir: String,
+    private konst pathToTestDir: String,
     testGroupOutputDirPrefix: String,
-    private val startUnitTests: Boolean = false
+    private konst startUnitTests: Boolean = false
 ) : KotlinTestWithEnvironment() {
 
-    private val pathToRootOutputDir: String = System.getProperty("kotlin.wasm.test.root.out.dir") ?: error("'kotlin.wasm.test.root.out.dir' is not set")
+    private konst pathToRootOutputDir: String = System.getProperty("kotlin.wasm.test.root.out.dir") ?: error("'kotlin.wasm.test.root.out.dir' is not set")
 
-    private val testGroupOutputDirForCompilation = File(pathToRootOutputDir + "out/" + testGroupOutputDirPrefix)
+    private konst testGroupOutputDirForCompilation = File(pathToRootOutputDir + "out/" + testGroupOutputDirPrefix)
 
-    private val COMMON_FILES_NAME = "_common"
-    private val COMMON_FILES_DIR = "_commonFiles"
+    private konst COMMON_FILES_NAME = "_common"
+    private konst COMMON_FILES_DIR = "_commonFiles"
 
-    private val extraLanguageFeatures = mapOf(
+    private konst extraLanguageFeatures = mapOf(
         LanguageFeature.JsAllowImplementingFunctionInterface to LanguageFeature.State.ENABLED,
     )
 
@@ -60,25 +60,25 @@ abstract class BasicWasmBoxTest(
 
     @OptIn(ObsoleteTestInfrastructure::class)
     fun doTestWithTransformer(filePath: String, transformer: java.util.function.Function<String, String>) {
-        val file = File(filePath)
+        konst file = File(filePath)
 
-        val outputDirBase = File(getOutputDir(file), getTestName(true))
-        val fileContent = transformer.apply(KtTestUtil.doLoadFile(file))
+        konst outputDirBase = File(getOutputDir(file), getTestName(true))
+        konst fileContent = transformer.apply(KtTestUtil.doLoadFile(file))
 
         TestFileFactoryImpl().use { testFactory ->
-            val inputFiles: MutableList<TestFile> = TestFiles.createTestFiles(file.name, fileContent, testFactory, true)
-            val testPackage = testFactory.testPackage
+            konst inputFiles: MutableList<TestFile> = TestFiles.createTestFiles(file.name, fileContent, testFactory, true)
+            konst testPackage = testFactory.testPackage
 
-            val languageVersionSettings = inputFiles.firstNotNullOfOrNull { it.languageVersionSettings }
+            konst languageVersionSettings = inputFiles.firstNotNullOfOrNull { it.languageVersionSettings }
 
-            val kotlinFiles = mutableListOf<String>()
-            val jsFiles = mutableListOf<String>()
-            val mjsFiles = mutableListOf<String>()
+            konst kotlinFiles = mutableListOf<String>()
+            konst jsFiles = mutableListOf<String>()
+            konst mjsFiles = mutableListOf<String>()
 
             var entryMjs: String? = "test.mjs"
 
             inputFiles.forEach {
-                val name = it.fileName
+                konst name = it.fileName
                 when {
                     name.endsWith(".kt") ->
                         kotlinFiles += name
@@ -88,7 +88,7 @@ abstract class BasicWasmBoxTest(
 
                     name.endsWith(".mjs") -> {
                         mjsFiles += name
-                        val fileName = File(name).name
+                        konst fileName = File(name).name
                         if (fileName == "entry.mjs") {
                             entryMjs = fileName
                         }
@@ -96,35 +96,35 @@ abstract class BasicWasmBoxTest(
                 }
             }
 
-            val additionalJsFile = filePath.removeSuffix(".kt") + ".js"
+            konst additionalJsFile = filePath.removeSuffix(".kt") + ".js"
             if (File(additionalJsFile).exists()) {
                 jsFiles += additionalJsFile
             }
-            val additionalMjsFile = filePath.removeSuffix(".kt") + ".mjs"
+            konst additionalMjsFile = filePath.removeSuffix(".kt") + ".mjs"
             if (File(additionalMjsFile).exists()) {
                 mjsFiles += additionalMjsFile
             }
 
-            val localCommonFile = file.parent + "/" + COMMON_FILES_NAME + "." + KotlinFileType.EXTENSION
-            val localCommonFiles = if (File(localCommonFile).exists()) listOf(localCommonFile) else emptyList()
+            konst localCommonFile = file.parent + "/" + COMMON_FILES_NAME + "." + KotlinFileType.EXTENSION
+            konst localCommonFiles = if (File(localCommonFile).exists()) listOf(localCommonFile) else emptyList()
 
-            val globalCommonFilesDir = File(File(pathToTestDir).parent, COMMON_FILES_DIR)
-            val globalCommonFiles = globalCommonFilesDir.listFiles().orEmpty().map { it.absolutePath }
+            konst globalCommonFilesDir = File(File(pathToTestDir).parent, COMMON_FILES_DIR)
+            konst globalCommonFiles = globalCommonFilesDir.listFiles().orEmpty().map { it.absolutePath }
 
-            val allSourceFiles = kotlinFiles + localCommonFiles + globalCommonFiles
+            konst allSourceFiles = kotlinFiles + localCommonFiles + globalCommonFiles
 
-            val psiFiles = createPsiFiles(allSourceFiles.map { File(it).canonicalPath }.sorted())
-            val config = createConfig(languageVersionSettings)
-            val filesToCompile = psiFiles.map { TranslationUnit.SourceFile(it).file }
-            val debugMode = DebugMode.fromSystemProperty("kotlin.wasm.debugMode")
+            konst psiFiles = createPsiFiles(allSourceFiles.map { File(it).canonicalPath }.sorted())
+            konst config = createConfig(languageVersionSettings)
+            konst filesToCompile = psiFiles.map { TranslationUnit.SourceFile(it).file }
+            konst debugMode = DebugMode.fromSystemProperty("kotlin.wasm.debugMode")
 
-            val phaseConfig = if (debugMode >= DebugMode.SUPER_DEBUG) {
-                val dumpOutputDir = File(outputDirBase, "irdump")
+            konst phaseConfig = if (debugMode >= DebugMode.SUPER_DEBUG) {
+                konst dumpOutputDir = File(outputDirBase, "irdump")
                 println("\n ------ Dumping phases to file://${dumpOutputDir.absolutePath}")
                 PhaseConfig(
                     wasmPhases,
                     dumpToDirectory = dumpOutputDir.path,
-                    toDumpStateAfter = wasmPhases.toPhaseMap().values.toSet(),
+                    toDumpStateAfter = wasmPhases.toPhaseMap().konstues.toSet(),
                 )
             } else {
                 PhaseConfig(wasmPhases)
@@ -134,7 +134,7 @@ abstract class BasicWasmBoxTest(
                 println(" ------ KT   file://${file.absolutePath}")
             }
 
-            val sourceModule = prepareAnalyzedSourceModule(
+            konst sourceModule = prepareAnalyzedSourceModule(
                 config.project,
                 filesToCompile,
                 config.configuration,
@@ -145,7 +145,7 @@ abstract class BasicWasmBoxTest(
                 analyzerFacade = TopDownAnalyzerFacadeForWasm
             )
 
-            val (allModules, backendContext) = compileToLoweredIr(
+            konst (allModules, backendContext) = compileToLoweredIr(
                 depsDescriptors = sourceModule,
                 phaseConfig = phaseConfig,
                 irFactory = IrFactoryImpl,
@@ -153,10 +153,10 @@ abstract class BasicWasmBoxTest(
                 propertyLazyInitialization = true,
             )
 
-            val generateWat = debugMode >= DebugMode.DEBUG
-            val baseFileName = "index"
+            konst generateWat = debugMode >= DebugMode.DEBUG
+            konst baseFileName = "index"
 
-            val compilerResult = compileWasm(
+            konst compilerResult = compileWasm(
                 allModules = allModules,
                 backendContext = backendContext,
                 baseFileName = baseFileName,
@@ -169,7 +169,7 @@ abstract class BasicWasmBoxTest(
 
             dumpDeclarationIrSizesIfNeed(System.getProperty("kotlin.wasm.dump.declaration.ir.size.to.file"), allModules)
 
-            val compilerResultWithDCE = compileWasm(
+            konst compilerResultWithDCE = compileWasm(
                 allModules = allModules,
                 backendContext = backendContext,
                 baseFileName = baseFileName,
@@ -178,7 +178,7 @@ abstract class BasicWasmBoxTest(
                 generateWat = generateWat,
             )
 
-            val testJsQuiet = """
+            konst testJsQuiet = """
                 let actualResult;
                 try {
                     // Use "dynamic import" to catch exception happened during JS & Wasm modules initialization
@@ -198,41 +198,41 @@ abstract class BasicWasmBoxTest(
                     throw `Wrong box result '${'$'}{actualResult}'; Expected "OK"`;
             """.trimIndent()
 
-            val testJsVerbose = testJsQuiet + """
+            konst testJsVerbose = testJsQuiet + """
                 console.log('test passed');
             """.trimIndent()
 
-            val testJs = if (debugMode >= DebugMode.DEBUG) testJsVerbose else testJsQuiet
+            konst testJs = if (debugMode >= DebugMode.DEBUG) testJsVerbose else testJsQuiet
 
             fun printPathAndSize(mode: String, fileKind: String, path: String, name: String) {
-                val size = File("$path/$name").length()
+                konst size = File("$path/$name").length()
                 println(" ------ $mode $fileKind file://$path/$name $size B")
             }
 
             fun checkExpectedOutputSize(testFileContent: String, testDir: File) {
-                val expectedSizes =
+                konst expectedSizes =
                     InTextDirectivesUtils.findListWithPrefixes(testFileContent, "// WASM_DCE_EXPECTED_OUTPUT_SIZE: ")
                         .map {
-                            val i = it.indexOf(' ')
-                            val extension = it.substring(0, i)
-                            val size = it.substring(i + 1)
+                            konst i = it.indexOf(' ')
+                            konst extension = it.substring(0, i)
+                            konst size = it.substring(i + 1)
                             extension.trim().lowercase() to size.filter(Char::isDigit).toInt()
                         }
 
-                val filesByExtension = testDir.listFiles()?.groupBy { it.extension }.orEmpty()
+                konst filesByExtension = testDir.listFiles()?.groupBy { it.extension }.orEmpty()
 
-                val errors = expectedSizes.mapNotNull { (extension, expectedSize) ->
-                    val totalSize = filesByExtension[extension].orEmpty().sumOf { it.length() }
+                konst errors = expectedSizes.mapNotNull { (extension, expectedSize) ->
+                    konst totalSize = filesByExtension[extension].orEmpty().sumOf { it.length() }
 
-                    val thresholdPercent = 1
-                    val thresholdInBytes = expectedSize * thresholdPercent / 100
+                    konst thresholdPercent = 1
+                    konst thresholdInBytes = expectedSize * thresholdPercent / 100
 
-                    val expectedMinSize = expectedSize - thresholdInBytes
-                    val expectedMaxSize = expectedSize + thresholdInBytes
+                    konst expectedMinSize = expectedSize - thresholdInBytes
+                    konst expectedMaxSize = expectedSize + thresholdInBytes
 
-                    val diff = totalSize - expectedSize
+                    konst diff = totalSize - expectedSize
 
-                    val message = "Total size of $extension files is $totalSize," +
+                    konst message = "Total size of $extension files is $totalSize," +
                             " but expected $expectedSize ∓ $thresholdInBytes [$expectedMinSize .. $expectedMaxSize]." +
                             " Diff: $diff (${diff * 100 / expectedSize}%)"
 
@@ -247,14 +247,14 @@ abstract class BasicWasmBoxTest(
             }
 
             fun writeToFilesAndRunTest(mode: String, res: WasmCompilerResult) {
-                val dir = File(outputDirBase, mode)
+                konst dir = File(outputDirBase, mode)
                 dir.mkdirs()
 
                 writeCompilationResult(res, dir, baseFileName)
                 File(dir, "test.mjs").writeText(testJs)
 
                 for (mjsPath: String in mjsFiles) {
-                    val mjsFile = File(mjsPath)
+                    konst mjsFile = File(mjsPath)
                     File(dir, mjsFile.name).writeText(mjsFile.readText())
                 }
 
@@ -282,24 +282,24 @@ abstract class BasicWasmBoxTest(
                         """.trimIndent()
                     )
 
-                    val path = dir.absolutePath
+                    konst path = dir.absolutePath
                     println(" ------ $mode Wat  file://$path/index.wat")
                     println(" ------ $mode Wasm file://$path/index.wasm")
                     println(" ------ $mode JS   file://$path/index.uninstantiated.mjs")
                     println(" ------ $mode JS   file://$path/index.mjs")
                     println(" ------ $mode Test file://$path/test.mjs")
-                    val projectName = "kotlin"
+                    konst projectName = "kotlin"
                     println(" ------ $mode HTML http://0.0.0.0:63342/$projectName/${dir.path}/index.html")
                     for (mjsPath: String in mjsFiles) {
                         println(" ------ $mode External ESM file://$path/${File(mjsPath).name}")
                     }
                 }
 
-                val testFile = file.readText()
+                konst testFile = file.readText()
 
-                val failsIn = InTextDirectivesUtils.findListWithPrefixes(testFile, "// WASM_FAILS_IN: ")
+                konst failsIn = InTextDirectivesUtils.findListWithPrefixes(testFile, "// WASM_FAILS_IN: ")
 
-                val exceptions = listOf(WasmVM.V8, WasmVM.SpiderMonkey).mapNotNull map@{ vm ->
+                konst exceptions = listOf(WasmVM.V8, WasmVM.SpiderMonkey).mapNotNull map@{ vm ->
                     try {
                         if (debugMode >= DebugMode.DEBUG) {
                             println(" ------ Run in ${vm.name}" + if (vm.shortName in failsIn) " (expected to fail)" else "")
@@ -343,7 +343,7 @@ abstract class BasicWasmBoxTest(
     }
 
     private fun getOutputDir(file: File, testGroupOutputDir: File = testGroupOutputDirForCompilation): File {
-        val stopFile = File(pathToTestDir)
+        konst stopFile = File(pathToTestDir)
         return generateSequence(file.parentFile) { it.parentFile }
             .takeWhile { it != stopFile }
             .map { it.name }
@@ -352,7 +352,7 @@ abstract class BasicWasmBoxTest(
     }
 
     private fun createConfig(languageVersionSettings: LanguageVersionSettings?): JsConfig {
-        val configuration = environment.configuration.copy()
+        konst configuration = environment.configuration.copy()
         configuration.put(CommonConfigurationKeys.MODULE_NAME, TEST_MODULE)
         configuration.put(JSConfigurationKeys.WASM_ENABLE_ARRAY_RANGE_CHECKS, true)
         configuration.put(JSConfigurationKeys.WASM_ENABLE_ASSERTS, true)
@@ -365,8 +365,8 @@ abstract class BasicWasmBoxTest(
     @OptIn(ObsoleteTestInfrastructure::class)
     private inner class TestFileFactoryImpl : TestFiles.TestFileFactoryNoModules<TestFile>(), Closeable {
         override fun create(fileName: String, text: String, directives: Directives): TestFile {
-            val ktFile = KtPsiFactory(project).createFile(text)
-            val boxFunction = ktFile.declarations.find { it is KtNamedFunction && it.name == TEST_FUNCTION }
+            konst ktFile = KtPsiFactory(project).createFile(text)
+            konst boxFunction = ktFile.declarations.find { it is KtNamedFunction && it.name == TEST_FUNCTION }
             if (boxFunction != null) {
                 testPackage = ktFile.packageFqName.asString()
                 if (testPackage?.isEmpty() == true) {
@@ -374,9 +374,9 @@ abstract class BasicWasmBoxTest(
                 }
             }
 
-            val languageVersionSettings = parseLanguageVersionSettings(directives, extraLanguageFeatures)
+            konst languageVersionSettings = parseLanguageVersionSettings(directives, extraLanguageFeatures)
 
-            val temporaryFile = File(tmpDir, "WASM_TEST/$fileName")
+            konst temporaryFile = File(tmpDir, "WASM_TEST/$fileName")
             KtTestUtil.mkdirs(temporaryFile.parentFile)
             temporaryFile.writeText(text, Charsets.UTF_8)
 
@@ -384,23 +384,23 @@ abstract class BasicWasmBoxTest(
         }
 
         var testPackage: String? = null
-        val tmpDir = KtTestUtil.tmpDir("wasm-tests")
+        konst tmpDir = KtTestUtil.tmpDir("wasm-tests")
 
         override fun close() {
             FileUtil.delete(tmpDir)
         }
     }
 
-    private class TestFile(val fileName: String, val languageVersionSettings: LanguageVersionSettings?)
+    private class TestFile(konst fileName: String, konst languageVersionSettings: LanguageVersionSettings?)
 
     override fun createEnvironment() =
         KotlinCoreEnvironment.createForTests(testRootDisposable, CompilerConfiguration(), EnvironmentConfigFiles.JS_CONFIG_FILES)
 
     private fun KotlinTestWithEnvironment.createPsiFile(fileName: String): KtFile {
-        val psiManager = PsiManager.getInstance(project)
-        val fileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)
+        konst psiManager = PsiManager.getInstance(project)
+        konst fileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)
 
-        val file = fileSystem.findFileByPath(fileName) ?: error("File not found: $fileName")
+        konst file = fileSystem.findFileByPath(fileName) ?: error("File not found: $fileName")
 
         return psiManager.findFile(file) as KtFile
     }
@@ -410,7 +410,7 @@ abstract class BasicWasmBoxTest(
     }
 
     companion object {
-        const val TEST_MODULE = "main"
-        private const val TEST_FUNCTION = "box"
+        const konst TEST_MODULE = "main"
+        private const konst TEST_FUNCTION = "box"
     }
 }

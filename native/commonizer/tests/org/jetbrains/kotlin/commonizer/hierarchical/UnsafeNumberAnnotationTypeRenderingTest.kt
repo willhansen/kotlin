@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 class UnsafeNumberAnnotationTypeRenderingTest {
     @Test
     fun `test simple class type with no arguments`() {
-        val type = CirClassType.createInterned(
+        konst type = CirClassType.createInterned(
             classId = CirEntityId.create("kotlin/String"), outerType = null, arguments = emptyList(), isMarkedNullable = false,
         )
         assertEquals("kotlin.String", renderTypeForUnsafeNumberAnnotation(type))
@@ -22,7 +22,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test simple nullable class type`() {
-        val type = CirClassType.createInterned(
+        konst type = CirClassType.createInterned(
             classId = CirEntityId.create("kotlin/String"), outerType = null, arguments = emptyList(), isMarkedNullable = true,
         )
         assertEquals("kotlin.String?", renderTypeForUnsafeNumberAnnotation(type))
@@ -30,7 +30,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test expanded type alias type with no arguments`() {
-        val type = CirTypeAliasType.createInterned(
+        konst type = CirTypeAliasType.createInterned(
             typeAliasId = CirEntityId.create("T"),
             underlyingType = CirClassType.createInterned(
                 classId = CirEntityId.create("kotlin/String"), outerType = null, arguments = emptyList(), isMarkedNullable = false,
@@ -43,7 +43,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test class type with arguments`() {
-        val type = CirClassType.createInterned(
+        konst type = CirClassType.createInterned(
             classId = CirEntityId.create("kotlin/Triple"), outerType = null, isMarkedNullable = false,
             arguments = listOf(
                 CirRegularTypeProjection(
@@ -64,7 +64,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test type alias type with an argument`() {
-        val type = CirTypeAliasType.createInterned(
+        konst type = CirTypeAliasType.createInterned(
             typeAliasId = CirEntityId.create("T"), isMarkedNullable = false, arguments = emptyList(),
             underlyingType = CirClassType.createInterned(
                 classId = CirEntityId.create("kotlin/Triple"), outerType = null, isMarkedNullable = false,
@@ -94,7 +94,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test flexible type`() {
-        val type = CirFlexibleType(
+        konst type = CirFlexibleType(
             lowerBound = CirClassType.createInterned(
                 classId = CirEntityId.create("kotlin/String"), outerType = null, arguments = emptyList(), isMarkedNullable = false,
             ),
@@ -107,7 +107,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test flexible type argument`() {
-        val type = CirClassType.createInterned(
+        konst type = CirClassType.createInterned(
             classId = CirEntityId.create("kotlin.Array"), outerType = null, isMarkedNullable = false, arguments = listOf(
                 CirRegularTypeProjection(
                     projectionKind = Variance.OUT_VARIANCE,
@@ -133,7 +133,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test nested type argument`() {
-        val type = CirClassType.createInterned(
+        konst type = CirClassType.createInterned(
             classId = CirEntityId.create("kotlin.Array"), outerType = null, isMarkedNullable = false, arguments = listOf(
                 CirRegularTypeProjection(
                     projectionKind = Variance.OUT_VARIANCE,
@@ -159,7 +159,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test type parameter type in type argument`() {
-        val type = CirClassType.createInterned(
+        konst type = CirClassType.createInterned(
             classId = CirEntityId.create("kotlin.Array"), outerType = null, isMarkedNullable = false, arguments = listOf(
                 CirRegularTypeProjection(
                     projectionKind = Variance.INVARIANT,
@@ -173,7 +173,7 @@ class UnsafeNumberAnnotationTypeRenderingTest {
 
     @Test
     fun `test combined type`() {
-        val type = CirClassType.createInterned(
+        konst type = CirClassType.createInterned(
             classId = CirEntityId.create("kotlin.Array"), outerType = null, isMarkedNullable = false, arguments = listOf(
                 CirRegularTypeProjection(
                     projectionKind = Variance.OUT_VARIANCE,

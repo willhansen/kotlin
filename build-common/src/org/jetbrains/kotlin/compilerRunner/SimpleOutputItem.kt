@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.build.GeneratedJvmClass
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 import java.io.File
 
-data class SimpleOutputItem(val sourceFiles: Collection<File>, val outputFile: File) {
+data class SimpleOutputItem(konst sourceFiles: Collection<File>, konst outputFile: File) {
     override fun toString(): String =
         "$sourceFiles->$outputFile"
 }

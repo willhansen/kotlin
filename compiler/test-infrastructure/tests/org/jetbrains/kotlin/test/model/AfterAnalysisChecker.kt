@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.test.model
 import org.jetbrains.kotlin.test.WrappedException
 import org.jetbrains.kotlin.test.services.TestServices
 
-abstract class AfterAnalysisChecker(protected val testServices: TestServices) : ServicesAndDirectivesContainer {
+abstract class AfterAnalysisChecker(protected konst testServices: TestServices) : ServicesAndDirectivesContainer {
     open fun check(failedAssertions: List<WrappedException>) {}
 
     open fun suppressIfNeeded(failedAssertions: List<WrappedException>): List<WrappedException> = failedAssertions

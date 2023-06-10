@@ -10,5 +10,5 @@ class B
 open class C(b: B) : B2 by <!TYPE_MISMATCH!>b<!> {} //no error in K2, K1 - [TYPE_MISMATCH] Type mismatch: inferred type is B but B2 was expected
 
 fun main() {
-  val c = C(B()).d() //runtime AbstractMethodError
+  konst c = C(B()).d() //runtime AbstractMethodError
 }

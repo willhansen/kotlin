@@ -10,14 +10,14 @@ import com.intellij.util.containers.ContainerUtil
 
 abstract class AbstractKotlinSuppressCache<Element> {
     // The cache is weak: we're OK with losing it
-    protected val suppressors = ContainerUtil.createConcurrentWeakValueMap<Element, Suppressor<Element>>()
+    protected konst suppressors = ContainerUtil.createConcurrentWeakValueMap<Element, Suppressor<Element>>()
 
     fun isSuppressed(element: Element, rootElement: Element, suppressionKey: String, severity: Severity) =
         isSuppressed(StringSuppressRequest(element, rootElement, severity, suppressionKey.lowercase()))
 
     protected open fun isSuppressed(request: SuppressRequest<Element>): Boolean {
 
-        val annotated = getClosestAnnotatedAncestorElement(request.element, request.rootElement, false) ?: return false
+        konst annotated = getClosestAnnotatedAncestorElement(request.element, request.rootElement, false) ?: return false
 
         return isSuppressedByAnnotated(request.suppressKey, request.severity, annotated, request.rootElement, 0)
 
@@ -61,13 +61,13 @@ abstract class AbstractKotlinSuppressCache<Element> {
         rootElement: Element,
         debugDepth: Int
     ): Boolean {
-        val suppressor = getOrCreateSuppressor(annotated)
+        konst suppressor = getOrCreateSuppressor(annotated)
         if (suppressor.isSuppressed(suppressionKey, severity)) return true
 
-        val annotatedAbove = getClosestAnnotatedAncestorElement(suppressor.annotatedElement, rootElement, true) ?: return false
+        konst annotatedAbove = getClosestAnnotatedAncestorElement(suppressor.annotatedElement, rootElement, true) ?: return false
 
-        val suppressed = isSuppressedByAnnotated(suppressionKey, severity, annotatedAbove, rootElement, debugDepth + 1)
-        val suppressorAbove = suppressors[annotatedAbove]
+        konst suppressed = isSuppressedByAnnotated(suppressionKey, severity, annotatedAbove, rootElement, debugDepth + 1)
+        konst suppressorAbove = suppressors[annotatedAbove]
         if (suppressorAbove != null && suppressorAbove.dominates(suppressor)) {
             suppressors[annotated] = suppressorAbove
         }
@@ -77,7 +77,7 @@ abstract class AbstractKotlinSuppressCache<Element> {
 
     protected fun getOrCreateSuppressor(annotated: Element): Suppressor<Element> =
         suppressors.getOrPut(annotated) {
-            val strings = getSuppressingStrings(annotated)
+            konst strings = getSuppressingStrings(annotated)
             when (strings.size) {
                 0 -> EmptySuppressor(annotated)
                 1 -> SingularSuppressor(annotated, strings.first())
@@ -93,7 +93,7 @@ abstract class AbstractKotlinSuppressCache<Element> {
             severity == Severity.WARNING && "warnings" in strings || key.lowercase() in strings
     }
 
-    protected abstract class Suppressor<Element>(val annotatedElement: Element) {
+    protected abstract class Suppressor<Element>(konst annotatedElement: Element) {
         abstract fun isSuppressed(suppressionKey: String, severity: Severity): Boolean
 
         // true is \forall x. other.isSuppressed(x) -> this.isSuppressed(x)
@@ -105,7 +105,7 @@ abstract class AbstractKotlinSuppressCache<Element> {
         override fun dominates(other: Suppressor<Element>): Boolean = other is EmptySuppressor
     }
 
-    private class SingularSuppressor<Element>(annotated: Element, private val string: String) : Suppressor<Element>(annotated) {
+    private class SingularSuppressor<Element>(annotated: Element, private konst string: String) : Suppressor<Element>(annotated) {
         override fun isSuppressed(suppressionKey: String, severity: Severity): Boolean {
             return isSuppressedByStrings(suppressionKey, ImmutableSet.of(string), severity)
         }
@@ -115,7 +115,7 @@ abstract class AbstractKotlinSuppressCache<Element> {
         }
     }
 
-    private class MultiSuppressor<Element>(annotated: Element, private val strings: Set<String>) : Suppressor<Element>(annotated) {
+    private class MultiSuppressor<Element>(annotated: Element, private konst strings: Set<String>) : Suppressor<Element>(annotated) {
         override fun isSuppressed(suppressionKey: String, severity: Severity): Boolean {
             return isSuppressedByStrings(suppressionKey, strings, severity)
         }
@@ -127,16 +127,16 @@ abstract class AbstractKotlinSuppressCache<Element> {
     }
 
     protected interface SuppressRequest<Element> {
-        val element: Element
-        val rootElement: Element
-        val severity: Severity
-        val suppressKey: String
+        konst element: Element
+        konst rootElement: Element
+        konst severity: Severity
+        konst suppressKey: String
     }
 
     private class StringSuppressRequest<Element>(
-        override val element: Element,
-        override val rootElement: Element,
-        override val severity: Severity,
-        override val suppressKey: String
+        override konst element: Element,
+        override konst rootElement: Element,
+        override konst severity: Severity,
+        override konst suppressKey: String
     ) : SuppressRequest<Element>
 }

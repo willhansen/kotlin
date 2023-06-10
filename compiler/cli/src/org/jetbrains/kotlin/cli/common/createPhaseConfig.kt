@@ -20,26 +20,26 @@ fun createPhaseConfig(
 ): PhaseConfig {
     fun report(message: String) = messageCollector.report(CompilerMessageSeverity.ERROR, message)
 
-    val phases = compoundPhase.toPhaseMap()
-    val enabled = computeEnabled(phases, arguments.disablePhases, ::report).toMutableSet()
-    val verbose = phaseSetFromArguments(phases, arguments.verbosePhases, ::report)
+    konst phases = compoundPhase.toPhaseMap()
+    konst enabled = computeEnabled(phases, arguments.disablePhases, ::report).toMutableSet()
+    konst verbose = phaseSetFromArguments(phases, arguments.verbosePhases, ::report)
 
-    val beforeDumpSet = phaseSetFromArguments(phases, arguments.phasesToDumpBefore, ::report)
-    val afterDumpSet = phaseSetFromArguments(phases, arguments.phasesToDumpAfter, ::report)
-    val bothDumpSet = phaseSetFromArguments(phases, arguments.phasesToDump, ::report)
-    val toDumpStateBefore = beforeDumpSet + bothDumpSet
-    val toDumpStateAfter = afterDumpSet + bothDumpSet
-    val dumpDirectory = arguments.dumpDirectory
-    val dumpOnlyFqName = arguments.dumpOnlyFqName
-    val beforeValidateSet = phaseSetFromArguments(phases, arguments.phasesToValidateBefore, ::report)
-    val afterValidateSet = phaseSetFromArguments(phases, arguments.phasesToValidateAfter, ::report)
-    val bothValidateSet = phaseSetFromArguments(phases, arguments.phasesToValidate, ::report)
-    val toValidateStateBefore = beforeValidateSet + bothValidateSet
-    val toValidateStateAfter = afterValidateSet + bothValidateSet
+    konst beforeDumpSet = phaseSetFromArguments(phases, arguments.phasesToDumpBefore, ::report)
+    konst afterDumpSet = phaseSetFromArguments(phases, arguments.phasesToDumpAfter, ::report)
+    konst bothDumpSet = phaseSetFromArguments(phases, arguments.phasesToDump, ::report)
+    konst toDumpStateBefore = beforeDumpSet + bothDumpSet
+    konst toDumpStateAfter = afterDumpSet + bothDumpSet
+    konst dumpDirectory = arguments.dumpDirectory
+    konst dumpOnlyFqName = arguments.dumpOnlyFqName
+    konst beforeValidateSet = phaseSetFromArguments(phases, arguments.phasesToValidateBefore, ::report)
+    konst afterValidateSet = phaseSetFromArguments(phases, arguments.phasesToValidateAfter, ::report)
+    konst bothValidateSet = phaseSetFromArguments(phases, arguments.phasesToValidate, ::report)
+    konst toValidateStateBefore = beforeValidateSet + bothValidateSet
+    konst toValidateStateAfter = afterValidateSet + bothValidateSet
 
-    val needProfiling = arguments.profilePhases
-    val checkConditions = arguments.checkPhaseConditions
-    val checkStickyConditions = arguments.checkStickyPhaseConditions
+    konst needProfiling = arguments.profilePhases
+    konst checkConditions = arguments.checkPhaseConditions
+    konst checkStickyConditions = arguments.checkStickyPhaseConditions
 
     return PhaseConfig(
         compoundPhase,
@@ -67,8 +67,8 @@ private fun computeEnabled(
     namesOfDisabled: Array<String>?,
     report: (String) -> Unit
 ): Set<AnyNamedPhase> {
-    val disabledPhases = phaseSetFromArguments(phases, namesOfDisabled, report)
-    return phases.values.toSet() - disabledPhases
+    konst disabledPhases = phaseSetFromArguments(phases, namesOfDisabled, report)
+    return phases.konstues.toSet() - disabledPhases
 }
 
 private fun phaseSetFromArguments(
@@ -77,7 +77,7 @@ private fun phaseSetFromArguments(
     report: (String) -> Unit
 ): Set<AnyNamedPhase> {
     if (names == null) return emptySet()
-    if ("ALL" in names) return phases.values.toSet()
+    if ("ALL" in names) return phases.konstues.toSet()
     return names.mapNotNull {
         phases[it] ?: run {
             report("no phase named $it")

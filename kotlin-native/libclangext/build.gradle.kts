@@ -21,13 +21,13 @@ plugins {
     id("kotlin.native.build-tools-conventions")
     id("native")
 }
-val libclangextEnabled = org.jetbrains.kotlin.konan.target.HostManager.hostIsMac
+konst libclangextEnabled = org.jetbrains.kotlin.konan.target.HostManager.hostIsMac
 extra["isEnabled"] = libclangextEnabled
 
 native {
-    val isWindows = PlatformInfo.isWindows()
-    val obj = if (isWindows) "obj" else "o"
-    val cxxflags = mutableListOf("--std=c++17", "-g",
+    konst isWindows = PlatformInfo.isWindows()
+    konst obj = if (isWindows) "obj" else "o"
+    konst cxxflags = mutableListOf("--std=c++17", "-g",
                           "-Isrc/main/include",
                           "-I${project.findProperty("llvmDir")}/include",
                           "-DLLVM_DISABLE_ABI_BREAKING_CHECKS_ENFORCING=1")
@@ -45,7 +45,7 @@ native {
             dir("src/main/cpp")
         }
     }
-    val objSet = sourceSets["main"]!!.transform(".cpp" to ".$obj")
+    konst objSet = sourceSets["main"]!!.transform(".cpp" to ".$obj")
     target(lib("clangext"), objSet) {
         tool(*platformManager.hostPlatform.clangForJni.llvmAr("").toTypedArray())
         flags("-qcv", ruleOut(), *ruleInAll())

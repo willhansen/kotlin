@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.build.report.metrics
 import java.io.Serializable
 
 data class BuildMetrics(
-    val buildTimes: BuildTimes = BuildTimes(),
-    val buildPerformanceMetrics: BuildPerformanceMetrics = BuildPerformanceMetrics(),
-    val buildAttributes: BuildAttributes = BuildAttributes(),
-    val gcMetrics: GcMetrics = GcMetrics()
+    konst buildTimes: BuildTimes = BuildTimes(),
+    konst buildPerformanceMetrics: BuildPerformanceMetrics = BuildPerformanceMetrics(),
+    konst buildAttributes: BuildAttributes = BuildAttributes(),
+    konst gcMetrics: GcMetrics = GcMetrics()
 ) : Serializable {
     fun addAll(other: BuildMetrics) {
         buildTimes.addAll(other.buildTimes)
@@ -21,6 +21,6 @@ data class BuildMetrics(
     }
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

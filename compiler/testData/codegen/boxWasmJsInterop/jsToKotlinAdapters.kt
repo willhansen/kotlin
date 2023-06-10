@@ -55,7 +55,7 @@ fun nullStructRef(x: StructRef): StructRef? = js("x")
 fun null2StructRef(x: StructRef): StructRef? = js("null")
 
 fun testStructRef() {
-    val structRef = StructRefImpl().toJsReference()
+    konst structRef = StructRefImpl().toJsReference()
     check(notNullStructRef(structRef) == structRef)
     checkNPE { notNull2StructRef(structRef) }
     check (nullStructRef(structRef) == structRef)

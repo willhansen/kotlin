@@ -31,14 +31,14 @@ class CompilerArgumentParsingTest {
         shortArgumentKeys: Boolean,
         compactArgumentValues: Boolean
     ) {
-        val constructor = type.constructors.find { it.parameters.isEmpty() } ?: error("Missing empty constructor on $type")
-        val arguments = constructor.call()
+        konst constructor = type.constructors.find { it.parameters.isEmpty() } ?: error("Missing empty constructor on $type")
+        konst arguments = constructor.call()
         arguments.fillRandomValues(Random(seed))
-        val argumentsAsStrings = arguments.toArgumentStrings(
+        konst argumentsAsStrings = arguments.toArgumentStrings(
             shortArgumentKeys = shortArgumentKeys,
             compactArgumentValues = compactArgumentValues
         )
-        val parsedArguments = parseCommandLineArguments(type, argumentsAsStrings)
+        konst parsedArguments = parseCommandLineArguments(type, argumentsAsStrings)
         assertEqualArguments(arguments, parsedArguments)
         assertEquals(
             argumentsAsStrings,
@@ -77,10 +77,10 @@ private fun assertEqualArguments(expected: CommonToolArguments, actual: CommonTo
         .map { property ->
             @Suppress("UNCHECKED_CAST")
             property as KProperty1<Any, Any?>
-            val expectedValue = property.get(expected)
-            val actualValue = property.get(actual)
+            konst expectedValue = property.get(expected)
+            konst actualValue = property.get(actual)
 
-            val message = "Unexpected value in '${property.name}: '${property.returnType}'"
+            konst message = "Unexpected konstue in '${property.name}: '${property.returnType}'"
             if (property.returnType.isSubtypeOf(typeOf<Array<*>?>())) {
                 @Suppress("UNCHECKED_CAST")
                 assertContentEquals(
@@ -101,7 +101,7 @@ private fun CommonToolArguments.fillRandomValues(random: Random) {
         runCatching {
             property.set(this, random.randomValue(property.returnType) ?: return@forEach)
         }.getOrElse {
-            throw Throwable("Failed setting random value for: ${property.name}: ${property.returnType}", it)
+            throw Throwable("Failed setting random konstue for: ${property.name}: ${property.returnType}", it)
         }
     }
 }
@@ -113,14 +113,14 @@ private fun Random.randomString() = nextBytes(nextInt(8, 12)).let { data ->
 private fun Random.randomBoolean() = nextBoolean()
 
 private fun Random.randomStringArray(): Array<String> {
-    val size = nextInt(5, 10)
+    konst size = nextInt(5, 10)
     return Array(size) {
         randomString()
     }
 }
 
 private fun Random.randomList(elementType: KType): List<Any>? {
-    val size = nextInt(5, 10)
+    konst size = nextInt(5, 10)
     return List(size) {
         randomValue(elementType) ?: return null
     }
@@ -128,7 +128,7 @@ private fun Random.randomList(elementType: KType): List<Any>? {
 
 fun Random.randomValue(type: KType): Any? {
     @Suppress("NAME_SHADOWING")
-    val type = type.withNullability(false)
+    konst type = type.withNullability(false)
     return when {
         type == typeOf<String>() -> randomString()
         type == typeOf<Boolean>() -> randomBoolean()

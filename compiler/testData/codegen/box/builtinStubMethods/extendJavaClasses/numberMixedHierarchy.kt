@@ -18,7 +18,7 @@ abstract class KANumber0 : JANumber0() {
 class Test : JNumber0()
 
 fun box(): String {
-    val t = Test()
+    konst t = Test()
     assertEquals(0.toByte(), t.toByte())
     assertEquals(0.toShort(), t.toShort())
     assertEquals(0, t.toInt())

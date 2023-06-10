@@ -11,5 +11,5 @@ public class TestClass {
 package foo
 
 fun main() {
-    val x = <caret>TestClass()
+    konst x = <caret>TestClass()
 }

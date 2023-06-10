@@ -48,11 +48,11 @@ class FirTypeAliasBuilder : FirDeclarationBuilder, FirTypeParametersOwnerBuilder
     override var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
     lateinit var status: FirDeclarationStatus
     var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
-    override val typeParameters: MutableList<FirTypeParameter> = mutableListOf()
+    override konst typeParameters: MutableList<FirTypeParameter> = mutableListOf()
     lateinit var name: Name
     lateinit var symbol: FirTypeAliasSymbol
     lateinit var expandedTypeRef: FirTypeRef
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 
     override fun build(): FirTypeAlias {
         return FirTypeAliasImpl(
@@ -86,7 +86,7 @@ inline fun buildTypeAliasCopy(original: FirTypeAlias, init: FirTypeAliasBuilder.
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirTypeAliasBuilder()
+    konst copyBuilder = FirTypeAliasBuilder()
     copyBuilder.source = original.source
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.moduleData = original.moduleData

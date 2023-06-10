@@ -45,7 +45,7 @@ public inline fun <R> run(block: () -> R): R {
 }
 
 /**
- * Calls the specified function [block] with `this` value as its receiver and returns its result.
+ * Calls the specified function [block] with `this` konstue as its receiver and returns its result.
  *
  * For detailed usage information see the documentation for [scope functions](https://kotlinlang.org/docs/reference/scope-functions.html#run).
  */
@@ -71,7 +71,7 @@ public inline fun <T, R> with(receiver: T, block: T.() -> R): R {
 }
 
 /**
- * Calls the specified function [block] with `this` value as its receiver and returns `this` value.
+ * Calls the specified function [block] with `this` konstue as its receiver and returns `this` konstue.
  *
  * For detailed usage information see the documentation for [scope functions](https://kotlinlang.org/docs/reference/scope-functions.html#apply).
  */
@@ -85,7 +85,7 @@ public inline fun <T> T.apply(block: T.() -> Unit): T {
 }
 
 /**
- * Calls the specified function [block] with `this` value as its argument and returns `this` value.
+ * Calls the specified function [block] with `this` konstue as its argument and returns `this` konstue.
  *
  * For detailed usage information see the documentation for [scope functions](https://kotlinlang.org/docs/reference/scope-functions.html#also).
  */
@@ -100,7 +100,7 @@ public inline fun <T> T.also(block: (T) -> Unit): T {
 }
 
 /**
- * Calls the specified function [block] with `this` value as its argument and returns its result.
+ * Calls the specified function [block] with `this` konstue as its argument and returns its result.
  *
  * For detailed usage information see the documentation for [scope functions](https://kotlinlang.org/docs/reference/scope-functions.html#let).
  */
@@ -113,7 +113,7 @@ public inline fun <T, R> T.let(block: (T) -> R): R {
 }
 
 /**
- * Returns `this` value if it satisfies the given [predicate] or `null`, if it doesn't.
+ * Returns `this` konstue if it satisfies the given [predicate] or `null`, if it doesn't.
  *
  * For detailed usage information see the documentation for [scope functions](https://kotlinlang.org/docs/reference/scope-functions.html#takeif-and-takeunless).
  */
@@ -127,7 +127,7 @@ public inline fun <T> T.takeIf(predicate: (T) -> Boolean): T? {
 }
 
 /**
- * Returns `this` value if it _does not_ satisfy the given [predicate] or `null`, if it does.
+ * Returns `this` konstue if it _does not_ satisfy the given [predicate] or `null`, if it does.
  *
  * For detailed usage information see the documentation for [scope functions](https://kotlinlang.org/docs/reference/scope-functions.html#takeif-and-takeunless).
  */

@@ -11,11 +11,11 @@ import java.io.InputStream
 import java.net.URL
 import java.util.*
 
-class CompiledScriptClassLoader(parent: ClassLoader?, private val entries: Map<String, ByteArray>) : ClassLoader(parent) {
+class CompiledScriptClassLoader(parent: ClassLoader?, private konst entries: Map<String, ByteArray>) : ClassLoader(parent) {
 
     override fun findClass(name: String): Class<*>? {
-        val classPathName = name.replace('.', '/') + ".class"
-        val classBytes = entries[classPathName] ?: return null
+        konst classPathName = name.replace('.', '/') + ".class"
+        konst classBytes = entries[classPathName] ?: return null
         return defineClass(name, classBytes, 0, classBytes.size)
     }
 
@@ -23,9 +23,9 @@ class CompiledScriptClassLoader(parent: ClassLoader?, private val entries: Map<S
         entries[name]?.let(::ByteArrayInputStream) ?: super.getResourceAsStream(name)
 
     override fun findResources(name: String?): Enumeration<URL>? {
-        val fromParent = super.findResources(name)
+        konst fromParent = super.findResources(name)
 
-        val url = entries[name]?.let { BytesUrlUtils.createBytesUrl(it) } ?: return fromParent
+        konst url = entries[name]?.let { BytesUrlUtils.createBytesUrl(it) } ?: return fromParent
 
         return Collections.enumeration(listOf(url) + fromParent.asSequence())
     }

@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirAssignmentOperatorStatementImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val operation: FirOperation,
+    override konst operation: FirOperation,
     override var leftArgument: FirExpression,
     override var rightArgument: FirExpression,
 ) : FirAssignmentOperatorStatement() {

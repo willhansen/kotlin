@@ -4,11 +4,11 @@
 @file:OptIn(ExperimentalUnsignedTypes::class)
 
 annotation class Ann(
-    val u: UInt,
-    val uba: UByteArray,
-    val usa: UShortArray,
-    val uia: UIntArray,
-    val ula: ULongArray,
+    konst u: UInt,
+    konst uba: UByteArray,
+    konst usa: UShortArray,
+    konst uia: UIntArray,
+    konst ula: ULongArray,
 )
 
 @OptIn(ExperimentalUnsignedTypes::class)

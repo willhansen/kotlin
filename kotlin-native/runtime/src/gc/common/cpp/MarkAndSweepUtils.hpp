@@ -171,9 +171,9 @@ void collectRootSetForThread(GCHandle gcHandle, typename Traits::MarkQueue& mark
     auto handle = gcHandle.collectThreadRoots(thread);
     thread.gc().OnStoppedForGC();
     // TODO: Remove useless mm::ThreadRootSet abstraction.
-    for (auto value : mm::ThreadRootSet(thread)) {
-        if (internal::collectRoot<Traits>(markQueue, value.object)) {
-            switch (value.source) {
+    for (auto konstue : mm::ThreadRootSet(thread)) {
+        if (internal::collectRoot<Traits>(markQueue, konstue.object)) {
+            switch (konstue.source) {
                 case mm::ThreadRootSet::Source::kStack:
                     handle.addStackRoot();
                     break;
@@ -189,9 +189,9 @@ template <typename Traits>
 void collectRootSetGlobals(GCHandle gcHandle, typename Traits::MarkQueue& markQueue) noexcept {
     auto handle = gcHandle.collectGlobalRoots();
     // TODO: Remove useless mm::GlobalRootSet abstraction.
-    for (auto value : mm::GlobalRootSet()) {
-        if (internal::collectRoot<Traits>(markQueue, value.object)) {
-            switch (value.source) {
+    for (auto konstue : mm::GlobalRootSet()) {
+        if (internal::collectRoot<Traits>(markQueue, konstue.object)) {
+            switch (konstue.source) {
                 case mm::GlobalRootSet::Source::kGlobal:
                     handle.addGlobalRoot();
                     break;

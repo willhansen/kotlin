@@ -1,6 +1,6 @@
 // !LANGUAGE: +NestedClassesInAnnotations
 
-annotation class Foo(val kind: Kind) {
+annotation class Foo(konst kind: Kind) {
     enum class Kind { FAIL, OK }
 }
 

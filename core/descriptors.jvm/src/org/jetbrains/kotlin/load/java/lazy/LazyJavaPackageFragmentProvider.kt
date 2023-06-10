@@ -28,13 +28,13 @@ class LazyJavaPackageFragmentProvider(
     components: JavaResolverComponents
 ) : PackageFragmentProviderOptimized {
 
-    private val c = LazyJavaResolverContext(components, TypeParameterResolver.EMPTY, lazyOf(null))
+    private konst c = LazyJavaResolverContext(components, TypeParameterResolver.EMPTY, lazyOf(null))
 
-    private val packageFragments: CacheWithNotNullValues<FqName, LazyJavaPackageFragment> =
+    private konst packageFragments: CacheWithNotNullValues<FqName, LazyJavaPackageFragment> =
         c.storageManager.createCacheWithNotNullValues()
 
     private fun getPackageFragment(fqName: FqName): LazyJavaPackageFragment? {
-        val jPackage = c.components.finder.findPackage(fqName) ?: return null
+        konst jPackage = c.components.finder.findPackage(fqName) ?: return null
 
         return packageFragments.computeIfAbsent(fqName) {
             LazyJavaPackageFragment(c, jPackage)

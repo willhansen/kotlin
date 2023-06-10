@@ -15,13 +15,13 @@ import org.jetbrains.kotlin.test.util.joinToArrayString
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 object TargetPlatformParser {
-    private const val JVM = "JVM"
-    private const val JDK = "JDK"
-    private const val JS = "JS"
+    private const konst JVM = "JVM"
+    private const konst JDK = "JDK"
+    private const konst JS = "JS"
 
     fun parseTargetPlatform(declaredPlatforms: List<String>): TargetPlatform? {
         if (declaredPlatforms.isEmpty()) return null
-        val simplePlatforms = declaredPlatforms.mapTo(mutableSetOf()) { platformString ->
+        konst simplePlatforms = declaredPlatforms.mapTo(mutableSetOf()) { platformString ->
             tryParseJdkPlatform(platformString)?.let { return@mapTo it }
             tryParseJsPlatform(platformString)?.let { return@mapTo it }
             tryParseNativePlatform(platformString)?.let { return@mapTo it }
@@ -31,11 +31,11 @@ object TargetPlatformParser {
     }
 
     private fun tryParseJdkPlatform(platformString: String): JdkPlatform? {
-        val target = when {
+        konst target = when {
             platformString == JVM -> JvmTarget.DEFAULT
             !platformString.startsWith(JDK) -> return null
-            else -> JvmTarget.values().find { it.name == platformString }
-                ?: error("JvmTarget \"$platformString\" not found.\nAvailable targets: ${JvmTarget.values().joinToArrayString()}")
+            else -> JvmTarget.konstues().find { it.name == platformString }
+                ?: error("JvmTarget \"$platformString\" not found.\nAvailable targets: ${JvmTarget.konstues().joinToArrayString()}")
         }
         return JdkPlatform(target)
     }

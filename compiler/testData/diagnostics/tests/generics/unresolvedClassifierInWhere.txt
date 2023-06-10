@@ -1,8 +1,8 @@
 package
 
-public val </*0*/ E> E.p1: kotlin.Int
-public val </*0*/ E> E.p2: kotlin.Int
-public val </*0*/ E> E.p3: kotlin.Int
+public konst </*0*/ E> E.p1: kotlin.Int
+public konst </*0*/ E> E.p2: kotlin.Int
+public konst </*0*/ E> E.p3: kotlin.Int
 public fun </*0*/ E> foo0(): kotlin.Unit
 public fun </*0*/ E> foo1(): kotlin.Unit
 public fun </*0*/ E> foo2(): kotlin.Unit

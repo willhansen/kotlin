@@ -12,7 +12,7 @@ import kotlin.reflect.full.memberProperties
 
 fun KtDiagnosticFactoryToRendererMap.verifyMessages(objectWithErrors: Any) {
     for (property in objectWithErrors::class.memberProperties) {
-        when (val factory = property.getter.call(objectWithErrors)) {
+        when (konst factory = property.getter.call(objectWithErrors)) {
             is AbstractKtDiagnosticFactory -> {
                 verifyMessageForFactory(factory, property)
             }
@@ -25,14 +25,14 @@ fun KtDiagnosticFactoryToRendererMap.verifyMessages(objectWithErrors: Any) {
     }
 }
 
-private val messageParameterRegex = """\{\d.*?}""".toRegex()
+private konst messageParameterRegex = """\{\d.*?}""".toRegex()
 
 fun KtDiagnosticFactoryToRendererMap.verifyMessageForFactory(factory: AbstractKtDiagnosticFactory, property: KProperty<*>) {
     Assert.assertTrue("No default diagnostic renderer is provided for ${property.name}", containsKey(factory))
 
-    val renderer = get(factory)!!
+    konst renderer = get(factory)!!
 
-    val parameterCount = when (renderer) {
+    konst parameterCount = when (renderer) {
         is KtDiagnosticWithParameters4Renderer<*, *, *, *> -> 4
         is KtDiagnosticWithParameters3Renderer<*, *, *> -> 3
         is KtDiagnosticWithParameters2Renderer<*, *> -> 2
@@ -41,7 +41,7 @@ fun KtDiagnosticFactoryToRendererMap.verifyMessageForFactory(factory: AbstractKt
     }
 
     for (parameter in messageParameterRegex.findAll(renderer.message)) {
-        val index = parameter.value.substring(1, 2).toInt()
+        konst index = parameter.konstue.substring(1, 2).toInt()
         Assert.assertTrue("Message for ${property.name} references wrong parameter {$index}", index < parameterCount)
     }
 }

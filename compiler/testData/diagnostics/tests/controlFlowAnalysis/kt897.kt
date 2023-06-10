@@ -7,7 +7,7 @@ class A() {
     init {
         <!INITIALIZATION_BEFORE_DECLARATION!>i<!> = 11
     }
-    val i : Int? = null // must be an error
+    konst i : Int? = null // must be an error
 
     init {
         <!INITIALIZATION_BEFORE_DECLARATION!>j<!> = 1
@@ -17,5 +17,5 @@ class A() {
     init {
         <!INITIALIZATION_BEFORE_DECLARATION!>k<!> = 3
     }
-    val k : Int
+    konst k : Int
 }

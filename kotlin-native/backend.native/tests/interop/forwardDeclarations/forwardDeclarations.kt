@@ -23,8 +23,8 @@ fun main() {
 
     checkSubtype2<StructDefined, CStructVar>()
 
-    val declared: StructDeclared? = null
-    val defined: StructDefined? = null
+    konst declared: StructDeclared? = null
+    konst defined: StructDefined? = null
 
     assertEquals(1, checkDifferentTypes(declared))
     assertEquals(2, checkDifferentTypes(defined))

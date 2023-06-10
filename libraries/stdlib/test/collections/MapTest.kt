@@ -12,33 +12,33 @@ import kotlin.math.pow
 class MapTest {
 
     @Test fun getOrElse() {
-        val data = mapOf<String, Int>()
-        val a = data.getOrElse("foo") { 2 }
+        konst data = mapOf<String, Int>()
+        konst a = data.getOrElse("foo") { 2 }
         assertEquals(2, a)
-        val a1 = data.getOrElse("foo") { data.get("bar") } ?: 1
+        konst a1 = data.getOrElse("foo") { data.get("bar") } ?: 1
         assertEquals(1, a1)
 
-        val b = data.getOrElse("foo") { 3 }
+        konst b = data.getOrElse("foo") { 3 }
         assertEquals(3, b)
         assertEquals(0, data.size)
 
-        val empty = mapOf<String, Int?>()
-        val c = empty.getOrElse("") { null }
+        konst empty = mapOf<String, Int?>()
+        konst c = empty.getOrElse("") { null }
         assertEquals(null, c)
 
-        val nullable = mapOf(1 to null)
-        val d = nullable.getOrElse(1) { "x" }
+        konst nullable = mapOf(1 to null)
+        konst d = nullable.getOrElse(1) { "x" }
         assertEquals("x", d)
     }
 
     @Test fun getValue() {
-        val data: MutableMap<String, Int> = hashMapOf("bar" to 1)
+        konst data: MutableMap<String, Int> = hashMapOf("bar" to 1)
         assertFailsWith<NoSuchElementException> { data.getValue("foo") }.let { e ->
             assertTrue("foo" in e.message!!)
         }
         assertEquals(1, data.getValue("bar"))
 
-        val mutableWithDefault = data.withDefault { 42 }
+        konst mutableWithDefault = data.withDefault { 42 }
         assertEquals(42, mutableWithDefault.getValue("foo"))
 
         // verify that it is wrapper
@@ -47,39 +47,39 @@ class MapTest {
         data["bar"] = 3
         assertEquals(3, mutableWithDefault["bar"])
 
-        val readonlyWithDefault = (data as Map<String, Int>).withDefault { it.length }
+        konst readonlyWithDefault = (data as Map<String, Int>).withDefault { it.length }
         assertEquals(4, readonlyWithDefault.getValue("loop"))
 
-        val withReplacedDefault = readonlyWithDefault.withDefault { 42 }
+        konst withReplacedDefault = readonlyWithDefault.withDefault { 42 }
         assertEquals(42, withReplacedDefault.getValue("loop"))
     }
 
     @Test fun getOrPut() {
-        val data = hashMapOf<String, Int>()
-        val a = data.getOrPut("foo") { 2 }
+        konst data = hashMapOf<String, Int>()
+        konst a = data.getOrPut("foo") { 2 }
         assertEquals(2, a)
 
-        val b = data.getOrPut("foo") { 3 }
+        konst b = data.getOrPut("foo") { 3 }
         assertEquals(2, b)
 
         assertEquals(1, data.size)
 
-        val empty = hashMapOf<String, Int?>()
-        val c = empty.getOrPut("") { null }
+        konst empty = hashMapOf<String, Int?>()
+        konst c = empty.getOrPut("") { null }
         assertEquals(null, c)
 
-        val d = empty.getOrPut("") { 1 }
+        konst d = empty.getOrPut("") { 1 }
         assertEquals(1, d)
     }
 
     @Test fun sizeAndEmpty() {
-        val data = hashMapOf<String, Int>()
+        konst data = hashMapOf<String, Int>()
         assertTrue { data.none() }
         assertEquals(data.size, 0)
     }
 
     @Test fun setViaIndexOperators() {
-        val map = hashMapOf<String, String>()
+        konst map = hashMapOf<String, String>()
         assertTrue { map.none() }
         assertEquals(map.size, 0)
 
@@ -91,11 +91,11 @@ class MapTest {
     }
 
     @Test fun iterate() {
-        val map = mapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
-        val list = arrayListOf<String>()
+        konst map = mapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
+        konst list = arrayListOf<String>()
         for (e in map) {
             list.add(e.key)
-            list.add(e.value)
+            list.add(e.konstue)
         }
 
         assertEquals(6, list.size)
@@ -103,8 +103,8 @@ class MapTest {
     }
 
     @Test fun iterateAndMutate() {
-        val map = mutableMapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
-        val it = map.iterator()
+        konst map = mutableMapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
+        konst it = map.iterator()
         for (e in it) {
             when (e.key) {
                 "beverage" -> e.setValue("juice")
@@ -117,9 +117,9 @@ class MapTest {
 
     @Test
     fun onEach() {
-        val map = mutableMapOf("beverage" to "beer", "location" to "Mells")
-        val result = StringBuilder()
-        val newMap = map.onEach { result.append(it.key).append("=").append(it.value).append(";") }
+        konst map = mutableMapOf("beverage" to "beer", "location" to "Mells")
+        konst result = StringBuilder()
+        konst newMap = map.onEach { result.append(it.key).append("=").append(it.konstue).append(";") }
         assertEquals("beverage=beer;location=Mells;", result.toString())
         assertTrue(map === newMap)
 
@@ -131,9 +131,9 @@ class MapTest {
 
     @Test
     fun onEachIndexed() {
-        val map = mutableMapOf("beverage" to "beer", "location" to "Mells")
-        val result = StringBuilder()
-        val newMap = map.onEachIndexed { i, e -> result.append(i + 1).append('.').append(e.key).append("=").append(e.value).append(";") }
+        konst map = mutableMapOf("beverage" to "beer", "location" to "Mells")
+        konst result = StringBuilder()
+        konst newMap = map.onEachIndexed { i, e -> result.append(i + 1).append('.').append(e.key).append("=").append(e.konstue).append(";") }
         assertEquals("1.beverage=beer;2.location=Mells;", result.toString())
         assertTrue(map === newMap)
 
@@ -144,17 +144,17 @@ class MapTest {
     }
 
     @Test fun stream() {
-        val map = mapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
-        val named = map.asSequence().filter { it.key == "name" }.single()
-        assertEquals("James", named.value)
+        konst map = mapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
+        konst named = map.asSequence().filter { it.key == "name" }.single()
+        assertEquals("James", named.konstue)
     }
 
     @Test fun iterateWithProperties() {
-        val map = mapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
-        val list = arrayListOf<String>()
+        konst map = mapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
+        konst list = arrayListOf<String>()
         for (e in map) {
             list.add(e.key)
-            list.add(e.value)
+            list.add(e.konstue)
         }
 
         assertEquals(6, list.size)
@@ -162,11 +162,11 @@ class MapTest {
     }
 
     @Test fun iterateWithExtraction() {
-        val map = mapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
-        val list = arrayListOf<String>()
-        for ((key, value) in map) {
+        konst map = mapOf("beverage" to "beer", "location" to "Mells", "name" to "James")
+        konst list = arrayListOf<String>()
+        for ((key, konstue) in map) {
             list.add(key)
-            list.add(value)
+            list.add(konstue)
         }
 
         assertEquals(6, list.size)
@@ -174,58 +174,58 @@ class MapTest {
     }
 
     @Test fun contains() {
-        val map = mapOf("a" to 1, "b" to 2)
+        konst map = mapOf("a" to 1, "b" to 2)
         assertTrue("a" in map)
         assertTrue("c" !in map)
     }
 
     @Test fun map() {
-        val m1 = mapOf("beverage" to "beer", "location" to "Mells")
-        val list = m1.map { it.value + " rocks" }
+        konst m1 = mapOf("beverage" to "beer", "location" to "Mells")
+        konst list = m1.map { it.konstue + " rocks" }
 
         assertEquals(listOf("beer rocks", "Mells rocks"), list)
     }
 
 
     @Test fun mapNotNull() {
-        val m1 = mapOf("a" to 1, "b" to null)
-        val list = m1.mapNotNull { it.value?.let { v -> "${it.key}$v" } }
+        konst m1 = mapOf("a" to 1, "b" to null)
+        konst list = m1.mapNotNull { it.konstue?.let { v -> "${it.key}$v" } }
         assertEquals(listOf("a1"), list)
     }
 
     @Test fun mapValues() {
-        val m1 = mapOf("beverage" to "beer", "location" to "Mells")
-        val m2 = m1.mapValues { it.value + "2" }
+        konst m1 = mapOf("beverage" to "beer", "location" to "Mells")
+        konst m2 = m1.mapValues { it.konstue + "2" }
 
         assertEquals(mapOf("beverage" to "beer2", "location" to "Mells2"), m2)
 
-        val m1p: Map<out String, String> = m1
-        val m3 = m1p.mapValuesTo(hashMapOf()) { it.value.length }
+        konst m1p: Map<out String, String> = m1
+        konst m3 = m1p.mapValuesTo(hashMapOf()) { it.konstue.length }
         assertStaticTypeIs<HashMap<String, Int>>(m3)
         assertEquals(mapOf("beverage" to 4, "location" to 5), m3)
     }
 
     @Test fun mapKeys() {
-        val m1 = mapOf("beverage" to "beer", "location" to "Mells")
-        val m2 = m1.mapKeys { it.key + "2" }
+        konst m1 = mapOf("beverage" to "beer", "location" to "Mells")
+        konst m2 = m1.mapKeys { it.key + "2" }
 
         assertEquals(mapOf("beverage2" to "beer", "location2" to "Mells"), m2)
 
-        val m1p: Map<out String, String> = m1
-        val m3 = m1p.mapKeysTo(mutableMapOf()) { it.key.length }
+        konst m1p: Map<out String, String> = m1
+        konst m3 = m1p.mapKeysTo(mutableMapOf()) { it.key.length }
         assertStaticTypeIs<MutableMap<Int, String>>(m3)
         assertEquals(mapOf(8 to "Mells"), m3)
     }
 
     @Test fun flatMap() {
-        fun <T> list(entry: Map.Entry<T, T>): List<T> = listOf(entry.key, entry.value)
-        fun <T> seq(entry: Map.Entry<T, T>): Sequence<T> = sequenceOf(entry.key, entry.value)
-        val m = mapOf("x" to 1, "y" to 0)
-        val result1 = m.flatMap { list(it) }
-        val result2 = m.flatMap { seq(it) }
-        val result3 = m.flatMap(::list)
-        val result4 = m.flatMap(::seq)
-        val expected = listOf("x", 1, "y", 0)
+        fun <T> list(entry: Map.Entry<T, T>): List<T> = listOf(entry.key, entry.konstue)
+        fun <T> seq(entry: Map.Entry<T, T>): Sequence<T> = sequenceOf(entry.key, entry.konstue)
+        konst m = mapOf("x" to 1, "y" to 0)
+        konst result1 = m.flatMap { list(it) }
+        konst result2 = m.flatMap { seq(it) }
+        konst result3 = m.flatMap(::list)
+        konst result4 = m.flatMap(::seq)
+        konst expected = listOf("x", 1, "y", 0)
         assertEquals(expected, result1)
         assertEquals(expected, result2)
         assertEquals(expected, result3)
@@ -233,8 +233,8 @@ class MapTest {
     }
 
     @Test fun createFrom() {
-        val pairs = arrayOf("a" to 1, "b" to 2)
-        val expected = mapOf(*pairs)
+        konst pairs = arrayOf("a" to 1, "b" to 2)
+        konst expected = mapOf(*pairs)
 
         assertEquals(expected, pairs.toMap())
         assertEquals(expected, pairs.asIterable().toMap())
@@ -243,34 +243,34 @@ class MapTest {
         assertEquals(mapOf("a" to 1), expected.filterKeys { it == "a" }.toMap())
         assertEquals(emptyMap(), expected.filter { false }.toMap())
 
-        val mutableMap = expected.toMutableMap()
+        konst mutableMap = expected.toMutableMap()
         assertEquals(expected, mutableMap)
         mutableMap += "c" to 3
         assertNotEquals(expected, mutableMap)
     }
 
     @Test fun populateTo() {
-        val pairs = arrayOf("a" to 1, "b" to 2)
-        val expected = mapOf(*pairs)
+        konst pairs = arrayOf("a" to 1, "b" to 2)
+        konst expected = mapOf(*pairs)
 
-        val linkedMap: LinkedHashMap<String, Int> = pairs.toMap(linkedMapOf())
+        konst linkedMap: LinkedHashMap<String, Int> = pairs.toMap(linkedMapOf())
         assertEquals(expected, linkedMap)
 
-        val hashMap: HashMap<String, Int> = pairs.asIterable().toMap(hashMapOf())
+        konst hashMap: HashMap<String, Int> = pairs.asIterable().toMap(hashMapOf())
         assertEquals(expected, hashMap)
 
-        val mutableMap: MutableMap<String, Int> = pairs.asSequence().toMap(mutableMapOf())
+        konst mutableMap: MutableMap<String, Int> = pairs.asSequence().toMap(mutableMapOf())
         assertEquals(expected, mutableMap)
 
-        val mutableMap2 = mutableMap.toMap(mutableMapOf())
+        konst mutableMap2 = mutableMap.toMap(mutableMapOf())
         assertEquals(expected, mutableMap2)
 
-        val mutableMap3 = mutableMap.toMap(hashMapOf<CharSequence, Any>())
+        konst mutableMap3 = mutableMap.toMap(hashMapOf<CharSequence, Any>())
         assertEquals<Map<*, *>>(expected, mutableMap3)
     }
 
     @Test fun createWithSelector() {
-        val map = listOf("a", "bb", "ccc").associateBy { it.length }
+        konst map = listOf("a", "bb", "ccc").associateBy { it.length }
         assertEquals(3, map.size)
         assertEquals("a", map.get(1))
         assertEquals("bb", map.get(2))
@@ -278,14 +278,14 @@ class MapTest {
     }
 
     @Test fun createWithSelectorAndOverwrite() {
-        val map = listOf("aa", "bb", "ccc").associateBy { it.length }
+        konst map = listOf("aa", "bb", "ccc").associateBy { it.length }
         assertEquals(2, map.size)
         assertEquals("bb", map.get(2))
         assertEquals("ccc", map.get(3))
     }
 
     @Test fun createWithSelectorForKeyAndValue() {
-        val map = listOf("a", "bb", "ccc").associateBy({ it.length }, { it.uppercase() })
+        konst map = listOf("a", "bb", "ccc").associateBy({ it.length }, { it.uppercase() })
         assertEquals(3, map.size)
         assertEquals("A", map[1])
         assertEquals("BB", map[2])
@@ -293,7 +293,7 @@ class MapTest {
     }
 
     @Test fun createWithPairSelector() {
-        val map = listOf("a", "bb", "ccc").associate { it.length to it.uppercase() }
+        konst map = listOf("a", "bb", "ccc").associate { it.length to it.uppercase() }
         assertEquals(3, map.size)
         assertEquals("A", map[1])
         assertEquals("BB", map[2])
@@ -301,20 +301,20 @@ class MapTest {
     }
 
     @Test fun createUsingTo() {
-        val map = mapOf("a" to 1, "b" to 2)
+        konst map = mapOf("a" to 1, "b" to 2)
         assertEquals(2, map.size)
         assertEquals(1, map["a"])
         assertEquals(2, map["b"])
     }
 
     @Test fun createMutableMap() {
-        val map = mutableMapOf("b" to 1, "c" to 2)
+        konst map = mutableMapOf("b" to 1, "c" to 2)
         map.put("a", 3)
         assertEquals(listOf("b" to 1, "c" to 2, "a" to 3), map.toList())
     }
 
     @Test fun createLinkedMap() {
-        val map = linkedMapOf(Pair("c", 3), Pair("b", 2), Pair("a", 1))
+        konst map = linkedMapOf(Pair("c", 3), Pair("b", 2), Pair("a", 1))
         assertEquals(1, map["a"])
         assertEquals(2, map["b"])
         assertEquals(3, map["c"])
@@ -322,81 +322,81 @@ class MapTest {
     }
 
     @Test fun filter() {
-        val map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
-        val filteredByKey = map.filter { it.key[0] == 'b' }
+        konst map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
+        konst filteredByKey = map.filter { it.key[0] == 'b' }
         assertEquals(mapOf("b" to 3), filteredByKey)
 
-        val filteredByKey2 = map.filterKeys { it[0] == 'b' }
+        konst filteredByKey2 = map.filterKeys { it[0] == 'b' }
         assertEquals(mapOf("b" to 3), filteredByKey2)
 
-        val filteredByValue = map.filter { it.value == 2 }
+        konst filteredByValue = map.filter { it.konstue == 2 }
         assertEquals(mapOf("a" to 2, "c" to 2), filteredByValue)
 
-        val filteredByValue2 = map.filterValues { it % 2 == 0 }
+        konst filteredByValue2 = map.filterValues { it % 2 == 0 }
         assertEquals(mapOf("a" to 2, "c" to 2), filteredByValue2)
     }
 
     @Test fun filterOutProjectedTo() {
-        val map: Map<out String, Int> = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
+        konst map: Map<out String, Int> = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
 
-        val filteredByKey = map.filterTo(mutableMapOf()) { it.key[0] == 'b' }
+        konst filteredByKey = map.filterTo(mutableMapOf()) { it.key[0] == 'b' }
         assertStaticTypeIs<MutableMap<String, Int>>(filteredByKey)
         assertEquals(mapOf("b" to 3), filteredByKey)
 
-        val filteredByKey2 = map.filterKeys { it[0] == 'b' }
+        konst filteredByKey2 = map.filterKeys { it[0] == 'b' }
         assertStaticTypeIs<Map<String, Int>>(filteredByKey2)
         assertEquals(mapOf("b" to 3), filteredByKey2)
 
-        val filteredByValue = map.filterNotTo(hashMapOf()) { it.value != 2 }
+        konst filteredByValue = map.filterNotTo(hashMapOf()) { it.konstue != 2 }
         assertStaticTypeIs<HashMap<String, Int>>(filteredByValue)
         assertEquals(mapOf("a" to 2, "c" to 2), filteredByValue)
 
-        val filteredByValue2 = map.filterValues { it % 2 == 0 }
+        konst filteredByValue2 = map.filterValues { it % 2 == 0 }
         assertStaticTypeIs<Map<String, Int>>(filteredByValue2)
         assertEquals(mapOf("a" to 2, "c" to 2), filteredByValue2)
     }
 
     @Test fun any() {
-        val map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
+        konst map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
         assertTrue(map.any())
         assertFalse(emptyMap<String, Int>().any())
 
         assertTrue(map.any { it.key == "b" })
         assertFalse(emptyMap<String, Int>().any { it.key == "b" })
 
-        assertTrue(map.any { it.value == 2 })
-        assertFalse(map.any { it.value == 5 })
+        assertTrue(map.any { it.konstue == 2 })
+        assertFalse(map.any { it.konstue == 5 })
     }
 
     @Test fun all() {
-        val map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
+        konst map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
         assertTrue(map.all { it.key != "d" })
         assertTrue(emptyMap<String, Int>().all { it.key == "d" })
 
-        assertTrue(map.all { it.value > 0 })
-        assertFalse(map.all { it.value == 2 })
+        assertTrue(map.all { it.konstue > 0 })
+        assertFalse(map.all { it.konstue == 2 })
     }
 
     @Test fun countBy() {
-        val map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
+        konst map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
         assertEquals(3, map.count())
 
-        val filteredByKey = map.count { it.key == "b" }
+        konst filteredByKey = map.count { it.key == "b" }
         assertEquals(1, filteredByKey)
 
-        val filteredByValue = map.count { it.value == 2 }
+        konst filteredByValue = map.count { it.konstue == 2 }
         assertEquals(2, filteredByValue)
     }
 
     @Test fun filterNot() {
-        val map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
-        val filteredByKey = map.filterNot { it.key == "b" }
+        konst map = mapOf(Pair("b", 3), Pair("c", 2), Pair("a", 2))
+        konst filteredByKey = map.filterNot { it.key == "b" }
         assertEquals(2, filteredByKey.size)
         assertEquals(null, filteredByKey["b"])
         assertEquals(2, filteredByKey["c"])
         assertEquals(2, filteredByKey["a"])
 
-        val filteredByValue = map.filterNot { it.value == 2 }
+        konst filteredByValue = map.filterNot { it.konstue == 2 }
         assertEquals(1, filteredByValue.size)
         assertEquals(3, filteredByValue["b"])
     }
@@ -404,36 +404,36 @@ class MapTest {
     @Test
     fun entriesCovariantContains() {
         // Based on https://youtrack.jetbrains.com/issue/KT-42428.
-        fun doTest(implName: String, map: Map<String, Int>, key: String, value: Int) {
-            class SimpleEntry<out K, out V>(override val key: K, override val value: V) : Map.Entry<K, V> {
-                override fun toString(): String = "$key=$value"
-                override fun hashCode(): Int = key.hashCode() xor value.hashCode()
+        fun doTest(implName: String, map: Map<String, Int>, key: String, konstue: Int) {
+            class SimpleEntry<out K, out V>(override konst key: K, override konst konstue: V) : Map.Entry<K, V> {
+                override fun toString(): String = "$key=$konstue"
+                override fun hashCode(): Int = key.hashCode() xor konstue.hashCode()
                 override fun equals(other: Any?): Boolean =
-                    other is Map.Entry<*, *> && key == other.key && value == other.value
+                    other is Map.Entry<*, *> && key == other.key && konstue == other.konstue
             }
 
-            val mapDescription = "$implName: ${map::class}"
+            konst mapDescription = "$implName: ${map::class}"
 
             assertTrue(map.keys.contains(key), mapDescription)
-            assertEquals(value, map[key], mapDescription)
+            assertEquals(konstue, map[key], mapDescription)
             // This one requires special efforts to make it work this way.
             // map.entries can in fact be `MutableSet<MutableMap.MutableEntry>`,
             // which [contains] method takes [MutableEntry], so the compiler may generate special bridge
-            // returning false for values that aren't [MutableEntry] (including [SimpleEntry]).
-            assertTrue(map.entries.contains(SimpleEntry(key, value)), mapDescription)
-            assertTrue(map.entries.toSet().contains(SimpleEntry(key, value)), "$mapDescription: reference")
+            // returning false for konstues that aren't [MutableEntry] (including [SimpleEntry]).
+            assertTrue(map.entries.contains(SimpleEntry(key, konstue)), mapDescription)
+            assertTrue(map.entries.toSet().contains(SimpleEntry(key, konstue)), "$mapDescription: reference")
 
             assertFalse(map.entries.contains(null as Any?), "$mapDescription: contains null")
             assertFalse(map.entries.contains("not an entry" as Any?), "$mapDescription: contains not an entry")
         }
 
-        val mapLetterToIndex = ('a'..'z').mapIndexed { i, c -> "$c" to i }.toMap()
+        konst mapLetterToIndex = ('a'..'z').mapIndexed { i, c -> "$c" to i }.toMap()
         doTest("default read-only", mapLetterToIndex, "h", 7)
         doTest("default mutable", mapLetterToIndex.toMutableMap(), "b", 1)
         doTest("HashMap", mapLetterToIndex.toMap(HashMap()), "c", 2)
         doTest("LinkedHashMap", mapLetterToIndex.toMap(LinkedHashMap()), "d", 3)
 
-        val builtMap = buildMap {
+        konst builtMap = buildMap {
             putAll(mapLetterToIndex)
             doTest("MapBuilder", this, "z", 25)
         }
@@ -442,24 +442,24 @@ class MapTest {
 
     @Test
     fun entriesCovariantRemove() {
-        fun doTest(implName: String, map: MutableMap<String, Int>, key: String, value: Int) {
-            class SimpleEntry<out K, out V>(override val key: K, override val value: V) : Map.Entry<K, V> {
-                override fun toString(): String = "$key=$value"
-                override fun hashCode(): Int = key.hashCode() xor value.hashCode()
+        fun doTest(implName: String, map: MutableMap<String, Int>, key: String, konstue: Int) {
+            class SimpleEntry<out K, out V>(override konst key: K, override konst konstue: V) : Map.Entry<K, V> {
+                override fun toString(): String = "$key=$konstue"
+                override fun hashCode(): Int = key.hashCode() xor konstue.hashCode()
                 override fun equals(other: Any?): Boolean =
-                    other is Map.Entry<*, *> && key == other.key && value == other.value
+                    other is Map.Entry<*, *> && key == other.key && konstue == other.konstue
             }
 
-            val mapDescription = "$implName: ${map::class}"
+            konst mapDescription = "$implName: ${map::class}"
 
-            assertTrue(map.entries.toMutableSet().remove(SimpleEntry(key, value) as Map.Entry<*, *>), "$mapDescription: reference")
-            assertTrue(map.entries.remove(SimpleEntry(key, value) as Map.Entry<*, *>), mapDescription)
+            assertTrue(map.entries.toMutableSet().remove(SimpleEntry(key, konstue) as Map.Entry<*, *>), "$mapDescription: reference")
+            assertTrue(map.entries.remove(SimpleEntry(key, konstue) as Map.Entry<*, *>), mapDescription)
 
             assertFalse(map.entries.remove(null as Any?), "$mapDescription: remove null")
             assertFalse(map.entries.remove("not an entry" as Any?), "$mapDescription: remove not an entry")
         }
 
-        val mapLetterToIndex = ('a'..'z').mapIndexed { i, c -> "$c" to i }.toMap()
+        konst mapLetterToIndex = ('a'..'z').mapIndexed { i, c -> "$c" to i }.toMap()
         doTest("default mutable", mapLetterToIndex.toMutableMap(), "b", 1)
         doTest("HashMap", mapLetterToIndex.toMap(HashMap()), "c", 2)
         doTest("LinkedHashMap", mapLetterToIndex.toMap(LinkedHashMap()), "d", 3)
@@ -472,24 +472,24 @@ class MapTest {
 
     @Test
     fun firstNotNullOf() {
-        val map = mapOf("Alice" to 20, "Tom" to 13, "Bob" to 18)
+        konst map = mapOf("Alice" to 20, "Tom" to 13, "Bob" to 18)
 
-        val firstAdult = map.firstNotNullOf { (name, age) -> name.takeIf { age >= 18 } }
-        val firstAdultOrNull = map.firstNotNullOfOrNull { (name, age) -> name.takeIf { age >= 18 } }
+        konst firstAdult = map.firstNotNullOf { (name, age) -> name.takeIf { age >= 18 } }
+        konst firstAdultOrNull = map.firstNotNullOfOrNull { (name, age) -> name.takeIf { age >= 18 } }
 
         assertEquals("Alice", firstAdult)
         assertEquals("Alice", firstAdultOrNull)
 
         @Suppress("UNUSED_VARIABLE")
-        assertFailsWith<NoSuchElementException> { val firstChild = map.firstNotNullOf { (name, age) -> name.takeIf { age <= 11 } } }
-        val firstChildOrNull = map.firstNotNullOfOrNull { (name, age) -> name.takeIf { age <= 11 } }
+        assertFailsWith<NoSuchElementException> { konst firstChild = map.firstNotNullOf { (name, age) -> name.takeIf { age <= 11 } } }
+        konst firstChildOrNull = map.firstNotNullOfOrNull { (name, age) -> name.takeIf { age <= 11 } }
 
         assertNull(firstChildOrNull)
     }
 
 
     fun testPlusAssign(doPlusAssign: (MutableMap<String, Int>) -> Unit) {
-        val map = hashMapOf("a" to 1, "b" to 2)
+        konst map = hashMapOf("a" to 1, "b" to 2)
         doPlusAssign(map)
         assertEquals(3, map.size)
         assertEquals(1, map["a"])
@@ -511,8 +511,8 @@ class MapTest {
     @Test fun plusAssignMap() = testPlusAssign { it += mapOf("c" to 3, "b" to 4) }
 
     fun testPlus(doPlus: (Map<String, Int>) -> Map<String, Int>) {
-        val original = mapOf("A" to 1, "B" to 2)
-        val extended = doPlus(original)
+        konst original = mapOf("A" to 1, "B" to 2)
+        konst extended = doPlus(original)
         assertEquals(3, extended.size)
         assertEquals(1, extended["A"])
         assertEquals(4, extended["B"])
@@ -535,7 +535,7 @@ class MapTest {
     }
 
     fun <K, V> testPlusAny(mapObject: Any, pair: Pair<K, V>) {
-        val map = mapObject as Map<*, *>
+        konst map = mapObject as Map<*, *>
         fun assertContains(map: Map<*, *>) = assertEquals(pair.second, map[pair.first])
 
         assertContains(map + pair)
@@ -547,8 +547,8 @@ class MapTest {
 
 
     fun testMinus(doMinus: (Map<String, Int>) -> Map<String, Int>) {
-        val original = mapOf("A" to 1, "B" to 2)
-        val shortened = doMinus(original)
+        konst original = mapOf("A" to 1, "B" to 2)
+        konst shortened = doMinus(original)
         assertEquals("A" to 1, shortened.entries.single().toPair())
     }
 
@@ -565,7 +565,7 @@ class MapTest {
 
 
     fun testMinusAssign(doMinusAssign: (MutableMap<String, Int>) -> Unit) {
-        val original = hashMapOf("A" to 1, "B" to 2)
+        konst original = hashMapOf("A" to 1, "B" to 2)
         doMinusAssign(original)
         assertEquals("A" to 1, original.entries.single().toPair())
     }
@@ -583,13 +583,13 @@ class MapTest {
 
 
     fun testIdempotent(operation: (Map<String, Int>) -> Map<String, Int>) {
-        val original = mapOf("A" to 1, "B" to 2)
+        konst original = mapOf("A" to 1, "B" to 2)
         assertEquals(original, operation(original))
     }
 
     fun testIdempotentAssign(operation: (MutableMap<String, Int>) -> Unit) {
-        val original = hashMapOf("A" to 1, "B" to 2)
-        val result = HashMap(original)
+        konst original = hashMapOf("A" to 1, "B" to 2)
+        konst result = HashMap(original)
         operation(result)
         assertEquals(original, result)
     }
@@ -613,17 +613,17 @@ class MapTest {
 
     @Test
     fun minMaxWith() {
-        val map = listOf("a", "bcd", "Ef").associateWith { it.length }
+        konst map = listOf("a", "bcd", "Ef").associateWith { it.length }
         expectMinMaxWith("Ef" to 2, "bcd" to 3, map, compareBy { it.key })
         expectMinMaxWith("a" to 1, "Ef" to 2, map, compareBy(String.CASE_INSENSITIVE_ORDER) { it.key })
-        expectMinMaxWith("a" to 1, "bcd" to 3, map, compareBy { it.value })
+        expectMinMaxWith("a" to 1, "bcd" to 3, map, compareBy { it.konstue })
 
     }
 
     @Test
     fun minMaxWithEmpty() {
-        val empty = mapOf<Int, Int>()
-        val comparator = compareBy<Map.Entry<Int, Int>> { it.value }
+        konst empty = mapOf<Int, Int>()
+        konst comparator = compareBy<Map.Entry<Int, Int>> { it.konstue }
         assertNull(empty.minWithOrNull(comparator))
         assertNull(empty.maxWithOrNull(comparator))
         assertFailsWith<NoSuchElementException> { empty.minWith(comparator) }
@@ -640,23 +640,23 @@ class MapTest {
 
     @Test
     fun minMaxBy() {
-        val map = listOf("a", "bcd", "Ef").associateWith { it.length }
+        konst map = listOf("a", "bcd", "Ef").associateWith { it.length }
         expectMinMaxBy("Ef" to 2, "bcd" to 3, map, { it.key })
         expectMinMaxBy("a" to 1, "Ef" to 2, map, { it.key.lowercase() })
-        expectMinMaxBy("a" to 1, "bcd" to 3, map, { it.value })
+        expectMinMaxBy("a" to 1, "bcd" to 3, map, { it.konstue })
     }
 
     @Test
     fun minMaxByEmpty() {
-        val empty = mapOf<Int, Int>()
+        konst empty = mapOf<Int, Int>()
         assertNull(empty.minByOrNull { it.toString() })
         assertNull(empty.maxByOrNull { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minBy { it.toString() } }
         assertFailsWith<NoSuchElementException> { empty.maxBy { it.toString() } }
     }
 
-    @Test fun minBySelectorEvaluateOnce() {
-        val source = listOf(1, 2, 3).associateWith { it }
+    @Test fun minBySelectorEkonstuateOnce() {
+        konst source = listOf(1, 2, 3).associateWith { it }
         var c = 0
         source.minBy { c++ }
         assertEquals(3, c)
@@ -665,8 +665,8 @@ class MapTest {
         assertEquals(3, c)
     }
 
-    @Test fun maxBySelectorEvaluateOnce() {
-        val source = listOf(1, 2, 3).associateWith { it }
+    @Test fun maxBySelectorEkonstuateOnce() {
+        konst source = listOf(1, 2, 3).associateWith { it }
         var c = 0
         source.maxBy { c++ }
         assertEquals(3, c)
@@ -684,7 +684,7 @@ class MapTest {
 
     @Test
     fun minMaxOf() {
-        val maps = (1..3).map { size -> listOf("a", "bcd", "Ef").take(size).associateWith { it.length } }
+        konst maps = (1..3).map { size -> listOf("a", "bcd", "Ef").take(size).associateWith { it.length } }
 
         expectMinMaxOf("a=1", "a=1", maps[0], { it.toString() })
         expectMinMaxOf("a=1", "bcd=3", maps[1], { it.toString() })
@@ -693,35 +693,35 @@ class MapTest {
 
     @Test
     fun minMaxOfDouble() {
-        val items = mapOf("a" to 0.0, "b" to 1.0, "c" to -1.0)
-        assertTrue(items.minOf { it.value.pow(0.5) }.isNaN())
-        assertTrue(items.minOfOrNull { it.value.pow(0.5) }!!.isNaN())
-        assertTrue(items.maxOf { it.value.pow(0.5) }.isNaN())
-        assertTrue(items.maxOfOrNull { it.value.pow(0.5) }!!.isNaN())
+        konst items = mapOf("a" to 0.0, "b" to 1.0, "c" to -1.0)
+        assertTrue(items.minOf { it.konstue.pow(0.5) }.isNaN())
+        assertTrue(items.minOfOrNull { it.konstue.pow(0.5) }!!.isNaN())
+        assertTrue(items.maxOf { it.konstue.pow(0.5) }.isNaN())
+        assertTrue(items.maxOfOrNull { it.konstue.pow(0.5) }!!.isNaN())
 
-        assertIsNegativeZero(items.minOf { it.value * 0.0 })
-        assertIsNegativeZero(items.minOfOrNull { it.value * 0.0 }!!)
-        assertIsPositiveZero(items.maxOf { it.value * 0.0 })
-        assertIsPositiveZero(items.maxOfOrNull { it.value * 0.0 }!!)
+        assertIsNegativeZero(items.minOf { it.konstue * 0.0 })
+        assertIsNegativeZero(items.minOfOrNull { it.konstue * 0.0 }!!)
+        assertIsPositiveZero(items.maxOf { it.konstue * 0.0 })
+        assertIsPositiveZero(items.maxOfOrNull { it.konstue * 0.0 }!!)
     }
 
     @Test
     fun minMaxOfFloat() {
-        val items = mapOf("a" to 0.0F, "b" to 1.0F, "c" to -1.0F)
-        assertTrue(items.minOf { it.value.pow(0.5F) }.isNaN())
-        assertTrue(items.minOfOrNull { it.value.pow(0.5F) }!!.isNaN())
-        assertTrue(items.maxOf { it.value.pow(0.5F) }.isNaN())
-        assertTrue(items.maxOfOrNull { it.value.pow(0.5F) }!!.isNaN())
+        konst items = mapOf("a" to 0.0F, "b" to 1.0F, "c" to -1.0F)
+        assertTrue(items.minOf { it.konstue.pow(0.5F) }.isNaN())
+        assertTrue(items.minOfOrNull { it.konstue.pow(0.5F) }!!.isNaN())
+        assertTrue(items.maxOf { it.konstue.pow(0.5F) }.isNaN())
+        assertTrue(items.maxOfOrNull { it.konstue.pow(0.5F) }!!.isNaN())
 
-        assertIsNegativeZero(items.minOf { it.value * 0.0F }.toDouble())
-        assertIsNegativeZero(items.minOfOrNull { it.value * 0.0F }!!.toDouble())
-        assertIsPositiveZero(items.maxOf { it.value * 0.0F }.toDouble())
-        assertIsPositiveZero(items.maxOfOrNull { it.value * 0.0F }!!.toDouble())
+        assertIsNegativeZero(items.minOf { it.konstue * 0.0F }.toDouble())
+        assertIsNegativeZero(items.minOfOrNull { it.konstue * 0.0F }!!.toDouble())
+        assertIsPositiveZero(items.maxOf { it.konstue * 0.0F }.toDouble())
+        assertIsPositiveZero(items.maxOfOrNull { it.konstue * 0.0F }!!.toDouble())
     }
 
     @Test
     fun minMaxOfEmpty() {
-        val empty = mapOf<Int, Int>()
+        konst empty = mapOf<Int, Int>()
 
         assertNull(empty.minOfOrNull { it.toString() })
         assertNull(empty.maxOfOrNull { it.toString() })
@@ -751,8 +751,8 @@ class MapTest {
 
     @Test
     fun minMaxOfWith() {
-        val maps = (1..3).map { size -> listOf("a", "bcd", "Ef").take(size).associateWith { it.length } }
-        val comparator = String.CASE_INSENSITIVE_ORDER
+        konst maps = (1..3).map { size -> listOf("a", "bcd", "Ef").take(size).associateWith { it.length } }
+        konst comparator = String.CASE_INSENSITIVE_ORDER
         expectMinMaxOfWith("a=1", "a=1", maps[0], comparator, { it.toString() })
         expectMinMaxOfWith("a=1", "bcd=3", maps[1], comparator, { it.toString() })
         expectMinMaxOfWith("a=1", "Ef=2", maps[2], comparator, { it.toString() })
@@ -760,7 +760,7 @@ class MapTest {
 
     @Test
     fun minMaxOfWithEmpty() {
-        val empty = mapOf<Int, Int>()
+        konst empty = mapOf<Int, Int>()
         assertNull(empty.minOfWithOrNull(naturalOrder()) { it.toString() })
         assertNull(empty.maxOfWithOrNull(naturalOrder()) { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minOfWith(naturalOrder()) { it.toString() } }

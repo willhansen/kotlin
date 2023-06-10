@@ -357,12 +357,12 @@ namespace {
 
 class PinnedType : private Pinned {
 public:
-    PinnedType(int value) : value_(value) {}
+    PinnedType(int konstue) : konstue_(konstue) {}
 
-    int value() const { return value_; }
+    int konstue() const { return konstue_; }
 
 private:
-    int value_;
+    int konstue_;
 };
 
 } // namespace
@@ -373,7 +373,7 @@ TEST(SingleLockListTest, PinnedType) {
 
     auto* itemNode = list.Emplace(kFirst);
     PinnedType* item = itemNode->Get();
-    EXPECT_THAT(item->value(), kFirst);
+    EXPECT_THAT(item->konstue(), kFirst);
 
     list.Erase(itemNode);
 

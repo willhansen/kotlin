@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.name.JsStandardClassIds
 
 object FirJsExternalFileChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val closestNonLocal = context.closestNonLocalWith(declaration)?.symbol ?: return
+        konst closestNonLocal = context.closestNonLocalWith(declaration)?.symbol ?: return
 
         if (closestNonLocal.isNativeObject(context) || !context.isTopLevel) {
             return
         }
 
-        val targetAnnotations = context.containingFile
+        konst targetAnnotations = context.containingFile
             ?.annotations
             ?.firstOrNull { it.toAnnotationClassId(context.session) in JsStandardClassIds.Annotations.annotationsRequiringExternal }
 

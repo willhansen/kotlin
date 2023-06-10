@@ -24,14 +24,14 @@ inline fun My.doPerform (closure : (param : My) -> Int) : Int {
 // FILE: 2.kt
 
 fun test1(): String {
-    val inlineX = My()
+    konst inlineX = My()
     var d = "";
     inlineX.doWork({ z: String -> d = z; z})
     return d
 }
 
 fun test2(): Int {
-    val inlineX = My()
+    konst inlineX = My()
     return inlineX.perform({ z: My -> 11})
 }
 

@@ -1,28 +1,28 @@
-/*∆*/ public val org.w3c.workers.ServiceWorkerState.Companion.ACTIVATED: org.w3c.workers.ServiceWorkerState { get; }
+/*∆*/ public konst org.w3c.workers.ServiceWorkerState.Companion.ACTIVATED: org.w3c.workers.ServiceWorkerState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.ServiceWorkerState.Companion.ACTIVATING: org.w3c.workers.ServiceWorkerState { get; }
+/*∆*/ public konst org.w3c.workers.ServiceWorkerState.Companion.ACTIVATING: org.w3c.workers.ServiceWorkerState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.ClientType.Companion.ALL: org.w3c.workers.ClientType { get; }
+/*∆*/ public konst org.w3c.workers.ClientType.Companion.ALL: org.w3c.workers.ClientType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.FrameType.Companion.AUXILIARY: org.w3c.workers.FrameType { get; }
+/*∆*/ public konst org.w3c.workers.FrameType.Companion.AUXILIARY: org.w3c.workers.FrameType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.ServiceWorkerState.Companion.INSTALLED: org.w3c.workers.ServiceWorkerState { get; }
+/*∆*/ public konst org.w3c.workers.ServiceWorkerState.Companion.INSTALLED: org.w3c.workers.ServiceWorkerState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.ServiceWorkerState.Companion.INSTALLING: org.w3c.workers.ServiceWorkerState { get; }
+/*∆*/ public konst org.w3c.workers.ServiceWorkerState.Companion.INSTALLING: org.w3c.workers.ServiceWorkerState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.FrameType.Companion.NESTED: org.w3c.workers.FrameType { get; }
+/*∆*/ public konst org.w3c.workers.FrameType.Companion.NESTED: org.w3c.workers.FrameType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.FrameType.Companion.NONE: org.w3c.workers.FrameType { get; }
+/*∆*/ public konst org.w3c.workers.FrameType.Companion.NONE: org.w3c.workers.FrameType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.ServiceWorkerState.Companion.REDUNDANT: org.w3c.workers.ServiceWorkerState { get; }
+/*∆*/ public konst org.w3c.workers.ServiceWorkerState.Companion.REDUNDANT: org.w3c.workers.ServiceWorkerState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.ClientType.Companion.SHAREDWORKER: org.w3c.workers.ClientType { get; }
+/*∆*/ public konst org.w3c.workers.ClientType.Companion.SHAREDWORKER: org.w3c.workers.ClientType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.FrameType.Companion.TOP_LEVEL: org.w3c.workers.FrameType { get; }
+/*∆*/ public konst org.w3c.workers.FrameType.Companion.TOP_LEVEL: org.w3c.workers.FrameType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.ClientType.Companion.WINDOW: org.w3c.workers.ClientType { get; }
+/*∆*/ public konst org.w3c.workers.ClientType.Companion.WINDOW: org.w3c.workers.ClientType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.workers.ClientType.Companion.WORKER: org.w3c.workers.ClientType { get; }
+/*∆*/ public konst org.w3c.workers.ClientType.Companion.WORKER: org.w3c.workers.ClientType { get; }
 /*∆*/ 
 /*∆*/ @kotlin.internal.InlineOnly
 /*∆*/ public inline fun CacheBatchOperation(type: kotlin.String? = ..., request: org.w3c.fetch.Request? = ..., response: org.w3c.fetch.Response? = ..., options: org.w3c.workers.CacheQueryOptions? = ...): org.w3c.workers.CacheBatchOperation
@@ -112,11 +112,11 @@
 /*∆*/ public abstract external class Client : org.w3c.workers.UnionClientOrMessagePortOrServiceWorker {
 /*∆*/     public constructor Client()
 /*∆*/ 
-/*∆*/     public open val frameType: org.w3c.workers.FrameType { get; }
+/*∆*/     public open konst frameType: org.w3c.workers.FrameType { get; }
 /*∆*/ 
-/*∆*/     public open val id: kotlin.String { get; }
+/*∆*/     public open konst id: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val url: kotlin.String { get; }
+/*∆*/     public open konst url: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final fun postMessage(message: kotlin.Any?, transfer: kotlin.Array<dynamic> = ...): kotlin.Unit
 /*∆*/ }
@@ -151,13 +151,13 @@
 /*∆*/     public final fun waitUntil(f: kotlin.js.Promise<kotlin.Any?>): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of ExtendableEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -167,24 +167,24 @@
 /*∆*/ public open external class ExtendableMessageEvent : org.w3c.workers.ExtendableEvent {
 /*∆*/     public constructor ExtendableMessageEvent(type: kotlin.String, eventInitDict: org.w3c.workers.ExtendableMessageEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val data: kotlin.Any? { get; }
+/*∆*/     public open konst data: kotlin.Any? { get; }
 /*∆*/ 
-/*∆*/     public open val lastEventId: kotlin.String { get; }
+/*∆*/     public open konst lastEventId: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val origin: kotlin.String { get; }
+/*∆*/     public open konst origin: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val ports: kotlin.Array<out org.w3c.dom.MessagePort>? { get; }
+/*∆*/     public open konst ports: kotlin.Array<out org.w3c.dom.MessagePort>? { get; }
 /*∆*/ 
-/*∆*/     public open val source: org.w3c.workers.UnionClientOrMessagePortOrServiceWorker? { get; }
+/*∆*/     public open konst source: org.w3c.workers.UnionClientOrMessagePortOrServiceWorker? { get; }
 /*∆*/ 
 /*∆*/     public companion object of ExtendableMessageEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -203,22 +203,22 @@
 /*∆*/ public open external class FetchEvent : org.w3c.workers.ExtendableEvent {
 /*∆*/     public constructor FetchEvent(type: kotlin.String, eventInitDict: org.w3c.workers.FetchEventInit)
 /*∆*/ 
-/*∆*/     public open val clientId: kotlin.String? { get; }
+/*∆*/     public open konst clientId: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val isReload: kotlin.Boolean { get; }
+/*∆*/     public open konst isReload: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val request: org.w3c.fetch.Request { get; }
+/*∆*/     public open konst request: org.w3c.fetch.Request { get; }
 /*∆*/ 
 /*∆*/     public final fun respondWith(r: kotlin.js.Promise<org.w3c.fetch.Response>): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of FetchEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -233,20 +233,20 @@
 /*∆*/ public open external class ForeignFetchEvent : org.w3c.workers.ExtendableEvent {
 /*∆*/     public constructor ForeignFetchEvent(type: kotlin.String, eventInitDict: org.w3c.workers.ForeignFetchEventInit)
 /*∆*/ 
-/*∆*/     public open val origin: kotlin.String { get; }
+/*∆*/     public open konst origin: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val request: org.w3c.fetch.Request { get; }
+/*∆*/     public open konst request: org.w3c.fetch.Request { get; }
 /*∆*/ 
 /*∆*/     public final fun respondWith(r: kotlin.js.Promise<org.w3c.workers.ForeignFetchResponse>): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of ForeignFetchEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -280,13 +280,13 @@
 /*∆*/     public constructor FunctionalEvent()
 /*∆*/ 
 /*∆*/     public companion object of FunctionalEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -296,13 +296,13 @@
 /*∆*/     public final fun registerForeignFetch(options: org.w3c.workers.ForeignFetchOptions): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of InstallEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -317,9 +317,9 @@
 /*∆*/ 
 /*∆*/     public open var onstatechange: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val scriptURL: kotlin.String { get; }
+/*∆*/     public open konst scriptURL: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val state: org.w3c.workers.ServiceWorkerState { get; }
+/*∆*/     public open konst state: org.w3c.workers.ServiceWorkerState { get; }
 /*∆*/ 
 /*∆*/     public final fun postMessage(message: kotlin.Any?, transfer: kotlin.Array<dynamic> = ...): kotlin.Unit
 /*∆*/ }
@@ -327,13 +327,13 @@
 /*∆*/ public abstract external class ServiceWorkerContainer : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor ServiceWorkerContainer()
 /*∆*/ 
-/*∆*/     public open val controller: org.w3c.workers.ServiceWorker? { get; }
+/*∆*/     public open konst controller: org.w3c.workers.ServiceWorker? { get; }
 /*∆*/ 
 /*∆*/     public open var oncontrollerchange: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
 /*∆*/     public open var onmessage: ((org.w3c.dom.MessageEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val ready: kotlin.js.Promise<org.w3c.workers.ServiceWorkerRegistration> { get; }
+/*∆*/     public open konst ready: kotlin.js.Promise<org.w3c.workers.ServiceWorkerRegistration> { get; }
 /*∆*/ 
 /*∆*/     public final fun getRegistration(clientURL: kotlin.String = ...): kotlin.js.Promise<kotlin.Any?>
 /*∆*/ 
@@ -347,7 +347,7 @@
 /*∆*/ public abstract external class ServiceWorkerGlobalScope : org.w3c.dom.WorkerGlobalScope {
 /*∆*/     public constructor ServiceWorkerGlobalScope()
 /*∆*/ 
-/*∆*/     public open val clients: org.w3c.workers.Clients { get; }
+/*∆*/     public open konst clients: org.w3c.workers.Clients { get; }
 /*∆*/ 
 /*∆*/     public open var onactivate: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -365,7 +365,7 @@
 /*∆*/ 
 /*∆*/     public open var onnotificationclose: ((org.w3c.notifications.NotificationEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val registration: org.w3c.workers.ServiceWorkerRegistration { get; }
+/*∆*/     public open konst registration: org.w3c.workers.ServiceWorkerRegistration { get; }
 /*∆*/ 
 /*∆*/     public final fun skipWaiting(): kotlin.js.Promise<kotlin.Unit>
 /*∆*/ }
@@ -373,24 +373,24 @@
 /*∆*/ public open external class ServiceWorkerMessageEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor ServiceWorkerMessageEvent(type: kotlin.String, eventInitDict: org.w3c.workers.ServiceWorkerMessageEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val data: kotlin.Any? { get; }
+/*∆*/     public open konst data: kotlin.Any? { get; }
 /*∆*/ 
-/*∆*/     public open val lastEventId: kotlin.String { get; }
+/*∆*/     public open konst lastEventId: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val origin: kotlin.String { get; }
+/*∆*/     public open konst origin: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val ports: kotlin.Array<out org.w3c.dom.MessagePort>? { get; }
+/*∆*/     public open konst ports: kotlin.Array<out org.w3c.dom.MessagePort>? { get; }
 /*∆*/ 
-/*∆*/     public open val source: org.w3c.workers.UnionMessagePortOrServiceWorker? { get; }
+/*∆*/     public open konst source: org.w3c.workers.UnionMessagePortOrServiceWorker? { get; }
 /*∆*/ 
 /*∆*/     public companion object of ServiceWorkerMessageEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -409,17 +409,17 @@
 /*∆*/ public abstract external class ServiceWorkerRegistration : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor ServiceWorkerRegistration()
 /*∆*/ 
-/*∆*/     public open val APISpace: dynamic { get; }
+/*∆*/     public open konst APISpace: dynamic { get; }
 /*∆*/ 
-/*∆*/     public open val active: org.w3c.workers.ServiceWorker? { get; }
+/*∆*/     public open konst active: org.w3c.workers.ServiceWorker? { get; }
 /*∆*/ 
-/*∆*/     public open val installing: org.w3c.workers.ServiceWorker? { get; }
+/*∆*/     public open konst installing: org.w3c.workers.ServiceWorker? { get; }
 /*∆*/ 
 /*∆*/     public open var onupdatefound: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val scope: kotlin.String { get; }
+/*∆*/     public open konst scope: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val waiting: org.w3c.workers.ServiceWorker? { get; }
+/*∆*/     public open konst waiting: org.w3c.workers.ServiceWorker? { get; }
 /*∆*/ 
 /*∆*/     public final fun getNotifications(filter: org.w3c.notifications.GetNotificationOptions = ...): kotlin.js.Promise<kotlin.Array<org.w3c.notifications.Notification>>
 /*∆*/ 
@@ -447,9 +447,9 @@
 /*∆*/ public abstract external class WindowClient : org.w3c.workers.Client {
 /*∆*/     public constructor WindowClient()
 /*∆*/ 
-/*∆*/     public open val focused: kotlin.Boolean { get; }
+/*∆*/     public open konst focused: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val visibilityState: dynamic { get; }
+/*∆*/     public open konst visibilityState: dynamic { get; }
 /*∆*/ 
 /*∆*/     public final fun focus(): kotlin.js.Promise<org.w3c.workers.WindowClient>
 /*∆*/ 

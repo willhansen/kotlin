@@ -2,14 +2,14 @@
 // WITH_STDLIB
 
 
-val MaxUI = UInt.MAX_VALUE
-val MinUI = UInt.MIN_VALUE
-val MaxUL = ULong.MAX_VALUE
-val MinUL = ULong.MIN_VALUE
+konst MaxUI = UInt.MAX_VALUE
+konst MinUI = UInt.MIN_VALUE
+konst MaxUL = ULong.MAX_VALUE
+konst MinUL = ULong.MIN_VALUE
 
 fun box(): String {
-    val list1 = ArrayList<UInt>()
-    val range1 = MaxUI..MinUI
+    konst list1 = ArrayList<UInt>()
+    konst range1 = MaxUI..MinUI
     for (i in range1) {
         list1.add(i)
         if (list1.size > 23) break
@@ -18,8 +18,8 @@ fun box(): String {
         return "Wrong elements for MaxUI..MinUI: $list1"
     }
 
-    val list2 = ArrayList<ULong>()
-    val range2 = MaxUL..MinUL
+    konst list2 = ArrayList<ULong>()
+    konst range2 = MaxUL..MinUL
     for (i in range2) {
         list2.add(i)
         if (list2.size > 23) break

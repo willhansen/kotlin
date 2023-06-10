@@ -196,7 +196,7 @@ public abstract class KotlinLightClassStructureTest extends KotlinAsJavaTestBase
 
     protected static void checkModifiers(PsiClass psiClass, ClassProperty... properties) {
         Set<ClassProperty> modifiersSet = Sets.newHashSet(properties);
-        for (ClassProperty property : values()) {
+        for (ClassProperty property : konstues()) {
             boolean present = property.present(psiClass);
             if (modifiersSet.contains(property)) {
                 assertTrue("Property " + property + " not present on " + psiClass, present);

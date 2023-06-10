@@ -23,35 +23,35 @@ import kotlin.test.*
 class KotlinNativeCompileArgumentsTest {
     @Test
     fun `test - simple project - old buildCompilerArgs and new CompilerArgumentsProducer - return same arguments`() {
-        val project = buildProjectWithMPP()
+        konst project = buildProjectWithMPP()
         project.repositories.mavenLocal()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         kotlin.linuxArm64()
-        val linuxX64Target = kotlin.linuxX64()
+        konst linuxX64Target = kotlin.linuxX64()
 
-        project.evaluate()
+        project.ekonstuate()
 
         /* Check linuxX64 main compilation as 'native platform compilation' */
         run {
-            val linuxX64MainCompilation = linuxX64Target.compilations.main
-            val linuxX64MainCompileTask = linuxX64MainCompilation.compileTaskProvider.get()
+            konst linuxX64MainCompilation = linuxX64Target.compilations.main
+            konst linuxX64MainCompileTask = linuxX64MainCompilation.compileTaskProvider.get()
             `assert setupCompilerArgs and createCompilerArguments are equal`(linuxX64MainCompileTask)
         }
 
         /* Check commonMain compilation as 'shared native compilation' */
         run {
-            val commonMainCompilation = kotlin.metadata().compilations.getByName("commonMain")
-            val commonMainCompileTask = commonMainCompilation.compileTaskProvider.get() as KotlinNativeCompile
+            konst commonMainCompilation = kotlin.metadata().compilations.getByName("commonMain")
+            konst commonMainCompileTask = commonMainCompilation.compileTaskProvider.get() as KotlinNativeCompile
             `assert setupCompilerArgs and createCompilerArguments are equal`(commonMainCompileTask)
         }
     }
 
 
     private fun `assert setupCompilerArgs and createCompilerArguments are equal`(compile: KotlinNativeCompile) {
-        val argumentsFromCompilerArgumentsProducer = compile.createCompilerArguments(lenient)
-        val argumentsFromBuildCompilerArgs = K2NativeCompilerArguments().apply {
+        konst argumentsFromCompilerArgumentsProducer = compile.createCompilerArguments(lenient)
+        konst argumentsFromBuildCompilerArgs = K2NativeCompilerArguments().apply {
             @Suppress("DEPRECATION_ERROR")
             compile.setupCompilerArgs(this, true)
         }
@@ -64,22 +64,22 @@ class KotlinNativeCompileArgumentsTest {
 
     @Test
     fun `test - simple project - failing dependency - lenient`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
-        val linuxX64Target = kotlin.linuxX64()
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
+        konst linuxX64Target = kotlin.linuxX64()
         kotlin.sourceSets.getByName("commonMain").dependencies { implementation("not-a:dependency:1.0.0") }
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMainCompileTask = linuxX64Target.compilations.main.compileTaskProvider.get()
+        konst commonMainCompileTask = linuxX64Target.compilations.main.compileTaskProvider.get()
         assertNull(commonMainCompileTask.createCompilerArguments(lenient).libraries)
         assertFails { commonMainCompileTask.createCompilerArguments(default) }
     }
 
     @Test
     fun `test - opt in`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
-        val linuxX64Target = kotlin.linuxX64()
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
+        konst linuxX64Target = kotlin.linuxX64()
         linuxX64Target.compilations.all {
             it.compilerOptions.options.apply {
                 optIn.add("my.OptIn")
@@ -87,9 +87,9 @@ class KotlinNativeCompileArgumentsTest {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val arguments = linuxX64Target.compilations.main.compileTaskProvider.get().createCompilerArguments(lenient)
+        konst arguments = linuxX64Target.compilations.main.compileTaskProvider.get().createCompilerArguments(lenient)
         assertEquals(
             listOf("my.OptIn", "my.other.OptIn"), arguments.optIn?.toList()
         )
@@ -97,8 +97,8 @@ class KotlinNativeCompileArgumentsTest {
 
     @Test
     fun `test - k2 - shared native compilation - sources`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.linuxX64()
         kotlin.linuxArm64()
 
@@ -109,15 +109,15 @@ class KotlinNativeCompileArgumentsTest {
             }
         }
 
-        val commonMainSourceFile = project.file("src/commonMain/kotlin/CommonMain.kt")
+        konst commonMainSourceFile = project.file("src/commonMain/kotlin/CommonMain.kt")
         commonMainSourceFile.parentFile.mkdirs()
         commonMainSourceFile.writeText("object CommonMain")
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val sharedNativeCompilation = kotlin.metadata().compilations.getByName("commonMain")
-        val sharedNativeCompileTask = sharedNativeCompilation.compileTaskProvider.get() as KotlinNativeCompile
-        val arguments = sharedNativeCompileTask.createCompilerArguments(lenient)
+        konst sharedNativeCompilation = kotlin.metadata().compilations.getByName("commonMain")
+        konst sharedNativeCompileTask = sharedNativeCompilation.compileTaskProvider.get() as KotlinNativeCompile
+        konst arguments = sharedNativeCompileTask.createCompilerArguments(lenient)
 
         assertTrue(
             LanguageVersion.fromVersionString(arguments.languageVersion)!! >= LanguageVersion.KOTLIN_2_0,
@@ -151,8 +151,8 @@ class KotlinNativeCompileArgumentsTest {
 
     @Test
     fun `test - k2 - platform native compilation - sources`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.linuxX64()
 
         /* Enable K2 if necessary */
@@ -162,15 +162,15 @@ class KotlinNativeCompileArgumentsTest {
             }
         }
 
-        val linuxX64SourceFile = project.file("src/linuxX64Main/kotlin/CommonMain.kt")
+        konst linuxX64SourceFile = project.file("src/linuxX64Main/kotlin/CommonMain.kt")
         linuxX64SourceFile.parentFile.mkdirs()
         linuxX64SourceFile.writeText("object Linux")
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val nativeCompilation = kotlin.linuxX64().compilations.main
-        val sharedNativeCompileTask = nativeCompilation.compileTaskProvider.get() as KotlinNativeCompile
-        val arguments = sharedNativeCompileTask.createCompilerArguments(lenient)
+        konst nativeCompilation = kotlin.linuxX64().compilations.main
+        konst sharedNativeCompileTask = nativeCompilation.compileTaskProvider.get() as KotlinNativeCompile
+        konst arguments = sharedNativeCompileTask.createCompilerArguments(lenient)
 
         assertTrue(
             LanguageVersion.fromVersionString(arguments.languageVersion)!! >= LanguageVersion.KOTLIN_2_0,

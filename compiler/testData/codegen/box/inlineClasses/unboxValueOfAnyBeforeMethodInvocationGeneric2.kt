@@ -3,18 +3,18 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class NullableInt<T: Any>(private val holder: T?) {
-    val intValue: Int get() = holder as Int
+konstue class NullableInt<T: Any>(private konst holder: T?) {
+    konst intValue: Int get() = holder as Int
 }
 
-val prop: ArrayList<NullableInt<Any>> = arrayListOf(NullableInt(0))
+konst prop: ArrayList<NullableInt<Any>> = arrayListOf(NullableInt(0))
 
 fun box(): String {
-    val a = prop[0].intValue
+    konst a = prop[0].intValue
     if (a != 0) return "Error 1: $a"
 
-    val local = mutableListOf(NullableInt(1))
-    val b = local[0].intValue
+    konst local = mutableListOf(NullableInt(1))
+    konst b = local[0].intValue
     if (b != 1) return "Error 2: $b"
 
     prop[0] = NullableInt(2)

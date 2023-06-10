@@ -26,7 +26,7 @@ internal fun getClasspathChanges(
     caches: IncrementalCacheCommon,
     scopes: Collection<String>
 ): ChangesEither {
-    val classpathSet = HashSet<File>()
+    konst classpathSet = HashSet<File>()
     for (file in classpath) {
         when {
             file.isFile -> classpathSet.add(file)
@@ -34,8 +34,8 @@ internal fun getClasspathChanges(
         }
     }
 
-    val modifiedClasspath = changedFiles.modified.filterTo(HashSet()) { it in classpathSet }
-    val removedClasspath = changedFiles.removed.filterTo(HashSet()) { it in classpathSet }
+    konst modifiedClasspath = changedFiles.modified.filterTo(HashSet()) { it in classpathSet }
+    konst removedClasspath = changedFiles.removed.filterTo(HashSet()) { it in classpathSet }
 
     // todo: removed classes could be processed normally
     if (removedClasspath.isNotEmpty()) {
@@ -47,17 +47,17 @@ internal fun getClasspathChanges(
 
     if (withSnapshot) {
         fun analyzeJarFiles(): ChangesEither {
-            val symbols = HashSet<LookupSymbol>()
-            val fqNames = HashSet<FqName>()
+            konst symbols = HashSet<LookupSymbol>()
+            konst fqNames = HashSet<FqName>()
 
             for ((module, abiSnapshot) in abiSnapshots) {
-                val actualAbiSnapshot = lastBuildInfo.dependencyToAbiSnapshot[module]
+                konst actualAbiSnapshot = lastBuildInfo.dependencyToAbiSnapshot[module]
                 if (actualAbiSnapshot == null) {
 
                     reporter.info { "Some jar are removed from classpath $module" }
                     return ChangesEither.Unknown(BuildAttribute.DEP_CHANGE_REMOVED_ENTRY)
                 }
-                val diffData = AbiSnapshotDiffService.doCompute(abiSnapshot, actualAbiSnapshot, caches, scopes)
+                konst diffData = AbiSnapshotDiffService.doCompute(abiSnapshot, actualAbiSnapshot, caches, scopes)
                 symbols.addAll(diffData.dirtyLookupSymbols)
                 fqNames.addAll(diffData.dirtyClassesFqNames)
 
@@ -68,18 +68,18 @@ internal fun getClasspathChanges(
             analyzeJarFiles()
         }
     } else {
-        val lastBuildTS = lastBuildInfo.startTS
+        konst lastBuildTS = lastBuildInfo.startTS
 
-        val symbols = HashSet<LookupSymbol>()
-        val fqNames = HashSet<FqName>()
+        konst symbols = HashSet<LookupSymbol>()
+        konst fqNames = HashSet<FqName>()
 
-        val historyFilesEither =
+        konst historyFilesEither =
             reporter.measure(BuildTime.IC_FIND_HISTORY_FILES) {
                 modulesApiHistory.historyFilesForChangedFiles(modifiedClasspath)
             }
 
-        val historyFiles = when (historyFilesEither) {
-            is Either.Success<Set<File>> -> historyFilesEither.value
+        konst historyFiles = when (historyFilesEither) {
+            is Either.Success<Set<File>> -> historyFilesEither.konstue
             is Either.Error -> {
                 reporter.info { "Could not find history files: ${historyFilesEither.reason}" }
                 return ChangesEither.Unknown(BuildAttribute.DEP_CHANGE_HISTORY_IS_NOT_FOUND)
@@ -88,13 +88,13 @@ internal fun getClasspathChanges(
 
         fun analyzeHistoryFiles(): ChangesEither {
             for (historyFile in historyFiles) {
-                val allBuilds = BuildDiffsStorage.readDiffsFromFile(historyFile, reporter = reporter)
+                konst allBuilds = BuildDiffsStorage.readDiffsFromFile(historyFile, reporter = reporter)
                     ?: return run {
                         reporter.info { "Could not read diffs from $historyFile" }
                         ChangesEither.Unknown(BuildAttribute.DEP_CHANGE_HISTORY_CANNOT_BE_READ)
                     }
 
-                val (knownBuilds, newBuilds) = allBuilds.partition { it.ts <= lastBuildTS }
+                konst (knownBuilds, newBuilds) = allBuilds.partition { it.ts <= lastBuildTS }
                 if (knownBuilds.isEmpty()) {
                     reporter.info { "No previously known builds for $historyFile" }
                     return ChangesEither.Unknown(BuildAttribute.DEP_CHANGE_HISTORY_NO_KNOWN_BUILDS)
@@ -107,7 +107,7 @@ internal fun getClasspathChanges(
                         return ChangesEither.Unknown(BuildAttribute.DEP_CHANGE_NON_INCREMENTAL_BUILD_IN_DEP)
 
                     }
-                    val dirtyData = buildDiff.dirtyData
+                    konst dirtyData = buildDiff.dirtyData
                     symbols.addAll(dirtyData.dirtyLookupSymbols)
                     fqNames.addAll(dirtyData.dirtyClassesFqNames)
                 }

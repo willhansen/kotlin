@@ -16,7 +16,7 @@ class KtFe10CollectionLiteralReference(
     expression: KtCollectionLiteralExpression
 ) : KtCollectionLiteralReference(expression), KtFe10Reference {
     override fun getTargetDescriptors(context: BindingContext): Collection<DeclarationDescriptor> {
-        val resolvedCall = context[BindingContext.COLLECTION_LITERAL_CALL, element]
+        konst resolvedCall = context[BindingContext.COLLECTION_LITERAL_CALL, element]
         return listOfNotNull(resolvedCall?.resultingDescriptor)
     }
 

@@ -1,11 +1,11 @@
-fun valuesNotNull(map: MutableMap<Int, String>) {
+fun konstuesNotNull(map: MutableMap<Int, String>) {
     map.putIfAbsent(1, "")
         // SUCCESS
         // ORIGINAL:    fun putIfAbsent(K, V): V? defined in kotlin.collections.MutableMap
         // SUBSTITUTED: fun putIfAbsent(Int, String): String? defined in kotlin.collections.MutableMap
 }
 
-fun valuesNullable(map: MutableMap<Int, String?>) {
+fun konstuesNullable(map: MutableMap<Int, String?>) {
     map.putIfAbsent(1, null)
         // SUCCESS
         // ORIGINAL:    fun putIfAbsent(K, V): V? defined in kotlin.collections.MutableMap

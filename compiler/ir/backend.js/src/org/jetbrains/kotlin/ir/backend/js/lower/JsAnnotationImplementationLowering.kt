@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.ir.util.isUnsignedArray
 
 
 // JS PIR (and IC) requires DeclarationTransformer instead of FileLoweringPass
-class JsAnnotationImplementationTransformer(val jsContext: JsIrBackendContext) :
+class JsAnnotationImplementationTransformer(konst jsContext: JsIrBackendContext) :
     AnnotationImplementationTransformer(jsContext, null),
     DeclarationTransformer {
 
@@ -49,13 +49,13 @@ class JsAnnotationImplementationTransformer(val jsContext: JsIrBackendContext) :
         }
     }
 
-    private val arraysContentEquals: Map<IrType, IrSimpleFunctionSymbol> =
+    private konst arraysContentEquals: Map<IrType, IrSimpleFunctionSymbol> =
         requireNotNull(jsContext.ir.symbols.arraysContentEquals) { "contentEquals symbols should be defined in JS IR context" }
 
     override fun getArrayContentEqualsSymbol(type: IrType) =
         when {
             type.isPrimitiveArray() || type.isUnsignedArray() -> arraysContentEquals[type]
-            else -> arraysContentEquals.entries.singleOrNull { (k, _) -> k.isArray() }?.value
+            else -> arraysContentEquals.entries.singleOrNull { (k, _) -> k.isArray() }?.konstue
         } ?: compilationException("Can't find an Arrays.contentEquals method for array type", type)
 
     override fun implementAnnotationPropertiesAndConstructor(

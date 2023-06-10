@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.builtins
 
 interface FunctionInterfacePackageFragment : BuiltInsPackageFragment {
-    override val isFallback: Boolean
+    override konst isFallback: Boolean
         get() = false
 }

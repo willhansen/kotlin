@@ -9,7 +9,7 @@ fun test() = withDynamicReceiver {
 
 fun test2() = withDynamicReceiver(fun dynamic.() {})
 
-val dynamicProperty: dynamic.() -> Unit = TODO()
+konst dynamicProperty: dynamic.() -> Unit = TODO()
 
 fun test(d: dynamic, <!UNUSED_PARAMETER!>dynamicParameter<!>: dynamic.() -> Unit) {
     d.<!DEBUG_INFO_DYNAMIC!>dynamicProperty<!>()

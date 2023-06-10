@@ -1,3 +1,3 @@
-class Foo(val a: A? = null)
+class Foo(konst a: A? = null)
 
 expect class A

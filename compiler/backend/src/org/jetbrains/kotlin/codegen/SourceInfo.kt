@@ -22,22 +22,22 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtNamedFunction
 
 data class SourceInfo(
-    val sourceFileName: String?,
-    val pathOrCleanFQN: String,
-    val linesInFile: Int
+    konst sourceFileName: String?,
+    konst pathOrCleanFQN: String,
+    konst linesInFile: Int
 ) {
 
     companion object {
         fun createFromPsi(element: KtElement?, internalClassName: String): SourceInfo {
             assert(element != null) { "Couldn't create source mapper for null element $internalClassName" }
-            val lineNumbers = CodegenUtil.getLineNumberForElement(element!!.containingFile, true)
+            konst lineNumbers = CodegenUtil.getLineNumberForElement(element!!.containingFile, true)
                 ?: error("Couldn't extract line count in ${element.containingFile}")
 
             //TODO hack condition for package parts cleaning
-            val isTopLevel = element is KtFile || (element is KtNamedFunction && element.getParent() is KtFile)
-            val cleanedClassFqName = if (!isTopLevel) internalClassName else internalClassName.substringBefore('$')
+            konst isTopLevel = element is KtFile || (element is KtNamedFunction && element.getParent() is KtFile)
+            konst cleanedClassFqName = if (!isTopLevel) internalClassName else internalClassName.substringBefore('$')
 
-            val fileName = element.containingKtFile.name
+            konst fileName = element.containingKtFile.name
             return SourceInfo(fileName, cleanedClassFqName, lineNumbers)
         }
 

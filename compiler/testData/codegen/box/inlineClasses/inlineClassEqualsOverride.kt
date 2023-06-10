@@ -6,9 +6,9 @@
 import kotlin.math.abs
 
 @JvmInline
-value class IC1(val value: Double) {
+konstue class IC1(konst konstue: Double) {
     fun equals(other: IC1): Boolean {
-        return abs(value - other.value) < 0.1
+        return abs(konstue - other.konstue) < 0.1
     }
 }
 
@@ -17,29 +17,29 @@ interface I {
 }
 
 @JvmInline
-value class IC2(val value: Int) : I {
+konstue class IC2(konst konstue: Int) : I {
     override operator fun equals(param: IC2): Boolean {
-        return abs(value - param.value) < 2
+        return abs(konstue - param.konstue) < 2
     }
 }
 
 @JvmInline
-value class IC3(val value: Int) {
+konstue class IC3(konst konstue: Int) {
 
 }
 
 @JvmInline
-value class IC4(val value: Int) {
+konstue class IC4(konst konstue: Int) {
     override fun equals(other: Any?) = TODO()
 }
 
 @JvmInline
-value class IC5(val value: Int) {
+konstue class IC5(konst konstue: Int) {
     operator fun equals(other: IC5): Nothing = TODO()
 }
 
 @JvmInline
-value class IC6(val value: Int) {
+konstue class IC6(konst konstue: Int) {
     override fun equals(other: Any?): Nothing = TODO()
 }
 

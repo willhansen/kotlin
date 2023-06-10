@@ -18,7 +18,7 @@ fun raise(name: String): Nothing {
 @Suppress("INVISIBLE_MEMBER")
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 @EagerInitialization
-private val underscore = kotlin.test.setAdapter(object : FrameworkAdapter {
+private konst underscore = kotlin.test.setAdapter(object : FrameworkAdapter {
     override fun suite(name: String, ignored: Boolean, suiteFn: () -> Unit) {
         sortingContext.suite(name, ignored) { suiteFn() }
     }
@@ -45,17 +45,17 @@ interface TestBodyContext {
     fun returned(msg: Any?)
 }
 
-private sealed class Entity(val name: String,
-                    val ignored: Boolean)
+private sealed class Entity(konst name: String,
+                    konst ignored: Boolean)
 
-private class Suite(name: String, ignored: Boolean, val body: SuiteContext.() -> Unit): Entity(name, ignored)
+private class Suite(name: String, ignored: Boolean, konst body: SuiteContext.() -> Unit): Entity(name, ignored)
 
-private class Test(name: String, ignored: Boolean, val body: TestBodyContext.() -> Unit): Entity(name, ignored)
+private class Test(name: String, ignored: Boolean, konst body: TestBodyContext.() -> Unit): Entity(name, ignored)
 
 
 private class SortingContext: SuiteContext {
 
-    val structure = mutableListOf<Entity>()
+    konst structure = mutableListOf<Entity>()
 
     override fun suite(name: String, ignored: Boolean, body: SuiteContext.() -> Unit) {
         structure += Suite(name, ignored, body)
@@ -69,7 +69,7 @@ private class SortingContext: SuiteContext {
         structure.sortedBy { it.name }.forEach {
             when (it) {
                 is Suite -> context.suite(it.name, it.ignored) {
-                    val oldSorter = sortingContext
+                    konst oldSorter = sortingContext
 
                     sortingContext = SortingContext()
                     it.body(sortingContext)
@@ -90,7 +90,7 @@ private class SortingContext: SuiteContext {
 }
 
 private class LoggingContext : SuiteContext, TestBodyContext{
-    val log: String
+    konst log: String
         get() = logHead + (lastRecord ?: "")
 
     private var indentation = ""
@@ -102,7 +102,7 @@ private class LoggingContext : SuiteContext, TestBodyContext{
     }
 
     override fun test(name: String, ignored: Boolean, body: TestBodyContext.() -> Unit) = indent {
-        val num = record("test(\"$name\"${optionalIgnore(ignored)}) {")
+        konst num = record("test(\"$name\"${optionalIgnore(ignored)}) {")
 
         runSafely { this.body() }
 
@@ -140,7 +140,7 @@ private class LoggingContext : SuiteContext, TestBodyContext{
     }
 
     private fun indent(body: () -> Unit) {
-        val prevIndentation = indentation
+        konst prevIndentation = indentation
         indentation += "    "
         body()
         indentation = prevIndentation
@@ -167,7 +167,7 @@ private class LoggingContext : SuiteContext, TestBodyContext{
 }
 
 fun checkLog(wrapInEmptySuite: Boolean = true, body: SuiteContext.() -> Unit): String {
-    val expectedContext = SortingContext()
+    konst expectedContext = SortingContext()
     if (wrapInEmptySuite) {
         expectedContext.suite("") {
             body()
@@ -176,8 +176,8 @@ fun checkLog(wrapInEmptySuite: Boolean = true, body: SuiteContext.() -> Unit): S
         expectedContext.body()
     }
 
-    val expectedLog = expectedContext.replayInto(LoggingContext()).log
-    val actualLog = sortingContext.replayInto(LoggingContext()).log
+    konst expectedLog = expectedContext.replayInto(LoggingContext()).log
+    konst actualLog = sortingContext.replayInto(LoggingContext()).log
 
     if (actualLog != expectedLog) {
         return "Failed test structure check. Expected: \"${expectedLog}\"; actual: \"${actualLog}\"."

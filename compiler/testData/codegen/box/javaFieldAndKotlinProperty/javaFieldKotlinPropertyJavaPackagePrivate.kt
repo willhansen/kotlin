@@ -21,7 +21,7 @@ public class A extends Y {}
 package base
 
 open class B : A() {
-    private val f = "FAIL"
+    private konst f = "FAIL"
 }
 
 // FILE: C.java

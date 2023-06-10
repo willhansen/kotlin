@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.fir.types.coneType
 object FirWhenConditionChecker : FirWhenExpressionChecker() {
     override fun check(expression: FirWhenExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         for (branch in expression.branches) {
-            val condition = branch.condition
+            konst condition = branch.condition
             if (condition is FirElseIfTrueCondition) continue
             checkCondition(condition, context, reporter)
         }
@@ -33,31 +33,31 @@ object FirWhenConditionChecker : FirWhenExpressionChecker() {
 
     private fun checkDuplicatedLabels(expression: FirWhenExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         // The second part of each pair indicates whether the `is` check is positive or negated.
-        val checkedTypes = hashSetOf<Pair<ConeKotlinType, FirOperation>>()
-        val checkedConstants = hashSetOf<Any?>()
+        konst checkedTypes = hashSetOf<Pair<ConeKotlinType, FirOperation>>()
+        konst checkedConstants = hashSetOf<Any?>()
         for (branch in expression.branches) {
-            when (val condition = branch.condition) {
+            when (konst condition = branch.condition) {
                 is FirEqualityOperatorCall -> {
-                    val arguments = condition.arguments
+                    konst arguments = condition.arguments
                     if (arguments.size == 2 && arguments[0].unwrapSmartcastExpression() is FirWhenSubjectExpression) {
-                        val value = when (val targetExpression = arguments[1]) {
-                            is FirConstExpression<*> -> targetExpression.value
+                        konst konstue = when (konst targetExpression = arguments[1]) {
+                            is FirConstExpression<*> -> targetExpression.konstue
                             is FirQualifiedAccessExpression -> targetExpression.calleeReference.toResolvedCallableSymbol() as? FirEnumEntrySymbol
                                 ?: continue
                             is FirResolvedQualifier -> {
-                                val classSymbol = targetExpression.symbol ?: continue
+                                konst classSymbol = targetExpression.symbol ?: continue
                                 if (classSymbol.classKind != ClassKind.OBJECT) continue
                                 classSymbol.classId
                             }
                             else -> continue
                         }
-                        if (!checkedConstants.add(value)) {
+                        if (!checkedConstants.add(konstue)) {
                             reporter.reportOn(condition.source, FirErrors.DUPLICATE_LABEL_IN_WHEN, context)
                         }
                     }
                 }
                 is FirTypeOperatorCall -> {
-                    val coneType = condition.conversionTypeRef.coneType
+                    konst coneType = condition.conversionTypeRef.coneType
                     if (!checkedTypes.add(coneType to condition.operation)) {
                         reporter.reportOn(condition.conversionTypeRef.source, FirErrors.DUPLICATE_LABEL_IN_WHEN, context)
                     }

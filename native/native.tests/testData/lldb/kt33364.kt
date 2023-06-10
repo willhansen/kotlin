@@ -3,7 +3,7 @@
 // LLDB_TRACE: kt33364.txt
 // FILE: kt33364.kt
 fun main() {
-    val param = 3
+    konst param = 3
 
     //breakpoint here (line: 8, breakpoint is set to 9th line)
     when(param) {

@@ -31,8 +31,8 @@ class Not : IntrinsicMethod() {
                         receiver: StackValue,
                         codegen: ExpressionCodegen
                 ): StackValue {
-                    val element = resolvedCall.call.callElement
-                    val stackValue =
+                    konst element = resolvedCall.call.callElement
+                    konst stackValue =
                             if (element is KtPrefixExpression) {
                                 codegen.gen(element.baseExpression)
                             }

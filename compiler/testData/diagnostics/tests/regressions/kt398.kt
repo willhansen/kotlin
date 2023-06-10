@@ -2,7 +2,7 @@
 // KT-398 Internal error when property initializes with function
 
 class X<T>() {
-    val check = { a : Any -> a is <!CANNOT_CHECK_FOR_ERASED!>T<!> }
+    konst check = { a : Any -> a is <!CANNOT_CHECK_FOR_ERASED!>T<!> }
 }
 
 fun box() : String {

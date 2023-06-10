@@ -10,13 +10,13 @@ import libCase1.*
 import kotlin.text.format
 
 fun case1() {
-    val y1 =(String)::<!OVERLOAD_RESOLUTION_AMBIGUITY!>format<!>
+    konst y1 =(String)::<!OVERLOAD_RESOLUTION_AMBIGUITY!>format<!>
 }
 
 // FILE: LibCase1.kt
 package libCase1
 
-val String.Companion.format: String
+konst String.Companion.format: String
     get() = "1"
 
 
@@ -27,11 +27,11 @@ import libCase2.*
 import kotlin.text.*
 
 fun case2() {
-    val y1 =(String)::<!OVERLOAD_RESOLUTION_AMBIGUITY!>format<!>
+    konst y1 =(String)::<!OVERLOAD_RESOLUTION_AMBIGUITY!>format<!>
 }
 
 // FILE: LibCase2.kt
 package libCase2
 
-val String.Companion.format: String
+konst String.Companion.format: String
     get() = "1"

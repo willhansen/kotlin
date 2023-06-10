@@ -16,6 +16,6 @@ class C {
     }
 }
 
-val anonObject = object {
+konst anonObject = object {
     <!CONSTRUCTOR_IN_OBJECT!>constructor()<!>
 }

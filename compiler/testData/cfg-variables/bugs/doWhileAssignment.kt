@@ -2,14 +2,14 @@
 
 fun test() {
     do {
-        val s: String
+        konst s: String
         s = ""
     } while (s == "")
 }
 
 fun test2() {
     while (true) {
-        val s: String
+        konst s: String
         s = ""
         if (s != "") break
     }

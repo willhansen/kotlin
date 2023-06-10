@@ -1,5 +1,5 @@
 class K {
-    val x: String = "OK"
+    konst x: String = "OK"
 }
 
 inline fun <T> Array<out T>.ifEmpty(body: () -> Array<out T>): Array<out T> =

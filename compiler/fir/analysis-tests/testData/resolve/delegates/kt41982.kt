@@ -5,7 +5,7 @@ import kotlin.reflect.KProperty
 class Delegate<R, T> {
     operator fun getValue(thisRef: R, property: KProperty<*>): T = null!!
 
-    operator fun setValue(thisRef: R, property: KProperty<*>, value: T) {}
+    operator fun setValue(thisRef: R, property: KProperty<*>, konstue: T) {}
 }
 
 abstract class DelegateProvider<in Type>

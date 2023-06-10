@@ -1,8 +1,8 @@
 fun testFun1(str: String): String {
-    val capture = str
+    konst capture = str
 
     class A {
-        val x = capture
+        konst x = capture
     }
 
     return A().x
@@ -11,19 +11,19 @@ fun testFun1(str: String): String {
 
 fun testFun2(str: String): String {
     class A {
-        val x = str
+        konst x = str
     }
     fun bar() = A()
     return bar().x
 }
 
 
-class TestClass(val str: String) {
+class TestClass(konst str: String) {
     var xx: String? = null
 
     init {
         class A {
-            val x = str
+            konst x = str
         }
 
         xx = A().x
@@ -35,7 +35,7 @@ fun testFun3(str: String): String = TestClass(str).xx!!
 
 fun String.testFun4(): String {
     class A {
-        val x = this@testFun4
+        konst x = this@testFun4
     }
     return A().x
 }

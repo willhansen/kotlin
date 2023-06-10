@@ -20,6 +20,6 @@ import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.descriptors.VariableDescriptor
 
 class PropertyReferenceInfo(
-    val target: VariableDescriptor,
-    val getFunction: FunctionDescriptor
+    konst target: VariableDescriptor,
+    konst getFunction: FunctionDescriptor
 )

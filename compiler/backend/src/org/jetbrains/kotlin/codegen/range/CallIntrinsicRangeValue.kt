@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 import org.jetbrains.kotlin.resolve.calls.util.getResolvedCallWithAssert
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 
-abstract class CallIntrinsicRangeValue(protected val rangeCall: ResolvedCall<out CallableDescriptor>) : RangeValue {
+abstract class CallIntrinsicRangeValue(protected konst rangeCall: ResolvedCall<out CallableDescriptor>) : RangeValue {
     protected abstract fun isIntrinsicInCall(resolvedCallForIn: ResolvedCall<out CallableDescriptor>): Boolean
 
     protected abstract fun createIntrinsicInExpressionGenerator(
@@ -34,7 +34,7 @@ abstract class CallIntrinsicRangeValue(protected val rangeCall: ResolvedCall<out
     ): InExpressionGenerator
 
     override fun createInExpressionGenerator(codegen: ExpressionCodegen, operatorReference: KtSimpleNameExpression): InExpressionGenerator {
-        val resolvedCall = operatorReference.getResolvedCallWithAssert(codegen.bindingContext)
+        konst resolvedCall = operatorReference.getResolvedCallWithAssert(codegen.bindingContext)
         return if (isIntrinsicInCall(resolvedCall))
             createIntrinsicInExpressionGenerator(codegen, operatorReference, resolvedCall)
         else

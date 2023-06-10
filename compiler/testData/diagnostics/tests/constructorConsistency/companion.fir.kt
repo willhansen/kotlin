@@ -1,18 +1,18 @@
 class My {
 
-    val x = foo()
+    konst x = foo()
 
-    val w = bar()
+    konst w = bar()
 
     fun foo() = 0
 
     companion object {
         
-        val y = <!UNRESOLVED_REFERENCE!>foo<!>()
+        konst y = <!UNRESOLVED_REFERENCE!>foo<!>()
 
-        val u = bar()
+        konst u = bar()
 
-        val z: String? = bar()
+        konst z: String? = bar()
 
         fun bar() = "1"
     }

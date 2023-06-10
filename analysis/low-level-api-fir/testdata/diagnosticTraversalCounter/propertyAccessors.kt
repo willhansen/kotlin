@@ -1,15 +1,15 @@
 var x: Int = 10
     get() = field
-    set(value) {
+    set(konstue) {
         println(1)
-        field = value
+        field = konstue
     }
 
 class X {
     var y: Int = 10
         get() = field
-        set(value) {
+        set(konstue) {
             println(2)
-            field = value
+            field = konstue
         }
 }

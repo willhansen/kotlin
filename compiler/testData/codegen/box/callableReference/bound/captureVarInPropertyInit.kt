@@ -2,7 +2,7 @@
 fun bar(b: ()-> Unit) { b() }
 
 class C() {
-    val p: Int = run {
+    konst p: Int = run {
         var v = 10
         bar() {
             v = 20
@@ -12,7 +12,7 @@ class C() {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     if (c.p != 21) return "fail ${c.p}"
     return "OK"
 }

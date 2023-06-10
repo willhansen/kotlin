@@ -1,27 +1,27 @@
 package ~ns~nestedObjects
   object ~A~A {
-    val b = `A.B`B
-    val d = `A`A.`A.B`B.`A.B.A`A
+    konst b = `A.B`B
+    konst d = `A`A.`A.B`B.`A.B.A`A
 
     object ~A.B~B {
-      val a = `A.B.A`A
-      val e = `A.B`B.`A.B.A`A
+      konst a = `A.B.A`A
+      konst e = `A.B`B.`A.B.A`A
 
       object ~A.B.A~A {
-        val a = `A.B.A`A
-        val b = `A.B`B
-        val x = `ns`nestedObjects.`A`A.`A.B`B.`A.B.A`A
+        konst a = `A.B.A`A
+        konst b = `A.B`B
+        konst x = `ns`nestedObjects.`A`A.`A.B`B.`A.B.A`A
       }
     }
 
   }
   object ~B~B {
-    val b = `B`B
-    val c = `A`A.`A.B`B
+    konst b = `B`B
+    konst c = `A`A.`A.B`B
   }
 
-  val a = `A`A
-  val b = `B`B
-  val c = `A`A.`A.B`B
-  val d = A.B.`A.B.A`A
-  val e = B.`!`A.B
+  konst a = `A`A
+  konst b = `B`B
+  konst c = `A`A.`A.B`B
+  konst d = A.B.`A.B.A`A
+  konst e = B.`!`A.B

@@ -27,11 +27,11 @@ class KotlinStringLiteralTextEscaper(host: KtStringTemplateExpression) : Literal
     private var sourceOffsets: IntArray? = null
 
     override fun decode(rangeInsideHost: TextRange, outChars: StringBuilder): Boolean {
-        val sourceOffsetsList = TIntArrayList()
+        konst sourceOffsetsList = TIntArrayList()
         var sourceOffset = 0
 
         for (child in myHost.entries) {
-            val childRange = TextRange.from(child.startOffsetInParent, child.textLength)
+            konst childRange = TextRange.from(child.startOffsetInParent, child.textLength)
             if (rangeInsideHost.endOffset <= childRange.startOffset) {
                 break
             }
@@ -47,7 +47,7 @@ class KotlinStringLiteralTextEscaper(host: KtStringTemplateExpression) : Literal
                         sourceOffsets = sourceOffsetsList.toNativeArray()
                         return false
                     }
-                    val unescaped = child.unescapedValue
+                    konst unescaped = child.unescapedValue
                     outChars.append(unescaped)
                     repeat(unescaped.length) {
                         sourceOffsetsList.add(sourceOffset)
@@ -55,7 +55,7 @@ class KotlinStringLiteralTextEscaper(host: KtStringTemplateExpression) : Literal
                     sourceOffset += child.getTextLength()
                 }
                 else -> {
-                    val textRange = rangeInsideHost.intersection(childRange)!!.shiftRight(-childRange.startOffset)
+                    konst textRange = rangeInsideHost.intersection(childRange)!!.shiftRight(-childRange.startOffset)
                     outChars.append(child.text, textRange.startOffset, textRange.endOffset)
                     repeat(textRange.length) {
                         sourceOffsetsList.add(sourceOffset++)
@@ -69,7 +69,7 @@ class KotlinStringLiteralTextEscaper(host: KtStringTemplateExpression) : Literal
     }
 
     override fun getOffsetInHost(offsetInDecoded: Int, rangeInsideHost: TextRange): Int {
-        val offsets = sourceOffsets
+        konst offsets = sourceOffsets
         if (offsets == null || offsetInDecoded >= offsets.size) return -1
         return min(offsets[offsetInDecoded], rangeInsideHost.length) + rangeInsideHost.startOffset
     }

@@ -10,7 +10,7 @@ object IdeaKpmLanguageSettingsProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmLanguageSettingsProtoKt {
       @JvmName("getLanguageVersion")
       get() = _builder.getLanguageVersion()
       @JvmName("setLanguageVersion")
-      set(value) {
-        _builder.setLanguageVersion(value)
+      set(konstue) {
+        _builder.setLanguageVersion(konstue)
       }
     /**
      * <code>optional string language_version = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKpmLanguageSettingsProtoKt {
       @JvmName("getApiVersion")
       get() = _builder.getApiVersion()
       @JvmName("setApiVersion")
-      set(value) {
-        _builder.setApiVersion(value)
+      set(konstue) {
+        _builder.setApiVersion(konstue)
       }
     /**
      * <code>optional string api_version = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKpmLanguageSettingsProtoKt {
       @JvmName("getIsProgressiveMode")
       get() = _builder.getIsProgressiveMode()
       @JvmName("setIsProgressiveMode")
-      set(value) {
-        _builder.setIsProgressiveMode(value)
+      set(konstue) {
+        _builder.setIsProgressiveMode(konstue)
       }
     /**
      * <code>optional bool is_progressive_mode = 3;</code>
@@ -104,58 +104,58 @@ object IdeaKpmLanguageSettingsProtoKt {
      * <code>repeated string enabled_language_features = 4;</code>
      * @return A list containing the enabledLanguageFeatures.
      */
-     val enabledLanguageFeatures: com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>
+     konst enabledLanguageFeatures: com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getEnabledLanguageFeaturesList()
       )
     /**
      * <code>repeated string enabled_language_features = 4;</code>
-     * @param value The enabledLanguageFeatures to add.
+     * @param konstue The enabledLanguageFeatures to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addEnabledLanguageFeatures")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.add(value: kotlin.String) {
-      _builder.addEnabledLanguageFeatures(value)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.add(konstue: kotlin.String) {
+      _builder.addEnabledLanguageFeatures(konstue)
     }
     /**
      * <code>repeated string enabled_language_features = 4;</code>
-     * @param value The enabledLanguageFeatures to add.
+     * @param konstue The enabledLanguageFeatures to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignEnabledLanguageFeatures")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.plusAssign(value: kotlin.String) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.plusAssign(konstue: kotlin.String) {
+      add(konstue)
     }
     /**
      * <code>repeated string enabled_language_features = 4;</code>
-     * @param values The enabledLanguageFeatures to add.
+     * @param konstues The enabledLanguageFeatures to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllEnabledLanguageFeatures")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
-      _builder.addAllEnabledLanguageFeatures(values)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.addAll(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllEnabledLanguageFeatures(konstues)
     }
     /**
      * <code>repeated string enabled_language_features = 4;</code>
-     * @param values The enabledLanguageFeatures to add.
+     * @param konstues The enabledLanguageFeatures to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllEnabledLanguageFeatures")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.plusAssign(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated string enabled_language_features = 4;</code>
-     * @param index The index to set the value at.
-     * @param value The enabledLanguageFeatures to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The enabledLanguageFeatures to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setEnabledLanguageFeatures")
-    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.set(index: kotlin.Int, value: kotlin.String) {
-      _builder.setEnabledLanguageFeatures(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, EnabledLanguageFeaturesProxy>.set(index: kotlin.Int, konstue: kotlin.String) {
+      _builder.setEnabledLanguageFeatures(index, konstue)
     }/**
      * <code>repeated string enabled_language_features = 4;</code>
      */
@@ -174,58 +174,58 @@ object IdeaKpmLanguageSettingsProtoKt {
      * <code>repeated string opt_in_annotations_in_use = 5;</code>
      * @return A list containing the optInAnnotationsInUse.
      */
-     val optInAnnotationsInUse: com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>
+     konst optInAnnotationsInUse: com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getOptInAnnotationsInUseList()
       )
     /**
      * <code>repeated string opt_in_annotations_in_use = 5;</code>
-     * @param value The optInAnnotationsInUse to add.
+     * @param konstue The optInAnnotationsInUse to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addOptInAnnotationsInUse")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.add(value: kotlin.String) {
-      _builder.addOptInAnnotationsInUse(value)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.add(konstue: kotlin.String) {
+      _builder.addOptInAnnotationsInUse(konstue)
     }
     /**
      * <code>repeated string opt_in_annotations_in_use = 5;</code>
-     * @param value The optInAnnotationsInUse to add.
+     * @param konstue The optInAnnotationsInUse to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignOptInAnnotationsInUse")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.plusAssign(value: kotlin.String) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.plusAssign(konstue: kotlin.String) {
+      add(konstue)
     }
     /**
      * <code>repeated string opt_in_annotations_in_use = 5;</code>
-     * @param values The optInAnnotationsInUse to add.
+     * @param konstues The optInAnnotationsInUse to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllOptInAnnotationsInUse")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
-      _builder.addAllOptInAnnotationsInUse(values)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.addAll(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllOptInAnnotationsInUse(konstues)
     }
     /**
      * <code>repeated string opt_in_annotations_in_use = 5;</code>
-     * @param values The optInAnnotationsInUse to add.
+     * @param konstues The optInAnnotationsInUse to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllOptInAnnotationsInUse")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.plusAssign(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated string opt_in_annotations_in_use = 5;</code>
-     * @param index The index to set the value at.
-     * @param value The optInAnnotationsInUse to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The optInAnnotationsInUse to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setOptInAnnotationsInUse")
-    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.set(index: kotlin.Int, value: kotlin.String) {
-      _builder.setOptInAnnotationsInUse(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, OptInAnnotationsInUseProxy>.set(index: kotlin.Int, konstue: kotlin.String) {
+      _builder.setOptInAnnotationsInUse(index, konstue)
     }/**
      * <code>repeated string opt_in_annotations_in_use = 5;</code>
      */
@@ -244,58 +244,58 @@ object IdeaKpmLanguageSettingsProtoKt {
      * <code>repeated string compiler_plugin_arguments = 6;</code>
      * @return A list containing the compilerPluginArguments.
      */
-     val compilerPluginArguments: com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>
+     konst compilerPluginArguments: com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getCompilerPluginArgumentsList()
       )
     /**
      * <code>repeated string compiler_plugin_arguments = 6;</code>
-     * @param value The compilerPluginArguments to add.
+     * @param konstue The compilerPluginArguments to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addCompilerPluginArguments")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.add(value: kotlin.String) {
-      _builder.addCompilerPluginArguments(value)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.add(konstue: kotlin.String) {
+      _builder.addCompilerPluginArguments(konstue)
     }
     /**
      * <code>repeated string compiler_plugin_arguments = 6;</code>
-     * @param value The compilerPluginArguments to add.
+     * @param konstue The compilerPluginArguments to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignCompilerPluginArguments")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.plusAssign(value: kotlin.String) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.plusAssign(konstue: kotlin.String) {
+      add(konstue)
     }
     /**
      * <code>repeated string compiler_plugin_arguments = 6;</code>
-     * @param values The compilerPluginArguments to add.
+     * @param konstues The compilerPluginArguments to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllCompilerPluginArguments")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
-      _builder.addAllCompilerPluginArguments(values)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.addAll(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllCompilerPluginArguments(konstues)
     }
     /**
      * <code>repeated string compiler_plugin_arguments = 6;</code>
-     * @param values The compilerPluginArguments to add.
+     * @param konstues The compilerPluginArguments to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllCompilerPluginArguments")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.plusAssign(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated string compiler_plugin_arguments = 6;</code>
-     * @param index The index to set the value at.
-     * @param value The compilerPluginArguments to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The compilerPluginArguments to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setCompilerPluginArguments")
-    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.set(index: kotlin.Int, value: kotlin.String) {
-      _builder.setCompilerPluginArguments(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginArgumentsProxy>.set(index: kotlin.Int, konstue: kotlin.String) {
+      _builder.setCompilerPluginArguments(index, konstue)
     }/**
      * <code>repeated string compiler_plugin_arguments = 6;</code>
      */
@@ -314,58 +314,58 @@ object IdeaKpmLanguageSettingsProtoKt {
      * <code>repeated string compiler_plugin_classpath = 7;</code>
      * @return A list containing the compilerPluginClasspath.
      */
-     val compilerPluginClasspath: com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>
+     konst compilerPluginClasspath: com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getCompilerPluginClasspathList()
       )
     /**
      * <code>repeated string compiler_plugin_classpath = 7;</code>
-     * @param value The compilerPluginClasspath to add.
+     * @param konstue The compilerPluginClasspath to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addCompilerPluginClasspath")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.add(value: kotlin.String) {
-      _builder.addCompilerPluginClasspath(value)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.add(konstue: kotlin.String) {
+      _builder.addCompilerPluginClasspath(konstue)
     }
     /**
      * <code>repeated string compiler_plugin_classpath = 7;</code>
-     * @param value The compilerPluginClasspath to add.
+     * @param konstue The compilerPluginClasspath to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignCompilerPluginClasspath")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.plusAssign(value: kotlin.String) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.plusAssign(konstue: kotlin.String) {
+      add(konstue)
     }
     /**
      * <code>repeated string compiler_plugin_classpath = 7;</code>
-     * @param values The compilerPluginClasspath to add.
+     * @param konstues The compilerPluginClasspath to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllCompilerPluginClasspath")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
-      _builder.addAllCompilerPluginClasspath(values)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.addAll(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllCompilerPluginClasspath(konstues)
     }
     /**
      * <code>repeated string compiler_plugin_classpath = 7;</code>
-     * @param values The compilerPluginClasspath to add.
+     * @param konstues The compilerPluginClasspath to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllCompilerPluginClasspath")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.plusAssign(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated string compiler_plugin_classpath = 7;</code>
-     * @param index The index to set the value at.
-     * @param value The compilerPluginClasspath to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The compilerPluginClasspath to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setCompilerPluginClasspath")
-    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.set(index: kotlin.Int, value: kotlin.String) {
-      _builder.setCompilerPluginClasspath(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, CompilerPluginClasspathProxy>.set(index: kotlin.Int, konstue: kotlin.String) {
+      _builder.setCompilerPluginClasspath(index, konstue)
     }/**
      * <code>repeated string compiler_plugin_classpath = 7;</code>
      */
@@ -384,58 +384,58 @@ object IdeaKpmLanguageSettingsProtoKt {
      * <code>repeated string free_compiler_args = 8;</code>
      * @return A list containing the freeCompilerArgs.
      */
-     val freeCompilerArgs: com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>
+     konst freeCompilerArgs: com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getFreeCompilerArgsList()
       )
     /**
      * <code>repeated string free_compiler_args = 8;</code>
-     * @param value The freeCompilerArgs to add.
+     * @param konstue The freeCompilerArgs to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addFreeCompilerArgs")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.add(value: kotlin.String) {
-      _builder.addFreeCompilerArgs(value)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.add(konstue: kotlin.String) {
+      _builder.addFreeCompilerArgs(konstue)
     }
     /**
      * <code>repeated string free_compiler_args = 8;</code>
-     * @param value The freeCompilerArgs to add.
+     * @param konstue The freeCompilerArgs to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignFreeCompilerArgs")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.plusAssign(value: kotlin.String) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.plusAssign(konstue: kotlin.String) {
+      add(konstue)
     }
     /**
      * <code>repeated string free_compiler_args = 8;</code>
-     * @param values The freeCompilerArgs to add.
+     * @param konstues The freeCompilerArgs to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllFreeCompilerArgs")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
-      _builder.addAllFreeCompilerArgs(values)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.addAll(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllFreeCompilerArgs(konstues)
     }
     /**
      * <code>repeated string free_compiler_args = 8;</code>
-     * @param values The freeCompilerArgs to add.
+     * @param konstues The freeCompilerArgs to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllFreeCompilerArgs")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.plusAssign(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated string free_compiler_args = 8;</code>
-     * @param index The index to set the value at.
-     * @param value The freeCompilerArgs to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The freeCompilerArgs to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setFreeCompilerArgs")
-    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.set(index: kotlin.Int, value: kotlin.String) {
-      _builder.setFreeCompilerArgs(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FreeCompilerArgsProxy>.set(index: kotlin.Int, konstue: kotlin.String) {
+      _builder.setFreeCompilerArgs(index, konstue)
     }/**
      * <code>repeated string free_compiler_args = 8;</code>
      */

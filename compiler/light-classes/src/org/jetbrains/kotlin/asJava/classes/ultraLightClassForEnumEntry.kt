@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.psi.KtEnumEntry
 
 internal class KtUltraLightClassForEnumEntry(
     enumEntry: KtEnumEntry, support: KtUltraLightSupport,
-    private val enumConstant: PsiEnumConstant
+    private konst enumConstant: PsiEnumConstant
 ) : KtUltraLightClass(enumEntry, support), PsiEnumConstantInitializer {
 
-    private val baseClassReferenceAndType: Pair<PsiJavaCodeReferenceElement, PsiClassType> by lazyPub {
+    private konst baseClassReferenceAndType: Pair<PsiJavaCodeReferenceElement, PsiClassType> by lazyPub {
         // It should not be null for not-too-complex classes and that is not the case because
         // the containing class is not too complex (since we created KtUltraLightClassForEnumEntry instance)
-        val extendsList =
+        konst extendsList =
             super.getExtendsList() ?: error("KtUltraLightClass::getExtendsList is null for ${enumEntry.fqName}")
 
         Pair(

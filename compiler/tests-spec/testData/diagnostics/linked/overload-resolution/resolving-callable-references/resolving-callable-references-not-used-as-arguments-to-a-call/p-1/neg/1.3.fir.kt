@@ -9,7 +9,7 @@ package testsCase1
 import libCase1.*
 
 fun case1() {
-    val y1 =(A)::<!OVERLOAD_RESOLUTION_AMBIGUITY!>boo<!>
+    konst y1 =(A)::<!OVERLOAD_RESOLUTION_AMBIGUITY!>boo<!>
 }
 
 // FILE: LibCase1.kt
@@ -18,7 +18,7 @@ package libCase1
 class A{
     companion object{}
 }
-val A.Companion.boo: String
+konst A.Companion.boo: String
     get() = "1"
 fun A.Companion.boo(): String =""
 
@@ -30,7 +30,7 @@ import libCase2.A
 import libCase2.boo
 
 fun case2() {
-    val y1 =(A)::<!OVERLOAD_RESOLUTION_AMBIGUITY!>boo<!>
+    konst y1 =(A)::<!OVERLOAD_RESOLUTION_AMBIGUITY!>boo<!>
 }
 
 // FILE: LibCase2.kt
@@ -39,6 +39,6 @@ package libCase2
 class A{
     companion object{}
 }
-val A.Companion.boo: String
+konst A.Companion.boo: String
     get() = "1"
 fun A.Companion.boo(): String =""

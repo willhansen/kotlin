@@ -1,6 +1,6 @@
 // !DUMP_CFG
 fun test() {
-    val x: Int
+    konst x: Int
     run {
         x = 1
     }

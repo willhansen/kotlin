@@ -6,9 +6,9 @@ interface I<E> {
 
 @Suppress("OPTIONAL_DECLARATION_USAGE_IN_NON_COMMON_SOURCE")
 @kotlin.jvm.JvmInline
-public value class VC<out T>(val holder: String)
+public konstue class VC<out T>(konst holder: String)
 
-abstract class AC<E>(val vc: VC<E>) : I<E> {
+abstract class AC<E>(konst vc: VC<E>) : I<E> {
     override fun foo(): VC<E> {
         return vc
     }

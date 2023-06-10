@@ -17,9 +17,9 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 
 internal class KtFe10CompletionCandidateChecker(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtCompletionCandidateChecker(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun checkExtensionFitsCandidate(

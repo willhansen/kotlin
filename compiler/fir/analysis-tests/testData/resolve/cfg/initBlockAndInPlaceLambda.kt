@@ -2,12 +2,12 @@
 interface B
 
 interface A {
-    val b: B?
+    konst b: B?
 }
 
 class C(a: A, b: B) {
     init {
-        val c = a.b?.let {
+        konst c = a.b?.let {
             C(a, it)
         }
     }

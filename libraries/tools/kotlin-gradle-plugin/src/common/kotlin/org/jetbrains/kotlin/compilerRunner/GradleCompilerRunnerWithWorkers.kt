@@ -30,7 +30,7 @@ internal class GradleCompilerRunnerWithWorkers(
     jdkToolsJar: File?,
     compilerExecutionSettings: CompilerExecutionSettings,
     buildMetrics: BuildMetricsReporter,
-    private val workerExecutor: WorkerExecutor
+    private konst workerExecutor: WorkerExecutor
 ) : GradleCompilerRunner(taskProvider, jdkToolsJar, compilerExecutionSettings, buildMetrics) {
     override fun runCompilerAsync(
         workArgs: GradleKotlinCompilerWorkArguments,
@@ -38,7 +38,7 @@ internal class GradleCompilerRunnerWithWorkers(
     ): WorkQueue {
 
         buildMetrics.addTimeMetric(BuildPerformanceMetric.CALL_WORKER)
-        val workQueue = workerExecutor.noIsolation()
+        konst workQueue = workerExecutor.noIsolation()
         workQueue.submit(GradleKotlinCompilerWorkAction::class.java) { params ->
             params.compilerWorkArguments.set(workArgs)
             if (taskOutputsBackup != null) {
@@ -52,13 +52,13 @@ internal class GradleCompilerRunnerWithWorkers(
     }
 
     internal abstract class GradleKotlinCompilerWorkAction @Inject constructor(
-        private val fileSystemOperations: FileSystemOperations
+        private konst fileSystemOperations: FileSystemOperations
     ) : WorkAction<GradleKotlinCompilerWorkParameters> {
 
-        private val logger = Logging.getLogger("kotlin-compile-worker")
+        private konst logger = Logging.getLogger("kotlin-compile-worker")
 
         override fun execute() {
-            val taskOutputsBackup = if (parameters.snapshotsDir.isPresent) {
+            konst taskOutputsBackup = if (parameters.snapshotsDir.isPresent) {
                 TaskOutputsBackup(
                     fileSystemOperations,
                     parameters.buildDir,
@@ -96,10 +96,10 @@ internal class GradleCompilerRunnerWithWorkers(
     }
 
     internal interface GradleKotlinCompilerWorkParameters : WorkParameters {
-        val compilerWorkArguments: Property<GradleKotlinCompilerWorkArguments>
-        val taskOutputsToRestore: ListProperty<File>
-        val snapshotsDir: DirectoryProperty
-        val buildDir: DirectoryProperty
-        val metricsReporter: Property<BuildMetricsReporter>
+        konst compilerWorkArguments: Property<GradleKotlinCompilerWorkArguments>
+        konst taskOutputsToRestore: ListProperty<File>
+        konst snapshotsDir: DirectoryProperty
+        konst buildDir: DirectoryProperty
+        konst metricsReporter: Property<BuildMetricsReporter>
     }
 }

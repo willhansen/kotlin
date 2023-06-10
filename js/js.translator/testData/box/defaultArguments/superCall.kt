@@ -16,13 +16,13 @@ open class B : A() {
 }
 
 fun box(): String {
-    val v1 = B().bar1()
+    konst v1 = B().bar1()
     if (v1 != 23) return "fail1: $v1"
 
-    val v2 = B().bar2()
+    konst v2 = B().bar2()
     if (v2 != 33) return "fail2: $v2"
 
-    val v3 = B().bar3()
+    konst v3 = B().bar3()
     if (v3 != 24) return "fail3: $v3"
 
     return "OK"

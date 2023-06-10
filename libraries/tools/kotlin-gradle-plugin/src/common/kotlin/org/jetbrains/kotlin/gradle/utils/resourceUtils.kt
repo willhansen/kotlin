@@ -15,8 +15,8 @@ import java.net.URL
 import java.util.*
 
 fun Any.loadPropertyFromResources(propFileName: String, property: String): String {
-    val props = Properties()
-    val inputStream = javaClass.classLoader!!.getResourceAsStream(propFileName)
+    konst props = Properties()
+    konst inputStream = javaClass.classLoader!!.getResourceAsStream(propFileName)
         ?: throw FileNotFoundException("property file '$propFileName' not found in the classpath")
 
     inputStream.use { props.load(it) }
@@ -25,7 +25,7 @@ fun Any.loadPropertyFromResources(propFileName: String, property: String): Strin
 
 @Throws(IOException::class)
 fun Project.probeRemoteFileLength(url: String, probingTimeoutMs: Int = 0): Long? {
-    val connection = URL(url).openConnection()
+    konst connection = URL(url).openConnection()
     if (connection !is HttpURLConnection) {
         logger.kotlinDebug(::probeRemoteFileLength.name + "($url, $probingTimeoutMs): Failed to obtain content-length. Likely not an HTTP-based URL. URL connection class is ${connection::class.java}.")
         return null

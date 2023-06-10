@@ -6,7 +6,7 @@ enum class A {
 
     companion object {
         @JvmStatic
-        val entries = 0
+        konst entries = 0
     }
 }
 

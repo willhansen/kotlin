@@ -21,16 +21,16 @@ internal fun KotlinNativeCInteropRunner.Companion.createExecutionContext(
 }
 
 private class DefaultKotlinNativeCInteropRunnerExecutionContext(
-    override val runnerSettings: KotlinNativeToolRunner.Settings,
-    override val gradleExecutionContext: KotlinToolRunner.GradleExecutionContext
+    override konst runnerSettings: KotlinNativeToolRunner.Settings,
+    override konst gradleExecutionContext: KotlinToolRunner.GradleExecutionContext
 ) : KotlinNativeCInteropRunner.ExecutionContext {
     override fun runWithContext(action: () -> Unit) = action()
 }
 
 private class IdeaSyncKotlinNativeCInteropRunnerExecutionContext(
-    override val runnerSettings: KotlinNativeToolRunner.Settings,
-    override val gradleExecutionContext: KotlinToolRunner.GradleExecutionContext,
-    private val task: Task
+    override konst runnerSettings: KotlinNativeToolRunner.Settings,
+    override konst gradleExecutionContext: KotlinToolRunner.GradleExecutionContext,
+    private konst task: Task
 ) : KotlinNativeCInteropRunner.ExecutionContext {
 
     override fun runWithContext(action: () -> Unit) {

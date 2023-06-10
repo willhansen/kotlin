@@ -1,12 +1,12 @@
-val a = 1.0 + 10
-val b = 2 + 10.0
-val c = 3.0F + 10
-val d = 4 + 10.0F
-val e = 1.0 / 0
-val f = 1 / 0.0
-val g = 0.0 / 0
-val h = 0 / 0.0
-val i = 0.0 / 0.0
+konst a = 1.0 + 10
+konst b = 2 + 10.0
+konst c = 3.0F + 10
+konst d = 4 + 10.0F
+konst e = 1.0 / 0
+konst f = 1 / 0.0
+konst g = 0.0 / 0
+konst h = 0 / 0.0
+konst i = 0.0 / 0.0
 
 // 1 LDC 11.0
 // 1 LDC 12.0

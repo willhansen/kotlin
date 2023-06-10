@@ -19,19 +19,19 @@ typealias F33 = (AN, AN, AN, AN, AN, AN, AN, AN, AN, AN, AN, AN,
                  AN, AN, AN, AN, AN, AN, AN, AN, AN) -> AN
 
 fun callDynType2(list: List<F2>, param: AN) {
-    val fct = list.first()
-    val ret = fct(param, null)
+    konst fct = list.first()
+    konst ret = fct(param, null)
     assertEquals(param, ret)
 }
 
 fun callStaticType2(fct: F2, param: AN) {
-    val ret = fct(param, null)
+    konst ret = fct(param, null)
     assertEquals(param, ret)
 }
 
 fun callDynType32(list: List<F32>, param: AN) {
-    val fct = list.first()
-    val ret = fct(param
+    konst fct = list.first()
+    konst ret = fct(param
             , null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null
@@ -41,7 +41,7 @@ fun callDynType32(list: List<F32>, param: AN) {
 }
 
 fun callStaticType32(fct: F32, param: AN) {
-    val ret = fct(param
+    konst ret = fct(param
             , null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null
@@ -51,8 +51,8 @@ fun callStaticType32(fct: F32, param: AN) {
 }
 
 fun callDynType33(list: List<F33>, param: AN) {
-    val fct = list.first()
-    val ret = fct(param
+    konst fct = list.first()
+    konst ret = fct(param
             , null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null
@@ -62,7 +62,7 @@ fun callDynType33(list: List<F33>, param: AN) {
 }
 
 fun callStaticType33(fct: F33, param: AN) {
-    val ret = fct(param
+    konst ret = fct(param
             , null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null
@@ -72,13 +72,13 @@ fun callStaticType33(fct: F33, param: AN) {
 }
 
 abstract class FHolder {
-    abstract val value: Any?
+    abstract konst konstue: Any?
 }
 
 // Note: can't provoke dynamic function type conversion using list (as above) or generics
 // due to Swift <-> Obj-C interop bugs/limitations.
 // Use covariant return type instead:
-class F2Holder(override val value: F2) : FHolder()
+class F2Holder(override konst konstue: F2) : FHolder()
 
 fun getDynTypeLambda2(): F2Holder = F2Holder({ p1, _ -> p1 })
 fun getStaticLambda2(): F2 = { p1, _ -> p1 }
@@ -103,12 +103,12 @@ private fun f33(
         p33: AN
 ): AN = p1
 
-class F32Holder(override val value: F32) : FHolder()
+class F32Holder(override konst konstue: F32) : FHolder()
 
 fun getDynType32(): F32Holder = F32Holder(::f32)
 fun getStaticType32(): F32 = ::f32
 
-class F33Holder(override val value: F33) : FHolder()
+class F33Holder(override konst konstue: F33) : FHolder()
 
 fun getDynTypeRef33(): F33Holder = F33Holder(::f33)
 fun getStaticTypeRef33(): F33 = ::f33

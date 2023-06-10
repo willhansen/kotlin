@@ -1,10 +1,10 @@
 package test
 
 annotation class Ann(
-        val b1: Short,
-        val b2: Short,
-        val b3: Short,
-        val b4: Short
+        konst b1: Short,
+        konst b2: Short,
+        konst b3: Short,
+        konst b4: Short
 )
 
 @Ann(1, 1.toShort(), 32768.toShort(), <!ARGUMENT_TYPE_MISMATCH!>32768<!>) class MyClass

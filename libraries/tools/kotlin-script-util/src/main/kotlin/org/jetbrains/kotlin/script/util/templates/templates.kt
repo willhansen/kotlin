@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.script.util.LocalFilesResolver
 import kotlin.script.templates.ScriptTemplateDefinition
 
 @ScriptTemplateDefinition(resolver = LocalFilesResolver::class, scriptFilePattern = ".*\\.kts")
-abstract class StandardArgsScriptTemplateWithLocalResolving(val args: Array<String>)
+abstract class StandardArgsScriptTemplateWithLocalResolving(konst args: Array<String>)
 
 @ScriptTemplateDefinition(resolver = LocalFilesResolver::class, scriptFilePattern = ".*\\.kts")
-abstract class BindingsScriptTemplateWithLocalResolving(val bindings: Map<String, Any?>)
+abstract class BindingsScriptTemplateWithLocalResolving(konst bindings: Map<String, Any?>)

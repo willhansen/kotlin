@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.asJava.elements.KtLightElementBase
 import org.jetbrains.kotlin.psi.KtClassOrObject
 
 abstract class KtLightClassForDecompiledDeclarationBase(
-    val clsDelegate: PsiClass,
+    konst clsDelegate: PsiClass,
     clsParent: PsiElement,
-    final override val kotlinOrigin: KtClassOrObject?
+    final override konst kotlinOrigin: KtClassOrObject?
 ) : KtLightElementBase(clsParent), PsiClass, KtExtensibleLightClass {
     override fun accept(visitor: PsiElementVisitor) {
         if (visitor is JavaElementVisitor) {

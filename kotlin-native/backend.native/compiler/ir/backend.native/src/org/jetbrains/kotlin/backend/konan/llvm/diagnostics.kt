@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.backend.konan.llvm.LlvmDiagnostic.Severity
 // By default LLVM prints messages to stderr and terminates the process on errors,
 // which isn't ok for Kotlin compiler, e.g. when embedding it into Gradle daemon process.
 
-internal class LlvmDiagnostic(val severity: Severity, val message: String) {
+internal class LlvmDiagnostic(konst severity: Severity, konst message: String) {
     enum class Severity {
         ERROR,
         WARNING,
@@ -26,7 +26,7 @@ internal class LlvmDiagnostic(val severity: Severity, val message: String) {
 }
 
 internal class LlvmDiagnosticCollector {
-    private val diagnostics = mutableListOf<LlvmDiagnostic>()
+    private konst diagnostics = mutableListOf<LlvmDiagnostic>()
 
     fun add(diagnostic: LlvmDiagnostic) {
         diagnostics += diagnostic
@@ -43,7 +43,7 @@ internal interface LlvmDiagnosticHandler {
 }
 
 internal inline fun <R> withLlvmDiagnosticHandler(llvmContext: LLVMContextRef, handler: LlvmDiagnosticHandler, block: () -> R): R {
-    val collector = LlvmDiagnosticCollector()
+    konst collector = LlvmDiagnosticCollector()
     return try {
         withLlvmDiagnosticCollector(llvmContext, collector, block)
     } finally {
@@ -52,10 +52,10 @@ internal inline fun <R> withLlvmDiagnosticHandler(llvmContext: LLVMContextRef, h
 }
 
 internal inline fun <R> withLlvmDiagnosticCollector(llvmContext: LLVMContextRef, collector: LlvmDiagnosticCollector, block: () -> R): R {
-    val handler: LLVMDiagnosticHandler = staticCFunction { diagnostic, context ->
+    konst handler: LLVMDiagnosticHandler = staticCFunction { diagnostic, context ->
         context!!.asStableRef<LlvmDiagnosticCollector>().get().add(createLlvmDiagnostic(diagnostic))
     }
-    val context = StableRef.create(collector)
+    konst context = StableRef.create(collector)
     return try {
         withLlvmDiagnosticHandler(llvmContext, handler, context.asCPointer(), block)
     } finally {
@@ -69,8 +69,8 @@ internal inline fun <R> withLlvmDiagnosticHandler(
         context: COpaquePointer,
         block: () -> R
 ): R {
-    val currentHandler = LLVMContextGetDiagnosticHandler(llvmContext)
-    val currentContext = LLVMContextGetDiagnosticContext(llvmContext)
+    konst currentHandler = LLVMContextGetDiagnosticHandler(llvmContext)
+    konst currentContext = LLVMContextGetDiagnosticContext(llvmContext)
 
     return try {
         LLVMContextSetDiagnosticHandler(llvmContext, handler, context)

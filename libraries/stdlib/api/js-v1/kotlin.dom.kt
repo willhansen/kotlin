@@ -1,12 +1,12 @@
 /*∆*/ @kotlin.internal.LowPriorityInOverloadResolution
 /*∆*/ @kotlin.Deprecated(message = "This API is moved to another package, use 'kotlinx.dom.isElement' instead.", replaceWith = kotlin.ReplaceWith(expression = "this.isElement", imports = {"kotlinx.dom.isElement"}))
 /*∆*/ @kotlin.DeprecatedSinceKotlin(errorSince = "1.6", warningSince = "1.4")
-/*∆*/ public val org.w3c.dom.Node.isElement: kotlin.Boolean { get; }
+/*∆*/ public konst org.w3c.dom.Node.isElement: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/ @kotlin.internal.LowPriorityInOverloadResolution
 /*∆*/ @kotlin.Deprecated(message = "This API is moved to another package, use 'kotlinx.dom.isText' instead.", replaceWith = kotlin.ReplaceWith(expression = "this.isText", imports = {"kotlinx.dom.isText"}))
 /*∆*/ @kotlin.DeprecatedSinceKotlin(errorSince = "1.6", warningSince = "1.4")
-/*∆*/ public val org.w3c.dom.Node.isText: kotlin.Boolean { get; }
+/*∆*/ public konst org.w3c.dom.Node.isText: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/ @kotlin.internal.LowPriorityInOverloadResolution
 /*∆*/ @kotlin.Deprecated(message = "This API is moved to another package, use 'kotlinx.dom.addClass' instead.", replaceWith = kotlin.ReplaceWith(expression = "this.addClass(cssClasses)", imports = {"kotlinx.dom.addClass"}))

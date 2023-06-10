@@ -1,9 +1,9 @@
 // Ensure the proper collection stubs are added, in
 // particular *not* when specialized implementations are provided.
 class MySet<E> : MutableSet<E> {
-    val elements: ArrayList<E> = ArrayList<E>()
+    konst elements: ArrayList<E> = ArrayList<E>()
 
-    override val size: Int
+    override konst size: Int
         get() = TODO()
 
     override fun add(element: E): Boolean = TODO()

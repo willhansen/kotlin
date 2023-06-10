@@ -73,5 +73,5 @@ public final class InlineMap {
     public method toString(): java.lang.String
     public static method toString-impl(p0: java.util.Map): java.lang.String
     public synthetic final method unbox-impl(): java.util.Map
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }

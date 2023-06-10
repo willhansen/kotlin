@@ -16,11 +16,11 @@ export default { defaultX: x, defaultF: f, defaultC: C };
 
 package named
 
-external val x: Int
+external konst x: Int
 external fun f(): Int
 external class C {
     constructor(x: String)
-    val x: String
+    konst x: String
 }
 
 // FILE: lib2.kt
@@ -28,12 +28,12 @@ package default
 
 @JsModule("./jsModule.mjs")
 external object jsModule {
-    val defaultX: Int
+    konst defaultX: Int
     fun defaultF(): Int
     class defaultC {
         constructor(x: String)
 
-        val x: String
+        konst x: String
     }
 }
 

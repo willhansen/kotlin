@@ -16,7 +16,7 @@ fun box(): String {
         fun f1() {
             res = "OK"
         }
-        val x: () -> Unit = {
+        konst x: () -> Unit = {
             f1()
         }
 

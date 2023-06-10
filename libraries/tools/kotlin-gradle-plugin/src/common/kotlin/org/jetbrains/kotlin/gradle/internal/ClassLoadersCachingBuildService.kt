@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 internal interface UsesClassLoadersCachingBuildService : Task {
     @get:Internal
-    val classLoadersCachingService: Property<ClassLoadersCachingBuildService>
+    konst classLoadersCachingService: Property<ClassLoadersCachingBuildService>
 }
 
 /**
@@ -29,8 +29,8 @@ internal interface UsesClassLoadersCachingBuildService : Task {
  */
 internal abstract class ClassLoadersCachingBuildService : BuildService<BuildServiceParameters.None>, AutoCloseable {
     // The service could be used by multiple tasks in parallel, so the map have to be synchronized
-    private val classLoaders = ConcurrentHashMap<ClassLoaderCacheKey, ClassLoader>()
-    private val logger = Logging.getLogger(javaClass)
+    private konst classLoaders = ConcurrentHashMap<ClassLoaderCacheKey, ClassLoader>()
+    private konst logger = Logging.getLogger(javaClass)
 
     fun getClassLoader(
         classpath: Iterable<File>,
@@ -59,8 +59,8 @@ internal abstract class ClassLoadersCachingBuildService : BuildService<BuildServ
 }
 
 private data class ClassLoaderCacheKey(
-    val classpath: Iterable<File>,
-    val parentClassLoaderProvider: ParentClassLoaderProvider,
+    konst classpath: Iterable<File>,
+    konst parentClassLoaderProvider: ParentClassLoaderProvider,
 )
 
 /**

@@ -7,13 +7,13 @@
 interface ByteChannel : ByteReadChannel, ByteWriteChannel
 
 expect interface ByteReadChannel {
-    val isClosedForWrite: Boolean
+    konst isClosedForWrite: Boolean
 
     fun f()
 }
 
 expect interface ByteWriteChannel {
-    val isClosedForWrite: Boolean
+    konst isClosedForWrite: Boolean
 
     fun f()
 }
@@ -22,13 +22,13 @@ expect interface ByteWriteChannel {
 // FILE: platform.kt
 
 actual interface ByteReadChannel {
-    actual val isClosedForWrite: Boolean
+    actual konst isClosedForWrite: Boolean
 
     actual fun f()
 }
 
 actual interface ByteWriteChannel {
-    actual val isClosedForWrite: Boolean
+    actual konst isClosedForWrite: Boolean
 
     actual fun f()
 }

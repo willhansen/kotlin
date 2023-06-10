@@ -15,31 +15,31 @@ import org.jetbrains.kotlin.library.KotlinAbiVersion
 import org.jetbrains.kotlin.library.KotlinLibraryVersioning
 import org.jetbrains.kotlin.library.metadata.KlibMetadataVersion
 
-internal val WriteKlibPhase = createSimpleNamedCompilerPhase<PhaseContext, SerializerOutput>(
+internal konst WriteKlibPhase = createSimpleNamedCompilerPhase<PhaseContext, SerializerOutput>(
         "WriteKlib", "Write klib output",
 ) { context, input ->
-    val config = context.config
-    val configuration = config.configuration
-    val outputFiles = OutputFiles(config.outputPath, config.target, config.produce)
-    val nopack = configuration.getBoolean(KonanConfigKeys.NOPACK)
-    val output = outputFiles.klibOutputFileName(!nopack)
-    val libraryName = config.moduleId
-    val shortLibraryName = config.shortModuleName
-    val abiVersion = KotlinAbiVersion.CURRENT
-    val compilerVersion = KotlinCompilerVersion.getVersion().toString()
-    val libraryVersion = configuration.get(KonanConfigKeys.LIBRARY_VERSION)
-    val metadataVersion = KlibMetadataVersion.INSTANCE.toString()
-    val versions = KotlinLibraryVersioning(
+    konst config = context.config
+    konst configuration = config.configuration
+    konst outputFiles = OutputFiles(config.outputPath, config.target, config.produce)
+    konst nopack = configuration.getBoolean(KonanConfigKeys.NOPACK)
+    konst output = outputFiles.klibOutputFileName(!nopack)
+    konst libraryName = config.moduleId
+    konst shortLibraryName = config.shortModuleName
+    konst abiVersion = KotlinAbiVersion.CURRENT
+    konst compilerVersion = KotlinCompilerVersion.getVersion().toString()
+    konst libraryVersion = configuration.get(KonanConfigKeys.LIBRARY_VERSION)
+    konst metadataVersion = KlibMetadataVersion.INSTANCE.toString()
+    konst versions = KotlinLibraryVersioning(
             abiVersion = abiVersion,
             libraryVersion = libraryVersion,
             compilerVersion = compilerVersion,
             metadataVersion = metadataVersion,
     )
-    val target = config.target
-    val manifestProperties = config.manifestProperties
+    konst target = config.target
+    konst manifestProperties = config.manifestProperties
 
     if (!nopack) {
-        val suffix = outputFiles.produce.suffix(target)
+        konst suffix = outputFiles.produce.suffix(target)
         if (!output.endsWith(suffix)) {
             error("please specify correct output: packed: ${!nopack}, $output$suffix")
         }
@@ -50,7 +50,7 @@ internal val WriteKlibPhase = createSimpleNamedCompilerPhase<PhaseContext, Seria
     why a consumer might not be able to provide the same compile classpath as the producer
     (e.g. commonized cinterops, host vs client environment differences).
     */
-    val linkDependencies = if (context.config.metadataKlib) emptyList()
+    konst linkDependencies = if (context.config.metadataKlib) emptyList()
     else input.neededLibraries
 
     buildLibrary(

@@ -10,5 +10,5 @@ fun <T> buildTarget(@BuilderInference block: Target<T>.() -> Unit): Target<T> {
 }
 
 fun test(s: String) {
-    val result = buildTarget { <expr>add</expr>(s) }
+    konst result = buildTarget { <expr>add</expr>(s) }
 }

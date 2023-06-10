@@ -1,7 +1,7 @@
 var result = ""
 
 object A {
-    val prop = test()
+    konst prop = test()
 
     fun test(): String {
         result += "OK"

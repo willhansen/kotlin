@@ -26,7 +26,7 @@ public interface IdeaKotlinClasspathProtoOrBuilder extends
   java.lang.String getFiles(int index);
   /**
    * <code>repeated string files = 1;</code>
-   * @param index The index of the value to return.
+   * @param index The index of the konstue to return.
    * @return The bytes of the files at the given index.
    */
   com.google.protobuf.ByteString

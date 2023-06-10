@@ -5,7 +5,7 @@
 package a
 
 public class X {
-    public val x : String? = null
+    public konst x : String? = null
 }
 
 // MODULE: m2(m1)

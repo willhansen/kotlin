@@ -16,11 +16,11 @@ FILE: kt54990.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|A<out L, out B<L, kotlin/Double>>| = R|<local>/x|
+        public final konst x: R|A<out L, out B<L, kotlin/Double>>| = R|<local>/x|
             public get(): R|A<out L, out B<L, kotlin/Double>>|
 
     }
     public final fun test(): R|kotlin/Unit| {
-        lval x: R|A<out kotlin/Any, out B<kotlin/Any, kotlin/Double>>| = R|/A.A|<R|kotlin/Any|, R|B<kotlin/Any, kotlin/Double>|>()
+        lkonst x: R|A<out kotlin/Any, out B<kotlin/Any, kotlin/Double>>| = R|/A.A|<R|kotlin/Any|, R|B<kotlin/Any, kotlin/Double>|>()
         R|/C.C|<R|kotlin/Any|>(R|<local>/x|)
     }

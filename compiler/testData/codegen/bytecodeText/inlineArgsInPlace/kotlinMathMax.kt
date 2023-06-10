@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun vectorReductionMax(vA: DoubleArray): Double {
-    val n = vA.size
+    konst n = vA.size
     var x = Double.NEGATIVE_INFINITY
     for (i in 0 until n) {
         x = kotlin.math.max(x, vA[i])

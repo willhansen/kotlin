@@ -1,3 +1,3 @@
 package transitiveStory.bottomActual.mppBeginning
 
-actual val sourceSetName: String = "jsMain"
+actual konst sourceSetName: String = "jsMain"

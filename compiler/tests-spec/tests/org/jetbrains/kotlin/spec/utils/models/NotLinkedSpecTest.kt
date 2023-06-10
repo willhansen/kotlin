@@ -19,10 +19,10 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 enum class NotLinkedSpecTestFileInfoElementType(
-    override val valuePattern: Pattern? = null,
-    override val required: Boolean = false
+    override konst konstuePattern: Pattern? = null,
+    override konst required: Boolean = false
 ) : SpecTestInfoElementType {
-    SECTIONS(valuePattern = sectionsInFilePattern, required = true)
+    SECTIONS(konstuePattern = sectionsInFilePattern, required = true)
 }
 
 class NotLinkedSpecTest(
@@ -38,7 +38,7 @@ class NotLinkedSpecTest(
     exception: TestsExceptionType?
 ) : AbstractSpecTest(testArea, testType, sections, testNumber, description, cases, unexpectedBehavior, issues, helpers, exception) {
     override fun checkPathConsistency(pathMatcher: Matcher) =
-        testArea == TestArea.valueOf(pathMatcher.group("testArea").withUnderscores())
+        testArea == TestArea.konstueOf(pathMatcher.group("testArea").withUnderscores())
                 && testType == TestType.fromValue(pathMatcher.group("testType"))!!
                 && sections == pathMatcher.group("sections").splitByPathSeparator()
                 && testNumber == pathMatcher.group("testNumber").toInt()

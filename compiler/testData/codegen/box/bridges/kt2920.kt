@@ -1,9 +1,9 @@
 interface Tr<T> {
-    val v: T
+    konst v: T
 }
 
 class C : Tr<String> {
-    override val v = "OK"
+    override konst v = "OK"
 }
 
 fun box() = C().v

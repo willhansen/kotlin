@@ -2,23 +2,23 @@ package
 
 public final class C : O.B {
     public constructor C()
-    public final val a: kotlin.reflect.KFunction1<O.A, kotlin.Int>
-    public final val b: kotlin.reflect.KFunction1<O.A, kotlin.Int>
-    public final val c: kotlin.reflect.KFunction1<O.A.FromA, kotlin.Int>
-    public final val d: kotlin.reflect.KFunction1<O.B.FromB, kotlin.Int>
-    public final val e: kotlin.reflect.KFunction1<O.A.Companion.FromCompanionA, kotlin.Int>
-    public final val f: kotlin.reflect.KFunction1<O.B.Companion.FromCompanionB, kotlin.Int>
-    public final val g: kotlin.reflect.KFunction1<O.Alpha, kotlin.Int>
-    public final val h: kotlin.reflect.KFunction1<O.Beta, kotlin.Int>
-    public final val i: kotlin.reflect.KFunction1<O.Gamma, kotlin.Int>
-    public final val k: kotlin.reflect.KFunction1<O.Alpha.FromAlpha, kotlin.Int>
-    public final val l: kotlin.reflect.KFunction1<O.Beta.FromBeta, kotlin.Int>
-    public final val m: kotlin.reflect.KFunction1<O.Gamma.FromGamma, kotlin.Int>
-    public final val n: kotlin.reflect.KFunction1<C.Companion.FromCompanionC, kotlin.Int>
-    public final val o: kotlin.reflect.KFunction1<O.Alpha.Companion.FromCompanionAlpha, kotlin.Int>
-    public final val p: kotlin.reflect.KFunction1<O.Beta.Companion.FromCompanionBeta, kotlin.Int>
-    public final val q: kotlin.reflect.KFunction1<O.Gamma.Companion.FromCompanionGamma, kotlin.Int>
-    public final val r: kotlin.reflect.KFunction1<Delta.FromDelta, kotlin.Int>
+    public final konst a: kotlin.reflect.KFunction1<O.A, kotlin.Int>
+    public final konst b: kotlin.reflect.KFunction1<O.A, kotlin.Int>
+    public final konst c: kotlin.reflect.KFunction1<O.A.FromA, kotlin.Int>
+    public final konst d: kotlin.reflect.KFunction1<O.B.FromB, kotlin.Int>
+    public final konst e: kotlin.reflect.KFunction1<O.A.Companion.FromCompanionA, kotlin.Int>
+    public final konst f: kotlin.reflect.KFunction1<O.B.Companion.FromCompanionB, kotlin.Int>
+    public final konst g: kotlin.reflect.KFunction1<O.Alpha, kotlin.Int>
+    public final konst h: kotlin.reflect.KFunction1<O.Beta, kotlin.Int>
+    public final konst i: kotlin.reflect.KFunction1<O.Gamma, kotlin.Int>
+    public final konst k: kotlin.reflect.KFunction1<O.Alpha.FromAlpha, kotlin.Int>
+    public final konst l: kotlin.reflect.KFunction1<O.Beta.FromBeta, kotlin.Int>
+    public final konst m: kotlin.reflect.KFunction1<O.Gamma.FromGamma, kotlin.Int>
+    public final konst n: kotlin.reflect.KFunction1<C.Companion.FromCompanionC, kotlin.Int>
+    public final konst o: kotlin.reflect.KFunction1<O.Alpha.Companion.FromCompanionAlpha, kotlin.Int>
+    public final konst p: kotlin.reflect.KFunction1<O.Beta.Companion.FromCompanionBeta, kotlin.Int>
+    public final konst q: kotlin.reflect.KFunction1<O.Gamma.Companion.FromCompanionGamma, kotlin.Int>
+    public final konst r: kotlin.reflect.KFunction1<Delta.FromDelta, kotlin.Int>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ fun foo(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

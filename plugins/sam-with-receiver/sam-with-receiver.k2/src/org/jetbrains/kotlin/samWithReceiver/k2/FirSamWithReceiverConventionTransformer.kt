@@ -18,15 +18,15 @@ import org.jetbrains.kotlin.fir.types.functionTypeService
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 class FirSamWithReceiverConventionTransformer(
-    private val annotations: List<String>,
+    private konst annotations: List<String>,
     session: FirSession
 ) : FirSamConversionTransformerExtension(session) {
     override fun getCustomFunctionTypeForSamConversion(function: FirSimpleFunction): ConeLookupTagBasedType? {
-        val containingClassSymbol = function.containingClassLookupTag()?.toFirRegularClassSymbol(session) ?: return null
+        konst containingClassSymbol = function.containingClassLookupTag()?.toFirRegularClassSymbol(session) ?: return null
         return runIf(containingClassSymbol.resolvedAnnotationClassIds.any { it.asSingleFqName().asString() in annotations }) {
-            val parameterTypes = function.valueParameters.map { it.returnTypeRef.coneType }
+            konst parameterTypes = function.konstueParameters.map { it.returnTypeRef.coneType }
             if (parameterTypes.isEmpty()) return null
-            val kind = session.functionTypeService.extractSingleSpecialKindForFunction(function.symbol) ?: FunctionTypeKind.Function
+            konst kind = session.functionTypeService.extractSingleSpecialKindForFunction(function.symbol) ?: FunctionTypeKind.Function
             createFunctionType(
                 kind,
                 parameters = parameterTypes.subList(1, parameterTypes.size),

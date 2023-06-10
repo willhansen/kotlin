@@ -1,8 +1,8 @@
 package
 
-public val bar: Bar
-public val foo: Foo
-public val foofoo: Foo
+public konst bar: Bar
+public konst foo: Foo
+public konst foofoo: Foo
 public fun bar(): Bar?
 public fun foo(): Foo?
 public fun </*0*/ T : Bar> run(/*0*/ f: () -> T): T

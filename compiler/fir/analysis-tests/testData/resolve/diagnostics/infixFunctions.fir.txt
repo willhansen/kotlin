@@ -14,7 +14,7 @@ FILE: infixFunctions.kt
 
     }
     public final typealias B = R|A|
-    public final val x: R|kotlin/Int| = Int(1)
+    public final konst x: R|kotlin/Int| = Int(1)
         public get(): R|kotlin/Int|
     public final class C : R|kotlin/Any| {
         public constructor(): R|C| {

@@ -32,7 +32,7 @@ class C : J, K {
     <this>.#$$delegate_0.jg2(c = c)
   }
 
-  private /* final field */ val $$delegate_0: J = j
+  private /* final field */ konst $$delegate_0: J = j
   override fun kf1(): Collection<out CharSequence> {
     return <this>.#$$delegate_1.kf1()
   }
@@ -49,7 +49,7 @@ class C : J, K {
     <this>.#$$delegate_1.kg2(c = c)
   }
 
-  private /* final field */ val $$delegate_1: K = k
+  private /* final field */ konst $$delegate_1: K = k
 
 }
 

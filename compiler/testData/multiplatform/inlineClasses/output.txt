@@ -1,11 +1,11 @@
 -- Common --
 Exit code: OK
 Output:
-compiler/testData/multiplatform/inlineClasses/common.kt:3:8: warning: 'inline' modifier is deprecated. Use 'value' instead
-expect inline class Foo1(val x: Int)
+compiler/testData/multiplatform/inlineClasses/common.kt:3:8: warning: 'inline' modifier is deprecated. Use 'konstue' instead
+expect inline class Foo1(konst x: Int)
        ^
-compiler/testData/multiplatform/inlineClasses/common.kt:4:8: warning: 'inline' modifier is deprecated. Use 'value' instead
-expect inline class Foo2(val y: String)
+compiler/testData/multiplatform/inlineClasses/common.kt:4:8: warning: 'inline' modifier is deprecated. Use 'konstue' instead
+expect inline class Foo2(konst y: String)
        ^
 
 -- JVM --
@@ -15,7 +15,7 @@ compiler/testData/multiplatform/inlineClasses/jvm.kt:5:1: error: actual class 'F
 The following declaration is incompatible because modifiers are different (companion, inner, inline):
     public final expect inline class Foo2
 
-actual class Foo2 actual constructor(actual val y: String)
+actual class Foo2 actual constructor(actual konst y: String)
 ^
 
 -- JS --
@@ -25,5 +25,5 @@ compiler/testData/multiplatform/inlineClasses/js.kt:5:1: error: actual class 'Fo
 The following declaration is incompatible because modifiers are different (companion, inner, inline):
     public final expect inline class Foo2
 
-actual class Foo2 actual constructor(actual val y: String)
+actual class Foo2 actual constructor(actual konst y: String)
 ^

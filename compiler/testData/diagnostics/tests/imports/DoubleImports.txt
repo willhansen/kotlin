@@ -6,7 +6,7 @@ public fun useNested(): star.SomeClass.Nested
 public fun useSomeClass(): star.SomeClass
 
 package explicit {
-    public val gau: kotlin.Int = 2
+    public konst gau: kotlin.Int = 2
     public fun baz(): kotlin.Unit
 
     public final class AnotherClass {
@@ -18,7 +18,7 @@ package explicit {
 }
 
 package star {
-    public val bar: kotlin.Int = 1
+    public konst bar: kotlin.Int = 1
     public fun foo(): kotlin.Unit
 
     public final class SomeClass {

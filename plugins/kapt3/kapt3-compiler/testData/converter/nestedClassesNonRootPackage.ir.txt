@@ -136,7 +136,7 @@ public final class Experiment {
         }
     }
 
-    @java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+    @java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
     @kotlin.Metadata()
     public static abstract @interface Type {
     }
@@ -182,14 +182,14 @@ public abstract interface IFoo {
     @kotlin.Metadata()
     public static abstract interface IBar {
 
-        @java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+        @java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
         @kotlin.Metadata()
         public static abstract @interface Anno {
 
-            public abstract java.lang.Class<?>[] value();
+            public abstract java.lang.Class<?>[] konstue();
         }
 
-        @test.IFoo.IBar.Anno(value = {test.IFoo.IBar.IZoo.class})
+        @test.IFoo.IBar.Anno(konstue = {test.IFoo.IBar.IZoo.class})
         @kotlin.Metadata()
         public static abstract interface IZoo {
         }
@@ -278,7 +278,7 @@ class JavaClass {
 
 package test;
 
-@test.IFoo.IBar.Anno(value = {test.IFoo.IBar.IZoo.class, test.Foo.Bar.class})
+@test.IFoo.IBar.Anno(konstue = {test.IFoo.IBar.IZoo.class, test.Foo.Bar.class})
 @kotlin.Metadata()
 public final class Test1 extends test.Foo.Bar implements test.IFoo.IBar, test.IFoo.IBar.IZoo {
     @org.jetbrains.annotations.NotNull()

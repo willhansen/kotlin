@@ -21,15 +21,15 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-sealed class CheckResult(val isSuccess: Boolean) {
-    class IllegalSignature(val error: String) : CheckResult(false)
+sealed class CheckResult(konst isSuccess: Boolean) {
+    class IllegalSignature(konst error: String) : CheckResult(false)
     object IllegalFunctionName : CheckResult(false)
     object SuccessCheck : CheckResult(true)
 }
 
 object OperatorFunctionChecks {
     fun isOperator(function: FirSimpleFunction, session: FirSession, scopeSession: ScopeSession?): CheckResult {
-        val checks = checksByName.getOrElse(function.name) {
+        konst checks = checksByName.getOrElse(function.name) {
             regexChecks.find { it.first.matches(function.name.asString()) }?.second
         } ?: return CheckResult.IllegalFunctionName
 
@@ -40,13 +40,13 @@ object OperatorFunctionChecks {
     }
 
     //reimplementation of org.jetbrains.kotlin.util.OperatorChecks for FIR
-    private val checksByName: Map<Name, List<Check>> = buildMap {
+    private konst checksByName: Map<Name, List<Check>> = buildMap {
         checkFor(OperatorNameConventions.GET, Checks.memberOrExtension, Checks.ValueParametersCount.atLeast(1))
         checkFor(
             OperatorNameConventions.SET,
             Checks.memberOrExtension, Checks.ValueParametersCount.atLeast(2),
-            Checks.simple("last parameter should not have a default value or be a vararg") {
-                it.valueParameters.lastOrNull()?.let { param ->
+            Checks.simple("last parameter should not have a default konstue or be a vararg") {
+                it.konstueParameters.lastOrNull()?.let { param ->
                     param.defaultValue == null && !param.isVararg
                 } == true
             }
@@ -93,8 +93,8 @@ object OperatorFunctionChecks {
             object : Check() {
                 override fun check(function: FirSimpleFunction, session: FirSession, scopeSession: ScopeSession?): String? {
                     if (scopeSession == null) return null
-                    val containingClassSymbol = function.containingClassLookupTag()?.toFirRegularClassSymbol(session) ?: return null
-                    val customEqualsSupported = session.languageVersionSettings.supportsFeature(LanguageFeature.CustomEqualsInValueClasses)
+                    konst containingClassSymbol = function.containingClassLookupTag()?.toFirRegularClassSymbol(session) ?: return null
+                    konst customEqualsSupported = session.languageVersionSettings.supportsFeature(LanguageFeature.CustomEqualsInValueClasses)
 
                     if (function.symbol.overriddenFunctions(containingClassSymbol, session, scopeSession)
                             .any { it.containingClassLookupTag()?.classId == StandardClassIds.Any }
@@ -105,7 +105,7 @@ object OperatorFunctionChecks {
                     return buildString {
                         append("must override ''equals()'' in Any")
                         if (customEqualsSupported && containingClassSymbol.isInline) {
-                            val expectedParameterTypeRendered =
+                            konst expectedParameterTypeRendered =
                                 containingClassSymbol.defaultType().replaceArgumentsWithStarProjections().renderReadable()
                             append(" or define ''equals(other: ${expectedParameterTypeRendered}): Boolean''")
                         }
@@ -128,7 +128,7 @@ object OperatorFunctionChecks {
             setOf(OperatorNameConventions.INC, OperatorNameConventions.DEC),
             Checks.memberOrExtension,
             Checks.full("receiver must be a supertype of the return type") { session, function ->
-                val receiver = function.dispatchReceiverType ?: function.receiverParameter?.typeRef?.coneType ?: return@full false
+                konst receiver = function.dispatchReceiverType ?: function.receiverParameter?.typeRef?.coneType ?: return@full false
                 function.returnTypeRef.coneType.isSubtypeOf(session.typeContext, receiver)
             }
         )
@@ -139,7 +139,7 @@ object OperatorFunctionChecks {
         )
     }
 
-    private val regexChecks: List<Pair<Regex, List<Check>>> = buildList {
+    private konst regexChecks: List<Pair<Regex, List<Check>>> = buildList {
         checkFor(OperatorNameConventions.COMPONENT_REGEX, Checks.memberOrExtension, Checks.ValueParametersCount.none)
     }
 
@@ -171,64 +171,64 @@ private object Checks {
             message.takeIf { !predicate(session, function) }
     }
 
-    val memberOrExtension = simple("must be a member or an extension function") {
+    konst memberOrExtension = simple("must be a member or an extension function") {
         it.dispatchReceiverType != null || it.receiverParameter != null
     }
 
-    val member = simple("must be a member function") {
+    konst member = simple("must be a member function") {
         it.dispatchReceiverType != null
     }
 
-    val nonSuspend = simple("must not be suspend") {
+    konst nonSuspend = simple("must not be suspend") {
         !it.isSuspend
     }
 
     object ValueParametersCount {
-        fun atLeast(n: Int) = simple("must have at least $n value parameter" + (if (n > 1) "s" else "")) {
-            it.valueParameters.size >= n
+        fun atLeast(n: Int) = simple("must have at least $n konstue parameter" + (if (n > 1) "s" else "")) {
+            it.konstueParameters.size >= n
         }
 
-        fun exactly(n: Int) = simple("must have exactly $n value parameters") {
-            it.valueParameters.size == n
+        fun exactly(n: Int) = simple("must have exactly $n konstue parameters") {
+            it.konstueParameters.size == n
         }
 
-        val single = simple("must have a single value parameter") {
-            it.valueParameters.size == 1
+        konst single = simple("must have a single konstue parameter") {
+            it.konstueParameters.size == 1
         }
 
-        val none = simple("must have no value parameters") {
-            it.valueParameters.isEmpty()
+        konst none = simple("must have no konstue parameters") {
+            it.konstueParameters.isEmpty()
         }
     }
 
     object Returns {
-        val boolean = simple("must return Boolean") {
+        konst boolean = simple("must return Boolean") {
             it.returnTypeRef.isBoolean
         }
 
-        val int = simple("must return Int") {
+        konst int = simple("must return Int") {
             it.returnTypeRef.isInt
         }
 
-        val unit = simple("must return Unit") {
+        konst unit = simple("must return Unit") {
             it.returnTypeRef.isUnit
         }
     }
 
-    val noDefaultAndVarargs = simple("should not have varargs or parameters with default values") {
-        it.valueParameters.all { param ->
+    konst noDefaultAndVarargs = simple("should not have varargs or parameters with default konstues") {
+        it.konstueParameters.all { param ->
             param.defaultValue == null && !param.isVararg
         }
     }
 
-    private val kPropertyType = ConeClassLikeTypeImpl(
+    private konst kPropertyType = ConeClassLikeTypeImpl(
         StandardClassIds.KProperty.toLookupTag(),
         arrayOf(ConeStarProjection),
         isNullable = false
     )
 
-    val isKProperty = full("second parameter must be of type KProperty<*> or its supertype") { session, function ->
-        val paramType = function.valueParameters.getOrNull(1)?.returnTypeRef?.coneType ?: return@full false
+    konst isKProperty = full("second parameter must be of type KProperty<*> or its supertype") { session, function ->
+        konst paramType = function.konstueParameters.getOrNull(1)?.returnTypeRef?.coneType ?: return@full false
         kPropertyType.isSubtypeOf(paramType, session, errorTypesEqualToAnything = true)
     }
 }

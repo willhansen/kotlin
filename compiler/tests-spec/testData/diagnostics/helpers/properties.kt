@@ -1,30 +1,30 @@
-val nullableNumberProperty: Number? = null
+konst nullableNumberProperty: Number? = null
 
-val stringProperty: String = ""
-val nullableStringProperty: String? = null
+konst stringProperty: String = ""
+konst nullableStringProperty: String? = null
 
-val intProperty: Int = ""
-val nullableIntProperty: Int? = null
+konst intProperty: Int = ""
+konst nullableIntProperty: Int? = null
 
-val implicitNullableNothingProperty = null
-val nullableNothingProperty: Nothing? = null
+konst implicitNullableNothingProperty = null
+konst nullableNothingProperty: Nothing? = null
 
-val anonymousTypeProperty = object {}
+konst anonymousTypeProperty = object {}
 
-val nullableAnonymousTypeProperty = if (true) object {} else null
+konst nullableAnonymousTypeProperty = if (true) object {} else null
 
-val nullableOut: Out<Int>? = null
+konst nullableOut: Out<Int>? = null
 
-val <T> T.propT get() = 10
+konst <T> T.propT get() = 10
 
-val <T : Any> T.propDefNotNullT get() = 10
+konst <T : Any> T.propDefNotNullT get() = 10
 
-val <T> T?.propNullableT get(): Int? = 10
+konst <T> T?.propNullableT get(): Int? = 10
 
-val <T> T.propTT get() = 10 as T
+konst <T> T.propTT get() = 10 as T
 
-val <T> T?.propNullableTT get() = 10 as T?
+konst <T> T?.propNullableTT get() = 10 as T?
 
-val Any.propAny get() = 10
+konst Any.propAny get() = 10
 
-val Any?.propNullableAny get() = 10
+konst Any?.propNullableAny get() = 10

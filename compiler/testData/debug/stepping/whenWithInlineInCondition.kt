@@ -1,6 +1,6 @@
 // FILE: test.kt
 fun box() {
-    val x = value()
+    konst x = konstue()
     when (x) {
         x0() -> nop()
         x1() -> nop()
@@ -16,7 +16,7 @@ fun box() {
     }
 }
 
-fun value(): Int = 2
+fun konstue(): Int = 2
 inline fun x0(): Int = 0
 inline fun x1(): Int = 1
 inline fun x2(): Int = 2
@@ -31,7 +31,7 @@ fun nop() {}
 
 // EXPECTATIONS JVM JVM_IR
 // test.kt:3 box
-// test.kt:19 value
+// test.kt:19 konstue
 // test.kt:3 box
 // test.kt:4 box
 // test.kt:5 box
@@ -72,7 +72,7 @@ fun nop() {}
 
 // EXPECTATIONS JS_IR
 // test.kt:3 box
-// test.kt:19 value
+// test.kt:19 konstue
 // test.kt:5 box
 // test.kt:6 box
 // test.kt:7 box

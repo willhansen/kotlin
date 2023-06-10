@@ -1,22 +1,22 @@
 // FIR_IDENTICAL
 // WITH_STDLIB
 
-val testSimpleUIntLiteral = 1u
+konst testSimpleUIntLiteral = 1u
 
-val testSimpleUIntLiteralWithOverflow = 0xFFFF_FFFFu
+konst testSimpleUIntLiteralWithOverflow = 0xFFFF_FFFFu
 
-val testUByteWithExpectedType: UByte = 1u
+konst testUByteWithExpectedType: UByte = 1u
 
-val testUShortWithExpectedType: UShort = 1u
+konst testUShortWithExpectedType: UShort = 1u
 
-val testUIntWithExpectedType: UInt = 1u
+konst testUIntWithExpectedType: UInt = 1u
 
-val testULongWithExpectedType: ULong = 1u
+konst testULongWithExpectedType: ULong = 1u
 
-val testToUByte = 1.toUByte()
+konst testToUByte = 1.toUByte()
 
-val testToUShort = 1.toUShort()
+konst testToUShort = 1.toUShort()
 
-val testToUInt = 1.toUInt()
+konst testToUInt = 1.toUInt()
 
-val testToULong = 1.toULong()
+konst testToULong = 1.toULong()

@@ -16,18 +16,18 @@ import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
 import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 
 internal class KtNotUnderContentRootModuleImpl(
-    override val name: String,
-    override val directRegularDependencies: List<KtModule> = emptyList(),
-    override val directDependsOnDependencies: List<KtModule> = emptyList(),
-    override val directFriendDependencies: List<KtModule> = emptyList(),
-    override val platform: TargetPlatform = JvmPlatforms.defaultJvmPlatform,
-    override val file: PsiFile? = null,
-    override val moduleDescription: String,
-    override val project: Project,
+    override konst name: String,
+    override konst directRegularDependencies: List<KtModule> = emptyList(),
+    override konst directDependsOnDependencies: List<KtModule> = emptyList(),
+    override konst directFriendDependencies: List<KtModule> = emptyList(),
+    override konst platform: TargetPlatform = JvmPlatforms.defaultJvmPlatform,
+    override konst file: PsiFile? = null,
+    override konst moduleDescription: String,
+    override konst project: Project,
 ) : KtNotUnderContentRootModule, KtModuleWithPlatform {
-    override val transitiveDependsOnDependencies: List<KtModule> by lazy { computeTransitiveDependsOnDependencies(directDependsOnDependencies) }
-    override val analyzerServices: PlatformDependentAnalyzerServices = super.analyzerServices
+    override konst transitiveDependsOnDependencies: List<KtModule> by lazy { computeTransitiveDependsOnDependencies(directDependsOnDependencies) }
+    override konst analyzerServices: PlatformDependentAnalyzerServices = super.analyzerServices
 
-    override val contentScope: GlobalSearchScope =
+    override konst contentScope: GlobalSearchScope =
         if (file != null) GlobalSearchScope.fileScope(file) else GlobalSearchScope.EMPTY_SCOPE
 }

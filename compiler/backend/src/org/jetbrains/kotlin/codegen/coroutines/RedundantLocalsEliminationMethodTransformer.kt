@@ -23,7 +23,7 @@ import org.jetbrains.org.objectweb.asm.tree.analysis.Frame
 import java.util.*
 
 /**
- * This pass removes unused Unit values. These typically occur as a result of inlining and could end up spilling
+ * This pass removes unused Unit konstues. These typically occur as a result of inlining and could end up spilling
  * into the continuation object or break tail-call elimination.
  *
  * Concretely, we remove "GETSTATIC kotlin/Unit.INSTANCE" instructions if they are unused, or all uses are either
@@ -31,13 +31,13 @@ import java.util.*
  *
  * This pass does not touch [suspensionPoints], as later passes rely on the bytecode patterns around suspension points.
  */
-internal class RedundantLocalsEliminationMethodTransformer(private val suspensionPoints: List<SuspensionPoint>) : MethodTransformer() {
+internal class RedundantLocalsEliminationMethodTransformer(private konst suspensionPoints: List<SuspensionPoint>) : MethodTransformer() {
     override fun transform(internalClassName: String, methodNode: MethodNode) {
-        val interpreter = UnitSourceInterpreter(methodNode.localVariables?.mapTo(mutableSetOf()) { it.index } ?: setOf())
-        val frames = interpreter.run(internalClassName, methodNode)
+        konst interpreter = UnitSourceInterpreter(methodNode.localVariables?.mapTo(mutableSetOf()) { it.index } ?: setOf())
+        konst frames = interpreter.run(internalClassName, methodNode)
 
         // Mark all unused instructions for deletion (except for labels which may be used in debug information)
-        val toDelete = mutableSetOf<AbstractInsnNode>()
+        konst toDelete = mutableSetOf<AbstractInsnNode>()
         methodNode.instructions.asSequence().zip(frames.asSequence()).mapNotNullTo(toDelete) { (insn, frame) ->
             insn.takeIf { frame == null && insn !is LabelNode }
         }
@@ -54,8 +54,8 @@ internal class RedundantLocalsEliminationMethodTransformer(private val suspensio
     }
 }
 
-// A version of SourceValue which inherits from BasicValue and is only used for Unit values.
-private class UnitValue(val insns: Set<AbstractInsnNode>) : BasicValue(AsmTypes.OBJECT_TYPE) {
+// A version of SourceValue which inherits from BasicValue and is only used for Unit konstues.
+private class UnitValue(konst insns: Set<AbstractInsnNode>) : BasicValue(AsmTypes.OBJECT_TYPE) {
     constructor(insn: AbstractInsnNode) : this(Collections.singleton(insn))
 
     override fun equals(other: Any?): Boolean = other is UnitValue && insns == other.insns
@@ -63,21 +63,21 @@ private class UnitValue(val insns: Set<AbstractInsnNode>) : BasicValue(AsmTypes.
     override fun toString() = "U"
 }
 
-// A specialized SourceInterpreter which only keeps track of the use sites for Unit values which are exclusively used as
+// A specialized SourceInterpreter which only keeps track of the use sites for Unit konstues which are exclusively used as
 // arguments to POP and unused ASTORE instructions.
-private class UnitSourceInterpreter(private val localVariables: Set<Int>) : BasicInterpreter(Opcodes.API_VERSION) {
-    // All unit values with visible use-sites.
-    val unspillableUnitValues = mutableSetOf<AbstractInsnNode>()
+private class UnitSourceInterpreter(private konst localVariables: Set<Int>) : BasicInterpreter(Opcodes.API_VERSION) {
+    // All unit konstues with visible use-sites.
+    konst unspillableUnitValues = mutableSetOf<AbstractInsnNode>()
 
-    // Map from unit values to ASTORE/POP use-sites.
-    val unitUsageInformation = mutableMapOf<AbstractInsnNode, MutableSet<AbstractInsnNode>>()
+    // Map from unit konstues to ASTORE/POP use-sites.
+    konst unitUsageInformation = mutableMapOf<AbstractInsnNode, MutableSet<AbstractInsnNode>>()
 
-    private fun markUnspillable(value: BasicValue?) {
-        (value as? UnitValue)?.let { unspillableUnitValues += it.insns }
+    private fun markUnspillable(konstue: BasicValue?) {
+        (konstue as? UnitValue)?.let { unspillableUnitValues += it.insns }
     }
 
-    private fun collectUnitUsage(use: AbstractInsnNode, value: UnitValue) {
-        for (def in value.insns) {
+    private fun collectUnitUsage(use: AbstractInsnNode, konstue: UnitValue) {
+        for (def in konstue.insns) {
             if (def !in unspillableUnitValues) {
                 unitUsageInformation.getOrPut(def) { mutableSetOf() } += use
             }
@@ -85,13 +85,13 @@ private class UnitSourceInterpreter(private val localVariables: Set<Int>) : Basi
     }
 
     fun run(internalClassName: String, methodNode: MethodNode): Array<Frame<BasicValue>?> {
-        val frames = FastMethodAnalyzer<BasicValue>(internalClassName, methodNode, this).analyze()
+        konst frames = FastMethodAnalyzer<BasicValue>(internalClassName, methodNode, this).analyze()
         // The ASM analyzer does not visit POP instructions, so we do so here.
         for ((insn, frame) in methodNode.instructions.asSequence().zip(frames.asSequence())) {
             if (frame != null && insn.opcode == Opcodes.POP) {
-                val value = frame.top()
-                if (value is UnitValue) {
-                    collectUnitUsage(insn, value)
+                konst konstue = frame.top()
+                if (konstue is UnitValue) {
+                    collectUnitUsage(insn, konstue)
                 }
             }
         }
@@ -101,53 +101,53 @@ private class UnitSourceInterpreter(private val localVariables: Set<Int>) : Basi
     override fun newOperation(insn: AbstractInsnNode?): BasicValue =
         if (insn?.isUnitInstance() == true) UnitValue(insn) else super.newOperation(insn)
 
-    override fun copyOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? {
-        if (value is UnitValue) {
+    override fun copyOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? {
+        if (konstue is UnitValue) {
             if (insn is VarInsnNode && insn.opcode == Opcodes.ASTORE && insn.`var` !in localVariables) {
-                collectUnitUsage(insn, value)
-                // We track the stored value in case it is subsequently read.
-                return value
+                collectUnitUsage(insn, konstue)
+                // We track the stored konstue in case it is subsequently read.
+                return konstue
             }
-            unspillableUnitValues += value.insns
+            unspillableUnitValues += konstue.insns
         }
-        return super.copyOperation(insn, value)
+        return super.copyOperation(insn, konstue)
     }
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? {
-        markUnspillable(value)
-        return super.unaryOperation(insn, value)
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? {
+        markUnspillable(konstue)
+        return super.unaryOperation(insn, konstue)
     }
 
-    override fun binaryOperation(insn: AbstractInsnNode, value1: BasicValue?, value2: BasicValue?): BasicValue? {
-        markUnspillable(value1)
-        markUnspillable(value2)
-        return super.binaryOperation(insn, value1, value2)
+    override fun binaryOperation(insn: AbstractInsnNode, konstue1: BasicValue?, konstue2: BasicValue?): BasicValue? {
+        markUnspillable(konstue1)
+        markUnspillable(konstue2)
+        return super.binaryOperation(insn, konstue1, konstue2)
     }
 
-    override fun ternaryOperation(insn: AbstractInsnNode, value1: BasicValue?, value2: BasicValue?, value3: BasicValue?): BasicValue? {
-        markUnspillable(value1)
-        markUnspillable(value2)
-        markUnspillable(value3)
-        return super.ternaryOperation(insn, value1, value2, value3)
+    override fun ternaryOperation(insn: AbstractInsnNode, konstue1: BasicValue?, konstue2: BasicValue?, konstue3: BasicValue?): BasicValue? {
+        markUnspillable(konstue1)
+        markUnspillable(konstue2)
+        markUnspillable(konstue3)
+        return super.ternaryOperation(insn, konstue1, konstue2, konstue3)
     }
 
-    override fun naryOperation(insn: AbstractInsnNode, values: List<BasicValue>?): BasicValue? {
-        values?.forEach(this::markUnspillable)
-        return super.naryOperation(insn, values)
+    override fun naryOperation(insn: AbstractInsnNode, konstues: List<BasicValue>?): BasicValue? {
+        konstues?.forEach(this::markUnspillable)
+        return super.naryOperation(insn, konstues)
     }
 
-    override fun merge(value1: BasicValue?, value2: BasicValue?): BasicValue? =
-        if (value1 is UnitValue && value2 is UnitValue) {
-            val newValue = UnitValue(value1.insns.union(value2.insns))
+    override fun merge(konstue1: BasicValue?, konstue2: BasicValue?): BasicValue? =
+        if (konstue1 is UnitValue && konstue2 is UnitValue) {
+            konst newValue = UnitValue(konstue1.insns.union(konstue2.insns))
             if (newValue.insns.any { it in unspillableUnitValues }) {
                 markUnspillable(newValue)
             }
             newValue
         } else {
-            // Mark unit values as unspillable if we merge them with non-unit values here.
-            // This is conservative since the value could turn out to be unused.
-            markUnspillable(value1)
-            markUnspillable(value2)
-            super.merge(value1, value2)
+            // Mark unit konstues as unspillable if we merge them with non-unit konstues here.
+            // This is conservative since the konstue could turn out to be unused.
+            markUnspillable(konstue1)
+            markUnspillable(konstue2)
+            super.merge(konstue1, konstue2)
         }
 }

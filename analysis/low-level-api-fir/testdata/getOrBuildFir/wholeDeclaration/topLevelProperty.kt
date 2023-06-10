@@ -1,3 +1,3 @@
 <expr>
-val x = 1
+konst x = 1
 </expr>

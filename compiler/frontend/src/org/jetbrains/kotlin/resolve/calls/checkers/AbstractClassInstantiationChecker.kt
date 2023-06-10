@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 
 object AbstractClassInstantiationChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val candidateDescriptor = resolvedCall.candidateDescriptor
-        val call = resolvedCall.call
+        konst candidateDescriptor = resolvedCall.candidateDescriptor
+        konst call = resolvedCall.call
 
         if (candidateDescriptor is ConstructorDescriptor &&
             !isSuperOrDelegatingConstructorCall(call)

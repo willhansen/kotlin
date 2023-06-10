@@ -23,11 +23,11 @@ class ResolvedDependencyIdTest {
 
     @Test
     fun namesAreOrdered() {
-        val characters: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-        val uniqueNames: List<String> = List(10) {
+        konst characters: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        konst uniqueNames: List<String> = List(10) {
             List(20) { characters.random() }.joinToString("")
         }
-        val moduleId = ResolvedDependencyId(uniqueNames)
+        konst moduleId = ResolvedDependencyId(uniqueNames)
         assertEquals(uniqueNames.sorted(), moduleId.uniqueNames.toList())
     }
 

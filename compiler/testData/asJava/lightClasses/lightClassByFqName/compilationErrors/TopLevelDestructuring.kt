@@ -1,6 +1,6 @@
 // TopLevelDestructuringKt
-data class Pair(val x: Int, val y: Int)
+data class Pair(konst x: Int, konst y: Int)
 
-val (x, y) = Pair(1, 2)
+konst (x, y) = Pair(1, 2)
 
-val z = { 3 }()
+konst z = { 3 }()

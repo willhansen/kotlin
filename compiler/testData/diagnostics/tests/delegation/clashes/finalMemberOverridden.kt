@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 open class Final {
     fun foo() {}
-    val bar: Int = 0
+    konst bar: Int = 0
     var qux: Int = 0
 }
 
@@ -16,27 +16,27 @@ class CFoo : IFoo {
 }
 
 interface IBar {
-    val bar: Int
+    konst bar: Int
 }
 
 class CBar : IBar {
-    override val bar: Int get() = 0
+    override konst bar: Int get() = 0
 }
 
 interface IQux {
-    val qux: Int
+    konst qux: Int
 }
 
 class CQux : IQux {
-    override val qux: Int get() = 0
+    override konst qux: Int get() = 0
 }
 
 interface IBarT<T> {
-    val bar: T
+    konst bar: T
 }
 
 class CBarT<T> : IBarT<T> {
-    override val bar: T get() = null!!
+    override konst bar: T get() = null!!
 }
 
 <!OVERRIDING_FINAL_MEMBER_BY_DELEGATION!>class Test1<!> : Final(), IFoo by CFoo()

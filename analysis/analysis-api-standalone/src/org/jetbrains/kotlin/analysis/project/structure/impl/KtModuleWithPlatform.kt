@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 
 internal interface KtModuleWithPlatform {
-    val platform: TargetPlatform
+    konst platform: TargetPlatform
 
-    val analyzerServices: PlatformDependentAnalyzerServices
+    konst analyzerServices: PlatformDependentAnalyzerServices
         get() = platform.getAnalyzerServices()
 }

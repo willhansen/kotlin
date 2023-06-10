@@ -14,7 +14,7 @@ KtConstructorSymbol:
     type: A
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null
@@ -35,7 +35,7 @@ KtConstructorSymbol:
     type: A
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -79,7 +79,7 @@ KtConstructorSymbol:
     type: A
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

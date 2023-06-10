@@ -7,7 +7,7 @@
 
 @interface BaseClass(IncludeCategory)
 - (id)initWithFloat:(float)number;
-- (float) multiplyBy:(int)value;
+- (float) multiplyBy:(int)konstue;
 @end;
 
 @interface DerivedClass : BaseClass

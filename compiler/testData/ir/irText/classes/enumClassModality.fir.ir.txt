@@ -9,14 +9,14 @@ FILE fqName:<root> fileName:/enumClassModality.kt
     ENUM_ENTRY name:X1
       init: EXPRESSION_BODY
         ENUM_CONSTRUCTOR_CALL 'private constructor <init> () declared in <root>.TestFinalEnum1'
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestFinalEnum1>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestFinalEnum1>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.TestFinalEnum1
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.TestFinalEnum1
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.TestFinalEnum1>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
     FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Any [fake_override]
       overridden:
@@ -40,21 +40,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -74,12 +74,12 @@ FILE fqName:<root> fileName:/enumClassModality.kt
         ENUM_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, ordinal: kotlin.Int) declared in kotlin.Enum'
           <E>: <root>.TestFinalEnum2
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ENUM_CLASS name:TestFinalEnum2 modality:FINAL visibility:public superTypes:[kotlin.Enum<<root>.TestFinalEnum2>]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.Int declared in <root>.TestFinalEnum2.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.TestFinalEnum2) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.TestFinalEnum2
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Int declared in <root>.TestFinalEnum2'
@@ -88,15 +88,15 @@ FILE fqName:<root> fileName:/enumClassModality.kt
     ENUM_ENTRY name:X1
       init: EXPRESSION_BODY
         ENUM_CONSTRUCTOR_CALL 'private constructor <init> (x: kotlin.Int) declared in <root>.TestFinalEnum2'
-          x: CONST Int type=kotlin.Int value=1
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestFinalEnum2>
+          x: CONST Int type=kotlin.Int konstue=1
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestFinalEnum2>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.TestFinalEnum2
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.TestFinalEnum2
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.TestFinalEnum2>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
     FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Any [fake_override]
       overridden:
@@ -120,21 +120,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -159,14 +159,14 @@ FILE fqName:<root> fileName:/enumClassModality.kt
     FUN name:doStuff visibility:public modality:FINAL <> ($this:<root>.TestFinalEnum3) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:<root>.TestFinalEnum3
       BLOCK_BODY
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestFinalEnum3>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestFinalEnum3>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.TestFinalEnum3
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.TestFinalEnum3
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.TestFinalEnum3>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
     FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Any [fake_override]
       overridden:
@@ -190,21 +190,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -238,7 +238,7 @@ FILE fqName:<root> fileName:/enumClassModality.kt
           $this: VALUE_PARAMETER name:<this> type:<root>.TestOpenEnum1.X1
           BLOCK_BODY
             RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.TestOpenEnum1.X1'
-              CONST String type=kotlin.String value="X1"
+              CONST String type=kotlin.String konstue="X1"
         FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Any [fake_override]
           overridden:
             protected final fun clone (): kotlin.Any declared in <root>.TestOpenEnum1
@@ -257,21 +257,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
           overridden:
             public final fun hashCode (): kotlin.Int declared in <root>.TestOpenEnum1
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           annotations:
-            IntrinsicConstEvaluation
+            IntrinsicConstEkonstuation
           overridden:
             public final name: kotlin.String
           FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-name> (): kotlin.String declared in <root>.TestOpenEnum1
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final ordinal: kotlin.Int
           FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-ordinal> (): kotlin.Int declared in <root>.TestOpenEnum1
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -283,14 +283,14 @@ FILE fqName:<root> fileName:/enumClassModality.kt
           overridden:
             protected/*protected and package*/ final fun finalize (): kotlin.Unit declared in <root>.TestOpenEnum1
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestOpenEnum1>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestOpenEnum1>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.TestOpenEnum1
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.TestOpenEnum1
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.TestOpenEnum1>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
     FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Any [fake_override]
       overridden:
@@ -314,21 +314,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -383,21 +383,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
           overridden:
             public open fun toString (): kotlin.String declared in <root>.TestOpenEnum2
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           annotations:
-            IntrinsicConstEvaluation
+            IntrinsicConstEkonstuation
           overridden:
             public final name: kotlin.String
           FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-name> (): kotlin.String declared in <root>.TestOpenEnum2
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final ordinal: kotlin.Int
           FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-ordinal> (): kotlin.Int declared in <root>.TestOpenEnum2
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -412,14 +412,14 @@ FILE fqName:<root> fileName:/enumClassModality.kt
     FUN name:foo visibility:public modality:OPEN <> ($this:<root>.TestOpenEnum2) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:<root>.TestOpenEnum2
       BLOCK_BODY
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestOpenEnum2>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestOpenEnum2>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.TestOpenEnum2
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.TestOpenEnum2
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.TestOpenEnum2>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
     FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Any [fake_override]
       overridden:
@@ -443,21 +443,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -512,21 +512,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
           overridden:
             public open fun toString (): kotlin.String declared in <root>.TestAbstractEnum1
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           annotations:
-            IntrinsicConstEvaluation
+            IntrinsicConstEkonstuation
           overridden:
             public final name: kotlin.String
           FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-name> (): kotlin.String declared in <root>.TestAbstractEnum1
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final ordinal: kotlin.Int
           FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-ordinal> (): kotlin.Int declared in <root>.TestAbstractEnum1
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -540,14 +540,14 @@ FILE fqName:<root> fileName:/enumClassModality.kt
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
     FUN name:foo visibility:public modality:ABSTRACT <> ($this:<root>.TestAbstractEnum1) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:<root>.TestAbstractEnum1
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestAbstractEnum1>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestAbstractEnum1>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.TestAbstractEnum1
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.TestAbstractEnum1
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.TestAbstractEnum1>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
     FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Any [fake_override]
       overridden:
@@ -571,21 +571,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -657,21 +657,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
             public final fun compareTo (other: <root>.TestAbstractEnum2): kotlin.Int declared in <root>.TestAbstractEnum2
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
           VALUE_PARAMETER name:other index:0 type:<root>.TestAbstractEnum2
-        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           annotations:
-            IntrinsicConstEvaluation
+            IntrinsicConstEkonstuation
           overridden:
             public final name: kotlin.String
           FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-name> (): kotlin.String declared in <root>.TestAbstractEnum2
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final ordinal: kotlin.Int
           FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-ordinal> (): kotlin.Int declared in <root>.TestAbstractEnum2
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -683,14 +683,14 @@ FILE fqName:<root> fileName:/enumClassModality.kt
           overridden:
             protected/*protected and package*/ final fun finalize (): kotlin.Unit declared in <root>.TestAbstractEnum2
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestAbstractEnum2>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.TestAbstractEnum2>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.TestAbstractEnum2
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.TestAbstractEnum2
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.TestAbstractEnum2>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
     FUN FAKE_OVERRIDE name:foo visibility:public modality:ABSTRACT <> ($this:<root>.IFoo) returnType:kotlin.Unit [fake_override]
       overridden:
@@ -718,21 +718,21 @@ FILE fqName:<root> fileName:/enumClassModality.kt
         public final fun compareTo (other: E of kotlin.Enum): kotlin.Int declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
       VALUE_PARAMETER name:other index:0 type:<root>.TestAbstractEnum2
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>

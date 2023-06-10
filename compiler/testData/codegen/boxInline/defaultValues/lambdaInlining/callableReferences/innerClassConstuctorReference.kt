@@ -2,10 +2,10 @@
 // FILE: 1.kt
 package test
 
-class A(val value: String) {
+class A(konst konstue: String) {
 
     inner class Inner {
-        fun ok() = value
+        fun ok() = konstue
     }
 }
 

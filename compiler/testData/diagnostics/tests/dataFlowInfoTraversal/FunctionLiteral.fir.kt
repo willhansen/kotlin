@@ -1,7 +1,7 @@
 fun bar(x: Int) = x + 1
 
 fun foo() {
-    val x: Int? = null
+    konst x: Int? = null
 
     fun baz() = bar(<!ARGUMENT_TYPE_MISMATCH!>x<!>)
     fun quux() = if (x != null) bar(x) else baz()

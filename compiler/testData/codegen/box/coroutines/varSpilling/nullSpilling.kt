@@ -4,8 +4,8 @@ import helpers.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-suspend fun foo(value: String): String = suspendCoroutineUninterceptedOrReturn { x ->
-    x.resume(value)
+suspend fun foo(konstue: String): String = suspendCoroutineUninterceptedOrReturn { x ->
+    x.resume(konstue)
     COROUTINE_SUSPENDED
 }
 

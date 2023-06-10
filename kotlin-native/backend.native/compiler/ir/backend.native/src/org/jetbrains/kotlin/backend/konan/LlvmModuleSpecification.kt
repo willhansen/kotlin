@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.library.KotlinLibrary
  * Defines what LLVM module should consist of.
  */
 interface LlvmModuleSpecification {
-    val isFinal: Boolean
+    konst isFinal: Boolean
     fun importsKotlinDeclarationsFromOtherObjectFiles(): Boolean
     fun importsKotlinDeclarationsFromOtherSharedLibraries(): Boolean
     fun containsLibrary(library: KotlinLibrary): Boolean

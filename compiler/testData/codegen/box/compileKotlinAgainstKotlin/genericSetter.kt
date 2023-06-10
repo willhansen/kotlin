@@ -2,7 +2,7 @@
 // FILE: 1.kt
 var <T> T.prop: Int
     get() = 33
-    set(value) {}
+    set(konstue) {}
 
 // MODULE: main(lib)
 // FILE: 2.kt

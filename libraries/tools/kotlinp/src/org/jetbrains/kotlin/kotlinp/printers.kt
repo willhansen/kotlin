@@ -10,7 +10,7 @@ import kotlinx.metadata.jvm.*
 import kotlin.contracts.ExperimentalContracts
 
 private object SpecialCharacters {
-    const val TYPE_ALIAS_MARKER = '^'
+    const konst TYPE_ALIAS_MARKER = '^'
 }
 
 @OptIn(ExperimentalContextReceivers::class, ExperimentalContracts::class)
@@ -44,7 +44,7 @@ private fun visitFunction(
         sb.append(printType(it)).append(".")
     }
     sb.append(function.name)
-    function.valueParameters.joinTo(sb, prefix = "(", postfix = ")", transform = ::printValueParameter)
+    function.konstueParameters.joinTo(sb, prefix = "(", postfix = ")", transform = ::printValueParameter)
     sb.append(": ").append(printType(function.returnType))
     sb.appendLine()
     function.contract?.let {
@@ -58,7 +58,7 @@ private fun visitProperty(
     settings: KotlinpSettings,
     sb: StringBuilder
 ) {
-    val flags: Flags = property.flags
+    konst flags: Flags = property.flags
 
     sb.appendLine()
     property.versionRequirements.map(::printVersionRequirement).forEach { versionRequirement ->
@@ -87,7 +87,7 @@ private fun visitProperty(
     }
     sb.append("  ")
     sb.appendFlags(flags, PROPERTY_FLAGS_MAP)
-    sb.append(if (Flag.Property.IS_VAR(flags)) "var " else "val ")
+    sb.append(if (Flag.Property.IS_VAR(flags)) "var " else "konst ")
     if (property.typeParameters.isNotEmpty()) {
         property.typeParameters.joinTo(sb, prefix = "<", postfix = ">", transform = { printTypeParameter(it, settings) })
         sb.append(" ")
@@ -129,7 +129,7 @@ private fun visitConstructor(constructor: KmConstructor, sb: StringBuilder) {
     sb.append("  ")
     sb.appendFlags(constructor.flags, CONSTRUCTOR_FLAGS_MAP)
     sb.append("constructor(")
-    constructor.valueParameters.joinTo(sb, transform = ::printValueParameter)
+    constructor.konstueParameters.joinTo(sb, transform = ::printValueParameter)
     sb.appendLine(")")
 }
 
@@ -157,22 +157,22 @@ private fun visitTypeAlias(
 }
 
 private fun printType(type: KmType): String {
-    val flags: Flags = type.flags
-    val classifier = when (val cls = type.classifier) {
+    konst flags: Flags = type.flags
+    konst classifier = when (konst cls = type.classifier) {
         is KmClassifier.Class -> cls.name
         is KmClassifier.TypeParameter -> "T#${cls.id}"
         is KmClassifier.TypeAlias -> "${cls.name}${SpecialCharacters.TYPE_ALIAS_MARKER}"
     }
 
-    val arguments = mutableListOf<String>()
+    konst arguments = mutableListOf<String>()
     type.arguments.forEach { argument ->
         arguments += if (argument == KmTypeProjection.STAR) {
             "*"
         } else {
-            val (variance, argumentType) = argument
+            konst (variance, argumentType) = argument
             if (variance == null || argumentType == null)
                 throw IllegalArgumentException("Variance and type must be set for non-star type projection")
-            val argumentTypeString = printType(argumentType)
+            konst argumentTypeString = printType(argumentType)
             buildString {
                 if (variance != KmVariance.INVARIANT) {
                     append(variance.name.lowercase()).append(" ")
@@ -182,9 +182,9 @@ private fun printType(type: KmType): String {
         }
     }
 
-    val abbreviatedType = type.abbreviatedType?.let(::printType)
-    val outerType = type.outerType?.let(::printType)
-    val platformTypeUpperBound = type.flexibleTypeUpperBound?.let {
+    konst abbreviatedType = type.abbreviatedType?.let(::printType)
+    konst outerType = type.outerType?.let(::printType)
+    konst platformTypeUpperBound = type.flexibleTypeUpperBound?.let {
         @Suppress("DEPRECATION")
         (if (it.typeFlexibilityId == JvmTypeExtensionVisitor.PLATFORM_TYPE_ID) {
             printType(it.type)
@@ -246,17 +246,17 @@ private fun printTypeParameter(
 }
 
 private fun printValueParameter(
-    valueParameter: KmValueParameter
+    konstueParameter: KmValueParameter
 ): String {
-    val flags: Flags = valueParameter.flags
-    val type = printType(valueParameter.type)
-    val varargElementType = valueParameter.varargElementType?.let(::printType)
+    konst flags: Flags = konstueParameter.flags
+    konst type = printType(konstueParameter.type)
+    konst varargElementType = konstueParameter.varargElementType?.let(::printType)
     return buildString {
         appendFlags(flags, VALUE_PARAMETER_FLAGS_MAP)
         if (varargElementType != null) {
-            append("vararg ").append(valueParameter.name).append(": ").append(varargElementType).append(" /* ").append(type).append(" */")
+            append("vararg ").append(konstueParameter.name).append(": ").append(varargElementType).append(" /* ").append(type).append(" */")
         } else {
-            append(valueParameter.name).append(": ").append(type)
+            append(konstueParameter.name).append(": ").append(type)
         }
         if (Flag.ValueParameter.DECLARES_DEFAULT_VALUE(flags)) {
             append(" /* = ... */")
@@ -272,19 +272,19 @@ private fun renderAnnotation(annotation: KmAnnotation): String =
 
 private fun renderAnnotationArgument(arg: KmAnnotationArgument): String =
     when (arg) {
-        is KmAnnotationArgument.ByteValue -> arg.value.toString() + ".toByte()"
-        is KmAnnotationArgument.CharValue -> "'${arg.value.toString().sanitize(quote = '\'')}'"
-        is KmAnnotationArgument.ShortValue -> arg.value.toString() + ".toShort()"
-        is KmAnnotationArgument.IntValue -> arg.value.toString()
-        is KmAnnotationArgument.LongValue -> arg.value.toString() + "L"
-        is KmAnnotationArgument.FloatValue -> arg.value.toString() + "f"
-        is KmAnnotationArgument.DoubleValue -> arg.value.toString()
-        is KmAnnotationArgument.UByteValue -> arg.value.toString() + ".toUByte()"
-        is KmAnnotationArgument.UShortValue -> arg.value.toString() + ".toUShort()"
-        is KmAnnotationArgument.UIntValue -> arg.value.toString() + "u"
-        is KmAnnotationArgument.ULongValue -> arg.value.toString() + "uL"
-        is KmAnnotationArgument.BooleanValue -> arg.value.toString()
-        is KmAnnotationArgument.StringValue -> "\"${arg.value.sanitize(quote = '"')}\""
+        is KmAnnotationArgument.ByteValue -> arg.konstue.toString() + ".toByte()"
+        is KmAnnotationArgument.CharValue -> "'${arg.konstue.toString().sanitize(quote = '\'')}'"
+        is KmAnnotationArgument.ShortValue -> arg.konstue.toString() + ".toShort()"
+        is KmAnnotationArgument.IntValue -> arg.konstue.toString()
+        is KmAnnotationArgument.LongValue -> arg.konstue.toString() + "L"
+        is KmAnnotationArgument.FloatValue -> arg.konstue.toString() + "f"
+        is KmAnnotationArgument.DoubleValue -> arg.konstue.toString()
+        is KmAnnotationArgument.UByteValue -> arg.konstue.toString() + ".toUByte()"
+        is KmAnnotationArgument.UShortValue -> arg.konstue.toString() + ".toUShort()"
+        is KmAnnotationArgument.UIntValue -> arg.konstue.toString() + "u"
+        is KmAnnotationArgument.ULongValue -> arg.konstue.toString() + "uL"
+        is KmAnnotationArgument.BooleanValue -> arg.konstue.toString()
+        is KmAnnotationArgument.StringValue -> "\"${arg.konstue.sanitize(quote = '"')}\""
         is KmAnnotationArgument.KClassValue -> "${arg.className}::class"
         is KmAnnotationArgument.ArrayKClassValue -> buildString {
             repeat(arg.arrayDimensionCount) { append("kotlin/Array<") }
@@ -293,7 +293,7 @@ private fun renderAnnotationArgument(arg: KmAnnotationArgument): String =
         }
         is KmAnnotationArgument.EnumValue -> "${arg.enumClassName}.${arg.enumEntryName}"
         is KmAnnotationArgument.AnnotationValue -> arg.annotation.let { annotation ->
-            val args = annotation.arguments.entries.joinToString { (name, argument) ->
+            konst args = annotation.arguments.entries.joinToString { (name, argument) ->
                 "$name = ${renderAnnotationArgument(argument)}"
             }
             "${annotation.className}($args)"
@@ -319,7 +319,7 @@ private fun String.sanitize(quote: Char): String =
     }
 
 private fun printVersionRequirement(versionRequirement: KmVersionRequirement): String {
-    val version = with(versionRequirement.version) { "$major.$minor.$patch" }
+    konst version = with(versionRequirement.version) { "$major.$minor.$patch" }
 
     return buildString {
         append("requires ").append(
@@ -395,7 +395,7 @@ private fun printEffect(
             argument = printEffectExpression(it)
         }
     }
-    val conclusion: String? = kmEffect.conclusion?.let(::printEffectExpression)
+    konst conclusion: String? = kmEffect.conclusion?.let(::printEffectExpression)
 
     return buildString {
         when (kmEffect.type) {
@@ -427,11 +427,11 @@ private fun printEffect(
 
 @ExperimentalContracts
 private fun printEffectExpression(effectExpression: KmEffectExpression): String {
-    val flags: Flags = effectExpression.flags
-    val parameterIndex: Int? = effectExpression.parameterIndex
-    val constantValue: List<Any?>? = effectExpression.constantValue?.let { listOf(it.value) }
-    val andArguments = effectExpression.andArguments.map(::printEffectExpression)
-    val orArguments = effectExpression.orArguments.map(::printEffectExpression)
+    konst flags: Flags = effectExpression.flags
+    konst parameterIndex: Int? = effectExpression.parameterIndex
+    konst constantValue: List<Any?>? = effectExpression.constantValue?.let { listOf(it.konstue) }
+    konst andArguments = effectExpression.andArguments.map(::printEffectExpression)
+    konst orArguments = effectExpression.orArguments.map(::printEffectExpression)
 
     fun wrapIfNeeded(s: String): String =
         // A simple heuristic to avoid wrapping into unnecessary parentheses
@@ -474,16 +474,16 @@ interface AbstractPrinter<in T : KotlinClassMetadata> {
     fun print(klass: T): String
 }
 
-class ClassPrinter(private val settings: KotlinpSettings) : AbstractPrinter<KotlinClassMetadata.Class> {
-    private val sb = StringBuilder()
-    internal val result = StringBuilder()
+class ClassPrinter(private konst settings: KotlinpSettings) : AbstractPrinter<KotlinClassMetadata.Class> {
+    private konst sb = StringBuilder()
+    internal konst result = StringBuilder()
 
     private var flags: Flags? = null
     private var name: ClassName? = null
-    private val typeParams = mutableListOf<String>()
-    private val supertypes = mutableListOf<String>()
-    private val contextReceiverTypes = mutableListOf<String>()
-    private val versionRequirements = mutableListOf<String>()
+    private konst typeParams = mutableListOf<String>()
+    private konst supertypes = mutableListOf<String>()
+    private konst contextReceiverTypes = mutableListOf<String>()
+    private konst versionRequirements = mutableListOf<String>()
     private var anonymousObjectOriginName: String? = null
 
     private fun visitEnd() {
@@ -545,9 +545,9 @@ class ClassPrinter(private val settings: KotlinpSettings) : AbstractPrinter<Kotl
     }
 
     private fun visitExtensions(kclass: KmClass) {
-        val localDelegatedProperties = mutableListOf<StringBuilder>()
-        val moduleName: String? = kclass.moduleName
-        val jvmFlags: Flags = kclass.jvmFlags
+        konst localDelegatedProperties = mutableListOf<StringBuilder>()
+        konst moduleName: String? = kclass.moduleName
+        konst jvmFlags: Flags = kclass.jvmFlags
         anonymousObjectOriginName = kclass.anonymousObjectOriginName
 
         kclass.localDelegatedProperties.sortIfNeededBy(settings) { it.getterSignature?.toString() ?: it.name }.forEach { p ->
@@ -597,14 +597,14 @@ class ClassPrinter(private val settings: KotlinpSettings) : AbstractPrinter<Kotl
     }
 }
 
-abstract class PackagePrinter(private val settings: KotlinpSettings) {
-    internal val sb = StringBuilder().apply {
+abstract class PackagePrinter(private konst settings: KotlinpSettings) {
+    internal konst sb = StringBuilder().apply {
         appendLine("package {")
     }
 
     private fun visitExtensions(kmPackage: KmPackage) {
-        val localDelegatedProperties = mutableListOf<StringBuilder>()
-        val moduleName: String? = kmPackage.moduleName
+        konst localDelegatedProperties = mutableListOf<StringBuilder>()
+        konst moduleName: String? = kmPackage.moduleName
 
         kmPackage.localDelegatedProperties.sortIfNeededBy(settings) { it.getterSignature?.toString() ?: it.name }.forEach { p ->
             visitProperty(p, settings, StringBuilder().also { localDelegatedProperties.add(it) })
@@ -630,12 +630,12 @@ class FileFacadePrinter(settings: KotlinpSettings) : PackagePrinter(settings), A
     }
 }
 
-class LambdaPrinter(private val settings: KotlinpSettings) : AbstractPrinter<KotlinClassMetadata.SyntheticClass> {
+class LambdaPrinter(private konst settings: KotlinpSettings) : AbstractPrinter<KotlinClassMetadata.SyntheticClass> {
     override fun print(klass: KotlinClassMetadata.SyntheticClass): String {
-        val sb = StringBuilder().apply {
+        konst sb = StringBuilder().apply {
             appendLine("lambda {")
         }
-        val kLambda = klass.toKmLambda() ?: throw KotlinpException("Synthetic class $klass is not a lambda")
+        konst kLambda = klass.toKmLambda() ?: throw KotlinpException("Synthetic class $klass is not a lambda")
         visitFunction(kLambda.function, settings, sb)
         sb.appendLine("}")
         return sb.toString()
@@ -663,15 +663,15 @@ class MultiFileClassFacadePrinter : AbstractPrinter<KotlinClassMetadata.MultiFil
         }
 }
 
-class ModuleFilePrinter(private val settings: KotlinpSettings) {
-    private val optionalAnnotations = mutableListOf<String>()
+class ModuleFilePrinter(private konst settings: KotlinpSettings) {
+    private konst optionalAnnotations = mutableListOf<String>()
 
-    private val sb = StringBuilder().apply {
+    private konst sb = StringBuilder().apply {
         appendLine("module {")
     }
 
     private fun visitPackageParts(fqName: String, fileFacades: List<String>, multiFileClassParts: Map<String, String>) {
-        val presentableFqName = fqName.ifEmpty { "<root>" }
+        konst presentableFqName = fqName.ifEmpty { "<root>" }
         sb.appendLine("  package $presentableFqName {")
         for (fileFacade in fileFacades) {
             sb.appendLine("    $fileFacade")
@@ -696,7 +696,7 @@ class ModuleFilePrinter(private val settings: KotlinpSettings) {
 
     @UnstableMetadataApi
     fun print(metadata: KotlinModuleMetadata): String {
-        val kmModule = metadata.toKmModule()
+        konst kmModule = metadata.toKmModule()
         kmModule.packageParts.forEach { (fqName, kmPackageParts) ->
             visitPackageParts(fqName, kmPackageParts.fileFacades, kmPackageParts.multiFileClassParts)
         }
@@ -707,7 +707,7 @@ class ModuleFilePrinter(private val settings: KotlinpSettings) {
     }
 }
 
-private val VISIBILITY_FLAGS_MAP = mapOf(
+private konst VISIBILITY_FLAGS_MAP = mapOf(
     Flag.IS_INTERNAL to "internal",
     Flag.IS_PRIVATE to "private",
     Flag.IS_PRIVATE_TO_THIS to "private",
@@ -716,19 +716,19 @@ private val VISIBILITY_FLAGS_MAP = mapOf(
     Flag.IS_LOCAL to "local"
 )
 
-private val COMMON_FLAGS_MAP = VISIBILITY_FLAGS_MAP + mapOf(
+private konst COMMON_FLAGS_MAP = VISIBILITY_FLAGS_MAP + mapOf(
     Flag.IS_FINAL to "final",
     Flag.IS_OPEN to "open",
     Flag.IS_ABSTRACT to "abstract",
     Flag.IS_SEALED to "sealed"
 )
 
-private val CLASS_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
+private konst CLASS_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
     Flag.Class.IS_INNER to "inner",
     Flag.Class.IS_DATA to "data",
     Flag.Class.IS_EXTERNAL to "external",
     Flag.Class.IS_EXPECT to "expect",
-    Flag.Class.IS_VALUE to "value",
+    Flag.Class.IS_VALUE to "konstue",
     Flag.Class.IS_FUN to "fun",
 
     Flag.Class.IS_CLASS to "class",
@@ -740,12 +740,12 @@ private val CLASS_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
     Flag.Class.IS_COMPANION_OBJECT to "companion object"
 )
 
-private val CONSTRUCTOR_FLAGS_MAP = VISIBILITY_FLAGS_MAP + mapOf(
+private konst CONSTRUCTOR_FLAGS_MAP = VISIBILITY_FLAGS_MAP + mapOf(
     Flag.Constructor.IS_SECONDARY to "/* secondary */",
     Flag.Constructor.HAS_NON_STABLE_PARAMETER_NAMES to "/* non-stable parameter names */"
 )
 
-private val FUNCTION_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
+private konst FUNCTION_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
     Flag.Function.IS_DECLARATION to "",
     Flag.Function.IS_FAKE_OVERRIDE to "/* fake override */",
     Flag.Function.IS_DELEGATION to "/* delegation */",
@@ -762,7 +762,7 @@ private val FUNCTION_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
     Flag.Function.HAS_NON_STABLE_PARAMETER_NAMES to "/* non-stable parameter names */"
 )
 
-private val PROPERTY_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
+private konst PROPERTY_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
     Flag.Property.IS_DECLARATION to "",
     Flag.Property.IS_FAKE_OVERRIDE to "/* fake override */",
     Flag.Property.IS_DELEGATION to "/* delegation */",
@@ -775,21 +775,21 @@ private val PROPERTY_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
     Flag.Property.IS_EXPECT to "expect"
 )
 
-private val PROPERTY_ACCESSOR_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
+private konst PROPERTY_ACCESSOR_FLAGS_MAP = COMMON_FLAGS_MAP + mapOf(
     Flag.PropertyAccessor.IS_NOT_DEFAULT to "/* non-default */",
     Flag.PropertyAccessor.IS_EXTERNAL to "external",
     Flag.PropertyAccessor.IS_INLINE to "inline"
 )
 
-private val VALUE_PARAMETER_FLAGS_MAP = mapOf(
+private konst VALUE_PARAMETER_FLAGS_MAP = mapOf(
     Flag.ValueParameter.IS_CROSSINLINE to "crossinline",
     Flag.ValueParameter.IS_NOINLINE to "noinline"
 )
 
-private val TYPE_PARAMETER_FLAGS_MAP = mapOf(
+private konst TYPE_PARAMETER_FLAGS_MAP = mapOf(
     Flag.TypeParameter.IS_REIFIED to "reified"
 )
 
-private val TYPE_FLAGS_MAP = mapOf(
+private konst TYPE_FLAGS_MAP = mapOf(
     Flag.Type.IS_SUSPEND to "suspend"
 )

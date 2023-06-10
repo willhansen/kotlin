@@ -9,14 +9,14 @@
 import java.lang.reflect.InvocationTargetException
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Simple(val x: String) {
+konstue class Simple(konst x: String) {
     fun somethingWeird() {}
 }
 
 fun box(): String {
     var s = ""
-    val name = "equals-impl0"
-    val specializedEquals =
+    konst name = "equals-impl0"
+    konst specializedEquals =
         Simple::class.java.getDeclaredMethod(name, String::class.java, String::class.java)
             ?: return "$name not found"
 

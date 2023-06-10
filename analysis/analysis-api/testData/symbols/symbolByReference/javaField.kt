@@ -1,7 +1,7 @@
 // DO_NOT_CHECK_SYMBOL_RESTORE_K1
 // FILE: main.kt
 fun some() {
-    val jClass = JavaClass()
+    konst jClass = JavaClass()
     jClass.<caret>field;
 }
 

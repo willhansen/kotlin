@@ -5,7 +5,7 @@ import foo.A
 @example.ExampleAnnotation
 class B {
     @field:example.ExampleAnnotation
-    val valB = "text"
+    konst konstB = "text"
 
     @example.ExampleAnnotation
     fun funB() {}

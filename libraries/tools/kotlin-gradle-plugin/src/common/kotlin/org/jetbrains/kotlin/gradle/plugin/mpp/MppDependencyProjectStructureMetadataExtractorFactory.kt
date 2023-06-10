@@ -13,40 +13,40 @@ import org.jetbrains.kotlin.gradle.plugin.extraProperties
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.toSingleKpmModuleIdentifier
 import org.jetbrains.kotlin.gradle.utils.getOrPut
 
-internal val Project.kotlinMppDependencyProjectStructureMetadataExtractorFactory: MppDependencyProjectStructureMetadataExtractorFactory
+internal konst Project.kotlinMppDependencyProjectStructureMetadataExtractorFactory: MppDependencyProjectStructureMetadataExtractorFactory
     get() = MppDependencyProjectStructureMetadataExtractorFactory.getOrCreate(this)
 
 internal data class ProjectPathWithBuildName(
-    val projectPath: String,
-    val buildName: String
+    konst projectPath: String,
+    konst buildName: String
 )
 
 internal class MppDependencyProjectStructureMetadataExtractorFactory
 private constructor(
-    private val includedBuildsProjectStructureMetadataProviders: Lazy<Map<ProjectPathWithBuildName, Lazy<KotlinProjectStructureMetadata?>>>,
-    private val currentBuildProjectStructureMetadataProviders: Map<String, Lazy<KotlinProjectStructureMetadata?>>
+    private konst includedBuildsProjectStructureMetadataProviders: Lazy<Map<ProjectPathWithBuildName, Lazy<KotlinProjectStructureMetadata?>>>,
+    private konst currentBuildProjectStructureMetadataProviders: Map<String, Lazy<KotlinProjectStructureMetadata?>>
 ) {
     fun create(
         metadataArtifact: ResolvedArtifactResult
     ): MppDependencyProjectStructureMetadataExtractor {
-        val moduleId = metadataArtifact.variant.owner
+        konst moduleId = metadataArtifact.variant.owner
 
         return if (moduleId is ProjectComponentIdentifier) {
             if (moduleId.build.isCurrentBuild) {
-                val projectStructureMetadataProvider = currentBuildProjectStructureMetadataProviders[moduleId.projectPath]
+                konst projectStructureMetadataProvider = currentBuildProjectStructureMetadataProviders[moduleId.projectPath]
                     ?: error("Project structure metadata not found for project '${moduleId.projectPath}'")
 
                 ProjectMppDependencyProjectStructureMetadataExtractor(
                     moduleIdentifier = metadataArtifact.variant.toSingleKpmModuleIdentifier(),
                     projectPath = moduleId.projectPath,
-                    projectStructureMetadataProvider = projectStructureMetadataProvider::value
+                    projectStructureMetadataProvider = projectStructureMetadataProvider::konstue
                 )
             } else {
-                val key = ProjectPathWithBuildName(moduleId.projectPath, moduleId.build.name)
+                konst key = ProjectPathWithBuildName(moduleId.projectPath, moduleId.build.name)
                 IncludedBuildMppDependencyProjectStructureMetadataExtractor(
                     componentId = moduleId,
                     primaryArtifact = metadataArtifact.file,
-                    projectStructureMetadataProvider = { includedBuildsProjectStructureMetadataProviders.value[key]?.value }
+                    projectStructureMetadataProvider = { includedBuildsProjectStructureMetadataProviders.konstue[key]?.konstue }
                 )
             }
         } else {
@@ -55,7 +55,7 @@ private constructor(
     }
 
     companion object {
-        private val extensionName = MppDependencyProjectStructureMetadataExtractorFactory::class.java.simpleName
+        private konst extensionName = MppDependencyProjectStructureMetadataExtractorFactory::class.java.simpleName
         fun getOrCreate(project: Project): MppDependencyProjectStructureMetadataExtractorFactory =
             project.rootProject.extraProperties.getOrPut(extensionName) {
                 MppDependencyProjectStructureMetadataExtractorFactory(

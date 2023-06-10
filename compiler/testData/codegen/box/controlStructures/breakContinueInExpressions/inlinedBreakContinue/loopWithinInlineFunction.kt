@@ -14,7 +14,7 @@ inline fun <T> Iterable<T>.myForEach(action: (T) -> Unit): Unit {
 
 
 fun box(): String {
-    val visited = mutableListOf<Pair<Int, Int>>()
+    konst visited = mutableListOf<Pair<Int, Int>>()
 
     for (i in 1..3) {
         (1..3).myForEach { j ->

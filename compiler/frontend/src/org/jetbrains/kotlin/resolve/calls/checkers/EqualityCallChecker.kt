@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 
 object EqualityCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val callExpression = resolvedCall.call.callElement as? KtBinaryExpression ?: return
-        val operationType = callExpression.operationReference.getReferencedNameElementType()
+        konst callExpression = resolvedCall.call.callElement as? KtBinaryExpression ?: return
+        konst operationType = callExpression.operationReference.getReferencedNameElementType()
 
         if (operationType in OperatorConventions.EQUALS_OPERATIONS) {
             checkEquality(resolvedCall, callExpression, context.resolutionContext)
@@ -35,8 +35,8 @@ object EqualityCallChecker : CallChecker {
     }
 
     private fun checkEquality(resolvedCall: ResolvedCall<*>, expression: KtBinaryExpression, context: ResolutionContext<*>) {
-        val returnType = resolvedCall.resultingDescriptor.returnType ?: return
-        val builtIns = returnType.builtIns
+        konst returnType = resolvedCall.resultingDescriptor.returnType ?: return
+        konst builtIns = returnType.builtIns
 
         if (!builtIns.isBooleanOrSubtype(returnType)) {
             context.trace.report(
@@ -60,11 +60,11 @@ object EqualityCallChecker : CallChecker {
     }
 
     private fun checkIdentityOnPrimitiveOrInlineClassTypes(expression: KtBinaryExpression, context: ResolutionContext<*>) {
-        val left = expression.left ?: return
-        val right = expression.right ?: return
+        konst left = expression.left ?: return
+        konst right = expression.right ?: return
 
-        val leftType = context.trace.getType(left) ?: return
-        val rightType = context.trace.getType(right) ?: return
+        konst leftType = context.trace.getType(left) ?: return
+        konst rightType = context.trace.getType(right) ?: return
 
         if (KotlinTypeChecker.DEFAULT.equalTypes(leftType, rightType)) {
             if (KotlinBuiltIns.isPrimitiveType(leftType)) {
@@ -84,19 +84,19 @@ object EqualityCallChecker : CallChecker {
                 && KotlinTypeChecker.DEFAULT.isSubtypeOf(leftType, rightType)
 
     private fun ensureNonemptyIntersectionOfOperandTypes(expression: KtBinaryExpression, context: ResolutionContext<*>) {
-        val left = expression.left ?: return
-        val right = expression.right ?: return
+        konst left = expression.left ?: return
+        konst right = expression.right ?: return
 
-        val leftType = context.trace.getType(left) ?: return
-        val rightType = context.trace.getType(right) ?: return
+        konst leftType = context.trace.getType(left) ?: return
+        konst rightType = context.trace.getType(right) ?: return
 
         if (TypeIntersector.isIntersectionEmpty(leftType, rightType)) {
-            val isProperEqualityChecksEnabled =
+            konst isProperEqualityChecksEnabled =
                 context.languageVersionSettings.supportsFeature(LanguageFeature.ProperEqualityChecksInBuilderInferenceCalls)
-            val shouldReportWarnings = !isProperEqualityChecksEnabled
+            konst shouldReportWarnings = !isProperEqualityChecksEnabled
                     && context.inferenceSession is BuilderInferenceSession
                     && context.trace.get(BindingContext.MARKED_EQUALIY_CALL_PROPER_IN_BUILDER_INFERENCE, expression) != null
-            val diagnostic = if (shouldReportWarnings) Errors.EQUALITY_NOT_APPLICABLE_WARNING else Errors.EQUALITY_NOT_APPLICABLE
+            konst diagnostic = if (shouldReportWarnings) Errors.EQUALITY_NOT_APPLICABLE_WARNING else Errors.EQUALITY_NOT_APPLICABLE
 
             context.trace.report(diagnostic.on(expression, expression.operationReference, leftType, rightType))
         } else {

@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.utils.identity
 object CompareToBOIF : BinaryOperationIntrinsicFactory {
     override fun getSupportTokens(): Set<KtSingleValueToken> = OperatorConventions.COMPARISON_OPERATIONS
 
-    private val patterns = listOf(
+    private konst patterns = listOf(
         pattern("Int|Short|Byte|Float|Double.compareTo(Long)") to binaryIntrinsic(toRight = { r, _ -> longToNumber(r) }),
         pattern("Long.compareTo(Int|Short|Byte|Float|Double)") to binaryIntrinsic(toLeft = { l, _ -> longToNumber(l) }),
         // L.compareTo(R) OP 0

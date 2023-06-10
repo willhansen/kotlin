@@ -7,7 +7,7 @@ fun fn0() {}
 fun fn1(x: Any) {}
 
 inline fun <reified T> reifiedSafeAsReturnsNonNull(x: Any?, operation: String) {
-    val y = try {
+    konst y = try {
         x as? T
     }
     catch (e: Throwable) {
@@ -19,7 +19,7 @@ inline fun <reified T> reifiedSafeAsReturnsNonNull(x: Any?, operation: String) {
 }
 
 inline fun <reified T> reifiedSafeAsReturnsNull(x: Any?, operation: String) {
-    val y = try {
+    konst y = try {
         x as? T
     }
     catch (e: Throwable) {
@@ -31,8 +31,8 @@ inline fun <reified T> reifiedSafeAsReturnsNull(x: Any?, operation: String) {
 }
 
 fun box(): String {
-    val f0 = ::fn0 as Any
-    val f1 = ::fn1 as Any
+    konst f0 = ::fn0 as Any
+    konst f1 = ::fn1 as Any
 
     reifiedSafeAsReturnsNonNull<Function0<*>>(f0, "f0 as Function0<*>")
     reifiedSafeAsReturnsNull<Function1<*, *>>(f0, "f0 as Function1<*, *>")

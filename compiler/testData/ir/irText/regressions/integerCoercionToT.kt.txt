@@ -16,26 +16,26 @@ class CInt32VarX<T : Any?> : CPointed {
 }
 
 typealias CInt32Var = CInt32VarX<Int>
-var <T_INT : Int> CInt32VarX<T_INT>.value: T_INT
+var <T_INT : Int> CInt32VarX<T_INT>.konstue: T_INT
   get(): T_INT {
     return TODO()
   }
-  set(value: T_INT) {
+  set(konstue: T_INT) {
   }
 
 class IdType : CPointed {
-  constructor(value: Int) /* primary */ {
+  constructor(konstue: Int) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: Int
-    field = value
+  konst konstue: Int
+    field = konstue
     get
 
 }
 
-fun foo(value: IdType, cv: CInt32VarX<Int>) {
-  cv.<set-value><Int>(value = value.<get-value>())
+fun foo(konstue: IdType, cv: CInt32VarX<Int>) {
+  cv.<set-konstue><Int>(konstue = konstue.<get-konstue>())
 }

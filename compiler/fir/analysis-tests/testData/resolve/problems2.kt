@@ -11,16 +11,16 @@ class Externer {
 }
 
 interface Some {
-    data class WithPrimary(val x: Int, val arr: Array<String>? = null, val s: String? = null)
+    data class WithPrimary(konst x: Int, konst arr: Array<String>? = null, konst s: String? = null)
 }
 
 fun test() {
     Some.WithPrimary(42, arrayOf("alpha", "omega"))
 }
 
-class KonanTarget(val name: String)
+class KonanTarget(konst name: String)
 
-val KonanTarget.presetName
+konst KonanTarget.presetName
     get() = this.name
 
 // Own private property conflicts with synthetic property from Java supertype

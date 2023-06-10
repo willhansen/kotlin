@@ -10,10 +10,10 @@ var z2 = false
 
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 @EagerInitialization
-val x = run { z1 = true; 42 }
+konst x = run { z1 = true; 42 }
 
 // Won't be initialized (cause no function from the file will be called during [x] initialization).
-val y = run { z2 = true; 117 }
+konst y = run { z2 = true; 117 }
 
 // FILE: main.kt
 

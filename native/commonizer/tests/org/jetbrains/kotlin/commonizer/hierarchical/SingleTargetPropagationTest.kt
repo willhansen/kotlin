@@ -20,7 +20,7 @@ class SingleTargetPropagationTest : AbstractInlineSourcesCommonizationTest() {
      */
     @Test
     fun `test single native target in hierarchy`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             simpleSingleSourceTarget("a", """class A""")
         }

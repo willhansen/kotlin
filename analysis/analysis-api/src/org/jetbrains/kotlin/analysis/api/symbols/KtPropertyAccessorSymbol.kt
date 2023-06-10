@@ -17,19 +17,19 @@ public sealed class KtPropertyAccessorSymbol : KtFunctionLikeSymbol(),
     KtSymbolWithVisibility,
     KtSymbolWithKind {
 
-    final override val isExtension: Boolean get() = withValidityAssertion { false }
+    final override konst isExtension: Boolean get() = withValidityAssertion { false }
 
-    final override val typeParameters: List<KtTypeParameterSymbol>
+    final override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { emptyList() }
 
-    final override val contextReceivers: List<KtContextReceiver> get() = withValidityAssertion { emptyList() }
+    final override konst contextReceivers: List<KtContextReceiver> get() = withValidityAssertion { emptyList() }
 
-    public abstract val isDefault: Boolean
-    public abstract val isInline: Boolean
-    public abstract val isOverride: Boolean
-    public abstract val hasBody: Boolean
+    public abstract konst isDefault: Boolean
+    public abstract konst isInline: Boolean
+    public abstract konst isOverride: Boolean
+    public abstract konst hasBody: Boolean
 
-    final override val symbolKind: KtSymbolKind get() = withValidityAssertion { KtSymbolKind.ACCESSOR }
+    final override konst symbolKind: KtSymbolKind get() = withValidityAssertion { KtSymbolKind.ACCESSOR }
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtPropertyAccessorSymbol>
@@ -41,7 +41,7 @@ public abstract class KtPropertyGetterSymbol : KtPropertyAccessorSymbol() {
 }
 
 public abstract class KtPropertySetterSymbol : KtPropertyAccessorSymbol() {
-    public abstract val parameter: KtValueParameterSymbol
+    public abstract konst parameter: KtValueParameterSymbol
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtPropertySetterSymbol>

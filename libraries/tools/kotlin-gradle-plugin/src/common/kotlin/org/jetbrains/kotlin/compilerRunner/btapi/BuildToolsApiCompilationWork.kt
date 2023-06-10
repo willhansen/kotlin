@@ -21,21 +21,21 @@ import java.util.*
 
 internal abstract class BuildToolsApiCompilationWork : WorkAction<BuildToolsApiCompilationWork.BuildToolsApiCompilationParameters> {
     internal interface BuildToolsApiCompilationParameters : WorkParameters {
-        val classLoadersCachingService: Property<ClassLoadersCachingBuildService>
-        val compilerWorkArguments: Property<GradleKotlinCompilerWorkArguments>
-        val taskOutputsToRestore: ListProperty<File>
-        val snapshotsDir: DirectoryProperty
-        val buildDir: DirectoryProperty
-        val metricsReporter: Property<BuildMetricsReporter>
+        konst classLoadersCachingService: Property<ClassLoadersCachingBuildService>
+        konst compilerWorkArguments: Property<GradleKotlinCompilerWorkArguments>
+        konst taskOutputsToRestore: ListProperty<File>
+        konst snapshotsDir: DirectoryProperty
+        konst buildDir: DirectoryProperty
+        konst metricsReporter: Property<BuildMetricsReporter>
     }
 
-    private val workArguments
+    private konst workArguments
         get() = parameters.compilerWorkArguments.get()
 
     override fun execute() {
-        val classLoader = parameters.classLoadersCachingService.get()
+        konst classLoader = parameters.classLoadersCachingService.get()
             .getClassLoader(workArguments.compilerFullClasspath, SharedApiClassesClassLoaderProvider)
-        val compilationService = CompilationService.loadImplementation(classLoader)
+        konst compilationService = CompilationService.loadImplementation(classLoader)
         compilationService.compile()
     }
 }

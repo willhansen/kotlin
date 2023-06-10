@@ -38,19 +38,19 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 /**
  * Create wrappers for external and @JsExport functions when type adaptation is needed
  */
-class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationTransformer {
-    val builtIns = context.irBuiltIns
-    val symbols = context.wasmSymbols
-    val adapters = symbols.jsInteropAdapters
+class JsInteropFunctionsLowering(konst context: WasmBackendContext) : DeclarationTransformer {
+    konst builtIns = context.irBuiltIns
+    konst symbols = context.wasmSymbols
+    konst adapters = symbols.jsInteropAdapters
 
-    val additionalDeclarations = mutableListOf<IrDeclaration>()
+    konst additionalDeclarations = mutableListOf<IrDeclaration>()
     lateinit var currentParent: IrDeclarationParent
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration.isFakeOverride) return null
         if (declaration !is IrSimpleFunction) return null
-        val isExported = declaration.isExported()
-        val isExternal = declaration.isExternal || declaration.getJsFunAnnotation() != null
+        konst isExported = declaration.isExported()
+        konst isExternal = declaration.isExternal || declaration.getJsFunAnnotation() != null
         if (declaration.isPropertyAccessor) return null
         if (declaration.parent !is IrPackageFragment) return null
         if (!isExported && !isExternal) return null
@@ -61,7 +61,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
 
         additionalDeclarations.clear()
         currentParent = declaration.parent
-        val newDeclarations = if (isExternal)
+        konst newDeclarations = if (isExternal)
             transformExternalFunction(declaration)
         else
             transformExportFunction(declaration)
@@ -70,8 +70,8 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
     }
 
     private fun doubleIfNumber(possiblyNumber: IrType): IrType {
-        val isNullable = possiblyNumber.isNullable()
-        val notNullType = possiblyNumber.makeNotNull()
+        konst isNullable = possiblyNumber.isNullable()
+        konst notNullType = possiblyNumber.makeNotNull()
         if (notNullType != builtIns.numberType) return possiblyNumber
         return if (isNullable) builtIns.doubleType.makeNullable() else builtIns.doubleType
     }
@@ -85,37 +85,37 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
      *  fun foo__externalAdapter(x: KotlinType): KotlinType = adaptResult(foo(adaptParameter(x)));
      */
     fun transformExternalFunction(function: IrSimpleFunction): List<IrDeclaration>? {
-        // External functions with default parameter values are already processed by
+        // External functions with default parameter konstues are already processed by
         // [ComplexExternalDeclarationsToTopLevelFunctionsLowering]
-        if (function.valueParameters.any { it.defaultValue != null })
+        if (function.konstueParameters.any { it.defaultValue != null })
             return null
 
         // Patch function types for Number parameters as double
         function.returnType = doubleIfNumber(function.returnType)
 
-        val valueParametersAdapters = function.valueParameters.map { parameter ->
-            val varargElementType = parameter.varargElementType
+        konst konstueParametersAdapters = function.konstueParameters.map { parameter ->
+            konst varargElementType = parameter.varargElementType
             if (varargElementType != null) {
                 CopyToJsArrayAdapter(parameter.type, varargElementType)
             } else {
                 parameter.type.kotlinToJsAdapterIfNeeded(isReturn = false)
             }
         }
-        val resultAdapter =
+        konst resultAdapter =
             function.returnType.jsToKotlinAdapterIfNeeded(isReturn = true)
 
-        if (resultAdapter == null && valueParametersAdapters.all { it == null })
+        if (resultAdapter == null && konstueParametersAdapters.all { it == null })
             return null
 
-        val newFun = context.irFactory.createStaticFunctionWithReceivers(
+        konst newFun = context.irFactory.createStaticFunctionWithReceivers(
             function.parent,
             name = Name.identifier(function.name.asStringStripSpecialMarkers() + "__externalAdapter"),
             function,
             remapMultiFieldValueClassStructure = context::remapMultiFieldValueClassStructure
         )
 
-        function.valueParameters.forEachIndexed { index, newParameter ->
-            val adapter = valueParametersAdapters[index]
+        function.konstueParameters.forEachIndexed { index, newParameter ->
+            konst adapter = konstueParametersAdapters[index]
             if (adapter != null) {
                 newParameter.type = adapter.toType
             }
@@ -124,8 +124,8 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             function.returnType = resultAdapter.fromType
         }
 
-        val builder = context.createIrBuilder(newFun.symbol)
-        newFun.body = createAdapterFunctionBody(builder, newFun, function, valueParametersAdapters, resultAdapter)
+        konst builder = context.createIrBuilder(newFun.symbol)
+        newFun.body = createAdapterFunctionBody(builder, newFun, function, konstueParametersAdapters, resultAdapter)
         newFun.annotations = emptyList()
 
         context.mapping.wasmJsInteropFunctionToWrapper[function] = newFun
@@ -146,24 +146,24 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
      *  fun foo(x: KotlinType): KotlinType { <original-body> }
      */
     fun transformExportFunction(function: IrSimpleFunction): List<IrDeclaration>? {
-        val valueParametersAdapters = function.valueParameters.map {
+        konst konstueParametersAdapters = function.konstueParameters.map {
             it.type.jsToKotlinAdapterIfNeeded(isReturn = false)
         }
-        val resultAdapter =
+        konst resultAdapter =
             function.returnType.kotlinToJsAdapterIfNeeded(isReturn = true)
 
-        if (resultAdapter == null && valueParametersAdapters.all { it == null })
+        if (resultAdapter == null && konstueParametersAdapters.all { it == null })
             return null
 
-        val newFun = context.irFactory.createStaticFunctionWithReceivers(
+        konst newFun = context.irFactory.createStaticFunctionWithReceivers(
             function.parent,
             name = Name.identifier(function.name.asStringStripSpecialMarkers() + "__JsExportAdapter"),
             function,
             remapMultiFieldValueClassStructure = context::remapMultiFieldValueClassStructure
         )
 
-        newFun.valueParameters.forEachIndexed { index, newParameter ->
-            val adapter = valueParametersAdapters[index]
+        newFun.konstueParameters.forEachIndexed { index, newParameter ->
+            konst adapter = konstueParametersAdapters[index]
             if (adapter != null) {
                 newParameter.type = adapter.fromType
             }
@@ -173,8 +173,8 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         }
 
         // Delegate new function to old function:
-        val builder: DeclarationIrBuilder = context.createIrBuilder(newFun.symbol)
-        newFun.body = createAdapterFunctionBody(builder, newFun, function, valueParametersAdapters, resultAdapter)
+        konst builder: DeclarationIrBuilder = context.createIrBuilder(newFun.symbol)
+        newFun.body = createAdapterFunctionBody(builder, newFun, function, konstueParametersAdapters, resultAdapter)
 
         newFun.annotations += builder.irCallConstructor(context.wasmSymbols.jsNameConstructor, typeArguments = emptyList()).also {
             it.putValueArgument(0, builder.irString(function.getJsNameOrKotlinName().identifier))
@@ -188,21 +188,21 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         builder: DeclarationIrBuilder,
         function: IrSimpleFunction,
         functionToCall: IrSimpleFunction,
-        valueParametersAdapters: List<InteropTypeAdapter?>,
+        konstueParametersAdapters: List<InteropTypeAdapter?>,
         resultAdapter: InteropTypeAdapter?
     ) = builder.irBlockBody {
         +irReturn(
             irCall(functionToCall).let { call ->
-                for ((index, valueParameter) in function.valueParameters.withIndex()) {
-                    val get = irGet(valueParameter)
-                    call.putValueArgument(index, valueParametersAdapters[index].adaptIfNeeded(get, builder))
+                for ((index, konstueParameter) in function.konstueParameters.withIndex()) {
+                    konst get = irGet(konstueParameter)
+                    call.putValueArgument(index, konstueParametersAdapters[index].adaptIfNeeded(get, builder))
                 }
                 resultAdapter.adaptIfNeeded(call, builder)
             }
         )
     }
 
-    val primitivesToExternRefAdapters: Map<IrType, InteropTypeAdapter> = mapOf(
+    konst primitivesToExternRefAdapters: Map<IrType, InteropTypeAdapter> = mapOf(
         builtIns.byteType to adapters.kotlinByteToExternRefAdapter,
         builtIns.shortType to adapters.kotlinShortToExternRefAdapter,
         builtIns.charType to adapters.kotlinCharToExternRefAdapter,
@@ -210,7 +210,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         builtIns.longType to adapters.kotlinLongToExternRefAdapter,
         builtIns.floatType to adapters.kotlinFloatToExternRefAdapter,
         builtIns.doubleType to adapters.kotlinDoubleToExternRefAdapter,
-    ).mapValues { FunctionBasedAdapter(it.value.owner) }
+    ).mapValues { FunctionBasedAdapter(it.konstue.owner) }
 
     private fun IrType.kotlinToJsAdapterIfNeeded(isReturn: Boolean): InteropTypeAdapter? {
         if (isReturn && this == builtIns.unitType)
@@ -223,7 +223,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             return kotlinToJsAdapterIfNeededNotNullable(isReturn)
         }
 
-        val notNullType = makeNotNull()
+        konst notNullType = makeNotNull()
 
         if (notNullType == builtIns.numberType) {
             return NullOrAdapter(
@@ -234,9 +234,9 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             )
         }
 
-        val primitiveToExternRefAdapter = primitivesToExternRefAdapters[notNullType]
+        konst primitiveToExternRefAdapter = primitivesToExternRefAdapters[notNullType]
 
-        val typeAdapter = primitiveToExternRefAdapter
+        konst typeAdapter = primitiveToExternRefAdapter
             ?: notNullType.kotlinToJsAdapterIfNeededNotNullable(isReturn)
             ?: return null
 
@@ -275,7 +275,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             return null
 
         if (this is IrSimpleType && this.isFunction()) {
-            val functionTypeInfo = FunctionTypeInfo(this, toJs = true)
+            konst functionTypeInfo = FunctionTypeInfo(this, toJs = true)
 
             // Kotlin's closures are objects that implement FunctionN interface.
             // JavaScript can receive opaque reference to them but cannot call them directly.
@@ -304,7 +304,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             //     }""")
             //     external fun __convertKotlinClosureToJsClosure_<signatureString>(f: structref): ExternalRef
             //
-            val kotlinToJsClosureConvertor = context.kotlinClosureToJsConverters.getOrPut(functionTypeInfo.signatureString) {
+            konst kotlinToJsClosureConvertor = context.kotlinClosureToJsConverters.getOrPut(functionTypeInfo.signatureString) {
                 createKotlinToJsClosureConvertor(functionTypeInfo)
             }
             return FunctionBasedAdapter(kotlinToJsClosureConvertor)
@@ -313,23 +313,23 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         return SendKotlinObjectToJsAdapter(this)
     }
 
-    private fun createNullableAdapter(notNullType: IrType, isPrimitive: Boolean, valueAdapter: InteropTypeAdapter?): InteropTypeAdapter? {
+    private fun createNullableAdapter(notNullType: IrType, isPrimitive: Boolean, konstueAdapter: InteropTypeAdapter?): InteropTypeAdapter? {
         return if (isPrimitive) { //nullable primitive should be checked and adapt to target type
-            val externRefToPrimitiveAdapter = when (notNullType) {
+            konst externRefToPrimitiveAdapter = when (notNullType) {
                 builtIns.floatType -> adapters.externRefToKotlinFloatAdapter.owner
                 builtIns.doubleType -> adapters.externRefToKotlinDoubleAdapter.owner
                 builtIns.longType -> adapters.externRefToKotlinLongAdapter.owner
                 builtIns.booleanType -> adapters.externRefToKotlinBooleanAdapter.owner
                 else -> adapters.externRefToKotlinIntAdapter.owner
             }
-            val externalToPrimitiveAdapter = FunctionBasedAdapter(externRefToPrimitiveAdapter)
+            konst externalToPrimitiveAdapter = FunctionBasedAdapter(externRefToPrimitiveAdapter)
             NullOrAdapter(
-                adapter = valueAdapter?.let { CombineAdapter(it, externalToPrimitiveAdapter) } ?: externalToPrimitiveAdapter
+                adapter = konstueAdapter?.let { CombineAdapter(it, externalToPrimitiveAdapter) } ?: externalToPrimitiveAdapter
             )
         } else { //nullable reference should not be checked
-            val nullableValueAdapter = valueAdapter?.let(::NullOrAdapter)
+            konst nullableValueAdapter = konstueAdapter?.let(::NullOrAdapter)
             if (isExternalType(notNullType)) {
-                val undefinedToNullAdapter = FunctionBasedAdapter(adapters.jsCheckIsNullOrUndefinedAdapter.owner)
+                konst undefinedToNullAdapter = FunctionBasedAdapter(adapters.jsCheckIsNullOrUndefinedAdapter.owner)
                 nullableValueAdapter
                     ?.let { CombineAdapter(it, undefinedToNullAdapter) }
                     ?: undefinedToNullAdapter
@@ -339,19 +339,19 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         }
     }
 
-    private fun createNotNullAdapter(notNullType: IrType, isPrimitive: Boolean, valueAdapter: InteropTypeAdapter?): InteropTypeAdapter? {
+    private fun createNotNullAdapter(notNullType: IrType, isPrimitive: Boolean, konstueAdapter: InteropTypeAdapter?): InteropTypeAdapter? {
         // !nullable primitive checked by wasm signature
-        if (isPrimitive) return valueAdapter
+        if (isPrimitive) return konstueAdapter
 
         // !nullable reference should be null checked
         // notNullAdapter((undefined -> null)!!)
-        val nullCheckedValueAdapter = valueAdapter?.let(::CheckNotNullAndAdapter)
+        konst nullCheckedValueAdapter = konstueAdapter?.let(::CheckNotNullAndAdapter)
             ?: CheckNotNullNoAdapter(notNullType)
 
-        // kotlin types could not take undefined value so just take null-checked value
+        // kotlin types could not take undefined konstue so just take null-checked konstue
         if (!isExternalType(notNullType)) return nullCheckedValueAdapter
 
-        // js value should convert undefined into null and the null-checked
+        // js konstue should convert undefined into null and the null-checked
         return CombineAdapter(
             outerAdapter = nullCheckedValueAdapter,
             innerAdapter = FunctionBasedAdapter(adapters.jsCheckIsNullOrUndefinedAdapter.owner)
@@ -362,14 +362,14 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         if (isReturn && this == builtIns.unitType)
             return null
 
-        val notNullType = makeNotNull()
-        val valueAdapter = notNullType.jsToKotlinAdapterIfNeededNotNullable(isReturn)
-        val isPrimitive = valueAdapter?.fromType?.isPrimitiveType() ?: notNullType.isPrimitiveType()
+        konst notNullType = makeNotNull()
+        konst konstueAdapter = notNullType.jsToKotlinAdapterIfNeededNotNullable(isReturn)
+        konst isPrimitive = konstueAdapter?.fromType?.isPrimitiveType() ?: notNullType.isPrimitiveType()
 
         return if (isNullable())
-            createNullableAdapter(notNullType, isPrimitive, valueAdapter)
+            createNullableAdapter(notNullType, isPrimitive, konstueAdapter)
         else
-            createNotNullAdapter(notNullType, isPrimitive, valueAdapter)
+            createNotNullAdapter(notNullType, isPrimitive, konstueAdapter)
     }
 
     private fun IrType.jsToKotlinAdapterIfNeededNotNullable(isReturn: Boolean): InteropTypeAdapter? {
@@ -399,7 +399,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             return null
 
         if (this is IrSimpleType && this.isFunction()) {
-            val functionTypeInfo = FunctionTypeInfo(this, toJs = false)
+            konst functionTypeInfo = FunctionTypeInfo(this, toJs = false)
 
             // JavaScript's closures are external references that cannot be called directly in WebAssembly.
             // Thus, we import helper "caller" method that WebAssembly will use to call JS closures:
@@ -407,7 +407,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             //     @JsFun("(f, p0, p1, ...) => f(p0, p1, ...)")
             //     external fun __callJsClosure_<signatureString>(f: ExternalRef, p0: JsType1, p1: JsType2, ...): JsResType
             //
-            val jsClosureCaller = context.jsClosureCallers.getOrPut(functionTypeInfo.signatureString) {
+            konst jsClosureCaller = context.jsClosureCallers.getOrPut(functionTypeInfo.signatureString) {
                 createJsClosureCaller(functionTypeInfo)
             }
 
@@ -419,7 +419,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             //          adapt(__callJsClosure_<signatureString>(f, adapt(p0), adapt(p1), ..))
             //       }
             //
-            val jsToKotlinClosure = context.jsToKotlinClosures.getOrPut(functionTypeInfo.signatureString) {
+            konst jsToKotlinClosure = context.jsToKotlinClosures.getOrPut(functionTypeInfo.signatureString) {
                 createJsToKotlinClosureConverter(functionTypeInfo, jsClosureCaller)
             }
             return FunctionBasedAdapter(jsToKotlinClosure)
@@ -429,7 +429,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
     }
 
     private fun createKotlinClosureCaller(info: FunctionTypeInfo): IrSimpleFunction {
-        val result = context.irFactory.buildFun {
+        konst result = context.irFactory.buildFun {
             name = Name.identifier("__callFunction_${info.signatureString}")
             returnType = info.adaptedResultType
         }
@@ -445,17 +445,17 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
                 this.type = type
             }
         }
-        val builder = context.createIrBuilder(result.symbol)
+        konst builder = context.createIrBuilder(result.symbol)
 
         result.body = builder.irBlockBody {
-            val invokeFun = info.functionType.classOrNull!!.owner.functions.single { it.name == Name.identifier("invoke") }
-            val callInvoke = irCall(invokeFun.symbol, info.originalResultType).also { call ->
+            konst invokeFun = info.functionType.classOrNull!!.owner.functions.single { it.name == Name.identifier("invoke") }
+            konst callInvoke = irCall(invokeFun.symbol, info.originalResultType).also { call ->
                 call.dispatchReceiver =
                     ReceivingKotlinObjectFromJsAdapter(invokeFun.dispatchReceiverParameter!!.type)
-                        .adapt(irGet(result.valueParameters[0]), builder)
+                        .adapt(irGet(result.konstueParameters[0]), builder)
 
                 for (i in info.adaptedParameterTypes.indices) {
-                    call.putValueArgument(i, info.parametersAdapters[i].adaptIfNeeded(irGet(result.valueParameters[i + 1]), builder))
+                    call.putValueArgument(i, info.parametersAdapters[i].adaptIfNeeded(irGet(result.konstueParameters[i + 1]), builder))
                 }
             }
             +irReturn(info.resultAdapter.adaptIfNeeded(callInvoke, builder))
@@ -468,7 +468,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
     }
 
     private fun createKotlinToJsClosureConvertor(info: FunctionTypeInfo): IrSimpleFunction {
-        val result = context.irFactory.buildFun {
+        konst result = context.irFactory.buildFun {
             name = Name.identifier("__convertKotlinClosureToJsClosure_${info.signatureString}")
             returnType = context.wasmSymbols.jsAnyType
             isExternal = true
@@ -478,10 +478,10 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             name = Name.identifier("f")
             type = context.wasmSymbols.wasmStructRefType
         }
-        val builder = context.createIrBuilder(result.symbol)
+        konst builder = context.createIrBuilder(result.symbol)
         // TODO: Cache created JS closures
-        val arity = info.parametersAdapters.size
-        val jsCode = buildString {
+        konst arity = info.parametersAdapters.size
+        konst jsCode = buildString {
             append("(f) => (")
             appendParameterList(arity)
             append(") => wasmExports[")
@@ -503,8 +503,8 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         info: FunctionTypeInfo,
         jsClosureCaller: IrSimpleFunction,
     ): IrSimpleFunction {
-        val functionType = info.functionType
-        val result = context.irFactory.buildFun {
+        konst functionType = info.functionType
+        konst result = context.irFactory.buildFun {
             name = Name.identifier("__convertJsClosureToKotlinClosure_${info.signatureString}")
             returnType = functionType
         }
@@ -514,7 +514,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             type = context.wasmSymbols.jsAnyType
         }
 
-        val closureClass = context.irFactory.buildClass {
+        konst closureClass = context.irFactory.buildClass {
             name = Name.identifier("__JsClosureToKotlinClosure_${info.signatureString}")
         }.apply {
             createImplicitParameterDeclarationWithWrappedDescriptor()
@@ -522,17 +522,17 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             parent = currentParent
         }
 
-        val closureClassField = closureClass.addField {
+        konst closureClassField = closureClass.addField {
             name = Name.identifier("jsClosure")
             type = context.wasmSymbols.jsAnyType
             visibility = DescriptorVisibilities.PRIVATE
             isFinal = true
         }
 
-        val closureClassConstructor = closureClass.addConstructor {
+        konst closureClassConstructor = closureClass.addConstructor {
             isPrimary = true
         }.apply {
-            val parameter = addValueParameter {
+            konst parameter = addValueParameter {
                 name = closureClassField.name
                 type = closureClassField.type
             }
@@ -554,15 +554,15 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
                     type = irType
                 }
             }
-            val lambdaBuilder = context.createIrBuilder(symbol)
+            konst lambdaBuilder = context.createIrBuilder(symbol)
             body = lambdaBuilder.irBlockBody {
-                val jsClosureCallerCall = irCall(jsClosureCaller)
+                konst jsClosureCallerCall = irCall(jsClosureCaller)
                 jsClosureCallerCall.putValueArgument(0, irGetField(irGet(dispatchReceiverParameter!!), closureClassField))
                 for ((adapterIndex, paramAdapter) in info.parametersAdapters.withIndex()) {
                     jsClosureCallerCall.putValueArgument(
                         adapterIndex + 1,
                         paramAdapter.adaptIfNeeded(
-                            irGet(valueParameters[adapterIndex]),
+                            irGet(konstueParameters[adapterIndex]),
                             lambdaBuilder
                         )
                     )
@@ -574,9 +574,9 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
                 overriddenSymbols + functionType.classOrNull!!.functions.single { it.owner.name == Name.identifier("invoke") }
         }
 
-        val builder = context.createIrBuilder(result.symbol)
+        konst builder = context.createIrBuilder(result.symbol)
         result.body = builder.irBlockBody {
-            +irReturn(irCall(closureClassConstructor).also { it.putValueArgument(0, irGet(result.valueParameters[0])) })
+            +irReturn(irCall(closureClassConstructor).also { it.putValueArgument(0, irGet(result.konstueParameters[0])) })
         }
 
         additionalDeclarations += closureClass
@@ -585,7 +585,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
     }
 
     private fun createJsClosureCaller(info: FunctionTypeInfo): IrSimpleFunction {
-        val result = context.irFactory.buildFun {
+        konst result = context.irFactory.buildFun {
             name = Name.identifier("__callJsClosure_${info.signatureString}")
             returnType = info.adaptedResultType
             isExternal = true
@@ -595,15 +595,15 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
             name = Name.identifier("f")
             type = symbols.jsAnyType
         }
-        val arity = info.adaptedParameterTypes.size
+        konst arity = info.adaptedParameterTypes.size
         repeat(arity) { paramIndex ->
             result.addValueParameter {
                 name = Name.identifier("p$paramIndex")
                 type = info.adaptedParameterTypes[paramIndex]
             }
         }
-        val builder = context.createIrBuilder(result.symbol)
-        val jsFun = buildString {
+        konst builder = context.createIrBuilder(result.symbol)
+        konst jsFun = buildString {
             append("(f, ")
             appendParameterList(arity)
             append(") => f(")
@@ -619,20 +619,20 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         return result
     }
 
-    inner class FunctionTypeInfo(val functionType: IrSimpleType, toJs: Boolean) {
+    inner class FunctionTypeInfo(konst functionType: IrSimpleType, toJs: Boolean) {
         init {
             require(functionType.arguments.all { it is IrTypeProjection }) {
                 "Star projection is not supported in function type interop ${functionType.render()}"
             }
         }
 
-        val originalParameterTypes: List<IrType> =
+        konst originalParameterTypes: List<IrType> =
             functionType.arguments.dropLast(1).map { (it as IrTypeProjection).type }
 
-        val originalResultType: IrType =
+        konst originalResultType: IrType =
             (functionType.arguments.last() as IrTypeProjection).type
 
-        val parametersAdapters: List<InteropTypeAdapter?> =
+        konst parametersAdapters: List<InteropTypeAdapter?> =
             originalParameterTypes.map { parameterType ->
                 if (toJs)
                     parameterType.jsToKotlinAdapterIfNeeded(isReturn = false)
@@ -640,26 +640,26 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
                     parameterType.kotlinToJsAdapterIfNeeded(isReturn = false)
             }
 
-        val resultAdapter: InteropTypeAdapter? =
+        konst resultAdapter: InteropTypeAdapter? =
             if (toJs)
                 originalResultType.kotlinToJsAdapterIfNeeded(isReturn = true)
             else
                 originalResultType.jsToKotlinAdapterIfNeeded(isReturn = true)
 
-        val adaptedParameterTypes: List<IrType> =
+        konst adaptedParameterTypes: List<IrType> =
             originalParameterTypes.zip(parametersAdapters).map { (parameterType, adapter) ->
                 (if (toJs) adapter?.fromType else adapter?.toType) ?: parameterType
             }
 
-        val adaptedResultType: IrType =
+        konst adaptedResultType: IrType =
             (if (toJs) resultAdapter?.toType else resultAdapter?.fromType) ?: originalResultType
 
-        val signatureString: String = jsInteropNotNullTypeSignature(this)
+        konst signatureString: String = jsInteropNotNullTypeSignature(this)
     }
 
     private fun jsInteropNotNullTypeSignature(type: JsInteropFunctionsLowering.FunctionTypeInfo): String {
-        val parameterTypes = type.originalParameterTypes.joinToString(separator = ",") { jsInteropTypeSignature(it) }
-        val resultType = jsInteropTypeSignature(type.originalResultType)
+        konst parameterTypes = type.originalParameterTypes.joinToString(separator = ",") { jsInteropTypeSignature(it) }
+        konst resultType = jsInteropTypeSignature(type.originalResultType)
         return "(($parameterTypes)->$resultType)"
     }
 
@@ -671,7 +671,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
         if (type.isFunction()) {
             return jsInteropNotNullTypeSignature(FunctionTypeInfo(type, true))
         }
-        val klass = type.classOrNull ?: error("Unsupported JS interop type: ${type.render()}")
+        konst klass = type.classOrNull ?: error("Unsupported JS interop type: ${type.render()}")
         if (klass.owner.packageFqName == FqName("kotlin")) {
             return klass.owner.name.identifier
         }
@@ -687,8 +687,8 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
     }
 
     interface InteropTypeAdapter {
-        val fromType: IrType
-        val toType: IrType
+        konst fromType: IrType
+        konst toType: IrType
         fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression
     }
 
@@ -699,23 +699,23 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
      * Adapter implemented as a single function call
      */
     class FunctionBasedAdapter(
-        private val function: IrSimpleFunction,
+        private konst function: IrSimpleFunction,
     ) : InteropTypeAdapter {
-        override val fromType = function.valueParameters[0].type
-        override val toType = function.returnType
+        override konst fromType = function.konstueParameters[0].type
+        override konst toType = function.returnType
         override fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression {
-            val call = builder.irCall(function)
+            konst call = builder.irCall(function)
             call.putValueArgument(0, expression)
             return call
         }
     }
 
     class CombineAdapter(
-        private val outerAdapter: InteropTypeAdapter,
-        private val innerAdapter: InteropTypeAdapter,
+        private konst outerAdapter: InteropTypeAdapter,
+        private konst innerAdapter: InteropTypeAdapter,
     ) : InteropTypeAdapter {
-        override val fromType = innerAdapter.fromType
-        override val toType = outerAdapter.toType
+        override konst fromType = innerAdapter.fromType
+        override konst toType = outerAdapter.toType
         override fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression {
             return outerAdapter.adapt(innerAdapter.adapt(expression, builder), builder)
         }
@@ -725,9 +725,9 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
      * Current V8 Wasm GC mandates structref type instead of structs and arrays
      */
     inner class SendKotlinObjectToJsAdapter(
-        override val fromType: IrType
+        override konst fromType: IrType
     ) : InteropTypeAdapter {
-        override val toType: IrType = context.wasmSymbols.wasmStructRefType
+        override konst toType: IrType = context.wasmSymbols.wasmStructRefType
         override fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression {
             return builder.irReinterpretCast(expression, toType)
         }
@@ -737,11 +737,11 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
      * Current V8 Wasm GC mandates structref type instead of structs and arrays
      */
     inner class ReceivingKotlinObjectFromJsAdapter(
-        override val toType: IrType
+        override konst toType: IrType
     ) : InteropTypeAdapter {
-        override val fromType: IrType = context.wasmSymbols.wasmStructRefType
+        override konst fromType: IrType = context.wasmSymbols.wasmStructRefType
         override fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression {
-            val call = builder.irCall(context.wasmSymbols.refCastNull)
+            konst call = builder.irCall(context.wasmSymbols.refCastNull)
             call.putValueArgument(0, expression)
             call.putTypeArgument(0, toType)
             return call
@@ -753,14 +753,14 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
      */
 
     /**
-     * Effectively `value!!`
+     * Effectively `konstue!!`
      */
     inner class CheckNotNullNoAdapter(type: IrType) : InteropTypeAdapter {
-        override val fromType: IrType = type.makeNullable()
-        override val toType: IrType = type.makeNotNull()
+        override konst fromType: IrType = type.makeNullable()
+        override konst toType: IrType = type.makeNotNull()
         override fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression {
             return builder.irComposite {
-                val tmp = irTemporary(expression)
+                konst tmp = irTemporary(expression)
                 +irIfNull(
                     type = toType,
                     subject = irGet(tmp),
@@ -772,16 +772,16 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
     }
 
     /**
-     * Effectively `value?.let { adapter(it) }`
+     * Effectively `konstue?.let { adapter(it) }`
      */
     inner class NullOrAdapter(
-        private val adapter: InteropTypeAdapter
+        private konst adapter: InteropTypeAdapter
     ) : InteropTypeAdapter {
-        override val fromType: IrType = adapter.fromType.makeNullable()
-        override val toType: IrType = adapter.toType.makeNullable()
+        override konst fromType: IrType = adapter.fromType.makeNullable()
+        override konst toType: IrType = adapter.toType.makeNullable()
         override fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression {
             return builder.irComposite {
-                val tmp = irTemporary(expression)
+                konst tmp = irTemporary(expression)
                 +irIfNull(
                     type = toType,
                     subject = irGet(tmp),
@@ -793,16 +793,16 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
     }
 
     /**
-     * Effectively `adapter(value!!)`
+     * Effectively `adapter(konstue!!)`
      */
     inner class CheckNotNullAndAdapter(
-        private val adapter: InteropTypeAdapter
+        private konst adapter: InteropTypeAdapter
     ) : InteropTypeAdapter {
-        override val fromType: IrType = adapter.fromType.makeNullable()
-        override val toType: IrType = adapter.toType
+        override konst fromType: IrType = adapter.fromType.makeNullable()
+        override konst toType: IrType = adapter.toType
         override fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression {
             return builder.irComposite {
-                val temp = irTemporary(expression)
+                konst temp = irTemporary(expression)
                 +irIfNull(
                     type = toType,
                     subject = irGet(temp),
@@ -817,38 +817,38 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
      * Vararg parameter adapter
      */
     inner class CopyToJsArrayAdapter(
-        override val fromType: IrType,
-        private val fromElementType: IrType,
+        override konst fromType: IrType,
+        private konst fromElementType: IrType,
     ) : InteropTypeAdapter {
-        override val toType: IrType =
+        override konst toType: IrType =
             context.wasmSymbols.jsAnyType
 
-        private val elementAdapter =
+        private konst elementAdapter =
             primitivesToExternRefAdapters[fromElementType]
                 ?: fromElementType.kotlinToJsAdapterIfNeeded(false)
 
-        private val arrayClass = fromType.classOrNull!!
-        private val getMethod = arrayClass.getSimpleFunction("get")!!.owner
-        private val sizeMethod = arrayClass.getPropertyGetter("size")!!.owner
+        private konst arrayClass = fromType.classOrNull!!
+        private konst getMethod = arrayClass.getSimpleFunction("get")!!.owner
+        private konst sizeMethod = arrayClass.getPropertyGetter("size")!!.owner
 
         override fun adapt(expression: IrExpression, builder: IrBuilderWithScope): IrExpression {
             return builder.irComposite {
-                val originalArrayVar = irTemporary(expression)
+                konst originalArrayVar = irTemporary(expression)
 
-                //  val newJsArray = []
+                //  konst newJsArray = []
                 //  var index = 0
                 //  while(index != size) {
                 //      newJsArray.push(adapt(originalArray[index]));
                 //      index++
                 //  }
-                val newJsArrayVar = irTemporary(irCall(symbols.newJsArray))
-                val indexVar = irTemporary(irInt(0), isMutable = true)
-                val arraySizeVar = irTemporary(irCall(sizeMethod).apply { dispatchReceiver = irGet(originalArrayVar) })
+                konst newJsArrayVar = irTemporary(irCall(symbols.newJsArray))
+                konst indexVar = irTemporary(irInt(0), isMutable = true)
+                konst arraySizeVar = irTemporary(irCall(sizeMethod).apply { dispatchReceiver = irGet(originalArrayVar) })
 
                 +irWhile().apply {
                     condition = irNotEquals(irGet(indexVar), irGet(arraySizeVar))
                     body = irBlock {
-                        val adaptedValue = elementAdapter.adaptIfNeeded(
+                        konst adaptedValue = elementAdapter.adaptIfNeeded(
                             irImplicitCast(
                                 irCall(getMethod).apply {
                                     dispatchReceiver = irGet(originalArrayVar)
@@ -862,7 +862,7 @@ class JsInteropFunctionsLowering(val context: WasmBackendContext) : DeclarationT
                             putValueArgument(0, irGet(newJsArrayVar))
                             putValueArgument(1, adaptedValue)
                         }
-                        val inc = indexVar.type.getClass()!!.functions.single { it.name == OperatorNameConventions.INC }
+                        konst inc = indexVar.type.getClass()!!.functions.single { it.name == OperatorNameConventions.INC }
                         +irSet(
                             indexVar,
                             irCallOp(inc.symbol, indexVar.type, irGet(indexVar)),
@@ -887,12 +887,12 @@ internal fun StringBuilder.appendParameterList(size: Int, name: String = "p", is
 /**
  * Redirect calls to external and @JsExport functions to created wrappers
  */
-class JsInteropFunctionCallsLowering(val context: WasmBackendContext) : BodyLoweringPass {
+class JsInteropFunctionCallsLowering(konst context: WasmBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitCall(expression: IrCall): IrExpression {
                 expression.transformChildrenVoid()
-                val newFun: IrSimpleFunction? = context.mapping.wasmJsInteropFunctionToWrapper[expression.symbol.owner]
+                konst newFun: IrSimpleFunction? = context.mapping.wasmJsInteropFunctionToWrapper[expression.symbol.owner]
                 return if (newFun != null && container != newFun) {
                     irCall(expression, newFun)
                 } else {

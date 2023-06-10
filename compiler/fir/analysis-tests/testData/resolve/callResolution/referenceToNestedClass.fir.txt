@@ -10,7 +10,7 @@ FILE: referenceToNestedClass.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val param: R|Param| = R|<local>/param|
+        public final konst param: R|Param| = R|<local>/param|
             public get(): R|Param|
 
     }

@@ -3,29 +3,29 @@
 // TARGET_BACKEND: JS_IR
 fun <T> T.id() = this
 
-const val someStr = <!EVALUATED("123")!>"123"<!>
-const val otherStr = <!EVALUATED("other")!>"other"<!>
+const konst someStr = <!EVALUATED("123")!>"123"<!>
+const konst otherStr = <!EVALUATED("other")!>"other"<!>
 
-const val oneVal = <!EVALUATED("1")!>1<!>
+const konst oneVal = <!EVALUATED("1")!>1<!>
 
-const val plus1 = someStr.<!EVALUATED("123other")!>plus(otherStr)<!>
-const val plus2 = someStr.<!EVALUATED("1231")!>plus(oneVal)<!>
+const konst plus1 = someStr.<!EVALUATED("123other")!>plus(otherStr)<!>
+const konst plus2 = someStr.<!EVALUATED("1231")!>plus(oneVal)<!>
 
-const val length1 = someStr.<!EVALUATED("3")!>length<!>
-const val length2 = otherStr.<!EVALUATED("5")!>length<!>
+const konst length1 = someStr.<!EVALUATED("3")!>length<!>
+const konst length2 = otherStr.<!EVALUATED("5")!>length<!>
 
-const val get1 = someStr.<!EVALUATED("1")!>get(0)<!>
-const val get2 = otherStr.<!EVALUATED("t")!>get(oneVal)<!>
+const konst get1 = someStr.<!EVALUATED("1")!>get(0)<!>
+const konst get2 = otherStr.<!EVALUATED("t")!>get(oneVal)<!>
 
-const val compareTo1 = someStr.<!EVALUATED("0")!>compareTo("123")<!>
-const val compareTo2 = someStr.<!EVALUATED("-62")!>compareTo(otherStr)<!>
-const val compareTo3 = otherStr.<!EVALUATED("62")!>compareTo(someStr)<!>
+const konst compareTo1 = someStr.<!EVALUATED("0")!>compareTo("123")<!>
+const konst compareTo2 = someStr.<!EVALUATED("-62")!>compareTo(otherStr)<!>
+const konst compareTo3 = otherStr.<!EVALUATED("62")!>compareTo(someStr)<!>
 
-const val equals1 = <!EVALUATED("true")!>someStr == "123"<!>
-const val equals2 = <!EVALUATED("false")!>someStr == otherStr<!>
-const val equals3 = <!EVALUATED("false")!>otherStr == someStr<!>
+const konst equals1 = <!EVALUATED("true")!>someStr == "123"<!>
+const konst equals2 = <!EVALUATED("false")!>someStr == otherStr<!>
+const konst equals3 = <!EVALUATED("false")!>otherStr == someStr<!>
 
-const val toString1 = someStr.<!EVALUATED("123")!>toString()<!>
+const konst toString1 = someStr.<!EVALUATED("123")!>toString()<!>
 
 // STOP_EVALUATION_CHECKS
 fun box(): String {

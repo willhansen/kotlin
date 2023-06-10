@@ -9,7 +9,7 @@
  * expressions, prefix-expressions, unary-minus-expression -> paragraph 1 -> sentence 1
  * expressions, prefix-expressions, unary-minus-expression -> paragraph 3 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: exactly the same as A.unaryMinus() where unaryMinus is a valid operator function available in the current scope.
+ * DESCRIPTION: exactly the same as A.unaryMinus() where unaryMinus is a konstid operator function available in the current scope.
  */
 
 class A(var a: Int) {
@@ -21,8 +21,8 @@ class A(var a: Int) {
 }
 
 fun box(): String {
-    val a = A(-1)
-    val a1 = -a
+    konst a = A(-1)
+    konst a1 = -a
     if (!a1.isCalled && a.isCalled) {
         return "OK"
     }

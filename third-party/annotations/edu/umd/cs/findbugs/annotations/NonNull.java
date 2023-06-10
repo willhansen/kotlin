@@ -31,7 +31,7 @@ import javax.annotation.meta.When;
  * The annotated element must not be null.
  * 
  * Annotated Fields must only not be null after construction has completed.
- * Annotated methods must have non-null return values.
+ * Annotated methods must have non-null return konstues.
  * 
  * @deprecated - use {@link javax.annotation.Nonnull} instead. 
  **/

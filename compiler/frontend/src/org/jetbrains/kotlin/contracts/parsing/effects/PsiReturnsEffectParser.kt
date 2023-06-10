@@ -29,16 +29,16 @@ internal class PsiReturnsEffectParser(
     contractParserDispatcher: PsiContractParserDispatcher
 ) : AbstractPsiEffectParser(collector, callContext, contractParserDispatcher) {
     override fun tryParseEffect(expression: KtExpression): EffectDeclaration? {
-        val resolvedCall = expression.getResolvedCall(callContext.bindingContext) ?: return null
-        val descriptor = resolvedCall.resultingDescriptor
+        konst resolvedCall = expression.getResolvedCall(callContext.bindingContext) ?: return null
+        konst descriptor = resolvedCall.resultingDescriptor
 
         if (descriptor.isReturnsNotNullDescriptor()) return ReturnsEffectDeclaration(ConstantReference.NOT_NULL)
         if (descriptor.isReturnsWildcardDescriptor()) return ReturnsEffectDeclaration(ConstantReference.WILDCARD)
 
         if (!descriptor.isReturnsEffectDescriptor()) return null
 
-        val argumentExpression = resolvedCall.firstArgumentAsExpressionOrNull()
-        val constantValue = if (argumentExpression != null) contractParserDispatcher.parseConstant(argumentExpression) else null
+        konst argumentExpression = resolvedCall.firstArgumentAsExpressionOrNull()
+        konst constantValue = if (argumentExpression != null) contractParserDispatcher.parseConstant(argumentExpression) else null
 
         if (constantValue == null) {
             collector.badDescription(

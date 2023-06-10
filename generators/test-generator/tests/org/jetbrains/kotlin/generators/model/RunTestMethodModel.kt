@@ -8,21 +8,21 @@ package org.jetbrains.kotlin.generators.model
 import org.jetbrains.kotlin.test.TargetBackend
 
 class RunTestMethodModel(
-    val targetBackend: TargetBackend,
-    val testMethodName: String,
-    val testRunnerMethodName: String,
-    val additionalRunnerArguments: List<String> = emptyList(),
-    val withTransformer: Boolean = false
+    konst targetBackend: TargetBackend,
+    konst testMethodName: String,
+    konst testRunnerMethodName: String,
+    konst additionalRunnerArguments: List<String> = emptyList(),
+    konst withTransformer: Boolean = false
 ) : MethodModel {
     object Kind : MethodModel.Kind()
 
-    override val kind: MethodModel.Kind
+    override konst kind: MethodModel.Kind
         get() = Kind
 
-    override val name = METHOD_NAME
-    override val dataString: String? = null
+    override konst name = METHOD_NAME
+    override konst dataString: String? = null
 
-    override val tags: List<String>
+    override konst tags: List<String>
         get() = emptyList()
 
     override fun imports(): Collection<Class<*>> {
@@ -34,6 +34,6 @@ class RunTestMethodModel(
     }
 
     companion object {
-        const val METHOD_NAME = "runTest"
+        const konst METHOD_NAME = "runTest"
     }
 }

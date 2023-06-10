@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.js.inline.util.rewriters
 
 import org.jetbrains.kotlin.js.backend.ast.*
 
-class ThisReplacingVisitor(private val thisReplacement: JsExpression) : JsVisitorWithContextImpl() {
+class ThisReplacingVisitor(private konst thisReplacement: JsExpression) : JsVisitorWithContextImpl() {
     override fun endVisit(x: JsThisRef, ctx: JsContext<JsNode>) {
         ctx.replaceMe(thisReplacement)
     }

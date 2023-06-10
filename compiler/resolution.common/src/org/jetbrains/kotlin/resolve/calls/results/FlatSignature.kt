@@ -12,25 +12,25 @@ interface SpecificityComparisonCallbacks {
     fun isNonSubtypeNotLessSpecific(specific: KotlinTypeMarker, general: KotlinTypeMarker): Boolean
 }
 
-class TypeWithConversion(val resultType: KotlinTypeMarker?, val originalTypeIfWasConverted: KotlinTypeMarker? = null)
+class TypeWithConversion(konst resultType: KotlinTypeMarker?, konst originalTypeIfWasConverted: KotlinTypeMarker? = null)
 
 class FlatSignature<out T> constructor(
-    val origin: T,
-    val typeParameters: Collection<TypeParameterMarker>,
-    val hasExtensionReceiver: Boolean,
-    val contextReceiverCount: Int,
-    val hasVarargs: Boolean,
-    val numDefaults: Int,
-    val isExpect: Boolean,
-    val isSyntheticMember: Boolean,
-    val valueParameterTypes: List<TypeWithConversion?>,
+    konst origin: T,
+    konst typeParameters: Collection<TypeParameterMarker>,
+    konst hasExtensionReceiver: Boolean,
+    konst contextReceiverCount: Int,
+    konst hasVarargs: Boolean,
+    konst numDefaults: Int,
+    konst isExpect: Boolean,
+    konst isSyntheticMember: Boolean,
+    konst konstueParameterTypes: List<TypeWithConversion?>,
 ) {
-    val isGeneric = typeParameters.isNotEmpty()
+    konst isGeneric = typeParameters.isNotEmpty()
 
     constructor(
         origin: T,
         typeParameters: Collection<TypeParameterMarker>,
-        valueParameterTypes: List<KotlinTypeMarker?>,
+        konstueParameterTypes: List<KotlinTypeMarker?>,
         hasExtensionReceiver: Boolean,
         contextReceiverCount: Int,
         hasVarargs: Boolean,
@@ -39,7 +39,7 @@ class FlatSignature<out T> constructor(
         isSyntheticMember: Boolean,
     ) : this(
         origin, typeParameters, hasExtensionReceiver, contextReceiverCount, hasVarargs, numDefaults, isExpect,
-        isSyntheticMember, valueParameterTypes.map(::TypeWithConversion)
+        isSyntheticMember, konstueParameterTypes.map(::TypeWithConversion)
     )
 
     companion object
@@ -52,9 +52,9 @@ interface SimpleConstraintSystem {
     fun hasContradiction(): Boolean
 
     // todo hack for migration
-    val captureFromArgument get() = false
+    konst captureFromArgument get() = false
 
-    val context: TypeSystemInferenceExtensionContext
+    konst context: TypeSystemInferenceExtensionContext
 }
 
 private fun <T> SimpleConstraintSystem.isValueParameterTypeNotLessSpecific(
@@ -64,14 +64,14 @@ private fun <T> SimpleConstraintSystem.isValueParameterTypeNotLessSpecific(
     specificityComparator: TypeSpecificityComparator,
     typeKindSelector: (TypeWithConversion?) -> KotlinTypeMarker?
 ): Boolean {
-    val typeParameters = general.typeParameters
-    val typeSubstitutor = registerTypeVariables(typeParameters)
+    konst typeParameters = general.typeParameters
+    konst typeSubstitutor = registerTypeVariables(typeParameters)
 
-    val specificContextReceiverCount = specific.contextReceiverCount
-    val generalContextReceiverCount = general.contextReceiverCount
+    konst specificContextReceiverCount = specific.contextReceiverCount
+    konst generalContextReceiverCount = general.contextReceiverCount
 
-    var specificValueParameterTypes = specific.valueParameterTypes
-    var generalValueParameterTypes = general.valueParameterTypes
+    var specificValueParameterTypes = specific.konstueParameterTypes
+    var generalValueParameterTypes = general.konstueParameterTypes
 
     if (specificContextReceiverCount != generalContextReceiverCount) {
         specificValueParameterTypes = specificValueParameterTypes.drop(specificContextReceiverCount)
@@ -79,8 +79,8 @@ private fun <T> SimpleConstraintSystem.isValueParameterTypeNotLessSpecific(
     }
 
     for (index in specificValueParameterTypes.indices) {
-        val specificType = typeKindSelector(specificValueParameterTypes[index]) ?: continue
-        val generalType = typeKindSelector(generalValueParameterTypes[index]) ?: continue
+        konst specificType = typeKindSelector(specificValueParameterTypes[index]) ?: continue
+        konst generalType = typeKindSelector(generalValueParameterTypes[index]) ?: continue
 
         if (specificityComparator.isDefinitelyLessSpecific(specificType, generalType)) {
             return false
@@ -93,16 +93,16 @@ private fun <T> SimpleConstraintSystem.isValueParameterTypeNotLessSpecific(
                 }
             }
         } else {
-            val substitutedGeneralType = typeSubstitutor.safeSubstitute(context, generalType)
+            konst substitutedGeneralType = typeSubstitutor.safeSubstitute(context, generalType)
 
             /**
              * Example:
              * fun <X> Array<out X>.sort(): Unit {}
              * fun <Y: Comparable<Y>> Array<out Y>.sort(): Unit {}
              * Here, when we try solve this CS(Y is variables) then Array<out X> <: Array<out Y> and this system impossible to solve,
-             * so we capture types from receiver and value parameters.
+             * so we capture types from receiver and konstue parameters.
              */
-            val specificCapturedType = AbstractTypeChecker.prepareType(context, specificType)
+            konst specificCapturedType = AbstractTypeChecker.prepareType(context, specificType)
                 .let { if (captureFromArgument) context.captureFromExpression(it) ?: it else it }
             addSubtypeConstraint(specificCapturedType, substitutedGeneralType)
         }
@@ -120,7 +120,7 @@ fun <T> SimpleConstraintSystem.isSignatureNotLessSpecific(
 ): Boolean {
     if (specific.hasExtensionReceiver != general.hasExtensionReceiver) return false
     if (specific.contextReceiverCount > general.contextReceiverCount) return false
-    if (specific.valueParameterTypes.size - specific.contextReceiverCount != general.valueParameterTypes.size - general.contextReceiverCount)
+    if (specific.konstueParameterTypes.size - specific.contextReceiverCount != general.konstueParameterTypes.size - general.contextReceiverCount)
         return false
 
     if (!isValueParameterTypeNotLessSpecific(specific, general, callbacks, specificityComparator) { it?.resultType }) {

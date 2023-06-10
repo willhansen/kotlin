@@ -11,7 +11,7 @@ fun builder(c: suspend () -> Unit) {
 var res = ""
 
 suspend fun foo(y: A?): String {
-    val origin: String? = y?.z
+    konst origin: String? = y?.z
     if (origin != null) {
         baz(origin)
         baz(origin)
@@ -26,7 +26,7 @@ suspend fun baz(y: String): Unit = suspendCoroutineUninterceptedOrReturn { x ->
     COROUTINE_SUSPENDED
 }
 
-class A(val z: String)
+class A(konst z: String)
 
 fun box(): String {
     var result = ""

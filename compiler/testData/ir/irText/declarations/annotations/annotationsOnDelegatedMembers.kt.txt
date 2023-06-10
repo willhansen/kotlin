@@ -9,14 +9,14 @@ open annotation class Ann : Annotation {
 
 interface IFoo {
   @Ann
-  abstract val testVal: String
+  abstract konst testVal: String
     abstract get
 
   @Ann
   abstract fun testFun()
 
   @Ann
-  abstract val String.testExtVal: String
+  abstract konst String.testExtVal: String
     abstract get
 
   @Ann
@@ -31,13 +31,13 @@ class DFoo : IFoo {
 
   }
 
-  private /* final field */ val $$delegate_0: IFoo = d
-  override val testVal: String
+  private /* final field */ konst $$delegate_0: IFoo = d
+  override konst testVal: String
     override get(): String {
       return <this>.#$$delegate_0.<get-testVal>()
     }
 
-  override val String.testExtVal: String
+  override konst String.testExtVal: String
     override get(): String {
       return (<this>.#$$delegate_0, <this>).<get-testExtVal>()
     }

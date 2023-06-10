@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.fir.checkers.generator.getGenerationPath
 import java.io.File
 
 fun generateDiagnostics(rootPath: File, packageName: String, diagnosticList: DiagnosticList, starImportsToAdd: Set<String>) {
-    val generationPath = getGenerationPath(rootPath, packageName)
+    konst generationPath = getGenerationPath(rootPath, packageName)
     ErrorListDiagnosticListRenderer.render(
         generationPath.resolve("${diagnosticList.objectName}.kt"),
         diagnosticList,

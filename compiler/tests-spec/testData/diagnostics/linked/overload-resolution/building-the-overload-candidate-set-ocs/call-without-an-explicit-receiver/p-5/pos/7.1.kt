@@ -50,6 +50,6 @@ package libPackagecase2
 import testscase2.*
 private fun <T> emptyArray(): Array<T> = TODO()
 
-private val Case2.emptyArray: A
+private konst Case2.emptyArray: A
     get() = A()
 

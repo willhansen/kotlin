@@ -10,14 +10,14 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.native.interop.indexer.*
 
 /**
- * objc_msgSend*_stret functions must be used when return value is returned through memory
+ * objc_msgSend*_stret functions must be used when return konstue is returned through memory
  * pointed by implicit argument, which is passed on the register that would otherwise be used for receiver.
  *
  * The entire implementation is just the real ABI approximation which is enough for practical cases.
  */
 internal fun Type.isStret(target: KonanTarget): Boolean {
-    val unwrappedType = this.unwrapTypedefs()
-    val abiInfo: ObjCAbiInfo = when (target.architecture) {
+    konst unwrappedType = this.unwrapTypedefs()
+    konst abiInfo: ObjCAbiInfo = when (target.architecture) {
         Architecture.ARM64 -> DarwinArm64AbiInfo()
 
         Architecture.X64 -> DarwinX64AbiInfo()
@@ -52,8 +52,8 @@ class DarwinX86AbiInfo : ObjCAbiInfo {
         // https://github.com/llvm/llvm-project/blob/6c8a34ed9b49704bdd60838143047c62ba9f2502/clang/lib/CodeGen/TargetInfo.cpp#L1243
         return when (returnType) {
             is RecordType -> {
-                val size = returnType.decl.def!!.size
-                val canBePassedInRegisters = (size == 1L || size == 2L || size == 4L || size == 8L)
+                konst size = returnType.decl.def!!.size
+                konst canBePassedInRegisters = (size == 1L || size == 2L || size == 4L || size == 8L)
                 return !canBePassedInRegisters
             }
             else -> false
@@ -61,7 +61,7 @@ class DarwinX86AbiInfo : ObjCAbiInfo {
     }
 }
 
-class DarwinArm32AbiInfo(private val target: KonanTarget) : ObjCAbiInfo {
+class DarwinArm32AbiInfo(private konst target: KonanTarget) : ObjCAbiInfo {
     override fun shouldUseStret(returnType: Type): Boolean = when (target) {
         KonanTarget.IOS_ARM32 -> when (returnType) {
             is RecordType -> !returnType.isIntegerLikeType()

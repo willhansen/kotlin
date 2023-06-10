@@ -13,26 +13,26 @@
 package foo
 
 
-val value = 10
+konst konstue = 10
 
 
 var variable = 10
 
 
-class C(val x: Int) {
+class C(konst x: Int) {
     fun doubleX() = x * 2
 }
 
 
 object O {
-    val value = 10
+    konst konstue = 10
 }
 
 
 object Parent {
-    val value = 10
+    konst konstue = 10
     class Nested {
-        val value = 10
+        konst konstue = 10
     }
 }
 

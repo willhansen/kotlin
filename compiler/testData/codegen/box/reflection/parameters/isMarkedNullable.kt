@@ -16,7 +16,7 @@ class A {
 fun Any?.ext() {}
 
 fun box(): String {
-    val ps = A::class.declaredFunctions.single().parameters.map { it.type.isMarkedNullable }
+    konst ps = A::class.declaredFunctions.single().parameters.map { it.type.isMarkedNullable }
     assertEquals(listOf(false, false, true, false, false, true), ps)
 
     assertTrue(Any?::ext.parameters.single().type.isMarkedNullable)

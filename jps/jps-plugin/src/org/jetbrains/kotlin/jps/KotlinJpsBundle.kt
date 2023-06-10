@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NonNls
 import org.jetbrains.annotations.PropertyKey
 
 @NonNls
-private const val BUNDLE = "messages.KotlinJpsBundle"
+private const konst BUNDLE = "messages.KotlinJpsBundle"
 
 object KotlinJpsBundle : AbstractBundle(BUNDLE) {
     @Nls

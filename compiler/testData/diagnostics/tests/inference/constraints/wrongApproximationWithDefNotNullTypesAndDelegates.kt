@@ -11,6 +11,6 @@ class Foo {
     class RefreshDelegate<T>(initialValue: T?) {
         operator fun getValue(thisRef: Foo, property: KProperty<*>): T = TODO()
 
-        operator fun setValue(thisRef: Foo, property: KProperty<*>, value: T) {}
+        operator fun setValue(thisRef: Foo, property: KProperty<*>, konstue: T) {}
     }
 }

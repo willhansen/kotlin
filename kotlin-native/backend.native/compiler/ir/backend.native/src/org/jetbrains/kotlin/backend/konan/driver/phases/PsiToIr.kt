@@ -30,71 +30,71 @@ import org.jetbrains.kotlin.resolve.CleanableBindingContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 
 data class PsiToIrInput(
-        val moduleDescriptor: ModuleDescriptor,
-        val environment: KotlinCoreEnvironment,
-        val isProducingLibrary: Boolean,
+        konst moduleDescriptor: ModuleDescriptor,
+        konst environment: KotlinCoreEnvironment,
+        konst isProducingLibrary: Boolean,
 )
 
 internal sealed class PsiToIrOutput(
-        val irModule: IrModuleFragment,
-        val symbols: KonanSymbols,
+        konst irModule: IrModuleFragment,
+        konst symbols: KonanSymbols,
 ) : KotlinBackendIrHolder {
 
-    override val kotlinIr: IrElement
+    override konst kotlinIr: IrElement
         get() = irModule
 
     class ForBackend(
-            val irModules: Map<String, IrModuleFragment>,
+            konst irModules: Map<String, IrModuleFragment>,
             irModule: IrModuleFragment,
             symbols: KonanSymbols,
-            val irLinker: KonanIrLinker,
+            konst irLinker: KonanIrLinker,
     ) : PsiToIrOutput(irModule, symbols)
 
     class ForKlib(
             irModule: IrModuleFragment,
             symbols: KonanSymbols,
-            val expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
+            konst expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
     ): PsiToIrOutput(irModule, symbols)
 }
 
 // TODO: Consider component-based approach
 internal interface PsiToIrContext : PhaseContext {
-    val symbolTable: SymbolTable?
+    konst symbolTable: SymbolTable?
 
-    val reflectionTypes: KonanReflectionTypes
+    konst reflectionTypes: KonanReflectionTypes
 
-    val builtIns: KonanBuiltIns
+    konst builtIns: KonanBuiltIns
 
-    val bindingContext: BindingContext
+    konst bindingContext: BindingContext
 
-    val stdlibModule: ModuleDescriptor
+    konst stdlibModule: ModuleDescriptor
         get() = this.builtIns.any.module
 }
 
 internal class PsiToIrContextImpl(
         config: KonanConfig,
-        private val moduleDescriptor: ModuleDescriptor,
-        override val bindingContext: BindingContext,
+        private konst moduleDescriptor: ModuleDescriptor,
+        override konst bindingContext: BindingContext,
 ) : BasicPhaseContext(config), PsiToIrContext {
-    // TODO: Invalidate properly in dispose method.
-    override val symbolTable = SymbolTable(KonanIdSignaturer(KonanManglerDesc), IrFactoryImpl)
+    // TODO: Inkonstidate properly in dispose method.
+    override konst symbolTable = SymbolTable(KonanIdSignaturer(KonanManglerDesc), IrFactoryImpl)
 
-    override val reflectionTypes: KonanReflectionTypes by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst reflectionTypes: KonanReflectionTypes by lazy(LazyThreadSafetyMode.PUBLICATION) {
         KonanReflectionTypes(moduleDescriptor)
     }
 
-    override val builtIns: KonanBuiltIns by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst builtIns: KonanBuiltIns by lazy(LazyThreadSafetyMode.PUBLICATION) {
         moduleDescriptor.builtIns as KonanBuiltIns
     }
 
     override fun dispose() {
-        val originalBindingContext = bindingContext as? CleanableBindingContext
+        konst originalBindingContext = bindingContext as? CleanableBindingContext
                 ?: error("BindingContext should be cleanable in K/N IR to avoid leaking memory: $bindingContext")
         originalBindingContext.clear()
     }
 }
 
-internal val PsiToIrPhase = createSimpleNamedCompilerPhase<PsiToIrContext, PsiToIrInput, PsiToIrOutput>(
+internal konst PsiToIrPhase = createSimpleNamedCompilerPhase<PsiToIrContext, PsiToIrInput, PsiToIrOutput>(
         "PsiToIr", "Translate PSI to IR",
         postactions = getDefaultIrActions(),
         outputIfNotEnabled = { _, _, _, _ -> error("PsiToIr phase cannot be disabled") }

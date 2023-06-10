@@ -20,6 +20,6 @@ import org.jetbrains.kotlin.js.backend.ast.JsBlock
 import org.jetbrains.kotlin.js.backend.ast.JsStatement
 
 class CoroutineBlock {
-    val statements = mutableListOf<JsStatement>()
-    val jsBlock = JsBlock(statements)
+    konst statements = mutableListOf<JsStatement>()
+    konst jsBlock = JsBlock(statements)
 }

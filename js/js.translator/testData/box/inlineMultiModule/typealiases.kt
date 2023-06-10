@@ -5,9 +5,9 @@
 package lib
 
 object O {
-    val x = "O"
+    konst x = "O"
 
-    val y = "K"
+    konst y = "K"
 }
 
 class C {

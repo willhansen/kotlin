@@ -11,7 +11,7 @@ fun <T : CirSimpleType> T.makeNullable(): T {
     if (isMarkedNullable)
         return this
 
-    val result = when (this) {
+    konst result = when (this) {
         is CirClassType -> CirClassType.createInterned(
             classId = classifierId,
             outerType = outerType,
@@ -42,10 +42,10 @@ inline fun <T : CirSimpleType> T.makeNullableIfNecessary(necessary: Boolean): T 
 fun CirClassOrTypeAliasType.unabbreviate(): CirClassType = when (this) {
     is CirClassType -> {
         var hasAbbreviationsInArguments = false
-        val unabbreviatedArguments = arguments.compactMap { argument ->
-            val argumentType =
+        konst unabbreviatedArguments = arguments.compactMap { argument ->
+            konst argumentType =
                 (argument as? CirRegularTypeProjection)?.type as? CirClassOrTypeAliasType ?: return@compactMap argument
-            val unabbreviatedArgumentType = argumentType.unabbreviate()
+            konst unabbreviatedArgumentType = argumentType.unabbreviate()
 
             if (argumentType == unabbreviatedArgumentType)
                 argument
@@ -58,8 +58,8 @@ fun CirClassOrTypeAliasType.unabbreviate(): CirClassType = when (this) {
             }
         }
 
-        val outerType = outerType
-        val unabbreviatedOuterType = outerType?.unabbreviate()
+        konst outerType = outerType
+        konst unabbreviatedOuterType = outerType?.unabbreviate()
 
         if (!hasAbbreviationsInArguments && outerType == unabbreviatedOuterType)
             this
@@ -87,10 +87,10 @@ internal inline fun CirDeclaration.unsupported(): Nothing = error("This method s
 internal fun CirClassOrTypeAliasType.withParentArguments(
     parentArguments: List<CirTypeProjection>
 ): CirClassOrTypeAliasType {
-    val newArguments = arguments.map { oldArgument ->
+    konst newArguments = arguments.map { oldArgument ->
         if (oldArgument !is CirRegularTypeProjection) return@map oldArgument
 
-        when (val type = oldArgument.type) {
+        when (konst type = oldArgument.type) {
             is CirTypeParameterType -> parentArguments[type.index]
             is CirClassOrTypeAliasType -> CirRegularTypeProjection(
                 oldArgument.projectionKind, type.withParentArguments(parentArguments)
@@ -99,7 +99,7 @@ internal fun CirClassOrTypeAliasType.withParentArguments(
         }
     }
 
-    return when (val newType = withArguments(newArguments)) {
+    return when (konst newType = withArguments(newArguments)) {
         this -> this
         is CirClassType -> newType
         is CirTypeAliasType -> newType.withUnderlyingType(

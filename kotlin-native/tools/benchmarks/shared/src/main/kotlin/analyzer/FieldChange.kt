@@ -6,7 +6,7 @@
 package org.jetbrains.analyzer
 
 // Report with changes of different fields.
-class ChangeReport<T>(val entityName: String, val changes: List<FieldChange<T>>) {
+class ChangeReport<T>(konst entityName: String, konst changes: List<FieldChange<T>>) {
     fun renderAsTextReport(): String {
         var content = ""
         if (!changes.isEmpty()) {
@@ -21,7 +21,7 @@ class ChangeReport<T>(val entityName: String, val changes: List<FieldChange<T>>)
 }
 
 // Change of report field.
-class FieldChange<T>(val field: String, val previous: T, val current: T) {
+class FieldChange<T>(konst field: String, konst previous: T, konst current: T) {
     companion object {
         fun <T> getFieldChangeOrNull(field: String, previous: T, current: T): FieldChange<T>? {
             if (previous != current) {

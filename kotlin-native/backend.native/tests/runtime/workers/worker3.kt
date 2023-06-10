@@ -11,17 +11,17 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 data class DataParam(var int: Int)
-data class WorkerArgument(val intParam: Int, val dataParam: DataParam)
-data class WorkerResult(val intResult: Int, val stringResult: String)
+data class WorkerArgument(konst intParam: Int, konst dataParam: DataParam)
+data class WorkerResult(konst intResult: Int, konst stringResult: String)
 
 @Test fun runTest() {
     main(emptyArray())
 }
 
 fun main(args: Array<String>) {
-    val worker = Worker.start()
-    val dataParam = DataParam(17)
-    val future = try {
+    konst worker = Worker.start()
+    konst dataParam = DataParam(17)
+    konst future = try {
         worker.execute(TransferMode.SAFE,
                 { WorkerArgument(42, dataParam) }) {
             input -> WorkerResult(input.intParam, input.dataParam.toString() + " result")

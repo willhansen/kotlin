@@ -9,7 +9,7 @@ import java.io.Serializable
 import java.util.*
 
 class BuildTimes : Serializable {
-    private val buildTimesNs = EnumMap<BuildTime, Long>(BuildTime::class.java)
+    private konst buildTimesNs = EnumMap<BuildTime, Long>(BuildTime::class.java)
 
     fun addAll(other: BuildTimes) {
         for ((buildTime, timeNs) in other.buildTimesNs) {
@@ -23,9 +23,9 @@ class BuildTimes : Serializable {
 
     fun addTimeMs(buildTime: BuildTime, timeMs: Long) = addTimeNs(buildTime, timeMs * 1_000_000)
 
-    fun asMapMs(): Map<BuildTime, Long> = buildTimesNs.mapValues { it.value / 1_000_000 }
+    fun asMapMs(): Map<BuildTime, Long> = buildTimesNs.mapValues { it.konstue / 1_000_000 }
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

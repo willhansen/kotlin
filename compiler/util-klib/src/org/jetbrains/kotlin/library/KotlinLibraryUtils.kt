@@ -4,15 +4,15 @@ import org.jetbrains.kotlin.konan.file.File
 import org.jetbrains.kotlin.konan.file.unzipTo
 import org.jetbrains.kotlin.library.impl.zippedKotlinLibraryChecks
 
-const val KLIB_FILE_EXTENSION = "klib"
-const val KLIB_FILE_EXTENSION_WITH_DOT = ".$KLIB_FILE_EXTENSION"
+const konst KLIB_FILE_EXTENSION = "klib"
+const konst KLIB_FILE_EXTENSION_WITH_DOT = ".$KLIB_FILE_EXTENSION"
 
-const val KLIB_METADATA_FILE_EXTENSION = "knm"
-const val KLIB_METADATA_FILE_EXTENSION_WITH_DOT = ".$KLIB_METADATA_FILE_EXTENSION"
+const konst KLIB_METADATA_FILE_EXTENSION = "knm"
+const konst KLIB_METADATA_FILE_EXTENSION_WITH_DOT = ".$KLIB_METADATA_FILE_EXTENSION"
 
 fun File.unpackZippedKonanLibraryTo(newDir: File) {
 
-    // First, run validity checks for the given KLIB file.
+    // First, run konstidity checks for the given KLIB file.
     zippedKotlinLibraryChecks(this)
 
     if (newDir.exists) {
@@ -26,7 +26,7 @@ fun File.unpackZippedKonanLibraryTo(newDir: File) {
     check(newDir.exists) { "Could not unpack $this as $newDir." }
 }
 
-val List<String>.toUnresolvedLibraries
+konst List<String>.toUnresolvedLibraries
     get() = this.map {
         UnresolvedLibrary(it, null)
     }

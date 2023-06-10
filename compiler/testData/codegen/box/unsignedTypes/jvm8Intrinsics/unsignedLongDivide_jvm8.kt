@@ -2,16 +2,16 @@
 // WITH_STDLIB
 // JVM_TARGET: 1.8
 
-val ua = 1234UL
-val ub = 5678UL
-val uai = ua.toUInt()
-val u = ua * ub
+konst ua = 1234UL
+konst ub = 5678UL
+konst uai = ua.toUInt()
+konst u = ua * ub
 
 fun box(): String {
-    val div = u / ua
+    konst div = u / ua
     if (div != ub) throw AssertionError("$div")
 
-    val divInt = u / uai
+    konst divInt = u / uai
     if (div != ub) throw AssertionError("$div")
 
     return "OK"

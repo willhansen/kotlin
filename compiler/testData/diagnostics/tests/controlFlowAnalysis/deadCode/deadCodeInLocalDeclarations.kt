@@ -8,7 +8,7 @@ fun testObject() {
 }
 
 fun testObjectExpression() {
-    <!UNREACHABLE_CODE!>val <!UNUSED_VARIABLE!>a<!>  = object : Foo(<!>todo()<!UNREACHABLE_CODE!>) {
+    <!UNREACHABLE_CODE!>konst <!UNUSED_VARIABLE!>a<!>  = object : Foo(<!>todo()<!UNREACHABLE_CODE!>) {
         fun foo() = 1
     }<!>
 }

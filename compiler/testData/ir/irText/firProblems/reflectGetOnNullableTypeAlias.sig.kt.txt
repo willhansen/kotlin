@@ -5,7 +5,7 @@ class Foo {
   // CHECK:
   //   Mangled name: Foo{}bar
   //   Public signature: /Foo.bar|-7864284097863469857[0]
-  val bar: String
+  konst bar: String
     // CHECK JVM_IR:
     //   Mangled name: Foo#<get-bar>(){}kotlin.String
     //   Public signature: /Foo.bar.<get-bar>|3423724227669014303[0]

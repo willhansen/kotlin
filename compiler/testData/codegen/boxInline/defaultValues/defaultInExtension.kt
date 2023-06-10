@@ -10,7 +10,7 @@ inline public fun String.run(p1: String = "", lambda: (a: String, b: Int) -> Str
     return lambda(p1, p2) + this
 }
 
-public class Z(val value: Int = 0) {
+public class Z(konst konstue: Int = 0) {
 
     inline public fun String.run(p1: String? = null): String? {
         return this + p1
@@ -34,10 +34,10 @@ fun testExtensionInClass() : String {
     res = with(Z(1)) { "1".run() }
     if (res != "1null") return "failed in class 2: $res"
 
-    res = with(Z(2)) { "3".run("OK", { a, b -> a + b + value }, 1) }
+    res = with(Z(2)) { "3".run("OK", { a, b -> a + b + konstue }, 1) }
     if (res != "OK123") return "failed in class 3: $res"
 
-    res = with(Z(3)) { "4".run(lambda = { a, b -> a + b + value }) }
+    res = with(Z(3)) { "4".run(lambda = { a, b -> a + b + konstue }) }
     if (res != "034") return "failed in class 4: $res"
 
     return "OK"

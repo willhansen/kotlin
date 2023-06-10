@@ -22,7 +22,7 @@ import java.io.ByteArrayInputStream
  * Usually such metadata comes from serialized klibs. However, special `kotlin_builtins` file from standard library
  * distribution can also be read with this reader.
  */
-class KotlinCommonMetadata private constructor(private val proto: ProtoBuf.PackageFragment) {
+class KotlinCommonMetadata private constructor(private konst proto: ProtoBuf.PackageFragment) {
     fun toKmModuleFragment(): KmModuleFragment =
         KmModuleFragment().apply(this::accept)
 
@@ -31,7 +31,7 @@ class KotlinCommonMetadata private constructor(private val proto: ProtoBuf.Packa
     }
 
     fun accept(v: KmModuleFragmentVisitor) {
-        val strings = NameResolverImpl(proto.strings, proto.qualifiedNames)
+        konst strings = NameResolverImpl(proto.strings, proto.qualifiedNames)
         if (proto.hasPackage()) {
             v.visitPackage()?.let { proto.`package`.accept(it, strings) }
         }
@@ -44,7 +44,7 @@ class KotlinCommonMetadata private constructor(private val proto: ProtoBuf.Packa
     companion object {
         @JvmStatic
         fun read(bytes: ByteArray): KotlinCommonMetadata? {
-            val (proto, _) = ByteArrayInputStream(bytes).readBuiltinsPackageFragment()
+            konst (proto, _) = ByteArrayInputStream(bytes).readBuiltinsPackageFragment()
             if (proto == null) return null
 
             return KotlinCommonMetadata(proto)
@@ -72,9 +72,9 @@ class KmModuleFragment : KmModuleFragmentVisitor() {
     /**
      * Classes in the module fragment.
      */
-    val classes: MutableList<KmClass> = ArrayList()
+    konst classes: MutableList<KmClass> = ArrayList()
 
-    private val extensions: List<KmModuleFragmentExtension> =
+    private konst extensions: List<KmModuleFragmentExtension> =
         MetadataExtensions.INSTANCES.map(MetadataExtensions::createModuleFragmentExtensions)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -111,7 +111,7 @@ class KmModuleFragment : KmModuleFragmentVisitor() {
  */
 @Deprecated(VISITOR_API_MESSAGE)
 @Suppress("DEPRECATION")
-abstract class KmModuleFragmentVisitor @JvmOverloads constructor(private val delegate: KmModuleFragmentVisitor? = null) {
+abstract class KmModuleFragmentVisitor @JvmOverloads constructor(private konst delegate: KmModuleFragmentVisitor? = null) {
 
     /**
      * Visits a package within the module fragment.

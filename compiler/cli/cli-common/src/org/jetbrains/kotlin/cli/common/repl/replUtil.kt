@@ -24,22 +24,22 @@ import java.io.File
 import java.net.URLClassLoader
 
 // using '#' to avoid collisions with xml escaping
-private val SOURCE_CHARS: List<String> = listOf("\r", "\n", "#")
-private val XML_REPLACEMENTS: List<String> = listOf("#r", "#n", "#diez")
+private konst SOURCE_CHARS: List<String> = listOf("\r", "\n", "#")
+private konst XML_REPLACEMENTS: List<String> = listOf("#r", "#n", "#diez")
 
-private val END_LINE: String = LineSeparator.getSystemLineSeparator().separatorString
-private const val XML_PREAMBLE = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+private konst END_LINE: String = LineSeparator.getSystemLineSeparator().separatorString
+private const konst XML_PREAMBLE = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 
 fun String.replUnescapeLineBreaks() = StringUtil.replace(this, XML_REPLACEMENTS, SOURCE_CHARS)
 fun String.replEscapeLineBreaks() = StringUtil.replace(this, SOURCE_CHARS, XML_REPLACEMENTS)
 
 fun String.replOutputAsXml(escapeType: ReplEscapeType): String {
-    val escapedXml = StringUtil.escapeXmlEntities(replEscapeLineBreaks())
+    konst escapedXml = StringUtil.escapeXmlEntities(replEscapeLineBreaks())
     return "$XML_PREAMBLE<output type=\"$escapeType\">$escapedXml</output>"
 }
 
 fun String.replInputAsXml(): String {
-    val escapedXml = StringUtil.escapeXmlEntities(replEscapeLineBreaks())
+    konst escapedXml = StringUtil.escapeXmlEntities(replEscapeLineBreaks())
     return "$XML_PREAMBLE<input>$escapedXml</input>"
 }
 
@@ -53,7 +53,7 @@ fun makeScriptBaseName(codeLine: ReplCodeLine) =
 fun scriptResultFieldName(lineNo: Int) = "res$lineNo"
 
 fun renderReplStackTrace(cause: Throwable, startFromMethodName: String): String {
-    val newTrace = arrayListOf<StackTraceElement>()
+    konst newTrace = arrayListOf<StackTraceElement>()
     var skip = true
     for (element in cause.stackTrace.reversed()) {
         if ("${element.className}.${element.methodName}" == startFromMethodName) {
@@ -64,7 +64,7 @@ fun renderReplStackTrace(cause: Throwable, startFromMethodName: String): String 
         }
     }
 
-    val resultingTrace = newTrace.reversed().dropLast(1)
+    konst resultingTrace = newTrace.reversed().dropLast(1)
 
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UsePropertyAccessSyntax")
     (cause as java.lang.Throwable).setStackTrace(resultingTrace.toTypedArray())
@@ -73,7 +73,7 @@ fun renderReplStackTrace(cause: Throwable, startFromMethodName: String): String 
 }
 
 internal fun ClassLoader.listAllUrlsAsFiles(): List<File> {
-    val parents = generateSequence(this) { loader -> loader.parent }.filterIsInstance(URLClassLoader::class.java)
+    konst parents = generateSequence(this) { loader -> loader.parent }.filterIsInstance(URLClassLoader::class.java)
     return parents.fold(emptyList<File>()) { accum, loader ->
         loader.listLocalUrlsAsFiles() + accum
     }.distinct()

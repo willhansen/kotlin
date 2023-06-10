@@ -36,11 +36,11 @@ fun DescriptorVisibility.isVisibleOutside() =
     this != DescriptorVisibilities.PRIVATE && this != DescriptorVisibilities.PRIVATE_TO_THIS && this != DescriptorVisibilities.INVISIBLE_FAKE
 
 fun syntheticVisibility(originalDescriptor: DeclarationDescriptorWithVisibility, isUsedForExtension: Boolean): DescriptorVisibility {
-    return when (val originalVisibility = originalDescriptor.visibility) {
+    return when (konst originalVisibility = originalDescriptor.visibility) {
         DescriptorVisibilities.PUBLIC -> DescriptorVisibilities.PUBLIC
 
         else -> object : DescriptorVisibility() {
-            override val delegate: Visibility
+            override konst delegate: Visibility
                 get() = originalVisibility.delegate
 
             override fun isVisible(
@@ -59,10 +59,10 @@ fun syntheticVisibility(originalDescriptor: DeclarationDescriptorWithVisibility,
 
             override fun normalize() = originalVisibility.normalize()
 
-            override val internalDisplayName: String
+            override konst internalDisplayName: String
                 get() = originalVisibility.internalDisplayName + " for synthetic extension"
 
-            override val externalDisplayName: String
+            override konst externalDisplayName: String
                 get() = internalDisplayName
         }
     }

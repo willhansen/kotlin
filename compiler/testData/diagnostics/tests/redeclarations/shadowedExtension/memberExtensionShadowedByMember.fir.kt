@@ -1,9 +1,9 @@
 interface IFooBar {
     fun foo()
-    val bar: Int
+    konst bar: Int
 }
 
 class Host {
     fun IFooBar.foo() {}
-    val IFooBar.bar: Int get() = 42
+    konst IFooBar.bar: Int get() = 42
 }

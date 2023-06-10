@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
 
-class GenericClass<T>(val value: T) {
+class GenericClass<T>(konst konstue: T) {
     fun withNewValue(newValue: T) = GenericClass(newValue)
 }

@@ -9,13 +9,13 @@ import org.jetbrains.kotlin.build.report.metrics.BuildMetrics
 
 /** Data for a build operation (e.g., task or transform). */
 interface BuildOperationRecord {
-    val path: String
-    val classFqName: String
-    val isFromKotlinPlugin: Boolean
-    val startTimeMs: Long // Measured by System.currentTimeMillis()
-    val totalTimeMs: Long
-    val buildMetrics: BuildMetrics
-    val didWork: Boolean
-    val skipMessage: String?
-    val icLogLines: List<String>
+    konst path: String
+    konst classFqName: String
+    konst isFromKotlinPlugin: Boolean
+    konst startTimeMs: Long // Measured by System.currentTimeMillis()
+    konst totalTimeMs: Long
+    konst buildMetrics: BuildMetrics
+    konst didWork: Boolean
+    konst skipMessage: String?
+    konst icLogLines: List<String>
 }

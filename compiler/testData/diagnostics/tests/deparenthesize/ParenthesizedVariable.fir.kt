@@ -1,3 +1,3 @@
 fun test() {
-    (d@ val bar = 2)
+    (d@ konst bar = 2)
 }

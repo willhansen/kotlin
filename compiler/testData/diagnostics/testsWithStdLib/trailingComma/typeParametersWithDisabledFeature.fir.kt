@@ -28,13 +28,13 @@ fun <T1,
         T2,
         > T2?.foo2() {}
 
-val <T,> T.bar1 get() = null
+konst <T,> T.bar1 get() = null
 
 var <
         T4,
         > T4?.bar2
     get() = null
-    set(value) {
+    set(konstue) {
 
     }
 

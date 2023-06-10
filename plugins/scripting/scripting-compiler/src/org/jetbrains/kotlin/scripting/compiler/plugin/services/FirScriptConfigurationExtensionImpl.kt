@@ -46,20 +46,20 @@ class FirScriptConfiguratorExtensionImpl(
 
     @OptIn(SymbolInternals::class)
     override fun FirScriptBuilder.configure(fileBuilder: FirFileBuilder) {
-        val sourceFile = fileBuilder.sourceFile ?: return
+        konst sourceFile = fileBuilder.sourceFile ?: return
 
         withConfigurationIfAny(sourceFile) { configuration ->
             // TODO: rewrite/extract decision logic for clarity
             configuration[ScriptCompilationConfiguration.baseClass]?.let { baseClass ->
-                val baseClassFqn = FqName.fromSegments(baseClass.typeName.split("."))
+                konst baseClassFqn = FqName.fromSegments(baseClass.typeName.split("."))
                 contextReceivers.add(buildContextReceiverWithFqName(baseClassFqn))
 
-                val baseClassSymbol =
+                konst baseClassSymbol =
                     session.dependenciesSymbolProvider.getClassLikeSymbolByClassId(ClassId(baseClassFqn.parent(), baseClassFqn.shortName()))
                             as? FirRegularClassSymbol
                 if (baseClassSymbol != null) {
                     // assuming that if base class will be unresolved, the error will be reported on the contextReceiver
-                    baseClassSymbol.fir.primaryConstructorIfAny(session)?.fir?.valueParameters?.forEach { baseCtorParameter ->
+                    baseClassSymbol.fir.primaryConstructorIfAny(session)?.fir?.konstueParameters?.forEach { baseCtorParameter ->
                         parameters.add(
                             buildProperty {
                                 moduleData = session.moduleData
@@ -80,7 +80,7 @@ class FirScriptConfiguratorExtensionImpl(
                 contextReceivers.add(buildContextReceiverWithFqName(FqName.fromSegments(implicitReceiver.typeName.split("."))))
             }
             configuration[ScriptCompilationConfiguration.providedProperties]?.forEach { propertyName, propertyType ->
-                val typeRef = buildUserTypeRef {
+                konst typeRef = buildUserTypeRef {
                     isMarkedNullable = propertyType.isNullable
                     propertyType.typeName.split(".").forEach {
                         qualifier.add(FirQualifierPartImpl(null, Name.identifier(it), FirTypeArgumentListImpl(null)))
@@ -104,13 +104,13 @@ class FirScriptConfiguratorExtensionImpl(
             }
 
             configuration[ScriptCompilationConfiguration.defaultImports]?.forEach { defaultImport ->
-                val trimmed = defaultImport.trim()
-                val endsWithStar = trimmed.endsWith("*")
-                val stripped = if (endsWithStar) trimmed.substring(0, trimmed.length - 2) else trimmed
-                val fqName = FqName.fromSegments(stripped.split("."))
+                konst trimmed = defaultImport.trim()
+                konst endsWithStar = trimmed.endsWith("*")
+                konst stripped = if (endsWithStar) trimmed.substring(0, trimmed.length - 2) else trimmed
+                konst fqName = FqName.fromSegments(stripped.split("."))
                 fileBuilder.imports += buildImport {
                     fileBuilder.sourceFile?.project()?.let {
-                        val dummyElement = KtPsiFactory(it, markGenerated = true).createColon()
+                        konst dummyElement = KtPsiFactory(it, markGenerated = true).createColon()
                         source = KtFakeSourceElement(dummyElement, KtFakeSourceElementKind.ImplicitImport)
                     }
                     importedFqName = fqName
@@ -125,9 +125,9 @@ class FirScriptConfiguratorExtensionImpl(
     }
 
     private fun withConfigurationIfAny(file: KtSourceFile, body: (ScriptCompilationConfiguration) -> Unit) {
-        val configuration = session.scriptDefinitionProviderService?.let { providerService ->
-            val sourceCode = file.toSourceCode()
-            val ktFile = sourceCode?.originalKtFile()
+        konst configuration = session.scriptDefinitionProviderService?.let { providerService ->
+            konst sourceCode = file.toSourceCode()
+            konst ktFile = sourceCode?.originalKtFile()
             with(providerService) {
                 ktFile?.let { configurationFor(it) }
                     ?: sourceCode?.let { configurationFor(it) }
@@ -150,9 +150,9 @@ class FirScriptConfiguratorExtensionImpl(
             }
         }
 
-    private val _knownAnnotationsForSamWithReceiver = hashSetOf<String>()
+    private konst _knownAnnotationsForSamWithReceiver = hashSetOf<String>()
 
-    internal val knownAnnotationsForSamWithReceiver: Set<String>
+    internal konst knownAnnotationsForSamWithReceiver: Set<String>
         get() = _knownAnnotationsForSamWithReceiver
 
     companion object {
@@ -169,7 +169,7 @@ private fun SourceCode.originalKtFile(): KtFile =
         ?: error("only PSI scripts are supported at the moment")
 
 private fun FirScriptDefinitionProviderService.configurationFor(file: KtFile): ScriptCompilationConfiguration? =
-    configurationProvider?.getScriptConfigurationResult(file)?.valueOrNull()?.configuration
+    configurationProvider?.getScriptConfigurationResult(file)?.konstueOrNull()?.configuration
 
 private fun FirScriptDefinitionProviderService.configurationFor(sourceCode: SourceCode): ScriptCompilationConfiguration? =
     definitionProvider?.findDefinition(sourceCode)?.compilationConfiguration

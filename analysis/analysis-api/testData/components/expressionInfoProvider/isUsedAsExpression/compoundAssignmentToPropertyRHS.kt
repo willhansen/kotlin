@@ -4,14 +4,14 @@ class C {
         get() {
             return field * 2
         }
-        set(value) {
+        set(konstue) {
             field += 45
         }
 
 }
 
 fun main() {
-    val c = C()
+    konst c = C()
     c.property -= <expr>20</expr>
     println(C().property)
 }

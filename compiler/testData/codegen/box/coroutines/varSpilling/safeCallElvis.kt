@@ -10,7 +10,7 @@ class Log {
     }
 }
 
-private val log = Log()
+private konst log = Log()
 
 class C {
     fun method() {}

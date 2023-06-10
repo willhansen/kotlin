@@ -29,7 +29,7 @@ fun <U> id(x: U) = x
 fun <E> select(vararg x: E) = x[0]
 
 fun test() {
-    val ret = build {
+    konst ret = build {
         emit("1")
         <!DEBUG_INFO_EXPRESSION_TYPE("(TypeVariable(R)..TypeVariable(R)?)")!>Test.foo(get())<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("(Inv<TypeVariable(R)>..Inv<TypeVariable(R)>?)")!>Test.foo(getInv())<!>

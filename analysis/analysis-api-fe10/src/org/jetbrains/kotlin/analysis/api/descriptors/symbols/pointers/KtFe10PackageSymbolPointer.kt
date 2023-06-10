@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 import org.jetbrains.kotlin.name.FqName
 
-internal class KtFe10PackageSymbolPointer(private val packageName: FqName) : KtSymbolPointer<KtPackageSymbol>() {
+internal class KtFe10PackageSymbolPointer(private konst packageName: FqName) : KtSymbolPointer<KtPackageSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtPackageSymbol {
         check(analysisSession is KtFe10AnalysisSession)

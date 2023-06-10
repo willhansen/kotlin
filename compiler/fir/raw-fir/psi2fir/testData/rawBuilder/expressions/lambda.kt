@@ -1,12 +1,12 @@
 // WITH_STDLIB
-data class Tuple(val x: Int, val y: Int)
+data class Tuple(konst x: Int, konst y: Int)
 
 inline fun use(f: (Tuple) -> Int) = f(Tuple(1, 2))
 
 fun foo(): Int {
-    val l1 = { t: Tuple ->
-        val x = t.x
-        val y = t.y
+    konst l1 = { t: Tuple ->
+        konst x = t.x
+        konst y = t.y
         x + y
     }
     use { (x, y) -> x + y }
@@ -25,12 +25,12 @@ fun bar(): Int {
 }
 
 fun test(list: List<Int>) {
-    val map = mutableMapOf<Int, String>()
+    konst map = mutableMapOf<Int, String>()
     list.forEach { map.getOrPut(it, { mutableListOf() }) += "" }
 }
 
-val simple = { }
+konst simple = { }
 
-val simpleWithArrow = { -> }
+konst simpleWithArrow = { -> }
 
-val another = { 42 }
+konst another = { 42 }

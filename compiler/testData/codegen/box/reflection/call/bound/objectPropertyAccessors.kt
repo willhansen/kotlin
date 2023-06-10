@@ -5,21 +5,21 @@ import kotlin.reflect.*
 import kotlin.test.assertEquals
 
 object Host {
-    val x = 1
+    konst x = 1
     var y = 2
 
-    val xx: Int
+    konst xx: Int
         get() = x
 
     var yy: Int
         get() = y
-        set(value) { y = value }
+        set(konstue) { y = konstue }
 }
 
-val c_x = Host::x
-val c_xx = Host::xx
-val c_y = Host::y
-val c_yy = Host::yy
+konst c_x = Host::x
+konst c_xx = Host::xx
+konst c_y = Host::y
+konst c_yy = Host::yy
 
 fun box(): String {
     assertEquals(1, c_x.getter())

@@ -1,6 +1,6 @@
 import okio.FileSystem
 
-actual val HostFileSystem: FileSystem
+actual konst HostFileSystem: FileSystem
     get() = FileSystem.SYSTEM
 
 fun useCommonMain() = main()

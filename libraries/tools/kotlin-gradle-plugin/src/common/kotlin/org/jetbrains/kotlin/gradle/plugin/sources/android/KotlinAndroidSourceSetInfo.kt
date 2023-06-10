@@ -17,20 +17,20 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.utils.findByType
 
 @ExperimentalKotlinGradlePluginApi
-val KotlinSourceSet.androidSourceSetInfoOrNull: KotlinAndroidSourceSetInfo?
+konst KotlinSourceSet.androidSourceSetInfoOrNull: KotlinAndroidSourceSetInfo?
     get() = (this as? ExtensionAware)?.extensions?.findByType()
 
 @ExperimentalKotlinGradlePluginApi
 var KotlinSourceSet.androidSourceSetInfo: KotlinAndroidSourceSetInfo
     get() = androidSourceSetInfoOrNull ?: throw UnknownDomainObjectException("No 'androidSourceSetInfo' found on KotlinSourceSet: $name")
-    internal set(value) {
-        (this as ExtensionAware).extensions.add("androidSourceSetInfo", value)
+    internal set(konstue) {
+        (this as ExtensionAware).extensions.add("androidSourceSetInfo", konstue)
     }
 
 @ExperimentalKotlinGradlePluginApi
 fun Project.findAndroidSourceSet(kotlinSourceSet: KotlinSourceSet): AndroidSourceSet? {
-    val androidSourceSetInfo = kotlinSourceSet.androidSourceSetInfoOrNull ?: return null
-    val android = extensions.findByType<BaseExtension>() ?: return null
+    konst androidSourceSetInfo = kotlinSourceSet.androidSourceSetInfoOrNull ?: return null
+    konst android = extensions.findByType<BaseExtension>() ?: return null
     return android.sourceSets.getByName(androidSourceSetInfo.androidSourceSetName)
 }
 
@@ -51,16 +51,16 @@ private fun Project.findKotlinSourceSet(androidSourceSetName: String): KotlinSou
 
 @ExperimentalKotlinGradlePluginApi
 sealed class KotlinAndroidSourceSetInfo {
-    abstract val kotlinSourceSetName: String
-    abstract val androidSourceSetName: String
-    internal abstract val androidVariantType: AndroidVariantType
-    abstract val androidVariantNames: Set<String>
+    abstract konst kotlinSourceSetName: String
+    abstract konst androidSourceSetName: String
+    internal abstract konst androidVariantType: AndroidVariantType
+    abstract konst androidVariantNames: Set<String>
 
     internal data class Mutable(
-        override val kotlinSourceSetName: String,
-        override val androidSourceSetName: String,
+        override konst kotlinSourceSetName: String,
+        override konst androidSourceSetName: String,
         override var androidVariantType: AndroidVariantType = AndroidVariantType.Unknown,
-        override val androidVariantNames: MutableSet<String> = mutableSetOf()
+        override konst androidVariantNames: MutableSet<String> = mutableSetOf()
     ) : KotlinAndroidSourceSetInfo()
 
     internal fun asMutable(): Mutable = when (this) {

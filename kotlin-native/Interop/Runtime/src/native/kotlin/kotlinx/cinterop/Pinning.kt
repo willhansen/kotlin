@@ -9,7 +9,7 @@ import kotlin.native.*
 import kotlin.native.internal.GCUnsafeCall
 
 @ExperimentalForeignApi
-data class Pinned<out T : Any> internal constructor(private val stablePtr: COpaquePointer) {
+data class Pinned<out T : Any> internal constructor(private konst stablePtr: COpaquePointer) {
 
     /**
      * Disposes the handle. It must not be [used][get] after that.
@@ -30,7 +30,7 @@ fun <T : Any> T.pin() = Pinned<T>(createStablePointer(this))
 
 @ExperimentalForeignApi
 inline fun <T : Any, R> T.usePinned(block: (Pinned<T>) -> R): R {
-    val pinned = this.pin()
+    konst pinned = this.pin()
     return try {
         block(pinned)
     } finally {
@@ -105,7 +105,7 @@ private inline fun <T : Any, P : CPointed> T.usingPinned(
 ) = object : CValuesRef<P>() {
 
     override fun getPointer(scope: AutofreeScope): CPointer<P> {
-        val pinned = this@usingPinned.pin()
+        konst pinned = this@usingPinned.pin()
         scope.defer { pinned.unpin() }
         return pinned.block()
     }

@@ -1,3 +1,3 @@
 package com.example
 
-val movedTopLevelProperty = 0
+konst movedTopLevelProperty = 0

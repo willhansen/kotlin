@@ -40,11 +40,11 @@ class JvmFieldApplicabilityChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is PropertyDescriptor || (declaration !is KtProperty && declaration !is KtParameter)) return
 
-        val annotation = descriptor.findJvmFieldAnnotation()
+        konst annotation = descriptor.findJvmFieldAnnotation()
             ?: descriptor.delegateField?.annotations?.findAnnotation(JvmAbi.JVM_FIELD_ANNOTATION_FQ_NAME)
             ?: return
 
-        val problem = when {
+        konst problem = when {
             declaration is KtProperty && declaration.hasDelegate() -> DELEGATE
             !descriptor.hasBackingField(context.trace.bindingContext) -> return
             descriptor.isOverridable -> NOT_FINAL
@@ -67,9 +67,9 @@ class JvmFieldApplicabilityChecker : DeclarationChecker {
             else -> return
         }
 
-        val annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(annotation) ?: return
+        konst annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(annotation) ?: return
 
-        val factory =
+        konst factory =
             if (declaration is KtParameter && !context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitJvmFieldOnOverrideFromInterfaceInPrimaryConstructor)) {
                 ErrorsJvm.INAPPLICABLE_JVM_FIELD_WARNING
             } else {
@@ -96,7 +96,7 @@ class JvmFieldApplicabilityChecker : DeclarationChecker {
     //
     //     @JvmField
     //     @get:Anno
-    //     val foo = 42
+    //     konst foo = 42
     //
     // we'd start considering foo as having a custom getter and disallow the JvmField annotation on it
     private fun KtProperty.hasCustomAccessor(): Boolean =

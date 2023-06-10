@@ -54,17 +54,17 @@ inline fun <reified T : Annotation> KAnnotatedElement.findAnnotations(): List<T>
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 @WasExperimental(ExperimentalStdlibApi::class)
 fun <T : Annotation> KAnnotatedElement.findAnnotations(klass: KClass<T>): List<T> {
-    val filtered = annotations.filterIsInstance(klass.java)
+    konst filtered = annotations.filterIsInstance(klass.java)
     if (filtered.isNotEmpty()) return filtered
 
-    val containerClass = Java8RepeatableContainerLoader.loadRepeatableContainer(klass.java)
+    konst containerClass = Java8RepeatableContainerLoader.loadRepeatableContainer(klass.java)
     if (containerClass != null) {
-        val container = annotations.firstOrNull { it.annotationClass.java == containerClass }
+        konst container = annotations.firstOrNull { it.annotationClass.java == containerClass }
         if (container != null) {
-            // A repeatable annotation container must have a method "value" returning the array of repeated annotations.
-            val valueMethod = container::class.java.getMethod("value")
+            // A repeatable annotation container must have a method "konstue" returning the array of repeated annotations.
+            konst konstueMethod = container::class.java.getMethod("konstue")
             @Suppress("UNCHECKED_CAST")
-            return (valueMethod(container) as Array<T>).asList()
+            return (konstueMethod(container) as Array<T>).asList()
         }
     }
 
@@ -73,29 +73,29 @@ fun <T : Annotation> KAnnotatedElement.findAnnotations(klass: KClass<T>): List<T
 
 @Suppress("UNCHECKED_CAST")
 private object Java8RepeatableContainerLoader {
-    class Cache(val repeatableClass: Class<out Annotation>?, val valueMethod: Method?)
+    class Cache(konst repeatableClass: Class<out Annotation>?, konst konstueMethod: Method?)
 
     var cache: Cache? = null
 
     private fun buildCache(): Cache {
-        val repeatableClass = try {
+        konst repeatableClass = try {
             Class.forName("java.lang.annotation.Repeatable") as Class<out Annotation>
         } catch (e: ClassNotFoundException) {
             return Cache(null, null)
         }
 
-        return Cache(repeatableClass, repeatableClass.getMethod("value"))
+        return Cache(repeatableClass, repeatableClass.getMethod("konstue"))
     }
 
     fun loadRepeatableContainer(klass: Class<out Annotation>): Class<out Annotation>? {
-        val cache = cache ?: synchronized(this) {
+        konst cache = cache ?: synchronized(this) {
             cache ?: buildCache().also { cache = it }
         }
 
-        val repeatableClass = cache.repeatableClass ?: return null
-        val repeatable = klass.getAnnotation(repeatableClass) ?: return null
-        val valueMethod = cache.valueMethod ?: return null
+        konst repeatableClass = cache.repeatableClass ?: return null
+        konst repeatable = klass.getAnnotation(repeatableClass) ?: return null
+        konst konstueMethod = cache.konstueMethod ?: return null
 
-        return valueMethod(repeatable) as Class<out Annotation>
+        return konstueMethod(repeatable) as Class<out Annotation>
     }
 }

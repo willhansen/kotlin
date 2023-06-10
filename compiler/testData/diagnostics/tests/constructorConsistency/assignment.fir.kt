@@ -1,8 +1,8 @@
 class My {
-    val x: String
+    konst x: String
 
     constructor() {
-        val temp = this
+        konst temp = this
         x = bar(temp)
     }
 

@@ -38,21 +38,21 @@ import java.io.File
 
 class SignatureDumpingBuilderFactory(
         builderFactory: ClassBuilderFactory,
-        val destination: File
+        konst destination: File
 ) : DelegatingClassBuilderFactory(builderFactory) {
 
     companion object {
-        val MEMBER_RENDERER = DescriptorRenderer.withOptions {
+        konst MEMBER_RENDERER = DescriptorRenderer.withOptions {
             withDefinedIn = false
             modifiers -= DescriptorRendererModifier.VISIBILITY
         }
-        val TYPE_RENDERER = DescriptorRenderer.withOptions {
+        konst TYPE_RENDERER = DescriptorRenderer.withOptions {
             withSourceFileForTopLevel = false
             modifiers -= DescriptorRendererModifier.VISIBILITY
         }
     }
 
-    private val outputStream: BufferedWriter by lazy {
+    private konst outputStream: BufferedWriter by lazy {
         // TODO: Replace with LOG.info and make log output go to MessageCollector
         println("[INFO] Dumping signatures to $destination")
         destination.parentFile?.mkdirs()
@@ -71,10 +71,10 @@ class SignatureDumpingBuilderFactory(
     }
 
 
-    private inner class SignatureDumpingClassBuilder(val origin: JvmDeclarationOrigin, val _delegate: ClassBuilder) : DelegatingClassBuilder() {
+    private inner class SignatureDumpingClassBuilder(konst origin: JvmDeclarationOrigin, konst _delegate: ClassBuilder) : DelegatingClassBuilder() {
         override fun getDelegate() = _delegate
 
-        private val signatures = mutableListOf<Pair<RawSignature, DeclarationDescriptor?>>()
+        private konst signatures = mutableListOf<Pair<RawSignature, DeclarationDescriptor?>>()
         private lateinit var javaClassName: String
 
         override fun defineClass(origin: PsiElement?, version: Int, access: Int, name: String, signature: String?, superName: String, interfaces: Array<out String>) {
@@ -90,9 +90,9 @@ class SignatureDumpingBuilderFactory(
             return super.newMethod(origin, access, name, desc, signature, exceptions)
         }
 
-        override fun newField(origin: JvmDeclarationOrigin, access: Int, name: String, desc: String, signature: String?, value: Any?): FieldVisitor {
+        override fun newField(origin: JvmDeclarationOrigin, access: Int, name: String, desc: String, signature: String?, konstue: Any?): FieldVisitor {
             signatures += RawSignature(name, desc, MemberKind.FIELD) to origin.descriptor
-            return super.newField(origin, access, name, desc, signature, value)
+            return super.newField(origin, access, name, desc, signature, konstue)
         }
 
         override fun done(generateSmapCopyToAnnotation: Boolean) {
@@ -108,7 +108,7 @@ class SignatureDumpingBuilderFactory(
 
             outputStream.append("\t\t").appendQuoted("members").append(": [\n")
             signatures.joinTo(outputStream, ",\n") { buildString {
-                val (signature, descriptor) = it
+                konst (signature, descriptor) = it
                 append("\t\t\t{")
                 descriptor?.let {
                     (it as? DeclarationDescriptorWithVisibility)?.visibility?.let {
@@ -127,12 +127,12 @@ class SignatureDumpingBuilderFactory(
     }
 }
 
-private fun Appendable.appendQuoted(value: String?): Appendable = value?.let { append('"').append(jsonEscape(it)).append('"') } ?: append("null")
-private fun Appendable.appendNameValue(name: String, value: String?): Appendable = appendQuoted(name).append(": ").appendQuoted(value)
+private fun Appendable.appendQuoted(konstue: String?): Appendable = konstue?.let { append('"').append(jsonEscape(it)).append('"') } ?: append("null")
+private fun Appendable.appendNameValue(name: String, konstue: String?): Appendable = appendQuoted(name).append(": ").appendQuoted(konstue)
 
-private fun jsonEscape(value: String): String = buildString {
-    for (index in 0..value.length - 1) {
-        val ch = value[index]
+private fun jsonEscape(konstue: String): String = buildString {
+    for (index in 0..konstue.length - 1) {
+        konst ch = konstue[index]
         when (ch) {
             '\b' -> append("\\b")
             '\t' -> append("\\t")

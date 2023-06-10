@@ -17,6 +17,6 @@ var x: Int = 0
     @ExplicitGetAnnotation
     ge<caret>t() = field
     @ExplicitSetAnnotation
-    set(@ExplicitSetparamAnnotation value) {
-        field = value
+    set(@ExplicitSetparamAnnotation konstue) {
+        field = konstue
     }

@@ -22,7 +22,7 @@ internal class HierarchicalStructureOptInMigrationArtifactContentMppIT : BaseGra
     companion object {
         @Parameterized.Parameters(name = "{0}")
         @JvmStatic
-        fun params() = Mode.values().map { arrayOf(it) }
+        fun params() = Mode.konstues().map { arrayOf(it) }
     }
 
     @Parameterized.Parameter(0)
@@ -49,7 +49,7 @@ internal class HierarchicalStructureOptInMigrationArtifactContentMppIT : BaseGra
             }.toTypedArray(),
         ) {
             assertSuccessful()
-            val metadataJarEntries = ZipFile(
+            konst metadataJarEntries = ZipFile(
                 projectDir.resolve("../repo/com/example/bar/my-lib-bar/1.0/my-lib-bar-1.0.jar")
             ).use { zip ->
                 zip.entries().asSequence().toList().map { it.name }
@@ -59,8 +59,8 @@ internal class HierarchicalStructureOptInMigrationArtifactContentMppIT : BaseGra
                 assertTrue { metadataJarEntries.any { "commonMain" in it } }
             }
 
-            val hasJvmAndJsMainEntries = metadataJarEntries.any { "jvmAndJsMain" in it }
-            val shouldHaveJvmAndJsMainEntries = when (mode) {
+            konst hasJvmAndJsMainEntries = metadataJarEntries.any { "jvmAndJsMain" in it }
+            konst shouldHaveJvmAndJsMainEntries = when (mode) {
                 OPT_OUT_HMPP, DISABLE_HMPP_BY_DEFAULT -> false
                 HMPP_BY_DEFAULT -> true
             }

@@ -14,7 +14,7 @@ class C1 {
 class C2 {
     companion object S {
 
-        val prop: String = ""
+        konst prop: String = ""
 
         fun o(s: String) = Unit
         fun o(i: Int) = Unit
@@ -40,8 +40,8 @@ open class Base {
     fun <T> g(t: T) {
     }
 
-    val p = 1
-    val Int.ext: Int
+    konst p = 1
+    konst Int.ext: Int
         get() = 4
 }
 
@@ -53,7 +53,7 @@ interface BaseI<T> {
 
 class C3 {
     companion object K: Base(), BaseI<Int> {
-        val own: String = ""
+        konst own: String = ""
     }
 }
 
@@ -84,18 +84,18 @@ fun testImportFromObjectByName() {
     o(3)
     3.ext()
     "".ext = 3
-    val c: Int = "".ext
+    konst c: Int = "".ext
 
     3.extRenamed()
     "".extRenamed = 3
-    val c2: Int = "".extRenamed
+    konst c2: Int = "".extRenamed
 
     A()
     A(3)
 
-    val a: Int = genericFun(3, 3)
-    val s: String = genericFun("A", "b")
-    val b: Boolean = genericFun(true, false)
+    konst a: Int = genericFun(3, 3)
+    konst s: String = genericFun("A", "b")
+    konst b: Boolean = genericFun(true, false)
 }
 
 fun <T> t(t: T): T {

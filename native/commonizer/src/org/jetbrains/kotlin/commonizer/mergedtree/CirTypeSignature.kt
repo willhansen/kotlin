@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.utils.Interner
 import org.jetbrains.kotlin.types.Variance
 
 class CirTypeSignature {
-    private val elements = ArrayList<Any>()
+    private konst elements = ArrayList<Any>()
 
     private var hashCode = 0
 
@@ -35,7 +35,7 @@ class CirTypeSignature {
     }
 
     companion object {
-        val interner = Interner<CirTypeSignature>()
+        konst interner = Interner<CirTypeSignature>()
     }
 }
 
@@ -50,9 +50,9 @@ internal fun SignatureBuildingContext(
 }
 
 internal sealed interface SignatureBuildingContext {
-    val memberContext: CirMemberContext
-    val classifierSignatureBuildingContext: ClassifierSignatureBuildingContext
-    val argumentsSignatureBuildingContext: ArgumentsSignatureBuildingContext
+    konst memberContext: CirMemberContext
+    konst classifierSignatureBuildingContext: ClassifierSignatureBuildingContext
+    konst argumentsSignatureBuildingContext: ArgumentsSignatureBuildingContext
 }
 
 internal sealed interface ClassifierSignatureBuildingContext {
@@ -62,7 +62,7 @@ internal sealed interface ClassifierSignatureBuildingContext {
         override fun appendSignature(signature: CirTypeSignature, classifierId: CirEntityId) = signature.add(classifierId)
     }
 
-    class TypeAliasInvariant(private val associatedIdsResolver: AssociatedClassifierIdsResolver) : ClassifierSignatureBuildingContext {
+    class TypeAliasInvariant(private konst associatedIdsResolver: AssociatedClassifierIdsResolver) : ClassifierSignatureBuildingContext {
         override fun appendSignature(signature: CirTypeSignature, classifierId: CirEntityId) {
             return signature.add(associatedIdsResolver.resolveAssociatedIds(classifierId) ?: classifierId)
         }
@@ -107,7 +107,7 @@ internal sealed interface ArgumentsSignatureBuildingContext {
 }
 
 
-private enum class TypeSignatureElements(val stringRepresentation: String) {
+private enum class TypeSignatureElements(konst stringRepresentation: String) {
     ArgumentsStartToken("<"),
     ArgumentsEndToken(">"),
     ArgumentsSeparator(", "),
@@ -125,7 +125,7 @@ private enum class TypeSignatureElements(val stringRepresentation: String) {
 }
 
 internal fun buildApproximationSignature(context: SignatureBuildingContext, type: CirType): CirTypeSignature {
-    val signature = CirTypeSignature()
+    konst signature = CirTypeSignature()
     signature.appendTypeApproximationSignature(context, type)
     return CirTypeSignature.interner.intern(signature)
 }
@@ -149,7 +149,7 @@ internal fun CirTypeSignature.appendClassOrTypeAliasTypeApproximationSignature(
 private fun CirTypeSignature.appendTypeParameterTypeApproximationSignature(
     context: TypeParameterTypeSignatureBuildingContext, type: CirTypeParameterType
 ) {
-    val typeParameter = context.resolveTypeParameter(type.index)
+    konst typeParameter = context.resolveTypeParameter(type.index)
     add(typeParameter.name)
     if (context.isVisitedFirstTime(type.index)) {
         add(TypeSignatureElements.UpperBoundsStartToken)
@@ -178,20 +178,20 @@ private fun SignatureBuildingContext.forTypeParameterTypes(): TypeParameterTypeS
 }
 
 private class DefaultSignatureBuildingContext(
-    override val memberContext: CirMemberContext,
-    override val classifierSignatureBuildingContext: ClassifierSignatureBuildingContext,
-    override val argumentsSignatureBuildingContext: ArgumentsSignatureBuildingContext,
-    val functionOrPropertyOrConstructor: CirHasTypeParameters
+    override konst memberContext: CirMemberContext,
+    override konst classifierSignatureBuildingContext: ClassifierSignatureBuildingContext,
+    override konst argumentsSignatureBuildingContext: ArgumentsSignatureBuildingContext,
+    konst functionOrPropertyOrConstructor: CirHasTypeParameters
 ) : SignatureBuildingContext
 
 private class TypeParameterTypeSignatureBuildingContext(
-    override val memberContext: CirMemberContext,
-    override val classifierSignatureBuildingContext: ClassifierSignatureBuildingContext,
-    override val argumentsSignatureBuildingContext: ArgumentsSignatureBuildingContext,
-    private val functionOrPropertyOrConstructor: CirHasTypeParameters
+    override konst memberContext: CirMemberContext,
+    override konst classifierSignatureBuildingContext: ClassifierSignatureBuildingContext,
+    override konst argumentsSignatureBuildingContext: ArgumentsSignatureBuildingContext,
+    private konst functionOrPropertyOrConstructor: CirHasTypeParameters
 ) : SignatureBuildingContext {
 
-    private val alreadyVisitedParameterTypeIndices = TIntHashSet()
+    private konst alreadyVisitedParameterTypeIndices = TIntHashSet()
 
     fun isVisitedFirstTime(typeParameterIndex: Int): Boolean {
         return alreadyVisitedParameterTypeIndices.add(typeParameterIndex)
@@ -200,7 +200,7 @@ private class TypeParameterTypeSignatureBuildingContext(
     fun resolveTypeParameter(index: Int): CirTypeParameter {
         var indexOffset = 0
         memberContext.classes.forEach { clazz ->
-            val indexInClass = index - indexOffset
+            konst indexInClass = index - indexOffset
             if (indexInClass >= 0 && indexInClass <= clazz.typeParameters.lastIndex) {
                 return clazz.typeParameters[indexInClass]
             }

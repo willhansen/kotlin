@@ -35,7 +35,7 @@ internal fun disposeStablePointer(pointer: COpaquePointer) = deleteGlobalRef(poi
 internal fun derefStablePointer(pointer: COpaquePointer): Any = derefGlobalRef(pointer.toLong())
 
 private fun getFieldCType(type: KType): CType<*> {
-    val classifier = type.classifier
+    konst classifier = type.classifier
     if (classifier is KClass<*> && classifier.isSubclassOf(CStructVar::class)) {
         return getStructCType(classifier)
     }
@@ -44,7 +44,7 @@ private fun getFieldCType(type: KType): CType<*> {
 }
 
 private fun getVariableCType(type: KType): CType<*>? {
-    val classifier = type.classifier
+    konst classifier = type.classifier
     return when (classifier) {
         !is KClass<*> -> null
         ByteVarOf::class -> SInt8
@@ -62,13 +62,13 @@ private fun getVariableCType(type: KType): CType<*>? {
 }
 
 internal class Caches {
-    val structTypeCache = ConcurrentHashMap<Class<*>, CType<*>>()
-    val createdStaticFunctions = ConcurrentHashMap<FunctionSpec, CPointer<CFunction<*>>>()
+    konst structTypeCache = ConcurrentHashMap<Class<*>, CType<*>>()
+    konst createdStaticFunctions = ConcurrentHashMap<FunctionSpec, CPointer<CFunction<*>>>()
 
     // TODO: No concurrent bag or something in Java?
-    private val createdTypeStructs = mutableListOf<NativePtr>()
-    private val createdCifs = mutableListOf<NativePtr>()
-    private val createdClosures = mutableListOf<NativePtr>()
+    private konst createdTypeStructs = mutableListOf<NativePtr>()
+    private konst createdCifs = mutableListOf<NativePtr>()
+    private konst createdClosures = mutableListOf<NativePtr>()
 
     fun addTypeStruct(ptr: NativePtr) {
         synchronized(createdTypeStructs) { createdTypeStructs.add(ptr) }
@@ -90,7 +90,7 @@ internal class Caches {
 }
 
 @PublishedApi
-internal val jvmCallbacksDisposeHelper = ThreadSafeDisposableHelper(
+internal konst jvmCallbacksDisposeHelper = ThreadSafeDisposableHelper(
         {
             NativeMemoryAllocator.init()
             Caches()
@@ -111,36 +111,36 @@ object JvmCInteropCallbacks {
     fun dispose() = jvmCallbacksDisposeHelper.dispose()
 }
 
-private val caches: Caches
+private konst caches: Caches
     get() = jvmCallbacksDisposeHelper.holder ?: error("Caches hasn't been created")
 
 private fun getStructCType(structClass: KClass<*>): CType<*> = caches.structTypeCache.computeIfAbsent(structClass.java) {
     // Note that struct classes are not supposed to be user-defined,
     // so they don't require to be checked strictly.
 
-    val annotations = structClass.annotations
-    val cNaturalStruct = annotations.filterIsInstance<CNaturalStruct>().firstOrNull() ?:
+    konst annotations = structClass.annotations
+    konst cNaturalStruct = annotations.filterIsInstance<CNaturalStruct>().firstOrNull() ?:
             error("struct ${structClass.simpleName} has custom layout")
 
-    val propertiesByName = structClass.declaredMemberProperties.groupBy { it.name }
+    konst propertiesByName = structClass.declaredMemberProperties.groupBy { it.name }
 
-    val fields = cNaturalStruct.fieldNames.map {
+    konst fields = cNaturalStruct.fieldNames.map {
         propertiesByName[it]!!.single()
     }
 
-    val fieldCTypes = mutableListOf<CType<*>>()
+    konst fieldCTypes = mutableListOf<CType<*>>()
 
     for (field in fields) {
-        val lengthAnnotation = field.annotations.filterIsInstance<CLength>().firstOrNull()
+        konst lengthAnnotation = field.annotations.filterIsInstance<CLength>().firstOrNull()
         if (lengthAnnotation == null) {
-            val fieldType = getFieldCType(field.returnType)
+            konst fieldType = getFieldCType(field.returnType)
             fieldCTypes.add(fieldType)
         } else {
             assert(field.returnType.classifier == CPointer::class)
-            val length = lengthAnnotation.value
+            konst length = lengthAnnotation.konstue
             if (length != 0) {
-                val pointed = field.returnType.arguments.single().type!!
-                val pointedCType = getVariableCType(pointed) ?: TODO("array element type '$pointed'")
+                konst pointed = field.returnType.arguments.single().type!!
+                konst pointedCType = getVariableCType(pointed) ?: TODO("array element type '$pointed'")
 
                 // Represent array field as repeated element-typed fields:
                 repeat(length) {
@@ -151,27 +151,27 @@ private fun getStructCType(structClass: KClass<*>): CType<*> = caches.structType
     }
 
     @Suppress("DEPRECATION")
-    val structType = structClass.companionObjectInstance as CVariable.Type
+    konst structType = structClass.companionObjectInstance as CVariable.Type
 
     Struct(structType.size, structType.align, fieldCTypes)
 }
 
 private fun getStructValueCType(type: KType): CType<*> {
-    val structClass = type.arguments.singleOrNull()?.type?.classifier as? KClass<*> ?:
+    konst structClass = type.arguments.singleOrNull()?.type?.classifier as? KClass<*> ?:
             error("'$type' type is incomplete")
 
     return getStructCType(structClass)
 }
 
 private fun getEnumCType(classifier: KClass<*>): CEnumType? {
-    val rawValueType = classifier.declaredMemberProperties.single().returnType
+    konst rawValueType = classifier.declaredMemberProperties.single().returnType
 
-    val rawValueCType = when (rawValueType.classifier) {
+    konst rawValueCType = when (rawValueType.classifier) {
         Byte::class -> SInt8
         Short::class -> SInt16
         Int::class -> SInt32
         Long::class -> SInt64
-        else -> error("'${classifier.simpleName}' has unexpected value type '$rawValueType'")
+        else -> error("'${classifier.simpleName}' has unexpected konstue type '$rawValueType'")
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -179,9 +179,9 @@ private fun getEnumCType(classifier: KClass<*>): CEnumType? {
 }
 
 private fun getArgOrRetValCType(type: KType): CType<*> {
-    val classifier = type.classifier
+    konst classifier = type.classifier
 
-    val result = when (classifier) {
+    konst result = when (classifier) {
         !is KClass<*> -> null
         Unit::class -> Void
         Byte::class -> SInt8
@@ -210,14 +210,14 @@ private fun getArgOrRetValCType(type: KType): CType<*> {
 }
 
 private fun createStaticCFunction(function: Function<*>, spec: FunctionSpec): CPointer<CFunction<*>> {
-    val errorMessage = "staticCFunction must take an unbound, non-capturing function"
+    konst errorMessage = "staticCFunction must take an unbound, non-capturing function"
 
     if (!isStatic(function)) {
         throw IllegalArgumentException(errorMessage)
     }
 
-    val returnType = getArgOrRetValCType(spec.returnType)
-    val paramTypes = spec.parameterTypes.map { getArgOrRetValCType(it) }
+    konst returnType = getArgOrRetValCType(spec.returnType)
+    konst paramTypes = spec.parameterTypes.map { getArgOrRetValCType(it) }
 
     @Suppress("UNCHECKED_CAST")
     return interpretCPointer(createStaticCFunctionImpl(returnType as CType<Any?>, paramTypes, function))!!
@@ -238,7 +238,7 @@ private fun isStatic(function: Function<*>): Boolean {
 
             return get(null) == function
 
-            // If the class has static final "INSTANCE" field, and only the value of this field is accepted,
+            // If the class has static final "INSTANCE" field, and only the konstue of this field is accepted,
             // then each class is handled at most once, so these checks prevent memory leaks.
         }
     } catch (e: NoSuchFieldException) {
@@ -246,18 +246,18 @@ private fun isStatic(function: Function<*>): Boolean {
     }
 }
 
-internal data class FunctionSpec(val functionClass: Class<*>, val returnType: KType, val parameterTypes: List<KType>)
+internal data class FunctionSpec(konst functionClass: Class<*>, konst returnType: KType, konst parameterTypes: List<KType>)
 
 @Suppress("UNCHECKED_CAST")
 @PublishedApi
 internal fun <F : Function<*>> staticCFunctionImpl(function: F, returnType: KType, vararg parameterTypes: KType): CPointer<CFunction<F>> {
-    val spec = FunctionSpec(function.javaClass, returnType, parameterTypes.asList())
+    konst spec = FunctionSpec(function.javaClass, returnType, parameterTypes.asList())
     return caches.createdStaticFunctions.computeIfAbsent(spec) {
         createStaticCFunction(function, spec)
     } as CPointer<CFunction<F>>
 }
 
-private val invokeMethods = (0 .. 22).map { arity ->
+private konst invokeMethods = (0 .. 22).map { arity ->
     Class.forName("kotlin.jvm.functions.Function$arity").getMethod("invoke",
             *Array<Class<*>>(arity) { java.lang.Object::class.java })
 }
@@ -267,53 +267,53 @@ private fun createStaticCFunctionImpl(
         paramTypes: List<CType<*>>,
         function: Function<*>
 ): NativePtr {
-    val ffiCif = ffiCreateCif(returnType.ffiType, paramTypes.map { it.ffiType })
+    konst ffiCif = ffiCreateCif(returnType.ffiType, paramTypes.map { it.ffiType })
 
-    val arity = paramTypes.size
-    val pt = paramTypes.toTypedArray()
+    konst arity = paramTypes.size
+    konst pt = paramTypes.toTypedArray()
 
     @Suppress("UNCHECKED_CAST")
-    val impl: FfiClosureImpl = when (arity) {
+    konst impl: FfiClosureImpl = when (arity) {
         0 -> {
-            val f = function as () -> Any?
+            konst f = function as () -> Any?
             ffiClosureImpl(returnType) { _ ->
                 f()
             }
         }
         1 -> {
-            val f = function as (Any?) -> Any?
+            konst f = function as (Any?) -> Any?
             ffiClosureImpl(returnType) { args ->
                 f(pt.read(args, 0))
             }
         }
         2 -> {
-            val f = function as (Any?, Any?) -> Any?
+            konst f = function as (Any?, Any?) -> Any?
             ffiClosureImpl(returnType) { args ->
                 f(pt.read(args, 0), pt.read(args, 1))
             }
         }
         3 -> {
-            val f = function as (Any?, Any?, Any?) -> Any?
+            konst f = function as (Any?, Any?, Any?) -> Any?
             ffiClosureImpl(returnType) { args ->
                 f(pt.read(args, 0), pt.read(args, 1), pt.read(args, 2))
             }
         }
         4 -> {
-            val f = function as (Any?, Any?, Any?, Any?) -> Any?
+            konst f = function as (Any?, Any?, Any?, Any?) -> Any?
             ffiClosureImpl(returnType) { args ->
                 f(pt.read(args, 0), pt.read(args, 1), pt.read(args, 2), pt.read(args, 3))
             }
         }
         5 -> {
-            val f = function as (Any?, Any?, Any?, Any?, Any?) -> Any?
+            konst f = function as (Any?, Any?, Any?, Any?, Any?) -> Any?
             ffiClosureImpl(returnType) { args ->
                 f(pt.read(args, 0), pt.read(args, 1), pt.read(args, 2), pt.read(args, 3), pt.read(args, 4))
             }
         }
         else -> {
-            val invokeMethod = invokeMethods[arity]
+            konst invokeMethod = invokeMethods[arity]
             ffiClosureImpl(returnType) { args ->
-                val arguments = Array(arity) { pt.read(args, it) }
+                konst arguments = Array(arity) { pt.read(args, it) }
                 invokeMethod.invoke(function, *arguments)
             }
         }
@@ -331,101 +331,101 @@ private inline fun ffiClosureImpl(
 ): FfiClosureImpl {
     // Called through [ffi_fun] when a native function created with [ffiCreateClosure] is invoked.
     return LongConsumer {  retAndArgsRaw ->
-        val retAndArgs = retAndArgsRaw.toCPointer<CPointerVar<*>>()!!
+        konst retAndArgs = retAndArgsRaw.toCPointer<CPointerVar<*>>()!!
 
-        // Pointer to memory to be filled with return value of the invoked native function:
-        val ret = retAndArgs[0]!!
+        // Pointer to memory to be filled with return konstue of the invoked native function:
+        konst ret = retAndArgs[0]!!
 
         // Pointer to array of pointers to arguments passed to the invoked native function:
-        val args = retAndArgs[1]!!.reinterpret<COpaquePointerVar>()
+        konst args = retAndArgs[1]!!.reinterpret<COpaquePointerVar>()
 
-        val result = invoke(args)
+        konst result = invoke(args)
 
         returnType.write(ret.rawValue, result)
     }
 }
 
 /**
- * Describes the bridge between Kotlin type `T` and the corresponding C type of a function's parameter or return value.
+ * Describes the bridge between Kotlin type `T` and the corresponding C type of a function's parameter or return konstue.
  * It is supposed to be constructed using the primitive types (such as [SInt32]), the [Struct] combinator
  * and the [CEnumType] wrapper.
  *
  * This description omits the details that are irrelevant for the ABI.
  */
-internal abstract class CType<T> constructor(val ffiType: ffi_type) {
+internal abstract class CType<T> constructor(konst ffiType: ffi_type) {
     constructor(ffiTypePtr: Long) : this(interpretPointed<ffi_type>(ffiTypePtr))
     abstract fun read(location: NativePtr): T
-    abstract fun write(location: NativePtr, value: T): Unit
+    abstract fun write(location: NativePtr, konstue: T): Unit
 }
 
 private object Void : CType<Any?>(ffiTypeVoid()) {
     override fun read(location: NativePtr) = throw UnsupportedOperationException()
 
-    override fun write(location: NativePtr, value: Any?) {
+    override fun write(location: NativePtr, konstue: Any?) {
         // nothing to do.
     }
 }
 
 private object SInt8 : CType<Byte>(ffiTypeSInt8()) {
-    override fun read(location: NativePtr) = interpretPointed<ByteVar>(location).value
-    override fun write(location: NativePtr, value: Byte) {
-        interpretPointed<ByteVar>(location).value = value
+    override fun read(location: NativePtr) = interpretPointed<ByteVar>(location).konstue
+    override fun write(location: NativePtr, konstue: Byte) {
+        interpretPointed<ByteVar>(location).konstue = konstue
     }
 }
 
 private object SInt16 : CType<Short>(ffiTypeSInt16()) {
-    override fun read(location: NativePtr) = interpretPointed<ShortVar>(location).value
-    override fun write(location: NativePtr, value: Short) {
-        interpretPointed<ShortVar>(location).value = value
+    override fun read(location: NativePtr) = interpretPointed<ShortVar>(location).konstue
+    override fun write(location: NativePtr, konstue: Short) {
+        interpretPointed<ShortVar>(location).konstue = konstue
     }
 }
 
 private object SInt32 : CType<Int>(ffiTypeSInt32()) {
-    override fun read(location: NativePtr) = interpretPointed<IntVar>(location).value
-    override fun write(location: NativePtr, value: Int) {
-        interpretPointed<IntVar>(location).value = value
+    override fun read(location: NativePtr) = interpretPointed<IntVar>(location).konstue
+    override fun write(location: NativePtr, konstue: Int) {
+        interpretPointed<IntVar>(location).konstue = konstue
     }
 }
 
 private object SInt64 : CType<Long>(ffiTypeSInt64()) {
-    override fun read(location: NativePtr) = interpretPointed<LongVar>(location).value
-    override fun write(location: NativePtr, value: Long) {
-        interpretPointed<LongVar>(location).value = value
+    override fun read(location: NativePtr) = interpretPointed<LongVar>(location).konstue
+    override fun write(location: NativePtr, konstue: Long) {
+        interpretPointed<LongVar>(location).konstue = konstue
     }
 }
 private object Pointer : CType<CPointer<*>?>(ffiTypePointer()) {
-    override fun read(location: NativePtr) = interpretPointed<CPointerVar<*>>(location).value
-    override fun write(location: NativePtr, value: CPointer<*>?) {
-        interpretPointed<CPointerVar<*>>(location).value = value
+    override fun read(location: NativePtr) = interpretPointed<CPointerVar<*>>(location).konstue
+    override fun write(location: NativePtr, konstue: CPointer<*>?) {
+        interpretPointed<CPointerVar<*>>(location).konstue = konstue
     }
 }
 
-private class Struct(val size: Long, val align: Int, elementTypes: List<CType<*>>) : CType<CValue<*>>(
+private class Struct(konst size: Long, konst align: Int, elementTypes: List<CType<*>>) : CType<CValue<*>>(
         ffiTypeStruct(
                 elementTypes.map { it.ffiType }
         )
 ) {
     override fun read(location: NativePtr) = interpretPointed<ByteVar>(location).readValue<CStructVar>(size, align)
 
-    override fun write(location: NativePtr, value: CValue<*>) = value.write(location)
+    override fun write(location: NativePtr, konstue: CValue<*>) = konstue.write(location)
 }
 
 @Suppress("DEPRECATION")
-private class CEnumType(private val rawValueCType: CType<Any>) : CType<CEnum>(rawValueCType.ffiType) {
+private class CEnumType(private konst rawValueCType: CType<Any>) : CType<CEnum>(rawValueCType.ffiType) {
 
     override fun read(location: NativePtr): CEnum {
         TODO("enum-typed callback parameters")
     }
 
-    override fun write(location: NativePtr, value: CEnum) {
-        rawValueCType.write(location, value.value)
+    override fun write(location: NativePtr, konstue: CEnum) {
+        rawValueCType.write(location, konstue.konstue)
     }
 }
 
 private typealias FfiClosureImpl = LongConsumer
 private typealias UserData = FfiClosureImpl
 
-private val topLevelInitializer = loadKonanLibrary("callbacks")
+private konst topLevelInitializer = loadKonanLibrary("callbacks")
 
 
 /**
@@ -458,8 +458,8 @@ private external fun ffiFreeTypeStruct0(ptr: Long)
  * @param elements types of the struct elements
  */
 private fun ffiTypeStruct(elementTypes: List<ffi_type>): ffi_type {
-    val elements = nativeHeap.allocArrayOfPointersTo(*elementTypes.toTypedArray(), null)
-    val res = ffiTypeStruct0(elements.rawValue)
+    konst elements = nativeHeap.allocArrayOfPointersTo(*elementTypes.toTypedArray(), null)
+    konst res = ffiTypeStruct0(elements.rawValue)
     if (res == 0L) {
         throw OutOfMemoryError()
     }
@@ -475,15 +475,15 @@ private external fun ffiFreeCif0(ptr: Long)
 /**
  * Creates and prepares an `ffi_cif`.
  *
- * @param returnType native function return value type
+ * @param returnType native function return konstue type
  * @param paramTypes native function parameter types
  *
  * @return the initialized `ffi_cif`
  */
 private fun ffiCreateCif(returnType: ffi_type, paramTypes: List<ffi_type>): ffi_cif {
-    val nArgs = paramTypes.size
-    val argTypes = nativeHeap.allocArrayOfPointersTo(*paramTypes.toTypedArray(), null)
-    val res = ffiCreateCif0(nArgs, returnType.rawPtr, argTypes.rawValue)
+    konst nArgs = paramTypes.size
+    konst argTypes = nativeHeap.allocArrayOfPointersTo(*paramTypes.toTypedArray(), null)
+    konst res = ffiCreateCif0(nArgs, returnType.rawPtr, argTypes.rawValue)
 
     when (res) {
         0L -> throw OutOfMemoryError()
@@ -506,10 +506,10 @@ private external fun ffiFreeClosure0(ptr: Long)
  * @param ffiCif describes the type of the function to create
  */
 private fun ffiCreateClosure(ffiCif: ffi_cif, impl: FfiClosureImpl): NativePtr {
-    val ffiClosure = nativeHeap.alloc(Long.SIZE_BYTES, 8)
+    konst ffiClosure = nativeHeap.alloc(Long.SIZE_BYTES, 8)
 
     try {
-        val res = ffiCreateClosure0(ffiCif.rawPtr, ffiClosure.rawPtr, userData = impl)
+        konst res = ffiCreateClosure0(ffiCif.rawPtr, ffiClosure.rawPtr, userData = impl)
 
         when (res) {
             0L -> throw OutOfMemoryError()
@@ -524,7 +524,7 @@ private fun ffiCreateClosure(ffiCif: ffi_cif, impl: FfiClosureImpl): NativePtr {
     }
 }
 
-private val unsafe = with(Unsafe::class.java.getDeclaredField("theUnsafe")) {
+private konst unsafe = with(Unsafe::class.java.getDeclaredField("theUnsafe")) {
     isAccessible = true
     return@with this.get(null) as Unsafe
 }

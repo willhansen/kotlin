@@ -1,5 +1,5 @@
 interface Ordinaled {
-    val ordinal: Int
+    konst ordinal: Int
 }
 
 enum class A : Ordinaled {
@@ -8,7 +8,7 @@ enum class A : Ordinaled {
 
 
 fun box(): String {
-    val result = (A.X as Ordinaled).ordinal
+    konst result = (A.X as Ordinaled).ordinal
 
     if (result != 0) return "fail 1: $result"
 

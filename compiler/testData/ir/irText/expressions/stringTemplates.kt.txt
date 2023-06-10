@@ -2,42 +2,42 @@ fun foo(): String {
   return ""
 }
 
-val x: Int
+konst x: Int
   field = 42
   get
 
-val test1: String
+konst test1: String
   field = ""
   get
 
-val test2: String
+konst test2: String
   field = "abc"
   get
 
-val test3: String
+konst test3: String
   field = ""
   get
 
-val test4: String
+konst test4: String
   field = "abc"
   get
 
-val test5: String
+konst test5: String
   field = "\nabc\n"
   get
 
-val test6: String
+konst test6: String
   field = <get-test1>() + " " + foo()
   get
 
-val test7: String
+konst test7: String
   field = <get-test1>()
   get
 
-val test8: String
+konst test8: String
   field = foo()
   get
 
-val test9: String
+konst test9: String
   field = <get-x>()
   get

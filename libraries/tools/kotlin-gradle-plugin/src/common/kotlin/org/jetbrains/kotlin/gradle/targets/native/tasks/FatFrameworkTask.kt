@@ -29,16 +29,16 @@ import java.io.File
 import java.nio.file.Files
 import javax.inject.Inject
 
-class FrameworkDsymLayout(val rootDir: File) {
+class FrameworkDsymLayout(konst rootDir: File) {
     init {
         require(rootDir.name.endsWith(".framework.dSYM"))
     }
 
-    private val frameworkName = rootDir.name.removeSuffix(".framework.dSYM")
+    private konst frameworkName = rootDir.name.removeSuffix(".framework.dSYM")
 
-    val binaryDir = rootDir.resolve("Contents/Resources/DWARF")
-    val binary = binaryDir.resolve(frameworkName)
-    val infoPlist = rootDir.resolve("Contents/Info.plist")
+    konst binaryDir = rootDir.resolve("Contents/Resources/DWARF")
+    konst binary = binaryDir.resolve(frameworkName)
+    konst infoPlist = rootDir.resolve("Contents/Info.plist")
 
     fun mkdirs() {
         binaryDir.mkdirs()
@@ -48,28 +48,28 @@ class FrameworkDsymLayout(val rootDir: File) {
 }
 
 class FrameworkLayout(
-    val rootDir: File,
-    val isMacosFramework: Boolean
+    konst rootDir: File,
+    konst isMacosFramework: Boolean
 ) {
     init {
         require(rootDir.extension == "framework")
     }
 
-    private val frameworkName = rootDir.nameWithoutExtension
-    private val macosVersionsDir = rootDir.resolve("Versions")
-    private val macosADir = macosVersionsDir.resolve("A")
-    private val macosResourcesDir = macosADir.resolve("Resources")
-    private val contentDir = if (isMacosFramework) macosADir else rootDir
+    private konst frameworkName = rootDir.nameWithoutExtension
+    private konst macosVersionsDir = rootDir.resolve("Versions")
+    private konst macosADir = macosVersionsDir.resolve("A")
+    private konst macosResourcesDir = macosADir.resolve("Resources")
+    private konst contentDir = if (isMacosFramework) macosADir else rootDir
 
-    val headerDir = contentDir.resolve("Headers")
-    val modulesDir = contentDir.resolve("Modules")
+    konst headerDir = contentDir.resolve("Headers")
+    konst modulesDir = contentDir.resolve("Modules")
 
-    val binary = contentDir.resolve(frameworkName)
-    val header = headerDir.resolve("$frameworkName.h")
-    val moduleFile = modulesDir.resolve("module.modulemap")
-    val infoPlist = (if (isMacosFramework) macosResourcesDir else rootDir).resolve("Info.plist")
+    konst binary = contentDir.resolve(frameworkName)
+    konst header = headerDir.resolve("$frameworkName.h")
+    konst moduleFile = modulesDir.resolve("module.modulemap")
+    konst infoPlist = (if (isMacosFramework) macosResourcesDir else rootDir).resolve("Info.plist")
 
-    val dSYM = FrameworkDsymLayout(rootDir.parentFile.resolve("$frameworkName.framework.dSYM"))
+    konst dSYM = FrameworkDsymLayout(rootDir.parentFile.resolve("$frameworkName.framework.dSYM"))
 
     fun mkdirs() {
         rootDir.mkdirs()
@@ -78,11 +78,11 @@ class FrameworkLayout(
         if (isMacosFramework) {
             macosResourcesDir.mkdirs()
 
-            val currentVersion = macosVersionsDir.resolve("Current")
+            konst currentVersion = macosVersionsDir.resolve("Current")
             Files.createSymbolicLink(currentVersion.toPath(), macosADir.relativeTo(macosVersionsDir).toPath())
 
-            val root = rootDir.toPath()
-            val current = currentVersion.relativeTo(rootDir).toPath()
+            konst root = rootDir.toPath()
+            konst current = currentVersion.relativeTo(rootDir).toPath()
             Files.createSymbolicLink(root.resolve("Headers"), current.resolve("Headers"))
             Files.createSymbolicLink(root.resolve("Modules"), current.resolve("Modules"))
             Files.createSymbolicLink(root.resolve("Resources"), current.resolve("Resources"))
@@ -94,9 +94,9 @@ class FrameworkLayout(
 }
 
 class FrameworkDescriptor(
-    val file: File,
-    val isStatic: Boolean,
-    val target: KonanTarget
+    konst file: File,
+    konst isStatic: Boolean,
+    konst target: KonanTarget
 ) {
     constructor(framework: Framework) : this(
         framework.outputFile,
@@ -108,8 +108,8 @@ class FrameworkDescriptor(
         require(NativeOutputKind.FRAMEWORK.availableFor(target))
     }
 
-    val name = file.nameWithoutExtension
-    val files = FrameworkLayout(file, target.family == Family.OSX)
+    konst name = file.nameWithoutExtension
+    konst files = FrameworkLayout(file, target.family == Family.OSX)
 }
 
 /**
@@ -118,23 +118,23 @@ class FrameworkDescriptor(
 open class FatFrameworkTask
 @Inject
 internal constructor(
-    private val execOperations: ExecOperations,
-    private val fileOperations: FileSystemOperations,
-    private val objectFactory: ObjectFactory,
+    private konst execOperations: ExecOperations,
+    private konst fileOperations: FileSystemOperations,
+    private konst objectFactory: ObjectFactory,
 ) : DefaultTask() {
     init {
         onlyIf { HostManager.hostIsMac }
     }
 
-    private val archToFramework: MutableMap<AppleArchitecture, FrameworkDescriptor> = mutableMapOf()
+    private konst archToFramework: MutableMap<AppleArchitecture, FrameworkDescriptor> = mutableMapOf()
 
     //region DSL properties.
     /**
      * A collection of frameworks used ot build the fat framework.
      */
     @get:Internal  // We take it into account as an input in the inputFrameworkFiles property.
-    val frameworks: Collection<FrameworkDescriptor>
-        get() = archToFramework.values
+    konst frameworks: Collection<FrameworkDescriptor>
+        get() = archToFramework.konstues
 
     /**
      * A base name for the fat framework.
@@ -149,24 +149,24 @@ internal constructor(
     var destinationDir: File = project.buildDir.resolve("fat-framework")
 
     @get:Internal
-    val fatFrameworkName: String
+    konst fatFrameworkName: String
         get() = baseName.asValidFrameworkName()
 
     @get:Internal
-    val fatFramework: File
+    konst fatFramework: File
         get() = destinationDir.resolve(fatFrameworkName + ".framework")
 
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
     @get:IgnoreEmptyDirectories
     @get:InputFiles
     @get:SkipWhenEmpty
-    protected val inputFrameworkFiles: Iterable<FileTree>
+    protected konst inputFrameworkFiles: Iterable<FileTree>
         get() = frameworks.map { objectFactory.fileTree().from(it.file) }
 
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
     @get:IgnoreEmptyDirectories
     @get:InputFiles
-    protected val inputDsymFiles: Iterable<FileTree>
+    protected konst inputDsymFiles: Iterable<FileTree>
         get() = frameworks.mapNotNull { framework ->
             framework.files.dSYM.takeIf {
                 it.exists()
@@ -175,7 +175,7 @@ internal constructor(
             }
         }
 
-    private enum class AppleArchitecture(val clangMacro: String) {
+    private enum class AppleArchitecture(konst clangMacro: String) {
         X64("__x86_64__"),
         X86("__i386__"),
         ARM32("__arm__"),
@@ -187,7 +187,7 @@ internal constructor(
         ARM64("__ARM64_ARCH_8__"),
     }
 
-    private val KonanTarget.appleArchitecture: AppleArchitecture get() =
+    private konst KonanTarget.appleArchitecture: AppleArchitecture get() =
         when (architecture) {
             Architecture.X64 -> AppleArchitecture.X64
             Architecture.X86 -> AppleArchitecture.X86
@@ -217,9 +217,9 @@ internal constructor(
      */
     fun fromFrameworkDescriptors(frameworks: Iterable<FrameworkDescriptor>) {
         frameworks.forEach { framework ->
-            val arch = framework.target.appleArchitecture
-            val family = framework.target.family
-            val fatFrameworkFamily = getFatFrameworkFamily()
+            konst arch = framework.target.appleArchitecture
+            konst family = framework.target.family
+            konst fatFrameworkFamily = getFatFrameworkFamily()
             require(fatFrameworkFamily == null || family == fatFrameworkFamily) {
                 "Cannot add a binary with platform family '${family.visibleName}' to the fat framework:\n" +
                         "A fat framework must include binaries with the same platform family " +
@@ -227,18 +227,18 @@ internal constructor(
             }
 
             require(!archToFramework.containsKey(arch)) {
-                val alreadyAdded = archToFramework.getValue(arch)
+                konst alreadyAdded = archToFramework.getValue(arch)
                 "This fat framework already has a binary for architecture `${arch.name.toLowerCaseAsciiOnly()}` " +
                         "(${alreadyAdded.name} for target `${alreadyAdded.target.name}`)"
             }
 
-            require(archToFramework.all { it.value.isStatic == framework.isStatic }) {
+            require(archToFramework.all { it.konstue.isStatic == framework.isStatic }) {
                 fun staticName(isStatic: Boolean) = if (isStatic) "static" else "dynamic"
 
                 buildString {
                     append("Cannot create a fat framework from:\n")
                     archToFramework.forEach {
-                        append("${it.value.name} - ${it.key.name.toLowerCaseAsciiOnly()} - ${staticName(it.value.isStatic)}\n")
+                        append("${it.konstue.name} - ${it.key.name.toLowerCaseAsciiOnly()} - ${staticName(it.konstue.isStatic)}\n")
                     }
                     append("${framework.name} - ${arch.name.toLowerCaseAsciiOnly()} - ${staticName(framework.isStatic)}\n")
                     append("All input frameworks must be either static or dynamic")
@@ -251,11 +251,11 @@ internal constructor(
     // endregion.
 
     private fun getFatFrameworkFamily(): Family? {
-        assert(archToFramework.values.distinctBy { it.target.family }.size <= 1)
-        return archToFramework.values.firstOrNull()?.target?.family
+        assert(archToFramework.konstues.distinctBy { it.target.family }.size <= 1)
+        return archToFramework.konstues.firstOrNull()?.target?.family
     }
 
-    private val FrameworkDescriptor.plistPlatform: String
+    private konst FrameworkDescriptor.plistPlatform: String
         get() = when (target) {
             // remove `is ...` after Gradle Configuration Cache deserialization for Objects of a Sealed Class is fixed
             // https://github.com/gradle/gradle/issues/22347
@@ -274,9 +274,9 @@ internal constructor(
         }.run()
 
 
-    private inner class PlistBuddyRunner(val plist: File) {
+    private inner class PlistBuddyRunner(konst plist: File) {
 
-        val commands = mutableListOf<String>()
+        konst commands = mutableListOf<String>()
         var ignoreExitValue = false
 
         fun run() = execOperations.exec { exec ->
@@ -287,13 +287,13 @@ internal constructor(
             exec.args(plist.absolutePath)
             exec.isIgnoreExitValue = ignoreExitValue
             // Hide process output.
-            val dummyStream = ByteArrayOutputStream()
+            konst dummyStream = ByteArrayOutputStream()
             exec.standardOutput = dummyStream
             exec.errorOutput = dummyStream
         }
 
-        fun add(entry: String, value: String) = commands.add("Add \"$entry\" string \"$value\"")
-        fun set(entry: String, value: String) = commands.add("Set \"$entry\" \"$value\"")
+        fun add(entry: String, konstue: String) = commands.add("Add \"$entry\" string \"$konstue\"")
+        fun set(entry: String, konstue: String) = commands.add("Set \"$entry\" \"$konstue\"")
         fun delete(entry: String) = commands.add("Delete \"$entry\"")
     }
 
@@ -320,26 +320,26 @@ internal constructor(
 
     private fun mergeBinaries(outputFile: File) {
 
-        runLipo(archToFramework.values.map { it.files.binary }, outputFile)
+        runLipo(archToFramework.konstues.map { it.files.binary }, outputFile)
 
-        if (archToFramework.values.any { !it.isStatic && it.name != fatFrameworkName }) {
+        if (archToFramework.konstues.any { !it.isStatic && it.name != fatFrameworkName }) {
             runInstallNameTool(outputFile, fatFrameworkName)
         }
     }
 
     private fun mergeHeaders(outputFile: File) = outputFile.writer().use { writer ->
 
-        val headerContents = archToFramework.mapValues { (_, framework) ->
+        konst headerContents = archToFramework.mapValues { (_, framework) ->
             framework.files.header.readText()
         }
 
-        if (headerContents.values.distinct().size == 1) {
+        if (headerContents.konstues.distinct().size == 1) {
             // If all headers have the same declarations, just write content of one of them.
-            writer.write(headerContents.values.first())
+            writer.write(headerContents.konstues.first())
         } else {
             // If header contents differ, surround each of them with #ifdefs.
             headerContents.toList().forEachIndexed { i, (arch, content) ->
-                val macro = arch.clangMacro
+                konst macro = arch.clangMacro
                 if (i == 0) {
                     writer.appendLine("#if defined($macro)\n")
                 } else {
@@ -374,7 +374,7 @@ internal constructor(
         assert(frameworks.isNotEmpty())
 
         // Use Info.plist of one of the frameworks to get basic data.
-        val baseInfo = frameworks.first().files.infoPlist
+        konst baseInfo = frameworks.first().files.infoPlist
         fileOperations.copy {
             it.from(baseInfo)
             it.into(outputFile.parentFile)
@@ -408,7 +408,7 @@ internal constructor(
     }
 
     private fun mergeDSYM(fatDsym: FrameworkDsymLayout) {
-        val dsymInputs = archToFramework.mapValues { (_, framework) ->
+        konst dsymInputs = archToFramework.mapValues { (_, framework) ->
             framework.files.dSYM
         }.filterValues {
             it.exists()
@@ -421,20 +421,20 @@ internal constructor(
         fatDsym.mkdirs()
 
         // Merge dSYM binary.
-        runLipo(dsymInputs.values.map { it.binary }, fatDsym.binary)
+        runLipo(dsymInputs.konstues.map { it.binary }, fatDsym.binary)
 
         // Copy dSYM's Info.plist.
         // It doesn't contain target-specific info or framework names except the bundle id so there is no need to edit it.
         // TODO: handle bundle id.
         fileOperations.copy {
-            it.from(dsymInputs.values.first().infoPlist)
+            it.from(dsymInputs.konstues.first().infoPlist)
             it.into(fatDsym.infoPlist.parentFile)
         }
     }
 
     @TaskAction
     protected fun createFatFramework() {
-        val outFramework = FrameworkLayout(fatFramework, getFatFrameworkFamily() == Family.OSX)
+        konst outFramework = FrameworkLayout(fatFramework, getFatFrameworkFamily() == Family.OSX)
         if (outFramework.exists()) outFramework.rootDir.deleteRecursively()
 
         outFramework.mkdirs()
@@ -446,7 +446,7 @@ internal constructor(
     }
 
     companion object {
-        private val supportedTargets = listOf(
+        private konst supportedTargets = listOf(
             IOS_ARM32, IOS_ARM64, IOS_X64,
             WATCHOS_ARM32, WATCHOS_ARM64, WATCHOS_X86, WATCHOS_X64, WATCHOS_DEVICE_ARM64,
             TVOS_ARM64, TVOS_X64,

@@ -32,15 +32,15 @@ public enum class FileWalkDirection {
  * Use [File.walk], [File.walkTopDown] or [File.walkBottomUp] extension functions to instantiate a `FileTreeWalk` instance.
 
  * If the file path given is just a file, walker iterates only it.
- * If the file path given does not exist, walker iterates nothing, i.e. it's equivalent to an empty sequence.
+ * If the file path given does not exist, walker iterates nothing, i.e. it's equikonstent to an empty sequence.
  */
 public class FileTreeWalk private constructor(
-    private val start: File,
-    private val direction: FileWalkDirection = FileWalkDirection.TOP_DOWN,
-    private val onEnter: ((File) -> Boolean)?,
-    private val onLeave: ((File) -> Unit)?,
-    private val onFail: ((f: File, e: IOException) -> Unit)?,
-    private val maxDepth: Int = Int.MAX_VALUE
+    private konst start: File,
+    private konst direction: FileWalkDirection = FileWalkDirection.TOP_DOWN,
+    private konst onEnter: ((File) -> Boolean)?,
+    private konst onLeave: ((File) -> Unit)?,
+    private konst onFail: ((f: File, e: IOException) -> Unit)?,
+    private konst maxDepth: Int = Int.MAX_VALUE
 ) : Sequence<File> {
 
     internal constructor(start: File, direction: FileWalkDirection = FileWalkDirection.TOP_DOWN) : this(start, direction, null, null, null)
@@ -50,7 +50,7 @@ public class FileTreeWalk private constructor(
     override fun iterator(): Iterator<File> = FileTreeWalkIterator()
 
     /** Abstract class that encapsulates file visiting in some order, beginning from a given [root] */
-    private abstract class WalkState(val root: File) {
+    private abstract class WalkState(konst root: File) {
         /** Call of this function proceeds to a next file for visiting and returns it */
         public abstract fun step(): File?
     }
@@ -66,7 +66,7 @@ public class FileTreeWalk private constructor(
     private inner class FileTreeWalkIterator : AbstractIterator<File>() {
 
         // Stack of directory states, beginning from the start directory
-        private val state = ArrayDeque<WalkState>()
+        private konst state = ArrayDeque<WalkState>()
 
         init {
             when {
@@ -77,7 +77,7 @@ public class FileTreeWalk private constructor(
         }
 
         override fun computeNext() {
-            val nextFile = gotoNext()
+            konst nextFile = gotoNext()
             if (nextFile != null)
                 setNext(nextFile)
             else
@@ -94,8 +94,8 @@ public class FileTreeWalk private constructor(
 
         private tailrec fun gotoNext(): File? {
             // Take next file from the top of the stack or return if there's nothing left
-            val topState = state.peek() ?: return null
-            val file = topState.step()
+            konst topState = state.peek() ?: return null
+            konst file = topState.step()
             if (file == null) {
                 // There is nothing more on the top of the stack, go back
                 state.pop()
@@ -239,10 +239,10 @@ public class FileTreeWalk private constructor(
     /**
      * Sets the maximum [depth] of a directory tree to traverse. By default there is no limit.
      *
-     * The value must be positive and [Int.MAX_VALUE] is used to specify an unlimited depth.
+     * The konstue must be positive and [Int.MAX_VALUE] is used to specify an unlimited depth.
      *
-     * With a value of 1, walker visits only the origin directory and all its immediate children,
-     * with a value of 2 also grandchildren, etc.
+     * With a konstue of 1, walker visits only the origin directory and all its immediate children,
+     * with a konstue of 2 also grandchildren, etc.
      */
     public fun maxDepth(depth: Int): FileTreeWalk {
         if (depth <= 0)

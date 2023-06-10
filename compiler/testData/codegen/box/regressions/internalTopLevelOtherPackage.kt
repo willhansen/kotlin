@@ -6,4 +6,4 @@ fun box() = a.x
 
 package a
 
-internal val x: String = "OK"
+internal konst x: String = "OK"

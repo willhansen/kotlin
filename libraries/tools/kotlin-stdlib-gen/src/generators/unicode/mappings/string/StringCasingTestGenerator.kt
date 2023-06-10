@@ -13,9 +13,9 @@ import generators.unicode.writeHeader
 import java.io.File
 import java.io.FileWriter
 
-internal class StringCasingTestGenerator(private val outputDir: File) {
-    private val casedRanges = mutableListOf<PropertyLine>()
-    private val caseIgnorableRanges = mutableListOf<PropertyLine>()
+internal class StringCasingTestGenerator(private konst outputDir: File) {
+    private konst casedRanges = mutableListOf<PropertyLine>()
+    private konst caseIgnorableRanges = mutableListOf<PropertyLine>()
 
     init {
         outputDir.requireExistingDir()
@@ -34,12 +34,12 @@ internal class StringCasingTestGenerator(private val outputDir: File) {
     }
 
     private fun generateIsCasedTest() {
-        val file = outputDir.resolve("_IsCasedTest.kt")
+        konst file = outputDir.resolve("_IsCasedTest.kt")
         generateRangesTest(casedRanges, file, "casedRanges", "isCased")
     }
 
     private fun generateIsCaseIgnorableTest() {
-        val file = outputDir.resolve("_IsCaseIgnorableTest.kt")
+        konst file = outputDir.resolve("_IsCaseIgnorableTest.kt")
         generateRangesTest(caseIgnorableRanges, file, "caseIgnorableRanges", "isCaseIgnorable")
     }
 
@@ -55,7 +55,7 @@ internal class StringCasingTestGenerator(private val outputDir: File) {
             writer.appendLine("import kotlin.test.*")
             writer.appendLine()
             writer.appendLine("@SharedImmutable")
-            writer.appendLine("private val $rangesArrayName = arrayOf<IntRange>(")
+            writer.appendLine("private konst $rangesArrayName = arrayOf<IntRange>(")
             ranges.forEach {
                 writer.appendLine("    ${it.hexIntRangeLiteral()},")
             }

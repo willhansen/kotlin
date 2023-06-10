@@ -23,19 +23,19 @@ import org.jetbrains.kotlin.ir.util.TypeTranslator
 import org.jetbrains.kotlin.name.Name
 
 class IrLazyField(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrFieldSymbol,
+    override konst symbol: IrFieldSymbol,
     @OptIn(ObsoleteDescriptorBasedAPI::class)
-    override val descriptor: PropertyDescriptor,
+    override konst descriptor: PropertyDescriptor,
     override var name: Name,
     override var visibility: DescriptorVisibility,
     override var isFinal: Boolean,
     override var isExternal: Boolean,
     override var isStatic: Boolean,
-    override val stubGenerator: DeclarationStubGenerator,
-    override val typeTranslator: TypeTranslator,
+    override konst stubGenerator: DeclarationStubGenerator,
+    override konst typeTranslator: TypeTranslator,
 ) : IrField(), IrLazyDeclarationBase {
     init {
         symbol.bind(this)

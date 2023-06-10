@@ -21,7 +21,7 @@ var test_3: Int = 1
         }
         return 1
     }
-    set(value) {
+    set(konstue) {
         kotlin.contracts.contract {
             callsInPlace()
             callsInPlace()

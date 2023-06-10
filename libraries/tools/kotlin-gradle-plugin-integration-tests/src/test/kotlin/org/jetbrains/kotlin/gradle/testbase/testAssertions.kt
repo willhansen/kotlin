@@ -20,12 +20,12 @@ import kotlin.streams.toList
 import kotlin.test.assertEquals
 
 fun GradleProject.assertTestResults(expectedTestReport: Path, vararg testReportNames: String) {
-    val testReportDirs = testReportNames.map { projectPath.resolve("build/test-results/$it") }
+    konst testReportDirs = testReportNames.map { projectPath.resolve("build/test-results/$it") }
 
     assertDirectoriesExist(*testReportDirs.toTypedArray())
 
-    val actualTestResults = readAndCleanupTestResults(testReportDirs, projectPath)
-    val expectedTestResults = prettyPrintXml(expectedTestReport.readText())
+    konst actualTestResults = readAndCleanupTestResults(testReportDirs, projectPath)
+    konst expectedTestResults = prettyPrintXml(expectedTestReport.readText())
 
     assertEquals(expectedTestResults, actualTestResults)
 }
@@ -35,7 +35,7 @@ internal fun readAndCleanupTestResults(
     projectPath: Path,
     cleanupStdOut: (String) -> String = { it }
 ): String {
-    val files = testReportDirs
+    konst files = testReportDirs
         .flatMap {
             it.allFilesWithExtension("xml")
         }
@@ -44,7 +44,7 @@ internal fun readAndCleanupTestResults(
             it.name.replace(".xml", ".A.xml")
         }
 
-    val xmlString = buildString {
+    konst xmlString = buildString {
         appendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
         appendLine("<results>")
         files.forEach { file ->
@@ -59,26 +59,26 @@ internal fun readAndCleanupTestResults(
         appendLine("</results>")
     }
 
-    val doc = SAXBuilder().build(xmlString.reader())
-    val skipAttrs = setOf("timestamp", "hostname", "time", "message")
-    val skipContentsOf = setOf("failure")
+    konst doc = SAXBuilder().build(xmlString.reader())
+    konst skipAttrs = setOf("timestamp", "hostname", "time", "message")
+    konst skipContentsOf = setOf("failure")
 
     fun cleanup(e: Element) {
         if (e.name in skipContentsOf) e.text = "..."
         e.attributes.forEach {
             if (it.name in skipAttrs) {
-                it.value = "..."
+                it.konstue = "..."
             } else if (it.name == "name" &&
                 e.name == "testcase" &&
-                it.value.contains("[browser")
+                it.konstue.contains("[browser")
             ) {
-                it.value = it.value.replace("\\[browser,.*]".toRegex(), "[browser]")
+                it.konstue = it.konstue.replace("\\[browser,.*]".toRegex(), "[browser]")
             }
         }
         if (e.name == "system-out") {
-            val content = e.content.map {
+            konst content = e.content.map {
                 if (it.cType == Content.CType.CDATA) {
-                    (it as CDATA).text = cleanupStdOut(it.value)
+                    (it as CDATA).text = cleanupStdOut(it.konstue)
                 }
                 it
             }

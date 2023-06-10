@@ -13,7 +13,7 @@ interface IFoo {
 }
 
 fun test() {
-    val foo : Foo = Foo2()
+    konst foo : Foo = Foo2()
     foo as IFoo
     foo.bar() // Should be resolved to Foo#bar
 }

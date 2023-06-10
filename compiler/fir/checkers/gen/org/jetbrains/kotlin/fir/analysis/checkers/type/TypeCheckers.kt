@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.fir.analysis.CheckersComponentInternal
 
 abstract class TypeCheckers {
     companion object {
-        val EMPTY: TypeCheckers = object : TypeCheckers() {}
+        konst EMPTY: TypeCheckers = object : TypeCheckers() {}
     }
 
-    open val typeRefCheckers: Set<FirTypeRefChecker> = emptySet()
+    open konst typeRefCheckers: Set<FirTypeRefChecker> = emptySet()
 
-    @CheckersComponentInternal internal val allTypeRefCheckers: Set<FirTypeRefChecker> by lazy { typeRefCheckers }
+    @CheckersComponentInternal internal konst allTypeRefCheckers: Set<FirTypeRefChecker> by lazy { typeRefCheckers }
 }

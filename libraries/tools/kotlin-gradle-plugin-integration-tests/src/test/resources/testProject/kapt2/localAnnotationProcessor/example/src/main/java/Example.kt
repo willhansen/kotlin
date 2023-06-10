@@ -6,8 +6,8 @@ import java.awt.Color
 @TestAnnotation
 class SimpleClass
 
-class Test(val a: String) {
+class Test(konst a: String) {
     companion object {
-        val a = Color.PINK
+        konst a = Color.PINK
     }
 }

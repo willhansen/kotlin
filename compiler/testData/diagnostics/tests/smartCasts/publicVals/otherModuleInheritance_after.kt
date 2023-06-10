@@ -3,8 +3,8 @@
 // MODULE: m1
 // FILE: A.kt
 
-open class Base(val x: Any)
-open class Generic<T>(val y: T)
+open class Base(konst x: Any)
+open class Generic<T>(konst y: T)
 
 // MODULE: m2(m1)
 // FILE: B.kt

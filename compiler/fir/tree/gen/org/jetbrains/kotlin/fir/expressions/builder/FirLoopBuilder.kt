@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 interface FirLoopBuilder {
     abstract var source: KtSourceElement?
-    abstract val annotations: MutableList<FirAnnotation>
+    abstract konst annotations: MutableList<FirAnnotation>
     abstract var block: FirBlock
     abstract var condition: FirExpression
     abstract var label: FirLabel?

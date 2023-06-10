@@ -34,13 +34,13 @@ object FirNativeHiddenFromObjCInheritanceChecker : FirRegularClassChecker() {
         // Non-public types do not leak to Objective-C API surface, so it is OK for them
         // to inherit from hidden types.
         if (!declaration.visibility.isPublicAPI) return
-        val session = context.session
+        konst session = context.session
         // No need to report anything on class that is hidden itself.
         if (checkIsHiddenFromObjC(declaration.symbol, session)) {
             return
         }
 
-        val superTypes = declaration.superConeTypes
+        konst superTypes = declaration.superConeTypes
             .filterNot { it.isAny || it.isNullableAny }
             .mapNotNull { it.toSymbol(session) }
 
@@ -62,8 +62,8 @@ private fun checkContainingClassIsHidden(classSymbol: FirClassLikeSymbol<*>, ses
 
 private fun checkIsHiddenFromObjC(classSymbol: FirClassLikeSymbol<*>, session: FirSession): Boolean {
     classSymbol.annotations.forEach { annotation ->
-        val annotationClass = annotation.toAnnotationClassLikeSymbol(session) ?: return@forEach
-        val objCExportMetaAnnotations = annotationClass.annotations.findMetaAnnotations(session)
+        konst annotationClass = annotation.toAnnotationClassLikeSymbol(session) ?: return@forEach
+        konst objCExportMetaAnnotations = annotationClass.annotations.findMetaAnnotations(session)
         if (objCExportMetaAnnotations.hidesFromObjCAnnotation != null) {
             return true
         }

@@ -6,7 +6,7 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, constant-literals, the-types-for-integer-literals -> paragraph 1 -> sentence 2
  * NUMBER: 2
- * DESCRIPTION: Type checking (comparison with invalid types) of various integer literals with long literal mark.
+ * DESCRIPTION: Type checking (comparison with inkonstid types) of various integer literals with long literal mark.
  * HELPERS: checkType
  */
 

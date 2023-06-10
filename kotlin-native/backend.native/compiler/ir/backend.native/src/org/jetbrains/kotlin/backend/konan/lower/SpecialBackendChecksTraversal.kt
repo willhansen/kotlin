@@ -41,37 +41,37 @@ import java.io.File
  * TODO: Should be moved to compiler frontend after K2.
  */
 internal class SpecialBackendChecksTraversal(
-        private val context: PhaseContext,
-        private val symbols: KonanSymbols,
-        private val irBuiltIns: IrBuiltIns,
+        private konst context: PhaseContext,
+        private konst symbols: KonanSymbols,
+        private konst irBuiltIns: IrBuiltIns,
 ) : FileLoweringPass {
     override fun lower(irFile: IrFile) = irFile.acceptChildrenVoid(BackendChecker(context, symbols, irBuiltIns, irFile))
 }
 
 private class BackendChecker(
-        private val context: PhaseContext,
-        val symbols: KonanSymbols,
-        val irBuiltIns: IrBuiltIns,
-        private val irFile: IrFile,
+        private konst context: PhaseContext,
+        konst symbols: KonanSymbols,
+        konst irBuiltIns: IrBuiltIns,
+        private konst irFile: IrFile,
 ) : IrElementVisitorVoid {
-    val target = context.config.target
+    konst target = context.config.target
 
     fun reportError(location: IrElement, message: String): Nothing =
             context.reportCompilationError(message, irFile, location)
 
-    private val outerDeclarations = mutableListOf<IrDeclaration>()
+    private konst outerDeclarations = mutableListOf<IrDeclaration>()
 
-    private val outerClass: IrClass? get() = outerDeclarations.last { it is IrClass } as? IrClass
-    private val outerFunction: IrFunction? get() = outerDeclarations.last { it is IrFunction } as? IrFunction
+    private konst outerClass: IrClass? get() = outerDeclarations.last { it is IrClass } as? IrClass
+    private konst outerFunction: IrFunction? get() = outerDeclarations.last { it is IrFunction } as? IrFunction
 
-    private val outerAnnotators = mutableListOf<Lazy<ClosureAnnotator>>()
-    private val functionAnnotators = mutableMapOf<IrFunction, Lazy<ClosureAnnotator>>()
-    private val functionClosures = mutableMapOf<IrFunction, Closure>()
+    private konst outerAnnotators = mutableListOf<Lazy<ClosureAnnotator>>()
+    private konst functionAnnotators = mutableMapOf<IrFunction, Lazy<ClosureAnnotator>>()
+    private konst functionClosures = mutableMapOf<IrFunction, Closure>()
 
     private fun captures(function: IrFunction): List<IrValueDeclaration> {
         if (function.visibility != DescriptorVisibilities.LOCAL) return emptyList()
-        val closure = functionClosures.getOrPut(function) {
-            functionAnnotators[function]!!.value.getFunctionClosure(function)
+        konst closure = functionClosures.getOrPut(function) {
+            functionAnnotators[function]!!.konstue.getFunctionClosure(function)
         }
         return closure.capturedValues.map { it.owner }
     }
@@ -90,7 +90,7 @@ private class BackendChecker(
     }
 
     override fun visitBody(body: IrBody) {
-        val declaration = outerDeclarations.peek()!!
+        konst declaration = outerDeclarations.peek()!!
         if ((declaration as? IrFunction)?.visibility == DescriptorVisibilities.LOCAL) {
             functionAnnotators[declaration] = outerAnnotators.peek()!!
             super.visitBody(body)
@@ -109,13 +109,13 @@ private class BackendChecker(
             this.annotations.hasAnnotation(InteropFqNames.objCOverrideInit)
 
     private fun checkCanGenerateOverrideInit(irClass: IrClass, constructor: IrConstructor) {
-        val superClass = irClass.getSuperClassNotAny()!!
-        val superConstructors = superClass.constructors.filter {
+        konst superClass = irClass.getSuperClassNotAny()!!
+        konst superConstructors = superClass.constructors.filter {
             constructor.overridesConstructor(it)
         }.toList()
 
-        val superConstructor = superConstructors.singleOrNull() ?: run {
-            val annotation = InteropFqNames.objCOverrideInit
+        konst superConstructor = superConstructors.singleOrNull() ?: run {
+            konst annotation = InteropFqNames.objCOverrideInit
             if (superConstructors.isEmpty())
                 reportError(constructor,
                         """
@@ -128,12 +128,12 @@ private class BackendChecker(
                 )
         }
 
-        val initMethod = superConstructor.getObjCInitMethod()!!
+        konst initMethod = superConstructor.getObjCInitMethod()!!
 
         // Remove fake overrides of this init method, also check for explicit overriding:
         irClass.declarations.forEach {
             if (it is IrSimpleFunction && initMethod.symbol in it.overriddenSymbols && it.isReal) {
-                val annotation = InteropFqNames.objCOverrideInit
+                konst annotation = InteropFqNames.objCOverrideInit
                 reportError(constructor,
                         "constructor with @$annotation overrides initializer that is already overridden explicitly"
                 )
@@ -142,27 +142,27 @@ private class BackendChecker(
     }
 
     private fun IrConstructor.overridesConstructor(other: IrConstructor) =
-            this.descriptor.valueParameters.size == other.descriptor.valueParameters.size &&
-                    this.descriptor.valueParameters.all {
-                        val otherParameter = other.descriptor.valueParameters[it.index]
+            this.descriptor.konstueParameters.size == other.descriptor.konstueParameters.size &&
+                    this.descriptor.konstueParameters.all {
+                        konst otherParameter = other.descriptor.konstueParameters[it.index]
                         it.name == otherParameter.name && it.type == otherParameter.type
                     }
 
     private fun checkCanGenerateActionImp(function: IrSimpleFunction) {
-        val action = "@${InteropFqNames.objCAction}"
+        konst action = "@${InteropFqNames.objCAction}"
 
         function.extensionReceiverParameter?.let {
             reportError(it, "$action method must not have extension receiver")
         }
 
-        function.valueParameters.forEach {
-            val kotlinType = it.descriptor.type
+        function.konstueParameters.forEach {
+            konst kotlinType = it.descriptor.type
             if (!kotlinType.isObjCObjectType())
                 reportError(it, "Unexpected $action method parameter type: ${it.type.classFqName}\n" +
                         "Only Objective-C object types are supported here")
         }
 
-        val returnType = function.returnType
+        konst returnType = function.returnType
         if (!returnType.isUnit())
             reportError(function, "Unexpected $action method return type: ${returnType.classFqName}\n" +
                     "Only 'Unit' is supported here")
@@ -171,9 +171,9 @@ private class BackendChecker(
     }
 
     private fun checkCanGenerateOutletSetterImp(property: IrProperty) {
-        val descriptor = property.descriptor
+        konst descriptor = property.descriptor
 
-        val outlet = "@${InteropFqNames.objCOutlet}"
+        konst outlet = "@${InteropFqNames.objCOutlet}"
 
         if (!descriptor.isVar)
             reportError(property, "$outlet property must be var")
@@ -182,7 +182,7 @@ private class BackendChecker(
             reportError(it, "$outlet must not have extension receiver")
         }
 
-        val type = descriptor.type
+        konst type = descriptor.type
         if (!type.isObjCObjectType())
             reportError(property, "Unexpected $outlet type: ${property.getter?.returnType?.classFqName}\n" +
                     "Only Objective-C object types are supported here")
@@ -191,7 +191,7 @@ private class BackendChecker(
     }
 
     private fun checkCanGenerateFunctionImp(function: IrFunction) {
-        if (function.valueParameters.size > 2)
+        if (function.konstueParameters.size > 2)
             reportError(function, "Only 0, 1 or 2 parameters are supported here")
     }
 
@@ -225,7 +225,7 @@ private class BackendChecker(
             }
         }
 
-        val kind = irClass.descriptor.kind
+        konst kind = irClass.descriptor.kind
         if (kind != ClassKind.CLASS && kind != ClassKind.OBJECT)
             reportError(irClass, "Only classes are supported as subtypes of Objective-C types")
 
@@ -243,7 +243,7 @@ private class BackendChecker(
 
         var hasObjCClassSupertype = false
         irClass.descriptor.defaultType.constructor.supertypes.forEach {
-            val descriptor = it.constructor.declarationDescriptor as ClassDescriptor
+            konst descriptor = it.constructor.declarationDescriptor as ClassDescriptor
             if (!descriptor.isObjCClass())
                 reportError(irClass, "Mixing Kotlin and Objective-C supertypes is not supported")
 
@@ -254,15 +254,15 @@ private class BackendChecker(
         if (!hasObjCClassSupertype)
             reportError(irClass, "Kotlin implementation of Objective-C protocol must have Objective-C superclass (e.g. NSObject)")
 
-        val methodsOfAny = symbols.any.owner.declarations.filterIsInstance<IrSimpleFunction>().toSet()
+        konst methodsOfAny = symbols.any.owner.declarations.filterIsInstance<IrSimpleFunction>().toSet()
 
         irClass.declarations.filterIsInstance<IrSimpleFunction>().filter { it.isReal }.forEach { method ->
-            val overriddenMethodOfAny = method.allOverriddenFunctions.firstOrNull {
+            konst overriddenMethodOfAny = method.allOverriddenFunctions.firstOrNull {
                 it in methodsOfAny
             }
 
             if (overriddenMethodOfAny != null) {
-                val correspondingObjCMethod = when (method.name.asString()) {
+                konst correspondingObjCMethod = when (method.name.asString()) {
                     "toString" -> "'description'"
                     "hashCode" -> "'hash'"
                     "equals" -> "'isEqual:'"
@@ -281,26 +281,26 @@ private class BackendChecker(
     override fun visitDelegatingConstructorCall(expression: IrDelegatingConstructorCall) {
         expression.acceptChildrenVoid(this)
 
-        val constructedClass = outerClass!!
+        konst constructedClass = outerClass!!
 
         if (!constructedClass.isObjCClass())
             return
 
         constructedClass.parent.let { parent ->
             if (parent is IrClass && parent.isObjCClass() && constructedClass.isCompanion) {
-                // Note: it is actually not used; getting values of such objects is handled by code generator
+                // Note: it is actually not used; getting konstues of such objects is handled by code generator
                 // in [FunctionGenerationContext.getObjectValue].
 
                 return
             }
         }
 
-        val delegatingCallConstructingClass = expression.symbol.owner.constructedClass
+        konst delegatingCallConstructingClass = expression.symbol.owner.constructedClass
         if (!constructedClass.isExternalObjCClass() &&
                 delegatingCallConstructingClass.isExternalObjCClass()) {
             // Calling super constructor from Kotlin Objective-C class.
 
-            val initMethod = expression.symbol.owner.getObjCInitMethod()!!
+            konst initMethod = expression.symbol.owner.getObjCInitMethod()!!
 
             if (!expression.symbol.owner.objCConstructorIsDesignated())
                 reportError(expression, "Unable to call non-designated initializer as super constructor")
@@ -308,7 +308,7 @@ private class BackendChecker(
             checkCanGenerateObjCCall(
                     method = initMethod,
                     call = expression,
-                    arguments = initMethod.valueParameters.map { expression.getValueArgument(it.index) }
+                    arguments = initMethod.konstueParameters.map { expression.getValueArgument(it.index) }
             )
         }
     }
@@ -316,10 +316,10 @@ private class BackendChecker(
     override fun visitConstructorCall(expression: IrConstructorCall) {
         expression.acceptChildrenVoid(this)
 
-        val callee = expression.symbol.owner
-        val initMethod = callee.getObjCInitMethod()
+        konst callee = expression.symbol.owner
+        konst initMethod = callee.getObjCInitMethod()
         if (initMethod != null) {
-            val arguments = callee.valueParameters.map { expression.getValueArgument(it.index) }
+            konst arguments = callee.konstueParameters.map { expression.getValueArgument(it.index) }
 
             checkCanGenerateObjCCall(
                     method = initMethod,
@@ -336,22 +336,22 @@ private class BackendChecker(
     override fun visitField(declaration: IrField) {
         if (declaration.isFakeOverride) return // Can't happen now, just trying to be future-proof here.
 
-        val parent = declaration.parent
+        konst parent = declaration.parent
 
         if (parent is IrClass && parent.defaultType.isNativePointed(symbols) && parent.symbol != symbols.nativePointed) {
             reportError(declaration, "Subclasses of ${InteropFqNames.nativePointed} cannot have properties with backing fields")
         }
     }
 
-    private val cwd = File(".").absoluteFile
+    private konst cwd = File(".").absoluteFile
 
     private fun reportBoundFunctionReferenceError(expression: IrExpression, callee: IrFunction, captures: List<IrExpression>): Nothing {
-        val formattedCaptures = if (captures.isEmpty())
+        konst formattedCaptures = if (captures.isEmpty())
             ""
         else ", but captures at:\n    ${captures.joinToString("\n    ") {
-            val location = it.getCompilerMessageLocation(irFile)!!
-            val relativePath = File(location.path).descendantRelativeTo(cwd).path
-            val capturedValueName = if (it is IrGetValue) ": ${it.symbol.owner.name.asString()}" else ""
+            konst location = it.getCompilerMessageLocation(irFile)!!
+            konst relativePath = File(location.path).descendantRelativeTo(cwd).path
+            konst capturedValueName = if (it is IrGetValue) ": ${it.symbol.owner.name.asString()}" else ""
             "$relativePath:${location.line}:${location.column}$capturedValueName"
         }}"
 
@@ -362,10 +362,10 @@ private class BackendChecker(
     override fun visitCall(expression: IrCall) {
         expression.acceptChildrenVoid(this)
 
-        val callee = expression.symbol.owner
+        konst callee = expression.symbol.owner
 
         callee.getObjCFactoryInitMethodInfo()?.let { _ ->
-            val arguments = (0 until expression.valueArgumentsCount).map(expression::getValueArgument)
+            konst arguments = (0 until expression.konstueArgumentsCount).map(expression::getValueArgument)
 
             checkCanGenerateObjCCall(
                     method = callee,
@@ -375,15 +375,15 @@ private class BackendChecker(
         }
 
         callee.getExternalObjCMethodInfo()?.let { _ ->
-            val isInteropStubsFile = irFile.annotations.hasAnnotation(InteropFqNames.interopStubs)
+            konst isInteropStubsFile = irFile.annotations.hasAnnotation(InteropFqNames.interopStubs)
 
             // Special case: bridge from Objective-C method implementation template to Kotlin method;
             // handled in CodeGeneratorVisitor.callVirtual.
-            val useKotlinDispatch = isInteropStubsFile &&
+            konst useKotlinDispatch = isInteropStubsFile &&
                     outerFunction!!.annotations.hasAnnotation(FqName("kotlin.native.internal.ExportForCppRuntime"))
 
             if (!useKotlinDispatch) {
-                val arguments = callee.valueParameters.map { expression.getValueArgument(it.index) }
+                konst arguments = callee.konstueParameters.map { expression.getValueArgument(it.index) }
 
                 if (expression.superQualifierSymbol?.owner?.isObjCMetaClass() == true)
                     reportError(expression, "Super calls to Objective-C meta classes are not supported yet")
@@ -402,18 +402,18 @@ private class BackendChecker(
         if (callee.annotations.hasAnnotation(RuntimeNames.cCall))
             checkCanGenerateCCall(expression, isInvoke = false)
 
-        when (val intrinsicType = tryGetIntrinsicType(expression)) {
+        when (konst intrinsicType = tryGetIntrinsicType(expression)) {
             IntrinsicType.INTEROP_STATIC_C_FUNCTION -> {
-                val (target, captures) = getUnboundReferencedFunction(expression.getValueArgument(0)!!)
+                konst (target, captures) = getUnboundReferencedFunction(expression.getValueArgument(0)!!)
 
                 if (target == null || target.symbol !is IrSimpleFunctionSymbol)
                     reportBoundFunctionReferenceError(expression, callee, captures)
 
-                val signatureTypes = target.allParameters.map { it.type } + target.returnType
+                konst signatureTypes = target.allParameters.map { it.type } + target.returnType
 
                 callee.typeParameters.indices.forEach { index ->
-                    val typeArgument = expression.getTypeArgument(index)!!.toKotlinType()
-                    val signatureType = signatureTypes[index].toKotlinType()
+                    konst typeArgument = expression.getTypeArgument(index)!!.toKotlinType()
+                    konst signatureType = signatureTypes[index].toKotlinType()
                     if (typeArgument.constructor != signatureType.constructor ||
                             typeArgument.isMarkedNullable != signatureType.isMarkedNullable
                     ) {
@@ -429,15 +429,15 @@ private class BackendChecker(
             }
             IntrinsicType.INTEROP_SIGN_EXTEND, IntrinsicType.INTEROP_NARROW -> {
 
-                val integerTypePredicates = arrayOf(
+                konst integerTypePredicates = arrayOf(
                         IrType::isByte, IrType::isShort, IrType::isInt, IrType::isLong
                 )
 
-                val receiver = expression.extensionReceiver!!
-                val typeOperand = expression.getSingleTypeArgument()
+                konst receiver = expression.extensionReceiver!!
+                konst typeOperand = expression.getSingleTypeArgument()
 
-                val receiverTypeIndex = integerTypePredicates.indexOfFirst { it(receiver.type) }
-                val typeOperandIndex = integerTypePredicates.indexOfFirst { it(typeOperand) }
+                konst receiverTypeIndex = integerTypePredicates.indexOfFirst { it(receiver.type) }
+                konst typeOperandIndex = integerTypePredicates.indexOfFirst { it(typeOperand) }
 
                 if (receiverTypeIndex == -1)
                     reportError(receiver, "Receiver's type ${receiver.type.classFqName} is not an integer type")
@@ -456,36 +456,36 @@ private class BackendChecker(
                 }
             }
             IntrinsicType.INTEROP_CONVERT -> {
-                val integerClasses = symbols.allIntegerClasses
-                val typeOperand = expression.getTypeArgument(0)!!
-                val receiverType = expression.symbol.owner.extensionReceiverParameter!!.type
+                konst integerClasses = symbols.allIntegerClasses
+                konst typeOperand = expression.getTypeArgument(0)!!
+                konst receiverType = expression.symbol.owner.extensionReceiverParameter!!.type
 
                 if (typeOperand !is IrSimpleType || typeOperand.classifier !in integerClasses || typeOperand.isNullable())
                     reportError(expression, "unable to convert ${receiverType.classFqName} to ${typeOperand.classFqName}")
             }
             IntrinsicType.WORKER_EXECUTE -> {
-                val (function, captures) = getUnboundReferencedFunction(expression.getValueArgument(2)!!)
+                konst (function, captures) = getUnboundReferencedFunction(expression.getValueArgument(2)!!)
                 if (function == null)
                     reportBoundFunctionReferenceError(expression, callee, captures)
             }
             else -> when {
                 callee.symbol == symbols.createCleaner -> {
-                    val (function, captures) = getUnboundReferencedFunction(expression.getValueArgument(1)!!)
+                    konst (function, captures) = getUnboundReferencedFunction(expression.getValueArgument(1)!!)
                     if (function == null)
                         reportBoundFunctionReferenceError(expression, callee, captures)
                 }
                 callee.symbol == symbols.immutableBlobOf -> {
-                    val args = expression.getValueArgument(0)
+                    konst args = expression.getValueArgument(0)
                             ?: reportError(expression, "expected at least one element")
-                    val elements = (args as IrVararg).elements
+                    konst elements = (args as IrVararg).elements
                     if (elements.any { it is IrSpreadElement })
                         reportError(args, "no spread elements allowed here")
                     elements.forEach {
                         if (it !is IrConst<*>)
                             reportError(args, "all elements of binary blob must be constants")
-                        val value = it.value as Short
-                        if (value < 0 || value > 0xff)
-                            reportError(it, "incorrect value for binary data: $value")
+                        konst konstue = it.konstue as Short
+                        if (konstue < 0 || konstue > 0xff)
+                            reportError(it, "incorrect konstue for binary data: $konstue")
                     }
                 }
                 Symbols.isTypeOfIntrinsic(callee.symbol) ->
@@ -508,7 +508,7 @@ private class BackendChecker(
 
     private fun checkCanReferenceFunction(callee: IrFunction, expression: IrExpression) {
         // Corresponds to the check in [KotlinToCCallBuilder.handleArgumentForVarargParameter].
-        if (callee.valueParameters.any { it.isVararg }) {
+        if (callee.konstueParameters.any { it.isVararg }) {
             if (callee.annotations.hasAnnotation(RuntimeNames.cCall))
                 reportError(expression, "callable references to variadic C functions are not supported")
             if (callee is IrConstructor && callee.getObjCInitMethod() != null
@@ -520,12 +520,12 @@ private class BackendChecker(
         }
     }
 
-    private data class ReferencedFunctionWithCapture(val function: IrFunction?, val captures: List<IrExpression>)
+    private data class ReferencedFunctionWithCapture(konst function: IrFunction?, konst captures: List<IrExpression>)
 
     private fun searchForReferences(function: IrFunction, targetValues: Set<IrValueDeclaration>): List<IrExpression> {
         if (targetValues.isEmpty()) return emptyList()
 
-        val result = mutableListOf<IrExpression>()
+        konst result = mutableListOf<IrExpression>()
         function.acceptChildrenVoid(object: IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
                 element.acceptChildrenVoid(this)
@@ -541,15 +541,15 @@ private class BackendChecker(
 
     private fun getUnboundReferencedFunction(expression: IrExpression) = when (expression) {
         is IrFunctionReference -> {
-            val arguments = expression.getArguments()
-            val capturedVariables = captures(expression.symbol.owner)
+            konst arguments = expression.getArguments()
+            konst capturedVariables = captures(expression.symbol.owner)
             ReferencedFunctionWithCapture(
                     expression.symbol.owner.takeIf { arguments.isEmpty() && capturedVariables.isEmpty() },
                     arguments.map { it.second } + searchForReferences(expression.symbol.owner, capturedVariables.toSet())
             )
         }
         is IrFunctionExpression -> {
-            val capturedVariables = captures(expression.function)
+            konst capturedVariables = captures(expression.function)
             ReferencedFunctionWithCapture(
                     expression.function.takeIf { capturedVariables.isEmpty() },
                     searchForReferences(expression.function, capturedVariables.toSet())
@@ -559,7 +559,7 @@ private class BackendChecker(
     }
 
     private fun IrCall.getSingleTypeArgument(): IrType {
-        val typeParameter = symbol.owner.typeParameters.single()
+        konst typeParameter = symbol.owner.typeParameters.single()
         return getTypeArgument(typeParameter.index)!!
     }
 
@@ -570,9 +570,9 @@ private class BackendChecker(
     ) {
         if (type !is IrSimpleType)
             return
-        val classifier = type.classifier
+        konst classifier = type.classifier
         if (classifier is IrTypeParameterSymbol
-                && !classifier.owner.isReified /* Reified may be substituted with valid types later */)
+                && !classifier.owner.isReified /* Reified may be substituted with konstid types later */)
             checkIrKTypeParameter(irElement, classifier.owner, seenTypeParameters)
 
         type.arguments.forEach {
@@ -602,10 +602,10 @@ private class BackendChecker(
 }
 
 private fun BackendChecker.checkCanGenerateCCall(expression: IrCall, isInvoke: Boolean) {
-    val callee = expression.symbol.owner
+    konst callee = expression.symbol.owner
 
     if (isInvoke) {
-        (0 until expression.valueArgumentsCount).forEach {
+        (0 until expression.konstueArgumentsCount).forEach {
             checkCanMapCalleeFunctionParameter(
                     type = expression.getTypeArgument(it)!!,
                     isObjCMethod = false,
@@ -614,10 +614,10 @@ private fun BackendChecker.checkCanGenerateCCall(expression: IrCall, isInvoke: B
                     argument = expression.getValueArgument(it)!!)
         }
 
-        val returnType = expression.getTypeArgument(expression.typeArgumentsCount - 1)!!
+        konst returnType = expression.getTypeArgument(expression.typeArgumentsCount - 1)!!
         checkCanMapReturnType(returnType, TypeLocation.FunctionCallResult(expression))
     } else {
-        val arguments = (0 until expression.valueArgumentsCount).map(expression::getValueArgument)
+        konst arguments = (0 until expression.konstueArgumentsCount).map(expression::getValueArgument)
         checkCanAddArguments(arguments, callee, isObjCMethod = false)
 
         checkCanMapReturnType(callee.returnType, TypeLocation.FunctionCallResult(expression))
@@ -626,7 +626,7 @@ private fun BackendChecker.checkCanGenerateCCall(expression: IrCall, isInvoke: B
 
 private fun BackendChecker.checkCanAddArguments(arguments: List<IrExpression?>, callee: IrFunction, isObjCMethod: Boolean) {
     arguments.forEachIndexed { index, argument ->
-        val parameter = callee.valueParameters[index]
+        konst parameter = callee.konstueParameters[index]
         if (parameter.isVararg)
             checkCanHandleArgumentForVarargParameter(argument, isObjCMethod)
         else
@@ -639,7 +639,7 @@ private fun BackendChecker.checkCanUnwrapVariadicArguments(elements: List<IrVara
         is IrExpression ->
             checkCanMapCalleeFunctionParameter(element.type, isObjCMethod, variadic = true, parameter = null, argument = element)
         is IrSpreadElement -> {
-            val expression = element.expression
+            konst expression = element.expression
             if (expression is IrCall && expression.symbol == symbols.arrayOf)
                 checkCanHandleArgumentForVarargParameter(expression.getValueArgument(0), isObjCMethod)
             else
@@ -661,14 +661,14 @@ private fun BackendChecker.checkCanHandleArgumentForVarargParameter(argument: Ir
              *
              * psi2ir generates as
              *
-             *   val secondTmp = *arrayOf(...)
-             *   val firstTmp = ...
+             *   konst secondTmp = *arrayOf(...)
+             *   konst firstTmp = ...
              *   foo(firstTmp, secondTmp)
              *
              *
              **/
 
-            val variable = argument.symbol.owner
+            konst variable = argument.symbol.owner
             if (variable is IrVariable && variable.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE && !variable.isVar)
                 checkCanUnwrapVariadicArguments((variable.initializer as IrVararg).elements, isObjCMethod)
         }
@@ -687,7 +687,7 @@ private fun BackendChecker.checkCanGenerateObjCCall(
 
 private fun BackendChecker.checkParameter(it: IrValueParameter, functionParameter: IrValueParameter,
                                           isObjCMethod: Boolean, location: IrElement) {
-    val typeLocation = if (isObjCMethod)
+    konst typeLocation = if (isObjCMethod)
         TypeLocation.ObjCMethodParameter(it.index, functionParameter)
     else
         TypeLocation.FunctionPointerParameter(it.index, location)
@@ -712,8 +712,8 @@ private fun BackendChecker.checkCanGenerateCFunction(
         checkParameter(it, function.extensionReceiverParameter!!, isObjCMethod, location)
     }
 
-    signature.valueParameters.forEach {
-        checkParameter(it, function.valueParameters[it.index], isObjCMethod, location)
+    signature.konstueParameters.forEach {
+        checkParameter(it, function.konstueParameters[it.index], isObjCMethod, location)
     }
 }
 
@@ -732,7 +732,7 @@ private fun BackendChecker.checkCanMapCalleeFunctionParameter(
         parameter: IrValueParameter?,
         argument: IrExpression
 ) {
-    val classifier = type.classifierOrNull
+    konst classifier = type.classifierOrNull
     when {
         classifier?.isClassWithFqName(InteropFqNames.cValues.toUnsafe()) == true || // Note: this should not be accepted, but is required for compatibility
                 classifier?.isClassWithFqName(InteropFqNames.cValuesRef.toUnsafe()) == true -> return
@@ -751,18 +751,18 @@ private fun BackendChecker.checkCanMapCalleeFunctionParameter(
     }
 }
 
-private sealed class TypeLocation(val element: IrElement) {
-    class FunctionArgument(val argument: IrExpression) : TypeLocation(argument)
-    class FunctionCallResult(val call: IrFunctionAccessExpression) : TypeLocation(call)
+private sealed class TypeLocation(konst element: IrElement) {
+    class FunctionArgument(konst argument: IrExpression) : TypeLocation(argument)
+    class FunctionCallResult(konst call: IrFunctionAccessExpression) : TypeLocation(call)
 
-    class FunctionPointerParameter(val index: Int, element: IrElement) : TypeLocation(element)
+    class FunctionPointerParameter(konst index: Int, element: IrElement) : TypeLocation(element)
     class FunctionPointerReturnValue(element: IrElement) : TypeLocation(element)
 
-    class ObjCMethodParameter(val index: Int, element: IrElement) : TypeLocation(element)
+    class ObjCMethodParameter(konst index: Int, element: IrElement) : TypeLocation(element)
     class ObjCMethodReturnValue(element: IrElement) : TypeLocation(element)
 
-    class BlockParameter(val index: Int, val blockLocation: TypeLocation) : TypeLocation(blockLocation.element)
-    class BlockReturnValue(val blockLocation: TypeLocation) : TypeLocation(blockLocation.element)
+    class BlockParameter(konst index: Int, konst blockLocation: TypeLocation) : TypeLocation(blockLocation.element)
+    class BlockReturnValue(konst blockLocation: TypeLocation) : TypeLocation(blockLocation.element)
 }
 
 private fun BackendChecker.checkCanMapFunctionParameterType(type: IrType, variadic: Boolean, location: TypeLocation) {
@@ -776,7 +776,7 @@ private fun BackendChecker.checkCanMapReturnType(type: IrType, location: TypeLoc
 }
 
 private fun BackendChecker.checkCanMapBlockType(type: IrType, location: TypeLocation) {
-    when (val returnTypeArgument = (type as IrSimpleType).arguments.last()) {
+    when (konst returnTypeArgument = (type as IrSimpleType).arguments.last()) {
         is IrTypeProjection -> if (returnTypeArgument.variance == Variance.INVARIANT)
             checkCanMapReturnType(returnTypeArgument.type, TypeLocation.BlockReturnValue(location))
         else
@@ -830,7 +830,7 @@ private fun BackendChecker.checkCanMapType(
         type.isCValue(symbols) -> if (type.isNullable())
             reportUnsupportedType("must not be nullable")
         else {
-            val kotlinClass = (type as IrSimpleType).arguments.singleOrNull()?.typeOrNull?.getClass()
+            konst kotlinClass = (type as IrSimpleType).arguments.singleOrNull()?.typeOrNull?.getClass()
                     ?: reportUnsupportedType("must be parameterized with concrete class")
 
             kotlinClass.getCStructSpelling()
@@ -854,16 +854,16 @@ private fun BackendChecker.reportUnsupportedType(reason: String, type: IrType, l
     // TODO: report errors in frontend instead.
     fun TypeLocation.render(): String = when (this) {
         is TypeLocation.FunctionArgument -> ""
-        is TypeLocation.FunctionCallResult -> " of return value"
+        is TypeLocation.FunctionCallResult -> " of return konstue"
         is TypeLocation.FunctionPointerParameter -> " of callback parameter ${index + 1}"
-        is TypeLocation.FunctionPointerReturnValue -> " of callback return value"
+        is TypeLocation.FunctionPointerReturnValue -> " of callback return konstue"
         is TypeLocation.ObjCMethodParameter -> " of overridden Objective-C method parameter"
-        is TypeLocation.ObjCMethodReturnValue -> " of overridden Objective-C method return value"
+        is TypeLocation.ObjCMethodReturnValue -> " of overridden Objective-C method return konstue"
         is TypeLocation.BlockParameter -> " of ${index + 1} parameter in Objective-C block type${blockLocation.render()}"
-        is TypeLocation.BlockReturnValue -> " of return value of Objective-C block type${blockLocation.render()}"
+        is TypeLocation.BlockReturnValue -> " of return konstue of Objective-C block type${blockLocation.render()}"
     }
 
-    val typeLocation: String = location.render()
+    konst typeLocation: String = location.render()
 
     reportError(location.element, "type ${type.render()} $typeLocation is not supported here" +
             if (reason.isNotEmpty()) ": $reason" else "")

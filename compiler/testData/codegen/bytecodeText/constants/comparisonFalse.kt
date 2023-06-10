@@ -11,7 +11,7 @@ fun foo(): Array<Boolean> {
 
 // Disabled: current backend doesn't fold them.
 // 4 INVOKESTATIC
-// 4 INVOKESTATIC java/lang/Boolean.valueOf
+// 4 INVOKESTATIC java/lang/Boolean.konstueOf
 // 1 ICONST_1
 // 5 ICONST_0
 // 0 IFEQ

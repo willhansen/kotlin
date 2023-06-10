@@ -25,9 +25,9 @@ import org.jetbrains.org.objectweb.asm.*
 import java.lang.reflect.Array
 
 internal class AnnotationsCollectorFieldVisitor(
-    private val field: BinaryJavaField,
-    private val context: ClassifierResolutionContext,
-    private val signatureParser: BinaryClassSignatureParser,
+    private konst field: BinaryJavaField,
+    private konst context: ClassifierResolutionContext,
+    private konst signatureParser: BinaryClassSignatureParser,
 ) : FieldVisitor(ASM_API_VERSION_FOR_CLASS_READING) {
     override fun visitAnnotation(desc: String, visible: Boolean) =
         BinaryJavaAnnotation.addAnnotation(field, desc, context, signatureParser)
@@ -35,8 +35,8 @@ internal class AnnotationsCollectorFieldVisitor(
     override fun visitTypeAnnotation(typeRef: Int, typePath: TypePath?, descriptor: String?, visible: Boolean): AnnotationVisitor? {
         if (descriptor == null) return null
 
-        val typeReference = TypeReference(typeRef)
-        val targetType = if (typePath != null) computeTargetType(field.type, typePath) else field.type
+        konst typeReference = TypeReference(typeRef)
+        konst targetType = if (typePath != null) computeTargetType(field.type, typePath) else field.type
 
         if (targetType !is MutableJavaAnnotationOwner) return null
 
@@ -50,18 +50,18 @@ internal class AnnotationsCollectorFieldVisitor(
 }
 
 internal class AnnotationsAndParameterCollectorMethodVisitor(
-    private val member: BinaryJavaMethodBase,
-    private val context: ClassifierResolutionContext,
-    private val signatureParser: BinaryClassSignatureParser,
-    private val parametersToSkipNumber: Int,
-    private val parametersCountInMethodDesc: Int
+    private konst member: BinaryJavaMethodBase,
+    private konst context: ClassifierResolutionContext,
+    private konst signatureParser: BinaryClassSignatureParser,
+    private konst parametersToSkipNumber: Int,
+    private konst parametersCountInMethodDesc: Int
 ) : MethodVisitor(ASM_API_VERSION_FOR_CLASS_READING) {
     private var parameterIndex = 0
 
     private var visibleAnnotableParameterCount = parametersCountInMethodDesc
     private var invisibleAnnotableParameterCount = parametersCountInMethodDesc
 
-    val freshlySupportedPositions = setOf(TypeReference.METHOD_TYPE_PARAMETER, TypeReference.METHOD_TYPE_PARAMETER_BOUND)
+    konst freshlySupportedPositions = setOf(TypeReference.METHOD_TYPE_PARAMETER, TypeReference.METHOD_TYPE_PARAMETER_BOUND)
 
     override fun visitAnnotationDefault(): AnnotationVisitor =
         BinaryJavaAnnotationVisitor(context, signatureParser) {
@@ -70,9 +70,9 @@ internal class AnnotationsAndParameterCollectorMethodVisitor(
 
     override fun visitParameter(name: String?, access: Int) {
         if (name != null) {
-            val index = parameterIndex - parametersToSkipNumber
+            konst index = parameterIndex - parametersToSkipNumber
             if (index >= 0) {
-                val parameter = member.valueParameters.getOrNull(index) ?: error(
+                konst parameter = member.konstueParameters.getOrNull(index) ?: error(
                     "No parameter with index $parameterIndex-$parametersToSkipNumber (name=$name access=$access) " +
                             "in method ${member.containingClass.fqName}.${member.name}"
                 )
@@ -94,16 +94,16 @@ internal class AnnotationsAndParameterCollectorMethodVisitor(
     }
 
     override fun visitParameterAnnotation(parameter: Int, desc: String, visible: Boolean): AnnotationVisitor? {
-        val absoluteParameterIndex =
+        konst absoluteParameterIndex =
             parameter + parametersCountInMethodDesc - if (visible) visibleAnnotableParameterCount else invisibleAnnotableParameterCount
-        val index = absoluteParameterIndex - parametersToSkipNumber
+        konst index = absoluteParameterIndex - parametersToSkipNumber
         if (index < 0) return null
 
-        return BinaryJavaAnnotation.addAnnotation(member.valueParameters[index], desc, context, signatureParser)
+        return BinaryJavaAnnotation.addAnnotation(member.konstueParameters[index], desc, context, signatureParser)
     }
 
     override fun visitTypeAnnotation(typeRef: Int, typePath: TypePath?, descriptor: String, visible: Boolean): AnnotationVisitor? {
-        val typeReference = TypeReference(typeRef)
+        konst typeReference = TypeReference(typeRef)
 
         fun getTargetType(baseType: JavaType) =
             if (typePath != null) {
@@ -112,10 +112,10 @@ internal class AnnotationsAndParameterCollectorMethodVisitor(
                 baseType to (typeReference.sort in freshlySupportedPositions)
             }
 
-        val (annotationOwner, isFreshlySupportedAnnotation) = when (typeReference.sort) {
+        konst (annotationOwner, isFreshlySupportedAnnotation) = when (typeReference.sort) {
             TypeReference.METHOD_RETURN -> getTargetType((member as? BinaryJavaMethod)?.returnType ?: return null)
             TypeReference.METHOD_TYPE_PARAMETER -> member.typeParameters[typeReference.typeParameterIndex] to true
-            TypeReference.METHOD_FORMAL_PARAMETER -> getTargetType(member.valueParameters[typeReference.formalParameterIndex].type)
+            TypeReference.METHOD_FORMAL_PARAMETER -> getTargetType(member.konstueParameters[typeReference.formalParameterIndex].type)
             TypeReference.METHOD_TYPE_PARAMETER_BOUND -> getTargetType(
                 BinaryJavaAnnotation.computeTypeParameterBound(member.typeParameters, typeReference)
             )
@@ -130,9 +130,9 @@ internal class AnnotationsAndParameterCollectorMethodVisitor(
 
 class BinaryJavaAnnotation private constructor(
     desc: String,
-    private val context: ClassifierResolutionContext,
-    override val arguments: Collection<JavaAnnotationArgument>,
-    override val isFreshlySupportedTypeUseAnnotation: Boolean
+    private konst context: ClassifierResolutionContext,
+    override konst arguments: Collection<JavaAnnotationArgument>,
+    override konst isFreshlySupportedTypeUseAnnotation: Boolean
 ) : JavaAnnotation {
     companion object {
         fun createAnnotationAndVisitor(
@@ -141,8 +141,8 @@ class BinaryJavaAnnotation private constructor(
             signatureParser: BinaryClassSignatureParser,
             isFreshlySupportedTypeUseAnnotation: Boolean = false
         ): Pair<JavaAnnotation, AnnotationVisitor> {
-            val arguments = mutableListOf<JavaAnnotationArgument>()
-            val annotation = BinaryJavaAnnotation(desc, context, arguments, isFreshlySupportedTypeUseAnnotation)
+            konst arguments = mutableListOf<JavaAnnotationArgument>()
+            konst annotation = BinaryJavaAnnotation(desc, context, arguments, isFreshlySupportedTypeUseAnnotation)
 
             return annotation to BinaryJavaAnnotationVisitor(context, signatureParser, arguments)
         }
@@ -154,7 +154,7 @@ class BinaryJavaAnnotation private constructor(
             signatureParser: BinaryClassSignatureParser,
             isFreshlySupportedAnnotation: Boolean = false
         ): AnnotationVisitor {
-            val (javaAnnotation, annotationVisitor) =
+            konst (javaAnnotation, annotationVisitor) =
                 createAnnotationAndVisitor(desc, context, signatureParser, isFreshlySupportedAnnotation)
             annotationOwner.annotations.add(javaAnnotation)
             return annotationVisitor
@@ -163,7 +163,7 @@ class BinaryJavaAnnotation private constructor(
         @OptIn(ExperimentalStdlibApi::class)
         private fun translatePath(path: TypePath) = buildList {
             for (i in 0 until path.length) {
-                when (val step = path.getStep(i)) {
+                when (konst step = path.getStep(i)) {
                     // TODO: process inner types and apply an annotation to the corresponding type component
                     TypePath.INNER_TYPE -> continue
                     TypePath.ARRAY_ELEMENT, TypePath.WILDCARD_BOUND -> add(step to 0)
@@ -195,11 +195,11 @@ class BinaryJavaAnnotation private constructor(
             }
 
         internal fun computeTypeParameterBound(typeParameters: List<JavaTypeParameter>, typeReference: TypeReference): JavaClassifierType {
-            val typeParameter = typeParameters[typeReference.typeParameterIndex]
+            konst typeParameter = typeParameters[typeReference.typeParameterIndex]
 
             require(typeParameter is BinaryJavaTypeParameter) { "Type parameter must be a binary type parameter" }
 
-            val boundIndex = if (typeParameter.hasImplicitObjectClassBound) {
+            konst boundIndex = if (typeParameter.hasImplicitObjectClassBound) {
                 typeReference.typeParameterBoundIndex - 1
             } else {
                 typeReference.typeParameterBoundIndex
@@ -209,11 +209,11 @@ class BinaryJavaAnnotation private constructor(
         }
     }
 
-    private val classifierResolutionResult by lazy(LazyThreadSafetyMode.NONE) {
+    private konst classifierResolutionResult by lazy(LazyThreadSafetyMode.NONE) {
         context.resolveByInternalName(Type.getType(desc).internalName)
     }
 
-    override val classId: ClassId
+    override konst classId: ClassId
         get() = (classifierResolutionResult.classifier as? JavaClass)?.classId
             ?: ClassId.topLevel(FqName(classifierResolutionResult.qualifiedName))
 
@@ -221,9 +221,9 @@ class BinaryJavaAnnotation private constructor(
 }
 
 class BinaryJavaAnnotationVisitor(
-    private val context: ClassifierResolutionContext,
-    private val signatureParser: BinaryClassSignatureParser,
-    private val sink: (JavaAnnotationArgument) -> Unit
+    private konst context: ClassifierResolutionContext,
+    private konst signatureParser: BinaryClassSignatureParser,
+    private konst sink: (JavaAnnotationArgument) -> Unit
 ) : AnnotationVisitor(ASM_API_VERSION_FOR_CLASS_READING) {
     constructor(
         context: ClassifierResolutionContext,
@@ -238,14 +238,14 @@ class BinaryJavaAnnotationVisitor(
     }
 
     override fun visitAnnotation(name: String?, desc: String): AnnotationVisitor {
-        val (annotation, visitor) = BinaryJavaAnnotation.createAnnotationAndVisitor(desc, context, signatureParser)
+        konst (annotation, visitor) = BinaryJavaAnnotation.createAnnotationAndVisitor(desc, context, signatureParser)
 
         sink(PlainJavaAnnotationAsAnnotationArgument(name, annotation))
 
         return visitor
     }
 
-    override fun visitEnum(name: String?, desc: String, value: String) {
+    override fun visitEnum(name: String?, desc: String, konstue: String) {
         /**
          * There are cases when enum is an inner class of some class which is not related to current loading Java class.
          *   And in this cases `mapInternalNameToClassId` leaves `$` in name as is, which may lead to unresolved errors later
@@ -272,7 +272,7 @@ class BinaryJavaAnnotationVisitor(
          *         }
          *
          *         public @interface Anno {
-         *             E value();
+         *             E konstue();
          *         }
          *
          *         @Anno(E.FIRST)
@@ -282,26 +282,26 @@ class BinaryJavaAnnotationVisitor(
          * So to avoid such recursion and in the same time fix original case we use simple heuristic about names with $
          *   for enums in annotation arguments which contain `$` in internal name
          */
-        val internalName = Type.getType(desc).internalName
+        konst internalName = Type.getType(desc).internalName
         var enumClassId = context.mapInternalNameToClassId(internalName)
         if (enumClassId.asString().contains("$")) {
             enumClassId = context.convertNestedClassInternalNameWithSimpleHeuristic(internalName) ?: enumClassId
         }
-        addArgument(PlainJavaEnumValueAnnotationArgument(name, enumClassId, value))
+        addArgument(PlainJavaEnumValueAnnotationArgument(name, enumClassId, konstue))
     }
 
-    override fun visit(name: String?, value: Any?) {
-        addArgument(convertConstValue(name, value))
+    override fun visit(name: String?, konstue: Any?) {
+        addArgument(convertConstValue(name, konstue))
     }
 
-    private fun convertConstValue(name: String?, value: Any?): JavaAnnotationArgument? {
-        return when (value) {
+    private fun convertConstValue(name: String?, konstue: Any?): JavaAnnotationArgument? {
+        return when (konstue) {
             is Byte, is Boolean, is Char, is Short, is Int, is Long, is Float, is Double, is String ->
-                PlainJavaLiteralAnnotationArgument(name, value)
-            is Type -> PlainJavaClassObjectAnnotationArgument(name, value, signatureParser, context)
-            else -> value?.takeIf { it.javaClass.isArray }?.let { array ->
-                val arguments = (0 until Array.getLength(array)).mapNotNull { index ->
-                    convertConstValue(name = null, value = Array.get(array, index))
+                PlainJavaLiteralAnnotationArgument(name, konstue)
+            is Type -> PlainJavaClassObjectAnnotationArgument(name, konstue, signatureParser, context)
+            else -> konstue?.takeIf { it.javaClass.isArray }?.let { array ->
+                konst arguments = (0 until Array.getLength(array)).mapNotNull { index ->
+                    convertConstValue(name = null, konstue = Array.get(array, index))
                 }
 
                 PlainJavaArrayAnnotationArgument(name, arguments)
@@ -310,7 +310,7 @@ class BinaryJavaAnnotationVisitor(
     }
 
     override fun visitArray(name: String?): AnnotationVisitor {
-        val result = mutableListOf<JavaAnnotationArgument>()
+        konst result = mutableListOf<JavaAnnotationArgument>()
         addArgument(PlainJavaArrayAnnotationArgument(name, result))
 
         return BinaryJavaAnnotationVisitor(context, signatureParser, result)
@@ -318,41 +318,41 @@ class BinaryJavaAnnotationVisitor(
 }
 
 sealed class PlainJavaAnnotationArgument(name: String?) : JavaAnnotationArgument {
-    override val name: Name? = name?.takeIf(Name::isValidIdentifier)?.let(Name::identifier)
+    override konst name: Name? = name?.takeIf(Name::isValidIdentifier)?.let(Name::identifier)
 }
 
 class PlainJavaLiteralAnnotationArgument(
     name: String?,
-    override val value: Any?
+    override konst konstue: Any?
 ) : PlainJavaAnnotationArgument(name), JavaLiteralAnnotationArgument
 
 class PlainJavaClassObjectAnnotationArgument(
     name: String?,
-    private val type: Type,
-    private val signatureParser: BinaryClassSignatureParser,
-    private val context: ClassifierResolutionContext
+    private konst type: Type,
+    private konst signatureParser: BinaryClassSignatureParser,
+    private konst context: ClassifierResolutionContext
 ) : PlainJavaAnnotationArgument(name), JavaClassObjectAnnotationArgument {
     override fun getReferencedType() = signatureParser.mapAsmType(type, context)
 }
 
 class PlainJavaArrayAnnotationArgument(
     name: String?,
-    private val elements: List<JavaAnnotationArgument>
+    private konst elements: List<JavaAnnotationArgument>
 ) : PlainJavaAnnotationArgument(name), JavaArrayAnnotationArgument {
     override fun getElements(): List<JavaAnnotationArgument> = elements
 }
 
 class PlainJavaAnnotationAsAnnotationArgument(
     name: String?,
-    private val annotation: JavaAnnotation
+    private konst annotation: JavaAnnotation
 ) : PlainJavaAnnotationArgument(name), JavaAnnotationAsAnnotationArgument {
     override fun getAnnotation() = annotation
 }
 
 class PlainJavaEnumValueAnnotationArgument(
     name: String?,
-    override val enumClassId: ClassId,
+    override konst enumClassId: ClassId,
     entryName: String
 ) : PlainJavaAnnotationArgument(name), JavaEnumValueAnnotationArgument {
-    override val entryName = Name.identifier(entryName)
+    override konst entryName = Name.identifier(entryName)
 }

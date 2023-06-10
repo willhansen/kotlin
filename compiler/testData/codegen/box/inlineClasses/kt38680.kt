@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC(val s: String)
+konstue class IC(konst s: String)
 
 interface IFoo<T> {
     fun foo(x: T, s: String = "K"): String

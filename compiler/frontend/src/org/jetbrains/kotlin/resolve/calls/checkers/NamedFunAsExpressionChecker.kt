@@ -24,13 +24,13 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
  *   foo(fun named() {}) // bad
  *
  *  // here `if` is synthetic function call
- *   val x = if (b) fun named1() {} else fun named2() {}
+ *   konst x = if (b) fun named1() {} else fun named2() {}
  */
 object NamedFunAsExpressionChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.NewInference)) return
-        for (argument in resolvedCall.valueArguments.values.filterIsInstance(ExpressionValueArgument::class.java)) {
-            val expression = KtPsiUtil.deparenthesize(argument.valueArgument?.getArgumentExpression()) as? KtNamedFunction ?: continue
+        for (argument in resolvedCall.konstueArguments.konstues.filterIsInstance(ExpressionValueArgument::class.java)) {
+            konst expression = KtPsiUtil.deparenthesize(argument.konstueArgument?.getArgumentExpression()) as? KtNamedFunction ?: continue
             if (!expression.isFunctionalExpression()) {
                 /*
                  * There is one another place, where ANONYMOUS_FUNCTION_WITH_NAME is reported

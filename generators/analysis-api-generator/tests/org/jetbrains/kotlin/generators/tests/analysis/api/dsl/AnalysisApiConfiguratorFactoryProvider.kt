@@ -11,14 +11,14 @@ import org.jetbrains.kotlin.analysis.api.standalone.fir.test.AnalysisApiFirStand
 import org.jetbrains.kotlin.analysis.test.framework.test.configurators.*
 
 object AnalysisApiConfiguratorFactoryProvider {
-    private val allFactories = listOf(
+    private konst allFactories = listOf(
         AnalysisApiFirTestConfiguratorFactory,
         AnalysisApiFe10TestConfiguratorFactory,
         AnalysisApiFirStandaloneModeTestConfiguratorFactory,
     )
 
     fun getFactory(data: AnalysisApiTestConfiguratorFactoryData): AnalysisApiTestConfiguratorFactory? {
-        val supportedFactories = allFactories.filter { it.supportMode(data) }
+        konst supportedFactories = allFactories.filter { it.supportMode(data) }
         check(supportedFactories.size <= 1) {
             buildString {
                 append("For $data")
@@ -39,11 +39,11 @@ object AnalysisApiConfiguratorFactoryProvider {
         else -> null
     }
 
-    val allPossibleFactoryDataList: List<AnalysisApiTestConfiguratorFactoryData> = buildList {
-        FrontendKind.values().forEach { frontend ->
-            TestModuleKind.values().forEach { moduleKind ->
-                AnalysisSessionMode.values().forEach { analysisSessionMode ->
-                    AnalysisApiMode.values().forEach { analysisApiMode ->
+    konst allPossibleFactoryDataList: List<AnalysisApiTestConfiguratorFactoryData> = buildList {
+        FrontendKind.konstues().forEach { frontend ->
+            TestModuleKind.konstues().forEach { moduleKind ->
+                AnalysisSessionMode.konstues().forEach { analysisSessionMode ->
+                    AnalysisApiMode.konstues().forEach { analysisApiMode ->
                         add(AnalysisApiTestConfiguratorFactoryData(frontend, moduleKind, analysisSessionMode, analysisApiMode))
                     }
                 }

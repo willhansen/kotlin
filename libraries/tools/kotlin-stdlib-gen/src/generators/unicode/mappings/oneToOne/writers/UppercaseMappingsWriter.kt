@@ -12,13 +12,13 @@ import generators.unicode.ranges.RangesWritingStrategy
 import generators.unicode.writeIntArray
 import java.io.FileWriter
 
-internal class UppercaseMappingsWriter(private val strategy: RangesWritingStrategy) : MappingsWriter {
+internal class UppercaseMappingsWriter(private konst strategy: RangesWritingStrategy) : MappingsWriter {
     override fun write(mappings: List<MappingPattern>, writer: FileWriter) {
         @Suppress("UNCHECKED_CAST")
-        val distanceMappings = mappings as List<EqualDistanceMappingPattern>
+        konst distanceMappings = mappings as List<EqualDistanceMappingPattern>
 
-        val start = distanceMappings.map { it.start }
-        val length = distanceMappings.map { (it.mapping shl 12) or (it.distance shl 8) or it.length }
+        konst start = distanceMappings.map { it.start }
+        konst length = distanceMappings.map { (it.mapping shl 12) or (it.distance shl 8) or it.length }
 
         strategy.beforeWritingRanges(writer)
         writer.writeIntArray("rangeStart", start, strategy)
@@ -35,19 +35,19 @@ internal class UppercaseMappingsWriter(private val strategy: RangesWritingStrate
 
     private fun equalDistanceMapping(): String = """
         internal fun equalDistanceMapping(code: Int, start: Int, pattern: Int): Int {
-            val diff = code - start
+            konst diff = code - start
 
-            val length = pattern and 0xff
+            konst length = pattern and 0xff
             if (diff >= length) {
                 return code
             }
 
-            val distance = (pattern shr 8) and 0xf
+            konst distance = (pattern shr 8) and 0xf
             if (diff % distance != 0) {
                 return code
             }
 
-            val mapping = pattern shr 12
+            konst mapping = pattern shr 12
             return code + mapping
         }
     """.trimIndent()
@@ -60,7 +60,7 @@ internal class UppercaseMappingsWriter(private val strategy: RangesWritingStrate
             if (this < 0x80) {
                 return this
             }
-            val index = binarySearchRange(rangeStart, this)
+            konst index = binarySearchRange(rangeStart, this)
             return equalDistanceMapping(this, rangeStart[index], rangeLength[index])
         }
     """.trimIndent()

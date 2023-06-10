@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 /**
  * After moving an [org.jetbrains.kotlin.ir.IrElement], some type parameter references within it may become out of scope.
- * This remapper restores validity by redirecting those references to new type parameters.
+ * This remapper restores konstidity by redirecting those references to new type parameters.
  */
 class IrTypeParameterRemapper(
-    private val typeParameterMap: Map<IrTypeParameter, IrTypeParameter>
+    private konst typeParameterMap: Map<IrTypeParameter, IrTypeParameter>
 ) : TypeRemapper {
     override fun enterScope(irTypeParametersContainer: IrTypeParametersContainer) {}
     override fun leaveScope() {}

@@ -13,8 +13,8 @@ fun test() {
     }<!>
 
     Sam {
-        val a: String = this
-        val a2: String = <!UNRESOLVED_REFERENCE!>it<!>
+        konst a: String = this
+        konst a2: String = <!UNRESOLVED_REFERENCE!>it<!>
         System.out.println(a)
     }
 }

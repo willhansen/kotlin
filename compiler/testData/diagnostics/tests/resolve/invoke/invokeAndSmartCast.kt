@@ -1,4 +1,4 @@
-class A(val x: (String.() -> Unit)?)
+class A(konst x: (String.() -> Unit)?)
 
 fun test(a: A) {
     if (a.x != null) {

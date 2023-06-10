@@ -3,13 +3,13 @@
 import kotlin.coroutines.*
 
 class B {
-    val value: Long = 10L
+    konst konstue: Long = 10L
 
     open inner class C : A<Unit> {
-        override suspend fun getTotalFrames(): Long? = this@B.value
+        override suspend fun getTotalFrames(): Long? = this@B.konstue
 
         open inner class D : A<Unit> {
-            override suspend fun getTotalFrames(): Long? = this@B.value
+            override suspend fun getTotalFrames(): Long? = this@B.konstue
         }
 
         suspend fun getInnerTotalFrames(): Long? = D().getTotalFrames()

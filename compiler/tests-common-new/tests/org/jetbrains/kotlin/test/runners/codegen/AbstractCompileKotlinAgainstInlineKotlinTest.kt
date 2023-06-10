@@ -39,13 +39,13 @@ import org.jetbrains.kotlin.test.services.SplittingModuleTransformerForBoxTests
 
 @OptIn(TestInfrastructureInternals::class)
 abstract class AbstractCompileKotlinAgainstInlineKotlinTestBase<R : ResultingArtifact.FrontendOutput<R>, I : ResultingArtifact.BackendInput<I>>(
-    val targetFrontend: FrontendKind<R>,
+    konst targetFrontend: FrontendKind<R>,
     targetBackend: TargetBackend
 ) : AbstractKotlinCompilerWithTargetBackendTest(targetBackend) {
-    abstract val frontendFacade: Constructor<FrontendFacade<R>>
-    abstract val frontendToBackendConverter: Constructor<Frontend2BackendConverter<R, I>>
-    abstract val backendFacade: Constructor<BackendFacade<I, BinaryArtifacts.Jvm>>
-    open val directiveToSuppressTest: ValueDirective<TargetBackend> = IGNORE_BACKEND_MULTI_MODULE
+    abstract konst frontendFacade: Constructor<FrontendFacade<R>>
+    abstract konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<R, I>>
+    abstract konst backendFacade: Constructor<BackendFacade<I, BinaryArtifacts.Jvm>>
+    open konst directiveToSuppressTest: ValueDirective<TargetBackend> = IGNORE_BACKEND_MULTI_MODULE
 
     override fun TestConfigurationBuilder.configuration() {
         commonConfigurationForTest(targetFrontend, frontendFacade, frontendToBackendConverter, backendFacade)
@@ -63,13 +63,13 @@ open class AbstractCompileKotlinAgainstInlineKotlinTest :
         FrontendKinds.ClassicFrontend,
         TargetBackend.JVM
     ) {
-    override val frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
 
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, ClassicBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, ClassicBackendInput>>
         get() = ::ClassicFrontend2ClassicBackendConverter
 
-    override val backendFacade: Constructor<BackendFacade<ClassicBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<ClassicBackendInput, BinaryArtifacts.Jvm>>
         get() = ::ClassicJvmBackendFacade
 }
 
@@ -78,13 +78,13 @@ open class AbstractIrCompileKotlinAgainstInlineKotlinTest :
         FrontendKinds.ClassicFrontend,
         TargetBackend.JVM_IR
     ) {
-    override val frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
 
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
         get() = ::ClassicFrontend2IrConverter
 
-    override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
         get() = ::JvmIrBackendFacade
 }
 
@@ -106,19 +106,19 @@ open class AbstractIrSerializeCompileKotlinAgainstInlineKotlinTest : AbstractIrC
     }
 }
 
-open class AbstractFirSerializeCompileKotlinAgainstInlineKotlinTestBase(val parser: FirParser) :
+open class AbstractFirSerializeCompileKotlinAgainstInlineKotlinTestBase(konst parser: FirParser) :
     AbstractCompileKotlinAgainstInlineKotlinTestBase<FirOutputArtifact, IrBackendInput>(FrontendKinds.FIR, TargetBackend.JVM_IR_SERIALIZE) {
 
-    override val frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
         get() = ::FirFrontendFacade
 
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
         get() = ::Fir2IrResultsConverter
 
-    override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
         get() = ::JvmIrBackendFacade
 
-    override val directiveToSuppressTest = IGNORE_BACKEND_K2_MULTI_MODULE
+    override konst directiveToSuppressTest = IGNORE_BACKEND_K2_MULTI_MODULE
 
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)

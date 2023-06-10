@@ -21,24 +21,24 @@ import kotlin.test.*
 
 class RegexTest {
     @Test fun namedGroups() {
-        val input = "1a 2b 3"
-        val regex = "(?<num>\\d)(?<liter>\\w)?".toRegex()
+        konst input = "1a 2b 3"
+        konst regex = "(?<num>\\d)(?<liter>\\w)?".toRegex()
 
-        val matches = regex.findAll(input).toList()
+        konst matches = regex.findAll(input).toList()
         assertTrue(matches.all { it.groups.size == 3 })
-        val (m1, m2, m3) = matches
+        konst (m1, m2, m3) = matches
 
-        assertEquals("1", m1.groups["num"]?.value)
+        assertEquals("1", m1.groups["num"]?.konstue)
         assertEquals(0..0, m1.groups["num"]?.range)
-        assertEquals("a", m1.groups["liter"]?.value)
+        assertEquals("a", m1.groups["liter"]?.konstue)
         assertEquals(1..1, m1.groups["liter"]?.range)
 
-        assertEquals("2", m2.groups["num"]?.value)
+        assertEquals("2", m2.groups["num"]?.konstue)
         assertEquals(3..3, m2.groups["num"]?.range)
-        assertEquals("b", m2.groups["liter"]?.value)
+        assertEquals("b", m2.groups["liter"]?.konstue)
         assertEquals(4..4, m2.groups["liter"]?.range)
 
-        assertEquals("3", m3.groups["num"]?.value)
+        assertEquals("3", m3.groups["num"]?.konstue)
         assertNull(m3.groups["liter"])
 
         assertFailsWith<IllegalArgumentException> { m2.groups["unknown_group"] }.let { e ->
@@ -72,14 +72,14 @@ class RegexTest {
             "(? <=[a-z])\\d".toRegex(RegexOption.COMMENTS) // (?<=X) - ?< shouldn't be separated
         }
         "(?< =[a-z])\\d".toRegex(RegexOption.COMMENTS).let { regex ->
-            assertEquals("4", regex.find("...a4...B1")?.value)
+            assertEquals("4", regex.find("...a4...B1")?.konstue)
         }
         // negative lookbehind
         assertFailsWith<IllegalArgumentException> {
             "(? <![a-z])\\d".toRegex(RegexOption.COMMENTS) // (?<=X) - ?< shouldn't be separated
         }
         "(?< ![a-z])\\d".toRegex(RegexOption.COMMENTS).let { regex ->
-            assertEquals("1", regex.find("...a4...B1")?.value)
+            assertEquals("1", regex.find("...a4...B1")?.konstue)
         }
         // positive lookahead
         assertFailsWith<IllegalArgumentException> {
@@ -96,10 +96,10 @@ class RegexTest {
             "(? <first>\\d+)".toRegex(RegexOption.COMMENTS) // (?<name>X) - ?< shouldn't be separated
         }
         "( ?< first  > \\d + ) - (?< se c  ond >\\d+)".toRegex(RegexOption.COMMENTS).let { regex ->
-            val match = regex.find("123-456")!!
-            assertEquals("123-456", match.value)
-            assertEquals("123", match.groups["first"]?.value)
-            assertEquals("456", match.groups["second"]?.value)
+            konst match = regex.find("123-456")!!
+            assertEquals("123-456", match.konstue)
+            assertEquals("123", match.groups["first"]?.konstue)
+            assertEquals("456", match.groups["second"]?.konstue)
         }
     }
 
@@ -111,14 +111,14 @@ class RegexTest {
             assertTrue(regex.matches("123- 1")) // \n - the construct shouldn't be separated. Otherwise, backslash quotes the following char - the space
         }
         "(?<first>\\d+)-\\k  < fi r  st > ".toRegex(RegexOption.COMMENTS).let { regex ->
-            val match = regex.find("123-123")!!
-            assertEquals("123-123", match.value)
-            assertEquals("123", match.groups["first"]?.value)
+            konst match = regex.find("123-123")!!
+            assertEquals("123-123", match.konstue)
+            assertEquals("123", match.groups["first"]?.konstue)
         }
         "0(1(2(3(4(5(6(7(8(9(A(B(C))))))))))))\\1  1 ".toRegex(RegexOption.COMMENTS).let { regex ->
-            val match = regex.find("0123456789ABCBC")!!
-            assertEquals("BC", match.groups[11]?.value)
-            assertEquals("56789ABC", match.groups[5]?.value)
+            konst match = regex.find("0123456789ABCBC")!!
+            assertEquals("BC", match.groups[11]?.konstue)
+            assertEquals("56789ABC", match.groups[5]?.konstue)
         }
     }
 }

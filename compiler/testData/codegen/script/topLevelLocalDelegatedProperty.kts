@@ -5,8 +5,8 @@ class Delegate {
 }
 
 
-val prop: Int by Delegate()
+konst prop: Int by Delegate()
 
-val  x = prop
+konst  x = prop
 
 // expected: x: 3

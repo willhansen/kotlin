@@ -9,6 +9,6 @@ fun <T : Comparable<T>> MutableList<T>.sort() {
 }
 
 fun <T> List<T>.plus(other : List<T>) : List<T> {
-  val result = ArrayList(this)
+  konst result = ArrayList(this)
   return result
 }

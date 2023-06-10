@@ -8,7 +8,7 @@ fun <X> OutBase<X>.myLast(): X = TODO()
 
 fun <T> foo(x: OutBase<T>) {
     if (x is OutDerived<*>) {
-        val l: T = x.myLast() // required T, found Cap(*). Only in NI
+        konst l: T = x.myLast() // required T, found Cap(*). Only in NI
     }
 }
 
@@ -19,7 +19,7 @@ fun <X> InvBase<X>.myLastInv(): X = TODO()
 
 fun <T> fooInv(x: InvBase<T>) {
     if (x is InvDerived<*>) {
-        val l: T = <!TYPE_MISMATCH!>x.<!TYPE_MISMATCH!>myLastInv()<!><!> // required T, found Cap(*). Only in NI
+        konst l: T = <!TYPE_MISMATCH!>x.<!TYPE_MISMATCH!>myLastInv()<!><!> // required T, found Cap(*). Only in NI
     }
 }
 

@@ -21,9 +21,9 @@ class InMemoryStorageWrapperTest {
 
     @Test
     fun testNoStorageIsCreatedOnFail() {
-        val storageRoot = workingDir.resolve("storage")
+        konst storageRoot = workingDir.resolve("storage")
         withLookupMapInTransaction(storageRoot, useInMemoryWrapper = true, successful = false) {
-            val key = LookupSymbolKey("a", "a")
+            konst key = LookupSymbolKey("a", "a")
             it[key] = setOf(1, 2)
             it.append(key, setOf(3))
         }
@@ -32,8 +32,8 @@ class InMemoryStorageWrapperTest {
 
     @Test
     fun testStorageIsProperlyCreatedOnSuccess() {
-        val storageRoot = workingDir.resolve("storage")
-        val key = LookupSymbolKey("a", "a")
+        konst storageRoot = workingDir.resolve("storage")
+        konst key = LookupSymbolKey("a", "a")
         withLookupMapInTransaction(storageRoot, useInMemoryWrapper = true, successful = true) {
             it[key] = setOf(1, 2)
             it.append(key, setOf(3))
@@ -57,12 +57,12 @@ class InMemoryStorageWrapperTest {
      */
     @Test
     fun testExistingStorageIsProperlyModifiedOnSuccess() {
-        val storageRoot = workingDir.resolve("storage")
-        val key1 = LookupSymbolKey("a", "a")
-        val key2 = LookupSymbolKey("b", "b")
-        val key3 = LookupSymbolKey("c", "c")
-        val key4 = LookupSymbolKey("d", "d")
-        val key5 = LookupSymbolKey("e", "e")
+        konst storageRoot = workingDir.resolve("storage")
+        konst key1 = LookupSymbolKey("a", "a")
+        konst key2 = LookupSymbolKey("b", "b")
+        konst key3 = LookupSymbolKey("c", "c")
+        konst key4 = LookupSymbolKey("d", "d")
+        konst key5 = LookupSymbolKey("e", "e")
         withLookupMapInTransaction(storageRoot, useInMemoryWrapper = false, successful = true) {
             it[key1] = setOf(1, 2)
             it[key2] = setOf(1, 2)
@@ -97,15 +97,15 @@ class InMemoryStorageWrapperTest {
 
     @Test
     fun testExistingStorageIsNotModifiedOnFail() {
-        val storageRoot = workingDir.resolve("storage")
-        val key1 = LookupSymbolKey("a", "a")
-        val key2 = LookupSymbolKey("b", "b")
-        val key3 = LookupSymbolKey("c", "c")
+        konst storageRoot = workingDir.resolve("storage")
+        konst key1 = LookupSymbolKey("a", "a")
+        konst key2 = LookupSymbolKey("b", "b")
+        konst key3 = LookupSymbolKey("c", "c")
         withLookupMapInTransaction(storageRoot, useInMemoryWrapper = false, successful = true) {
             it[key1] = setOf(1, 2)
             it[key2] = setOf(1, 2)
         }
-        val savedState = workingDir.resolve("backup")
+        konst savedState = workingDir.resolve("backup")
         storageRoot.toFile().copyRecursively(savedState.toFile())
         withLookupMapInTransaction(storageRoot, useInMemoryWrapper = true, successful = false) {
             it.clean()
@@ -122,14 +122,14 @@ class InMemoryStorageWrapperTest {
         successful: Boolean,
         dataProvider: (LookupMap) -> Unit
     ) {
-        val storageFile = storageRoot.resolve("lookup").toFile()
-        val fileToPathConverter = RelativeFileToPathConverter(storageFile)
-        val icContext = IncrementalCompilationContext(
+        konst storageFile = storageRoot.resolve("lookup").toFile()
+        konst fileToPathConverter = RelativeFileToPathConverter(storageFile)
+        konst icContext = IncrementalCompilationContext(
             pathConverter = fileToPathConverter,
             keepIncrementalCompilationCachesInMemory = useInMemoryWrapper
         )
         icContext.transaction.runWithin { transaction ->
-            val lookupMap = LookupMap(storageFile, icContext)
+            konst lookupMap = LookupMap(storageFile, icContext)
             transaction.cachesManager = Closeable {
                 lookupMap.flush(false)
                 lookupMap.close()

@@ -18,157 +18,157 @@ import kotlin.text.Regex
 class A(var a: Int)
 
 @SharedImmutable
-val global1: WorkerBoundReference<A> = WorkerBoundReference(A(3))
+konst global1: WorkerBoundReference<A> = WorkerBoundReference(A(3))
 
 @Test
 fun testGlobal() {
-    assertEquals(3, global1.value.a)
-    assertEquals(3, global1.valueOrNull?.a)
+    assertEquals(3, global1.konstue.a)
+    assertEquals(3, global1.konstueOrNull?.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         global1
     }
 
-    val value = future.result
-    assertEquals(3, value.value.a)
-    assertEquals(3, value.valueOrNull?.a)
+    konst konstue = future.result
+    assertEquals(3, konstue.konstue.a)
+    assertEquals(3, konstue.konstueOrNull?.a)
     worker.requestTermination().result
 }
 
 @SharedImmutable
-val global2: WorkerBoundReference<A> = WorkerBoundReference(A(3))
+konst global2: WorkerBoundReference<A> = WorkerBoundReference(A(3))
 
 @Test
 fun testGlobalAccessOnWorker() {
-    assertEquals(3, global2.value.a)
+    assertEquals(3, global2.konstue.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-            assertEquals(global2.value, global2.valueOrNull)
-            global2.value.a
+            assertEquals(global2.konstue, global2.konstueOrNull)
+            global2.konstue.a
         } else {
-            val local = global2
+            konst local = global2
             assertFailsWith<IncorrectDereferenceException> {
-                local.value
+                local.konstue
             }
-            assertEquals(null, local.valueOrNull)
+            assertEquals(null, local.konstueOrNull)
             null
         }
     }
 
-    val value = future.result
+    konst konstue = future.result
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-        assertEquals(3, value)
+        assertEquals(3, konstue)
     } else {
-        assertEquals(null, value)
+        assertEquals(null, konstue)
     }
     worker.requestTermination().result
 }
 
 @SharedImmutable
-val global3: WorkerBoundReference<A> = WorkerBoundReference(A(3).freeze())
+konst global3: WorkerBoundReference<A> = WorkerBoundReference(A(3).freeze())
 
 @Test
 fun testGlobalAccessOnWorkerFrozenInitially() {
-    assertEquals(3, global3.value.a)
-    assertEquals(3, global3.valueOrNull?.a)
+    assertEquals(3, global3.konstue.a)
+    assertEquals(3, global3.konstueOrNull?.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
-        global3.value.a
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
+        global3.konstue.a
     }
 
-    val value = future.result
-    assertEquals(3, value)
+    konst konstue = future.result
+    assertEquals(3, konstue)
     worker.requestTermination().result
 }
 
 @SharedImmutable
-val global4: WorkerBoundReference<A> = WorkerBoundReference(A(3))
+konst global4: WorkerBoundReference<A> = WorkerBoundReference(A(3))
 
 @Test
 fun testGlobalAccessOnWorkerFrozenBeforePassing() {
-    assertEquals(3, global4.value.a)
-    global4.value.freeze()
+    assertEquals(3, global4.konstue.a)
+    global4.konstue.freeze()
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
-        global4.value.a
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
+        global4.konstue.a
     }
 
-    val value = future.result
-    assertEquals(3, value)
+    konst konstue = future.result
+    assertEquals(3, konstue)
     worker.requestTermination().result
 }
 
 @SharedImmutable
-val global5: WorkerBoundReference<A> = WorkerBoundReference(A(3))
+konst global5: WorkerBoundReference<A> = WorkerBoundReference(A(3))
 
 @Test
 fun testGlobalAccessOnWorkerFrozenBeforeAccess() {
-    val semaphore: AtomicInt = AtomicInt(0)
+    konst semaphore: AtomicInt = AtomicInt(0)
 
-    assertEquals(3, global5.value.a)
+    assertEquals(3, global5.konstue.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { semaphore }) { semaphore ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { semaphore }) { semaphore ->
         semaphore.increment()
-        while (semaphore.value < 2) {
+        while (semaphore.konstue < 2) {
         }
 
-        global5.value.a
+        global5.konstue.a
     }
 
-    while (semaphore.value < 1) {
+    while (semaphore.konstue < 1) {
     }
-    global5.value.freeze()
+    global5.konstue.freeze()
     semaphore.increment()
 
-    val value = future.result
-    assertEquals(3, value)
+    konst konstue = future.result
+    assertEquals(3, konstue)
     worker.requestTermination().result
 }
 
 @SharedImmutable
-val global6: WorkerBoundReference<A> = WorkerBoundReference(A(3))
+konst global6: WorkerBoundReference<A> = WorkerBoundReference(A(3))
 
 @Test
 fun testGlobalModification() {
-    val semaphore: AtomicInt = AtomicInt(0)
+    konst semaphore: AtomicInt = AtomicInt(0)
 
-    assertEquals(3, global6.value.a)
+    assertEquals(3, global6.konstue.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { semaphore }) { semaphore ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { semaphore }) { semaphore ->
         semaphore.increment()
-        while (semaphore.value < 2) {
+        while (semaphore.konstue < 2) {
         }
         global6
     }
 
-    while (semaphore.value < 1) {
+    while (semaphore.konstue < 1) {
     }
-    global6.value.a = 4
+    global6.konstue.a = 4
     semaphore.increment()
 
-    val value = future.result
-    assertEquals(4, value.value.a)
-    assertEquals(4, value.valueOrNull?.a)
+    konst konstue = future.result
+    assertEquals(4, konstue.konstue.a)
+    assertEquals(4, konstue.konstueOrNull?.a)
     worker.requestTermination().result
 }
 
 @SharedImmutable
-val global7: WorkerBoundReference<A> = WorkerBoundReference(A(3))
+konst global7: WorkerBoundReference<A> = WorkerBoundReference(A(3))
 
 @Test
 fun testGlobalGetWorker() {
-    val ownerId = Worker.current.id
+    konst ownerId = Worker.current.id
     assertEquals(ownerId, global7.worker.id)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { ownerId }) { ownerId ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { ownerId }) { ownerId ->
         assertEquals(ownerId, global7.worker.id)
         Unit
     }
@@ -179,142 +179,142 @@ fun testGlobalGetWorker() {
 
 @Test
 fun testLocal() {
-    val local = WorkerBoundReference(A(3))
-    assertEquals(3, local.value.a)
-    assertEquals(3, local.valueOrNull?.a)
+    konst local = WorkerBoundReference(A(3))
+    assertEquals(3, local.konstue.a)
+    assertEquals(3, local.konstueOrNull?.a)
 }
 
 @Test
 fun testLocalFrozen() {
-    val local = WorkerBoundReference(A(3)).freeze()
-    assertEquals(3, local.value.a)
-    assertEquals(3, local.valueOrNull?.a)
+    konst local = WorkerBoundReference(A(3)).freeze()
+    assertEquals(3, local.konstue.a)
+    assertEquals(3, local.konstueOrNull?.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { local }) { local ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { local }) { local ->
         local
     }
 
-    val value = future.result
-    assertEquals(3, value.value.a)
-    assertEquals(3, value.valueOrNull?.a)
+    konst konstue = future.result
+    assertEquals(3, konstue.konstue.a)
+    assertEquals(3, konstue.konstueOrNull?.a)
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalAccessOnWorkerFrozen() {
-    val local = WorkerBoundReference(A(3)).freeze()
-    assertEquals(3, local.value.a)
+    konst local = WorkerBoundReference(A(3)).freeze()
+    assertEquals(3, local.konstue.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { local }) { local ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { local }) { local ->
         if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-            assertEquals(local.value, local.valueOrNull)
-            local.value.a
+            assertEquals(local.konstue, local.konstueOrNull)
+            local.konstue.a
         } else {
             assertFailsWith<IncorrectDereferenceException> {
-                local.value
+                local.konstue
             }
-            assertEquals(null, local.valueOrNull)
+            assertEquals(null, local.konstueOrNull)
             null
         }
     }
 
-    val value = future.result
+    konst konstue = future.result
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-        assertEquals(3, value)
+        assertEquals(3, konstue)
     } else {
-        assertEquals(null, value)
+        assertEquals(null, konstue)
     }
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalAccessOnWorkerFrozenInitiallyFrozen() {
-    val local = WorkerBoundReference(A(3).freeze()).freeze()
-    assertEquals(3, local.value.a)
-    assertEquals(3, local.valueOrNull?.a)
+    konst local = WorkerBoundReference(A(3).freeze()).freeze()
+    assertEquals(3, local.konstue.a)
+    assertEquals(3, local.konstueOrNull?.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { local }) { local ->
-        local.value.a
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { local }) { local ->
+        local.konstue.a
     }
 
-    val value = future.result
-    assertEquals(3, value)
+    konst konstue = future.result
+    assertEquals(3, konstue)
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalAccessOnWorkerFrozenBeforePassingFrozen() {
-    val local = WorkerBoundReference(A(3)).freeze()
-    assertEquals(3, local.value.a)
-    local.value.freeze()
+    konst local = WorkerBoundReference(A(3)).freeze()
+    assertEquals(3, local.konstue.a)
+    local.konstue.freeze()
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { local }) { local ->
-        local.value.a
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { local }) { local ->
+        local.konstue.a
     }
 
-    val value = future.result
-    assertEquals(3, value)
+    konst konstue = future.result
+    assertEquals(3, konstue)
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalAccessOnWorkerFrozenBeforeAccessFrozen() {
-    val semaphore: AtomicInt = AtomicInt(0)
+    konst semaphore: AtomicInt = AtomicInt(0)
 
-    val local = WorkerBoundReference(A(3)).freeze()
-    assertEquals(3, local.value.a)
+    konst local = WorkerBoundReference(A(3)).freeze()
+    assertEquals(3, local.konstue.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { Pair(local, semaphore) }) { (local, semaphore) ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { Pair(local, semaphore) }) { (local, semaphore) ->
         semaphore.increment()
-        while (semaphore.value < 2) {
+        while (semaphore.konstue < 2) {
         }
 
-        local.value.a
+        local.konstue.a
     }
 
-    while (semaphore.value < 1) {
+    while (semaphore.konstue < 1) {
     }
-    local.value.freeze()
+    local.konstue.freeze()
     semaphore.increment()
 
-    val value = future.result
-    assertEquals(3, value)
+    konst konstue = future.result
+    assertEquals(3, konstue)
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalAccessOnMainThread() {
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         WorkerBoundReference(A(3))
     }
 
-    assertEquals(3, future.result.value.a)
+    assertEquals(3, future.result.konstue.a)
 
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalAccessOnMainThreadFrozen() {
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         WorkerBoundReference(A(3)).freeze()
     }
 
-    val value = future.result
+    konst konstue = future.result
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-        assertEquals(3, value.value.a)
-        assertEquals(value.value, value.valueOrNull)
+        assertEquals(3, konstue.konstue.a)
+        assertEquals(konstue.konstue, konstue.konstueOrNull)
     } else {
         assertFailsWith<IncorrectDereferenceException> {
-            value.value
+            konstue.konstue
         }
-        assertEquals(null, value.valueOrNull)
+        assertEquals(null, konstue.konstueOrNull)
     }
 
     worker.requestTermination().result
@@ -322,39 +322,39 @@ fun testLocalAccessOnMainThreadFrozen() {
 
 @Test
 fun testLocalModificationFrozen() {
-    val semaphore: AtomicInt = AtomicInt(0)
+    konst semaphore: AtomicInt = AtomicInt(0)
 
-    val local = WorkerBoundReference(A(3)).freeze()
-    assertEquals(3, local.value.a)
+    konst local = WorkerBoundReference(A(3)).freeze()
+    assertEquals(3, local.konstue.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { Pair(local, semaphore) }) { (local, semaphore) ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { Pair(local, semaphore) }) { (local, semaphore) ->
         semaphore.increment()
-        while (semaphore.value < 2) {
+        while (semaphore.konstue < 2) {
         }
         local
     }
 
-    while (semaphore.value < 1) {
+    while (semaphore.konstue < 1) {
     }
-    local.value.a = 4
+    local.konstue.a = 4
     semaphore.increment()
 
-    val value = future.result
-    assertEquals(4, value.value.a)
-    assertEquals(4, value.valueOrNull?.a)
+    konst konstue = future.result
+    assertEquals(4, konstue.konstue.a)
+    assertEquals(4, konstue.konstueOrNull?.a)
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalGetWorkerFrozen() {
-    val local = WorkerBoundReference(A(3)).freeze()
+    konst local = WorkerBoundReference(A(3)).freeze()
 
-    val ownerId = Worker.current.id
+    konst ownerId = Worker.current.id
     assertEquals(ownerId, local.worker.id)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { Pair(local, ownerId) }) { (local, ownerId) ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { Pair(local, ownerId) }) { (local, ownerId) ->
         assertEquals(ownerId, local.worker.id)
         Unit
     }
@@ -365,116 +365,116 @@ fun testLocalGetWorkerFrozen() {
 
 @Test
 fun testLocalForeignGetWorker() {
-    val worker = Worker.start()
-    val ownerId = worker.id
-    val future = worker.execute(TransferMode.SAFE, { ownerId }) { ownerId ->
-        val local = WorkerBoundReference(A(3))
+    konst worker = Worker.start()
+    konst ownerId = worker.id
+    konst future = worker.execute(TransferMode.SAFE, { ownerId }) { ownerId ->
+        konst local = WorkerBoundReference(A(3))
         assertEquals(ownerId, local.worker.id)
         local
     }
 
-    val value = future.result
-    assertEquals(ownerId, value.worker.id)
+    konst konstue = future.result
+    assertEquals(ownerId, konstue.worker.id)
 
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalForeignGetWorkerFrozen() {
-    val worker = Worker.start()
-    val ownerId = worker.id
-    val future = worker.execute(TransferMode.SAFE, { ownerId }) { ownerId ->
-        val local = WorkerBoundReference(A(3)).freeze()
+    konst worker = Worker.start()
+    konst ownerId = worker.id
+    konst future = worker.execute(TransferMode.SAFE, { ownerId }) { ownerId ->
+        konst local = WorkerBoundReference(A(3)).freeze()
         assertEquals(ownerId, local.worker.id)
         local
     }
 
-    val value = future.result
-    assertEquals(ownerId, value.worker.id)
+    konst konstue = future.result
+    assertEquals(ownerId, konstue.worker.id)
 
     worker.requestTermination().result
 }
 
-class Wrapper(val ref: WorkerBoundReference<A>)
+class Wrapper(konst ref: WorkerBoundReference<A>)
 
 @Test
 fun testLocalWithWrapperFrozen() {
-    val local = Wrapper(WorkerBoundReference(A(3))).freeze()
-    assertEquals(3, local.ref.value.a)
+    konst local = Wrapper(WorkerBoundReference(A(3))).freeze()
+    assertEquals(3, local.ref.konstue.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { local }) { local ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { local }) { local ->
         local
     }
 
-    val value = future.result
-    assertEquals(3, value.ref.value.a)
+    konst konstue = future.result
+    assertEquals(3, konstue.ref.konstue.a)
     worker.requestTermination().result
 }
 
 @Test
 fun testLocalAccessWithWrapperFrozen() {
-    val local = Wrapper(WorkerBoundReference(A(3))).freeze()
-    assertEquals(3, local.ref.value.a)
+    konst local = Wrapper(WorkerBoundReference(A(3))).freeze()
+    assertEquals(3, local.ref.konstue.a)
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { local }) { local ->
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { local }) { local ->
         if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-            assertEquals(local.ref.value, local.ref.valueOrNull)
-            local.ref.value.a
+            assertEquals(local.ref.konstue, local.ref.konstueOrNull)
+            local.ref.konstue.a
         } else {
             assertFailsWith<IncorrectDereferenceException> {
-                local.ref.value
+                local.ref.konstue
             }
-            assertEquals(null, local.ref.valueOrNull)
+            assertEquals(null, local.ref.konstueOrNull)
             null
         }
     }
 
-    val value = future.result
+    konst konstue = future.result
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-        assertEquals(3, value)
+        assertEquals(3, konstue)
     } else {
-        assertEquals(null, value)
+        assertEquals(null, konstue)
     }
     worker.requestTermination().result
 }
 
 fun getOwnerAndWeaks(initial: Int): Triple<FreezableAtomicReference<WorkerBoundReference<A>?>, WeakReference<WorkerBoundReference<A>>, WeakReference<A>> {
-    val ref = WorkerBoundReference(A(initial))
-    val refOwner: FreezableAtomicReference<WorkerBoundReference<A>?> = FreezableAtomicReference(ref)
-    val refWeak = WeakReference(ref)
-    val refValueWeak = WeakReference(ref.value)
+    konst ref = WorkerBoundReference(A(initial))
+    konst refOwner: FreezableAtomicReference<WorkerBoundReference<A>?> = FreezableAtomicReference(ref)
+    konst refWeak = WeakReference(ref)
+    konst refValueWeak = WeakReference(ref.konstue)
 
     return Triple(refOwner, refWeak, refValueWeak)
 }
 
 @Test
 fun testCollect() {
-    val (refOwner, refWeak, refValueWeak) = getOwnerAndWeaks(3)
+    konst (refOwner, refWeak, refValueWeak) = getOwnerAndWeaks(3)
 
-    refOwner.value = null
+    refOwner.konstue = null
     GC.collect()
 
     // Last reference to WorkerBoundReference is gone, so it and it's referent are destroyed.
-    assertNull(refWeak.value)
-    assertNull(refValueWeak.value)
+    assertNull(refWeak.konstue)
+    assertNull(refValueWeak.konstue)
 }
 
 fun getOwnerAndWeaksFrozen(initial: Int): Triple<AtomicReference<WorkerBoundReference<A>?>, WeakReference<WorkerBoundReference<A>>, WeakReference<A>> {
-    val ref = WorkerBoundReference(A(initial)).freeze()
-    val refOwner: AtomicReference<WorkerBoundReference<A>?> = AtomicReference(ref)
-    val refWeak = WeakReference(ref)
-    val refValueWeak = WeakReference(ref.value)
+    konst ref = WorkerBoundReference(A(initial)).freeze()
+    konst refOwner: AtomicReference<WorkerBoundReference<A>?> = AtomicReference(ref)
+    konst refWeak = WeakReference(ref)
+    konst refValueWeak = WeakReference(ref.konstue)
 
     return Triple(refOwner, refWeak, refValueWeak)
 }
 
 @Test
 fun testCollectFrozen() {
-    val (refOwner, refWeak, refValueWeak) = getOwnerAndWeaksFrozen(3)
+    konst (refOwner, refWeak, refValueWeak) = getOwnerAndWeaksFrozen(3)
 
-    refOwner.value = null
+    refOwner.konstue = null
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
         // This runs the finalizer on the WorkerBoundReference<A>, which schedules removing A from the root set
         GC.collect()
@@ -485,55 +485,55 @@ fun testCollectFrozen() {
     }
 
     // Last reference to WorkerBoundReference is gone, so it and it's referent are destroyed.
-    assertNull(refWeak.value)
-    assertNull(refValueWeak.value)
+    assertNull(refWeak.konstue)
+    assertNull(refValueWeak.konstue)
 }
 
 fun collectInWorkerFrozen(worker: Worker, semaphore: AtomicInt): Pair<WeakReference<A>, Future<Unit>> {
-    val (refOwner, _, refValueWeak) = getOwnerAndWeaksFrozen(3)
+    konst (refOwner, _, refValueWeak) = getOwnerAndWeaksFrozen(3)
 
-    val future = worker.execute(TransferMode.SAFE, { Pair(refOwner, semaphore) }) { (refOwner, semaphore) ->
+    konst future = worker.execute(TransferMode.SAFE, { Pair(refOwner, semaphore) }) { (refOwner, semaphore) ->
         semaphore.increment()
-        while (semaphore.value < 2) {
+        while (semaphore.konstue < 2) {
         }
 
-        refOwner.value = null
+        refOwner.konstue = null
         GC.collect()
     }
 
-    while (semaphore.value < 1) {
+    while (semaphore.konstue < 1) {
     }
     // At this point worker is spinning on semaphore. refOwner still contains reference to
     // WorkerBoundReference, so referent is kept alive.
     GC.collect()
-    assertNotNull(refValueWeak.value)
+    assertNotNull(refValueWeak.konstue)
 
     return Pair(refValueWeak, future)
 }
 
 @Test
 fun testCollectInWorkerFrozen() {
-    val semaphore: AtomicInt = AtomicInt(0)
+    konst semaphore: AtomicInt = AtomicInt(0)
 
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
-    val (refValueWeak, future) = collectInWorkerFrozen(worker, semaphore)
+    konst (refValueWeak, future) = collectInWorkerFrozen(worker, semaphore)
     semaphore.increment()
     future.result
 
     // At this point WorkerBoundReference no longer has a reference, so it's referent is destroyed.
     GC.collect()
-    assertNull(refValueWeak.value)
+    assertNull(refValueWeak.konstue)
 
     worker.requestTermination().result
 }
 
 fun doNotCollectInWorkerFrozen(worker: Worker, semaphore: AtomicInt): Future<WorkerBoundReference<A>> {
-    val ref = WorkerBoundReference(A(3)).freeze()
+    konst ref = WorkerBoundReference(A(3)).freeze()
 
     return worker.execute(TransferMode.SAFE, { Pair(ref, semaphore) }) { (ref, semaphore) ->
         semaphore.increment()
-        while (semaphore.value < 2) {
+        while (semaphore.konstue < 2) {
         }
 
         GC.collect()
@@ -543,18 +543,18 @@ fun doNotCollectInWorkerFrozen(worker: Worker, semaphore: AtomicInt): Future<Wor
 
 @Test
 fun testDoNotCollectInWorkerFrozen() {
-    val semaphore: AtomicInt = AtomicInt(0)
+    konst semaphore: AtomicInt = AtomicInt(0)
 
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
-    val future = doNotCollectInWorkerFrozen(worker, semaphore)
-    while (semaphore.value < 1) {
+    konst future = doNotCollectInWorkerFrozen(worker, semaphore)
+    while (semaphore.konstue < 1) {
     }
     GC.collect()
     semaphore.increment()
 
-    val value = future.result
-    assertEquals(3, value.value.a)
+    konst konstue = future.result
+    assertEquals(3, konstue.konstue.a)
     worker.requestTermination().result
 }
 
@@ -562,41 +562,41 @@ class B1 {
     lateinit var b2: WorkerBoundReference<B2>
 }
 
-data class B2(val b1: WorkerBoundReference<B1>)
+data class B2(konst b1: WorkerBoundReference<B1>)
 
 fun createCyclicGarbage(): Triple<FreezableAtomicReference<WorkerBoundReference<B1>?>, WeakReference<B1>, WeakReference<B2>> {
-    val ref1 = WorkerBoundReference(B1())
-    val ref1Owner: FreezableAtomicReference<WorkerBoundReference<B1>?> = FreezableAtomicReference(ref1)
-    val ref1Weak = WeakReference(ref1.value)
+    konst ref1 = WorkerBoundReference(B1())
+    konst ref1Owner: FreezableAtomicReference<WorkerBoundReference<B1>?> = FreezableAtomicReference(ref1)
+    konst ref1Weak = WeakReference(ref1.konstue)
 
-    val ref2 = WorkerBoundReference(B2(ref1))
-    val ref2Weak = WeakReference(ref2.value)
+    konst ref2 = WorkerBoundReference(B2(ref1))
+    konst ref2Weak = WeakReference(ref2.konstue)
 
-    ref1.value.b2 = ref2
+    ref1.konstue.b2 = ref2
 
     return Triple(ref1Owner, ref1Weak, ref2Weak)
 }
 
 @Test
 fun collectCyclicGarbage() {
-    val (ref1Owner, ref1Weak, ref2Weak) = createCyclicGarbage()
+    konst (ref1Owner, ref1Weak, ref2Weak) = createCyclicGarbage()
 
-    ref1Owner.value = null
+    ref1Owner.konstue = null
     GC.collect()
 
-    assertNull(ref1Weak.value)
-    assertNull(ref2Weak.value)
+    assertNull(ref1Weak.konstue)
+    assertNull(ref2Weak.konstue)
 }
 
 fun createCyclicGarbageFrozen(): Triple<AtomicReference<WorkerBoundReference<B1>?>, WeakReference<B1>, WeakReference<B2>> {
-    val ref1 = WorkerBoundReference(B1()).freeze()
-    val ref1Owner: AtomicReference<WorkerBoundReference<B1>?> = AtomicReference(ref1)
-    val ref1Weak = WeakReference(ref1.value)
+    konst ref1 = WorkerBoundReference(B1()).freeze()
+    konst ref1Owner: AtomicReference<WorkerBoundReference<B1>?> = AtomicReference(ref1)
+    konst ref1Weak = WeakReference(ref1.konstue)
 
-    val ref2 = WorkerBoundReference(B2(ref1)).freeze()
-    val ref2Weak = WeakReference(ref2.value)
+    konst ref2 = WorkerBoundReference(B2(ref1)).freeze()
+    konst ref2Weak = WeakReference(ref2.konstue)
 
-    ref1.value.b2 = ref2
+    ref1.konstue.b2 = ref2
 
     return Triple(ref1Owner, ref1Weak, ref2Weak)
 }
@@ -604,30 +604,30 @@ fun createCyclicGarbageFrozen(): Triple<AtomicReference<WorkerBoundReference<B1>
 @Test
 fun doesNotCollectCyclicGarbageFrozen() {
     if (!Platform.isFreezingEnabled) return
-    val (ref1Owner, ref1Weak, ref2Weak) = createCyclicGarbageFrozen()
+    konst (ref1Owner, ref1Weak, ref2Weak) = createCyclicGarbageFrozen()
 
-    ref1Owner.value = null
+    ref1Owner.konstue = null
     GC.collect()
 
     // If these asserts fail, that means WorkerBoundReference managed to clean up cyclic garbage all by itself.
-    assertNotNull(ref1Weak.value)
-    assertNotNull(ref2Weak.value)
+    assertNotNull(ref1Weak.konstue)
+    assertNotNull(ref2Weak.konstue)
 }
 
 fun createCrossThreadCyclicGarbageFrozen(
         worker: Worker
 ): Triple<AtomicReference<WorkerBoundReference<B1>?>, WeakReference<B1>, WeakReference<B2>> {
-    val ref1 = WorkerBoundReference(B1()).freeze()
-    val ref1Owner: AtomicReference<WorkerBoundReference<B1>?> = AtomicReference(ref1)
-    val ref1Weak = WeakReference(ref1.value)
+    konst ref1 = WorkerBoundReference(B1()).freeze()
+    konst ref1Owner: AtomicReference<WorkerBoundReference<B1>?> = AtomicReference(ref1)
+    konst ref1Weak = WeakReference(ref1.konstue)
 
-    val future = worker.execute(TransferMode.SAFE, { ref1 }) { ref1 ->
-        val ref2 = WorkerBoundReference(B2(ref1)).freeze()
-        Pair(ref2, WeakReference(ref2.value))
+    konst future = worker.execute(TransferMode.SAFE, { ref1 }) { ref1 ->
+        konst ref2 = WorkerBoundReference(B2(ref1)).freeze()
+        Pair(ref2, WeakReference(ref2.konstue))
     }
-    val (ref2, ref2Weak) = future.result
+    konst (ref2, ref2Weak) = future.result
 
-    ref1.value.b2 = ref2
+    ref1.konstue.b2 = ref2
 
     return Triple(ref1Owner, ref1Weak, ref2Weak)
 }
@@ -635,17 +635,17 @@ fun createCrossThreadCyclicGarbageFrozen(
 @Test
 fun doesNotCollectCrossThreadCyclicGarbageFrozen() {
     if (!Platform.isFreezingEnabled) return
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
-    val (ref1Owner, ref1Weak, ref2Weak) = createCrossThreadCyclicGarbageFrozen(worker)
+    konst (ref1Owner, ref1Weak, ref2Weak) = createCrossThreadCyclicGarbageFrozen(worker)
 
-    ref1Owner.value = null
+    ref1Owner.konstue = null
     GC.collect()
     worker.execute(TransferMode.SAFE, {}) { GC.collect() }.result
 
     // If these asserts fail, that means WorkerBoundReference managed to clean up cyclic garbage all by itself.
-    assertNotNull(ref1Weak.value)
-    assertNotNull(ref2Weak.value)
+    assertNotNull(ref1Weak.konstue)
+    assertNotNull(ref2Weak.konstue)
 
     worker.requestTermination().result
 }
@@ -654,51 +654,51 @@ class C1 {
     lateinit var c2: AtomicReference<WorkerBoundReference<C2>?>
 
     fun dispose() {
-        c2.value = null
+        c2.konstue = null
     }
 }
 
-data class C2(val c1: AtomicReference<WorkerBoundReference<C1>>)
+data class C2(konst c1: AtomicReference<WorkerBoundReference<C1>>)
 
 fun createCyclicGarbageWithAtomicsFrozen(): Triple<AtomicReference<WorkerBoundReference<C1>?>, WeakReference<C1>, WeakReference<C2>> {
-    val ref1 = WorkerBoundReference(C1()).freeze()
-    val ref1Weak = WeakReference(ref1.value)
+    konst ref1 = WorkerBoundReference(C1()).freeze()
+    konst ref1Weak = WeakReference(ref1.konstue)
 
-    val ref2 = WorkerBoundReference(C2(AtomicReference(ref1))).freeze()
-    val ref2Weak = WeakReference(ref2.value)
+    konst ref2 = WorkerBoundReference(C2(AtomicReference(ref1))).freeze()
+    konst ref2Weak = WeakReference(ref2.konstue)
 
-    ref1.value.c2 = AtomicReference(ref2)
+    ref1.konstue.c2 = AtomicReference(ref2)
 
     return Triple(AtomicReference(ref1), ref1Weak, ref2Weak)
 }
 
 fun dispose(refOwner: AtomicReference<WorkerBoundReference<C1>?>) {
-    refOwner.value!!.value.dispose()
-    refOwner.value = null
+    refOwner.konstue!!.konstue.dispose()
+    refOwner.konstue = null
 }
 
 @Test
 fun doesNotCollectCyclicGarbageWithAtomicsFrozen() {
     if (!Platform.isFreezingEnabled) return
-    val (ref1Owner, ref1Weak, ref2Weak) = createCyclicGarbageWithAtomicsFrozen()
+    konst (ref1Owner, ref1Weak, ref2Weak) = createCyclicGarbageWithAtomicsFrozen()
 
-    ref1Owner.value = null
+    ref1Owner.konstue = null
     GC.collect()
 
     // If these asserts fail, that means AtomicReference<WorkerBoundReference> managed to clean up cyclic garbage all by itself.
-    assertNotNull(ref1Weak.value)
-    assertNotNull(ref2Weak.value)
+    assertNotNull(ref1Weak.konstue)
+    assertNotNull(ref2Weak.konstue)
 }
 
 @Test
 fun collectCyclicGarbageWithAtomicsFrozen() {
-    val (ref1Owner, ref1Weak, ref2Weak) = createCyclicGarbageWithAtomicsFrozen()
+    konst (ref1Owner, ref1Weak, ref2Weak) = createCyclicGarbageWithAtomicsFrozen()
 
     dispose(ref1Owner)
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-        // Finalizes WorkerBoundReference<C2> and schedules C2 removal from the root set
+        // Finalizes WorkerBoundReference<C2> and schedules C2 remokonst from the root set
         GC.collect()
-        // Frees C2, finalizes WorkerBoundReference<C1> and schedules C1 removal from the root set
+        // Frees C2, finalizes WorkerBoundReference<C1> and schedules C1 remokonst from the root set
         GC.collect()
         // Frees C1
         GC.collect()
@@ -706,23 +706,23 @@ fun collectCyclicGarbageWithAtomicsFrozen() {
         GC.collect()
     }
 
-    assertNull(ref1Weak.value)
-    assertNull(ref2Weak.value)
+    assertNull(ref1Weak.konstue)
+    assertNull(ref2Weak.konstue)
 }
 
 fun createCrossThreadCyclicGarbageWithAtomicsFrozen(
         worker: Worker
 ): Triple<AtomicReference<WorkerBoundReference<C1>?>, WeakReference<C1>, WeakReference<C2>> {
-    val ref1 = WorkerBoundReference(C1()).freeze()
-    val ref1Weak = WeakReference(ref1.value)
+    konst ref1 = WorkerBoundReference(C1()).freeze()
+    konst ref1Weak = WeakReference(ref1.konstue)
 
-    val future = worker.execute(TransferMode.SAFE, { ref1 }) { ref1 ->
-        val ref2 = WorkerBoundReference(C2(AtomicReference(ref1))).freeze()
-        Pair(ref2, WeakReference(ref2.value))
+    konst future = worker.execute(TransferMode.SAFE, { ref1 }) { ref1 ->
+        konst ref2 = WorkerBoundReference(C2(AtomicReference(ref1))).freeze()
+        Pair(ref2, WeakReference(ref2.konstue))
     }
-    val (ref2, ref2Weak) = future.result
+    konst (ref2, ref2Weak) = future.result
 
-    ref1.value.c2 = AtomicReference(ref2)
+    ref1.konstue.c2 = AtomicReference(ref2)
 
     return Triple(AtomicReference(ref1), ref1Weak, ref2Weak)
 }
@@ -730,26 +730,26 @@ fun createCrossThreadCyclicGarbageWithAtomicsFrozen(
 @Test
 fun doesNotCollectCrossThreadCyclicGarbageWithAtomicsFrozen() {
     if (!Platform.isFreezingEnabled) return
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
-    val (ref1Owner, ref1Weak, ref2Weak) = createCrossThreadCyclicGarbageWithAtomicsFrozen(worker)
+    konst (ref1Owner, ref1Weak, ref2Weak) = createCrossThreadCyclicGarbageWithAtomicsFrozen(worker)
 
-    ref1Owner.value = null
+    ref1Owner.konstue = null
     GC.collect()
     worker.execute(TransferMode.SAFE, {}) { GC.collect() }.result
 
     // If these asserts fail, that means AtomicReference<WorkerBoundReference> managed to clean up cyclic garbage all by itself.
-    assertNotNull(ref1Weak.value)
-    assertNotNull(ref2Weak.value)
+    assertNotNull(ref1Weak.konstue)
+    assertNotNull(ref2Weak.konstue)
 
     worker.requestTermination().result
 }
 
 @Test
 fun collectCrossThreadCyclicGarbageWithAtomicsFrozen() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
-    val (ref1Owner, ref1Weak, ref2Weak) = createCrossThreadCyclicGarbageWithAtomicsFrozen(worker)
+    konst (ref1Owner, ref1Weak, ref2Weak) = createCrossThreadCyclicGarbageWithAtomicsFrozen(worker)
 
     dispose(ref1Owner)
     // This marks C2 as gone on the main thread
@@ -759,33 +759,33 @@ fun collectCrossThreadCyclicGarbageWithAtomicsFrozen() {
     // And this finally destroys C1
     GC.collect()
 
-    assertNull(ref1Weak.value)
-    assertNull(ref2Weak.value)
+    assertNull(ref1Weak.konstue)
+    assertNull(ref2Weak.konstue)
 
     worker.requestTermination().result
 }
 
 @Test
 fun concurrentAccessFrozen() {
-    val workerCount = 10
-    val workerUnlocker = AtomicInt(0)
+    konst workerCount = 10
+    konst workerUnlocker = AtomicInt(0)
 
-    val ref = WorkerBoundReference(A(3)).freeze()
-    assertEquals(3, ref.value.a)
+    konst ref = WorkerBoundReference(A(3)).freeze()
+    assertEquals(3, ref.konstue.a)
 
-    val workers = Array(workerCount) {
+    konst workers = Array(workerCount) {
         Worker.start()
     }
-    val futures = Array(workers.size) {
+    konst futures = Array(workers.size) {
         workers[it].execute(TransferMode.SAFE, { Pair(ref, workerUnlocker) }) { (ref, workerUnlocker) ->
-            while (workerUnlocker.value < 1) {
+            while (workerUnlocker.konstue < 1) {
             }
 
             if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-                ref.value.a
+                ref.konstue.a
             } else {
                 assertFailsWith<IncorrectDereferenceException> {
-                    ref.value
+                    ref.konstue
                 }
                 null
             }
@@ -794,11 +794,11 @@ fun concurrentAccessFrozen() {
     workerUnlocker.increment()
 
     for (future in futures) {
-        val value = future.result
+        konst konstue = future.result
         if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
-            assertEquals(3, value)
+            assertEquals(3, konstue)
         } else {
-            assertEquals(null, value)
+            assertEquals(null, konstue)
         }
     }
 
@@ -814,17 +814,17 @@ fun testExceptionMessageFrozen() {
         return
     }
 
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         WorkerBoundReference(A(3)).freeze()
     }
-    val value = future.result
+    konst konstue = future.result
 
-    val ownerName = worker.name
-    val messagePattern = Regex("illegal attempt to access non-shared runtime\\.concurrent\\.worker_bound_reference0\\.A@[a-f0-9]+ bound to `$ownerName` from `${Worker.current.name}`")
+    konst ownerName = worker.name
+    konst messagePattern = Regex("illegal attempt to access non-shared runtime\\.concurrent\\.worker_bound_reference0\\.A@[a-f0-9]+ bound to `$ownerName` from `${Worker.current.name}`")
 
-    val exception = assertFailsWith<IncorrectDereferenceException> {
-        value.value
+    konst exception = assertFailsWith<IncorrectDereferenceException> {
+        konstue.konstue
     }
     assertTrue(messagePattern matches exception.message!!)
 
@@ -833,8 +833,8 @@ fun testExceptionMessageFrozen() {
 
 @Test
 fun testDoubleFreeze() {
-    val ref = WorkerBoundReference(A(3))
-    val wrapper = Wrapper(ref)
+    konst ref = WorkerBoundReference(A(3))
+    konst wrapper = Wrapper(ref)
     ref.freeze()
     ref.freeze()
     wrapper.freeze()
@@ -843,8 +843,8 @@ fun testDoubleFreeze() {
 @Test
 fun testDoubleFreezeWithFreezeBlocker() {
     if (!Platform.isFreezingEnabled) return
-    val ref = WorkerBoundReference(A(3))
-    val wrapper = Wrapper(ref)
+    konst ref = WorkerBoundReference(A(3))
+    konst wrapper = Wrapper(ref)
     wrapper.ensureNeverFrozen()
     assertFailsWith<FreezingException> {
         wrapper.freeze()

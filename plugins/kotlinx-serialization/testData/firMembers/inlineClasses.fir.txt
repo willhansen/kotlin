@@ -4,7 +4,7 @@ FILE: inlineClasses.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val i: R|kotlin/Int| = R|<local>/i|
+        public final konst i: R|kotlin/Int| = R|<local>/i|
             public get(): R|kotlin/Int|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -17,11 +17,11 @@ FILE: inlineClasses.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<Foo>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Foo|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Foo|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Foo|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -38,7 +38,7 @@ FILE: inlineClasses.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val f: R|Foo| = R|<local>/f|
+        public final konst f: R|Foo| = R|<local>/f|
             public get(): R|Foo|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -51,11 +51,11 @@ FILE: inlineClasses.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<Holder>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Holder|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Holder|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Holder|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -74,7 +74,7 @@ FILE: inlineClasses.kt
             }
         }
 
-        lval s: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Holder|>(Q|Holder|.R|/Holder.Companion.serializer|(), R|/Holder.Holder|(R|/Foo.Foo|(Int(42))))
+        lkonst s: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Holder|>(Q|Holder|.R|/Holder.Companion.serializer|(), R|/Holder.Holder|(R|/Foo.Foo|(Int(42))))
         when () {
             !=(R|<local>/s|, String({"f":42})) ->  {
                 ^box R|<local>/s|

@@ -8,7 +8,7 @@ object WithFunctionInBase {
 
     public class C {
         // error-scope
-        val data: Data = Data()
+        konst data: Data = Data()
 
         open class Base() {
             // error-scope
@@ -30,11 +30,11 @@ object WithPropertyInBase {
 
         open class Base() {
             // error-scope
-            val foo: Int = 42
+            konst foo: Int = 42
         }
 
         // error-scope
-        val data: Data = Data()
+        konst data: Data = Data()
 
         companion object : DerivedAbstract()
     }
@@ -51,11 +51,11 @@ object WithPropertyInBaseDifferentOrder {
 
     public class C {
         // Now it is successfully resolved (vs. ErrorType like in the previous case)
-        val data: Data = Data()
+        konst data: Data = Data()
 
         open class Base() {
             // Now it is unresolved (vs. ErrorType like in the previous case)
-            val foo: Int = 42
+            konst foo: Int = 42
 
         }
 

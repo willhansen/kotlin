@@ -26,16 +26,16 @@ public class JavaClass {
 
     @Deprecated
     public int getSomething2() { return 1; }
-    public void setSomething2(int value) { }
+    public void setSomething2(int konstue) { }
 
     public int getSomething3() { return 1; }
     @Deprecated
-    public void setSomething3(int value) { }
+    public void setSomething3(int konstue) { }
 
     @Deprecated
     public int getSomething4() { return 1; }
     @Deprecated
-    public void setSomething4(int value) { }
+    public void setSomething4(int konstue) { }
 
     /**
      * @deprecated Bla-bla-bla
@@ -44,5 +44,5 @@ public class JavaClass {
     /**
      * @deprecated Ha-ha-ha
      */
-    public void setSomething5(int value) { }
+    public void setSomething5(int konstue) { }
 }

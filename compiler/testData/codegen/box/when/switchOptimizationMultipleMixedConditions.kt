@@ -11,10 +11,10 @@ enum class Numbers {
 
 fun box(): String {
 
-    val oneParsed = parse("one")
+    konst oneParsed = parse("one")
     if (oneParsed != 1) return "'one' should map to '1' but was $oneParsed"
 
-    val OneParsed = parse("One")
+    konst OneParsed = parse("One")
     if (OneParsed != 1) return "'One' should map to '1' but was $OneParsed"
 
     return "OK"

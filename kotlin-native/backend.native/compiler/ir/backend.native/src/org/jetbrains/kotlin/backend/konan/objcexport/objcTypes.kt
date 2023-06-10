@@ -21,7 +21,7 @@ sealed class ObjCType {
 }
 
 data class ObjCRawType(
-        val rawText: String
+        konst rawText: String
 ) : ObjCType() {
     override fun render(attrsAndName: String): String = rawText.withAttrsAndName(attrsAndName)
 }
@@ -31,18 +31,18 @@ sealed class ObjCReferenceType : ObjCType()
 sealed class ObjCNonNullReferenceType : ObjCReferenceType()
 
 data class ObjCNullableReferenceType(
-        val nonNullType: ObjCNonNullReferenceType,
-        val isNullableResult: Boolean = false
+        konst nonNullType: ObjCNonNullReferenceType,
+        konst isNullableResult: Boolean = false
 ) : ObjCReferenceType() {
     override fun render(attrsAndName: String): String {
-        val attribute = if (isNullableResult) objcNullableResultAttribute else objcNullableAttribute
+        konst attribute = if (isNullableResult) objcNullableResultAttribute else objcNullableAttribute
         return nonNullType.render(" $attribute".withAttrsAndName(attrsAndName))
     }
 }
 
 data class ObjCClassType(
-        val className: String,
-        val typeArguments: List<ObjCNonNullReferenceType> = emptyList()
+        konst className: String,
+        konst typeArguments: List<ObjCNonNullReferenceType> = emptyList()
 ) : ObjCNonNullReferenceType() {
 
     override fun render(attrsAndName: String) = buildString {
@@ -58,24 +58,24 @@ data class ObjCClassType(
 }
 
 sealed class ObjCGenericTypeUsage: ObjCNonNullReferenceType() {
-    abstract val typeName: String
+    abstract konst typeName: String
     final override fun render(attrsAndName: String): String {
         return typeName.withAttrsAndName(attrsAndName)
     }
 }
 
-data class ObjCGenericTypeRawUsage(override val typeName: String) : ObjCGenericTypeUsage()
+data class ObjCGenericTypeRawUsage(override konst typeName: String) : ObjCGenericTypeUsage()
 
 data class ObjCGenericTypeParameterUsage(
-        val typeParameterDescriptor: TypeParameterDescriptor,
-        val namer: ObjCExportNamer
+        konst typeParameterDescriptor: TypeParameterDescriptor,
+        konst namer: ObjCExportNamer
 ) : ObjCGenericTypeUsage() {
-    override val typeName: String
+    override konst typeName: String
         get() = namer.getTypeParameterName(typeParameterDescriptor)
 }
 
 data class ObjCProtocolType(
-        val protocolName: String
+        konst protocolName: String
 ) : ObjCNonNullReferenceType() {
     override fun render(attrsAndName: String) = "id<$protocolName>".withAttrsAndName(attrsAndName)
 }
@@ -89,8 +89,8 @@ object ObjCInstanceType : ObjCNonNullReferenceType() {
 }
 
 data class ObjCBlockPointerType(
-        val returnType: ObjCType,
-        val parameterTypes: List<ObjCReferenceType>
+        konst returnType: ObjCType,
+        konst parameterTypes: List<ObjCReferenceType>
 ) : ObjCNonNullReferenceType() {
 
     override fun render(attrsAndName: String) = returnType.render(buildString {
@@ -108,7 +108,7 @@ object ObjCMetaClassType : ObjCNonNullReferenceType() {
 }
 
 sealed class ObjCPrimitiveType(
-        val cName: String
+        konst cName: String
 ) : ObjCType() {
     object NSUInteger : ObjCPrimitiveType("NSUInteger")
     object BOOL : ObjCPrimitiveType("BOOL")
@@ -139,8 +139,8 @@ sealed class ObjCPrimitiveType(
 }
 
 data class ObjCPointerType(
-        val pointee: ObjCType,
-        val nullable: Boolean = false
+        konst pointee: ObjCType,
+        konst nullable: Boolean = false
 ) : ObjCType() {
     override fun render(attrsAndName: String) =
             pointee.render("*${if (nullable) {
@@ -154,7 +154,7 @@ object ObjCVoidType : ObjCType() {
     override fun render(attrsAndName: String) = "void".withAttrsAndName(attrsAndName)
 }
 
-internal enum class ObjCValueType(val encoding: String, val defaultParameterAttributes: List<LlvmParameterAttribute> = emptyList()) {
+internal enum class ObjCValueType(konst encoding: String, konst defaultParameterAttributes: List<LlvmParameterAttribute> = emptyList()) {
     BOOL("c", listOf(LlvmParameterAttribute.SignExt)),
     UNICHAR("S", listOf(LlvmParameterAttribute.ZeroExt)),
     // TODO: Switch to explicit SIGNED_CHAR
@@ -171,7 +171,7 @@ internal enum class ObjCValueType(val encoding: String, val defaultParameterAttr
     POINTER("^v")
 }
 
-enum class ObjCVariance(internal val declaration: String) {
+enum class ObjCVariance(internal konst declaration: String) {
     INVARIANT(""),
     COVARIANT("__covariant "),
     CONTRAVARIANT("__contravariant ");
@@ -186,23 +186,23 @@ enum class ObjCVariance(internal val declaration: String) {
 }
 
 sealed class ObjCGenericTypeDeclaration {
-    abstract val typeName: String
-    abstract val variance: ObjCVariance
+    abstract konst typeName: String
+    abstract konst variance: ObjCVariance
     final override fun toString(): String = variance.declaration + typeName
 }
 
 data class ObjCGenericTypeRawDeclaration(
-        override val typeName: String,
-        override val variance: ObjCVariance = ObjCVariance.INVARIANT
+        override konst typeName: String,
+        override konst variance: ObjCVariance = ObjCVariance.INVARIANT
 ) : ObjCGenericTypeDeclaration()
 
 data class ObjCGenericTypeParameterDeclaration(
-        val typeParameterDescriptor: TypeParameterDescriptor,
-        val namer: ObjCExportNamer
+        konst typeParameterDescriptor: TypeParameterDescriptor,
+        konst namer: ObjCExportNamer
 ) : ObjCGenericTypeDeclaration() {
-    override val typeName: String
+    override konst typeName: String
         get() = namer.getTypeParameterName(typeParameterDescriptor)
-    override val variance: ObjCVariance
+    override konst variance: ObjCVariance
         get() = ObjCVariance.fromKotlinVariance(typeParameterDescriptor.variance)
 }
 
@@ -214,5 +214,5 @@ internal fun ObjCType.makeNullableIfReferenceOrPointer(): ObjCType = when (this)
     is ObjCNullableReferenceType, is ObjCRawType, is ObjCPrimitiveType, ObjCVoidType -> this
 }
 
-const val objcNullableAttribute = "_Nullable"
-const val objcNullableResultAttribute = "_Nullable_result"
+const konst objcNullableAttribute = "_Nullable"
+const konst objcNullableResultAttribute = "_Nullable_result"

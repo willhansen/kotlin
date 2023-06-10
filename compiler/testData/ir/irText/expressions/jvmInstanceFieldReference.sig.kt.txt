@@ -15,7 +15,7 @@ class Derived : Base {
   // CHECK:
   //   Mangled name: Derived#setValue(kotlin.Int){}
   //   Public signature: /Derived.setValue|4983946438954816976[0]
-  fun setValue(value: Int): Unit
+  fun setValue(konstue: Int): Unit
 
 }
 

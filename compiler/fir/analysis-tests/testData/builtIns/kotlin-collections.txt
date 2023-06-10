@@ -41,7 +41,7 @@ public abstract interface Collection<out E> : R|kotlin/collections/Iterable<E>| 
 
     public abstract operator fun iterator(): R|kotlin/collections/Iterator<E>|
 
-    public abstract val size: R|kotlin/Int|
+    public abstract konst size: R|kotlin/Int|
         public get(): R|kotlin/Int|
 
 }
@@ -106,7 +106,7 @@ public abstract interface List<out E> : R|kotlin/collections/Collection<E>| {
 
     public abstract fun subList(fromIndex: R|kotlin/Int|, toIndex: R|kotlin/Int|): R|kotlin/collections/List<E>|
 
-    public abstract val size: R|kotlin/Int|
+    public abstract konst size: R|kotlin/Int|
         public get(): R|kotlin/Int|
 
 }
@@ -138,7 +138,7 @@ public abstract class LongIterator : R|kotlin/collections/Iterator<kotlin/Long>|
 public abstract interface Map<K, out V> : R|kotlin/Any| {
     public abstract fun containsKey(key: R|K|): R|kotlin/Boolean|
 
-    public abstract fun containsValue(value: R|V|): R|kotlin/Boolean|
+    public abstract fun containsValue(konstue: R|V|): R|kotlin/Boolean|
 
     public abstract operator fun get(key: R|K|): R|V?|
 
@@ -146,23 +146,23 @@ public abstract interface Map<K, out V> : R|kotlin/Any| {
 
     public abstract fun isEmpty(): R|kotlin/Boolean|
 
-    public abstract val entries: R|kotlin/collections/Set<kotlin/collections/Map.Entry<K, V>>|
+    public abstract konst entries: R|kotlin/collections/Set<kotlin/collections/Map.Entry<K, V>>|
         public get(): R|kotlin/collections/Set<kotlin/collections/Map.Entry<K, V>>|
 
-    public abstract val keys: R|kotlin/collections/Set<K>|
+    public abstract konst keys: R|kotlin/collections/Set<K>|
         public get(): R|kotlin/collections/Set<K>|
 
-    public abstract val size: R|kotlin/Int|
+    public abstract konst size: R|kotlin/Int|
         public get(): R|kotlin/Int|
 
-    public abstract val values: R|kotlin/collections/Collection<V>|
+    public abstract konst konstues: R|kotlin/collections/Collection<V>|
         public get(): R|kotlin/collections/Collection<V>|
 
     public abstract interface Entry<out K, out V> : R|kotlin/Any| {
-        public abstract val key: R|K|
+        public abstract konst key: R|K|
             public get(): R|K|
 
-        public abstract val value: R|V|
+        public abstract konst konstue: R|V|
             public get(): R|V|
 
     }
@@ -241,21 +241,21 @@ public abstract interface MutableListIterator<T> : R|kotlin/collections/ListIter
 public abstract interface MutableMap<K, V> : R|kotlin/collections/Map<K, V>| {
     public abstract fun clear(): R|kotlin/Unit|
 
-    public abstract fun put(key: R|K|, value: R|V|): R|V?|
+    public abstract fun put(key: R|K|, konstue: R|V|): R|V?|
 
     public abstract fun putAll(from: R|kotlin/collections/Map<out K, V>|): R|kotlin/Unit|
 
     public abstract fun remove(key: R|K|): R|V?|
 
-    @R|kotlin/SinceKotlin|(version = String(1.1)) @R|kotlin/internal/PlatformDependent|() public open fun remove(key: R|K|, value: R|V|): R|kotlin/Boolean|
+    @R|kotlin/SinceKotlin|(version = String(1.1)) @R|kotlin/internal/PlatformDependent|() public open fun remove(key: R|K|, konstue: R|V|): R|kotlin/Boolean|
 
-    public abstract val entries: R|kotlin/collections/MutableSet<kotlin/collections/MutableMap.MutableEntry<K, V>>|
+    public abstract konst entries: R|kotlin/collections/MutableSet<kotlin/collections/MutableMap.MutableEntry<K, V>>|
         public get(): R|kotlin/collections/MutableSet<kotlin/collections/MutableMap.MutableEntry<K, V>>|
 
-    public abstract val keys: R|kotlin/collections/MutableSet<K>|
+    public abstract konst keys: R|kotlin/collections/MutableSet<K>|
         public get(): R|kotlin/collections/MutableSet<K>|
 
-    public abstract val values: R|kotlin/collections/MutableCollection<V>|
+    public abstract konst konstues: R|kotlin/collections/MutableCollection<V>|
         public get(): R|kotlin/collections/MutableCollection<V>|
 
     public abstract interface MutableEntry<K, V> : R|kotlin/collections/Map.Entry<K, V>| {
@@ -291,7 +291,7 @@ public abstract interface Set<out E> : R|kotlin/collections/Collection<E>| {
 
     public abstract operator fun iterator(): R|kotlin/collections/Iterator<E>|
 
-    public abstract val size: R|kotlin/Int|
+    public abstract konst size: R|kotlin/Int|
         public get(): R|kotlin/Int|
 
 }

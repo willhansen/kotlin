@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider.PropertyNames.KOTLI
 import org.jetbrains.kotlin.gradle.plugin.diagnostics.KotlinToolingDiagnostics
 import org.jetbrains.kotlin.gradle.plugin.diagnostics.kotlinToolingDiagnosticsCollector
 import org.jetbrains.kotlin.gradle.utils.SingleWarningPerBuild
-import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEvaluated
+import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEkonstuated
 import org.jetbrains.kotlin.gradle.utils.toMap
 import org.jetbrains.kotlin.tooling.core.UnsafeApi
 
 internal fun runDeprecationDiagnostics(project: Project) {
     checkAndReportDeprecatedMppProperties(project)
     handleHierarchicalStructureFlagsMigration(project)
-    project.runProjectConfigurationHealthCheckWhenEvaluated {
+    project.runProjectConfigurationHealthCheckWhenEkonstuated {
         reportTargetsWithNonUniqueConsumableConfigurations(project)
         checkAndReportPreHmppDependenciesUsage(project)
     }
@@ -33,25 +33,25 @@ internal fun runDeprecationDiagnostics(project: Project) {
  * Report scenario when there are two targets of the same platform without distinguishing attribute
  */
 private fun reportTargetsWithNonUniqueConsumableConfigurations(project: Project) {
-    // Wrap diagnostic check again to afterEvaluate to make sure that it gets executed the last
-    // Since Multiplatform plugin updates consumable configurations in afterEvaluate blocks
-    project.afterEvaluate {
-        val allTargets = project.multiplatformExtension.targets
+    // Wrap diagnostic check again to afterEkonstuate to make sure that it gets executed the last
+    // Since Multiplatform plugin updates consumable configurations in afterEkonstuate blocks
+    project.afterEkonstuate {
+        konst allTargets = project.multiplatformExtension.targets
 
-        val nonDistinguishableTargets = allTargets
+        konst nonDistinguishableTargets = allTargets
             .mapNotNull { target ->
-                val configuration = project.configurations.findByName(target.apiElementsConfigurationName) ?: return@mapNotNull null
+                konst configuration = project.configurations.findByName(target.apiElementsConfigurationName) ?: return@mapNotNull null
                 target.name to configuration
             }
             .groupBy { (_, consumableConfiguration) -> consumableConfiguration.attributes.toMap() }
-            .values
+            .konstues
             .filter { targetGroup -> targetGroup.size > 1 }
             .map { targetGroup -> targetGroup.map { (targetName, _) -> targetName } }
 
-        if (nonDistinguishableTargets.isEmpty()) return@afterEvaluate
+        if (nonDistinguishableTargets.isEmpty()) return@afterEkonstuate
 
-        val nonUniqueTargetsString = nonDistinguishableTargets.joinToString(separator = "\n") { targets ->
-            val targetsListString = targets.joinToString { targetName -> "'$targetName'" }
+        konst nonUniqueTargetsString = nonDistinguishableTargets.joinToString(separator = "\n") { targets ->
+            konst targetsListString = targets.joinToString { targetName -> "'$targetName'" }
             "  * $targetsListString"
         }
 
@@ -65,13 +65,13 @@ private fun reportTargetsWithNonUniqueConsumableConfigurations(project: Project)
 
 /**
  * Declared properties have to be captured during plugin application phase before the HMPP migration util sets them.
- * Warnings have to be reported only for successfully evaluated projects without errors.
+ * Warnings have to be reported only for successfully ekonstuated projects without errors.
  */
 private fun checkAndReportDeprecatedMppProperties(project: Project) {
-    val projectProperties = project.kotlinPropertiesProvider
+    konst projectProperties = project.kotlinPropertiesProvider
     if (projectProperties.ignoreHmppDeprecationWarnings == true) return
 
-    val usedProperties = deprecatedMppProperties.mapNotNull { propertyName ->
+    konst usedProperties = deprecatedMppProperties.mapNotNull { propertyName ->
         if (propertyName in propertiesSetByPlugin && projectProperties.mpp13XFlagsSetByPlugin)
             return@mapNotNull null
 
@@ -87,7 +87,7 @@ private fun checkAndReportDeprecatedMppProperties(project: Project) {
     )
 }
 
-internal val deprecatedMppProperties: List<String> = listOf(
+internal konst deprecatedMppProperties: List<String> = listOf(
     KOTLIN_MPP_ENABLE_COMPATIBILITY_METADATA_VARIANT,
     KOTLIN_MPP_ENABLE_GRANULAR_SOURCE_SETS_METADATA,
     KOTLIN_MPP_HIERARCHICAL_STRUCTURE_BY_DEFAULT,
@@ -95,7 +95,7 @@ internal val deprecatedMppProperties: List<String> = listOf(
     KOTLIN_NATIVE_DEPENDENCY_PROPAGATION,
 )
 
-private val propertiesSetByPlugin: Set<String> = setOf(
+private konst propertiesSetByPlugin: Set<String> = setOf(
     KOTLIN_MPP_ENABLE_GRANULAR_SOURCE_SETS_METADATA,
     KOTLIN_NATIVE_DEPENDENCY_PROPAGATION,
 )

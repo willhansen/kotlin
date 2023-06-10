@@ -5,5 +5,5 @@ package test
 class WithGeneratedCompanion
 
 fun test() {
-    val companionObject = WithGenerated<caret>Companion
+    konst companionObject = WithGenerated<caret>Companion
 }

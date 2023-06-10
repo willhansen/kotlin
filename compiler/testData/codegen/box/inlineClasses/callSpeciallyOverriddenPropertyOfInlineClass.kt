@@ -4,11 +4,11 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt(val x: Int)
+konstue class UInt(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UIntArray(private val storage: IntArray) : Collection<UInt> {
-    public override val size: Int get() = storage.size
+konstue class UIntArray(private konst storage: IntArray) : Collection<UInt> {
+    public override konst size: Int get() = storage.size
 
     override operator fun iterator() = TODO()
     override fun contains(element: UInt): Boolean = TODO()

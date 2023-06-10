@@ -13,37 +13,37 @@ import org.jetbrains.kotlin.project.model.KpmModuleIdentifier
 import org.jetbrains.kotlin.project.model.KpmCompilerPlugin
 
 interface GradleKpmModule : KpmModule, Named, HasKotlinDependencies {
-    val project: Project
-    val moduleClassifier: String?
+    konst project: Project
+    konst moduleClassifier: String?
 
-    override val fragments: ExtensiblePolymorphicDomainObjectContainer<GradleKpmFragment>
+    override konst fragments: ExtensiblePolymorphicDomainObjectContainer<GradleKpmFragment>
 
     // TODO DSL & build script model: find a way to create a flexible typed view on fragments?
-    override val variants: NamedDomainObjectSet<GradleKpmVariant>
+    override konst variants: NamedDomainObjectSet<GradleKpmVariant>
 
-    override val plugins: Set<KpmCompilerPlugin>
+    override konst plugins: Set<KpmCompilerPlugin>
 
-    val isPublic: Boolean
+    konst isPublic: Boolean
 
     fun ifMadePublic(action: () -> Unit)
 
     fun makePublic()
 
     companion object {
-        val KpmModuleIdentifier.moduleName get() = moduleClassifier ?: MAIN_MODULE_NAME
+        konst KpmModuleIdentifier.moduleName get() = moduleClassifier ?: MAIN_MODULE_NAME
 
-        const val MAIN_MODULE_NAME = "main"
-        const val TEST_MODULE_NAME = "test"
+        const konst MAIN_MODULE_NAME = "main"
+        const konst TEST_MODULE_NAME = "test"
     }
 
-    override fun getName(): String = when (val classifier = moduleClassifier) {
+    override fun getName(): String = when (konst classifier = moduleClassifier) {
         null -> MAIN_MODULE_NAME
         else -> classifier
     }
 
     // DSL
 
-    val common: GradleKpmFragment
+    konst common: GradleKpmFragment
         get() = fragments.getByName(GradleKpmFragment.COMMON_FRAGMENT_NAME)
 
     fun common(configure: GradleKpmFragment.() -> Unit) =
@@ -55,15 +55,15 @@ interface GradleKpmModule : KpmModule, Named, HasKotlinDependencies {
     override fun dependencies(configure: Action<KotlinDependencyHandler>) =
         dependencies { configure.execute(this) }
 
-    override val apiConfigurationName: String
+    override konst apiConfigurationName: String
         get() = common.apiConfigurationName
 
-    override val implementationConfigurationName: String
+    override konst implementationConfigurationName: String
         get() = common.implementationConfigurationName
 
-    override val compileOnlyConfigurationName: String
+    override konst compileOnlyConfigurationName: String
         get() = common.compileOnlyConfigurationName
 
-    override val runtimeOnlyConfigurationName: String
+    override konst runtimeOnlyConfigurationName: String
         get() = common.runtimeOnlyConfigurationName
 }

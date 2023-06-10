@@ -12,7 +12,7 @@ object O {
     fun f(): Int = 3
 
     @JvmStatic
-    val p: Int = 6
+    konst p: Int = 6
 }
 
 class C {
@@ -21,7 +21,7 @@ class C {
         fun f1(): Int = 3
 
         @JvmStatic
-        val p1: Int = 6
+        konst p1: Int = 6
     }
 
 }

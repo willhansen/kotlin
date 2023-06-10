@@ -1,20 +1,20 @@
-val x1 = ".  ."
+konst x1 = ".  ."
 
-val x2 = ".   ."
+konst x2 = ".   ."
 
-val x3 = ".   ."
+konst x3 = ".   ."
 
-val x4 = ''
+konst x4 = ''
 
-val x5 = """.  ."""
+konst x5 = """.  ."""
 
-val x6 = """.   ."""
+konst x6 = """.   ."""
 
-val x7 = """.   ."""
+konst x7 = """.   ."""
 
-val x8 = """.
+konst x8 = """.
 ."""
 
-val x9 = """.
+konst x9 = """.
 
 ."""

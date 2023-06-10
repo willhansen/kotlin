@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-data class SomeObject(val n: SomeObject?) {
+data class SomeObject(konst n: SomeObject?) {
     fun doSomething(): Boolean = true
     fun next(): SomeObject? = n    
 }

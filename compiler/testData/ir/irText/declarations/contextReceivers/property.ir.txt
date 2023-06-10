@@ -33,9 +33,9 @@ FILE fqName:<root> fileName:/property.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-  PROPERTY name:c visibility:public modality:FINAL [val]
+  PROPERTY name:c visibility:public modality:FINAL [konst]
     FUN name:<get-c> visibility:public modality:FINAL <> ($context_receiver_0:<root>.A, $context_receiver_1:<root>.B) returnType:kotlin.Int
-      correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [konst]
       contextReceiverParametersCount: 2
       VALUE_PARAMETER name:$context_receiver_0 index:0 type:<root>.A
       VALUE_PARAMETER name:$context_receiver_1 index:1 type:<root>.B

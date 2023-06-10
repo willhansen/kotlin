@@ -21,7 +21,7 @@ interface KotlinCompilerArgumentsProducer {
         Sources;
 
         companion object {
-            val all = values().toSet()
+            konst all = konstues().toSet()
         }
     }
 
@@ -29,8 +29,8 @@ interface KotlinCompilerArgumentsProducer {
         fun <T : CommonToolArguments> create(type: KClass<T>, action: ContributeCompilerArgumentsContext<T>.() -> Unit): T
 
         companion object {
-            val default: CreateCompilerArgumentsContext = CreateCompilerArgumentsContext()
-            val lenient: CreateCompilerArgumentsContext = CreateCompilerArgumentsContext(isLenient = true)
+            konst default: CreateCompilerArgumentsContext = CreateCompilerArgumentsContext()
+            konst lenient: CreateCompilerArgumentsContext = CreateCompilerArgumentsContext(isLenient = true)
 
             inline fun <reified T : CommonToolArguments> CreateCompilerArgumentsContext.create(
                 noinline action: ContributeCompilerArgumentsContext<T>.() -> Unit
@@ -64,24 +64,24 @@ internal fun CreateCompilerArgumentsContext(
 }
 
 private class CreateCompilerArgumentsContextImpl(
-    private val includeArgumentTypes: Set<KotlinCompilerArgumentsProducer.ArgumentType>,
-    private val isLenient: Boolean
+    private konst includeArgumentTypes: Set<KotlinCompilerArgumentsProducer.ArgumentType>,
+    private konst isLenient: Boolean
 ) : KotlinCompilerArgumentsProducer.CreateCompilerArgumentsContext {
 
     override fun <T : CommonToolArguments> create(
         type: KClass<T>, action: ContributeCompilerArgumentsContext<T>.() -> Unit
     ): T {
-        val constructor = type.java.constructors.firstOrNull { it.parameters.isEmpty() }
+        konst constructor = type.java.constructors.firstOrNull { it.parameters.isEmpty() }
             ?: throw IllegalArgumentException("'${type.qualifiedName}' does not have an empty constructor")
-        val arguments = type.cast(constructor.newInstance())
+        konst arguments = type.cast(constructor.newInstance())
         ContributeCompilerArgumentsContextImpl(arguments, includeArgumentTypes, isLenient).also(action)
         return arguments
     }
 
     private class ContributeCompilerArgumentsContextImpl<T : CommonToolArguments>(
-        private val arguments: T,
-        private val includedArgumentTypes: Set<KotlinCompilerArgumentsProducer.ArgumentType>,
-        private val isLenient: Boolean
+        private konst arguments: T,
+        private konst includedArgumentTypes: Set<KotlinCompilerArgumentsProducer.ArgumentType>,
+        private konst isLenient: Boolean
     ) : ContributeCompilerArgumentsContext<T> {
 
         private inline fun applyContribution(contribution: (args: T) -> Unit) {

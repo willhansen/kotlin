@@ -5,4 +5,4 @@
 
 // WITH_STDLIB
 
-val d = empty<caret>Array<String>()
+konst d = empty<caret>Array<String>()

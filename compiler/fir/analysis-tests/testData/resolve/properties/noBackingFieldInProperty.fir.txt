@@ -4,10 +4,10 @@ FILE: noBackingFieldInProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val field: R|kotlin/String| = String()
+        public final konst field: R|kotlin/String| = String()
             public get(): R|kotlin/String|
 
-        public final val x: R|kotlin/Int|
+        public final konst x: R|kotlin/Int|
             public get(): R|kotlin/Int| {
                 ^ this@R|/A|.R|/A.field|.R|kotlin/String.length|
             }
@@ -18,10 +18,10 @@ FILE: noBackingFieldInProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val field: R|kotlin/String| = String()
+        public final konst field: R|kotlin/String| = String()
             public get(): R|kotlin/String|
 
-        public final val x: R|kotlin/Int|
+        public final konst x: R|kotlin/Int|
             public get(): R|kotlin/Int| {
                 ^ this@R|/B|.F|/B.x|.<Unresolved name: length>#
             }

@@ -45,7 +45,7 @@ class ImplicitReceiverValue<S : Symbol<*>> : ReceiverValue {
   // CHECK:
   //   Mangled name: ImplicitReceiverValue{}boundSymbol
   //   Public signature: /ImplicitReceiverValue.boundSymbol|7940914052046792092[0]
-  val boundSymbol: S?
+  konst boundSymbol: S?
     // CHECK JVM_IR:
     //   Mangled name: ImplicitReceiverValue#<get-boundSymbol>(){}1:0?
     //   Public signature: /ImplicitReceiverValue.boundSymbol.<get-boundSymbol>|4571442115658707994[0]
@@ -57,7 +57,7 @@ class ImplicitReceiverValue<S : Symbol<*>> : ReceiverValue {
   // CHECK:
   //   Mangled name: ImplicitReceiverValue{}type
   //   Public signature: /ImplicitReceiverValue.type|-6051055617123801408[0]
-  override val type: String
+  override konst type: String
     // CHECK JVM_IR:
     //   Mangled name: ImplicitReceiverValue#<get-type>(){}kotlin.String
     //   Public signature: /ImplicitReceiverValue.type.<get-type>|9160771839252493702[0]
@@ -80,7 +80,7 @@ class PersistentImplicitReceiverStack : ImplicitReceiverStack, Iterable<Implicit
   // CHECK:
   //   Mangled name: PersistentImplicitReceiverStack{}stack
   //   Public signature: /PersistentImplicitReceiverStack.stack|-6859012302810162613[0]
-  private val stack: List<ImplicitReceiverValue<*>>
+  private konst stack: List<ImplicitReceiverValue<*>>
     // CHECK JVM_IR:
     //   Mangled name: PersistentImplicitReceiverStack#<get-stack>(){}kotlin.collections.List<ImplicitReceiverValue<*>>
     //   Public signature: /PersistentImplicitReceiverStack.stack.<get-stack>|2790934809164034447[0]
@@ -133,7 +133,7 @@ interface ReceiverValue {
   // CHECK:
   //   Mangled name: ReceiverValue{}type
   //   Public signature: /ReceiverValue.type|-6051055617123801408[0]
-  abstract val type: String
+  abstract konst type: String
     // CHECK JVM_IR:
     //   Mangled name: ReceiverValue#<get-type>(){}kotlin.String
     //   Public signature: /ReceiverValue.type.<get-type>|9160771839252493702[0]

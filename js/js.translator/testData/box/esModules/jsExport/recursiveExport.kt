@@ -17,7 +17,7 @@ fun ping(s: Something<*>): String {
 
 // FILE: main.kt
 external interface JsResult {
-    val pingCall: () -> String
+    konst pingCall: () -> String
 }
 
 @JsModule("./recursiveExport.mjs")

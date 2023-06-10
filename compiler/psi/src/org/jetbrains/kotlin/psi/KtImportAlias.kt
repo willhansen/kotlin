@@ -33,7 +33,7 @@ class KtImportAlias : KtElementImplStub<KotlinImportAliasStub>, PsiNameIdentifie
         return visitor.visitImportAlias(this, data)
     }
 
-    val importDirective: KtImportDirective?
+    konst importDirective: KtImportDirective?
         get() = parent as? KtImportDirective
 
     override fun getName() = stub?.getName() ?: nameIdentifier?.text

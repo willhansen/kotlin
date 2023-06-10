@@ -1,10 +1,10 @@
 // FIR_IDENTICAL
-val flag = true
+konst flag = true
 
 interface I
 class A(): I
 class B(): I
 
-val a = l@ {
+konst a = l@ {
     return@l if (flag) A() else B()
 }

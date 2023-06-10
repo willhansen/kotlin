@@ -13,11 +13,11 @@ enum class En : Enum<En> {
 
   D = En()
 
-  fun values(): Array<En> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<En> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): En /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): En /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<En>
+  konst entries: EnumEntries<En>
     get(): EnumEntries<En> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -29,7 +29,7 @@ open annotation class TestAnn : Annotation {
 
   }
 
-  val x: En
+  konst x: En
     field = x
     get
 

@@ -30,7 +30,7 @@ fun processCompilerOutput(
     stream: ByteArrayOutputStream,
     exitCode: ExitCode?
 ) {
-    val reader = BufferedReader(StringReader(stream.toString()))
+    konst reader = BufferedReader(StringReader(stream.toString()))
     CompilerOutputParser.parseCompilerMessagesFromReader(messageCollector, reader, outputItemsCollector)
 
     if (ExitCode.INTERNAL_ERROR == exitCode) {

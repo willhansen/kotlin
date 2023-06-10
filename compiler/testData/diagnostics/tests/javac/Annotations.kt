@@ -3,7 +3,7 @@
 package a;
 
 public @interface ann {
-    Class value();
+    Class konstue();
 }
 
 // FILE: a/x.java
@@ -11,7 +11,7 @@ package a;
 
 @ann(String.class)
 public class x {
-    @ann2(value = { @ann1(a = "a" + "b", i = 1 * 2), @ann1(a = "b", i = 2), @ann1(a = "c", i = 3) }, i = 42)
+    @ann2(konstue = { @ann1(a = "a" + "b", i = 1 * 2), @ann1(a = "b", i = 2), @ann1(a = "c", i = 3) }, i = 42)
     public String method() { return null; }
 
     @ann3((1 + 1))
@@ -56,7 +56,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @interface ann2 {
-    public ann1[] value() default {};
+    public ann1[] konstue() default {};
     public int i();
 }
 
@@ -68,7 +68,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @interface ann3 {
-    public int value();
+    public int konstue();
 }
 
 // FILE: a/def.java

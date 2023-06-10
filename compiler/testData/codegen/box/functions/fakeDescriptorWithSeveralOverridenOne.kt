@@ -14,8 +14,8 @@ class ClassDescriptorImpl : ClassDescriptor {
     }
 }
 
-class A(val descriptor : ClassDescriptor) {
-    val result : String = descriptor.getName()
+class A(konst descriptor : ClassDescriptor) {
+    konst result : String = descriptor.getName()
 }
 
 fun box(): String {

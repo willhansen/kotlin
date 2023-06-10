@@ -16,7 +16,7 @@ interface LanguageSettingsBuilder : LanguageSettings {
 
     fun enableLanguageFeature(name: String)
 
-    override val enabledLanguageFeatures: Set<String>
+    override konst enabledLanguageFeatures: Set<String>
 
     fun optIn(annotationName: String)
 }

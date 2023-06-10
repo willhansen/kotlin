@@ -21,13 +21,13 @@ enum class TargetInliner {
 }
 
 class BlackBoxInlinerCodegenSuppressor(testServices: TestServices) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
     override fun suppressIfNeeded(failedAssertions: List<WrappedException>): List<WrappedException> {
-        val targetFrontend = testServices.defaultsProvider.defaultFrontend
+        konst targetFrontend = testServices.defaultsProvider.defaultFrontend
 
-        val commonResult = suppressForTargetFrontend(failedAssertions, CodegenTestDirectives.IGNORE_INLINER)
+        konst commonResult = suppressForTargetFrontend(failedAssertions, CodegenTestDirectives.IGNORE_INLINER)
         if (commonResult != null) return commonResult
 
         return when (targetFrontend) {
@@ -45,15 +45,15 @@ class BlackBoxInlinerCodegenSuppressor(testServices: TestServices) : AfterAnalys
         failedAssertions: List<WrappedException>,
         directive: ValueDirective<TargetInliner>
     ): List<WrappedException>? {
-        val directiveName = directive.name
-        val ignoreDirectives = testServices.moduleStructure.allDirectives[directive]
+        konst directiveName = directive.name
+        konst ignoreDirectives = testServices.moduleStructure.allDirectives[directive]
         if (ignoreDirectives.size > 1) {
-            throw IllegalArgumentException("Directive $directiveName should contains only one value")
+            throw IllegalArgumentException("Directive $directiveName should contains only one konstue")
         }
 
-        val ignoreDirective = ignoreDirectives.singleOrNull()
-        val enabledIrInliner = LanguageSettingsDirectives.ENABLE_JVM_IR_INLINER in testServices.moduleStructure.allDirectives
-        val unmuteError = listOf(AssertionError("Looks like this test can be unmuted. Please remove $directiveName directive.").wrap())
+        konst ignoreDirective = ignoreDirectives.singleOrNull()
+        konst enabledIrInliner = LanguageSettingsDirectives.ENABLE_JVM_IR_INLINER in testServices.moduleStructure.allDirectives
+        konst unmuteError = listOf(AssertionError("Looks like this test can be unmuted. Please remove $directiveName directive.").wrap())
 
         if (ignoreDirective == TargetInliner.IR && enabledIrInliner || ignoreDirective == TargetInliner.BYTECODE && !enabledIrInliner) {
             return if (failedAssertions.isNotEmpty()) emptyList() else unmuteError

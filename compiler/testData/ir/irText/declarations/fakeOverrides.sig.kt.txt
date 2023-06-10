@@ -21,7 +21,7 @@ class Test1 : CFoo<String>, IBar, IFooStr {
   // CHECK:
   //   Mangled name: Test1{}bar
   //   Public signature: /Test1.bar|-7864284097863469857[0]
-  override val bar: Int
+  override konst bar: Int
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-bar>(){}kotlin.Int
     //   Public signature: /Test1.bar.<get-bar>|-7403724005139201014[0]
@@ -50,7 +50,7 @@ interface IBar {
   // CHECK:
   //   Mangled name: IBar{}bar
   //   Public signature: /IBar.bar|-7864284097863469857[0]
-  abstract val bar: Int
+  abstract konst bar: Int
     // CHECK JVM_IR:
     //   Mangled name: IBar#<get-bar>(){}kotlin.Int
     //   Public signature: /IBar.bar.<get-bar>|-7403724005139201014[0]

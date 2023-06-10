@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.tooling.core.withClosure
  * Has similar API as non-configuration cache friendly Gradle's [ResolvedConfiguration]
  */
 internal class LazyResolvedConfiguration private constructor(
-    private val resolvedComponentsRootProvider: Lazy<ResolvedComponentResult>,
-    private val artifactCollection: ArtifactCollection,
-    private val configurationName: String,
+    private konst resolvedComponentsRootProvider: Lazy<ResolvedComponentResult>,
+    private konst artifactCollection: ArtifactCollection,
+    private konst configurationName: String,
 ) {
     constructor(configuration: Configuration) : this(
         // Calling resolutionResult doesn't actually trigger resolution. But accessing its root ResolvedComponentResult
@@ -35,34 +35,34 @@ internal class LazyResolvedConfiguration private constructor(
         configurationName = configuration.name
     )
 
-    val files: FileCollection get() = artifactCollection.artifactFiles
+    konst files: FileCollection get() = artifactCollection.artifactFiles
 
-    val root by resolvedComponentsRootProvider
+    konst root by resolvedComponentsRootProvider
 
-    val resolvedArtifacts: Set<ResolvedArtifactResult> get() = artifactCollection.artifacts
+    konst resolvedArtifacts: Set<ResolvedArtifactResult> get() = artifactCollection.artifacts
 
-    val resolutionFailures: Collection<Throwable> get() = artifactCollection.failures
+    konst resolutionFailures: Collection<Throwable> get() = artifactCollection.failures
 
-    private val artifactsByComponentId by TransientLazy { resolvedArtifacts.groupBy { it.id.componentIdentifier } }
+    private konst artifactsByComponentId by TransientLazy { resolvedArtifacts.groupBy { it.id.componentIdentifier } }
 
-    val allDependencies: Set<DependencyResult> by TransientLazy {
+    konst allDependencies: Set<DependencyResult> by TransientLazy {
         root.dependencies.withClosure<DependencyResult> {
             if (it is ResolvedDependencyResult) it.selected.dependencies
             else emptyList()
         }
     }
 
-    internal val allResolvedDependencies: Set<ResolvedDependencyResult> by TransientLazy {
+    internal konst allResolvedDependencies: Set<ResolvedDependencyResult> by TransientLazy {
         allDependencies.filterIsInstance<ResolvedDependencyResult>().toSet()
     }
 
     fun getArtifacts(dependency: ResolvedDependencyResult): List<ResolvedArtifactResult> {
-        val componentId = dependency.resolvedVariant.lastExternalVariantOrSelf().owner
+        konst componentId = dependency.resolvedVariant.lastExternalVariantOrSelf().owner
         return artifactsByComponentId[componentId] ?: emptyList()
     }
 
     fun getArtifacts(component: ResolvedComponentResult): List<ResolvedArtifactResult> {
-        val componentIds = component.variants.map { it.lastExternalVariantOrSelf().owner }
+        konst componentIds = component.variants.map { it.lastExternalVariantOrSelf().owner }
         return componentIds.flatMap { artifactsByComponentId[it].orEmpty() }
     }
 

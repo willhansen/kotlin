@@ -39,7 +39,7 @@ KtFile: DefaultKeyword.kt
         PsiElement(object)('object')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('c')
         PsiElement(COLON)(':')
@@ -285,7 +285,7 @@ KtFile: DefaultKeyword.kt
   PROPERTY
     PsiComment(EOL_COMMENT)('//should be error')
     PsiWhiteSpace('\n')
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('t')
     PsiWhiteSpace(' ')

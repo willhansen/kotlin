@@ -8,11 +8,11 @@ package codegen.inlineClass.nestedInlineClasses
 import kotlin.test.*
 
 interface I {
-    inline class IC(val x: Int)
+    inline class IC(konst x: Int)
 }
 
 interface I2 {
-    inline class IC(val x: Int)
+    inline class IC(konst x: Int)
 }
 
 @Test fun runTest() {

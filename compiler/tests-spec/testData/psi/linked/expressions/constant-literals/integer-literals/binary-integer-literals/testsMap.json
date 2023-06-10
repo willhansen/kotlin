@@ -23,7 +23,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Binary integer literals with invalid or double prefixes.",
+          "description": "Binary integer literals with inkonstid or double prefixes.",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/integer-literals/binary-integer-literals/p-1/neg/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -35,7 +35,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Binary integer literals with underscore symbols in valid places.",
+          "description": "Binary integer literals with underscore symbols in konstid places.",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/integer-literals/binary-integer-literals/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -69,7 +69,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Binary integer literals with invalid [2-9] digit symbols.",
+          "description": "Binary integer literals with inkonstid [2-9] digit symbols.",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/integer-literals/binary-integer-literals/p-1/pos/1.2.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -85,7 +85,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Binary integer literals with valid digit symbols.",
+          "description": "Binary integer literals with konstid digit symbols.",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/integer-literals/binary-integer-literals/p-1/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"

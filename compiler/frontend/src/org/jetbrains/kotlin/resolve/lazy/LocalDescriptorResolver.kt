@@ -27,7 +27,7 @@ interface LocalDescriptorResolver {
 }
 
 class CompilerLocalDescriptorResolver(
-    private val lazyDeclarationResolver: LazyDeclarationResolver
+    private konst lazyDeclarationResolver: LazyDeclarationResolver
 ) : LocalDescriptorResolver {
     override fun resolveLocalDeclaration(declaration: KtDeclaration): DeclarationDescriptor {
         return lazyDeclarationResolver.resolveToDescriptor(declaration)

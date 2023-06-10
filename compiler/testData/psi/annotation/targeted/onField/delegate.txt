@@ -24,7 +24,7 @@ KtFile: delegate.kt
                   REFERENCE_EXPRESSION
                     PsiElement(IDENTIFIER)('Transient')
         PsiWhiteSpace('\n    ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('plainField')
         PsiElement(COLON)(':')
@@ -52,7 +52,7 @@ KtFile: delegate.kt
                   REFERENCE_EXPRESSION
                     PsiElement(IDENTIFIER)('Transient')
         PsiWhiteSpace('\n    ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('lazy')
         PsiWhiteSpace(' ')

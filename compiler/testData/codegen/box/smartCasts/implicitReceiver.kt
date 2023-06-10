@@ -1,7 +1,7 @@
 
 open class A {
     class B : A() {
-        val a = "FAIL"
+        konst a = "FAIL"
     }
 
     fun foo(): String {

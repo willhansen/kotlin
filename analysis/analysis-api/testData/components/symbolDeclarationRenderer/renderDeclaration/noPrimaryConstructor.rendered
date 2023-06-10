@@ -3,6 +3,6 @@ class NoPrimary {
 
   constructor(x: String)
 
-  val x: String
+  konst x: String
 }
 

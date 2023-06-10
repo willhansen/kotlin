@@ -12,7 +12,7 @@ fun testDecoding(decode: (String) -> Any) {
 
 class Test {
     fun fooTest() {
-        val foo: JsonCodingParser = object : JsonCodingParser {}
+        konst foo: JsonCodingParser = object : JsonCodingParser {}
         testDecoding(foo::parseValue)
     }
 }

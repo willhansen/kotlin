@@ -1,6 +1,6 @@
 package
 
-public val foo: O.() -> kotlin.Unit
+public konst foo: O.() -> kotlin.Unit
 public fun test(): kotlin.Unit
 
 public object O {

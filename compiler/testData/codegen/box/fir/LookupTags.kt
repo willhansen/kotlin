@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 
 abstract class ConeClassLikeLookupTag {
-    abstract val status: String
+    abstract konst status: String
 }
 
 class ConeClassLikeLookupTagImpl : ConeClassLikeLookupTag() {
@@ -14,7 +14,7 @@ class ConeClassLikeLookupTagImpl : ConeClassLikeLookupTag() {
 }
 
 class ConeClassLikeErrorLookupTag : ConeClassLikeLookupTag() {
-    override val status: String
+    override konst status: String
         get() = "ERROR"
 }
 
@@ -30,9 +30,9 @@ fun ConeClassLikeLookupTagImpl.bar(s: String) {
 }
 
 fun box(): String {
-    val tag = ConeClassLikeErrorLookupTag()
+    konst tag = ConeClassLikeErrorLookupTag()
     tag.foo()
-    val tag2 = ConeClassLikeLookupTagImpl()
+    konst tag2 = ConeClassLikeLookupTagImpl()
     tag2.change("OK")
     tag2.foo()
     return tag2.status

@@ -6,7 +6,7 @@ package foo
 // FIXME: The IR backend generates a lot of redundant vars
 // CHECK_VARS_COUNT: function=test count=0 TARGET_BACKENDS=JS
 
-internal class A(val x: Int) {
+internal class A(konst x: Int) {
     inline fun f(): Int = x
 
     inline fun ff(): Int = f()

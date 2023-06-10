@@ -58,7 +58,7 @@ KtFile: declarationsJustAtTyped.kt
             PsiWhiteSpace(' ')
             PsiElement(private)('private')
           PsiWhiteSpace(' ')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x')
           PsiElement(COLON)(':')
@@ -279,7 +279,7 @@ KtFile: declarationsJustAtTyped.kt
           PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiElement(COLON)(':')

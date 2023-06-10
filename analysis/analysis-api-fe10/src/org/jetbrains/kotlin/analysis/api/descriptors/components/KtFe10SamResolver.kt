@@ -20,15 +20,15 @@ import org.jetbrains.kotlin.resolve.sam.createSamConstructorFunction
 import org.jetbrains.kotlin.resolve.sam.getSingleAbstractMethodOrNull
 
 internal class KtFe10SamResolver(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtSamResolver(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun getSamConstructor(ktClassLikeSymbol: KtClassLikeSymbol): KtSamConstructorSymbol?  {
-        val descriptor = getSymbolDescriptor(ktClassLikeSymbol)
+        konst descriptor = getSymbolDescriptor(ktClassLikeSymbol)
         if (descriptor is ClassDescriptor && getSingleAbstractMethodOrNull(descriptor) != null) {
-            val constructorDescriptor = createSamConstructorFunction(
+            konst constructorDescriptor = createSamConstructorFunction(
                 descriptor.containingDeclaration,
                 descriptor,
                 analysisContext.resolveSession.samConversionResolver,

@@ -16,10 +16,10 @@ public final class Example {
     private final lateinit var latePoint1: Point
     private final lateinit var latePoint2: Point
     private final var nullPoint: Point?
-    private final val point1: Point
-    private final val point2: Point
-    private final val point3: Point
-    private final val point4: Point
+    private final konst point1: Point
+    private final konst point2: Point
+    private final konst point3: Point
+    private final konst point4: Point
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     private final fun newIndex(/*0*/ zero: kotlin.Boolean): kotlin.Int

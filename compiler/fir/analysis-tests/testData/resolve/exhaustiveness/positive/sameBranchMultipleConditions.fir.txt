@@ -8,7 +8,7 @@ FILE: sameBranchMultipleConditions.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val something: R|kotlin/String| = R|<local>/something|
+        public final konst something: R|kotlin/String| = R|<local>/something|
             public get(): R|kotlin/String|
 
         public final operator fun component1(): R|kotlin/String|
@@ -21,7 +21,7 @@ FILE: sameBranchMultipleConditions.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val something: R|kotlin/String| = R|<local>/something|
+        public final konst something: R|kotlin/String| = R|<local>/something|
             public get(): R|kotlin/String|
 
         public final operator fun component1(): R|kotlin/String|

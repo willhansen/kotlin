@@ -10,4 +10,4 @@ fun box(): String =
 
 // FILE: script.kts
 
-val x = "OK"
+konst x = "OK"

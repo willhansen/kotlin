@@ -9,13 +9,13 @@ repositories {
 
 kotlin {
     jvm() // https://youtrack.jetbrains.com/issue/KT-45832
-    val targetA = <targetA>("targetA")
-    val targetB = <targetB>("targetB")
+    konst targetA = <targetA>("targetA")
+    konst targetB = <targetB>("targetB")
 
-    val commonMain by sourceSets.getting
-    val nativeMain by sourceSets.creating
-    val targetAMain by sourceSets.getting
-    val targetBMain by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst nativeMain by sourceSets.creating
+    konst targetAMain by sourceSets.getting
+    konst targetBMain by sourceSets.getting
 
     nativeMain.dependsOn(commonMain)
     targetAMain.dependsOn(nativeMain)

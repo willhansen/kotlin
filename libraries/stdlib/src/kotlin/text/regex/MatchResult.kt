@@ -47,18 +47,18 @@ public interface MatchNamedGroupCollection : MatchGroupCollection {
  */
 public interface MatchResult {
     /** The range of indices in the original string where match was captured. */
-    public val range: IntRange
+    public konst range: IntRange
     /** The substring from the input string captured by this match. */
-    public val value: String
+    public konst konstue: String
     /**
      * A collection of groups matched by the regular expression.
      *
      * This collection has size of `groupCount + 1` where `groupCount` is the count of groups in the regular expression.
      * Groups are indexed from 1 to `groupCount` and group with the index 0 corresponds to the entire match.
      */
-    public val groups: MatchGroupCollection
+    public konst groups: MatchGroupCollection
     /**
-     * A list of matched indexed group values.
+     * A list of matched indexed group konstues.
      *
      * This list has size of `groupCount + 1` where `groupCount` is the count of groups in the regular expression.
      * Groups are indexed from 1 to `groupCount` and group with the index 0 corresponds to the entire match.
@@ -68,16 +68,16 @@ public interface MatchResult {
      *
      * @sample samples.text.Regexps.matchDestructuringToGroupValues
      */
-    public val groupValues: List<String>
+    public konst groupValues: List<String>
 
     /**
-     * An instance of [MatchResult.Destructured] wrapper providing components for destructuring assignment of group values.
+     * An instance of [MatchResult.Destructured] wrapper providing components for destructuring assignment of group konstues.
      *
-     * component1 corresponds to the value of the first group, component2 — of the second, and so on.
+     * component1 corresponds to the konstue of the first group, component2 — of the second, and so on.
      *
      * @sample samples.text.Regexps.matchDestructuringToGroupValues
      */
-    public val destructured: Destructured get() = Destructured(this)
+    public konst destructured: Destructured get() = Destructured(this)
 
     /** Returns a new [MatchResult] with the results for the next match, starting at the position
      *  at which the last match ended (at the character after the last matched character).
@@ -85,16 +85,16 @@ public interface MatchResult {
     public fun next(): MatchResult?
 
     /**
-     * Provides components for destructuring assignment of group values.
+     * Provides components for destructuring assignment of group konstues.
      *
-     * [component1] corresponds to the value of the first group, [component2] — of the second, and so on.
+     * [component1] corresponds to the konstue of the first group, [component2] — of the second, and so on.
      *
      * If the group in the regular expression is optional and there were no match captured by that group,
-     * corresponding component value is an empty string.
+     * corresponding component konstue is an empty string.
      *
      * @sample samples.text.Regexps.matchDestructuringToGroupValues
      */
-    public class Destructured internal constructor(public val match: MatchResult) {
+    public class Destructured internal constructor(public konst match: MatchResult) {
         @kotlin.internal.InlineOnly
         public operator inline fun component1():  String = match.groupValues[1]
         @kotlin.internal.InlineOnly
@@ -117,8 +117,8 @@ public interface MatchResult {
         public operator inline fun component10(): String = match.groupValues[10]
 
         /**
-         *  Returns destructured group values as a list of strings.
-         *  First value in the returned list corresponds to the value of the first group, and so on.
+         *  Returns destructured group konstues as a list of strings.
+         *  First konstue in the returned list corresponds to the konstue of the first group, and so on.
          *
          * @sample samples.text.Regexps.matchDestructuringToGroupValues
          */

@@ -16,7 +16,7 @@ class JUnit5Contributor : AsserterContributor {
         return if (hasJUnitInClassPath) JUnit5Asserter else null
     }
 
-    private val hasJUnitInClassPath = try {
+    private konst hasJUnitInClassPath = try {
         Class.forName("org.junit.jupiter.api.Assertions")
         true
     } catch (_: ClassNotFoundException) {
@@ -45,11 +45,11 @@ object JUnit5Asserter : Asserter {
     }
 
     override fun assertNotNull(message: String?, actual: Any?) {
-        Assertions.assertNotNull(actual, message ?: "actual value is null")
+        Assertions.assertNotNull(actual, message ?: "actual konstue is null")
     }
 
     override fun assertNull(message: String?, actual: Any?) {
-        Assertions.assertNull(actual, message ?: "actual value is not null")
+        Assertions.assertNull(actual, message ?: "actual konstue is not null")
     }
 
     override fun fail(message: String?): Nothing {

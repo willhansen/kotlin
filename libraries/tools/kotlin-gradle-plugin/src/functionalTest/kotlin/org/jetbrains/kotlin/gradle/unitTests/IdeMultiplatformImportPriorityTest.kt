@@ -34,8 +34,8 @@ class IdeMultiplatformImportPriorityTest {
     }
 
     @Test
-    fun `test - predefined values`() {
-        val predefinedValues = listOf(
+    fun `test - predefined konstues`() {
+        konst predefinedValues = listOf(
             Priority.low,
             Priority.normal,
             Priority.high,

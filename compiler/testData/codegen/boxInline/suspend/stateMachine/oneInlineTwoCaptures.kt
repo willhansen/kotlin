@@ -31,7 +31,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val r = inlineMe(
+    konst r = inlineMe(
         {
             StateMachineChecker.suspendHere()
             StateMachineChecker.suspendHere()

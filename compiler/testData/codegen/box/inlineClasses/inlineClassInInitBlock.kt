@@ -5,12 +5,12 @@
 var result = "Fail"
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val value: String) {
-    fun f() = value + "K"
+konstue class A(konst konstue: String) {
+    fun f() = konstue + "K"
 }
 
-class B(val a: A) {
-    val result: String
+class B(konst a: A) {
+    konst result: String
     init {
         result = a.f()
     }

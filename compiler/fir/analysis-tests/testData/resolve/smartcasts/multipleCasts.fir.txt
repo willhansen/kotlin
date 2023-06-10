@@ -11,16 +11,16 @@ FILE: multipleCasts.kt
         ^getAny Null(null)
     }
     public final fun test_0(): R|kotlin/Unit| {
-        lval a: R|kotlin/Any?| = R|/getAny|()
-        lval b: R|kotlin/Any?| = R|/getAny|()
+        lkonst a: R|kotlin/Any?| = R|/getAny|()
+        lkonst b: R|kotlin/Any?| = R|/getAny|()
         (R|<local>/a| as R|A|)
         R|<local>/a|.R|/A.foo|()
         (R|<local>/b| as R|B|)
         R|<local>/b|.R|/B.foo|()
     }
     public final fun test_1(): R|kotlin/Unit| {
-        lval a: R|kotlin/Any?| = R|/getAny|()
-        lval b: R|kotlin/Any?| = R|/getAny|()
+        lkonst a: R|kotlin/Any?| = R|/getAny|()
+        lkonst b: R|kotlin/Any?| = R|/getAny|()
         when () {
             (R|<local>/a| is R|A|) && (R|<local>/b| is R|B|) ->  {
                 R|<local>/a|.R|/A.foo|()

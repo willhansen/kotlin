@@ -21,11 +21,11 @@ fun builder(c: suspend () -> Unit) {
 fun builderConsumer(c: suspend () -> Consumer): Consumer {
     var res: Consumer? = null
     c.startCoroutine(object : Continuation<Consumer> {
-        override fun resumeWith(value: Result<Consumer>) {
-            res = value.getOrThrow()
+        override fun resumeWith(konstue: Result<Consumer>) {
+            res = konstue.getOrThrow()
         }
 
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
     })
     return res!!
 }
@@ -33,17 +33,17 @@ fun builderConsumer(c: suspend () -> Consumer): Consumer {
 class Container {
     var y: String = "FAIL 0"
 
-    val consumer0 = crossInlineBuilderConsumer { s ->
+    konst consumer0 = crossInlineBuilderConsumer { s ->
         y = s
     }
 
-    val consumer1 = crossInlineBuilderConsumer { s ->
+    konst consumer1 = crossInlineBuilderConsumer { s ->
         builder {
             y = s
         }
     }
 
-    val consumer2 = inlineBuilder {
+    konst consumer2 = inlineBuilder {
         object : Consumer {
             override fun consume(s: String) {
                 builder {
@@ -53,7 +53,7 @@ class Container {
         }
     }
 
-    val consumer3 = inlineBuilder {
+    konst consumer3 = inlineBuilder {
         builderConsumer {
             object : Consumer {
                 override fun consume(s: String) {
@@ -63,7 +63,7 @@ class Container {
         }
     }
 
-    val consumer4 = crossInlineBuilderConsumer { s ->
+    konst consumer4 = crossInlineBuilderConsumer { s ->
         object : Consumer {
             override fun consume(s1: String) {
                 builder {
@@ -73,7 +73,7 @@ class Container {
         }
     }
 
-    val consumer5 = crossInlineBuilderConsumer { s ->
+    konst consumer5 = crossInlineBuilderConsumer { s ->
         builderConsumer {
             object : Consumer {
                 override fun consume(s1: String) {
@@ -83,8 +83,8 @@ class Container {
         }
     }
 
-    val consumer6 = crossInlineBuilderConsumer { s ->
-        val c = object : Consumer {
+    konst consumer6 = crossInlineBuilderConsumer { s ->
+        konst c = object : Consumer {
             override fun consume(s1: String) {
                 builder {
                     y = s1
@@ -94,8 +94,8 @@ class Container {
         c.consume(s)
     }
 
-    val consumer7 = crossInlineBuilderConsumer { s ->
-        val c = builderConsumer {
+    konst consumer7 = crossInlineBuilderConsumer { s ->
+        konst c = builderConsumer {
             object : Consumer {
                 override fun consume(s1: String) {
                     y = s1
@@ -107,7 +107,7 @@ class Container {
 }
 
 fun box(): String {
-    val c = Container()
+    konst c = Container()
     c.consumer0.consume("OK")
     if (c.y != "OK") return c.y
     c.y = "FAIL 1"

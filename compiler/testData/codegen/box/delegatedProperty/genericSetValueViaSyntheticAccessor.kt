@@ -1,11 +1,11 @@
 // FILE: Var.kt
 package pvar
 
-open class PVar<T>(private var value: T) {
-    protected operator fun getValue(thisRef: Any?, prop: Any?) = value
+open class PVar<T>(private var konstue: T) {
+    protected operator fun getValue(thisRef: Any?, prop: Any?) = konstue
 
     protected operator fun setValue(thisRef: Any?, prop: Any?, newValue: T) {
-        value = newValue
+        konstue = newValue
     }
 }
 
@@ -19,7 +19,7 @@ class C : PVar<Long>(42L) {
 }
 
 fun box(): String {
-    val inner = C().Inner()
+    konst inner = C().Inner()
     inner.x = 1L
     return "OK"
 }

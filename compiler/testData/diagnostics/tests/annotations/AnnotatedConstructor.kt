@@ -1,3 +1,3 @@
 // FIR_IDENTICAL
 annotation class ann
-class Annotated(@ann val x: Int)
+class Annotated(@ann konst x: Int)

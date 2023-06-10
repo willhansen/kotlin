@@ -6,7 +6,7 @@ interface Base
 interface Derived : Base
 
 interface M1 {
-    val success: Boolean
+    konst success: Boolean
 }
 interface M1Sub : M1
 

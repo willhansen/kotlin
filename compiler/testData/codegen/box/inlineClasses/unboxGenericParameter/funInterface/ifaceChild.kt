@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 fun <T> underlying(a: IC): T = bar(a) {
-    (it.value as FooHolder).value as T
+    (it.konstue as FooHolder).konstue as T
 }
 
 fun <T> extension(a: IC): T = bar(a) {
@@ -18,25 +18,25 @@ fun <T> normal(a: IC): T = bar(a) {
     normalValue(it)
 }
 
-fun <T> IC.extensionValue(): T = (value as FooHolder).value as T
+fun <T> IC.extensionValue(): T = (konstue as FooHolder).konstue as T
 
-fun <T> normalValue(ic: IC): T = (ic.value as FooHolder).value as T
+fun <T> normalValue(ic: IC): T = (ic.konstue as FooHolder).konstue as T
 
 fun interface FunIFace<T, R> {
     fun call(ic: T): R
 }
 
-fun <T, R> bar(value: T, f: FunIFace<T, R>): R {
-    return f.call(value)
+fun <T, R> bar(konstue: T, f: FunIFace<T, R>): R {
+    return f.call(konstue)
 }
 
 interface Foo
 
-class FooHolder(val value: Any): Foo
+class FooHolder(konst konstue: Any): Foo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC(val value: FooHolder): Foo {
-    fun <T> dispatchValue(): T = (value as FooHolder).value as T
+konstue class IC(konst konstue: FooHolder): Foo {
+    fun <T> dispatchValue(): T = (konstue as FooHolder).konstue as T
 }
 
 fun box(): String {

@@ -1,14 +1,14 @@
-class Test(val prop: String) {
+class Test(konst prop: String) {
 
   companion object {
-    public val prop : String = "CO";
+    public konst prop : String = "CO";
   }
 
 }
 
 
 fun box() : String {
-  val obj = Test("OK");
+  konst obj = Test("OK");
 
   if (Test.prop != "CO") return "fail1";
 

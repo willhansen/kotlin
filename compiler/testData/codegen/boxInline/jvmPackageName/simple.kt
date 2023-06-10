@@ -8,9 +8,9 @@ package foo.bar
 
 fun f(): String = "O"
 
-val g: String? get() = "K"
+konst g: String? get() = "K"
 
-inline val h: String get() = ""
+inline konst h: String get() = ""
 
 inline fun <T> i(block: () -> T): T = block()
 

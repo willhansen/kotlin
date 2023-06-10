@@ -17,14 +17,14 @@ class C {
 }
 
 fun box(): String {
-    val mh = MethodHandles.lookup().findVirtual(
+    konst mh = MethodHandles.lookup().findVirtual(
         C::class.java, "foo",
         MethodType.methodType(String::class.java, String::class.java, Double::class.java, Int::class.java)
     )
-    val result: String = mh.invokeExact(C(), "Hello", 0.01, 42) as String
+    konst result: String = mh.invokeExact(C(), "Hello", 0.01, 42) as String
     if (result != "Hello0.0142") return "Fail 1: $result"
 
-    val mh2 = MethodHandles.lookup().findStatic(C::class.java, "bar", MethodType.methodType(Object::class.java))
-    val result2 = mh2.invokeExact() is String
+    konst mh2 = MethodHandles.lookup().findStatic(C::class.java, "bar", MethodType.methodType(Object::class.java))
+    konst result2 = mh2.invokeExact() is String
     return if (result2) "OK" else "Fail 2"
 }

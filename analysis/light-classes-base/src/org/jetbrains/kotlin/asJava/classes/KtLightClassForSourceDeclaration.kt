@@ -30,8 +30,8 @@ import org.jetbrains.kotlin.serialization.deserialization.builtins.BuiltInSerial
 import javax.swing.Icon
 
 abstract class KtLightClassForSourceDeclaration(
-    protected val classOrObject: KtClassOrObject,
-    protected val jvmDefaultMode: JvmDefaultMode,
+    protected konst classOrObject: KtClassOrObject,
+    protected konst jvmDefaultMode: JvmDefaultMode,
 ) : KtLightClassBase(classOrObject.manager),
     StubBasedPsiElement<KotlinClassOrObjectStub<out KtClassOrObject>> {
     override fun cacheDependencies(): List<Any> = classOrObject.getExternalDependencies()
@@ -46,13 +46,13 @@ abstract class KtLightClassForSourceDeclaration(
 
     override fun isWritable() = kotlinOrigin.isWritable
 
-    private val _extendsList by lazyPub { createExtendsList() }
-    private val _implementsList by lazyPub { createImplementsList() }
+    private konst _extendsList by lazyPub { createExtendsList() }
+    private konst _implementsList by lazyPub { createImplementsList() }
 
     protected abstract fun createExtendsList(): PsiReferenceList?
     protected abstract fun createImplementsList(): PsiReferenceList?
 
-    override val kotlinOrigin: KtClassOrObject = classOrObject
+    override konst kotlinOrigin: KtClassOrObject = classOrObject
 
     abstract override fun copy(): PsiElement
     abstract override fun getParent(): PsiElement?
@@ -62,8 +62,8 @@ abstract class KtLightClassForSourceDeclaration(
 
     override fun getNavigationElement(): PsiElement = classOrObject
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean =
-        kotlinOrigin.isEquivalentTo(another) ||
+    override fun isEquikonstentTo(another: PsiElement?): Boolean =
+        kotlinOrigin.isEquikonstentTo(another) ||
                 equals(another) ||
                 (qualifiedName != null && another is KtLightClassForSourceDeclaration && qualifiedName == another.qualifiedName)
 
@@ -74,7 +74,7 @@ abstract class KtLightClassForSourceDeclaration(
         if (this === other) return true
         if (other == null || this::class.java != other::class.java) return false
 
-        val aClass = other as KtLightClassForSourceDeclaration
+        konst aClass = other as KtLightClassForSourceDeclaration
 
         if (jvmDefaultMode != aClass.jvmDefaultMode) return false
         if (classOrObject != aClass.classOrObject) return false
@@ -85,7 +85,7 @@ abstract class KtLightClassForSourceDeclaration(
     override fun hashCode(): Int = classOrObject.hashCode() * 31 + jvmDefaultMode.hashCode()
 
 
-    private val _typeParameterList: PsiTypeParameterList by lazyPub { buildTypeParameterList() }
+    private konst _typeParameterList: PsiTypeParameterList by lazyPub { buildTypeParameterList() }
 
     protected abstract fun buildTypeParameterList(): PsiTypeParameterList
 
@@ -151,7 +151,7 @@ abstract class KtLightClassForSourceDeclaration(
         if (ancestor.qualifiedName != CommonClassNames.JAVA_LANG_ENUM) {
             return PsiSubstitutor.EMPTY
         }
-        val javaLangEnumsTypeParameter = ancestor.typeParameters.firstOrNull() ?: return PsiSubstitutor.EMPTY
+        konst javaLangEnumsTypeParameter = ancestor.typeParameters.firstOrNull() ?: return PsiSubstitutor.EMPTY
         return PsiSubstitutor.createSubstitutor(
             mapOf(
                 javaLangEnumsTypeParameter to PsiImmediateClassType(this, PsiSubstitutor.EMPTY)
@@ -159,7 +159,7 @@ abstract class KtLightClassForSourceDeclaration(
         )
     }
 
-    override val originKind: LightClassOriginKind
+    override konst originKind: LightClassOriginKind
         get() = LightClassOriginKind.SOURCE
 
     abstract fun isFinal(isFinalByPsi: Boolean): Boolean
@@ -202,7 +202,7 @@ fun KtClassOrObject.defaultJavaAncestorQualifiedName(): String? {
 }
 
 fun KtClassOrObject.shouldNotBeVisibleAsLightClass(): Boolean {
-    val containingFile = containingFile
+    konst containingFile = containingFile
     if (containingFile is KtCodeFragment) {
         // Avoid building light classes for code fragments
         return true
@@ -243,7 +243,7 @@ fun KtClassOrObject.shouldNotBeVisibleAsLightClass(): Boolean {
 private fun classDeclaredInUnexpectedPosition(classOrObject: KtClassOrObject): Boolean {
     if (classOrObject is KtObjectDeclaration) return false
 
-    val classParent = classOrObject.parent
+    konst classParent = classOrObject.parent
 
     return classParent !is KtBlockExpression &&
             classParent !is KtDeclarationContainer
@@ -257,7 +257,7 @@ private fun isEnumEntryWithoutBody(classOrObject: KtClassOrObject): Boolean {
 }
 
 private fun hasParseErrorsAround(psi: PsiElement): Boolean {
-    val node = psi.node ?: return false
+    konst node = psi.node ?: return false
 
     TreeUtil.nextLeaf(node)?.let { nextLeaf ->
         if (nextLeaf.elementType == TokenType.ERROR_ELEMENT || nextLeaf.treePrev?.elementType == TokenType.ERROR_ELEMENT) {

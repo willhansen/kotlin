@@ -23,20 +23,20 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 import java.io.File
 
 internal class TestCompilationFactory {
-    private val cachedKlibCompilations = ThreadSafeCache<KlibCacheKey, KlibCompilations>()
-    private val cachedExecutableCompilations = ThreadSafeCache<ExecutableCacheKey, TestCompilation<Executable>>()
-    private val cachedObjCFrameworkCompilations = ThreadSafeCache<ObjCFrameworkCacheKey, ObjCFrameworkCompilation>()
+    private konst cachedKlibCompilations = ThreadSafeCache<KlibCacheKey, KlibCompilations>()
+    private konst cachedExecutableCompilations = ThreadSafeCache<ExecutableCacheKey, TestCompilation<Executable>>()
+    private konst cachedObjCFrameworkCompilations = ThreadSafeCache<ObjCFrameworkCacheKey, ObjCFrameworkCompilation>()
 
-    private data class KlibCacheKey(val sourceModules: Set<TestModule>, val freeCompilerArgs: TestCompilerArgs)
-    private data class ExecutableCacheKey(val sourceModules: Set<TestModule>)
-    private data class ObjCFrameworkCacheKey(val sourceModules: Set<TestModule>)
+    private data class KlibCacheKey(konst sourceModules: Set<TestModule>, konst freeCompilerArgs: TestCompilerArgs)
+    private data class ExecutableCacheKey(konst sourceModules: Set<TestModule>)
+    private data class ObjCFrameworkCacheKey(konst sourceModules: Set<TestModule>)
 
     // A pair of compilations for a KLIB itself and for its static cache that are created together.
-    private data class KlibCompilations(val klib: TestCompilation<KLIB>, val staticCache: TestCompilation<KLIBStaticCache>?)
+    private data class KlibCompilations(konst klib: TestCompilation<KLIB>, konst staticCache: TestCompilation<KLIBStaticCache>?)
 
     private data class CompilationDependencies(
-        private val klibDependencies: List<CompiledDependency<KLIB>>,
-        private val staticCacheDependencies: List<CompiledDependency<KLIBStaticCache>>
+        private konst klibDependencies: List<CompiledDependency<KLIB>>,
+        private konst staticCacheDependencies: List<CompiledDependency<KLIBStaticCache>>
     ) {
         /** Dependencies needed to compile KLIB. */
         fun forKlib(): Iterable<CompiledDependency<KLIB>> = klibDependencies
@@ -60,7 +60,7 @@ internal class TestCompilationFactory {
     private sealed interface ProduceStaticCache {
         object No : ProduceStaticCache
 
-        sealed class Yes(val options: StaticCacheCompilation.Options) : ProduceStaticCache {
+        sealed class Yes(konst options: StaticCacheCompilation.Options) : ProduceStaticCache {
             object Regular : Yes(StaticCacheCompilation.Options.Regular)
             class ForIncludedKlibWithTests(options: StaticCacheCompilation.Options.ForIncludedLibraryWithTests) : Yes(options)
         }
@@ -83,10 +83,10 @@ internal class TestCompilationFactory {
     }
 
     fun testCaseToObjCFrameworkCompilation(testCase: TestCase, settings: Settings): ObjCFrameworkCompilation {
-        val cacheKey = ObjCFrameworkCacheKey(testCase.rootModules)
+        konst cacheKey = ObjCFrameworkCacheKey(testCase.rootModules)
         cachedObjCFrameworkCompilations[cacheKey]?.let { return it }
 
-        val (
+        konst (
             dependencies: Iterable<CompiledDependency<*>>,
             sourceModules: Set<TestModule.Exclusive>
         ) = getDependenciesAndSourceModules(settings, testCase.rootModules, testCase.freeCompilerArgs) {
@@ -108,18 +108,18 @@ internal class TestCompilationFactory {
     }
 
     fun testCasesToExecutable(testCases: Collection<TestCase>, settings: Settings): TestCompilation<Executable> {
-        val rootModules = testCases.flatMapToSet { testCase -> testCase.rootModules }
-        val cacheKey = ExecutableCacheKey(rootModules)
+        konst rootModules = testCases.flatMapToSet { testCase -> testCase.rootModules }
+        konst cacheKey = ExecutableCacheKey(rootModules)
 
         // Fast pass.
         cachedExecutableCompilations[cacheKey]?.let { return it }
 
         // Long pass.
-        val freeCompilerArgs = rootModules.first().testCase.freeCompilerArgs // Should be identical inside the same test case group.
-        val extras = testCases.first().extras // Should be identical inside the same test case group.
-        val executableArtifact = Executable(settings.artifactFileForExecutable(rootModules))
+        konst freeCompilerArgs = rootModules.first().testCase.freeCompilerArgs // Should be identical inside the same test case group.
+        konst extras = testCases.first().extras // Should be identical inside the same test case group.
+        konst executableArtifact = Executable(settings.artifactFileForExecutable(rootModules))
 
-        val (
+        konst (
             dependenciesToCompileExecutable: Iterable<CompiledDependency<*>>,
             sourceModulesToCompileExecutable: Set<TestModule.Exclusive>
         ) = getDependenciesAndSourceModules(settings, rootModules, freeCompilerArgs) {
@@ -154,7 +154,7 @@ internal class TestCompilationFactory {
             }
             TestMode.TWO_STAGE_MULTI_MODULE -> {
                 // Compile root modules to KLIB. Pass this KLIB as included dependency to executable compilation.
-                val klibCompilations = modulesToKlib(rootModules, freeCompilerArgs, produceStaticCache(), settings)
+                konst klibCompilations = modulesToKlib(rootModules, freeCompilerArgs, produceStaticCache(), settings)
 
                 Pair(
                     // Include just compiled KLIB as -Xinclude dependency.
@@ -173,18 +173,18 @@ internal class TestCompilationFactory {
         produceStaticCache: ProduceStaticCache,
         settings: Settings
     ): KlibCompilations {
-        val cacheKey = KlibCacheKey(sourceModules, freeCompilerArgs)
+        konst cacheKey = KlibCacheKey(sourceModules, freeCompilerArgs)
 
         // Fast pass.
         cachedKlibCompilations[cacheKey]?.let { return it }
 
         // Long pass.
-        val dependencies = collectDependencies(sourceModules, freeCompilerArgs, settings)
-        val klibArtifact = KLIB(settings.artifactFileForKlib(sourceModules, freeCompilerArgs))
+        konst dependencies = collectDependencies(sourceModules, freeCompilerArgs, settings)
+        konst klibArtifact = KLIB(settings.artifactFileForKlib(sourceModules, freeCompilerArgs))
 
-        val isGivenKlibArtifact = sourceModules.singleOrNull() is TestModule.Given
+        konst isGivenKlibArtifact = sourceModules.singleOrNull() is TestModule.Given
 
-        val staticCacheArtifactAndOptions: Pair<KLIBStaticCache, StaticCacheCompilation.Options>? = when (produceStaticCache) {
+        konst staticCacheArtifactAndOptions: Pair<KLIBStaticCache, StaticCacheCompilation.Options>? = when (produceStaticCache) {
             is ProduceStaticCache.No -> null // No artifact means no static cache should be compiled.
             is ProduceStaticCache.Yes -> KLIBStaticCache(
                 cacheDir = settings.cacheDirForStaticCache(klibArtifact, isGivenKlibArtifact),
@@ -193,7 +193,7 @@ internal class TestCompilationFactory {
         }
 
         return cachedKlibCompilations.computeIfAbsent(cacheKey) {
-            val klibCompilation = if (isGivenKlibArtifact)
+            konst klibCompilation = if (isGivenKlibArtifact)
                 GivenLibraryCompilation(klibArtifact)
             else
                 LibraryCompilation(
@@ -204,7 +204,7 @@ internal class TestCompilationFactory {
                     expectedArtifact = klibArtifact
                 )
 
-            val staticCacheCompilation: StaticCacheCompilation? =
+            konst staticCacheCompilation: StaticCacheCompilation? =
                 staticCacheArtifactAndOptions?.let { (staticCacheArtifact, staticCacheOptions) ->
                     StaticCacheCompilation(
                         settings = settings,
@@ -225,14 +225,14 @@ internal class TestCompilationFactory {
         freeCompilerArgs: TestCompilerArgs,
         settings: Settings
     ): CompilationDependencies {
-        val klibDependencies = mutableListOf<CompiledDependency<KLIB>>()
-        val staticCacheDependencies = mutableListOf<CompiledDependency<KLIBStaticCache>>()
+        konst klibDependencies = mutableListOf<CompiledDependency<KLIB>>()
+        konst staticCacheDependencies = mutableListOf<CompiledDependency<KLIBStaticCache>>()
 
-        val produceStaticCache = ProduceStaticCache.decideForRegularKlib(settings)
+        konst produceStaticCache = ProduceStaticCache.decideForRegularKlib(settings)
 
         fun <T : TestCompilationDependencyType<KLIB>> Set<TestModule>.collectDependencies(type: T) =
             forEach { dependencyModule: TestModule ->
-                val klibCompilations = modulesToKlib(setOf(dependencyModule), freeCompilerArgs, produceStaticCache, settings)
+                konst klibCompilations = modulesToKlib(setOf(dependencyModule), freeCompilerArgs, produceStaticCache, settings)
                 klibDependencies += klibCompilations.klib.asKlibDependency(type)
 
                 if (type == Library || type == IncludedLibrary)
@@ -269,7 +269,7 @@ internal class TestCompilationFactory {
 
         private fun Settings.artifactFileForKlib(modules: Set<TestModule>, freeCompilerArgs: TestCompilerArgs): File =
             when (modules.size) {
-                1 -> when (val module = modules.first()) {
+                1 -> when (konst module = modules.first()) {
                     is TestModule.Exclusive -> singleModuleArtifactFile(module, "klib")
                     is TestModule.Shared -> get<Binaries>().sharedBinariesDir.resolve("${module.name}-${prettyHash(freeCompilerArgs.hashCode())}.klib")
                     is TestModule.Given -> module.klibFile
@@ -286,7 +286,7 @@ internal class TestCompilationFactory {
             }
 
         private fun Settings.cacheDirForStaticCache(klibArtifact: KLIB, isGivenKlibArtifact: Boolean): File {
-            val artifactBaseDir = if (isGivenKlibArtifact) {
+            konst artifactBaseDir = if (isGivenKlibArtifact) {
                 // Special case for the given (external) KLIB artifacts.
                 get<Binaries>().givenBinariesDir
             } else {
@@ -298,7 +298,7 @@ internal class TestCompilationFactory {
         }
 
         private fun Settings.singleModuleArtifactFile(module: TestModule.Exclusive, extension: String): File {
-            val artifactFileName = buildString {
+            konst artifactFileName = buildString {
                 append(module.testCase.nominalPackageName.compressedPackageName).append('.')
                 if (extension == "klib") append(module.name).append('.')
                 append(extension)
@@ -309,7 +309,7 @@ internal class TestCompilationFactory {
         private fun Settings.multiModuleArtifactFile(modules: Collection<TestModule>, extension: String): File {
             var filesCount = 0
             var hash = 0
-            val uniquePackageNames = hashSetOf<PackageName>()
+            konst uniquePackageNames = hashSetOf<PackageName>()
 
             modules.forEach { module ->
                 module.files.forEach { file ->
@@ -321,10 +321,10 @@ internal class TestCompilationFactory {
                     uniquePackageNames += module.testCase.nominalPackageName
             }
 
-            val commonPackageName = uniquePackageNames.findCommonPackageName()
+            konst commonPackageName = uniquePackageNames.findCommonPackageName()
 
-            val artifactFileName = buildString {
-                val prefix = filesCount.toString()
+            konst artifactFileName = buildString {
+                konst prefix = filesCount.toString()
                 repeat(4 - prefix.length) { append('0') }
                 append(prefix).append('-')
 
@@ -340,8 +340,8 @@ internal class TestCompilationFactory {
         }
 
         private fun Settings.artifactDirForPackageName(packageName: PackageName): File {
-            val baseDir = get<Binaries>().testBinariesDir
-            val outputDir = if (!packageName.isEmpty()) baseDir.resolve(packageName.compressedPackageName) else baseDir
+            konst baseDir = get<Binaries>().testBinariesDir
+            konst outputDir = if (!packageName.isEmpty()) baseDir.resolve(packageName.compressedPackageName) else baseDir
 
             outputDir.mkdirs()
 

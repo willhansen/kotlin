@@ -4,8 +4,8 @@
 
 class B {
   fun bar() {
-    val a: Int by `A`A().`foo`foo()
-    val b: Int by `A`A()
+    konst a: Int by `A`A().`foo`foo()
+    konst b: Int by `A`A()
   }
 }
 

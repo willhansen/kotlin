@@ -27,7 +27,7 @@ enum class OSKind {
     Unknown;
 
     companion object {
-        val current: OSKind = CompilerSystemProperties.OS_NAME.safeValue.toLowerCaseAsciiOnly().let {
+        konst current: OSKind = CompilerSystemProperties.OS_NAME.safeValue.toLowerCaseAsciiOnly().let {
             when {
                 // partly taken from http://www.code4copy.com/java/post/detecting-os-type-in-java
                 it.startsWith("windows") -> Windows
@@ -58,12 +58,12 @@ private fun String?.orDefault(v: String): String =
 
 object FileSystem {
 
-    val userHomePath: String get() = CompilerSystemProperties.USER_HOME.safeValue
-    val tempPath: String get() = CompilerSystemProperties.TMP_DIR.safeValue
+    konst userHomePath: String get() = CompilerSystemProperties.USER_HOME.safeValue
+    konst tempPath: String get() = CompilerSystemProperties.TMP_DIR.safeValue
 
-    val logFilesPath: String get() = tempPath
+    konst logFilesPath: String get() = tempPath
 
-    val runtimeStateFilesBasePath: String get() = when (OSKind.current) {
+    konst runtimeStateFilesBasePath: String get() = when (OSKind.current) {
         OSKind.Windows -> System.getenv("LOCALAPPDATA").orDefault(tempPath)
         OSKind.OSX -> userHomePath + "/Library/Application Support"
         OSKind.Unix -> System.getenv("XDG_DATA_HOME").orDefault(userHomePath + "/.local/share")
@@ -72,10 +72,10 @@ object FileSystem {
 
     fun getRuntimeStateFilesPath(vararg names: String): String {
         assert(names.any())
-        val base = File(runtimeStateFilesBasePath)
+        konst base = File(runtimeStateFilesBasePath)
         // if base is not suitable, take home dir as a base and ensure the first name is prefixed with "." -
         //   this will work ok as a fallback solution on most systems
-        val dir = if (base.exists() && base.isDirectory) names.fold(base, ::File)
+        konst dir = if (base.exists() && base.isDirectory) names.fold(base, ::File)
                   else names.drop(1)
                             .fold(File(userHomePath, names.first().let { if (it.startsWith(".")) it else ".$it" }), ::File)
         return if ((dir.exists() && dir.isDirectory) || dir.mkdirs()) dir.absolutePath

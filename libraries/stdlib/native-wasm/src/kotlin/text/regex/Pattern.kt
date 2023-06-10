@@ -26,19 +26,19 @@ package kotlin.text.regex
 import kotlin.experimental.ExperimentalNativeApi
 
 /** Represents a compiled pattern used by [Regex] for matching, searching, or replacing strings. */
-internal class Pattern(val pattern: String, flags: Int = 0) {
+internal class Pattern(konst pattern: String, flags: Int = 0) {
 
     var flags = flags
         private set
 
     /** A lexer instance used to get tokens from the pattern. */
-    private val lexemes = Lexer(pattern, flags)
+    private konst lexemes = Lexer(pattern, flags)
 
     /** List of all capturing groups in the pattern. Primarily used for handling back references. */
-    val capturingGroups = mutableListOf<FSet>()
+    konst capturingGroups = mutableListOf<FSet>()
 
     /** Mapping from group name to its index */
-    val groupNameToIndex = hashMapOf<String, Int>()
+    konst groupNameToIndex = hashMapOf<String, Int>()
 
     /** Is true if back referenced sets replacement by second compilation pass is needed.*/
     private var needsBackRefReplacement = false
@@ -55,12 +55,12 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
         private set
 
     /** A node to start a matching/searching process by call startNode.matches/startNode.find. */
-    internal val startNode: AbstractSet
+    internal konst startNode: AbstractSet
 
     /** Compiles the given pattern */
     init {
         if (flags != 0 && flags or flagsBitMask != flagsBitMask) {
-            throw IllegalArgumentException("Invalid match flags value")
+            throw IllegalArgumentException("Inkonstid match flags konstue")
         }
         startNode = processExpression(-1, this.flags, null)
 
@@ -82,7 +82,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
     // Compilation methods. ============================================================================================
     /** A->(a|)+ */
     private fun processAlternations(last: AbstractSet): AbstractSet {
-        val auxRange = CharClass(hasFlag(Pattern.CASE_INSENSITIVE))
+        konst auxRange = CharClass(hasFlag(Pattern.CASE_INSENSITIVE))
         while (!lexemes.isEmpty() && lexemes.isLetter()
                 && (lexemes.lookAhead == 0
                     || lexemes.lookAhead == Lexer.CHAR_VERTICAL_BAR
@@ -92,7 +92,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                 lexemes.next()
             }
         }
-        val rangeSet = processRangeSet(auxRange)
+        konst rangeSet = processRangeSet(auxRange)
         rangeSet.next = last
 
         return rangeSet
@@ -100,8 +100,8 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
 
     /** E->AE; E->S|E; E->S; A->(a|)+ E->S(|S)* */
     private fun processExpression(ch: Int, newFlags: Int, last: AbstractSet?): AbstractSet {
-        val children = ArrayList<AbstractSet>()
-        val savedFlags = flags
+        konst children = ArrayList<AbstractSet>()
+        konst savedFlags = flags
         var saveChangedFlags = false
 
         if (newFlags != flags) {
@@ -109,7 +109,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
         }
 
         // Create a right finalizing set.
-        val fSet: FSet
+        konst fSet: FSet
         when (ch) {
             // Special groups: non-capturing, look ahead/behind etc.
             Lexer.CHAR_NONCAP_GROUP -> fSet = NonCapFSet(consumersCount++)
@@ -131,7 +131,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                 capturingGroups.add(fSet)
 
                 if (ch == Lexer.CHAR_NAMED_GROUP) {
-                    val name = (lexemes.curSpecialToken as NamedGroup).name
+                    konst name = (lexemes.curSpecialToken as NamedGroup).name
                     if (groupNameToIndex.containsKey(name)) {
                         throw PatternSyntaxException("Named capturing group <$name> is already defined", pattern, lexemes.curTokenIndex)
                     }
@@ -146,7 +146,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
 
         //Process to EOF or ')'
         do {
-            val child: AbstractSet
+            konst child: AbstractSet
             when {
                 // a|...
                 lexemes.isLetter() && lexemes.lookAhead == Lexer.CHAR_VERTICAL_BAR -> child = processAlternations(fSet)
@@ -198,7 +198,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
      */
     @OptIn(ExperimentalNativeApi::class)
     private fun processSequence(): AbstractSet {
-        val substring = StringBuilder()
+        konst substring = StringBuilder()
         while (!lexemes.isEmpty()
                 && lexemes.isLetter()
                 && !lexemes.isSurrogate()
@@ -208,7 +208,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                     || lexemes.lookAhead and 0x8000ffff.toInt() == Lexer.CHAR_LEFT_PARENTHESIS
                     || lexemes.lookAhead == Lexer.CHAR_VERTICAL_BAR
                     || lexemes.lookAhead == Lexer.CHAR_DOLLAR)) {
-            val ch = lexemes.next()
+            konst ch = lexemes.next()
 
             if (Char.isSupplementaryCodePoint(ch)) {
                 substring.append(Char.toChars(ch))
@@ -223,8 +223,8 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
      * D->a
      */
     private fun processDecomposedChar(): AbstractSet {
-        val codePoints = IntArray(Lexer.MAX_DECOMPOSITION_LENGTH)
-        val codePointsHangul: CharArray
+        konst codePoints = IntArray(Lexer.MAX_DECOMPOSITION_LENGTH)
+        konst codePointsHangul: CharArray
         var readCodePoints = 0
         var curSymb = -1
         var curSymbIndex = -1
@@ -312,7 +312,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                         }
                     }
                     lexemes.isHighSurrogate() || lexemes.isLowSurrogate() -> {
-                        val term = processTerminal(last)
+                        konst term = processTerminal(last)
                         cur = processQuantifier(last, term)
                     }
                     else -> {
@@ -327,7 +327,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                 cur = EmptySet(last)
             }
             else -> {
-                val term = processTerminal(last)
+                konst term = processTerminal(last)
                 cur = processQuantifier(last, term)
             }
         }
@@ -336,7 +336,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
             && (lexemes.currentChar != Lexer.CHAR_RIGHT_PARENTHESIS || last is FinalSet)
             && lexemes.currentChar != Lexer.CHAR_VERTICAL_BAR) {
 
-            val next = processSubExpression(last)
+            konst next = processSubExpression(last)
             if (cur is LeafQuantifierSet
                 // '*' or '{0,}' quantifier
                 && cur.max == Quantifier.INF
@@ -368,7 +368,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
      * Q->T(*|+|?...) also do some optimizations.
      */
     private fun processQuantifier(last: AbstractSet, term: AbstractSet): AbstractSet {
-        val quant = lexemes.currentChar
+        konst quant = lexemes.currentChar
 
         if (term.type == AbstractSet.TYPE_DOTSET && (quant == Lexer.QUANT_STAR || quant == Lexer.QUANT_PLUS)) {
             lexemes.next()
@@ -378,7 +378,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
         return when (quant) {
 
             Lexer.QUANT_STAR, Lexer.QUANT_PLUS, Lexer.QUANT_ALT, Lexer.QUANT_COMP -> {
-                val quantifier = quantifierFromLexerToken(quant)
+                konst quantifier = quantifierFromLexerToken(quant)
                 when {
                     term is LeafSet ->
                         LeafQuantifierSet(quantifier, term, last, quant)
@@ -390,7 +390,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
             }
 
             Lexer.QUANT_STAR_R, Lexer.QUANT_PLUS_R, Lexer.QUANT_ALT_R, Lexer.QUANT_COMP_R -> {
-                val quantifier = quantifierFromLexerToken(quant)
+                konst quantifier = quantifierFromLexerToken(quant)
                 when {
                     term is LeafSet ->
                         ReluctantLeafQuantifierSet(quantifier, term, last, quant)
@@ -402,7 +402,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
             }
 
             Lexer.QUANT_PLUS_P, Lexer.QUANT_STAR_P, Lexer.QUANT_ALT_P, Lexer.QUANT_COMP_P -> {
-                val quantifier = quantifierFromLexerToken(quant)
+                konst quantifier = quantifierFromLexerToken(quant)
                 when {
                     term is LeafSet ->
                         PossessiveLeafQuantifierSet(quantifier, term, last, quant)
@@ -421,7 +421,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
      * T-> letter|[range]|{char-class}|(E)
      */
     private fun processTerminal(last: AbstractSet): AbstractSet {
-        val term: AbstractSet
+        konst term: AbstractSet
         var char = lexemes.currentChar
         // Process flags: (?...)(?...)...
         while (char and 0xff00ffff.toInt() == Lexer.CHAR_FLAGS) {
@@ -506,11 +506,11 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                     // Any unicode linebreak sequence:
                     // \u000D\u000A|[\u000A\u000B\u000C\u000D\u0085\u2028\u2029]
                     lexemes.next()
-                    val fSet = NonCapFSet(consumersCount++)
-                    val lineBreakSequence = SequenceSet("\u000D\u000A").apply {
+                    konst fSet = NonCapFSet(consumersCount++)
+                    konst lineBreakSequence = SequenceSet("\u000D\u000A").apply {
                         next = fSet
                     }
-                    val lineBreakChars = RangeSet(
+                    konst lineBreakChars = RangeSet(
                         CharClass().addAll(listOf('\u000A', '\u000B', '\u000C', '\u000D', '\u0085', '\u2028', '\u2029'))
                     ).apply {
                         next = fSet
@@ -535,7 +535,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                 0x80000000.toInt() or '9'.toInt() -> {
                     var groupIndex = (char and 0x7FFFFFFF) - '0'.code
                     while (lexemes.lookAhead in '0'.code..'9'.code) {
-                        val newGroupIndex = (groupIndex * 10) + (lexemes.lookAhead - '0'.code)
+                        konst newGroupIndex = (groupIndex * 10) + (lexemes.lookAhead - '0'.code)
                         if (newGroupIndex in 0 until capturingGroups.size) {
                             groupIndex = newGroupIndex
                             lexemes.next()
@@ -548,15 +548,15 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                 }
 
                 Lexer.CHAR_NAMED_GROUP_REF -> {
-                    val name = (lexemes.curSpecialToken as NamedGroup).name
-                    val groupIndex = groupNameToIndex[name] ?: -1
+                    konst name = (lexemes.curSpecialToken as NamedGroup).name
+                    konst groupIndex = groupNameToIndex[name] ?: -1
                     term = createBackReference(groupIndex)
                     lexemes.next()
                 }
 
                 // A special token (\D, \w etc), 'u0000' or the end of the pattern.
                 0 -> {
-                    val cc: AbstractCharClass? = lexemes.curSpecialToken as AbstractCharClass?
+                    konst cc: AbstractCharClass? = lexemes.curSpecialToken as AbstractCharClass?
                     when {
                         cc != null -> {
                             term = processRangeSet(cc)
@@ -587,7 +587,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                             term = EmptySet(last)
                         }
                         else -> {
-                            val current = if (lexemes.isSpecial) lexemes.curSpecialToken.toString() else char.toString()
+                            konst current = if (lexemes.isSpecial) lexemes.curSpecialToken.toString() else char.toString()
                             throw PatternSyntaxException("Dangling meta construction: $current", pattern, lexemes.curTokenIndex)
                         }
                     }
@@ -612,8 +612,8 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
      * Process [...] ranges
      */
     private fun processRange(negative: Boolean, last: AbstractSet): AbstractSet {
-        val res = processRangeExpression(negative)
-        val rangeSet = processRangeSet(res)
+        konst res = processRangeExpression(negative)
+        konst rangeSet = processRangeSet(res)
         rangeSet.next = last
 
         return rangeSet
@@ -741,7 +741,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
                     if (buffer >= 0) {
                         result.add(buffer)
                     }
-                    val cs = lexemes.curSpecialToken as AbstractCharClass?
+                    konst cs = lexemes.curSpecialToken as AbstractCharClass?
                     if (cs != null) {
                         result.add(cs)
                         buffer = -1
@@ -774,7 +774,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
 
     private fun processRangeSet(charClass: AbstractCharClass): AbstractSet {
         if (charClass.hasLowHighSurrogates()) {
-            val lowHighSurrRangeSet = SurrogateRangeSet(charClass.classWithSurrogates())
+            konst lowHighSurrRangeSet = SurrogateRangeSet(charClass.classWithSurrogates())
 
             if (charClass.mayContainSupplCodepoints) {
                 return CompositeRangeSet(SupplementaryRangeSet(charClass.classWithoutSurrogates(), hasFlag(CASE_INSENSITIVE)), lowHighSurrRangeSet)
@@ -792,7 +792,7 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
 
     @OptIn(ExperimentalNativeApi::class)
     private fun processCharSet(ch: Int): AbstractSet {
-        val isSupplCodePoint = Char.isSupplementaryCodePoint(ch)
+        konst isSupplCodePoint = Char.isSupplementaryCodePoint(ch)
 
         return when {
             isSupplCodePoint -> SequenceSet(Char.toChars(ch).concatToString(0, 2), hasFlag(CASE_INSENSITIVE))
@@ -809,50 +809,50 @@ internal class Pattern(val pattern: String, flags: Int = 0) {
          * This constant specifies that a pattern matches Unix line endings ('\n')
          * only against the '.', '^', and '$' meta characters.
          */
-        val UNIX_LINES = 1 shl 0
+        konst UNIX_LINES = 1 shl 0
 
         /**
          * This constant specifies that a `Pattern` is matched
          * case-insensitively. That is, the patterns "a+" and "A+" would both match
          * the string "aAaAaA".
          */
-        val CASE_INSENSITIVE = 1 shl 1
+        konst CASE_INSENSITIVE = 1 shl 1
 
         /**
          * This constant specifies that a `Pattern` may contain whitespace or
          * comments. Otherwise comments and whitespace are taken as literal
          * characters.
          */
-        val COMMENTS = 1 shl 2
+        konst COMMENTS = 1 shl 2
 
         /**
          * This constant specifies that the meta characters '^' and '$' match only
          * the beginning and end end of an input line, respectively. Normally, they
          * match the beginning and the end of the complete input.
          */
-        val MULTILINE = 1 shl 3
+        konst MULTILINE = 1 shl 3
 
         /**
          * This constant specifies that the whole `Pattern` is to be taken
          * literally, that is, all meta characters lose their meanings.
          */
-        val LITERAL = 1 shl 4
+        konst LITERAL = 1 shl 4
 
         /**
          * This constant specifies that the '.' meta character matches arbitrary
          * characters, including line endings, which is normally not the case.
          */
-        val DOTALL = 1 shl 5
+        konst DOTALL = 1 shl 5
 
         /**
          * This constant specifies that a character in a `Pattern` and a
          * character in the input string only match if they are canonically
-         * equivalent.
+         * equikonstent.
          */
-        val CANON_EQ = 1 shl 6
+        konst CANON_EQ = 1 shl 6
 
         /** A bit mask that includes all defined match flags */
-        internal val flagsBitMask = Pattern.UNIX_LINES or
+        internal konst flagsBitMask = Pattern.UNIX_LINES or
                 Pattern.CASE_INSENSITIVE or
                 Pattern.COMMENTS or
                 Pattern.MULTILINE or

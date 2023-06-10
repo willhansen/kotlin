@@ -38,7 +38,7 @@ KtFile: IIterator.kt
               PsiElement(IDENTIFIER)('T')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('hasNext')
         PsiWhiteSpace(' ')

@@ -12,10 +12,10 @@ fun test(i: Int?) {
         foo((l3@ i))
     }
 
-    val a: Int = <!INITIALIZER_TYPE_MISMATCH!>l4@ ""<!>
-    val b: Int = <!INITIALIZER_TYPE_MISMATCH!>("")<!>
-    val c: Int = checkSubtype<Int>(<!ARGUMENT_TYPE_MISMATCH!>""<!>)
-    val d: Int = <!INITIALIZER_TYPE_MISMATCH!>checkSubtype<Long>(<!ARGUMENT_TYPE_MISMATCH!>""<!>)<!>
+    konst a: Int = <!INITIALIZER_TYPE_MISMATCH!>l4@ ""<!>
+    konst b: Int = <!INITIALIZER_TYPE_MISMATCH!>("")<!>
+    konst c: Int = checkSubtype<Int>(<!ARGUMENT_TYPE_MISMATCH!>""<!>)
+    konst d: Int = <!INITIALIZER_TYPE_MISMATCH!>checkSubtype<Long>(<!ARGUMENT_TYPE_MISMATCH!>""<!>)<!>
 
 
     foo(l4@ <!ARGUMENT_TYPE_MISMATCH!>""<!>)

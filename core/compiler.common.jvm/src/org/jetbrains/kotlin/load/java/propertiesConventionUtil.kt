@@ -34,7 +34,7 @@ private fun propertyNameFromAccessorMethodName(
     addPrefix: String? = null
 ): Name? {
     if (methodName.isSpecial) return null
-    val identifier = methodName.identifier
+    konst identifier = methodName.identifier
     if (!identifier.startsWith(prefix)) return null
     if (identifier.length == prefix.length) return null
     if (identifier[prefix.length] in 'a'..'z') return null
@@ -45,13 +45,13 @@ private fun propertyNameFromAccessorMethodName(
     }
 
     if (!removePrefix) return methodName
-    val name = identifier.removePrefix(prefix).decapitalizeSmartForCompiler(asciiOnly = true)
+    konst name = identifier.removePrefix(prefix).decapitalizeSmartForCompiler(asciiOnly = true)
     if (!Name.isValidIdentifier(name)) return null
     return Name.identifier(name)
 }
 
 fun getPropertyNamesCandidatesByAccessorName(name: Name): List<Name> {
-    val nameAsString = name.asString()
+    konst nameAsString = name.asString()
 
     if (JvmAbi.isGetterName(nameAsString)) {
         return listOfNotNull(propertyNameByGetMethodName(name))
@@ -67,20 +67,20 @@ fun getPropertyNamesCandidatesByAccessorName(name: Name): List<Name> {
 fun possibleGetMethodNames(propertyName: Name): List<Name> {
     if (propertyName.isSpecial) return emptyList()
 
-    val identifier = propertyName.identifier
+    konst identifier = propertyName.identifier
     if (identifier.isEmpty()) return emptyList()
 
-    val firstChar = identifier[0]
+    konst firstChar = identifier[0]
     if (!firstChar.isJavaIdentifierStart() || firstChar in 'A'..'Z') return emptyList()
 
-    val result = ArrayList<Name>(3)
+    konst result = ArrayList<Name>(3)
 
     if (JvmAbi.startsWithIsPrefix(identifier)) {
         result.add(propertyName)
     }
 
-    val capitalize1 = identifier.capitalizeAsciiOnly()
-    val capitalize2 = identifier.capitalizeFirstWord(asciiOnly = true)
+    konst capitalize1 = identifier.capitalizeAsciiOnly()
+    konst capitalize2 = identifier.capitalizeFirstWord(asciiOnly = true)
     result.add(Name.identifier("get$capitalize1"))
     if (capitalize2 != capitalize1) {
         result.add(Name.identifier("get$capitalize2"))
@@ -91,8 +91,8 @@ fun possibleGetMethodNames(propertyName: Name): List<Name> {
 }
 
 fun setMethodName(getMethodName: Name): Name {
-    val identifier = getMethodName.identifier
-    val prefix = when {
+    konst identifier = getMethodName.identifier
+    konst prefix = when {
         identifier.startsWith("get") -> "get"
         identifier.startsWith("is") -> "is"
         else -> throw IllegalArgumentException()

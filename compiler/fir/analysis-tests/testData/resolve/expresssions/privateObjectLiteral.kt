@@ -1,13 +1,13 @@
 class C {
-    private val x = object {
+    private konst x = object {
         fun foo() = 42
     }
 
-    val y = x.foo()
+    konst y = x.foo()
 
-    internal val z = object {
+    internal konst z = object {
         fun foo() = 13
     }
 
-    val w = z.<!UNRESOLVED_REFERENCE!>foo<!>() // ERROR!
+    konst w = z.<!UNRESOLVED_REFERENCE!>foo<!>() // ERROR!
 }

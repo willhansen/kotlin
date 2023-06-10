@@ -3,7 +3,7 @@
 // FILE: 1.kt
 package test
 
-open class C(val x: () -> String)
+open class C(konst x: () -> String)
 
 inline fun f(crossinline g: () -> String) = object : C({ g() }) {}
 

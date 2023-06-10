@@ -10,7 +10,7 @@ object IdeaKpmBinaryCoordinatesProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmBinaryCoordinatesProtoKt {
       @JvmName("getGroup")
       get() = _builder.getGroup()
       @JvmName("setGroup")
-      set(value) {
-        _builder.setGroup(value)
+      set(konstue) {
+        _builder.setGroup(konstue)
       }
     /**
      * <code>optional string group = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKpmBinaryCoordinatesProtoKt {
       @JvmName("getModule")
       get() = _builder.getModule()
       @JvmName("setModule")
-      set(value) {
-        _builder.setModule(value)
+      set(konstue) {
+        _builder.setModule(konstue)
       }
     /**
      * <code>optional string module = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKpmBinaryCoordinatesProtoKt {
       @JvmName("getVersion")
       get() = _builder.getVersion()
       @JvmName("setVersion")
-      set(value) {
-        _builder.setVersion(value)
+      set(konstue) {
+        _builder.setVersion(konstue)
       }
     /**
      * <code>optional string version = 3;</code>
@@ -101,8 +101,8 @@ object IdeaKpmBinaryCoordinatesProtoKt {
       @JvmName("getKotlinModuleName")
       get() = _builder.getKotlinModuleName()
       @JvmName("setKotlinModuleName")
-      set(value) {
-        _builder.setKotlinModuleName(value)
+      set(konstue) {
+        _builder.setKotlinModuleName(konstue)
       }
     /**
      * <code>optional string kotlin_module_name = 4;</code>
@@ -125,8 +125,8 @@ object IdeaKpmBinaryCoordinatesProtoKt {
       @JvmName("getKotlinFragmentName")
       get() = _builder.getKotlinFragmentName()
       @JvmName("setKotlinFragmentName")
-      set(value) {
-        _builder.setKotlinFragmentName(value)
+      set(konstue) {
+        _builder.setKotlinFragmentName(konstue)
       }
     /**
      * <code>optional string kotlin_fragment_name = 5;</code>

@@ -9,7 +9,7 @@ var z = false
 // FILE: lib2.kt
 import kotlin.test.*
 
-val x = foo()
+konst x = foo()
 
 private fun foo(): Int {
     z = true

@@ -25,12 +25,12 @@ object SuspendConversionCallChecker : CallChecker {
 
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.SuspendConversion)) return
 
-        val argumentsWithSuspendConversion = resolvedCall.resolvedCallAtom.argumentsWithSuspendConversion
+        konst argumentsWithSuspendConversion = resolvedCall.resolvedCallAtom.argumentsWithSuspendConversion
 
         for (argumentWithSuspendConversion in argumentsWithSuspendConversion.keys) {
             context.trace.report(
                 Errors.UNSUPPORTED_FEATURE.on(
-                    argumentWithSuspendConversion.psiCallArgument.valueArgument.asElement(),
+                    argumentWithSuspendConversion.psiCallArgument.konstueArgument.asElement(),
                     LanguageFeature.SuspendConversion to context.languageVersionSettings
                 )
             )

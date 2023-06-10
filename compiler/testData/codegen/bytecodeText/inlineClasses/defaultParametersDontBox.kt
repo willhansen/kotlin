@@ -1,8 +1,8 @@
 // LANGUAGE: +InlineClasses
 // FILE: classes.kt
 
-inline class A(val i: Int)
-inline class B(val a: A)
+inline class A(konst i: Int)
+inline class B(konst a: A)
 
 // FILE: test.kt
 

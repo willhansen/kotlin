@@ -4,7 +4,7 @@ package foo
 
 private inline fun bar(predicate: (Char) -> Boolean): Int {
     var i = 0
-    val str = "abc "
+    konst str = "abc "
     while (predicate(str[i]) && i < 3) {
         i++
     }

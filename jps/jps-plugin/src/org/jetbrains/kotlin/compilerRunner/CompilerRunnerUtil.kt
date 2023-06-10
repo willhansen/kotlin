@@ -31,13 +31,13 @@ import java.nio.file.Paths
 object CompilerRunnerUtil {
     private var ourClassLoaderRef = SoftReference<ClassLoader>(null)
 
-    internal val jdkToolsJar: File?
+    internal konst jdkToolsJar: File?
         get() {
-            val javaHomePath = System.getProperty("java.home")
+            konst javaHomePath = System.getProperty("java.home")
             if (javaHomePath == null || javaHomePath.isEmpty()) {
                 return null
             }
-            val javaHome = Paths.get(javaHomePath)
+            konst javaHome = Paths.get(javaHomePath)
             var toolsJar = javaHome.resolve("lib/tools.jar")
             if (Files.exists(toolsJar)) {
                 return toolsJar.toFile()
@@ -73,7 +73,7 @@ object CompilerRunnerUtil {
     }
 
     fun getLibPath(paths: KotlinPaths, messageCollector: MessageCollector): File? {
-        val libs = paths.libPath
+        konst libs = paths.libPath
         if (libs.exists() && !libs.isFile) return libs
 
         messageCollector.report(
@@ -90,8 +90,8 @@ object CompilerRunnerUtil {
         environment: JpsCompilerEnvironment,
         out: PrintStream
     ): Any? = withCompilerClassloader(environment) { classLoader ->
-        val compiler = Class.forName(compilerClassName, true, classLoader)
-        val exec = compiler.getMethod(
+        konst compiler = Class.forName(compilerClassName, true, classLoader)
+        konst exec = compiler.getMethod(
             "execAndOutputXml",
             PrintStream::class.java,
             Class.forName("org.jetbrains.kotlin.config.Services", true, classLoader),
@@ -104,8 +104,8 @@ object CompilerRunnerUtil {
         environment: JpsCompilerEnvironment,
         files: Set<File>
     ): Set<String> = withCompilerClassloader(environment) { classLoader ->
-        val klass = Class.forName("org.jetbrains.kotlin.incremental.parsing.ParseFileUtilsKt", true, classLoader)
-        val method = klass.getMethod("classesFqNames", Set::class.java)
+        konst klass = Class.forName("org.jetbrains.kotlin.incremental.parsing.ParseFileUtilsKt", true, classLoader)
+        konst method = klass.getMethod("classesFqNames", Set::class.java)
         @Suppress("UNCHECKED_CAST")
         method.invoke(klass, files) as? Set<String>
     } ?: emptySet()
@@ -114,12 +114,12 @@ object CompilerRunnerUtil {
         environment: JpsCompilerEnvironment,
         fn: (ClassLoader) -> T
     ): T? {
-        val libPath = getLibPath(environment.kotlinPaths, environment.messageCollector) ?: return null
-        val kotlinPaths = KotlinPathsFromBaseDirectory(libPath)
-        val paths = kotlinPaths.classPath(KotlinPaths.ClassPaths.CompilerWithScripting).toMutableList()
+        konst libPath = getLibPath(environment.kotlinPaths, environment.messageCollector) ?: return null
+        konst kotlinPaths = KotlinPathsFromBaseDirectory(libPath)
+        konst paths = kotlinPaths.classPath(KotlinPaths.ClassPaths.CompilerWithScripting).toMutableList()
         jdkToolsJar?.let { paths.add(it) }
 
-        val classLoader = getOrCreateClassLoader(environment, paths)
+        konst classLoader = getOrCreateClassLoader(environment, paths)
         return fn(classLoader)
     }
 }

@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T: String>(val arg: T)
+konstue class Foo<T: String>(konst arg: T)
 
 fun box(): String {
-    val ls = listOf(Foo("abc"), Foo("def"))
+    konst ls = listOf(Foo("abc"), Foo("def"))
     var res = ""
     for (el in ls) {
         res += el.arg

@@ -10,10 +10,10 @@
  */
 
 fun box(): String {
-    val c = Class()
+    konst c = Class()
     if (c.data !is () -> Nothing) return "NOK"
-    val e1 : () -> Nothing = c.exception as () -> Nothing as? () -> Nothing ?: return "NOK"
-    val v = c.value as () -> Nothing as? () -> Nothing ?: return "NOK"
+    konst e1 : () -> Nothing = c.exception as () -> Nothing as? () -> Nothing ?: return "NOK"
+    konst v = c.konstue as () -> Nothing as? () -> Nothing ?: return "NOK"
 
     return "OK"
 }
@@ -21,7 +21,7 @@ fun box(): String {
 open class Class() {
     var data: () -> Nothing = { throwException("boo") as Nothing }
     var exception: () -> CharSequence = { throwException("foo") as String }
-    val value: () -> Any
+    konst konstue: () -> Any
         get() = { TODO() as Nothing }
 }
 

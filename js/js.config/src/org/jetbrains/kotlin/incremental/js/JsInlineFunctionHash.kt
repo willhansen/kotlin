@@ -7,4 +7,4 @@ package org.jetbrains.kotlin.incremental.js
 
 import java.io.Serializable
 
-class JsInlineFunctionHash(val sourceFilePath: String, val fqName: String, val inlineFunctionMd5Hash: Long) : Serializable
+class JsInlineFunctionHash(konst sourceFilePath: String, konst fqName: String, konst inlineFunctionMd5Hash: Long) : Serializable

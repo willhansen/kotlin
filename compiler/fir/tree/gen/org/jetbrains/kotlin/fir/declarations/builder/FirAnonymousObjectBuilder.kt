@@ -48,13 +48,13 @@ class FirAnonymousObjectBuilder : FirDeclarationBuilder, FirClassBuilder, FirAnn
     override lateinit var moduleData: FirModuleData
     override lateinit var origin: FirDeclarationOrigin
     override var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
-    override val typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
+    override konst typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
     override lateinit var status: FirDeclarationStatus
     override var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     override lateinit var classKind: ClassKind
-    override val superTypeRefs: MutableList<FirTypeRef> = mutableListOf()
-    override val declarations: MutableList<FirDeclaration> = mutableListOf()
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst superTypeRefs: MutableList<FirTypeRef> = mutableListOf()
+    override konst declarations: MutableList<FirDeclaration> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     override lateinit var scopeProvider: FirScopeProvider
     lateinit var symbol: FirAnonymousObjectSymbol
 

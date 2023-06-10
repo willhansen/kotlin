@@ -17,7 +17,7 @@ inline fun <reified T : Any> f(): String {
 // FILE: 2.kt
 import foo.*
 
-class A(val O: Int, val K: Int)
+class A(konst O: Int, konst K: Int)
 
 fun box(): String {
     return f<A>()

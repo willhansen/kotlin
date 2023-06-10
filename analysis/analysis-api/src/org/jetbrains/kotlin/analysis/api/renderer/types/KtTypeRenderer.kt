@@ -15,25 +15,25 @@ import org.jetbrains.kotlin.analysis.api.types.*
 import org.jetbrains.kotlin.analysis.utils.printer.PrettyPrinter
 
 public class KtTypeRenderer private constructor(
-    public val capturedTypeRenderer: KtCapturedTypeRenderer,
-    public val definitelyNotNullTypeRenderer: KtDefinitelyNotNullTypeRenderer,
-    public val dynamicTypeRenderer: KtDynamicTypeRenderer,
-    public val flexibleTypeRenderer: KtFlexibleTypeRenderer,
-    public val functionalTypeRenderer: KtFunctionalTypeRenderer,
-    public val integerLiteralTypeRenderer: KtIntegerLiteralTypeRenderer,
-    public val intersectionTypeRenderer: KtIntersectionTypeRenderer,
-    public val typeErrorTypeRenderer: KtTypeErrorTypeRenderer,
-    public val typeParameterTypeRenderer: KtTypeParameterTypeRenderer,
-    public val unresolvedClassErrorTypeRenderer: KtUnresolvedClassErrorTypeRenderer,
-    public val usualClassTypeRenderer: KtUsualClassTypeRenderer,
+    public konst capturedTypeRenderer: KtCapturedTypeRenderer,
+    public konst definitelyNotNullTypeRenderer: KtDefinitelyNotNullTypeRenderer,
+    public konst dynamicTypeRenderer: KtDynamicTypeRenderer,
+    public konst flexibleTypeRenderer: KtFlexibleTypeRenderer,
+    public konst functionalTypeRenderer: KtFunctionalTypeRenderer,
+    public konst integerLiteralTypeRenderer: KtIntegerLiteralTypeRenderer,
+    public konst intersectionTypeRenderer: KtIntersectionTypeRenderer,
+    public konst typeErrorTypeRenderer: KtTypeErrorTypeRenderer,
+    public konst typeParameterTypeRenderer: KtTypeParameterTypeRenderer,
+    public konst unresolvedClassErrorTypeRenderer: KtUnresolvedClassErrorTypeRenderer,
+    public konst usualClassTypeRenderer: KtUsualClassTypeRenderer,
 
-    public val classIdRenderer: KtClassTypeQualifierRenderer,
-    public val typeNameRenderer: KtTypeNameRenderer,
-    public val typeApproximator: KtRendererTypeApproximator,
-    public val typeProjectionRenderer: KtTypeProjectionRenderer,
-    public val annotationsRenderer: KtAnnotationRenderer,
-    public val contextReceiversRenderer: KtContextReceiversRenderer,
-    public val keywordRenderer: KtKeywordRenderer,
+    public konst classIdRenderer: KtClassTypeQualifierRenderer,
+    public konst typeNameRenderer: KtTypeNameRenderer,
+    public konst typeApproximator: KtRendererTypeApproximator,
+    public konst typeProjectionRenderer: KtTypeProjectionRenderer,
+    public konst annotationsRenderer: KtAnnotationRenderer,
+    public konst contextReceiversRenderer: KtContextReceiversRenderer,
+    public konst keywordRenderer: KtKeywordRenderer,
 ) {
     context(KtAnalysisSession)
     public fun renderType(type: KtType, printer: PrettyPrinter) {
@@ -53,7 +53,7 @@ public class KtTypeRenderer private constructor(
     }
 
     public fun with(action: Builder.() -> Unit): KtTypeRenderer {
-        val renderer = this
+        konst renderer = this
         return KtTypeRenderer {
             this.capturedTypeRenderer = renderer.capturedTypeRenderer
             this.definitelyNotNullTypeRenderer = renderer.definitelyNotNullTypeRenderer

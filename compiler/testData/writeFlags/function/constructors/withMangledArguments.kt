@@ -1,6 +1,6 @@
-inline class A(val x: Int)
+inline class A(konst x: Int)
 
-class B(val y: A)
+class B(konst y: A)
 
 // TESTED_OBJECT_KIND: function
 // TESTED_OBJECTS: A, <init>

@@ -40,16 +40,16 @@ fun IntegerLiteralAndOperatorApproximationTransformer.approximateIfIsIntegerCons
 }
 
 class IntegerLiteralAndOperatorApproximationTransformer(
-    val session: FirSession,
-    val scopeSession: ScopeSession
+    konst session: FirSession,
+    konst scopeSession: ScopeSession
 ) : FirTransformer<ConeKotlinType?>() {
     companion object {
-        private val TO_LONG = Name.identifier("toLong")
-        private val TO_U_LONG = Name.identifier("toULong")
+        private konst TO_LONG = Name.identifier("toLong")
+        private konst TO_U_LONG = Name.identifier("toULong")
     }
 
-    private val toLongSymbol by lazy { findConversionFunction(session.builtinTypes.intType, TO_LONG) }
-    private val toULongSymbol by lazy { findConversionFunction(session.builtinTypes.uIntType, TO_U_LONG) }
+    private konst toLongSymbol by lazy { findConversionFunction(session.builtinTypes.intType, TO_LONG) }
+    private konst toULongSymbol by lazy { findConversionFunction(session.builtinTypes.uIntType, TO_U_LONG) }
 
     private fun findConversionFunction(receiverType: FirImplicitBuiltinTypeRef, name: Name): FirNamedFunctionSymbol {
         return receiverType.type.scope(
@@ -68,11 +68,11 @@ class IntegerLiteralAndOperatorApproximationTransformer(
         constExpression: FirConstExpression<T>,
         data: ConeKotlinType?
     ): FirStatement {
-        val type = constExpression.resultType.coneTypeSafe<ConeIntegerLiteralType>() ?: return constExpression
-        val approximatedType = type.getApproximatedType(data?.fullyExpandedType(session))
+        konst type = constExpression.resultType.coneTypeSafe<ConeIntegerLiteralType>() ?: return constExpression
+        konst approximatedType = type.getApproximatedType(data?.fullyExpandedType(session))
         constExpression.resultType = constExpression.resultType.resolvedTypeFromPrototype(approximatedType)
         @Suppress("UNCHECKED_CAST")
-        val kind = approximatedType.toConstKind() as ConstantValueKind<T>
+        konst kind = approximatedType.toConstKind() as ConstantValueKind<T>
         constExpression.replaceKind(kind)
         return constExpression
     }
@@ -82,22 +82,22 @@ class IntegerLiteralAndOperatorApproximationTransformer(
         data: ConeKotlinType?
     ): FirStatement {
         @Suppress("UnnecessaryVariable")
-        val call = integerLiteralOperatorCall
-        val operatorType = call.resultType.coneTypeSafe<ConeIntegerLiteralType>() ?: return call
-        val approximatedType = operatorType.getApproximatedType(data?.fullyExpandedType(session))
+        konst call = integerLiteralOperatorCall
+        konst operatorType = call.resultType.coneTypeSafe<ConeIntegerLiteralType>() ?: return call
+        konst approximatedType = operatorType.getApproximatedType(data?.fullyExpandedType(session))
         call.transformDispatchReceiver(this, null)
         call.transformExtensionReceiver(this, null)
         call.argumentList.transformArguments(this, null)
 
         call.resultType = call.resultType.resolvedTypeFromPrototype(approximatedType)
 
-        val calleeReference = call.calleeReference
+        konst calleeReference = call.calleeReference
         // callee reference may also be an error reference and it's ok if wrapped operator function leaks throw it
         if (calleeReference is FirResolvedNamedReference) {
-            val wrappedFunctionSymbol = calleeReference.resolvedSymbol as FirNamedFunctionSymbol
-            val originalFunctionSymbol = wrappedFunctionSymbol.fir.originalForWrappedIntegerOperator!!
+            konst wrappedFunctionSymbol = calleeReference.resolvedSymbol as FirNamedFunctionSymbol
+            konst originalFunctionSymbol = wrappedFunctionSymbol.fir.originalForWrappedIntegerOperator!!
 
-            val newCalleeReference = when (calleeReference) {
+            konst newCalleeReference = when (calleeReference) {
                 is FirResolvedErrorReference -> buildResolvedErrorReference {
                     name = calleeReference.name
                     source = calleeReference.source
@@ -115,7 +115,7 @@ class IntegerLiteralAndOperatorApproximationTransformer(
         }
 
         if (approximatedType.isInt || approximatedType.isUInt) return call
-        val typeBeforeConversion = if (operatorType.isUnsigned) {
+        konst typeBeforeConversion = if (operatorType.isUnsigned) {
             session.builtinTypes.uIntType
         } else {
             session.builtinTypes.intType

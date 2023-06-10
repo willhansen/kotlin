@@ -80,7 +80,7 @@ fun out(container: Container<out Any>, wrapper: Wrapper<String>) {
     container.setSimple(<!CONSTANT_EXPECTED_TYPE_MISMATCH!>456<!>)
 }
 
-val x = 456
+konst x = 456
 
 fun inn(container: Container<in String>, wrapper: Wrapper<Any>, arg: Any) {
     <!SYNTHETIC_SETTER_PROJECTED_OUT!>container.wrapper<!> = wrapper

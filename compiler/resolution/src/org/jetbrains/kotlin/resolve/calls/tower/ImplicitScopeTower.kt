@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeApproximator
 
 interface ImplicitScopeTower {
-    val lexicalScope: LexicalScope
+    konst lexicalScope: LexicalScope
 
     fun getImplicitReceiver(scope: LexicalScope): ReceiverValueWithSmartCastInfo?
 
@@ -43,23 +43,23 @@ interface ImplicitScopeTower {
 
     fun getNameForGivenImportAlias(name: Name): Name?
 
-    val dynamicScope: MemberScope
+    konst dynamicScope: MemberScope
 
-    val syntheticScopes: SyntheticScopes
+    konst syntheticScopes: SyntheticScopes
 
-    val location: LookupLocation
+    konst location: LookupLocation
 
-    val isDebuggerContext: Boolean
+    konst isDebuggerContext: Boolean
 
-    val isNewInferenceEnabled: Boolean
+    konst isNewInferenceEnabled: Boolean
 
-    val areContextReceiversEnabled: Boolean
+    konst areContextReceiversEnabled: Boolean
 
-    val languageVersionSettings: LanguageVersionSettings
+    konst languageVersionSettings: LanguageVersionSettings
 
-    val typeApproximator: TypeApproximator
+    konst typeApproximator: TypeApproximator
 
-    val implicitsResolutionFilter: ImplicitsExtensionsResolutionFilter
+    konst implicitsResolutionFilter: ImplicitsExtensionsResolutionFilter
 
     fun allScopesWithImplicitsResolutionInfo(): Sequence<ScopeWithImplicitsExtensionsResolutionInfo> =
         implicitsResolutionFilter.getScopesWithInfo(lexicalScope.parentsWithSelf)
@@ -94,9 +94,9 @@ interface ScopeTowerLevel {
 }
 
 class CandidateWithBoundDispatchReceiver(
-    val dispatchReceiver: ReceiverValueWithSmartCastInfo?,
-    val descriptor: CallableDescriptor,
-    val diagnostics: List<ResolutionDiagnostic>
+    konst dispatchReceiver: ReceiverValueWithSmartCastInfo?,
+    konst descriptor: CallableDescriptor,
+    konst diagnostics: List<ResolutionDiagnostic>
 )
 
 @JvmName("getResultApplicabilityForConstraintErrors")
@@ -133,25 +133,25 @@ class UnsupportedContextualDeclarationCall : ResolutionDiagnostic(RESOLVED_WITH_
 }
 
 // todo error for this access from nested class
-class VisibilityError(val invisibleMember: DeclarationDescriptorWithVisibility) : ResolutionDiagnostic(K1_RUNTIME_ERROR) {
+class VisibilityError(konst invisibleMember: DeclarationDescriptorWithVisibility) : ResolutionDiagnostic(K1_RUNTIME_ERROR) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCall(this)
     }
 }
 
 class VisibilityErrorOnArgument(
-    val argument: KotlinCallArgument,
-    val invisibleMember: DeclarationDescriptorWithVisibility
+    konst argument: KotlinCallArgument,
+    konst invisibleMember: DeclarationDescriptorWithVisibility
 ) : ResolutionDiagnostic(K1_RUNTIME_ERROR) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCallArgument(argument, this)
     }
 }
 
-class NestedClassViaInstanceReference(val classDescriptor: ClassDescriptor) : ResolutionDiagnostic(K1_IMPOSSIBLE_TO_GENERATE)
-class InnerClassViaStaticReference(val classDescriptor: ClassDescriptor) : ResolutionDiagnostic(K1_IMPOSSIBLE_TO_GENERATE)
-class UnsupportedInnerClassCall(val message: String) : ResolutionDiagnostic(K1_IMPOSSIBLE_TO_GENERATE)
-class UsedSmartCastForDispatchReceiver(val smartCastType: KotlinType) : ResolutionDiagnostic(RESOLVED)
+class NestedClassViaInstanceReference(konst classDescriptor: ClassDescriptor) : ResolutionDiagnostic(K1_IMPOSSIBLE_TO_GENERATE)
+class InnerClassViaStaticReference(konst classDescriptor: ClassDescriptor) : ResolutionDiagnostic(K1_IMPOSSIBLE_TO_GENERATE)
+class UnsupportedInnerClassCall(konst message: String) : ResolutionDiagnostic(K1_IMPOSSIBLE_TO_GENERATE)
+class UsedSmartCastForDispatchReceiver(konst smartCastType: KotlinType) : ResolutionDiagnostic(RESOLVED)
 
 object ErrorDescriptorDiagnostic : ResolutionDiagnostic(RESOLVED) // todo discuss and change to INAPPLICABLE
 object LowPriorityDescriptorDiagnostic : ResolutionDiagnostic(RESOLVED_LOW_PRIORITY)
@@ -164,4 +164,4 @@ object InvokeConventionCallNoOperatorModifier : ResolutionDiagnostic(CONVENTION_
 object InfixCallNoInfixModifier : ResolutionDiagnostic(CONVENTION_ERROR)
 object DeprecatedUnaryPlusAsPlus : ResolutionDiagnostic(CONVENTION_ERROR)
 
-class ResolvedUsingDeprecatedVisibility(val baseSourceScope: ResolutionScope, val lookupLocation: LookupLocation) : ResolutionDiagnostic(RESOLVED)
+class ResolvedUsingDeprecatedVisibility(konst baseSourceScope: ResolutionScope, konst lookupLocation: LookupLocation) : ResolutionDiagnostic(RESOLVED)

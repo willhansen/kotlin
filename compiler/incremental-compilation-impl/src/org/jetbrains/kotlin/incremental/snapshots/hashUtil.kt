@@ -19,13 +19,13 @@ package org.jetbrains.kotlin.incremental.snapshots
 import java.io.File
 import java.security.MessageDigest
 
-internal val File.md5: ByteArray
+internal konst File.md5: ByteArray
     get() {
-        val messageDigest = MessageDigest.getInstance("MD5")
-        val buffer = ByteArray(4048)
+        konst messageDigest = MessageDigest.getInstance("MD5")
+        konst buffer = ByteArray(4048)
         inputStream().use { input ->
             while (true) {
-                val len = input.read(buffer)
+                konst len = input.read(buffer)
                 if (len < 0) {
                     break
                 }

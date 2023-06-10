@@ -24,17 +24,17 @@ public class ByteArray(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> Byte)
 
     /** Returns the array element at the given [index]. This method can be called using the index operator. */
     public operator fun get(index: Int): Byte
-    /** Sets the element at the given [index] to the given [value]. This method can be called using the index operator. */
-    public operator fun set(index: Int, value: Byte): Unit
+    /** Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator. */
+    public operator fun set(index: Int, konstue: Byte): Unit
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
 
     /** Creates an iterator over the elements of the array. */
     public operator fun iterator(): ByteIterator
@@ -50,17 +50,17 @@ public class CharArray(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> Char)
 
     /** Returns the array element at the given [index]. This method can be called using the index operator. */
     public operator fun get(index: Int): Char
-    /** Sets the element at the given [index] to the given [value]. This method can be called using the index operator. */
-    public operator fun set(index: Int, value: Char): Unit
+    /** Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator. */
+    public operator fun set(index: Int, konstue: Char): Unit
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
 
     /** Creates an iterator over the elements of the array. */
     public operator fun iterator(): CharIterator
@@ -76,17 +76,17 @@ public class ShortArray(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> Short)
 
     /** Returns the array element at the given [index]. This method can be called using the index operator. */
     public operator fun get(index: Int): Short
-    /** Sets the element at the given [index] to the given [value]. This method can be called using the index operator. */
-    public operator fun set(index: Int, value: Short): Unit
+    /** Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator. */
+    public operator fun set(index: Int, konstue: Short): Unit
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
 
     /** Creates an iterator over the elements of the array. */
     public operator fun iterator(): ShortIterator
@@ -102,17 +102,17 @@ public class IntArray(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> Int)
 
     /** Returns the array element at the given [index]. This method can be called using the index operator. */
     public operator fun get(index: Int): Int
-    /** Sets the element at the given [index] to the given [value]. This method can be called using the index operator. */
-    public operator fun set(index: Int, value: Int): Unit
+    /** Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator. */
+    public operator fun set(index: Int, konstue: Int): Unit
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
 
     /** Creates an iterator over the elements of the array. */
     public operator fun iterator(): IntIterator
@@ -128,17 +128,17 @@ public class LongArray(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> Long)
 
     /** Returns the array element at the given [index]. This method can be called using the index operator. */
     public operator fun get(index: Int): Long
-    /** Sets the element at the given [index] to the given [value]. This method can be called using the index operator. */
-    public operator fun set(index: Int, value: Long): Unit
+    /** Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator. */
+    public operator fun set(index: Int, konstue: Long): Unit
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
 
     /** Creates an iterator over the elements of the array. */
     public operator fun iterator(): LongIterator
@@ -154,17 +154,17 @@ public class FloatArray(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> Float)
 
     /** Returns the array element at the given [index]. This method can be called using the index operator. */
     public operator fun get(index: Int): Float
-    /** Sets the element at the given [index] to the given [value]. This method can be called using the index operator. */
-    public operator fun set(index: Int, value: Float): Unit
+    /** Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator. */
+    public operator fun set(index: Int, konstue: Float): Unit
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
 
     /** Creates an iterator over the elements of the array. */
     public operator fun iterator(): FloatIterator
@@ -180,17 +180,17 @@ public class DoubleArray(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> Double)
 
     /** Returns the array element at the given [index]. This method can be called using the index operator. */
     public operator fun get(index: Int): Double
-    /** Sets the element at the given [index] to the given [value]. This method can be called using the index operator. */
-    public operator fun set(index: Int, value: Double): Unit
+    /** Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator. */
+    public operator fun set(index: Int, konstue: Double): Unit
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
 
     /** Creates an iterator over the elements of the array. */
     public operator fun iterator(): DoubleIterator
@@ -206,17 +206,17 @@ public class BooleanArray(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> Boolean)
 
     /** Returns the array element at the given [index]. This method can be called using the index operator. */
     public operator fun get(index: Int): Boolean
-    /** Sets the element at the given [index] to the given [value]. This method can be called using the index operator. */
-    public operator fun set(index: Int, value: Boolean): Unit
+    /** Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator. */
+    public operator fun set(index: Int, konstue: Boolean): Unit
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
 
     /** Creates an iterator over the elements of the array. */
     public operator fun iterator(): BooleanIterator

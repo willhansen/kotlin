@@ -2,7 +2,7 @@ package
 
 public open class A {
     public constructor A()
-    public open val servers: kotlin.collections.List<C>
+    public open konst servers: kotlin.collections.List<C>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun findAndExpand(/*0*/ vararg path: () -> kotlin.String /*kotlin.Array<out () -> kotlin.String>*/): kotlin.collections.List<kotlin.String>
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

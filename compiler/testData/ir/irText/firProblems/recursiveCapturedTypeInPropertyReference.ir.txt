@@ -17,9 +17,9 @@ FILE fqName:<root> fileName:/recursiveCapturedTypeInPropertyReference.kt
   CLASS INTERFACE name:Recursive modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Recursive<R of <root>.Recursive>
     TYPE_PARAMETER name:R index:0 variance: superTypes:[<root>.Recursive<R of <root>.Recursive>; <root>.Something] reified:false
-    PROPERTY name:symbol visibility:public modality:ABSTRACT [val]
+    PROPERTY name:symbol visibility:public modality:ABSTRACT [konst]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-symbol> visibility:public modality:ABSTRACT <> ($this:<root>.Recursive<R of <root>.Recursive>) returnType:<root>.AbstractSymbol<R of <root>.Recursive>
-        correspondingProperty: PROPERTY name:symbol visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:symbol visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Recursive<R of <root>.Recursive>
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
@@ -45,7 +45,7 @@ FILE fqName:<root> fileName:/recursiveCapturedTypeInPropertyReference.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.AbstractSymbol<E of <root>.AbstractSymbol>
       VALUE_PARAMETER name:list index:0 type:kotlin.collections.List<kotlin.Any>
       BLOCK_BODY
-        VAR name:result type:kotlin.collections.List<<root>.AbstractSymbol<out <root>.Recursive<*>>> [val]
+        VAR name:result type:kotlin.collections.List<<root>.AbstractSymbol<out <root>.Recursive<*>>> [konst]
           CALL 'public final fun map <T, R> (transform: kotlin.Function1<T of kotlin.collections.map, R of kotlin.collections.map>): kotlin.collections.List<R of kotlin.collections.map> declared in kotlin.collections' type=kotlin.collections.List<<root>.AbstractSymbol<out <root>.Recursive<*>>> origin=null
             <T>: <root>.Recursive<*>
             <R>: <root>.AbstractSymbol<out <root>.Recursive<*>>

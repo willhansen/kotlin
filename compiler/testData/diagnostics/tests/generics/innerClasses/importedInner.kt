@@ -7,7 +7,7 @@ class Outer<E> {
 
     fun foo() {
         class E
-        val x: Inner = Inner()
+        konst x: Inner = Inner()
     }
 
     class Nested {

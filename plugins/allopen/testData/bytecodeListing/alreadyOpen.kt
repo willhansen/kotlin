@@ -6,11 +6,11 @@ open class Test1
 @AllOpen
 open class Test2 {
     open fun method() {}
-    val prop: String = ""
+    konst prop: String = ""
 }
 
 @AllOpen
 class Test3 {
     fun method() {}
-    open val prop: String = ""
+    open konst prop: String = ""
 }

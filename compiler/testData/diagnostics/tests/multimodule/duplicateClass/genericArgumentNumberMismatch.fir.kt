@@ -6,7 +6,7 @@ package p
 
 public class A<X, Y>
 public class M1 {
-    public val a: A<!WRONG_NUMBER_OF_TYPE_ARGUMENTS!><Int><!> = A<Int, Int>()
+    public konst a: A<!WRONG_NUMBER_OF_TYPE_ARGUMENTS!><Int><!> = A<Int, Int>()
 }
 
 // MODULE: m2

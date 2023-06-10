@@ -37,8 +37,8 @@ fun box(): String {
     assertEquals(3, arr["length"])
 
 
-    bar["num0"] = "new value"
-    assertEquals("new value", bar["num0"])
+    bar["num0"] = "new konstue"
+    assertEquals("new konstue", bar["num0"])
 
     bar["STR"] = 12
     assertEquals(12, bar["STR"])

@@ -6,16 +6,16 @@ enum class Foo {
     FOO;
 
     companion object {
-        fun valueOf(something: String) = 2
+        fun konstueOf(something: String) = 2
 
-        fun values() = 1
+        fun konstues() = 1
     }
 }
 
 fun test() {
-    Foo.values() checkType { _<Array<Foo>>() }
-    Foo.Companion.values() checkType { _<Int>() }
+    Foo.konstues() checkType { _<Array<Foo>>() }
+    Foo.Companion.konstues() checkType { _<Int>() }
 
-    Foo.valueOf("") checkType { _<Foo>() }
-    Foo.Companion.valueOf("") checkType { _<Int>() }
+    Foo.konstueOf("") checkType { _<Foo>() }
+    Foo.Companion.konstueOf("") checkType { _<Int>() }
 }

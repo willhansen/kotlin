@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.konan.blackboxtest.support.PackageName
 internal typealias SourceText = CharSequence
 internal typealias SourceLine = String
 
-internal data class NumberedSourceLine(val number: Int, val text: SourceLine) : CharSequence by text {
+internal data class NumberedSourceLine(konst number: Int, konst text: SourceLine) : CharSequence by text {
     override fun toString() = text
 }
 

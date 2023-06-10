@@ -8,7 +8,7 @@ public abstract class A {
 
 // FILE: B.kt
 interface B {
-    val foo: Int
+    konst foo: Int
 }
 
 // FILE: C.java

@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.kotlinPathsForDistDirectoryForTests
 import org.jetbrains.kotlin.utils.PathUtil
 import java.io.File
 
-enum class KotlinJpsLibrary(val id: String, roots: () -> Array<File>) {
+enum class KotlinJpsLibrary(konst id: String, roots: () -> Array<File>) {
     MockRuntime(
         "kotlin-mock-runtime",
         {
@@ -57,10 +57,10 @@ enum class KotlinJpsLibrary(val id: String, roots: () -> Array<File>) {
         }
     );
 
-    val roots: Array<File> by lazy(roots)
+    konst roots: Array<File> by lazy(roots)
 
     fun create(project: JpsProject): JpsLibrary {
-        val library = project.addLibrary(id, JpsJavaLibraryType.INSTANCE)
+        konst library = project.addLibrary(id, JpsJavaLibraryType.INSTANCE)
 
         for (fileRoot in roots) {
             library.addRoot(fileRoot, JpsOrderRootType.COMPILED)

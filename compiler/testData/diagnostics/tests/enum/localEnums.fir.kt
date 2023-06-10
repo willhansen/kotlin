@@ -5,14 +5,14 @@ fun foo() {
         FOO,
         BAR
     }
-    val foo = A.FOO
-    val b = object {
+    konst foo = A.FOO
+    konst b = object {
         <!WRONG_MODIFIER_TARGET!>enum<!> class B {}
     }
     class C {
         <!WRONG_MODIFIER_TARGET!>enum<!> class D {}
     }
-    val f = {
+    konst f = {
         <!WRONG_MODIFIER_TARGET!>enum<!> class E {}
     }
 

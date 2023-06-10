@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CONSTRUCTOR)
 @Retention(AnnotationRetention.SOURCE)
-public annotation class Throws(vararg val ThrowableClasses: KClass<out Throwable>)
+public annotation class Throws(vararg konst ThrowableClasses: KClass<out Throwable>)
 
 // FILE: native.kt
 package kotlin.native

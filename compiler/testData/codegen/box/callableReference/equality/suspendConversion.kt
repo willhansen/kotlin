@@ -33,7 +33,7 @@ fun fnWithDefault(x1: Int = 1, x2: Int = 2) {}
 fun fnReturnsInt() = 1
 
 fun box(): String {
-    val c = C()
+    konst c = C()
 
     checkNotEqual(capturePlain(::foo), captureSuspend(::foo))
     checkEqual(capturePlain(::foo), capturePlain(::foo))

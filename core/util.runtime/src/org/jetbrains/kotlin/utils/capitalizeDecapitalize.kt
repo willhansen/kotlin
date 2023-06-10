@@ -31,7 +31,7 @@ fun String.decapitalizeSmartForCompiler(asciiOnly: Boolean = false): String {
         return if (asciiOnly) decapitalizeAsciiOnly() else replaceFirstChar(Char::lowercaseChar)
     }
 
-    val secondWordStart = (indices.firstOrNull { !isUpperCaseCharAt(it, asciiOnly) } ?: return toLowerCase(this, asciiOnly)) - 1
+    konst secondWordStart = (indices.firstOrNull { !isUpperCaseCharAt(it, asciiOnly) } ?: return toLowerCase(this, asciiOnly)) - 1
 
     return toLowerCase(substring(0, secondWordStart), asciiOnly) + substring(secondWordStart)
 }
@@ -54,7 +54,7 @@ fun String.decapitalizeSmart(asciiOnly: Boolean = false): String {
  * "foo" -> "FOO"
  */
 fun String.capitalizeFirstWord(asciiOnly: Boolean = false): String {
-    val secondWordStart = indices.drop(1).firstOrNull { !isLowerCaseCharAt(it, asciiOnly) }
+    konst secondWordStart = indices.drop(1).firstOrNull { !isLowerCaseCharAt(it, asciiOnly) }
         ?: return toUpperCase(this, asciiOnly)
 
     return toUpperCase(substring(0, secondWordStart), asciiOnly) + substring(secondWordStart)
@@ -69,11 +69,11 @@ fun String.capitalizeFirstWord(asciiOnly: Boolean = false): String {
  * "F_BAR" -> "fBar"
  */
 private fun decapitalizeWithUnderscores(str: String, asciiOnly: Boolean): String? {
-    val words = str.split("_").filter { it.isNotEmpty() }
+    konst words = str.split("_").filter { it.isNotEmpty() }
 
     if (words.size <= 1) return null
 
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
 
     words.forEachIndexed { index, word ->
         if (index == 0) {
@@ -88,12 +88,12 @@ private fun decapitalizeWithUnderscores(str: String, asciiOnly: Boolean): String
 }
 
 private fun String.isUpperCaseCharAt(index: Int, asciiOnly: Boolean): Boolean {
-    val c = this[index]
+    konst c = this[index]
     return if (asciiOnly) c in 'A'..'Z' else c.isUpperCase()
 }
 
 private fun String.isLowerCaseCharAt(index: Int, asciiOnly: Boolean): Boolean {
-    val c = this[index]
+    konst c = this[index]
     return if (asciiOnly) c in 'a'..'z' else c.isLowerCase()
 }
 
@@ -107,7 +107,7 @@ private fun toUpperCase(string: String, asciiOnly: Boolean): String {
 
 fun String.capitalizeAsciiOnly(): String {
     if (isEmpty()) return this
-    val c = this[0]
+    konst c = this[0]
     return if (c in 'a'..'z')
         c.uppercaseChar() + substring(1)
     else
@@ -116,7 +116,7 @@ fun String.capitalizeAsciiOnly(): String {
 
 fun String.decapitalizeAsciiOnly(): String {
     if (isEmpty()) return this
-    val c = this[0]
+    konst c = this[0]
     return if (c in 'A'..'Z')
         c.lowercaseChar() + substring(1)
     else
@@ -124,7 +124,7 @@ fun String.decapitalizeAsciiOnly(): String {
 }
 
 fun String.toLowerCaseAsciiOnly(): String {
-    val builder = StringBuilder(length)
+    konst builder = StringBuilder(length)
     for (c in this) {
         builder.append(if (c in 'A'..'Z') c.lowercaseChar() else c)
     }
@@ -132,7 +132,7 @@ fun String.toLowerCaseAsciiOnly(): String {
 }
 
 fun String.toUpperCaseAsciiOnly(): String {
-    val builder = StringBuilder(length)
+    konst builder = StringBuilder(length)
     for (c in this) {
         builder.append(if (c in 'a'..'z') c.uppercaseChar() else c)
     }

@@ -15,7 +15,7 @@ interface TestInterface<R> {
 fun box(): String {
     build myLabel@ {
         emit("")
-        val x = this@myLabel
+        konst x = this@myLabel
         ""
     }
 

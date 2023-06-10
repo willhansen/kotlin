@@ -9,8 +9,8 @@ fun exception() {
 }
 
 fun main(args: Array<String>) {
-    val sourceInfoType = args.first()
-    val (e, i) = when (sourceInfoType) {
+    konst sourceInfoType = args.first()
+    konst (e, i) = when (sourceInfoType) {
         "libbacktrace" -> Pair(0, 1)
         "coresymbolication" -> Pair(4, 0)
         else -> throw AssertionError("Unknown source info type " + sourceInfoType)
@@ -23,20 +23,20 @@ fun main(args: Array<String>) {
         exception()
     }
     catch (e:Exception) {
-        val stackTrace = e.getStackTrace()
+        konst stackTrace = e.getStackTrace()
         actualInlinesCount = stackTrace.count { it.contains("[inlined]")}
         stackTrace.take(expectedExceptionContrFrames + 2).forEach(::checkFrame)
     }
     assertEquals(expectedInlinesCount, actualInlinesCount)
 }
-internal val regex = Regex("^(\\d+)\\ +.*/(.*):(\\d+):.*$")
-internal fun checkFrame(value:String) {
-    val goldValues = arrayOf<Pair<String, Int>?>(
+internal konst regex = Regex("^(\\d+)\\ +.*/(.*):(\\d+):.*$")
+internal fun checkFrame(konstue:String) {
+    konst goldValues = arrayOf<Pair<String, Int>?>(
             *arrayOfNulls(expectedExceptionContrFrames),
             *arrayOfNulls(expectedInlinesCount),
             "stack_trace_inline.kt" to 8,
             "stack_trace_inline.kt" to 23)
-    val (pos, file, line) = regex.find(value)!!.destructured
+    konst (pos, file, line) = regex.find(konstue)!!.destructured
     goldValues[pos.toInt()]?.let {
         assertEquals(it.first, file)
         assertEquals(it.second, line.toInt())

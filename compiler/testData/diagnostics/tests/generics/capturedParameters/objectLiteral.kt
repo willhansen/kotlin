@@ -5,7 +5,7 @@ fun <T> magic(): T = null!!
 class Q {
     private fun <E> foo() =
         object {
-            val prop: E = magic()
+            konst prop: E = magic()
         }
 
     private var x = <!DEBUG_INFO_LEAKING_THIS!>foo<!><CharSequence>()

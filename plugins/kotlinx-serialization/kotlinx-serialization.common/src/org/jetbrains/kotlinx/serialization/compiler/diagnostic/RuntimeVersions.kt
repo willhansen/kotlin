@@ -13,14 +13,14 @@ import org.jetbrains.kotlin.load.kotlin.KotlinJvmBinarySourceElement
 import java.io.File
 import java.util.jar.Attributes
 
-data class RuntimeVersions(val implementationVersion: ApiVersion?, val requireKotlinVersion: ApiVersion?) {
+data class RuntimeVersions(konst implementationVersion: ApiVersion?, konst requireKotlinVersion: ApiVersion?) {
     companion object {
-        val MINIMAL_SUPPORTED_VERSION = ApiVersion.parse("1.0-M1-SNAPSHOT")!!
-        val MINIMAL_VERSION_FOR_INLINE_CLASSES = ApiVersion.parse("1.1-M1-SNAPSHOT")!!
+        konst MINIMAL_SUPPORTED_VERSION = ApiVersion.parse("1.0-M1-SNAPSHOT")!!
+        konst MINIMAL_VERSION_FOR_INLINE_CLASSES = ApiVersion.parse("1.1-M1-SNAPSHOT")!!
     }
 
     fun currentCompilerMatchRequired(): Boolean {
-        val current = requireNotNull(KotlinCompilerVersion.getVersion()?.let(ApiVersion.Companion::parse))
+        konst current = requireNotNull(KotlinCompilerVersion.getVersion()?.let(ApiVersion.Companion::parse))
         return requireKotlinVersion == null || requireKotlinVersion <= current
     }
 
@@ -30,27 +30,27 @@ data class RuntimeVersions(val implementationVersion: ApiVersion?, val requireKo
 }
 
 object CommonVersionReader {
-    private val REQUIRE_KOTLIN_VERSION = Attributes.Name("Require-Kotlin-Version")
-    private const val CLASS_SUFFIX = "!/kotlinx/serialization/KSerializer.class"
+    private konst REQUIRE_KOTLIN_VERSION = Attributes.Name("Require-Kotlin-Version")
+    private const konst CLASS_SUFFIX = "!/kotlinx/serialization/KSerializer.class"
 
     fun computeRuntimeVersions(sourceElement: SourceElement?): RuntimeVersions? {
-        val location = (sourceElement as? KotlinJvmBinarySourceElement)?.binaryClass?.location ?: return null
-        val jarFile = location.removeSuffix(CLASS_SUFFIX)
+        konst location = (sourceElement as? KotlinJvmBinarySourceElement)?.binaryClass?.location ?: return null
+        konst jarFile = location.removeSuffix(CLASS_SUFFIX)
         if (!jarFile.endsWith(".jar")) return null
-        val file = File(jarFile)
+        konst file = File(jarFile)
         if (!file.exists()) return null
         return getVersionsFromManifest(file)
     }
 
     fun getVersionsFromManifest(runtimeLibraryPath: File): RuntimeVersions {
-        val version = JarUtil.getJarAttribute(runtimeLibraryPath, Attributes.Name.IMPLEMENTATION_VERSION)?.let(ApiVersion.Companion::parse)
-        val kotlinVersion = JarUtil.getJarAttribute(runtimeLibraryPath, REQUIRE_KOTLIN_VERSION)?.let(ApiVersion.Companion::parse)
+        konst version = JarUtil.getJarAttribute(runtimeLibraryPath, Attributes.Name.IMPLEMENTATION_VERSION)?.let(ApiVersion.Companion::parse)
+        konst kotlinVersion = JarUtil.getJarAttribute(runtimeLibraryPath, REQUIRE_KOTLIN_VERSION)?.let(ApiVersion.Companion::parse)
         return RuntimeVersions(version, kotlinVersion)
     }
 
     fun canSupportInlineClasses(currentVersion: RuntimeVersions?): Boolean {
         if (currentVersion == null) return true
-        val implVersion = currentVersion.implementationVersion ?: return false
+        konst implVersion = currentVersion.implementationVersion ?: return false
         return implVersion >= RuntimeVersions.MINIMAL_VERSION_FOR_INLINE_CLASSES
     }
 }

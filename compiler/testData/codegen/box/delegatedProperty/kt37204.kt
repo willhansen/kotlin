@@ -1,9 +1,9 @@
 // WITH_STDLIB
 
-val log = StringBuilder()
+konst log = StringBuilder()
 
 inline fun test() {
-    val localLazy by lazy {
+    konst localLazy by lazy {
         log.append("localLazy;")
         "v;"
     }
@@ -13,7 +13,7 @@ inline fun test() {
 
 fun box(): String {
     test()
-    val t = log.toString()
+    konst t = log.toString()
     if (t != "test;localLazy;v;")
         throw AssertionError(t)
     return "OK"

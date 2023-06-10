@@ -12,33 +12,33 @@
  */
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: SealedClass): Int = when (value_1) {
-    is SealedChild1 -> <!DEBUG_INFO_SMARTCAST!>value_1<!>.number
-    is SealedChild2 -> <!DEBUG_INFO_SMARTCAST!>value_1<!>.e1 + <!DEBUG_INFO_SMARTCAST!>value_1<!>.e2
-    is SealedChild3 -> <!DEBUG_INFO_SMARTCAST!>value_1<!>.m1 + <!DEBUG_INFO_SMARTCAST!>value_1<!>.m2
+fun case_1(konstue_1: SealedClass): Int = when (konstue_1) {
+    is SealedChild1 -> <!DEBUG_INFO_SMARTCAST!>konstue_1<!>.number
+    is SealedChild2 -> <!DEBUG_INFO_SMARTCAST!>konstue_1<!>.e1 + <!DEBUG_INFO_SMARTCAST!>konstue_1<!>.e2
+    is SealedChild3 -> <!DEBUG_INFO_SMARTCAST!>konstue_1<!>.m1 + <!DEBUG_INFO_SMARTCAST!>konstue_1<!>.m2
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: SealedClass): String = when (value_1) {
+fun case_2(konstue_1: SealedClass): String = when (konstue_1) {
     <!USELESS_IS_CHECK!>is SealedClass<!> -> ""
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(value_1: SealedClassWithMethods): String = when (value_1) {
-    is SealedWithMethodsChild1 -> <!DEBUG_INFO_SMARTCAST!>value_1<!>.m1()
-    is SealedWithMethodsChild2 -> <!DEBUG_INFO_SMARTCAST!>value_1<!>.m2()
-    is SealedWithMethodsChild3 -> <!DEBUG_INFO_SMARTCAST!>value_1<!>.m3()
+fun case_3(konstue_1: SealedClassWithMethods): String = when (konstue_1) {
+    is SealedWithMethodsChild1 -> <!DEBUG_INFO_SMARTCAST!>konstue_1<!>.m1()
+    is SealedWithMethodsChild2 -> <!DEBUG_INFO_SMARTCAST!>konstue_1<!>.m2()
+    is SealedWithMethodsChild3 -> <!DEBUG_INFO_SMARTCAST!>konstue_1<!>.m3()
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(value_1: SealedClassWithObjects): String = when (value_1) {
+fun case_4(konstue_1: SealedClassWithObjects): String = when (konstue_1) {
     SealedWithObjectsChild1 -> ""
     SealedWithObjectsChild2 -> ""
     SealedWithObjectsChild3 -> ""
 }
 
 // TESTCASE NUMBER: 5
-fun case_5(value_1: SealedClassMixed): String = when (value_1) {
+fun case_5(konstue_1: SealedClassMixed): String = when (konstue_1) {
     is SealedMixedChild1 -> ""
     is SealedMixedChild2 -> ""
     is SealedMixedChild3 -> ""
@@ -51,7 +51,7 @@ fun case_5(value_1: SealedClassMixed): String = when (value_1) {
  * TESTCASE NUMBER: 6
  * DISCUSSION: is it correct that objects can be checked using the type checking operator?
  */
-fun case_6(value_1: SealedClassMixed): String = when (value_1) {
+fun case_6(konstue_1: SealedClassMixed): String = when (konstue_1) {
     is SealedMixedChild1 -> ""
     is SealedMixedChild2 -> ""
     is SealedMixedChild3 -> ""
@@ -61,7 +61,7 @@ fun case_6(value_1: SealedClassMixed): String = when (value_1) {
 }
 
 // TESTCASE NUMBER: 7
-fun case_7(value_1: SealedClassEmpty): String = when (value_1) {
+fun case_7(konstue_1: SealedClassEmpty): String = when (konstue_1) {
     else -> ""
 }
 
@@ -70,7 +70,7 @@ fun case_7(value_1: SealedClassEmpty): String = when (value_1) {
  * UNEXPECTED BEHAVIOUR: must be exhaustive
  * ISSUES: KT-22996
  */
-fun case_8(value: SealedClass?): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
+fun case_8(konstue: SealedClass?): String = <!NO_ELSE_IN_WHEN!>when<!> (konstue) {
     is SealedChild1, !is SealedChild3?, <!USELESS_IS_CHECK!>is SealedChild3?<!> -> ""
 }
 
@@ -79,7 +79,7 @@ fun case_8(value: SealedClass?): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
  * UNEXPECTED BEHAVIOUR: must be exhaustive
  * ISSUES: KT-22996
  */
-fun case_9(value: SealedClass?): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
+fun case_9(konstue: SealedClass?): String = <!NO_ELSE_IN_WHEN!>when<!> (konstue) {
     is SealedChild1, !is SealedChild3 -> ""
     <!USELESS_IS_CHECK!>is SealedChild3?<!> -> ""
 }

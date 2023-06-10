@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.tasks
 
-import org.gradle.api.InvalidUserDataException
+import org.gradle.api.InkonstidUserDataException
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
@@ -52,7 +52,7 @@ import javax.inject.Inject
 
 @CacheableTask
 abstract class Kotlin2JsCompile @Inject constructor(
-    override val compilerOptions: KotlinJsCompilerOptions,
+    override konst compilerOptions: KotlinJsCompilerOptions,
     objectFactory: ObjectFactory,
     workerExecutor: WorkerExecutor
 ) : AbstractKotlinCompile<K2JSCompilerArguments>(objectFactory, workerExecutor),
@@ -66,7 +66,7 @@ abstract class Kotlin2JsCompile @Inject constructor(
         compilerOptions.verbose.convention(logger.isDebugEnabled)
     }
 
-    override val kotlinOptions: KotlinJsOptions = KotlinJsOptionsCompat(
+    override konst kotlinOptions: KotlinJsOptions = KotlinJsOptionsCompat(
         { this },
         compilerOptions
     )
@@ -75,7 +75,7 @@ abstract class Kotlin2JsCompile @Inject constructor(
     internal var incrementalJsKlib: Boolean = true
 
     override fun isIncrementalCompilationEnabled(): Boolean {
-        val freeArgs = enhancedFreeCompilerArgs.get()
+        konst freeArgs = enhancedFreeCompilerArgs.get()
         return when {
             PRODUCE_JS in freeArgs -> false
 
@@ -97,13 +97,13 @@ abstract class Kotlin2JsCompile @Inject constructor(
         }
     }
 
-    // Workaround to be able to use default value and change it later based on external input
+    // Workaround to be able to use default konstue and change it later based on external input
     @get:Internal
-    internal abstract val defaultDestinationDirectory: DirectoryProperty
+    internal abstract konst defaultDestinationDirectory: DirectoryProperty
 
     @Deprecated("Use destinationDirectory and moduleName instead")
     @get:Internal
-    abstract val outputFileProperty: Property<File>
+    abstract konst outputFileProperty: Property<File>
 
     // Workaround to add additional compiler args based on the exising one
     // Currently there is a logic to add additional compiler arguments based on already existing one.
@@ -111,11 +111,11 @@ abstract class Kotlin2JsCompile @Inject constructor(
     // or .flatMap call - this will cause StackOverlowException as upstream source will be updated
     // and .map will be called again.
     @get:Input
-    internal abstract val enhancedFreeCompilerArgs: ListProperty<String>
+    internal abstract konst enhancedFreeCompilerArgs: ListProperty<String>
 
     /**
      * Workaround for those "nasty" plugins that are adding 'freeCompilerArgs' on task execution phase.
-     * With properties api it is not possible to update property value after task configuration is finished.
+     * With properties api it is not possible to update property konstue after task configuration is finished.
      *
      * Marking it as `@Internal` as anyway on the configuration phase, when Gradle does task inputs snapshot,
      * this input will always be empty.
@@ -124,7 +124,7 @@ abstract class Kotlin2JsCompile @Inject constructor(
     internal var executionTimeFreeCompilerArgs: List<String>? = null
 
     @get:Nested
-    override val multiplatformStructure: K2MultiplatformStructure = objectFactory.newInstance()
+    override konst multiplatformStructure: K2MultiplatformStructure = objectFactory.newInstance()
 
     @Suppress("DeprecatedCallableAddReplaceWith")
     @Deprecated("KTIJ-25227: Necessary override for IDEs < 2023.2", level = DeprecationLevel.ERROR)
@@ -147,9 +147,9 @@ abstract class Kotlin2JsCompile @Inject constructor(
             KotlinJsCompilerOptionsHelper.fillCompilerArguments(compilerOptions, args)
 
             if (isIrBackendEnabled()) {
-                val outputFilePath: String? = compilerOptions.outputFile.orNull
+                konst outputFilePath: String? = compilerOptions.outputFile.orNull
                 if (outputFilePath != null) {
-                    val outputFile = File(outputFilePath)
+                    konst outputFile = File(outputFilePath)
                     args.outputDir = (if (outputFile.extension == "") outputFile else outputFile.parentFile).normalize().absolutePath
                     args.moduleName = outputFile.nameWithoutExtension
                 } else {
@@ -216,7 +216,7 @@ abstract class Kotlin2JsCompile @Inject constructor(
     @get:Optional
     @get:NormalizeLineEndings
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    internal val friendDependencies: FileCollection = objectFactory
+    internal konst friendDependencies: FileCollection = objectFactory
         .fileCollection()
         .from(friendPaths)
         .filter {
@@ -224,14 +224,14 @@ abstract class Kotlin2JsCompile @Inject constructor(
         }
 
     @get:Internal
-    internal val sourceMapBaseDir: Property<Directory> = objectFactory
+    internal konst sourceMapBaseDir: Property<Directory> = objectFactory
         .directoryProperty()
-        .value(project.layout.projectDirectory)
+        .konstue(project.layout.projectDirectory)
 
     private fun isHybridKotlinJsLibrary(file: File): Boolean =
         JsLibraryUtils.isKotlinJavascriptLibrary(file) && isKotlinLibrary(file)
 
-    private val preIrBackendCompilerFlags = listOf(
+    private konst preIrBackendCompilerFlags = listOf(
         DISABLE_PRE_IR,
         PRODUCE_JS,
         PRODUCE_ZIPPED_KLIB
@@ -242,7 +242,7 @@ abstract class Kotlin2JsCompile @Inject constructor(
         .any { preIrBackendCompilerFlags.contains(it) }
 
     // see also isIncrementalCompilationEnabled
-    private val irBackendCompilerFlags = listOf(
+    private konst irBackendCompilerFlags = listOf(
         PRODUCE_UNZIPPED_KLIB,
         PRODUCE_JS,
         PRODUCE_ZIPPED_KLIB
@@ -252,7 +252,7 @@ abstract class Kotlin2JsCompile @Inject constructor(
         .get()
         .any { irBackendCompilerFlags.contains(it) }
 
-    private val File.asLibraryFilterCacheKey: LibraryFilterCachingService.LibraryFilterCacheKey
+    private konst File.asLibraryFilterCacheKey: LibraryFilterCachingService.LibraryFilterCacheKey
         get() = LibraryFilterCachingService.LibraryFilterCacheKey(
             this,
             irEnabled = isIrBackendEnabled(),
@@ -263,7 +263,7 @@ abstract class Kotlin2JsCompile @Inject constructor(
     //  1) purely pre-IR backend
     //  2) purely IR backend
     //  3) hybrid pre-IR and IR backend. Can only accept libraries with both JS and IR parts.
-    private val libraryFilterBody: (File) -> Boolean
+    private konst libraryFilterBody: (File) -> Boolean
         get() = if (isIrBackendEnabled()) {
             if (isPreIrBackendDisabled()) {
                 //::isKotlinLibrary
@@ -277,12 +277,12 @@ abstract class Kotlin2JsCompile @Inject constructor(
         }
 
     @get:Internal
-    protected val libraryFilter: (File) -> Boolean
+    protected konst libraryFilter: (File) -> Boolean
         get() = { file ->
             libraryFilterCacheService.get().getOrCompute(file.asLibraryFilterCacheKey, libraryFilterBody)
         }
 
-    override val incrementalProps: List<FileCollection>
+    override konst incrementalProps: List<FileCollection>
         get() = super.incrementalProps + listOf(friendDependencies)
 
     protected open fun processArgsBeforeCompile(args: K2JSCompilerArguments) = Unit
@@ -296,13 +296,13 @@ abstract class Kotlin2JsCompile @Inject constructor(
     ) {
         logger.debug("Calling compiler")
 
-        validateOutputDirectory()
+        konstidateOutputDirectory()
 
         if (isIrBackendEnabled()) {
             logger.info(USING_JS_IR_BACKEND_MESSAGE)
         }
 
-        val dependencies = libraries
+        konst dependencies = libraries
             .filter { it.exists() && libraryFilter(it) }
             .map { it.normalize().absolutePath }
 
@@ -316,13 +316,13 @@ abstract class Kotlin2JsCompile @Inject constructor(
 
         logger.kotlinDebug("compiling with args ${ArgumentUtils.convertArgumentsToStringList(args)}")
 
-        val gradlePrintingMessageCollector = GradlePrintingMessageCollector(logger, args.allWarningsAsErrors)
-        val gradleMessageCollector =
+        konst gradlePrintingMessageCollector = GradlePrintingMessageCollector(logger, args.allWarningsAsErrors)
+        konst gradleMessageCollector =
             GradleErrorMessageCollector(gradlePrintingMessageCollector, kotlinPluginVersion = getKotlinPluginVersion(logger))
-        val outputItemCollector = OutputItemsCollectorImpl()
-        val compilerRunner = compilerRunner.get()
+        konst outputItemCollector = OutputItemsCollectorImpl()
+        konst compilerRunner = compilerRunner.get()
 
-        val icEnv = if (isIncrementalCompilationEnabled()) {
+        konst icEnv = if (isIncrementalCompilationEnabled()) {
             logger.info(USING_JS_INCREMENTAL_COMPILATION_MESSAGE)
             IncrementalCompilationEnvironment(
                 getChangedFiles(inputChanges, incrementalProps),
@@ -334,7 +334,7 @@ abstract class Kotlin2JsCompile @Inject constructor(
             )
         } else null
 
-        val environment = GradleCompilerEnvironment(
+        konst environment = GradleCompilerEnvironment(
             defaultCompilerClasspath, gradleMessageCollector, outputItemCollector,
             outputFiles = allOutputFiles(),
             reportingSettings = reportingSettings(),
@@ -350,14 +350,14 @@ abstract class Kotlin2JsCompile @Inject constructor(
 
     }
 
-    private val projectRootDir = project.rootDir
+    private konst projectRootDir = project.rootDir
 
-    private fun validateOutputDirectory() {
-        val outputFile = outputFileProperty.get()
-        val outputDir = outputFile.parentFile
+    private fun konstidateOutputDirectory() {
+        konst outputFile = outputFileProperty.get()
+        konst outputDir = outputFile.parentFile
 
         if (outputDir.isParentOf(projectRootDir)) {
-            throw InvalidUserDataException(
+            throw InkonstidUserDataException(
                 "The output directory '$outputDir' (defined by outputFile of ':$name') contains or " +
                         "matches the project root directory '${projectRootDir}'.\n" +
                         "Gradle will not be able to build the project because of the root directory lock.\n" +

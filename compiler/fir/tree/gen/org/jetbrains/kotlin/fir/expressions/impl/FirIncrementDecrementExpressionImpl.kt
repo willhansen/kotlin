@@ -24,12 +24,12 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirIncrementDecrementExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val isPrefix: Boolean,
-    override val operationName: Name,
+    override konst isPrefix: Boolean,
+    override konst operationName: Name,
     override var expression: FirExpression,
-    override val operationSource: KtSourceElement?,
+    override konst operationSource: KtSourceElement?,
 ) : FirIncrementDecrementExpression() {
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
 

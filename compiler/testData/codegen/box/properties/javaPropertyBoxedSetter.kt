@@ -4,21 +4,21 @@
 
 public class JavaClass {
 
-    private boolean value;
+    private boolean konstue;
 
     public boolean isValue() {
-        return value;
+        return konstue;
     }
 
-    public void setValue(Boolean value) {
-        this.value = value;
+    public void setValue(Boolean konstue) {
+        this.konstue = konstue;
     }
 }
 
 // FILE: kotlin.kt
 
 fun box(): String {
-    val javaClass = JavaClass()
+    konst javaClass = JavaClass()
 
     if (javaClass.isValue != false) return "fail 1"
 

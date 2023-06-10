@@ -196,8 +196,8 @@ public final class TranslationUtils {
         JsExpression thenExpression;
         if (isCacheNeeded(expression)) {
             TemporaryConstVariable tempVar = context.getOrDeclareTemporaryConstVariable(expression);
-            testExpression = isNotNullCheck(tempVar.value());
-            thenExpression = tempVar.value();
+            testExpression = isNotNullCheck(tempVar.konstue());
+            thenExpression = tempVar.konstue();
         }
         else {
             testExpression = isNotNullCheck(expression);
@@ -495,34 +495,34 @@ public final class TranslationUtils {
     }
 
     @NotNull
-    public static JsExpression coerce(@NotNull TranslationContext context, @NotNull JsExpression value, @NotNull KotlinType to) {
-        if (DynamicTypesKt.isDynamic(to)) return value;
+    public static JsExpression coerce(@NotNull TranslationContext context, @NotNull JsExpression konstue, @NotNull KotlinType to) {
+        if (DynamicTypesKt.isDynamic(to)) return konstue;
 
-        KotlinType from = MetadataProperties.getType(value);
+        KotlinType from = MetadataProperties.getType(konstue);
         if (from == null) {
             from = context.getCurrentModule().getBuiltIns().getAnyType();
         }
 
-        if (from.equals(to)) return value;
+        if (from.equals(to)) return konstue;
 
         if (KotlinBuiltIns.isCharOrNullableChar(to)) {
-            if (!KotlinBuiltIns.isCharOrNullableChar(from) && !(value instanceof JsNullLiteral)) {
-                value = boxedCharToChar(context, value);
+            if (!KotlinBuiltIns.isCharOrNullableChar(from) && !(konstue instanceof JsNullLiteral)) {
+                konstue = boxedCharToChar(context, konstue);
             }
         }
         else if (KotlinBuiltIns.isUnit(to)) {
             if (!KotlinBuiltIns.isUnit(from)) {
-                value = unitToVoid(value);
+                konstue = unitToVoid(konstue);
             }
         }
         else if (KotlinBuiltIns.isCharOrNullableChar(from)) {
-            if (!KotlinBuiltIns.isCharOrNullableChar(to) && !(value instanceof JsNullLiteral)) {
-                value = charToBoxedChar(context, value);
+            if (!KotlinBuiltIns.isCharOrNullableChar(to) && !(konstue instanceof JsNullLiteral)) {
+                konstue = charToBoxedChar(context, konstue);
             }
         }
         else if (KotlinBuiltIns.isUnit(from)) {
-            if (!KotlinBuiltIns.isUnit(to) && !MetadataProperties.isUnit(value)) {
-                value = voidToUnit(context, value);
+            if (!KotlinBuiltIns.isUnit(to) && !MetadataProperties.isUnit(konstue)) {
+                konstue = voidToUnit(context, konstue);
             }
         }
 
@@ -531,16 +531,16 @@ public final class TranslationUtils {
             if (KotlinBuiltIns.isInt(from)) {
                 switch (signedPrimitiveFromUnsigned) {
                     case BYTE:
-                        value = AstUtilsKt.toByte(context, value);
+                        konstue = AstUtilsKt.toByte(context, konstue);
                         break;
                     case SHORT:
-                        value = AstUtilsKt.toShort(context, value);
+                        konstue = AstUtilsKt.toShort(context, konstue);
                         break;
                 }
                 DeclarationDescriptor d = to.getConstructor().getDeclarationDescriptor();
                 if (d instanceof ClassDescriptor) {
-                    value =  new JsNew(ReferenceTranslator.translateAsTypeReference((ClassDescriptor) d, context),
-                                     Collections.singletonList(value));
+                    konstue =  new JsNew(ReferenceTranslator.translateAsTypeReference((ClassDescriptor) d, context),
+                                     Collections.singletonList(konstue));
                 }
             }
         }
@@ -551,17 +551,17 @@ public final class TranslationUtils {
             if (d instanceof ClassDescriptor && ((ClassDescriptor)d).isFun()) {
                 JsName constructorName = context.getInlineableInnerNameForDescriptor(d.getOriginal());
                 if (to.isMarkedNullable()) {
-                    JsConditional c = TranslationUtils.notNullConditional(value, new JsNullLiteral(), context);
+                    JsConditional c = TranslationUtils.notNullConditional(konstue, new JsNullLiteral(), context);
                     c.setThenExpression(new JsNew(new JsNameRef(constructorName), Collections.singletonList(c.getThenExpression())));
-                    value = c;
+                    konstue = c;
                 } else {
-                    value = new JsNew(new JsNameRef(constructorName), Collections.singletonList(value));
+                    konstue = new JsNew(new JsNameRef(constructorName), Collections.singletonList(konstue));
                 }
             }
         }
 
-        MetadataProperties.setType(value, to);
-        return value;
+        MetadataProperties.setType(konstue, to);
+        return konstue;
     }
 
     @NotNull

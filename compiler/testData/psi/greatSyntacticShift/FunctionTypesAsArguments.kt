@@ -1,5 +1,5 @@
-val commands = java.util.HashMap<String, () -> Unit>()   // multiple errors
+konst commands = java.util.HashMap<String, () -> Unit>()   // multiple errors
 
 class Lifetime{
- val attached = ArrayList<()->Unit>()
+ konst attached = ArrayList<()->Unit>()
 }

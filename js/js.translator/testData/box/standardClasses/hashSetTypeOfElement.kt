@@ -5,22 +5,22 @@ package foo
 
 fun box(): String {
 
-    val x = true
-    val y = false
+    konst x = true
+    konst y = false
 
-    val intSet = HashSet<Int>()
+    konst intSet = HashSet<Int>()
     intSet.add(1)
     assertEquals("number", jsTypeOf (intSet.iterator().next()), "intSet")
 
-    val shortSet = HashSet<Short>()
+    konst shortSet = HashSet<Short>()
     shortSet.add(1.toShort())
     assertEquals("number", jsTypeOf (shortSet.iterator().next()), "shortSet")
 
-    val byteSet = HashSet<Byte>()
+    konst byteSet = HashSet<Byte>()
     byteSet.add(1.toByte())
     assertEquals("number", jsTypeOf (byteSet.iterator().next()), "byteSet")
 
-    val doubleSet = HashSet<Double>()
+    konst doubleSet = HashSet<Double>()
     doubleSet.add(1.0)
     assertEquals("number", jsTypeOf (doubleSet.iterator().next()), "doubleSet")
 
@@ -36,7 +36,7 @@ fun box(): String {
     doubleSet.add(-1.0 / 0.0)
     assertEquals("number", jsTypeOf (doubleSet.iterator().next()), "dNegativeInfinity")
 
-    val floatSet = HashSet<Float>()
+    konst floatSet = HashSet<Float>()
     floatSet.add(1.0f)
     assertEquals("number", jsTypeOf (floatSet.iterator().next()), "floatSet")
 
@@ -52,19 +52,19 @@ fun box(): String {
     floatSet.add(-1.0f / 0.0f)
     assertEquals("number", jsTypeOf (floatSet.iterator().next()), "fNegativeInfinity")
 
-    val charSet = HashSet<Char>()
+    konst charSet = HashSet<Char>()
     charSet.add('A')
     assertEquals("object", jsTypeOf (charSet.iterator().next()), "charSet")
 
-    val longSet = HashSet<Long>()
+    konst longSet = HashSet<Long>()
     longSet.add(1L)
     assertEquals("object", jsTypeOf (longSet.iterator().next()), "longSet")
 
-    val booleanSet = HashSet<Boolean>()
+    konst booleanSet = HashSet<Boolean>()
     booleanSet.add(true)
     assertEquals("boolean", jsTypeOf (booleanSet.iterator().next()), "booleanSet")
 
-    val stringSet = HashSet<String>()
+    konst stringSet = HashSet<String>()
     stringSet.add("text")
     assertEquals("string", jsTypeOf (stringSet.iterator().next()), "stringSet")
 

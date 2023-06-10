@@ -1,5 +1,5 @@
 // LL_FIR_DIVERGENCE
-// The compiler doesn't guarantee exhaustiveness in reporting of inheritance cycles, so the compiler and LL FIR results are equally valid.
+// The compiler doesn't guarantee exhaustiveness in reporting of inheritance cycles, so the compiler and LL FIR results are equally konstid.
 // LL_FIR_DIVERGENCE
 // FILE: ExceptionTracker.kt
 

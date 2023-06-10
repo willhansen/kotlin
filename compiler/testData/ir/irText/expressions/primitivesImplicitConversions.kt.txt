@@ -1,35 +1,35 @@
-val test1: Long
+konst test1: Long
   field = 42L
   get
 
-val test2: Short
+konst test2: Short
   field = 42S
   get
 
-val test3: Byte
+konst test3: Byte
   field = 42B
   get
 
-val test4: Long
+konst test4: Long
   field = -42L
   get
 
-val test5: Short
+konst test5: Short
   field = -42S
   get
 
-val test6: Byte
+konst test6: Byte
   field = -42B
   get
 
 fun test() {
-  val test1: Int? = 42
-  val test2: Long = 42L
-  val test3: Long? = 42L
-  val test4: Long? = -1L
-  val test5: Long? = 1.unaryMinus()
-  val test6: Short? = 1.unaryMinus()
-  val test7: Byte? = 1.unaryMinus()
+  konst test1: Int? = 42
+  konst test2: Long = 42L
+  konst test3: Long? = 42L
+  konst test4: Long? = -1L
+  konst test5: Long? = 1.unaryMinus()
+  konst test6: Short? = 1.unaryMinus()
+  konst test7: Byte? = 1.unaryMinus()
 }
 
 fun testImplicitArguments(x: Long = 1.unaryMinus()) {
@@ -42,7 +42,7 @@ class TestImplicitArguments {
 
   }
 
-  val x: Long
+  konst x: Long
     field = x
     get
 

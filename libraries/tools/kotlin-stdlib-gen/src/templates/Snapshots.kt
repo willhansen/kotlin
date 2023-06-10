@@ -18,7 +18,7 @@ object Snapshots : TemplateGroupBase() {
         }
     }
 
-    val f_toCollection = fn("toCollection(destination: C)") {
+    konst f_toCollection = fn("toCollection(destination: C)") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -37,19 +37,19 @@ object Snapshots : TemplateGroupBase() {
 
     private fun optimizedSequenceToCollection(emptyFactory: String, singleElementFactory: String, dstType: String) =
         """
-        val it = iterator()
+        konst it = iterator()
         if (!it.hasNext())
             return $emptyFactory()
-        val element = it.next()
+        konst element = it.next()
         if (!it.hasNext())
             return $singleElementFactory(element)
-        val dst = $dstType<T>()
+        konst dst = $dstType<T>()
         dst.add(element)
         while (it.hasNext()) dst.add(it.next())
         return dst
         """
 
-    val f_toSet = fn("toSet()") {
+    konst f_toSet = fn("toSet()") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -75,8 +75,8 @@ object Snapshots : TemplateGroupBase() {
         }
         body(Sequences) { optimizedSequenceToCollection("emptySet", "setOf", "LinkedHashSet") }
         body(CharSequences, ArraysOfObjects, ArraysOfPrimitives) {
-            val size = f.code.size
-            val capacity = if (f == CharSequences || primitive == PrimitiveType.Char) "$size.coerceAtMost(128)" else size
+            konst size = f.code.size
+            konst capacity = if (f == CharSequences || primitive == PrimitiveType.Char) "$size.coerceAtMost(128)" else size
             """
             return when ($size) {
                 0 -> emptySet()
@@ -87,7 +87,7 @@ object Snapshots : TemplateGroupBase() {
         }
     }
 
-    val f_toHashSet = fn("toHashSet()") {
+    konst f_toHashSet = fn("toHashSet()") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -96,13 +96,13 @@ object Snapshots : TemplateGroupBase() {
         body { "return toCollection(HashSet<T>(mapCapacity(collectionSizeOrDefault(12))))" }
         body(Sequences) { "return toCollection(HashSet<T>())" }
         body(CharSequences, ArraysOfObjects, ArraysOfPrimitives) {
-            val size = f.code.size
-            val capacity = if (f == CharSequences || primitive == PrimitiveType.Char) "$size.coerceAtMost(128)" else size
+            konst size = f.code.size
+            konst capacity = if (f == CharSequences || primitive == PrimitiveType.Char) "$size.coerceAtMost(128)" else size
             "return toCollection(HashSet<T>(mapCapacity($capacity)))"
         }
     }
 
-    val f_toSortedSet = fn("toSortedSet()") {
+    konst f_toSortedSet = fn("toSortedSet()") {
         includeDefault()
         include(CharSequences)
         platforms(Platform.JVM)
@@ -113,7 +113,7 @@ object Snapshots : TemplateGroupBase() {
         body { "return toCollection(java.util.TreeSet<T>())" }
     }
 
-    val f_toSortedSet_comparator = fn("toSortedSet(comparator: Comparator<in T>)") {
+    konst f_toSortedSet_comparator = fn("toSortedSet(comparator: Comparator<in T>)") {
         include(Iterables, ArraysOfObjects, Sequences)
         platforms(Platform.JVM)
     } builder {
@@ -128,7 +128,7 @@ object Snapshots : TemplateGroupBase() {
         body { "return toCollection(java.util.TreeSet<T>(comparator))" }
     }
 
-    val f_toMutableList = fn("toMutableList()") {
+    konst f_toMutableList = fn("toMutableList()") {
         includeDefault()
         include(Collections, CharSequences)
     } builder {
@@ -147,14 +147,14 @@ object Snapshots : TemplateGroupBase() {
         body(ArraysOfObjects) { "return ArrayList(this.asCollection())" }
         body(ArraysOfPrimitives) {
             """
-            val list = ArrayList<T>(size)
+            konst list = ArrayList<T>(size)
             for (item in this) list.add(item)
             return list
             """
         }
     }
 
-    val f_toList = fn("toList()") {
+    konst f_toList = fn("toList()") {
         includeDefault()
         include(Maps, CharSequences)
     } builder {
@@ -184,19 +184,19 @@ object Snapshots : TemplateGroupBase() {
         }
         body(Sequences) { optimizedSequenceToCollection("emptyList", "listOf", "ArrayList") }
         specialFor(Maps) {
-            doc { "Returns a [List] containing all key-value pairs." }
+            doc { "Returns a [List] containing all key-konstue pairs." }
             returns("List<Pair<K, V>>")
             body {
                 """
                 if (size == 0)
                     return emptyList()
-                val iterator = entries.iterator()
+                konst iterator = entries.iterator()
                 if (!iterator.hasNext())
                     return emptyList()
-                val first = iterator.next()
+                konst first = iterator.next()
                 if (!iterator.hasNext())
                     return listOf(first.toPair())
-                val result = ArrayList<Pair<K, V>>(size)
+                konst result = ArrayList<Pair<K, V>>(size)
                 result.add(first.toPair())
                 do {
                     result.add(iterator.next().toPair())
@@ -207,7 +207,7 @@ object Snapshots : TemplateGroupBase() {
         }
     }
 
-    val f_associate = fn("associate(transform: (T) -> Pair<K, V>)") {
+    konst f_associate = fn("associate(transform: (T) -> Pair<K, V>)") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -217,7 +217,7 @@ object Snapshots : TemplateGroupBase() {
         returns("Map<K, V>")
         doc {
             """
-            Returns a [Map] containing key-value pairs provided by [transform] function
+            Returns a [Map] containing key-konstue pairs provided by [transform] function
             applied to ${f.element.pluralize()} of the given ${f.collection}.
 
             If any of two pairs would have the same key the last one gets added to the map.
@@ -232,7 +232,7 @@ object Snapshots : TemplateGroupBase() {
         })
         body {
             """
-            val capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
+            konst capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
             return associateTo(LinkedHashMap<K, V>(capacity), transform)
             """
         }
@@ -243,19 +243,19 @@ object Snapshots : TemplateGroupBase() {
         }
         body(CharSequences) {
             """
-            val capacity = mapCapacity(length).coerceAtLeast(16)
+            konst capacity = mapCapacity(length).coerceAtLeast(16)
             return associateTo(LinkedHashMap<K, V>(capacity), transform)
             """
         }
         body(ArraysOfObjects, ArraysOfPrimitives) {
             """
-            val capacity = mapCapacity(size).coerceAtLeast(16)
+            konst capacity = mapCapacity(size).coerceAtLeast(16)
             return associateTo(LinkedHashMap<K, V>(capacity), transform)
             """
         }
     }
 
-    val f_associateTo = fn("associateTo(destination: M, transform: (T) -> Pair<K, V>)") {
+    konst f_associateTo = fn("associateTo(destination: M, transform: (T) -> Pair<K, V>)") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -266,7 +266,7 @@ object Snapshots : TemplateGroupBase() {
         returns("M")
         doc {
             """
-            Populates and returns the [destination] mutable map with key-value pairs
+            Populates and returns the [destination] mutable map with key-konstue pairs
             provided by [transform] function applied to each ${f.element} of the given ${f.collection}.
 
             If any of two pairs would have the same key the last one gets added to the map.
@@ -287,7 +287,7 @@ object Snapshots : TemplateGroupBase() {
         }
     }
 
-    val f_associateBy_key = fn("associateBy(keySelector: (T) -> K)") {
+    konst f_associateBy_key = fn("associateBy(keySelector: (T) -> K)") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -314,7 +314,7 @@ object Snapshots : TemplateGroupBase() {
         // constructor.
         body {
             """
-            val capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
+            konst capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
             return associateByTo(LinkedHashMap<K, T>(capacity), keySelector)
             """
         }
@@ -325,19 +325,19 @@ object Snapshots : TemplateGroupBase() {
         }
         body(CharSequences) {
             """
-            val capacity = mapCapacity(length).coerceAtLeast(16)
+            konst capacity = mapCapacity(length).coerceAtLeast(16)
             return associateByTo(LinkedHashMap<K, T>(capacity), keySelector)
             """
         }
         body(ArraysOfObjects, ArraysOfPrimitives) {
             """
-            val capacity = mapCapacity(size).coerceAtLeast(16)
+            konst capacity = mapCapacity(size).coerceAtLeast(16)
             return associateByTo(LinkedHashMap<K, T>(capacity), keySelector)
             """
         }
     }
 
-    val f_associateByTo_key = fn("associateByTo(destination: M, keySelector: (T) -> K)") {
+    konst f_associateByTo_key = fn("associateByTo(destination: M, keySelector: (T) -> K)") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -347,9 +347,9 @@ object Snapshots : TemplateGroupBase() {
         returns("M")
         doc {
             """
-            Populates and returns the [destination] mutable map with key-value pairs,
+            Populates and returns the [destination] mutable map with key-konstue pairs,
             where key is provided by the [keySelector] function applied to each ${f.element} of the given ${f.collection}
-            and value is the ${f.element} itself.
+            and konstue is the ${f.element} itself.
 
             If any two ${f.element.pluralize()} would have the same key returned by [keySelector] the last one gets added to the map.
             """
@@ -369,7 +369,7 @@ object Snapshots : TemplateGroupBase() {
         }
     }
 
-    val f_associateBy_key_value = fn("associateBy(keySelector: (T) -> K, valueTransform: (T) -> V)") {
+    konst f_associateBy_key_konstue = fn("associateBy(keySelector: (T) -> K, konstueTransform: (T) -> V)") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -378,7 +378,7 @@ object Snapshots : TemplateGroupBase() {
         typeParam("V")
         doc {
             """
-            Returns a [Map] containing the values provided by [valueTransform] and indexed by [keySelector] functions applied to ${f.element.pluralize()} of the given ${f.collection}.
+            Returns a [Map] containing the konstues provided by [konstueTransform] and indexed by [keySelector] functions applied to ${f.element.pluralize()} of the given ${f.collection}.
 
             If any two ${f.element.pluralize()} would have the same key returned by [keySelector] the last one gets added to the map.
 
@@ -399,30 +399,30 @@ object Snapshots : TemplateGroupBase() {
 
         body {
             """
-            val capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
-            return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, valueTransform)
+            konst capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
+            return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, konstueTransform)
             """
         }
         body(Sequences) {
             """
-            return associateByTo(LinkedHashMap<K, V>(), keySelector, valueTransform)
+            return associateByTo(LinkedHashMap<K, V>(), keySelector, konstueTransform)
             """
         }
         body(CharSequences) {
             """
-            val capacity = mapCapacity(length).coerceAtLeast(16)
-            return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, valueTransform)
+            konst capacity = mapCapacity(length).coerceAtLeast(16)
+            return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, konstueTransform)
             """
         }
         body(ArraysOfObjects, ArraysOfPrimitives) {
             """
-            val capacity = mapCapacity(size).coerceAtLeast(16)
-            return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, valueTransform)
+            konst capacity = mapCapacity(size).coerceAtLeast(16)
+            return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, konstueTransform)
             """
         }
     }
 
-    val f_associateByTo_key_value = fn("associateByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V)") {
+    konst f_associateByTo_key_konstue = fn("associateByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V)") {
         includeDefault()
         include(CharSequences)
     } builder {
@@ -434,9 +434,9 @@ object Snapshots : TemplateGroupBase() {
 
         doc {
             """
-            Populates and returns the [destination] mutable map with key-value pairs,
+            Populates and returns the [destination] mutable map with key-konstue pairs,
             where key is provided by the [keySelector] function and
-            and value is provided by the [valueTransform] function applied to ${f.element.pluralize()} of the given ${f.collection}.
+            and konstue is provided by the [konstueTransform] function applied to ${f.element.pluralize()} of the given ${f.collection}.
 
             If any two ${f.element.pluralize()} would have the same key returned by [keySelector] the last one gets added to the map.
             """
@@ -449,14 +449,14 @@ object Snapshots : TemplateGroupBase() {
         body {
             """
             for (element in this) {
-                destination.put(keySelector(element), valueTransform(element))
+                destination.put(keySelector(element), konstueTransform(element))
             }
             return destination
             """
         }
     }
 
-    val f_associateWith = fn("associateWith(valueSelector: (K) -> V)") {
+    konst f_associateWith = fn("associateWith(konstueSelector: (K) -> V)") {
         include(Iterables, Sequences, CharSequences, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -470,8 +470,8 @@ object Snapshots : TemplateGroupBase() {
         returns("Map<K, V>")
         doc {
             """
-            Returns a [Map] where keys are ${f.element.pluralize()} from the given ${f.collection} and values are
-            produced by the [valueSelector] function applied to each ${f.element}.
+            Returns a [Map] where keys are ${f.element.pluralize()} from the given ${f.collection} and konstues are
+            produced by the [konstueSelector] function applied to each ${f.element}.
 
             If any two ${f.element.pluralize()} are equal, the last one gets added to the map.
 
@@ -483,7 +483,7 @@ object Snapshots : TemplateGroupBase() {
             else -> "samples.collections.Collections.Transformations.associateWith"
         })
         body {
-            val capacity = when (family) {
+            konst capacity = when (family) {
                 Iterables -> "mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)"
                 CharSequences -> "mapCapacity(length.coerceAtMost(128)).coerceAtLeast(16)"
                 ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned -> if (primitive == PrimitiveType.Char) {
@@ -494,13 +494,13 @@ object Snapshots : TemplateGroupBase() {
                 else -> ""
             }
             """
-            val result = LinkedHashMap<K, V>($capacity)
-            return associateWithTo(result, valueSelector)
+            konst result = LinkedHashMap<K, V>($capacity)
+            return associateWithTo(result, konstueSelector)
             """
         }
     }
 
-    val f_associateWithTo = fn("associateWithTo(destination: M, valueSelector: (K) -> V)") {
+    konst f_associateWithTo = fn("associateWithTo(destination: M, konstueSelector: (K) -> V)") {
         include(Iterables, Sequences, CharSequences, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -515,10 +515,10 @@ object Snapshots : TemplateGroupBase() {
         returns("M")
         doc {
             """
-            Populates and returns the [destination] mutable map with key-value pairs for each ${f.element} of the given ${f.collection},
-            where key is the ${f.element} itself and value is provided by the [valueSelector] function applied to that key.
+            Populates and returns the [destination] mutable map with key-konstue pairs for each ${f.element} of the given ${f.collection},
+            where key is the ${f.element} itself and konstue is provided by the [konstueSelector] function applied to that key.
 
-            If any two ${f.element.pluralize()} are equal, the last one overwrites the former value in the map.
+            If any two ${f.element.pluralize()} are equal, the last one overwrites the former konstue in the map.
             """
         }
         sample(when (family) {
@@ -528,7 +528,7 @@ object Snapshots : TemplateGroupBase() {
         body {
             """
             for (element in this) {
-                destination.put(element, valueSelector(element))
+                destination.put(element, konstueSelector(element))
             }
             return destination
             """

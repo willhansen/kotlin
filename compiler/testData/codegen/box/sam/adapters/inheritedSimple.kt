@@ -16,7 +16,7 @@ class Sub extends Super {
 
 fun box(): String {
     var r = "FAIL"
-    val sub = Sub()
+    konst sub = Sub()
     sub.safeInvoke(null)
     sub.safeInvoke { r = "OK" }
     return r

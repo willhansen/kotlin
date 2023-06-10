@@ -29,7 +29,7 @@ class Kotlin {
     fun foo() = bar()
 
     @JvmField
-    val field = bar()
+    konst field = bar()
 }
 
 fun box(): String {

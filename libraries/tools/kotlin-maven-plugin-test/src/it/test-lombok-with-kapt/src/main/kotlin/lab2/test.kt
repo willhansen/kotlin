@@ -5,20 +5,20 @@ import com.squareup.moshi.Moshi
 
 @JsonClass(generateAdapter = true)
 data class SomeObj(
-    val hidden: Boolean,
-    val names: List<String>
+    konst hidden: Boolean,
+    konst names: List<String>
 )
 
 fun main() {
 
-    val json = """
+    konst json = """
         {
             "hidden": true,
             "names": ["a", "b"]
         }
     """.trimIndent()
 
-    val moshi: Moshi = Moshi.Builder().build()
-    val adapter = moshi.adapter(SomeObj::class.java)
+    konst moshi: Moshi = Moshi.Builder().build()
+    konst adapter = moshi.adapter(SomeObj::class.java)
     println(adapter.fromJson(json))
 }

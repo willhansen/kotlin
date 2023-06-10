@@ -8,29 +8,29 @@
  * UNEXPECTED BEHAVIOUR
  */
 
-val value = 0...1f
-val value = 1…1f
-val value = 000:1F
-val value = 2•0F
-val value = 00·0f
-val value = 300‚1F
-val value = 0000°1f
-val value = 1●1F
-val value = 8☺10f
+konst konstue = 0...1f
+konst konstue = 1…1f
+konst konstue = 000:1F
+konst konstue = 2•0F
+konst konstue = 00·0f
+konst konstue = 300‚1F
+konst konstue = 0000°1f
+konst konstue = 1●1F
+konst konstue = 8☺10f
 
-val value = 1. 2f
-val value = 1 . 2f
-val value = 1 .2F
-val value = 1	.2f
-val value = 1	.	2F
-val value = 1.	2f
-val value = 1
+konst konstue = 1. 2f
+konst konstue = 1 . 2f
+konst konstue = 1 .2F
+konst konstue = 1	.2f
+konst konstue = 1	.	2F
+konst konstue = 1.	2f
+konst konstue = 1
 .2F
-val value = 1.
+konst konstue = 1.
     2F
-val value = 1.
+konst konstue = 1.
     2f
-val value = 1
+konst konstue = 1
 .2f
-val value = 1.35f
-val value = 3.5F
+konst konstue = 1.35f
+konst konstue = 3.5F

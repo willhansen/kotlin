@@ -25,7 +25,7 @@ local open class .LocalClassInSignatureKt$test$Local : kotlin/Any {
 
   // field: returnType:LLocalClassInSignatureKt$test$Local;
   // getter: getReturnType()LLocalClassInSignatureKt$test$Local;
-  public final val returnType: .LocalClassInSignatureKt$test$Local
+  public final konst returnType: .LocalClassInSignatureKt$test$Local
     public final get
 
   // module name: test-module

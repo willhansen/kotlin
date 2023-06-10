@@ -48,6 +48,6 @@ package libPackagecase2
 import testscase2.*
 private fun <T> listOf(vararg elements1: T): List<T> = TODO()
 
-private val Case2.listOf: A
+private konst Case2.listOf: A
     get() = A()
 

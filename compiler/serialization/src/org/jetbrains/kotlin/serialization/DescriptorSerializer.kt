@@ -46,17 +46,17 @@ import org.jetbrains.kotlin.types.typeUtil.replaceAnnotations
 import java.util.*
 
 class DescriptorSerializer private constructor(
-    private val containingDeclaration: DeclarationDescriptor?,
-    private val typeParameters: Interner<TypeParameterDescriptor>,
-    private val extension: SerializerExtension,
-    val typeTable: MutableTypeTable,
-    private val versionRequirementTable: MutableVersionRequirementTable?,
-    private val serializeTypeTableToFunction: Boolean,
-    private val languageVersionSettings: LanguageVersionSettings,
-    val plugins: List<DescriptorSerializerPlugin> = emptyList(),
-    val typeAttributeTranslators: TypeAttributeTranslators? = null,
+    private konst containingDeclaration: DeclarationDescriptor?,
+    private konst typeParameters: Interner<TypeParameterDescriptor>,
+    private konst extension: SerializerExtension,
+    konst typeTable: MutableTypeTable,
+    private konst versionRequirementTable: MutableVersionRequirementTable?,
+    private konst serializeTypeTableToFunction: Boolean,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    konst plugins: List<DescriptorSerializerPlugin> = emptyList(),
+    konst typeAttributeTranslators: TypeAttributeTranslators? = null,
 ) {
-    private val contractSerializer = ContractSerializer()
+    private konst contractSerializer = ContractSerializer()
 
     private var metDefinitelyNotNullType: Boolean = false
 
@@ -68,17 +68,17 @@ class DescriptorSerializer private constructor(
             plugins = plugins,
         )
 
-    val stringTable: DescriptorAwareStringTable
+    konst stringTable: DescriptorAwareStringTable
         get() = extension.stringTable
 
     private fun useTypeTable(): Boolean = extension.shouldUseTypeTable()
 
     fun classProto(classDescriptor: ClassDescriptor): ProtoBuf.Class.Builder {
-        val builder = ProtoBuf.Class.newBuilder()
+        konst builder = ProtoBuf.Class.newBuilder()
 
-        val hasEnumEntries = classDescriptor.kind == ClassKind.ENUM_CLASS &&
+        konst hasEnumEntries = classDescriptor.kind == ClassKind.ENUM_CLASS &&
                 languageVersionSettings.supportsFeature(LanguageFeature.EnumEntries)
-        val flags = Flags.getClassFlags(
+        konst flags = Flags.getClassFlags(
             // Since 1.4.30 isInline & isValue are the same flag. To distinguish them we generate @JvmInline annotation.
             // See ClassDescriptor.isInlineClass() function.
             hasAnnotations(classDescriptor) || classDescriptor.isInline,
@@ -98,7 +98,7 @@ class DescriptorSerializer private constructor(
             builder.addTypeParameter(typeParameter(typeParameterDescriptor))
         }
 
-        val contextReceivers = classDescriptor.contextReceivers
+        konst contextReceivers = classDescriptor.contextReceivers
         if (useTypeTable()) {
             contextReceivers.forEach { builder.addContextReceiverTypeId(typeId(it.type)) }
         } else {
@@ -122,7 +122,7 @@ class DescriptorSerializer private constructor(
             }
         }
 
-        val callableMembers =
+        konst callableMembers =
             extension.customClassMembersProducer?.getCallableMembers(classDescriptor)
                 ?: sort(
                     DescriptorUtils.getAllDescriptors(classDescriptor.defaultType.memberScope)
@@ -137,12 +137,12 @@ class DescriptorSerializer private constructor(
             }
         }
 
-        val nestedClassifiers = sort(DescriptorUtils.getAllDescriptors(classDescriptor.unsubstitutedInnerClassesScope))
+        konst nestedClassifiers = sort(DescriptorUtils.getAllDescriptors(classDescriptor.unsubstitutedInnerClassesScope))
         for (descriptor in nestedClassifiers) {
             if (descriptor is TypeAliasDescriptor) {
                 typeAliasProto(descriptor)?.let { builder.addTypeAlias(it) }
             } else {
-                val name = getSimpleNameIndex(descriptor.name)
+                konst name = getSimpleNameIndex(descriptor.name)
                 if (isEnumEntry(descriptor)) {
                     builder.addEnumEntry(enumEntryProto(descriptor as ClassDescriptor))
                 } else {
@@ -155,7 +155,7 @@ class DescriptorSerializer private constructor(
             builder.addSealedSubclassFqName(getClassifierId(sealedSubclass))
         }
 
-        val companionObjectDescriptor = classDescriptor.companionObjectDescriptor
+        konst companionObjectDescriptor = classDescriptor.companionObjectDescriptor
         if (companionObjectDescriptor != null) {
             builder.companionObjectName = getSimpleNameIndex(companionObjectDescriptor.name)
         }
@@ -163,7 +163,7 @@ class DescriptorSerializer private constructor(
         classDescriptor.inlineClassRepresentation?.let { inlineClassRepresentation ->
             builder.inlineClassUnderlyingPropertyName = getSimpleNameIndex(inlineClassRepresentation.underlyingPropertyName)
 
-            val property = callableMembers.single {
+            konst property = callableMembers.single {
                 it is PropertyDescriptor && it.extensionReceiverParameter == null && it.name == inlineClassRepresentation.underlyingPropertyName
             }
             if (!property.visibility.isPublicAPI) {
@@ -176,7 +176,7 @@ class DescriptorSerializer private constructor(
         }
 
         classDescriptor.multiFieldValueClassRepresentation?.let { multiFieldValueClassRepresentation ->
-            val namesToTypes = multiFieldValueClassRepresentation.underlyingPropertyNamesToTypes
+            konst namesToTypes = multiFieldValueClassRepresentation.underlyingPropertyNamesToTypes
             builder.addAllMultiFieldValueClassUnderlyingName(namesToTypes.map { (name, _) -> getSimpleNameIndex(name) })
             if (useTypeTable()) {
                 builder.addAllMultiFieldValueClassUnderlyingTypeId(namesToTypes.map { (_, kotlinType) -> typeId(kotlinType) })
@@ -230,52 +230,52 @@ class DescriptorSerializer private constructor(
     }
 
     fun propertyProto(descriptor: PropertyDescriptor): ProtoBuf.Property.Builder? {
-        val builder = ProtoBuf.Property.newBuilder()
+        konst builder = ProtoBuf.Property.newBuilder()
 
-        val local = createChildSerializer(descriptor)
+        konst local = createChildSerializer(descriptor)
 
         var hasGetter = false
         var hasSetter = false
 
-        val compileTimeConstant = descriptor.compileTimeInitializer
-        val hasConstant = compileTimeConstant != null && compileTimeConstant !is NullValue
+        konst compileTimeConstant = descriptor.compileTimeInitializer
+        konst hasConstant = compileTimeConstant != null && compileTimeConstant !is NullValue
 
-        val hasAnnotations =
+        konst hasAnnotations =
             hasAnnotations(descriptor) || hasAnnotations(descriptor.backingField) || hasAnnotations(descriptor.delegateField)
 
-        val defaultAccessorFlags = Flags.getAccessorFlags(
+        konst defaultAccessorFlags = Flags.getAccessorFlags(
             hasAnnotations,
             ProtoEnumFlags.descriptorVisibility(normalizeVisibility(descriptor)),
             ProtoEnumFlags.modality(descriptor.modality),
             false, false, false
         )
 
-        val getter = descriptor.getter
+        konst getter = descriptor.getter
         if (getter != null) {
             hasGetter = true
-            val accessorFlags = getAccessorFlags(getter)
+            konst accessorFlags = getAccessorFlags(getter)
             if (accessorFlags != defaultAccessorFlags) {
                 builder.getterFlags = accessorFlags
             }
         }
 
-        val setter = descriptor.setter
+        konst setter = descriptor.setter
         if (setter != null) {
             hasSetter = true
-            val accessorFlags = getAccessorFlags(setter)
+            konst accessorFlags = getAccessorFlags(setter)
             if (accessorFlags != defaultAccessorFlags) {
                 builder.setterFlags = accessorFlags
             }
 
             if (!setter.isDefault) {
-                val setterLocal = local.createChildSerializer(setter)
-                for (valueParameterDescriptor in setter.valueParameters) {
-                    builder.setSetterValueParameter(setterLocal.valueParameter(valueParameterDescriptor))
+                konst setterLocal = local.createChildSerializer(setter)
+                for (konstueParameterDescriptor in setter.konstueParameters) {
+                    builder.setSetterValueParameter(setterLocal.konstueParameter(konstueParameterDescriptor))
                 }
             }
         }
 
-        val flags = Flags.getPropertyFlags(
+        konst flags = Flags.getPropertyFlags(
             hasAnnotations,
             ProtoEnumFlags.descriptorVisibility(normalizeVisibility(descriptor)),
             ProtoEnumFlags.modality(descriptor.modality),
@@ -299,7 +299,7 @@ class DescriptorSerializer private constructor(
             builder.addTypeParameter(local.typeParameter(typeParameterDescriptor))
         }
 
-        val receiverParameter = descriptor.extensionReceiverParameter
+        konst receiverParameter = descriptor.extensionReceiverParameter
         if (receiverParameter != null) {
             if (useTypeTable()) {
                 builder.receiverTypeId = local.typeId(receiverParameter.type)
@@ -308,7 +308,7 @@ class DescriptorSerializer private constructor(
             }
         }
 
-        val contextReceivers = descriptor.contextReceiverParameters
+        konst contextReceivers = descriptor.contextReceiverParameters
         if (useTypeTable()) {
             contextReceivers.forEach { builder.addContextReceiverTypeId(local.typeId(it.type)) }
         } else {
@@ -354,11 +354,11 @@ class DescriptorSerializer private constructor(
     }
 
     fun functionProto(descriptor: FunctionDescriptor): ProtoBuf.Function.Builder? {
-        val builder = ProtoBuf.Function.newBuilder()
+        konst builder = ProtoBuf.Function.newBuilder()
 
-        val local = createChildSerializer(descriptor)
+        konst local = createChildSerializer(descriptor)
 
-        val flags = Flags.getFunctionFlags(
+        konst flags = Flags.getFunctionFlags(
             hasAnnotations(descriptor),
             ProtoEnumFlags.descriptorVisibility(normalizeVisibility(descriptor)),
             ProtoEnumFlags.modality(descriptor.modality),
@@ -382,7 +382,7 @@ class DescriptorSerializer private constructor(
             builder.addTypeParameter(local.typeParameter(typeParameterDescriptor))
         }
 
-        val receiverParameter = descriptor.extensionReceiverParameter
+        konst receiverParameter = descriptor.extensionReceiverParameter
         if (receiverParameter != null) {
             if (useTypeTable()) {
                 builder.receiverTypeId = local.typeId(receiverParameter.type)
@@ -391,15 +391,15 @@ class DescriptorSerializer private constructor(
             }
         }
 
-        val contextReceivers = descriptor.contextReceiverParameters
+        konst contextReceivers = descriptor.contextReceiverParameters
         if (useTypeTable()) {
             contextReceivers.forEach { builder.addContextReceiverTypeId(local.typeId(it.type)) }
         } else {
             contextReceivers.forEach { builder.addContextReceiverType(local.type(it.type)) }
         }
 
-        for (valueParameterDescriptor in descriptor.valueParameters) {
-            builder.addValueParameter(local.valueParameter(valueParameterDescriptor))
+        for (konstueParameterDescriptor in descriptor.konstueParameters) {
+            builder.addValueParameter(local.konstueParameter(konstueParameterDescriptor))
         }
 
         contractSerializer.serializeContractOfFunctionIfAny(descriptor, builder, this)
@@ -432,11 +432,11 @@ class DescriptorSerializer private constructor(
     }
 
     private fun constructorProto(descriptor: ConstructorDescriptor): ProtoBuf.Constructor.Builder {
-        val builder = ProtoBuf.Constructor.newBuilder()
+        konst builder = ProtoBuf.Constructor.newBuilder()
 
-        val local = createChildSerializer(descriptor)
+        konst local = createChildSerializer(descriptor)
 
-        val flags = Flags.getConstructorFlags(
+        konst flags = Flags.getConstructorFlags(
             hasAnnotations(descriptor), ProtoEnumFlags.descriptorVisibility(normalizeVisibility(descriptor)), !descriptor.isPrimary,
             shouldSerializeHasStableParameterNames(descriptor)
         )
@@ -444,8 +444,8 @@ class DescriptorSerializer private constructor(
             builder.flags = flags
         }
 
-        for (valueParameterDescriptor in descriptor.valueParameters) {
-            builder.addValueParameter(local.valueParameter(valueParameterDescriptor))
+        for (konstueParameterDescriptor in descriptor.konstueParameters) {
+            builder.addValueParameter(local.konstueParameter(konstueParameterDescriptor))
         }
 
         versionRequirementTable?.run {
@@ -489,15 +489,15 @@ class DescriptorSerializer private constructor(
             extensionReceiverParameter?.type,
             returnType,
             *typeParameters.flatMap { it.upperBounds }.toTypedArray(),
-            *valueParameters.map(ValueParameterDescriptor::getType).toTypedArray()
+            *konstueParameters.map(ValueParameterDescriptor::getType).toTypedArray()
         )
     }
 
     private fun typeAliasProto(descriptor: TypeAliasDescriptor): ProtoBuf.TypeAlias.Builder? {
-        val builder = ProtoBuf.TypeAlias.newBuilder()
-        val local = createChildSerializer(descriptor)
+        konst builder = ProtoBuf.TypeAlias.newBuilder()
+        konst local = createChildSerializer(descriptor)
 
-        val flags =
+        konst flags =
             Flags.getTypeAliasFlags(hasAnnotations(descriptor), ProtoEnumFlags.descriptorVisibility(normalizeVisibility(descriptor)))
         if (flags != builder.flags) {
             builder.flags = flags
@@ -509,14 +509,14 @@ class DescriptorSerializer private constructor(
             builder.addTypeParameter(local.typeParameter(typeParameterDescriptor))
         }
 
-        val underlyingType = descriptor.underlyingType
+        konst underlyingType = descriptor.underlyingType
         if (useTypeTable()) {
             builder.underlyingTypeId = local.typeId(underlyingType)
         } else {
             builder.setUnderlyingType(local.type(underlyingType))
         }
 
-        val expandedType = descriptor.expandedType
+        konst expandedType = descriptor.expandedType
         if (useTypeTable()) {
             builder.expandedTypeId = local.typeId(expandedType)
         } else {
@@ -544,18 +544,18 @@ class DescriptorSerializer private constructor(
     }
 
     private fun enumEntryProto(descriptor: ClassDescriptor): ProtoBuf.EnumEntry.Builder {
-        val builder = ProtoBuf.EnumEntry.newBuilder()
+        konst builder = ProtoBuf.EnumEntry.newBuilder()
         builder.name = getSimpleNameIndex(descriptor.name)
         extension.serializeEnumEntry(descriptor, builder)
         return builder
     }
 
-    private fun valueParameter(descriptor: ValueParameterDescriptor): ProtoBuf.ValueParameter.Builder {
-        val builder = ProtoBuf.ValueParameter.newBuilder()
+    private fun konstueParameter(descriptor: ValueParameterDescriptor): ProtoBuf.ValueParameter.Builder {
+        konst builder = ProtoBuf.ValueParameter.newBuilder()
 
-        val declaresDefaultValue = descriptor.declaresDefaultValue() || descriptor.isActualParameterWithAnyExpectedDefault
+        konst declaresDefaultValue = descriptor.declaresDefaultValue() || descriptor.isActualParameterWithAnyExpectedDefault
 
-        val flags = Flags.getValueParameterFlags(
+        konst flags = Flags.getValueParameterFlags(
             hasAnnotations(descriptor), declaresDefaultValue, descriptor.isCrossinline, descriptor.isNoinline
         )
         if (flags != builder.flags) {
@@ -570,7 +570,7 @@ class DescriptorSerializer private constructor(
             builder.setType(type(descriptor.type))
         }
 
-        val varargElementType = descriptor.varargElementType
+        konst varargElementType = descriptor.varargElementType
         if (varargElementType != null) {
             if (useTypeTable()) {
                 builder.varargElementTypeId = typeId(varargElementType)
@@ -585,7 +585,7 @@ class DescriptorSerializer private constructor(
     }
 
     private fun typeParameter(typeParameter: TypeParameterDescriptor): ProtoBuf.TypeParameter.Builder {
-        val builder = ProtoBuf.TypeParameter.newBuilder()
+        konst builder = ProtoBuf.TypeParameter.newBuilder()
 
         builder.id = getTypeParameterId(typeParameter)
 
@@ -595,13 +595,13 @@ class DescriptorSerializer private constructor(
             builder.reified = typeParameter.isReified
         }
 
-        val variance = variance(typeParameter.variance)
+        konst variance = variance(typeParameter.variance)
         if (variance != builder.variance) {
             builder.variance = variance
         }
         extension.serializeTypeParameter(typeParameter, builder)
 
-        val upperBounds = typeParameter.upperBounds
+        konst upperBounds = typeParameter.upperBounds
         if (upperBounds.size == 1 && KotlinBuiltIns.isDefaultBound(upperBounds.single())) return builder
 
         for (upperBound in upperBounds) {
@@ -618,7 +618,7 @@ class DescriptorSerializer private constructor(
     fun typeId(type: KotlinType): Int = typeTable[type(type)]
 
     internal fun type(type: KotlinType): ProtoBuf.Type.Builder {
-        val builder = ProtoBuf.Type.newBuilder()
+        konst builder = ProtoBuf.Type.newBuilder()
 
         if (type.isError) {
             extension.serializeErrorType(type, builder)
@@ -626,10 +626,10 @@ class DescriptorSerializer private constructor(
         }
 
         if (type.isFlexible()) {
-            val flexibleType = type.asFlexibleType()
+            konst flexibleType = type.asFlexibleType()
 
-            val lowerBound = type(flexibleType.lowerBound)
-            val upperBound = type(flexibleType.upperBound)
+            konst lowerBound = type(flexibleType.lowerBound)
+            konst upperBound = type(flexibleType.upperBound)
             extension.serializeFlexibleType(flexibleType, lowerBound, upperBound)
             if (useTypeTable()) {
                 lowerBound.flexibleUpperBoundId = typeTable[upperBound]
@@ -640,14 +640,14 @@ class DescriptorSerializer private constructor(
         }
 
         if (type.isSuspendFunctionType) {
-            val functionType = type(transformSuspendFunctionToRuntimeFunctionType(type))
+            konst functionType = type(transformSuspendFunctionToRuntimeFunctionType(type))
             functionType.flags = Flags.getTypeFlags(true, false)
             return functionType
         }
 
-        when (val descriptor = type.constructor.declarationDescriptor) {
+        when (konst descriptor = type.constructor.declarationDescriptor) {
             is ClassDescriptor, is TypeAliasDescriptor -> {
-                val possiblyInnerType = type.buildPossiblyInnerType() ?: error("possiblyInnerType should not be null: $type")
+                konst possiblyInnerType = type.buildPossiblyInnerType() ?: error("possiblyInnerType should not be null: $type")
                 fillFromPossiblyInnerType(builder, possiblyInnerType)
             }
             is TypeParameterDescriptor -> {
@@ -670,7 +670,7 @@ class DescriptorSerializer private constructor(
             builder.nullable = type.isMarkedNullable
         }
 
-        val abbreviation = type.getAbbreviatedType()?.abbreviation
+        konst abbreviation = type.getAbbreviatedType()?.abbreviation
         if (abbreviation != null) {
             if (useTypeTable()) {
                 builder.abbreviatedTypeId = typeId(abbreviation)
@@ -679,7 +679,7 @@ class DescriptorSerializer private constructor(
             }
         }
 
-        val typeWithUpdatedAnnotations = typeAttributeTranslators?.let {
+        konst typeWithUpdatedAnnotations = typeAttributeTranslators?.let {
             type.replaceAnnotations(it.toAnnotations(type.attributes))
         } ?: type
 
@@ -689,8 +689,8 @@ class DescriptorSerializer private constructor(
     }
 
     private fun fillFromPossiblyInnerType(builder: ProtoBuf.Type.Builder, type: PossiblyInnerType) {
-        val classifierDescriptor = type.classifierDescriptor
-        val classifierId = getClassifierId(classifierDescriptor)
+        konst classifierDescriptor = type.classifierDescriptor
+        konst classifierId = getClassifierId(classifierDescriptor)
 
         when (classifierDescriptor) {
             is ClassDescriptor -> builder.className = classifierId
@@ -705,7 +705,7 @@ class DescriptorSerializer private constructor(
         }
 
         if (type.outerType != null) {
-            val outerBuilder = ProtoBuf.Type.newBuilder()
+            konst outerBuilder = ProtoBuf.Type.newBuilder()
             fillFromPossiblyInnerType(outerBuilder, type.outerType!!)
             if (useTypeTable()) {
                 builder.outerTypeId = typeTable[outerBuilder]
@@ -716,12 +716,12 @@ class DescriptorSerializer private constructor(
     }
 
     private fun typeArgument(typeProjection: TypeProjection): ProtoBuf.Type.Argument.Builder {
-        val builder = ProtoBuf.Type.Argument.newBuilder()
+        konst builder = ProtoBuf.Type.Argument.newBuilder()
 
         if (typeProjection.isStarProjection) {
             builder.projection = ProtoBuf.Type.Argument.Projection.STAR
         } else {
-            val projection = projection(typeProjection.projectionKind)
+            konst projection = projection(typeProjection.projectionKind)
 
             if (projection != builder.projection) {
                 builder.projection = projection
@@ -738,7 +738,7 @@ class DescriptorSerializer private constructor(
     }
 
     fun packagePartProto(packageFqName: FqName, members: Collection<DeclarationDescriptor>): ProtoBuf.Package.Builder {
-        val builder = ProtoBuf.Package.newBuilder()
+        konst builder = ProtoBuf.Package.newBuilder()
 
         for (declaration in sort(members)) {
             when (declaration) {
@@ -771,22 +771,22 @@ class DescriptorSerializer private constructor(
             .map(::get)
 
     private fun serializeVersionRequirementFromRequireKotlin(annotation: AnnotationDescriptor): ProtoBuf.VersionRequirement.Builder? {
-        val args = annotation.allValueArguments
+        konst args = annotation.allValueArguments
 
-        val versionString = (args[RequireKotlinConstants.VERSION] as? StringValue)?.value ?: return null
-        val matchResult = RequireKotlinConstants.VERSION_REGEX.matchEntire(versionString) ?: return null
+        konst versionString = (args[RequireKotlinConstants.VERSION] as? StringValue)?.konstue ?: return null
+        konst matchResult = RequireKotlinConstants.VERSION_REGEX.matchEntire(versionString) ?: return null
 
-        val major = matchResult.groupValues.getOrNull(1)?.toIntOrNull() ?: return null
-        val minor = matchResult.groupValues.getOrNull(2)?.toIntOrNull() ?: 0
-        val patch = matchResult.groupValues.getOrNull(4)?.toIntOrNull() ?: 0
+        konst major = matchResult.groupValues.getOrNull(1)?.toIntOrNull() ?: return null
+        konst minor = matchResult.groupValues.getOrNull(2)?.toIntOrNull() ?: 0
+        konst patch = matchResult.groupValues.getOrNull(4)?.toIntOrNull() ?: 0
 
-        val proto = ProtoBuf.VersionRequirement.newBuilder()
+        konst proto = ProtoBuf.VersionRequirement.newBuilder()
         VersionRequirement.Version(major, minor, patch).encode(
             writeVersion = { proto.version = it },
             writeVersionFull = { proto.versionFull = it }
         )
 
-        val message = (args[RequireKotlinConstants.MESSAGE] as? StringValue)?.value
+        konst message = (args[RequireKotlinConstants.MESSAGE] as? StringValue)?.konstue
         if (message != null) {
             proto.message = stringTable.getStringIndex(message)
         }
@@ -809,7 +809,7 @@ class DescriptorSerializer private constructor(
                 proto.versionKind = ProtoBuf.VersionRequirement.VersionKind.API_VERSION
         }
 
-        val errorCode = (args[RequireKotlinConstants.ERROR_CODE] as? IntValue)?.value
+        konst errorCode = (args[RequireKotlinConstants.ERROR_CODE] as? IntValue)?.konstue
         if (errorCode != null && errorCode != -1) {
             proto.errorCode = errorCode
         }
@@ -863,18 +863,18 @@ class DescriptorSerializer private constructor(
             languageVersionSettings: LanguageVersionSettings,
             project: Project? = null
         ): DescriptorSerializer {
-            val container = descriptor.containingDeclaration
-            val parent = if (container is ClassDescriptor)
+            konst container = descriptor.containingDeclaration
+            konst parent = if (container is ClassDescriptor)
                 parentSerializer ?: create(container, extension, null, languageVersionSettings, project)
             else
                 createTopLevel(extension, languageVersionSettings)
-            val plugins = project?.let { DescriptorSerializerPlugin.getInstances(it) }.orEmpty()
-            val typeAttributeTranslators = project?.let { TypeAttributeTranslatorExtension.createTranslators(it) }
+            konst plugins = project?.let { DescriptorSerializerPlugin.getInstances(it) }.orEmpty()
+            konst typeAttributeTranslators = project?.let { TypeAttributeTranslatorExtension.createTranslators(it) }
 
             // Calculate type parameter ids for the outer class beforehand, as it would've had happened if we were always
             // serializing outer classes before nested classes.
             // Otherwise our interner can get wrong ids because we may serialize classes in any order.
-            val serializer = DescriptorSerializer(
+            konst serializer = DescriptorSerializer(
                 descriptor,
                 Interner(parent.typeParameters),
                 extension,
@@ -917,7 +917,7 @@ class DescriptorSerializer private constructor(
             languageFeature: LanguageFeature,
             versionRequirementTable: MutableVersionRequirementTable
         ): Int {
-            val languageVersion = languageFeature.sinceVersion!!
+            konst languageVersion = languageFeature.sinceVersion!!
             return writeVersionRequirement(
                 languageVersion.major, languageVersion.minor, 0,
                 ProtoBuf.VersionRequirement.VersionKind.LANGUAGE_VERSION,
@@ -943,7 +943,7 @@ class DescriptorSerializer private constructor(
             versionKind: ProtoBuf.VersionRequirement.VersionKind,
             versionRequirementTable: MutableVersionRequirementTable
         ): Int {
-            val requirement = ProtoBuf.VersionRequirement.newBuilder().apply {
+            konst requirement = ProtoBuf.VersionRequirement.newBuilder().apply {
                 VersionRequirement.Version(major, minor, patch).encode(
                     writeVersion = { version = it },
                     writeVersionFull = { versionFull = it }

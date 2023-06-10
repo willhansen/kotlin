@@ -10,7 +10,7 @@
 // FILE: serializableConstructorRef.kt
 import java.io.*
 
-class C(val t: String)
+class C(konst t: String)
 
 fun box(): String {
     return roundtrip(Sam(::C))
@@ -18,7 +18,7 @@ fun box(): String {
 }
 
 fun <T> roundtrip(x: T): T {
-    val out1 = ByteArrayOutputStream()
+    konst out1 = ByteArrayOutputStream()
     ObjectOutputStream(out1).writeObject(x)
     return ObjectInputStream(ByteArrayInputStream(out1.toByteArray())).readObject() as T
 }

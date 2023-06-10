@@ -24,7 +24,7 @@ class InlinedLambdaRemapper(
     originalLambdaInternalName: String,
     parent: FieldRemapper,
     methodParams: Parameters,
-    private val isDefaultBoundCallableReference: Boolean
+    private konst isDefaultBoundCallableReference: Boolean
 ) : FieldRemapper(originalLambdaInternalName, parent, methodParams) {
 
     public override fun canProcess(fieldOwner: String, fieldName: String, isFolding: Boolean) =
@@ -39,7 +39,7 @@ class InlinedLambdaRemapper(
     override fun findField(fieldInsnNode: FieldInsnNode, captured: Collection<CapturedParamInfo>) =
         parent!!.findField(fieldInsnNode, captured)
 
-    override val isInsideInliningLambda: Boolean = true
+    override konst isInsideInliningLambda: Boolean = true
 
     override fun getFieldForInline(node: FieldInsnNode, prefix: StackValue?) =
         if (parent!!.isRoot)

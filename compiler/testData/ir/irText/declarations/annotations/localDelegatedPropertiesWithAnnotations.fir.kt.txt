@@ -5,15 +5,15 @@ open annotation class A : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 
 }
 
 fun foo(m: Map<String, Int>) {
-  val test: Int
-    val test$delegate: Lazy<Int> = lazy<Int>(initializer = local fun <anonymous>(): Int {
+  konst test: Int
+    konst test$delegate: Lazy<Int> = lazy<Int>(initializer = local fun <anonymous>(): Int {
       return 42
     }
 )

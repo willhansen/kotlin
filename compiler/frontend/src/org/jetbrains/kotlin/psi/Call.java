@@ -32,7 +32,7 @@ public interface Call {
     @Nullable
     ASTNode getCallOperationNode();
 
-    default boolean isSemanticallyEquivalentToSafeCall() {
+    default boolean isSemanticallyEquikonstentToSafeCall() {
         return getCallOperationNode() != null && getCallOperationNode().getElementType() == KtTokens.SAFE_ACCESS;
     }
 

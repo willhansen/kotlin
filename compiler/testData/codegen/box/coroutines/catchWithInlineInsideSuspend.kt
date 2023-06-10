@@ -26,7 +26,7 @@ suspend fun Controller.bar() {
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation)
     return controller.result
 }

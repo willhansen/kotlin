@@ -10,32 +10,32 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 object SyntheticCallableId {
-    private val syntheticPackageName: FqName = FqName("_synthetic")
+    private konst syntheticPackageName: FqName = FqName("_synthetic")
 
-    val WHEN = CallableId(
+    konst WHEN = CallableId(
         syntheticPackageName,
         Name.identifier("WHEN_CALL")
     )
-    val TRY = CallableId(
+    konst TRY = CallableId(
         syntheticPackageName,
         Name.identifier("TRY_CALL")
     )
-    val CHECK_NOT_NULL = CallableId(
+    konst CHECK_NOT_NULL = CallableId(
         syntheticPackageName,
         Name.identifier("CHECK_NOT_NULL_CALL")
     )
 
-    val ELVIS_NOT_NULL = CallableId(
+    konst ELVIS_NOT_NULL = CallableId(
         syntheticPackageName,
         Name.identifier("ELVIS_CALL")
     )
 
-    val ID = CallableId(
+    konst ID = CallableId(
         syntheticPackageName,
         Name.identifier("ID_CALL")
     )
 
-    val ACCEPT_SPECIFIC_TYPE = CallableId(
+    konst ACCEPT_SPECIFIC_TYPE = CallableId(
         syntheticPackageName,
         Name.identifier("ACCEPT_SPECIFIC_TYPE_CALL")
     )

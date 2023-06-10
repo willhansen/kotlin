@@ -1,8 +1,8 @@
 // WITH_STDLIB
 // FILE: test.kt
 fun test() {
-    val result = Result.success("yes!")
-    val failure = Result.failure<String>(Exception())
+    konst result = Result.success("yes!")
+    konst failure = Result.failure<String>(Exception())
 
     if (result.isSuccess) println("success")
     if (result.isFailure) println("failure")

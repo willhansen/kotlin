@@ -19,7 +19,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
 
-private val Project.performanceServerUrl: String
+private konst Project.performanceServerUrl: String
     get() = findProperty("kotlin.native.performance.server.url")?.toString() ?: "http://localhost:3000"
 
 /**
@@ -52,19 +52,19 @@ open class BuildRegister : DefaultTask() {
     var performanceServer: String? = project.performanceServerUrl
 
     private fun sendPostRequest(url: String, body: String): String {
-        val connection = URL(url).openConnection() as HttpURLConnection
+        konst connection = URL(url).openConnection() as HttpURLConnection
         return connection.apply {
             setRequestProperty("Content-Type", "application/json; charset=utf-8")
             requestMethod = "POST"
             doOutput = true
-            val outputWriter = OutputStreamWriter(outputStream)
+            konst outputWriter = OutputStreamWriter(outputStream)
             outputWriter.write(body)
             outputWriter.flush()
         }.let {
             if (it.responseCode == 200) it.inputStream else it.errorStream
         }.let { streamToRead ->
             BufferedReader(InputStreamReader(streamToRead)).use {
-                val response = StringBuffer()
+                konst response = StringBuffer()
 
                 var inputLine = it.readLine()
                 while (inputLine != null) {
@@ -80,20 +80,20 @@ open class BuildRegister : DefaultTask() {
     @TaskAction
     fun run() {
         // Get TeamCity properties.
-        val teamcityConfig = System.getenv("TEAMCITY_BUILD_PROPERTIES_FILE") ?: error("Can't load teamcity config!")
+        konst teamcityConfig = System.getenv("TEAMCITY_BUILD_PROPERTIES_FILE") ?: error("Can't load teamcity config!")
 
-        val buildProperties = Properties()
+        konst buildProperties = Properties()
         buildProperties.load(FileInputStream(teamcityConfig))
-        val buildId = buildProperties.getProperty("teamcity.build.id")
-        val teamCityUser = buildProperties.getProperty("teamcity.auth.userId")
-        val teamCityPassword = buildProperties.getProperty("teamcity.auth.password")
+        konst buildId = buildProperties.getProperty("teamcity.build.id")
+        konst teamCityUser = buildProperties.getProperty("teamcity.auth.userId")
+        konst teamCityPassword = buildProperties.getProperty("teamcity.auth.password")
 
         // Get branch.
-        val currentBuild = getBuild("id:$buildId", teamCityUser, teamCityPassword)
-        val branch = getBuildProperty(currentBuild, "branchName")
+        konst currentBuild = getBuild("id:$buildId", teamCityUser, teamCityPassword)
+        konst branch = getBuildProperty(currentBuild, "branchName")
 
         // Send post request to register build.
-        val requestBody = buildString {
+        konst requestBody = buildString {
             append("{\"buildId\":\"$buildId\",")
             append("\"teamCityUser\":\"$teamCityUser\",")
             append("\"teamCityPassword\":\"$teamCityPassword\",")

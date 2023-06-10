@@ -33,21 +33,21 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 class WasmBackendContext(
-    val module: ModuleDescriptor,
-    override val irBuiltIns: IrBuiltIns,
-    val symbolTable: SymbolTable,
-    val irModuleFragment: IrModuleFragment,
+    konst module: ModuleDescriptor,
+    override konst irBuiltIns: IrBuiltIns,
+    konst symbolTable: SymbolTable,
+    konst irModuleFragment: IrModuleFragment,
     propertyLazyInitialization: Boolean,
-    override val configuration: CompilerConfiguration,
+    override konst configuration: CompilerConfiguration,
 ) : JsCommonBackendContext {
-    override val builtIns = module.builtIns
-    override val typeSystem: IrTypeSystemContext = IrTypeSystemContextImpl(irBuiltIns)
+    override konst builtIns = module.builtIns
+    override konst typeSystem: IrTypeSystemContext = IrTypeSystemContextImpl(irBuiltIns)
     override var inVerbosePhase: Boolean = false
-    override val scriptMode = false
-    override val irFactory: IrFactory = symbolTable.irFactory
+    override konst scriptMode = false
+    override konst irFactory: IrFactory = symbolTable.irFactory
 
     // Place to store declarations excluded from code generation
-    private val excludedDeclarations = mutableMapOf<FqName, IrPackageFragment>()
+    private konst excludedDeclarations = mutableMapOf<FqName, IrPackageFragment>()
 
     fun getExcludedPackageFragment(fqName: FqName): IrPackageFragment = excludedDeclarations.getOrPut(fqName) {
         IrExternalPackageFragmentImpl(
@@ -56,31 +56,31 @@ class WasmBackendContext(
         )
     }
 
-    override val mapping = JsMapping()
+    override konst mapping = JsMapping()
 
-    val closureCallExports = mutableMapOf<String, IrSimpleFunction>()
-    val kotlinClosureToJsConverters = mutableMapOf<String, IrSimpleFunction>()
-    val jsClosureCallers = mutableMapOf<String, IrSimpleFunction>()
-    val jsToKotlinClosures = mutableMapOf<String, IrSimpleFunction>()
+    konst closureCallExports = mutableMapOf<String, IrSimpleFunction>()
+    konst kotlinClosureToJsConverters = mutableMapOf<String, IrSimpleFunction>()
+    konst jsClosureCallers = mutableMapOf<String, IrSimpleFunction>()
+    konst jsToKotlinClosures = mutableMapOf<String, IrSimpleFunction>()
 
-    val jsModuleAndQualifierReferences =
+    konst jsModuleAndQualifierReferences =
         mutableSetOf<JsModuleAndQualifierReference>()
 
-    override val coroutineSymbols =
+    override konst coroutineSymbols =
         JsCommonCoroutineSymbols(symbolTable, module,this)
 
-    val innerClassesSupport = JsInnerClassesSupport(mapping, irFactory)
+    konst innerClassesSupport = JsInnerClassesSupport(mapping, irFactory)
 
-    override val internalPackageFqn = FqName("kotlin.wasm")
+    override konst internalPackageFqn = FqName("kotlin.wasm")
 
-    val kotlinWasmInternalPackageFqn = internalPackageFqn.child(Name.identifier("internal"))
+    konst kotlinWasmInternalPackageFqn = internalPackageFqn.child(Name.identifier("internal"))
 
-    private val internalPackageFragmentDescriptor = EmptyPackageFragmentDescriptor(builtIns.builtInsModule, kotlinWasmInternalPackageFqn)
+    private konst internalPackageFragmentDescriptor = EmptyPackageFragmentDescriptor(builtIns.builtInsModule, kotlinWasmInternalPackageFqn)
     // TODO: Merge with JS IR Backend context lazy file
-    val internalPackageFragment by lazy {
+    konst internalPackageFragment by lazy {
         IrFileImpl(object : IrFileEntry {
-            override val name = "<implicitDeclarations>"
-            override val maxOffset = UNDEFINED_OFFSET
+            override konst name = "<implicitDeclarations>"
+            override konst maxOffset = UNDEFINED_OFFSET
 
             override fun getSourceRangeInfo(beginOffset: Int, endOffset: Int) =
                 SourceRangeInfo(
@@ -108,27 +108,27 @@ class WasmBackendContext(
         internalPackageFragment.addChild(this)
     }
 
-    val fieldInitFunction = createInitFunction("fieldInit")
-    val mainCallsWrapperFunction = createInitFunction("mainCallsWrapper")
+    konst fieldInitFunction = createInitFunction("fieldInit")
+    konst mainCallsWrapperFunction = createInitFunction("mainCallsWrapper")
 
-    override val sharedVariablesManager =
+    override konst sharedVariablesManager =
         WasmSharedVariablesManager(this, irBuiltIns, internalPackageFragment)
 
-    val wasmSymbols: WasmSymbols = WasmSymbols(this@WasmBackendContext, symbolTable)
-    override val reflectionSymbols: ReflectionSymbols get() = wasmSymbols.reflectionSymbols
+    konst wasmSymbols: WasmSymbols = WasmSymbols(this@WasmBackendContext, symbolTable)
+    override konst reflectionSymbols: ReflectionSymbols get() = wasmSymbols.reflectionSymbols
 
-    override val enumEntries = wasmSymbols.enumEntries
-    override val createEnumEntries = wasmSymbols.createEnumEntries
+    override konst enumEntries = wasmSymbols.enumEntries
+    override konst createEnumEntries = wasmSymbols.createEnumEntries
 
-    override val propertyLazyInitialization: PropertyLazyInitialization =
+    override konst propertyLazyInitialization: PropertyLazyInitialization =
         PropertyLazyInitialization(enabled = propertyLazyInitialization, eagerInitialization = wasmSymbols.eagerInitialization)
 
-    override val ir = object : Ir<WasmBackendContext>(this) {
-        override val symbols: Symbols = wasmSymbols
+    override konst ir = object : Ir<WasmBackendContext>(this) {
+        override konst symbols: Symbols = wasmSymbols
         override fun shouldGenerateHandlerParameterForDefaultBodyFun() = true
     }
 
-    override val inlineClassesUtils = WasmInlineClassesUtils(wasmSymbols)
+    override konst inlineClassesUtils = WasmInlineClassesUtils(wasmSymbols)
 
     override fun log(message: () -> String) {
         /*TODO*/
@@ -144,15 +144,15 @@ class WasmBackendContext(
     // Unit test support, mostly borrowed from the JS implementation
     //
 
-    override val suiteFun: IrSimpleFunctionSymbol?
+    override konst suiteFun: IrSimpleFunctionSymbol?
         get() = wasmSymbols.suiteFun
-    override val testFun: IrSimpleFunctionSymbol?
+    override konst testFun: IrSimpleFunctionSymbol?
         get() = wasmSymbols.testFun
 
     private fun syntheticFile(name: String, module: IrModuleFragment): IrFile {
         return IrFileImpl(object : IrFileEntry {
-            override val name = "<$name>"
-            override val maxOffset = UNDEFINED_OFFSET
+            override konst name = "<$name>"
+            override konst maxOffset = UNDEFINED_OFFSET
 
             override fun getSourceRangeInfo(beginOffset: Int, endOffset: Int) =
                 SourceRangeInfo(
@@ -172,15 +172,15 @@ class WasmBackendContext(
         }
     }
 
-    private val testContainerFuns = mutableMapOf<IrModuleFragment, IrSimpleFunction>()
+    private konst testContainerFuns = mutableMapOf<IrModuleFragment, IrSimpleFunction>()
 
-    val testEntryPoints: Collection<IrSimpleFunction>
-        get() = testContainerFuns.values
+    konst testEntryPoints: Collection<IrSimpleFunction>
+        get() = testContainerFuns.konstues
 
     override fun createTestContainerFun(irFile: IrFile): IrSimpleFunction {
-        val module = irFile.module
+        konst module = irFile.module
         return testContainerFuns.getOrPut(module) {
-            val file = syntheticFile("tests", module)
+            konst file = syntheticFile("tests", module)
             irFactory.addFunction(file) {
                 name = Name.identifier("testContainer")
                 returnType = irBuiltIns.unitType

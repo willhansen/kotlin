@@ -28,7 +28,7 @@ fun IdeaKpmFragment.assertResolvedBinaryDependencies(
     binaryType: String,
     matchers: Set<TestIdeaKpmBinaryDependencyMatcher>
 ): Set<IdeaKpmResolvedBinaryDependency> {
-    val resolvedBinaryDependencies = dependencies
+    konst resolvedBinaryDependencies = dependencies
         .mapNotNull { dependency ->
             when (dependency) {
                 is IdeaKpmResolvedBinaryDependencyImpl -> dependency
@@ -39,10 +39,10 @@ fun IdeaKpmFragment.assertResolvedBinaryDependencies(
         .filter { it.binaryType == binaryType }
         .toSet()
 
-    val unexpectedResolvedBinaryDependencies = resolvedBinaryDependencies
+    konst unexpectedResolvedBinaryDependencies = resolvedBinaryDependencies
         .filter { dependency -> matchers.none { matcher -> matcher.matches(dependency) } }
 
-    val missingDependencies = matchers.filter { matcher ->
+    konst missingDependencies = matchers.filter { matcher ->
         resolvedBinaryDependencies.none { dependency -> matcher.matches(dependency) }
     }
 
@@ -92,12 +92,12 @@ fun IdeaKpmFragment.assertResolvedBinaryDependencies(
 ) = assertResolvedBinaryDependencies(binaryType, matchers.toSet())
 
 fun IdeaKpmFragment.assertFragmentDependencies(matchers: Set<TestIdeaKpmFragmentDependencyMatcher>): Set<IdeaKpmFragmentDependency> {
-    val sourceDependencies = dependencies.filterIsInstance<IdeaKpmFragmentDependency>().toSet()
+    konst sourceDependencies = dependencies.filterIsInstance<IdeaKpmFragmentDependency>().toSet()
 
-    val unexpectedDependencies = sourceDependencies
+    konst unexpectedDependencies = sourceDependencies
         .filter { dependency -> matchers.none { matcher -> matcher.matches(dependency) } }
 
-    val missingDependencies = matchers.filter { matcher ->
+    konst missingDependencies = matchers.filter { matcher ->
         sourceDependencies.none { dependency -> matcher.matches(dependency) }
     }
 

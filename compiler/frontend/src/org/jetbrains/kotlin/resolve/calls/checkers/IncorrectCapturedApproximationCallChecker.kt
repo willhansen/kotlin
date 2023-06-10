@@ -25,27 +25,27 @@ import org.jetbrains.kotlin.types.typeUtil.isSubtypeOf
 object IncorrectCapturedApproximationCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (!resolvedCall.isReallySuccess()) return
-        val dispatchReceiverType = resolvedCall.smartCastDispatchReceiverType ?: resolvedCall.dispatchReceiver?.type ?: return
+        konst dispatchReceiverType = resolvedCall.smartCastDispatchReceiverType ?: resolvedCall.dispatchReceiver?.type ?: return
         if (dispatchReceiverType.arguments.all { it.projectionKind == Variance.INVARIANT && !it.type.isCaptured() }) return
 
-        val substitutor =
+        konst substitutor =
             TypeSubstitutor.create(dispatchReceiverType)
                 .substitution.wrapWithCapturingSubstitution(needApproximation = false).buildSubstitutor()
 
-        val functionDescriptor = resolvedCall.resultingDescriptor.original as? FunctionDescriptor ?: return
+        konst functionDescriptor = resolvedCall.resultingDescriptor.original as? FunctionDescriptor ?: return
 
-        val capturedSubstituted = functionDescriptor.substitute(substitutor) ?: return
+        konst capturedSubstituted = functionDescriptor.substitute(substitutor) ?: return
 
-        val indexedArguments = resolvedCall.valueArgumentsByIndex ?: return
-        for ((index, parameter) in capturedSubstituted.valueParameters.withIndex()) {
+        konst indexedArguments = resolvedCall.konstueArgumentsByIndex ?: return
+        for ((index, parameter) in capturedSubstituted.konstueParameters.withIndex()) {
             for (argument in indexedArguments[index].arguments) {
-                val expectedType =
+                konst expectedType =
                     getEffectiveExpectedType(parameter, argument, context.resolutionContext)
 
-                val argumentExpression = argument.getArgumentExpression() ?: continue
-                val expressionType = argumentExpression.getType(context.trace.bindingContext) ?: continue
+                konst argumentExpression = argument.getArgumentExpression() ?: continue
+                konst expressionType = argumentExpression.getType(context.trace.bindingContext) ?: continue
 
-                val dataFlowValue =
+                konst dataFlowValue =
                     context.dataFlowValueFactory.createDataFlowValue(argumentExpression, expressionType, context.resolutionContext)
                 if (shouldWarningBeReported(expressionType, expectedType, dataFlowValue, context)) {
                     context.trace.report(
@@ -58,13 +58,13 @@ object IncorrectCapturedApproximationCallChecker : CallChecker {
         }
 
         capturedSubstituted.extensionReceiverParameter?.let { extensionReceiverParameter ->
-            val extensionReceiver = resolvedCall.extensionReceiver ?: return@let
+            konst extensionReceiver = resolvedCall.extensionReceiver ?: return@let
 
-            val dataFlowValue =
+            konst dataFlowValue =
                 context.dataFlowValueFactory.createDataFlowValue(extensionReceiver, context.resolutionContext)
 
             if (shouldWarningBeReported(extensionReceiver.type, extensionReceiverParameter.type, dataFlowValue, context)) {
-                val expression = (extensionReceiver as? ExpressionReceiver)?.expression ?: reportOn
+                konst expression = (extensionReceiver as? ExpressionReceiver)?.expression ?: reportOn
                 context.trace.report(
                     Errors.RECEIVER_TYPE_MISMATCH_WARNING_FOR_INCORRECT_CAPTURE_APPROXIMATION.on(
                         expression, extensionReceiverParameter.type, extensionReceiver.type
@@ -83,7 +83,7 @@ object IncorrectCapturedApproximationCallChecker : CallChecker {
         if (expectedType.arguments.none { arg -> !arg.isStarProjection && arg.type.contains(UnwrappedType::isCaptured) }) return false
         if (expressionType.isSubtypeOf(expectedType)) return false
 
-        val samExpectedType = getFunctionTypeForSamType(
+        konst samExpectedType = getFunctionTypeForSamType(
             expectedType, context.callComponents.samConversionResolver, context.callComponents.samConversionOracle,
         )
 

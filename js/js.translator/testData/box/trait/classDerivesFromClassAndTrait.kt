@@ -3,7 +3,7 @@ package foo
 
 
 open class A() {
-    val value = "O"
+    konst konstue = "O"
 }
 
 interface Test {
@@ -14,9 +14,9 @@ interface Test {
 
 
 class B() : A(), Test {
-    fun eval(): String {
-        return addFoo(value);
+    fun ekonst(): String {
+        return addFoo(konstue);
     }
 }
 
-fun box() = B().eval()
+fun box() = B().ekonst()

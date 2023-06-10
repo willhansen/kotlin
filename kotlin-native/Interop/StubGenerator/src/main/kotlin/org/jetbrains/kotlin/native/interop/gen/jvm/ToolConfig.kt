@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.native.interop.indexer.Language
 class ToolConfig(userProvidedTargetName: String?, flavor: KotlinPlatform, propertyOverrides: Map<String, String>)
     : AbstractToolConfig(KonanHomeProvider.determineKonanHome(), userProvidedTargetName, propertyOverrides) {
 
-    val clang = when (flavor) {
+    konst clang = when (flavor) {
         KotlinPlatform.JVM -> platform.clangForJni
         KotlinPlatform.NATIVE -> platform.clang
     }
@@ -36,7 +36,7 @@ class ToolConfig(userProvidedTargetName: String?, flavor: KotlinPlatform, proper
         Language.CPP -> clang.libclangXXArgs.toList()
     }
 
-    val platformCompilerOpts =
+    konst platformCompilerOpts =
             if (clang is ClangArgs.Jni)
                 clang.hostCompilerArgsForJni.toList()
             else emptyList()

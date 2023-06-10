@@ -26,14 +26,14 @@ public abstract class KtContextReceiver : KtLifetimeOwner {
      *
      * @see KtContextReceiver
      */
-    public abstract val type: KtType
+    public abstract konst type: KtType
 
     /**
      * Additional label for the context receivers in the format `label@Type`, if label is not present, return `null`
      *
      * @see KtContextReceiver
      */
-    public abstract val label: Name?
+    public abstract konst label: Name?
 }
 
 /**
@@ -43,5 +43,5 @@ public interface KtContextReceiversOwner : KtLifetimeOwner {
     /**
      * List of [KtContextReceiver] directly declared in the source code
      */
-    public val contextReceivers: List<KtContextReceiver>
+    public konst contextReceivers: List<KtContextReceiver>
 }

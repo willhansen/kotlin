@@ -4,7 +4,7 @@
 external fun foo(vararg arg: String): String
 
 fun box(): String {
-    val x = arrayOf("a", "b")
+    konst x = arrayOf("a", "b")
     var r = foo(*x)
     if (r != "(ab)") return "fail1: $r"
 

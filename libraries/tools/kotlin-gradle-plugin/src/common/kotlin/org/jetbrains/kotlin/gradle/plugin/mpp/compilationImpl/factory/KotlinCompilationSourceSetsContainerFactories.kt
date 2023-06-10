@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrTarget
 import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 
 internal class DefaultKotlinCompilationSourceSetsContainerFactory(
-    private val defaultSourceSetNaming: DefaultSourceSetNaming = DefaultDefaultSourceSetNaming
+    private konst defaultSourceSetNaming: DefaultSourceSetNaming = DefaultDefaultSourceSetNaming
 ) : KotlinCompilationImplFactory.KotlinCompilationSourceSetsContainerFactory {
 
     fun interface DefaultSourceSetNaming {
@@ -36,17 +36,17 @@ internal class DefaultKotlinCompilationSourceSetsContainerFactory(
     }
 
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationSourceSetsContainer {
-        val defaultSourceSetName = defaultSourceSetNaming.defaultSourceSetName(target, compilationName)
-        val defaultSourceSet = target.project.kotlinExtension.sourceSets.maybeCreate(defaultSourceSetName)
+        konst defaultSourceSetName = defaultSourceSetNaming.defaultSourceSetName(target, compilationName)
+        konst defaultSourceSet = target.project.kotlinExtension.sourceSets.maybeCreate(defaultSourceSetName)
         return KotlinCompilationSourceSetsContainer(defaultSourceSet)
     }
 }
 
 internal class AndroidCompilationSourceSetsContainerFactory(
-    private val target: KotlinAndroidTarget, private val variant: BaseVariant
+    private konst target: KotlinAndroidTarget, private konst variant: BaseVariant
 ) : KotlinCompilationImplFactory.KotlinCompilationSourceSetsContainerFactory {
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationSourceSetsContainer {
-        val sourceSetName = target.project.kotlinAndroidSourceSetLayout.naming.defaultKotlinSourceSetName(this.target, variant)
+        konst sourceSetName = target.project.kotlinAndroidSourceSetLayout.naming.defaultKotlinSourceSetName(this.target, variant)
             ?: lowerCamelCaseName(target.disambiguationClassifier, compilationName)
         return KotlinCompilationSourceSetsContainer(target.project.kotlinExtension.sourceSets.maybeCreate(sourceSetName))
     }
@@ -54,7 +54,7 @@ internal class AndroidCompilationSourceSetsContainerFactory(
 
 internal object JsCompilationSourceSetsContainerFactory : KotlinCompilationImplFactory.KotlinCompilationSourceSetsContainerFactory {
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationSourceSetsContainer {
-        val defaultSourceSetName = lowerCamelCaseName(
+        konst defaultSourceSetName = lowerCamelCaseName(
             if (target is KotlinJsTarget && target.irTarget != null) target.disambiguationClassifierInPlatform
             else target.disambiguationClassifier,
             compilationName
@@ -66,7 +66,7 @@ internal object JsCompilationSourceSetsContainerFactory : KotlinCompilationImplF
 
 internal object JsIrCompilationSourceSetsContainerFactory : KotlinCompilationImplFactory.KotlinCompilationSourceSetsContainerFactory {
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationSourceSetsContainer {
-        val defaultSourceSetName = lowerCamelCaseName(
+        konst defaultSourceSetName = lowerCamelCaseName(
             if (target is KotlinJsIrTarget && target.mixedMode) target.disambiguationClassifierInPlatform
             else target.disambiguationClassifier,
             compilationName

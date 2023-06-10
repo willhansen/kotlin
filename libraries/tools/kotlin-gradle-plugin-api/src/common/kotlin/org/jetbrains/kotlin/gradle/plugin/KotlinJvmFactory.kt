@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 /** An API used by third-party plugins to integration with the Kotlin Gradle plugin. */
 interface KotlinJvmFactory {
     /** Instance of DSL object that should be used to configure KAPT stub generation and annotation processing tasks.*/
-    val kaptExtension: KaptExtensionConfig
+    konst kaptExtension: KaptExtensionConfig
 
     /** Instance of DSL object that should be used to configure Kotlin compilation pipeline. */
-    val kotlinExtension: KotlinTopLevelExtensionConfig
+    konst kotlinExtension: KotlinTopLevelExtensionConfig
 
     /**
      * Creates instance of DSL object that should be used to configure JVM/android specific compilation.

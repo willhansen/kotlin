@@ -15,21 +15,21 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtQualifiedExpression
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
-import org.jetbrains.kotlin.resolve.DescriptorEquivalenceForOverrides
+import org.jetbrains.kotlin.resolve.DescriptorEquikonstenceForOverrides
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 import org.jetbrains.kotlin.resolve.scopes.receivers.ClassValueReceiver
 import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 
 object EnumEntryVsCompanionPriorityCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.candidateDescriptor
+        konst descriptor = resolvedCall.candidateDescriptor
         if (descriptor !is PropertyDescriptor) return
-        val propertyName = descriptor.name
+        konst propertyName = descriptor.name
 
-        val containingDescriptor = descriptor.containingDeclaration
+        konst containingDescriptor = descriptor.containingDeclaration
         if (containingDescriptor !is ClassDescriptor || !containingDescriptor.isCompanionObject) return
 
-        val grandParent = containingDescriptor.containingDeclaration
+        konst grandParent = containingDescriptor.containingDeclaration
 
         if (grandParent is ClassDescriptor &&
             grandParent.kind == ClassKind.ENUM_CLASS &&
@@ -40,13 +40,13 @@ object EnumEntryVsCompanionPriorityCallChecker : CallChecker {
     }
 
     private fun ClassDescriptor.containsEntryWithName(name: Name): Boolean {
-        val foundDescriptor = unsubstitutedMemberScope.getContributedClassifier(name, NoLookupLocation.FOR_ALREADY_TRACKED)
+        konst foundDescriptor = unsubstitutedMemberScope.getContributedClassifier(name, NoLookupLocation.FOR_ALREADY_TRACKED)
         return foundDescriptor is ClassDescriptor && foundDescriptor.kind == ClassKind.ENUM_ENTRY
     }
 }
 
 internal fun ReceiverValue?.isQualifierFor(classDescriptor: ClassDescriptor): Boolean {
     if (this !is ClassValueReceiver) return false
-    val thisClass = this.classQualifier.descriptor as? ClassDescriptor ?: return false
+    konst thisClass = this.classQualifier.descriptor as? ClassDescriptor ?: return false
     return thisClass.typeConstructor == classDescriptor.typeConstructor
 }

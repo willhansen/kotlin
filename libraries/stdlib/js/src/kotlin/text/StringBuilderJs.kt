@@ -27,7 +27,7 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
 
     private var string: String = if (content !== undefined) content else ""
 
-    actual override val length: Int
+    actual override konst length: Int
         get() = string.asDynamic().length
 
     actual override fun get(index: Int): Char =
@@ -35,18 +35,18 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
 
     actual override fun subSequence(startIndex: Int, endIndex: Int): CharSequence = string.substring(startIndex, endIndex)
 
-    actual override fun append(value: Char): StringBuilder {
-        string += value
+    actual override fun append(konstue: Char): StringBuilder {
+        string += konstue
         return this
     }
 
-    actual override fun append(value: CharSequence?): StringBuilder {
-        string += value.toString()
+    actual override fun append(konstue: CharSequence?): StringBuilder {
+        string += konstue.toString()
         return this
     }
 
-    actual override fun append(value: CharSequence?, startIndex: Int, endIndex: Int): StringBuilder =
-        this.appendRange(value ?: "null", startIndex, endIndex)
+    actual override fun append(konstue: CharSequence?, startIndex: Int, endIndex: Int): StringBuilder =
+        this.appendRange(konstue ?: "null", startIndex, endIndex)
 
     /**
      * Reverses the contents of this string builder and returns this instance.
@@ -55,15 +55,15 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
      * Therefore, the order of the high-low surrogates is never reversed.
      *
      * Note that the reverse operation may produce new surrogate pairs that were unpaired low-surrogates and high-surrogates before the operation.
-     * For example, reversing `"\uDC00\uD800"` produces `"\uD800\uDC00"` which is a valid surrogate pair.
+     * For example, reversing `"\uDC00\uD800"` produces `"\uD800\uDC00"` which is a konstid surrogate pair.
      */
     actual fun reverse(): StringBuilder {
         var reversed = ""
         var index = string.length - 1
         while (index >= 0) {
-            val low = string[index--]
+            konst low = string[index--]
             if (low.isLowSurrogate() && index >= 0) {
-                val high = string[index--]
+                konst high = string[index--]
                 if (high.isHighSurrogate()) {
                     reversed = reversed + high + low
                 } else {
@@ -78,48 +78,48 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
     }
 
     /**
-     * Appends the string representation of the specified object [value] to this string builder and returns this instance.
+     * Appends the string representation of the specified object [konstue] to this string builder and returns this instance.
      *
-     * The overall effect is exactly as if the [value] were converted to a string by the `value.toString()` method,
+     * The overall effect is exactly as if the [konstue] were converted to a string by the `konstue.toString()` method,
      * and then that string was appended to this string builder.
      */
-    actual fun append(value: Any?): StringBuilder {
-        string += value.toString()
+    actual fun append(konstue: Any?): StringBuilder {
+        string += konstue.toString()
         return this
     }
 
     /**
-     * Appends the string representation of the specified boolean [value] to this string builder and returns this instance.
+     * Appends the string representation of the specified boolean [konstue] to this string builder and returns this instance.
      *
-     * The overall effect is exactly as if the [value] were converted to a string by the `value.toString()` method,
+     * The overall effect is exactly as if the [konstue] were converted to a string by the `konstue.toString()` method,
      * and then that string was appended to this string builder.
      */
     @SinceKotlin("1.3")
-    actual fun append(value: Boolean): StringBuilder {
-        string += value
+    actual fun append(konstue: Boolean): StringBuilder {
+        string += konstue
         return this
     }
 
     /**
-     * Appends characters in the specified character array [value] to this string builder and returns this instance.
+     * Appends characters in the specified character array [konstue] to this string builder and returns this instance.
      *
      * Characters are appended in order, starting at the index 0.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    actual fun append(value: CharArray): StringBuilder {
-        string += value.concatToString()
+    actual fun append(konstue: CharArray): StringBuilder {
+        string += konstue.concatToString()
         return this
     }
 
     /**
-     * Appends the specified string [value] to this string builder and returns this instance.
+     * Appends the specified string [konstue] to this string builder and returns this instance.
      *
-     * If [value] is `null`, then the four characters `"null"` are appended.
+     * If [konstue] is `null`, then the four characters `"null"` are appended.
      */
     @SinceKotlin("1.3")
-    actual fun append(value: String?): StringBuilder {
-        this.string += value ?: "null"
+    actual fun append(konstue: String?): StringBuilder {
+        this.string += konstue ?: "null"
         return this
     }
 
@@ -128,7 +128,7 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
      *
      * The capacity is the maximum length this string builder can have before an allocation occurs.
      *
-     * In Kotlin/JS implementation of StringBuilder the value returned from this method may not indicate the actual size of the backing storage.
+     * In Kotlin/JS implementation of StringBuilder the konstue returned from this method may not indicate the actual size of the backing storage.
      */
     @SinceKotlin("1.3")
 //    @ExperimentalStdlibApi
@@ -192,101 +192,101 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
     }
 
     /**
-     * Inserts the string representation of the specified boolean [value] into this string builder at the specified [index] and returns this instance.
+     * Inserts the string representation of the specified boolean [konstue] into this string builder at the specified [index] and returns this instance.
      *
-     * The overall effect is exactly as if the [value] were converted to a string by the `value.toString()` method,
+     * The overall effect is exactly as if the [konstue] were converted to a string by the `konstue.toString()` method,
      * and then that string was inserted into this string builder at the specified [index].
      *
      * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    actual fun insert(index: Int, value: Boolean): StringBuilder {
+    actual fun insert(index: Int, konstue: Boolean): StringBuilder {
         AbstractList.checkPositionIndex(index, length)
 
-        string = string.substring(0, index) + value + string.substring(index)
+        string = string.substring(0, index) + konstue + string.substring(index)
         return this
     }
 
     /**
-     * Inserts the specified character [value] into this string builder at the specified [index] and returns this instance.
+     * Inserts the specified character [konstue] into this string builder at the specified [index] and returns this instance.
      *
      * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    actual fun insert(index: Int, value: Char): StringBuilder {
+    actual fun insert(index: Int, konstue: Char): StringBuilder {
         AbstractList.checkPositionIndex(index, length)
 
-        string = string.substring(0, index) + value + string.substring(index)
+        string = string.substring(0, index) + konstue + string.substring(index)
         return this
     }
 
     /**
-     * Inserts characters in the specified character array [value] into this string builder at the specified [index] and returns this instance.
+     * Inserts characters in the specified character array [konstue] into this string builder at the specified [index] and returns this instance.
      *
-     * The inserted characters go in same order as in the [value] character array, starting at [index].
+     * The inserted characters go in same order as in the [konstue] character array, starting at [index].
      *
      * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    actual fun insert(index: Int, value: CharArray): StringBuilder {
+    actual fun insert(index: Int, konstue: CharArray): StringBuilder {
         AbstractList.checkPositionIndex(index, length)
 
-        string = string.substring(0, index) + value.concatToString() + string.substring(index)
+        string = string.substring(0, index) + konstue.concatToString() + string.substring(index)
         return this
     }
 
     /**
-     * Inserts characters in the specified character sequence [value] into this string builder at the specified [index] and returns this instance.
+     * Inserts characters in the specified character sequence [konstue] into this string builder at the specified [index] and returns this instance.
      *
-     * The inserted characters go in the same order as in the [value] character sequence, starting at [index].
+     * The inserted characters go in the same order as in the [konstue] character sequence, starting at [index].
      *
      * @param index the position in this string builder to insert at.
-     * @param value the character sequence from which characters are inserted. If [value] is `null`, then the four characters `"null"` are inserted.
+     * @param konstue the character sequence from which characters are inserted. If [konstue] is `null`, then the four characters `"null"` are inserted.
      *
      * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    actual fun insert(index: Int, value: CharSequence?): StringBuilder {
+    actual fun insert(index: Int, konstue: CharSequence?): StringBuilder {
         AbstractList.checkPositionIndex(index, length)
 
-        string = string.substring(0, index) + value.toString() + string.substring(index)
+        string = string.substring(0, index) + konstue.toString() + string.substring(index)
         return this
     }
 
     /**
-     * Inserts the string representation of the specified object [value] into this string builder at the specified [index] and returns this instance.
+     * Inserts the string representation of the specified object [konstue] into this string builder at the specified [index] and returns this instance.
      *
-     * The overall effect is exactly as if the [value] were converted to a string by the `value.toString()` method,
+     * The overall effect is exactly as if the [konstue] were converted to a string by the `konstue.toString()` method,
      * and then that string was inserted into this string builder at the specified [index].
      *
      * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    actual fun insert(index: Int, value: Any?): StringBuilder {
+    actual fun insert(index: Int, konstue: Any?): StringBuilder {
         AbstractList.checkPositionIndex(index, length)
 
-        string = string.substring(0, index) + value.toString() + string.substring(index)
+        string = string.substring(0, index) + konstue.toString() + string.substring(index)
         return this
     }
 
     /**
-     * Inserts the string [value] into this string builder at the specified [index] and returns this instance.
+     * Inserts the string [konstue] into this string builder at the specified [index] and returns this instance.
      *
-     * If [value] is `null`, then the four characters `"null"` are inserted.
+     * If [konstue] is `null`, then the four characters `"null"` are inserted.
      *
      * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    actual fun insert(index: Int, value: String?): StringBuilder {
+    actual fun insert(index: Int, konstue: String?): StringBuilder {
         AbstractList.checkPositionIndex(index, length)
 
-        val toInsert = value ?: "null"
+        konst toInsert = konstue ?: "null"
         this.string = this.string.substring(0, index) + toInsert + this.string.substring(index)
         return this
     }
@@ -349,7 +349,7 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
      *
      * If the backing storage of this string builder is larger than necessary to hold its current contents,
      * then it may be resized to become more space efficient.
-     * Calling this method may, but is not required to, affect the value of the [capacity] property.
+     * Calling this method may, but is not required to, affect the konstue of the [capacity] property.
      *
      * In Kotlin/JS implementation of StringBuilder the size of the backing storage is always equal to the length of the string builder.
      */
@@ -372,33 +372,33 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
     }
 
     /**
-     * Sets the character at the specified [index] to the specified [value].
+     * Sets the character at the specified [index] to the specified [konstue].
      *
      * @throws IndexOutOfBoundsException if [index] is out of bounds of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    public operator fun set(index: Int, value: Char) {
+    public operator fun set(index: Int, konstue: Char) {
         AbstractList.checkElementIndex(index, length)
 
-        string = string.substring(0, index) + value + string.substring(index + 1)
+        string = string.substring(0, index) + konstue + string.substring(index + 1)
     }
 
     /**
-     * Replaces characters in the specified range of this string builder with characters in the specified string [value] and returns this instance.
+     * Replaces characters in the specified range of this string builder with characters in the specified string [konstue] and returns this instance.
      *
      * @param startIndex the beginning (inclusive) of the range to replace.
      * @param endIndex the end (exclusive) of the range to replace.
-     * @param value the string to replace with.
+     * @param konstue the string to replace with.
      *
      * @throws IndexOutOfBoundsException or [IllegalArgumentException] if [startIndex] is less than zero, greater than the length of this string builder, or `startIndex > endIndex`.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    public fun setRange(startIndex: Int, endIndex: Int, value: String): StringBuilder {
+    public fun setRange(startIndex: Int, endIndex: Int, konstue: String): StringBuilder {
         checkReplaceRange(startIndex, endIndex, length)
 
-        this.string = this.string.substring(0, startIndex) + value + this.string.substring(endIndex)
+        this.string = this.string.substring(0, startIndex) + konstue + this.string.substring(endIndex)
         return this
     }
 
@@ -471,36 +471,36 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
     }
 
     /**
-     * Appends characters in a subarray of the specified character array [value] to this string builder and returns this instance.
+     * Appends characters in a subarray of the specified character array [konstue] to this string builder and returns this instance.
      *
      * Characters are appended in order, starting at specified [startIndex].
      *
-     * @param value the array from which characters are appended.
+     * @param konstue the array from which characters are appended.
      * @param startIndex the beginning (inclusive) of the subarray to append.
      * @param endIndex the end (exclusive) of the subarray to append.
      *
-     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] array indices or when `startIndex > endIndex`.
+     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] array indices or when `startIndex > endIndex`.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    public fun appendRange(value: CharArray, startIndex: Int, endIndex: Int): StringBuilder {
-        string += value.concatToString(startIndex, endIndex)
+    public fun appendRange(konstue: CharArray, startIndex: Int, endIndex: Int): StringBuilder {
+        string += konstue.concatToString(startIndex, endIndex)
         return this
     }
 
     /**
-     * Appends a subsequence of the specified character sequence [value] to this string builder and returns this instance.
+     * Appends a subsequence of the specified character sequence [konstue] to this string builder and returns this instance.
      *
-     * @param value the character sequence from which a subsequence is appended.
+     * @param konstue the character sequence from which a subsequence is appended.
      * @param startIndex the beginning (inclusive) of the subsequence to append.
      * @param endIndex the end (exclusive) of the subsequence to append.
      *
-     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    public fun appendRange(value: CharSequence, startIndex: Int, endIndex: Int): StringBuilder {
-        val stringCsq = value.toString()
+    public fun appendRange(konstue: CharSequence, startIndex: Int, endIndex: Int): StringBuilder {
+        konst stringCsq = konstue.toString()
         AbstractList.checkBoundsIndexes(startIndex, endIndex, stringCsq.length)
 
         string += stringCsq.substring(startIndex, endIndex)
@@ -508,46 +508,46 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
     }
 
     /**
-     * Inserts characters in a subarray of the specified character array [value] into this string builder at the specified [index] and returns this instance.
+     * Inserts characters in a subarray of the specified character array [konstue] into this string builder at the specified [index] and returns this instance.
      *
-     * The inserted characters go in same order as in the [value] array, starting at [index].
+     * The inserted characters go in same order as in the [konstue] array, starting at [index].
      *
      * @param index the position in this string builder to insert at.
-     * @param value the array from which characters are inserted.
+     * @param konstue the array from which characters are inserted.
      * @param startIndex the beginning (inclusive) of the subarray to insert.
      * @param endIndex the end (exclusive) of the subarray to insert.
      *
-     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] array indices or when `startIndex > endIndex`.
+     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] array indices or when `startIndex > endIndex`.
      * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    public fun insertRange(index: Int, value: CharArray, startIndex: Int, endIndex: Int): StringBuilder {
+    public fun insertRange(index: Int, konstue: CharArray, startIndex: Int, endIndex: Int): StringBuilder {
         AbstractList.checkPositionIndex(index, this.length)
 
-        string = string.substring(0, index) + value.concatToString(startIndex, endIndex) + string.substring(index)
+        string = string.substring(0, index) + konstue.concatToString(startIndex, endIndex) + string.substring(index)
         return this
     }
 
     /**
-     * Inserts characters in a subsequence of the specified character sequence [value] into this string builder at the specified [index] and returns this instance.
+     * Inserts characters in a subsequence of the specified character sequence [konstue] into this string builder at the specified [index] and returns this instance.
      *
-     * The inserted characters go in the same order as in the [value] character sequence, starting at [index].
+     * The inserted characters go in the same order as in the [konstue] character sequence, starting at [index].
      *
      * @param index the position in this string builder to insert at.
-     * @param value the character sequence from which a subsequence is inserted.
+     * @param konstue the character sequence from which a subsequence is inserted.
      * @param startIndex the beginning (inclusive) of the subsequence to insert.
      * @param endIndex the end (exclusive) of the subsequence to insert.
      *
-     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
      * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
      */
     @SinceKotlin("1.4")
     @WasExperimental(ExperimentalStdlibApi::class)
-    public fun insertRange(index: Int, value: CharSequence, startIndex: Int, endIndex: Int): StringBuilder {
+    public fun insertRange(index: Int, konstue: CharSequence, startIndex: Int, endIndex: Int): StringBuilder {
         AbstractList.checkPositionIndex(index, length)
 
-        val stringCsq = value.toString()
+        konst stringCsq = konstue.toString()
         AbstractList.checkBoundsIndexes(startIndex, endIndex, stringCsq.length)
 
         string = string.substring(0, index) + stringCsq.substring(startIndex, endIndex) + string.substring(index)
@@ -566,29 +566,29 @@ public actual class StringBuilder actual constructor(content: String) : Appendab
 public actual inline fun StringBuilder.clear(): StringBuilder = this.clear()
 
 /**
- * Sets the character at the specified [index] to the specified [value].
+ * Sets the character at the specified [index] to the specified [konstue].
  *
  * @throws IndexOutOfBoundsException if [index] is out of bounds of this string builder.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
-public actual inline operator fun StringBuilder.set(index: Int, value: Char) = this.set(index, value)
+public actual inline operator fun StringBuilder.set(index: Int, konstue: Char) = this.set(index, konstue)
 
 /**
- * Replaces characters in the specified range of this string builder with characters in the specified string [value] and returns this instance.
+ * Replaces characters in the specified range of this string builder with characters in the specified string [konstue] and returns this instance.
  *
  * @param startIndex the beginning (inclusive) of the range to replace.
  * @param endIndex the end (exclusive) of the range to replace.
- * @param value the string to replace with.
+ * @param konstue the string to replace with.
  *
  * @throws IndexOutOfBoundsException or [IllegalArgumentException] if [startIndex] is less than zero, greater than the length of this string builder, or `startIndex > endIndex`.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
-public actual inline fun StringBuilder.setRange(startIndex: Int, endIndex: Int, value: String): StringBuilder =
-    this.setRange(startIndex, endIndex, value)
+public actual inline fun StringBuilder.setRange(startIndex: Int, endIndex: Int, konstue: String): StringBuilder =
+    this.setRange(startIndex, endIndex, konstue)
 
 /**
  * Removes the character at the specified [index] from this string builder and returns this instance.
@@ -636,71 +636,71 @@ public actual inline fun StringBuilder.toCharArray(destination: CharArray, desti
     this.toCharArray(destination, destinationOffset, startIndex, endIndex)
 
 /**
- * Appends characters in a subarray of the specified character array [value] to this string builder and returns this instance.
+ * Appends characters in a subarray of the specified character array [konstue] to this string builder and returns this instance.
  *
  * Characters are appended in order, starting at specified [startIndex].
  *
- * @param value the array from which characters are appended.
+ * @param konstue the array from which characters are appended.
  * @param startIndex the beginning (inclusive) of the subarray to append.
  * @param endIndex the end (exclusive) of the subarray to append.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] array indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] array indices or when `startIndex > endIndex`.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
-public actual inline fun StringBuilder.appendRange(value: CharArray, startIndex: Int, endIndex: Int): StringBuilder =
-    this.appendRange(value, startIndex, endIndex)
+public actual inline fun StringBuilder.appendRange(konstue: CharArray, startIndex: Int, endIndex: Int): StringBuilder =
+    this.appendRange(konstue, startIndex, endIndex)
 
 /**
- * Appends a subsequence of the specified character sequence [value] to this string builder and returns this instance.
+ * Appends a subsequence of the specified character sequence [konstue] to this string builder and returns this instance.
  *
- * @param value the character sequence from which a subsequence is appended.
+ * @param konstue the character sequence from which a subsequence is appended.
  * @param startIndex the beginning (inclusive) of the subsequence to append.
  * @param endIndex the end (exclusive) of the subsequence to append.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
-public actual inline fun StringBuilder.appendRange(value: CharSequence, startIndex: Int, endIndex: Int): StringBuilder =
-    this.appendRange(value, startIndex, endIndex)
+public actual inline fun StringBuilder.appendRange(konstue: CharSequence, startIndex: Int, endIndex: Int): StringBuilder =
+    this.appendRange(konstue, startIndex, endIndex)
 
 /**
- * Inserts characters in a subarray of the specified character array [value] into this string builder at the specified [index] and returns this instance.
+ * Inserts characters in a subarray of the specified character array [konstue] into this string builder at the specified [index] and returns this instance.
  *
- * The inserted characters go in same order as in the [value] array, starting at [index].
+ * The inserted characters go in same order as in the [konstue] array, starting at [index].
  *
  * @param index the position in this string builder to insert at.
- * @param value the array from which characters are inserted.
+ * @param konstue the array from which characters are inserted.
  * @param startIndex the beginning (inclusive) of the subarray to insert.
  * @param endIndex the end (exclusive) of the subarray to insert.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] array indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] array indices or when `startIndex > endIndex`.
  * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
-public actual inline fun StringBuilder.insertRange(index: Int, value: CharArray, startIndex: Int, endIndex: Int): StringBuilder =
-    this.insertRange(index, value, startIndex, endIndex)
+public actual inline fun StringBuilder.insertRange(index: Int, konstue: CharArray, startIndex: Int, endIndex: Int): StringBuilder =
+    this.insertRange(index, konstue, startIndex, endIndex)
 
 /**
- * Inserts characters in a subsequence of the specified character sequence [value] into this string builder at the specified [index] and returns this instance.
+ * Inserts characters in a subsequence of the specified character sequence [konstue] into this string builder at the specified [index] and returns this instance.
  *
- * The inserted characters go in the same order as in the [value] character sequence, starting at [index].
+ * The inserted characters go in the same order as in the [konstue] character sequence, starting at [index].
  *
  * @param index the position in this string builder to insert at.
- * @param value the character sequence from which a subsequence is inserted.
+ * @param konstue the character sequence from which a subsequence is inserted.
  * @param startIndex the beginning (inclusive) of the subsequence to insert.
  * @param endIndex the end (exclusive) of the subsequence to insert.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
  * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER", "NOTHING_TO_INLINE")
-public actual inline fun StringBuilder.insertRange(index: Int, value: CharSequence, startIndex: Int, endIndex: Int): StringBuilder =
-    this.insertRange(index, value, startIndex, endIndex)
+public actual inline fun StringBuilder.insertRange(index: Int, konstue: CharSequence, startIndex: Int, endIndex: Int): StringBuilder =
+    this.insertRange(index, konstue, startIndex, endIndex)

@@ -3,7 +3,7 @@
 fun a() = "string"
 
 class A {
-    val b: String
+    konst b: String
     init {
         a().apply {
             b = this

@@ -49,16 +49,16 @@ import org.jetbrains.kotlin.name.Name
 
 class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
     companion object {
-        private const val TO_BUILDER = "toBuilder"
+        private const konst TO_BUILDER = "toBuilder"
     }
 
-    private val lombokService: LombokService
+    private konst lombokService: LombokService
         get() = session.lombokService
 
-    private val builderClassCache: FirCache<FirClassSymbol<*>, FirJavaClass?, Nothing?> =
+    private konst builderClassCache: FirCache<FirClassSymbol<*>, FirJavaClass?, Nothing?> =
         session.firCachesFactory.createCache(::createBuilderClass)
 
-    private val functionsCache: FirCache<FirClassSymbol<*>, Map<Name, List<FirJavaMethod>>?, Nothing?> =
+    private konst functionsCache: FirCache<FirClassSymbol<*>, Map<Name, List<FirJavaMethod>>?, Nothing?> =
         session.firCachesFactory.createCache(::createFunctions)
 
     override fun getCallableNamesForClass(classSymbol: FirClassSymbol<*>, context: MemberGenerationContext): Set<Name> {
@@ -68,12 +68,12 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
 
     override fun getNestedClassifiersNames(classSymbol: FirClassSymbol<*>, context: NestedClassGenerationContext): Set<Name> {
         if (!classSymbol.isSuitableJavaClass()) return emptySet()
-        val name = builderClassCache.getValue(classSymbol)?.name ?: return emptySet()
+        konst name = builderClassCache.getValue(classSymbol)?.name ?: return emptySet()
         return setOf(name)
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
-        val classSymbol = context?.owner ?: return emptyList()
+        konst classSymbol = context?.owner ?: return emptyList()
         return functionsCache.getValue(classSymbol)?.get(callableId.callableName).orEmpty().map { it.symbol }
     }
 
@@ -87,17 +87,17 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
     }
 
     private fun createFunctions(classSymbol: FirClassSymbol<*>): Map<Name, List<FirJavaMethod>>? {
-        val builder = lombokService.getBuilder(classSymbol) ?: return null
-        val functions = mutableListOf<FirJavaMethod>()
-        val classId = classSymbol.classId
-        val builderClassName = builder.builderClassName.replace("*", classId.shortClassName.asString())
-        val builderClassId = classId.createNestedClassId(Name.identifier(builderClassName))
+        konst builder = lombokService.getBuilder(classSymbol) ?: return null
+        konst functions = mutableListOf<FirJavaMethod>()
+        konst classId = classSymbol.classId
+        konst builderClassName = builder.builderClassName.replace("*", classId.shortClassName.asString())
+        konst builderClassId = classId.createNestedClassId(Name.identifier(builderClassName))
 
-        val builderType = builderClassId.constructClassLikeType(emptyArray(), isNullable = false)
-        val visibility = builder.visibility.toVisibility()
+        konst builderType = builderClassId.constructClassLikeType(emptyArray(), isNullable = false)
+        konst visibility = builder.visibility.toVisibility()
         functions += classSymbol.createJavaMethod(
             Name.identifier(builder.builderMethodName),
-            valueParameters = emptyList(),
+            konstueParameters = emptyList(),
             returnTypeRef = builderType.toFirResolvedTypeRef(),
             visibility = visibility,
             modality = Modality.FINAL,
@@ -108,7 +108,7 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
         if (builder.requiresToBuilder) {
             functions += classSymbol.createJavaMethod(
                 Name.identifier(TO_BUILDER),
-                valueParameters = emptyList(),
+                konstueParameters = emptyList(),
                 returnTypeRef = builderType.toFirResolvedTypeRef(),
                 visibility = visibility,
                 modality = Modality.FINAL,
@@ -120,11 +120,11 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
 
     @OptIn(SymbolInternals::class)
     private fun createBuilderClass(classSymbol: FirClassSymbol<*>): FirJavaClass? {
-        val javaClass = classSymbol.fir as? FirJavaClass ?: return null
-        val builder = lombokService.getBuilder(classSymbol) ?: return null
-        val builderName = Name.identifier(builder.builderClassName.replace("*", classSymbol.name.asString()))
-        val visibility = builder.visibility.toVisibility()
-        val builderClass = classSymbol.createJavaClass(
+        konst javaClass = classSymbol.fir as? FirJavaClass ?: return null
+        konst builder = lombokService.getBuilder(classSymbol) ?: return null
+        konst builderName = Name.identifier(builder.builderClassName.replace("*", classSymbol.name.asString()))
+        konst visibility = builder.visibility.toVisibility()
+        konst builderClass = classSymbol.createJavaClass(
             session,
             builderName,
             visibility,
@@ -135,14 +135,14 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
             declarations += symbol.createDefaultJavaConstructor(visibility)
             declarations += symbol.createJavaMethod(
                 Name.identifier(builder.buildMethodName),
-                valueParameters = emptyList(),
+                konstueParameters = emptyList(),
                 returnTypeRef = classSymbol.defaultType().toFirResolvedTypeRef(),
                 visibility = visibility,
                 modality = Modality.FINAL
             )
-            val fields = javaClass.declarations.filterIsInstance<FirJavaField>()
+            konst fields = javaClass.declarations.filterIsInstance<FirJavaField>()
             for (field in fields) {
-                when (val singular = lombokService.getSingular(field.symbol)) {
+                when (konst singular = lombokService.getSingular(field.symbol)) {
                     null -> createSetterMethod(builder, field, symbol, declarations)
                     else -> createMethodsForSingularFields(builder, singular, field, symbol, declarations)
                 }
@@ -160,11 +160,11 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
         builderClassSymbol: FirRegularClassSymbol,
         destination: MutableList<FirDeclaration>
     ) {
-        val fieldName = field.name
-        val setterName = fieldName.toMethodName(builder)
+        konst fieldName = field.name
+        konst setterName = fieldName.toMethodName(builder)
         destination += builderClassSymbol.createJavaMethod(
             name = setterName,
-            valueParameters = listOf(ConeLombokValueParameter(fieldName, field.returnTypeRef)),
+            konstueParameters = listOf(ConeLombokValueParameter(fieldName, field.returnTypeRef)),
             returnTypeRef = builderClassSymbol.defaultType().toFirResolvedTypeRef(),
             modality = Modality.FINAL,
             visibility = builder.visibility.toVisibility()
@@ -178,25 +178,25 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
         builderClassSymbol: FirRegularClassSymbol,
         destination: MutableList<FirDeclaration>
     ) {
-        val fieldJavaTypeRef = field.returnTypeRef as? FirJavaTypeRef ?: return
-        val javaClassifierType = fieldJavaTypeRef.type as? JavaClassifierType ?: return
-        val typeName = (javaClassifierType.classifier as? JavaClass)?.fqName?.asString() ?: return
+        konst fieldJavaTypeRef = field.returnTypeRef as? FirJavaTypeRef ?: return
+        konst javaClassifierType = fieldJavaTypeRef.type as? JavaClassifierType ?: return
+        konst typeName = (javaClassifierType.classifier as? JavaClass)?.fqName?.asString() ?: return
 
-        val nameInSingularForm = (singular.singularName ?: field.name.identifier.singularForm)?.let(Name::identifier) ?: return
+        konst nameInSingularForm = (singular.singularName ?: field.name.identifier.singularForm)?.let(Name::identifier) ?: return
 
-        val addMultipleParameterType: FirTypeRef
-        val valueParameters: List<ConeLombokValueParameter>
+        konst addMultipleParameterType: FirTypeRef
+        konst konstueParameters: List<ConeLombokValueParameter>
 
-        val fallbackParameterType = DummyJavaClassType.ObjectType.takeIf { javaClassifierType.isRaw }
+        konst fallbackParameterType = DummyJavaClassType.ObjectType.takeIf { javaClassifierType.isRaw }
 
         when (typeName) {
             in LombokNames.SUPPORTED_COLLECTIONS -> {
-                val parameterType = javaClassifierType.parameterType(0) ?: fallbackParameterType ?: return
-                valueParameters = listOf(
+                konst parameterType = javaClassifierType.parameterType(0) ?: fallbackParameterType ?: return
+                konstueParameters = listOf(
                     ConeLombokValueParameter(nameInSingularForm, parameterType.toRef())
                 )
 
-                val baseType = when (typeName) {
+                konst baseType = when (typeName) {
                     in LombokNames.SUPPORTED_GUAVA_COLLECTIONS -> JavaClasses.Iterable
                     else -> JavaClasses.Collection
                 }
@@ -207,44 +207,44 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
             }
 
             in LombokNames.SUPPORTED_MAPS -> {
-                val keyType = javaClassifierType.parameterType(0) ?: fallbackParameterType ?: return
-                val valueType = javaClassifierType.parameterType(1) ?: fallbackParameterType ?: return
-                valueParameters = listOf(
+                konst keyType = javaClassifierType.parameterType(0) ?: fallbackParameterType ?: return
+                konst konstueType = javaClassifierType.parameterType(1) ?: fallbackParameterType ?: return
+                konstueParameters = listOf(
                     ConeLombokValueParameter(Name.identifier("key"), keyType.toRef()),
-                    ConeLombokValueParameter(Name.identifier("value"), valueType.toRef()),
+                    ConeLombokValueParameter(Name.identifier("konstue"), konstueType.toRef()),
                 )
 
-                addMultipleParameterType = DummyJavaClassType(JavaClasses.Map, typeArguments = listOf(keyType, valueType))
+                addMultipleParameterType = DummyJavaClassType(JavaClasses.Map, typeArguments = listOf(keyType, konstueType))
                     .withProperNullability(singular.allowNull)
                     .toRef()
             }
 
             in LombokNames.SUPPORTED_TABLES -> {
-                val rowKeyType = javaClassifierType.parameterType(0) ?: fallbackParameterType ?: return
-                val columnKeyType = javaClassifierType.parameterType(1) ?: fallbackParameterType ?: return
-                val valueType = javaClassifierType.parameterType(2) ?: fallbackParameterType ?: return
+                konst rowKeyType = javaClassifierType.parameterType(0) ?: fallbackParameterType ?: return
+                konst columnKeyType = javaClassifierType.parameterType(1) ?: fallbackParameterType ?: return
+                konst konstueType = javaClassifierType.parameterType(2) ?: fallbackParameterType ?: return
 
-                valueParameters = listOf(
+                konstueParameters = listOf(
                     ConeLombokValueParameter(Name.identifier("rowKey"), rowKeyType.toRef()),
                     ConeLombokValueParameter(Name.identifier("columnKey"), columnKeyType.toRef()),
-                    ConeLombokValueParameter(Name.identifier("value"), valueType.toRef()),
+                    ConeLombokValueParameter(Name.identifier("konstue"), konstueType.toRef()),
                 )
 
                 addMultipleParameterType = DummyJavaClassType(
                     JavaClasses.Table,
-                    typeArguments = listOf(rowKeyType, columnKeyType, valueType)
+                    typeArguments = listOf(rowKeyType, columnKeyType, konstueType)
                 ).withProperNullability(singular.allowNull).toRef()
             }
 
             else -> return
         }
 
-        val builderType = builderClassSymbol.defaultType().toFirResolvedTypeRef()
-        val visibility = builder.visibility.toVisibility()
+        konst builderType = builderClassSymbol.defaultType().toFirResolvedTypeRef()
+        konst visibility = builder.visibility.toVisibility()
 
         destination += builderClassSymbol.createJavaMethod(
             name = nameInSingularForm.toMethodName(builder),
-            valueParameters,
+            konstueParameters,
             returnTypeRef = builderType,
             modality = Modality.FINAL,
             visibility = visibility
@@ -252,7 +252,7 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
 
         destination += builderClassSymbol.createJavaMethod(
             name = field.name.toMethodName(builder),
-            valueParameters = listOf(ConeLombokValueParameter(field.name, addMultipleParameterType)),
+            konstueParameters = listOf(ConeLombokValueParameter(field.name, addMultipleParameterType)),
             returnTypeRef = builderType,
             modality = Modality.FINAL,
             visibility = visibility
@@ -260,7 +260,7 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
 
         destination += builderClassSymbol.createJavaMethod(
             name = Name.identifier("clear${field.name.identifier.capitalize()}"),
-            valueParameters = listOf(),
+            konstueParameters = listOf(),
             returnTypeRef = builderType,
             modality = Modality.FINAL,
             visibility = visibility
@@ -268,7 +268,7 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
     }
 
     private fun Name.toMethodName(builder: Builder): Name {
-        val prefix = builder.setterPrefix
+        konst prefix = builder.setterPrefix
         return if (prefix.isNullOrBlank()) {
             this
         } else {
@@ -276,7 +276,7 @@ class BuilderGenerator(session: FirSession) : FirDeclarationGenerationExtension(
         }
     }
 
-    private val String.singularForm: String?
+    private konst String.singularForm: String?
         get() = StringUtil.unpluralize(this)
 
     private fun JavaClassifierType.parameterType(index: Int): JavaType? {
@@ -293,7 +293,7 @@ fun JavaType.makeNotNullable(): JavaType = withAnnotations(annotations + Nullabi
 
 fun FirClassSymbol<*>.createJavaMethod(
     name: Name,
-    valueParameters: List<ConeLombokValueParameter>,
+    konstueParameters: List<ConeLombokValueParameter>,
     returnTypeRef: FirTypeRef,
     visibility: Visibility,
     modality: Modality,
@@ -311,12 +311,12 @@ fun FirClassSymbol<*>.createJavaMethod(
         }
         isFromSource = true
         annotationBuilder = { emptyList() }
-        for (valueParameter in valueParameters) {
-            this.valueParameters += buildJavaValueParameter {
+        for (konstueParameter in konstueParameters) {
+            this.konstueParameters += buildJavaValueParameter {
                 moduleData = this@createJavaMethod.moduleData
-                this.returnTypeRef = valueParameter.typeRef
+                this.returnTypeRef = konstueParameter.typeRef
                 containingFunctionSymbol = this@buildJavaMethod.symbol
-                this.name = valueParameter.name
+                this.name = konstueParameter.name
                 annotationBuilder = { emptyList() }
                 isVararg = false
                 isFromSource = true
@@ -332,7 +332,7 @@ fun FirClassSymbol<*>.createJavaMethod(
 fun FirClassSymbol<*>.createDefaultJavaConstructor(
     visibility: Visibility,
 ): FirJavaConstructor {
-    val outerClassSymbol = this
+    konst outerClassSymbol = this
     return buildJavaConstructor {
         moduleData = outerClassSymbol.moduleData
         isFromSource = true
@@ -359,7 +359,7 @@ fun FirClassSymbol<*>.createDefaultJavaConstructor(
     }
 }
 
-class ConeLombokValueParameter(val name: Name, val typeRef: FirTypeRef)
+class ConeLombokValueParameter(konst name: Name, konst typeRef: FirTypeRef)
 
 @OptIn(SymbolInternals::class)
 fun FirClassSymbol<*>.createJavaClass(
@@ -370,8 +370,8 @@ fun FirClassSymbol<*>.createJavaClass(
     isStatic: Boolean,
     superTypeRefs: List<FirTypeRef>,
 ): FirJavaClass? {
-    val containingClass = this.fir as? FirJavaClass ?: return null
-    val classId = containingClass.classId.createNestedClassId(name)
+    konst containingClass = this.fir as? FirJavaClass ?: return null
+    konst classId = containingClass.classId.createNestedClassId(name)
     return buildJavaClass {
         moduleData = containingClass.moduleData
         symbol = FirRegularClassSymbol(classId)
@@ -389,7 +389,7 @@ fun FirClassSymbol<*>.createJavaClass(
             }
         }
         this.superTypeRefs += superTypeRefs
-        val effectiveVisibility = containingClass.effectiveVisibility.lowerBound(
+        konst effectiveVisibility = containingClass.effectiveVisibility.lowerBound(
             visibility.toEffectiveVisibility(this@createJavaClass, forClass = true),
             session.typeContext
         )

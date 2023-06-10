@@ -1,7 +1,7 @@
 //KT-1703 Reference to label is unresolved
 
 fun test() {
-    val ints = Array<Int?>(2, { null })
+    konst ints = Array<Int?>(2, { null })
     ints.forEach lit@ {
         if (it == null) return@lit
         use(it + 5)

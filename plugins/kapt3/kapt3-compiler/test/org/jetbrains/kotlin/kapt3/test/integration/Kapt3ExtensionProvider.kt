@@ -35,8 +35,8 @@ import javax.lang.model.element.Element
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.TypeElement
 
-class Kapt3ExtensionProvider(private val testServices: TestServices) : TestService {
-    private val cache: MutableMap<TestModule, Kapt3ExtensionForTests> = mutableMapOf()
+class Kapt3ExtensionProvider(private konst testServices: TestServices) : TestService {
+    private konst cache: MutableMap<TestModule, Kapt3ExtensionForTests> = mutableMapOf()
 
     fun createExtension(
         module: TestModule,
@@ -50,7 +50,7 @@ class Kapt3ExtensionProvider(private val testServices: TestServices) : TestServi
             testServices.assertions.fail { "Kapt3ExtensionForTests for module $module already registered" }
         }
 
-        val extension = Kapt3ExtensionForTests(
+        konst extension = Kapt3ExtensionForTests(
             processorOptions,
             kaptOptions,
             process,
@@ -66,15 +66,15 @@ class Kapt3ExtensionProvider(private val testServices: TestServices) : TestServi
     }
 }
 
-val TestServices.kapt3ExtensionProvider: Kapt3ExtensionProvider by TestServices.testServiceAccessor()
+konst TestServices.kapt3ExtensionProvider: Kapt3ExtensionProvider by TestServices.testServiceAccessor()
 
 class Kapt3ExtensionForTests(
-    private val processorOptions: Map<String, String>,
+    private konst processorOptions: Map<String, String>,
     options: KaptOptions,
-    private val process: (Set<TypeElement>, RoundEnvironment, ProcessingEnvironment, Kapt3ExtensionForTests) -> Unit,
-    val supportedAnnotations: List<String>,
+    private konst process: (Set<TypeElement>, RoundEnvironment, ProcessingEnvironment, Kapt3ExtensionForTests) -> Unit,
+    konst supportedAnnotations: List<String>,
     compilerConfiguration: CompilerConfiguration,
-    val messageCollector: LoggingMessageCollector = LoggingMessageCollector()
+    konst messageCollector: LoggingMessageCollector = LoggingMessageCollector()
 ) : AbstractKapt3Extension(
     options, MessageCollectorBackedKaptLogger(
         flags = options,
@@ -82,14 +82,14 @@ class Kapt3ExtensionForTests(
     ), compilerConfiguration = compilerConfiguration
 ) {
     private var _started = false
-    val started: Boolean
+    konst started: Boolean
         get() = _started
     var savedStubs: String? = null
         private set
     var savedBindings: Map<String, KaptJavaFileObject>? = null
         private set
 
-    private val processor = object : Processor {
+    private konst processor = object : Processor {
         lateinit var processingEnv: ProcessingEnvironment
 
         override fun getSupportedOptions() = processorOptions.keys
@@ -157,8 +157,8 @@ class Kapt3ExtensionForTests(
 }
 
 class LoggingMessageCollector : MessageCollector {
-    private val _messages = mutableListOf<Message>()
-    val messages: List<Message>
+    private konst _messages = mutableListOf<Message>()
+    konst messages: List<Message>
         get() = _messages
 
     override fun clear() {
@@ -174,8 +174,8 @@ class LoggingMessageCollector : MessageCollector {
     }
 
     data class Message(
-        val severity: CompilerMessageSeverity,
-        val message: String,
-        val location: CompilerMessageSourceLocation?
+        konst severity: CompilerMessageSeverity,
+        konst message: String,
+        konst location: CompilerMessageSourceLocation?
     )
 }

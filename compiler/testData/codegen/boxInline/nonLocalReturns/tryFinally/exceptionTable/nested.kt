@@ -38,13 +38,13 @@ public inline fun doCall(block: ()-> String, exception1: (e: Exception)-> Unit, 
 import test.*
 
 class Holder {
-    var value: String = ""
+    var konstue: String = ""
 }
 
 fun test0(h: Holder, throwEx1: Boolean, throwEx2: Boolean, throwEx3: Boolean = false, throwEx4: Boolean = false): String {
-    val localResult = doCall (
+    konst localResult = doCall (
             {
-                h.value += "OK_NON_LOCAL"
+                h.konstue += "OK_NON_LOCAL"
                 if (throwEx1) {
                     throw Exception1("1")
                 }
@@ -54,7 +54,7 @@ fun test0(h: Holder, throwEx1: Boolean, throwEx2: Boolean, throwEx3: Boolean = f
                 return "OK_NON_LOCAL"
             },
             {
-                h.value += ", OK_EXCEPTION1"
+                h.konstue += ", OK_EXCEPTION1"
                 if (throwEx3) {
                     throw Exception1("3_1")
                 }
@@ -64,7 +64,7 @@ fun test0(h: Holder, throwEx1: Boolean, throwEx2: Boolean, throwEx3: Boolean = f
                 return "OK_EXCEPTION1"
             },
             {
-                h.value += ", OK_EXCEPTION2"
+                h.konstue += ", OK_EXCEPTION2"
                 if (throwEx3) {
                     throw Exception1("3_2")
                 }
@@ -74,19 +74,19 @@ fun test0(h: Holder, throwEx1: Boolean, throwEx2: Boolean, throwEx3: Boolean = f
                 return "OK_EXCEPTION2"
             },
             {
-                h.value += ", OK_FINALLY1"
+                h.konstue += ", OK_FINALLY1"
                 "OK_FINALLY1"
             },
             {
-                h.value += ", OK_EXCEPTION3"
+                h.konstue += ", OK_EXCEPTION3"
                 return "OK_EXCEPTION3"
             },
             {
-                h.value += ", OK_EXCEPTION4"
+                h.konstue += ", OK_EXCEPTION4"
                 return "OK_EXCEPTION4"
             },
             {
-                h.value += ", OK_FINALLY2"
+                h.konstue += ", OK_FINALLY2"
                 "OK_FINALLY2"
             })
 
@@ -98,31 +98,31 @@ fun test0(h: Holder, throwEx1: Boolean, throwEx2: Boolean, throwEx3: Boolean = f
 fun box(): String {
     var h = Holder()
     var test0 = test0(h, false, false)
-    if (test0 != "OK_NON_LOCAL" || h.value != "OK_NON_LOCAL, OK_FINALLY1, OK_FINALLY2") return "test0_1: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_NON_LOCAL" || h.konstue != "OK_NON_LOCAL, OK_FINALLY1, OK_FINALLY2") return "test0_1: ${test0}, holder: ${h.konstue}"
 
     h = Holder()
     test0 = test0(h, true, false)
-    if (test0 != "OK_EXCEPTION1" || h.value != "OK_NON_LOCAL, OK_EXCEPTION1, OK_FINALLY1, OK_FINALLY2") return "test0_2: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_EXCEPTION1" || h.konstue != "OK_NON_LOCAL, OK_EXCEPTION1, OK_FINALLY1, OK_FINALLY2") return "test0_2: ${test0}, holder: ${h.konstue}"
 
     h = Holder()
     test0 = test0(h, false, true)
-    if (test0 != "OK_EXCEPTION2" || h.value != "OK_NON_LOCAL, OK_EXCEPTION2, OK_FINALLY1, OK_FINALLY2") return "test0_3: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_EXCEPTION2" || h.konstue != "OK_NON_LOCAL, OK_EXCEPTION2, OK_FINALLY1, OK_FINALLY2") return "test0_3: ${test0}, holder: ${h.konstue}"
 
     h = Holder()
     test0 = test0(h, true, false, true, false)
-    if (test0 != "OK_EXCEPTION3" || h.value != "OK_NON_LOCAL, OK_EXCEPTION1, OK_FINALLY1, OK_EXCEPTION3, OK_FINALLY2") return "test0_4: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_EXCEPTION3" || h.konstue != "OK_NON_LOCAL, OK_EXCEPTION1, OK_FINALLY1, OK_EXCEPTION3, OK_FINALLY2") return "test0_4: ${test0}, holder: ${h.konstue}"
 
     h = Holder()
     test0 = test0(h, true, false, false, true)
-    if (test0 != "OK_EXCEPTION4" || h.value != "OK_NON_LOCAL, OK_EXCEPTION1, OK_FINALLY1, OK_EXCEPTION4, OK_FINALLY2") return "test0_5: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_EXCEPTION4" || h.konstue != "OK_NON_LOCAL, OK_EXCEPTION1, OK_FINALLY1, OK_EXCEPTION4, OK_FINALLY2") return "test0_5: ${test0}, holder: ${h.konstue}"
 
     h = Holder()
     test0 = test0(h, false, true, true, false)
-    if (test0 != "OK_EXCEPTION3" || h.value != "OK_NON_LOCAL, OK_EXCEPTION2, OK_FINALLY1, OK_EXCEPTION3, OK_FINALLY2") return "test0_6: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_EXCEPTION3" || h.konstue != "OK_NON_LOCAL, OK_EXCEPTION2, OK_FINALLY1, OK_EXCEPTION3, OK_FINALLY2") return "test0_6: ${test0}, holder: ${h.konstue}"
 
     h = Holder()
     test0 = test0(h, false, true, false, true)
-    if (test0 != "OK_EXCEPTION4" || h.value != "OK_NON_LOCAL, OK_EXCEPTION2, OK_FINALLY1, OK_EXCEPTION4, OK_FINALLY2") return "test0_7: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_EXCEPTION4" || h.konstue != "OK_NON_LOCAL, OK_EXCEPTION2, OK_FINALLY1, OK_EXCEPTION4, OK_FINALLY2") return "test0_7: ${test0}, holder: ${h.konstue}"
 
     return "OK"
 }

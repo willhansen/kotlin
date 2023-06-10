@@ -11,10 +11,10 @@ import kotlin.test.*
 class RandomWrappersTest {
     @Test
     fun kotlinRandomAsJavaRandom() {
-        val expect = Random(42)
-        val actual = Random(42)
+        konst expect = Random(42)
+        konst actual = Random(42)
 
-        val actualJava = actual.asJavaRandom()
+        konst actualJava = actual.asJavaRandom()
 
         repeat(10) {
             assertEquals(expect.nextInt(), actualJava.nextInt())
@@ -29,16 +29,16 @@ class RandomWrappersTest {
 
         assertFailsWith<UnsupportedOperationException> { actualJava.setSeed(1L) }
 
-        val defaultAsJava = Random.asJavaRandom()
+        konst defaultAsJava = Random.asJavaRandom()
         assertFailsWith<UnsupportedOperationException> { defaultAsJava.setSeed(1L) }
     }
 
     @Test
     fun javaRandomAsKotlinRandom() {
-        val expect = java.util.Random(42L)
-        val actual = java.util.Random(42L)
+        konst expect = java.util.Random(42L)
+        konst actual = java.util.Random(42L)
 
-        val actualKotlin = actual.asKotlinRandom()
+        konst actualKotlin = actual.asKotlinRandom()
 
         repeat(10) {
             assertEquals(expect.nextInt(), actualKotlin.nextInt())

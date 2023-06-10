@@ -22,6 +22,6 @@ inline fun <reified T : Any> test(): String {
 import test.*
 
 fun box():String {
-    val test = test<OK>()
+    konst test = test<OK>()
     return if (test == OK::class.qualifiedName) "OK" else "fail: $test"
 }

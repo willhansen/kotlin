@@ -5,7 +5,7 @@
 // JVM_TARGET: 17
 
 @JvmRecord
-data class A constructor(val x: Int, val s: String) {
+data class A constructor(konst x: Int, konst s: String) {
     constructor(x: Long, s: String) : <!PRIMARY_CONSTRUCTOR_DELEGATION_CALL_EXPECTED!>super<!>(<!TOO_MANY_ARGUMENTS!>x.toInt()<!>, <!TOO_MANY_ARGUMENTS!>s<!>)
     constructor(x: Byte, s: String) : <!PRIMARY_CONSTRUCTOR_DELEGATION_CALL_EXPECTED!>super<!>(<!TOO_MANY_ARGUMENTS!>x.toInt()<!>, <!TOO_MANY_ARGUMENTS!>s.<!UNRESOLVED_REFERENCE!>unresolved<!>()<!>)
 

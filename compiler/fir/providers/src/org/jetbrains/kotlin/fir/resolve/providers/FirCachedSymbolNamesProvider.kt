@@ -17,19 +17,19 @@ import org.jetbrains.kotlin.name.Name
 /**
  * A [FirSymbolNamesProvider] that caches all name sets.
  */
-abstract class FirCachedSymbolNamesProvider(protected val session: FirSession) : FirSymbolNamesProvider() {
+abstract class FirCachedSymbolNamesProvider(protected konst session: FirSession) : FirSymbolNamesProvider() {
     abstract fun computeTopLevelClassifierNames(packageFqName: FqName): Set<String>?
     abstract fun computePackageNamesWithTopLevelCallables(): Set<String>?
     abstract fun computeTopLevelCallableNames(packageFqName: FqName): Set<Name>?
 
-    private val topLevelClassifierNamesByPackage =
+    private konst topLevelClassifierNamesByPackage =
         session.firCachesFactory.createCache(::computeTopLevelClassifierNames)
 
-    private val topLevelCallablePackageNames by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst topLevelCallablePackageNames by lazy(LazyThreadSafetyMode.PUBLICATION) {
         computePackageNamesWithTopLevelCallables()
     }
 
-    private val topLevelCallableNamesByPackage =
+    private konst topLevelCallableNamesByPackage =
         session.firCachesFactory.createCache(::computeTopLevelCallableNames)
 
     override fun getTopLevelClassifierNamesInPackage(packageFqName: FqName): Set<String>? =
@@ -38,7 +38,7 @@ abstract class FirCachedSymbolNamesProvider(protected val session: FirSession) :
     override fun getPackageNamesWithTopLevelCallables(): Set<String>? = topLevelCallablePackageNames
 
     override fun getTopLevelCallableNamesInPackage(packageFqName: FqName): Set<Name>? {
-        val packageNames = getPackageNamesWithTopLevelCallables()
+        konst packageNames = getPackageNamesWithTopLevelCallables()
         if (packageNames != null && packageFqName.asString() !in packageNames) return emptySet()
 
         return topLevelCallableNamesByPackage.getValue(packageFqName)
@@ -47,7 +47,7 @@ abstract class FirCachedSymbolNamesProvider(protected val session: FirSession) :
 
 class FirDelegatingCachedSymbolNamesProvider(
     session: FirSession,
-    private val delegate: FirSymbolNamesProvider,
+    private konst delegate: FirSymbolNamesProvider,
 ) : FirCachedSymbolNamesProvider(session) {
     override fun computeTopLevelClassifierNames(packageFqName: FqName): Set<String>? =
         delegate.getTopLevelClassifierNamesInPackage(packageFqName)
@@ -58,7 +58,7 @@ class FirDelegatingCachedSymbolNamesProvider(
     override fun computeTopLevelCallableNames(packageFqName: FqName): Set<Name>? =
         delegate.getTopLevelCallableNamesInPackage(packageFqName)
 
-    override val mayHaveSyntheticFunctionTypes: Boolean
+    override konst mayHaveSyntheticFunctionTypes: Boolean
         get() = delegate.mayHaveSyntheticFunctionTypes
 
     override fun mayHaveSyntheticFunctionType(classId: ClassId): Boolean = delegate.mayHaveSyntheticFunctionType(classId)
@@ -66,7 +66,7 @@ class FirDelegatingCachedSymbolNamesProvider(
 
 open class FirCompositeCachedSymbolNamesProvider(
     session: FirSession,
-    val providers: List<FirSymbolNamesProvider>,
+    konst providers: List<FirSymbolNamesProvider>,
 ) : FirCachedSymbolNamesProvider(session) {
     override fun computeTopLevelClassifierNames(packageFqName: FqName): Set<String>? =
         providers.flatMapToNullableSet { it.getTopLevelClassifierNamesInPackage(packageFqName) }
@@ -77,7 +77,7 @@ open class FirCompositeCachedSymbolNamesProvider(
     override fun computeTopLevelCallableNames(packageFqName: FqName): Set<Name>? =
         providers.flatMapToNullableSet { it.getTopLevelCallableNamesInPackage(packageFqName) }
 
-    override val mayHaveSyntheticFunctionTypes: Boolean = providers.any { it.mayHaveSyntheticFunctionTypes }
+    override konst mayHaveSyntheticFunctionTypes: Boolean = providers.any { it.mayHaveSyntheticFunctionTypes }
 
     @OptIn(FirSymbolProviderInternals::class)
     override fun mayHaveSyntheticFunctionType(classId: ClassId): Boolean {
@@ -91,7 +91,7 @@ open class FirCompositeCachedSymbolNamesProvider(
     companion object {
         fun create(session: FirSession, providers: List<FirSymbolNamesProvider>): FirSymbolNamesProvider = when (providers.size) {
             0 -> FirEmptySymbolNamesProvider
-            1 -> when (val provider = providers.single()) {
+            1 -> when (konst provider = providers.single()) {
                 is FirCachedSymbolNamesProvider -> provider
                 else -> FirDelegatingCachedSymbolNamesProvider(session, provider)
             }

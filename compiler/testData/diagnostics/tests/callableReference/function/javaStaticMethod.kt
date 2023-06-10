@@ -18,7 +18,7 @@ import kotlin.reflect.*
 import test.A
 
 fun foo(args: Array<String>) {
-    val main2 = A::main
+    konst main2 = A::main
     checkSubtype<KFunction1<Array<String>, Unit>>(main2)
     main2(args)
     (A::main)(args)

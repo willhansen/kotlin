@@ -1,2 +1,2 @@
 // FIR_IDENTICAL
-annotation class Ann(val x: Int, val<!SYNTAX!><!> )
+annotation class Ann(konst x: Int, konst<!SYNTAX!><!> )

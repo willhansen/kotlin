@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.backend.konan.Context
 import org.jetbrains.kotlin.backend.konan.NativeGenerationState
 
 internal fun llvmLinkModules2(generationState: NativeGenerationState, dest: LLVMModuleRef, src: LLVMModuleRef): LLVMBool {
-    val diagnosticHandler = DefaultLlvmDiagnosticHandler(generationState, object : DefaultLlvmDiagnosticHandler.Policy {
+    konst diagnosticHandler = DefaultLlvmDiagnosticHandler(generationState, object : DefaultLlvmDiagnosticHandler.Policy {
         override fun suppressWarning(diagnostic: LlvmDiagnostic): Boolean {
             if (super.suppressWarning(diagnostic)) return true
 
@@ -19,7 +19,7 @@ internal fun llvmLinkModules2(generationState: NativeGenerationState, dest: LLVM
             // Also it is expected: LLVM bitcode can be built in different environments with different SDK versions,
             // and then linked by the compiler altogether.
             // Just ignore such warnings for now:
-            if (diagnostic.message.startsWith("linking module flags 'SDK Version': IDs have conflicting values")) return true
+            if (diagnostic.message.startsWith("linking module flags 'SDK Version': IDs have conflicting konstues")) return true
 
             return false
         }

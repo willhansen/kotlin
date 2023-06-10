@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 
 abstract class KtElementInstructionImpl(
-    override val element: KtElement,
+    override konst element: KtElement,
     blockScope: BlockScope
 ) : InstructionImpl(blockScope), KtElementInstruction {
     protected fun render(element: PsiElement): String =

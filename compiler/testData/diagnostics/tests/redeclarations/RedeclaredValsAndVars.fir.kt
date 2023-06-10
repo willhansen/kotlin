@@ -7,10 +7,10 @@ class A {
 }
 
 fun testRedeclaration(b: Boolean) {
-    val <!REDECLARATION!>y<!> = 1
-    val <!REDECLARATION!>y<!> = 2
-    val <!REDECLARATION!>`_`<!> = 3
-    val <!REDECLARATION!>`_`<!> = 4
+    konst <!REDECLARATION!>y<!> = 1
+    konst <!REDECLARATION!>y<!> = 2
+    konst <!REDECLARATION!>`_`<!> = 3
+    konst <!REDECLARATION!>`_`<!> = 4
     {
         var <!REDECLARATION!>a<!> = 10
         var <!REDECLARATION!>a<!> = 11
@@ -19,12 +19,12 @@ fun testRedeclaration(b: Boolean) {
 
 fun testNoRedeclaration(list: List<Int>, b: Boolean) {
     for (el in list) {
-        val el = 42
+        konst el = 42
     }
     if (b) {
-        val z = 3
+        konst z = 3
     } else {
-        val z = 4
+        konst z = 4
     }
-    val (`_`, _) = A()
+    konst (`_`, _) = A()
 }

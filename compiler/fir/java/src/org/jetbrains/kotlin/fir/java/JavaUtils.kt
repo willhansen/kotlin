@@ -28,14 +28,14 @@ import org.jetbrains.kotlin.load.java.structure.JavaModifierListOwner
 import org.jetbrains.kotlin.load.java.structure.JavaWildcardType
 import org.jetbrains.kotlin.types.ConstantValueKind
 
-internal val JavaModifierListOwner.modality: Modality
+internal konst JavaModifierListOwner.modality: Modality
     get() = when {
         isAbstract -> Modality.ABSTRACT
         isFinal -> Modality.FINAL
         else -> Modality.OPEN
     }
 
-val JavaClass.modality: Modality
+konst JavaClass.modality: Modality
     get() = when {
         isAnnotationType || isEnum -> Modality.FINAL
         isSealed -> Modality.SEALED
@@ -44,7 +44,7 @@ val JavaClass.modality: Modality
         else -> Modality.OPEN
     }
 
-val JavaClass.classKind: ClassKind
+konst JavaClass.classKind: ClassKind
     get() = when {
         isAnnotationType -> ClassKind.ANNOTATION_CLASS
         isInterface -> ClassKind.INTERFACE
@@ -57,7 +57,7 @@ fun JavaClass.hasMetadataAnnotation(): Boolean =
 
 internal fun Any?.createConstantOrError(session: FirSession): FirExpression {
     return createConstantIfAny(session) ?: buildErrorExpression {
-        diagnostic = ConeSimpleDiagnostic("Unknown value in JavaLiteralAnnotationArgument: $this", DiagnosticKind.Java)
+        diagnostic = ConeSimpleDiagnostic("Unknown konstue in JavaLiteralAnnotationArgument: $this", DiagnosticKind.Java)
     }
 }
 
@@ -100,7 +100,7 @@ private fun <T> List<T>.createArrayOfCall(session: FirSession, kind: ConstantVal
 }
 
 private fun FirConstExpression<*>.setProperType(session: FirSession): FirConstExpression<*> {
-    val typeRef = buildResolvedTypeRef {
+    konst typeRef = buildResolvedTypeRef {
         type = kind.expectedConeType(session)
     }
     replaceTypeRef(typeRef)

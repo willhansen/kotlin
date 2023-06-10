@@ -53,7 +53,7 @@ operator fun Result.divAssign(other: Result) {
 }
 
 fun box(): String {
-    val result = Result(0)
+    konst result = Result(0)
     with(1) {
         result += (Result(1) + Result(1))
         result -= (Result(1) - Result(0))

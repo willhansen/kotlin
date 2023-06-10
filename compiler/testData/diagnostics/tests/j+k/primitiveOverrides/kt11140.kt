@@ -14,12 +14,12 @@ public class A extends HashMap<Integer, Double> implements B<Integer, Double> {
     }
 
     @Override
-    public Double put(Integer key, Double value) {
-        return super.put(key, value);
+    public Double put(Integer key, Double konstue) {
+        return super.put(key, konstue);
     }
 }
 // FILE: main.kt
 fun test(){
-    val o = A()
+    konst o = A()
     o.put(1, 2.0)
 }

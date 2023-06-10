@@ -18,18 +18,18 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.plus
 import org.jetbrains.kotlin.gradle.utils.filesProvider
 
 class KotlinWithJavaCompilationFactory<KotlinOptionsType : KotlinCommonOptions, CO : KotlinCommonCompilerOptions> internal constructor(
-    override val target: KotlinWithJavaTarget<KotlinOptionsType, CO>,
-    val compilerOptionsFactory: () -> HasCompilerOptions<CO>,
-    val kotlinOptionsFactory: (CO) -> KotlinOptionsType
+    override konst target: KotlinWithJavaTarget<KotlinOptionsType, CO>,
+    konst compilerOptionsFactory: () -> HasCompilerOptions<CO>,
+    konst kotlinOptionsFactory: (CO) -> KotlinOptionsType
 ) : KotlinCompilationFactory<KotlinWithJavaCompilation<KotlinOptionsType, CO>> {
 
     @Suppress("UNCHECKED_CAST")
-    override val itemClass: Class<KotlinWithJavaCompilation<KotlinOptionsType, CO>>
+    override konst itemClass: Class<KotlinWithJavaCompilation<KotlinOptionsType, CO>>
         get() = KotlinWithJavaCompilation::class.java as Class<KotlinWithJavaCompilation<KotlinOptionsType, CO>>
 
     @Suppress("UNCHECKED_CAST")
     override fun create(name: String): KotlinWithJavaCompilation<KotlinOptionsType, CO> {
-        val javaSourceSet = project.javaSourceSets.findByName(name) ?: run {
+        konst javaSourceSet = project.javaSourceSets.findByName(name) ?: run {
             /*
             Creating the java SourceSet first here:
             After the javaSourceSet is created, another .all hook will call into this factory creating the KotlinCompilation.
@@ -39,11 +39,11 @@ class KotlinWithJavaCompilationFactory<KotlinOptionsType : KotlinCommonOptions, 
             return target.compilations.getByName(name)
         }
 
-        val compilationImplFactory = KotlinCompilationImplFactory(
+        konst compilationImplFactory = KotlinCompilationImplFactory(
             processResourcesTaskNameFactory = { _, _ -> javaSourceSet.processResourcesTaskName },
             compilerOptionsFactory = { _, _ ->
-                val compilerOptions = compilerOptionsFactory()
-                val kotlinOptions = kotlinOptionsFactory(compilerOptions.options)
+                konst compilerOptions = compilerOptionsFactory()
+                konst kotlinOptions = kotlinOptionsFactory(compilerOptions.options)
                 KotlinCompilationImplFactory.KotlinCompilerOptionsFactory.Options(compilerOptions, kotlinOptions)
             },
             compilationAssociator = KotlinJvmCompilationAssociator,

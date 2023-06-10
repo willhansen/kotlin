@@ -30,18 +30,18 @@ abstract class GradleKpmJvmVariant @Inject constructor(
     runtimeDependencyConfiguration = runtimeDependenciesConfiguration,
     runtimeElementsConfiguration = runtimeElementsConfiguration
 ) {
-    override val compilationData: GradleKpmJvmVariantCompilationData by lazy { GradleKpmJvmVariantCompilationData(this) }
+    override konst compilationData: GradleKpmJvmVariantCompilationData by lazy { GradleKpmJvmVariantCompilationData(this) }
 
-    override val platformType: KotlinPlatformType
+    override konst platformType: KotlinPlatformType
         get() = KotlinPlatformType.jvm
 }
 
-class GradleKpmJvmVariantCompilationData(val variant: GradleKpmJvmVariant) : GradleKpmVariantCompilationDataInternal<KotlinJvmOptions> {
-    override val owner: GradleKpmJvmVariant get() = variant
+class GradleKpmJvmVariantCompilationData(konst variant: GradleKpmJvmVariant) : GradleKpmVariantCompilationDataInternal<KotlinJvmOptions> {
+    override konst owner: GradleKpmJvmVariant get() = variant
 
-    override val compilerOptions: HasCompilerOptions<KotlinJvmCompilerOptions> =
+    override konst compilerOptions: HasCompilerOptions<KotlinJvmCompilerOptions> =
         object : HasCompilerOptions<KotlinJvmCompilerOptions> {
-            override val options: KotlinJvmCompilerOptions = variant.project.objects
+            override konst options: KotlinJvmCompilerOptions = variant.project.objects
                 .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
                 .configureExperimentalTryK2(variant.project)
         }
@@ -49,16 +49,16 @@ class GradleKpmJvmVariantCompilationData(val variant: GradleKpmJvmVariant) : Gra
     // TODO pull out to the variant
     @Suppress("DEPRECATION")
     @Deprecated("Replaced with compilerOptions.options", replaceWith = ReplaceWith("compilerOptions.options"))
-    override val kotlinOptions: KotlinJvmOptions = object : KotlinJvmOptions {
-        override val options: KotlinJvmCompilerOptions
+    override konst kotlinOptions: KotlinJvmOptions = object : KotlinJvmOptions {
+        override konst options: KotlinJvmCompilerOptions
             get() = compilerOptions.options
     }
 }
 
 internal fun GradleKpmVariant.ownModuleName(): String {
-    val project = containingModule.project
-    val baseName = project.archivesName.orNull
+    konst project = containingModule.project
+    konst baseName = project.archivesName.orNull
         ?: project.name
-    val suffix = if (containingModule.moduleClassifier == null) "" else "_${containingModule.moduleClassifier}"
+    konst suffix = if (containingModule.moduleClassifier == null) "" else "_${containingModule.moduleClassifier}"
     return filterModuleName("$baseName$suffix")
 }

@@ -1,7 +1,7 @@
 @Deprecated("Deprecated class")
 open class DeprecatedClass
 
-open class WithDeprecatedCtor(val x: Int) {
+open class WithDeprecatedCtor(konst x: Int) {
     @Deprecated("Deprecated constructor")
     constructor() : this(0)
 }
@@ -14,4 +14,4 @@ class Test1 : <!TYPEALIAS_EXPANSION_DEPRECATION!>DeprecatedClassAlias<!>()
 
 class Test2 : <!TYPEALIAS_EXPANSION_DEPRECATION!>WithDeprecatedCtorAlias<!>()
 
-val test3 = <!TYPEALIAS_EXPANSION_DEPRECATION!>ArrayListOfDeprecatedClass<!>()
+konst test3 = <!TYPEALIAS_EXPANSION_DEPRECATION!>ArrayListOfDeprecatedClass<!>()

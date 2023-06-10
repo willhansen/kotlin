@@ -17,7 +17,7 @@ fun <T> foo(comparator: Cmp<in T>, a: T, b: T) = comparator.compare(a, b)
 fun bar(x: Int, y: Int) = foo({ a, b -> a - b}, x, y)
 
 fun box(): String {
-    val t = bar(42, 117)
+    konst t = bar(42, 117)
     if (t != -75)
         return "Failed: t=$t"
     return "OK"

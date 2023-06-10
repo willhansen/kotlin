@@ -24,17 +24,17 @@ class GenerateArrayIterators(out: PrintWriter) : BuiltInsSourceGenerator(out) {
     override fun getPackage() = "kotlin.jvm.internal"
 
     override fun generateBody() {
-        for (kind in PrimitiveType.values()) {
-            val s = kind.capitalized
-            out.println("private class Array${s}Iterator(private val array: ${s}Array) : ${s}Iterator() {")
+        for (kind in PrimitiveType.konstues()) {
+            konst s = kind.capitalized
+            out.println("private class Array${s}Iterator(private konst array: ${s}Array) : ${s}Iterator() {")
             out.println("    private var index = 0")
             out.println("    override fun hasNext() = index < array.size")
             out.println("    override fun next$s() = try { array[index++] } catch (e: ArrayIndexOutOfBoundsException) { index -= 1; throw NoSuchElementException(e.message) }")
             out.println("}")
             out.println()
         }
-        for (kind in PrimitiveType.values()) {
-            val s = kind.capitalized
+        for (kind in PrimitiveType.konstues()) {
+            konst s = kind.capitalized
             out.println("public fun iterator(array: ${s}Array): ${s}Iterator = Array${s}Iterator(array)")
         }
     }

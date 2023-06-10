@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirStringConcatenationCallImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var argumentList: FirArgumentList,
 ) : FirStringConcatenationCall() {

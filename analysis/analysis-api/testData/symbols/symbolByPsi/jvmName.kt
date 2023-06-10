@@ -10,6 +10,6 @@ class Foo {
         @JvmName("getMyJ")
         get() = 1
         @JvmName("setMyJ")
-        set(value) {
+        set(konstue) {
         }
 }

@@ -10,6 +10,6 @@
 
 int main(int argc, char** argv) {
     T_(ObjectForExample) instance = __ kotlin.root.ObjectForExample._instance ();
-    T_(Example)          value =    __ kotlin.root.ObjectForExample.get_example (instance);
-    printf("%x\n", value.pinned);
+    T_(Example)          konstue =    __ kotlin.root.ObjectForExample.get_example (instance);
+    printf("%x\n", konstue.pinned);
 }

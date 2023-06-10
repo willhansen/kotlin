@@ -8,25 +8,25 @@ repositories {
 }
 
 kotlin {
-	val mingwTargetName: String by project
-	val linuxTargetName: String by project
-	val macosTargetName: String by project
-	val currentHostTargetName: String by project
+	konst mingwTargetName: String by project
+	konst linuxTargetName: String by project
+	konst macosTargetName: String by project
+	konst currentHostTargetName: String by project
 
-    val mingw = mingwX64(mingwTargetName) { }
-    val linux = linuxX64(linuxTargetName) { }
-    val macos = macosX64(macosTargetName) { }
-    val linuxArm = linuxArm64()
+    konst mingw = mingwX64(mingwTargetName) { }
+    konst linux = linuxX64(linuxTargetName) { }
+    konst macos = macosX64(macosTargetName) { }
+    konst linuxArm = linuxArm64()
 
 	sourceSets {
-		val allNative by creating {
+		konst allNative by creating {
 			dependsOn(getByName("commonMain"))
 			listOf(mingw, linux, macos).forEach {
 				it.compilations["main"].defaultSourceSet.dependsOn(this@creating)
 			}
 		}
 
-    	val currentHostAndLinux by creating {
+    	konst currentHostAndLinux by creating {
     		dependsOn(allNative)
     	}
 

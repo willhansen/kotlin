@@ -13,6 +13,6 @@ sealed class Season {
     class Nested: Season()
 }
 
-sealed class SealedWithArgs(val a: Int)
+sealed class SealedWithArgs(konst a: Int)
 
 // FIR_COMPARISON

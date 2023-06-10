@@ -5,11 +5,11 @@ import java.io.File
 import java.net.URL
 
 data class D8Env(
-    val cleanableStore: CleanableStore,
-    val zipPath: File,
-    val targetPath: File,
-    val executablePath: File,
-    val isWindows: Boolean,
-    val downloadUrl: URL,
-    val ivyDependency: String
+    konst cleanableStore: CleanableStore,
+    konst zipPath: File,
+    konst targetPath: File,
+    konst executablePath: File,
+    konst isWindows: Boolean,
+    konst downloadUrl: URL,
+    konst ivyDependency: String
 )

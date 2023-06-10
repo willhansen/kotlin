@@ -14,21 +14,21 @@ package foo
 
 
 class Test {
-    val _val: Int = 1
+    konst _konst: Int = 1
 
     var _var: Int = 1
 
-    val _valCustom: Int
+    konst _konstCustom: Int
         get() = 1
 
-    val _valCustomWithField: Int = 1
+    konst _konstCustomWithField: Int = 1
         get() = field + 1
 
     var _varCustom: Int
         get() = 1
-        set(value) {}
+        set(konstue) {}
 
     var _varCustomWithField: Int = 1
         get() = field * 10
-        set(value) { field = value * 10 }
+        set(konstue) { field = konstue * 10 }
 }

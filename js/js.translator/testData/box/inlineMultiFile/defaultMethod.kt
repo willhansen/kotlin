@@ -10,12 +10,12 @@ package foo
 import test.*
 
 fun simple(): String {
-    val k = "K"
+    konst k = "K"
     return simpleFun(lambda = {it + "O"}) + simpleFun("K", {k + it})
 }
 
 fun simpleR(): String {
-    val k = "K"
+    konst k = "K"
     return simpleFunR({it + "O"}) + simpleFunR({k + it}, "K")
 }
 

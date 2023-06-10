@@ -3,7 +3,7 @@
 @file:JvmName("SomeName")
 
 <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-val c = 4
+konst c = 4
 
 <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
 var g = 5

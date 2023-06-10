@@ -3,12 +3,12 @@ package foo
 
 var sideEffect: Int = 0;
 
-class A(val x: Int)
+class A(konst x: Int)
 
-val global_a = A(1)
-val global_b = A(2)
+konst global_a = A(1)
+konst global_b = A(2)
 
-fun nullFun(value: Boolean): Any? = if (value) null else global_a
+fun nullFun(konstue: Boolean): Any? = if (konstue) null else global_a
 
 fun padding(right: Int, left: Int) {
     ++sideEffect

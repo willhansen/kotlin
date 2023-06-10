@@ -34,21 +34,21 @@ sink:
 =====================
 == foo ==
 fun foo(): Int {
-    val prop: Int by Delegate()
+    konst prop: Int by Delegate()
     return prop
 }
 ---------------------
 L0:
   1 <START>
-  2 mark({ val prop: Int by Delegate() return prop })
-    v(val prop: Int by Delegate())
-    magic[UNRECOGNIZED_WRITE_RHS](val prop: Int by Delegate()) -> <v0>
+  2 mark({ konst prop: Int by Delegate() return prop })
+    v(konst prop: Int by Delegate())
+    magic[UNRECOGNIZED_WRITE_RHS](konst prop: Int by Delegate()) -> <v0>
     w(prop|<v0>)
     mark(Delegate())
     call(Delegate(), <init>) -> <v1>
-    magic[FAKE_INITIALIZER](val prop: Int by Delegate()) -> <v2>
+    magic[FAKE_INITIALIZER](konst prop: Int by Delegate()) -> <v2>
     w(prop|<v2>)
-    magic[VALUE_CONSUMER](val prop: Int by Delegate()|<v1>) -> <v3>
+    magic[VALUE_CONSUMER](konst prop: Int by Delegate()|<v1>) -> <v3>
     r(prop) -> <v4>
     ret(*|<v4>) L1
 L1:

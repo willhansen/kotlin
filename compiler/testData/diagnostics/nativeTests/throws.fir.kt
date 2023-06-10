@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CONSTRUCTOR)
 @Retention(AnnotationRetention.SOURCE)
-public annotation class Throws(vararg val exceptionClasses: KClass<out Throwable>)
+public annotation class Throws(vararg konst exceptionClasses: KClass<out Throwable>)
 
 public open class Exception : Throwable()
 

@@ -1,8 +1,8 @@
 /*∆*/ @kotlin.SinceKotlin(version = "1.4")
-/*∆*/ public val org.w3c.dom.Node.isElement: kotlin.Boolean { get; }
+/*∆*/ public konst org.w3c.dom.Node.isElement: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/ @kotlin.SinceKotlin(version = "1.4")
-/*∆*/ public val org.w3c.dom.Node.isText: kotlin.Boolean { get; }
+/*∆*/ public konst org.w3c.dom.Node.isText: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/ @kotlin.SinceKotlin(version = "1.4")
 /*∆*/ public fun org.w3c.dom.Element.addClass(vararg cssClasses: kotlin.String): kotlin.Boolean

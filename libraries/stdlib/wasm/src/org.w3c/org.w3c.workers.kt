@@ -19,8 +19,8 @@ import org.w3c.notifications.*
  * Exposes the JavaScript [ServiceWorker](https://developer.mozilla.org/en/docs/Web/API/ServiceWorker) to Kotlin
  */
 public external abstract class ServiceWorker : EventTarget, AbstractWorker, UnionMessagePortOrServiceWorker, UnionClientOrMessagePortOrServiceWorker, JsAny {
-    open val scriptURL: String
-    open val state: ServiceWorkerState
+    open konst scriptURL: String
+    open konst state: ServiceWorkerState
     open var onstatechange: ((Event) -> JsAny?)?
     fun postMessage(message: JsAny?, transfer: JsArray<JsAny> = definedExternally)
 }
@@ -29,12 +29,12 @@ public external abstract class ServiceWorker : EventTarget, AbstractWorker, Unio
  * Exposes the JavaScript [ServiceWorkerRegistration](https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerRegistration) to Kotlin
  */
 public external abstract class ServiceWorkerRegistration : EventTarget, JsAny {
-    open val installing: ServiceWorker?
-    open val waiting: ServiceWorker?
-    open val active: ServiceWorker?
-    open val scope: String
+    open konst installing: ServiceWorker?
+    open konst waiting: ServiceWorker?
+    open konst active: ServiceWorker?
+    open konst scope: String
     open var onupdatefound: ((Event) -> JsAny?)?
-    open val APISpace: JsAny?
+    open konst APISpace: JsAny?
     fun update(): Promise<Nothing?>
     fun unregister(): Promise<JsBoolean>
     fun showNotification(title: String, options: NotificationOptions = definedExternally): Promise<Nothing?>
@@ -46,8 +46,8 @@ public external abstract class ServiceWorkerRegistration : EventTarget, JsAny {
  * Exposes the JavaScript [ServiceWorkerContainer](https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerContainer) to Kotlin
  */
 public external abstract class ServiceWorkerContainer : EventTarget, JsAny {
-    open val controller: ServiceWorker?
-    open val ready: Promise<ServiceWorkerRegistration>
+    open konst controller: ServiceWorker?
+    open konst ready: Promise<ServiceWorkerRegistration>
     open var oncontrollerchange: ((Event) -> JsAny?)?
     open var onmessage: ((MessageEvent) -> JsAny?)?
     fun register(scriptURL: String, options: RegistrationOptions = definedExternally): Promise<ServiceWorkerRegistration>
@@ -59,10 +59,10 @@ public external abstract class ServiceWorkerContainer : EventTarget, JsAny {
 public external interface RegistrationOptions : JsAny {
     var scope: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var type: WorkerType? /* = WorkerType.CLASSIC */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -72,36 +72,36 @@ public fun RegistrationOptions(scope: String? = undefined, type: WorkerType? = W
  * Exposes the JavaScript [ServiceWorkerMessageEvent](https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerMessageEvent) to Kotlin
  */
 public external open class ServiceWorkerMessageEvent(type: String, eventInitDict: ServiceWorkerMessageEventInit = definedExternally) : Event, JsAny {
-    open val data: JsAny?
-    open val origin: String
-    open val lastEventId: String
-    open val source: UnionMessagePortOrServiceWorker?
-    open val ports: JsArray<out MessagePort>?
+    open konst data: JsAny?
+    open konst origin: String
+    open konst lastEventId: String
+    open konst source: UnionMessagePortOrServiceWorker?
+    open konst ports: JsArray<out MessagePort>?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface ServiceWorkerMessageEventInit : EventInit, JsAny {
     var data: JsAny?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var origin: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var lastEventId: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var source: UnionMessagePortOrServiceWorker?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ports: JsArray<MessagePort>?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -111,8 +111,8 @@ public fun ServiceWorkerMessageEventInit(data: JsAny? = undefined, origin: Strin
  * Exposes the JavaScript [ServiceWorkerGlobalScope](https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerGlobalScope) to Kotlin
  */
 public external abstract class ServiceWorkerGlobalScope : WorkerGlobalScope, JsAny {
-    open val clients: Clients
-    open val registration: ServiceWorkerRegistration
+    open konst clients: Clients
+    open konst registration: ServiceWorkerRegistration
     open var oninstall: ((Event) -> JsAny?)?
     open var onactivate: ((Event) -> JsAny?)?
     open var onfetch: ((FetchEvent) -> JsAny?)?
@@ -128,9 +128,9 @@ public external abstract class ServiceWorkerGlobalScope : WorkerGlobalScope, JsA
  * Exposes the JavaScript [Client](https://developer.mozilla.org/en/docs/Web/API/Client) to Kotlin
  */
 public external abstract class Client : UnionClientOrMessagePortOrServiceWorker, JsAny {
-    open val url: String
-    open val frameType: FrameType
-    open val id: String
+    open konst url: String
+    open konst frameType: FrameType
+    open konst id: String
     fun postMessage(message: JsAny?, transfer: JsArray<JsAny> = definedExternally)
 }
 
@@ -138,8 +138,8 @@ public external abstract class Client : UnionClientOrMessagePortOrServiceWorker,
  * Exposes the JavaScript [WindowClient](https://developer.mozilla.org/en/docs/Web/API/WindowClient) to Kotlin
  */
 public external abstract class WindowClient : Client, JsAny {
-    open val visibilityState: JsAny?
-    open val focused: Boolean
+    open konst visibilityState: JsAny?
+    open konst focused: Boolean
     fun focus(): Promise<WindowClient>
     fun navigate(url: String): Promise<WindowClient>
 }
@@ -157,10 +157,10 @@ public external abstract class Clients : JsAny {
 public external interface ClientQueryOptions : JsAny {
     var includeUncontrolled: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var type: ClientType? /* = ClientType.WINDOW */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -173,10 +173,10 @@ public external open class ExtendableEvent(type: String, eventInitDict: Extendab
     fun waitUntil(f: Promise<JsAny?>)
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -192,10 +192,10 @@ public external open class InstallEvent(type: String, eventInitDict: ExtendableE
     fun registerForeignFetch(options: ForeignFetchOptions)
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -211,16 +211,16 @@ public fun ForeignFetchOptions(scopes: JsArray<JsString>?, origins: JsArray<JsSt
  * Exposes the JavaScript [FetchEvent](https://developer.mozilla.org/en/docs/Web/API/FetchEvent) to Kotlin
  */
 public external open class FetchEvent(type: String, eventInitDict: FetchEventInit) : ExtendableEvent, JsAny {
-    open val request: Request
-    open val clientId: String?
-    open val isReload: Boolean
+    open konst request: Request
+    open konst clientId: String?
+    open konst isReload: Boolean
     fun respondWith(r: Promise<Response>)
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -228,25 +228,25 @@ public external interface FetchEventInit : ExtendableEventInit, JsAny {
     var request: Request?
     var clientId: String? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var isReload: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
 public fun FetchEventInit(request: Request?, clientId: String? = null, isReload: Boolean? = false, bubbles: Boolean? = false, cancelable: Boolean? = false, composed: Boolean? = false): FetchEventInit { js("return { request, clientId, isReload, bubbles, cancelable, composed };") }
 
 public external open class ForeignFetchEvent(type: String, eventInitDict: ForeignFetchEventInit) : ExtendableEvent, JsAny {
-    open val request: Request
-    open val origin: String
+    open konst request: Request
+    open konst origin: String
     fun respondWith(r: Promise<ForeignFetchResponse>)
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -254,7 +254,7 @@ public external interface ForeignFetchEventInit : ExtendableEventInit, JsAny {
     var request: Request?
     var origin: String? /* = "null" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -264,10 +264,10 @@ public external interface ForeignFetchResponse : JsAny {
     var response: Response?
     var origin: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var headers: JsArray<JsString>?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -277,36 +277,36 @@ public fun ForeignFetchResponse(response: Response?, origin: String? = undefined
  * Exposes the JavaScript [ExtendableMessageEvent](https://developer.mozilla.org/en/docs/Web/API/ExtendableMessageEvent) to Kotlin
  */
 public external open class ExtendableMessageEvent(type: String, eventInitDict: ExtendableMessageEventInit = definedExternally) : ExtendableEvent, JsAny {
-    open val data: JsAny?
-    open val origin: String
-    open val lastEventId: String
-    open val source: UnionClientOrMessagePortOrServiceWorker?
-    open val ports: JsArray<out MessagePort>?
+    open konst data: JsAny?
+    open konst origin: String
+    open konst lastEventId: String
+    open konst source: UnionClientOrMessagePortOrServiceWorker?
+    open konst ports: JsArray<out MessagePort>?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface ExtendableMessageEventInit : ExtendableEventInit, JsAny {
     var data: JsAny?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var origin: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var lastEventId: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var source: UnionClientOrMessagePortOrServiceWorker?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ports: JsArray<MessagePort>?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -328,16 +328,16 @@ public external abstract class Cache : JsAny {
 public external interface CacheQueryOptions : JsAny {
     var ignoreSearch: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ignoreMethod: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ignoreVary: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var cacheName: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -346,16 +346,16 @@ public fun CacheQueryOptions(ignoreSearch: Boolean? = false, ignoreMethod: Boole
 public external interface CacheBatchOperation : JsAny {
     var type: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var request: Request?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var response: Response?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var options: CacheQueryOptions?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -374,10 +374,10 @@ public external abstract class CacheStorage : JsAny {
 
 public external open class FunctionalEvent : ExtendableEvent, JsAny {
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -392,15 +392,15 @@ public external interface ServiceWorkerState : JsAny {
     companion object
 }
 
-public inline val ServiceWorkerState.Companion.INSTALLING: ServiceWorkerState get() = "installing".toJsString().unsafeCast<ServiceWorkerState>()
+public inline konst ServiceWorkerState.Companion.INSTALLING: ServiceWorkerState get() = "installing".toJsString().unsafeCast<ServiceWorkerState>()
 
-public inline val ServiceWorkerState.Companion.INSTALLED: ServiceWorkerState get() = "installed".toJsString().unsafeCast<ServiceWorkerState>()
+public inline konst ServiceWorkerState.Companion.INSTALLED: ServiceWorkerState get() = "installed".toJsString().unsafeCast<ServiceWorkerState>()
 
-public inline val ServiceWorkerState.Companion.ACTIVATING: ServiceWorkerState get() = "activating".toJsString().unsafeCast<ServiceWorkerState>()
+public inline konst ServiceWorkerState.Companion.ACTIVATING: ServiceWorkerState get() = "activating".toJsString().unsafeCast<ServiceWorkerState>()
 
-public inline val ServiceWorkerState.Companion.ACTIVATED: ServiceWorkerState get() = "activated".toJsString().unsafeCast<ServiceWorkerState>()
+public inline konst ServiceWorkerState.Companion.ACTIVATED: ServiceWorkerState get() = "activated".toJsString().unsafeCast<ServiceWorkerState>()
 
-public inline val ServiceWorkerState.Companion.REDUNDANT: ServiceWorkerState get() = "redundant".toJsString().unsafeCast<ServiceWorkerState>()
+public inline konst ServiceWorkerState.Companion.REDUNDANT: ServiceWorkerState get() = "redundant".toJsString().unsafeCast<ServiceWorkerState>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -409,13 +409,13 @@ public external interface FrameType : JsAny {
     companion object
 }
 
-public inline val FrameType.Companion.AUXILIARY: FrameType get() = "auxiliary".toJsString().unsafeCast<FrameType>()
+public inline konst FrameType.Companion.AUXILIARY: FrameType get() = "auxiliary".toJsString().unsafeCast<FrameType>()
 
-public inline val FrameType.Companion.TOP_LEVEL: FrameType get() = "top-level".toJsString().unsafeCast<FrameType>()
+public inline konst FrameType.Companion.TOP_LEVEL: FrameType get() = "top-level".toJsString().unsafeCast<FrameType>()
 
-public inline val FrameType.Companion.NESTED: FrameType get() = "nested".toJsString().unsafeCast<FrameType>()
+public inline konst FrameType.Companion.NESTED: FrameType get() = "nested".toJsString().unsafeCast<FrameType>()
 
-public inline val FrameType.Companion.NONE: FrameType get() = "none".toJsString().unsafeCast<FrameType>()
+public inline konst FrameType.Companion.NONE: FrameType get() = "none".toJsString().unsafeCast<FrameType>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -424,10 +424,10 @@ public external interface ClientType : JsAny {
     companion object
 }
 
-public inline val ClientType.Companion.WINDOW: ClientType get() = "window".toJsString().unsafeCast<ClientType>()
+public inline konst ClientType.Companion.WINDOW: ClientType get() = "window".toJsString().unsafeCast<ClientType>()
 
-public inline val ClientType.Companion.WORKER: ClientType get() = "worker".toJsString().unsafeCast<ClientType>()
+public inline konst ClientType.Companion.WORKER: ClientType get() = "worker".toJsString().unsafeCast<ClientType>()
 
-public inline val ClientType.Companion.SHAREDWORKER: ClientType get() = "sharedworker".toJsString().unsafeCast<ClientType>()
+public inline konst ClientType.Companion.SHAREDWORKER: ClientType get() = "sharedworker".toJsString().unsafeCast<ClientType>()
 
-public inline val ClientType.Companion.ALL: ClientType get() = "all".toJsString().unsafeCast<ClientType>()
+public inline konst ClientType.Companion.ALL: ClientType get() = "all".toJsString().unsafeCast<ClientType>()

@@ -11,28 +11,28 @@ import org.jetbrains.kotlin.types.model.*
 import org.jetbrains.kotlin.utils.SmartSet
 
 class TypeVariableDependencyInformationProvider(
-    private val notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints>,
-    private val postponedKtPrimitives: List<PostponedResolvedAtomMarker>,
-    private val topLevelType: KotlinTypeMarker?,
-    private val typeSystemContext: TypeSystemInferenceExtensionContext
+    private konst notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints>,
+    private konst postponedKtPrimitives: List<PostponedResolvedAtomMarker>,
+    private konst topLevelType: KotlinTypeMarker?,
+    private konst typeSystemContext: TypeSystemInferenceExtensionContext
 ) {
     /*
      * Not oriented edges
      * TypeVariable(A) has UPPER(Function1<TypeVariable(B), R>) => A and B are related deeply
      */
-    private val deepTypeVariableDependencies: MutableMap<TypeConstructorMarker, MutableSet<TypeConstructorMarker>> = hashMapOf()
+    private konst deepTypeVariableDependencies: MutableMap<TypeConstructorMarker, MutableSet<TypeConstructorMarker>> = hashMapOf()
 
     /*
      * Not oriented edges
      * TypeVariable(A) has UPPER(TypeVariable(B)) => A and B are related shallowly
      */
-    private val shallowTypeVariableDependencies: MutableMap<TypeConstructorMarker, MutableSet<TypeConstructorMarker>> = hashMapOf()
+    private konst shallowTypeVariableDependencies: MutableMap<TypeConstructorMarker, MutableSet<TypeConstructorMarker>> = hashMapOf()
 
     // Oriented edges
-    private val postponeArgumentsEdges: MutableMap<TypeConstructorMarker, MutableSet<TypeConstructorMarker>> = hashMapOf()
+    private konst postponeArgumentsEdges: MutableMap<TypeConstructorMarker, MutableSet<TypeConstructorMarker>> = hashMapOf()
 
-    private val relatedToAllOutputTypes: MutableSet<TypeConstructorMarker> = hashSetOf()
-    private val relatedToTopLevelType: MutableSet<TypeConstructorMarker> = hashSetOf()
+    private konst relatedToAllOutputTypes: MutableSet<TypeConstructorMarker> = hashSetOf()
+    private konst relatedToTopLevelType: MutableSet<TypeConstructorMarker> = hashSetOf()
 
     init {
         computeConstraintEdges()
@@ -50,10 +50,10 @@ class TypeVariableDependencyInformationProvider(
     fun areVariablesDependentShallowly(a: TypeConstructorMarker, b: TypeConstructorMarker): Boolean {
         if (a == b) return true
 
-        val shallowDependencies = shallowTypeVariableDependencies[a] ?: return false
+        konst shallowDependencies = shallowTypeVariableDependencies[a] ?: return false
 
         return shallowDependencies.any { it == b } ||
-                shallowTypeVariableDependencies.values.any { dependencies -> a in dependencies && b in dependencies }
+                shallowTypeVariableDependencies.konstues.any { dependencies -> a in dependencies && b in dependencies }
     }
 
     private fun computeConstraintEdges() {
@@ -67,11 +67,11 @@ class TypeVariableDependencyInformationProvider(
             shallowTypeVariableDependencies.getOrPut(to) { linkedSetOf() }.add(from)
         }
 
-        for (variableWithConstraints in notFixedTypeVariables.values) {
-            val from = variableWithConstraints.typeVariable.freshTypeConstructor(typeSystemContext)
+        for (variableWithConstraints in notFixedTypeVariables.konstues) {
+            konst from = variableWithConstraints.typeVariable.freshTypeConstructor(typeSystemContext)
 
             for (constraint in variableWithConstraints.constraints) {
-                val constraintTypeConstructor = constraint.type.typeConstructor(typeSystemContext)
+                konst constraintTypeConstructor = constraint.type.typeConstructor(typeSystemContext)
 
                 constraint.type.forAllMyTypeVariables {
                     if (isMyTypeVariable(it)) {
@@ -93,7 +93,7 @@ class TypeVariableDependencyInformationProvider(
         for (argument in postponedKtPrimitives) {
             if (argument.analyzed) continue
 
-            val typeVariablesInOutputType = SmartSet.create<TypeConstructorMarker>()
+            konst typeVariablesInOutputType = SmartSet.create<TypeConstructorMarker>()
             (argument.outputType ?: continue).forAllMyTypeVariables { typeVariablesInOutputType.add(it) }
             if (typeVariablesInOutputType.isEmpty()) continue
 
@@ -128,7 +128,7 @@ class TypeVariableDependencyInformationProvider(
     private fun KotlinTypeMarker.forAllMyTypeVariables(action: (TypeConstructorMarker) -> Unit) =
         with(typeSystemContext) {
             contains {
-                val typeConstructor = it.typeConstructor()
+                konst typeConstructor = it.typeConstructor()
                 if (isMyTypeVariable(typeConstructor)) action(typeConstructor)
                 false
             }

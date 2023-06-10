@@ -22,16 +22,16 @@ object FirQualifiedSupertypeExtendedByOtherSupertypeChecker : FirQualifiedAccess
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.QualifiedSupertypeMayBeExtendedByOtherSupertype)) return
         // require to be called over a super reference
-        val superReference = (expression.calleeReference as? FirSuperReference)
+        konst superReference = (expression.calleeReference as? FirSuperReference)
             ?.takeIf { it.hadExplicitTypeInSource() }
             ?: return
 
-        val explicitType = superReference.superTypeRef
+        konst explicitType = superReference.superTypeRef
             .toClassLikeSymbol(context.session)
             ?.fullyExpandedClass(context.session) as? FirClassSymbol<*>
             ?: return
 
-        val surroundingType = context.findClosestClassOrObject()
+        konst surroundingType = context.findClosestClassOrObject()
             ?: return
 
         // how many supertypes of `surroundingType`
@@ -41,11 +41,11 @@ object FirQualifiedSupertypeExtendedByOtherSupertypeChecker : FirQualifiedAccess
         var candidate: FirClassSymbol<*>? = null
 
         for (it in surroundingType.superTypeRefs) {
-            val that = it.toClassLikeSymbol(context.session)
+            konst that = it.toClassLikeSymbol(context.session)
                 ?.fullyExpandedClass(context.session) as? FirClassSymbol<*>
                 ?: continue
 
-            val isSupertype = explicitType.isSupertypeOf(that, context.session)
+            konst isSupertype = explicitType.isSupertypeOf(that, context.session)
 
             if (explicitType == that || isSupertype) {
                 if (isSupertype) {

@@ -183,7 +183,7 @@ Version 1.1
     control compilation and installation of an Executable, or source
     code differential comparisons against either the Original Code or
     another well known, available Covered Code of the Contributor's
-    choice. The Source Code can be in a compressed or archival form,
+    choice. The Source Code can be in a compressed or archikonst form,
     provided the appropriate decompression or de-archiving software is
     widely available for no charge.
 
@@ -509,13 +509,13 @@ Version 1.1
     directly or indirectly infringes any patent where such claim is
     resolved (such as by license or settlement) prior to the
     initiation of patent infringement litigation, then the reasonable
-    value of the licenses granted by such Participant under Sections
+    konstue of the licenses granted by such Participant under Sections
     2.1 or 2.2 shall be taken into account in determining the amount
-    or value of any payment or license.
+    or konstue of any payment or license.
 
     8.4.  In the event of termination under Sections 8.1 or 8.2 above,
     all end user license agreements (excluding distributors and
-    resellers) which have been validly granted by You or any
+    resellers) which have been konstidly granted by You or any
     distributor hereunder prior to termination shall survive
     termination.
 
@@ -769,7 +769,7 @@ EXHIBIT A -Mozilla Public License.
       source code, which must be distributed under the terms of Sections
       1 and 2 above on a medium customarily used for software interchange; or,
 
-      b) Accompany it with a written offer, valid for at least three
+      b) Accompany it with a written offer, konstid for at least three
       years, to give any third party, for a charge no more than your
       cost of physically performing source distribution, a complete
       machine-readable copy of the corresponding source code, to be
@@ -794,7 +794,7 @@ EXHIBIT A -Mozilla Public License.
   itself accompanies the executable.
 
   If distribution of executable or object code is made by offering
-  access to copy from a designated place, then offering equivalent
+  access to copy from a designated place, then offering equikonstent
   access to copy the source code from the same place counts as
   distribution of the source code, even though third parties are not
   compelled to copy the source along with the object code.
@@ -837,13 +837,13 @@ EXHIBIT A -Mozilla Public License.
   the only way you could satisfy both it and this License would be to
   refrain entirely from distribution of the Program.
 
-  If any portion of this section is held invalid or unenforceable under
+  If any portion of this section is held inkonstid or unenforceable under
   any particular circumstance, the balance of the section is intended to
   apply and the section as a whole is intended to apply in other
   circumstances.
 
   It is not the purpose of this section to induce you to infringe any
-  patents or other property right claims or to contest validity of any
+  patents or other property right claims or to contest konstidity of any
   such claims; this section has the sole purpose of protecting the
   integrity of the free software distribution system, which is
   implemented by public license practices.  Many people have made

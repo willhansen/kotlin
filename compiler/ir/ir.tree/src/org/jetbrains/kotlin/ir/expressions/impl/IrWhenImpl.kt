@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.utils.SmartList
 
 class IrWhenImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var origin: IrStatementOrigin? = null
 ) : IrWhen() {
@@ -36,12 +36,12 @@ class IrWhenImpl(
         this.branches.addAll(branches)
     }
 
-    override val branches: MutableList<IrBranch> = ArrayList(2)
+    override konst branches: MutableList<IrBranch> = ArrayList(2)
 }
 
 open class IrBranchImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var condition: IrExpression,
     override var result: IrExpression
 ) : IrBranch() {
@@ -50,8 +50,8 @@ open class IrBranchImpl(
 }
 
 class IrElseBranchImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var condition: IrExpression,
     override var result: IrExpression
 ) : IrElseBranch() {

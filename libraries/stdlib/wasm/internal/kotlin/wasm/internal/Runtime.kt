@@ -7,14 +7,14 @@
 
 package kotlin.wasm.internal
 
-internal const val CHAR_SIZE_BYTES = 2
+internal const konst CHAR_SIZE_BYTES = 2
 
 internal fun unsafeRawMemoryToWasmCharArray(srcAddr: Int, dstOffset: Int, dstLength: Int, dst: WasmCharArray) {
     var curAddr = srcAddr
-    val srcAddrEndOffset = srcAddr + dstLength * CHAR_SIZE_BYTES
+    konst srcAddrEndOffset = srcAddr + dstLength * CHAR_SIZE_BYTES
     var dstIndex = dstOffset
     while (curAddr < srcAddrEndOffset) {
-        val char = wasm_i32_load16_u(curAddr).toChar()
+        konst char = wasm_i32_load16_u(curAddr).toChar()
         dst.set(dstIndex, char)
         curAddr += CHAR_SIZE_BYTES
         dstIndex++
@@ -30,7 +30,7 @@ internal fun unsafeGetScratchRawMemory(): Int =
 // Assumes there is enough space at the destination, fails with wasm trap otherwise.
 internal fun unsafeWasmCharArrayToRawMemory(src: WasmCharArray, srcOffset: Int, srcLength: Int, dstAddr: Int) {
     var curAddr = dstAddr
-    val srcEndOffset = srcOffset + srcLength
+    konst srcEndOffset = srcOffset + srcLength
     var srcIndex = srcOffset
     while (srcIndex < srcEndOffset) {
         wasm_i32_store16(curAddr, src.get(srcIndex))
@@ -71,7 +71,7 @@ internal fun <T, R> boxIntrinsic(x: T): R =
 internal fun <T, R> unboxIntrinsic(x: T): R =
     implementedAsIntrinsic
 
-// Represents absence of a value. Should never be used as a real object. See UnitToVoidLowering.kt for more info.
+// Represents absence of a konstue. Should never be used as a real object. See UnitToVoidLowering.kt for more info.
 @ExcludedFromCodegen
 internal class Void private constructor()
 
@@ -119,4 +119,4 @@ internal fun stringGetPoolSize(): Int =
 // This initializer is a special case in FieldInitializersLowering
 @Suppress("DEPRECATION")
 @EagerInitialization
-internal val stringPool: Array<String?> = Array(stringGetPoolSize())
+internal konst stringPool: Array<String?> = Array(stringGetPoolSize())

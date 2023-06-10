@@ -41,7 +41,7 @@ open class KotlinClsStubBuilder : ClsStubBuilder() {
     override fun getStubVersion() = ClassFileStubBuilder.STUB_VERSION + KotlinStubVersions.CLASSFILE_STUB_VERSION
 
     override fun buildFileStub(content: FileContent): PsiFileStub<*>? {
-        val virtualFile = content.file
+        konst virtualFile = content.file
 
         if (ClsClassFinder.isKotlinInternalCompiledFile(virtualFile, content.content)) {
             return null
@@ -57,28 +57,28 @@ open class KotlinClsStubBuilder : ClsStubBuilder() {
     }
 
     private fun doBuildFileStub(file: VirtualFile, fileContent: ByteArray): PsiFileStub<KtFile>? {
-        val kotlinClass = ClsKotlinBinaryClassCache.getInstance().getKotlinBinaryClass(file, fileContent)
+        konst kotlinClass = ClsKotlinBinaryClassCache.getInstance().getKotlinBinaryClass(file, fileContent)
             ?: error("Can't find binary class for Kotlin file: $file")
-        val header = kotlinClass.classHeader
-        val classId = kotlinClass.classId
-        val packageFqName = header.packageName?.let { FqName(it) } ?: classId.packageFqName
+        konst header = kotlinClass.classHeader
+        konst classId = kotlinClass.classId
+        konst packageFqName = header.packageName?.let { FqName(it) } ?: classId.packageFqName
 
         if (!header.metadataVersion.isCompatibleWithCurrentCompilerVersion()) {
             return createIncompatibleAbiVersionFileStub()
         }
 
-        val components = createStubBuilderComponents(file, packageFqName, fileContent, header.metadataVersion)
+        konst components = createStubBuilderComponents(file, packageFqName, fileContent, header.metadataVersion)
         if (header.kind == KotlinClassHeader.Kind.MULTIFILE_CLASS) {
-            val partFiles = ClsClassFinder.findMultifileClassParts(file, classId, header.multifilePartNames)
+            konst partFiles = ClsClassFinder.findMultifileClassParts(file, classId, header.multifilePartNames)
             return createMultifileClassStub(header, partFiles, classId.asSingleFqName(), components)
         }
 
-        val annotationData = header.data
+        konst annotationData = header.data
         if (annotationData == null) {
             LOG.error("Corrupted kotlin header for file ${file.name}")
             return null
         }
-        val strings = header.strings
+        konst strings = header.strings
         if (strings == null) {
             LOG.error("String table not found in file ${file.name}")
             return null
@@ -86,7 +86,7 @@ open class KotlinClsStubBuilder : ClsStubBuilder() {
         return when (header.kind) {
             KotlinClassHeader.Kind.CLASS -> {
                 if (classId.isLocal) return null
-                val (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(annotationData, strings)
+                konst (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(annotationData, strings)
                 if (Flags.VISIBILITY.get(classProto.flags) == ProtoBuf.Visibility.LOCAL) {
                     // Older Kotlin compiler versions didn't put 'INNERCLASS' attributes in some cases (e.g. for cross-inline lambdas),
                     // so 'ClassFileViewProvider.isInnerClass()' pre-check won't find them (EA-105730).
@@ -94,13 +94,13 @@ open class KotlinClsStubBuilder : ClsStubBuilder() {
                     return null
                 }
 
-                val context = components.createContext(nameResolver, packageFqName, TypeTable(classProto.typeTable))
+                konst context = components.createContext(nameResolver, packageFqName, TypeTable(classProto.typeTable))
                 createTopLevelClassStub(classId, classProto, KotlinJvmBinarySourceElement(kotlinClass), context, header.isScript)
             }
             KotlinClassHeader.Kind.FILE_FACADE -> {
-                val (nameResolver, packageProto) = JvmProtoBufUtil.readPackageDataFrom(annotationData, strings)
-                val context = components.createContext(nameResolver, packageFqName, TypeTable(packageProto.typeTable))
-                val fqName = header.packageName?.let { ClassId(FqName(it), classId.relativeClassName, classId.isLocal).asSingleFqName() }
+                konst (nameResolver, packageProto) = JvmProtoBufUtil.readPackageDataFrom(annotationData, strings)
+                konst context = components.createContext(nameResolver, packageFqName, TypeTable(packageProto.typeTable))
+                konst fqName = header.packageName?.let { ClassId(FqName(it), classId.relativeClassName, classId.isLocal).asSingleFqName() }
                     ?: classId.asSingleFqName()
                 createFileFacadeStub(packageProto, fqName, context)
             }
@@ -114,17 +114,17 @@ open class KotlinClsStubBuilder : ClsStubBuilder() {
         fileContent: ByteArray,
         jvmMetadataVersion: JvmMetadataVersion
     ): ClsStubBuilderComponents {
-        val classFinder = DirectoryBasedClassFinder(file.parent!!, packageFqName)
-        val classDataFinder = DirectoryBasedDataFinder(classFinder, LOG, jvmMetadataVersion)
-        val annotationLoader = AnnotationLoaderForClassFileStubBuilder(classFinder, file, fileContent, jvmMetadataVersion)
+        konst classFinder = DirectoryBasedClassFinder(file.parent!!, packageFqName)
+        konst classDataFinder = DirectoryBasedDataFinder(classFinder, LOG, jvmMetadataVersion)
+        konst annotationLoader = AnnotationLoaderForClassFileStubBuilder(classFinder, file, fileContent, jvmMetadataVersion)
         return ClsStubBuilderComponents(classDataFinder, annotationLoader, file, BuiltInSerializerProtocol, classFinder, jvmMetadataVersion)
     }
 
     companion object {
-        val LOG = Logger.getInstance(KotlinClsStubBuilder::class.java)
+        konst LOG = Logger.getInstance(KotlinClsStubBuilder::class.java)
 
         // Archive separator + META-INF + versions
-        private val VERSIONED_PATH_MARKER = "!/META-INF/versions/"
+        private konst VERSIONED_PATH_MARKER = "!/META-INF/versions/"
 
         fun isVersioned(virtualFile: VirtualFile): Boolean {
             return virtualFile.path.contains(VERSIONED_PATH_MARKER)
@@ -134,14 +134,14 @@ open class KotlinClsStubBuilder : ClsStubBuilder() {
 
 private class AnnotationLoaderForClassFileStubBuilder(
     kotlinClassFinder: KotlinClassFinder,
-    private val cachedFile: VirtualFile,
-    private val cachedFileContent: ByteArray,
-    override val jvmMetadataVersion: JvmMetadataVersion
+    private konst cachedFile: VirtualFile,
+    private konst cachedFileContent: ByteArray,
+    override konst jvmMetadataVersion: JvmMetadataVersion
 ) : AbstractBinaryClassAnnotationLoader<AnnotationWithArgs, AnnotationsContainerWithConstants<AnnotationWithArgs, ConstantValue<*>>>(
     kotlinClassFinder
 ) {
 
-    private val storage =
+    private konst storage =
         LockBasedStorageManager.NO_LOCKS.createMemoizedFunction<KotlinJvmBinaryClass, AnnotationsContainerWithConstants<AnnotationWithArgs, ConstantValue<*>>> { kotlinClass ->
             loadAnnotationsAndInitializers(kotlinClass)
         }
@@ -158,7 +158,7 @@ private class AnnotationLoaderForClassFileStubBuilder(
     }
 
     override fun loadAnnotation(proto: ProtoBuf.Annotation, nameResolver: NameResolver): AnnotationWithArgs {
-        val args = proto.argumentList.associate { nameResolver.getName(it.nameId) to createConstantValue(it.value, nameResolver) }
+        konst args = proto.argumentList.associate { nameResolver.getName(it.nameId) to createConstantValue(it.konstue, nameResolver) }
         return AnnotationWithArgs(nameResolver.getClassId(proto.id), args)
     }
 
@@ -177,14 +177,14 @@ private class AnnotationLoaderForClassFileStubBuilder(
     protected fun isRepeatableWithImplicitContainer(annotationClassId: ClassId, arguments: Map<Name, ConstantValue<*>>): Boolean {
         if (annotationClassId != SpecialJvmAnnotations.JAVA_LANG_ANNOTATION_REPEATABLE) return false
 
-        val containerKClassValue = arguments[JvmAnnotationNames.DEFAULT_ANNOTATION_MEMBER_NAME] as? KClassValue ?: return false
-        return isImplicitRepeatableContainer((containerKClassValue.value as KClassValue.Value.NormalClass).classId)
+        konst containerKClassValue = arguments[JvmAnnotationNames.DEFAULT_ANNOTATION_MEMBER_NAME] as? KClassValue ?: return false
+        return isImplicitRepeatableContainer((containerKClassValue.konstue as KClassValue.Value.NormalClass).classId)
     }
 
     private fun loadAnnotationsAndInitializers(kotlinClass: KotlinJvmBinaryClass): AnnotationsContainerWithConstants<AnnotationWithArgs, ConstantValue<*>> {
-        val memberAnnotations = HashMap<MemberSignature, MutableList<AnnotationWithArgs>>()
-        val propertyConstants = HashMap<MemberSignature, ConstantValue<*>>()
-        val annotationParametersDefaultValues = HashMap<MemberSignature, ConstantValue<*>>()
+        konst memberAnnotations = HashMap<MemberSignature, MutableList<AnnotationWithArgs>>()
+        konst propertyConstants = HashMap<MemberSignature, ConstantValue<*>>()
+        konst annotationParametersDefaultValues = HashMap<MemberSignature, ConstantValue<*>>()
 
         kotlinClass.visitMembers(object : KotlinJvmBinaryClass.MemberVisitor {
             override fun visitMethod(name: Name, desc: String): KotlinJvmBinaryClass.MethodAnnotationVisitor {
@@ -192,7 +192,7 @@ private class AnnotationLoaderForClassFileStubBuilder(
             }
 
             override fun visitField(name: Name, desc: String, initializer: Any?): KotlinJvmBinaryClass.AnnotationVisitor {
-                val signature = MemberSignature.fromFieldNameAndDesc(name.asString(), desc)
+                konst signature = MemberSignature.fromFieldNameAndDesc(name.asString(), desc)
                 return MemberAnnotationVisitor(signature)
             }
 
@@ -202,7 +202,7 @@ private class AnnotationLoaderForClassFileStubBuilder(
                 override fun visitParameterAnnotation(
                     index: Int, classId: ClassId, source: SourceElement
                 ): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {
-                    val paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(signature, index)
+                    konst paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(signature, index)
                     var result = memberAnnotations[paramSignature]
                     if (result == null) {
                         result = ArrayList()
@@ -216,8 +216,8 @@ private class AnnotationLoaderForClassFileStubBuilder(
                 }
             }
 
-            open inner class MemberAnnotationVisitor(protected val signature: MemberSignature) : KotlinJvmBinaryClass.AnnotationVisitor {
-                private val result = ArrayList<AnnotationWithArgs>()
+            open inner class MemberAnnotationVisitor(protected konst signature: MemberSignature) : KotlinJvmBinaryClass.AnnotationVisitor {
+                private konst result = ArrayList<AnnotationWithArgs>()
 
                 override fun visitAnnotation(classId: ClassId, source: SourceElement): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {
                     return loadAnnotationIfNotSpecial(classId, source, result)

@@ -1,4 +1,4 @@
-data class A(val x: String, val y: String)
+data class A(konst x: String, konst y: String)
 
 suspend inline fun foo(a: A, block: suspend (A) -> String): String = block(a)
 

@@ -20,20 +20,20 @@ import org.jetbrains.kotlin.test.model.TestArtifactKind
  *   - default libraries
  */
 class DefaultsProvider(
-    val defaultFrontend: FrontendKind<*>,
-    val defaultLanguageSettings: LanguageVersionSettings,
-    private val defaultLanguageSettingsBuilder: LanguageVersionSettingsBuilder,
-    val defaultPlatform: TargetPlatform,
-    val defaultArtifactKind: BinaryKind<*>?,
-    val defaultTargetBackend: TargetBackend?,
-    val defaultDependencyKind: DependencyKind
+    konst defaultFrontend: FrontendKind<*>,
+    konst defaultLanguageSettings: LanguageVersionSettings,
+    private konst defaultLanguageSettingsBuilder: LanguageVersionSettingsBuilder,
+    konst defaultPlatform: TargetPlatform,
+    konst defaultArtifactKind: BinaryKind<*>?,
+    konst defaultTargetBackend: TargetBackend?,
+    konst defaultDependencyKind: DependencyKind
 ) : TestService {
     fun newLanguageSettingsBuilder(): LanguageVersionSettingsBuilder {
         return LanguageVersionSettingsBuilder.fromExistingSettings(defaultLanguageSettingsBuilder)
     }
 }
 
-val TestServices.defaultsProvider: DefaultsProvider by TestServices.testServiceAccessor()
+konst TestServices.defaultsProvider: DefaultsProvider by TestServices.testServiceAccessor()
 
 @DslMarker
 annotation class DefaultsDsl

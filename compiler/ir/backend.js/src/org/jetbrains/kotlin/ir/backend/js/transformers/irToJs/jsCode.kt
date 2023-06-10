@@ -43,18 +43,18 @@ private fun translateJsCodeIntoStatementList(
     sourceInfo: JsLocation?
 ): List<JsStatement>? {
     // TODO: support proper symbol linkage and label clash resolution
-    val (fileName, startLine, offset) = sourceInfo ?: JsLocation("<js-code>", 0, 0)
-    val jsCode = foldString(code, context) ?: return null
+    konst (fileName, startLine, offset) = sourceInfo ?: JsLocation("<js-code>", 0, 0)
+    konst jsCode = foldString(code, context) ?: return null
 
     // Parser can change local or global scope.
     // In case of js we want to keep new local names,
     // but no new global ones.
 
-    val temporaryRootScope = JsRootScope(JsProgram())
-    val currentScope = JsFunctionScope(temporaryRootScope, "js")
+    konst temporaryRootScope = JsRootScope(JsProgram())
+    konst currentScope = JsFunctionScope(temporaryRootScope, "js")
 
     // NOTE: emitting the correct debug info for JS injections is a non-trivial task, because the injection may consist of
-    // constant-evaluated strings, whose origin is hard to track in the JS parser. Also, the presence of explicit \n characters in
+    // constant-ekonstuated strings, whose origin is hard to track in the JS parser. Also, the presence of explicit \n characters in
     // the JS string literal breaks the debug info, because at this level we are unable to distinguish multiline string literals and
     // single-line string literals with explicit \n in it.
     //
@@ -64,7 +64,7 @@ private fun translateJsCodeIntoStatementList(
 }
 
 private fun foldString(expression: IrExpression, context: JsIrBackendContext?): String? {
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
     var foldingFailed = false
     expression.acceptVoid(object : IrElementVisitorVoid {
         override fun visitElement(element: IrElement) {
@@ -85,14 +85,14 @@ private fun foldString(expression: IrExpression, context: JsIrBackendContext?): 
         }
 
         override fun visitGetField(expression: IrGetField) {
-            val owner = expression.symbol.owner
+            konst owner = expression.symbol.owner
             owner.initializer?.expression?.acceptVoid(this)
                 ?: context?.fieldToInitializer?.get(owner)?.acceptVoid(this)
         }
 
         override fun visitCall(expression: IrCall) {
-            val owner = expression.symbol.owner
-            val propertySymbol = owner.correspondingPropertySymbol
+            konst owner = expression.symbol.owner
+            konst propertySymbol = owner.correspondingPropertySymbol
             return when {
                 expression.origin == IrStatementOrigin.PLUS ->
                     expression.acceptChildrenVoid(this)
@@ -102,7 +102,7 @@ private fun foldString(expression: IrExpression, context: JsIrBackendContext?): 
                 }
                 propertySymbol != null && owner == propertySymbol.owner.getter -> {
                     if (propertySymbol.owner.isConst) {
-                        val initializer = propertySymbol.owner.backingField?.initializer
+                        konst initializer = propertySymbol.owner.backingField?.initializer
                         if (initializer != null) {
                             initializer.acceptChildrenVoid(this)
                         } else {
@@ -122,7 +122,7 @@ private fun foldString(expression: IrExpression, context: JsIrBackendContext?): 
         }
 
         override fun visitConst(expression: IrConst<*>) {
-            builder.append(expression.kind.valueOf(expression))
+            builder.append(expression.kind.konstueOf(expression))
         }
 
         override fun visitStringConcatenation(expression: IrStringConcatenation) = expression.acceptChildrenVoid(this)
@@ -133,12 +133,12 @@ private fun foldString(expression: IrExpression, context: JsIrBackendContext?): 
     return builder.toString()
 }
 
-private class InitFunVisitor(private val context: JsIrBackendContext?) : IrElementVisitorVoid {
+private class InitFunVisitor(private konst context: JsIrBackendContext?) : IrElementVisitorVoid {
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
     }
 
     override fun visitSetField(expression: IrSetField) {
-        context?.fieldToInitializer?.set(expression.symbol.owner, expression.value)
+        context?.fieldToInitializer?.set(expression.symbol.owner, expression.konstue)
     }
 }

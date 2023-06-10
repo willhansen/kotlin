@@ -14,36 +14,36 @@ import org.jetbrains.kotlin.kapt3.util.doOpenInternalPackagesIfRequired
 import kotlin.system.measureTimeMillis
 
 object Kapt {
-    private const val JAVAC_CONTEXT_CLASS = "com.sun.tools.javac.util.Context"
+    private const konst JAVAC_CONTEXT_CLASS = "com.sun.tools.javac.util.Context"
 
     @JvmStatic
     @Suppress("unused")
     fun kaptFlags(rawFlags: Set<String>): KaptFlags {
-        return KaptFlags.fromSet(KaptFlag.values().filterTo(mutableSetOf()) { it.name in rawFlags })
+        return KaptFlags.fromSet(KaptFlag.konstues().filterTo(mutableSetOf()) { it.name in rawFlags })
     }
 
     @JvmStatic
     @Suppress("unused")
     fun kapt(options: KaptOptions): Boolean {
         doOpenInternalPackagesIfRequired()
-        val logger = WriterBackedKaptLogger(options[KaptFlag.VERBOSE])
+        konst logger = WriterBackedKaptLogger(options[KaptFlag.VERBOSE])
 
         if (!Kapt.checkJavacComponentsAccess(logger)) {
             return false
         }
 
-        val kaptContext = KaptContext(options, false, logger)
+        konst kaptContext = KaptContext(options, false, logger)
 
         logger.info { options.logString("stand-alone mode") }
 
-        val javaSourceFiles = options.collectJavaSourceFiles(kaptContext.sourcesToReprocess)
+        konst javaSourceFiles = options.collectJavaSourceFiles(kaptContext.sourcesToReprocess)
 
-        val processorLoader = ProcessorLoader(options, logger)
+        konst processorLoader = ProcessorLoader(options, logger)
 
         processorLoader.use {
-            val processors = processorLoader.loadProcessors(findClassLoaderWithJavac())
+            konst processors = processorLoader.loadProcessors(findClassLoaderWithJavac())
 
-            val annotationProcessingTime = measureTimeMillis {
+            konst annotationProcessingTime = measureTimeMillis {
                 kaptContext.doAnnotationProcessing(
                     javaSourceFiles,
                     processors.processors,

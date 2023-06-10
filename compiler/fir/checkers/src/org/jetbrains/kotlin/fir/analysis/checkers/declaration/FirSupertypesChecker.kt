@@ -32,19 +32,19 @@ import org.jetbrains.kotlin.name.StandardClassIds
 object FirSupertypesChecker : FirClassChecker() {
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration.source?.kind is KtFakeSourceElementKind) return
-        val isInterface = declaration.classKind == ClassKind.INTERFACE
+        konst isInterface = declaration.classKind == ClassKind.INTERFACE
         var nullableSupertypeReported = false
         var extensionFunctionSupertypeReported = false
         var interfaceWithSuperclassReported = !isInterface
         var finalSupertypeReported = false
         var singletonInSupertypeReported = false
         var classAppeared = false
-        val superClassSymbols = hashSetOf<FirRegularClassSymbol>()
+        konst superClassSymbols = hashSetOf<FirRegularClassSymbol>()
         for (superTypeRef in declaration.superTypeRefs) {
             // skip implicit super types like Enum or Any
             if (superTypeRef.source == null) continue
 
-            val coneType = superTypeRef.coneType
+            konst coneType = superTypeRef.coneType
             if (!nullableSupertypeReported && coneType.nullability == ConeNullability.NULLABLE) {
                 reporter.reportOn(superTypeRef.source, FirErrors.NULLABLE_SUPERTYPE, context)
                 nullableSupertypeReported = true
@@ -55,8 +55,8 @@ object FirSupertypesChecker : FirClassChecker() {
                 reporter.reportOn(superTypeRef.source, FirErrors.SUPERTYPE_IS_EXTENSION_FUNCTION_TYPE, context)
                 extensionFunctionSupertypeReported = true
             }
-            val lookupTag = (coneType as? ConeClassLikeType)?.lookupTag ?: continue
-            val superTypeSymbol = lookupTag.toSymbol(context.session)
+            konst lookupTag = (coneType as? ConeClassLikeType)?.lookupTag ?: continue
+            konst superTypeSymbol = lookupTag.toSymbol(context.session)
 
             if (superTypeSymbol is FirRegularClassSymbol) {
                 if (!superClassSymbols.add(superTypeSymbol)) {
@@ -73,7 +73,7 @@ object FirSupertypesChecker : FirClassChecker() {
                         interfaceWithSuperclassReported = true
                     }
                 }
-                val isObject = superTypeSymbol.classKind == ClassKind.OBJECT
+                konst isObject = superTypeSymbol.classKind == ClassKind.OBJECT
                 if (!finalSupertypeReported && !isObject && superTypeSymbol.modality == Modality.FINAL) {
                     reporter.reportOn(superTypeRef.source, FirErrors.FINAL_SUPERTYPE, context)
                     finalSupertypeReported = true
@@ -86,8 +86,8 @@ object FirSupertypesChecker : FirClassChecker() {
 
             checkAnnotationOnSuperclass(superTypeRef, context, reporter)
 
-            val fullyExpandedType = coneType.fullyExpandedType(context.session)
-            val symbol = fullyExpandedType.toSymbol(context.session)
+            konst fullyExpandedType = coneType.fullyExpandedType(context.session)
+            konst symbol = fullyExpandedType.toSymbol(context.session)
 
             checkClassCannotBeExtendedDirectly(symbol, reporter, superTypeRef, context)
 
@@ -134,10 +134,10 @@ object FirSupertypesChecker : FirClassChecker() {
         reporter: DiagnosticReporter,
         context: CheckerContext
     ) {
-        val typeRefAndSourcesForArguments = extractArgumentsTypeRefAndSource(superTypeRef) ?: return
+        konst typeRefAndSourcesForArguments = extractArgumentsTypeRefAndSource(superTypeRef) ?: return
         for ((index, typeArgument) in coneType.typeArguments.withIndex()) {
             if (typeArgument.isConflictingOrNotInvariant) {
-                val (_, argSource) = typeRefAndSourcesForArguments.getOrNull(index) ?: continue
+                konst (_, argSource) = typeRefAndSourcesForArguments.getOrNull(index) ?: continue
                 reporter.reportOn(
                     argSource ?: superTypeRef.source,
                     FirErrors.PROJECTION_IN_IMMEDIATE_ARGUMENT_TO_SUPERTYPE,
@@ -173,7 +173,7 @@ object FirSupertypesChecker : FirClassChecker() {
         for (subDeclaration in declaration.declarations) {
             if (subDeclaration is FirField) {
                 if (subDeclaration.visibility == Visibilities.Private && subDeclaration.name.isDelegated) {
-                    val delegatedClassSymbol = subDeclaration.returnTypeRef.toRegularClassSymbol(context.session)
+                    konst delegatedClassSymbol = subDeclaration.returnTypeRef.toRegularClassSymbol(context.session)
                     if (delegatedClassSymbol != null && delegatedClassSymbol.classKind != ClassKind.INTERFACE) {
                         reporter.reportOn(subDeclaration.returnTypeRef.source, FirErrors.DELEGATION_NOT_TO_INTERFACE, context)
                     }

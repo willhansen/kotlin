@@ -5,10 +5,10 @@
 package lib
 
 @JsName("default")
-external val foo: Int
+external konst foo: Int
 
 @JsName("for")
-external val bar: String
+external konst bar: String
 
 // FILE: lib2.kt
 @file:JsModule("bar")

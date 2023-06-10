@@ -19,10 +19,10 @@ import test.*
 
 
 class OK {
-    var value by crashMe<OK>()
+    var konstue by crashMe<OK>()
 }
 
 fun box(): String {
-    OK().value = Unit
+    OK().konstue = Unit
     return result
 }

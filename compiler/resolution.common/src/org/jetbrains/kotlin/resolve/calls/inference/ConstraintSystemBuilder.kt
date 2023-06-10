@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.resolve.calls.inference.model.*
 import org.jetbrains.kotlin.types.model.*
 
 interface ConstraintSystemOperation {
-    val hasContradiction: Boolean
+    konst hasContradiction: Boolean
     fun registerVariable(variable: TypeVariableMarker)
     fun markPostponedVariable(variable: TypeVariableMarker)
     fun markCouldBeResolvedWithUnrestrictedBuilderInference()
@@ -46,7 +46,7 @@ interface ConstraintSystemOperation {
 
     fun addOtherSystem(otherSystem: ConstraintStorage)
 
-    val errors: List<ConstraintSystemError>
+    konst errors: List<ConstraintSystemError>
 }
 
 abstract class ConstraintSystemTransaction {
@@ -65,7 +65,7 @@ interface ConstraintSystemBuilder : ConstraintSystemOperation {
 
 // if runOperations return true, then this operation will be applied, and function return true
 inline fun ConstraintSystemBuilder.runTransaction(crossinline runOperations: ConstraintSystemOperation.() -> Boolean): Boolean {
-    val transactionState = prepareTransaction()
+    konst transactionState = prepareTransaction()
 
     // typeVariablesTransaction is clear
     if (runOperations()) {

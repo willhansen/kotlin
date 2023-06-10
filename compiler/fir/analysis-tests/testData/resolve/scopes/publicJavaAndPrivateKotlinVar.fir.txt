@@ -6,7 +6,7 @@ FILE: C.kt
 
         private final var name: R|kotlin/String| = R|<local>/name|
             private get(): R|kotlin/String|
-            private set(value: R|kotlin/String|): R|kotlin/Unit|
+            private set(konstue: R|kotlin/String|): R|kotlin/Unit|
 
         public open override fun getName(): R|kotlin/String| {
             ^getName this@R|/C|.R|/C.name|
@@ -19,5 +19,5 @@ FILE: C.kt
     }
 FILE: main.kt
     public final fun test(d: R|D|): R|kotlin/Unit| {
-        lval name: R|kotlin/String| = R|<local>/d|.R|/C.name|
+        lkonst name: R|kotlin/String| = R|<local>/d|.R|/C.name|
     }

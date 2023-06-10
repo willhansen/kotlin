@@ -4,7 +4,7 @@ package foo
 fun f(a: Int?, b: Int.(Int) -> Int) = a?.b(2)
 
 fun box(): String {
-    val c1 = f (null) {
+    konst c1 = f (null) {
         it + this
     } != null
     if (c1) return "fail1"

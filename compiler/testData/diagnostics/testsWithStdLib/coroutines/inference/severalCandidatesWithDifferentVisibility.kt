@@ -36,7 +36,7 @@ fun <T> invBuilder(block: Inv<T>.() -> Unit) {}
 
 fun test() {
     invBuilder {
-        val q = Queue.empty()
+        konst q = Queue.empty()
         emit(42)
     }
 }

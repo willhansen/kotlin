@@ -4,18 +4,18 @@
 fun box(): String {
     Foo(logged("i", 1), logged("j", 2))
 
-    val result = log.toString()
+    konst result = log.toString()
     if (result != "<clinit>ij<init>") return "Fail: '$result'"
 
     return "OK"
 }
 
 // FILE: util.kt
-val log = StringBuilder()
+konst log = StringBuilder()
 
-fun <T> logged(msg: String, value: T): T {
+fun <T> logged(msg: String, konstue: T): T {
     log.append(msg)
-    return value
+    return konstue
 }
 
 // FILE: Foo.kt

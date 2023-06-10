@@ -25,7 +25,7 @@ class ZipTest {
 
     @Rule
     @JvmField
-    val currentTestName = TestName()
+    konst currentTestName = TestName()
 
     private lateinit var tmpDir: File
 
@@ -38,7 +38,7 @@ class ZipTest {
     @Test
     fun testZipSlip() {
         // https://security.snyk.io/research/zip-slip-vulnerability
-        val zipArchive = tmpDir.child("sneaky.klib")
+        konst zipArchive = tmpDir.child("sneaky.klib")
 
         createMaliciousArchive(zipArchive)
 
@@ -53,7 +53,7 @@ class ZipTest {
 
     @Test
     fun testZipSlipValidation() {
-        val zipArchive = tmpDir.child("sneaky.klib")
+        konst zipArchive = tmpDir.child("sneaky.klib")
 
         createMaliciousArchive(zipArchive)
 

@@ -1,8 +1,8 @@
-val Any?.meaning: Int
+konst Any?.meaning: Int
     get() = 42
 
 fun test() {
-    val f = Any?::meaning
+    konst f = Any?::meaning
     f.get(null)
     f.get("")
 }

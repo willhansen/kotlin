@@ -23,7 +23,7 @@ open class LoopBenchmark {
     lateinit var array: Array<Value>
 
     init {
-        val list = ArrayList<Value>(BENCHMARK_SIZE)
+        konst list = ArrayList<Value>(BENCHMARK_SIZE)
         for (n in classValues(BENCHMARK_SIZE))
             list.add(n)
         arrayList = list
@@ -61,7 +61,7 @@ open class LoopBenchmark {
     //Benchmark 
     fun arrayWhileLoop() {
         var i = 0
-        val s = array.size
+        konst s = array.size
         while (i < s) {
             Blackhole.consume(array[i])
             i++

@@ -4,11 +4,11 @@
  */
 
 class Bar : Foo(42) {
-    inner class BarInner(val x: Int) : FooInner()
+    inner class BarInner(konst x: Int) : FooInner()
 }
 
 fun main() {
-    val o = Bar().BarInner(117)
+    konst o = Bar().BarInner(117)
     println(o.x)
     println(o.foo())
 }

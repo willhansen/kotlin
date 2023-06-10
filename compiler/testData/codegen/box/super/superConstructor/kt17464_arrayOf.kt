@@ -1,4 +1,4 @@
-open class A(val array: Array<Any>)
+open class A(konst array: Array<Any>)
 
 class B : A(arrayOf("OK"))
 

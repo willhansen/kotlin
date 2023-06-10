@@ -1,6 +1,6 @@
 enum class Direction() {
     NORTH {
-        val someSpecialValue = "OK"
+        konst someSpecialValue = "OK"
 
         override fun f() = someSpecialValue
     };

@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind
 
 interface KtLightElement<out T : KtElement, out D : PsiElement> : PsiElement {
-    val kotlinOrigin: T?
+    konst kotlinOrigin: T?
 
     /**
      * KtLightModifierList by default retrieves annotation from the relevant KtElement or from clsDelegate
@@ -23,13 +23,13 @@ interface KtLightElement<out T : KtElement, out D : PsiElement> : PsiElement {
      * For that case, KtLightModifierList in the beginning checks `givenAnnotations` and uses them if it's not null
      * Probably, it's a bit dirty solution. But, for now it's not clear how to make it better
      */
-    val givenAnnotations: List<KtLightAbstractAnnotation>? get() = null
+    konst givenAnnotations: List<KtLightAbstractAnnotation>? get() = null
 }
 
 interface KtLightDeclaration<out T : KtDeclaration, out D : PsiElement> : KtLightElement<T, D>, PsiNamedElement
 
 interface KtLightMember<out D : PsiMember> : PsiMember, KtLightDeclaration<KtDeclaration, D>, PsiNameIdentifierOwner, PsiDocCommentOwner {
-    val lightMemberOrigin: LightMemberOrigin?
+    konst lightMemberOrigin: LightMemberOrigin?
 
     override fun getContainingClass(): KtLightClass
 }
@@ -37,17 +37,17 @@ interface KtLightMember<out D : PsiMember> : PsiMember, KtLightDeclaration<KtDec
 interface KtLightField : PsiField, KtLightMember<PsiField>, PsiVariableEx
 
 interface KtLightParameter : PsiParameter, KtLightDeclaration<KtParameter, PsiParameter> {
-    val method: KtLightMethod
+    konst method: KtLightMethod
 }
 
 interface KtLightFieldForSourceDeclarationSupport : PsiField {
-    val kotlinOrigin: KtDeclaration?
+    konst kotlinOrigin: KtDeclaration?
 }
 
 interface KtLightMethod : PsiAnnotationMethod, KtLightMember<PsiMethod> {
-    val isDelegated: Boolean
+    konst isDelegated: Boolean
         get() = lightMemberOrigin?.originKind == JvmDeclarationOriginKind.DELEGATION
                 || lightMemberOrigin?.originKind == JvmDeclarationOriginKind.CLASS_MEMBER_DELEGATION_TO_DEFAULT_IMPL
 
-    val isMangled: Boolean
+    konst isMangled: Boolean
 }

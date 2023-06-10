@@ -3,7 +3,7 @@
 
 fun f(vararg x: Int) {}
 
-val inVal: (<!UNSUPPORTED!>vararg<!> x: Int)->Unit = {}
+konst inVal: (<!UNSUPPORTED!>vararg<!> x: Int)->Unit = {}
 
 fun inParam(fn: (<!UNSUPPORTED!>vararg<!> x: Int)->Unit) {}
 
@@ -16,11 +16,11 @@ class A : (<!UNSUPPORTED!>vararg<!> Int)->Unit {
         var lambda: (<!UNSUPPORTED!>vararg<!> x: Int)->Unit = {}
     }
 
-    val prop: (<!UNSUPPORTED!>vararg<!> x: Int)->Unit
+    konst prop: (<!UNSUPPORTED!>vararg<!> x: Int)->Unit
         get(): (<!UNSUPPORTED!>vararg<!> x: Int)->Unit = {}
 }
 
-val allProhibited: (<!UNSUPPORTED!>abstract<!>
+konst allProhibited: (<!UNSUPPORTED!>abstract<!>
                     <!UNSUPPORTED!>annotation<!>
                     <!UNSUPPORTED!>companion<!>
                     <!UNSUPPORTED!>const<!>
@@ -49,5 +49,5 @@ val allProhibited: (<!UNSUPPORTED!>abstract<!>
 
                     x: Int)->Unit = {}
 
-val valProhibited: (<!UNSUPPORTED!>val<!> x: Int)->Unit = {}
-val varProhibited: (<!UNSUPPORTED!>var<!> x: Int)->Unit = {}
+konst konstProhibited: (<!UNSUPPORTED!>konst<!> x: Int)->Unit = {}
+konst varProhibited: (<!UNSUPPORTED!>var<!> x: Int)->Unit = {}

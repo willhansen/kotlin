@@ -13,9 +13,9 @@ import kotlin.test.assertEquals
 import kotlin.reflect.full.*
 
 @java.lang.annotation.Repeatable(As::class)
-annotation class A(val value: Int)
+annotation class A(konst konstue: Int)
 
-annotation class As(val value: Array<A>)
+annotation class As(konst konstue: Array<A>)
 
 @A(1)
 @As([A(2), A(3)])
@@ -25,9 +25,9 @@ class Z
 @A(3)
 class ZZ
 
-// JDK 9+ uses {} for array arguments instead of [], JDK 15+ doesn't render "value="
+// JDK 9+ uses {} for array arguments instead of [], JDK 15+ doesn't render "konstue="
 fun Any?.render(): String =
-    toString().replace("value=", "").replace("{", "[").replace("}", "]")
+    toString().replace("konstue=", "").replace("{", "[").replace("}", "]")
 
 // Explicit container is not unwrapped.
 fun box(): String {

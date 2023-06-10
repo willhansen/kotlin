@@ -25,24 +25,24 @@ import org.jetbrains.kotlin.psi.KtScript
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiScriptSymbol(
-    private val script: KtScript,
-    override val analysisContext: Fe10AnalysisContext
+    private konst script: KtScript,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtScriptSymbol(), KtFe10AnnotatedSymbol, KtFe10PsiSymbol<KtScript, ScriptDescriptor> {
-    override val descriptor: ScriptDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi, Fe10AnalysisFacade.AnalysisMode.PARTIAL)
+    override konst descriptor: ScriptDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi, Fe10AnalysisFacade.AnalysisMode.PARTIAL)
         bindingContext[BindingContext.SCRIPT, psi]
     }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { if (script.containingKtFile.isCompiled) KtSymbolOrigin.LIBRARY else KtSymbolOrigin.SOURCE }
 
-    override val psi: KtScript
+    override konst psi: KtScript
         get() = withValidityAssertion { script }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { script.nameAsSafeName }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { emptyList() }
 
     context(KtAnalysisSession)

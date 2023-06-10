@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 
-inline class AsNonNullPrimitive(val i: Int)
-inline class AsNonNullReference(val s: String)
+inline class AsNonNullPrimitive(konst i: Int)
+inline class AsNonNullReference(konst s: String)
 // ^ JVM: 3 assertions (constructor, box method, erased constructor)
 //   JVM IR: 1 assertion (erased constructor)
 

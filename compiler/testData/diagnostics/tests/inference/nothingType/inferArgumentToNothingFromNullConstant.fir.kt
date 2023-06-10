@@ -3,7 +3,7 @@
 class Out<out T : Any>(result: T?)
 
 fun main() {
-    val a = Out(null)
+    konst a = Out(null)
 
     a
 

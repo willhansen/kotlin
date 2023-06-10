@@ -10,14 +10,14 @@ import org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable.QualifiedName
 import java.util.*
 
 class NameResolverImpl(
-    val strings: ProtoBuf.StringTable,
-    val qualifiedNames: ProtoBuf.QualifiedNameTable
+    konst strings: ProtoBuf.StringTable,
+    konst qualifiedNames: ProtoBuf.QualifiedNameTable
 ) : NameResolver {
     override fun getString(index: Int): String = strings.getString(index)
 
     override fun getQualifiedClassName(index: Int): String {
-        val (packageFqNameSegments, relativeClassNameSegments) = traverseIds(index)
-        val className = relativeClassNameSegments.joinToString(".")
+        konst (packageFqNameSegments, relativeClassNameSegments) = traverseIds(index)
+        konst className = relativeClassNameSegments.joinToString(".")
         return if (packageFqNameSegments.isEmpty()) className
         else packageFqNameSegments.joinToString("/") + "/$className"
     }
@@ -30,13 +30,13 @@ class NameResolverImpl(
 
     private fun traverseIds(startingIndex: Int): Triple<List<String>, List<String>, Boolean> {
         var index = startingIndex
-        val packageNameSegments = LinkedList<String>()
-        val relativeClassNameSegments = LinkedList<String>()
+        konst packageNameSegments = LinkedList<String>()
+        konst relativeClassNameSegments = LinkedList<String>()
         var local = false
 
         while (index != -1) {
-            val proto = qualifiedNames.getQualifiedName(index)
-            val shortName = strings.getString(proto.shortName)
+            konst proto = qualifiedNames.getQualifiedName(index)
+            konst shortName = strings.getString(proto.shortName)
             when (proto.kind!!) {
                 QualifiedName.Kind.CLASS -> relativeClassNameSegments.addFirst(shortName)
                 QualifiedName.Kind.PACKAGE -> packageNameSegments.addFirst(shortName)

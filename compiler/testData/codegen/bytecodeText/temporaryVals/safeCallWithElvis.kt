@@ -6,7 +6,7 @@ fun test(a: Any?) =
 // 0 ISTORE
 // 0 ILOAD
 // 1 POP
-// 0 valueOf
+// 0 konstueOf
 
 // JVM_IR_TEMPLATES
 // 2 DUP

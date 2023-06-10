@@ -23,11 +23,11 @@ open external class internal {
 
     B = NestedExternalEnum()
 
-    external fun values(): Array<NestedExternalEnum> /* Synthetic body for ENUM_VALUES */
+    external fun konstues(): Array<NestedExternalEnum> /* Synthetic body for ENUM_VALUES */
 
-    external fun valueOf(value: String): NestedExternalEnum /* Synthetic body for ENUM_VALUEOF */
+    external fun konstueOf(konstue: String): NestedExternalEnum /* Synthetic body for ENUM_VALUEOF */
 
-    external val entries: EnumEntries<NestedExternalEnum>
+    external konst entries: EnumEntries<NestedExternalEnum>
       external get(): EnumEntries<NestedExternalEnum> /* Synthetic body for ENUM_ENTRIES */
 
   }

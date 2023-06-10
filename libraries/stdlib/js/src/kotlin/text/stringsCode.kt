@@ -50,7 +50,7 @@ public actual fun String.endsWith(suffix: String, ignoreCase: Boolean = false): 
 @DeprecatedSinceKotlin(warningSince = "1.6")
 public fun String.matches(regex: String): Boolean {
     @Suppress("DEPRECATION")
-    val result = this.match(regex)
+    konst result = this.match(regex)
     return result != null && result.size != 0
 }
 
@@ -78,8 +78,8 @@ public actual fun String?.equals(other: String?, ignoreCase: Boolean = false): B
     if (this.length != other.length) return false
 
     for (index in 0 until this.length) {
-        val thisChar = this[index]
-        val otherChar = other[index]
+        konst thisChar = this[index]
+        konst otherChar = other[index]
         if (!thisChar.equals(otherChar, ignoreCase)) {
             return false
         }

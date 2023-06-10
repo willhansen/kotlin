@@ -2,7 +2,7 @@ KtDeclaration: KtProperty
 Symbol:
 var foo: kotlin.Int
   get()
-  set(value: kotlin.Int)
+  set(konstue: kotlin.Int)
 
 Signature:
 KtVariableLikeSignature:

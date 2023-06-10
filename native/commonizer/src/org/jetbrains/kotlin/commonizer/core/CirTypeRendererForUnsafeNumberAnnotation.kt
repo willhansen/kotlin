@@ -41,6 +41,6 @@ private fun renderVariance(variance: Variance): String = "$variance ".takeIf { i
 
 private fun CirSimpleType.renderNullable(): String = isMarkedNullable.ifTrue { NULLABLE }.orEmpty()
 
-private const val NULLABLE: String = "?"
-private const val STAR_PROJECTION: String = "*"
-private const val TYPE_PARAMETER_TYPE_PREFIX = "#"
+private const konst NULLABLE: String = "?"
+private const konst STAR_PROJECTION: String = "*"
+private const konst TYPE_PARAMETER_TYPE_PREFIX = "#"

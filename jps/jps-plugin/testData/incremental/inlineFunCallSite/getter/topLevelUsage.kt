@@ -1,4 +1,4 @@
 package usage
 
-val y: Int
+konst y: Int
     get() = inline.f()

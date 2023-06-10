@@ -1,18 +1,18 @@
 package
 
-public val ns: kotlin.String? = null
-public val testElvis1: kotlin.String?
-public val testElvis2: kotlin.String
-public val testElvis3: kotlin.String?
-public val testExcl1: kotlin.String?
-public val testExcl2: kotlin.String?
-public val testIf1: kotlin.String?
-public val testIf2: kotlin.String?
-public val testIf3: kotlin.String?
-public val testIf4: kotlin.String?
-public val testIf5: kotlin.String?
-public val testWhen1: kotlin.String?
-public val testWhen2: kotlin.String?
-public val testWhen3: kotlin.String?
-public val testWhen4: kotlin.String?
-public val testWhen5: kotlin.String?
+public konst ns: kotlin.String? = null
+public konst testElvis1: kotlin.String?
+public konst testElvis2: kotlin.String
+public konst testElvis3: kotlin.String?
+public konst testExcl1: kotlin.String?
+public konst testExcl2: kotlin.String?
+public konst testIf1: kotlin.String?
+public konst testIf2: kotlin.String?
+public konst testIf3: kotlin.String?
+public konst testIf4: kotlin.String?
+public konst testIf5: kotlin.String?
+public konst testWhen1: kotlin.String?
+public konst testWhen2: kotlin.String?
+public konst testWhen3: kotlin.String?
+public konst testWhen4: kotlin.String?
+public konst testWhen5: kotlin.String?

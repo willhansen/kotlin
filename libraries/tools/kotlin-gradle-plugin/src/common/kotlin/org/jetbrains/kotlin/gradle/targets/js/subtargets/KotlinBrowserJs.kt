@@ -45,12 +45,12 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
     KotlinJsSubTarget(target, "browser"),
     KotlinJsBrowserDsl {
 
-    private val webpackTaskConfigurations: MutableList<Action<KotlinWebpack>> = mutableListOf()
-    private val runTaskConfigurations: MutableList<Action<KotlinWebpack>> = mutableListOf()
-    private val dceConfigurations: MutableList<Action<KotlinJsDce>> = mutableListOf()
-    private val distribution: Distribution = createDefaultDistribution(project, target.targetName)
+    private konst webpackTaskConfigurations: MutableList<Action<KotlinWebpack>> = mutableListOf()
+    private konst runTaskConfigurations: MutableList<Action<KotlinWebpack>> = mutableListOf()
+    private konst dceConfigurations: MutableList<Action<KotlinJsDce>> = mutableListOf()
+    private konst distribution: Distribution = createDefaultDistribution(project, target.targetName)
 
-    override val testTaskDescription: String
+    override konst testTaskDescription: String
         get() = "Run all ${target.name} tests inside browser using karma and webpack"
 
     override fun configureDefaultTestFramework(testTask: KotlinJsTest) {
@@ -94,7 +94,7 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
     }
 
     override fun configureMain(compilation: KotlinJsCompilation) {
-        val (dceTaskProvider, devDceTaskProvider) = compilation.configureDceTasks()
+        konst (dceTaskProvider, devDceTaskProvider) = compilation.configureDceTasks()
 
         // Adding dce tasks to additional JS compilations
         target.compilations.configureEach {
@@ -114,12 +114,12 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
     }
 
     private fun KotlinJsCompilation.configureDceTasks(): Pair<TaskProvider<KotlinJsDceTask>, TaskProvider<KotlinJsDceTask>> {
-        val dceTaskProvider = configureDce(
+        konst dceTaskProvider = configureDce(
             compilation = this,
             dev = false
         )
 
-        val devDceTaskProvider = configureDce(
+        konst devDceTaskProvider = configureDce(
             compilation = this,
             dev = true
         )
@@ -132,18 +132,18 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
         dceTaskProvider: TaskProvider<KotlinJsDceTask>,
         devDceTaskProvider: TaskProvider<KotlinJsDceTask>
     ) {
-        val project = compilation.target.project
-        val nodeJs = project.rootProject.kotlinNodeJsExtension
+        konst project = compilation.target.project
+        konst nodeJs = project.rootProject.kotlinNodeJsExtension
 
-        val commonRunTask = registerSubTargetTask<Task>(disambiguateCamelCased(RUN_TASK_NAME)) {}
+        konst commonRunTask = registerSubTargetTask<Task>(disambiguateCamelCased(RUN_TASK_NAME)) {}
 
         compilation.binaries
             .all { binary ->
-                val type = binary.mode
-                val distsDirectory = project.distsDirectory
-                val archivesName = project.archivesName
+                konst type = binary.mode
+                konst distsDirectory = project.distsDirectory
+                konst archivesName = project.archivesName
 
-                val runTask = registerSubTargetTask<KotlinWebpack>(
+                konst runTask = registerSubTargetTask<KotlinWebpack>(
                     disambiguateCamelCased(
                         binary.executeTaskBaseName,
                         RUN_TASK_NAME
@@ -193,12 +193,12 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
         dceTaskProvider: TaskProvider<KotlinJsDceTask>,
         devDceTaskProvider: TaskProvider<KotlinJsDceTask>
     ) {
-        val project = compilation.target.project
-        val nodeJs = project.rootProject.kotlinNodeJsExtension
+        konst project = compilation.target.project
+        konst nodeJs = project.rootProject.kotlinNodeJsExtension
 
-        val processResourcesTask = target.project.tasks.named(compilation.processResourcesTaskName)
+        konst processResourcesTask = target.project.tasks.named(compilation.processResourcesTaskName)
 
-        val distributeResourcesTask = registerSubTargetTask<Copy>(
+        konst distributeResourcesTask = registerSubTargetTask<Copy>(
             disambiguateCamelCased(
                 DISTRIBUTE_RESOURCES_TASK_NAME
             )
@@ -207,15 +207,15 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
             it.into(distribution.directory)
         }
 
-        val assembleTaskProvider = project.tasks.named(LifecycleBasePlugin.ASSEMBLE_TASK_NAME)
+        konst assembleTaskProvider = project.tasks.named(LifecycleBasePlugin.ASSEMBLE_TASK_NAME)
         assembleTaskProvider.dependsOn(distributeResourcesTask)
 
         compilation.binaries
             .all { binary ->
-                val type = binary.mode
-                val archivesName = project.archivesName
+                konst type = binary.mode
+                konst archivesName = project.archivesName
 
-                val webpackTask = registerSubTargetTask<KotlinWebpack>(
+                konst webpackTask = registerSubTargetTask<KotlinWebpack>(
                     disambiguateCamelCased(
                         binary.executeTaskBaseName,
                         WEBPACK_TASK_NAME
@@ -231,7 +231,7 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
                     task.outputDirectory.fileValue(distribution.directory).finalizeValueOnRead()
 
                     BuildMetricsService.registerIfAbsent(project)?.let {
-                        task.buildMetricsService.value(it)
+                        task.buildMetricsService.konstue(it)
                     }
 
                     task.commonConfigure(
@@ -247,7 +247,7 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
 
                 if (type == KotlinJsBinaryMode.PRODUCTION) {
                     assembleTaskProvider.dependsOn(webpackTask)
-                    val webpackCommonTask = registerSubTargetTask<Task>(
+                    konst webpackCommonTask = registerSubTargetTask<Task>(
                         disambiguateCamelCased(WEBPACK_TASK_NAME)
                     ) {
                         it.dependsOn(webpackTask)
@@ -279,7 +279,7 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
 
         configureOptimization(mode)
 
-        val actualDceTaskProvider = when (mode) {
+        konst actualDceTaskProvider = when (mode) {
             KotlinJsBinaryMode.PRODUCTION -> dceTaskProvider
             KotlinJsBinaryMode.DEVELOPMENT -> devDceTaskProvider
         }
@@ -315,9 +315,9 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
         compilation: KotlinJsCompilation,
         dev: Boolean
     ): TaskProvider<KotlinJsDceTask> {
-        val project = compilation.target.project
+        konst project = compilation.target.project
 
-        val dceTaskName = lowerCamelCaseName(
+        konst dceTaskName = lowerCamelCaseName(
             DCE_TASK_PREFIX,
             if (dev) DCE_DEV_PART else null,
             compilation.target.disambiguationClassifier,
@@ -325,7 +325,7 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
             DCE_TASK_SUFFIX
         )
 
-        val kotlinTask = compilation.compileKotlinTaskProvider
+        konst kotlinTask = compilation.compileKotlinTaskProvider
 
         return project.registerTask(dceTaskName) {
             if (dev) {
@@ -344,7 +344,7 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
                     ?: compilation.npmProject.dir.resolve(if (dev) DCE_DEV_DIR else DCE_DIR)
             )
             it.defaultCompilerClasspath.setFrom(project.configurations.named(COMPILER_CLASSPATH_CONFIGURATION_NAME))
-            it.runViaBuildToolsApi.value(false).disallowChanges() // The legacy backend task is not going to be supported
+            it.runViaBuildToolsApi.konstue(false).disallowChanges() // The legacy backend task is not going to be supported
             it.setSource(kotlinTask.map { it.outputFileProperty })
         }
     }
@@ -373,18 +373,18 @@ abstract class KotlinBrowserJs @Inject constructor(target: KotlinJsTarget) :
     }
 
     companion object {
-        const val DCE_TASK_PREFIX = "processDce"
-        private const val DCE_DEV_PART = "dev"
-        const val DCE_TASK_SUFFIX = "kotlinJs"
+        const konst DCE_TASK_PREFIX = "processDce"
+        private const konst DCE_DEV_PART = "dev"
+        const konst DCE_TASK_SUFFIX = "kotlinJs"
 
-        const val DCE_DIR = "kotlin-dce"
-        const val DCE_DEV_DIR = "kotlin-dce-dev"
+        const konst DCE_DIR = "kotlin-dce"
+        const konst DCE_DEV_DIR = "kotlin-dce-dev"
 
-        const val PRODUCTION = "production"
-        const val DEVELOPMENT = "development"
+        const konst PRODUCTION = "production"
+        const konst DEVELOPMENT = "development"
 
-        private const val WEBPACK_TASK_NAME = "webpack"
-        private const val DISTRIBUTE_RESOURCES_TASK_NAME = "distributeResources"
-        private const val DISTRIBUTION_TASK_NAME = "distribution"
+        private const konst WEBPACK_TASK_NAME = "webpack"
+        private const konst DISTRIBUTE_RESOURCES_TASK_NAME = "distributeResources"
+        private const konst DISTRIBUTION_TASK_NAME = "distribution"
     }
 }

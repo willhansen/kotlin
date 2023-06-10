@@ -1,26 +1,26 @@
 // FIR_IDENTICAL
 object AnObject {
-    val ok = "OK"
+    konst ok = "OK"
     fun foo() = "OK"
 }
 
 typealias GenericTestObject<T> = AnObject
 
-val test11: AnObject = GenericTestObject
-val test12: GenericTestObject<*> = GenericTestObject
-val test13: String = GenericTestObject.ok
-val test14: String = GenericTestObject.foo()
+konst test11: AnObject = GenericTestObject
+konst test12: GenericTestObject<*> = GenericTestObject
+konst test13: String = GenericTestObject.ok
+konst test14: String = GenericTestObject.foo()
 
 class GenericClassWithCompanion<T> {
     companion object {
-        val ok = "OK"
+        konst ok = "OK"
         fun foo() = "OK"
     }
 }
 
 typealias TestGCWC<T> = GenericClassWithCompanion<T>
 
-val test25: GenericClassWithCompanion.Companion = TestGCWC
-val test26 = TestGCWC
-val test27: String = TestGCWC.ok
-val test28: String = TestGCWC.foo()
+konst test25: GenericClassWithCompanion.Companion = TestGCWC
+konst test26 = TestGCWC
+konst test27: String = TestGCWC.ok
+konst test28: String = TestGCWC.foo()

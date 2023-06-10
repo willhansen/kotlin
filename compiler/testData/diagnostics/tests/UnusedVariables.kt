@@ -119,9 +119,9 @@ interface Trait {
 }
 
 fun testObject() : Trait {
-    val x = 24
-    val o = object : Trait {
-        val y : Int   //in this case y should not be marked as unused
+    konst x = 24
+    konst o = object : Trait {
+        konst y : Int   //in this case y should not be marked as unused
            get() = 55
 
         override fun foo() {

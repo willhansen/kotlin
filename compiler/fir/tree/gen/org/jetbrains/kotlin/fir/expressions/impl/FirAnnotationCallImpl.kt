@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirAnnotationCallImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var useSiteTarget: AnnotationUseSiteTarget?,
     override var annotationTypeRef: FirTypeRef,
     override var typeArguments: MutableOrEmptyList<FirTypeProjection>,
@@ -36,8 +36,8 @@ internal class FirAnnotationCallImpl(
     override var argumentMapping: FirAnnotationArgumentMapping,
     override var annotationResolvePhase: FirAnnotationResolvePhase,
 ) : FirAnnotationCall() {
-    override val typeRef: FirTypeRef get() = annotationTypeRef
-    override val annotations: List<FirAnnotation> get() = emptyList()
+    override konst typeRef: FirTypeRef get() = annotationTypeRef
+    override konst annotations: List<FirAnnotation> get() = emptyList()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotationTypeRef.accept(visitor, data)

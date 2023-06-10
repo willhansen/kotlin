@@ -1,4 +1,4 @@
-class A(val s: String = "FAIL")
+class A(konst s: String = "FAIL")
 
 private fun foo(a: A?, aOther: A?): A {
     return if (a == null) {

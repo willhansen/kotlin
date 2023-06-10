@@ -21,13 +21,13 @@ interface InterfaceMultiple<T1 : SomeInterface, T2 : SomeInterface>
 
 @Serializable
 class ToSerialize(
-    val a: SealedMultiple<SomeInterface, SomeInterface>,
-    val b: AbstractMultiple<*, *>,
-    val c: SealedInterfaceMultiple<*, *>,
-    val d: InterfaceMultiple<*, *>
+    konst a: SealedMultiple<SomeInterface, SomeInterface>,
+    konst b: AbstractMultiple<*, *>,
+    konst c: SealedInterfaceMultiple<*, *>,
+    konst d: InterfaceMultiple<*, *>
 )
 
 fun box(): String {
-    val s = ToSerialize.serializer().descriptor.elementDescriptors.joinToString { it.kind.toString() }
+    konst s = ToSerialize.serializer().descriptor.elementDescriptors.joinToString { it.kind.toString() }
     return if (s == "SEALED, OPEN, SEALED, OPEN") "OK" else s
 }

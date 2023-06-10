@@ -14,7 +14,7 @@ fun interface IntFun {
 fun invoke1(intFun: IntFun) = intFun.invoke(1)
 
 fun box(): String {
-    val test = invoke1(41::plus)
+    konst test = invoke1(41::plus)
     if (test != 42) return "Failed: $test"
 
     return "OK"

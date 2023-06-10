@@ -6,7 +6,7 @@ FILE: [ResolvedTo(RAW_FIR)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -28,7 +28,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -50,7 +50,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -72,7 +72,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -94,7 +94,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -116,7 +116,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -138,7 +138,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -160,7 +160,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -182,7 +182,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -204,7 +204,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -214,13 +214,13 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
                 super<R|kotlin/Any|>()
             }
 
-            @Deprecated[Unresolved](String(constructorProperty)) @Anno[Unresolved](String(constructorProperty)) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val a: Int = R|<local>/a|
+            @Deprecated[Unresolved](String(constructorProperty)) @Anno[Unresolved](String(constructorProperty)) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst a: Int = R|<local>/a|
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=FirstClass] get(): Int
 
             @Deprecated[Unresolved](String(memberFunction)) @Anno[Unresolved](String(memberFunction)) public? final? [ResolvedTo(RAW_FIR)] fun memberFunction(): R|kotlin/Unit| {
             }
 
-            @Deprecated[Unresolved](String(memberProperty)) @Anno[Unresolved](String(memberProperty)) public? final? [ResolvedTo(RAW_FIR)] val memberProperty: <implicit> = IntegerLiteral(32)
+            @Deprecated[Unresolved](String(memberProperty)) @Anno[Unresolved](String(memberProperty)) public? final? [ResolvedTo(RAW_FIR)] konst memberProperty: <implicit> = IntegerLiteral(32)
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=FirstClass] get(): <implicit>
 
         }
@@ -246,7 +246,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -256,13 +256,13 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
                 super<R|kotlin/Any|>()
             }
 
-            @Deprecated[Unresolved](String(constructorProperty)) @Anno[Unresolved](String(constructorProperty)) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val a: Int = R|<local>/a|
+            @Deprecated[Unresolved](String(constructorProperty)) @Anno[Unresolved](String(constructorProperty)) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst a: Int = R|<local>/a|
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=FirstClass] get(): Int
 
             @Deprecated[Unresolved](String(memberFunction)) @Anno[Unresolved](String(memberFunction)) public? final? [ResolvedTo(RAW_FIR)] fun memberFunction(): R|kotlin/Unit| {
             }
 
-            @Deprecated[Unresolved](String(memberProperty)) @Anno[Unresolved](String(memberProperty)) public? final? [ResolvedTo(RAW_FIR)] val memberProperty: <implicit> = IntegerLiteral(32)
+            @Deprecated[Unresolved](String(memberProperty)) @Anno[Unresolved](String(memberProperty)) public? final? [ResolvedTo(RAW_FIR)] konst memberProperty: <implicit> = IntegerLiteral(32)
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=FirstClass] get(): <implicit>
 
         }
@@ -288,7 +288,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -298,13 +298,13 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
                 super<R|kotlin/Any|>()
             }
 
-            @Deprecated[Unresolved](String(constructorProperty)) @Anno[Unresolved](String(constructorProperty)) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val a: Int = R|<local>/a|
+            @Deprecated[Unresolved](String(constructorProperty)) @Anno[Unresolved](String(constructorProperty)) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst a: Int = R|<local>/a|
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=FirstClass] get(): Int
 
             @Deprecated[Unresolved](String(memberFunction)) @Anno[Unresolved](String(memberFunction)) public? final? [ResolvedTo(RAW_FIR)] fun memberFunction(): R|kotlin/Unit| {
             }
 
-            @Deprecated[Unresolved](String(memberProperty)) @Anno[Unresolved](String(memberProperty)) public? final? [ResolvedTo(RAW_FIR)] val memberProperty: <implicit> = IntegerLiteral(32)
+            @Deprecated[Unresolved](String(memberProperty)) @Anno[Unresolved](String(memberProperty)) public? final? [ResolvedTo(RAW_FIR)] konst memberProperty: <implicit> = IntegerLiteral(32)
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=FirstClass] get(): <implicit>
 
         }
@@ -330,7 +330,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -340,13 +340,13 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
                 super<R|kotlin/Any|>()
             }
 
-            @R|kotlin/Deprecated|[Types](message = String(constructorProperty)) public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val a: R|kotlin/Int| = R|<local>/a|
+            @R|kotlin/Deprecated|[Types](message = String(constructorProperty)) public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst a: R|kotlin/Int| = R|<local>/a|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=FirstClass] get(): R|kotlin/Int|
 
             @R|kotlin/Deprecated|[Types](message = String(memberFunction)) @R|Anno|[Types](s = String(memberFunction)) public final [ResolvedTo(BODY_RESOLVE)] fun memberFunction(): R|kotlin/Unit| {
             }
 
-            @R|kotlin/Deprecated|[Types](message = String(memberProperty)) @R|Anno|[Types](s = String(memberProperty)) public final [ResolvedTo(BODY_RESOLVE)] val memberProperty: R|kotlin/Int| = Int(32)
+            @R|kotlin/Deprecated|[Types](message = String(memberProperty)) @R|Anno|[Types](s = String(memberProperty)) public final [ResolvedTo(BODY_RESOLVE)] konst memberProperty: R|kotlin/Int| = Int(32)
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=FirstClass] get(): R|kotlin/Int|
 
         }
@@ -372,7 +372,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -382,13 +382,13 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsInsideBody.kt
                 super<R|kotlin/Any|>()
             }
 
-            @R|kotlin/Deprecated|[Types](message = String(constructorProperty)) public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val a: R|kotlin/Int| = R|<local>/a|
+            @R|kotlin/Deprecated|[Types](message = String(constructorProperty)) public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst a: R|kotlin/Int| = R|<local>/a|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=FirstClass] get(): R|kotlin/Int|
 
             @R|kotlin/Deprecated|[Types](message = String(memberFunction)) @R|Anno|[Types](s = String(memberFunction)) public final [ResolvedTo(BODY_RESOLVE)] fun memberFunction(): R|kotlin/Unit| {
             }
 
-            @R|kotlin/Deprecated|[Types](message = String(memberProperty)) @R|Anno|[Types](s = String(memberProperty)) public final [ResolvedTo(BODY_RESOLVE)] val memberProperty: R|kotlin/Int| = Int(32)
+            @R|kotlin/Deprecated|[Types](message = String(memberProperty)) @R|Anno|[Types](s = String(memberProperty)) public final [ResolvedTo(BODY_RESOLVE)] konst memberProperty: R|kotlin/Int| = Int(32)
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=FirstClass] get(): R|kotlin/Int|
 
         }

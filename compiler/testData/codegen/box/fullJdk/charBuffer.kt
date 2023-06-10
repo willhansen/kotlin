@@ -5,9 +5,9 @@
 import java.nio.CharBuffer
 
 fun box(): String {
-    val cb = CharBuffer.wrap("OK")
+    konst cb = CharBuffer.wrap("OK")
     cb.position(1)
-    val o = cb[0]
-    val k = (cb as CharSequence).get(0)
+    konst o = cb[0]
+    konst k = (cb as CharSequence).get(0)
     return o.toString() + k
 }

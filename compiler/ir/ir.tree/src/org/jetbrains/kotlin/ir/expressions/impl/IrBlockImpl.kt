@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.ir.symbols.IrReturnableBlockSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrBlockImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var origin: IrStatementOrigin? = null,
 ) : IrBlock() {
@@ -55,14 +55,14 @@ fun IrBlockImpl.inlineStatement(statement: IrStatement) {
 }
 
 class IrReturnableBlockImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrReturnableBlockSymbol,
+    override konst symbol: IrReturnableBlockSymbol,
     override var origin: IrStatementOrigin? = null,
 ) : IrReturnableBlock() {
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: FunctionDescriptor
+    override konst descriptor: FunctionDescriptor
         get() = symbol.descriptor
 
     constructor(
@@ -82,8 +82,8 @@ class IrReturnableBlockImpl(
 }
 
 class IrInlinedFunctionBlockImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var inlineCall: IrFunctionAccessExpression,
     override var inlinedElement: IrElement,

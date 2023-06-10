@@ -20,10 +20,10 @@ fun box(): String {
     J.accept42(::tf2)
     if (test != 420) return "Failed 2: test=$test"
 
-    val t3 = J.get { 1234 }
+    konst t3 = J.get { 1234 }
     if (t3 != 1234) return "Failed 3: t3=$t3"
 
-    val t4 = J.get(::tf4)
+    konst t4 = J.get(::tf4)
     if (t4 != 5678) return "Failed 4: t4=$t4"
 
     return "OK"

@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.currentBuildId
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.toKpmModuleDependency
 
 internal class IdeaKpmGranularFragmentDependencyResolver(
-    private val fragmentGranularMetadataResolverFactory: GradleKpmFragmentGranularMetadataResolverFactory
+    private konst fragmentGranularMetadataResolverFactory: GradleKpmFragmentGranularMetadataResolverFactory
 ) : IdeaKpmDependencyResolver {
     override fun resolve(fragment: GradleKpmFragment): Set<IdeaKpmDependency> {
         return fragmentGranularMetadataResolverFactory.getOrCreate(fragment).resolutions
@@ -25,8 +25,8 @@ internal class IdeaKpmGranularFragmentDependencyResolver(
     }
 
     private fun resolve(fragment: GradleKpmFragment, resolution: ChooseVisibleSourceSets): Iterable<IdeaKpmDependency> {
-        val gradleProjectIdentifier = resolution.dependency.id as? ProjectComponentIdentifier ?: return emptyList()
-        val kotlinModuleIdentifier = resolution.dependency.toKpmModuleDependency().moduleIdentifier
+        konst gradleProjectIdentifier = resolution.dependency.id as? ProjectComponentIdentifier ?: return emptyList()
+        konst kotlinModuleIdentifier = resolution.dependency.toKpmModuleDependency().moduleIdentifier
         return resolution.allVisibleSourceSetNames.map { visibleFragmentName ->
             IdeaKpmFragmentDependencyImpl(
                 type = if (

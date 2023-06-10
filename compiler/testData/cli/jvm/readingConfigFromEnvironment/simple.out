@@ -5,6 +5,6 @@ public final operator fun plus(other: Float): Float defined in kotlin.Int
 public final operator fun plus(other: Int): Int defined in kotlin.Int
 public final operator fun plus(other: Long): Long defined in kotlin.Int
 public final operator fun plus(other: Short): Int defined in kotlin.Int
-    val x = 1 + ""
+    konst x = 1 + ""
               ^
 COMPILATION_ERROR

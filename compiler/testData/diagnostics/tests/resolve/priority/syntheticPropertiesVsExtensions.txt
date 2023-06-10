@@ -1,6 +1,6 @@
 package
 
-private val A.foo: kotlin.Int
+private konst A.foo: kotlin.Int
 public fun test(/*0*/ a: A): kotlin.Unit
 
 public open class A {
@@ -13,7 +13,7 @@ public open class A {
 
 public final class B {
     public constructor B()
-    private final val A.foo: B
+    private final konst A.foo: B
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun test(/*0*/ a: A): kotlin.Unit

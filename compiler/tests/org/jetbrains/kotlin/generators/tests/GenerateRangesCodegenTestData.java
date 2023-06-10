@@ -43,7 +43,7 @@ public class GenerateRangesCodegenTestData {
             Pattern.compile("doTest\\(([^,]+), [^,]+, [^,]+, [^,]+,\\s+listOf[\\w<>]*\\(([^\\n]*)\\)\\)", Pattern.DOTALL);
 
     // $LIST.size() check is needed in order for tests not to run forever
-    private static final String LITERAL_TEMPLATE = "    val $LIST = ArrayList<$TYPE>()\n" +
+    private static final String LITERAL_TEMPLATE = "    konst $LIST = ArrayList<$TYPE>()\n" +
                                                    "    for (i in $RANGE_EXPR) {\n" +
                                                    "        $LIST.add(i)\n" +
                                                    "        if ($LIST.size > 23) break\n" +
@@ -53,8 +53,8 @@ public class GenerateRangesCodegenTestData {
                                                    "    }\n" +
                                                    "\n";
 
-    private static final String EXPRESSION_TEMPLATE = "    val $LIST = ArrayList<$TYPE>()\n" +
-                                                      "    val $RANGE = $RANGE_EXPR\n" +
+    private static final String EXPRESSION_TEMPLATE = "    konst $LIST = ArrayList<$TYPE>()\n" +
+                                                      "    konst $RANGE = $RANGE_EXPR\n" +
                                                       "    for (i in $RANGE) {\n" +
                                                       "        $LIST.add(i)\n" +
                                                       "        if ($LIST.size > 23) break\n" +
@@ -180,13 +180,13 @@ public class GenerateRangesCodegenTestData {
             out.println("// KOTLIN_CONFIGURATION_FLAGS: +JVM.USE_OLD_INLINE_CLASSES_MANGLING_SCHEME");
         }
         out.println();
-        // Import min/max values, but only in case when the generated test case actually uses them (not to clutter tests which don't)
+        // Import min/max konstues, but only in case when the generated test case actually uses them (not to clutter tests which don't)
         out.println();
-        MIN_MAX_CONSTANTS.forEach((name, value) -> {
+        MIN_MAX_CONSTANTS.forEach((name, konstue) -> {
             if (generatedBody.contains(name)) {
-                // They are intentionally added as non-const vals rather than direct references to MIN_VALUE/MAX_VALUE
-                // in order to fool constant evaluation.
-                out.printf("val %s = %s", name, value).println();
+                // They are intentionally added as non-const konsts rather than direct references to MIN_VALUE/MAX_VALUE
+                // in order to fool constant ekonstuation.
+                out.printf("konst %s = %s", name, konstue).println();
             }
         });
 

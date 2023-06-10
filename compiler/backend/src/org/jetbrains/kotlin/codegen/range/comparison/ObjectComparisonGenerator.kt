@@ -21,7 +21,7 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 object ObjectComparisonGenerator : ComparisonGenerator {
-    override val comparedType: Type = Type.getObjectType("java/lang/Comparable")
+    override konst comparedType: Type = Type.getObjectType("java/lang/Comparable")
 
     override fun jumpIfGreaterOrEqual(v: InstructionAdapter, label: Label) {
         invokeCompare(v)

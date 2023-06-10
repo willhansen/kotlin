@@ -16,7 +16,7 @@ interface ObjCExportScope {
         constructor(type: KotlinType) : super("$type was already encountered during type mapping process.")
     }
 
-    val parent: ObjCExportScope?
+    konst parent: ObjCExportScope?
         get() = null
 
     fun deriveForType(kotlinType: KotlinType): ObjCTypeExportScope = ObjCTypeExportScopeImpl(kotlinType, this)
@@ -43,10 +43,10 @@ interface ObjCClassExportScope : ObjCExportScope {
 
 private class ObjCClassExportScopeImpl constructor(
         container: DeclarationDescriptor,
-        val namer: ObjCExportNamer,
-        override val parent: ObjCExportScope?,
+        konst namer: ObjCExportNamer,
+        override konst parent: ObjCExportScope?,
 ) : ObjCClassExportScope {
-    private val typeParameterNames: List<TypeParameterDescriptor> =
+    private konst typeParameterNames: List<TypeParameterDescriptor> =
             if (container is ClassDescriptor && !container.isInterface) {
                 container.typeConstructor.parameters
             } else {
@@ -65,10 +65,10 @@ private class ObjCClassExportScopeImpl constructor(
 }
 
 interface ObjCTypeExportScope : ObjCExportScope {
-    val kotlinType: KotlinType
+    konst kotlinType: KotlinType
 }
 
-private class ObjCTypeExportScopeImpl(override val kotlinType: KotlinType, override val parent: ObjCExportScope?) : ObjCTypeExportScope {
+private class ObjCTypeExportScopeImpl(override konst kotlinType: KotlinType, override konst parent: ObjCExportScope?) : ObjCTypeExportScope {
     init {
         var parent = this.parent
         while (parent != null && parent is ObjCTypeExportScope) {

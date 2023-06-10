@@ -1,10 +1,10 @@
 class A {
-    val value: String
+    konst konstue: String
         get() = field + "K"
 
     constructor(o: String) {
-        value = o
+        konstue = o
     }
 }
 
-fun box() = A("O").value
+fun box() = A("O").konstue

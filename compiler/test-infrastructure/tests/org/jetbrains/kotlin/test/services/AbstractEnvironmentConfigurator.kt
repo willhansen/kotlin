@@ -28,14 +28,14 @@ abstract class AbstractEnvironmentConfigurator : ServicesAndDirectivesContainer 
     abstract fun ExtensionStorage.registerCompilerExtensions( module: TestModule, configuration: CompilerConfiguration)
 }
 
-class EnvironmentConfiguratorsProvider(internal val environmentConfigurators: List<AbstractEnvironmentConfigurator>) : TestService
+class EnvironmentConfiguratorsProvider(internal konst environmentConfigurators: List<AbstractEnvironmentConfigurator>) : TestService
 
-internal val TestServices.environmentConfiguratorsProvider: EnvironmentConfiguratorsProvider by TestServices.testServiceAccessor()
-val TestServices.environmentConfigurators: List<AbstractEnvironmentConfigurator>
+internal konst TestServices.environmentConfiguratorsProvider: EnvironmentConfiguratorsProvider by TestServices.testServiceAccessor()
+konst TestServices.environmentConfigurators: List<AbstractEnvironmentConfigurator>
     get() = environmentConfiguratorsProvider.environmentConfigurators
 
-abstract class EnvironmentConfigurator(protected val testServices: TestServices) : AbstractEnvironmentConfigurator() {
-    protected val moduleStructure: TestModuleStructure
+abstract class EnvironmentConfigurator(protected konst testServices: TestServices) : AbstractEnvironmentConfigurator() {
+    protected konst moduleStructure: TestModuleStructure
         get() = testServices.moduleStructure
 
     protected open fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {}
@@ -44,7 +44,7 @@ abstract class EnvironmentConfigurator(protected val testServices: TestServices)
         configuration: CompilerConfiguration,
         module: TestModule,
     ) {
-        val extractor = DirectiveToConfigurationKeyExtractor()
+        konst extractor = DirectiveToConfigurationKeyExtractor()
         extractor.provideConfigurationKeys()
         extractor.configure(configuration, module.directives)
         configureCompilerConfiguration(configuration, module)
@@ -53,7 +53,7 @@ abstract class EnvironmentConfigurator(protected val testServices: TestServices)
     open fun DirectiveToConfigurationKeyExtractor.provideConfigurationKeys() {}
 
     fun TestModule.allTransitiveDependencies(): Set<DependencyDescription> {
-        val modules = testServices.moduleStructure.modules
+        konst modules = testServices.moduleStructure.modules
         return regularDependencies.toSet() +
                 regularDependencies.flatMap { modules.single { module -> module.name == it.moduleName }.allTransitiveDependencies() }
     }
@@ -71,9 +71,9 @@ abstract class EnvironmentConfigurator(protected val testServices: TestServices)
 }
 
 class DirectiveToConfigurationKeyExtractor {
-    private val booleanDirectivesMap = mutableMapOf<SimpleDirective, CompilerConfigurationKey<Boolean>>()
-    private val invertedBooleanDirectives = mutableSetOf<SimpleDirective>()
-    private val valueDirectivesMap = mutableMapOf<ValueDirective<*>, CompilerConfigurationKey<*>>()
+    private konst booleanDirectivesMap = mutableMapOf<SimpleDirective, CompilerConfigurationKey<Boolean>>()
+    private konst invertedBooleanDirectives = mutableSetOf<SimpleDirective>()
+    private konst konstueDirectivesMap = mutableMapOf<ValueDirective<*>, CompilerConfigurationKey<*>>()
 
     fun register(
         directive: SimpleDirective,
@@ -90,20 +90,20 @@ class DirectiveToConfigurationKeyExtractor {
         directive: ValueDirective<T>,
         key: CompilerConfigurationKey<T>
     ) {
-        valueDirectivesMap[directive] = key
+        konstueDirectivesMap[directive] = key
     }
 
     fun configure(configuration: CompilerConfiguration, registeredDirectives: RegisteredDirectives) {
         for ((directive, key) in booleanDirectivesMap) {
             if (directive in registeredDirectives) {
-                val value = directive !in invertedBooleanDirectives
-                configuration.put(key, value)
+                konst konstue = directive !in invertedBooleanDirectives
+                configuration.put(key, konstue)
             }
         }
-        for ((directive, key) in valueDirectivesMap) {
-            val value = registeredDirectives.singleOrZeroValue(directive) ?: continue
+        for ((directive, key) in konstueDirectivesMap) {
+            konst konstue = registeredDirectives.singleOrZeroValue(directive) ?: continue
             @Suppress("UNCHECKED_CAST")
-            configuration.put(key as CompilerConfigurationKey<Any>, value)
+            configuration.put(key as CompilerConfigurationKey<Any>, konstue)
         }
     }
 }

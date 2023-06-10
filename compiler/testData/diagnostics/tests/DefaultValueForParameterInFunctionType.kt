@@ -3,7 +3,7 @@
 
 fun f(x: Int = 0) {}
 
-val inVal: (x: Int = <!UNSUPPORTED!>0<!>)->Unit = {}
+konst inVal: (x: Int = <!UNSUPPORTED!>0<!>)->Unit = {}
 
 fun inParam(fn: (x: Int = <!UNSUPPORTED!>0<!>)->Unit) {}
 
@@ -16,6 +16,6 @@ class A : (Int)->Unit {
         var lambda: (x: Int = <!UNSUPPORTED!>0<!>)->Unit = {}
     }
 
-    val prop: (x: Int = <!UNSUPPORTED!>0<!>)->Unit
+    konst prop: (x: Int = <!UNSUPPORTED!>0<!>)->Unit
     get(): (x: Int = <!UNSUPPORTED!>0<!>)->Unit = {}
 }

@@ -9,10 +9,10 @@ public class Enum<T : Enum<T>> : Comparable<Enum<T>> {
     @JsName("name$") private var _name: String = ""
     @JsName("ordinal$") private var _ordinal: Int = 0
 
-    val name: String
+    konst name: String
         get() = _name
 
-    val ordinal: Int
+    konst ordinal: Int
         get() = _ordinal
 
     override fun compareTo(other: Enum<T>) = ordinal.compareTo(other.ordinal)

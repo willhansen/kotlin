@@ -4,7 +4,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-val f = run {
+konst f = run {
     sequence {
         if (true) {
             yield("OK")

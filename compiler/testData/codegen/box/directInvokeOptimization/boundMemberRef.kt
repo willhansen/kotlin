@@ -2,7 +2,7 @@
 // JVM_IR_TEMPLATES
 // 0 invoke\(
 
-class C(val x: String) {
+class C(konst x: String) {
     fun foo(s: String) = x + s
 }
 

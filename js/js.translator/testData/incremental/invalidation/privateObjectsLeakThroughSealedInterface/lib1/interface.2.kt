@@ -1,5 +1,5 @@
 sealed interface SealedInterface {
-    val extraNumber get() = 1
+    konst extraNumber get() = 1
 
     fun getNumber() = 0
 

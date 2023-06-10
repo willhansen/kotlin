@@ -4,7 +4,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-inline class IC(val s: Any?)
+inline class IC(konst s: Any?)
 
 var c: Continuation<Any>? = null
 
@@ -28,7 +28,7 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var res: String? = null
     builder {
-        val base: Base<*> = Derived()
+        konst base: Base<*> = Derived()
         res = (base.generic() as IC).s as String
     }
     c?.resume(IC("OK"))

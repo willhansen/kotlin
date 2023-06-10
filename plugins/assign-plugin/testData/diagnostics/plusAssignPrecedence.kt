@@ -65,21 +65,21 @@ class StringPropertyWithPlusAndPlusAssign(v: String) : AbstractStringProperty(v)
 }
 
 data class Task(
-    val valInput: StringProperty,
+    konst konstInput: StringProperty,
     var varInput: StringProperty,
 
-    val valInputWithPlus: StringPropertyWithPlus,
+    konst konstInputWithPlus: StringPropertyWithPlus,
     var varInputWithPlus: StringPropertyWithPlus,
 
-    val valInputWithPlusAssign: StringPropertyWithPlusAssign,
+    konst konstInputWithPlusAssign: StringPropertyWithPlusAssign,
     var varInputWithPlusAssign: StringPropertyWithPlusAssign,
 
-    val valInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign,
+    konst konstInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign,
     var varInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign,
 )
 
 fun box(): String {
-    val task = Task(
+    konst task = Task(
         StringProperty("O"),
         StringProperty("O"),
 
@@ -93,10 +93,10 @@ fun box(): String {
         StringPropertyWithPlusAndPlusAssign("O")
     )
 
-    task.valInput <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>+=<!> "K"
+    task.konstInput <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>+=<!> "K"
     task.varInput <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>+=<!> "K"
 
-    <!VAL_REASSIGNMENT!>task.valInputWithPlus<!> += "K"
+    <!VAL_REASSIGNMENT!>task.konstInputWithPlus<!> += "K"
 
     task.varInputWithPlusAndPlusAssign <!ASSIGN_OPERATOR_AMBIGUITY!>+=<!> "K"
 

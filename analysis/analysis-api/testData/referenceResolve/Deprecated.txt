@@ -1,2 +1,2 @@
 Resolved to:
-0: (in ROOT) val i: kotlin.Int
+0: (in ROOT) konst i: kotlin.Int

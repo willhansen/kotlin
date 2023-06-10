@@ -22,8 +22,8 @@ class SynchronizedByValueChecker : CallChecker {
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (resolvedCall.resultingDescriptor?.isTopLevelInPackage("synchronized", "kotlin") != true) return
-        val argument = resolvedCall.valueArgumentsByIndex?.get(0)?.arguments?.firstOrNull() ?: return
-        val type = argument.getArgumentExpression()?.getType(context.trace.bindingContext) ?: return
+        konst argument = resolvedCall.konstueArgumentsByIndex?.get(0)?.arguments?.firstOrNull() ?: return
+        konst type = argument.getArgumentExpression()?.getType(context.trace.bindingContext) ?: return
         if (type.isValueOrPrimitive()) {
             context.trace.report(Errors.FORBIDDEN_SYNCHRONIZED_BY_VALUE_CLASSES_OR_PRIMITIVES.on(reportOn, type))
         }

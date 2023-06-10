@@ -1,22 +1,22 @@
 // FIR_IDENTICAL
 // VAL
 class A(
-        val<!SYNTAX!><!>
-        val x: Int,
-        val
-        private<!SYNTAX!><!> val z: Int,
-        val<!SYNTAX!><!>
+        konst<!SYNTAX!><!>
+        konst x: Int,
+        konst
+        private<!SYNTAX!><!> konst z: Int,
+        konst<!SYNTAX!><!>
 )
 
-val<!SYNTAX!><!>
+konst<!SYNTAX!><!>
 fun foo() {}
 
 class B {
-    val<!SYNTAX!><!>
+    konst<!SYNTAX!><!>
     fun foo() {}
 
     fun bar() {
-        val<!SYNTAX!><!>
+        konst<!SYNTAX!><!>
         fun foo() {}
     }
 }
@@ -24,9 +24,9 @@ class B {
 // VAR
 class C(
         var<!SYNTAX!><!>
-        val x: Int,
+        konst x: Int,
         var
-        private<!SYNTAX!><!> val z: Int,
+        private<!SYNTAX!><!> konst z: Int,
         var<!SYNTAX!><!>
 )
 

@@ -2,7 +2,7 @@
 // FIR_IDENTICAL
 // DUMP_EXTERNAL_CLASS: J
 // FILE: javaSyntheticProperty.kt
-val test = J().foo
+konst test = J().foo
 
 // FILE: J.java
 class J {

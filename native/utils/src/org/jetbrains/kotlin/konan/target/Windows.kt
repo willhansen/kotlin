@@ -13,20 +13,20 @@ import java.nio.file.Paths
 
 class MingwConfigurablesImpl(target: KonanTarget, properties: Properties, baseDir: String?)
     : MingwConfigurables, KonanPropertiesLoader(target, properties, baseDir) {
-    override val windowsKit: WindowsKit by lazy {
+    override konst windowsKit: WindowsKit by lazy {
         when (windowsSdkPartsProvider) {
             WindowsSdkPartsProvider.InternalServer -> createCustomWindowsKitPath(Paths.get(absolute(windowsKitParts)))
             WindowsSdkPartsProvider.Local -> WindowsKit.DefaultPath
         }
     }
-    override val msvc: Msvc by lazy {
+    override konst msvc: Msvc by lazy {
         when (windowsSdkPartsProvider) {
             WindowsSdkPartsProvider.InternalServer -> createCustomMsvcPath(Paths.get(absolute(msvcParts)))
             WindowsSdkPartsProvider.Local -> Msvc.DefaultPath
         }
     }
 
-    private val windowsSdkPartsProvider by lazy {
+    private konst windowsSdkPartsProvider by lazy {
         if (InternalServer.isAvailable) {
             WindowsSdkPartsProvider.InternalServer
         } else {
@@ -34,14 +34,14 @@ class MingwConfigurablesImpl(target: KonanTarget, properties: Properties, baseDi
         }
     }
 
-    private val windowsHostDependencies by lazy {
+    private konst windowsHostDependencies by lazy {
         when (windowsSdkPartsProvider) {
             WindowsSdkPartsProvider.InternalServer -> listOf(windowsKitParts, msvcParts)
             WindowsSdkPartsProvider.Local -> emptyList()
         }
     }
 
-    override val dependencies
+    override konst dependencies
         get() = super.dependencies + if (HostManager.hostIsMingw) {
             windowsHostDependencies
         } else {
@@ -81,8 +81,8 @@ sealed class Msvc {
     }
 
     class CustomPath(
-            private val includeDirectories: List<Path>,
-            private val libraryDirectories: List<Path>
+            private konst includeDirectories: List<Path>,
+            private konst libraryDirectories: List<Path>
     ) : Msvc() {
         // Note that this approach doesn't exclude default VS path.
         // TODO: A better (but harder) way would be LIB environment variable.
@@ -101,8 +101,8 @@ sealed class WindowsKit {
     }
 
     class CustomPath(
-            private val includeDirectories: List<Path>,
-            private val libraryDirectories: List<Path>
+            private konst includeDirectories: List<Path>,
+            private konst libraryDirectories: List<Path>
     ) : WindowsKit() {
         // Note that this approach doesn't exclude default Windows Kit path.
         // TODO: A better (but harder) way would be LIB environment variable.

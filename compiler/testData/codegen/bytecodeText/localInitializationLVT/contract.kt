@@ -4,7 +4,7 @@ import kotlin.contracts.contract
 
 @ExperimentalContracts
 fun test(): Char {
-    val c: Char
+    konst c: Char
     doIt {
         c = ' '
     }

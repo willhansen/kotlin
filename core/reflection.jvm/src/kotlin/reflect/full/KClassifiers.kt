@@ -44,18 +44,18 @@ fun KClassifier.createType(
     nullable: Boolean = false,
     annotations: List<Annotation> = emptyList()
 ): KType {
-    val descriptor = (this as? KClassifierImpl)?.descriptor
+    konst descriptor = (this as? KClassifierImpl)?.descriptor
         ?: throw KotlinReflectionInternalError("Cannot create type for an unsupported classifier: $this (${this.javaClass})")
 
-    val typeConstructor = descriptor.typeConstructor
-    val parameters = typeConstructor.parameters
+    konst typeConstructor = descriptor.typeConstructor
+    konst parameters = typeConstructor.parameters
     if (parameters.size != arguments.size) {
         throw IllegalArgumentException("Class declares ${parameters.size} type parameters, but ${arguments.size} were provided.")
     }
 
     // TODO: throw exception if argument does not satisfy bounds
 
-    val typeAttributes =
+    konst typeAttributes =
         if (annotations.isEmpty()) TypeAttributes.Empty
         else TypeAttributes.Empty // TODO: support type annotations
 
@@ -65,9 +65,9 @@ fun KClassifier.createType(
 private fun createKotlinType(
     attributes: TypeAttributes, typeConstructor: TypeConstructor, arguments: List<KTypeProjection>, nullable: Boolean
 ): SimpleType {
-    val parameters = typeConstructor.parameters
+    konst parameters = typeConstructor.parameters
     return KotlinTypeFactory.simpleType(attributes, typeConstructor, arguments.mapIndexed { index, typeProjection ->
-        val type = (typeProjection.type as KTypeImpl?)?.type
+        konst type = (typeProjection.type as KTypeImpl?)?.type
         when (typeProjection.variance) {
             KVariance.INVARIANT -> TypeProjectionImpl(Variance.INVARIANT, type!!)
             KVariance.IN -> TypeProjectionImpl(Variance.IN_VARIANCE, type!!)
@@ -84,12 +84,12 @@ private fun createKotlinType(
  * @see [KClassifier.createType]
  */
 @SinceKotlin("1.1")
-val KClassifier.starProjectedType: KType
+konst KClassifier.starProjectedType: KType
     get() {
-        val descriptor = (this as? KClassifierImpl)?.descriptor
+        konst descriptor = (this as? KClassifierImpl)?.descriptor
             ?: return createType()
 
-        val typeParameters = descriptor.typeConstructor.parameters
+        konst typeParameters = descriptor.typeConstructor.parameters
         if (typeParameters.isEmpty()) return createType() // TODO: optimize, get defaultType from ClassDescriptor
 
         return createType(typeParameters.map { KTypeProjection.STAR })

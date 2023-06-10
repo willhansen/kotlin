@@ -18,20 +18,20 @@ import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
 internal fun FirDeclaration.getKtDeclarationForFirElement(): KtDeclaration {
     require(this !is FirFile)
 
-    val ktDeclaration = (psi as? KtDeclaration) ?: run {
+    konst ktDeclaration = (psi as? KtDeclaration) ?: run {
         (source as? KtFakeSourceElement).psi?.parentOfType()
     }
     check(ktDeclaration is KtDeclaration) {
         "FirDeclaration should have a PSI of type KtDeclaration"
     }
 
-    val declaration = when (this) {
+    konst declaration = when (this) {
         is FirPropertyAccessor, is FirTypeParameter, is FirValueParameter -> {
             when (ktDeclaration) {
                 is KtPropertyAccessor -> ktDeclaration.property
                 is KtProperty -> ktDeclaration
                 is KtParameter, is KtTypeParameter -> {
-                    val containingDeclaration = ktDeclaration.getParentOfType<KtDeclaration>(true)
+                    konst containingDeclaration = ktDeclaration.getParentOfType<KtDeclaration>(true)
                     if (containingDeclaration !is KtPropertyAccessor) containingDeclaration else containingDeclaration.property
                 }
                 is KtCallExpression -> {
@@ -54,7 +54,7 @@ internal fun declarationCanBeLazilyResolved(declaration: KtDeclaration): Boolean
     is KtPrimaryConstructor -> (declaration.parent as? KtClassOrObject)?.getClassId() != null
     is KtParameter -> declaration.hasValOrVar() && declaration.containingClassOrObject?.getClassId() != null
     is KtCallableDeclaration, is KtEnumEntry, is KtClassInitializer -> {
-        when (val parent = declaration.parent) {
+        when (konst parent = declaration.parent) {
             is KtFile -> true
             is KtClassBody -> (parent.parent as? KtClassOrObject)?.getClassId() != null
             else -> false

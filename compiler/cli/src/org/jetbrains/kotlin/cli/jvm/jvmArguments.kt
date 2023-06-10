@@ -25,21 +25,21 @@ fun CompilerConfiguration.setupJvmSpecificArguments(arguments: K2JVMCompilerArgu
 
     putIfNotNull(JVMConfigurationKeys.FRIEND_PATHS, arguments.friendPaths?.asList())
 
-    val releaseTargetArg = arguments.jdkRelease
-    val jvmTargetArg = arguments.jvmTarget
+    konst releaseTargetArg = arguments.jdkRelease
+    konst jvmTargetArg = arguments.jvmTarget
     if (releaseTargetArg != null) {
-        val value =
+        konst konstue =
             when (releaseTargetArg) {
                 "1.6" -> 6
                 "1.8" -> 8
                 else -> releaseTargetArg.toIntOrNull()
             }
-        if (value == null || value < 6) {
+        if (konstue == null || konstue < 6) {
             messageCollector.report(ERROR, "Unknown JDK release version: $releaseTargetArg")
         } else {
             //don't use release flag if it equals to compilation JDK version
-            if (value != getJavaVersion() || arguments.jdkHome != null) {
-                put(JVMConfigurationKeys.JDK_RELEASE, value)
+            if (konstue != getJavaVersion() || arguments.jdkHome != null) {
+                put(JVMConfigurationKeys.JDK_RELEASE, konstue)
             }
             if (jvmTargetArg != null && jvmTargetArg != releaseTargetArg) {
                 messageCollector.report(
@@ -51,14 +51,14 @@ fun CompilerConfiguration.setupJvmSpecificArguments(arguments: K2JVMCompilerArgu
         }
     }
 
-    val jvmTargetValue = when (releaseTargetArg) {
+    konst jvmTargetValue = when (releaseTargetArg) {
         "6" -> "1.6"
         "8" -> "1.8"
         null -> jvmTargetArg
         else -> releaseTargetArg
     }
     if (jvmTargetValue != null) {
-        val jvmTarget = JvmTarget.fromString(jvmTargetValue)
+        konst jvmTarget = JvmTarget.fromString(jvmTargetValue)
         if (jvmTarget != null) {
             put(JVMConfigurationKeys.JVM_TARGET, jvmTarget)
             if (jvmTarget == JvmTarget.JVM_1_6) {
@@ -70,13 +70,13 @@ fun CompilerConfiguration.setupJvmSpecificArguments(arguments: K2JVMCompilerArgu
         } else {
             messageCollector.report(
                 ERROR, "Unknown JVM target version: $jvmTargetValue\n" +
-                        "Supported versions: ${JvmTarget.values().joinToString { it.description }}"
+                        "Supported versions: ${JvmTarget.konstues().joinToString { it.description }}"
             )
         }
     }
 
-    val jvmDefaultMode = languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
-    val jvmTarget = get(JVMConfigurationKeys.JVM_TARGET) ?: JvmTarget.DEFAULT
+    konst jvmDefaultMode = languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
+    konst jvmTarget = get(JVMConfigurationKeys.JVM_TARGET) ?: JvmTarget.DEFAULT
 
     if (jvmDefaultMode == JvmDefaultMode.ENABLE || jvmDefaultMode == JvmDefaultMode.ENABLE_WITH_DEFAULT_IMPLS) {
         messageCollector.report(
@@ -85,9 +85,9 @@ fun CompilerConfiguration.setupJvmSpecificArguments(arguments: K2JVMCompilerArgu
         )
     }
 
-    val stringConcat = arguments.stringConcat
+    konst stringConcat = arguments.stringConcat
     if (stringConcat != null) {
-        val runtimeStringConcat = JvmStringConcat.fromString(stringConcat)
+        konst runtimeStringConcat = JvmStringConcat.fromString(stringConcat)
         if (runtimeStringConcat != null) {
             put(JVMConfigurationKeys.STRING_CONCAT, runtimeStringConcat)
             if (jvmTarget.majorVersion < JvmTarget.JVM_9.majorVersion && runtimeStringConcat != JvmStringConcat.INLINE) {
@@ -99,7 +99,7 @@ fun CompilerConfiguration.setupJvmSpecificArguments(arguments: K2JVMCompilerArgu
         } else {
             messageCollector.report(
                 ERROR, "Unknown `-Xstring-concat` mode: $stringConcat\n" +
-                        "Supported modes: ${JvmStringConcat.values().joinToString { it.description }}"
+                        "Supported modes: ${JvmStringConcat.konstues().joinToString { it.description }}"
             )
         }
     }
@@ -112,19 +112,19 @@ fun CompilerConfiguration.setupJvmSpecificArguments(arguments: K2JVMCompilerArgu
 
 private fun CompilerConfiguration.handleClosureGenerationSchemeArgument(
     flag: String,
-    value: String?,
+    konstue: String?,
     key: CompilerConfigurationKey<JvmClosureGenerationScheme>,
 ) {
-    if (value == null) return
+    if (konstue == null) return
 
-    val parsedValue = JvmClosureGenerationScheme.fromString(value)
+    konst parsedValue = JvmClosureGenerationScheme.fromString(konstue)
     if (parsedValue != null) {
         put(key, parsedValue)
     } else {
         messageCollector.report(
             ERROR,
-            "Unknown `$flag` argument: ${value}\n." +
-                    "Supported arguments: ${JvmClosureGenerationScheme.values().joinToString { it.description }}"
+            "Unknown `$flag` argument: ${konstue}\n." +
+                    "Supported arguments: ${JvmClosureGenerationScheme.konstues().joinToString { it.description }}"
         )
     }
 }
@@ -140,7 +140,7 @@ fun CompilerConfiguration.configureJdkHome(arguments: K2JVMCompilerArguments): B
     }
 
     if (arguments.jdkHome != null) {
-        val jdkHome = File(arguments.jdkHome!!)
+        konst jdkHome = File(arguments.jdkHome!!)
         if (!jdkHome.exists()) {
             messageCollector.report(ERROR, "JDK home directory does not exist: $jdkHome")
             return false
@@ -155,7 +155,7 @@ fun CompilerConfiguration.configureJdkHome(arguments: K2JVMCompilerArguments): B
 }
 
 fun CompilerConfiguration.configureJdkHomeFromSystemProperty() {
-    val javaHome = File(System.getProperty("java.home"))
+    konst javaHome = File(System.getProperty("java.home"))
     messageCollector.report(LOGGING, "Using JDK home inferred from java.home: $javaHome")
     put(JVMConfigurationKeys.JDK_HOME, javaHome)
 }
@@ -189,8 +189,8 @@ fun <PathProvider : Any> CompilerConfiguration.configureStandardLibs(
     reflectPath: (PathProvider) -> File,
     arguments: K2JVMCompilerArguments
 ) {
-    val jdkRelease = get(JVMConfigurationKeys.JDK_RELEASE)
-    val isModularJava = isModularJava() && (jdkRelease == null || jdkRelease >= 9)
+    konst jdkRelease = get(JVMConfigurationKeys.JDK_RELEASE)
+    konst isModularJava = isModularJava() && (jdkRelease == null || jdkRelease >= 9)
 
     fun addRoot(moduleName: String, libraryName: String, getLibrary: (PathProvider) -> File, noLibraryArgument: String) {
         addModularRootIfNotNull(
@@ -246,19 +246,19 @@ fun CompilerConfiguration.configureAdvancedJvmOptions(arguments: K2JVMCompilerAr
 
     put(JVMConfigurationKeys.PARAMETERS_METADATA, arguments.javaParameters)
 
-    val useOldBackend = arguments.useOldBackend
-    val useIR = arguments.useK2 || languageVersionSettings.languageVersion.usesK2 || !useOldBackend
+    konst useOldBackend = arguments.useOldBackend
+    konst useIR = arguments.useK2 || languageVersionSettings.languageVersion.usesK2 || !useOldBackend
 
     messageCollector.report(LOGGING, "Using ${if (useIR) "JVM IR" else "old JVM"} backend")
 
     put(JVMConfigurationKeys.IR, useIR)
 
-    val abiStability = JvmAbiStability.fromStringOrNull(arguments.abiStability)
+    konst abiStability = JvmAbiStability.fromStringOrNull(arguments.abiStability)
     if (arguments.abiStability != null) {
         if (abiStability == null) {
             messageCollector.report(
                 ERROR,
-                "Unknown ABI stability mode: ${arguments.abiStability}, supported modes: ${JvmAbiStability.values().map { it.description }}"
+                "Unknown ABI stability mode: ${arguments.abiStability}, supported modes: ${JvmAbiStability.konstues().map { it.description }}"
             )
         } else if (!useIR && abiStability == JvmAbiStability.UNSTABLE) {
             messageCollector.report(ERROR, "-Xabi-stability=unstable is not supported in the old JVM backend")
@@ -281,8 +281,8 @@ fun CompilerConfiguration.configureAdvancedJvmOptions(arguments: K2JVMCompilerAr
 
     put(JVMConfigurationKeys.SERIALIZE_IR, JvmSerializeIrMode.fromString(arguments.serializeIr))
 
-    put(JVMConfigurationKeys.VALIDATE_IR, arguments.validateIr)
-    put(JVMConfigurationKeys.VALIDATE_BYTECODE, arguments.validateBytecode)
+    put(JVMConfigurationKeys.VALIDATE_IR, arguments.konstidateIr)
+    put(JVMConfigurationKeys.VALIDATE_BYTECODE, arguments.konstidateBytecode)
 
     put(JVMConfigurationKeys.LINK_VIA_SIGNATURES, arguments.linkViaSignatures)
 
@@ -291,12 +291,12 @@ fun CompilerConfiguration.configureAdvancedJvmOptions(arguments: K2JVMCompilerAr
     put(JVMConfigurationKeys.OLD_INNER_CLASSES_LOGIC, arguments.oldInnerClassesLogic)
     put(JVMConfigurationKeys.ENABLE_IR_INLINER, arguments.enableIrInliner)
 
-    val assertionsMode =
+    konst assertionsMode =
         JVMAssertionsMode.fromStringOrNull(arguments.assertionsMode)
     if (assertionsMode == null) {
         messageCollector.report(
             ERROR,
-            "Unknown assertions mode: ${arguments.assertionsMode}, supported modes: ${JVMAssertionsMode.values().map { it.description }}"
+            "Unknown assertions mode: ${arguments.assertionsMode}, supported modes: ${JVMAssertionsMode.konstues().map { it.description }}"
         )
     }
     put(JVMConfigurationKeys.ASSERTIONS_MODE, assertionsMode ?: JVMAssertionsMode.DEFAULT)
@@ -324,8 +324,8 @@ fun CompilerConfiguration.configureAdvancedJvmOptions(arguments: K2JVMCompilerAr
 
     arguments.declarationsOutputPath?.let { put(JVMConfigurationKeys.DECLARATIONS_JSON_PATH, it) }
 
-    val nThreadsRaw = parseBackendThreads(arguments.backendThreads, messageCollector)
-    val nThreads = if (nThreadsRaw == 0) Runtime.getRuntime().availableProcessors() else nThreadsRaw
+    konst nThreadsRaw = parseBackendThreads(arguments.backendThreads, messageCollector)
+    konst nThreads = if (nThreadsRaw == 0) Runtime.getRuntime().availableProcessors() else nThreadsRaw
     if (nThreads > 1) {
         messageCollector.report(LOGGING, "Running backend in parallel with $nThreads threads")
     }
@@ -333,24 +333,24 @@ fun CompilerConfiguration.configureAdvancedJvmOptions(arguments: K2JVMCompilerAr
 }
 
 private fun parseBackendThreads(stringValue: String, messageCollector: MessageCollector): Int {
-    val value = stringValue.toIntOrNull()
-    if (value == null) {
-        messageCollector.report(ERROR, "Cannot parse -Xbackend-threads value: \"$stringValue\". Please use an integer number")
+    konst konstue = stringValue.toIntOrNull()
+    if (konstue == null) {
+        messageCollector.report(ERROR, "Cannot parse -Xbackend-threads konstue: \"$stringValue\". Please use an integer number")
         return 1
     }
-    if (value < 0) {
-        messageCollector.report(ERROR, "-Xbackend-threads value cannot be negative")
+    if (konstue < 0) {
+        messageCollector.report(ERROR, "-Xbackend-threads konstue cannot be negative")
         return 1
     }
-    return value
+    return konstue
 }
 
 fun CompilerConfiguration.configureKlibPaths(arguments: K2JVMCompilerArguments) {
-    val libraries = arguments.klibLibraries ?: return
+    konst libraries = arguments.klibLibraries ?: return
     put(JVMConfigurationKeys.KLIB_PATHS, libraries.split(File.pathSeparator.toRegex()).filterNot(String::isEmpty))
 }
 
-private val CompilerConfiguration.messageCollector: MessageCollector
+private konst CompilerConfiguration.messageCollector: MessageCollector
     get() = getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
 private fun getJavaVersion(): Int =

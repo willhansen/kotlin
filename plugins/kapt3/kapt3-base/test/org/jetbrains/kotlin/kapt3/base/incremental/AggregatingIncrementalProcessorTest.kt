@@ -12,8 +12,8 @@ import java.io.File
 class AggregatingIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir() {
     @Test
     fun testDependenciesRecorded() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val aggregating = SimpleProcessor().toAggregating()
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst aggregating = SimpleProcessor().toAggregating()
         runAnnotationProcessing(srcFiles, listOf(aggregating), generatedSources)
 
         assertEquals(RuntimeProcType.AGGREGATING, aggregating.getRuntimeType())
@@ -29,8 +29,8 @@ class AggregatingIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir(
 
     @Test
     fun testNoSourcesToProcess() {
-        val srcFiles = listOf("Observable.java").map { File(TEST_DATA_DIR, it) }
-        val aggregating = SimpleProcessor().toAggregating()
+        konst srcFiles = listOf("Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst aggregating = SimpleProcessor().toAggregating()
         runAnnotationProcessing(srcFiles, listOf(aggregating), generatedSources)
 
         assertEquals(RuntimeProcType.AGGREGATING, aggregating.getRuntimeType())
@@ -39,8 +39,8 @@ class AggregatingIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir(
 
     @Test
     fun testGeneratingSourcesClassesResources() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val aggregating = SimpleCreatingClassFilesAndResources().toAggregating()
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst aggregating = SimpleCreatingClassFilesAndResources().toAggregating()
         runAnnotationProcessing(srcFiles, listOf(aggregating), generatedSources)
 
         assertEquals(RuntimeProcType.AGGREGATING, aggregating.getRuntimeType())

@@ -1,45 +1,45 @@
 package test
 
-// val prop1: 1
-val prop1: Int = 1
+// konst prop1: 1
+konst prop1: Int = 1
 
-// val prop2: 1
-val prop2: Int? = 1
+// konst prop2: 1
+konst prop2: Int? = 1
 
-// val prop3: 1
-val prop3: Number? = 1
+// konst prop3: 1
+konst prop3: Number? = 1
 
-// val prop4: 1
-val prop4: Any? = 1
+// konst prop4: 1
+konst prop4: Any? = 1
 
-// val prop5: 1
-val prop5: Number = 1
+// konst prop5: 1
+konst prop5: Number = 1
 
-// val prop6: 1
-val prop6: Any = 1
+// konst prop6: 1
+konst prop6: Any = 1
 
-// val prop7: \"a\"
-val prop7: String = "a"
+// konst prop7: \"a\"
+konst prop7: String = "a"
 
-// val prop8: \"a\"
-val prop8: String? = "a"
+// konst prop8: \"a\"
+konst prop8: String? = "a"
 
-// val prop9: \"a\"
-val prop9: Any? = "a"
+// konst prop9: \"a\"
+konst prop9: Any? = "a"
 
-// val prop10: \"a\"
-val prop10: Any = "a"
+// konst prop10: \"a\"
+konst prop10: Any = "a"
 
-// val prop11: null
-val prop11: <!UNRESOLVED_REFERENCE!>aaa<!> = 1
+// konst prop11: null
+konst prop11: <!UNRESOLVED_REFERENCE!>aaa<!> = 1
 
-// val prop14: null
-val prop14: <!UNRESOLVED_REFERENCE!>aaa<!>? = 1
+// konst prop14: null
+konst prop14: <!UNRESOLVED_REFERENCE!>aaa<!>? = 1
 
 class A
 
-// val prop15: null
-val prop15: A = <!INITIALIZER_TYPE_MISMATCH!>1<!>
+// konst prop15: null
+konst prop15: A = <!INITIALIZER_TYPE_MISMATCH!>1<!>
 
-// val prop16: 1
-val prop16: A? = <!INITIALIZER_TYPE_MISMATCH!>1<!>
+// konst prop16: 1
+konst prop16: A? = <!INITIALIZER_TYPE_MISMATCH!>1<!>

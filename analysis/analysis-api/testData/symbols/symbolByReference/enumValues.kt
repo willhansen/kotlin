@@ -5,5 +5,5 @@ enum class MyKotlinEnum {
 }
 
 fun test() {
-    MyKotlinEnum.valu<caret>es()
+    MyKotlinEnum.konstu<caret>es()
 }

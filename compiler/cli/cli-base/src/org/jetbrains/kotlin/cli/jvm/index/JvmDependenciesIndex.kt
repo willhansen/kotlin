@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.name.FqName
 import java.util.*
 
 interface JvmDependenciesIndex {
-    val indexedRoots: Sequence<JavaRoot>
+    konst indexedRoots: Sequence<JavaRoot>
 
     fun <T : Any> findClass(
         classId: ClassId,
@@ -37,7 +37,7 @@ interface JvmDependenciesIndex {
     )
 }
 
-data class JavaRoot(val file: VirtualFile, val type: RootType, val prefixFqName: FqName? = null) {
+data class JavaRoot(konst file: VirtualFile, konst type: RootType, konst prefixFqName: FqName? = null) {
     enum class RootType {
         SOURCE,
         BINARY,
@@ -45,8 +45,8 @@ data class JavaRoot(val file: VirtualFile, val type: RootType, val prefixFqName:
     }
 
     companion object RootTypes {
-        val OnlyBinary: Set<RootType> = EnumSet.of(RootType.BINARY, RootType.BINARY_SIG)
-        val OnlySource: Set<RootType> = EnumSet.of(RootType.SOURCE)
-        val SourceAndBinary: Set<RootType> = EnumSet.of(RootType.BINARY, RootType.BINARY_SIG, RootType.SOURCE)
+        konst OnlyBinary: Set<RootType> = EnumSet.of(RootType.BINARY, RootType.BINARY_SIG)
+        konst OnlySource: Set<RootType> = EnumSet.of(RootType.SOURCE)
+        konst SourceAndBinary: Set<RootType> = EnumSet.of(RootType.BINARY, RootType.BINARY_SIG, RootType.SOURCE)
     }
 }

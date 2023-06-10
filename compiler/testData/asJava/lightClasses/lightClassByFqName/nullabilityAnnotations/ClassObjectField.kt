@@ -2,7 +2,7 @@
 
 class ClassObjectField {
     companion object {
-        val x: String? = { "" }()
-        private val y: String? = { "" }()
+        konst x: String? = { "" }()
+        private konst y: String? = { "" }()
     }
 }

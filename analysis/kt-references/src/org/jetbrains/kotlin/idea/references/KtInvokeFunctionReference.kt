@@ -17,37 +17,37 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 import java.util.*
 
 abstract class KtInvokeFunctionReference(expression: KtCallExpression) : KtSimpleReference<KtCallExpression>(expression), MultiRangeReference {
-    override val resolvesByNames: Collection<Name> get() = NAMES
+    override konst resolvesByNames: Collection<Name> get() = NAMES
 
     override fun getRangeInElement(): TextRange {
         return element.textRange.shiftRight(-element.textOffset)
     }
 
     override fun getRanges(): List<TextRange> {
-        val list = ArrayList<TextRange>()
-        val valueArgumentList = expression.valueArgumentList
-        if (valueArgumentList != null) {
-            if (valueArgumentList.arguments.isNotEmpty()) {
-                val valueArgumentListNode = valueArgumentList.node
-                val lPar = valueArgumentListNode.findChildByType(KtTokens.LPAR)
+        konst list = ArrayList<TextRange>()
+        konst konstueArgumentList = expression.konstueArgumentList
+        if (konstueArgumentList != null) {
+            if (konstueArgumentList.arguments.isNotEmpty()) {
+                konst konstueArgumentListNode = konstueArgumentList.node
+                konst lPar = konstueArgumentListNode.findChildByType(KtTokens.LPAR)
                 if (lPar != null) {
                     list.add(getRange(lPar))
                 }
 
-                val rPar = valueArgumentListNode.findChildByType(KtTokens.RPAR)
+                konst rPar = konstueArgumentListNode.findChildByType(KtTokens.RPAR)
                 if (rPar != null) {
                     list.add(getRange(rPar))
                 }
             } else {
-                list.add(getRange(valueArgumentList.node))
+                list.add(getRange(konstueArgumentList.node))
             }
         }
 
-        val functionLiteralArguments = expression.lambdaArguments
+        konst functionLiteralArguments = expression.lambdaArguments
         for (functionLiteralArgument in functionLiteralArguments) {
-            val functionLiteralExpression = functionLiteralArgument.getLambdaExpression() ?: continue
+            konst functionLiteralExpression = functionLiteralArgument.getLambdaExpression() ?: continue
             list.add(getRange(functionLiteralExpression.leftCurlyBrace))
-            val rightCurlyBrace = functionLiteralExpression.rightCurlyBrace
+            konst rightCurlyBrace = functionLiteralExpression.rightCurlyBrace
             if (rightCurlyBrace != null) {
                 list.add(getRange(rightCurlyBrace))
             }
@@ -57,13 +57,13 @@ abstract class KtInvokeFunctionReference(expression: KtCallExpression) : KtSimpl
     }
 
     private fun getRange(node: ASTNode): TextRange {
-        val textRange = node.textRange
+        konst textRange = node.textRange
         return textRange.shiftRight(-expression.textOffset)
     }
 
     override fun canRename(): Boolean = true
 
     companion object {
-        private val NAMES = listOf(OperatorNameConventions.INVOKE)
+        private konst NAMES = listOf(OperatorNameConventions.INVOKE)
     }
 }

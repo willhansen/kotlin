@@ -8,49 +8,49 @@ package kotlin.script.experimental.api
 import kotlin.script.experimental.util.LinkedSnippet
 
 /**
- * Evaluated snippet type, the most common return type for
- * [ReplEvaluator.eval] and [ReplEvaluator.lastEvaluatedSnippet], boxed into
+ * Ekonstuated snippet type, the most common return type for
+ * [ReplEkonstuator.ekonst] and [ReplEkonstuator.lastEkonstuatedSnippet], boxed into
  * [LinkedSnippet] container
  */
-interface EvaluatedSnippet {
+interface EkonstuatedSnippet {
     /**
-     * Link to the compiled snippet used for the evaluation
+     * Link to the compiled snippet used for the ekonstuation
      */
-    val compiledSnippet: CompiledSnippet
+    konst compiledSnippet: CompiledSnippet
 
     /**
-     * Real evaluation configuration for this snippet
+     * Real ekonstuation configuration for this snippet
      */
-    val configuration: ScriptEvaluationConfiguration
+    konst configuration: ScriptEkonstuationConfiguration
 
     /**
-     * Result of the script evaluation.
+     * Result of the script ekonstuation.
      */
-    val result: ResultValue
+    konst result: ResultValue
 }
 
 /**
- * REPL Evaluator interface which is used for compiled snippets evaluation
+ * REPL Ekonstuator interface which is used for compiled snippets ekonstuation
  * @param CompiledSnippetT Should be equal to or wider than the corresponding type parameter of compiler.
- *                         Lets evaluator use specific versions of compiled script without type conversion.
- * @param EvaluatedSnippetT Implementation of [EvaluatedSnippet] which is returned by this evaluator
+ *                         Lets ekonstuator use specific versions of compiled script without type conversion.
+ * @param EkonstuatedSnippetT Implementation of [EkonstuatedSnippet] which is returned by this ekonstuator
  */
-interface ReplEvaluator<CompiledSnippetT : CompiledSnippet, EvaluatedSnippetT : EvaluatedSnippet> {
+interface ReplEkonstuator<CompiledSnippetT : CompiledSnippet, EkonstuatedSnippetT : EkonstuatedSnippet> {
 
     /**
-     * Reference to the last evaluation result
+     * Reference to the last ekonstuation result
      */
-    val lastEvaluatedSnippet: LinkedSnippet<EvaluatedSnippetT>?
+    konst lastEkonstuatedSnippet: LinkedSnippet<EkonstuatedSnippetT>?
 
     /**
-     * Evaluates compiled snippet and returns result for it.
-     * Should assert that snippet sequence is valid.
-     * @param snippet Snippet to evaluate.
-     * @param configuration Evaluation configuration used.
-     * @return Evaluation result
+     * Ekonstuates compiled snippet and returns result for it.
+     * Should assert that snippet sequence is konstid.
+     * @param snippet Snippet to ekonstuate.
+     * @param configuration Ekonstuation configuration used.
+     * @return Ekonstuation result
      */
-    suspend fun eval(
+    suspend fun ekonst(
         snippet: LinkedSnippet<out CompiledSnippetT>,
-        configuration: ScriptEvaluationConfiguration
-    ): ResultWithDiagnostics<LinkedSnippet<EvaluatedSnippetT>>
+        configuration: ScriptEkonstuationConfiguration
+    ): ResultWithDiagnostics<LinkedSnippet<EkonstuatedSnippetT>>
 }

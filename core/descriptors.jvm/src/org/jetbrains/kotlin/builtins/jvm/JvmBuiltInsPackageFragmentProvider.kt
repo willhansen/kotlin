@@ -63,6 +63,6 @@ class JvmBuiltInsPackageFragmentProvider(
         }
 
     companion object {
-        const val DOT_BUILTINS_METADATA_FILE_EXTENSION = ".kotlin_builtins"
+        const konst DOT_BUILTINS_METADATA_FILE_EXTENSION = ".kotlin_builtins"
     }
 }

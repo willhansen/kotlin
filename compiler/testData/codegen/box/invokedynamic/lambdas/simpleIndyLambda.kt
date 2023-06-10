@@ -7,6 +7,6 @@
 // 1 java/lang/invoke/LambdaMetafactory
 
 fun box(): String {
-    val lam = { "OK" }
+    konst lam = { "OK" }
     return lam()
 }

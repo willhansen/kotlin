@@ -23,7 +23,7 @@ open class KotlinJsIr10IncrementalGradlePluginIT : AbstractKotlinJsIncrementalGr
 
 @JsGradlePluginTests
 class KotlinJsFirIncrementalGradlePluginIT : KotlinJsIr10IncrementalGradlePluginIT() {
-    override val defaultBuildOptions: BuildOptions
+    override konst defaultBuildOptions: BuildOptions
         get() = super.defaultBuildOptions.copy(
             languageVersion = "2.0"
         )
@@ -36,15 +36,15 @@ open class KotlinJsLegacy10IncrementalGradlePluginIT : AbstractKotlinJsIncrement
 
 @JsGradlePluginTests
 abstract class AbstractKotlinJsIncrementalGradlePluginIT(
-    protected val irBackend: Boolean
+    protected konst irBackend: Boolean
 ) : KGPBaseTest() {
     @Suppress("DEPRECATION")
-    private val defaultJsOptions = BuildOptions.JsOptions(
+    private konst defaultJsOptions = BuildOptions.JsOptions(
         useIrBackend = irBackend,
         jsCompilerType = if (irBackend) KotlinJsCompilerType.IR else KotlinJsCompilerType.LEGACY
     )
 
-    override val defaultBuildOptions =
+    override konst defaultBuildOptions =
         super.defaultBuildOptions.copy(
             jsOptions = defaultJsOptions,
         )
@@ -60,7 +60,7 @@ abstract class AbstractKotlinJsIncrementalGradlePluginIT(
     @DisplayName("incremental compilation for js works")
     @GradleTest
     fun testIncrementalCompilation(gradleVersion: GradleVersion) {
-        val buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
+        konst buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
         project("kotlin2JsICProject", gradleVersion, buildOptions = buildOptions) {
             build("compileKotlinJs", "compileTestKotlinJs") {
                 checkIrCompilationMessage()
@@ -72,14 +72,14 @@ abstract class AbstractKotlinJsIncrementalGradlePluginIT(
                 assertCompiledKotlinSources(emptyList(), output)
             }
 
-            val modifiedFile = subProject("lib").kotlinSourcesDir().resolve("A.kt") ?: error("No A.kt file in test project")
+            konst modifiedFile = subProject("lib").kotlinSourcesDir().resolve("A.kt") ?: error("No A.kt file in test project")
             modifiedFile.modify {
-                it.replace("val x = 0", "val x = \"a\"")
+                it.replace("konst x = 0", "konst x = \"a\"")
             }
             build("compileKotlinJs", "compileTestKotlinJs") {
                 checkIrCompilationMessage()
                 assertOutputContains(USING_JS_INCREMENTAL_COMPILATION_MESSAGE)
-                val affectedFiles = listOf("A.kt", "useAInLibMain.kt", "useAInAppMain.kt", "useAInAppTest.kt").mapNotNull {
+                konst affectedFiles = listOf("A.kt", "useAInLibMain.kt", "useAInAppMain.kt", "useAInAppTest.kt").mapNotNull {
                     projectPath.findInPath(it)
                 }
                 assertCompiledKotlinSources(affectedFiles.relativizeTo(projectPath), output)
@@ -90,10 +90,10 @@ abstract class AbstractKotlinJsIncrementalGradlePluginIT(
     @DisplayName("non-incremental compilation works")
     @GradleTest
     fun testIncrementalCompilationDisabled(gradleVersion: GradleVersion) {
-        val jsOptions = defaultJsOptions.run {
+        konst jsOptions = defaultJsOptions.run {
             if (irBackend) copy(incrementalJsKlib = false) else copy(incrementalJs = false)
         }
-        val options = defaultBuildOptions.copy(jsOptions = jsOptions)
+        konst options = defaultBuildOptions.copy(jsOptions = jsOptions)
         project("kotlin2JsICProject", gradleVersion, buildOptions = options) {
             build("compileKotlinJs", "compileTestKotlinJs") {
                 checkIrCompilationMessage()
@@ -106,12 +106,12 @@ abstract class AbstractKotlinJsIncrementalGradlePluginIT(
     @GradleTest
     @GradleTestVersions(minVersion = TestVersions.Gradle.G_7_6)
     fun testIncrementalCompilationWithMultipleModulesAfterCompilationError(gradleVersion: GradleVersion) {
-        val buildOptions = defaultBuildOptions.copy(jsOptions = defaultJsOptions.copy(incrementalJsKlib = true))
+        konst buildOptions = defaultBuildOptions.copy(jsOptions = defaultJsOptions.copy(incrementalJsKlib = true))
         project("kotlin-js-ir-ic-multiple-artifacts", gradleVersion, buildOptions = buildOptions) {
             build("compileKotlinJs")
 
-            val libKt = subProject("lib").kotlinSourcesDir().resolve("Lib.kt") ?: error("No Lib.kt file in test project")
-            val appKt = subProject("app").kotlinSourcesDir().resolve("App.kt") ?: error("No App.kt file in test project")
+            konst libKt = subProject("lib").kotlinSourcesDir().resolve("Lib.kt") ?: error("No Lib.kt file in test project")
+            konst appKt = subProject("app").kotlinSourcesDir().resolve("App.kt") ?: error("No App.kt file in test project")
 
             libKt.modify { it.replace("fun answer", "func answe") } // introduce compilation error
             buildAndFail("compileKotlinJs")

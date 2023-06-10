@@ -9,7 +9,7 @@ plugins {
 
 publish(sbom = false)
 
-val default = configurations.getByName(Dependency.DEFAULT_CONFIGURATION)
+konst default = configurations.getByName(Dependency.DEFAULT_CONFIGURATION)
 default.extendsFrom(configurations.publishedRuntime.get())
 
 node {
@@ -20,7 +20,7 @@ node {
 
 tasks {
     named("yarn") {
-        val nodeModulesDir = projectDir.resolve("node_modules")
+        konst nodeModulesDir = projectDir.resolve("node_modules")
         outputs.upToDateWhen {
             nodeModulesDir.isDirectory
         }
@@ -74,7 +74,7 @@ tasks {
     }
 }
 
-val jar by tasks.creating(Jar::class) {
+konst jar by tasks.creating(Jar::class) {
     dependsOn(tasks.named("yarnBuild"))
     from(projectDir.resolve("lib"))
     from(projectDir.resolve("package.json"))

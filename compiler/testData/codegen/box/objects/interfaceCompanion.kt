@@ -7,7 +7,7 @@ interface A {
 
     companion object {
 
-        val prop = test()
+        konst prop = test()
 
         fun test(): String {
             result += "OK"

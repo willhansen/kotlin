@@ -1,4 +1,4 @@
-abstract class Base(val fn: () -> String)
+abstract class Base(konst fn: () -> String)
 
 interface Host {
     companion object : Base(run { { Host.ok() } }) {

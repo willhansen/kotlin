@@ -1,28 +1,28 @@
 // FILE: AbstractToolConfig.kt
 
 abstract class AbstractToolConfig {
-    private val platformManager = platformManager()
-    private val targetManager = platformManager.targetManager()
-    val target = targetManager.target
+    private konst platformManager = platformManager()
+    private konst targetManager = platformManager.targetManager()
+    konst target = targetManager.target
 
-    protected val platform = platformManager.platform(target)
+    protected konst platform = platformManager.platform(target)
 
-    val llvmHome = platform.absoluteLlvmHome
+    konst llvmHome = platform.absoluteLlvmHome
 
     abstract fun platformManager(): PlatformManager
 }
 
 // FILE: Platform.kt
 
-class Platform(val configurables: Configurables) : Configurables by configurables
+class Platform(konst configurables: Configurables) : Configurables by configurables
 
 abstract class PlatformManager : HostManager() {
-    private val loaders = enabled.map {
+    private konst loaders = enabled.map {
         it to loadConfigurables(it)
     }.toMap()
 
-    private val platforms = loaders.map {
-        it.key to Platform(it.value)
+    private konst platforms = loaders.map {
+        it.key to Platform(it.konstue)
     }.toMap()
 
     abstract fun targetManager(userRequest: String? = null): TargetManager
@@ -34,7 +34,7 @@ abstract class PlatformManager : HostManager() {
 // FILE: HostManager.kt
 
 open class HostManager {
-    val enabled: List<KonanTarget>
+    konst enabled: List<KonanTarget>
         get() = emptyList()
 }
 
@@ -42,11 +42,11 @@ open class HostManager {
 
 interface Configurables {
 
-    val llvmHome get() = hostString("llvmHome")
+    konst llvmHome get() = hostString("llvmHome")
 
-    val absoluteLlvmHome get() = absolute(llvmHome)
+    konst absoluteLlvmHome get() = absolute(llvmHome)
 
-    fun absolute(value: String?): String
+    fun absolute(konstue: String?): String
 
     fun hostString(key: String): String?
 }
@@ -62,7 +62,7 @@ sealed class KonanTarget {
 // FILE: TargetManager.kt
 
 interface TargetManager {
-    val target: KonanTarget
+    konst target: KonanTarget
 }
 
 

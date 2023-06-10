@@ -25,9 +25,9 @@ fun foo(): Int = 1
 
 fun box(): String {
     builder {
-        val x: Byte = 1
+        konst x: Byte = 1
         // No actual cast happens here
-        val y: Int = x.toInt()
+        konst y: Int = x.toInt()
         suspendHere()
         setRes(x, y)
     }

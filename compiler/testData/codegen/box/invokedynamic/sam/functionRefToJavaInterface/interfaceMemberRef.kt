@@ -11,7 +11,7 @@ interface IFoo {
     fun foo(): String
 }
 
-class C(val v: String) : IFoo {
+class C(konst v: String) : IFoo {
     override fun foo(): String = v
 }
 

@@ -19,13 +19,13 @@ fun <T> LiveData<T>.observe(a: Any, observer: (T) -> Unit): Observer<T> {
 fun <T> test1(r: Runnable, l: LiveData<T>): Observer<T> = l.<!COMPATIBILITY_WARNING!>observe<!>(r) {  } // partial conversion
 
 fun <T> test2(r: Runnable, o: Observer<T>, l: LiveData<T>) {
-    val a = l.observe(r, o) // no conversion
+    konst a = l.observe(r, o) // no conversion
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit")!>a<!>
 
-    val b = l.observe({}, {}) // conversion for all arguments
+    konst b = l.observe({}, {}) // conversion for all arguments
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit")!>b<!>
 
-    val c = l.observe({}) {} // conversion for all arguments
+    konst c = l.observe({}) {} // conversion for all arguments
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit")!>c<!>
 }
 

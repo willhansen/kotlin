@@ -8,7 +8,7 @@ class A {
 }
 
 fun main() {
-    val x = A::Nested
+    konst x = A::Nested
 
     checkSubtype<KFunction0<A.Nested>>(x)
 }

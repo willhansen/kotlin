@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.light.classes.symbol.annotations.annotationUseSiteTa
 import org.jetbrains.kotlin.light.classes.symbol.cachedValue
 import org.jetbrains.kotlin.light.classes.symbol.classes.SymbolLightClassForClassOrObject
 import org.jetbrains.kotlin.light.classes.symbol.classes.SymbolLightClassForEnumEntry
-import org.jetbrains.kotlin.light.classes.symbol.isOriginEquivalentTo
+import org.jetbrains.kotlin.light.classes.symbol.isOriginEquikonstentTo
 import org.jetbrains.kotlin.light.classes.symbol.modifierLists.InitializedModifiersBox
 import org.jetbrains.kotlin.light.classes.symbol.modifierLists.SymbolLightMemberModifierList
 import org.jetbrains.kotlin.light.classes.symbol.nonExistentType
@@ -29,8 +29,8 @@ import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.utils.addToStdlib.ifTrue
 
 internal class SymbolLightFieldForEnumEntry(
-    private val enumEntry: KtEnumEntry,
-    private val enumEntryName: String,
+    private konst enumEntry: KtEnumEntry,
+    private konst enumEntryName: String,
     containingClass: SymbolLightClassForClassOrObject,
 ) : SymbolLightField(containingClass = containingClass, lightMemberOrigin = null), PsiEnumConstant {
     internal inline fun <T> withEnumEntrySymbol(crossinline action: KtAnalysisSession.(KtEnumEntrySymbol) -> T): T =
@@ -38,7 +38,7 @@ internal class SymbolLightFieldForEnumEntry(
             action(enumEntry.getEnumEntrySymbol())
         }
 
-    private val _modifierList by lazyPub {
+    private konst _modifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this,
             modifiersBox = InitializedModifiersBox(PsiModifier.STATIC, PsiModifier.FINAL, PsiModifier.PUBLIC),
@@ -56,17 +56,17 @@ internal class SymbolLightFieldForEnumEntry(
         )
     }
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
-        return super.isEquivalentTo(another) || isOriginEquivalentTo(another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
+        return super.isEquikonstentTo(another) || isOriginEquikonstentTo(another)
     }
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    override val kotlinOrigin: KtEnumEntry = enumEntry
+    override konst kotlinOrigin: KtEnumEntry = enumEntry
 
     override fun isDeprecated(): Boolean = false
 
-    private val hasBody: Boolean get() = enumEntry.body != null
+    private konst hasBody: Boolean get() = enumEntry.body != null
 
     override fun getInitializingClass(): PsiEnumConstantInitializer? = cachedValue {
         hasBody.ifTrue {
@@ -91,7 +91,7 @@ internal class SymbolLightFieldForEnumEntry(
 
     override fun getName(): String = enumEntryName
 
-    private val _type: PsiType by lazyPub {
+    private konst _type: PsiType by lazyPub {
         withEnumEntrySymbol { enumEntrySymbol ->
             enumEntrySymbol.returnType
                 .asPsiType(this@SymbolLightFieldForEnumEntry, allowErrorTypes = true)

@@ -1,9 +1,9 @@
 // MAIN_ARGS: [4]
 
 fun main(args: Array<String>) {
-    val x = args[0].toInt()
+    konst x = args[0].toInt()
     //Check if a number lies within a range:
-    val y = 10
+    konst y = 10
     if (x in 1..y - 1)
         println("OK")
 
@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
 
     //Check if a number is out of range:
     println()
-    val array = mutableListOf<String>()
+    konst array = mutableListOf<String>()
 
     array.add("aaa")
     array.add("bbb")

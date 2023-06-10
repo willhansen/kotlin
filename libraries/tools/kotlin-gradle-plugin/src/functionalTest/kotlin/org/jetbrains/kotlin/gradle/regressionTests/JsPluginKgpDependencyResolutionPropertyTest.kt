@@ -17,29 +17,29 @@ import kotlin.test.assertEquals
 class JsPluginKgpDependencyResolutionPropertyTest {
     @Test
     fun `test project with js plugin has kgp dependency resolution disabled`() {
-        val project = buildProject {
+        konst project = buildProject {
             plugins.apply("org.jetbrains.kotlin.js")
         }
 
-        val kotlin = project.kotlinExtension as KotlinJsProjectExtension
+        konst kotlin = project.kotlinExtension as KotlinJsProjectExtension
         kotlin.js(KotlinJsCompilerType.IR)
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals("false", project.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
     }
 
     @Test
     fun `test kgp dependency resolution state in a nested js project with a top-level mpp project`() {
-        val project = buildProject {
+        konst project = buildProject {
             applyMultiplatformPlugin()
         }
 
-        val subproject = buildProject({ withParent(project) }) {
+        konst subproject = buildProject({ withParent(project) }) {
             plugins.apply("org.jetbrains.kotlin.js")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(null, project.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
         assertEquals("false", subproject.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
@@ -47,16 +47,16 @@ class JsPluginKgpDependencyResolutionPropertyTest {
 
     @Test
     fun `test kgp import state in a nested js project with a top-level mpp project and enabled kgp dependency resolution`() {
-        val project = buildProject {
+        konst project = buildProject {
             applyMultiplatformPlugin()
             extensions.extraProperties.set(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION, "true")
         }
 
-        val subproject = buildProject({ withParent(project) }) {
+        konst subproject = buildProject({ withParent(project) }) {
             plugins.apply("org.jetbrains.kotlin.js")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals("true", project.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
         assertEquals("false", subproject.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
@@ -64,17 +64,17 @@ class JsPluginKgpDependencyResolutionPropertyTest {
 
     @Test
     fun `test kgp dependency resolution state in a nested mpp project with a top-level js project`() {
-        val project = buildProject {
+        konst project = buildProject {
             plugins.apply("org.jetbrains.kotlin.js")
         }
 
-        val subproject = buildProject({ withParent(project) }) {
+        konst subproject = buildProject({ withParent(project) }) {
             applyMultiplatformPlugin()
         }
 
         (project.kotlinExtension as KotlinJsProjectExtension).js(KotlinJsCompilerType.IR)
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals("false", project.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
         // Requires a workaround, one has to set the property explicitly for the MPP project nested under the JS project.
@@ -84,18 +84,18 @@ class JsPluginKgpDependencyResolutionPropertyTest {
 
     @Test
     fun `test kgp dependency resolution state in a nested mpp project with a top-level js project and enabled kgp import`() {
-        val project = buildProject {
+        konst project = buildProject {
             plugins.apply("org.jetbrains.kotlin.js")
         }
 
-        val subproject = buildProject({ withParent(project) }) {
+        konst subproject = buildProject({ withParent(project) }) {
             applyMultiplatformPlugin()
             extensions.extraProperties.set(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION, "true")
         }
 
         (project.kotlinExtension as KotlinJsProjectExtension).js(KotlinJsCompilerType.IR)
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals("false", project.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
         assertEquals("true", subproject.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
@@ -103,20 +103,20 @@ class JsPluginKgpDependencyResolutionPropertyTest {
 
     @Test
     fun `test kgp dependency resolution state in an mpp project alongside a js project`() {
-        val project = buildProject {
+        konst project = buildProject {
         }
 
-        val mppSubproject = buildProject({ withParent(project) }) {
+        konst mppSubproject = buildProject({ withParent(project) }) {
             applyMultiplatformPlugin()
         }
 
-        val jsSubproject = buildProject({ withParent(project) }) {
+        konst jsSubproject = buildProject({ withParent(project) }) {
             plugins.apply("org.jetbrains.kotlin.js")
         }
 
         (jsSubproject.kotlinExtension as KotlinJsProjectExtension).js(KotlinJsCompilerType.IR)
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(null, mppSubproject.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))
         assertEquals("false", jsSubproject.findProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION))

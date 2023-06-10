@@ -1,1 +1,1 @@
-private val pVal = object {}
+private konst pVal = object {}

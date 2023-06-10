@@ -12,5 +12,5 @@ class CustomDelegate {
 }
 
 class Class {
-    @delegate:Anno val property by CustomDelegate()
+    @delegate:Anno konst property by CustomDelegate()
 }

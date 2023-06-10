@@ -10,7 +10,7 @@ import org.gradle.api.tasks.testing.TestFailure
 import org.gradle.api.tasks.testing.TestOutputEvent
 
 class RecordingTestResultProcessor : TestResultProcessor {
-    val output = StringBuilder()
+    konst output = StringBuilder()
     var indent = 0
 
     fun line(line: String) {
@@ -19,7 +19,7 @@ class RecordingTestResultProcessor : TestResultProcessor {
     }
 
     override fun started(test: TestDescriptorInternal, event: TestStartEvent) {
-        val description = when (test) {
+        konst description = when (test) {
             is DefaultTestSuiteDescriptor -> "SUITE ${test.displayName}"
             is DefaultTestDescriptor -> "TEST displayName: ${test.displayName}, " +
                     "classDisplayName: ${test.classDisplayName}, " +

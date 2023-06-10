@@ -6,7 +6,7 @@ import kotlin.coroutines.intrinsics.*
 
 class Controller {
     var exception: Throwable? = null
-    val postponedActions = ArrayList<() -> Unit>()
+    konst postponedActions = ArrayList<() -> Unit>()
 
     suspend fun suspendWithValue(v: String): String = suspendCoroutineUninterceptedOrReturn { x ->
         postponedActions.add {
@@ -36,7 +36,7 @@ class Controller {
 }
 
 fun builder(c: suspend Controller.() -> Unit) {
-    val controller = Controller()
+    konst controller = Controller()
     controller.run(c)
 
     if (controller.exception?.message != "OK") {

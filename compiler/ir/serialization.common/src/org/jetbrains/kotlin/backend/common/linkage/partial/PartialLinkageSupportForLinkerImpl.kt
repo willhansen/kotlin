@@ -32,19 +32,19 @@ internal class PartialLinkageSupportForLinkerImpl(
     allowErrorTypes: Boolean,
     logger: PartialLinkageLogger
 ) : PartialLinkageSupportForLinker {
-    private val stubGenerator = MissingDeclarationStubGenerator(builtIns)
-    private val classifierExplorer = ClassifierExplorer(builtIns, stubGenerator, allowErrorTypes)
-    private val patcher = PartiallyLinkedIrTreePatcher(builtIns, classifierExplorer, stubGenerator, logger)
+    private konst stubGenerator = MissingDeclarationStubGenerator(builtIns)
+    private konst classifierExplorer = ClassifierExplorer(builtIns, stubGenerator, allowErrorTypes)
+    private konst patcher = PartiallyLinkedIrTreePatcher(builtIns, classifierExplorer, stubGenerator, logger)
 
-    override val isEnabled get() = true
+    override konst isEnabled get() = true
 
     override fun shouldBeSkipped(declaration: IrDeclaration) = patcher.shouldBeSkipped(declaration)
 
     override fun exploreClassifiers(fakeOverrideBuilder: FakeOverrideBuilder) {
-        val entries = fakeOverrideBuilder.fakeOverrideCandidates
+        konst entries = fakeOverrideBuilder.fakeOverrideCandidates
         if (entries.isEmpty()) return
 
-        val toExclude = buildSet {
+        konst toExclude = buildSet {
             for (clazz in entries.keys) {
                 if (classifierExplorer.exploreSymbol(clazz.symbol) != null) {
                     this += clazz

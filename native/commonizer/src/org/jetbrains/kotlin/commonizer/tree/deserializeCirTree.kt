@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.commonizer.tree
 
 import org.jetbrains.kotlin.commonizer.tree.deserializer.*
 
-internal val defaultCirTreeModuleDeserializer = CirTreeModuleDeserializer(
+internal konst defaultCirTreeModuleDeserializer = CirTreeModuleDeserializer(
     packageDeserializer = CirTreePackageDeserializer(
         propertyDeserializer = CirTreePropertyDeserializer,
         functionDeserializer = CirTreeFunctionDeserializer,
@@ -20,6 +20,6 @@ internal val defaultCirTreeModuleDeserializer = CirTreeModuleDeserializer(
     )
 )
 
-internal val defaultCirTreeRootDeserializer = RootCirTreeDeserializer(
+internal konst defaultCirTreeRootDeserializer = RootCirTreeDeserializer(
     defaultCirTreeModuleDeserializer
 )

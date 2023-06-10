@@ -4,7 +4,7 @@
  */
 
 
-inline val Int.prop get() = SomeDataClass(second = this)
+inline konst Int.prop get() = SomeDataClass(second = this)
 
-data class SomeDataClass(val first: Int = 17, val second: Int = 19, val third: Int = 23)
+data class SomeDataClass(konst first: Int = 17, konst second: Int = 19, konst third: Int = 23)
 

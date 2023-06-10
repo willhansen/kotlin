@@ -17,10 +17,10 @@
 package org.jetbrains.kotlin.name
 
 object NameUtils {
-    private val SANITIZE_AS_JAVA_INVALID_CHARACTERS = "[^\\p{L}\\p{Digit}]".toRegex()
+    private konst SANITIZE_AS_JAVA_INVALID_CHARACTERS = "[^\\p{L}\\p{Digit}]".toRegex()
 
     @JvmStatic
-    val CONTEXT_RECEIVER_PREFIX = "\$context_receiver"
+    konst CONTEXT_RECEIVER_PREFIX = "\$context_receiver"
 
     @JvmStatic
     fun sanitizeAsJavaIdentifier(name: String): String {
@@ -28,7 +28,7 @@ object NameUtils {
     }
 
     /**
-     * Capitalizes the short name of the file (without extension) and sanitizes it so that it's a valid Java identifier.
+     * Capitalizes the short name of the file (without extension) and sanitizes it so that it's a konstid Java identifier.
      * E.g. "fileName" -> "FileName", "1" -> "_1", "" -> "_"
      */
     @JvmStatic

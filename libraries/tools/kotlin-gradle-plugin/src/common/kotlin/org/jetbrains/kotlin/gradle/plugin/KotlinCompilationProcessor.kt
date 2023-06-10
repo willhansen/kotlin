@@ -14,19 +14,19 @@ import org.jetbrains.kotlin.gradle.dsl.topLevelExtension
 import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool
 
 abstract class KotlinCompilationProcessor<out T : AbstractKotlinCompileTool<*>> internal constructor(
-    internal val compilationInfo: KotlinCompilationInfo
+    internal konst compilationInfo: KotlinCompilationInfo
 ) {
 
-    abstract val kotlinTask: TaskProvider<out T>
+    abstract konst kotlinTask: TaskProvider<out T>
     abstract fun run()
 
-    protected val project: Project
+    protected konst project: Project
         get() = compilationInfo.project
 
-    protected val defaultKotlinDestinationDir: Provider<Directory>
+    protected konst defaultKotlinDestinationDir: Provider<Directory>
         get() {
-            val kotlinExt = project.topLevelExtension
-            val targetSubDirectory =
+            konst kotlinExt = project.topLevelExtension
+            konst targetSubDirectory =
                 if (kotlinExt is KotlinSingleJavaTargetExtension)
                     "" // In single-target projects, don't add the target name part to this path
                 else

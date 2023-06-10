@@ -1,5 +1,5 @@
 package test
 
-inline class IC(val i: Int)
+inline class IC(konst i: Int)
 
 fun foo(i: Int, ic: IC) {}

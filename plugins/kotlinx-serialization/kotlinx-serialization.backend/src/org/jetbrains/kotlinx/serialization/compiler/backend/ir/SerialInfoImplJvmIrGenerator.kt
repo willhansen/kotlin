@@ -24,18 +24,18 @@ import org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationPlug
 import org.jetbrains.kotlinx.serialization.compiler.resolve.SerialEntityNames
 
 class SerialInfoImplJvmIrGenerator(
-    private val context: SerializationPluginContext,
-    private val moduleFragment: IrModuleFragment,
+    private konst context: SerializationPluginContext,
+    private konst moduleFragment: IrModuleFragment,
 ) {
-    private val javaLangClass = createClass(createPackage("java.lang"), "Class", ClassKind.CLASS)
+    private konst javaLangClass = createClass(createPackage("java.lang"), "Class", ClassKind.CLASS)
 
-    private val jvmName: IrClassSymbol = createClass(createPackage("kotlin.jvm"), "JvmName", ClassKind.ANNOTATION_CLASS) { klass ->
+    private konst jvmName: IrClassSymbol = createClass(createPackage("kotlin.jvm"), "JvmName", ClassKind.ANNOTATION_CLASS) { klass ->
         klass.addConstructor().apply {
             addValueParameter("name", context.irBuiltIns.stringType)
         }
     }
 
-    private val kClassJava: IrPropertySymbol =
+    private konst kClassJava: IrPropertySymbol =
         IrFactoryImpl.buildProperty {
             name = Name.identifier("java")
         }.apply {
@@ -59,7 +59,7 @@ class SerialInfoImplJvmIrGenerator(
             }
         }.symbol
 
-    private val implementor = JvmAnnotationImplementationTransformer.AnnotationPropertyImplementor(
+    private konst implementor = JvmAnnotationImplementationTransformer.AnnotationPropertyImplementor(
         context.irFactory,
         context.irBuiltIns,
         context.symbols,
@@ -70,9 +70,9 @@ class SerialInfoImplJvmIrGenerator(
 
     fun generateImplementationFor(annotationClass: IrClass) {
 
-        val properties = annotationClass.declarations.filterIsInstance<IrProperty>()
+        konst properties = annotationClass.declarations.filterIsInstance<IrProperty>()
 
-        val subclass = context.irFactory.buildClass {
+        konst subclass = context.irFactory.buildClass {
             startOffset = UNDEFINED_OFFSET
             endOffset = UNDEFINED_OFFSET
             name = SerialEntityNames.IMPL_NAME
@@ -85,7 +85,7 @@ class SerialInfoImplJvmIrGenerator(
         }
         annotationClass.declarations.add(subclass)
 
-        val ctor = subclass.addConstructor {
+        konst ctor = subclass.addConstructor {
             startOffset = UNDEFINED_OFFSET
             endOffset = UNDEFINED_OFFSET
             visibility = DescriptorVisibilities.PUBLIC

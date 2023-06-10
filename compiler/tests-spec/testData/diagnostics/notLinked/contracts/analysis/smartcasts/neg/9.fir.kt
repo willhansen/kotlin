@@ -15,14 +15,14 @@ fun case_2(arg: Int?) {
 
 // TESTCASE NUMBER: 3
 fun case_3() {
-    val value_1: Boolean?
-    funWithAtMostOnceCallsInPlace { value_1 = false }
-    <!UNINITIALIZED_VARIABLE!>value_1<!><!UNSAFE_CALL!>.<!>not()
+    konst konstue_1: Boolean?
+    funWithAtMostOnceCallsInPlace { konstue_1 = false }
+    <!UNINITIALIZED_VARIABLE!>konstue_1<!><!UNSAFE_CALL!>.<!>not()
 }
 
 // TESTCASE NUMBER: 4
 fun case_4() {
-    val value_1: Boolean?
-    funWithUnknownCallsInPlace { <!VAL_REASSIGNMENT!>value_1<!> = true }
-    <!UNINITIALIZED_VARIABLE!>value_1<!><!UNSAFE_CALL!>.<!>not()
+    konst konstue_1: Boolean?
+    funWithUnknownCallsInPlace { <!VAL_REASSIGNMENT!>konstue_1<!> = true }
+    <!UNINITIALIZED_VARIABLE!>konstue_1<!><!UNSAFE_CALL!>.<!>not()
 }

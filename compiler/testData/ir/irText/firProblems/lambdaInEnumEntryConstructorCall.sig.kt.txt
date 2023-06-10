@@ -41,23 +41,23 @@ enum class ConfigurationParameter : Enum<ConfigurationParameter> {
     // CHECK:
     //   Mangled name computed from Ir:         ConfigurationParameter#<anonymous>#static(kotlin.String;Wrapper){}
     //   Mangled name computed from Descriptor: ConfigurationParameter.BASE_URL#<init>(){}#<anonymous>#static(kotlin.String;Wrapper){}
-    local fun <anonymous>(value: String, nc: Wrapper): Unit
+    local fun <anonymous>(konstue: String, nc: Wrapper): Unit
 
   // CHECK JVM_IR:
-  //   Mangled name: ConfigurationParameter#valueOf#static(kotlin.String){}ConfigurationParameter
-  //   Public signature: /ConfigurationParameter.valueOf|4681288256259957260[0]
+  //   Mangled name: ConfigurationParameter#konstueOf#static(kotlin.String){}ConfigurationParameter
+  //   Public signature: /ConfigurationParameter.konstueOf|4681288256259957260[0]
   // CHECK JS_IR NATIVE:
-  //   Mangled name: ConfigurationParameter#valueOf#static(kotlin.String){}
-  //   Public signature: /ConfigurationParameter.valueOf|-4683474617854611729[0]
-  fun valueOf(value: String): ConfigurationParameter
+  //   Mangled name: ConfigurationParameter#konstueOf#static(kotlin.String){}
+  //   Public signature: /ConfigurationParameter.konstueOf|-4683474617854611729[0]
+  fun konstueOf(konstue: String): ConfigurationParameter
 
   // CHECK JVM_IR:
-  //   Mangled name: ConfigurationParameter#values#static(){}kotlin.Array<ConfigurationParameter>
-  //   Public signature: /ConfigurationParameter.values|-8145439714348067759[0]
+  //   Mangled name: ConfigurationParameter#konstues#static(){}kotlin.Array<ConfigurationParameter>
+  //   Public signature: /ConfigurationParameter.konstues|-8145439714348067759[0]
   // CHECK JS_IR NATIVE:
-  //   Mangled name: ConfigurationParameter#values#static(){}
-  //   Public signature: /ConfigurationParameter.values|-8715569000920726747[0]
-  fun values(): Array<ConfigurationParameter>
+  //   Mangled name: ConfigurationParameter#konstues#static(){}
+  //   Public signature: /ConfigurationParameter.konstues|-8715569000920726747[0]
+  fun konstues(): Array<ConfigurationParameter>
 
   // CHECK JVM_IR:
   //   Mangled name: ConfigurationParameter#clone(){}kotlin.Any
@@ -102,7 +102,7 @@ enum class ConfigurationParameter : Enum<ConfigurationParameter> {
   // CHECK:
   //   Mangled name: ConfigurationParameter#static{}entries
   //   Public signature: /ConfigurationParameter.entries|-5134227801081826149[0]
-  val entries: EnumEntries<ConfigurationParameter>
+  konst entries: EnumEntries<ConfigurationParameter>
     // CHECK JVM_IR:
     //   Mangled name: ConfigurationParameter#<get-entries>#static(){}kotlin.enums.EnumEntries<ConfigurationParameter>
     //   Public signature: /ConfigurationParameter.entries.<get-entries>|-1947990751381640787[0]
@@ -114,7 +114,7 @@ enum class ConfigurationParameter : Enum<ConfigurationParameter> {
   // CHECK:
   //   Mangled name: ConfigurationParameter{}name
   //   Public signature: /ConfigurationParameter.name|4231860309499509769[0]
-  /* fake */ override val name: String
+  /* fake */ override konst name: String
     // CHECK JVM_IR:
     //   Mangled name: ConfigurationParameter#<get-name>(){}kotlin.String
     //   Public signature: /ConfigurationParameter.name.<get-name>|-8006111524522882650[0]
@@ -126,7 +126,7 @@ enum class ConfigurationParameter : Enum<ConfigurationParameter> {
   // CHECK:
   //   Mangled name: ConfigurationParameter{}ordinal
   //   Public signature: /ConfigurationParameter.ordinal|1912745122988592376[0]
-  /* fake */ override val ordinal: Int
+  /* fake */ override konst ordinal: Int
     // CHECK JVM_IR:
     //   Mangled name: ConfigurationParameter#<get-ordinal>(){}kotlin.Int
     //   Public signature: /ConfigurationParameter.ordinal.<get-ordinal>|-6902664390061762634[0]

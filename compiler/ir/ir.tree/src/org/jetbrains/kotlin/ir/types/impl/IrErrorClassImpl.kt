@@ -26,16 +26,16 @@ object IrErrorClassImpl : IrClassImpl(
 ) {
     override var parent: IrDeclarationParent
         get() = object : IrFile() {
-            override val startOffset: Int
+            override konst startOffset: Int
                 get() = TODO("Not yet implemented")
-            override val endOffset: Int
+            override konst endOffset: Int
                 get() = TODO("Not yet implemented")
             override var annotations: List<IrConstructorCall>
                 get() = TODO("Not yet implemented")
                 set(_) {}
-            override val declarations: MutableList<IrDeclaration>
+            override konst declarations: MutableList<IrDeclaration>
                 get() = TODO("Not yet implemented")
-            override val symbol: IrFileSymbol
+            override konst symbol: IrFileSymbol
                 get() = TODO("Not yet implemented")
             override var module: IrModuleFragment
                 get() = TODO("Not yet implemented")
@@ -48,7 +48,7 @@ object IrErrorClassImpl : IrClassImpl(
                 set(_) {}
 
             @ObsoleteDescriptorBasedAPI
-            override val packageFragmentDescriptor: PackageFragmentDescriptor
+            override konst packageFragmentDescriptor: PackageFragmentDescriptor
                 get() = TODO("Not yet implemented")
             override var packageFqName: FqName
                 get() = FqName.ROOT

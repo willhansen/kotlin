@@ -12,26 +12,26 @@ import org.jetbrains.kotlin.util.SmartPrinter
 import org.jetbrains.kotlin.util.withIndent
 import java.io.File
 
-private val elementsWithMultipleSupertypesForDefaultVisitor = mapOf(
+private konst elementsWithMultipleSupertypesForDefaultVisitor = mapOf(
     FirTreeBuilder.resolvedErrorReference to FirTreeBuilder.resolvedNamedReference
 )
 
 private fun Element.isAcceptableForDefaultVisiting(): Boolean {
     if (this == AbstractFirTreeBuilder.baseFirElement) return false
-    val hasSingleSupertype = parents.size == 1 && parents.single().name != "Element"
+    konst hasSingleSupertype = parents.size == 1 && parents.single().name != "Element"
     return hasSingleSupertype || this in elementsWithMultipleSupertypesForDefaultVisitor
 }
 
 private fun Element.getNameOfSupertypeForDefaultVisiting(): String {
-    val parentForDefaultVisiting = parents.singleOrNull() ?: elementsWithMultipleSupertypesForDefaultVisitor.getValue(this)
+    konst parentForDefaultVisiting = parents.singleOrNull() ?: elementsWithMultipleSupertypesForDefaultVisitor.getValue(this)
     return parentForDefaultVisiting.name
 }
 
 fun printVisitor(elements: List<Element>, generationPath: File, visitSuperTypeByDefault: Boolean): GeneratedFile {
-    val className = if (visitSuperTypeByDefault) "FirDefaultVisitor" else "FirVisitor"
-    val dir = File(generationPath, VISITOR_PACKAGE.replace(".", "/"))
-    val file = File(dir, "$className.kt")
-    val stringBuilder = StringBuilder()
+    konst className = if (visitSuperTypeByDefault) "FirDefaultVisitor" else "FirVisitor"
+    konst dir = File(generationPath, VISITOR_PACKAGE.replace(".", "/"))
+    konst file = File(dir, "$className.kt")
+    konst stringBuilder = StringBuilder()
     SmartPrinter(stringBuilder).apply {
         printCopyright()
         println("package $VISITOR_PACKAGE")
@@ -54,7 +54,7 @@ fun printVisitor(elements: List<Element>, generationPath: File, visitSuperTypeBy
             if (element == AbstractFirTreeBuilder.baseFirElement) continue
             if (visitSuperTypeByDefault && !element.isAcceptableForDefaultVisiting()) continue
             with(element) {
-                val varName = safeDecapitalizedName
+                konst varName = safeDecapitalizedName
                 if (visitSuperTypeByDefault) {
                     print("override")
                 } else {
@@ -78,9 +78,9 @@ fun printVisitor(elements: List<Element>, generationPath: File, visitSuperTypeBy
 
 
 fun printVisitorVoid(elements: List<Element>, generationPath: File): GeneratedFile {
-    val dir = File(generationPath, VISITOR_PACKAGE.replace(".", "/"))
-    val file = File(dir, "FirVisitorVoid.kt")
-    val stringBuilder = StringBuilder()
+    konst dir = File(generationPath, VISITOR_PACKAGE.replace(".", "/"))
+    konst file = File(dir, "FirVisitorVoid.kt")
+    konst stringBuilder = StringBuilder()
     SmartPrinter(stringBuilder).apply {
         printCopyright()
         println("package $VISITOR_PACKAGE")
@@ -97,7 +97,7 @@ fun printVisitorVoid(elements: List<Element>, generationPath: File): GeneratedFi
             for (element in elements) {
                 if (element == AbstractFirTreeBuilder.baseFirElement) continue
                 with(element) {
-                    val varName = safeDecapitalizedName
+                    konst varName = safeDecapitalizedName
                     println("open fun ${typeParameters}visit$name($varName: $typeWithArguments)${multipleUpperBoundsList()}{")
                     withIndent {
                         println("visitElement($varName)")
@@ -109,7 +109,7 @@ fun printVisitorVoid(elements: List<Element>, generationPath: File): GeneratedFi
 
             for (element in elements) {
                 with(element) {
-                    val varName = safeDecapitalizedName
+                    konst varName = safeDecapitalizedName
                     println("final override fun ${typeParameters}visit$name($varName: $typeWithArguments, data: Nothing?)${multipleUpperBoundsList()}{")
                     withIndent {
                         println("visit$name($varName)")
@@ -125,10 +125,10 @@ fun printVisitorVoid(elements: List<Element>, generationPath: File): GeneratedFi
 }
 
 fun printDefaultVisitorVoid(elements: List<Element>, generationPath: File): GeneratedFile {
-    val className = "FirDefaultVisitorVoid"
-    val dir = File(generationPath, VISITOR_PACKAGE.replace(".", "/"))
-    val file = File(dir, "$className.kt")
-    val stringBuilder = StringBuilder()
+    konst className = "FirDefaultVisitorVoid"
+    konst dir = File(generationPath, VISITOR_PACKAGE.replace(".", "/"))
+    konst file = File(dir, "$className.kt")
+    konst stringBuilder = StringBuilder()
     SmartPrinter(stringBuilder).apply {
         printCopyright()
         println("package $VISITOR_PACKAGE")
@@ -143,7 +143,7 @@ fun printDefaultVisitorVoid(elements: List<Element>, generationPath: File): Gene
         for (element in elements) {
             if (!element.isAcceptableForDefaultVisiting()) continue
             with(element) {
-                val varName = safeDecapitalizedName
+                konst varName = safeDecapitalizedName
                 println("override fun ${typeParameters}visit$name($varName: $typeWithArguments)${multipleUpperBoundsList()} = visit${element.getNameOfSupertypeForDefaultVisiting()}($varName)")
                 println()
             }

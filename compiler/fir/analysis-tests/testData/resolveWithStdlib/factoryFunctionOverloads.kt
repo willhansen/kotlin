@@ -1,17 +1,17 @@
 interface B
 interface C {
-    val b: B
+    konst b: B
 }
 
 fun A(b: B?, flag: Boolean = true) = A(b!!, flag)
 
 fun A(c: C, flag: Boolean = true) = A(c.b, flag)
 
-class A(val b: B, val flag: Boolean = true)
+class A(konst b: B, konst flag: Boolean = true)
 
 
 fun foo(c: C, b: B, bn: B?) {
-    val x = A(c)
-    val y = A(b)
-    val z = A(bn)
+    konst x = A(c)
+    konst y = A(b)
+    konst z = A(bn)
 }

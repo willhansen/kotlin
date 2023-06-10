@@ -10,11 +10,11 @@ import org.jetbrains.kotlin.cli.common.arguments.DevModeOverwritingStrategies.OL
 
 class K2JSDceArguments : CommonToolArguments() {
     companion object {
-        @JvmStatic private val serialVersionUID = 0L
+        @JvmStatic private konst serialVersionUID = 0L
     }
 
     @GradleOption(
-        value = DefaultValue.STRING_NULL_DEFAULT,
+        konstue = DefaultValue.STRING_NULL_DEFAULT,
         gradleInputType = GradleInputTypes.INTERNAL, // handled by 'destinationDirectory'
         shouldGenerateDeprecatedKotlinOptions = true,
     )
@@ -24,67 +24,67 @@ class K2JSDceArguments : CommonToolArguments() {
         removeAfter = "1.9.0"
     )
     @Argument(
-            value = "-output-dir",
-            valueDescription = "<path>",
+            konstue = "-output-dir",
+            konstueDescription = "<path>",
             description = "Output directory"
     )
     var outputDirectory: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-            value = "-keep",
-            valueDescription = "<fully.qualified.name[,]>",
+            konstue = "-keep",
+            konstueDescription = "<fully.qualified.name[,]>",
             description = "List of fully-qualified names of declarations that shouldn't be eliminated"
     )
     var declarationsToKeep: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-            value = "-Xprint-reachability-info",
+            konstue = "-Xprint-reachability-info",
             description = "Print declarations marked as reachable"
     )
     var printReachabilityInfo = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @GradleOption(
-        value = DefaultValue.BOOLEAN_FALSE_DEFAULT,
+        konstue = DefaultValue.BOOLEAN_FALSE_DEFAULT,
         gradleInputType = GradleInputTypes.INPUT,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
     @Argument(
-            value = "-dev-mode",
+            konstue = "-dev-mode",
             description = "Development mode: don't strip out any code, just copy dependencies"
     )
     var devMode = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xdev-mode-overwriting-strategy",
-        valueDescription = "{$OLDER|$ALL}",
+        konstue = "-Xdev-mode-overwriting-strategy",
+        konstueDescription = "{$OLDER|$ALL}",
         description = "Overwriting strategy during copy dependencies in development mode"
     )
     var devModeOverwritingStrategy: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     override fun copyOf(): Freezable = copyK2JSDceArguments(this, K2JSDceArguments())
 }
 
 object DevModeOverwritingStrategies {
-    const val OLDER = "older"
-    const val ALL = "all"
+    const konst OLDER = "older"
+    const konst ALL = "all"
 }

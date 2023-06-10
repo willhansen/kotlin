@@ -10,11 +10,11 @@ import org.jetbrains.kotlin.test.services.JUnit5Assertions.assertTrue
 import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
 import kotlin.reflect.KClass
 
-internal abstract class Settings(private val parent: Settings?, settings: Iterable<Any>) {
-    private val map: Map<KClass<*>, Any> = THashMap<KClass<*>, Any>().apply {
+internal abstract class Settings(private konst parent: Settings?, settings: Iterable<Any>) {
+    private konst map: Map<KClass<*>, Any> = THashMap<KClass<*>, Any>().apply {
         settings.forEach {
-            val settingClass: KClass<*>
-            val setting: Any
+            konst settingClass: KClass<*>
+            konst setting: Any
             if (it is Pair<*, *>) {
                 settingClass = it.first as KClass<*>
                 setting = it.second ?: error("Setting $settingClass is null")
@@ -23,7 +23,7 @@ internal abstract class Settings(private val parent: Settings?, settings: Iterab
                 setting = it
             }
 
-            val previous = put(settingClass, setting)
+            konst previous = put(settingClass, setting)
             assertTrue(previous == null) { "Duplicated settings: $settingClass, $previous, $setting" }
         }
     }

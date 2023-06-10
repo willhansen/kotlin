@@ -2,29 +2,29 @@
 // FILE: common.kt
 
 expect class Foo {
-    val justVal: String
+    konst justVal: String
     var justVar: String
 
-    val String.extensionVal: Unit
+    konst String.extensionVal: Unit
     var <T> T.genericExtensionVar: T
 
-    val valWithGet: String
+    konst konstWithGet: String
         get
     var varWithGetSet: String
         get set
 
-    val backingFieldVal: String = <!EXPECTED_PROPERTY_INITIALIZER!>"no"<!>
+    konst backingFieldVal: String = <!EXPECTED_PROPERTY_INITIALIZER!>"no"<!>
     var backingFieldVar: String = <!EXPECTED_PROPERTY_INITIALIZER!>"no"<!>
 
-    val customAccessorVal: String
+    konst customAccessorVal: String
     <!EXPECTED_DECLARATION_WITH_BODY!>get()<!> = "no"
     var customAccessorVar: String
     <!EXPECTED_DECLARATION_WITH_BODY!>get()<!> = "no"
-    <!EXPECTED_DECLARATION_WITH_BODY!>set(value)<!> {}
+    <!EXPECTED_DECLARATION_WITH_BODY!>set(konstue)<!> {}
 
     <!EXPECTED_LATEINIT_PROPERTY!>lateinit<!> var lateinitVar: String
 
-    val delegated: String <!EXPECTED_DELEGATED_PROPERTY!>by Delegate<!>
+    konst delegated: String <!EXPECTED_DELEGATED_PROPERTY!>by Delegate<!>
 }
 
 object Delegate { operator fun getValue(x: Any?, y: Any?): String = "" }

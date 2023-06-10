@@ -4,7 +4,7 @@
  */
 package kotlin.wasm.internal
 
-private enum class CharCodes(val code: Int) {
+private enum class CharCodes(konst code: Int) {
 //  PERCENT(0x25),
     PLUS(0x2B),
     MINUS(0x2D),
@@ -54,12 +54,12 @@ internal fun itoa32(inputValue: Int, radix: Int): String {
     // We can't represent abs(Int.MIN_VALUE), so just hardcode it here
     if (inputValue == Int.MIN_VALUE) return "-2147483648"
 
-    val sign = inputValue ushr 31
+    konst sign = inputValue ushr 31
     assert(sign == 1 || sign == 0)
-    val absValue = if (sign == 1) -inputValue else inputValue
+    konst absValue = if (sign == 1) -inputValue else inputValue
 
-    val decimals = decimalCount32(absValue) + sign
-    val buf = WasmCharArray(decimals)
+    konst decimals = decimalCount32(absValue) + sign
+    konst buf = WasmCharArray(decimals)
     utoaDecSimple(buf, absValue, decimals)
     if (sign == 1)
         buf.set(0, CharCodes.MINUS.code.toChar())
@@ -75,8 +75,8 @@ private fun utoaDecSimple(buffer: WasmCharArray, numInput: Int, offsetInput: Int
     var num = numInput
     var offset = offsetInput
     do {
-        val t = num / 10
-        val r = num % 10
+        konst t = num / 10
+        konst r = num % 10
         num = t
         offset--
         buffer.set(offset, digitToChar(r))
@@ -91,8 +91,8 @@ private fun utoaDecSimple64(buffer: WasmCharArray, numInput: Long, offsetInput: 
     var num = numInput
     var offset = offsetInput
     do {
-        val t = num / 10
-        val r = (num % 10).toInt()
+        konst t = num / 10
+        konst r = (num % 10).toInt()
         num = t
         offset--
         buffer.set(offset, digitToChar(r))
@@ -103,18 +103,18 @@ private fun utoaDecSimple64(buffer: WasmCharArray, numInput: Long, offsetInput: 
 private fun Boolean.toInt() = if (this) 1 else 0
 private fun Boolean.toLong() = if (this) 1L else 0L
 
-private fun decimalCount32(value: Int): Int {
-    if (value < 100000) {
-        if (value < 100) {
-            return 1 + (value >= 10).toInt()
+private fun decimalCount32(konstue: Int): Int {
+    if (konstue < 100000) {
+        if (konstue < 100) {
+            return 1 + (konstue >= 10).toInt()
         } else {
-            return 3 + (value >= 10000).toInt() + (value >= 1000).toInt()
+            return 3 + (konstue >= 10000).toInt() + (konstue >= 1000).toInt()
         }
     } else {
-        if (value < 10000000) {
-            return 6 + (value >= 1000000).toInt()
+        if (konstue < 10000000) {
+            return 6 + (konstue >= 1000000).toInt()
         } else {
-            return 8 + (value >= 1000000000).toInt() + (value >= 100000000).toInt()
+            return 8 + (konstue >= 1000000000).toInt() + (konstue >= 100000000).toInt()
         }
     }
 }
@@ -134,12 +134,12 @@ internal fun itoa64(inputValue: Long, radix: Int): String {
         TODO("When we need it")
     }
 
-    val sign = (inputValue ushr 63).toInt()
+    konst sign = (inputValue ushr 63).toInt()
     assert(sign == 1 || sign == 0)
-    val absValue = if (sign == 1) -inputValue else inputValue
+    konst absValue = if (sign == 1) -inputValue else inputValue
 
-    val decimals = decimalCount64High(absValue) + sign
-    val buf = WasmCharArray(decimals)
+    konst decimals = decimalCount64High(absValue) + sign
+    konst buf = WasmCharArray(decimals)
     utoaDecSimple64(buf, absValue, decimals)
     if (sign == 1)
         buf.set(0, CharCodes.MINUS.code.toChar())
@@ -147,49 +147,49 @@ internal fun itoa64(inputValue: Long, radix: Int): String {
     return buf.createString()
 }
 
-// Count number of decimals for u64 values
-// In our case input value always greater than 2^32-1 so we can skip some parts
-private fun decimalCount64High(value: Long): Int {
-    if (value < 1000000000000000) {
-        if (value < 1000000000000) {
-            return 10 + (value >= 100000000000).toInt() + (value >= 10000000000).toInt()
+// Count number of decimals for u64 konstues
+// In our case input konstue always greater than 2^32-1 so we can skip some parts
+private fun decimalCount64High(konstue: Long): Int {
+    if (konstue < 1000000000000000) {
+        if (konstue < 1000000000000) {
+            return 10 + (konstue >= 100000000000).toInt() + (konstue >= 10000000000).toInt()
         } else {
-            return 13 + (value >= 100000000000000).toInt() + (value >= 10000000000000).toInt()
+            return 13 + (konstue >= 100000000000000).toInt() + (konstue >= 10000000000000).toInt()
         }
     } else {
-        if (value < 100000000000000000) {
-            return 16 + (value >= 10000000000000000).toInt()
+        if (konstue < 100000000000000000) {
+            return 16 + (konstue >= 10000000000000000).toInt()
         } else {
-            return 18 + (value >= 1000000000000000000).toInt()
+            return 18 + (konstue >= 1000000000000000000).toInt()
         }
     }
 }
 
-private const val MAX_DOUBLE_LENGTH = 28
+private const konst MAX_DOUBLE_LENGTH = 28
 
-internal fun dtoa(value: Double): String {
-    if (value == 0.0) return "0.0"
-    if (!value.isFinite()) {
-        if (value.isNaN()) return "NaN"
-        return if (value < 0) "-Infinity" else "Infinity"
+internal fun dtoa(konstue: Double): String {
+    if (konstue == 0.0) return "0.0"
+    if (!konstue.isFinite()) {
+        if (konstue.isNaN()) return "NaN"
+        return if (konstue < 0) "-Infinity" else "Infinity"
     }
 
-    val buf = WasmCharArray(MAX_DOUBLE_LENGTH)
-    val size = dtoaCore(buf, value)
-    val ret = WasmCharArray(size)
+    konst buf = WasmCharArray(MAX_DOUBLE_LENGTH)
+    konst size = dtoaCore(buf, konstue)
+    konst ret = WasmCharArray(size)
     buf.copyInto(ret, 0, 0, size)
     return ret.createString()
 }
 
-private fun dtoaCore(buffer: WasmCharArray, valueInp: Double): Int {
-    var value = valueInp
+private fun dtoaCore(buffer: WasmCharArray, konstueInp: Double): Int {
+    var konstue = konstueInp
 
-    val sign = (value < 0).toInt()
+    konst sign = (konstue < 0).toInt()
     if (sign == 1) {
-        value = -value
+        konstue = -konstue
         buffer.set(0, CharCodes.MINUS.code.toChar())
     }
-    var len = grisu2(value, buffer, sign)
+    var len = grisu2(konstue, buffer, sign)
     len = prettify(BufferWithOffset(buffer, sign), len - sign, _K)
     return len + sign
 }
@@ -203,7 +203,7 @@ private var _frc_plus:  Long = 0
 private var _frc_pow: Long = 0
 private var _exp_pow: Int = 0
 
-private val EXP_POWERS = shortArrayOf(
+private konst EXP_POWERS = shortArrayOf(
     -1220, -1193, -1166, -1140, -1113, -1087, -1060, -1034, -1007, -980,
     -954, -927, -901, -874, -847, -821, -794, -768, -741, -715,
     -688, -661, -635, -608, -582, -555, -529, -502, -475, -449,
@@ -216,7 +216,7 @@ private val EXP_POWERS = shortArrayOf(
 )
 
 // 1e-348, 1e-340, ..., 1e340
-private val FRC_POWERS = longArrayOf(
+private konst FRC_POWERS = longArrayOf(
     0xFA8FD5A0081C0288UL.toLong(), 0xBAAEE17FA23EBF76UL.toLong(), 0x8B16FB203055AC76UL.toLong(), 0xCF42894A5DCE35EAUL.toLong(),
     0x9A6BB0AA55653B2DUL.toLong(), 0xE61ACF033D1A45DFUL.toLong(), 0xAB70FE17C79AC6CAUL.toLong(), 0xFF77B1FCBEBCDC4FUL.toLong(),
     0xBE5691EF416BD60CUL.toLong(), 0x8DD01FAD907FFC3CUL.toLong(), 0xD3515C2831559A83UL.toLong(), 0x9D71AC8FADA6C9B5UL.toLong(),
@@ -241,11 +241,11 @@ private val FRC_POWERS = longArrayOf(
     0x9E19DB92B4E31BA9UL.toLong(), 0xEB96BF6EBADF77D9UL.toLong(), 0xAF87023B9BF0EE6BUL.toLong()
 )
 
-private fun grisu2(value: Double, buffer: WasmCharArray, sign: Int): Int {
+private fun grisu2(konstue: Double, buffer: WasmCharArray, sign: Int): Int {
     // frexp routine
-    val uv = value.toBits()
+    konst uv = konstue.toBits()
     var exp = ((uv and 0x7FF0000000000000) ushr 52).toInt()
-    val sid = uv and 0x000FFFFFFFFFFFFF
+    konst sid = uv and 0x000FFFFFFFFFFFFF
     var frc = ((exp != 0).toLong() shl 52) + sid
     exp = (if (exp != 0) exp else 1) - (0x3FF + 52)
 
@@ -253,7 +253,7 @@ private fun grisu2(value: Double, buffer: WasmCharArray, sign: Int): Int {
     getCachedPower(_exp)
 
     // normalize
-    val off = frc.countLeadingZeroBits()
+    konst off = frc.countLeadingZeroBits()
     frc = frc shl off
     exp -= off
 
@@ -272,13 +272,13 @@ private fun grisu2(value: Double, buffer: WasmCharArray, sign: Int): Int {
 }
 
 private fun umul64f(u: Long, v: Long): Long {
-    val u0 = u and 0xFFFFFFFF
-    val v0 = v and 0xFFFFFFFF
+    konst u0 = u and 0xFFFFFFFF
+    konst v0 = v and 0xFFFFFFFF
 
-    val u1 = u ushr 32
-    val v1 = v ushr 32
+    konst u1 = u ushr 32
+    konst v1 = v ushr 32
 
-    val l = u0 * v0
+    konst l = u0 * v0
     var t = u1 * v0 + (l ushr 32)
     var w = u0 * v1 + (t and 0xFFFFFFFF)
 
@@ -297,11 +297,11 @@ private fun umul64e(e1: Int, e2: Int): Int {
 private fun normalizedBoundaries(f: Long, e: Int) {
     var frc = (f shl 1) + 1
     var exp = e - 1
-    val off = frc.countLeadingZeroBits()
+    konst off = frc.countLeadingZeroBits()
     frc = frc shl off
     exp -= off
 
-    val m = 1 + (f == 0x0010000000000000).toInt()
+    konst m = 1 + (f == 0x0010000000000000).toInt()
 
     _frc_plus = frc
     _frc_minus = ((f shl m) - 1) shl e - m - exp
@@ -309,12 +309,12 @@ private fun normalizedBoundaries(f: Long, e: Int) {
 }
 
 private fun getCachedPower(minExp: Int) {
-    val c = Double.fromBits(0x3FD34413509F79FE) // 1 / lg(10) = 0.30102999566398114
-    val dk = (-61 - minExp) * c + 347 // dk must be positive, so can do ceiling in positive
+    konst c = Double.fromBits(0x3FD34413509F79FE) // 1 / lg(10) = 0.30102999566398114
+    konst dk = (-61 - minExp) * c + 347 // dk must be positive, so can do ceiling in positive
     var k = dk.toInt()
     k += (k.toDouble() != dk).toInt() // conversion with ceil
 
-    val index = (k shr 3) + 1
+    konst index = (k shr 3) + 1
     _K = 348 - (index shl 3)    // decimal exponent no need lookup table
     _frc_pow = FRC_POWERS[index]
     _exp_pow = EXP_POWERS[index].toInt()
@@ -322,9 +322,9 @@ private fun getCachedPower(minExp: Int) {
 
 private fun genDigits(buffer: WasmCharArray, w_frc: Long, mp_frc: Long, mp_exp: Int, deltaInp: Long, sign: Int): Int {
     var delta = deltaInp
-    val one_exp = -mp_exp
-    val one_frc = 1L shl one_exp
-    val mask = one_frc - 1
+    konst one_exp = -mp_exp
+    konst one_frc = 1L shl one_exp
+    konst mask = one_frc - 1
 
     var wp_w_frc = mp_frc - w_frc
 
@@ -355,7 +355,7 @@ private fun genDigits(buffer: WasmCharArray, w_frc: Long, mp_frc: Long, mp_exp: 
             buffer.set(len++, digitToChar(d))
 
         --kappa
-        val tmp = (p1.toLong() shl one_exp) + p2
+        konst tmp = (p1.toLong() shl one_exp) + p2
         if (tmp <= delta) {
             _K += kappa
             grisuRound(buffer, len, delta, tmp, pow10 shl one_exp, wp_w_frc)
@@ -369,7 +369,7 @@ private fun genDigits(buffer: WasmCharArray, w_frc: Long, mp_frc: Long, mp_exp: 
         delta *= 10
         unit *= 10
 
-        val d = p2 ushr one_exp
+        konst d = p2 ushr one_exp
         if (d or len.toLong() != 0L)
             buffer.set(len++, digitToChar(d.toInt()))
 
@@ -385,7 +385,7 @@ private fun genDigits(buffer: WasmCharArray, w_frc: Long, mp_frc: Long, mp_exp: 
 
 private fun grisuRound(buffer: WasmCharArray, len: Int, delta: Long, restInp: Long, ten_kappa: Long, wp_w: Long) {
     var rest = restInp
-    val lastp = len - 1
+    konst lastp = len - 1
     var digit = buffer.get(lastp)
     while (
         rest < wp_w &&
@@ -421,13 +421,13 @@ private fun WasmCharArray.copyInto(destination: WasmCharArray, destinationOffset
     }
 }
 
-private class BufferWithOffset(val buf: WasmCharArray, val off: Int) {
-    operator fun set(addr: Int, value: Char) {
-        buf.set(off + addr, value)
+private class BufferWithOffset(konst buf: WasmCharArray, konst off: Int) {
+    operator fun set(addr: Int, konstue: Char) {
+        buf.set(off + addr, konstue)
     }
 
     fun memoryCopy(destAddr: Int, srcAddr: Int, len: Int) {
-        val startIdx = off + srcAddr
+        konst startIdx = off + srcAddr
         buf.copyInto(buf, off + destAddr, startIdx, len)
     }
 
@@ -458,7 +458,7 @@ private fun prettify(buffer: BufferWithOffset, lengthInp: Int, k: Int): Int {
         return length + 1
     } else if (-6 < kk && kk <= 0) {
         // 1234e-6 -> 0.001234
-        val offset = 2 - kk
+        konst offset = 2 - kk
         buffer.memoryCopy(offset, 0, length)
         buffer[0] = CharCodes._0.code.toChar()
         buffer[1] = CharCodes.DOT.code.toChar()
@@ -472,7 +472,7 @@ private fun prettify(buffer: BufferWithOffset, lengthInp: Int, k: Int): Int {
         length = genExponent(buffer.offsetABitMore(2), kk - 1)
         return length + 2
     } else {
-        val len = length
+        konst len = length
         buffer.memoryCopy(2, 1, len - 1)
         buffer[1] = CharCodes.DOT.code.toChar()
         buffer[len + 1] = CharCodes.e.code.toChar()
@@ -483,9 +483,9 @@ private fun prettify(buffer: BufferWithOffset, lengthInp: Int, k: Int): Int {
 
 private fun genExponent(buffer: BufferWithOffset, kInp: Int): Int {
     var k = kInp
-    val sign = k < 0
+    konst sign = k < 0
     if (sign) k = -k
-    val kStr = k.toString()
+    konst kStr = k.toString()
     for (i in kStr.indices)
         buffer[i + 1] = kStr[i]
     buffer[0] = if (sign) CharCodes.MINUS.code.toChar() else CharCodes.PLUS.code.toChar()

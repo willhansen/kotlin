@@ -6,7 +6,7 @@
 
 package test
 
-open class A(val value: String)
+open class A(konst konstue: String)
 
 var invokeOrder = ""
 
@@ -15,7 +15,7 @@ inline fun inlineFun(
         init: String,
         vararg constraints: A
 ): String {
-    return constraints.map { it.value }.joinToString() + ", " + receiver + ", " + init
+    return constraints.map { it.konstue }.joinToString() + ", " + receiver + ", " + init
 }
 
 // FILE: 2.kt

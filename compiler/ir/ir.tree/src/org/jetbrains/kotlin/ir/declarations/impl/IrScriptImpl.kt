@@ -18,15 +18,15 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.SmartList
 
-private val SCRIPT_ORIGIN = object : IrDeclarationOriginImpl("SCRIPT") {}
-val SCRIPT_K2_ORIGIN = object : IrDeclarationOriginImpl("SCRIPT_K2") {}
+private konst SCRIPT_ORIGIN = object : IrDeclarationOriginImpl("SCRIPT") {}
+konst SCRIPT_K2_ORIGIN = object : IrDeclarationOriginImpl("SCRIPT_K2") {}
 
 class IrScriptImpl(
-    override val symbol: IrScriptSymbol,
+    override konst symbol: IrScriptSymbol,
     override var name: Name,
-    override val factory: IrFactory,
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst factory: IrFactory,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
 ) : IrScript() {
     override var origin: IrDeclarationOrigin = SCRIPT_ORIGIN
 
@@ -40,7 +40,7 @@ class IrScriptImpl(
 
     override var annotations: List<IrConstructorCall> = SmartList()
 
-    override val statements: MutableList<IrStatement> = mutableListOf()
+    override konst statements: MutableList<IrStatement> = mutableListOf()
 
     override var metadata: MetadataSource? = null
 
@@ -58,7 +58,7 @@ class IrScriptImpl(
     override var constructor: IrConstructor? = null
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ScriptDescriptor
+    override konst descriptor: ScriptDescriptor
         get() = symbol.descriptor
 
     init {

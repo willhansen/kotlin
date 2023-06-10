@@ -27,13 +27,13 @@ import java.util.concurrent.ConcurrentHashMap
 
 class BuilderFactoryForDuplicateClassNameDiagnostics(
         builderFactory: ClassBuilderFactory,
-        private val diagnostics: DiagnosticSink
+        private konst diagnostics: DiagnosticSink
 ) : ClassNameCollectionClassBuilderFactory(builderFactory) {
 
-    private val className = ConcurrentHashMap<String, JvmDeclarationOrigin>()
+    private konst className = ConcurrentHashMap<String, JvmDeclarationOrigin>()
 
     override fun handleClashingNames(internalName: String, origin: JvmDeclarationOrigin) {
-        val another = className.getOrPut(internalName, { origin })
+        konst another = className.getOrPut(internalName, { origin })
         //workaround for inlined anonymous objects
         if (origin.element != another.element) {
             reportError(internalName, origin, another)
@@ -41,7 +41,7 @@ class BuilderFactoryForDuplicateClassNameDiagnostics(
     }
 
     private fun reportError(internalName: String, vararg another: JvmDeclarationOrigin) {
-        val fromString = another.mapNotNull { it.descriptor }.
+        konst fromString = another.mapNotNull { it.descriptor }.
                 joinToString { DescriptorRenderer.ONLY_NAMES_WITH_SHORT_TYPES.render(it) }
 
         another.mapNotNull { it.element }.forEach {

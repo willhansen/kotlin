@@ -26,9 +26,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirContinueExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val target: FirTarget<FirLoop>,
+    override konst target: FirTarget<FirLoop>,
 ) : FirContinueExpression() {
     override var typeRef: FirTypeRef = FirImplicitNothingTypeRef(source?.fakeElement(KtFakeSourceElementKind.ImplicitTypeRef))
 

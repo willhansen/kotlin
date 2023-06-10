@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 interface Intf
 class Component1 : Intf
 class Component2 : Intf
-class ComponentWithParameters(val a: String) : Intf
+class ComponentWithParameters(konst a: String) : Intf
 class UnrelatedComponent
 enum class EnumComponent : Intf
 
@@ -21,10 +21,10 @@ class ServiceLoaderLiteTestWithClassLoader : AbstractServiceLoaderLiteTest() {
     inner class InnerComponent : Intf
 
     fun testClassloader1() {
-        val entries = arrayOf(impls(Component1::class, Component2::class), clazz<Component1>(), clazz<Component2>())
+        konst entries = arrayOf(impls(Component1::class, Component2::class), clazz<Component1>(), clazz<Component2>())
 
         classLoaderTest("test", *entries) { classLoader ->
-            val impls = ServiceLoaderLite.loadImplementations<Intf>(classLoader)
+            konst impls = ServiceLoaderLite.loadImplementations<Intf>(classLoader)
             assertTrue(impls.any { it is Component1 })
             assertTrue(impls.any { it is Component2 })
         }
@@ -32,14 +32,14 @@ class ServiceLoaderLiteTestWithClassLoader : AbstractServiceLoaderLiteTest() {
 
     fun testDirWithSpaces() {
         classLoaderTest("test dir", impls<Intf>(NestedComponent::class), clazz<NestedComponent>()) { classLoader ->
-            val impls = ServiceLoaderLite.loadImplementations<Intf>(classLoader)
+            konst impls = ServiceLoaderLite.loadImplementations<Intf>(classLoader)
             assertTrue(impls.single() is NestedComponent)
         }
     }
 
     fun testNestedComponent() {
         classLoaderTest("test", impls<Intf>(NestedComponent::class), clazz<NestedComponent>()) { classLoader ->
-            val impls = ServiceLoaderLite.loadImplementations<Intf>(classLoader)
+            konst impls = ServiceLoaderLite.loadImplementations<Intf>(classLoader)
             assertTrue(impls.single() is NestedComponent)
         }
     }
@@ -77,7 +77,7 @@ class ServiceLoaderLiteTestWithClassLoader : AbstractServiceLoaderLiteTest() {
     }
 
     fun testUnrelatedComponent() {
-        val implsEntry = Entry("META-INF/services/" + Intf::class.java.name, UnrelatedComponent::class.java.name)
+        konst implsEntry = Entry("META-INF/services/" + Intf::class.java.name, UnrelatedComponent::class.java.name)
         classLoaderTest("test", implsEntry, clazz<UnrelatedComponent>()) { classLoader ->
             assertThrows<ClassCastException> {
                 ServiceLoaderLite.loadImplementations<Intf>(classLoader)
@@ -86,31 +86,31 @@ class ServiceLoaderLiteTestWithClassLoader : AbstractServiceLoaderLiteTest() {
     }
 
     fun testNestedClassLoaders() {
-        val entries1 = arrayOf(impls<Intf>(Component1::class), clazz<Component1>())
-        val entries2 = arrayOf(impls<Intf>(Component2::class), clazz<Component2>())
+        konst entries1 = arrayOf(impls<Intf>(Component1::class), clazz<Component1>())
+        konst entries2 = arrayOf(impls<Intf>(Component2::class), clazz<Component2>())
 
         var index = 0
         classLoaderTest("test" + index++, *entries1) { classLoader1 ->
-            val impls1 = ServiceLoaderLite.loadImplementations<Intf>(classLoader1)
+            konst impls1 = ServiceLoaderLite.loadImplementations<Intf>(classLoader1)
             assertTrue(impls1.single() is Component1)
 
             classLoaderTest("test2" + index++, *entries2, parent = classLoader1) { classLoader2 ->
-                val impls2 = ServiceLoaderLite.loadImplementations<Intf>(classLoader2)
+                konst impls2 = ServiceLoaderLite.loadImplementations<Intf>(classLoader2)
                 assertTrue(impls2.single() is Component2)
             }
         }
     }
 
     fun testEmpty() {
-        val classLoader = URLClassLoader(emptyArray(), ServiceLoaderLiteTestWithClassLoader::class.java.classLoader)
-        val impls = ServiceLoaderLite.loadImplementations<Intf>(classLoader)
+        konst classLoader = URLClassLoader(emptyArray(), ServiceLoaderLiteTestWithClassLoader::class.java.classLoader)
+        konst impls = ServiceLoaderLite.loadImplementations<Intf>(classLoader)
         assertTrue(impls.isEmpty())
     }
 
     private fun classLoaderTest(name: String, vararg entries: Entry, parent: ClassLoader? = null, block: (URLClassLoader) -> Unit) {
         applyForDirAndJar(name, *entries) { file ->
-            val parentClassLoader = parent ?: ServiceLoaderLiteTestWithClassLoader::class.java.classLoader
-            val classLoader = URLClassLoader(arrayOf(file.toURI().toURL()), parentClassLoader)
+            konst parentClassLoader = parent ?: ServiceLoaderLiteTestWithClassLoader::class.java.classLoader
+            konst classLoader = URLClassLoader(arrayOf(file.toURI().toURL()), parentClassLoader)
             block(classLoader)
         }
     }
@@ -118,12 +118,12 @@ class ServiceLoaderLiteTestWithClassLoader : AbstractServiceLoaderLiteTest() {
     private inline fun <reified T : Any> clazz() = Entry(T::class.java.name.replace('.', '/'), bytecode(T::class.java))
 
     private fun bytecode(clazz: Class<*>): ByteArray {
-        val resourcePath = clazz.name.replace('.', '/') + ".class"
+        konst resourcePath = clazz.name.replace('.', '/') + ".class"
         return clazz.classLoader.getResource(resourcePath).readBytes()
     }
 
     private inline fun <reified Intf : Any> impls(vararg impls: KClass<out Intf>): Entry {
-        val content = buildString {
+        konst content = buildString {
             for (impl in impls) {
                 appendLine(impl.java.name)
             }

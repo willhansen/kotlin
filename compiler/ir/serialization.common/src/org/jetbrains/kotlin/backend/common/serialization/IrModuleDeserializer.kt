@@ -29,7 +29,7 @@ fun IrSymbol.kind(): BinarySymbolData.SymbolKind {
     }
 }
 
-class CompatibilityMode(val abiVersion: KotlinAbiVersion) {
+class CompatibilityMode(konst abiVersion: KotlinAbiVersion) {
 
     init {
         require(abiVersion.isCompatible()) {
@@ -37,7 +37,7 @@ class CompatibilityMode(val abiVersion: KotlinAbiVersion) {
         }
     }
 
-    val oldSignatures: Boolean
+    konst oldSignatures: Boolean
         get() {
             if (abiVersion.minor == LAST_PRIVATE_SIG_ABI_VERSION.minor) {
                 return abiVersion.patch <= LAST_PRIVATE_SIG_ABI_VERSION.patch
@@ -46,8 +46,8 @@ class CompatibilityMode(val abiVersion: KotlinAbiVersion) {
         }
 
     companion object {
-        val LAST_PRIVATE_SIG_ABI_VERSION = KotlinAbiVersion(1, 5, 0)
-        val CURRENT = CompatibilityMode(KotlinAbiVersion.CURRENT)
+        konst LAST_PRIVATE_SIG_ABI_VERSION = KotlinAbiVersion(1, 5, 0)
+        konst CURRENT = CompatibilityMode(KotlinAbiVersion.CURRENT)
     }
 }
 
@@ -55,12 +55,12 @@ enum class IrModuleDeserializerKind {
     CURRENT, DESERIALIZED, SYNTHETIC
 }
 
-abstract class IrModuleDeserializer(private val _moduleDescriptor: ModuleDescriptor?, val libraryAbiVersion: KotlinAbiVersion) {
+abstract class IrModuleDeserializer(private konst _moduleDescriptor: ModuleDescriptor?, konst libraryAbiVersion: KotlinAbiVersion) {
     abstract operator fun contains(idSig: IdSignature): Boolean
     abstract fun tryDeserializeIrSymbol(idSig: IdSignature, symbolKind: BinarySymbolData.SymbolKind): IrSymbol?
     abstract fun deserializedSymbolNotFound(idSig: IdSignature): Nothing
 
-    val moduleDescriptor: ModuleDescriptor get() = _moduleDescriptor ?: error("No ModuleDescriptor provided")
+    konst moduleDescriptor: ModuleDescriptor get() = _moduleDescriptor ?: error("No ModuleDescriptor provided")
 
     open fun referenceSimpleFunctionByLocalSignature(file: IrFile, idSignature: IdSignature): IrSimpleFunctionSymbol =
         error("Unsupported operation")
@@ -69,13 +69,13 @@ abstract class IrModuleDeserializer(private val _moduleDescriptor: ModuleDescrip
         error("Unsupported operation")
 
     open fun declareIrSymbol(symbol: IrSymbol) {
-        val signature = symbol.signature
+        konst signature = symbol.signature
         require(signature != null) { "Symbol is not public API: ${symbol.descriptor}" }
         assert(symbol.hasDescriptor)
         deserializeIrSymbolOrFail(signature, symbol.kind())
     }
 
-    open val klib: IrLibrary get() = error("Unsupported operation")
+    open konst klib: IrLibrary get() = error("Unsupported operation")
 
     open fun init() = init(this)
 
@@ -89,17 +89,17 @@ abstract class IrModuleDeserializer(private val _moduleDescriptor: ModuleDescrip
 
     open fun deserializeReachableDeclarations() { error("Unsupported Operation") }
 
-    abstract val moduleFragment: IrModuleFragment
+    abstract konst moduleFragment: IrModuleFragment
 
-    abstract val moduleDependencies: Collection<IrModuleDeserializer>
+    abstract konst moduleDependencies: Collection<IrModuleDeserializer>
 
-    open val strategyResolver: (String) -> DeserializationStrategy = { DeserializationStrategy.ONLY_DECLARATION_HEADERS }
+    open konst strategyResolver: (String) -> DeserializationStrategy = { DeserializationStrategy.ONLY_DECLARATION_HEADERS }
 
-    abstract val kind: IrModuleDeserializerKind
+    abstract konst kind: IrModuleDeserializerKind
 
     open fun fileDeserializers(): Collection<IrFileDeserializer> = error("Unsupported")
 
-    val compatibilityMode: CompatibilityMode get() = CompatibilityMode(libraryAbiVersion)
+    konst compatibilityMode: CompatibilityMode get() = CompatibilityMode(libraryAbiVersion)
 
     open fun signatureDeserializerForFile(fileName: String): IdSignatureDeserializer = error("Unsupported")
 }
@@ -109,8 +109,8 @@ fun IrModuleDeserializer.deserializeIrSymbolOrFail(idSig: IdSignature, symbolKin
 
 // Used to resolve built in symbols like `kotlin.ir.internal.*` or `kotlin.FunctionN`
 class IrModuleDeserializerWithBuiltIns(
-    private val builtIns: IrBuiltIns,
-    private val delegate: IrModuleDeserializer
+    private konst builtIns: IrBuiltIns,
+    private konst delegate: IrModuleDeserializer
 ) : IrModuleDeserializer(delegate.moduleDescriptor, delegate.libraryAbiVersion) {
 
     init {
@@ -118,13 +118,13 @@ class IrModuleDeserializerWithBuiltIns(
 //        assert(builtIns.builtIns.builtInsModule === delegate.moduleDescriptor)
     }
 
-    private val irBuiltInsMap = builtIns.knownBuiltins.associate {
-        val symbol = (it as IrSymbolOwner).symbol
+    private konst irBuiltInsMap = builtIns.knownBuiltins.associate {
+        konst symbol = (it as IrSymbolOwner).symbol
         symbol.signature to symbol
     }
 
     override operator fun contains(idSig: IdSignature): Boolean {
-        val topLevel = idSig.topLevelSignature()
+        konst topLevel = idSig.topLevelSignature()
         if (topLevel in irBuiltInsMap) return true
 
         return checkIsFunctionInterface(topLevel) || idSig in delegate
@@ -141,9 +141,9 @@ class IrModuleDeserializerWithBuiltIns(
     }
 
     private fun computeFunctionClass(className: String): IrClass {
-        val isK = className[0] == 'K'
-        val isSuspend = (if (isK) className[1] else className[0]) == 'S'
-        val arity = className.run { substring(indexOfFirst { it.isDigit() }).toInt(10) }
+        konst isK = className[0] == 'K'
+        konst isSuspend = (if (isK) className[1] else className[0]) == 'S'
+        konst arity = className.run { substring(indexOfFirst { it.isDigit() }).toInt(10) }
         return builtIns.run {
             when {
                 isK && isSuspend -> kSuspendFunctionN(arity)
@@ -156,25 +156,25 @@ class IrModuleDeserializerWithBuiltIns(
 
     private fun resolveFunctionalInterface(idSig: IdSignature, symbolKind: BinarySymbolData.SymbolKind): IrSymbol {
         if (symbolKind == BinarySymbolData.SymbolKind.TYPE_PARAMETER_SYMBOL) {
-            val composite = idSig as IdSignature.CompositeSignature
-            val classSignature = idSig.container
-            val classSymbol = resolveFunctionalInterface(classSignature, BinarySymbolData.SymbolKind.CLASS_SYMBOL) as IrClassSymbol
-            val typeParameterSig = composite.inner as IdSignature.LocalSignature
-            val typeParameterIndex = typeParameterSig.index()
-            val typeParameter = classSymbol.owner.typeParameters[typeParameterIndex]
+            konst composite = idSig as IdSignature.CompositeSignature
+            konst classSignature = idSig.container
+            konst classSymbol = resolveFunctionalInterface(classSignature, BinarySymbolData.SymbolKind.CLASS_SYMBOL) as IrClassSymbol
+            konst typeParameterSig = composite.inner as IdSignature.LocalSignature
+            konst typeParameterIndex = typeParameterSig.index()
+            konst typeParameter = classSymbol.owner.typeParameters[typeParameterIndex]
             return typeParameter.symbol
         }
-        val publicSig = idSig.asPublic() ?: error("$idSig has to be public")
+        konst publicSig = idSig.asPublic() ?: error("$idSig has to be public")
 
-        val fqnParts = publicSig.nameSegments
-        val className = fqnParts.firstOrNull() ?: error("Expected class name for $idSig")
+        konst fqnParts = publicSig.nameSegments
+        konst className = fqnParts.firstOrNull() ?: error("Expected class name for $idSig")
 
-        val functionClass = computeFunctionClass(className)
+        konst functionClass = computeFunctionClass(className)
 
         return when (fqnParts.size) {
             1 -> functionClass.symbol.also { assert(symbolKind == BinarySymbolData.SymbolKind.CLASS_SYMBOL) }
             2 -> {
-                val memberName = fqnParts[1]
+                konst memberName = fqnParts[1]
                 functionClass.declarations.single { it is IrDeclarationWithName && it.name.asString() == memberName }.let {
                     (it as IrSymbolOwner).symbol
                 }
@@ -182,8 +182,8 @@ class IrModuleDeserializerWithBuiltIns(
             3 -> {
                 assert(idSig is IdSignature.AccessorSignature)
                 assert(symbolKind == BinarySymbolData.SymbolKind.FUNCTION_SYMBOL)
-                val propertyName = fqnParts[1]
-                val accessorName = fqnParts[2]
+                konst propertyName = fqnParts[1]
+                konst accessorName = fqnParts[2]
                 functionClass.declarations.filterIsInstance<IrProperty>().single { it.name.asString() == propertyName }.let { p ->
                     p.getter?.let { g -> if (g.name.asString() == accessorName) return g.symbol }
                     p.setter?.let { s -> if (s.name.asString() == accessorName) return s.symbol }
@@ -197,7 +197,7 @@ class IrModuleDeserializerWithBuiltIns(
     override fun tryDeserializeIrSymbol(idSig: IdSignature, symbolKind: BinarySymbolData.SymbolKind): IrSymbol? {
         irBuiltInsMap[idSig]?.let { return it }
 
-        val topLevel = idSig.topLevelSignature()
+        konst topLevel = idSig.topLevelSignature()
         if (checkIsFunctionInterface(topLevel)) return resolveFunctionalInterface(idSig, symbolKind)
 
         return delegate.tryDeserializeIrSymbol(idSig, symbolKind)
@@ -206,7 +206,7 @@ class IrModuleDeserializerWithBuiltIns(
     override fun deserializedSymbolNotFound(idSig: IdSignature): Nothing = delegate.deserializedSymbolNotFound(idSig)
 
     override fun declareIrSymbol(symbol: IrSymbol) {
-        val signature = symbol.signature
+        konst signature = symbol.signature
         if (signature != null && checkIsFunctionInterface(signature))
             resolveFunctionalInterface(signature, symbol.kind())
         else delegate.declareIrSymbol(symbol)
@@ -216,19 +216,19 @@ class IrModuleDeserializerWithBuiltIns(
         delegate.init(this)
     }
 
-    override val klib: IrLibrary
+    override konst klib: IrLibrary
         get() = delegate.klib
 
-    override val strategyResolver: (String) -> DeserializationStrategy
+    override konst strategyResolver: (String) -> DeserializationStrategy
         get() = delegate.strategyResolver
 
     override fun addModuleReachableTopLevel(idSig: IdSignature) {
         delegate.addModuleReachableTopLevel(idSig)
     }
 
-    override val moduleFragment: IrModuleFragment get() = delegate.moduleFragment
-    override val moduleDependencies: Collection<IrModuleDeserializer> get() = delegate.moduleDependencies
-    override val kind get() = delegate.kind
+    override konst moduleFragment: IrModuleFragment get() = delegate.moduleFragment
+    override konst moduleDependencies: Collection<IrModuleDeserializer> get() = delegate.moduleDependencies
+    override konst kind get() = delegate.kind
 
     override fun fileDeserializers(): Collection<IrFileDeserializer> {
         return delegate.fileDeserializers()
@@ -244,8 +244,8 @@ class IrModuleDeserializerWithBuiltIns(
 }
 
 open class CurrentModuleDeserializer(
-    override val moduleFragment: IrModuleFragment,
-    override val moduleDependencies: Collection<IrModuleDeserializer>
+    override konst moduleFragment: IrModuleFragment,
+    override konst moduleDependencies: Collection<IrModuleDeserializer>
 ) : IrModuleDeserializer(moduleFragment.descriptor, KotlinAbiVersion.CURRENT) {
     override fun contains(idSig: IdSignature): Boolean = false // TODO:
 
@@ -257,5 +257,5 @@ open class CurrentModuleDeserializer(
 
     override fun declareIrSymbol(symbol: IrSymbol) = Unit
 
-    override val kind get() = IrModuleDeserializerKind.CURRENT
+    override konst kind get() = IrModuleDeserializerKind.CURRENT
 }

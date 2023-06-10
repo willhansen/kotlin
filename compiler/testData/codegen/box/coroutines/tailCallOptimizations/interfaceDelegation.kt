@@ -28,7 +28,7 @@ class A : I {
     }
 }
 
-open class B(val x: I) : I by x // open override suspend fun suspendHere() = x.suspendHere()
+open class B(konst x: I) : I by x // open override suspend fun suspendHere() = x.suspendHere()
 
 fun builder(c: suspend () -> Unit) {
     c.startCoroutine(EmptyContinuation)

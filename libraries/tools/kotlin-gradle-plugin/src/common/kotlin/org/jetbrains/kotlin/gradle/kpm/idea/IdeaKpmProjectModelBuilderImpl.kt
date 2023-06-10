@@ -20,35 +20,35 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinPm20ProjectExtension
 import org.jetbrains.kotlin.tooling.core.UnsafeApi
 
 internal class IdeaKpmProjectModelBuilderImpl @UnsafeApi("Use factory methods instead") constructor(
-    private val extension: KotlinPm20ProjectExtension,
+    private konst extension: KotlinPm20ProjectExtension,
 ) : ToolingModelBuilder, IdeaKpmProjectModelBuilder {
 
     private inner class IdeaKpmBuildingContextImpl : IdeaKpmProjectBuildingContext {
-        override val dependencyResolver = createDependencyResolver()
+        override konst dependencyResolver = createDependencyResolver()
     }
 
     private data class RegisteredDependencyResolver(
-        val resolver: IdeaKpmDependencyResolver,
-        val constraint: FragmentConstraint,
-        val phase: DependencyResolutionPhase,
-        val level: DependencyResolutionLevel,
+        konst resolver: IdeaKpmDependencyResolver,
+        konst constraint: FragmentConstraint,
+        konst phase: DependencyResolutionPhase,
+        konst level: DependencyResolutionLevel,
     )
 
     private data class RegisteredDependencyTransformer(
-        val transformer: IdeaKpmDependencyTransformer,
-        val constraint: FragmentConstraint,
-        val phase: DependencyTransformationPhase
+        konst transformer: IdeaKpmDependencyTransformer,
+        konst constraint: FragmentConstraint,
+        konst phase: DependencyTransformationPhase
     )
 
     private data class RegisteredDependencyEffect(
-        val effect: IdeaKpmDependencyEffect,
-        val constraint: FragmentConstraint,
+        konst effect: IdeaKpmDependencyEffect,
+        konst constraint: FragmentConstraint,
     )
 
-    private val registeredDependencyResolvers = mutableListOf<RegisteredDependencyResolver>()
-    private val registeredDependencyTransformers = mutableListOf<RegisteredDependencyTransformer>()
-    private val registeredDependencyEffects = mutableListOf<RegisteredDependencyEffect>()
-    private val registeredExtrasSerializationExtensions = mutableListOf<IdeaKotlinExtrasSerializationExtension>()
+    private konst registeredDependencyResolvers = mutableListOf<RegisteredDependencyResolver>()
+    private konst registeredDependencyTransformers = mutableListOf<RegisteredDependencyTransformer>()
+    private konst registeredDependencyEffects = mutableListOf<RegisteredDependencyEffect>()
+    private konst registeredExtrasSerializationExtensions = mutableListOf<IdeaKotlinExtrasSerializationExtension>()
 
     override fun registerDependencyResolver(
         resolver: IdeaKpmDependencyResolver,
@@ -114,21 +114,21 @@ internal class IdeaKpmProjectModelBuilderImpl @UnsafeApi("Use factory methods in
     }
 
     private fun createDependencyResolver(): IdeaKpmDependencyResolver {
-        return IdeaKpmDependencyResolver(DependencyResolutionPhase.values().map { phase ->
+        return IdeaKpmDependencyResolver(DependencyResolutionPhase.konstues().map { phase ->
             createDependencyResolver(phase)
         }).withTransformer(createDependencyTransformer())
             .withEffect(createDependencyEffect())
     }
 
     private fun createDependencyResolver(phase: DependencyResolutionPhase) = IdeaKpmDependencyResolver resolve@{ fragment ->
-        val applicableResolvers = registeredDependencyResolvers
+        konst applicableResolvers = registeredDependencyResolvers
             .filter { it.phase == phase }
             .filter { it.constraint(fragment) }
             .groupBy { it.level }
 
         /* Find resolvers in the highest resolution level and only consider those */
-        DependencyResolutionLevel.values().reversed().forEach { level ->
-            val resolvers = applicableResolvers[level].orEmpty().map { it.resolver }
+        DependencyResolutionLevel.konstues().reversed().forEach { level ->
+            konst resolvers = applicableResolvers[level].orEmpty().map { it.resolver }
             if (resolvers.isNotEmpty()) {
                 return@resolve IdeaKpmDependencyResolver(resolvers).resolve(fragment)
             }
@@ -139,7 +139,7 @@ internal class IdeaKpmProjectModelBuilderImpl @UnsafeApi("Use factory methods in
     }
 
     private fun createDependencyTransformer(): IdeaKpmDependencyTransformer {
-        return IdeaKpmDependencyTransformer(DependencyTransformationPhase.values().map { phase ->
+        return IdeaKpmDependencyTransformer(DependencyTransformationPhase.konstues().map { phase ->
             createDependencyTransformer(phase)
         })
     }

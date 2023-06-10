@@ -5,8 +5,8 @@
 class A
 
 fun box(): String {
-    val a1 = A::class.java.kotlin
-    val a2 = A::class
+    konst a1 = A::class.java.kotlin
+    konst a2 = A::class
 
     if (a1 != a2) return "Fail equals"
     if (a1.hashCode() != a2.hashCode()) return "Fail hashCode"

@@ -33,9 +33,9 @@ interface CandidateInfoProvider {
 }
 
 abstract class AbstractCandidateInfoProvider(
-    protected val resolutionParameters: ResolutionParameters,
-    protected val firFile: FirFile,
-    protected val firSession: FirSession,
+    protected konst resolutionParameters: ResolutionParameters,
+    protected konst firFile: FirFile,
+    protected konst firSession: FirSession,
 ) : CandidateInfoProvider {
     override fun callInfo(): CallInfo = with(resolutionParameters) {
         CallInfo(
@@ -84,10 +84,10 @@ class CheckExtensionForCompletionCandidateInfoProvider(
     // Candidates with inconsistent extension receivers are skipped in tower resolver before resolution stages.
     // Passing them through can lead to false positives.
     override fun shouldFailBeforeResolve(): Boolean = with(resolutionParameters) {
-        val callHasExtensionReceiver = explicitReceiverKind() == ExplicitReceiverKind.EXTENSION_RECEIVER
+        konst callHasExtensionReceiver = explicitReceiverKind() == ExplicitReceiverKind.EXTENSION_RECEIVER
                 || implicitExtensionReceiverValue() != null
-        val fir = callableSymbol.fir
-        val candidateHasExtensionReceiver = fir.receiverParameter != null
+        konst fir = callableSymbol.fir
+        konst candidateHasExtensionReceiver = fir.receiverParameter != null
                 || fir is FirVariable && fir.returnTypeRef.coneType.receiverType(firSession) != null
         callHasExtensionReceiver != candidateHasExtensionReceiver
     }

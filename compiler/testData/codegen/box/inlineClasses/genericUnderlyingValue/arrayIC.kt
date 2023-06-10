@@ -3,12 +3,12 @@
 // LANGUAGE: -JvmInlineValueClasses, +GenericInlineClassParameter
 // IGNORE_BACKEND: JVM
 
-inline class ICStr(val value: String)
-inline class ICIStr<T : ICStr>(val value: T)
-inline class ICIStrArray<T : ICStr>(val value: Array<T>)
+inline class ICStr(konst konstue: String)
+inline class ICIStr<T : ICStr>(konst konstue: T)
+inline class ICIStrArray<T : ICStr>(konst konstue: Array<T>)
 
 fun box(): String {
-    val res = ICIStrArray(arrayOf(ICStr("OK"))).value[0].value
+    konst res = ICIStrArray(arrayOf(ICStr("OK"))).konstue[0].konstue
     if (res != "OK") return res
-    return ICIStr(ICStr("OK")).value.value
+    return ICIStr(ICStr("OK")).konstue.konstue
 }

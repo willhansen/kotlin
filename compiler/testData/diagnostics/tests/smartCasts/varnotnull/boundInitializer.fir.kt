@@ -1,13 +1,13 @@
 fun foo(arg: Int?) {
-    val x = arg
+    konst x = arg
     if (x != null) {
         arg.hashCode()
     }
-    val y: Any? = arg
+    konst y: Any? = arg
     if (y != null) {
         arg<!UNSAFE_CALL!>.<!>hashCode()
     }
-    val yy: Any?
+    konst yy: Any?
     yy = arg
     if (yy != null) {
         arg.hashCode()

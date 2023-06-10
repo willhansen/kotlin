@@ -10,7 +10,7 @@ import kotlin.test.assertFailsWith
 
 class InlineSourceCommonizationHealthCheckTest : AbstractInlineSourcesCommonizationTest() {
     fun `test reference module with error diagnostics breaks tests`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             "a" withSource "class X"
             "b" withSource "class X"

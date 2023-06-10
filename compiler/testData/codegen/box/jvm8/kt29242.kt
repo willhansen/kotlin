@@ -10,11 +10,11 @@ sealed class Sample<out T> {
     inline fun <R> flatMap(f: (T) -> Sample<R>): Sample<R> =
         when (this) {
             is Failure -> this
-            is Success -> f(this.value)
+            is Success -> f(this.konstue)
         }
 
-    data class Failure(val exception: Throwable): Sample<Nothing>()
-    data class Success<out T>(val value: T): Sample<T>()
+    data class Failure(konst exception: Throwable): Sample<Nothing>()
+    data class Success<out T>(konst konstue: T): Sample<T>()
 }
 
 fun box(): String {

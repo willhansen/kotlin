@@ -6,11 +6,11 @@
 package org.jetbrains.kotlin.backend.common.serialization.encodings
 
 @JvmInline
-value class BinaryCoordinates(private val decoded: BinaryLattice) {
+konstue class BinaryCoordinates(private konst decoded: BinaryLattice) {
     private fun diff(): Int = decoded.second
 
-    val startOffset: Int get() = decoded.first
-    val endOffset: Int get() = startOffset + diff()
+    konst startOffset: Int get() = decoded.first
+    konst endOffset: Int get() = startOffset + diff()
 
     companion object {
         fun encode(startOffset: Int, endOffset: Int): Long {

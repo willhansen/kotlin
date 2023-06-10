@@ -12,18 +12,18 @@ import org.jetbrains.kotlin.analysis.api.types.KtType
 import org.jetbrains.kotlin.types.Variance
 
 public sealed class KtTypeProjection : KtLifetimeOwner {
-    public abstract val type: KtType?
+    public abstract konst type: KtType?
 }
 
-public class KtStarTypeProjection(override val token: KtLifetimeToken) : KtTypeProjection() {
-    override val type: KtType? get() = withValidityAssertion { null }
+public class KtStarTypeProjection(override konst token: KtLifetimeToken) : KtTypeProjection() {
+    override konst type: KtType? get() = withValidityAssertion { null }
 }
 
 public class KtTypeArgumentWithVariance(
-    private val _type: KtType,
-    public val variance: Variance,
-    override val token: KtLifetimeToken,
+    private konst _type: KtType,
+    public konst variance: Variance,
+    override konst token: KtLifetimeToken,
 ) : KtTypeProjection() {
-    override val type: KtType get() = withValidityAssertion { _type }
+    override konst type: KtType get() = withValidityAssertion { _type }
 }
 

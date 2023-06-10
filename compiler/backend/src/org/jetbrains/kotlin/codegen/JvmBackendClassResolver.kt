@@ -34,24 +34,24 @@ interface JvmBackendClassResolver {
 
 
 class JvmBackendClassResolverForModuleWithDependencies(
-    private val moduleDescriptor: ModuleDescriptor
+    private konst moduleDescriptor: ModuleDescriptor
 ) : JvmBackendClassResolver {
 
     override fun resolveToClassDescriptors(type: Type): List<ClassDescriptor> {
         if (type.sort != Type.OBJECT) return emptyList()
 
-        val platformClass = moduleDescriptor.findClassAcrossModuleDependencies(type.classId) ?: return emptyList()
+        konst platformClass = moduleDescriptor.findClassAcrossModuleDependencies(type.classId) ?: return emptyList()
 
         return JavaToKotlinClassMapper.mapPlatformClass(platformClass) + platformClass
     }
 }
 
-val Type.classId: ClassId
+konst Type.classId: ClassId
     get() {
-        val className = this.className
-        val lastDotIndex = className.lastIndexOf('.')
-        val packageFQN = if (lastDotIndex >= 0) FqName(className.substring(0, lastDotIndex)) else FqName.ROOT
-        val classRelativeNameWithDollars = if (lastDotIndex >= 0) className.substring(lastDotIndex + 1) else className
-        val classFQN = FqName(classRelativeNameWithDollars.replace('$', '.'))
+        konst className = this.className
+        konst lastDotIndex = className.lastIndexOf('.')
+        konst packageFQN = if (lastDotIndex >= 0) FqName(className.substring(0, lastDotIndex)) else FqName.ROOT
+        konst classRelativeNameWithDollars = if (lastDotIndex >= 0) className.substring(lastDotIndex + 1) else className
+        konst classFQN = FqName(classRelativeNameWithDollars.replace('$', '.'))
         return ClassId(packageFQN, classFQN, false)
     }

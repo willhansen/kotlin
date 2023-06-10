@@ -36,12 +36,12 @@ class IrDeclarationToJsTransformer : BaseIrElementToJsNodeTransformer<JsStatemen
     }
 
     override fun visitField(declaration: IrField, context: JsGenerationContext): JsStatement {
-        val fieldName = context.getNameForField(declaration)
+        konst fieldName = context.getNameForField(declaration)
 
         if (declaration.isExternal) return JsEmpty
 
         if (declaration.initializer != null) {
-            val initializer = declaration.initializer!!.accept(IrElementToJsExpressionTransformer(), context)
+            konst initializer = declaration.initializer!!.accept(IrElementToJsExpressionTransformer(), context)
             context.staticContext.initializerBlock.statements += jsAssignment(fieldName.makeRef(), initializer).makeStmt()
         }
 

@@ -12,24 +12,24 @@ class B {
     /** Nested
      * member
      * comment. */
-    val a = ""
+    konst a = ""
 
 	/**
 	 * Mixed
 	 * tabs/spaces
 	 */
-    val b = ""
+    konst b = ""
 
     /**
      * List:
      * * first item
      * * second item
      */
-    val c = ""
+    konst c = ""
 
     /**
      Without
      stars
      */
-    val d = ""
+    konst d = ""
 }

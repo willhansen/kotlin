@@ -12,27 +12,27 @@ import kotlin.test.assertEquals
 
 class IsHostSpecificKonanTargetsSetTest {
 
-    private val hostManager = HostManager()
+    private konst hostManager = HostManager()
 
     @Test
     fun `matches previous implementation`() {
         fun previousImplementation(konanTargets: Iterable<KonanTarget>): Boolean {
-            val enabledByHost = hostManager.enabledByHost
-            val allHosts = enabledByHost.keys
+            konst enabledByHost = hostManager.enabledByHost
+            konst allHosts = enabledByHost.keys
             fun canBeBuiltOnHosts(konanTarget: KonanTarget) = enabledByHost.filterValues { konanTarget in it }.keys
             return konanTargets.flatMapTo(mutableSetOf(), ::canBeBuiltOnHosts) != allHosts
         }
 
-        val testInputs = sequence {
+        konst testInputs = sequence {
             yield(emptyList())
 
-            KonanTarget.predefinedTargets.values.forEach { first ->
+            KonanTarget.predefinedTargets.konstues.forEach { first ->
                 yield(listOf(first))
 
-                KonanTarget.predefinedTargets.values.forEach { second ->
+                KonanTarget.predefinedTargets.konstues.forEach { second ->
                     yield(listOf(first, second))
 
-                    KonanTarget.predefinedTargets.values.forEach { third ->
+                    KonanTarget.predefinedTargets.konstues.forEach { third ->
                         yield(listOf(first, second, third))
                     }
                 }

@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.types.model.TypeSystemInferenceExtensionContextDeleg
 class JsTypeSpecificityComparator(context: TypeSystemInferenceExtensionContextDelegate) :
     TypeSpecificityComparator by JsTypeSpecificityComparatorWithoutDelegate(context)
 
-class JsTypeSpecificityComparatorWithoutDelegate(val context: TypeSystemInferenceExtensionContext) : TypeSpecificityComparator {
+class JsTypeSpecificityComparatorWithoutDelegate(konst context: TypeSystemInferenceExtensionContext) : TypeSpecificityComparator {
     private fun TypeSystemInferenceExtensionContext.checkOnlyDynamicFlexibleType(type: KotlinTypeMarker) {
         if (type.asFlexibleType() != null) {
             assert(type.isDynamic()) {

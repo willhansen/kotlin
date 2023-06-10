@@ -31,11 +31,11 @@ import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 class FirStatusResolver(
-    val session: FirSession,
-    val scopeSession: ScopeSession
+    konst session: FirSession,
+    konst scopeSession: ScopeSession
 ) {
     companion object {
-        private val NOT_INHERITED_MODIFIERS: List<FirDeclarationStatusImpl.Modifier> = listOf(
+        private konst NOT_INHERITED_MODIFIERS: List<FirDeclarationStatusImpl.Modifier> = listOf(
             FirDeclarationStatusImpl.Modifier.ACTUAL,
             FirDeclarationStatusImpl.Modifier.EXPECT,
             FirDeclarationStatusImpl.Modifier.CONST,
@@ -44,17 +44,17 @@ class FirStatusResolver(
             FirDeclarationStatusImpl.Modifier.EXTERNAL,
         )
 
-        private val MODIFIERS_FROM_OVERRIDDEN: List<FirDeclarationStatusImpl.Modifier> =
-            FirDeclarationStatusImpl.Modifier.values().toList() - NOT_INHERITED_MODIFIERS
+        private konst MODIFIERS_FROM_OVERRIDDEN: List<FirDeclarationStatusImpl.Modifier> =
+            FirDeclarationStatusImpl.Modifier.konstues().toList() - NOT_INHERITED_MODIFIERS
     }
 
-    private val extensionStatusTransformers = session.extensionService.statusTransformerExtensions
+    private konst extensionStatusTransformers = session.extensionService.statusTransformerExtensions
 
     private inline fun FirMemberDeclaration.applyExtensionTransformers(
         operation: FirStatusTransformerExtension.(FirDeclarationStatus) -> FirDeclarationStatus
     ): FirDeclarationStatus {
         if (extensionStatusTransformers.isEmpty()) return status
-        val declaration = this
+        konst declaration = this
         return extensionStatusTransformers.fold(status) { acc, it ->
             if (it.needTransformStatus(declaration)) {
                 it.operation(acc)
@@ -91,7 +91,7 @@ class FirStatusResolver(
             return emptyList()
         }
 
-        val scope = containingClass.unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = false, memberRequiredPhase = null)
+        konst scope = containingClass.unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = false, memberRequiredPhase = null)
 
         return buildList {
             scope.processPropertiesByName(property.name) {}
@@ -113,10 +113,10 @@ class FirStatusResolver(
         isLocal: Boolean,
         overriddenStatuses: List<FirResolvedDeclarationStatus>? = null,
     ): FirResolvedDeclarationStatus {
-        val statuses = overriddenStatuses
+        konst statuses = overriddenStatuses
             ?: getOverriddenProperties(property, containingClass).map { it.status as FirResolvedDeclarationStatus }
 
-        val status = property.applyExtensionTransformers { transformStatus(it, property, containingClass?.symbol, isLocal) }
+        konst status = property.applyExtensionTransformers { transformStatus(it, property, containingClass?.symbol, isLocal) }
         return resolveStatus(property, status, containingClass, null, isLocal, statuses)
     }
 
@@ -129,14 +129,14 @@ class FirStatusResolver(
         }
 
         return buildList {
-            val scope = containingClass.unsubstitutedScope(
+            konst scope = containingClass.unsubstitutedScope(
                 session,
                 scopeSession,
                 withForcedTypeCalculator = false,
                 memberRequiredPhase = null,
             )
 
-            val symbol = function.symbol
+            konst symbol = function.symbol
             scope.processFunctionsByName(function.name) {}
             scope.processDirectOverriddenFunctionsWithBaseScope(symbol) { overriddenSymbol, _ ->
                 if (session.visibilityChecker.isVisibleForOverriding(
@@ -156,11 +156,11 @@ class FirStatusResolver(
         isLocal: Boolean,
         overriddenStatuses: List<FirResolvedDeclarationStatus>? = null,
     ): FirResolvedDeclarationStatus {
-        val status = function.applyExtensionTransformers {
+        konst status = function.applyExtensionTransformers {
             transformStatus(it, function, containingClass?.symbol, isLocal)
         }
 
-        val statuses = overriddenStatuses
+        konst statuses = overriddenStatuses
             ?: getOverriddenFunctions(function, containingClass).map { it.status as FirResolvedDeclarationStatus }
 
         return resolveStatus(function, status, containingClass, null, isLocal, statuses)
@@ -171,7 +171,7 @@ class FirStatusResolver(
         containingClass: FirClass?,
         isLocal: Boolean
     ): FirResolvedDeclarationStatus {
-        val status = when (firClass) {
+        konst status = when (firClass) {
             is FirRegularClass -> firClass.applyExtensionTransformers { transformStatus(it, firClass, containingClass?.symbol, isLocal) }
             else -> firClass.status
         }
@@ -183,7 +183,7 @@ class FirStatusResolver(
         containingClass: FirClass?,
         isLocal: Boolean
     ): FirResolvedDeclarationStatus {
-        val status = typeAlias.applyExtensionTransformers {
+        konst status = typeAlias.applyExtensionTransformers {
             transformStatus(it, typeAlias, containingClass?.symbol, isLocal)
         }
         return resolveStatus(typeAlias, status, containingClass, null, isLocal, emptyList())
@@ -196,14 +196,14 @@ class FirStatusResolver(
         isLocal: Boolean,
         overriddenStatuses: List<FirResolvedDeclarationStatus> = emptyList(),
     ): FirResolvedDeclarationStatus {
-        val status = propertyAccessor.applyExtensionTransformers {
+        konst status = propertyAccessor.applyExtensionTransformers {
             transformStatus(it, propertyAccessor, containingClass?.symbol, containingProperty, isLocal)
         }
         return resolveStatus(propertyAccessor, status, containingClass, containingProperty, isLocal, overriddenStatuses)
     }
 
     fun resolveStatus(constructor: FirConstructor, containingClass: FirClass?, isLocal: Boolean): FirResolvedDeclarationStatus {
-        val status = constructor.applyExtensionTransformers {
+        konst status = constructor.applyExtensionTransformers {
             transformStatus(it, constructor, containingClass?.symbol, isLocal)
         }
         return resolveStatus(constructor, status, containingClass, null, isLocal, emptyList())
@@ -218,14 +218,14 @@ class FirStatusResolver(
         containingClass: FirClass?,
         isLocal: Boolean
     ): FirResolvedDeclarationStatus {
-        val status = backingField.applyExtensionTransformers {
+        konst status = backingField.applyExtensionTransformers {
             transformStatus(it, backingField, containingClass?.symbol, isLocal)
         }
         return resolveStatus(backingField, status, containingClass, null, isLocal, emptyList())
     }
 
     fun resolveStatus(enumEntry: FirEnumEntry, containingClass: FirClass?, isLocal: Boolean): FirResolvedDeclarationStatus {
-        val status = enumEntry.applyExtensionTransformers {
+        konst status = enumEntry.applyExtensionTransformers {
             transformStatus(it, enumEntry, containingClass?.symbol, isLocal)
         }
         return resolveStatus(enumEntry, status, containingClass, null, isLocal, emptyList())
@@ -244,7 +244,7 @@ class FirStatusResolver(
 
         @Suppress("UNCHECKED_CAST")
         overriddenStatuses as List<FirResolvedDeclarationStatusImpl>
-        val visibility = when (status.visibility) {
+        konst visibility = when (status.visibility) {
             Visibilities.Unknown -> when {
                 isLocal -> Visibilities.Local
                 else -> resolveVisibility(declaration, containingClass, containingProperty, overriddenStatuses)
@@ -264,7 +264,7 @@ class FirStatusResolver(
             else -> status.visibility
         }
 
-        val modality = status.modality?.let {
+        konst modality = status.modality?.let {
             if (it == Modality.OPEN && containingClass?.classKind == ClassKind.INTERFACE && !(declaration.hasOwnBodyOrAccessorBody() || status.isExpect)) {
                 Modality.ABSTRACT
             } else {
@@ -279,19 +279,19 @@ class FirStatusResolver(
             }
         }
 
-        val parentEffectiveVisibility = when {
+        konst parentEffectiveVisibility = when {
             containingProperty != null -> containingProperty.effectiveVisibility
             containingClass is FirRegularClass -> containingClass.effectiveVisibility
             containingClass is FirAnonymousObject -> EffectiveVisibility.Local
             else -> EffectiveVisibility.Public
         }
-        val selfEffectiveVisibility = visibility.toEffectiveVisibility(
+        konst selfEffectiveVisibility = visibility.toEffectiveVisibility(
             containingClass?.symbol?.toLookupTag(), forClass = declaration is FirClass
         )
-        val effectiveVisibility = parentEffectiveVisibility.lowerBound(selfEffectiveVisibility, session.typeContext)
-        val annotations = (containingProperty ?: declaration).annotations
+        konst effectiveVisibility = parentEffectiveVisibility.lowerBound(selfEffectiveVisibility, session.typeContext)
+        konst annotations = (containingProperty ?: declaration).annotations
 
-        val hasPublishedApiAnnotation = annotations.any {
+        konst hasPublishedApiAnnotation = annotations.any {
             it.typeRef.coneTypeSafe<ConeClassLikeType>()?.lookupTag?.classId == StandardClassIds.Annotations.PublishedApi
         }
 
@@ -341,7 +341,7 @@ class FirStatusResolver(
             return true
         }
         if (declaration is FirFunction) {
-            for (parameter in declaration.valueParameters) {
+            for (parameter in declaration.konstueParameters) {
                 if (parameter.returnTypeRef.contradictsWith(Variance.IN_VARIANCE)) {
                     return true
                 }
@@ -351,7 +351,7 @@ class FirStatusResolver(
     }
 
     private fun FirTypeRef.contradictsWith(requiredVariance: Variance): Boolean {
-        val type = coneTypeSafe<ConeKotlinType>() ?: return false
+        konst type = coneTypeSafe<ConeKotlinType>() ?: return false
         return contradictsWith(type, requiredVariance)
     }
 
@@ -360,10 +360,10 @@ class FirStatusResolver(
             return !type.lookupTag.typeParameterSymbol.fir.variance.allowsPosition(requiredVariance)
         }
         if (type is ConeClassLikeType) {
-            val classLike = type.lookupTag.toSymbol(session)?.fir
+            konst classLike = type.lookupTag.toSymbol(session)?.fir
             for ((index, argument) in type.typeArguments.withIndex()) {
                 if (classLike?.typeParameters?.getOrNull(index) is FirOuterClassTypeParameterRef) continue
-                val (argType, requiredVarianceForArgument) = when (argument) {
+                konst (argType, requiredVarianceForArgument) = when (argument) {
                     is ConeKotlinTypeProjectionOut -> argument.type to requiredVariance
                     is ConeKotlinTypeProjectionIn -> argument.type to requiredVariance.opposite()
                     is ConeKotlinTypeProjection -> argument.type to Variance.INVARIANT
@@ -385,7 +385,7 @@ class FirStatusResolver(
     ): Visibility {
         if (declaration is FirConstructor && containingClass?.hasPrivateConstructor() == true) return Visibilities.Private
 
-        val fallbackVisibility = when {
+        konst fallbackVisibility = when {
             declaration is FirPropertyAccessor && containingProperty != null -> containingProperty.visibility
             else -> Visibilities.Public
         }
@@ -397,7 +397,7 @@ class FirStatusResolver(
     }
 
     private fun FirClass.hasPrivateConstructor(): Boolean {
-        val classKind = classKind
+        konst classKind = classKind
         return classKind == ClassKind.ENUM_CLASS || classKind == ClassKind.ENUM_ENTRY || modality == Modality.SEALED || this is FirAnonymousObject
     }
 
@@ -428,7 +428,7 @@ class FirStatusResolver(
     }
 }
 
-private val FirClass.modality: Modality?
+private konst FirClass.modality: Modality?
     get() = when (this) {
         is FirRegularClass -> status.modality
         is FirAnonymousObject -> Modality.FINAL

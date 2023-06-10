@@ -32,32 +32,32 @@ fun <K: Any> takeArrayOfNotNullK(x: Array<K>) {}
 fun <K> takeArrayOfNullableK(x: Array<K?>) {}
 
 fun <R> main(a: ReturnType<R>) {
-    val x1 = <!DEBUG_INFO_EXPRESSION_TYPE("(ReturnType.A<@org.jetbrains.annotations.Nullable kotlin.String?, @org.jetbrains.annotations.Nullable R?>..ReturnType.A<@org.jetbrains.annotations.Nullable kotlin.String?, @org.jetbrains.annotations.Nullable R?>?)")!>a.foo1()<!>
+    konst x1 = <!DEBUG_INFO_EXPRESSION_TYPE("(ReturnType.A<@org.jetbrains.annotations.Nullable kotlin.String?, @org.jetbrains.annotations.Nullable R?>..ReturnType.A<@org.jetbrains.annotations.Nullable kotlin.String?, @org.jetbrains.annotations.Nullable R?>?)")!>a.foo1()<!>
     takeNotNullStringAndKNullable(<!TYPE_MISMATCH!>x1<!>)
     takeNullableStringAndKNullable(x1)
     takeNotNullStringAndNotNullK(<!TYPE_MISMATCH("ReturnType.A<String, TypeVariable(K)>; ReturnType.A<String?, R?>!")!>x1<!>)
     takeNullableStringAndNotNullK(<!TYPE_MISMATCH!>x1<!>)
     takeNotNullString(<!TYPE_MISMATCH!>a.foo41.foo411<!>)
 
-    val x2 = <!DEBUG_INFO_EXPRESSION_TYPE("(ReturnType.A<@org.jetbrains.annotations.Nullable kotlin.String?, @org.jetbrains.annotations.NotNull R & Any>..ReturnType.A<@org.jetbrains.annotations.Nullable kotlin.String?, @org.jetbrains.annotations.NotNull R & Any>?)")!>a.foo2()<!>
+    konst x2 = <!DEBUG_INFO_EXPRESSION_TYPE("(ReturnType.A<@org.jetbrains.annotations.Nullable kotlin.String?, @org.jetbrains.annotations.NotNull R & Any>..ReturnType.A<@org.jetbrains.annotations.Nullable kotlin.String?, @org.jetbrains.annotations.NotNull R & Any>?)")!>a.foo2()<!>
     takeNotNullStringAndKNullable(<!TYPE_MISMATCH!>x2<!>)
     takeNullableStringAndKNullable(<!TYPE_MISMATCH!>x2<!>)
     takeNotNullStringAndNotNullK(<!TYPE_MISMATCH("ReturnType.A<String, TypeVariable(K)>; ReturnType.A<String?, R & Any>!")!>x2<!>)
     takeNullableStringAndNotNullK(x2)
 
-    val x3 = <!DEBUG_INFO_EXPRESSION_TYPE("(ReturnType.A<@org.jetbrains.annotations.NotNull kotlin.String, @org.jetbrains.annotations.NotNull R & Any>..ReturnType.A<@org.jetbrains.annotations.NotNull kotlin.String, @org.jetbrains.annotations.NotNull R & Any>?)")!>a.foo3<!>
+    konst x3 = <!DEBUG_INFO_EXPRESSION_TYPE("(ReturnType.A<@org.jetbrains.annotations.NotNull kotlin.String, @org.jetbrains.annotations.NotNull R & Any>..ReturnType.A<@org.jetbrains.annotations.NotNull kotlin.String, @org.jetbrains.annotations.NotNull R & Any>?)")!>a.foo3<!>
     takeNotNullStringAndKNullable(<!TYPE_MISMATCH!>x3<!>)
     takeNullableStringAndKNullable(<!TYPE_MISMATCH!>x3<!>)
     takeNotNullStringAndNotNullK(x3)
     takeNullableStringAndNotNullK(<!TYPE_MISMATCH("ReturnType.A<String?, TypeVariable(K)>; ReturnType.A<String, R & Any>!")!>x3<!>)
 
-    val x4 = <!DEBUG_INFO_EXPRESSION_TYPE("(kotlin.Array<@org.jetbrains.annotations.NotNull R & Any>..kotlin.Array<out @org.jetbrains.annotations.NotNull R & Any>?)")!>a.foo4<!>
+    konst x4 = <!DEBUG_INFO_EXPRESSION_TYPE("(kotlin.Array<@org.jetbrains.annotations.NotNull R & Any>..kotlin.Array<out @org.jetbrains.annotations.NotNull R & Any>?)")!>a.foo4<!>
     takeArrayOfNotNullString(<!TYPE_MISMATCH!>x4<!>)
     takeArrayOfNullableString(<!TYPE_MISMATCH!>x4<!>)
     takeArrayOfNotNullK(x4)
     takeArrayOfNullableK(<!TYPE_MISMATCH!>x4<!>)
 
-    val x5 = <!DEBUG_INFO_EXPRESSION_TYPE("(kotlin.Array<@org.jetbrains.annotations.Nullable kotlin.String?>..kotlin.Array<out @org.jetbrains.annotations.Nullable kotlin.String?>?)")!>a.foo5()<!>
+    konst x5 = <!DEBUG_INFO_EXPRESSION_TYPE("(kotlin.Array<@org.jetbrains.annotations.Nullable kotlin.String?>..kotlin.Array<out @org.jetbrains.annotations.Nullable kotlin.String?>?)")!>a.foo5()<!>
     takeArrayOfNotNullString(<!TYPE_MISMATCH!>x5<!>)
     takeArrayOfNullableString(x5)
     takeArrayOfNotNullK(<!TYPE_MISMATCH!>x5<!>)

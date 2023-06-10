@@ -8,19 +8,19 @@ package org.jetbrains.kotlin.test.mutes
 import java.io.File
 
 class MutedTest(
-    val key: String,
-    @Suppress("unused") val issue: String?,
-    val hasFailFile: Boolean,
-    val isFlaky: Boolean
+    konst key: String,
+    @Suppress("unused") konst issue: String?,
+    konst hasFailFile: Boolean,
+    konst isFlaky: Boolean
 ) {
-    val methodKey: String
-    val classNameKey: String
-    val simpleClassName: String
+    konst methodKey: String
+    konst classNameKey: String
+    konst simpleClassName: String
 
     init {
-        val noQuoteKey = key.replace("`", "")
-        val beforeParamsKey = noQuoteKey.substringBefore("[")
-        val params = noQuoteKey.substringAfterWithDelimiter("[", "")
+        konst noQuoteKey = key.replace("`", "")
+        konst beforeParamsKey = noQuoteKey.substringBefore("[")
+        konst params = noQuoteKey.substringAfterWithDelimiter("[", "")
 
         methodKey = (beforeParamsKey.substringAfterLast(".", "") + params)
             .also {
@@ -36,7 +36,7 @@ class MutedTest(
 
     companion object {
         fun String.substringAfterWithDelimiter(delimiter: String, missingDelimiterValue: String = this): String {
-            val index = indexOf(delimiter)
+            konst index = indexOf(delimiter)
             return if (index == -1) missingDelimiterValue else (delimiter + substring(index + 1, length))
         }
     }
@@ -53,7 +53,7 @@ internal fun loadMutedTests(file: File): List<MutedTest> {
     }
 
     try {
-        val testLines = file.readLines()
+        konst testLines = file.readLines()
             .asSequence()
             .map { it.trim() }
             .filter { it.isNotEmpty() }
@@ -65,31 +65,31 @@ internal fun loadMutedTests(file: File): List<MutedTest> {
     }
 }
 
-private val COLUMN_PARSE_REGEXP = Regex("\\s*(?:(?:\"((?:[^\"]|\"\")*)\")|([^,]*))\\s*")
-private val MUTE_LINE_PARSE_REGEXP = Regex("$COLUMN_PARSE_REGEXP,$COLUMN_PARSE_REGEXP,$COLUMN_PARSE_REGEXP,$COLUMN_PARSE_REGEXP")
+private konst COLUMN_PARSE_REGEXP = Regex("\\s*(?:(?:\"((?:[^\"]|\"\")*)\")|([^,]*))\\s*")
+private konst MUTE_LINE_PARSE_REGEXP = Regex("$COLUMN_PARSE_REGEXP,$COLUMN_PARSE_REGEXP,$COLUMN_PARSE_REGEXP,$COLUMN_PARSE_REGEXP")
 private fun parseMutedTest(str: String): MutedTest {
-    val matchResult = MUTE_LINE_PARSE_REGEXP.matchEntire(str) ?: throw ParseError("Can't parse the line: $str")
-    val resultValues = matchResult.groups.filterNotNull()
+    konst matchResult = MUTE_LINE_PARSE_REGEXP.matchEntire(str) ?: throw ParseError("Can't parse the line: $str")
+    konst resultValues = matchResult.groups.filterNotNull()
 
-    val testKey = resultValues[1].value
-    val issue = resultValues[2].value
-    val stateStr = resultValues[3].value
-    val statusStr = resultValues[4].value
+    konst testKey = resultValues[1].konstue
+    konst issue = resultValues[2].konstue
+    konst stateStr = resultValues[3].konstue
+    konst statusStr = resultValues[4].konstue
 
-    val hasFailFile = when (stateStr) {
+    konst hasFailFile = when (stateStr) {
         "MUTE", "" -> false
         "FAIL" -> true
-        else -> throw ParseError("Invalid state (`$stateStr`), MUTE, FAIL or empty are expected: $str")
+        else -> throw ParseError("Inkonstid state (`$stateStr`), MUTE, FAIL or empty are expected: $str")
     }
-    val isFlaky = when (statusStr) {
+    konst isFlaky = when (statusStr) {
         "FLAKY" -> true
         "" -> false
-        else -> throw ParseError("Invalid status (`$statusStr`), FLAKY or empty are expected: $str")
+        else -> throw ParseError("Inkonstid status (`$statusStr`), FLAKY or empty are expected: $str")
     }
 
     return MutedTest(testKey, issue, hasFailFile, isFlaky)
 }
 
-private class ParseError(message: String, override val cause: Throwable? = null) : IllegalArgumentException(message)
+private class ParseError(message: String, override konst cause: Throwable? = null) : IllegalArgumentException(message)
 
 fun flakyTests(file: File): List<MutedTest> = loadMutedTests(file).filter { it.isFlaky }

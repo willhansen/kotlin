@@ -26,6 +26,6 @@ class MavenPluginComponent : KotlinMavenPluginExtension {
                 "test-me",
                 TestCommandLineProcessor.TestPluginId,
                 TestCommandLineProcessor.MyTestOption.optionName,
-                "my-special-value"))
+                "my-special-konstue"))
     }
 }

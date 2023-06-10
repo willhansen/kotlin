@@ -26,8 +26,8 @@ union U {
     double d;
 };
 
-void setDouble(union U* u, double value) {
-    u->d = value;
+void setDouble(union U* u, double konstue) {
+    u->d = konstue;
 }
 
 double getDouble(union U* u) {
@@ -40,9 +40,9 @@ union U u = {
 
 char array[5] = { 0, 0, 0, 0, 0 };
 
-void setArrayValue(char* array, char value) {
+void setArrayValue(char* array, char konstue) {
     for (int i = 0; i < 5; ++i) {
-        array[i] = value;
+        array[i] = konstue;
     }
 }
 

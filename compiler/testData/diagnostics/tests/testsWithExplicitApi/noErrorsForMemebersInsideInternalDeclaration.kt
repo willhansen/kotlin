@@ -4,9 +4,9 @@
 
 @PublishedApi
 internal class SomeClass {
-    private val somethingPrivate = "123"
+    private konst somethingPrivate = "123"
 
-    public val somethingPublic = "456"
+    public konst somethingPublic = "456"
 
     fun foo() = "789"
 }
@@ -14,9 +14,9 @@ internal class SomeClass {
 @PublishedApi
 internal class Outer {
     class Inner {
-        private val somethingPrivate = "123"
+        private konst somethingPrivate = "123"
 
-        public val somethingPublic = "456"
+        public konst somethingPublic = "456"
 
         fun foo() = "789"
     }

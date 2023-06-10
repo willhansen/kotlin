@@ -3,7 +3,7 @@ interface IA {
 }
 
 interface IB {
-    operator fun IA.set(index: String, value: Int)
+    operator fun IA.set(index: String, konstue: Int)
 }
 
 fun IB.test(a: IA) {

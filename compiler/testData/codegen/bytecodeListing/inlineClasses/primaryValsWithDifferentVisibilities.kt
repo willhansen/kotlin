@@ -1,13 +1,13 @@
 // !LANGUAGE: +InlineClasses
 
 interface IValue {
-    val value: Int
+    konst konstue: Int
 }
 
-inline class TestOverriding(override val value: Int) : IValue
+inline class TestOverriding(override konst konstue: Int) : IValue
 
-inline class TestPublic(val value: Int)
+inline class TestPublic(konst konstue: Int)
 
-inline class TestInternal(internal val value: Int)
+inline class TestInternal(internal konst konstue: Int)
 
-inline class TestPrivate(private val value: Int)
+inline class TestPrivate(private konst konstue: Int)

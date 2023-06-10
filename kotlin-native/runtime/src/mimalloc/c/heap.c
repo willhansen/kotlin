@@ -49,21 +49,21 @@ static bool mi_heap_visit_pages(mi_heap_t* heap, heap_page_visitor_fun* fn, void
 
 
 #if MI_DEBUG>=2
-static bool mi_heap_page_is_valid(mi_heap_t* heap, mi_page_queue_t* pq, mi_page_t* page, void* arg1, void* arg2) {
+static bool mi_heap_page_is_konstid(mi_heap_t* heap, mi_page_queue_t* pq, mi_page_t* page, void* arg1, void* arg2) {
   UNUSED(arg1);
   UNUSED(arg2);
   UNUSED(pq);
   mi_assert_internal(mi_page_heap(page) == heap);
   mi_segment_t* segment = _mi_page_segment(page);
   mi_assert_internal(segment->thread_id == heap->thread_id);
-  mi_assert_expensive(_mi_page_is_valid(page));
+  mi_assert_expensive(_mi_page_is_konstid(page));
   return true;
 }
 #endif
 #if MI_DEBUG>=3
-static bool mi_heap_is_valid(mi_heap_t* heap) {
+static bool mi_heap_is_konstid(mi_heap_t* heap) {
   mi_assert_internal(heap!=NULL);
-  mi_heap_visit_pages(heap, &mi_heap_page_is_valid, NULL, NULL);
+  mi_heap_visit_pages(heap, &mi_heap_page_is_konstid, NULL, NULL);
   return true;
 }
 #endif
@@ -88,7 +88,7 @@ typedef enum mi_collect_e {
 static bool mi_heap_page_collect(mi_heap_t* heap, mi_page_queue_t* pq, mi_page_t* page, void* arg_collect, void* arg2 ) {
   UNUSED(arg2);
   UNUSED(heap);
-  mi_assert_internal(mi_heap_page_is_valid(heap, pq, page, NULL, NULL));
+  mi_assert_internal(mi_heap_page_is_konstid(heap, pq, page, NULL, NULL));
   mi_collect_t collect = *((mi_collect_t*)arg_collect);
   _mi_page_free_collect(page, collect >= MI_FORCE);
   if (mi_page_all_free(page)) {
@@ -314,7 +314,7 @@ void mi_heap_destroy(mi_heap_t* heap) {
   mi_assert(heap != NULL);
   mi_assert(mi_heap_is_initialized(heap));
   mi_assert(heap->no_reclaim);
-  mi_assert_expensive(mi_heap_is_valid(heap));
+  mi_assert_expensive(mi_heap_is_konstid(heap));
   if (heap==NULL || !mi_heap_is_initialized(heap)) return;
   if (!heap->no_reclaim) {
     // don't free in case it may contain reclaimed pages
@@ -372,7 +372,7 @@ void mi_heap_delete(mi_heap_t* heap)
 {
   mi_assert(heap != NULL);
   mi_assert(mi_heap_is_initialized(heap));
-  mi_assert_expensive(mi_heap_is_valid(heap));
+  mi_assert_expensive(mi_heap_is_konstid(heap));
   if (heap==NULL || !mi_heap_is_initialized(heap)) return;
 
   if (!mi_heap_is_backing(heap)) {
@@ -391,7 +391,7 @@ mi_heap_t* mi_heap_set_default(mi_heap_t* heap) {
   mi_assert(heap != NULL);
   mi_assert(mi_heap_is_initialized(heap));
   if (heap==NULL || !mi_heap_is_initialized(heap)) return NULL;
-  mi_assert_expensive(mi_heap_is_valid(heap));
+  mi_assert_expensive(mi_heap_is_konstid(heap));
   mi_heap_t* old = mi_get_default_heap();
   _mi_heap_set_default_direct(heap);
   return old;
@@ -408,9 +408,9 @@ mi_heap_t* mi_heap_set_default(mi_heap_t* heap) {
 static mi_heap_t* mi_heap_of_block(const void* p) {
   if (p == NULL) return NULL;
   mi_segment_t* segment = _mi_ptr_segment(p);
-  bool valid = (_mi_ptr_cookie(segment) == segment->cookie);
-  mi_assert_internal(valid);
-  if (mi_unlikely(!valid)) return NULL;
+  bool konstid = (_mi_ptr_cookie(segment) == segment->cookie);
+  mi_assert_internal(konstid);
+  if (mi_unlikely(!konstid)) return NULL;
   return mi_page_heap(_mi_segment_page_of(segment,p));
 }
 

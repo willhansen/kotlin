@@ -31,7 +31,7 @@ object JsSerializerProtocol : SerializerExtensionProtocol(
     JsProtoBuf.typeParameterAnnotation
 ) {
     fun getKjsmFilePath(packageFqName: FqName): String {
-        val shortName = if (packageFqName.isRoot) Name.identifier("root-package") else packageFqName.shortName()
+        konst shortName = if (packageFqName.isRoot) Name.identifier("root-package") else packageFqName.shortName()
 
         return packageFqName.child(shortName).asString().replace('.', '/') +
                 "." +

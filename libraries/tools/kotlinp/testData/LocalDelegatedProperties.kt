@@ -1,30 +1,30 @@
 import kotlin.reflect.KProperty
 
-class Delegate<T>(val value: T? = null) {
-    operator fun getValue(instance: Any?, property: KProperty<*>): T = value!!
+class Delegate<T>(konst konstue: T? = null) {
+    operator fun getValue(instance: Any?, property: KProperty<*>): T = konstue!!
 }
 
-val nonLocal by Delegate<String>()
+konst nonLocal by Delegate<String>()
 
-val init0 = run {
-    val local1 by Delegate<Double>()
-    val local2 by Delegate<Any>()
+konst init0 = run {
+    konst local1 by Delegate<Double>()
+    konst local2 by Delegate<Any>()
 }
 
-val init1 = run {
-    val local3 by Delegate<CharSequence?>()
+konst init1 = run {
+    konst local3 by Delegate<CharSequence?>()
 }
 
 class Class {
     init {
-        val local4 by Delegate<Array<String>>()
+        konst local4 by Delegate<Array<String>>()
     }
 
     fun f() {
-        val local5 by Delegate<List<Unit>?>()
+        konst local5 by Delegate<List<Unit>?>()
 
         fun g() {
-            val local6 by Delegate<Int>()
+            konst local6 by Delegate<Int>()
         }
     }
 }

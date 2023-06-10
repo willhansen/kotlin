@@ -7,11 +7,11 @@ class A
 external class B
 
 fun box(): String {
-    val a: dynamic = A()
+    konst a: dynamic = A()
     testTrue { a is A }
     testFalse { a is B }
 
-    val b: dynamic = B()
+    konst b: dynamic = B()
     testTrue { b is B }
     testFalse { b is A }
 

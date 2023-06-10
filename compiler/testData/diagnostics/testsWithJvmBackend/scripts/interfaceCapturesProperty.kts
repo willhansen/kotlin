@@ -3,10 +3,10 @@
 
 fun foo() = B().bar()
 
-val life = 42
+konst life = 42
 
 <!SCRIPT_CAPTURING_INTERFACE!>interface A {
-    val x get() = life
+    konst x get() = life
 }<!>
 
 class B : A {

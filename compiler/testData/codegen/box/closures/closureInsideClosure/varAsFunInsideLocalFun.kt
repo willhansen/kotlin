@@ -2,7 +2,7 @@
 
 fun box(): String {
     fun rec(n : Int) {
-        val x = { m : Int ->
+        konst x = { m : Int ->
             if (n > 0) rec(n - 1)
         }
 

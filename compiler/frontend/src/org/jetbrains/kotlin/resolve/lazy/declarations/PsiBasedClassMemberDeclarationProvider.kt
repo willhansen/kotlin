@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.storage.StorageManager
 
 class PsiBasedClassMemberDeclarationProvider(
     storageManager: StorageManager,
-    override val ownerInfo: KtClassLikeInfo
+    override konst ownerInfo: KtClassLikeInfo
 ) : AbstractPsiBasedDeclarationProvider(storageManager), ClassMemberDeclarationProvider {
 
     override fun doCreateIndex(index: AbstractPsiBasedDeclarationProvider.Index) {

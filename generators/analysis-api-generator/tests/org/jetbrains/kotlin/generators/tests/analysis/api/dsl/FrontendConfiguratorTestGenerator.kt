@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.utils.Printer
 import kotlin.reflect.KClass
 
 object FrontendConfiguratorTestGenerator : MethodGenerator<FrontendConfiguratorTestModel>() {
-    override val kind: MethodModel.Kind get() = FrontendConfiguratorTestModelKind
+    override konst kind: MethodModel.Kind get() = FrontendConfiguratorTestModelKind
 
     override fun generateSignature(method: FrontendConfiguratorTestModel, p: Printer): Unit = with(p) {
         println("@NotNull")
@@ -47,13 +47,13 @@ object FrontendConfiguratorTestModelKind : MethodModel.Kind()
 
 
 class FrontendConfiguratorTestModel(
-    val frontendConfiguratorFactoryClass: KClass<out AnalysisApiTestConfiguratorFactory>,
-    val data: AnalysisApiTestConfiguratorFactoryData
+    konst frontendConfiguratorFactoryClass: KClass<out AnalysisApiTestConfiguratorFactory>,
+    konst data: AnalysisApiTestConfiguratorFactoryData
 ) : MethodModel {
-    override val kind: MethodModel.Kind get() = FrontendConfiguratorTestModelKind
-    override val name: String get() = "getConfigurator"
-    override val dataString: String? get() = null
-    override val tags: List<String> get() = emptyList()
+    override konst kind: MethodModel.Kind get() = FrontendConfiguratorTestModelKind
+    override konst name: String get() = "getConfigurator"
+    override konst dataString: String? get() = null
+    override konst tags: List<String> get() = emptyList()
 
     override fun isTestMethod(): Boolean = false
     override fun shouldBeGeneratedForInnerTestClass(): Boolean = false

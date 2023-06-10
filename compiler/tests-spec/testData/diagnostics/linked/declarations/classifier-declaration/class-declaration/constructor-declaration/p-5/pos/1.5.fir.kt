@@ -12,7 +12,7 @@ fun <T> List<T>.case1() {
 }
 
 // TESTCASE NUMBER: 2
-val <T> List<T>.case2: Int
+konst <T> List<T>.case2: Int
     get() = {
         class A(t: T)
         class B(x: List<T>)

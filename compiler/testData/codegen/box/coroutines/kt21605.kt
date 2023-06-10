@@ -18,7 +18,7 @@ fun builder(block: suspend Unit.() -> Unit) {
 class Container {
     var y: String = "FAIL"
 
-    val consumer = crossInlineBuilder { s ->
+    konst consumer = crossInlineBuilder { s ->
         builder {
             y = s
         }
@@ -26,7 +26,7 @@ class Container {
 }
 
 fun box(): String {
-    val container = Container()
+    konst container = Container()
     container.consumer.consume("OK")
     return container.y
 }

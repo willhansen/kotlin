@@ -16,7 +16,7 @@ fun runSuspend(block: suspend () -> Unit) {
 // FILE: test.kt
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double) {
+konstue class DPoint(konst x: Double, konst y: Double) {
     fun f(z: Double) = x + y + z
     suspend fun suspended() = this
     inline suspend fun suspendedInline() = this
@@ -32,7 +32,7 @@ fun DPoint.extensionFunction(z: Double) = x + y + z
 
 fun g(point: DPoint, z: Double) = point.f(z)
 
-class A(val point: DPoint) {
+class A(konst point: DPoint) {
     fun f(otherDPoint: DPoint, z: Double) = point.f(z) * otherDPoint.f(z)
 }
 
@@ -49,8 +49,8 @@ inline fun makeDPointInline(x: Double, y: Double, maker: (Double, Double) -> DPo
 inline fun <T> id(x: T) = x
 
 fun box(): String {
-    val dPoint = DPoint(1.0, 2.0)
-    val a = A(dPoint)
+    konst dPoint = DPoint(1.0, 2.0)
+    konst a = A(dPoint)
 
     require((::DPoint)(1.0, 2.0) == dPoint)
     require((dPoint::f)(3.0) == 6.0)

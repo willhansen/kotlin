@@ -31,11 +31,11 @@ class FirCompanionGenerationProcessor(
     session: FirSession,
     scopeSession: ScopeSession
 ) : FirTransformerBasedResolveProcessor(session, scopeSession, FirResolvePhase.COMPILER_REQUIRED_ANNOTATIONS) {
-    override val transformer: FirTransformer<Nothing?> = FirCompanionGenerationTransformer(session)
+    override konst transformer: FirTransformer<Nothing?> = FirCompanionGenerationTransformer(session)
 }
 
-class FirCompanionGenerationTransformer(val session: FirSession) : FirTransformer<Nothing?>() {
-    private val generatedDeclarationProvider: FirSwitchableExtensionDeclarationsSymbolProvider? =
+class FirCompanionGenerationTransformer(konst session: FirSession) : FirTransformer<Nothing?>() {
+    private konst generatedDeclarationProvider: FirSwitchableExtensionDeclarationsSymbolProvider? =
         session.generatedDeclarationsSymbolProvider
 
     override fun <E : FirElement> transformElement(element: E, data: Nothing?): E {
@@ -56,7 +56,7 @@ class FirCompanionGenerationTransformer(val session: FirSession) : FirTransforme
     }
 
     fun generateAndUpdateCompanion(regularClass: FirRegularClass) {
-        val companionSymbol = generateCompanion(regularClass)
+        konst companionSymbol = generateCompanion(regularClass)
         if (companionSymbol != null) {
             regularClass.replaceCompanionObjectSymbol(companionSymbol)
         }
@@ -64,7 +64,7 @@ class FirCompanionGenerationTransformer(val session: FirSession) : FirTransforme
 
     private fun generateCompanion(regularClass: FirRegularClass): FirRegularClassSymbol? {
         if (generatedDeclarationProvider == null) return null
-        val generatedCompanion = if (regularClass.isLocal) {
+        konst generatedCompanion = if (regularClass.isLocal) {
             var result: FirClassLikeSymbol<*>? = null
             session.nestedClassifierScope(regularClass)?.processClassifiersByName(DEFAULT_NAME_FOR_COMPANION_OBJECT) {
                 if (it is FirClassLikeSymbol<*> && it.origin.generated) {
@@ -74,7 +74,7 @@ class FirCompanionGenerationTransformer(val session: FirSession) : FirTransforme
 
             result
         } else {
-            val companionClassId = regularClass.classId.createNestedClassId(DEFAULT_NAME_FOR_COMPANION_OBJECT)
+            konst companionClassId = regularClass.classId.createNestedClassId(DEFAULT_NAME_FOR_COMPANION_OBJECT)
             generatedDeclarationProvider.getClassLikeSymbolByClassId(companionClassId)?.takeIf { it.origin.generated }
         }
 
@@ -90,6 +90,6 @@ class FirCompanionGenerationTransformer(val session: FirSession) : FirTransforme
 }
 
 fun <F : FirClassLikeDeclaration> F.runCompanionGenerationPhaseForLocalClass(session: FirSession): F {
-    val transformer = FirCompanionGenerationTransformer(session)
+    konst transformer = FirCompanionGenerationTransformer(session)
     return this.transformSingle(transformer, null)
 }

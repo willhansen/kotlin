@@ -97,7 +97,7 @@ package kotlin.text.regex
 internal class LowSurrogateCharSet(low: Char) : CharSet(low) {
 
     override fun accepts(startIndex: Int, testString: CharSequence): Int {
-        val result = super.accepts(startIndex, testString)
+        konst result = super.accepts(startIndex, testString)
         if (result < 0 || testString.isHighSurrogate(startIndex - 1)) {
             return -1
         }
@@ -158,7 +158,7 @@ internal class LowSurrogateCharSet(low: Char) : CharSet(low) {
 internal class HighSurrogateCharSet(high: Char) : CharSet(high) {
 
     override fun accepts(startIndex: Int, testString: CharSequence): Int {
-        val result = super.accepts(startIndex, testString)
+        konst result = super.accepts(startIndex, testString)
         if (result < 0 || testString.isLowSurrogate(startIndex + 1)) {
             return -1
         }

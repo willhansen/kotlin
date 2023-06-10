@@ -89,7 +89,7 @@ struct NeonTraits {
 #elif defined(__linux__) or defined(__unix__)
     #include <sys/auxv.h>
     #include <asm/hwcap.h>
-    const bool neonSupported = getauxval(AT_HWCAP) & HWCAP_NEON;
+    const bool neonSupported = getauxkonst(AT_HWCAP) & HWCAP_NEON;
 #else
     #error "Not supported"
 #endif

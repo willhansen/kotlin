@@ -28,7 +28,7 @@ abstract class A : HtmlTag() {
 }
 
 fun listOf(vararg strings: String): List<String> {
-    val list = ArrayList<String>()
+    konst list = ArrayList<String>()
     for (s in strings) {
         list.add(s)
     }

@@ -7,7 +7,7 @@ enum class Order {
     THIRD
 }
 
-enum class Planet(val m: Double, internal val r: Double) {
+enum class Planet(konst m: Double, internal konst r: Double) {
     MERCURY(1.0, 2.0) {
         override fun sayHello() {
             <!UNRESOLVED_REFERENCE!>println<!>("Hello!!!")
@@ -24,11 +24,11 @@ enum class Planet(val m: Double, internal val r: Double) {
         }
     };
 
-    val g: Double = <!UNINITIALIZED_ENUM_COMPANION!>G<!> * m / (r * r)
+    konst g: Double = <!UNINITIALIZED_ENUM_COMPANION!>G<!> * m / (r * r)
 
     abstract fun sayHello()
 
     companion object {
-        const val G = 6.67e-11
+        const konst G = 6.67e-11
     }
 }

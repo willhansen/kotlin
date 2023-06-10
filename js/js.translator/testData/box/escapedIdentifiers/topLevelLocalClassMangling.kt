@@ -1,22 +1,22 @@
 // IGNORE_BACKEND: JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
 package foo
 
-class class_with_invalid_chars {
+class class_with_inkonstid_chars {
     fun foo(): Int = 23
 }
 
-class `class@with$invalid chars` {
+class `class@with$inkonstid chars` {
     fun foo(): Int = 42
 }
 
 fun box(): String {
-    val a = class_with_invalid_chars()
-    val b = `class@with$invalid chars`()
+    konst a = class_with_inkonstid_chars()
+    konst b = `class@with$inkonstid chars`()
 
-    assertEquals(true, a is class_with_invalid_chars)
-    assertEquals(true, b is `class@with$invalid chars`)
+    assertEquals(true, a is class_with_inkonstid_chars)
+    assertEquals(true, b is `class@with$inkonstid chars`)
 
     assertEquals(23, a.foo())
     assertEquals(42, b.foo())

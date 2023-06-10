@@ -34,27 +34,27 @@ CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB ENUM_CLASS name:JEnum modality:FINAL vis
     overridden:
       protected/*protected and package*/ final fun finalize (): kotlin.Unit declared in kotlin.Enum
     $this: VALUE_PARAMETER FAKE_OVERRIDE name:<this> type:kotlin.Enum<@[FlexibleNullability] <root>.JEnum?>
-  PROPERTY IR_EXTERNAL_DECLARATION_STUB name:name visibility:public modality:FINAL [fake_override,val]
+  PROPERTY IR_EXTERNAL_DECLARATION_STUB name:name visibility:public modality:FINAL [fake_override,konst]
     annotations:
-      IntrinsicConstEvaluation
+      IntrinsicConstEkonstuation
     overridden:
-      public final name: kotlin.String [val]
+      public final name: kotlin.String [konst]
     FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<@[FlexibleNullability] <root>.JEnum?>) returnType:kotlin.String [fake_override]
-      correspondingProperty: PROPERTY IR_EXTERNAL_DECLARATION_STUB name:name visibility:public modality:FINAL [fake_override,val]
+      correspondingProperty: PROPERTY IR_EXTERNAL_DECLARATION_STUB name:name visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final fun <get-name> (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER FAKE_OVERRIDE name:<this> type:kotlin.Enum<@[FlexibleNullability] <root>.JEnum?>
-  PROPERTY IR_EXTERNAL_DECLARATION_STUB name:ordinal visibility:public modality:FINAL [fake_override,val]
+  PROPERTY IR_EXTERNAL_DECLARATION_STUB name:ordinal visibility:public modality:FINAL [fake_override,konst]
     overridden:
-      public final ordinal: kotlin.Int [val]
+      public final ordinal: kotlin.Int [konst]
     FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<@[FlexibleNullability] <root>.JEnum?>) returnType:kotlin.Int [fake_override]
-      correspondingProperty: PROPERTY IR_EXTERNAL_DECLARATION_STUB name:ordinal visibility:public modality:FINAL [fake_override,val]
+      correspondingProperty: PROPERTY IR_EXTERNAL_DECLARATION_STUB name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
       $this: VALUE_PARAMETER FAKE_OVERRIDE name:<this> type:kotlin.Enum<@[FlexibleNullability] <root>.JEnum?>
-  FUN IR_EXTERNAL_DECLARATION_STUB name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.JEnum
-    VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:value index:0 type:kotlin.String
-  FUN IR_EXTERNAL_DECLARATION_STUB name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.JEnum>
-  PROPERTY IR_EXTERNAL_DECLARATION_STUB name:entries visibility:public modality:FINAL [val]
+  FUN IR_EXTERNAL_DECLARATION_STUB name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.JEnum
+    VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:konstue index:0 type:kotlin.String
+  FUN IR_EXTERNAL_DECLARATION_STUB name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.JEnum>
+  PROPERTY IR_EXTERNAL_DECLARATION_STUB name:entries visibility:public modality:FINAL [konst]
     FUN IR_EXTERNAL_DECLARATION_STUB name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.JEnum>
-      correspondingProperty: PROPERTY IR_EXTERNAL_DECLARATION_STUB name:entries visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY IR_EXTERNAL_DECLARATION_STUB name:entries visibility:public modality:FINAL [konst]

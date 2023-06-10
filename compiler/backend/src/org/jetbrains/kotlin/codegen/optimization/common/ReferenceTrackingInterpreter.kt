@@ -60,7 +60,7 @@ abstract class ReferenceTrackingInterpreter : OptimizationBasicInterpreter() {
     private fun mergeDescriptors(v: BasicValue, w: BasicValue) =
         v.referenceValueDescriptors + w.referenceValueDescriptors
 
-    private val BasicValue.referenceValueDescriptors: Set<ReferenceValueDescriptor>
+    private konst BasicValue.referenceValueDescriptors: Set<ReferenceValueDescriptor>
         get() = if (this is TrackedReferenceValue) this.descriptors else emptySet()
 
     protected fun getMergedValueType(type1: Type?, type2: Type?): Type =
@@ -70,48 +70,48 @@ abstract class ReferenceTrackingInterpreter : OptimizationBasicInterpreter() {
             else -> AsmTypes.OBJECT_TYPE
         }
 
-    override fun copyOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue? =
-        if (value is TrackedReferenceValue) {
-            checkRefValuesUsages(insn, listOf(value))
-            value
+    override fun copyOperation(insn: AbstractInsnNode, konstue: BasicValue): BasicValue? =
+        if (konstue is TrackedReferenceValue) {
+            checkRefValuesUsages(insn, listOf(konstue))
+            konstue
         } else {
-            super.copyOperation(insn, value)
+            super.copyOperation(insn, konstue)
         }
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue? {
-        checkRefValuesUsages(insn, listOf(value))
-        return super.unaryOperation(insn, value)
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue): BasicValue? {
+        checkRefValuesUsages(insn, listOf(konstue))
+        return super.unaryOperation(insn, konstue)
     }
 
-    override fun binaryOperation(insn: AbstractInsnNode, value1: BasicValue, value2: BasicValue): BasicValue? {
-        checkRefValuesUsages(insn, listOf(value1, value2))
-        return super.binaryOperation(insn, value1, value2)
+    override fun binaryOperation(insn: AbstractInsnNode, konstue1: BasicValue, konstue2: BasicValue): BasicValue? {
+        checkRefValuesUsages(insn, listOf(konstue1, konstue2))
+        return super.binaryOperation(insn, konstue1, konstue2)
     }
 
-    override fun ternaryOperation(insn: AbstractInsnNode, value1: BasicValue, value2: BasicValue, value3: BasicValue): BasicValue? {
-        checkRefValuesUsages(insn, listOf(value1, value2, value3))
-        return super.ternaryOperation(insn, value1, value2, value3)
+    override fun ternaryOperation(insn: AbstractInsnNode, konstue1: BasicValue, konstue2: BasicValue, konstue3: BasicValue): BasicValue? {
+        checkRefValuesUsages(insn, listOf(konstue1, konstue2, konstue3))
+        return super.ternaryOperation(insn, konstue1, konstue2, konstue3)
     }
 
-    override fun naryOperation(insn: AbstractInsnNode, values: List<BasicValue>): BasicValue? {
-        checkRefValuesUsages(insn, values)
-        return super.naryOperation(insn, values)
+    override fun naryOperation(insn: AbstractInsnNode, konstues: List<BasicValue>): BasicValue? {
+        checkRefValuesUsages(insn, konstues)
+        return super.naryOperation(insn, konstues)
     }
 
-    protected open fun checkRefValuesUsages(insn: AbstractInsnNode, values: List<BasicValue>) {
-        values.forEach { value ->
-            if (value is TaintedTrackedReferenceValue) {
-                value.descriptors.forEach { it.onUseAsTainted() }
+    protected open fun checkRefValuesUsages(insn: AbstractInsnNode, konstues: List<BasicValue>) {
+        konstues.forEach { konstue ->
+            if (konstue is TaintedTrackedReferenceValue) {
+                konstue.descriptors.forEach { it.onUseAsTainted() }
             }
         }
 
-        values.forEachIndexed { pos, value ->
-            if (value is TrackedReferenceValue) {
-                processRefValueUsage(value, insn, pos)
+        konstues.forEachIndexed { pos, konstue ->
+            if (konstue is TrackedReferenceValue) {
+                processRefValueUsage(konstue, insn, pos)
             }
         }
     }
 
-    protected abstract fun processRefValueUsage(value: TrackedReferenceValue, insn: AbstractInsnNode, position: Int)
+    protected abstract fun processRefValueUsage(konstue: TrackedReferenceValue, insn: AbstractInsnNode, position: Int)
 }
 

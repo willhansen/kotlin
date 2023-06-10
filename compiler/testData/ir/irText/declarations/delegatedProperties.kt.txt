@@ -1,4 +1,4 @@
-val test1: Int /* by */
+konst test1: Int /* by */
   field = lazy<Int>(initializer = local fun <anonymous>(): Int {
     return 42
   }
@@ -14,11 +14,11 @@ class C {
 
   }
 
-  val map: MutableMap<String, Any>
+  konst map: MutableMap<String, Any>
     field = map
     get
 
-  val test2: Int /* by */
+  konst test2: Int /* by */
     field = lazy<Int>(initializer = local fun <anonymous>(): Int {
       return 42
     }
@@ -33,7 +33,7 @@ class C {
       return <this>.#test3$delegate.getValue<Any, Any>(thisRef = <this>, property = C::test3)
     }
     set(<set-?>: Any) {
-      return <this>.#test3$delegate.setValue<Any>(thisRef = <this>, property = C::test3, value = <set-?>)
+      return <this>.#test3$delegate.setValue<Any>(thisRef = <this>, property = C::test3, konstue = <set-?>)
     }
 
 }
@@ -44,5 +44,5 @@ var test4: Any /* by */
     return #test4$delegate.getValue<Any, Any>(thisRef = null, property = ::test4)
   }
   set(<set-?>: Any) {
-    return #test4$delegate.setValue<Any>(thisRef = null, property = ::test4, value = <set-?>)
+    return #test4$delegate.setValue<Any>(thisRef = null, property = ::test4, konstue = <set-?>)
   }

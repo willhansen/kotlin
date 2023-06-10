@@ -17,7 +17,7 @@ fun throwException(): Nothing = throw Exception()
 
 fun case1() {
     try {
-        val a = ""
+        konst a = ""
     } catch (e: Exception) {
     }
 }
@@ -26,7 +26,7 @@ fun case1() {
 
 fun case2() {
     try {
-        val a = ""
+        konst a = ""
         throwException()
     } catch (e: IllegalArgumentException) {
     } catch (e: ExcA) {

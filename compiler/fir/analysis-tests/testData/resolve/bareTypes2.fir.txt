@@ -2,10 +2,10 @@ FILE: bareTypes2.kt
     public abstract interface A<D : R|A<D>|> : R|kotlin/Any| {
         public abstract fun foo(): R|kotlin/Any|
 
-        public abstract val cond: R|kotlin/Boolean|
+        public abstract konst cond: R|kotlin/Boolean|
             public get(): R|kotlin/Boolean|
 
-        public abstract val field: R|kotlin/Any|
+        public abstract konst field: R|kotlin/Any|
             public get(): R|kotlin/Any|
 
     }

@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.tools.dukat.wasm.translateIdlToSourceSet
 import java.io.File
 
 fun main() {
-    val outputDirectory = "../../stdlib/wasm/src/org.w3c/"
-    val input = "../../stdlib/js/idl/org.w3c.dom.idl"
+    konst outputDirectory = "../../stdlib/wasm/src/org.w3c/"
+    konst input = "../../stdlib/js/idl/org.w3c.dom.idl"
 
-    val sourceSet = translateIdlToSourceSet(input)
+    konst sourceSet = translateIdlToSourceSet(input)
     compileUnits(translateSourceSet(sourceSet), outputDirectory)
 
     File(outputDirectory).walk().forEach {

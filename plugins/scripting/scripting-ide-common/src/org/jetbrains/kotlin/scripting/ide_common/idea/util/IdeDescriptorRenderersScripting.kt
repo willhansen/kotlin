@@ -14,25 +14,25 @@ import org.jetbrains.kotlin.types.typeUtil.builtIns
 // Copy-pasted from IdeDescriptorRenderers in intellij-community
 object IdeDescriptorRenderersScripting {
     @JvmField
-    val APPROXIMATE_FLEXIBLE_TYPES: (KotlinType) -> KotlinType = { it.approximateFlexibleTypes(preferNotNull = false) }
+    konst APPROXIMATE_FLEXIBLE_TYPES: (KotlinType) -> KotlinType = { it.approximateFlexibleTypes(preferNotNull = false) }
 
     private fun unwrapAnonymousType(type: KotlinType): KotlinType {
         if (type.isDynamic()) return type
         if (type.constructor is NewCapturedTypeConstructor) return type
 
-        val classifier = type.constructor.declarationDescriptor
+        konst classifier = type.constructor.declarationDescriptor
         if (classifier != null && !classifier.name.isSpecial) return type
 
         type.constructor.supertypes.singleOrNull()?.let { return it }
 
-        val builtIns = type.builtIns
+        konst builtIns = type.builtIns
         return if (type.isMarkedNullable)
             builtIns.nullableAnyType
         else
             builtIns.anyType
     }
 
-    private val BASE: DescriptorRenderer = DescriptorRenderer.withOptions {
+    private konst BASE: DescriptorRenderer = DescriptorRenderer.withOptions {
         normalizedVisibilities = true
         withDefinedIn = false
         renderDefaultVisibility = false
@@ -45,7 +45,7 @@ object IdeDescriptorRenderersScripting {
     }
 
     @JvmField
-    val SOURCE_CODE: DescriptorRenderer = BASE.withOptions {
+    konst SOURCE_CODE: DescriptorRenderer = BASE.withOptions {
         classifierNamePolicy = ClassifierNamePolicy.SOURCE_CODE_QUALIFIED
         typeNormalizer = { APPROXIMATE_FLEXIBLE_TYPES(unwrapAnonymousType(it)) }
     }

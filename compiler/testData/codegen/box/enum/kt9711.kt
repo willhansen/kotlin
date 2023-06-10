@@ -1,13 +1,13 @@
 enum class X {
 
     B {
-        val value2 = "OK"
-        override val value = { value2 }
+        konst konstue2 = "OK"
+        override konst konstue = { konstue2 }
     };
 
-    abstract val value: () -> String
+    abstract konst konstue: () -> String
 }
 
 fun box(): String {
-    return X.B.value()
+    return X.B.konstue()
 }

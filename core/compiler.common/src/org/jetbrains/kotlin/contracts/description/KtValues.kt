@@ -10,8 +10,8 @@ interface KtContractDescriptionValue<Type, Diagnostic> : KtContractDescriptionEl
         contractDescriptionVisitor.visitValue(this, data)
 }
 
-open class KtConstantReference<Type, Diagnostic>(val name: String) : KtContractDescriptionValue<Type, Diagnostic> {
-    override val erroneous: Boolean
+open class KtConstantReference<Type, Diagnostic>(konst name: String) : KtContractDescriptionValue<Type, Diagnostic> {
+    override konst erroneous: Boolean
         get() = false
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R =
@@ -24,8 +24,8 @@ class KtBooleanConstantReference<Type, Diagnostic>(name: String) : KtConstantRef
         contractDescriptionVisitor.visitBooleanConstantDescriptor(this, data)
 }
 
-class KtErroneousConstantReference<Type, Diagnostic>(val diagnostic: Diagnostic) : KtConstantReference<Type, Diagnostic>("ERROR") {
-    override val erroneous: Boolean
+class KtErroneousConstantReference<Type, Diagnostic>(konst diagnostic: Diagnostic) : KtConstantReference<Type, Diagnostic>("ERROR") {
+    override konst erroneous: Boolean
         get() = true
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R =
@@ -33,16 +33,16 @@ class KtErroneousConstantReference<Type, Diagnostic>(val diagnostic: Diagnostic)
 }
 
 /*
- * Index of value parameter of function
+ * Index of konstue parameter of function
  * -1 means that it is reference to extension receiver
  */
-open class KtValueParameterReference<Type, Diagnostic>(val parameterIndex: Int, val name: String) :
+open class KtValueParameterReference<Type, Diagnostic>(konst parameterIndex: Int, konst name: String) :
     KtContractDescriptionValue<Type, Diagnostic> {
     init {
         assert(parameterIndex >= -1)
     }
 
-    override val erroneous: Boolean
+    override konst erroneous: Boolean
         get() = false
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R =
@@ -55,8 +55,8 @@ class KtBooleanValueParameterReference<Type, Diagnostic>(parameterIndex: Int, na
         contractDescriptionVisitor.visitBooleanValueParameterReference(this, data)
 }
 
-class KtErroneousValueParameterReference<Type, Diagnostic>(val diagnostic: Diagnostic) : KtValueParameterReference<Type, Diagnostic>(Int.MAX_VALUE, "ERROR") {
-    override val erroneous: Boolean
+class KtErroneousValueParameterReference<Type, Diagnostic>(konst diagnostic: Diagnostic) : KtValueParameterReference<Type, Diagnostic>(Int.MAX_VALUE, "ERROR") {
+    override konst erroneous: Boolean
         get() = true
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R =

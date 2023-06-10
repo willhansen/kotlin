@@ -30,9 +30,9 @@ internal fun interface KtFirDiagnostic4Creator<A, B, C, D> : KtFirDiagnosticCrea
     fun KtFirAnalysisSession.create(diagnostic: KtDiagnosticWithParameters4<A, B, C, D>): KtFirDiagnostic<*>
 }
 
-internal class KtDiagnosticConverter(private val conversions: Map<AbstractKtDiagnosticFactory, KtFirDiagnosticCreator>) {
+internal class KtDiagnosticConverter(private konst conversions: Map<AbstractKtDiagnosticFactory, KtFirDiagnosticCreator>) {
     fun convert(analysisSession: KtFirAnalysisSession, diagnostic: KtDiagnostic): KtFirDiagnostic<*> {
-        val creator = conversions[diagnostic.factory] ?: buildCreatorForPluginDiagnostic(diagnostic.factory)
+        konst creator = conversions[diagnostic.factory] ?: buildCreatorForPluginDiagnostic(diagnostic.factory)
 
         @Suppress("UNCHECKED_CAST")
         return with(analysisSession) {
@@ -52,7 +52,7 @@ internal class KtDiagnosticConverter(private val conversions: Map<AbstractKtDiag
                 is KtFirDiagnostic4Creator<*, *, *, *> -> with(creator as KtFirDiagnostic4Creator<Any?, Any?, Any?, Any?>) {
                     create(diagnostic as KtDiagnosticWithParameters4<Any?, Any?, Any?, Any?>)
                 }
-                else -> error("Invalid KtFirDiagnosticCreator ${creator::class.simpleName}")
+                else -> error("Inkonstid KtFirDiagnosticCreator ${creator::class.simpleName}")
             }
         }
     }
@@ -102,7 +102,7 @@ internal class KtDiagnosticConverter(private val conversions: Map<AbstractKtDiag
 }
 
 internal class KtDiagnosticConverterBuilder private constructor() {
-    private val conversions = mutableMapOf<AbstractKtDiagnosticFactory, KtFirDiagnosticCreator>()
+    private konst conversions = mutableMapOf<AbstractKtDiagnosticFactory, KtFirDiagnosticCreator>()
 
     fun add(diagnostic: KtDiagnosticFactory0, creator: KtFirDiagnostic0Creator) {
         conversions[diagnostic] = creator

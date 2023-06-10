@@ -27,13 +27,13 @@ public inline fun <reified T : PsiElement> PsiElement.parentsOfType(withSelf: Bo
 
 
 public fun KtElement.getElementTextInContext(): String {
-    @Suppress("LocalVariableName") val ELEMENT_TAG = "ELEMENT"
-    val context = parentOfType<KtImportDirective>()
+    @Suppress("LocalVariableName") konst ELEMENT_TAG = "ELEMENT"
+    konst context = parentOfType<KtImportDirective>()
         ?: parentOfType<KtPackageDirective>()
         ?: PsiTreeUtil.getParentOfType(this, KtDeclarationWithBody::class.java, KtClassOrObject::class.java, KtScript::class.java)
         ?: getNonStrictParentOfType<KtProperty>()
         ?: containingKtFile
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
     context.accept(object : PsiElementVisitor() {
         override fun visitElement(element: PsiElement) {
             if (element === this@getElementTextInContext) builder.append("<$ELEMENT_TAG>")

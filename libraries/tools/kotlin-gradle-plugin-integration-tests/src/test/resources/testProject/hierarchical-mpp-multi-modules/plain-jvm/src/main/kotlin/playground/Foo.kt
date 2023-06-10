@@ -1,3 +1,3 @@
 package playground
 
-//inline class Foo(val i: Int)
+//inline class Foo(konst i: Int)

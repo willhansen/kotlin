@@ -8,6 +8,6 @@ open class A<X>() {
 }
 
 fun test() {
-    val a = A<Int>()
-    val b : A<Int>.B = a.B()
+    konst a = A<Int>()
+    konst b : A<Int>.B = a.B()
 }

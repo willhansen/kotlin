@@ -18,7 +18,7 @@ FILE: enum.kt
             super<R|kotlin/Enum<SomeEnum>|>()
         }
 
-        public final val x: R|Some| = R|<local>/x|
+        public final konst x: R|Some| = R|<local>/x|
             public get(): R|Some|
 
         public final static enum entry FIRST: R|SomeEnum| = object : R|SomeEnum| {
@@ -45,13 +45,13 @@ FILE: enum.kt
 
         public abstract fun check(y: R|Some|): R|kotlin/Boolean|
 
-        public final static fun values(): R|kotlin/Array<SomeEnum>| {
+        public final static fun konstues(): R|kotlin/Array<SomeEnum>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|SomeEnum| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|SomeEnum| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<SomeEnum>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<SomeEnum>|
             public get(): R|kotlin/enums/EnumEntries<SomeEnum>|
 
     }
@@ -61,13 +61,13 @@ FILE: enum.kt
             super<R|kotlin/Enum<E>|>()
         }
 
-        public final static fun values(): R|kotlin/Array<E>| {
+        public final static fun konstues(): R|kotlin/Array<E>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|E| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|E| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<E>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<E>|
             public get(): R|kotlin/enums/EnumEntries<E>|
 
     }
@@ -85,7 +85,7 @@ FILE: enum.kt
                 ^foo Int(1)
             }
 
-            public open override val bar: R|kotlin/String| = String(a)
+            public open override konst bar: R|kotlin/String| = String(a)
                 public get(): R|kotlin/String|
 
         }
@@ -106,16 +106,16 @@ FILE: enum.kt
 
         public abstract fun foo(): R|kotlin/Int|
 
-        public abstract val bar: R|kotlin/String|
+        public abstract konst bar: R|kotlin/String|
             public get(): R|kotlin/String|
 
-        public final static fun values(): R|kotlin/Array<EnumClass>| {
+        public final static fun konstues(): R|kotlin/Array<EnumClass>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|EnumClass| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|EnumClass| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<EnumClass>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<EnumClass>|
             public get(): R|kotlin/enums/EnumEntries<EnumClass>|
 
     }

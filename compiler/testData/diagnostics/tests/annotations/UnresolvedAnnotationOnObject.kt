@@ -7,4 +7,4 @@ package test
 @<!UNRESOLVED_REFERENCE!>BadAnnotation<!>
 object SomeObject
 
-val some = SomeObject
+konst some = SomeObject

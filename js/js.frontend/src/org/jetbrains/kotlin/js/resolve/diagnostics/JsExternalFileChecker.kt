@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 
 object JsExternalFileChecker : DeclarationChecker {
-    private val annotationFqNames = JsStandardClassIds.Annotations.annotationsRequiringExternal.map { it.asSingleFqName() }
+    private konst annotationFqNames = JsStandardClassIds.Annotations.annotationsRequiringExternal.map { it.asSingleFqName() }
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (!AnnotationsUtils.isNativeObject(descriptor) && DescriptorUtils.isTopLevelDeclaration(descriptor)) {

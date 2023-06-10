@@ -13,7 +13,7 @@ fun foo1(a: A) {
     if (a is B) {
         if (a is D) {
             if (<!USELESS_IS_CHECK!>a is C<!>) {
-                val t =
+                konst t =
                     when (a) {
                         is DD -> "DD"
                     }
@@ -26,7 +26,7 @@ fun foo2(a: A) {
     if (a is B) {
         if (a is D) {
             if (<!USELESS_IS_CHECK!>a is C<!>) {
-                val t =
+                konst t =
                     when (a) {
                         is DD -> "DD"
                     }

@@ -32,7 +32,7 @@ internal object DECLARATION_ORIGIN_STATIC_GLOBAL_INITIALIZER : IrDeclarationOrig
 internal object DECLARATION_ORIGIN_STATIC_THREAD_LOCAL_INITIALIZER : IrDeclarationOriginImpl("STATIC_THREAD_LOCAL_INITIALIZER")
 internal object DECLARATION_ORIGIN_STATIC_STANDALONE_THREAD_LOCAL_INITIALIZER : IrDeclarationOriginImpl("STATIC_STANDALONE_THREAD_LOCAL_INITIALIZER")
 
-internal val IrFunction.isStaticInitializer: Boolean
+internal konst IrFunction.isStaticInitializer: Boolean
     get() = origin == DECLARATION_ORIGIN_STATIC_GLOBAL_INITIALIZER
             || origin == DECLARATION_ORIGIN_STATIC_THREAD_LOCAL_INITIALIZER
             || origin == DECLARATION_ORIGIN_STATIC_STANDALONE_THREAD_LOCAL_INITIALIZER
@@ -44,12 +44,12 @@ internal fun ConfigChecks.shouldBeInitializedEagerly(irField: IrField): Boolean 
     if (irField.parent is IrFile || irField.correspondingPropertySymbol?.owner?.parent is IrFile) {
         if (!useLazyFileInitializers()) return true
     }
-    val annotations = irField.correspondingPropertySymbol?.owner?.annotations ?: irField.annotations
+    konst annotations = irField.correspondingPropertySymbol?.owner?.annotations ?: irField.annotations
     return annotations.hasAnnotation(KonanFqNames.eagerInitialization)
 }
 
 // TODO: ExplicitlyExported for IR proto are not longer needed.
-internal class StaticInitializersLowering(val context: Context) : FileLoweringPass {
+internal class StaticInitializersLowering(konst context: Context) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.acceptVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
@@ -70,7 +70,7 @@ internal class StaticInitializersLowering(val context: Context) : FileLoweringPa
         var requireGlobalInitializer = false
         var requireThreadLocalInitializer = false
         for (declaration in container.declarations) {
-            val irField = (declaration as? IrField) ?: (declaration as? IrProperty)?.backingField
+            konst irField = (declaration as? IrField) ?: (declaration as? IrProperty)?.backingField
             if (irField == null || !irField.isStatic || !irField.needsInitializationAtRuntime || context.shouldBeInitializedEagerly(irField)) continue
             if (irField.storageKind(context) != FieldStorageKind.THREAD_LOCAL) {
                 requireGlobalInitializer = true
@@ -83,11 +83,11 @@ internal class StaticInitializersLowering(val context: Context) : FileLoweringPa
             return
         }
 
-        val globalInitFunction =
+        konst globalInitFunction =
                 if (requireGlobalInitializer)
                     buildInitFileFunction(container, "\$init_global", DECLARATION_ORIGIN_STATIC_GLOBAL_INITIALIZER)
                 else null
-        val threadLocalInitFunction =
+        konst threadLocalInitFunction =
                 if (requireThreadLocalInitializer)
                     buildInitFileFunction(container, "\$init_thread_local",
                             if (requireGlobalInitializer)
@@ -99,8 +99,8 @@ internal class StaticInitializersLowering(val context: Context) : FileLoweringPa
         container.simpleFunctions()
                 .filterNot { it.origin == DECLARATION_ORIGIN_ENTRY_POINT }
                 .forEach {
-                    val body = it.body ?: return@forEach
-                    val statements = (body as IrBlockBody).statements
+                    konst body = it.body ?: return@forEach
+                    konst statements = (body as IrBlockBody).statements
                     context.createIrBuilder(it.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET).run {
                         // The order of calling initializers: first global, then thread-local.
                         // It is ok for a thread local top level property to reference a global, but not vice versa.
@@ -122,7 +122,7 @@ internal class StaticInitializersLowering(val context: Context) : FileLoweringPa
         container.declarations.add(0, this)
     }
 
-    private val IrField.needsInitializationAtRuntime: Boolean
+    private konst IrField.needsInitializationAtRuntime: Boolean
         get() = hasNonConstInitializer || needsGCRegistration(context)
 
 }

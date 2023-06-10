@@ -9,5 +9,5 @@ class A {
 
 fun A?.foo() {}
 
-val f: KFunction1<A, Unit> = A::foo
-val g: KFunction1<A, Unit> = A?::foo
+konst f: KFunction1<A, Unit> = A::foo
+konst g: KFunction1<A, Unit> = A?::foo

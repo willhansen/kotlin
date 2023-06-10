@@ -2,10 +2,10 @@ import abitestutils.abiTest
 import abitestutils.TestBuilder
 
 fun box() = abiTest {
-    val ecifaec = ExternalClassInheritedFromAbstractExternalClass()
-    val rcifaec = RegularClassInheritedFromAbstractExternalClass()
-    val ecifeiifoec = ExternalClassInheritedFromExternalInterfaceInheritedFromOpenExternalClass()
-    val rcifeiifoec = RegularClassInheritedFromExternalInterfaceInheritedFromOpenExternalClass()
+    konst ecifaec = ExternalClassInheritedFromAbstractExternalClass()
+    konst rcifaec = RegularClassInheritedFromAbstractExternalClass()
+    konst ecifeiifoec = ExternalClassInheritedFromExternalInterfaceInheritedFromOpenExternalClass()
+    konst rcifeiifoec = RegularClassInheritedFromExternalInterfaceInheritedFromOpenExternalClass()
 
     expectSuccess("ExternalClassInheritedFromAbstractExternalClass.abstractFunction") { ecifaec.abstractFunction() }
     expectSuccess("ExternalClassInheritedFromAbstractExternalClass.removedAbstractFunction") { ecifaec.removedAbstractFunction() }

@@ -11,17 +11,17 @@ import java.util.*
 
 @Parcelize
 data class Test(
-        val a: Map<String, String>,
-        val b: MutableMap<String, String>,
-        val c: HashMap<String, String>,
-        val d: LinkedHashMap<String, String>,
-        val e: TreeMap<String, String>,
-        val f: SortedMap<String, String>,
-        val g: NavigableMap<String, String>
+        konst a: Map<String, String>,
+        konst b: MutableMap<String, String>,
+        konst c: HashMap<String, String>,
+        konst d: LinkedHashMap<String, String>,
+        konst e: TreeMap<String, String>,
+        konst f: SortedMap<String, String>,
+        konst g: NavigableMap<String, String>
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = Test(
+    konst first = Test(
             a = mapOf("A" to "B"),
             b = mutableMapOf("A" to "B"),
             c = HashMap<String, String>().apply { put("A", "B") },
@@ -33,11 +33,11 @@ fun box() = parcelTest { parcel ->
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val first2 = parcelableCreator<Test>().createFromParcel(parcel)
+    konst first2 = parcelableCreator<Test>().createFromParcel(parcel)
 
     assert(first == first2)
     assert((first.c as HashMap<*, *>).size == 1)

@@ -12,7 +12,7 @@ class CalendarConverter : TypeConverter<Long, Calendar>() {
     }
 
     override fun getModelValue(data: Long?): Calendar {
-        val calendar = Calendar.getInstance()
+        konst calendar = Calendar.getInstance()
         calendar.timeInMillis = data!!
         return calendar
     }

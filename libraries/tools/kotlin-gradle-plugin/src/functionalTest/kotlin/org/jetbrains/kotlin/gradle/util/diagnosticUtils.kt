@@ -16,10 +16,10 @@ import kotlin.test.assertTrue
 import kotlin.test.fail
 
 internal fun checkDiagnosticsWithMppProject(projectName: String, projectConfiguration: Project.() -> Unit) {
-    val project = buildProjectWithMPP(projectBuilder = { withName(projectName) })
+    konst project = buildProjectWithMPP(projectBuilder = { withName(projectName) })
     project.setMultiplatformAndroidSourceSetLayoutVersion(2)
     project.projectConfiguration()
-    project.evaluate()
+    project.ekonstuate()
     project.checkDiagnostics(projectName)
 }
 
@@ -29,14 +29,14 @@ internal fun checkDiagnosticsWithMppProject(projectName: String, projectConfigur
  * name of the project if it's a single one with diagnostics (useful for small one-project tests)
  */
 internal fun Project.checkDiagnostics(testDataName: String, compactRendering: Boolean = true) {
-    val diagnosticsPerProject = rootProject.allprojects.mapNotNull {
-        val diagnostics = it.kotlinToolingDiagnosticsCollector.getDiagnosticsForProject(it)
+    konst diagnosticsPerProject = rootProject.allprojects.mapNotNull {
+        konst diagnostics = it.kotlinToolingDiagnosticsCollector.getDiagnosticsForProject(it)
         if (diagnostics.isEmpty() && compactRendering)
             null
         else
             it.name to diagnostics
     }.toMap()
-    val expectedDiagnostics = expectedDiagnosticsFile(testDataName)
+    konst expectedDiagnostics = expectedDiagnosticsFile(testDataName)
 
     if (diagnosticsPerProject.all { (_, diagnostics) -> diagnostics.isEmpty() }) {
         if (expectedDiagnostics.exists())
@@ -45,24 +45,24 @@ internal fun Project.checkDiagnostics(testDataName: String, compactRendering: Bo
             return // do not create empty file
     }
 
-    val actualRenderedText = if (diagnosticsPerProject.size == 1 && compactRendering) {
-        diagnosticsPerProject.entries.single().value.render()
+    konst actualRenderedText = if (diagnosticsPerProject.size == 1 && compactRendering) {
+        diagnosticsPerProject.entries.single().konstue.render()
     } else {
         diagnosticsPerProject
             .entries
             .joinToString(separator = "\n\n") { (projectName, diagnostics) ->
-                val nameSanitized = if (projectName == "test") "<root>" else projectName
+                konst nameSanitized = if (projectName == "test") "<root>" else projectName
                 "PROJECT: $nameSanitized\n" + diagnostics.render()
             }
     }
 
-    val sanitizedTest = actualRenderedText.replace(File.separator, "/")
+    konst sanitizedTest = actualRenderedText.replace(File.separator, "/")
 
     KotlinTestUtils.assertEqualsToFile(expectedDiagnostics, sanitizedTest)
 }
 
 internal fun Project.assertNoDiagnostics() {
-    val actualDiagnostics = kotlinToolingDiagnosticsCollector.getDiagnosticsForProject(this)
+    konst actualDiagnostics = kotlinToolingDiagnosticsCollector.getDiagnosticsForProject(this)
     assertTrue(
         actualDiagnostics.isEmpty(), "Expected to have no diagnostics, but some were reported:\n ${actualDiagnostics.render()}"
     )
@@ -84,7 +84,7 @@ internal fun Project.assertNoDiagnostics(id: String) {
 }
 
 internal fun Collection<ToolingDiagnostic>.assertNoDiagnostics(id: String) {
-    val unexpectedDiagnostics = filter { it.id == id }
+    konst unexpectedDiagnostics = filter { it.id == id }
     if (unexpectedDiagnostics.isNotEmpty()) {
         fail("Expected to have no diagnostics with id '$id', but some were reported:\n${unexpectedDiagnostics.render()}")
     }
@@ -96,7 +96,7 @@ internal fun Collection<ToolingDiagnostic>.assertNoDiagnostics(factory: ToolingD
 
 private fun Collection<ToolingDiagnostic>.render(): String = joinToString(separator = "\n----\n")
 
-private val expectedDiagnosticsRoot: Path
+private konst expectedDiagnosticsRoot: Path
     get() = resourcesRoot.resolve("expectedDiagnostics")
 
 private fun expectedDiagnosticsFile(projectName: String): File = expectedDiagnosticsRoot.resolve("$projectName.txt").toFile()

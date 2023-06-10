@@ -19,22 +19,22 @@ class JsBoxRunner(testServices: TestServices) : AbstractJsArtifactsCollector(tes
     }
 
     private fun runJsCode() {
-        val globalDirectives = testServices.moduleStructure.allDirectives
-        val dontRunGeneratedCode = globalDirectives[JsEnvironmentConfigurationDirectives.DONT_RUN_GENERATED_CODE]
+        konst globalDirectives = testServices.moduleStructure.allDirectives
+        konst dontRunGeneratedCode = globalDirectives[JsEnvironmentConfigurationDirectives.DONT_RUN_GENERATED_CODE]
             .contains(testServices.defaultsProvider.defaultTargetBackend?.name)
 
         if (dontRunGeneratedCode) return
 
-        val allJsFiles = getAllFilesForRunner(testServices, modulesToArtifact)
+        konst allJsFiles = getAllFilesForRunner(testServices, modulesToArtifact)
 
-        val withModuleSystem = testWithModuleSystem(testServices)
-        val testModuleName = getTestModuleName(testServices)
-        val testPackage = extractTestPackage(testServices)
+        konst withModuleSystem = testWithModuleSystem(testServices)
+        konst testModuleName = getTestModuleName(testServices)
+        konst testPackage = extractTestPackage(testServices)
 
-        val dontSkipRegularMode = JsEnvironmentConfigurationDirectives.SKIP_REGULAR_MODE !in globalDirectives
+        konst dontSkipRegularMode = JsEnvironmentConfigurationDirectives.SKIP_REGULAR_MODE !in globalDirectives
         if (dontSkipRegularMode) {
             for ((mode, jsFiles) in allJsFiles) {
-                val entryModulePath = extractEntryModulePath(mode, testServices)
+                konst entryModulePath = extractEntryModulePath(mode, testServices)
                 runGeneratedCode(entryModulePath, jsFiles, testModuleName, testPackage, withModuleSystem)
             }
         }
@@ -60,7 +60,7 @@ class JsBoxRunner(testServices: TestServices) : AbstractJsArtifactsCollector(tes
     }
 
     companion object {
-        const val DEFAULT_EXPECTED_RESULT = "OK"
-        const val TEST_FUNCTION = "box"
+        const konst DEFAULT_EXPECTED_RESULT = "OK"
+        const konst TEST_FUNCTION = "box"
     }
 }

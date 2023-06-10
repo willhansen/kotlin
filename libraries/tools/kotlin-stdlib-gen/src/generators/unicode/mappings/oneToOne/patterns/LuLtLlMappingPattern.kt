@@ -19,10 +19,10 @@ internal class LuLtLlMappingPattern private constructor(
     categoryCode: String,
     mapping: Int
 ) : MappingPattern {
-    override val start = charCode
+    override konst start = charCode
     override var end = charCode
         private set
-    val distance = 1
+    konst distance = 1
 
     init {
         require(categoryCode == "Lu" && mapping == 1)
@@ -31,10 +31,10 @@ internal class LuLtLlMappingPattern private constructor(
     override fun append(charCode: Int, categoryCode: String, mapping: Int): Boolean {
         require(charCode > end)
 
-        val distance = charCode - end
-        val modThree = (charCode - start) % 3
-        val expectedMapping = expectedMapping(categoryCode)
-        val expectedModThree = expectedModThree(categoryCode)
+        konst distance = charCode - end
+        konst modThree = (charCode - start) % 3
+        konst expectedMapping = expectedMapping(categoryCode)
+        konst expectedModThree = expectedModThree(categoryCode)
         if (distance == this.distance && mapping == expectedMapping && modThree == expectedModThree) {
             end = charCode
             return true
@@ -73,7 +73,7 @@ internal class LuLtLlMappingPattern private constructor(
                 && pattern.categoryCode == "Lu"
                 && pattern.mapping == 1
             ) {
-                val newPattern = LuLtLlMappingPattern(pattern.start, pattern.categoryCode, pattern.mapping)
+                konst newPattern = LuLtLlMappingPattern(pattern.start, pattern.categoryCode, pattern.mapping)
                 if (newPattern.append(charCode, categoryCode, mapping)) {
                     return newPattern
                 }

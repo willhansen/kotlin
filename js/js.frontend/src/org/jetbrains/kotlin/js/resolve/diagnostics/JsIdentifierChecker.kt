@@ -25,16 +25,16 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 import org.jetbrains.kotlin.resolve.IdentifierChecker
 
-class JsIdentifierChecker(private val languageVersionSettings: LanguageVersionSettings) : IdentifierChecker {
+class JsIdentifierChecker(private konst languageVersionSettings: LanguageVersionSettings) : IdentifierChecker {
     override fun checkIdentifier(simpleNameExpression: KtSimpleNameExpression, diagnosticHolder: DiagnosticSink) {
-        if (languageVersionSettings.supportsFeature(LanguageFeature.JsAllowInvalidCharsIdentifiersEscaping)) {
+        if (languageVersionSettings.supportsFeature(LanguageFeature.JsAllowInkonstidCharsIdentifiersEscaping)) {
             return
         }
-        val simpleName = simpleNameExpression.getReferencedName()
+        konst simpleName = simpleNameExpression.getReferencedName()
 
-        val hasIllegalChars = simpleName.split('.').any { NameSuggestion.sanitizeName(it) != it }
+        konst hasIllegalChars = simpleName.split('.').any { NameSuggestion.sanitizeName(it) != it }
         if (hasIllegalChars) {
-            val identifier = simpleNameExpression.getIdentifier() ?: return
+            konst identifier = simpleNameExpression.getIdentifier() ?: return
             diagnosticHolder.report(Errors.INVALID_CHARACTERS.on(identifier, "contains illegal characters"))
         }
     }

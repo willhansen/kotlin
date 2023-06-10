@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.utils.Printer
 
 class LexicalScopeImpl @JvmOverloads constructor(
     parent: HierarchicalScope,
-    override val ownerDescriptor: DeclarationDescriptor,
-    override val isOwnerDescriptorAccessibleByLabel: Boolean,
-    override val implicitReceiver: ReceiverParameterDescriptor?,
-    override val contextReceiversGroup: List<ReceiverParameterDescriptor>,
-    override val kind: LexicalScopeKind,
+    override konst ownerDescriptor: DeclarationDescriptor,
+    override konst isOwnerDescriptorAccessibleByLabel: Boolean,
+    override konst implicitReceiver: ReceiverParameterDescriptor?,
+    override konst contextReceiversGroup: List<ReceiverParameterDescriptor>,
+    override konst kind: LexicalScopeKind,
     redeclarationChecker: LocalRedeclarationChecker = LocalRedeclarationChecker.DO_NOTHING,
     initialize: LexicalScopeImpl.InitializeHandler.() -> Unit = {}
 ) : LexicalScope, LexicalScopeStorage(parent, redeclarationChecker) {
@@ -44,9 +44,9 @@ class LexicalScopeImpl @JvmOverloads constructor(
             "; for descriptor: ",
             ownerDescriptor.name,
             " with implicitReceiver: ",
-            implicitReceiver?.value ?: "NONE",
+            implicitReceiver?.konstue ?: "NONE",
             " with contextReceiversGroup: ",
-            if (contextReceiversGroup.isEmpty()) "NONE" else contextReceiversGroup.joinToString { it.value.toString() },
+            if (contextReceiversGroup.isEmpty()) "NONE" else contextReceiversGroup.joinToString { it.konstue.toString() },
             " {"
         )
         p.pushIndent()

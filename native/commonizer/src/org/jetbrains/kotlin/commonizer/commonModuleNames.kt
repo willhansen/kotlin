@@ -9,10 +9,10 @@ package org.jetbrains.kotlin.commonizer
  * @return Set of module names that is available across all children targets
  */
 internal fun CommonizerParameters.commonModuleNames(target: CommonizerTarget): Set<String> {
-    val supportedTargets = target.withAllLeaves().mapNotNull(targetProviders::getOrNull)
+    konst supportedTargets = target.withAllLeaves().mapNotNull(targetProviders::getOrNull)
     if (supportedTargets.isEmpty()) return emptySet() // Nothing to do
 
-    val allModuleNames: List<Set<String>> = supportedTargets.toList().map { targetProvider ->
+    konst allModuleNames: List<Set<String>> = supportedTargets.toList().map { targetProvider ->
         targetProvider.modulesProvider.moduleInfos.mapTo(HashSet()) { it.name }
     }
 

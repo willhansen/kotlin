@@ -10,7 +10,7 @@ analyse(psiElementForContext) { // you are inside KtAnalysisSession Context
 You may want to decompose your logic into functions. In such a case, add KtAnalysisSession receiver to it. Such a thing should be done even if your function does not use the receiver. The approach may look cumbersome, but it is important to be sure that we do not publish resolution results. Publishing resolution results may cause memory leaks or working with out-of-date resolution results.
 ```kotlin
 analyse(psiElementForContext) {
-    val symbol = getSymbol()
+    konst symbol = getSymbol()
     ...
 }
 

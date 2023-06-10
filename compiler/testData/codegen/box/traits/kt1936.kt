@@ -17,7 +17,7 @@ open class B(param : String) : MyTrait
 }
 
 fun box(): String {
-    val b = B("OK")
+    konst b = B("OK")
     b.foo()
     return result
 }

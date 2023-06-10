@@ -2,14 +2,14 @@
 // !DUMP_CFG
 
 fun test() {
-    val list: MutableList<(String) -> String> = null!!
+    konst list: MutableList<(String) -> String> = null!!
     list += { it }
 }
 
-class A<T>(private val executor: ((T) -> Unit) -> Unit)
+class A<T>(private konst executor: ((T) -> Unit) -> Unit)
 
 fun <T> postpone(computation: () -> T): A<T> {
-    val queue = mutableListOf<() -> Unit>()
+    konst queue = mutableListOf<() -> Unit>()
 
     return A { resolve ->
         queue += {

@@ -34,7 +34,7 @@ fun test4T(o: Foo) = if (o::bar.isInitialized) "4T" else "Fail4T"
 
 
 fun box(): String {
-    val o = Foo()
+    konst o = Foo()
     if (o.testF() != "0F") return "Fail0F"
     if (test1F(o) != "1F") return "Fail1F"
     if (test2F(o) != "2F") return "Fail2F"

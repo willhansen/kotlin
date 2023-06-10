@@ -12,7 +12,7 @@ object Delegate {
         return emptyList()
     }
 
-    operator fun setValue(instance: Any?, kProperty: KProperty<*>, value: List<String?>) {
+    operator fun setValue(instance: Any?, kProperty: KProperty<*>, konstue: List<String?>) {
         throw AssertionError()
     }
 }
@@ -60,7 +60,7 @@ annotation class Anno
 
 fun box(): String {
     @Anno
-    val localVal by Delegate
+    konst localVal by Delegate
     localVal
 
     check("localVal", Delegate.property as KProperty0<*>)?.let { error -> return error }

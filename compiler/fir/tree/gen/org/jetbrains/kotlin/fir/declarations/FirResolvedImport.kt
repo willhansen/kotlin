@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirResolvedImport : FirPureAbstractElement(), FirImport {
-    abstract override val source: KtSourceElement?
-    abstract override val importedFqName: FqName?
-    abstract override val isAllUnder: Boolean
-    abstract override val aliasName: Name?
-    abstract override val aliasSource: KtSourceElement?
-    abstract val delegate: FirImport
-    abstract val packageFqName: FqName
-    abstract val relativeParentClassName: FqName?
-    abstract val resolvedParentClassId: ClassId?
-    abstract val importedName: Name?
+    abstract override konst source: KtSourceElement?
+    abstract override konst importedFqName: FqName?
+    abstract override konst isAllUnder: Boolean
+    abstract override konst aliasName: Name?
+    abstract override konst aliasSource: KtSourceElement?
+    abstract konst delegate: FirImport
+    abstract konst packageFqName: FqName
+    abstract konst relativeParentClassName: FqName?
+    abstract konst resolvedParentClassId: ClassId?
+    abstract konst importedName: Name?
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitResolvedImport(this, data)
 

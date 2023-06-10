@@ -26,18 +26,18 @@ import org.jetbrains.kotlin.fir.types.customAnnotations
 import org.jetbrains.kotlin.name.ClassId
 
 internal class KtFirAnnotationListForType private constructor(
-    val coneType: ConeKotlinType,
-    private val useSiteSession: FirSession,
-    override val token: KtLifetimeToken,
+    konst coneType: ConeKotlinType,
+    private konst useSiteSession: FirSession,
+    override konst token: KtLifetimeToken,
 ) : KtAnnotationsList() {
-    override val annotations: List<KtAnnotationApplicationWithArgumentsInfo>
+    override konst annotations: List<KtAnnotationApplicationWithArgumentsInfo>
         get() = withValidityAssertion {
             coneType.customAnnotationsWithLazyResolve(FirResolvePhase.ANNOTATIONS_ARGUMENTS_MAPPING).mapIndexed { index, annotation ->
                 annotation.toKtAnnotationApplication(useSiteSession, index)
             }
         }
 
-    override val annotationInfos: List<KtAnnotationApplicationInfo>
+    override konst annotationInfos: List<KtAnnotationApplicationInfo>
         get() = withValidityAssertion {
             coneType.customAnnotationsWithLazyResolve(FirResolvePhase.TYPES).mapIndexed { index, annotation ->
                 annotation.toKtAnnotationInfo(useSiteSession, index)
@@ -63,7 +63,7 @@ internal class KtFirAnnotationListForType private constructor(
         }
     }
 
-    override val annotationClassIds: Collection<ClassId>
+    override konst annotationClassIds: Collection<ClassId>
         get() = withValidityAssertion {
             coneType.customAnnotationsWithLazyResolve(FirResolvePhase.TYPES).mapNotNull { it.toAnnotationClassId(useSiteSession) }
         }
@@ -84,8 +84,8 @@ internal class KtFirAnnotationListForType private constructor(
 }
 
 private fun ConeKotlinType.customAnnotationsWithLazyResolve(phase: FirResolvePhase): List<FirAnnotation> {
-    val custom = attributes.custom ?: return emptyList()
-    val annotations = custom.annotations.ifEmpty { return emptyList() }
+    konst custom = attributes.custom ?: return emptyList()
+    konst annotations = custom.annotations.ifEmpty { return emptyList() }
 
     for (containerSymbol in custom.containerSymbols) {
         when (phase) {

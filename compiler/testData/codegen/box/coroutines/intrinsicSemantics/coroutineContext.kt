@@ -19,12 +19,12 @@ suspend fun multipleArgs(a: Any, b: Any, c: Any) =
 fun builder(c: suspend () -> String): String {
     var fromSuspension: String? = null
 
-    val continuation = object : Continuation<String> {
-        override val context: CoroutineContext
+    konst continuation = object : Continuation<String> {
+        override konst context: CoroutineContext
             get() = EmptyCoroutineContext
 
-        override fun resumeWith(value: Result<String>) {
-            fromSuspension = try { value.getOrThrow() } catch (exception: Throwable) { "Exception: ${exception}" }
+        override fun resumeWith(konstue: Result<String>) {
+            fromSuspension = try { konstue.getOrThrow() } catch (exception: Throwable) { "Exception: ${exception}" }
         }
     }
 

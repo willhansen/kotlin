@@ -1,7 +1,7 @@
 package transitiveStory.apiJvm.test.smokeTest
 
 import org.junit.Test
-import transitiveStory.apiJvm.beginning.tlAPIval
+import transitiveStory.apiJvm.beginning.tlAPIkonst
 import kotlin.test.assertEquals
 
 class KClassForTheSmokeTestFromApi {
@@ -11,7 +11,7 @@ class SomeTestInApiJVM {
     @Test
     fun some() {
         println("I'm simple test in `api-jvm` module")
-        assertEquals(tlAPIval, 42)
+        assertEquals(tlAPIkonst, 42)
     }
 
     // KT-33573

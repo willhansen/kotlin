@@ -13,21 +13,21 @@ abstract class Adapter {
 }
 
 @JsExport
-class TwoArgumentsWrapper(val adapter: Adapter) {
+class TwoArgumentsWrapper(konst adapter: Adapter) {
     fun method(a: String, b: String) {
         adapter.method(a, b)
     }
 }
 
 @JsExport
-class OneArgumentWrapper(val adapter: Adapter) {
+class OneArgumentWrapper(konst adapter: Adapter) {
     fun method(param: String) {
         adapter.method(param)
     }
 }
 
 @JsExport
-class NoArgumentsWrapper(val adapter: Adapter) {
+class NoArgumentsWrapper(konst adapter: Adapter) {
     fun method() {
         adapter.method()
     }

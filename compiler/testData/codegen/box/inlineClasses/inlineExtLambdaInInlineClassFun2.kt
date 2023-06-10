@@ -5,7 +5,7 @@
 inline fun <T> T.runInlineExt(fn: T.() -> String) = fn()
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R(private val r: String) {
+konstue class R(private konst r: String) {
     fun test() = runInlineExt { r }
 }
 

@@ -24,22 +24,22 @@ Use the following naming scheme:
 */
 
 abstract class KotlinNativeBinaryContainer @Inject constructor(
-    override val target: KotlinNativeTarget,
+    override konst target: KotlinNativeTarget,
     backingContainer: DomainObjectSet<NativeBinary>
 ) : AbstractKotlinNativeBinaryContainer(),
     DomainObjectSet<NativeBinary> by backingContainer
 {
-    final override val project: Project
+    final override konst project: Project
         get() = target.project
 
-    private val defaultCompilation: KotlinNativeCompilation
+    private konst defaultCompilation: KotlinNativeCompilation
         get() = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
 
-    private val defaultTestCompilation: KotlinNativeCompilation
+    private konst defaultTestCompilation: KotlinNativeCompilation
         get() = target.compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
 
-    private val nameToBinary = mutableMapOf<String, NativeBinary>()
-    internal val prefixGroups: NamedDomainObjectSet<PrefixGroup> = project.container(PrefixGroup::class.java)
+    private konst nameToBinary = mutableMapOf<String, NativeBinary>()
+    internal konst prefixGroups: NamedDomainObjectSet<PrefixGroup> = project.container(PrefixGroup::class.java)
 
     // region DSL getters.
     private inline fun <reified T : NativeBinary> getBinary(
@@ -47,9 +47,9 @@ abstract class KotlinNativeBinaryContainer @Inject constructor(
         buildType: NativeBuildType,
         outputKind: NativeOutputKind
     ): T {
-        val classifier = outputKind.taskNameClassifier
-        val name = generateBinaryName(namePrefix, buildType, classifier)
-        val binary = getByName(name)
+        konst classifier = outputKind.taskNameClassifier
+        konst name = generateBinaryName(namePrefix, buildType, classifier)
+        konst binary = getByName(name)
         require(binary is T && binary.buildType == buildType) {
             "Binary $name has incorrect outputKind or build type.\n" +
                     "Expected: ${buildType.getName()} $classifier. Actual: ${binary.buildType.getName()} ${binary.outputKind.taskNameClassifier}."
@@ -62,9 +62,9 @@ abstract class KotlinNativeBinaryContainer @Inject constructor(
         buildType: NativeBuildType,
         outputKind: NativeOutputKind
     ): T? {
-        val classifier = outputKind.taskNameClassifier
-        val name = generateBinaryName(namePrefix, buildType, classifier)
-        val binary = findByName(name)
+        konst classifier = outputKind.taskNameClassifier
+        konst name = generateBinaryName(namePrefix, buildType, classifier)
+        konst binary = findByName(name)
         return if (binary is T && binary.buildType == buildType) {
             binary
         } else {
@@ -125,12 +125,12 @@ abstract class KotlinNativeBinaryContainer @Inject constructor(
         create: (name: String, baseName: String, buildType: NativeBuildType, compilation: KotlinNativeCompilation) -> T,
         configure: T.() -> Unit
     ) {
-        val prefixGroup = prefixGroups.findByName(namePrefix) ?: PrefixGroup(namePrefix).also {
+        konst prefixGroup = prefixGroups.findByName(namePrefix) ?: PrefixGroup(namePrefix).also {
             prefixGroups.add(it)
         }
 
         buildTypes.forEach { buildType ->
-            val name = generateBinaryName(namePrefix, buildType, outputKind.taskNameClassifier)
+            konst name = generateBinaryName(namePrefix, buildType, outputKind.taskNameClassifier)
 
             require(name !in nameToBinary) {
                 "Cannot create binary $name: binary with such a name already exists"
@@ -140,8 +140,8 @@ abstract class KotlinNativeBinaryContainer @Inject constructor(
                 "Cannot create ${outputKind.description}: $name. Binaries of this kind are not available for target ${target.name}"
             }
 
-            val compilation = if (outputKind == NativeOutputKind.TEST) defaultTestCompilation else defaultCompilation
-            val binary = create(name, baseName, buildType, compilation)
+            konst compilation = if (outputKind == NativeOutputKind.TEST) defaultTestCompilation else defaultCompilation
+            konst binary = create(name, baseName, buildType, compilation)
             add(binary)
             prefixGroup.binaries.add(binary)
             nameToBinary[binary.name] = binary
@@ -154,14 +154,14 @@ abstract class KotlinNativeBinaryContainer @Inject constructor(
     }
 
     companion object {
-        internal val DEFAULT_TEST_BUILD_TYPE = NativeBuildType.DEBUG
-        internal val DEFAULT_TEST_NAME_PREFIX = "test"
+        internal konst DEFAULT_TEST_BUILD_TYPE = NativeBuildType.DEBUG
+        internal konst DEFAULT_TEST_NAME_PREFIX = "test"
 
         internal fun generateBinaryName(prefix: String, buildType: NativeBuildType, outputKindClassifier: String) =
             lowerCamelCaseName(prefix, buildType.getName(), outputKindClassifier)
 
         internal fun extractPrefixFromBinaryName(name: String, buildType: NativeBuildType, outputKindClassifier: String): String {
-            val suffix = lowerCamelCaseName(buildType.getName(), outputKindClassifier)
+            konst suffix = lowerCamelCaseName(buildType.getName(), outputKindClassifier)
             return if (name == suffix)
                 ""
             else
@@ -169,7 +169,7 @@ abstract class KotlinNativeBinaryContainer @Inject constructor(
         }
 
         // TODO: Remove in 1.3.50.
-        private val GET_TEST_DEPRECATION_WARNING = """
+        private konst GET_TEST_DEPRECATION_WARNING = """
             |
             |Probably you are accessing the default test binary using the 'binaries.getExecutable("$DEFAULT_TEST_NAME_PREFIX", ${DEFAULT_TEST_BUILD_TYPE.name})' method.
             |Since 1.3.40 tests are represented by a separate binary type. To get the default test binary, use:
@@ -178,7 +178,7 @@ abstract class KotlinNativeBinaryContainer @Inject constructor(
             |
             """.trimMargin()
 
-        private val FIND_TEST_DEPRECATED_WARNING = """
+        private konst FIND_TEST_DEPRECATED_WARNING = """
             |
             |Probably you are accessing the default test binary using the 'binaries.findExecutable("$DEFAULT_TEST_NAME_PREFIX", ${DEFAULT_TEST_BUILD_TYPE.name})' method.
             |Since 1.3.40 tests are represented by a separate binary type. To get the default test binary, use:
@@ -190,12 +190,12 @@ abstract class KotlinNativeBinaryContainer @Inject constructor(
     // endregion.
 
     internal inner class PrefixGroup(
-        private val name: String
+        private konst name: String
     ) : Named {
         override fun getName(): String = name
-        val binaries: DomainObjectSet<NativeBinary> = project.objects.domainObjectSet(NativeBinary::class.java)
+        konst binaries: DomainObjectSet<NativeBinary> = project.objects.domainObjectSet(NativeBinary::class.java)
 
-        val linkTaskName: String
+        konst linkTaskName: String
             get() = lowerCamelCaseName("link", name, target.targetName)
     }
 }

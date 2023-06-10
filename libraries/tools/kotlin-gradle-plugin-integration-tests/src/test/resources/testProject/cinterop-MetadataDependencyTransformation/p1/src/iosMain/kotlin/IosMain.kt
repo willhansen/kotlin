@@ -8,19 +8,19 @@ import withPosix.getStructFromPosix
 import withPosix.getStructPointerFromPosix
 
 object IosMain {
-    val structFromPosix = getStructFromPosix()
-    val structPointerFromPosix = getStructPointerFromPosix()
+    konst structFromPosix = getStructFromPosix()
+    konst structPointerFromPosix = getStructPointerFromPosix()
 
     object MyStruct {
-        val struct = getMyStructPointer()?.pointed ?: error("Missing my struct")
-        val posixProperty: stat = struct.posixProperty
-        val longProperty: Long = struct.longProperty
-        val doubleProperty: Double = struct.doubleProperty
-        val int32tProperty: Int = struct.int32tProperty
-        val int64TProperty: Long = struct.int64tProperty
-        val appleOnly: Boolean = struct.appleOnlyProperty
-        val iosOnly: Boolean = struct.iosOnlyProperty
+        konst struct = getMyStructPointer()?.pointed ?: error("Missing my struct")
+        konst posixProperty: stat = struct.posixProperty
+        konst longProperty: Long = struct.longProperty
+        konst doubleProperty: Double = struct.doubleProperty
+        konst int32tProperty: Int = struct.int32tProperty
+        konst int64TProperty: Long = struct.int64tProperty
+        konst appleOnly: Boolean = struct.appleOnlyProperty
+        konst iosOnly: Boolean = struct.iosOnlyProperty
     }
 
-    val simple = simpleInterop()
+    konst simple = simpleInterop()
 }

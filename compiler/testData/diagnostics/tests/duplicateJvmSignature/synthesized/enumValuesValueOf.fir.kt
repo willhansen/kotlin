@@ -2,11 +2,11 @@ enum class A {
     A1,
     A2;
 
-    fun valueOf(s: String): A = valueOf(s)
+    fun konstueOf(s: String): A = konstueOf(s)
 
-    fun valueOf() = "OK"
+    fun konstueOf() = "OK"
 
-    fun values(): Array<A> = null!!
+    fun konstues(): Array<A> = null!!
 
-    fun values(x: String) = x
+    fun konstues(x: String) = x
 }

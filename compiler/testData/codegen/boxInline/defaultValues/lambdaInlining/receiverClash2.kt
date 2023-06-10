@@ -16,6 +16,6 @@ import test.*
 fun String.test(): String = "INLINE".inlineFun({ this })
 
 fun box(): String {
-    val result = "TEST".test()
+    konst result = "TEST".test()
     return if (result == "INLINE TEST INLINE") "OK" else "fail 1: $result"
 }

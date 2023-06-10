@@ -38,7 +38,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -49,7 +49,7 @@ KtKotlinPropertySymbol:
   hasBackingField: true
   hasGetter: true
   hasSetter: false
-  initializer: KtNonConstantInitializerValue(val abc: Int)
+  initializer: KtNonConstantInitializerValue(konst abc: Int)
   isConst: false
   isDelegatedProperty: false
   isExtension: false

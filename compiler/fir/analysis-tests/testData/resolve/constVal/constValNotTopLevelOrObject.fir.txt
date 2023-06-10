@@ -1,12 +1,12 @@
 FILE: constValNotTopLevelOrObject.kt
-    public final const val a: R|kotlin/Int| = Int(1)
+    public final const konst a: R|kotlin/Int| = Int(1)
         public get(): R|kotlin/Int|
     public final object B : R|kotlin/Any| {
         private constructor(): R|B| {
             super<R|kotlin/Any|>()
         }
 
-        public final const val b: R|kotlin/Int| = Int(2)
+        public final const konst b: R|kotlin/Int| = Int(2)
             public get(): R|kotlin/Int|
 
     }
@@ -15,10 +15,10 @@ FILE: constValNotTopLevelOrObject.kt
             super<R|kotlin/Any|>()
         }
 
-        public final const val b: R|kotlin/Boolean| = R|<local>/b|
+        public final const konst b: R|kotlin/Boolean| = R|<local>/b|
             public get(): R|kotlin/Boolean|
 
-        public final const val c: R|kotlin/Int| = Int(3)
+        public final const konst c: R|kotlin/Int| = Int(3)
             public get(): R|kotlin/Int|
 
     }
@@ -32,7 +32,7 @@ FILE: constValNotTopLevelOrObject.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final const val e: R|kotlin/Int| = Int(4)
+            public final const konst e: R|kotlin/Int| = Int(4)
                 public get(): R|kotlin/Int|
 
         }
@@ -42,17 +42,17 @@ FILE: constValNotTopLevelOrObject.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final const val k: R|kotlin/Int| = Int(4)
+            public final const konst k: R|kotlin/Int| = Int(4)
                 public get(): R|kotlin/Int|
 
         }
 
-        public final val M: R|kotlin/Any| = object : R|kotlin/Any| {
+        public final konst M: R|kotlin/Any| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
 
-            public final const val m: R|kotlin/Int| = Int(3)
+            public final const konst m: R|kotlin/Int| = Int(3)
                 public get(): R|kotlin/Int|
 
         }
@@ -64,17 +64,17 @@ FILE: constValNotTopLevelOrObject.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open val y: R|kotlin/Int| = Int(8)
+            public open konst y: R|kotlin/Int| = Int(8)
                 public get(): R|kotlin/Int|
 
         }
 
-        public final val t: R|D.O| = object : R|D.O| {
+        public final konst t: R|D.O| = object : R|D.O| {
             private constructor(): R|<anonymous>| {
                 super<R|D.O|>()
             }
 
-            public final const val x: R|kotlin/Int| = Int(15)
+            public final const konst x: R|kotlin/Int| = Int(15)
                 public get(): R|kotlin/Int|
 
         }
@@ -92,12 +92,12 @@ FILE: constValNotTopLevelOrObject.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final const val e: R|kotlin/Int| = Int(4)
+            public final const konst e: R|kotlin/Int| = Int(4)
                 public get(): R|kotlin/Int|
 
         }
 
     }
     public final fun foo(): R|kotlin/Unit| {
-        lval a: R|kotlin/String| = String(2)
+        lkonst a: R|kotlin/String| = String(2)
     }

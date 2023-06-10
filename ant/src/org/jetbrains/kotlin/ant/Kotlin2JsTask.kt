@@ -20,7 +20,7 @@ import org.apache.tools.ant.types.Path
 import java.io.File
 
 class Kotlin2JsTask : KotlinCompilerBaseTask() {
-    override val compilerFqName = "org.jetbrains.kotlin.cli.js.K2JSCompiler"
+    override konst compilerFqName = "org.jetbrains.kotlin.cli.js.K2JSCompiler"
 
     var libraries: Path? = null
     var outputPrefix: File? = null
@@ -36,7 +36,7 @@ class Kotlin2JsTask : KotlinCompilerBaseTask() {
     var main: String? = null
 
     fun createLibraries(): Path {
-        val libraryPaths = libraries ?: return Path(getProject()).also { libraries = it }
+        konst libraryPaths = libraries ?: return Path(getProject()).also { libraries = it }
         return libraryPaths.createPath()
     }
 

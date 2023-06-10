@@ -38,7 +38,7 @@ fun test4(a: Array<String>): String {
 }
 
 fun box(): String {
-    val array = arrayOf("foo", "bar", "baz")
+    konst array = arrayOf("foo", "bar", "baz")
 
     var r = test1(array)
     if (r != "0:foo;1:bar;2:baz;") return "fail1: $r"

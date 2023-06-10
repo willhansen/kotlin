@@ -19,7 +19,7 @@ abstract class Sub : Super() {
         s.name = s.<!INVISIBLE_MEMBER!>name<!>
         s.setName("")
 
-        val anon1 = object : Super() {
+        konst anon1 = object : Super() {
             fun testAnon() {
                 s.<!INVISIBLE_MEMBER!>name<!>
                 s.<!INVISIBLE_MEMBER!>getName<!>()
@@ -29,7 +29,7 @@ abstract class Sub : Super() {
             }
         }
 
-        val anon2 = object {
+        konst anon2 = object {
             fun testAnon() {
                 s.<!INVISIBLE_MEMBER!>name<!>
                 s.<!INVISIBLE_MEMBER!>getName<!>()
@@ -69,7 +69,7 @@ abstract class NonSub {
         s.<!INVISIBLE_MEMBER!>name<!> = s.<!INVISIBLE_MEMBER!>name<!>
         s.setName("")
 
-        val anon1 = object : Super() {
+        konst anon1 = object : Super() {
             fun testAnon() {
                 s.<!INVISIBLE_MEMBER!>name<!>
                 s.<!INVISIBLE_MEMBER!>getName<!>()
@@ -79,7 +79,7 @@ abstract class NonSub {
             }
         }
 
-        val anon2 = object {
+        konst anon2 = object {
             fun testAnon() {
                 s.<!INVISIBLE_MEMBER!>name<!>
                 s.<!INVISIBLE_MEMBER!>getName<!>()

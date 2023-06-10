@@ -7,6 +7,6 @@ open class A {
             }
 }
 
-class B(val x: String) : A()
+class B(konst x: String) : A()
 
 fun box() = B("OK").f()

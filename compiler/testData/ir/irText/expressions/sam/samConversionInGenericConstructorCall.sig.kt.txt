@@ -5,7 +5,7 @@ class Outer<T1 : Any?> {
   // CHECK:
   //   Mangled name: Outer{}j11
   //   Public signature: /Outer.j11|3042103907784946942[0]
-  val j11: J<T1, T1>
+  konst j11: J<T1, T1>
     // CHECK JVM_IR:
     //   Mangled name: Outer#<get-j11>(){}J<1:0,1:0>
     //   Public signature: /Outer.j11.<get-j11>|1291746945058754296[0]
@@ -18,7 +18,7 @@ class Outer<T1 : Any?> {
     // CHECK:
     //   Mangled name: Outer.Inner{}j12
     //   Public signature: /Outer.Inner.j12|8035547960084394556[0]
-    val j12: J<T1, T2>
+    konst j12: J<T1, T2>
       // CHECK JVM_IR:
       //   Mangled name: Outer.Inner#<get-j12>(){}J<2:0,1:0>
       //   Public signature: /Outer.Inner.j12.<get-j12>|-5099511302970927970[0]

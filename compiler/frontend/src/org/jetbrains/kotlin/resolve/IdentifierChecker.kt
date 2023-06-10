@@ -39,7 +39,7 @@ class IdentifierCheckerClashesResolver : PlatformExtensionsClashResolver<Identif
 }
 
 // Launches every underlying checker
-class CompositeIdentifierChecker(private val identifierCheckers: List<IdentifierChecker>) : IdentifierChecker {
+class CompositeIdentifierChecker(private konst identifierCheckers: List<IdentifierChecker>) : IdentifierChecker {
     override fun checkIdentifier(simpleNameExpression: KtSimpleNameExpression, diagnosticHolder: DiagnosticSink) {
         identifierCheckers.forEach { it.checkIdentifier(simpleNameExpression, diagnosticHolder) }
     }

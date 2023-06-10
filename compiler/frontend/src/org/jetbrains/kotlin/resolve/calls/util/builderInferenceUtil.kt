@@ -7,9 +7,9 @@ package org.jetbrains.kotlin.resolve.calls.util
 
 import org.jetbrains.kotlin.psi.KtLambdaExpression
 
-class BuilderLambdaLabelingInfo(val builderLambda: KtLambdaExpression?) {
+class BuilderLambdaLabelingInfo(konst builderLambda: KtLambdaExpression?) {
     companion object {
-        val EMPTY = BuilderLambdaLabelingInfo(null)
+        konst EMPTY = BuilderLambdaLabelingInfo(null)
     }
 
     override fun toString(): String {

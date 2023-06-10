@@ -2,10 +2,10 @@
 package foo
 
 open class Base {
-    val i: Int
-    val i2: Int
-    val i3: Int
-    val bs: String
+    konst i: Int
+    konst i2: Int
+    konst i3: Int
+    konst bs: String
 
     constructor(s:String) {bs = s}
 
@@ -19,8 +19,8 @@ open class Base {
 }
 
 class Test: Base {
-    val t1: Int
-    val t2: Int
+    konst t1: Int
+    konst t2: Int
 
     constructor(tt1: Int, tt2:Int) : super("OK") {
         t1 = tt1
@@ -30,6 +30,6 @@ class Test: Base {
 
 fun box(): String {
 
-    val t = Test(1, 2)
+    konst t = Test(1, 2)
     return t.foo()
 }

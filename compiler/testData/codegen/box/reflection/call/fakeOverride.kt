@@ -8,6 +8,6 @@ open class A {
 class B : A()
 
 fun box(): String {
-    val foo = B::class.members.single { it.name == "foo" }
+    konst foo = B::class.members.single { it.name == "foo" }
     return foo.call(B()) as String
 }

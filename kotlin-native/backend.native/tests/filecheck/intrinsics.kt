@@ -19,7 +19,7 @@ fun ieee754(a: Float, b: Float): Boolean {
 
 // CHECK-LABEL: "kfun:#main(){}"
 fun main() {
-    val x = and(1, 2)
-    val y = ieee754(0.0f, 1.0f)
+    konst x = and(1, 2)
+    konst y = ieee754(0.0f, 1.0f)
 // CHECK-LABEL: epilogue
 }

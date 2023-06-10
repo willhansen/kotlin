@@ -2,6 +2,6 @@
 package test
 
 public object Obj {
-    public val v: String = { "val" }()
+    public konst v: String = { "konst" }()
     public fun f(): String = "fun"
 }

@@ -1,4 +1,4 @@
-enum class Test(val str: String = "OK") {
+enum class Test(konst str: String = "OK") {
     OK
 }
 

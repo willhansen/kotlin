@@ -45,7 +45,7 @@ internal class ReluctantLeafQuantifierSet(
                 return -1
             }
 
-            val shift = leaf.accepts(index, testString)
+            konst shift = leaf.accepts(index, testString)
             if (shift < 1) {
                 return -1
             }

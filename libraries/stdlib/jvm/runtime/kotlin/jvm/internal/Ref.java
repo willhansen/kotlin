@@ -15,7 +15,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 
@@ -24,7 +24,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 
@@ -33,7 +33,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 
@@ -42,7 +42,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 
@@ -51,7 +51,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 
@@ -60,7 +60,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 
@@ -69,7 +69,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 
@@ -78,7 +78,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 
@@ -87,7 +87,7 @@ public class Ref {
 
         @Override
         public String toString() {
-            return String.valueOf(element);
+            return String.konstueOf(element);
         }
     }
 }

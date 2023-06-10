@@ -5,7 +5,7 @@ import java.util.*
 import java.util.concurrent.*
 
 fun bar(): String? = null
-val nullableInt: Int? = null
+konst nullableInt: Int? = null
 
 fun hashMapTest() {
     var x: HashMap<String, Int> = HashMap<String, Int>()
@@ -19,16 +19,16 @@ fun hashMapTest() {
     x[""] = <!ARGUMENT_TYPE_MISMATCH!>nullableInt<!>
     x[""] = 1
 
-    val b1: MutableMap<String, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b2: MutableMap<String, Int> = x
-    val b3: Map<String?, Int> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b4: Map<String?, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b5: Map<String, Int?> = x
+    konst b1: MutableMap<String, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b2: MutableMap<String, Int> = x
+    konst b3: Map<String?, Int> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b4: Map<String?, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b5: Map<String, Int?> = x
 
-    val b6: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x[""]<!>
-    val b7: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x.get("")<!>
+    konst b6: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x[""]<!>
+    konst b7: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x.get("")<!>
 
-    val b8: Int? = x.get("")
+    konst b8: Int? = x.get("")
 }
 
 fun treeMapTest() {
@@ -43,16 +43,16 @@ fun treeMapTest() {
     x[""] = <!ARGUMENT_TYPE_MISMATCH!>nullableInt<!>
     x[""] = 1
 
-    val b1: MutableMap<String, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b2: MutableMap<String, Int> = x
-    val b3: Map<String?, Int> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b4: Map<String?, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b5: Map<String, Int?> = x
+    konst b1: MutableMap<String, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b2: MutableMap<String, Int> = x
+    konst b3: Map<String?, Int> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b4: Map<String?, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b5: Map<String, Int?> = x
 
-    val b6: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x[""]<!>
-    val b7: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x.get("")<!>
+    konst b6: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x[""]<!>
+    konst b7: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x.get("")<!>
 
-    val b8: Int? = x.get("")
+    konst b8: Int? = x.get("")
 }
 
 fun concurrentHashMapTest() {
@@ -67,14 +67,14 @@ fun concurrentHashMapTest() {
     x[""] = <!ARGUMENT_TYPE_MISMATCH!>nullableInt<!>
     x[""] = 1
 
-    val b1: MutableMap<String, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b2: MutableMap<String, Int> = x
-    val b3: Map<String?, Int> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b4: Map<String?, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b5: Map<String, Int?> = x
+    konst b1: MutableMap<String, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b2: MutableMap<String, Int> = x
+    konst b3: Map<String?, Int> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b4: Map<String?, Int?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b5: Map<String, Int?> = x
 
-    val b6: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x[""]<!>
-    val b7: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x.get("")<!>
+    konst b6: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x[""]<!>
+    konst b7: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>x.get("")<!>
 
-    val b8: Int? = x.get("")
+    konst b8: Int? = x.get("")
 }

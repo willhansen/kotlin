@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.asJava.elements.KtLightMember
 import org.jetbrains.kotlin.psi.KtDeclaration
 
 open class KtLightFieldForDecompiledDeclaration(
-    private val fldDelegate: PsiField,
-    private val fldParent: KtLightClass,
-    override val lightMemberOrigin: LightMemberOriginForCompiledField
+    private konst fldDelegate: PsiField,
+    private konst fldParent: KtLightClass,
+    override konst lightMemberOrigin: LightMemberOriginForCompiledField
 ) : KtLightElementBase(fldParent), PsiField, KtLightFieldForSourceDeclarationSupport, KtLightMember<PsiField>, PsiVariableEx {
 
-    override val kotlinOrigin: KtDeclaration? get() = lightMemberOrigin.originalElement
+    override konst kotlinOrigin: KtDeclaration? get() = lightMemberOrigin.originalElement
 
     override fun hasModifierProperty(name: String): Boolean = fldDelegate.hasModifierProperty(name)
 
@@ -74,10 +74,10 @@ open class KtLightFieldForDecompiledDeclaration(
 
     override fun isValid(): Boolean = parent.isValid
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
         return this == another ||
-                another is KtLightFieldForDecompiledDeclaration && fldDelegate.isEquivalentTo(another.fldDelegate) ||
-                fldDelegate.isEquivalentTo(another)
+                another is KtLightFieldForDecompiledDeclaration && fldDelegate.isEquikonstentTo(another.fldDelegate) ||
+                fldDelegate.isEquikonstentTo(another)
     }
 
     override fun accept(visitor: PsiElementVisitor) {

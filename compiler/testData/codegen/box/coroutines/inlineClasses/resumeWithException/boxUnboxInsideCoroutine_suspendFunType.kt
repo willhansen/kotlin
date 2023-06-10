@@ -13,7 +13,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 var c: Continuation<Any>? = null
 
@@ -26,7 +26,7 @@ fun suspendFunId(block: suspend () -> IC) = block
 
 class Test1() {
 
-    suspend fun <T> foo(value: T): T = value
+    suspend fun <T> foo(konstue: T): T = konstue
 
     suspend fun qux(ss: IC): IC = IC(ss.s)
 

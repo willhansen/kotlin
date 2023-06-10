@@ -13,7 +13,7 @@ import kotlin.wasm.unsafe.UnsafeWasmMemoryApi
 
 internal typealias ExternalInterfaceType = JsAny
 
-internal class JsExternalBox @WasmPrimitiveConstructor constructor(val ref: ExternalInterfaceType) {
+internal class JsExternalBox @WasmPrimitiveConstructor constructor(konst ref: ExternalInterfaceType) {
     override fun toString(): String =
         externrefToString(ref)
 
@@ -199,18 +199,18 @@ internal fun importStringFromWasm(address: Int, length: Int, prefix: ExternalInt
 }
 
 internal fun kotlinToJsStringAdapter(x: String?): JsString? {
-    // Using nullable String to represent default value
-    // for parameters with default values
+    // Using nullable String to represent default konstue
+    // for parameters with default konstues
     if (x == null) return null
     if (x.isEmpty()) return jsEmptyString
 
-    val srcArray = x.chars
-    val stringLength = srcArray.len()
-    val maxStringLength = STRING_INTEROP_MEM_BUFFER_SIZE / CHAR_SIZE_BYTES
+    konst srcArray = x.chars
+    konst stringLength = srcArray.len()
+    konst maxStringLength = STRING_INTEROP_MEM_BUFFER_SIZE / CHAR_SIZE_BYTES
 
     @OptIn(UnsafeWasmMemoryApi::class)
     withScopedMemoryAllocator { allocator ->
-        val memBuffer = allocator.allocate(stringLength.coerceAtMost(maxStringLength) * CHAR_SIZE_BYTES).address.toInt()
+        konst memBuffer = allocator.allocate(stringLength.coerceAtMost(maxStringLength) * CHAR_SIZE_BYTES).address.toInt()
 
         var result: ExternalInterfaceType? = null
         var srcStartIndex = 0
@@ -243,19 +243,19 @@ internal fun jsExportStringToWasm(src: ExternalInterfaceType, srcOffset: Int, sr
     """)
 }
 
-private const val STRING_INTEROP_MEM_BUFFER_SIZE = 65_536 // 1 page 4KiB
+private const konst STRING_INTEROP_MEM_BUFFER_SIZE = 65_536 // 1 page 4KiB
 
 internal fun jsToKotlinStringAdapter(x: ExternalInterfaceType): String {
-    val stringLength = stringLength(x)
-    val dstArray = WasmCharArray(stringLength)
+    konst stringLength = stringLength(x)
+    konst dstArray = WasmCharArray(stringLength)
     if (stringLength == 0) {
         return dstArray.createString()
     }
 
     @OptIn(UnsafeWasmMemoryApi::class)
     withScopedMemoryAllocator { allocator ->
-        val maxStringLength = STRING_INTEROP_MEM_BUFFER_SIZE / CHAR_SIZE_BYTES
-        val memBuffer = allocator.allocate(stringLength.coerceAtMost(maxStringLength) * CHAR_SIZE_BYTES).address.toInt()
+        konst maxStringLength = STRING_INTEROP_MEM_BUFFER_SIZE / CHAR_SIZE_BYTES
+        konst memBuffer = allocator.allocate(stringLength.coerceAtMost(maxStringLength) * CHAR_SIZE_BYTES).address.toInt()
 
         var srcStartIndex = 0
         while (srcStartIndex < stringLength - maxStringLength) {
@@ -282,39 +282,39 @@ private fun getJsFalse(): JsBoolean =
     js("false")
 
 private var _jsEmptyString: JsString? = null
-private val jsEmptyString: JsString
+private konst jsEmptyString: JsString
     get() {
-        var value = _jsEmptyString
-        if (value == null) {
-            value = getJsEmptyString()
-            _jsEmptyString = value
+        var konstue = _jsEmptyString
+        if (konstue == null) {
+            konstue = getJsEmptyString()
+            _jsEmptyString = konstue
         }
 
-        return value
+        return konstue
     }
 
 private var _jsTrue: JsBoolean? = null
-private val jsTrue: JsBoolean
+private konst jsTrue: JsBoolean
     get() {
-        var value = _jsTrue
-        if (value == null) {
-            value = getJsTrue()
-            _jsTrue = value
+        var konstue = _jsTrue
+        if (konstue == null) {
+            konstue = getJsTrue()
+            _jsTrue = konstue
         }
 
-        return value
+        return konstue
     }
 
 private var _jsFalse: JsBoolean? = null
-private val jsFalse: JsBoolean
+private konst jsFalse: JsBoolean
     get() {
-        var value = _jsFalse
-        if (value == null) {
-            value = getJsFalse()
-            _jsFalse = value
+        var konstue = _jsFalse
+        if (konstue == null) {
+            konstue = getJsFalse()
+            _jsFalse = konstue
         }
 
-        return value
+        return konstue
     }
 
 internal fun numberToDoubleAdapter(x: Number): Double =

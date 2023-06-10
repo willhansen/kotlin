@@ -48,21 +48,21 @@ internal fun KtAnalysisSession.stringRepresentation(any: Any): String = with(any
             append("(")
             (this@with as? KtFunctionSymbol)?.receiverParameter?.let { receiver ->
                 append("<extension receiver>: ${receiver.type.render()}")
-                if (valueParameters.isNotEmpty()) append(", ")
+                if (konstueParameters.isNotEmpty()) append(", ")
             }
 
             @Suppress("DEPRECATION")
             (this@with as? KtCallableSymbol)?.getDispatchReceiverType()?.let { dispatchReceiverType ->
                 append("<dispatch receiver>: ${dispatchReceiverType.render()}")
-                if (valueParameters.isNotEmpty()) append(", ")
+                if (konstueParameters.isNotEmpty()) append(", ")
             }
-            valueParameters.joinTo(this) { stringRepresentation(it) }
+            konstueParameters.joinTo(this) { stringRepresentation(it) }
             append(")")
             append(": ${returnType.render()}")
         }
         is KtValueParameterSymbol -> "${if (isVararg) "vararg " else ""}$name: ${returnType.render()}"
         is KtTypeParameterSymbol -> this.nameOrAnonymous.asString()
-        is KtVariableSymbol -> "${if (isVal) "val" else "var"} $name: ${returnType.render()}"
+        is KtVariableSymbol -> "${if (isVal) "konst" else "var"} $name: ${returnType.render()}"
         is KtSymbol -> DebugSymbolRenderer().render(this)
         is Boolean -> toString()
         is Map<*, *> -> if (isEmpty()) "{}" else entries.joinToString(
@@ -80,7 +80,7 @@ internal fun KtAnalysisSession.stringRepresentation(any: Any): String = with(any
         is PsiElement -> this.text
         is KtSubstitutor.Empty -> "<empty substitutor>"
         is KtMapBackedSubstitutor -> {
-            val mappingText = getAsMap().entries
+            konst mappingText = getAsMap().entries
                 .joinToString(prefix = "{", postfix = "}") { (k, v) -> stringRepresentation(k) + " = " + v.asStringForDebugging() }
             "<map substitutor: $mappingText>"
         }
@@ -92,23 +92,23 @@ internal fun KtAnalysisSession.stringRepresentation(any: Any): String = with(any
         is CallableId -> toString()
         is KtCallableSignature<*> -> this.stringRepresentation()
         else -> buildString {
-            val clazz = this@with::class
-            val className = clazz.simpleName!!
+            konst clazz = this@with::class
+            konst className = clazz.simpleName!!
             append(className)
             appendLine(":")
             clazz.memberProperties
                 .filter { it.name != "token" && it.visibility == KVisibility.PUBLIC }
                 .joinTo(this, separator = "\n  ", prefix = "  ") { property ->
-                    val name = property.name
+                    konst name = property.name
 
                     @Suppress("UNCHECKED_CAST")
-                    val value = (property as KProperty1<Any, *>).get(this@with)?.let {
+                    konst konstue = (property as KProperty1<Any, *>).get(this@with)?.let {
                         if (className == "KtErrorCallInfo" && name == "candidateCalls") {
                             (it as Collection<KtCall>).sortedWith { call1, call2 -> compareCalls(call1, call2) }
                         } else it
                     }
-                    val valueAsString = value?.let { stringRepresentation(it).indented() }
-                    "$name = $valueAsString"
+                    konst konstueAsString = konstue?.let { stringRepresentation(it).indented() }
+                    "$name = $konstueAsString"
                 }
         }
     }
@@ -121,19 +121,19 @@ private fun KtCallableSignature<*>.stringRepresentation(): String = buildString 
         is KtVariableLikeSignature<*> -> append(KtVariableLikeSignature::class.simpleName)
     }
     appendLine(":")
-    val memberProperties = listOfNotNull(
+    konst memberProperties = listOfNotNull(
         KtVariableLikeSignature<*>::name.takeIf { this@stringRepresentation is KtVariableLikeSignature<*> },
         KtCallableSignature<*>::receiverType,
         KtCallableSignature<*>::returnType,
         KtCallableSignature<*>::symbol,
-        KtFunctionLikeSignature<*>::valueParameters.takeIf { this@stringRepresentation is KtFunctionLikeSignature<*> },
+        KtFunctionLikeSignature<*>::konstueParameters.takeIf { this@stringRepresentation is KtFunctionLikeSignature<*> },
         KtCallableSignature<*>::callableIdIfNonLocal
     )
     memberProperties.joinTo(this, separator = "\n  ", prefix = "  ") { property ->
         @Suppress("UNCHECKED_CAST")
-        val value = (property as KProperty1<Any, *>).get(this@stringRepresentation)
-        val valueAsString = value?.let { stringRepresentation(it).indented() }
-        "${property.name} = $valueAsString"
+        konst konstue = (property as KProperty1<Any, *>).get(this@stringRepresentation)
+        konst konstueAsString = konstue?.let { stringRepresentation(it).indented() }
+        "${property.name} = $konstueAsString"
     }
 }
 
@@ -145,7 +145,7 @@ internal fun KtAnalysisSession.prettyPrintSignature(signature: KtCallableSignatu
             append("fun ")
             signature.receiverType?.let { append('.'); append(it.render(position = Variance.INVARIANT)) }
             append((signature.symbol as KtNamedSymbol).name.asString())
-            printCollection(signature.valueParameters, prefix = "(", postfix = ")") { parameter ->
+            printCollection(signature.konstueParameters, prefix = "(", postfix = ")") { parameter ->
                 append(parameter.name.asString())
                 append(": ")
                 append(parameter.returnType.render(position = Variance.INVARIANT))
@@ -154,9 +154,9 @@ internal fun KtAnalysisSession.prettyPrintSignature(signature: KtCallableSignatu
             append(signature.returnType.render(position = Variance.INVARIANT))
         }
         is KtVariableLikeSignature -> {
-            val symbol = signature.symbol
+            konst symbol = signature.symbol
             if (symbol is KtVariableSymbol) {
-                append(if (symbol.isVal) "val" else "var")
+                append(if (symbol.isVal) "konst" else "var")
                 append(" ")
             }
             signature.receiverType?.let { append('.'); append(it.render(position = Variance.INVARIANT)) }
@@ -169,7 +169,7 @@ internal fun KtAnalysisSession.prettyPrintSignature(signature: KtCallableSignatu
 
 
 internal fun KtAnalysisSession.compareCalls(call1: KtCall, call2: KtCall): Int {
-    // The order of candidate calls is non-deterministic. Sort by symbol string value.
+    // The order of candidate calls is non-deterministic. Sort by symbol string konstue.
     if (call1 !is KtCallableMemberCall<*, *> || call2 !is KtCallableMemberCall<*, *>) return 0
     return stringRepresentation(call1.partiallyAppliedSymbol).compareTo(stringRepresentation(call2.partiallyAppliedSymbol))
 }
@@ -183,14 +183,14 @@ internal fun renderScopeWithParentDeclarations(scope: KtScope): String = prettyP
         else -> error("unknown symbol $this")
     }
 
-    val renderingOptions = KtDeclarationRendererForSource.WITH_SHORT_NAMES.with {
+    konst renderingOptions = KtDeclarationRendererForSource.WITH_SHORT_NAMES.with {
         modifiersRenderer = modifiersRenderer.with {
             modifierFilter = KtRendererModifierFilter.NONE
         }
     }
 
     printCollection(scope.getAllSymbols().toList(), separator = "\n\n") { symbol ->
-        val containingDeclaration = symbol.getContainingSymbol() as KtClassLikeSymbol
+        konst containingDeclaration = symbol.getContainingSymbol() as KtClassLikeSymbol
         append(symbol.render(renderingOptions))
         append(" fromClass ")
         append(containingDeclaration.classIdIfNonLocal?.asString())
@@ -198,7 +198,7 @@ internal fun renderScopeWithParentDeclarations(scope: KtScope): String = prettyP
             appendLine()
             withIndent {
                 printCollection(symbol.typeParameters, separator = "\n") { typeParameter ->
-                    val containingDeclarationForTypeParameter = typeParameter.getContainingSymbol()
+                    konst containingDeclarationForTypeParameter = typeParameter.getContainingSymbol()
                     append(typeParameter.render(renderingOptions))
                     append(" from ")
                     append(containingDeclarationForTypeParameter?.qualifiedNameString())
@@ -206,11 +206,11 @@ internal fun renderScopeWithParentDeclarations(scope: KtScope): String = prettyP
             }
         }
 
-        if (symbol is KtFunctionLikeSymbol && symbol.valueParameters.isNotEmpty()) {
+        if (symbol is KtFunctionLikeSymbol && symbol.konstueParameters.isNotEmpty()) {
             appendLine()
             withIndent {
-                printCollection(symbol.valueParameters, separator = "\n") { typeParameter ->
-                    val containingDeclarationForValueParameter = typeParameter.getContainingSymbol()
+                printCollection(symbol.konstueParameters, separator = "\n") { typeParameter ->
+                    konst containingDeclarationForValueParameter = typeParameter.getContainingSymbol()
                     append(typeParameter.render(renderingOptions))
                     append(" from ")
                     append(containingDeclarationForValueParameter?.qualifiedNameString())

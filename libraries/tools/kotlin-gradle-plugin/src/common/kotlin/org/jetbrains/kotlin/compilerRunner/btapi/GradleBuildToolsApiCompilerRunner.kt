@@ -23,8 +23,8 @@ internal class GradleBuildToolsApiCompilerRunner(
     jdkToolsJar: File?,
     compilerExecutionSettings: CompilerExecutionSettings,
     buildMetrics: BuildMetricsReporter,
-    private val workerExecutor: WorkerExecutor,
-    private val cachedClassLoadersService: Provider<ClassLoadersCachingBuildService>
+    private konst workerExecutor: WorkerExecutor,
+    private konst cachedClassLoadersService: Provider<ClassLoadersCachingBuildService>
 ) : GradleCompilerRunner(taskProvider, jdkToolsJar, compilerExecutionSettings, buildMetrics) {
 
 
@@ -33,7 +33,7 @@ internal class GradleBuildToolsApiCompilerRunner(
         taskOutputsBackup: TaskOutputsBackup?
     ): WorkQueue {
         buildMetrics.addTimeMetric(BuildPerformanceMetric.CALL_WORKER)
-        val workQueue = workerExecutor.noIsolation()
+        konst workQueue = workerExecutor.noIsolation()
         workQueue.submit(BuildToolsApiCompilationWork::class.java) { params ->
             params.compilerWorkArguments.set(workArgs)
             params.classLoadersCachingService.set(cachedClassLoadersService)

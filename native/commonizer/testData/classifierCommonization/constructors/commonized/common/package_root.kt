@@ -38,5 +38,5 @@ expect enum class F {
     BAZ;
 
     // no constructor allowed for enum class
-    val alias: String
+    konst alias: String
 }

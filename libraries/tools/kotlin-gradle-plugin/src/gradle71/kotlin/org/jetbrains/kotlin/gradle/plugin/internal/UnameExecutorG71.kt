@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.gradle.targets.js.nodejs.UnameExecutor
 import java.io.ByteArrayOutputStream
 
 internal class UnameExecutorG71(
-    private val project: Project,
+    private konst project: Project,
 ) : UnameExecutor {
-    override val unameExecResult: Provider<String>
+    override konst unameExecResult: Provider<String>
         get() {
             return project.provider {
-                val out = ByteArrayOutputStream()
-                val cmd = project.exec {
+                konst out = ByteArrayOutputStream()
+                konst cmd = project.exec {
                     it.executable = "uname"
                     it.args = listOf("-m")
                     it.standardOutput = out

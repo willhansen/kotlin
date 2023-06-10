@@ -43,34 +43,34 @@ FILE fqName:<root> fileName:/test.kt
             if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
               $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
                 arg0: CALL 'public final fun testInt (x: kotlin.UInt): kotlin.UInt declared in <root>' type=kotlin.UInt origin=null
-                  x: CONST Int type=kotlin.UInt value=5
+                  x: CONST Int type=kotlin.UInt konstue=5
                 arg1: CALL 'public final fun toUInt (): kotlin.UInt declared in kotlin' type=kotlin.UInt origin=null
-                  $receiver: CONST Int type=kotlin.Int value=5
-            then: CONST String type=kotlin.String value="Fail: testInt(5)"
+                  $receiver: CONST Int type=kotlin.Int konstue=5
+            then: CONST String type=kotlin.String konstue="Fail: testInt(5)"
           BRANCH
             if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
               $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
                 arg0: CALL 'public final fun testInt (x: kotlin.UInt): kotlin.UInt declared in <root>' type=kotlin.UInt origin=null
-                  x: CONST Int type=kotlin.UInt value=5
+                  x: CONST Int type=kotlin.UInt konstue=5
                 arg1: CALL 'public final fun toUInt (): kotlin.UInt declared in kotlin' type=kotlin.UInt origin=null
-                  $receiver: CONST Int type=kotlin.Int value=5
-            then: CONST String type=kotlin.String value="Fail: testInt(x = 5)"
+                  $receiver: CONST Int type=kotlin.Int konstue=5
+            then: CONST String type=kotlin.String konstue="Fail: testInt(x = 5)"
           BRANCH
             if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
               $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
                 arg0: CALL 'public final fun testLong (x: kotlin.ULong): kotlin.ULong declared in <root>' type=kotlin.ULong origin=null
-                  x: CONST Long type=kotlin.ULong value=5
+                  x: CONST Long type=kotlin.ULong konstue=5
                 arg1: CALL 'public final fun toULong (): kotlin.ULong declared in kotlin' type=kotlin.ULong origin=null
-                  $receiver: CONST Long type=kotlin.Long value=5
-            then: CONST String type=kotlin.String value="Fail: testLong(5L)"
+                  $receiver: CONST Long type=kotlin.Long konstue=5
+            then: CONST String type=kotlin.String konstue="Fail: testLong(5L)"
           BRANCH
             if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
               $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
                 arg0: CALL 'public final fun testLong (x: kotlin.ULong): kotlin.ULong declared in <root>' type=kotlin.ULong origin=null
-                  x: CONST Long type=kotlin.ULong value=5
+                  x: CONST Long type=kotlin.ULong konstue=5
                 arg1: CALL 'public final fun toULong (): kotlin.ULong declared in kotlin' type=kotlin.ULong origin=null
-                  $receiver: CONST Long type=kotlin.Long value=5
-            then: CONST String type=kotlin.String value="Fail: testLong(x = 5L)"
+                  $receiver: CONST Long type=kotlin.Long konstue=5
+            then: CONST String type=kotlin.String konstue="Fail: testLong(x = 5L)"
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST String type=kotlin.String value="OK"
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST String type=kotlin.String konstue="OK"

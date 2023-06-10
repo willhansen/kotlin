@@ -15,11 +15,11 @@ FILE: eagerAndPostponedCallableReferences.kt
         ^foo R|kotlin/TODO|()
     }
     public final fun test(): R|kotlin/Unit| {
-        lval a1: R|A| = R|/foo|<R|A|>(::R|/singleA|, ::R|/multiple|)
-        lval a2: R|B| = R|/foo|<R|B|>(::R|/singleB|, ::R|/multiple|)
-        lval a3: R|A| = R|/foo|<R|A|>(::R|/multiple|, ::R|/singleA|)
-        lval a4: R|B| = R|/foo|<R|B|>(::R|/multiple|, ::R|/singleB|)
-        lval a5: R|A| = R|/foo|<R|A|>(::R|/singleA|, ::R|/singleA|)
-        lval a6: R|it(A & B)| = R|/foo|<R|it(A & B)|>(::R|/singleA|, ::R|/singleB|)
+        lkonst a1: R|A| = R|/foo|<R|A|>(::R|/singleA|, ::R|/multiple|)
+        lkonst a2: R|B| = R|/foo|<R|B|>(::R|/singleB|, ::R|/multiple|)
+        lkonst a3: R|A| = R|/foo|<R|A|>(::R|/multiple|, ::R|/singleA|)
+        lkonst a4: R|B| = R|/foo|<R|B|>(::R|/multiple|, ::R|/singleB|)
+        lkonst a5: R|A| = R|/foo|<R|A|>(::R|/singleA|, ::R|/singleA|)
+        lkonst a6: R|it(A & B)| = R|/foo|<R|it(A & B)|>(::R|/singleA|, ::R|/singleB|)
         R|/foo<CS errors: /foo>#|<<ERROR TYPE REF: Cannot infer argument for type parameter T>>(::<Ambiguity: multiple, [/multiple, /multiple]>#, ::<Ambiguity: multiple, [/multiple, /multiple]>#)
     }

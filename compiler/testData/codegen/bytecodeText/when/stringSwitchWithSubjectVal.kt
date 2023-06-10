@@ -1,5 +1,5 @@
 fun foo(x: String): String {
-    return when (val y = x) {
+    return when (konst y = x) {
         "1" -> "one"
         "2" -> "two"
         "3" -> "two and one"

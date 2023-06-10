@@ -1,21 +1,21 @@
 interface B {
     @A
-    val Array<Int>.a: Int
+    konst Array<Int>.a: Int
 
     @A
-    val Array<Array<Int>>.b: Int
+    konst Array<Array<Int>>.b: Int
 
     @A
-    val Array<IntArray>.c: Int
+    konst Array<IntArray>.c: Int
 
     @A
-    val Array<*>.d: Int
+    konst Array<*>.d: Int
 
     @A
-    val Array<out String>.e: Int
+    konst Array<out String>.e: Int
 
     @A
-    val Array<in String>.f: Int
+    konst Array<in String>.f: Int
 }
 
 annotation class A

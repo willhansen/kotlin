@@ -32,33 +32,33 @@ import org.jetbrains.kotlin.resolve.checkers.OptInNames.OPT_IN_ANNOTATION_CLASS
 
 object FirOptInAnnotationCallChecker : FirAnnotationCallChecker() {
     override fun check(expression: FirAnnotationCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val lookupTag = expression.annotationTypeRef.coneTypeSafe<ConeClassLikeType>()?.lookupTag ?: return
-        val classId = lookupTag.classId
-        val isRequiresOptIn = classId == OptInNames.REQUIRES_OPT_IN_CLASS_ID
-        val isOptIn = classId == OptInNames.OPT_IN_CLASS_ID
-        val isSubclassOptIn = classId == OptInNames.SUBCLASS_OPT_IN_REQUIRED_CLASS_ID
+        konst lookupTag = expression.annotationTypeRef.coneTypeSafe<ConeClassLikeType>()?.lookupTag ?: return
+        konst classId = lookupTag.classId
+        konst isRequiresOptIn = classId == OptInNames.REQUIRES_OPT_IN_CLASS_ID
+        konst isOptIn = classId == OptInNames.OPT_IN_CLASS_ID
+        konst isSubclassOptIn = classId == OptInNames.SUBCLASS_OPT_IN_REQUIRED_CLASS_ID
         if (isRequiresOptIn || isOptIn) {
             checkOptInIsEnabled(expression.source, context, reporter)
             if (isOptIn) {
-                val arguments = expression.arguments
+                konst arguments = expression.arguments
                 if (arguments.isEmpty()) {
                     reporter.reportOn(expression.source, FirErrors.OPT_IN_WITHOUT_ARGUMENTS, context)
                 } else {
-                    val annotationClasses = expression.findArgumentByName(OPT_IN_ANNOTATION_CLASS)
+                    konst annotationClasses = expression.findArgumentByName(OPT_IN_ANNOTATION_CLASS)
                     for (classSymbol in annotationClasses?.extractClassesFromArgument(context.session).orEmpty()) {
                         checkOptInArgumentIsMarker(classSymbol, expression.source, reporter, context)
                     }
                 }
             }
         } else if (isSubclassOptIn) {
-            val declaration = context.containingDeclarations.lastOrNull() as? FirClass
+            konst declaration = context.containingDeclarations.lastOrNull() as? FirClass
             if (declaration != null) {
-                val kind = declaration.classKind
+                konst kind = declaration.classKind
                 if (kind == ClassKind.ENUM_CLASS || kind == ClassKind.OBJECT || kind == ClassKind.ANNOTATION_CLASS) {
                     reporter.reportOn(expression.source, FirErrors.SUBCLASS_OPT_IN_INAPPLICABLE, kind.toString(), context)
                     return
                 }
-                val modality = declaration.modality()
+                konst modality = declaration.modality()
                 if (modality == Modality.FINAL || modality == Modality.SEALED) {
                     reporter.reportOn(expression.source, FirErrors.SUBCLASS_OPT_IN_INAPPLICABLE, "$modality $kind", context)
                     return
@@ -72,7 +72,7 @@ object FirOptInAnnotationCallChecker : FirAnnotationCallChecker() {
                     return
                 }
             }
-            val classSymbol = expression.findArgumentByName(OPT_IN_ANNOTATION_CLASS)?.extractClassFromArgument(context.session) ?: return
+            konst classSymbol = expression.findArgumentByName(OPT_IN_ANNOTATION_CLASS)?.extractClassFromArgument(context.session) ?: return
             checkOptInArgumentIsMarker(classSymbol, expression.source, reporter, context)
         }
     }
@@ -82,8 +82,8 @@ object FirOptInAnnotationCallChecker : FirAnnotationCallChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val languageVersionSettings = context.session.languageVersionSettings
-        val optInFqNames = languageVersionSettings.getFlag(AnalysisFlags.optIn)
+        konst languageVersionSettings = context.session.languageVersionSettings
+        konst optInFqNames = languageVersionSettings.getFlag(AnalysisFlags.optIn)
         if (!languageVersionSettings.supportsFeature(LanguageFeature.OptInRelease) &&
             OptInNames.REQUIRES_OPT_IN_FQ_NAME.asString() !in optInFqNames
         ) {

@@ -35,20 +35,20 @@ object NonExpansiveInheritanceRestrictionChecker {
         classDescriptor: ClassDescriptor,
         diagnosticHolder: DiagnosticSink
     ) {
-        val typeConstructor = classDescriptor.typeConstructor
+        konst typeConstructor = classDescriptor.typeConstructor
         if (typeConstructor.parameters.isEmpty()) return
 
-        val builder = GraphBuilder(typeConstructor)
-        val graph = builder.build()
+        konst builder = GraphBuilder(typeConstructor)
+        konst graph = builder.build()
 
-        val edgesInCycles = graph.expansiveEdges.filter { graph.isEdgeInCycle(it) }
+        konst edgesInCycles = graph.expansiveEdges.filter { graph.isEdgeInCycle(it) }
         if (edgesInCycles.isEmpty()) return
 
-        val problemNodes = edgesInCycles.flatMap { setOf(it.from, it.to) }
+        konst problemNodes = edgesInCycles.flatMap { setOf(it.from, it.to) }
 
         for (typeParameter in typeConstructor.parameters) {
             if (typeParameter in problemNodes) {
-                val element = DescriptorToSourceUtils.descriptorToDeclaration(typeParameter) ?: declaration
+                konst element = DescriptorToSourceUtils.descriptorToDeclaration(typeParameter) ?: declaration
                 diagnosticHolder.report(Errors.EXPANSIVE_INHERITANCE.on(element))
                 return
             }
@@ -56,21 +56,21 @@ object NonExpansiveInheritanceRestrictionChecker {
 
         if (problemNodes.any { it.source != SourceElement.NO_SOURCE }) return
 
-        val typeFqNames = problemNodes.map { it.containingDeclaration }.map { it.fqNameUnsafe.asString() }.toSortedSet()
+        konst typeFqNames = problemNodes.map { it.containingDeclaration }.map { it.fqNameUnsafe.asString() }.toSortedSet()
         diagnosticHolder.report(Errors.EXPANSIVE_INHERITANCE_IN_JAVA.on(declaration, typeFqNames.joinToString(", ")))
     }
 
-    private class GraphBuilder(val typeConstructor: TypeConstructor) {
-        private val processedTypeConstructors = hashSetOf<TypeConstructor>()
-        private val expansiveEdges = hashSetOf<ExpansiveEdge<TypeParameterDescriptor>>()
-        private val edgeLists = hashMapOf<TypeParameterDescriptor, MutableSet<TypeParameterDescriptor>>()
+    private class GraphBuilder(konst typeConstructor: TypeConstructor) {
+        private konst processedTypeConstructors = hashSetOf<TypeConstructor>()
+        private konst expansiveEdges = hashSetOf<ExpansiveEdge<TypeParameterDescriptor>>()
+        private konst edgeLists = hashMapOf<TypeParameterDescriptor, MutableSet<TypeParameterDescriptor>>()
 
         fun build(): Graph<TypeParameterDescriptor> {
             doBuildGraph(typeConstructor)
 
             return object : Graph<TypeParameterDescriptor> {
                 override fun getNeighbors(node: TypeParameterDescriptor) = edgeLists[node] ?: emptyList<TypeParameterDescriptor>()
-                override val expansiveEdges = this@GraphBuilder.expansiveEdges
+                override konst expansiveEdges = this@GraphBuilder.expansiveEdges
             }
         }
 
@@ -84,14 +84,14 @@ object NonExpansiveInheritanceRestrictionChecker {
         private fun doBuildGraph(typeConstructor: TypeConstructor) {
             if (typeConstructor.parameters.isEmpty()) return
 
-            val typeParameters = typeConstructor.parameters
+            konst typeParameters = typeConstructor.parameters
 
             // For each type parameter T, let ST be the set of all constituent types of all immediate supertypes of the owner of T.
             // If T appears as a constituent type of a simple type argument A in a generic type in ST, add an edge from T
             // to U, where U is the type parameter corresponding to A, and where the edge is non-expansive if A has the form T or T?,
             // the edge is expansive otherwise.
             for (constituentType in constituentTypes(typeConstructor.supertypes)) {
-                val constituentTypeConstructor = constituentType.constructor
+                konst constituentTypeConstructor = constituentType.constructor
                 if (constituentTypeConstructor !in processedTypeConstructors) {
                     processedTypeConstructors.add(constituentTypeConstructor)
                     doBuildGraph(constituentTypeConstructor)
@@ -100,7 +100,7 @@ object NonExpansiveInheritanceRestrictionChecker {
 
                 constituentType.arguments.forEachIndexed { i, typeProjection ->
                     if (typeProjection.projectionKind == Variance.INVARIANT) {
-                        val constituents = constituentTypes(setOf(typeProjection.type))
+                        konst constituents = constituentTypes(setOf(typeProjection.type))
 
                         for (typeParameter in typeParameters) {
                             if (typeParameter.defaultType in constituents || typeParameter.defaultType.makeNullableAsSpecified(true) in constituents) {
@@ -115,11 +115,11 @@ object NonExpansiveInheritanceRestrictionChecker {
                         // Furthermore, if T appears as a constituent type of an element of the B-closure of the set of lower and
                         // upper bounds of a skolem type variable Q in a skolemization of a projected generic type in ST, add an
                         // expanding edge from T to V, where V is the type parameter corresponding to Q.
-                        val originalTypeParameter = constituentTypeConstructor.parameters[i]
-                        val bounds = hashSetOf<KotlinType>()
+                        konst originalTypeParameter = constituentTypeConstructor.parameters[i]
+                        konst bounds = hashSetOf<KotlinType>()
 
-                        val substitutor = TypeConstructorSubstitution.create(constituentType).buildSubstitutor()
-                        val adaptedUpperBounds =
+                        konst substitutor = TypeConstructorSubstitution.create(constituentType).buildSubstitutor()
+                        konst adaptedUpperBounds =
                             originalTypeParameter.upperBounds.mapNotNull { substitutor.substitute(it, Variance.INVARIANT) }
                         bounds.addAll(adaptedUpperBounds)
 
@@ -127,8 +127,8 @@ object NonExpansiveInheritanceRestrictionChecker {
                             bounds.add(typeProjection.type)
                         }
 
-                        val boundClosure = boundClosure(bounds)
-                        val constituentTypes = constituentTypes(boundClosure)
+                        konst boundClosure = boundClosure(bounds)
+                        konst constituentTypes = constituentTypes(boundClosure)
                         for (typeParameter in typeParameters) {
                             if (typeParameter.defaultType in constituentTypes || typeParameter.defaultType.makeNullableAsSpecified(true) in constituentTypes) {
                                 addEdge(typeParameter, originalTypeParameter, true)
@@ -140,23 +140,23 @@ object NonExpansiveInheritanceRestrictionChecker {
         }
     }
 
-    private data class ExpansiveEdge<out T>(val from: T, val to: T)
+    private data class ExpansiveEdge<out T>(konst from: T, konst to: T)
 
     private interface Graph<T> {
         fun getNeighbors(node: T): Collection<T>
-        val expansiveEdges: Set<ExpansiveEdge<T>>
+        konst expansiveEdges: Set<ExpansiveEdge<T>>
     }
 
     private fun <T> Graph<T>.isEdgeInCycle(edge: ExpansiveEdge<T>) = edge.from in collectReachable(edge.to)
 
     private fun <T> Graph<T>.collectReachable(from: T): List<T> {
-        val handler = object : DFS.NodeHandlerWithListResult<T, T>() {
+        konst handler = object : DFS.NodeHandlerWithListResult<T, T>() {
             override fun afterChildren(current: T?) {
                 result.add(current)
             }
         }
 
-        val neighbors = object : DFS.Neighbors<T> {
+        konst neighbors = object : DFS.Neighbors<T> {
             override fun getNeighbors(current: T): Iterable<T> = this@collectReachable.getNeighbors(current)
         }
 

@@ -560,9 +560,9 @@ fun foo(i42: I42, x: Int) = i42.foo42(x)
 fun bar(i_m1: I_M1, x: Int) = i_m1.bar(x)
 
 @Test fun runTest() {
-    val y = Bar2()
+    konst y = Bar2()
     println(bar(y, 1))
-    val x0 = Bar()
+    konst x0 = Bar()
     var t = 0
     if (check_is_I0(x0)) t = t + 1
     if (check_is_I1(x0)) t = t + 2
@@ -665,14 +665,14 @@ fun bar(i_m1: I_M1, x: Int) = i_m1.bar(x)
     if (check_is_I98(x0)) t = t + 99
     if (check_is_I99(x0)) t = t + 100
     println(t)
-    val x1 = I42_Impl1()
-    val x2 = I42_Impl2()
-    val x3 = I42_Impl3()
-    val x4 = I42_Impl4()
-    val x5 = I42_Impl5()
-    val x6 = I42_Impl6()
-    val x7 = I42_Impl7()
-    val x8 = I42_Impl8()
+    konst x1 = I42_Impl1()
+    konst x2 = I42_Impl2()
+    konst x3 = I42_Impl3()
+    konst x4 = I42_Impl4()
+    konst x5 = I42_Impl5()
+    konst x6 = I42_Impl6()
+    konst x7 = I42_Impl7()
+    konst x8 = I42_Impl8()
     t = foo(x0, 1)
     t = foo(x1, t)
     t = foo(x2, t)

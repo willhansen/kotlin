@@ -11,18 +11,18 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
-class FirPackageViewDescriptor(override val fqName: FqName, val moduleDescriptor: ModuleDescriptor) : PackageViewDescriptor {
+class FirPackageViewDescriptor(override konst fqName: FqName, konst moduleDescriptor: ModuleDescriptor) : PackageViewDescriptor {
     override fun getContainingDeclaration(): PackageViewDescriptor? {
         TODO("not implemented")
     }
 
-    override val memberScope: MemberScope
+    override konst memberScope: MemberScope
         get() = MemberScope.Empty
 
-    override val module: ModuleDescriptor
+    override konst module: ModuleDescriptor
         get() = moduleDescriptor
 
-    override val fragments: List<PackageFragmentDescriptor>
+    override konst fragments: List<PackageFragmentDescriptor>
         get() = listOf(FirPackageFragmentDescriptor(fqName, moduleDescriptor))
 
     override fun getOriginal(): DeclarationDescriptor {
@@ -41,7 +41,7 @@ class FirPackageViewDescriptor(override val fqName: FqName, val moduleDescriptor
         TODO("not implemented")
     }
 
-    override val annotations: Annotations
+    override konst annotations: Annotations
         get() = Annotations.EMPTY
 
 }

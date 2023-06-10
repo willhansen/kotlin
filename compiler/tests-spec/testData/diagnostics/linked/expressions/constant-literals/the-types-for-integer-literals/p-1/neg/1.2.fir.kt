@@ -1,11 +1,11 @@
 // TESTCASE NUMBER: 1
-val value_1 = <!ILLEGAL_UNDERSCORE!>0b0_l<!>
+konst konstue_1 = <!ILLEGAL_UNDERSCORE!>0b0_l<!>
 
 // TESTCASE NUMBER: 2
-val value_2 = <!ILLEGAL_UNDERSCORE!>0B12_L<!>
+konst konstue_2 = <!ILLEGAL_UNDERSCORE!>0B12_L<!>
 
 // TESTCASE NUMBER: 3
-val value_3 = <!ILLEGAL_UNDERSCORE!>0X234_l<!>
+konst konstue_3 = <!ILLEGAL_UNDERSCORE!>0X234_l<!>
 
 // TESTCASE NUMBER: 4
-val value_4 = <!ILLEGAL_UNDERSCORE!>0x3567_L<!>
+konst konstue_4 = <!ILLEGAL_UNDERSCORE!>0x3567_L<!>

@@ -1,15 +1,15 @@
 @kotlin.jvm.internal.RepeatableContainer
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class A$Container {
     // source: 'propertyGetterUseSiteTarget.kt'
-    public abstract method value(): A[]
+    public abstract method konstue(): A[]
     public inner class A$Container
 }
 
 @kotlin.annotation.Repeatable
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Repeatable(value=A$Container::class)
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Repeatable(konstue=A$Container::class)
 @kotlin.Metadata
 public annotation class A {
     // source: 'propertyGetterUseSiteTarget.kt'
@@ -22,11 +22,11 @@ public final class PropertyGetterUseSiteTargetKt {
     // source: 'propertyGetterUseSiteTarget.kt'
     private final static field ab: int
     static method <clinit>(): void
-    public final static @A$Container(value=[A(v="a"), A(v="b")]) method getAb(): int
-    public final static @A$Container(value=[A(v="c"), A(v="d")]) method getCd(): int
-    public final static @A$Container(value=[A(v="e"), A(v="f")]) method getEf(): int
-    public final static @A$Container(value=[A(v="g"), A(v="h")]) method getGh(): int
+    public final static @A$Container(konstue=[A(v="a"), A(v="b")]) method getAb(): int
+    public final static @A$Container(konstue=[A(v="c"), A(v="d")]) method getCd(): int
+    public final static @A$Container(konstue=[A(v="e"), A(v="f")]) method getEf(): int
+    public final static @A$Container(konstue=[A(v="g"), A(v="h")]) method getGh(): int
     public final static method getIj(): int
-    public final static @A$Container(value=[A(v="i"), A(v="j")]) method setIj(p0: int): void
+    public final static @A$Container(konstue=[A(v="i"), A(v="j")]) method setIj(p0: int): void
     public inner class A$Container
 }

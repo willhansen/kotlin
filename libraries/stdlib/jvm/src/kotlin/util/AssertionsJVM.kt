@@ -11,27 +11,27 @@ package kotlin
 internal object _Assertions {
     @JvmField
     @PublishedApi
-    internal val ENABLED: Boolean = javaClass.desiredAssertionStatus()
+    internal konst ENABLED: Boolean = javaClass.desiredAssertionStatus()
 }
 
 /**
- * Throws an [AssertionError] if the [value] is false
+ * Throws an [AssertionError] if the [konstue] is false
  * and runtime assertions have been enabled on the JVM using the *-ea* JVM option.
  */
 @kotlin.internal.InlineOnly
-public inline fun assert(value: Boolean) {
-    assert(value) { "Assertion failed" }
+public inline fun assert(konstue: Boolean) {
+    assert(konstue) { "Assertion failed" }
 }
 
 /**
- * Throws an [AssertionError] calculated by [lazyMessage] if the [value] is false
+ * Throws an [AssertionError] calculated by [lazyMessage] if the [konstue] is false
  * and runtime assertions have been enabled on the JVM using the *-ea* JVM option.
  */
 @kotlin.internal.InlineOnly
-public inline fun assert(value: Boolean, lazyMessage: () -> Any) {
+public inline fun assert(konstue: Boolean, lazyMessage: () -> Any) {
     if (_Assertions.ENABLED) {
-        if (!value) {
-            val message = lazyMessage()
+        if (!konstue) {
+            konst message = lazyMessage()
             throw AssertionError(message)
         }
     }

@@ -25,16 +25,16 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.types.SimpleType
 
 internal class KtFe10UsualClassType(
-    override val fe10Type: SimpleType,
-    private val descriptor: ClassDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst fe10Type: SimpleType,
+    private konst descriptor: ClassDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtUsualClassType(), KtFe10Type {
     override fun asStringForDebugging(): String = withValidityAssertion { fe10Type.asStringForDebugging(analysisContext) }
 
-    override val qualifiers: List<KtClassTypeQualifier.KtResolvedClassTypeQualifier>
+    override konst qualifiers: List<KtClassTypeQualifier.KtResolvedClassTypeQualifier>
         get() = withValidityAssertion {
-            val nestedType = KtFe10JvmTypeMapperContext.getNestedType(fe10Type)
-            val nonInnerQualifiers =
+            konst nestedType = KtFe10JvmTypeMapperContext.getNestedType(fe10Type)
+            konst nonInnerQualifiers =
                 generateSequence(nestedType.root.classifierDescriptor.containingDeclaration as? ClassDescriptor) { it.containingDeclaration as? ClassDescriptor }
 
             buildList {
@@ -57,16 +57,16 @@ internal class KtFe10UsualClassType(
             }
         }
 
-    override val classId: ClassId
+    override konst classId: ClassId
         get() = withValidityAssertion { descriptor.maybeLocalClassId }
 
-    override val classSymbol: KtClassLikeSymbol
+    override konst classSymbol: KtClassLikeSymbol
         get() = withValidityAssertion { KtFe10DescNamedClassOrObjectSymbol(descriptor, analysisContext) }
 
-    override val ownTypeArguments: List<KtTypeProjection>
+    override konst ownTypeArguments: List<KtTypeProjection>
         get() = withValidityAssertion { fe10Type.arguments.map { it.toKtTypeProjection(analysisContext) } }
 
-    override val nullability: KtTypeNullability
+    override konst nullability: KtTypeNullability
         get() = withValidityAssertion { fe10Type.ktNullability }
 
 }

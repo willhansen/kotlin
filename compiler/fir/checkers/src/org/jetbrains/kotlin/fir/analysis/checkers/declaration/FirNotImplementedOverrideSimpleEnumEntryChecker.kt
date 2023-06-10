@@ -22,12 +22,12 @@ object FirNotImplementedOverrideSimpleEnumEntryChecker : FirClassChecker() {
         if (!declaration.isEnumClass) return
 
         // Enum entries with an initializer are handled by FirNotImplementedOverrideChecker since they contain an AnonymousObject.
-        val enumEntries = declaration.declarations.filterIsInstance<FirEnumEntry>().filter { it.initializer == null && it.source != null }
+        konst enumEntries = declaration.declarations.filterIsInstance<FirEnumEntry>().filter { it.initializer == null && it.source != null }
         if (enumEntries.isEmpty()) return
 
-        val enumScope = declaration.unsubstitutedScope(context)
+        konst enumScope = declaration.unsubstitutedScope(context)
 
-        val notImplemented = mutableListOf<FirCallableSymbol<*>>()
+        konst notImplemented = mutableListOf<FirCallableSymbol<*>>()
         enumScope.processAllCallables { symbol ->
             if (symbol.isAbstract) {
                 notImplemented.add(symbol)

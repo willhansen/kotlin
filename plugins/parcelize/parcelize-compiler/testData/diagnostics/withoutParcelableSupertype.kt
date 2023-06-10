@@ -5,17 +5,17 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
 @Parcelize
-class <!NO_PARCELABLE_SUPERTYPE!>Without<!>(val firstName: String, val secondName: String, val age: Int)
+class <!NO_PARCELABLE_SUPERTYPE!>Without<!>(konst firstName: String, konst secondName: String, konst age: Int)
 
 @Parcelize
-class With(val firstName: String, val secondName: String, val age: Int) : Parcelable
+class With(konst firstName: String, konst secondName: String, konst age: Int) : Parcelable
 
 interface MyParcelableIntf : Parcelable
 
 abstract class MyParcelableCl : Parcelable
 
 @Parcelize
-class WithIntfSubtype(val firstName: String, val secondName: String, val age: Int) : MyParcelableIntf
+class WithIntfSubtype(konst firstName: String, konst secondName: String, konst age: Int) : MyParcelableIntf
 
 @Parcelize
-class WithClSubtype(val firstName: String, val secondName: String, val age: Int) : MyParcelableCl()
+class WithClSubtype(konst firstName: String, konst secondName: String, konst age: Int) : MyParcelableCl()

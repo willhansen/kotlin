@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtFile
 
 internal class KtFirOriginalPsiProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtOriginalPsiProvider(), KtFirAnalysisSessionComponent {
     override fun getOriginalDeclaration(declaration: KtDeclaration): KtDeclaration? = declaration.originalDeclaration
 

@@ -24,13 +24,13 @@ configureJavaOnlyToolchain(JdkMajorVersion.JDK_1_8)
 
 publish()
 
-val core = "$rootDir/core"
-val relocatedCoreSrc = "$buildDir/core-relocated"
+konst core = "$rootDir/core"
+konst relocatedCoreSrc = "$buildDir/core-relocated"
 
-val proguardDeps by configurations.creating
-val proguardAdditionalInJars by configurations.creating
+konst proguardDeps by configurations.creating
+konst proguardAdditionalInJars by configurations.creating
 
-val embedded by configurations
+konst embedded by configurations
 embedded.isTransitive = false
 
 configurations.getByName("compileOnly").extendsFrom(embedded)
@@ -60,11 +60,11 @@ dependencies {
 }
 
 @CacheableTransformer
-class KotlinModuleShadowTransformer(private val logger: Logger, private val useK2: Boolean) : Transformer {
+class KotlinModuleShadowTransformer(private konst logger: Logger, private konst useK2: Boolean) : Transformer {
     @Suppress("ArrayInDataClass")
-    private data class Entry(val path: String, val bytes: ByteArray)
+    private data class Entry(konst path: String, konst bytes: ByteArray)
 
-    private val data = mutableListOf<Entry>()
+    private konst data = mutableListOf<Entry>()
 
     override fun getName() = "KotlinModuleShadowTransformer"
 
@@ -75,27 +75,27 @@ class KotlinModuleShadowTransformer(private val logger: Logger, private val useK
         fun relocate(content: String): String =
             context.relocators.fold(content) { acc, relocator -> relocator.applyToSourceContent(acc) }
 
-        val writer = KotlinModuleMetadata.Writer()
+        konst writer = KotlinModuleMetadata.Writer()
         logger.info("Transforming ${context.path}")
         if (useK2) {
             // TODO: remove this branch after migration to version 1.9
-            val internalData = org.jetbrains.kotlin.metadata.jvm.deserialization.ModuleMapping.loadModuleMapping(
+            konst internalData = org.jetbrains.kotlin.metadata.jvm.deserialization.ModuleMapping.loadModuleMapping(
                 context.`is`.readBytes(), javaClass.name, skipMetadataVersionCheck = true, isJvmPackageNameSupported = true
             ) {
             }
-            val visitor = object : KmModuleVisitor(writer) {
+            konst visitor = object : KmModuleVisitor(writer) {
                 override fun visitPackageParts(fqName: String, fileFacades: List<String>, multiFileClassParts: Map<String, String>) {
                     assert(multiFileClassParts.isEmpty()) { multiFileClassParts } // There are no multi-file class parts in core
                     super.visitPackageParts(relocate(fqName), fileFacades.map(::relocate), multiFileClassParts)
                 }
             }
             for ((fqName, parts) in internalData.packageFqName2Parts) {
-                val (fileFacades, multiFileClassParts) = parts.parts.partition { parts.getMultifileFacadeName(it) == null }
+                konst (fileFacades, multiFileClassParts) = parts.parts.partition { parts.getMultifileFacadeName(it) == null }
                 visitor.visitPackageParts(fqName, fileFacades, multiFileClassParts.associateWith { parts.getMultifileFacadeName(it)!! })
             }
             visitor.visitEnd()
         } else {
-            val metadata = KotlinModuleMetadata.read(context.`is`.readBytes())
+            konst metadata = KotlinModuleMetadata.read(context.`is`.readBytes())
                 ?: error("Not a .kotlin_module file: ${context.path}")
             // TODO: writer declaration and logger.info call from above should be move here after migration to version 1.9
             metadata.accept(object : KmModuleVisitor(writer) {
@@ -120,11 +120,11 @@ class KotlinModuleShadowTransformer(private val logger: Logger, private val useK
     }
 
     companion object {
-        const val KOTLIN_MODULE = "kotlin_module"
+        const konst KOTLIN_MODULE = "kotlin_module"
     }
 }
 
-val reflectShadowJar by task<ShadowJar> {
+konst reflectShadowJar by task<ShadowJar> {
     archiveClassifier.set("shadow")
     configurations = listOf(embedded)
 
@@ -139,10 +139,10 @@ val reflectShadowJar by task<ShadowJar> {
     }
 }
 
-val stripMetadata by tasks.registering {
+konst stripMetadata by tasks.registering {
     dependsOn(reflectShadowJar)
-    val inputJar = provider { reflectShadowJar.get().outputs.files.singleFile }
-    val outputJar = fileFrom(base.libsDirectory.asFile.get(), "${base.archivesName.get()}-$version-stripped.jar")
+    konst inputJar = provider { reflectShadowJar.get().outputs.files.singleFile }
+    konst outputJar = fileFrom(base.libsDirectory.asFile.get(), "${base.archivesName.get()}-$version-stripped.jar")
 
     inputs.file(inputJar).withNormalizer(ClasspathNormalizer::class.java)
 
@@ -160,7 +160,7 @@ val stripMetadata by tasks.registering {
     }
 }
 
-val proguard by task<CacheableProguardTask> {
+konst proguard by task<CacheableProguardTask> {
     dependsOn(stripMetadata)
 
     injars(mapOf("filter" to "!META-INF/versions/**"), stripMetadata.get().outputs.files)
@@ -184,9 +184,9 @@ val proguard by task<CacheableProguardTask> {
     configuration("$core/reflection.jvm/reflection.pro")
 }
 
-val relocateCoreSources by task<Copy> {
-    val relocatedCoreSrc = relocatedCoreSrc
-    val fs = serviceOf<FileSystemOperations>()
+konst relocateCoreSources by task<Copy> {
+    konst relocatedCoreSrc = relocatedCoreSrc
+    konst fs = serviceOf<FileSystemOperations>()
     doFirst {
         fs.delete {
             delete(relocatedCoreSrc)
@@ -228,7 +228,7 @@ configurePublishedComponent {
     addVariantsFromConfiguration(configurations[JavaPlugin.SOURCES_ELEMENTS_CONFIGURATION_NAME]) { }
 }
 
-val sourcesJar = tasks.named<Jar>("sourcesJar") {
+konst sourcesJar = tasks.named<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
 
     dependsOn(relocateCoreSources)
@@ -239,13 +239,13 @@ val sourcesJar = tasks.named<Jar>("sourcesJar") {
 addArtifact("archives", sourcesJar)
 addArtifact("sources", sourcesJar)
 
-val intermediate = when {
+konst intermediate = when {
     kotlinBuildProperties.proguard -> proguard
     kotlinBuildProperties.relocation -> stripMetadata
     else -> reflectShadowJar
 }
     
-val result by task<Jar> {
+konst result by task<Jar> {
     dependsOn(intermediate)
     from {
         zipTree(intermediate.get().singleOutputFile())

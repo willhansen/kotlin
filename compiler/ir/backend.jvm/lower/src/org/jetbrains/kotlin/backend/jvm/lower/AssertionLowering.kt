@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
 import org.jetbrains.kotlin.ir.util.getPackageFragment
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
-internal val assertionPhase = makeIrFilePhase(
+internal konst assertionPhase = makeIrFilePhase(
     ::AssertionLowering,
     name = "Assertion",
     description = "Lower assert calls depending on the assertions mode",
@@ -33,15 +33,15 @@ internal val assertionPhase = makeIrFilePhase(
     prerequisite = setOf(functionReferencePhase)
 )
 
-private class AssertionLowering(private val context: JvmBackendContext) :
+private class AssertionLowering(private konst context: JvmBackendContext) :
     FileLoweringPass,
     IrElementTransformer<AssertionLowering.ClassInfo?>
 {
     // Keeps track of the $assertionsDisabled field, which we generate lazily for classes containing
     // assertions when compiled with -Xassertions=jvm.
-    class ClassInfo(val irClass: IrClass, val topLevelClass: IrClass, var assertionsDisabledField: IrField? = null)
+    class ClassInfo(konst irClass: IrClass, konst topLevelClass: IrClass, var assertionsDisabledField: IrField? = null)
 
-    private val scopeOwnerStack = java.util.ArrayDeque<IrDeclaration>()
+    private konst scopeOwnerStack = java.util.ArrayDeque<IrDeclaration>()
 
     override fun lower(irFile: IrFile) {
         // In legacy mode we treat assertions as inline function calls
@@ -51,13 +51,13 @@ private class AssertionLowering(private val context: JvmBackendContext) :
 
     override fun visitDeclaration(declaration: IrDeclarationBase, data: ClassInfo?): IrStatement {
         scopeOwnerStack.push(declaration)
-        val result = super.visitDeclaration(declaration, data)
+        konst result = super.visitDeclaration(declaration, data)
         scopeOwnerStack.pop()
         return result
     }
 
     override fun visitClass(declaration: IrClass, data: ClassInfo?): IrStatement {
-        val info = ClassInfo(declaration, data?.topLevelClass ?: declaration)
+        konst info = ClassInfo(declaration, data?.topLevelClass ?: declaration)
 
         visitDeclaration(declaration, info)
 
@@ -74,18 +74,18 @@ private class AssertionLowering(private val context: JvmBackendContext) :
     }
 
     override fun visitCall(expression: IrCall, data: ClassInfo?): IrElement {
-        val function = expression.symbol.owner
+        konst function = expression.symbol.owner
         if (!function.isAssert)
             return super.visitCall(expression, data)
 
-        val mode = context.state.assertionsMode
+        konst mode = context.state.assertionsMode
         if (mode == JVMAssertionsMode.ALWAYS_DISABLE)
             return IrCompositeImpl(expression.startOffset, expression.endOffset, context.irBuiltIns.unitType)
 
         context.createIrBuilder(scopeOwnerStack.peek().symbol).run {
             at(expression)
-            val assertCondition = expression.getValueArgument(0)!!
-            val lambdaArgument = if (function.valueParameters.size == 2) expression.getValueArgument(1) else null
+            konst assertCondition = expression.getValueArgument(0)!!
+            konst lambdaArgument = if (function.konstueParameters.size == 2) expression.getValueArgument(1) else null
 
             return if (mode == JVMAssertionsMode.ALWAYS_ENABLE) {
                 checkAssertion(assertCondition, lambdaArgument)
@@ -101,9 +101,9 @@ private class AssertionLowering(private val context: JvmBackendContext) :
 
     private fun IrBuilderWithScope.checkAssertion(assertCondition: IrExpression, lambdaArgument: IrExpression?) =
         irBlock {
-            val generator = lambdaArgument?.asInlinable(this)
-            val constructor = this@AssertionLowering.context.ir.symbols.assertionErrorConstructor
-            val throwError = irThrow(irCall(constructor).apply {
+            konst generator = lambdaArgument?.asInlinable(this)
+            konst constructor = this@AssertionLowering.context.ir.symbols.assertionErrorConstructor
+            konst throwError = irThrow(irCall(constructor).apply {
                 putValueArgument(0, generator?.inline(parent) ?: irString("Assertion failed"))
             })
             +irIfThen(irNot(assertCondition), throwError)
@@ -115,6 +115,6 @@ private class AssertionLowering(private val context: JvmBackendContext) :
         return irBuilder.irGetField(null, data.assertionsDisabledField!!)
     }
 
-    private val IrFunction.isAssert: Boolean
+    private konst IrFunction.isAssert: Boolean
         get() = name.asString() == "assert" && getPackageFragment().packageFqName == StandardNames.BUILT_INS_PACKAGE_FQ_NAME
 }

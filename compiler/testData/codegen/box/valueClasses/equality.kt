@@ -4,53 +4,53 @@
 // CHECK_BYTECODE_LISTING
 
 @JvmInline
-value class F1(val x: Int)
+konstue class F1(konst x: Int)
 
 @JvmInline
-value class F2(val x: UInt)
+konstue class F2(konst x: UInt)
 
 @JvmInline
-value class F3(val x: F1, val y: F2)
+konstue class F3(konst x: F1, konst y: F2)
 
 @JvmInline
-value class F4(val x: Int)
+konstue class F4(konst x: Int)
 
 @JvmInline
-value class F5(val x: UInt)
+konstue class F5(konst x: UInt)
 
 @JvmInline
-value class F6(val x: String)
+konstue class F6(konst x: String)
 
 @JvmInline
-value class A(
-    val f1: F1,
-    val f2: F2,
-    val f3: F3,
-    val f4: F4,
-    val f5: F5,
-    val f6: F6,
-    val f7: Int,
-    val f8: UInt,
-    val f9: String,
+konstue class A(
+    konst f1: F1,
+    konst f2: F2,
+    konst f3: F3,
+    konst f4: F4,
+    konst f5: F5,
+    konst f6: F6,
+    konst f7: Int,
+    konst f8: UInt,
+    konst f9: String,
 )
 
 @JvmInline
-value class B(val a1: A, val a2: A) {
+konstue class B(konst a1: A, konst a2: A) {
     override fun toString(): String {
         return "OverridenBToString(a1 = $a1, a2 = $a2)"
     }
 }
 
 fun box(): String {
-    val f1 = F1(1)
-    val f2 = F2(UInt.MAX_VALUE)
-    val f3 = F3(f1, f2)
-    val f4 = F4(5)
-    val f5 = F5(UInt.MAX_VALUE.dec())
-    val f6 = F6("678")
-    val a1 = A(f1, f2, f3, f4, f5, f6, 9, UInt.MAX_VALUE - 2U, "0")
-    val a2 = A(f1, f2, f3, f4, f5, f6, 9, UInt.MAX_VALUE - 2U, "0")
-    val b = B(a1, a2)
+    konst f1 = F1(1)
+    konst f2 = F2(UInt.MAX_VALUE)
+    konst f3 = F3(f1, f2)
+    konst f4 = F4(5)
+    konst f5 = F5(UInt.MAX_VALUE.dec())
+    konst f6 = F6("678")
+    konst a1 = A(f1, f2, f3, f4, f5, f6, 9, UInt.MAX_VALUE - 2U, "0")
+    konst a2 = A(f1, f2, f3, f4, f5, f6, 9, UInt.MAX_VALUE - 2U, "0")
+    konst b = B(a1, a2)
 
     assert(f1.x == 1)
     assert(f2.x == UInt.MAX_VALUE)
@@ -188,7 +188,7 @@ fun box(): String {
     assert(f4.toString() == "F4(x=5)") { f4.toString() }
     assert(f5.toString() == "F5(x=4294967294)") { f5.toString() }
     assert(f6.toString() == "F6(x=678)") { f6.toString() }
-    val aStr = "A(f1=F1(x=1), f2=F2(x=4294967295), f3=F3(x=F1(x=1), y=F2(x=4294967295)), f4=F4(x=5), f5=F5(x=4294967294), f6=F6(x=678), f7=9, f8=4294967293, f9=0)"
+    konst aStr = "A(f1=F1(x=1), f2=F2(x=4294967295), f3=F3(x=F1(x=1), y=F2(x=4294967295)), f4=F4(x=5), f5=F5(x=4294967294), f6=F6(x=678), f7=9, f8=4294967293, f9=0)"
     assert(a1.toString() == aStr) { a1.toString() }
     assert(a2.toString() == aStr) { a2.toString() }
     assert(b.toString() == "OverridenBToString(a1 = $aStr, a2 = $aStr)") { b.toString() }

@@ -25,7 +25,7 @@ fun test() {}
 // FILE: box.kt
 
 fun isFlagSet(className: String): Boolean {
-    val extraInt = Class.forName(className).getAnnotation(Metadata::class.java).extraInt
+    konst extraInt = Class.forName(className).getAnnotation(Metadata::class.java).extraInt
     return (extraInt and (1 shl 0)) != 0
 }
 

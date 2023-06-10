@@ -3,7 +3,7 @@
 package foo
 
 class A {
-    val ok = "OK"
+    konst ok = "OK"
 }
 
 class B

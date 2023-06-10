@@ -11,6 +11,6 @@ enum class KotlinIrJsGeneratedTSValidationStrategy {
 
     companion object {
         fun byArgument(argument: String): KotlinIrJsGeneratedTSValidationStrategy? =
-            values().firstOrNull { it.name.equals(argument, ignoreCase = true) }
+            konstues().firstOrNull { it.name.equals(argument, ignoreCase = true) }
     }
 }

@@ -30,8 +30,8 @@ object FirFunctionTypeParametersSyntaxChecker : FirDeclarationSyntaxChecker<FirS
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val typeParamsNode = psi.typeParameterList
-        val nameNode = psi.nameIdentifier
+        konst typeParamsNode = psi.typeParameterList
+        konst nameNode = psi.nameIdentifier
 
         if (typeParamsNode != null && nameNode != null && typeParamsNode.startOffset > nameNode.startOffset) {
             reporter.reportOn(
@@ -48,8 +48,8 @@ object FirFunctionTypeParametersSyntaxChecker : FirDeclarationSyntaxChecker<FirS
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val typeParamsNode = source.treeStructure.typeParametersList(source.lighterASTNode)
-        val nameNode = source.treeStructure.nameIdentifier(source.lighterASTNode)
+        konst typeParamsNode = source.treeStructure.typeParametersList(source.lighterASTNode)
+        konst nameNode = source.treeStructure.nameIdentifier(source.lighterASTNode)
         if (typeParamsNode != null && nameNode != null && typeParamsNode.startOffset > nameNode.startOffset) {
             reporter.reportOn(
                 source,

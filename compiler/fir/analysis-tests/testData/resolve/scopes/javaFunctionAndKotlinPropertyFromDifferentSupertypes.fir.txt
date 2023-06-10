@@ -1,6 +1,6 @@
 FILE: B.kt
     public abstract interface B : R|kotlin/Any| {
-        public abstract val foo: R|kotlin/Int|
+        public abstract konst foo: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
     }

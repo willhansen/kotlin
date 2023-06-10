@@ -2,8 +2,8 @@
 
 @Suppress("INCOMPATIBLE_MODIFIERS")
 open data class Test(
-    open val x: String,
-    open val y: String
+    open konst x: String,
+    open konst y: String
 )
 
 // 1 GETFIELD Test\.x

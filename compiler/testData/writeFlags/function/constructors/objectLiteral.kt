@@ -1,6 +1,6 @@
 class Foo {
   fun a() {
-    val s = object { }
+    konst s = object { }
   }
 }
 

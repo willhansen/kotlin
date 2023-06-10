@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 class SuperCallWithDefaultArgumentsChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val superCallExpression = getSuperCallExpression(resolvedCall.call)
+        konst superCallExpression = getSuperCallExpression(resolvedCall.call)
         if (superCallExpression == null || !resolvedCall.usesDefaultArguments()) return
         context.trace.report(ErrorsJvm.SUPER_CALL_WITH_DEFAULT_PARAMETERS.on(reportOn, resolvedCall.resultingDescriptor.name.asString()))
     }

@@ -26,7 +26,7 @@ import org.jetbrains.org.objectweb.asm.FieldVisitor
 import org.jetbrains.org.objectweb.asm.MethodVisitor
 
 abstract class SignatureCollectingClassBuilderFactory(
-        delegate: ClassBuilderFactory, val shouldGenerate: (JvmDeclarationOrigin) -> Boolean
+        delegate: ClassBuilderFactory, konst shouldGenerate: (JvmDeclarationOrigin) -> Boolean
 ) : DelegatingClassBuilderFactory(delegate) {
 
     protected abstract fun handleClashingSignatures(data: ConflictingJvmDeclarationsData)
@@ -39,27 +39,27 @@ abstract class SignatureCollectingClassBuilderFactory(
     }
 
     private inner class SignatureCollectingClassBuilder(
-            private val classCreatedFor: JvmDeclarationOrigin,
-            internal val _delegate: ClassBuilder
+            private konst classCreatedFor: JvmDeclarationOrigin,
+            internal konst _delegate: ClassBuilder
     ) : DelegatingClassBuilder() {
 
         override fun getDelegate() = _delegate
 
         private lateinit var classInternalName: String
 
-        private val signatures = MultiMap.createLinked<RawSignature, JvmDeclarationOrigin>()
+        private konst signatures = MultiMap.createLinked<RawSignature, JvmDeclarationOrigin>()
 
         override fun defineClass(origin: PsiElement?, version: Int, access: Int, name: String, signature: String?, superName: String, interfaces: Array<out String>) {
             classInternalName = name
             super.defineClass(origin, version, access, name, signature, superName, interfaces)
         }
 
-        override fun newField(origin: JvmDeclarationOrigin, access: Int, name: String, desc: String, signature: String?, value: Any?): FieldVisitor {
+        override fun newField(origin: JvmDeclarationOrigin, access: Int, name: String, desc: String, signature: String?, konstue: Any?): FieldVisitor {
             signatures.putValue(RawSignature(name, desc, MemberKind.FIELD), origin)
             if (!shouldGenerate(origin)) {
                 return AbstractClassBuilder.EMPTY_FIELD_VISITOR
             }
-            return super.newField(origin, access, name, desc, signature, value)
+            return super.newField(origin, access, name, desc, signature, konstue)
         }
 
         override fun newMethod(origin: JvmDeclarationOrigin, access: Int, name: String, desc: String, signature: String?, exceptions: Array<out String>?): MethodVisitor {

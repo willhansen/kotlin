@@ -6,7 +6,7 @@ public operator fun </*0*/ A> ((A) -> kotlin.Unit).provideDelegate(/*0*/ thisRef
 
 public final class CaptureContext</*0*/ A> : kotlin.properties.ReadOnlyProperty<A, () -> kotlin.Unit> {
     public constructor CaptureContext</*0*/ A>(/*0*/ capture: (A) -> kotlin.Unit)
-    public final val capture: (A) -> kotlin.Unit
+    public final konst capture: (A) -> kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ fun getValue(/*0*/ thisRef: A, /*1*/ property: kotlin.reflect.KProperty<*>): () -> kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -15,7 +15,7 @@ public final class CaptureContext</*0*/ A> : kotlin.properties.ReadOnlyProperty<
 
 public final class Right {
     public constructor Right()
-    public final val prop: () -> kotlin.Unit
+    public final konst prop: () -> kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

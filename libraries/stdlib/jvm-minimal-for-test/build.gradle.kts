@@ -9,7 +9,7 @@ plugins {
 
 project.configureJvmToolchain(JdkMajorVersion.JDK_1_8)
 
-val builtins by configurations.creating {
+konst builtins by configurations.creating {
     isCanBeResolved = true
     isCanBeConsumed = false
     attributes {
@@ -31,8 +31,8 @@ sourceSets {
     "test" {}
 }
 
-val copySources by task<Sync> {
-    val stdlibProjectDir = project(":kotlin-stdlib").projectDir
+konst copySources by task<Sync> {
+    konst stdlibProjectDir = project(":kotlin-stdlib").projectDir
 
     from(stdlibProjectDir.resolve("runtime"))
         .include("kotlin/TypeAliases.kt",
@@ -65,7 +65,7 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-val jar = runtimeJar {
+konst jar = runtimeJar {
     dependsOn(builtins)
     from(provider { zipTree(builtins.singleFile) }) { include("kotlin/**") }
 }

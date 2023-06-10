@@ -15,7 +15,7 @@ interface Right : A {
 interface C : Left, Right {}
 
 fun box(): String {
-    val x = object : C {}
+    konst x = object : C {}
     return x.foo()
 }
 

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.types.expressions.OperatorConventions
 
-internal val replaceNumberToCharCallSitesPhase = makeIrFilePhase(
+internal konst replaceNumberToCharCallSitesPhase = makeIrFilePhase(
     ::ReplaceNumberToCharCallSitesLowering,
     name = "ReplaceNumberToCharCallSites",
     description = "Replace `Number.toChar` call sites with `toInt().toChar()`",
@@ -33,7 +33,7 @@ internal val replaceNumberToCharCallSitesPhase = makeIrFilePhase(
 // This allows us to migrate usages of deprecated `Number.toChar` less painfully in order to remove it in the future (KT-56822).
 // Also, this allows to invoke `toChar` on `Number` subclasses declared in Java, which do not have it declared, even though the
 // compiler sees it there because `java.lang.Number` is mapped to `kotlin.Number`.
-class ReplaceNumberToCharCallSitesLowering(val context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoid() {
+class ReplaceNumberToCharCallSitesLowering(konst context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoid() {
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(this)
     }
@@ -41,14 +41,14 @@ class ReplaceNumberToCharCallSitesLowering(val context: JvmBackendContext) : Fil
     override fun visitCall(expression: IrCall): IrExpression {
         expression.transformChildrenVoid(this)
 
-        val callee = expression.symbol.owner
+        konst callee = expression.symbol.owner
         if (callee.name != OperatorConventions.CHAR) return expression
 
-        val declaration = callee.resolveFakeOverride() ?: callee
-        val declaringClassType = declaration.dispatchReceiverParameter?.type ?: return expression
+        konst declaration = callee.resolveFakeOverride() ?: callee
+        konst declaringClassType = declaration.dispatchReceiverParameter?.type ?: return expression
         if (!declaringClassType.isNumber()) return expression
 
-        val dispatchReceiver = expression.dispatchReceiver ?: return expression
+        konst dispatchReceiver = expression.dispatchReceiver ?: return expression
         expression.dispatchReceiver = IrCallImpl(
             dispatchReceiver.startOffset, dispatchReceiver.endOffset,
             context.irBuiltIns.intType, context.irBuiltIns.numberClass.functionByName("toInt"), 0, 0,

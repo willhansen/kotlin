@@ -17,29 +17,29 @@ FILE fqName:<root> fileName:/dataObject.kt
               arg0: GET_VAR '<this>: <root>.DataObject declared in <root>.DataObject.equals' type=<root>.DataObject origin=null
               arg1: GET_VAR 'other: kotlin.Any? declared in <root>.DataObject.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.DataObject'
-              CONST Boolean type=kotlin.Boolean value=true
+              CONST Boolean type=kotlin.Boolean konstue=true
         WHEN type=kotlin.Unit origin=null
           BRANCH
             if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.DataObject
               GET_VAR 'other: kotlin.Any? declared in <root>.DataObject.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.DataObject'
-              CONST Boolean type=kotlin.Boolean value=false
-        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.DataObject [val]
+              CONST Boolean type=kotlin.Boolean konstue=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.DataObject [konst]
           TYPE_OP type=<root>.DataObject origin=CAST typeOperand=<root>.DataObject
             GET_VAR 'other: kotlin.Any? declared in <root>.DataObject.equals' type=kotlin.Any? origin=null
         RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.DataObject'
-          CONST Boolean type=kotlin.Boolean value=true
+          CONST Boolean type=kotlin.Boolean konstue=true
     FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN <> ($this:<root>.DataObject) returnType:kotlin.Int
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:<root>.DataObject
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun hashCode (): kotlin.Int declared in <root>.DataObject'
-          CONST Int type=kotlin.Int value=-1155894359
+          CONST Int type=kotlin.Int konstue=-1155894359
     FUN GENERATED_DATA_CLASS_MEMBER name:toString visibility:public modality:OPEN <> ($this:<root>.DataObject) returnType:kotlin.String
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:<root>.DataObject
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.DataObject'
-          CONST String type=kotlin.String value="DataObject"
+          CONST String type=kotlin.String konstue="DataObject"

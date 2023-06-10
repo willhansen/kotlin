@@ -7,13 +7,13 @@ package templates
 
 import templates.Family.*
 
-val Family.DocExtension.collection: String
+konst Family.DocExtension.collection: String
     get() = with(DocExtensions) { family.collection }
 
-val Family.DocExtension.element: String
+konst Family.DocExtension.element: String
     get() = with(DocExtensions) { family.element }
 
-val Family.CodeExtension.size: String
+konst Family.CodeExtension.size: String
     get() = when (family) {
         Iterables, Collections, Lists, Sets, Maps, InvariantArraysOfObjects, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned -> "size"
         CharSequences, Strings -> "length"
@@ -22,14 +22,14 @@ val Family.CodeExtension.size: String
 
 object DocExtensions {
 
-    val Family.element: String
+    konst Family.element: String
         get() = when (this) {
             Strings, CharSequences -> "character"
             Maps -> "entry"
             else -> "element"
         }
 
-    val Family.collection: String
+    konst Family.collection: String
         get() = when (this) {
             CharSequences -> "char sequence"
             ArraysOfObjects, ArraysOfPrimitives, InvariantArraysOfObjects, ArraysOfUnsigned -> "array"
@@ -39,13 +39,13 @@ object DocExtensions {
             else -> "collection"
         }
 
-    val Family.mapResult: String
+    konst Family.mapResult: String
         get() = when (this) {
             Sequences -> "sequence"
             else -> "list"
         }
 
-    val PrimitiveType?.zero: String
+    konst PrimitiveType?.zero: String
         get() = when (this) {
             null -> "`null`"
             PrimitiveType.Boolean -> "`false`"

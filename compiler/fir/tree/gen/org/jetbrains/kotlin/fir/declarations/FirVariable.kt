@@ -25,28 +25,28 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 sealed class FirVariable : FirCallableDeclaration(), FirStatement {
-    abstract override val source: KtSourceElement?
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val typeParameters: List<FirTypeParameterRef>
-    abstract override val status: FirDeclarationStatus
-    abstract override val returnTypeRef: FirTypeRef
-    abstract override val receiverParameter: FirReceiverParameter?
-    abstract override val deprecationsProvider: DeprecationsProvider
-    abstract override val containerSource: DeserializedContainerSource?
-    abstract override val dispatchReceiverType: ConeSimpleKotlinType?
-    abstract override val contextReceivers: List<FirContextReceiver>
-    abstract val name: Name
-    abstract override val symbol: FirVariableSymbol<out FirVariable>
-    abstract val initializer: FirExpression?
-    abstract val delegate: FirExpression?
-    abstract val isVar: Boolean
-    abstract val isVal: Boolean
-    abstract val getter: FirPropertyAccessor?
-    abstract val setter: FirPropertyAccessor?
-    abstract val backingField: FirBackingField?
-    abstract override val annotations: List<FirAnnotation>
+    abstract override konst source: KtSourceElement?
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst typeParameters: List<FirTypeParameterRef>
+    abstract override konst status: FirDeclarationStatus
+    abstract override konst returnTypeRef: FirTypeRef
+    abstract override konst receiverParameter: FirReceiverParameter?
+    abstract override konst deprecationsProvider: DeprecationsProvider
+    abstract override konst containerSource: DeserializedContainerSource?
+    abstract override konst dispatchReceiverType: ConeSimpleKotlinType?
+    abstract override konst contextReceivers: List<FirContextReceiver>
+    abstract konst name: Name
+    abstract override konst symbol: FirVariableSymbol<out FirVariable>
+    abstract konst initializer: FirExpression?
+    abstract konst delegate: FirExpression?
+    abstract konst isVar: Boolean
+    abstract konst isVal: Boolean
+    abstract konst getter: FirPropertyAccessor?
+    abstract konst setter: FirPropertyAccessor?
+    abstract konst backingField: FirBackingField?
+    abstract override konst annotations: List<FirAnnotation>
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitVariable(this, data)
 

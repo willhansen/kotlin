@@ -1,11 +1,11 @@
 class Some(classNames: () -> Collection<String>) {
-    internal val first by lazy {
+    internal konst first by lazy {
         classNames().toSet()
     }
 
-    private val second by lazy {
-        val nonDeclaredNames = getNonDeclaredClassifierNames() ?: return@lazy null
-        val allNames = first + nonDeclaredNames
+    private konst second by lazy {
+        konst nonDeclaredNames = getNonDeclaredClassifierNames() ?: return@lazy null
+        konst allNames = first + nonDeclaredNames
         allNames
     }
 

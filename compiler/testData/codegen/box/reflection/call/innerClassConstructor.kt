@@ -2,8 +2,8 @@
 // WITH_REFLECT
 
 class A {
-    class Nested(val result: String)
-    inner class Inner(val result: String)
+    class Nested(konst result: String)
+    inner class Inner(konst result: String)
 }
 
 fun box(): String {

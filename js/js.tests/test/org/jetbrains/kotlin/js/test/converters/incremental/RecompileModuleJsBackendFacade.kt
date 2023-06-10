@@ -22,8 +22,8 @@ import java.io.File
 @Suppress("warnings")
 class RecompileModuleJsBackendFacade<R : ResultingArtifact.FrontendOutput<R>>(
     testServices: TestServices,
-    private val frontendFacade: Constructor<FrontendFacade<R>>,
-    private val frontend2BackendConverter: Constructor<Frontend2BackendConverter<R, ClassicBackendInput>>
+    private konst frontendFacade: Constructor<FrontendFacade<R>>,
+    private konst frontend2BackendConverter: Constructor<Frontend2BackendConverter<R, ClassicBackendInput>>
 ) : CommonRecompileModuleJsBackendFacade<R, ClassicBackendInput>(testServices, TargetBackend.JS) {
     override fun TestConfigurationBuilder.configure(module: TestModule) {
         facadeStep(frontendFacade)
@@ -32,8 +32,8 @@ class RecompileModuleJsBackendFacade<R : ResultingArtifact.FrontendOutput<R>>(
     }
 
     override fun TestServices.register(module: TestModule) {
-        val filesToRecompile = module.files.filter { RECOMPILE in it.directives }
-        val incrementalData = testServices.jsClassicIncrementalDataProvider.getIncrementalData(module).copy()
+        konst filesToRecompile = module.files.filter { RECOMPILE in it.directives }
+        konst incrementalData = testServices.jsClassicIncrementalDataProvider.getIncrementalData(module).copy()
         for (testFile in filesToRecompile) {
             incrementalData.translatedFiles.remove(File("/${testFile.relativePath}"))
         }

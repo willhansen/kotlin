@@ -18,6 +18,6 @@ actual open class A actual constructor() {
 }
 
 fun box(): String {
-    val b = getB()
+    konst b = getB()
     return b.foo() + b.bar()
 }

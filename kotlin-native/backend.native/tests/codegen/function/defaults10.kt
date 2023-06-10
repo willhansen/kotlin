@@ -7,7 +7,7 @@ package codegen.function.defaults10
 
 import kotlin.test.*
 
-enum class A(one: Int, val two: Int = one) {
+enum class A(one: Int, konst two: Int = one) {
     FOO(42)
 }
 

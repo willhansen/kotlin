@@ -2,7 +2,7 @@ enum class SimpleEnum {
     A, B, C
 }
 
-enum class WithConstructor(val x: String) {
+enum class WithConstructor(konst x: String) {
     A("1"), B("2"), C("3")
 }
 

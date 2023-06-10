@@ -8,24 +8,24 @@ package org.jetbrains.kotlin
 import java.io.PrintStream
 import java.io.PrintWriter
 
-enum class TestsExceptionType(val postfix: String) {
+enum class TestsExceptionType(konst postfix: String) {
     COMPILER_ERROR("compiler"),
     COMPILETIME_ERROR("compiletime"),
     RUNTIME_ERROR("runtime"),
     INFRASTRUCTURE_ERROR("infrastructure");
 
     companion object {
-        private val map = values().associateBy(TestsExceptionType::postfix)
+        private konst map = konstues().associateBy(TestsExceptionType::postfix)
 
         fun fromValue(type: String) = map[type]
     }
 }
 
-sealed class TestsError(val original: Throwable, val type: TestsExceptionType) : Error() {
+sealed class TestsError(konst original: Throwable, konst type: TestsExceptionType) : Error() {
     override fun toString(): String = original.toString()
     override fun getStackTrace(): Array<out StackTraceElement> = original.stackTrace
     override fun initCause(cause: Throwable?): Throwable = original.initCause(cause)
-    override val cause: Throwable? get() = original.cause
+    override konst cause: Throwable? get() = original.cause
 
     // This function is called in the constructor of Throwable, where original is not yet initialized
     override fun fillInStackTrace(): Throwable? = @Suppress("UNNECESSARY_SAFE_CALL", "SAFE_CALL_WILL_CHANGE_NULLABILITY") original?.fillInStackTrace()

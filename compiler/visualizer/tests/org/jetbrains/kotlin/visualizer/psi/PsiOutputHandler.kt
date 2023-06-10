@@ -15,12 +15,12 @@ import java.io.File
 
 internal class PsiOutputHandler(testServices: TestServices) : ClassicFrontendAnalysisHandler(testServices) {
     override fun processModule(module: TestModule, info: ClassicFrontendOutputArtifact) {
-        val renderer = info.ktFiles.values.firstOrNull()?.let { PsiVisualizer(it, info.analysisResult) } ?: return
-        val psiRenderResult = renderer.render()
+        konst renderer = info.ktFiles.konstues.firstOrNull()?.let { PsiVisualizer(it, info.analysisResult) } ?: return
+        konst psiRenderResult = renderer.render()
 
-        val replaceFrom = module.directives[VisualizerDirectives.TEST_FILE_PATH].first()
-        val replaceTo = module.directives[VisualizerDirectives.EXPECTED_FILE_PATH].first()
-        val path = module.files.first().originalFile.absolutePath.replace(replaceFrom, replaceTo)
+        konst replaceFrom = module.directives[VisualizerDirectives.TEST_FILE_PATH].first()
+        konst replaceTo = module.directives[VisualizerDirectives.EXPECTED_FILE_PATH].first()
+        konst path = module.files.first().originalFile.absolutePath.replace(replaceFrom, replaceTo)
         assertions.assertEqualsToFile(File(path), psiRenderResult) { text ->
             text.replace("// FIR_IGNORE\n", "")
         }

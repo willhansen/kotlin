@@ -1,7 +1,7 @@
-val f: (String.() -> String)? = null
+konst f: (String.() -> String)? = null
 
 fun box(): String {
-    val g = when {
+    konst g = when {
         f != null -> f
         else -> {
             { this + "K" }

@@ -27,65 +27,65 @@ import kotlin.collections.HashSet
 /**
  * Copy-pasted from [org.jetbrains.kotlin.library.KLIB_PROPERTY_NATIVE_TARGETS]
  */
-private const val KLIB_PROPERTY_NATIVE_TARGETS = "native_targets"
+private const konst KLIB_PROPERTY_NATIVE_TARGETS = "native_targets"
 
 //region Project properties.
 
-val Project.platformManager
+konst Project.platformManager
     get() = findProperty("platformManager") as PlatformManager
 
-val Project.testTarget
+konst Project.testTarget
     get() = findProperty("target") as? KonanTarget ?: HostManager.host
 
-val Project.testTargetSuffix
+konst Project.testTargetSuffix
     get() = (findProperty("target") as KonanTarget).name.replaceFirstChar { it.uppercase() }
 
-val Project.verboseTest
+konst Project.verboseTest
     get() = hasProperty("test_verbose")
 
-val Project.testOutputRoot
+konst Project.testOutputRoot
     get() = findProperty("testOutputRoot") as String
 
-val Project.testOutputLocal
+konst Project.testOutputLocal
     get() = (findProperty("testOutputLocal") as File).toString()
 
-val Project.testOutputStdlib
+konst Project.testOutputStdlib
     get() = (findProperty("testOutputStdlib") as File).toString()
 
-val Project.testOutputFramework
+konst Project.testOutputFramework
     get() = (findProperty("testOutputFramework") as File).toString()
 
-val Project.testOutputExternal
+konst Project.testOutputExternal
     get() = (findProperty("testOutputExternal") as File).toString()
 
-val Project.compileOnlyTests: Boolean
+konst Project.compileOnlyTests: Boolean
     get() = hasProperty("test_compile_only")
 
-val validPropertiesNames = listOf(
+konst konstidPropertiesNames = listOf(
     "konan.home",
     "org.jetbrains.kotlin.native.home",
     "kotlin.native.home"
 )
 
-val Project.kotlinNativeDist
+konst Project.kotlinNativeDist
     get() = rootProject.currentKotlinNativeDist
 
-val Project.currentKotlinNativeDist
-    get() = file(validPropertiesNames.firstOrNull { hasProperty(it) }?.let { findProperty(it) } ?: "dist")
+konst Project.currentKotlinNativeDist
+    get() = file(konstidPropertiesNames.firstOrNull { hasProperty(it) }?.let { findProperty(it) } ?: "dist")
 
-val kotlinNativeHome
-    get() = validPropertiesNames.mapNotNull(System::getProperty).first()
+konst kotlinNativeHome
+    get() = konstidPropertiesNames.mapNotNull(System::getProperty).first()
 
-val Project.useCustomDist
-    get() = validPropertiesNames.any { hasProperty(it) }
+konst Project.useCustomDist
+    get() = konstidPropertiesNames.any { hasProperty(it) }
 
-val Project.nativeBundlesLocation
+konst Project.nativeBundlesLocation
     get() = file(findProperty("nativeBundlesLocation") ?: project.projectDir)
 
-private val libraryRegexp = Regex("""^import\s+platform\.(\S+)\..*$""")
+private konst libraryRegexp = Regex("""^import\s+platform\.(\S+)\..*$""")
 fun File.dependencies() =
     readLines().filter(libraryRegexp::containsMatchIn)
-        .map { libraryRegexp.matchEntire(it)?.groups?.get(1)?.value ?: "" }
+        .map { libraryRegexp.matchEntire(it)?.groups?.get(1)?.konstue ?: "" }
         .toSortedSet()
 
 
@@ -113,18 +113,18 @@ private fun Project.groovyPropertyArrayToList(property: String): List<String> =
         else this as List<String>
     }
 
-val Project.globalBuildArgs: List<String>
+konst Project.globalBuildArgs: List<String>
     get() = project.groovyPropertyArrayToList("globalBuildArgs")
 
-val Project.globalTestArgs: List<String>
+konst Project.globalTestArgs: List<String>
     get() = project.groovyPropertyArrayToList("globalTestArgs")
 
-val Project.testTargetSupportsCodeCoverage: Boolean
+konst Project.testTargetSupportsCodeCoverage: Boolean
     get() = this.testTarget.supportsCodeCoverage()
 
 fun projectOrFiles(proj: Project, notation: String): Any? {
-    val propertyMapper = proj.findProperty("notationMapping") ?: return proj.project(notation)
-    val mapping = (propertyMapper as? Map<*, *>)?.get(notation) as? String ?: return proj.project(notation)
+    konst propertyMapper = proj.findProperty("notationMapping") ?: return proj.project(notation)
+    konst mapping = (propertyMapper as? Map<*, *>)?.get(notation) as? String ?: return proj.project(notation)
     return proj.files(mapping).also {
         proj.logger.info("MAPPING: $notation -> ${it.asPath}")
     }
@@ -137,7 +137,7 @@ fun projectOrFiles(proj: Project, notation: String): Any? {
  */
 fun codesign(project: Project, path: String) {
     check(HostManager.hostIsMac) { "Apple specific code signing" }
-    val (stdOut, stdErr, exitCode) = runProcess(
+    konst (stdOut, stdErr, exitCode) = runProcess(
         executor = localExecutor(project), executable = "/usr/bin/codesign",
         args = listOf("--verbose", "-s", "-", path)
     )
@@ -167,7 +167,7 @@ fun supportsRunningTestsOnDevice(target: KonanTarget): Boolean =
  */
 fun Project.getFilesToCompile(compile: List<String>, exclude: List<String>): List<String> {
     // convert exclude list to paths
-    val excludeFiles = exclude.map { project.file(it).absolutePath }.toList()
+    konst excludeFiles = exclude.map { project.file(it).absolutePath }.toList()
 
     // create list of tests to compile
     return compile.flatMap { f ->
@@ -201,10 +201,10 @@ fun Task.isDependsOnPlatformLibs(): Boolean {
     }
 }
 
-val Project.isDefaultNativeHome: Boolean
+konst Project.isDefaultNativeHome: Boolean
     get() = kotlinNativeDist.absolutePath == project(":kotlin-native").file("dist").absolutePath
 
-private val Project.hasPlatformLibs: Boolean
+private konst Project.hasPlatformLibs: Boolean
     get() {
         if (!isDefaultNativeHome) {
             return File(buildDistribution(project.kotlinNativeDist.absolutePath).platformLibs(project.testTarget))
@@ -213,7 +213,7 @@ private val Project.hasPlatformLibs: Boolean
         return false
     }
 
-private val Project.isCrossDist: Boolean
+private konst Project.isCrossDist: Boolean
     get() {
         if (!isDefaultNativeHome) {
             return File(buildDistribution(project.kotlinNativeDist.absolutePath).runtime(project.testTarget))
@@ -223,7 +223,7 @@ private val Project.isCrossDist: Boolean
     }
 
 fun Task.dependsOnDist() {
-    val target = project.testTarget
+    konst target = project.testTarget
     if (project.isDefaultNativeHome) {
         dependsOn(":kotlin-native:dist")
         if (target != HostManager.host) {
@@ -255,7 +255,7 @@ fun Task.dependsOnCrossDist(target: KonanTarget) {
 fun Task.konanOldPluginTaskDependenciesWalker(index: Int = 0, walker: Task.(Int) -> Unit) {
     walker(index + 1)
     dependsOn.forEach {
-        val task = (it as? Task) ?: return@forEach
+        konst task = (it as? Task) ?: return@forEach
         if (task.name.startsWith("compileKonan"))
             task.konanOldPluginTaskDependenciesWalker(index + 1, walker)
     }
@@ -265,7 +265,7 @@ fun Task.konanOldPluginTaskDependenciesWalker(index: Int = 0, walker: Task.(Int)
  * Sets the same dependencies for the receiver task from the given [task]
  */
 fun String.sameDependenciesAs(task: Task) {
-    val t = task.project.tasks.getByName(this)
+    konst t = task.project.tasks.getByName(this)
     t.sameDependenciesAs(task)
 }
 
@@ -273,7 +273,7 @@ fun String.sameDependenciesAs(task: Task) {
  * Sets the same dependencies for the receiver task from the given [task]
  */
 fun Task.sameDependenciesAs(task: Task) {
-    val dependencies = task.dependsOn.toList() // save to the list, otherwise it will cause cyclic dependency.
+    konst dependencies = task.dependsOn.toList() // save to the list, otherwise it will cause cyclic dependency.
     this.dependsOn(dependencies)
 }
 
@@ -282,7 +282,7 @@ fun Task.sameDependenciesAs(task: Task) {
  * also make [artifact] depend on `dist` and all dependencies of the task to make [artifact] execute before the task.
  */
 fun Task.dependsOnKonanBuildingTask(artifact: String, target: KonanTarget) {
-    val buildTask = project.findKonanBuildTask(artifact, target)
+    konst buildTask = project.findKonanBuildTask(artifact, target)
     buildTask.get().apply {
         konanOldPluginTaskDependenciesWalker {
             dependsOnDist()
@@ -299,18 +299,18 @@ fun compileSwift(
     project: Project, target: KonanTarget, sources: List<String>, options: List<String>,
     output: Path, fullBitcode: Boolean = false
 ) {
-    val platform = project.platformManager.platform(target)
+    konst platform = project.platformManager.platform(target)
     assert(platform.configurables is AppleConfigurables)
-    val configs = platform.configurables as AppleConfigurables
-    val compiler = configs.absoluteTargetToolchain + "/usr/bin/swiftc"
+    konst configs = platform.configurables as AppleConfigurables
+    konst compiler = configs.absoluteTargetToolchain + "/usr/bin/swiftc"
 
-    val swiftTarget = configs.targetTriple.withOSVersion(configs.osVersionMin).toString()
+    konst swiftTarget = configs.targetTriple.withOSVersion(configs.osVersionMin).toString()
 
-    val args = listOf("-sdk", configs.absoluteTargetSysRoot, "-target", swiftTarget) +
+    konst args = listOf("-sdk", configs.absoluteTargetSysRoot, "-target", swiftTarget) +
             options + "-o" + output.toString() + sources +
             if (fullBitcode) listOf("-embed-bitcode", "-Xlinker", "-bitcode_verify") else listOf("-embed-bitcode-marker")
 
-    val (stdOut, stdErr, exitCode) = runProcess(executor = localExecutor(project), executable = compiler, args = args)
+    konst (stdOut, stdErr, exitCode) = runProcess(executor = localExecutor(project), executable = compiler, args = args)
 
     println(
         """
@@ -339,21 +339,21 @@ fun targetSupportsThreads(targetName: String) =
 fun Project.mergeManifestsByTargets(source: File, destination: File) {
     logger.info("Merging manifests: $source -> $destination")
 
-    val sourceFile = KFile(source.absolutePath)
-    val sourceProperties = sourceFile.loadProperties()
+    konst sourceFile = KFile(source.absolutePath)
+    konst sourceProperties = sourceFile.loadProperties()
 
-    val destinationFile = KFile(destination.absolutePath)
-    val destinationProperties = destinationFile.loadProperties()
+    konst destinationFile = KFile(destination.absolutePath)
+    konst destinationProperties = destinationFile.loadProperties()
 
-    // check that all properties except for KLIB_PROPERTY_NATIVE_TARGETS are equivalent
-    val mismatchedProperties = (sourceProperties.keys + destinationProperties.keys)
+    // check that all properties except for KLIB_PROPERTY_NATIVE_TARGETS are equikonstent
+    konst mismatchedProperties = (sourceProperties.keys + destinationProperties.keys)
         .asSequence()
         .map { it.toString() }
         .filter { it != KLIB_PROPERTY_NATIVE_TARGETS }
         .sorted()
         .mapNotNull { propertyKey: String ->
-            val sourceProperty: String? = sourceProperties.getProperty(propertyKey)
-            val destinationProperty: String? = destinationProperties.getProperty(propertyKey)
+            konst sourceProperty: String? = sourceProperties.getProperty(propertyKey)
+            konst destinationProperty: String? = destinationProperties.getProperty(propertyKey)
             when {
                 sourceProperty == null -> "\"$propertyKey\" is absent in $sourceFile"
                 destinationProperty == null -> "\"$propertyKey\" is absent in $destinationFile"
@@ -379,10 +379,10 @@ fun Project.mergeManifestsByTargets(source: File, destination: File) {
     }
 
     // merge KLIB_PROPERTY_NATIVE_TARGETS property
-    val sourceNativeTargets = sourceProperties.propertyList(KLIB_PROPERTY_NATIVE_TARGETS)
-    val destinationNativeTargets = destinationProperties.propertyList(KLIB_PROPERTY_NATIVE_TARGETS)
+    konst sourceNativeTargets = sourceProperties.propertyList(KLIB_PROPERTY_NATIVE_TARGETS)
+    konst destinationNativeTargets = destinationProperties.propertyList(KLIB_PROPERTY_NATIVE_TARGETS)
 
-    val mergedNativeTargets = HashSet<String>().apply {
+    konst mergedNativeTargets = HashSet<String>().apply {
         addAll(sourceNativeTargets)
         addAll(destinationNativeTargets)
     }
@@ -396,7 +396,7 @@ fun Project.buildStaticLibrary(cSources: Collection<File>, output: File, objDir:
     delete(objDir)
     delete(output)
 
-    val platform = platformManager.platform(testTarget)
+    konst platform = platformManager.platform(testTarget)
 
     objDir.mkdirs()
     ExecClang.create(project).execClangForCompilerTests(testTarget) {
@@ -416,7 +416,7 @@ fun Project.buildStaticLibrary(cSources: Collection<File>, output: File, objDir:
 }
 
 fun Project.binaryFromToolchain(toolName: String): File {
-    val platform = platformManager.platform(testTarget)
+    konst platform = platformManager.platform(testTarget)
     return File("${platform.configurables.absoluteTargetToolchain}/bin/$toolName")
 }
 
@@ -426,19 +426,19 @@ internal fun StringBuilder.appendln(o: Any?) {
     append('\n')
 }
 
-internal val Project.testTargetConfigurables: Configurables
+internal konst Project.testTargetConfigurables: Configurables
     get() {
-        val platformManager = project.platformManager
-        val testTarget = project.testTarget
+        konst platformManager = project.platformManager
+        konst testTarget = project.testTarget
         return platformManager.platform(testTarget).configurables
     }
 
-internal val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()!!
+internal konst gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()!!
 
-internal val Project.ext: ExtraPropertiesExtension
+internal konst Project.ext: ExtraPropertiesExtension
     get() = extensions.getByName("ext") as ExtraPropertiesExtension
 
-internal val FileCollection.isNotEmpty: Boolean
+internal konst FileCollection.isNotEmpty: Boolean
     get() = !isEmpty
 
 internal fun Provider<File>.resolve(child: String): Provider<File> = map { it.resolve(child) }

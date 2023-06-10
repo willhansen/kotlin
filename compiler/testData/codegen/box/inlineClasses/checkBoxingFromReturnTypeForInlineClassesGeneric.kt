@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T: Int>(val a: T) {
+konstue class Foo<T: Int>(konst a: T) {
     fun member(): String = ""
 
     fun asResult() = a
@@ -22,8 +22,8 @@ fun <T: Int> test(f: Foo<T>): String {
     id(f).member() // box unbox
     id(f).extension() // box unbox
 
-    val a = id(f) // box unbox
-    val b = id(f).idExtension() // box unbox
+    konst a = id(f) // box unbox
+    konst b = id(f).idExtension() // box unbox
 
     if (a.asResult() != 10) return "fail a"
     if (b.asResult() != 10) return "fail b"
@@ -32,7 +32,7 @@ fun <T: Int> test(f: Foo<T>): String {
 }
 
 fun box(): String {
-    val f = Foo(10)
+    konst f = Foo(10)
 
     return test(f)
 }

@@ -6,7 +6,7 @@ import kotlin.experimental.ExperimentalTypeInference
 
 class TypeDefinition<KotlinType : Any> {
     fun parse(parser: (serializedValue: String) -> KotlinType?): Unit = TODO()
-    fun serialize(parser: (value: KotlinType) -> Any?): Unit = TODO()
+    fun serialize(parser: (konstue: KotlinType) -> Any?): Unit = TODO()
 }
 
 @OptIn(ExperimentalTypeInference::class)

@@ -22,9 +22,9 @@ import j.JavaProtected
 import j.JavaPackageLocal
 
 class A {
-    val p1 = JavaPackageLocal.<!INVISIBLE_REFERENCE!>javaPPackage<!>
-    val p2 = JavaProtected.<!INVISIBLE_REFERENCE!>javaPProtectedStatic<!>
-    val p3 = JavaProtected().<!INVISIBLE_REFERENCE!>javaPProtectedPackage<!>
+    konst p1 = JavaPackageLocal.<!INVISIBLE_REFERENCE!>javaPPackage<!>
+    konst p2 = JavaProtected.<!INVISIBLE_REFERENCE!>javaPProtectedStatic<!>
+    konst p3 = JavaProtected().<!INVISIBLE_REFERENCE!>javaPProtectedPackage<!>
 
     fun test() {
         JavaProtected.<!INVISIBLE_REFERENCE!>javaMProtectedStatic<!>()
@@ -33,9 +33,9 @@ class A {
 }
 
 class B : JavaProtected() {
-    val p1 = JavaPackageLocal.<!INVISIBLE_REFERENCE!>javaPPackage<!>
-    val p2 = JavaProtected.javaPProtectedStatic
-    val p3 = javaPProtectedPackage
+    konst p1 = JavaPackageLocal.<!INVISIBLE_REFERENCE!>javaPPackage<!>
+    konst p2 = JavaProtected.javaPProtectedStatic
+    konst p3 = javaPProtectedPackage
 
     fun test() {
         JavaProtected.javaMProtectedStatic()
@@ -50,9 +50,9 @@ import j.JavaProtected
 import j.JavaPackageLocal
 
 class C {
-    val p1 = JavaPackageLocal.javaPPackage
-    val p2 = JavaProtected.javaPProtectedStatic
-    val p3 = JavaProtected().javaPProtectedPackage
+    konst p1 = JavaPackageLocal.javaPPackage
+    konst p2 = JavaProtected.javaPProtectedStatic
+    konst p3 = JavaProtected().javaPProtectedPackage
 
     fun test() {
         JavaProtected.javaMProtectedStatic()

@@ -2,8 +2,8 @@
 package test
 
 annotation class Ann(
-        val b1: Long,
-        val b2: Long
+        konst b1: Long,
+        konst b2: Long
 )
 
 @Ann(1, 1.toLong()) class MyClass

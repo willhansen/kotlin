@@ -9,29 +9,29 @@ public class J<T extends Integer>  {}
 
 import java.util.ArrayList
 
-class Foo(val attributes: Map<String, String>)
+class Foo(konst attributes: Map<String, String>)
 
 class A<R>
 
 class Bar<T, K: Any> {
-    val foos1 = ArrayList<Foo>()
-    val foos2 = ArrayList<Foo?>()
-    val foos3 = ArrayList<A<Foo>>()
-    val foos4 = ArrayList<A<Foo>?>()
-    val foos5 = ArrayList<A<Foo?>?>()
-    val foos6 = ArrayList<A<Foo?>>()
-    val foos7 = ArrayList<T>()
-    val foos8 = ArrayList<T?>()
-    val foos9 = ArrayList<K>()
-    val foos10 = ArrayList<K?>()
-    val foos11 = ArrayList<A<K?>>()
-    val foos12 = ArrayList<A<K>>()
-    val foos13 = ArrayList<A<T>>()
-    val foos14 = ArrayList<A<T>?>()
-    val foos15 = ArrayList<A<T?>>()
+    konst foos1 = ArrayList<Foo>()
+    konst foos2 = ArrayList<Foo?>()
+    konst foos3 = ArrayList<A<Foo>>()
+    konst foos4 = ArrayList<A<Foo>?>()
+    konst foos5 = ArrayList<A<Foo?>?>()
+    konst foos6 = ArrayList<A<Foo?>>()
+    konst foos7 = ArrayList<T>()
+    konst foos8 = ArrayList<T?>()
+    konst foos9 = ArrayList<K>()
+    konst foos10 = ArrayList<K?>()
+    konst foos11 = ArrayList<A<K?>>()
+    konst foos12 = ArrayList<A<K>>()
+    konst foos13 = ArrayList<A<T>>()
+    konst foos14 = ArrayList<A<T>?>()
+    konst foos15 = ArrayList<A<T?>>()
 
-    val foos16 = J<<!UPPER_BOUND_VIOLATED!>Foo<!>>()
-    val foos17 = J<<!UPPER_BOUND_VIOLATED!>Foo?<!>>()
-    val foos18 = J<<!UPPER_BOUND_VIOLATED!>T<!>>()
-    val foos19 = J<<!UPPER_BOUND_VIOLATED!>T?<!>>()
+    konst foos16 = J<<!UPPER_BOUND_VIOLATED!>Foo<!>>()
+    konst foos17 = J<<!UPPER_BOUND_VIOLATED!>Foo?<!>>()
+    konst foos18 = J<<!UPPER_BOUND_VIOLATED!>T<!>>()
+    konst foos19 = J<<!UPPER_BOUND_VIOLATED!>T?<!>>()
 }

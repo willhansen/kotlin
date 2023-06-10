@@ -66,14 +66,14 @@ public abstract class AssignmentTranslator extends AbstractTranslator {
         assert expression.getLeft() != null : "No left-hand side: " + expression.getText();
     }
 
-    protected final AccessTranslator createAccessTranslator(@NotNull KtExpression left, boolean forceOrderOfEvaluation) {
+    protected final AccessTranslator createAccessTranslator(@NotNull KtExpression left, boolean forceOrderOfEkonstuation) {
         if (isValProperty(left, context())) {
             KtSimpleNameExpression simpleName = getSimpleName(left);
             assert simpleName != null;
             return BackingFieldAccessTranslator.newInstance(simpleName, context());
         }
         else {
-            return AccessTranslationUtils.getAccessTranslator(left, context(), forceOrderOfEvaluation);
+            return AccessTranslationUtils.getAccessTranslator(left, context(), forceOrderOfEkonstuation);
         }
     }
 

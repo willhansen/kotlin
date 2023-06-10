@@ -25,15 +25,15 @@ import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 
 class ScriptingCompilerConfigurationExtension(
-    val project: MockProject,
-    val baseHostConfiguration: ScriptingHostConfiguration
+    konst project: MockProject,
+    konst baseHostConfiguration: ScriptingHostConfiguration
 ) : CompilerConfigurationExtension {
 
     override fun updateConfiguration(configuration: CompilerConfiguration) {
 
         if (!configuration.getBoolean(ScriptingConfigurationKeys.DISABLE_SCRIPTING_PLUGIN_OPTION)) {
 
-            val projectRoot = project.run { basePath ?: baseDir?.canonicalPath }?.let(::File)
+            konst projectRoot = project.run { basePath ?: baseDir?.canonicalPath }?.let(::File)
             if (projectRoot != null) {
                 configuration.put(
                     ScriptingConfigurationKeys.LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION,
@@ -41,7 +41,7 @@ class ScriptingCompilerConfigurationExtension(
                     projectRoot
                 )
             }
-            val hostConfiguration = ScriptingHostConfiguration(baseHostConfiguration) {
+            konst hostConfiguration = ScriptingHostConfiguration(baseHostConfiguration) {
                 getEnvironment {
                     configuration.getMap(ScriptingConfigurationKeys.LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION)
                 }
@@ -49,7 +49,7 @@ class ScriptingCompilerConfigurationExtension(
 
             configureScriptDefinitions(configuration, hostConfiguration, this::class.java.classLoader)
 
-            val scriptDefinitionProvider = ScriptDefinitionProvider.getInstance(project) as? CliScriptDefinitionProvider
+            konst scriptDefinitionProvider = ScriptDefinitionProvider.getInstance(project) as? CliScriptDefinitionProvider
             if (scriptDefinitionProvider != null) {
                 scriptDefinitionProvider.setScriptDefinitionsSources(configuration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_SOURCES))
                 scriptDefinitionProvider.setScriptDefinitions(configuration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS))
@@ -58,10 +58,10 @@ class ScriptingCompilerConfigurationExtension(
     }
 
     override fun updateFileRegistry() {
-        val scriptDefinitionProvider = ScriptDefinitionProvider.getInstance(project) as? CliScriptDefinitionProvider
+        konst scriptDefinitionProvider = ScriptDefinitionProvider.getInstance(project) as? CliScriptDefinitionProvider
         if (scriptDefinitionProvider != null) {
             // Register new file extensions
-            val fileTypeRegistry = FileTypeRegistry.getInstance() as CoreFileTypeRegistry
+            konst fileTypeRegistry = FileTypeRegistry.getInstance() as CoreFileTypeRegistry
 
             KotlinCoreEnvironment.underApplicationLock {
                 scriptDefinitionProvider.getKnownFilenameExtensions().filter {
@@ -79,9 +79,9 @@ internal fun configureScriptDefinitions(
     hostConfiguration: ScriptingHostConfiguration,
     classLoader: ClassLoader
 ) {
-    val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY) ?: MessageCollector.NONE
+    konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY) ?: MessageCollector.NONE
 
-    val explicitScriptDefinitions = configuration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_CLASSES)
+    konst explicitScriptDefinitions = configuration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_CLASSES)
 
     if (explicitScriptDefinitions.isNotEmpty()) {
         configureScriptDefinitions(
@@ -102,7 +102,7 @@ internal fun configureScriptDefinitions(
         )
     }
 
-    val definitionsFromClasspath =
+    konst definitionsFromClasspath =
         if (configuration.getBoolean(ScriptingConfigurationKeys.DISABLE_SCRIPT_DEFINITIONS_FROM_CLASSPATH_OPTION)) null
         else
             ScriptDefinitionsFromClasspathDiscoverySource(
@@ -110,7 +110,7 @@ internal fun configureScriptDefinitions(
                 hostConfiguration,
                 messageCollector.reporter
             )
-    val autoloadedScriptDefinitions =
+    konst autoloadedScriptDefinitions =
         if (configuration.getBoolean(ScriptingConfigurationKeys.DISABLE_SCRIPT_DEFINITIONS_AUTOLOADING_OPTION)) null
         else AutoloadedScriptDefinitions(hostConfiguration, classLoader, messageCollector.reporter)
 

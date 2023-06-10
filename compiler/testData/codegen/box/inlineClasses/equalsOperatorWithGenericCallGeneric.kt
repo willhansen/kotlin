@@ -3,13 +3,13 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny<T>(val x: T)
+konstue class IcAny<T>(konst x: T)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny2<T: Any>(val x: T?)
+konstue class IcAny2<T: Any>(konst x: T?)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcInt<T: Int>(val x: T)
+konstue class IcInt<T: Int>(konst x: T)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcLong<T: Long>(val x: T)
+konstue class IcLong<T: Long>(konst x: T)
 
 fun <T> id(x: T) = x
 

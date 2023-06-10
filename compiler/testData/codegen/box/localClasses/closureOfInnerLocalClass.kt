@@ -7,7 +7,7 @@ fun box(): String {
     var s: Any? = null
     for (t in arrayOf("1", "2", "3")) {
         class C() {
-            val y = t
+            konst y = t
 
             inner class D() {
                 fun copyOuter() = C()
@@ -18,7 +18,7 @@ fun box(): String {
             s = C()
         }
 
-        val c = (s as C).D().copyOuter()
+        konst c = (s as C).D().copyOuter()
         log += c.y
     }
 

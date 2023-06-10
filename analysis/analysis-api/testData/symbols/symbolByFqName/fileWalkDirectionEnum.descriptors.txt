@@ -29,7 +29,7 @@ KtFunctionSymbol:
   typeParameters: [
     KtTypeParameterSymbol(T)
   ]
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -91,7 +91,7 @@ KtFunctionSymbol:
   typeParameters: [
     KtTypeParameterSymbol(T)
   ]
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtLibraryModule "Library kotlin-stdlib"
   deprecationStatus: null
@@ -127,7 +127,7 @@ KtFunctionSymbol:
   typeParameters: [
     KtTypeParameterSymbol(T)
   ]
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

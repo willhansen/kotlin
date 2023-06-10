@@ -1,5 +1,5 @@
-annotation class A(vararg val strings: String)
-annotation class AArray(vararg val value: A)
+annotation class A(vararg konst strings: String)
+annotation class AArray(vararg konst konstue: A)
 
 @AArray(A(strings = ["foo", "bar"]))
 class F<caret>oo

@@ -30,7 +30,7 @@ public final class IrFile extends
   private IrFile(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -147,10 +147,10 @@ public final class IrFile extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -183,7 +183,7 @@ public final class IrFile extends
     public IrFile parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrFile(input, extensionRegistry);
     }
   };
@@ -496,23 +496,23 @@ public final class IrFile extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFile parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFile parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFile parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFile parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFile parseFrom(java.io.InputStream input)
@@ -735,7 +735,7 @@ public final class IrFile extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrFile parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrFile) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -777,18 +777,18 @@ public final class IrFile extends
      * <code>repeated int32 declaration_id = 1 [packed = true];</code>
      */
     public Builder setDeclarationId(
-        int index, int value) {
+        int index, int konstue) {
       ensureDeclarationIdIsMutable();
-      declarationId_.set(index, value);
+      declarationId_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int32 declaration_id = 1 [packed = true];</code>
      */
-    public Builder addDeclarationId(int value) {
+    public Builder addDeclarationId(int konstue) {
       ensureDeclarationIdIsMutable();
-      declarationId_.add(value);
+      declarationId_.add(konstue);
       
       return this;
     }
@@ -796,10 +796,10 @@ public final class IrFile extends
      * <code>repeated int32 declaration_id = 1 [packed = true];</code>
      */
     public Builder addAllDeclarationId(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensureDeclarationIdIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, declarationId_);
+          konstues, declarationId_);
       
       return this;
     }
@@ -829,11 +829,11 @@ public final class IrFile extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry file_entry = 2;</code>
      */
-    public Builder setFileEntry(org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry value) {
-      if (value == null) {
+    public Builder setFileEntry(org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      fileEntry_ = value;
+      fileEntry_ = konstue;
 
       bitField0_ |= 0x00000002;
       return this;
@@ -851,13 +851,13 @@ public final class IrFile extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry file_entry = 2;</code>
      */
-    public Builder mergeFileEntry(org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry value) {
+    public Builder mergeFileEntry(org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry konstue) {
       if (((bitField0_ & 0x00000002) == 0x00000002) &&
           fileEntry_ != org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry.getDefaultInstance()) {
         fileEntry_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry.newBuilder(fileEntry_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry.newBuilder(fileEntry_).mergeFrom(konstue).buildPartial();
       } else {
-        fileEntry_ = value;
+        fileEntry_ = konstue;
       }
 
       bitField0_ |= 0x00000002;
@@ -903,18 +903,18 @@ public final class IrFile extends
      * <code>repeated int32 fq_name = 3 [packed = true];</code>
      */
     public Builder setFqName(
-        int index, int value) {
+        int index, int konstue) {
       ensureFqNameIsMutable();
-      fqName_.set(index, value);
+      fqName_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int32 fq_name = 3 [packed = true];</code>
      */
-    public Builder addFqName(int value) {
+    public Builder addFqName(int konstue) {
       ensureFqNameIsMutable();
-      fqName_.add(value);
+      fqName_.add(konstue);
       
       return this;
     }
@@ -922,10 +922,10 @@ public final class IrFile extends
      * <code>repeated int32 fq_name = 3 [packed = true];</code>
      */
     public Builder addAllFqName(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensureFqNameIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, fqName_);
+          konstues, fqName_);
       
       return this;
     }
@@ -970,12 +970,12 @@ public final class IrFile extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 4;</code>
      */
     public Builder setAnnotation(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.set(index, value);
+      annotation_.set(index, konstue);
 
       return this;
     }
@@ -992,12 +992,12 @@ public final class IrFile extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 4;</code>
      */
-    public Builder addAnnotation(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+    public Builder addAnnotation(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.add(value);
+      annotation_.add(konstue);
 
       return this;
     }
@@ -1005,12 +1005,12 @@ public final class IrFile extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 4;</code>
      */
     public Builder addAnnotation(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.add(index, value);
+      annotation_.add(index, konstue);
 
       return this;
     }
@@ -1038,10 +1038,10 @@ public final class IrFile extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 4;</code>
      */
     public Builder addAllAnnotation(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall> konstues) {
       ensureAnnotationIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, annotation_);
+          konstues, annotation_);
 
       return this;
     }
@@ -1094,18 +1094,18 @@ public final class IrFile extends
      * <code>repeated int64 explicitly_exported_to_compiler = 5 [packed = true];</code>
      */
     public Builder setExplicitlyExportedToCompiler(
-        int index, long value) {
+        int index, long konstue) {
       ensureExplicitlyExportedToCompilerIsMutable();
-      explicitlyExportedToCompiler_.set(index, value);
+      explicitlyExportedToCompiler_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int64 explicitly_exported_to_compiler = 5 [packed = true];</code>
      */
-    public Builder addExplicitlyExportedToCompiler(long value) {
+    public Builder addExplicitlyExportedToCompiler(long konstue) {
       ensureExplicitlyExportedToCompilerIsMutable();
-      explicitlyExportedToCompiler_.add(value);
+      explicitlyExportedToCompiler_.add(konstue);
       
       return this;
     }
@@ -1113,10 +1113,10 @@ public final class IrFile extends
      * <code>repeated int64 explicitly_exported_to_compiler = 5 [packed = true];</code>
      */
     public Builder addAllExplicitlyExportedToCompiler(
-        java.lang.Iterable<? extends java.lang.Long> values) {
+        java.lang.Iterable<? extends java.lang.Long> konstues) {
       ensureExplicitlyExportedToCompilerIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, explicitlyExportedToCompiler_);
+          konstues, explicitlyExportedToCompiler_);
       
       return this;
     }
@@ -1161,12 +1161,12 @@ public final class IrFile extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.Actual actual = 6;</code>
      */
     public Builder setActual(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.Actual value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.Actual konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureActualIsMutable();
-      actual_.set(index, value);
+      actual_.set(index, konstue);
 
       return this;
     }
@@ -1183,12 +1183,12 @@ public final class IrFile extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.Actual actual = 6;</code>
      */
-    public Builder addActual(org.jetbrains.kotlin.backend.common.serialization.proto.Actual value) {
-      if (value == null) {
+    public Builder addActual(org.jetbrains.kotlin.backend.common.serialization.proto.Actual konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureActualIsMutable();
-      actual_.add(value);
+      actual_.add(konstue);
 
       return this;
     }
@@ -1196,12 +1196,12 @@ public final class IrFile extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.Actual actual = 6;</code>
      */
     public Builder addActual(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.Actual value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.Actual konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureActualIsMutable();
-      actual_.add(index, value);
+      actual_.add(index, konstue);
 
       return this;
     }
@@ -1229,10 +1229,10 @@ public final class IrFile extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.Actual actual = 6;</code>
      */
     public Builder addAllActual(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.Actual> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.Actual> konstues) {
       ensureActualIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, actual_);
+          konstues, actual_);
 
       return this;
     }

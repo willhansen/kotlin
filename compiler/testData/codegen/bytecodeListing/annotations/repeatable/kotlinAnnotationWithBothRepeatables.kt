@@ -10,9 +10,9 @@ package test
 
 @Repeatable
 @JvmRepeatable(As::class)
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 
-annotation class As(val value: Array<A>)
+annotation class As(konst konstue: Array<A>)
 
 @A("a1")
 @A("a2")

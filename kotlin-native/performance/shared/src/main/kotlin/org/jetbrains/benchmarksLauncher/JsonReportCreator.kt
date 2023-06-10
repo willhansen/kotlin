@@ -18,9 +18,9 @@ package org.jetbrains.benchmarksLauncher
 
 import org.jetbrains.report.BenchmarkResult
 
-class JsonReportCreator(val data: Iterable<BenchmarkResult>) {
+class JsonReportCreator(konst data: Iterable<BenchmarkResult>) {
     fun printJsonReport(jsonReport: String?): Unit {
-        val reportText = data.joinToString(prefix = "[", postfix = "]") {
+        konst reportText = data.joinToString(prefix = "[", postfix = "]") {
             it.toJson()
         }
         jsonReport?.let { writeToFile(it, reportText) } ?: print(reportText)

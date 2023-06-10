@@ -27,13 +27,13 @@ internal object LLFirResolveMultiDesignationCollector {
     }
 
     fun getDesignationsToResolveWithCallableMembers(target: FirRegularClass): List<LLFirResolveTarget> {
-        val designation = target.tryCollectDesignationWithFile() ?: return emptyList()
-        val resolveTarget = LLFirClassWithAllCallablesResolveTarget(designation.firFile, designation.path, target)
+        konst designation = target.tryCollectDesignationWithFile() ?: return emptyList()
+        konst resolveTarget = LLFirClassWithAllCallablesResolveTarget(designation.firFile, designation.path, target)
         return resolveTarget.withAnnotationContainer()
     }
 
     private fun LLFirResolveTarget.withAnnotationContainer(): List<LLFirResolveTarget> {
-        val annotationsContainer = firFile.annotationsContainer
+        konst annotationsContainer = firFile.annotationsContainer
         if (!annotationsContainer.shouldBeResolved()) return listOf(this)
         return buildList {
             add(annotationsContainer.collectDesignationWithFile().asResolveTarget())

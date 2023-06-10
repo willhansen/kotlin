@@ -23,20 +23,20 @@ abstract class FirDeclarationDataKey
  *   won't be any race condition. You can achieve this by
  * - setting attribute to declaration before it's publication (e.g. in scopes)
  * - setting attribute in one phase and reading it only in following ones (using `ensureResolve` on symbol)
- * - resetting attribute under lock over specific attribute value
+ * - resetting attribute under lock over specific attribute konstue
  */
 class FirDeclarationAttributes : AttributeArrayOwner<FirDeclarationDataKey, Any> {
-    override val typeRegistry: TypeRegistry<FirDeclarationDataKey, Any>
+    override konst typeRegistry: TypeRegistry<FirDeclarationDataKey, Any>
         get() = FirDeclarationDataRegistry
 
     constructor() : super()
     private constructor(arrayMap: ArrayMap<Any>) : super(arrayMap)
 
-    internal operator fun set(key: KClass<out FirDeclarationDataKey>, value: Any?) {
-        if (value == null) {
+    internal operator fun set(key: KClass<out FirDeclarationDataKey>, konstue: Any?) {
+        if (konstue == null) {
             removeComponent(key)
         } else {
-            registerComponent(key, value)
+            registerComponent(key, konstue)
         }
     }
 
@@ -51,37 +51,37 @@ class FirDeclarationAttributes : AttributeArrayOwner<FirDeclarationDataKey, Any>
  */
 object FirDeclarationDataRegistry : ConeTypeRegistry<FirDeclarationDataKey, Any>() {
     fun <K : FirDeclarationDataKey> data(key: K): DeclarationDataAccessor {
-        val kClass = key::class
+        konst kClass = key::class
         return DeclarationDataAccessor(generateAnyNullableAccessor(kClass), kClass)
     }
 
     fun <K : FirDeclarationDataKey> symbolAccessor(key: K): SymbolDataAccessor {
-        val kClass = key::class
+        konst kClass = key::class
         return SymbolDataAccessor(generateAnyNullableAccessor(kClass), kClass)
     }
 
     fun <K : FirDeclarationDataKey, V : Any> attributesAccessor(key: K): ReadWriteProperty<FirDeclarationAttributes, V?> {
-        val kClass = key::class
+        konst kClass = key::class
         return AttributeDataAccessor(generateNullableAccessor(kClass), kClass)
     }
 
     class DeclarationDataAccessor(
-        private val dataAccessor: NullableArrayMapAccessor<FirDeclarationDataKey, Any, *>,
-        val key: KClass<out FirDeclarationDataKey>
+        private konst dataAccessor: NullableArrayMapAccessor<FirDeclarationDataKey, Any, *>,
+        konst key: KClass<out FirDeclarationDataKey>
     ) {
         operator fun <V> getValue(thisRef: FirDeclaration, property: KProperty<*>): V? {
             @Suppress("UNCHECKED_CAST")
             return dataAccessor.getValue(thisRef.attributes, property) as? V
         }
 
-        operator fun <V> setValue(thisRef: FirDeclaration, property: KProperty<*>, value: V?) {
-            thisRef.attributes[key] = value
+        operator fun <V> setValue(thisRef: FirDeclaration, property: KProperty<*>, konstue: V?) {
+            thisRef.attributes[key] = konstue
         }
     }
 
     class SymbolDataAccessor(
-        private val dataAccessor: NullableArrayMapAccessor<FirDeclarationDataKey, Any, *>,
-        val key: KClass<out FirDeclarationDataKey>
+        private konst dataAccessor: NullableArrayMapAccessor<FirDeclarationDataKey, Any, *>,
+        konst key: KClass<out FirDeclarationDataKey>
     ) {
         operator fun <V> getValue(thisRef: FirBasedSymbol<*>, property: KProperty<*>): V? {
             @Suppress("UNCHECKED_CAST")
@@ -90,15 +90,15 @@ object FirDeclarationDataRegistry : ConeTypeRegistry<FirDeclarationDataKey, Any>
     }
 
     private class AttributeDataAccessor<V : Any>(
-        val dataAccessor: NullableArrayMapAccessor<FirDeclarationDataKey, Any, V>,
-        val key: KClass<out FirDeclarationDataKey>
+        konst dataAccessor: NullableArrayMapAccessor<FirDeclarationDataKey, Any, V>,
+        konst key: KClass<out FirDeclarationDataKey>
     ) : ReadWriteProperty<FirDeclarationAttributes, V?> {
         override fun getValue(thisRef: FirDeclarationAttributes, property: KProperty<*>): V? {
             return dataAccessor.getValue(thisRef, property)
         }
 
-        override fun setValue(thisRef: FirDeclarationAttributes, property: KProperty<*>, value: V?) {
-            thisRef[key] = value
+        override fun setValue(thisRef: FirDeclarationAttributes, property: KProperty<*>, konstue: V?) {
+            thisRef[key] = konstue
         }
     }
 }

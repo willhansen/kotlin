@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.name.Name
 interface SyntheticJavaPartsProvider {
 
     companion object {
-        val EMPTY = CompositeSyntheticJavaPartsProvider(emptyList())
+        konst EMPTY = CompositeSyntheticJavaPartsProvider(emptyList())
     }
 
     context(LazyJavaResolverContext)
@@ -52,7 +52,7 @@ interface SyntheticJavaPartsProvider {
 }
 
 @Suppress("IncorrectFormatting") // KTIJ-22227
-class CompositeSyntheticJavaPartsProvider(private val inner: List<SyntheticJavaPartsProvider>) : SyntheticJavaPartsProvider {
+class CompositeSyntheticJavaPartsProvider(private konst inner: List<SyntheticJavaPartsProvider>) : SyntheticJavaPartsProvider {
     context(LazyJavaResolverContext)
     override fun getMethodNames(thisDescriptor: ClassDescriptor): List<Name> {
         return inner.flatMap { it.getMethodNames(thisDescriptor) }

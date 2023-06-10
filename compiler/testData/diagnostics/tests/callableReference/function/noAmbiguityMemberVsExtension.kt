@@ -9,7 +9,7 @@ class A {
 fun A.<!EXTENSION_SHADOWED_BY_MEMBER!>foo<!>() {}
 
 fun main() {
-    val x = A::foo
+    konst x = A::foo
 
     checkSubtype<KFunction1<A, Int>>(x)
 }

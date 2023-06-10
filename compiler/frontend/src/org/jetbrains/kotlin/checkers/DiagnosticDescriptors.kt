@@ -10,17 +10,17 @@ import org.jetbrains.kotlin.checkers.diagnostics.AbstractTestDiagnostic
 import org.jetbrains.kotlin.checkers.diagnostics.PositionalTextDiagnostic
 import org.jetbrains.kotlin.checkers.diagnostics.TextDiagnostic
 
-abstract class AbstractDiagnosticDescriptor internal constructor(val start: Int, val end: Int) {
-    val textRange: TextRange
+abstract class AbstractDiagnosticDescriptor internal constructor(konst start: Int, konst end: Int) {
+    konst textRange: TextRange
         get() = TextRange(start, end)
 }
 
-class ActualDiagnosticDescriptor internal constructor(start: Int, end: Int, val diagnostics: List<AbstractTestDiagnostic>) :
+class ActualDiagnosticDescriptor internal constructor(start: Int, end: Int, konst diagnostics: List<AbstractTestDiagnostic>) :
     AbstractDiagnosticDescriptor(start, end) {
 
-    val textDiagnosticsMap: MutableMap<AbstractTestDiagnostic, TextDiagnostic>
+    konst textDiagnosticsMap: MutableMap<AbstractTestDiagnostic, TextDiagnostic>
         get() {
-            val diagnosticMap = mutableMapOf<AbstractTestDiagnostic, TextDiagnostic>()
+            konst diagnosticMap = mutableMapOf<AbstractTestDiagnostic, TextDiagnostic>()
             for (diagnostic in diagnostics) {
                 diagnosticMap[diagnostic] = TextDiagnostic.asTextDiagnostic(diagnostic)
             }
@@ -29,9 +29,9 @@ class ActualDiagnosticDescriptor internal constructor(start: Int, end: Int, val 
         }
 }
 
-class TextDiagnosticDescriptor internal constructor(private val positionalTextDiagnostic: PositionalTextDiagnostic) :
+class TextDiagnosticDescriptor internal constructor(private konst positionalTextDiagnostic: PositionalTextDiagnostic) :
     AbstractDiagnosticDescriptor(positionalTextDiagnostic.start, positionalTextDiagnostic.end) {
 
-    val textDiagnostic: TextDiagnostic
+    konst textDiagnostic: TextDiagnostic
         get() = positionalTextDiagnostic.diagnostic
 }

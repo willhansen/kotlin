@@ -18,9 +18,9 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
 internal class JavaClassDeclaredMembersEnhancementScope(
-    private val useSiteSession: FirSession,
-    private val owner: FirJavaClass,
-    private val useSiteMemberEnhancementScope: FirTypeScope
+    private konst useSiteSession: FirSession,
+    private konst owner: FirJavaClass,
+    private konst useSiteMemberEnhancementScope: FirTypeScope
 ) : FirContainingNamesAwareScope() {
     private fun FirCallableDeclaration.isDeclared(): Boolean {
         return (this.dispatchReceiverType as? ConeLookupTagBasedType)?.lookupTag == owner.symbol.toLookupTag()
@@ -28,7 +28,7 @@ internal class JavaClassDeclaredMembersEnhancementScope(
                 && this.origin != FirDeclarationOrigin.IntersectionOverride
     }
 
-    private val callableNames = run {
+    private konst callableNames = run {
         (useSiteMemberEnhancementScope.collectAllProperties() + useSiteMemberEnhancementScope.collectAllFunctions()).filter {
             it.fir.isDeclared()
         }.map {
@@ -36,7 +36,7 @@ internal class JavaClassDeclaredMembersEnhancementScope(
         }.toSet()
     }
 
-    private val nestedClassifierScope: FirContainingNamesAwareScope? =
+    private konst nestedClassifierScope: FirContainingNamesAwareScope? =
         useSiteSession.nestedClassifierScope(owner)
 
     override fun getCallableNames(): Set<Name> {
@@ -82,7 +82,7 @@ internal class JavaClassDeclaredMembersEnhancementScope(
     }
 
     private fun FirCallableDeclaration.overriddenMembers(): List<FirCallableDeclaration> {
-        return when (val symbol = this.symbol) {
+        return when (konst symbol = this.symbol) {
             is FirNamedFunctionSymbol -> useSiteMemberEnhancementScope.getDirectOverriddenMembers(symbol)
             is FirPropertySymbol -> useSiteMemberEnhancementScope.getDirectOverriddenProperties(symbol)
             else -> emptyList()

@@ -5,8 +5,8 @@ import org.junit.Test
 class InternalDummyTest {
     @Test
     fun testDummy() {
-        val dummy = InternalDummy()
-        val dummyUser = InternalDummyUser()
+        konst dummy = InternalDummy()
+        konst dummyUser = InternalDummyUser()
         dummyUser.use(dummy)
     }
 }

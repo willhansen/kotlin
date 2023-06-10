@@ -6,12 +6,12 @@
 
 interface I {
     companion object {
-        val default: IC by lazy(::IC)
+        konst default: IC by lazy(::IC)
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC(val ok: String = "OK") : I
+konstue class IC(konst ok: String = "OK") : I
 
 fun box(): String {
     return I.default.ok

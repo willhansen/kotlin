@@ -15,8 +15,8 @@ fun runnable(kr: KRunnable) = kr
 fun foo() {}
 
 fun box(): String {
-    val foo1 = runnable(::foo)
-    val foo2 = runnable(::foo)
+    konst foo1 = runnable(::foo)
+    konst foo2 = runnable(::foo)
 
     if (foo1 != foo2) {
         return "Failed: foo1 != foo2"

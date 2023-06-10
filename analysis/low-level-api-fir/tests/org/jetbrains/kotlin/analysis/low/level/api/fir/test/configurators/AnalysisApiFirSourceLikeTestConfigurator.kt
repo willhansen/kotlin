@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.test.services.TestModuleStructure
 import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.configuration.JvmEnvironmentConfigurator
 
-abstract class AnalysisApiFirSourceLikeTestConfigurator(override val analyseInDependentSession: Boolean) : AnalysisApiTestConfigurator() {
-    override val frontendKind: FrontendKind get() = FrontendKind.Fir
+abstract class AnalysisApiFirSourceLikeTestConfigurator(override konst analyseInDependentSession: Boolean) : AnalysisApiTestConfigurator() {
+    override konst frontendKind: FrontendKind get() = FrontendKind.Fir
 
     override fun configureTest(builder: TestConfigurationBuilder, disposable: Disposable) {
         builder.apply {
@@ -34,7 +34,7 @@ abstract class AnalysisApiFirSourceLikeTestConfigurator(override val analyseInDe
         }
     }
 
-    override val serviceRegistrars: List<AnalysisApiTestServiceRegistrar> = listOf(
+    override konst serviceRegistrars: List<AnalysisApiTestServiceRegistrar> = listOf(
         AnalysisApiBaseTestServiceRegistrar,
         AnalysisApiDecompiledCodeTestServiceRegistrar,
         AnalysisApiFirTestServiceRegistrar,

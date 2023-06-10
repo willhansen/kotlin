@@ -52,8 +52,8 @@ Directives are main option for configuring test. With them you can configure fil
 All directives should be declared in special containers which are inheritors of [SimpleDirectivesContainer](tests/org/jetbrains/kotlin/test/directives/model/DirectivesContainer.kt). There are multiple utility functions in [SimpleDirectivesContainer](tests/org/jetbrains/kotlin/test/directives/model/DirectivesContainer.kt) which **should** be used for declaring directives:
 - function `directive()` declares `SimpleDirective`
 - function `stringDirective()` declares `StringDirective`
-- function `valueDirective<T>()` takes parser of type `(String) -> T?` and declares `ValueDirective<T>`. Parser function is needed to transform arguments from testdata to real values of type `T`
-- function `enumDirective<T>()` is needed to create `ValueDirective<T>` of enum type `T`. It doesn't require `parser` function and parse enum values by their names. Note that you can pass `additionalParser: (String) -> T?` as a fallback parsing option.
+- function `konstueDirective<T>()` takes parser of type `(String) -> T?` and declares `ValueDirective<T>`. Parser function is needed to transform arguments from testdata to real konstues of type `T`
+- function `enumDirective<T>()` is needed to create `ValueDirective<T>` of enum type `T`. It doesn't require `parser` function and parse enum konstues by their names. Note that you can pass `additionalParser: (String) -> T?` as a fallback parsing option.
 
 All these functions also take the following arguments:
 - `description: String`: required parameter which should include description of this directive
@@ -97,19 +97,19 @@ Different parts of test (like facades and handlers) may use some additional comp
 To declare your own service you need to do three things:
 1. Declare class of service with one constructor which takes `TestServices` as parameter and inherit it from `TestService` interface
 ```kotlin
-class MySuperService(val testServices: TestServices) : TestService {
+class MySuperService(konst testServices: TestServices) : TestService {
     ...
 }
 ```
 2. Add typed accessor to this service from `TestServices`
 ```kotlin
-val TestServices.mySuperService: MySuperService by TestServices.testServiceAccessor()
+konst TestServices.mySuperService: MySuperService by TestServices.testServiceAccessor()
 ```
 3. Register service inside test. There are two ways to register service:
 - A lot of different test entities (like facades or handlers) are marked with `ServicesAndDirectivesContainer` interface, which has `additionalService` field with list of services this entity uses. During test configuration, infrastructure collects all those additional services, creates instances of them and registers inside `TestServices`
 ```kotlin
 class MyHandler : AnalysisHandler<MyArtifact>() {
-    override val additionalServices: List<ServiceRegistrationData> = listOf(service(::MySuperService))
+    override konst additionalServices: List<ServiceRegistrationData> = listOf(service(::MySuperService))
 }
 ```
 - You also can manually register service using test configuration builder DSL (which will be fully described below)
@@ -138,14 +138,14 @@ There are many other services, you can find them by looking at inheritors of `Te
 [CompilerConfiguration](../config/src/org/jetbrains/kotlin/config/CompilerConfiguration.java) is main class which configures how specific module will be analyzed or compiled and for its setup there is a special service named [CompilerConfigurationProvider](../tests-common-new/tests/org/jetbrains/kotlin/test/services/CompilerConfigurationProvider.kt). It creates `CompilerConfiguration` which is based on list of [EnvironmentConfigurators](tests/org/jetbrains/kotlin/test/services/EnvironmentConfigurator.kt) which can be registered in test. So if you want to customize compiler configuration you need to modify existing configurator (e.g. [JvmEnvironmentConfigurator](../tests-common-new/tests/org/jetbrains/kotlin/test/services/configuration/JvmEnvironmentConfigurator.kt)) or write your own. Main method of `EnvironmentConfigurator` is `configureCompilerConfiguration` which takes compiler configuration and test module, so you can configure configuration (sorry for tautology) using directives which are applied to specific module.
 
 There are also two additional methods which can be used to provide some simple mapping:
-1. from some value directive to configuration key of same type
+1. from some konstue directive to configuration key of same type
 2. from some directive to analysis flag
 
 Here is short example of declaring your own environment configurator:
 
 ```kotlin
 class MySuperEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(MyDirectives)
 
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
@@ -187,11 +187,11 @@ Basic [AnalysisHandler](tests/org/jetbrains/kotlin/test/model/AnalysisHandler.kt
 
 ```kotlin
 abstract class AnalysisHandler<A : ResultingArtifact<A>>(
-    val testServices: TestServices,
-    val failureDisablesNextSteps: Boolean,
-    val doNotRunIfThereWerePreviousFailures: Boolean
+    konst testServices: TestServices,
+    konst failureDisablesNextSteps: Boolean,
+    konst doNotRunIfThereWerePreviousFailures: Boolean
 ) : ServicesAndDirectivesContainer {
-    abstract val artifactKind: TestArtifactKind<A>
+    abstract konst artifactKind: TestArtifactKind<A>
 
     abstract fun processModule(module: TestModule, info: A)
 
@@ -222,18 +222,18 @@ In test infrastructure there are some tools which can be useful for handlers of 
 
 ```kotlin
 class MySuperHandler(testServices: TestServices) : AnalysisHandler<ClassicFrontendOutputArtifact>(testServices, false, false) {
-    override val artifactKind: TestArtifactKind<ClassicFrontendOutputArtifact>
+    override konst artifactKind: TestArtifactKind<ClassicFrontendOutputArtifact>
         get() = FrontendKinds.ClassicFrontend
     
-    private val dumper = MultiModuleInfoDumperImpl()
+    private konst dumper = MultiModuleInfoDumperImpl()
     
     override fun processModule(module: TestModule, info: ClassicFrontendOutputArtifact) {
-        val builder = dumper.builderForModule(module)
+        konst builder = dumper.builderForModule(module)
         builder.appendLine("---- This is dump from module ${module.name} ----")
     }
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
-        val expectedFile = testServices.moduleStructure.originalTestDataFiles.first().withExtension(".myDump.txt")
+        konst expectedFile = testServices.moduleStructure.originalTestDataFiles.first().withExtension(".myDump.txt")
         assertions.assertEqualsToFile(expectedFile, dumper.generateResultingDump())
     }
 }
@@ -281,8 +281,8 @@ defaultDirectives {
     +SOME_SIMPLE_DIRECTIVE // enable SOME_SIMPLE_DIRECTIVE
     -ANOTHER_SIMPLE_DIRECTIVE // disable directive if it was enabled before by other `defaultDirectives block
     
-    STRING_DIRECTIVE with listOf("foo", "bar") // Add STRING_DIRECTIVE with values "foo" and "bar"
-    VALUE_DIRECTIVE with Enum.SomeValue // Add VALUE_DIRECTIVE with value  Enum.SomeValue
+    STRING_DIRECTIVE with listOf("foo", "bar") // Add STRING_DIRECTIVE with konstues "foo" and "bar"
+    VALUE_DIRECTIVE with Enum.SomeValue // Add VALUE_DIRECTIVE with konstue  Enum.SomeValue
 }
 ```
 - `useSomething` for registering different kinds of test services
@@ -300,15 +300,15 @@ defaultDirectives {
 
 Almost all methods of DSL take `Constructor<SomeService>` as parameter, and `Constructor<T>` is just typealias to `(TestService) -> T`. If your service has constructor of such shape you can just pass callable reference to it (`useHandlers(::MyHandler)`). If your service is parametrized and has some additional parameter you can pass this parameter to service using function `bind`:
 ```kotlin
-class MyHandler(testServices: TestServices, val someFlag: Boolean) : AnalysisHandler...
+class MyHandler(testServices: TestServices, konst someFlag: Boolean) : AnalysisHandler...
 
 ...
 useHandlers(::MyHandler.bind(true))
 ...
 
 // declaration of bind:
-fun <T, R> ((TestServices, T) -> R).bind(value: T): Constructor<R> {
-    return { this.invoke(it, value) }
+fun <T, R> ((TestServices, T) -> R).bind(konstue: T): Constructor<R> {
+    return { this.invoke(it, konstue) }
 }
 ```
     

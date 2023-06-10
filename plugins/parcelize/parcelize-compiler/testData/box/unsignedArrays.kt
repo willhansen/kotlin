@@ -12,14 +12,14 @@ import java.util.Arrays
 
 @Parcelize
 data class Test(
-    val a: UByteArray,
-    val b: UShortArray,
-    val c: UIntArray,
-    val d: ULongArray,
-    val e: UByteArray?,
-    val f: UShortArray?,
-    val g: UIntArray?,
-    val h: ULongArray?
+    konst a: UByteArray,
+    konst b: UShortArray,
+    konst c: UIntArray,
+    konst d: ULongArray,
+    konst e: UByteArray?,
+    konst f: UShortArray?,
+    konst g: UIntArray?,
+    konst h: ULongArray?
 ) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -43,7 +43,7 @@ data class Test(
 }
 
 fun box() = parcelTest { parcel ->
-    val first = Test(
+    konst first = Test(
         a = ubyteArrayOf(1U, 2U, 3U),
         b = ushortArrayOf(2U, 3U, 4U),
         c = uintArrayOf(3U, 4U, 5U),
@@ -53,7 +53,7 @@ fun box() = parcelTest { parcel ->
         g = uintArrayOf(UInt.MAX_VALUE, UInt.MIN_VALUE),
         h = ulongArrayOf(ULong.MAX_VALUE, ULong.MIN_VALUE),
     )
-    val second = Test(
+    konst second = Test(
         a = ubyteArrayOf(),
         b = ushortArrayOf(),
         c = uintArrayOf(),
@@ -67,13 +67,13 @@ fun box() = parcelTest { parcel ->
     first.writeToParcel(parcel, 0)
     second.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val creator = parcelableCreator<Test>()
-    val first2 = creator.createFromParcel(parcel)
-    val second2 = creator.createFromParcel(parcel)
+    konst creator = parcelableCreator<Test>()
+    konst first2 = creator.createFromParcel(parcel)
+    konst second2 = creator.createFromParcel(parcel)
 
     assert(first == first2)
     assert(second == second2)

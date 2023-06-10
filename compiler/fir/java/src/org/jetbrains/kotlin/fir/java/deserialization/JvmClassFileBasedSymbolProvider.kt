@@ -42,39 +42,39 @@ class JvmClassFileBasedSymbolProvider(
     session: FirSession,
     moduleDataProvider: ModuleDataProvider,
     kotlinScopeProvider: FirKotlinScopeProvider,
-    private val packagePartProvider: PackagePartProvider,
-    private val kotlinClassFinder: KotlinClassFinder,
-    private val javaFacade: FirJavaFacade,
+    private konst packagePartProvider: PackagePartProvider,
+    private konst kotlinClassFinder: KotlinClassFinder,
+    private konst javaFacade: FirJavaFacade,
     defaultDeserializationOrigin: FirDeclarationOrigin = FirDeclarationOrigin.Library
 ) : AbstractFirDeserializedSymbolProvider(
     session, moduleDataProvider, kotlinScopeProvider, defaultDeserializationOrigin, BuiltInSerializerProtocol
 ) {
-    private val annotationsLoader = AnnotationsLoader(session, kotlinClassFinder)
+    private konst annotationsLoader = AnnotationsLoader(session, kotlinClassFinder)
 
     override fun computePackagePartsInfos(packageFqName: FqName): List<PackagePartsCacheData> {
         return packagePartProvider.findPackageParts(packageFqName.asString()).mapNotNull { partName ->
             if (partName in KotlinBuiltins) return@mapNotNull null
-            val classId = ClassId.topLevel(JvmClassName.byInternalName(partName).fqNameForTopLevelClassMaybeWithDollars)
+            konst classId = ClassId.topLevel(JvmClassName.byInternalName(partName).fqNameForTopLevelClassMaybeWithDollars)
             if (!javaFacade.hasTopLevelClassOf(classId)) return@mapNotNull null
-            val jvmMetadataVersion = session.languageVersionSettings.languageVersion.toMetadataVersion()
-            val (kotlinJvmBinaryClass, byteContent) = kotlinClassFinder.findKotlinClassOrContent(
+            konst jvmMetadataVersion = session.languageVersionSettings.languageVersion.toMetadataVersion()
+            konst (kotlinJvmBinaryClass, byteContent) = kotlinClassFinder.findKotlinClassOrContent(
                 classId, jvmMetadataVersion
             ) as? KotlinClassFinder.Result.KotlinClass ?: return@mapNotNull null
 
-            val facadeName = kotlinJvmBinaryClass.classHeader.multifileClassName?.takeIf { it.isNotEmpty() }
-            val facadeFqName = facadeName?.let { JvmClassName.byInternalName(it).fqNameForTopLevelClassMaybeWithDollars }
-            val facadeBinaryClass = facadeFqName?.let {
+            konst facadeName = kotlinJvmBinaryClass.classHeader.multifileClassName?.takeIf { it.isNotEmpty() }
+            konst facadeFqName = facadeName?.let { JvmClassName.byInternalName(it).fqNameForTopLevelClassMaybeWithDollars }
+            konst facadeBinaryClass = facadeFqName?.let {
                 kotlinClassFinder.findKotlinClass(ClassId.topLevel(it), jvmMetadataVersion)
             }
 
-            val moduleData = moduleDataProvider.getModuleData(kotlinJvmBinaryClass.containingLibrary.toPath()) ?: return@mapNotNull null
+            konst moduleData = moduleDataProvider.getModuleData(kotlinJvmBinaryClass.containingLibrary.toPath()) ?: return@mapNotNull null
 
-            val header = kotlinJvmBinaryClass.classHeader
-            val data = header.data ?: header.incompatibleData ?: return@mapNotNull null
-            val strings = header.strings ?: return@mapNotNull null
-            val (nameResolver, packageProto) = JvmProtoBufUtil.readPackageDataFrom(data, strings)
+            konst header = kotlinJvmBinaryClass.classHeader
+            konst data = header.data ?: header.incompatibleData ?: return@mapNotNull null
+            konst strings = header.strings ?: return@mapNotNull null
+            konst (nameResolver, packageProto) = JvmProtoBufUtil.readPackageDataFrom(data, strings)
 
-            val source = JvmPackagePartSource(
+            konst source = JvmPackagePartSource(
                 kotlinJvmBinaryClass, packageProto, nameResolver,
                 kotlinJvmBinaryClass.incompatibility, kotlinJvmBinaryClass.isPreReleaseInvisible,
             )
@@ -95,10 +95,10 @@ class JvmClassFileBasedSymbolProvider(
 
     override fun knownTopLevelClassesInPackage(packageFqName: FqName): Set<String>? = javaFacade.knownClassNamesInPackage(packageFqName)
 
-    private val KotlinJvmBinaryClass.incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>?
+    private konst KotlinJvmBinaryClass.incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>?
         get() {
             // TODO: skipMetadataVersionCheck
-            val metadataVersionFromLanguageVersion = session.languageVersionSettings.languageVersion.toMetadataVersion()
+            konst metadataVersionFromLanguageVersion = session.languageVersionSettings.languageVersion.toMetadataVersion()
             if (classHeader.metadataVersion.isCompatible(metadataVersionFromLanguageVersion)) return null
             return IncompatibleVersionErrorData(
                 actualVersion = classHeader.metadataVersion,
@@ -110,14 +110,14 @@ class JvmClassFileBasedSymbolProvider(
             )
         }
 
-    private val KotlinJvmBinaryClass.isPreReleaseInvisible: Boolean
+    private konst KotlinJvmBinaryClass.isPreReleaseInvisible: Boolean
         get() = classHeader.isPreRelease
 
     override fun extractClassMetadata(classId: ClassId, parentContext: FirDeserializationContext?): ClassMetadataFindResult? {
         // Kotlin classes are annotated Java classes, so this check also looks for them.
         if (!javaFacade.hasTopLevelClassOf(classId)) return null
 
-        val result = kotlinClassFinder.findKotlinClassOrContent(
+        konst result = kotlinClassFinder.findKotlinClassOrContent(
             classId, session.languageVersionSettings.languageVersion.toMetadataVersion()
         )
         if (result !is KotlinClassFinder.Result.KotlinClass) {
@@ -125,18 +125,18 @@ class JvmClassFileBasedSymbolProvider(
                 // Nested class of Kotlin class should have been a Kotlin class.
                 return null
             }
-            val knownContent = (result as? KotlinClassFinder.Result.ClassFileContent)?.content
-            val javaClass = javaFacade.findClass(classId, knownContent) ?: return null
+            konst knownContent = (result as? KotlinClassFinder.Result.ClassFileContent)?.content
+            konst javaClass = javaFacade.findClass(classId, knownContent) ?: return null
             return ClassMetadataFindResult.NoMetadata { symbol ->
                 javaFacade.convertJavaClassToFir(symbol, classId.outerClassId?.let(::getClass), javaClass)
             }
         }
 
-        val kotlinClass = result.kotlinJvmBinaryClass
+        konst kotlinClass = result.kotlinJvmBinaryClass
         if (kotlinClass.classHeader.kind != KotlinClassHeader.Kind.CLASS || kotlinClass.classId != classId) return null
-        val data = kotlinClass.classHeader.data ?: return null
-        val strings = kotlinClass.classHeader.strings ?: return null
-        val (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(data, strings)
+        konst data = kotlinClass.classHeader.data ?: return null
+        konst strings = kotlinClass.classHeader.strings ?: return null
+        konst (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(data, strings)
 
         return ClassMetadataFindResult.Metadata(
             nameResolver,
@@ -158,7 +158,7 @@ class JvmClassFileBasedSymbolProvider(
         kotlinClass: KotlinClassFinder.Result.KotlinClass,
         symbol: FirRegularClassSymbol
     ) {
-        val annotations = mutableListOf<FirAnnotation>()
+        konst annotations = mutableListOf<FirAnnotation>()
         kotlinClass.kotlinJvmBinaryClass.loadClassAnnotations(
             object : KotlinJvmBinaryClass.AnnotationVisitor {
                 override fun visitAnnotation(classId: ClassId, source: SourceElement): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {

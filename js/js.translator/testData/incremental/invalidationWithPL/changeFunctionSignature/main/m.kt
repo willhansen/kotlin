@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val x = test()
+    konst x = test()
     if (stepId == 4) {
         // this is known issue, that return type doesn not affect IdSignature
         // https://youtrack.jetbrains.com/issue/KT-51707

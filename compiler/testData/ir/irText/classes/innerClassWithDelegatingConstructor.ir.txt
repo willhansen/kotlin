@@ -13,12 +13,12 @@ FILE fqName:<root> fileName:/innerClassWithDelegatingConstructor.kt
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Inner modality:FINAL visibility:public [inner] superTypes:[kotlin.Any]'
-      PROPERTY name:x visibility:public modality:FINAL [val]
+      PROPERTY name:x visibility:public modality:FINAL [konst]
         FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
           EXPRESSION_BODY
             GET_VAR 'x: kotlin.Int declared in <root>.Outer.Inner.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
         FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.Outer.Inner) returnType:kotlin.Int
-          correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+          correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
           $this: VALUE_PARAMETER name:<this> type:<root>.Outer.Inner
           BLOCK_BODY
             RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Int declared in <root>.Outer.Inner'
@@ -29,7 +29,7 @@ FILE fqName:<root> fileName:/innerClassWithDelegatingConstructor.kt
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (x: kotlin.Int) declared in <root>.Outer.Inner'
             $this: GET_VAR '<this>: <root>.Outer declared in <root>.Outer.Inner.<init>' type=<root>.Outer origin=null
-            x: CONST Int type=kotlin.Int value=0
+            x: CONST Int type=kotlin.Int konstue=0
       FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
         overridden:
           public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any

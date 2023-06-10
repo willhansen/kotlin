@@ -25,8 +25,8 @@ fun setBooleanRes(x: Boolean) {
 
 fun box(): String {
     builder {
-        val x = true
-        val y = false
+        konst x = true
+        konst y = false
         suspendHere()
         setBooleanRes(if (foo()) x else y)
     }

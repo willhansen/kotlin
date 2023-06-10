@@ -16,9 +16,9 @@ class TransitiveRuntimeOnlyConfigurationTest : AbstractKpmExtensionTest() {
     fun `test transitiveRuntimeOnlyConfiguration contains dependencies from refines parents`() {
         project.applyKpmPlugin()
         kotlin.mainAndTest {
-            val left = fragments.create("left") { it.refines(common) }
-            val right = fragments.create("right") { it.refines(common) }
-            val bottomLeft = fragments.create("bottom") { it.refines(left) }
+            konst left = fragments.create("left") { it.refines(common) }
+            konst right = fragments.create("right") { it.refines(common) }
+            konst bottomLeft = fragments.create("bottom") { it.refines(left) }
 
             common.dependencies {
                 implementation(project.files("common-implementation.jar"))

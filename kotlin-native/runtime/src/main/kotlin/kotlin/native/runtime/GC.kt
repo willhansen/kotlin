@@ -100,7 +100,7 @@ public object GC {
 
     /**
      * GC threshold, controlling how frequenly GC is activated, and how much time GC
-     * takes. Bigger values lead to longer GC pauses, but less GCs.
+     * takes. Bigger konstues lead to longer GC pauses, but less GCs.
      * Usually unused. For the on-safepoints GC scheduler counts
      *         how many safepoints must the code pass before informing the GC scheduler.
      *
@@ -108,31 +108,31 @@ public object GC {
      *
      * Default: (new MM) 100000
      *
-     * @throws [IllegalArgumentException] when value is not positive.
+     * @throws [IllegalArgumentException] when konstue is not positive.
      */
     var threshold: Int
         get() = getThreshold()
-        set(value) {
-            require(value > 0) { "threshold must be positive: $value" }
-            setThreshold(value)
+        set(konstue) {
+            require(konstue > 0) { "threshold must be positive: $konstue" }
+            setThreshold(konstue)
         }
 
     /**
      * Deprecated and unused.
      *
      * Legacy MM: GC allocation threshold, controlling how frequenly GC collect cycles, and how much time
-     * this process takes. Bigger values lead to longer GC pauses, but less GCs.
+     * this process takes. Bigger konstues lead to longer GC pauses, but less GCs.
      *
      * Default: 8 * 1024
      *
-     * @throws [IllegalArgumentException] when value is not positive.
+     * @throws [IllegalArgumentException] when konstue is not positive.
      */
     @Deprecated("No-op in modern GC implementation")
     var collectCyclesThreshold: Long
         get() = getCollectCyclesThreshold()
-        set(value) {
-            require(value > 0) { "collectCyclesThreshold must be positive: $value" }
-            setCollectCyclesThreshold(value)
+        set(konstue) {
+            require(konstue > 0) { "collectCyclesThreshold must be positive: $konstue" }
+            setCollectCyclesThreshold(konstue)
         }
 
     /**
@@ -145,13 +145,13 @@ public object GC {
      *
      * Default: (legacy MM) 8 * 1024 * 1024
      *
-     * @throws [IllegalArgumentException] when value is not positive.
+     * @throws [IllegalArgumentException] when konstue is not positive.
      */
     var thresholdAllocations: Long
         get() = getThresholdAllocations()
-        set(value) {
-            require(value > 0) { "thresholdAllocations must be positive: $value" }
-            setThresholdAllocations(value)
+        set(konstue) {
+            require(konstue > 0) { "thresholdAllocations must be positive: $konstue" }
+            setThresholdAllocations(konstue)
         }
 
     /**
@@ -163,7 +163,7 @@ public object GC {
      */
     var autotune: Boolean
         get() = getTuneThreshold()
-        set(value) = setTuneThreshold(value)
+        set(konstue) = setTuneThreshold(konstue)
 
 
     /**
@@ -174,11 +174,11 @@ public object GC {
     @Deprecated("No-op in modern GC implementation")
     var cyclicCollectorEnabled: Boolean
         get() = getCyclicCollectorEnabled()
-        set(value) = setCyclicCollectorEnabled(value)
+        set(konstue) = setCyclicCollectorEnabled(konstue)
 
     /**
      * When Kotlin code is not allocating enough to trigger GC, the GC scheduler uses timer to drive collection.
-     * Timer-triggered collection will happen roughly in [regularGCInterval] .. 2 * [regularGCInterval] since
+     * Timer-triggered collection will happen roughly in [regularGCInterkonst] .. 2 * [regularGCInterkonst] since
      * any previous collection.
      * Unused with on-safepoints GC scheduler.
      *
@@ -186,13 +186,13 @@ public object GC {
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is negative.
+     * @throws [IllegalArgumentException] when konstue is negative.
      */
-    var regularGCInterval: Duration
-        get() = getRegularGCIntervalMicroseconds().microseconds
-        set(value) {
-            require(!value.isNegative()) { "regularGCInterval must not be negative: $value" }
-            setRegularGCIntervalMicroseconds(value.inWholeMicroseconds)
+    var regularGCInterkonst: Duration
+        get() = getRegularGCInterkonstMicroseconds().microseconds
+        set(konstue) {
+            require(!konstue.isNegative()) { "regularGCInterkonst must not be negative: $konstue" }
+            setRegularGCInterkonstMicroseconds(konstue.inWholeMicroseconds)
         }
 
     /**
@@ -208,13 +208,13 @@ public object GC {
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is negative.
+     * @throws [IllegalArgumentException] when konstue is negative.
      */
     var targetHeapBytes: Long
         get() = getTargetHeapBytes()
-        set(value) {
-            require(value >= 0) { "targetHeapBytes must not be negative: $value" }
-            setTargetHeapBytes(value)
+        set(konstue) {
+            require(konstue >= 0) { "targetHeapBytes must not be negative: $konstue" }
+            setTargetHeapBytes(konstue)
         }
 
     /**
@@ -225,47 +225,47 @@ public object GC {
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is outside (0, 1] interval.
+     * @throws [IllegalArgumentException] when konstue is outside (0, 1] interkonst.
      */
     var targetHeapUtilization: Double
         get() = getTargetHeapUtilization()
-        set(value) {
-            require(value > 0 && value <= 1) { "targetHeapUtilization must be in (0, 1] interval: $value" }
-            setTargetHeapUtilization(value)
+        set(konstue) {
+            require(konstue > 0 && konstue <= 1) { "targetHeapUtilization must be in (0, 1] interkonst: $konstue" }
+            setTargetHeapUtilization(konstue)
         }
 
     /**
-     * The minimum value for [targetHeapBytes]
+     * The minimum konstue for [targetHeapBytes]
      * Only used if [autotune] is true. See [targetHeapBytes] for more details.
      *
      * Default: 1 MiB
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is negative.
+     * @throws [IllegalArgumentException] when konstue is negative.
      */
     var minHeapBytes: Long
         get() = getMinHeapBytes()
-        set(value) {
-            require(value >= 0) { "minHeapBytes must not be negative: $value" }
-            setMinHeapBytes(value)
+        set(konstue) {
+            require(konstue >= 0) { "minHeapBytes must not be negative: $konstue" }
+            setMinHeapBytes(konstue)
         }
 
     /**
-     * The maximum value for [targetHeapBytes].
+     * The maximum konstue for [targetHeapBytes].
      * Only used if [autotune] is true. See [targetHeapBytes] for more details.
      *
      * Default: [Long.MAX_VALUE]
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is negative.
+     * @throws [IllegalArgumentException] when konstue is negative.
      */
     var maxHeapBytes: Long
         get() = getMaxHeapBytes()
-        set(value) {
-            require(value >= 0) { "maxHeapBytes must not be negative: $value" }
-            setMaxHeapBytes(value)
+        set(konstue) {
+            require(konstue >= 0) { "maxHeapBytes must not be negative: $konstue" }
+            setMaxHeapBytes(konstue)
         }
 
     /**
@@ -288,7 +288,7 @@ public object GC {
      * Legacy MM: Always returns null
      */
     @ExperimentalStdlibApi
-    val lastGCInfo: GCInfo?
+    konst lastGCInfo: GCInfo?
         get() = GCInfo.lastGCInfo
 
     /**
@@ -304,59 +304,59 @@ public object GC {
     private external fun getThreshold(): Int
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setThreshold")
-    private external fun setThreshold(value: Int)
+    private external fun setThreshold(konstue: Int)
 
     @GCUnsafeCall("Kotlin_native_internal_GC_getCollectCyclesThreshold")
     private external fun getCollectCyclesThreshold(): Long
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setCollectCyclesThreshold")
-    private external fun setCollectCyclesThreshold(value: Long)
+    private external fun setCollectCyclesThreshold(konstue: Long)
 
     @GCUnsafeCall("Kotlin_native_internal_GC_getThresholdAllocations")
     private external fun getThresholdAllocations(): Long
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setThresholdAllocations")
-    private external fun setThresholdAllocations(value: Long)
+    private external fun setThresholdAllocations(konstue: Long)
 
     @GCUnsafeCall("Kotlin_native_internal_GC_getTuneThreshold")
     private external fun getTuneThreshold(): Boolean
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setTuneThreshold")
-    private external fun setTuneThreshold(value: Boolean)
+    private external fun setTuneThreshold(konstue: Boolean)
 
     @GCUnsafeCall("Kotlin_native_internal_GC_getCyclicCollector")
     private external fun getCyclicCollectorEnabled(): Boolean
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setCyclicCollector")
-    private external fun setCyclicCollectorEnabled(value: Boolean)
+    private external fun setCyclicCollectorEnabled(konstue: Boolean)
 
-    @GCUnsafeCall("Kotlin_native_internal_GC_getRegularGCIntervalMicroseconds")
-    private external fun getRegularGCIntervalMicroseconds(): Long
+    @GCUnsafeCall("Kotlin_native_internal_GC_getRegularGCInterkonstMicroseconds")
+    private external fun getRegularGCInterkonstMicroseconds(): Long
 
-    @GCUnsafeCall("Kotlin_native_internal_GC_setRegularGCIntervalMicroseconds")
-    private external fun setRegularGCIntervalMicroseconds(value: Long)
+    @GCUnsafeCall("Kotlin_native_internal_GC_setRegularGCInterkonstMicroseconds")
+    private external fun setRegularGCInterkonstMicroseconds(konstue: Long)
 
     @GCUnsafeCall("Kotlin_native_internal_GC_getTargetHeapBytes")
     private external fun getTargetHeapBytes(): Long
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setTargetHeapBytes")
-    private external fun setTargetHeapBytes(value: Long)
+    private external fun setTargetHeapBytes(konstue: Long)
 
     @GCUnsafeCall("Kotlin_native_internal_GC_getTargetHeapUtilization")
     private external fun getTargetHeapUtilization(): Double
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setTargetHeapUtilization")
-    private external fun setTargetHeapUtilization(value: Double)
+    private external fun setTargetHeapUtilization(konstue: Double)
 
     @GCUnsafeCall("Kotlin_native_internal_GC_getMinHeapBytes")
     private external fun getMinHeapBytes(): Long
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setMinHeapBytes")
-    private external fun setMinHeapBytes(value: Long)
+    private external fun setMinHeapBytes(konstue: Long)
 
     @GCUnsafeCall("Kotlin_native_internal_GC_getMaxHeapBytes")
     private external fun getMaxHeapBytes(): Long
 
     @GCUnsafeCall("Kotlin_native_internal_GC_setMaxHeapBytes")
-    private external fun setMaxHeapBytes(value: Long)
+    private external fun setMaxHeapBytes(konstue: Long)
 }

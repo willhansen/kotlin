@@ -16,7 +16,7 @@ fun newFunExperimentalInThePast() {}
 
 @SinceKotlin("1.4")
 @WasExperimental(Marker::class)
-val newValExperimentalInThePast = ""
+konst newValExperimentalInThePast = ""
 
 @SinceKotlin("1.4")
 @WasExperimental(Marker::class)

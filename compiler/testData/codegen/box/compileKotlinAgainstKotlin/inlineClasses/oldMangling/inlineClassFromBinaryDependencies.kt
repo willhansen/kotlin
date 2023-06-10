@@ -10,7 +10,7 @@ interface IFoo {
     fun foo(): String
 }
 
-inline class Z(val s: String) : IFoo {
+inline class Z(konst s: String) : IFoo {
     constructor(i: Int) : this(i.toString())
 
     override fun foo(): String = s

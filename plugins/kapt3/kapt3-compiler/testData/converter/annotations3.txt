@@ -66,11 +66,11 @@ public final class Test {
 ////////////////////
 
 
-@kotlin.annotation.Retention(value = kotlin.annotation.AnnotationRetention.SOURCE)
+@kotlin.annotation.Retention(konstue = kotlin.annotation.AnnotationRetention.SOURCE)
 @kotlin.annotation.Repeatable()
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.CLASS, kotlin.annotation.AnnotationTarget.PROPERTY})
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.SOURCE)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.TYPE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.SOURCE)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.TYPE})
 @kotlin.Metadata()
 public abstract @interface TypeParceler<T extends java.lang.Object, P extends Parceler<? super T>> extends java.lang.annotation.Annotation {
 }

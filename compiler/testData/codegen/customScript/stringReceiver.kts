@@ -3,6 +3,6 @@
 
 // receiver: abracadabra
 
-val res = drop(4)
+konst res = drop(4)
 
 // expected: res=cadabra

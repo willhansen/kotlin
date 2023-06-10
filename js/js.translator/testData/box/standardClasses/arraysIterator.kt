@@ -1,10 +1,10 @@
 // EXPECTED_REACHABLE_NODES: 1402
 package foo
 
-val a1 = Array<Int>(3, { i: Int -> i })
+konst a1 = Array<Int>(3, { i: Int -> i })
 
 fun box(): String {
-    val i = a1.iterator()
+    konst i = a1.iterator()
     if (i.hasNext() != true) return "fail1"
     if (i.next() != 0) return "fail2"
     if (i.hasNext() != true) return "fail3"

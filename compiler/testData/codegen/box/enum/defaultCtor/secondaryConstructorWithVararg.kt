@@ -1,4 +1,4 @@
-enum class Test(val x: Int, val str: String) {
+enum class Test(konst x: Int, konst str: String) {
     OK;
     constructor(vararg xs: Int) : this(xs.size + 42, "OK")
 }

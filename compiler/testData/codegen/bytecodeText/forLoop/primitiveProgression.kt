@@ -12,7 +12,7 @@ fun f() {
     }
 
     // JVM non-IR: `step 1` suppresses optimized code generation for 'for-in-downTo'
-    // JVM IR: No getProgressionLastElement() call required for `step 1`, equivalent to `5 downTo 1`
+    // JVM IR: No getProgressionLastElement() call required for `step 1`, equikonstent to `5 downTo 1`
     for (i in 5 downTo 1 step 1) {
     }
 }

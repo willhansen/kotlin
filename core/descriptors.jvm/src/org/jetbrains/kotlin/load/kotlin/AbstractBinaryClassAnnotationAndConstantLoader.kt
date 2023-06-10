@@ -27,7 +27,7 @@ abstract class AbstractBinaryClassAnnotationAndConstantLoader<A : Any, C : Any>(
 ) : AnnotationAndConstantLoader<A, C>,
     AbstractBinaryClassAnnotationLoader<A, AnnotationsContainerWithConstants<A, C>>(kotlinClassFinder) {
 
-    private val storage =
+    private konst storage =
         storageManager.createMemoizedFunction<KotlinJvmBinaryClass, AnnotationsContainerWithConstants<A, C>> { kotlinClass ->
             loadAnnotationsAndInitializers(kotlinClass)
         }
@@ -68,7 +68,7 @@ abstract class AbstractBinaryClassAnnotationAndConstantLoader<A : Any, C : Any>(
         expectedType: KotlinType,
         loader: AnnotationsContainerWithConstants<A, C>.(MemberSignature) -> C?
     ): C? {
-        val specialCase = getSpecialCaseContainerClass(
+        konst specialCase = getSpecialCaseContainerClass(
             container,
             property = true,
             field = true,
@@ -76,24 +76,24 @@ abstract class AbstractBinaryClassAnnotationAndConstantLoader<A : Any, C : Any>(
             isMovedFromInterfaceCompanion = JvmProtoBufUtil.isMovedFromInterfaceCompanion(proto),
             kotlinClassFinder = kotlinClassFinder, jvmMetadataVersion = jvmMetadataVersion
         )
-        val kotlinClass = findClassWithAnnotationsAndInitializers(container, specialCase) ?: return null
+        konst kotlinClass = findClassWithAnnotationsAndInitializers(container, specialCase) ?: return null
 
-        val requireHasFieldFlag = kotlinClass.classHeader.metadataVersion.isAtLeast(
+        konst requireHasFieldFlag = kotlinClass.classHeader.metadataVersion.isAtLeast(
             DeserializedDescriptorResolver.KOTLIN_1_3_RC_METADATA_VERSION
         )
-        val signature =
+        konst signature =
             getCallableSignature(
                 proto, container.nameResolver, container.typeTable, annotatedCallableKind, requireHasFieldFlag
             ) ?: return null
 
-        val result = storage(kotlinClass).loader(signature) ?: return null
+        konst result = storage(kotlinClass).loader(signature) ?: return null
         return if (UnsignedTypes.isUnsignedType(expectedType)) transformToUnsignedConstant(result) else result
     }
 
     private fun loadAnnotationsAndInitializers(kotlinClass: KotlinJvmBinaryClass): AnnotationsContainerWithConstants<A, C> {
-        val memberAnnotations = HashMap<MemberSignature, MutableList<A>>()
-        val propertyConstants = HashMap<MemberSignature, C>()
-        val annotationParametersDefaultValues = HashMap<MemberSignature, C>()
+        konst memberAnnotations = HashMap<MemberSignature, MutableList<A>>()
+        konst propertyConstants = HashMap<MemberSignature, C>()
+        konst annotationParametersDefaultValues = HashMap<MemberSignature, C>()
 
         kotlinClass.visitMembers(object : KotlinJvmBinaryClass.MemberVisitor {
             override fun visitMethod(name: Name, desc: String): KotlinJvmBinaryClass.MethodAnnotationVisitor? {
@@ -101,10 +101,10 @@ abstract class AbstractBinaryClassAnnotationAndConstantLoader<A : Any, C : Any>(
             }
 
             override fun visitField(name: Name, desc: String, initializer: Any?): KotlinJvmBinaryClass.AnnotationVisitor? {
-                val signature = MemberSignature.fromFieldNameAndDesc(name.asString(), desc)
+                konst signature = MemberSignature.fromFieldNameAndDesc(name.asString(), desc)
 
                 if (initializer != null) {
-                    val constant = loadConstant(desc, initializer)
+                    konst constant = loadConstant(desc, initializer)
                     if (constant != null) {
                         propertyConstants[signature] = constant
                     }
@@ -118,7 +118,7 @@ abstract class AbstractBinaryClassAnnotationAndConstantLoader<A : Any, C : Any>(
                 override fun visitParameterAnnotation(
                     index: Int, classId: ClassId, source: SourceElement
                 ): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {
-                    val paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(signature, index)
+                    konst paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(signature, index)
                     var result = memberAnnotations[paramSignature]
                     if (result == null) {
                         result = ArrayList()
@@ -134,8 +134,8 @@ abstract class AbstractBinaryClassAnnotationAndConstantLoader<A : Any, C : Any>(
                 }
             }
 
-            open inner class MemberAnnotationVisitor(protected val signature: MemberSignature) : KotlinJvmBinaryClass.AnnotationVisitor {
-                private val result = ArrayList<A>()
+            open inner class MemberAnnotationVisitor(protected konst signature: MemberSignature) : KotlinJvmBinaryClass.AnnotationVisitor {
+                private konst result = ArrayList<A>()
 
                 override fun visitAnnotation(classId: ClassId, source: SourceElement): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {
                     return loadAnnotationIfNotSpecial(classId, source, result)
@@ -156,8 +156,8 @@ abstract class AbstractBinaryClassAnnotationAndConstantLoader<A : Any, C : Any>(
     protected fun isRepeatableWithImplicitContainer(annotationClassId: ClassId, arguments: Map<Name, ConstantValue<*>>): Boolean {
         if (annotationClassId != SpecialJvmAnnotations.JAVA_LANG_ANNOTATION_REPEATABLE) return false
 
-        val containerKClassValue = arguments[Name.identifier("value")] as? KClassValue ?: return false
-        val normalClass = containerKClassValue.value as? KClassValue.Value.NormalClass ?: return false
+        konst containerKClassValue = arguments[Name.identifier("konstue")] as? KClassValue ?: return false
+        konst normalClass = containerKClassValue.konstue as? KClassValue.Value.NormalClass ?: return false
         return isImplicitRepeatableContainer(normalClass.classId)
     }
 }

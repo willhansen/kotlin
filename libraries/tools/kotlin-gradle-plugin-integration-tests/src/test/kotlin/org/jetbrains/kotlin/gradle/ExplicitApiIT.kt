@@ -132,7 +132,7 @@ class ExplicitApiIT : KGPBaseTest() {
                 assertCompilerArgument(":compileKotlinNodeJs", "-Xexplicit-api=warning")
             }
 
-            val nativeTaskName = when (HostManager.host) {
+            konst nativeTaskName = when (HostManager.host) {
                 KonanTarget.LINUX_X64 -> ":compileKotlinLinux64"
                 KonanTarget.MACOS_ARM64 -> ":compileKotlinMacos64"
                 KonanTarget.MINGW_X64 -> ":compileKotlinMingw64"

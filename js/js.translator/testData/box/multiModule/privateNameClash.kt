@@ -7,7 +7,7 @@
 package lib
 
 open class A {
-    private val x = 23
+    private konst x = 23
 
     fun foo() = x
 }
@@ -39,10 +39,10 @@ class B : A() {
 fun box(): String {
     if (!check()) return "check failed: did not compile against old library"
 
-    val a = A()
+    konst a = A()
     if (a.foo() != 23) return "fail1: ${a.foo()}"
 
-    val b = B()
+    konst b = B()
     if (b.foo() != 23) return "fail2: ${b.foo()}"
     if (b.bar() != 42) return "fail3: ${b.bar()}"
     checkJsNames("x", b)

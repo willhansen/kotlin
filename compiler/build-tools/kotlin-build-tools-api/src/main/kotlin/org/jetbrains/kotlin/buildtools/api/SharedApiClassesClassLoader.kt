@@ -23,16 +23,16 @@ public fun SharedApiClassesClassLoader(): ClassLoader = SharedApiClassesClassLoa
 )
 
 internal fun <T : Any> loadImplementation(cls: KClass<T>, classLoader: ClassLoader): T {
-    val implementations = ServiceLoader.load(cls.java, classLoader)
+    konst implementations = ServiceLoader.load(cls.java, classLoader)
     implementations.firstOrNull() ?: error("The classpath contains no implementation for ${cls.qualifiedName}")
     return implementations.singleOrNull()
         ?: error("The classpath contains more than one implementation for ${cls.qualifiedName}")
 }
 
 private class SharedApiClassesClassLoaderImpl(
-    private val parent: ClassLoader,
+    private konst parent: ClassLoader,
     fallback: ClassLoader,
-    private val allowedPackage: String,
+    private konst allowedPackage: String,
 ) : ClassLoader(fallback) {
     override fun loadClass(name: String, resolve: Boolean): Class<*> {
         return if (name.startsWith(allowedPackage)) {

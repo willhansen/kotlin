@@ -1,11 +1,11 @@
 <!DIRECTIVES("HELPERS: REFLECT")!>
 
-val Boolean.<!ELEMENT(1)!>: Boolean
+konst Boolean.<!ELEMENT(1)!>: Boolean
     get() {
         return true
     }
 
-val Boolean?.<!ELEMENT(2)!>: Boolean
+konst Boolean?.<!ELEMENT(2)!>: Boolean
     get() {
         return false
     }

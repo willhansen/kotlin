@@ -10,7 +10,7 @@ object Obj {
 }
 
 fun box(): String {
-    val p = Obj::class.members.single { it.name == "result" } as KMutableProperty1<Any?, String>
+    konst p = Obj::class.members.single { it.name == "result" } as KMutableProperty1<Any?, String>
     p.isAccessible = true
 
     try {

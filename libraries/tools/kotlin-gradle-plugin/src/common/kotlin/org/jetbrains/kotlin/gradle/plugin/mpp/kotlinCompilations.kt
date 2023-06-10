@@ -39,7 +39,7 @@ internal fun addSourcesToKotlinCompileTask(
     taskName: String,
     sourceFileExtensions: Iterable<String>,
     addAsCommonSources: Lazy<Boolean> = lazyOf(false),
-    /** Evaluated as project.files(...) */
+    /** Ekonstuated as project.files(...) */
     sources: () -> Any
 ) {
     fun AbstractKotlinCompile<*>.configureAction() {
@@ -54,24 +54,24 @@ internal fun addSourcesToKotlinCompileTask(
 
         // The `commonSourceSet` is passed to the compiler as-is, converted with toList
         commonSourceSet.from(
-            { if (addAsCommonSources.value) sources else emptyList<Any>() }
+            { if (addAsCommonSources.konstue) sources else emptyList<Any>() }
         )
     }
 
     project.tasks
         .withType(AbstractKotlinCompile::class.java)
         .configureEach { compileKotlinTask ->
-            val compileTaskName = compileKotlinTask.name
+            konst compileTaskName = compileKotlinTask.name
             // We also should configure related Kapt* tasks as they are not pickup configuration from
             // related KotlinJvmCompile to avoid circular task dependencies
-            val kaptGenerateStubsTaskName = getKaptTaskName(compileTaskName, KAPT_GENERATE_STUBS_PREFIX)
+            konst kaptGenerateStubsTaskName = getKaptTaskName(compileTaskName, KAPT_GENERATE_STUBS_PREFIX)
             if (compileTaskName == taskName || kaptGenerateStubsTaskName == taskName) {
                 compileKotlinTask.configureAction()
             }
         }
 }
 
-internal val KotlinCompilation<*>.associateWithClosure: Iterable<KotlinCompilation<*>>
+internal konst KotlinCompilation<*>.associateWithClosure: Iterable<KotlinCompilation<*>>
     get() = this.closure { it.associateWith }
 
 internal fun KotlinCompilation<*>.disambiguateName(simpleName: String): String {
@@ -82,7 +82,7 @@ internal fun KotlinCompilation<*>.disambiguateName(simpleName: String): String {
     )
 }
 
-private val invalidModuleNameCharactersRegex = """[\\/\r\n\t]""".toRegex()
+private konst inkonstidModuleNameCharactersRegex = """[\\/\r\n\t]""".toRegex()
 
 internal fun Project.baseModuleName(): Provider<String> = archivesName.orElse(project.name)
 
@@ -90,7 +90,7 @@ internal fun moduleNameForCompilation(
     compilationName: String,
     baseName: Provider<String>
 ): Provider<String> = baseName.map {
-    val suffix = if (compilationName == KotlinCompilation.MAIN_COMPILATION_NAME) {
+    konst suffix = if (compilationName == KotlinCompilation.MAIN_COMPILATION_NAME) {
         ""
     } else {
         "_${compilationName}"
@@ -103,7 +103,7 @@ internal fun KotlinCompilation<*>.moduleNameForCompilation(
 ): Provider<String> = moduleNameForCompilation(compilationName, baseName)
 
 internal fun filterModuleName(moduleName: String): String =
-    moduleName.replace(invalidModuleNameCharactersRegex, "_")
+    moduleName.replace(inkonstidModuleNameCharactersRegex, "_")
 
 internal inline fun <reified T : KotlinCommonOptions> InternalKotlinCompilation<*>.castKotlinOptionsType(): InternalKotlinCompilation<T> {
     this.kotlinOptions as T

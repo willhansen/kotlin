@@ -1,14 +1,14 @@
 == test ==
 fun test(): Int {
-    val j = 1
+    konst j = 1
     fun local() = 1
     return local()
 }
 ---------------------
 L0:
   1 <START>
-  2 mark({ val j = 1 fun local() = 1 return local() })
-    v(val j = 1)
+  2 mark({ konst j = 1 fun local() = 1 return local() })
+    v(konst j = 1)
     r(1) -> <v0>
     w(j|<v0>)
     jmp?(L2)                                              NEXT:[mark(local()), d(fun local() = 1)]

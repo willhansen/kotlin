@@ -22,25 +22,25 @@ internal abstract class InspectClassesForMultiModuleIC @Inject constructor(
     objects: ObjectFactory
 ) : DefaultTask() {
     @get:Input
-    internal abstract val archivePath: Property<String>
+    internal abstract konst archivePath: Property<String>
 
     @get:Input
-    internal abstract val sourceSetName: Property<String>
+    internal abstract konst sourceSetName: Property<String>
 
     @get:OutputFile
-    internal abstract val classesListFile: RegularFileProperty
+    internal abstract konst classesListFile: RegularFileProperty
 
     @get:IgnoreEmptyDirectories
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
     @get:InputFiles
     @get:NormalizeLineEndings
-    internal abstract val sourceSetOutputClassesDir: ConfigurableFileCollection
+    internal abstract konst sourceSetOutputClassesDir: ConfigurableFileCollection
 
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
     @get:IgnoreEmptyDirectories
     @get:InputFiles
     @get:NormalizeLineEndings
-    internal val classFiles: FileCollection = objects.fileCollection()
+    internal konst classFiles: FileCollection = objects.fileCollection()
         .from({ sourceSetOutputClassesDir.asFileTree.matching { it.include("**/*.class") } })
 
     @TaskAction

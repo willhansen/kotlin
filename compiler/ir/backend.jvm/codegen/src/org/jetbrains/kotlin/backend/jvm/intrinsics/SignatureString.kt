@@ -23,9 +23,9 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
  */
 object SignatureString : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue {
-        val argument = generateSequence(expression.getValueArgument(0) as IrStatement) { (it as? IrBlock)?.statements?.lastOrNull() }
+        konst argument = generateSequence(expression.getValueArgument(0) as IrStatement) { (it as? IrBlock)?.statements?.lastOrNull() }
             .filterIsInstance<IrFunctionReference>().single()
-        val function = argument.symbol.owner
+        konst function = argument.symbol.owner
         generateSignatureString(codegen.mv, function, codegen.classCodegen)
         return MaterialValue(codegen, AsmTypes.JAVA_STRING_TYPE, codegen.context.irBuiltIns.stringType)
     }
@@ -35,8 +35,8 @@ object SignatureString : IntrinsicMethod() {
         if (resolved.isSuspend) {
             resolved = codegen.context.suspendFunctionOriginalToView[resolved] ?: resolved
         }
-        val method = codegen.methodSignatureMapper.mapAsmMethod(resolved)
-        val descriptor = method.name + method.descriptor
+        konst method = codegen.methodSignatureMapper.mapAsmMethod(resolved)
+        konst descriptor = method.name + method.descriptor
         v.aconst(descriptor)
     }
 }

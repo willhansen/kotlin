@@ -208,7 +208,7 @@ public abstract class ExpressionTypingVisitorDispatcher extends KtVisitor<Kotlin
                 BindingContextUtilsKt.recordDataFlowInfo(context.replaceDataFlowInfo(result.getDataFlowInfo()), expression);
                 try {
                     // Here we have to resolve some types, so the following exception is possible
-                    // Example: val a = ::a, fun foo() = ::foo
+                    // Example: konst a = ::a, fun foo() = ::foo
                     recordTypeInfo(expression, result);
                 }
                 catch (ReenteringLazyValueComputationException e) {

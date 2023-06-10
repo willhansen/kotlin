@@ -1,4 +1,4 @@
-val x = foo(
+konst x = foo(
     a,
     b
     c

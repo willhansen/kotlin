@@ -30,7 +30,7 @@ object AsmTypeFactory : JvmTypeFactory<Type> {
         Type.getType(representation)
 
     override fun createPrimitiveType(primitiveType: PrimitiveType): Type =
-        AsmTypes.valueTypeForPrimitive(primitiveType)
+        AsmTypes.konstueTypeForPrimitive(primitiveType)
 
     override fun createObjectType(internalName: String): Type =
         Type.getObjectType(internalName)
@@ -38,6 +38,6 @@ object AsmTypeFactory : JvmTypeFactory<Type> {
     override fun toString(type: Type): String =
         type.descriptor
 
-    override val javaLangClassType: Type
+    override konst javaLangClassType: Type
         get() = AsmTypes.JAVA_CLASS_TYPE
 }

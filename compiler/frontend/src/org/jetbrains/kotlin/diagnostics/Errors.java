@@ -1167,7 +1167,7 @@ public interface Errors {
     DiagnosticFactory0<KtBinaryExpression> USELESS_ELVIS_RIGHT_IS_NULL =
             DiagnosticFactory0.create(WARNING, PositioningStrategies.USELESS_ELVIS);
 
-    // Compile-time values
+    // Compile-time konstues
 
     DiagnosticFactory0<KtExpression> DIVISION_BY_ZERO = DiagnosticFactory0.create(WARNING);
     DiagnosticFactory0<KtExpression> INTEGER_OVERFLOW = DiagnosticFactory0.create(WARNING);
@@ -1422,13 +1422,13 @@ public interface Errors {
             for (Field field : aClass.getFields()) {
                 if (Modifier.isStatic(field.getModifiers())) {
                     try {
-                        Object value = field.get(null);
-                        if (value instanceof DiagnosticFactory) {
-                            initializeNameAndRenderer(diagnosticToRendererMap, field.getName(), (DiagnosticFactory<?>) value);
+                        Object konstue = field.get(null);
+                        if (konstue instanceof DiagnosticFactory) {
+                            initializeNameAndRenderer(diagnosticToRendererMap, field.getName(), (DiagnosticFactory<?>) konstue);
                         }
-                        if (value instanceof DiagnosticFactoryForDeprecation) {
+                        if (konstue instanceof DiagnosticFactoryForDeprecation) {
                             String errorName = field.getName();
-                            DiagnosticFactoryForDeprecation<?, ?, ?> factory = (DiagnosticFactoryForDeprecation<?, ?, ?>) value;
+                            DiagnosticFactoryForDeprecation<?, ?, ?> factory = (DiagnosticFactoryForDeprecation<?, ?, ?>) konstue;
                             initializeNameAndRenderer(diagnosticToRendererMap, field.getName() + ERROR, factory.getErrorFactory());
                             initializeNameAndRenderer(diagnosticToRendererMap, field.getName() + WARNING, factory.getWarningFactory());
                         }

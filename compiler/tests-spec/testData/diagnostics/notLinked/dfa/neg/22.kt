@@ -124,7 +124,7 @@ fun case_8(x: Boolean?, y: Boolean?) {
  * ISSUES: KT-28333
  */
 fun case_9(x: Int?) {
-    val y: Int
+    konst y: Int
     while (true) {
         <!UNREACHABLE_CODE!>y =<!> break as Int <!UNREACHABLE_CODE!>+ x!!<!>
     }
@@ -139,7 +139,7 @@ fun case_9(x: Int?) {
  * ISSUES: KT-28333
  */
 fun case_10(x: Int?) {
-    val y: Int
+    konst y: Int
     do {
         break as Int <!UNREACHABLE_CODE!>+ x as Int<!>
     } while (<!UNREACHABLE_CODE!>true<!>)
@@ -156,7 +156,7 @@ fun case_10(x: Int?) {
 fun case_11(x: Int?) {
     operator fun Nothing.invoke(x: Any) = x
 
-    val y: Int
+    konst y: Int
     while (true) {
         break<!UNREACHABLE_CODE!>(x!!)<!>
     }
@@ -173,7 +173,7 @@ fun case_11(x: Int?) {
 fun case_12(x: Int?) {
     operator fun Nothing.get(x: Int, y: Int) = x + y
 
-    val y: Int
+    konst y: Int
     while (true) {
         <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>break<!UNREACHABLE_CODE!>[x!!]<!><!>
     }
@@ -190,7 +190,7 @@ fun case_12(x: Int?) {
 fun case_13(x: Int?) {
     operator fun Nothing.set(<!UNUSED_PARAMETER!>x<!>: Int, <!UNUSED_PARAMETER!>y<!>: Int) {}
 
-    val y: Int
+    konst y: Int
     while (true) {
         break<!UNREACHABLE_CODE!>[x!!] = 10<!>
     }
@@ -207,7 +207,7 @@ fun case_13(x: Int?) {
 fun case_14(x: Int?) {
     operator fun Nothing.set(<!UNUSED_PARAMETER!>x<!>: Int, <!UNUSED_PARAMETER!>y<!>: Int) {}
 
-    val y: Int
+    konst y: Int
     while (true) {
         break<!UNREACHABLE_CODE!>[10] = x!!<!>
     }
@@ -220,7 +220,7 @@ fun case_14(x: Int?) {
 fun case_15(x: Int?) {
     operator fun Nothing.invoke(x: () -> Unit) = x()
 
-    val y: Int
+    konst y: Int
     while (true) {
         break <!UNREACHABLE_CODE!>{
             x!!

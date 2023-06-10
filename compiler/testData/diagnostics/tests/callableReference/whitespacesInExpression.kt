@@ -6,12 +6,12 @@ class Foo
 fun Foo?.bar() {}
 
 fun test() {
-    val r1 = Foo ?:: bar
+    konst r1 = Foo ?:: bar
     checkSubtype<(Foo?) -> Unit>(r1)
 
-    val r2 = Foo ? :: bar
+    konst r2 = Foo ? :: bar
     checkSubtype<(Foo?) -> Unit>(r2)
 
-    val r3 = Foo ? ? :: bar
+    konst r3 = Foo ? ? :: bar
     checkSubtype<(Foo?) -> Unit>(r3)
 }

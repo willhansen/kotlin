@@ -31,9 +31,9 @@ abstract class IrClass : IrDeclarationBase(), IrPossiblyExternalDeclaration,
         IrDeclarationWithVisibility, IrTypeParametersContainer, IrDeclarationContainer,
         IrAttributeContainer, IrMetadataSourceOwner {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: ClassDescriptor
+    abstract override konst descriptor: ClassDescriptor
 
-    abstract override val symbol: IrClassSymbol
+    abstract override konst symbol: IrClassSymbol
 
     abstract var kind: ClassKind
 
@@ -51,13 +51,13 @@ abstract class IrClass : IrDeclarationBase(), IrPossiblyExternalDeclaration,
 
     abstract var isFun: Boolean
 
-    abstract val source: SourceElement
+    abstract konst source: SourceElement
 
     abstract var superTypes: List<IrType>
 
     abstract var thisReceiver: IrValueParameter?
 
-    abstract var valueClassRepresentation: ValueClassRepresentation<IrSimpleType>?
+    abstract var konstueClassRepresentation: ValueClassRepresentation<IrSimpleType>?
 
     /**
      * If this is a sealed class or interface, this list contains symbols of all its immediate

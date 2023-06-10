@@ -1,9 +1,9 @@
-open class A(open val v: String) {
+open class A(open konst v: String) {
 }
 
-open class B(open val v: String) {
+open class B(open konst v: String) {
   fun a(newv: String) = object: A("fail") {
-     override val v = this@B.v + newv
+     override konst v = this@B.v + newv
   }
 }
 

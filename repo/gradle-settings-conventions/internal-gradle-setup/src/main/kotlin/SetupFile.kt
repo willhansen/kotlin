@@ -17,12 +17,12 @@ import kotlin.streams.asSequence
 
 @Serializable
 internal data class SetupFile(
-    val properties: Map<String, String>,
-    val consentDetailsLink: String? = null,
+    konst properties: Map<String, String>,
+    konst consentDetailsLink: String? = null,
 )
 
 @OptIn(ExperimentalSerializationApi::class)
-private val json = Json {
+private konst json = Json {
     ignoreUnknownKeys = true
     namingStrategy = JsonNamingStrategy.SnakeCase
 }

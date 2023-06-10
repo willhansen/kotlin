@@ -2,7 +2,7 @@
 // WITH_STDLIB
 
 fun dense(x: Int): Int {
-    return when (val xx = x) {
+    return when (konst xx = x) {
         -4 -> 9
         -1 -> 10
         0 -> x + 11

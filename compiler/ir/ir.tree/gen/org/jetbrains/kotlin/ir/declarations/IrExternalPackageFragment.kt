@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.externalPackageFragment]
  */
 abstract class IrExternalPackageFragment : IrPackageFragment() {
-    abstract override val symbol: IrExternalPackageFragmentSymbol
+    abstract override konst symbol: IrExternalPackageFragmentSymbol
 
-    abstract val containerSource: DeserializedContainerSource?
+    abstract konst containerSource: DeserializedContainerSource?
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
         visitor.visitExternalPackageFragment(this, data)

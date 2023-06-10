@@ -15,12 +15,12 @@ class Foo {
       class LocalObject {}
   }
 
-  val objectLiteral = object  {
+  konst objectLiteral = object  {
       fun objectLiteralFoo() { }
   }
 
     //anonymous lambda in constructor
-  val s = { 11 }()
+  konst s = { 11 }()
 
   fun foo() {
         //anonymous lambda
@@ -32,7 +32,7 @@ object PackageInnerObject {
     fun PackageInnerObjectFoo() { }
 }
 
-val packageObjectLiteral = object {
+konst packageObjectLiteral = object {
       fun objectLiteralFoo() { }
 }
 

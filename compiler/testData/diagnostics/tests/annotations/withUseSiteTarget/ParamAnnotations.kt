@@ -9,12 +9,12 @@ class SomeClass {
     constructor(<!INAPPLICABLE_PARAM_TARGET!>@param:Ann<!> a: String)
 
     <!INAPPLICABLE_PARAM_TARGET!>@param:Ann<!>
-    protected val simpleProperty: String = "text"
+    protected konst simpleProperty: String = "text"
 
     <!INAPPLICABLE_PARAM_TARGET!>@param:Ann<!>
     fun anotherFun() {
         <!INAPPLICABLE_PARAM_TARGET!>@param:Ann<!>
-        val localVariable = 5
+        konst localVariable = 5
     }
 
 }
@@ -22,4 +22,4 @@ class SomeClass {
 class PrimaryConstructorClass(
         <!REDUNDANT_ANNOTATION_TARGET!>@param:Ann<!> a: String,
 @param:[<!REDUNDANT_ANNOTATION_TARGET!>Ann<!> <!REDUNDANT_ANNOTATION_TARGET!>Second<!>] b: String,
-@param:Ann val c: String)
+@param:Ann konst c: String)

@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.tooling.core.extrasLazyProperty
 /**
  * @see resolvableMetadataConfiguration
  */
-internal val InternalKotlinSourceSet.resolvableMetadataConfigurationName: String
+internal konst InternalKotlinSourceSet.resolvableMetadataConfigurationName: String
     get() = disambiguateName(lowerCamelCaseName("resolvable", METADATA_CONFIGURATION_NAME_SUFFIX))
 
 /**
@@ -36,11 +36,11 @@ internal val InternalKotlinSourceSet.resolvableMetadataConfigurationName: String
  * These dependencies are set up to resolve Kotlin Metadata (without transformation) and will resolve
  * consistently across the whole project.
  */
-internal val InternalKotlinSourceSet.resolvableMetadataConfiguration: Configuration by extrasLazyProperty(
+internal konst InternalKotlinSourceSet.resolvableMetadataConfiguration: Configuration by extrasLazyProperty(
     "resolvableMetadataConfiguration"
 ) {
     assert(resolvableMetadataConfigurationName !in project.configurations.names)
-    val configuration = project.configurations.maybeCreate(resolvableMetadataConfigurationName)
+    konst configuration = project.configurations.maybeCreate(resolvableMetadataConfigurationName)
     configuration.markResolvable()
 
     withDependsOnClosure.forAll { sourceSet ->
@@ -62,7 +62,7 @@ internal val InternalKotlinSourceSet.resolvableMetadataConfiguration: Configurat
         }
     })
 
-    val allCompileMetadataConfiguration = project.allCompileMetadataConfiguration
+    konst allCompileMetadataConfiguration = project.allCompileMetadataConfiguration
 
     /* Ensure consistent dependency resolution result within the whole module */
     configuration.shouldResolveConsistentlyWith(allCompileMetadataConfiguration)
@@ -87,7 +87,7 @@ private fun InternalKotlinSourceSet.configureMetadataDependenciesConfigurations(
         implementationMetadataConfigurationName,
         compileOnlyMetadataConfigurationName
     ).forEach { configurationName ->
-        val configuration = project.configurations.getByName(configurationName)
+        konst configuration = project.configurations.getByName(configurationName)
         configuration.extendsFrom(resolvableMetadataConfiguration)
         configuration.shouldResolveConsistentlyWith(resolvableMetadataConfiguration)
     }
@@ -98,7 +98,7 @@ private fun InternalKotlinSourceSet.configureMetadataDependenciesConfigurations(
  * This configuration is used to provide a dependency 'consistency scope' for
  * the [InternalKotlinSourceSet.resolvableMetadataConfiguration]
  */
-private val Project.allCompileMetadataConfiguration
+private konst Project.allCompileMetadataConfiguration
     get(): Configuration = configurations.getOrCreate("allSourceSetsCompileDependenciesMetadata", invokeWhenCreated = { configuration ->
         configuration.markResolvable()
         configuration.usesPlatformOf(multiplatformExtension.metadata())

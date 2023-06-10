@@ -53,11 +53,11 @@ fun makeFirMetadataSerializerForIrClass(
     parent: MetadataSerializer?,
     irActualizedResult: IrActualizedResult?
 ): FirMetadataSerializer {
-    val approximator = TypeApproximatorForMetadataSerializer(session)
-    val localDelegatedProperties = context.localDelegatedProperties[irClass.attributeOwnerId]?.map {
+    konst approximator = TypeApproximatorForMetadataSerializer(session)
+    konst localDelegatedProperties = context.localDelegatedProperties[irClass.attributeOwnerId]?.map {
         (it.owner.metadata as FirMetadataSource.Property).fir.copyToFreeProperty(approximator)
     } ?: emptyList()
-    val firSerializerExtension = FirJvmSerializerExtension(
+    konst firSerializerExtension = FirJvmSerializerExtension(
         session, serializationBindings, context.state, irClass.metadata, localDelegatedProperties,
         approximator, context.defaultTypeMapper, components
     )
@@ -83,16 +83,16 @@ fun makeLocalFirMetadataSerializerForMetadataSource(
     configuration: CompilerConfiguration,
     irActualizedResult: IrActualizedResult?
 ): FirMetadataSerializer {
-    val serializationBindings = JvmSerializationBindings()
-    val approximator = TypeApproximatorForMetadataSerializer(session)
+    konst serializationBindings = JvmSerializationBindings()
+    konst approximator = TypeApproximatorForMetadataSerializer(session)
 
-    val stringTable = object : JvmStringTable(null), FirElementAwareStringTable {
+    konst stringTable = object : JvmStringTable(null), FirElementAwareStringTable {
         override fun getLocalClassIdReplacement(firClass: FirClass): ClassId =
             ((firClass as? FirRegularClass)?.containingClassForLocal()?.toFirRegularClass(session) ?: firClass)
                 .symbol.classId
     }
 
-    val firSerializerExtension = FirJvmSerializerExtension(
+    konst firSerializerExtension = FirJvmSerializerExtension(
         session, serializationBindings, metadata, emptyList(), approximator, scopeSession,
         globalSerializationBindings,
         configuration.getBoolean(JVMConfigurationKeys.USE_TYPE_TABLE),
@@ -119,21 +119,21 @@ fun makeLocalFirMetadataSerializerForMetadataSource(
 }
 
 class FirMetadataSerializer(
-    private val globalSerializationBindings: JvmSerializationBindings,
-    private val serializationBindings: JvmSerializationBindings,
-    private val approximator: AbstractTypeApproximator,
-    internal val serializer: FirElementSerializer?,
+    private konst globalSerializationBindings: JvmSerializationBindings,
+    private konst serializationBindings: JvmSerializationBindings,
+    private konst approximator: AbstractTypeApproximator,
+    internal konst serializer: FirElementSerializer?,
     irActualizedResult: IrActualizedResult?
 ) : MetadataSerializer {
-    private val actualizedExpectDeclarations = irActualizedResult.extractFirDeclarations()
+    private konst actualizedExpectDeclarations = irActualizedResult.extractFirDeclarations()
 
     override fun serialize(metadata: MetadataSource): Pair<MessageLite, JvmStringTable>? {
-        val message = when (metadata) {
+        konst message = when (metadata) {
             is FirMetadataSource.Class -> serializer!!.classProto(metadata.fir).build()
             is FirMetadataSource.File ->
                 serializer!!.packagePartProto(metadata.files.first().packageFqName, metadata.files, actualizedExpectDeclarations).build()
             is FirMetadataSource.Function -> {
-                val withTypeParameters = metadata.fir.copyToFreeAnonymousFunction(approximator)
+                konst withTypeParameters = metadata.fir.copyToFreeAnonymousFunction(approximator)
                 serializationBindings.get(FirJvmSerializerExtension.METHOD_FOR_FIR_FUNCTION, metadata.fir)?.let {
                     serializationBindings.put(FirJvmSerializerExtension.METHOD_FOR_FIR_FUNCTION, withTypeParameters, it)
                 }
@@ -145,24 +145,24 @@ class FirMetadataSerializer(
     }
 
     override fun bindPropertyMetadata(metadata: MetadataSource.Property, signature: Method, origin: IrDeclarationOrigin) {
-        val fir = (metadata as FirMetadataSource.Property).fir
-        val slice = when (origin) {
+        konst fir = (metadata as FirMetadataSource.Property).fir
+        konst slice = when (origin) {
             JvmLoweredDeclarationOrigin.SYNTHETIC_METHOD_FOR_PROPERTY_OR_TYPEALIAS_ANNOTATIONS ->
                 FirJvmSerializerExtension.SYNTHETIC_METHOD_FOR_FIR_VARIABLE
             IrDeclarationOrigin.PROPERTY_DELEGATE ->
                 FirJvmSerializerExtension.DELEGATE_METHOD_FOR_FIR_VARIABLE
-            else -> throw IllegalStateException("invalid origin $origin for property-related method $signature")
+            else -> throw IllegalStateException("inkonstid origin $origin for property-related method $signature")
         }
         globalSerializationBindings.put(slice, fir, signature)
     }
 
     override fun bindMethodMetadata(metadata: MetadataSource.Function, signature: Method) {
-        val fir = (metadata as FirMetadataSource.Function).fir
+        konst fir = (metadata as FirMetadataSource.Function).fir
         serializationBindings.put(FirJvmSerializerExtension.METHOD_FOR_FIR_FUNCTION, fir, signature)
     }
 
     override fun bindFieldMetadata(metadata: MetadataSource.Property, signature: Pair<Type, String>) {
-        val fir = (metadata as FirMetadataSource.Property).fir
+        konst fir = (metadata as FirMetadataSource.Property).fir
         globalSerializationBindings.put(FirJvmSerializerExtension.FIELD_FOR_PROPERTY, fir, signature)
     }
 }
@@ -201,9 +201,9 @@ internal fun makeElementSerializer(
     }
 
 private fun FirFunction.copyToFreeAnonymousFunction(approximator: AbstractTypeApproximator): FirAnonymousFunction {
-    val function = this
+    konst function = this
     return buildAnonymousFunction {
-        val typeParameterSet = function.typeParameters.filterIsInstanceTo(mutableSetOf<FirTypeParameter>())
+        konst typeParameterSet = function.typeParameters.filterIsInstanceTo(mutableSetOf<FirTypeParameter>())
         annotations += function.annotations
         moduleData = function.moduleData
         origin = FirDeclarationOrigin.Source
@@ -217,7 +217,7 @@ private fun FirFunction.copyToFreeAnonymousFunction(approximator: AbstractTypeAp
 
         isLambda = (function as? FirAnonymousFunction)?.isLambda == true
         hasExplicitParameterList = (function as? FirAnonymousFunction)?.hasExplicitParameterList == true
-        valueParameters.addAll(function.valueParameters.map {
+        konstueParameters.addAll(function.konstueParameters.map {
             buildValueParameterCopy(it) {
                 returnTypeRef = it.returnTypeRef.approximated(approximator, typeParameterSet, toSuper = false)
             }
@@ -231,9 +231,9 @@ private fun FirPropertyAccessor.copyToFreeAccessor(
     approximator: AbstractTypeApproximator,
     newPropertySymbol: FirPropertySymbol,
 ): FirPropertyAccessor {
-    val accessor = this
+    konst accessor = this
     return buildPropertyAccessor {
-        val typeParameterSet = accessor.typeParameters.toMutableSet()
+        konst typeParameterSet = accessor.typeParameters.toMutableSet()
         moduleData = accessor.moduleData
         origin = FirDeclarationOrigin.Source
         returnTypeRef = accessor.returnTypeRef.approximated(approximator, typeParameterSet, toSuper = true)
@@ -241,7 +241,7 @@ private fun FirPropertyAccessor.copyToFreeAccessor(
         propertySymbol = newPropertySymbol
         isGetter = accessor.isGetter
         status = accessor.status
-        accessor.valueParameters.mapTo(valueParameters) {
+        accessor.konstueParameters.mapTo(konstueParameters) {
             buildValueParameterCopy(it) {
                 returnTypeRef = it.returnTypeRef.approximated(approximator, typeParameterSet, toSuper = false)
             }
@@ -252,13 +252,13 @@ private fun FirPropertyAccessor.copyToFreeAccessor(
 }
 
 internal fun FirProperty.copyToFreeProperty(approximator: AbstractTypeApproximator): FirProperty {
-    val property = this
+    konst property = this
     return buildProperty {
-        val typeParameterSet = property.typeParameters.toMutableSet()
+        konst typeParameterSet = property.typeParameters.toMutableSet()
         moduleData = property.moduleData
         origin = FirDeclarationOrigin.Source
 
-        val newPropertySymbol = FirPropertySymbol(property.symbol.callableId)
+        konst newPropertySymbol = FirPropertySymbol(property.symbol.callableId)
         symbol = newPropertySymbol
         returnTypeRef = property.returnTypeRef.approximated(approximator, typeParameterSet, toSuper = true)
         receiverParameter = property.receiverParameter?.let { receiverParameter ->
@@ -291,7 +291,7 @@ internal fun FirTypeRef.approximated(
     typeParameterSet: MutableCollection<FirTypeParameter>,
     toSuper: Boolean
 ): FirTypeRef {
-    val approximatedType = if (toSuper)
+    konst approximatedType = if (toSuper)
         approximator.approximateToSuperType(coneType, TypeApproximatorConfiguration.PublicDeclaration.SaveAnonymousTypes)
     else
         approximator.approximateToSubType(coneType, TypeApproximatorConfiguration.PublicDeclaration.SaveAnonymousTypes)

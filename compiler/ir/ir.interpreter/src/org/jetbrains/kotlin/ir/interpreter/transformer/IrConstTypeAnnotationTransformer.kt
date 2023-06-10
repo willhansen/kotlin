@@ -5,12 +5,12 @@
 
 package org.jetbrains.kotlin.ir.interpreter.transformer
 
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrErrorExpression
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreter
-import org.jetbrains.kotlin.ir.interpreter.checker.EvaluationMode
+import org.jetbrains.kotlin.ir.interpreter.checker.EkonstuationMode
 import org.jetbrains.kotlin.ir.interpreter.checker.IrInterpreterChecker
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.ir.visitors.IrTypeTransformerVoid
 internal class IrConstTypeAnnotationTransformer(
     interpreter: IrInterpreter,
     irFile: IrFile,
-    mode: EvaluationMode,
+    mode: EkonstuationMode,
     checker: IrInterpreterChecker,
-    evaluatedConstTracker: EvaluatedConstTracker?,
+    ekonstuatedConstTracker: EkonstuatedConstTracker?,
     onWarning: (IrFile, IrElement, IrErrorExpression) -> Unit,
     onError: (IrFile, IrElement, IrErrorExpression) -> Unit,
     suppressExceptions: Boolean,
-) : IrConstAnnotationTransformer(interpreter, irFile, mode, checker, evaluatedConstTracker, onWarning, onError, suppressExceptions),
+) : IrConstAnnotationTransformer(interpreter, irFile, mode, checker, ekonstuatedConstTracker, onWarning, onError, suppressExceptions),
     IrTypeTransformerVoid<Nothing?> {
 
     override fun <Type : IrType?> transformType(container: IrElement, type: Type, data: Nothing?): Type {

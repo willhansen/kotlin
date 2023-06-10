@@ -6,9 +6,9 @@ inline fun foo(x: (Int, Station) -> Unit) {
 }
 
 data class Station(
-        val id: String?,
-        val name: String,
-        val distance: Int)
+        konst id: String?,
+        konst name: String,
+        konst distance: Int)
 
 
 // FILE: 2.kt

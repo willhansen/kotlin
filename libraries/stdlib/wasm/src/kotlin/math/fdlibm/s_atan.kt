@@ -15,8 +15,8 @@
  * Method
  *   1. Reduce x to positive by atan(x) = -atan(-x).
  *   2. According to the integer k=4t+0.25 chopped, t=x, the argument
- *      is further reduced to one of the following intervals and the
- *      arctangent of t is evaluated by the corresponding formula:
+ *      is further reduced to one of the following interkonsts and the
+ *      arctangent of t is ekonstuated by the corresponding formula:
  *
  *      [0,7/16]      atan(x) = t-t^3*(a1+t^2*(a2+...(a10+t^2*a11)...)
  *      [7/16,11/16]  atan(x) = atan(1/2) + atan( (t-0.5)/(1+t/2) )
@@ -25,29 +25,29 @@
  *      [39/16,INF]   atan(x) = atan(INF) + atan( -1/t )
  *
  * Constants:
- * The hexadecimal values are the intended ones for the following 
- * constants. The decimal values may be used, provided that the 
+ * The hexadecimal konstues are the intended ones for the following 
+ * constants. The decimal konstues may be used, provided that the 
  * compiler will convert from decimal to binary accurately enough 
- * to produce the hexadecimal values shown.
+ * to produce the hexadecimal konstues shown.
  */
 
 package kotlin.math.fdlibm
 
-private val atanhi = doubleArrayOf(
+private konst atanhi = doubleArrayOf(
     4.63647609000806093515e-01, /* atan(0.5)hi 0x3FDDAC67, 0x0561BB4F */
     7.85398163397448278999e-01, /* atan(1.0)hi 0x3FE921FB, 0x54442D18 */
     9.82793723247329054082e-01, /* atan(1.5)hi 0x3FEF730B, 0xD281F69B */
     1.57079632679489655800e+00, /* atan(inf)hi 0x3FF921FB, 0x54442D18 */
 )
 
-private val atanlo = doubleArrayOf(
+private konst atanlo = doubleArrayOf(
     2.26987774529616870924e-17, /* atan(0.5)lo 0x3C7A2B7F, 0x222F65E2 */
     3.06161699786838301793e-17, /* atan(1.0)lo 0x3C81A626, 0x33145C07 */
     1.39033110312309984516e-17, /* atan(1.5)lo 0x3C700788, 0x7AF0CBBD */
     6.12323399573676603587e-17, /* atan(inf)lo 0x3C91A626, 0x33145C07 */
 )
 
-private val aT = doubleArrayOf(
+private konst aT = doubleArrayOf(
     3.33333333333329318027e-01, /* 0x3FD55555, 0x5555550D */
     -1.99999999998764832476e-01, /* 0xBFC99999, 0x9998EBC4 */
     1.42857142725034663711e-01, /* 0x3FC24924, 0x920083FF */
@@ -62,8 +62,8 @@ private val aT = doubleArrayOf(
 )
 
 
-private const val one = 1.0
-private const val huge = 1.0e300
+private const konst one = 1.0
+private const konst huge = 1.0e300
 
 internal fun atan(_x: Double): Double {
     var x: Double = _x

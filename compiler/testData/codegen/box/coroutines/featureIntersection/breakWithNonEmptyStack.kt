@@ -23,7 +23,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 suspend fun bar() {
-    val a = A()
+    konst a = A()
     while (true) {
         append("ignore", a.foo() ?: break)
     }

@@ -2,13 +2,13 @@
 package foo
 
 class A {
-    val a = 12
+    konst a = 12
     var b = 1
 
     fun boo(c: Int) = c
 
     fun litlit() {
-        val testName = "litlit"
+        konst testName = "litlit"
         myRun {
             myRun {
                 assertEquals(12, a, testName)
@@ -23,7 +23,7 @@ class A {
     }
 
     fun funfun() {
-        val testName = "funfun"
+        konst testName = "funfun"
         fun foo() {
             fun bar() {
                 assertEquals(12, a, testName)
@@ -40,7 +40,7 @@ class A {
     }
 
     fun litfun() {
-        val testName = "litfun"
+        konst testName = "litfun"
         myRun {
             fun bar() {
                 assertEquals(12, a, testName)
@@ -56,7 +56,7 @@ class A {
     }
 
     fun funlit() {
-        val testName = "funlit"
+        konst testName = "funlit"
         fun foo() {
             myRun {
                 assertEquals(12, a, testName)

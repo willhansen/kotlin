@@ -1,4 +1,4 @@
-KtFile: validExpressions.kt
+KtFile: konstidExpressions.kt
   PACKAGE_DIRECTIVE
     <empty list>
   IMPORT_LIST
@@ -320,7 +320,7 @@ KtFile: validExpressions.kt
           PsiElement(IDENTIFIER)('simpleName')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')

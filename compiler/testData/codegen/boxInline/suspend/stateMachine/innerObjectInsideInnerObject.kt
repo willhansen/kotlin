@@ -9,9 +9,9 @@ interface SuspendRunnable {
 }
 
 suspend inline fun crossinlineMe(crossinline c: suspend () -> Unit) {
-    val o = object : SuspendRunnable {
+    konst o = object : SuspendRunnable {
         override suspend fun run() {
-            val o1 = object: SuspendRunnable {
+            konst o1 = object: SuspendRunnable {
                 override suspend fun run() {
                     c()
                     c()

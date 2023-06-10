@@ -11,10 +11,10 @@ inline fun abs(a: Int): Int {
     }
 }
 
-val r1 = abs(1)
-val r2 = abs(-2)
-val r3 = abs(3)
-val r4 = abs(-4)
+konst r1 = abs(1)
+konst r2 = abs(-2)
+konst r3 = abs(3)
+konst r4 = abs(-4)
 
 fun box(): String {
     assertEquals(1, r1)

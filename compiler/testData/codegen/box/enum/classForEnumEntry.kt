@@ -14,15 +14,15 @@ enum class IssueState {
 }
 
 fun box(): String {
-    val field = IssueState::class.java.getField("FIXED")
+    konst field = IssueState::class.java.getField("FIXED")
 
-    val typeName = field.type.name
+    konst typeName = field.type.name
     if (typeName != "test.IssueState") return "Fail type name: $typeName"
 
-    val className = field.get(null).javaClass.name
+    konst className = field.get(null).javaClass.name
     if (className != "test.IssueState\$FIXED") return "Fail class name: $className"
 
-    val classLoader = IssueState::class.java.classLoader
+    konst classLoader = IssueState::class.java.classLoader
     classLoader.loadClass("test.IssueState\$FIXED")
     try {
         classLoader.loadClass("test.IssueState\$DEFAULT")

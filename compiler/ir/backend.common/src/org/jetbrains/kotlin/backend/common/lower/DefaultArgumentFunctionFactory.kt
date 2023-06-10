@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.utils.*
 import org.jetbrains.kotlin.name.Name
 
-abstract class DefaultArgumentFunctionFactory(val context: CommonBackendContext) {
+abstract class DefaultArgumentFunctionFactory(konst context: CommonBackendContext) {
 
     protected fun IrFunction.generateDefaultArgumentsFunctionName() =
         Name.identifier("${name}\$default")
@@ -46,15 +46,15 @@ abstract class DefaultArgumentFunctionFactory(val context: CommonBackendContext)
      * Whether `null` will be used for this type if no argument is passed.
      * In that case, the type of the default dispatch function will be made nullable.
      *
-     * By default, always returns `true` – this is valid, but suboptimal.
+     * By default, always returns `true` – this is konstid, but suboptimal.
      * Better performance can be achieved in a backend-specific way.
      */
     protected open fun IrType.hasNullAsUndefinedValue(): Boolean = true
 
     protected fun IrFunction.copyValueParametersFrom(original: IrFunction) {
-        valueParameters = original.valueParameters.memoryOptimizedMap {
-            val newType = it.type.remapTypeParameters(original.classIfConstructor, classIfConstructor)
-            val makeNullable = it.defaultValue != null && it.type.hasNullAsUndefinedValue()
+        konstueParameters = original.konstueParameters.memoryOptimizedMap {
+            konst newType = it.type.remapTypeParameters(original.classIfConstructor, classIfConstructor)
+            konst makeNullable = it.defaultValue != null && it.type.hasNullAsUndefinedValue()
             it.copyTo(
                 this,
                 type = if (makeNullable) newType.makeNullable() else newType,
@@ -75,7 +75,7 @@ abstract class DefaultArgumentFunctionFactory(val context: CommonBackendContext)
         skipInlineMethods: Boolean,
         skipExternalMethods: Boolean
     ): IrFunction? {
-        val visited = mutableSetOf<IrFunction>()
+        konst visited = mutableSetOf<IrFunction>()
 
         fun IrFunction.dfsImpl(): IrFunction? {
             visited += this
@@ -85,12 +85,12 @@ abstract class DefaultArgumentFunctionFactory(val context: CommonBackendContext)
 
             if (this is IrSimpleFunction) {
                 overriddenSymbols.forEach { overridden ->
-                    val base = overridden.owner
+                    konst base = overridden.owner
                     if (base !in visited) base.dfsImpl()?.let { return it }
                 }
             }
 
-            if (valueParameters.any { it.defaultValue != null }) return this
+            if (konstueParameters.any { it.defaultValue != null }) return this
 
             return null
         }
@@ -152,12 +152,12 @@ abstract class DefaultArgumentFunctionFactory(val context: CommonBackendContext)
         //     interface I {
         //         fun f(x: Int = 1)
         //     }
-        //     class C(val y: I) : I by y {
-        //         // implicit `override fun f(x: Int) = y.f(x)` has a default value for `x`
+        //     class C(konst y: I) : I by y {
+        //         // implicit `override fun f(x: Int) = y.f(x)` has a default konstue for `x`
         //     }
-        // Since this bug causes the metadata serializer to write the "has default value" flag into compiled
+        // Since this bug causes the metadata serializer to write the "has default konstue" flag into compiled
         // binaries, it's way too late to fix it. Hence the workaround.
-        if (declaration.valueParameters.any { it.defaultValue != null }) {
+        if (declaration.konstueParameters.any { it.defaultValue != null }) {
             return generateDefaultsFunctionImpl(
                 declaration,
                 IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER,
@@ -182,7 +182,7 @@ abstract class DefaultArgumentFunctionFactory(val context: CommonBackendContext)
         isFakeOverride: Boolean,
         useConstructorMarker: Boolean,
     ): IrFunction {
-        val newFunction = when (declaration) {
+        konst newFunction = when (declaration) {
             is IrConstructor ->
                 declaration.factory.buildConstructor {
                     updateFrom(declaration)
@@ -211,7 +211,7 @@ abstract class DefaultArgumentFunctionFactory(val context: CommonBackendContext)
         return newFunction.apply {
             parent = declaration.parent
             generateDefaultArgumentStubFrom(declaration, useConstructorMarker)
-            // TODO some annotations are needed (e.g. @JvmStatic), others need different values (e.g. @JvmName), the rest are redundant.
+            // TODO some annotations are needed (e.g. @JvmStatic), others need different konstues (e.g. @JvmName), the rest are redundant.
             annotations = annotations memoryOptimizedPlus copiedAnnotations
         }
     }

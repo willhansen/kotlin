@@ -3,5 +3,5 @@ package test
 
 annotation class Anno
 
-val property: Int
+konst property: Int
     @[Anno] get() = 42

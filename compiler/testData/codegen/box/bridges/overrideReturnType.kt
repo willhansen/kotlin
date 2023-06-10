@@ -7,7 +7,7 @@ class D() : C() {
 }
 
 fun box(): String{
-    val d : C = D()
+    konst d : C = D()
     if(d.f() != "D f") return "fail f"
     return "OK"
 }

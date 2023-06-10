@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirIntersectionTypeRefImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val isMarkedNullable: Boolean,
+    override konst isMarkedNullable: Boolean,
     override var leftType: FirTypeRef,
     override var rightType: FirTypeRef,
 ) : FirIntersectionTypeRef() {

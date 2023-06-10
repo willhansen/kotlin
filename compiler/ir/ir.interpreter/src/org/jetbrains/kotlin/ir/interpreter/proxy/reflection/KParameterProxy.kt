@@ -10,20 +10,20 @@ import org.jetbrains.kotlin.ir.interpreter.state.reflection.KParameterState
 import kotlin.reflect.KParameter
 import kotlin.reflect.KType
 
-internal class KParameterProxy(override val state: KParameterState, override val callInterceptor: CallInterceptor) : ReflectionProxy, KParameter {
-    override val index: Int
+internal class KParameterProxy(override konst state: KParameterState, override konst callInterceptor: CallInterceptor) : ReflectionProxy, KParameter {
+    override konst index: Int
         get() = state.index
-    override val name: String?
+    override konst name: String?
         get() = if (kind == KParameter.Kind.VALUE) state.irParameter.name.asString() else null
-    override val type: KType
+    override konst type: KType
         get() = state.getType(callInterceptor)
-    override val kind: KParameter.Kind
+    override konst kind: KParameter.Kind
         get() = state.kind
-    override val isOptional: Boolean
+    override konst isOptional: Boolean
         get() = state.irParameter.defaultValue != null
-    override val isVararg: Boolean
+    override konst isVararg: Boolean
         get() = state.irParameter.varargElementType != null
-    override val annotations: List<Annotation>
+    override konst annotations: List<Annotation>
         get() = TODO("Not yet implemented")
 
     override fun equals(other: Any?): Boolean {

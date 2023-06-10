@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.resolve.calls.smartcasts
 import org.jetbrains.kotlin.resolve.scopes.receivers.ImplicitReceiver
 import org.jetbrains.kotlin.types.KotlinType
 
-data class ImplicitSmartCasts private constructor(val receiverTypes: Map<ImplicitReceiver, KotlinType>) {
+data class ImplicitSmartCasts private constructor(konst receiverTypes: Map<ImplicitReceiver, KotlinType>) {
     operator fun plus(other: ImplicitSmartCasts) = ImplicitSmartCasts(receiverTypes + other.receiverTypes)
 
     constructor(receiver: ImplicitReceiver, type: KotlinType) : this(mapOf(receiver to type))

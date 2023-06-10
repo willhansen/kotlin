@@ -16,20 +16,20 @@ import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
 import org.jetbrains.org.objectweb.asm.Type
 
 internal class KtFe10JvmTypeMapper(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtJvmTypeMapper(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
-    private val typeMapper by lazy { KtFe10JvmTypeMapperContext(analysisContext.resolveSession) }
+    private konst typeMapper by lazy { KtFe10JvmTypeMapperContext(analysisContext.resolveSession) }
 
     override fun mapTypeToJvmType(type: KtType, mode: TypeMappingMode): Type {
-        val kotlinType = (type as KtFe10Type).fe10Type
+        konst kotlinType = (type as KtFe10Type).fe10Type
         return typeMapper.mapType(kotlinType, mode)
     }
 
     override fun isPrimitiveBacked(type: KtType): Boolean {
-        val kotlinType = (type as KtFe10Type).fe10Type
+        konst kotlinType = (type as KtFe10Type).fe10Type
         return typeMapper.isPrimitiveBacked(kotlinType)
     }
 }

@@ -43,19 +43,19 @@ function getFalseBoolean(x) {
 // -- Any --
 
 function createJsObjectAsAny() {
-    return { value: "object created by createJsObjectAsAny" };
+    return { konstue: "object created by createJsObjectAsAny" };
 }
 
 function createJsObjectAsExternalInterface() {
-    return { value: "object created by createJsObjectAsExternalInterface" };
+    return { konstue: "object created by createJsObjectAsExternalInterface" };
 }
 
 function getObjectValueEI(x) {
-    return x.value;
+    return x.konstue;
 }
 
 function getObjectValueAny(x) {
-    return x.value;
+    return x.konstue;
 }
 
 // FILE: externals.kt
@@ -93,7 +93,7 @@ fun box(): String {
     if (getFalseBoolean() != false) return "Fail getFalseBoolean"
 
     // External interface
-    val objAsEI: EI = createJsObjectAsExternalInterface()
+    konst objAsEI: EI = createJsObjectAsExternalInterface()
     if (getObjectValueEI(objAsEI) != "object created by createJsObjectAsExternalInterface")
         return "Fail createJsObjectAsExternalInterface + getObjectValueEI"
 

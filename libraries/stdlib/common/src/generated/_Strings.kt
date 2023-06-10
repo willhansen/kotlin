@@ -83,20 +83,20 @@ public inline fun CharSequence.first(predicate: (Char) -> Boolean): Char {
 }
 
 /**
- * Returns the first non-null value produced by [transform] function being applied to characters of this char sequence in iteration order,
- * or throws [NoSuchElementException] if no non-null value was produced.
+ * Returns the first non-null konstue produced by [transform] function being applied to characters of this char sequence in iteration order,
+ * or throws [NoSuchElementException] if no non-null konstue was produced.
  * 
  * @sample samples.collections.Collections.Transformations.firstNotNullOf
  */
 @SinceKotlin("1.5")
 @kotlin.internal.InlineOnly
 public inline fun <R : Any> CharSequence.firstNotNullOf(transform: (Char) -> R?): R {
-    return firstNotNullOfOrNull(transform) ?: throw NoSuchElementException("No element of the char sequence was transformed to a non-null value.")
+    return firstNotNullOfOrNull(transform) ?: throw NoSuchElementException("No element of the char sequence was transformed to a non-null konstue.")
 }
 
 /**
- * Returns the first non-null value produced by [transform] function being applied to characters of this char sequence in iteration order,
- * or `null` if no non-null value was produced.
+ * Returns the first non-null konstue produced by [transform] function being applied to characters of this char sequence in iteration order,
+ * or `null` if no non-null konstue was produced.
  * 
  * @sample samples.collections.Collections.Transformations.firstNotNullOf
  */
@@ -104,7 +104,7 @@ public inline fun <R : Any> CharSequence.firstNotNullOf(transform: (Char) -> R?)
 @kotlin.internal.InlineOnly
 public inline fun <R : Any> CharSequence.firstNotNullOfOrNull(transform: (Char) -> R?): R? {
     for (element in this) {
-        val result = transform(element)
+        konst result = transform(element)
         if (result != null) {
             return result
         }
@@ -190,7 +190,7 @@ public fun CharSequence.last(): Char {
  */
 public inline fun CharSequence.last(predicate: (Char) -> Boolean): Char {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     throw NoSuchElementException("Char sequence contains no character matching the predicate.")
@@ -212,7 +212,7 @@ public fun CharSequence.lastOrNull(): Char? {
  */
 public inline fun CharSequence.lastOrNull(predicate: (Char) -> Boolean): Char? {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     return null
@@ -432,7 +432,7 @@ public inline fun String.filter(predicate: (Char) -> Boolean): String {
 /**
  * Returns a char sequence containing only those characters from the original char sequence that match the given [predicate].
  * @param [predicate] function that takes the index of a character and the character itself
- * and returns the result of predicate evaluation on the character.
+ * and returns the result of predicate ekonstuation on the character.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexed
  */
@@ -443,7 +443,7 @@ public inline fun CharSequence.filterIndexed(predicate: (index: Int, Char) -> Bo
 /**
  * Returns a string containing only those characters from the original string that match the given [predicate].
  * @param [predicate] function that takes the index of a character and the character itself
- * and returns the result of predicate evaluation on the character.
+ * and returns the result of predicate ekonstuation on the character.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexed
  */
@@ -454,7 +454,7 @@ public inline fun String.filterIndexed(predicate: (index: Int, Char) -> Boolean)
 /**
  * Appends all characters matching the given [predicate] to the given [destination].
  * @param [predicate] function that takes the index of a character and the character itself
- * and returns the result of predicate evaluation on the character.
+ * and returns the result of predicate ekonstuation on the character.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexedTo
  */
@@ -500,7 +500,7 @@ public inline fun <C : Appendable> CharSequence.filterNotTo(destination: C, pred
  */
 public inline fun <C : Appendable> CharSequence.filterTo(destination: C, predicate: (Char) -> Boolean): C {
     for (index in 0 until length) {
-        val element = get(index)
+        konst element = get(index)
         if (predicate(element)) destination.append(element)
     }
     return destination
@@ -526,9 +526,9 @@ public fun String.slice(indices: IntRange): String {
  * Returns a char sequence containing characters of the original char sequence at specified [indices].
  */
 public fun CharSequence.slice(indices: Iterable<Int>): CharSequence {
-    val size = indices.collectionSizeOrDefault(10)
+    konst size = indices.collectionSizeOrDefault(10)
     if (size == 0) return ""
-    val result = StringBuilder(size)
+    konst result = StringBuilder(size)
     for (i in indices) {
         result.append(get(i))
     }
@@ -576,7 +576,7 @@ public fun String.take(n: Int): String {
  */
 public fun CharSequence.takeLast(n: Int): CharSequence {
     require(n >= 0) { "Requested character count $n is less than zero." }
-    val length = length
+    konst length = length
     return subSequence(length - n.coerceAtMost(length), length)
 }
 
@@ -589,7 +589,7 @@ public fun CharSequence.takeLast(n: Int): CharSequence {
  */
 public fun String.takeLast(n: Int): String {
     require(n >= 0) { "Requested character count $n is less than zero." }
-    val length = length
+    konst length = length
     return substring(length - n.coerceAtMost(length))
 }
 
@@ -663,7 +663,7 @@ public inline fun String.reversed(): String {
 }
 
 /**
- * Returns a [Map] containing key-value pairs provided by [transform] function
+ * Returns a [Map] containing key-konstue pairs provided by [transform] function
  * applied to characters of the given char sequence.
  * 
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -673,7 +673,7 @@ public inline fun String.reversed(): String {
  * @sample samples.text.Strings.associate
  */
 public inline fun <K, V> CharSequence.associate(transform: (Char) -> Pair<K, V>): Map<K, V> {
-    val capacity = mapCapacity(length).coerceAtLeast(16)
+    konst capacity = mapCapacity(length).coerceAtLeast(16)
     return associateTo(LinkedHashMap<K, V>(capacity), transform)
 }
 
@@ -688,12 +688,12 @@ public inline fun <K, V> CharSequence.associate(transform: (Char) -> Pair<K, V>)
  * @sample samples.text.Strings.associateBy
  */
 public inline fun <K> CharSequence.associateBy(keySelector: (Char) -> K): Map<K, Char> {
-    val capacity = mapCapacity(length).coerceAtLeast(16)
+    konst capacity = mapCapacity(length).coerceAtLeast(16)
     return associateByTo(LinkedHashMap<K, Char>(capacity), keySelector)
 }
 
 /**
- * Returns a [Map] containing the values provided by [valueTransform] and indexed by [keySelector] functions applied to characters of the given char sequence.
+ * Returns a [Map] containing the konstues provided by [konstueTransform] and indexed by [keySelector] functions applied to characters of the given char sequence.
  * 
  * If any two characters would have the same key returned by [keySelector] the last one gets added to the map.
  * 
@@ -701,15 +701,15 @@ public inline fun <K> CharSequence.associateBy(keySelector: (Char) -> K): Map<K,
  * 
  * @sample samples.text.Strings.associateByWithValueTransform
  */
-public inline fun <K, V> CharSequence.associateBy(keySelector: (Char) -> K, valueTransform: (Char) -> V): Map<K, V> {
-    val capacity = mapCapacity(length).coerceAtLeast(16)
-    return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, valueTransform)
+public inline fun <K, V> CharSequence.associateBy(keySelector: (Char) -> K, konstueTransform: (Char) -> V): Map<K, V> {
+    konst capacity = mapCapacity(length).coerceAtLeast(16)
+    return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, konstueTransform)
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs,
+ * Populates and returns the [destination] mutable map with key-konstue pairs,
  * where key is provided by the [keySelector] function applied to each character of the given char sequence
- * and value is the character itself.
+ * and konstue is the character itself.
  * 
  * If any two characters would have the same key returned by [keySelector] the last one gets added to the map.
  * 
@@ -723,23 +723,23 @@ public inline fun <K, M : MutableMap<in K, in Char>> CharSequence.associateByTo(
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs,
+ * Populates and returns the [destination] mutable map with key-konstue pairs,
  * where key is provided by the [keySelector] function and
- * and value is provided by the [valueTransform] function applied to characters of the given char sequence.
+ * and konstue is provided by the [konstueTransform] function applied to characters of the given char sequence.
  * 
  * If any two characters would have the same key returned by [keySelector] the last one gets added to the map.
  * 
  * @sample samples.text.Strings.associateByToWithValueTransform
  */
-public inline fun <K, V, M : MutableMap<in K, in V>> CharSequence.associateByTo(destination: M, keySelector: (Char) -> K, valueTransform: (Char) -> V): M {
+public inline fun <K, V, M : MutableMap<in K, in V>> CharSequence.associateByTo(destination: M, keySelector: (Char) -> K, konstueTransform: (Char) -> V): M {
     for (element in this) {
-        destination.put(keySelector(element), valueTransform(element))
+        destination.put(keySelector(element), konstueTransform(element))
     }
     return destination
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs
+ * Populates and returns the [destination] mutable map with key-konstue pairs
  * provided by [transform] function applied to each character of the given char sequence.
  * 
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -754,8 +754,8 @@ public inline fun <K, V, M : MutableMap<in K, in V>> CharSequence.associateTo(de
 }
 
 /**
- * Returns a [Map] where keys are characters from the given char sequence and values are
- * produced by the [valueSelector] function applied to each character.
+ * Returns a [Map] where keys are characters from the given char sequence and konstues are
+ * produced by the [konstueSelector] function applied to each character.
  * 
  * If any two characters are equal, the last one gets added to the map.
  * 
@@ -764,23 +764,23 @@ public inline fun <K, V, M : MutableMap<in K, in V>> CharSequence.associateTo(de
  * @sample samples.text.Strings.associateWith
  */
 @SinceKotlin("1.3")
-public inline fun <V> CharSequence.associateWith(valueSelector: (Char) -> V): Map<Char, V> {
-    val result = LinkedHashMap<Char, V>(mapCapacity(length.coerceAtMost(128)).coerceAtLeast(16))
-    return associateWithTo(result, valueSelector)
+public inline fun <V> CharSequence.associateWith(konstueSelector: (Char) -> V): Map<Char, V> {
+    konst result = LinkedHashMap<Char, V>(mapCapacity(length.coerceAtMost(128)).coerceAtLeast(16))
+    return associateWithTo(result, konstueSelector)
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs for each character of the given char sequence,
- * where key is the character itself and value is provided by the [valueSelector] function applied to that key.
+ * Populates and returns the [destination] mutable map with key-konstue pairs for each character of the given char sequence,
+ * where key is the character itself and konstue is provided by the [konstueSelector] function applied to that key.
  * 
- * If any two characters are equal, the last one overwrites the former value in the map.
+ * If any two characters are equal, the last one overwrites the former konstue in the map.
  * 
  * @sample samples.text.Strings.associateWithTo
  */
 @SinceKotlin("1.3")
-public inline fun <V, M : MutableMap<in Char, in V>> CharSequence.associateWithTo(destination: M, valueSelector: (Char) -> V): M {
+public inline fun <V, M : MutableMap<in Char, in V>> CharSequence.associateWithTo(destination: M, konstueSelector: (Char) -> V): M {
     for (element in this) {
-        destination.put(element, valueSelector(element))
+        destination.put(element, konstueSelector(element))
     }
     return destination
 }
@@ -869,7 +869,7 @@ public inline fun <R> CharSequence.flatMapIndexed(transform: (index: Int, Char) 
 public inline fun <R, C : MutableCollection<in R>> CharSequence.flatMapIndexedTo(destination: C, transform: (index: Int, Char) -> Iterable<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(index++, element)
+        konst list = transform(index++, element)
         destination.addAll(list)
     }
     return destination
@@ -880,7 +880,7 @@ public inline fun <R, C : MutableCollection<in R>> CharSequence.flatMapIndexedTo
  */
 public inline fun <R, C : MutableCollection<in R>> CharSequence.flatMapTo(destination: C, transform: (Char) -> Iterable<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -899,16 +899,16 @@ public inline fun <K> CharSequence.groupBy(keySelector: (Char) -> K): Map<K, Lis
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each character of the original char sequence
+ * Groups konstues returned by the [konstueTransform] function applied to each character of the original char sequence
  * by the key returned by the given [keySelector] function applied to the character
- * and returns a map where each group key is associated with a list of corresponding values.
+ * and returns a map where each group key is associated with a list of corresponding konstues.
  * 
  * The returned map preserves the entry iteration order of the keys produced from the original char sequence.
  * 
  * @sample samples.collections.Collections.Transformations.groupByKeysAndValues
  */
-public inline fun <K, V> CharSequence.groupBy(keySelector: (Char) -> K, valueTransform: (Char) -> V): Map<K, List<V>> {
-    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, valueTransform)
+public inline fun <K, V> CharSequence.groupBy(keySelector: (Char) -> K, konstueTransform: (Char) -> V): Map<K, List<V>> {
+    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, konstueTransform)
 }
 
 /**
@@ -921,27 +921,27 @@ public inline fun <K, V> CharSequence.groupBy(keySelector: (Char) -> K, valueTra
  */
 public inline fun <K, M : MutableMap<in K, MutableList<Char>>> CharSequence.groupByTo(destination: M, keySelector: (Char) -> K): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<Char>() }
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<Char>() }
         list.add(element)
     }
     return destination
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each character of the original char sequence
+ * Groups konstues returned by the [konstueTransform] function applied to each character of the original char sequence
  * by the key returned by the given [keySelector] function applied to the character
- * and puts to the [destination] map each group key associated with a list of corresponding values.
+ * and puts to the [destination] map each group key associated with a list of corresponding konstues.
  * 
  * @return The [destination] map.
  * 
  * @sample samples.collections.Collections.Transformations.groupByKeysAndValues
  */
-public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> CharSequence.groupByTo(destination: M, keySelector: (Char) -> K, valueTransform: (Char) -> V): M {
+public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> CharSequence.groupByTo(destination: M, keySelector: (Char) -> K, konstueTransform: (Char) -> V): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<V>() }
-        list.add(valueTransform(element))
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<V>() }
+        list.add(konstueTransform(element))
     }
     return destination
 }
@@ -1102,12 +1102,12 @@ public inline fun CharSequence.count(predicate: (Char) -> Boolean): Int {
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each character.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each character.
  * 
- * Returns the specified [initial] value if the char sequence is empty.
+ * Returns the specified [initial] konstue if the char sequence is empty.
  * 
- * @param [operation] function that takes current accumulator value and a character, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and a character, and calculates the next accumulator konstue.
  */
 public inline fun <R> CharSequence.fold(initial: R, operation: (acc: R, Char) -> R): R {
     var accumulator = initial
@@ -1116,13 +1116,13 @@ public inline fun <R> CharSequence.fold(initial: R, operation: (acc: R, Char) ->
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each character with its index in the original char sequence.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each character with its index in the original char sequence.
  * 
- * Returns the specified [initial] value if the char sequence is empty.
+ * Returns the specified [initial] konstue if the char sequence is empty.
  * 
- * @param [operation] function that takes the index of a character, current accumulator value
- * and the character itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of a character, current accumulator konstue
+ * and the character itself, and calculates the next accumulator konstue.
  */
 public inline fun <R> CharSequence.foldIndexed(initial: R, operation: (index: Int, acc: R, Char) -> R): R {
     var index = 0
@@ -1132,12 +1132,12 @@ public inline fun <R> CharSequence.foldIndexed(initial: R, operation: (index: In
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each character and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each character and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the char sequence is empty.
+ * Returns the specified [initial] konstue if the char sequence is empty.
  * 
- * @param [operation] function that takes a character and current accumulator value, and calculates the next accumulator value.
+ * @param [operation] function that takes a character and current accumulator konstue, and calculates the next accumulator konstue.
  */
 public inline fun <R> CharSequence.foldRight(initial: R, operation: (Char, acc: R) -> R): R {
     var index = lastIndex
@@ -1149,13 +1149,13 @@ public inline fun <R> CharSequence.foldRight(initial: R, operation: (Char, acc: 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each character with its index in the original char sequence and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each character with its index in the original char sequence and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the char sequence is empty.
+ * Returns the specified [initial] konstue if the char sequence is empty.
  * 
  * @param [operation] function that takes the index of a character, the character itself
- * and current accumulator value, and calculates the next accumulator value.
+ * and current accumulator konstue, and calculates the next accumulator konstue.
  */
 public inline fun <R> CharSequence.foldRightIndexed(initial: R, operation: (index: Int, Char, acc: R) -> R): R {
     var index = lastIndex
@@ -1196,14 +1196,14 @@ public fun CharSequence.max(): Char {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
 }
 
 /**
- * Returns the first character yielding the largest value of the given function.
+ * Returns the first character yielding the largest konstue of the given function.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  * 
@@ -1215,12 +1215,12 @@ public fun CharSequence.max(): Char {
 public inline fun <R : Comparable<R>> CharSequence.maxBy(selector: (Char) -> R): Char {
     if (isEmpty()) throw NoSuchElementException()
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -1230,7 +1230,7 @@ public inline fun <R : Comparable<R>> CharSequence.maxBy(selector: (Char) -> R):
 }
 
 /**
- * Returns the first character yielding the largest value of the given function or `null` if there are no characters.
+ * Returns the first character yielding the largest konstue of the given function or `null` if there are no characters.
  * 
  * @sample samples.collections.Collections.Aggregates.maxByOrNull
  */
@@ -1238,12 +1238,12 @@ public inline fun <R : Comparable<R>> CharSequence.maxBy(selector: (Char) -> R):
 public inline fun <R : Comparable<R>> CharSequence.maxByOrNull(selector: (Char) -> R): Char? {
     if (isEmpty()) return null
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -1253,10 +1253,10 @@ public inline fun <R : Comparable<R>> CharSequence.maxByOrNull(selector: (Char) 
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  */
@@ -1268,17 +1268,17 @@ public inline fun CharSequence.maxOf(selector: (Char) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  */
@@ -1290,14 +1290,14 @@ public inline fun CharSequence.maxOf(selector: (Char) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
@@ -1310,7 +1310,7 @@ public inline fun <R : Comparable<R>> CharSequence.maxOf(selector: (Char) -> R):
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -1319,10 +1319,10 @@ public inline fun <R : Comparable<R>> CharSequence.maxOf(selector: (Char) -> R):
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence or `null` if there are no characters.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -1332,17 +1332,17 @@ public inline fun CharSequence.maxOfOrNull(selector: (Char) -> Double): Double? 
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence or `null` if there are no characters.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -1352,14 +1352,14 @@ public inline fun CharSequence.maxOfOrNull(selector: (Char) -> Float): Float? {
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence or `null` if there are no characters.
  */
 @SinceKotlin("1.4")
@@ -1370,7 +1370,7 @@ public inline fun <R : Comparable<R>> CharSequence.maxOfOrNull(selector: (Char) 
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -1379,8 +1379,8 @@ public inline fun <R : Comparable<R>> CharSequence.maxOfOrNull(selector: (Char) 
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each character in the char sequence.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  */
@@ -1392,7 +1392,7 @@ public inline fun <R> CharSequence.maxOfWith(comparator: Comparator<in R>, selec
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -1401,8 +1401,8 @@ public inline fun <R> CharSequence.maxOfWith(comparator: Comparator<in R>, selec
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each character in the char sequence or `null` if there are no characters.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each character in the char sequence or `null` if there are no characters.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -1412,7 +1412,7 @@ public inline fun <R> CharSequence.maxOfWithOrNull(comparator: Comparator<in R>,
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -1428,14 +1428,14 @@ public fun CharSequence.maxOrNull(): Char? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
 }
 
 /**
- * Returns the first character having the largest value according to the provided [comparator].
+ * Returns the first character having the largest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  */
@@ -1446,21 +1446,21 @@ public fun CharSequence.maxWith(comparator: Comparator<in Char>): Char {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first character having the largest value according to the provided [comparator] or `null` if there are no characters.
+ * Returns the first character having the largest konstue according to the provided [comparator] or `null` if there are no characters.
  */
 @SinceKotlin("1.4")
 public fun CharSequence.maxWithOrNull(comparator: Comparator<in Char>): Char? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
@@ -1478,14 +1478,14 @@ public fun CharSequence.min(): Char {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
 }
 
 /**
- * Returns the first character yielding the smallest value of the given function.
+ * Returns the first character yielding the smallest konstue of the given function.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  * 
@@ -1497,12 +1497,12 @@ public fun CharSequence.min(): Char {
 public inline fun <R : Comparable<R>> CharSequence.minBy(selector: (Char) -> R): Char {
     if (isEmpty()) throw NoSuchElementException()
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -1512,7 +1512,7 @@ public inline fun <R : Comparable<R>> CharSequence.minBy(selector: (Char) -> R):
 }
 
 /**
- * Returns the first character yielding the smallest value of the given function or `null` if there are no characters.
+ * Returns the first character yielding the smallest konstue of the given function or `null` if there are no characters.
  * 
  * @sample samples.collections.Collections.Aggregates.minByOrNull
  */
@@ -1520,12 +1520,12 @@ public inline fun <R : Comparable<R>> CharSequence.minBy(selector: (Char) -> R):
 public inline fun <R : Comparable<R>> CharSequence.minByOrNull(selector: (Char) -> R): Char? {
     if (isEmpty()) return null
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -1535,10 +1535,10 @@ public inline fun <R : Comparable<R>> CharSequence.minByOrNull(selector: (Char) 
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  */
@@ -1550,17 +1550,17 @@ public inline fun CharSequence.minOf(selector: (Char) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  */
@@ -1572,14 +1572,14 @@ public inline fun CharSequence.minOf(selector: (Char) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
@@ -1592,7 +1592,7 @@ public inline fun <R : Comparable<R>> CharSequence.minOf(selector: (Char) -> R):
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -1601,10 +1601,10 @@ public inline fun <R : Comparable<R>> CharSequence.minOf(selector: (Char) -> R):
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence or `null` if there are no characters.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -1614,17 +1614,17 @@ public inline fun CharSequence.minOfOrNull(selector: (Char) -> Double): Double? 
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence or `null` if there are no characters.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -1634,14 +1634,14 @@ public inline fun CharSequence.minOfOrNull(selector: (Char) -> Float): Float? {
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each character in the char sequence or `null` if there are no characters.
  */
 @SinceKotlin("1.4")
@@ -1652,7 +1652,7 @@ public inline fun <R : Comparable<R>> CharSequence.minOfOrNull(selector: (Char) 
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -1661,8 +1661,8 @@ public inline fun <R : Comparable<R>> CharSequence.minOfOrNull(selector: (Char) 
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each character in the char sequence.
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  */
@@ -1674,7 +1674,7 @@ public inline fun <R> CharSequence.minOfWith(comparator: Comparator<in R>, selec
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -1683,8 +1683,8 @@ public inline fun <R> CharSequence.minOfWith(comparator: Comparator<in R>, selec
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each character in the char sequence or `null` if there are no characters.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each character in the char sequence or `null` if there are no characters.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -1694,7 +1694,7 @@ public inline fun <R> CharSequence.minOfWithOrNull(comparator: Comparator<in R>,
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -1710,14 +1710,14 @@ public fun CharSequence.minOrNull(): Char? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
 }
 
 /**
- * Returns the first character having the smallest value according to the provided [comparator].
+ * Returns the first character having the smallest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the char sequence is empty.
  */
@@ -1728,21 +1728,21 @@ public fun CharSequence.minWith(comparator: Comparator<in Char>): Char {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first character having the smallest value according to the provided [comparator] or `null` if there are no characters.
+ * Returns the first character having the smallest konstue according to the provided [comparator] or `null` if there are no characters.
  */
 @SinceKotlin("1.4")
 public fun CharSequence.minWithOrNull(comparator: Comparator<in Char>): Char? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
@@ -1787,14 +1787,14 @@ public inline fun <S : CharSequence> S.onEachIndexed(action: (index: Int, Char) 
 }
 
 /**
- * Accumulates value starting with the first character and applying [operation] from left to right
- * to current accumulator value and each character.
+ * Accumulates konstue starting with the first character and applying [operation] from left to right
+ * to current accumulator konstue and each character.
  * 
  * Throws an exception if this char sequence is empty. If the char sequence can be empty in an expected way,
  * please use [reduceOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes current accumulator value and a character,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and a character,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -1809,14 +1809,14 @@ public inline fun CharSequence.reduce(operation: (acc: Char, Char) -> Char): Cha
 }
 
 /**
- * Accumulates value starting with the first character and applying [operation] from left to right
- * to current accumulator value and each character with its index in the original char sequence.
+ * Accumulates konstue starting with the first character and applying [operation] from left to right
+ * to current accumulator konstue and each character with its index in the original char sequence.
  * 
  * Throws an exception if this char sequence is empty. If the char sequence can be empty in an expected way,
  * please use [reduceIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of a character, current accumulator value and the character itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of a character, current accumulator konstue and the character itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -1831,13 +1831,13 @@ public inline fun CharSequence.reduceIndexed(operation: (index: Int, acc: Char, 
 }
 
 /**
- * Accumulates value starting with the first character and applying [operation] from left to right
- * to current accumulator value and each character with its index in the original char sequence.
+ * Accumulates konstue starting with the first character and applying [operation] from left to right
+ * to current accumulator konstue and each character with its index in the original char sequence.
  * 
  * Returns `null` if the char sequence is empty.
  * 
- * @param [operation] function that takes the index of a character, current accumulator value and the character itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of a character, current accumulator konstue and the character itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -1853,13 +1853,13 @@ public inline fun CharSequence.reduceIndexedOrNull(operation: (index: Int, acc: 
 }
 
 /**
- * Accumulates value starting with the first character and applying [operation] from left to right
- * to current accumulator value and each character.
+ * Accumulates konstue starting with the first character and applying [operation] from left to right
+ * to current accumulator konstue and each character.
  * 
  * Returns `null` if the char sequence is empty.
  * 
- * @param [operation] function that takes current accumulator value and a character,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and a character,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -1876,14 +1876,14 @@ public inline fun CharSequence.reduceOrNull(operation: (acc: Char, Char) -> Char
 }
 
 /**
- * Accumulates value starting with the last character and applying [operation] from right to left
- * to each character and current accumulator value.
+ * Accumulates konstue starting with the last character and applying [operation] from right to left
+ * to each character and current accumulator konstue.
  * 
  * Throws an exception if this char sequence is empty. If the char sequence can be empty in an expected way,
  * please use [reduceRightOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes a character and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes a character and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -1898,14 +1898,14 @@ public inline fun CharSequence.reduceRight(operation: (Char, acc: Char) -> Char)
 }
 
 /**
- * Accumulates value starting with the last character and applying [operation] from right to left
- * to each character with its index in the original char sequence and current accumulator value.
+ * Accumulates konstue starting with the last character and applying [operation] from right to left
+ * to each character with its index in the original char sequence and current accumulator konstue.
  * 
  * Throws an exception if this char sequence is empty. If the char sequence can be empty in an expected way,
  * please use [reduceRightIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of a character, the character itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of a character, the character itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -1921,13 +1921,13 @@ public inline fun CharSequence.reduceRightIndexed(operation: (index: Int, Char, 
 }
 
 /**
- * Accumulates value starting with the last character and applying [operation] from right to left
- * to each character with its index in the original char sequence and current accumulator value.
+ * Accumulates konstue starting with the last character and applying [operation] from right to left
+ * to each character with its index in the original char sequence and current accumulator konstue.
  * 
  * Returns `null` if the char sequence is empty.
  * 
- * @param [operation] function that takes the index of a character, the character itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of a character, the character itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -1944,13 +1944,13 @@ public inline fun CharSequence.reduceRightIndexedOrNull(operation: (index: Int, 
 }
 
 /**
- * Accumulates value starting with the last character and applying [operation] from right to left
- * to each character and current accumulator value.
+ * Accumulates konstue starting with the last character and applying [operation] from right to left
+ * to each character and current accumulator konstue.
  * 
  * Returns `null` if the char sequence is empty.
  * 
- * @param [operation] function that takes a character and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes a character and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -1967,20 +1967,20 @@ public inline fun CharSequence.reduceRightOrNull(operation: (Char, acc: Char) ->
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each character and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each character and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and a character, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and a character, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
 @SinceKotlin("1.4")
 public inline fun <R> CharSequence.runningFold(initial: R, operation: (acc: R, Char) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(length + 1).apply { add(initial) }
+    konst result = ArrayList<R>(length + 1).apply { add(initial) }
     var accumulator = initial
     for (element in this) {
         accumulator = operation(accumulator, element)
@@ -1990,21 +1990,21 @@ public inline fun <R> CharSequence.runningFold(initial: R, operation: (acc: R, C
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each character, its index in the original char sequence and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each character, its index in the original char sequence and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of a character, current accumulator value
- * and the character itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of a character, current accumulator konstue
+ * and the character itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
 @SinceKotlin("1.4")
 public inline fun <R> CharSequence.runningFoldIndexed(initial: R, operation: (index: Int, acc: R, Char) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(length + 1).apply { add(initial) }
+    konst result = ArrayList<R>(length + 1).apply { add(initial) }
     var accumulator = initial
     for (index in indices) {
         accumulator = operation(index, accumulator, this[index])
@@ -2014,13 +2014,13 @@ public inline fun <R> CharSequence.runningFoldIndexed(initial: R, operation: (in
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each character and current accumulator value that starts with the first character of this char sequence.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each character and current accumulator konstue that starts with the first character of this char sequence.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and a character, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and a character, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -2028,7 +2028,7 @@ public inline fun <R> CharSequence.runningFoldIndexed(initial: R, operation: (in
 public inline fun CharSequence.runningReduce(operation: (acc: Char, Char) -> Char): List<Char> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<Char>(length).apply { add(accumulator) }
+    konst result = ArrayList<Char>(length).apply { add(accumulator) }
     for (index in 1 until length) {
         accumulator = operation(accumulator, this[index])
         result.add(accumulator)
@@ -2037,14 +2037,14 @@ public inline fun CharSequence.runningReduce(operation: (acc: Char, Char) -> Cha
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each character, its index in the original char sequence and current accumulator value that starts with the first character of this char sequence.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each character, its index in the original char sequence and current accumulator konstue that starts with the first character of this char sequence.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of a character, current accumulator value
- * and the character itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of a character, current accumulator konstue
+ * and the character itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -2052,7 +2052,7 @@ public inline fun CharSequence.runningReduce(operation: (acc: Char, Char) -> Cha
 public inline fun CharSequence.runningReduceIndexed(operation: (index: Int, acc: Char, Char) -> Char): List<Char> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<Char>(length).apply { add(accumulator) }
+    konst result = ArrayList<Char>(length).apply { add(accumulator) }
     for (index in 1 until length) {
         accumulator = operation(index, accumulator, this[index])
         result.add(accumulator)
@@ -2061,13 +2061,13 @@ public inline fun CharSequence.runningReduceIndexed(operation: (index: Int, acc:
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each character and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each character and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and a character, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and a character, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -2078,14 +2078,14 @@ public inline fun <R> CharSequence.scan(initial: R, operation: (acc: R, Char) ->
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each character, its index in the original char sequence and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each character, its index in the original char sequence and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of a character, current accumulator value
- * and the character itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of a character, current accumulator konstue
+ * and the character itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -2096,7 +2096,7 @@ public inline fun <R> CharSequence.scanIndexed(initial: R, operation: (index: In
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each character in the char sequence.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -2109,7 +2109,7 @@ public inline fun CharSequence.sumBy(selector: (Char) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each character in the char sequence.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -2122,7 +2122,7 @@ public inline fun CharSequence.sumByDouble(selector: (Char) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each character in the char sequence.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2138,7 +2138,7 @@ public inline fun CharSequence.sumOf(selector: (Char) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each character in the char sequence.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2154,7 +2154,7 @@ public inline fun CharSequence.sumOf(selector: (Char) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each character in the char sequence.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2170,7 +2170,7 @@ public inline fun CharSequence.sumOf(selector: (Char) -> Long): Long {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each character in the char sequence.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2187,7 +2187,7 @@ public inline fun CharSequence.sumOf(selector: (Char) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each character in the char sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each character in the char sequence.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2223,7 +2223,7 @@ public fun CharSequence.chunked(size: Int): List<String> {
  * 
  * @return list of results of the [transform] applied to an each char sequence.
  * 
- * Note that the char sequence passed to the [transform] function is ephemeral and is valid only inside that function.
+ * Note that the char sequence passed to the [transform] function is ephemeral and is konstid only inside that function.
  * You should not store it or allow it to escape in some way, unless you made a snapshot of it.
  * The last char sequence may have fewer characters than the given [size].
  * 
@@ -2256,7 +2256,7 @@ public fun CharSequence.chunkedSequence(size: Int): Sequence<String> {
  * 
  * @return sequence of results of the [transform] applied to an each char sequence.
  * 
- * Note that the char sequence passed to the [transform] function is ephemeral and is valid only inside that function.
+ * Note that the char sequence passed to the [transform] function is ephemeral and is konstid only inside that function.
  * You should not store it or allow it to escape in some way, unless you made a snapshot of it.
  * The last char sequence may have fewer characters than the given [size].
  * 
@@ -2277,8 +2277,8 @@ public fun <R> CharSequence.chunkedSequence(size: Int, transform: (CharSequence)
  * @sample samples.text.Strings.partition
  */
 public inline fun CharSequence.partition(predicate: (Char) -> Boolean): Pair<CharSequence, CharSequence> {
-    val first = StringBuilder()
-    val second = StringBuilder()
+    konst first = StringBuilder()
+    konst second = StringBuilder()
     for (element in this) {
         if (predicate(element)) {
             first.append(element)
@@ -2297,8 +2297,8 @@ public inline fun CharSequence.partition(predicate: (Char) -> Boolean): Pair<Cha
  * @sample samples.text.Strings.partition
  */
 public inline fun String.partition(predicate: (Char) -> Boolean): Pair<String, String> {
-    val first = StringBuilder()
-    val second = StringBuilder()
+    konst first = StringBuilder()
+    konst second = StringBuilder()
     for (element in this) {
         if (predicate(element)) {
             first.append(element)
@@ -2334,7 +2334,7 @@ public fun CharSequence.windowed(size: Int, step: Int = 1, partialWindows: Boole
  * an each char sequence representing a view over the window of the given [size]
  * sliding along this char sequence with the given [step].
  * 
- * Note that the char sequence passed to the [transform] function is ephemeral and is valid only inside that function.
+ * Note that the char sequence passed to the [transform] function is ephemeral and is konstid only inside that function.
  * You should not store it or allow it to escape in some way, unless you made a snapshot of it.
  * Several last char sequences may have fewer characters than the given [size].
  * 
@@ -2349,13 +2349,13 @@ public fun CharSequence.windowed(size: Int, step: Int = 1, partialWindows: Boole
 @SinceKotlin("1.2")
 public fun <R> CharSequence.windowed(size: Int, step: Int = 1, partialWindows: Boolean = false, transform: (CharSequence) -> R): List<R> {
     checkWindowSizeStep(size, step)
-    val thisSize = this.length
-    val resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
-    val result = ArrayList<R>(resultCapacity)
+    konst thisSize = this.length
+    konst resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
+    konst result = ArrayList<R>(resultCapacity)
     var index = 0
     while (index in 0 until thisSize) {
-        val end = index + size
-        val coercedEnd = if (end < 0 || end > thisSize) { if (partialWindows) thisSize else break } else end
+        konst end = index + size
+        konst coercedEnd = if (end < 0 || end > thisSize) { if (partialWindows) thisSize else break } else end
         result.add(transform(subSequence(index, coercedEnd)))
         index += step
     }
@@ -2387,7 +2387,7 @@ public fun CharSequence.windowedSequence(size: Int, step: Int = 1, partialWindow
  * an each char sequence representing a view over the window of the given [size]
  * sliding along this char sequence with the given [step].
  * 
- * Note that the char sequence passed to the [transform] function is ephemeral and is valid only inside that function.
+ * Note that the char sequence passed to the [transform] function is ephemeral and is konstid only inside that function.
  * You should not store it or allow it to escape in some way, unless you made a snapshot of it.
  * Several last char sequences may have fewer characters than the given [size].
  * 
@@ -2402,10 +2402,10 @@ public fun CharSequence.windowedSequence(size: Int, step: Int = 1, partialWindow
 @SinceKotlin("1.2")
 public fun <R> CharSequence.windowedSequence(size: Int, step: Int = 1, partialWindows: Boolean = false, transform: (CharSequence) -> R): Sequence<R> {
     checkWindowSizeStep(size, step)
-    val windows = (if (partialWindows) indices else 0 until length - size + 1) step step
+    konst windows = (if (partialWindows) indices else 0 until length - size + 1) step step
     return windows.asSequence().map { index ->
-        val end = index + size
-        val coercedEnd = if (end < 0 || end > length) length else end
+        konst end = index + size
+        konst coercedEnd = if (end < 0 || end > length) length else end
         transform(subSequence(index, coercedEnd))
     }
 }
@@ -2421,15 +2421,15 @@ public infix fun CharSequence.zip(other: CharSequence): List<Pair<Char, Char>> {
 }
 
 /**
- * Returns a list of values built from the characters of `this` and the [other] char sequences with the same index
+ * Returns a list of konstues built from the characters of `this` and the [other] char sequences with the same index
  * using the provided [transform] function applied to each pair of characters.
  * The returned list has length of the shortest char sequence.
  * 
  * @sample samples.text.Strings.zipWithTransform
  */
 public inline fun <V> CharSequence.zip(other: CharSequence, transform: (a: Char, b: Char) -> V): List<V> {
-    val length = minOf(this.length, other.length)
-    val list = ArrayList<V>(length)
+    konst length = minOf(this.length, other.length)
+    konst list = ArrayList<V>(length)
     for (i in 0 until length) {
         list.add(transform(this[i], other[i]))
     }
@@ -2458,9 +2458,9 @@ public fun CharSequence.zipWithNext(): List<Pair<Char, Char>> {
  */
 @SinceKotlin("1.2")
 public inline fun <R> CharSequence.zipWithNext(transform: (a: Char, b: Char) -> R): List<R> {
-    val size = length - 1
+    konst size = length - 1
     if (size < 1) return emptyList()
-    val result = ArrayList<R>(size)
+    konst result = ArrayList<R>(size)
     for (index in 0 until size) {
         result.add(transform(this[index], this[index + 1]))
     }

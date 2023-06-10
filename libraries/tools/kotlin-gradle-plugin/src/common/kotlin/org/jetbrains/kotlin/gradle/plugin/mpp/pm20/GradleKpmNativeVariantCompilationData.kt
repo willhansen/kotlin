@@ -12,9 +12,9 @@ import org.jetbrains.kotlin.gradle.targets.native.NativeCompilerOptions
 import org.jetbrains.kotlin.konan.target.KonanTarget
 
 internal class GradleKpmNativeVariantCompilationData(
-    val variant: GradleKpmNativeVariantInternal
+    konst variant: GradleKpmNativeVariantInternal
 ) : GradleKpmVariantCompilationDataInternal<KotlinCommonOptions>, GradleKpmNativeCompilationData<KotlinCommonOptions> {
-    override val konanTarget: KonanTarget
+    override konst konanTarget: KonanTarget
         get() = variant.konanTarget
 
 
@@ -23,21 +23,21 @@ internal class GradleKpmNativeVariantCompilationData(
         "Please declare explicit dependency on kotlinx-cli. This option has no longer effect since 1.9.0",
         level = DeprecationLevel.ERROR
     )
-    override val enableEndorsedLibs: Boolean
+    override konst enableEndorsedLibs: Boolean
         get() = false
 
-    override val project: Project
+    override konst project: Project
         get() = variant.containingModule.project
 
-    override val owner: GradleKpmNativeVariant
+    override konst owner: GradleKpmNativeVariant
         get() = variant
 
-    override val compilerOptions: HasCompilerOptions<KotlinCommonCompilerOptions> = NativeCompilerOptions(project)
+    override konst compilerOptions: HasCompilerOptions<KotlinCommonCompilerOptions> = NativeCompilerOptions(project)
 
     @Suppress("DEPRECATION")
     @Deprecated("Replaced with compilerOptions.options", replaceWith = ReplaceWith("compilerOptions.options"))
-    override val kotlinOptions: KotlinCommonOptions = object : KotlinCommonOptions {
-        override val options: KotlinCommonCompilerOptions
+    override konst kotlinOptions: KotlinCommonOptions = object : KotlinCommonOptions {
+        override konst options: KotlinCommonCompilerOptions
             get() = compilerOptions.options
     }
 }

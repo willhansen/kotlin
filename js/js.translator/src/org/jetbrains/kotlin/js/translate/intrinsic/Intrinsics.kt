@@ -31,9 +31,9 @@ import org.jetbrains.kotlin.psi.KtBinaryExpression
  * Provides mechanism to substitute method calls /w native constructs directly.
  */
 class Intrinsics {
-    private val functionIntrinsics = FunctionIntrinsics()
-    private val binaryOperationIntrinsics = BinaryOperationIntrinsics()
-    private val objectIntrinsics = ObjectIntrinsics()
+    private konst functionIntrinsics = FunctionIntrinsics()
+    private konst binaryOperationIntrinsics = BinaryOperationIntrinsics()
+    private konst objectIntrinsics = ObjectIntrinsics()
 
     fun getBinaryOperationIntrinsic(expression: KtBinaryExpression, context: TranslationContext): BinaryOperationIntrinsic? {
         return binaryOperationIntrinsics.getIntrinsic(expression, context)

@@ -362,8 +362,8 @@ public abstract class KtUsefulTestCase extends TestCase {
             totalTeardown += entry.getValue();
         }
         System.out.println(String.format("Total overhead: setup %d ms, teardown %d ms", totalSetup, totalTeardown));
-        System.out.println(String.format("##teamcity[buildStatisticValue key='ideaTests.totalSetupMs' value='%d']", totalSetup));
-        System.out.println(String.format("##teamcity[buildStatisticValue key='ideaTests.totalTeardownMs' value='%d']", totalTeardown));
+        System.out.println(String.format("##teamcity[buildStatisticValue key='ideaTests.totalSetupMs' konstue='%d']", totalSetup));
+        System.out.println(String.format("##teamcity[buildStatisticValue key='ideaTests.totalTeardownMs' konstue='%d']", totalTeardown));
     }
 
     @Override
@@ -554,7 +554,7 @@ public abstract class KtUsefulTestCase extends TestCase {
 
     @NotNull
     public static String toString(@NotNull Collection<?> collection, @NotNull String separator) {
-        List<String> list = ContainerUtil.map2List(collection, String::valueOf);
+        List<String> list = ContainerUtil.map2List(collection, String::konstueOf);
         Collections.sort(list);
         StringBuilder builder = new StringBuilder();
         boolean flag = false;
@@ -656,13 +656,13 @@ public abstract class KtUsefulTestCase extends TestCase {
     }
 
     @SafeVarargs
-    public static <T> void assertOneOf(T value, @NotNull T... values) {
-        for (T v : values) {
-            if (Objects.equals(value, v)) {
+    public static <T> void assertOneOf(T konstue, @NotNull T... konstues) {
+        for (T v : konstues) {
+            if (Objects.equals(konstue, v)) {
                 return;
             }
         }
-        Assert.fail(value + " should be equal to one of " + Arrays.toString(values));
+        Assert.fail(konstue + " should be equal to one of " + Arrays.toString(konstues));
     }
 
     public static void assertEmpty(@NotNull Object[] array) {
@@ -829,7 +829,7 @@ public abstract class KtUsefulTestCase extends TestCase {
 
     /**
      * @return true for a test which performs A LOT of computations.
-     * Such test should typically avoid performing expensive checks, e.g. data structure consistency complex validations.
+     * Such test should typically avoid performing expensive checks, e.g. data structure consistency complex konstidations.
      * If you want your test to be treated as "Stress", please mention one of these words in its name: "Stress", "Slow".
      * For example: {@code public void testStressPSIFromDifferentThreads()}
      */

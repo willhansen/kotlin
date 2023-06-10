@@ -1,6 +1,6 @@
 class A<caret_onAirContext> {
     abstract class B {
-        abstract val b: A.B
+        abstract konst b: A.B
     }
 }
 

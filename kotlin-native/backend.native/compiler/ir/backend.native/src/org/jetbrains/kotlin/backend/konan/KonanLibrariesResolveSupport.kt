@@ -23,20 +23,20 @@ class KonanLibrariesResolveSupport(
         distribution: Distribution,
         resolveManifestDependenciesLenient: Boolean
 ) {
-    private val includedLibraryFiles =
+    private konst includedLibraryFiles =
             configuration.getList(KonanConfigKeys.INCLUDED_LIBRARIES).map { File(it) }
 
-    private val libraryToCacheFile =
+    private konst libraryToCacheFile =
                     configuration.get(KonanConfigKeys.LIBRARY_TO_ADD_TO_CACHE)?.let { File(it) }
 
-    private val libraryNames = configuration.getList(KonanConfigKeys.LIBRARY_FILES)
+    private konst libraryNames = configuration.getList(KonanConfigKeys.LIBRARY_FILES)
 
-    private val unresolvedLibraries = libraryNames.toUnresolvedLibraries
+    private konst unresolvedLibraries = libraryNames.toUnresolvedLibraries
 
-    private val repositories = configuration.getList(KonanConfigKeys.REPOSITORIES)
-    private val resolverLogger =
+    private konst repositories = configuration.getList(KonanConfigKeys.REPOSITORIES)
+    private konst resolverLogger =
             object : Logger {
-                private val collector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+                private konst collector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
                 override fun warning(message: String)= collector.report(CompilerMessageSeverity.STRONG_WARNING, message)
                 override fun error(message: String) = collector.report(CompilerMessageSeverity.ERROR, message)
                 override fun log(message: String) = collector.report(CompilerMessageSeverity.LOGGING, message)
@@ -46,7 +46,7 @@ class KonanLibrariesResolveSupport(
                 }
             }
 
-    private val resolver = defaultResolver(
+    private konst resolver = defaultResolver(
             repositories,
             libraryNames.filter { it.contains(File.separator) } + includedLibraryFiles.map { it.absolutePath },
             target,
@@ -58,8 +58,8 @@ class KonanLibrariesResolveSupport(
     // Strictly speaking such "direct" libraries should be specially handled by the resolver, not by KonanConfig.
     // But currently the resolver is in the middle of a complex refactoring so it was decided to avoid changes in its logic.
     // TODO: Handle included libraries in KonanLibraryResolver when it's refactored and moved into the big Kotlin repo.
-    internal val resolvedLibraries = run {
-        val additionalLibraryFiles = includedLibraryFiles + listOfNotNull(libraryToCacheFile)
+    internal konst resolvedLibraries = run {
+        konst additionalLibraryFiles = includedLibraryFiles + listOfNotNull(libraryToCacheFile)
         resolver.resolveWithDependencies(
                 unresolvedLibraries + additionalLibraryFiles.map { UnresolvedLibrary(it.absolutePath, null) },
                 noStdLib = configuration.getBoolean(KonanConfigKeys.NOSTDLIB),
@@ -68,12 +68,12 @@ class KonanLibrariesResolveSupport(
         )
     }
 
-    internal val exportedLibraries =
+    internal konst exportedLibraries =
             getExportedLibraries(configuration, resolvedLibraries, resolver.searchPathResolver, report = true)
 
-    internal val coveredLibraries =
+    internal konst coveredLibraries =
             getCoveredLibraries(configuration, resolvedLibraries, resolver.searchPathResolver)
 
-    internal val includedLibraries =
+    internal konst includedLibraries =
             getIncludedLibraries(includedLibraryFiles, configuration, resolvedLibraries)
 }

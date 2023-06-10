@@ -8,8 +8,8 @@ import kotlin.reflect.typeOf
 import kotlin.reflect.jvm.internal.*
 
 private inline fun <reified T> check(isNullable: Boolean = false) {
-    val t1 = typeOf<T>()
-    val t2 = typeOf<T>()
+    konst t1 = typeOf<T>()
+    konst t2 = typeOf<T>()
     assertSame(t1.classifier, t2.classifier)
     assertEquals(isNullable, t1.isMarkedNullable)
     assertEquals(isNullable, t2.isMarkedNullable)

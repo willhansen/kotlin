@@ -26,4 +26,4 @@ interface Bar {
 fun foo() {}
 fun foo(a: Int) {}
 
-val foo: String = "foo"
+konst foo: String = "foo"

@@ -9,7 +9,7 @@
 // 1 java/lang/invoke/LambdaMetafactory
 
 fun box(): String {
-    val fn: (String) -> String = { it }
+    konst fn: (String) -> String = { it }
     try {
         J.test(fn)
     } catch (e: NullPointerException) {

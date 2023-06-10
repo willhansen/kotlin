@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.test.services.TestModuleStructure
 import org.jetbrains.kotlin.test.services.TestServices
 
 class KtSingleModuleResolveExtensionProviderForTest(
-    private val files: List<KtResolveExtensionFile>,
-    private val packages: Set<FqName>,
-    private val shadowedScope: GlobalSearchScope,
+    private konst files: List<KtResolveExtensionFile>,
+    private konst packages: Set<FqName>,
+    private konst shadowedScope: GlobalSearchScope,
 ) : KtResolveExtensionProvider() {
     override fun provideExtensionsFor(module: KtModule): List<KtResolveExtension> {
         return listOf(KtResolveExtensionForTest(files, packages, shadowedScope))
@@ -34,10 +34,10 @@ class KtSingleModuleResolveExtensionProviderForTest(
 }
 
 class KtMultiModuleResolveExtensionProviderForTest(
-    private val files: List<KtResolveExtensionFile>,
-    private val packages: Set<FqName>,
-    private val shadowedScope: GlobalSearchScope,
-    private val hasResolveExtension: (KtModule) -> Boolean,
+    private konst files: List<KtResolveExtensionFile>,
+    private konst packages: Set<FqName>,
+    private konst shadowedScope: GlobalSearchScope,
+    private konst hasResolveExtension: (KtModule) -> Boolean,
 ) : KtResolveExtensionProvider() {
     override fun provideExtensionsFor(module: KtModule): List<KtResolveExtension> {
         if (!hasResolveExtension(module)) return emptyList()
@@ -47,11 +47,11 @@ class KtMultiModuleResolveExtensionProviderForTest(
 
 class KtResolveExtensionProviderForTestPreAnalysisHandler(
     testServices: TestServices,
-    private val providers: List<KtResolveExtensionProvider>,
+    private konst providers: List<KtResolveExtensionProvider>,
 ) : PreAnalysisHandler(testServices) {
     override fun preprocessModuleStructure(moduleStructure: TestModuleStructure) {
-        val project = testServices.environmentManager.getProject() as MockProject
-        val extensionPoint = project.extensionArea.getExtensionPoint(KtResolveExtensionProvider.EP_NAME)
+        konst project = testServices.environmentManager.getProject() as MockProject
+        konst extensionPoint = project.extensionArea.getExtensionPoint(KtResolveExtensionProvider.EP_NAME)
         for (provider in providers) {
             extensionPoint.registerExtension(provider, project)
         }
@@ -60,9 +60,9 @@ class KtResolveExtensionProviderForTestPreAnalysisHandler(
 
 
 class KtResolveExtensionForTest(
-    private val files: List<KtResolveExtensionFile>,
-    private val packages: Set<FqName>,
-    private val shadowedScope: GlobalSearchScope,
+    private konst files: List<KtResolveExtensionFile>,
+    private konst packages: Set<FqName>,
+    private konst shadowedScope: GlobalSearchScope,
 ) : KtResolveExtension() {
     override fun getKtFiles(): List<KtResolveExtensionFile> = files
     override fun getModificationTracker(): ModificationTracker = ModificationTracker.NEVER_CHANGED
@@ -71,15 +71,15 @@ class KtResolveExtensionForTest(
 }
 
 class KtResolveExtensionFileForTests(
-    private val fileName: String,
-    private val packageName: FqName,
+    private konst fileName: String,
+    private konst packageName: FqName,
     topLevelClassifiersNames: Set<String>,
     topLevelCallableNames: Set<String>,
-    private val fileText: String,
+    private konst fileText: String,
 ) : KtResolveExtensionFile() {
 
-    private val topLevelClassifiersNames: Set<Name> = topLevelClassifiersNames.mapTo(mutableSetOf()) { Name.identifier(it) }
-    private val topLevelCallableNames: Set<Name> = topLevelCallableNames.mapTo(mutableSetOf()) { Name.identifier(it) }
+    private konst topLevelClassifiersNames: Set<Name> = topLevelClassifiersNames.mapTo(mutableSetOf()) { Name.identifier(it) }
+    private konst topLevelCallableNames: Set<Name> = topLevelCallableNames.mapTo(mutableSetOf()) { Name.identifier(it) }
     override fun getFileName(): String = fileName
     override fun getFilePackageName(): FqName = packageName
     override fun getTopLevelClassifierNames(): Set<Name> = topLevelClassifiersNames

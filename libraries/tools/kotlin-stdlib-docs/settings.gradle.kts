@@ -1,6 +1,6 @@
 pluginManagement {
-    val dokkaVersion = providers.gradleProperty("dokka_version").get()
-    val dokkaRepository = providers.gradleProperty("dokka_repository").getOrElse("https://maven.pkg.jetbrains.space/kotlin/p/dokka/dev")
+    konst dokkaVersion = providers.gradleProperty("dokka_version").get()
+    konst dokkaRepository = providers.gradleProperty("dokka_repository").getOrElse("https://maven.pkg.jetbrains.space/kotlin/p/dokka/dev")
     plugins {
         id("org.jetbrains.dokka") version(dokkaVersion)
     }
@@ -15,8 +15,8 @@ pluginManagement {
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
-    val dokkaVersion = providers.gradleProperty("dokka_version").get()
-    val dokkaRepository = providers.gradleProperty("dokka_repository").getOrElse("https://maven.pkg.jetbrains.space/kotlin/p/dokka/dev")
+    konst dokkaVersion = providers.gradleProperty("dokka_version").get()
+    konst dokkaRepository = providers.gradleProperty("dokka_repository").getOrElse("https://maven.pkg.jetbrains.space/kotlin/p/dokka/dev")
     repositories {
         mavenCentral()
         maven(url = dokkaRepository)

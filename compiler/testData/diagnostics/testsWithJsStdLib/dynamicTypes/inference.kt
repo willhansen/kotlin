@@ -12,10 +12,10 @@ fun test(d: dynamic, b: Boolean, n: String?) {
     foo(d, "").<!DEBUG_INFO_DYNAMIC!>foo<!>()
     foo1(d, C()).<!DEBUG_INFO_DYNAMIC!>foo<!>()
 
-    val fromIf = if (b) d else ""
+    konst fromIf = if (b) d else ""
     fromIf.<!DEBUG_INFO_DYNAMIC!>doo<!>()
 
-    val fromElvis = n ?: d
+    konst fromElvis = n ?: d
     fromElvis.<!DEBUG_INFO_DYNAMIC!>doo<!>()
 }
 

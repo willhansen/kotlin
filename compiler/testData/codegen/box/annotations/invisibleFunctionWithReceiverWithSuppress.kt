@@ -3,7 +3,7 @@
 // MODULE: lib
 package foo
 
-class Some(val s: String)
+class Some(konst s: String)
 
 internal fun Some.foo(): String = s
 
@@ -15,6 +15,6 @@ import foo.Some
 import foo.foo
 
 fun box(): String {
-    val some = Some("OK")
+    konst some = Some("OK")
     return some.foo()
 }

@@ -4,7 +4,7 @@ FILE: genericReceiverPropertyOverride.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val <D> R|Inv<D>|.phasedFir: R|D|
+        public open konst <D> R|Inv<D>|.phasedFir: R|D|
             public get(): R|D| {
                 ^ R|kotlin/TODO|()
             }
@@ -15,7 +15,7 @@ FILE: genericReceiverPropertyOverride.kt
             super<R|A|>()
         }
 
-        public final override val <D> R|Inv<D>|.phasedFir: R|D|
+        public final override konst <D> R|Inv<D>|.phasedFir: R|D|
             public get(): R|D| {
                 ^ R|kotlin/TODO|()
             }

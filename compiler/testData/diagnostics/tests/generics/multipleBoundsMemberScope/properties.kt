@@ -2,11 +2,11 @@
 // !CHECK_TYPE
 
 interface A {
-    val foo: Any?
+    konst foo: Any?
 }
 
 interface C: A {
-    override val foo: String?
+    override konst foo: String?
 }
 interface B: A {
     override var foo: String

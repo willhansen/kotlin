@@ -20,4 +20,4 @@ package app
 
 import androidx.annotation.Box
 
-class KBox(val delegate: Box) : Box by delegate
+class KBox(konst delegate: Box) : Box by delegate

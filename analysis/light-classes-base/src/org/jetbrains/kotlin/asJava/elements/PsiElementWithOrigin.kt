@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.asJava.elements
 import com.intellij.psi.PsiElement
 
 interface PsiElementWithOrigin<out T> : PsiElement where T : PsiElement {
-    val origin: T?
+    konst origin: T?
 }

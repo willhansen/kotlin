@@ -17,11 +17,11 @@ public interface IrReturnOrBuilder extends
   long getReturnTarget();
 
   /**
-   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
    */
   boolean hasValue();
   /**
-   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression getValue();
 }

@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 import org.jetbrains.kotlin.fir.symbols.impl.FirAnonymousInitializerSymbol
 
 internal class KtFirClassInitializerSymbol(
-    override val firSymbol: FirAnonymousInitializerSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirAnonymousInitializerSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtClassInitializerSymbol(), KtFirSymbol<FirAnonymousInitializerSymbol> {
-    override val psi: PsiElement? = withValidityAssertion { firSymbol.fir.getAllowedPsi() }
+    override konst psi: PsiElement? = withValidityAssertion { firSymbol.fir.getAllowedPsi() }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtSymbol> = withValidityAssertion {
@@ -32,8 +32,8 @@ internal class KtFirClassInitializerSymbol(
         TODO("Figure out how to create such a pointer. Should we give an index to class initializers?")
     }
 
-    override val symbolKind: KtSymbolKind get() = withValidityAssertion { KtSymbolKind.CLASS_MEMBER }
+    override konst symbolKind: KtSymbolKind get() = withValidityAssertion { KtSymbolKind.CLASS_MEMBER }
 
-    override val typeParameters: List<KtTypeParameterSymbol> get() = withValidityAssertion { emptyList() }
-    override val annotationsList: KtAnnotationsList get() = withValidityAssertion { KtEmptyAnnotationsList(token) }
+    override konst typeParameters: List<KtTypeParameterSymbol> get() = withValidityAssertion { emptyList() }
+    override konst annotationsList: KtAnnotationsList get() = withValidityAssertion { KtEmptyAnnotationsList(token) }
 }

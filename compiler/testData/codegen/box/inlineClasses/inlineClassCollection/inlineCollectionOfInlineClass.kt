@@ -3,11 +3,11 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int)
+konstue class Z(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZArray(val storage: IntArray) : Collection<Z> {
-    override val size: Int
+konstue class ZArray(konst storage: IntArray) : Collection<Z> {
+    override konst size: Int
         get() = storage.size
 
     override fun contains(element: Z): Boolean {
@@ -22,7 +22,7 @@ value class ZArray(val storage: IntArray) : Collection<Z> {
         return storage.isEmpty()
     }
 
-    private class ZArrayIterator(val storage: IntArray): Iterator<Z> {
+    private class ZArrayIterator(konst storage: IntArray): Iterator<Z> {
         var index = 0
 
         override fun hasNext(): Boolean = index < storage.size
@@ -35,12 +35,12 @@ value class ZArray(val storage: IntArray) : Collection<Z> {
 
 
 fun box(): String {
-    val zs = ZArray(IntArray(5))
+    konst zs = ZArray(IntArray(5))
 
-    val testSize = zs.size
+    konst testSize = zs.size
     if (testSize != 5) return "Failed: testSize=$testSize"
 
-    val testContains = zs.contains(object {} as Any)
+    konst testContains = zs.contains(object {} as Any)
     if (testContains) return "Failed: testContains=$testContains"
 
     return "OK"

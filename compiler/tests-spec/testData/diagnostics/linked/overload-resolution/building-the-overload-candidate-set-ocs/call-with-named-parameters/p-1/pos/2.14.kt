@@ -78,7 +78,7 @@ fun <T> Case2.listOf(vararg elements1: T): List<T> = TODO()
 package libPackageCase2Explicit
 import testsCase2.*
 
-val Case2.listOf: A
+konst Case2.listOf: A
     get() = A()
 
 fun <T> Case2.listOf(vararg elements1: T): List<T> = TODO()
@@ -122,7 +122,7 @@ fun <T> Case3.listOf(vararg elements1: T): List<T> = TODO()
 package libPackageCase3Explicit
 import testsCase3.*
 
-val Case3.listOf: A
+konst Case3.listOf: A
     get() = A()
 
 private fun <T> Case3.listOf(vararg elements1: T): List<T> = TODO()

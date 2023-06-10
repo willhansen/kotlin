@@ -8,5 +8,5 @@ fun test_2(x: Int) {
 }
 
 fun test_3(x: Int) {
-    when (val y = x) {}
+    when (konst y = x) {}
 }

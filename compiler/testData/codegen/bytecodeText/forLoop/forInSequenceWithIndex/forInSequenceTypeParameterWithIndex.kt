@@ -8,7 +8,7 @@
 // with compiler built from your changes if you are not sure.
 
 fun <T : Sequence<*>> test(sequence: T): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
 
     for ((index, x) in sequence.withIndex()) {
         s.append("$index:$x;")

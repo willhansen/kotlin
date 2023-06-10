@@ -5,9 +5,9 @@ CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:IntArray modality:FINAL visibility
     VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:init index:1 type:kotlin.Function1<kotlin.Int, kotlin.Int>
   CONSTRUCTOR IR_EXTERNAL_DECLARATION_STUB visibility:public <> (size:kotlin.Int) returnType:kotlin.IntArray [primary]
     VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:size index:0 type:kotlin.Int
-  PROPERTY IR_EXTERNAL_DECLARATION_STUB name:size visibility:public modality:FINAL [val]
+  PROPERTY IR_EXTERNAL_DECLARATION_STUB name:size visibility:public modality:FINAL [konst]
     FUN IR_EXTERNAL_DECLARATION_STUB name:<get-size> visibility:public modality:FINAL <> ($this:kotlin.IntArray) returnType:kotlin.Int
-      correspondingProperty: PROPERTY IR_EXTERNAL_DECLARATION_STUB name:size visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY IR_EXTERNAL_DECLARATION_STUB name:size visibility:public modality:FINAL [konst]
       $this: VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:<this> type:kotlin.IntArray
   FUN IR_EXTERNAL_DECLARATION_STUB name:clone visibility:public modality:OPEN <> ($this:kotlin.IntArray) returnType:kotlin.IntArray
     overridden:
@@ -29,10 +29,10 @@ CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:IntArray modality:FINAL visibility
     $this: VALUE_PARAMETER FAKE_OVERRIDE name:<this> type:kotlin.Any
   FUN IR_EXTERNAL_DECLARATION_STUB name:iterator visibility:public modality:FINAL <> ($this:kotlin.IntArray) returnType:kotlin.collections.IntIterator [operator]
     $this: VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:<this> type:kotlin.IntArray
-  FUN IR_EXTERNAL_DECLARATION_STUB name:set visibility:public modality:FINAL <> ($this:kotlin.IntArray, index:kotlin.Int, value:kotlin.Int) returnType:kotlin.Unit [operator]
+  FUN IR_EXTERNAL_DECLARATION_STUB name:set visibility:public modality:FINAL <> ($this:kotlin.IntArray, index:kotlin.Int, konstue:kotlin.Int) returnType:kotlin.Unit [operator]
     $this: VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:<this> type:kotlin.IntArray
     VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:index index:0 type:kotlin.Int
-    VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:value index:1 type:kotlin.Int
+    VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:konstue index:1 type:kotlin.Int
   FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
     overridden:
       public open fun toString (): kotlin.String declared in kotlin.Any

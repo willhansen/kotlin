@@ -5,10 +5,10 @@ sealed class ArrayMap<T : Any> : Iterable<T> {
 
   }
 
-  abstract val size: Int
+  abstract konst size: Int
     abstract get
 
-  abstract operator fun set(index: Int, value: T)
+  abstract operator fun set(index: Int, konstue: T)
 
   abstract operator fun get(index: Int): T?
 
@@ -31,12 +31,12 @@ internal object EmptyArrayMap : ArrayMap<Nothing> {
 
   }
 
-  override val size: Int
+  override konst size: Int
     override get(): Int {
       return 0
     }
 
-  override operator fun set(index: Int, value: Nothing) {
+  override operator fun set(index: Int, konstue: Nothing) {
     throw IllegalStateException()
   }
 
@@ -74,38 +74,38 @@ internal object EmptyArrayMap : ArrayMap<Nothing> {
 }
 
 internal class OneElementArrayMap<T : Any> : ArrayMap<T> {
-  constructor(value: T, index: Int) /* primary */ {
+  constructor(konstue: T, index: Int) /* primary */ {
     super/*ArrayMap*/<T>()
     /* <init>() */
 
   }
 
-  val value: T
-    field = value
+  konst konstue: T
+    field = konstue
     get
 
-  val index: Int
+  konst index: Int
     field = index
     get
 
-  override val size: Int
+  override konst size: Int
     override get(): Int {
       return 1
     }
 
-  override operator fun set(index: Int, value: T) {
+  override operator fun set(index: Int, konstue: T) {
     throw IllegalStateException()
   }
 
   override operator fun get(index: Int): T? {
     return when {
-      EQEQ(arg0 = index, arg1 = <this>.<get-index>()) -> <this>.<get-value>()
+      EQEQ(arg0 = index, arg1 = <this>.<get-index>()) -> <this>.<get-konstue>()
       else -> null
     }
   }
 
   override fun copy(): ArrayMap<T> {
-    return OneElementArrayMap<T>(value = <this>.<get-value>(), index = <this>.<get-index>())
+    return OneElementArrayMap<T>(konstue = <this>.<get-konstue>(), index = <this>.<get-index>())
   }
 
   override operator fun iterator(): Iterator<T> {
@@ -130,7 +130,7 @@ internal class OneElementArrayMap<T : Any> : ArrayMap<T> {
           when {
             <this>.<get-notVisited>() -> { // BLOCK
               <this>.<set-notVisited>(<set-?> = false)
-              return <this>.<get-value>()
+              return <this>.<get-konstue>()
             }
             else -> { // BLOCK
               throw NoSuchElementException()
@@ -165,11 +165,11 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
 
     }
 
-    private const val DEFAULT_SIZE: Int
+    private const konst DEFAULT_SIZE: Int
       field = 20
       private get
 
-    private const val INCREASE_K: Int
+    private const konst INCREASE_K: Int
       field = 2
       private get
 
@@ -192,21 +192,21 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
     }
   }
 
-  override operator fun set(index: Int, value: T) {
+  override operator fun set(index: Int, konstue: T) {
     <this>.ensureCapacity(index = index)
     when {
       EQEQ(arg0 = <this>.<get-data>().get(index = index), arg1 = null) -> { // BLOCK
         { // BLOCK
-          val tmp0_this: ArrayMapImpl<T> = <this>
+          konst tmp0_this: ArrayMapImpl<T> = <this>
           { // BLOCK
-            val tmp1: Int = tmp0_this.<get-size>()
+            konst tmp1: Int = tmp0_this.<get-size>()
             tmp0_this.<set-size>(<set-?> = tmp1.inc())
             tmp1
           }
         }
       } /*~> Unit */
     }
-    <this>.<get-data>().set(index = index, value = value)
+    <this>.<get-data>().set(index = index, konstue = konstue)
   }
 
   override operator fun get(index: Int): T? {
@@ -235,9 +235,9 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
           { // BLOCK
             do// COMPOSITE {
             { // BLOCK
-              val tmp0_this: <no name provided><T> = <this>
+              konst tmp0_this: <no name provided><T> = <this>
               { // BLOCK
-                val tmp1: Int = tmp0_this.<get-index>()
+                konst tmp1: Int = tmp0_this.<get-index>()
                 tmp0_this.<set-index>(<set-?> = tmp1.inc())
                 tmp1
               }
@@ -252,7 +252,7 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
               <this>.done()
             }
             else -> { // BLOCK
-              <this>.setNext(value = <this>.<get-data>().get(index = <this>.<get-index>()) as T)
+              <this>.setNext(konstue = <this>.<get-data>().get(index = <this>.<get-index>()) as T)
             }
           }
         }
@@ -267,22 +267,22 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
     when {
       EQEQ(arg0 = <this>.<get-data>().get(index = index), arg1 = null).not() -> { // BLOCK
         { // BLOCK
-          val tmp0_this: ArrayMapImpl<T> = <this>
+          konst tmp0_this: ArrayMapImpl<T> = <this>
           { // BLOCK
-            val tmp1: Int = tmp0_this.<get-size>()
+            konst tmp1: Int = tmp0_this.<get-size>()
             tmp0_this.<set-size>(<set-?> = tmp1.dec())
             tmp1
           }
         }
       } /*~> Unit */
     }
-    <this>.<get-data>().set(index = index, value = null)
+    <this>.<get-data>().set(index = index, konstue = null)
   }
 
   fun entries(): List<Entry<T>> {
-    return <this>.<get-data>().mapIndexedNotNull<Any?, Entry<T>>(transform = local fun <anonymous>(index: Int, value: Any?): Entry<T>? {
+    return <this>.<get-data>().mapIndexedNotNull<Any?, Entry<T>>(transform = local fun <anonymous>(index: Int, konstue: Any?): Entry<T>? {
       return when {
-        EQEQ(arg0 = value, arg1 = null).not() -> Entry<T>(key = index, value = value as T)
+        EQEQ(arg0 = konstue, arg1 = null).not() -> Entry<T>(key = index, konstue = konstue as T)
         else -> null
       }
     }
@@ -290,18 +290,18 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
   }
 
   data class Entry<T : Any?> : Entry<Int, T> {
-    constructor(key: Int, value: T) /* primary */ {
+    constructor(key: Int, konstue: T) /* primary */ {
       super/*Any*/()
       /* <init>() */
 
     }
 
-    override val key: Int
+    override konst key: Int
       field = key
       override get
 
-    override val value: T
-      field = value
+    override konst konstue: T
+      field = konstue
       override get
 
     operator fun component1(): Int {
@@ -309,22 +309,22 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
     }
 
     operator fun component2(): T {
-      return <this>.#value
+      return <this>.#konstue
     }
 
-    fun copy(key: Int = <this>.#key, value: T = <this>.#value): Entry<T> {
-      return Entry<T>(key = key, value = value)
+    fun copy(key: Int = <this>.#key, konstue: T = <this>.#konstue): Entry<T> {
+      return Entry<T>(key = key, konstue = konstue)
     }
 
     override fun toString(): String {
-      return "Entry(" + "key=" + <this>.#key + ", " + "value=" + <this>.#value + ")"
+      return "Entry(" + "key=" + <this>.#key + ", " + "konstue=" + <this>.#konstue + ")"
     }
 
     override fun hashCode(): Int {
       var result: Int = <this>.#key.hashCode()
       result = result.times(other = 31).plus(other = when {
-        EQEQ(arg0 = <this>.#value, arg1 = null) -> 0
-        else -> <this>.#value.hashCode()
+        EQEQ(arg0 = <this>.#konstue, arg1 = null) -> 0
+        else -> <this>.#konstue.hashCode()
       })
       return result
     }
@@ -336,12 +336,12 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
       when {
         other !is Entry<T> -> return false
       }
-      val tmp0_other_with_cast: Entry<T> = other as Entry<T>
+      konst tmp0_other_with_cast: Entry<T> = other as Entry<T>
       when {
         EQEQ(arg0 = <this>.#key, arg1 = tmp0_other_with_cast.#key).not() -> return false
       }
       when {
-        EQEQ(arg0 = <this>.#value, arg1 = tmp0_other_with_cast.#value).not() -> return false
+        EQEQ(arg0 = <this>.#konstue, arg1 = tmp0_other_with_cast.#konstue).not() -> return false
       }
       return true
     }

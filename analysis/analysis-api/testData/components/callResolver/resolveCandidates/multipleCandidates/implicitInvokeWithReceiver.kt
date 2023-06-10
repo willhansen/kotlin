@@ -1,6 +1,6 @@
 operator fun Int.invoke(i: Int) {}
 
-class A(val x: Int) {
+class A(konst x: Int) {
     fun x(b: Boolean) {}
 }
 

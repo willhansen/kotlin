@@ -1,13 +1,13 @@
 // FILE: Base.java
 
 public class Base {
-    public int value = 0;
+    public int konstue = 0;
 }
 
 // FILE: Derived.kt
 
 class Derived : Base() {
-    fun getValue() = value
+    fun getValue() = konstue
 
-    fun foo() = value
+    fun foo() = konstue
 }

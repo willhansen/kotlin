@@ -53,7 +53,7 @@ object PluginCliParser {
         pluginConfigurations: Collection<String>,
         configuration: CompilerConfiguration
     ): ExitCode {
-        val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
         try {
             loadPluginsLegacyStyle(pluginClasspaths, pluginOptions, configuration)
             loadPluginsModernStyle(pluginConfigurations, configuration)
@@ -61,7 +61,7 @@ object PluginCliParser {
         } catch (e: PluginProcessingException) {
             messageCollector.report(CompilerMessageSeverity.ERROR, e.message!!)
         } catch (e: PluginCliOptionProcessingException) {
-            val message = e.message + "\n\n" + cliPluginUsageString(e.pluginId, e.options)
+            konst message = e.message + "\n\n" + cliPluginUsageString(e.pluginId, e.options)
             messageCollector.report(CompilerMessageSeverity.ERROR, message)
         } catch (e: CliOptionProcessingException) {
             messageCollector.report(CompilerMessageSeverity.ERROR, e.message!!)
@@ -72,24 +72,24 @@ object PluginCliParser {
     }
 
     class RegisteredPluginInfo(
-        @Suppress("DEPRECATION") val componentRegistrar: ComponentRegistrar?,
-        val compilerPluginRegistrar: CompilerPluginRegistrar?,
-        val commandLineProcessor: CommandLineProcessor?,
-        val pluginOptions: List<CliOptionValue>
+        @Suppress("DEPRECATION") konst componentRegistrar: ComponentRegistrar?,
+        konst compilerPluginRegistrar: CompilerPluginRegistrar?,
+        konst commandLineProcessor: CommandLineProcessor?,
+        konst pluginOptions: List<CliOptionValue>
     )
 
     @Suppress("DEPRECATION")
     private fun loadRegisteredPluginsInfo(rawPluginConfigurations: Iterable<String>): List<RegisteredPluginInfo> {
-        val pluginConfigurations = extractPluginClasspathAndOptions(rawPluginConfigurations)
-        val pluginInfos = pluginConfigurations.map { pluginConfiguration ->
-            val classLoader = createClassLoader(pluginConfiguration.classpath)
-            val componentRegistrars = ServiceLoaderLite.loadImplementations(ComponentRegistrar::class.java, classLoader)
-            val compilerPluginRegistrars = ServiceLoaderLite.loadImplementations(CompilerPluginRegistrar::class.java, classLoader)
+        konst pluginConfigurations = extractPluginClasspathAndOptions(rawPluginConfigurations)
+        konst pluginInfos = pluginConfigurations.map { pluginConfiguration ->
+            konst classLoader = createClassLoader(pluginConfiguration.classpath)
+            konst componentRegistrars = ServiceLoaderLite.loadImplementations(ComponentRegistrar::class.java, classLoader)
+            konst compilerPluginRegistrars = ServiceLoaderLite.loadImplementations(CompilerPluginRegistrar::class.java, classLoader)
 
             fun multiplePluginsErrorMessage(pluginObjects: List<Any>): String {
                 return buildString {
                     append("Multiple plugins found in given classpath: ")
-                    val extensionNames = pluginObjects.mapNotNull { it::class.qualifiedName }
+                    konst extensionNames = pluginObjects.mapNotNull { it::class.qualifiedName }
                     appendLine(extensionNames.joinToString(", "))
                     append("  Plugin configuration is: ${pluginConfiguration.rawArgument}")
                 }
@@ -101,7 +101,7 @@ object PluginCliParser {
                 else -> throw PluginProcessingException(multiplePluginsErrorMessage(componentRegistrars + compilerPluginRegistrars))
             }
 
-            val commandLineProcessor = ServiceLoaderLite.loadImplementations(CommandLineProcessor::class.java, classLoader)
+            konst commandLineProcessor = ServiceLoaderLite.loadImplementations(CommandLineProcessor::class.java, classLoader)
             if (commandLineProcessor.size > 1) {
                 throw PluginProcessingException(multiplePluginsErrorMessage(commandLineProcessor))
             }
@@ -117,7 +117,7 @@ object PluginCliParser {
 
     private fun loadPluginsModernStyle(rawPluginConfigurations: Iterable<String>?, configuration: CompilerConfiguration) {
         if (rawPluginConfigurations == null) return
-        val pluginInfos = loadRegisteredPluginsInfo(rawPluginConfigurations)
+        konst pluginInfos = loadRegisteredPluginsInfo(rawPluginConfigurations)
         for (pluginInfo in pluginInfos) {
             pluginInfo.componentRegistrar?.let {
                 @Suppress("DEPRECATION")
@@ -126,7 +126,7 @@ object PluginCliParser {
             pluginInfo.compilerPluginRegistrar?.let { configuration.add(CompilerPluginRegistrar.COMPILER_PLUGIN_REGISTRARS, it) }
 
             if (pluginInfo.pluginOptions.isEmpty()) continue
-            val commandLineProcessor = pluginInfo.commandLineProcessor ?: throw RuntimeException() // TODO: proper exception
+            konst commandLineProcessor = pluginInfo.commandLineProcessor ?: throw RuntimeException() // TODO: proper exception
             processCompilerPluginOptions(commandLineProcessor, pluginInfo.pluginOptions, configuration)
         }
     }
@@ -138,11 +138,11 @@ object PluginCliParser {
         pluginOptions: Iterable<String>?,
         configuration: CompilerConfiguration
     ) {
-        val classLoader = createClassLoader(pluginClasspaths ?: emptyList())
-        val componentRegistrars = ServiceLoaderLite.loadImplementations(ComponentRegistrar::class.java, classLoader)
+        konst classLoader = createClassLoader(pluginClasspaths ?: emptyList())
+        konst componentRegistrars = ServiceLoaderLite.loadImplementations(ComponentRegistrar::class.java, classLoader)
         configuration.addAll(ComponentRegistrar.PLUGIN_COMPONENT_REGISTRARS, componentRegistrars)
 
-        val compilerPluginRegistrars = ServiceLoaderLite.loadImplementations(CompilerPluginRegistrar::class.java, classLoader)
+        konst compilerPluginRegistrars = ServiceLoaderLite.loadImplementations(CompilerPluginRegistrar::class.java, classLoader)
         configuration.addAll(CompilerPluginRegistrar.COMPILER_PLUGIN_REGISTRARS, compilerPluginRegistrars)
 
         processPluginOptions(pluginOptions, configuration, classLoader)
@@ -154,7 +154,7 @@ object PluginCliParser {
         classLoader: URLClassLoader
     ) {
         // TODO issue a warning on using deprecated command line processors when all official plugin migrate to the newer convention
-        val commandLineProcessors = ServiceLoaderLite.loadImplementations(CommandLineProcessor::class.java, classLoader)
+        konst commandLineProcessors = ServiceLoaderLite.loadImplementations(CommandLineProcessor::class.java, classLoader)
 
         processCompilerPluginsOptions(configuration, pluginOptions, commandLineProcessors)
     }

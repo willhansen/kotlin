@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.diagnostics.reportOn
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.defaultValueForParameter
 import org.jetbrains.kotlin.fir.analysis.checkers.isSubtypeOfThrowable
-import org.jetbrains.kotlin.fir.analysis.checkers.valOrVarKeyword
+import org.jetbrains.kotlin.fir.analysis.checkers.konstOrVarKeyword
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
 import org.jetbrains.kotlin.fir.expressions.FirTryExpression
 import org.jetbrains.kotlin.fir.types.ConeTypeParameterType
@@ -21,20 +21,20 @@ import org.jetbrains.kotlin.fir.types.typeContext
 object FirCatchParameterChecker : FirTryExpressionChecker() {
     override fun check(expression: FirTryExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         for (catchEntry in expression.catches) {
-            val catchParameter = catchEntry.parameter
-            val source = catchParameter.source ?: continue
+            konst catchParameter = catchEntry.parameter
+            konst source = catchParameter.source ?: continue
 
             if (catchParameter.source?.defaultValueForParameter != null) {
                 reporter.reportOn(source, FirErrors.CATCH_PARAMETER_WITH_DEFAULT_VALUE, context)
             }
 
-            source.valOrVarKeyword?.let {
+            source.konstOrVarKeyword?.let {
                 reporter.reportOn(source, FirErrors.VAL_OR_VAR_ON_CATCH_PARAMETER, it, context)
             }
 
-            val coneType = catchParameter.returnTypeRef.coneType
+            konst coneType = catchParameter.returnTypeRef.coneType
             if (coneType is ConeTypeParameterType) {
-                val isReified = coneType.lookupTag.typeParameterSymbol.isReified
+                konst isReified = coneType.lookupTag.typeParameterSymbol.isReified
 
                 if (isReified) {
                     reporter.reportOn(source, FirErrors.REIFIED_TYPE_IN_CATCH_CLAUSE, context)
@@ -43,7 +43,7 @@ object FirCatchParameterChecker : FirTryExpressionChecker() {
                 }
             }
 
-            val session = context.session
+            konst session = context.session
             if (!coneType.isSubtypeOfThrowable(session)) {
                 reporter.reportOn(
                     source,

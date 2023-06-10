@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.util.DummyLogger
 import org.jetbrains.kotlin.util.Logger
 
 interface SearchPathResolverWithTarget<L: KotlinLibrary>: SearchPathResolver<L> {
-    val target: KonanTarget
+    konst target: KonanTarget
 }
 
 fun defaultResolver(
@@ -58,11 +58,11 @@ fun resolverByName(
 internal class KonanLibraryProperResolver(
     repositories: List<String>,
     directLibs: List<String>,
-    override val target: KonanTarget,
+    override konst target: KonanTarget,
     distributionKlib: String?,
     localKonanDir: String?,
     skipCurrentDir: Boolean,
-    override val logger: Logger
+    override konst logger: Logger
 ) : KotlinLibraryProperResolverWithAttributes<KonanLibrary>(
     repositories, directLibs,
     distributionKlib,
@@ -74,12 +74,12 @@ internal class KonanLibraryProperResolver(
 {
     override fun libraryComponentBuilder(file: File, isDefault: Boolean) = createKonanLibraryComponents(file, target, isDefault)
 
-    override val distPlatformHead: File?
+    override konst distPlatformHead: File?
         get() = distributionKlib?.File()?.child("platform")?.child(target.visibleName)
 
     override fun libraryMatch(candidate: KonanLibrary, unresolved: UnresolvedLibrary): Boolean {
-        val resolverTarget = this.target
-        val candidatePath = candidate.libraryFile.absolutePath
+        konst resolverTarget = this.target
+        konst candidatePath = candidate.libraryFile.absolutePath
 
         if (!candidate.targetList.contains(resolverTarget.visibleName)) {
             logger.warning("skipping $candidatePath. The target doesn't match. Expected '$resolverTarget', found ${candidate.targetList}")

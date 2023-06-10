@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.build.report.metrics
 import java.io.Serializable
 
 @Suppress("Reformat")
-enum class BuildPerformanceMetric(val parent: BuildPerformanceMetric? = null, val readableString: String, val type: ValueType) : Serializable {
+enum class BuildPerformanceMetric(konst parent: BuildPerformanceMetric? = null, konst readableString: String, konst type: ValueType) : Serializable {
     CACHE_DIRECTORY_SIZE(readableString = "Total size of the cache directory", type = ValueType.BYTES),
         LOOKUP_SIZE(CACHE_DIRECTORY_SIZE, "Lookups size", type = ValueType.BYTES),
         SNAPSHOT_SIZE(CACHE_DIRECTORY_SIZE, "ABI snapshot size", type = ValueType.BYTES),
@@ -51,10 +51,10 @@ enum class BuildPerformanceMetric(val parent: BuildPerformanceMetric? = null, va
     START_KOTLIN_DAEMON_EXECUTION(readableString = "Start time of kotlin daemon task execution", type = ValueType.NANOSECONDS),
     ;
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
 
-        val children by lazy {
-            values().filter { it.parent != null }.groupBy { it.parent }
+        konst children by lazy {
+            konstues().filter { it.parent != null }.groupBy { it.parent }
         }
     }
 }

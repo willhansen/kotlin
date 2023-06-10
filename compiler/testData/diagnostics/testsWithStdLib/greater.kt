@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
-class Expression<T>(val x: T)
+class Expression<T>(konst x: T)
 
-class GreaterOp(val expr1: Expression<*>, val expr2: Expression<*>)
+class GreaterOp(konst expr1: Expression<*>, konst expr2: Expression<*>)
 
 fun <T : Comparable<T>, S : T?> Expression<in S>.greater(other: T): GreaterOp =
     GreaterOp(this, Expression(other))

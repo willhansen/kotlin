@@ -4,7 +4,7 @@
 
 package test
 
-open class Base(val name: String)
+open class Base(konst name: String)
 class A(name: String) : Base(name)
 class B(name: String) : Base(name)
 
@@ -17,7 +17,7 @@ fun foo(base: Array<out Base>) {
 fun cond() = true
 
 inline fun <reified T : Base, reified Y : Base> process(a: Base) {
-    val z = try {
+    konst z = try {
         arrayOf<T>(a as T)
     } catch (e: Exception) {
         arrayOf<Y>(a as Y)

@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.gradle.plugin.variantImplementationFactory
  * The old API is now deprecated, so we continue using it only for old Gradle versions
  */
 interface ArtifactTypeAttributeAccessor {
-    val artifactTypeAttribute: Attribute<String>
+    konst artifactTypeAttribute: Attribute<String>
 
     interface ArtifactTypeAttributeAccessorVariantFactory : VariantImplementationFactories.VariantImplementationFactory {
         fun getInstance(): ArtifactTypeAttributeAccessor
@@ -29,11 +29,11 @@ internal class DefaultArtifactTypeAttributeAccessorVariantFactory :
 }
 
 internal class DefaultArtifactTypeAttributeAccessor : ArtifactTypeAttributeAccessor {
-    override val artifactTypeAttribute: Attribute<String>
+    override konst artifactTypeAttribute: Attribute<String>
         get() = ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE
 }
 
-internal val Project.artifactTypeAttribute
+internal konst Project.artifactTypeAttribute
     get() = variantImplementationFactory<ArtifactTypeAttributeAccessor.ArtifactTypeAttributeAccessorVariantFactory>()
         .getInstance()
         .artifactTypeAttribute

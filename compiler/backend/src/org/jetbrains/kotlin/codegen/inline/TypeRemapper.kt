@@ -20,12 +20,12 @@ import java.util.*
 
 //typeMapping data could be changed outside through method processing
 class TypeRemapper private constructor(
-    private val typeMapping: MutableMap<String, String?>,
-    val parent: TypeRemapper? = null,
-    private val isRootInlineLambda: Boolean = false
+    private konst typeMapping: MutableMap<String, String?>,
+    konst parent: TypeRemapper? = null,
+    private konst isRootInlineLambda: Boolean = false
 ) {
-    private val additionalMappings = hashMapOf<String, String>()
-    private val typeParametersMapping = hashMapOf<String, TypeParameterMapping<*>?>()
+    private konst additionalMappings = hashMapOf<String, String>()
+    private konst typeParametersMapping = hashMapOf<String, TypeParameterMapping<*>?>()
 
     fun addMapping(type: String, newType: String) {
         typeMapping[type] = newType

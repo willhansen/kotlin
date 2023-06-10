@@ -27,9 +27,9 @@ fun SmartPrinter.printField(field: Field, isImplementation: Boolean, override: B
     if (isImplementation && !field.isVal || field.isFinal && field.isMutable) {
         print("var")
     } else {
-        print("val")
+        print("konst")
     }
-    val type = if (isImplementation) field.getMutableType(notNull = notNull) else field.getTypeWithArguments(notNull = notNull)
+    konst type = if (isImplementation) field.getMutableType(notNull = notNull) else field.getTypeWithArguments(notNull = notNull)
     println(" ${field.name}: $type$end")
 }
 
@@ -37,10 +37,10 @@ fun SmartPrinter.printFieldWithDefaultInImplementation(field: Field) {
     if (!field.isVal && field.isVolatile) {
         println("@Volatile")
     }
-    val defaultValue = field.defaultValueInImplementation
+    konst defaultValue = field.defaultValueInImplementation
     print("override ")
     if (field.isVal) {
-        print("val")
+        print("konst")
     } else {
         print("var")
     }
@@ -53,11 +53,11 @@ fun SmartPrinter.printFieldWithDefaultInImplementation(field: Field) {
         print("get() ")
     }
     requireNotNull(defaultValue) {
-        "No default value for $field"
+        "No default konstue for $field"
     }
     println("= $defaultValue")
     field.customSetter?.let {
-        println("set(value) {")
+        println("set(konstue) {")
         pushIndent()
         println(it)
         popIndent()

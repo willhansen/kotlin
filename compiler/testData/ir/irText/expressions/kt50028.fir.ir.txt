@@ -4,9 +4,9 @@ FILE fqName:<root> fileName:/kt50028.kt
       RETURN type=kotlin.Nothing from='public final fun test_1 (): kotlin.String declared in <root>'
         WHEN type=kotlin.Nothing origin=WHEN
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
+            if: CONST Boolean type=kotlin.Boolean konstue=true
             then: RETURN type=kotlin.Nothing from='public final fun test_1 (): kotlin.String declared in <root>'
-              CONST String type=kotlin.String value=""
+              CONST String type=kotlin.String konstue=""
   FUN name:test_2 visibility:public modality:FINAL <> (b:kotlin.Boolean) returnType:kotlin.Boolean
     VALUE_PARAMETER name:b index:0 type:kotlin.Boolean
     BLOCK_BODY
@@ -14,8 +14,8 @@ FILE fqName:<root> fileName:/kt50028.kt
         WHEN type=kotlin.Boolean origin=IF
           BRANCH
             if: GET_VAR 'b: kotlin.Boolean declared in <root>.test_2' type=kotlin.Boolean origin=null
-            then: CONST Boolean type=kotlin.Boolean value=true
+            then: CONST Boolean type=kotlin.Boolean konstue=true
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
+            if: CONST Boolean type=kotlin.Boolean konstue=true
             then: THROW type=kotlin.Nothing
               CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in kotlin.NotImplementedError' type=kotlin.NotImplementedError origin=null

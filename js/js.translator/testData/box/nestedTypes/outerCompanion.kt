@@ -3,11 +3,11 @@ package foo
 
 class A {
     inner class B {
-        val x = foo();
+        konst x = foo();
     }
 
     class C {
-        val x = foo();
+        konst x = foo();
     }
 
     companion object {

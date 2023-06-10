@@ -35,16 +35,16 @@ import org.jetbrains.kotlin.fir.visitors.*
 interface FirClassBuilder : FirDeclarationBuilder, FirAnnotationContainerBuilder {
     abstract override var source: KtSourceElement?
     abstract override var resolvePhase: FirResolvePhase
-    abstract override val annotations: MutableList<FirAnnotation>
+    abstract override konst annotations: MutableList<FirAnnotation>
     abstract override var moduleData: FirModuleData
     abstract override var origin: FirDeclarationOrigin
     abstract override var attributes: FirDeclarationAttributes
-    abstract val typeParameters: MutableList<FirTypeParameterRef>
+    abstract konst typeParameters: MutableList<FirTypeParameterRef>
     abstract var status: FirDeclarationStatus
     abstract var deprecationsProvider: DeprecationsProvider
     abstract var classKind: ClassKind
-    abstract val superTypeRefs: MutableList<FirTypeRef>
-    abstract val declarations: MutableList<FirDeclaration>
+    abstract konst superTypeRefs: MutableList<FirTypeRef>
+    abstract konst declarations: MutableList<FirDeclaration>
     abstract var scopeProvider: FirScopeProvider
     override fun build(): FirClass
 }

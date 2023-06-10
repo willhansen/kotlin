@@ -4,9 +4,9 @@ class A {
     fun argumentAdded(x: Int = 1) {}
     fun argumentRemoved() {}
 
-    fun valueAdded(x: Int = 3) {}
-    fun valueRemoved(x: Int) {}
-    fun valueChanged(x: Int = 6) {}
+    fun konstueAdded(x: Int = 3) {}
+    fun konstueRemoved(x: Int) {}
+    fun konstueChanged(x: Int = 6) {}
 }
 
 class ConstructorValueAdded(x: Int = 7)

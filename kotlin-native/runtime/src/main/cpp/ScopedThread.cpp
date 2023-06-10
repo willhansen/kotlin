@@ -17,10 +17,10 @@ using namespace kotlin;
 
 void internal::setCurrentThreadName(std::string_view name) noexcept {
 #if KONAN_MACOSX || KONAN_IOS || KONAN_WATCHOS || KONAN_TVOS
-    static_assert(std::is_invocable_r_v<void, decltype(pthread_setname_np), const char*>, "Invalid pthread_setname_np signature");
+    static_assert(std::is_invocable_r_v<void, decltype(pthread_setname_np), const char*>, "Inkonstid pthread_setname_np signature");
     pthread_setname_np(name.data());
 #else
-    static_assert(std::is_invocable_r_v<int, decltype(pthread_setname_np), pthread_t, const char*>, "Invalid pthread_setname_np signature");
+    static_assert(std::is_invocable_r_v<int, decltype(pthread_setname_np), pthread_t, const char*>, "Inkonstid pthread_setname_np signature");
     // TODO: On Linux the maximum thread name is 16 characters. Handle automatically?
     int result = pthread_setname_np(pthread_self(), name.data());
     if (result != 0) {

@@ -9,7 +9,7 @@ class DP {
 
 class H {
     companion object {
-        val property: String by DP()
+        konst property: String by DP()
     }
 }
 

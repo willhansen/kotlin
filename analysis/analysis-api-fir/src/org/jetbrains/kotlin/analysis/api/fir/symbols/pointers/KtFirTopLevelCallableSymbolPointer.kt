@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.name.CallableId
 
 internal abstract class KtTopLevelCallableSymbolPointer<S : KtCallableSymbol>(
-    private val callableId: CallableId
+    private konst callableId: CallableId
 ) : KtSymbolPointer<S>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     final override fun restoreSymbol(analysisSession: KtAnalysisSession): S? {
         require(analysisSession is KtFirAnalysisSession)
-        val candidates = analysisSession.getCallableSymbols(callableId)
+        konst candidates = analysisSession.getCallableSymbols(callableId)
         if (candidates.isEmpty()) return null
-        val session = candidates.first().fir.moduleData.session
+        konst session = candidates.first().fir.moduleData.session
         return analysisSession.chooseCandidateAndCreateSymbol(candidates, session)
     }
 

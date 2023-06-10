@@ -13,7 +13,7 @@ inline fun inlineFunction(f: () -> Unit) = f()
 fun testCase1(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus = inlineGenericTestFunction {
+    konst updateStatus = inlineGenericTestFunction {
         fun localFunction() { obj.status = "OK" }
         ::localFunction
     }
@@ -23,7 +23,7 @@ fun testCase1(obj: TestData) = inlineFunction {
 fun testCase2(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus = inlineGenericTestFunction {
+    konst updateStatus = inlineGenericTestFunction {
         fun localFunction(msg: String) { obj.status = msg }
         ::localFunction
     }
@@ -33,7 +33,7 @@ fun testCase2(obj: TestData) = inlineFunction {
 fun testCase3(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus = inlineGenericTestFunction {
+    konst updateStatus = inlineGenericTestFunction {
         fun localFunction(flag: Boolean, msg: String) { obj.status = if (flag) msg else "ERROR" }
         ::localFunction
     }
@@ -43,7 +43,7 @@ fun testCase3(obj: TestData) = inlineFunction {
 fun testCase4(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus: String.() -> Unit = inlineGenericTestFunction {
+    konst updateStatus: String.() -> Unit = inlineGenericTestFunction {
         fun String.localFunction() { obj.status = this }
         String::localFunction
     }
@@ -54,7 +54,7 @@ fun testCase4(obj: TestData) = inlineFunction {
 fun testCase5(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus: () -> Unit = inlineGenericTestFunction {
+    konst updateStatus: () -> Unit = inlineGenericTestFunction {
         fun String.localFunction() { obj.status = this }
         "OK"::localFunction
     }
@@ -64,7 +64,7 @@ fun testCase5(obj: TestData) = inlineFunction {
 fun testCase6(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus: TestData.(String) -> Unit = inlineGenericTestFunction {
+    konst updateStatus: TestData.(String) -> Unit = inlineGenericTestFunction {
         fun TestData.localFunction(msg: String) { status = msg }
         TestData::localFunction
     }
@@ -75,7 +75,7 @@ fun testCase6(obj: TestData) = inlineFunction {
 fun testCase7(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus: (String) -> Unit = inlineGenericTestFunction {
+    konst updateStatus: (String) -> Unit = inlineGenericTestFunction {
         fun TestData.localFunction(msg: String) { status = msg }
         obj::localFunction
     }
@@ -85,7 +85,7 @@ fun testCase7(obj: TestData) = inlineFunction {
 fun testCase8(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus: (String) -> Unit = inlineGenericTestFunction {
+    konst updateStatus: (String) -> Unit = inlineGenericTestFunction {
         obj::updateStatus
     }
     updateStatus("OK")
@@ -94,7 +94,7 @@ fun testCase8(obj: TestData) = inlineFunction {
 fun testCase9(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus: String.() -> Unit = inlineGenericTestFunction {
+    konst updateStatus: String.() -> Unit = inlineGenericTestFunction {
         { obj.updateStatus(this) }
     }
     updateStatus("ERROR")
@@ -104,7 +104,7 @@ fun testCase9(obj: TestData) = inlineFunction {
 fun testCase10(obj: TestData) = inlineFunction {
     class InlineClass
 
-    val updateStatus: String.() -> Unit = inlineGenericTestFunction {
+    konst updateStatus: String.() -> Unit = inlineGenericTestFunction {
         fun <T> T.localFunction() { obj.status = this.toString() }
         String::localFunction
     }
@@ -116,7 +116,7 @@ fun testCase11(obj: TestData) {
     fun testCaseImpl(msg: String) = inlineFunction {
         class InlineClass
 
-        val updateStatus: (Boolean) -> Unit = inlineGenericTestFunction {
+        konst updateStatus: (Boolean) -> Unit = inlineGenericTestFunction {
             fun TestData.localFunction(flag: Boolean) { status = if (flag) msg else "ERROR" }
             obj::localFunction
         }
@@ -129,7 +129,7 @@ fun testCase12(obj: TestData) {
     fun testCaseImpl(msg: String) = inlineFunction {
         class InlineClass
 
-        val updateStatus: TestData.(Boolean) -> Unit = inlineGenericTestFunction {
+        konst updateStatus: TestData.(Boolean) -> Unit = inlineGenericTestFunction {
             fun TestData.localFunction(flag: Boolean) { status = if (flag) msg else "ERROR" }
             TestData::localFunction
         }
@@ -143,7 +143,7 @@ fun testCase13(obj: TestData) {
     fun testCaseImpl(msg: String) = inlineFunction {
         class InlineClass
 
-        val updateStatus: (Boolean) -> Unit = inlineGenericTestFunction {
+        konst updateStatus: (Boolean) -> Unit = inlineGenericTestFunction {
             fun <T, F> T.localFunction(flag: F) { obj.status = if (flag!!.equals(true)) this.toString() else "ERROR" }
             msg::localFunction
         }
@@ -154,7 +154,7 @@ fun testCase13(obj: TestData) {
 }
 
 fun checkTest(test: (TestData) -> Unit): Boolean {
-    val obj = TestData("Fail")
+    konst obj = TestData("Fail")
     test(obj)
     return obj.status == "OK"
 }

@@ -17,18 +17,18 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 
-abstract class AbstractSymbolLightClassesEquivalentTest : AbstractAnalysisApiBasedSingleModuleTest() {
+abstract class AbstractSymbolLightClassesEquikonstentTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val lightQName = LightClassTestCommon.fqNameInTestDataFile(testDataPath.toFile())
-        val ktFile = ktFiles.first()
-        val declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFile)
-        val lightElements = declaration.toLightElements()
+        konst lightQName = LightClassTestCommon.fqNameInTestDataFile(testDataPath.toFile())
+        konst ktFile = ktFiles.first()
+        konst declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFile)
+        konst lightElements = declaration.toLightElements()
         testServices.assertions.assertFalse(lightElements.isEmpty())
-        val lightElement = lightElements.find { it.javaClass.name == lightQName }
+        konst lightElement = lightElements.find { it.javaClass.name == lightQName }
         testServices.assertions.assertNotNull(lightElement) { "Expected $lightQName, got: " + lightElements.joinToString { it::class.java.name } }
-        testServices.assertions.assertTrue(lightElement!!.isEquivalentTo(declaration)) { "Light element is not equivalent to the corresponding ktElement" }
+        testServices.assertions.assertTrue(lightElement!!.isEquikonstentTo(declaration)) { "Light element is not equikonstent to the corresponding ktElement" }
     }
 
-    override val configurator: AnalysisApiTestConfigurator
+    override konst configurator: AnalysisApiTestConfigurator
         get() = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 }

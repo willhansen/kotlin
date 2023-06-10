@@ -8,19 +8,19 @@ package kotlin.jvm
 annotation class JvmInline
 
 @JvmInline
-value class X(val x: Int)
+konstue class X(konst x: Int)
 @JvmInline
-value class Z(val x: Int)
+konstue class Z(konst x: Int)
 
-class TestOk1(val a: Int, val b: Int) {
+class TestOk1(konst a: Int, konst b: Int) {
     constructor(x: X) : this(x.x, 1)
 }
 
-class TestErr1(val a: Int) {
+class TestErr1(konst a: Int) {
     constructor(x: X) : this(x.x)
 }
 
-class TestErr2(val a: Int, val b: Int) {
+class TestErr2(konst a: Int, konst b: Int) {
     constructor(x: X) : this(x.x, 1)
     constructor(z: Z) : this(z.x, 2)
 }

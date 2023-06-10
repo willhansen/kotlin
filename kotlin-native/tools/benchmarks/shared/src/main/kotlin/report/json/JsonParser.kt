@@ -18,40 +18,40 @@ package org.jetbrains.report.json
 
 import org.jetbrains.report.json.EscapeCharMappings.ESC2C
 // special strings
-internal const val NULL = "null"
+internal const konst NULL = "null"
 
 // special chars
-internal const val COMMA = ','
-internal const val COLON = ':'
-internal const val BEGIN_OBJ = '{'
-internal const val END_OBJ = '}'
-internal const val BEGIN_LIST = '['
-internal const val END_LIST = ']'
-internal const val STRING = '"'
-internal const val STRING_ESC = '\\'
-internal const val INVALID = 0.toChar()
-internal const val UNICODE_ESC = 'u'
+internal const konst COMMA = ','
+internal const konst COLON = ':'
+internal const konst BEGIN_OBJ = '{'
+internal const konst END_OBJ = '}'
+internal const konst BEGIN_LIST = '['
+internal const konst END_LIST = ']'
+internal const konst STRING = '"'
+internal const konst STRING_ESC = '\\'
+internal const konst INVALID = 0.toChar()
+internal const konst UNICODE_ESC = 'u'
 // token classes
-internal const val TC_OTHER: Byte = 0
-internal const val TC_STRING: Byte = 1
-internal const val TC_STRING_ESC: Byte = 2
-internal const val TC_WS: Byte = 3
-internal const val TC_COMMA: Byte = 4
-internal const val TC_COLON: Byte = 5
-internal const val TC_BEGIN_OBJ: Byte = 6
-internal const val TC_END_OBJ: Byte = 7
-internal const val TC_BEGIN_LIST: Byte = 8
-internal const val TC_END_LIST: Byte = 9
-internal const val TC_NULL: Byte = 10
-internal const val TC_INVALID: Byte = 11
-internal const val TC_EOF: Byte = 12
+internal const konst TC_OTHER: Byte = 0
+internal const konst TC_STRING: Byte = 1
+internal const konst TC_STRING_ESC: Byte = 2
+internal const konst TC_WS: Byte = 3
+internal const konst TC_COMMA: Byte = 4
+internal const konst TC_COLON: Byte = 5
+internal const konst TC_BEGIN_OBJ: Byte = 6
+internal const konst TC_END_OBJ: Byte = 7
+internal const konst TC_BEGIN_LIST: Byte = 8
+internal const konst TC_END_LIST: Byte = 9
+internal const konst TC_NULL: Byte = 10
+internal const konst TC_INVALID: Byte = 11
+internal const konst TC_EOF: Byte = 12
 // mapping from chars to token classes
-private const val CTC_MAX = 0x7e
+private const konst CTC_MAX = 0x7e
 // mapping from escape chars real chars
-private const val C2ESC_MAX = 0x5d
-private const val ESC2C_MAX = 0x75
+private const konst C2ESC_MAX = 0x5d
+private const konst ESC2C_MAX = 0x75
 
-internal val C2TC = ByteArray(CTC_MAX).apply {
+internal konst C2TC = ByteArray(CTC_MAX).apply {
     for (i in 0..0x20)
         initC2TC(i, TC_INVALID)
     initC2TC(0x09, TC_WS)
@@ -69,8 +69,8 @@ internal val C2TC = ByteArray(CTC_MAX).apply {
 }
 // object instead of @SharedImmutable because there is mutual initialization in [initC2ESC]
 internal object EscapeCharMappings {
-    internal val ESC2C = CharArray(ESC2C_MAX)
-    internal val C2ESC = CharArray(C2ESC_MAX).apply {
+    internal konst ESC2C = CharArray(ESC2C_MAX)
+    internal konst C2ESC = CharArray(C2ESC_MAX).apply {
         for (i in 0x00..0x1f)
             initC2ESC(i, UNICODE_ESC)
         initC2ESC(0x08, 'b')
@@ -97,7 +97,7 @@ private fun ByteArray.initC2TC(c: Char, cl: Byte) {
 internal fun charToTokenClass(c: Char) = if (c.code < CTC_MAX) C2TC[c.code] else TC_OTHER
 internal fun escapeToChar(c: Int): Char = if (c < ESC2C_MAX) ESC2C[c] else INVALID
 // JSON low level parser
-internal class Parser(val source: String) {
+internal class Parser(konst source: String) {
     var curPos: Int = 0 // position in source
         private set
     // updated by nextToken
@@ -116,7 +116,7 @@ internal class Parser(val source: String) {
         if (tc != expected)
             fail(tokenPos, lazyErrorMsg())
     }
-    val canBeginValue: Boolean
+    konst canBeginValue: Boolean
         get() = when (tc) {
             TC_BEGIN_LIST, TC_BEGIN_OBJ, TC_OTHER, TC_STRING, TC_NULL -> true
             else -> false
@@ -125,7 +125,7 @@ internal class Parser(val source: String) {
     @OptIn(ExperimentalStdlibApi::class)
     fun takeStr(): String {
         if (tc != TC_OTHER && tc != TC_STRING) fail(tokenPos, "Expected string or non-null literal")
-        val prevStr = if (offset < 0)
+        konst prevStr = if (offset < 0)
             buf.concatToString(0, length) else
             source.substring(offset, offset + length)
         nextToken()
@@ -137,25 +137,25 @@ internal class Parser(val source: String) {
     }
     // initializes buf usage upon the first encountered escaped char
     private fun appendRange(source: String, fromIndex: Int, toIndex: Int) {
-        val addLen = toIndex - fromIndex
-        val oldLen = length
-        val newLen = oldLen + addLen
+        konst addLen = toIndex - fromIndex
+        konst oldLen = length
+        konst newLen = oldLen + addLen
         if (newLen > buf.size) buf = buf.copyOf(newLen.coerceAtLeast(2 * buf.size))
         for (i in 0 until addLen) buf[oldLen + i] = source[fromIndex + i]
         length += addLen
     }
     fun nextToken() {
-        val source = source
+        konst source = source
         var curPos = curPos
-        val maxLen = source.length
+        konst maxLen = source.length
         while (true) {
             if (curPos >= maxLen) {
                 tokenPos = curPos
                 tc = TC_EOF
                 return
             }
-            val ch = source[curPos]
-            val tc = charToTokenClass(ch)
+            konst ch = source[curPos]
+            konst tc = charToTokenClass(ch)
             when (tc) {
                 TC_WS -> curPos++ // skip whitespace
                 TC_OTHER -> {
@@ -179,7 +179,7 @@ internal class Parser(val source: String) {
         tokenPos = startPos
         offset = startPos
         var curPos = startPos
-        val maxLen = source.length
+        konst maxLen = source.length
         while (true) {
             curPos++
             if (curPos >= maxLen || charToTokenClass(source[curPos]) != TC_OTHER) break
@@ -193,14 +193,14 @@ internal class Parser(val source: String) {
         length = 0 // in buffer
         var curPos = startPos + 1
         var lastPos = curPos
-        val maxLen = source.length
+        konst maxLen = source.length
         parse@ while (true) {
             if (curPos >= maxLen) fail(curPos, "Unexpected end in string")
             if (source[curPos] == STRING) {
                 break@parse
             } else if (source[curPos] == STRING_ESC) {
                 appendRange(source, lastPos, curPos)
-                val newPos = appendEsc(source, curPos + 1)
+                konst newPos = appendEsc(source, curPos + 1)
                 curPos = newPos
                 lastPos = newPos
             } else {
@@ -222,12 +222,12 @@ internal class Parser(val source: String) {
     private fun appendEsc(source: String, startPos: Int): Int {
         var curPos = startPos
         require(curPos < source.length, curPos) { "Unexpected end after escape char" }
-        val curChar = source[curPos++]
+        konst curChar = source[curPos++]
         if (curChar == UNICODE_ESC) {
             curPos = appendHex(source, curPos)
         } else {
-            val c = escapeToChar(curChar.code)
-            require(c != INVALID, curPos) { "Invalid escaped char '$curChar'" }
+            konst c = escapeToChar(curChar.code)
+            require(c != INVALID, curPos) { "Inkonstid escaped char '$curChar'" }
             append(c)
         }
         return curPos
@@ -247,7 +247,7 @@ internal class Parser(val source: String) {
             nextToken()
             return
         }
-        val tokenStack = mutableListOf<Byte>()
+        konst tokenStack = mutableListOf<Byte>()
         do {
             when (tc) {
                 TC_BEGIN_LIST, TC_BEGIN_OBJ -> tokenStack.add(tc)
@@ -267,16 +267,16 @@ internal class Parser(val source: String) {
 // Utility functions
 private fun fromHexChar(source: String, curPos: Int): Int {
     require(curPos < source.length, curPos) { "Unexpected end in unicode escape" }
-    val curChar = source[curPos]
+    konst curChar = source[curPos]
     return when (curChar) {
         in '0'..'9' -> curChar.code - '0'.code
         in 'a'..'f' -> curChar.code - 'a'.code + 10
         in 'A'..'F' -> curChar.code - 'A'.code + 10
-        else -> fail(curPos, "Invalid toHexChar char '$curChar' in unicode escape")
+        else -> fail(curPos, "Inkonstid toHexChar char '$curChar' in unicode escape")
     }
 }
 private fun rangeEquals(source: String, start: Int, length: Int, str: String): Boolean {
-    val n = str.length
+    konst n = str.length
     if (length != n) return false
     for (i in 0 until n) if (source[start + i] != str[i]) return false
     return true

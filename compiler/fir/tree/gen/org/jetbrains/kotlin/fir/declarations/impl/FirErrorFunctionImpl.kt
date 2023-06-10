@@ -42,26 +42,26 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirErrorFunctionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
     override var deprecationsProvider: DeprecationsProvider,
-    override val containerSource: DeserializedContainerSource?,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst containerSource: DeserializedContainerSource?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
-    override val valueParameters: MutableList<FirValueParameter>,
-    override val diagnostic: ConeDiagnostic,
-    override val symbol: FirErrorFunctionSymbol,
+    override konst konstueParameters: MutableList<FirValueParameter>,
+    override konst diagnostic: ConeDiagnostic,
+    override konst symbol: FirErrorFunctionSymbol,
 ) : FirErrorFunction() {
-    override val typeParameters: List<FirTypeParameterRef> get() = emptyList()
+    override konst typeParameters: List<FirTypeParameterRef> get() = emptyList()
     override var status: FirDeclarationStatus = FirResolvedDeclarationStatusImpl.DEFAULT_STATUS_FOR_STATUSLESS_DECLARATIONS
     override var returnTypeRef: FirTypeRef = FirErrorTypeRefImpl(null, null, diagnostic, false)
-    override val receiverParameter: FirReceiverParameter? get() = null
+    override konst receiverParameter: FirReceiverParameter? get() = null
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
-    override val body: FirBlock? get() = null
+    override konst body: FirBlock? get() = null
 
     init {
         symbol.bind(this)
@@ -75,7 +75,7 @@ internal class FirErrorFunctionImpl(
         returnTypeRef.accept(visitor, data)
         contextReceivers.forEach { it.accept(visitor, data) }
         controlFlowGraphReference?.accept(visitor, data)
-        valueParameters.forEach { it.accept(visitor, data) }
+        konstueParameters.forEach { it.accept(visitor, data) }
     }
 
     override fun <D> transformChildren(transformer: FirTransformer<D>, data: D): FirErrorFunctionImpl {
@@ -112,7 +112,7 @@ internal class FirErrorFunctionImpl(
     }
 
     override fun <D> transformValueParameters(transformer: FirTransformer<D>, data: D): FirErrorFunctionImpl {
-        valueParameters.transformInplace(transformer, data)
+        konstueParameters.transformInplace(transformer, data)
         return this
     }
 
@@ -147,8 +147,8 @@ internal class FirErrorFunctionImpl(
     }
 
     override fun replaceValueParameters(newValueParameters: List<FirValueParameter>) {
-        valueParameters.clear()
-        valueParameters.addAll(newValueParameters)
+        konstueParameters.clear()
+        konstueParameters.addAll(newValueParameters)
     }
 
     override fun replaceBody(newBody: FirBlock?) {}

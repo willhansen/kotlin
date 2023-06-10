@@ -18,8 +18,8 @@ import kotlin.reflect.KType
 import kotlin.reflect.KTypeProjection
 
 object ErrorListDiagnosticListRenderer : DiagnosticListRenderer() {
-    const val BASE_PACKAGE = "org.jetbrains.kotlin.fir.analysis.diagnostics"
-    const val DIAGNOSTICS_PACKAGE = "org.jetbrains.kotlin.diagnostics"
+    const konst BASE_PACKAGE = "org.jetbrains.kotlin.fir.analysis.diagnostics"
+    const konst DIAGNOSTICS_PACKAGE = "org.jetbrains.kotlin.diagnostics"
 
     override fun render(
         file: File,
@@ -68,14 +68,14 @@ object ErrorListDiagnosticListRenderer : DiagnosticListRenderer() {
     }
 
     private fun SmartPrinter.printDiagnostic(diagnostic: DiagnosticData) {
-        print("val ${diagnostic.name} by ${diagnostic.getFactoryFunction()}")
+        print("konst ${diagnostic.name} by ${diagnostic.getFactoryFunction()}")
         printTypeArguments(diagnostic.getAllTypeArguments())
         printPositioningStrategyAndLanguageFeature(diagnostic)
         println()
     }
 
     private fun SmartPrinter.printPositioningStrategyAndLanguageFeature(diagnostic: DiagnosticData) {
-        val argumentsList = buildList {
+        konst argumentsList = buildList {
             if (diagnostic is DeprecationDiagnosticData) {
                 add(diagnostic.featureForError.name)
             }
@@ -115,7 +115,7 @@ object ErrorListDiagnosticListRenderer : DiagnosticListRenderer() {
     }
 
     private fun SmartPrinter.printTypeArgument(typeArgument: KTypeProjection) {
-        val typeArgumentType = typeArgument.type
+        konst typeArgumentType = typeArgument.type
         if (typeArgumentType == null) {
             print("*")
         } else {
@@ -124,7 +124,7 @@ object ErrorListDiagnosticListRenderer : DiagnosticListRenderer() {
     }
 
     private fun SmartPrinter.collectAndPrintImports(diagnosticList: DiagnosticList, packageName: String, starImportsToAdd: Set<String>) {
-        val imports = collectImports(diagnosticList, packageName, starImportsToAdd)
+        konst imports = collectImports(diagnosticList, packageName, starImportsToAdd)
         printImports(imports)
         println()
     }
@@ -154,7 +154,7 @@ object ErrorListDiagnosticListRenderer : DiagnosticListRenderer() {
     }
 
 
-    private val KType.kClass: KClass<*>
+    private konst KType.kClass: KClass<*>
         get() = classifier as KClass<*>
 
     private fun DiagnosticData.getFactoryFunction(): String = when (this) {

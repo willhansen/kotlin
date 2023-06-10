@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
 fun foo(s: S): String {
-    val anon = object {
+    konst anon = object {
         fun bar() = s.string
     }
     return anon.bar()

@@ -25,7 +25,7 @@ class Kotlin: A.B() {
 }
 
 fun box(): String {
-    val kotlin = Kotlin()
+    konst kotlin = Kotlin()
     if (kotlin.getS() != "OK") return "fail1"
     return kotlin.callF()
 }

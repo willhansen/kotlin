@@ -9,7 +9,7 @@
 // FILE: kt45853.kt
 
 abstract class A {
-    abstract val a: A?
+    abstract konst a: A?
 }
 
 class B() : AX() {

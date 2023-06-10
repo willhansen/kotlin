@@ -10,7 +10,7 @@ FILE: superCallWithDelegation.kt
 
         private final field $$delegate_0: R|A| = R|<local>/a|
 
-        private final val a: R|A| = R|<local>/a|
+        private final konst a: R|A| = R|<local>/a|
             private get(): R|A|
 
     }

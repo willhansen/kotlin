@@ -1,7 +1,7 @@
 class A {
-    val foo = ""
+    konst foo = ""
 
-    val bar = A::foo
+    konst bar = A::foo
 }
 
 // TESTED_OBJECT_KIND: class

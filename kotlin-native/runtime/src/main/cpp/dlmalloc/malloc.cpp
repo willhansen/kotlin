@@ -15,7 +15,7 @@
 
   This library is all in one file to simplify the most common usage:
   ftp it, compile it (-O3), and link it into another program. All of
-  the compile-time options default to reasonable values for use on
+  the compile-time options default to reasonable konstues for use on
   most platforms.  You might later want to step through various
   compile-time and dynamic tuning options.
 
@@ -219,10 +219,10 @@
 
  -------------------------  Compile-time options ---------------------------
 
-Be careful in setting #define values for numerical constants of type
-size_t. On some systems, literal values are not automatically extended
+Be careful in setting #define konstues for numerical constants of type
+size_t. On some systems, literal konstues are not automatically extended
 to size_t precision unless they are explicitly casted. You can also
-use the symbolic values MAX_SIZE_T, SIZE_T_ONE, etc below.
+use the symbolic konstues MAX_SIZE_T, SIZE_T_ONE, etc below.
 
 WIN32                    default: defined if _WIN32 defined
   Defining WIN32 sets up defaults for MS environment and compilers.
@@ -265,7 +265,7 @@ USE_LOCKS                default: 0 (false)
   Causes each call to each public routine to be surrounded with
   pthread or WIN32 mutex lock/unlock. (If set true, this can be
   overridden on a per-mspace basis for mspace versions.) If set to a
-  non-zero value other than 1, locks are used, but their
+  non-zero konstue other than 1, locks are used, but their
   implementation is left out, so lock functions must be supplied manually,
   as described below.
 
@@ -360,7 +360,7 @@ MORECORE                  default: sbrk
   arguments, so it is normally the signed type of the same width as
   size_t (sometimes declared as "intptr_t").  It doesn't much matter
   though. Internally, we only call it with arguments less than half
-  the max value of a size_t, which should work across all reasonable
+  the max konstue of a size_t, which should work across all reasonable
   possibilities, although sometimes generating compiler warnings.
 
 MORECORE_CONTIGUOUS       default: 1 (true) if HAVE_MORECORE
@@ -428,7 +428,7 @@ NO_MALLINFO                default: 0
 MALLINFO_FIELD_TYPE        default: size_t
   The type of the fields in the mallinfo struct. This was originally
   defined as "int" in SVID etc, but is more usefully defined as
-  size_t. The value is used only if  HAVE_USR_INCLUDE_MALLOC_H is not set
+  size_t. The konstue is used only if  HAVE_USR_INCLUDE_MALLOC_H is not set
 
 NO_MALLOC_STATS            default: 0
   If defined, don't compile "malloc_stats". This avoids calls to
@@ -454,11 +454,11 @@ DEFAULT_GRANULARITY        default: page size if MORECORE_CONTIGUOUS,
   most systems with contiguous MORECORE, there is no reason to
   make this more than a page. However, systems with MMAP tend to
   either require or encourage larger granularities.  You can increase
-  this value to prevent system allocation functions to be called so
-  often, especially if they are slow.  The value must be at least one
+  this konstue to prevent system allocation functions to be called so
+  often, especially if they are slow.  The konstue must be at least one
   page and must be a power of two.  Setting to 0 causes initialization
   to either page size or win32 region size.  (Note: In previous
-  versions of malloc, the equivalent of this option was called
+  versions of malloc, the equikonstent of this option was called
   "TOP_PAD")
 
 DEFAULT_TRIM_THRESHOLD    default: 2MB
@@ -468,16 +468,16 @@ DEFAULT_TRIM_THRESHOLD    default: 2MB
   useful in long-lived programs using contiguous MORECORE.  Because
   trimming via sbrk can be slow on some systems, and can sometimes be
   wasteful (in cases where programs immediately afterward allocate
-  more large chunks) the value should be high enough so that your
+  more large chunks) the konstue should be high enough so that your
   overall system performance would improve by releasing this much
-  memory.  As a rough guide, you might set to a value close to the
+  memory.  As a rough guide, you might set to a konstue close to the
   average size of a process (program) running on your system.
   Releasing this much memory would allow such a process to run in
   memory.  Generally, it is worth tuning trim thresholds when a
   program undergoes phases where several large chunks are allocated
   and released in ways that can reuse each other's storage, perhaps
   mixed with phases where there are no such chunks at all. The trim
-  value must be greater than page size to have any useful effect.  To
+  konstue must be greater than page size to have any useful effect.  To
   disable trimming completely, you can set to MAX_SIZE_T. Note that the trick
   some people use of mallocing a huge space and then freeing it at
   program startup, in an attempt to reserve system memory, doesn't
@@ -504,8 +504,8 @@ DEFAULT_MMAP_THRESHOLD       default: 256K
   cannot be reclaimed, consolidated, and then used to service later
   requests, as happens with normal chunks.  The advantages of mmap
   nearly always outweigh disadvantages for "large" chunks, but the
-  value of "large" may vary across systems.  The default is an
-  empirically derived value that works well in most systems. You can
+  konstue of "large" may vary across systems.  The default is an
+  empirically derived konstue that works well in most systems. You can
   disable mmap by setting to MAX_SIZE_T.
 
 MAX_RELEASE_CHECK_RATE   default: 4095 unless not HAVE_MMAP
@@ -516,7 +516,7 @@ MAX_RELEASE_CHECK_RATE   default: 4095 unless not HAVE_MMAP
   free() will, with a period of MAX_RELEASE_CHECK_RATE (or the
   current number of segments, if greater) try to release unused
   segments to the OS when freeing chunks that result in
-  consolidation. The best value for this parameter is a compromise
+  consolidation. The best konstue for this parameter is a compromise
   between slowing down frees with relatively costly checks that
   rarely trigger versus holding on to unused memory. To effectively
   disable, set to MAX_SIZE_T. This may lead to a very slight speed
@@ -608,7 +608,7 @@ extern long getpagesize();
 #include <sys/types.h>  /* For size_t */
 #endif  /* LACKS_SYS_TYPES_H */
 
-/* The maximum possible size_t value has all bits set */
+/* The maximum possible size_t konstue has all bits set */
 #define MAX_SIZE_T           (~(size_t)0)
 
 #ifndef USE_LOCKS /* ensure true if spin or recursive locks set */
@@ -847,8 +847,8 @@ extern "C" {
 #define dlposix_memalign       posix_memalign
 #define dlrealloc              realloc
 #define dlrealloc_in_place     realloc_in_place
-#define dlvalloc               valloc
-#define dlpvalloc              pvalloc
+#define dlkonstloc               konstloc
+#define dlpkonstloc              pkonstloc
 #define dlmallinfo             mallinfo
 #define dlmallopt              mallopt
 #define dlmalloc_trim          malloc_trim
@@ -875,8 +875,8 @@ extern "C" {
   systems.)  Note that size_t is an unsigned type, so calls with
   arguments that would be negative if signed are interpreted as
   requests for huge amounts of space, which will often fail. The
-  maximum supported value of n differs across systems, but is in all
-  cases less than the maximum representable value of a size_t.
+  maximum supported konstue of n differs across systems, but is in all
+  cases less than the maximum representable konstue of a size_t.
 */
 DLMALLOC_EXPORT void* dlmalloc(size_t);
 
@@ -904,9 +904,9 @@ DLMALLOC_EXPORT void* dlcalloc(size_t, size_t);
 
   The returned pointer may or may not be the same as p. The algorithm
   prefers extending p in most cases when possible, otherwise it
-  employs the equivalent of a malloc-copy-free sequence.
+  employs the equikonstent of a malloc-copy-free sequence.
 
-  If p is null, realloc is equivalent to malloc.
+  If p is null, realloc is equikonstent to malloc.
 
   If space is not available, realloc returns null, errno is set (if on
   ANSI) and p is NOT freed.
@@ -960,21 +960,21 @@ DLMALLOC_EXPORT void* dlmemalign(size_t, size_t);
 DLMALLOC_EXPORT int dlposix_memalign(void**, size_t, size_t);
 
 /*
-  valloc(size_t n);
-  Equivalent to memalign(pagesize, n), where pagesize is the page
+  konstloc(size_t n);
+  Equikonstent to memalign(pagesize, n), where pagesize is the page
   size of the system. If the pagesize is unknown, 4096 is used.
 */
-DLMALLOC_EXPORT void* dlvalloc(size_t);
+DLMALLOC_EXPORT void* dlkonstloc(size_t);
 
 /*
-  mallopt(int parameter_number, int parameter_value)
+  mallopt(int parameter_number, int parameter_konstue)
   Sets tunable parameters The format is to provide a
-  (parameter-number, parameter-value) pair.  mallopt then sets the
-  corresponding parameter to the argument value if it can (i.e., so
-  long as the value is meaningful), and returns 1 if successful else
+  (parameter-number, parameter-konstue) pair.  mallopt then sets the
+  corresponding parameter to the argument konstue if it can (i.e., so
+  long as the konstue is meaningful), and returns 1 if successful else
   0.  To workaround the fact that mallopt is specified to use int,
-  not size_t parameters, the value -1 is specially treated as the
-  maximum unsigned size_t value.
+  not size_t parameters, the konstue -1 is specially treated as the
+  maximum unsigned size_t konstue.
 
   SVID/XPG/ANSI defines four standard param numbers for mallopt,
   normally defined in malloc.h.  None of these are use in this malloc,
@@ -983,7 +983,7 @@ DLMALLOC_EXPORT void* dlvalloc(size_t);
   parameters are as follows (listed defaults are for "typical"
   configurations).
 
-  Symbol            param #  default    allowed param values
+  Symbol            param #  default    allowed param konstues
   M_TRIM_THRESHOLD     -1   2*1024*1024   any   (-1 disables)
   M_GRANULARITY        -2     page size   any power of 2 >= page size
   M_MMAP_THRESHOLD     -3      256*1024   any   (or 0 if no MMAP support)
@@ -994,7 +994,7 @@ DLMALLOC_EXPORT int dlmallopt(int, int);
   malloc_footprint();
   Returns the number of bytes obtained from the system.  The total
   number of bytes allocated by malloc, realloc etc., is less than this
-  value. Unlike mallinfo, this function returns only a precomputed
+  konstue. Unlike mallinfo, this function returns only a precomputed
   result, so can be called frequently to monitor memory consumption.
   Even if locks are otherwise defined, this function does not use them,
   so results might not be up to date.
@@ -1004,9 +1004,9 @@ DLMALLOC_EXPORT size_t dlmalloc_footprint(void);
 /*
   malloc_max_footprint();
   Returns the maximum number of bytes obtained from the system. This
-  value will be greater than current footprint if deallocated space
+  konstue will be greater than current footprint if deallocated space
   has been reclaimed by the system. The peak number of bytes allocated
-  by malloc, realloc etc., is less than this value. Unlike mallinfo,
+  by malloc, realloc etc., is less than this konstue. Unlike mallinfo,
   this function returns only a precomputed result, so can be called
   frequently to monitor memory consumption.  Even if locks are
   otherwise defined, this function does not use them, so results might
@@ -1017,9 +1017,9 @@ DLMALLOC_EXPORT size_t dlmalloc_max_footprint(void);
 /*
   malloc_footprint_limit();
   Returns the number of bytes that the heap is allowed to obtain from
-  the system, returning the last value returned by
-  malloc_set_footprint_limit, or the maximum size_t value if
-  never set. The returned value reflects a permission. There is no
+  the system, returning the last konstue returned by
+  malloc_set_footprint_limit, or the maximum size_t konstue if
+  never set. The returned konstue reflects a permission. There is no
   guarantee that this number of bytes can actually be obtained from
   the system.
 */
@@ -1029,8 +1029,8 @@ DLMALLOC_EXPORT size_t dlmalloc_footprint_limit();
   malloc_set_footprint_limit();
   Sets the maximum number of bytes to obtain from the system, causing
   failure returns from malloc and related functions upon attempts to
-  exceed this value. The argument value may be subject to page
-  rounding to an enforceable limit; this actual value is returned.
+  exceed this konstue. The argument konstue may be subject to page
+  rounding to an enforceable limit; this actual konstue is returned.
   Using an argument of the maximum possible size_t effectively
   disables checks. If the argument is less than or equal to the
   current malloc_footprint, then all future allocations that require
@@ -1093,7 +1093,7 @@ DLMALLOC_EXPORT void dlmalloc_inspect_all(void(*handler)(void*, void *, size_t, 
                it ignores page restrictions etc.)
 
   Because these fields are ints, but internal bookkeeping may
-  be kept as longs, the reported values may wrap around zero and
+  be kept as longs, the reported konstues may wrap around zero and
   thus be inaccurate.
 */
 DLMALLOC_EXPORT struct mallinfo dlmallinfo(void);
@@ -1199,7 +1199,7 @@ DLMALLOC_EXPORT void** dlindependent_calloc(size_t, size_t, void**);
   }
 
   In general though, independent_comalloc is worth using only for
-  larger values of n_elements. For small values, you probably won't
+  larger konstues of n_elements. For small konstues, you probably won't
   detect enough difference from series of malloc calls to bother.
 
   Overuse of independent_comalloc can increase overall memory usage,
@@ -1220,11 +1220,11 @@ DLMALLOC_EXPORT void** dlindependent_comalloc(size_t, size_t*, void**);
 DLMALLOC_EXPORT size_t  dlbulk_free(void**, size_t n_elements);
 
 /*
-  pvalloc(size_t n);
-  Equivalent to valloc(minimum-page-that-holds(n)), that is,
+  pkonstloc(size_t n);
+  Equikonstent to konstloc(minimum-page-that-holds(n)), that is,
   round up n to nearest pagesize.
  */
-DLMALLOC_EXPORT void*  dlpvalloc(size_t);
+DLMALLOC_EXPORT void*  dlpkonstloc(size_t);
 
 /*
   malloc_trim(size_t pad);
@@ -1305,7 +1305,7 @@ typedef void* mspace;
   dynamically as needed to service mspace_malloc requests.  You can
   control the sizes of incremental increases of this space by
   compiling with a different DEFAULT_GRANULARITY or dynamically
-  setting with mallopt(M_GRANULARITY, value).
+  setting with mallopt(M_GRANULARITY, konstue).
 */
 DLMALLOC_EXPORT mspace create_mspace(size_t capacity, int locked);
 
@@ -1543,7 +1543,7 @@ LONG __cdecl _InterlockedExchange(LONG volatile *Target, LONG Value);
 #define interlockedcompareexchange _InterlockedCompareExchange
 #define interlockedexchange _InterlockedExchange
 #elif defined(WIN32) && defined(__GNUC__)
-#define interlockedcompareexchange(a, b, c) __sync_val_compare_and_swap(a, c, b)
+#define interlockedcompareexchange(a, b, c) __sync_konst_compare_and_swap(a, c, b)
 #define interlockedexchange __sync_lock_test_and_set
 #endif /* Win32 */
 #else /* USE_LOCKS */
@@ -1636,7 +1636,7 @@ unsigned char _BitScanReverse(unsigned long *index, unsigned long mask);
 #define SIX_SIZE_T_SIZES    (FOUR_SIZE_T_SIZES+TWO_SIZE_T_SIZES)
 #define HALF_MAX_SIZE_T     (MAX_SIZE_T / 2U)
 
-/* The bit mask value corresponding to MALLOC_ALIGNMENT */
+/* The bit mask konstue corresponding to MALLOC_ALIGNMENT */
 #define CHUNK_ALIGN_MASK    (MALLOC_ALIGNMENT - SIZE_T_ONE)
 
 /* True if address a has acceptable alignment */
@@ -1803,7 +1803,7 @@ static FORCEINLINE int win32munmap(void* ptr, size_t size) {
   one per-mspace lock.
 
   The global lock_ensures that mparams.magic and other unique
-  mparams values are initialized only once. It also protects
+  mparams konstues are initialized only once. It also protects
   sequences of calls to MORECORE.  In many cases sys_alloc requires
   two calls, that should not be interleaved with calls by other
   threads.  This does not protect against direct calls to MORECORE
@@ -1822,7 +1822,7 @@ static FORCEINLINE int win32munmap(void* ptr, size_t size) {
   bypassed, in which case you will need to define the type MLOCK_T,
   and at least INITIAL_LOCK, DESTROY_LOCK, ACQUIRE_LOCK, RELEASE_LOCK
   and TRY_LOCK.  You must also declare a
-    static MLOCK_T malloc_global_mutex = { initialization values };.
+    static MLOCK_T malloc_global_mutex = { initialization konstues };.
 
 */
 
@@ -1857,11 +1857,11 @@ static FORCEINLINE int win32munmap(void* ptr, size_t size) {
 /* Custom spin locks for older gcc on x86 */
 static FORCEINLINE int x86_cas_lock(int *sl) {
   int ret;
-  int val = 1;
+  int konst = 1;
   int cmp = 0;
   __asm__ __volatile__  ("lock; cmpxchgl %1, %2"
                          : "=a" (ret)
-                         : "r" (val), "m" (*(sl)), "0"(cmp)
+                         : "r" (konst), "m" (*(sl)), "0"(cmp)
                          : "memory", "cc");
   return ret;
 }
@@ -2274,7 +2274,7 @@ typedef unsigned int flag_t;           /* The type of various bit flag sets */
 #define INUSE_BITS          (PINUSE_BIT|CINUSE_BIT)
 #define FLAG_BITS           (PINUSE_BIT|CINUSE_BIT|FLAG4_BIT)
 
-/* Head value for fenceposts */
+/* Head konstue for fenceposts */
 #define FENCEPOST_HEAD      (INUSE_BITS|SIZE_T_SIZE)
 
 /* extraction of fields from head words */
@@ -2565,7 +2565,7 @@ typedef struct malloc_segment* msegmentptr;
     than this are trapped (unless INSECURE is defined).
 
   Magic tag
-    A cross-check field that should always hold same value as mparams.magic.
+    A cross-check field that should always hold same konstue as mparams.magic.
 
   Max allowed footprint
     The maximum allowed bytes to allocate from system (zero means no limit)
@@ -3200,7 +3200,7 @@ static int init_mparams(void) {
       magic = (size_t)(time(0) ^ (size_t)0x55555555U);
 #endif
       magic |= (size_t)8U;    /* ensure nonzero */
-      magic &= ~(size_t)7U;   /* improve chances of fault for bad values */
+      magic &= ~(size_t)7U;   /* improve chances of fault for bad konstues */
       /* Until memory modes commonly available, use volatile-write */
       (*(volatile size_t *)(&(mparams.magic))) = magic;
     }
@@ -3211,23 +3211,23 @@ static int init_mparams(void) {
 }
 
 /* support for mallopt */
-static int change_mparam(int param_number, int value) {
-  size_t val;
+static int change_mparam(int param_number, int konstue) {
+  size_t konst;
   ensure_initialization();
-  val = (value == -1)? MAX_SIZE_T : (size_t)value;
+  konst = (konstue == -1)? MAX_SIZE_T : (size_t)konstue;
   switch(param_number) {
   case M_TRIM_THRESHOLD:
-    mparams.trim_threshold = val;
+    mparams.trim_threshold = konst;
     return 1;
   case M_GRANULARITY:
-    if (val >= mparams.page_size && ((val & (val-1)) == 0)) {
-      mparams.granularity = val;
+    if (konst >= mparams.page_size && ((konst & (konst-1)) == 0)) {
+      mparams.granularity = konst;
       return 1;
     }
     else
       return 0;
   case M_MMAP_THRESHOLD:
-    mparams.mmap_threshold = val;
+    mparams.mmap_threshold = konst;
     return 1;
   default:
     return 0;
@@ -3728,7 +3728,7 @@ static void internal_malloc_stats(mstate m) {
      right), to make sure that lefts and rights of descendents
      correspond properly to bit masks.  We use the rightmost descendent
      of x.  We could use any other leaf, but this is easy to locate and
-     tends to counteract removal of leftmosts elsewhere, and so keeps
+     tends to counteract remokonst of leftmosts elsewhere, and so keeps
      paths shorter than minimally guaranteed.  This doesn't loop much
      because on average a node in a tree is near the bottom.
   3. If x is the base of a chain (i.e., has parent links) relink
@@ -5310,14 +5310,14 @@ int dlposix_memalign(void** pp, size_t alignment, size_t bytes) {
   }
 }
 
-void* dlvalloc(size_t bytes) {
+void* dlkonstloc(size_t bytes) {
   size_t pagesz;
   ensure_initialization();
   pagesz = mparams.page_size;
   return dlmemalign(pagesz, bytes);
 }
 
-void* dlpvalloc(size_t bytes) {
+void* dlpkonstloc(size_t bytes) {
   size_t pagesz;
   ensure_initialization();
   pagesz = mparams.page_size;
@@ -5399,8 +5399,8 @@ void dlmalloc_stats() {
 }
 #endif /* NO_MALLOC_STATS */
 
-int dlmallopt(int param_number, int value) {
-  return change_mparam(param_number, value);
+int dlmallopt(int param_number, int konstue) {
+  return change_mparam(param_number, konstue);
 }
 
 size_t dlmalloc_usable_size(void* mem) {
@@ -5988,8 +5988,8 @@ size_t mspace_usable_size(const void* mem) {
   return 0;
 }
 
-int mspace_mallopt(int param_number, int value) {
-  return change_mparam(param_number, value);
+int mspace_mallopt(int param_number, int konstue) {
+  return change_mparam(param_number, konstue);
 }
 
 #endif /* MSPACES */
@@ -6223,7 +6223,7 @@ History:
       * Fixed ordering problem with boundary-stamping
 
     V2.6.3 Sun May 19 08:17:58 1996  Doug Lea  (dl at gee)
-      * Added pvalloc, as recommended by H.J. Liu
+      * Added pkonstloc, as recommended by H.J. Liu
       * Added 64bit pointer support mainly from Wolfram Gloger
       * Added anonymously donated WIN32 sbrk emulation
       * Malloc, calloc, getpagesize: add optimizations from Raymond Nijssen

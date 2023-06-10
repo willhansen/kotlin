@@ -11,7 +11,7 @@ package kotlin.js
 if (typeof Array.prototype.fill === "undefined") {
     // Polyfill from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill#Polyfill
     Object.defineProperty(Array.prototype, 'fill', {
-        value: function (value) {
+        konstue: function (konstue) {
             // Steps 1-2.
             if (this == null) {
                 throw new TypeError('this is null or not defined');
@@ -43,7 +43,7 @@ if (typeof Array.prototype.fill === "undefined") {
 
             // Step 12.
             while (k < finalValue) {
-                O[k] = value;
+                O[k] = konstue;
                 k++;
             }
 
@@ -56,7 +56,7 @@ if (typeof Array.prototype.fill === "undefined") {
 [Int8Array, Int16Array, Uint16Array, Int32Array, Float32Array, Float64Array].forEach(function (TypedArray) {
     if (typeof TypedArray.prototype.fill === "undefined") {
         Object.defineProperty(TypedArray.prototype, 'fill', {
-            value: Array.prototype.fill
+            konstue: Array.prototype.fill
         });
     }
 })

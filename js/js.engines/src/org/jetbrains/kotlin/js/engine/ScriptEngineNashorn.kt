@@ -13,32 +13,32 @@ class ScriptEngineNashorn : ScriptEngineWithTypedResult {
     private var savedState: Map<String, Any?>? = null
 
     // TODO use "-strict"
-    private val myEngine = NashornScriptEngineFactory().getScriptEngine("--language=es5", "--no-java", "--no-syntax-extensions")
+    private konst myEngine = NashornScriptEngineFactory().getScriptEngine("--language=es5", "--no-java", "--no-syntax-extensions")
 
-    override fun eval(script: String): String = evalWithTypedResult<Any?>(script).toString()
+    override fun ekonst(script: String): String = ekonstWithTypedResult<Any?>(script).toString()
 
     @Suppress("UNCHECKED_CAST")
-    override fun <R> evalWithTypedResult(script: String): R {
-        return myEngine.eval(script) as R
+    override fun <R> ekonstWithTypedResult(script: String): R {
+        return myEngine.ekonst(script) as R
     }
 
     override fun loadFile(path: String) {
-        eval("load('${path.replace('\\', '/')}');")
+        ekonst("load('${path.replace('\\', '/')}');")
     }
 
     override fun reset() {
         throw UnsupportedOperationException()
     }
 
-    private fun getGlobalState(): MutableMap<String, Any?> = evalWithTypedResult("this")
+    private fun getGlobalState(): MutableMap<String, Any?> = ekonstWithTypedResult("this")
 
     override fun saveGlobalState() {
         savedState = getGlobalState().toMap()
     }
 
     override fun restoreGlobalState() {
-        val globalState = getGlobalState()
-        val originalState = savedState!!
+        konst globalState = getGlobalState()
+        konst originalState = savedState!!
         for (key in globalState.keys) {
             globalState[key] = originalState[key] ?: ScriptRuntime.UNDEFINED
         }

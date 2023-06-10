@@ -3,12 +3,12 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val string: T)
+konstue class S<T: String>(konst string: T)
 
 class Outer {
     private fun foo(s: S<String>) = s.string
 
-    inner class Inner(val string: String) {
+    inner class Inner(konst string: String) {
         fun bar() = foo(S(string))
     }
 }

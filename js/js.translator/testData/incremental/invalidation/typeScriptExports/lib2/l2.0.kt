@@ -1,4 +1,4 @@
-class MyClass(val stepId: Int) {
+class MyClass(konst stepId: Int) {
     fun qux() = foo() + stepId
 }
 

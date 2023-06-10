@@ -47,7 +47,7 @@ KtFile: BinaryTree.kt
             VALUE_PARAMETER
               PsiElement(var)('var')
               PsiWhiteSpace(' ')
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               PsiElement(COLON)(':')
               PsiWhiteSpace(' ')
@@ -104,7 +104,7 @@ KtFile: BinaryTree.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('compare')
         PsiWhiteSpace(' ')
@@ -430,7 +430,7 @@ KtFile: BinaryTree.kt
                           PsiElement(IDENTIFIER)('node')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                     PsiElement(RPAR)(')')
                 PsiElement(RPAR)(')')
                 PsiWhiteSpace(' ')
@@ -655,7 +655,7 @@ KtFile: BinaryTree.kt
                         PsiElement(IDENTIFIER)('node')
                       PsiElement(DOT)('.')
                       REFERENCE_EXPRESSION
-                        PsiElement(IDENTIFIER)('value')
+                        PsiElement(IDENTIFIER)('konstue')
                     PsiWhiteSpace(' ')
                     OPERATION_REFERENCE
                       PsiElement(EQEQ)('==')
@@ -674,7 +674,7 @@ KtFile: BinaryTree.kt
                           PsiElement(IDENTIFIER)('node')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                       PsiWhiteSpace(' ')
                       OPERATION_REFERENCE
                         PsiElement(EQ)('=')
@@ -723,10 +723,10 @@ KtFile: BinaryTree.kt
                             PsiElement(IDENTIFIER)('node')
                           PsiElement(DOT)('.')
                           REFERENCE_EXPRESSION
-                            PsiElement(IDENTIFIER)('value')
+                            PsiElement(IDENTIFIER)('konstue')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                     PsiElement(RPAR)(')')
                 PsiElement(RPAR)(')')
                 PsiWhiteSpace(' ')
@@ -766,7 +766,7 @@ KtFile: BinaryTree.kt
                               PsiErrorElement:Expecting an element
                                 PsiElement(DOT)('.')
                             OPERATION_REFERENCE
-                              PsiElement(IDENTIFIER)('value')
+                              PsiElement(IDENTIFIER)('konstue')
                             PsiErrorElement:Expecting an element
                               PsiElement(DOT)('.')
                           OPERATION_REFERENCE
@@ -804,7 +804,7 @@ KtFile: BinaryTree.kt
                               PsiErrorElement:Expecting an element
                                 PsiElement(DOT)('.')
                             OPERATION_REFERENCE
-                              PsiElement(IDENTIFIER)('value')
+                              PsiElement(IDENTIFIER)('konstue')
                             PsiErrorElement:Expecting an element
                               PsiElement(DOT)('.')
                           OPERATION_REFERENCE
@@ -921,7 +921,7 @@ KtFile: BinaryTree.kt
                           PsiElement(IDENTIFIER)('node')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                     PsiElement(RPAR)(')')
                 PsiElement(RPAR)(')')
                 PsiWhiteSpace(' ')
@@ -1147,7 +1147,7 @@ KtFile: BinaryTree.kt
           PsiElement(LBRACE)('{')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('toRemove')
             PsiWhiteSpace(' ')
@@ -1289,7 +1289,7 @@ KtFile: BinaryTree.kt
                           PsiElement(IDENTIFIER)('node')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                     PsiElement(RPAR)(')')
                 PsiElement(RPAR)(')')
                 PsiWhiteSpace(' ')
@@ -1394,9 +1394,9 @@ KtFile: BinaryTree.kt
             PsiWhiteSpace('\n      ')
             PsiComment(EOL_COMMENT)('//is TreeNode  #(left, right) -> {')
             PsiWhiteSpace('\n      ')
-            PsiComment(EOL_COMMENT)('//  val min = min(node.right)')
+            PsiComment(EOL_COMMENT)('//  konst min = min(node.right)')
             PsiWhiteSpace('\n      ')
-            PsiComment(EOL_COMMENT)('//  node.value = min.value')
+            PsiComment(EOL_COMMENT)('//  node.konstue = min.konstue')
             PsiWhiteSpace('\n      ')
             PsiComment(EOL_COMMENT)('//  remove(min)')
             PsiWhiteSpace('\n      ')
@@ -1734,7 +1734,7 @@ KtFile: BinaryTree.kt
               PsiElement(LBRACE)('{')
               PsiWhiteSpace('\n    ')
               PROPERTY
-                PsiElement(val)('val')
+                PsiElement(konst)('konst')
                 PsiWhiteSpace(' ')
                 PsiElement(IDENTIFIER)('version')
                 PsiWhiteSpace(' ')
@@ -1753,7 +1753,7 @@ KtFile: BinaryTree.kt
                     PsiElement(IDENTIFIER)('version')
               PsiWhiteSpace('\n    ')
               PROPERTY
-                PsiElement(val)('val')
+                PsiElement(konst)('konst')
                 PsiWhiteSpace(' ')
                 PsiElement(IDENTIFIER)('down')
                 PsiWhiteSpace(' ')
@@ -1775,7 +1775,7 @@ KtFile: BinaryTree.kt
                     PsiElement(RPAR)(')')
               PsiWhiteSpace('\n    ')
               PROPERTY
-                PsiElement(val)('val')
+                PsiElement(konst)('konst')
                 PsiWhiteSpace(' ')
                 PsiElement(IDENTIFIER)('up')
                 PsiWhiteSpace(' ')
@@ -1920,7 +1920,7 @@ KtFile: BinaryTree.kt
                         PsiElement(IDENTIFIER)('lastNode')
                       PsiElement(DOT)('.')
                       REFERENCE_EXPRESSION
-                        PsiElement(IDENTIFIER)('value')
+                        PsiElement(IDENTIFIER)('konstue')
                   PsiWhiteSpace('\n    ')
                   PsiElement(RBRACE)('}')
               PsiWhiteSpace('\n\n    ')
@@ -1979,7 +1979,7 @@ KtFile: BinaryTree.kt
                               PsiElement(LBRACE)('{')
                               PsiWhiteSpace('\n          ')
                               PROPERTY
-                                PsiElement(val)('val')
+                                PsiElement(konst)('konst')
                                 PsiWhiteSpace(' ')
                                 PsiElement(IDENTIFIER)('curNode')
                                 PsiWhiteSpace(' ')
@@ -2122,7 +2122,7 @@ KtFile: BinaryTree.kt
                               PsiElement(LBRACE)('{')
                               PsiWhiteSpace('\n          ')
                               PROPERTY
-                                PsiElement(val)('val')
+                                PsiElement(konst)('konst')
                                 PsiWhiteSpace(' ')
                                 PsiElement(IDENTIFIER)('curNode')
                                 PsiWhiteSpace(' ')
@@ -2199,7 +2199,7 @@ KtFile: BinaryTree.kt
                 MODIFIER_LIST
                   PsiElement(override)('override')
                 PsiWhiteSpace(' ')
-                PsiElement(val)('val')
+                PsiElement(konst)('konst')
                 PsiWhiteSpace(' ')
                 PsiElement(IDENTIFIER)('hasNext')
                 PsiWhiteSpace(' ')

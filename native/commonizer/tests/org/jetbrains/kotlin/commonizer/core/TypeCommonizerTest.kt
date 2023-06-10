@@ -65,40 +65,40 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
         targetCDependencySources: (InlineSourceBuilder.ModuleBuilder.() -> Unit)? = null
     ): TypeCommonizer {
 
-        val targetARoot = createCirTreeRoot {
+        konst targetARoot = createCirTreeRoot {
             commonTargetSources()
             if (targetASpecificSources != null) targetASpecificSources()
         }
 
-        val targetBRoot = createCirTreeRoot {
+        konst targetBRoot = createCirTreeRoot {
             commonTargetSources()
             if (targetBSpecificSources != null) targetBSpecificSources()
         }
 
-        val targetCRoot = createCirTreeRoot {
+        konst targetCRoot = createCirTreeRoot {
             commonTargetSources()
             if (targetCSpecificSources != null) targetCSpecificSources()
         }
 
-        val commonDependencies = createCirProvidedClassifiers { commonDependencySources() }
+        konst commonDependencies = createCirProvidedClassifiers { commonDependencySources() }
 
-        val targetADependencies = targetADependencySources?.let { createCirProvidedClassifiers { it() } } ?: CirProvidedClassifiers.EMPTY
-        val targetBDependencies = targetBDependencySources?.let { createCirProvidedClassifiers { it() } } ?: CirProvidedClassifiers.EMPTY
-        val targetCDependencies = targetCDependencySources?.let { createCirProvidedClassifiers { it() } } ?: CirProvidedClassifiers.EMPTY
+        konst targetADependencies = targetADependencySources?.let { createCirProvidedClassifiers { it() } } ?: CirProvidedClassifiers.EMPTY
+        konst targetBDependencies = targetBDependencySources?.let { createCirProvidedClassifiers { it() } } ?: CirProvidedClassifiers.EMPTY
+        konst targetCDependencies = targetCDependencySources?.let { createCirProvidedClassifiers { it() } } ?: CirProvidedClassifiers.EMPTY
 
-        val targetDependencies = TargetDependent(
+        konst targetDependencies = TargetDependent(
             LeafCommonizerTarget("a") to targetADependencies,
             LeafCommonizerTarget("b") to targetBDependencies,
             LeafCommonizerTarget("c") to targetCDependencies
         )
 
-        val roots = TargetDependent(
+        konst roots = TargetDependent(
             LeafCommonizerTarget("a") to targetARoot,
             LeafCommonizerTarget("b") to targetBRoot,
             LeafCommonizerTarget("c") to targetCRoot
         )
 
-        val classifiers = CirKnownClassifiers(
+        konst classifiers = CirKnownClassifiers(
             classifierIndices = roots.mapValue(::CirClassifierIndex),
             targetDependencies = targetDependencies,
             commonizedNodes = CirCommonizedClassifierNodes.default(),
@@ -325,7 +325,7 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
     }
 
     fun `test ta types in Kotlin package with same name and class`() {
-        val commonizer = createCommonizer(
+        konst commonizer = createCommonizer(
             commonDependencySources = {
                 source(
                     """
@@ -346,7 +346,7 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
     }
 
     fun `test ta types in Kotlin package with different names`() {
-        val commonizer = createCommonizer(
+        konst commonizer = createCommonizer(
             commonDependencySources = {
                 source(
                     """
@@ -377,7 +377,7 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
     }
 
     fun `test ta types in Kotlin package with different classes`() {
-        val commonizer = createCommonizer(
+        konst commonizer = createCommonizer(
             targetADependencySources = {
                 source(
                     """
@@ -415,7 +415,7 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
     }
 
     fun `test multilevel ta types in Kotlin package with same name and right hand side class`() {
-        val commonizer = createCommonizer(
+        konst commonizer = createCommonizer(
             targetASpecificSources = {
                 source(
                     """
@@ -472,7 +472,7 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
     }
 
     fun `test multilevel ta types in user package with same name and right hand side class - 1`() {
-        val commonizer = createCommonizer(
+        konst commonizer = createCommonizer(
             targetASpecificSources = {
                 source(
                     """
@@ -523,7 +523,7 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
     }
 
     fun `test multilevel ta types in user package with same name and right hand side class - 3`() {
-        val commonizer = createCommonizer(
+        konst commonizer = createCommonizer(
             commonTargetSources = {
                 source(
                     """
@@ -563,7 +563,7 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
     }
 
     fun `test ta types in Kotlin package with different nullability`() {
-        val commonizer = createCommonizer(
+        konst commonizer = createCommonizer(
             targetADependencySources = {
                 source(
                     """
@@ -600,7 +600,7 @@ class TypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
     }
 
     fun `test ta types in user package with same nullability`() {
-        val commonizer = createCommonizer(
+        konst commonizer = createCommonizer(
             commonTargetSources = {
                 source(
                     """

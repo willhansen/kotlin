@@ -1,7 +1,7 @@
 == foo ==
 fun foo() {
-    val a = 1
-    val b: Int
+    konst a = 1
+    konst b: Int
     b = 2
     42
 }
@@ -9,7 +9,7 @@ fun foo() {
 1                                   <v0>: Int   NEW: r(1) -> <v0> 
 2                                   <v1>: Int   NEW: r(2) -> <v1> 
 42                                  <v2>: *     NEW: r(42) -> <v2>
-{ val a = 1 val b: Int b = 2 42 }   <v2>: *     COPY              
+{ konst a = 1 konst b: Int b = 2 42 }   <v2>: *     COPY              
 =====================
 == bar ==
 fun bar(foo: Foo) {

@@ -64,42 +64,42 @@ class ScriptHostUtilTest : TestCase() {
 
 
     data class MergedScriptTextTestParams(
-        val fragmentsToInclude: List<Int>,
-        val intiCharPool: CharSequence = "abc",
-        val randomCharPool: Boolean = false
+        konst fragmentsToInclude: List<Int>,
+        konst intiCharPool: CharSequence = "abc",
+        konst randomCharPool: Boolean = false
     )
 
     class FragmentedText {
-        private val sb: StringBuilder = StringBuilder()
-        private val fragmentList: List<TextFragment> = mutableListOf()
+        private konst sb: StringBuilder = StringBuilder()
+        private konst fragmentList: List<TextFragment> = mutableListOf()
 
         companion object {
-            private val charPool: List<String> = ('a'..'z').map(Char::toString) + "\n"
+            private konst charPool: List<String> = ('a'..'z').map(Char::toString) + "\n"
         }
 
         fun fragments(): List<TextFragment> = fragmentList
         fun text(): String = sb.toString()
 
         data class TextFragment(
-            val text: String,
-            val textRange: SourceCode.Range
+            konst text: String,
+            konst textRange: SourceCode.Range
         ) {
             fun toScriptSourceNamedFragment(index: Int) = ScriptSourceNamedFragment("fragment$index", textRange)
         }
 
 
         fun addRandomFragment(): FragmentedText {
-            val randomText = (1..28).joinToString(separator = "") { charPool.random().toString() }
+            konst randomText = (1..28).joinToString(separator = "") { charPool.random().toString() }
             return addFragment(randomText)
         }
 
         fun addFragment(fragmentText: String): FragmentedText = apply {
-            val fragmentTextLength = fragmentText.length
-            val text = text()
-            val fragmentStartLine: Int = text.lines().count()
-            val fragmentEndLine = fragmentStartLine + fragmentText.count { it == '\n' }
-            val fullTextLength = text.length
-            val fragment = TextFragment(
+            konst fragmentTextLength = fragmentText.length
+            konst text = text()
+            konst fragmentStartLine: Int = text.lines().count()
+            konst fragmentEndLine = fragmentStartLine + fragmentText.count { it == '\n' }
+            konst fullTextLength = text.length
+            konst fragment = TextFragment(
                 text = fragmentText,
                 textRange = SourceCode.Range(
                     start = SourceCode.Position(fragmentStartLine, 1, fullTextLength),
@@ -114,13 +114,13 @@ class ScriptHostUtilTest : TestCase() {
     @Test
     fun `test `() {
 
-        val fragmentedText = initFragmentedScript(params.intiCharPool, params.randomCharPool)
-        val textFragments = fragmentedText.fragments()
-        val includedFragments = params.fragmentsToInclude.map(textFragments::get)
+        konst fragmentedText = initFragmentedScript(params.intiCharPool, params.randomCharPool)
+        konst textFragments = fragmentedText.fragments()
+        konst includedFragments = params.fragmentsToInclude.map(textFragments::get)
 
-        val script = fragmentedText.text().toScriptSource()
-        val testConfig = scriptCompilationConfiguration(includedFragments)
-        val mergedScriptText = getMergedScriptText(script, testConfig)
+        konst script = fragmentedText.text().toScriptSource()
+        konst testConfig = scriptCompilationConfiguration(includedFragments)
+        konst mergedScriptText = getMergedScriptText(script, testConfig)
         runValidations(script.text, mergedScriptText, includedFragments)
     }
 
@@ -144,10 +144,10 @@ class ScriptHostUtilTest : TestCase() {
         randomCharPool: Boolean,
         lines: Int = charSeq.length
     ): FragmentedText {
-        val generateFragment: FragmentedText.(Int) -> FragmentedText = when {
+        konst generateFragment: FragmentedText.(Int) -> FragmentedText = when {
             randomCharPool -> { _ -> addRandomFragment() }
             else -> { line: Int ->
-                val index = line % charSeq.length
+                konst index = line % charSeq.length
                 addFragment(charSeq[index].toString().repeat(3))
             }
         }

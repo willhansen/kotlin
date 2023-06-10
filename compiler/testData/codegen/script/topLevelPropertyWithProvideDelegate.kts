@@ -10,12 +10,12 @@ class Provider {
 
 class Test {
     companion object {
-        val instance = Test()
+        konst instance = Test()
     }
 
-    val message by Provider()
+    konst message by Provider()
 }
 
-val x = Test.instance.message
+konst x = Test.instance.message
 
 // expected: x: OK

@@ -5,22 +5,22 @@ import helpers.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-fun <T> builder(value: T, c: suspend T.() -> Unit) {
-    c.startCoroutine(value, EmptyContinuation)
+fun <T> builder(konstue: T, c: suspend T.() -> Unit) {
+    c.startCoroutine(konstue, EmptyContinuation)
 }
 
 interface A<T> {
-    val value: T
+    konst konstue: T
     var result: T
 
     fun test(): T {
-        builder(value) { result = this }
+        builder(konstue) { result = this }
         return result
     }
 }
 
 fun box(): String =
     object : A<String> {
-        override val value = "OK"
+        override konst konstue = "OK"
         override var result = "Fail"
     }.test()

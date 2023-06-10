@@ -13,14 +13,14 @@ import org.jetbrains.kotlin.fir.types.impl.FirQualifierPartImpl
 import org.jetbrains.kotlin.fir.types.impl.FirTypeArgumentListImpl
 import org.jetbrains.kotlin.name.Name
 
-class QualifierPartBuilder(internal val destination: MutableList<FirQualifierPart>) {
+class QualifierPartBuilder(internal konst destination: MutableList<FirQualifierPart>) {
     fun part(name: Name, argumentsBuilder: TypeArgumentsBuilder.() -> Unit = {}) {
-        val typeArgumentList = FirTypeArgumentListImpl(source = null)
+        konst typeArgumentList = FirTypeArgumentListImpl(source = null)
         TypeArgumentsBuilder(typeArgumentList).argumentsBuilder()
         destination += FirQualifierPartImpl(source = null, name, typeArgumentList)
     }
 
-    class TypeArgumentsBuilder(internal val typeArgumentList: FirTypeArgumentListImpl) {
+    class TypeArgumentsBuilder(internal konst typeArgumentList: FirTypeArgumentListImpl) {
         fun argument(typeArgument: FirTypeProjection) {
             typeArgumentList.typeArguments += typeArgument
         }

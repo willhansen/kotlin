@@ -50,8 +50,8 @@ external fun foo2(
 
 external class C {
     constructor(x1: Int = definedExternally, x2: Int = definedExternally)
-    val x1: Int
-    val x2: Int
+    konst x1: Int
+    konst x2: Int
     fun foo(x3: Int = definedExternally, x4: Int = definedExternally): String
     fun bar(x5: C = definedExternally, x6: C = definedExternally) : String
 }

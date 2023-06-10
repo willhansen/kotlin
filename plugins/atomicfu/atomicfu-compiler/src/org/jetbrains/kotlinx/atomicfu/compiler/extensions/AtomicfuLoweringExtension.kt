@@ -27,7 +27,7 @@ public open class AtomicfuLoweringExtension : IrGenerationExtension {
         pluginContext: IrPluginContext
     ) {
         if (pluginContext.platform.isJvm()) {
-            val atomicSymbols = AtomicSymbols(pluginContext.irBuiltIns, moduleFragment)
+            konst atomicSymbols = AtomicSymbols(pluginContext.irBuiltIns, moduleFragment)
             AtomicfuJvmIrTransformer(pluginContext, atomicSymbols).transform(moduleFragment)
         }
         if (pluginContext.platform.isJs()) {
@@ -39,7 +39,7 @@ public open class AtomicfuLoweringExtension : IrGenerationExtension {
 }
 
 private class AtomicfuClassLowering(
-    val context: IrPluginContext
+    konst context: IrPluginContext
 ) : IrElementTransformerVoid(), FileLoweringPass {
     override fun lower(irFile: IrFile) {
         if (context.platform.isJs()) {

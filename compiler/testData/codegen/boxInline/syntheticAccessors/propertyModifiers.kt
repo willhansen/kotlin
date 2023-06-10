@@ -3,9 +3,9 @@
 package test
 
 class P {
-    private val FOO_PRIVATE = "OK"
+    private konst FOO_PRIVATE = "OK"
 
-    final val FOO_FINAL = "OK"
+    final konst FOO_FINAL = "OK"
 
     private inline fun fooPrivate(): String {
         return FOO_PRIVATE
@@ -29,7 +29,7 @@ class P {
 import test.*
 
 fun box() : String {
-    val p = P()
+    konst p = P()
 
     if (p.testPrivate() != "OK") return "fail 1 ${p.testPrivate()}"
 

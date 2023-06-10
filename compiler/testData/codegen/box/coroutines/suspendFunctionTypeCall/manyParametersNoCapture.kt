@@ -19,7 +19,7 @@ class Controller {
     override fun toString() = "Controller"
 }
 
-val controller = Controller()
+konst controller = Controller()
 
 suspend fun foo(c: suspend Controller.(Long, Int, String) -> String) = controller.c(56L, 55, "abc")
 

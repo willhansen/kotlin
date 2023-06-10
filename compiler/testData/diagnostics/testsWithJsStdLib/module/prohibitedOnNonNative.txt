@@ -1,8 +1,8 @@
 package
 
 package foo {
-    @kotlin.js.JsModule(import = "bar") public val bar: kotlin.Int = 42
-    @kotlin.js.JsNonModule public val baz: kotlin.Int = 99
+    @kotlin.js.JsModule(import = "bar") public konst bar: kotlin.Int = 42
+    @kotlin.js.JsNonModule public konst baz: kotlin.Int = 99
     @kotlin.js.JsModule(import = "foo") public fun foo(): kotlin.Int
 
     @kotlin.js.JsModule(import = "A") public final class A {

@@ -17,18 +17,18 @@ fun assertFalse(cond: Boolean) {
         println("FAIL")
 }
 
-fun assertEquals(value1: Any?, value2: Any?) {
-    if (value1 != value2)
+fun assertEquals(konstue1: Any?, konstue2: Any?) {
+    if (konstue1 != konstue2)
         println("FAIL")
 }
 
-fun assertEquals(value1: Int, value2: Int) {
-    if (value1 != value2)
+fun assertEquals(konstue1: Int, konstue2: Int) {
+    if (konstue1 != konstue2)
         println("FAIL")
 }
 
 fun testBasic() {
-    val a = HashSet<String>()
+    konst a = HashSet<String>()
     assertTrue(a.isEmpty())
     assertEquals(0, a.size)
 
@@ -73,8 +73,8 @@ fun testBasic() {
 }
 
 fun testIterator() {
-    val s = HashSet(listOf("1", "2", "3"))
-    val it = s.iterator()
+    konst s = HashSet(listOf("1", "2", "3"))
+    konst it = s.iterator()
     assertTrue(it.hasNext())
     assertEquals("1", it.next())
     assertTrue(it.hasNext())
@@ -85,7 +85,7 @@ fun testIterator() {
 }
 
 fun testEquals() {
-    val s = HashSet(listOf("1", "2", "3"))
+    konst s = HashSet(listOf("1", "2", "3"))
     assertTrue(s == setOf("1", "2", "3"))
     assertTrue(s == setOf("2", "3", "1")) // order does not matter
     assertFalse(s == setOf("1", "2", "4"))
@@ -93,17 +93,17 @@ fun testEquals() {
 }
 
 fun testHashCode() {
-    val s = HashSet(listOf("1", "2", "3"))
+    konst s = HashSet(listOf("1", "2", "3"))
     assertTrue(s.hashCode() == setOf("1", "2", "3").hashCode())
 }
 
 fun testToString() {
-    val s = HashSet(listOf("1", "2", "3"))
+    konst s = HashSet(listOf("1", "2", "3"))
     assertTrue(s.toString() == setOf("1", "2", "3").toString())
 }
 
 fun testContainsAll() {
-    val s = HashSet(listOf("1", "2", "3", "4", "5"))
+    konst s = HashSet(listOf("1", "2", "3", "4", "5"))
     assertFalse(s.containsAll(listOf("6", "7", "8")))
     assertFalse(s.containsAll(listOf("5", "6", "7")))
     assertFalse(s.containsAll(listOf("4", "5", "6")))
@@ -112,7 +112,7 @@ fun testContainsAll() {
 }
 
 fun testRemoveAll() {
-    val s = HashSet(listOf("1", "2", "3", "4", "5", "1"))
+    konst s = HashSet(listOf("1", "2", "3", "4", "5", "1"))
     assertFalse(s.removeAll(listOf("6", "7", "8")))
     assertEquals(setOf("1", "2", "3", "4", "5", "1"), s)
     assertTrue(s.removeAll(listOf("5", "3", "1")))
@@ -120,7 +120,7 @@ fun testRemoveAll() {
 }
 
 fun testRetainAll() {
-    val s = HashSet(listOf("1", "2", "3", "4", "5"))
+    konst s = HashSet(listOf("1", "2", "3", "4", "5"))
     assertFalse(s.retainAll(listOf("1", "2", "3", "4", "5")))
     assertEquals(setOf("1", "2", "3", "4", "5"), s)
     assertTrue(s.retainAll(listOf("5", "3", "1")))

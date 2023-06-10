@@ -1,11 +1,11 @@
 package
 
-public val c: [ERROR : Type for C.Self.Self()]
-public val ic: [ERROR : Type for C.Self.InCompanion()]
-public val n: [ERROR : Type for C.Self.Nested()]
-public val n2: [ERROR : <ERROR FUNCTION RETURN TYPE>]
-public val ok: kotlin.String = "OK"
-public val x: [ERROR : Type for C.Self.X]
+public konst c: [ERROR : Type for C.Self.Self()]
+public konst ic: [ERROR : Type for C.Self.InCompanion()]
+public konst n: [ERROR : Type for C.Self.Nested()]
+public konst n2: [ERROR : <ERROR FUNCTION RETURN TYPE>]
+public konst ok: kotlin.String = "OK"
+public konst x: [ERROR : Type for C.Self.X]
 
 public final class C {
     public constructor C()
@@ -30,7 +30,7 @@ public final class C {
 
     public companion object X {
         private constructor X()
-        public final val ok: kotlin.String = "OK"
+        public final konst ok: kotlin.String = "OK"
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

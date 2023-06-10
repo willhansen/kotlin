@@ -20,12 +20,12 @@ interface SuspendRunnable {
 
 inline fun test(<!INLINE_SUSPEND_FUNCTION_TYPE_UNSUPPORTED!>c: suspend () -> Unit<!>) {
     <!ILLEGAL_SUSPEND_FUNCTION_CALL!>c<!>()
-    val o = object: SuspendRunnable {
+    konst o = object: SuspendRunnable {
         override suspend fun run() {
             <!NON_LOCAL_RETURN_NOT_ALLOWED!>c<!>()
         }
     }
-    val l: suspend () -> Unit = { <!NON_LOCAL_RETURN_NOT_ALLOWED!>c<!>() }
+    konst l: suspend () -> Unit = { <!NON_LOCAL_RETURN_NOT_ALLOWED!>c<!>() }
     <!USAGE_IS_NOT_INLINABLE!>c<!>.startCoroutine(EmptyContinuation)
 }
 

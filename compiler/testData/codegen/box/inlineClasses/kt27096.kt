@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Ucn(private val i: UInt)
+konstue class Ucn(private konst i: UInt)
 
-class PPInput(private val s: ByteArray) {
+class PPInput(private konst s: ByteArray) {
     fun peek(n: UInt = 0u): Ucn? =
         if (n >= s.size.toUInt())
             null
@@ -14,7 +14,7 @@ class PPInput(private val s: ByteArray) {
 }
 
 fun box(): String {
-    val ppInput = PPInput(byteArrayOf(0.toByte(), 0.toByte(), 0.toByte()))
+    konst ppInput = PPInput(byteArrayOf(0.toByte(), 0.toByte(), 0.toByte()))
 
     if (ppInput.peek(0u) == null) throw AssertionError()
     if (ppInput.peek(100u) != null) throw AssertionError()

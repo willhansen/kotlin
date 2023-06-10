@@ -29,18 +29,18 @@ internal fun CallReceiver.adjustForCallee(callee: CallableMemberDescriptor): Cal
     object : CallReceiver {
         override fun call(builder: CallExpressionBuilder): IrExpression =
             this@adjustForCallee.call { dispatchReceiverValue, extensionReceiverValue, contextReceiverValues ->
-                val numReceiversPresent = listOfNotNull(dispatchReceiverValue, extensionReceiverValue).size
-                val numReceiversExpected = listOfNotNull(callee.dispatchReceiverParameter, callee.extensionReceiverParameter).size
+                konst numReceiversPresent = listOfNotNull(dispatchReceiverValue, extensionReceiverValue).size
+                konst numReceiversExpected = listOfNotNull(callee.dispatchReceiverParameter, callee.extensionReceiverParameter).size
                 if (numReceiversPresent != numReceiversExpected)
                     throw AssertionError("Mismatching receivers for $callee: $numReceiversPresent, expected: $numReceiversExpected")
 
-                val newDispatchReceiverValue =
+                konst newDispatchReceiverValue =
                     when {
                         callee.dispatchReceiverParameter == null -> null
                         dispatchReceiverValue != null -> dispatchReceiverValue
                         else -> extensionReceiverValue
                     }
-                val newExtensionReceiverValue =
+                konst newExtensionReceiverValue =
                     when {
                         callee.extensionReceiverParameter == null -> null
                         dispatchReceiverValue != null && callee.dispatchReceiverParameter == null -> dispatchReceiverValue
@@ -89,7 +89,7 @@ private fun copyTypesFromExtensionAccessor(
             extensionAccessorDescriptor.extensionReceiverParameter?.copy(this),
             emptyList(),
             emptyList(),
-            extensionAccessorDescriptor.valueParameters.map { it.copy(this, it.name, it.index) },
+            extensionAccessorDescriptor.konstueParameters.map { it.copy(this, it.name, it.index) },
             extensionAccessorDescriptor.returnType,
             accessorFunctionDescriptor.modality,
             accessorFunctionDescriptor.visibility

@@ -1,6 +1,6 @@
 package
 
-public fun acceptMyRecursive(/*0*/ value: MyRecursive?): kotlin.Unit
+public fun acceptMyRecursive(/*0*/ konstue: MyRecursive?): kotlin.Unit
 public fun </*0*/ R : Recursive<R>?> inferType(): R
 public fun test(): kotlin.Unit
 

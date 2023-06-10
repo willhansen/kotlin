@@ -26,10 +26,10 @@ import org.jetbrains.kotlin.types.isFlexible
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
-private const val DECOMPILED_CODE_COMMENT = "/* compiled code */"
-private const val DECOMPILED_COMMENT_FOR_PARAMETER = "/* = compiled code */"
-private const val FLEXIBLE_TYPE_COMMENT = "/* platform type */"
-private const val DECOMPILED_CONTRACT_STUB = "contract { /* compiled contract */ }"
+private const konst DECOMPILED_CODE_COMMENT = "/* compiled code */"
+private const konst DECOMPILED_COMMENT_FOR_PARAMETER = "/* = compiled code */"
+private const konst FLEXIBLE_TYPE_COMMENT = "/* platform type */"
+private const konst DECOMPILED_CONTRACT_STUB = "contract { /* compiled contract */ }"
 
 fun DescriptorRendererOptions.defaultDecompilerRendererOptions() {
     withDefinedIn = false
@@ -67,7 +67,7 @@ fun buildDecompiledText(
     descriptors: List<DeclarationDescriptor>,
     descriptorRenderer: DescriptorRenderer,
 ): DecompiledText {
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
 
     fun appendDecompiledTextAndPackageName() {
         builder.append("// IntelliJ API Decompiler stub source generated from a class file\n" + "// Implementation of methods is not available")
@@ -128,12 +128,12 @@ fun buildDecompiledText(
                         builder.append("get")
                     } else if (accessor is PropertySetterDescriptor) {
                         builder.append("set(")
-                        val parameterDescriptor = accessor.valueParameters[0]
+                        konst parameterDescriptor = accessor.konstueParameters[0]
                         for (annotation in parameterDescriptor.annotations) {
                             builder.append(descriptorRenderer.renderAnnotation(annotation))
                             builder.append(" ")
                         }
-                        val paramName = when (val name = parameterDescriptor.name) {
+                        konst paramName = when (konst name = parameterDescriptor.name) {
                             SpecialNames.IMPLICIT_SET_PARAMETER -> StandardNames.DEFAULT_VALUE_PARAMETER
                             else -> name
                         }
@@ -147,7 +147,7 @@ fun buildDecompiledText(
         } else if (descriptor is ClassDescriptor && !isEnumEntry(descriptor)) {
             builder.append(" {\n")
 
-            val subindent = "$indent    "
+            konst subindent = "$indent    "
 
             var firstPassed = false
             fun newlineExceptFirst() {
@@ -158,8 +158,8 @@ fun buildDecompiledText(
                 }
             }
 
-            val allDescriptors = descriptor.secondaryConstructors + descriptor.defaultType.memberScope.getContributedDescriptors()
-            val (enumEntries, members) = allDescriptors.partition(::isEnumEntry)
+            konst allDescriptors = descriptor.secondaryConstructors + descriptor.defaultType.memberScope.getContributedDescriptors()
+            konst (enumEntries, members) = allDescriptors.partition(::isEnumEntry)
 
             for ((index, enumEntry) in enumEntries.withIndex()) {
                 newlineExceptFirst()
@@ -167,7 +167,7 @@ fun buildDecompiledText(
                 appendDescriptor(enumEntry, subindent, index == enumEntries.lastIndex)
             }
 
-            val companionObject = descriptor.companionObjectDescriptor
+            konst companionObject = descriptor.companionObjectDescriptor
             if (companionObject != null) {
                 newlineExceptFirst()
                 builder.append(subindent)

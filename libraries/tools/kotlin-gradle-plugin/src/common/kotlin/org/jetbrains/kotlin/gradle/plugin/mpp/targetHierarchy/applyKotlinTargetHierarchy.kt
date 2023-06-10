@@ -23,7 +23,7 @@ internal fun applyKotlinTargetHierarchy(
             target.compilations.all forCompilation@{ compilation ->
                 target.project.kotlinPluginLifecycle.launch {
                     withRestrictedStages(upTo(Stage.FinaliseRefinesEdges)) {
-                        val hierarchy = hierarchyDescriptor.buildKotlinTargetHierarchy(compilation) ?: return@withRestrictedStages
+                        konst hierarchy = hierarchyDescriptor.buildKotlinTargetHierarchy(compilation) ?: return@withRestrictedStages
                         applyKotlinTargetHierarchy(hierarchy, compilation, sourceSets)
                     }
                 }
@@ -36,9 +36,9 @@ private suspend fun applyKotlinTargetHierarchy(
     compilation: KotlinCompilation<*>,
     sourceSets: NamedDomainObjectContainer<KotlinSourceSet>
 ): KotlinSourceSet? {
-    val sharedSourceSet = createSharedSourceSetOrNull(sourceSets, hierarchy.node, compilation)
+    konst sharedSourceSet = createSharedSourceSetOrNull(sourceSets, hierarchy.node, compilation)
 
-    val childSourceSets = hierarchy.children
+    konst childSourceSets = hierarchy.children
         .mapNotNull { childHierarchy -> applyKotlinTargetHierarchy(childHierarchy, compilation, sourceSets) }
 
     if (sharedSourceSet == null) return null
@@ -59,6 +59,6 @@ private suspend fun createSharedSourceSetOrNull(
     node: KotlinTargetHierarchyTree.Node,
     compilation: KotlinCompilation<*>,
 ): KotlinSourceSet? {
-    val sharedSourceSetName = node.sharedSourceSetName(compilation) ?: return null
+    konst sharedSourceSetName = node.sharedSourceSetName(compilation) ?: return null
     return sourceSets.maybeCreate(sharedSourceSetName)
 }

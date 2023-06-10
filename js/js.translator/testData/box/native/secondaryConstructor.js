@@ -1,3 +1,3 @@
-function A(value) {
-    this.value = value
+function A(konstue) {
+    this.konstue = konstue
 }

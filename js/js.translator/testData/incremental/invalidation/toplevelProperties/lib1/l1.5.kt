@@ -1,4 +1,4 @@
-val globalVal = 3
+konst globalVal = 3
 
-inline val inlineGlobalVal: String
+inline konst inlineGlobalVal: String
     get() = "2"

@@ -1,7 +1,7 @@
-data class A<T>(val t: T)
+data class A<T>(konst t: T)
 
 fun box(): String {
-    val h = A<String?>(null).hashCode()
+    konst h = A<String?>(null).hashCode()
     if (h != 0) return "Fail $h"
     return "OK"
 }

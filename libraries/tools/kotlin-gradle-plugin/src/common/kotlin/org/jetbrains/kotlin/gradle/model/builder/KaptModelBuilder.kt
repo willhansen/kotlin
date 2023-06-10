@@ -25,7 +25,7 @@ class KaptModelBuilder : ToolingModelBuilder {
 
     override fun buildAll(modelName: String, project: Project): Any {
         require(canBuild(modelName)) { "buildAll(\"$modelName\") has been called while canBeBuild is false" }
-        val kaptTasks = project.tasks.withType(KaptTask::class.java)
+        konst kaptTasks = project.tasks.withType(KaptTask::class.java)
         return KaptImpl(project.name, kaptTasks.map { it.createKaptSourceSet() })
     }
 

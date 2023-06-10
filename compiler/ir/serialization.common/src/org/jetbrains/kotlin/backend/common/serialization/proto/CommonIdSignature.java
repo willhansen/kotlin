@@ -30,7 +30,7 @@ public final class CommonIdSignature extends
   private CommonIdSignature(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -107,10 +107,10 @@ public final class CommonIdSignature extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -134,7 +134,7 @@ public final class CommonIdSignature extends
     public CommonIdSignature parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new CommonIdSignature(input, extensionRegistry);
     }
   };
@@ -319,23 +319,23 @@ public final class CommonIdSignature extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature parseFrom(java.io.InputStream input)
@@ -496,7 +496,7 @@ public final class CommonIdSignature extends
       org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -538,18 +538,18 @@ public final class CommonIdSignature extends
      * <code>repeated int32 package_fq_name = 1 [packed = true];</code>
      */
     public Builder setPackageFqName(
-        int index, int value) {
+        int index, int konstue) {
       ensurePackageFqNameIsMutable();
-      packageFqName_.set(index, value);
+      packageFqName_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int32 package_fq_name = 1 [packed = true];</code>
      */
-    public Builder addPackageFqName(int value) {
+    public Builder addPackageFqName(int konstue) {
       ensurePackageFqNameIsMutable();
-      packageFqName_.add(value);
+      packageFqName_.add(konstue);
       
       return this;
     }
@@ -557,10 +557,10 @@ public final class CommonIdSignature extends
      * <code>repeated int32 package_fq_name = 1 [packed = true];</code>
      */
     public Builder addAllPackageFqName(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensurePackageFqNameIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, packageFqName_);
+          konstues, packageFqName_);
       
       return this;
     }
@@ -604,18 +604,18 @@ public final class CommonIdSignature extends
      * <code>repeated int32 declaration_fq_name = 2 [packed = true];</code>
      */
     public Builder setDeclarationFqName(
-        int index, int value) {
+        int index, int konstue) {
       ensureDeclarationFqNameIsMutable();
-      declarationFqName_.set(index, value);
+      declarationFqName_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int32 declaration_fq_name = 2 [packed = true];</code>
      */
-    public Builder addDeclarationFqName(int value) {
+    public Builder addDeclarationFqName(int konstue) {
       ensureDeclarationFqNameIsMutable();
-      declarationFqName_.add(value);
+      declarationFqName_.add(konstue);
       
       return this;
     }
@@ -623,10 +623,10 @@ public final class CommonIdSignature extends
      * <code>repeated int32 declaration_fq_name = 2 [packed = true];</code>
      */
     public Builder addAllDeclarationFqName(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensureDeclarationFqNameIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, declarationFqName_);
+          konstues, declarationFqName_);
       
       return this;
     }
@@ -656,9 +656,9 @@ public final class CommonIdSignature extends
     /**
      * <code>optional int64 member_uniq_id = 3;</code>
      */
-    public Builder setMemberUniqId(long value) {
+    public Builder setMemberUniqId(long konstue) {
       bitField0_ |= 0x00000004;
-      memberUniqId_ = value;
+      memberUniqId_ = konstue;
       
       return this;
     }
@@ -688,9 +688,9 @@ public final class CommonIdSignature extends
     /**
      * <code>optional int64 flags = 4 [default = 0];</code>
      */
-    public Builder setFlags(long value) {
+    public Builder setFlags(long konstue) {
       bitField0_ |= 0x00000008;
-      flags_ = value;
+      flags_ = konstue;
       
       return this;
     }

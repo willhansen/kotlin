@@ -5,7 +5,7 @@
 
 package codegen.escapeAnalysis.test7
 
-class A(val s: String) {
+class A(konst s: String) {
     var h: String = ""
     var p: C = C()
 }
@@ -42,10 +42,10 @@ class D {
 //     D0.h -> P3
 // Escapes: D1
 fun foo(z: Boolean, c: C, b: B, s: String, d: D) {
-    val v = if(z) c.g else b.f
+    konst v = if(z) c.g else b.f
     v.h = s
     d.o = v
-    val u = v
+    konst u = v
     u.p = c
 }
 

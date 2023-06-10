@@ -40,7 +40,7 @@ fun createKotlinJavascriptPackageFragmentProvider(
     configuration: DeserializationConfiguration,
     lookupTracker: LookupTracker
 ): PackageFragmentProvider {
-    val packageFragments: MutableList<PackageFragmentDescriptor> = packageFragmentProtos.mapNotNullTo(mutableListOf()) { proto ->
+    konst packageFragments: MutableList<PackageFragmentDescriptor> = packageFragmentProtos.mapNotNullTo(mutableListOf()) { proto ->
         proto.fqName?.let { fqName ->
             KotlinJavascriptPackageFragment(fqName, storageManager, module, proto, header, metadataVersion, configuration)
         }
@@ -51,7 +51,7 @@ fun createKotlinJavascriptPackageFragmentProvider(
     // none for `foo`. Various descriptor/scope code relies on presence of such package fragments, and currently we
     // don't know if it's possible to fix this.
     // TODO: think about fixing issues in descriptors/scopes
-    val packageFqNames = packageFragmentProtos.mapNotNullTo(mutableSetOf()) { it.fqName }
+    konst packageFqNames = packageFragmentProtos.mapNotNullTo(mutableSetOf()) { it.fqName }
     for (packageFqName in packageFqNames.mapNotNull { it.parentOrNull() }) {
         var ancestorFqName = packageFqName
         while (!ancestorFqName.isRoot && packageFqNames.add(ancestorFqName)) {
@@ -60,15 +60,15 @@ fun createKotlinJavascriptPackageFragmentProvider(
         }
     }
 
-    val provider = PackageFragmentProviderImpl(packageFragments)
+    konst provider = PackageFragmentProviderImpl(packageFragments)
 
-    val notFoundClasses = NotFoundClasses(storageManager, module)
+    konst notFoundClasses = NotFoundClasses(storageManager, module)
 
-    val enumEntriesDeserializationSupport = object : EnumEntriesDeserializationSupport {
+    konst enumEntriesDeserializationSupport = object : EnumEntriesDeserializationSupport {
         override fun canSynthesizeEnumEntries(): Boolean = false
     }
 
-    val components = DeserializationComponents(
+    konst components = DeserializationComponents(
         storageManager,
         module,
         configuration,
@@ -95,9 +95,9 @@ fun createKotlinJavascriptPackageFragmentProvider(
     return provider
 }
 
-private val ProtoBuf.PackageFragment.fqName: FqName?
+private konst ProtoBuf.PackageFragment.fqName: FqName?
     get() {
-        val nameResolver = NameResolverImpl(strings, qualifiedNames)
+        konst nameResolver = NameResolverImpl(strings, qualifiedNames)
         return when {
             hasPackage() -> FqName(nameResolver.getPackageFqName(`package`.getExtension(JsProtoBuf.packageFqName)))
             class_Count > 0 -> nameResolver.getClassId(class_OrBuilderList.first().fqName).packageFqName

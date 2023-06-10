@@ -17,40 +17,40 @@ typealias K2NativeCompilerArguments = MovedK2NativeCompilerArguments
         "Moved to new 'org.jetbrains.kotlin.cli.common.arguments' package",
         ReplaceWith("EMBED_BITCODE_FLAG", "org.jetbrains.kotlin.cli.common.arguments.EMBED_BITCODE_FLAG")
 )
-const val EMBED_BITCODE_FLAG = MovedK2NativeCompilerArguments.EMBED_BITCODE_FLAG
+const konst EMBED_BITCODE_FLAG = MovedK2NativeCompilerArguments.EMBED_BITCODE_FLAG
 
 @Deprecated(
         "Moved to new 'org.jetbrains.kotlin.cli.common.arguments' package",
         ReplaceWith("EMBED_BITCODE_MARKER_FLAG", "org.jetbrains.kotlin.cli.common.arguments.EMBED_BITCODE_MARKER_FLAG")
 )
-const val EMBED_BITCODE_MARKER_FLAG = MovedK2NativeCompilerArguments.EMBED_BITCODE_MARKER_FLAG
+const konst EMBED_BITCODE_MARKER_FLAG = MovedK2NativeCompilerArguments.EMBED_BITCODE_MARKER_FLAG
 
 @Deprecated(
         "Moved to new 'org.jetbrains.kotlin.cli.common.arguments' package",
         ReplaceWith("STATIC_FRAMEWORK_FLAG", "org.jetbrains.kotlin.cli.common.arguments.STATIC_FRAMEWORK_FLAG")
 )
-const val STATIC_FRAMEWORK_FLAG = MovedK2NativeCompilerArguments.STATIC_FRAMEWORK_FLAG
+const konst STATIC_FRAMEWORK_FLAG = MovedK2NativeCompilerArguments.STATIC_FRAMEWORK_FLAG
 
 @Deprecated(
         "Moved to new 'org.jetbrains.kotlin.cli.common.arguments' package",
         ReplaceWith("INCLUDE_ARG", "org.jetbrains.kotlin.cli.common.arguments.INCLUDE_ARG")
 )
-const val INCLUDE_ARG = MovedK2NativeCompilerArguments.INCLUDE_ARG
+const konst INCLUDE_ARG = MovedK2NativeCompilerArguments.INCLUDE_ARG
 
 @Deprecated(
         "Moved to new 'org.jetbrains.kotlin.cli.common.arguments' package",
         ReplaceWith("CACHED_LIBRARY", "org.jetbrains.kotlin.cli.common.arguments.CACHED_LIBRARY")
 )
-const val CACHED_LIBRARY = MovedK2NativeCompilerArguments.CACHED_LIBRARY
+const konst CACHED_LIBRARY = MovedK2NativeCompilerArguments.CACHED_LIBRARY
 
 @Deprecated(
         "Moved to new 'org.jetbrains.kotlin.cli.common.arguments' package",
         ReplaceWith("ADD_CACHE", "org.jetbrains.kotlin.cli.common.arguments.ADD_CACHE")
 )
-const val ADD_CACHE = MovedK2NativeCompilerArguments.ADD_CACHE
+const konst ADD_CACHE = MovedK2NativeCompilerArguments.ADD_CACHE
 
 @Deprecated(
         "Moved to new 'org.jetbrains.kotlin.cli.common.arguments' package",
         ReplaceWith("SHORT_MODULE_NAME_ARG", "org.jetbrains.kotlin.cli.common.arguments.SHORT_MODULE_NAME_ARG")
 )
-const val SHORT_MODULE_NAME_ARG = MovedK2NativeCompilerArguments.SHORT_MODULE_NAME_ARG
+const konst SHORT_MODULE_NAME_ARG = MovedK2NativeCompilerArguments.SHORT_MODULE_NAME_ARG

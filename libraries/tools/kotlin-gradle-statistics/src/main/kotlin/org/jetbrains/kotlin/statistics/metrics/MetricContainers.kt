@@ -71,7 +71,7 @@ class AverageMetricContainer() : IMetricContainer<Long> {
     }
 
     override fun addValue(t: Long, weight: Long?) {
-        val w = weight ?: 1
+        konst w = weight ?: 1
         totalSum = (totalSum ?: 0) + t * w
         totalWeight += w
     }
@@ -96,14 +96,14 @@ class OrMetricContainer() : OverrideMetricContainer<Boolean>() {
 }
 
 class ConcatMetricContainer() : IMetricContainer<String> {
-    private val myValues = TreeSet<String>()
+    private konst myValues = TreeSet<String>()
 
     companion object {
-        const val SEPARATOR = ";"
+        const konst SEPARATOR = ";"
     }
 
-    constructor(values: Collection<String>) : this() {
-        myValues.addAll(values)
+    constructor(konstues: Collection<String>) : this() {
+        myValues.addAll(konstues)
     }
 
     override fun addValue(t: String, weight: Long?) {

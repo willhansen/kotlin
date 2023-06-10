@@ -7,7 +7,7 @@ import org.gradle.kotlin.dsl.project
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-val Project.intellijVersion
+konst Project.intellijVersion
     get() = rootProject.extra["versions.intellijSdk"]
 
 fun Project.intellijCore() = dependencies.project(":dependencies:intellij-core")

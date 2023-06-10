@@ -12,8 +12,8 @@ import kotlin.native.concurrent.*
 
 @Test fun runTest1() {
     withLock { println("zzz") }
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         withLock {
             println("42")
         }
@@ -28,9 +28,9 @@ fun withLock(op: () -> Unit) {
 }
 
 @Test fun runTest2() {
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
-        val me = Worker.current
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
+        konst me = Worker.current
         var x = 1
         me.executeAfter (20000) {
             println("second ${++x}")
@@ -43,7 +43,7 @@ fun withLock(op: () -> Unit) {
 }
 
 @Test fun runTest3() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
         worker.executeAfter {
             println("unfrozen OK")
@@ -71,18 +71,18 @@ fun withLock(op: () -> Unit) {
 class Node(var node: Node?, var outher: Node?)
 
 fun makeCyclic(): Node {
-    val inner = Node(null, null)
+    konst inner = Node(null, null)
     inner.node = inner
-    val outer = Node(null, null)
+    konst outer = Node(null, null)
     inner.outher = outer
     return outer
 }
 
 @OptIn(kotlin.native.runtime.NativeRuntimeApi::class)
 @Test fun runTest4() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
-    val future = worker.execute(TransferMode.SAFE, { }) {
+    konst future = worker.execute(TransferMode.SAFE, { }) {
         makeCyclic().also {
             kotlin.native.runtime.GC.collect()
         }

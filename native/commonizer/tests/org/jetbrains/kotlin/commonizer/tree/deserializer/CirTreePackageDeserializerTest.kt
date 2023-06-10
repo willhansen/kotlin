@@ -10,11 +10,11 @@ import org.jetbrains.kotlin.commonizer.utils.createCirTree
 class CirTreePackageDeserializerTest : AbstractCirTreeDeserializerTest() {
 
     fun `test package with multiple classes properties and functions`() {
-        val module = createCirTree {
+        konst module = createCirTree {
             source(
                 """
                     typealias rootTypeAlias = Int
-                    val rootProperty: String = "hello,"
+                    konst rootProperty: String = "hello,"
                     fun rootFunction(): String = "it is me"
                     class RootClass
             """.trimIndent(), "root.kt"
@@ -24,7 +24,7 @@ class CirTreePackageDeserializerTest : AbstractCirTreeDeserializerTest() {
                 """
                     package test.pkg1
                     typealias pkg1TypeAlias = Int
-                    val pkg1Property: Int = 42
+                    konst pkg1Property: Int = 42
                     fun pkg1Function(): String = "answer"
                     class Pkg1
             """.trimIndent(), "pkg1.kt"
@@ -34,20 +34,20 @@ class CirTreePackageDeserializerTest : AbstractCirTreeDeserializerTest() {
                 """
                     package test.pkg2
                     typealias pkg2TypeAlias = Int
-                    val pkg2Property: Int = 42
+                    konst pkg2Property: Int = 42
                     fun pkg2Function(): String = "answer"
                     class Pkg2
                 """.trimIndent(), "pkg2.kt"
             )
         }
 
-        val rootPackage = module.packages.singleOrNull { it.pkg.packageName.isRoot() }
+        konst rootPackage = module.packages.singleOrNull { it.pkg.packageName.isRoot() }
             ?: kotlin.test.fail("Missing root package")
 
-        val pkg1 = module.packages.singleOrNull { it.pkg.packageName.toMetadataString() == "test/pkg1" }
+        konst pkg1 = module.packages.singleOrNull { it.pkg.packageName.toMetadataString() == "test/pkg1" }
             ?: kotlin.test.fail("Missing pkg1")
 
-        val pkg2 = module.packages.singleOrNull { it.pkg.packageName.toMetadataString() == "test/pkg2" }
+        konst pkg2 = module.packages.singleOrNull { it.pkg.packageName.toMetadataString() == "test/pkg2" }
             ?: kotlin.test.fail("Missing pkg2")
 
 

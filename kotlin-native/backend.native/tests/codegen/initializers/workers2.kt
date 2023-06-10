@@ -6,10 +6,10 @@
 // FILE: lib.kt
 import kotlin.native.concurrent.*
 
-class Z(val x: Int)
+class Z(konst x: Int)
 
 @ThreadLocal
-val z = Z(42)
+konst z = Z(42)
 
 // FILE: main.kt
 @file:OptIn(ObsoleteWorkersApi::class)
@@ -17,7 +17,7 @@ import kotlin.native.concurrent.*
 
 fun main() {
     println(z.x)
-    val worker = Worker.start()
+    konst worker = Worker.start()
     worker.execute(TransferMode.SAFE, { -> }, {
         it -> println(z.x)
     }).consume { }

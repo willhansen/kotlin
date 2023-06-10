@@ -1,7 +1,7 @@
-open class OpenClass1(private val x: Int) {
+open class OpenClass1(private konst x: Int) {
     final override fun toString() = "${this::class.simpleName}(x=$x)"
 }
-open class OpenClass2(private val x: String) {
+open class OpenClass2(private konst x: String) {
     final override fun toString() = "${this::class.simpleName}(x=$x)"
 }
 typealias OpenClassRemovedTA = OpenClass1

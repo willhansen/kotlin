@@ -8,5 +8,5 @@ fun foo() {
 fun baz() {
 }
 
-val prop1 = ""
-val prop2 = prop1
+konst prop1 = ""
+konst prop2 = prop1

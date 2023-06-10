@@ -26,12 +26,12 @@ class AnnotationClassTargetAndRetentionChecker : DeclarationChecker {
         if (declaration !is KtClassOrObject) return
         if (!DescriptorUtils.isAnnotationClass(descriptor)) return
 
-        val targets = AnnotationChecker.applicableTargetSetFromTargetAnnotationOrNull(descriptor) ?: return
-        val retention = descriptor.getAnnotationRetention() ?: KotlinRetention.RUNTIME
+        konst targets = AnnotationChecker.applicableTargetSetFromTargetAnnotationOrNull(descriptor) ?: return
+        konst retention = descriptor.getAnnotationRetention() ?: KotlinRetention.RUNTIME
 
         if (targets.contains(KotlinTarget.EXPRESSION) && retention != KotlinRetention.SOURCE) {
-            val retentionAnnotation = descriptor.annotations.findAnnotation(StandardNames.FqNames.retention)
-            val targetAnnotation = descriptor.annotations.findAnnotation(StandardNames.FqNames.target)
+            konst retentionAnnotation = descriptor.annotations.findAnnotation(StandardNames.FqNames.retention)
+            konst targetAnnotation = descriptor.annotations.findAnnotation(StandardNames.FqNames.target)
 
             context.trace.report(
                 Errors.RESTRICTED_RETENTION_FOR_EXPRESSION_ANNOTATION.on(
@@ -42,6 +42,6 @@ class AnnotationClassTargetAndRetentionChecker : DeclarationChecker {
         }
     }
 
-    private val AnnotationDescriptor.psi: PsiElement?
+    private konst AnnotationDescriptor.psi: PsiElement?
         get() = DescriptorToSourceUtils.getSourceFromAnnotation(this)
 }

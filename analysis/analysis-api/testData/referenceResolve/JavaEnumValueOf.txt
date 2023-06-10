@@ -1,2 +1,2 @@
 Resolved to:
-0: (in java.lang.annotation.RetentionPolicy) fun valueOf(value: kotlin.String): java.lang.annotation.RetentionPolicy
+0: (in java.lang.annotation.RetentionPolicy) fun konstueOf(konstue: kotlin.String): java.lang.annotation.RetentionPolicy

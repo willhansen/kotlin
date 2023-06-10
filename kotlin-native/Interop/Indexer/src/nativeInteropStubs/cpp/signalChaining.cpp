@@ -94,12 +94,12 @@ static void initSignalChaining() {
   }
 #endif
   for (int index = 0, patched = 0; patched < 1; index++) {
-    void* value = base[index];
-    if (value == &sigaction) {
+    void* konstue = base[index];
+    if (konstue == &sigaction) {
         base[index] = (void*)mySigaction;
         patched++;
     }
-    if (value == mySigaction) {
+    if (konstue == mySigaction) {
         patched++;
     }
   }

@@ -1,6 +1,6 @@
 // MODULE: common
 class Some {
-    val e: SomeEnum? = null
+    konst e: SomeEnum? = null
 }
 
 enum class SomeEnum {
@@ -10,7 +10,7 @@ enum class SomeEnum {
 // MODULE: main()()(common)
 fun Some.test() {
     if (e == null) return
-    val x = when (<!DEBUG_INFO_SMARTCAST!>e<!>) {
+    konst x = when (<!DEBUG_INFO_SMARTCAST!>e<!>) {
         SomeEnum.A -> "a"
         SomeEnum.B -> "B"
     }

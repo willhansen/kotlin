@@ -9,20 +9,20 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendWithResult(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-        c.resume(value)
+    suspend fun <T> suspendWithResult(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation)
     return controller.result
 }
 
 fun box(): String {
-    val value = builder {
+    konst konstue = builder {
         try {
             outer@for (x in listOf("A", "B")) {
                 try {
@@ -64,7 +64,7 @@ fun box(): String {
         }
         result += "."
     }
-    if (value != "AC!ED!@F?HG?*finally.") return "fail: $value"
+    if (konstue != "AC!ED!@F?HG?*finally.") return "fail: $konstue"
 
     return "OK"
 }

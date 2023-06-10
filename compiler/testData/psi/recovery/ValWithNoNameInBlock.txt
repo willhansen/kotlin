@@ -15,7 +15,7 @@ KtFile: ValWithNoNameInBlock.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')
@@ -33,7 +33,7 @@ KtFile: ValWithNoNameInBlock.kt
           PsiElement(RPAR)(')')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')
@@ -51,7 +51,7 @@ KtFile: ValWithNoNameInBlock.kt
               PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')
@@ -78,7 +78,7 @@ KtFile: ValWithNoNameInBlock.kt
             PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')
@@ -98,7 +98,7 @@ KtFile: ValWithNoNameInBlock.kt
       PsiComment(EOL_COMMENT)('// `propertyNameOnTheNextLine` parsed as simple name expression')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')
@@ -106,7 +106,7 @@ KtFile: ValWithNoNameInBlock.kt
         PsiElement(IDENTIFIER)('propertyNameOnTheNextLine')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')
@@ -116,7 +116,7 @@ KtFile: ValWithNoNameInBlock.kt
         PsiElement(IDENTIFIER)('propertyNameOnTheNextLine')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
         PsiWhiteSpace(' ')
@@ -128,7 +128,7 @@ KtFile: ValWithNoNameInBlock.kt
       PsiComment(EOL_COMMENT)('// Correct properties')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace('\n    ')
         PsiElement(IDENTIFIER)('property1')
         PsiWhiteSpace(' ')
@@ -138,7 +138,7 @@ KtFile: ValWithNoNameInBlock.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace('\n    ')
         PsiElement(IDENTIFIER)('propertyWithBy')
         PsiWhiteSpace(' ')
@@ -161,7 +161,7 @@ KtFile: ValWithNoNameInBlock.kt
                   PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace('\n    ')
         PsiElement(IDENTIFIER)('propertyWithType')
         PsiElement(COLON)(':')
@@ -172,7 +172,7 @@ KtFile: ValWithNoNameInBlock.kt
               PsiElement(IDENTIFIER)('Int')
       PsiWhiteSpace('\n\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace('\n    ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY

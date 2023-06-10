@@ -15,7 +15,7 @@ var res = ""
 
 fun String.id() = this
 
-val receiver: String
+konst receiver: String
     get() {
         res += "L"
         return "L"

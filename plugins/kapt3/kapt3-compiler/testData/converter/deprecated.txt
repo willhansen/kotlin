@@ -1,6 +1,6 @@
 package deprecated;
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 @java.lang.Deprecated()
 public abstract @interface Anno {
@@ -40,6 +40,6 @@ public final class Foo {
     }
 
     @java.lang.Deprecated()
-    public final void setFoo(int value) {
+    public final void setFoo(int konstue) {
     }
 }

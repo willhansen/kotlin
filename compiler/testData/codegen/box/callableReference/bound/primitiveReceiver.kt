@@ -9,7 +9,7 @@ fun Float.foo() = 7
 fun Double.foo() = 8
 
 fun testRef(name: String, f: () -> Int, expected: Int) {
-    val actual = f()
+    konst actual = f()
     if (actual != expected) throw AssertionError("$name: $actual != $expected")
 }
 

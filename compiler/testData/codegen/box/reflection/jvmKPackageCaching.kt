@@ -7,9 +7,9 @@ import kotlin.reflect.jvm.internal.*
 class A
 fun box(): String {
     return synchronized(ReflectionFactoryImpl::class.java) {
-        val pckg = Reflection.getOrCreateKotlinPackage(A::class.java)
+        konst pckg = Reflection.getOrCreateKotlinPackage(A::class.java)
         System.gc()
-        val pckg2 = Reflection.getOrCreateKotlinPackage(A::class.java)
+        konst pckg2 = Reflection.getOrCreateKotlinPackage(A::class.java)
         if (pckg === pckg2) return@synchronized "OK"
         return@synchronized "Fail"
     }

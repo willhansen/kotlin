@@ -2,13 +2,13 @@
 // TARGET_BACKEND: JVM
 import kotlin.reflect.full.declaredFunctions
 
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)
 
 @JvmInline
-value class A(val value: String)
+konstue class A(konst konstue: String)
 
 abstract class B {
-    @Anno(value = "K")
+    @Anno(konstue = "K")
     abstract fun f(): A?
 }
 
@@ -21,10 +21,10 @@ class D : B() {
 }
 
 fun box(): String {
-    val o = if ((D() as B).f() == null) (C() as B).f()!!.value else "Fail"
+    konst o = if ((D() as B).f() == null) (C() as B).f()!!.konstue else "Fail"
 
-    val annotations = B::class.declaredFunctions.single().annotations
-    val k = (annotations.single() as Anno).value
+    konst annotations = B::class.declaredFunctions.single().annotations
+    konst k = (annotations.single() as Anno).konstue
 
     return o + k
 }

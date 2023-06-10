@@ -11,11 +11,11 @@ class Test {
     fun method(a: String) {}
 
     /** prop. */
-    const val prop: String = ""
+    const konst prop: String = ""
 
     /** prop2. */
     @Anno
-    val prop2: String = ""
+    konst prop2: String = ""
 
     /** prop3. */
     var prop3: String
@@ -28,9 +28,9 @@ class Test {
  * Multiline
  * documentation.
  */
-class Test2(val a: String)
+class Test2(konst a: String)
 
-class Test3 /** constructor. */ protected constructor(val a: String)
+class Test3 /** constructor. */ protected constructor(konst a: String)
 
 /** Obj. */
 object Obj

@@ -6,5 +6,5 @@
 package libproject
 
 class Util {
-    val projectName: String = "lib-project"
+    konst projectName: String = "lib-project"
 }

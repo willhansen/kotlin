@@ -1,5 +1,5 @@
 == s ==
-val s = mutableListOf<String>()
+konst s = mutableListOf<String>()
 ---------------------
 mutableListOf             !<v0>: *
 mutableListOf<String>()   <v1>: {<: [Error type: Not found recorded type for mutableListOf<String>()]}   NEW: magic[UNRESOLVED_CALL](mutableListOf<String>()|!<v0>) -> <v1>

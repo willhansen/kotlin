@@ -1,6 +1,6 @@
 FILE: when.kt
     public final fun test_1(x: R|kotlin/Int|): R|kotlin/Unit| {
-        lval y: R|kotlin/Int| = when () {
+        lkonst y: R|kotlin/Int| = when () {
             ==(R|<local>/x|, Int(1)) ->  {
                 Int(10)
             }

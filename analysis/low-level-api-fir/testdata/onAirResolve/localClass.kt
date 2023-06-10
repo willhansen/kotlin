@@ -1,5 +1,5 @@
 fun xxx() {
-    val x = 2
+    konst x = 2
     /*PLACE*/class C
 }
 

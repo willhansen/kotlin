@@ -13,6 +13,6 @@ abstract class Base {
 
 class Derived : Base() {
     <!OVERRIDE_BY_INLINE!>override final inline fun withDefault(
-            <!NOT_YET_SUPPORTED_IN_INLINE("Functional parameters with inherited default values")!>f: () -> Unit<!>
+            <!NOT_YET_SUPPORTED_IN_INLINE("Functional parameters with inherited default konstues")!>f: () -> Unit<!>
     )<!> {}
 }

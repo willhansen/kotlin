@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.utils.Printer
 
 class LexicalWritableScope(
     parent: LexicalScope,
-    override val ownerDescriptor: DeclarationDescriptor,
-    override val isOwnerDescriptorAccessibleByLabel: Boolean,
+    override konst ownerDescriptor: DeclarationDescriptor,
+    override konst isOwnerDescriptorAccessibleByLabel: Boolean,
     redeclarationChecker: LocalRedeclarationChecker,
-    override val kind: LexicalScopeKind
+    override konst kind: LexicalScopeKind
 ) : LexicalScopeStorage(parent, redeclarationChecker) {
 
-    override val implicitReceiver: ReceiverParameterDescriptor?
+    override konst implicitReceiver: ReceiverParameterDescriptor?
         get() = null
-    override val contextReceiversGroup: List<ReceiverParameterDescriptor>
+    override konst contextReceiversGroup: List<ReceiverParameterDescriptor>
         get() = emptyList()
 
     private var canWrite: Boolean = true
@@ -69,7 +69,7 @@ class LexicalWritableScope(
         }
     }
 
-    private inner class Snapshot(val descriptorLimit: Int) : LexicalScope by this {
+    private inner class Snapshot(konst descriptorLimit: Int) : LexicalScope by this {
         override fun getContributedDescriptors(kindFilter: DescriptorKindFilter, nameFilter: (Name) -> Boolean) =
             addedDescriptors.subList(0, descriptorLimit)
 
@@ -111,9 +111,9 @@ class LexicalWritableScope(
             "; for descriptor: ",
             ownerDescriptor.name,
             " with implicitReceivers: ",
-            implicitReceiver?.value ?: "NONE",
+            implicitReceiver?.konstue ?: "NONE",
             " with contextReceiversGroup: ",
-            if (contextReceiversGroup.isEmpty()) "NONE" else contextReceiversGroup.joinToString { it.value.toString() },
+            if (contextReceiversGroup.isEmpty()) "NONE" else contextReceiversGroup.joinToString { it.konstue.toString() },
             " {"
         )
         p.pushIndent()

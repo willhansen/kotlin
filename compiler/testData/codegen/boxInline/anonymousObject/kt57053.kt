@@ -1,6 +1,6 @@
 // FILE: 1.kt
 inline fun foo(): String {
-    val obj = object {
+    konst obj = object {
         fun localDefault(s: String = "OK") = s
         fun local() = localDefault()
     }

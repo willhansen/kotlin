@@ -45,9 +45,9 @@ fun <T : FirCallableSymbol<*>> T.getOverriddenBuiltinWithDifferentJvmName(contai
 }
 
 fun FirCallableSymbol<*>.getJvmMethodNameIfSpecial(containingScope: FirTypeScope, session: FirSession): Name? {
-    val overriddenBuiltin = getOverriddenBuiltinWithDifferentJvmName(containingScope, session)
+    konst overriddenBuiltin = getOverriddenBuiltinWithDifferentJvmName(containingScope, session)
         ?: return null
-    val name = when (overriddenBuiltin) {
+    konst name = when (overriddenBuiltin) {
         is FirPropertySymbol -> overriddenBuiltin.getBuiltinSpecialPropertyGetterName(containingScope)
         is FirNamedFunctionSymbol -> BuiltinMethodsWithDifferentJvmName.getJvmName(overriddenBuiltin)?.asString()
         else -> null
@@ -57,7 +57,7 @@ fun FirCallableSymbol<*>.getJvmMethodNameIfSpecial(containingScope: FirTypeScope
 
 
 object BuiltinMethodsWithSpecialGenericSignature {
-    private val FirNamedFunctionSymbol.hasErasedValueParametersInJava: Boolean
+    private konst FirNamedFunctionSymbol.hasErasedValueParametersInJava: Boolean
         get() = fir.computeJvmSignature() in ERASED_VALUE_PARAMETERS_SIGNATURES
 
     fun getOverriddenBuiltinFunctionWithErasedValueParametersInJava(
@@ -76,7 +76,7 @@ object BuiltinMethodsWithSpecialGenericSignature {
         return functionSymbol.firstOverriddenFunction(containingScope) { it.hasErasedValueParametersInJava }
     }
 
-    val Name.sameAsBuiltinMethodWithErasedValueParameters: Boolean
+    konst Name.sameAsBuiltinMethodWithErasedValueParameters: Boolean
         get() = this in ERASED_VALUE_PARAMETERS_SHORT_NAMES
 
     fun FirNamedFunctionSymbol.isBuiltinWithSpecialDescriptorInJvm(containingScope: FirTypeScope, session: FirSession): Boolean {
@@ -89,7 +89,7 @@ object BuiltinMethodsWithSpecialGenericSignature {
     fun FirNamedFunctionSymbol.getSpecialSignatureInfo(containingScope: FirTypeScope): SpecialGenericSignatures.SpecialSignatureInfo? {
         if (name !in ERASED_VALUE_PARAMETERS_SHORT_NAMES) return null
 
-        val builtinSignature = firstOverriddenFunction(containingScope) { it.hasErasedValueParametersInJava }
+        konst builtinSignature = firstOverriddenFunction(containingScope) { it.hasErasedValueParametersInJava }
             ?.fir
             ?.computeJvmSignature()
             ?: return null
@@ -106,13 +106,13 @@ object BuiltinMethodsWithDifferentJvmName {
         return functionSymbol.isFromBuiltinClass(session) && SIGNATURE_TO_JVM_REPRESENTATION_NAME.containsKey(functionSymbol.fir.computeJvmSignature())
     }
 
-    val FirNamedFunctionSymbol.isRemoveAtByIndex: Boolean
+    konst FirNamedFunctionSymbol.isRemoveAtByIndex: Boolean
         get() = name.asString() == "removeAt" && fir.computeJvmSignature() == REMOVE_AT_NAME_AND_SIGNATURE.signature
 }
 
 object ClassicBuiltinSpecialProperties {
     fun FirCallableSymbol<*>.getBuiltinSpecialPropertyGetterName(containingScope: FirTypeScope): String? {
-        val overridden = findBuiltinSpecialPropertyFqName(this, containingScope) ?: return null
+        konst overridden = findBuiltinSpecialPropertyFqName(this, containingScope) ?: return null
         return BuiltinSpecialProperties.PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP[overridden.callableId.asSingleFqName()]?.asString()
     }
 
@@ -123,12 +123,12 @@ object ClassicBuiltinSpecialProperties {
     }
 
     private fun FirCallableSymbol<*>.hasBuiltinSpecialPropertyFqNameImpl(containingScope: FirTypeScope): FirCallableSymbol<*>? {
-        if (callableId.asSingleFqName() in BuiltinSpecialProperties.SPECIAL_FQ_NAMES && valueParametersAreEmpty()) return this
+        if (callableId.asSingleFqName() in BuiltinSpecialProperties.SPECIAL_FQ_NAMES && konstueParametersAreEmpty()) return this
         // if (!KotlinBuiltIns.isBuiltIn(this)) return false
         var result: FirCallableSymbol<*>? = null
 
         fun process(overridden: FirCallableSymbol<*>, scope: FirTypeScope): ProcessorAction {
-            val foundSymbol = findBuiltinSpecialPropertyFqName(overridden, scope)
+            konst foundSymbol = findBuiltinSpecialPropertyFqName(overridden, scope)
             return if (foundSymbol != null) {
                 result = foundSymbol
                 ProcessorAction.STOP
@@ -150,9 +150,9 @@ object ClassicBuiltinSpecialProperties {
         return result
     }
 
-    private fun FirCallableSymbol<*>.valueParametersAreEmpty(): Boolean {
+    private fun FirCallableSymbol<*>.konstueParametersAreEmpty(): Boolean {
         return when (this) {
-            is FirNamedFunctionSymbol -> fir.valueParameters.isEmpty()
+            is FirNamedFunctionSymbol -> fir.konstueParameters.isEmpty()
             else -> true
         }
     }

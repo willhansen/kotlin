@@ -8,14 +8,14 @@ plugins {
     id("jps-compatible")
 }
 
-val jsonJsIrRuntimeForTests: Configuration by configurations.creating {
+konst jsonJsIrRuntimeForTests: Configuration by configurations.creating {
     attributes {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.js)
         attribute(KotlinJsCompilerAttribute.jsCompilerAttribute, KotlinJsCompilerAttribute.ir)
     }
 }
 
-val coreJsIrRuntimeForTests: Configuration by configurations.creating {
+konst coreJsIrRuntimeForTests: Configuration by configurations.creating {
     attributes {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.js)
         attribute(KotlinJsCompilerAttribute.jsCompilerAttribute, KotlinJsCompilerAttribute.ir)
@@ -76,7 +76,7 @@ publish {
     artifactId = artifactId.replace("kotlinx-", "kotlin-")
 }
 
-val runtimeJar = runtimeJar {
+konst runtimeJar = runtimeJar {
     archiveBaseName.set("kotlin-serialization-compiler-plugin")
 }
 sourcesJar()
@@ -84,12 +84,12 @@ javadocJar()
 testsJar()
 useD8Plugin()
 
-val distCompat by configurations.creating {
+konst distCompat by configurations.creating {
     isCanBeResolved = false
     isCanBeConsumed = true
 }
 
-val compatJar = tasks.register<Copy>("compatJar") {
+konst compatJar = tasks.register<Copy>("compatJar") {
     from(runtimeJar)
     into(layout.buildDirectory.dir("libsCompat"))
     rename {
@@ -109,13 +109,13 @@ projectTest(parallel = true, jUnitMode = JUnitMode.JUnit5) {
     setUpJsIrBoxTests()
 }
 
-val generateTests by generator("org.jetbrains.kotlinx.serialization.TestGeneratorKt")
+konst generateTests by generator("org.jetbrains.kotlinx.serialization.TestGeneratorKt")
 
 fun Test.setUpJsIrBoxTests() {
     useJsIrBoxTests(version = version, buildDir = "$buildDir/")
 
-    val localJsCoreRuntimeForTests: FileCollection = coreJsIrRuntimeForTests
-    val localJsJsonRuntimeForTests: FileCollection = jsonJsIrRuntimeForTests
+    konst localJsCoreRuntimeForTests: FileCollection = coreJsIrRuntimeForTests
+    konst localJsJsonRuntimeForTests: FileCollection = jsonJsIrRuntimeForTests
 
     doFirst {
         systemProperty("serialization.core.path", localJsCoreRuntimeForTests.asPath)

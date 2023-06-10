@@ -3,9 +3,9 @@ fun use(s: P) {
 
 fun testForInListUnused() {
   { // BLOCK
-    val <iterator>: MutableIterator<@EnhancedNullability P> = listOfNotNull().iterator()
+    konst <iterator>: MutableIterator<@EnhancedNullability P> = listOfNotNull().iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val x: P = <iterator>.next() /*!! P */
+      konst x: P = <iterator>.next() /*!! P */
       { // BLOCK
       }
     }
@@ -14,11 +14,11 @@ fun testForInListUnused() {
 
 fun testForInListDestructured() {
   { // BLOCK
-    val <iterator>: MutableIterator<@EnhancedNullability P> = listOfNotNull().iterator()
+    konst <iterator>: MutableIterator<@EnhancedNullability P> = listOfNotNull().iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val <destruct>: P = <iterator>.next() /*!! P */
-      val x: Int = <destruct>.component1()
-      val y: Int = <destruct>.component2()
+      konst <destruct>: P = <iterator>.next() /*!! P */
+      konst x: Int = <destruct>.component1()
+      konst y: Int = <destruct>.component2()
       { // BLOCK
       }
     }
@@ -26,17 +26,17 @@ fun testForInListDestructured() {
 }
 
 fun testDesugaredForInList() {
-  val iterator: MutableIterator<@EnhancedNullability P> = listOfNotNull().iterator()
+  konst iterator: MutableIterator<@EnhancedNullability P> = listOfNotNull().iterator()
   while (iterator.hasNext()) { // BLOCK
-    val x: P = iterator.next() /*!! P */
+    konst x: P = iterator.next() /*!! P */
   }
 }
 
 fun testForInArrayUnused(j: J) {
   { // BLOCK
-    val <iterator>: Iterator<@EnhancedNullability P> = j.arrayOfNotNull().iterator()
+    konst <iterator>: Iterator<@EnhancedNullability P> = j.arrayOfNotNull().iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val x: P = <iterator>.next() /*!! P */
+      konst x: P = <iterator>.next() /*!! P */
       { // BLOCK
       }
     }
@@ -45,9 +45,9 @@ fun testForInArrayUnused(j: J) {
 
 fun testForInListUse() {
   { // BLOCK
-    val <iterator>: MutableIterator<@EnhancedNullability P> = listOfNotNull().iterator()
+    konst <iterator>: MutableIterator<@EnhancedNullability P> = listOfNotNull().iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val x: P = <iterator>.next() /*!! P */
+      konst x: P = <iterator>.next() /*!! P */
       { // BLOCK
         use(s = x)
         use(s = x)
@@ -58,9 +58,9 @@ fun testForInListUse() {
 
 fun testForInArrayUse(j: J) {
   { // BLOCK
-    val <iterator>: Iterator<@EnhancedNullability P> = j.arrayOfNotNull().iterator()
+    konst <iterator>: Iterator<@EnhancedNullability P> = j.arrayOfNotNull().iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val x: P = <iterator>.next() /*!! P */
+      konst x: P = <iterator>.next() /*!! P */
       { // BLOCK
         use(s = x)
         use(s = x)
@@ -81,11 +81,11 @@ data class P {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
-  val y: Int
+  konst y: Int
     field = y
     get
 
@@ -108,7 +108,7 @@ data class P {
     when {
       other !is P -> return false
     }
-    val tmp0_other_with_cast: P = other as P
+    konst tmp0_other_with_cast: P = other as P
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }

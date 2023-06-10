@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 import org.jetbrains.org.objectweb.asm.tree.analysis.BasicVerifier
 
-class MethodVerifier(private val checkPoint: String, private val generationState: GenerationState) : MethodTransformer() {
+class MethodVerifier(private konst checkPoint: String, private konst generationState: GenerationState) : MethodTransformer() {
     override fun transform(internalClassName: String, methodNode: MethodNode) {
         if (!generationState.shouldValidateBytecode) return
         try {

@@ -9,33 +9,33 @@ import kotlin.reflect.KProperty
 
 inline fun charSequence(key: String? = null) = object : BundleProperty<CharSequence>(key) {
     override fun getValue(bundle: Any, key: String): CharSequence? = TODO()
-    override fun setValue(bundle: Any, key: String, value: CharSequence) {}
+    override fun setValue(bundle: Any, key: String, konstue: CharSequence) {}
 }
 
-abstract class NullableBundleProperty<EE>(private val key: String?) : ReadWriteProperty<Any, EE?> {
+abstract class NullableBundleProperty<EE>(private konst key: String?) : ReadWriteProperty<Any, EE?> {
     private inline fun KProperty<*>.toKey(): String {
         return toString()
     }
 
     override fun getValue(thisRef: Any, property: KProperty<*>): EE? = getValue(thisRef, key ?: property.toKey())
-    override fun setValue(thisRef: Any, property: KProperty<*>, value: EE?) {
-        setNullableValue(thisRef, key ?: property.toKey(), value)
+    override fun setValue(thisRef: Any, property: KProperty<*>, konstue: EE?) {
+        setNullableValue(thisRef, key ?: property.toKey(), konstue)
     }
 
     abstract fun getValue(bundle: Any, key: String): EE?
-    abstract fun setNullableValue(bundle: Any, key: String, value: EE?)
+    abstract fun setNullableValue(bundle: Any, key: String, konstue: EE?)
 }
 
 abstract class BundleProperty<AA>(key: String?) : NullableBundleProperty<AA>(key) {
 
-    final override fun setValue(thisRef: Any, property: KProperty<*>, value: AA?) {
-        super.setValue(thisRef, property, value)
+    final override fun setValue(thisRef: Any, property: KProperty<*>, konstue: AA?) {
+        super.setValue(thisRef, property, konstue)
     }
 
     final override fun getValue(thisRef: Any, property: KProperty<*>): AA = super.getValue(thisRef, property)!!
-    final override fun setNullableValue(bundle: Any, key: String, value: AA?) {
-        setValue(bundle, key, value!!)
+    final override fun setNullableValue(bundle: Any, key: String, konstue: AA?) {
+        setValue(bundle, key, konstue!!)
     }
 
-    abstract fun setValue(bundle: Any, key: String, value: AA)
+    abstract fun setValue(bundle: Any, key: String, konstue: AA)
 }

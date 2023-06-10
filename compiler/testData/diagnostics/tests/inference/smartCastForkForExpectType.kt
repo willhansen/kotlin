@@ -6,9 +6,9 @@ interface A
 interface B : A
 interface C : A
 
-val SL0: Slice<A> = TODO()
-val SL1: Slice<B> = TODO()
-val SL2: Slice<C> = TODO()
+konst SL0: Slice<A> = TODO()
+konst SL1: Slice<B> = TODO()
+konst SL2: Slice<C> = TODO()
 
 fun <X> foo(s: Slice<X>): X? {
     if (s.hashCode() == 0) {

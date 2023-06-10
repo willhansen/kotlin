@@ -3,21 +3,21 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsAny<T>(val a: T) {
+konstue class AsAny<T>(konst a: T) {
     fun myEq(other: Any?): Boolean {
         return other is AsAny<*> && other.a == a
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsAny2<T: Any>(val a: T?) {
+konstue class AsAny2<T: Any>(konst a: T?) {
     fun myEq(other: Any?): Boolean {
         return other is AsAny2<*> && other.a == a
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsInt<T: Int>(val a: T) {
+konstue class AsInt<T: Int>(konst a: T) {
     fun myEq(other: Any?): Boolean {
         return other is AsInt<*> && other.a == a
     }
@@ -47,10 +47,10 @@ object Primitive {
 }
 
 fun box(): String {
-    val a = AsAny(42)
-    val b = AsAny(40 + 2)
-    val a2 = AsAny2(42)
-    val b2 = AsAny2(40 + 2)
+    konst a = AsAny(42)
+    konst b = AsAny(40 + 2)
+    konst a2 = AsAny2(42)
+    konst b2 = AsAny2(40 + 2)
 
     if (!a.myEq(b)) return "Fail 1"
     if (a.myEq(42)) return "Fail 2"
@@ -70,8 +70,8 @@ fun box(): String {
     if (!Reference2.isNullableNotNullable(a2)) return "Fail 82"
     if (Reference2.isNullableNotNullable<Int>(null)) return "Fail 92"
 
-    val c = AsInt(42)
-    val d = AsInt(40 + 2)
+    konst c = AsInt(42)
+    konst d = AsInt(40 + 2)
     if (!c.myEq(d)) return "Fail 10"
     if (c.myEq(42)) return "Fail 11"
     if (c.myEq("other")) return "Fail 12"

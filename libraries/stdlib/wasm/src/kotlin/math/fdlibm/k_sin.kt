@@ -41,13 +41,13 @@
 package kotlin.math.fdlibm
 
 
-private const val half = 5.00000000000000000000e-01 /* 0x3FE00000, 0x00000000 */
-private const val S1 = -1.66666666666666324348e-01 /* 0xBFC55555, 0x55555549 */
-private const val S2 = 8.33333333332248946124e-03 /* 0x3F811111, 0x1110F8A6 */
-private const val S3 = -1.98412698298579493134e-04 /* 0xBF2A01A0, 0x19C161D5 */
-private const val S4 = 2.75573137070700676789e-06 /* 0x3EC71DE3, 0x57B1FE7D */
-private const val S5 = -2.50507602534068634195e-08 /* 0xBE5AE5E6, 0x8A2B9CEB */
-private const val S6 = 1.58969099521155010221e-10 /* 0x3DE5D93A, 0x5ACFD57C */
+private const konst half = 5.00000000000000000000e-01 /* 0x3FE00000, 0x00000000 */
+private const konst S1 = -1.66666666666666324348e-01 /* 0xBFC55555, 0x55555549 */
+private const konst S2 = 8.33333333332248946124e-03 /* 0x3F811111, 0x1110F8A6 */
+private const konst S3 = -1.98412698298579493134e-04 /* 0xBF2A01A0, 0x19C161D5 */
+private const konst S4 = 2.75573137070700676789e-06 /* 0x3EC71DE3, 0x57B1FE7D */
+private const konst S5 = -2.50507602534068634195e-08 /* 0xBE5AE5E6, 0x8A2B9CEB */
+private const konst S6 = 1.58969099521155010221e-10 /* 0x3DE5D93A, 0x5ACFD57C */
 
 internal fun __kernel_sin(x: Double, y: Double, iy: Int): Double {
     var z: Double

@@ -14,7 +14,7 @@
 // FILE: common.kt
 
 expect class Foo {
-    val p: Int
+    konst p: Int
     fun bar(r: () -> Int = this::p): Int
 }
 
@@ -22,11 +22,11 @@ expect class Foo {
 // FILE: actual.kt
 
 actual class Foo {
-    actual val p = 42
+    actual konst p = 42
     actual fun bar(r: () -> Int) = r()
 }
 fun box(): String {
-    val bar = Foo().bar()
+    konst bar = Foo().bar()
     if (bar != 42)
         return "bar is wrongly $bar"
 

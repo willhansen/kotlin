@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X<T: Any>(val x: T)
+konstue class X<T: Any>(konst x: T)
 
 interface IFoo {
     fun foo(): Any
@@ -16,8 +16,8 @@ class TestX : IFoo {
 }
 
 fun box(): String {
-    val t: IFoo = TestX()
-    val tFoo = t.foo()
+    konst t: IFoo = TestX()
+    konst tFoo = t.foo()
     if (tFoo !is X<*>) {
         throw AssertionError("X expected: $tFoo")
     }

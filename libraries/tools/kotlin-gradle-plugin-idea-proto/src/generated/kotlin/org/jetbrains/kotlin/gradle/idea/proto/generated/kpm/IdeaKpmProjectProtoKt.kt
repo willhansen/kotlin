@@ -10,7 +10,7 @@ object IdeaKpmProjectProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmProjectProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmProjectProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKpmProjectProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKpmProjectProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKpmProjectProtoKt {
       @JvmName("getGradlePluginVersion")
       get() = _builder.getGradlePluginVersion()
       @JvmName("setGradlePluginVersion")
-      set(value) {
-        _builder.setGradlePluginVersion(value)
+      set(konstue) {
+        _builder.setGradlePluginVersion(konstue)
       }
     /**
      * <code>optional string gradle_plugin_version = 2;</code>
@@ -79,8 +79,8 @@ object IdeaKpmProjectProtoKt {
       @JvmName("getCoreLibrariesVersion")
       get() = _builder.getCoreLibrariesVersion()
       @JvmName("setCoreLibrariesVersion")
-      set(value) {
-        _builder.setCoreLibrariesVersion(value)
+      set(konstue) {
+        _builder.setCoreLibrariesVersion(konstue)
       }
     /**
      * <code>optional string core_libraries_version = 3;</code>
@@ -103,8 +103,8 @@ object IdeaKpmProjectProtoKt {
       @JvmName("getExplicitApiModeCliOption")
       get() = _builder.getExplicitApiModeCliOption()
       @JvmName("setExplicitApiModeCliOption")
-      set(value) {
-        _builder.setExplicitApiModeCliOption(value)
+      set(konstue) {
+        _builder.setExplicitApiModeCliOption(konstue)
       }
     /**
      * <code>optional string explicit_api_mode_cli_option = 4;</code>
@@ -127,8 +127,8 @@ object IdeaKpmProjectProtoKt {
       @JvmName("getKotlinNativeHome")
       get() = _builder.getKotlinNativeHome()
       @JvmName("setKotlinNativeHome")
-      set(value) {
-        _builder.setKotlinNativeHome(value)
+      set(konstue) {
+        _builder.setKotlinNativeHome(konstue)
       }
     /**
      * <code>optional string kotlin_native_home = 5;</code>
@@ -153,58 +153,58 @@ object IdeaKpmProjectProtoKt {
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto modules = 6;</code>
      */
-     val modules: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>
+     konst modules: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getModulesList()
       )
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto modules = 6;</code>
-     * @param value The modules to add.
+     * @param konstue The modules to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addModules")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.add(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto) {
-      _builder.addModules(value)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.add(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto) {
+      _builder.addModules(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto modules = 6;</code>
-     * @param value The modules to add.
+     * @param konstue The modules to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignModules")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.plusAssign(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.plusAssign(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto) {
+      add(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto modules = 6;</code>
-     * @param values The modules to add.
+     * @param konstues The modules to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllModules")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.addAll(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto>) {
-      _builder.addAllModules(values)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.addAll(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto>) {
+      _builder.addAllModules(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto modules = 6;</code>
-     * @param values The modules to add.
+     * @param konstues The modules to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllModules")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.plusAssign(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.plusAssign(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto modules = 6;</code>
-     * @param index The index to set the value at.
-     * @param value The modules to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The modules to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setModules")
-    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.set(index: kotlin.Int, value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto) {
-      _builder.setModules(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto, ModulesProxy>.set(index: kotlin.Int, konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto) {
+      _builder.setModules(index, konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto modules = 6;</code>
@@ -221,6 +221,6 @@ object IdeaKpmProjectProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 

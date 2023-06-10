@@ -9,10 +9,10 @@ package kotlin.enums
 
 @Suppress("UNCHECKED_CAST", "unused")
 internal actual class EnumEntriesSerializationProxy<E : Enum<E>> actual constructor(entries: Array<E>) : Serializable {
-    private val c: Class<E> = entries.javaClass.componentType!! as Class<E>
+    private konst c: Class<E> = entries.javaClass.componentType!! as Class<E>
 
     private companion object {
-        private const val serialVersionUID: Long = 0L
+        private const konst serialVersionUID: Long = 0L
     }
 
     @OptIn(ExperimentalStdlibApi::class)

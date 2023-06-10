@@ -1,4 +1,4 @@
-val la1 = {
+konst la1 = {
     // start
     // start 1
     foo()
@@ -10,29 +10,29 @@ val la1 = {
     // end
 }
 
-val la2 = {
+konst la2 = {
     /**/
 }
 
-val la3 = {
+konst la3 = {
     /** */
 }
 
-val la4 = {
+konst la4 = {
     /** Should be under block */
 
     /** Should be under property */
-    val some = 1
+    konst some = 1
 }
 
-val la5 = {
+konst la5 = {
     /** */
     /** */
 }
 
-val la6 = /*1*/ {/*2*/ a /*3*/ -> /*4*/
+konst la6 = /*1*/ {/*2*/ a /*3*/ -> /*4*/
 }
 
-val la7 = {/**/}
+konst la7 = {/**/}
 
 fun foo() {}

@@ -11,20 +11,20 @@ import kotlin.system.getTimeNanos
  * The default implementation of pseudo-random generator using the linear congruential generator.
  */
 internal object NativeRandom : Random() {
-    private const val MULTIPLIER = 0x5deece66dL
+    private const konst MULTIPLIER = 0x5deece66dL
     @Suppress("DEPRECATION")
-    private val _seed = AtomicLong(mult(getTimeNanos()))
+    private konst _seed = AtomicLong(mult(getTimeNanos()))
 
     /**
-     * Random generator seed value.
+     * Random generator seed konstue.
      */
-    private val seed: Long
-        get() = _seed.value
+    private konst seed: Long
+        get() = _seed.konstue
 
-    private fun mult(value: Long) = (value xor MULTIPLIER) and ((1L shl 48) - 1)
+    private fun mult(konstue: Long) = (konstue xor MULTIPLIER) and ((1L shl 48) - 1)
 
     private fun update(seed: Long): Unit {
-        _seed.value = seed
+        _seed.konstue = seed
     }
 
     override fun nextBits(bitCount: Int): Int {

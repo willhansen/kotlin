@@ -6,8 +6,8 @@ object MARKED : Square
 object UNMARKED : Square
 
 fun test_1() {
-    val lines: List<String> = listOf()
-    val cards = lines.windowed(6)
+    konst lines: List<String> = listOf()
+    konst cards = lines.windowed(6)
         .map { card ->
             card.map { line: String ->
                 line.map { UNMARKED as Square }
@@ -18,8 +18,8 @@ fun test_1() {
 }
 
 fun test_2() {
-    val lines: List<String> = listOf()
-    val cards = lines.windowed(6)
+    konst lines: List<String> = listOf()
+    konst cards = lines.windowed(6)
         .map { card ->
             card.map { line: String ->
                 line.map { UNMARKED }

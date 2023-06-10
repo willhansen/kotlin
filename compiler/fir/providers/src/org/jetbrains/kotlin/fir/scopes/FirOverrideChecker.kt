@@ -29,4 +29,4 @@ fun FirOverrideChecker.isOverriddenFunction(
     baseDeclaration: FirNamedFunctionSymbol
 ): Boolean = isOverriddenFunction(overrideCandidate.fir, baseDeclaration.fir)
 
-val FirSession.firOverrideChecker: FirOverrideChecker by FirSession.sessionComponentAccessor()
+konst FirSession.firOverrideChecker: FirOverrideChecker by FirSession.sessionComponentAccessor()

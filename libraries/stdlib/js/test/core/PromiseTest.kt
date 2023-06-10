@@ -18,8 +18,8 @@ class PromiseTest {
 
         assertStaticTypeIs<Promise<Int>>(p.then({ 1 }))
 
-        val f: (Int) -> Int = { 1 }
-        val ft: (Throwable) -> Int = { 1 }
+        konst f: (Int) -> Int = { 1 }
+        konst ft: (Throwable) -> Int = { 1 }
 
         assertStaticTypeIs<Promise<Int>>(p.then(f, ft))
 

@@ -17,20 +17,20 @@ fun runSuspend(block: suspend () -> Unit) {
 import kotlin.math.sqrt
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double)
+konstue class DPoint(konst x: Double, konst y: Double)
 
 fun Double.square() = this * this
 
 @JvmInline
-value class DSegment(val p1: DPoint, val p2: DPoint) {
-    inline val length
+konstue class DSegment(konst p1: DPoint, konst p2: DPoint) {
+    inline konst length
         get() = sqrt((p1.x - p2.x).square() + (p1.y - p2.y).square())
-    inline val middle
+    inline konst middle
         get() = DPoint((p1.x + p2.x) / 2.0, (p1.y + p2.y) / 2.0)
 }
-inline val DSegment.length1
+inline konst DSegment.length1
     get() = length
-inline val DSegment.middle1
+inline konst DSegment.middle1
     get() = middle
 
 
@@ -63,9 +63,9 @@ fun forStatement() {
 }
 
 fun box(): String {
-    val point = DPoint(1.0, 2.0)
-    val pointX2 = DPoint(2.0, 4.0)
-    val segment = DSegment(point, pointX2)
+    konst point = DPoint(1.0, 2.0)
+    konst pointX2 = DPoint(2.0, 4.0)
+    konst segment = DSegment(point, pointX2)
 
     supply("a")
     point.let { it.x }
@@ -74,7 +74,7 @@ fun box(): String {
     supply("c")
     run { DPoint (1.0, 2.0) }
     supply("d")
-    val x = run { DPoint(100.0, 200.0) }
+    konst x = run { DPoint(100.0, 200.0) }
     supply("e")
     require(x == DPoint(100.0, 200.0))
     supply("f")
@@ -96,7 +96,7 @@ fun box(): String {
     supply("n")
     var a = 1
     segment.let { a++ }
-    val b = segment.let { ++a }
+    konst b = segment.let { ++a }
     require(a == 3)
     supply("o")
     runSuspend { require(suspendFun() == DPoint(1.0, 2.0).toString()) }
@@ -122,12 +122,12 @@ fun box(): String {
 
 suspend fun f() = suspendCoroutine { it.resume(Unit) }
 suspend fun suspendFun(): String {
-    val x = run { f(); DPoint(1.0, 2.0) }
+    konst x = run { f(); DPoint(1.0, 2.0) }
     return x.toString()
 }
 
 // @TestKt.class:
-// 0 valueOf
+// 0 konstueOf
 // 0 INVOKE(STATIC|VIRTUAL) (DPoint|DSegment).*\.(un)?box
 // 0 INVOKE(STATIC|VIRTUAL) .*(stub_for_inlining|lambda)
 // 0 DCONST_0

@@ -13,8 +13,8 @@ class A(param: String) {
 }
 
 fun box(): String {
-    val a = A(":(")
-    val f = a.ref()
+    konst a = A(":(")
+    konst f = a.ref()
 
     try {
         f.get(a)

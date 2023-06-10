@@ -14,7 +14,7 @@ typealias S = String
 
 fun f(): String = "O"
 
-val g: S? get() = f().substring(0, 0) + "K"
+konst g: S? get() = f().substring(0, 0) + "K"
 
 inline fun <T> i(block: () -> T): T = block()
 

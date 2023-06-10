@@ -45,45 +45,45 @@ import org.jetbrains.kotlin.name.Name
  * @param javaMappedClassUseSiteScope use-site scope of JDK class
  */
 class JvmMappedScope(
-    private val session: FirSession,
-    private val firKotlinClass: FirRegularClass,
-    private val firJavaClass: FirRegularClass,
-    private val declaredMemberScope: FirContainingNamesAwareScope,
-    private val javaMappedClassUseSiteScope: FirTypeScope,
+    private konst session: FirSession,
+    private konst firKotlinClass: FirRegularClass,
+    private konst firJavaClass: FirRegularClass,
+    private konst declaredMemberScope: FirContainingNamesAwareScope,
+    private konst javaMappedClassUseSiteScope: FirTypeScope,
 ) : FirTypeScope() {
-    private val functionsCache = mutableMapOf<FirNamedFunctionSymbol, FirNamedFunctionSymbol>()
+    private konst functionsCache = mutableMapOf<FirNamedFunctionSymbol, FirNamedFunctionSymbol>()
 
-    private val constructorsCache = mutableMapOf<FirConstructorSymbol, FirConstructorSymbol>()
+    private konst constructorsCache = mutableMapOf<FirConstructorSymbol, FirConstructorSymbol>()
 
-    private val overrideChecker = FirStandardOverrideChecker(session)
+    private konst overrideChecker = FirStandardOverrideChecker(session)
 
-    private val substitutor = createMappingSubstitutor(firJavaClass, firKotlinClass, session)
-    private val kotlinDispatchReceiverType = firKotlinClass.defaultType()
+    private konst substitutor = createMappingSubstitutor(firJavaClass, firKotlinClass, session)
+    private konst kotlinDispatchReceiverType = firKotlinClass.defaultType()
 
-    private val declaredScopeOfMutableVersion = JavaToKotlinClassMap.readOnlyToMutable(firKotlinClass.classId)?.let {
+    private konst declaredScopeOfMutableVersion = JavaToKotlinClassMap.readOnlyToMutable(firKotlinClass.classId)?.let {
         session.symbolProvider.getClassLikeSymbolByClassId(it) as? FirClassSymbol
     }?.let {
         session.declaredMemberScope(it, memberRequiredPhase = null)
     }
 
-    private val isMutableContainer = JavaToKotlinClassMap.isMutable(firKotlinClass.classId)
+    private konst isMutableContainer = JavaToKotlinClassMap.isMutable(firKotlinClass.classId)
 
-    private val allJavaMappedSuperClassIds: List<ClassId> by lazy {
+    private konst allJavaMappedSuperClassIds: List<ClassId> by lazy {
         buildList {
             add(firJavaClass.classId)
             lookupSuperTypes(firJavaClass.symbol, lookupInterfaces = true, deep = true, session).mapTo(this) { superType ->
-                val originalClassId = superType.lookupTag.classId
+                konst originalClassId = superType.lookupTag.classId
                 JavaToKotlinClassMap.mapKotlinToJava(originalClassId.asSingleFqName().toUnsafe()) ?: originalClassId
             }
         }
     }
 
     // It's ok to have a super set of actually available member names
-    private val myCallableNames by lazy {
+    private konst myCallableNames by lazy {
         if (firKotlinClass.isFinal) {
             // For final classes we don't need to load HIDDEN members at all because they might not be overridden
-            val signaturePrefix = firJavaClass.symbol.classId.toString()
-            val names = (JvmBuiltInsSignatures.VISIBLE_METHOD_SIGNATURES).filter { signature ->
+            konst signaturePrefix = firJavaClass.symbol.classId.toString()
+            konst names = (JvmBuiltInsSignatures.VISIBLE_METHOD_SIGNATURES).filter { signature ->
                 signature in JvmBuiltInsSignatures.MUTABLE_METHOD_SIGNATURES == isMutableContainer &&
                         signature.startsWith(signaturePrefix)
             }.map { signature ->
@@ -98,13 +98,13 @@ class JvmMappedScope(
     }
 
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
-        val declared = mutableListOf<FirNamedFunctionSymbol>()
+        konst declared = mutableListOf<FirNamedFunctionSymbol>()
         declaredMemberScope.processFunctionsByName(name) { symbol ->
             declared += symbol
             processor(symbol)
         }
 
-        val declaredSignatures: Set<String> by lazy {
+        konst declaredSignatures: Set<String> by lazy {
             buildSet {
                 declared.mapTo(this) { it.fir.computeJvmDescriptor() }
                 declaredScopeOfMutableVersion?.processFunctionsByName(name) {
@@ -118,7 +118,7 @@ class JvmMappedScope(
                 return@processor
             }
 
-            val jvmDescriptor = symbol.fir.computeJvmDescriptor()
+            konst jvmDescriptor = symbol.fir.computeJvmDescriptor()
             // We don't need adding what is already declared
             if (jvmDescriptor in declaredSignatures) return@processor
 
@@ -131,13 +131,13 @@ class JvmMappedScope(
 
             if (isMutabilityViolation(symbol, jvmDescriptor)) return@processor
 
-            val jdkMemberStatus = getJdkMethodStatus(jvmDescriptor)
+            konst jdkMemberStatus = getJdkMethodStatus(jvmDescriptor)
 
             if (jdkMemberStatus == JDKMemberStatus.DROP) return@processor
             // hidden methods in final class can't be overridden or called with 'super'
             if (jdkMemberStatus == JDKMemberStatus.HIDDEN && firKotlinClass.isFinal) return@processor
 
-            val newSymbol = getOrCreateSubstitutedCopy(symbol, jdkMemberStatus)
+            konst newSymbol = getOrCreateSubstitutedCopy(symbol, jdkMemberStatus)
             processor(newSymbol)
         }
     }
@@ -146,8 +146,8 @@ class JvmMappedScope(
         javaMappedClassUseSiteScope.anyOverriddenOf(symbol, ::isDeclaredInBuiltinClass)
 
     private fun isMutabilityViolation(symbol: FirNamedFunctionSymbol, jvmDescriptor: String): Boolean {
-        val signature = SignatureBuildingComponents.signature(firJavaClass.classId, jvmDescriptor)
-        val isAmongMutableSignatures = signature in JvmBuiltInsSignatures.MUTABLE_METHOD_SIGNATURES
+        konst signature = SignatureBuildingComponents.signature(firJavaClass.classId, jvmDescriptor)
+        konst isAmongMutableSignatures = signature in JvmBuiltInsSignatures.MUTABLE_METHOD_SIGNATURES
         // If the method belongs to MUTABLE_METHOD_SIGNATURES, but the class is a read-only collection we shouldn't add it.
         // For example, we don't want j.u.Collection.removeIf would got to read-only kotlin.collections.Collection
         // But if the method is not among MUTABLE_METHOD_SIGNATURES, but the class is a mutable version, we skip it too,
@@ -162,8 +162,8 @@ class JvmMappedScope(
     }
 
     private fun FirNamedFunctionSymbol.isOverrideOfKotlinBuiltinPropertyGetter(): Boolean {
-        val fqName = firJavaClass.classId.asSingleFqName().child(name)
-        if (valueParameterSymbols.isEmpty()) {
+        konst fqName = firJavaClass.classId.asSingleFqName().child(name)
+        if (konstueParameterSymbols.isEmpty()) {
             if (fqName in BuiltinSpecialProperties.GETTER_FQ_NAMES) return true
             if (getPropertyNamesCandidatesByAccessorName(name).any(::isTherePropertyWithNameInKotlinClass)) return true
         }
@@ -173,7 +173,7 @@ class JvmMappedScope(
 
     // j/l/Number.intValue(), j/u/Collection.remove(I), etc.
     private fun isRenamedJdkMethod(jvmDescriptor: String): Boolean {
-        val signature = SignatureBuildingComponents.signature(firJavaClass.classId, jvmDescriptor)
+        konst signature = SignatureBuildingComponents.signature(firJavaClass.classId, jvmDescriptor)
         return signature in SpecialGenericSignatures.JVM_SIGNATURES_FOR_RENAMED_BUILT_INS
     }
 
@@ -216,8 +216,8 @@ class JvmMappedScope(
 
     private fun getOrCreateSubstitutedCopy(symbol: FirNamedFunctionSymbol, jdkMemberStatus: JDKMemberStatus): FirNamedFunctionSymbol {
         return functionsCache.getOrPut(symbol) {
-            val oldFunction = symbol.fir
-            val newSymbol = FirNamedFunctionSymbol(CallableId(firKotlinClass.classId, symbol.callableId.callableName))
+            konst oldFunction = symbol.fir
+            konst newSymbol = FirNamedFunctionSymbol(CallableId(firKotlinClass.classId, symbol.callableId.callableName))
             FirFakeOverrideGenerator.createCopyForFirFunction(
                 newSymbol,
                 baseFunction = symbol.fir,
@@ -225,7 +225,7 @@ class JvmMappedScope(
                 session,
                 symbol.fir.origin,
                 newDispatchReceiverType = kotlinDispatchReceiverType,
-                newParameterTypes = oldFunction.valueParameters.map { substitutor.substituteOrSelf(it.returnTypeRef.coneType) },
+                newParameterTypes = oldFunction.konstueParameters.map { substitutor.substituteOrSelf(it.returnTypeRef.coneType) },
                 newReturnType = substitutor.substituteOrSelf(oldFunction.returnTypeRef.coneType),
             ).apply {
                 if (jdkMemberStatus == JDKMemberStatus.HIDDEN) {
@@ -241,7 +241,7 @@ class JvmMappedScope(
         processor: (FirNamedFunctionSymbol, FirTypeScope) -> ProcessorAction
     ) = ProcessorAction.NONE
 
-    private val firKotlinClassConstructors by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst firKotlinClassConstructors by lazy(LazyThreadSafetyMode.PUBLICATION) {
         firKotlinClass.constructors(session)
     }
 
@@ -250,32 +250,32 @@ class JvmMappedScope(
 
             fun FirConstructor.isShadowedBy(ctorFromKotlin: FirConstructorSymbol): Boolean {
                 // assuming already checked for visibility
-                val valueParams = valueParameters
-                val valueParamsFromKotlin = ctorFromKotlin.fir.valueParameters
-                if (valueParams.size != valueParamsFromKotlin.size) return false
-                val substitutor = buildSubstitutorForOverridesCheck(ctorFromKotlin.fir, this@isShadowedBy, session) ?: return false
-                return valueParamsFromKotlin.zip(valueParams).all { (kotlinCtorParam, javaCtorParam) ->
+                konst konstueParams = konstueParameters
+                konst konstueParamsFromKotlin = ctorFromKotlin.fir.konstueParameters
+                if (konstueParams.size != konstueParamsFromKotlin.size) return false
+                konst substitutor = buildSubstitutorForOverridesCheck(ctorFromKotlin.fir, this@isShadowedBy, session) ?: return false
+                return konstueParamsFromKotlin.zip(konstueParams).all { (kotlinCtorParam, javaCtorParam) ->
                     overrideChecker.isEqualTypes(kotlinCtorParam.returnTypeRef, javaCtorParam.returnTypeRef, substitutor)
                 }
             }
 
             fun FirConstructor.isTrivialCopyConstructor(): Boolean =
-                valueParameters.singleOrNull()?.let {
+                konstueParameters.singleOrNull()?.let {
                     (it.returnTypeRef.coneType.lowerBoundIfFlexible() as? ConeClassLikeType)?.lookupTag == firKotlinClass.symbol.toLookupTag()
                 } ?: false
 
             // In K1 it is handled by JvmBuiltInsCustomizer.getConstructors
             // Here the logic is generally the same, but simplified for performance by reordering checks and avoiding checking
             // for the impossible combinations
-            val javaCtor = javaCtorSymbol.fir
+            konst javaCtor = javaCtorSymbol.fir
 
             if (!javaCtor.status.visibility.isPublicAPI || javaCtor.isDeprecated()) return@processor
-            val signature = SignatureBuildingComponents.signature(firJavaClass.classId, javaCtor.computeJvmDescriptor())
+            konst signature = SignatureBuildingComponents.signature(firJavaClass.classId, javaCtor.computeJvmDescriptor())
             if (signature in JvmBuiltInsSignatures.HIDDEN_CONSTRUCTOR_SIGNATURES) return@processor
             if (javaCtor.isTrivialCopyConstructor()) return@processor
             if (firKotlinClassConstructors.any { javaCtor.isShadowedBy(it) }) return@processor
 
-            val newSymbol = getOrCreateCopy(javaCtorSymbol)
+            konst newSymbol = getOrCreateCopy(javaCtorSymbol)
             processor(newSymbol)
         }
 
@@ -286,9 +286,9 @@ class JvmMappedScope(
 
     private fun getOrCreateCopy(symbol: FirConstructorSymbol): FirConstructorSymbol {
         return constructorsCache.getOrPut(symbol) {
-            val oldConstructor = symbol.fir
-            val classId = firKotlinClass.classId
-            val newSymbol = FirConstructorSymbol(CallableId(classId, classId.shortClassName))
+            konst oldConstructor = symbol.fir
+            konst classId = firKotlinClass.classId
+            konst newSymbol = FirConstructorSymbol(CallableId(classId, classId.shortClassName))
             FirFakeOverrideGenerator.createCopyForFirConstructor(
                 newSymbol,
                 session,
@@ -297,7 +297,7 @@ class JvmMappedScope(
                 symbol.fir.origin,
                 newDispatchReceiverType = null,
                 newReturnType = substitutor.substituteOrSelf(oldConstructor.returnTypeRef.coneType),
-                newParameterTypes = oldConstructor.valueParameters.map { substitutor.substituteOrSelf(it.returnTypeRef.coneType) },
+                newParameterTypes = oldConstructor.konstueParameters.map { substitutor.substituteOrSelf(it.returnTypeRef.coneType) },
                 newTypeParameters = null,
                 newContextReceiverTypes = emptyList(),
                 isExpect = false,

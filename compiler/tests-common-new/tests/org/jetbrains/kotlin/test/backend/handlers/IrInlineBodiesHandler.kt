@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.TestServices
 
 class IrInlineBodiesHandler(testServices: TestServices) : AbstractIrHandler(testServices) {
-    val declaredInlineFunctionSignatures = mutableSetOf<IdSignature>()
+    konst declaredInlineFunctionSignatures = mutableSetOf<IdSignature>()
 
     override fun processModule(module: TestModule, info: IrBackendInput) {
         info.processAllIrModuleFragments(module) { irModule, _ ->
@@ -52,11 +52,11 @@ class IrInlineBodiesHandler(testServices: TestServices) : AbstractIrHandler(test
         }
 
         override fun visitMemberAccess(expression: IrMemberAccessExpression<*>) {
-            val symbol = expression.symbol
+            konst symbol = expression.symbol
             assertions.assertTrue(symbol.isBound)
-            val callee = symbol.owner
+            konst callee = symbol.owner
             if (callee.symbol.signature in declaredInlineFunctionSignatures) {
-                val trueCallee = (callee as IrSimpleFunction).resolveFakeOverride()!!
+                konst trueCallee = (callee as IrSimpleFunction).resolveFakeOverride()!!
                 assertions.assertTrue(trueCallee.hasBody()) {
                     "IrInlineBodiesHandler: function with body expected"
                 }

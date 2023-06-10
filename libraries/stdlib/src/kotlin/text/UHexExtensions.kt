@@ -52,7 +52,7 @@ public inline fun UByteArray.toHexString(
  *
  * Note that only [HexFormat.BytesHexFormat] affects parsing,
  * and parsing is performed in case-insensitive manner.
- * Also, any of the char sequences CRLF, LF and CR is considered a valid line separator.
+ * Also, any of the char sequences CRLF, LF and CR is considered a konstid line separator.
  *
  * @param format the [HexFormat] to use for parsing, [HexFormat.Default] by default.
  *
@@ -70,7 +70,7 @@ public inline fun String.hexToUByteArray(format: HexFormat = HexFormat.Default):
 // *
 // * Note that only [HexFormat.BytesHexFormat] affects parsing,
 // * and parsing is performed in case-insensitive manner.
-// * Also, any of the char sequences CRLF, LF and CR is considered a valid line separator.
+// * Also, any of the char sequences CRLF, LF and CR is considered a konstid line separator.
 // *
 // * @param startIndex the beginning (inclusive) of the substring to parse, 0 by default.
 // * @param endIndex the end (exclusive) of the substring to parse, length of this string by default.
@@ -93,7 +93,7 @@ public inline fun String.hexToUByteArray(format: HexFormat = HexFormat.Default):
 // -------------------------- format and parse UByte --------------------------
 
 /**
- * Formats this `UByte` value using the specified [format].
+ * Formats this `UByte` konstue using the specified [format].
  *
  * Note that only [HexFormat.upperCase] and [HexFormat.NumberHexFormat] affect formatting.
  *
@@ -105,7 +105,7 @@ public inline fun String.hexToUByteArray(format: HexFormat = HexFormat.Default):
 public inline fun UByte.toHexString(format: HexFormat = HexFormat.Default): String = data.toHexString(format)
 
 /**
- * Parses an `UByte` value from this string using the specified [format].
+ * Parses an `UByte` konstue from this string using the specified [format].
  *
  * Note that only [HexFormat.NumberHexFormat] affects parsing,
  * and parsing is performed in case-insensitive manner.
@@ -120,7 +120,7 @@ public inline fun UByte.toHexString(format: HexFormat = HexFormat.Default): Stri
 public inline fun String.hexToUByte(format: HexFormat = HexFormat.Default): UByte = hexToByte(format).toUByte()
 
 ///**
-// * Parses an `UByte` value from this string using the specified [format].
+// * Parses an `UByte` konstue from this string using the specified [format].
 // *
 // * Note that only [HexFormat.NumberHexFormat] affects parsing,
 // * and parsing is performed in case-insensitive manner.
@@ -142,7 +142,7 @@ public inline fun String.hexToUByte(format: HexFormat = HexFormat.Default): UByt
 // -------------------------- format and parse UShort --------------------------
 
 /**
- * Formats this `UShort` value using the specified [format].
+ * Formats this `UShort` konstue using the specified [format].
  *
  * Note that only [HexFormat.upperCase] and [HexFormat.NumberHexFormat] affect formatting.
  *
@@ -154,7 +154,7 @@ public inline fun String.hexToUByte(format: HexFormat = HexFormat.Default): UByt
 public inline fun UShort.toHexString(format: HexFormat = HexFormat.Default): String = data.toHexString(format)
 
 /**
- * Parses an `UShort` value from this string using the specified [format].
+ * Parses an `UShort` konstue from this string using the specified [format].
  *
  * Note that only [HexFormat.NumberHexFormat] affects parsing,
  * and parsing is performed in case-insensitive manner.
@@ -169,7 +169,7 @@ public inline fun UShort.toHexString(format: HexFormat = HexFormat.Default): Str
 public inline fun String.hexToUShort(format: HexFormat = HexFormat.Default): UShort = hexToShort(format).toUShort()
 
 ///**
-// * Parses an `UShort` value from this string using the specified [format].
+// * Parses an `UShort` konstue from this string using the specified [format].
 // *
 // * Note that only [HexFormat.NumberHexFormat] affects parsing,
 // * and parsing is performed in case-insensitive manner.
@@ -191,7 +191,7 @@ public inline fun String.hexToUShort(format: HexFormat = HexFormat.Default): USh
 // -------------------------- format and parse UInt --------------------------
 
 /**
- * Formats this `UInt` value using the specified [format].
+ * Formats this `UInt` konstue using the specified [format].
  *
  * Note that only [HexFormat.upperCase] and [HexFormat.NumberHexFormat] affect formatting.
  *
@@ -203,7 +203,7 @@ public inline fun String.hexToUShort(format: HexFormat = HexFormat.Default): USh
 public inline fun UInt.toHexString(format: HexFormat = HexFormat.Default): String = data.toHexString(format)
 
 /**
- * Parses an `UInt` value from this string using the specified [format].
+ * Parses an `UInt` konstue from this string using the specified [format].
  *
  * Note that only [HexFormat.NumberHexFormat] affects parsing,
  * and parsing is performed in case-insensitive manner.
@@ -218,7 +218,7 @@ public inline fun UInt.toHexString(format: HexFormat = HexFormat.Default): Strin
 public inline fun String.hexToUInt(format: HexFormat = HexFormat.Default): UInt = hexToInt(format).toUInt()
 
 ///**
-// * Parses an `UInt` value from this string using the specified [format].
+// * Parses an `UInt` konstue from this string using the specified [format].
 // *
 // * Note that only [HexFormat.NumberHexFormat] affects parsing,
 // * and parsing is performed in case-insensitive manner.
@@ -240,7 +240,7 @@ public inline fun String.hexToUInt(format: HexFormat = HexFormat.Default): UInt 
 // -------------------------- format and parse ULong --------------------------
 
 /**
- * Formats this `ULong` value using the specified [format].
+ * Formats this `ULong` konstue using the specified [format].
  *
  * Note that only [HexFormat.upperCase] and [HexFormat.NumberHexFormat] affect formatting.
  *
@@ -252,7 +252,7 @@ public inline fun String.hexToUInt(format: HexFormat = HexFormat.Default): UInt 
 public inline fun ULong.toHexString(format: HexFormat = HexFormat.Default): String = data.toHexString(format)
 
 /**
- * Parses an `ULong` value from this string using the specified [format].
+ * Parses an `ULong` konstue from this string using the specified [format].
  *
  * Note that only [HexFormat.NumberHexFormat] affects parsing,
  * and parsing is performed in case-insensitive manner.
@@ -267,7 +267,7 @@ public inline fun ULong.toHexString(format: HexFormat = HexFormat.Default): Stri
 public inline fun String.hexToULong(format: HexFormat = HexFormat.Default): ULong = hexToLong(format).toULong()
 
 ///**
-// * Parses an `ULong` value from this string using the specified [format].
+// * Parses an `ULong` konstue from this string using the specified [format].
 // *
 // * Note that only [HexFormat.NumberHexFormat] affects parsing,
 // * and parsing is performed in case-insensitive manner.

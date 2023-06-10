@@ -14,18 +14,18 @@ import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
 internal class NativeDistributionCommonizerLock @JvmOverloads constructor(
-    private val outputDirectory: File,
-    private val logInfo: (message: String) -> Unit = {}
+    private konst outputDirectory: File,
+    private konst logInfo: (message: String) -> Unit = {}
 ) {
     private companion object {
-        val intraProcessLock: ReentrantLock = ReentrantLock()
-        val lockedOutputDirectories = hashSetOf<File>()
+        konst intraProcessLock: ReentrantLock = ReentrantLock()
+        konst lockedOutputDirectories = hashSetOf<File>()
     }
 
     fun <T> withLock(action: (lockFile: File) -> T): T {
         /* Enter intra-process wide lock */
         intraProcessLock.withLock {
-            val lockFile = outputDirectory.resolve(".lock")
+            konst lockFile = outputDirectory.resolve(".lock")
             if (outputDirectory in lockedOutputDirectories) {
                 /* Already acquired this directory and re-entered: We can just execute the action */
                 return action(lockFile)
@@ -35,7 +35,7 @@ internal class NativeDistributionCommonizerLock @JvmOverloads constructor(
             outputDirectory.mkdirs()
             logInfo("Acquire lock: ${lockFile.path} ...")
             FileOutputStream(outputDirectory.resolve(".lock")).use { stream ->
-                val lock: FileLock = stream.channel.lockWithRetries(lockFile)
+                konst lock: FileLock = stream.channel.lockWithRetries(lockFile)
                 assert(lock.isValid)
                 return try {
                     logInfo("Lock acquired: ${lockFile.path}")

@@ -1,10 +1,10 @@
 // FILE: 1.kt
 
-class Inline(val res : Int) {
+class Inline(konst res : Int) {
 
     inline fun foo(s : () -> Int) : Int {
-        val f = "fooStart"
-        val z = s()
+        konst f = "fooStart"
+        konst z = s()
         return z
     }
 
@@ -13,13 +13,13 @@ class Inline(val res : Int) {
     }
 
     inline fun fooRes(s : (l: Int) -> Int) : Int {
-        val z = s(res)
+        konst z = s(res)
         return z
     }
 
     inline fun fooRes2(s : (l: Int, t: Int) -> Int) : Int {
-        val f = "fooRes2Start"
-        val z = s(1, 11)
+        konst f = "fooRes2Start"
+        konst z = s(1, 11)
         return z
     }
 }
@@ -27,39 +27,39 @@ class Inline(val res : Int) {
 // FILE: 2.kt
 
 fun test0Param(): Int {
-    val inlineX = Inline(10)
+    konst inlineX = Inline(10)
     return inlineX.foo({ -> 1})
 }
 
 fun test1Param(): Int {
-    val inlineX = Inline(10)
+    konst inlineX = Inline(10)
     return inlineX.foo11({ z: Int -> z})
 }
 
 fun test1ParamCaptured(): Int {
-    val s = 100
-    val inlineX = Inline(10)
+    konst s = 100
+    konst inlineX = Inline(10)
     return inlineX.foo11({ z: Int -> s})
 }
 
 fun test1ParamMissed() : Int {
-    val inlineX = Inline(10)
+    konst inlineX = Inline(10)
     return inlineX.foo11({ z: Int -> 111})
 }
 
 fun test1ParamFromCallContext() : Int {
-    val inlineX = Inline(1000)
+    konst inlineX = Inline(1000)
     return inlineX.fooRes({ z: Int -> z})
 }
 
 fun test2Params() : Int {
-    val inlineX = Inline(1000)
+    konst inlineX = Inline(1000)
     return inlineX.fooRes2({ y: Int, z: Int -> 2 * y + 3 * z})
 }
 
 fun test2ParamsWithCaptured() : Int {
-    val inlineX = Inline(1000)
-    val s = 9
+    konst inlineX = Inline(1000)
+    konst s = 9
     var t = 1
     return inlineX.fooRes2({ y: Int, z: Int -> 2 * s + t})
 }

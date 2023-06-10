@@ -2,9 +2,9 @@
 // JVM_IR_TEMPLATES
 // 0 invoke\(
 
-class Outer (val x: String) {
-    inner class Inner(val y: String) {
-        val yx = y + x
+class Outer (konst x: String) {
+    inner class Inner(konst y: String) {
+        konst yx = y + x
     }
 }
 

@@ -1,3 +1,3 @@
 abstract class AStarDeclaration {
-    abstract val a: A<*>
+    abstract konst a: A<*>
 }

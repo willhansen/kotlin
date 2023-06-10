@@ -57,35 +57,35 @@ import kotlin.reflect.jvm.internal.calls.toJvmDescriptor
 internal sealed class JvmFunctionSignature {
     abstract fun asString(): String
 
-    class KotlinFunction(val signature: JvmMemberSignature.Method) : JvmFunctionSignature() {
-        private val _signature = signature.asString()
+    class KotlinFunction(konst signature: JvmMemberSignature.Method) : JvmFunctionSignature() {
+        private konst _signature = signature.asString()
 
-        val methodName: String get() = signature.name
-        val methodDesc: String get() = signature.desc
-
-        override fun asString(): String = _signature
-    }
-
-    class KotlinConstructor(val signature: JvmMemberSignature.Method) : JvmFunctionSignature() {
-        private val _signature = signature.asString()
-
-        val constructorDesc: String get() = signature.desc
+        konst methodName: String get() = signature.name
+        konst methodDesc: String get() = signature.desc
 
         override fun asString(): String = _signature
     }
 
-    class JavaMethod(val method: Method) : JvmFunctionSignature() {
+    class KotlinConstructor(konst signature: JvmMemberSignature.Method) : JvmFunctionSignature() {
+        private konst _signature = signature.asString()
+
+        konst constructorDesc: String get() = signature.desc
+
+        override fun asString(): String = _signature
+    }
+
+    class JavaMethod(konst method: Method) : JvmFunctionSignature() {
         override fun asString(): String = method.signature
     }
 
-    class JavaConstructor(val constructor: Constructor<*>) : JvmFunctionSignature() {
+    class JavaConstructor(konst constructor: Constructor<*>) : JvmFunctionSignature() {
         override fun asString(): String =
             constructor.parameterTypes.joinToString(separator = "", prefix = "<init>(", postfix = ")V") { it.desc }
     }
 
-    class FakeJavaAnnotationConstructor(val jClass: Class<*>) : JvmFunctionSignature() {
+    class FakeJavaAnnotationConstructor(konst jClass: Class<*>) : JvmFunctionSignature() {
         // Java annotations do not impose any order of methods inside them, so we consider them lexicographic here for stability
-        val methods = jClass.declaredMethods.sortedBy { it.name }
+        konst methods = jClass.declaredMethods.sortedBy { it.name }
 
         override fun asString(): String =
             methods.joinToString(separator = "", prefix = "<init>(", postfix = ")V") { it.returnType.desc }
@@ -100,31 +100,31 @@ internal sealed class JvmPropertySignature {
     abstract fun asString(): String
 
     class KotlinProperty(
-        val descriptor: PropertyDescriptor,
-        val proto: ProtoBuf.Property,
-        val signature: JvmProtoBuf.JvmPropertySignature,
-        val nameResolver: NameResolver,
-        val typeTable: TypeTable
+        konst descriptor: PropertyDescriptor,
+        konst proto: ProtoBuf.Property,
+        konst signature: JvmProtoBuf.JvmPropertySignature,
+        konst nameResolver: NameResolver,
+        konst typeTable: TypeTable
     ) : JvmPropertySignature() {
-        private val string: String = if (signature.hasGetter()) {
+        private konst string: String = if (signature.hasGetter()) {
             nameResolver.getString(signature.getter.name) + nameResolver.getString(signature.getter.desc)
         } else {
-            val (name, desc) =
+            konst (name, desc) =
                 JvmProtoBufUtil.getJvmFieldSignature(proto, nameResolver, typeTable)
                     ?: throw KotlinReflectionInternalError("No field signature for property: $descriptor")
             JvmAbi.getterName(name) + getManglingSuffix() + "()" + desc
         }
 
         private fun getManglingSuffix(): String {
-            val containingDeclaration = descriptor.containingDeclaration
+            konst containingDeclaration = descriptor.containingDeclaration
             if (descriptor.visibility == DescriptorVisibilities.INTERNAL && containingDeclaration is DeserializedClassDescriptor) {
-                val classProto = containingDeclaration.classProto
-                val moduleName = classProto.getExtensionOrNull(JvmProtoBuf.classModuleName)?.let(nameResolver::getString)
+                konst classProto = containingDeclaration.classProto
+                konst moduleName = classProto.getExtensionOrNull(JvmProtoBuf.classModuleName)?.let(nameResolver::getString)
                     ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME
                 return "$" + NameUtils.sanitizeAsJavaIdentifier(moduleName)
             }
             if (descriptor.visibility == DescriptorVisibilities.PRIVATE && containingDeclaration is PackageFragmentDescriptor) {
-                val packagePartSource = (descriptor as DeserializedPropertyDescriptor).containerSource
+                konst packagePartSource = (descriptor as DeserializedPropertyDescriptor).containerSource
                 if (packagePartSource is JvmPackagePartSource && packagePartSource.facadeClassName != null) {
                     return "$" + packagePartSource.simpleName.asString()
                 }
@@ -136,39 +136,39 @@ internal sealed class JvmPropertySignature {
         override fun asString(): String = string
     }
 
-    class JavaMethodProperty(val getterMethod: Method, val setterMethod: Method?) : JvmPropertySignature() {
+    class JavaMethodProperty(konst getterMethod: Method, konst setterMethod: Method?) : JvmPropertySignature() {
         override fun asString(): String = getterMethod.signature
     }
 
-    class JavaField(val field: Field) : JvmPropertySignature() {
+    class JavaField(konst field: Field) : JvmPropertySignature() {
         override fun asString(): String =
             JvmAbi.getterName(field.name) + "()" + field.type.desc
     }
 
     class MappedKotlinProperty(
-        val getterSignature: JvmFunctionSignature.KotlinFunction,
-        val setterSignature: JvmFunctionSignature.KotlinFunction?
+        konst getterSignature: JvmFunctionSignature.KotlinFunction,
+        konst setterSignature: JvmFunctionSignature.KotlinFunction?
     ) : JvmPropertySignature() {
         override fun asString(): String = getterSignature.asString()
     }
 }
 
-private val Method.signature: String
+private konst Method.signature: String
     get() = name +
             parameterTypes.joinToString(separator = "", prefix = "(", postfix = ")") { it.desc } +
             returnType.desc
 
 internal object RuntimeTypeMapper {
-    private val JAVA_LANG_VOID = ClassId.topLevel(FqName("java.lang.Void"))
+    private konst JAVA_LANG_VOID = ClassId.topLevel(FqName("java.lang.Void"))
 
     fun mapSignature(possiblySubstitutedFunction: FunctionDescriptor): JvmFunctionSignature {
         // Fake overrides don't have a source element, so we need to take a declaration.
         // TODO: support the case when a fake override overrides several declarations with different signatures
-        val function = DescriptorUtils.unwrapFakeOverride(possiblySubstitutedFunction).original
+        konst function = DescriptorUtils.unwrapFakeOverride(possiblySubstitutedFunction).original
 
         when (function) {
             is DeserializedCallableMemberDescriptor -> {
-                val proto = function.proto
+                konst proto = function.proto
                 if (proto is ProtoBuf.Function) {
                     JvmProtoBufUtil.getJvmMethodSignature(proto, function.nameResolver, function.typeTable)?.let { signature ->
                         return JvmFunctionSignature.KotlinFunction(signature)
@@ -180,16 +180,16 @@ internal object RuntimeTypeMapper {
                             possiblySubstitutedFunction.containingDeclaration.isInlineClass() ->
                                 JvmFunctionSignature.KotlinFunction(signature)
                             possiblySubstitutedFunction.containingDeclaration.isMultiFieldValueClass() -> {
-                                val realSignature = if ((possiblySubstitutedFunction as ConstructorDescriptor).isPrimary) {
-                                    require(signature.name == "constructor-impl" && signature.desc.endsWith(")V")) { "Invalid signature: $signature" }
+                                konst realSignature = if ((possiblySubstitutedFunction as ConstructorDescriptor).isPrimary) {
+                                    require(signature.name == "constructor-impl" && signature.desc.endsWith(")V")) { "Inkonstid signature: $signature" }
                                     signature
                                 } else {
-                                    require(signature.name == "constructor-impl") { "Invalid signature: $signature" }
-                                    val constructedClass = possiblySubstitutedFunction.constructedClass.toJvmDescriptor()
+                                    require(signature.name == "constructor-impl") { "Inkonstid signature: $signature" }
+                                    konst constructedClass = possiblySubstitutedFunction.constructedClass.toJvmDescriptor()
                                     if (signature.desc.endsWith(")V")) {
                                         signature.copy(desc = signature.desc.removeSuffix("V") + constructedClass)
                                     } else {
-                                        require(signature.desc.endsWith(constructedClass)) { "Invalid signature: $signature" }
+                                        require(signature.desc.endsWith(constructedClass)) { "Inkonstid signature: $signature" }
                                         signature
                                     }
                                 }
@@ -202,13 +202,13 @@ internal object RuntimeTypeMapper {
                 return mapJvmFunctionSignature(function)
             }
             is JavaMethodDescriptor -> {
-                val method = ((function.source as? JavaSourceElement)?.javaElement as? ReflectJavaMethod)?.member
+                konst method = ((function.source as? JavaSourceElement)?.javaElement as? ReflectJavaMethod)?.member
                     ?: throw KotlinReflectionInternalError("Incorrect resolution sequence for Java method $function")
 
                 return JvmFunctionSignature.JavaMethod(method)
             }
             is JavaClassConstructorDescriptor -> {
-                val element = (function.source as? JavaSourceElement)?.javaElement
+                konst element = (function.source as? JavaSourceElement)?.javaElement
                 return when {
                     element is ReflectJavaConstructor ->
                         JvmFunctionSignature.JavaConstructor(element.member)
@@ -227,17 +227,17 @@ internal object RuntimeTypeMapper {
     }
 
     fun mapPropertySignature(possiblyOverriddenProperty: PropertyDescriptor): JvmPropertySignature {
-        val property = DescriptorUtils.unwrapFakeOverride(possiblyOverriddenProperty).original
+        konst property = DescriptorUtils.unwrapFakeOverride(possiblyOverriddenProperty).original
         when (property) {
             is DeserializedPropertyDescriptor -> {
-                val proto = property.proto
-                val signature = proto.getExtensionOrNull(JvmProtoBuf.propertySignature)
+                konst proto = property.proto
+                konst signature = proto.getExtensionOrNull(JvmProtoBuf.propertySignature)
                 if (signature != null) {
                     return JvmPropertySignature.KotlinProperty(property, proto, signature, property.nameResolver, property.typeTable)
                 }
             }
             is JavaPropertyDescriptor -> {
-                return when (val element = (property.source as? JavaSourceElement)?.javaElement) {
+                return when (konst element = (property.source as? JavaSourceElement)?.javaElement) {
                     is ReflectJavaField -> JvmPropertySignature.JavaField(element.member)
                     is ReflectJavaMethod -> JvmPropertySignature.JavaMethodProperty(
                         element.member,
@@ -257,7 +257,7 @@ internal object RuntimeTypeMapper {
     private fun isKnownBuiltInFunction(descriptor: FunctionDescriptor): Boolean {
         if (DescriptorFactory.isEnumValueOfMethod(descriptor) || DescriptorFactory.isEnumValuesMethod(descriptor)) return true
 
-        if (descriptor.name == CloneableClassScope.CLONE_NAME && descriptor.valueParameters.isEmpty()) return true
+        if (descriptor.name == CloneableClassScope.CLONE_NAME && descriptor.konstueParameters.isEmpty()) return true
 
         return false
     }
@@ -288,7 +288,7 @@ internal object RuntimeTypeMapper {
             return ClassId(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, it.typeName)
         }
 
-        val classId = klass.classId
+        konst classId = klass.classId
         if (!classId.isLocal) {
             JavaToKotlinClassMap.mapJavaToKotlin(classId.asSingleFqName())?.let { return it }
         }
@@ -296,6 +296,6 @@ internal object RuntimeTypeMapper {
         return classId
     }
 
-    private val Class<*>.primitiveType: PrimitiveType?
+    private konst Class<*>.primitiveType: PrimitiveType?
         get() = if (isPrimitive) JvmPrimitiveType.get(simpleName).primitiveType else null
 }

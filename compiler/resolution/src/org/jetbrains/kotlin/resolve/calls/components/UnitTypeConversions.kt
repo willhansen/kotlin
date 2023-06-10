@@ -27,8 +27,8 @@ object UnitTypeConversions : ParameterTypeConversion {
         // for callable references and lambdas it already works
         if (argument !is SimpleKotlinCallArgument) return true
 
-        val receiver = argument.receiver
-        val csBuilder = candidate.getSystem().getBuilder()
+        konst receiver = argument.receiver
+        konst csBuilder = candidate.getSystem().getBuilder()
 
         if (receiver.receiverValue.type.hasUnitOrSubtypeReturnType(csBuilder)) return true
         if (receiver.typesFromSmartCasts.any { it.hasUnitOrSubtypeReturnType(csBuilder) }) return true
@@ -61,7 +61,7 @@ object UnitTypeConversions : ParameterTypeConversion {
         if (argument !is SimpleKotlinCallArgument) return false
 
         var isFunctionTypeOrSubtype = false
-        val hasReturnTypeInSubtypes = argument.receiver.stableType.isFunctionTypeOrSubtype {
+        konst hasReturnTypeInSubtypes = argument.receiver.stableType.isFunctionTypeOrSubtype {
             isFunctionTypeOrSubtype = true
             it.getReturnTypeFromFunctionType().isUnitOrSubtype() // there is no need to check for variable as it was done earlier
         }
@@ -77,7 +77,7 @@ object UnitTypeConversions : ParameterTypeConversion {
         parameter: ParameterDescriptor,
         expectedParameterType: UnwrappedType
     ): UnwrappedType {
-        val nonUnitReturnedParameterType = createFunctionType(
+        konst nonUnitReturnedParameterType = createFunctionType(
             candidate.callComponents.builtIns,
             expectedParameterType.annotations,
             expectedParameterType.getReceiverTypeFromFunctionType(),

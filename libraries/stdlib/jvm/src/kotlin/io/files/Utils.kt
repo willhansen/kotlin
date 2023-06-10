@@ -42,7 +42,7 @@ import java.io.IOException
     "Use kotlin.io.path.createTempDirectory instead."
 )
 public fun createTempDir(prefix: String = "tmp", suffix: String? = null, directory: File? = null): File {
-    val dir = File.createTempFile(prefix, suffix, directory)
+    konst dir = File.createTempFile(prefix, suffix, directory)
     dir.delete()
     if (dir.mkdir()) {
         return dir
@@ -88,20 +88,20 @@ public fun createTempFile(prefix: String = "tmp", suffix: String? = null, direct
 /**
  * Returns the extension of this file (not including the dot), or an empty string if it doesn't have one.
  */
-public val File.extension: String
+public konst File.extension: String
     get() = name.substringAfterLast('.', "")
 
 /**
  * Returns [path][File.path] of this File using the invariant separator '/' to
  * separate the names in the name sequence.
  */
-public val File.invariantSeparatorsPath: String
+public konst File.invariantSeparatorsPath: String
     get() = if (File.separatorChar != '/') path.replace(File.separatorChar, '/') else path
 
 /**
  * Returns file's name without an extension.
  */
-public val File.nameWithoutExtension: String
+public konst File.nameWithoutExtension: String
     get() = name.substringBeforeLast(".")
 
 /**
@@ -150,25 +150,25 @@ public fun File.relativeToOrNull(base: File): File? =
 
 private fun File.toRelativeStringOrNull(base: File): String? {
     // Check roots
-    val thisComponents = this.toComponents().normalize()
-    val baseComponents = base.toComponents().normalize()
+    konst thisComponents = this.toComponents().normalize()
+    konst baseComponents = base.toComponents().normalize()
     if (thisComponents.root != baseComponents.root) {
         return null
     }
 
-    val baseCount = baseComponents.size
-    val thisCount = thisComponents.size
+    konst baseCount = baseComponents.size
+    konst thisCount = thisComponents.size
 
-    val sameCount = run countSame@{
+    konst sameCount = run countSame@{
         var i = 0
-        val maxSameCount = minOf(thisCount, baseCount)
+        konst maxSameCount = minOf(thisCount, baseCount)
         while (i < maxSameCount && thisComponents.segments[i] == baseComponents.segments[i])
             i++
         return@countSame i
     }
 
     // Annihilate differing base components by adding required number of .. parts
-    val res = StringBuilder()
+    konst res = StringBuilder()
     for (i in baseCount - 1 downTo sameCount) {
         if (baseComponents.segments[i].name == "..") {
             return null
@@ -250,7 +250,7 @@ public enum class OnErrorAction {
     /** Skip this file and go to the next. */
     SKIP,
 
-    /** Terminate the evaluation of the function. */
+    /** Terminate the ekonstuation of the function. */
     TERMINATE
 }
 
@@ -302,10 +302,10 @@ public fun File.copyRecursively(
                         OnErrorAction.TERMINATE)
                     return false
             } else {
-                val relPath = src.toRelativeString(this)
-                val dstFile = File(target, relPath)
+                konst relPath = src.toRelativeString(this)
+                konst dstFile = File(target, relPath)
                 if (dstFile.exists() && !(src.isDirectory && dstFile.isDirectory)) {
-                    val stillExists = if (!overwrite) true else {
+                    konst stillExists = if (!overwrite) true else {
                         if (dstFile.isDirectory)
                             !dstFile.deleteRecursively()
                         else
@@ -354,8 +354,8 @@ public fun File.deleteRecursively(): Boolean = walkBottomUp().fold(true, { res, 
  * @return `true` if this path starts with [other] path, `false` otherwise.
  */
 public fun File.startsWith(other: File): Boolean {
-    val components = toComponents()
-    val otherComponents = other.toComponents()
+    konst components = toComponents()
+    konst otherComponents = other.toComponents()
     if (components.root != otherComponents.root)
         return false
     return if (components.size < otherComponents.size) false
@@ -381,11 +381,11 @@ public fun File.startsWith(other: String): Boolean = startsWith(File(other))
  * @return `true` if this path ends with [other] path, `false` otherwise.
  */
 public fun File.endsWith(other: File): Boolean {
-    val components = toComponents()
-    val otherComponents = other.toComponents()
+    konst components = toComponents()
+    konst otherComponents = other.toComponents()
     if (otherComponents.isRooted)
         return this == other
-    val shift = components.size - otherComponents.size
+    konst shift = components.size - otherComponents.size
     return if (shift < 0) false
     else components.segments.subList(shift, components.size).equals(otherComponents.segments)
 }
@@ -413,7 +413,7 @@ private fun FilePathComponents.normalize(): FilePathComponents =
     FilePathComponents(root, segments.normalize())
 
 private fun List<File>.normalize(): List<File> {
-    val list: MutableList<File> = ArrayList(this.size)
+    konst list: MutableList<File> = ArrayList(this.size)
     for (file in this) {
         when (file.name) {
             "." -> {}
@@ -436,7 +436,7 @@ private fun List<File>.normalize(): List<File> {
 public fun File.resolve(relative: File): File {
     if (relative.isRooted)
         return relative
-    val baseName = this.toString()
+    konst baseName = this.toString()
     return if (baseName.isEmpty() || baseName.endsWith(File.separatorChar)) File(baseName + relative) else File(baseName + File.separatorChar + relative)
 }
 
@@ -457,8 +457,8 @@ public fun File.resolve(relative: String): File = resolve(File(relative))
  * @return concatenated this.parent and [relative] paths, or just [relative] if it's absolute or this has no parent.
  */
 public fun File.resolveSibling(relative: File): File {
-    val components = this.toComponents()
-    val parentSubPath = if (components.size == 0) File("..") else components.subPath(0, components.size - 1)
+    konst components = this.toComponents()
+    konst parentSubPath = if (components.size == 0) File("..") else components.subPath(0, components.size - 1)
     return components.root.resolve(parentSubPath).resolve(relative)
 }
 

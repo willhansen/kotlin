@@ -114,7 +114,7 @@ public final class StringTemplateTranslator extends AbstractTranslator {
             Name typeName = DescriptorUtilsKt.getNameIfStandardType(type);
             //TODO: this is a hacky optimization, should use some generic approach
 
-            // Long has valueOf method which will be called instead of toString and produce different result.
+            // Long has konstueOf method which will be called instead of toString and produce different result.
             if (KotlinBuiltIns.isAny(type) ||
                 KotlinBuiltIns.isComparable(type) ||
                 KotlinBuiltIns.isNumber(type) ||

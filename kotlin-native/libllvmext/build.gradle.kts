@@ -26,9 +26,9 @@ plugins {
 }
 
 native {
-    val obj = if (HostManager.hostIsMingw) "obj" else "o"
-    val llvmDir = project.findProperty("llvmDir")
-    val cxxflags = mutableListOf(
+    konst obj = if (HostManager.hostIsMingw) "obj" else "o"
+    konst llvmDir = project.findProperty("llvmDir")
+    konst cxxflags = mutableListOf(
         "--std=c++17",
         "-I${llvmDir}/include",
         "-Isrc/main/include"
@@ -56,7 +56,7 @@ native {
             dir("src/main/cpp")
         }
     }
-    val objSet = sourceSets["main"]!!.transform(".cpp" to ".$obj")
+    konst objSet = sourceSets["main"]!!.transform(".cpp" to ".$obj")
 
     target(lib("llvmext"), objSet) {
         tool(*platformManager.hostPlatform.clangForJni.llvmAr("").toTypedArray())
@@ -65,7 +65,7 @@ native {
 }
 
 
-val printLlvmDir by tasks.registering {
+konst printLlvmDir by tasks.registering {
     doLast {
         println(project.findProperty("llvmDir"))
     }

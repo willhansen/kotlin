@@ -12,25 +12,25 @@ import java.io.File
 
 class LicensesTests {
     companion object {
-        private const val licenseReadmePath = "license/README.md"
+        private const konst licenseReadmePath = "license/README.md"
     }
 
     @Test
     fun testLinksDefinitions() {
-        val linkDefinitionRegExp = Regex(pattern = "\\[(\\w+)]:.+")
-        val linkRegExp = Regex(pattern = "]\\s?\\[(\\w+)]")
+        konst linkDefinitionRegExp = Regex(pattern = "\\[(\\w+)]:.+")
+        konst linkRegExp = Regex(pattern = "]\\s?\\[(\\w+)]")
 
-        val linksUsages = mutableSetOf<String>()
-        val linksDefinitions = mutableSetOf<String>()
+        konst linksUsages = mutableSetOf<String>()
+        konst linksDefinitions = mutableSetOf<String>()
 
-        val readmeFile = File(licenseReadmePath)
+        konst readmeFile = File(licenseReadmePath)
         readmeFile.useLines { lineSequence ->
             lineSequence.forEach { line ->
-                val definitionMatch = linkDefinitionRegExp.matchEntire(line)
+                konst definitionMatch = linkDefinitionRegExp.matchEntire(line)
                 if (definitionMatch != null) {
-                    linksDefinitions.add(definitionMatch.groups[1]?.value ?: error("Should be present because of match"))
+                    linksDefinitions.add(definitionMatch.groups[1]?.konstue ?: error("Should be present because of match"))
                 } else {
-                    linksUsages.addAll(linkRegExp.findAll(line).map { it.groups[1]?.value ?: "Should be present because of match" })
+                    linksUsages.addAll(linkRegExp.findAll(line).map { it.groups[1]?.konstue ?: "Should be present because of match" })
                 }
             }
         }
@@ -44,15 +44,15 @@ class LicensesTests {
 
     @Test
     fun testLicensesAreExistingFiles() {
-        val licenseReferenceRegexp = Regex("\\[([^]]*third_party/[^]]*\\.txt)]")
-        val readmeFile = File(licenseReadmePath)
-        val linkedInReadme = readmeFile.useLines { lineSequence ->
+        konst licenseReferenceRegexp = Regex("\\[([^]]*third_party/[^]]*\\.txt)]")
+        konst readmeFile = File(licenseReadmePath)
+        konst linkedInReadme = readmeFile.useLines { lineSequence ->
             lineSequence.flatMap { line ->
-                licenseReferenceRegexp.findAll(line).map { it.groups[1]?.value ?: error("Should be present because of match") }
+                licenseReferenceRegexp.findAll(line).map { it.groups[1]?.konstue ?: error("Should be present because of match") }
             }.toSet()
         }
 
-        val missingFiles = linkedInReadme.filterNot { path -> File(path).exists() }
+        konst missingFiles = linkedInReadme.filterNot { path -> File(path).exists() }
         assertEmpty("Files for licenses are missing", missingFiles)
     }
 }

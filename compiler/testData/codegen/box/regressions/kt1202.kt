@@ -3,40 +3,40 @@
 // WITH_STDLIB
 // FULL_JDK
 
-package testeval
+package testekonst
 
 import java.util.LinkedList
 import java.util.Deque
 
 interface Expression
-class Num(val value : Int) : Expression
-class Sum(val left : Expression, val right : Expression) : Expression
-class Mult(val left : Expression, val right : Expression) : Expression
+class Num(konst konstue : Int) : Expression
+class Sum(konst left : Expression, konst right : Expression) : Expression
+class Mult(konst left : Expression, konst right : Expression) : Expression
 
-fun eval(e : Expression) : Int {
+fun ekonst(e : Expression) : Int {
     return when (e) {
-        is Num -> e.value
-        is Sum -> eval(e.left) + eval (e.right)
-        is Mult -> eval(e.left) * eval (e.right)
+        is Num -> e.konstue
+        is Sum -> ekonst(e.left) + ekonst (e.right)
+        is Mult -> ekonst(e.left) * ekonst (e.right)
         else -> throw AssertionError("Unknown expression")
     }
 }
 
 interface ParseResult<out T> {
-    val success : Boolean
-    val value : T
+    konst success : Boolean
+    konst konstue : T
 }
 
-class Success<T>(override val value : T) : ParseResult<T> {
-    public override val success : Boolean = true
+class Success<T>(override konst konstue : T) : ParseResult<T> {
+    public override konst success : Boolean = true
 }
 
-class Failure(val message : String) : ParseResult<Nothing> {
-    override val success = false
-    override val value : Nothing = throw UnsupportedOperationException("Don't call value on a Failure")
+class Failure(konst message : String) : ParseResult<Nothing> {
+    override konst success = false
+    override konst konstue : Nothing = throw UnsupportedOperationException("Don't call konstue on a Failure")
 }
 
-open class Token(val text : String) {
+open class Token(konst text : String) {
     override fun toString() = text
 }
 object LPAR : Token("(")
@@ -49,7 +49,7 @@ class Error(text : String) : Token("[Error: $text]")
 
 
 fun tokenize(text : String) : Deque<Token> {
-    val result = LinkedList<Token>()
+    konst result = LinkedList<Token>()
     for (c in text) {
         result.add(when (c) {
             '(' -> LPAR
@@ -65,39 +65,39 @@ fun tokenize(text : String) : Deque<Token> {
 }
 
 fun parseSum(tokens : Deque<Token>) : ParseResult<Expression> {
-    val left = parseMult(tokens)
+    konst left = parseMult(tokens)
     if (!left.success) return left
 
     if (tokens.peek() == PLUS) {
         tokens.pop()
-        val right = parseSum(tokens)
+        konst right = parseSum(tokens)
         if (!right.success) return right
-        return Success(Sum(left.value, right.value))
+        return Success(Sum(left.konstue, right.konstue))
     }
 
     return left
 }
 
 fun parseMult(tokens : Deque<Token>) : ParseResult<Expression> {
-    val left = parseAtomic(tokens)
+    konst left = parseAtomic(tokens)
     if (!left.success) return left
 
     if (tokens.peek() == PLUS) {
         tokens.pop()
-        val right = parseMult(tokens)
+        konst right = parseMult(tokens)
         if (!right.success) return right
-        return Success(Mult(left.value, right.value))
+        return Success(Mult(left.konstue, right.konstue))
     }
 
     return left
 }
 
 fun parseAtomic(tokens : Deque<Token>) : ParseResult<Expression> {
-    val token = tokens.poll()
+    konst token = tokens.poll()
     return when (token) {
         LPAR -> {
-            val result = parseSum(tokens)
-            val rpar = tokens.poll()
+            konst result = parseSum(tokens)
+            konst rpar = tokens.poll()
             if (rpar == RPAR)
                 result
             else
@@ -111,12 +111,12 @@ fun parseAtomic(tokens : Deque<Token>) : ParseResult<Expression> {
 fun parse(text : String) : ParseResult<Expression> = parseSum(tokenize(text))
 
 fun box(): String {
-    if (1 != eval(Num(1))) return "fail 1"
-    if (2 != eval(Sum(Num(1), Num(1)))) return "fail 2"
-    if (3 != eval(Mult(Num(3), Num(1)))) return "fail 3"
-    if (6 != eval(Mult(Num(3), Sum(Num(1), Num(1))))) return "fail 4"
+    if (1 != ekonst(Num(1))) return "fail 1"
+    if (2 != ekonst(Sum(Num(1), Num(1)))) return "fail 2"
+    if (3 != ekonst(Mult(Num(3), Num(1)))) return "fail 3"
+    if (6 != ekonst(Mult(Num(3), Sum(Num(1), Num(1))))) return "fail 4"
 
-    if (1 != eval(parse("1").value)) return "fail 5"
+    if (1 != ekonst(parse("1").konstue)) return "fail 5"
 
     return "OK"
 }

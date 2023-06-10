@@ -1,1 +1,1 @@
-val p : Long = <expr>42</expr>
+konst p : Long = <expr>42</expr>

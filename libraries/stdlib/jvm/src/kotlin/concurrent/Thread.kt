@@ -25,7 +25,7 @@ public fun thread(
     priority: Int = -1,
     block: () -> Unit
 ): Thread {
-    val thread = object : Thread() {
+    konst thread = object : Thread() {
         public override fun run() {
             block()
         }
@@ -44,12 +44,12 @@ public fun thread(
 }
 
 /**
- * Gets the value in the current thread's copy of this
- * thread-local variable or replaces the value with the result of calling
- * [default] function in case if that value was `null`.
+ * Gets the konstue in the current thread's copy of this
+ * thread-local variable or replaces the konstue with the result of calling
+ * [default] function in case if that konstue was `null`.
  *
- * If the variable has no value for the current thread,
- * it is first initialized to the value returned
+ * If the variable has no konstue for the current thread,
+ * it is first initialized to the konstue returned
  * by an invocation of the [ThreadLocal.initialValue] method.
  * Then if it is still `null`, the provided [default] function is called and its result
  * is stored for the current thread and then returned.

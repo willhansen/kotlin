@@ -13,7 +13,7 @@ interface DenotedFace {
 }
 
 @JsExport
-val denotedFaceTrigger = object : DenotedFace { override fun keepMeB() = 8 }
+konst denotedFaceTrigger = object : DenotedFace { override fun keepMeB() = 8 }
 
 // FILE: test.js
 function box() {

@@ -32,7 +32,7 @@ fun BasicBlock.dump(builder: StringBuilder = StringBuilder(), indent: String = "
     for ((index, element) in elements.withIndex()) {
         builder.append(indent)
         builder.append(String.format("%3d ", index + 1))
-        val dump = element.cfgDump()
+        konst dump = element.cfgDump()
         builder.appendLine(dump.lines().first())
     }
     return builder.toString()
@@ -40,31 +40,31 @@ fun BasicBlock.dump(builder: StringBuilder = StringBuilder(), indent: String = "
 
 fun BlockConnector.dump(builder: StringBuilder = StringBuilder(), indent: String = ""): String {
     builder.append(indent)
-    val dump = element.cfgDump()
+    konst dump = element.cfgDump()
     builder.appendLine(dump.lines().first())
     return builder.toString()
 }
 
 fun ControlFlowGraph.dump(): String {
-    val connectorIndex = hashMapOf<BlockConnector, Int>()
+    konst connectorIndex = hashMapOf<BlockConnector, Int>()
     for ((index, connector) in connectors.withIndex()) {
         connectorIndex[connector] = index
     }
-    val blockIndex = hashMapOf<BasicBlock, Int>()
+    konst blockIndex = hashMapOf<BasicBlock, Int>()
     for ((index, block) in blocks.withIndex()) {
         blockIndex[block] = index
     }
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
     for ((index, block) in blocks.withIndex()) {
         builder.appendLine("BB $index")
-        val incoming = block.incoming
+        konst incoming = block.incoming
         if (incoming != null) {
             builder.appendLine(incoming.previousBlocks.joinToString(prefix = "INCOMING <- BB ") { blockIndex[it].toString() })
             incoming.dump(builder, "    ")
         }
         builder.appendLine("CONTENT")
         block.dump(builder, "    ")
-        val outgoing = block.outgoing
+        konst outgoing = block.outgoing
         if (outgoing != null) {
             if (outgoing.nextBlocks.isEmpty()) {
                 builder.appendLine("OUTGOING -> NONE")

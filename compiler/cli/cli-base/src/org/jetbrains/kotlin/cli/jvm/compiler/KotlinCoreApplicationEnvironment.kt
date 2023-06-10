@@ -43,7 +43,7 @@ class KotlinCoreApplicationEnvironment private constructor(
     private var fastJarFileSystemField: FastJarFileSystem? = null
     private var fastJarFileSystemFieldInitialized = false
 
-    val fastJarFileSystem: FastJarFileSystem?
+    konst fastJarFileSystem: FastJarFileSystem?
         get() {
             synchronized(KotlinCoreEnvironment.APPLICATION_LOCK) {
                 if (!fastJarFileSystemFieldInitialized) {
@@ -68,7 +68,7 @@ class KotlinCoreApplicationEnvironment private constructor(
         fun create(
             parentDisposable: Disposable, unitTestMode: Boolean
         ): KotlinCoreApplicationEnvironment {
-            val environment = KotlinCoreApplicationEnvironment(parentDisposable, unitTestMode)
+            konst environment = KotlinCoreApplicationEnvironment(parentDisposable, unitTestMode)
             registerExtensionPoints()
             return environment
         }

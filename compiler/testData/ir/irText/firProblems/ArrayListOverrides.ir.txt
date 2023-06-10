@@ -180,11 +180,11 @@ FILE fqName:<root> fileName:/ArrayListOverrides.kt
         public open fun ensureCapacity (p0: kotlin.Int): kotlin.Unit declared in java.util.ArrayList
       $this: VALUE_PARAMETER name:<this> type:java.util.ArrayList<kotlin.String>
       VALUE_PARAMETER name:p0 index:0 type:kotlin.Int
-    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,konst]
       overridden:
         public open size: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-size> visibility:public modality:OPEN <> ($this:java.util.ArrayList<kotlin.String>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open fun <get-size> (): kotlin.Int declared in java.util.ArrayList
         $this: VALUE_PARAMETER name:<this> type:java.util.ArrayList<kotlin.String>
@@ -205,7 +205,7 @@ FILE fqName:<root> fileName:/ArrayListOverrides.kt
       VALUE_PARAMETER name:x index:0 type:kotlin.String
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun remove (x: kotlin.String): kotlin.Boolean declared in <root>.A2'
-          CONST Boolean type=kotlin.Boolean value=true
+          CONST Boolean type=kotlin.Boolean konstue=true
     FUN FAKE_OVERRIDE name:add visibility:public modality:OPEN <> ($this:java.util.ArrayList<kotlin.String>, element:@[EnhancedNullability] kotlin.String) returnType:kotlin.Boolean [fake_override]
       overridden:
         public open fun add (element: @[EnhancedNullability] E of java.util.ArrayList): kotlin.Boolean declared in java.util.ArrayList
@@ -375,11 +375,11 @@ FILE fqName:<root> fileName:/ArrayListOverrides.kt
         public open fun ensureCapacity (p0: kotlin.Int): kotlin.Unit declared in java.util.ArrayList
       $this: VALUE_PARAMETER name:<this> type:java.util.ArrayList<kotlin.String>
       VALUE_PARAMETER name:p0 index:0 type:kotlin.Int
-    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,konst]
       overridden:
         public open size: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-size> visibility:public modality:OPEN <> ($this:java.util.ArrayList<kotlin.String>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open fun <get-size> (): kotlin.Int declared in java.util.ArrayList
         $this: VALUE_PARAMETER name:<this> type:java.util.ArrayList<kotlin.String>

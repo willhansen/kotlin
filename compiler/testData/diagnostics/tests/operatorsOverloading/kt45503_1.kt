@@ -4,7 +4,7 @@
 // SKIP_TXT
 
 class A<T>
-class B<T>(val x: MutableList<T>) : MutableList<T> by x
+class B<T>(konst x: MutableList<T>) : MutableList<T> by x
 
 class C {
     operator fun <T> get(k: A<T>): T = TODO()

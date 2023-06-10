@@ -5,7 +5,7 @@ enum class E {
 }
 
 fun foo() {
-    val e = E.<!SYNTAX!><!>
+    konst e = E.<!SYNTAX!><!>
 }
 
 

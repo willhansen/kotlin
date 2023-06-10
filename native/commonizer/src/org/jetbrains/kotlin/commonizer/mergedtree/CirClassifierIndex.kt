@@ -23,7 +23,7 @@ fun CirClassifierIndex(tree: CirTreeRoot): CirClassifierIndex {
 }
 
 interface CirClassifierIndex {
-    val allClassifierIds: Set<CirEntityId>
+    konst allClassifierIds: Set<CirEntityId>
     fun findClassifier(id: CirEntityId): CirClassifier?
     fun findTypeAliasesWithUnderlyingType(underlyingClassifier: CirEntityId): List<CirTreeTypeAlias>
 }
@@ -43,9 +43,9 @@ internal fun CirClassifierIndex.getClassifier(id: CirEntityId): CirClassifier =
     findClassifier(id) ?: throw NoSuchElementException("Missing classifier $id")
 
 private class CirClassifierIndexImpl(
-    override val allClassifierIds: Set<CirEntityId>,
-    private val classifiersById: Map<CirEntityId, CirClassifier>,
-    private val typeAliasesByUnderlyingType: Map<CirEntityId, List<CirTreeTypeAlias>>
+    override konst allClassifierIds: Set<CirEntityId>,
+    private konst classifiersById: Map<CirEntityId, CirClassifier>,
+    private konst typeAliasesByUnderlyingType: Map<CirEntityId, List<CirTreeTypeAlias>>
 ) : CirClassifierIndex {
 
     override fun findClassifier(id: CirEntityId): CirClassifier? {
@@ -59,12 +59,12 @@ private class CirClassifierIndexImpl(
 
 private class CirClassifierIndexBuilder {
     companion object {
-        const val initialCapacity = 1000
+        const konst initialCapacity = 1000
     }
 
-    private val typeAliasesByUnderlyingType = THashMap<CirEntityId, MutableList<CirTreeTypeAlias>>(initialCapacity)
-    private val classifiersById = THashMap<CirEntityId, CirClassifier>(initialCapacity)
-    private val classifierIds = THashSet<CirEntityId>(initialCapacity)
+    private konst typeAliasesByUnderlyingType = THashMap<CirEntityId, MutableList<CirTreeTypeAlias>>(initialCapacity)
+    private konst classifiersById = THashMap<CirEntityId, CirClassifier>(initialCapacity)
+    private konst classifierIds = THashSet<CirEntityId>(initialCapacity)
 
     operator fun invoke(tree: CirTreeRoot) {
         tree.modules.forEach { module -> this(module) }

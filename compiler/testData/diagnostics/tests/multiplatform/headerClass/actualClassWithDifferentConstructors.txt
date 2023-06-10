@@ -73,7 +73,7 @@ package
 
 public final actual class Bar1 {
     public constructor Bar1(/*0*/ s: kotlin.String)
-    public final val s: kotlin.String
+    public final konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -81,7 +81,7 @@ public final actual class Bar1 {
 
 public final actual class Bar2 {
     public constructor Bar2(/*0*/ p: kotlin.String = ..., /*1*/ i: kotlin.Int)
-    public final val p: kotlin.String
+    public final konst p: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -90,7 +90,7 @@ public final actual class Bar2 {
 public final actual class Bar4 {
     public constructor Bar4()
     public constructor Bar4(/*0*/ s: kotlin.String)
-    public final val s: kotlin.String
+    public final konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -121,7 +121,7 @@ public final actual class Bar7 {
 
 public final actual class Foo1 {
     public constructor Foo1(/*0*/ s: kotlin.String)
-    public final val s: kotlin.String
+    public final konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -129,7 +129,7 @@ public final actual class Foo1 {
 
 public final actual class Foo2 {
     public constructor Foo2(/*0*/ p: kotlin.String = ..., /*1*/ i: kotlin.Int)
-    public final val p: kotlin.String
+    public final konst p: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

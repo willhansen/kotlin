@@ -14,17 +14,17 @@ public class User {
 
 // FILE: test.kt
 fun box(): String {
-    val userBuilder = User.builder()
+    konst userBuilder = User.builder()
         .status(10)
         .status("hello")
         .statuses(listOf("world", 20))
         .number("1", 1)
         .numbers(mapOf(2 to "2"))
 
-    val user = userBuilder.build()
+    konst user = userBuilder.build()
 
-    val expectedNumbers = mapOf("1" to 1, 2 to "2")
-    val expectedStatuses = listOf(10, "hello", "world", 20)
+    konst expectedNumbers = mapOf("1" to 1, 2 to "2")
+    konst expectedStatuses = listOf(10, "hello", "world", 20)
 
     return if (
         user.numbers == expectedNumbers &&

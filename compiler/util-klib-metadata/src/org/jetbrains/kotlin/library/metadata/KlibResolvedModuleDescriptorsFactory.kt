@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.storage.StorageManager
 
 interface KlibResolvedModuleDescriptorsFactory {
 
-    val moduleDescriptorFactory: KlibMetadataModuleDescriptorFactory
+    konst moduleDescriptorFactory: KlibMetadataModuleDescriptorFactory
 
     /**
      * Given the [resolvedLibraries] creates the list of [ModuleDescriptorImpl]s with properly installed
@@ -42,14 +42,14 @@ class KotlinResolvedModuleDescriptors(
      * in this list have properly installed dependencies, i.e. module has all necessary dependencies
      * on other modules plus a dependency on the [forwardDeclarationsModule].
      */
-    val resolvedDescriptors: List<ModuleDescriptorImpl>,
+    konst resolvedDescriptors: List<ModuleDescriptorImpl>,
 
     /**
      * This is a module which "contains" forward declarations.
      * Note: this module should be unique per compilation and should always be the last dependency of any module.
      */
-    val forwardDeclarationsModule: ModuleDescriptorImpl,
+    konst forwardDeclarationsModule: ModuleDescriptorImpl,
 
-    val friendModules: Set<ModuleDescriptorImpl>,
-    val refinesModules: Set<ModuleDescriptorImpl>
+    konst friendModules: Set<ModuleDescriptorImpl>,
+    konst refinesModules: Set<ModuleDescriptorImpl>
 )

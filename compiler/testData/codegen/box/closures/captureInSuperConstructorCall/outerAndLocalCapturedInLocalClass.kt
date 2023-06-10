@@ -1,10 +1,10 @@
-abstract class Base(val fn: () -> String)
+abstract class Base(konst fn: () -> String)
 
 open class Outer {
-    val outerO = "O"
+    konst outerO = "O"
 
     fun test(): Base {
-        val localK = "K"
+        konst localK = "K"
         class Local : Base({ outerO + localK })
 
         return Local()

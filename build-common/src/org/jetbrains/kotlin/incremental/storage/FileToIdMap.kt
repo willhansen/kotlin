@@ -23,7 +23,7 @@ internal class FileToIdMap(
     file: File,
     icContext: IncrementalCompilationContext,
 ) : BasicStringMap<Int>(file, IntExternalizer, icContext) {
-    override fun dumpValue(value: Int): String = value.toString()
+    override fun dumpValue(konstue: Int): String = konstue.toString()
 
     operator fun get(file: File): Int? = storage[pathConverter.toPath(file)]
 
@@ -36,10 +36,10 @@ internal class FileToIdMap(
     }
 
     fun toMap(): Map<File, Int> {
-        val result = HashMap<File, Int>()
+        konst result = HashMap<File, Int>()
         for (key in storage.keys) {
-            val value = storage[key] ?: continue
-            result[pathConverter.toFile(key)] = value
+            konst konstue = storage[key] ?: continue
+            result[pathConverter.toFile(key)] = konstue
         }
         return result
     }

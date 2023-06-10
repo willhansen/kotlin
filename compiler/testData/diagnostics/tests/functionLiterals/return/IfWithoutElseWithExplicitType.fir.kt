@@ -1,22 +1,22 @@
-val flag = true
+konst flag = true
 
-val a: () -> Int = <!INITIALIZER_TYPE_MISMATCH!>l@ {
+konst a: () -> Int = <!INITIALIZER_TYPE_MISMATCH!>l@ {
     if (flag) return@l 4
 }<!>
 
-val b: () -> Unit = l@ {
+konst b: () -> Unit = l@ {
     if (flag) return@l 4
 }
 
-val c: () -> Any = l@ {
+konst c: () -> Any = l@ {
     if (flag) return@l 4
 }
 
-val d: () -> Int = l@ {
+konst d: () -> Int = l@ {
     if (flag) return@l 4
     5
 }
 
-val e: () -> Int = <!INITIALIZER_TYPE_MISMATCH!>l@ {
+konst e: () -> Int = <!INITIALIZER_TYPE_MISMATCH!>l@ {
     if (flag) 4
 }<!>

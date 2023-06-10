@@ -7,6 +7,6 @@ class F1
 // FILE: A.kts
 package test
 
-val x = 1
+konst x = 1
 
 class F1

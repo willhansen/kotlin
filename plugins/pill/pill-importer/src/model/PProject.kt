@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.pill.OutputDir
 import java.io.File
 
 data class PProject(
-    val name: String,
-    val rootDirectory: File,
-    val modules: List<PModule>,
-    val libraries: List<PLibrary>,
-    val artifacts: Map<OutputDir, List<GradleProjectPath>>
+    konst name: String,
+    konst rootDirectory: File,
+    konst modules: List<PModule>,
+    konst libraries: List<PLibrary>,
+    konst artifacts: Map<OutputDir, List<GradleProjectPath>>
 )

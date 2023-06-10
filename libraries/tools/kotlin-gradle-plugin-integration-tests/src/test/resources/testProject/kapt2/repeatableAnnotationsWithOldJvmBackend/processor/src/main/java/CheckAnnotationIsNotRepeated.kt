@@ -8,8 +8,8 @@ import javax.tools.Diagnostic
 
 class CheckAnnotationIsNotRepeated : AbstractProcessor() {
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment): Boolean {
-        val element = processingEnv.elementUtils.getTypeElement("example.TestClass")
-        val containerAnnotation = element.annotationMirrors.singleOrNull {
+        konst element = processingEnv.elementUtils.getTypeElement("example.TestClass")
+        konst containerAnnotation = element.annotationMirrors.singleOrNull {
             it.annotationType.asElement().simpleName.contentEquals("Container") &&
                     it.annotationType.asElement().enclosingElement.simpleName.contentEquals("Anno")
         }

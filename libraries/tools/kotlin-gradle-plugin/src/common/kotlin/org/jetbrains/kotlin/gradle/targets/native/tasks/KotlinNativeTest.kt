@@ -28,13 +28,13 @@ import javax.inject.Inject
 
 abstract class KotlinNativeTest : KotlinTest() {
     @get:Inject
-    abstract val providerFactory: ProviderFactory
+    abstract konst providerFactory: ProviderFactory
 
     @Suppress("LeakingThis")
-    private val processOptions: ProcessForkOptions = DefaultProcessForkOptions(fileResolver)
+    private konst processOptions: ProcessForkOptions = DefaultProcessForkOptions(fileResolver)
 
     @get:Internal
-    val executableProperty: Property<FileCollection> = project.objects.property(FileCollection::class.java)
+    konst executableProperty: Property<FileCollection> = project.objects.property(FileCollection::class.java)
 
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
     @get:IgnoreEmptyDirectories
@@ -42,10 +42,10 @@ abstract class KotlinNativeTest : KotlinTest() {
     @get:InputFiles // use FileCollection & @InputFiles rather than @InputFile to allow for task dependencies built-into this FileCollection
     @get:SkipWhenEmpty
     @Suppress("UNUSED") // Gradle input
-    internal val executableFiles: FileCollection // Gradle < 5.0 seems to not work properly with @InputFiles Property<FileCollection>
+    internal konst executableFiles: FileCollection // Gradle < 5.0 seems to not work properly with @InputFiles Property<FileCollection>
         get() = executableProperty.get()
 
-    private val executableFile
+    private konst executableFile
         get() = executableProperty.get().singleFile
 
     init {
@@ -59,30 +59,30 @@ abstract class KotlinNativeTest : KotlinTest() {
     @get:Internal
     var executable: File
         get() = executableProperty.get().singleFile
-        set(value) {
-            executableProperty.set(project.files(value))
+        set(konstue) {
+            executableProperty.set(project.files(konstue))
         }
 
     @get:Input
     var workingDir: String
         get() = processOptions.workingDir.canonicalPath
-        set(value) {
-            processOptions.workingDir = File(value)
+        set(konstue) {
+            processOptions.workingDir = File(konstue)
         }
 
     @get:Internal
     var environment: Map<String, Any>
         get() = processOptions.environment
-        set(value) {
-            processOptions.environment = value
+        set(konstue) {
+            processOptions.environment = konstue
         }
 
-    private val trackedEnvironmentVariablesKeys = mutableSetOf<String>()
+    private konst trackedEnvironmentVariablesKeys = mutableSetOf<String>()
 
 
     @Suppress("unused")
     @get:Input
-    val trackedEnvironment
+    konst trackedEnvironment
         get() = environment.filterKeys(trackedEnvironmentVariablesKeys::contains)
 
     private fun <T> Property<T>.set(providerLambda: () -> T) = set(project.provider { providerLambda() })
@@ -112,8 +112,8 @@ abstract class KotlinNativeTest : KotlinTest() {
     }
 
     @JvmOverloads
-    fun environment(name: String, value: Any, tracked: Boolean = true) {
-        processOptions.environment(name, value)
+    fun environment(name: String, konstue: Any, tracked: Boolean = true) {
+        processOptions.environment(name, konstue)
         if (tracked) {
             trackedEnvironmentVariablesKeys.add(name)
         }
@@ -129,14 +129,14 @@ abstract class KotlinNativeTest : KotlinTest() {
     }
 
     @get:Internal
-    protected abstract val testCommand: TestCommand
+    protected abstract konst testCommand: TestCommand
 
     override fun createTestExecutionSpec(): TCServiceMessagesTestExecutionSpec {
-        val extendedForkOptions = DefaultProcessForkOptions(fileResolver)
+        konst extendedForkOptions = DefaultProcessForkOptions(fileResolver)
         processOptions.copyTo(extendedForkOptions)
         extendedForkOptions.executable = testCommand.executable
 
-        val clientSettings = TCServiceMessagesClientSettings(
+        konst clientSettings = TCServiceMessagesClientSettings(
             name,
             testNameSuffix = targetName,
             prependSuiteName = targetName != null,
@@ -147,15 +147,15 @@ abstract class KotlinNativeTest : KotlinTest() {
 
         // The KotlinTest expects that the exit code is zero even if some tests failed.
         // In this case it can check exit code and distinguish test failures from crashes.
-        val checkExitCode = true
+        konst checkExitCode = true
 
-        val cliArgs = testCommand.cliArgs("TEAMCITY", checkExitCode, includePatterns, excludePatterns, args)
+        konst cliArgs = testCommand.cliArgs("TEAMCITY", checkExitCode, includePatterns, excludePatterns, args)
 
         return TCServiceMessagesTestExecutionSpec(extendedForkOptions, cliArgs, checkExitCode, clientSettings)
     }
 
     protected abstract class TestCommand() {
-        abstract val executable: String
+        abstract konst executable: String
         abstract fun cliArgs(
             testLogger: String?,
             checkExitCode: Boolean,
@@ -200,8 +200,8 @@ abstract class KotlinNativeTest : KotlinTest() {
  */
 abstract class KotlinNativeHostTest : KotlinNativeTest() {
     @get:Internal
-    override val testCommand: TestCommand = object : TestCommand() {
-        override val executable: String
+    override konst testCommand: TestCommand = object : TestCommand() {
+        override konst executable: String
             get() = this@KotlinNativeHostTest.executable.absolutePath
 
         override fun cliArgs(
@@ -222,23 +222,23 @@ abstract class KotlinNativeSimulatorTest : KotlinNativeTest() {
     @get:Internal
     var deviceId: String
         get() = device.get()
-        set(value) {
-            device.set(value)
+        set(konstue) {
+            device.set(konstue)
         }
 
     @get:Input
     @get:Option(option = "device", description = "Sets a simulated device used to execute tests.")
-    abstract val device: Property<String>
+    abstract konst device: Property<String>
 
     @Internal
     var debugMode = false
 
     @get:Input
-    abstract val standalone: Property<Boolean> // disabled standalone means that xcode won't handle simulator boot/shutdown automatically
+    abstract konst standalone: Property<Boolean> // disabled standalone means that xcode won't handle simulator boot/shutdown automatically
 
     @get:Internal
-    override val testCommand: TestCommand = object : TestCommand() {
-        override val executable: String
+    override konst testCommand: TestCommand = object : TestCommand() {
+        override konst executable: String
             get() = "/usr/bin/xcrun"
 
         override fun cliArgs(
@@ -261,7 +261,7 @@ abstract class KotlinNativeSimulatorTest : KotlinNativeTest() {
     }
 
     override fun createTestExecutionSpec(): TCServiceMessagesTestExecutionSpec {
-        val origin = super.createTestExecutionSpec()
+        konst origin = super.createTestExecutionSpec()
         return NativeAppleSimulatorTCServiceMessagesTestExecutionSpec(
             origin.forkOptions,
             origin.args,

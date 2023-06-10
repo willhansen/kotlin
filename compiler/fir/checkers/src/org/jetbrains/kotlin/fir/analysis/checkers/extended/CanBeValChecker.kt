@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.util.getChildren
 
 object CanBeValChecker : AbstractFirPropertyInitializationChecker() {
     override fun analyze(data: PropertyInitializationInfoData, reporter: DiagnosticReporter, context: CheckerContext) {
-        val collector = ReassignedVariableCollector(data).apply { data.graph.traverse(this) }
-        val iterator = data.properties.iterator()
+        konst collector = ReassignedVariableCollector(data).apply { data.graph.traverse(this) }
+        konst iterator = data.properties.iterator()
         for (symbol in iterator) {
-            val source = symbol.source ?: continue
-            val canBeVal = if (source.elementType == KtNodeTypes.DESTRUCTURING_DECLARATION) {
-                // var (a, b) -> { val _tmp; var a; var b }
-                val count = source.lighterASTNode.getChildren(source.treeStructure).count {
+            konst source = symbol.source ?: continue
+            konst canBeVal = if (source.elementType == KtNodeTypes.DESTRUCTURING_DECLARATION) {
+                // var (a, b) -> { konst _tmp; var a; var b }
+                konst count = source.lighterASTNode.getChildren(source.treeStructure).count {
                     it.tokenType == KtNodeTypes.DESTRUCTURING_DECLARATION_ENTRY
                 }
                 // Weird way of writing `and { ... }` that will always call `next()` N times.
@@ -43,15 +43,15 @@ object CanBeValChecker : AbstractFirPropertyInitializationChecker() {
         }
     }
 
-    private class ReassignedVariableCollector(val data: PropertyInitializationInfoData) : ControlFlowGraphVisitorVoid() {
-        private val reassigned = mutableSetOf<FirPropertySymbol>()
+    private class ReassignedVariableCollector(konst data: PropertyInitializationInfoData) : ControlFlowGraphVisitorVoid() {
+        private konst reassigned = mutableSetOf<FirPropertySymbol>()
 
         override fun visitNode(node: CFGNode<*>) {}
 
         override fun visitVariableAssignmentNode(node: VariableAssignmentNode) {
-            val symbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: return
+            konst symbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: return
             if (symbol.isVar && symbol.source?.kind !is KtFakeSourceElementKind && symbol in data.properties &&
-                (!symbol.requiresInitialization(isForClassInitialization = data.graph.kind == ControlFlowGraph.Kind.Class) || data.getValue(node).values.any { it[symbol]?.canBeRevisited() == true })
+                (!symbol.requiresInitialization(isForClassInitialization = data.graph.kind == ControlFlowGraph.Kind.Class) || data.getValue(node).konstues.any { it[symbol]?.canBeRevisited() == true })
             ) {
                 reassigned.add(symbol)
             }

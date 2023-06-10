@@ -4,7 +4,7 @@
 // FULL_JDK
 
 fun box(): String {
-    val obj = "" as java.lang.Object
+    konst obj = "" as java.lang.Object
     try {
         obj.wait(1)
         return "Fail: exception should have been thrown"

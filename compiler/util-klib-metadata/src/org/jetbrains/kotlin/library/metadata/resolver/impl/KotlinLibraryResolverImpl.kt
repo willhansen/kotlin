@@ -29,8 +29,8 @@ fun <L: KotlinLibrary> SearchPathResolver<L>.libraryResolver(resolveManifestDepe
         = KotlinLibraryResolverImpl<L>(this, resolveManifestDependenciesLenient)
 
 class KotlinLibraryResolverImpl<L: KotlinLibrary> internal constructor(
-        override val searchPathResolver: SearchPathResolver<L>,
-        val resolveManifestDependenciesLenient: Boolean
+        override konst searchPathResolver: SearchPathResolver<L>,
+        konst resolveManifestDependenciesLenient: Boolean
 ): KotlinLibraryResolver<L>, WithLogger by searchPathResolver {
     override fun resolveWithoutDependencies(
         unresolvedLibraries: List<UnresolvedLibrary>,
@@ -54,11 +54,11 @@ class KotlinLibraryResolverImpl<L: KotlinLibrary> internal constructor(
             noEndorsedLibs: Boolean
     ): List<KotlinLibrary> {
 
-        val userProvidedLibraries = unresolvedLibraries.asSequence()
+        konst userProvidedLibraries = unresolvedLibraries.asSequence()
                 .mapNotNull { searchPathResolver.resolve(it) }
                 .toList()
 
-        val defaultLibraries = searchPathResolver.defaultLinks(noStdLib, noDefaultLibs, noEndorsedLibs)
+        konst defaultLibraries = searchPathResolver.defaultLinks(noStdLib, noDefaultLibs, noEndorsedLibs)
 
         // Make sure the user provided ones appear first, so that
         // they have precedence over defaults when duplicates are eliminated.
@@ -70,8 +70,8 @@ class KotlinLibraryResolverImpl<L: KotlinLibrary> internal constructor(
      */
     private fun List<KotlinLibrary>.leaveDistinct() =
             this.groupBy { it.libraryFile.absolutePath }.let { groupedByAbsolutePath ->
-                warnOnLibraryDuplicates(groupedByAbsolutePath.filter { it.value.size > 1 }.keys)
-                groupedByAbsolutePath.map { it.value.first() }
+                warnOnLibraryDuplicates(groupedByAbsolutePath.filter { it.konstue.size > 1 }.keys)
+                groupedByAbsolutePath.map { it.konstue.first() }
             }
 
     /**
@@ -81,8 +81,8 @@ class KotlinLibraryResolverImpl<L: KotlinLibrary> internal constructor(
      */
     private fun List<KotlinLibrary>.omitDuplicateNames() =
             this.groupBy { it.uniqueName }.let { groupedByUniqName ->
-                warnOnLibraryDuplicateNames(groupedByUniqName.filter { it.value.size > 1 }.keys)
-                groupedByUniqName.map { it.value.first() }
+                warnOnLibraryDuplicateNames(groupedByUniqName.filter { it.konstue.size > 1 }.keys)
+                groupedByUniqName.map { it.konstue.first() }
             }
 
     private fun warnOnLibraryDuplicates(duplicatedPaths: Iterable<String>) {
@@ -96,19 +96,19 @@ class KotlinLibraryResolverImpl<L: KotlinLibrary> internal constructor(
     /**
      * Given the list of root libraries does the following:
      *
-     * 1. Evaluates other libraries that are available via transitive dependencies.
+     * 1. Ekonstuates other libraries that are available via transitive dependencies.
      * 2. Wraps each [KotlinLibrary] into a [KotlinResolvedLibrary] with information about dependencies on other libraries.
      * 3. Creates resulting [KotlinLibraryResolveResult] object.
      */
     override fun List<KotlinLibrary>.resolveDependencies(): KotlinLibraryResolveResult {
 
-        val rootLibraries = this.map { KotlinResolvedLibraryImpl(it) }
+        konst rootLibraries = this.map { KotlinResolvedLibraryImpl(it) }
 
         // As far as the list of root libraries is known from the very beginning, the result can be
         // constructed from the very beginning as well.
-        val result = KotlinLibraryResolverResultImpl(rootLibraries)
+        konst result = KotlinLibraryResolverResultImpl(rootLibraries)
 
-        val cache = mutableMapOf<File, KotlinResolvedLibrary>()
+        konst cache = mutableMapOf<File, KotlinResolvedLibrary>()
         cache.putAll(rootLibraries.map { it.library.libraryFile.canonicalFile to it })
 
         var newDependencies = rootLibraries
@@ -119,7 +119,7 @@ class KotlinLibraryResolverImpl<L: KotlinLibrary> internal constructor(
                         .filterNot { searchPathResolver.isProvidedByDefault(it) }
                         .mapNotNull { searchPathResolver.resolve(it)?.let(::KotlinResolvedLibraryImpl) }
                         .map { resolved ->
-                            val canonicalFile = resolved.library.libraryFile.canonicalFile
+                            konst canonicalFile = resolved.library.libraryFile.canonicalFile
                             if (canonicalFile in cache) {
                                 library.addDependency(cache[canonicalFile]!!)
                                 null
@@ -139,12 +139,12 @@ class KotlinLibraryResolverImpl<L: KotlinLibrary> internal constructor(
 }
 
 class KotlinLibraryResolverResultImpl(
-        private val roots: List<KotlinResolvedLibrary>
+        private konst roots: List<KotlinResolvedLibrary>
 ): KotlinLibraryResolveResult {
 
-    private val all: List<KotlinResolvedLibrary>
+    private konst all: List<KotlinResolvedLibrary>
         by lazy {
-            val result = mutableSetOf<KotlinResolvedLibrary>().also { it.addAll(roots) }
+            konst result = mutableSetOf<KotlinResolvedLibrary>().also { it.addAll(roots) }
 
             var newDependencies = result.toList()
             do {

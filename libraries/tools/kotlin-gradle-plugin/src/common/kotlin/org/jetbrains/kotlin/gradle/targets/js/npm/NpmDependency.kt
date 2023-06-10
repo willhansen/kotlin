@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.NpmProject.Companion.PACKAGE_J
 import java.io.File
 
 data class NpmDependency(
-    val objectFactory: ObjectFactory,
-    val scope: Scope = Scope.NORMAL,
-    private val name: String,
-    private val version: String,
+    konst objectFactory: ObjectFactory,
+    konst scope: Scope = Scope.NORMAL,
+    private konst name: String,
+    private konst version: String,
 ) : FileCollectionDependency,
     SelfResolvingDependencyInternal {
 
@@ -84,7 +84,7 @@ internal fun fileVersion(directory: File): String =
     "$FILE_VERSION_PREFIX${directory.canonicalPath}"
 
 internal fun moduleName(directory: File): String {
-    val packageJson = directory.resolve(PACKAGE_JSON)
+    konst packageJson = directory.resolve(PACKAGE_JSON)
 
     if (packageJson.isFile) {
         return fromSrcPackageJson(packageJson)!!.name
@@ -93,4 +93,4 @@ internal fun moduleName(directory: File): String {
     return directory.name
 }
 
-const val FILE_VERSION_PREFIX = "file:"
+const konst FILE_VERSION_PREFIX = "file:"

@@ -1,12 +1,12 @@
 abstract class Your {
-    abstract val your: String
+    abstract konst your: String
 
     fun foo() = your
 }
 
-val my: String = "O"
+konst my: String = "O"
     get() = field + object: Your() {
-        override val your = "K"
+        override konst your = "K"
             get() = field
     }.foo()
 

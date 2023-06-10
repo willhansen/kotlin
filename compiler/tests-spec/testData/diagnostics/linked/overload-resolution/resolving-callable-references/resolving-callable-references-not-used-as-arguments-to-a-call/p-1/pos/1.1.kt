@@ -20,11 +20,11 @@ fun foo(i: Int): Int = 2         // (1)
 fun foo(d: Double): Double = 2.0 // (2)
 
 fun case1() {
-    val x1: (Int) -> Int = ::<!DEBUG_INFO_CALL("fqName: testsCase1.foo; typeCall: function")!>foo<!>
-    val x2: (Int) -> Int = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int>")!>::foo<!>
+    konst x1: (Int) -> Int = ::<!DEBUG_INFO_CALL("fqName: testsCase1.foo; typeCall: function")!>foo<!>
+    konst x2: (Int) -> Int = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int>")!>::foo<!>
 
-    val y1: (Double) -> Double = ::<!DEBUG_INFO_CALL("fqName: testsCase1.foo; typeCall: function")!>foo<!>
-    val y2: (Double) -> Double = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction1<kotlin.Double, kotlin.Double>")!>::foo<!>
+    konst y1: (Double) -> Double = ::<!DEBUG_INFO_CALL("fqName: testsCase1.foo; typeCall: function")!>foo<!>
+    konst y2: (Double) -> Double = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction1<kotlin.Double, kotlin.Double>")!>::foo<!>
 }
 
 // FILE: TestCase2.kt
@@ -33,12 +33,12 @@ fun case1() {
  */
 package testPackCase2
 
-val foo = 4
-val boo = 4.0
+konst foo = 4
+konst boo = 4.0
 fun case2() {
-    val y2 : () ->Int =::<!DEBUG_INFO_CALL("fqName: testPackCase2.foo; typeCall: variable")!>foo<!>
-    val y1 : () ->Int =<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KProperty0<kotlin.Int>")!>::foo<!>
+    konst y2 : () ->Int =::<!DEBUG_INFO_CALL("fqName: testPackCase2.foo; typeCall: variable")!>foo<!>
+    konst y1 : () ->Int =<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KProperty0<kotlin.Int>")!>::foo<!>
 
-    val x1 : () ->Any =::<!DEBUG_INFO_CALL("fqName: testPackCase2.boo; typeCall: variable")!>boo<!>
-    val x2 : () ->Any =<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KProperty0<kotlin.Double>")!>::boo<!>
+    konst x1 : () ->Any =::<!DEBUG_INFO_CALL("fqName: testPackCase2.boo; typeCall: variable")!>boo<!>
+    konst x2 : () ->Any =<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KProperty0<kotlin.Double>")!>::boo<!>
 }

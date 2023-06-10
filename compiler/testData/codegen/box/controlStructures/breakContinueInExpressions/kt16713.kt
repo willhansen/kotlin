@@ -3,7 +3,7 @@ class MyQueue {
 }
 
 class A {
-    val delayedQueue = MyQueue()
+    konst delayedQueue = MyQueue()
 
     fun next() {
         while (true) {

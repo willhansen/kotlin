@@ -3,9 +3,9 @@
 import interop.*
 
 object Definitions {
-    const val KT_CONSTANT = Interface.CONSTANT
+    const konst KT_CONSTANT = Interface.CONSTANT
 
-    val ktValue = Interface.CONSTANT
+    konst ktValue = Interface.CONSTANT
 }
 
 fun box(): String =

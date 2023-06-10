@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 import java.util.*
 
 enum class NativeBuildType(
-    val optimized: Boolean,
-    val debuggable: Boolean
+    konst optimized: Boolean,
+    konst debuggable: Boolean
 ) : Named {
     RELEASE(true, false),
     DEBUG(false, true);
@@ -29,14 +29,14 @@ enum class NativeBuildType(
     fun embedBitcode(target: KonanTarget) = BitcodeEmbeddingMode.DISABLE
 
     companion object {
-        val DEFAULT_BUILD_TYPES = setOf(DEBUG, RELEASE)
+        konst DEFAULT_BUILD_TYPES = setOf(DEBUG, RELEASE)
     }
 }
 
 enum class NativeOutputKind(
-    val compilerOutputKind: CompilerOutputKind,
-    val taskNameClassifier: String,
-    val description: String = taskNameClassifier
+    konst compilerOutputKind: CompilerOutputKind,
+    konst taskNameClassifier: String,
+    konst description: String = taskNameClassifier
 ) {
     EXECUTABLE(
         CompilerOutputKind.PROGRAM,

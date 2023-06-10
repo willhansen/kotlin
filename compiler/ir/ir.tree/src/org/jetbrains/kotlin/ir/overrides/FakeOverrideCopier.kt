@@ -10,16 +10,16 @@ import org.jetbrains.kotlin.ir.linkage.partial.IrUnimplementedOverridesStrategy
 import org.jetbrains.kotlin.ir.util.*
 
 class FakeOverrideCopier(
-    private val symbolRemapper: SymbolRemapper,
-    private val typeRemapper: TypeRemapper,
-    private val symbolRenamer: SymbolRenamer,
-    private val makeExternal: Boolean,
-    private val parent: IrClass,
-    private val unimplementedOverridesStrategy: IrUnimplementedOverridesStrategy
+    private konst symbolRemapper: SymbolRemapper,
+    private konst typeRemapper: TypeRemapper,
+    private konst symbolRenamer: SymbolRenamer,
+    private konst makeExternal: Boolean,
+    private konst parent: IrClass,
+    private konst unimplementedOverridesStrategy: IrUnimplementedOverridesStrategy
 ) : DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper, symbolRenamer) {
 
     override fun visitSimpleFunction(declaration: IrSimpleFunction): IrSimpleFunction {
-        val customization = unimplementedOverridesStrategy.computeCustomization(declaration, parent)
+        konst customization = unimplementedOverridesStrategy.computeCustomization(declaration, parent)
 
         return declaration.factory.createFunctionWithLateBinding(
             declaration.startOffset, declaration.endOffset,
@@ -42,9 +42,9 @@ class FakeOverrideCopier(
                 // This is the more correct way to produce dispatch receiver for a fake override,
                 // but some lowerings still expect the below behavior as produced by the current psi2ir.
                 /*
-                    val superDispatchReceiver = declaration.dispatchReceiverParameter!!
-                    val dispatchReceiverSymbol = IrValueParameterSymbolImpl(WrappedReceiverParameterDescriptor())
-                    val dispatchReceiverType = destinationClass.defaultType
+                    konst superDispatchReceiver = declaration.dispatchReceiverParameter!!
+                    konst dispatchReceiverSymbol = IrValueParameterSymbolImpl(WrappedReceiverParameterDescriptor())
+                    konst dispatchReceiverType = destinationClass.defaultType
                     dispatchReceiverParameter = IrValueParameterImpl(
                         superDispatchReceiver.startOffset,
                         superDispatchReceiver.endOffset,
@@ -62,13 +62,13 @@ class FakeOverrideCopier(
                 dispatchReceiverParameter = declaration.dispatchReceiverParameter?.transform()
                 extensionReceiverParameter = declaration.extensionReceiverParameter?.transform()
                 returnType = typeRemapper.remapType(declaration.returnType)
-                valueParameters = declaration.valueParameters.transform()
+                konstueParameters = declaration.konstueParameters.transform()
             }
         }
     }
 
     override fun visitProperty(declaration: IrProperty): IrProperty {
-        val customization = unimplementedOverridesStrategy.computeCustomization(declaration, parent)
+        konst customization = unimplementedOverridesStrategy.computeCustomization(declaration, parent)
 
         return declaration.factory.createPropertyWithLateBinding(
             declaration.startOffset, declaration.endOffset,
@@ -104,6 +104,6 @@ class FakeOverrideCopier(
             declaration.isAssignable
         ).apply {
             transformAnnotations(declaration)
-            // Don't set the default value for fake overrides.
+            // Don't set the default konstue for fake overrides.
         }
 }

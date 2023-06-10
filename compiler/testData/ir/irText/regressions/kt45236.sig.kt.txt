@@ -9,25 +9,25 @@ sealed class NetRequestStatus<out T : Any> {
     // CHECK:
     //   Mangled name: NetRequestStatus.Error{}error
     //   Public signature: /NetRequestStatus.Error.error|6099401258667737098[0]
-    val error: Throwable
+    konst error: Throwable
       // CHECK JVM_IR:
       //   Mangled name: NetRequestStatus.Error#<get-error>(){}kotlin.Throwable
       //   Public signature: /NetRequestStatus.Error.error.<get-error>|-5591110135270758069[0]
       get
 
     // CHECK:
-    //   Mangled name: NetRequestStatus.Error{}value
-    //   Public signature: /NetRequestStatus.Error.value|1987073854177347439[0]
-    override val value: T?
+    //   Mangled name: NetRequestStatus.Error{}konstue
+    //   Public signature: /NetRequestStatus.Error.konstue|1987073854177347439[0]
+    override konst konstue: T?
       // CHECK JVM_IR:
-      //   Mangled name: NetRequestStatus.Error#<get-value>(){}1:0?
-      //   Public signature: /NetRequestStatus.Error.value.<get-value>|6345929521467247406[0]
+      //   Mangled name: NetRequestStatus.Error#<get-konstue>(){}1:0?
+      //   Public signature: /NetRequestStatus.Error.konstue.<get-konstue>|6345929521467247406[0]
       override get
 
     // CHECK:
     //   Mangled name: NetRequestStatus.Error#<init>(kotlin.Throwable;1:0?){}
     //   Public signature: /NetRequestStatus.Error.<init>|-1373568199086185373[0]
-    constructor(error: Throwable, value: T?) /* primary */
+    constructor(error: Throwable, konstue: T?) /* primary */
     // CHECK JVM_IR:
     //   Mangled name: NetRequestStatus.Error#component1(){}kotlin.Throwable
     //   Public signature: /NetRequestStatus.Error.component1|2250146239720393392[0]
@@ -41,7 +41,7 @@ sealed class NetRequestStatus<out T : Any> {
     // CHECK JVM_IR:
     //   Mangled name: NetRequestStatus.Error#copy(kotlin.Throwable;1:0?){}NetRequestStatus.Error<1:0>
     //   Public signature: /NetRequestStatus.Error.copy|1925006413771870834[0]
-    fun copy(error: Throwable, value: T?): Error<T>
+    fun copy(error: Throwable, konstue: T?): Error<T>
 
     // CHECK JVM_IR:
     //   Mangled name: NetRequestStatus.Error#equals(kotlin.Any?){}kotlin.Boolean
@@ -66,12 +66,12 @@ sealed class NetRequestStatus<out T : Any> {
   protected constructor() /* primary */
 
   // CHECK:
-  //   Mangled name: NetRequestStatus{}value
-  //   Public signature: /NetRequestStatus.value|1987073854177347439[0]
-  abstract val value: T?
+  //   Mangled name: NetRequestStatus{}konstue
+  //   Public signature: /NetRequestStatus.konstue|1987073854177347439[0]
+  abstract konst konstue: T?
     // CHECK JVM_IR:
-    //   Mangled name: NetRequestStatus#<get-value>(){}1:0?
-    //   Public signature: /NetRequestStatus.value.<get-value>|6345929521467247406[0]
+    //   Mangled name: NetRequestStatus#<get-konstue>(){}1:0?
+    //   Public signature: /NetRequestStatus.konstue.<get-konstue>|6345929521467247406[0]
     abstract get
 
 }

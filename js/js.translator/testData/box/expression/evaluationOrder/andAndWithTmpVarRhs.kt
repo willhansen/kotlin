@@ -5,6 +5,6 @@ fun foo(arg: Any): Boolean {
 }
 
 fun box(): String {
-    val values = listOf(null, "x")
-    return if (values[0] == null && foo(values[1]!!)) "OK" else "fail"
+    konst konstues = listOf(null, "x")
+    return if (konstues[0] == null && foo(konstues[1]!!)) "OK" else "fail"
 }

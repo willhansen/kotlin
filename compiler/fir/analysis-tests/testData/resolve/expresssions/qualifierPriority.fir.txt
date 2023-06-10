@@ -23,15 +23,15 @@ FILE: qualifierPriority.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val B: R|kotlin/String| = String()
+            public final konst B: R|kotlin/String| = String()
                 public get(): R|kotlin/String|
 
         }
 
     }
-    public final val ab: R|A.B| = Q|A.B|
+    public final konst ab: R|A.B| = Q|A.B|
         public get(): R|A.B|
-    public final val abc: R|A.B.C| = Q|A.B.C|
+    public final konst abc: R|A.B.C| = Q|A.B.C|
         public get(): R|A.B.C|
     public final object D : R|kotlin/Any| {
         private constructor(): R|D| {
@@ -53,13 +53,13 @@ FILE: qualifierPriority.kt
         }
 
     }
-    public final val R|D|.E: R|kotlin/String|
+    public final konst R|D|.E: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ String()
         }
-    public final val def: R|D.E.F| = Q|D.E.F|
+    public final konst def: R|D.E.F| = Q|D.E.F|
         public get(): R|D.E.F|
-    public final val de: R|kotlin/String| = Q|D|.R|/E|
+    public final konst de: R|kotlin/String| = Q|D|.R|/E|
         public get(): R|kotlin/String|
     public final enum class G : R|kotlin/Enum<G>| {
         private constructor(): R|G| {
@@ -68,7 +68,7 @@ FILE: qualifierPriority.kt
 
         public final static enum entry H: R|G|
         public final fun foo(): R|kotlin/Unit| {
-            R|/G.values|()
+            R|/G.konstues|()
         }
 
         public final companion object Companion : R|kotlin/Any| {
@@ -76,26 +76,26 @@ FILE: qualifierPriority.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val H: R|kotlin/String| = String()
+            public final konst H: R|kotlin/String| = String()
                 public get(): R|kotlin/String|
 
-            public final fun values(): R|kotlin/Int| {
-                ^values Int(42)
+            public final fun konstues(): R|kotlin/Int| {
+                ^konstues Int(42)
             }
 
         }
 
-        public final static fun values(): R|kotlin/Array<G>| {
+        public final static fun konstues(): R|kotlin/Array<G>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|G| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|G| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<G>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<G>|
             public get(): R|kotlin/enums/EnumEntries<G>|
 
     }
-    public final val gh: R|G| = Q|G|.R|/G.H|
+    public final konst gh: R|G| = Q|G|.R|/G.H|
         public get(): R|G|
-    public final val gv: R|kotlin/Array<G>| = Q|G|.R|/G.values|()
+    public final konst gv: R|kotlin/Array<G>| = Q|G|.R|/G.konstues|()
         public get(): R|kotlin/Array<G>|

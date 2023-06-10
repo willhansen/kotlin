@@ -3,24 +3,24 @@
 
 fun test(list: A) {
     if (true) {
-        val (c) = list
+        konst (c) = list
     }
     else {}
 
     if (true) {
         Unit
-        val (c) = list
+        konst (c) = list
     }
     else {}
 
     when (1) {
         1 -> {
-            val (c) = list
+            konst (c) = list
         }
     }
 
     fn { it ->
-        val (a) = it
+        konst (a) = it
     }
 }
 

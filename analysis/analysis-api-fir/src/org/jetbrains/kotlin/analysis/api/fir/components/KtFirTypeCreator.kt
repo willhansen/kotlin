@@ -25,26 +25,26 @@ import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.typeContext
 
 internal class KtFirTypeCreator(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken
 ) : KtTypeCreator(), KtFirAnalysisSessionComponent {
 
     override fun buildClassType(builder: KtClassTypeBuilder): KtClassType {
-        val lookupTag = when (builder) {
+        konst lookupTag = when (builder) {
             is KtClassTypeBuilder.ByClassId -> {
-                val classSymbol = rootModuleSession.symbolProvider.getClassLikeSymbolByClassId(builder.classId)
+                konst classSymbol = rootModuleSession.symbolProvider.getClassLikeSymbolByClassId(builder.classId)
                     ?: return ConeErrorType(ConeUnresolvedSymbolError(builder.classId)).asKtType() as KtClassType
                 classSymbol.toLookupTag()
             }
             is KtClassTypeBuilder.BySymbol -> {
-                val symbol = builder.symbol
+                konst symbol = builder.symbol
                 check(symbol is KtFirSymbol<*>)
                 (symbol.firSymbol as FirClassLikeSymbol<*>).toLookupTag()
             }
         }
 
-        val typeContext = rootModuleSession.typeContext
-        val coneType = typeContext.createSimpleType(
+        konst typeContext = rootModuleSession.typeContext
+        konst coneType = typeContext.createSimpleType(
             lookupTag,
             builder.arguments.map { it.coneTypeProjection },
             builder.nullability.isNullable
@@ -54,9 +54,9 @@ internal class KtFirTypeCreator(
     }
 
     override fun buildTypeParameterType(builder: KtTypeParameterTypeBuilder): KtTypeParameterType  {
-        val coneType = when (builder) {
+        konst coneType = when (builder) {
             is KtTypeParameterTypeBuilder.BySymbol -> {
-                val symbol = builder.symbol
+                konst symbol = builder.symbol
                 (symbol as KtFirTypeParameterSymbol).firSymbol.toConeType()
             }
         }

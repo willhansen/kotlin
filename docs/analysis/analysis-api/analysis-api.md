@@ -63,7 +63,7 @@ analyses with `KtReadActionConfinementLifetimeToken`
     * Analysis should be called from a **read action**
     * Analysis should not be called outside **KtAnalysisSession Scope** (i.e, outside `analyse(context) { ... }` lambda
 * Validity contracts:
-    * Lifecycle Owner is valid only inside Analysis Context it was created in.
+    * Lifecycle Owner is konstid only inside Analysis Context it was created in.
 
 ## KtSymbol
 
@@ -77,7 +77,7 @@ Consider you want to take a symbol you got in one **KtAnalysisSession Scope** an
 can not be leaked outside **KtAnalysisSession Scope**. But there is such thing as `
 KtSymbolPointer`. For every `KtSymbol`corresponding `KtSymbolPointer` can be created in one analysis session and symbol can be restored by
 using it in another. If between creating a symbol and restoring it, corresponding declaration changed then the symbol will not be restored
-and `KtSymbolPointer.restore` call will return the null value.
+and `KtSymbolPointer.restore` call will return the null konstue.
 
 ## KtType
 

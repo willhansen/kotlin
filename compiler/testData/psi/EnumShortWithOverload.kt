@@ -1,4 +1,4 @@
-enum class Color(val rgb : Int) {
+enum class Color(konst rgb : Int) {
     RED(0xFF000) {
         override fun foo(): Int { return 1 }
     },

@@ -2,8 +2,8 @@
 // JAVAC_EXPECTED_FILE
 // FILE: KotlinFile.kt
 fun foo(javaClass: JavaClass<Int>) {
-    val a: String = javaClass.doSomething1("", 1) { p: String -> p }
-    val b: String = javaClass.doSomething2("", 1, true) { p: Int -> p }
+    konst a: String = javaClass.doSomething1("", 1) { p: String -> p }
+    konst b: String = javaClass.doSomething2("", 1, true) { p: Int -> p }
 }
 
 // FILE: JavaClass.java

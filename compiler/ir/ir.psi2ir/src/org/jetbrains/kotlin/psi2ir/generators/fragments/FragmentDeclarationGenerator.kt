@@ -26,14 +26,14 @@ import org.jetbrains.kotlin.resolve.BindingContextUtils
 import org.jetbrains.kotlin.types.KotlinType
 
 open class FragmentDeclarationGenerator(
-    override val context: GeneratorContext,
-    private val fragmentInfo: EvaluatorFragmentInfo
+    override konst context: GeneratorContext,
+    private konst fragmentInfo: EkonstuatorFragmentInfo
 ) : Generator {
 
     fun generateClassForCodeFragment(ktFile: KtBlockCodeFragment): IrClass {
-        val classDescriptor = fragmentInfo.classDescriptor
-        val startOffset = UNDEFINED_OFFSET
-        val endOffset = UNDEFINED_OFFSET
+        konst classDescriptor = fragmentInfo.classDescriptor
+        konst startOffset = UNDEFINED_OFFSET
+        konst endOffset = UNDEFINED_OFFSET
 
         return context.symbolTable.declareClass(classDescriptor) {
             context.irFactory.createIrClassFromDescriptor(
@@ -62,7 +62,7 @@ open class FragmentDeclarationGenerator(
     }
 
     private fun generatePrimaryConstructor(irClass: IrClass) {
-        val constructor = context.irFactory.createConstructor(
+        konst constructor = context.irFactory.createConstructor(
             startOffset = UNDEFINED_OFFSET,
             endOffset = UNDEFINED_OFFSET,
             origin = IrDeclarationOrigin.DEFINED,
@@ -84,7 +84,7 @@ open class FragmentDeclarationGenerator(
     }
 
     private fun delegatingCallToAnyConstructor(): IrStatement {
-        val anyConstructor = context.irBuiltIns.anyClass.descriptor.constructors.single()
+        konst anyConstructor = context.irBuiltIns.anyClass.descriptor.constructors.single()
         return IrDelegatingConstructorCallImpl.fromSymbolDescriptor(
             UNDEFINED_OFFSET, UNDEFINED_OFFSET,
             context.irBuiltIns.unitType,
@@ -105,24 +105,24 @@ open class FragmentDeclarationGenerator(
     }
 
     private fun generateFragmentValueParameterDeclarations(irFunction: IrSimpleFunction) {
-        val functionDescriptor = irFunction.descriptor
-        functionDescriptor.valueParameters.forEachIndexed { index, valueParameterDescriptor ->
-            val parameterInfo = fragmentInfo.parameters[index]
-            irFunction.valueParameters += declareParameter(valueParameterDescriptor, parameterInfo).apply {
+        konst functionDescriptor = irFunction.descriptor
+        functionDescriptor.konstueParameters.forEachIndexed { index, konstueParameterDescriptor ->
+            konst parameterInfo = fragmentInfo.parameters[index]
+            irFunction.konstueParameters += declareParameter(konstueParameterDescriptor, parameterInfo).apply {
                 context.fragmentContext!!.capturedDescriptorToFragmentParameterMap[parameterInfo.descriptor] = this.symbol
             }
         }
     }
 
-    private fun declareParameter(descriptor: ValueParameterDescriptor, parameterInfo: EvaluatorFragmentParameterInfo): IrValueParameter {
+    private fun declareParameter(descriptor: ValueParameterDescriptor, parameterInfo: EkonstuatorFragmentParameterInfo): IrValueParameter {
         // Parameter must be _assignable_ if written by the fragment:
         // These parameters model the captured variables of the fragment. The
-        // captured _values_ are extracted from the call stack of the JVM being
-        // debugged, and supplied to the fragment evaluator via these
+        // captured _konstues_ are extracted from the call stack of the JVM being
+        // debugged, and supplied to the fragment ekonstuator via these
         // parameters.
         //
         // If the parameter is modified by the fragment, the parameter is boxed
-        // in a `Ref`, and the value extracted from that box upon return from
+        // in a `Ref`, and the konstue extracted from that box upon return from
         // the fragment, then written back into the stack frame of the JVM
         // being debugged.
         //
@@ -144,7 +144,7 @@ open class FragmentDeclarationGenerator(
         )
     }
 
-    private fun shouldPromoteToSharedVariable(parameterInfo: EvaluatorFragmentParameterInfo) =
+    private fun shouldPromoteToSharedVariable(parameterInfo: EkonstuatorFragmentParameterInfo) =
         parameterInfo.isLValue ||
                 BindingContextUtils.isBoxedLocalCapturedInClosure(
                     context.bindingContext,

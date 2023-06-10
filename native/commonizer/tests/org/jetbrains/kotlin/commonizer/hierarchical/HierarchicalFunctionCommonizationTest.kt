@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class HierarchicalFunctionCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test simple function 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a,b)", "(c,d)", "(a, b, c, d)")
             simpleSingleSourceTarget("a", "fun x(): Int = 42")
             simpleSingleSourceTarget("b", "fun x(): Int = 42")
@@ -25,7 +25,7 @@ class HierarchicalFunctionCommonizationTest : AbstractInlineSourcesCommonization
     }
 
     fun `test simple function 2`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(a, b, c)")
             simpleSingleSourceTarget("a", "fun x(): Int = 42")
             simpleSingleSourceTarget("b", "fun x(): Int = 42")
@@ -37,7 +37,7 @@ class HierarchicalFunctionCommonizationTest : AbstractInlineSourcesCommonization
     }
 
     fun `test function with returnType`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             simpleSingleSourceTarget(
                 "a", """
@@ -89,7 +89,7 @@ class HierarchicalFunctionCommonizationTest : AbstractInlineSourcesCommonization
     }
 
     fun `test function with returnType from dependency 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             registerDependency("a", "b", "c", "d", "(a, b)", "(c, d)", "(a, b, c, d)") { source("interface ABCD") }
             simpleSingleSourceTarget("a", "fun x(): ABCD = null!!")
@@ -104,7 +104,7 @@ class HierarchicalFunctionCommonizationTest : AbstractInlineSourcesCommonization
     }
 
     fun `test function with returnType from dependency 2`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             registerDependency("a", "b", "c", "d") { source("interface ABCD") }
             registerDependency("(a, b)") { source("interface ABCD") }
@@ -123,7 +123,7 @@ class HierarchicalFunctionCommonizationTest : AbstractInlineSourcesCommonization
     }
 
     fun `test function with returnType from dependency 3`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(a, b, c)")
             registerDependency("(a, b, c)") { source("interface ABCD") }
             registerDependency("a", "b", "c", "(a, b)") { source("interface ABCD") }

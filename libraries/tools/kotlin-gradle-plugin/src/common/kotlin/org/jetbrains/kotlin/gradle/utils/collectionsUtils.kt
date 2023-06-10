@@ -18,12 +18,12 @@ fun <T : Any> T?.toSetOrEmpty(): Set<T> =
  * { 0: ['x'], 1: ['a', 'b', 'c'], 2: ['c'], 42: ['y'] }
  */
 infix fun <K, V> Map<K, Set<V>>.mergeWith(that: Map<K, Set<V>>): Map<K, Set<V>> {
-    val result = mutableMapOf<K, Set<V>>()
+    konst result = mutableMapOf<K, Set<V>>()
     for ((k, setOfV) in this) {
         result[k] = setOfV + that[k].orEmpty()
     }
 
-    val uniqueEntriesFromRight = that - this.keys
+    konst uniqueEntriesFromRight = that - this.keys
     result.putAll(uniqueEntriesFromRight)
 
     return result

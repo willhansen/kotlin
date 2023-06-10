@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.MavenPublicationCoordinatesProvide
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.ComputedCapability
 
 class GradleKpmDefaultSingleMavenPublishedModuleHolder(
-    private var module: GradleKpmModule, override val defaultPublishedModuleSuffix: String?
+    private var module: GradleKpmModule, override konst defaultPublishedModuleSuffix: String?
 ) : GradleKpmSingleMavenPublishedModuleHolder {
-    private val project get() = module.project
+    private konst project get() = module.project
 
     private var assignedMavenPublication: MavenPublication? = null
 
-    private val publicationAssignedHandlers = mutableListOf<(MavenPublication) -> Unit>()
+    private konst publicationAssignedHandlers = mutableListOf<(MavenPublication) -> Unit>()
 
     override fun assignMavenPublication(publication: MavenPublication) {
         if (assignedMavenPublication != null) error("already assigned publication $publication")
@@ -28,7 +28,7 @@ class GradleKpmDefaultSingleMavenPublishedModuleHolder(
         assignedMavenPublication?.let(handlePublication) ?: publicationAssignedHandlers.add(handlePublication)
     }
 
-    override val publishedMavenModuleCoordinates: PublishedModuleCoordinatesProvider = MavenPublicationCoordinatesProvider(
+    override konst publishedMavenModuleCoordinates: PublishedModuleCoordinatesProvider = MavenPublicationCoordinatesProvider(
         project,
         { assignedMavenPublication },
         defaultPublishedModuleSuffix,

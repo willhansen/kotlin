@@ -51,23 +51,23 @@ external inline fun <reified R : Number> Number.narrow(): R
 
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.SOURCE)
-internal annotation class JvmName(val name: String)
+internal annotation class JvmName(konst name: String)
 
 @ExperimentalForeignApi
 fun cValuesOf(vararg elements: UByte): CValues<UByteVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 fun cValuesOf(vararg elements: UShort): CValues<UShortVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 fun cValuesOf(vararg elements: UInt): CValues<UIntVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 fun cValuesOf(vararg elements: ULong): CValues<ULongVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 fun UByteArray.toCValues() = cValuesOf(*this)

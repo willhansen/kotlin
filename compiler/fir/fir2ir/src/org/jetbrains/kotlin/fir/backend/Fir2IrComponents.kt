@@ -17,30 +17,30 @@ import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.util.SymbolTable
 
 interface Fir2IrComponents {
-    val session: FirSession
-    val scopeSession: ScopeSession
+    konst session: FirSession
+    konst scopeSession: ScopeSession
 
-    val converter: Fir2IrConverter
+    konst converter: Fir2IrConverter
 
-    val symbolTable: SymbolTable
-    val irBuiltIns: IrBuiltInsOverFir
-    val builtIns: Fir2IrBuiltIns
-    val irFactory: IrFactory
-    val irProviders: List<IrProvider>
-    val lock: IrLock
+    konst symbolTable: SymbolTable
+    konst irBuiltIns: IrBuiltInsOverFir
+    konst builtIns: Fir2IrBuiltIns
+    konst irFactory: IrFactory
+    konst irProviders: List<IrProvider>
+    konst lock: IrLock
 
-    val classifierStorage: Fir2IrClassifierStorage
-    val declarationStorage: Fir2IrDeclarationStorage
+    konst classifierStorage: Fir2IrClassifierStorage
+    konst declarationStorage: Fir2IrDeclarationStorage
 
-    val typeConverter: Fir2IrTypeConverter
-    val signatureComposer: Fir2IrSignatureComposer
-    val visibilityConverter: Fir2IrVisibilityConverter
+    konst typeConverter: Fir2IrTypeConverter
+    konst signatureComposer: Fir2IrSignatureComposer
+    konst visibilityConverter: Fir2IrVisibilityConverter
 
-    val annotationGenerator: AnnotationGenerator
-    val callGenerator: CallAndReferenceGenerator
-    val fakeOverrideGenerator: FakeOverrideGenerator
-    val delegatedMemberGenerator: DelegatedMemberGenerator
+    konst annotationGenerator: AnnotationGenerator
+    konst callGenerator: CallAndReferenceGenerator
+    konst fakeOverrideGenerator: FakeOverrideGenerator
+    konst delegatedMemberGenerator: DelegatedMemberGenerator
 
-    val extensions: Fir2IrExtensions
-    val configuration: Fir2IrConfiguration
+    konst extensions: Fir2IrExtensions
+    konst configuration: Fir2IrConfiguration
 }

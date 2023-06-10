@@ -14,7 +14,7 @@ class KpmCoreCasesRenderingTests : KpmCoreCasesTestRunner {
     override fun testSimpleProjectToProject(case: KpmTestCase) {
         case.expectRenderedDsl(
             """
-                val SimpleProjectToProject = describeCase("SimpleProjectToProject") {
+                konst SimpleProjectToProject = describeCase("SimpleProjectToProject") {
                     project("a") {
                         module("main") {
                             jvm()
@@ -39,7 +39,7 @@ class KpmCoreCasesRenderingTests : KpmCoreCasesTestRunner {
     override fun testSimpleTwoLevel(case: KpmTestCase) {
         case.expectRenderedDsl(
             """
-            val SimpleTwoLevel = describeCase("SimpleTwoLevel") {
+            konst SimpleTwoLevel = describeCase("SimpleTwoLevel") {
                 project("p") {
                     module("main") {
                         jvm()

@@ -8,7 +8,7 @@ public interface A {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final val field: kotlin.Int = 1
+    public const final konst field: kotlin.Int = 1
 }
 
 public interface B {
@@ -17,7 +17,7 @@ public interface B {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final val field: kotlin.String
+    public const final konst field: kotlin.String
 }
 
 public interface C : A {
@@ -26,7 +26,7 @@ public interface C : A {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final override /*1*/ /*fake_override*/ val field: kotlin.Int = 1
+    public const final override /*1*/ /*fake_override*/ konst field: kotlin.Int = 1
 }
 
 public interface D : B {
@@ -35,7 +35,7 @@ public interface D : B {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final override /*1*/ /*fake_override*/ val field: kotlin.String
+    public const final override /*1*/ /*fake_override*/ konst field: kotlin.String
 }
 
 public open class E : C, D {
@@ -45,8 +45,8 @@ public open class E : C, D {
     public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final override /*1*/ /*fake_override*/ val field: kotlin.Int = 1
-    public const final override /*1*/ /*fake_override*/ val field: kotlin.String
+    public const final override /*1*/ /*fake_override*/ konst field: kotlin.Int = 1
+    public const final override /*1*/ /*fake_override*/ konst field: kotlin.String
 }
 
 public open class EE : E {
@@ -56,8 +56,8 @@ public open class EE : E {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final override /*1*/ /*fake_override*/ val field: kotlin.Int = 1
-    public const final override /*1*/ /*fake_override*/ val field: kotlin.String
+    public const final override /*1*/ /*fake_override*/ konst field: kotlin.Int = 1
+    public const final override /*1*/ /*fake_override*/ konst field: kotlin.String
 }
 
 public open class EO : E {

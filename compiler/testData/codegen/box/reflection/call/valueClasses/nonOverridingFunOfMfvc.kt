@@ -5,25 +5,25 @@
 import kotlin.test.assertEquals
 
 @JvmInline
-value class Z(val x1: UInt, val x2: Int) {
+konstue class Z(konst x1: UInt, konst x2: Int) {
     fun test(a: Int, b: Z, c: Z?) = "$x1$x2$a${b.x1}${b.x2}${c!!.x1}${c!!.x2}"
 }
 
 @JvmInline
-value class S(val x1: String, val x2: String) {
+konstue class S(konst x1: String, konst x2: String) {
     fun test(a: Int, b: Z, c: Z?) = "$x1$x2$a${b.x1}${b.x2}${c!!.x1}${c!!.x2}"
 }
 
 @JvmInline
-value class A(val x1: Any, val x2: Any) {
+konstue class A(konst x1: Any, konst x2: Any) {
     fun test(a: Int, b: Z, c: Z?) = "$x1$x2$a${b.x1}${b.x2}${c!!.x1}${c!!.x2}"
 }
 
 fun box(): String {
-    val two = Z(2U, 3)
-    val four = Z(4U, 5)
+    konst two = Z(2U, 3)
+    konst four = Z(4U, 5)
 
-    val expected = "0912345"
+    konst expected = "0912345"
     assertEquals(expected, Z::test.call(Z(0U, 9), 1, two, four))
     assertEquals(expected, Z(0U, 9)::test.call(1, two, four))
 

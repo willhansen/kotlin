@@ -81,7 +81,7 @@ scopes:
             type: kotlin/String
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
         hasBackingField: true
         hasGetter: true
@@ -132,7 +132,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -159,7 +159,7 @@ scopes:
           type: kotlin/Any
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Protected
       KtFunctionSymbol:
         annotationsList: []
@@ -186,7 +186,7 @@ scopes:
           type: kotlin/Int
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -234,7 +234,7 @@ scopes:
           type: kotlin/Boolean
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -282,7 +282,7 @@ scopes:
           type: kotlin/Int
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -309,11 +309,11 @@ scopes:
           type: kotlin/String
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtKotlinPropertySymbol:
         annotationsList: [
-          kotlin/internal/IntrinsicConstEvaluation()
+          kotlin/internal/IntrinsicConstEkonstuation()
             psi: null
         ]
         backingFieldSymbol: KtBackingFieldSymbol:
@@ -426,7 +426,7 @@ scopes:
           type: ft<java/lang/Class<E!>, java/lang/Class<E!>?>
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -453,7 +453,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: ProtectedAndPackage
 
   StaticMemberScope, index = 3
@@ -476,7 +476,7 @@ scopes:
         typeParameters: []
       KtFunctionSymbol:
         annotationsList: []
-        callableIdIfNonLocal: /E.values
+        callableIdIfNonLocal: /E.konstues
         contextReceivers: []
         contractEffects: []
         hasStableParameterNames: true
@@ -490,7 +490,7 @@ scopes:
         isStatic: true
         isSuspend: false
         modality: FINAL
-        name: values
+        name: konstues
         origin: SOURCE_MEMBER_GENERATED
         receiverParameter: null
         returnType: KtUsualClassType:
@@ -504,11 +504,11 @@ scopes:
           type: kotlin/Array<E>
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
-        callableIdIfNonLocal: /E.valueOf
+        callableIdIfNonLocal: /E.konstueOf
         contextReceivers: []
         contractEffects: []
         hasStableParameterNames: true
@@ -522,7 +522,7 @@ scopes:
         isStatic: true
         isSuspend: false
         modality: FINAL
-        name: valueOf
+        name: konstueOf
         origin: SOURCE_MEMBER_GENERATED
         receiverParameter: null
         returnType: KtUsualClassType:
@@ -531,7 +531,7 @@ scopes:
           type: E
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -543,7 +543,7 @@ scopes:
             isImplicitLambdaParameter: false
             isNoinline: false
             isVararg: false
-            name: value
+            name: konstue
             origin: SOURCE_MEMBER_GENERATED
             receiverParameter: null
             returnType: KtUsualClassType:
@@ -583,7 +583,7 @@ scopes:
             type: kotlin/enums/EnumEntries<E>
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
         hasBackingField: false
         hasGetter: true
@@ -670,7 +670,7 @@ scopes:
           type: kotlin/Boolean
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -718,7 +718,7 @@ scopes:
           type: kotlin/Int
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -745,7 +745,7 @@ scopes:
           type: kotlin/String
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
 
   ExplicitSimpleImportingScope, index = 6, empty

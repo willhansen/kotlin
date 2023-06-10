@@ -23,7 +23,7 @@ fun box(): String {
     if (null.foo3<A>() != null) return "fail 3"
     if (null.foo3<A?>() != null) return "fail 4"
 
-    val a = A()
+    konst a = A()
 
     if (a.foo3<Any>() != a) return "fail 5"
     if (a.foo3<Any?>() != a) return "fail 6"
@@ -31,7 +31,7 @@ fun box(): String {
     if (a.foo3<A>() != a) return "fail 7"
     if (a.foo3<A?>() != a) return "fail 8"
 
-    val b = B()
+    konst b = B()
 
     failClassCast { b.foo3<A>(); return "failTypeCast 9" }
     failClassCast { b.foo3<A?>(); return "failTypeCast 10" }

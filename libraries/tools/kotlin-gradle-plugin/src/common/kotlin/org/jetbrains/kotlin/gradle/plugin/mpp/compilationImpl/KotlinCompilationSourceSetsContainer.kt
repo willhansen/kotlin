@@ -18,25 +18,25 @@ internal fun KotlinCompilationSourceSetsContainer(
 }
 
 internal interface KotlinCompilationSourceSetsContainer {
-    val defaultSourceSet: KotlinSourceSet
-    val kotlinSourceSets: ObservableSet<KotlinSourceSet>
-    val allKotlinSourceSets: ObservableSet<KotlinSourceSet>
+    konst defaultSourceSet: KotlinSourceSet
+    konst kotlinSourceSets: ObservableSet<KotlinSourceSet>
+    konst allKotlinSourceSets: ObservableSet<KotlinSourceSet>
     fun source(sourceSet: KotlinSourceSet)
 }
 
 private class DefaultKotlinCompilationSourceSetsContainer(
-    override val defaultSourceSet: KotlinSourceSet
+    override konst defaultSourceSet: KotlinSourceSet
 ) : KotlinCompilationSourceSetsContainer {
-    private val kotlinSourceSetsImpl: MutableObservableSet<KotlinSourceSet> = MutableObservableSetImpl(defaultSourceSet)
+    private konst kotlinSourceSetsImpl: MutableObservableSet<KotlinSourceSet> = MutableObservableSetImpl(defaultSourceSet)
 
-    private val allKotlinSourceSetsImpl: MutableObservableSet<KotlinSourceSet> = MutableObservableSetImpl<KotlinSourceSet>().also { set ->
+    private konst allKotlinSourceSetsImpl: MutableObservableSet<KotlinSourceSet> = MutableObservableSetImpl<KotlinSourceSet>().also { set ->
         defaultSourceSet.internal.withDependsOnClosure.forAll(set::add)
     }
 
-    override val kotlinSourceSets: ObservableSet<KotlinSourceSet>
+    override konst kotlinSourceSets: ObservableSet<KotlinSourceSet>
         get() = kotlinSourceSetsImpl
 
-    override val allKotlinSourceSets: ObservableSet<KotlinSourceSet>
+    override konst allKotlinSourceSets: ObservableSet<KotlinSourceSet>
         get() = allKotlinSourceSetsImpl
 
     /**
@@ -44,7 +44,7 @@ private class DefaultKotlinCompilationSourceSetsContainer(
      * [directlyIncludedKotlinSourceSets] cannot be used in this case, because
      * the [defaultSourceSet] will always be already included.
      */
-    private val sourcedKotlinSourceSets = hashSetOf<KotlinSourceSet>()
+    private konst sourcedKotlinSourceSets = hashSetOf<KotlinSourceSet>()
 
     override fun source(sourceSet: KotlinSourceSet) {
         if (!sourcedKotlinSourceSets.add(sourceSet)) return

@@ -36,11 +36,11 @@ public class x {
 // FILE: test.kt
 package a
 
-val v1 = x.STR
-val v2 = x.STR2
-val v3 = x.I
-val v4 = x.IMAX
-val v5 = x.I2
-val v6 = x.D
-val v7 = x.NULL
-val v8 = x.VAL
+konst v1 = x.STR
+konst v2 = x.STR2
+konst v3 = x.I
+konst v4 = x.IMAX
+konst v5 = x.I2
+konst v6 = x.D
+konst v7 = x.NULL
+konst v8 = x.VAL

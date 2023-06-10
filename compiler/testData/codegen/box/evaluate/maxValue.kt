@@ -4,12 +4,12 @@
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Ann(
-        val p1: Int,
-        val p2: Int,
-        val p3: Int,
-        val p4: Int,
-        val p5: Long,
-        val p6: Long
+        konst p1: Int,
+        konst p2: Int,
+        konst p3: Int,
+        konst p4: Int,
+        konst p5: Long,
+        konst p6: Long
 )
 
 @Ann(
@@ -22,7 +22,7 @@ annotation class Ann(
 ) class MyClass
 
 fun box(): String {
-    val annotation = MyClass::class.java.getAnnotation(Ann::class.java)!!
+    konst annotation = MyClass::class.java.getAnnotation(Ann::class.java)!!
     if (annotation.p1 != 128) return "fail 1, expected = ${128}, actual = ${annotation.p1}"
     if (annotation.p2 != 32768) return "fail 2, expected = ${32768}, actual = ${annotation.p2}"
     if (annotation.p3 != -2147483648) return "fail 3, expected = ${-2147483648}, actual = ${annotation.p3}"

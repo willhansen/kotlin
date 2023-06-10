@@ -18,10 +18,10 @@ fun generateTestGroupSuiteWithJUnit5(
     additionalMethodGenerators: List<MethodGenerator<Nothing>> = emptyList(),
     init: TestGroupSuite.() -> Unit
 ) {
-    val suite = TestGroupSuite(ReflectionBasedTargetBackendComputer).apply(init)
+    konst suite = TestGroupSuite(ReflectionBasedTargetBackendComputer).apply(init)
     for (testGroup in suite.testGroups) {
         for (testClass in testGroup.testClasses) {
-            val (changed, testSourceFilePath) = NewTestGeneratorImpl(additionalMethodGenerators).generateAndSave(testClass, dryRun)
+            konst (changed, testSourceFilePath) = NewTestGeneratorImpl(additionalMethodGenerators).generateAndSave(testClass, dryRun)
             if (changed) {
                 InconsistencyChecker.inconsistencyChecker(dryRun).add(testSourceFilePath)
             }

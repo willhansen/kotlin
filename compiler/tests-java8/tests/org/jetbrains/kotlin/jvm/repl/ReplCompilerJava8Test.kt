@@ -40,8 +40,8 @@ import org.jetbrains.kotlin.test.testFramework.KtUsefulTestCase
 import org.junit.Assert
 import java.io.File
 
-private const val library = "inline fun<T> foo(fn: () -> T): T = fn()"
-private const val script = "import foo\nval x = foo { 0 }"
+private const konst library = "inline fun<T> foo(fn: () -> T): T = fn()"
+private const konst script = "import foo\nkonst x = foo { 0 }"
 
 class ReplCompilerJava8Test : KtUsefulTestCase() {
     private lateinit var tmpdir: File
@@ -52,34 +52,34 @@ class ReplCompilerJava8Test : KtUsefulTestCase() {
 
         File(tmpdir, "library.kt").writeText(library)
 
-        val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.FULL_JDK).apply {
+        konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.FULL_JDK).apply {
             put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, PrintingMessageCollector(System.out, MessageRenderer.WITHOUT_PATHS, false))
             addKotlinSourceRoot(tmpdir.absolutePath)
             put(JVMConfigurationKeys.OUTPUT_DIRECTORY, tmpdir)
             loadScriptingPlugin(this)
         }
 
-        val environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
-        val res = KotlinToJVMBytecodeCompiler.compileBunchOfSources(environment)
+        konst res = KotlinToJVMBytecodeCompiler.compileBunchOfSources(environment)
         Assert.assertTrue(res)
     }
 
     fun testIncompatibleScriptJvmTargetConfig() {
-        val configuration = makeConfiguration().apply {
+        konst configuration = makeConfiguration().apply {
             put(JVMConfigurationKeys.JVM_TARGET, JvmTarget.JVM_1_6)
         }
 
-        val result = runTest(configuration)
+        konst result = runTest(configuration)
         Assert.assertTrue(result is ReplCompileResult.Error)
         Assert.assertTrue((result as ReplCompileResult.Error).message.contains("error: cannot inline bytecode built with JVM target 1.8 into bytecode that is being built with JVM target 1.6"))
     }
 
     fun testIncompatibleScriptJvmTargetProperty() {
-        val configuration = makeConfiguration()
+        konst configuration = makeConfiguration()
         System.setProperty(KOTLIN_REPL_JVM_TARGET_PROPERTY, "1.6")
         try {
-            val result = runTest(configuration)
+            konst result = runTest(configuration)
             Assert.assertTrue(result is ReplCompileResult.Error)
             Assert.assertTrue((result as ReplCompileResult.Error).message.contains("error: cannot inline bytecode built with JVM target 1.8 into bytecode that is being built with JVM target 1.6"))
         }
@@ -89,13 +89,13 @@ class ReplCompilerJava8Test : KtUsefulTestCase() {
     }
 
     fun testCompatibleScriptJvmTargetJavaVersionDetect() {
-        val configuration = makeConfiguration()
-        val result = runTest(configuration)
+        konst configuration = makeConfiguration()
+        konst result = runTest(configuration)
         Assert.assertTrue(result is ReplCompileResult.CompiledClasses)
     }
 
     fun testCompatibleScriptJvmTargetProperty() {
-        val configuration = makeConfiguration()
+        konst configuration = makeConfiguration()
         System.setProperty(KOTLIN_REPL_JVM_TARGET_PROPERTY, "1.8")
         try {
             Assert.assertTrue(runTest(configuration) is ReplCompileResult.CompiledClasses)
@@ -112,10 +112,10 @@ class ReplCompilerJava8Test : KtUsefulTestCase() {
     }
 
     private fun runTest(configuration: CompilerConfiguration): ReplCompileResult {
-        val collector = PrintingMessageCollector(System.out, MessageRenderer.WITHOUT_PATHS, false)
-        val replCompiler = GenericReplCompiler(testRootDisposable,
+        konst collector = PrintingMessageCollector(System.out, MessageRenderer.WITHOUT_PATHS, false)
+        konst replCompiler = GenericReplCompiler(testRootDisposable,
                                                StandardScriptDefinition, configuration, collector)
-        val state = replCompiler.createState()
+        konst state = replCompiler.createState()
 
         return replCompiler.compile(state, ReplCodeLine(0, 0, script))
     }

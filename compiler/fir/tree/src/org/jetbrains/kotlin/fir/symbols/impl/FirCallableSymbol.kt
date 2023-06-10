@@ -15,12 +15,12 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 abstract class FirCallableSymbol<D : FirCallableDeclaration> : FirBasedSymbol<D>(), CallableSymbolMarker {
-    abstract val callableId: CallableId
+    abstract konst callableId: CallableId
 
-    val resolvedReturnTypeRef: FirResolvedTypeRef
+    konst resolvedReturnTypeRef: FirResolvedTypeRef
         get() {
             ensureType(fir.returnTypeRef)
-            val returnTypeRef = fir.returnTypeRef
+            konst returnTypeRef = fir.returnTypeRef
             if (returnTypeRef !is FirResolvedTypeRef) {
                 errorInLazyResolve("returnTypeRef", returnTypeRef::class, FirResolvedTypeRef::class)
             }
@@ -28,16 +28,16 @@ abstract class FirCallableSymbol<D : FirCallableDeclaration> : FirBasedSymbol<D>
             return returnTypeRef
         }
 
-    val resolvedReturnType: ConeKotlinType
+    konst resolvedReturnType: ConeKotlinType
         get() = resolvedReturnTypeRef.coneType
 
-    val resolvedReceiverTypeRef: FirResolvedTypeRef?
+    konst resolvedReceiverTypeRef: FirResolvedTypeRef?
         get() = calculateReceiverTypeRef()
 
     private fun calculateReceiverTypeRef(): FirResolvedTypeRef? {
-        val receiverParameter = fir.receiverParameter ?: return null
+        konst receiverParameter = fir.receiverParameter ?: return null
         ensureType(receiverParameter.typeRef)
-        val receiverTypeRef = receiverParameter.typeRef
+        konst receiverTypeRef = receiverParameter.typeRef
         if (receiverTypeRef !is FirResolvedTypeRef) {
             errorInLazyResolve("receiverTypeRef", receiverTypeRef::class, FirResolvedTypeRef::class)
         }
@@ -45,32 +45,32 @@ abstract class FirCallableSymbol<D : FirCallableDeclaration> : FirBasedSymbol<D>
         return receiverTypeRef
     }
 
-    val receiverParameter: FirReceiverParameter?
+    konst receiverParameter: FirReceiverParameter?
         get() {
             calculateReceiverTypeRef()
             return fir.receiverParameter
         }
 
-    val resolvedContextReceivers: List<FirContextReceiver>
+    konst resolvedContextReceivers: List<FirContextReceiver>
         get() {
             if (fir.contextReceivers.isEmpty()) return emptyList()
             lazyResolveToPhase(FirResolvePhase.TYPES)
             return fir.contextReceivers
         }
 
-    val resolvedStatus: FirResolvedDeclarationStatus
+    konst resolvedStatus: FirResolvedDeclarationStatus
         get() = fir.resolvedStatus()
 
-    val rawStatus: FirDeclarationStatus
+    konst rawStatus: FirDeclarationStatus
         get() = fir.status
 
-    val typeParameterSymbols: List<FirTypeParameterSymbol>
+    konst typeParameterSymbols: List<FirTypeParameterSymbol>
         get() = fir.typeParameters.map { it.symbol }
 
-    val dispatchReceiverType: ConeSimpleKotlinType?
+    konst dispatchReceiverType: ConeSimpleKotlinType?
         get() = fir.dispatchReceiverType
 
-    val name: Name
+    konst name: Name
         get() = callableId.callableName
 
     fun getDeprecation(apiVersion: ApiVersion): DeprecationsPerUseSite? {
@@ -89,7 +89,7 @@ abstract class FirCallableSymbol<D : FirCallableDeclaration> : FirBasedSymbol<D>
     override fun toString(): String = "${this::class.simpleName} $callableId"
 }
 
-val FirCallableSymbol<*>.isExtension: Boolean
+konst FirCallableSymbol<*>.isExtension: Boolean
     get() = when (fir) {
         is FirFunction -> fir.receiverParameter != null
         is FirProperty -> fir.receiverParameter != null

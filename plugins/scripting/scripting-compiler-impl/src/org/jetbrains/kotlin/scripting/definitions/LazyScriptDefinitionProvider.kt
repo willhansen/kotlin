@@ -22,29 +22,29 @@ abstract class LazyScriptDefinitionProvider : ScriptDefinitionProvider {
     @Volatile
     private var disposed: Boolean = false
 
-    private val cachedDefinitionsLock = ReentrantLock()
+    private konst cachedDefinitionsLock = ReentrantLock()
 
-    protected abstract val currentDefinitions: Sequence<ScriptDefinition>
+    protected abstract konst currentDefinitions: Sequence<ScriptDefinition>
 
     protected open fun getScriptingHostConfiguration(): ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration
 
     override fun getDefaultDefinition(): ScriptDefinition =
         ScriptDefinition.getDefault(getScriptingHostConfiguration())
 
-    protected val fixedDefinitions: HashMap<URI, ScriptDefinition> = HashMap()
+    protected konst fixedDefinitions: HashMap<URI, ScriptDefinition> = HashMap()
 
     @Volatile
     private var _cachedDefinitions: Sequence<ScriptDefinition>? = null
 
-    private val cachedDefinitions: Sequence<ScriptDefinition>
+    private konst cachedDefinitions: Sequence<ScriptDefinition>
         get() {
             return _cachedDefinitions ?: run {
                 assert(cachedDefinitionsLock.holdCount == 0) { "cachedDefinitions should not be used under the lock" }
-                val originalSequence = currentDefinitions.constrainOnce()
+                konst originalSequence = currentDefinitions.constrainOnce()
                 cachedDefinitionsLock.withLock {
                     _cachedDefinitions ?: run {
                         if (!disposed) {
-                            val seq = CachingSequence(originalSequence)
+                            konst seq = CachingSequence(originalSequence)
                             _cachedDefinitions = seq
                             seq
                         } else {
@@ -95,16 +95,16 @@ abstract class LazyScriptDefinitionProvider : ScriptDefinitionProvider {
     override fun getDefaultScriptDefinition(): KotlinScriptDefinition = getDefaultDefinition().legacyDefinition
 
     companion object {
-        // TODO: find a common place for storing kotlin-related extensions and reuse values from it everywhere
-        protected val nonScriptFilenameSuffixes = arrayOf(".${KotlinFileType.EXTENSION}", ".${JavaFileType.DEFAULT_EXTENSION}")
+        // TODO: find a common place for storing kotlin-related extensions and reuse konstues from it everywhere
+        protected konst nonScriptFilenameSuffixes = arrayOf(".${KotlinFileType.EXTENSION}", ".${JavaFileType.DEFAULT_EXTENSION}")
     }
 }
 
 private class CachingSequence<T>(from: Sequence<T>) : Sequence<T> {
 
-    private val lock = ReentrantReadWriteLock()
-    private val sequenceIterator = from.iterator()
-    private val cache = arrayListOf<T>()
+    private konst lock = ReentrantReadWriteLock()
+    private konst sequenceIterator = from.iterator()
+    private konst cache = arrayListOf<T>()
 
     private inner class CachingIterator : Iterator<T> {
 

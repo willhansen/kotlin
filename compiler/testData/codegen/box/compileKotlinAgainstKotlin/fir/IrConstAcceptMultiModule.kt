@@ -4,17 +4,17 @@
 // FILE: A.kt
 
 abstract class IrConst<T> : IrExpression(), IrExpressionWithCopy {
-    abstract val kind: IrConstKind<T>
-    abstract val value: T
+    abstract konst kind: IrConstKind<T>
+    abstract konst konstue: T
 
     abstract override fun copy(): IrConst<T>
     abstract fun copyWithOffsets(startOffset: Int, endOffset: Int): IrConst<T>
 }
 
-sealed class IrConstKind<T>(val asString: kotlin.String) {
+sealed class IrConstKind<T>(konst asString: kotlin.String) {
     @Suppress("UNCHECKED_CAST")
-    fun valueOf(aConst: IrConst<*>) =
-        (aConst as IrConst<T>).value
+    fun konstueOf(aConst: IrConst<*>) =
+        (aConst as IrConst<T>).konstue
 
     object Null : IrConstKind<Nothing?>("Null")
     object Boolean : IrConstKind<kotlin.Boolean>("Boolean")
@@ -65,8 +65,8 @@ interface IrStatement : IrElement
 interface IrVarargElement : IrElement
 
 interface IrElement {
-    val startOffset: Int
-    val endOffset: Int
+    konst startOffset: Int
+    konst endOffset: Int
 
     fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R
 

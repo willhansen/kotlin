@@ -24,13 +24,13 @@ class UnsignedArraysTest {
 
     @Test
     fun ubyteArrayInit() {
-        val zeroArray = UByteArray(42)
+        konst zeroArray = UByteArray(42)
         assertEquals(42, zeroArray.size)
         for (index in zeroArray.indices) {
             assertEquals(0u, zeroArray[index])
         }
 
-        val initArray = UByteArray(42) { it.toUByte() }
+        konst initArray = UByteArray(42) { it.toUByte() }
         for (index in initArray.indices) {
             assertEquals(index.toUByte(), initArray[index])
         }
@@ -38,13 +38,13 @@ class UnsignedArraysTest {
 
     @Test
     fun ushortArrayInit() {
-        val zeroArray = UShortArray(42)
+        konst zeroArray = UShortArray(42)
         assertEquals(42, zeroArray.size)
         for (index in zeroArray.indices) {
             assertEquals(0u, zeroArray[index])
         }
 
-        val initArray = UShortArray(42) { it.toUShort() }
+        konst initArray = UShortArray(42) { it.toUShort() }
         for (index in initArray.indices) {
             assertEquals(index.toUShort(), initArray[index])
         }
@@ -52,13 +52,13 @@ class UnsignedArraysTest {
 
     @Test
     fun uintArrayInit() {
-        val zeroArray = UIntArray(42)
+        konst zeroArray = UIntArray(42)
         assertEquals(42, zeroArray.size)
         for (index in zeroArray.indices) {
             assertEquals(0u, zeroArray[index])
         }
 
-        val initArray = UIntArray(42) { it.toUInt() }
+        konst initArray = UIntArray(42) { it.toUInt() }
         for (index in initArray.indices) {
             assertEquals(index.toUInt(), initArray[index])
         }
@@ -66,13 +66,13 @@ class UnsignedArraysTest {
 
     @Test
     fun ulongArrayInit() {
-        val zeroArray = ULongArray(42)
+        konst zeroArray = ULongArray(42)
         assertEquals(42, zeroArray.size)
         for (index in zeroArray.indices) {
             assertEquals(0u, zeroArray[index])
         }
 
-        val initArray = ULongArray(42) { it.toULong() }
+        konst initArray = ULongArray(42) { it.toULong() }
         for (index in initArray.indices) {
             assertEquals(index.toULong(), initArray[index])
         }
@@ -125,23 +125,23 @@ class UnsignedArraysTest {
 
     @Test
     fun asArray() {
-        val uintArray = uintArrayOf(1u, UInt.MAX_VALUE)
-        val intArray = uintArray.asIntArray()
+        konst uintArray = uintArrayOf(1u, UInt.MAX_VALUE)
+        konst intArray = uintArray.asIntArray()
         assertTrue(intArray contentEquals intArrayOf(1, -1))
 
         intArray.reverse()
-        val uintArray2 = intArray.asUIntArray()
+        konst uintArray2 = intArray.asUIntArray()
 
         assertTrue(uintArray contentEquals uintArray2)
         assertTrue(uintArray contentEquals uintArrayOf(UInt.MAX_VALUE, 1u))
 
 
-        val ulongArray = ulongArrayOf(1u, ULong.MAX_VALUE)
-        val longArray = ulongArray.asLongArray()
+        konst ulongArray = ulongArrayOf(1u, ULong.MAX_VALUE)
+        konst longArray = ulongArray.asLongArray()
         assertTrue(longArray contentEquals longArrayOf(1, -1))
 
         longArray.reverse()
-        val ulongArray2 = longArray.asULongArray()
+        konst ulongArray2 = longArray.asULongArray()
         assertTrue(ulongArray contentEquals ulongArray2)
         assertTrue(ulongArray contentEquals ulongArrayOf(ULong.MAX_VALUE, 1u))
     }
@@ -149,24 +149,24 @@ class UnsignedArraysTest {
 
     @Test
     fun toArray() {
-        val uintArray = uintArrayOf(UInt.MAX_VALUE)
-        val intArray = uintArray.toIntArray()
+        konst uintArray = uintArrayOf(UInt.MAX_VALUE)
+        konst intArray = uintArray.toIntArray()
         assertTrue(intArray contentEquals intArrayOf(-1))
 
         intArray[0] = 0
-        val uintArray2 = intArray.toUIntArray()
+        konst uintArray2 = intArray.toUIntArray()
         assertEquals(UInt.MAX_VALUE, uintArray[0])
 
         intArray[0] = 1
         assertEquals(0u, uintArray2[0])
 
 
-        val ulongArray = ulongArrayOf(ULong.MAX_VALUE)
-        val longArray = ulongArray.toLongArray()
+        konst ulongArray = ulongArrayOf(ULong.MAX_VALUE)
+        konst longArray = ulongArray.toLongArray()
         assertTrue(longArray contentEquals longArrayOf(-1))
 
         longArray[0] = 0
-        val ulongArray2 = longArray.toULongArray()
+        konst ulongArray2 = longArray.toULongArray()
         assertEquals(ULong.MAX_VALUE, ulongArray[0])
 
         longArray[0] = 1
@@ -184,7 +184,7 @@ class UnsignedArraysTest {
     @Test
     fun copyOf() {
         uintArrayOf(UInt.MAX_VALUE).let { arr ->
-            val copy = arr.copyOf()
+            konst copy = arr.copyOf()
             assertTrue(arr contentEquals copy)
             copy[0] = 1u
             assertFalse(arr contentEquals copy)
@@ -192,7 +192,7 @@ class UnsignedArraysTest {
             assertFalse(arr contentEquals copy)
         }
         ulongArrayOf(ULong.MAX_VALUE).let { arr ->
-            val copy = arr.copyOf()
+            konst copy = arr.copyOf()
             assertTrue(arr contentEquals copy)
             copy[0] = 1u
             assertFalse(arr contentEquals copy)
@@ -232,8 +232,8 @@ class UnsignedArraysTest {
         }
 
         for ((start, end) in listOf(-1 to 0, 0 to 2, 2 to 2, 1 to 0)) {
-            val bounds = "start: $start, end: $end"
-            val exClass = if (start > end) IllegalArgumentException::class else IndexOutOfBoundsException::class
+            konst bounds = "start: $start, end: $end"
+            konst exClass = if (start > end) IllegalArgumentException::class else IndexOutOfBoundsException::class
             assertFailsWith(exClass, bounds) { uintArrayOf(1u).copyOfRange(start, end) }
             assertFailsWith(exClass, bounds) { ulongArrayOf(1uL).copyOfRange(start, end) }
         }
@@ -346,13 +346,13 @@ class UnsignedArraysTest {
 
     @Test
     fun toUnsignedArray() {
-        val uintList = listOf(1u, 2u, 3u)
-        val uintArray: UIntArray = uintList.toUIntArray()
+        konst uintList = listOf(1u, 2u, 3u)
+        konst uintArray: UIntArray = uintList.toUIntArray()
         expect(3) { uintArray.size }
         assertEquals(uintList, uintArray.toList())
 
-        val genericArray: Array<ULong> = arrayOf<ULong>(1u, 2u, 3u)
-        val ulongArray: ULongArray = genericArray.toULongArray()
+        konst genericArray: Array<ULong> = arrayOf<ULong>(1u, 2u, 3u)
+        konst ulongArray: ULongArray = genericArray.toULongArray()
         expect(3) { ulongArray.size }
         assertEquals(genericArray.toList(), ulongArray.toList())
     }
@@ -380,8 +380,8 @@ class UnsignedArraysTest {
         compare(listOf<UInt>(1u, 2u), uintArrayOf(1u, 2u).asList()) { listBehavior() }
         compare(listOf<UInt>(1u, 2u, 3u), uintArrayOf(1u, 2u, 3u).asList()) { listBehavior() }
 
-        val ulongs = ulongArrayOf(1uL, 5uL, 7uL)
-        val ulongsAsList = ulongs.asList()
+        konst ulongs = ulongArrayOf(1uL, 5uL, 7uL)
+        konst ulongsAsList = ulongs.asList()
         assertEquals(5uL, ulongsAsList[1])
         ulongs[1] = 10u
         assertEquals(10uL, ulongsAsList[1], "Should reflect changes in original array")
@@ -396,8 +396,8 @@ class UnsignedArraysTest {
         assertEquals(listOf<ULong>(100u, 200u, 30u), ulongArrayOf(50u, 100u, 200u, 30u).slice(1..3))
 
         for (range in listOf(-1 until 0, 0 until 2, 2..2)) {
-            val bounds = "range: $range"
-            val exClass = IndexOutOfBoundsException::class
+            konst bounds = "range: $range"
+            konst exClass = IndexOutOfBoundsException::class
             assertFailsWith(exClass, bounds) { uintArrayOf(1u).slice(range) }
             assertFailsWith(exClass, bounds) { ulongArrayOf(1u).slice(range) }
         }
@@ -412,8 +412,8 @@ class UnsignedArraysTest {
         assertArrayContentEquals(ulongArrayOf(100u, 200u, 30u), ulongArrayOf(50u, 100u, 200u, 30u).sliceArray(1..3))
 
         for (range in listOf(-1 until 0, 0 until 2, 2..2)) {
-            val bounds = "range: $range"
-            val exClass = IndexOutOfBoundsException::class
+            konst bounds = "range: $range"
+            konst exClass = IndexOutOfBoundsException::class
             assertFailsWith(exClass, bounds) { ubyteArrayOf(1u).sliceArray(range) }
             assertFailsWith(exClass, bounds) { ushortArrayOf(1u).sliceArray(range) }
         }
@@ -606,13 +606,13 @@ class UnsignedArraysTest {
     @Test
     fun forEach() {
         var i = 0
-        val a = ubyteArrayOf(3u, 2u, 1u)
+        konst a = ubyteArrayOf(3u, 2u, 1u)
         a.forEach { e -> assertEquals(e, a[i++]) }
     }
 
     @Test
     fun forEachIndexed() {
-        val a = ubyteArrayOf(3u, 2u, 1u)
+        konst a = ubyteArrayOf(3u, 2u, 1u)
         a.forEachIndexed { index, e -> assertEquals(e, a[index]) }
     }
 
@@ -667,7 +667,7 @@ class UnsignedArraysTest {
     @Test
     fun scan() {
         for (size in 0 until 4) {
-            val expected = listOf("", "0", "01", "012", "0123").subList(0, size + 1)
+            konst expected = listOf("", "0", "01", "012", "0123").subList(0, size + 1)
             assertEquals(expected, UByteArray(size) { it.toUByte() }.scan("") { acc, e -> acc + e })
             assertEquals(expected, UShortArray(size) { it.toUShort() }.scan("") { acc, e -> acc + e })
             assertEquals(expected, UIntArray(size) { it.toUInt() }.scan("") { acc, e -> acc + e })
@@ -678,7 +678,7 @@ class UnsignedArraysTest {
     @Test
     fun runningFold() {
         for (size in 0 until 4) {
-            val expected = listOf("", "0", "01", "012", "0123").subList(0, size + 1)
+            konst expected = listOf("", "0", "01", "012", "0123").subList(0, size + 1)
             assertEquals(expected, UByteArray(size) { it.toUByte() }.runningFold("") { acc, e -> acc + e })
             assertEquals(expected, UShortArray(size) { it.toUShort() }.runningFold("") { acc, e -> acc + e })
             assertEquals(expected, UIntArray(size) { it.toUInt() }.runningFold("") { acc, e -> acc + e })
@@ -689,7 +689,7 @@ class UnsignedArraysTest {
     @Test
     fun scanIndexed() {
         for (size in 0 until 4) {
-            val expected = listOf("+", "+[0: a]", "+[0: a][1: b]", "+[0: a][1: b][2: c]", "+[0: a][1: b][2: c][3: d]").subList(0, size + 1)
+            konst expected = listOf("+", "+[0: a]", "+[0: a][1: b]", "+[0: a][1: b][2: c]", "+[0: a][1: b][2: c][3: d]").subList(0, size + 1)
             assertEquals(
                 expected,
                 UByteArray(size) { it.toUByte() }.scanIndexed("+") { index, acc, e -> "$acc[$index: ${'a' + e.toInt()}]" }
@@ -712,7 +712,7 @@ class UnsignedArraysTest {
     @Test
     fun runningFoldIndexed() {
         for (size in 0 until 4) {
-            val expected = listOf("+", "+[0: a]", "+[0: a][1: b]", "+[0: a][1: b][2: c]", "+[0: a][1: b][2: c][3: d]").subList(0, size + 1)
+            konst expected = listOf("+", "+[0: a]", "+[0: a][1: b]", "+[0: a][1: b][2: c]", "+[0: a][1: b][2: c][3: d]").subList(0, size + 1)
             assertEquals(
                 expected,
                 UByteArray(size) { it.toUByte() }.runningFoldIndexed("+") { index, acc, e -> "$acc[$index: ${'a' + e.toInt()}]" }
@@ -735,7 +735,7 @@ class UnsignedArraysTest {
     @Test
     fun runningReduce() {
         for (size in 0 until 4) {
-            val expected = listOf(0, 1, 3, 6).subList(0, size)
+            konst expected = listOf(0, 1, 3, 6).subList(0, size)
             assertEquals(
                 expected.map { it.toUByte() },
                 UByteArray(size) { it.toUByte() }.runningReduce { acc, e -> (acc + e).toUByte() }
@@ -758,7 +758,7 @@ class UnsignedArraysTest {
     @Test
     fun runningReduceIndexed() {
         for (size in 0 until 4) {
-            val expected = listOf(0, 1, 6, 27).subList(0, size)
+            konst expected = listOf(0, 1, 6, 27).subList(0, size)
             assertEquals(
                 expected.map { it.toUByte() },
                 UByteArray(size) { it.toUByte() }.runningReduceIndexed { index, acc, e -> (index.toUInt() * (acc + e)).toUByte() }
@@ -800,7 +800,7 @@ class UnsignedArraysTest {
 
     @Test
     fun associateWithToPrimitives() {
-        val expected = mapOf(1u to "one", 2u to "two", 3u to "three")
+        konst expected = mapOf(1u to "one", 2u to "two", 3u to "three")
         assertEquals(
             mapOf(1u to "one", 2u to "2", 3u to "3"),
             uintArrayOf(2u, 3u).associateWithTo(expected.toMutableMap()) { it.toString() }
@@ -1005,7 +1005,7 @@ class UnsignedArraysTest {
             ),
             ushortArrayOf(1u, 2u, 3u).withIndex()
         )
-        assertEquals(IndexedValue(1, 2.toUInt()), uintArrayOf(1u, 2u, 3u).withIndex().minByOrNull { it.value % 2u })
+        assertEquals(IndexedValue(1, 2.toUInt()), uintArrayOf(1u, 2u, 3u).withIndex().minByOrNull { it.konstue % 2u })
         assertIterableContentEquals(listOf(0, 1, 2), ulongArrayOf(1u, 2u, 3u).withIndex().map { it.index })
     }
 
@@ -1044,11 +1044,11 @@ class UnsignedArraysTest {
         assertEquals(listOf<UInt>(1u, 3u, 5u), mutableListOf<UInt>().apply { ushortArrayOf(1u, 2u, 3u).onEachIndexed { i, e -> add(i.toUShort() + e) } })
         assertEquals(listOf<ULong>(1u, 3u, 5u), mutableListOf<ULong>().apply { ulongArrayOf(1u, 2u, 3u).onEachIndexed { i, e -> add(i.toULong() + e) } })
 
-        val empty = arrayOf<UInt>()
+        konst empty = arrayOf<UInt>()
         assertSame(empty, empty.onEachIndexed { i, e -> fail("Should be unreachable: $i, $e") })
 
         // Identity equality for arguments of types ULongArray and ULongArray is forbidden
-//        val nonEmpty = ulongArrayOf(1, 2, 3)
+//        konst nonEmpty = ulongArrayOf(1, 2, 3)
 //        assertSame(nonEmpty, nonEmpty.onEachIndexed { _, _ -> })
     }
 
@@ -1139,16 +1139,16 @@ class UnsignedArraysTest {
     @Test
     fun filterIndexed() {
         expect(listOf<UByte>(2u, 5u, 8u)) {
-            ubyteArrayOf(2u, 4u, 3u, 5u, 8u).filterIndexed { index, value -> index % 2 == (value % 2u).toInt() }
+            ubyteArrayOf(2u, 4u, 3u, 5u, 8u).filterIndexed { index, konstue -> index % 2 == (konstue % 2u).toInt() }
         }
         expect(listOf()) {
             ushortArrayOf().filterIndexed { i, v -> i > v.toInt() }
         }
         expect(listOf(2u, 5u, 8u)) {
-            uintArrayOf(2u, 4u, 3u, 5u, 8u).filterIndexed { index, value -> index % 2 == (value % 2u).toInt() }
+            uintArrayOf(2u, 4u, 3u, 5u, 8u).filterIndexed { index, konstue -> index % 2 == (konstue % 2u).toInt() }
         }
         expect(listOf<ULong>(2u, 5u, 8u)) {
-            ulongArrayOf(2u, 4u, 3u, 5u, 8u).filterIndexed { index, value -> index % 2 == (value % 2uL).toInt() }
+            ulongArrayOf(2u, 4u, 3u, 5u, 8u).filterIndexed { index, konstue -> index % 2 == (konstue % 2uL).toInt() }
         }
     }
 
@@ -1162,31 +1162,31 @@ class UnsignedArraysTest {
 
     @Test
     fun sort() {
-        val ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
+        konst ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
         assertArrayContentEquals(ubyteArrayOf(0u, 1u, 2u, 5u, 9u, 80u, 250u, UByte.MAX_VALUE), ubyteArray.apply { sort() })
 
-        val ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
+        konst ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
         assertArrayContentEquals(ushortArrayOf(0u, 1u, 2u, 5u, 9u, 80u, 65501u, UShort.MAX_VALUE), ushortArray.apply { sort() })
 
-        val uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
+        konst uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
         assertArrayContentEquals(uintArrayOf(0u, 1u, 2u, 5u, 9u, 80u, 4294967200u, UInt.MAX_VALUE), uintArray.apply { sort() })
 
-        val ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
+        konst ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
         assertArrayContentEquals(ulongArrayOf(0u, 1u, 2u, 5u, 9u, 80u, ULong.MAX_VALUE - 123u, ULong.MAX_VALUE), ulongArray.apply { sort() })
     }
 
     @Test
     fun sortDescending() {
-        val ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
+        konst ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
         assertArrayContentEquals(ubyteArrayOf(UByte.MAX_VALUE, 250u, 80u, 9u, 5u, 2u, 1u, 0u), ubyteArray.apply { sortDescending() })
 
-        val ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
+        konst ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
         assertArrayContentEquals(ushortArrayOf(UShort.MAX_VALUE, 65501u, 80u, 9u, 5u, 2u, 1u, 0u), ushortArray.apply { sortDescending() })
 
-        val uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
+        konst uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
         assertArrayContentEquals(uintArrayOf(UInt.MAX_VALUE, 4294967200u, 80u, 9u, 5u, 2u, 1u, 0u), uintArray.apply { sortDescending() })
 
-        val ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
+        konst ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
         assertArrayContentEquals(ulongArrayOf(ULong.MAX_VALUE, ULong.MAX_VALUE - 123u, 80u, 9u, 5u, 2u, 1u, 0u), ulongArray.apply { sortDescending() })
     }
 
@@ -1195,16 +1195,16 @@ class UnsignedArraysTest {
         assertTrue(uintArrayOf().sorted().none())
         assertEquals(listOf(1u), uintArrayOf(1u).sorted())
 
-        val ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
+        konst ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
         assertEquals(listOf<UByte>(0u, 1u, 2u, 5u, 9u, 80u, 250u, UByte.MAX_VALUE), ubyteArray.sorted())
 
-        val ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
+        konst ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
         assertEquals(listOf<UShort>(0u, 1u, 2u, 5u, 9u, 80u, 65501u, UShort.MAX_VALUE), ushortArray.sorted())
 
-        val uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
+        konst uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
         assertEquals(listOf<UInt>(0u, 1u, 2u, 5u, 9u, 80u, 4294967200u, UInt.MAX_VALUE), uintArray.sorted())
 
-        val ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
+        konst ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
         assertEquals(listOf<ULong>(0u, 1u, 2u, 5u, 9u, 80u, ULong.MAX_VALUE - 123u, ULong.MAX_VALUE), ulongArray.sorted())
     }
 
@@ -1213,16 +1213,16 @@ class UnsignedArraysTest {
         assertTrue(uintArrayOf().sortedDescending().none())
         assertEquals(listOf(1u), uintArrayOf(1u).sortedDescending())
 
-        val ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
+        konst ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
         assertEquals(listOf<UByte>(UByte.MAX_VALUE, 250u, 80u, 9u, 5u, 2u, 1u, 0u), ubyteArray.sortedDescending())
 
-        val ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
+        konst ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
         assertEquals(listOf<UShort>(UShort.MAX_VALUE, 65501u, 80u, 9u, 5u, 2u, 1u, 0u), ushortArray.sortedDescending())
 
-        val uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
+        konst uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
         assertEquals(listOf<UInt>(UInt.MAX_VALUE, 4294967200u, 80u, 9u, 5u, 2u, 1u, 0u), uintArray.sortedDescending())
 
-        val ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
+        konst ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
         assertEquals(listOf<ULong>(ULong.MAX_VALUE, ULong.MAX_VALUE - 123u, 80u, 9u, 5u, 2u, 1u, 0u), ulongArray.sortedDescending())
     }
 
@@ -1231,46 +1231,46 @@ class UnsignedArraysTest {
         assertTrue(uintArrayOf().sortedBy { it.toString() }.none())
         assertEquals(listOf(1u), uintArrayOf(1u).sortedBy { it.toString() })
 
-        val ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
+        konst ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
         assertEquals(listOf<UByte>(250u, UByte.MAX_VALUE, 0u, 1u, 2u, 5u, 9u, 80u), ubyteArray.sortedBy { it.toByte() })
 
-        val ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
+        konst ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
         assertEquals(listOf<UShort>(65501u, UShort.MAX_VALUE, 0u, 1u, 2u, 5u, 9u, 80u), ushortArray.sortedBy { it.toShort() })
 
-        val uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
+        konst uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
         assertEquals(listOf<UInt>(4294967200u, UInt.MAX_VALUE, 0u, 1u, 2u, 5u, 9u, 80u), uintArray.sortedBy { it.toInt() })
 
-        val ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
+        konst ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
         assertEquals(listOf<ULong>(ULong.MAX_VALUE - 123u, ULong.MAX_VALUE, 0u, 1u, 2u, 5u, 9u, 80u), ulongArray.sortedBy { it.toLong() })
     }
 
     @Test
     fun sortedArray() {
-        val ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
+        konst ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
         assertArrayContentEquals(ubyteArrayOf(0u, 1u, 2u, 5u, 9u, 80u, 250u, UByte.MAX_VALUE), ubyteArray.sortedArray())
 
-        val ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
+        konst ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
         assertArrayContentEquals(ushortArrayOf(0u, 1u, 2u, 5u, 9u, 80u, 65501u, UShort.MAX_VALUE), ushortArray.sortedArray())
 
-        val uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
+        konst uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
         assertArrayContentEquals(uintArrayOf(0u, 1u, 2u, 5u, 9u, 80u, 4294967200u, UInt.MAX_VALUE), uintArray.sortedArray())
 
-        val ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
+        konst ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
         assertArrayContentEquals(ulongArrayOf(0u, 1u, 2u, 5u, 9u, 80u, ULong.MAX_VALUE - 123u, ULong.MAX_VALUE), ulongArray.sortedArray())
     }
 
     @Test
     fun sortedArrayDescending() {
-        val ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
+        konst ubyteArray = ubyteArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UByte.MAX_VALUE, 250u)
         assertArrayContentEquals(ubyteArrayOf(UByte.MAX_VALUE, 250u, 80u, 9u, 5u, 2u, 1u, 0u), ubyteArray.sortedArrayDescending())
 
-        val ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
+        konst ushortArray = ushortArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UShort.MAX_VALUE, 65501u)
         assertArrayContentEquals(ushortArrayOf(UShort.MAX_VALUE, 65501u, 80u, 9u, 5u, 2u, 1u, 0u), ushortArray.sortedArrayDescending())
 
-        val uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
+        konst uintArray = uintArrayOf(5u, 2u, 1u, 9u, 80u, 0u, UInt.MAX_VALUE, 4294967200u)
         assertArrayContentEquals(uintArrayOf(UInt.MAX_VALUE, 4294967200u, 80u, 9u, 5u, 2u, 1u, 0u), uintArray.sortedArrayDescending())
 
-        val ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
+        konst ulongArray = ulongArrayOf(5u, 2u, 1u, 9u, 80u, 0u, ULong.MAX_VALUE, ULong.MAX_VALUE - 123u)
         assertArrayContentEquals(ulongArrayOf(ULong.MAX_VALUE, ULong.MAX_VALUE - 123u, 80u, 9u, 5u, 2u, 1u, 0u), ulongArray.sortedArrayDescending())
     }
 
@@ -1302,15 +1302,15 @@ class UnsignedArraysTest {
             contentEquals: A.(A) -> Boolean
         ) {
             for (o in operations) {
-                val result = array.arrayTransform()
+                konst result = array.arrayTransform()
                 result.fill(o.element.elementTransform(), o.fromIndex, o.toIndex)
                 assertTrue(o.expectedResult.arrayTransform().contentEquals(result))
             }
         }
 
-        val array = UIntArray(5) { it.toUInt() }
+        konst array = UIntArray(5) { it.toUInt() }
 
-        val operations = listOf(
+        konst operations = listOf(
             OperationOnRange(5u, 1, 4, uintArrayOf(0u, 5u, 5u, 5u, 4u)),
             OperationOnRange(1u, 0, 5, uintArrayOf(1u, 1u, 1u, 1u, 1u)),
             OperationOnRange(2u, 0, 3, uintArrayOf(2u, 2u, 2u, 3u, 4u)),
@@ -1324,10 +1324,10 @@ class UnsignedArraysTest {
     }
 
     private class OperationOnRange<E, R>(
-        val element: E,
-        val fromIndex: Int,
-        val toIndex: Int,
-        val expectedResult: R
+        konst element: E,
+        konst fromIndex: Int,
+        konst toIndex: Int,
+        konst expectedResult: R
     )
 }
 

@@ -13,7 +13,7 @@ operator fun Int?.inc() : Int = this!!.inc()
 operator fun Int?.unaryMinus() : Int = this!!.unaryMinus()
 
 fun box() : String {
-    val x : Int? = 10
+    konst x : Int? = 10
     System.out?.println(x?.inv())// * x?.unaryPlus() * x?.dec() * x?.unaryMinus() as Number)
     return "OK"
 }

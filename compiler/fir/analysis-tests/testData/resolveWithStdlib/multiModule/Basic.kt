@@ -4,9 +4,9 @@
 
 package hello
 
-class Hello(val msg: String)
+class Hello(konst msg: String)
 
-class Test(val set: <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.util.Set<*><!>)
+class Test(konst set: <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.util.Set<*><!>)
 
 // MODULE: m2(m1)
 // FILE: user.kt

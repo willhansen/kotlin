@@ -19,5 +19,5 @@ fun box(): String {
 package b
 
 open class B {
-    @JvmField protected val ok = "OK"
+    @JvmField protected konst ok = "OK"
 }

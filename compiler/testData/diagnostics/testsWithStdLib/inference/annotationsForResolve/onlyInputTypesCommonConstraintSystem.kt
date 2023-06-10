@@ -8,12 +8,12 @@ import kotlin.internal.OnlyInputTypes
 interface Bound
 class First : Bound
 class Second : Bound
-class Inv<I >(val v: I)
-class InvB<I : Bound>(val v: I)
+class Inv<I >(konst v: I)
+class InvB<I : Bound>(konst v: I)
 class In<in C>(v: C)
 class InB<in C : Bound>(v: C)
-class Out<out O>(val v: O)
-class OutB<out O : Bound>(val v: O)
+class Out<out O>(konst v: O)
+class OutB<out O : Bound>(konst v: O)
 
 fun <@OnlyInputTypes M> strictId(arg: M): M = arg
 fun <@OnlyInputTypes S> strictSelect(arg1: S, arg2: S): S = arg1
@@ -37,8 +37,8 @@ fun testOK(first: First, bound: Bound, second: Second) {
     strictSelect(In(first), In(bound))
     strictSelect(InB(first), InB(bound))
 
-    val out: Out<Bound> = strictSelect(Out(first), Out(second))
-    val outb: OutB<Bound> = strictSelect(OutB(first), OutB(second))
+    konst out: Out<Bound> = strictSelect(Out(first), Out(second))
+    konst outb: OutB<Bound> = strictSelect(OutB(first), OutB(second))
     strictSelect<Out<Bound>>(Out(first), Out(second))
     strictSelect<OutB<Bound>>(OutB(first), OutB(second))
 }

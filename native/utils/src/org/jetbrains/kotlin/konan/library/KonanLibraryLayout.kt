@@ -23,27 +23,27 @@ import org.jetbrains.kotlin.library.KotlinLibraryLayout
 import org.jetbrains.kotlin.library.MetadataKotlinLibraryLayout
 
 interface TargetedKotlinLibraryLayout : KotlinLibraryLayout {
-    val target: KonanTarget?
+    konst target: KonanTarget?
         // This is a default implementation. Can't make it an assignment.
         get() = null
-    val targetsDir
+    konst targetsDir
         get() = File(componentDir, "targets")
-    val targetDir
+    konst targetDir
         get() = File(targetsDir, target!!.visibleName)
-    val includedDir
+    konst includedDir
         get() = File(targetDir, "included")
 }
 
 interface BitcodeKotlinLibraryLayout : TargetedKotlinLibraryLayout, KotlinLibraryLayout {
-    val kotlinDir
+    konst kotlinDir
         get() = File(targetDir, "kotlin")
-    val nativeDir
+    konst nativeDir
         get() = File(targetDir, "native")
     // TODO: Experiment with separate bitcode files.
     // Per package or per class.
-    val mainBitcodeFile
+    konst mainBitcodeFile
         get() = File(kotlinDir, "program.kt.bc")
-    val mainBitcodeFileName
+    konst mainBitcodeFileName
         get() = mainBitcodeFile.path
 }
 

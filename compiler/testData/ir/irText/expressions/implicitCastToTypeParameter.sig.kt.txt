@@ -37,7 +37,7 @@ inline fun <reified T : Any> Any.test1(): T?
 // CHECK:
 //   Mangled name: @Foo<0:0>{0§<kotlin.Any>}asT
 //   Public signature: /asT|-840544213460054683[0]
-val <reified T : Any> Foo<T>.asT: T?
+konst <reified T : Any> Foo<T>.asT: T?
   // CHECK JVM_IR:
   //   Mangled name: #<get-asT>@Foo<0:0>(){0§<kotlin.Any>}0:0?
   //   Public signature: /asT.<get-asT>|-4847921419158920204[0]

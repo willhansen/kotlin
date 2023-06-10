@@ -12,13 +12,13 @@ import java.net.Socket
 import java.net.URL
 import org.jetbrains.kotlin.test.KtAssert.fail
 
-class TestProxy(val serverPort: Int, val testClass: String, val classPath: List<URL>) {
+class TestProxy(konst serverPort: Int, konst testClass: String, konst classPath: List<URL>) {
 
     fun runTest(): String {
         return Socket("localhost", serverPort).use { clientSocket ->
 
-            val output = ObjectOutputStream(clientSocket.getOutputStream())
-            val input = ObjectInputStream(clientSocket.getInputStream())
+            konst output = ObjectOutputStream(clientSocket.getOutputStream())
+            konst input = ObjectInputStream(clientSocket.getInputStream())
             try {
                 output.writeObject(MessageHeader.NEW_TEST)
                 output.writeObject(testClass)
@@ -28,7 +28,7 @@ class TestProxy(val serverPort: Int, val testClass: String, val classPath: List<
                 //filter out jdk libs
                 output.writeObject(filterOutJdkJars(classPath).toTypedArray())
 
-                val message = input.readObject() as MessageHeader
+                konst message = input.readObject() as MessageHeader
                 if (message == MessageHeader.RESULT) {
                     input.readObject() as String
                 } else if (message == MessageHeader.ERROR) {
@@ -45,7 +45,7 @@ class TestProxy(val serverPort: Int, val testClass: String, val classPath: List<
 
     fun runTestNoOutput(): String {
         Socket("localhost", serverPort).use { clientSocket ->
-            val output = ObjectOutputStream(clientSocket.getOutputStream())
+            konst output = ObjectOutputStream(clientSocket.getOutputStream())
             try {
                 output.writeObject(MessageHeader.NEW_TEST)
                 output.writeObject(testClass)
@@ -62,8 +62,8 @@ class TestProxy(val serverPort: Int, val testClass: String, val classPath: List<
     }
 
     fun filterOutJdkJars(classPath: List<URL>): List<URL> {
-        val javaHome = System.getProperty("java.home")
-        val javaFolder = File(javaHome)
+        konst javaHome = System.getProperty("java.home")
+        konst javaFolder = File(javaHome)
         return classPath.filterNot {
             File(it.file).startsWith(javaFolder)
         }

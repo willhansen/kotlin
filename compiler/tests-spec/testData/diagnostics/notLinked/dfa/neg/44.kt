@@ -15,7 +15,7 @@
  * ISSUES: KT-25747
  */
 fun case_1(x: Int?) {
-    val y = x != null
+    konst y = x != null
     if (y) {
         x<!UNSAFE_CALL!>.<!>inv()
     }
@@ -26,7 +26,7 @@ fun case_1(x: Int?) {
  * ISSUES: KT-25747
  */
 fun case_2(x: Any?) {
-    val y = x is Int
+    konst y = x is Int
     if (y) {
         x.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()
     }
@@ -37,7 +37,7 @@ fun case_2(x: Any?) {
  * ISSUES: KT-25747
  */
 fun <T> case_3(x: T) {
-    val y = x is Int
+    konst y = x is Int
     if (y) {
         x.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()
     }
@@ -48,7 +48,7 @@ fun <T> case_3(x: T) {
  * ISSUES: KT-25747
  */
 fun <T> case_4(x: T) {
-    val y = x is Int?
+    konst y = x is Int?
     if (y) {
         x?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()
     }

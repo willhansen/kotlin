@@ -41,40 +41,40 @@ fun TranslationContext.translateAndAliasParameters(
         descriptor: FunctionDescriptor,
         targetList: MutableList<JsParameter>
 ): TranslationContext {
-    val aliases = mutableMapOf<DeclarationDescriptor, JsExpression>()
+    konst aliases = mutableMapOf<DeclarationDescriptor, JsExpression>()
 
     for (type in descriptor.getCorrectTypeParameters()) {
         if (type.isReified) {
-            val paramNameForType = getNameForDescriptor(type)
+            konst paramNameForType = getNameForDescriptor(type)
             targetList += JsParameter(paramNameForType)
 
-            val suggestedName = Namer.isInstanceSuggestedName(type)
-            val paramName = JsScope.declareTemporaryName(suggestedName)
+            konst suggestedName = Namer.isInstanceSuggestedName(type)
+            konst paramName = JsScope.declareTemporaryName(suggestedName)
             targetList += JsParameter(paramName)
             aliases[type] = paramName.makeRef()
         }
     }
 
     if (descriptor.requiresExtensionReceiverParameter) {
-        val receiverParameterName = JsScope.declareTemporaryName(Namer.getReceiverParameterName())
-        val receiverRef = receiverParameterName.makeRef()
+        konst receiverParameterName = JsScope.declareTemporaryName(Namer.getReceiverParameterName())
+        konst receiverRef = receiverParameterName.makeRef()
         receiverRef.type = descriptor.extensionReceiverParameter!!.type
         aliases[descriptor.extensionReceiverParameter!!] = receiverRef
         targetList += JsParameter(receiverParameterName)
     }
 
-    for (valueParameter in descriptor.valueParameters) {
-        val name = getNameForDescriptor(valueParameter)
-        val tmpName = JsScope.declareTemporaryName(name.ident).also { it.descriptor = valueParameter }
-        val parameterRef = JsAstUtils.pureFqn(tmpName, null)
-        parameterRef.type = valueParameter.type
-        aliases[valueParameter] = parameterRef
-        targetList += JsParameter(tmpName).apply { hasDefaultValue = valueParameter.hasDefaultValue() }
+    for (konstueParameter in descriptor.konstueParameters) {
+        konst name = getNameForDescriptor(konstueParameter)
+        konst tmpName = JsScope.declareTemporaryName(name.ident).also { it.descriptor = konstueParameter }
+        konst parameterRef = JsAstUtils.pureFqn(tmpName, null)
+        parameterRef.type = konstueParameter.type
+        aliases[konstueParameter] = parameterRef
+        targetList += JsParameter(tmpName).apply { hasDefaultValue = konstueParameter.hasDefaultValue() }
     }
 
-    val continuationDescriptor = continuationParameterDescriptor
+    konst continuationDescriptor = continuationParameterDescriptor
     if (continuationDescriptor != null) {
-        val jsParameter = JsParameter(getNameForDescriptor(continuationDescriptor))
+        konst jsParameter = JsParameter(getNameForDescriptor(continuationDescriptor))
         targetList += jsParameter
         aliases[continuationDescriptor] = JsAstUtils.stateMachineReceiver()
     }
@@ -86,13 +86,13 @@ private fun FunctionDescriptor.getCorrectTypeParameters() =
     (this as? PropertyAccessorDescriptor)?.correspondingProperty?.typeParameters ?: typeParameters
 
 
-private val FunctionDescriptor.requiresExtensionReceiverParameter
+private konst FunctionDescriptor.requiresExtensionReceiverParameter
     get() = DescriptorUtils.isExtension(this)
 
 fun TranslationContext.translateFunction(declaration: KtDeclarationWithBody, function: JsFunction) {
-    val descriptor = BindingUtils.getFunctionDescriptor(bindingContext(), declaration)
+    konst descriptor = BindingUtils.getFunctionDescriptor(bindingContext(), declaration)
     if (declaration.hasBody()) {
-        val body = translateFunctionBody(descriptor, declaration, this)
+        konst body = translateFunctionBody(descriptor, declaration, this)
         function.body.statements += body.statements
     }
     function.functionDescriptor = descriptor
@@ -102,21 +102,21 @@ fun TranslationContext.wrapWithInlineMetadata(
         outerContext: TranslationContext,
         function: JsFunction, descriptor: FunctionDescriptor
 ): JsExpression {
-    val sourceInfo = descriptor.source.getPsi()
+    konst sourceInfo = descriptor.source.getPsi()
     return if (descriptor.isInline) {
         if (descriptor.shouldBeExported(config)) {
-            val metadata = InlineMetadata.compose(function, descriptor, this)
+            konst metadata = InlineMetadata.compose(function, descriptor, this)
             metadata.functionWithMetadata(outerContext, sourceInfo)
         }
         else {
-            val block =
+            konst block =
                 inlineFunctionContext!!.let {
                     JsBlock(it.importBlock.statements + it.prototypeBlock.statements + it.declarationsBlock.statements +
                         JsReturn(function))
                 }
             InlineMetadata.wrapFunction(outerContext, FunctionWithWrapper(function, block), sourceInfo)
         }.also {
-            val incrementalResults = config.configuration[JSConfigurationKeys.INCREMENTAL_RESULTS_CONSUMER]
+            konst incrementalResults = config.configuration[JSConfigurationKeys.INCREMENTAL_RESULTS_CONSUMER]
             incrementalResults?.reportInlineFunction(descriptor, it, sourceInfo)
         }
     }
@@ -130,12 +130,12 @@ private fun IncrementalResultsConsumer.reportInlineFunction(
         translatedFunction: JsExpression,
         sourceInfo: PsiElement?
 ) {
-    val psiFile = (descriptor.source.containingFile as? PsiSourceFile)?.psiFile ?: return
-    val file = VfsUtilCore.virtualToIoFile(psiFile.virtualFile)
+    konst psiFile = (descriptor.source.containingFile as? PsiSourceFile)?.psiFile ?: return
+    konst file = VfsUtilCore.virtualToIoFile(psiFile.virtualFile)
 
     if (descriptor.visibility.effectiveVisibility(descriptor, true).privateApi) return
 
-    val fqName = when (descriptor) {
+    konst fqName = when (descriptor) {
         is PropertyGetterDescriptor -> {
             "<get>" + descriptor.correspondingProperty.fqNameSafe.asString()
         }
@@ -145,8 +145,8 @@ private fun IncrementalResultsConsumer.reportInlineFunction(
         else -> descriptor.fqNameSafe.asString()
     }
 
-    val offset = sourceInfo?.node?.startOffset
-    val document = psiFile.viewProvider.document
+    konst offset = sourceInfo?.node?.startOffset
+    konst document = psiFile.viewProvider.document
     var sourceLine = -1
     var sourceColumn = -1
     if (offset != null && document != null) {

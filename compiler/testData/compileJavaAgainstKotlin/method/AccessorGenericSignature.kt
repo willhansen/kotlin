@@ -4,7 +4,7 @@ import java.util.ArrayList
 
 public class BadClass {
     fun foo() {
-        val x: () -> Int = {
+        konst x: () -> Int = {
             bar(ArrayList<Int>())
             baz<Double, ArrayList<Double>>(ArrayList())
             0

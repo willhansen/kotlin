@@ -2,12 +2,12 @@
 package foo
 
 class myInt(a: Int) {
-    val value = a;
+    konst konstue = a;
 
-    operator fun plus(other: myInt): myInt = myInt(value + other.value)
+    operator fun plus(other: myInt): myInt = myInt(konstue + other.konstue)
 }
 
 fun box(): String {
 
-    return if ((myInt(3) + myInt(5)).value == 8) "OK" else "fail"
+    return if ((myInt(3) + myInt(5)).konstue == 8) "OK" else "fail"
 }

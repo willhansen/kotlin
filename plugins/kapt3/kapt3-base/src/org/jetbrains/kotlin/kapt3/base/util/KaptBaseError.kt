@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.kapt3.base.util
 
 class KaptBaseError : RuntimeException {
-    val kind: Kind
+    konst kind: Kind
 
-    enum class Kind(val message: String) {
+    enum class Kind(konst message: String) {
         EXCEPTION("Exception while annotation processing"),
         ERROR_RAISED("Error while annotation processing"),
     }

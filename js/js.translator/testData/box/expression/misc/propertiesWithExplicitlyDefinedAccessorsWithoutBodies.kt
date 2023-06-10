@@ -11,7 +11,7 @@ class A() {
 }
 
 fun box(): String {
-    val result = A().f()
+    konst result = A().f()
     if (result != 4) return "fail: $result"
     return "OK"
 }

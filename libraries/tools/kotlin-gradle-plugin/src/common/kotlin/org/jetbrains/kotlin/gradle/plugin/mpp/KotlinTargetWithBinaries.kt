@@ -16,7 +16,7 @@ abstract class KotlinTargetWithBinaries<T : KotlinCompilation<*>, out R : Domain
     project: Project,
     platformType: KotlinPlatformType
 ) : KotlinOnlyTarget<T>(project, platformType) {
-    abstract val binaries: R
+    abstract konst binaries: R
 
     fun binaries(configure: R.() -> Unit) {
         binaries.configure()

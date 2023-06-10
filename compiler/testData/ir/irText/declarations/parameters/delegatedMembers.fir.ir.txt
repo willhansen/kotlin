@@ -5,9 +5,9 @@ FILE fqName:<root> fileName:/delegatedMembers.kt
     FUN name:foo visibility:public modality:ABSTRACT <> ($this:<root>.IBase<T of <root>.IBase>, x:kotlin.Int) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:<root>.IBase<T of <root>.IBase>
       VALUE_PARAMETER name:x index:0 type:kotlin.Int
-    PROPERTY name:bar visibility:public modality:ABSTRACT [val]
+    PROPERTY name:bar visibility:public modality:ABSTRACT [konst]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bar> visibility:public modality:ABSTRACT <> ($this:<root>.IBase<T of <root>.IBase>) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:bar visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:bar visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.IBase<T of <root>.IBase>
     FUN name:qux visibility:public modality:ABSTRACT <X> ($this:<root>.IBase<T of <root>.IBase>, t:T of <root>.IBase, x:X of <root>.IBase.qux) returnType:kotlin.Unit
       TYPE_PARAMETER name:X index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -59,11 +59,11 @@ FILE fqName:<root> fileName:/delegatedMembers.kt
             receiver: GET_VAR '<this>: <root>.Test<TT of <root>.Test> declared in <root>.Test.qux' type=<root>.Test<TT of <root>.Test> origin=null
           t: GET_VAR 't: TT of <root>.Test declared in <root>.Test.qux' type=TT of <root>.Test origin=null
           x: GET_VAR 'x: X of <root>.Test.qux declared in <root>.Test.qux' type=X of <root>.Test.qux origin=null
-    PROPERTY DELEGATED_MEMBER name:bar visibility:public modality:OPEN [val]
+    PROPERTY DELEGATED_MEMBER name:bar visibility:public modality:OPEN [konst]
       overridden:
         public abstract bar: kotlin.Int
       FUN DELEGATED_MEMBER name:<get-bar> visibility:public modality:OPEN <> ($this:<root>.Test<TT of <root>.Test>) returnType:kotlin.Int
-        correspondingProperty: PROPERTY DELEGATED_MEMBER name:bar visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY DELEGATED_MEMBER name:bar visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-bar> (): kotlin.Int declared in <root>.IBase
         $this: VALUE_PARAMETER name:<this> type:<root>.Test<TT of <root>.Test>

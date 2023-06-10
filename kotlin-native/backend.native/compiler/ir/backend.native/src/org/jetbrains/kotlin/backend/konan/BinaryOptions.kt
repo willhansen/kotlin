@@ -11,71 +11,71 @@ import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadOnlyProperty
 
 // Note: options defined in this class are a part of user interface, including the names:
-// users can pass these options using a -Xbinary=name=value compiler argument or corresponding Gradle DSL.
+// users can pass these options using a -Xbinary=name=konstue compiler argument or corresponding Gradle DSL.
 object BinaryOptions : BinaryOptionRegistry() {
-    val runtimeAssertionsMode by option<RuntimeAssertsMode>()
+    konst runtimeAssertionsMode by option<RuntimeAssertsMode>()
 
-    val memoryModel by option<MemoryModel>()
+    konst memoryModel by option<MemoryModel>()
 
-    val freezing by option<Freezing>()
+    konst freezing by option<Freezing>()
 
-    val stripDebugInfoFromNativeLibs by booleanOption()
+    konst stripDebugInfoFromNativeLibs by booleanOption()
 
-    val sourceInfoType by option<SourceInfoType>()
+    konst sourceInfoType by option<SourceInfoType>()
 
-    val androidProgramType by option<AndroidProgramType>()
+    konst androidProgramType by option<AndroidProgramType>()
 
-    val unitSuspendFunctionObjCExport by option<UnitSuspendFunctionObjCExport>()
+    konst unitSuspendFunctionObjCExport by option<UnitSuspendFunctionObjCExport>()
 
-    val objcExportSuspendFunctionLaunchThreadRestriction by option<ObjCExportSuspendFunctionLaunchThreadRestriction>()
+    konst objcExportSuspendFunctionLaunchThreadRestriction by option<ObjCExportSuspendFunctionLaunchThreadRestriction>()
 
-    val objcExportDisableSwiftMemberNameMangling by booleanOption()
+    konst objcExportDisableSwiftMemberNameMangling by booleanOption()
 
-    val objcExportIgnoreInterfaceMethodCollisions by booleanOption()
+    konst objcExportIgnoreInterfaceMethodCollisions by booleanOption()
 
-    val gc by option<GC>(shortcut = { it.shortcut })
+    konst gc by option<GC>(shortcut = { it.shortcut })
 
-    val gcSchedulerType by option<GCSchedulerType>(hideValue = { it.deprecatedWithReplacement != null })
+    konst gcSchedulerType by option<GCSchedulerType>(hideValue = { it.deprecatedWithReplacement != null })
 
-    val gcMarkSingleThreaded by booleanOption()
+    konst gcMarkSingleThreaded by booleanOption()
 
-    val linkRuntime by option<RuntimeLinkageStrategyBinaryOption>()
+    konst linkRuntime by option<RuntimeLinkageStrategyBinaryOption>()
 
-    val bundleId by stringOption()
-    val bundleShortVersionString by stringOption()
-    val bundleVersion by stringOption()
+    konst bundleId by stringOption()
+    konst bundleShortVersionString by stringOption()
+    konst bundleVersion by stringOption()
 
-    val appStateTracking by option<AppStateTracking>()
+    konst appStateTracking by option<AppStateTracking>()
 
-    val sanitizer by option<SanitizerKind>()
+    konst sanitizer by option<SanitizerKind>()
 
-    val mimallocUseDefaultOptions by booleanOption()
+    konst mimallocUseDefaultOptions by booleanOption()
 
-    val mimallocUseCompaction by booleanOption()
+    konst mimallocUseCompaction by booleanOption()
 
-    val compileBitcodeWithXcodeLlvm by booleanOption()
+    konst compileBitcodeWithXcodeLlvm by booleanOption()
 
-    val objcDisposeOnMain by booleanOption()
+    konst objcDisposeOnMain by booleanOption()
 
-    val disableMmap by booleanOption()
+    konst disableMmap by booleanOption()
 }
 
 open class BinaryOption<T : Any>(
-        val name: String,
-        val valueParser: ValueParser<T>,
-        val compilerConfigurationKey: CompilerConfigurationKey<T> = CompilerConfigurationKey.create(name)
+        konst name: String,
+        konst konstueParser: ValueParser<T>,
+        konst compilerConfigurationKey: CompilerConfigurationKey<T> = CompilerConfigurationKey.create(name)
 ) {
     interface ValueParser<T : Any> {
-        fun parse(value: String): T?
-        val validValuesHint: String?
+        fun parse(konstue: String): T?
+        konst konstidValuesHint: String?
     }
 }
 
 open class BinaryOptionRegistry {
-    private val registeredOptionsByName = mutableMapOf<String, BinaryOption<*>>()
+    private konst registeredOptionsByName = mutableMapOf<String, BinaryOption<*>>()
 
     protected fun register(option: BinaryOption<*>) {
-        val previousOption = registeredOptionsByName[option.name]
+        konst previousOption = registeredOptionsByName[option.name]
         if (previousOption != null) {
             error("option '${option.name}' is registered twice")
         }
@@ -86,7 +86,7 @@ open class BinaryOptionRegistry {
 
     protected fun booleanOption(): PropertyDelegateProvider<Any?, ReadOnlyProperty<Any?, CompilerConfigurationKey<Boolean>>> =
             PropertyDelegateProvider { _, property ->
-                val option = BinaryOption(property.name, BooleanValueParser)
+                konst option = BinaryOption(property.name, BooleanValueParser)
                 register(option)
                 ReadOnlyProperty { _, _ ->
                     option.compilerConfigurationKey
@@ -95,7 +95,7 @@ open class BinaryOptionRegistry {
 
     protected fun stringOption(): PropertyDelegateProvider<Any?, ReadOnlyProperty<Any?, CompilerConfigurationKey<String>>> =
             PropertyDelegateProvider { _, property ->
-                val option = BinaryOption(property.name, StringValueParser)
+                konst option = BinaryOption(property.name, StringValueParser)
                 register(option)
                 ReadOnlyProperty { _, _ ->
                     option.compilerConfigurationKey
@@ -104,7 +104,7 @@ open class BinaryOptionRegistry {
 
     protected inline fun <reified T : Enum<T>> option(noinline shortcut : (T) -> String? = { null }, noinline hideValue: (T) -> Boolean = { false }): PropertyDelegateProvider<Any?, ReadOnlyProperty<Any?, CompilerConfigurationKey<T>>> =
             PropertyDelegateProvider { _, property ->
-                val option = BinaryOption(property.name, EnumValueParser(enumValues<T>().toList(), shortcut, hideValue))
+                konst option = BinaryOption(property.name, EnumValueParser(enumValues<T>().toList(), shortcut, hideValue))
                 register(option)
                 ReadOnlyProperty { _, _ ->
                     option.compilerConfigurationKey
@@ -113,32 +113,32 @@ open class BinaryOptionRegistry {
 }
 
 private object BooleanValueParser : BinaryOption.ValueParser<Boolean> {
-    override fun parse(value: String): Boolean? = value.toBooleanStrictOrNull()
+    override fun parse(konstue: String): Boolean? = konstue.toBooleanStrictOrNull()
 
-    override val validValuesHint: String?
+    override konst konstidValuesHint: String?
         get() = "true|false"
 }
 
 private object StringValueParser : BinaryOption.ValueParser<String> {
-    override fun parse(value: String) = value
-    override val validValuesHint: String?
+    override fun parse(konstue: String) = konstue
+    override konst konstidValuesHint: String?
         get() = null
 }
 
 @PublishedApi
 internal class EnumValueParser<T : Enum<T>>(
-    val values: List<T>,
-    val shortcut: (T) -> String?,
-    val hideValue: (T) -> Boolean,
+    konst konstues: List<T>,
+    konst shortcut: (T) -> String?,
+    konst hideValue: (T) -> Boolean,
 ) : BinaryOption.ValueParser<T> {
-    override fun parse(value: String): T? = values.firstOrNull {
+    override fun parse(konstue: String): T? = konstues.firstOrNull {
         // TODO: should we really ignore case here?
-        it.name.equals(value, ignoreCase = true) || (shortcut(it)?.equals(value, ignoreCase = true) ?: false)
+        it.name.equals(konstue, ignoreCase = true) || (shortcut(it)?.equals(konstue, ignoreCase = true) ?: false)
     }
 
-    override val validValuesHint: String?
-        get() = values.filter { !hideValue(it) }.map {
-            val fullName = "$it".lowercase()
+    override konst konstidValuesHint: String?
+        get() = konstues.filter { !hideValue(it) }.map {
+            konst fullName = "$it".lowercase()
             shortcut(it)?.let { short ->
                 "$fullName (or: $short)"
             } ?: fullName

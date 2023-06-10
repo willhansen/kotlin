@@ -5,13 +5,13 @@ open annotation class TestAnn : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 
 }
 
 @TestAnn(x = "testVal.property")
-val testVal: String
+konst testVal: String
   field = ""
   get

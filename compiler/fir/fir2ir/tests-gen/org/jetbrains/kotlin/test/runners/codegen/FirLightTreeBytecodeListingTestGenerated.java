@@ -2536,24 +2536,24 @@ public class FirLightTreeBytecodeListingTestGenerated extends AbstractFirLightTr
     }
 
     @Nested
-    @TestMetadata("compiler/testData/codegen/bytecodeListing/valueClasses")
+    @TestMetadata("compiler/testData/codegen/bytecodeListing/konstueClasses")
     @TestDataPath("$PROJECT_ROOT")
     public class ValueClasses {
         @Test
         public void testAllFilesPresentInValueClasses() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeListing/valueClasses"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeListing/konstueClasses"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
         }
 
         @Test
         @TestMetadata("annotations.kt")
         public void testAnnotations() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeListing/valueClasses/annotations.kt");
+            runTest("compiler/testData/codegen/bytecodeListing/konstueClasses/annotations.kt");
         }
 
         @Test
         @TestMetadata("nullabilityAnnotationsOnInlineClassMembers.kt")
         public void testNullabilityAnnotationsOnInlineClassMembers() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeListing/valueClasses/nullabilityAnnotationsOnInlineClassMembers.kt");
+            runTest("compiler/testData/codegen/bytecodeListing/konstueClasses/nullabilityAnnotationsOnInlineClassMembers.kt");
         }
     }
 }

@@ -5,8 +5,8 @@ import java.io.File
 import java.util.*
 
 class Directories(
-    private val systemProperties: Properties,
-    private val environment: Map<String, String>)
+    private konst systemProperties: Properties,
+    private konst environment: Map<String, String>)
 {
     // Links to recommendations for storing various kinds of files on different platforms:
     // Windows: http://www.microsoft.com/security/portal/mmpc/shared/variables.aspx
@@ -14,7 +14,7 @@ class Directories(
     // OS X: https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/AccessingFilesandDirectories/AccessingFilesandDirectories.html
     //
     // Note that the temp directory must not be used on Unix, as it is shared between users.
-    val cache: File?
+    konst cache: File?
         get() = when (os) {
             OSKind.Windows -> getEnv("LOCALAPPDATA")?.toFile() ?: temp
             OSKind.OSX -> userHome?.resolve("Library/Caches")
@@ -22,10 +22,10 @@ class Directories(
             OSKind.Unknown -> userHome?.resolve(".cache")
         }
 
-    private val userHome: File?
+    private konst userHome: File?
         get() = getProperty("user.home")?.toFile()
 
-    private val temp: File?
+    private konst temp: File?
         get() = getProperty("java.io.tmpdir")?.toFile()
 
     private enum class OSKind {
@@ -38,7 +38,7 @@ class Directories(
     // OS detection based on
     // compiler/daemon/daemon-common/src/org/jetbrains/kotlin/daemon/common/FileSystemUtils.kt
     // which in turn is based on: http://www.code4copy.com/java/post/detecting-os-type-in-java
-    private val os: OSKind
+    private konst os: OSKind
         get() = getProperty("os.name")?.lowercase().let { name ->
             when {
                 name == null -> OSKind.Unknown

@@ -2,11 +2,11 @@
 package foo
 
 external class A(c: Int) {
-    val c: Int
+    konst c: Int
 
     companion object {
-        val g: Int
-        val c: String = definedExternally
+        konst g: Int
+        konst c: String = definedExternally
     }
 }
 

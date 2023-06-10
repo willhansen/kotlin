@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
 import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 import org.jetbrains.kotlin.resolve.jvm.getCompileTimeConstant
@@ -28,8 +28,8 @@ object DefaultCheckerInTailrec : DeclarationChecker {
 
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.ProperComputationOrderOfTailrecDefaultParameters)) return
 
-        val defaultValues = descriptor.valueParameters.filter { it.declaresDefaultValue() }.filter {
-            val parameterDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(it)
+        konst defaultValues = descriptor.konstueParameters.filter { it.declaresDefaultValue() }.filter {
+            konst parameterDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(it)
             if (parameterDeclaration is KtParameter) {
                 parameterDeclaration.defaultValue?.let {
                     getCompileTimeConstant(
@@ -38,7 +38,7 @@ object DefaultCheckerInTailrec : DeclarationChecker {
                         false,
                         context.languageVersionSettings.supportsFeature(LanguageFeature.InlineConstVals)
                     )?.let { const ->
-                        val type = const.getType(descriptor.module)
+                        konst type = const.getType(descriptor.module)
                         return@filter !(KotlinBuiltIns.isPrimitiveTypeOrNullablePrimitiveType(type) ||
                                 KotlinBuiltIns.isStringOrNullableString(type))
                     }

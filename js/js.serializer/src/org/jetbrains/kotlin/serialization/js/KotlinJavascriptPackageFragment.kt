@@ -45,7 +45,7 @@ class KotlinJavascriptPackageFragment(
 ) : DeserializedPackageFragmentImpl(
     fqName, storageManager, module, proto, metadataVersion, JsContainerSource(fqName, header, configuration)
 ) {
-    val fileMap: Map<Int, FileHolder> =
+    konst fileMap: Map<Int, FileHolder> =
         proto.getExtension(JsProtoBuf.packageFragmentFiles).fileList.withIndex().associate { (index, file) ->
             (if (file.hasId()) file.id else index) to FileHolder(file.annotationList)
         }
@@ -61,23 +61,23 @@ class KotlinJavascriptPackageFragment(
         if (DescriptorUtils.getParentOfType(descriptor, PackageFragmentDescriptor::class.java) != this) {
             throw IllegalArgumentException("Provided descriptor $descriptor does not belong to this package $this")
         }
-        val fileId = descriptor.extractFileId()
+        konst fileId = descriptor.extractFileId()
 
         return fileId?.let { fileMap[it] }?.annotations.orEmpty()
     }
 
-    inner class FileHolder(private val annotationsProto: List<ProtoBuf.Annotation>) {
-        val annotations: List<AnnotationDescriptor> by storageManager.createLazyValue {
+    inner class FileHolder(private konst annotationsProto: List<ProtoBuf.Annotation>) {
+        konst annotations: List<AnnotationDescriptor> by storageManager.createLazyValue {
             annotationsProto.map { annotationDeserializer.deserializeAnnotation(it, nameResolver) }
         }
     }
 
     class JsContainerSource(
-        private val fqName: FqName,
+        private konst fqName: FqName,
         header: JsProtoBuf.Header,
         configuration: DeserializationConfiguration
     ) : DeserializedContainerSource {
-        val annotations: List<ClassId> =
+        konst annotations: List<ClassId> =
             if (header.annotationCount == 0) emptyList()
             else NameResolverImpl(header.strings, header.qualifiedNames).let { nameResolver ->
                 // TODO: read arguments of module annotations
@@ -89,16 +89,16 @@ class KotlinJavascriptPackageFragment(
 
         // This is null because we look for incompatible libraries in dependencies in the beginning of the compilation anyway,
         // and refuse to compile against them completely
-        override val incompatibility: IncompatibleVersionErrorData<*>?
+        override konst incompatibility: IncompatibleVersionErrorData<*>?
             get() = null
 
-        override val isPreReleaseInvisible: Boolean =
+        override konst isPreReleaseInvisible: Boolean =
             configuration.reportErrorsOnPreReleaseDependencies && (header.flags and 1) != 0
 
-        override val abiStability: DeserializedContainerAbiStability
+        override konst abiStability: DeserializedContainerAbiStability
             get() = DeserializedContainerAbiStability.STABLE
 
-        override val presentableString: String
+        override konst presentableString: String
             get() = "Package '$fqName'"
     }
 }

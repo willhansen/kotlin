@@ -20,15 +20,15 @@ import java.io.File
 import java.io.PrintStream
 import java.nio.charset.Charset
 
-abstract class AbstractJsFirInvalidationTest : FirAbstractInvalidationTest(TargetBackend.JS_IR, "incrementalOut/invalidationFir")
+abstract class AbstractJsFirInkonstidationTest : FirAbstractInkonstidationTest(TargetBackend.JS_IR, "incrementalOut/inkonstidationFir")
 
-abstract class FirAbstractInvalidationTest(
+abstract class FirAbstractInkonstidationTest(
     targetBackend: TargetBackend,
     workingDirPath: String
-) : AbstractInvalidationTest(targetBackend, workingDirPath) {
+) : AbstractInkonstidationTest(targetBackend, workingDirPath) {
     private fun getFirInfoFile(defaultInfoFile: File): File {
-        val firInfoFileName = "${defaultInfoFile.nameWithoutExtension}.fir.${defaultInfoFile.extension}"
-        val firInfoFile = defaultInfoFile.parentFile.resolve(firInfoFileName)
+        konst firInfoFileName = "${defaultInfoFile.nameWithoutExtension}.fir.${defaultInfoFile.extension}"
+        konst firInfoFile = defaultInfoFile.parentFile.resolve(firInfoFileName)
         return firInfoFile.takeIf { it.exists() } ?: defaultInfoFile
     }
 
@@ -48,14 +48,14 @@ abstract class FirAbstractInvalidationTest(
         friends: Collection<File>,
         outputKlibFile: File
     ) {
-        val outputStream = ByteArrayOutputStream()
-        val messageCollector = PrintingMessageCollector(PrintStream(outputStream), MessageRenderer.PLAIN_FULL_PATHS, true)
-        val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
+        konst outputStream = ByteArrayOutputStream()
+        konst messageCollector = PrintingMessageCollector(PrintStream(outputStream), MessageRenderer.PLAIN_FULL_PATHS, true)
+        konst diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
 
-        val libraries = dependencies.map { it.absolutePath }
-        val friendLibraries = friends.map { it.absolutePath }
-        val sourceFiles = sourceDir.filteredKtFiles().map { environment.createPsiFile(it) }
-        val moduleStructure = ModulesStructure(
+        konst libraries = dependencies.map { it.absolutePath }
+        konst friendLibraries = friends.map { it.absolutePath }
+        konst sourceFiles = sourceDir.filteredKtFiles().map { environment.createPsiFile(it) }
+        konst moduleStructure = ModulesStructure(
             project = environment.project,
             mainModule = MainModule.SourceFiles(sourceFiles),
             compilerConfiguration = configuration,
@@ -63,7 +63,7 @@ abstract class FirAbstractInvalidationTest(
             friendDependenciesPaths = friendLibraries
         )
 
-        val analyzedOutput = compileModuleToAnalyzedFirWithPsi(
+        konst analyzedOutput = compileModuleToAnalyzedFirWithPsi(
             moduleStructure = moduleStructure,
             ktFiles = sourceFiles,
             libraries = libraries,
@@ -73,10 +73,10 @@ abstract class FirAbstractInvalidationTest(
             lookupTracker = null,
         )
 
-        val fir2IrActualizedResult = transformFirToIr(moduleStructure, analyzedOutput.output, diagnosticsReporter)
+        konst fir2IrActualizedResult = transformFirToIr(moduleStructure, analyzedOutput.output, diagnosticsReporter)
 
         if (analyzedOutput.reportCompilationErrors(moduleStructure, diagnosticsReporter, messageCollector)) {
-            val messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
+            konst messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
             throw AssertionError("The following errors occurred compiling test:\n$messages")
         }
 
@@ -91,7 +91,7 @@ abstract class FirAbstractInvalidationTest(
         )
 
         if (messageCollector.hasErrors()) {
-            val messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
+            konst messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
             throw AssertionError("The following errors occurred serializing test klib:\n$messages")
         }
     }

@@ -4,7 +4,7 @@ FILE: kt50386.kt
     public abstract interface MutableSharedFlow<T> : R|Flow<T>| {
     }
     public final fun test(output: R|(ScrapingOffOutput) -> kotlin/Unit|): R|kotlin/Unit| {
-        lval p: <ERROR TYPE REF: Ambiguity: presenter, [/presenter, /presenter]> = <Ambiguity: presenter, [/presenter, /presenter]>#(R|<local>/output|, <L> = presenter@fun <anonymous>(): R|ScrapingOffPresenter| <inline=Unknown>  {
+        lkonst p: <ERROR TYPE REF: Ambiguity: presenter, [/presenter, /presenter]> = <Ambiguity: presenter, [/presenter, /presenter]>#(R|<local>/output|, <L> = presenter@fun <anonymous>(): R|ScrapingOffPresenter| <inline=Unknown>  {
             ^ R|/ScrapingOffPresenter.ScrapingOffPresenter|()
         }
         )
@@ -14,7 +14,7 @@ FILE: kt50386.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val output: R|MutableSharedFlow<Output>| = Null(null)!!
+        public final konst output: R|MutableSharedFlow<Output>| = Null(null)!!
             public get(): R|MutableSharedFlow<Output>|
 
         public abstract fun Present(events: R|Events|): R|Model|
@@ -31,10 +31,10 @@ FILE: kt50386.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val model: R|M| = R|<local>/model|
+        public final konst model: R|M| = R|<local>/model|
             public get(): R|M|
 
-        public final val events: R|E| = R|<local>/events|
+        public final konst events: R|E| = R|<local>/events|
             public get(): R|E|
 
         public final operator fun component1(): R|M|

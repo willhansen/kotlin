@@ -14,8 +14,8 @@ interface Interface {
 }
 
 abstract class AbstractClass {
-    final val finalVal = Unit
-    open val openVal = Unit
+    final konst finalVal = Unit
+    open konst openVal = Unit
     abstract var abstractVar: Unit
 }
 

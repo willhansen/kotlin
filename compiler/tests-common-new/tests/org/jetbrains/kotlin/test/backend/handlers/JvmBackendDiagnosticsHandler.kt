@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.io.File
 
 class JvmBackendDiagnosticsHandler(testServices: TestServices) : JvmBinaryArtifactHandler(testServices) {
-    private val reporter = ClassicDiagnosticReporter(testServices)
+    private konst reporter = ClassicDiagnosticReporter(testServices)
 
     override fun processModule(module: TestModule, info: BinaryArtifacts.Jvm) {
         reportDiagnostics(module, info)
@@ -42,7 +42,7 @@ class JvmBackendDiagnosticsHandler(testServices: TestServices) : JvmBinaryArtifa
         return when (module.frontendKind) {
             FrontendKinds.ClassicFrontend -> testServices.dependencyProvider.getArtifact(module, FrontendKinds.ClassicFrontend).ktFiles
             FrontendKinds.FIR -> testServices.dependencyProvider.getArtifact(module, FrontendKinds.FIR).mainFirFiles.entries
-                .associate { it.key to (it.value.psi as KtFile) }
+                .associate { it.key to (it.konstue.psi as KtFile) }
             else -> testServices.assertions.fail { "Unknown frontend kind ${module.frontendKind}" }
         }
     }
@@ -50,36 +50,36 @@ class JvmBackendDiagnosticsHandler(testServices: TestServices) : JvmBinaryArtifa
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {}
 
     private fun getLineAndColumnRange(diagnostic: KtDiagnostic): PsiDiagnosticUtils.LineAndColumnRange {
-        val file = diagnostic.psiElement.containingFile
-        val textRanges = diagnostic.textRanges
+        konst file = diagnostic.psiElement.containingFile
+        konst textRanges = diagnostic.textRanges
         return DiagnosticUtils.getLineAndColumnRange(file, textRanges)
     }
 
     private fun reportDiagnostics(module: TestModule, info: BinaryArtifacts.Jvm) {
-        val testFileToKtFileMap = getKtFiles(module)
-        val ktFileToTestFileMap = testFileToKtFileMap.entries.associate { it.value to it.key }
-        val generationState = info.classFileFactory.generationState
-        val configuration = reporter.createConfiguration(module)
-        val withNewInferenceModeEnabled = testServices.withNewInferenceModeEnabled()
+        konst testFileToKtFileMap = getKtFiles(module)
+        konst ktFileToTestFileMap = testFileToKtFileMap.entries.associate { it.konstue to it.key }
+        konst generationState = info.classFileFactory.generationState
+        konst configuration = reporter.createConfiguration(module)
+        konst withNewInferenceModeEnabled = testServices.withNewInferenceModeEnabled()
 
-        val diagnostics = generationState.collectedExtraJvmDiagnostics.all()
+        konst diagnostics = generationState.collectedExtraJvmDiagnostics.all()
         for (diagnostic in diagnostics) {
-            val ktFile = diagnostic.psiFile as? KtFile ?: continue
-            val testFile = ktFileToTestFileMap[ktFile] ?: continue
+            konst ktFile = diagnostic.psiFile as? KtFile ?: continue
+            konst testFile = ktFileToTestFileMap[ktFile] ?: continue
             reporter.reportDiagnostic(diagnostic, module, testFile, configuration, withNewInferenceModeEnabled)
         }
     }
 
     private fun reportKtDiagnostics(module: TestModule, info: BinaryArtifacts.Jvm) {
-        val testFileToKtFileMap = getKtFiles(module)
-        val generationState = info.classFileFactory.generationState
+        konst testFileToKtFileMap = getKtFiles(module)
+        konst generationState = info.classFileFactory.generationState
 
-        val ktDiagnosticReporter = generationState.diagnosticReporter as BaseDiagnosticsCollector
-        val globalMetadataInfoHandler = testServices.globalMetadataInfoHandler
+        konst ktDiagnosticReporter = generationState.diagnosticReporter as BaseDiagnosticsCollector
+        konst globalMetadataInfoHandler = testServices.globalMetadataInfoHandler
         for ((testFile, ktFile) in testFileToKtFileMap.entries) {
-            val ktDiagnostics = ktDiagnosticReporter.diagnosticsByFilePath[ktFile.virtualFilePath] ?: continue
+            konst ktDiagnostics = ktDiagnosticReporter.diagnosticsByFilePath[ktFile.virtualFilePath] ?: continue
             ktDiagnostics.forEach {
-                val metaInfos =
+                konst metaInfos =
                     it.toMetaInfos(module, testFile, globalMetadataInfoHandler, false, false)
                 globalMetadataInfoHandler.addMetadataInfosForFile(testFile, metaInfos)
             }
@@ -89,17 +89,17 @@ class JvmBackendDiagnosticsHandler(testServices: TestServices) : JvmBinaryArtifa
     private fun checkFullDiagnosticRender(module: TestModule, info: BinaryArtifacts.Jvm) {
         if (DiagnosticsDirectives.RENDER_DIAGNOSTICS_FULL_TEXT !in module.directives) return
 
-        val testFileToKtFileMap = getKtFiles(module)
-        val generationState = info.classFileFactory.generationState
+        konst testFileToKtFileMap = getKtFiles(module)
+        konst generationState = info.classFileFactory.generationState
 
-        val ktDiagnosticReporter = generationState.diagnosticReporter as BaseDiagnosticsCollector
-        val reportedDiagnostics = mutableListOf<String>()
-        for (ktFile in testFileToKtFileMap.values) {
-            val ktDiagnostics = ktDiagnosticReporter.diagnosticsByFilePath[ktFile.virtualFilePath] ?: continue
+        konst ktDiagnosticReporter = generationState.diagnosticReporter as BaseDiagnosticsCollector
+        konst reportedDiagnostics = mutableListOf<String>()
+        for (ktFile in testFileToKtFileMap.konstues) {
+            konst ktDiagnostics = ktDiagnosticReporter.diagnosticsByFilePath[ktFile.virtualFilePath] ?: continue
             ktDiagnostics.forEach {
-                val severity = AnalyzerWithCompilerReport.convertSeverity(it.severity).toString().toLowerCaseAsciiOnly()
-                val message = KtDefaultJvmErrorMessages.MAP[it.factory]?.render(it)
-                val position = getLineAndColumnRange(it).start
+                konst severity = AnalyzerWithCompilerReport.convertSeverity(it.severity).toString().toLowerCaseAsciiOnly()
+                konst message = KtDefaultJvmErrorMessages.MAP[it.factory]?.render(it)
+                konst position = getLineAndColumnRange(it).start
                 reportedDiagnostics += "/${ktFile.name}:${position.line}:${position.column}: $severity: $message"
             }
         }

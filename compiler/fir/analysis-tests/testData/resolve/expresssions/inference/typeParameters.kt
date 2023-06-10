@@ -6,6 +6,6 @@ fun <T : Foo> foo(t: T) = t
 
 
 fun main(fooImpl: FooImpl, bar: Bar) {
-    val a = foo(fooImpl)
-    val b = foo(<!ARGUMENT_TYPE_MISMATCH!>bar<!>)
+    konst a = foo(fooImpl)
+    konst b = foo(<!ARGUMENT_TYPE_MISMATCH!>bar<!>)
 }

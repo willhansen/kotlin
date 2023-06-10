@@ -15,7 +15,7 @@ class A {
 }
 
 class B {
-    private val foo = 1
+    private konst foo = 1
         get
 
     fun foo() {

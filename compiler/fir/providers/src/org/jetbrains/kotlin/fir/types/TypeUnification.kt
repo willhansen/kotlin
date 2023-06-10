@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.types.AbstractTypeChecker
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 
 /**
- * @return false does only mean that there were conflicted values for some type parameter. In all other cases, it returns true.
+ * @return false does only mean that there were conflicted konstues for some type parameter. In all other cases, it returns true.
  * "fail" result in the comments below means that we can't infer anything meaningful in that branch of unification.
  * See more at org.jetbrains.kotlin.types.TypeUnifier.doUnify.
  * NB: "Failed@ result of UnificationResultImpl is effectively unused in production.
@@ -23,16 +23,16 @@ fun FirSession.doUnify(
     targetTypeParameters: Set<FirTypeParameterSymbol>,
     result: MutableMap<FirTypeParameterSymbol, ConeTypeProjection>,
 ): Boolean {
-    val originalType = originalTypeProjection.type?.lowerBoundIfFlexible()?.fullyExpandedType(this)
-    val typeWithParameters = typeWithParametersProjection.type?.lowerBoundIfFlexible()?.fullyExpandedType(this)
+    konst originalType = originalTypeProjection.type?.lowerBoundIfFlexible()?.fullyExpandedType(this)
+    konst typeWithParameters = typeWithParametersProjection.type?.lowerBoundIfFlexible()?.fullyExpandedType(this)
 
     if (originalType is ConeIntersectionType) {
-        val intersectionResult = mutableMapOf<FirTypeParameterSymbol, ConeTypeProjection>()
+        konst intersectionResult = mutableMapOf<FirTypeParameterSymbol, ConeTypeProjection>()
         for (intersectedType in originalType.intersectedTypes) {
-            val localResult = mutableMapOf<FirTypeParameterSymbol, ConeTypeProjection>()
+            konst localResult = mutableMapOf<FirTypeParameterSymbol, ConeTypeProjection>()
             if (!doUnify(intersectedType, typeWithParametersProjection, targetTypeParameters, localResult)) return false
             for ((typeParameter, typeProjection) in localResult) {
-                val existingTypeProjection = intersectionResult[typeParameter]
+                konst existingTypeProjection = intersectionResult[typeParameter]
                 if (existingTypeProjection == null
                     || (typeProjection is KotlinTypeMarker &&
                             existingTypeProjection is KotlinTypeMarker &&
@@ -42,8 +42,8 @@ fun FirSession.doUnify(
                 }
             }
         }
-        for ((key, value) in intersectionResult) {
-            result[key] = value
+        for ((key, konstue) in intersectionResult) {
+            result[key] = konstue
         }
         return true
     }
@@ -88,7 +88,7 @@ fun FirSession.doUnify(
 
     // Foo ~ X  =>  x |-> Foo
     // * ~ X => x |-> *
-    val typeParameter = (typeWithParameters as? ConeTypeParameterType)?.lookupTag?.typeParameterSymbol
+    konst typeParameter = (typeWithParameters as? ConeTypeParameterType)?.lookupTag?.typeParameterSymbol
     if (typeParameter != null && typeParameter in targetTypeParameters) {
         if (typeParameter in result && result[typeParameter] != originalTypeProjection) return false
         result[typeParameter] = originalTypeProjection
@@ -120,7 +120,7 @@ fun FirSession.doUnify(
 }
 
 private fun ConeTypeProjection.removeQuestionMark(typeContext: ConeTypeContext): ConeTypeProjection {
-    val type = type
+    konst type = type
     require(type != null && type.nullability.isNullable) {
         "Expected nullable type, got $type"
     }

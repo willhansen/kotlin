@@ -14,7 +14,7 @@ interface Plus {
     fun plus(ss: String): String
 }
 
-class C(val s: String) : Plus, Serializable {
+class C(konst s: String) : Plus, Serializable {
     override fun plus(ss: String) = ss + s
 }
 
@@ -23,19 +23,19 @@ class K : Plus, Serializable {
 }
 
 fun box(): String {
-    val p1: Plus = C("K")
-    val t1 = roundtrip(Sam(p1::plus)).get("O")
+    konst p1: Plus = C("K")
+    konst t1 = roundtrip(Sam(p1::plus)).get("O")
     if (t1 != "OK") return "Failed: t1='$t1'"
 
-    val p2: Plus = K()
-    val t2 = roundtrip(Sam(p2::plus)).get("O")
+    konst p2: Plus = K()
+    konst t2 = roundtrip(Sam(p2::plus)).get("O")
     if (t2 != "OK") return "Failed: t2='$t2'"
 
     return "OK"
 }
 
 fun <T> roundtrip(x: T): T {
-    val out1 = ByteArrayOutputStream()
+    konst out1 = ByteArrayOutputStream()
     ObjectOutputStream(out1).writeObject(x)
     return ObjectInputStream(ByteArrayInputStream(out1.toByteArray())).readObject() as T
 }

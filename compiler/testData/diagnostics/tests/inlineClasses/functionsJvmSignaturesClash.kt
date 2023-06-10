@@ -1,11 +1,11 @@
 // !LANGUAGE: +InlineClasses, -JvmInlineValueClasses
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-inline class X(val x: Int)
-inline class Z(val x: Int)
-inline class Str(val str: String)
-inline class Name(val name: String)
-inline class NStr(val str: String?)
+inline class X(konst x: Int)
+inline class Z(konst x: Int)
+inline class Str(konst str: String)
+inline class Name(konst name: String)
+inline class NStr(konst str: String?)
 
 fun testSimple(x: X) {}
 fun testSimple(z: Z) {}

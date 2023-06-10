@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.load.java.descriptors
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 
 interface PossiblyExternalAnnotationDescriptor : AnnotationDescriptor {
-    val isIdeExternalAnnotation: Boolean
+    konst isIdeExternalAnnotation: Boolean
 }

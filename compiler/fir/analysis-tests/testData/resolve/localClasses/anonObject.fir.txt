@@ -4,12 +4,12 @@ FILE: a.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val O: R|B| = object : R|B| {
+        public final konst O: R|B| = object : R|B| {
             private constructor(): R|<anonymous>| {
                 super<R|B|>()
             }
 
-            protected open override val message: R|kotlin/String| = String(expression expected)
+            protected open override konst message: R|kotlin/String| = String(expression expected)
                 protected get(): R|kotlin/String|
 
         }
@@ -23,7 +23,7 @@ FILE: b.kt
             super<R|kotlin/Any|>()
         }
 
-        protected abstract val message: R|kotlin/String|
+        protected abstract konst message: R|kotlin/String|
             protected get(): R|kotlin/String|
 
     }

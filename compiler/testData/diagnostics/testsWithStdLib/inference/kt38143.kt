@@ -22,15 +22,15 @@ class Baz : UseCase<Unit, List<List<List<List<List<List<String>>>>>>> {
 }
 
 fun main() {
-    val foo = Foo()
+    konst foo = Foo()
     foo.execute(Unit) // Member: OK both versions
     foo.execute() // Extension: OI - OK, NI - was error: "Not enough information to infer type variable O"
 
-    val bar = Bar()
+    konst bar = Bar()
     bar.execute(Unit) // Member: OK both versions
     bar.execute() // Extension: OK both versions
 
-    val baz = Baz()
+    konst baz = Baz()
     baz.execute(Unit)
     baz.execute()
 }

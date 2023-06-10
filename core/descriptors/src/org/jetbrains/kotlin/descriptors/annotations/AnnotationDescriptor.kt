@@ -28,16 +28,16 @@ import org.jetbrains.kotlin.types.getAbbreviation
 import org.jetbrains.kotlin.types.model.AnnotationMarker
 
 interface AnnotationDescriptor : AnnotationMarker {
-    val type: KotlinType
+    konst type: KotlinType
 
-    val fqName: FqName?
+    konst fqName: FqName?
         get() = annotationClass?.takeUnless(ErrorUtils::isError)?.fqNameOrNull()
 
-    val allValueArguments: Map<Name, ConstantValue<*>>
+    konst allValueArguments: Map<Name, ConstantValue<*>>
 
-    val source: SourceElement
+    konst source: SourceElement
 
 }
 
-val AnnotationDescriptor.abbreviationFqName: FqName?
+konst AnnotationDescriptor.abbreviationFqName: FqName?
     get() = type.getAbbreviation()?.constructor?.declarationDescriptor?.fqNameOrNull()

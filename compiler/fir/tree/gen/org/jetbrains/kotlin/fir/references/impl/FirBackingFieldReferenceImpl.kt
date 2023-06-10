@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirBackingFieldReferenceImpl(
-    override val source: KtSourceElement?,
-    override val resolvedSymbol: FirBackingFieldSymbol,
+    override konst source: KtSourceElement?,
+    override konst resolvedSymbol: FirBackingFieldSymbol,
 ) : FirBackingFieldReference() {
-    override val name: Name get() = Name.identifier("\$field")
+    override konst name: Name get() = Name.identifier("\$field")
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

@@ -16,15 +16,15 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val cMin = '\u0000'
+    konst cMin = '\u0000'
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Char")!>cMin<!>
     cMin checkType { check<Char>()}
 
-    val cMax = '\uffff'
+    konst cMax = '\uffff'
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Char")!>cMax<!>
     cMax checkType { check<Char>()}
 
-    val cMax1 = '\uFFFF'
+    konst cMax1 = '\uFFFF'
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Char")!>cMax1<!>
     cMax1 checkType { check<Char>()}
 }

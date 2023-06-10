@@ -8,7 +8,7 @@ import java.util.stream.Collectors
 import java.util.function.Function
 
 fun box(): String {
-    val m = listOf("OK", "OK")
+    konst m = listOf("OK", "OK")
         .stream()
         .collect(
             Collectors.groupingBy(

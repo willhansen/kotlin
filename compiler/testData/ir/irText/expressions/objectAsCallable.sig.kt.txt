@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Int
+konst test1: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Int
   //   Public signature: /test1.<get-test1>|3978508226793108919[0]
@@ -13,7 +13,7 @@ val test1: Int
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: Int
+konst test2: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test2>(){}kotlin.Int
   //   Public signature: /test2.<get-test2>|-8779933517717592707[0]
@@ -36,20 +36,20 @@ enum class En : Enum<En> {
   X
 
   // CHECK JVM_IR:
-  //   Mangled name: En#valueOf#static(kotlin.String){}En
-  //   Public signature: /En.valueOf|-1047188124757226812[0]
+  //   Mangled name: En#konstueOf#static(kotlin.String){}En
+  //   Public signature: /En.konstueOf|-1047188124757226812[0]
   // CHECK JS_IR NATIVE:
-  //   Mangled name: En#valueOf#static(kotlin.String){}
-  //   Public signature: /En.valueOf|-4683474617854611729[0]
-  fun valueOf(value: String): En
+  //   Mangled name: En#konstueOf#static(kotlin.String){}
+  //   Public signature: /En.konstueOf|-4683474617854611729[0]
+  fun konstueOf(konstue: String): En
 
   // CHECK JVM_IR:
-  //   Mangled name: En#values#static(){}kotlin.Array<En>
-  //   Public signature: /En.values|-6442868649398371099[0]
+  //   Mangled name: En#konstues#static(){}kotlin.Array<En>
+  //   Public signature: /En.konstues|-6442868649398371099[0]
   // CHECK JS_IR NATIVE:
-  //   Mangled name: En#values#static(){}
-  //   Public signature: /En.values|-8715569000920726747[0]
-  fun values(): Array<En>
+  //   Mangled name: En#konstues#static(){}
+  //   Public signature: /En.konstues|-8715569000920726747[0]
+  fun konstues(): Array<En>
 
   // CHECK JVM_IR:
   //   Mangled name: En#clone(){}kotlin.Any
@@ -94,7 +94,7 @@ enum class En : Enum<En> {
   // CHECK:
   //   Mangled name: En#static{}entries
   //   Public signature: /En.entries|-5134227801081826149[0]
-  val entries: EnumEntries<En>
+  konst entries: EnumEntries<En>
     // CHECK JVM_IR:
     //   Mangled name: En#<get-entries>#static(){}kotlin.enums.EnumEntries<En>
     //   Public signature: /En.entries.<get-entries>|7832995474718587298[0]
@@ -106,7 +106,7 @@ enum class En : Enum<En> {
   // CHECK:
   //   Mangled name: En{}name
   //   Public signature: /En.name|4231860309499509769[0]
-  /* fake */ override val name: String
+  /* fake */ override konst name: String
     // CHECK JVM_IR:
     //   Mangled name: En#<get-name>(){}kotlin.String
     //   Public signature: /En.name.<get-name>|-8006111524522882650[0]
@@ -118,7 +118,7 @@ enum class En : Enum<En> {
   // CHECK:
   //   Mangled name: En{}ordinal
   //   Public signature: /En.ordinal|1912745122988592376[0]
-  /* fake */ override val ordinal: Int
+  /* fake */ override konst ordinal: Int
     // CHECK JVM_IR:
     //   Mangled name: En#<get-ordinal>(){}kotlin.Int
     //   Public signature: /En.ordinal.<get-ordinal>|-6902664390061762634[0]

@@ -12,7 +12,7 @@ class SmileView(frame: CValue<CGRect>): UIView(frame = frame) {
     override fun drawRect(rect: CValue<CGRect>) {
         super.drawRect(rect)
 
-        val smile = ":)" as NSString
+        konst smile = ":)" as NSString
         smile.drawInRect(rect, withAttributes = null)
         println("SmileView::drawRect")
     }
@@ -25,8 +25,8 @@ class SmileView(frame: CValue<CGRect>): UIView(frame = frame) {
 
 fun main() {
     memScoped {
-        val frame = alloc<CGRect>()
-        val x = SmileView(frame.readValue())
+        konst frame = alloc<CGRect>()
+        konst x = SmileView(frame.readValue())
         x.drawRect(frame.readValue())
         x.layoutSubviews()
     }

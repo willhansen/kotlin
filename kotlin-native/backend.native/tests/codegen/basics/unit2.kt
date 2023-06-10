@@ -9,7 +9,7 @@ import kotlin.test.*
 
 @Test
 fun runTest() {
-    val x = foo()
+    konst x = foo()
     println(x.toString())
 }
 

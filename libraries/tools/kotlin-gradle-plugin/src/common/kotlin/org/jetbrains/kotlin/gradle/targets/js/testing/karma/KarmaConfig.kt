@@ -12,38 +12,38 @@ data class KarmaConfig(
     var singleRun: Boolean = true,
     var autoWatch: Boolean = false,
     var basePath: String? = null,
-    val files: MutableList<Any> = mutableListOf(),
-    val frameworks: MutableList<String> = mutableListOf(),
-    val client: KarmaClient = KarmaClient(),
-    val browsers: MutableList<String> = mutableListOf(),
-    val customLaunchers: MutableMap<String, CustomLauncher> = mutableMapOf(),
+    konst files: MutableList<Any> = mutableListOf(),
+    konst frameworks: MutableList<String> = mutableListOf(),
+    konst client: KarmaClient = KarmaClient(),
+    konst browsers: MutableList<String> = mutableListOf(),
+    konst customLaunchers: MutableMap<String, CustomLauncher> = mutableMapOf(),
     var customContextFile: String? = null,
     var customDebugFile: String? = null,
-    val failOnFailingTestSuite: Boolean = false,
-    val failOnEmptyTestSuite: Boolean = false,
-    val reporters: MutableList<String> = mutableListOf(),
-    val preprocessors: MutableMap<String, MutableList<String>> = mutableMapOf(),
-    val proxies: MutableMap<String, String> = mutableMapOf()
+    konst failOnFailingTestSuite: Boolean = false,
+    konst failOnEmptyTestSuite: Boolean = false,
+    konst reporters: MutableList<String> = mutableListOf(),
+    konst preprocessors: MutableMap<String, MutableList<String>> = mutableMapOf(),
+    konst proxies: MutableMap<String, String> = mutableMapOf()
 )
 
 data class KarmaFile(
-    val pattern: String,
-    val included: Boolean,
-    val served: Boolean,
-    val watched: Boolean
+    konst pattern: String,
+    konst included: Boolean,
+    konst served: Boolean,
+    konst watched: Boolean
 )
 
 data class KarmaClient(
-    val args: MutableList<String> = mutableListOf()
+    konst args: MutableList<String> = mutableListOf()
 )
 
 class CustomLauncher(var base: String) {
-    val flags = mutableListOf<String>()
+    konst flags = mutableListOf<String>()
     var debug: Boolean? = null
 }
 
 data class Reporter(
-    val type: String,
-    val subDir: String? = null,
-    val file: String? = null
+    konst type: String,
+    konst subDir: String? = null,
+    konst file: String? = null
 )

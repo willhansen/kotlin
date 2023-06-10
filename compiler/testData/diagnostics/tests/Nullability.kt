@@ -1,7 +1,7 @@
 // FULL_JDK
 
 fun test() {
-  val a : Int? = 0
+  konst a : Int? = 0
   if (a != null) {
     <!DEBUG_INFO_SMARTCAST!>a<!>.plus(1)
   }
@@ -9,8 +9,8 @@ fun test() {
     <!DEBUG_INFO_CONSTANT!>a<!>?.plus(1)
   }
 
-  val out : java.io.PrintStream? = null
-  val ins : java.io.InputStream? = null
+  konst out : java.io.PrintStream? = null
+  konst ins : java.io.InputStream? = null
 
   out?.println()
   ins?.read()
@@ -144,7 +144,7 @@ fun test() {
   }
   <!DEBUG_INFO_CONSTANT!>out<!>?.println();
 
-  val out2 : java.io.PrintStream? = null
+  konst out2 : java.io.PrintStream? = null
 
   while (out2 == null) {
     <!DEBUG_INFO_CONSTANT!>out2<!>?.println();

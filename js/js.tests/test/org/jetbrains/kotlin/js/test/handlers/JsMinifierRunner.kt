@@ -22,40 +22,40 @@ import org.jetbrains.kotlin.test.services.moduleStructure
 import java.io.File
 
 class JsMinifierRunner(testServices: TestServices) : AbstractJsArtifactsCollector(testServices) {
-    private val distDirJsPath = "dist/js/"
-    private val overwriteReachableNodesProperty = "kotlin.js.overwriteReachableNodes"
-    private val overwriteReachableNodes = java.lang.Boolean.getBoolean(overwriteReachableNodesProperty)
+    private konst distDirJsPath = "dist/js/"
+    private konst overwriteReachableNodesProperty = "kotlin.js.overwriteReachableNodes"
+    private konst overwriteReachableNodes = java.lang.Boolean.getBoolean(overwriteReachableNodesProperty)
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (someAssertionWasFailed) return
 
-        val globalDirectives = testServices.moduleStructure.allDirectives
-        val dontRunGeneratedCode = globalDirectives[JsEnvironmentConfigurationDirectives.DONT_RUN_GENERATED_CODE]
+        konst globalDirectives = testServices.moduleStructure.allDirectives
+        konst dontRunGeneratedCode = globalDirectives[JsEnvironmentConfigurationDirectives.DONT_RUN_GENERATED_CODE]
             .contains(testServices.defaultsProvider.defaultTargetBackend?.name)
-        val esModules = JsEnvironmentConfigurationDirectives.ES_MODULES in globalDirectives
-        val onlyIrDce = JsEnvironmentConfigurationDirectives.ONLY_IR_DCE in globalDirectives
+        konst esModules = JsEnvironmentConfigurationDirectives.ES_MODULES in globalDirectives
+        konst onlyIrDce = JsEnvironmentConfigurationDirectives.ONLY_IR_DCE in globalDirectives
 
         if (dontRunGeneratedCode || esModules || onlyIrDce) return
 
-        val allJsFiles = getOnlyJsFilesForRunner(testServices, modulesToArtifact)
+        konst allJsFiles = getOnlyJsFilesForRunner(testServices, modulesToArtifact)
 
-        val withModuleSystem = testWithModuleSystem(testServices)
-        val testModuleName = getTestModuleName(testServices)
-        val testPackage = extractTestPackage(testServices)
-        val testFunction = JsBoxRunner.TEST_FUNCTION
+        konst withModuleSystem = testWithModuleSystem(testServices)
+        konst testModuleName = getTestModuleName(testServices)
+        konst testPackage = extractTestPackage(testServices)
+        konst testFunction = JsBoxRunner.TEST_FUNCTION
 
-        val dontSkipMinification = JsEnvironmentConfigurationDirectives.SKIP_MINIFICATION !in globalDirectives
-        val runMinifierByDefault = JsEnvironmentConfigurationDirectives.RUN_MINIFIER_BY_DEFAULT in globalDirectives
-        val expectedReachableNodes = globalDirectives[JsEnvironmentConfigurationDirectives.EXPECTED_REACHABLE_NODES].firstOrNull()
+        konst dontSkipMinification = JsEnvironmentConfigurationDirectives.SKIP_MINIFICATION !in globalDirectives
+        konst runMinifierByDefault = JsEnvironmentConfigurationDirectives.RUN_MINIFIER_BY_DEFAULT in globalDirectives
+        konst expectedReachableNodes = globalDirectives[JsEnvironmentConfigurationDirectives.EXPECTED_REACHABLE_NODES].firstOrNull()
 
         if (dontSkipMinification && (runMinifierByDefault || expectedReachableNodes != null)) {
-            val originalFile = testServices.moduleStructure.originalTestDataFiles.first()
+            konst originalFile = testServices.moduleStructure.originalTestDataFiles.first()
             minifyAndRun(
                 originalFile,
                 expectedReachableNodes,
                 workDir = JsEnvironmentConfigurator.getMinificationJsArtifactsOutputDir(testServices),
                 allJsFiles = allJsFiles,
-                generatedJsFiles = modulesToArtifact.map { it.value.outputFile.absolutePath to it.key.name },
+                generatedJsFiles = modulesToArtifact.map { it.konstue.outputFile.absolutePath to it.key.name },
                 expectedResult = JsBoxRunner.DEFAULT_EXPECTED_RESULT,
                 testModuleName = testModuleName,
                 testPackage = testPackage,
@@ -66,12 +66,12 @@ class JsMinifierRunner(testServices: TestServices) : AbstractJsArtifactsCollecto
     }
 
     private fun minificationThresholdChecker(expectedReachableNodes: Int?, actualReachableNodes: Int, file: File) {
-        val fileContent = file.readText()
-        val replacement = "// ${JsEnvironmentConfigurationDirectives.EXPECTED_REACHABLE_NODES.name}: $actualReachableNodes"
-        val enablingMessage = "To set expected reachable nodes use '$replacement'\n" +
+        konst fileContent = file.readText()
+        konst replacement = "// ${JsEnvironmentConfigurationDirectives.EXPECTED_REACHABLE_NODES.name}: $actualReachableNodes"
+        konst enablingMessage = "To set expected reachable nodes use '$replacement'\n" +
                 "To enable automatic overwriting reachable nodes use property '-Pfd.${overwriteReachableNodesProperty}=true'"
         if (expectedReachableNodes == null) {
-            val baseMessage = "The number of expected reachable nodes was not set. Actual reachable nodes: $actualReachableNodes."
+            konst baseMessage = "The number of expected reachable nodes was not set. Actual reachable nodes: $actualReachableNodes."
             return when {
                 overwriteReachableNodes -> {
                     file.writeText("$replacement\n$fileContent")
@@ -81,15 +81,15 @@ class JsMinifierRunner(testServices: TestServices) : AbstractJsArtifactsCollecto
             }
         }
 
-        val minThreshold = expectedReachableNodes * 9 / 10
-        val maxThreshold = expectedReachableNodes * 11 / 10
+        konst minThreshold = expectedReachableNodes * 9 / 10
+        konst maxThreshold = expectedReachableNodes * 11 / 10
         if (actualReachableNodes < minThreshold || actualReachableNodes > maxThreshold) {
-            val message = "Number of reachable nodes ($actualReachableNodes) does not fit into expected range " +
+            konst message = "Number of reachable nodes ($actualReachableNodes) does not fit into expected range " +
                     "[$minThreshold; $maxThreshold]"
-            val additionalMessage: String =
+            konst additionalMessage: String =
                 if (overwriteReachableNodes) {
-                    val oldValue = "// ${JsEnvironmentConfigurationDirectives.EXPECTED_REACHABLE_NODES.name}: $expectedReachableNodes"
-                    val newText = fileContent.replaceFirst(oldValue, replacement)
+                    konst oldValue = "// ${JsEnvironmentConfigurationDirectives.EXPECTED_REACHABLE_NODES.name}: $expectedReachableNodes"
+                    konst newText = fileContent.replaceFirst(oldValue, replacement)
                     file.writeText(newText)
                     ""
                 } else {
@@ -112,42 +112,42 @@ class JsMinifierRunner(testServices: TestServices) : AbstractJsArtifactsCollecto
         testFunction: String,
         withModuleSystem: Boolean
     ) {
-        val kotlinJsLib = distDirJsPath + "kotlin.js"
-        val kotlinTestJsLib = distDirJsPath + "kotlin-test.js"
-        val kotlinJsLibOutput = File(workDir, "kotlin.min.js").path
-        val kotlinTestJsLibOutput = File(workDir, "kotlin-test.min.js").path
+        konst kotlinJsLib = distDirJsPath + "kotlin.js"
+        konst kotlinTestJsLib = distDirJsPath + "kotlin-test.js"
+        konst kotlinJsLibOutput = File(workDir, "kotlin.min.js").path
+        konst kotlinTestJsLibOutput = File(workDir, "kotlin-test.min.js").path
 
-        val kotlinJsInputFile = InputFile(InputResource.file(kotlinJsLib), null, kotlinJsLibOutput, "kotlin")
-        val kotlinTestJsInputFile = InputFile(InputResource.file(kotlinTestJsLib), null, kotlinTestJsLibOutput, "kotlin-test")
+        konst kotlinJsInputFile = InputFile(InputResource.file(kotlinJsLib), null, kotlinJsLibOutput, "kotlin")
+        konst kotlinTestJsInputFile = InputFile(InputResource.file(kotlinTestJsLib), null, kotlinTestJsLibOutput, "kotlin-test")
 
-        val filesToMinify = generatedJsFiles.associate { (fileName, moduleName) ->
-            val inputFileName = File(fileName).nameWithoutExtension
+        konst filesToMinify = generatedJsFiles.associate { (fileName, moduleName) ->
+            konst inputFileName = File(fileName).nameWithoutExtension
             fileName to InputFile(InputResource.file(fileName), null, File(workDir, inputFileName + ".min.js").absolutePath, moduleName)
         }
 
-        val testFunctionFqn = testModuleName + (if (testPackage.isNullOrEmpty()) "" else ".$testPackage") + ".$testFunction"
-        val additionalReachableNodes = setOf(
+        konst testFunctionFqn = testModuleName + (if (testPackage.isNullOrEmpty()) "" else ".$testPackage") + ".$testFunction"
+        konst additionalReachableNodes = setOf(
             testFunctionFqn, "kotlin.kotlin.io.BufferedOutput", "kotlin.kotlin.io.output.flush",
             "kotlin.kotlin.io.output.buffer", "kotlin-test.kotlin.test.overrideAsserter_wbnzx$",
             "kotlin-test.kotlin.test.DefaultAsserter"
         )
-        val allFilesToMinify = filesToMinify.values + kotlinJsInputFile + kotlinTestJsInputFile
-        val dceResult = DeadCodeElimination.run(allFilesToMinify, additionalReachableNodes, true) { _, _ -> }
+        konst allFilesToMinify = filesToMinify.konstues + kotlinJsInputFile + kotlinTestJsInputFile
+        konst dceResult = DeadCodeElimination.run(allFilesToMinify, additionalReachableNodes, true) { _, _ -> }
 
-        val reachableNodes = dceResult.reachableNodes
+        konst reachableNodes = dceResult.reachableNodes
         minificationThresholdChecker(expectedReachableNodes, reachableNodes.count { it.reachable }, file)
 
-        val runList = mutableListOf<String>()
+        konst runList = mutableListOf<String>()
         runList += kotlinJsLibOutput
         runList += kotlinTestJsLibOutput
         runList += "${JsEnvironmentConfigurator.TEST_DATA_DIR_PATH}/nashorn-polyfills.js"
         runList += allJsFiles.map { filesToMinify[it]?.outputPath ?: it }
 
-        val engineForMinifier = createScriptEngine()
-        val result = engineForMinifier.runAndRestoreContext {
+        konst engineForMinifier = createScriptEngine()
+        konst result = engineForMinifier.runAndRestoreContext {
             loadFiles(runList)
             overrideAsserter()
-            eval(SETUP_KOTLIN_OUTPUT)
+            ekonst(SETUP_KOTLIN_OUTPUT)
             runTestFunction(testModuleName, testPackage, testFunction, withModuleSystem)
         }
         engineForMinifier.release()

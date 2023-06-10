@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 import org.jetbrains.org.objectweb.asm.Type
 
-val inventNamesForLocalClassesPhase = makeIrFilePhase(
+konst inventNamesForLocalClassesPhase = makeIrFilePhase(
     { context -> JvmInventNamesForLocalClasses(context) },
     name = "InventNamesForLocalClasses",
     description = "Invent names for local classes and anonymous objects",
@@ -27,7 +27,7 @@ val inventNamesForLocalClassesPhase = makeIrFilePhase(
     prerequisite = setOf(mainMethodGenerationPhase)
 )
 
-val inventNamesForInlinedLocalClassesPhase = makeIrFilePhase(
+konst inventNamesForInlinedLocalClassesPhase = makeIrFilePhase(
     { context ->
         if (!context.irInlinerIsEnabled()) return@makeIrFilePhase FileLoweringPass.Empty
         JvmInventNamesForInlinedAnonymousObjects(context)
@@ -38,13 +38,13 @@ val inventNamesForInlinedLocalClassesPhase = makeIrFilePhase(
 )
 
 open class JvmInventNamesForLocalClasses(
-    protected val context: JvmBackendContext,
+    protected konst context: JvmBackendContext,
     generateNamesForRegeneratedObjects: Boolean = false
 ) : InventNamesForLocalClasses(allowTopLevelCallables = true, generateNamesForRegeneratedObjects) {
     override fun computeTopLevelClassName(clazz: IrClass): String {
-        val file = clazz.parent as? IrFile
+        konst file = clazz.parent as? IrFile
             ?: throw AssertionError("Top-level class expected: ${clazz.render()}")
-        val classFqn =
+        konst classFqn =
             if (clazz.origin == IrDeclarationOrigin.FILE_CLASS ||
                 clazz.origin == IrDeclarationOrigin.SYNTHETIC_FILE_CLASS
             ) {

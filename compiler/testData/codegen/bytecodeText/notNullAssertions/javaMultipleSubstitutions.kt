@@ -26,9 +26,9 @@ class C extends B<String> {
 
 // FILE: javaMultipleSubstitutions.kt
 internal fun bar(a: A<String, Int>, b: B<String>, c: C) {
-    val sa: String = a.foo()
-    val sb: String = b.foo()
-    val sc: String = c.foo()
+    konst sa: String = a.foo()
+    konst sb: String = b.foo()
+    konst sc: String = c.foo()
 }
 
 // @JavaMultipleSubstitutionsKt.class

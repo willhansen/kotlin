@@ -15,7 +15,7 @@ enum class KotlinJsCompilerAttribute : Named, Serializable {
     legacy,
     ir,
 
-    @Deprecated("This value is not used in Gradle plugin. You don't need to use it. It will be removed in next major.")
+    @Deprecated("This konstue is not used in Gradle plugin. You don't need to use it. It will be removed in next major.")
     both;
 
     override fun getName(): String =
@@ -25,7 +25,7 @@ enum class KotlinJsCompilerAttribute : Named, Serializable {
         getName()
 
     companion object {
-        val jsCompilerAttribute = Attribute.of(
+        konst jsCompilerAttribute = Attribute.of(
             "org.jetbrains.kotlin.js.compiler",
             KotlinJsCompilerAttribute::class.java
         )

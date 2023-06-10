@@ -10,7 +10,7 @@ import kotlinx.metadata.KmFunction
 import kotlinx.metadata.KmProperty
 import kotlinx.metadata.klib.annotations
 
-internal const val KNI_BRIDGE_FUNCTION_PREFIX = "kniBridge"
+internal const konst KNI_BRIDGE_FUNCTION_PREFIX = "kniBridge"
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun KmFunction.isKniBridgeFunction() =

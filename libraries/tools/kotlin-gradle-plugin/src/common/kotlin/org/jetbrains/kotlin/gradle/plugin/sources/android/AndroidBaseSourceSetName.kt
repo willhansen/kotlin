@@ -8,19 +8,19 @@ package org.jetbrains.kotlin.gradle.plugin.sources.android
 import com.android.build.gradle.api.AndroidSourceSet
 import org.gradle.api.NamedDomainObjectContainer
 
-internal val NamedDomainObjectContainer<out AndroidSourceSet>.main: AndroidSourceSet
+internal konst NamedDomainObjectContainer<out AndroidSourceSet>.main: AndroidSourceSet
     get() = getByName(AndroidBaseSourceSetName.Main.name)
 
-internal val NamedDomainObjectContainer<out AndroidSourceSet>.test: AndroidSourceSet
+internal konst NamedDomainObjectContainer<out AndroidSourceSet>.test: AndroidSourceSet
     get() = getByName(AndroidBaseSourceSetName.Test.name)
 
-internal val NamedDomainObjectContainer<out AndroidSourceSet>.androidTest: AndroidSourceSet
+internal konst NamedDomainObjectContainer<out AndroidSourceSet>.androidTest: AndroidSourceSet
     get() = getByName(AndroidBaseSourceSetName.AndroidTest.name)
 
 /*
 Not written as enum class to avoid Enum.name ambiguity with 'source set name' semantics.
  */
-internal sealed class AndroidBaseSourceSetName(val name: String) {
+internal sealed class AndroidBaseSourceSetName(konst name: String) {
     final override fun toString(): String = name
 
     object Main : AndroidBaseSourceSetName("main")

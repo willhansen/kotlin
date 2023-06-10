@@ -25,26 +25,26 @@ interface KotlinCompileTool : PatternFilterable, Task {
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    val sources: FileCollection
+    konst sources: FileCollection
 
     /**
      * Sets sources for this task.
-     * The given sources object is evaluated as per [org.gradle.api.Project.files].
+     * The given sources object is ekonstuated as per [org.gradle.api.Project.files].
      */
     fun source(vararg sources: Any)
 
     /**
      * Sets sources for this task.
-     * The given sources object is evaluated as per [org.gradle.api.Project.files].
+     * The given sources object is ekonstuated as per [org.gradle.api.Project.files].
      */
     fun setSource(vararg sources: Any)
 
     @get:Classpath
     @get:Incremental
-    val libraries: ConfigurableFileCollection
+    konst libraries: ConfigurableFileCollection
 
     @get:OutputDirectory
-    val destinationDirectory: DirectoryProperty
+    konst destinationDirectory: DirectoryProperty
 
     @Internal
     override fun getExcludes(): MutableSet<String>
@@ -56,25 +56,25 @@ interface KotlinCompileTool : PatternFilterable, Task {
 interface BaseKotlinCompile : KotlinCompileTool {
 
     @get:Internal
-    val friendPaths: ConfigurableFileCollection
+    konst friendPaths: ConfigurableFileCollection
 
     @get:Classpath
-    val pluginClasspath: ConfigurableFileCollection
+    konst pluginClasspath: ConfigurableFileCollection
 
     @get:Input
-    val moduleName: Property<String>
+    konst moduleName: Property<String>
 
     @get:Internal
-    val sourceSetName: Property<String>
+    konst sourceSetName: Property<String>
 
     @get:Input
-    val multiPlatformEnabled: Property<Boolean>
+    konst multiPlatformEnabled: Property<Boolean>
 
     @get:Input
-    val useModuleDetection: Property<Boolean>
+    konst useModuleDetection: Property<Boolean>
 
     @get:Nested
-    val pluginOptions: ListProperty<CompilerPluginConfig>
+    konst pluginOptions: ListProperty<CompilerPluginConfig>
 }
 
 @Suppress("TYPEALIAS_EXPANSION_DEPRECATION")
@@ -88,7 +88,7 @@ interface KotlinJvmCompile : BaseKotlinCompile,
     )
     @get:Optional
     @get:Input
-    override val moduleName: Property<String>
+    override konst moduleName: Property<String>
 
     // JVM specific
     @get:Internal("Takes part in compiler args.")
@@ -96,15 +96,15 @@ interface KotlinJvmCompile : BaseKotlinCompile,
         message = "Configure compilerOptions directly",
         replaceWith = ReplaceWith("compilerOptions")
     )
-    val parentKotlinOptions: Property<KotlinJvmOptionsDeprecated>
+    konst parentKotlinOptions: Property<KotlinJvmOptionsDeprecated>
 
     /**
-     * Controls JVM target validation mode between this task and the Java compilation task from Gradle for the same source set.
+     * Controls JVM target konstidation mode between this task and the Java compilation task from Gradle for the same source set.
      *
      * The same JVM targets ensure that the produced jar file contains class files of the same JVM bytecode version,
      * which is important to avoid compatibility issues for the code consumers.
      *
-     * Also, Gradle Java compilation task [org.gradle.api.tasks.compile.JavaCompile.targetCompatibility] controls value
+     * Also, Gradle Java compilation task [org.gradle.api.tasks.compile.JavaCompile.targetCompatibility] controls konstue
      * of "org.gradle.jvm.version" [attribute](https://docs.gradle.org/current/javadoc/org/gradle/api/attributes/java/TargetJvmVersion.html)
      * which itself controls the produced artifact minimal supported JVM version via
      * [Gradle Module Metadata](https://docs.gradle.org/current/userguide/publishing_gradle_module_metadata.html).
@@ -112,21 +112,21 @@ interface KotlinJvmCompile : BaseKotlinCompile,
      *
      * To avoid problems with different targets we advise to use [JDK Toolchain](https://kotl.in/gradle/jvm/toolchain) feature.
      *
-     * Default value for builds with Gradle <8.0 is [JvmTargetValidationMode.WARNING],
+     * Default konstue for builds with Gradle <8.0 is [JvmTargetValidationMode.WARNING],
      * while for builds with Gradle 8.0+ it is [JvmTargetValidationMode.ERROR].
      *
      * @since 1.9.0
      */
     @get:Input
-    val jvmTargetValidationMode: Property<JvmTargetValidationMode>
+    konst jvmTargetValidationMode: Property<JvmTargetValidationMode>
 }
 
 interface KaptGenerateStubs : KotlinJvmCompile {
     @get:OutputDirectory
-    val stubsDir: DirectoryProperty
+    konst stubsDir: DirectoryProperty
 
     @get:Internal("Not an input, just passed as kapt args. ")
-    val kaptClasspath: ConfigurableFileCollection
+    konst kaptClasspath: ConfigurableFileCollection
 
     @get:Deprecated(
         message = "Please migrate to compilerOptions.moduleName",
@@ -134,7 +134,7 @@ interface KaptGenerateStubs : KotlinJvmCompile {
     )
     @get:Optional
     @get:Input
-    override val moduleName: Property<String>
+    override konst moduleName: Property<String>
 }
 
 interface BaseKapt : Task {
@@ -142,65 +142,65 @@ interface BaseKapt : Task {
     //part of kaptClasspath consisting from external artifacts only
     //basically kaptClasspath = kaptExternalClasspath + artifacts built locally
     @get:Classpath
-    val kaptExternalClasspath: ConfigurableFileCollection
+    konst kaptExternalClasspath: ConfigurableFileCollection
 
     @get:Internal
-    val kaptClasspathConfigurationNames: ListProperty<String>
+    konst kaptClasspathConfigurationNames: ListProperty<String>
 
     /**
      * Output directory that contains caches necessary to support incremental annotation processing.
      */
     @get:LocalState
-    val incAptCache: DirectoryProperty
+    konst incAptCache: DirectoryProperty
 
     @get:OutputDirectory
-    val classesDir: DirectoryProperty
+    konst classesDir: DirectoryProperty
 
     @get:OutputDirectory
-    val destinationDir: DirectoryProperty
+    konst destinationDir: DirectoryProperty
 
     /** Used in the model builder only. */
     @get:OutputDirectory
-    val kotlinSourcesDestinationDir: DirectoryProperty
+    konst kotlinSourcesDestinationDir: DirectoryProperty
 
     @get:Nested
-    val annotationProcessorOptionProviders: MutableList<Any>
+    konst annotationProcessorOptionProviders: MutableList<Any>
 
     @get:Internal
-    val stubsDir: DirectoryProperty
+    konst stubsDir: DirectoryProperty
 
     @get:Classpath
-    val kaptClasspath: ConfigurableFileCollection
+    konst kaptClasspath: ConfigurableFileCollection
 
     @get:Internal
-    val compiledSources: ConfigurableFileCollection
+    konst compiledSources: ConfigurableFileCollection
 
     @get:Internal("Task implementation adds correct input annotation.")
-    val classpath: ConfigurableFileCollection
+    konst classpath: ConfigurableFileCollection
 
     /** Needed for the model builder. */
     @get:Internal
-    val sourceSetName: Property<String>
+    konst sourceSetName: Property<String>
 
     @get:InputFiles
     @get:IgnoreEmptyDirectories
     @get:Incremental
     @get:NormalizeLineEndings
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    val source: ConfigurableFileCollection
+    konst source: ConfigurableFileCollection
 
     @get:Input
-    val includeCompileClasspath: Property<Boolean>
+    konst includeCompileClasspath: Property<Boolean>
 
     @get:Internal("Used to compute javac option.")
-    val defaultJavaSourceCompatibility: Property<String>
+    konst defaultJavaSourceCompatibility: Property<String>
 }
 
 interface Kapt : BaseKapt {
 
     @get:Input
-    val addJdkClassesToClasspath: Property<Boolean>
+    konst addJdkClassesToClasspath: Property<Boolean>
 
     @get:Classpath
-    val kaptJars: ConfigurableFileCollection
+    konst kaptJars: ConfigurableFileCollection
 }

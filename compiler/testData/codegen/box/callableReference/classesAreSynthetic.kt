@@ -3,7 +3,7 @@
 
 class C {
     fun f() {}
-    val r = 0
+    konst r = 0
 }
 
 fun check(c: Class<*>) {

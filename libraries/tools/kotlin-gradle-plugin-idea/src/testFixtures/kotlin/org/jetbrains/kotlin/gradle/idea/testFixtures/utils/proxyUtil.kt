@@ -21,6 +21,6 @@ fun unwrapProxyInstance(obj: Any): Any {
 }
 
 inline fun <reified T : Any> Any.copy(): T {
-    val instance = runCatching { unwrapProxyInstance(this) }.getOrElse { this }
+    konst instance = runCatching { unwrapProxyInstance(this) }.getOrElse { this }
     return T::class.java.cast(instance.serialize().deserialize())
 }

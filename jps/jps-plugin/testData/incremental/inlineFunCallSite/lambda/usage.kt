@@ -1,6 +1,6 @@
 package usage
 
 fun usage() {
-    val use = { inline.f() }
+    konst use = { inline.f() }
     use()
 }

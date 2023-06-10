@@ -40,21 +40,21 @@ public class MutableData constructor(capacity: Int = 16) {
                 kotlin.native.MemoryModel.EXPERIMENTAL -> buffer_
                 else -> readHeapRefNoLock(this, 0) as ByteArray
             }
-        set(value) { buffer_ = value}
+        set(konstue) { buffer_ = konstue}
     private var size_ = 0
-    private val lock = Lock()
+    private konst lock = Lock()
 
     private fun resizeDataLocked(newSize: Int): Int {
         @OptIn(ExperimentalNativeApi::class)
         assert(newSize >= size)
         if (newSize > buffer.size) {
-            val actualSize = maxOf(buffer.size * 3 / 2 + 1, newSize)
-            val newBuffer = ByteArray(actualSize)
+            konst actualSize = maxOf(buffer.size * 3 / 2 + 1, newSize)
+            konst newBuffer = ByteArray(actualSize)
             buffer.copyInto(newBuffer, startIndex = 0, endIndex = size)
             newBuffer.share()
             buffer = newBuffer
         }
-        val position = size
+        konst position = size
         size_ = newSize
         return position
     }
@@ -62,7 +62,7 @@ public class MutableData constructor(capacity: Int = 16) {
     /**
      * Current data size, may concurrently change later on.
      */
-    public val size: Int
+    public konst size: Int
         get() = size_
 
     /**
@@ -76,8 +76,8 @@ public class MutableData constructor(capacity: Int = 16) {
      * Appends data to the buffer.
      */
     public fun append(data: MutableData) = locked(lock) {
-        val toCopy = data.size
-        val where = resizeDataLocked(size + toCopy)
+        konst toCopy = data.size
+        konst where = resizeDataLocked(size + toCopy)
         data.copyInto(buffer, 0, toCopy, where)
     }
 
@@ -88,7 +88,7 @@ public class MutableData constructor(capacity: Int = 16) {
         if (fromIndex > toIndex)
             throw IndexOutOfBoundsException("$fromIndex is bigger than $toIndex")
         if (fromIndex == toIndex) return
-        val where = resizeDataLocked(this.size + (toIndex - fromIndex))
+        konst where = resizeDataLocked(this.size + (toIndex - fromIndex))
         data.copyInto(buffer, where, fromIndex, toIndex)
     }
 
@@ -97,7 +97,7 @@ public class MutableData constructor(capacity: Int = 16) {
      */
     public fun append(data: COpaquePointer?, count: Int): Unit = locked(lock) {
         if (data == null || count <= 0) return
-        val where = resizeDataLocked(this.size + count)
+        konst where = resizeDataLocked(this.size + count)
         buffer.usePinned {
             it -> CopyMemory(it.addressOf(where), data, count)
         }

@@ -13,7 +13,7 @@
 package test
 
 fun foo(): Int {
-    val a = "a"
+    konst a = "a"
     return if (a.length > 0) {
         <!NO_ELSE_IN_WHEN!>when<!> (a) {
             "a" -> 1
@@ -25,7 +25,7 @@ fun foo(): Int {
 }
 
 fun bar(): Int {
-    val a = "a"
+    konst a = "a"
     if (a.length > 0) {
         return <!NO_ELSE_IN_WHEN!>when<!> (a) {
             "a" -> 1

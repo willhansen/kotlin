@@ -19,7 +19,7 @@ package base
 abstract class BaseKotlin
 
 open class Intermediate : BaseJava() {
-    private val a = ""
+    private konst a = ""
 }
 
 class Derived : Intermediate() {
@@ -37,17 +37,17 @@ package derived
 import base.BaseJava
 
 open class Intermediate : BaseJava() {
-    private val a = ""
+    private konst a = ""
 
-    private val b = ""
+    private konst b = ""
 }
 
 open class IntermediateWithoutField : BaseJava() {
-    private val a get() = ""
+    private konst a get() = ""
 }
 
 open class IntermediatePublic : BaseJava() {
-    val a = ""
+    konst a = ""
 }
 
 class Derived : Intermediate() {
@@ -68,7 +68,7 @@ class DerivedAlias : Alias() {
 
 fun local() {
     open class LocalIntermediate : BaseJava() {
-        private val a = ""
+        private konst a = ""
     }
 
     class LocalDerived : LocalIntermediate() {

@@ -8,15 +8,15 @@ import java.util.UUID
 import java.util.UUID.randomUUID
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IdOne(val id: UUID)
+konstue class IdOne(konst id: UUID)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IdTwo(val id: UUID)
+konstue class IdTwo(konst id: UUID)
 
 fun box(): String {
-    val sameUUID = randomUUID()
-    val one = IdOne(sameUUID)
-    val two = IdTwo(sameUUID)
+    konst sameUUID = randomUUID()
+    konst one = IdOne(sameUUID)
+    konst two = IdTwo(sameUUID)
 
     if (one.equals(two)) return "Fail"
 

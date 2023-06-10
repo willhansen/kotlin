@@ -6,7 +6,7 @@ package one
 
 import one.JavaClass.staticJavaMethod
 
-private val MY_FIELD = "abcd"
+private konst MY_FIELD = "abcd"
 
 // FILE: one/JavaClass.java
 package one;
@@ -30,7 +30,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Service {
-    Level[] value() default {};
+    Level[] konstue() default {};
 
     enum Level {
         PROJECT

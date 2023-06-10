@@ -3,13 +3,13 @@
 // WITH_REFLECT
 
 @JvmInline
-value class Value(val value: String)
+konstue class Value(konst konstue: String)
 
-class A(val result: Value)
+class A(konst result: Value)
 
 fun box(): String {
-    val args: Array<Value> = arrayOf(Value("OK"))
+    konst args: Array<Value> = arrayOf(Value("OK"))
 
-    val a = (::A).call(*args)
-    return a.result.value
+    konst a = (::A).call(*args)
+    return a.result.konstue
 }

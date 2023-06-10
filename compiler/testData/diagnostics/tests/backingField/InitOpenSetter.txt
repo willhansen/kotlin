@@ -4,7 +4,7 @@ public abstract class My {
     public constructor My()
     public constructor My(/*0*/ v: kotlin.Int)
     public open var u: kotlin.Int
-    public final val v: kotlin.Int
+    public final konst v: kotlin.Int
     public open var w: kotlin.Int
     public abstract var x: kotlin.Int
     public open var y: kotlin.Int

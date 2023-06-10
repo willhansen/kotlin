@@ -16,6 +16,6 @@ package test
 
 fun test() {
     Foo()
-    val a: Foo = Foo.create()
+    konst a: Foo = Foo.create()
     Foo().takeFoo(a)
 }

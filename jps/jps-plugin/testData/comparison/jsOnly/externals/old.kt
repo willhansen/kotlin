@@ -2,14 +2,14 @@ package test
 
 external class ExternalClass {
     fun removedExternalFun()
-    val removedExternalVal: Int
+    konst removedExternalVal: Int
 }
 
 class ClassBecameExternal
 external class ClassBecameNonExternal
 
 external fun removedExternalFun()
-external val removedExternalVal: Int
+external konst removedExternalVal: Int
 
 fun funBecameExternal() {}
 external fun funBecameNonExternal()

@@ -3,16 +3,16 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val int: Int)
+konstue class Z(konst int: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L(val long: Long)
+konstue class L(konst long: Long)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str(val string: String)
+konstue class Str(konst string: String)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Obj(val obj: Any)
+konstue class Obj(konst obj: Any)
 
 fun box(): String {
     var xz = Z(0)

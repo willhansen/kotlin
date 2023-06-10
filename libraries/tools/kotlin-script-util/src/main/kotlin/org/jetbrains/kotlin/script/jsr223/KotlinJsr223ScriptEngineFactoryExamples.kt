@@ -40,7 +40,7 @@ class KotlinJsr223JvmLocalScriptEngineFactory : KotlinJsr223JvmScriptEngineFacto
 }
 
 @Deprecated("Use kotlin-scripting-jsr223 instead")
-class KotlinJsr223JvmDaemonLocalEvalScriptEngineFactory : KotlinJsr223JvmScriptEngineFactoryBase() {
+class KotlinJsr223JvmDaemonLocalEkonstScriptEngineFactory : KotlinJsr223JvmScriptEngineFactoryBase() {
 
     override fun getScriptEngine(): ScriptEngine =
         KotlinJsr223JvmDaemonCompileScriptEngine(

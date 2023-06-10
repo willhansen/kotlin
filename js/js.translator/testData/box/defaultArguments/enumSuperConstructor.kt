@@ -4,7 +4,7 @@ package foo
 enum class A {
     B(2);
 
-    val c: Int
+    konst c: Int
 
     constructor (a: Int, b: Int = 3) {
         c = a + b

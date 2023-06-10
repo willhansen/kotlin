@@ -1,8 +1,8 @@
 class My {
-    val x: String
+    konst x: String
 
     constructor() {
-        val temp = <!DEBUG_INFO_LEAKING_THIS!>this<!>
+        konst temp = <!DEBUG_INFO_LEAKING_THIS!>this<!>
         x = bar(temp)
     }
 

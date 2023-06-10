@@ -15,7 +15,7 @@ import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import org.gradle.kotlin.dsl.accessors.runtime.addExternalModuleDependencyTo
 import org.gradle.kotlin.dsl.add
 
-val NamedDomainObjectContainer<Configuration>.embedded: NamedDomainObjectProvider<Configuration> get() = named("embedded")
+konst NamedDomainObjectContainer<Configuration>.embedded: NamedDomainObjectProvider<Configuration> get() = named("embedded")
 
 fun DependencyHandler.embedded(dependencyNotation: Any): Dependency? =
     add("embedded", dependencyNotation)

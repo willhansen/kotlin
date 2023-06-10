@@ -30,8 +30,8 @@ import org.jetbrains.kotlin.resolve.calls.model.VariableAsFunctionResolvedCall
 object UnderscoreUsageChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (resolvedCall is VariableAsFunctionResolvedCall) return
-        val descriptor = resolvedCall.resultingDescriptor
-        val namedDescriptor: DeclarationDescriptor = (descriptor as? ConstructorDescriptor)?.containingDeclaration ?: descriptor
+        konst descriptor = resolvedCall.resultingDescriptor
+        konst namedDescriptor: DeclarationDescriptor = (descriptor as? ConstructorDescriptor)?.containingDeclaration ?: descriptor
         if (!namedDescriptor.name.asString().isUnderscoreOnlyName()) return
         checkCallElement(resolvedCall.call.callElement, context)
     }

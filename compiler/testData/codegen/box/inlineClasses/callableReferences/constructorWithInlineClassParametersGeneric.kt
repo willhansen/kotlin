@@ -5,10 +5,10 @@
 import kotlin.test.assertEquals
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val x: T)
+konstue class Z<T: Int>(konst x: T)
 
-class Outer(val z1: Z<Int>) {
-    inner class Inner(val z2: Z<Int>)
+class Outer(konst z1: Z<Int>) {
+    inner class Inner(konst z2: Z<Int>)
 }
 
 fun box(): String {

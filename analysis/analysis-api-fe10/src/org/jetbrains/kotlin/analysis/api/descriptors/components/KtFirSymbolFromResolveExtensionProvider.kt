@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken
 import org.jetbrains.kotlin.analysis.api.scopes.KtScope
 
 internal class KtFe10SymbolFromResolveExtensionProvider(
-    override val analysisSession: KtFe10AnalysisSession,
+    override konst analysisSession: KtFe10AnalysisSession,
 ) : KtSymbolFromResolveExtensionProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun getResolveExtensionScopeWithTopLevelDeclarations(): KtScope {

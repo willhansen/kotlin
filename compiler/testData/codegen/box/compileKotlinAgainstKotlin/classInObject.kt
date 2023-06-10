@@ -5,7 +5,7 @@ package a
 
 object CartRoutes {
     class RemoveOrderItem {
-        val result = "OK"
+        konst result = "OK"
     }
 }
 
@@ -15,6 +15,6 @@ object CartRoutes {
 import a.CartRoutes
 
 fun box(): String {
-    val r = CartRoutes.RemoveOrderItem()
+    konst r = CartRoutes.RemoveOrderItem()
     return r.result
 }

@@ -18,7 +18,7 @@ fun main() {
 private fun sleep(millis: Int) {
     assertTrue(millis > 0)
 
-    val endTimeMillis = getTimeMillis() + millis
+    konst endTimeMillis = getTimeMillis() + millis
     do {
         // Emulate intensive computations to spend CPU time.
         for (i in 1..100) {

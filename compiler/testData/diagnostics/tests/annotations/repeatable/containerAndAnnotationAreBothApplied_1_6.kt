@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JR {
     public @interface Container {
-        JR[] value();
+        JR[] konstue();
     }
 }
 
@@ -21,7 +21,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.SOURCE)
 public @interface JS {
     public @interface Container {
-        JS[] value();
+        JS[] konstue();
     }
 }
 
@@ -30,7 +30,7 @@ public @interface JS {
 @java.lang.annotation.Repeatable(KR.Container::class)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class KR {
-    annotation class Container(val value: Array<KR>)
+    annotation class Container(konst konstue: Array<KR>)
 }
 
 // FILE: KS.kt
@@ -38,7 +38,7 @@ annotation class KR {
 @java.lang.annotation.Repeatable(KS.Container::class)
 @Retention(AnnotationRetention.SOURCE)
 annotation class KS {
-    annotation class Container(val value: Array<KS>)
+    annotation class Container(konst konstue: Array<KS>)
 }
 
 // FILE: test.kt

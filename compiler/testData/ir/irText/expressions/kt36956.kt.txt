@@ -1,16 +1,16 @@
 class A<T : Any?> {
-  constructor(value: T) /* primary */ {
+  constructor(konstue: T) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  private val value: T
-    field = value
+  private konst konstue: T
+    field = konstue
     private get
 
   operator fun get(i: Int): T {
-    return <this>.<get-value>()
+    return <this>.<get-konstue>()
   }
 
   operator fun set(i: Int, v: T) {
@@ -18,15 +18,15 @@ class A<T : Any?> {
 
 }
 
-val aFloat: A<Float>
-  field = A<Float>(value = 0.0F)
+konst aFloat: A<Float>
+  field = A<Float>(konstue = 0.0F)
   get
 
-val aInt: Float
+konst aInt: Float
   field = { // BLOCK
-    val tmp0_array: A<Float> = <get-aFloat>()
-    val tmp1_index0: Int = 1
-    val tmp2: Float = tmp0_array.get(i = tmp1_index0)
+    konst tmp0_array: A<Float> = <get-aFloat>()
+    konst tmp1_index0: Int = 1
+    konst tmp2: Float = tmp0_array.get(i = tmp1_index0)
     tmp0_array.set(i = tmp1_index0, v = tmp2.dec())
     tmp2
   }

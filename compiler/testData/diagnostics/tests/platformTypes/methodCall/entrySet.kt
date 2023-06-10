@@ -16,10 +16,10 @@ public class MultiMap<K, V> {
 import p.*
 
 fun test() {
-    val map = MultiMap<Int, String>()
-    val set = map.entrySet()
+    konst map = MultiMap<Int, String>()
+    konst set = map.entrySet()
     set.iterator()
 
-    val set1 = map.entrySet()!!
+    konst set1 = map.entrySet()!!
     set1.iterator()
 }

@@ -24,34 +24,34 @@ import org.jetbrains.kotlin.name.Name
 interface JavaElement
 
 interface JavaNamedElement : JavaElement {
-    val name: Name
-    val isFromSource: Boolean
+    konst name: Name
+    konst isFromSource: Boolean
 }
 
 interface JavaAnnotationOwner : JavaElement {
-    val annotations: Collection<JavaAnnotation>
-    val isDeprecatedInJavaDoc: Boolean
+    konst annotations: Collection<JavaAnnotation>
+    konst isDeprecatedInJavaDoc: Boolean
 
     fun findAnnotation(fqName: FqName): JavaAnnotation?
 }
 
 interface JavaModifierListOwner : JavaElement {
-    val isAbstract: Boolean
-    val isStatic: Boolean
-    val isFinal: Boolean
-    val visibility: Visibility
+    konst isAbstract: Boolean
+    konst isStatic: Boolean
+    konst isFinal: Boolean
+    konst visibility: Visibility
 }
 
 interface JavaTypeParameterListOwner : JavaElement {
-    val typeParameters: List<JavaTypeParameter>
+    konst typeParameters: List<JavaTypeParameter>
 }
 
 interface JavaAnnotation : JavaElement {
-    val arguments: Collection<JavaAnnotationArgument>
-    val classId: ClassId?
-    val isIdeExternalAnnotation: Boolean
+    konst arguments: Collection<JavaAnnotationArgument>
+    konst classId: ClassId?
+    konst isIdeExternalAnnotation: Boolean
         get() = false
-    val isFreshlySupportedTypeUseAnnotation: Boolean
+    konst isFreshlySupportedTypeUseAnnotation: Boolean
         get() = false
 
     fun isResolvedTo(fqName: FqName) : Boolean {
@@ -62,9 +62,9 @@ interface JavaAnnotation : JavaElement {
 }
 
 interface MapBasedJavaAnnotationOwner : JavaAnnotationOwner {
-    val annotationsByFqName: Map<FqName?, JavaAnnotation>
+    konst annotationsByFqName: Map<FqName?, JavaAnnotation>
 
-    override val isDeprecatedInJavaDoc: Boolean get() = false
+    override konst isDeprecatedInJavaDoc: Boolean get() = false
     override fun findAnnotation(fqName: FqName) = annotationsByFqName[fqName]
 }
 
@@ -73,7 +73,7 @@ interface ListBasedJavaAnnotationOwner : JavaAnnotationOwner {
 }
 
 interface MutableJavaAnnotationOwner : JavaAnnotationOwner {
-    override val annotations: MutableCollection<JavaAnnotation>
+    override konst annotations: MutableCollection<JavaAnnotation>
 }
 
 fun JavaAnnotationOwner.buildLazyValueForMap() = lazy {
@@ -81,8 +81,8 @@ fun JavaAnnotationOwner.buildLazyValueForMap() = lazy {
 }
 
 interface JavaPackage : JavaElement, JavaAnnotationOwner {
-    val fqName: FqName
-    val subPackages: Collection<JavaPackage>
+    konst fqName: FqName
+    konst subPackages: Collection<JavaPackage>
 
     fun getClasses(nameFilter: (Name) -> Boolean): Collection<JavaClass>
 }
@@ -90,29 +90,29 @@ interface JavaPackage : JavaElement, JavaAnnotationOwner {
 interface JavaClassifier : JavaNamedElement, JavaAnnotationOwner
 
 interface JavaClass : JavaClassifier, JavaTypeParameterListOwner, JavaModifierListOwner {
-    val fqName: FqName?
+    konst fqName: FqName?
 
-    val supertypes: Collection<JavaClassifierType>
-    val innerClassNames: Collection<Name>
+    konst supertypes: Collection<JavaClassifierType>
+    konst innerClassNames: Collection<Name>
     fun findInnerClass(name: Name): JavaClass?
-    val outerClass: JavaClass?
+    konst outerClass: JavaClass?
 
-    val isInterface: Boolean
-    val isAnnotationType: Boolean
-    val isEnum: Boolean
-    val isRecord: Boolean
-    val isSealed: Boolean
-    val permittedTypes: Collection<JavaClassifierType>
-    val lightClassOriginKind: LightClassOriginKind?
+    konst isInterface: Boolean
+    konst isAnnotationType: Boolean
+    konst isEnum: Boolean
+    konst isRecord: Boolean
+    konst isSealed: Boolean
+    konst permittedTypes: Collection<JavaClassifierType>
+    konst lightClassOriginKind: LightClassOriginKind?
 
-    val methods: Collection<JavaMethod>
-    val fields: Collection<JavaField>
-    val constructors: Collection<JavaConstructor>
-    val recordComponents: Collection<JavaRecordComponent>
+    konst methods: Collection<JavaMethod>
+    konst fields: Collection<JavaField>
+    konst constructors: Collection<JavaConstructor>
+    konst recordComponents: Collection<JavaRecordComponent>
     fun hasDefaultConstructor(): Boolean
 }
 
-val JavaClass.classId: ClassId?
+konst JavaClass.classId: ClassId?
     get() = outerClass?.classId?.createNestedClassId(name) ?: fqName?.let(ClassId::topLevel)
 
 enum class LightClassOriginKind {
@@ -120,44 +120,44 @@ enum class LightClassOriginKind {
 }
 
 interface JavaMember : JavaModifierListOwner, JavaAnnotationOwner, JavaNamedElement {
-    val containingClass: JavaClass
+    konst containingClass: JavaClass
 }
 
 interface JavaMethod : JavaMember, JavaTypeParameterListOwner {
-    val valueParameters: List<JavaValueParameter>
-    val returnType: JavaType
+    konst konstueParameters: List<JavaValueParameter>
+    konst returnType: JavaType
 
-    // WARNING: computing the default value may lead to an exception in the compiler because of IDEA-207252.
-    // If you only need to check default value presence, use `hasAnnotationParameterDefaultValue` instead.
-    val annotationParameterDefaultValue: JavaAnnotationArgument?
+    // WARNING: computing the default konstue may lead to an exception in the compiler because of IDEA-207252.
+    // If you only need to check default konstue presence, use `hasAnnotationParameterDefaultValue` instead.
+    konst annotationParameterDefaultValue: JavaAnnotationArgument?
 
-    val hasAnnotationParameterDefaultValue: Boolean
+    konst hasAnnotationParameterDefaultValue: Boolean
         get() = annotationParameterDefaultValue != null
 }
 
 interface JavaField : JavaMember {
-    val isEnumEntry: Boolean
-    val type: JavaType
-    val initializerValue: Any?
-    val hasConstantNotNullInitializer: Boolean
+    konst isEnumEntry: Boolean
+    konst type: JavaType
+    konst initializerValue: Any?
+    konst hasConstantNotNullInitializer: Boolean
 }
 
 interface JavaConstructor : JavaMember, JavaTypeParameterListOwner {
-    val valueParameters: List<JavaValueParameter>
+    konst konstueParameters: List<JavaValueParameter>
 }
 
 interface JavaValueParameter : JavaAnnotationOwner {
-    val name: Name?
-    val type: JavaType
-    val isVararg: Boolean
-    val isFromSource: Boolean
+    konst name: Name?
+    konst type: JavaType
+    konst isVararg: Boolean
+    konst isFromSource: Boolean
 }
 
 interface JavaRecordComponent : JavaMember {
-    val type: JavaType
-    val isVararg: Boolean
+    konst type: JavaType
+    konst isVararg: Boolean
 }
 
 interface JavaTypeParameter : JavaClassifier {
-    val upperBounds: Collection<JavaClassifierType>
+    konst upperBounds: Collection<JavaClassifierType>
 }

@@ -14,7 +14,7 @@ import kotlin.reflect.KProperty1
 
 interface XdEntity
 class XdIssue : XdEntity {
-    val isRemoved: Boolean = true
+    konst isRemoved: Boolean = true
     var votes: Int = 0
 }
 
@@ -26,7 +26,7 @@ fun XdIssue.duplicatesRootSearch(): XdIssue = this
 fun <T : XdEntity, R : Comparable<*>?> T.getOldValue(property: KProperty1<T, R>): R? = null
 
 internal fun updateVotesForDuplicates(issue: XdIssue) {
-    val toRecount = HashSet<XdIssue>()
+    konst toRecount = HashSet<XdIssue>()
     var oldDup = getNullableIssue()
     if (oldDup != null) {
         oldDup = try {
@@ -35,7 +35,7 @@ internal fun updateVotesForDuplicates(issue: XdIssue) {
             null
         }
     }
-    val newDup = getNullableIssue()
+    konst newDup = getNullableIssue()
 
     if (oldDup != null && !<!DEBUG_INFO_SMARTCAST!>oldDup<!>.isRemoved) {
         toRecount.add(<!DEBUG_INFO_SMARTCAST!>oldDup<!>.duplicatesRootSearch())

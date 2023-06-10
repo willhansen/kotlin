@@ -2,15 +2,15 @@
 
 // FILE: utils.kt
 
-inline class UInt(val value: Int)
+inline class UInt(konst konstue: Int)
 
 // FILE: test.kt
 
 fun test(u1: UInt, u2: UInt) {
-    val a = u1.value
+    konst a = u1.konstue
 
-    val b = u1.value.hashCode()
-    val c = u1.value + u2.value
+    konst b = u1.konstue.hashCode()
+    konst c = u1.konstue + u2.konstue
 }
 
 // @TestKt.class:
@@ -18,5 +18,5 @@ fun test(u1: UInt, u2: UInt) {
 // 0 INVOKESTATIC UInt\$Erased.box
 // 0 INVOKEVIRTUAL UInt.unbox
 
-// 0 valueOf
+// 0 konstueOf
 // 0 intValue

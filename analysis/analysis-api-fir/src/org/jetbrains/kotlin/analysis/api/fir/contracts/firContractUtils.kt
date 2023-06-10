@@ -25,8 +25,8 @@ internal fun KtEffectDeclaration<ConeKotlinType, ConeDiagnostic>.coneEffectDecla
     accept(ConeContractDescriptionElementToAnalysisApi(builder, firFunctionSymbol), Unit) as KtContractEffectDeclaration
 
 private class ConeContractDescriptionElementToAnalysisApi(
-    private val builder: KtSymbolByFirBuilder,
-    private val firFunctionSymbol: KtFirFunctionSymbol
+    private konst builder: KtSymbolByFirBuilder,
+    private konst firFunctionSymbol: KtFirFunctionSymbol
 ) : KtContractDescriptionVisitor<Any, Unit, ConeKotlinType, ConeDiagnostic>() {
 
     override fun visitConditionalEffectDeclaration(
@@ -41,17 +41,17 @@ private class ConeContractDescriptionElementToAnalysisApi(
         returnsEffect: ConeReturnsEffectDeclaration,
         data: Unit
     ): KtContractReturnsContractEffectDeclaration =
-        when (val value = returnsEffect.value) {
+        when (konst konstue = returnsEffect.konstue) {
             ConeContractConstantValues.NULL ->
                 KtContractReturnsSpecificValueEffectDeclaration(KtContractConstantValue(KtContractConstantType.NULL, builder.token))
             ConeContractConstantValues.NOT_NULL -> KtContractReturnsNotNullEffectDeclaration(builder.token)
             ConeContractConstantValues.WILDCARD -> KtContractReturnsSuccessfullyEffectDeclaration(builder.token)
             is KtBooleanConstantReference -> KtContractReturnsSpecificValueEffectDeclaration(
                 KtContractConstantValue(
-                    when (value) {
+                    when (konstue) {
                         ConeContractConstantValues.TRUE -> KtContractConstantType.TRUE
                         ConeContractConstantValues.FALSE -> KtContractConstantType.FALSE
-                        else -> error("Can't convert $value to the Analysis API")
+                        else -> error("Can't convert $konstue to the Analysis API")
                     },
                     builder.token
                 )
@@ -61,7 +61,7 @@ private class ConeContractDescriptionElementToAnalysisApi(
 
     override fun visitCallsEffectDeclaration(callsEffect: KtCallsEffectDeclaration<ConeKotlinType, ConeDiagnostic>, data: Unit): KtContractCallsInPlaceContractEffectDeclaration =
         KtContractCallsInPlaceContractEffectDeclaration(
-            callsEffect.valueParameterReference.accept(),
+            callsEffect.konstueParameterReference.accept(),
             callsEffect.kind
         )
 
@@ -101,9 +101,9 @@ private class ConeContractDescriptionElementToAnalysisApi(
         }
 
     override fun visitValueParameterReference(
-        valueParameterReference: ConeValueParameterReference,
+        konstueParameterReference: ConeValueParameterReference,
         data: Unit
-    ): Any = visitValueParameterReference(valueParameterReference, ::KtContractParameterValue)
+    ): Any = visitValueParameterReference(konstueParameterReference, ::KtContractParameterValue)
 
     override fun visitBooleanValueParameterReference(
         booleanValueParameterReference: ConeBooleanValueParameterReference,
@@ -112,12 +112,12 @@ private class ConeContractDescriptionElementToAnalysisApi(
         visitValueParameterReference(booleanValueParameterReference, ::KtContractBooleanValueParameterExpression)
 
     private fun <T> visitValueParameterReference(
-        valueParameterReference: ConeValueParameterReference,
+        konstueParameterReference: ConeValueParameterReference,
         constructor: (KtParameterSymbol) -> T
     ): T = constructor(
-        if (valueParameterReference.parameterIndex == -1) firFunctionSymbol.receiverParameter
+        if (konstueParameterReference.parameterIndex == -1) firFunctionSymbol.receiverParameter
             ?: error("$firFunctionSymbol should contain a receiver")
-        else firFunctionSymbol.valueParameters[valueParameterReference.parameterIndex]
+        else firFunctionSymbol.konstueParameters[konstueParameterReference.parameterIndex]
     )
 
     // Util function to avoid hard coding names of the classes. Type inference will do a better job figuring out the best type to cast to.

@@ -21,7 +21,7 @@ PsiJetFileStubImpl[package=p]
         TYPE_REFERENCE
           USER_TYPE
             REFERENCE_EXPRESSION[referencedName=I]
-      PROPERTY[fqName=p.PrivateToThis.val_with_accessors, hasDelegate=false, hasDelegateExpression=false, hasInitializer=false, hasReturnTypeRef=true, isExtension=false, isTopLevel=false, isVar=false, name=val_with_accessors]
+      PROPERTY[fqName=p.PrivateToThis.konst_with_accessors, hasDelegate=false, hasDelegateExpression=false, hasInitializer=false, hasReturnTypeRef=true, isExtension=false, isTopLevel=false, isVar=false, name=konst_with_accessors]
         MODIFIER_LIST[private final]
         TYPE_REFERENCE
           USER_TYPE
@@ -38,7 +38,7 @@ PsiJetFileStubImpl[package=p]
         PROPERTY_ACCESSOR[hasBlockBody=true, hasBody=true, isGetter=false]
           MODIFIER_LIST[private final]
           VALUE_PARAMETER_LIST
-            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=value]
+            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=konstue]
               TYPE_REFERENCE
                 USER_TYPE
                   REFERENCE_EXPRESSION[referencedName=I]

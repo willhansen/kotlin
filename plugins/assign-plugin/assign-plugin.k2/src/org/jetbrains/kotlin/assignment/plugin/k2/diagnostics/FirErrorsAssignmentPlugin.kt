@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.diagnostics.SourceElementPositioningStrategies.OPERA
 import org.jetbrains.kotlin.diagnostics.error0
 
 object FirErrorsAssignmentPlugin {
-    val DECLARATION_ERROR_ASSIGN_METHOD_SHOULD_RETURN_UNIT by error0<PsiElement>(DECLARATION_RETURN_TYPE)
-    val CALL_ERROR_ASSIGN_METHOD_SHOULD_RETURN_UNIT by error0<PsiElement>(OPERATOR)
-    val NO_APPLICABLE_ASSIGN_METHOD by error0<PsiElement>(OPERATOR)
+    konst DECLARATION_ERROR_ASSIGN_METHOD_SHOULD_RETURN_UNIT by error0<PsiElement>(DECLARATION_RETURN_TYPE)
+    konst CALL_ERROR_ASSIGN_METHOD_SHOULD_RETURN_UNIT by error0<PsiElement>(OPERATOR)
+    konst NO_APPLICABLE_ASSIGN_METHOD by error0<PsiElement>(OPERATOR)
 }

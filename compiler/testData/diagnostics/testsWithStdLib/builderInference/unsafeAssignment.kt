@@ -6,8 +6,8 @@ class Foo<T : Any> {
 fun <T : Any> myBuilder(block: Foo<T>.() -> Unit) : Foo<T> = Foo<T>().apply(block)
 
 fun main(arg: Any) {
-    val x = 57
-    val value = myBuilder {
+    konst x = 57
+    konst konstue = myBuilder {
         doSmthng("one ")
         run { a; this }.a = <!TYPE_MISMATCH, TYPE_MISMATCH!>10<!>
         <!BUILDER_INFERENCE_STUB_RECEIVER, STUB_TYPE_IN_RECEIVER_CAUSES_AMBIGUITY, TYPE_MISMATCH, TYPE_MISMATCH!>a<!> <!OVERLOAD_RESOLUTION_AMBIGUITY_BECAUSE_OF_STUB_TYPES!>+=<!> 1
@@ -20,5 +20,5 @@ fun main(arg: Any) {
             a = arg
         }
     }
-    println(value.a?.count { it in 'l' .. 'q' })
+    println(konstue.a?.count { it in 'l' .. 'q' })
 }

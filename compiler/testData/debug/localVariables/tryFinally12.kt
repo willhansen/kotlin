@@ -7,11 +7,11 @@ fun box(): String {
     try {
         for (i in 0 until 1) {
             try {
-                val x = "x"
+                konst x = "x"
                 throw RuntimeException(x)
             } catch (e: Exception) {
-                val y = "y"
-                val z = "z"
+                konst y = "y"
+                konst z = "z"
                 continue
             } finally {
                 throw RuntimeException("$i")

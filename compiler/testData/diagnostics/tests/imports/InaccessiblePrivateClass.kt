@@ -14,5 +14,5 @@ package p1
 
 import p2.*
 
-val x: X = X()
-val <!EXPOSED_PROPERTY_TYPE!>y<!>: <!INVISIBLE_REFERENCE!>Y<!> = <!INVISIBLE_MEMBER!>Y<!>()
+konst x: X = X()
+konst <!EXPOSED_PROPERTY_TYPE!>y<!>: <!INVISIBLE_REFERENCE!>Y<!> = <!INVISIBLE_MEMBER!>Y<!>()

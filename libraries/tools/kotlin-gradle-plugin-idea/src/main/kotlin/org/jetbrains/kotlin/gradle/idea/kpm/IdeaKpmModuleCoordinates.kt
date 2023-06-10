@@ -9,27 +9,27 @@ import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import java.io.Serializable
 
 sealed interface IdeaKpmModuleCoordinates : Serializable {
-    val buildId: String
-    val projectPath: String
-    val projectName: String
-    val moduleName: String
-    val moduleClassifier: String?
+    konst buildId: String
+    konst projectPath: String
+    konst projectName: String
+    konst moduleName: String
+    konst moduleClassifier: String?
 }
 
-val IdeaKpmModuleCoordinates.path: String
+konst IdeaKpmModuleCoordinates.path: String
     get() = "${buildId.takeIf { it != ":" }.orEmpty()}$projectPath/$moduleName"
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmModuleCoordinatesImpl(
-    override val buildId: String,
-    override val projectPath: String,
-    override val projectName: String,
-    override val moduleName: String,
-    override val moduleClassifier: String?
+    override konst buildId: String,
+    override konst projectPath: String,
+    override konst projectName: String,
+    override konst moduleName: String,
+    override konst moduleClassifier: String?
 ) : IdeaKpmModuleCoordinates {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

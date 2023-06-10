@@ -13,33 +13,33 @@ import kotlin.script.experimental.host.toScriptSource
 import kotlin.script.experimental.jvm.*
 import kotlin.script.experimental.jvm.util.classpathFromClass
 import kotlin.script.experimental.jvmhost.BasicJvmScriptingHost
-import kotlin.script.experimental.jvmhost.test.ReplTest.Companion.checkEvaluateInRepl
+import kotlin.script.experimental.jvmhost.test.ReplTest.Companion.checkEkonstuateInRepl
 
 class ResolveDependenciesTest : TestCase() {
 
-    private val configurationWithDependenciesFromClassloader = ScriptCompilationConfiguration {
+    private konst configurationWithDependenciesFromClassloader = ScriptCompilationConfiguration {
         dependencies(JvmDependencyFromClassLoader { ShouldBeVisibleFromScript::class.java.classLoader })
     }
 
-    private val configurationWithDependenciesFromClasspath = ScriptCompilationConfiguration {
+    private konst configurationWithDependenciesFromClasspath = ScriptCompilationConfiguration {
         updateClasspath(classpathFromClass(ShouldBeVisibleFromScript::class))
     }
 
-    private val thisPackage = ShouldBeVisibleFromScript::class.java.`package`.name
+    private konst thisPackage = ShouldBeVisibleFromScript::class.java.`package`.name
 
-    private val classAccessScript = "${thisPackage}.ShouldBeVisibleFromScript().x".toScriptSource()
-    private val classImportScript = "import ${thisPackage}.ShouldBeVisibleFromScript\nShouldBeVisibleFromScript().x".toScriptSource()
+    private konst classAccessScript = "${thisPackage}.ShouldBeVisibleFromScript().x".toScriptSource()
+    private konst classImportScript = "import ${thisPackage}.ShouldBeVisibleFromScript\nShouldBeVisibleFromScript().x".toScriptSource()
 
-    val funAndValAccessScriptText = "$thisPackage.funShouldBeVisibleFromScript($thisPackage.valShouldBeVisibleFromScript)"
-    private val funAndValAccessScript = funAndValAccessScriptText.toScriptSource()
+    konst funAndValAccessScriptText = "$thisPackage.funShouldBeVisibleFromScript($thisPackage.konstShouldBeVisibleFromScript)"
+    private konst funAndValAccessScript = funAndValAccessScriptText.toScriptSource()
 
-    private val funAndValImportScriptText =
+    private konst funAndValImportScriptText =
         """
             import $thisPackage.funShouldBeVisibleFromScript
-            import $thisPackage.valShouldBeVisibleFromScript
-            funShouldBeVisibleFromScript(valShouldBeVisibleFromScript)
+            import $thisPackage.konstShouldBeVisibleFromScript
+            funShouldBeVisibleFromScript(konstShouldBeVisibleFromScript)
         """.trimMargin()
-    private val funAndValImportScript = funAndValImportScriptText.toScriptSource()
+    private konst funAndValImportScript = funAndValImportScriptText.toScriptSource()
 
     @Test
     fun testResolveClassFromClassloader() {
@@ -61,12 +61,12 @@ class ResolveDependenciesTest : TestCase() {
 
     @Test
     fun testReplResolveFunAndValFromClassloader() {
-        checkEvaluateInRepl(
+        checkEkonstuateInRepl(
             sequenceOf(funAndValAccessScriptText, funAndValAccessScriptText), sequenceOf(42, 42),
             configurationWithDependenciesFromClassloader,
             null
         )
-        checkEvaluateInRepl(
+        checkEkonstuateInRepl(
             funAndValImportScriptText.split('\n').asSequence(), sequenceOf(null, null, 42),
             configurationWithDependenciesFromClassloader,
             null
@@ -82,26 +82,26 @@ class ResolveDependenciesTest : TestCase() {
 
     @Test
     fun testResolveClassFromClassloaderIsolated() {
-        val evaluationConfiguration = ScriptEvaluationConfiguration {
+        konst ekonstuationConfiguration = ScriptEkonstuationConfiguration {
             jvm {
                 baseClassLoader(null)
             }
         }
-        runScriptAndCheckResult(classAccessScript, configurationWithDependenciesFromClassloader, evaluationConfiguration, 42)
+        runScriptAndCheckResult(classAccessScript, configurationWithDependenciesFromClassloader, ekonstuationConfiguration, 42)
     }
 
     @Test
     fun testResolveClassesFromClassloaderAndClassPath() {
-        val script = """
+        konst script = """
             org.jetbrains.kotlin.mainKts.MainKtsConfigurator()
             ${thisPackage}.ShouldBeVisibleFromScript().x
         """.trimIndent().toScriptSource()
-        val classpath = listOf(
+        konst classpath = listOf(
             File("dist/kotlinc/lib/kotlin-main-kts.jar").also {
                 assertTrue("kotlin-main-kts.jar not found, run dist task: ${it.absolutePath}", it.exists())
             }
         )
-        val compilationConfiguration = configurationWithDependenciesFromClassloader.with {
+        konst compilationConfiguration = configurationWithDependenciesFromClassloader.with {
             updateClasspath(classpath)
         }
         runScriptAndCheckResult(script, compilationConfiguration, null, 42)
@@ -110,25 +110,25 @@ class ResolveDependenciesTest : TestCase() {
     private fun <T> runScriptAndCheckResult(
         script: SourceCode,
         compilationConfiguration: ScriptCompilationConfiguration,
-        evaluationConfiguration: ScriptEvaluationConfiguration?,
+        ekonstuationConfiguration: ScriptEkonstuationConfiguration?,
         expectedResult: T
     ) {
-        val res = BasicJvmScriptingHost().eval(script, compilationConfiguration, evaluationConfiguration).valueOrThrow().returnValue
+        konst res = BasicJvmScriptingHost().ekonst(script, compilationConfiguration, ekonstuationConfiguration).konstueOrThrow().returnValue
         when (res) {
-            is ResultValue.Value -> assertEquals(expectedResult, res.value)
+            is ResultValue.Value -> assertEquals(expectedResult, res.konstue)
             is ResultValue.Error -> throw res.error
-            else -> throw Exception("Unexpected evaluation result: $res")
+            else -> throw Exception("Unexpected ekonstuation result: $res")
         }
     }
 }
 
 @Suppress("unused")
 class ShouldBeVisibleFromScript {
-    val x = 42
+    konst x = 42
 }
 
 @Suppress("unused")
 fun funShouldBeVisibleFromScript(x: Int) = x * 7
 
 @Suppress("unused")
-val valShouldBeVisibleFromScript = 6
+konst konstShouldBeVisibleFromScript = 6

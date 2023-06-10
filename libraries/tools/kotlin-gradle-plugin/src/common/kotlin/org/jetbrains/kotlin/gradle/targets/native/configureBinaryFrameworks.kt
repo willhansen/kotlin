@@ -32,13 +32,13 @@ import java.io.File
  * Contains common data between frameworks that can be bundled to a fat framework.
  */
 private data class FrameworkGroupDescription(
-    val frameworkName: String,
-    val targetFamilyName: String,
-    val baseName: String,
-    val buildType: NativeBuildType
+    konst frameworkName: String,
+    konst targetFamilyName: String,
+    konst baseName: String,
+    konst buildType: NativeBuildType
 )
 
-private val Framework.frameworkGroupDescription
+private konst Framework.frameworkGroupDescription
     get() = FrameworkGroupDescription(
         frameworkName = name,
         targetFamilyName = target.konanTarget.family.name.toLowerCaseAsciiOnly(),
@@ -47,7 +47,7 @@ private val Framework.frameworkGroupDescription
     )
 
 internal fun Project.createFrameworkArtifact(binaryFramework: Framework, linkTask: TaskProvider<KotlinNativeLink>) {
-    val frameworkConfiguration = configurations.getOrCreate(binaryFramework.binaryFrameworkConfigurationName, invokeWhenCreated = {
+    konst frameworkConfiguration = configurations.getOrCreate(binaryFramework.binaryFrameworkConfigurationName, invokeWhenCreated = {
         it.markConsumable()
         it.applyBinaryFrameworkGroupAttributes(project, binaryFramework.frameworkGroupDescription, listOf(binaryFramework.target))
         project.launchInStage(KotlinPluginLifecycle.Stage.FinaliseDsl) {
@@ -59,7 +59,7 @@ internal fun Project.createFrameworkArtifact(binaryFramework: Framework, linkTas
 }
 
 internal fun KotlinMultiplatformExtension.createFatFrameworks() {
-    val frameworkGroups = targets
+    konst frameworkGroups = targets
         .filterIsInstance<KotlinNativeTarget>()
         .filter { FatFrameworkTask.isSupportedTarget(it) }
         .flatMap { it.binaries }
@@ -72,8 +72,8 @@ internal fun KotlinMultiplatformExtension.createFatFrameworks() {
     }
 }
 
-private val Framework.binaryFrameworkConfigurationName get() = lowerCamelCaseName(name, target.name)
-private val FrameworkGroupDescription.fatFrameworkConfigurationName get() = lowerCamelCaseName(frameworkName, targetFamilyName, "fat")
+private konst Framework.binaryFrameworkConfigurationName get() = lowerCamelCaseName(name, target.name)
+private konst FrameworkGroupDescription.fatFrameworkConfigurationName get() = lowerCamelCaseName(frameworkName, targetFamilyName, "fat")
 
 private fun Configuration.applyBinaryFrameworkGroupAttributes(
     project: Project,
@@ -90,7 +90,7 @@ private fun Configuration.applyBinaryFrameworkGroupAttributes(
 }
 
 private fun Project.addFrameworkArtifact(configuration: Configuration, artifactFile: Provider<File>) {
-    val frameworkArtifact = artifacts.add(configuration.name, artifactFile) { artifact ->
+    konst frameworkArtifact = artifacts.add(configuration.name, artifactFile) { artifact ->
         artifact.name = name
         artifact.extension = "framework"
         artifact.type = "binary"
@@ -102,10 +102,10 @@ private fun Project.addFrameworkArtifact(configuration: Configuration, artifactF
 
 private fun Project.createFatFramework(groupDescription: FrameworkGroupDescription, frameworks: List<Framework>) {
     require(frameworks.size > 1) { "Can't create binary fat framework from a single framework" }
-    val fatFrameworkConfigurationName = groupDescription.fatFrameworkConfigurationName
-    val fatFrameworkTaskName = "link${fatFrameworkConfigurationName.capitalizeAsciiOnly()}"
+    konst fatFrameworkConfigurationName = groupDescription.fatFrameworkConfigurationName
+    konst fatFrameworkTaskName = "link${fatFrameworkConfigurationName.capitalizeAsciiOnly()}"
 
-    val fatFrameworkTask = if (fatFrameworkTaskName in tasks.names) {
+    konst fatFrameworkTask = if (fatFrameworkTaskName in tasks.names) {
         tasks.named(fatFrameworkTaskName, FatFrameworkTask::class.java)
     } else {
         tasks.register(fatFrameworkTaskName, FatFrameworkTask::class.java) {
@@ -122,7 +122,7 @@ private fun Project.createFatFramework(groupDescription: FrameworkGroupDescripti
         }
     }
 
-    val fatFrameworkConfiguration = project.configurations.getOrCreate(fatFrameworkConfigurationName, invokeWhenCreated = {
+    konst fatFrameworkConfiguration = project.configurations.getOrCreate(fatFrameworkConfigurationName, invokeWhenCreated = {
         it.markConsumable()
         it.applyBinaryFrameworkGroupAttributes(project, groupDescription, targets = frameworks.map(Framework::target))
     })

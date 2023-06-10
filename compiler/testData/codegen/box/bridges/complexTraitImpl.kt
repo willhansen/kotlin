@@ -19,12 +19,12 @@ interface D {
 class E : D, C()
 
 fun box(): String {
-    val e = E()
+    konst e = E()
     var r = e.foo()[0]
-    val d: D = e
-    val c: C = e
-    val b: B = e
-    val a: A = e
+    konst d: D = e
+    konst c: C = e
+    konst b: B = e
+    konst a: A = e
     r += d.foo().iterator().next()
     r += c.foo()[0]
     r += b.foo()[0]

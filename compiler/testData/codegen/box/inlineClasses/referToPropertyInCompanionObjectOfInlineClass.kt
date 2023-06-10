@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo(val c: Char) {
+konstue class Foo(konst c: Char) {
     companion object {
-        val prop = "O"
-        const val constVal = 1
+        konst prop = "O"
+        const konst constVal = 1
         fun funInCompanion(): String = "K"
     }
 
@@ -20,7 +20,7 @@ value class Foo(val c: Char) {
 }
 
 fun box(): String {
-    val r = Foo('2')
+    konst r = Foo('2')
     if (r.asResult() != "O1K2") return "fail"
     return "OK"
 }

@@ -1,7 +1,7 @@
 fun <T : Any, R> T.myLet(f: (T) -> R): R = f(this)
 
 fun box(): String {
-    val o: String? = null
+    konst o: String? = null
 
     var state = 0
 

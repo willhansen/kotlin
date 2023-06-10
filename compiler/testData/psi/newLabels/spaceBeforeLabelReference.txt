@@ -25,7 +25,7 @@ KtFile: spaceBeforeLabelReference.kt
             PsiElement(IDENTIFIER)('l1')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -48,7 +48,7 @@ KtFile: spaceBeforeLabelReference.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -68,7 +68,7 @@ KtFile: spaceBeforeLabelReference.kt
             PsiElement(IDENTIFIER)('l3')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -91,7 +91,7 @@ KtFile: spaceBeforeLabelReference.kt
         PsiElement(INTEGER_LITERAL)('5')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -111,7 +111,7 @@ KtFile: spaceBeforeLabelReference.kt
             PsiElement(IDENTIFIER)('l5')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -132,7 +132,7 @@ KtFile: spaceBeforeLabelReference.kt
             PsiElement(IDENTIFIER)('l6')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -158,7 +158,7 @@ KtFile: spaceBeforeLabelReference.kt
           PsiElement(INTEGER_LITERAL)('4')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')

@@ -8,7 +8,7 @@ import java.util.UUID
 
 @Serializable
 @JvmInline
-value class Id(val id: @Contextual UUID) {
+konstue class Id(konst id: @Contextual UUID) {
     companion object {
         fun random() = Id(UUID.randomUUID())
     }
@@ -16,11 +16,11 @@ value class Id(val id: @Contextual UUID) {
 
 @Serializable
 @JvmInline
-value class Parametrized<T: Any>(val l: List<T>)
+konstue class Parametrized<T: Any>(konst l: List<T>)
 
 
 fun pageMain () {
-    val id: Id = Id.random()
+    konst id: Id = Id.random()
     println(id)
 }
 

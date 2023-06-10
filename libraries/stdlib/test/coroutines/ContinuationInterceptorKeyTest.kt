@@ -10,7 +10,7 @@ import kotlin.test.*
 
 class ContinuationInterceptorKeyTest {
 
-    private val CoroutineContext.size get() = fold(0) { acc, _ -> acc + 1 }
+    private konst CoroutineContext.size get() = fold(0) { acc, _ -> acc + 1 }
 
     abstract class BaseElement : AbstractCoroutineContextElement(ContinuationInterceptor), ContinuationInterceptor {
         companion object Key :
@@ -21,7 +21,7 @@ class ContinuationInterceptorKeyTest {
 
     // "Legacy" code, BaseElement with ContinuationInterceptor key
     class DerivedElementWithOldKey : BaseElement() {
-        override val key: CoroutineContext.Key<*>
+        override konst key: CoroutineContext.Key<*>
             get() = ContinuationInterceptor
     }
 
@@ -33,7 +33,7 @@ class ContinuationInterceptorKeyTest {
 
     // Irrelevant interceptor
     class CustomInterceptor : ContinuationInterceptor {
-        override val key: CoroutineContext.Key<*>
+        override konst key: CoroutineContext.Key<*>
             get() = ContinuationInterceptor
 
         override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> = continuation
@@ -45,22 +45,22 @@ class ContinuationInterceptorKeyTest {
 
     @Test
     fun testKeyIsNotOverridden() {
-        val derivedElementWithOldKey = DerivedElementWithOldKey()
+        konst derivedElementWithOldKey = DerivedElementWithOldKey()
         testKeyIsNotOverridden(derivedElementWithOldKey, derivedElementWithOldKey)
         testKeyIsNotOverridden(IrrelevantElement + derivedElementWithOldKey, derivedElementWithOldKey) // test for CombinedContext
     }
 
     private fun testKeyIsNotOverridden(context: CoroutineContext, element: CoroutineContext.Element) {
         run {
-            val interceptor: ContinuationInterceptor = context[ContinuationInterceptor]!!
+            konst interceptor: ContinuationInterceptor = context[ContinuationInterceptor]!!
             assertSame(element, interceptor)
         }
         run {
-            val baseElement: BaseElement = context[BaseElement]!!
+            konst baseElement: BaseElement = context[BaseElement]!!
             assertSame(element, baseElement)
         }
 
-        val subtracted = context.minusKey(ContinuationInterceptor)
+        konst subtracted = context.minusKey(ContinuationInterceptor)
         assertEquals(subtracted, context.minusKey(BaseElement))
         assertNull(subtracted[ContinuationInterceptor])
         assertNull(subtracted[BaseElement])
@@ -69,17 +69,17 @@ class ContinuationInterceptorKeyTest {
 
     @Test
     fun testKeyIsOverridden() {
-        val derivedElementWithPolyKey = DerivedElementWithPolyKey()
+        konst derivedElementWithPolyKey = DerivedElementWithPolyKey()
         testKeyIsOverridden(derivedElementWithPolyKey, derivedElementWithPolyKey)
         testKeyIsOverridden(IrrelevantElement + derivedElementWithPolyKey, derivedElementWithPolyKey) // test for CombinedContext
     }
 
     private fun testKeyIsOverridden(context: CoroutineContext, element: CoroutineContext.Element) {
         testKeyIsNotOverridden(context, element)
-        val derived = context[DerivedElementWithPolyKey]
+        konst derived = context[DerivedElementWithPolyKey]
         assertNotNull(derived)
         assertSame(element, derived)
-        val subtracted = context.minusKey(ContinuationInterceptor)
+        konst subtracted = context.minusKey(ContinuationInterceptor)
         assertEquals(subtracted, context.minusKey(BaseElement))
         assertEquals(subtracted, context.minusKey(DerivedElementWithPolyKey))
         assertEquals(context.size - 1, subtracted.size)
@@ -87,13 +87,13 @@ class ContinuationInterceptorKeyTest {
 
     @Test
     fun testInterceptorKeyIsNotOverridden() {
-        val ci = CustomInterceptor()
+        konst ci = CustomInterceptor()
         testInterceptorKeyIsNotOverridden(ci, ci)
         testInterceptorKeyIsNotOverridden(IrrelevantElement + ci, ci) // test for CombinedContext
     }
 
     private fun testInterceptorKeyIsNotOverridden(context: CoroutineContext, element: CoroutineContext.Element) {
-        val interceptor = context[ContinuationInterceptor]
+        konst interceptor = context[ContinuationInterceptor]
         assertNotNull(interceptor)
         assertSame(element, interceptor)
         assertNull(context[BaseElement])
@@ -104,10 +104,10 @@ class ContinuationInterceptorKeyTest {
 
     @Test
     fun testContextOperations() {
-        val interceptor = CustomInterceptor()
-        val derivedWithOld = DerivedElementWithOldKey()
-        val derivedWithPoly = DerivedElementWithPolyKey()
-        val e = IrrelevantElement
+        konst interceptor = CustomInterceptor()
+        konst derivedWithOld = DerivedElementWithOldKey()
+        konst derivedWithPoly = DerivedElementWithPolyKey()
+        konst e = IrrelevantElement
         run {
             assertEquals(interceptor, derivedWithOld + derivedWithPoly + interceptor)
             assertEquals(interceptor + e, derivedWithOld + derivedWithPoly + interceptor + e)

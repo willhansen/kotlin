@@ -7,16 +7,16 @@
 package test
 
 @Deprecated("")
-val str: String
+konst str: String
     get() = ""
 
 @Deprecated("")
 fun f() {}
 
 @Deprecated("")
-val Int.ext: Int get() = this
+konst Int.ext: Int get() = this
 
 var Int.extA: Int
     get() = this
     @Deprecated("")
-    set(value) {}
+    set(konstue) {}

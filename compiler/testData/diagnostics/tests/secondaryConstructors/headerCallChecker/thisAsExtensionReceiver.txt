@@ -1,6 +1,6 @@
 package
 
-public val A.prop: kotlin.Int
+public konst A.prop: kotlin.Int
 public fun A.foobar(): kotlin.Int
 
 public final class A {

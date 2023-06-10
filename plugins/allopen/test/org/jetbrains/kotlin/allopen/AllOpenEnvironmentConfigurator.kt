@@ -19,8 +19,8 @@ class AllOpenEnvironmentConfigurator(testServices: TestServices) : EnvironmentCo
         module: TestModule,
         configuration: CompilerConfiguration
     ) {
-        val annotations = AbstractAllOpenDeclarationAttributeAltererExtension.ANNOTATIONS_FOR_TESTS +
-                AllOpenPluginNames.SUPPORTED_PRESETS.flatMap { it.value }
+        konst annotations = AbstractAllOpenDeclarationAttributeAltererExtension.ANNOTATIONS_FOR_TESTS +
+                AllOpenPluginNames.SUPPORTED_PRESETS.flatMap { it.konstue }
 
         DeclarationAttributeAltererExtension.registerExtension(CliAllOpenDeclarationAttributeAltererExtension(annotations))
         FirExtensionRegistrarAdapter.registerExtension(FirAllOpenExtensionRegistrar(annotations))

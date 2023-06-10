@@ -39,7 +39,7 @@ fun <R : FirTypeRef> R.copyWithNewSource(newSource: KtSourceElement?): R {
     if (source?.kind == newSource?.kind) return this
 
     @Suppress("UNCHECKED_CAST")
-    return when (val typeRef = this) {
+    return when (konst typeRef = this) {
         is FirResolvedTypeRefImpl -> buildResolvedTypeRefCopy(typeRef) {
             source = newSource
         }
@@ -74,13 +74,13 @@ fun <R : FirTypeRef> R.copyWithNewSource(newSource: KtSourceElement?): R {
     } as R
 }
 
-val FirFile.packageFqName: FqName
+konst FirFile.packageFqName: FqName
     get() = packageDirective.packageFqName
 
-val FirElement.psi: PsiElement? get() = (source as? KtPsiSourceElement)?.psi
-val FirElement.realPsi: PsiElement? get() = (source as? KtRealPsiSourceElement)?.psi
+konst FirElement.psi: PsiElement? get() = (source as? KtPsiSourceElement)?.psi
+konst FirElement.realPsi: PsiElement? get() = (source as? KtRealPsiSourceElement)?.psi
 
-val FirContextReceiver.labelName: Name? get() = customLabelName ?: labelNameFromTypeRef
+konst FirContextReceiver.labelName: Name? get() = customLabelName ?: labelNameFromTypeRef
 
 fun FirElement.renderWithType(): String =
     FirRenderer().renderElementWithTypeAsString(this)
@@ -111,9 +111,9 @@ fun FirDeclarationStatus.copy(
     isFun: Boolean = this.isFun,
     hasStableParameterNames: Boolean = this.hasStableParameterNames,
 ): FirDeclarationStatus {
-    val newVisibility = visibility ?: this.visibility
-    val newModality = modality ?: this.modality
-    val newStatus = if (this is FirResolvedDeclarationStatus) {
+    konst newVisibility = visibility ?: this.visibility
+    konst newModality = modality ?: this.modality
+    konst newStatus = if (this is FirResolvedDeclarationStatus) {
         FirResolvedDeclarationStatusImpl(newVisibility, newModality!!, effectiveVisibility)
     } else {
         FirDeclarationStatusImpl(newVisibility, newModality)
@@ -162,7 +162,7 @@ abstract class FirExceptionHandler : FirSessionComponent {
     abstract fun handleExceptionOnFileAnalysis(file: FirFile, throwable: Throwable): Nothing
 }
 
-val FirSession.exceptionHandler: FirExceptionHandler by FirSession.sessionComponentAccessor()
+konst FirSession.exceptionHandler: FirExceptionHandler by FirSession.sessionComponentAccessor()
 
 object FirCliExceptionHandler : FirExceptionHandler() {
     override fun handleExceptionOnElementAnalysis(element: FirElement, throwable: Throwable): Nothing {
@@ -178,11 +178,11 @@ object FirCliExceptionHandler : FirExceptionHandler() {
 }
 
 @JvmInline
-value class MutableOrEmptyList<out T>(internal val list: MutableList<@UnsafeVariance T>?) : List<T> {
+konstue class MutableOrEmptyList<out T>(internal konst list: MutableList<@UnsafeVariance T>?) : List<T> {
 
     private constructor(list: Nothing?) : this(list as MutableList<T>?)
 
-    override val size: Int
+    override konst size: Int
         get() = list?.size ?: 0
 
     override fun get(index: Int): T {
@@ -231,13 +231,13 @@ value class MutableOrEmptyList<out T>(internal val list: MutableList<@UnsafeVari
     }
 
     companion object {
-        private val EMPTY = MutableOrEmptyList<Nothing>(null)
+        private konst EMPTY = MutableOrEmptyList<Nothing>(null)
 
-        private val EMPTY_LIST_STUB = emptyList<Nothing>()
+        private konst EMPTY_LIST_STUB = emptyList<Nothing>()
 
-        private val EMPTY_LIST_STUB_ITERATOR = EMPTY_LIST_STUB.iterator()
+        private konst EMPTY_LIST_STUB_ITERATOR = EMPTY_LIST_STUB.iterator()
 
-        private val EMPTY_LIST_STUB_LIST_ITERATOR = EMPTY_LIST_STUB.listIterator()
+        private konst EMPTY_LIST_STUB_LIST_ITERATOR = EMPTY_LIST_STUB.listIterator()
 
         fun <T> empty(): MutableOrEmptyList<T> = EMPTY
     }
@@ -247,7 +247,7 @@ fun <T> List<T>.smartPlus(other: List<T>): List<T> = when {
     other.isEmpty() -> this
     this.isEmpty() -> other
     else -> {
-        val result = ArrayList<T>(this.size + other.size)
+        konst result = ArrayList<T>(this.size + other.size)
         result.addAll(this)
         result.addAll(other)
         result

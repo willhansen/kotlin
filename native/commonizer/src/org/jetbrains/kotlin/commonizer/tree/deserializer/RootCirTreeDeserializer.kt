@@ -14,18 +14,18 @@ import org.jetbrains.kotlin.commonizer.metadata.CirTypeResolver
 import org.jetbrains.kotlin.commonizer.tree.CirTreeRoot
 
 internal class RootCirTreeDeserializer(
-    private val moduleDeserializer: CirTreeModuleDeserializer
+    private konst moduleDeserializer: CirTreeModuleDeserializer
 ) {
     operator fun invoke(parameters: CommonizerParameters, targetProvider: TargetProvider): CirTreeRoot {
 
-        val commonModuleNames = parameters.commonModuleNames(targetProvider)
+        konst commonModuleNames = parameters.commonModuleNames(targetProvider)
 
-        val commonModuleInfos = targetProvider.modulesProvider.moduleInfos
+        konst commonModuleInfos = targetProvider.modulesProvider.moduleInfos
             .filter { moduleInfo -> moduleInfo.name in commonModuleNames }
 
-        val dependencies = parameters.dependencyClassifiers(targetProvider.target)
+        konst dependencies = parameters.dependencyClassifiers(targetProvider.target)
 
-        val typeResolver = CirTypeResolver.create(
+        konst typeResolver = CirTypeResolver.create(
             providedClassifiers = CirProvidedClassifiers.of(
                 CirProvidedClassifiers.by(targetProvider.modulesProvider), dependencies
             )
@@ -33,7 +33,7 @@ internal class RootCirTreeDeserializer(
 
         return CirTreeRoot(
             modules = commonModuleInfos.map { moduleInfo ->
-                val metadata = targetProvider.modulesProvider.loadModuleMetadata(moduleInfo.name)
+                konst metadata = targetProvider.modulesProvider.loadModuleMetadata(moduleInfo.name)
                 moduleDeserializer(metadata, typeResolver)
             },
             dependencies = dependencies

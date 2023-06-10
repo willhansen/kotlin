@@ -20,8 +20,8 @@ inline fun <T : Any> flow(crossinline block: suspend () -> String) = object : Fl
 
 fun CoroutineScope.launch(c: suspend () -> String): String {
     var result: String = "fail"
-    c.startCoroutine(handleResultContinuation { value ->
-        result = value
+    c.startCoroutine(handleResultContinuation { konstue ->
+        result = konstue
     })
     return result
 }

@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
 import org.jetbrains.kotlin.resolve.calls.util.getResolvedCall
 import org.jetbrains.kotlin.resolve.calls.util.isSingleUnderscore
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.descriptorUtil.isAnnotationConstructor
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyExternal
 import org.jetbrains.kotlin.resolve.descriptorUtil.propertyIfAccessor
@@ -54,7 +54,7 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
         }
 
     fun generateLambdaFunctionDeclaration(ktFunction: KtFunctionLiteral, parentLoopResolver: LoopResolver?): IrSimpleFunction {
-        val lambdaDescriptor = getOrFail(BindingContext.FUNCTION, ktFunction)
+        konst lambdaDescriptor = getOrFail(BindingContext.FUNCTION, ktFunction)
         return declareSimpleFunction(
             ktFunction,
             null,
@@ -130,7 +130,7 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
                 ktProperty.contextReceivers.mapNotNull { it.typeReference() }
             )
             if (context.configuration.generateBodies) {
-                val ktBodyExpression = ktAccessor?.bodyExpression
+                konst ktBodyExpression = ktAccessor?.bodyExpression
                 irAccessor.body =
                     if (ktBodyExpression != null)
                         createBodyGenerator(irAccessor.symbol).generateFunctionBody(ktBodyExpression)
@@ -167,13 +167,13 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
         getter: PropertyGetterDescriptor,
         irAccessor: IrSimpleFunction
     ): IrBlockBody {
-        val property = getter.correspondingProperty
+        konst property = getter.correspondingProperty
 
-        val startOffset = irAccessor.startOffset
-        val endOffset = irAccessor.endOffset
-        val irBody = context.irFactory.createBlockBody(startOffset, endOffset)
+        konst startOffset = irAccessor.startOffset
+        konst endOffset = irAccessor.endOffset
+        konst irBody = context.irFactory.createBlockBody(startOffset, endOffset)
 
-        val receiver = generateReceiverExpressionForDefaultPropertyAccessor(property, irAccessor)
+        konst receiver = generateReceiverExpressionForDefaultPropertyAccessor(property, irAccessor)
 
         irBody.statements.add(
             IrReturnImpl(
@@ -194,15 +194,15 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
         setter: PropertySetterDescriptor,
         irAccessor: IrSimpleFunction
     ): IrBlockBody {
-        val property = setter.correspondingProperty
+        konst property = setter.correspondingProperty
 
-        val startOffset = irAccessor.startOffset
-        val endOffset = irAccessor.endOffset
-        val irBody = context.irFactory.createBlockBody(startOffset, endOffset)
+        konst startOffset = irAccessor.startOffset
+        konst endOffset = irAccessor.endOffset
+        konst irBody = context.irFactory.createBlockBody(startOffset, endOffset)
 
-        val receiver = generateReceiverExpressionForDefaultPropertyAccessor(property, irAccessor)
+        konst receiver = generateReceiverExpressionForDefaultPropertyAccessor(property, irAccessor)
 
-        val irValueParameter = irAccessor.valueParameters.single()
+        konst irValueParameter = irAccessor.konstueParameters.single()
         irBody.statements.add(
             IrSetFieldImpl(
                 startOffset, endOffset,
@@ -219,9 +219,9 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
         property: PropertyDescriptor,
         irAccessor: IrSimpleFunction
     ): IrExpression? {
-        return when (val containingDeclaration = property.containingDeclaration) {
+        return when (konst containingDeclaration = property.containingDeclaration) {
             is ClassDescriptor -> {
-                val thisAsReceiverParameter = containingDeclaration.thisAsReceiverParameter
+                konst thisAsReceiverParameter = containingDeclaration.thisAsReceiverParameter
                 IrGetValueImpl(
                     irAccessor.startOffset, irAccessor.endOffset,
                     thisAsReceiverParameter.type.toIrType(),
@@ -253,7 +253,7 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
         }
 
     fun generateSecondaryConstructor(ktConstructor: KtSecondaryConstructor, ktClassOrObject: KtPureClassOrObject): IrConstructor {
-        val constructorDescriptor = getOrFail(BindingContext.CONSTRUCTOR, ktConstructor) as ClassConstructorDescriptor
+        konst constructorDescriptor = getOrFail(BindingContext.CONSTRUCTOR, ktConstructor) as ClassConstructorDescriptor
         return declareConstructor(
             ktConstructor,
             ktConstructor,
@@ -280,9 +280,9 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
         constructorDescriptor: ClassConstructorDescriptor,
         generateBody: BodyGenerator.(IrConstructor) -> IrBody?
     ): IrConstructor {
-        val startOffset = ktConstructorElement.getStartOffsetOfConstructorDeclarationKeywordOrNull() ?: ktConstructorElement.pureStartOffset
-        val endOffset = ktConstructorElement.pureEndOffset
-        val origin = IrDeclarationOrigin.DEFINED
+        konst startOffset = ktConstructorElement.getStartOffsetOfConstructorDeclarationKeywordOrNull() ?: ktConstructorElement.pureStartOffset
+        konst endOffset = ktConstructorElement.pureEndOffset
+        konst origin = IrDeclarationOrigin.DEFINED
         return context.symbolTable.declareConstructor(constructorDescriptor) {
             with(constructorDescriptor) {
                 context.irFactory.createConstructor(
@@ -303,8 +303,8 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
     }
 
     fun generateSyntheticFunctionParameterDeclarations(irFunction: IrFunction) {
-        val descriptor = irFunction.descriptor
-        val typeParameters =
+        konst descriptor = irFunction.descriptor
+        konst typeParameters =
             if (descriptor is PropertyAccessorDescriptor)
                 descriptor.correspondingProperty.typeParameters
             else
@@ -320,7 +320,7 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
         ktContextReceiverParameterElements: List<KtPureElement>,
         withDefaultValues: Boolean = true
     ) {
-        val functionDescriptor = irFunction.descriptor
+        konst functionDescriptor = irFunction.descriptor
 
         irFunction.dispatchReceiverParameter = functionDescriptor.dispatchReceiverParameter?.let {
             generateReceiverParameterDeclaration(it, ktParameterOwner, irFunction)
@@ -330,33 +330,33 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
             generateReceiverParameterDeclaration(it, ktReceiverParameterElement ?: ktParameterOwner, irFunction)
         }
 
-        val bodyGenerator = createBodyGenerator(irFunction.symbol)
+        konst bodyGenerator = createBodyGenerator(irFunction.symbol)
 
-        val contextReceiverParametersCount = functionDescriptor.contextReceiverParameters.size
+        konst contextReceiverParametersCount = functionDescriptor.contextReceiverParameters.size
         irFunction.contextReceiverParametersCount = contextReceiverParametersCount
-        irFunction.valueParameters += functionDescriptor.contextReceiverParameters.mapIndexed { i, contextReceiver ->
+        irFunction.konstueParameters += functionDescriptor.contextReceiverParameters.mapIndexed { i, contextReceiver ->
             declareParameter(contextReceiver, ktContextReceiverParameterElements.getOrNull(i) ?: ktParameterOwner, irFunction, null, i)
         }
 
-        // Declare all the value parameters up first.
-        irFunction.valueParameters += functionDescriptor.valueParameters.mapIndexed { i, valueParameterDescriptor ->
-            val ktParameter = DescriptorToSourceUtils.getSourceFromDescriptor(valueParameterDescriptor) as? KtParameter
-            declareParameter(valueParameterDescriptor, ktParameter, irFunction, null, i + contextReceiverParametersCount)
+        // Declare all the konstue parameters up first.
+        irFunction.konstueParameters += functionDescriptor.konstueParameters.mapIndexed { i, konstueParameterDescriptor ->
+            konst ktParameter = DescriptorToSourceUtils.getSourceFromDescriptor(konstueParameterDescriptor) as? KtParameter
+            declareParameter(konstueParameterDescriptor, ktParameter, irFunction, null, i + contextReceiverParametersCount)
         }
-        // Only after value parameters have been declared, generate default values. This ensures
-        // that forward references to other parameters works in default value lambdas. For example:
+        // Only after konstue parameters have been declared, generate default konstues. This ensures
+        // that forward references to other parameters works in default konstue lambdas. For example:
         //
         // fun f(f1: () -> String = { f2() },
         //       f2: () -> String) = f1()
         if (withDefaultValues) {
-            irFunction.valueParameters.drop(contextReceiverParametersCount).forEachIndexed { index, irValueParameter ->
-                val valueParameterDescriptor = functionDescriptor.valueParameters[index]
-                val ktParameter = DescriptorToSourceUtils.getSourceFromDescriptor(valueParameterDescriptor) as? KtParameter
+            irFunction.konstueParameters.drop(contextReceiverParametersCount).forEachIndexed { index, irValueParameter ->
+                konst konstueParameterDescriptor = functionDescriptor.konstueParameters[index]
+                konst ktParameter = DescriptorToSourceUtils.getSourceFromDescriptor(konstueParameterDescriptor) as? KtParameter
                 irValueParameter.defaultValue = ktParameter?.defaultValue?.let { defaultValue ->
-                    val inAnnotation =
-                        (valueParameterDescriptor.containingDeclaration as? ConstructorDescriptor)?.isAnnotationConstructor() == true
+                    konst inAnnotation =
+                        (konstueParameterDescriptor.containingDeclaration as? ConstructorDescriptor)?.isAnnotationConstructor() == true
                     if (inAnnotation) {
-                        generateDefaultAnnotationParameterValue(defaultValue, valueParameterDescriptor)
+                        generateDefaultAnnotationParameterValue(defaultValue, konstueParameterDescriptor)
                     } else if (context.configuration.generateBodies) {
                         bodyGenerator.generateExpressionBody(defaultValue)
                     } else context.irFactory.createExpressionBody(
@@ -377,9 +377,9 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
         ktElement: KtPureElement?,
         irOwnerElement: IrElement
     ): IrValueParameter {
-        val name = if (context.languageVersionSettings.supportsFeature(LanguageFeature.NewCapturedReceiverFieldNamingConvention)) {
+        konst name = if (context.languageVersionSettings.supportsFeature(LanguageFeature.NewCapturedReceiverFieldNamingConvention)) {
             if (ktElement is KtFunctionLiteral) {
-                val label = getCallLabelForLambdaArgument(ktElement, this.context.bindingContext)?.let {
+                konst label = getCallLabelForLambdaArgument(ktElement, this.context.bindingContext)?.let {
                     it.takeIf(Name::isValidIdentifier) ?: "\$receiver"
                 }
                 // TODO: this can produce `$this$null` - expected?
@@ -390,25 +390,25 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
     }
 
     private fun getCallLabelForLambdaArgument(declaration: KtFunctionLiteral, bindingContext: BindingContext): String? {
-        val lambdaExpression = declaration.parent as? KtLambdaExpression ?: return null
-        val lambdaExpressionParent = lambdaExpression.parent
+        konst lambdaExpression = declaration.parent as? KtLambdaExpression ?: return null
+        konst lambdaExpressionParent = lambdaExpression.parent
 
         if (lambdaExpressionParent is KtLabeledExpression) {
             lambdaExpressionParent.name?.let { return it }
         }
 
-        val callExpression = when (val argument = lambdaExpression.parent) {
+        konst callExpression = when (konst argument = lambdaExpression.parent) {
             is KtLambdaArgument -> {
                 argument.parent as? KtCallExpression ?: return null
             }
             is KtValueArgument -> {
-                val valueArgumentList = argument.parent as? KtValueArgumentList ?: return null
-                valueArgumentList.parent as? KtCallExpression ?: return null
+                konst konstueArgumentList = argument.parent as? KtValueArgumentList ?: return null
+                konstueArgumentList.parent as? KtCallExpression ?: return null
             }
             else -> return null
         }
 
-        val call = callExpression.getResolvedCall(bindingContext) ?: return null
+        konst call = callExpression.getResolvedCall(bindingContext) ?: return null
         return call.resultingDescriptor.name.asString()
     }
 
@@ -440,15 +440,15 @@ internal class FunctionGenerator(declarationGenerator: DeclarationGenerator) : D
     }
 
     private fun generateDefaultAnnotationParameterValue(
-        valueExpression: KtExpression,
-        valueParameterDescriptor: ValueParameterDescriptor
+        konstueExpression: KtExpression,
+        konstueParameterDescriptor: ValueParameterDescriptor
     ): IrExpressionBody {
-        val constantDefaultValue =
-            ConstantExpressionEvaluator.getConstant(valueExpression, context.bindingContext)?.toConstantValue(valueParameterDescriptor.type)
-                ?: error("Constant value expected for default parameter value in annotation, got $valueExpression")
-        val converted = context.constantValueGenerator.generateAnnotationValueAsExpression(
-            UNDEFINED_OFFSET, UNDEFINED_OFFSET, constantDefaultValue, valueParameterDescriptor
-        ) ?: error("Could not convert annotation default ${valueExpression.getElementTextWithContext()}")
+        konst constantDefaultValue =
+            ConstantExpressionEkonstuator.getConstant(konstueExpression, context.bindingContext)?.toConstantValue(konstueParameterDescriptor.type)
+                ?: error("Constant konstue expected for default parameter konstue in annotation, got $konstueExpression")
+        konst converted = context.constantValueGenerator.generateAnnotationValueAsExpression(
+            UNDEFINED_OFFSET, UNDEFINED_OFFSET, constantDefaultValue, konstueParameterDescriptor
+        ) ?: error("Could not convert annotation default ${konstueExpression.getElementTextWithContext()}")
         return context.irFactory.createExpressionBody(UNDEFINED_OFFSET, UNDEFINED_OFFSET, converted)
     }
 }

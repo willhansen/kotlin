@@ -8,12 +8,12 @@ package org.jetbrains.kotlin.fir
 import java.text.DecimalFormat
 
 class RTableContext {
-    val data: MutableList<Row> = mutableListOf()
+    konst data: MutableList<Row> = mutableListOf()
     var cols = 0
     fun row(names: List<String>) = row(names.map { Cell(it) })
 
     sealed class Row {
-        class Data(val cells: List<Cell>) : Row()
+        class Data(konst cells: List<Cell>) : Row()
         class Separator() : Row()
     }
 
@@ -32,9 +32,9 @@ class RTableContext {
     }
 
     inner class RTableRowContext() {
-        val rowData = mutableListOf<Cell>()
-        val LEFT = false
-        val RIGHT = true
+        konst rowData = mutableListOf<Cell>()
+        konst LEFT = false
+        konst RIGHT = true
         fun cell(text: String?, align: Boolean = RIGHT) {
             rowData += Cell(text.toString(), align)
         }
@@ -49,12 +49,12 @@ class RTableContext {
     }
 
     inline fun row(body: RTableRowContext.() -> Unit) {
-        val ctx = RTableRowContext()
+        konst ctx = RTableRowContext()
         ctx.body()
         row(ctx.rowData)
     }
 
-    data class Cell(val text: String, val alignRight: Boolean = true) {
+    data class Cell(konst text: String, konst alignRight: Boolean = true) {
         fun padText(size: Int): String {
             return if (alignRight) {
                 text.padStart(size)
@@ -65,7 +65,7 @@ class RTableContext {
     }
 
     fun printout(out: Appendable) {
-        val colSize = IntArray(cols) { index ->
+        konst colSize = IntArray(cols) { index ->
             data.filterIsInstance<Row.Data>().fold(0) { acc, row -> maxOf(acc, row.cells.getOrNull(index)?.text?.length ?: 0) }
         }
 
@@ -105,36 +105,36 @@ class RTableContext {
     }
 
     companion object {
-        private const val CROSS = "┼"
-        private const val VLINE = "│"
-        private const val HLINE = "─"
-        private const val CORNER_LU = "┌"
-        private const val CORNER_RU = "┐"
-        private const val CORNER_LD = "└"
-        private const val CORNER_RD = "┘"
-        private const val LEFT_T = "├"
-        private const val RIGHT_T = "┤"
-        private const val TOP_T = "┬"
-        private const val BOT_T = "┴"
+        private const konst CROSS = "┼"
+        private const konst VLINE = "│"
+        private const konst HLINE = "─"
+        private const konst CORNER_LU = "┌"
+        private const konst CORNER_RU = "┐"
+        private const konst CORNER_LD = "└"
+        private const konst CORNER_RD = "┘"
+        private const konst LEFT_T = "├"
+        private const konst RIGHT_T = "┤"
+        private const konst TOP_T = "┬"
+        private const konst BOT_T = "┴"
     }
 }
 
 
-enum class TableTimeUnit(val postfixText: String, val nsMultiplier: Double, val fractionDigits: Int) {
+enum class TableTimeUnit(konst postfixText: String, konst nsMultiplier: Double, konst fractionDigits: Int) {
     NS("ns", 1.0, 0),
     MICS("mcs", 1e-3, 3),
     MS("ms", 1e-6, 6),
     S("s", 1e-9, 9);
 
-    fun convert(value: Long, from: TableTimeUnit): Double {
-        return value / from.nsMultiplier * this.nsMultiplier
+    fun convert(konstue: Long, from: TableTimeUnit): Double {
+        return konstue / from.nsMultiplier * this.nsMultiplier
     }
 }
 
 @JvmInline
-value class TableTimeUnitConversion(val value: Double) {
+konstue class TableTimeUnitConversion(konst konstue: Double) {
     infix fun to(dest: TableTimeUnit): Double {
-        return value * dest.nsMultiplier
+        return konstue * dest.nsMultiplier
     }
 }
 
@@ -148,7 +148,7 @@ inline fun RTableContext.RTableRowContext.timeCell(
     inputUnit: TableTimeUnit = TableTimeUnit.NS,
     fractionDigits: Int = outputUnit.fractionDigits
 ) {
-    val df = DecimalFormat().apply {
+    konst df = DecimalFormat().apply {
         maximumFractionDigits = fractionDigits
         isGroupingUsed = true
     }

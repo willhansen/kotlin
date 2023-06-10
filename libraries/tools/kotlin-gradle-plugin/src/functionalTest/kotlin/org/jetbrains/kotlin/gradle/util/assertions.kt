@@ -25,22 +25,22 @@ fun Task.assertDependsOn(other: Task) {
 
 fun Task.assertNoCircularTaskDependencies() {
     data class TaskAndDependants(
-        val task: Task,
-        val dependants: List<Task>
+        konst task: Task,
+        konst dependants: List<Task>
     )
 
-    val visited = mutableSetOf<Task>()
-    val queue = ArrayDeque(taskDependencies.getDependencies(this).map { TaskAndDependants(it, listOf(this)) })
+    konst visited = mutableSetOf<Task>()
+    konst queue = ArrayDeque(taskDependencies.getDependencies(this).map { TaskAndDependants(it, listOf(this)) })
 
     while (queue.isNotEmpty()) {
-        val (task, dependants) = queue.removeFirst()
+        konst (task, dependants) = queue.removeFirst()
         if (task in visited) {
-            val dependencyChain = dependants.joinToString(" -> ") { it.name }
+            konst dependencyChain = dependants.joinToString(" -> ") { it.name }
             fail("Task $name has circular dependency: $dependencyChain")
         }
         visited.add(task)
 
-        val dependencies = task.taskDependencies.getDependencies(null)
+        konst dependencies = task.taskDependencies.getDependencies(null)
         queue.addAll(dependencies.map { TaskAndDependants(it, dependants + task) })
     }
 }
@@ -66,9 +66,9 @@ fun Project.assertContainsNoTaskWithName(taskName: String) {
 }
 
 fun Project.assertContainsDependencies(configurationName: String, vararg dependencyNotations: Any, exhaustive: Boolean = false) {
-    val configuration = configurations.getByName(configurationName)
-    val expectedDependencies = dependencyNotations.map { dependencies.create(it) }.toMutableSet()
-    val unexpectedDependencies = mutableSetOf<Dependency>()
+    konst configuration = configurations.getByName(configurationName)
+    konst expectedDependencies = dependencyNotations.map { dependencies.create(it) }.toMutableSet()
+    konst unexpectedDependencies = mutableSetOf<Dependency>()
 
     for (dependency in configuration.allDependencies) {
         if (!expectedDependencies.remove(dependency)) {
@@ -90,10 +90,10 @@ fun Project.assertContainsDependencies(configurationName: String, vararg depende
 }
 
 fun Project.assertNotContainsDependencies(configurationName: String, vararg dependencyNotations: Any) {
-    val configuration = configurations.getByName(configurationName)
-    val unexpectedDependencies = dependencyNotations.map { dependencies.create(it) }.toMutableSet()
+    konst configuration = configurations.getByName(configurationName)
+    konst unexpectedDependencies = dependencyNotations.map { dependencies.create(it) }.toMutableSet()
 
-    val foundUnexpectedDependencies = mutableSetOf<Dependency>()
+    konst foundUnexpectedDependencies = mutableSetOf<Dependency>()
 
     for (dependency in configuration.allDependencies) {
         if (dependency in unexpectedDependencies) {
@@ -107,7 +107,7 @@ fun Project.assertNotContainsDependencies(configurationName: String, vararg depe
     )
 }
 
-inline fun <reified T> assertIsInstance(value: Any?): T {
-    if (value is T) return value
-    fail("Expected $value to implement ${T::class.java}")
+inline fun <reified T> assertIsInstance(konstue: Any?): T {
+    if (konstue is T) return konstue
+    fail("Expected $konstue to implement ${T::class.java}")
 }

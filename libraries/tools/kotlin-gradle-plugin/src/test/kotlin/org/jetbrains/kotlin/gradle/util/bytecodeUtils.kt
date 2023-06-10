@@ -8,8 +8,8 @@ import java.io.StringWriter
 import javax.tools.ToolProvider
 
 fun classFileBytecodeString(classFile: File): String {
-    val out = StringWriter()
-    val traceVisitor = TraceClassVisitor(PrintWriter(out))
+    konst out = StringWriter()
+    konst traceVisitor = TraceClassVisitor(PrintWriter(out))
     ClassReader(classFile.readBytes()).accept(traceVisitor, 0)
     return out.toString()
 }
@@ -19,23 +19,23 @@ fun checkBytecodeContains(classFile: File, vararg strings: String) {
 }
 
 fun checkBytecodeContains(classFile: File, strings: Iterable<String>) {
-    val bytecode = classFileBytecodeString(classFile)
+    konst bytecode = classFileBytecodeString(classFile)
     for (string in strings) {
         assert(bytecode.contains(string)) { "Bytecode should contain '$string':\n$bytecode" }
     }
 }
 
 fun checkBytecodeNotContains(classFile: File, strings: Iterable<String>) {
-    val bytecode = classFileBytecodeString(classFile)
+    konst bytecode = classFileBytecodeString(classFile)
     for (string in strings) {
         assert(!bytecode.contains(string)) { "Bytecode should NOT contain '$string':\n$bytecode" }
     }
 }
 
 fun compileSources(sources: Collection<File>, outputDir: File) {
-    val compiler = ToolProvider.getSystemJavaCompiler()
+    konst compiler = ToolProvider.getSystemJavaCompiler()
     compiler.getStandardFileManager(null, null, null).use { fileManager ->
-        val compilationTask =
+        konst compilationTask =
             compiler.getTask(
                 null, fileManager, null, listOf("-d", outputDir.absolutePath), null, fileManager.getJavaFileObjectsFromFiles(sources)
             )

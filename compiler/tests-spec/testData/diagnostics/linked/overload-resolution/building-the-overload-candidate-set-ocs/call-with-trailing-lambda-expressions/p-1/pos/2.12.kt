@@ -59,7 +59,7 @@ import libPackageCase2Explicit.listOf
 class Case2() {
     fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
 
-    val listOf: A
+    konst listOf: A
         get() = A()
 
     fun case1() {
@@ -76,7 +76,7 @@ class A {
 package libPackageCase2
 import testsCase2.*
 
-val Case2.listOf: A
+konst Case2.listOf: A
     get() = A()
 
 public fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
@@ -86,7 +86,7 @@ fun <T> Case2.listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): 
 package libPackageCase2Explicit
 import testsCase2.*
 
-val Case2.listOf: A
+konst Case2.listOf: A
     get() = A()
 
 fun <T> Case2.listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
@@ -95,7 +95,7 @@ public fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }):
 
 // FILE: LibtestsPack2.kt
 package testsCase2
-val Case2.listOf: A
+konst Case2.listOf: A
     get() = A()
 
 fun <T> Case2.listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
@@ -113,7 +113,7 @@ class Case3() {
     fun <T> Case3.listOf(vararg elements1: T = TODO(), body: () -> T =
     { TODO() }): List<T> = TODO()
 
-    val listOf: A
+    konst listOf: A
         get() = A()
 
     fun case1() {
@@ -132,7 +132,7 @@ class A {
 package libPackageCase3
 import testsCase3.*
 
-val Case3.listOf: A
+konst Case3.listOf: A
     get() = A()
 
 public fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
@@ -144,7 +144,7 @@ fun <T> Case3.listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): 
 package libPackageCase3Explicit
 import testsCase3.*
 
-val Case3.listOf: A
+konst Case3.listOf: A
     get() = A()
 
 fun <T> Case3.listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
@@ -155,7 +155,7 @@ public fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }):
 // TESTCASE NUMBER: 3
 
 package testsCase3
-val Case3.listOf: A
+konst Case3.listOf: A
     get() = A()
 
 fun <T> Case3.listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()

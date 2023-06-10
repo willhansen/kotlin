@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.analysis.api.lifetime.withValidityAssertion
 import org.jetbrains.kotlin.types.DefinitelyNotNullType
 
 internal class KtFe10DefinitelyNotNullType(
-    override val fe10Type: DefinitelyNotNullType,
-    override val analysisContext: Fe10AnalysisContext
+    override konst fe10Type: DefinitelyNotNullType,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtDefinitelyNotNullType(), KtFe10Type {
     override fun asStringForDebugging(): String = withValidityAssertion { fe10Type.asStringForDebugging(analysisContext) }
 
-    override val original: KtType
+    override konst original: KtType
         get() = withValidityAssertion { fe10Type.original.toKtType(analysisContext) }
 }

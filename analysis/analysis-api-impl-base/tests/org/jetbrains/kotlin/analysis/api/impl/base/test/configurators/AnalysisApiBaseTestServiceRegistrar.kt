@@ -47,10 +47,10 @@ object AnalysisApiBaseTestServiceRegistrar: AnalysisApiTestServiceRegistrar()  {
         }
     }
 
-    class KtClsFileClassProvider(val project: Project) : KtFileClassProvider {
+    class KtClsFileClassProvider(konst project: Project) : KtFileClassProvider {
         override fun getFileClasses(file: KtFile): Array<PsiClass> {
-            val virtualFile = file.virtualFile
-            val classOrObject = file.declarations.filterIsInstance<KtClassOrObject>().singleOrNull()
+            konst virtualFile = file.virtualFile
+            konst classOrObject = file.declarations.filterIsInstance<KtClassOrObject>().singleOrNull()
             if (file is KtClsFile && virtualFile != null) {
                 DecompiledLightClassesFactory.createClsJavaClassFromVirtualFile(file, virtualFile, classOrObject, project)?.let {
                     return arrayOf(it)
@@ -61,9 +61,9 @@ object AnalysisApiBaseTestServiceRegistrar: AnalysisApiTestServiceRegistrar()  {
     }
 
     override fun registerProjectModelServices(project: MockProject, testServices: TestServices) {
-        val moduleStructure = testServices.ktModuleProvider.getModuleStructure()
-        val allKtFiles = moduleStructure.mainModules.flatMap { it.files.filterIsInstance<KtFile>() }
-        val roots = StandaloneProjectFactory.getVirtualFilesForLibraryRoots(
+        konst moduleStructure = testServices.ktModuleProvider.getModuleStructure()
+        konst allKtFiles = moduleStructure.mainModules.flatMap { it.files.filterIsInstance<KtFile>() }
+        konst roots = StandaloneProjectFactory.getVirtualFilesForLibraryRoots(
             moduleStructure.binaryModules.flatMap { binary -> binary.getBinaryRoots() },
             testServices.environmentManager.getProjectEnvironment()
         ).distinct()
@@ -71,7 +71,7 @@ object AnalysisApiBaseTestServiceRegistrar: AnalysisApiTestServiceRegistrar()  {
             registerService(KtModuleScopeProvider::class.java, KtModuleScopeProviderImpl())
             registerService(KotlinAnnotationsResolverFactory::class.java, KotlinStaticAnnotationsResolverFactory(allKtFiles))
 
-            val filter = BuiltInDefinitionFile.FILTER_OUT_CLASSES_EXISTING_AS_JVM_CLASS_FILES
+            konst filter = BuiltInDefinitionFile.FILTER_OUT_CLASSES_EXISTING_AS_JVM_CLASS_FILES
             try {
                 BuiltInDefinitionFile.FILTER_OUT_CLASSES_EXISTING_AS_JVM_CLASS_FILES = false
                 registerService(

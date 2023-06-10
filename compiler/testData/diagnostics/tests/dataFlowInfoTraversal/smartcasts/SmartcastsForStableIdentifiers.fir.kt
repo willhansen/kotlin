@@ -1,7 +1,7 @@
 // FILE: a.kt
 package example.ns
 
-val y : Any? = 2
+konst y : Any? = 2
 
 // FILE: b.kt
 package example
@@ -9,16 +9,16 @@ package example
 import example.ns.y
 
 object Obj {
-    val y : Any? = 2
+    konst y : Any? = 2
 }
 
 class AClass() {
     companion object {
-        val y : Any? = 2
+        konst y : Any? = 2
     }
 }
 
-val x : Any? = 1
+konst x : Any? = 1
 
 fun Any?.vars(a: Any?) : Int {
     var b: Int = 0

@@ -29,8 +29,8 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.types.SimpleType
 import java.util.*
 
-class LazySyntheticElementResolveContext(private val module: ModuleDescriptor, storageManager: StorageManager) {
-    private val context = storageManager.createLazyValue {
+class LazySyntheticElementResolveContext(private konst module: ModuleDescriptor, storageManager: StorageManager) {
+    private konst context = storageManager.createLazyValue {
         module.createResolveContext()
     }
 
@@ -39,13 +39,13 @@ class LazySyntheticElementResolveContext(private val module: ModuleDescriptor, s
     private fun ModuleDescriptor.createResolveContext(): SyntheticElementResolveContext {
         fun find(fqName: String) = module.findClassAcrossModuleDependencies(ClassId.topLevel(FqName(fqName)))
 
-        val viewDescriptor = find(AndroidConst.VIEW_FQNAME) ?: return SyntheticElementResolveContext.ERROR_CONTEXT
-        val activityDescriptor = find(AndroidConst.ACTIVITY_FQNAME) ?: return SyntheticElementResolveContext.ERROR_CONTEXT
-        val fragmentDescriptor = find(AndroidConst.FRAGMENT_FQNAME)
-        val dialogDescriptor = find(AndroidConst.DIALOG_FQNAME) ?: return SyntheticElementResolveContext.ERROR_CONTEXT
-        val supportActivityDescriptor = find(AndroidConst.ANDROIDX_SUPPORT_FRAGMENT_ACTIVITY_FQNAME) ?: find(AndroidConst.SUPPORT_FRAGMENT_ACTIVITY_FQNAME)
-        val supportFragmentDescriptor = find(AndroidConst.ANDROIDX_SUPPORT_FRAGMENT_FQNAME) ?: find(AndroidConst.SUPPORT_FRAGMENT_FQNAME)
-        val layoutContainerDescriptor = find(LayoutContainer::class.java.canonicalName)
+        konst viewDescriptor = find(AndroidConst.VIEW_FQNAME) ?: return SyntheticElementResolveContext.ERROR_CONTEXT
+        konst activityDescriptor = find(AndroidConst.ACTIVITY_FQNAME) ?: return SyntheticElementResolveContext.ERROR_CONTEXT
+        konst fragmentDescriptor = find(AndroidConst.FRAGMENT_FQNAME)
+        konst dialogDescriptor = find(AndroidConst.DIALOG_FQNAME) ?: return SyntheticElementResolveContext.ERROR_CONTEXT
+        konst supportActivityDescriptor = find(AndroidConst.ANDROIDX_SUPPORT_FRAGMENT_ACTIVITY_FQNAME) ?: find(AndroidConst.SUPPORT_FRAGMENT_ACTIVITY_FQNAME)
+        konst supportFragmentDescriptor = find(AndroidConst.ANDROIDX_SUPPORT_FRAGMENT_FQNAME) ?: find(AndroidConst.SUPPORT_FRAGMENT_FQNAME)
+        konst layoutContainerDescriptor = find(LayoutContainer::class.java.canonicalName)
 
         return SyntheticElementResolveContext(
                 view = viewDescriptor.defaultType,
@@ -59,21 +59,21 @@ class LazySyntheticElementResolveContext(private val module: ModuleDescriptor, s
 }
 
 internal class SyntheticElementResolveContext(
-        val view: SimpleType,
-        val activity: SimpleType,
-        val fragment: SimpleType?,
-        val dialog: SimpleType,
-        val supportActivity: SimpleType?,
-        val supportFragment: SimpleType?,
-        val layoutContainer: SimpleType?
+        konst view: SimpleType,
+        konst activity: SimpleType,
+        konst fragment: SimpleType?,
+        konst dialog: SimpleType,
+        konst supportActivity: SimpleType?,
+        konst supportFragment: SimpleType?,
+        konst layoutContainer: SimpleType?
 ) {
     companion object {
         private fun errorType() = ErrorUtils.createErrorType(ErrorTypeKind.SYNTHETIC_ELEMENT_ERROR_TYPE)
-        val ERROR_CONTEXT = SyntheticElementResolveContext(errorType(), errorType(), null, errorType(), null, null, null)
+        konst ERROR_CONTEXT = SyntheticElementResolveContext(errorType(), errorType(), null, errorType(), null, null, null)
     }
 
-    private val widgetReceivers by lazy {
-        val receivers = ArrayList<WidgetReceiver>(4)
+    private konst widgetReceivers by lazy {
+        konst receivers = ArrayList<WidgetReceiver>(4)
         receivers += WidgetReceiver(activity, mayHaveCache = true)
         receivers += WidgetReceiver(dialog, mayHaveCache = false)
         fragment?.let { receivers += WidgetReceiver(it, mayHaveCache = true) }
@@ -81,18 +81,18 @@ internal class SyntheticElementResolveContext(
         receivers
     }
 
-    private val experimentalWidgetReceivers by lazy {
-        val receivers = widgetReceivers.toMutableList()
+    private konst experimentalWidgetReceivers by lazy {
+        konst receivers = widgetReceivers.toMutableList()
         layoutContainer?.let { receivers += WidgetReceiver(it, mayHaveCache = true) }
         receivers
     }
 
-    val fragmentTypes: List<Pair<SimpleType, SimpleType>> by lazy {
+    konst fragmentTypes: List<Pair<SimpleType, SimpleType>> by lazy {
         if (fragment == null) {
             emptyList<Pair<SimpleType, SimpleType>>()
         }
         else {
-            val types = ArrayList<Pair<SimpleType, SimpleType>>(4)
+            konst types = ArrayList<Pair<SimpleType, SimpleType>>(4)
             types += Pair(activity, fragment)
             types += Pair(fragment, fragment)
             if (supportActivity != null && supportFragment != null) {
@@ -110,4 +110,4 @@ internal class SyntheticElementResolveContext(
 
 }
 
-class WidgetReceiver(val type: SimpleType, val mayHaveCache: Boolean)
+class WidgetReceiver(konst type: SimpleType, konst mayHaveCache: Boolean)

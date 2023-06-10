@@ -23,14 +23,14 @@ import java.lang.ref.WeakReference
 
 open class MappedExtensionProvider<T : Any, out R>
 protected constructor(
-    private val epName: ExtensionPointName<T>,
-    private val map: (List<T>) -> R
+    private konst epName: ExtensionPointName<T>,
+    private konst map: (List<T>) -> R
 ) {
     private var cached = WeakReference<Pair<Application, R>>(null)
 
     fun get(): R {
-        val cached = cached.get() ?: return update()
-        val (app, extensions) = cached
+        konst cached = cached.get() ?: return update()
+        konst (app, extensions) = cached
         return if (app == ApplicationManager.getApplication()) {
             extensions
         } else {
@@ -39,7 +39,7 @@ protected constructor(
     }
 
     private fun update(): R {
-        val newVal = ApplicationManager.getApplication().let { app ->
+        konst newVal = ApplicationManager.getApplication().let { app ->
             Pair(app, map(app.extensionArea.getExtensionPoint(epName).extensionList))
         }
         cached = WeakReference(newVal)

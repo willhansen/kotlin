@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.psi.KtFile
  * Should not be used directly, consider using [analyse]/[analyzeWithReadAction]/[analyzeInModalWindow] instead
  */
 @KtAnalysisApiInternals
-public abstract class KtAnalysisSessionProvider(public val project: Project) : Disposable {
+public abstract class KtAnalysisSessionProvider(public konst project: Project) : Disposable {
 
     @Suppress("LeakingThis")
-    public val noWriteActionInAnalyseCallChecker: NoWriteActionInAnalyseCallChecker = NoWriteActionInAnalyseCallChecker(this)
+    public konst noWriteActionInAnalyseCallChecker: NoWriteActionInAnalyseCallChecker = NoWriteActionInAnalyseCallChecker(this)
 
     public abstract fun getAnalysisSession(useSiteKtElement: KtElement, factory: KtLifetimeTokenFactory): KtAnalysisSession
 
@@ -37,11 +37,11 @@ public abstract class KtAnalysisSessionProvider(public val project: Project) : D
         nonDefaultLifetimeTokenFactory: KtLifetimeTokenFactory?,
         action: KtAnalysisSession.() -> R
     ): R {
-        val factory =
+        konst factory =
             nonDefaultLifetimeTokenFactory ?: KtDefaultLifetimeTokenProvider.getService(project).getDefaultLifetimeTokenFactory()
 
-        val originalAnalysisSession = getAnalysisSession(originalFile, factory)
-        val dependedAnalysisSession = originalAnalysisSession
+        konst originalAnalysisSession = getAnalysisSession(originalFile, factory)
+        konst dependedAnalysisSession = originalAnalysisSession
             .createContextDependentCopy(originalFile, elementToReanalyze)
         return analyse(dependedAnalysisSession, factory, action)
     }
@@ -51,7 +51,7 @@ public abstract class KtAnalysisSessionProvider(public val project: Project) : D
         nonDefaultLifetimeTokenFactory: KtLifetimeTokenFactory?,
         action: KtAnalysisSession.() -> R
     ): R {
-        val factory =
+        konst factory =
             nonDefaultLifetimeTokenFactory ?: KtDefaultLifetimeTokenProvider.getService(project).getDefaultLifetimeTokenFactory()
         return analyse(getAnalysisSession(useSiteKtElement, factory), factory, action)
     }
@@ -61,7 +61,7 @@ public abstract class KtAnalysisSessionProvider(public val project: Project) : D
         nonDefaultLifetimeTokenFactory: KtLifetimeTokenFactory?,
         action: KtAnalysisSession.() -> R
     ): R {
-        val factory =
+        konst factory =
             nonDefaultLifetimeTokenFactory ?: KtDefaultLifetimeTokenProvider.getService(project).getDefaultLifetimeTokenFactory()
 
         return analyse(getAnalysisSessionByUseSiteKtModule(useSiteKtModule, factory), factory, action)

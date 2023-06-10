@@ -13,6 +13,6 @@ class C : B {
 }
 
 fun box(): String {
-    val x = C().foo()
+    konst x = C().foo()
     return if (x == 42) "OK" else "Fail: $x"
 }

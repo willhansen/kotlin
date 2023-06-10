@@ -18,6 +18,6 @@ import org.jetbrains.kotlin.resolve.TargetPlatform
 interface KonanPlatform : TargetPlatform {
     companion object {
         @JvmField
-        val INSTANCE: KonanPlatform = NativePlatforms.CompatNativePlatform
+        konst INSTANCE: KonanPlatform = NativePlatforms.CompatNativePlatform
     }
 }

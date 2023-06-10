@@ -18,20 +18,20 @@ import org.jetbrains.kotlin.tooling.core.extrasNullableLazyProperty
  * scopes: API, IMPLEMENTATION, COMPILE_ONLY; See [KotlinDependencyScope.compileScopes]
  *
  * Used only for IDE import (w/o KGP based dependency resolution).
- * Scheduled for removal after 1.9.20
+ * Scheduled for remokonst after 1.9.20
  */
-internal val InternalKotlinSourceSet.metadataTransformation: GranularMetadataTransformation? by extrasNullableLazyProperty lazy@{
+internal konst InternalKotlinSourceSet.metadataTransformation: GranularMetadataTransformation? by extrasNullableLazyProperty lazy@{
     // Create only for source sets in multiplatform plugin
     project.multiplatformExtensionOrNull ?: return@lazy null
 
-    val parentSourceSetVisibilityProvider = ParentSourceSetVisibilityProvider { componentIdentifier ->
+    konst parentSourceSetVisibilityProvider = ParentSourceSetVisibilityProvider { componentIdentifier ->
         dependsOnClosureWithInterCompilationDependencies(this).filterIsInstance<DefaultKotlinSourceSet>()
             .mapNotNull { it.metadataTransformation }
             .flatMap { it.visibleSourceSetsByComponentId[componentIdentifier].orEmpty() }
             .toSet()
     }
 
-    val granularMetadataTransformation = GranularMetadataTransformation(
+    konst granularMetadataTransformation = GranularMetadataTransformation(
         params = GranularMetadataTransformation.Params(project, this),
         parentSourceSetVisibilityProvider = parentSourceSetVisibilityProvider
     )
@@ -49,7 +49,7 @@ internal val InternalKotlinSourceSet.metadataTransformation: GranularMetadataTra
         implementationMetadataConfigurationName,
         compileOnlyMetadataConfigurationName
     ).forEach { configurationName ->
-        val configuration = project.configurations.getByName(configurationName)
+        konst configuration = project.configurations.getByName(configurationName)
         project.applyTransformationToLegacyDependenciesMetadataConfiguration(configuration, granularMetadataTransformation)
     }
 
@@ -72,11 +72,11 @@ private fun Project.applyTransformationToLegacyDependenciesMetadataConfiguration
 ) {
     // Run this action immediately before the configuration first takes part in dependency resolution:
     configuration.withDependencies {
-        val (unrequested, requested) = transformation.metadataDependencyResolutions
+        konst (unrequested, requested) = transformation.metadataDependencyResolutions
             .partition { it is MetadataDependencyResolution.Exclude }
 
         unrequested.forEach {
-            val (group, name) = it.projectDependency(project)?.run {
+            konst (group, name) = it.projectDependency(project)?.run {
                 /** Note: the project dependency notation here should be exactly this, group:name,
                  * not from [ModuleIds.fromProjectPathDependency], as `exclude` checks it against the project's group:name  */
                 ModuleDependencyIdentifier(group.toString(), name)
@@ -85,8 +85,8 @@ private fun Project.applyTransformationToLegacyDependenciesMetadataConfiguration
         }
 
         requested.filter { !it.dependency.id.isProjectComponentIdentifierInCurrentBuild }.forEach {
-            val (group, name) = ModuleIds.fromComponent(project, it.dependency)
-            val notation = listOfNotNull(group.orEmpty(), name, it.dependency.moduleVersion?.version).joinToString(":")
+            konst (group, name) = ModuleIds.fromComponent(project, it.dependency)
+            konst notation = listOfNotNull(group.orEmpty(), name, it.dependency.moduleVersion?.version).joinToString(":")
             configuration.resolutionStrategy.force(notation)
         }
     }

@@ -1,7 +1,7 @@
 package
 
-public val str1: kotlin.String? = null
-public val str2: kotlin.String? = null
+public konst str1: kotlin.String? = null
+public konst str2: kotlin.String? = null
 public fun </*0*/ T> visit(/*0*/ arg: Visitor<T>): T
 
 public interface Visitor</*0*/ T> {

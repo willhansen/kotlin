@@ -18,14 +18,14 @@ class AnnotationsCommonizer : AbstractStandardCommonizer<List<CirAnnotation>, Li
     private var deprecatedAnnotationCommonizer: DeprecatedAnnotationCommonizer? = null
     private var deprecatedAnnotationCommonizerHasResult: Boolean = true
 
-    private val objCInteropCallableAnnotationCommonizer = ObjCInteropCallableAnnotationCommonizer.asCommonizer()
+    private konst objCInteropCallableAnnotationCommonizer = ObjCInteropCallableAnnotationCommonizer.asCommonizer()
     private var objCInteropCallableAnnotationCommonizerHasResult = true
 
     override fun commonizationResult(): List<CirAnnotation> {
-        val deprecatedAnnotation = if (deprecatedAnnotationCommonizerHasResult)
+        konst deprecatedAnnotation = if (deprecatedAnnotationCommonizerHasResult)
             deprecatedAnnotationCommonizer?.result else null
 
-        val objCInteropCallableAnnotations = if (objCInteropCallableAnnotationCommonizerHasResult)
+        konst objCInteropCallableAnnotations = if (objCInteropCallableAnnotationCommonizerHasResult)
             objCInteropCallableAnnotationCommonizer.result else emptyList()
 
         return if (deprecatedAnnotation != null) {
@@ -48,16 +48,16 @@ class AnnotationsCommonizer : AbstractStandardCommonizer<List<CirAnnotation>, Li
     }
 
     private fun doCommonizeDeprecatedAnnotation(next: List<CirAnnotation>): Boolean {
-        val nextDeprecatedAnnotation = next.firstOrNull { it.type.classifierId == DEPRECATED_ANNOTATION_CLASS_ID } ?: return true
+        konst nextDeprecatedAnnotation = next.firstOrNull { it.type.classifierId == DEPRECATED_ANNOTATION_CLASS_ID } ?: return true
 
-        val deprecatedAnnotationCommonizer = deprecatedAnnotationCommonizer
+        konst deprecatedAnnotationCommonizer = deprecatedAnnotationCommonizer
             ?: DeprecatedAnnotationCommonizer().also { this.deprecatedAnnotationCommonizer = it }
 
         return deprecatedAnnotationCommonizer.commonizeWith(nextDeprecatedAnnotation)
     }
 
     companion object {
-        internal const val FALLBACK_MESSAGE = "See concrete deprecation messages in actual declarations"
+        internal const konst FALLBACK_MESSAGE = "See concrete deprecation messages in actual declarations"
     }
 }
 
@@ -70,7 +70,7 @@ object ObjCInteropCallableAnnotationCommonizer : AssociativeCommonizer<List<CirA
         } else emptyList()
     }
 
-    private val objCCallableAnnotation = CirAnnotation.createInterned(
+    private konst objCCallableAnnotation = CirAnnotation.createInterned(
         CirClassType.createInterned(
             classId = COMMONIZER_OBJC_INTEROP_CALLABLE_ANNOTATION_ID,
             outerType = null, arguments = emptyList(), isMarkedNullable = false
@@ -79,7 +79,7 @@ object ObjCInteropCallableAnnotationCommonizer : AssociativeCommonizer<List<CirA
         annotationValueArguments = emptyMap()
     )
 
-    private val objCCallableAnnotationList = listOf(objCCallableAnnotation)
+    private konst objCCallableAnnotationList = listOf(objCCallableAnnotation)
 }
 
 private class DeprecatedAnnotationCommonizer : Commonizer<CirAnnotation, CirAnnotation> {
@@ -88,14 +88,14 @@ private class DeprecatedAnnotationCommonizer : Commonizer<CirAnnotation, CirAnno
     private lateinit var replaceWithExpression: String
     private lateinit var replaceWithImports: List<String>
 
-    override val result: CirAnnotation
+    override konst result: CirAnnotation
         get() {
-            val level: DeprecationLevel = level ?: failInEmptyState()
-            val messageValue: StringValue = message.toDeprecationMessageValue()
+            konst level: DeprecationLevel = level ?: failInEmptyState()
+            konst messageValue: StringValue = message.toDeprecationMessageValue()
 
-            val constantValueArguments: Map<CirName, CirConstantValue> =
+            konst constantValueArguments: Map<CirName, CirConstantValue> =
                 if (level == WARNING) {
-                    // don't populate with the default level value
+                    // don't populate with the default level konstue
                     compactMapOf(PROPERTY_NAME_MESSAGE, messageValue)
                 } else
                     compactMapOf(
@@ -103,7 +103,7 @@ private class DeprecatedAnnotationCommonizer : Commonizer<CirAnnotation, CirAnno
                         PROPERTY_NAME_LEVEL, level.toDeprecationLevelValue()
                     )
 
-            val annotationValueArguments: Map<CirName, CirAnnotation> =
+            konst annotationValueArguments: Map<CirName, CirAnnotation> =
                 if (replaceWithExpression.isEmpty() && replaceWithImports.isEmpty()) {
                     // don't populate with empty (default) ReplaceWith
                     emptyMap()
@@ -118,11 +118,11 @@ private class DeprecatedAnnotationCommonizer : Commonizer<CirAnnotation, CirAnno
         }
 
     override fun commonizeWith(next: CirAnnotation): Boolean {
-        val nextLevel: DeprecationLevel = next.getDeprecationLevel() ?: WARNING
-        val nextMessage: String = next.getDeprecationMessage().orEmpty()
-        val nextReplaceWith: CirAnnotation? = next.getReplaceWith()
-        val nextReplaceWithExpression: String = nextReplaceWith?.getReplaceWithExpression().orEmpty()
-        val nextReplaceWithImports: List<String> = nextReplaceWith?.getReplaceWithImports().orEmpty()
+        konst nextLevel: DeprecationLevel = next.getDeprecationLevel() ?: WARNING
+        konst nextMessage: String = next.getDeprecationMessage().orEmpty()
+        konst nextReplaceWith: CirAnnotation? = next.getReplaceWith()
+        konst nextReplaceWithExpression: String = nextReplaceWith?.getReplaceWithExpression().orEmpty()
+        konst nextReplaceWithImports: List<String> = nextReplaceWith?.getReplaceWithImports().orEmpty()
 
         return if (level != null) {
             doCommonizeWith(nextLevel, nextMessage, nextReplaceWithExpression, nextReplaceWithImports)
@@ -167,27 +167,27 @@ private class DeprecatedAnnotationCommonizer : Commonizer<CirAnnotation, CirAnno
 
     @Suppress("NOTHING_TO_INLINE")
     companion object {
-        private val PROPERTY_NAME_MESSAGE = CirName.create(Deprecated::message.name)
-        private val PROPERTY_NAME_REPLACE_WITH = CirName.create(Deprecated::replaceWith.name)
-        private val PROPERTY_NAME_LEVEL = CirName.create(Deprecated::level.name)
+        private konst PROPERTY_NAME_MESSAGE = CirName.create(Deprecated::message.name)
+        private konst PROPERTY_NAME_REPLACE_WITH = CirName.create(Deprecated::replaceWith.name)
+        private konst PROPERTY_NAME_LEVEL = CirName.create(Deprecated::level.name)
 
-        private val PROPERTY_NAME_EXPRESSION = CirName.create(ReplaceWith::expression.name)
-        private val PROPERTY_NAME_IMPORTS = CirName.create(ReplaceWith::imports.name)
+        private konst PROPERTY_NAME_EXPRESSION = CirName.create(ReplaceWith::expression.name)
+        private konst PROPERTY_NAME_IMPORTS = CirName.create(ReplaceWith::imports.name)
 
         // Optimization: Keep most frequently used message constants.
-        private val FREQUENTLY_USED_MESSAGE_VALUES: Map<String, StringValue> = listOf(
+        private konst FREQUENTLY_USED_MESSAGE_VALUES: Map<String, StringValue> = listOf(
             "Use constructor instead",
             "Use factory method instead"
         ).associateWith { StringValue(it) }
-        private val FALLBACK_MESSAGE_VALUE = StringValue(FALLBACK_MESSAGE)
+        private konst FALLBACK_MESSAGE_VALUE = StringValue(FALLBACK_MESSAGE)
 
-        private val DEPRECATED_ANNOTATION_TYPE = buildAnnotationType(DEPRECATED_ANNOTATION_CLASS_ID)
-        private val REPLACE_WITH_ANNOTATION_TYPE = buildAnnotationType(CirEntityId.create("kotlin/ReplaceWith"))
+        private konst DEPRECATED_ANNOTATION_TYPE = buildAnnotationType(DEPRECATED_ANNOTATION_CLASS_ID)
+        private konst REPLACE_WITH_ANNOTATION_TYPE = buildAnnotationType(CirEntityId.create("kotlin/ReplaceWith"))
 
-        private val DEPRECATION_LEVEL_CLASS_ID = CirEntityId.create("kotlin/DeprecationLevel")
+        private konst DEPRECATION_LEVEL_CLASS_ID = CirEntityId.create("kotlin/DeprecationLevel")
 
         // Optimization: Keep DeprecationLevel enum constants.
-        private val DEPRECATION_LEVEL_ENUM_ENTRY_VALUES: Map<String, EnumValue> = DeprecationLevel.values().associate {
+        private konst DEPRECATION_LEVEL_ENUM_ENTRY_VALUES: Map<String, EnumValue> = DeprecationLevel.konstues().associate {
             it.name to EnumValue(DEPRECATION_LEVEL_CLASS_ID, CirName.create(it.name))
         }
 
@@ -207,8 +207,8 @@ private class DeprecatedAnnotationCommonizer : Commonizer<CirAnnotation, CirAnno
                 FREQUENTLY_USED_MESSAGE_VALUES[this] ?: StringValue(this)
 
         private fun CirAnnotation.getDeprecationLevel(): DeprecationLevel? {
-            val enumEntryName = constantValueArguments.getEnumEntryName(PROPERTY_NAME_LEVEL) ?: return null
-            return DeprecationLevel.values().firstOrNull { it.name == enumEntryName }
+            konst enumEntryName = constantValueArguments.getEnumEntryName(PROPERTY_NAME_LEVEL) ?: return null
+            return DeprecationLevel.konstues().firstOrNull { it.name == enumEntryName }
         }
 
         private fun DeprecationLevel.toDeprecationLevelValue(): EnumValue =
@@ -227,7 +227,7 @@ private class DeprecatedAnnotationCommonizer : Commonizer<CirAnnotation, CirAnno
             createReplaceWithAnnotation(this, imports)
 
         private inline fun Map<CirName, CirConstantValue>.getString(name: CirName): String? =
-            (this[name] as? StringValue)?.value
+            (this[name] as? StringValue)?.konstue
 
         private inline fun Map<CirName, CirConstantValue>.getEnumEntryName(name: CirName): String? =
             (this[name] as? EnumValue)?.enumEntryName?.name
@@ -236,13 +236,13 @@ private class DeprecatedAnnotationCommonizer : Commonizer<CirAnnotation, CirAnno
             this[name]
 
         private inline fun Map<CirName, CirConstantValue>.getStringArray(name: CirName): List<String>? {
-            val elements: List<CirConstantValue> = (this[name] as? ArrayValue)?.elements ?: return null
+            konst elements: List<CirConstantValue> = (this[name] as? ArrayValue)?.elements ?: return null
             if (elements.isEmpty()) return emptyList()
 
-            val result = ArrayList<String>(elements.size)
+            konst result = ArrayList<String>(elements.size)
             for (element in elements) {
                 if (element is StringValue) {
-                    result += element.value
+                    result += element.konstue
                 } else
                     return null
             }

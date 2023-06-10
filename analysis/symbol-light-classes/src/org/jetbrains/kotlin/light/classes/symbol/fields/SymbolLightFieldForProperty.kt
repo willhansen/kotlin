@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtProperty
 
 internal class SymbolLightFieldForProperty private constructor(
-    private val propertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
-    private val fieldName: String,
+    private konst propertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
+    private konst fieldName: String,
     containingClass: SymbolLightClassBase,
     lightMemberOrigin: LightMemberOrigin?,
-    private val isStatic: Boolean,
-    override val kotlinOrigin: KtCallableDeclaration?,
-    private val backingFieldSymbolPointer: KtSymbolPointer<KtBackingFieldSymbol>?,
+    private konst isStatic: Boolean,
+    override konst kotlinOrigin: KtCallableDeclaration?,
+    private konst backingFieldSymbolPointer: KtSymbolPointer<KtBackingFieldSymbol>?,
 ) : SymbolLightField(containingClass, lightMemberOrigin) {
     internal constructor(
         ktAnalysisSession: KtAnalysisSession,
@@ -62,15 +62,15 @@ internal class SymbolLightFieldForProperty private constructor(
         return propertySymbolPointer.withSymbol(ktModule, action)
     }
 
-    private val _returnedType: PsiType by lazyPub {
+    private konst _returnedType: PsiType by lazyPub {
         withPropertySymbol { propertySymbol ->
-            val isDelegated = (propertySymbol as? KtKotlinPropertySymbol)?.isDelegatedProperty == true
-            val ktType = if (isDelegated)
+            konst isDelegated = (propertySymbol as? KtKotlinPropertySymbol)?.isDelegatedProperty == true
+            konst ktType = if (isDelegated)
                 (kotlinOrigin as? KtProperty)?.delegateExpression?.getKtType()
             else
                 propertySymbol.returnType
             // See [KotlinTypeMapper#writeFieldSignature]
-            val typeMappingMode = if (propertySymbol.isVal)
+            konst typeMappingMode = if (propertySymbol.isVal)
                 KtTypeMappingMode.RETURN_TYPE
             else
                 KtTypeMappingMode.VALUE_PARAMETER
@@ -82,14 +82,14 @@ internal class SymbolLightFieldForProperty private constructor(
         } ?: nonExistentType()
     }
 
-    private val _isDeprecated: Boolean by lazyPub {
+    private konst _isDeprecated: Boolean by lazyPub {
         withPropertySymbol { propertySymbol ->
             propertySymbol.hasDeprecatedAnnotation(AnnotationUseSiteTarget.FIELD.toOptionalFilter())
         }
     }
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
-        return super.isEquivalentTo(another) || isOriginEquivalentTo(another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
+        return super.isEquikonstentTo(another) || isOriginEquikonstentTo(another)
     }
 
     override fun isDeprecated(): Boolean = _isDeprecated
@@ -100,11 +100,11 @@ internal class SymbolLightFieldForProperty private constructor(
 
     private fun computeModifiers(modifier: String): Map<String, Boolean>? = when (modifier) {
         in GranularModifiersBox.VISIBILITY_MODIFIERS -> {
-            val visibility = withPropertySymbol { propertySymbol ->
+            konst visibility = withPropertySymbol { propertySymbol ->
                 when {
                     propertySymbol.visibility.isPrivateOrPrivateToThis() -> PsiModifier.PRIVATE
                     propertySymbol.canHaveNonPrivateField -> {
-                        val declaration = propertySymbol.setter ?: propertySymbol
+                        konst declaration = propertySymbol.setter ?: propertySymbol
                         declaration.toPsiVisibilityForMember()
                     }
                     else -> PsiModifier.PRIVATE
@@ -114,7 +114,7 @@ internal class SymbolLightFieldForProperty private constructor(
             GranularModifiersBox.VISIBILITY_MODIFIERS_MAP.with(visibility)
         }
         in GranularModifiersBox.MODALITY_MODIFIERS -> {
-            val modality = withPropertySymbol { propertySymbol ->
+            konst modality = withPropertySymbol { propertySymbol ->
                 if (propertySymbol.isVal || propertySymbol.isDelegatedProperty) {
                     PsiModifier.FINAL
                 } else {
@@ -126,7 +126,7 @@ internal class SymbolLightFieldForProperty private constructor(
         }
 
         PsiModifier.VOLATILE -> withPropertySymbol { propertySymbol ->
-            val hasAnnotation = propertySymbol.backingFieldSymbol?.hasAnnotation(
+            konst hasAnnotation = propertySymbol.backingFieldSymbol?.hasAnnotation(
                 VOLATILE_ANNOTATION_CLASS_ID,
                 AnnotationUseSiteTarget.FIELD.toOptionalFilter(),
             ) == true
@@ -135,7 +135,7 @@ internal class SymbolLightFieldForProperty private constructor(
         }
 
         PsiModifier.TRANSIENT -> withPropertySymbol { propertySymbol ->
-            val hasAnnotation = propertySymbol.backingFieldSymbol?.hasAnnotation(
+            konst hasAnnotation = propertySymbol.backingFieldSymbol?.hasAnnotation(
                 TRANSIENT_ANNOTATION_CLASS_ID,
                 AnnotationUseSiteTarget.FIELD.toOptionalFilter(),
             ) == true
@@ -146,7 +146,7 @@ internal class SymbolLightFieldForProperty private constructor(
         else -> null
     }
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this,
             modifiersBox = GranularModifiersBox(
@@ -174,31 +174,31 @@ internal class SymbolLightFieldForProperty private constructor(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _initializerValue: KtConstantValue? by lazyPub {
+    private konst _initializerValue: KtConstantValue? by lazyPub {
         withPropertySymbol { propertySymbol ->
             if (propertySymbol !is KtKotlinPropertySymbol) return@withPropertySymbol null
             (propertySymbol.initializer as? KtConstantInitializerValue)?.constant
         }
     }
 
-    private val _initializer by lazyPub {
+    private konst _initializer by lazyPub {
         _initializerValue?.createPsiExpression(this) ?: withPropertySymbol { propertySymbol ->
             if (propertySymbol !is KtKotlinPropertySymbol) return@withPropertySymbol null
-            (kotlinOrigin as? KtProperty)?.initializer?.evaluateAsAnnotationValue()
+            (kotlinOrigin as? KtProperty)?.initializer?.ekonstuateAsAnnotationValue()
                 ?.let(::toPsiExpression)
         }
     }
 
-    private fun toPsiExpression(value: KtAnnotationValue): PsiExpression? =
+    private fun toPsiExpression(konstue: KtAnnotationValue): PsiExpression? =
         project.withElementFactorySafe {
-            when (value) {
+            when (konstue) {
                 is KtConstantAnnotationValue ->
-                    value.constantValue.createPsiExpression(this@SymbolLightFieldForProperty)
+                    konstue.constantValue.createPsiExpression(this@SymbolLightFieldForProperty)
                 is KtEnumEntryAnnotationValue ->
-                    value.callableId?.let { createExpressionFromText(it.asSingleFqName().asString(), this@SymbolLightFieldForProperty) }
+                    konstue.callableId?.let { createExpressionFromText(it.asSingleFqName().asString(), this@SymbolLightFieldForProperty) }
                 is KtArrayAnnotationValue ->
                     createExpressionFromText(
-                        value.values
+                        konstue.konstues
                             .map { toPsiExpression(it)?.text ?: return@withElementFactorySafe null }
                             .joinToString(", ", "{", "}"),
                         this@SymbolLightFieldForProperty
@@ -209,10 +209,10 @@ internal class SymbolLightFieldForProperty private constructor(
 
     override fun getInitializer(): PsiExpression? = _initializer
 
-    private val _constantValue by lazyPub {
-        _initializerValue?.value?.takeIf {
+    private konst _constantValue by lazyPub {
+        _initializerValue?.konstue?.takeIf {
             withPropertySymbol { propertySymbol ->
-                // val => final
+                // konst => final
                 propertySymbol.isVal &&
                         // NB: not as?, since _initializerValue already checks that
                         (propertySymbol as KtKotlinPropertySymbol).isConst &&

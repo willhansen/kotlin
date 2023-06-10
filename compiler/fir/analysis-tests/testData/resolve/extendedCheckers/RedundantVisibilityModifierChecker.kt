@@ -11,7 +11,7 @@ internal <!NOTHING_TO_INLINE!>inline<!> fun internal() {
 }
 
 class <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>C<!> {
-    internal val z = object {
+    internal konst z = object {
         fun foo() = 13
     }
 }
@@ -27,7 +27,7 @@ class Foo2<
 }
 
 <!REDUNDANT_VISIBILITY_MODIFIER!>public<!> class <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>C<!> {
-    <!REDUNDANT_VISIBILITY_MODIFIER!>public<!> val foo: Int = 0
+    <!REDUNDANT_VISIBILITY_MODIFIER!>public<!> konst foo: Int = 0
 
     <!REDUNDANT_VISIBILITY_MODIFIER!>public<!> fun bar() {}
 
@@ -49,11 +49,11 @@ class E : D() {
     }
 }
 
-enum class F <!REDUNDANT_VISIBILITY_MODIFIER!>private<!> constructor(val x: Int) {
+enum class F <!REDUNDANT_VISIBILITY_MODIFIER!>private<!> constructor(konst x: Int) {
     FIRST(42)
 }
 
-sealed class G constructor(val y: Int) {
+sealed class G constructor(konst y: Int) {
     <!REDUNDANT_VISIBILITY_MODIFIER!>private<!> constructor(): this(42)
 
     object H : G()
@@ -66,23 +66,23 @@ interface I {
 <!REDUNDANT_VISIBILITY_MODIFIER!>public<!> var baz = 0
 
 open class J {
-    protected val baz = 0
+    protected konst baz = 0
     <!REDUNDANT_VISIBILITY_MODIFIER!>protected<!> get() = field * 2
     var baf = 0
     <!REDUNDANT_VISIBILITY_MODIFIER!>public<!> get() = 1
-    <!REDUNDANT_VISIBILITY_MODIFIER!>public<!> set(value) {
-        field = value
+    <!REDUNDANT_VISIBILITY_MODIFIER!>public<!> set(konstue) {
+        field = konstue
     }
 
     var buf = 0
         <!GETTER_VISIBILITY_DIFFERS_FROM_PROPERTY_VISIBILITY!>private<!> get() = 42
-        protected set(value) {
-            field = value
+        protected set(konstue) {
+            field = konstue
         }
 
     var bar = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>
         get() = <!RETURN_TYPE_MISMATCH!>3.1415926535<!>
-        set(value) {}
+        set(konstue) {}
 }
 
 private class Foo {

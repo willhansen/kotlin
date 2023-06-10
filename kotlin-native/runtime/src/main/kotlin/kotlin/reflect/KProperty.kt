@@ -6,13 +6,13 @@
 package kotlin.reflect
 
 /**
- * Represents a property, such as a named `val` or `var` declaration.
+ * Represents a property, such as a named `konst` or `var` declaration.
  * Instances of this class are obtainable by the `::` operator.
  *
  * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/reflection.html)
  * for more information.
  *
- * @param V the type of the property value.
+ * @param V the type of the property konstue.
  */
 public actual interface KProperty<out V> : KCallable<V>
 
@@ -41,13 +41,13 @@ public actual interface KProperty2<D, E, out V> : kotlin.reflect.KProperty<V>, (
 public actual interface KMutableProperty<V> : KProperty<V>
 
 public actual interface KMutableProperty0<V> : KProperty0<V>, KMutableProperty<V> {
-    public actual fun set(value: V)
+    public actual fun set(konstue: V)
 }
 
 public actual interface KMutableProperty1<T, V> : KProperty1<T, V>, KMutableProperty<V> {
-    public actual fun set(receiver: T, value: V)
+    public actual fun set(receiver: T, konstue: V)
 }
 
 public actual interface KMutableProperty2<D, E, V> : KProperty2<D, E, V>, KMutableProperty<V> {
-    public actual fun set(receiver1: D, receiver2: E, value: V)
+    public actual fun set(receiver1: D, receiver2: E, konstue: V)
 }

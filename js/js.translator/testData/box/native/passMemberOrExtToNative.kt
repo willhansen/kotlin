@@ -7,7 +7,7 @@
 
 package foo
 
-open class A(val v: String) {
+open class A(konst v: String) {
     open fun m(i:Int, s:String): String = "A.m ${this.v} $i $s"
 }
 
@@ -20,7 +20,7 @@ external fun bar(a: A, extLambda: A.(Int, String) -> String): String = definedEx
 fun A.topLevelExt(i:Int, s:String): String = "A::topLevelExt ${this.v} $i $s"
 
 fun box(): String {
-    val a = A("test")
+    konst a = A("test")
 
     var r = bar(a) { i, s -> "${this.v} $i $s"}
     if (r != "test 4 boo") return r
@@ -36,7 +36,7 @@ fun box(): String {
     r = bar(a, fun A.(i, s) = (A::m)(this, i, s))
     if (r != "A.m test 4 boo") return r
 
-    val b = B("test")
+    konst b = B("test")
     r = bar(b, fun A.(i, s) = (A::m)(this, i, s))
     if (r != "B.m test 4 boo") return r
 

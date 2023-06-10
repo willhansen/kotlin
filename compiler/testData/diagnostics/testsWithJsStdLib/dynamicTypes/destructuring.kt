@@ -9,9 +9,9 @@ fun foo() {
         println(x + y)
     }
 
-    val x: dynamic = Any()
+    konst x: dynamic = Any()
 
-    <!WRONG_OPERATION_WITH_DYNAMIC!>val (y, z) = x<!>
+    <!WRONG_OPERATION_WITH_DYNAMIC!>konst (y, z) = x<!>
     println(y + z)
 }
 

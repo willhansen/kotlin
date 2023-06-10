@@ -41,10 +41,10 @@ fun KtElement.deparenthesize(): KtElement =
 
 internal fun ResolvedCall<*>.isValueArgumentReorderingRequired(): Boolean {
     var lastValueParameterIndex = -1
-    for (valueArgument in call.valueArguments) {
-        val argumentMapping =
-            getArgumentMapping(valueArgument) as? ArgumentMatch ?: throw Exception("Value argument in function call is mapped with error")
-        val argumentIndex = argumentMapping.valueParameter.index
+    for (konstueArgument in call.konstueArguments) {
+        konst argumentMapping =
+            getArgumentMapping(konstueArgument) as? ArgumentMatch ?: throw Exception("Value argument in function call is mapped with error")
+        konst argumentIndex = argumentMapping.konstueParameter.index
         if (argumentIndex < lastValueParameterIndex) {
             return true
         }
@@ -54,11 +54,11 @@ internal fun ResolvedCall<*>.isValueArgumentReorderingRequired(): Boolean {
 }
 
 internal fun KtSecondaryConstructor.isConstructorDelegatingToSuper(bindingContext: BindingContext): Boolean {
-    val constructorDescriptor = bindingContext.get(BindingContext.CONSTRUCTOR, this) ?: return false
-    val delegatingResolvedCall = getDelegationCall().getResolvedCall(bindingContext)
+    konst constructorDescriptor = bindingContext.get(BindingContext.CONSTRUCTOR, this) ?: return false
+    konst delegatingResolvedCall = getDelegationCall().getResolvedCall(bindingContext)
     return if (delegatingResolvedCall != null) {
-        val ownerClassDescriptor = constructorDescriptor.containingDeclaration
-        val targetClassDescriptor = delegatingResolvedCall.resultingDescriptor.containingDeclaration
+        konst ownerClassDescriptor = constructorDescriptor.containingDeclaration
+        konst targetClassDescriptor = delegatingResolvedCall.resultingDescriptor.containingDeclaration
         targetClassDescriptor != ownerClassDescriptor
     } else {
         constructorDescriptor.constructedClass.kind == ClassKind.ENUM_CLASS
@@ -68,13 +68,13 @@ internal fun KtSecondaryConstructor.isConstructorDelegatingToSuper(bindingContex
 fun MemberScope.findSingleFunction(name: Name): FunctionDescriptor =
     getContributedFunctions(name, NoLookupLocation.FROM_BACKEND).single()
 
-internal val PsiElement?.startOffsetOrUndefined get() = this?.startOffsetSkippingComments ?: UNDEFINED_OFFSET
-internal val PsiElement?.endOffsetOrUndefined get() = this?.endOffset ?: UNDEFINED_OFFSET
+internal konst PsiElement?.startOffsetOrUndefined get() = this?.startOffsetSkippingComments ?: UNDEFINED_OFFSET
+internal konst PsiElement?.endOffsetOrUndefined get() = this?.endOffset ?: UNDEFINED_OFFSET
 
-internal val PropertyDescriptor.unwrappedGetMethod: FunctionDescriptor?
+internal konst PropertyDescriptor.unwrappedGetMethod: FunctionDescriptor?
     get() = if (this is SyntheticPropertyDescriptor) this.getMethod else getter
 
-internal val PropertyDescriptor.unwrappedSetMethod: FunctionDescriptor?
+internal konst PropertyDescriptor.unwrappedSetMethod: FunctionDescriptor?
     get() = if (this is SyntheticPropertyDescriptor) this.setMethod else setter
 
 // Only works for descriptors of Java fields.
@@ -90,7 +90,7 @@ internal fun PropertyDescriptor.resolveFakeOverride(): PropertyDescriptor {
     return current
 }
 
-internal val KtPureElement?.pureStartOffsetOrUndefined get() = this?.psiOrParent?.startOffsetSkippingComments ?: UNDEFINED_OFFSET
-internal val KtPureElement?.pureEndOffsetOrUndefined get() = this?.psiOrParent?.endOffset ?: UNDEFINED_OFFSET
+internal konst KtPureElement?.pureStartOffsetOrUndefined get() = this?.psiOrParent?.startOffsetSkippingComments ?: UNDEFINED_OFFSET
+internal konst KtPureElement?.pureEndOffsetOrUndefined get() = this?.psiOrParent?.endOffset ?: UNDEFINED_OFFSET
 
 internal fun KtElement.getChildTokenStartOffsetOrNull(tokenSet: TokenSet) = node.findChildByType(tokenSet)?.startOffset

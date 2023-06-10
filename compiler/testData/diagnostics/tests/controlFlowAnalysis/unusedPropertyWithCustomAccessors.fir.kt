@@ -34,7 +34,7 @@ class Delegate {
         return prop
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
-        prop = value
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: Int) {
+        prop = konstue
     }
 }

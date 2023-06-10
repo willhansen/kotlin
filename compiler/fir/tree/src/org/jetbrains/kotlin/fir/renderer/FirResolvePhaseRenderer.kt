@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.fir.expressions.FirAnnotationCall
 
 class FirResolvePhaseRenderer {
     internal lateinit var components: FirRendererComponents
-    private val printer get() = components.printer
+    private konst printer get() = components.printer
 
     fun render(element: FirElementWithResolveState) {
-        val text = if (element is FirSyntheticPropertyAccessor) {
+        konst text = if (element is FirSyntheticPropertyAccessor) {
             "[<synthetic>] "
         } else {
             @OptIn(ResolveStateAccess::class)

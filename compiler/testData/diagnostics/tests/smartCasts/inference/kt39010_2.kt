@@ -7,7 +7,7 @@ class B : A<String>() {
 }
 
 interface KI {
-    val a: A<*>
+    konst a: A<*>
 }
 
 fun KI.bar() {

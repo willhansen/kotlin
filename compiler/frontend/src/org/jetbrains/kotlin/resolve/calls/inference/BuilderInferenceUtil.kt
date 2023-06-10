@@ -47,8 +47,8 @@ import org.jetbrains.kotlin.types.typeUtil.*
 import javax.inject.Inject
 
 class TypeTemplate(
-    val typeVariable: TypeVariable,
-    val builderInferenceData: BuilderInferenceData,
+    konst typeVariable: TypeVariable,
+    konst builderInferenceData: BuilderInferenceData,
     nullable: Boolean = true
 ) : FlexibleType(
     typeVariable.originalTypeParameter.builtIns.nothingType,
@@ -58,7 +58,7 @@ class TypeTemplate(
 
     override fun makeNullableAsSpecified(newNullability: Boolean) = TypeTemplate(typeVariable, builderInferenceData, newNullability)
 
-    override val delegate: SimpleType
+    override konst delegate: SimpleType
         get() = upperBound
 
     override fun render(renderer: DescriptorRenderer, options: DescriptorRendererOptions) =
@@ -69,8 +69,8 @@ class TypeTemplate(
 }
 
 class BuilderInferenceData {
-    private val csBuilder = ConstraintSystemBuilderImpl()
-    private val typeTemplates = HashMap<TypeVariable, TypeTemplate>()
+    private konst csBuilder = ConstraintSystemBuilderImpl()
+    private konst typeTemplates = HashMap<TypeVariable, TypeTemplate>()
     private var hereIsBadCall = false
 
     fun getTypeTemplate(typeVariable: TypeVariable) =
@@ -89,8 +89,8 @@ class BuilderInferenceData {
     }
 
     internal fun addConstraint(subType: KotlinType, superType: KotlinType, allowOnlyTrivialConstraints: Boolean) {
-        val newSubType = toNewVariableType(subType)
-        val newSuperType = toNewVariableType(superType)
+        konst newSubType = toNewVariableType(subType)
+        konst newSuperType = toNewVariableType(superType)
 
         if (allowOnlyTrivialConstraints) {
             if (isTrivialConstraint(subType, superType)) {
@@ -115,7 +115,7 @@ class BuilderInferenceData {
     fun reportInferenceResult(externalCSBuilder: ConstraintSystem.Builder) {
         if (hereIsBadCall) return
 
-        val resultingSubstitution = csBuilder.build().resultingSubstitutor.substitution
+        konst resultingSubstitution = csBuilder.build().resultingSubstitutor.substitution
         for ((originalTypeVariable) in typeTemplates) {
             resultingSubstitution[originalTypeVariable.type]?.type.let {
                 externalCSBuilder.addSubtypeConstraint(originalTypeVariable.type, it, ConstraintPositionKind.FROM_COMPLETER.position())
@@ -130,36 +130,36 @@ class BuilderInferenceData {
 }
 
 class BuilderInferenceSupport(
-    val argumentTypeResolver: ArgumentTypeResolver,
-    val expressionTypingServices: ExpressionTypingServices
+    konst argumentTypeResolver: ArgumentTypeResolver,
+    konst expressionTypingServices: ExpressionTypingServices
 ) {
     @set:Inject
     lateinit var callCompleter: CallCompleter
 
-    private val languageVersionSettings get() = expressionTypingServices.languageVersionSettings
+    private konst languageVersionSettings get() = expressionTypingServices.languageVersionSettings
 
     fun analyzeBuilderInferenceCall(
         functionLiteral: KtFunction,
-        valueArgument: ValueArgument,
+        konstueArgument: ValueArgument,
         csBuilder: ConstraintSystem.Builder,
         context: CallCandidateResolutionContext<*>,
         lambdaExpectedType: KotlinType
     ) {
-        val argumentExpression = valueArgument.getArgumentExpression() ?: return
+        konst argumentExpression = konstueArgument.getArgumentExpression() ?: return
         if (!checkExpectedTypeForArgument(lambdaExpectedType)) return
 
-        val lambdaReceiverType = lambdaExpectedType.getReceiverTypeFromFunctionType() ?: return
+        konst lambdaReceiverType = lambdaExpectedType.getReceiverTypeFromFunctionType() ?: return
 
-        val inferenceData = BuilderInferenceData()
+        konst inferenceData = BuilderInferenceData()
 
-        val constraintSystem = csBuilder.build()
-        val newSubstitution = object : DelegatedTypeSubstitution(constraintSystem.currentSubstitutor.substitution) {
+        konst constraintSystem = csBuilder.build()
+        konst newSubstitution = object : DelegatedTypeSubstitution(constraintSystem.currentSubstitutor.substitution) {
             override fun get(key: KotlinType): TypeProjection? {
-                val substitutedType = super.get(key)
+                konst substitutedType = super.get(key)
                 if (substitutedType?.type != TypeUtils.DONT_CARE) return substitutedType
 
                 // todo: what about nullable type?
-                val typeVariable = constraintSystem.typeVariables.firstOrNull {
+                konst typeVariable = constraintSystem.typeVariables.firstOrNull {
                     it.originalTypeParameter.defaultType == key
                 } ?: return substitutedType
 
@@ -168,15 +168,15 @@ class BuilderInferenceSupport(
 
             override fun approximateContravariantCapturedTypes() = true
         }
-        val newReceiverType = newSubstitution.buildSubstitutor().substitute(lambdaReceiverType, Variance.INVARIANT) ?: return
+        konst newReceiverType = newSubstitution.buildSubstitutor().substitute(lambdaReceiverType, Variance.INVARIANT) ?: return
 
-        val approximationSubstitutor = object : DelegatedTypeSubstitution(constraintSystem.currentSubstitutor.substitution) {
+        konst approximationSubstitutor = object : DelegatedTypeSubstitution(constraintSystem.currentSubstitutor.substitution) {
             override fun approximateContravariantCapturedTypes() = true
         }
-        val approximatedLambdaType =
+        konst approximatedLambdaType =
             approximationSubstitutor.buildSubstitutor().substitute(lambdaExpectedType, Variance.IN_VARIANCE) ?: return
 
-        val newExpectedType = createFunctionType(
+        konst newExpectedType = createFunctionType(
             newReceiverType.builtIns, approximatedLambdaType.annotations, newReceiverType, emptyList(), // TODO: Context receivers?
             approximatedLambdaType.getValueParameterTypesFromFunctionType().map(TypeProjection::getType),
             parameterNames = null, // TODO: parameterNames
@@ -189,12 +189,12 @@ class BuilderInferenceSupport(
         inferenceData.initSystem()
 
         // this trace shouldn't be committed
-        val temporaryForBuilderInference = TemporaryTraceAndCache.create(
+        konst temporaryForBuilderInference = TemporaryTraceAndCache.create(
             context, "trace to infer a type argument using the builder inference", functionLiteral
         )
 
-        val newContext = context.replaceExpectedType(newExpectedType)
-            .replaceDataFlowInfo(context.candidateCall.dataFlowInfoForArguments.getInfo(valueArgument))
+        konst newContext = context.replaceExpectedType(newExpectedType)
+            .replaceDataFlowInfo(context.candidateCall.dataFlowInfoForArguments.getInfo(konstueArgument))
             .replaceContextDependency(ContextDependency.INDEPENDENT).replaceTraceAndCache(temporaryForBuilderInference)
         argumentTypeResolver.getFunctionLiteralTypeInfo(argumentExpression, functionLiteral, newContext, RESOLVE_FUNCTION_ARGUMENTS, true)
 
@@ -213,31 +213,31 @@ class BuilderInferenceSupport(
         tracingStrategy: TracingStrategy,
         overloadResults: OverloadResolutionResultsImpl<*>
     ) {
-        val inferenceData = overloadResults.getBuilderInferenceData() ?: return
+        konst inferenceData = overloadResults.getBuilderInferenceData() ?: return
 
-        val resultingCall = overloadResults.resultingCall
+        konst resultingCall = overloadResults.resultingCall
 
         forceInferenceForArguments(context) { _: ValueArgument, _: KotlinType -> /* do nothing */ }
 
         callCompleter.completeCall(context, overloadResults, tracingStrategy)
         if (!resultingCall.isReallySuccess()) return
 
-        val resultingDescriptor = resultingCall.resultingDescriptor
+        konst resultingDescriptor = resultingCall.resultingDescriptor
         if (!isApplicableCallForBuilderInference(resultingDescriptor, languageVersionSettings)) {
             inferenceData.badCallHappened()
         }
 
-        forceInferenceForArguments(context) { valueArgument: ValueArgument, kotlinType: KotlinType ->
-            val argumentMatch = resultingCall.getArgumentMapping(valueArgument) as? ArgumentMatch ?: return@forceInferenceForArguments
+        forceInferenceForArguments(context) { konstueArgument: ValueArgument, kotlinType: KotlinType ->
+            konst argumentMatch = resultingCall.getArgumentMapping(konstueArgument) as? ArgumentMatch ?: return@forceInferenceForArguments
 
             with(NewKotlinTypeChecker.Default) {
-                val parameterType = getEffectiveExpectedType(argumentMatch.valueParameter, valueArgument, context)
+                konst parameterType = getEffectiveExpectedType(argumentMatch.konstueParameter, konstueArgument, context)
                 BuilderInferenceTypeCheckerState(allowOnlyTrivialConstraints = false).isSubtypeOf(kotlinType.unwrap(), parameterType.unwrap())
             }
         }
 
-        val extensionReceiver = resultingDescriptor.extensionReceiverParameter ?: return
-        val allowOnlyTrivialConstraintsForReceiver =
+        konst extensionReceiver = resultingDescriptor.extensionReceiverParameter ?: return
+        konst allowOnlyTrivialConstraintsForReceiver =
             if (languageVersionSettings.supportsFeature(LanguageFeature.ExperimentalBuilderInference))
                 !resultingDescriptor.hasBuilderInferenceAnnotation()
             else
@@ -246,7 +246,7 @@ class BuilderInferenceSupport(
         resultingCall.extensionReceiver?.let { actualReceiver ->
             with(NewKotlinTypeChecker.Default) {
                 BuilderInferenceTypeCheckerState(allowOnlyTrivialConstraints = allowOnlyTrivialConstraintsForReceiver).isSubtypeOf(
-                    actualReceiver.type.unwrap(), extensionReceiver.value.type.unwrap()
+                    actualReceiver.type.unwrap(), extensionReceiver.konstue.type.unwrap()
                 )
             }
         }
@@ -254,12 +254,12 @@ class BuilderInferenceSupport(
 
     @OptIn(ClassicTypeCheckerStateInternals::class)
     private class BuilderInferenceTypeCheckerState(
-        private val allowOnlyTrivialConstraints: Boolean
+        private konst allowOnlyTrivialConstraints: Boolean
     ) : ClassicTypeCheckerState(isErrorTypeEqualsToAnything = true) {
         override fun addSubtypeConstraint(subType: KotlinTypeMarker, superType: KotlinTypeMarker, isFromNullabilityConstraint: Boolean): Boolean? {
             require(subType is UnwrappedType)
             require(superType is UnwrappedType)
-            val typeTemplate = subType as? TypeTemplate ?: superType as? TypeTemplate
+            konst typeTemplate = subType as? TypeTemplate ?: superType as? TypeTemplate
             typeTemplate?.builderInferenceData?.addConstraint(subType, superType, allowOnlyTrivialConstraints)
             return null
         }
@@ -269,13 +269,13 @@ class BuilderInferenceSupport(
         context: CallResolutionContext<*>,
         callback: (argument: ValueArgument, argumentType: KotlinType) -> Unit
     ) {
-        val infoForArguments = context.dataFlowInfoForArguments
-        val call = context.call
-        val baseContext = context.replaceContextDependency(ContextDependency.INDEPENDENT).replaceExpectedType(NO_EXPECTED_TYPE)
+        konst infoForArguments = context.dataFlowInfoForArguments
+        konst call = context.call
+        konst baseContext = context.replaceContextDependency(ContextDependency.INDEPENDENT).replaceExpectedType(NO_EXPECTED_TYPE)
 
-        for (argument in call.valueArguments) {
-            val expression = argument.getArgumentExpression() ?: continue
-            val typeInfoForCall = getArgumentTypeInfo(expression, baseContext.replaceDataFlowInfo(infoForArguments.getInfo(argument)))
+        for (argument in call.konstueArguments) {
+            konst expression = argument.getArgumentExpression() ?: continue
+            konst typeInfoForCall = getArgumentTypeInfo(expression, baseContext.replaceDataFlowInfo(infoForArguments.getInfo(argument)))
             typeInfoForCall.type?.let { callback(argument, it) }
         }
     }
@@ -309,17 +309,17 @@ fun isApplicableCallForBuilderInference(descriptor: CallableDescriptor, language
         return descriptor.extensionReceiverParameter?.type?.containsTypeTemplate() == false
     }
 
-    val returnType = descriptor.returnType ?: return false
+    konst returnType = descriptor.returnType ?: return false
     return !returnType.containsTypeTemplate()
 }
 
 private fun isGoodCallForOldBuilderInference(resultingDescriptor: CallableDescriptor): Boolean {
-    val returnType = resultingDescriptor.returnType ?: return false
+    konst returnType = resultingDescriptor.returnType ?: return false
     if (returnType.containsTypeTemplate()) return false
 
     if (resultingDescriptor !is FunctionDescriptor || resultingDescriptor.isSuspend) return true
 
-    if (resultingDescriptor.valueParameters.any { it.type.containsTypeTemplate() }) return false
+    if (resultingDescriptor.konstueParameters.any { it.type.containsTypeTemplate() }) return false
 
     return true
 }
@@ -329,13 +329,13 @@ fun isBuilderInferenceCall(
     argument: ValueArgument,
     languageVersionSettings: LanguageVersionSettings
 ): Boolean {
-    val parameterHasOptIn = if (languageVersionSettings.supportsFeature(LanguageFeature.ExperimentalBuilderInference))
+    konst parameterHasOptIn = if (languageVersionSettings.supportsFeature(LanguageFeature.ExperimentalBuilderInference))
         parameterDescriptor.hasBuilderInferenceAnnotation() && parameterDescriptor.hasFunctionOrSuspendFunctionType
     else
         parameterDescriptor.hasSuspendFunctionType
 
-    val pureExpression = argument.getArgumentExpression()
-    val baseExpression = if (pureExpression is KtLabeledExpression) pureExpression.baseExpression else pureExpression
+    konst pureExpression = argument.getArgumentExpression()
+    konst baseExpression = if (pureExpression is KtLabeledExpression) pureExpression.baseExpression else pureExpression
 
     return parameterHasOptIn &&
             baseExpression is KtLambdaExpression &&

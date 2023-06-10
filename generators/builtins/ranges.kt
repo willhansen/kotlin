@@ -15,20 +15,20 @@ import java.io.PrintWriter
 class GenerateRanges(out: PrintWriter) : BuiltInsSourceGenerator(out) {
     override fun getPackage() = "kotlin.ranges"
     override fun generateBody() {
-        for (kind in ProgressionKind.values()) {
-            val t = kind.capitalized
-            val range = "${t}Range"
+        for (kind in ProgressionKind.konstues()) {
+            konst t = kind.capitalized
+            konst range = "${t}Range"
 
-            val increment = "1"
+            konst increment = "1"
 
-            val emptyBounds = when (kind) {
+            konst emptyBounds = when (kind) {
                 CHAR -> "1.toChar(), 0.toChar()"
                 else -> "1, 0"
             }
 
             fun compare(v: String) = areEqualNumbers(v)
 
-            val hashCode = when (kind) {
+            konst hashCode = when (kind) {
                 CHAR -> "=\n" +
                 "        if (isEmpty()) -1 else (31 * first.code + last.code)"
                 INT -> "=\n" +
@@ -37,30 +37,30 @@ class GenerateRanges(out: PrintWriter) : BuiltInsSourceGenerator(out) {
                 "        if (isEmpty()) -1 else (31 * ${hashLong("first")} + ${hashLong("last")}).toInt()"
             }
 
-            val toString = "\"\$first..\$last\""
+            konst toString = "\"\$first..\$last\""
 
             out.println(
 """/**
- * A range of values of type `$t`.
+ * A range of konstues of type `$t`.
  */
 public class $range(start: $t, endInclusive: $t) : ${t}Progression(start, endInclusive, $increment), ClosedRange<$t>, OpenEndRange<$t> {
-    override val start: $t get() = first
-    override val endInclusive: $t get() = last
+    override konst start: $t get() = first
+    override konst endInclusive: $t get() = last
     
-    @Deprecated("Can throw an exception when it's impossible to represent the value with $t type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @Deprecated("Can throw an exception when it's impossible to represent the konstue with $t type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @SinceKotlin("1.9")
     @WasExperimental(ExperimentalStdlibApi::class)
-    override val endExclusive: $t get() {
+    override konst endExclusive: $t get() {
         if (last == $t.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1
     }
 
-    override fun contains(value: $t): Boolean = first <= value && value <= last
+    override fun contains(konstue: $t): Boolean = first <= konstue && konstue <= last
 
     /** 
      * Checks whether the range is empty.
      *
-     * The range is empty if its start value is greater than the end value.
+     * The range is empty if its start konstue is greater than the end konstue.
      */
     override fun isEmpty(): Boolean = first > last
 
@@ -73,8 +73,8 @@ public class $range(start: $t, endInclusive: $t) : ${t}Progression(start, endInc
     override fun toString(): String = $toString
 
     companion object {
-        /** An empty range of values of type $t. */
-        public val EMPTY: $range = $range($emptyBounds)
+        /** An empty range of konstues of type $t. */
+        public konst EMPTY: $range = $range($emptyBounds)
     }
 }""")
             out.println()

@@ -7,7 +7,7 @@ abstract class AbstractClass {
 
   abstract fun abstractFun()
 
-  abstract val abstractVal: Int
+  abstract konst abstractVal: Int
     abstract get
 
   abstract var abstractVar: Int
@@ -19,7 +19,7 @@ abstract class AbstractClass {
 interface Interface {
   abstract fun abstractFun()
 
-  abstract val abstractVal: Int
+  abstract konst abstractVal: Int
     abstract get
 
   abstract var abstractVar: Int

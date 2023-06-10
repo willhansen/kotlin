@@ -2,9 +2,9 @@
 package override.generics
 
 abstract class MyAbstractClass<T> {
-    abstract val pr : T
+    abstract konst pr : T
 }
 
 abstract class MyLegalAbstractClass2<T>(t : T) : MyAbstractClass<Int>() {
-    <!CONFLICTING_OVERLOADS!>val <R> pr : T<!> = t
+    <!CONFLICTING_OVERLOADS!>konst <R> pr : T<!> = t
 }

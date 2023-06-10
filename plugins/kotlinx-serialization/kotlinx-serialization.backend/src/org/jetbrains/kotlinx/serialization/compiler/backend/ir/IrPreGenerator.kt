@@ -30,7 +30,7 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.bitMaskSlotCount
  * we manually add them here.
  */
 class IrPreGenerator(
-    val irClass: IrClass,
+    konst irClass: IrClass,
     compilerContext: SerializationPluginContext,
 ) : BaseIrGenerator(irClass, compilerContext) {
 
@@ -43,7 +43,7 @@ class IrPreGenerator(
         // write$Self in K1 is created only on JVM (see SerializationResolveExtension)
         if (!compilerContext.platform.isJvm()) return
         if (!irClass.isInternalSerializable) return
-        val serializerDescriptor = irClass.classSerializer(compilerContext)?.owner ?: return
+        konst serializerDescriptor = irClass.classSerializer(compilerContext)?.owner ?: return
         if (!irClass.shouldHaveSpecificSyntheticMethods {
                 serializerDescriptor.findPluginGeneratedMethod(
                     SerialEntityNames.SAVE,
@@ -51,7 +51,7 @@ class IrPreGenerator(
                 )
             }) return
         if (irClass.findWriteSelfMethod() != null) return
-        val method = irClass.addFunction {
+        konst method = irClass.addFunction {
             name = SerialEntityNames.WRITE_SELF_NAME
             returnType = compilerContext.irBuiltIns.unitType
             visibility = DescriptorVisibilities.PUBLIC
@@ -63,12 +63,12 @@ class IrPreGenerator(
             excludeFromJsExport()
         }
 
-        val typeParams = irClass.typeParameters.map {
+        konst typeParams = irClass.typeParameters.map {
             method.addTypeParameter(
                 it.name.asString(), compilerContext.irBuiltIns.anyNType
             )
         }
-        val typeParamsAsArguments = typeParams.map { it.defaultType }
+        konst typeParamsAsArguments = typeParams.map { it.defaultType }
 
         // object
         method.addValueParameter(
@@ -82,13 +82,13 @@ class IrPreGenerator(
             SERIALIZATION_PLUGIN_ORIGIN
         )
         // descriptor
-        val serialDescriptorSymbol = compilerContext.getClassFromRuntime(SerialEntityNames.SERIAL_DESCRIPTOR_CLASS)
+        konst serialDescriptorSymbol = compilerContext.getClassFromRuntime(SerialEntityNames.SERIAL_DESCRIPTOR_CLASS)
         method.addValueParameter(
             Name.identifier("serialDesc"), serialDescriptorSymbol.defaultType,
             SERIALIZATION_PLUGIN_ORIGIN
         )
         // KSerializer<Tn>
-        val kSerializerSymbol = compilerContext.getClassFromRuntime(SerialEntityNames.KSERIALIZER_CLASS)
+        konst kSerializerSymbol = compilerContext.getClassFromRuntime(SerialEntityNames.KSERIALIZER_CLASS)
         typeParamsAsArguments.forEachIndexed { i, it ->
             method.addValueParameter(
                 Name.identifier("${SerialEntityNames.typeArgPrefix}$i"),
@@ -106,14 +106,14 @@ class IrPreGenerator(
         ) return
         if (irClass.isSingleFieldValueClass) return
         if (irClass.findSerializableSyntheticConstructor() != null) return
-        val ctor = irClass.addConstructor {
+        konst ctor = irClass.addConstructor {
             origin = SERIALIZATION_PLUGIN_ORIGIN
             visibility = DescriptorVisibilities.PUBLIC
         }.apply { excludeFromJsExport() }
-        val markerClassSymbol =
+        konst markerClassSymbol =
             compilerContext.getClassFromInternalSerializationPackage(SerialEntityNames.SERIAL_CTOR_MARKER_NAME.asString())
-        val serializableProperties = serializablePropertiesForIrBackend(irClass).serializableProperties
-        val bitMaskSlotsCount = serializableProperties.bitMaskSlotCount()
+        konst serializableProperties = serializablePropertiesForIrBackend(irClass).serializableProperties
+        konst bitMaskSlotsCount = serializableProperties.bitMaskSlotCount()
 
         repeat(bitMaskSlotsCount) {
             ctor.addValueParameter(Name.identifier("seen$it"), compilerContext.irBuiltIns.intType, SERIALIZATION_PLUGIN_ORIGIN)

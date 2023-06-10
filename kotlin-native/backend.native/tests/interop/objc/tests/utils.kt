@@ -6,7 +6,7 @@ import objcTests.*
 
 fun Worker.runInWorker(block: () -> Unit) {
     block.freeze()
-    val future = this.execute(TransferMode.SAFE, { block }) {
+    konst future = this.execute(TransferMode.SAFE, { block }) {
         it()
     }
     future.result // Throws on failure.

@@ -12,7 +12,7 @@ typealias ItemKey = Klass
 
 import pkg.ItemKey
 
-val ItemKey = 42
+konst ItemKey = 42
 
 fun main() {
     ItemKey // K1: ok, K2: NO_COMPANION_OBJECT

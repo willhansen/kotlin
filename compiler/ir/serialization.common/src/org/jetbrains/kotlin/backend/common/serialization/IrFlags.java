@@ -18,7 +18,7 @@ public class IrFlags extends Flags {
     public static final BooleanFlagField IS_ACTUAL = FlagField.booleanAfter(VISIBILITY);
 
     // Type Parameters
-    public static final FlagField<ProtoBuf.TypeParameter.Variance> VARIANCE = FlagField.after(HAS_ANNOTATIONS, ProtoBuf.TypeParameter.Variance.values());
+    public static final FlagField<ProtoBuf.TypeParameter.Variance> VARIANCE = FlagField.after(HAS_ANNOTATIONS, ProtoBuf.TypeParameter.Variance.konstues());
     public static final BooleanFlagField IS_REIFIED = FlagField.booleanAfter(VARIANCE);
 
     // Fields

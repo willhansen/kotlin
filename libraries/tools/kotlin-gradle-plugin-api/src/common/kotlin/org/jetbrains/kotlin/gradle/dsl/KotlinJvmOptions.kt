@@ -6,42 +6,42 @@
 package org.jetbrains.kotlin.gradle.dsl
 
 interface KotlinJvmOptions : org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptions {
-    override val options: org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
+    override konst options: org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 
     /**
      * Generate metadata for Java 1.8 reflection on method parameters
-     * Default value: false
+     * Default konstue: false
      */
     var javaParameters: kotlin.Boolean
         get() = options.javaParameters.get()
-        set(value) = options.javaParameters.set(value)
+        set(konstue) = options.javaParameters.set(konstue)
 
-    private val kotlin.String?.jvmTargetCompilerOption get() = if (this != null) org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(this) else null
+    private konst kotlin.String?.jvmTargetCompilerOption get() = if (this != null) org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(this) else null
 
-    private val org.jetbrains.kotlin.gradle.dsl.JvmTarget.jvmTargetKotlinOption get() = this.target
+    private konst org.jetbrains.kotlin.gradle.dsl.JvmTarget.jvmTargetKotlinOption get() = this.target
 
     /**
      * Target version of the generated JVM bytecode (1.8, 9, 10, ..., 20), default is 1.8
-     * Possible values: "1.8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
-     * Default value: JvmTarget.DEFAULT
+     * Possible konstues: "1.8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
+     * Default konstue: JvmTarget.DEFAULT
      */
     var jvmTarget: kotlin.String
         get() = options.jvmTarget.get().jvmTargetKotlinOption
-        set(value) = options.jvmTarget.set(value.jvmTargetCompilerOption)
+        set(konstue) = options.jvmTarget.set(konstue.jvmTargetCompilerOption)
 
     /**
      * Name of the generated .kotlin_module file
-     * Default value: null
+     * Default konstue: null
      */
     var moduleName: kotlin.String?
         get() = options.moduleName.orNull
-        set(value) = options.moduleName.set(value)
+        set(konstue) = options.moduleName.set(konstue)
 
     /**
      * Don't automatically include the Java runtime into the classpath
-     * Default value: false
+     * Default konstue: false
      */
     var noJdk: kotlin.Boolean
         get() = options.noJdk.get()
-        set(value) = options.noJdk.set(value)
+        set(konstue) = options.noJdk.set(konstue)
 }

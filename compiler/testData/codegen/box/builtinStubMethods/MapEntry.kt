@@ -3,8 +3,8 @@
 class MyMapEntry<K, V>: Map.Entry<K, V> {
     override fun hashCode(): Int = 0
     override fun equals(other: Any?): Boolean = false
-    override val key: K get() = throw UnsupportedOperationException()
-    override val value: V get() = throw UnsupportedOperationException()
+    override konst key: K get() = throw UnsupportedOperationException()
+    override konst konstue: V get() = throw UnsupportedOperationException()
 }
 
 fun box(): String {

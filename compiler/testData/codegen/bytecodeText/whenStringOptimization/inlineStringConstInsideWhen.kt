@@ -1,4 +1,4 @@
-const val y = "cde"
+const konst y = "cde"
 
 fun foo(x : String) : String {
     when (x) {

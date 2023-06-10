@@ -24,11 +24,11 @@ import kotlin.reflect.KClass
  * that could be used inside the common code.
  *
  * We cannot register them directly in [VariantImplementationFactories] as we would lose the factories after
- * the service reinitialization on configuration cache retrieval. Thus, this service should be used to register factories
+ * the service reinitialization on configuration cache retriekonst. Thus, this service should be used to register factories
  * and [VariantImplementationFactories] should be used to use them.
  */
 internal abstract class VariantImplementationFactoriesConfigurator : BuildService<BuildServiceParameters.None> {
-    val factories: MutableMap<String, VariantImplementationFactories.VariantImplementationFactory> = ConcurrentHashMap()
+    konst factories: MutableMap<String, VariantImplementationFactories.VariantImplementationFactory> = ConcurrentHashMap()
 
     fun <T : VariantImplementationFactories.VariantImplementationFactory> putIfAbsent(
         type: KClass<T>,
@@ -67,7 +67,7 @@ internal interface UsesVariantImplementationFactories : Task
  */
 abstract class VariantImplementationFactories : BuildService<VariantImplementationFactories.Parameters> {
     interface Parameters : BuildServiceParameters {
-        val factories: MapProperty<String, VariantImplementationFactory>
+        konst factories: MapProperty<String, VariantImplementationFactory>
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -89,14 +89,14 @@ abstract class VariantImplementationFactories : BuildService<VariantImplementati
         private fun getProvider(
             gradle: Gradle
         ): Provider<VariantImplementationFactories> {
-            val configProvider = VariantImplementationFactoriesConfigurator.getProvider(gradle)
+            konst configProvider = VariantImplementationFactoriesConfigurator.getProvider(gradle)
             // Use class loader hashcode in case there are multiple class loaders in the same build
             return gradle.sharedServices
                 .registerIfAbsent(
                     "variant_impl_factories_${VariantImplementationFactories::class.java.classLoader.hashCode()}",
                     VariantImplementationFactories::class.java
                 ) {
-                    it.parameters.factories.value(configProvider.get().factories)
+                    it.parameters.factories.konstue(configProvider.get().factories)
                 }
         }
 

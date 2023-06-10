@@ -8,19 +8,19 @@
 
 interface I
 
-val i: I = object : I {}
+konst i: I = object : I {}
 
 @JvmRecord
-data class MyRec1(val name: String) : <!DELEGATION_BY_IN_JVM_RECORD!>I by i<!>
+data class MyRec1(konst name: String) : <!DELEGATION_BY_IN_JVM_RECORD!>I by i<!>
 
 @JvmRecord
-data class MyRec2(val name: String) {
-    <!FIELD_IN_JVM_RECORD!>val x: Int = 0<!>
+data class MyRec2(konst name: String) {
+    <!FIELD_IN_JVM_RECORD!>konst x: Int = 0<!>
 }
 
 @JvmRecord
-data class MyRec3(val name: String) {
-    <!FIELD_IN_JVM_RECORD!>val y: String
+data class MyRec3(konst name: String) {
+    <!FIELD_IN_JVM_RECORD!>konst y: String
         get() = field + "1"<!>
 
     init {
@@ -29,13 +29,13 @@ data class MyRec3(val name: String) {
 }
 
 @JvmRecord
-data class MyRec4(val name: String) {
-    <!FIELD_IN_JVM_RECORD!>val z: Int by lazy { 1 }<!>
+data class MyRec4(konst name: String) {
+    <!FIELD_IN_JVM_RECORD!>konst z: Int by lazy { 1 }<!>
 }
 
 @JvmRecord
-data class MyRec5(val name: String) {
-    val w: String get() = name + "1"
+data class MyRec5(konst name: String) {
+    konst w: String get() = name + "1"
 }
 
 

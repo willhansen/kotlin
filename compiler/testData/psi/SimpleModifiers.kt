@@ -28,17 +28,17 @@ out
         in
         out
         T> {
-    val abstract
-    val open
-    val enum
-    val open
-    val annotation
-    val override
-    val open
-    val abstract
-    val private
-    val protected
-    val public
-    val internal
-    val lazy
+    konst abstract
+    konst open
+    konst enum
+    konst open
+    konst annotation
+    konst override
+    konst open
+    konst abstract
+    konst private
+    konst protected
+    konst public
+    konst internal
+    konst lazy
 }

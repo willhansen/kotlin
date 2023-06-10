@@ -14,21 +14,21 @@ class JavaSourceInnerClassInClassPathTest : TestCaseWithTmpdir() {
     // Test that a java source file for a class is taken before a class file for the same
     // class on the class path.
     fun test() {
-        val aJava = tmpdir.resolve("A.java").also {
+        konst aJava = tmpdir.resolve("A.java").also {
             it.writeText("class A { interface AInner { int foo(); } }")
         }
-        val bJava = tmpdir.resolve("B.java").also {
+        konst bJava = tmpdir.resolve("B.java").also {
             it.writeText("class B implements A.AInner { public int foo() { return 42; } }")
         }
-        val cKt = tmpdir.resolve("C.kt").also {
+        konst cKt = tmpdir.resolve("C.kt").also {
             it.writeText("fun main() { B().foo() }")
         }
-        val (output, exit) = AbstractCliTest.executeCompilerGrabOutput(
+        konst (output, exit) = AbstractCliTest.executeCompilerGrabOutput(
             K2JVMCompiler(),
             listOf(aJava.path, bJava.path, cKt.path, "-d", tmpdir.path, "-Xcompile-java", "-Xuse-javac")
         )
         assert(exit == ExitCode.OK) { output }
-        val (output2, exit2) = AbstractCliTest.executeCompilerGrabOutput(
+        konst (output2, exit2) = AbstractCliTest.executeCompilerGrabOutput(
             K2JVMCompiler(),
             listOf(aJava.path, bJava.path, cKt.path, "-cp", tmpdir.path, "-d", tmpdir.path)
         )

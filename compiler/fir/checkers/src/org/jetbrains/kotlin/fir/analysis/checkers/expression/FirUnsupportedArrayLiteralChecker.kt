@@ -33,7 +33,7 @@ object FirUnsupportedArrayLiteralChecker : FirArrayOfCallChecker() {
 
     private fun isInsideAnnotationCall(expression: FirArrayOfCall, context: CheckerContext): Boolean {
         context.qualifiedAccessOrAssignmentsOrAnnotationCalls.lastOrNull()?.let {
-            val arguments = when (it) {
+            konst arguments = when (it) {
                 is FirFunctionCall ->
                     if (it.typeRef.toRegularClassSymbol(context.session)?.classKind == ClassKind.ANNOTATION_CLASS) {
                         it.arguments
@@ -45,7 +45,7 @@ object FirUnsupportedArrayLiteralChecker : FirArrayOfCallChecker() {
             }
 
             return arguments.any { argument ->
-                val unwrappedArguments =
+                konst unwrappedArguments =
                     if (argument is FirVarargArgumentsExpression) {
                         argument.arguments.map { arg -> arg.unwrapArgument() }
                     } else {

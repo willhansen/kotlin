@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 var state: String = ""
 
 fun box(): String {
-    val prop = ::state
+    konst prop = ::state
 
     assertEquals("", prop.getter.invoke())
     assertEquals("", prop.getter())

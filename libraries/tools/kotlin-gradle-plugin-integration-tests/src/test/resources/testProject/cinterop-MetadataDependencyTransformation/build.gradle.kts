@@ -11,9 +11,9 @@ allprojects {
         mavenCentral()
     }
 
-    afterEvaluate {
+    afterEkonstuate {
         extensions.findByType<KotlinMultiplatformExtension>()?.let { kotlin ->
-            val compileAll by tasks.creating
+            konst compileAll by tasks.creating
             kotlin.targets.all {
                 compileAll.dependsOn(
                     provider { compilations.map { it.compileKotlinTaskName } }
@@ -25,7 +25,7 @@ allprojects {
 
 // Setup configuration resolution hook
 // Report configurations that is going to be resolved before the task graph is ready
-val isResolutionAllowed = AtomicBoolean(false)
+konst isResolutionAllowed = AtomicBoolean(false)
 project.gradle.taskGraph.whenReady { isResolutionAllowed.set(true) }
 
 configurations.all {

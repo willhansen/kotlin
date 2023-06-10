@@ -1,5 +1,5 @@
 fun foo() {
-    val p = 1
+    konst p = 1
     when (p) {
         0 -> System.out?.println()
         else -> System.out?.println()

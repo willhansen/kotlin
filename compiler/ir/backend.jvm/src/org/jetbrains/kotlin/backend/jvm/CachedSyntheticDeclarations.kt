@@ -28,18 +28,18 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.org.objectweb.asm.Opcodes
 import java.util.concurrent.ConcurrentHashMap
 
-class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
-    private data class FieldKey(val fieldSymbol: IrFieldSymbol, val parent: IrDeclarationParent, val superQualifierSymbol: IrClassSymbol?)
+class CachedSyntheticDeclarations(private konst context: JvmBackendContext) {
+    private data class FieldKey(konst fieldSymbol: IrFieldSymbol, konst parent: IrDeclarationParent, konst superQualifierSymbol: IrClassSymbol?)
 
     private data class FunctionKey(
-        val functionSymbol: IrFunctionSymbol,
-        val parent: IrDeclarationParent,
-        val superQualifierSymbol: IrClassSymbol?
+        konst functionSymbol: IrFunctionSymbol,
+        konst parent: IrDeclarationParent,
+        konst superQualifierSymbol: IrClassSymbol?
     )
 
-    private val functionMap = ConcurrentHashMap<FunctionKey, IrFunctionSymbol>()
-    private val getterMap = ConcurrentHashMap<FieldKey, IrSimpleFunctionSymbol>()
-    private val setterMap = ConcurrentHashMap<FieldKey, IrSimpleFunctionSymbol>()
+    private konst functionMap = ConcurrentHashMap<FunctionKey, IrFunctionSymbol>()
+    private konst getterMap = ConcurrentHashMap<FieldKey, IrSimpleFunctionSymbol>()
+    private konst setterMap = ConcurrentHashMap<FieldKey, IrSimpleFunctionSymbol>()
 
     fun getSyntheticFunctionAccessor(expression: IrFunctionAccessExpression, scopes: List<ScopeWithIr>): IrFunctionSymbol {
         return createAccessor(expression, scopes)
@@ -96,7 +96,7 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
         // Finally, we need to produce accessors for calls to protected static methods coming from Java,
         // which we put in the closest enclosing class which has access to the method in question.
 
-        val parent = symbol.owner.accessorParent(dispatchReceiverType?.classOrNull?.owner ?: symbol.owner.parent, scopes)
+        konst parent = symbol.owner.accessorParent(dispatchReceiverType?.classOrNull?.owner ?: symbol.owner.parent, scopes)
 
         // The key in the cache/map needs to be BOTH the symbol of the function being accessed AND the parent
         // of the accessor. Going from the above example, if we have another class C similar to B:
@@ -137,7 +137,7 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
                     }
                     accessor.annotations += declaration.annotations
                     declaration.annotations = emptyList()
-                    declaration.valueParameters.forEach { it.annotations = emptyList() }
+                    declaration.konstueParameters.forEach { it.annotations = emptyList() }
                 }
             }
         }
@@ -147,7 +147,7 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
         originForConstructorAccessor: IrDeclarationOrigin =
             JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR
     ): IrConstructor {
-        val source = this
+        konst source = this
 
         return factory.buildConstructor {
             origin = originForConstructorAccessor
@@ -159,7 +159,7 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
             accessor.copyTypeParametersFrom(source, JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR)
             accessor.copyValueParametersToStatic(source, JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR)
             if (source.constructedClass.modality == Modality.SEALED) {
-                for (accessorValueParameter in accessor.valueParameters) {
+                for (accessorValueParameter in accessor.konstueParameters) {
                     accessorValueParameter.annotations = emptyList()
                 }
             }
@@ -191,7 +191,7 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
     private fun IrSimpleFunction.makeSimpleFunctionAccessor(
         superQualifierSymbol: IrClassSymbol?, dispatchReceiverType: IrType?, parent: IrDeclarationParent, scopes: List<ScopeWithIr>
     ): IrSimpleFunction {
-        val source = this
+        konst source = this
 
         return factory.buildFun {
             startOffset = parent.startOffset
@@ -227,10 +227,10 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
         }
 
     fun getSyntheticGetter(expression: IrGetField, scopes: List<ScopeWithIr>): IrSimpleFunctionSymbol {
-        val dispatchReceiverType = expression.receiver?.type
-        val dispatchReceiverClassSymbol = dispatchReceiverType?.classifierOrNull as? IrClassSymbol
-        val symbol = expression.symbol
-        val parent = symbol.owner.accessorParent(dispatchReceiverClassSymbol?.owner ?: symbol.owner.parent, scopes) as IrClass
+        konst dispatchReceiverType = expression.receiver?.type
+        konst dispatchReceiverClassSymbol = dispatchReceiverType?.classifierOrNull as? IrClassSymbol
+        konst symbol = expression.symbol
+        konst parent = symbol.owner.accessorParent(dispatchReceiverClassSymbol?.owner ?: symbol.owner.parent, scopes) as IrClass
         return getterMap.getOrPut(FieldKey(symbol, parent, expression.superQualifierSymbol)) {
             makeGetterAccessorSymbol(symbol, parent, expression.superQualifierSymbol)
         }
@@ -267,9 +267,9 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
         accessor: IrSimpleFunction,
         superQualifierSymbol: IrClassSymbol?
     ): IrBody {
-        val maybeDispatchReceiver =
+        konst maybeDispatchReceiver =
             if (targetField.isStatic) null
-            else IrGetValueImpl(accessor.startOffset, accessor.endOffset, accessor.valueParameters[0].symbol)
+            else IrGetValueImpl(accessor.startOffset, accessor.endOffset, accessor.konstueParameters[0].symbol)
         return IrExpressionBodyImpl(
             accessor.startOffset, accessor.endOffset,
             IrGetFieldImpl(
@@ -283,10 +283,10 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
     }
 
     fun getSyntheticSetter(expression: IrSetField, scopes: List<ScopeWithIr>): IrSimpleFunctionSymbol {
-        val dispatchReceiverType = expression.receiver?.type
-        val dispatchReceiverClassSymbol = dispatchReceiverType?.classifierOrNull as? IrClassSymbol
-        val symbol = expression.symbol
-        val parent = symbol.owner.accessorParent(dispatchReceiverClassSymbol?.owner ?: symbol.owner.parent, scopes) as IrClass
+        konst dispatchReceiverType = expression.receiver?.type
+        konst dispatchReceiverClassSymbol = dispatchReceiverType?.classifierOrNull as? IrClassSymbol
+        konst symbol = expression.symbol
+        konst parent = symbol.owner.accessorParent(dispatchReceiverClassSymbol?.owner ?: symbol.owner.parent, scopes) as IrClass
         return setterMap.getOrPut(FieldKey(symbol, parent, expression.superQualifierSymbol)) {
             makeSetterAccessorSymbol(symbol, parent, expression.superQualifierSymbol)
         }
@@ -325,12 +325,12 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
         accessor: IrSimpleFunction,
         superQualifierSymbol: IrClassSymbol?
     ): IrBody {
-        val maybeDispatchReceiver =
+        konst maybeDispatchReceiver =
             if (targetField.isStatic) null
-            else IrGetValueImpl(accessor.startOffset, accessor.endOffset, accessor.valueParameters[0].symbol)
-        val value = IrGetValueImpl(
+            else IrGetValueImpl(accessor.startOffset, accessor.endOffset, accessor.konstueParameters[0].symbol)
+        konst konstue = IrGetValueImpl(
             accessor.startOffset, accessor.endOffset,
-            accessor.valueParameters[if (targetField.isStatic) 0 else 1].symbol
+            accessor.konstueParameters[if (targetField.isStatic) 0 else 1].symbol
         )
         return IrExpressionBodyImpl(
             accessor.startOffset, accessor.endOffset,
@@ -338,7 +338,7 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
                 accessor.startOffset, accessor.endOffset,
                 targetField.symbol,
                 maybeDispatchReceiver,
-                value,
+                konstue,
                 context.irBuiltIns.unitType,
                 superQualifierSymbol = superQualifierSymbol
             )
@@ -357,24 +357,24 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
         call.passTypeArgumentsFrom(syntheticFunction, offset = typeArgumentOffset)
 
         var offset = 0
-        val delegateTo = call.symbol.owner
+        konst delegateTo = call.symbol.owner
         delegateTo.dispatchReceiverParameter?.let {
             call.dispatchReceiver =
-                IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, syntheticFunction.valueParameters[offset++].symbol)
+                IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, syntheticFunction.konstueParameters[offset++].symbol)
         }
 
         delegateTo.extensionReceiverParameter?.let {
             call.extensionReceiver =
-                IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, syntheticFunction.valueParameters[offset++].symbol)
+                IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, syntheticFunction.konstueParameters[offset++].symbol)
         }
 
-        delegateTo.valueParameters.forEachIndexed { i, _ ->
+        delegateTo.konstueParameters.forEachIndexed { i, _ ->
             call.putValueArgument(
                 i,
                 IrGetValueImpl(
                     UNDEFINED_OFFSET,
                     UNDEFINED_OFFSET,
-                    syntheticFunction.valueParameters[i + offset].symbol
+                    syntheticFunction.konstueParameters[i + offset].symbol
                 )
             )
         }
@@ -384,20 +384,20 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
     // or a subclass of the Java class. Both cases require an accessor, which we cannot add to the Java class.
     private fun IrDeclarationWithVisibility.accessorParent(parent: IrDeclarationParent, scopes: List<ScopeWithIr>) =
         if (visibility == JavaDescriptorVisibilities.PROTECTED_STATIC_VISIBILITY) {
-            val classes = scopes.map { it.irElement }.filterIsInstance<IrClass>()
-            val companions = classes.mapNotNull(IrClass::companionObject)
-            val objectsInScope =
+            konst classes = scopes.map { it.irElement }.filterIsInstance<IrClass>()
+            konst companions = classes.mapNotNull(IrClass::companionObject)
+            konst objectsInScope =
                 classes.flatMap { it.declarations.filter(IrDeclaration::isAnonymousObject).filterIsInstance<IrClass>() }
-            val candidates = objectsInScope + companions + classes
+            konst candidates = objectsInScope + companions + classes
             candidates.lastOrNull { parent is IrClass && it.isSubclassOf(parent) } ?: classes.last()
         } else {
             parent
         }
 
     private fun IrSimpleFunction.accessorName(superQualifier: IrClassSymbol?, scopes: List<ScopeWithIr>): Name {
-        val jvmName = context.defaultMethodSignatureMapper.mapFunctionName(this)
-        val currentClass = scopes.lastOrNull { it.scope.scopeOwnerSymbol is IrClassSymbol }
-        val suffix = when {
+        konst jvmName = context.defaultMethodSignatureMapper.mapFunctionName(this)
+        konst currentClass = scopes.lastOrNull { it.scope.scopeOwnerSymbol is IrClassSymbol }
+        konst suffix = when {
             // Accessors for top level functions never need a suffix.
             isTopLevel -> ""
 
@@ -421,12 +421,12 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
     }
 
     private fun IrField.accessorNameForGetter(superQualifierSymbol: IrClassSymbol?): Name {
-        val getterName = JvmAbi.getterName(name.asString())
+        konst getterName = JvmAbi.getterName(name.asString())
         return Name.identifier("access\$$getterName\$${fieldAccessorSuffix(superQualifierSymbol)}")
     }
 
     private fun IrField.accessorNameForSetter(superQualifierSymbol: IrClassSymbol?): Name {
-        val setterName = JvmAbi.setterName(name.asString())
+        konst setterName = JvmAbi.setterName(name.asString())
         return Name.identifier("access\$$setterName\$${fieldAccessorSuffix(superQualifierSymbol)}")
     }
 
@@ -450,7 +450,7 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
         // TODO: change this to `fqNameUnsafe.asString().replace(".", "_")` as soon as we're ready to break compatibility with pre-KT-21178 code
         name.asString().hashCode().toString()
 
-    private val DescriptorVisibility.isProtected
+    private konst DescriptorVisibility.isProtected
         get() = AsmUtil.getVisibilityAccessFlag(delegate) == Opcodes.ACC_PROTECTED
 
     fun isOrShouldBeHiddenSinceHasMangledParams(constructor: IrConstructor): Boolean {
@@ -467,7 +467,7 @@ class CachedSyntheticDeclarations(private val context: JvmBackendContext) {
         return constructor.isOrShouldBeHiddenDueToOrigin && constructor.visibility != DescriptorVisibilities.PUBLIC && constructor.constructedClass.modality == Modality.SEALED
     }
 
-    private val IrConstructor.isOrShouldBeHiddenDueToOrigin: Boolean
+    private konst IrConstructor.isOrShouldBeHiddenDueToOrigin: Boolean
         get() = !(origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
                 origin == JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR ||
                 origin == JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR_FOR_HIDDEN_CONSTRUCTOR ||

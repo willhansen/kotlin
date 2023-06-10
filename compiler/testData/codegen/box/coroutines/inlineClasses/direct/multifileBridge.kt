@@ -9,7 +9,7 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class I(val x: Any?)
+inline class I(konst x: Any?)
 
 suspend fun <T> suspendHere(t: T): T = t
 

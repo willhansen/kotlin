@@ -13,7 +13,7 @@ class KtNamedFunction : ASTDelegatePsiElement(), KtFunction {
 class KtFunctionLiteral : ASTDelegatePsiElement(), KtFunction
 
 fun test_1(namedFunction: KtNamedFunction, functionLiteral: KtFunctionLiteral, cond: Boolean) {
-    val function = when (cond) {
+    konst function = when (cond) {
         true -> namedFunction
         false -> functionLiteral
     }
@@ -25,5 +25,5 @@ fun test_1(namedFunction: KtNamedFunction, functionLiteral: KtFunctionLiteral, c
         function.baz()
     }
 
-    val myNamedFunction = function as KtNamedFunction
+    konst myNamedFunction = function as KtNamedFunction
 }

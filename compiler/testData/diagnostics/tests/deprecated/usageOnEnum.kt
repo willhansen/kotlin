@@ -3,6 +3,6 @@
 // ISSUE: KT-37975
 
 @Deprecated("")
-enum class Foo(val x: Int) {
+enum class Foo(konst x: Int) {
     A(42)
 }

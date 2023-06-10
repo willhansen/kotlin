@@ -20,9 +20,9 @@ import kotlin.test.Test
 class IdeSourceDependencyResolutionTest {
     @Test
     fun `test - multiplatform to multiplatform - sample 0`() {
-        val root = buildProject()
+        konst root = buildProject()
 
-        val producer = buildProject({ withParent(root).withName("producer") }) {
+        konst producer = buildProject({ withParent(root).withName("producer") }) {
             enableDefaultStdlibDependency(false)
             applyMultiplatformPlugin()
 
@@ -34,7 +34,7 @@ class IdeSourceDependencyResolutionTest {
             }
         }
 
-        val consumer = buildProject({ withParent(root).withName("consumer") }) {
+        konst consumer = buildProject({ withParent(root).withName("consumer") }) {
             enableDefaultStdlibDependency(false)
             applyMultiplatformPlugin()
 
@@ -50,9 +50,9 @@ class IdeSourceDependencyResolutionTest {
             }
         }
 
-        root.evaluate()
-        producer.evaluate()
-        consumer.evaluate()
+        root.ekonstuate()
+        producer.ekonstuate()
+        consumer.ekonstuate()
 
         consumer.resolveDependencies("commonMain").assertMatches(
             regularSourceDependency(":producer/commonMain")
@@ -134,7 +134,7 @@ class IdeSourceDependencyResolutionTest {
     @Test
     fun `test - multiplatform to multiplatform - sample 1 - jvmAndAndroid`() {
         assertAndroidSdkAvailable()
-        val root = buildProject()
+        konst root = buildProject()
 
         fun Project.setup() {
             enableDefaultStdlibDependency(false)
@@ -158,15 +158,15 @@ class IdeSourceDependencyResolutionTest {
             }
         }
 
-        val producer = buildProject({ withParent(root).withName("producer") }, Project::setup)
-        val consumer = buildProject({ withParent(root).withName("consumer") }, Project::setup)
+        konst producer = buildProject({ withParent(root).withName("producer") }, Project::setup)
+        konst consumer = buildProject({ withParent(root).withName("consumer") }, Project::setup)
         consumer.multiplatformExtension.sourceSets.getByName("commonMain").dependencies {
             implementation(project(":producer"))
         }
 
-        root.evaluate()
-        producer.evaluate()
-        consumer.evaluate()
+        root.ekonstuate()
+        producer.ekonstuate()
+        consumer.ekonstuate()
 
         consumer.resolveDependencies("jvmAndAndroidMain").assertMatches(
             regularSourceDependency(":producer/commonMain"),
@@ -177,14 +177,14 @@ class IdeSourceDependencyResolutionTest {
 
     @Test
     fun `test - multiplatform to kotlin jvm - sample 0`() {
-        val root = buildProject()
+        konst root = buildProject()
 
-        val producer = buildProject({ withParent(root).withName("producer") }) {
+        konst producer = buildProject({ withParent(root).withName("producer") }) {
             enableDefaultStdlibDependency(false)
             applyKotlinJvmPlugin()
         }
 
-        val consumer = buildProject({ withParent(root).withName("consumer") }) {
+        konst consumer = buildProject({ withParent(root).withName("consumer") }) {
             enableDefaultStdlibDependency(false)
             applyMultiplatformPlugin()
             multiplatformExtension.jvm()
@@ -193,9 +193,9 @@ class IdeSourceDependencyResolutionTest {
             }
         }
 
-        root.evaluate()
-        producer.evaluate()
-        consumer.evaluate()
+        root.ekonstuate()
+        producer.ekonstuate()
+        consumer.ekonstuate()
 
         consumer.resolveDependencies("commonMain").assertMatches(
             projectArtifactDependency(Regular, ":producer", FilePathRegex(".*/build/libs/producer.jar"))

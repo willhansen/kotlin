@@ -3,7 +3,7 @@ fun baz(s: String?): Int {
         ""
     }
     else {
-        val u: String? = null
+        konst u: String? = null
         if (u == null) return 0
         u
     }.length

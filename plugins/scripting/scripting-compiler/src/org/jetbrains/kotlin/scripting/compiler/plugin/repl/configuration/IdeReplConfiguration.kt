@@ -15,10 +15,10 @@ import org.jetbrains.kotlin.scripting.compiler.plugin.repl.writer.IdeSystemOutWr
 import org.jetbrains.kotlin.scripting.compiler.plugin.repl.writer.ReplWriter
 
 class IdeReplConfiguration : ReplConfiguration {
-    override val allowIncompleteLines: Boolean
+    override konst allowIncompleteLines: Boolean
         get() = false
 
-    override val executionInterceptor: SnippetExecutionInterceptor = object :
+    override konst executionInterceptor: SnippetExecutionInterceptor = object :
         SnippetExecutionInterceptor {
         override fun <T> execute(block: () -> T): T {
             try {
@@ -32,17 +32,17 @@ class IdeReplConfiguration : ReplConfiguration {
 
     override fun createDiagnosticHolder() = IdeDiagnosticMessageHolder()
 
-    override val writer: ReplWriter
-    override val exceptionReporter: ReplExceptionReporter
-    override val commandReader: ReplCommandReader
+    override konst writer: ReplWriter
+    override konst exceptionReporter: ReplExceptionReporter
+    override konst commandReader: ReplCommandReader
 
-    val sinWrapper: ReplSystemInWrapper
+    konst sinWrapper: ReplSystemInWrapper
 
     init {
         // wrapper for `out` is required to escape every input in [ideMode];
         // if [ideMode == false] then just redirects all input to [System.out]
         // if user calls [System.setOut(...)] then undefined behaviour
-        val soutWrapper = IdeSystemOutWrapperReplWriter(System.out)
+        konst soutWrapper = IdeSystemOutWrapperReplWriter(System.out)
         System.setOut(soutWrapper)
 
         // wrapper for `in` is required to give user possibility of calling

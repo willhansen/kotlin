@@ -3,11 +3,11 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny(val x: Any?)
+konstue class IcAny(konst x: Any?)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcInt(val x: Int)
+konstue class IcInt(konst x: Int)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcLong(val x: Long)
+konstue class IcLong(konst x: Long)
 
 fun <T> id(x: T) = x
 

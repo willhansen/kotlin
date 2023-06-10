@@ -6,55 +6,55 @@
 import kotlin.native.internal.*
 import kotlin.test.*
 
-value class BoxInt(val x: Int)
-value class BoxBoxInt(val x: BoxInt)
-data class A(val x: Int)
-value class BoxA(val x: A)
-value class BoxBoxA(val x: BoxA)
+konstue class BoxInt(konst x: Int)
+konstue class BoxBoxInt(konst x: BoxInt)
+data class A(konst x: Int)
+konstue class BoxA(konst x: A)
+konstue class BoxBoxA(konst x: BoxA)
 
 
 class X(
-        val a: Int,
-        val b: List<Int>,
-        val c: IntArray,
-        val d: Array<Int>,
-        val e: Array<Any>,
-        val f: BoxInt,
-        val g: BoxBoxInt,
-        val h: A,
-        val i: BoxA,
-        val j: BoxBoxA,
-        val k: Any?,
-        val l: Any?,
-        val m: Any?,
-        val n: Any?,
-        val o: IntArray?
+        konst a: Int,
+        konst b: List<Int>,
+        konst c: IntArray,
+        konst d: Array<Int>,
+        konst e: Array<Any>,
+        konst f: BoxInt,
+        konst g: BoxBoxInt,
+        konst h: A,
+        konst i: BoxA,
+        konst j: BoxBoxA,
+        konst k: Any?,
+        konst l: Any?,
+        konst m: Any?,
+        konst n: Any?,
+        konst o: IntArray?
 ) {
-    val p by lazy { 1 }
+    konst p by lazy { 1 }
     lateinit var q: IntArray
     lateinit var r: IntArray
 }
 
 @Test
-fun `big class with mixed values`() {
-    val lst = listOf(1, 2, 3)
-    val ia = intArrayOf(1, 2, 3)
-    val ia2 = intArrayOf(3, 4, 5)
-    val ai = arrayOf(1, 2, 3)
-    val astr: Array<Any> = arrayOf("123", "456", 1, 2, 3)
-    val bi = BoxInt(2)
-    val bbi = BoxBoxInt(BoxInt(3))
-    val a1 = A(1)
-    val a2 = A(2)
-    val a3 = A(3)
-    val a6 = A(3)
-    val x = X(
+fun `big class with mixed konstues`() {
+    konst lst = listOf(1, 2, 3)
+    konst ia = intArrayOf(1, 2, 3)
+    konst ia2 = intArrayOf(3, 4, 5)
+    konst ai = arrayOf(1, 2, 3)
+    konst astr: Array<Any> = arrayOf("123", "456", 1, 2, 3)
+    konst bi = BoxInt(2)
+    konst bbi = BoxBoxInt(BoxInt(3))
+    konst a1 = A(1)
+    konst a2 = A(2)
+    konst a3 = A(3)
+    konst a6 = A(3)
+    konst x = X(
             1, lst, ia, ai, astr, bi, bbi,
             a1, BoxA(a2), BoxBoxA(BoxA(a3)),
             4, BoxInt(5), BoxA(a6), null, null
     )
     x.r = ia2
-    val fields = x.collectReferenceFieldValues()
+    konst fields = x.collectReferenceFieldValues()
     assertEquals(12, fields.size)
     // not using assertContains because of ===
     assertTrue(fields.any { it === lst }, "Should contain list $lst")
@@ -65,7 +65,7 @@ fun `big class with mixed values`() {
     assertTrue(fields.any { it === a1 }, "Should contain A(1)")
     assertTrue(fields.any { it === a2 }, "Should contain A(2)")
     assertTrue(fields.any { it === a3 }, "Should contain A(3)")
-    assertTrue(fields.any { it.toString().startsWith("Lazy value not initialized yet") }, "Should contain lazy delegate")
+    assertTrue(fields.any { it.toString().startsWith("Lazy konstue not initialized yet") }, "Should contain lazy delegate")
     assertContains(fields, 4)
     assertContains(fields, BoxInt(5))
     assertContains(fields, BoxA(a6))}
@@ -77,14 +77,14 @@ fun `call on primitive`() {
 }
 
 @Test
-fun `call on value over primitive class`() {
+fun `call on konstue over primitive class`() {
     assertEquals(BoxInt(1).collectReferenceFieldValues(), emptyList<Any>())
     assertEquals(BoxBoxInt(BoxInt(1)).collectReferenceFieldValues(), emptyList<Any>())
 }
 
 @Test
-fun `call on value class`() {
-    val a1 = A(1)
+fun `call on konstue class`() {
+    konst a1 = A(1)
     assertEquals(BoxA(a1).collectReferenceFieldValues(), listOf(a1))
     assertEquals(BoxBoxA(BoxA(a1)).collectReferenceFieldValues(), listOf(a1))
 }

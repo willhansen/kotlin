@@ -34,7 +34,7 @@ class FirAssignmentPluginAssignAltererExtension(
     }
 
     private fun FirVariableAssignment.supportsTransformVariableAssignment(): Boolean {
-        return when (val lSymbol = calleeReference?.toResolvedVariableSymbol()) {
+        return when (konst lSymbol = calleeReference?.toResolvedVariableSymbol()) {
             is FirPropertySymbol -> lSymbol.isVal && !lSymbol.isLocal && lSymbol.hasSpecialAnnotation()
             is FirBackingFieldSymbol -> lSymbol.isVal && lSymbol.hasSpecialAnnotation()
             is FirFieldSymbol -> lSymbol.isVal && lSymbol.hasSpecialAnnotation()
@@ -46,10 +46,10 @@ class FirAssignmentPluginAssignAltererExtension(
         session.annotationMatchingService.isAnnotated(resolvedReturnType.upperBoundIfFlexible().toRegularClassSymbol(session))
 
     private fun buildFunctionCall(variableAssignment: FirVariableAssignment): FirFunctionCall {
-        val leftArgument = variableAssignment.calleeReference!!
-        val leftSymbol = leftArgument.toResolvedVariableSymbol()!!
-        val leftResolvedType = leftSymbol.resolvedReturnTypeRef
-        val rightArgument = variableAssignment.rValue
+        konst leftArgument = variableAssignment.calleeReference!!
+        konst leftSymbol = leftArgument.toResolvedVariableSymbol()!!
+        konst leftResolvedType = leftSymbol.resolvedReturnTypeRef
+        konst rightArgument = variableAssignment.rValue
         return buildFunctionCall {
             source = variableAssignment.source?.fakeElement(KtFakeSourceElementKind.DesugaredCompoundAssignment)
             explicitReceiver = buildPropertyAccessExpression {

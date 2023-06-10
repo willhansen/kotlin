@@ -3,7 +3,7 @@
 class MyObject
 
 // Test infrastructure can move declarations to a package. So we need a prefix for class names in exception messages:
-val p = MyObject::class.qualifiedName!!.removeSuffix("MyObject")
+konst p = MyObject::class.qualifiedName!!.removeSuffix("MyObject")
 
 fun box(): String {
     try {

@@ -13,24 +13,24 @@ import org.jetbrains.kotlin.tooling.core.mutableExtrasOf
 import java.io.File
 
 interface KpmTestEntity {
-    val name: String
+    konst name: String
 }
 
 class KpmTestCase(
-    override val name: String,
+    override konst name: String,
 ) : KpmTestEntity {
-    val projects: ObservableIndexedCollection<TestKpmModuleContainer> = ObservableIndexedCollection()
-    val extras: MutableExtras = mutableExtrasOf()
+    konst projects: ObservableIndexedCollection<TestKpmModuleContainer> = ObservableIndexedCollection()
+    konst extras: MutableExtras = mutableExtrasOf()
 
     override fun toString(): String = "Case $name"
 }
 
 class TestKpmModuleContainer(
-    val containingCase: KpmTestCase,
-    override val name: String,
+    konst containingCase: KpmTestCase,
+    override konst name: String,
 ) : KpmTestEntity {
-    val modules: ObservableIndexedCollection<TestKpmModule> = ObservableIndexedCollection()
-    val extras: MutableExtras = mutableExtrasOf()
+    konst modules: ObservableIndexedCollection<TestKpmModule> = ObservableIndexedCollection()
+    konst extras: MutableExtras = mutableExtrasOf()
 
     fun applyDefaults() {
         module("main")
@@ -40,14 +40,14 @@ class TestKpmModuleContainer(
 }
 
 class TestKpmModule(
-    val containingProject: TestKpmModuleContainer,
-    override val moduleIdentifier: KpmModuleIdentifier,
+    konst containingProject: TestKpmModuleContainer,
+    override konst moduleIdentifier: KpmModuleIdentifier,
 ) : KpmTestEntity, KpmModule {
-    override val fragments: ObservableIndexedCollection<TestKpmFragment> = ObservableIndexedCollection()
-    override val plugins: MutableSet<KpmCompilerPlugin> = mutableSetOf()
-    val extras: MutableExtras = mutableExtrasOf()
+    override konst fragments: ObservableIndexedCollection<TestKpmFragment> = ObservableIndexedCollection()
+    override konst plugins: MutableSet<KpmCompilerPlugin> = mutableSetOf()
+    konst extras: MutableExtras = mutableExtrasOf()
 
-    override val name: String
+    override konst name: String
         get() = moduleIdentifier.moduleClassifier ?: "main"
 
     fun applyDefaults() {
@@ -56,15 +56,15 @@ class TestKpmModule(
 }
 
 open class TestKpmFragment(
-    override val containingModule: TestKpmModule,
-    override val fragmentName: String,
+    override konst containingModule: TestKpmModule,
+    override konst fragmentName: String,
 ) : KpmTestEntity, KpmFragment {
     override var languageSettings: LanguageSettings? = null
-    val extras: MutableExtras = mutableExtrasOf()
-    override val kotlinSourceRoots: MutableList<File> = mutableListOf()
-    override val declaredModuleDependencies: MutableList<KpmModuleDependency> = mutableListOf()
-    override val declaredRefinesDependencies: MutableList<TestKpmFragment> = mutableListOf()
-    override val name: String get() = fragmentName
+    konst extras: MutableExtras = mutableExtrasOf()
+    override konst kotlinSourceRoots: MutableList<File> = mutableListOf()
+    override konst declaredModuleDependencies: MutableList<KpmModuleDependency> = mutableListOf()
+    override konst declaredRefinesDependencies: MutableList<TestKpmFragment> = mutableListOf()
+    override konst name: String get() = fragmentName
 
     fun applyDefaults() {
         refines(containingModule.common)
@@ -75,5 +75,5 @@ class TestKpmVariant(
     containingModule: TestKpmModule,
     fragmentName: String,
 ) : TestKpmFragment(containingModule, fragmentName), KpmTestEntity, KpmVariant {
-    override val variantAttributes: MutableMap<KotlinAttributeKey, String> = mutableMapOf()
+    override konst variantAttributes: MutableMap<KotlinAttributeKey, String> = mutableMapOf()
 }

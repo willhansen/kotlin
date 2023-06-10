@@ -28,8 +28,8 @@ object DecompiledPsiDeclarationProvider {
         constructorSymbol: KtConstructorSymbol,
         project: Project
     ): PsiElement? {
-        val classId = constructorSymbol.containingClassIdIfNonLocal ?: return null
-        val psiClass = project.createPsiDeclarationProvider(constructorSymbol.scope(project))
+        konst classId = constructorSymbol.containingClassIdIfNonLocal ?: return null
+        konst psiClass = project.createPsiDeclarationProvider(constructorSymbol.scope(project))
             ?.getClassesByClassId(classId)
             ?.firstOrNull() ?: return null
         return psiClass.constructors.find { psiMethod ->
@@ -42,7 +42,7 @@ object DecompiledPsiDeclarationProvider {
         project: Project
     ): PsiElement? {
         return functionLikeSymbol.callableIdIfNonLocal?.let {
-            val candidates = project.createPsiDeclarationProvider(functionLikeSymbol.scope(project))
+            konst candidates = project.createPsiDeclarationProvider(functionLikeSymbol.scope(project))
                 ?.getFunctions(it)
             if (candidates?.size == 1)
                 candidates.single()
@@ -80,8 +80,8 @@ object DecompiledPsiDeclarationProvider {
         enumEntrySymbol: KtEnumEntrySymbol,
         project: Project
     ): PsiElement? {
-        val classId = enumEntrySymbol.containingEnumClassIdIfNonLocal ?: return null
-        val psiClass = project.createPsiDeclarationProvider(enumEntrySymbol.scope(project))
+        konst classId = enumEntrySymbol.containingEnumClassIdIfNonLocal ?: return null
+        konst psiClass = project.createPsiDeclarationProvider(enumEntrySymbol.scope(project))
             ?.getClassesByClassId(classId)
             ?.firstOrNull() ?: return null
         return psiClass.fields.find {

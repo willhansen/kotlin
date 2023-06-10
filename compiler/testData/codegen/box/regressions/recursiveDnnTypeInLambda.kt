@@ -1,7 +1,7 @@
 fun <T : In<T & Any>?> foo(
-    value: T,
+    konstue: T,
     range: CR<T & Any>
-) = value?.run { toString() } ?: "fail"
+) = konstue?.run { toString() } ?: "fail"
 
 interface In<T>
 interface CR<D>

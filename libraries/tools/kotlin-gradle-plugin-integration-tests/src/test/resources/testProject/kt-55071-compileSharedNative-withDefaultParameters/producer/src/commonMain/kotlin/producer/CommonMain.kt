@@ -1,5 +1,5 @@
 package producer
 
 expect class Producer constructor() {
-    fun foo(value: String, optionalParameter: Boolean = false)
+    fun foo(konstue: String, optionalParameter: Boolean = false)
 }

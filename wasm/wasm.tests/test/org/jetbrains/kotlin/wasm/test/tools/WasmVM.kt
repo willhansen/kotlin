@@ -11,11 +11,11 @@ import java.io.InputStreamReader
 import java.lang.Boolean.getBoolean
 import kotlin.test.fail
 
-private val toolLogsEnabled: Boolean = getBoolean("kotlin.js.test.verbose")
+private konst toolLogsEnabled: Boolean = getBoolean("kotlin.js.test.verbose")
 
-internal sealed class WasmVM(val shortName: String) {
-    val name: String = javaClass.simpleName
-    protected val tool = ExternalTool(System.getProperty("javascript.engine.path.$name"))
+internal sealed class WasmVM(konst shortName: String) {
+    konst name: String = javaClass.simpleName
+    protected konst tool = ExternalTool(System.getProperty("javascript.engine.path.$name"))
 
     abstract fun run(entryMjs: String, jsFiles: List<String>, workingDirectory: File?)
 
@@ -45,19 +45,19 @@ internal sealed class WasmVM(val shortName: String) {
     }
 }
 
-internal class ExternalTool(val path: String) {
+internal class ExternalTool(konst path: String) {
     fun run(vararg arguments: String, workingDirectory: File? = null) {
-        val command = arrayOf(path, *arguments)
-        val processBuilder = ProcessBuilder(*command).redirectErrorStream(true)
+        konst command = arrayOf(path, *arguments)
+        konst processBuilder = ProcessBuilder(*command).redirectErrorStream(true)
 
         if (workingDirectory != null) {
             processBuilder.directory(workingDirectory)
         }
 
-        val process = processBuilder.start()
+        konst process = processBuilder.start()
 
 
-        val commandString = command.joinToString(" ") { escapeShellArgument(it) }
+        konst commandString = command.joinToString(" ") { escapeShellArgument(it) }
         if (toolLogsEnabled) {
             println(
                 if (workingDirectory != null) {
@@ -69,10 +69,10 @@ internal class ExternalTool(val path: String) {
         }
 
         // Print process output
-        val input = BufferedReader(InputStreamReader(process.inputStream))
+        konst input = BufferedReader(InputStreamReader(process.inputStream))
         while (true) println(input.readLine() ?: break)
 
-        val exitValue = process.waitFor()
+        konst exitValue = process.waitFor()
         if (exitValue != 0) {
             fail("Command \"$commandString\" terminated with exit code $exitValue")
         }

@@ -9,14 +9,14 @@ fun case1() {
 
 // TESTCASE NUMBER: 2
 fun case2() {
-    val condition: Any = true
+    konst condition: Any = true
     do {
     } while (<!CONDITION_TYPE_MISMATCH!>condition<!>)
 }
 
 // TESTCASE NUMBER: 3
 fun case3() {
-    val condition: Boolean? = true
+    konst condition: Boolean? = true
     do {
     } while (<!CONDITION_TYPE_MISMATCH!>condition<!>)
 }

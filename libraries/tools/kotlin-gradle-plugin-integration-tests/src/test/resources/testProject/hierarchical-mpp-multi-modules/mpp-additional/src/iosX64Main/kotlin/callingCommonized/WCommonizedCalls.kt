@@ -18,16 +18,16 @@ import platform.posix.DBL_MIN
 
 actual class WCommonizedCalls actual constructor(pc: __CLPK_real) {
 
-    val eFunCall: CFTypeID = CFAllocatorGetTypeID() // create actual doesn't work because of this
-    actual val eClass: NSObject = ACAccount()
-    actual val enumInteroped: CEnum = __CFByteOrder.CFByteOrderLittleEndian
+    konst eFunCall: CFTypeID = CFAllocatorGetTypeID() // create actual doesn't work because of this
+    actual konst eClass: NSObject = ACAccount()
+    actual konst enumInteroped: CEnum = __CFByteOrder.CFByteOrderLittleEndian
 
-    val somel = NSLog("")
+    konst somel = NSLog("")
 
-    val dfg = DBL_MIN
+    konst dfg = DBL_MIN
 
-    val device get() = platform.UIKit.UIDevice.currentDevice
+    konst device get() = platform.UIKit.UIDevice.currentDevice
 
-    val eVal: CBLAS_TRANSPOSE = AtlasConj
+    konst eVal: CBLAS_TRANSPOSE = AtlasConj
 
 }

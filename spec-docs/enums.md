@@ -21,7 +21,7 @@ enum class Foo {
 
 Enum with constructor:
 ``` kotlin
-enum class Foo(val s: String) {
+enum class Foo(konst s: String) {
     A("a")
     B("b")
     C("c") {
@@ -45,7 +45,7 @@ Issues
 Example for option 1.4:
 
 ``` kotlin
-enum class Foo(val s: String) {
+enum class Foo(konst s: String) {
     A("a"), // semicolon CAN NOT be used here!
     B("b"), // comma is MANDATORY after each enum constant except the last one
     C("c") {

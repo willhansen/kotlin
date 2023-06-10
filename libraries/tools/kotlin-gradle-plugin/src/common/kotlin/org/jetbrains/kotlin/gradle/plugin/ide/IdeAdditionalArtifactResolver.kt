@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.gradle.plugin.ide.IdeDependencyResolver.Companion.SO
  * Resolver for attaching additional artifacts to already resolved dependencies.
  * #### Example
  * ```
- * val sourcesJarResolver = IdeAdditionalArtifactResolver { sourceSet, dependencies ->
+ * konst sourcesJarResolver = IdeAdditionalArtifactResolver { sourceSet, dependencies ->
  *     dependencies.forEach { dependency ->
  *         dependency.sourcesClasspath.add(findMySourcesJarFile(dependency))
  *     }
@@ -50,7 +50,7 @@ fun interface IdeAdditionalArtifactResolver {
         /**
          * Empty [IdeAdditionalArtifactResolver] that will not resolve any artifact (noop)
          */
-        val empty = IdeAdditionalArtifactResolver { _, _ -> }
+        konst empty = IdeAdditionalArtifactResolver { _, _ -> }
     }
 }
 
@@ -77,7 +77,7 @@ internal fun IdeAdditionalArtifactResolver(resolver: IdeDependencyResolver) = Id
     Group already resolved dependencies by their coordinates (ignoring sourceSetName, since -sources.jar are not published
     on a "per source set" level.)
      */
-    val dependenciesByCoordinates = dependencies.filterIsInstance<IdeaKotlinResolvedBinaryDependency>()
+    konst dependenciesByCoordinates = dependencies.filterIsInstance<IdeaKotlinResolvedBinaryDependency>()
         .filter { it.binaryType == IdeaKotlinBinaryDependency.KOTLIN_COMPILE_BINARY_TYPE }
         .groupBy { it.coordinates?.copy(sourceSetName = null) }
 
@@ -91,7 +91,7 @@ internal fun IdeAdditionalArtifactResolver(resolver: IdeDependencyResolver) = Id
             /* Find dependencies that match by coordinates and add the artifacts */
             dependenciesByCoordinates[sourceOrDocumentationDependency.coordinates ?: return@forEachSourceOrDocumentationDependency]
                 .orEmpty().forEach forEachMatchedDependency@{ dependency ->
-                    val classpath = when (sourceOrDocumentationDependency.binaryType) {
+                    konst classpath = when (sourceOrDocumentationDependency.binaryType) {
                         SOURCES_BINARY_TYPE -> dependency.sourcesClasspath
                         DOCUMENTATION_BINARY_TYPE -> dependency.documentationClasspath
                         else -> return@forEachMatchedDependency

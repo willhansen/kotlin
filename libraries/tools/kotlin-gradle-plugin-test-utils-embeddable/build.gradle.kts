@@ -9,7 +9,7 @@ plugins {
     `java-library`
 }
 
-val projectsToInclude = listOf(
+konst projectsToInclude = listOf(
     ":compiler:test-infrastructure-utils",
     ":compiler:tests-common",
     ":compiler:incremental-compilation-impl",

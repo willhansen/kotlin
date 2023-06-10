@@ -21,6 +21,6 @@ class G<T> where T: U, T: W {
 }
 
 fun test() {
-    val g = sel(G<A>(), G<B>())
+    konst g = sel(G<A>(), G<B>())
     g.check {} // TODO: report a compile time error for this case
 }

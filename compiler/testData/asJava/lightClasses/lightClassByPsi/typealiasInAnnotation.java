@@ -1,7 +1,7 @@
 public abstract interface A /* A*/ {
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 public abstract @interface Ann /* Ann*/ {
   public abstract java.lang.Class<?>[] kClass();//  kClass()
 }

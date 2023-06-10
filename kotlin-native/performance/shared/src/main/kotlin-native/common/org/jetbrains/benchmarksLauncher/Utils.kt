@@ -22,7 +22,7 @@ import platform.posix.*
 import kotlinx.cinterop.*
 
 actual fun writeToFile(fileName: String, text: String) {
-    val file = fopen(fileName, "wt") ?: error("Cannot write file '$fileName'")
+    konst file = fopen(fileName, "wt") ?: error("Cannot write file '$fileName'")
     try {
         if (fputs(text, file) == EOF) throw Error("File write error")
     } finally {
@@ -31,8 +31,8 @@ actual fun writeToFile(fileName: String, text: String) {
 }
 
 // Wrapper for assert funtion in stdlib
-actual fun assert(value: Boolean) {
-    kotlin.assert(value)
+actual fun assert(konstue: Boolean) {
+    kotlin.assert(konstue)
 }
 
 // Wrapper for measureNanoTime funtion in stdlib
@@ -46,7 +46,7 @@ actual fun cleanup() {
 }
 
 actual fun printStderr(message: String) {
-    val STDERR = fdopen(2, "w")
+    konst STDERR = fdopen(2, "w")
     fprintf(STDERR, message)
     fflush(STDERR)
 }
@@ -57,8 +57,8 @@ actual class Blackhole {
     @kotlin.native.ThreadLocal
     actual companion object {
         actual var consumer = 0
-        actual fun consume(value: Any) {
-            consumer += value.hashCode()
+        actual fun consume(konstue: Any) {
+            consumer += konstue.hashCode()
         }
     }
 }

@@ -3,24 +3,24 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt<T: Int>(val value: T)
+konstue class UInt<T: Int>(konst konstue: T)
 
 fun <T> takeVarargs(vararg e: T): T {
     return e[e.size - 1]
 }
 
 fun <T: Int> test(u1: UInt<T>, u2: UInt<T>, u3: UInt<T>?): Int {
-    val a = takeVarargs(u1, u2)
-    val b = takeVarargs(u3) ?: UInt(-1)
-    val c = takeVarargs(u1, u3) ?: UInt(-1)
+    konst a = takeVarargs(u1, u2)
+    konst b = takeVarargs(u3) ?: UInt(-1)
+    konst c = takeVarargs(u1, u3) ?: UInt(-1)
 
-    return a.value + b.value + c.value
+    return a.konstue + b.konstue + c.konstue
 }
 
 fun box(): String {
-    val u1 = UInt(0)
-    val u2 = UInt(1)
-    val u3 = UInt(2)
+    konst u1 = UInt(0)
+    konst u2 = UInt(1)
+    konst u3 = UInt(2)
     if (test(u1, u2, u3) != 1 + 2 + 2) return "fail"
 
     return "OK"

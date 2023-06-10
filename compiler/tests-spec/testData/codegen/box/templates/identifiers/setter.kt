@@ -18,7 +18,7 @@ var x3: String = "102"
     }
 
 fun box(): String? {
-    val a = A()
+    konst a = A()
     a.x1 = "0"
     B.x2 = "1"
     x3 = "2"

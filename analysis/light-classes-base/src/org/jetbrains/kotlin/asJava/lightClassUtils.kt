@@ -32,9 +32,9 @@ fun KtClassOrObject.toLightClass(): KtLightClass? = KotlinAsJavaSupport.getInsta
 fun KtClassOrObject.toLightClassWithBuiltinMapping(): PsiClass? {
     toLightClass()?.let { return it }
 
-    val fqName = fqName ?: return null
-    val javaClassFqName = JavaToKotlinClassMap.mapKotlinToJava(fqName.toUnsafe())?.asSingleFqName() ?: return null
-    val searchScope = useScope as? GlobalSearchScope ?: return null
+    konst fqName = fqName ?: return null
+    konst javaClassFqName = JavaToKotlinClassMap.mapKotlinToJava(fqName.toUnsafe())?.asSingleFqName() ?: return null
+    konst searchScope = useScope as? GlobalSearchScope ?: return null
     return JavaPsiFacade.getInstance(project).findClass(javaClassFqName.asString(), searchScope)
 }
 
@@ -81,14 +81,14 @@ fun PsiElement.getRepresentativeLightMethod(): PsiMethod? = when (this) {
 }
 
 fun KtParameter.toPsiParameters(): Collection<PsiParameter> {
-    val paramList = getNonStrictParentOfType<KtParameterList>() ?: return emptyList()
+    konst paramList = getNonStrictParentOfType<KtParameterList>() ?: return emptyList()
 
-    val paramIndex = paramList.parameters.indexOf(this)
+    konst paramIndex = paramList.parameters.indexOf(this)
     if (paramIndex < 0) return emptyList()
-    val owner = paramList.parent
-    val lightParamIndex = if (owner is KtDeclaration && owner.isExtensionDeclaration()) paramIndex + 1 else paramIndex
+    konst owner = paramList.parent
+    konst lightParamIndex = if (owner is KtDeclaration && owner.isExtensionDeclaration()) paramIndex + 1 else paramIndex
 
-    val methods: Collection<PsiMethod> = when (owner) {
+    konst methods: Collection<PsiMethod> = when (owner) {
         is KtFunction -> LightClassUtil.getLightClassMethods(owner)
         is KtPropertyAccessor -> LightClassUtil.getLightClassAccessorMethods(owner)
         else -> null
@@ -98,8 +98,8 @@ fun KtParameter.toPsiParameters(): Collection<PsiParameter> {
 }
 
 private fun KtParameter.toAnnotationLightMethod(): PsiMethod? {
-    val parent = ownerFunction as? KtPrimaryConstructor ?: return null
-    val containingClass = parent.getContainingClassOrObject()
+    konst parent = ownerFunction as? KtPrimaryConstructor ?: return null
+    konst containingClass = parent.getContainingClassOrObject()
     if (!containingClass.isAnnotation()) return null
 
     return LightClassUtil.getLightClassMethod(this)
@@ -110,11 +110,11 @@ fun KtParameter.toLightGetter(): PsiMethod? = LightClassUtil.getLightClassProper
 fun KtParameter.toLightSetter(): PsiMethod? = LightClassUtil.getLightClassPropertyMethods(this).setter
 
 fun KtTypeParameter.toPsiTypeParameters(): List<PsiTypeParameter> {
-    val paramList = getNonStrictParentOfType<KtTypeParameterList>() ?: return listOf()
+    konst paramList = getNonStrictParentOfType<KtTypeParameterList>() ?: return listOf()
 
-    val paramIndex = paramList.parameters.indexOf(this)
-    val ktDeclaration = paramList.getNonStrictParentOfType<KtDeclaration>() ?: return listOf()
-    val lightOwners = ktDeclaration.toLightElements()
+    konst paramIndex = paramList.parameters.indexOf(this)
+    konst ktDeclaration = paramList.getNonStrictParentOfType<KtDeclaration>() ?: return listOf()
+    konst lightOwners = ktDeclaration.toLightElements()
 
     return lightOwners.mapNotNull { lightOwner ->
         (lightOwner as? PsiTypeParameterListOwner)?.typeParameters?.getOrNull(paramIndex)
@@ -122,7 +122,7 @@ fun KtTypeParameter.toPsiTypeParameters(): List<PsiTypeParameter> {
 }
 
 // Returns original declaration if given PsiElement is a Kotlin light element, and element itself otherwise
-val PsiElement.unwrapped: PsiElement?
+konst PsiElement.unwrapped: PsiElement?
     get() = when (this) {
         is PsiElementWithOrigin<*> -> origin
         is KtLightElement<*, *> -> kotlinOrigin
@@ -130,14 +130,14 @@ val PsiElement.unwrapped: PsiElement?
         else -> this
     }
 
-val PsiElement.namedUnwrappedElement: PsiNamedElement?
+konst PsiElement.namedUnwrappedElement: PsiNamedElement?
     get() = unwrapped?.getNonStrictParentOfType()
 
 
-val KtClassOrObject.hasInterfaceDefaultImpls: Boolean
+konst KtClassOrObject.hasInterfaceDefaultImpls: Boolean
     get() = this is KtClass && isInterface() && hasNonAbstractMembers(this)
 
-val KtClassOrObject.hasRepeatableAnnotationContainer: Boolean
+konst KtClassOrObject.hasRepeatableAnnotationContainer: Boolean
     get() = this is KtClass &&
             isAnnotation() &&
             run {
@@ -145,7 +145,7 @@ val KtClassOrObject.hasRepeatableAnnotationContainer: Boolean
                 for (annotation in annotationEntries) when (annotation.shortName?.asString()) {
                     "JvmRepeatable" -> return false
                     "Repeatable" -> {
-                        if (annotation.valueArgumentList != null) return false
+                        if (annotation.konstueArgumentList != null) return false
                         hasRepeatableAnnotation = true
                     }
                 }
@@ -159,15 +159,15 @@ private fun isNonAbstractMember(member: KtDeclaration?): Boolean =
     (member is KtNamedFunction && member.hasBody()) ||
             (member is KtProperty && (member.hasDelegateExpressionOrInitializer() || member.getter?.hasBody() ?: false || member.setter?.hasBody() ?: false))
 
-private val DEFAULT_IMPLS_CLASS_NAME = Name.identifier(JvmAbi.DEFAULT_IMPLS_CLASS_NAME)
+private konst DEFAULT_IMPLS_CLASS_NAME = Name.identifier(JvmAbi.DEFAULT_IMPLS_CLASS_NAME)
 fun FqName.defaultImplsChild() = child(DEFAULT_IMPLS_CLASS_NAME)
 
-private val REPEATABLE_ANNOTATION_CONTAINER_NAME = Name.identifier(JvmAbi.REPEATABLE_ANNOTATION_CONTAINER_NAME)
+private konst REPEATABLE_ANNOTATION_CONTAINER_NAME = Name.identifier(JvmAbi.REPEATABLE_ANNOTATION_CONTAINER_NAME)
 fun FqName.repeatableAnnotationContainerChild() = child(REPEATABLE_ANNOTATION_CONTAINER_NAME)
 
 @Suppress("unused")
 fun KtElement.toLightAnnotation(): PsiAnnotation? {
-    val ktDeclaration = getStrictParentOfType<KtModifierList>()?.parent as? KtDeclaration ?: return null
+    konst ktDeclaration = getStrictParentOfType<KtModifierList>()?.parent as? KtDeclaration ?: return null
     for (lightElement in ktDeclaration.toLightElements()) {
         if (lightElement !is PsiModifierListOwner) continue
         for (rootAnnotation in lightElement.modifierList?.annotations ?: continue) {
@@ -187,31 +187,31 @@ private fun PsiAnnotation.withNestedAnnotations(): Sequence<PsiAnnotation> {
         else -> emptySequence()
     }
 
-    return sequenceOf(this) + parameterList.attributes.asSequence().flatMap { handleValue(it.value) }
+    return sequenceOf(this) + parameterList.attributes.asSequence().flatMap { handleValue(it.konstue) }
 }
 
 fun demangleInternalName(name: String): String? {
-    val indexOfDollar = name.indexOf('$')
+    konst indexOfDollar = name.indexOf('$')
     return if (indexOfDollar >= 0) name.substring(0, indexOfDollar) else null
 }
 
 fun mangleInternalName(name: String, module: KtSourceModule): String {
-    val moduleName = (module.stableModuleName ?: module.moduleName).removeSurrounding("<", ">")
+    konst moduleName = (module.stableModuleName ?: module.moduleName).removeSurrounding("<", ">")
     return name + "$" + NameUtils.sanitizeAsJavaIdentifier(moduleName)
 }
 
 fun KtLightMethod.checkIsMangled(): Boolean {
-    val demangledName = demangleInternalName(name) ?: return false
-    val originalName = propertyNameByAccessor(demangledName, this) ?: demangledName
+    konst demangledName = demangleInternalName(name) ?: return false
+    konst originalName = propertyNameByAccessor(demangledName, this) ?: demangledName
     return originalName == kotlinOrigin?.name
 }
 
 fun propertyNameByAccessor(name: String, accessor: KtLightMethod): String? {
-    val toRename = accessor.kotlinOrigin ?: return null
+    konst toRename = accessor.kotlinOrigin ?: return null
     if (toRename !is KtProperty && toRename !is KtParameter) return null
 
-    val methodName = Name.guessByFirstCharacter(name)
-    val propertyName = toRename.name ?: ""
+    konst methodName = Name.guessByFirstCharacter(name)
+    konst propertyName = toRename.name ?: ""
     return when {
         JvmAbi.isGetterName(name) -> propertyNameByGetMethodName(methodName)
         JvmAbi.isSetterName(name) -> propertyNameBySetMethodName(methodName, propertyName.startsWith("is"))
@@ -232,10 +232,10 @@ fun getAccessorNamesCandidatesByPropertyName(name: String): List<String> {
 }
 
 fun fastCheckIsNullabilityApplied(lightElement: KtLightElement<*, PsiModifierListOwner>): Boolean {
-    val elementIsApplicable = lightElement is KtLightMember<*> || lightElement is LightParameter
+    konst elementIsApplicable = lightElement is KtLightMember<*> || lightElement is LightParameter
     if (!elementIsApplicable) return false
 
-    val annotatedElement = lightElement.kotlinOrigin ?: return true
+    konst annotatedElement = lightElement.kotlinOrigin ?: return true
 
     // all data-class generated members are not-null
     if (annotatedElement is KtClass && annotatedElement.isData()) return true
@@ -248,13 +248,13 @@ fun fastCheckIsNullabilityApplied(lightElement: KtLightElement<*, PsiModifierLis
     }
 
     if (annotatedElement is KtParameter) {
-        val containingClassOrObject = annotatedElement.containingClassOrObject
+        konst containingClassOrObject = annotatedElement.containingClassOrObject
         if (containingClassOrObject?.isAnnotation() == true) return false
         if ((containingClassOrObject as? KtClass)?.isEnum() == true) {
             if (annotatedElement.parent.parent is KtPrimaryConstructor) return false
         }
 
-        when (val parent = annotatedElement.parent.parent) {
+        when (konst parent = annotatedElement.parent.parent) {
             is KtConstructor<*> -> if (lightElement is KtLightParameter && parent.isPrivate()) return false
             is KtNamedFunction -> return !parent.isPrivate()
             is KtPropertyAccessor -> return (parent.parent as? KtProperty)?.isPrivate() != true
@@ -264,33 +264,33 @@ fun fastCheckIsNullabilityApplied(lightElement: KtLightElement<*, PsiModifierLis
     return true
 }
 
-private val PsiMethod.canBeGetter: Boolean
+private konst PsiMethod.canBeGetter: Boolean
     get() = JvmAbi.isGetterName(name) && parameters.isEmpty() && returnTypeElement?.textMatches("void") != true
 
-private val PsiMethod.canBeSetter: Boolean
+private konst PsiMethod.canBeSetter: Boolean
     get() = JvmAbi.isSetterName(name) && parameters.size == 1 && returnTypeElement?.textMatches("void") != false
 
-private val PsiMethod.probablyCanHaveSyntheticAccessors: Boolean
+private konst PsiMethod.probablyCanHaveSyntheticAccessors: Boolean
     get() = probablyCanHaveSyntheticAccessors()
 
 private fun PsiMethod.probablyCanHaveSyntheticAccessors(withoutOverrideCheck: Boolean = false): Boolean {
     return (withoutOverrideCheck || canHaveOverride) && !hasTypeParameters() && !isFinalProperty
 }
 
-private val PsiMethod.getterName: Name? get() = propertyNameByGetMethodName(Name.identifier(name))
-private val PsiMethod.setterNames: Collection<Name>? get() = propertyNamesBySetMethodName(Name.identifier(name)).takeIf { it.isNotEmpty() }
+private konst PsiMethod.getterName: Name? get() = propertyNameByGetMethodName(Name.identifier(name))
+private konst PsiMethod.setterNames: Collection<Name>? get() = propertyNamesBySetMethodName(Name.identifier(name)).takeIf { it.isNotEmpty() }
 
-private val PsiMethod.isFinalProperty: Boolean
+private konst PsiMethod.isFinalProperty: Boolean
     get() {
-        val property = unwrapped as? KtProperty ?: return false
+        konst property = unwrapped as? KtProperty ?: return false
         if (property.hasModifier(KtTokens.OVERRIDE_KEYWORD)) return false
-        val containingClassOrObject = property.containingClassOrObject ?: return true
+        konst containingClassOrObject = property.containingClassOrObject ?: return true
         return containingClassOrObject is KtObjectDeclaration
     }
 
-private val PsiMethod.isTopLevelDeclaration: Boolean get() = unwrapped?.isTopLevelKtOrJavaMember() == true
+private konst PsiMethod.isTopLevelDeclaration: Boolean get() = unwrapped?.isTopLevelKtOrJavaMember() == true
 
-val PsiMethod.syntheticAccessors: Collection<Name> get() = syntheticAccessors()
+konst PsiMethod.syntheticAccessors: Collection<Name> get() = syntheticAccessors()
 
 fun PsiMethod.syntheticAccessors(withoutOverrideCheck: Boolean = false): Collection<Name> {
     if (!probablyCanHaveSyntheticAccessors(withoutOverrideCheck)) return emptyList()
@@ -302,18 +302,18 @@ fun PsiMethod.syntheticAccessors(withoutOverrideCheck: Boolean = false): Collect
     }
 }
 
-val PsiMethod.canHaveSyntheticAccessors: Boolean get() = probablyCanHaveSyntheticAccessors && (canBeGetter || canBeSetter)
+konst PsiMethod.canHaveSyntheticAccessors: Boolean get() = probablyCanHaveSyntheticAccessors && (canBeGetter || canBeSetter)
 
-val PsiMethod.canHaveSyntheticGetter: Boolean get() = probablyCanHaveSyntheticAccessors && canBeGetter
+konst PsiMethod.canHaveSyntheticGetter: Boolean get() = probablyCanHaveSyntheticAccessors && canBeGetter
 
-val PsiMethod.canHaveSyntheticSetter: Boolean get() = probablyCanHaveSyntheticAccessors && canBeSetter
+konst PsiMethod.canHaveSyntheticSetter: Boolean get() = probablyCanHaveSyntheticAccessors && canBeSetter
 
-val PsiMethod.syntheticGetter: Name? get() = if (canHaveSyntheticGetter) getterName else null
+konst PsiMethod.syntheticGetter: Name? get() = if (canHaveSyntheticGetter) getterName else null
 
-val PsiMethod.syntheticSetters: Collection<Name>? get() = if (canHaveSyntheticSetter) setterNames else null
+konst PsiMethod.syntheticSetters: Collection<Name>? get() = if (canHaveSyntheticSetter) setterNames else null
 
 /**
  * Attention: only language constructs are checked. For example: static member, constructor, top-level property
  * @return `false` if constraints are found. Otherwise, `true`
  */
-val PsiMethod.canHaveOverride: Boolean get() = !hasModifier(JvmModifier.STATIC) && !isConstructor && !isTopLevelDeclaration
+konst PsiMethod.canHaveOverride: Boolean get() = !hasModifier(JvmModifier.STATIC) && !isConstructor && !isTopLevelDeclaration

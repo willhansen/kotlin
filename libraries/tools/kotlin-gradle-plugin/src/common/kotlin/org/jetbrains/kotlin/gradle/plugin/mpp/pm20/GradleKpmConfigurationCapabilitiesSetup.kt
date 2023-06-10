@@ -32,22 +32,22 @@ fun CapabilitiesContainer(configuration: ConfigurationPublications): Capabilitie
     CapabilitiesContainerImpl(configuration)
 
 private class CapabilitiesContainerImpl(
-    private val publications: ConfigurationPublications
+    private konst publications: ConfigurationPublications
 ) : CapabilitiesContainer {
     override fun capability(notation: Any) = publications.capability(notation)
 }
 
 class GradleKpmConfigurationCapabilitiesSetupContext<T : GradleKpmFragment> internal constructor(
-    internal val container: CapabilitiesContainer, val fragment: T
+    internal konst container: CapabilitiesContainer, konst fragment: T
 ) : CapabilitiesContainer by container {
-    val project: Project get() = fragment.project
+    konst project: Project get() = fragment.project
 }
 
 fun <T : GradleKpmFragment> GradleKpmConfigurationCapabilitiesSetup(
     setCapabilities: GradleKpmConfigurationCapabilitiesSetupContext<T>.() -> Unit
 ): GradleKpmConfigurationCapabilitiesSetup<T> = object : GradleKpmConfigurationCapabilitiesSetup<T> {
     override fun setCapabilities(container: CapabilitiesContainer, fragment: T) {
-        val context = GradleKpmConfigurationCapabilitiesSetupContext(container, fragment)
+        konst context = GradleKpmConfigurationCapabilitiesSetupContext(container, fragment)
         context.setCapabilities()
     }
 }
@@ -73,7 +73,7 @@ operator fun <T : GradleKpmFragment> GradleKpmConfigurationCapabilitiesSetup<T>.
     return CompositeKpmCapabilitiesSetup(listOf(this, other))
 }
 
-internal class CompositeKpmCapabilitiesSetup<in T : GradleKpmFragment>(val children: List<GradleKpmConfigurationCapabilitiesSetup<T>>) :
+internal class CompositeKpmCapabilitiesSetup<in T : GradleKpmFragment>(konst children: List<GradleKpmConfigurationCapabilitiesSetup<T>>) :
     GradleKpmConfigurationCapabilitiesSetup<T> {
     override fun setCapabilities(container: CapabilitiesContainer, fragment: T) {
         children.forEach { child -> child.setCapabilities(container, fragment) }

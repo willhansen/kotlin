@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.ir.symbols.IrEnumEntrySymbol
 import org.jetbrains.kotlin.name.Name
 
 class IrEnumEntryImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrEnumEntrySymbol,
+    override konst symbol: IrEnumEntrySymbol,
     override var name: Name,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrEnumEntry() {
     init {
         symbol.bind(this)
@@ -29,7 +29,7 @@ class IrEnumEntryImpl(
     override var annotations: List<IrConstructorCall> = emptyList()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ClassDescriptor
+    override konst descriptor: ClassDescriptor
         get() = symbol.descriptor
 
     override var correspondingClass: IrClass? = null

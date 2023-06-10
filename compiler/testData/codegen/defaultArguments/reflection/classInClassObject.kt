@@ -1,6 +1,6 @@
 class A {
     companion object {
-        class Foo(val a: Int = 1) {}
+        class Foo(konst a: Int = 1) {}
     }
 }
 

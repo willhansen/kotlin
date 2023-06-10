@@ -1,7 +1,7 @@
-val foo = object<T, R> {}
+konst foo = object<T, R> {}
 
-val foo = object<T, R> : Bar {
+konst foo = object<T, R> : Bar {
 
 }
 
-val foo = object(a: Int, b: String)
+konst foo = object(a: Int, b: String)

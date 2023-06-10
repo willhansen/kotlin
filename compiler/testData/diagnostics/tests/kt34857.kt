@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 
-val Int.plusAssign: (Int) -> Unit
+konst Int.plusAssign: (Int) -> Unit
     get() = {}
 
 fun main() {

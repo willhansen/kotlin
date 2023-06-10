@@ -10,14 +10,14 @@ package kotlin.text
 // See: https://github.com/JetBrains/kotlin/tree/master/libraries/stdlib
 //
 
-private val otherLowerStart = intArrayOf(
+private konst otherLowerStart = intArrayOf(
     0x00aa, 0x00ba, 0x02b0, 0x02c0, 0x02e0, 0x0345, 0x037a, 0x1d2c, 0x1d78, 0x1d9b, 0x2071, 0x207f, 0x2090, 0x2170, 0x24d0, 0x2c7c, 0xa69c, 0xa770, 0xa7f8, 0xab5c, 
 )
-private val otherLowerLength = intArrayOf(
+private konst otherLowerLength = intArrayOf(
     1, 1, 9, 2, 5, 1, 1, 63, 1, 37, 1, 1, 13, 16, 26, 2, 2, 1, 2, 4, 
 )
 
 internal fun Int.isOtherLowercase(): Boolean {
-    val index = binarySearchRange(otherLowerStart, this)
+    konst index = binarySearchRange(otherLowerStart, this)
     return index >= 0 && this < otherLowerStart[index] + otherLowerLength[index]
 }

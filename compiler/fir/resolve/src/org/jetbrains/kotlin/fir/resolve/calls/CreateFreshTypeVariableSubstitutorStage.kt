@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.resolve.calls.inference.model.SimpleConstraintSystem
 
 internal object CreateFreshTypeVariableSubstitutorStage : ResolutionStage() {
     override suspend fun check(candidate: Candidate, callInfo: CallInfo, sink: CheckerSink, context: ResolutionContext) {
-        val declaration = candidate.symbol.fir
+        konst declaration = candidate.symbol.fir
         candidate.symbol.lazyResolveToPhase(FirResolvePhase.STATUS)
         if (declaration !is FirTypeParameterRefsOwner || declaration.typeParameters.isEmpty()) {
             candidate.substitutor = ConeSubstitutor.Empty
             candidate.freshVariables = emptyList()
             return
         }
-        val csBuilder = candidate.system.getBuilder()
-        val (substitutor, freshVariables) =
+        konst csBuilder = candidate.system.getBuilder()
+        konst (substitutor, freshVariables) =
             createToFreshVariableSubstitutorAndAddInitialConstraints(declaration, csBuilder, context.session)
         candidate.substitutor = substitutor
         candidate.freshVariables = freshVariables
@@ -47,12 +47,12 @@ internal object CreateFreshTypeVariableSubstitutorStage : ResolutionStage() {
             return
         }
 
-        val typeParameters = declaration.typeParameters
+        konst typeParameters = declaration.typeParameters
         for (index in typeParameters.indices) {
-            val typeParameter = typeParameters[index]
-            val freshVariable = freshVariables[index]
+            konst typeParameter = typeParameters[index]
+            konst freshVariable = freshVariables[index]
 
-//            val knownTypeArgument = knownTypeParametersResultingSubstitutor?.substitute(typeParameter.defaultType)
+//            konst knownTypeArgument = knownTypeParametersResultingSubstitutor?.substitute(typeParameter.defaultType)
 //            if (knownTypeArgument != null) {
 //                csBuilder.addEqualityConstraint(
 //                    freshVariable.defaultType,
@@ -62,7 +62,7 @@ internal object CreateFreshTypeVariableSubstitutorStage : ResolutionStage() {
 //                continue
 //            }
 
-            when (val typeArgument = candidate.typeArgumentMapping[index]) {
+            when (konst typeArgument = candidate.typeArgumentMapping[index]) {
                 is FirTypeProjectionWithVariance -> csBuilder.addEqualityConstraint(
                     freshVariable.defaultType,
                     typeArgument.typeRef.coneType.fullyExpandedType(context.session),
@@ -94,11 +94,11 @@ private fun createToFreshVariableSubstitutorAndAddInitialConstraints(
     session: FirSession
 ): Pair<ConeSubstitutor, List<ConeTypeVariable>> {
 
-    val typeParameters = declaration.typeParameters
+    konst typeParameters = declaration.typeParameters
 
-    val freshTypeVariables = typeParameters.map { ConeTypeParameterBasedTypeVariable(it.symbol) }
+    konst freshTypeVariables = typeParameters.map { ConeTypeParameterBasedTypeVariable(it.symbol) }
 
-    val toFreshVariables = substitutorByMap(freshTypeVariables.associate { it.typeParameterSymbol to it.defaultType }, session)
+    konst toFreshVariables = substitutorByMap(freshTypeVariables.associate { it.typeParameterSymbol to it.defaultType }, session)
 
     for (freshVariable in freshTypeVariables) {
         csBuilder.registerVariable(freshVariable)
@@ -122,10 +122,10 @@ private fun createToFreshVariableSubstitutorAndAddInitialConstraints(
     }
 
     for (index in typeParameters.indices) {
-        val typeParameter = typeParameters[index]
-        val freshVariable = freshTypeVariables[index]
+        konst typeParameter = typeParameters[index]
+        konst freshVariable = freshTypeVariables[index]
 
-        val parameterSymbolFromExpandedClass = typeParameter.symbol.fir.getTypeParameterFromExpandedClass(index, session)
+        konst parameterSymbolFromExpandedClass = typeParameter.symbol.fir.getTypeParameterFromExpandedClass(index, session)
 
         for (upperBound in parameterSymbolFromExpandedClass.symbol.resolvedBounds) {
             freshVariable.addSubtypeConstraint(upperBound.coneType/*, position*/)
@@ -136,16 +136,16 @@ private fun createToFreshVariableSubstitutorAndAddInitialConstraints(
 }
 
 private fun FirTypeParameter.getTypeParameterFromExpandedClass(index: Int, session: FirSession): FirTypeParameter {
-    val containingDeclaration = containingDeclarationSymbol.fir
+    konst containingDeclaration = containingDeclarationSymbol.fir
     if (containingDeclaration is FirRegularClass) {
         return containingDeclaration.typeParameters.elementAtOrNull(index)?.symbol?.fir ?: this
     } else if (containingDeclaration is FirTypeAlias) {
-        val typeParameterConeType = toConeType()
-        val expandedConeType = containingDeclaration.expandedTypeRef.coneType
-        val typeArgumentIndex = expandedConeType.typeArguments.indexOfFirst { it.type == typeParameterConeType }
-        val expandedTypeFir = expandedConeType.toSymbol(session)?.fir
+        konst typeParameterConeType = toConeType()
+        konst expandedConeType = containingDeclaration.expandedTypeRef.coneType
+        konst typeArgumentIndex = expandedConeType.typeArguments.indexOfFirst { it.type == typeParameterConeType }
+        konst expandedTypeFir = expandedConeType.toSymbol(session)?.fir
         if (expandedTypeFir is FirTypeParameterRefsOwner) {
-            val typeParameterFir = expandedTypeFir.typeParameters.elementAtOrNull(typeArgumentIndex)?.symbol?.fir ?: return this
+            konst typeParameterFir = expandedTypeFir.typeParameters.elementAtOrNull(typeArgumentIndex)?.symbol?.fir ?: return this
             if (expandedTypeFir is FirTypeAlias) {
                 return typeParameterFir.getTypeParameterFromExpandedClass(typeArgumentIndex, session)
             }

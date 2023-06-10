@@ -10,10 +10,10 @@
  */
 
 fun box(): String {
-    val a = '\u0000'
-    val c = ' ' //u+0020
-    val cMax = '￿' //u+ffff
-    val aMax = '\uffff'
+    konst a = '\u0000'
+    konst c = ' ' //u+0020
+    konst cMax = '￿' //u+ffff
+    konst aMax = '\uffff'
     if (a.toShort() == 0x0000.toShort()
         && c.toShort() == 0x0020.toShort()
         && cMax.toShort() == 0xffff.toShort()

@@ -9,21 +9,21 @@ fun <T> lazy(f: () -> T): Lazy<T> = throw Exception()
 
 class A {
     private inner class B {
-        val o1 = object : I1 {}
-        val o2 by lazy {
+        konst o1 = object : I1 {}
+        konst o2 by lazy {
             object : I1 {}
         }
-        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>val o3<!> = object : I1, I2 {} // FIR allows this since the containing class is private
-        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>val o4<!> by lazy { // FIR allows this since the containing class is private
+        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>konst o3<!> = object : I1, I2 {} // FIR allows this since the containing class is private
+        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>konst o4<!> by lazy { // FIR allows this since the containing class is private
             object : I1, I2 {}
         }
 
-        private val privateO1 = object : I1 {}
-        private val privateO2 by lazy {
+        private konst privateO1 = object : I1 {}
+        private konst privateO2 by lazy {
             object : I1 {}
         }
-        private val privateO3 = object : I1, I2 {}
-        private val privateO4 by lazy {
+        private konst privateO3 = object : I1, I2 {}
+        private konst privateO4 by lazy {
             object : I1, I2 {}
         }
     }

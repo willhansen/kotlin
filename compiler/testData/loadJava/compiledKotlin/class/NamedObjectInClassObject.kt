@@ -4,7 +4,7 @@ package test
 public class Outer {
     public companion object {
         public object Obj {
-            public val v: String = { "val" }()
+            public konst v: String = { "konst" }()
             public fun f(): String = "fun"
         }
     }

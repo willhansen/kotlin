@@ -5,45 +5,45 @@ import kotlin.test.assertEquals
 
 var global = S("")
 
-inline class S(val x: String) {
+inline class S(konst x: String) {
     var nonNullTest: S
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value.x}$x")
+        set(konstue) {
+            global = S("${konstue.x}$x")
         }
 
     var nullableTest: S?
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value!!.x}$x")
+        set(konstue) {
+            global = S("${konstue!!.x}$x")
         }
 }
 
-inline class Z(val x: Int) {
+inline class Z(konst x: Int) {
     var nonNullTest: S
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value.x}$x")
+        set(konstue) {
+            global = S("${konstue.x}$x")
         }
 
     var nullableTest: S?
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value!!.x}$x")
+        set(konstue) {
+            global = S("${konstue!!.x}$x")
         }
 }
 
-inline class A(val x: Any) {
+inline class A(konst x: Any) {
     var nonNullTest: S
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value.x}$x")
+        set(konstue) {
+            global = S("${konstue.x}$x")
         }
 
     var nullableTest: S?
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value!!.x}$x")
+        set(konstue) {
+            global = S("${konstue!!.x}$x")
         }
 }
 

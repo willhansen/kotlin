@@ -38,7 +38,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -121,7 +121,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -207,7 +207,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -293,7 +293,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -376,7 +376,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -427,7 +427,7 @@ KtKotlinPropertySymbol:
       isImplicitLambdaParameter: false
       isNoinline: false
       isVararg: false
-      name: value
+      name: konstue
       origin: SOURCE
       receiverParameter: null
       returnType: KtUsualClassType:
@@ -445,7 +445,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Unit
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: [
+    konstueParameters: [
       KtValueParameterSymbol:
         annotationsList: []
         callableIdIfNonLocal: null
@@ -457,7 +457,7 @@ KtKotlinPropertySymbol:
         isImplicitLambdaParameter: false
         isNoinline: false
         isVararg: false
-        name: value
+        name: konstue
         origin: SOURCE
         receiverParameter: null
         returnType: KtUsualClassType:
@@ -530,7 +530,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -581,7 +581,7 @@ KtKotlinPropertySymbol:
       isImplicitLambdaParameter: false
       isNoinline: false
       isVararg: false
-      name: value
+      name: konstue
       origin: SOURCE
       receiverParameter: null
       returnType: KtUsualClassType:
@@ -599,7 +599,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Unit
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: [
+    konstueParameters: [
       KtValueParameterSymbol:
         annotationsList: []
         callableIdIfNonLocal: null
@@ -611,7 +611,7 @@ KtKotlinPropertySymbol:
         isImplicitLambdaParameter: false
         isNoinline: false
         isVararg: false
-        name: value
+        name: konstue
         origin: SOURCE
         receiverParameter: null
         returnType: KtUsualClassType:
@@ -684,7 +684,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -735,7 +735,7 @@ KtKotlinPropertySymbol:
       isImplicitLambdaParameter: false
       isNoinline: false
       isVararg: false
-      name: value
+      name: konstue
       origin: SOURCE
       receiverParameter: null
       returnType: KtUsualClassType:
@@ -753,7 +753,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Unit
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: [
+    konstueParameters: [
       KtValueParameterSymbol:
         annotationsList: []
         callableIdIfNonLocal: null
@@ -765,7 +765,7 @@ KtKotlinPropertySymbol:
         isImplicitLambdaParameter: false
         isNoinline: false
         isVararg: false
-        name: value
+        name: konstue
         origin: SOURCE
         receiverParameter: null
         returnType: KtUsualClassType:

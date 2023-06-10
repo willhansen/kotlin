@@ -24,7 +24,7 @@ internal fun checkCopyOfRangeArguments(fromIndex: Int, toIndex: Int, size: Int) 
  * Returns a string representation of the contents of the subarray of the specified array as if it is [List].
  */
 internal inline fun <T> Array<out T>.subarrayContentToString(offset: Int, length: Int): String {
-    val sb = StringBuilder(2 + length * 3)
+    konst sb = StringBuilder(2 + length * 3)
     sb.append("[")
     var i = 0
     while (i < length) {
@@ -49,7 +49,7 @@ internal fun <T> Array<out T>?.contentDeepHashCodeImpl(): Int {
     if (this == null) return 0
     var result = 1
     for (element in this) {
-        val elementHash = when (element) {
+        konst elementHash = when (element) {
             null            -> 0
 
             is Array<*>     -> element.contentDeepHashCode()
@@ -80,8 +80,8 @@ internal fun <T> Array<out T>?.contentDeepHashCodeImpl(): Int {
 internal actual fun <T> arrayOfNulls(reference: Array<T>, size: Int): Array<T> = arrayOfNulls<Any>(size) as Array<T>
 
 internal actual fun copyToArrayImpl(collection: Collection<*>): Array<Any?> {
-    val array = arrayOfUninitializedElements<Any?>(collection.size)
-    val iterator = collection.iterator()
+    konst array = arrayOfUninitializedElements<Any?>(collection.size)
+    konst iterator = collection.iterator()
     var index = 0
     while (iterator.hasNext())
         array[index++] = iterator.next()
@@ -89,16 +89,16 @@ internal actual fun copyToArrayImpl(collection: Collection<*>): Array<Any?> {
 }
 
 /**
- * Returns a new array which is a copy of the original array with new elements filled with null values.
+ * Returns a new array which is a copy of the original array with new elements filled with null konstues.
  */
 internal fun <E> Array<E>.copyOfNulls(newSize: Int): Array<E?>  = copyOfNulls(0, newSize)
 
 internal fun <E> Array<E>.copyOfNulls(fromIndex: Int, toIndex: Int): Array<E?> {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = @Suppress("TYPE_PARAMETER_AS_REIFIED") arrayOfNulls<E>(newSize)
+    konst result = @Suppress("TYPE_PARAMETER_AS_REIFIED") arrayOfNulls<E>(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }

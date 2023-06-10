@@ -160,9 +160,9 @@ public class MemberComparator implements Comparator<DeclarationDescriptor> {
                 }
             }
 
-            int valueParametersNumberCompareTo = c1ValueParameters.size() - c2ValueParameters.size();
-            if (valueParametersNumberCompareTo != 0) {
-                return valueParametersNumberCompareTo;
+            int konstueParametersNumberCompareTo = c1ValueParameters.size() - c2ValueParameters.size();
+            if (konstueParametersNumberCompareTo != 0) {
+                return konstueParametersNumberCompareTo;
             }
 
             List<TypeParameterDescriptor> c1TypeParameters = c1.getTypeParameters();

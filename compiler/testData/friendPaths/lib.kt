@@ -3,8 +3,8 @@ package lib
 fun publicFun() {}
 internal fun internalFun() {}
 
-val publicVal = ""
-internal val internalVal = ""
+konst publicVal = ""
+internal konst internalVal = ""
 
 class PublicClass
 internal class InternalClass

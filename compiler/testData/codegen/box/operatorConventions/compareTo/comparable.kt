@@ -1,6 +1,6 @@
 interface A : Comparable<A>
 
-class B(val x: Int) : A {
+class B(konst x: Int) : A {
     override fun compareTo(other: A) = x.compareTo((other as B).x)
 }
 

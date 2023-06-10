@@ -4,7 +4,7 @@ FILE: classWithWrongSuperCall.kt
             super<R|kotlin/Any|>()
         }
 
-        public? final? val prop: String = String()
+        public? final? konst prop: String = String()
             public? [ContainingClassKey=A] get(): String
 
     }

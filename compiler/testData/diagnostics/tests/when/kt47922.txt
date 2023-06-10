@@ -3,8 +3,8 @@ package
 package whencase {
 
     package whencase.castissue {
-        public val nonSealedTest: whencase.castissue.NonSealedBase.() -> whencase.castissue.ToState?
-        public val sealedTest: whencase.castissue.SealedBase.() -> whencase.castissue.ToState?
+        public konst nonSealedTest: whencase.castissue.NonSealedBase.() -> whencase.castissue.ToState?
+        public konst sealedTest: whencase.castissue.SealedBase.() -> whencase.castissue.ToState?
 
         public abstract class NonSealedBase {
             public constructor NonSealedBase()

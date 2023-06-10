@@ -1,7 +1,7 @@
 // WITH_STDLIB
 // FILE: test.kt
 inline fun hasLocal(): Int {
-    val x = 41
+    konst x = 41
     return x + 1
 }
 

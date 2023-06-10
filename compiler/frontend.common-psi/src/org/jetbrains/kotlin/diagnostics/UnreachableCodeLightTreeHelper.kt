@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.util.getChildren
 
 typealias Node = LighterASTNode
 
-class UnreachableCodeLightTreeHelper(val tree: FlyweightCapableTreeStructure<Node>) {
+class UnreachableCodeLightTreeHelper(konst tree: FlyweightCapableTreeStructure<Node>) {
 
     fun Node.hasChildrenInSet(set: Set<Node>): Boolean {
         var result = false
@@ -27,9 +27,9 @@ class UnreachableCodeLightTreeHelper(val tree: FlyweightCapableTreeStructure<Nod
     }
 
     fun Node.getLeavesOrReachableChildren(reachable: Set<Node>, unreachable: Set<Node>): List<Node> {
-        val result = mutableListOf<Node>()
+        konst result = mutableListOf<Node>()
         tree.traverseDescendants(this) { element ->
-            val isReachable = element in reachable && !element.hasChildrenInSet(unreachable)
+            konst isReachable = element in reachable && !element.hasChildrenInSet(unreachable)
             if (isReachable || element.getChildren(tree).isEmpty()) {
                 result.add(element)
                 false
@@ -41,12 +41,12 @@ class UnreachableCodeLightTreeHelper(val tree: FlyweightCapableTreeStructure<Nod
     }
 
     fun List<Node>.removeReachableElementsWithMeaninglessSiblings(reachableElements: Set<Node>): List<Node> {
-        val childrenToRemove = mutableSetOf<Node>()
+        konst childrenToRemove = mutableSetOf<Node>()
         fun collectSiblingsIfMeaningless(elementIndex: Int, direction: Int) {
-            val index = elementIndex + direction
+            konst index = elementIndex + direction
             if (index !in 0 until size) return
 
-            val element = this[index]
+            konst element = this[index]
             if (element.isFiller() || element.tokenType == KtTokens.COMMA) {
                 childrenToRemove.add(element)
                 collectSiblingsIfMeaningless(index, direction)
@@ -63,8 +63,8 @@ class UnreachableCodeLightTreeHelper(val tree: FlyweightCapableTreeStructure<Nod
     }
 
     fun List<TextRange>.mergeAdjacentTextRanges(): List<TextRange> {
-        val result = ArrayList<TextRange>()
-        val lastRange = fold(null as TextRange?) { currentTextRange, elementRange ->
+        konst result = ArrayList<TextRange>()
+        konst lastRange = fold(null as TextRange?) { currentTextRange, elementRange ->
             when {
                 currentTextRange == null -> {
                     elementRange

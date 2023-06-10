@@ -1,5 +1,5 @@
 class Test {
-    private val foo = Example.FOO
+    private konst foo = Example.FOO
 
     companion object {
         enum class Example { FOO }
@@ -7,7 +7,7 @@ class Test {
 }
 
 class Test2 {
-    private val foo = Example.FOO
+    private konst foo = Example.FOO
 
     companion object Amigo {
         enum class Example { FOO }
@@ -15,7 +15,7 @@ class Test2 {
 }
 
 class Test3 {
-    private val foo = Amigo.Example.FOO
+    private konst foo = Amigo.Example.FOO
 
     object Amigo {
         enum class Example { FOO }
@@ -23,17 +23,17 @@ class Test3 {
 }
 
 class Test4 {
-    private val foo = Foo.constProperty
+    private konst foo = Foo.constProperty
 
     companion object {
         object Foo {
-            const val constProperty = 1
+            const konst constProperty = 1
         }
     }
 }
 
 class Test5 {
-    private val foo = Amigos.Companion.Goo.Example.FOO
+    private konst foo = Amigos.Companion.Goo.Example.FOO
 
     class Amigos {
         companion object {

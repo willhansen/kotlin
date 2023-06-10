@@ -32,11 +32,11 @@ class KtDotQualifiedExpression : KtExpressionImplStub<KotlinPlaceHolderStub<KtDo
         return visitor.visitDotQualifiedExpression(this, data)
     }
 
-    override val receiverExpression: KtExpression
+    override konst receiverExpression: KtExpression
         get() {
-            val stub = stub
+            konst stub = stub
             if (stub != null) {
-                val childExpressionsByStub = getChildExpressionsByStub(stub)
+                konst childExpressionsByStub = getChildExpressionsByStub(stub)
                 if (childExpressionsByStub != null) {
                     return childExpressionsByStub[0]
                 }
@@ -44,11 +44,11 @@ class KtDotQualifiedExpression : KtExpressionImplStub<KotlinPlaceHolderStub<KtDo
             return super.receiverExpression
         }
 
-    override val selectorExpression: KtExpression?
+    override konst selectorExpression: KtExpression?
         get() {
-            val stub = stub
+            konst stub = stub
             if (stub != null) {
-                val childExpressionsByStub = getChildExpressionsByStub(stub)
+                konst childExpressionsByStub = getChildExpressionsByStub(stub)
                 if (childExpressionsByStub != null && childExpressionsByStub.size == 2) {
                     return childExpressionsByStub[1]
                 }
@@ -67,11 +67,11 @@ class KtDotQualifiedExpression : KtExpressionImplStub<KotlinPlaceHolderStub<KtDo
             )
             return null
         } else {
-            val expressions = stub.getChildrenByType(INSIDE_DIRECTIVE_EXPRESSIONS, KtExpression.ARRAY_FACTORY)
+            konst expressions = stub.getChildrenByType(INSIDE_DIRECTIVE_EXPRESSIONS, KtExpression.ARRAY_FACTORY)
             if (expressions.size !in 1..2) {
                 LOG.error(
                     KotlinExceptionWithAttachments(
-                        "Invalid stub structure. DOT_QUALIFIED_EXPRESSION must have one or two children. Was: ${expressions.size}\n"
+                        "Inkonstid stub structure. DOT_QUALIFIED_EXPRESSION must have one or two children. Was: ${expressions.size}\n"
                     ).withPsiAttachment("file.kt", containingFile)
                 )
                 return null
@@ -81,6 +81,6 @@ class KtDotQualifiedExpression : KtExpressionImplStub<KotlinPlaceHolderStub<KtDo
     }
 
     companion object {
-        private val LOG = Logger.getInstance(KtDotQualifiedExpression::class.java)
+        private konst LOG = Logger.getInstance(KtDotQualifiedExpression::class.java)
     }
 }

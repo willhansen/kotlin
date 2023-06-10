@@ -17,7 +17,7 @@ public actual interface KType {
      * Returns `null` if this type is not denotable in Kotlin, for example if it is an intersection type.
      */
     @SinceKotlin("1.1")
-    public actual val classifier: KClassifier?
+    public actual konst classifier: KClassifier?
 
     /**
      * Type arguments passed for the parameters of the classifier in this type.
@@ -28,17 +28,17 @@ public actual interface KType {
      * For example, in the type `Outer<A, B>.Inner<C, D>` the returned list is `[C, D, A, B]`.
      */
     @SinceKotlin("1.1")
-    public actual val arguments: List<KTypeProjection>
+    public actual konst arguments: List<KTypeProjection>
 
     /**
      * `true` if this type was marked nullable in the source code.
      *
-     * For Kotlin types, it means that `null` value is allowed to be represented by this type.
+     * For Kotlin types, it means that `null` konstue is allowed to be represented by this type.
      * In practice it means that the type was declared with a question mark at the end.
      * For non-Kotlin types, it means the type or the symbol which was declared with this type
      * is annotated with a runtime-retained nullability annotation such as [javax.annotation.Nullable].
      *
-     * Note that even if [isMarkedNullable] is false, values of the type can still be `null`.
+     * Note that even if [isMarkedNullable] is false, konstues of the type can still be `null`.
      * This may happen if it is a type of the type parameter with a nullable upper bound:
      *
      * ```
@@ -47,6 +47,6 @@ public actual interface KType {
      * }
      * ```
      */
-    public actual val isMarkedNullable: Boolean
+    public actual konst isMarkedNullable: Boolean
 }
 

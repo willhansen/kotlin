@@ -7,12 +7,12 @@ import com.sun.crypto.provider.SunJCE
 import sun.nio.ByteBuffered
 
 fun main() {
-    val a = Big5() // charsets.jar
-    val c = DNSNameService() // dnsns.jar
-    val e : Cipher? = null // jce.jar
-    val f : SunJCE? = null // sunjce_provider.jar
-    val j : ByteBuffered? = null // rt.jar
-    val result = "$a$c$e$f$j"
+    konst a = Big5() // charsets.jar
+    konst c = DNSNameService() // dnsns.jar
+    konst e : Cipher? = null // jce.jar
+    konst f : SunJCE? = null // sunjce_provider.jar
+    konst j : ByteBuffered? = null // rt.jar
+    konst result = "$a$c$e$f$j"
     println("OK")
 }
 

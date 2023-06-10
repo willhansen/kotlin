@@ -36,11 +36,11 @@ public abstract class ClassDoesNotOverrideMethod : java.util.Date {
 
     // Static members
     invisible_fake final override /*1*/ /*fake_override*/ var defaultCenturyStart: kotlin.Int
-    invisible_fake final override /*1*/ /*fake_override*/ val gcal: sun.util.calendar.BaseCalendar!
+    invisible_fake final override /*1*/ /*fake_override*/ konst gcal: sun.util.calendar.BaseCalendar!
     invisible_fake final override /*1*/ /*fake_override*/ var jcal: sun.util.calendar.BaseCalendar!
-    invisible_fake const final override /*1*/ /*fake_override*/ val serialVersionUID: kotlin.Long = 7523967970034938905.toLong()
-    invisible_fake final override /*1*/ /*fake_override*/ val ttb: kotlin.IntArray!
-    invisible_fake final override /*1*/ /*fake_override*/ val wtb: kotlin.Array<(out) kotlin.String!>!
+    invisible_fake const final override /*1*/ /*fake_override*/ konst serialVersionUID: kotlin.Long = 7523967970034938905.toLong()
+    invisible_fake final override /*1*/ /*fake_override*/ konst ttb: kotlin.IntArray!
+    invisible_fake final override /*1*/ /*fake_override*/ konst wtb: kotlin.Array<(out) kotlin.String!>!
     @kotlin.Deprecated(message = "Deprecated in Java") public open override /*1*/ /*fake_override*/ fun UTC(/*0*/ p0: kotlin.Int, /*1*/ p1: kotlin.Int, /*2*/ p2: kotlin.Int, /*3*/ p3: kotlin.Int, /*4*/ p4: kotlin.Int, /*5*/ p5: kotlin.Int): kotlin.Long
     invisible_fake final override /*1*/ /*fake_override*/ fun convertToAbbr(/*0*/ p0: java.lang.StringBuilder!, /*1*/ p1: kotlin.String!): java.lang.StringBuilder!
     public open override /*1*/ /*fake_override*/ fun from(/*0*/ p0: java.time.Instant!): java.util.Date!

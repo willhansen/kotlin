@@ -25,37 +25,37 @@ import kotlin.script.experimental.util.getOrError
 // temporary trick with passing Any as a template and overwriting it below, TODO: fix after introducing new script definitions hierarchy
 abstract class KotlinScriptDefinitionAdapterFromNewAPIBase : KotlinScriptDefinition(Any::class) {
 
-    abstract val scriptCompilationConfiguration: ScriptCompilationConfiguration
+    abstract konst scriptCompilationConfiguration: ScriptCompilationConfiguration
 
-    abstract val hostConfiguration: ScriptingHostConfiguration
+    abstract konst hostConfiguration: ScriptingHostConfiguration
 
-    open val baseClass: KClass<*> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    open konst baseClass: KClass<*> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         getScriptingClass(scriptCompilationConfiguration.getOrError(ScriptCompilationConfiguration.baseClass))
     }
 
-    override val template: KClass<*> get() = baseClass
+    override konst template: KClass<*> get() = baseClass
 
-    override val name: String
+    override konst name: String
         get() = scriptCompilationConfiguration[ScriptCompilationConfiguration.displayName] ?: KOTLIN_SCRIPT
 
-    override val fileType: LanguageFileType = KotlinFileType.INSTANCE
+    override konst fileType: LanguageFileType = KotlinFileType.INSTANCE
 
     override fun isScript(fileName: String): Boolean =
         fileName.endsWith(".$fileExtension")
 
     override fun getScriptName(script: KtScript): Name {
-        val fileBasedName = NameUtils.getScriptNameForFile(script.containingKtFile.name)
+        konst fileBasedName = NameUtils.getScriptNameForFile(script.containingKtFile.name)
         return Name.identifier(fileBasedName.identifier.removeSuffix(".$fileExtension"))
     }
 
-    override val annotationsForSamWithReceivers: List<String>
+    override konst annotationsForSamWithReceivers: List<String>
         get() = emptyList()
 
-    override val dependencyResolver: DependenciesResolver by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst dependencyResolver: DependenciesResolver by lazy(LazyThreadSafetyMode.PUBLICATION) {
         BridgeDependenciesResolver(scriptCompilationConfiguration)
     }
 
-    override val acceptedAnnotations: List<KClass<out Annotation>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst acceptedAnnotations: List<KClass<out Annotation>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         scriptCompilationConfiguration[ScriptCompilationConfiguration.refineConfigurationOnAnnotations]
             ?.flatMap {
                 it.annotations.map { ann ->
@@ -66,31 +66,31 @@ abstract class KotlinScriptDefinitionAdapterFromNewAPIBase : KotlinScriptDefinit
             .orEmpty()
     }
 
-    override val implicitReceivers: List<KType> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst implicitReceivers: List<KType> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         scriptCompilationConfiguration[ScriptCompilationConfiguration.implicitReceivers]
             .orEmpty()
             .map { getScriptingClass(it).starProjectedType.withNullability(it.isNullable) }
     }
 
-    override val providedProperties: List<Pair<String, KType>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst providedProperties: List<Pair<String, KType>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         scriptCompilationConfiguration[ScriptCompilationConfiguration.providedProperties]
             ?.map { (k, v) -> k to getScriptingClass(v).starProjectedType.withNullability(v.isNullable) }.orEmpty()
     }
 
     @Deprecated("temporary workaround for missing functionality, will be replaced by the new API soon")
-    override val additionalCompilerArguments: List<String>
+    override konst additionalCompilerArguments: List<String>
         get() = scriptCompilationConfiguration[ScriptCompilationConfiguration.compilerOptions]
             .orEmpty()
 
     @Suppress("DEPRECATION")
-    override val scriptExpectedLocations: List<kotlin.script.experimental.location.ScriptExpectedLocation>
+    override konst scriptExpectedLocations: List<kotlin.script.experimental.location.ScriptExpectedLocation>
         get() = scriptCompilationConfiguration[ScriptCompilationConfiguration.ide.acceptedLocations]?.mapToLegacyExpectedLocations()
             ?: listOf(
                 kotlin.script.experimental.location.ScriptExpectedLocation.SourcesOnly,
                 kotlin.script.experimental.location.ScriptExpectedLocation.TestsOnly
             )
 
-    private val scriptingClassGetter by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst scriptingClassGetter by lazy(LazyThreadSafetyMode.PUBLICATION) {
         hostConfiguration[ScriptingHostConfiguration.getScriptingClass]
             ?: throw IllegalArgumentException("Expecting 'getScriptingClass' property in the scripting environment")
     }
@@ -105,12 +105,12 @@ abstract class KotlinScriptDefinitionAdapterFromNewAPIBase : KotlinScriptDefinit
 
 
 class KotlinScriptDefinitionAdapterFromNewAPI(
-    override val scriptCompilationConfiguration: ScriptCompilationConfiguration,
-    override val hostConfiguration: ScriptingHostConfiguration
+    override konst scriptCompilationConfiguration: ScriptCompilationConfiguration,
+    override konst hostConfiguration: ScriptingHostConfiguration
 ) : KotlinScriptDefinitionAdapterFromNewAPIBase() {
 
-    override val name: String get() = scriptCompilationConfiguration[ScriptCompilationConfiguration.displayName] ?: super.name
+    override konst name: String get() = scriptCompilationConfiguration[ScriptCompilationConfiguration.displayName] ?: super.name
 
-    override val fileExtension: String
+    override konst fileExtension: String
         get() = scriptCompilationConfiguration[ScriptCompilationConfiguration.fileExtension] ?: super.fileExtension
 }

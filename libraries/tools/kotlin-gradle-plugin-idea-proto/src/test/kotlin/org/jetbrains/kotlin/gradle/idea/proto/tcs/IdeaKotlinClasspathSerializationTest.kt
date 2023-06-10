@@ -13,8 +13,8 @@ import kotlin.test.assertEquals
 import kotlin.test.fail
 
 class IdeaKotlinClasspathSerializationTest : AbstractSerializationTest<IdeaKotlinClasspath>() {
-    override fun serialize(value: IdeaKotlinClasspath): ByteArray {
-        return value.toByteArray()
+    override fun serialize(konstue: IdeaKotlinClasspath): ByteArray {
+        return konstue.toByteArray()
     }
 
     override fun deserialize(data: ByteArray): IdeaKotlinClasspath {

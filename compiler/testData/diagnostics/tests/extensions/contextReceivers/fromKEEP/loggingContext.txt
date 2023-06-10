@@ -10,7 +10,7 @@ public interface Logger {
 }
 
 public interface LoggingContext {
-    public abstract val log: Logger
+    public abstract konst log: Logger
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

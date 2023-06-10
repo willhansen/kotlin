@@ -1,17 +1,17 @@
 class Cell<T : Any?> {
-  constructor(value: T) /* primary */ {
+  constructor(konstue: T) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: T
-    field = value
+  konst konstue: T
+    field = konstue
     get
 
 }
 
 typealias IntAlias = Cell<Int>
 fun test(): Cell<Int> {
-  return Cell<Int>(value = 42)
+  return Cell<Int>(konstue = 42)
 }

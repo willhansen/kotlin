@@ -5,7 +5,7 @@ class A {
 
   }
 
-  val test_1: Int
+  konst test_1: Int
     field = try { // BLOCK
       throw RuntimeException()
     }
@@ -15,7 +15,7 @@ class A {
 
     get
 
-  val test_2: Int
+  konst test_2: Int
     field = try { // BLOCK
       1
     }

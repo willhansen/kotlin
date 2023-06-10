@@ -23,18 +23,18 @@ import org.jetbrains.kotlin.name.Name
 internal object DECLARATION_ORIGIN_ENTRY_POINT : IrDeclarationOriginImpl("ENTRY_POINT")
 
 internal fun makeEntryPoint(generationState: NativeGenerationState): IrFunction {
-    val context = generationState.context
-    val actualMain = context.ir.symbols.entryPoint!!.owner
+    konst context = generationState.context
+    konst actualMain = context.ir.symbols.entryPoint!!.owner
     // TODO: Do we need to do something with the offsets if <main> is in a cached library?
-    val startOffset = if (generationState.llvmModuleSpecification.containsDeclaration(actualMain))
+    konst startOffset = if (generationState.llvmModuleSpecification.containsDeclaration(actualMain))
         actualMain.startOffset
     else
         SYNTHETIC_OFFSET
-    val endOffset = if (generationState.llvmModuleSpecification.containsDeclaration(actualMain))
+    konst endOffset = if (generationState.llvmModuleSpecification.containsDeclaration(actualMain))
         actualMain.endOffset
     else
         SYNTHETIC_OFFSET
-    val entryPoint = context.irFactory.buildFun {
+    konst entryPoint = context.irFactory.buildFun {
         this.startOffset = startOffset
         this.endOffset = endOffset
         origin = DECLARATION_ORIGIN_ENTRY_POINT
@@ -54,13 +54,13 @@ internal fun makeEntryPoint(generationState: NativeGenerationState): IrFunction 
             startOffset, endOffset,
             context.ir.symbols.exportForCppRuntime.owner, "Konan_start")
 
-    val builder = context.createIrBuilder(entryPoint.symbol, startOffset, endOffset)
+    konst builder = context.createIrBuilder(entryPoint.symbol, startOffset, endOffset)
     entryPoint.body = builder.irBlockBody(entryPoint) {
         +IrTryImpl(startOffset, endOffset, context.irBuiltIns.nothingType).apply {
             tryResult = irBlock {
                 +irCall(actualMain).apply {
-                    if (actualMain.valueParameters.size != 0)
-                        putValueArgument(0, irGet(entryPoint.valueParameters[0]))
+                    if (actualMain.konstueParameters.size != 0)
+                        putValueArgument(0, irGet(entryPoint.konstueParameters[0]))
                 }
                 +irReturn(irInt(0))
             }

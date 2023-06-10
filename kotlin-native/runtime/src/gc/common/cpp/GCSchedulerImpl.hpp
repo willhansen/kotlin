@@ -62,16 +62,16 @@ private:
 };
 
 template <typename Clock>
-class RegularIntervalPacer {
+class RegularInterkonstPacer {
 public:
     using TimePoint = std::chrono::time_point<Clock>;
 
-    explicit RegularIntervalPacer(gc::GCSchedulerConfig& config) noexcept : config_(config), lastGC_(Clock::now()) {}
+    explicit RegularInterkonstPacer(gc::GCSchedulerConfig& config) noexcept : config_(config), lastGC_(Clock::now()) {}
 
     // Called by the mutators or the timer thread.
     bool NeedsGC() const noexcept {
         auto currentTime = Clock::now();
-        return currentTime >= lastGC_.load() + config_.regularGcInterval();
+        return currentTime >= lastGC_.load() + config_.regularGcInterkonst();
     }
 
     // Called by the GC thread.
@@ -133,13 +133,13 @@ public:
         config_(config),
         appStateTracking_(mm::GlobalData::Instance().appStateTracking()),
         heapGrowthController_(config),
-        regularIntervalPacer_(config),
+        regularInterkonstPacer_(config),
         scheduleGC_(std::move(scheduleGC)),
-        timer_("GC Timer thread", config_.regularGcInterval(), [this] {
+        timer_("GC Timer thread", config_.regularGcInterkonst(), [this] {
             if (appStateTracking_.state() == mm::AppStateTracking::State::kBackground) {
                 return;
             }
-            if (regularIntervalPacer_.NeedsGC()) {
+            if (regularInterkonstPacer_.NeedsGC()) {
                 RuntimeLogInfo({kTagGC}, "Scheduling GC by timer");
                 scheduleGC_();
             }
@@ -155,8 +155,8 @@ public:
 
     void OnPerformFullGC() noexcept override {
         heapGrowthController_.OnPerformFullGC();
-        regularIntervalPacer_.OnPerformFullGC();
-        timer_.restart(config_.regularGcInterval());
+        regularInterkonstPacer_.OnPerformFullGC();
+        timer_.restart(config_.regularGcInterkonst());
     }
 
     void UpdateAliveSetBytes(size_t bytes) noexcept override { heapGrowthController_.UpdateAliveSetBytes(bytes); }
@@ -165,7 +165,7 @@ private:
     gc::GCSchedulerConfig& config_;
     mm::AppStateTracking& appStateTracking_;
     HeapGrowthController heapGrowthController_;
-    RegularIntervalPacer<Clock> regularIntervalPacer_;
+    RegularInterkonstPacer<Clock> regularInterkonstPacer_;
     std::function<void()> scheduleGC_;
     RepeatedTimer<Clock> timer_;
 };
@@ -176,27 +176,27 @@ template <typename Clock>
 class GCSchedulerDataOnSafepoints : public gc::GCSchedulerData {
 public:
     GCSchedulerDataOnSafepoints(gc::GCSchedulerConfig& config, std::function<void()> scheduleGC) noexcept :
-        heapGrowthController_(config), regularIntervalPacer_(config), scheduleGC_(std::move(scheduleGC)) {}
+        heapGrowthController_(config), regularInterkonstPacer_(config), scheduleGC_(std::move(scheduleGC)) {}
 
     void UpdateFromThreadData(gc::GCSchedulerThreadData& threadData) noexcept override {
         heapGrowthController_.OnAllocated(threadData.allocatedBytes());
         if (heapGrowthController_.NeedsGC()) {
             scheduleGC_();
-        } else if (regularIntervalPacer_.NeedsGC()) {
+        } else if (regularInterkonstPacer_.NeedsGC()) {
             scheduleGC_();
         }
     }
 
     void OnPerformFullGC() noexcept override {
         heapGrowthController_.OnPerformFullGC();
-        regularIntervalPacer_.OnPerformFullGC();
+        regularInterkonstPacer_.OnPerformFullGC();
     }
 
     void UpdateAliveSetBytes(size_t bytes) noexcept override { heapGrowthController_.UpdateAliveSetBytes(bytes); }
 
 private:
     HeapGrowthController heapGrowthController_;
-    RegularIntervalPacer<Clock> regularIntervalPacer_;
+    RegularInterkonstPacer<Clock> regularInterkonstPacer_;
     std::function<void()> scheduleGC_;
 };
 

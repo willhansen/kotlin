@@ -1,6 +1,6 @@
 package lit
 
-annotation class AnnInt(val a: IntArray)
+annotation class AnnInt(konst a: IntArray)
 
 @Suppress("UNSUPPORTED_FEATURE")
 @AnnInt([1, 2])

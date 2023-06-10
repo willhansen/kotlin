@@ -7,7 +7,7 @@ class Delegate {
 
 class TestClass {
     companion object {
-        val test by Delegate()
+        konst test by Delegate()
     }
 }
 

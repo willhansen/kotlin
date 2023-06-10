@@ -9,5 +9,5 @@ class Derived : Base()
 fun test(x: Derived.<!UNRESOLVED_REFERENCE!>Nested<!>) = <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>x<!>
 
 fun Base.testWithImplicitReceiver(x: <!UNRESOLVED_REFERENCE!>Nested<!>) {
-    val y: <!UNRESOLVED_REFERENCE!>Nested<!> = <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>x<!>
+    konst y: <!UNRESOLVED_REFERENCE!>Nested<!> = <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>x<!>
 }

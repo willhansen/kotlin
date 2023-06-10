@@ -18,13 +18,13 @@ package org.jetbrains.kotlin.native.interop.gen
 
 import org.jetbrains.kotlin.native.interop.indexer.Type
 
-data class TypedKotlinValue(val type: Type, val value: KotlinExpression)
-data class TypedNativeValue(val type: Type, val value: NativeExpression)
+data class TypedKotlinValue(konst type: Type, konst konstue: KotlinExpression)
+data class TypedNativeValue(konst type: Type, konst konstue: NativeExpression)
 
 /**
- * Generates bridges between Kotlin and native, passing arbitrary native-typed values.
+ * Generates bridges between Kotlin and native, passing arbitrary native-typed konstues.
  *
- * It does the same as [SimpleBridgeGenerator] except that it supports any native types, e.g. struct values.
+ * It does the same as [SimpleBridgeGenerator] except that it supports any native types, e.g. struct konstues.
  */
 interface MappingBridgeGenerator {
     fun kotlinToNative(

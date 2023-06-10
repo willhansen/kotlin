@@ -8,7 +8,7 @@ package test
 
 object CrossinlineLambdaContainer {
     inline fun call(crossinline c: () -> Boolean) {
-        val l = { assert(c()) }
+        konst l = { assert(c()) }
         l()
     }
 }
@@ -51,9 +51,9 @@ class ShouldBeEnabled : Checker {
 }
 
 fun setDesiredAssertionStatus(v: Boolean): Checker {
-    val loader = Checker::class.java.classLoader
+    konst loader = Checker::class.java.classLoader
     loader.setDefaultAssertionStatus(v)
-    val c = loader.loadClass(if (v) "ShouldBeEnabled" else "ShouldBeDisabled")
+    konst c = loader.loadClass(if (v) "ShouldBeEnabled" else "ShouldBeDisabled")
     return c.newInstance() as Checker
 }
 

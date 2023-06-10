@@ -2,7 +2,7 @@ class C {
     fun OK() {}
 
     companion object {
-        val result = C::OK
+        konst result = C::OK
     }
 }
 

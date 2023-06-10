@@ -15,7 +15,7 @@ class DuplicatedFirSourceElementsException(
     newFir: FirElement,
     psi: KtElement
 ) : IllegalStateException() {
-    override val message: String? = """|The PSI element should be used only once as a real PSI source of FirElement,
+    override konst message: String? = """|The PSI element should be used only once as a real PSI source of FirElement,
        |the elements ${if (existingFir.source === newFir.source) "HAVE" else "DON'T HAVE"} the same instances of source elements 
        |
        |existing FIR element is $existingFir with text:

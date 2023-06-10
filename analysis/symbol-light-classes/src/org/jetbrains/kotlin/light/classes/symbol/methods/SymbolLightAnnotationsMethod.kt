@@ -30,8 +30,8 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 internal class SymbolLightAnnotationsMethod private constructor(
     lightMemberOrigin: LightMemberOrigin?,
     containingClass: SymbolLightClassBase,
-    private val containingPropertyDeclaration: KtCallableDeclaration?,
-    private val containingPropertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
+    private konst containingPropertyDeclaration: KtCallableDeclaration?,
+    private konst containingPropertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
 ) : SymbolLightMethodBase(
     lightMemberOrigin,
     containingClass,
@@ -58,11 +58,11 @@ internal class SymbolLightAnnotationsMethod private constructor(
         return JvmAbi.getSyntheticMethodNameForAnnotatedProperty(JvmAbi.getterName(this))
     }
 
-    private val _name: String by lazyPub {
+    private konst _name: String by lazyPub {
         analyzeForLightClasses(ktModule) {
-            val symbol = propertySymbol()
+            konst symbol = propertySymbol()
             symbol.getJvmNameFromAnnotation(AnnotationUseSiteTarget.PROPERTY.toOptionalFilter()) ?: run {
-                val defaultName = symbol.name.identifier.let {
+                konst defaultName = symbol.name.identifier.let {
                     if (containingClass.isAnnotationType) it else it.abiName()
                 }
                 symbol.computeJvmMethodName(defaultName, containingClass, AnnotationUseSiteTarget.PROPERTY)
@@ -74,9 +74,9 @@ internal class SymbolLightAnnotationsMethod private constructor(
 
     override fun isVarArgs(): Boolean = false
 
-    override val kotlinOrigin: KtDeclaration? get() = containingPropertyDeclaration
+    override konst kotlinOrigin: KtDeclaration? get() = containingPropertyDeclaration
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         return@lazyPub containingPropertySymbolPointer.withSymbol(ktModule) { propertySymbol ->
             SymbolLightMemberModifierList(
                 containingDeclaration = this@SymbolLightAnnotationsMethod,
@@ -99,7 +99,7 @@ internal class SymbolLightAnnotationsMethod private constructor(
 
     override fun isDeprecated(): Boolean = true
 
-    private val _identifier: PsiIdentifier by lazyPub {
+    private konst _identifier: PsiIdentifier by lazyPub {
         KtLightIdentifier(this, containingPropertyDeclaration)
     }
 
@@ -118,7 +118,7 @@ internal class SymbolLightAnnotationsMethod private constructor(
     override fun getTypeParameterList(): PsiTypeParameterList? = null
     override fun getTypeParameters(): Array<PsiTypeParameter> = PsiTypeParameter.EMPTY_ARRAY
 
-    private val _parametersList by lazyPub {
+    private konst _parametersList by lazyPub {
         SymbolLightParameterList(
             parent = this@SymbolLightAnnotationsMethod,
             parameterPopulator = { builder ->

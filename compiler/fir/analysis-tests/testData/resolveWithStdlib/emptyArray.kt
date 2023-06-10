@@ -1,9 +1,9 @@
-val x: Array<String> = emptyArray()
+konst x: Array<String> = emptyArray()
 
-val y: Array<String>
+konst y: Array<String>
     get() = emptyArray()
 
 interface My
 
-val z: Array<out My>
+konst z: Array<out My>
     get() = emptyArray()

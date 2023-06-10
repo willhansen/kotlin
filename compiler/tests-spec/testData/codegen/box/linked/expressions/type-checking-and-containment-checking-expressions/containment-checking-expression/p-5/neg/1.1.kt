@@ -10,8 +10,8 @@
  * EXCEPTION: compiletime
  */
 
-class A(val a: Set<Any>) {
-    var isEvaluated: Boolean = false
+class A(konst a: Set<Any>) {
+    var isEkonstuated: Boolean = false
     var isChecked = false
     operator fun contains(other: Any): Nothing = run {
         TODO()
@@ -22,8 +22,8 @@ class A(val a: Set<Any>) {
 
 fun box() {
 
-    val b = A(mutableSetOf(1,  3, false, 2, "azaza"))
+    konst b = A(mutableSetOf(1,  3, false, 2, "azaza"))
 
-    val a = (true in b)
+    konst a = (true in b)
 
 }

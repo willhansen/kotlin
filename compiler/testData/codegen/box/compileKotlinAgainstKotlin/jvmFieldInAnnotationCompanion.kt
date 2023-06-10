@@ -5,12 +5,12 @@
 // MODULE: lib
 // FILE: Foo.kt
 
-public class Bar(public val value: String)
+public class Bar(public konst konstue: String)
 
 annotation class Foo {
     companion object {
         @JvmField
-        val FOO = Bar("OK")
+        konst FOO = Bar("OK")
     }
 }
 
@@ -18,5 +18,5 @@ annotation class Foo {
 // FILE: bar.kt
 
 fun box(): String {
-    return Foo.FOO.value
+    return Foo.FOO.konstue
 }

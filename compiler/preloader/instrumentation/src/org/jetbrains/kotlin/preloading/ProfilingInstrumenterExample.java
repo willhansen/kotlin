@@ -91,7 +91,7 @@ public class ProfilingInstrumenterExample extends InterceptionInstrumenterAdapto
         }
 
         public void dump(PrintStream out) {
-            out.println("Different values: " + new HashSet<>(arguments).size());
+            out.println("Different konstues: " + new HashSet<>(arguments).size());
         }
     }
 

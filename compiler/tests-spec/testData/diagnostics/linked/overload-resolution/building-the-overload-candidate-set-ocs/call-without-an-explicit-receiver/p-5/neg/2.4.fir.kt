@@ -54,7 +54,7 @@ class Case2(){
     }
 }
 
-val Case2.emptyArray: A
+konst Case2.emptyArray: A
     get() = A()
 
 class A {

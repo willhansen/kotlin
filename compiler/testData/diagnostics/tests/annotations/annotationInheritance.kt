@@ -1,4 +1,4 @@
-val a = object: T {}
+konst a = object: T {}
 open class C
 interface T
 

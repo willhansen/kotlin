@@ -15,9 +15,9 @@ import javax.lang.model.element.TypeElement
 import javax.lang.model.util.Elements
 
 class MentionedTypesTaskListener(
-    private val cache: JavaClassCache,
-    private val elementUtils: Elements,
-    private val trees: Trees
+    private konst cache: JavaClassCache,
+    private konst elementUtils: Elements,
+    private konst trees: Trees
 ) : TaskListener {
 
     var time = 0L
@@ -33,12 +33,12 @@ class MentionedTypesTaskListener(
         if (e.kind != TaskEvent.Kind.ENTER || cache.isAlreadyProcessed(e.sourceFile.toUri())) return
 
         try {
-            val l = System.currentTimeMillis()
-            val compilationUnit = e.compilationUnit
+            konst l = System.currentTimeMillis()
+            konst compilationUnit = e.compilationUnit
 
-            val structure = SourceFileStructure(e.sourceFile.toUri())
+            konst structure = SourceFileStructure(e.sourceFile.toUri())
 
-            val treeVisitor = TypeTreeVisitor(elementUtils, trees, compilationUnit, structure)
+            konst treeVisitor = TypeTreeVisitor(elementUtils, trees, compilationUnit, structure)
             compilationUnit.typeDecls.forEach {
                 it.accept(treeVisitor, Visibility.ABI)
             }
@@ -54,10 +54,10 @@ private enum class Visibility {
     ABI, NON_ABI
 }
 
-private class TypeTreeVisitor(val elementUtils: Elements, val trees: Trees, val compilationUnit: CompilationUnitTree, val sourceStructure: SourceFileStructure) :
+private class TypeTreeVisitor(konst elementUtils: Elements, konst trees: Trees, konst compilationUnit: CompilationUnitTree, konst sourceStructure: SourceFileStructure) :
     SimpleTreeVisitor<Void, Visibility>() {
 
-    val constantTreeVisitor = ConstantTreeVisitor(sourceStructure)
+    konst constantTreeVisitor = ConstantTreeVisitor(sourceStructure)
 
     /** Handle annotations on this class, including the @Inherited ones as those are not visible using Tree APIs. */
     private fun handleClassAnnotations(classSymbol: Symbol.ClassSymbol) {
@@ -92,7 +92,7 @@ private class TypeTreeVisitor(val elementUtils: Elements, val trees: Trees, val 
     }
 
     override fun visitMethod(node: MethodTree, visibility: Visibility): Void? {
-        val methodVisibility = if (node.modifiers.flags.contains(Modifier.PRIVATE)) Visibility.NON_ABI else Visibility.ABI
+        konst methodVisibility = if (node.modifiers.flags.contains(Modifier.PRIVATE)) Visibility.NON_ABI else Visibility.ABI
 
         node.modifiers.annotations.forEach { visit(it, methodVisibility) }
         visit(node.returnType, methodVisibility)
@@ -116,8 +116,8 @@ private class TypeTreeVisitor(val elementUtils: Elements, val trees: Trees, val 
 
     override fun visitVariable(node: VariableTree, visibility: Visibility): Void? {
         node as JCTree.JCVariableDecl
-        val newVisibility = if (node.sym.getKind() == ElementKind.FIELD) {
-            val flags = node.modifiers.getFlags()
+        konst newVisibility = if (node.sym.getKind() == ElementKind.FIELD) {
+            konst flags = node.modifiers.getFlags()
 
             node.sym.constValue?.let { _ ->
                 if (!constantTreeVisitor.isTrivialLiteralExpression(node.init)) {
@@ -187,12 +187,12 @@ private class TypeTreeVisitor(val elementUtils: Elements, val trees: Trees, val 
     }
 
     private fun maybeAddToTracker(symbol: Symbol, visibility: Visibility): Boolean {
-        val kind = symbol.getKind()
+        konst kind = symbol.getKind()
         if (!kind.isInterface && !kind.isClass) {
             return false
         }
 
-        val qualifiedName = symbol.qualifiedName.toString()
+        konst qualifiedName = symbol.qualifiedName.toString()
         if (symbol.getKind() == ElementKind.ANNOTATION_TYPE) {
             sourceStructure.addMentionedAnnotations(qualifiedName)
         }
@@ -205,7 +205,7 @@ private class TypeTreeVisitor(val elementUtils: Elements, val trees: Trees, val 
     }
 }
 
-private val literalKinds = setOf(
+private konst literalKinds = setOf(
     Tree.Kind.BOOLEAN_LITERAL,
     Tree.Kind.INT_LITERAL,
     Tree.Kind.LONG_LITERAL,
@@ -219,12 +219,12 @@ private val literalKinds = setOf(
  * Visits a constant initializer expression, and extracts all references to constants, either through field select (A.MY_FIELD) or
  * identifier (MY_FIELD, which happens if A.MY_FIELD is statically imported).
  */
-private class ConstantTreeVisitor(val sourceStructure: SourceFileStructure) : TreePathScanner<Void, Void>() {
+private class ConstantTreeVisitor(konst sourceStructure: SourceFileStructure) : TreePathScanner<Void, Void>() {
 
     fun isTrivialLiteralExpression(tree: Tree) = tree.kind in literalKinds
 
     override fun visitAssignment(node: AssignmentTree, p: Void?): Void? {
-        // Annotation element values are in "element = expression" form, and we only want to analyze "expression" part. So ignore variable.
+        // Annotation element konstues are in "element = expression" form, and we only want to analyze "expression" part. So ignore variable.
         scan(node.expression, p)
         return null
     }
@@ -240,8 +240,8 @@ private class ConstantTreeVisitor(val sourceStructure: SourceFileStructure) : Tr
     }
 
     private fun addConstantSymbol(sym: Symbol) {
-        val name = sym.name
-        val containingClass = sym.owner
+        konst name = sym.name
+        konst containingClass = sym.owner
 
         sourceStructure.addMentionedConstant(containingClass.qualifiedName.toString(), name.toString())
     }

@@ -1,4 +1,4 @@
-KtFile: validDeclarations.kt
+KtFile: konstidDeclarations.kt
   PACKAGE_DIRECTIVE
     <empty list>
   IMPORT_LIST
@@ -91,7 +91,7 @@ KtFile: validDeclarations.kt
             PsiWhiteSpace(' ')
             PsiElement(private)('private')
           PsiWhiteSpace(' ')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x')
           PsiElement(COLON)(':')
@@ -386,7 +386,7 @@ KtFile: validDeclarations.kt
           PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiElement(COLON)(':')
@@ -581,7 +581,7 @@ KtFile: validDeclarations.kt
               REFERENCE_EXPRESSION
                 PsiElement(IDENTIFIER)('private')
     PsiWhiteSpace(' ')
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')
     PsiWhiteSpace(' ')

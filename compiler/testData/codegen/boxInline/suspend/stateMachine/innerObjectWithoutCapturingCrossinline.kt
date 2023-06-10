@@ -12,7 +12,7 @@ interface SuspendRunnable {
 }
 
 suspend inline fun crossinlineMe(crossinline c: suspend () -> Unit) {
-    val o = object : SuspendRunnable {
+    konst o = object : SuspendRunnable {
         override suspend fun run() {
             StateMachineChecker.suspendHere()
             StateMachineChecker.suspendHere()

@@ -23,7 +23,7 @@ class FirPartialModifierRenderer : FirModifierRenderer() {
         if (memberDeclaration.isInner) {
             renderModifier("inner ")
         }
-        // `companion/data/fun` modifiers are only valid for FirRegularClass, but we render them to make sure they are not
+        // `companion/data/fun` modifiers are only konstid for FirRegularClass, but we render them to make sure they are not
         // incorrectly loaded for other declarations during deserialization.
         if (memberDeclaration.status.isCompanion) {
             renderModifier("companion ")
@@ -33,7 +33,7 @@ class FirPartialModifierRenderer : FirModifierRenderer() {
         }
         // All Java interfaces are considered `fun` (functional interfaces) for resolution purposes
         // (see JavaSymbolProvider.createFirJavaClass). Don't render `fun` for Java interfaces; it's not a modifier in Java.
-        val isJavaInterface =
+        konst isJavaInterface =
             memberDeclaration is FirRegularClass && memberDeclaration.classKind == ClassKind.INTERFACE && memberDeclaration.isJava
         if (memberDeclaration.status.isFun && !isJavaInterface) {
             renderModifier("fun ")

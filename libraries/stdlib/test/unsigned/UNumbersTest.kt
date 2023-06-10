@@ -13,14 +13,14 @@ class NumbersTest {
 
     @Test
     fun ubyteBits() {
-        fun test(value: UByte, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
-            assertEquals(oneBits, value.countOneBits())
-            assertEquals(leadingZeroes, value.countLeadingZeroBits())
-            assertEquals(trailingZeroes, value.countTrailingZeroBits())
-            val highestBit = if (leadingZeroes < UByte.SIZE_BITS) 1u.shl(UByte.SIZE_BITS - leadingZeroes - 1).toUByte() else 0u
-            val lowestBit = if (trailingZeroes < UByte.SIZE_BITS) 1u.shl(trailingZeroes).toUByte() else 0u
-            assertEquals(highestBit, value.takeHighestOneBit())
-            assertEquals(lowestBit, value.takeLowestOneBit())
+        fun test(konstue: UByte, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
+            assertEquals(oneBits, konstue.countOneBits())
+            assertEquals(leadingZeroes, konstue.countLeadingZeroBits())
+            assertEquals(trailingZeroes, konstue.countTrailingZeroBits())
+            konst highestBit = if (leadingZeroes < UByte.SIZE_BITS) 1u.shl(UByte.SIZE_BITS - leadingZeroes - 1).toUByte() else 0u
+            konst lowestBit = if (trailingZeroes < UByte.SIZE_BITS) 1u.shl(trailingZeroes).toUByte() else 0u
+            assertEquals(highestBit, konstue.takeHighestOneBit())
+            assertEquals(lowestBit, konstue.takeLowestOneBit())
         }
 
         test(0u, 0, 8, 8)
@@ -33,14 +33,14 @@ class NumbersTest {
 
     @Test
     fun ushortBits() {
-        fun test(value: UShort, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
-            assertEquals(oneBits, value.countOneBits())
-            assertEquals(leadingZeroes, value.countLeadingZeroBits())
-            assertEquals(trailingZeroes, value.countTrailingZeroBits())
-            val highestBit = if (leadingZeroes < UShort.SIZE_BITS) 1u.shl(UShort.SIZE_BITS - leadingZeroes - 1).toUShort() else 0u
-            val lowestBit = if (trailingZeroes < UShort.SIZE_BITS) 1u.shl(trailingZeroes).toUShort() else 0u
-            assertEquals(highestBit, value.takeHighestOneBit())
-            assertEquals(lowestBit, value.takeLowestOneBit())
+        fun test(konstue: UShort, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
+            assertEquals(oneBits, konstue.countOneBits())
+            assertEquals(leadingZeroes, konstue.countLeadingZeroBits())
+            assertEquals(trailingZeroes, konstue.countTrailingZeroBits())
+            konst highestBit = if (leadingZeroes < UShort.SIZE_BITS) 1u.shl(UShort.SIZE_BITS - leadingZeroes - 1).toUShort() else 0u
+            konst lowestBit = if (trailingZeroes < UShort.SIZE_BITS) 1u.shl(trailingZeroes).toUShort() else 0u
+            assertEquals(highestBit, konstue.takeHighestOneBit())
+            assertEquals(lowestBit, konstue.takeLowestOneBit())
         }
 
         test(0u, 0, 16, 16)
@@ -53,14 +53,14 @@ class NumbersTest {
 
     @Test
     fun uintBits() {
-        fun test(value: UInt, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
-            assertEquals(oneBits, value.countOneBits())
-            assertEquals(leadingZeroes, value.countLeadingZeroBits())
-            assertEquals(trailingZeroes, value.countTrailingZeroBits())
-            val highestBit = if (leadingZeroes < UInt.SIZE_BITS) 1u.shl(UInt.SIZE_BITS - leadingZeroes - 1) else 0u
-            val lowestBit = if (trailingZeroes < UInt.SIZE_BITS) 1u.shl(trailingZeroes) else 0u
-            assertEquals(highestBit, value.takeHighestOneBit())
-            assertEquals(lowestBit, value.takeLowestOneBit())
+        fun test(konstue: UInt, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
+            assertEquals(oneBits, konstue.countOneBits())
+            assertEquals(leadingZeroes, konstue.countLeadingZeroBits())
+            assertEquals(trailingZeroes, konstue.countTrailingZeroBits())
+            konst highestBit = if (leadingZeroes < UInt.SIZE_BITS) 1u.shl(UInt.SIZE_BITS - leadingZeroes - 1) else 0u
+            konst lowestBit = if (trailingZeroes < UInt.SIZE_BITS) 1u.shl(trailingZeroes) else 0u
+            assertEquals(highestBit, konstue.takeHighestOneBit())
+            assertEquals(lowestBit, konstue.takeLowestOneBit())
         }
 
         test(0u, 0, 32, 32)
@@ -72,14 +72,14 @@ class NumbersTest {
 
     @Test
     fun ulongBits() {
-        fun test(value: ULong, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
-            assertEquals(oneBits, value.countOneBits())
-            assertEquals(leadingZeroes, value.countLeadingZeroBits())
-            assertEquals(trailingZeroes, value.countTrailingZeroBits())
-            val highestBit = if (leadingZeroes < ULong.SIZE_BITS) 1uL.shl(ULong.SIZE_BITS - leadingZeroes - 1).toULong() else 0u
-            val lowestBit = if (trailingZeroes < ULong.SIZE_BITS) 1uL.shl(trailingZeroes).toULong() else 0u
-            assertEquals(highestBit, value.takeHighestOneBit())
-            assertEquals(lowestBit, value.takeLowestOneBit())
+        fun test(konstue: ULong, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
+            assertEquals(oneBits, konstue.countOneBits())
+            assertEquals(leadingZeroes, konstue.countLeadingZeroBits())
+            assertEquals(trailingZeroes, konstue.countTrailingZeroBits())
+            konst highestBit = if (leadingZeroes < ULong.SIZE_BITS) 1uL.shl(ULong.SIZE_BITS - leadingZeroes - 1).toULong() else 0u
+            konst lowestBit = if (trailingZeroes < ULong.SIZE_BITS) 1uL.shl(trailingZeroes).toULong() else 0u
+            assertEquals(highestBit, konstue.takeHighestOneBit())
+            assertEquals(lowestBit, konstue.takeLowestOneBit())
         }
 
         test(0uL, 0, 64, 64)
@@ -93,20 +93,20 @@ class NumbersTest {
 
     @Test
     fun uintRotate() {
-        fun test(value: UInt, n: Int, expected: UInt) {
-            assertEquals(expected, value.rotateLeft(n))
-            assertEquals(expected, value.rotateRight(-n))
+        fun test(konstue: UInt, n: Int, expected: UInt) {
+            assertEquals(expected, konstue.rotateLeft(n))
+            assertEquals(expected, konstue.rotateRight(-n))
         }
 
-        fun testCyclic(value: UInt) {
+        fun testCyclic(konstue: UInt) {
             for (n in -2 * UInt.SIZE_BITS..2 * UInt.SIZE_BITS) {
-                val rl = value.rotateLeft(n)
-                val rr = value.rotateRight(-n)
+                konst rl = konstue.rotateLeft(n)
+                konst rr = konstue.rotateRight(-n)
                 assertEquals(rl, rr)
-                assertEquals(rl, value.rotateLeft(n % UInt.SIZE_BITS))
-                assertEquals(rr, value.rotateRight((-n) % UInt.SIZE_BITS))
-                assertEquals(value, value.rotateLeft(n).rotateLeft(-n))
-                assertEquals(value, value.rotateRight(n).rotateRight(-n))
+                assertEquals(rl, konstue.rotateLeft(n % UInt.SIZE_BITS))
+                assertEquals(rr, konstue.rotateRight((-n) % UInt.SIZE_BITS))
+                assertEquals(konstue, konstue.rotateLeft(n).rotateLeft(-n))
+                assertEquals(konstue, konstue.rotateRight(n).rotateRight(-n))
             }
         }
 
@@ -120,20 +120,20 @@ class NumbersTest {
 
     @Test
     fun ubyteRotate() {
-        fun test(value: UByte, n: Int, expected: UByte) {
-            assertEquals(expected, value.rotateLeft(n))
-            assertEquals(expected, value.rotateRight(-n))
+        fun test(konstue: UByte, n: Int, expected: UByte) {
+            assertEquals(expected, konstue.rotateLeft(n))
+            assertEquals(expected, konstue.rotateRight(-n))
         }
 
-        fun testCyclic(value: UByte) {
+        fun testCyclic(konstue: UByte) {
             for (n in -2 * UByte.SIZE_BITS..2 * UByte.SIZE_BITS) {
-                val rl = value.rotateLeft(n)
-                val rr = value.rotateRight(-n)
+                konst rl = konstue.rotateLeft(n)
+                konst rr = konstue.rotateRight(-n)
                 assertEquals(rl, rr)
-                assertEquals(rl, value.rotateLeft(n % UByte.SIZE_BITS))
-                assertEquals(rr, value.rotateRight((-n) % UByte.SIZE_BITS))
-                assertEquals(value, value.rotateLeft(n).rotateLeft(-n))
-                assertEquals(value, value.rotateRight(n).rotateRight(-n))
+                assertEquals(rl, konstue.rotateLeft(n % UByte.SIZE_BITS))
+                assertEquals(rr, konstue.rotateRight((-n) % UByte.SIZE_BITS))
+                assertEquals(konstue, konstue.rotateLeft(n).rotateLeft(-n))
+                assertEquals(konstue, konstue.rotateRight(n).rotateRight(-n))
             }
         }
 
@@ -148,20 +148,20 @@ class NumbersTest {
 
     @Test
     fun ulongRotate() {
-        fun test(value: ULong, n: Int, expected: ULong) {
-            assertEquals(expected, value.rotateLeft(n))
-            assertEquals(expected, value.rotateRight(-n))
+        fun test(konstue: ULong, n: Int, expected: ULong) {
+            assertEquals(expected, konstue.rotateLeft(n))
+            assertEquals(expected, konstue.rotateRight(-n))
         }
 
-        fun testCyclic(value: ULong) {
+        fun testCyclic(konstue: ULong) {
             for (n in -2 * ULong.SIZE_BITS..2 * ULong.SIZE_BITS) {
-                val rl = value.rotateLeft(n)
-                val rr = value.rotateRight(-n)
+                konst rl = konstue.rotateLeft(n)
+                konst rr = konstue.rotateRight(-n)
                 assertEquals(rl, rr)
-                assertEquals(rl, value.rotateLeft(n % ULong.SIZE_BITS))
-                assertEquals(rr, value.rotateRight((-n) % ULong.SIZE_BITS))
-                assertEquals(value, value.rotateLeft(n).rotateLeft(-n))
-                assertEquals(value, value.rotateRight(n).rotateRight(-n))
+                assertEquals(rl, konstue.rotateLeft(n % ULong.SIZE_BITS))
+                assertEquals(rr, konstue.rotateRight((-n) % ULong.SIZE_BITS))
+                assertEquals(konstue, konstue.rotateLeft(n).rotateLeft(-n))
+                assertEquals(konstue, konstue.rotateRight(n).rotateRight(-n))
             }
         }
 
@@ -175,20 +175,20 @@ class NumbersTest {
 
     @Test
     fun ushortRotate() {
-        fun test(value: UShort, n: Int, expected: UShort) {
-            assertEquals(expected, value.rotateLeft(n))
-            assertEquals(expected, value.rotateRight(-n))
+        fun test(konstue: UShort, n: Int, expected: UShort) {
+            assertEquals(expected, konstue.rotateLeft(n))
+            assertEquals(expected, konstue.rotateRight(-n))
         }
 
-        fun testCyclic(value: UShort) {
+        fun testCyclic(konstue: UShort) {
             for (n in -2 * UShort.SIZE_BITS..2 * UShort.SIZE_BITS) {
-                val rl = value.rotateLeft(n)
-                val rr = value.rotateRight(-n)
+                konst rl = konstue.rotateLeft(n)
+                konst rr = konstue.rotateRight(-n)
                 assertEquals(rl, rr)
-                assertEquals(rl, value.rotateLeft(n % UShort.SIZE_BITS))
-                assertEquals(rr, value.rotateRight((-n) % UShort.SIZE_BITS))
-                assertEquals(value, value.rotateLeft(n).rotateLeft(-n))
-                assertEquals(value, value.rotateRight(n).rotateRight(-n))
+                assertEquals(rl, konstue.rotateLeft(n % UShort.SIZE_BITS))
+                assertEquals(rr, konstue.rotateRight((-n) % UShort.SIZE_BITS))
+                assertEquals(konstue, konstue.rotateLeft(n).rotateLeft(-n))
+                assertEquals(konstue, konstue.rotateRight(n).rotateRight(-n))
             }
         }
 

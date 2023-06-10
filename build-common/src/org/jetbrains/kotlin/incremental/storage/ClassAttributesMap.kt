@@ -23,15 +23,15 @@ import java.io.DataInput
 import java.io.DataOutput
 import java.io.File
 
-internal data class ICClassesAttributes(val isSealed: Boolean)
+internal data class ICClassesAttributes(konst isSealed: Boolean)
 
 internal object ICClassesAttributesExternalizer : DataExternalizer<ICClassesAttributes> {
     override fun read(input: DataInput): ICClassesAttributes {
         return ICClassesAttributes(input.readBoolean())
     }
 
-    override fun save(output: DataOutput, value: ICClassesAttributes) {
-        output.writeBoolean(value.isSealed)
+    override fun save(output: DataOutput, konstue: ICClassesAttributes) {
+        output.writeBoolean(konstue.isSealed)
     }
 }
 
@@ -39,10 +39,10 @@ internal open class ClassAttributesMap(
     storageFile: File,
     icContext: IncrementalCompilationContext,
 ) : BasicStringMap<ICClassesAttributes>(storageFile, ICClassesAttributesExternalizer, icContext) {
-    override fun dumpValue(value: ICClassesAttributes): String = value.toString()
+    override fun dumpValue(konstue: ICClassesAttributes): String = konstue.toString()
 
-    operator fun set(key: FqName, value: ICClassesAttributes) {
-        storage[key.asString()] = value
+    operator fun set(key: FqName, konstue: ICClassesAttributes) {
+        storage[key.asString()] = konstue
     }
 
     operator fun get(key: FqName): ICClassesAttributes? = storage[key.asString()]

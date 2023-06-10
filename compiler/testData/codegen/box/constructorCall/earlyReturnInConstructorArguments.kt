@@ -5,17 +5,17 @@ inline fun ok(): String {
 }
 
 fun box(): String {
-    val ok = ok()
+    konst ok = ok()
     if (ok != "OK") return "Fail: $ok"
 
-    val r = log.toString()
+    konst r = log.toString()
     if (r != "bar;<clinit>;<init>;foo;") return "Fail: '$r'"
 
     return "OK"
 }
 
 // FILE: C.kt
-class C(val str: String) {
+class C(konst str: String) {
     init {
         log.append("<init>;")
     }
@@ -33,9 +33,9 @@ fun foo(x: Int, a: Double, b: Float, y: Long, z: String, c: C) =
 
 fun bar() = logged("bar;", false)
 
-val log = StringBuilder()
+konst log = StringBuilder()
 
-fun <T> logged(msg: String, value: T): T {
+fun <T> logged(msg: String, konstue: T): T {
     log.append(msg)
-    return value
+    return konstue
 }

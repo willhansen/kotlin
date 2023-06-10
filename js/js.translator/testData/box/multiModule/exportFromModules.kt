@@ -7,7 +7,7 @@
 package demoPackage.a1
 
 @JsExport
-data class ModuleA1Class(private val string: String = "A1") {
+data class ModuleA1Class(private konst string: String = "A1") {
     override fun toString(): String = string
 }
 
@@ -38,9 +38,9 @@ package mainPackage
 import demoPackage.*
 
 external interface JsResult {
-    val moduleA1: String
-    val moduleA2: String
-    val moduleB: String
+    konst moduleA1: String
+    konst moduleA2: String
+    konst moduleB: String
 }
 
 @JsModule("lib")
@@ -49,7 +49,7 @@ external fun jsBox(): JsResult
 fun box(): String {
     assertEquals(demoPackage.b.moduleBFunction(), "B")
 
-    val res = jsBox()
+    konst res = jsBox()
     assertEquals(res.moduleA1, "A1")
     assertEquals(res.moduleA2, "A2")
     assertEquals(res.moduleB, "B")

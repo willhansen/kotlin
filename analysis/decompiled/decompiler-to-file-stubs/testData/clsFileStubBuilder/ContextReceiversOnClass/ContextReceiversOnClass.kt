@@ -6,9 +6,9 @@ private open class ContextReceiversOnClass {
 }
 
 class A {
-    val valueA: Int = 10
+    konst konstueA: Int = 10
 }
 
 class B {
-    val valueB: Int = 11
+    konst konstueB: Int = 11
 }

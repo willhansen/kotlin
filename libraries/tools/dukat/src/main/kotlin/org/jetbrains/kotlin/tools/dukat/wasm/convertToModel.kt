@@ -52,7 +52,7 @@ import org.jetbrains.dukat.stdlib.isTsStdlibPrefixed
 import org.jetbrains.dukat.translator.ROOT_PACKAGENAME
 import java.io.File
 
-private val jsAnyHeritageModel: HeritageModel = HeritageModel(
+private konst jsAnyHeritageModel: HeritageModel = HeritageModel(
     TypeValueModel(
         IdentifierEntity("JsAny"),
         emptyList(),
@@ -75,28 +75,28 @@ private fun IDLDeclaration.resolveName(): String? {
     }
 }
 
-private val INLINE_ONLY_ANNOTATION = AnnotationModel(
+private konst INLINE_ONLY_ANNOTATION = AnnotationModel(
     name = IdentifierEntity("kotlin.internal.InlineOnly"),
     params = listOf()
 )
 
-private val PUBLISHED_API_ANNOTATION = AnnotationModel(
+private konst PUBLISHED_API_ANNOTATION = AnnotationModel(
     name = IdentifierEntity("PublishedApi"),
     params = listOf()
 )
 
-private val SUPPRESS_UNUSED_PARAMETER_ANNOTATION = AnnotationModel(
+private konst SUPPRESS_UNUSED_PARAMETER_ANNOTATION = AnnotationModel(
     IdentifierEntity("Suppress"),
     listOf(IdentifierEntity("UNUSED_PARAMETER"))
 )
 
 private class IdlFileConverter(
-    private val fileDeclaration: IDLFileDeclaration,
-    private val typeMap: Map<String, NameEntity?>,
+    private konst fileDeclaration: IDLFileDeclaration,
+    private konst typeMap: Map<String, NameEntity?>,
 ) {
 
     private companion object {
-        val stdLibTypes = setOf(
+        konst stdLibTypes = setOf(
             "Any",
             "Array",
             "Boolean",
@@ -111,7 +111,7 @@ private class IdlFileConverter(
             "Unit"
         )
 
-        val toStdMap = mapOf(
+        konst toStdMap = mapOf(
             "ByteString" to "String",
             "CSSOMString" to "String",
             "DOMError" to "JsAny",
@@ -141,7 +141,7 @@ private class IdlFileConverter(
             "void" to "Unit"
         )
 
-        val kotlinToExternalType = mapOf(
+        konst kotlinToExternalType = mapOf(
             "String" to "JsString",
             "Byte" to "JsNumber",
             "Short" to "JsNumber",
@@ -153,18 +153,18 @@ private class IdlFileConverter(
         )
     }
 
-    private val staticConverterNames = setOf(
+    private konst staticConverterNames = setOf(
         "Boolean", "Byte", "Short", "Char", "Int", "Long", "Float", "Double", "String" )
 
     private fun NameEntity.staticConverter(): String? {
         return when (this) {
-            is QualifierEntity -> if (isTsStdlibPrefixed() && staticConverterNames.contains(right.value)) "get${right.value}" else null
-            is IdentifierEntity -> if (staticConverterNames.contains(value)) "get$value" else null
+            is QualifierEntity -> if (isTsStdlibPrefixed() && staticConverterNames.contains(right.konstue)) "get${right.konstue}" else null
+            is IdentifierEntity -> if (staticConverterNames.contains(konstue)) "get$konstue" else null
         }
     }
 
     private fun String.stdFqName(): NameEntity? {
-        val name = toStdMap[this] ?: this
+        konst name = toStdMap[this] ?: this
         return if (stdLibTypes.contains(name)) {
             QualifierEntity(TSLIBROOT, IdentifierEntity(name))
         } else {
@@ -173,7 +173,7 @@ private class IdlFileConverter(
     }
 
     private fun IDLDeclaration.toFqName(): NameEntity? {
-        val name = resolveName() ?: return null
+        konst name = resolveName() ?: return null
         return name.stdFqName() ?: typeMap[name]?.appendLeft(IdentifierEntity(name))
     }
 
@@ -186,8 +186,8 @@ private class IdlFileConverter(
         if (isTypeParameter)
             resolvedName = kotlinToExternalType[resolvedName] ?: resolvedName
 
-        val typeModel = TypeValueModel(
-            value = IdentifierEntity(resolvedName),
+        konst typeModel = TypeValueModel(
+            konstue = IdentifierEntity(resolvedName),
             params = listOfNotNull(typeParameter?.convertToModel(isTypeParameter = true))
                 .map { TypeParameterModel(it, listOf()) }
                 .map {
@@ -211,7 +211,7 @@ private class IdlFileConverter(
     }
 
     private fun IDLFunctionTypeDeclaration.convertToModel(): FunctionTypeModel {
-        val returnTypeModel = returnType.convertToModel()
+        konst returnTypeModel = returnType.convertToModel()
         return FunctionTypeModel(
             parameters = arguments.filterNot { it.variadic }.map { it.convertToLambdaParameterModel() },
             type = returnTypeModel,
@@ -269,15 +269,15 @@ private class IdlFileConverter(
     }
 
     private fun IDLSetterDeclaration.processAsTopLevel(ownerName: NameEntity): List<TopLevelModel> {
-        val privateSetterName = IdentifierEntity("setMethodImplFor" + (ownerName as IdentifierEntity).value)
-        val unitType = TypeValueModel(
-            value = IdentifierEntity("Unit"),
+        konst privateSetterName = IdentifierEntity("setMethodImplFor" + (ownerName as IdentifierEntity).konstue)
+        konst unitType = TypeValueModel(
+            konstue = IdentifierEntity("Unit"),
             params = listOf(),
             metaDescription = null,
             fqName = "Unit".stdFqName()
         )
 
-        val privateSetterImpl = FunctionModel(
+        konst privateSetterImpl = FunctionModel(
             name = privateSetterName,
             parameters = listOf(
                 ParameterModel(
@@ -288,7 +288,7 @@ private class IdlFileConverter(
                     modifier = null
                 ),
                 key.convertToParameterModel(),
-                value.convertToParameterModel(),
+                konstue.convertToParameterModel(),
             ),
             type = unitType,
             typeParameters = listOf(),
@@ -301,7 +301,7 @@ private class IdlFileConverter(
             ),
             body = BlockStatementModel(
                 listOf(
-                    ExpressionStatementModel(callJsFunction("obj[${key.name}] = ${value.name};"))
+                    ExpressionStatementModel(callJsFunction("obj[${key.name}] = ${konstue.name};"))
                 )
             ),
             visibilityModifier = VisibilityModifierModel.INTERNAL,
@@ -309,9 +309,9 @@ private class IdlFileConverter(
             external = false
         )
 
-        val publicSetter = FunctionModel(
+        konst publicSetter = FunctionModel(
             name = IdentifierEntity("set"),
-            parameters = listOf(key.convertToParameterModel(), value.convertToParameterModel()),
+            parameters = listOf(key.convertToParameterModel(), konstue.convertToParameterModel()),
             type = unitType,
             typeParameters = listOf(),
             annotations = mutableListOf(
@@ -331,7 +331,7 @@ private class IdlFileConverter(
                             arguments = listOf(
                                 ThisExpressionModel(),
                                 IdentifierExpressionModel(IdentifierEntity(key.name)),
-                                IdentifierExpressionModel(IdentifierEntity(value.name))
+                                IdentifierExpressionModel(IdentifierEntity(konstue.name))
                             ),
                         )
                     )
@@ -345,12 +345,12 @@ private class IdlFileConverter(
     }
 
     private fun IDLGetterDeclaration.processAsTopLevel(ownerName: NameEntity): List<TopLevelModel> {
-        val keyExpression = IdentifierExpressionModel(IdentifierEntity(value = key.name))
-        IdentifierEntity((valueType.toNullableIfNotPrimitive().convertToModel() as? TypeValueModel)?.value?.staticConverter() ?: "getAny")
+        konst keyExpression = IdentifierExpressionModel(IdentifierEntity(konstue = key.name))
+        IdentifierEntity((konstueType.toNullableIfNotPrimitive().convertToModel() as? TypeValueModel)?.konstue?.staticConverter() ?: "getAny")
 
-        val privateGetterName = IdentifierEntity("getMethodImplFor" + (ownerName as IdentifierEntity).value)
+        konst privateGetterName = IdentifierEntity("getMethodImplFor" + (ownerName as IdentifierEntity).konstue)
 
-        val privateGetterImpl = FunctionModel(
+        konst privateGetterImpl = FunctionModel(
             name = privateGetterName,
             parameters = listOf(
                 ParameterModel(
@@ -362,7 +362,7 @@ private class IdlFileConverter(
                 ),
                 key.convertToParameterModel()
             ),
-            type = valueType.toNullableIfNotPrimitive().convertToModel(),
+            type = konstueType.toNullableIfNotPrimitive().convertToModel(),
             typeParameters = listOf(),
             export = false,
             inline = false,
@@ -381,10 +381,10 @@ private class IdlFileConverter(
             external = false
         )
 
-        val publicGetter = FunctionModel(
+        konst publicGetter = FunctionModel(
             name = IdentifierEntity("get"),
             parameters = listOf(key.convertToParameterModel()),
-            type = valueType.toNullableIfNotPrimitive().convertToModel(),
+            type = konstueType.toNullableIfNotPrimitive().convertToModel(),
             typeParameters = listOf(),
             annotations = mutableListOf(
             ),
@@ -418,10 +418,10 @@ private class IdlFileConverter(
             return listOf()
         }
 
-        val (staticAttributes, dynamicAttributes) = attributes.partition { it.static }
-        val (staticOperations, dynamicOperations) = operations.partition { it.static }
+        konst (staticAttributes, dynamicAttributes) = attributes.partition { it.static }
+        konst (staticOperations, dynamicOperations) = operations.partition { it.static }
 
-        val dynamicMemberModels = (
+        konst dynamicMemberModels = (
                 constructors +
                         dynamicAttributes + dynamicOperations +
                         getters.filterNot { it.name == "get" } +
@@ -431,11 +431,11 @@ private class IdlFileConverter(
             }.distinct()
 
 
-        val staticMemberModels = (staticAttributes + staticOperations).mapNotNull {
+        konst staticMemberModels = (staticAttributes + staticOperations).mapNotNull {
             it.convertToModel()
         }.distinct()
 
-        val companionObjectModel = if (staticMemberModels.isNotEmpty()) {
+        konst companionObjectModel = if (staticMemberModels.isNotEmpty()) {
             ObjectModel(
                 name = IdentifierEntity(""),
                 members = staticMemberModels,
@@ -448,7 +448,7 @@ private class IdlFileConverter(
             null
         }
 
-        val parentModels = (parents + unions).map {
+        konst parentModels = (parents + unions).map {
             HeritageModel(
                 it.convertToModel(),
                 listOf(),
@@ -456,7 +456,7 @@ private class IdlFileConverter(
             )
         }
 
-        val annotationModels = listOfNotNull(
+        konst annotationModels = listOfNotNull(
             if (companionObjectModel != null) {
                 AnnotationModel(
                     IdentifierEntity("Suppress"),
@@ -467,7 +467,7 @@ private class IdlFileConverter(
             }
         ).toMutableList()
 
-        val declaration = if (
+        konst declaration = if (
             kind == InterfaceKind.INTERFACE) {
             InterfaceModel(
                 name = IdentifierEntity(name),
@@ -503,19 +503,19 @@ private class IdlFileConverter(
                 visibilityModifier = VisibilityModifierModel.PUBLIC
             )
         }
-        val getterModels = getters.flatMap { it.processAsTopLevel(declaration.name) }
-        val setterModels = setters.flatMap { it.processAsTopLevel(declaration.name) }
+        konst getterModels = getters.flatMap { it.processAsTopLevel(declaration.name) }
+        konst setterModels = setters.flatMap { it.processAsTopLevel(declaration.name) }
         return listOf(declaration) + getterModels + setterModels
     }
 
     private fun IDLDictionaryMemberDeclaration.convertToParameterModel(): ParameterModel {
-        val type = type.toNullable().changeComment(null).convertToModel()
+        konst type = type.toNullable().changeComment(null).convertToModel()
         return ParameterModel(
             name = name,
             type = type,
             initializer = if (defaultValue != null && !required) {
-                val typeString = (type as? TypeValueModel)?.value.toString()
-                val newDefaultValue = when {
+                konst typeString = (type as? TypeValueModel)?.konstue.toString()
+                konst newDefaultValue = when {
                     typeString.startsWith("Js") && defaultValue == "arrayOf()" ->
                         "JsArray()"
 
@@ -527,7 +527,7 @@ private class IdlFileConverter(
 
                     else -> defaultValue
                 }
-                val defaultValueModel = IdentifierExpressionModel(
+                konst defaultValueModel = IdentifierExpressionModel(
                     IdentifierEntity(newDefaultValue!!)
                 )
                 ExpressionStatementModel(defaultValueModel)
@@ -553,7 +553,7 @@ private class IdlFileConverter(
         )
 
     private fun IDLDictionaryDeclaration.convertToModel(): List<TopLevelModel> {
-        val declaration = InterfaceModel(
+        konst declaration = InterfaceModel(
             name = IdentifierEntity(name),
             members = members.filterNot { it.inherited }.mapNotNull { it.convertToModel() },
             companionObject = null,
@@ -570,11 +570,11 @@ private class IdlFileConverter(
             external = true,
             visibilityModifier = VisibilityModifierModel.PUBLIC
         )
-        val generatedFunction = FunctionModel(
+        konst generatedFunction = FunctionModel(
             name = IdentifierEntity(name),
             parameters = members.map { it.convertToParameterModel() },
             type = TypeValueModel(
-                value = IdentifierEntity(name),
+                konstue = IdentifierEntity(name),
                 params = listOf(),
                 metaDescription = null,
                 fqName = toFqName()
@@ -596,7 +596,7 @@ private class IdlFileConverter(
     }
 
     private fun IDLEnumDeclaration.convertToModel(): List<TopLevelModel> {
-        val declaration = InterfaceModel(
+        konst declaration = InterfaceModel(
             name = IdentifierEntity(name),
             members = listOf(),
             companionObject = ObjectModel(
@@ -631,12 +631,12 @@ private class IdlFileConverter(
             external = true,
             visibilityModifier = VisibilityModifierModel.PUBLIC
         )
-        val generatedVariables = members.map { memberName ->
-            val processedName = processEnumMember(memberName)
+        konst generatedVariables = members.map { memberName ->
+            konst processedName = processEnumMember(memberName)
             VariableModel(
                 name = IdentifierEntity(processEnumMember(memberName)),
                 type = TypeValueModel(
-                    value = declaration.name,
+                    konstue = declaration.name,
                     params = listOf(),
                     metaDescription = null,
                     fqName = processedName.toFqName()
@@ -664,7 +664,7 @@ private class IdlFileConverter(
                             listOf(),
                             typeParameters = listOf(
                                 TypeValueModel(
-                                    value = IdentifierEntity(name),
+                                    konstue = IdentifierEntity(name),
                                     params = listOf(),
                                     metaDescription = null,
                                     fqName = null
@@ -789,7 +789,7 @@ private class IdlFileConverter(
             is IDLGetterDeclaration -> MethodModel(
                 name = IdentifierEntity(name),
                 parameters = listOf(key.convertToParameterModel()),
-                type = valueType.convertToModel(),
+                type = konstueType.convertToModel(),
                 typeParameters = listOf(),
                 static = false,
                 override = null,
@@ -801,9 +801,9 @@ private class IdlFileConverter(
 
             is IDLSetterDeclaration -> MethodModel(
                 name = IdentifierEntity(name),
-                parameters = listOf(key.convertToParameterModel(), value.convertToParameterModel()),
+                parameters = listOf(key.convertToParameterModel(), konstue.convertToParameterModel()),
                 type = TypeValueModel(
-                    value = IdentifierEntity("Unit"),
+                    konstue = IdentifierEntity("Unit"),
                     params = listOf(),
                     metaDescription = null,
                     fqName = "Unit".stdFqName()
@@ -822,18 +822,18 @@ private class IdlFileConverter(
     }
 
     fun convert(): SourceFileModel {
-        val modelsExceptEnumsAndGenerated = fileDeclaration.declarations.filterNot {
+        konst modelsExceptEnumsAndGenerated = fileDeclaration.declarations.filterNot {
             it is IDLEnumDeclaration || (it is IDLInterfaceDeclaration && it.generated)
         }.mapNotNull { it.convertToModel() }.flatten()
 
-        val enumModels =
+        konst enumModels =
             fileDeclaration.declarations.filterIsInstance<IDLEnumDeclaration>().map { it.convertToModel() }.flatten()
 
-        val generatedModels = fileDeclaration.declarations.filter {
+        konst generatedModels = fileDeclaration.declarations.filter {
             it is IDLInterfaceDeclaration && it.generated
         }.mapNotNull { it.convertToModel() }.flatten()
 
-        val module = ModuleModel(
+        konst module = ModuleModel(
             name = fileDeclaration.packageName ?: ROOT_PACKAGENAME,
             shortName = fileDeclaration.packageName?.rightMost() ?: ROOT_PACKAGENAME,
             declarations = modelsExceptEnumsAndGenerated + generatedModels + enumModels,
@@ -856,7 +856,7 @@ private class IdlFileConverter(
     }
 }
 
-private class IDLReferenceVisitor(private val visit: (IDLDeclaration, NameEntity?) -> Unit) : IDLLowering {
+private class IDLReferenceVisitor(private konst visit: (IDLDeclaration, NameEntity?) -> Unit) : IDLLowering {
     override fun lowerTopLevelDeclaration(
         declaration: IDLTopLevelDeclaration,
         owner: IDLFileDeclaration
@@ -868,7 +868,7 @@ private class IDLReferenceVisitor(private val visit: (IDLDeclaration, NameEntity
 
 fun IDLSourceSetDeclaration.convertToWasmModel(): SourceSetModel {
 
-    val typeMap = mutableMapOf<String, NameEntity?>()
+    konst typeMap = mutableMapOf<String, NameEntity?>()
     IDLReferenceVisitor { declaration, packageName ->
         declaration.resolveName()?.let {
             typeMap[it] = packageName ?: ROOT_PACKAGENAME

@@ -33,11 +33,11 @@ object FirTypeParameterInQualifiedAccessChecker : FirQualifiedAccessExpressionCh
         // Make sure the current expression is not the receiver of a qualified access expression.
         // E.g., for `T::toString`, which is a callable reference (a subtype of qualified access), type parameter T is checked once as an
         // explicit receiver. When we visit `T` (as a qualified access expression), we should not regard it as an expression here.
-        val secondLast = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.elementAtOrNull(context.qualifiedAccessOrAssignmentsOrAnnotationCalls.size - 2)
+        konst secondLast = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.elementAtOrNull(context.qualifiedAccessOrAssignmentsOrAnnotationCalls.size - 2)
         if (secondLast is FirQualifiedAccessExpression && secondLast.explicitReceiver == expression) return
 
-        val diagnostic = expression.typeRef.coneTypeParameterInQualifiedAccess ?: return
-        val source = expression.source ?: return
+        konst diagnostic = expression.typeRef.coneTypeParameterInQualifiedAccess ?: return
+        konst source = expression.source ?: return
         reporter.reportOn(source, FirErrors.TYPE_PARAMETER_IS_NOT_AN_EXPRESSION, diagnostic.symbol, context)
     }
 
@@ -46,8 +46,8 @@ object FirTypeParameterInQualifiedAccessChecker : FirQualifiedAccessExpressionCh
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val explicitReceiver = expression.explicitReceiver
-        val typeParameterSymbol =
+        konst explicitReceiver = expression.explicitReceiver
+        konst typeParameterSymbol =
             (explicitReceiver as? FirResolvedReifiedParameterReference)?.symbol
                 ?: explicitReceiver?.typeRef?.coneTypeParameterInQualifiedAccess?.symbol
                 ?: return
@@ -58,6 +58,6 @@ object FirTypeParameterInQualifiedAccessChecker : FirQualifiedAccessExpressionCh
         }
     }
 
-    private val FirTypeRef.coneTypeParameterInQualifiedAccess: ConeTypeParameterInQualifiedAccess?
+    private konst FirTypeRef.coneTypeParameterInQualifiedAccess: ConeTypeParameterInQualifiedAccess?
         get() = (this as? FirErrorTypeRef)?.diagnostic as? ConeTypeParameterInQualifiedAccess
 }

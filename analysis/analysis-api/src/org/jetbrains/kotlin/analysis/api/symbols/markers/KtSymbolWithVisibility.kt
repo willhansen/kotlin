@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.descriptors.Visibility
 import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 
 public interface KtSymbolWithVisibility : KtSymbol {
-    public val visibility: Visibility
+    public konst visibility: Visibility
 }
 
 

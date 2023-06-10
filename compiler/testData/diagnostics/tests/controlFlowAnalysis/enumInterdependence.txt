@@ -8,9 +8,9 @@ public final enum class A : kotlin.Enum<A> {
     enum entry A3
 
     private constructor A(/*0*/ v: A)
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
-    public final val v: A
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
+    public final konst v: A
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: A): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -20,9 +20,9 @@ public final enum class A : kotlin.Enum<A> {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<A>
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): A
-    public final /*synthesized*/ fun values(): kotlin.Array<A>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<A>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): A
+    public final /*synthesized*/ fun konstues(): kotlin.Array<A>
 }
 
 public final enum class D : kotlin.Enum<D> {
@@ -31,9 +31,9 @@ public final enum class D : kotlin.Enum<D> {
     enum entry D2
 
     private constructor D(/*0*/ x: kotlin.Int)
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
-    public final val x: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
+    public final konst x: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: D): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -43,18 +43,18 @@ public final enum class D : kotlin.Enum<D> {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<D>
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): D
-    public final /*synthesized*/ fun values(): kotlin.Array<D>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<D>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): D
+    public final /*synthesized*/ fun konstues(): kotlin.Array<D>
 }
 
 public final enum class E : kotlin.Enum<E> {
     enum entry E1
 
     private constructor E(/*0*/ v: kotlin.Int)
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
-    public final val v: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
+    public final konst v: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: E): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -65,16 +65,16 @@ public final enum class E : kotlin.Enum<E> {
 
     public object Nested {
         private constructor Nested()
-        public final val COPY: kotlin.Int
+        public final konst COPY: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
     }
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<E>
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): E
-    public final /*synthesized*/ fun values(): kotlin.Array<E>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<E>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): E
+    public final /*synthesized*/ fun konstues(): kotlin.Array<E>
 }
 
 public final enum class MyEnum : kotlin.Enum<MyEnum> {
@@ -83,9 +83,9 @@ public final enum class MyEnum : kotlin.Enum<MyEnum> {
     enum entry B
 
     private constructor MyEnum()
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
-    public final val x: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
+    public final konst x: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: MyEnum): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -95,21 +95,21 @@ public final enum class MyEnum : kotlin.Enum<MyEnum> {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<MyEnum>
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): MyEnum
-    public final /*synthesized*/ fun values(): kotlin.Array<MyEnum>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<MyEnum>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): MyEnum
+    public final /*synthesized*/ fun konstues(): kotlin.Array<MyEnum>
 }
 
 public object Object1 {
     private constructor Object1()
-    public final val y: kotlin.Any
+    public final konst y: kotlin.Any
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     public object Object2 {
         private constructor Object2()
-        public final val z: kotlin.Any
+        public final konst z: kotlin.Any
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

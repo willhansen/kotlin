@@ -245,7 +245,7 @@ public abstract class AbstractAnnotationDescriptorResolveTest extends KotlinTest
 
     @NotNull
     private ClassDescriptor getLocalClassDescriptor(@NotNull String name) {
-        for (ClassDescriptor descriptor : getContext().getSliceContents(BindingContext.CLASS).values()) {
+        for (ClassDescriptor descriptor : getContext().getSliceContents(BindingContext.CLASS).konstues()) {
             if (descriptor.getName().asString().equals(name)) {
                 return descriptor;
             }
@@ -268,7 +268,7 @@ public abstract class AbstractAnnotationDescriptorResolveTest extends KotlinTest
 
     @NotNull
     private SimpleFunctionDescriptor getLocalFunDescriptor(@NotNull String name) {
-        for (SimpleFunctionDescriptor descriptor : getContext().getSliceContents(BindingContext.FUNCTION).values()) {
+        for (SimpleFunctionDescriptor descriptor : getContext().getSliceContents(BindingContext.FUNCTION).konstues()) {
             if (descriptor.getName().asString().equals(name)) {
                 return descriptor;
             }
@@ -280,7 +280,7 @@ public abstract class AbstractAnnotationDescriptorResolveTest extends KotlinTest
 
     @NotNull
     protected static VariableDescriptor getLocalVarDescriptor(@NotNull BindingContext context, @NotNull String name) {
-        for (VariableDescriptor descriptor : context.getSliceContents(BindingContext.VARIABLE).values()) {
+        for (VariableDescriptor descriptor : context.getSliceContents(BindingContext.VARIABLE).konstues()) {
             if (descriptor.getName().asString().equals(name)) {
                 return descriptor;
             }
@@ -292,7 +292,7 @@ public abstract class AbstractAnnotationDescriptorResolveTest extends KotlinTest
 
     @NotNull
     private SimpleFunctionDescriptor getAnonymousFunDescriptor() {
-        for (SimpleFunctionDescriptor descriptor : getContext().getSliceContents(BindingContext.FUNCTION).values()) {
+        for (SimpleFunctionDescriptor descriptor : getContext().getSliceContents(BindingContext.FUNCTION).konstues()) {
             if (descriptor instanceof AnonymousFunctionDescriptor) {
                 return descriptor;
             }

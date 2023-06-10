@@ -5,7 +5,7 @@
  *
  * SECTIONS: contracts, analysis, smartcasts
  * NUMBER: 11
- * DESCRIPTION: Smartcast using many of the various Returns effects on the same values.
+ * DESCRIPTION: Smartcast using many of the various Returns effects on the same konstues.
  * HELPERS: contractFunctions
  */
 
@@ -40,9 +40,9 @@ fun <T : Number?> T.case_2_2(): Boolean? {
 import contracts.*
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Any?) {
-    if (!(value_1.case_1_1() || value_1.case_1_2() == null)) {
-        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_1(konstue_1: Any?) {
+    if (!(konstue_1.case_1_1() || konstue_1.case_1_2() == null)) {
+        println(konstue_1.<!UNRESOLVED_REFERENCE!>length<!>)
     }
 }
 
@@ -51,7 +51,7 @@ fun case_1(value_1: Any?) {
  * DISCUSSION: maybe make the code unreachable in the second condition?
  * UNEXPECTED BEHAVIOUR
  */
-fun case_2(value_1: Number?) {
-    if (value_1?.case_2_1() != null) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())
-    if (value_1?.case_2_2() != null) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())
+fun case_2(konstue_1: Number?) {
+    if (konstue_1?.case_2_1() != null) println(<!DEBUG_INFO_SMARTCAST!>konstue_1<!>.toByte())
+    if (konstue_1?.case_2_2() != null) println(<!DEBUG_INFO_SMARTCAST!>konstue_1<!>.toByte())
 }

@@ -32,7 +32,7 @@ fun <U> id(x: U): U? = x
 fun <E> select(vararg x: E): E? = x[0]
 
 fun test() {
-    val ret = build {
+    konst ret = build {
         emit("1")
         Test.foo(get())
         Test.foo(getInv())
@@ -57,7 +57,7 @@ fun test() {
         }
         ""
     }
-    val ret2 = build {
+    konst ret2 = build {
         emit("1")
         select(get(), null)
         select(Test.foo(null), Test.foo(get()))

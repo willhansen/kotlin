@@ -3,7 +3,7 @@
 interface A {
     var a:Int
         get() = 239
-        set(value) {
+        set(konstue) {
         }
 }
 

@@ -4,11 +4,11 @@ public fun test(): kotlin.Unit
 
 public open class JavaClass {
     public constructor JavaClass()
-    private final val privateFinal: kotlin.String!
+    private final konst privateFinal: kotlin.String!
     private final var privateMutable: kotlin.Any!
-    protected/*protected and package*/ final val protectedFinal: kotlin.Double
+    protected/*protected and package*/ final konst protectedFinal: kotlin.Double
     protected/*protected and package*/ final var protectedMutable: kotlin.Char
-    public final val publicFinal: kotlin.Int
+    public final konst publicFinal: kotlin.Int
     public final var publicMutable: kotlin.Long
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

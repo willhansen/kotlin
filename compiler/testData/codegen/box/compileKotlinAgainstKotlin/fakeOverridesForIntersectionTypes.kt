@@ -28,7 +28,7 @@ class D : A, B {
 import a.*
 
 fun foo(condition: Boolean): String {
-    val aAndB = if (condition) C() else D()
+    konst aAndB = if (condition) C() else D()
     aAndB.x = "OK"
 
     return aAndB.x

@@ -12,14 +12,14 @@ fun bar2() = {
 //properties
 //in a class
 class A() {
-    val x = { <!DEBUG_INFO_MISSING_UNRESOLVED, TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM_ERROR!>x<!> }
+    konst x = { <!DEBUG_INFO_MISSING_UNRESOLVED, TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM_ERROR!>x<!> }
 }
 
 //in a package
-val x = { <!DEBUG_INFO_MISSING_UNRESOLVED, TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM_ERROR!>x<!> }
+konst x = { <!DEBUG_INFO_MISSING_UNRESOLVED, TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM_ERROR!>x<!> }
 
-//KT-787 AssertionError on code 'val x = x'
-val z = <!DEBUG_INFO_MISSING_UNRESOLVED, TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM_ERROR!>z<!>
+//KT-787 AssertionError on code 'konst x = x'
+konst z = <!DEBUG_INFO_MISSING_UNRESOLVED, TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM_ERROR!>z<!>
 
 //KT-329 Assertion failure on local function
 fun block(f : () -> Unit) = f()

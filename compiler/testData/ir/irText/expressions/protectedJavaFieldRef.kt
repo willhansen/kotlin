@@ -6,7 +6,7 @@ import p.*
 class Derived : Base() {
     init { j = "" }
     fun set() { j = "OK" }
-    val ref = ::j
+    konst ref = ::j
 }
 
 // FILE: p/Base.java

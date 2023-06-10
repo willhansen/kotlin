@@ -37,36 +37,36 @@ import org.jetbrains.kotlin.psi.stubs.impl.KotlinPropertyStubImpl
 import org.jetbrains.kotlin.types.ConstantValueKind
 
 class StubBasedAnnotationDeserializer(
-    private val session: FirSession,
+    private konst session: FirSession,
 ) {
     fun loadAnnotations(
         ktAnnotated: KtAnnotated,
     ): List<FirAnnotation> {
-        val annotations = ktAnnotated.annotationEntries
+        konst annotations = ktAnnotated.annotationEntries
         if (annotations.isEmpty()) return emptyList()
         return annotations.map { deserializeAnnotation(it) }
     }
 
-    private val constantCache = mutableMapOf<CallableId, FirExpression>()
+    private konst constantCache = mutableMapOf<CallableId, FirExpression>()
 
     fun loadConstant(property: KtProperty, callableId: CallableId): FirExpression? {
         if (!property.hasModifier(KtTokens.CONST_KEYWORD)) return null
         constantCache[callableId]?.let { return it }
-        val propertyStub = (property.stub ?: loadStubByElement(property)) as? KotlinPropertyStubImpl ?: return null
-        val constantValue = propertyStub.constantInitializer ?: return null
+        konst propertyStub = (property.stub ?: loadStubByElement(property)) as? KotlinPropertyStubImpl ?: return null
+        konst constantValue = propertyStub.constantInitializer ?: return null
         return resolveValue(property, constantValue)
     }
 
     private fun deserializeAnnotation(
         ktAnnotation: KtAnnotationEntry
     ): FirAnnotation {
-        val userType =
+        konst userType =
             ktAnnotation.getStubOrPsiChild(KtStubElementTypes.CONSTRUCTOR_CALLEE)?.getStubOrPsiChild(KtStubElementTypes.TYPE_REFERENCE)
                 ?.getStubOrPsiChild(KtStubElementTypes.USER_TYPE)!!
         return deserializeAnnotation(
             ktAnnotation,
             userType.classId(),
-            ((ktAnnotation.stub ?: loadStubByElement(ktAnnotation)) as? KotlinAnnotationEntryStubImpl)?.valueArguments,
+            ((ktAnnotation.stub ?: loadStubByElement(ktAnnotation)) as? KotlinAnnotationEntryStubImpl)?.konstueArguments,
             ktAnnotation.useSiteTarget?.getAnnotationUseSiteTarget()
         )
     }
@@ -74,7 +74,7 @@ class StubBasedAnnotationDeserializer(
     private fun deserializeAnnotation(
         ktAnnotation: PsiElement,
         classId: ClassId,
-        valueArguments: Map<Name, ConstantValue<*>>?,
+        konstueArguments: Map<Name, ConstantValue<*>>?,
         useSiteTarget: AnnotationUseSiteTarget? = null
     ): FirAnnotation {
         return buildAnnotation {
@@ -83,7 +83,7 @@ class StubBasedAnnotationDeserializer(
                 type = classId.toLookupTag().constructClassType(ConeTypeProjection.EMPTY_ARRAY, isNullable = false)
             }
             this.argumentMapping = buildAnnotationArgumentMapping {
-                valueArguments?.forEach { (name, constantValue) ->
+                konstueArguments?.forEach { (name, constantValue) ->
                     mapping[name] = resolveValue(ktAnnotation, constantValue)
                 }
             }
@@ -95,15 +95,15 @@ class StubBasedAnnotationDeserializer(
 
     private fun resolveValue(
         sourceElement: PsiElement,
-        value: ConstantValue<*>
+        konstue: ConstantValue<*>
     ): FirExpression {
-        return when (value) {
-            is EnumValue -> sourceElement.toEnumEntryReferenceExpression(value.enumClassId, value.enumEntryName)
+        return when (konstue) {
+            is EnumValue -> sourceElement.toEnumEntryReferenceExpression(konstue.enumClassId, konstue.enumEntryName)
             is KClassValue -> buildGetClassCall {
                 source = KtRealPsiSourceElement(sourceElement)
-                val lookupTag = (value.value as KClassValue.Value.NormalClass).classId.toLookupTag()
-                val referencedType = lookupTag.constructType(ConeTypeProjection.EMPTY_ARRAY, isNullable = false)
-                val resolvedTypeRef = buildResolvedTypeRef {
+                konst lookupTag = (konstue.konstue as KClassValue.Value.NormalClass).classId.toLookupTag()
+                konst referencedType = lookupTag.constructType(ConeTypeProjection.EMPTY_ARRAY, isNullable = false)
+                konst resolvedTypeRef = buildResolvedTypeRef {
                     type = StandardClassIds.KClass.constructClassLikeType(arrayOf(referencedType), false)
                 }
                 argumentList = buildUnaryArgumentList(
@@ -116,44 +116,44 @@ class StubBasedAnnotationDeserializer(
             is ArrayValue -> buildArrayOfCall {
                 source = KtRealPsiSourceElement(sourceElement)
                 argumentList = buildArgumentList {
-                    value.value.mapTo(arguments) { resolveValue(sourceElement, it) }
+                    konstue.konstue.mapTo(arguments) { resolveValue(sourceElement, it) }
                 }
             }
             is AnnotationValue -> {
                 deserializeAnnotation(
                     sourceElement,
-                    (value.value.type as KotlinClassTypeBean).classId,
-                    value.value.argumentsMapping
+                    (konstue.konstue.type as KotlinClassTypeBean).classId,
+                    konstue.konstue.argumentsMapping
                 )
             }
-            is BooleanValue -> const(ConstantValueKind.Boolean, value.value, session.builtinTypes.booleanType, sourceElement)
-            is ByteValue -> const(ConstantValueKind.Byte, value.value, session.builtinTypes.byteType, sourceElement)
-            is CharValue -> const(ConstantValueKind.Char, value.value, session.builtinTypes.charType, sourceElement)
-            is ShortValue -> const(ConstantValueKind.Short, value.value, session.builtinTypes.shortType, sourceElement)
-            is LongValue -> const(ConstantValueKind.Long, value.value, session.builtinTypes.longType, sourceElement)
-            is FloatValue -> const(ConstantValueKind.Float, value.value, session.builtinTypes.floatType, sourceElement)
-            is DoubleValue -> const(ConstantValueKind.Double, value.value, session.builtinTypes.doubleType, sourceElement)
-            is UByteValue -> const(ConstantValueKind.UnsignedByte, value.value, session.builtinTypes.byteType, sourceElement)
-            is UShortValue -> const(ConstantValueKind.UnsignedShort, value.value, session.builtinTypes.shortType, sourceElement)
-            is UIntValue -> const(ConstantValueKind.UnsignedInt, value.value, session.builtinTypes.intType, sourceElement)
-            is ULongValue -> const(ConstantValueKind.UnsignedLong, value.value, session.builtinTypes.longType, sourceElement)
-            is IntValue -> const(ConstantValueKind.Int, value.value, session.builtinTypes.intType, sourceElement)
+            is BooleanValue -> const(ConstantValueKind.Boolean, konstue.konstue, session.builtinTypes.booleanType, sourceElement)
+            is ByteValue -> const(ConstantValueKind.Byte, konstue.konstue, session.builtinTypes.byteType, sourceElement)
+            is CharValue -> const(ConstantValueKind.Char, konstue.konstue, session.builtinTypes.charType, sourceElement)
+            is ShortValue -> const(ConstantValueKind.Short, konstue.konstue, session.builtinTypes.shortType, sourceElement)
+            is LongValue -> const(ConstantValueKind.Long, konstue.konstue, session.builtinTypes.longType, sourceElement)
+            is FloatValue -> const(ConstantValueKind.Float, konstue.konstue, session.builtinTypes.floatType, sourceElement)
+            is DoubleValue -> const(ConstantValueKind.Double, konstue.konstue, session.builtinTypes.doubleType, sourceElement)
+            is UByteValue -> const(ConstantValueKind.UnsignedByte, konstue.konstue, session.builtinTypes.byteType, sourceElement)
+            is UShortValue -> const(ConstantValueKind.UnsignedShort, konstue.konstue, session.builtinTypes.shortType, sourceElement)
+            is UIntValue -> const(ConstantValueKind.UnsignedInt, konstue.konstue, session.builtinTypes.intType, sourceElement)
+            is ULongValue -> const(ConstantValueKind.UnsignedLong, konstue.konstue, session.builtinTypes.longType, sourceElement)
+            is IntValue -> const(ConstantValueKind.Int, konstue.konstue, session.builtinTypes.intType, sourceElement)
             NullValue -> const(ConstantValueKind.Null, null, session.builtinTypes.nullableAnyType, sourceElement)
-            is StringValue -> const(ConstantValueKind.String, value.value, session.builtinTypes.stringType, sourceElement)
-            else -> error("Unexpected value $value")
+            is StringValue -> const(ConstantValueKind.String, konstue.konstue, session.builtinTypes.stringType, sourceElement)
+            else -> error("Unexpected konstue $konstue")
         }
     }
 
     private fun <T> const(
         kind: ConstantValueKind<T>,
-        value: T,
+        konstue: T,
         typeRef: FirResolvedTypeRef,
         sourceElement: PsiElement
     ): FirConstExpression<T> {
         return buildConstExpression(
             KtRealPsiSourceElement(sourceElement),
             kind,
-            value,
+            konstue,
             setType = true
         ).apply { this.replaceTypeRef(typeRef) }
     }
@@ -161,11 +161,11 @@ class StubBasedAnnotationDeserializer(
     private fun PsiElement.toEnumEntryReferenceExpression(classId: ClassId, entryName: Name): FirExpression {
         return buildPropertyAccessExpression {
             source = KtRealPsiSourceElement(this@toEnumEntryReferenceExpression)
-            val enumLookupTag = classId.toLookupTag()
-            val enumSymbol = enumLookupTag.toSymbol(session)
-            val firClass = enumSymbol?.fir as? FirRegularClass
-            val enumEntries = firClass?.collectEnumEntries() ?: emptyList()
-            val enumEntrySymbol = enumEntries.find { it.name == entryName }
+            konst enumLookupTag = classId.toLookupTag()
+            konst enumSymbol = enumLookupTag.toSymbol(session)
+            konst firClass = enumSymbol?.fir as? FirRegularClass
+            konst enumEntries = firClass?.collectEnumEntries() ?: emptyList()
+            konst enumEntrySymbol = enumEntries.find { it.name == entryName }
             calleeReference = enumEntrySymbol?.let {
                 buildResolvedNamedReference {
                     name = entryName

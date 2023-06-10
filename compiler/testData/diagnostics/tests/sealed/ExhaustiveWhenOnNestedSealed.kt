@@ -9,11 +9,11 @@ sealed class Sealed {
 }
 
 fun foo(s: Sealed, nf: Sealed.NonFirst): Int {
-    val si = when(s) {
+    konst si = when(s) {
         Sealed.First -> 1
         Sealed.NonFirst.Fourth -> 4
     }
-    val nfi = when(nf) {
+    konst nfi = when(nf) {
         Sealed.NonFirst.Second -> 2
         Sealed.NonFirst.Third -> 3
     }

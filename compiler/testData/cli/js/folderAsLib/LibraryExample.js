@@ -9,8 +9,8 @@ var LibraryExample = function (_, Kotlin) {
   function pairMul(p) {
     return Kotlin.imul(p.first, p.second);
   }
-  function IntHolder(value) {
-    this.value = value;
+  function IntHolder(konstue) {
+    this.konstue = konstue;
   }
   IntHolder.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -18,21 +18,21 @@ var LibraryExample = function (_, Kotlin) {
     interfaces: []
   };
   IntHolder.prototype.component1 = function () {
-    return this.value;
+    return this.konstue;
   };
-  IntHolder.prototype.copy_za3lpa$ = function (value) {
-    return new IntHolder(value === void 0 ? this.value : value);
+  IntHolder.prototype.copy_za3lpa$ = function (konstue) {
+    return new IntHolder(konstue === void 0 ? this.konstue : konstue);
   };
   IntHolder.prototype.toString = function () {
-    return 'IntHolder(value=' + Kotlin.toString(this.value) + ')';
+    return 'IntHolder(konstue=' + Kotlin.toString(this.konstue) + ')';
   };
   IntHolder.prototype.hashCode = function () {
     var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.value) | 0;
+    result = result * 31 + Kotlin.hashCode(this.konstue) | 0;
     return result;
   };
   IntHolder.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.konstue, other.konstue))));
   };
   var package$library = _.library || (_.library = {});
   var package$sample = package$library.sample || (package$library.sample = {});

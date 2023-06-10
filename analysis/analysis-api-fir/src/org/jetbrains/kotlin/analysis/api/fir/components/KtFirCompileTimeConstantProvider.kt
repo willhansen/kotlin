@@ -9,10 +9,10 @@ import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.analysis.api.annotations.KtAnnotationValue
 import org.jetbrains.kotlin.analysis.api.base.KtConstantValue
 import org.jetbrains.kotlin.analysis.api.components.KtCompileTimeConstantProvider
-import org.jetbrains.kotlin.analysis.api.components.KtConstantEvaluationMode
+import org.jetbrains.kotlin.analysis.api.components.KtConstantEkonstuationMode
 import org.jetbrains.kotlin.analysis.api.fir.KtFirAnalysisSession
-import org.jetbrains.kotlin.analysis.api.fir.evaluate.FirAnnotationValueConverter
-import org.jetbrains.kotlin.analysis.api.fir.evaluate.FirCompileTimeConstantEvaluator
+import org.jetbrains.kotlin.analysis.api.fir.ekonstuate.FirAnnotationValueConverter
+import org.jetbrains.kotlin.analysis.api.fir.ekonstuate.FirCompileTimeConstantEkonstuator
 import org.jetbrains.kotlin.analysis.api.fir.utils.asKtInitializerValue
 import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken
 import org.jetbrains.kotlin.analysis.low.level.api.fir.api.getOrBuildFir
@@ -28,36 +28,36 @@ import org.jetbrains.kotlin.psi
 import org.jetbrains.kotlin.psi.KtExpression
 
 internal class KtFirCompileTimeConstantProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtCompileTimeConstantProvider(), KtFirAnalysisSessionComponent {
 
-    override fun evaluate(
+    override fun ekonstuate(
         expression: KtExpression,
-        mode: KtConstantEvaluationMode,
+        mode: KtConstantEkonstuationMode,
     ): KtConstantValue? {
-        return evaluateFir(expression.getOrBuildFir(firResolveSession), expression, mode)
+        return ekonstuateFir(expression.getOrBuildFir(firResolveSession), expression, mode)
     }
 
-    override fun evaluateAsAnnotationValue(expression: KtExpression): KtAnnotationValue? =
+    override fun ekonstuateAsAnnotationValue(expression: KtExpression): KtAnnotationValue? =
         (expression.getOrBuildFir(firResolveSession) as? FirExpression)?.let {
             FirAnnotationValueConverter.toConstantValue(it, firResolveSession.useSiteFirSession)
         }
 
-    private fun evaluateFir(
+    private fun ekonstuateFir(
         fir: FirElement?,
         sourcePsi: KtExpression,
-        mode: KtConstantEvaluationMode,
+        mode: KtConstantEkonstuationMode,
     ): KtConstantValue? {
         return when {
             fir is FirPropertyAccessExpression || fir is FirExpression || fir is FirNamedReference -> {
                 try {
-                    FirCompileTimeConstantEvaluator.evaluateAsKtConstantValue(fir, mode)
+                    FirCompileTimeConstantEkonstuator.ekonstuateAsKtConstantValue(fir, mode)
                 } catch (e: ArithmeticException) {
                     KtConstantValue.KtErrorConstantValue(e.localizedMessage, sourcePsi)
                 }
             }
-            // For invalid code like the following,
+            // For inkonstid code like the following,
             // ```
             // when {
             //   true, false -> {}

@@ -20,7 +20,7 @@ internal fun Project.androidBootClasspath(): FileCollection {
     return project.files(Callable { project.extensions.getByType<BaseExtension>().bootClasspath })
 }
 
-internal class AndroidBootClasspathIdeDependencyResolver(private val project: Project) : IdeDependencyResolver {
+internal class AndroidBootClasspathIdeDependencyResolver(private konst project: Project) : IdeDependencyResolver {
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
         if (sourceSet.android == null) return emptySet()
         return setOf(

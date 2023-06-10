@@ -31,7 +31,7 @@ interface B {
 // CHECK:
 //   Mangled name: {}c
 //   Public signature: /c|-4416962153448040627[0]
-val c: Int
+konst c: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-c>!A!B(){}kotlin.Int
   //   Public signature: /c.<get-c>|-2082007887378586898[0]

@@ -16,6 +16,6 @@ public class Celebrities {
 // FILE: main.kt
 
 fun box(): String {
-    val celebrities = Celebrities.invite(listOf())
+    konst celebrities = Celebrities.invite(listOf())
     return if (celebrities.names.isEmpty()) "OK" else "Fail"
 }

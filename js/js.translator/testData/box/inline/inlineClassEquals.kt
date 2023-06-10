@@ -3,33 +3,33 @@
 
 @file:Suppress("RESERVED_MEMBER_INSIDE_VALUE_CLASS")
 
-inline class ClassInt(val x: Int)
-inline class ClassString(val x: String)
-inline class ClassUnderlayingInline(val x: ClassInt)
-inline class ClassNullableInt(val x: Int?)
-inline class ClassNullableUnderlayingInline(val x: ClassInt?)
-inline class ClassNothing(val x: Nothing?)
+inline class ClassInt(konst x: Int)
+inline class ClassString(konst x: String)
+inline class ClassUnderlayingInline(konst x: ClassInt)
+inline class ClassNullableInt(konst x: Int?)
+inline class ClassNullableUnderlayingInline(konst x: ClassInt?)
+inline class ClassNothing(konst x: Nothing?)
 
-value class ClassWithEqualsOverride(val data: Int) {
+konstue class ClassWithEqualsOverride(konst data: Int) {
     override fun equals(other: Any?): Boolean = other is ClassWithEqualsOverride && data % 256 == other.data % 256
 }
 
-class MyClass(val data: Int) {
+class MyClass(konst data: Int) {
     override fun equals(other: Any?): Boolean = other is MyClass && data % 10 == other.data % 10
 }
 
-inline class ClassUnderlayingWithEquals(val x: MyClass)
+inline class ClassUnderlayingWithEquals(konst x: MyClass)
 
 interface InterfaceForInlineClass
-inline class ClassIntWithInterface(val x: Int) : InterfaceForInlineClass
-inline class ClassStringWithInterface(val x: String) : InterfaceForInlineClass
+inline class ClassIntWithInterface(konst x: Int) : InterfaceForInlineClass
+inline class ClassStringWithInterface(konst x: String) : InterfaceForInlineClass
 
 // CHECK_NOT_CALLED_IN_SCOPE: scope=testBasicInt function=equals
 // CHECK_NEW_COUNT: function=testBasicInt count=0
 fun testBasicInt() {
-    val a1_1 = ClassInt(1)
-    val a1_2 = ClassInt(1)
-    val a2 = ClassInt(2)
+    konst a1_1 = ClassInt(1)
+    konst a1_2 = ClassInt(1)
+    konst a2 = ClassInt(2)
 
     assertTrue(a1_1 == a1_1)
     assertTrue(a1_1 == a1_2)
@@ -39,9 +39,9 @@ fun testBasicInt() {
 // CHECK_NOT_CALLED_IN_SCOPE: scope=testBasicString function=equals
 // CHECK_NEW_COUNT: function=testBasicString count=0
 fun testBasicString() {
-    val b1_1 = ClassString("b1")
-    val b1_2 = ClassString("b1")
-    val b2 = ClassString("b2")
+    konst b1_1 = ClassString("b1")
+    konst b1_2 = ClassString("b1")
+    konst b2 = ClassString("b2")
 
     assertTrue(b1_1 == b1_1)
     assertTrue(b1_1 == b1_2)
@@ -56,7 +56,7 @@ fun testFunctionCall() {
         return ClassInt(x)
     }
 
-    val a1 = ClassInt(1)
+    konst a1 = ClassInt(1)
     assertTrue(a1 == makeClassInt(1))
     assertTrue(makeClassInt(1) == a1)
     assertTrue(makeClassInt(1) == makeClassInt(1))
@@ -68,7 +68,7 @@ fun testFunctionCall() {
 
 // CHECK_NEW_COUNT: function=testTypeErasing count=3
 fun testTypeErasing() {
-    val a1 = ClassInt(1)
+    konst a1 = ClassInt(1)
 
     // CHECK_CALLED_IN_SCOPE: scope=testTypeErasing$isEqualsWithA1 function=equals
     // CHECK_NEW_COUNT: function=testTypeErasing$isEqualsWithA1 count=1
@@ -79,7 +79,7 @@ fun testTypeErasing() {
     assertTrue(isEqualsWithA1(a1))
     assertTrue(isEqualsWithA1(ClassInt(1)))
 
-    val a2 = ClassInt(2)
+    konst a2 = ClassInt(2)
     assertFalse(isEqualsWithA1(a2))
 }
 
@@ -90,8 +90,8 @@ fun testTypeErasingAndCast() {
         return a as ClassInt
     }
 
-    val a1_1 = ClassInt(1)
-    val a1_2 = ClassInt(1)
+    konst a1_1 = ClassInt(1)
+    konst a1_2 = ClassInt(1)
 
     assertTrue(boxValue(a1_1) == a1_2)
     assertTrue(boxValue(a1_1) == boxValue(a1_2))
@@ -101,10 +101,10 @@ fun testTypeErasingAndCast() {
 // CHECK_CALLED_IN_SCOPE: scope=testNullableInstances function=equals
 // CHECK_NEW_COUNT: function=testNullableInstances count=21
 fun testNullableInstances() {
-    val a1_1: ClassInt? = ClassInt(1)
-    val a1_2 = ClassInt(1)
-    val a1_3: ClassInt? = null
-    val a1_4: ClassInt? = ClassInt(1)
+    konst a1_1: ClassInt? = ClassInt(1)
+    konst a1_2 = ClassInt(1)
+    konst a1_3: ClassInt? = null
+    konst a1_4: ClassInt? = ClassInt(1)
 
     assertTrue(a1_1 == a1_2)
     assertTrue(a1_2 == a1_1)
@@ -113,7 +113,7 @@ fun testNullableInstances() {
     assertTrue(a1_4 == a1_1!!)
     assertTrue(a1_4!! == a1_1!!)
 
-    val a1_5 = a1_4!!
+    konst a1_5 = a1_4!!
     assertTrue(a1_5 == a1_1!!)
 
     assertFalse(a1_1 == a1_3)
@@ -122,11 +122,11 @@ fun testNullableInstances() {
 }
 
 fun testUnderlyingInline() {
-    val x1: ClassInt? = ClassInt(1)
+    konst x1: ClassInt? = ClassInt(1)
 
-    val c1_1 = ClassUnderlayingInline(ClassInt(1))
-    val c1_2 = ClassUnderlayingInline(ClassInt(1))
-    val c2 = ClassUnderlayingInline(ClassInt(2))
+    konst c1_1 = ClassUnderlayingInline(ClassInt(1))
+    konst c1_2 = ClassUnderlayingInline(ClassInt(1))
+    konst c2 = ClassUnderlayingInline(ClassInt(2))
 
     // CHECK_NOT_CALLED_IN_SCOPE: scope=testUnderlyingInline$caseJsEq function=equals
     // CHECK_NEW_COUNT: function=testUnderlyingInline$caseJsEq count=0
@@ -134,7 +134,7 @@ fun testUnderlyingInline() {
         assertTrue(c1_1 == c1_2)
         assertFalse(c1_1 == c2)
 
-        val a1 = ClassInt(1)
+        konst a1 = ClassInt(1)
         assertTrue(c1_1.x == a1)
         assertTrue(c1_1.x == c1_2.x)
         assertFalse(a1 == c2.x)
@@ -153,11 +153,11 @@ fun testUnderlyingInline() {
 // CHECK_CALLED_IN_SCOPE: scope=testEqualsOverride function=equals
 // CHECK_NEW_COUNT: function=testEqualsOverride count=14
 fun testEqualsOverride() {
-    val d1 = ClassWithEqualsOverride(1)
-    val d2 = ClassWithEqualsOverride(2)
-    val d257 = ClassWithEqualsOverride(257)
-    val d1_1: ClassWithEqualsOverride? = ClassWithEqualsOverride(513)
-    val d1_2: ClassWithEqualsOverride? = null
+    konst d1 = ClassWithEqualsOverride(1)
+    konst d2 = ClassWithEqualsOverride(2)
+    konst d257 = ClassWithEqualsOverride(257)
+    konst d1_1: ClassWithEqualsOverride? = ClassWithEqualsOverride(513)
+    konst d1_2: ClassWithEqualsOverride? = null
 
     assertTrue(d1 == d257)
     assertTrue(d1_1 == d1)
@@ -171,13 +171,13 @@ fun testEqualsOverride() {
 
 // CHECK_NEW_COUNT: function=testNullableUnderlyingType count=1
 fun testNullableUnderlyingType() {
-    val x0 = ClassNullableInt(0)
-    val x1_1 = ClassNullableInt(1)
-    val x1_2 = ClassNullableInt(1)
-    val x_null_1 = ClassNullableInt(null)
-    val x_null_2 = ClassNullableInt(null)
-    val nullable_1: ClassNullableInt? = null
-    val nullable_2: ClassNullableInt? = ClassNullableInt(null)
+    konst x0 = ClassNullableInt(0)
+    konst x1_1 = ClassNullableInt(1)
+    konst x1_2 = ClassNullableInt(1)
+    konst x_null_1 = ClassNullableInt(null)
+    konst x_null_2 = ClassNullableInt(null)
+    konst nullable_1: ClassNullableInt? = null
+    konst nullable_2: ClassNullableInt? = ClassNullableInt(null)
 
     // CHECK_NOT_CALLED_IN_SCOPE: scope=testNullableUnderlyingType$caseEquals function=equals
     // CHECK_NEW_COUNT: function=testNullableUnderlyingType$caseEquals count=0
@@ -212,10 +212,10 @@ fun testNullableUnderlyingType() {
 // CHECK_NEW_COUNT: function=testUnderlyingWithEqualsOverride count=4 TARGET_BACKENDS=JS_IR
 // CHECK_CALLED_IN_SCOPE: scope=testUnderlyingWithEqualsOverride function=equals
 fun testUnderlyingWithEqualsOverride() {
-    val x0 = ClassUnderlayingWithEquals(MyClass(0))
-    val x10 = ClassUnderlayingWithEquals(MyClass(10))
-    val x1_1 = ClassUnderlayingWithEquals(MyClass(1))
-    val x1_2 = ClassUnderlayingWithEquals(MyClass(1))
+    konst x0 = ClassUnderlayingWithEquals(MyClass(0))
+    konst x10 = ClassUnderlayingWithEquals(MyClass(10))
+    konst x1_1 = ClassUnderlayingWithEquals(MyClass(1))
+    konst x1_2 = ClassUnderlayingWithEquals(MyClass(1))
 
     assertTrue(x0 == x0)
     assertTrue(x0 == x10)
@@ -227,15 +227,15 @@ fun testUnderlyingWithEqualsOverride() {
 
 // CHECK_NEW_COUNT: function=testNullableUnderlyingInlineClass count=1
 fun testNullableUnderlyingInlineClass() {
-    val i1_1: ClassInt? = ClassInt(1)
-    val i1_2: ClassInt? = ClassInt(1)
+    konst i1_1: ClassInt? = ClassInt(1)
+    konst i1_2: ClassInt? = ClassInt(1)
 
-    val x_null = ClassNullableUnderlayingInline(null)
-    val x0 = ClassNullableUnderlayingInline(ClassInt(0))
-    val x1_1 = ClassNullableUnderlayingInline(ClassInt(1))
-    val x1_2 = ClassNullableUnderlayingInline(ClassInt(1))
-    val x1_3 = ClassNullableUnderlayingInline(i1_1)
-    val x1_4 = ClassNullableUnderlayingInline(i1_2!!)
+    konst x_null = ClassNullableUnderlayingInline(null)
+    konst x0 = ClassNullableUnderlayingInline(ClassInt(0))
+    konst x1_1 = ClassNullableUnderlayingInline(ClassInt(1))
+    konst x1_2 = ClassNullableUnderlayingInline(ClassInt(1))
+    konst x1_3 = ClassNullableUnderlayingInline(i1_1)
+    konst x1_4 = ClassNullableUnderlayingInline(i1_2!!)
 
     // CHECK_NOT_CALLED_IN_SCOPE: scope=testNullableUnderlyingInlineClass$caseJsEq function=equals
     // CHECK_NEW_COUNT: function=testNullableUnderlyingInlineClass$caseJsEq count=0
@@ -267,14 +267,14 @@ fun testNullableUnderlyingInlineClass() {
 // CHECK_CALLED_IN_SCOPE: scope=testInlineClassWithInterface function=equals
 // CHECK_NEW_COUNT: function=testInlineClassWithInterface count=14
 fun testInlineClassWithInterface() {
-    val xi_1_1: InterfaceForInlineClass = ClassIntWithInterface(1)
-    val xi_1_2: InterfaceForInlineClass = ClassIntWithInterface(1)
-    val x_1 = ClassIntWithInterface(1)
-    val x_2 = ClassIntWithInterface(2)
+    konst xi_1_1: InterfaceForInlineClass = ClassIntWithInterface(1)
+    konst xi_1_2: InterfaceForInlineClass = ClassIntWithInterface(1)
+    konst x_1 = ClassIntWithInterface(1)
+    konst x_2 = ClassIntWithInterface(2)
 
-    val yi_foo: InterfaceForInlineClass = ClassStringWithInterface("foo")
-    val y_foo = ClassStringWithInterface("foo")
-    val y_bar = ClassStringWithInterface("bar")
+    konst yi_foo: InterfaceForInlineClass = ClassStringWithInterface("foo")
+    konst y_foo = ClassStringWithInterface("foo")
+    konst y_bar = ClassStringWithInterface("bar")
 
     assertTrue(xi_1_1 == x_1)
     assertTrue(xi_1_1 == xi_1_2)
@@ -295,11 +295,11 @@ fun testInlineClassWithInterface() {
 // CHECK_NEW_COUNT: function=testCompareDifferentInstancesInSmartCast count=6
 @Suppress("EQUALITY_NOT_APPLICABLE")
 fun testCompareDifferentInstancesInSmartCast() {
-    val x1_1: Any = ClassInt(1)
-    val x1_2 = ClassInt(1)
+    konst x1_1: Any = ClassInt(1)
+    konst x1_2 = ClassInt(1)
 
-    val y1: Any = ClassString("1")
-    val y_foo: Any = ClassString("foo")
+    konst y1: Any = ClassString("1")
+    konst y_foo: Any = ClassString("foo")
 
     if (x1_1 is ClassInt && y1 is ClassString) {
         assertTrue(x1_2 == x1_1)
@@ -340,10 +340,10 @@ fun testCompareDifferentInstncesInInlineTemplate() {
 // CHECK_CALLED_IN_SCOPE: scope=testNothing function=equals
 // CHECK_NEW_COUNT: function=testNothing count=0
 fun testNothing() {
-    val x_undefined_1 = ClassNothing(undefined)
-    val x_undefined_2 = ClassNothing(undefined)
-    val x_null_1 = ClassNothing(null)
-    val x_null_2 = ClassNothing(null)
+    konst x_undefined_1 = ClassNothing(undefined)
+    konst x_undefined_2 = ClassNothing(undefined)
+    konst x_null_1 = ClassNothing(null)
+    konst x_null_2 = ClassNothing(null)
 
     assertTrue(x_undefined_1 == x_undefined_1)
     assertTrue(x_undefined_1 == x_undefined_2)
@@ -366,9 +366,9 @@ fun testNothing() {
 // CHECK_CALLED_IN_SCOPE: scope=testNullableNothing function=equals
 // CHECK_NEW_COUNT: function=testNullableNothing count=2
 fun testNullableNothing() {
-    val x_nothing_undefined: ClassNothing? = ClassNothing(undefined)
-    val x_nothing_null: ClassNothing? = ClassNothing(null)
-    val x_null: ClassNothing? = null
+    konst x_nothing_undefined: ClassNothing? = ClassNothing(undefined)
+    konst x_nothing_null: ClassNothing? = ClassNothing(null)
+    konst x_null: ClassNothing? = null
 
     assertTrue(x_nothing_undefined == x_nothing_null)
     assertTrue(x_null == null)

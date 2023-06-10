@@ -18,7 +18,7 @@ suspend inline fun foo(): String {
 fun box(): String {
     var result = ""
     suspend {
-        val ref = ::foo
+        konst ref = ::foo
         result = ref()
     }.startCoroutine(EmptyContinuation)
     return result

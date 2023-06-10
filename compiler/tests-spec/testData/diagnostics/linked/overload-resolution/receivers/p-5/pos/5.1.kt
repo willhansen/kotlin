@@ -21,38 +21,38 @@ open class A {
 }
 
 interface Super_0 {
-    companion object values : A()
+    companion object konstues : A()
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase1.Super_0.values.invoke; typeCall: variable&invoke")!>values()<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase1.Super_0.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
     }
 }
 
 open class Super_1 : Super_0 {
-    companion object values : A() {}
+    companion object konstues : A() {}
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase1.Super_1.values.invoke; typeCall: variable&invoke")!>values()<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase1.Super_1.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
     }
 }
 
 open class Super_2 : Super_1() {
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase1.Super_1.values.invoke; typeCall: variable&invoke")!>values()<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase1.Super_1.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
     }
 
     class Nested : Super_1() {
-        companion object values : A() {}
+        companion object konstues : A() {}
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase1.Super_2.Nested.values.invoke; typeCall: variable&invoke")!>values()<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase1.Super_2.Nested.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
         }
     }
 
     inner class Inner : Super_1() {
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase1.Super_1.values.invoke; typeCall: variable&invoke")!>values()<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase1.Super_1.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
         }
     }
 
@@ -64,42 +64,42 @@ open class Super_2 : Super_1() {
 package testsCase2
 
 open class A {
-    operator fun invoke(value: String) = print("invoke $value")
+    operator fun invoke(konstue: String) = print("invoke $konstue")
 }
 
 interface Super_0 {
-    companion object valueOf : A()
+    companion object konstueOf : A()
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase2.Super_0.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase2.Super_0.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
     }
 }
 
 open class Super_1 : Super_0 {
-    companion object valueOf : A() {}
+    companion object konstueOf : A() {}
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase2.Super_1.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase2.Super_1.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
     }
 }
 
 open class Super_2 : Super_1() {
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase2.Super_1.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase2.Super_1.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
     }
 
     class Nested : Super_1() {
-        companion object valueOf : A() {}
+        companion object konstueOf : A() {}
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase2.Super_2.Nested.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase2.Super_2.Nested.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
         }
     }
 
     inner class Inner : Super_1() {
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase2.Super_1.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase2.Super_1.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
         }
     }
 
@@ -114,38 +114,38 @@ open class A {
 }
 
 interface Super_0 {
-    object values : A()
+    object konstues : A()
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase3.Super_0.values.invoke; typeCall: variable&invoke")!>values()<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase3.Super_0.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
     }
 }
 
 open class Super_1 : Super_0 {
-    object values : A() {}
+    object konstues : A() {}
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase3.Super_1.values.invoke; typeCall: variable&invoke")!>values()<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase3.Super_1.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
     }
 }
 
 open class Super_2 : Super_1() {
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase3.Super_1.values.invoke; typeCall: variable&invoke")!>values()<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase3.Super_1.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
     }
 
     class Nested : Super_1() {
-        object values : A() {}
+        object konstues : A() {}
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase3.Super_2.Nested.values.invoke; typeCall: variable&invoke")!>values()<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase3.Super_2.Nested.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
         }
     }
 
     inner class Inner : Super_1() {
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase3.Super_1.values.invoke; typeCall: variable&invoke")!>values()<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase3.Super_1.konstues.invoke; typeCall: variable&invoke")!>konstues()<!>
         }
     }
 
@@ -157,42 +157,42 @@ open class Super_2 : Super_1() {
 package testsCase4
 
 open class A {
-    operator fun invoke(value: String) = print("invoke $value")
+    operator fun invoke(konstue: String) = print("invoke $konstue")
 }
 
 interface Super_0 {
-    object valueOf : A()
+    object konstueOf : A()
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase4.Super_0.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase4.Super_0.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
     }
 }
 
 open class Super_1 : Super_0 {
-    object valueOf : A() {}
+    object konstueOf : A() {}
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase4.Super_1.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase4.Super_1.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
     }
 }
 
 open class Super_2 : Super_1() {
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase4.Super_1.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase4.Super_1.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
     }
 
     class Nested : Super_1() {
-        object valueOf : A() {}
+        object konstueOf : A() {}
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase4.Super_2.Nested.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase4.Super_2.Nested.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
         }
     }
 
     inner class Inner : Super_1() {
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase4.Super_1.valueOf.invoke; typeCall: variable&invoke")!>valueOf("")<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase4.Super_1.konstueOf.invoke; typeCall: variable&invoke")!>konstueOf("")<!>
         }
     }
 

@@ -28,7 +28,7 @@ import java.lang.StringBuilder
 import java.util.ArrayList
 
 object AnalyzingUtils {
-    private const val WRITE_DEBUG_TRACE_NAMES = false
+    private const konst WRITE_DEBUG_TRACE_NAMES = false
 
     @JvmStatic
     fun checkForSyntacticErrors(root: PsiElement) {
@@ -45,7 +45,7 @@ object AnalyzingUtils {
 
     @JvmStatic
     fun getSyntaxErrorRanges(root: PsiElement): List<PsiErrorElement> {
-        val r: MutableList<PsiErrorElement> = ArrayList()
+        konst r: MutableList<PsiErrorElement> = ArrayList()
         root.acceptChildren(object : PsiErrorElementVisitor() {
             override fun visitErrorElement(element: PsiErrorElement) {
                 r.add(element)
@@ -68,7 +68,7 @@ object AnalyzingUtils {
     @JvmStatic
     fun formDebugNameForBindingTrace(debugName: String, resolutionSubjectForMessage: Any?): String {
         if (WRITE_DEBUG_TRACE_NAMES) {
-            val debugInfo = StringBuilder(debugName)
+            konst debugInfo = StringBuilder(debugName)
             if (resolutionSubjectForMessage is KtElement) {
                 debugInfo.append(" ").append(resolutionSubjectForMessage.getDebugText())
                 //debugInfo.append(" in ").append(element.getContainingFile().getName());

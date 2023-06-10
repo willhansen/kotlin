@@ -6,9 +6,9 @@ class Check {
         class Bwd {
             class BBD
             fun dad() {
-                val Bwd = 42
+                konst Bwd = 42
 
-                val a = <expr>foo.www.ddd.Check.BBD.Bwd::class.java.annotatedInterfaces.size</expr>
+                konst a = <expr>foo.www.ddd.Check.BBD.Bwd::class.java.annotatedInterfaces.size</expr>
             }
         }
     }

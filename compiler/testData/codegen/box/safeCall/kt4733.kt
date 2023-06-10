@@ -1,8 +1,8 @@
 class Test {
-    val Long.foo: Long
+    konst Long.foo: Long
         get() = this + 1
 
-    val Int.foo: Int
+    konst Int.foo: Int
         get() = this + 1
 
     fun testLong(): Long? {
@@ -17,7 +17,7 @@ class Test {
 }
 
 fun box(): String {
-    val s = Test()
+    konst s = Test()
 
     if (s.testLong() != 11.toLong()) return "fail 1"
 

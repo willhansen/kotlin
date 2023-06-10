@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.test.services.impl.TestModuleStructureImpl
  */
 @TestInfrastructureInternals
 class ModuleTransformerForSwitchingBackend(
-    val backendForLib: TargetBackend,
-    val backendForMain: TargetBackend
+    konst backendForLib: TargetBackend,
+    konst backendForMain: TargetBackend
 ) : ModuleStructureTransformer() {
     override fun transformModuleStructure(moduleStructure: TestModuleStructure): TestModuleStructure {
         if (moduleStructure.modules.size != 2) error("Test should contain only one module")
-        val (first, second) = moduleStructure.modules
+        konst (first, second) = moduleStructure.modules
 
         return TestModuleStructureImpl(
             listOf(

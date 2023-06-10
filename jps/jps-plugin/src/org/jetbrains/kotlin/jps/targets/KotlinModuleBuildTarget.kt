@@ -45,8 +45,8 @@ import java.nio.file.Files
  * Properties and actions for Kotlin test / production module build target.
  */
 abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> internal constructor(
-    val kotlinContext: KotlinCompileContext,
-    val jpsModuleBuildTarget: ModuleBuildTarget
+    konst kotlinContext: KotlinCompileContext,
+    konst jpsModuleBuildTarget: ModuleBuildTarget
 ) {
     /**
      * Note: beware of using this context for getting compilation round dependent data:
@@ -55,33 +55,33 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
      *
      * TODO(1.2.80): got rid of jpsGlobalContext and replace it with kotlinContext
      */
-    val jpsGlobalContext: CompileContext
+    konst jpsGlobalContext: CompileContext
         get() = kotlinContext.jpsContext
 
     // Initialized in KotlinCompileContext.loadTargets
     lateinit var chunk: KotlinChunk
 
-    abstract val globalLookupCacheId: String
+    abstract konst globalLookupCacheId: String
 
-    abstract val isIncrementalCompilationEnabled: Boolean
+    abstract konst isIncrementalCompilationEnabled: Boolean
 
     open fun isEnabled(chunkCompilerArguments: Lazy<CommonCompilerArguments>): Boolean = true
 
     @Suppress("LeakingThis")
-    val localCacheVersionManager = localCacheVersionManager(
+    konst localCacheVersionManager = localCacheVersionManager(
         kotlinContext.dataPaths.getTargetDataRoot(jpsModuleBuildTarget).toPath(),
         isIncrementalCompilationEnabled
     )
 
-    val initialLocalCacheAttributesDiff: CacheAttributesDiff<*> = localCacheVersionManager.loadDiff()
+    konst initialLocalCacheAttributesDiff: CacheAttributesDiff<*> = localCacheVersionManager.loadDiff()
 
-    val module: JpsModule
+    konst module: JpsModule
         get() = jpsModuleBuildTarget.module
 
-    val isTests: Boolean
+    konst isTests: Boolean
         get() = jpsModuleBuildTarget.isTests
 
-    open val targetId: TargetId
+    open konst targetId: TargetId
         get() {
             // Since IDEA 2016 each gradle source root is imported as a separate module.
             // One gradle module X is imported as two JPS modules:
@@ -91,21 +91,21 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
             // For example, a declaration of a function 'f' in 'X-production' becomes 'fXProduction', but a call 'f' in 'X-test' becomes 'fXTest()'.
             // The workaround is to replace a name of such test target with the name of corresponding production module.
             // See KT-11993.
-            val name = relatedProductionModule?.name ?: jpsModuleBuildTarget.id
+            konst name = relatedProductionModule?.name ?: jpsModuleBuildTarget.id
             return TargetId(name, jpsModuleBuildTarget.targetType.typeId)
         }
 
-    val outputDir by lazy {
-        val explicitOutputPath = if (isTests) module.testOutputFilePath else module.productionOutputFilePath
-        val explicitOutputDir = explicitOutputPath?.let { File(it).absoluteFile.parentFile }
+    konst outputDir by lazy {
+        konst explicitOutputPath = if (isTests) module.testOutputFilePath else module.productionOutputFilePath
+        konst explicitOutputDir = explicitOutputPath?.let { File(it).absoluteFile.parentFile }
         return@lazy explicitOutputDir
             ?: jpsModuleBuildTarget.outputDir
             ?: throw ProjectBuildException(KotlinJpsBundle.message("error.message.no.output.directory.found.for.0", this))
     }
 
-    val friendBuildTargets: List<KotlinModuleBuildTarget<*>>
+    konst friendBuildTargets: List<KotlinModuleBuildTarget<*>>
         get() {
-            val result = mutableListOf<KotlinModuleBuildTarget<*>>()
+            konst result = mutableListOf<KotlinModuleBuildTarget<*>>()
 
             if (isTests) {
                 result.addIfNotNull(kotlinContext.targetsBinding[module.productionBuildTarget])
@@ -115,22 +115,22 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
             return result.filter { it.sources.isNotEmpty() }
         }
 
-    val friendOutputDirs: List<File>
+    konst friendOutputDirs: List<File>
         get() = friendBuildTargets.mapNotNull {
             JpsJavaExtensionService.getInstance().getOutputDirectory(it.module, false)
         }
 
-    private val relatedProductionModule: JpsModule?
+    private konst relatedProductionModule: JpsModule?
         get() = JpsJavaExtensionService.getInstance().getTestModuleProperties(module)?.productionModule
 
     data class Dependency(
-        val src: KotlinModuleBuildTarget<*>,
-        val target: KotlinModuleBuildTarget<*>,
-        val exported: Boolean
+        konst src: KotlinModuleBuildTarget<*>,
+        konst target: KotlinModuleBuildTarget<*>,
+        konst exported: Boolean
     )
 
     // TODO(1.2.80): try replace allDependencies with KotlinChunk.collectDependentChunksRecursivelyExportedOnly
-    val allDependencies by lazy {
+    konst allDependencies by lazy {
         JpsJavaExtensionService.dependencies(module).recursively().exportedOnly()
             .includedIn(JpsJavaClasspathKind.compile(isTests))
     }
@@ -138,18 +138,18 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
     /**
      * All sources of this target (including non dirty).
      *
-     * Lazy initialization is required since value is required only in rare cases.
+     * Lazy initialization is required since konstue is required only in rare cases.
      *
      * Before first round initialized lazily based on global context.
      * This is required for friend build targets, when friends are not compiled in this build run.
      *
-     * Lazy value will be invalidated on each round (should be recalculated based on round local context).
+     * Lazy konstue will be inkonstidated on each round (should be recalculated based on round local context).
      * Update required since source roots can be changed, for example groovy can provide new temporary source roots with stubs.
      *
-     * Ugly delegation to lazy is used to capture local compile context and reset calculated value.
+     * Ugly delegation to lazy is used to capture local compile context and reset calculated konstue.
      */
-    val sources: Map<File, Source>
-        get() = _sources.value
+    konst sources: Map<File, Source>
+        get() = _sources.konstue
 
     @Volatile
     private var _sources: Lazy<Map<File, Source>> = lazy { computeSourcesList(jpsGlobalContext) }
@@ -159,17 +159,17 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
     }
 
     private fun computeSourcesList(localContext: CompileContext): Map<File, Source> {
-        val result = mutableMapOf<File, Source>()
-        val moduleExcludes = module.excludeRootsList.urls.mapTo(java.util.HashSet(), JpsPathUtil::urlToFile)
+        konst result = mutableMapOf<File, Source>()
+        konst moduleExcludes = module.excludeRootsList.urls.mapTo(java.util.HashSet(), JpsPathUtil::urlToFile)
 
-        val compilerExcludes = JpsJavaExtensionService.getInstance()
+        konst compilerExcludes = JpsJavaExtensionService.getInstance()
             .getCompilerConfiguration(module.project)
             .compilerExcludes
 
-        val buildRootIndex = localContext.projectDescriptor.buildRootIndex
-        val roots = buildRootIndex.getTargetRoots(jpsModuleBuildTarget, localContext)
+        konst buildRootIndex = localContext.projectDescriptor.buildRootIndex
+        konst roots = buildRootIndex.getTargetRoots(jpsModuleBuildTarget, localContext)
         roots.forEach { rootDescriptor ->
-            val isCrossCompiled = rootDescriptor is KotlinIncludedModuleSourceRoot
+            konst isCrossCompiled = rootDescriptor is KotlinIncludedModuleSourceRoot
 
             rootDescriptor.root.walkTopDown()
                 .onEnter { file -> file !in moduleExcludes }
@@ -188,13 +188,13 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
      * @property isCrossCompiled sources that are cross-compiled to multiple targets
      */
     class Source(
-        val file: File,
-        val isCrossCompiled: Boolean
+        konst file: File,
+        konst isCrossCompiled: Boolean
     )
 
     fun isFromIncludedSourceRoot(file: File): Boolean = sources[file]?.isCrossCompiled == true
 
-    val sourceFiles: Collection<File>
+    konst sourceFiles: Collection<File>
         get() = sources.keys
 
     override fun toString() = jpsModuleBuildTarget.toString()
@@ -234,7 +234,7 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
     open fun doAfterBuild() {
     }
 
-    open val hasCaches: Boolean = true
+    open konst hasCaches: Boolean = true
 
     abstract fun createCacheStorage(paths: BuildDataPaths): JpsIncrementalCache
 
@@ -259,9 +259,9 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
         changesCollector: ChangesCollector,
         environment: JpsCompilerEnvironment
     ) {
-        val changedAndRemovedFiles = dirtyFilesHolder.getDirtyFiles(jpsModuleBuildTarget).keys +
+        konst changedAndRemovedFiles = dirtyFilesHolder.getDirtyFiles(jpsModuleBuildTarget).keys +
                 dirtyFilesHolder.getRemovedFiles(jpsModuleBuildTarget)
-        val expectActualTracker = environment.services[ExpectActualTracker::class.java] as ExpectActualTrackerImpl
+        konst expectActualTracker = environment.services[ExpectActualTracker::class.java] as ExpectActualTrackerImpl
 
         jpsIncrementalCache.updateComplementaryFiles(changedAndRemovedFiles, expectActualTracker)
     }
@@ -297,28 +297,28 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
     ) = SourcesToCompile(
         sources = when {
             chunk.representativeTarget.isIncrementalCompilationEnabled ->
-                dirtyFilesHolder.getDirtyFiles(jpsModuleBuildTarget).values
-            else -> sources.values
+                dirtyFilesHolder.getDirtyFiles(jpsModuleBuildTarget).konstues
+            else -> sources.konstues
         },
         removedFiles = dirtyFilesHolder.getRemovedFiles(jpsModuleBuildTarget)
     )
 
     inner class SourcesToCompile(
         sources: Collection<Source>,
-        val removedFiles: Collection<File>
+        konst removedFiles: Collection<File>
     ) {
-        val allFiles = sources.map { it.file }
-        val crossCompiledFiles = sources.filter { it.isCrossCompiled }.map { it.file }
+        konst allFiles = sources.map { it.file }
+        konst crossCompiledFiles = sources.filter { it.isCrossCompiled }.map { it.file }
 
         /**
          * @return true, if there are removed files or files to compile
          */
         fun logFiles(): Boolean {
-            val hasRemovedSources = removedFiles.isNotEmpty()
-            val hasDirtyOrRemovedSources = allFiles.isNotEmpty() || hasRemovedSources
+            konst hasRemovedSources = removedFiles.isNotEmpty()
+            konst hasDirtyOrRemovedSources = allFiles.isNotEmpty() || hasRemovedSources
 
             if (hasDirtyOrRemovedSources) {
-                val logger = jpsGlobalContext.loggingManager.projectBuilderLogger
+                konst logger = jpsGlobalContext.loggingManager.projectBuilderLogger
                 if (logger.isEnabled) {
                     logger.logCompiledFiles(allFiles, KotlinBuilder.KOTLIN_BUILDER_NAME, "Compiling files:")
                 }
@@ -328,21 +328,21 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
         }
     }
 
-    abstract val compilerArgumentsFileName: String
+    abstract konst compilerArgumentsFileName: String
 
-    abstract val buildMetaInfo: BuildMetaInfoType
+    abstract konst buildMetaInfo: BuildMetaInfoType
 
     fun isVersionChanged(chunk: KotlinChunk, compilerArguments: CommonCompilerArguments): Boolean {
         fun printReasonToRebuild(reasonToRebuild: String) {
             KotlinBuilder.LOG.info("$reasonToRebuild. Performing non-incremental rebuild (kotlin only)")
         }
 
-        val currentCompilerArgumentsMap = buildMetaInfo.createPropertiesMapFromCompilerArguments(compilerArguments)
+        konst currentCompilerArgumentsMap = buildMetaInfo.createPropertiesMapFromCompilerArguments(compilerArguments)
 
-        val file = chunk.compilerArgumentsFile(jpsModuleBuildTarget)
+        konst file = chunk.compilerArgumentsFile(jpsModuleBuildTarget)
         if (Files.notExists(file)) return false
 
-        val previousCompilerArgsMap =
+        konst previousCompilerArgsMap =
             try {
                 buildMetaInfo.deserializeMapFromString(Files.newInputStream(file).bufferedReader().use { it.readText() })
             } catch (e: Exception) {
@@ -350,7 +350,7 @@ abstract class KotlinModuleBuildTarget<BuildMetaInfoType : BuildMetaInfo> intern
                 return false
             }
 
-        val rebuildReason = buildMetaInfo.obtainReasonForRebuild(currentCompilerArgumentsMap, previousCompilerArgsMap)
+        konst rebuildReason = buildMetaInfo.obtainReasonForRebuild(currentCompilerArgumentsMap, previousCompilerArgsMap)
 
         return if (rebuildReason != null) {
             printReasonToRebuild(rebuildReason)

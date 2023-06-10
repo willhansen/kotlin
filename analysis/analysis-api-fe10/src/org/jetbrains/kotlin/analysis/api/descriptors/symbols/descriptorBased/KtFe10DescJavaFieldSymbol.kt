@@ -24,22 +24,22 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 
 internal class KtFe10DescJavaFieldSymbol(
-    override val descriptor: JavaPropertyDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: JavaPropertyDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtJavaFieldSymbol(), KtFe10DescMemberSymbol<JavaPropertyDescriptor> {
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { descriptor.name }
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = withValidityAssertion { DescriptorUtils.isStaticDeclaration(descriptor) }
 
-    override val isVal: Boolean
+    override konst isVal: Boolean
         get() = withValidityAssertion { !descriptor.isVar }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { descriptor.callableIdIfNotLocal }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.returnType.toKtType(analysisContext) }
 
     context(KtAnalysisSession)

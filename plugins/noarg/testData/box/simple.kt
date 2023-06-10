@@ -3,7 +3,7 @@
 annotation class NoArg
 
 @NoArg
-class Test(val a: String)
+class Test(konst a: String)
 
 fun box(): String {
     Test::class.java.newInstance()

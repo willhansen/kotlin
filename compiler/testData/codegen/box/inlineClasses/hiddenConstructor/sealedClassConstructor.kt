@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
-sealed class Sealed(val x: S)
+sealed class Sealed(konst x: S)
 
 class Test(x: S) : Sealed(x)
 

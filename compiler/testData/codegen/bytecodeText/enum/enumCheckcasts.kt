@@ -4,7 +4,7 @@ enum class Foo {
 }
 
 // JVM_TEMPLATES
-// There are two CHECKCASTs, one in Foo.valueOf and one in Foo.values
+// There are two CHECKCASTs, one in Foo.konstueOf and one in Foo.konstues
 // 2 CHECKCAST
 
 // JVM_IR_TEMPLATES

@@ -1,6 +1,6 @@
 class ClassB : Interface {
-    val x = 3
+    konst x = 3
 
-    override val someValue: Int
+    override konst someValue: Int
         get() = super.someValue + 1
 }

@@ -6,12 +6,12 @@
 
 // MODULE: lib
 // FILE: koo.kt
-value class Koo(val koo: String = "OK")
+konstue class Koo(konst koo: String = "OK")
 
 // FILE: bar.kt
 @file:JsExport
 
-class Bar(val koo: Koo = Koo())
+class Bar(konst koo: Koo = Koo())
 
 // MODULE: main(lib)
 // FILE: entry.mjs

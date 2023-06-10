@@ -24,32 +24,32 @@ import org.jetbrains.kotlin.resolve.calls.tower.CandidateApplicability
 import org.jetbrains.kotlin.resolve.calls.tower.isSuccess
 
 class SingleCandidateResolver(
-    private val firSession: FirSession,
-    private val firFile: FirFile,
+    private konst firSession: FirSession,
+    private konst firFile: FirFile,
 ) {
-    private val bodyResolveComponents = createStubBodyResolveComponents(firSession)
-    private val firCallCompleter = FirCallCompleter(
+    private konst bodyResolveComponents = createStubBodyResolveComponents(firSession)
+    private konst firCallCompleter = FirCallCompleter(
         bodyResolveComponents.transformer,
         bodyResolveComponents,
     )
-    private val resolutionStageRunner = ResolutionStageRunner()
+    private konst resolutionStageRunner = ResolutionStageRunner()
 
     fun resolveSingleCandidate(
         resolutionParameters: ResolutionParameters
     ): FirFunctionCall? {
 
-        val infoProvider = createCandidateInfoProvider(resolutionParameters)
+        konst infoProvider = createCandidateInfoProvider(resolutionParameters)
         if (infoProvider.shouldFailBeforeResolve())
             return null
 
-        val callInfo = infoProvider.callInfo()
-        val explicitReceiverKind = infoProvider.explicitReceiverKind()
-        val dispatchReceiverValue = infoProvider.dispatchReceiverValue()
-        val implicitExtensionReceiverValue = infoProvider.implicitExtensionReceiverValue()
+        konst callInfo = infoProvider.callInfo()
+        konst explicitReceiverKind = infoProvider.explicitReceiverKind()
+        konst dispatchReceiverValue = infoProvider.dispatchReceiverValue()
+        konst implicitExtensionReceiverValue = infoProvider.implicitExtensionReceiverValue()
 
-        val resolutionContext = bodyResolveComponents.transformer.resolutionContext
+        konst resolutionContext = bodyResolveComponents.transformer.resolutionContext
 
-        val candidate = CandidateFactory(resolutionContext, callInfo).createCandidate(
+        konst candidate = CandidateFactory(resolutionContext, callInfo).createCandidate(
             callInfo,
             resolutionParameters.callableSymbol,
             explicitReceiverKind = explicitReceiverKind,
@@ -63,9 +63,9 @@ class SingleCandidateResolver(
             scope = null,
         )
 
-        val applicability = resolutionStageRunner.processCandidate(candidate, resolutionContext, stopOnFirstError = true)
+        konst applicability = resolutionStageRunner.processCandidate(candidate, resolutionContext, stopOnFirstError = true)
 
-        val fakeCall = if (applicability.isSuccess) {
+        konst fakeCall = if (applicability.isSuccess) {
             buildCallForResolvedCandidate(candidate, resolutionParameters)
         } else if (
             resolutionParameters.allowUnsafeCall && applicability == CandidateApplicability.UNSAFE_CALL ||
@@ -76,7 +76,7 @@ class SingleCandidateResolver(
             return null
         }
 
-        val completionResult = firCallCompleter.completeCall(
+        konst completionResult = firCallCompleter.completeCall(
             fakeCall,
             (resolutionParameters.expectedType as? FirResolvedTypeRef)?.let { ResolutionMode.WithExpectedType(it) }
                 ?: ResolutionMode.ContextIndependent
@@ -109,8 +109,8 @@ class SingleCandidateResolver(
         applicability: CandidateApplicability,
         resolutionParameters: ResolutionParameters
     ): FirFunctionCall {
-        val diagnostic = createConeDiagnosticForCandidateWithError(applicability, candidate)
-        val name = resolutionParameters.callableSymbol.callableId.callableName
+        konst diagnostic = createConeDiagnosticForCandidateWithError(applicability, candidate)
+        konst name = resolutionParameters.callableSymbol.callableId.callableName
         return buildFunctionCall {
             calleeReference = FirErrorReferenceWithCandidate(source = null, name, candidate, diagnostic)
         }
@@ -122,15 +122,15 @@ class SingleCandidateResolver(
  * @param allowUnstableSmartCast if true, then candidate is resolved even if it requires unstable smart cast
  */
 class ResolutionParameters(
-    val singleCandidateResolutionMode: SingleCandidateResolutionMode,
-    val callableSymbol: FirCallableSymbol<*>,
-    val implicitReceiver: ImplicitReceiverValue<*>? = null,
-    val expectedType: FirTypeRef? = null,
-    val explicitReceiver: FirExpression? = null,
-    val argumentList: FirArgumentList = FirEmptyArgumentList,
-    val typeArgumentList: List<FirTypeProjection> = emptyList(),
-    val allowUnsafeCall: Boolean = false,
-    val allowUnstableSmartCast: Boolean = false,
+    konst singleCandidateResolutionMode: SingleCandidateResolutionMode,
+    konst callableSymbol: FirCallableSymbol<*>,
+    konst implicitReceiver: ImplicitReceiverValue<*>? = null,
+    konst expectedType: FirTypeRef? = null,
+    konst explicitReceiver: FirExpression? = null,
+    konst argumentList: FirArgumentList = FirEmptyArgumentList,
+    konst typeArgumentList: List<FirTypeProjection> = emptyList(),
+    konst allowUnsafeCall: Boolean = false,
+    konst allowUnstableSmartCast: Boolean = false,
 )
 
 enum class SingleCandidateResolutionMode {

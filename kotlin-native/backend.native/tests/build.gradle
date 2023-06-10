@@ -792,7 +792,7 @@ standaloneTest("cleaner_basic") {
     flags = ['-tr', '-opt-in=kotlin.native.internal.InternalForKotlinNative']
 }
 
-standaloneTest("collect_reference_field_values") {
+standaloneTest("collect_reference_field_konstues") {
     enabled = !isNoopGC
     source = "runtime/basic/collectReferenceFieldValues.kt"
     flags = ['-tr', '-opt-in=kotlin.native.internal.InternalForKotlinNative']
@@ -1113,14 +1113,14 @@ tasks.register("enum1", KonanLocalTest) {
     source = "codegen/enum/test1.kt"
 }
 
-tasks.register("enum_valueOf", KonanLocalTest) {
+tasks.register("enum_konstueOf", KonanLocalTest) {
     useGoldenData = true
-    source = "codegen/enum/valueOf.kt"
+    source = "codegen/enum/konstueOf.kt"
 }
 
-tasks.register("enum_values", KonanLocalTest) {
+tasks.register("enum_konstues", KonanLocalTest) {
     useGoldenData = true
-    source = "codegen/enum/values.kt"
+    source = "codegen/enum/konstues.kt"
 }
 
 tasks.register("enum_vCallNoEntryClass", KonanLocalTest) {
@@ -1682,14 +1682,14 @@ tasks.register("delegatedProperty_map", KonanLocalTest) {
     source = "codegen/delegatedProperty/map.kt"
 }
 
-tasks.register("propertyCallableReference_valClass", KonanLocalTest) {
+tasks.register("propertyCallableReference_konstClass", KonanLocalTest) {
     useGoldenData = true
-    source = "codegen/propertyCallableReference/valClass.kt"
+    source = "codegen/propertyCallableReference/konstClass.kt"
 }
 
-tasks.register("propertyCallableReference_valModule", KonanLocalTest) {
+tasks.register("propertyCallableReference_konstModule", KonanLocalTest) {
     useGoldenData = true
-    source = "codegen/propertyCallableReference/valModule.kt"
+    source = "codegen/propertyCallableReference/konstModule.kt"
 }
 
 tasks.register("propertyCallableReference_varClass", KonanLocalTest) {
@@ -1702,9 +1702,9 @@ tasks.register("propertyCallableReference_varModule", KonanLocalTest) {
     source = "codegen/propertyCallableReference/varModule.kt"
 }
 
-tasks.register("propertyCallableReference_valExtension", KonanLocalTest) {
+tasks.register("propertyCallableReference_konstExtension", KonanLocalTest) {
     useGoldenData = true
-    source = "codegen/propertyCallableReference/valExtension.kt"
+    source = "codegen/propertyCallableReference/konstExtension.kt"
 }
 
 tasks.register("propertyCallableReference_varExtension", KonanLocalTest) {
@@ -2538,7 +2538,7 @@ standaloneTest("throw_from_except_constr") {
 
 standaloneTest("custom_hook") {
     outputChecker = {
-        it.contains("value 42: Error. Runnable state: true") && it.contains("Uncaught Kotlin exception: kotlin.Error: an error")
+        it.contains("konstue 42: Error. Runnable state: true") && it.contains("Uncaught Kotlin exception: kotlin.Error: an error")
     }
     expectedExitStatusChecker = { it != 0 }
     source = "runtime/exceptions/custom_hook.kt"
@@ -2726,9 +2726,9 @@ tasks.register("scope1", KonanLocalTest) {
     source = "codegen/dataflow/scope1.kt"
 }
 
-tasks.register("uninitialized_val", KonanLocalTest) {
+tasks.register("uninitialized_konst", KonanLocalTest) {
     useGoldenData = true
-    source = "codegen/dataflow/uninitialized_val.kt"
+    source = "codegen/dataflow/uninitialized_konst.kt"
 }
 
 tasks.register("try1", KonanLocalTest) {
@@ -3435,8 +3435,8 @@ tasks.register("inlineClass_nestedInlineClasses", KonanLocalTest) {
     source = "codegen/inlineClass/nestedInlineClasses.kt"
 }
 
-tasks.register("valueClass0", KonanLocalTest) {
-    source = "codegen/inlineClass/valueClass0.kt"
+tasks.register("konstueClass0", KonanLocalTest) {
+    source = "codegen/inlineClass/konstueClass0.kt"
 }
 
 tasks.register("deserialized_inline0", KonanLocalTest) {
@@ -3840,8 +3840,8 @@ createInterop("structAnonym") {
     it.defFile 'interop/basics/structAnonym.def'
 }
 
-createInterop("cvalues") {
-    it.defFile 'interop/basics/cvalues.def'
+createInterop("ckonstues") {
+    it.defFile 'interop/basics/ckonstues.def'
 }
 
 createInterop("cvectors") {
@@ -4338,9 +4338,9 @@ interopTest("interop_embedStaticLibraries") {
     interop = 'embedStaticLibraries'
 }
 
-interopTest("interop_values") {
-    source = "interop/basics/values.kt"
-    interop = 'cvalues'
+interopTest("interop_konstues") {
+    source = "interop/basics/konstues.kt"
+    interop = 'ckonstues'
 }
 
 interopTest("interop_structs") {
@@ -4468,8 +4468,8 @@ tasks.register("interop_sourceCodeStruct", KonanLocalTest) {
     source = "codegen/intrinsics/interop_sourceCodeStruct.kt"
 }
 
-tasks.register("interop_alloc_value", KonanLocalTest) {
-    source = "runtime/interop/interop_alloc_value.kt"
+tasks.register("interop_alloc_konstue", KonanLocalTest) {
+    source = "runtime/interop/interop_alloc_konstue.kt"
 }
 
 standaloneTest("isExperimentalMM") {
@@ -4803,7 +4803,7 @@ if (PlatformInfo.isAppleTarget(project)) {
         interop = "objc_kt50648"
         expectedExitStatusChecker = { it != 0 }
         outputChecker = {
-            it.contains("Converting Obj-C blocks with non-reference-typed return value to kotlin.Any is not supported (v)") &&
+            it.contains("Converting Obj-C blocks with non-reference-typed return konstue to kotlin.Any is not supported (v)") &&
                     (it.contains("kfun:#main(){}") || project.globalTestArgs.contains('-opt')) // Stacktrace.
         }
     }
@@ -5116,13 +5116,13 @@ tasks.register("library_ir_provider_mismatch", KonanDriverTest) {
 
     def dir = buildDir.absolutePath
     def lib = "$projectDir/link/ir_providers/library/empty.kt"
-    def invalidManifest = "$projectDir/link/ir_providers/library/manifest.properties"
+    def inkonstidManifest = "$projectDir/link/ir_providers/library/manifest.properties"
 
     def currentTarget = project.target.name
 
     doBeforeBuild {
         konanc("$lib -p library -o $dir/supported_ir_provider/empty -target $currentTarget")
-        konanc("$lib -p library -o $dir/unsupported_ir_provider/empty -manifest $invalidManifest -target $currentTarget")
+        konanc("$lib -p library -o $dir/unsupported_ir_provider/empty -manifest $inkonstidManifest -target $currentTarget")
 
     }
     source = "link/ir_providers/hello.kt"
@@ -5388,9 +5388,9 @@ if (isAppleTarget(project)) {
 
     frameworkTest('testValuesGenericsFramework') {
         framework('ValuesGenerics') {
-            sources = ['objcexport/values.kt', 'framework/values_generics']
+            sources = ['objcexport/konstues.kt', 'framework/konstues_generics']
         }
-        swiftSources = ['framework/values_generics/']
+        swiftSources = ['framework/konstues_generics/']
     }
 
     frameworkTest("testStdlibFramework") {
@@ -5915,7 +5915,7 @@ if (HostManager.@Companion.hostIsMac) {
         phaseToCheck = "LTOBitcodeOptimization"
     }
 
-    fileCheckTest("filecheck_redundant_safepoints_removal_smallbinary") {
+    fileCheckTest("filecheck_redundant_safepoints_remokonst_smallbinary") {
         enabled = project.globalTestArgs.contains("-opt")
         annotatedSource = project.file('filecheck/redundant_safepoints.kt')
         targetName = "watchos_arm32"
@@ -5926,7 +5926,7 @@ if (HostManager.@Companion.hostIsMac) {
 
 }
 
-fileCheckTest("filecheck_redundant_safepoints_removal") {
+fileCheckTest("filecheck_redundant_safepoints_remokonst") {
     enabled = !isNoopGC && !isSTWMSGC &&
             project.globalTestArgs.contains("-opt") &&
             !needSmallBinary(project)
@@ -5996,8 +5996,8 @@ fileCheckTest("filecheck_kt53261_inline_unbox") {
     }
 }
 
-fileCheckTest("filecheck_kt53261_noinline_value_unbox") {
-    annotatedSource = project.file('filecheck/kt53261/kt53261_noinline_value_unbox.kt')
+fileCheckTest("filecheck_kt53261_noinline_konstue_unbox") {
+    annotatedSource = project.file('filecheck/kt53261/kt53261_noinline_konstue_unbox.kt')
     enabled = project.globalTestArgs.contains('-opt')
 }
 
@@ -6249,7 +6249,7 @@ if (UtilsKt.supportsRunningTestsOnDevice(target) && !UtilsKt.getCompileOnlyTests
             .configureEach { it.enabled = false }
 }
 
-project.afterEvaluate {
+project.afterEkonstuate {
     // Don't treat any task as up-to-date, no matter what.
     // Note: this project should contain only test tasks, including ones that build binaries,
     // and ones that run binaries.

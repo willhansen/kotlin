@@ -25,28 +25,28 @@ import java.util.Collections;
 import java.util.List;
 
 public class ExpressionValueArgument implements ResolvedValueArgument {
-    private final ValueArgument valueArgument;
+    private final ValueArgument konstueArgument;
 
-    public ExpressionValueArgument(@Nullable ValueArgument valueArgument) {
-        this.valueArgument = valueArgument;
+    public ExpressionValueArgument(@Nullable ValueArgument konstueArgument) {
+        this.konstueArgument = konstueArgument;
     }
 
     // Nullable when something like f(a, , b) was in the source code
     @Nullable
     public ValueArgument getValueArgument() {
-        return valueArgument;
+        return konstueArgument;
     }
 
     @NotNull
     @Override
     public List<ValueArgument> getArguments() {
-        if (valueArgument == null) return Collections.emptyList();
-        return Collections.singletonList(valueArgument);
+        if (konstueArgument == null) return Collections.emptyList();
+        return Collections.singletonList(konstueArgument);
     }
 
     @Override
     public String toString() {
-        KtExpression expression = valueArgument.getArgumentExpression();
+        KtExpression expression = konstueArgument.getArgumentExpression();
         return expression == null ? "no expression" : expression.getText();
     }
 }

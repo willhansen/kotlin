@@ -29,8 +29,8 @@ fun box(): String {
     checkMethodExists(DerivedClass::class.java, "toOverride")
     checkNoMethod(DerivedClass::class.java, "nonOverride")
 
-    val value = DerivedClass()
-    return value.toOverride() + value.nonOverride()
+    konst konstue = DerivedClass()
+    return konstue.toOverride() + konstue.nonOverride()
 }
 
 fun checkNoMethod(clazz: Class<*>, name: String, vararg parameterTypes: Class<*>) {

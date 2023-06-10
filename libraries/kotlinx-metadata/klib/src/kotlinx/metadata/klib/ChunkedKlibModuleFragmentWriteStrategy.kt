@@ -9,18 +9,18 @@ import kotlinx.metadata.*
 import kotlinx.metadata.internal.common.KmModuleFragment
 
 class ChunkedKlibModuleFragmentWriteStrategy(
-    private val topLevelClassifierDeclarationsPerFile: Int = 64,
-    private val topLevelCallableDeclarationsPerFile: Int = 128
+    private konst topLevelClassifierDeclarationsPerFile: Int = 64,
+    private konst topLevelCallableDeclarationsPerFile: Int = 128
 ) : KlibModuleFragmentWriteStrategy {
     override fun processPackageParts(parts: List<KmModuleFragment>): List<KmModuleFragment> {
         if (parts.isEmpty())
             return emptyList()
 
-        val fqName = checkNotNull(parts.first().fqName) {
+        konst fqName = checkNotNull(parts.first().fqName) {
             "KmModuleFragment should have a not-null fqName!"
         }
 
-        val classifierFragments = parts.asSequence()
+        konst classifierFragments = parts.asSequence()
             .flatMap { it.classes.asSequence() + it.pkg?.typeAliases.orEmpty() }
             .chunked(topLevelClassifierDeclarationsPerFile) { chunkedClassifiers ->
                 KmModuleFragment().also { fragment ->
@@ -32,7 +32,7 @@ class ChunkedKlibModuleFragmentWriteStrategy(
                                 fragment.className += classifier.name
                             }
                             is KmTypeAlias -> {
-                                val pkg = fragment.pkg ?: KmPackage().also { pkg ->
+                                konst pkg = fragment.pkg ?: KmPackage().also { pkg ->
                                     pkg.fqName = fqName
                                     fragment.pkg = pkg
                                 }
@@ -44,13 +44,13 @@ class ChunkedKlibModuleFragmentWriteStrategy(
                 }
             }
 
-        val callableFragments = parts.asSequence()
+        konst callableFragments = parts.asSequence()
             .flatMap { it.pkg?.let { pkg -> pkg.functions.asSequence() + pkg.properties } ?: emptySequence() }
             .chunked(topLevelCallableDeclarationsPerFile) { chunkedCallables ->
                 KmModuleFragment().also { fragment ->
                     fragment.fqName = fqName
                     chunkedCallables.forEach { callable ->
-                        val pkg = fragment.pkg ?: KmPackage().also { pkg ->
+                        konst pkg = fragment.pkg ?: KmPackage().also { pkg ->
                             pkg.fqName = fqName
                             fragment.pkg = pkg
                         }
@@ -63,7 +63,7 @@ class ChunkedKlibModuleFragmentWriteStrategy(
                 }
             }
 
-        val allFragments = (classifierFragments + callableFragments).toList()
+        konst allFragments = (classifierFragments + callableFragments).toList()
         return if (allFragments.isEmpty()) {
             // We still need to emit empty packages because they may
             // represent parts of package declaration (e.g. platform.[]).

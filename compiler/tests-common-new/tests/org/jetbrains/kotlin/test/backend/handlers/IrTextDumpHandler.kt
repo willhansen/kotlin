@@ -33,7 +33,7 @@ import java.io.File
 
 class IrTextDumpHandler(testServices: TestServices) : AbstractIrHandler(testServices) {
     companion object {
-        const val DUMP_EXTENSION = "ir.txt"
+        const konst DUMP_EXTENSION = "ir.txt"
 
         fun computeDumpExtension(module: TestModule, defaultExtension: String, ignoreFirIdentical: Boolean = false): String {
             return if (
@@ -47,30 +47,30 @@ class IrTextDumpHandler(testServices: TestServices) : AbstractIrHandler(testServ
         }
 
         fun List<IrFile>.groupWithTestFiles(module: TestModule): List<Pair<TestFile?, IrFile>> = mapNotNull { irFile ->
-            val name = File(irFile.fileEntry.name).name
-            val testFile = module.files.firstOrNull { it.name == name }
+            konst name = File(irFile.fileEntry.name).name
+            konst testFile = module.files.firstOrNull { it.name == name }
             testFile to irFile
         }
     }
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives, FirDiagnosticsDirectives)
 
-    private val baseDumper = MultiModuleInfoDumper()
-    private val buildersForSeparateFileDumps: MutableMap<File, StringBuilder> = mutableMapOf()
+    private konst baseDumper = MultiModuleInfoDumper()
+    private konst buildersForSeparateFileDumps: MutableMap<File, StringBuilder> = mutableMapOf()
 
     override fun processModule(module: TestModule, info: IrBackendInput) {
         if (DUMP_IR !in module.directives) return
 
-        val dumpOptions = DumpIrTreeOptions(
+        konst dumpOptions = DumpIrTreeOptions(
             normalizeNames = true,
             printFacadeClassInFqNames = false,
             printFlagsInDeclarationReferences = false,
         )
 
         info.processAllIrModuleFragments(module) { irModuleFragment, moduleName ->
-            val builder = baseDumper.builderForModule(moduleName)
-            val testFileToIrFile = irModuleFragment.files.groupWithTestFiles(module)
+            konst builder = baseDumper.builderForModule(moduleName)
+            konst testFileToIrFile = irModuleFragment.files.groupWithTestFiles(module)
 
             for ((testFile, irFile) in testFileToIrFile) {
                 if (testFile?.directives?.contains(EXTERNAL_FILE) == true) continue
@@ -86,16 +86,16 @@ class IrTextDumpHandler(testServices: TestServices) : AbstractIrHandler(testServ
     }
 
     private fun compareDumpsOfExternalClasses(module: TestModule, info: IrBackendInput) {
-        val externalClassIds = module.directives[DUMP_EXTERNAL_CLASS]
+        konst externalClassIds = module.directives[DUMP_EXTERNAL_CLASS]
         if (externalClassIds.isEmpty()) return
 
-        val baseFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst baseFile = testServices.moduleStructure.originalTestDataFiles.first()
         assertions.assertAll(
             externalClassIds.map { externalClassId ->
                 {
-                    val classDump = info.irPluginContext.findExternalClass(externalClassId).dump()
-                    val suffix = ".__${externalClassId.replace("/", ".")}"
-                    val expectedFile = baseFile.withSuffixAndExtension(suffix, module.getDumpExtension(ignoreFirIdentical = true))
+                    konst classDump = info.irPluginContext.findExternalClass(externalClassId).dump()
+                    konst suffix = ".__${externalClassId.replace("/", ".")}"
+                    konst expectedFile = baseFile.withSuffixAndExtension(suffix, module.getDumpExtension(ignoreFirIdentical = true))
                     assertions.assertEqualsToFile(expectedFile, classDump)
                 }
             }
@@ -103,13 +103,13 @@ class IrTextDumpHandler(testServices: TestServices) : AbstractIrHandler(testServ
     }
 
     private fun IrPluginContext.findExternalClass(externalClassId: String): IrClass {
-        val classId = ClassId.fromString(externalClassId)
+        konst classId = ClassId.fromString(externalClassId)
         return referenceClass(classId)?.owner ?: assertions.fail { "Can't find a class in external dependencies: $externalClassId" }
     }
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
-        val moduleStructure = testServices.moduleStructure
-        val defaultExpectedFile = moduleStructure.originalTestDataFiles.first()
+        konst moduleStructure = testServices.moduleStructure
+        konst defaultExpectedFile = moduleStructure.originalTestDataFiles.first()
             .withExtension(moduleStructure.modules.first().getDumpExtension())
         checkOneExpectedFile(defaultExpectedFile, baseDumper.generateResultingDump())
         buildersForSeparateFileDumps.entries.forEach { (expectedFile, dump) -> checkOneExpectedFile(expectedFile, dump.toString()) }

@@ -2,27 +2,27 @@ package lab2
 
 fun main() {
     println("something")
-    val obj = SomePojo()
+    konst obj = SomePojo()
     obj.name = "test"
-    val s: String = obj.name
+    konst s: String = obj.name
     obj.age = 12
-    val v = obj.human
+    konst v = obj.human
     obj.human = !v
     println(obj)
 //
-//    val manualPojo = ManualPojo()
+//    konst manualPojo = ManualPojo()
 //
-//    val foo: String? = manualPojo.getFoo()
-//    val res: Any? = manualPojo.someMethod()
+//    konst foo: String? = manualPojo.getFoo()
+//    konst res: Any? = manualPojo.someMethod()
 //
-    val ddd = SomeData()
+    konst ddd = SomeData()
 
     JavaUsage.cycleUsage()
 }
 
 class SomeKotlinClass {
     fun call() {
-        val ddd = SomeData()
+        konst ddd = SomeData()
         ddd.age = 12
         println(ddd)
     }

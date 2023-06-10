@@ -1,4 +1,4 @@
->>> val c = "OK"
+>>> konst c = "OK"
 >>> inner class A {
 ...     fun foo() = c
 ... }

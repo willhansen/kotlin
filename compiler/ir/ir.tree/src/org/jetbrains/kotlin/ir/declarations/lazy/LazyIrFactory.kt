@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.types.Variance
 
 // An IrFactory that does not recreate declarations for already bound symbols.
 class LazyIrFactory(
-    private val delegate: IrFactory,
+    private konst delegate: IrFactory,
 ) : IrFactory by delegate {
     override fun createClass(
         startOffset: Int,

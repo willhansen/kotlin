@@ -28,27 +28,27 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 
 object ByDescriptorIndexer {
     fun getDeclarationForDescriptor(descriptor: DeclarationDescriptor, file: KtDecompiledFile): KtDeclaration? {
-        val original = descriptor.original
+        konst original = descriptor.original
 
         if (original is TypeAliasConstructorDescriptor) {
             return getDeclarationForDescriptor(original.typeAliasDescriptor, file)
         }
 
         if (original is ValueParameterDescriptor) {
-            val callable = original.containingDeclaration
-            val callableDeclaration = getDeclarationForDescriptor(callable, file) as? KtCallableDeclaration ?: return null
-            if (original.index >= callableDeclaration.valueParameters.size) {
+            konst callable = original.containingDeclaration
+            konst callableDeclaration = getDeclarationForDescriptor(callable, file) as? KtCallableDeclaration ?: return null
+            if (original.index >= callableDeclaration.konstueParameters.size) {
                 LOG.error(
                     "Parameter count mismatch for ${DescriptorRenderer.DEBUG_TEXT.render(callable)}[${original.index}] vs " +
-                            callableDeclaration.valueParameterList?.text
+                            callableDeclaration.konstueParameterList?.text
                 )
                 return null
             }
-            return callableDeclaration.valueParameters[original.index]
+            return callableDeclaration.konstueParameters[original.index]
         }
 
         if (original is ConstructorDescriptor && original.isPrimary) {
-            val classOrObject = getDeclarationForDescriptor(original.containingDeclaration, file) as? KtClassOrObject
+            konst classOrObject = getDeclarationForDescriptor(original.containingDeclaration, file) as? KtClassOrObject
             return classOrObject?.primaryConstructor ?: classOrObject
         }
 
@@ -63,7 +63,7 @@ object ByDescriptorIndexer {
         }
         
         if (original is MemberDescriptor) {
-            val declarationContainer: KtDeclarationContainer? = when {
+            konst declarationContainer: KtDeclarationContainer? = when {
                 DescriptorUtils.isTopLevelDeclaration(original) -> file
                 original.containingDeclaration is ClassDescriptor ->
                     getDeclarationForDescriptor(original.containingDeclaration as ClassDescriptor, file) as? KtClassOrObject
@@ -71,8 +71,8 @@ object ByDescriptorIndexer {
             }
 
             if (declarationContainer != null) {
-                val descriptorName = original.name.asString()
-                val declarations = when {
+                konst descriptorName = original.name.asString()
+                konst declarations = when {
                     original is ConstructorDescriptor && declarationContainer is KtClass -> declarationContainer.allConstructors
                     else -> declarationContainer.declarations.filter { it.name == descriptorName }
                 }
@@ -106,21 +106,21 @@ object ByDescriptorIndexer {
         //typeReference can be null when used in IDE in source -> class file navigation 
         //for functions without explicit return type specified.
         //In that case return types are not compared
-        val typeReference = declaration.typeReference ?: return true
+        konst typeReference = declaration.typeReference ?: return true
         return areTypesTheSame(descriptor.returnType!!, typeReference)
     }
 
     private fun typeParametersMatch(declaration: KtCallableDeclaration, descriptor: CallableDescriptor): Boolean {
         if (declaration.typeParameters.size != declaration.typeParameters.size) return false
-        val boundsByName = declaration.typeConstraints.groupBy { it.subjectTypeParameterName?.getReferencedName() }
+        konst boundsByName = declaration.typeConstraints.groupBy { it.subjectTypeParameterName?.getReferencedName() }
         descriptor.typeParameters.zip(declaration.typeParameters) { descriptorTypeParam, psiTypeParameter ->
             if (descriptorTypeParam.name.toString() != psiTypeParameter.name) return false
-            val psiBounds = mutableListOf<KtTypeReference>()
+            konst psiBounds = mutableListOf<KtTypeReference>()
             psiBounds.addIfNotNull(psiTypeParameter.extendsBound)
             boundsByName[psiTypeParameter.name]?.forEach {
                 psiBounds.addIfNotNull(it.boundTypeReference)
             }
-            val expectedBounds = descriptorTypeParam.upperBounds.filter { !it.isNullableAny() }
+            konst expectedBounds = descriptorTypeParam.upperBounds.filter { !it.isNullableAny() }
             if (psiBounds.size != expectedBounds.size) return false
             expectedBounds.zip(psiBounds) { expectedBound, candidateBound ->
                 if (!areTypesTheSame(expectedBound, candidateBound)) {
@@ -135,11 +135,11 @@ object ByDescriptorIndexer {
         declaration: KtCallableDeclaration,
         original: CallableDescriptor
     ): Boolean {
-        if (declaration.valueParameters.size != original.valueParameters.size) {
+        if (declaration.konstueParameters.size != original.konstueParameters.size) {
             return false
         }
-        declaration.valueParameters.zip(original.valueParameters).forEach { (ktParam, paramDesc) ->
-            val isVarargs = ktParam.isVarArg
+        declaration.konstueParameters.zip(original.konstueParameters).forEach { (ktParam, paramDesc) ->
+            konst isVarargs = ktParam.isVarArg
             if (isVarargs != (paramDesc.varargElementType != null)) {
                 return false
             }
@@ -156,7 +156,7 @@ object ByDescriptorIndexer {
     ): Boolean {
         if (ktTypeReference != null) {
             if (receiverParameter == null) return false
-            val receiverType = receiverParameter.type
+            konst receiverType = receiverParameter.type
             if (!areTypesTheSame(receiverType, ktTypeReference)) {
                 return false
             }
@@ -168,10 +168,10 @@ object ByDescriptorIndexer {
         kotlinType: KotlinType,
         ktTypeReference: KtTypeReference
     ): Boolean {
-        val qualifiedName = getQualifiedName(
+        konst qualifiedName = getQualifiedName(
             ktTypeReference.typeElement,
             ktTypeReference.getAllModifierLists().any { it.hasSuspendModifier() }) ?: return false
-        val declarationDescriptor =
+        konst declarationDescriptor =
             ((kotlinType as? AbbreviatedType)?.abbreviation ?: kotlinType).constructor.declarationDescriptor ?: return false
         if (declarationDescriptor is TypeParameterDescriptor) {
             return declarationDescriptor.name.asString() == qualifiedName
@@ -179,11 +179,11 @@ object ByDescriptorIndexer {
         return declarationDescriptor.fqNameSafe.asString() == qualifiedName
     }
 
-    private val LOG = Logger.getInstance(this::class.java)
+    private konst LOG = Logger.getInstance(this::class.java)
 }
 
 fun getQualifiedName(typeElement: KtTypeElement?, isSuspend: Boolean): String? {
-    val referencedName = when (typeElement) {
+    konst referencedName = when (typeElement) {
         is KtUserType -> getQualifiedName(typeElement)
         is KtFunctionType -> {
             var parametersCount = typeElement.parameters.size
@@ -201,7 +201,7 @@ fun getQualifiedName(typeElement: KtTypeElement?, isSuspend: Boolean): String? {
 }
 
 private fun getQualifiedName(userType: KtUserType): String? {
-    val qualifier = userType.qualifier ?: return userType.referencedName
+    konst qualifier = userType.qualifier ?: return userType.referencedName
     return getQualifiedName(qualifier) + "." + userType.referencedName
 }
 

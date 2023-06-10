@@ -8,7 +8,7 @@ public open class JavaClass {
     public open fun getSomething1(): kotlin.Int
     public open fun getSomething2(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public open fun setSomething1(/*0*/ value: kotlin.Int): kotlin.Unit
-    public open fun setSomething2(/*0*/ value: kotlin.Int): JavaClass!
+    public open fun setSomething1(/*0*/ konstue: kotlin.Int): kotlin.Unit
+    public open fun setSomething2(/*0*/ konstue: kotlin.Int): JavaClass!
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }

@@ -4,7 +4,7 @@ FILE: nestedClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val s: String = R|<local>/s|
+        public? final? konst s: String = R|<local>/s|
             public? get(): String
 
     }

@@ -2,7 +2,7 @@ package hello
 
 open class A {
 
-    internal val z: String = "A_O"
+    internal konst z: String = "A_O"
 
     internal fun test() = "A_K"
 

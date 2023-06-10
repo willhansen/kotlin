@@ -2,7 +2,7 @@
 
 fun foo() = prop
 
-val prop = 1
+konst prop = 1
 
 fun box() {
     foo()

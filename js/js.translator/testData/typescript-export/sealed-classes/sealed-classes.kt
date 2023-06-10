@@ -10,7 +10,7 @@ package foo
 
 // See KT-47376, KT-39364
 @JsExport
-sealed class TestSealed(val name: String) {
+sealed class TestSealed(konst name: String) {
     class AA : TestSealed("AA") {
         fun bar(): String = "bar"
     }

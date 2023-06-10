@@ -5,10 +5,10 @@ package test
 import kotlin.reflect.KProperty1
 
 interface A {
-    val bla: CharSequence get() = ""
+    konst bla: CharSequence get() = ""
 }
 
-class B<T>(val x: T)
+class B<T>(konst x: T)
 fun <K, V> B<K>.foo(p: KProperty1<K, V>) {}
 
 class C : A

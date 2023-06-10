@@ -18,14 +18,14 @@
  * NOTE: a navigation expression referring to a unmutable property
  */
 fun case1() {
-    val x : Case1? = Case1()
+    konst x : Case1? = Case1()
     <!VAL_REASSIGNMENT!>x.x<!> = "0"
     <!VAL_REASSIGNMENT!>x?.x<!> = "0"
     <!VARIABLE_EXPECTED!>x::<!TYPE_MISMATCH!>x<!><!> = TODO()
 }
 
 class Case1{
-    val x : Any?
+    konst x : Any?
         get() { TODO() }
 }
 
@@ -34,25 +34,25 @@ class Case1{
  * NOTE: an identifier referring to a ununmutable property
  */
 fun case2() {
-    val x : Case2? = Case2(null)
+    konst x : Case2? = Case2(null)
     <!VAL_REASSIGNMENT!>x.x<!> = "0"
     <!VAL_REASSIGNMENT!>x?.x<!> = "0"
     <!VARIABLE_EXPECTED!>x::<!TYPE_MISMATCH!>x<!><!> = TODO()
 }
 
-class Case2(val x: Any?) {}
+class Case2(konst x: Any?) {}
 
 /*
  * TESTCASE NUMBER: 3
  * NOTE: an identifier referring to a ununmutable property
  */
 fun case3() {
-    val x : Case3? = Case3()
+    konst x : Case3? = Case3()
     <!VAL_REASSIGNMENT!>x.x<!> = "0"
     <!VAL_REASSIGNMENT!>x?.x<!> = "0"
     <!VARIABLE_EXPECTED!>x::<!TYPE_MISMATCH!>x<!><!> = TODO()
 }
 
 class Case3() {
-    val x: Any? = null
+    konst x: Any? = null
 }

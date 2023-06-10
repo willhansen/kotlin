@@ -20,18 +20,18 @@
 
 abstract class BaseCase1() {
     abstract fun foo(): String
-    abstract val a: String
+    abstract konst a: String
 }
 
 interface InterfaceCase1 {
     fun foo() = "foo"
-    val a: String
+    konst a: String
         get() = "a"
 }
 
 // TESTCASE NUMBER: 2
 class Case2Outer {
-    val v = "v"
+    konst v = "v"
 
     abstract class Case2Base() {
         abstract fun foo(): String
@@ -51,7 +51,7 @@ fun case3() {
 <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>class B<!>() : CaseOuter.CaseBase() {}
 
 sealed class CaseOuter {
-    val v = "v"
+    konst v = "v"
     abstract fun outerFoo();
 
     abstract class CaseBase() : CaseOuter() {

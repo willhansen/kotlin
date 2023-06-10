@@ -7,7 +7,7 @@ fun foo() {
         FindTagEnd@ while (tokenType.let { it != null && it !== "XML_END_TAG_START" }) {
             if (tokenType === "XML_COMMENT_CHARACTERS") {
                 // we should terminate on first occurence of </
-                val end = tokenType
+                konst end = tokenType
                 for (i in tokenType) {
                     if (i == ' ') {
                         break@FindTagEnd

@@ -4,11 +4,11 @@ class A {
 }
 
 fun a() {
-    val (<!REDECLARATION!>a<!>, <!NAME_SHADOWING, REDECLARATION!>a<!>) = A()
-    val (x, <!REDECLARATION!>y<!>) = A();
-    val <!REDECLARATION!>b<!> = 1
+    konst (<!REDECLARATION!>a<!>, <!NAME_SHADOWING, REDECLARATION!>a<!>) = A()
+    konst (x, <!REDECLARATION!>y<!>) = A();
+    konst <!REDECLARATION!>b<!> = 1
     use(b)
-    val (<!NAME_SHADOWING, REDECLARATION!>b<!>, <!NAME_SHADOWING, REDECLARATION!>y<!>) = A();
+    konst (<!NAME_SHADOWING, REDECLARATION!>b<!>, <!NAME_SHADOWING, REDECLARATION!>y<!>) = A();
 }
 
 

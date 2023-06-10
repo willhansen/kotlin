@@ -12,7 +12,7 @@ inline fun foo(x: String = "x", y: String = "y") = x + y
 fun test() = foo() + ";" + foo(x = "X") + ";" + foo(y = "Y") + ";" + foo(x = "X", y = "Y")
 
 fun box(): String {
-    val r = test()
+    konst r = test()
     if (test() != "xy;Xy;xY;XY") return "fail: $r"
 
     return "OK"

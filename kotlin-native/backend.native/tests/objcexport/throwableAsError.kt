@@ -28,7 +28,7 @@ fun callAndCatchThrowableAsErrorSuspend(throwsThrowableAsErrorSuspend: ThrowsThr
     suspend {
         throwsThrowableAsErrorSuspend.throwError()
     }.startCoroutine(object : Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
         override fun resumeWith(result: Result<Unit>) {
             throwable = result.exceptionOrNull() as? ThrowableAsError
         }

@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.daemon.common.SOCKET_ANY_FREE_PORT
 import java.rmi.server.UnicastRemoteObject
 
 class RemoteReplStateFacadeServer(
-    val _id: Int,
-    val state: IReplStageState<*>,
+    konst _id: Int,
+    konst state: IReplStageState<*>,
     port: Int = SOCKET_ANY_FREE_PORT
 ) : ReplStateFacade,
     UnicastRemoteObject(port, LoopbackNetworkInterface.clientLoopbackSocketFactory, LoopbackNetworkInterface.serverLoopbackSocketFactory)

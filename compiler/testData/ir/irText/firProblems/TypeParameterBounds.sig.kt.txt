@@ -6,7 +6,7 @@ open annotation class TypeAnn : Annotation {
   // CHECK:
   //   Mangled name: TypeAnn{}name
   //   Public signature: /TypeAnn.name|4231860309499509769[0]
-  val name: String
+  konst name: String
     // CHECK JVM_IR:
     //   Mangled name: TypeAnn#<get-name>(){}kotlin.String
     //   Public signature: /TypeAnn.name.<get-name>|-8006111524522882650[0]
@@ -38,7 +38,7 @@ open annotation class TypeParameterAnn : Annotation {
 //   Mangled name: TypeParameterAnnBinary
 //   Public signature: /TypeParameterAnnBinary|null[0]
 @Target(allowedTargets = [AnnotationTarget.TYPE_PARAMETER])
-@Retention(value = AnnotationRetention.BINARY)
+@Retention(konstue = AnnotationRetention.BINARY)
 open annotation class TypeParameterAnnBinary : Annotation {
   // CHECK:
   //   Mangled name: TypeParameterAnnBinary#<init>(){}

@@ -34,11 +34,11 @@ import org.jetbrains.kotlin.psi.KtTypeParameter
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
 
 internal class SymbolLightTypeParameter private constructor(
-    private val parent: SymbolLightTypeParameterList,
-    private val index: Int,
-    private val typeParameterSymbolPointer: KtSymbolPointer<KtTypeParameterSymbol>,
-    private val typeParameterDeclaration: KtTypeParameter?,
-    override val kotlinOrigin: KtTypeParameter?,
+    private konst parent: SymbolLightTypeParameterList,
+    private konst index: Int,
+    private konst typeParameterSymbolPointer: KtSymbolPointer<KtTypeParameterSymbol>,
+    private konst typeParameterDeclaration: KtTypeParameter?,
+    override konst kotlinOrigin: KtTypeParameter?,
 ) : LightElement(parent.manager, KotlinLanguage.INSTANCE), PsiTypeParameter,
     KtLightDeclaration<KtTypeParameter, PsiTypeParameter> {
 
@@ -55,12 +55,12 @@ internal class SymbolLightTypeParameter private constructor(
         kotlinOrigin = typeParameterSymbol.psiSafe(),
     )
 
-    private val ktModule: KtModule get() = parent.ktModule
+    private konst ktModule: KtModule get() = parent.ktModule
 
     private inline fun <T> withTypeParameterSymbol(crossinline action: KtAnalysisSession.(KtTypeParameterSymbol) -> T): T =
         typeParameterSymbolPointer.withSymbol(ktModule, action)
 
-    override val givenAnnotations: List<KtLightAbstractAnnotation> get() = invalidAccess()
+    override konst givenAnnotations: List<KtLightAbstractAnnotation> get() = inkonstidAccess()
 
     override fun copy(): PsiElement = SymbolLightTypeParameter(
         parent,
@@ -78,8 +78,8 @@ internal class SymbolLightTypeParameter private constructor(
         }
     }
 
-    private val _extendsList: PsiReferenceList by lazyPub {
-        val listBuilder = KotlinSuperTypeListBuilder(
+    private konst _extendsList: PsiReferenceList by lazyPub {
+        konst listBuilder = KotlinSuperTypeListBuilder(
             this,
             kotlinOrigin = null,
             manager = manager,
@@ -159,7 +159,7 @@ internal class SymbolLightTypeParameter private constructor(
     override fun addAnnotation(qualifiedName: String): PsiAnnotation = cannotModify()
     //End of PsiClass simple implementation
 
-    private val _name: String by lazyPub {
+    private konst _name: String by lazyPub {
         typeParameterDeclaration?.name ?: withTypeParameterSymbol { it.name.asString() }
     }
 
@@ -187,8 +187,8 @@ internal class SymbolLightTypeParameter private constructor(
     }
 
     override fun hashCode(): Int = typeParameterDeclaration?.hashCode() ?: name.hashCode()
-    override fun isEquivalentTo(another: PsiElement): Boolean {
-        return basicIsEquivalentTo(this, another) || isOriginEquivalentTo(another)
+    override fun isEquikonstentTo(another: PsiElement): Boolean {
+        return basicIsEquikonstentTo(this, another) || isOriginEquikonstentTo(another)
     }
 
     override fun getText(): String? = typeParameterDeclaration?.text

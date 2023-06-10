@@ -31,7 +31,7 @@ class DeprecatedClassifierUsageChecker : ClassifierUsageChecker {
         if (element.parent is KtThisExpression) return
 
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.NoDeprecationOnDeprecatedEnumEntries) && element is KtEnumEntrySuperclassReferenceExpression) {
-            val referencedEnum =
+            konst referencedEnum =
                 (element.getResolvedCall(context.trace.bindingContext)?.resultingDescriptor as? ConstructorDescriptor)?.constructedClass
             if (referencedEnum == targetDescriptor) {
                 return

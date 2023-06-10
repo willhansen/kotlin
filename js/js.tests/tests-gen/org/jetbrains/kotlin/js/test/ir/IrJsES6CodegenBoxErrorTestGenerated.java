@@ -47,9 +47,9 @@ public class IrJsES6CodegenBoxErrorTestGenerated extends AbstractIrJsES6CodegenB
         }
 
         @Test
-        @TestMetadata("evaluationOrder.kt")
-        public void testEvaluationOrder() throws Exception {
-            runTest("compiler/testData/codegen/boxError/semantic/evaluationOrder.kt");
+        @TestMetadata("ekonstuationOrder.kt")
+        public void testEkonstuationOrder() throws Exception {
+            runTest("compiler/testData/codegen/boxError/semantic/ekonstuationOrder.kt");
         }
 
         @Test
@@ -111,9 +111,9 @@ public class IrJsES6CodegenBoxErrorTestGenerated extends AbstractIrJsES6CodegenB
         }
 
         @Test
-        @TestMetadata("evaluationOrder.kt")
-        public void testEvaluationOrder() throws Exception {
-            runTest("compiler/testData/codegen/boxError/syntax/evaluationOrder.kt");
+        @TestMetadata("ekonstuationOrder.kt")
+        public void testEkonstuationOrder() throws Exception {
+            runTest("compiler/testData/codegen/boxError/syntax/ekonstuationOrder.kt");
         }
 
         @Test

@@ -3,7 +3,7 @@
 // FILE: J.java
 
 public class J extends K {
-    public final int value = 42;
+    public final int konstue = 42;
 }
 
 // FILE: K.kt
@@ -11,7 +11,7 @@ public class J extends K {
 open class K
 
 fun box(): String {
-    val f = J::value
-    val a = J()
+    konst f = J::konstue
+    konst a = J()
     return if (f.get(a) == 42) "OK" else "Fail: ${f.get(a)}"
 }

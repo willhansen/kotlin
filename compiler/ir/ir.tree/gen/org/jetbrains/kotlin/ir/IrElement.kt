@@ -27,7 +27,7 @@ interface IrElement {
      *
      * @see IrFileEntry.getSourceRangeInfo
      */
-    val startOffset: Int
+    konst startOffset: Int
 
     /**
      * The end offset of the syntax node from which this IR node was generated,
@@ -39,14 +39,14 @@ interface IrElement {
      *
      * @see IrFileEntry.getSourceRangeInfo
      */
-    val endOffset: Int
+    konst endOffset: Int
 
     /**
      * Runs the provided [visitor] on the IR subtree with the root at this node.
      *
      * @param visitor The visitor to accept.
      * @param data An arbitrary context to pass to each invocation of [visitor]'s methods.
-     * @return The value returned by the topmost `visit*` invocation.
+     * @return The konstue returned by the topmost `visit*` invocation.
      */
     fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R
 

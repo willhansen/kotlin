@@ -6,7 +6,7 @@ enum class Color {
     }
 }
 
-class MyColor(val x: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>, y: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>) : Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> {
+class MyColor(konst x: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>, y: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>) : Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> {
 
     var z: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> = Color.RED
     set(arg: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>) { z = arg }
@@ -16,12 +16,12 @@ class MyColor(val x: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>, y: Color.<!ENUM_ENTRY_A
     fun bar(): Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> {
         class Local : Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>
         fun local(arg: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>): Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> = arg
-        val temp: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> = Color.RED
+        konst temp: Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> = Color.RED
         temp as? Color.<!ENUM_ENTRY_AS_TYPE, ENUM_ENTRY_AS_TYPE!>RED<!>
         if (temp is <!IS_ENUM_ENTRY!>Color.RED<!>) {
         return temp as Color.<!ENUM_ENTRY_AS_TYPE!>RED<!>
     }
-        val obj = object : Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> {}
+        konst obj = object : Color.<!ENUM_ENTRY_AS_TYPE!>RED<!> {}
         if (obj is <!IS_ENUM_ENTRY!>Color.RED<!>) {
         return obj
     }

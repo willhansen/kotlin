@@ -26,15 +26,15 @@ import org.jetbrains.kotlin.resolve.jvm.platform.JvmPlatformAnalyzerServices
 import java.util.concurrent.ConcurrentMap
 
 @LLFirInternals
-class LLFirSessionCache(private val project: Project) {
+class LLFirSessionCache(private konst project: Project) {
     companion object {
         fun getInstance(project: Project): LLFirSessionCache {
             return project.getService(LLFirSessionCache::class.java)
         }
     }
 
-    private val sourceCache: ConcurrentMap<KtModule, CachedValue<LLFirSession>> = CollectionFactory.createConcurrentSoftValueMap()
-    private val binaryCache: ConcurrentMap<KtModule, CachedValue<LLFirSession>> = CollectionFactory.createConcurrentSoftValueMap()
+    private konst sourceCache: ConcurrentMap<KtModule, CachedValue<LLFirSession>> = CollectionFactory.createConcurrentSoftValueMap()
+    private konst binaryCache: ConcurrentMap<KtModule, CachedValue<LLFirSession>> = CollectionFactory.createConcurrentSoftValueMap()
 
     /**
      * Returns the existing session if found, or creates a new session and caches it.
@@ -67,14 +67,14 @@ class LLFirSessionCache(private val project: Project) {
 
         return storage.computeIfAbsent(module) {
             CachedValuesManager.getManager(project).createCachedValue {
-                val session = factory(module)
+                konst session = factory(module)
                 CachedValueProvider.Result(session, session.modificationTracker)
             }
-        }.value
+        }.konstue
     }
 
     private fun createSession(module: KtModule): LLFirSession {
-        val sessionFactory = createPlatformAwareSessionFactory(module)
+        konst sessionFactory = createPlatformAwareSessionFactory(module)
         return when (module) {
             is KtSourceModule -> sessionFactory.createSourcesSession(module)
             is KtLibraryModule, is KtLibrarySourceModule -> sessionFactory.createLibrarySession(module)
@@ -86,7 +86,7 @@ class LLFirSessionCache(private val project: Project) {
     }
 
     private fun createPlatformAwareSessionFactory(module: KtModule): LLFirAbstractSessionFactory {
-        val targetPlatform = module.platform
+        konst targetPlatform = module.platform
         return when {
             targetPlatform.all { it is JvmPlatform } -> LLFirJvmSessionFactory(project)
             targetPlatform.all { it is JsPlatform } -> LLFirJsSessionFactory(project)
@@ -98,7 +98,7 @@ class LLFirSessionCache(private val project: Project) {
 }
 
 internal fun LLFirSessionConfigurator.Companion.configure(session: LLFirSession) {
-    val project = session.project
+    konst project = session.project
     for (extension in extensionPointName.getExtensionList(project)) {
         extension.configure(session)
     }
@@ -111,7 +111,7 @@ internal fun LLFirSessionConfigurator.Companion.configure(session: LLFirSession)
 @OptIn(PrivateSessionConstructor::class)
 fun createEmptySession(): FirSession {
     return object : FirSession(null, Kind.Source) {}.apply {
-        val moduleData = FirModuleDataImpl(
+        konst moduleData = FirModuleDataImpl(
             Name.identifier("<stub module>"),
             dependencies = emptyList(),
             dependsOnDependencies = emptyList(),

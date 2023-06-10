@@ -1,16 +1,16 @@
 package test
 
 abstract class A {
-    val abstractFlagAddedVal: String = ""
-    abstract val abstractFlagRemovedVal: String
-    abstract val abstractFlagUnchangedVal: String
+    konst abstractFlagAddedVal: String = ""
+    abstract konst abstractFlagRemovedVal: String
+    abstract konst abstractFlagUnchangedVal: String
     fun abstractFlagAddedFun() {}
     abstract fun abstractFlagRemovedFun()
     abstract fun abstractFlagUnchangedFun()
 
-    val finalFlagAddedVal = ""
-    final val finalFlagRemovedVal = ""
-    final val finalFlagUnchangedVal = ""
+    konst finalFlagAddedVal = ""
+    final konst finalFlagRemovedVal = ""
+    final konst finalFlagUnchangedVal = ""
     fun finalFlagAddedFun() {}
     final fun finalFlagRemovedFun() {}
     final fun finalFlagUnchangedFun() {}
@@ -25,9 +25,9 @@ abstract class A {
     inline fun inlineFlagRemovedFun() {}
     inline fun inlineFlagUnchangedFun() {}
 
-    val internalFlagAddedVal = ""
-    internal val internalFlagRemovedVal = ""
-    internal val internalFlagUnchangedVal = ""
+    konst internalFlagAddedVal = ""
+    internal konst internalFlagRemovedVal = ""
+    internal konst internalFlagUnchangedVal = ""
     fun internalFlagAddedFun() {}
     internal fun internalFlagRemovedFun() {}
     internal fun internalFlagUnchangedFun() {}
@@ -36,9 +36,9 @@ abstract class A {
     lateinit var lateinitFlagRemovedVal: String
     lateinit var lateinitFlagUnchangedVal: String
 
-    val openFlagAddedVal = ""
-    open val openFlagRemovedVal = ""
-    open val openFlagUnchangedVal = ""
+    konst openFlagAddedVal = ""
+    open konst openFlagRemovedVal = ""
+    open konst openFlagUnchangedVal = ""
     fun openFlagAddedFun() {}
     open fun openFlagRemovedFun() {}
     open fun openFlagUnchangedFun() {}
@@ -49,23 +49,23 @@ abstract class A {
     @Suppress("INAPPLICABLE_OPERATOR_MODIFIER")
     operator fun operatorFlagUnchangedFun() {}
 
-    val privateFlagAddedVal = ""
-    private val privateFlagRemovedVal = ""
-    private val privateFlagUnchangedVal = ""
+    konst privateFlagAddedVal = ""
+    private konst privateFlagRemovedVal = ""
+    private konst privateFlagUnchangedVal = ""
     fun privateFlagAddedFun() {}
     private fun privateFlagRemovedFun() {}
     private fun privateFlagUnchangedFun() {}
 
-    val protectedFlagAddedVal = ""
-    protected val protectedFlagRemovedVal = ""
-    protected val protectedFlagUnchangedVal = ""
+    konst protectedFlagAddedVal = ""
+    protected konst protectedFlagRemovedVal = ""
+    protected konst protectedFlagUnchangedVal = ""
     fun protectedFlagAddedFun() {}
     protected fun protectedFlagRemovedFun() {}
     protected fun protectedFlagUnchangedFun() {}
 
-    val publicFlagAddedVal = ""
-    public val publicFlagRemovedVal = ""
-    public val publicFlagUnchangedVal = ""
+    konst publicFlagAddedVal = ""
+    public konst publicFlagRemovedVal = ""
+    public konst publicFlagUnchangedVal = ""
     fun publicFlagAddedFun() {}
     public fun publicFlagRemovedFun() {}
     public fun publicFlagUnchangedFun() {}
@@ -74,12 +74,12 @@ abstract class A {
     tailrec fun tailrecFlagRemovedFun() {}
     tailrec fun tailrecFlagUnchangedFun() {}
 
-    val noFlagsUnchangedVal = ""
+    konst noFlagsUnchangedVal = ""
     fun noFlagsUnchangedFun() {}
 }
 
 object O {
-    val constFlagAddedVal = ""
-    const val constFlagRemovedVal = ""
-    const val constFlagUnchangedVal = ""
+    konst constFlagAddedVal = ""
+    const konst constFlagRemovedVal = ""
+    const konst constFlagUnchangedVal = ""
 }

@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.types.TypeProjection
 
 abstract class DescriptorRenderer {
     fun withOptions(changeOptions: DescriptorRendererOptions.() -> Unit): DescriptorRenderer {
-        val options = (this as DescriptorRendererImpl).options.copy()
+        konst options = (this as DescriptorRendererImpl).options.copy()
         options.changeOptions()
         options.lock()
         return DescriptorRendererImpl(options)
@@ -46,7 +46,7 @@ abstract class DescriptorRenderer {
     abstract fun renderValueParameters(parameters: Collection<ValueParameterDescriptor>, synthesizedParameterNames: Boolean): String
 
     fun renderFunctionParameters(functionDescriptor: FunctionDescriptor): String =
-        renderValueParameters(functionDescriptor.valueParameters, functionDescriptor.hasSynthesizedParameterNames())
+        renderValueParameters(functionDescriptor.konstueParameters, functionDescriptor.hasSynthesizedParameterNames())
 
     abstract fun renderName(name: Name, rootRenderedElement: Boolean): String
 
@@ -97,39 +97,39 @@ abstract class DescriptorRenderer {
 
     companion object {
         fun withOptions(changeOptions: DescriptorRendererOptions.() -> Unit): DescriptorRenderer {
-            val options = DescriptorRendererOptionsImpl()
+            konst options = DescriptorRendererOptionsImpl()
             options.changeOptions()
             options.lock()
             return DescriptorRendererImpl(options)
         }
 
         @JvmField
-        val COMPACT_WITH_MODIFIERS: DescriptorRenderer = withOptions {
+        konst COMPACT_WITH_MODIFIERS: DescriptorRenderer = withOptions {
             withDefinedIn = false
         }
 
         @JvmField
-        val COMPACT: DescriptorRenderer = withOptions {
+        konst COMPACT: DescriptorRenderer = withOptions {
             withDefinedIn = false
             modifiers = emptySet()
         }
 
         @JvmField
-        val COMPACT_WITHOUT_SUPERTYPES: DescriptorRenderer = withOptions {
+        konst COMPACT_WITHOUT_SUPERTYPES: DescriptorRenderer = withOptions {
             withDefinedIn = false
             modifiers = emptySet()
             withoutSuperTypes = true
         }
 
         @JvmField
-        val COMPACT_WITH_SHORT_TYPES: DescriptorRenderer = withOptions {
+        konst COMPACT_WITH_SHORT_TYPES: DescriptorRenderer = withOptions {
             modifiers = emptySet()
             classifierNamePolicy = ClassifierNamePolicy.SHORT
             parameterNameRenderingPolicy = ParameterNameRenderingPolicy.ONLY_NON_SYNTHESIZED
         }
 
         @JvmField
-        val ONLY_NAMES_WITH_SHORT_TYPES: DescriptorRenderer = withOptions {
+        konst ONLY_NAMES_WITH_SHORT_TYPES: DescriptorRenderer = withOptions {
             withDefinedIn = false
             modifiers = emptySet()
             classifierNamePolicy = ClassifierNamePolicy.SHORT
@@ -142,30 +142,30 @@ abstract class DescriptorRenderer {
         }
 
         @JvmField
-        val FQ_NAMES_IN_TYPES: DescriptorRenderer = withOptions {
+        konst FQ_NAMES_IN_TYPES: DescriptorRenderer = withOptions {
             modifiers = DescriptorRendererModifier.ALL_EXCEPT_ANNOTATIONS
         }
 
         @JvmField
-        val FQ_NAMES_IN_TYPES_WITH_ANNOTATIONS: DescriptorRenderer = withOptions {
+        konst FQ_NAMES_IN_TYPES_WITH_ANNOTATIONS: DescriptorRenderer = withOptions {
             modifiers = DescriptorRendererModifier.ALL
         }
 
         @JvmField
-        val SHORT_NAMES_IN_TYPES: DescriptorRenderer = withOptions {
+        konst SHORT_NAMES_IN_TYPES: DescriptorRenderer = withOptions {
             classifierNamePolicy = ClassifierNamePolicy.SHORT
             parameterNameRenderingPolicy = ParameterNameRenderingPolicy.ONLY_NON_SYNTHESIZED
         }
 
         @JvmField
-        val DEBUG_TEXT: DescriptorRenderer = withOptions {
+        konst DEBUG_TEXT: DescriptorRenderer = withOptions {
             debugMode = true
             classifierNamePolicy = ClassifierNamePolicy.FULLY_QUALIFIED
             modifiers = DescriptorRendererModifier.ALL
         }
 
         @JvmField
-        val HTML: DescriptorRenderer = withOptions {
+        konst HTML: DescriptorRenderer = withOptions {
             textFormat = RenderingFormat.HTML
             modifiers = DescriptorRendererModifier.ALL
         }
@@ -191,8 +191,8 @@ abstract class DescriptorRenderer {
 }
 
 enum class AnnotationArgumentsRenderingPolicy(
-    val includeAnnotationArguments: Boolean = false,
-    val includeEmptyAnnotationArguments: Boolean = false
+    konst includeAnnotationArguments: Boolean = false,
+    konst includeEmptyAnnotationArguments: Boolean = false
 ) {
     NO_ARGUMENTS,
     UNLESS_EMPTY(true),
@@ -220,7 +220,7 @@ interface DescriptorRendererOptions {
     var actualPropertiesInPrimaryConstructor: Boolean
     var uninferredTypeParameterAsName: Boolean
     var overrideRenderingPolicy: OverrideRenderingPolicy
-    var valueParametersHandler: DescriptorRenderer.ValueParametersHandler
+    var konstueParametersHandler: DescriptorRenderer.ValueParametersHandler
     var textFormat: RenderingFormat
     var excludedAnnotationClasses: Set<FqName>
     var excludedTypeAnnotationClasses: Set<FqName>
@@ -228,8 +228,8 @@ interface DescriptorRendererOptions {
     var eachAnnotationOnNewLine: Boolean
 
     var annotationArgumentsRenderingPolicy: AnnotationArgumentsRenderingPolicy
-    val includeAnnotationArguments: Boolean get() = annotationArgumentsRenderingPolicy.includeAnnotationArguments
-    val includeEmptyAnnotationArguments: Boolean get() = annotationArgumentsRenderingPolicy.includeEmptyAnnotationArguments
+    konst includeAnnotationArguments: Boolean get() = annotationArgumentsRenderingPolicy.includeAnnotationArguments
+    konst includeEmptyAnnotationArguments: Boolean get() = annotationArgumentsRenderingPolicy.includeEmptyAnnotationArguments
 
     var boldOnlyForNamesInHtml: Boolean
 
@@ -257,7 +257,7 @@ interface DescriptorRendererOptions {
 }
 
 object ExcludedTypeAnnotations {
-    val internalAnnotationsForResolve = setOf(
+    konst internalAnnotationsForResolve = setOf(
         FqName("kotlin.internal.NoInfer"),
         FqName("kotlin.internal.Exact")
     )
@@ -292,7 +292,7 @@ enum class PropertyAccessorRenderingPolicy {
     NONE
 }
 
-enum class DescriptorRendererModifier(val includeByDefault: Boolean) {
+enum class DescriptorRendererModifier(konst includeByDefault: Boolean) {
     VISIBILITY(true),
     MODALITY(true),
     OVERRIDE(true),
@@ -311,9 +311,9 @@ enum class DescriptorRendererModifier(val includeByDefault: Boolean) {
 
     companion object {
         @JvmField
-        val ALL_EXCEPT_ANNOTATIONS = values().filter { it.includeByDefault }.toSet()
+        konst ALL_EXCEPT_ANNOTATIONS = konstues().filter { it.includeByDefault }.toSet()
 
         @JvmField
-        val ALL = values().toSet()
+        konst ALL = konstues().toSet()
     }
 }

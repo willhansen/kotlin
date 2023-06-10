@@ -4,7 +4,7 @@ package test
 
 
 open class Base
-class Child(val value: String): Base()
+class Child(konst konstue: String): Base()
 
 inline fun inlineFun(s: (Child) -> Base = { a: Base -> a as Child}): Base {
     return s(Child("OK"))
@@ -14,5 +14,5 @@ inline fun inlineFun(s: (Child) -> Base = { a: Base -> a as Child}): Base {
 import test.*
 
 fun box(): String {
-    return (inlineFun() as Child).value
+    return (inlineFun() as Child).konstue
 }

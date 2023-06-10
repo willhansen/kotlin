@@ -2,7 +2,7 @@
 // FILE: test.kt
 @file:JvmSynthetic
 
-private val keepme = 1
+private konst keepme = 1
 
 // TESTED_OBJECT_KIND: class
 // TESTED_OBJECTS: TestKt

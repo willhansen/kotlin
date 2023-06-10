@@ -21,10 +21,10 @@ internal abstract class KotlinGradleBuildServices : BuildService<KotlinGradleBui
         var projectCacheDir: File
     }
 
-    private val log = Logging.getLogger(this.javaClass)
-    private val buildHandler: KotlinGradleFinishBuildHandler = KotlinGradleFinishBuildHandler()
+    private konst log = Logging.getLogger(this.javaClass)
+    private konst buildHandler: KotlinGradleFinishBuildHandler = KotlinGradleFinishBuildHandler()
 
-    private val multipleProjectsHolder = KotlinPluginInMultipleProjectsHolder(
+    private konst multipleProjectsHolder = KotlinPluginInMultipleProjectsHolder(
         trackPluginVersionsSeparately = true
     )
 
@@ -35,10 +35,10 @@ internal abstract class KotlinGradleBuildServices : BuildService<KotlinGradleBui
 
     @Synchronized
     internal fun detectKotlinPluginLoadedInMultipleProjects(project: Project, kotlinPluginVersion: String) {
-        val onRegister = {
+        konst onRegister = {
             project.gradle.taskGraph.whenReady {
                 if (multipleProjectsHolder.isInMultipleProjects(project, kotlinPluginVersion)) {
-                    val loadedInProjects = multipleProjectsHolder.getAffectedProjects(project, kotlinPluginVersion)!!
+                    konst loadedInProjects = multipleProjectsHolder.getAffectedProjects(project, kotlinPluginVersion)!!
                     if (PropertiesProvider(project).ignorePluginLoadedInMultipleProjects != true) {
                         project.logger.warn("\n$MULTIPLE_KOTLIN_PLUGINS_LOADED_WARNING")
                         project.logger.warn(
@@ -66,9 +66,9 @@ internal abstract class KotlinGradleBuildServices : BuildService<KotlinGradleBui
     }
 
     companion object {
-        private val CLASS_NAME = KotlinGradleBuildServices::class.java.simpleName
-        private val INIT_MESSAGE = "Initialized $CLASS_NAME"
-        private val DISPOSE_MESSAGE = "Disposed $CLASS_NAME"
+        private konst CLASS_NAME = KotlinGradleBuildServices::class.java.simpleName
+        private konst INIT_MESSAGE = "Initialized $CLASS_NAME"
+        private konst DISPOSE_MESSAGE = "Disposed $CLASS_NAME"
 
         fun registerIfAbsent(gradle: Gradle): Provider<KotlinGradleBuildServices> =
             gradle.sharedServices.registerIfAbsent(

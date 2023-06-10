@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 interface FirDeclarationBuilder {
     abstract var source: KtSourceElement?
     abstract var resolvePhase: FirResolvePhase
-    abstract val annotations: MutableList<FirAnnotation>
+    abstract konst annotations: MutableList<FirAnnotation>
     abstract var moduleData: FirModuleData
     abstract var origin: FirDeclarationOrigin
     abstract var attributes: FirDeclarationAttributes

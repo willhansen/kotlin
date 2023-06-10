@@ -4,17 +4,17 @@
 
 // MODULE: lib1
 // FILE: A.kt
-val o = "O"
+konst o = "O"
 
 // FILE: B.kt
-val okCandidate = o + k
+konst okCandidate = o + k
 
 // FILE: C.kt
-val k = "K"
+konst k = "K"
 
 // MODULE: lib2(lib1)
 // FILE: lib2.kt
-val ok = okCandidate
+konst ok = okCandidate
 
 // MODULE: main(lib1, lib2)
 // FILE: main.kt

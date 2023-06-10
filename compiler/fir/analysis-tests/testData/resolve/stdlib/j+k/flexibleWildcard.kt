@@ -8,6 +8,6 @@ public class ContainerUtil {
 // FILE: main.kt
 
 fun main(x: MutableCollection<Set<String>>) {
-    val y = ContainerUtil.flatten(x)
+    konst y = ContainerUtil.flatten(x)
     y[0].length
 }

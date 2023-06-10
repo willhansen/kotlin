@@ -8,7 +8,7 @@ import kotlin.native.concurrent.*
 
 @Test
 fun testExecuteAfterStartLegacy() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
     worker.executeAfter(0L, {
         throw Error("testExecuteAfterStartLegacy error")
     }.freeze())
@@ -17,8 +17,8 @@ fun testExecuteAfterStartLegacy() {
 
 @Test
 fun testExecuteStartLegacy() {
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         throw Error("testExecuteStartLegacy error")
     }
     assertFailsWith<Throwable> {

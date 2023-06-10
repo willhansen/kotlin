@@ -1,9 +1,9 @@
 // WITH_STDLIB
 
-val arr = arrayOf("a", "b", "c", "d")
+konst arr = arrayOf("a", "b", "c", "d")
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
 
     for ((index, x) in arr.withIndex()) {
         if (index == 0) continue
@@ -11,6 +11,6 @@ fun box(): String {
         s.append("$index:$x;")
     }
 
-    val ss = s.toString()
+    konst ss = s.toString()
     return if (ss == "1:b;2:c;") "OK" else "fail: '$ss'"
 }

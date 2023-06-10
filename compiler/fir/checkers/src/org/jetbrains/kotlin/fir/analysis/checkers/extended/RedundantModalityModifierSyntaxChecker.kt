@@ -30,7 +30,7 @@ object RedundantModalityModifierSyntaxChecker : FirDeclarationSyntaxChecker<FirD
         element.isMemberWithRealSource && element !is FirValueParameter
                 || element.source?.kind == KtFakeSourceElementKind.PropertyFromParameter
 
-    private val FirDeclaration.isMemberWithRealSource get() = this is FirMemberDeclaration && source?.kind is KtRealSourceElementKind
+    private konst FirDeclaration.isMemberWithRealSource get() = this is FirMemberDeclaration && source?.kind is KtRealSourceElementKind
 
     override fun checkPsiOrLightTree(
         element: FirDeclaration,
@@ -39,14 +39,14 @@ object RedundantModalityModifierSyntaxChecker : FirDeclarationSyntaxChecker<FirD
         reporter: DiagnosticReporter
     ) {
         require(element is FirMemberDeclaration)
-        val modality = element.modality ?: return
+        konst modality = element.modality ?: return
         if (
             modality == Modality.FINAL
             && (context.containingDeclarations.last() as? FirClass)?.classKind == ClassKind.INTERFACE
         ) return
 
         if (source.treeStructure.modalityModifier(source.lighterASTNode) == null) return
-        val redundantModalities = element.redundantModalities(context)
+        konst redundantModalities = element.redundantModalities(context)
         if (redundantModalities.contains(modality)) {
             reporter.reportOn(source, REDUNDANT_MODALITY_MODIFIER, context)
         }

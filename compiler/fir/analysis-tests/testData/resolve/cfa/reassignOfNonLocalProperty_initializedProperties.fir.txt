@@ -1,7 +1,7 @@
 FILE: reassignOfNonLocalProperty_initializedProperties.kt
-    public final val z: R|kotlin/String| = String(ok)
+    public final konst z: R|kotlin/String| = String(ok)
         public get(): R|kotlin/String|
-    public final val R|Some|.y: R|kotlin/String|
+    public final konst R|Some|.y: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ String(ok)
         }
@@ -10,7 +10,7 @@ FILE: reassignOfNonLocalProperty_initializedProperties.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/String| = String(ok)
+        public final konst x: R|kotlin/String| = String(ok)
             public get(): R|kotlin/String|
 
         init {
@@ -19,7 +19,7 @@ FILE: reassignOfNonLocalProperty_initializedProperties.kt
             R|/z| = String(error)
         }
 
-        public final val a: R|kotlin/String| = this@R|/Some|.R|kotlin/run|<R|Some|, R|kotlin/String|>(<L> = run@fun R|Some|.<anonymous>(): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
+        public final konst a: R|kotlin/String| = this@R|/Some|.R|kotlin/run|<R|Some|, R|kotlin/String|>(<L> = run@fun R|Some|.<anonymous>(): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
             this@R|special/anonymous|.R|/Some.x| = String(error)
             this@R|special/anonymous|.R|/y| = String(error)
             R|/z| = String(error)

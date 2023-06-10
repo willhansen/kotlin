@@ -21,11 +21,11 @@ interface ResultProvider<AR, BR> {
     fun provideResult(): AR
 }
 
-val resultProvider: ResultProvider<Any, Any> = object : ResultProvider<Any, Any> {
+konst resultProvider: ResultProvider<Any, Any> = object : ResultProvider<Any, Any> {
     override fun provideResult(): Any = "NOK"
 }
 
-val result = build {
+konst result = build {
     getResult(build2 {
         getResult2(resultProvider)
     })

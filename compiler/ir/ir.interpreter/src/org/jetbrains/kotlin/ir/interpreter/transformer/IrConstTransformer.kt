@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.ir.interpreter.transformer
 
 import org.jetbrains.kotlin.constant.ErrorValue
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.nameWithPackage
@@ -25,31 +25,31 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
 fun IrFile.transformConst(
     interpreter: IrInterpreter,
-    mode: EvaluationMode,
-    evaluatedConstTracker: EvaluatedConstTracker? = null,
+    mode: EkonstuationMode,
+    ekonstuatedConstTracker: EkonstuatedConstTracker? = null,
     onWarning: (IrFile, IrElement, IrErrorExpression) -> Unit = { _, _, _ -> },
     onError: (IrFile, IrElement, IrErrorExpression) -> Unit = { _, _, _ -> },
     suppressExceptions: Boolean = false,
 ) {
-    val preprocessors = setOf(IrInterpreterKCallableNamePreprocessor())
-    val preprocessedFile = preprocessors.fold(this) { file, preprocessor ->
+    konst preprocessors = setOf(IrInterpreterKCallableNamePreprocessor())
+    konst preprocessedFile = preprocessors.fold(this) { file, preprocessor ->
         preprocessor.preprocess(file, IrInterpreterPreprocessorData(mode, interpreter.irBuiltIns))
     }
 
-    val checkers = setOf(
+    konst checkers = setOf(
         IrInterpreterNameChecker(),
         IrInterpreterCommonChecker(),
     )
 
     checkers.fold(preprocessedFile) { file, checker ->
-        val irConstExpressionTransformer = IrConstExpressionTransformer(
-            interpreter, file, mode, checker, evaluatedConstTracker, onWarning, onError, suppressExceptions
+        konst irConstExpressionTransformer = IrConstExpressionTransformer(
+            interpreter, file, mode, checker, ekonstuatedConstTracker, onWarning, onError, suppressExceptions
         )
-        val irConstDeclarationAnnotationTransformer = IrConstDeclarationAnnotationTransformer(
-            interpreter, file, mode, checker, evaluatedConstTracker, onWarning, onError, suppressExceptions
+        konst irConstDeclarationAnnotationTransformer = IrConstDeclarationAnnotationTransformer(
+            interpreter, file, mode, checker, ekonstuatedConstTracker, onWarning, onError, suppressExceptions
         )
-        val irConstTypeAnnotationTransformer = IrConstTypeAnnotationTransformer(
-            interpreter, file, mode, checker, evaluatedConstTracker, onWarning, onError, suppressExceptions
+        konst irConstTypeAnnotationTransformer = IrConstTypeAnnotationTransformer(
+            interpreter, file, mode, checker, ekonstuatedConstTracker, onWarning, onError, suppressExceptions
         )
         file.transform(irConstExpressionTransformer, null)
         file.transform(irConstDeclarationAnnotationTransformer, null)
@@ -60,14 +60,14 @@ fun IrFile.transformConst(
 // Note: We are using `IrElementTransformer` here instead of `IrElementTransformerVoid` to avoid conflicts with `IrTypeVisitorVoid`
 // that is used later in `IrConstTypeAnnotationTransformer`.
 internal abstract class IrConstTransformer(
-    protected val interpreter: IrInterpreter,
-    private val irFile: IrFile,
-    private val mode: EvaluationMode,
-    private val checker: IrInterpreterChecker,
-    private val evaluatedConstTracker: EvaluatedConstTracker? = null,
-    private val onWarning: (IrFile, IrElement, IrErrorExpression) -> Unit,
-    private val onError: (IrFile, IrElement, IrErrorExpression) -> Unit,
-    private val suppressExceptions: Boolean,
+    protected konst interpreter: IrInterpreter,
+    private konst irFile: IrFile,
+    private konst mode: EkonstuationMode,
+    private konst checker: IrInterpreterChecker,
+    private konst ekonstuatedConstTracker: EkonstuatedConstTracker? = null,
+    private konst onWarning: (IrFile, IrElement, IrErrorExpression) -> Unit,
+    private konst onError: (IrFile, IrElement, IrErrorExpression) -> Unit,
+    private konst suppressExceptions: Boolean,
 ) : IrElementTransformer<Nothing?> {
     private fun IrExpression.warningIfError(original: IrExpression): IrExpression {
         if (this is IrErrorExpression) {
@@ -81,8 +81,8 @@ internal abstract class IrConstTransformer(
         if (this is IrErrorExpression) {
             onError(irFile, original, this)
             return when (mode) {
-                // need to pass any const value to be able to get some bytecode and then report error
-                EvaluationMode.ONLY_INTRINSIC_CONST -> IrConstImpl.constNull(startOffset, endOffset, type)
+                // need to pass any const konstue to be able to get some bytecode and then report error
+                EkonstuationMode.ONLY_INTRINSIC_CONST -> IrConstImpl.constNull(startOffset, endOffset, type)
                 else -> original
             }
         }
@@ -103,7 +103,7 @@ internal abstract class IrConstTransformer(
     }
 
     protected fun IrExpression.interpret(failAsError: Boolean): IrExpression {
-        val result = try {
+        konst result = try {
             interpreter.interpret(this, irFile)
         } catch (e: Throwable) {
             if (suppressExceptions) {
@@ -112,7 +112,7 @@ internal abstract class IrConstTransformer(
             throw AssertionError("Error occurred while optimizing an expression:\n${this.dump()}", e)
         }
 
-        evaluatedConstTracker?.save(
+        ekonstuatedConstTracker?.save(
             result.startOffset, result.endOffset, irFile.nameWithPackage,
             constant = if (result is IrErrorExpression) ErrorValue.create(result.description)
             else (result as IrConst<*>).toConstantValue()

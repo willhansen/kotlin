@@ -5,16 +5,16 @@ private fun `+`(a: Int, b: Int) = a + b
 fun `-`(a: Int, b: Int) = a - b
 
 fun test1(): Int {
-    val ` x ` = 23
-    val `*` = 3
+    konst ` x ` = 23
+    konst `*` = 3
     return `-`(` x `, `*`)
 }
 
 fun test2(`p 1`: Int, `.p 2`: Int) = `+`(`p 1`, `.p 2`)
 
 fun test3(): String {
-    val `#` = "K"
-    class ` `(private val `::`: String) {
+    konst `#` = "K"
+    class ` `(private konst `::`: String) {
         private fun `@`() = `::` + `#`
 
         operator fun invoke() = `@`()
@@ -23,7 +23,7 @@ fun test3(): String {
 }
 
 fun test4(): String {
-    val `1(¢)` = "OK"
+    konst `1(¢)` = "OK"
     fun `[£]`() = `1(¢)`
     return `[£]`()
 }

@@ -3,9 +3,9 @@
 package test
 
 data class Address(
-        val createdTimeMs: Long = 0,
-        val firstName: String = "",
-        val lastName: String = ""
+        konst createdTimeMs: Long = 0,
+        konst firstName: String = "",
+        konst lastName: String = ""
 )
 
 inline fun String.switchIfEmpty(provider: () -> String): String {
@@ -17,8 +17,8 @@ inline fun String.switchIfEmpty(provider: () -> String): String {
 import test.*
 
 fun box(): String {
-    val address = Address()
-    val result = address.copy(
+    konst address = Address()
+    konst result = address.copy(
             firstName = address.firstName.switchIfEmpty { "O" },
             lastName = address.lastName.switchIfEmpty { "K" }
     )

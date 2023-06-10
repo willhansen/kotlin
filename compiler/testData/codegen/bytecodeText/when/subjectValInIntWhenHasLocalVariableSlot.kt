@@ -1,7 +1,7 @@
 // !LANGUAGE: +VariableDeclarationInWhenSubject
 
 fun test(a: Int) =
-    when (val subject = a) {
+    when (konst subject = a) {
         1 -> 0
         2 -> 1
         3 -> 2

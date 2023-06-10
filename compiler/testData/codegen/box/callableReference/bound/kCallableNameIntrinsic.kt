@@ -2,10 +2,10 @@
 
 fun box(): String {
     var state = 0
-    val name = (state++)::toString.name
+    konst name = (state++)::toString.name
     if (name != "toString") return "Fail 1: $name"
 
-    val name2 = with(state++) {
+    konst name2 = with(state++) {
         ::toString.name
         ::toString.name
         ::toString.name

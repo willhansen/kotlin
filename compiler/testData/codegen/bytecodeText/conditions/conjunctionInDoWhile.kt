@@ -1,6 +1,6 @@
-val a = false
-val b = false
-val c = false
+konst a = false
+konst b = false
+konst c = false
 
 fun main() {
     do {

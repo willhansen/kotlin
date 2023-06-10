@@ -18,26 +18,26 @@ import kotlin.native.concurrent.SharedImmutable
 import kotlin.native.concurrent.ThreadLocal
 import kotlin.reflect.KProperty
 
-fun println(value: Int) {}
-fun println(value: String) {}
-fun println(value: Point) {}
+fun println(konstue: Int) {}
+fun println(konstue: String) {}
+fun println(konstue: Point) {}
 
-data class Point(val x: Double, val y: Double)
+data class Point(konst x: Double, konst y: Double)
 @SharedImmutable
-val point1 = Point(1.0, 1.0)
+konst point1 = Point(1.0, 1.0)
 
 <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY!>@SharedImmutable<!>
 var point2 = Point(2.0, 2.0)
 
-class Date(<!INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL!>@SharedImmutable<!> val month: Int, <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY, INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL!>@SharedImmutable<!> var day:Int)
-class Person(val name: String) {
+class Date(<!INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL!>@SharedImmutable<!> konst month: Int, <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY, INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL!>@SharedImmutable<!> var day:Int)
+class Person(konst name: String) {
     <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY, INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL!>@SharedImmutable<!>
     var surname: String? = null
 }
 
 class Figure {
     <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY, INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL!>@SharedImmutable<!>
-    val cornerPoint: Point
+    konst cornerPoint: Point
         get() = point1
 }
 
@@ -47,8 +47,8 @@ var age = 20
         println("Age is: $field")
         return field
     }
-    set(value) {
-        println(value)
+    set(konstue) {
+        println(konstue)
     }
 
 var globalAge = 30
@@ -58,12 +58,12 @@ var age1 = 20
         println("Age is: $field")
         return field
     }
-    set(value) {
-        globalAge = value
+    set(konstue) {
+        globalAge = konstue
     }
 
 @SharedImmutable
-val age2 = 20
+konst age2 = 20
     get() {
         println("Age is: $field")
         return field
@@ -72,15 +72,15 @@ val age2 = 20
 <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY!>@SharedImmutable<!>
 var point3: Point
     get() = point2
-    set(value) {
-        point2 = value
+    set(konstue) {
+        point2 = konstue
     }
 
 <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY!>@SharedImmutable<!>
 var point4: Point
     get() = point2
-    set(value) {
-        println(value)
+    set(konstue) {
+        println(konstue)
     }
 
 @ThreadLocal
@@ -89,19 +89,19 @@ var point0 = Point(2.0, 2.0)
 <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY!>@SharedImmutable<!>
 var point5: Point
     get() = point0
-    set(value) {
-        point0 = value
+    set(konstue) {
+        point0 = konstue
     }
 
 
 class Delegate {
-    var value = 20
+    var konstue = 20
     operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
         println("Get")
-        return value
+        return konstue
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: Int) {
         println("Set")
     }
 }
@@ -110,13 +110,13 @@ class Delegate {
 var property: Int by Delegate()
 
 class Delegate1 {
-    var value = 20
+    var konstue = 20
     operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
-        return value
+        return konstue
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
-        this.value = value
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: Int) {
+        this.konstue = konstue
     }
 }
 
@@ -131,8 +131,8 @@ class Delegate2 {
         return globalValue
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
-        println(value)
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: Int) {
+        println(konstue)
     }
 }
 
@@ -140,8 +140,8 @@ class Delegate2 {
 var property2: Int by Delegate2()
 
 <!INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY!>@SharedImmutable<!>
-val someValue: Int
+konst someValue: Int
     get() = 20
 
 @SharedImmutable
-val someValueWithDelegate by Delegate()
+konst someValueWithDelegate by Delegate()

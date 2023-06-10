@@ -32,13 +32,13 @@ fun check(lambda: () -> Unit) {
         lambda()
     } catch (e: Throwable) {
         if (e !is InvocationTargetException && e !is StackOverflowError) {
-            throw RuntimeException("The current implementation uses reflection to get the value of the property," +
+            throw RuntimeException("The current implementation uses reflection to get the konstue of the property," +
                                    "so either InvocationTargetException or StackOverflowError should have happened",
                                    e)
         }
         return
     }
-    throw AssertionError("Getting the property value with .get() from getValue() or setting it with .set() in setValue() " +
+    throw AssertionError("Getting the property konstue with .get() from getValue() or setting it with .set() in setValue() " +
                          "is effectively an endless recursion and should fail")
 }
 

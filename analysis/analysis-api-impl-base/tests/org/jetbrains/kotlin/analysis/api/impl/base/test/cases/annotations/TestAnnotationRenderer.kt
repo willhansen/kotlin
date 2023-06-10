@@ -32,13 +32,13 @@ object TestAnnotationRenderer {
         for (annotation in annotations.annotations) {
             appendLine(DebugSymbolRenderer().renderAnnotationApplication(annotation).indented(indent = indent + 2))
             if (currentMetaAnnotations != null) {
-                val classId = annotation.classId ?: continue
+                konst classId = annotation.classId ?: continue
                 if (classId in currentMetaAnnotations) {
                     appendLine("<recursive meta-annotation ${classId}>".indented(indent + 4))
                     continue
                 }
 
-                val metaAnnotations = getClassOrObjectSymbolByClassId(classId)?.annotationsList
+                konst metaAnnotations = getClassOrObjectSymbolByClassId(classId)?.annotationsList
                 if (metaAnnotations != null) {
                     renderAnnotationsRecursive(metaAnnotations, currentMetaAnnotations + classId, indent = indent + 4)
                 } else {

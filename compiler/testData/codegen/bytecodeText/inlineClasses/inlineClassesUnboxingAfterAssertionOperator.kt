@@ -2,13 +2,13 @@
 
 // FILE: utils.kt
 
-inline class WithPrimitive(val a: Int)
+inline class WithPrimitive(konst a: Int)
 fun takeWithPrimitive(a: WithPrimitive) {}
 
-inline class WithReference(val a: Any)
+inline class WithReference(konst a: Any)
 fun takeWithReference(a: WithReference) {}
 
-inline class WithNullableReference(val a: Any?)
+inline class WithNullableReference(konst a: Any?)
 fun takeWithNullableReference(a: WithNullableReference) {}
 
 // FILE: test.kt
@@ -38,4 +38,4 @@ fun baz(a: WithNullableReference?, b: WithNullableReference) {
 // 3 INVOKEVIRTUAL WithNullableReference\.unbox
 
 // 0 intValue
-// 0 valueOf
+// 0 konstueOf

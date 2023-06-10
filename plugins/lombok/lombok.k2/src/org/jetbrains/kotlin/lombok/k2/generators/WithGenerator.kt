@@ -34,10 +34,10 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 class WithGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
-    private val lombokService: LombokService
+    private konst lombokService: LombokService
         get() = session.lombokService
 
-    private val cache: FirCache<FirClassSymbol<*>, Map<Name, FirJavaMethod>?, Nothing?> =
+    private konst cache: FirCache<FirClassSymbol<*>, Map<Name, FirJavaMethod>?, Nothing?> =
         session.firCachesFactory.createCache(::createWith)
 
     override fun getCallableNamesForClass(classSymbol: FirClassSymbol<*>, context: MemberGenerationContext): Set<Name> {
@@ -46,17 +46,17 @@ class WithGenerator(session: FirSession) : FirDeclarationGenerationExtension(ses
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
-        val owner = context?.owner
+        konst owner = context?.owner
         if (owner == null || !owner.isSuitableJavaClass()) return emptyList()
-        val getter = cache.getValue(owner)?.get(callableId.callableName) ?: return emptyList()
+        konst getter = cache.getValue(owner)?.get(callableId.callableName) ?: return emptyList()
         return listOf(getter.symbol)
     }
 
     private fun createWith(classSymbol: FirClassSymbol<*>): Map<Name, FirJavaMethod>? {
-        val fieldsWithWith = computeFieldsWithWithAnnotation(classSymbol) ?: return null
+        konst fieldsWithWith = computeFieldsWithWithAnnotation(classSymbol) ?: return null
         return fieldsWithWith.mapNotNull { (field, withInfo) ->
-            val withName = computeWithName(field, withInfo) ?: return@mapNotNull null
-            val function = buildJavaMethod {
+            konst withName = computeWithName(field, withInfo) ?: return@mapNotNull null
+            konst function = buildJavaMethod {
                 moduleData = field.moduleData
                 returnTypeRef = buildResolvedTypeRef {
                     type = classSymbol.defaultType()
@@ -65,10 +65,10 @@ class WithGenerator(session: FirSession) : FirDeclarationGenerationExtension(ses
                 dispatchReceiverType = classSymbol.defaultType()
                 name = withName
                 symbol = FirNamedFunctionSymbol(CallableId(classSymbol.classId, withName))
-                val visibility = withInfo.visibility.toVisibility()
+                konst visibility = withInfo.visibility.toVisibility()
                 status = FirResolvedDeclarationStatusImpl(visibility, Modality.OPEN, visibility.toEffectiveVisibility(classSymbol))
 
-                valueParameters += buildJavaValueParameter {
+                konstueParameters += buildJavaValueParameter {
                     moduleData = field.moduleData
                     containingFunctionSymbol = this@buildJavaMethod.symbol
                     returnTypeRef = field.returnTypeRef
@@ -88,7 +88,7 @@ class WithGenerator(session: FirSession) : FirDeclarationGenerationExtension(ses
 
     @OptIn(SymbolInternals::class)
     private fun computeFieldsWithWithAnnotation(classSymbol: FirClassSymbol<*>): List<Pair<FirJavaField, With>>? {
-        val classWith = lombokService.getWith(classSymbol)
+        konst classWith = lombokService.getWith(classSymbol)
 
         return classSymbol.fir.declarations
             .filterIsInstance<FirJavaField>()
@@ -98,13 +98,13 @@ class WithGenerator(session: FirSession) : FirDeclarationGenerationExtension(ses
 
     private fun computeWithName(field: FirJavaField, withInfo: With): Name? {
         if (withInfo.visibility == AccessLevel.NONE) return null
-        val rawPropertyName = field.name.identifier
-        val propertyName = if (field.returnTypeRef.isPrimitiveBoolean() && rawPropertyName.startsWith("is")) {
+        konst rawPropertyName = field.name.identifier
+        konst propertyName = if (field.returnTypeRef.isPrimitiveBoolean() && rawPropertyName.startsWith("is")) {
             rawPropertyName.removePrefix("is")
         } else {
             rawPropertyName
         }
-        val functionName = "with" + toPropertyNameCapitalized(propertyName)
+        konst functionName = "with" + toPropertyNameCapitalized(propertyName)
         return Name.identifier(functionName)
     }
 }

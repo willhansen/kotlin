@@ -7,13 +7,13 @@
 package test
 
 @Repeatable
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 @Repeatable
-annotation class B(val value: String)
+annotation class B(konst konstue: String)
 @Repeatable
-annotation class C(val value: String)
+annotation class C(konst konstue: String)
 
-annotation class Z(val value: String)
+annotation class Z(konst konstue: String)
 
 // Expected annotation order (as in Java): all @A, then all @B, then @Z, then all @C.
 @A("a1")

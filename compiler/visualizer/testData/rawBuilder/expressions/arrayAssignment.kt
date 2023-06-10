@@ -5,8 +5,8 @@ fun test() {
 //      │   │          │  Int
 //      │   │          │  │  Int
 //      │   │          │  │  │
-    val x = intArrayOf(1, 2, 3)
-//  val test.x: IntArray
+    konst x = intArrayOf(1, 2, 3)
+//  konst test.x: IntArray
 //  │ Int
 //  │ │  fun (IntArray).set(Int, Int): Unit
 //  │ │  │ Int

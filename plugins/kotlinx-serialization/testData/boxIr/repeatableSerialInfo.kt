@@ -8,15 +8,15 @@ import kotlinx.serialization.*
 @SerialInfo
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
 @Repeatable
-annotation class RepeatableSerialInfo(val value: Int)
+annotation class RepeatableSerialInfo(konst konstue: Int)
 
 @SerialInfo
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
 @java.lang.annotation.Repeatable(JavaRepeatableContainer::class)
-annotation class JavaRepeatable(val value2: Int)
+annotation class JavaRepeatable(konst konstue2: Int)
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
-annotation class JavaRepeatableContainer(val value: Array<JavaRepeatable>)
+annotation class JavaRepeatableContainer(konst konstue: Array<JavaRepeatable>)
 
 @Serializable
 @RepeatableSerialInfo(1)
@@ -25,14 +25,14 @@ annotation class JavaRepeatableContainer(val value: Array<JavaRepeatable>)
 @JavaRepeatable(2)
 @JavaRepeatable(3)
 data class RepeatableSerialInfoClass(
-    @RepeatableSerialInfo(4) @RepeatableSerialInfo(5) @JavaRepeatable(6) @JavaRepeatable(7) val name: String = "Some Name"
+    @RepeatableSerialInfo(4) @RepeatableSerialInfo(5) @JavaRepeatable(6) @JavaRepeatable(7) konst name: String = "Some Name"
 )
 
-fun List<Annotation>.sum(): Int = filterIsInstance<RepeatableSerialInfo>().sumOf { it.value }
-fun List<Annotation>.sumJava(): Int = filterIsInstance<JavaRepeatable>().sumOf { it.value2 }
+fun List<Annotation>.sum(): Int = filterIsInstance<RepeatableSerialInfo>().sumOf { it.konstue }
+fun List<Annotation>.sumJava(): Int = filterIsInstance<JavaRepeatable>().sumOf { it.konstue2 }
 
 fun box(): String {
-    val d = RepeatableSerialInfoClass.serializer().descriptor
+    konst d = RepeatableSerialInfoClass.serializer().descriptor
     if (d.annotations.sum() != 6) return "Incorrect number of RepeatableSerialInfo on class: ${d.annotations}"
     if (d.annotations.sumJava() != 5) return "Incorrect number of JavaRepeatable on class: ${d.annotations}"
     if (d.getElementAnnotations(0).sum() != 9) return "Incorrect number of RepeatableSerialInfo on property: ${d.getElementAnnotations(0)}"

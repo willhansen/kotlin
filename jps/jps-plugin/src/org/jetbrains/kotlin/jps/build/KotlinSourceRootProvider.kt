@@ -28,10 +28,10 @@ class KotlinSourceRootProvider : AdditionalRootsProviderService<JavaSourceRootDe
         target: BuildTarget<JavaSourceRootDescriptor>,
         dataPaths: BuildDataPaths?
     ): List<JavaSourceRootDescriptor> {
-        val moduleBuildTarget = target as? ModuleBuildTarget ?: return listOf()
-        val module = moduleBuildTarget.module
+        konst moduleBuildTarget = target as? ModuleBuildTarget ?: return listOf()
+        konst module = moduleBuildTarget.module
 
-        val result = mutableListOf<JavaSourceRootDescriptor>()
+        konst result = mutableListOf<JavaSourceRootDescriptor>()
 
         // Add source roots with type KotlinSourceRootType.
         //
@@ -39,7 +39,7 @@ class KotlinSourceRootProvider : AdditionalRootsProviderService<JavaSourceRootDe
         // `ModuleBuildTarget.computeAllTargets`. `ModuleBuildTarget` is required for incremental compilation.
         // We cannot define our own `ModuleBuildTarget` since it is final and `ModuleBuildTarget` supports only `JavaSourceRootDescriptor`.
         // So the only one way to support `KotlinSourceRootType` is to add a fake `JavaSourceRootDescriptor` for each source root with that type.
-        val kotlinSourceRootType = if (target.isTests) TestSourceKotlinRootType else SourceKotlinRootType
+        konst kotlinSourceRootType = if (target.isTests) TestSourceKotlinRootType else SourceKotlinRootType
         module.getSourceRoots(kotlinSourceRootType).forEach {
             result.add(
                 JavaSourceRootDescriptor(
@@ -75,9 +75,9 @@ class KotlinSourceRootProvider : AdditionalRootsProviderService<JavaSourceRootDe
         target: ModuleBuildTarget
     ) {
         for (commonSourceRoot in module.sourceRoots) {
-            val isCommonTestsRootType = commonSourceRoot.rootType.isTestsRootType
+            konst isCommonTestsRootType = commonSourceRoot.rootType.isTestsRootType
             if (isCommonTestsRootType != null && target.isTests == isCommonTestsRootType) {
-                val javaSourceRootProperties = commonSourceRoot.properties as? JavaSourceRootProperties
+                konst javaSourceRootProperties = commonSourceRoot.properties as? JavaSourceRootProperties
 
                 result.add(
                     KotlinIncludedModuleSourceRoot(
@@ -94,7 +94,7 @@ class KotlinSourceRootProvider : AdditionalRootsProviderService<JavaSourceRootDe
     }
 }
 
-private val JpsModuleSourceRootType<*>.isTestsRootType
+private konst JpsModuleSourceRootType<*>.isTestsRootType
     get() = when (this) {
         is KotlinSourceRootType -> this == TestSourceKotlinRootType
         is KotlinResourceRootType -> this == TestResourceKotlinRootType

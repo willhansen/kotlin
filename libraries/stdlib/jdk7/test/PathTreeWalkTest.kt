@@ -13,13 +13,13 @@ import kotlin.test.*
 class PathTreeWalkTest : AbstractPathTest() {
 
     companion object {
-        val referenceFilenames = listOf("1", "1/2", "1/3", "1/3/4.txt", "1/3/5.txt", "6", "7.txt", "8", "8/9.txt")
-        val referenceFilesOnly = listOf("1/3/4.txt", "1/3/5.txt", "7.txt", "8/9.txt")
+        konst referenceFilenames = listOf("1", "1/2", "1/3", "1/3/4.txt", "1/3/5.txt", "6", "7.txt", "8", "8/9.txt")
+        konst referenceFilesOnly = listOf("1/3/4.txt", "1/3/5.txt", "7.txt", "8/9.txt")
 
         fun createTestFiles(): Path {
-            val basedir = createTempDirectory()
+            konst basedir = createTempDirectory()
             for (name in referenceFilenames) {
-                val file = basedir.resolve(name)
+                konst file = basedir.resolve(name)
                 if (file.extension.isEmpty())
                     file.createDirectories()
                 else
@@ -29,24 +29,24 @@ class PathTreeWalkTest : AbstractPathTest() {
         }
 
         fun testVisitedFiles(expected: List<String>, walk: Sequence<Path>, basedir: Path, message: (() -> String)? = null) {
-            val actual = walk.map { it.relativeToOrSelf(basedir).invariantSeparatorsPathString }
+            konst actual = walk.map { it.relativeToOrSelf(basedir).invariantSeparatorsPathString }
             assertEquals(expected.sorted(), actual.toList().sorted(), message?.invoke())
         }
     }
 
     @Test
     fun visitOnce() {
-        val basedir = createTestFiles().cleanupRecursively()
+        konst basedir = createTestFiles().cleanupRecursively()
         testVisitedFiles(referenceFilesOnly, basedir.walk(), basedir)
 
-        val expected = listOf("") + referenceFilenames
+        konst expected = listOf("") + referenceFilenames
         testVisitedFiles(expected, basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES), basedir)
     }
 
     @Test
     fun singleFile() {
-        val testFile = createTempFile().cleanup()
-        val nonExistentFile = testFile.resolve("foo")
+        konst testFile = createTempFile().cleanup()
+        konst nonExistentFile = testFile.resolve("foo")
 
         assertEquals(testFile, testFile.walk().single())
         assertEquals(testFile, testFile.walk(PathWalkOption.INCLUDE_DIRECTORIES).single())
@@ -57,14 +57,14 @@ class PathTreeWalkTest : AbstractPathTest() {
 
     @Test
     fun singleEmptyDirectory() {
-        val testDir = createTempDirectory().cleanup()
+        konst testDir = createTempDirectory().cleanup()
         assertTrue(testDir.walk().none())
         assertEquals(testDir, testDir.walk(PathWalkOption.INCLUDE_DIRECTORIES).single())
     }
 
     @Test
     fun filterAndMap() {
-        val basedir = createTestFiles().cleanupRecursively()
+        konst basedir = createTestFiles().cleanupRecursively()
         testVisitedFiles(referenceFilesOnly, basedir.walk().filterNot { it.isDirectory() }, basedir)
     }
 
@@ -80,48 +80,48 @@ class PathTreeWalkTest : AbstractPathTest() {
             }
         }
 
-        val basedir = createTestFiles().cleanupRecursively()
-        val walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach { visit(it) }
-        val expected = listOf("", "1", "1/2", "1/3", "6", "8")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach { visit(it) }
+        konst expected = listOf("", "1", "1/2", "1/3", "6", "8")
         testVisitedFiles(expected, walk, basedir)
     }
 
     @Test
     fun deleteSubtreeOnVisit() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach { path ->
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach { path ->
             if (path.name == "1") {
                 path.toFile().deleteRecursively()
             }
         }
 
-        val expected = listOf("", "1", "6", "7.txt", "8", "8/9.txt")
+        konst expected = listOf("", "1", "6", "7.txt", "8", "8/9.txt")
         testVisitedFiles(expected, walk, basedir)
     }
 
     @Test
     fun addChildOnVisit() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach { path ->
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach { path ->
             if (path.isDirectory()) {
                 path.resolve("a.txt").createFile()
             }
         }
 
-        val expected = referenceFilenames + listOf("", "a.txt", "1/a.txt", "1/2/a.txt", "1/3/a.txt", "6/a.txt", "8/a.txt")
+        konst expected = referenceFilenames + listOf("", "a.txt", "1/a.txt", "1/2/a.txt", "1/3/a.txt", "6/a.txt", "8/a.txt")
         testVisitedFiles(expected, walk, basedir)
     }
 
     @Test
     fun exceptionOnVisit() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach { path ->
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach { path ->
             if (path.name == "3") {
                 throw RuntimeException("Test error")
             }
         }
 
-        val error = assertFailsWith<RuntimeException> {
+        konst error = assertFailsWith<RuntimeException> {
             walk.toList()
         }
         assertEquals("Test error", error.message)
@@ -129,13 +129,13 @@ class PathTreeWalkTest : AbstractPathTest() {
 
     @Test
     fun restrictedRead() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val restrictedDir = basedir.resolve("1/3")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst restrictedDir = basedir.resolve("1/3")
 
         withRestrictedRead(restrictedDir) {
-            val walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES)
+            konst walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES)
 
-            val error = assertFailsWith<java.nio.file.AccessDeniedException> {
+            konst error = assertFailsWith<java.nio.file.AccessDeniedException> {
                 walk.toList()
             }
             assertEquals(restrictedDir.toString(), error.file)
@@ -144,9 +144,9 @@ class PathTreeWalkTest : AbstractPathTest() {
 
     @Test
     fun depthFirstOrder() {
-        val basedir = createTestFiles().cleanupRecursively()
+        konst basedir = createTestFiles().cleanupRecursively()
 
-        val visited = HashSet<Path>()
+        konst visited = HashSet<Path>()
 
         fun visit(path: Path) {
             if (path == basedir) {
@@ -157,9 +157,9 @@ class PathTreeWalkTest : AbstractPathTest() {
             visited.add(path)
         }
 
-        val walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach(::visit)
+        konst walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES).onEach(::visit)
 
-        val expected = referenceFilenames + listOf("")
+        konst expected = referenceFilenames + listOf("")
         testVisitedFiles(expected, walk, basedir)
         assertEquals(expected.sorted(), visited.map { it.relativeToOrSelf(basedir).invariantSeparatorsPathString }.sorted())
     }
@@ -167,117 +167,117 @@ class PathTreeWalkTest : AbstractPathTest() {
     @Test
     fun addSiblingOnVisit() {
         fun makeBackup(file: Path) {
-            val bakFile = Path("$file.bak")
+            konst bakFile = Path("$file.bak")
             file.copyTo(bakFile)
         }
 
-        val basedir = createTestFiles().cleanupRecursively()
+        konst basedir = createTestFiles().cleanupRecursively()
 
         // added siblings do not appear during iteration
         testVisitedFiles(referenceFilesOnly, basedir.walk().onEach(::makeBackup), basedir)
 
-        val expected = referenceFilenames + referenceFilesOnly.map { "$it.bak" } + listOf("")
+        konst expected = referenceFilenames + referenceFilesOnly.map { "$it.bak" } + listOf("")
         testVisitedFiles(expected, basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES), basedir)
     }
 
     @Test
     fun find() {
-        val basedir = createTestFiles().cleanupRecursively()
+        konst basedir = createTestFiles().cleanupRecursively()
         basedir.resolve("8/4.txt").createFile()
-        val count = basedir.walk().count { it.name == "4.txt" }
+        konst count = basedir.walk().count { it.name == "4.txt" }
         assertEquals(2, count)
     }
 
     @Test
     fun symlinkToFile() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val original = basedir.resolve("8/9.txt")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst original = basedir.resolve("8/9.txt")
         basedir.resolve("1/3/link").tryCreateSymbolicLinkTo(original) ?: return
 
         for (followLinks in listOf(emptyArray(), arrayOf(PathWalkOption.FOLLOW_LINKS))) {
-            val walk = basedir.walk(*followLinks)
+            konst walk = basedir.walk(*followLinks)
             testVisitedFiles(referenceFilesOnly + listOf("1/3/link"), walk, basedir)
         }
 
         original.deleteExisting()
         for (followLinks in listOf(emptyArray(), arrayOf(PathWalkOption.FOLLOW_LINKS))) {
-            val walk = basedir.walk(*followLinks)
+            konst walk = basedir.walk(*followLinks)
             testVisitedFiles(referenceFilesOnly - listOf("8/9.txt") + listOf("1/3/link"), walk, basedir)
         }
     }
 
     @Test
     fun symlinkToDirectory() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val original = basedir.resolve("8")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst original = basedir.resolve("8")
         basedir.resolve("1/3/link").tryCreateSymbolicLinkTo(original) ?: return
 
         // directory "8" contains "9.txt" file
-        val followWalk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES, PathWalkOption.FOLLOW_LINKS)
+        konst followWalk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES, PathWalkOption.FOLLOW_LINKS)
         testVisitedFiles(referenceFilenames + listOf("", "1/3/link", "1/3/link/9.txt"), followWalk, basedir)
 
-        val nofollowWalk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES)
+        konst nofollowWalk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES)
         testVisitedFiles(referenceFilenames + listOf("", "1/3/link"), nofollowWalk, basedir)
 
         original.toFile().deleteRecursively()
         for (followLinks in listOf(emptyArray(), arrayOf(PathWalkOption.FOLLOW_LINKS))) {
-            val walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES, *followLinks)
+            konst walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES, *followLinks)
             testVisitedFiles(referenceFilenames - listOf("8", "8/9.txt") + listOf("", "1/3/link"), walk, basedir)
         }
     }
 
     @Test
     fun symlinkTwoPointingToEachOther() {
-        val basedir = createTempDirectory().cleanupRecursively()
-        val link1 = basedir.resolve("link1")
-        val link2 = basedir.resolve("link2").tryCreateSymbolicLinkTo(link1) ?: return
+        konst basedir = createTempDirectory().cleanupRecursively()
+        konst link1 = basedir.resolve("link1")
+        konst link2 = basedir.resolve("link2").tryCreateSymbolicLinkTo(link1) ?: return
         link1.tryCreateSymbolicLinkTo(link2) ?: return
 
-        val walk = basedir.walk(PathWalkOption.FOLLOW_LINKS)
+        konst walk = basedir.walk(PathWalkOption.FOLLOW_LINKS)
 
         testVisitedFiles(listOf("link1", "link2"), walk, basedir)
     }
 
     @Test
     fun symlinkPointingToItself() {
-        val basedir = createTempDirectory().cleanupRecursively()
-        val link = basedir.resolve("link")
+        konst basedir = createTempDirectory().cleanupRecursively()
+        konst link = basedir.resolve("link")
         link.tryCreateSymbolicLinkTo(link) ?: return
 
-        val walk = basedir.walk(PathWalkOption.FOLLOW_LINKS)
+        konst walk = basedir.walk(PathWalkOption.FOLLOW_LINKS)
 
         testVisitedFiles(listOf("link"), walk, basedir)
     }
 
     @Test
     fun symlinkToSymlink() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val original = basedir.resolve("8")
-        val link = basedir.resolve("1/3/link").tryCreateSymbolicLinkTo(original) ?: return
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst original = basedir.resolve("8")
+        konst link = basedir.resolve("1/3/link").tryCreateSymbolicLinkTo(original) ?: return
         basedir.resolve("1/linkToLink").tryCreateSymbolicLinkTo(link) ?: return
 
-        val walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES, PathWalkOption.FOLLOW_LINKS)
+        konst walk = basedir.walk(PathWalkOption.INCLUDE_DIRECTORIES, PathWalkOption.FOLLOW_LINKS)
 
-        val depth2ExpectedNames =
+        konst depth2ExpectedNames =
                 listOf("", "1", "1/2", "1/3", "1/linkToLink", "6", "7.txt", "8", "8/9.txt") // linkToLink is visited
-        val depth3ExpectedNames = depth2ExpectedNames +
+        konst depth3ExpectedNames = depth2ExpectedNames +
                 listOf("1/3/4.txt", "1/3/5.txt", "1/3/link", "1/linkToLink/9.txt") // "9.txt" is visited once more through linkToLink
-        val depth4ExpectedNames = depth3ExpectedNames +
+        konst depth4ExpectedNames = depth3ExpectedNames +
                 listOf("1/3/link/9.txt") // "9.txt" is visited once more through link
         testVisitedFiles(depth4ExpectedNames, walk, basedir) // no depth limit
     }
 
     @Test
     fun symlinkBasedir() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(basedir) ?: return
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(basedir) ?: return
 
         run {
-            val followWalk = link.walk(PathWalkOption.INCLUDE_DIRECTORIES, PathWalkOption.FOLLOW_LINKS)
+            konst followWalk = link.walk(PathWalkOption.INCLUDE_DIRECTORIES, PathWalkOption.FOLLOW_LINKS)
             testVisitedFiles(referenceFilenames + listOf(""), followWalk, link)
             testVisitedFiles(referenceFilesOnly, link.walk(PathWalkOption.FOLLOW_LINKS), link)
 
-            val nofollowWalk = link.walk(PathWalkOption.INCLUDE_DIRECTORIES)
+            konst nofollowWalk = link.walk(PathWalkOption.INCLUDE_DIRECTORIES)
             assertEquals(link, nofollowWalk.single())
             assertEquals(link, link.walk().single())
         }
@@ -285,23 +285,23 @@ class PathTreeWalkTest : AbstractPathTest() {
         run {
             basedir.toFile().deleteRecursively()
 
-            val followWalk = link.walk(PathWalkOption.INCLUDE_DIRECTORIES, PathWalkOption.FOLLOW_LINKS)
+            konst followWalk = link.walk(PathWalkOption.INCLUDE_DIRECTORIES, PathWalkOption.FOLLOW_LINKS)
             assertEquals(link, followWalk.single())
 
-            val nofollowWalk = link.walk(PathWalkOption.INCLUDE_DIRECTORIES)
+            konst nofollowWalk = link.walk(PathWalkOption.INCLUDE_DIRECTORIES)
             assertEquals(link, nofollowWalk.single())
         }
     }
 
     @Test
     fun symlinkCyclic() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val original = basedir.resolve("1")
-        val link = original.resolve("2/link").tryCreateSymbolicLinkTo(original) ?: return
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst original = basedir.resolve("1")
+        konst link = original.resolve("2/link").tryCreateSymbolicLinkTo(original) ?: return
 
         for (order in listOf(arrayOf(), arrayOf(PathWalkOption.BREADTH_FIRST))) {
-            val walk = basedir.walk(PathWalkOption.FOLLOW_LINKS, *order)
-            val error = assertFailsWith<FileSystemLoopException> {
+            konst walk = basedir.walk(PathWalkOption.FOLLOW_LINKS, *order)
+            konst error = assertFailsWith<FileSystemLoopException> {
                 walk.toList()
             }
             assertEquals(link.toString(), error.file)
@@ -310,14 +310,14 @@ class PathTreeWalkTest : AbstractPathTest() {
 
     @Test
     fun symlinkCyclicWithTwo() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val dir8 = basedir.resolve("8")
-        val dir2 = basedir.resolve("1/2")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst dir8 = basedir.resolve("8")
+        konst dir2 = basedir.resolve("1/2")
         dir8.resolve("linkTo2").tryCreateSymbolicLinkTo(dir2) ?: return
         dir2.resolve("linkTo8").tryCreateSymbolicLinkTo(dir8) ?: return
 
         for (order in listOf(arrayOf(), arrayOf(PathWalkOption.BREADTH_FIRST))) {
-            val walk = basedir.walk(PathWalkOption.FOLLOW_LINKS, *order)
+            konst walk = basedir.walk(PathWalkOption.FOLLOW_LINKS, *order)
             assertFailsWith<FileSystemLoopException> {
                 walk.toList()
             }
@@ -326,15 +326,15 @@ class PathTreeWalkTest : AbstractPathTest() {
 
     @Test
     fun breadthFirstOrder() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val walk = basedir.walk(PathWalkOption.BREADTH_FIRST, PathWalkOption.INCLUDE_DIRECTORIES)
-        val depth0 = mutableListOf("")
-        val depth1 = mutableListOf("1", "6", "7.txt", "8")
-        val depth2 = mutableListOf("1/2", "1/3", "8/9.txt")
-        val depth3 = mutableListOf("1/3/4.txt", "1/3/5.txt")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst walk = basedir.walk(PathWalkOption.BREADTH_FIRST, PathWalkOption.INCLUDE_DIRECTORIES)
+        konst depth0 = mutableListOf("")
+        konst depth1 = mutableListOf("1", "6", "7.txt", "8")
+        konst depth2 = mutableListOf("1/2", "1/3", "8/9.txt")
+        konst depth3 = mutableListOf("1/3/4.txt", "1/3/5.txt")
 
         for (file in walk) {
-            when (val pathString = file.relativeToOrSelf(basedir).invariantSeparatorsPathString) {
+            when (konst pathString = file.relativeToOrSelf(basedir).invariantSeparatorsPathString) {
                 in depth0 -> {
                     depth0.remove(pathString)
                 }
@@ -364,15 +364,15 @@ class PathTreeWalkTest : AbstractPathTest() {
 
     @Test
     fun breadthFirstOnlyFiles() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val walk = basedir.walk(PathWalkOption.BREADTH_FIRST)
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst walk = basedir.walk(PathWalkOption.BREADTH_FIRST)
 
-        val depth1 = mutableListOf("7.txt")
-        val depth2 = mutableListOf("8/9.txt")
-        val depth3 = mutableListOf("1/3/4.txt", "1/3/5.txt")
+        konst depth1 = mutableListOf("7.txt")
+        konst depth2 = mutableListOf("8/9.txt")
+        konst depth3 = mutableListOf("1/3/4.txt", "1/3/5.txt")
 
         for (file in walk) {
-            when (val pathString = file.relativeToOrSelf(basedir).invariantSeparatorsPathString) {
+            when (konst pathString = file.relativeToOrSelf(basedir).invariantSeparatorsPathString) {
                 in depth1 -> {
                     depth1.remove(pathString)
                 }

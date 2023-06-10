@@ -9,7 +9,7 @@ object A {
 
 fun testWithSubject(x: Any?): String {
   return { // BLOCK
-    val tmp0_subject: Any? = x
+    konst tmp0_subject: Any? = x
     when {
       EQEQ(arg0 = tmp0_subject, arg1 = null) -> "null"
       EQEQ(arg0 = tmp0_subject, arg1 = A) -> "A"
@@ -34,7 +34,7 @@ fun test(x: Any?): String {
 
 fun testComma(x: Int): String {
   return { // BLOCK
-    val tmp0_subject: Int = x
+    konst tmp0_subject: Int = x
     when {
       when {
         when {

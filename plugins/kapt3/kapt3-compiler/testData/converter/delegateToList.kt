@@ -1,3 +1,3 @@
 class MyList<out T : Any>(
-    private val wrappedList: List<T>,
+    private konst wrappedList: List<T>,
 ) : List<T> by wrappedList

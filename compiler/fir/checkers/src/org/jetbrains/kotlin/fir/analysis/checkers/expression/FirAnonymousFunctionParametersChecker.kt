@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.fir.declarations.FirAnonymousFunction
 
 object FirAnonymousFunctionParametersChecker : FirAnonymousFunctionChecker() {
     override fun check(declaration: FirAnonymousFunction, context: CheckerContext, reporter: DiagnosticReporter) {
-        for (valueParameter in declaration.valueParameters) {
-            val source = valueParameter.source ?: continue
-            if (valueParameter.defaultValue != null) {
+        for (konstueParameter in declaration.konstueParameters) {
+            konst source = konstueParameter.source ?: continue
+            if (konstueParameter.defaultValue != null) {
                 reporter.reportOn(source, FirErrors.ANONYMOUS_FUNCTION_PARAMETER_WITH_DEFAULT_VALUE, context)
             }
-            if (valueParameter.isVararg) {
+            if (konstueParameter.isVararg) {
                 reporter.reportOn(source, FirErrors.USELESS_VARARG_ON_PARAMETER, context)
             }
         }

@@ -11,6 +11,6 @@ package dependency
 
 class Bar {
     companion object {
-        val Int.minutes: Int get() = this
+        konst Int.minutes: Int get() = this
     }
 }

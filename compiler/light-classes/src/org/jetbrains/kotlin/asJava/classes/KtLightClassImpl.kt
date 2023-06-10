@@ -29,12 +29,12 @@ abstract class KtLightClassImpl(
     fun getDescriptor() =
         LightClassGenerationSupport.getInstance(project).resolveToDescriptor(classOrObject) as? ClassDescriptor
 
-    private val _deprecated by lazyPub { classOrObject.isDeprecated() }
+    private konst _deprecated by lazyPub { classOrObject.isDeprecated() }
 
     override fun isDeprecated(): Boolean = _deprecated
 
     protected open fun computeModifiersByPsi(): Set<String> {
-        val psiModifiers = hashSetOf<String>()
+        konst psiModifiers = hashSetOf<String>()
 
         // PUBLIC, PROTECTED, PRIVATE
         //noinspection unchecked
@@ -71,7 +71,7 @@ abstract class KtLightClassImpl(
         isAbstract() || isSealed() -> false
         isEnum -> false
         !classOrObject.hasModifier(KtTokens.OPEN_KEYWORD) -> {
-            val descriptor = lazy { getDescriptor() }
+            konst descriptor = lazy { getDescriptor() }
             var modifier = PsiModifier.FINAL
             project.applyCompilerPlugins {
                 modifier = it.interceptModalityBuilding(kotlinOrigin, descriptor, modifier)
@@ -88,16 +88,16 @@ abstract class KtLightClassImpl(
     private fun isSealed(): Boolean = classOrObject.hasModifier(KtTokens.SEALED_KEYWORD)
 
     override fun isInheritor(baseClass: PsiClass, checkDeep: Boolean): Boolean {
-        if (manager.areElementsEquivalent(baseClass, this)) return false
+        if (manager.areElementsEquikonstent(baseClass, this)) return false
         LightClassInheritanceHelper.getService(project).isInheritor(this, baseClass, checkDeep).ifSure { return it }
 
-        val qualifiedName: String? = if (baseClass is KtLightClassImpl) {
+        konst qualifiedName: String? = if (baseClass is KtLightClassImpl) {
             baseClass.getDescriptor()?.let(DescriptorUtils::getFqName)?.asString()
         } else {
             baseClass.qualifiedName
         }
 
-        val thisDescriptor = getDescriptor()
+        konst thisDescriptor = getDescriptor()
 
         return if (qualifiedName != null && thisDescriptor != null) {
             qualifiedName != DescriptorUtils.getFqName(thisDescriptor).asString() &&
@@ -116,8 +116,8 @@ abstract class KtLightClassImpl(
 
     abstract override fun copy(): PsiElement
 
-    private val _containingFile: PsiFile by lazyPub {
-        val lightClass = if (classOrObject.isTopLevel()) this else getOutermostClassOrObject(classOrObject).toLightClass()!!
+    private konst _containingFile: PsiFile by lazyPub {
+        konst lightClass = if (classOrObject.isTopLevel()) this else getOutermostClassOrObject(classOrObject).toLightClass()!!
         object : FakeFileForLightClass(classOrObject.containingKtFile, lightClass) {
             override fun findReferenceAt(offset: Int) = ktFile.findReferenceAt(offset)
 
@@ -131,10 +131,10 @@ abstract class KtLightClassImpl(
 
                 // We have to explicitly process package declarations if current file belongs to default package
                 // so that Java resolve can find classes located in that package
-                val packageName = packageName
+                konst packageName = packageName
                 if (packageName.isNotEmpty()) return true
 
-                val aPackage = JavaPsiFacade.getInstance(myManager.project).findPackage(packageName)
+                konst aPackage = JavaPsiFacade.getInstance(myManager.project).findPackage(packageName)
                 if (aPackage != null && !aPackage.processDeclarations(processor, state, null, place)) return false
 
                 return true
@@ -145,7 +145,7 @@ abstract class KtLightClassImpl(
     override fun getContainingFile(): PsiFile? = _containingFile
 
     override fun getOwnInnerClasses(): List<PsiClass> {
-        val result = ArrayList<PsiClass>()
+        konst result = ArrayList<PsiClass>()
         classOrObject.declarations.filterIsInstance<KtClassOrObject>()
             // workaround for ClassInnerStuffCache not supporting classes with null names, see KT-13927
             // inner classes with null names can't be searched for and can't be used from java anyway
@@ -165,7 +165,7 @@ abstract class KtLightClassImpl(
     override fun getContainingClass(): PsiClass? {
         if (classOrObject.parent === classOrObject.containingFile) return null
 
-        val containingClassOrObject = (classOrObject.parent as? KtClassBody)?.parent as? KtClassOrObject
+        konst containingClassOrObject = (classOrObject.parent as? KtClassBody)?.parent as? KtClassOrObject
         if (containingClassOrObject != null) {
             return containingClassOrObject.toLightClass()
         }
@@ -179,18 +179,18 @@ abstract class KtLightClassImpl(
 
             if (qualifiedName == DescriptorUtils.getFqName(classDescriptor).asString()) return true
 
-            val fqName = FqNameUnsafe(qualifiedName)
-            val mappedQName =
+            konst fqName = FqNameUnsafe(qualifiedName)
+            konst mappedQName =
                 if (fqName.isSafe)
                     JavaToKotlinClassMap.mapJavaToKotlin(fqName.toSafe())?.asSingleFqName()?.asString()
                 else null
             if (qualifiedName == mappedQName) return true
 
             for (superType in classDescriptor.typeConstructor.supertypes) {
-                val superDescriptor = superType.constructor.declarationDescriptor
+                konst superDescriptor = superType.constructor.declarationDescriptor
 
                 if (superDescriptor is ClassDescriptor) {
-                    val superQName = DescriptorUtils.getFqName(superDescriptor).asString()
+                    konst superQName = DescriptorUtils.getFqName(superDescriptor).asString()
                     if (superQName == qualifiedName || superQName == mappedQName) return true
 
                     if (deep) {
@@ -204,7 +204,7 @@ abstract class KtLightClassImpl(
             return false
         }
 
-        private val ktTokenToPsiModifier = listOf(
+        private konst ktTokenToPsiModifier = listOf(
             KtTokens.PUBLIC_KEYWORD to PsiModifier.PUBLIC,
             KtTokens.INTERNAL_KEYWORD to PsiModifier.PUBLIC,
             KtTokens.PROTECTED_KEYWORD to PsiModifier.PROTECTED,

@@ -11,7 +11,7 @@ class A() {
 }
 
 fun box(): String {
-    val a = A()
-    val s = "$a == $a"
+    konst a = A()
+    konst s = "$a == $a"
     return if (s == "bar == bar" && i == 2) "OK" else "fail"
 }

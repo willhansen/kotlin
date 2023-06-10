@@ -5,9 +5,9 @@ class Test {
     fun ignoredFun() {}
 
     @KaptIgnored @get:KaptIgnored
-    const val ignoredProperty: String = ""
+    const konst ignoredProperty: String = ""
 
     fun nonIgnoredFun() {}
 
-    val nonIgnoredProperty: String = ""
+    konst nonIgnoredProperty: String = ""
 }

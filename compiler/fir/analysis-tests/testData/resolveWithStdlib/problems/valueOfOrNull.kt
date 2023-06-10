@@ -3,15 +3,15 @@ enum class SomeEnum {
 }
 
 fun foo(s: String?) {
-    val result = s?.let { valueOfOrNull(it) } ?: SomeEnum.ENTRY
-    val result2 = s?.let { valueOfOrNull<SomeEnum>(it) } ?: SomeEnum.ENTRY
-    val result3 = if (s == null) SomeEnum.ENTRY else valueOfOrNull(s)
-    val result4 = if (s == null) SomeEnum.ENTRY else s.let { valueOfOrNull(it) }
+    konst result = s?.let { konstueOfOrNull(it) } ?: SomeEnum.ENTRY
+    konst result2 = s?.let { konstueOfOrNull<SomeEnum>(it) } ?: SomeEnum.ENTRY
+    konst result3 = if (s == null) SomeEnum.ENTRY else konstueOfOrNull(s)
+    konst result4 = if (s == null) SomeEnum.ENTRY else s.let { konstueOfOrNull(it) }
 }
 
-inline fun <reified E : Enum<E>> valueOfOrNull(value: String): E? {
+inline fun <reified E : Enum<E>> konstueOfOrNull(konstue: String): E? {
     for (enumValue in enumValues<E>()) {
-        if (enumValue.name == value) {
+        if (enumValue.name == konstue) {
             return enumValue
         }
     }

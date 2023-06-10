@@ -2,13 +2,13 @@
 package foo
 
 class A {
-    val x: String
+    konst x: String
 
     constructor() {
     }
 
     init {
-        val o = "O"
+        konst o = "O"
         fun baz() = o + "K"
         x = baz()
     }

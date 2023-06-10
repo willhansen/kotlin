@@ -5,7 +5,7 @@ public fun test(): kotlin.Int
 
 public final class A {
     public constructor A()
-    public final val test: kotlin.Int
+    public final konst test: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -13,7 +13,7 @@ public final class A {
 
 public final class B {
     public constructor B()
-    public final val test: kotlin.Int
+    public final konst test: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -21,8 +21,8 @@ public final class B {
 
 public final class C {
     public constructor C()
-    public final val bar: [Error type: Return type for function cannot be resolved]
-    public final val test: [Error type: Not found recorded type for bar()]
+    public final konst bar: [Error type: Return type for function cannot be resolved]
+    public final konst test: [Error type: Not found recorded type for bar()]
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

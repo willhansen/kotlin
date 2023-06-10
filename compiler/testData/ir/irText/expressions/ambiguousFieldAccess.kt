@@ -15,11 +15,11 @@ public class A {
 
 package test
 
-fun <T> eval(f: () -> T) = f()
+fun <T> ekonst(f: () -> T) = f()
 
 class C : A.B() {
     // Both x & y here should in fact be taken from B class: this.(super<B>.x), this.(super<B>.y)
-    fun f() = eval { x }
-    fun g() = eval { y }
+    fun f() = ekonst { x }
+    fun g() = ekonst { y }
 }
 

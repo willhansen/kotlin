@@ -6,7 +6,7 @@ import java.util.Collections
 import java.util.ArrayList
 
 fun box(): String {
-    val numbers = ArrayList<Int>()
+    konst numbers = ArrayList<Int>()
     numbers.add(1)
     numbers.add(2)
     numbers.add(3)

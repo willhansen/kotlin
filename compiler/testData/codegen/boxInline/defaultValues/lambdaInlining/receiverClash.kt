@@ -15,6 +15,6 @@ inline fun String.inlineFun(crossinline lambda: () -> String = { this }): String
 import test.*
 
 fun box(): String {
-    val result = "OK".inlineFun()
+    konst result = "OK".inlineFun()
     return if (result == "OKOK") "OK" else "fail 1: $result"
 }

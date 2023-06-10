@@ -20,13 +20,13 @@ suspend fun ExternalDependenciesResolver.resolve(
 ): ResultWithDiagnostics<List<File>> = resolve(artifactCoordinates, makeExternalDependenciesResolverOptions(options), sourceCodeLocation)
 
 private class MapExternalDependenciesResolverOptions(
-    private val map: Map<String, String>
+    private konst map: Map<String, String>
 ) : ExternalDependenciesResolver.Options {
 
-    override fun value(name: String): String? = map[name]
+    override fun konstue(name: String): String? = map[name]
 
-    override fun flag(name: String): Boolean? = map[name]?.let { value ->
-        when (value.lowercase()) {
+    override fun flag(name: String): Boolean? = map[name]?.let { konstue ->
+        when (konstue.lowercase()) {
             "1", "true", "t", "yes", "y" -> true
             "0", "false", "f", "no", "n" -> false
             else -> null

@@ -23,7 +23,7 @@ object FirUselessElvisChecker : FirElvisExpressionChecker() {
         // where an error type is recorded as the expression's return type.
         if (expression.typeRef.coneType is ConeErrorType) return
 
-        val lhsType = expression.lhs.typeRef.coneType
+        konst lhsType = expression.lhs.typeRef.coneType
         if (lhsType is ConeErrorType) return
         if (!lhsType.canBeNull) {
             if (context.languageVersionSettings.supportsFeature(LanguageFeature.EnableDfaWarningsInK2)) {

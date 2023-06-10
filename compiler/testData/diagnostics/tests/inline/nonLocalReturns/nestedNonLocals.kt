@@ -8,17 +8,17 @@ enum class Kind {
     GLOBAL_RETURN
 }
 
-class Internal(val value: String)
+class Internal(konst konstue: String)
 
-class External(val value: String)
+class External(konst konstue: String)
 
-class Global(val value: String)
+class Global(konst konstue: String)
 
 fun test1(intKind: Kind, extKind: Kind): Global {
 
     var externalResult = doCall ext@ {
 
-        val internalResult = doCall int@ {
+        konst internalResult = doCall int@ {
             if (intKind == Kind.LOCAL) {
                 return@test1 Global("internal to global")
             } else if (intKind == EXT_RETURN) {
@@ -31,10 +31,10 @@ fun test1(intKind: Kind, extKind: Kind): Global {
             return Global("external to global")
         }
 
-        External(internalResult.value + " to local");
+        External(internalResult.konstue + " to local");
     }
 
-    return Global(externalResult.value + " to exit")
+    return Global(externalResult.konstue + " to exit")
 }
 
 public inline fun <R> doCall(block: ()-> R) : R {

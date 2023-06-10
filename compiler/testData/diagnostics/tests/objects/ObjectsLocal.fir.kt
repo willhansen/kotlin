@@ -3,7 +3,7 @@
 package localObjects
 
 object A {
-    val x : Int = 0
+    konst x : Int = 0
 }
 
 open class Foo {
@@ -12,7 +12,7 @@ open class Foo {
 
 fun test() {
     A.x
-    val b = object : Foo() {
+    konst b = object : Foo() {
     }
     b.foo()
 
@@ -22,4 +22,4 @@ fun test() {
     B.foo()
 }
 
-val bb = <!UNRESOLVED_REFERENCE!>B<!>.foo()
+konst bb = <!UNRESOLVED_REFERENCE!>B<!>.foo()

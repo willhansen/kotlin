@@ -21,14 +21,14 @@ class ThreadData;
 // TODO: `OBJ_GETTER` is used because the returned objects needs to be accessible via the rootset before the function
 //       returns. If we had a different way to efficiently keep the object in the roots, `OBJ_GETTER` can be removed.
 
-void SetStackRef(ObjHeader** location, ObjHeader* value) noexcept;
-void SetHeapRef(ObjHeader** location, ObjHeader* value) noexcept;
-void SetHeapRefAtomic(ObjHeader** location, ObjHeader* value) noexcept;
-void SetHeapRefAtomicSeqCst(ObjHeader** location, ObjHeader* value) noexcept;
+void SetStackRef(ObjHeader** location, ObjHeader* konstue) noexcept;
+void SetHeapRef(ObjHeader** location, ObjHeader* konstue) noexcept;
+void SetHeapRefAtomic(ObjHeader** location, ObjHeader* konstue) noexcept;
+void SetHeapRefAtomicSeqCst(ObjHeader** location, ObjHeader* konstue) noexcept;
 OBJ_GETTER(ReadHeapRefAtomic, ObjHeader** location) noexcept;
-OBJ_GETTER(CompareAndSwapHeapRef, ObjHeader** location, ObjHeader* expected, ObjHeader* value) noexcept;
-bool CompareAndSetHeapRef(ObjHeader** location, ObjHeader* expected, ObjHeader* value) noexcept;
-OBJ_GETTER(GetAndSetHeapRef, ObjHeader** location, ObjHeader* value) noexcept;
+OBJ_GETTER(CompareAndSwapHeapRef, ObjHeader** location, ObjHeader* expected, ObjHeader* konstue) noexcept;
+bool CompareAndSetHeapRef(ObjHeader** location, ObjHeader* expected, ObjHeader* konstue) noexcept;
+OBJ_GETTER(GetAndSetHeapRef, ObjHeader** location, ObjHeader* konstue) noexcept;
 OBJ_GETTER(AllocateObject, ThreadData* threadData, const TypeInfo* typeInfo) noexcept;
 OBJ_GETTER(AllocateArray, ThreadData* threadData, const TypeInfo* typeInfo, uint32_t elements) noexcept;
 

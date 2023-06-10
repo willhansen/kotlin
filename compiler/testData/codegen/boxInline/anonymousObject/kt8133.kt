@@ -14,7 +14,7 @@ interface foo {
 }
 
 fun box(): String {
-    val baz = "OK".myLet {
+    konst baz = "OK".myLet {
         object : foo {
             override fun bar() = it
         }

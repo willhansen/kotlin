@@ -11,12 +11,12 @@ import org.jetbrains.kotlin.resolve.calls.tasks.ExplicitReceiverKind
 import org.jetbrains.kotlin.resolve.calls.tower.CandidateApplicability
 
 abstract class AbstractCandidate {
-    abstract val symbol: FirBasedSymbol<*>
-    abstract val dispatchReceiverValue: ReceiverValue?
-    abstract val chosenExtensionReceiverValue: ReceiverValue?
-    abstract val explicitReceiverKind: ExplicitReceiverKind
-    abstract val callInfo: AbstractCallInfo
-    abstract val diagnostics: List<ResolutionDiagnostic>
-    abstract val errors: List<ConstraintSystemError>
-    abstract val applicability: CandidateApplicability
+    abstract konst symbol: FirBasedSymbol<*>
+    abstract konst dispatchReceiverValue: ReceiverValue?
+    abstract konst chosenExtensionReceiverValue: ReceiverValue?
+    abstract konst explicitReceiverKind: ExplicitReceiverKind
+    abstract konst callInfo: AbstractCallInfo
+    abstract konst diagnostics: List<ResolutionDiagnostic>
+    abstract konst errors: List<ConstraintSystemError>
+    abstract konst applicability: CandidateApplicability
 }

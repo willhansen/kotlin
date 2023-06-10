@@ -23,16 +23,16 @@ class Test {
 
 // FILE: main.kt
 
-val strList: List<String> = null!!
-val strMap: Map<String, String> = null!!
+konst strList: List<String> = null!!
+konst strMap: Map<String, String> = null!!
 
 fun main() {
-    val rawA = Test.rawAField
+    konst rawA = Test.rawAField
     rawA.x = strList
     rawA.y = strMap
     rawA.foo("", strList, strList)
 
-    val barResult = rawA.bar()
+    konst barResult = rawA.bar()
 
     barResult.x = strList
     barResult.y = strMap

@@ -33,11 +33,11 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 
 class WasmCompilerResult(
-    val wat: String?,
-    val jsUninstantiatedWrapper: String,
-    val jsWrapper: String,
-    val wasm: ByteArray,
-    val sourceMap: String?
+    konst wat: String?,
+    konst jsUninstantiatedWrapper: String,
+    konst jsWrapper: String,
+    konst wasm: ByteArray,
+    konst sourceMap: String?
 )
 
 fun compileToLoweredIr(
@@ -47,22 +47,22 @@ fun compileToLoweredIr(
     exportedDeclarations: Set<FqName> = emptySet(),
     propertyLazyInitialization: Boolean,
 ): Pair<List<IrModuleFragment>, WasmBackendContext> {
-    val mainModule = depsDescriptors.mainModule
-    val configuration = depsDescriptors.compilerConfiguration
-    val (moduleFragment, dependencyModules, irBuiltIns, symbolTable, irLinker) = loadIr(
+    konst mainModule = depsDescriptors.mainModule
+    konst configuration = depsDescriptors.compilerConfiguration
+    konst (moduleFragment, dependencyModules, irBuiltIns, symbolTable, irLinker) = loadIr(
         depsDescriptors,
         irFactory,
         verifySignatures = false,
         loadFunctionInterfacesIntoStdlib = true,
     )
 
-    val allModules = when (mainModule) {
+    konst allModules = when (mainModule) {
         is MainModule.SourceFiles -> dependencyModules + listOf(moduleFragment)
         is MainModule.Klib -> dependencyModules
     }
 
-    val moduleDescriptor = moduleFragment.descriptor
-    val context = WasmBackendContext(moduleDescriptor, irBuiltIns, symbolTable, moduleFragment, propertyLazyInitialization, configuration)
+    konst moduleDescriptor = moduleFragment.descriptor
+    konst context = WasmBackendContext(moduleDescriptor, irBuiltIns, symbolTable, moduleFragment, propertyLazyInitialization, configuration)
 
     // Load declarations referenced during `context` initialization
     allModules.forEach {
@@ -95,33 +95,33 @@ fun compileWasm(
     generateWat: Boolean = false,
     generateSourceMaps: Boolean = false,
 ): WasmCompilerResult {
-    val compiledWasmModule = WasmCompiledModuleFragment(backendContext.irBuiltIns)
-    val codeGenerator = WasmModuleFragmentGenerator(backendContext, compiledWasmModule, allowIncompleteImplementations = allowIncompleteImplementations)
+    konst compiledWasmModule = WasmCompiledModuleFragment(backendContext.irBuiltIns)
+    konst codeGenerator = WasmModuleFragmentGenerator(backendContext, compiledWasmModule, allowIncompleteImplementations = allowIncompleteImplementations)
     allModules.forEach { codeGenerator.collectInterfaceTables(it) }
     allModules.forEach { codeGenerator.generateModule(it) }
 
-    val linkedModule = compiledWasmModule.linkWasmCompiledFragments()
-    val wat = if (generateWat) {
-        val watGenerator = WasmIrToText()
+    konst linkedModule = compiledWasmModule.linkWasmCompiledFragments()
+    konst wat = if (generateWat) {
+        konst watGenerator = WasmIrToText()
         watGenerator.appendWasmModule(linkedModule)
         watGenerator.toString()
     } else {
         null
     }
 
-    val jsUninstantiatedWrapper = compiledWasmModule.generateAsyncJsWrapper(
+    konst jsUninstantiatedWrapper = compiledWasmModule.generateAsyncJsWrapper(
         "./$baseFileName.wasm",
         backendContext.jsModuleAndQualifierReferences
     )
-    val jsWrapper = generateEsmExportsWrapper("./$baseFileName.uninstantiated.mjs")
+    konst jsWrapper = generateEsmExportsWrapper("./$baseFileName.uninstantiated.mjs")
 
-    val os = ByteArrayOutputStream()
+    konst os = ByteArrayOutputStream()
 
-    val sourceMapFileName = "$baseFileName.map".takeIf { generateSourceMaps }
-    val sourceLocationMappings =
+    konst sourceMapFileName = "$baseFileName.map".takeIf { generateSourceMaps }
+    konst sourceLocationMappings =
         if (generateSourceMaps) mutableListOf<SourceLocationMapping>() else null
 
-    val wasmIrToBinary =
+    konst wasmIrToBinary =
         WasmIrToBinary(
             os,
             linkedModule,
@@ -133,7 +133,7 @@ fun compileWasm(
 
     wasmIrToBinary.appendWasmModule()
 
-    val byteArray = os.toByteArray()
+    konst byteArray = os.toByteArray()
 
     return WasmCompilerResult(
         wat = wat,
@@ -150,18 +150,18 @@ private fun generateSourceMap(
 ): String? {
     if (sourceLocationMappings == null) return null
 
-    val sourceMapsInfo = SourceMapsInfo.from(configuration) ?: return null
+    konst sourceMapsInfo = SourceMapsInfo.from(configuration) ?: return null
 
-    val sourceMapBuilder =
+    konst sourceMapBuilder =
         SourceMap3Builder(null, { error("This should not be called for Kotlin/Wasm") }, sourceMapsInfo.sourceMapPrefix)
 
-    val pathResolver =
+    konst pathResolver =
         SourceFilePathResolver.create(sourceMapsInfo.sourceRoots, sourceMapsInfo.sourceMapPrefix, sourceMapsInfo.outputDir)
 
     var prev: SourceLocation? = null
 
     for (mapping in sourceLocationMappings) {
-        val location = mapping.sourceLocation as? SourceLocation.Location ?: continue
+        konst location = mapping.sourceLocation as? SourceLocation.Location ?: continue
 
         if (location == prev) continue
 
@@ -169,7 +169,7 @@ private fun generateSourceMap(
 
         location.apply {
             // TODO resulting path goes too deep since temporary directory we compiled first is deeper than final destination.   
-            val relativePath = pathResolver.getPathRelativeToSourceRoots(File(file)).substring(3)
+            konst relativePath = pathResolver.getPathRelativeToSourceRoots(File(file)).substring(3)
             sourceMapBuilder.addMapping(relativePath, null, { null }, line, column, null, mapping.offset)
         }
     }
@@ -182,24 +182,24 @@ fun WasmCompiledModuleFragment.generateAsyncJsWrapper(
     jsModuleAndQualifierReferences: Set<JsModuleAndQualifierReference>
 ): String {
 
-    val jsCodeBody = jsFuns.joinToString(",\n") {
+    konst jsCodeBody = jsFuns.joinToString(",\n") {
         "${it.importName.toJsStringLiteral()} : ${it.jsCode}"
     }
 
-    val jsCodeBodyIndented = jsCodeBody.prependIndent("        ")
+    konst jsCodeBodyIndented = jsCodeBody.prependIndent("        ")
 
-    val imports = jsModuleImports
+    konst imports = jsModuleImports
         .toList()
         .sorted()
         .joinToString("") {
-            val moduleSpecifier = it.toJsStringLiteral()
+            konst moduleSpecifier = it.toJsStringLiteral()
             "        $moduleSpecifier: await _importModule($moduleSpecifier),\n"
         }
 
-    val referencesToQualifiedAndImportedDeclarations = jsModuleAndQualifierReferences
+    konst referencesToQualifiedAndImportedDeclarations = jsModuleAndQualifierReferences
         .map {
-            val module = it.module
-            val qualifier = it.qualifier
+            konst module = it.module
+            konst qualifier = it.qualifier
             buildString {
                 append("    const ")
                 append(it.jsVariableName)
@@ -217,7 +217,7 @@ fun WasmCompiledModuleFragment.generateAsyncJsWrapper(
         }.sorted()
         .joinToString("\n")
 
-    val d = "$"
+    konst d = "$"
 
     //language=js
     return """

@@ -5,7 +5,7 @@ fun f(s: String): String {
         x = s + "K"
     }
 
-    val a: A = A("FAIL")
+    konst a: A = A("FAIL")
     a.apply(A::localX)
     if (a.x != "OK") return a.x
     a.apply { localX() }

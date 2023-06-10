@@ -32,9 +32,9 @@ abstract class DescriptorBasedKotlinManglerImpl : AbstractKotlinMangler<Declarat
     override fun DeclarationDescriptor.isExported(compatibleMode: Boolean): Boolean = getExportChecker(compatibleMode).check(this, SpecialDeclarationType.REGULAR)
 }
 
-class Ir2DescriptorManglerAdapter(private val delegate: DescriptorBasedKotlinManglerImpl) : AbstractKotlinMangler<IrDeclaration>(),
+class Ir2DescriptorManglerAdapter(private konst delegate: DescriptorBasedKotlinManglerImpl) : AbstractKotlinMangler<IrDeclaration>(),
     KotlinMangler.IrMangler {
-    override val manglerName: String
+    override konst manglerName: String
         get() = delegate.manglerName
 
     override fun IrDeclaration.isExported(compatibleMode: Boolean): Boolean {

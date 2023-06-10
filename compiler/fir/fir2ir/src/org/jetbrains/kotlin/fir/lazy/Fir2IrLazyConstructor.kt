@@ -30,11 +30,11 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 
 class Fir2IrLazyConstructor(
     components: Fir2IrComponents,
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val fir: FirConstructor,
-    override val symbol: Fir2IrConstructorSymbol,
+    override konst fir: FirConstructor,
+    override konst symbol: Fir2IrConstructorSymbol,
 ) : IrConstructor(), AbstractFir2IrLazyDeclaration<FirConstructor>, Fir2IrTypeParametersContainer,
     Fir2IrComponents by components {
     init {
@@ -51,7 +51,7 @@ class Fir2IrLazyConstructor(
         set(_) = mutationNotSupported()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ClassConstructorDescriptor
+    override konst descriptor: ClassConstructorDescriptor
         get() = symbol.descriptor
 
     override var isInline: Boolean
@@ -80,8 +80,8 @@ class Fir2IrLazyConstructor(
     }
 
     override var dispatchReceiverParameter: IrValueParameter? by lazyVar(lock) {
-        val containingClass = parent as? IrClass
-        val outerClass = containingClass?.parentClassOrNull
+        konst containingClass = parent as? IrClass
+        konst outerClass = containingClass?.parentClassOrNull
         if (containingClass?.isInner == true && outerClass != null) {
             declarationStorage.enterScope(this)
             declareThisReceiverParameter(
@@ -97,7 +97,7 @@ class Fir2IrLazyConstructor(
 
     override var contextReceiverParametersCount: Int = fir.contextReceivers.size
 
-    override var valueParameters: List<IrValueParameter> by lazyVar(lock) {
+    override var konstueParameters: List<IrValueParameter> by lazyVar(lock) {
         declarationStorage.enterScope(this)
 
         buildList {
@@ -107,9 +107,9 @@ class Fir2IrLazyConstructor(
                 this@buildList,
             )
 
-            fir.valueParameters.mapIndexedTo(this) { index, valueParameter ->
+            fir.konstueParameters.mapIndexedTo(this) { index, konstueParameter ->
                 declarationStorage.createIrParameter(
-                    valueParameter, index + contextReceiverParametersCount,
+                    konstueParameter, index + contextReceiverParametersCount,
                     useStubForDefaultValueStub = (parent as? IrClass)?.name != Name.identifier("Enum")
                 ).apply {
                     this.parent = this@Fir2IrLazyConstructor
@@ -124,7 +124,7 @@ class Fir2IrLazyConstructor(
         get() = null
         set(_) = error("We should never need to store metadata of external declarations.")
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = fir.containerSource
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R {

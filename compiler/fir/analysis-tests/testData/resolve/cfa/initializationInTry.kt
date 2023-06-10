@@ -4,10 +4,10 @@ fun getNullableString(): String? = null
 fun takeNullableString(s: String?) {}
 
 fun test_1() {
-    val x: String?
+    konst x: String?
 
     try {
-        val y = getNullableString()!! // 3
+        konst y = getNullableString()!! // 3
         x = getNullableString()
     } finally {
         Unit
@@ -17,10 +17,10 @@ fun test_1() {
 }
 
 fun test_2() {
-    val x: String?
+    konst x: String?
 
     try {
-        val y = getNullableString()
+        konst y = getNullableString()
         x = getNullableString()
     } finally {
         Unit

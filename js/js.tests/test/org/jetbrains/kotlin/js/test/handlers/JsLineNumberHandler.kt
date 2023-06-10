@@ -34,17 +34,17 @@ import java.io.File
  */
 class JsLineNumberHandler(testServices: TestServices) : JsBinaryArtifactHandler(testServices) {
 
-    private val translationModeForIr = TranslationMode.PER_MODULE_DEV
+    private konst translationModeForIr = TranslationMode.PER_MODULE_DEV
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {}
 
     override fun processModule(module: TestModule, info: BinaryArtifacts.Js) {
-        when (val artifact = info.unwrap()) {
+        when (konst artifact = info.unwrap()) {
             is BinaryArtifacts.Js.OldJsArtifact ->
                 verifyModule(module, TranslationMode.FULL_DEV, artifact.translationResult.cast<TranslationResult.Success>().program, "JS")
             is BinaryArtifacts.Js.JsIrArtifact -> {
-                val testModules = testServices.moduleStructure.modules
-                val moduleId2TestModule = testModules.associateBy { it.name.safeModuleName }
+                konst testModules = testServices.moduleStructure.modules
+                konst moduleId2TestModule = testModules.associateBy { it.name.safeModuleName }
 
                 var verifiedModuleCount = 0
 
@@ -80,13 +80,13 @@ class JsLineNumberHandler(testServices: TestServices) : JsBinaryArtifactHandler(
         jsProgram: JsProgram,
         backendPattern: String
     ) {
-        val baseOutputPath = JsEnvironmentConfigurator.getJsModuleArtifactPath(testServices, module.name, translationMode)
+        konst baseOutputPath = JsEnvironmentConfigurator.getJsModuleArtifactPath(testServices, module.name, translationMode)
 
-        val lineCollector = LineCollector()
+        konst lineCollector = LineCollector()
         lineCollector.accept(jsProgram)
 
-        val generatedCode = kotlin.run {
-            val programOutput = TextOutputImpl()
+        konst generatedCode = kotlin.run {
+            konst programOutput = TextOutputImpl()
             jsProgram.globalBlock.accept(LineOutputToStringVisitor(programOutput, lineCollector))
             programOutput.toString()
         }
@@ -96,9 +96,9 @@ class JsLineNumberHandler(testServices: TestServices) : JsBinaryArtifactHandler(
             writeText(generatedCode)
         }
 
-        val linesPattern = Regex("^ *// *LINES\\($backendPattern\\): *(.*)$", RegexOption.MULTILINE)
+        konst linesPattern = Regex("^ *// *LINES\\($backendPattern\\): *(.*)$", RegexOption.MULTILINE)
 
-        val linesMatcher = module.files
+        konst linesMatcher = module.files
             .firstNotNullOfOrNull { linesPattern.find(it.originalContent) }
             ?: testServices.assertions.fail {
                 "'// LINES($backendPattern): ' comment was not found in source file. Generated code is:\n$generatedCode"
@@ -106,10 +106,10 @@ class JsLineNumberHandler(testServices: TestServices) : JsBinaryArtifactHandler(
 
         fun List<Int?>.render() = joinToString(" ") { it?.toString() ?: "*" }
 
-        val expectedLines =
-            linesMatcher.groups[1]!!.value.split(Regex("\\s+")).map { if (it == "*") null else it.toInt() }.render()
+        konst expectedLines =
+            linesMatcher.groups[1]!!.konstue.split(Regex("\\s+")).map { if (it == "*") null else it.toInt() }.render()
 
-        val actualLines = lineCollector.lines
+        konst actualLines = lineCollector.lines
             .dropLastWhile { it == null }
             .map { lineNumber -> lineNumber?.let { it + 1 } }
             .render()

@@ -9,7 +9,7 @@
 fun case1(): Int {
     var a = 1
     try {
-        throw Exception() //invalid UNREACHABLE_CODE diagnostic
+        throw Exception() //inkonstid UNREACHABLE_CODE diagnostic
     } catch (e: Exception) {
         a = 5
         return++a

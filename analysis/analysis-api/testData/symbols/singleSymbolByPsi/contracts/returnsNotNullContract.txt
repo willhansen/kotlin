@@ -58,7 +58,7 @@ KtFunctionSymbol:
     type: kotlin/Any?
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

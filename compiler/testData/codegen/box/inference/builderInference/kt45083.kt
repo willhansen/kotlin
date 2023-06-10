@@ -2,13 +2,13 @@
 
 import kotlin.experimental.ExperimentalTypeInference
 object Hello {
-    val hello = "hello"
+    konst hello = "hello"
 }
 
 @OptIn(ExperimentalTypeInference::class)
 fun <E> buildList0(builder: MutableList<E>.() -> Unit): List<E> = mutableListOf<E>().apply { builder() }
 
-val numbers = buildList0 {
+konst numbers = buildList0 {
     add(Hello.let { it::hello }.get())
 }
 

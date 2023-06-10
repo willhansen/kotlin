@@ -3,7 +3,7 @@ enum class E {
 }
 
 fun foo(e: E?): String {
-    val c = when (e) {
+    konst c = when (e) {
         null -> "Fail: null"
         E.B -> "OK"
         E.A -> "Fail: A"

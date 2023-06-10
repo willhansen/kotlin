@@ -28,31 +28,31 @@ import org.jetbrains.kotlin.types.typeUtil.TypeUtilsKt;
 
 public class ReceiverParameterDescriptorImpl extends AbstractReceiverParameterDescriptor {
     private final DeclarationDescriptor containingDeclaration;
-    private ReceiverValue value;
+    private ReceiverValue konstue;
 
     public ReceiverParameterDescriptorImpl(
             @NotNull DeclarationDescriptor containingDeclaration,
-            @NotNull ReceiverValue value,
+            @NotNull ReceiverValue konstue,
             @NotNull Annotations annotations
     ) {
-        this(containingDeclaration, value, annotations, SpecialNames.THIS);
+        this(containingDeclaration, konstue, annotations, SpecialNames.THIS);
     }
 
     public ReceiverParameterDescriptorImpl(
             @NotNull DeclarationDescriptor containingDeclaration,
-            @NotNull ReceiverValue value,
+            @NotNull ReceiverValue konstue,
             @NotNull Annotations annotations,
             @NotNull Name name
     ) {
         super(annotations, name);
         this.containingDeclaration = containingDeclaration;
-        this.value = value;
+        this.konstue = konstue;
     }
 
     @NotNull
     @Override
     public ReceiverValue getValue() {
-        return value;
+        return konstue;
     }
 
     @NotNull
@@ -64,11 +64,11 @@ public class ReceiverParameterDescriptorImpl extends AbstractReceiverParameterDe
     @NotNull
     @Override
     public ReceiverParameterDescriptor copy(@NotNull DeclarationDescriptor newOwner) {
-        return new ReceiverParameterDescriptorImpl(newOwner, value, getAnnotations());
+        return new ReceiverParameterDescriptorImpl(newOwner, konstue, getAnnotations());
     }
 
     public void setOutType(@NotNull KotlinType outType) {
-        assert TypeUtilsKt.shouldBeUpdated(this.value.getType());
-        this.value = value.replaceType(outType);
+        assert TypeUtilsKt.shouldBeUpdated(this.konstue.getType());
+        this.konstue = konstue.replaceType(outType);
     }
 }

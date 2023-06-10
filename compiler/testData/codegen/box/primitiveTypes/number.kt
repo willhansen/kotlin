@@ -29,7 +29,7 @@ class FortyTwo : Number() {
 }
 
 fun box(): String {
-    val extractor = FortyTwoExtractor()
+    konst extractor = FortyTwoExtractor()
     if (extractor.intValue() != 42) return "FAIL"
     return "OK"
 }

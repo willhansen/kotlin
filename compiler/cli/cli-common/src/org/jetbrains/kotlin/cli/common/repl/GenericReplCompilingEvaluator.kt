@@ -20,22 +20,22 @@ import java.io.File
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.write
 
-open class GenericReplCompilingEvaluatorBase(
-    val compiler: ReplCompilerWithoutCheck,
-    val evaluator: ReplEvaluator,
-    private val fallbackScriptArgs: ScriptArgsWithTypes? = null
-) : ReplFullEvaluator {
+open class GenericReplCompilingEkonstuatorBase(
+    konst compiler: ReplCompilerWithoutCheck,
+    konst ekonstuator: ReplEkonstuator,
+    private konst fallbackScriptArgs: ScriptArgsWithTypes? = null
+) : ReplFullEkonstuator {
 
-    override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> = AggregatedReplStageState(compiler.createState(lock), evaluator.createState(lock), lock)
+    override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> = AggregatedReplStageState(compiler.createState(lock), ekonstuator.createState(lock), lock)
 
-    override fun compileAndEval(state: IReplStageState<*>, codeLine: ReplCodeLine, scriptArgs: ScriptArgsWithTypes?, invokeWrapper: InvokeWrapper?): ReplEvalResult {
+    override fun compileAndEkonst(state: IReplStageState<*>, codeLine: ReplCodeLine, scriptArgs: ScriptArgsWithTypes?, invokeWrapper: InvokeWrapper?): ReplEkonstResult {
         if (codeLine.code.trim().isEmpty()) {
-            return ReplEvalResult.UnitResult()
+            return ReplEkonstResult.UnitResult()
         }
 
         return state.lock.write {
-            val aggregatedState = state.asState(AggregatedReplStageState::class.java)
-            val compiled = compiler.compile(state, codeLine)
+            konst aggregatedState = state.asState(AggregatedReplStageState::class.java)
+            konst compiled = compiler.compile(state, codeLine)
             when (compiled) {
                 is ReplCompileResult.Error -> {
                     aggregatedState.apply {
@@ -44,15 +44,15 @@ open class GenericReplCompilingEvaluatorBase(
                             adjustHistories() // needed due to statefulness of AnalyzerEngine - in case of compilation errors the line name reuse leads to #KT-17921
                         }
                     }
-                    ReplEvalResult.Error.CompileTime(compiled.message, compiled.location)
+                    ReplEkonstResult.Error.CompileTime(compiled.message, compiled.location)
                 }
-                is ReplCompileResult.Incomplete -> ReplEvalResult.Incomplete(compiled.message)
+                is ReplCompileResult.Incomplete -> ReplEkonstResult.Incomplete(compiled.message)
                 is ReplCompileResult.CompiledClasses -> {
-                    val result = eval(state, compiled, scriptArgs, invokeWrapper)
+                    konst result = ekonst(state, compiled, scriptArgs, invokeWrapper)
                     when (result) {
-                        is ReplEvalResult.Error,
-                        is ReplEvalResult.HistoryMismatch,
-                        is ReplEvalResult.Incomplete -> {
+                        is ReplEkonstResult.Error,
+                        is ReplEkonstResult.HistoryMismatch,
+                        is ReplEkonstResult.Incomplete -> {
                             aggregatedState.apply {
                                 lock.write {
                                     if (state1.history.size > state2.history.size) {
@@ -63,8 +63,8 @@ open class GenericReplCompilingEvaluatorBase(
                             }
                             result
                         }
-                        is ReplEvalResult.ValueResult,
-                        is ReplEvalResult.UnitResult ->
+                        is ReplEkonstResult.ValueResult,
+                        is ReplEkonstResult.UnitResult ->
                             result
                     }
                 }
@@ -72,36 +72,36 @@ open class GenericReplCompilingEvaluatorBase(
         }
     }
 
-    override fun eval(state: IReplStageState<*>, compileResult: ReplCompileResult.CompiledClasses, scriptArgs: ScriptArgsWithTypes?, invokeWrapper: InvokeWrapper?): ReplEvalResult =
-        evaluator.eval(state, compileResult, scriptArgs, invokeWrapper)
+    override fun ekonst(state: IReplStageState<*>, compileResult: ReplCompileResult.CompiledClasses, scriptArgs: ScriptArgsWithTypes?, invokeWrapper: InvokeWrapper?): ReplEkonstResult =
+        ekonstuator.ekonst(state, compileResult, scriptArgs, invokeWrapper)
 
-    override fun compileToEvaluable(state: IReplStageState<*>, codeLine: ReplCodeLine, defaultScriptArgs: ScriptArgsWithTypes?): Pair<ReplCompileResult, Evaluable?> {
-        val compiled = compiler.compile(state, codeLine)
+    override fun compileToEkonstuable(state: IReplStageState<*>, codeLine: ReplCodeLine, defaultScriptArgs: ScriptArgsWithTypes?): Pair<ReplCompileResult, Ekonstuable?> {
+        konst compiled = compiler.compile(state, codeLine)
         return when (compiled) {
-            // TODO: seems usafe when delayed evaluation may happen after some more compileAndEval calls on the same state; check and fix or protect
-            is ReplCompileResult.CompiledClasses -> Pair(compiled, DelayedEvaluation(state, compiled, evaluator, defaultScriptArgs ?: fallbackScriptArgs))
+            // TODO: seems usafe when delayed ekonstuation may happen after some more compileAndEkonst calls on the same state; check and fix or protect
+            is ReplCompileResult.CompiledClasses -> Pair(compiled, DelayedEkonstuation(state, compiled, ekonstuator, defaultScriptArgs ?: fallbackScriptArgs))
             else -> Pair(compiled, null)
         }
     }
 
-    class DelayedEvaluation(private val state: IReplStageState<*>,
-                            override val compiledCode: ReplCompileResult.CompiledClasses,
-                            private val evaluator: ReplEvaluator,
-                            private val defaultScriptArgs: ScriptArgsWithTypes?) : Evaluable {
-        override fun eval(scriptArgs: ScriptArgsWithTypes?, invokeWrapper: InvokeWrapper?): ReplEvalResult =
-            evaluator.eval(state, compiledCode, scriptArgs ?: defaultScriptArgs, invokeWrapper)
+    class DelayedEkonstuation(private konst state: IReplStageState<*>,
+                            override konst compiledCode: ReplCompileResult.CompiledClasses,
+                            private konst ekonstuator: ReplEkonstuator,
+                            private konst defaultScriptArgs: ScriptArgsWithTypes?) : Ekonstuable {
+        override fun ekonst(scriptArgs: ScriptArgsWithTypes?, invokeWrapper: InvokeWrapper?): ReplEkonstResult =
+            ekonstuator.ekonst(state, compiledCode, scriptArgs ?: defaultScriptArgs, invokeWrapper)
     }
 }
 
-class GenericReplCompilingEvaluator(
+class GenericReplCompilingEkonstuator(
     compiler: ReplCompilerWithoutCheck,
     baseClasspath: Iterable<File>,
     baseClassloader: ClassLoader? = Thread.currentThread().contextClassLoader,
     fallbackScriptArgs: ScriptArgsWithTypes? = null,
     repeatingMode: ReplRepeatingMode = ReplRepeatingMode.REPEAT_ONLY_MOST_RECENT
-) : GenericReplCompilingEvaluatorBase(
+) : GenericReplCompilingEkonstuatorBase(
     compiler,
-    GenericReplEvaluator(baseClasspath, baseClassloader, fallbackScriptArgs, repeatingMode),
+    GenericReplEkonstuator(baseClasspath, baseClassloader, fallbackScriptArgs, repeatingMode),
     fallbackScriptArgs
 )
 

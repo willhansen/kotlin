@@ -1,6 +1,6 @@
 fun foo(s: String?): String {
   { // BLOCK
-    val tmp0_safe_receiver: String? = s
+    konst tmp0_safe_receiver: String? = s
     when {
       EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
       else -> tmp0_safe_receiver.let<String, Nothing>(block = local fun <anonymous>(it: String): Nothing {
@@ -14,12 +14,12 @@ fun foo(s: String?): String {
 
 fun bar(s: String?, t: String?): String {
   { // BLOCK
-    val tmp0_safe_receiver: String? = s
+    konst tmp0_safe_receiver: String? = s
     when {
       EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
       else -> tmp0_safe_receiver.let<String, Nothing?>(block = local fun <anonymous>(it: String): Nothing? {
         return { // BLOCK
-          val tmp0_safe_receiver: String? = t
+          konst tmp0_safe_receiver: String? = t
           when {
             EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
             else -> tmp0_safe_receiver.let<String, Nothing>(block = local fun <anonymous>(it: String): Nothing {
@@ -35,10 +35,10 @@ fun bar(s: String?, t: String?): String {
   return ""
 }
 
-val String?.baz: String
+konst String?.baz: String
   get(): String {
     { // BLOCK
-      val tmp0_safe_receiver: String? = <this>
+      konst tmp0_safe_receiver: String? = <this>
       when {
         EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
         else -> tmp0_safe_receiver.let<String, Nothing>(block = local fun <anonymous>(it: String): Nothing {

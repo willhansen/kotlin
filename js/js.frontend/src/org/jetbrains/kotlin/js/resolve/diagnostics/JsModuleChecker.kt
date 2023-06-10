@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.getSuperClassNotAny
 
 object JsModuleChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val trace = context.trace
+        konst trace = context.trace
         checkSuperClass(declaration, descriptor, trace)
         if (AnnotationsUtils.getModuleName(descriptor) == null && !AnnotationsUtils.isNonModule(descriptor)) return
 
@@ -44,7 +44,7 @@ object JsModuleChecker : DeclarationChecker {
         }
 
         if (DescriptorUtils.isTopLevelDeclaration(descriptor)) {
-            val isFileModuleOrNonModule = AnnotationsUtils.getFileModuleName(trace.bindingContext, descriptor) != null ||
+            konst isFileModuleOrNonModule = AnnotationsUtils.getFileModuleName(trace.bindingContext, descriptor) != null ||
                                           AnnotationsUtils.isFromNonModuleFile(trace.bindingContext, descriptor)
             if (isFileModuleOrNonModule) {
                 trace.report(ErrorsJs.NESTED_JS_MODULE_PROHIBITED.on(declaration))
@@ -54,9 +54,9 @@ object JsModuleChecker : DeclarationChecker {
 
     private fun checkSuperClass(declaration: KtDeclaration, descriptor: DeclarationDescriptor, trace: BindingTrace) {
         if (descriptor !is ClassDescriptor) return
-        val superClass = descriptor.getSuperClassNotAny() ?: return
+        konst superClass = descriptor.getSuperClassNotAny() ?: return
 
-        val psi = (declaration as KtClassOrObject).superTypeListEntries.firstOrNull { entry ->
+        konst psi = (declaration as KtClassOrObject).superTypeListEntries.firstOrNull { entry ->
             trace[BindingContext.TYPE, entry.typeReference]?.constructor?.declarationDescriptor == superClass
         }
 

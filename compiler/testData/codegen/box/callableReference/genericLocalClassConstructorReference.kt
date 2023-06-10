@@ -1,18 +1,18 @@
 
 // KT-42025
 
-open class L<LL>(val ll: LL)
+open class L<LL>(konst ll: LL)
 
-class Rec<T>(val rt: T)
+class Rec<T>(konst rt: T)
 
 fun <FT> Rec<FT>.fn(): L<FT> {
-    class FLocal<LT>(lt: LT, val pt: FT): L<LT>(lt)
+    class FLocal<LT>(lt: LT, konst pt: FT): L<LT>(lt)
     return foo2(rt, rt, ::FLocal)
 }
 
-val <PT> Rec<PT>.p: L<PT>
+konst <PT> Rec<PT>.p: L<PT>
     get() {
-        class PLocal<LT>(lt: LT, val pt: PT): L<LT>(lt)
+        class PLocal<LT>(lt: LT, konst pt: PT): L<LT>(lt)
         return foo2(rt, rt, ::PLocal)
     }
 

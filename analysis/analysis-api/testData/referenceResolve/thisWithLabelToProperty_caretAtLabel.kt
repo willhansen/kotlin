@@ -1,5 +1,5 @@
 class Foo {
-    val String.foo : Any
+    konst String.foo : Any
     get() {
         return this@f<caret>oo
     }

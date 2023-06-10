@@ -1,73 +1,73 @@
 fun testBoolean(v: Boolean): Boolean {
-    var value = false
+    var konstue = false
     fun setValue(v: Boolean) {
-        value = v
+        konstue = v
     }
     setValue(v)
-    return value
+    return konstue
 }
 
 fun testChar(v: Char): Char {
-    var value = 0.toChar()
+    var konstue = 0.toChar()
     fun setValue(v: Char) {
-        value = v
+        konstue = v
     }
     setValue(v)
-    return value
+    return konstue
 }
 
 fun testByte(v: Byte): Byte {
-    var value = 0.toByte()
+    var konstue = 0.toByte()
     fun setValue(v: Byte) {
-        value = v
+        konstue = v
     }
     setValue(v)
-    return value
+    return konstue
 }
 
 fun testShort(v: Short): Short {
-    var value = 0.toShort()
+    var konstue = 0.toShort()
     fun setValue(v: Short) {
-        value = v
+        konstue = v
     }
     setValue(v)
-    return value
+    return konstue
 }
 
 fun testInt(v: Int): Int {
-    var value = 0.toInt()
+    var konstue = 0.toInt()
     fun setValue(v: Int) {
-        value = v
+        konstue = v
     }
     setValue(v)
-    return value
+    return konstue
 }
 
 fun testLong(v: Long): Long {
-    var value = 0.toLong()
+    var konstue = 0.toLong()
     fun setValue(v: Long) {
-        value = v
+        konstue = v
     }
     setValue(v)
-    return value
+    return konstue
 }
 
 fun testFloat(v: Float): Float {
-    var value = 0.toFloat()
+    var konstue = 0.toFloat()
     fun setValue(v: Float) {
-        value = v
+        konstue = v
     }
     setValue(v)
-    return value
+    return konstue
 }
 
 fun testDouble(v: Double): Double {
-    var value = 0.toDouble()
+    var konstue = 0.toDouble()
     fun setValue(v: Double) {
-        value = v
+        konstue = v
     }
     setValue(v)
-    return value
+    return konstue
 }
 
 fun box(): String {

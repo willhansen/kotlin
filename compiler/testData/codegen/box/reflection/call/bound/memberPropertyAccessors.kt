@@ -4,21 +4,21 @@
 import kotlin.reflect.*
 import kotlin.test.assertEquals
 
-class C(val x: Int, var y: Int) {
-    val xx: Int
+class C(konst x: Int, var y: Int) {
+    konst xx: Int
         get() = x
 
     var yy: Int
         get() = y
-        set(value) { y = value }
+        set(konstue) { y = konstue }
 }
 
-val c = C(1, 2)
+konst c = C(1, 2)
 
-val c_x = c::x
-val c_xx = c::xx
-val c_y = c::y
-val c_yy = c::yy
+konst c_x = c::x
+konst c_xx = c::xx
+konst c_y = c::y
+konst c_yy = c::yy
 
 fun box(): String {
     assertEquals(1, c_x.getter())

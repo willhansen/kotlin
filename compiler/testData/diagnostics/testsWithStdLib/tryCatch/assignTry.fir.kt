@@ -5,7 +5,7 @@ class ExcA : Exception()
 class ExcB : Exception()
 
 fun test2() {
-    val s: String? = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>try {
+    konst s: String? = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>try {
         ""
     }
     catch (e: ExcA) {
@@ -18,7 +18,7 @@ fun test2() {
 }
 
 fun test3() {
-    val s: String? = try {
+    konst s: String? = try {
         ""
     }
     catch (e: ExcA) {
@@ -31,7 +31,7 @@ fun test3() {
 }
 
 fun test4() {
-    val s: String? = try {
+    konst s: String? = try {
         ""
     }
     catch (e: ExcA) {
@@ -44,7 +44,7 @@ fun test4() {
 }
 
 fun test5() {
-    val s: String? = try {
+    konst s: String? = try {
         ""
     }
     catch (e: ExcA) {
@@ -57,7 +57,7 @@ fun test5() {
 }
 
 fun test6() {
-    val s: String? = try {
+    konst s: String? = try {
         ""
     }
     catch (e: ExcA) {
@@ -70,7 +70,7 @@ fun test6() {
 }
 
 fun test7() {
-    val s: String? = try {
+    konst s: String? = try {
         ""
     }
     catch (e: ExcA) {
@@ -83,7 +83,7 @@ fun test7() {
 }
 
 fun test8() {
-    val s = try {
+    konst s = try {
         ""
     } catch (e: ExcA) {
         null
@@ -92,7 +92,7 @@ fun test8() {
 }
 
 fun test9() {
-    val s = try {
+    konst s = try {
         ""
     } catch (e: ExcA) {
         ""
@@ -101,7 +101,7 @@ fun test9() {
 }
 
 fun test10() {
-    val x = try {
+    konst x = try {
         ""
     } finally {
         42

@@ -1,11 +1,11 @@
 // MODULE: lib
 // FILE: Class.kt
 
-annotation class Ann(val p: String)
+annotation class Ann(konst p: String)
 
 class Class {
     object Obj {
-        const val Const = "const"
+        const konst Const = "const"
     }
 }
 

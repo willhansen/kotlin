@@ -27,18 +27,18 @@ import org.jetbrains.kotlin.name.Name
 import kotlin.collections.set
 
 internal fun createLlvmDeclarations(generationState: NativeGenerationState, irModule: IrModuleFragment): LlvmDeclarations {
-    val generator = DeclarationsGeneratorVisitor(generationState)
+    konst generator = DeclarationsGeneratorVisitor(generationState)
     irModule.acceptChildrenVoid(generator)
     return LlvmDeclarations(generator.uniques)
 }
 
 // Please note, that llvmName is part of the ABI, and cannot be liberally changed.
-enum class UniqueKind(val llvmName: String) {
+enum class UniqueKind(konst llvmName: String) {
     UNIT("theUnitInstance"),
     EMPTY_ARRAY("theEmptyArray")
 }
 
-internal class LlvmDeclarations(private val unique: Map<UniqueKind, UniqueLlvmDeclarations>) {
+internal class LlvmDeclarations(private konst unique: Map<UniqueKind, UniqueLlvmDeclarations>) {
     fun forFunction(function: IrFunction): LlvmCallable =
             forFunctionOrNull(function) ?: with(function) {
                 error("$name in $file/${parent.fqNameForIrSerialization}")
@@ -61,39 +61,39 @@ internal class LlvmDeclarations(private val unique: Map<UniqueKind, UniqueLlvmDe
 }
 
 internal class ClassLlvmDeclarations(
-        val bodyType: LLVMTypeRef,
-        val typeInfoGlobal: StaticData.Global,
-        val writableTypeInfoGlobal: StaticData.Global?,
-        val typeInfo: ConstPointer,
-        val objCDeclarations: KotlinObjCClassLlvmDeclarations?,
-        val alignment: Int,
-        val fieldIndices: Map<IrFieldSymbol, Int>
+        konst bodyType: LLVMTypeRef,
+        konst typeInfoGlobal: StaticData.Global,
+        konst writableTypeInfoGlobal: StaticData.Global?,
+        konst typeInfo: ConstPointer,
+        konst objCDeclarations: KotlinObjCClassLlvmDeclarations?,
+        konst alignment: Int,
+        konst fieldIndices: Map<IrFieldSymbol, Int>
 )
 
 internal class KotlinObjCClassLlvmDeclarations(
-        val classInfoGlobal: StaticData.Global,
-        val bodyOffsetGlobal: StaticData.Global
+        konst classInfoGlobal: StaticData.Global,
+        konst bodyOffsetGlobal: StaticData.Global
 )
 
-internal class FieldLlvmDeclarations(val index: Int, val classBodyType: LLVMTypeRef, val alignment: Int)
+internal class FieldLlvmDeclarations(konst index: Int, konst classBodyType: LLVMTypeRef, konst alignment: Int)
 
-internal class StaticFieldLlvmDeclarations(val storageAddressAccess: AddressAccess, val alignment: Int)
+internal class StaticFieldLlvmDeclarations(konst storageAddressAccess: AddressAccess, konst alignment: Int)
 
-internal class UniqueLlvmDeclarations(val pointer: ConstPointer)
+internal class UniqueLlvmDeclarations(konst pointer: ConstPointer)
 
 internal data class ClassBodyAndAlignmentInfo(
-        val body: LLVMTypeRef,
-        val alignment: Int,
-        val fieldsIndices: Map<IrFieldSymbol, Int>
+        konst body: LLVMTypeRef,
+        konst alignment: Int,
+        konst fieldsIndices: Map<IrFieldSymbol, Int>
 )
 
 private fun ContextUtils.createClassBody(name: String, fields: List<ClassLayoutBuilder.FieldInfo>): ClassBodyAndAlignmentInfo {
-    val classType = LLVMStructCreateNamed(LLVMGetModuleContext(llvm.module), name)!!
-    val packed = fields.any { LLVMABIAlignmentOfType(runtime.targetData, it.type.toLLVMType(llvm)) != it.alignment }
-    val alignment = maxOf(runtime.objectAlignment, fields.maxOfOrNull { it.alignment } ?: 0)
-    val indices = mutableMapOf<IrFieldSymbol, Int>()
+    konst classType = LLVMStructCreateNamed(LLVMGetModuleContext(llvm.module), name)!!
+    konst packed = fields.any { LLVMABIAlignmentOfType(runtime.targetData, it.type.toLLVMType(llvm)) != it.alignment }
+    konst alignment = maxOf(runtime.objectAlignment, fields.maxOfOrNull { it.alignment } ?: 0)
+    konst indices = mutableMapOf<IrFieldSymbol, Int>()
 
-    val fieldTypes = buildList {
+    konst fieldTypes = buildList {
         var currentOffset = 0L
         fun addAndCount(type: LLVMTypeRef) {
             add(type)
@@ -102,9 +102,9 @@ private fun ContextUtils.createClassBody(name: String, fields: List<ClassLayoutB
         addAndCount(runtime.objHeaderType)
         for (field in fields) {
             if (packed) {
-                val offset = (currentOffset % field.alignment).toInt()
+                konst offset = (currentOffset % field.alignment).toInt()
                 if (offset != 0) {
-                    val toInsert = field.alignment - offset
+                    konst toInsert = field.alignment - offset
                     addAndCount(LLVMArrayType(llvm.int8Type, toInsert)!!)
                 }
                 require(currentOffset % field.alignment == 0L)
@@ -129,25 +129,25 @@ private fun ContextUtils.createClassBody(name: String, fields: List<ClassLayoutB
     return ClassBodyAndAlignmentInfo(classType, alignment, indices)
 }
 
-private class DeclarationsGeneratorVisitor(override val generationState: NativeGenerationState)
+private class DeclarationsGeneratorVisitor(override konst generationState: NativeGenerationState)
     : IrElementVisitorVoid, ContextUtils {
 
-    val uniques = mutableMapOf<UniqueKind, UniqueLlvmDeclarations>()
+    konst uniques = mutableMapOf<UniqueKind, UniqueLlvmDeclarations>()
 
-    class Namer(val prefix: String) {
-        private val names = mutableMapOf<IrDeclaration, Name>()
-        private val counts = mutableMapOf<FqName, Int>()
+    class Namer(konst prefix: String) {
+        private konst names = mutableMapOf<IrDeclaration, Name>()
+        private konst counts = mutableMapOf<FqName, Int>()
 
         fun getName(parent: FqName, declaration: IrDeclaration): Name {
             return names.getOrPut(declaration) {
-                val count = counts.getOrDefault(parent, 0) + 1
+                konst count = counts.getOrDefault(parent, 0) + 1
                 counts[parent] = count
                 Name.identifier(prefix + count)
             }
         }
     }
 
-    private val objectNamer = Namer("object-")
+    private konst objectNamer = Namer("object-")
 
     private fun getLocalName(parent: FqName, declaration: IrDeclaration): Name {
         if (declaration.isAnonymousObject) {
@@ -158,14 +158,14 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
     }
 
     private fun getFqName(declaration: IrDeclaration): FqName {
-        val parent = declaration.parent
-        val parentFqName = when (parent) {
+        konst parent = declaration.parent
+        konst parentFqName = when (parent) {
             is IrPackageFragment -> parent.packageFqName
             is IrDeclaration -> getFqName(parent)
             else -> error(parent)
         }
 
-        val localName = getLocalName(parentFqName, declaration)
+        konst localName = getLocalName(parentFqName, declaration)
         return parentFqName.child(localName)
     }
 
@@ -185,33 +185,33 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
 
     override fun visitClass(declaration: IrClass) {
         if (declaration.requiresRtti()) {
-            val classLlvmDeclarations = createClassDeclarations(declaration)
+            konst classLlvmDeclarations = createClassDeclarations(declaration)
             declaration.metadata = KonanMetadata.Class(declaration, classLlvmDeclarations, context.getLayoutBuilder(declaration))
         }
         super.visitClass(declaration)
     }
 
     private fun createClassDeclarations(declaration: IrClass): ClassLlvmDeclarations {
-        val internalName = qualifyInternalName(declaration)
+        konst internalName = qualifyInternalName(declaration)
 
-        val fields = context.getLayoutBuilder(declaration).getFields(llvm)
-        val (bodyType, alignment, fieldIndices) = createClassBody("kclassbody:$internalName", fields)
+        konst fields = context.getLayoutBuilder(declaration).getFields(llvm)
+        konst (bodyType, alignment, fieldIndices) = createClassBody("kclassbody:$internalName", fields)
 
         require(alignment == runtime.objectAlignment) {
             "Over-aligned objects are not supported yet: expected alignment for ${declaration.fqNameWhenAvailable} is $alignment"
         }
 
 
-        val typeInfoPtr: ConstPointer
-        val typeInfoGlobal: StaticData.Global
+        konst typeInfoPtr: ConstPointer
+        konst typeInfoGlobal: StaticData.Global
 
-        val typeInfoSymbolName = if (declaration.isExported()) {
+        konst typeInfoSymbolName = if (declaration.isExported()) {
             declaration.computeTypeInfoSymbolName()
         } else {
             if (!context.config.producePerFileCache)
                 "${MangleConstant.CLASS_PREFIX}:$internalName"
             else {
-                val containerName = (generationState.cacheDeserializationStrategy as CacheDeserializationStrategy.SingleFile).filePath
+                konst containerName = (generationState.cacheDeserializationStrategy as CacheDeserializationStrategy.SingleFile).filePath
                 declaration.computePrivateTypeInfoSymbolName(containerName)
             }
         }
@@ -219,16 +219,16 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
         if (declaration.typeInfoHasVtableAttached) {
             // Create the special global consisting of TypeInfo and vtable.
 
-            val typeInfoGlobalName = "ktypeglobal:$internalName"
+            konst typeInfoGlobalName = "ktypeglobal:$internalName"
 
-            val typeInfoWithVtableType = llvm.structType(
+            konst typeInfoWithVtableType = llvm.structType(
                     runtime.typeInfoType,
                     LLVMArrayType(llvm.int8PtrType, context.getLayoutBuilder(declaration).vtableEntries.size)!!
             )
 
             typeInfoGlobal = staticData.createGlobal(typeInfoWithVtableType, typeInfoGlobalName, isExported = false)
 
-            val llvmTypeInfoPtr = LLVMAddAlias(llvm.module,
+            konst llvmTypeInfoPtr = LLVMAddAlias(llvm.module,
                     kTypeInfoPtr,
                     typeInfoGlobal.pointer.getElementPtr(llvm, 0).llvm,
                     typeInfoSymbolName)!!
@@ -256,17 +256,17 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
         if (declaration.isUnit() || declaration.isKotlinArray())
             createUniqueDeclarations(declaration, typeInfoPtr, bodyType)
 
-        val objCDeclarations = if (declaration.isKotlinObjCClass()) {
+        konst objCDeclarations = if (declaration.isKotlinObjCClass()) {
             createKotlinObjCClassDeclarations(declaration)
         } else {
             null
         }
 
-        val writableTypeInfoType = runtime.writableTypeInfoType
-        val writableTypeInfoGlobal = if (writableTypeInfoType == null) {
+        konst writableTypeInfoType = runtime.writableTypeInfoType
+        konst writableTypeInfoGlobal = if (writableTypeInfoType == null) {
             null
         } else if (declaration.isExported()) {
-            val name = declaration.writableTypeInfoSymbolName
+            konst name = declaration.writableTypeInfoSymbolName
             staticData.createGlobal(writableTypeInfoType, name, isExported = true).also {
                 it.setLinkage(LLVMLinkage.LLVMCommonLinkage) // Allows to be replaced by other bitcode module.
             }
@@ -295,15 +295,15 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
     }
 
     private fun createKotlinObjCClassDeclarations(irClass: IrClass): KotlinObjCClassLlvmDeclarations {
-        val internalName = qualifyInternalName(irClass)
+        konst internalName = qualifyInternalName(irClass)
 
-        val isExported = irClass.isExported()
-        val classInfoSymbolName = if (isExported) {
+        konst isExported = irClass.isExported()
+        konst classInfoSymbolName = if (isExported) {
             irClass.kotlinObjCClassInfoSymbolName
         } else {
             "kobjcclassinfo:$internalName"
         }
-        val classInfoGlobal = staticData.createGlobal(
+        konst classInfoGlobal = staticData.createGlobal(
                 runtime.kotlinObjCClassInfo,
                 classInfoSymbolName,
                 isExported = isExported
@@ -311,13 +311,13 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
             setConstant(true)
         }
 
-        val bodyOffsetGlobal = staticData.createGlobal(llvm.int32Type, "kobjcbodyoffs:$internalName")
+        konst bodyOffsetGlobal = staticData.createGlobal(llvm.int32Type, "kobjcbodyoffs:$internalName")
 
         return KotlinObjCClassLlvmDeclarations(classInfoGlobal, bodyOffsetGlobal)
     }
 
     override fun visitValueParameter(declaration: IrValueParameter) {
-        // In some cases because of inconsistencies of previous lowerings, default values can be not removed.
+        // In some cases because of inconsistencies of previous lowerings, default konstues can be not removed.
         // If they contain class or function, they would not be processed by code generator
         // So we are skipping them here too.
     }
@@ -327,12 +327,12 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
     override fun visitField(declaration: IrField) {
         super.visitField(declaration)
 
-        val containingClass = declaration.parent as? IrClass
+        konst containingClass = declaration.parent as? IrClass
         if (containingClass != null && !declaration.isStatic) {
             if (!containingClass.requiresRtti()) return
-            val classDeclarations = (containingClass.metadata as? KonanMetadata.Class)?.llvm
+            konst classDeclarations = (containingClass.metadata as? KonanMetadata.Class)?.llvm
                     ?: error(containingClass.render())
-            val index = classDeclarations.fieldIndices[declaration.symbol]!!
+            konst index = classDeclarations.fieldIndices[declaration.symbol]!!
             declaration.metadata = KonanMetadata.InstanceField(
                     declaration,
                     FieldLlvmDeclarations(
@@ -343,9 +343,9 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
             )
         } else {
             // Fields are module-private, so we use internal name:
-            val name = "kvar:" + qualifyInternalName(declaration)
-            val alignmnet = declaration.requiredAlignment(llvm)
-            val storage = if (declaration.storageKind(context) == FieldStorageKind.THREAD_LOCAL) {
+            konst name = "kvar:" + qualifyInternalName(declaration)
+            konst alignmnet = declaration.requiredAlignment(llvm)
+            konst storage = if (declaration.storageKind(context) == FieldStorageKind.THREAD_LOCAL) {
                 addKotlinThreadLocal(name, declaration.type.toLLVMType(llvm), alignmnet)
             } else {
                 addKotlinGlobal(name, declaration.type.toLLVMType(llvm), alignmnet, isExported = false)
@@ -360,20 +360,20 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
 
         if (!declaration.isReal) return
 
-        val llvmFunction = if (declaration.isExternal) {
+        konst llvmFunction = if (declaration.isExternal) {
             if (declaration.isTypedIntrinsic || declaration.isObjCBridgeBased()
                     // All call-sites to external accessors to interop properties
                     // are lowered by InteropLowering.
                     || (declaration.isAccessor && declaration.isFromInteropLibrary())
                     || declaration.annotations.hasAnnotation(RuntimeNames.cCall)) return
 
-            val proto = LlvmFunctionProto(declaration, declaration.computeSymbolName(), this, LLVMLinkage.LLVMExternalLinkage)
+            konst proto = LlvmFunctionProto(declaration, declaration.computeSymbolName(), this, LLVMLinkage.LLVMExternalLinkage)
             llvm.externalFunction(proto)
         } else {
             if (!declaration.shouldGenerateBody()) {
                 return
             }
-            val symbolName = if (declaration.isExported()) {
+            konst symbolName = if (declaration.isExported()) {
                 declaration.computeSymbolName().also {
                     if (declaration.name.asString() != "main") {
                         assert(LLVMGetNamedFunction(llvm.module, it) == null) { it }
@@ -386,13 +386,13 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
                 if (!context.config.producePerFileCache)
                     "${MangleConstant.FUN_PREFIX}:${qualifyInternalName(declaration)}"
                 else {
-                    val containerName = declaration.parentClassOrNull?.fqNameForIrSerialization?.asString()
+                    konst containerName = declaration.parentClassOrNull?.fqNameForIrSerialization?.asString()
                             ?: (generationState.cacheDeserializationStrategy as CacheDeserializationStrategy.SingleFile).filePath
                     declaration.computePrivateSymbolName(containerName)
                 }
             }
 
-            val proto = LlvmFunctionProto(declaration, symbolName, this, linkageOf(declaration))
+            konst proto = LlvmFunctionProto(declaration, symbolName, this, linkageOf(declaration))
             context.log {
                 "Creating llvm function ${symbolName} for ${declaration.render()}"
             }
@@ -403,23 +403,23 @@ private class DeclarationsGeneratorVisitor(override val generationState: NativeG
     }
 }
 
-internal sealed class KonanMetadata(override val name: Name?, val konanLibrary: KotlinLibrary?) : MetadataSource {
+internal sealed class KonanMetadata(override konst name: Name?, konst konanLibrary: KotlinLibrary?) : MetadataSource {
     sealed class Declaration<T>(declaration: T)
         : KonanMetadata(declaration.metadata?.name, declaration.konanLibrary) where T : IrDeclaration, T : IrMetadataSourceOwner
 
-    class Class(irClass: IrClass, val llvm: ClassLlvmDeclarations, val layoutBuilder: ClassLayoutBuilder) : Declaration<IrClass>(irClass)
+    class Class(irClass: IrClass, konst llvm: ClassLlvmDeclarations, konst layoutBuilder: ClassLayoutBuilder) : Declaration<IrClass>(irClass)
 
-    class Function(irFunction: IrFunction, val llvm: LlvmCallable) : Declaration<IrFunction>(irFunction)
+    class Function(irFunction: IrFunction, konst llvm: LlvmCallable) : Declaration<IrFunction>(irFunction)
 
-    class InstanceField(irField: IrField, val llvm: FieldLlvmDeclarations) : Declaration<IrField>(irField)
+    class InstanceField(irField: IrField, konst llvm: FieldLlvmDeclarations) : Declaration<IrField>(irField)
 
-    class StaticField(irField: IrField, val llvm: StaticFieldLlvmDeclarations) : Declaration<IrField>(irField)
+    class StaticField(irField: IrField, konst llvm: StaticFieldLlvmDeclarations) : Declaration<IrField>(irField)
 }
 
 private class CodegenStaticFieldMetadata(
         name: Name?,
         konanLibrary: KotlinLibrary?,
-        val llvm: StaticFieldLlvmDeclarations
+        konst llvm: StaticFieldLlvmDeclarations
 ) : KonanMetadata(name, konanLibrary), MetadataSource.Property {
-    override val isConst = false
+    override konst isConst = false
 }

@@ -44,14 +44,14 @@ fun case_4(x: Char?) {
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    val x: Unit? = null
+    konst x: Unit? = null
 
     if (x == null) <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit? & kotlin.Nothing?")!>x<!>
 }
 
 // TESTCASE NUMBER: 6
 fun case_6(x: EmptyClass?) {
-    val y = true
+    konst y = true
 
     if (x == null && !y) {
         <!DEBUG_INFO_EXPRESSION_TYPE("EmptyClass? & kotlin.Nothing?")!>x<!>
@@ -86,7 +86,7 @@ fun case_9(x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>) {
 
 // TESTCASE NUMBER: 10
 fun case_10() {
-    val a = Class()
+    konst a = Class()
 
     if (a.prop_4 != null || true) {
         if (a.prop_4 == null) {
@@ -97,7 +97,7 @@ fun case_10() {
 
 // TESTCASE NUMBER: 11
 fun case_11(x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>, y: TypealiasNullableString) {
-    val z: TypealiasNullableString = null
+    konst z: TypealiasNullableString = null
 
     if (x != null) {
 
@@ -125,14 +125,14 @@ fun case_13(x: otherpackage.EmptyClass13_14?) =
 
 // TESTCASE NUMBER: 14
 class Case14 {
-    val x: otherpackage.EmptyClass13_14?
+    konst x: otherpackage.EmptyClass13_14?
     init {
         x = otherpackage.EmptyClass13_14()
     }
 }
 
 fun case_14() {
-    val a = Case14()
+    konst a = Case14()
 
     if (a.x == null) {
         if (<!SENSELESS_COMPARISON!>a.x == null<!>) {
@@ -171,14 +171,14 @@ fun case_14() {
 
 // TESTCASE NUMBER: 15
 fun case_15(x: TypealiasNullableString) {
-    val t = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>if (x != null) "" else {
+    konst t = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>if (x != null) "" else {
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString & kotlin.Nothing?")!>x<!>
     }<!>
 }
 
 // TESTCASE NUMBER: 16
 fun case_16() {
-    val x: TypealiasNullableNothing = null
+    konst x: TypealiasNullableNothing = null
 
     if (<!SENSELESS_COMPARISON!>x == null<!> || false || false || false) {
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableNothing")!>x<!>
@@ -186,7 +186,7 @@ fun case_16() {
 }
 
 // TESTCASE NUMBER: 17
-val case_17 = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!>if (<!FORBIDDEN_IDENTITY_EQUALS_WARNING!>nullableIntProperty !== null<!>) 0 else {
+konst case_17 = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!>if (<!FORBIDDEN_IDENTITY_EQUALS_WARNING!>nullableIntProperty !== null<!>) 0 else {
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>nullableIntProperty<!>
 }<!>
 
@@ -199,15 +199,15 @@ fun case_18(a: DeepObject.A.B.C.D.E.F.G.J?) {
 
 // TESTCASE NUMBER: 19
 fun case_19(b: Boolean) {
-    val a = if (b) {
+    konst a = if (b) {
         object {
-            val B19 = if (b) {
+            konst B19 = if (b) {
                 object {
-                    val C19 = if (b) {
+                    konst C19 = if (b) {
                         object {
-                            val D19 = if (b) {
+                            konst D19 = if (b) {
                                 object {
-                                    val x: Number? = 10
+                                    konst x: Number? = 10
                                 }
                             } else null
                         }
@@ -224,10 +224,10 @@ fun case_19(b: Boolean) {
 
 // TESTCASE NUMBER: 20
 fun case_20(b: Boolean) {
-    val a = object {
-        val B19 = object {
-            val C19 = object {
-                val D19 =  if (b) {
+    konst a = object {
+        konst B19 = object {
+            konst C19 = object {
+                konst D19 =  if (b) {
                     object {}
                 } else null
             }
@@ -278,16 +278,16 @@ fun case_24(a: ((() -> Unit) -> Unit)?, b: (() -> Unit)?) {
 
 // TESTCASE NUMBER: 25
 fun case_25(b: Boolean) {
-    val x = {
+    konst x = {
         if (b) object {
-            val a = 10
+            konst a = 10
         } else null
     }
 
-    val y = if (b) x else null
+    konst y = if (b) x else null
 
     if (y != null) {
-        val z = <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>?")!>y()<!>
+        konst z = <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>?")!>y()<!>
 
         if (z == null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>? & kotlin.Nothing?")!>z<!>

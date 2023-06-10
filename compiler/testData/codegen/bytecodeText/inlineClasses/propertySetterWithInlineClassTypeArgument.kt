@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Str(val string: String)
+inline class Str(konst string: String)
 
 class C {
     var s = Str("")

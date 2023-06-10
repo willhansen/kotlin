@@ -14,7 +14,7 @@ import org.gradle.kotlin.dsl.*
  */
 open class GitClangFormatPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        val directory = target.layout.projectDirectory.toString()
+        konst directory = target.layout.projectDirectory.toString()
         target.tasks.register<GitClangFormat>("clangFormat") {
             description = "Run clang-format in $directory"
             group = TASK_GROUP
@@ -29,6 +29,6 @@ open class GitClangFormatPlugin : Plugin<Project> {
 
     companion object {
         @JvmStatic
-        val TASK_GROUP = "development support"
+        konst TASK_GROUP = "development support"
     }
 }

@@ -4,10 +4,10 @@
 
 import kotlin.reflect.*
 
-fun <T, R> hidden(nameProp: KProperty1<T, R>, value: R) {}
-fun <T, R> hiddenFun(nameFunc: KFunction1<T, R>, value: R) {}
+fun <T, R> hidden(nameProp: KProperty1<T, R>, konstue: R) {}
+fun <T, R> hiddenFun(nameFunc: KFunction1<T, R>, konstue: R) {}
 
-class App(val nullable: String?) {
+class App(konst nullable: String?) {
     fun nullableFun(): String? = null
 }
 

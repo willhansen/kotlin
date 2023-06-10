@@ -6,17 +6,17 @@ import java.io.FileWriter
 import kotlin.reflect.KCallable
 
 internal class MathTestsGenerator(
-    private val outputFile: File,
-    private val testPoints: List<Double>,
-    private val functions: List<Model>
+    private konst outputFile: File,
+    private konst testPoints: List<Double>,
+    private konst functions: List<Model>
 ) {
-    sealed class Model(val exact: Boolean) {
-        abstract val function: Function<*>
+    sealed class Model(konst exact: Boolean) {
+        abstract konst function: Function<*>
     }
-    class ModelFunction1(override val function: Function1<Double, Double>, exact: Boolean = true, val customTestPoint: Double? = null) : Model(exact)
-    class ModelFunction2(override val function: Function2<Double, Double, Double>, exact: Boolean = true) : Model(exact)
+    class ModelFunction1(override konst function: Function1<Double, Double>, exact: Boolean = true, konst customTestPoint: Double? = null) : Model(exact)
+    class ModelFunction2(override konst function: Function2<Double, Double, Double>, exact: Boolean = true) : Model(exact)
 
-    private val doubleSpecialPoints = listOf(
+    private konst doubleSpecialPoints = listOf(
         Double.NEGATIVE_INFINITY,
         Double.POSITIVE_INFINITY,
         Double.MIN_VALUE,
@@ -53,7 +53,7 @@ internal class MathTestsGenerator(
     private fun Double.toULongString() = "0x${toBits().toULong().toString(16)}UL"
 
     private fun Sequence<Double>.toULongVariableList(name: String): String = buildString {
-        appendLine("val $name = arrayOf(")
+        appendLine("konst $name = arrayOf(")
         this@toULongVariableList.forEachIndexed { i, d ->
             append("${d.toULongString()}, ".prependIndent())
             if (i % 4 == 3) appendLine()
@@ -66,17 +66,17 @@ internal class MathTestsGenerator(
         functions.forEach { model ->
             appendLine()
             appendLine("@Test")
-            val function = model.function
-            val name = (function as KCallable<*>).name
+            konst function = model.function
+            konst name = (function as KCallable<*>).name
             appendLine("fun test${name.capitalize()}() {")
-            val answers = when (model) {
+            konst answers = when (model) {
                 is ModelFunction1 -> generatePoints().map { arg -> model.function(arg) }
                 is ModelFunction2 -> generate2dPoints().map { arg -> model.function(arg.first, arg.second) }
             }
             appendLineWithIndent(answers.toULongVariableList("answers"))
             appendLine()
             appendLineWithIndent("checkAnswers(::$name, arguments, answers, ${model.exact})")
-            val specialFunctionPoint = (model as? ModelFunction1)?.customTestPoint
+            konst specialFunctionPoint = (model as? ModelFunction1)?.customTestPoint
             if (specialFunctionPoint != null) {
                 appendLineWithIndent(mutatePoints(listOf(specialFunctionPoint)).toULongVariableList("specialFunctionPointArguments"))
                 appendLineWithIndent(

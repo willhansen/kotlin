@@ -9,7 +9,7 @@ fun <T> bar(a: T, i: Int): T {
 }
 
 fun box(): String {
-    val x = 3
+    konst x = 3
     when(if (x == 4) return bar("fail1", 1) else 4) {
         else -> return bar("OK", 2)
     }

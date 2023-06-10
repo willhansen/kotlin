@@ -11,9 +11,9 @@ public final class A {
         enum entry ENTRY
 
         /*primary*/ private constructor E()
-        @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
             public final override /*1*/ /*fake_override*/ fun `<get-name>`(): kotlin.String
-        public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+        public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
             public final override /*1*/ /*fake_override*/ fun `<get-ordinal>`(): kotlin.Int
         protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
         public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: test.A.E): kotlin.Int
@@ -21,9 +21,9 @@ public final class A {
         public final override /*1*/ /*fake_override*/ /*isHiddenForResolutionEverywhereBesideSupercalls*/ fun getDeclaringClass(): java.lang.Class<test.A.E!>!
 
         // Static members
-        public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<test.A.E>
+        public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<test.A.E>
             public final /*synthesized*/ fun `<get-entries>`(): kotlin.enums.EnumEntries<test.A.E>
-        public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): test.A.E
-        public final /*synthesized*/ fun values(): kotlin.Array<test.A.E>
+        public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): test.A.E
+        public final /*synthesized*/ fun konstues(): kotlin.Array<test.A.E>
     }
 }

@@ -2,7 +2,7 @@
 
 package zzz
 
-public class A(val a: Int, val b: Int)
+public class A(konst a: Int, konst b: Int)
 
 operator inline fun A.component1() = a
 

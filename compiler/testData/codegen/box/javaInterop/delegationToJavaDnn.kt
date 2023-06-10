@@ -19,7 +19,7 @@ public class JImpl implements J {
     }
 }
 // FILE: a.kt
-class C(val x: J) : J by x
+class C(konst x: J) : J by x
 
 // MODULE: main(lib)
 // FILE: a.kt

@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class NumberInlineClass(val value: Double)
+konstue class NumberInlineClass(konst konstue: Double)
 
 interface TypeAdapter<FROM, TO> {
     fun decode(string: FROM): TO
@@ -14,9 +14,9 @@ class StringToDoubleTypeAdapter : TypeAdapter<String, NumberInlineClass> {
 }
 
 fun box(): String {
-    val string: String? = "2019"
-    val typeAdapter = StringToDoubleTypeAdapter()
-    val test = string?.let(typeAdapter::decode)!!
-    if (test.value != 2019.0) throw AssertionError("test: $test")
+    konst string: String? = "2019"
+    konst typeAdapter = StringToDoubleTypeAdapter()
+    konst test = string?.let(typeAdapter::decode)!!
+    if (test.konstue != 2019.0) throw AssertionError("test: $test")
     return "OK"
 }

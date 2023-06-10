@@ -13,16 +13,16 @@ external fun g(x: Int, y: String = <!WRONG_DEFAULT_VALUE_FOR_EXTERNAL_FUN_PARAME
 
 external var a: Int
     get() = definedExternally
-    set(value) {
+    set(konstue) {
         definedExternally
     }
 
-external val b: Int
+external konst b: Int
     get() = <!WRONG_BODY_OF_EXTERNAL_DECLARATION!>23<!>
 
-external val c: Int = definedExternally
+external konst c: Int = definedExternally
 
-external val d: Int = <!WRONG_INITIALIZER_OF_EXTERNAL_DECLARATION!>23<!>
+external konst d: Int = <!WRONG_INITIALIZER_OF_EXTERNAL_DECLARATION!>23<!>
 
 external class C {
     fun foo(): Int = definedExternally

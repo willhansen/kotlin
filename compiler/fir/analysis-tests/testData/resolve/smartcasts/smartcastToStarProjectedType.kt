@@ -1,8 +1,8 @@
 // ISSUE: KT-42449
 
 data class NodePropertyDescriptor<TNode : Node, TProperty : Any, TPropertyVal : TProperty?>(
-    val description: String,
-    val propertyRef: NodePropertyRef<TNode, TProperty, TPropertyVal>,
+    konst description: String,
+    konst propertyRef: NodePropertyRef<TNode, TProperty, TPropertyVal>,
 ) {
     fun test_1(other: Any?): Boolean {
         if (other !is NodePropertyDescriptor<*, *, *>) return false

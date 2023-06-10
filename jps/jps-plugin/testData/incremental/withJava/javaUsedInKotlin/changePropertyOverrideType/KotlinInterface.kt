@@ -1,4 +1,4 @@
 interface KotlinInterface {
-    val x: CharSequence
-    val y: Int
+    konst x: CharSequence
+    konst y: Int
 }

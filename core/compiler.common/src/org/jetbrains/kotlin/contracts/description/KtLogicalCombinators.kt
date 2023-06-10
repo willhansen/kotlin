@@ -6,11 +6,11 @@
 package org.jetbrains.kotlin.contracts.description
 
 class KtBinaryLogicExpression<Type, Diagnostic>(
-    val left: KtBooleanExpression<Type, Diagnostic>,
-    val right: KtBooleanExpression<Type, Diagnostic>,
-    val kind: LogicOperationKind
+    konst left: KtBooleanExpression<Type, Diagnostic>,
+    konst right: KtBooleanExpression<Type, Diagnostic>,
+    konst kind: LogicOperationKind
 ) : KtBooleanExpression<Type, Diagnostic> {
-    override val erroneous: Boolean
+    override konst erroneous: Boolean
         get() = left.erroneous || right.erroneous
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R {
@@ -18,8 +18,8 @@ class KtBinaryLogicExpression<Type, Diagnostic>(
     }
 }
 
-class KtLogicalNot<Type, Diagnostic>(val arg: KtBooleanExpression<Type, Diagnostic>) : KtBooleanExpression<Type, Diagnostic> {
-    override val erroneous: Boolean
+class KtLogicalNot<Type, Diagnostic>(konst arg: KtBooleanExpression<Type, Diagnostic>) : KtBooleanExpression<Type, Diagnostic> {
+    override konst erroneous: Boolean
         get() = arg.erroneous
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R =

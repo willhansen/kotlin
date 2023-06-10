@@ -58,7 +58,7 @@ object FirDiagnosticsCompilerResultsReporter {
                 for (diagnostic in diagnosticsCollector.diagnosticsByFilePath[filePath].orEmpty().sortedWith(InFileDiagnosticsComparator)) {
                     when (diagnostic) {
                         is KtPsiDiagnostic -> {
-                            val file = diagnostic.element.psi.containingFile
+                            konst file = diagnostic.element.psi.containingFile
                             MessageUtil.psiFileToMessageLocation(
                                 file,
                                 file.name,
@@ -106,11 +106,11 @@ object FirDiagnosticsCompilerResultsReporter {
         reporter: MessageCollector,
         renderDiagnosticName: Boolean
     ) {
-        val severity = AnalyzerWithCompilerReport.convertSeverity(diagnostic.severity)
-        val renderer = RootDiagnosticRendererFactory(diagnostic)
+        konst severity = AnalyzerWithCompilerReport.convertSeverity(diagnostic.severity)
+        konst renderer = RootDiagnosticRendererFactory(diagnostic)
 
-        val message = renderer.render(diagnostic)
-        val textToRender = when (renderDiagnosticName) {
+        konst message = renderer.render(diagnostic)
+        konst textToRender = when (renderDiagnosticName) {
             true -> "[${diagnostic.factoryName}] $message"
             false -> message
         }
@@ -124,17 +124,17 @@ object FirDiagnosticsCompilerResultsReporter {
         messageRenderer: MessageRenderer
     ) {
         if (diagnostic.severity == Severity.ERROR) {
-            val severity = AnalyzerWithCompilerReport.convertSeverity(diagnostic.severity)
-            val renderer = RootDiagnosticRendererFactory(diagnostic)
-            val diagnosticText = messageRenderer.render(severity, renderer.render(diagnostic), location)
+            konst severity = AnalyzerWithCompilerReport.convertSeverity(diagnostic.severity)
+            konst renderer = RootDiagnosticRendererFactory(diagnostic)
+            konst diagnosticText = messageRenderer.render(severity, renderer.render(diagnostic), location)
             throw IllegalStateException("${diagnostic.factory.name}: $diagnosticText")
         }
     }
 
     private object InFileDiagnosticsComparator : Comparator<KtDiagnostic> {
         override fun compare(o1: KtDiagnostic, o2: KtDiagnostic): Int {
-            val range1 = DiagnosticUtils.firstRange(o1.textRanges)
-            val range2 = DiagnosticUtils.firstRange(o2.textRanges)
+            konst range1 = DiagnosticUtils.firstRange(o1.textRanges)
+            konst range2 = DiagnosticUtils.firstRange(o2.textRanges)
 
             return if (range1 != range2) {
                 DiagnosticUtils.TEXT_RANGE_COMPARATOR.compare(range1, range2)
@@ -148,17 +148,17 @@ fun BaseDiagnosticsCollector.reportToMessageCollector(messageCollector: MessageC
 }
 
 // public only because of tests
-class KtSourceFileDiagnosticPos(val line: Int, val column: Int, val lineContent: String?) {
+class KtSourceFileDiagnosticPos(konst line: Int, konst column: Int, konst lineContent: String?) {
 
     // NOTE: This method is used for presenting positions to the user
     override fun toString(): String = if (line < 0) "(offset: $column line unknown)" else "($line,$column)"
 
     companion object {
-        val NONE = KtSourceFileDiagnosticPos(-1, -1, null)
+        konst NONE = KtSourceFileDiagnosticPos(-1, -1, null)
     }
 }
 
-private class SequentialFilePositionFinder private constructor(private val reader: InputStreamReader)
+private class SequentialFilePositionFinder private constructor(private konst reader: InputStreamReader)
     : Closeable, SequentialPositionFinder(reader)
 {
     constructor(file: File) : this(file.reader(/* TODO: select proper charset */))
@@ -169,10 +169,10 @@ private class SequentialFilePositionFinder private constructor(private val reade
 }
 
 // public only for tests
-open class SequentialPositionFinder(private val reader: InputStreamReader) {
+open class SequentialPositionFinder(private konst reader: InputStreamReader) {
 
     private var currentLineContent: String? = null
-    private val buffer = CharArray(255)
+    private konst buffer = CharArray(255)
     private var bufLength = -1
     private var bufPos = 0
     private var endOfStream = false
@@ -185,7 +185,7 @@ open class SequentialPositionFinder(private val reader: InputStreamReader) {
     fun findNextPosition(offset: Int, withLineContents: Boolean = true): KtSourceFileDiagnosticPos {
 
         fun posInCurrentLine(): KtSourceFileDiagnosticPos? {
-            val col = offset - (charsRead - currentLineContent!!.length - 1)/* beginning of line offset */ + 1 /* col is 1-based */
+            konst col = offset - (charsRead - currentLineContent!!.length - 1)/* beginning of line offset */ + 1 /* col is 1-based */
             assert(col > 0)
             return if (col <= currentLineContent!!.length + 1 /* accounting for a report on EOL (e.g. syntax errors) */)
                 KtSourceFileDiagnosticPos(currentLine, col, if (withLineContents) currentLineContent else null)
@@ -221,7 +221,7 @@ open class SequentialPositionFinder(private val reader: InputStreamReader) {
                     break
                 }
             } else {
-                val c = buffer[bufPos++]
+                konst c = buffer[bufPos++]
                 charsRead++
                 when {
                     c == '\n' && skipNextLf -> {

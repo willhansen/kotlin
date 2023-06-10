@@ -30,7 +30,7 @@ public final class Actual extends
   private Actual(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -65,10 +65,10 @@ public final class Actual extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -86,7 +86,7 @@ public final class Actual extends
     public Actual parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new Actual(input, extensionRegistry);
     }
   };
@@ -189,23 +189,23 @@ public final class Actual extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Actual parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Actual parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Actual parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Actual parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Actual parseFrom(java.io.InputStream input)
@@ -340,7 +340,7 @@ public final class Actual extends
       org.jetbrains.kotlin.backend.common.serialization.proto.Actual parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.Actual) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -368,9 +368,9 @@ public final class Actual extends
     /**
      * <code>required int64 actual_symbol = 1;</code>
      */
-    public Builder setActualSymbol(long value) {
+    public Builder setActualSymbol(long konstue) {
       bitField0_ |= 0x00000001;
-      actualSymbol_ = value;
+      actualSymbol_ = konstue;
       
       return this;
     }
@@ -400,9 +400,9 @@ public final class Actual extends
     /**
      * <code>required int64 expect_symbol = 2;</code>
      */
-    public Builder setExpectSymbol(long value) {
+    public Builder setExpectSymbol(long konstue) {
       bitField0_ |= 0x00000002;
-      expectSymbol_ = value;
+      expectSymbol_ = konstue;
       
       return this;
     }

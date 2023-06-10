@@ -12,7 +12,7 @@ FILE: multipleImplicitReceivers.kt
 
     }
     public abstract interface IFoo : R|kotlin/Any| {
-        public open val R|A|.foo: R|B|
+        public open konst R|A|.foo: R|B|
             public get(): R|B| {
                 ^ Q|B|
             }

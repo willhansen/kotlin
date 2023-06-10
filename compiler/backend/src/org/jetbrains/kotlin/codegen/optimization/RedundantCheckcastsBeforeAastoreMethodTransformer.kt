@@ -12,11 +12,11 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
 object RedundantCheckcastsBeforeAastoreMethodTransformer : MethodTransformer() {
     override fun transform(internalClassName: String, methodNode: MethodNode) {
-        val iter = methodNode.instructions.iterator()
+        konst iter = methodNode.instructions.iterator()
         while (iter.hasNext()) {
-            val insn = iter.next()
+            konst insn = iter.next()
             if (insn.opcode == Opcodes.CHECKCAST && insn.next?.opcode == Opcodes.AASTORE) {
-                val isReified = isOperationReifiedMarker(insn.previous)
+                konst isReified = isOperationReifiedMarker(insn.previous)
                 iter.remove()
                 if (isReified) {
                     for (i in 1..3) {

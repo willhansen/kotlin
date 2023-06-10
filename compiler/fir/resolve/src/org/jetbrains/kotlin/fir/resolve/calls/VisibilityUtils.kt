@@ -32,9 +32,9 @@ fun FirVisibilityChecker.isVisible(
     callInfo: CallInfo,
     dispatchReceiverValue: ReceiverValue?
 ): Boolean {
-    val staticQualifierForCallable = runIf(declaration is FirCallableDeclaration && declaration.isStatic) {
-        val explicitReceiver = (dispatchReceiverValue as? ExpressionReceiverValue)?.explicitReceiver
-        when (val classLikeSymbol = (explicitReceiver as? FirResolvedQualifier)?.symbol) {
+    konst staticQualifierForCallable = runIf(declaration is FirCallableDeclaration && declaration.isStatic) {
+        konst explicitReceiver = (dispatchReceiverValue as? ExpressionReceiverValue)?.explicitReceiver
+        when (konst classLikeSymbol = (explicitReceiver as? FirResolvedQualifier)?.symbol) {
             is FirRegularClassSymbol -> classLikeSymbol.fir
             is FirTypeAliasSymbol -> classLikeSymbol.fullyExpandedClass(callInfo.session)?.fir
             is FirAnonymousObjectSymbol, null -> null
@@ -55,10 +55,10 @@ fun FirVisibilityChecker.isVisible(
     declaration: FirMemberDeclaration,
     candidate: Candidate
 ): Boolean {
-    val callInfo = candidate.callInfo
+    konst callInfo = candidate.callInfo
 
     if (!isVisible(declaration, callInfo, candidate.dispatchReceiverValue)) {
-        val dispatchReceiverWithoutSmartCastType =
+        konst dispatchReceiverWithoutSmartCastType =
             removeSmartCastTypeForAttemptToFitVisibility(candidate.dispatchReceiverValue, candidate.callInfo.session) ?: return false
 
         if (!isVisible(declaration, callInfo, dispatchReceiverWithoutSmartCastType)) return false
@@ -66,7 +66,7 @@ fun FirVisibilityChecker.isVisible(
         candidate.dispatchReceiverValue = dispatchReceiverWithoutSmartCastType
     }
 
-    val backingField = declaration.getBackingFieldIfApplicable()
+    konst backingField = declaration.getBackingFieldIfApplicable()
     if (backingField != null) {
         candidate.hasVisibleBackingField = isVisible(backingField, callInfo, candidate.dispatchReceiverValue)
     }
@@ -75,21 +75,21 @@ fun FirVisibilityChecker.isVisible(
 }
 
 private fun removeSmartCastTypeForAttemptToFitVisibility(dispatchReceiverValue: ReceiverValue?, session: FirSession): ReceiverValue? {
-    val expressionWithSmartcastIfStable =
+    konst expressionWithSmartcastIfStable =
         (dispatchReceiverValue?.receiverExpression as? FirSmartCastExpression)?.takeIf { it.isStable } ?: return null
 
     if (dispatchReceiverValue.type.isNullableNothing) return null
 
-    val originalExpression = expressionWithSmartcastIfStable.originalExpression
-    val originalType = originalExpression.typeRef.coneType
-    val originalTypeNotNullable =
+    konst originalExpression = expressionWithSmartcastIfStable.originalExpression
+    konst originalType = originalExpression.typeRef.coneType
+    konst originalTypeNotNullable =
         originalType.makeConeTypeDefinitelyNotNullOrNotNull(session.typeContext)
 
     // Basically, this `if` is just for sake of optimizaton
-    // We have only nullability enhancement, here, so return initial smart cast receiver value
+    // We have only nullability enhancement, here, so return initial smart cast receiver konstue
     if (originalTypeNotNullable == dispatchReceiverValue.type) return null
 
-    val expressionForReceiver = with(session.typeContext) {
+    konst expressionForReceiver = with(session.typeContext) {
         when {
             originalType.isNullableType() && !dispatchReceiverValue.type.isNullableType() ->
                 buildSmartCastExpression {
@@ -112,7 +112,7 @@ private fun removeSmartCastTypeForAttemptToFitVisibility(dispatchReceiverValue: 
 }
 
 private fun FirMemberDeclaration.getBackingFieldIfApplicable(): FirBackingField? {
-    val field = (this as? FirProperty)?.getExplicitBackingField() ?: return null
+    konst field = (this as? FirProperty)?.getExplicitBackingField() ?: return null
 
     // This check prevents resolving protected and
     // public fields.

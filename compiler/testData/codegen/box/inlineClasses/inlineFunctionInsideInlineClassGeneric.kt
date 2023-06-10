@@ -3,13 +3,13 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T: Int>(val x: T) {
+konstue class Foo<T: Int>(konst x: T) {
     inline fun inc(): Foo<T> = Foo(x + 1) as Foo<T>
 }
 
 fun box(): String {
-    val a = Foo(0)
-    val b = a.inc().inc()
+    konst a = Foo(0)
+    konst b = a.inc().inc()
 
     if (b.x != 2) return "fail"
 

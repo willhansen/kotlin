@@ -5,11 +5,11 @@ class Test1<T1 : Any?, T2 : Any?> {
 
   }
 
-  val x: T1
+  konst x: T1
     field = x
     get
 
-  val y: T2
+  konst y: T2
     field = y
     get
 
@@ -22,7 +22,7 @@ class Test2 {
 
   }
 
-  val y: String
+  konst y: String
     field = y
     get
 
@@ -33,7 +33,7 @@ class Test2 {
 
     }
 
-    val z: Z
+    konst z: Z
       field = z
       get
 
@@ -52,11 +52,11 @@ class Test3 {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
-  val y: String
+  konst y: String
     field = y
     get
 
@@ -69,7 +69,7 @@ class Test4<T : Any?> {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 

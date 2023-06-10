@@ -1,10 +1,10 @@
 // !LANGUAGE: +ContextReceivers
 // TARGET_BACKEND: JVM_IR
 
-data class Pair<A, B>(val first: A, val second: B)
+data class Pair<A, B>(konst first: A, konst second: B)
 
 context(Comparator<T>)
 infix operator fun <T> T.compareTo(other: T) = compare(this, other)
 
 context(Comparator<T>)
-val <T> Pair<T, T>.min get() = if (first < second) first else second
+konst <T> Pair<T, T>.min get() = if (first < second) first else second

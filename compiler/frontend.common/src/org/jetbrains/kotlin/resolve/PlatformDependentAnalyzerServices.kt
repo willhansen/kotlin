@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.storage.StorageManager
 import java.util.ArrayList
 
 abstract class PlatformDependentAnalyzerServices {
-    private data class DefaultImportsKey(val includeKotlinComparisons: Boolean, val includeLowPriorityImports: Boolean)
+    private data class DefaultImportsKey(konst includeKotlinComparisons: Boolean, konst includeLowPriorityImports: Boolean)
 
-    private val defaultImports = LockBasedStorageManager("TargetPlatform").let { storageManager ->
+    private konst defaultImports = LockBasedStorageManager("TargetPlatform").let { storageManager ->
         storageManager.createMemoizedFunction<DefaultImportsKey, List<ImportPath>> { (includeKotlinComparisons, includeLowPriorityImports) ->
             ArrayList<ImportPath>().apply {
                 listOf(
@@ -41,9 +41,9 @@ abstract class PlatformDependentAnalyzerServices {
         }
     }
 
-    abstract val platformConfigurator: PlatformConfigurator
+    abstract konst platformConfigurator: PlatformConfigurator
 
-    open val defaultLowPriorityImports: List<ImportPath> get() = emptyList()
+    open konst defaultLowPriorityImports: List<ImportPath> get() = emptyList()
 
     fun getDefaultImports(languageVersionSettings: LanguageVersionSettings, includeLowPriorityImports: Boolean): List<ImportPath> =
         defaultImports(
@@ -55,7 +55,7 @@ abstract class PlatformDependentAnalyzerServices {
 
     abstract fun computePlatformSpecificDefaultImports(storageManager: StorageManager, result: MutableList<ImportPath>)
 
-    open val excludedImports: List<FqName> get() = emptyList()
+    open konst excludedImports: List<FqName> get() = emptyList()
 
     open fun dependencyOnBuiltIns(): ModuleInfo.DependencyOnBuiltIns =
         ModuleInfo.DependencyOnBuiltIns.LAST

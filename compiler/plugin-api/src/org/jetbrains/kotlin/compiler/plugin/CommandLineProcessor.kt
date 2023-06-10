@@ -22,38 +22,38 @@ import org.jetbrains.kotlin.config.CompilerConfigurationKey
 @ExperimentalCompilerApi
 @JvmDefaultWithCompatibility
 interface CommandLineProcessor {
-    val pluginId: String
-    val pluginOptions: Collection<AbstractCliOption>
+    konst pluginId: String
+    konst pluginOptions: Collection<AbstractCliOption>
 
     @Throws(CliOptionProcessingException::class)
-    fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
+    fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) {
         @Suppress("DEPRECATION")
-        processOption(option as CliOption, value, configuration)
+        processOption(option as CliOption, konstue, configuration)
     }
 
-    // TODO remove processOption(AbstractCliOption, ...) implementation after removal of this.
-    @Deprecated("Implement processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) instead.")
+    // TODO remove processOption(AbstractCliOption, ...) implementation after remokonst of this.
+    @Deprecated("Implement processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) instead.")
     @Throws(CliOptionProcessingException::class)
-    fun processOption(option: CliOption, value: String, configuration: CompilerConfiguration) {}
+    fun processOption(option: CliOption, konstue: String, configuration: CompilerConfiguration) {}
 
-    fun <T> CompilerConfiguration.appendList(option: CompilerConfigurationKey<List<T>>, value: T) {
-        val paths = getList(option).asMutableList()
-        paths.add(value)
+    fun <T> CompilerConfiguration.appendList(option: CompilerConfigurationKey<List<T>>, konstue: T) {
+        konst paths = getList(option).asMutableList()
+        paths.add(konstue)
         put(option, paths)
     }
 
-    fun <T> CompilerConfiguration.appendList(option: CompilerConfigurationKey<List<T>>, values: List<T>) {
-        val paths = getList(option).asMutableList()
-        paths.addAll(values)
+    fun <T> CompilerConfiguration.appendList(option: CompilerConfigurationKey<List<T>>, konstues: List<T>) {
+        konst paths = getList(option).asMutableList()
+        paths.addAll(konstues)
         put(option, paths)
     }
 
     fun CompilerConfiguration.applyOptionsFrom(map: Map<String, List<String>>, pluginOptions: Collection<AbstractCliOption>) {
-        for ((key, values) in map) {
-            val option = pluginOptions.firstOrNull { it.optionName == key } ?: continue
+        for ((key, konstues) in map) {
+            konst option = pluginOptions.firstOrNull { it.optionName == key } ?: continue
 
-            for (value in values) {
-                processOption(option, value, this)
+            for (konstue in konstues) {
+                processOption(option, konstue, this)
             }
         }
     }

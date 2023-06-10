@@ -1,7 +1,7 @@
 fun use(x: Any?) = x
 
 class Eap {
-    private val foo = toString()
+    private konst foo = toString()
 
     constructor(foo: Int) {
         use(foo)

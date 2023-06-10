@@ -16,17 +16,17 @@
 
 package org.jetbrains.kotlin.descriptors
 
-class InvalidModuleException(message: String) : IllegalStateException(message)
+class InkonstidModuleException(message: String) : IllegalStateException(message)
 
-interface InvalidModuleNotifier {
-    fun notifyModuleInvalidated(moduleDescriptor: ModuleDescriptor)
+interface InkonstidModuleNotifier {
+    fun notifyModuleInkonstidated(moduleDescriptor: ModuleDescriptor)
 }
 
-fun ModuleDescriptor.moduleInvalidated() {
-    val capability = getCapability(INVALID_MODULE_NOTIFIER_CAPABILITY)
-    capability?.notifyModuleInvalidated(this) ?: run {
-        throw InvalidModuleException("Accessing invalid module descriptor $this")
+fun ModuleDescriptor.moduleInkonstidated() {
+    konst capability = getCapability(INVALID_MODULE_NOTIFIER_CAPABILITY)
+    capability?.notifyModuleInkonstidated(this) ?: run {
+        throw InkonstidModuleException("Accessing inkonstid module descriptor $this")
     }
 }
 
-val INVALID_MODULE_NOTIFIER_CAPABILITY = ModuleCapability<InvalidModuleNotifier>("InvalidModuleNotifier")
+konst INVALID_MODULE_NOTIFIER_CAPABILITY = ModuleCapability<InkonstidModuleNotifier>("InkonstidModuleNotifier")

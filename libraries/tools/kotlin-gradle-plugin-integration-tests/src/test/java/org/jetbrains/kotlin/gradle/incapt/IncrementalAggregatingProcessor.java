@@ -23,7 +23,7 @@ import java.util.TreeSet;
  */
 public class IncrementalAggregatingProcessor extends AbstractProcessor {
 
-    private Set<String> values = new TreeSet<String>();
+    private Set<String> konstues = new TreeSet<String>();
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
@@ -35,21 +35,21 @@ public class IncrementalAggregatingProcessor extends AbstractProcessor {
         for (TypeElement annotation : annotations) {
             for (Element element : roundEnv.getElementsAnnotatedWith(annotation)) {
                 if (element instanceof TypeElement || element instanceof ExecutableElement || element instanceof VariableElement) {
-                    values.add(element.getSimpleName().toString());
+                    konstues.add(element.getSimpleName().toString());
                 }
             }
         }
 
-        if (roundEnv.processingOver() && !values.isEmpty()) {
+        if (roundEnv.processingOver() && !konstues.isEmpty()) {
             try (Writer writer = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "", "generated.txt").openWriter()) {
-                for (String value : values) {
-                    writer.append(value).append("\n");
+                for (String konstue : konstues) {
+                    writer.append(konstue).append("\n");
                 }
             }
             catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            values.clear();
+            konstues.clear();
         }
 
         return true;

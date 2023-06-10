@@ -77,7 +77,7 @@ interface IIC {
 
 }
 
-inline class IC(val x: Long) : IIC {
+inline class IC(konst x: Long) : IIC {
     override fun f(
         i1: Long,
         i2: Long,

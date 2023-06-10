@@ -48,12 +48,12 @@ public final class JsDescriptorUtils {
     private JsDescriptorUtils() {
     }
 
-    private static int valueParametersCount(@NotNull FunctionDescriptor functionDescriptor) {
+    private static int konstueParametersCount(@NotNull FunctionDescriptor functionDescriptor) {
         return functionDescriptor.getValueParameters().size();
     }
 
     public static boolean hasParameters(@NotNull FunctionDescriptor functionDescriptor) {
-        return (valueParametersCount(functionDescriptor) > 0);
+        return (konstueParametersCount(functionDescriptor) > 0);
     }
 
     public static boolean isCompareTo(@NotNull CallableDescriptor descriptor) {

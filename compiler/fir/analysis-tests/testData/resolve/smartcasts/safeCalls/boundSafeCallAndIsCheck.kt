@@ -1,5 +1,5 @@
 interface A {
-    val b: B
+    konst b: B
 }
 
 interface B
@@ -10,7 +10,7 @@ interface C : B {
 fun A.foo(): String = ""
 
 fun main(a: A?) {
-    val lb = a?.b
+    konst lb = a?.b
     if (lb !is C) return
 
     a.foo().length

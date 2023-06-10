@@ -1,3 +1,3 @@
-actual val sourceSetsAfterCommonMain get() = "iosMain/$sourceSetsAfterIosMain"
+actual konst sourceSetsAfterCommonMain get() = "iosMain/$sourceSetsAfterIosMain"
 
-expect val sourceSetsAfterIosMain: String
+expect konst sourceSetsAfterIosMain: String

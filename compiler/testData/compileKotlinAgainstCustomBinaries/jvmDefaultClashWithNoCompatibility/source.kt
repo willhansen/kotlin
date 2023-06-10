@@ -1,7 +1,7 @@
 import base.*
 
-interface KotlinEvaluatableUElement : UExpression {
-    override fun evaluate(): Any? {
+interface KotlinEkonstuatableUElement : UExpression {
+    override fun ekonstuate(): Any? {
         return "OK"
     }
 }
@@ -9,9 +9,9 @@ interface KotlinEvaluatableUElement : UExpression {
 abstract class KotlinAbstractUExpression() : UExpression {}
 
 @JvmDefaultWithoutCompatibility
-class KotlinUBinaryExpressionWithType : KotlinAbstractUExpression(), KotlinEvaluatableUElement {}
+class KotlinUBinaryExpressionWithType : KotlinAbstractUExpression(), KotlinEkonstuatableUElement {}
 
 fun box(): String {
-    val foo = KotlinUBinaryExpressionWithType()
-    return foo.evaluate() as String
+    konst foo = KotlinUBinaryExpressionWithType()
+    return foo.ekonstuate() as String
 }

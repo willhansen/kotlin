@@ -13,7 +13,7 @@ interface Store<K, T, V>
 interface WorkStore : Store<Intent, State, Label> {
     @kotlinx.parcelize.Parcelize
     data class State(
-        val isLoading: Boolean,
+        konst isLoading: Boolean,
     ) : Parcelable
 
     sealed class Intent

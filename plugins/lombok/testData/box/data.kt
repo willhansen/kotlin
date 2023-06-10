@@ -16,12 +16,12 @@ import java.util.Arrays;
     @Data(staticConstructor="of")
     public static class Exercise<T> {
         private final String name;
-        private final T value;
+        private final T konstue;
         private final List<T> list;
     }
 
     public static void usage() {
-        val obj = new DataExample("name");
+        konst obj = new DataExample("name");
         obj.getName();
         obj.getTags();
         obj.setScore(1.5);
@@ -33,16 +33,16 @@ import java.util.Arrays;
 // FILE: test.kt
 
 fun box(): String {
-    val obj = DataExample("name")
+    konst obj = DataExample("name")
     obj.getName()
     assertEquals(obj.name, "name")
     obj.getTags()
-    val tags = obj.tags
+    konst tags = obj.tags
     obj.setScore(1.5)
     assertEquals(obj.score, 1.5)
     obj.score = 2.5
     assertEquals(obj.score, 2.5)
 
-    val ex: DataExample.Exercise<Int> = DataExample.Exercise.of("name", 12, listOf(1, 2, 3))
+    konst ex: DataExample.Exercise<Int> = DataExample.Exercise.of("name", 12, listOf(1, 2, 3))
     return "OK"
 }

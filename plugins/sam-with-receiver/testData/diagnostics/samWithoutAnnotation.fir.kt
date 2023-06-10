@@ -11,7 +11,7 @@ fun test() {
     }
 
     Sam <!ARGUMENT_TYPE_MISMATCH!>{ b ->
-        val a = this<!UNRESOLVED_LABEL!>@Sam<!>
+        konst a = this<!UNRESOLVED_LABEL!>@Sam<!>
         System.out.<!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(a)
         ""
     }<!>

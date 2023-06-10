@@ -30,20 +30,20 @@ object ModifierCheckerCore {
     ) {
         if (listOwner is KtDeclarationWithBody) {
             // KtFunction or KtPropertyAccessor
-            for (parameter in listOwner.valueParameters) {
+            for (parameter in listOwner.konstueParameters) {
                 if (!parameter.hasValOrVar()) {
                     check(parameter, trace, trace[BindingContext.VALUE_PARAMETER, parameter], languageVersionSettings)
                 }
             }
         }
-        val actualTargets = AnnotationChecker.getDeclarationSiteActualTargetList(
+        konst actualTargets = AnnotationChecker.getDeclarationSiteActualTargetList(
             listOwner, descriptor as? ClassDescriptor, trace.bindingContext
         )
-        val list = listOwner.modifierList ?: return
+        konst list = listOwner.modifierList ?: return
         checkModifierList(list, trace, descriptor?.containingDeclaration, actualTargets, languageVersionSettings)
     }
 
-    private val MODIFIER_KEYWORD_SET = TokenSet.orSet(SOFT_KEYWORDS, TokenSet.create(IN_KEYWORD, FUN_KEYWORD))
+    private konst MODIFIER_KEYWORD_SET = TokenSet.orSet(SOFT_KEYWORDS, TokenSet.create(IN_KEYWORD, FUN_KEYWORD))
 
     private fun checkModifierList(
         list: KtModifierList,
@@ -56,9 +56,9 @@ object ModifierCheckerCore {
 
         // It's a list of all nodes with error already reported
         // General strategy: report no more than one error but any number of warnings
-        val incorrectNodes = hashSetOf<ASTNode>()
+        konst incorrectNodes = hashSetOf<ASTNode>()
 
-        val children = list.node.getChildren(MODIFIER_KEYWORD_SET)
+        konst children = list.node.getChildren(MODIFIER_KEYWORD_SET)
         for (second in children) {
             for (first in children) {
                 if (first == second) {
@@ -83,9 +83,9 @@ object ModifierCheckerCore {
         owner: PsiElement,
         incorrectNodes: MutableSet<ASTNode>
     ) {
-        val firstModifier = firstNode.elementType as KtModifierKeywordToken
-        val secondModifier = secondNode.elementType as KtModifierKeywordToken
-        when (val compatibility = compatibility(firstModifier, secondModifier)) {
+        konst firstModifier = firstNode.elementType as KtModifierKeywordToken
+        konst secondModifier = secondNode.elementType as KtModifierKeywordToken
+        when (konst compatibility = compatibility(firstModifier, secondModifier)) {
             Compatibility.COMPATIBLE -> {
             }
             Compatibility.REPEATED -> if (incorrectNodes.add(secondNode)) {
@@ -115,16 +115,16 @@ object ModifierCheckerCore {
 
     // Should return false if error is reported, true otherwise
     private fun checkTarget(trace: BindingTrace, node: ASTNode, actualTargets: List<KotlinTarget>): Boolean {
-        val modifier = node.elementType as KtModifierKeywordToken
+        konst modifier = node.elementType as KtModifierKeywordToken
 
-        val possibleTargets = possibleTargetMap[modifier] ?: emptySet()
+        konst possibleTargets = possibleTargetMap[modifier] ?: emptySet()
         if (!actualTargets.any { it in possibleTargets }) {
             trace.report(Errors.WRONG_MODIFIER_TARGET.on(node.psi, modifier, actualTargets.firstOrNull()?.description ?: "this"))
             return false
         }
-        val deprecatedModifierReplacement = deprecatedModifierMap[modifier]
-        val deprecatedTargets = deprecatedTargetMap[modifier] ?: emptySet()
-        val redundantTargets = redundantTargetMap[modifier] ?: emptySet()
+        konst deprecatedModifierReplacement = deprecatedModifierMap[modifier]
+        konst deprecatedTargets = deprecatedTargetMap[modifier] ?: emptySet()
+        konst redundantTargets = redundantTargetMap[modifier] ?: emptySet()
         when {
             deprecatedModifierReplacement != null ->
                 trace.report(Errors.DEPRECATED_MODIFIER.on(node.psi, modifier, deprecatedModifierReplacement))
@@ -155,9 +155,9 @@ object ModifierCheckerCore {
         parentDescriptor: DeclarationDescriptor?,
         languageVersionSettings: LanguageVersionSettings
     ): Boolean {
-        val modifier = node.elementType as KtModifierKeywordToken
+        konst modifier = node.elementType as KtModifierKeywordToken
 
-        val actualParents: List<KotlinTarget> = when (parentDescriptor) {
+        konst actualParents: List<KotlinTarget> = when (parentDescriptor) {
             is ClassDescriptor -> KotlinTarget.classActualTargets(
                 parentDescriptor.kind,
                 isInnerClass = parentDescriptor.isInner,
@@ -169,7 +169,7 @@ object ModifierCheckerCore {
             is FunctionDescriptor -> KotlinTarget.FUNCTION_LIST
             else -> KotlinTarget.FILE_LIST
         }
-        val deprecatedParents = deprecatedParentTargetMap[modifier]
+        konst deprecatedParents = deprecatedParentTargetMap[modifier]
         if (deprecatedParents != null && actualParents.any { it in deprecatedParents }) {
             trace.report(
                 Errors.DEPRECATED_MODIFIER_CONTAINING_DECLARATION.on(
@@ -189,7 +189,7 @@ object ModifierCheckerCore {
                 )
             )
         }
-        val possibleParentPredicate = possibleParentTargetPredicateMap[modifier] ?: return true
+        konst possibleParentPredicate = possibleParentTargetPredicateMap[modifier] ?: return true
         if (actualParents.any { possibleParentPredicate.isAllowed(it, languageVersionSettings) }) return true
         trace.report(
             Errors.WRONG_MODIFIER_CONTAINING_DECLARATION.on(
@@ -207,16 +207,16 @@ object ModifierCheckerCore {
         languageVersionSettings: LanguageVersionSettings,
         actualTargets: List<KotlinTarget>
     ): Boolean {
-        val modifier = node.elementType as KtModifierKeywordToken
+        konst modifier = node.elementType as KtModifierKeywordToken
 
-        val dependencies = featureDependencies[modifier] ?: return true
+        konst dependencies = featureDependencies[modifier] ?: return true
         for (dependency in dependencies) {
-            val restrictedTargets = featureDependenciesTargets[dependency]
+            konst restrictedTargets = featureDependenciesTargets[dependency]
             if (restrictedTargets != null && actualTargets.intersect(restrictedTargets).isEmpty()) {
                 continue
             }
 
-            val featureSupport = languageVersionSettings.getFeatureSupport(dependency)
+            konst featureSupport = languageVersionSettings.getFeatureSupport(dependency)
 
             if (dependency == LanguageFeature.Coroutines) {
                 checkCoroutinesFeature(languageVersionSettings, trace, node.psi)
@@ -230,7 +230,7 @@ object ModifierCheckerCore {
                 }
             }
 
-            val diagnosticData = dependency to languageVersionSettings
+            konst diagnosticData = dependency to languageVersionSettings
             when (featureSupport) {
                 LanguageFeature.State.ENABLED_WITH_WARNING -> {
                     trace.report(Errors.EXPERIMENTAL_FEATURE_WARNING.on(node.psi, diagnosticData))

@@ -14,15 +14,15 @@ class Controller {
 
     fun hasNext() = lastSuspension != null
     fun next() {
-        val x = lastSuspension!!
+        konst x = lastSuspension!!
         lastSuspension = null
         x.resume("56")
     }
 }
 
 fun builder(c: suspend Controller.() -> Unit) {
-    val controller1 = Controller()
-    val controller2 = Controller()
+    konst controller1 = Controller()
+    konst controller2 = Controller()
 
     c.startCoroutine(controller1, EmptyContinuation)
     c.startCoroutine(controller2, EmptyContinuation)
@@ -32,8 +32,8 @@ fun builder(c: suspend Controller.() -> Unit) {
 
 // TODO: additional parameters are not supported yet
 //fun builder2(coroutine c: Controller.(Long, String) -> Continuation<Unit>) {
-//    val controller1 = Controller()
-//    val controller2 = Controller()
+//    konst controller1 = Controller()
+//    konst controller2 = Controller()
 //
 //    c(controller1, 1234567890123456789L, "Q").resume(Unit)
 //    c(controller2, 1234567890123456789L, "Q").resume(Unit)

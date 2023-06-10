@@ -11,18 +11,18 @@ import kotlin.reflect.full.*
 
 class C {
     fun foo() {}
-    val bar = 42
+    konst bar = 42
 }
 
-val C_fooReflect = C::class.functions.find { it.name == "foo" }!!
-val C_foo = C::foo
-val cFoo = C()::foo
+konst C_fooReflect = C::class.functions.find { it.name == "foo" }!!
+konst C_foo = C::foo
+konst cFoo = C()::foo
 
-val C_barReflect = C::class.memberProperties.find { it.name == "bar" }!!
-val C_bar = C::bar
-val cBar= C()::bar
+konst C_barReflect = C::class.memberProperties.find { it.name == "bar" }!!
+konst C_bar = C::bar
+konst cBar= C()::bar
 
-val Any.className: String
+konst Any.className: String
         get() = this::class.qualifiedName!!
 
 fun box(): String =

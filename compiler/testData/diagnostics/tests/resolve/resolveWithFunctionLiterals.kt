@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 object A {
-    val iii = 42
+    konst iii = 42
 }
 
 //inappropriate but participating in resolve functions

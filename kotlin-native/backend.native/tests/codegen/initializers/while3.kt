@@ -4,7 +4,7 @@
  */
 
 // FILE: lib.kt
-val y = getY()
+konst y = getY()
 
 private fun getY() = 42
 

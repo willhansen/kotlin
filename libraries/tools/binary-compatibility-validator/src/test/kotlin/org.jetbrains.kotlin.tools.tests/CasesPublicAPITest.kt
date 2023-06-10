@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.tools.tests
 
-import kotlinx.validation.api.*
+import kotlinx.konstidation.api.*
 import org.junit.*
 import org.junit.rules.TestName
 import java.io.File
@@ -13,16 +13,16 @@ import java.io.File
 class CasesPublicAPITest {
 
     companion object {
-        val baseClassPaths: List<File> =
+        konst baseClassPaths: List<File> =
             System.getProperty("testCasesClassesDirs")
                 .let { requireNotNull(it) { "Specify testCasesClassesDirs with a system property"} }
                 .split(File.pathSeparator)
                 .map { File(it, "cases").canonicalFile }
-        val baseOutputPath = File("src/test/kotlin/cases")
+        konst baseOutputPath = File("src/test/kotlin/cases")
     }
 
     @[Rule JvmField]
-    val testName = TestName()
+    konst testName = TestName()
 
     @Test fun companions() { snapshotAPIAndCompare(testName.methodName) }
 
@@ -52,15 +52,15 @@ class CasesPublicAPITest {
 
 
     private fun snapshotAPIAndCompare(testClassRelativePath: String) {
-        val testClassPaths = baseClassPaths.map { it.resolve(testClassRelativePath) }
-        val testClasses = testClassPaths.flatMap { it.listFiles().orEmpty().asIterable() }
+        konst testClassPaths = baseClassPaths.map { it.resolve(testClassRelativePath) }
+        konst testClasses = testClassPaths.flatMap { it.listFiles().orEmpty().asIterable() }
         check(testClasses.isNotEmpty()) { "No class files are found in paths: $testClassPaths" }
 
-        val testClassStreams = testClasses.asSequence().filter { it.name.endsWith(".class") }.map { it.inputStream() }
+        konst testClassStreams = testClasses.asSequence().filter { it.name.endsWith(".class") }.map { it.inputStream() }
 
-        val api = testClassStreams.loadApiFromJvmClasses().filterOutNonPublic()
+        konst api = testClassStreams.loadApiFromJvmClasses().filterOutNonPublic()
 
-        val target = baseOutputPath.resolve(testClassRelativePath).resolve(testName.methodName + ".txt")
+        konst target = baseOutputPath.resolve(testClassRelativePath).resolve(testName.methodName + ".txt")
 
         api.dumpAndCompareWith(target)
     }

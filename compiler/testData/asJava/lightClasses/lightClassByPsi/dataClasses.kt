@@ -1,5 +1,5 @@
-data class User(val name: String = "", val age: Int = 0)
+data class User(konst name: String = "", konst age: Int = 0)
 
-data class Person(val name: String) {
+data class Person(konst name: String) {
     var age: Int = 0
 }

@@ -16,13 +16,13 @@ import kotlin.test.*
 class CirTreeClassDeserializerTest : AbstractCirTreeDeserializerTest() {
 
     fun `test simple class`() {
-        val module = createCirTreeFromSourceCode("class X")
-        val clazz = module.assertSingleClass().clazz
+        konst module = createCirTreeFromSourceCode("class X")
+        konst clazz = module.assertSingleClass().clazz
         assertEquals(Visibilities.Public, clazz.visibility, "Expected class to be public")
         assertNull(clazz.companion, "Expected class *not* having a companion")
         assertFalse(clazz.isInner, "Expected class *not* being inner")
         assertFalse(clazz.isCompanion, "Expected class *not* being companion")
-        assertFalse(clazz.isValue, "Expected class *not* being value")
+        assertFalse(clazz.isValue, "Expected class *not* being konstue")
         assertFalse(clazz.isData, "Expected class *not* being data class")
         assertTrue(clazz.supertypes.isEmpty(), "Expected class not having any explicit supertypes")
         assertEquals(Modality.FINAL, clazz.modality, "Expected class to be final")
@@ -30,7 +30,7 @@ class CirTreeClassDeserializerTest : AbstractCirTreeDeserializerTest() {
     }
 
     fun `test nested class`() {
-        val module = createCirTreeFromSourceCode(
+        konst module = createCirTreeFromSourceCode(
             """
             class Outer {
                 class Inner
@@ -38,16 +38,16 @@ class CirTreeClassDeserializerTest : AbstractCirTreeDeserializerTest() {
             """
         )
 
-        val pkg = module.assertSinglePackage()
-        val outerClass = pkg.classes.singleOrNull() ?: kotlin.test.fail("Expected single class in package")
+        konst pkg = module.assertSinglePackage()
+        konst outerClass = pkg.classes.singleOrNull() ?: kotlin.test.fail("Expected single class in package")
         assertEquals("Outer", outerClass.clazz.name.toStrippedString())
 
-        val innerClass = outerClass.classes.singleOrNull() ?: kotlin.test.fail("Expected single nested class 'Inner'")
+        konst innerClass = outerClass.classes.singleOrNull() ?: kotlin.test.fail("Expected single nested class 'Inner'")
         assertFalse(innerClass.clazz.isInner, "Expected nested class to *not* be inner")
     }
 
     fun `test inner class`() {
-        val module = createCirTreeFromSourceCode(
+        konst module = createCirTreeFromSourceCode(
             """
             class Outer {
                 inner class Inner
@@ -55,53 +55,53 @@ class CirTreeClassDeserializerTest : AbstractCirTreeDeserializerTest() {
             """
         )
 
-        val pkg = module.assertSinglePackage()
-        val outerClass = pkg.classes.singleOrNull() ?: kotlin.test.fail("Expected single class in package")
+        konst pkg = module.assertSinglePackage()
+        konst outerClass = pkg.classes.singleOrNull() ?: kotlin.test.fail("Expected single class in package")
         assertEquals("Outer", outerClass.clazz.name.toStrippedString())
 
-        val innerClass = outerClass.classes.singleOrNull() ?: kotlin.test.fail("Expected single nested class 'Inner'")
+        konst innerClass = outerClass.classes.singleOrNull() ?: kotlin.test.fail("Expected single nested class 'Inner'")
         assertTrue(innerClass.clazz.isInner, "Expected nested class to be inner class")
     }
 
 
     fun `test data class`() {
-        val module = createCirTreeFromSourceCode("data class X(val x: String)")
-        val clazz = module.assertSingleClass()
+        konst module = createCirTreeFromSourceCode("data class X(konst x: String)")
+        konst clazz = module.assertSingleClass()
         assertTrue(clazz.clazz.isData, "Expected is data class")
         assertEquals(1, clazz.constructors.size, "Expected single constructor")
         assertEquals(1, clazz.properties.size, "Expected single property")
     }
 
     fun `test companion`() {
-        val module = createCirTreeFromSourceCode(
+        konst module = createCirTreeFromSourceCode(
             """
             class Outer {
                 companion object {
-                    val x: Int = 42
+                    konst x: Int = 42
                 }
             }
         """.trimIndent()
         )
-        val clazz = module.assertSingleClass()
-        val companion = clazz.classes.singleOrNull() ?: kotlin.test.fail("Expected single class in 'Outer'")
+        konst clazz = module.assertSingleClass()
+        konst companion = clazz.classes.singleOrNull() ?: kotlin.test.fail("Expected single class in 'Outer'")
         assertTrue(companion.clazz.isCompanion, "Expected companion being marked as companion")
         assertEquals(1, companion.properties.size, "Expected exactly one property in companion")
     }
 
     fun `test object`() {
-        val module = createCirTreeFromSourceCode("object X")
-        val clazz = module.assertSingleClass()
+        konst module = createCirTreeFromSourceCode("object X")
+        konst clazz = module.assertSingleClass()
         assertEquals(ClassKind.OBJECT, clazz.clazz.kind, "Expected object class kind")
     }
 
     fun `test interface`() {
-        val module = createCirTreeFromSourceCode("interface X")
-        val clazz = module.assertSingleClass()
+        konst module = createCirTreeFromSourceCode("interface X")
+        konst clazz = module.assertSingleClass()
         assertEquals(ClassKind.INTERFACE, clazz.clazz.kind)
     }
 
     fun `test supertypes`() {
-        val module = createCirTreeFromSourceCode(
+        konst module = createCirTreeFromSourceCode(
             """
             interface A
             interface B: A 
@@ -110,16 +110,16 @@ class CirTreeClassDeserializerTest : AbstractCirTreeDeserializerTest() {
             """.trimIndent()
         )
 
-        val pkg = module.assertSinglePackage()
-        val xClass = pkg.classes.singleOrNull { it.clazz.name.toStrippedString() == "X" } ?: kotlin.test.fail("Missing class 'X'")
-        val xSuperType = xClass.clazz.supertypes.singleOrNull() ?: kotlin.test.fail("Expected single supertype for 'X'")
-        val xClassSuperType = assertIs<CirClassType>(xSuperType, "Expected xSuperType to be class type")
+        konst pkg = module.assertSinglePackage()
+        konst xClass = pkg.classes.singleOrNull { it.clazz.name.toStrippedString() == "X" } ?: kotlin.test.fail("Missing class 'X'")
+        konst xSuperType = xClass.clazz.supertypes.singleOrNull() ?: kotlin.test.fail("Expected single supertype for 'X'")
+        konst xClassSuperType = assertIs<CirClassType>(xSuperType, "Expected xSuperType to be class type")
         assertEquals("/C", xClassSuperType.classifierId.toString())
 
     }
 
     fun `test supertypes - supertype being nested`() {
-        val module = createCirTreeFromSourceCode(
+        konst module = createCirTreeFromSourceCode(
             """
             class Outer {
                 open inner class Inner
@@ -128,36 +128,36 @@ class CirTreeClassDeserializerTest : AbstractCirTreeDeserializerTest() {
             """.trimIndent()
         )
 
-        val pkg = module.assertSinglePackage()
-        val xClass = pkg.classes.withClosure<CirTreeClass> { it.classes }
+        konst pkg = module.assertSinglePackage()
+        konst xClass = pkg.classes.withClosure<CirTreeClass> { it.classes }
             .singleOrNull { it.clazz.name.toStrippedString() == "X" } ?: kotlin.test.fail("Missing class 'X'")
-        val xSuperType = xClass.clazz.supertypes.singleOrNull()
+        konst xSuperType = xClass.clazz.supertypes.singleOrNull()
             ?: kotlin.test.fail("Expected single supertype for 'X'. Found ${xClass.clazz.supertypes}")
-        val xClassSuperType = assertIs<CirClassType>(xSuperType, "Expected xSuperType to be class type")
+        konst xClassSuperType = assertIs<CirClassType>(xSuperType, "Expected xSuperType to be class type")
         assertEquals("/Outer.Inner", xClassSuperType.classifierId.toString())
         assertEquals("/Outer", xClassSuperType.outerType?.classifierId.toString())
     }
 
     fun `test abstract class`() {
-        val module = createCirTreeFromSourceCode("abstract class X")
-        val clazz = module.assertSingleClass()
+        konst module = createCirTreeFromSourceCode("abstract class X")
+        konst clazz = module.assertSingleClass()
         assertEquals(Modality.ABSTRACT, clazz.clazz.modality)
     }
 
     fun `test open class`() {
-        val module = createCirTreeFromSourceCode("open class X")
-        val clazz = module.assertSingleClass()
+        konst module = createCirTreeFromSourceCode("open class X")
+        konst clazz = module.assertSingleClass()
         assertEquals(Modality.OPEN, clazz.clazz.modality)
     }
 
     fun `test class with properties functions and nested classes`() {
-        val module = createCirTreeFromSourceCode(
+        konst module = createCirTreeFromSourceCode(
             """
                 class X {
-                    val myInt: Int = 42
-                    val myFloat: Float = 42f
-                    val myDouble: Double = 42.0
-                    val myString = "hello"
+                    konst myInt: Int = 42
+                    konst myFloat: Float = 42f
+                    konst myDouble: Double = 42.0
+                    konst myString = "hello"
                     
                     fun myIntFunction(int: Int) = int
                     fun myStringFunction(string: String) = string
@@ -168,7 +168,7 @@ class CirTreeClassDeserializerTest : AbstractCirTreeDeserializerTest() {
             """.trimIndent()
         )
 
-        val clazz = module.assertSingleClass()
+        konst clazz = module.assertSingleClass()
 
         fun assertContainsProperty(name: String) {
             clazz.properties.singleOrNull { it.name.toStrippedString() == name }

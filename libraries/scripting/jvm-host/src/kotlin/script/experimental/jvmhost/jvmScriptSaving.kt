@@ -25,16 +25,16 @@ import kotlin.script.experimental.jvm.util.scriptCompilationClasspathFromContext
 
 // TODO: generate execution code (main)
 
-open class BasicJvmScriptClassFilesGenerator(val outputDir: File) : ScriptEvaluator {
+open class BasicJvmScriptClassFilesGenerator(konst outputDir: File) : ScriptEkonstuator {
 
     override suspend operator fun invoke(
         compiledScript: CompiledScript,
-        scriptEvaluationConfiguration: ScriptEvaluationConfiguration
-    ): ResultWithDiagnostics<EvaluationResult> {
+        scriptEkonstuationConfiguration: ScriptEkonstuationConfiguration
+    ): ResultWithDiagnostics<EkonstuationResult> {
         try {
             if (compiledScript !is KJvmCompiledScript)
                 return failure("Cannot generate classes: unsupported compiled script type $compiledScript")
-            val module = (compiledScript.getCompiledModule() as? KJvmCompiledModuleInMemory)
+            konst module = (compiledScript.getCompiledModule() as? KJvmCompiledModuleInMemory)
                 ?: return failure("Cannot generate classes: unsupported module type ${compiledScript.getCompiledModule()}")
             for ((path, bytes) in module.compilerOutputFiles) {
                 File(outputDir, path).apply {
@@ -44,7 +44,7 @@ open class BasicJvmScriptClassFilesGenerator(val outputDir: File) : ScriptEvalua
                     writeBytes(bytes)
                 }
             }
-            return ResultWithDiagnostics.Success(EvaluationResult(ResultValue.NotEvaluated, scriptEvaluationConfiguration))
+            return ResultWithDiagnostics.Success(EkonstuationResult(ResultValue.NotEkonstuated, scriptEkonstuationConfiguration))
         } catch (e: Throwable) {
             return ResultWithDiagnostics.Failure(
                 e.asDiagnostics(customMessage = "Cannot generate script classes: ${e.message}", path = compiledScript.sourceLocationId)
@@ -54,21 +54,21 @@ open class BasicJvmScriptClassFilesGenerator(val outputDir: File) : ScriptEvalua
 }
 
 fun KJvmCompiledScript.saveToJar(outputJar: File) {
-    val module = (getCompiledModule() as? KJvmCompiledModuleInMemory)
+    konst module = (getCompiledModule() as? KJvmCompiledModuleInMemory)
         ?: throw IllegalArgumentException("Unsupported module type ${getCompiledModule()}")
-    val dependenciesFromScript = compilationConfiguration[ScriptCompilationConfiguration.dependencies]
+    konst dependenciesFromScript = compilationConfiguration[ScriptCompilationConfiguration.dependencies]
         ?.filterIsInstance<JvmDependency>()
         ?.flatMap { it.classpath }
         .orEmpty()
-    val dependenciesForMain = scriptCompilationClasspathFromContextOrNull(
+    konst dependenciesForMain = scriptCompilationClasspathFromContextOrNull(
         KotlinPaths.Jar.ScriptingLib.baseName, KotlinPaths.Jar.ScriptingJvmLib.baseName,
         classLoader = this::class.java.classLoader,
         wholeClasspath = false
     ) ?: emptyList()
     // saving only existing files, so the check for the existence in the loadScriptFromJar is meaningful
-    val dependencies = (dependenciesFromScript + dependenciesForMain).distinct().filter { it.exists() }
+    konst dependencies = (dependenciesFromScript + dependenciesForMain).distinct().filter { it.exists() }
     FileOutputStream(outputJar).use { fileStream ->
-        val manifest = Manifest()
+        konst manifest = Manifest()
         manifest.mainAttributes.apply {
             putValue("Manifest-Version", "1.0")
             putValue("Created-By", "JetBrains Kotlin")
@@ -95,7 +95,7 @@ fun KJvmCompiledScript.saveToJar(outputJar: File) {
 }
 
 fun File.loadScriptFromJar(checkMissingDependencies: Boolean = true): CompiledScript? {
-    val (className: String?, classPathUrls) = this.inputStream().use { ostr ->
+    konst (className: String?, classPathUrls) = this.inputStream().use { ostr ->
         JarInputStream(ostr).use {
             it.manifest.mainAttributes.getValue("Main-Class") to
                     (it.manifest.mainAttributes.getValue("Class-Path")?.split(" ") ?: emptyList())
@@ -103,28 +103,28 @@ fun File.loadScriptFromJar(checkMissingDependencies: Boolean = true): CompiledSc
     }
     if (className == null) return null
 
-    val classPath = classPathUrls.mapNotNullTo(mutableListOf(this)) { cpEntry ->
+    konst classPath = classPathUrls.mapNotNullTo(mutableListOf(this)) { cpEntry ->
         File(URI(cpEntry)).takeIf { it.exists() } ?: File(cpEntry).takeIf { it.exists() }
     }
     if (!checkMissingDependencies || classPathUrls.size + 1 == classPath.size) {
         return KJvmCompiledScriptLazilyLoadedFromClasspath(className, classPath)
     } else {
-        // Assuming that some script dependencies are not accessible anymore so the script is not valid and should be recompiled to reresolve dependencies
+        // Assuming that some script dependencies are not accessible anymore so the script is not konstid and should be recompiled to reresolve dependencies
         return null
     }
 }
 
-open class BasicJvmScriptJarGenerator(val outputJar: File) : ScriptEvaluator {
+open class BasicJvmScriptJarGenerator(konst outputJar: File) : ScriptEkonstuator {
 
     override suspend operator fun invoke(
         compiledScript: CompiledScript,
-        scriptEvaluationConfiguration: ScriptEvaluationConfiguration
-    ): ResultWithDiagnostics<EvaluationResult> {
+        scriptEkonstuationConfiguration: ScriptEkonstuationConfiguration
+    ): ResultWithDiagnostics<EkonstuationResult> {
         try {
             if (compiledScript !is KJvmCompiledScript)
                 return failure("Cannot generate jar: unsupported compiled script type $compiledScript")
             compiledScript.saveToJar(outputJar)
-            return ResultWithDiagnostics.Success(EvaluationResult(ResultValue.NotEvaluated, scriptEvaluationConfiguration))
+            return ResultWithDiagnostics.Success(EkonstuationResult(ResultValue.NotEkonstuated, scriptEkonstuationConfiguration))
         } catch (e: Throwable) {
             return ResultWithDiagnostics.Failure(
                 e.asDiagnostics(customMessage = "Cannot generate script jar: ${e.message}", path = compiledScript.sourceLocationId)
@@ -134,38 +134,38 @@ open class BasicJvmScriptJarGenerator(val outputJar: File) : ScriptEvaluator {
 }
 
 private class KJvmCompiledScriptLazilyLoadedFromClasspath(
-    private val scriptClassFQName: String,
-    private val classPath: List<File>
+    private konst scriptClassFQName: String,
+    private konst classPath: List<File>
 ) : CompiledScript {
 
     private var loadedScript: KJvmCompiledScript? = null
 
     fun getScriptOrError(): KJvmCompiledScript = loadedScript ?: throw RuntimeException("Compiled script is not loaded yet")
 
-    override suspend fun getClass(scriptEvaluationConfiguration: ScriptEvaluationConfiguration?): ResultWithDiagnostics<KClass<*>> {
+    override suspend fun getClass(scriptEkonstuationConfiguration: ScriptEkonstuationConfiguration?): ResultWithDiagnostics<KClass<*>> {
         if (loadedScript == null) {
-            val actualEvaluationConfiguration = scriptEvaluationConfiguration ?: ScriptEvaluationConfiguration()
-            val baseClassLoader = actualEvaluationConfiguration[ScriptEvaluationConfiguration.jvm.baseClassLoader]
-            val loadDependencies = actualEvaluationConfiguration[ScriptEvaluationConfiguration.jvm.loadDependencies]!!
-            val classLoader = URLClassLoader(
+            konst actualEkonstuationConfiguration = scriptEkonstuationConfiguration ?: ScriptEkonstuationConfiguration()
+            konst baseClassLoader = actualEkonstuationConfiguration[ScriptEkonstuationConfiguration.jvm.baseClassLoader]
+            konst loadDependencies = actualEkonstuationConfiguration[ScriptEkonstuationConfiguration.jvm.loadDependencies]!!
+            konst classLoader = URLClassLoader(
                 classPath.let { if (loadDependencies) it else it.take(1) }.map { it.toURI().toURL() }.toTypedArray(),
                 baseClassLoader
             )
             loadedScript = createScriptFromClassLoader(scriptClassFQName, classLoader)
         }
-        return getScriptOrError().getClass(scriptEvaluationConfiguration)
+        return getScriptOrError().getClass(scriptEkonstuationConfiguration)
     }
 
-    override val compilationConfiguration: ScriptCompilationConfiguration
+    override konst compilationConfiguration: ScriptCompilationConfiguration
         get() = getScriptOrError().compilationConfiguration
 
-    override val sourceLocationId: String?
+    override konst sourceLocationId: String?
         get() = getScriptOrError().sourceLocationId
 
-    override val otherScripts: List<CompiledScript>
+    override konst otherScripts: List<CompiledScript>
         get() = getScriptOrError().otherScripts
 
-    override val resultField: Pair<String, KotlinType>?
+    override konst resultField: Pair<String, KotlinType>?
         get() = getScriptOrError().resultField
 }
 

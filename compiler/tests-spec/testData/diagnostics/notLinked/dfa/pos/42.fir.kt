@@ -9,8 +9,8 @@
 fun case_1() {
     var x: Boolean? = true
     x!!
-    val y = {
-        val x: Int?
+    konst y = {
+        konst x: Int?
         x = 10
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Boolean? & kotlin.Boolean")!>x<!>
@@ -25,7 +25,7 @@ fun case_1() {
 fun case_2() {
     var x: Boolean? = true
     x!!
-    val y = {
+    konst y = {
         var x: Int? = 10
         x = 10
     }
@@ -37,7 +37,7 @@ fun case_2() {
 fun case_3() {
     var x: Boolean? = true
     x!!
-    val y = {
+    konst y = {
         var x: Int? = 10
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Boolean? & kotlin.Boolean")!>x<!>

@@ -6,7 +6,7 @@ package org.jetbrains.kotlin.script.examples.jvm.embeddable.host
 
 import org.jetbrains.kotlin.script.examples.jvm.simple.SimpleScript
 import java.io.File
-import kotlin.script.experimental.api.EvaluationResult
+import kotlin.script.experimental.api.EkonstuationResult
 import kotlin.script.experimental.api.ResultWithDiagnostics
 import kotlin.script.experimental.host.toScriptSource
 import kotlin.script.experimental.jvm.dependenciesFromCurrentContext
@@ -14,8 +14,8 @@ import kotlin.script.experimental.jvm.jvm
 import kotlin.script.experimental.jvmhost.BasicJvmScriptingHost
 import kotlin.script.experimental.jvmhost.createJvmCompilationConfigurationFromTemplate
 
-fun evalFile(scriptFile: File): ResultWithDiagnostics<EvaluationResult> {
-    val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScript> {
+fun ekonstFile(scriptFile: File): ResultWithDiagnostics<EkonstuationResult> {
+    konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScript> {
         jvm {
             dependenciesFromCurrentContext(
                 "scripting-jvm-simple-script", /* script library jar name */
@@ -25,17 +25,17 @@ fun evalFile(scriptFile: File): ResultWithDiagnostics<EvaluationResult> {
         }
     }
 
-    return BasicJvmScriptingHost().eval(scriptFile.toScriptSource(), compilationConfiguration, null)
+    return BasicJvmScriptingHost().ekonst(scriptFile.toScriptSource(), compilationConfiguration, null)
 }
 
 fun main(vararg args: String) {
     if (args.size != 1) {
         println("usage: <app> <script file>")
     } else {
-        val scriptFile = File(args[0])
+        konst scriptFile = File(args[0])
         println("Executing script $scriptFile")
 
-        val res = evalFile(scriptFile)
+        konst res = ekonstFile(scriptFile)
 
         res.reports.forEach {
             println(" : ${it.message}" + if (it.exception == null) "" else ": ${it.exception}")

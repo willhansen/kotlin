@@ -9,8 +9,8 @@ fun bar(f: () -> Unit) {
 
 fun test() {
     bar {
-        // val actionId: Any = 1
-        val item: Any? = 1
+        // konst actionId: Any = 1
+        konst item: Any? = 1
         if (item != null) {
             // In original version, as I remember, `when` was an important to reproduce, but now it is not.
             // when(actionId){
@@ -21,8 +21,8 @@ fun test() {
         }
     }
     bar {
-        val actionId: Any = 1
-        val item: Any? = 1
+        konst actionId: Any = 1
+        konst item: Any? = 1
         if (item != null) {
             when (actionId) {
                 1 -> {

@@ -7,7 +7,7 @@ fun test1(foo: Foo<<!INCOMPATIBLE_MODIFIERS!>in<!> <!INCOMPATIBLE_MODIFIERS!>out
 fun test2(): Foo<in <!REPEATED_MODIFIER!>in<!> Int> = throw Exception()
 
 fun test3() {
-    val f: Foo<out <!REPEATED_MODIFIER!>out<!> <!REPEATED_MODIFIER!>out<!> <!REPEATED_MODIFIER!>out<!> Int>
+    konst f: Foo<out <!REPEATED_MODIFIER!>out<!> <!REPEATED_MODIFIER!>out<!> <!REPEATED_MODIFIER!>out<!> Int>
 
     class Bzz<in <!REPEATED_MODIFIER!>in<!> T>
 }

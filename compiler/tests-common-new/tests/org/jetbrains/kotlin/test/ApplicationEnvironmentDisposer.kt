@@ -16,13 +16,13 @@ import java.lang.reflect.Field
 
 class ApplicationEnvironmentDisposer : TestExecutionListener {
     companion object {
-        val ROOT_DISPOSABLE: Disposable = Disposer.newDisposable()
+        konst ROOT_DISPOSABLE: Disposable = Disposer.newDisposable()
     }
 
     override fun testPlanExecutionFinished(testPlan: TestPlan) {
         KotlinCoreEnvironment.disposeApplicationEnvironment()
         Disposer.dispose(ROOT_DISPOSABLE)
-        val ourApplicationField: Field = ApplicationManager::class.java.getDeclaredField("ourApplication")
+        konst ourApplicationField: Field = ApplicationManager::class.java.getDeclaredField("ourApplication")
         ourApplicationField.isAccessible = true
         ourApplicationField.set(null, null)
     }

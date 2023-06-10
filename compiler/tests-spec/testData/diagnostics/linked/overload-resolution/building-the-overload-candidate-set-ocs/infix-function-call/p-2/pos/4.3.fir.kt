@@ -25,7 +25,7 @@ import libPackage.contains
 
 
 fun case1() {
-    val regex = Regex("")
+    konst regex = Regex("")
     <!DEBUG_INFO_CALL("fqName: libPackage.contains; typeCall: infix operator extension function")!>"" contains  regex<!>
 }
 
@@ -41,6 +41,6 @@ fun case2() {
         println("my local contains")
         return true
     }
-    val regex = Regex("")
+    konst regex = Regex("")
     <!DEBUG_INFO_CALL("fqName: sentence3.case2.contains; typeCall: infix operator extension function")!>"" contains  regex<!>
 }

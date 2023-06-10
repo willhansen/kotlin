@@ -12,7 +12,7 @@ fun box(): String
 // CHECK JS_IR NATIVE:
 //   Mangled name: #test_1(kotlin.Any?){}
 //   Public signature: /test_1|6244764910155513609[0]
-fun test_1(value: Any?): String?
+fun test_1(konstue: Any?): String?
 
 // CHECK JVM_IR:
 //   Mangled name: #test_2(kotlin.Any?){}kotlin.String?
@@ -20,5 +20,5 @@ fun test_1(value: Any?): String?
 // CHECK JS_IR NATIVE:
 //   Mangled name: #test_2(kotlin.Any?){}
 //   Public signature: /test_2|-2820233899677445404[0]
-fun test_2(value: Any?): String?
+fun test_2(konstue: Any?): String?
 

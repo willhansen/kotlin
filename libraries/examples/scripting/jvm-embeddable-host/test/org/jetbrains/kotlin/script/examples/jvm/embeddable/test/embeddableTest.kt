@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.script.examples.jvm.embeddable.test
 
-import org.jetbrains.kotlin.script.examples.jvm.embeddable.host.evalFile
+import org.jetbrains.kotlin.script.examples.jvm.embeddable.host.ekonstFile
 import org.junit.Assert
 import java.io.File
 import org.junit.Test
@@ -16,7 +16,7 @@ class SimpleTest {
     @Test
     fun testSimple() {
         // see comments in the script file
-        val res = evalFile(File("testData/useGuava.simplescript.kts"))
+        konst res = ekonstFile(File("testData/useGuava.simplescript.kts"))
 
         Assert.assertTrue(
             "test failed:\n  ${res.reports.joinToString("\n  ") { it.message + if (it.exception == null) "" else ": ${it.exception}" }}",

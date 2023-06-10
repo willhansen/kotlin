@@ -12,13 +12,13 @@ import org.jetbrains.kotlin.gradle.utils.appendLine
 
 internal object CompilationFreeArgsValidator : AggregateReporter() {
 
-    private const val EXTRA_PROPERTY_NAME = "org.jetbrains.kotlin.native.incorrectFreeArgs"
+    private const konst EXTRA_PROPERTY_NAME = "org.jetbrains.kotlin.native.incorrectFreeArgs"
 
-    private data class IncorrectArgumentsReport(val compilation: KotlinNativeCompilation, val incorrectArgs: List<String>) {
-        val target: KotlinNativeTarget
+    private data class IncorrectArgumentsReport(konst compilation: KotlinNativeCompilation, konst incorrectArgs: List<String>) {
+        konst target: KotlinNativeTarget
             get() = compilation.target
 
-        val project: Project
+        konst project: Project
             get() = target.project
     }
 
@@ -30,8 +30,8 @@ internal object CompilationFreeArgsValidator : AggregateReporter() {
 
     private fun String.withIndent(indent: Int) = prependIndent("    ".repeat(indent))
 
-    fun validate(compilation: KotlinNativeCompilation) {
-        val incorrectArgs = compilation.kotlinOptions.freeCompilerArgs.filter { arg ->
+    fun konstidate(compilation: KotlinNativeCompilation) {
+        konst incorrectArgs = compilation.kotlinOptions.freeCompilerArgs.filter { arg ->
             arg.startsWithIncorrectPrefix() || arg.disablesDevirtualization()
         }
         if (incorrectArgs.isNotEmpty()) {
@@ -56,7 +56,7 @@ internal object CompilationFreeArgsValidator : AggregateReporter() {
     override fun printWarning(project: Project) {
         // filterIsInstance helps against potential class loaders conflict or misconfiguration.
         @Suppress("UselessCallOnCollection")
-        val incorrectArgs = project
+        konst incorrectArgs = project
             .getOrRegisterIncorrectArguments()
             .filterIsInstance<IncorrectArgumentsReport>()
             .groupBy { it.project }
@@ -66,12 +66,12 @@ internal object CompilationFreeArgsValidator : AggregateReporter() {
             return
         }
 
-        val message = buildString {
+        konst message = buildString {
             appendLine()
             appendLine("The following free compiler arguments must be specified for a binary instead of a compilation:")
             incorrectArgs.forEach { (project, reports) ->
                 appendLine("* In project '${project.path}':".withIndent(1))
-                val groupedReports = reports
+                konst groupedReports = reports
                     .groupBy { it.target }
                     .toSortedMap(compareBy { it.name })
                 groupedReports.forEach { (target, reports) ->
@@ -94,7 +94,7 @@ internal object CompilationFreeArgsValidator : AggregateReporter() {
         project.logger.warn(message)
     }
 
-    private val incorrectArgPrefixes = listOf(
+    private konst incorrectArgPrefixes = listOf(
         // Optimizations/debug info.
         "-opt",
         "-g",

@@ -19,7 +19,7 @@ public class AsmUtil {
 package frontend
 public class JvmDeclarationOrigin {
     companion object {
-        public val NO_ORIGIN: JvmDeclarationOrigin = JvmDeclarationOrigin()
+        public konst NO_ORIGIN: JvmDeclarationOrigin = JvmDeclarationOrigin()
     }
 }
 

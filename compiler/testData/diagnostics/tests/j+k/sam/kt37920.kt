@@ -18,7 +18,7 @@ public interface ThrowableComputable<T, E extends Throwable> {
 // FILE: test.kt
 
 fun main() {
-    val headers = A.compute(
+    konst headers = A.compute(
         ThrowableComputable {
             getCollection()
         }

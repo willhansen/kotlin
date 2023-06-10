@@ -3,7 +3,7 @@
 enum class X { A, B, C }
 
 fun test(a: X) =
-    when (val subject = a) {
+    when (konst subject = a) {
         X.A -> 0
         X.B -> 1
         X.C -> 2

@@ -19,19 +19,19 @@ package org.jetbrains.kotlin.resolve.calls.tower
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 
-private val INAPPLICABLE_STATUSES = setOf(
+private konst INAPPLICABLE_STATUSES = setOf(
     CandidateApplicability.INAPPLICABLE,
     CandidateApplicability.INAPPLICABLE_ARGUMENTS_MAPPING_ERROR,
     CandidateApplicability.INAPPLICABLE_WRONG_RECEIVER
 )
 
-val CallableDescriptor.isSynthesized: Boolean
+konst CallableDescriptor.isSynthesized: Boolean
     get() = (this is CallableMemberDescriptor && kind == CallableMemberDescriptor.Kind.SYNTHESIZED)
 
-val CandidateWithBoundDispatchReceiver.requiresExtensionReceiver: Boolean
+konst CandidateWithBoundDispatchReceiver.requiresExtensionReceiver: Boolean
     get() = descriptor.extensionReceiverParameter != null
 
-val CandidateApplicability.isInapplicable: Boolean
+konst CandidateApplicability.isInapplicable: Boolean
     get() = this in INAPPLICABLE_STATUSES
 
 fun <C : Candidate> C.forceResolution(): C {

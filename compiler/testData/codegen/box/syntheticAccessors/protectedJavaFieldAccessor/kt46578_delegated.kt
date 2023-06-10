@@ -9,7 +9,7 @@ class Derived : Base() {
 }
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     d.delegated = "OK"
     return d.delegated
 }

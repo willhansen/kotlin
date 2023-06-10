@@ -1,6 +1,6 @@
 enum class E {
     A {
-        val x: String = ""
+        konst x: String = ""
         fun foo() {
             <expr>e</expr>
         }

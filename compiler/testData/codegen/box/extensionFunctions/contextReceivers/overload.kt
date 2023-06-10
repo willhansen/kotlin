@@ -2,10 +2,10 @@
 // TARGET_BACKEND: JVM_IR
 
 context(String, Int)
-fun overloaded(value: Any?) = "OK"
+fun overloaded(konstue: Any?) = "OK"
 
 context(String)
-fun overloaded(value: Any?) = "fail"
+fun overloaded(konstue: Any?) = "fail"
 
 fun box() = with("42") {
     with(42) {

@@ -20,20 +20,20 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 object FirJvmSuspensionPointInsideMutexLockChecker : FirFunctionCallChecker() {
-    private val synchronizedCallableId = CallableId(FqName("kotlin"), Name.identifier("synchronized"))
-    private val withLockCallableId = CallableId(FqName("kotlin.concurrent"), Name.identifier("withLock"))
+    private konst synchronizedCallableId = CallableId(FqName("kotlin"), Name.identifier("synchronized"))
+    private konst withLockCallableId = CallableId(FqName("kotlin.concurrent"), Name.identifier("withLock"))
 
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val symbol = expression.calleeReference.toResolvedCallableSymbol() ?: return
+        konst symbol = expression.calleeReference.toResolvedCallableSymbol() ?: return
         if (!symbol.isSuspend) return
-        val closestAnonymousFunction = context.findClosest<FirAnonymousFunction>() ?: return
+        konst closestAnonymousFunction = context.findClosest<FirAnonymousFunction>() ?: return
 
         for (call in context.qualifiedAccessOrAssignmentsOrAnnotationCalls.asReversed()) {
             if (call is FirFunctionCall) {
-                val callableSymbol = call.calleeReference.toResolvedCallableSymbol() ?: continue
+                konst callableSymbol = call.calleeReference.toResolvedCallableSymbol() ?: continue
                 if (callableSymbol.callableId == synchronizedCallableId) {
-                    val unwrappedFirstArgument = call.arguments.elementAtOrNull(1)?.unwrapArgument() ?: return
-                    val firstArgumentAnonymousFunction =
+                    konst unwrappedFirstArgument = call.arguments.elementAtOrNull(1)?.unwrapArgument() ?: return
+                    konst firstArgumentAnonymousFunction =
                         (unwrappedFirstArgument as? FirAnonymousFunctionExpression)?.anonymousFunction ?: return
 
                     if (closestAnonymousFunction == firstArgumentAnonymousFunction) {

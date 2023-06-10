@@ -8,7 +8,7 @@ expect open class C1 {
   // CHECK:
   //   Mangled name: C1{}p
   //   Public signature: /C1.p|6715504260787941082[1]
-  expect val p: Int
+  expect konst p: Int
     // CHECK JVM_IR:
     //   Mangled name: C1#<get-p>(){}kotlin.Int
     //   Public signature: /C1.p.<get-p>|5329635969197638839[1]
@@ -52,7 +52,7 @@ class C2 : C1 {
   // CHECK:
   //   Mangled name: C2{}p
   //   Public signature: /C2.p|6715504260787941082[1]
-  expect /* fake */ override val p: Int
+  expect /* fake */ override konst p: Int
     // CHECK JVM_IR:
     //   Mangled name: C2#<get-p>(){}kotlin.Int
     //   Public signature: /C2.p.<get-p>|5329635969197638839[1]
@@ -73,7 +73,7 @@ open class C1 {
   // CHECK:
   //   Mangled name: C1{}p
   //   Public signature: /C1.p|6715504260787941082[0]
-  val p: Int
+  konst p: Int
     // CHECK JVM_IR:
     //   Mangled name: C1#<get-p>(){}kotlin.Int
     //   Public signature: /C1.p.<get-p>|5329635969197638839[0]

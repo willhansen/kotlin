@@ -39,31 +39,31 @@ internal fun ObjCExportedInterface.createCodeSpec(symbolTable: SymbolTable): Obj
         }
     })
 
-    val files = topLevel.map { (sourceFile, declarations) ->
-        val binaryName = namer.getFileClassName(sourceFile).binaryName
-        val methods = declarations.toObjCMethods()
+    konst files = topLevel.map { (sourceFile, declarations) ->
+        konst binaryName = namer.getFileClassName(sourceFile).binaryName
+        konst methods = declarations.toObjCMethods()
         ObjCClassForKotlinFile(binaryName, sourceFile, methods)
     }
 
-    val classToType = mutableMapOf<ClassDescriptor, ObjCTypeForKotlinType>()
+    konst classToType = mutableMapOf<ClassDescriptor, ObjCTypeForKotlinType>()
     fun getType(descriptor: ClassDescriptor): ObjCTypeForKotlinType = classToType.getOrPut(descriptor) {
-        val methods = mutableListOf<ObjCMethodSpec>()
+        konst methods = mutableListOf<ObjCMethodSpec>()
 
         // Note: contributedMethods includes fake overrides too.
-        val allBaseMethods = descriptor.contributedMethods.filter { mapper.shouldBeExposed(it) }
+        konst allBaseMethods = descriptor.contributedMethods.filter { mapper.shouldBeExposed(it) }
                 .flatMap { mapper.getBaseMethods(it) }.distinct()
 
         methods += createObjCMethods(allBaseMethods)
 
-        val binaryName = namer.getClassOrProtocolName(descriptor).binaryName
-        val irClassSymbol = symbolTable.referenceClass(descriptor)
+        konst binaryName = namer.getClassOrProtocolName(descriptor).binaryName
+        konst irClassSymbol = symbolTable.referenceClass(descriptor)
 
         if (descriptor.isInterface) {
             ObjCProtocolForKotlinInterface(binaryName, irClassSymbol, methods)
         } else {
             descriptor.constructors.filter { mapper.shouldBeExposed(it) }.mapTo(methods) {
-                val irConstructorSymbol = symbolTable.referenceConstructor(it)
-                val baseMethod = createObjCMethodSpecBaseMethod(mapper, namer, irConstructorSymbol, it)
+                konst irConstructorSymbol = symbolTable.referenceConstructor(it)
+                konst baseMethod = createObjCMethodSpecBaseMethod(mapper, namer, irConstructorSymbol, it)
 
                 if (descriptor.isArray) {
                     ObjCFactoryMethodForKotlinArrayConstructor(baseMethod)
@@ -105,16 +105,16 @@ internal fun ObjCExportedInterface.createCodeSpec(symbolTable: SymbolTable): Obj
                 methods += ObjCKotlinThrowableAsErrorMethod
             }
 
-            val categoryMethods = categoryMembers[descriptor].orEmpty().toObjCMethods()
+            konst categoryMethods = categoryMembers[descriptor].orEmpty().toObjCMethods()
 
-            val superClassNotAny = descriptor.getSuperClassNotAny()
+            konst superClassNotAny = descriptor.getSuperClassNotAny()
                     ?.let { getType(it) as ObjCClassForKotlinClass }
 
             ObjCClassForKotlinClass(binaryName, irClassSymbol, methods, categoryMethods, superClassNotAny)
         }
     }
 
-    val types = generatedClasses.map { getType(it) }
+    konst types = generatedClasses.map { getType(it) }
 
     return ObjCExportCodeSpec(files, types)
 }
@@ -127,15 +127,15 @@ internal fun <S : IrFunctionSymbol> createObjCMethodSpecBaseMethod(
 ): ObjCMethodSpec.BaseMethod<S> {
     require(mapper.isBaseMethod(descriptor))
 
-    val selector = namer.getSelector(descriptor)
-    val bridge = mapper.bridgeMethod(descriptor)
+    konst selector = namer.getSelector(descriptor)
+    konst bridge = mapper.bridgeMethod(descriptor)
 
     return ObjCMethodSpec.BaseMethod(symbol, bridge, selector)
 }
 
 internal class ObjCExportCodeSpec(
-        val files: List<ObjCClassForKotlinFile>,
-        val types: List<ObjCTypeForKotlinType>
+        konst files: List<ObjCClassForKotlinFile>,
+        konst types: List<ObjCTypeForKotlinType>
 )
 
 internal sealed class ObjCMethodSpec {
@@ -143,43 +143,43 @@ internal sealed class ObjCMethodSpec {
      * Aggregates base method (as defined by [ObjCExportMapper.isBaseMethod])
      * and details required to generate code for bridges between Kotlin and Obj-C methods.
      */
-    data class BaseMethod<out S : IrFunctionSymbol>(val symbol: S, val bridge: MethodBridge, val selector: String)
+    data class BaseMethod<out S : IrFunctionSymbol>(konst symbol: S, konst bridge: MethodBridge, konst selector: String)
 }
 
-internal class ObjCMethodForKotlinMethod(val baseMethod: BaseMethod<IrSimpleFunctionSymbol>) : ObjCMethodSpec() {
+internal class ObjCMethodForKotlinMethod(konst baseMethod: BaseMethod<IrSimpleFunctionSymbol>) : ObjCMethodSpec() {
     override fun toString(): String =
             "ObjC spec of method `${baseMethod.selector}` for `${baseMethod.symbol}`"
 }
 
-internal class ObjCInitMethodForKotlinConstructor(val baseMethod: BaseMethod<IrConstructorSymbol>) : ObjCMethodSpec() {
+internal class ObjCInitMethodForKotlinConstructor(konst baseMethod: BaseMethod<IrConstructorSymbol>) : ObjCMethodSpec() {
     override fun toString(): String =
             "ObjC spec of method `${baseMethod.selector}` for `${baseMethod.symbol}`"
 }
 
 internal class ObjCFactoryMethodForKotlinArrayConstructor(
-        val baseMethod: BaseMethod<IrConstructorSymbol>
+        konst baseMethod: BaseMethod<IrConstructorSymbol>
 ) : ObjCMethodSpec() {
     override fun toString(): String =
             "ObjC spec of factory ${baseMethod.selector} for ${baseMethod.symbol}"
 }
 
 internal class ObjCGetterForKotlinEnumEntry(
-        val irEnumEntrySymbol: IrEnumEntrySymbol,
-        val selector: String
+        konst irEnumEntrySymbol: IrEnumEntrySymbol,
+        konst selector: String
 ) : ObjCMethodSpec() {
     override fun toString(): String =
             "ObjC spec of getter `$selector` for `$irEnumEntrySymbol`"
 }
 
 internal class ObjCClassMethodForKotlinEnumValuesOrEntries(
-        val valuesFunctionSymbol: IrFunctionSymbol,
-        val selector: String
+        konst konstuesFunctionSymbol: IrFunctionSymbol,
+        konst selector: String
 ) : ObjCMethodSpec() {
     override fun toString(): String =
-            "ObjC spec of method `$selector` for $valuesFunctionSymbol"
+            "ObjC spec of method `$selector` for $konstuesFunctionSymbol"
 }
 
-internal class ObjCGetterForObjectInstance(val selector: String, val classSymbol: IrClassSymbol) : ObjCMethodSpec() {
+internal class ObjCGetterForObjectInstance(konst selector: String, konst classSymbol: IrClassSymbol) : ObjCMethodSpec() {
     override fun toString(): String =
             "ObjC spec of instance getter `$selector` for $classSymbol"
 }
@@ -189,20 +189,20 @@ internal object ObjCKotlinThrowableAsErrorMethod : ObjCMethodSpec() {
             "ObjC spec for ThrowableAsError method"
 }
 
-internal sealed class ObjCTypeSpec(val binaryName: String)
+internal sealed class ObjCTypeSpec(konst binaryName: String)
 
 internal sealed class ObjCTypeForKotlinType(
         binaryName: String,
-        val irClassSymbol: IrClassSymbol,
-        val methods: List<ObjCMethodSpec>
+        konst irClassSymbol: IrClassSymbol,
+        konst methods: List<ObjCMethodSpec>
 ) : ObjCTypeSpec(binaryName)
 
 internal class ObjCClassForKotlinClass(
         binaryName: String,
         irClassSymbol: IrClassSymbol,
         methods: List<ObjCMethodSpec>,
-        val categoryMethods: List<ObjCMethodForKotlinMethod>,
-        val superClassNotAny: ObjCClassForKotlinClass?
+        konst categoryMethods: List<ObjCMethodForKotlinMethod>,
+        konst superClassNotAny: ObjCClassForKotlinClass?
 ) : ObjCTypeForKotlinType(binaryName, irClassSymbol, methods) {
     override fun toString(): String =
             "ObjC spec of class `$binaryName` for `$irClassSymbol`"
@@ -220,8 +220,8 @@ internal class ObjCProtocolForKotlinInterface(
 
 internal class ObjCClassForKotlinFile(
         binaryName: String,
-        private val sourceFile: SourceFile,
-        val methods: List<ObjCMethodForKotlinMethod>
+        private konst sourceFile: SourceFile,
+        konst methods: List<ObjCMethodForKotlinMethod>
 ) : ObjCTypeSpec(binaryName) {
     override fun toString(): String =
             "ObjC spec of class `$binaryName` for `${sourceFile.name}`"

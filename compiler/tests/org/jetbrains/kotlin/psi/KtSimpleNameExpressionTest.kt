@@ -33,7 +33,7 @@ class KtSimpleNameExpressionTest : KotlinTestWithEnvironment() {
     }
 
     private fun assertReceiver(exprString: String, expected: String) {
-        val expression = KtPsiFactory(project).createExpression(exprString) as KtBinaryExpression
+        konst expression = KtPsiFactory(project).createExpression(exprString) as KtBinaryExpression
         Assert.assertEquals(expected, expression.operationReference.getReceiverExpression()!!.text)
     }
 

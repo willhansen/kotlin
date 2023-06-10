@@ -9,12 +9,12 @@ import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.util.DeserializableClass
 
 abstract class AbstractIrLazyFunction : IrSimpleFunction(), IrLazyFunctionBase {
-    abstract val isDeserializationEnabled: Boolean
+    abstract konst isDeserializationEnabled: Boolean
 
     fun tryLoadIr(): Boolean {
         if (!isInline || isFakeOverride) return false
         if (!isDeserializationEnabled) return false
-        val toplevel = getTopLevelDeclaration()
+        konst toplevel = getTopLevelDeclaration()
         return (toplevel as? DeserializableClass)?.loadIr() ?: false
     }
 }

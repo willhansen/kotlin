@@ -1,8 +1,8 @@
 // !LANGUAGE: +ContextReceivers
 // TARGET_BACKEND: JVM_IR
 
-class A(val a: String)
-class B(val b: String)
+class A(konst a: String)
+class B(konst b: String)
 
 context(A, B)
 class C {
@@ -10,7 +10,7 @@ class C {
 }
 
 fun box(): String {
-    val c = with(A("O")) {
+    konst c = with(A("O")) {
         with(B("K")) {
             C()
         }

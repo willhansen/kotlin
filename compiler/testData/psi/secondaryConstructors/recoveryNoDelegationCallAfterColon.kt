@@ -1,6 +1,6 @@
 class A {
     constructor():
-    val x = 1
+    konst x = 1
 
     constructor():
     constructor()

@@ -2,7 +2,7 @@
 package a
 
 abstract class Base {
-    protected val property get() = "OK"
+    protected konst property get() = "OK"
 }
 
 // FILE: b.kt

@@ -29,27 +29,27 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirJavaFieldSymbol(
-    override val firSymbol: FirFieldSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirFieldSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtJavaFieldSymbol(), KtFirSymbol<FirFieldSymbol> {
-    override val token: KtLifetimeToken get() = builder.token
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst token: KtLifetimeToken get() = builder.token
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
         }
 
-    override val isVal: Boolean get() = withValidityAssertion { firSymbol.fir.isVal }
-    override val name: Name get() = withValidityAssertion { firSymbol.name }
-    override val returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
+    override konst isVal: Boolean get() = withValidityAssertion { firSymbol.fir.isVal }
+    override konst name: Name get() = withValidityAssertion { firSymbol.name }
+    override konst returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
 
-    override val callableIdIfNonLocal: CallableId? get() = withValidityAssertion { firSymbol.getCallableIdIfNonLocal() }
+    override konst callableIdIfNonLocal: CallableId? get() = withValidityAssertion { firSymbol.getCallableIdIfNonLocal() }
 
-    override val modality: Modality get() = withValidityAssertion { firSymbol.modalityOrFinal }
-    override val visibility: Visibility get() = withValidityAssertion { firSymbol.visibility }
+    override konst modality: Modality get() = withValidityAssertion { firSymbol.modalityOrFinal }
+    override konst visibility: Visibility get() = withValidityAssertion { firSymbol.visibility }
 
-    override val isStatic: Boolean get() = withValidityAssertion { firSymbol.isStatic }
+    override konst isStatic: Boolean get() = withValidityAssertion { firSymbol.isStatic }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtJavaFieldSymbol> = withValidityAssertion {

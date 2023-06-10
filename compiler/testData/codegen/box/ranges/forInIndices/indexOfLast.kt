@@ -11,7 +11,7 @@ inline fun <T> Array<out T>.indexOfLast(predicate: (T) -> Boolean): Int {
     return -1
 }
 
-val ints = arrayOf(1, 2, 3, 2, 1)
+konst ints = arrayOf(1, 2, 3, 2, 1)
 
 fun box(): String {
     assertEquals(-1, ints.indexOfLast { it == 4 })

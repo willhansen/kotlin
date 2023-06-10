@@ -14,15 +14,15 @@ import org.jetbrains.kotlin.psi.KtCallElement
  * @see KtAnnotationApplicationInfo
  */
 public data class KtAnnotationApplicationWithArgumentsInfo(
-    override val classId: ClassId?,
-    override val psi: KtCallElement?,
-    override val useSiteTarget: AnnotationUseSiteTarget?,
+    override konst classId: ClassId?,
+    override konst psi: KtCallElement?,
+    override konst useSiteTarget: AnnotationUseSiteTarget?,
 
     /**
      * A list of annotation arguments which were applied when constructing annotation. Every argument is [KtAnnotationValue]
      */
-    public val arguments: List<KtNamedAnnotationValue>,
-    override val index: Int?,
+    public konst arguments: List<KtNamedAnnotationValue>,
+    override konst index: Int?,
 ) : KtAnnotationApplication {
-    override val isCallWithArguments: Boolean get() = arguments.isNotEmpty()
+    override konst isCallWithArguments: Boolean get() = arguments.isNotEmpty()
 }

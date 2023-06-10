@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.light.classes.symbol.modifierLists.InitializedModifi
 import org.jetbrains.kotlin.light.classes.symbol.modifierLists.SymbolLightClassModifierList
 import org.jetbrains.kotlin.load.java.JvmAbi
 
-internal class SymbolLightClassForRepeatableAnnotationContainer(private val containerOwner: SymbolLightClassForAnnotationClass) :
+internal class SymbolLightClassForRepeatableAnnotationContainer(private konst containerOwner: SymbolLightClassForAnnotationClass) :
     SymbolLightClassForAnnotationClass(
         containerOwner.classOrObjectDeclaration,
         containerOwner.classOrObjectSymbolPointer,
@@ -59,8 +59,8 @@ internal class SymbolLightClassForRepeatableAnnotationContainer(private val cont
 
     override fun copy(): SymbolLightClassForRepeatableAnnotationContainer = SymbolLightClassForRepeatableAnnotationContainer(containerOwner)
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
-        return isEquivalentToByName(another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
+        return isEquikonstentToByName(another)
     }
 
     override fun equals(other: Any?): Boolean = this === other ||
@@ -69,9 +69,9 @@ internal class SymbolLightClassForRepeatableAnnotationContainer(private val cont
     override fun hashCode(): Int = containerOwner.hashCode()
 
     companion object {
-        private const val KOTLIN_JVM_INTERNAL_REPEATABLE_CONTAINER = "kotlin.jvm.internal.RepeatableContainer"
+        private const konst KOTLIN_JVM_INTERNAL_REPEATABLE_CONTAINER = "kotlin.jvm.internal.RepeatableContainer"
 
-        private val allowedAnnotations = persistentHashSetOf(
+        private konst allowedAnnotations = persistentHashSetOf(
             CommonClassNames.JAVA_LANG_ANNOTATION_RETENTION,
             StandardNames.FqNames.retention.asString(),
             CommonClassNames.JAVA_LANG_ANNOTATION_TARGET,

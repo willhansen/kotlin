@@ -12,12 +12,12 @@ import java.io.File
 import java.io.FileWriter
 
 class GradleErrorMessageCollector(
-    private val delegate: MessageCollector? = null,
-    private val acceptableMessageSeverity: List<CompilerMessageSeverity> = listOf(CompilerMessageSeverity.EXCEPTION),
-    private val kotlinPluginVersion: String? = null
+    private konst delegate: MessageCollector? = null,
+    private konst acceptableMessageSeverity: List<CompilerMessageSeverity> = listOf(CompilerMessageSeverity.EXCEPTION),
+    private konst kotlinPluginVersion: String? = null
 ) : MessageCollector {
 
-    private val errors = ArrayList<String>()
+    private konst errors = ArrayList<String>()
 
     override fun clear() {
         delegate?.clear()

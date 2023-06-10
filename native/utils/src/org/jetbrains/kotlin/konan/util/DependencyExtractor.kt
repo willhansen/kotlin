@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.konan.file.unzipTo
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-enum class ArchiveType(val fileExtension: String) {
+enum class ArchiveType(konst fileExtension: String) {
     ZIP("zip"),
     TAR_GZ("tar.gz");
 
     companion object {
-        val systemDefault = if (System.getProperty("os.name").startsWith("Windows")) {
+        konst systemDefault = if (System.getProperty("os.name").startsWith("Windows")) {
             ZIP
         } else {
             TAR_GZ
@@ -34,15 +34,15 @@ enum class ArchiveType(val fileExtension: String) {
 }
 
 class DependencyExtractor(
-        private val archiveType: ArchiveType
+        private konst archiveType: ArchiveType
 ) {
     private fun extractTarGz(tarGz: File, targetDirectory: File) {
-        val tarProcess = ProcessBuilder().apply {
+        konst tarProcess = ProcessBuilder().apply {
             command("tar", "-xzf", tarGz.canonicalPath)
             directory(targetDirectory)
             inheritIO()
         }.start()
-        val finished = tarProcess.waitFor(extractionTimeout, extractionTimeoutUntis)
+        konst finished = tarProcess.waitFor(extractionTimeout, extractionTimeoutUntis)
         when {
             finished && tarProcess.exitValue() != 0 ->
                 throw RuntimeException(
@@ -66,8 +66,8 @@ class DependencyExtractor(
     }
 
     companion object {
-        val extractionTimeout = 3600L
-        val extractionTimeoutUntis = TimeUnit.SECONDS
+        konst extractionTimeout = 3600L
+        konst extractionTimeoutUntis = TimeUnit.SECONDS
     }
 
 }

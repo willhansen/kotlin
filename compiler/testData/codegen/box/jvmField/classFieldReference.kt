@@ -8,9 +8,9 @@ import kotlin.reflect.KProperty1
 import kotlin.reflect.KProperty0
 import kotlin.test.assertEquals
 
-class A(val s1: String, val s2: String) {
-    @JvmField public val publicField = s1;
-    @JvmField internal val internalField = s2;
+class A(konst s1: String, konst s2: String) {
+    @JvmField public konst publicField = s1;
+    @JvmField internal konst internalField = s2;
 
     fun testAccessors() {
         checkAccessor(A::publicField, s1, this)
@@ -21,8 +21,8 @@ class A(val s1: String, val s2: String) {
 
 class AWithCompanion {
     companion object {
-        @JvmField public val publicField = "1";
-        @JvmField internal val internalField = "2";
+        @JvmField public konst publicField = "1";
+        @JvmField internal konst internalField = "2";
 
         fun testAccessors() {
             checkAccessor(AWithCompanion.Companion::publicField, "1")
@@ -37,10 +37,10 @@ fun box(): String {
     return "OK"
 }
 
-public fun <T, R> checkAccessor(prop: KProperty1<T, R>, value: R, receiver: T) {
-    assertEquals(prop.get(receiver), value, "Property ${prop} has wrong value")
+public fun <T, R> checkAccessor(prop: KProperty1<T, R>, konstue: R, receiver: T) {
+    assertEquals(prop.get(receiver), konstue, "Property ${prop} has wrong konstue")
 }
 
-public fun <R> checkAccessor(prop: KProperty0<R>, value: R) {
-    assertEquals(prop.get(), value, "Property ${prop} has wrong value")
+public fun <R> checkAccessor(prop: KProperty0<R>, konstue: R) {
+    assertEquals(prop.get(), konstue, "Property ${prop} has wrong konstue")
 }

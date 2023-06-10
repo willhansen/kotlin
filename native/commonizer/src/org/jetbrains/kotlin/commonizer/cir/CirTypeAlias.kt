@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.commonizer.cir
 import org.jetbrains.kotlin.descriptors.Visibility
 
 interface CirTypeAlias : CirClassifier, CirLiftedUpDeclaration, AnyTypeAlias {
-    override val underlyingType: CirClassOrTypeAliasType
-    val expandedType: CirClassType
+    override konst underlyingType: CirClassOrTypeAliasType
+    konst expandedType: CirClassType
 
     companion object {
         @Suppress("NOTHING_TO_INLINE")
@@ -32,13 +32,13 @@ interface CirTypeAlias : CirClassifier, CirLiftedUpDeclaration, AnyTypeAlias {
 }
 
 data class CirTypeAliasImpl(
-    override val annotations: List<CirAnnotation>,
-    override val name: CirName,
-    override val typeParameters: List<CirTypeParameter>,
-    override val visibility: Visibility,
-    override val underlyingType: CirClassOrTypeAliasType,
-    override val expandedType: CirClassType // only for commonization algorithm; does not participate in building resulting declarations
+    override konst annotations: List<CirAnnotation>,
+    override konst name: CirName,
+    override konst typeParameters: List<CirTypeParameter>,
+    override konst visibility: Visibility,
+    override konst underlyingType: CirClassOrTypeAliasType,
+    override konst expandedType: CirClassType // only for commonization algorithm; does not participate in building resulting declarations
 ) : CirTypeAlias {
     // any TA in "common" fragment is already lifted up
-    override val isLiftedUp get() = true
+    override konst isLiftedUp get() = true
 }

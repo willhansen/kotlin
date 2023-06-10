@@ -1,8 +1,8 @@
 // WITH_STDLIB
 
-annotation class A(val x: String)
+annotation class A(konst x: String)
 
 fun foo(m: Map<String, Int>) {
     @A("foo/test")
-    val test by lazy { 42 }
+    konst test by lazy { 42 }
 }

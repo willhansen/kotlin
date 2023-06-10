@@ -2,15 +2,15 @@
 package test
 
 class A<in I> {
-    private val foo: I = null!!
+    private konst foo: I = null!!
     private var bar: I = null!!
 
-    private val val_with_accessors: I
+    private konst konst_with_accessors: I
         get() = null!!
 
     private var var_with_accessors: I
         get() = null!!
-        set(value: I) {}
+        set(konstue: I) {}
 
     private fun bas(): I = null!!
 }

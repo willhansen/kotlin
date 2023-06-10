@@ -7,7 +7,7 @@ annotation class ExprAnn
 annotation class FunAnn
 
 fun foo(): Int {
-    val x = @ExprAnn fun() = 1
-    val y = @FunAnn fun() = 2
+    konst x = @ExprAnn fun() = 1
+    konst y = @FunAnn fun() = 2
     return x() + y()    
 }

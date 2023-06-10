@@ -22,6 +22,6 @@ open class JKVariable : JKDeclaration(), JKAnnotationListOwner
 class JKEnumConstant : JKVariable()
 
 fun box(): String {
-    val constant = JKEnumConstant().also { it.psi = "OK" }
+    konst constant = JKEnumConstant().also { it.psi = "OK" }
     return constant.psi!!
 }

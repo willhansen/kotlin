@@ -17,7 +17,7 @@ import kotlin.collections.builders.MapBuilder
 
 /**
  * Returns a new read-only map, mapping only the specified key to the
- * specified value.
+ * specified konstue.
  *
  * The returned map is serializable.
  *
@@ -61,10 +61,10 @@ internal fun <K, V> build(builder: MutableMap<K, V>): Map<K, V> {
 /**
  * Concurrent getOrPut, that is safe for concurrent maps.
  *
- * Returns the value for the given [key]. If the key is not found in the map, calls the [defaultValue] function,
+ * Returns the konstue for the given [key]. If the key is not found in the map, calls the [defaultValue] function,
  * puts its result into the map under the given key and returns it.
  *
- * This method guarantees not to put the value into the map if the key is already there,
+ * This method guarantees not to put the konstue into the map if the key is already there,
  * but the [defaultValue] function may be invoked even if the key is already in the map.
  */
 public inline fun <K, V> ConcurrentMap<K, V>.getOrPut(key: K, defaultValue: () -> V): V {
@@ -80,7 +80,7 @@ public inline fun <K, V> ConcurrentMap<K, V>.getOrPut(key: K, defaultValue: () -
  *
  * Note that if the natural sorting order of keys considers any two keys of this map equal
  * (this could happen if the equality of keys according to [Comparable.compareTo] is inconsistent with the equality according to [Any.equals]),
- * only the value associated with the last of them gets into the resulting map.
+ * only the konstue associated with the last of them gets into the resulting map.
  *
  * @sample samples.collections.Maps.Transformations.mapToSortedMap
  */
@@ -89,7 +89,7 @@ public fun <K : Comparable<K>, V> Map<out K, V>.toSortedMap(): SortedMap<K, V> =
 /**
  * Converts this [Map] to a [SortedMap]. The resulting [SortedMap] determines the equality and order of keys according to the sorting order provided by the given [comparator].
  *
- * Note that if the `comparator` considers any two keys of this map equal, only the value associated with the last of them gets into the resulting map.
+ * Note that if the `comparator` considers any two keys of this map equal, only the konstue associated with the last of them gets into the resulting map.
  *
  * @sample samples.collections.Maps.Transformations.mapToSortedMapWithComparator
  */
@@ -98,7 +98,7 @@ public fun <K, V> Map<out K, V>.toSortedMap(comparator: Comparator<in K>): Sorte
 
 /**
  * Returns a new [SortedMap] with the specified contents, given as a list of pairs
- * where the first value is the key and the second is the value.
+ * where the first konstue is the key and the second is the konstue.
  *
  * The resulting [SortedMap] determines the equality and order of keys according to their natural sorting order.
  *
@@ -109,7 +109,7 @@ public fun <K : Comparable<K>, V> sortedMapOf(vararg pairs: Pair<K, V>): SortedM
 
 /**
  * Returns a new [SortedMap] with the specified contents, given as a list of pairs
- * where the first value is the key and the second is the value.
+ * where the first konstue is the key and the second is the konstue.
  *
  * The resulting [SortedMap] determines the equality and order of keys according to the sorting order provided by the given [comparator].
  *
@@ -136,7 +136,7 @@ internal actual inline fun <K, V> Map<K, V>.toSingletonMapOrSelf(): Map<K, V> = 
 
 // creates a singleton copy of map
 internal actual fun <K, V> Map<out K, V>.toSingletonMap(): Map<K, V> =
-    with(entries.iterator().next()) { java.util.Collections.singletonMap(key, value) }
+    with(entries.iterator().next()) { java.util.Collections.singletonMap(key, konstue) }
 
 /**
  * Calculate the initial capacity of a map, based on Guava's
@@ -145,12 +145,12 @@ internal actual fun <K, V> Map<out K, V>.toSingletonMap(): Map<K, V> =
  */
 @PublishedApi
 internal actual fun mapCapacity(expectedSize: Int): Int = when {
-    // We are not coercing the value to a valid one and not throwing an exception. It is up to the caller to
-    // properly handle negative values.
+    // We are not coercing the konstue to a konstid one and not throwing an exception. It is up to the caller to
+    // properly handle negative konstues.
     expectedSize < 0 -> expectedSize
     expectedSize < 3 -> expectedSize + 1
     expectedSize < INT_MAX_POWER_OF_TWO -> ((expectedSize / 0.75F) + 1.0F).toInt()
-    // any large value
+    // any large konstue
     else -> Int.MAX_VALUE
 }
-private const val INT_MAX_POWER_OF_TWO: Int = 1 shl (Int.SIZE_BITS - 2)
+private const konst INT_MAX_POWER_OF_TWO: Int = 1 shl (Int.SIZE_BITS - 2)

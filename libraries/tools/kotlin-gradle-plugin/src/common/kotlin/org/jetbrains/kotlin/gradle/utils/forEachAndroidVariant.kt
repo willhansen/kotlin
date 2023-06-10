@@ -10,7 +10,7 @@ import com.android.build.gradle.api.BaseVariant
 import org.gradle.api.Project
 
 internal fun Project.forAllAndroidVariants(action: (BaseVariant) -> Unit) {
-    val androidExtension = this.extensions.getByName("android")
+    konst androidExtension = this.extensions.getByName("android")
     when (androidExtension) {
         is AppExtension -> androidExtension.applicationVariants.all(action)
         is LibraryExtension -> {

@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toUpperCaseAsciiOnly
 import kotlin.collections.set
 
 abstract class InventNamesForLocalClasses(
-    private val allowTopLevelCallables: Boolean,
-    private val generateNamesForRegeneratedObjects: Boolean = false
+    private konst allowTopLevelCallables: Boolean,
+    private konst generateNamesForRegeneratedObjects: Boolean = false
 ) : FileLoweringPass {
 
     protected abstract fun computeTopLevelClassName(clazz: IrClass): String
@@ -39,13 +39,13 @@ abstract class InventNamesForLocalClasses(
      * @property enclosingName internal name of the enclosing class (including anonymous classes, local objects and callable references)
      * @property isLocal true if the next declaration to be encountered in the IR tree is local
      */
-    private data class Data(val enclosingName: String?, val isLocal: Boolean, val processingInlinedFunction: Boolean = false) {
+    private data class Data(konst enclosingName: String?, konst isLocal: Boolean, konst processingInlinedFunction: Boolean = false) {
         fun makeLocal(): Data = if (isLocal) this else copy(isLocal = true)
     }
 
     private inner class NameInventor : IrElementVisitor<Unit, Data> {
-        private val anonymousClassesCount = mutableMapOf<String, Int>()
-        private val localFunctionNames = mutableMapOf<IrFunctionSymbol, String>()
+        private konst anonymousClassesCount = mutableMapOf<String, Int>()
+        private konst localFunctionNames = mutableMapOf<IrFunctionSymbol, String>()
 
         override fun visitContainerExpression(expression: IrContainerExpression, data: Data) {
             if (expression is IrInlinedFunctionBlock && !generateNamesForRegeneratedObjects) {
@@ -55,8 +55,8 @@ abstract class InventNamesForLocalClasses(
             if (!data.processingInlinedFunction && expression is IrInlinedFunctionBlock && expression.isFunctionInlining()) {
                 expression.getAdditionalStatementsFromInlinedBlock().forEach { it.accept(this, data) }
 
-                val inlinedAt = expression.inlineCall.symbol.owner.name.asString()
-                val newData = data.copy(
+                konst inlinedAt = expression.inlineCall.symbol.owner.name.asString()
+                konst newData = data.copy(
                     enclosingName = data.enclosingName + "$\$inlined\$$inlinedAt", isLocal = true, processingInlinedFunction = true
                 )
                 expression.getOriginalStatementsFromInlinedBlock().forEach { it.accept(this, newData) }
@@ -70,8 +70,8 @@ abstract class InventNamesForLocalClasses(
             if (!data.isLocal) {
                 // This is not a local class, so we need not invent a name for it, the type mapper will correctly compute it
                 // by navigating through its containers.
-                val enclosingName = data.enclosingName
-                val internalName = if (enclosingName != null) {
+                konst enclosingName = data.enclosingName
+                konst internalName = if (enclosingName != null) {
                     "$enclosingName$${declaration.name.asString()}"
                 } else {
                     computeTopLevelClassName(declaration)
@@ -80,14 +80,14 @@ abstract class InventNamesForLocalClasses(
                 return
             }
 
-            val internalName = inventName(declaration.name, data)
+            konst internalName = inventName(declaration.name, data)
             putLocalClassName(declaration, internalName)
 
-            val newData = data.copy(enclosingName = internalName)
+            konst newData = data.copy(enclosingName = internalName)
 
             // Old backend doesn't add the anonymous object name to the stack when traversing its super constructor arguments.
             // E.g. a lambda in the super call of an object literal "foo$1" will get the name "foo$2", not "foo$1$1".
-            val newDataForConstructor =
+            konst newDataForConstructor =
                 if (declaration.isAnonymousObject) data else newData
 
             for (child in declaration.declarations) {
@@ -113,10 +113,10 @@ abstract class InventNamesForLocalClasses(
                 return
             }
 
-            val enclosingName = data.enclosingName
-            val simpleName = declaration.name.asString()
+            konst enclosingName = data.enclosingName
+            konst simpleName = declaration.name.asString()
 
-            val internalName = when {
+            konst internalName = when {
                 declaration is IrFunction && !NameUtils.hasName(declaration.name) -> {
                     // Replace "unnamed" function names with indices.
                     inventName(null, data).also { name ->
@@ -130,7 +130,7 @@ abstract class InventNamesForLocalClasses(
                 else -> simpleName
             }
 
-            val newData = data.copy(enclosingName = internalName, isLocal = true)
+            konst newData = data.copy(enclosingName = internalName, isLocal = true)
             if ((declaration is IrProperty && declaration.isDelegated) || declaration is IrLocalDelegatedProperty) {
                 // Old backend currently reserves a name here, in case a property reference-like anonymous object will need
                 // to be generated in the codegen later, which is now happening for local delegated properties in inline functions.
@@ -146,7 +146,7 @@ abstract class InventNamesForLocalClasses(
                 // skip IrFunctionReference from `singleArgumentInlineFunction`
                 return
             }
-            val internalName = localFunctionNames[expression.symbol] ?: inventName(null, data)
+            konst internalName = localFunctionNames[expression.symbol] ?: inventName(null, data)
             putLocalClassName(expression, internalName)
 
             expression.acceptChildren(this, data)
@@ -154,12 +154,12 @@ abstract class InventNamesForLocalClasses(
 
         override fun visitFunctionExpression(expression: IrFunctionExpression, data: Data) {
             expression.acceptChildren(this, data)
-            val internalName = localFunctionNames[expression.function.symbol] ?: inventName(null, data)
+            konst internalName = localFunctionNames[expression.function.symbol] ?: inventName(null, data)
             putLocalClassName(expression, internalName)
         }
 
         override fun visitPropertyReference(expression: IrPropertyReference, data: Data) {
-            val internalName = inventName(null, data)
+            konst internalName = inventName(null, data)
             putLocalClassName(expression, internalName)
 
             expression.acceptChildren(this, data)
@@ -173,7 +173,7 @@ abstract class InventNamesForLocalClasses(
         }
 
         override fun visitValueParameter(declaration: IrValueParameter, data: Data) {
-            // We skip value parameters when constructing names to replicate behavior of the old backend, but this can be safely changed.
+            // We skip konstue parameters when constructing names to replicate behavior of the old backend, but this can be safely changed.
             declaration.acceptChildren(this, data.makeLocal())
         }
 
@@ -185,13 +185,13 @@ abstract class InventNamesForLocalClasses(
             }
             if (declaration.isSuspend && declaration.body != null && declaration.origin != IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA) {
                 // Suspend functions have a continuation, which is essentially a local class
-                val newData = data.copy(
+                konst newData = data.copy(
                     enclosingName = inventName(
                         declaration.name,
                         if (data.enclosingName == null && allowTopLevelCallables) data.copy(enclosingName = "") else data
                     )
                 )
-                val internalName = inventName(null, newData)
+                konst internalName = inventName(null, newData)
                 putLocalClassName(declaration, internalName)
             }
 
@@ -214,7 +214,7 @@ abstract class InventNamesForLocalClasses(
         }
 
         private fun inventName(sourceName: Name?, data: Data): String {
-            val enclosingName = data.enclosingName
+            konst enclosingName = data.enclosingName
             check(enclosingName != null) {
                 """
                     There should be at least one name in the stack for every local declaration that needs a name
@@ -223,8 +223,8 @@ abstract class InventNamesForLocalClasses(
                 """.trimIndent()
             }
 
-            val simpleName = if (sourceName == null || sourceName.isSpecial) {
-                val count = (anonymousClassesCount[enclosingName.toUpperCaseAsciiOnly()] ?: 0) + 1
+            konst simpleName = if (sourceName == null || sourceName.isSpecial) {
+                konst count = (anonymousClassesCount[enclosingName.toUpperCaseAsciiOnly()] ?: 0) + 1
                 anonymousClassesCount[enclosingName.toUpperCaseAsciiOnly()] = count
                 count.toString()
             } else {

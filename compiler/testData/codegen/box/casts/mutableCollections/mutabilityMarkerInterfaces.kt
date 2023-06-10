@@ -25,7 +25,7 @@ abstract class ML2 : ML()
 abstract class Weird : Iterator<String>, MutableList<String>
 
 fun expectInterfaces(jClass: Class<*>, expectedInterfaceNames: Set<String>) {
-    val actualInterfaceNames = jClass.getInterfaces().mapTo(linkedSetOf<String>()) { it.name }
+    konst actualInterfaceNames = jClass.getInterfaces().mapTo(linkedSetOf<String>()) { it.name }
 
     assert(actualInterfaceNames == expectedInterfaceNames) {
         "${jClass.name}: interfaces: expected: $expectedInterfaceNames; actual: $actualInterfaceNames"

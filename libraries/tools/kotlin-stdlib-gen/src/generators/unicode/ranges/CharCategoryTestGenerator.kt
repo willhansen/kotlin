@@ -11,7 +11,7 @@ import generators.unicode.writeHeader
 import java.io.File
 import java.io.FileWriter
 
-internal class CharCategoryTestGenerator(private val outputFile: File) {
+internal class CharCategoryTestGenerator(private konst outputFile: File) {
     private var arrayIndex = 0
     private var arraySize = 0
     private var writer: FileWriter? = null
@@ -28,7 +28,7 @@ internal class CharCategoryTestGenerator(private val outputFile: File) {
             generateUnicodeDataHeader(arrayIndex)
         }
 
-        val isStart = line.name.endsWith(", First>")
+        konst isStart = line.name.endsWith(", First>")
 
         writer?.appendLine("    CharProperties(char = '\\u${line.char}', isStartOfARange = $isStart, categoryCode = \"${line.categoryCode}\"),")
 
@@ -39,8 +39,8 @@ internal class CharCategoryTestGenerator(private val outputFile: File) {
         }
     }
 
-    private val otherLowercaseRanges = mutableListOf<PropertyLine>()
-    private val otherUppercaseRanges = mutableListOf<PropertyLine>()
+    private konst otherLowercaseRanges = mutableListOf<PropertyLine>()
+    private konst otherUppercaseRanges = mutableListOf<PropertyLine>()
 
     fun appendPropertyLine(line: PropertyLine) {
         when (line.property) {
@@ -59,10 +59,10 @@ internal class CharCategoryTestGenerator(private val outputFile: File) {
     }
 
     private fun generateFlattenUnicodeData() {
-        val file = outputFile.resolveSibling("_UnicodeDataFlatten.kt")
+        konst file = outputFile.resolveSibling("_UnicodeDataFlatten.kt")
         generateFileHeader(file)
 
-        writer?.appendLine("internal val unicodeData = arrayOf<Array<CharProperties>>(")
+        writer?.appendLine("internal konst unicodeData = arrayOf<Array<CharProperties>>(")
         for (index in 0..arrayIndex) {
             writer?.appendLine("    unicodeData$index,")
         }
@@ -72,10 +72,10 @@ internal class CharCategoryTestGenerator(private val outputFile: File) {
     }
 
     private fun generateCharProperties() {
-        val file = outputFile.resolveSibling("_CharProperties.kt")
+        konst file = outputFile.resolveSibling("_CharProperties.kt")
         generateFileHeader(file)
 
-        writer?.appendLine("data class CharProperties(val char: Char, val isStartOfARange: Boolean, val categoryCode: String)")
+        writer?.appendLine("data class CharProperties(konst char: Char, konst isStartOfARange: Boolean, konst categoryCode: String)")
         writer?.close()
     }
 
@@ -89,7 +89,7 @@ import kotlin.test.*
 class CharCategoryTest {
     @Test
     fun category() {
-        val charProperties = hashMapOf<Char, CharProperties>()
+        konst charProperties = hashMapOf<Char, CharProperties>()
 
         for (properties in unicodeData) {
             charProperties[properties.char] = properties
@@ -104,8 +104,8 @@ class CharCategoryTest {
                 properties = null
             }
 
-            val charCode = char.code.toString(radix = 16).padStart(length = 4, padChar = '0')
-            val expectedCategoryCode = properties?.categoryCode ?: CharCategory.UNASSIGNED.code
+            konst charCode = char.code.toString(radix = 16).padStart(length = 4, padChar = '0')
+            konst expectedCategoryCode = properties?.categoryCode ?: CharCategory.UNASSIGNED.code
 
             fun <T> test(expected: T, actual: T, name: String) {
                 assertEquals(expected, actual, "Char:[${"$"}char] with code:[${"$"}charCode] in Unicode has ${"$"}name = ${"$"}expected, but in Kotlin ${"$"}name = ${"$"}actual")
@@ -113,22 +113,22 @@ class CharCategoryTest {
 
             test(expectedCategoryCode, char.category.code, "category")
 
-            val expectedIsDigit = isDigit(expectedCategoryCode)
+            konst expectedIsDigit = isDigit(expectedCategoryCode)
             test(expectedIsDigit, char.isDigit(), "isDigit()")
             
-            val expectedIsLetter = isLetter(expectedCategoryCode)
+            konst expectedIsLetter = isLetter(expectedCategoryCode)
             test(expectedIsLetter, char.isLetter(), "isLetter()")
             
-            val expectedIsLetterOrDigit = expectedIsLetter || expectedIsDigit
+            konst expectedIsLetterOrDigit = expectedIsLetter || expectedIsDigit
             test(expectedIsLetterOrDigit, char.isLetterOrDigit(), "isLetterOrDigit()")
             
-            val expectedIsLowerCase = isLowerCase(char, expectedCategoryCode)
+            konst expectedIsLowerCase = isLowerCase(char, expectedCategoryCode)
             test(expectedIsLowerCase, char.isLowerCase(), "isLowerCase()")
 
-            val expectedIsUpperCase = isUpperCase(char, expectedCategoryCode)
+            konst expectedIsUpperCase = isUpperCase(char, expectedCategoryCode)
             test(expectedIsUpperCase, char.isUpperCase(), "isUpperCase()")
 
-            val expectedIsWhitespace = isWhitespace(char, expectedCategoryCode)
+            konst expectedIsWhitespace = isWhitespace(char, expectedCategoryCode)
             test(expectedIsWhitespace, char.isWhitespace(), "isWhitespace()")
         }
     }
@@ -147,7 +147,7 @@ class CharCategoryTest {
         ).map { it.code }
     }
 
-    private val otherLowerChars = listOf<IntRange>(
+    private konst otherLowerChars = listOf<IntRange>(
         ${otherLowercaseRanges.joinToString { it.hexIntRangeLiteral() }}
     ).flatten().toHashSet()
 
@@ -155,7 +155,7 @@ class CharCategoryTest {
         return categoryCode == CharCategory.LOWERCASE_LETTER.code || otherLowerChars.contains(char.code)
     }
 
-    private val otherUpperChars = listOf<IntRange>(
+    private konst otherUpperChars = listOf<IntRange>(
         ${otherUppercaseRanges.joinToString { it.hexIntRangeLiteral() }}
     ).flatten().toHashSet()
 
@@ -178,10 +178,10 @@ class CharCategoryTest {
     }
 
     private fun generateUnicodeDataHeader(arrayIndex: Int) {
-        val file = outputFile.resolveSibling("_UnicodeData$arrayIndex.kt")
+        konst file = outputFile.resolveSibling("_UnicodeData$arrayIndex.kt")
         generateFileHeader(file)
 
-        writer?.appendLine("internal val unicodeData$arrayIndex = arrayOf<CharProperties>(")
+        writer?.appendLine("internal konst unicodeData$arrayIndex = arrayOf<CharProperties>(")
     }
 
     private fun generateFileHeader(file: File) {

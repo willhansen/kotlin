@@ -5,12 +5,12 @@ class B {
     companion object <!REDECLARATION!>A<!> {
     }
 
-    val <!REDECLARATION!>A<!>: A = B.A
+    konst <!REDECLARATION!>A<!>: A = B.A
 }
 
 class C {
     companion object A {
-        val A: A = C.A
+        konst A: A = C.A
     }
 }
 

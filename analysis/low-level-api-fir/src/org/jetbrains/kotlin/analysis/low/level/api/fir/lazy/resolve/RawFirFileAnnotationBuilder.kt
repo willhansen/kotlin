@@ -20,16 +20,16 @@ internal fun buildFileFirAnnotation(
     replacement: RawFirReplacement? = null
 ): FirAnnotation {
 
-    val replacementApplier = replacement?.Applier()
+    konst replacementApplier = replacement?.Applier()
 
-    val builder = object : RawFirBuilder(session, baseScopeProvider) {
+    konst builder = object : RawFirBuilder(session, baseScopeProvider) {
         inner class VisitorWithReplacement : Visitor() {
             override fun convertElement(element: KtElement, original: FirElement?): FirElement? =
                 super.convertElement(replacementApplier?.tryReplace(element) ?: element, original)
         }
     }
     builder.context.packageFqName = fileAnnotation.containingKtFile.packageFqName
-    val result = builder.VisitorWithReplacement().convertElement(fileAnnotation, null) as FirAnnotation
+    konst result = builder.VisitorWithReplacement().convertElement(fileAnnotation, null) as FirAnnotation
     replacementApplier?.ensureApplied()
     return result
 }

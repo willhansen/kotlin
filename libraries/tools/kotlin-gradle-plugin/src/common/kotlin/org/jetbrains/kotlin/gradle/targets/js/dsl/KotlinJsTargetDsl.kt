@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 interface KotlinJsSubTargetContainerDsl : KotlinTarget {
-    val nodejs: KotlinJsNodeDsl
+    konst nodejs: KotlinJsNodeDsl
 
-    val browser: KotlinJsBrowserDsl
+    konst browser: KotlinJsBrowserDsl
 
-    val isNodejsConfigured: Boolean
+    konst isNodejsConfigured: Boolean
 
-    val isBrowserConfigured: Boolean
+    konst isBrowserConfigured: Boolean
 
     fun whenNodejsConfigured(body: KotlinJsNodeDsl.() -> Unit)
 
@@ -57,7 +57,7 @@ interface KotlinJsTargetDsl : KotlinTarget {
 
     fun generateTypeScriptDefinitions()
 
-    val binaries: KotlinJsBinaryContainer
+    konst binaries: KotlinJsBinaryContainer
 
     @Deprecated(
         message = "produceExecutable() was changed on binaries.executable()",
@@ -68,10 +68,10 @@ interface KotlinJsTargetDsl : KotlinTarget {
         throw GradleException("Please change produceExecutable() on binaries.executable()")
     }
 
-    val testRuns: NamedDomainObjectContainer<KotlinJsReportAggregatingTestRun>
+    konst testRuns: NamedDomainObjectContainer<KotlinJsReportAggregatingTestRun>
 
     // Need to compatibility when users use KotlinJsCompilation specific in build script
-    override val compilations: NamedDomainObjectContainer<out KotlinJsCompilation>
+    override konst compilations: NamedDomainObjectContainer<out KotlinJsCompilation>
 }
 
 interface KotlinJsSubTargetDsl {
@@ -80,7 +80,7 @@ interface KotlinJsSubTargetDsl {
 
     fun testTask(body: Action<KotlinJsTest>)
 
-    val testRuns: NamedDomainObjectContainer<KotlinJsPlatformTestRun>
+    konst testRuns: NamedDomainObjectContainer<KotlinJsPlatformTestRun>
 }
 
 interface KotlinJsBrowserDsl : KotlinJsSubTargetDsl {

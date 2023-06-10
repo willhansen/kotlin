@@ -30,7 +30,7 @@ fun <U> id(x: U) = x
 fun <E> intersect(vararg x: In<E>): E = null as E
 
 fun box(): String {
-    val ret = build {
+    konst ret = build {
         emit("1")
         intersect(getIn(), getIn())
         intersect(getIn(), Test.foo(getIn()))

@@ -15,14 +15,14 @@ import org.jetbrains.kotlin.fir.lightTree.fir.modifier.Modifier
 import org.jetbrains.kotlin.name.SpecialNames
 
 data class DestructuringDeclaration(
-    val isVar: Boolean,
-    val entries: List<FirVariable?>,
-    val initializer: FirExpression,
-    val source: KtSourceElement,
-    val modifier: Modifier,
+    konst isVar: Boolean,
+    konst entries: List<FirVariable?>,
+    konst initializer: FirExpression,
+    konst source: KtSourceElement,
+    konst modifier: Modifier,
 ) {
     fun toFirDestructingDeclaration(moduleData: FirModuleData): FirExpression {
-        val baseVariable = generateTemporaryVariable(
+        konst baseVariable = generateTemporaryVariable(
             moduleData,
             source,
             SpecialNames.DESTRUCT,

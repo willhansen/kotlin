@@ -23,7 +23,7 @@ interface IrDeclaration {
 }
 
 interface IrTypeParameter : IrDeclaration {
-  abstract val superTypes: MutableList<IrType>
+  abstract konst superTypes: MutableList<IrType>
     abstract get
 
 }
@@ -39,7 +39,7 @@ class DeepCopyIrTreeWithSymbols {
 
   }
 
-  private val typeRemapper: TypeRemapper
+  private konst typeRemapper: TypeRemapper
     field = typeRemapper
     private get
 
@@ -54,11 +54,11 @@ class DeepCopyIrTreeWithSymbols {
 ))
     <this>.<get-typeRemapper>().withinScope<Unit>(irTypeParametersContainer = <this>, fn = local fun <anonymous>() {
       { // BLOCK
-        val tmp0_iterator: Iterator<Pair<IrTypeParameter, IrTypeParameter>> = <this>.<get-typeParameters>().zip<IrTypeParameter, IrTypeParameter>(other = other.<get-typeParameters>()).iterator()
+        konst tmp0_iterator: Iterator<Pair<IrTypeParameter, IrTypeParameter>> = <this>.<get-typeParameters>().zip<IrTypeParameter, IrTypeParameter>(other = other.<get-typeParameters>()).iterator()
         while (tmp0_iterator.hasNext()) { // BLOCK
-          val tmp1_loop_parameter: Pair<IrTypeParameter, IrTypeParameter> = tmp0_iterator.next()
-          val thisTypeParameter: IrTypeParameter = tmp1_loop_parameter.component1()
-          val otherTypeParameter: IrTypeParameter = tmp1_loop_parameter.component2()
+          konst tmp1_loop_parameter: Pair<IrTypeParameter, IrTypeParameter> = tmp0_iterator.next()
+          konst thisTypeParameter: IrTypeParameter = tmp1_loop_parameter.component1()
+          konst otherTypeParameter: IrTypeParameter = tmp1_loop_parameter.component2()
           { // BLOCK
             otherTypeParameter.<get-superTypes>().mapTo<IrType, IrType, MutableList<IrType>>(destination = thisTypeParameter.<get-superTypes>(), transform = local fun <anonymous>(it: IrType): IrType {
               return <this>.<get-typeRemapper>().remapType(type = it)
@@ -75,7 +75,7 @@ class DeepCopyIrTreeWithSymbols {
 
 inline fun <T : Any?> TypeRemapper.withinScope(irTypeParametersContainer: IrTypeParametersContainer, fn: Function0<T>): T {
   <this>.enterScope(irTypeParametersContainer = irTypeParametersContainer)
-  val result: T = fn.invoke()
+  konst result: T = fn.invoke()
   <this>.leaveScope()
   return result
 }

@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.utils
 
-val CompositeProjectComponentArtifactMetadata =
+konst CompositeProjectComponentArtifactMetadata =
     Class.forName("org.gradle.composite.internal.CompositeProjectComponentArtifactMetadata")
 
 // is operator for classes which cannot be imported

@@ -2,7 +2,7 @@ package
 
 public final class Problem {
     public constructor Problem()
-    public final val variable: kotlin.Int
+    public final konst variable: kotlin.Int
     public final fun </*0*/ T : kotlin.CharSequence> delegate(): ReadOnlyProperty<Problem, T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -14,12 +14,12 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 abstract class AbstractTreeBuilder {
-    private val configurationCallbacks = mutableListOf<() -> ElementConfig>()
+    private konst configurationCallbacks = mutableListOf<() -> ElementConfig>()
 
-    abstract val rootElement: ElementConfig
+    abstract konst rootElement: ElementConfig
 
     fun element(category: ElementConfig.Category, name: String? = null, initializer: ElementConfig.() -> Unit = {}): ElementConfigDel {
-        val del = ElementConfigDel(category, name)
+        konst del = ElementConfigDel(category, name)
         configurationCallbacks.add {
             del.element!!.apply { initializer() }
         }
@@ -65,20 +65,20 @@ abstract class AbstractTreeBuilder {
     }
 
     fun build(): Config {
-        val elements = configurationCallbacks.map { it() }
+        konst elements = configurationCallbacks.map { it() }
         return Config(elements, rootElement)
     }
 
     companion object {
-        val int = type<Int>()
-        val string = type<String>()
-        val boolean = type<Boolean>()
+        konst int = type<Int>()
+        konst string = type<String>()
+        konst boolean = type<Boolean>()
     }
 }
 
 class ElementConfigDel(
-    private val category: ElementConfig.Category,
-    private val name: String?
+    private konst category: ElementConfig.Category,
+    private konst name: String?
 ) : ReadOnlyProperty<AbstractTreeBuilder, ElementConfig>, PropertyDelegateProvider<AbstractTreeBuilder, ElementConfigDel> {
     var element: ElementConfig? = null
         private set
@@ -88,7 +88,7 @@ class ElementConfigDel(
     }
 
     override fun provideDelegate(thisRef: AbstractTreeBuilder, property: KProperty<*>): ElementConfigDel {
-        val path = thisRef.javaClass.name + "." + property.name
+        konst path = thisRef.javaClass.name + "." + property.name
         element = ElementConfig(path, name ?: property.name, category)
         return this
     }

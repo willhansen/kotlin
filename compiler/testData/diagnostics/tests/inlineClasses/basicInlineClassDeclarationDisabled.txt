@@ -2,7 +2,7 @@ package
 
 public final inline class Foo {
     public constructor Foo(/*0*/ x: kotlin.Int)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
@@ -17,8 +17,8 @@ public final inline annotation class InlineAnn : kotlin.Annotation {
 
 public final inline enum class InlineEnum : kotlin.Enum<InlineEnum> {
     private constructor InlineEnum()
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: InlineEnum): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -28,9 +28,9 @@ public final inline enum class InlineEnum : kotlin.Enum<InlineEnum> {
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<InlineEnum>
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): InlineEnum
-    public final /*synthesized*/ fun values(): kotlin.Array<InlineEnum>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<InlineEnum>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): InlineEnum
+    public final /*synthesized*/ fun konstues(): kotlin.Array<InlineEnum>
 }
 
 public inline object InlineObject {

@@ -7,7 +7,7 @@ import objcTests.*
 @Test
 fun testTryRetainGC() {
     kotlin.native.runtime.GC.collect()
-    val weakRefHolder = WeakRefHolder()
+    konst weakRefHolder = WeakRefHolder()
     createGarbageNSObjects(weakRefHolder)
     weakRefHolder.obj = object : NSObject() {}
     // Loading weak ref takes a lock. If K/N runtime runs GC while the lock is taken,

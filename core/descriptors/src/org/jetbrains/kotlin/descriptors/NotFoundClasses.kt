@@ -20,27 +20,27 @@ import org.jetbrains.kotlin.types.SimpleType
 import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
-class NotFoundClasses(private val storageManager: StorageManager, private val module: ModuleDescriptor) {
+class NotFoundClasses(private konst storageManager: StorageManager, private konst module: ModuleDescriptor) {
     /**
      * @param typeParametersCount list of numbers of type parameters in this class and all its outer classes, starting from this class
      */
-    private data class ClassRequest(val classId: ClassId, val typeParametersCount: List<Int>)
+    private data class ClassRequest(konst classId: ClassId, konst typeParametersCount: List<Int>)
 
-    private val packageFragments = storageManager.createMemoizedFunction<FqName, PackageFragmentDescriptor> { fqName ->
+    private konst packageFragments = storageManager.createMemoizedFunction<FqName, PackageFragmentDescriptor> { fqName ->
         EmptyPackageFragmentDescriptor(module, fqName)
     }
 
-    private val classes = storageManager.createMemoizedFunction<ClassRequest, ClassDescriptor> { (classId, typeParametersCount) ->
+    private konst classes = storageManager.createMemoizedFunction<ClassRequest, ClassDescriptor> { (classId, typeParametersCount) ->
         if (classId.isLocal) {
             throw UnsupportedOperationException("Unresolved local class: $classId")
         }
 
-        val container = classId.outerClassId?.let { outerClassId ->
+        konst container = classId.outerClassId?.let { outerClassId ->
             getClass(outerClassId, typeParametersCount.drop(1))
         } ?: packageFragments(classId.packageFqName)
 
         // Treat a class with a nested ClassId as inner for simplicity, otherwise the outer type cannot have generic arguments
-        val isInner = classId.isNestedClass
+        konst isInner = classId.isNestedClass
 
         MockClassDescriptor(storageManager, container, classId.shortClassName, isInner, typeParametersCount.firstOrNull() ?: 0)
     }
@@ -49,16 +49,16 @@ class NotFoundClasses(private val storageManager: StorageManager, private val mo
             storageManager: StorageManager,
             container: DeclarationDescriptor,
             name: Name,
-            private val isInner: Boolean,
+            private konst isInner: Boolean,
             numberOfDeclaredTypeParameters: Int
     ) : ClassDescriptorBase(storageManager, container, name, SourceElement.NO_SOURCE, /* isExternal = */ false) {
-        private val declaredTypeParameters = (0 until numberOfDeclaredTypeParameters).map { index ->
+        private konst declaredTypeParameters = (0 until numberOfDeclaredTypeParameters).map { index ->
             TypeParameterDescriptorImpl.createWithDefaultBound(
                     this, Annotations.EMPTY, false, Variance.INVARIANT, Name.identifier("T$index"), index, storageManager
             )
         }
 
-        private val typeConstructor =
+        private konst typeConstructor =
             ClassTypeConstructorImpl(this, computeConstructorTypeParameters(), setOf(module.builtIns.anyType), storageManager)
 
         override fun getKind() = ClassKind.CLASS
@@ -76,7 +76,7 @@ class NotFoundClasses(private val storageManager: StorageManager, private val mo
         override fun isExpect() = false
         override fun isActual() = false
         override fun isExternal() = false
-        override val annotations: Annotations get() = Annotations.EMPTY
+        override konst annotations: Annotations get() = Annotations.EMPTY
 
         override fun getUnsubstitutedMemberScope(kotlinTypeRefiner: KotlinTypeRefiner) = MemberScope.Empty
         override fun getStaticScope() = MemberScope.Empty

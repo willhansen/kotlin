@@ -8,7 +8,7 @@
  */
 
 fun case_1() {
-    when (value)
+    when (konstue)
     when ()
     when
 }

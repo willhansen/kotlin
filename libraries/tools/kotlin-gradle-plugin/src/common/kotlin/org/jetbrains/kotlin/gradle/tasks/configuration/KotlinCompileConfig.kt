@@ -30,8 +30,8 @@ internal open class BaseKotlinCompileConfig<TASK : KotlinCompile> : AbstractKotl
 
     init {
         configureTaskProvider { taskProvider ->
-            val useClasspathSnapshot = propertiesProvider.useClasspathSnapshot
-            val classpathConfiguration = if (useClasspathSnapshot) {
+            konst useClasspathSnapshot = propertiesProvider.useClasspathSnapshot
+            konst classpathConfiguration = if (useClasspathSnapshot) {
                 registerTransformsOnce(project)
                 // Note: Creating configurations should be done during build configuration, not task configuration, to avoid issues with
                 // composite builds (e.g., https://issuetracker.google.com/183952598).
@@ -44,15 +44,15 @@ internal open class BaseKotlinCompileConfig<TASK : KotlinCompile> : AbstractKotl
                 task.incremental = propertiesProvider.incrementalJvm ?: true
                 task.usePreciseJavaTracking = propertiesProvider.usePreciseJavaTracking ?: true
                 task.jvmTargetValidationMode.convention(propertiesProvider.jvmTargetValidationMode).finalizeValueOnRead()
-                task.useKotlinAbiSnapshot.value(propertiesProvider.useKotlinAbiSnapshot).disallowChanges()
+                task.useKotlinAbiSnapshot.konstue(propertiesProvider.useKotlinAbiSnapshot).disallowChanges()
 
-                task.classpathSnapshotProperties.useClasspathSnapshot.value(useClasspathSnapshot).disallowChanges()
+                task.classpathSnapshotProperties.useClasspathSnapshot.konstue(useClasspathSnapshot).disallowChanges()
                 if (useClasspathSnapshot) {
-                    val classpathEntrySnapshotFiles = classpathConfiguration!!.incoming.artifactView {
+                    konst classpathEntrySnapshotFiles = classpathConfiguration!!.incoming.artifactView {
                         it.attributes.attribute(ARTIFACT_TYPE_ATTRIBUTE, CLASSPATH_ENTRY_SNAPSHOT_ARTIFACT_TYPE)
                     }.files
                     task.classpathSnapshotProperties.classpathSnapshot.from(classpathEntrySnapshotFiles).disallowChanges()
-                    task.classpathSnapshotProperties.classpathSnapshotDir.value(getClasspathSnapshotDir(task)).disallowChanges()
+                    task.classpathSnapshotProperties.classpathSnapshotDir.konstue(getClasspathSnapshotDir(task)).disallowChanges()
                 } else {
                     task.classpathSnapshotProperties.classpath.from(task.project.provider { task.libraries }).disallowChanges()
                 }
@@ -67,7 +67,7 @@ internal open class BaseKotlinCompileConfig<TASK : KotlinCompile> : AbstractKotl
     }
 
     constructor(compilationInfo: KotlinCompilationInfo) : super(compilationInfo) {
-        val javaTaskProvider = when (val compilation = compilationInfo.tcsOrNull?.compilation) {
+        konst javaTaskProvider = when (konst compilation = compilationInfo.tcsOrNull?.compilation) {
             is KotlinJvmCompilation -> compilation.compileJavaTaskProviderSafe
             is KotlinJvmAndroidCompilation -> compilation.compileJavaTaskProvider
             is KotlinWithJavaCompilation<*, *> -> compilation.compileJavaTaskProvider
@@ -77,12 +77,12 @@ internal open class BaseKotlinCompileConfig<TASK : KotlinCompile> : AbstractKotl
         configureTaskProvider { taskProvider ->
             taskProvider.configure { task ->
                 javaTaskProvider?.let { javaTask ->
-                    task.associatedJavaCompileTaskTargetCompatibility.value(javaTask.map { it.targetCompatibility })
-                    task.associatedJavaCompileTaskName.value(javaTask.map { it.name })
+                    task.associatedJavaCompileTaskTargetCompatibility.konstue(javaTask.map { it.targetCompatibility })
+                    task.associatedJavaCompileTaskName.konstue(javaTask.map { it.name })
                 }
 
                 @Suppress("DEPRECATION")
-                task.ownModuleName.value(
+                task.ownModuleName.konstue(
                     providers.provider {
                         task.parentKotlinOptions.orNull?.moduleName ?: compilationInfo.moduleName
                     })
@@ -103,12 +103,12 @@ internal open class BaseKotlinCompileConfig<TASK : KotlinCompile> : AbstractKotl
     )
 
     companion object {
-        private const val TRANSFORMS_REGISTERED = "_kgp_internal_kotlin_compile_transforms_registered"
+        private const konst TRANSFORMS_REGISTERED = "_kgp_internal_kotlin_compile_transforms_registered"
 
-        val ARTIFACT_TYPE_ATTRIBUTE: Attribute<String> = Attribute.of("artifactType", String::class.java)
-        private const val DIRECTORY_ARTIFACT_TYPE = "directory"
-        private const val JAR_ARTIFACT_TYPE = "jar"
-        const val CLASSPATH_ENTRY_SNAPSHOT_ARTIFACT_TYPE = "classpath-entry-snapshot"
+        konst ARTIFACT_TYPE_ATTRIBUTE: Attribute<String> = Attribute.of("artifactType", String::class.java)
+        private const konst DIRECTORY_ARTIFACT_TYPE = "directory"
+        private const konst JAR_ARTIFACT_TYPE = "jar"
+        const konst CLASSPATH_ENTRY_SNAPSHOT_ARTIFACT_TYPE = "classpath-entry-snapshot"
 
         private fun getDefaultLangSetting(project: Project): Provider<LanguageSettings> {
             return project.provider { DefaultLanguageSettingsBuilder() }
@@ -121,7 +121,7 @@ internal open class BaseKotlinCompileConfig<TASK : KotlinCompile> : AbstractKotl
         }
         project.extensions.extraProperties[TRANSFORMS_REGISTERED] = true
 
-        val buildMetricsService = BuildMetricsService.registerIfAbsent(project)
+        konst buildMetricsService = BuildMetricsService.registerIfAbsent(project)
         project.dependencies.registerTransform(ClasspathEntrySnapshotTransform::class.java) {
             it.from.attribute(ARTIFACT_TYPE_ATTRIBUTE, JAR_ARTIFACT_TYPE)
             it.to.attribute(ARTIFACT_TYPE_ATTRIBUTE, CLASSPATH_ENTRY_SNAPSHOT_ARTIFACT_TYPE)

@@ -12,6 +12,6 @@ class A() {
 }
 
 fun box() : String {
-    val a : A = A()
+    konst a : A = A()
     return "OK"
 }

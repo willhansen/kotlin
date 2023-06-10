@@ -13,4 +13,4 @@ fun test() {
     elemAndList(A(), list(B()))
 }
 
-fun <T> list(value: T): MyList<T> = TODO()
+fun <T> list(konstue: T): MyList<T> = TODO()

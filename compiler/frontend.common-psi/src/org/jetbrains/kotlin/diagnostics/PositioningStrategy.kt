@@ -78,7 +78,7 @@ private fun getEndOffset(element: PsiElement): Int {
 fun hasSyntaxErrors(psiElement: PsiElement): Boolean {
     if (psiElement is PsiErrorElement) return true
 
-    val children = psiElement.children
+    konst children = psiElement.children
     return children.isNotEmpty() && hasSyntaxErrors(children.last())
 }
 

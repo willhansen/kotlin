@@ -335,25 +335,25 @@ fun referenceExpressionRecursiveVisitor(block: (KtReferenceExpression) -> Unit) 
         }
     }
 
-fun valueArgumentListVisitor(block: (KtValueArgumentList) -> Unit) =
+fun konstueArgumentListVisitor(block: (KtValueArgumentList) -> Unit) =
     object : KtVisitorVoid() {
         override fun visitValueArgumentList(list: KtValueArgumentList) {
             block(list)
         }
     }
 
-fun valueArgumentVisitor(block: (KtValueArgument) -> Unit) =
+fun konstueArgumentVisitor(block: (KtValueArgument) -> Unit) =
     object : KtVisitorVoid() {
-        override fun visitArgument(valueArgument: KtValueArgument) {
-            block(valueArgument)
+        override fun visitArgument(konstueArgument: KtValueArgument) {
+            block(konstueArgument)
         }
     }
 
-fun valueArgumentRecursiveVisitor(block: (KtValueArgument) -> Unit) =
+fun konstueArgumentRecursiveVisitor(block: (KtValueArgument) -> Unit) =
     object : KtTreeVisitorVoid() {
-        override fun visitArgument(valueArgument: KtValueArgument) {
-            super.visitArgument(valueArgument)
-            block(valueArgument)
+        override fun visitArgument(konstueArgument: KtValueArgument) {
+            super.visitArgument(konstueArgument)
+            block(konstueArgument)
         }
     }
 

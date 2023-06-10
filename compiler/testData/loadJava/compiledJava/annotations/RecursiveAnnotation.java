@@ -4,11 +4,11 @@ public interface RecursiveAnnotation {
 
     @B(@A("test"))
     public @interface A {
-        String value();
+        String konstue();
     }
 
     @B(@A("test"))
     public @interface B {
-        A value();
+        A konstue();
     }
 }

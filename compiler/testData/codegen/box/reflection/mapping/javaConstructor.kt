@@ -18,10 +18,10 @@ import kotlin.reflect.*
 import kotlin.reflect.jvm.*
 
 fun box(): String {
-    val reference = ::J
-    val javaConstructor = reference.javaConstructor ?: return "Fail: no Constructor for reference"
-    val j = javaConstructor.newInstance("OK")
-    val kotlinConstructor = javaConstructor.kotlinFunction
+    konst reference = ::J
+    konst javaConstructor = reference.javaConstructor ?: return "Fail: no Constructor for reference"
+    konst j = javaConstructor.newInstance("OK")
+    konst kotlinConstructor = javaConstructor.kotlinFunction
     if (reference != kotlinConstructor) return "Fail: reference != kotlinConstructor"
     return j.result
 }

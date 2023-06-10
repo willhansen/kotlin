@@ -2,7 +2,7 @@ package test
 
 public final class A {
     /*primary*/ public constructor A()
-    public final val @receiver:test.Ann kotlin.String.myLength2: kotlin.Int
+    public final konst @receiver:test.Ann kotlin.String.myLength2: kotlin.Int
         public final fun @receiver:test.Ann kotlin.String.`<get-myLength2>`(): kotlin.Int
     public final var @receiver:test.Ann kotlin.String.myLength3: kotlin.Int
         public final fun @receiver:test.Ann kotlin.String.`<get-myLength3>`(): kotlin.Int

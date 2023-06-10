@@ -4,7 +4,7 @@ package foo
 
 private fun bar() = 23
 
-private val bar = 42
+private konst bar = 42
 
 fun box(): String {
     assertEquals(23, bar())
@@ -17,4 +17,4 @@ fun box(): String {
 // FILE: foobar.kt
 package foo.bar
 
-val x = 32
+konst x = 32

@@ -19,18 +19,18 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.SimpleType
 
 internal class KtFe10TypeParameterType(
-    override val fe10Type: SimpleType,
-    private val parameter: TypeParameterDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst fe10Type: SimpleType,
+    private konst parameter: TypeParameterDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtTypeParameterType(), KtFe10Type {
     override fun asStringForDebugging(): String = withValidityAssertion { fe10Type.asStringForDebugging(analysisContext) }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { parameter.name }
 
-    override val nullability: KtTypeNullability
+    override konst nullability: KtTypeNullability
         get() = withValidityAssertion { fe10Type.ktNullability }
 
-    override val symbol: KtTypeParameterSymbol
+    override konst symbol: KtTypeParameterSymbol
         get() = withValidityAssertion { KtFe10DescTypeParameterSymbol(parameter, analysisContext) }
 }

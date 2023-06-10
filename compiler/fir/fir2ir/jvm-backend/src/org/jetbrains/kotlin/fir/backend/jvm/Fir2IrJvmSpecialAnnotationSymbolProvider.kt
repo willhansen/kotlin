@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.name.Name
 
 class Fir2IrJvmSpecialAnnotationSymbolProvider : Fir2IrSpecialSymbolProvider() {
 
-    private val kotlinJvmInternalPackage by lazy {
+    private konst kotlinJvmInternalPackage by lazy {
         IrExternalPackageFragmentImpl(
             DescriptorlessExternalPackageFragmentSymbol(),
             ENHANCED_NULLABILITY_ID.packageFqName
         )
     }
 
-    private val kotlinInternalIrPackage by lazy {
+    private konst kotlinInternalIrPackage by lazy {
         IrExternalPackageFragmentImpl(
             DescriptorlessExternalPackageFragmentSymbol(),
             FLEXIBLE_NULLABILITY_ID.packageFqName
@@ -58,12 +58,12 @@ class Fir2IrJvmSpecialAnnotationSymbolProvider : Fir2IrSpecialSymbolProvider() {
         }
 
     companion object {
-        private val ENHANCED_NULLABILITY_ID = ClassId.topLevel(JvmAnnotationNames.ENHANCED_NULLABILITY_ANNOTATION)
-        private val FLEXIBLE_NULLABILITY_ID =
+        private konst ENHANCED_NULLABILITY_ID = ClassId.topLevel(JvmAnnotationNames.ENHANCED_NULLABILITY_ANNOTATION)
+        private konst FLEXIBLE_NULLABILITY_ID =
             ClassId.topLevel(IrBuiltIns.KOTLIN_INTERNAL_IR_FQN.child(Name.identifier("FlexibleNullability")))
-        private val FLEXIBLE_MUTABILITY_ID =
+        private konst FLEXIBLE_MUTABILITY_ID =
             ClassId.topLevel(IrBuiltIns.KOTLIN_INTERNAL_IR_FQN.child(Name.identifier("FlexibleMutability")))
-        private val RAW_TYPE_ANNOTATION_ID =
+        private konst RAW_TYPE_ANNOTATION_ID =
             ClassId.topLevel(IrBuiltIns.KOTLIN_INTERNAL_IR_FQN.child(Name.identifier("RawType")))
     }
 }

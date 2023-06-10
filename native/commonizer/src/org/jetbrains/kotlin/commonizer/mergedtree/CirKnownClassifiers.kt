@@ -10,11 +10,11 @@ import org.jetbrains.kotlin.commonizer.TargetDependent
 import org.jetbrains.kotlin.commonizer.cir.CirEntityId
 
 class CirKnownClassifiers(
-    val classifierIndices: TargetDependent<CirClassifierIndex>,
-    val targetDependencies: TargetDependent<CirProvidedClassifiers>,
-    val commonizedNodes: CirCommonizedClassifierNodes,
-    val commonDependencies: CirProvidedClassifiers,
-    val associatedIdsResolver: AssociatedClassifierIdsResolver =
+    konst classifierIndices: TargetDependent<CirClassifierIndex>,
+    konst targetDependencies: TargetDependent<CirProvidedClassifiers>,
+    konst commonizedNodes: CirCommonizedClassifierNodes,
+    konst commonDependencies: CirProvidedClassifiers,
+    konst associatedIdsResolver: AssociatedClassifierIdsResolver =
         AssociatedClassifierIdsResolver(classifierIndices, targetDependencies, commonDependencies),
 )
 
@@ -30,19 +30,19 @@ interface CirCommonizedClassifierNodes {
 
     companion object {
         fun default(allowedDuplicates: Set<CirEntityId> = setOf()) = object : CirCommonizedClassifierNodes {
-            private val classNodes = THashMap<CirEntityId, CirClassNode>()
-            private val typeAliases = THashMap<CirEntityId, CirTypeAliasNode>()
+            private konst classNodes = THashMap<CirEntityId, CirClassNode>()
+            private konst typeAliases = THashMap<CirEntityId, CirTypeAliasNode>()
 
             override fun classNode(classId: CirEntityId) = classNodes[classId]
             override fun typeAliasNode(typeAliasId: CirEntityId) = typeAliases[typeAliasId]
 
             override fun addClassNode(classId: CirEntityId, node: CirClassNode) {
-                val oldNode = classNodes.put(classId, node)
+                konst oldNode = classNodes.put(classId, node)
                 check(oldNode == null || classId in allowedDuplicates) { "Rewriting class node $classId" }
             }
 
             override fun addTypeAliasNode(typeAliasId: CirEntityId, node: CirTypeAliasNode) {
-                val oldNode = typeAliases.put(typeAliasId, node)
+                konst oldNode = typeAliases.put(typeAliasId, node)
                 check(oldNode == null || typeAliasId in allowedDuplicates) { "Rewriting type alias node $typeAliasId" }
             }
         }

@@ -9,6 +9,6 @@ fun box(): String = X(Z("OK")).z.result
 // FILE: 2.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: String>(val result: T)
+konstue class Z<T: String>(konst result: T)
 
-class X(val z: Z<String>)
+class X(konst z: Z<String>)

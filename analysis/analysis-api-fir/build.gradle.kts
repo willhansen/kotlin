@@ -70,16 +70,16 @@ allprojects {
     }
 }
 
-val generatorClasspath by configurations.creating
+konst generatorClasspath by configurations.creating
 
 dependencies {
     generatorClasspath(project(":analysis:analysis-api-fir:analysis-api-fir-generator"))
 }
 
-val generateCode by tasks.registering(NoDebugJavaExec::class) {
-    val generatorRoot = "$projectDir/analysis/analysis-api-fir/analysis-api-fir-generator/src/"
+konst generateCode by tasks.registering(NoDebugJavaExec::class) {
+    konst generatorRoot = "$projectDir/analysis/analysis-api-fir/analysis-api-fir-generator/src/"
 
-    val generatorConfigurationFiles = fileTree(generatorRoot) {
+    konst generatorConfigurationFiles = fileTree(generatorRoot) {
         include("**/*.kt")
     }
 
@@ -91,7 +91,7 @@ val generateCode by tasks.registering(NoDebugJavaExec::class) {
     systemProperties["line.separator"] = "\n"
 }
 
-val compileKotlin by tasks
+konst compileKotlin by tasks
 
 compileKotlin.dependsOn(generateCode)
 

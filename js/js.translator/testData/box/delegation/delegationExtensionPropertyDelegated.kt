@@ -3,17 +3,17 @@ package foo
 
 import kotlin.reflect.KProperty
 
-class State(var value: Int)
+class State(var konstue: Int)
 
 interface Base {
     var State.multiplied: Int
 }
 
-class Delegate(val multiplier: Int) {
-    operator fun getValue(state: State, desc: KProperty<*>): Int  = multiplier * state.value
+class Delegate(konst multiplier: Int) {
+    operator fun getValue(state: State, desc: KProperty<*>): Int  = multiplier * state.konstue
 
-    operator fun setValue(state: State, desc: KProperty<*>, value: Int) {
-        state.value = value / multiplier
+    operator fun setValue(state: State, desc: KProperty<*>, konstue: Int) {
+        state.konstue = konstue / multiplier
     }
 
 }
@@ -25,15 +25,15 @@ open class BaseImpl() : Base {
 class Derived() : Base by BaseImpl() {
     fun getValueMultiplied(state: State): Int = state.multiplied
 
-    fun setValueMultiplied(state: State, value: Int) {
-        state.multiplied = value
+    fun setValueMultiplied(state: State, konstue: Int) {
+        state.multiplied = konstue
     }
 }
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
 
-    val state = State(2)
+    konst state = State(2)
     assertEquals(4, d.getValueMultiplied(state))
 
     d.setValueMultiplied(state, 10)

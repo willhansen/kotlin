@@ -43,10 +43,10 @@ fun main(args : Array<String>) {
     (foo2())<!TYPE_MISMATCH!>{<!CANNOT_INFER_PARAMETER_TYPE, EXPECTED_PARAMETERS_NUMBER_MISMATCH!>x<!> -> }<!>
     foo2()(<!TYPE_MISMATCH!>{<!CANNOT_INFER_PARAMETER_TYPE, EXPECTED_PARAMETERS_NUMBER_MISMATCH!>x<!> -> }<!>)
 
-    val a = fooT1(1)()
+    konst a = fooT1(1)()
     checkSubtype<Int>(a)
 
-    val b = fooT2<Int>()(1)
+    konst b = fooT2<Int>()(1)
     checkSubtype<Int>(b)
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>fooT2<!>()(1) // : Any?
 
@@ -79,7 +79,7 @@ fun test() {
     {x : Int -> 1}<!NO_VALUE_FOR_PARAMETER!>()<!>;
     (fun Int.() = 1)<!NO_VALUE_FOR_PARAMETER!>()<!>
     "sd".<!FUNCTION_EXPECTED!>(fun Int.() = 1)<!>()
-    val i : Int? = null
+    konst i : Int? = null
     i<!UNSAFE_CALL!>.<!>(fun Int.() = 1)();
     {}<!WRONG_NUMBER_OF_TYPE_ARGUMENTS!><Int><!>()
     1<!UNNECESSARY_SAFE_CALL!>?.<!>(fun Int.() = 1)()

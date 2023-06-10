@@ -18,7 +18,7 @@ object PackagePartClassUtils {
     @JvmStatic
     fun getPathHashCode(file: VirtualFile): Int = file.path.lowercase().hashCode()
 
-    private const val PART_CLASS_NAME_SUFFIX = "Kt"
+    private const konst PART_CLASS_NAME_SUFFIX = "Kt"
 
     @JvmStatic
     private fun decapitalizeAsJavaClassName(str: String): String =
@@ -37,7 +37,7 @@ object PackagePartClassUtils {
 
     @JvmStatic
     fun getPackagePartFqName(packageFqName: FqName, fileName: String): FqName {
-        val partClassName = getFilePartShortName(fileName)
+        konst partClassName = getFilePartShortName(fileName)
         return packageFqName.child(Name.identifier(partClassName))
     }
 
@@ -52,7 +52,7 @@ object PackagePartClassUtils {
     @JvmStatic
     fun getFileNameByFacadeName(facadeClassName: String): String? {
         if (!facadeClassName.endsWith(PART_CLASS_NAME_SUFFIX)) return null
-        val baseName = facadeClassName.substring(0, facadeClassName.length - PART_CLASS_NAME_SUFFIX.length)
+        konst baseName = facadeClassName.substring(0, facadeClassName.length - PART_CLASS_NAME_SUFFIX.length)
         if (baseName == "_") return null
         return "${decapitalizeAsJavaClassName(baseName)}.${KotlinFileType.EXTENSION}"
     }

@@ -27,7 +27,7 @@ public class InheritedClass extends SuperClass {
 // FILE: test.kt
 
 fun box(): String {
-    val superValue = (SuperClass::stringParam)(SuperClass("O"))
-    val inheritedValue = (InheritedClass("K")::stringParam)()
+    konst superValue = (SuperClass::stringParam)(SuperClass("O"))
+    konst inheritedValue = (InheritedClass("K")::stringParam)()
     return superValue + inheritedValue
 }

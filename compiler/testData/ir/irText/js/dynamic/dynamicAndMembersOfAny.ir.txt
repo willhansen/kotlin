@@ -20,4 +20,4 @@ FILE fqName:<root> fileName:/dynamicAndMembersOfAny.kt
         CALL 'public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any' type=kotlin.Boolean origin=null
           $this: TYPE_OP type=kotlin.Any origin=IMPLICIT_DYNAMIC_CAST typeOperand=kotlin.Any
             GET_VAR 'd: dynamic declared in <root>.test3' type=dynamic origin=null
-          other: CONST Int type=kotlin.Int value=42
+          other: CONST Int type=kotlin.Int konstue=42

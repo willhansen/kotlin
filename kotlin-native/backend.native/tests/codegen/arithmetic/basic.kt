@@ -14,14 +14,14 @@ fun selfComparison() {
 }
 
 private fun charCornersMinus(): Int {
-    val a: Char = 0xFFFF.toChar()
-    val b: Char = 0.toChar()
+    konst a: Char = 0xFFFF.toChar()
+    konst b: Char = 0.toChar()
     return a - b
 }
 
 private fun charCornersComparison(): Boolean {
-    val a = 0xFFFF.toChar()
-    val b = 0.toChar()
+    konst a = 0xFFFF.toChar()
+    konst b = 0.toChar()
     return a < b
 }
 
@@ -91,6 +91,6 @@ fun compareIntToFloat() {
 
 @Test
 fun testKt37412() {
-    val two = 2.0
+    konst two = 2.0
     assertEquals(2, two.toInt())
 }

@@ -14,18 +14,18 @@ fun main(args: Array<String>) {
         return
     }
 
-    val port = args[0].toShort()
+    konst port = args[0].toShort()
 
     // Initialize sockets in platform-dependent way.
     init_sockets()
 
     memScoped {
 
-        val buffer = ByteArray(1024)
-        val prefixBuffer = "echo: ".encodeToByteArray()
-        val serverAddr = alloc<sockaddr_in>()
+        konst buffer = ByteArray(1024)
+        konst prefixBuffer = "echo: ".encodeToByteArray()
+        konst serverAddr = alloc<sockaddr_in>()
 
-        val listenFd = socket(AF_INET, SOCK_STREAM, 0)
+        konst listenFd = socket(AF_INET, SOCK_STREAM, 0)
                 .ensureUnixCallResult("socket") { !it.isMinusOne() }
 
         with(serverAddr) {
@@ -40,12 +40,12 @@ fun main(args: Array<String>) {
         listen(listenFd, 10)
                 .ensureUnixCallResult("listen") { it == 0 }
 
-        val commFd = accept(listenFd, null, null)
+        konst commFd = accept(listenFd, null, null)
                 .ensureUnixCallResult("accept") { !it.isMinusOne() }
 
         buffer.usePinned { pinned ->
           while (true) {
-            val length = recv(commFd, pinned.addressOf(0), buffer.size.convert(), 0).toInt()
+            konst length = recv(commFd, pinned.addressOf(0), buffer.size.convert(), 0).toInt()
                     .ensureUnixCallResult("read") { it >= 0 }
 
             if (length == 0) {

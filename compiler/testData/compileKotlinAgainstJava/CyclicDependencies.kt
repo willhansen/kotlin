@@ -5,7 +5,7 @@ class KotlinClass {
 }
 
 class KotlinClass2 {
-    val str = "HELLO"
+    konst str = "HELLO"
 }
 
 fun useJavaClass() = CyclicDependencies().apply {

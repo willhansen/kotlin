@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.name.FqName
 abstract class FirProvidedDeclarationsForMetadataService : FirSessionComponent {
     companion object {
         fun create(session: FirSession): FirProvidedDeclarationsForMetadataService {
-            val extensionProviders = session.extensionService.declarationForMetadataProviders
+            konst extensionProviders = session.extensionService.declarationForMetadataProviders
             return if (extensionProviders.isEmpty()) Empty else FirProvidedDeclarationsForMetadataServiceImpl(session, extensionProviders)
         }
     }
@@ -53,14 +53,14 @@ abstract class FirProvidedDeclarationsForMetadataService : FirSessionComponent {
 
 private class FirProvidedDeclarationsForMetadataServiceImpl(
     session: FirSession,
-    private val extensionDeclarationProviders: List<FirDeclarationsForMetadataProviderExtension>
+    private konst extensionDeclarationProviders: List<FirDeclarationsForMetadataProviderExtension>
 ) : FirProvidedDeclarationsForMetadataService() {
-    private val cachesFactory = session.firCachesFactory
+    private konst cachesFactory = session.firCachesFactory
 
-    private val topLevelsCache: FirCache<FqName, List<FirDeclaration>, ScopeSession> =
+    private konst topLevelsCache: FirCache<FqName, List<FirDeclaration>, ScopeSession> =
         cachesFactory.createCache(::computeTopLevelDeclarations)
 
-    private val membersCache: FirCache<FirClassSymbol<*>, ClassDeclarations, ScopeSession> =
+    private konst membersCache: FirCache<FirClassSymbol<*>, ClassDeclarations, ScopeSession> =
         cachesFactory.createCache(::computeMemberDeclarations)
 
     private fun computeTopLevelDeclarations(packageFqName: FqName, scopeSession: ScopeSession): List<FirDeclaration> {
@@ -90,15 +90,15 @@ private class FirProvidedDeclarationsForMetadataServiceImpl(
     }
 
     private data class ClassDeclarations(
-        val providedCallables: List<FirCallableDeclaration>,
-        val providedConstructors: List<FirConstructor>,
-        val providedNestedClasses: List<FirClassLikeSymbol<*>>,
+        konst providedCallables: List<FirCallableDeclaration>,
+        konst providedConstructors: List<FirConstructor>,
+        konst providedNestedClasses: List<FirClassLikeSymbol<*>>,
     )
 
     private fun computeMemberDeclarations(symbol: FirClassSymbol<*>, scopeSession: ScopeSession): ClassDeclarations {
-        val providedCallables = mutableListOf<FirCallableDeclaration>()
-        val providedConstructors = mutableListOf<FirConstructor>()
-        val providedNestedClassifiers = mutableListOf<FirClassLikeSymbol<*>>()
+        konst providedCallables = mutableListOf<FirCallableDeclaration>()
+        konst providedConstructors = mutableListOf<FirConstructor>()
+        konst providedNestedClassifiers = mutableListOf<FirClassLikeSymbol<*>>()
 
         for (extensionProvider in extensionDeclarationProviders) {
             for (declaration in extensionProvider.provideDeclarationsForClass(symbol.fir, scopeSession)) {
@@ -115,4 +115,4 @@ private class FirProvidedDeclarationsForMetadataServiceImpl(
     }
 }
 
-val FirSession.providedDeclarationsForMetadataService: FirProvidedDeclarationsForMetadataService by FirSession.sessionComponentAccessor()
+konst FirSession.providedDeclarationsForMetadataService: FirProvidedDeclarationsForMetadataService by FirSession.sessionComponentAccessor()

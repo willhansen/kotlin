@@ -17,7 +17,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 api("com.example:lib:1.0")
             }

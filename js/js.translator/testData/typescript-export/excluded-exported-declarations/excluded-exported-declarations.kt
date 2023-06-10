@@ -11,7 +11,7 @@ package foo
 
 @JsExport
 @JsExport.Ignore
-val baz: String = "Baz"
+konst baz: String = "Baz"
 
 @JsExport
 @JsExport.Ignore
@@ -24,11 +24,11 @@ class NotExportableNestedInsideInterface
 @JsExport.Ignore
 @JsExport
 object Comanion {
-    val foo: String ="FOO"
+    konst foo: String ="FOO"
 }
 
 @JsExport
-val foo: String = "Foo"
+konst foo: String = "Foo"
 
 @JsExport
 fun bar() = "Bar"
@@ -47,7 +47,7 @@ fun notExportableReturn(): List<String> = listOf("1", "2")
 
 @JsExport
 @JsExport.Ignore
-val String.notExportableExentsionProperty: String
+konst String.notExportableExentsionProperty: String
     get() = "notExportableExentsionProperty"
 
 @JsExport
@@ -56,4 +56,4 @@ annotation class NotExportableAnnotation
 
 @JsExport
 @JsExport.Ignore
-value class NotExportableInlineClass(val value: Int)
+konstue class NotExportableInlineClass(konst konstue: Int)

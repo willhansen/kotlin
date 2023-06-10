@@ -4,8 +4,8 @@
 import kotlin.reflect.KMutableProperty2
 import kotlin.test.assertEquals
 
-inline class S(val value: String) {
-    operator fun plus(other: S): S = S(this.value + other.value)
+inline class S(konst konstue: String) {
+    operator fun plus(other: S): S = S(this.konstue + other.konstue)
 }
 
 class C {
@@ -15,19 +15,19 @@ class C {
     private var suffix = S("")
     var S.nonNull_nonNullMemExt: S
         get() = this + suffix
-        set(value) { suffix = this + value }
+        set(konstue) { suffix = this + konstue }
 
     var S.nonNull_nullableMemExt: S?
         get() = this + suffix
-        set(value) { suffix = this + value!! }
+        set(konstue) { suffix = this + konstue!! }
 
     var S?.nullable_nonNullMemExt: S
         get() = this!! + suffix
-        set(value) { suffix = this!! + value }
+        set(konstue) { suffix = this!! + konstue }
 
     var S?.nullable_nullableMemExt: S?
         get() = this!! + suffix
-        set(value) { suffix = this!! + value!! }
+        set(konstue) { suffix = this!! + konstue!! }
 }
 
 var nonNullTopLevel: S = S("")
@@ -36,22 +36,22 @@ var nullableTopLevel: S? = S("")
 private var suffix = S("")
 var S.nonNull_nonNullExt: S
     get() = this + suffix
-    set(value) { suffix = this + value }
+    set(konstue) { suffix = this + konstue }
 
 var S.nonNull_nullableExt: S?
     get() = this + suffix
-    set(value) { suffix = this + value!! }
+    set(konstue) { suffix = this + konstue!! }
 
 var S?.nullable_nonNullExt: S
     get() = this!! + suffix
-    set(value) { suffix = this!! + value }
+    set(konstue) { suffix = this!! + konstue }
 
 var S?.nullable_nullableExt: S?
     get() = this!! + suffix
-    set(value) { suffix = this!! + value!! }
+    set(konstue) { suffix = this!! + konstue!! }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     assertEquals(Unit, C::nonNullMember.setter.call(c, S("ab")))
     assertEquals(S("ab"), C::nonNullMember.call(c))
     assertEquals(S("ab"), C::nonNullMember.getter.call(c))
@@ -68,22 +68,22 @@ fun box(): String {
     assertEquals(S("cd"), c::nullableMember.call())
     assertEquals(S("cd"), c::nullableMember.getter.call())
 
-    val nonNull_nonNullMemExt = C::class.members.single { it.name == "nonNull_nonNullMemExt" } as KMutableProperty2<C, S, S>
+    konst nonNull_nonNullMemExt = C::class.members.single { it.name == "nonNull_nonNullMemExt" } as KMutableProperty2<C, S, S>
     assertEquals(Unit, nonNull_nonNullMemExt.setter.call(c, S(""), S("f")))
     assertEquals(S("ef"), nonNull_nonNullMemExt.call(c, S("e")))
     assertEquals(S("ef"), nonNull_nonNullMemExt.getter.call(c, S("e")))
 
-    val nonNull_nullableMemExt = C::class.members.single { it.name == "nonNull_nullableMemExt" } as KMutableProperty2<C, S, S?>
+    konst nonNull_nullableMemExt = C::class.members.single { it.name == "nonNull_nullableMemExt" } as KMutableProperty2<C, S, S?>
     assertEquals(Unit, nonNull_nullableMemExt.setter.call(c, S(""), S("f")))
     assertEquals(S("ef"), nonNull_nullableMemExt.call(c, S("e")))
     assertEquals(S("ef"), nonNull_nullableMemExt.getter.call(c, S("e")))
 
-    val nullable_nonNullMemExt = C::class.members.single { it.name == "nullable_nonNullMemExt" } as KMutableProperty2<C, S?, S>
+    konst nullable_nonNullMemExt = C::class.members.single { it.name == "nullable_nonNullMemExt" } as KMutableProperty2<C, S?, S>
     assertEquals(Unit, nullable_nonNullMemExt.setter.call(c, S(""), S("f")))
     assertEquals(S("ef"), nullable_nonNullMemExt.call(c, S("e")))
     assertEquals(S("ef"), nullable_nonNullMemExt.getter.call(c, S("e")))
 
-    val nullable_nullableMemExt = C::class.members.single { it.name == "nullable_nullableMemExt" } as KMutableProperty2<C, S?, S?>
+    konst nullable_nullableMemExt = C::class.members.single { it.name == "nullable_nullableMemExt" } as KMutableProperty2<C, S?, S?>
     assertEquals(Unit, nullable_nullableMemExt.setter.call(c, S(""), S("f")))
     assertEquals(S("ef"), nullable_nullableMemExt.call(c, S("e")))
     assertEquals(S("ef"), nullable_nullableMemExt.getter.call(c, S("e")))

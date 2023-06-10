@@ -3,15 +3,15 @@
 import abitestutils.abiTest
 
 fun box() = abiTest {
-    val ii: InterfaceImpl = InterfaceImpl()
-    val i: Interface = ii
-    val aci: AbstractClassImpl = AbstractClassImpl()
-    val ac: AbstractClass = aci
-    val oci: OpenClassImpl = OpenClassImpl()
-    val oc: OpenClass = oci
-    val soc: StableOpenClass = StableOpenClass()
-    val sci: StableClassImpl = StableClassImpl()
-    val sci2: StableClassImpl2 = StableClassImpl2()
+    konst ii: InterfaceImpl = InterfaceImpl()
+    konst i: Interface = ii
+    konst aci: AbstractClassImpl = AbstractClassImpl()
+    konst ac: AbstractClass = aci
+    konst oci: OpenClassImpl = OpenClassImpl()
+    konst oc: OpenClass = oci
+    konst soc: StableOpenClass = StableOpenClass()
+    konst sci: StableClassImpl = StableClassImpl()
+    konst sci2: StableClassImpl2 = StableClassImpl2()
 
     expectSuccess("memberOperatorsToNonOperators: a=Alice,b=Bob") { memberOperatorsToNonOperators("a" to "Alice", "b" to "Bob") }
     expectSuccess("extensionOperatorsToNonOperators: a=Alice,b=Bob") { extensionOperatorsToNonOperators("a" to "Alice", "b" to "Bob") }
@@ -33,12 +33,12 @@ fun box() = abiTest {
     expectSuccess(-58) { firstDefaultValueInFunctionInStableClassImpl2(sci2, 100) }
     expectSuccess(58) { lastDefaultValueInFunctionInStableClassImpl2(sci2, 100) }
 
-    expectFailure(linkage("Function 'removedFirstDefaultValue' can not be called: The call site provides less value arguments (1) than the function requires (2)")) { removedFirstDefaultValueInFunction(1) }
-    expectSuccess(100) { removedVarargFirstDefaultValueInFunction(100) } // Default IntArray value disappears. So it contrinutes 0 to the sum.
-    expectFailure(linkage("Function 'removedLastDefaultValue' can not be called: The call site provides less value arguments (1) than the function requires (2)")) { removedLastDefaultValueInFunction(1) }
-    expectSuccess(100) { removedVarargLastDefaultValueInFunction(100) } // Default IntArray value disappears. So it contrinutes 0 to the sum.
-    expectFailure(linkage("Constructor 'RemovedFirstDefaultValueInConstructor.<init>' can not be called: The call site provides less value arguments (1) than the constructor requires (2)")) { removedFirstDefaultValueInConstructor(1) }
-    expectFailure(linkage("Constructor 'RemovedLastDefaultValueInConstructor.<init>' can not be called: The call site provides less value arguments (1) than the constructor requires (2)")) { removedLastDefaultValueInConstructor(1) }
+    expectFailure(linkage("Function 'removedFirstDefaultValue' can not be called: The call site provides less konstue arguments (1) than the function requires (2)")) { removedFirstDefaultValueInFunction(1) }
+    expectSuccess(100) { removedVarargFirstDefaultValueInFunction(100) } // Default IntArray konstue disappears. So it contrinutes 0 to the sum.
+    expectFailure(linkage("Function 'removedLastDefaultValue' can not be called: The call site provides less konstue arguments (1) than the function requires (2)")) { removedLastDefaultValueInFunction(1) }
+    expectSuccess(100) { removedVarargLastDefaultValueInFunction(100) } // Default IntArray konstue disappears. So it contrinutes 0 to the sum.
+    expectFailure(linkage("Constructor 'RemovedFirstDefaultValueInConstructor.<init>' can not be called: The call site provides less konstue arguments (1) than the constructor requires (2)")) { removedFirstDefaultValueInConstructor(1) }
+    expectFailure(linkage("Constructor 'RemovedLastDefaultValueInConstructor.<init>' can not be called: The call site provides less konstue arguments (1) than the constructor requires (2)")) { removedLastDefaultValueInConstructor(1) }
 
     expectSuccess(0) { singleVarargArgument() }
     expectSuccess(1) { singleVarargArgument(1) }

@@ -9,7 +9,7 @@ import kotlin.test.*
 
 @Suppress("NOTHING_TO_INLINE")
 inline private fun foo(i: Int): Int {
-    val result = i
+    konst result = i
     return result + i
 }
 

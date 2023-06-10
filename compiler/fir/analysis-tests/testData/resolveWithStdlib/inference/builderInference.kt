@@ -3,7 +3,7 @@ fun <T> foo(@<!OPT_IN_USAGE_ERROR!>BuilderInference<!> block: MutableList<T>.() 
 fun takeString(s: String) {}
 
 fun test() {
-    val s = foo {
+    konst s = foo {
         this.add("")
     }
     takeString(s)

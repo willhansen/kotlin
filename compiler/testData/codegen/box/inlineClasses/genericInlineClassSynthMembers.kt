@@ -5,7 +5,7 @@
 // MODULE: lib1
 // FILE: lib1.kt
 
-class C<T>(val t: T) {
+class C<T>(konst t: T) {
     override fun hashCode(): Int = t as Int
 }
 
@@ -13,7 +13,7 @@ class C<T>(val t: T) {
 // FILE: lib2.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<TT>(val c: C<TT>) {
+konstue class IC<TT>(konst c: C<TT>) {
     fun foo(): Int = c.hashCode()
 }
 
@@ -21,7 +21,7 @@ value class IC<TT>(val c: C<TT>) {
 // FILE: main.kt
 
 fun box(): String {
-    val ic = IC<Int>(C(42))
+    konst ic = IC<Int>(C(42))
 
     if (ic.foo() != 42) return "FAIL"
     return "OK"

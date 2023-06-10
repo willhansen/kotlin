@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.pill.model
 import java.io.File
 
 data class PLibrary(
-    val name: String,
-    val classes: List<File>,
-    val javadoc: List<File> = emptyList(),
-    val sources: List<File> = emptyList(),
-    val annotations: List<File> = emptyList(),
-    val dependencies: List<PLibrary> = emptyList(),
-    val originalName: String = name
+    konst name: String,
+    konst classes: List<File>,
+    konst javadoc: List<File> = emptyList(),
+    konst sources: List<File> = emptyList(),
+    konst annotations: List<File> = emptyList(),
+    konst dependencies: List<PLibrary> = emptyList(),
+    konst originalName: String = name
 ) {
     fun attachSource(file: File): PLibrary {
         return this.copy(sources = this.sources + listOf(file))

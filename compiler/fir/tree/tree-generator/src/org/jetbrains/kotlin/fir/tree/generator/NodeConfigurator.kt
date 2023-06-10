@@ -114,7 +114,7 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
 
         function.configure {
             +symbol("FirFunctionSymbol", "out FirFunction")
-            +fieldList(valueParameter, withReplace = true).withTransform()
+            +fieldList(konstueParameter, withReplace = true).withTransform()
             +body(nullable = true, withReplace = true).withTransform()
         }
 
@@ -228,7 +228,7 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
         constExpression.configure {
             withArg("T")
             +field("kind", constKindType.withArgs("T"), withReplace = true)
-            +field("value", "T", null)
+            +field("konstue", "T", null)
         }
 
         functionCall.configure {
@@ -422,7 +422,7 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
             +fieldList("delegatedConstructorCalls", delegatedConstructorCall, withReplace = true).withTransform()
         }
 
-        valueParameter.configure {
+        konstueParameter.configure {
             +symbol("FirValueParameterSymbol")
             +field("defaultValue", expression, nullable = true, withReplace = true)
             +field("containingFunctionSymbol", functionSymbolType, "*").apply {
@@ -441,7 +441,7 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
             +symbol("FirVariableSymbol", "out FirVariable")
             +initializer.withTransform().withReplace()
             +field("delegate", expression, nullable = true).withTransform()
-            generateBooleanFields("var", "val")
+            generateBooleanFields("var", "konst")
             +field("getter", propertyAccessor, nullable = true, withReplace = true).withTransform()
             +field("setter", propertyAccessor, nullable = true, withReplace = true).withTransform()
             +field("backingField", backingField, nullable = true).withTransform()
@@ -773,8 +773,8 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
 }
 
 fun Element.withArgs(vararg replacements: Pair<String, String>): AbstractElement {
-    val replaceMap = replacements.toMap()
-    val newArguments = typeArguments.map { typeArgument ->
+    konst replaceMap = replacements.toMap()
+    konst newArguments = typeArguments.map { typeArgument ->
         replaceMap[typeArgument.name]?.let { SimpleTypeArgument(it, null) } ?: typeArgument
     }
     return ElementWithArguments(this, newArguments)

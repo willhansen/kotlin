@@ -1,3 +1,3 @@
-val x get() {
+konst x get() {
     return 1
 }

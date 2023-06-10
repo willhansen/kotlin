@@ -16,15 +16,15 @@ import org.jetbrains.kotlin.library.impl.toSpaceSeparatedString
  * preserved in commonized libraries (both for "common" and platform-specific library parts).
  */
 data class NativeSensitiveManifestData(
-    val uniqueName: UniqueLibraryName,
-    val versions: KotlinLibraryVersioning,
-    val dependencies: List<String>,
-    val isInterop: Boolean,
-    val packageFqName: String?,
-    val exportForwardDeclarations: List<String>,
-    val nativeTargets: Collection<String>,
-    val shortName: String?,
-    val commonizerTarget: CommonizerTarget?,
+    konst uniqueName: UniqueLibraryName,
+    konst versions: KotlinLibraryVersioning,
+    konst dependencies: List<String>,
+    konst isInterop: Boolean,
+    konst packageFqName: String?,
+    konst exportForwardDeclarations: List<String>,
+    konst nativeTargets: Collection<String>,
+    konst shortName: String?,
+    konst commonizerTarget: CommonizerTarget?,
 ) {
 
     companion object {
@@ -42,8 +42,8 @@ data class NativeSensitiveManifestData(
     }
 }
 
-private inline fun BaseWriterImpl.addOptionalProperty(name: String, condition: Boolean, value: () -> String) {
-    if (condition) manifestProperties[name] = value()
+private inline fun BaseWriterImpl.addOptionalProperty(name: String, condition: Boolean, konstue: () -> String) {
+    if (condition) manifestProperties[name] = konstue()
     else manifestProperties.remove(name)
 }
 

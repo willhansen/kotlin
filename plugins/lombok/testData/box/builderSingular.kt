@@ -26,7 +26,7 @@ public class Other {
 
 // FILE: test.kt
 fun box(): String {
-    val userBuilder = User.builder()
+    konst userBuilder = User.builder()
         .status("wrong")
         .clearStatuses()
         .status("hello")
@@ -34,19 +34,19 @@ fun box(): String {
         .number("1", 1)
         .numbers(mapOf("2" to 2, "3" to 3))
 
-    val user = userBuilder.build()
+    konst user = userBuilder.build()
 
-    val other = Other.builder()
+    konst other = Other.builder()
         .withSingleSome(1)
         .withSome(listOf(2, 3))
         .withName("John")
         .withNames(setOf("Peter"))
         .build()
 
-    val expectedNumbers = mapOf("1" to 1, "2" to 2, "3" to 3)
-    val expectedStatuses = listOf("hello", "world", "!")
-    val expectedSome = listOf(1, 2, 3)
-    val expectedNames = listOf("John", "Peter")
+    konst expectedNumbers = mapOf("1" to 1, "2" to 2, "3" to 3)
+    konst expectedStatuses = listOf("hello", "world", "!")
+    konst expectedSome = listOf(1, 2, 3)
+    konst expectedNames = listOf("John", "Peter")
 
     return if (
         user.numbers == expectedNumbers &&

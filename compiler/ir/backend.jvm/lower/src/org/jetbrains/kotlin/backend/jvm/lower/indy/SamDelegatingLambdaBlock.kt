@@ -28,15 +28,15 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 internal sealed class SamDelegatingLambdaBlock {
-    abstract val block: IrContainerExpression
-    abstract val ref: IrFunctionReference
+    abstract konst block: IrContainerExpression
+    abstract konst ref: IrFunctionReference
     abstract fun replaceRefWith(expression: IrExpression)
 }
 
 
 internal class RegularDelegatingLambdaBlock(
-    override val block: IrContainerExpression,
-    override val ref: IrFunctionReference
+    override konst block: IrContainerExpression,
+    override konst ref: IrFunctionReference
 ) : SamDelegatingLambdaBlock() {
 
     override fun replaceRefWith(expression: IrExpression) {
@@ -47,10 +47,10 @@ internal class RegularDelegatingLambdaBlock(
 
 
 internal class NullableDelegatingLambdaBlock(
-    override val block: IrContainerExpression,
-    override val ref: IrFunctionReference,
-    private val ifExpr: IrExpression,
-    private val ifNotNullBlock: IrContainerExpression
+    override konst block: IrContainerExpression,
+    override konst ref: IrFunctionReference,
+    private konst ifExpr: IrExpression,
+    private konst ifNotNullBlock: IrContainerExpression
 ) : SamDelegatingLambdaBlock() {
 
     override fun replaceRefWith(expression: IrExpression) {
@@ -62,7 +62,7 @@ internal class NullableDelegatingLambdaBlock(
 }
 
 
-internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendContext) {
+internal class SamDelegatingLambdaBuilder(private konst jvmContext: JvmBackendContext) {
     fun build(expression: IrExpression, superType: IrType, scopeSymbol: IrSymbol, parent: IrDeclarationParent): SamDelegatingLambdaBlock {
         return if (superType.isNullable() && expression.type.isNullable())
             buildNullableDelegatingLambda(expression, superType, scopeSymbol, parent)
@@ -77,17 +77,17 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
         parent: IrDeclarationParent
     ): SamDelegatingLambdaBlock {
         lateinit var ref: IrFunctionReference
-        val block = jvmContext.createJvmIrBuilder(scopeSymbol, expression).run {
+        konst block = jvmContext.createJvmIrBuilder(scopeSymbol, expression).run {
             //  {
-            //      val tmp = <expression>
+            //      konst tmp = <expression>
             //      fun `<anonymous>`(p1: T1, ..., pN: TN): R =
             //          tmp.invoke(p1, ..., pN)
             //      ::`<anonymous>`
             //  }
 
             irBlock(origin = IrStatementOrigin.LAMBDA) {
-                val tmp = irTemporary(expression)
-                val lambda = createDelegatingLambda(expression, superType, tmp, parent)
+                konst tmp = irTemporary(expression)
+                konst lambda = createDelegatingLambda(expression, superType, tmp, parent)
                     .also { +it }
                 ref = createDelegatingLambdaReference(expression, lambda)
                     .also { +it }
@@ -106,9 +106,9 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
         lateinit var ref: IrFunctionReference
         lateinit var ifExpr: IrExpression
         lateinit var ifNotNullBlock: IrContainerExpression
-        val block = jvmContext.createJvmIrBuilder(scopeSymbol, expression).run {
+        konst block = jvmContext.createJvmIrBuilder(scopeSymbol, expression).run {
             //  {
-            //      val tmp = <expression>
+            //      konst tmp = <expression>
             //      if (tmp == null)
             //          null
             //      else {
@@ -119,9 +119,9 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
             //  }
 
             irBlock(origin = IrStatementOrigin.LAMBDA) {
-                val tmp = irTemporary(expression)
+                konst tmp = irTemporary(expression)
                 ifNotNullBlock = irBlock {
-                    val lambda = createDelegatingLambda(expression, superType, tmp, parent)
+                    konst lambda = createDelegatingLambda(expression, superType, tmp, parent)
                         .also { +it }
                     ref = createDelegatingLambdaReference(expression, lambda)
                         .also { +it }
@@ -140,17 +140,17 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
         tmp: IrVariable,
         parent: IrDeclarationParent
     ): IrSimpleFunction {
-        val superMethod = superType.getClass()?.getSingleAbstractMethod()
+        konst superMethod = superType.getClass()?.getSingleAbstractMethod()
             ?: throw AssertionError("SAM type expected: ${superType.render()}")
-        val effectiveValueParametersCount = superMethod.valueParameters.size +
+        konst effectiveValueParametersCount = superMethod.konstueParameters.size +
                 if (superMethod.extensionReceiverParameter == null) 0 else 1
-        val invocableFunctionClass =
+        konst invocableFunctionClass =
             if (superMethod.isSuspend)
                 jvmContext.ir.symbols.suspendFunctionN(effectiveValueParametersCount).owner
             else
                 jvmContext.ir.symbols.functionN(effectiveValueParametersCount).owner
-        val invokeFunction = invocableFunctionClass.functions.single { it.name == OperatorNameConventions.INVOKE }
-        val typeSubstitutor = createTypeSubstitutor(superType)
+        konst invokeFunction = invocableFunctionClass.functions.single { it.name == OperatorNameConventions.INVOKE }
+        konst typeSubstitutor = createTypeSubstitutor(superType)
 
         return jvmContext.irFactory.buildFun {
             name = Name.special("<anonymous>")
@@ -162,7 +162,7 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
         }.also { lambda ->
             lambda.dispatchReceiverParameter = null
             lambda.extensionReceiverParameter = null
-            lambda.valueParameters = createLambdaValueParameters(superMethod, lambda, typeSubstitutor)
+            lambda.konstueParameters = createLambdaValueParameters(superMethod, lambda, typeSubstitutor)
             lambda.body = jvmContext.createJvmIrBuilder(lambda.symbol, expression)
                 .irBlockBody {
                     +irReturn(
@@ -171,15 +171,15 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
                             // is mapped to KFunction in the codegen by default, which has no 'invoke'. Looks like correct type arguments
                             // are not needed here, so we use "raw" type for simplicity. If that stops working, we'll need to compute the
                             // correct substitution of invocableFunctionClass by visiting tmp.type's hierarchy.
-                            val rawFunctionType = invocableFunctionClass.typeWith()
+                            konst rawFunctionType = invocableFunctionClass.typeWith()
 
                             invokeCall.dispatchReceiver = irImplicitCast(irGet(tmp), rawFunctionType)
                             var parameterIndex = 0
                             invokeFunction.extensionReceiverParameter?.let {
-                                invokeCall.extensionReceiver = irGet(lambda.valueParameters[parameterIndex++])
+                                invokeCall.extensionReceiver = irGet(lambda.konstueParameters[parameterIndex++])
                             }
-                            for (argumentIndex in invokeFunction.valueParameters.indices) {
-                                invokeCall.putValueArgument(argumentIndex, irGet(lambda.valueParameters[parameterIndex++]))
+                            for (argumentIndex in invokeFunction.konstueParameters.indices) {
+                                invokeCall.putValueArgument(argumentIndex, irGet(lambda.konstueParameters[parameterIndex++]))
                             }
                         }
                     )
@@ -193,12 +193,12 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
         lambda: IrSimpleFunction,
         typeSubstitutor: IrTypeSubstitutor
     ): List<IrValueParameter> {
-        val lambdaParameters = ArrayList<IrValueParameter>()
+        konst lambdaParameters = ArrayList<IrValueParameter>()
         var index = 0
         superMethod.extensionReceiverParameter?.let { superExtensionReceiver ->
             lambdaParameters.add(superExtensionReceiver.copySubstituted(lambda, typeSubstitutor, index++, Name.identifier("\$receiver")))
         }
-        superMethod.valueParameters.mapTo(lambdaParameters) { superValueParameter ->
+        superMethod.konstueParameters.mapTo(lambdaParameters) { superValueParameter ->
             superValueParameter.copySubstituted(lambda, typeSubstitutor, index++)
         }
         return lambdaParameters
@@ -222,7 +222,7 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
             expression.type,
             lambda.symbol,
             typeArgumentsCount = 0,
-            valueArgumentsCount = lambda.valueParameters.size,
+            konstueArgumentsCount = lambda.konstueParameters.size,
             reflectionTarget = null,
             origin = IrStatementOrigin.LAMBDA
         )
@@ -231,7 +231,7 @@ internal class SamDelegatingLambdaBuilder(private val jvmContext: JvmBackendCont
     private fun createTypeSubstitutor(irType: IrType): IrTypeSubstitutor {
         if (irType !is IrSimpleType)
             throw AssertionError("Simple type expected: ${irType.render()}")
-        val irClassSymbol = irType.classOrNull
+        konst irClassSymbol = irType.classOrNull
             ?: throw AssertionError("Class type expected: ${irType.render()}")
         return IrTypeSubstitutor(
             irClassSymbol.owner.typeParameters.map { it.symbol },

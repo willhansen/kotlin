@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.konan.target.*
 import org.jetbrains.kotlin.konan.util.*
 
 // These properties are used by the 'konan' plugin, thus we set them before applying it.
-val distDir: File by project
-val konanHome: String by extra(distDir.absolutePath)
-val jvmArgs: String by extra(
+konst distDir: File by project
+konst konanHome: String by extra(distDir.absolutePath)
+konst jvmArgs: String by extra(
         mutableListOf<String>().apply {
             addAll(HostManager.defaultJvmArgs)
             add(project.findProperty("platformLibsJvmArgs") as? String ?: "-Xmx6G")
@@ -26,7 +26,7 @@ plugins {
     id("konan")
 }
 
-val targetsWithoutZlib: List<KonanTarget> by project
+konst targetsWithoutZlib: List<KonanTarget> by project
 
 // region: Util functions.
 fun KonanTarget.defFiles() =
@@ -46,19 +46,19 @@ if (HostManager.host == KonanTarget.MACOS_ARM64) {
     project.configureJvmToolchain(JdkMajorVersion.JDK_17_0)
 }
 
-val konanTargetList: List<KonanTarget> by project
-val targetList: List<String> by project
-val cacheableTargets: List<KonanTarget> by project
+konst konanTargetList: List<KonanTarget> by project
+konst targetList: List<String> by project
+konst cacheableTargets: List<KonanTarget> by project
 
 konanTargetList.forEach { target ->
-    val targetName = target.visibleName
-    val installTasks = mutableListOf<TaskProvider<out Task>>()
-    val cacheTasks = mutableListOf<TaskProvider<out Task>>()
+    konst targetName = target.visibleName
+    konst installTasks = mutableListOf<TaskProvider<out Task>>()
+    konst cacheTasks = mutableListOf<TaskProvider<out Task>>()
 
     target.defFiles().forEach { df ->
-        val libName = defFileToLibName(targetName, df.name)
-        val fileNamePrefix = PlatformLibsInfo.namePrefix
-        val artifactName = "${fileNamePrefix}${df.name}"
+        konst libName = defFileToLibName(targetName, df.name)
+        konst fileNamePrefix = PlatformLibsInfo.namePrefix
+        konst artifactName = "${fileNamePrefix}${df.name}"
 
         konanArtifacts {
             interop(
@@ -78,7 +78,7 @@ konanTargetList.forEach { target ->
         }
 
         @kotlin.Suppress("UNCHECKED_CAST")
-        val libTask = konanArtifacts.getByName(libName).getByTarget(targetName) as TaskProvider<KonanInteropTask>
+        konst libTask = konanArtifacts.getByName(libName).getByTarget(targetName) as TaskProvider<KonanInteropTask>
         libTask.configure {
             dependsOn(df.config.depends.map { defFileToLibName(targetName, it) })
             dependsOn(":kotlin-native:${targetName}CrossDist")
@@ -86,7 +86,7 @@ konanTargetList.forEach { target ->
             enableParallel = project.findProperty("kotlin.native.platformLibs.parallel")?.toString()?.toBoolean() ?: true
         }
 
-        val klibInstallTask = tasks.register(libName, KonanKlibInstallTask::class.java) {
+        konst klibInstallTask = tasks.register(libName, KonanKlibInstallTask::class.java) {
             klib = libTask.map { it.artifact }
             repo = file("$konanHome/klib/platform/$targetName")
             this.target = targetName
@@ -95,7 +95,7 @@ konanTargetList.forEach { target ->
         installTasks.add(klibInstallTask)
 
         if (target in cacheableTargets) {
-            val cacheTask = tasks.register("${libName}Cache", KonanCacheTask::class.java) {
+            konst cacheTask = tasks.register("${libName}Cache", KonanCacheTask::class.java) {
                 this.target = targetName
                 originalKlib = klibInstallTask.get().installDir.get()
                 klibUniqName = artifactName
@@ -104,7 +104,7 @@ konanTargetList.forEach { target ->
                 dependsOn(":kotlin-native:${targetName}StdlibCache")
                 dependsOn(tasks.named(libName))
                 dependsOn(df.config.depends.map {
-                    val depName = defFileToLibName(targetName, it)
+                    konst depName = defFileToLibName(targetName, it)
                     "${depName}Cache"
                 })
             }
@@ -126,17 +126,17 @@ konanTargetList.forEach { target ->
     }
 }
 
-val hostName: String by project
+konst hostName: String by project
 
-val hostInstall by tasks.registering {
+konst hostInstall by tasks.registering {
     dependsOn("${hostName}Install")
 }
 
-val hostCache by tasks.registering {
+konst hostCache by tasks.registering {
     dependsOn("${hostName}Cache")
 }
 
-val cache by tasks.registering {
+konst cache by tasks.registering {
     dependsOn(tasks.withType(KonanCacheTask::class.java))
 
     group = BasePlugin.BUILD_GROUP

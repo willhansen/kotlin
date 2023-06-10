@@ -25,19 +25,19 @@ interface ValueParameterDescriptor : VariableDescriptor, ParameterDescriptor, Va
     override fun getContainingDeclaration(): CallableDescriptor
 
     /**
-     * Returns the 0-based index of the value parameter in the parameter list of its containing function.
+     * Returns the 0-based index of the konstue parameter in the parameter list of its containing function.
 
      * @return the parameter index
      */
-    val index: Int
+    konst index: Int
 
     /**
-     * @return true iff this parameter belongs to a declared function (not a fake override) and declares the default value,
+     * @return true iff this parameter belongs to a declared function (not a fake override) and declares the default konstue,
      * i.e. explicitly specifies it in the function signature. Also see 'hasDefaultValue' extension in DescriptorUtils.kt
      */
     fun declaresDefaultValue(): Boolean
 
-    val varargElementType: KotlinType?
+    konst varargElementType: KotlinType?
 
     override fun getOriginal(): ValueParameterDescriptor
 
@@ -52,9 +52,9 @@ interface ValueParameterDescriptor : VariableDescriptor, ParameterDescriptor, Va
      */
     override fun getOverriddenDescriptors(): Collection<ValueParameterDescriptor>
 
-    val isCrossinline: Boolean
+    konst isCrossinline: Boolean
 
-    val isNoinline: Boolean
+    konst isNoinline: Boolean
 
     override fun isLateInit(): Boolean = false
 }

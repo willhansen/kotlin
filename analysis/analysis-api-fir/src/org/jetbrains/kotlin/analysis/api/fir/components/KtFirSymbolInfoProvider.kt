@@ -28,10 +28,10 @@ import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationInfo
 
 internal class KtFirSymbolInfoProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken
 ) : KtSymbolInfoProvider(), KtFirAnalysisSessionComponent {
-    private val apiVersion = analysisSession.useSiteSession.languageVersionSettings.apiVersion
+    private konst apiVersion = analysisSession.useSiteSession.languageVersionSettings.apiVersion
 
     override fun getDeprecation(symbol: KtSymbol): DeprecationInfo? {
         if (symbol is KtFirPackageSymbol || symbol is KtReceiverParameterSymbol) return null
@@ -42,7 +42,7 @@ internal class KtFirSymbolInfoProvider(
             return null
         }
 
-        return when (val firSymbol = symbol.firSymbol) {
+        return when (konst firSymbol = symbol.firSymbol) {
             is FirPropertySymbol -> {
                 firSymbol.getDeprecationForCallSite(apiVersion, AnnotationUseSiteTarget.PROPERTY)
             }
@@ -99,7 +99,7 @@ internal class KtFirSymbolInfoProvider(
             return symbol.javaGetterSymbol.name
         }
 
-        val firProperty = symbol.firSymbol.fir
+        konst firProperty = symbol.firSymbol.fir
         requireIsInstance<FirProperty>(firProperty)
 
         return getJvmName(firProperty, isSetter = false)
@@ -111,7 +111,7 @@ internal class KtFirSymbolInfoProvider(
             return symbol.javaSetterSymbol?.name
         }
 
-        val firProperty = symbol.firSymbol.fir
+        konst firProperty = symbol.firSymbol.fir
         requireIsInstance<FirProperty>(firProperty)
 
         if (firProperty.isVal) return null
@@ -134,19 +134,19 @@ internal class KtFirSymbolInfoProvider(
     }
 
     private fun getJvmNameAsString(property: FirProperty, isSetter: Boolean): String {
-        val useSiteTarget = if (isSetter) AnnotationUseSiteTarget.PROPERTY_SETTER else AnnotationUseSiteTarget.PROPERTY_GETTER
-        val jvmNameFromProperty = property.getJvmNameFromAnnotation(analysisSession.useSiteSession, useSiteTarget)
+        konst useSiteTarget = if (isSetter) AnnotationUseSiteTarget.PROPERTY_SETTER else AnnotationUseSiteTarget.PROPERTY_GETTER
+        konst jvmNameFromProperty = property.getJvmNameFromAnnotation(analysisSession.useSiteSession, useSiteTarget)
         if (jvmNameFromProperty != null) {
             return jvmNameFromProperty
         }
 
-        val accessor = if (isSetter) property.setter else property.getter
-        val jvmNameFromAccessor = accessor?.getJvmNameFromAnnotation(analysisSession.useSiteSession)
+        konst accessor = if (isSetter) property.setter else property.getter
+        konst jvmNameFromAccessor = accessor?.getJvmNameFromAnnotation(analysisSession.useSiteSession)
         if (jvmNameFromAccessor != null) {
             return jvmNameFromAccessor
         }
 
-        val identifier = property.name.identifier
+        konst identifier = property.name.identifier
         return if (isSetter) JvmAbi.setterName(identifier) else JvmAbi.getterName(identifier)
     }
 }

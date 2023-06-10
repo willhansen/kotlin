@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirReceiverParameterBuilder : FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
     lateinit var typeRef: FirTypeRef
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 
     override fun build(): FirReceiverParameter {
         return FirReceiverParameterImpl(
@@ -52,7 +52,7 @@ inline fun buildReceiverParameterCopy(original: FirReceiverParameter, init: FirR
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirReceiverParameterBuilder()
+    konst copyBuilder = FirReceiverParameterBuilder()
     copyBuilder.source = original.source
     copyBuilder.typeRef = original.typeRef
     copyBuilder.annotations.addAll(original.annotations)

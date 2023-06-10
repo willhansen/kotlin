@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.gradle.idea.testFixtures.tcs.TestIdeaKotlinInstances
 import kotlin.test.Test
 
 class IdeaKotlinProjectArtifactDependencySerializationTest : AbstractSerializationTest<IdeaKotlinProjectArtifactDependency>() {
-    override fun serialize(value: IdeaKotlinProjectArtifactDependency): ByteArray {
-        return IdeaKotlinProjectArtifactDependencyProto(value).toByteArray()
+    override fun serialize(konstue: IdeaKotlinProjectArtifactDependency): ByteArray {
+        return IdeaKotlinProjectArtifactDependencyProto(konstue).toByteArray()
     }
 
     override fun deserialize(data: ByteArray): IdeaKotlinProjectArtifactDependency {

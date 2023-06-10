@@ -3,7 +3,7 @@
 // FILE: test.kt
 fun box(): String {
     for (count in 0..3) {
-        val test = Foo(count, Foo(1, "x", 2), if (count > 0) break else 3)
+        konst test = Foo(count, Foo(1, "x", 2), if (count > 0) break else 3)
         if (count > 0) return "Fail: count = $count"
         if (test.toString() != "Foo(0,Foo(1,x,2),3)") return "Fail: ${test.toString()}"
     }
@@ -13,15 +13,15 @@ fun box(): String {
 
 
 // FILE: util.kt
-val log = StringBuilder()
+konst log = StringBuilder()
 
-fun <T> logged(msg: String, value: T): T {
+fun <T> logged(msg: String, konstue: T): T {
     log.append(msg)
-    return value
+    return konstue
 }
 
 // FILE: Foo.kt
-class Foo(val a: Int, val b: Any, val c: Int) {
+class Foo(konst a: Int, konst b: Any, konst c: Int) {
     init {
         log.append("<init>")
     }

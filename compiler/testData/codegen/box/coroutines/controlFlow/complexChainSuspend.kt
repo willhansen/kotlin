@@ -24,7 +24,7 @@ suspend fun throws() {
 suspend fun first(x: String, y: String): String = x
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation)
     return controller.result
 }

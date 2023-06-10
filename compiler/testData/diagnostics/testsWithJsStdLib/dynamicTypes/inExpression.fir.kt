@@ -1,5 +1,5 @@
 fun foo() {
-    val a: dynamic = Any()
+    konst a: dynamic = Any()
     println(a in setOf(1, 2))
     println(<!WRONG_OPERATION_WITH_DYNAMIC!>1 in a<!>)
     println(<!WRONG_OPERATION_WITH_DYNAMIC!>1 !in a<!>)

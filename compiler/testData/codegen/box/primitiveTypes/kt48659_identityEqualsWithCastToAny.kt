@@ -18,7 +18,7 @@ fun box(): String {
     if (float(3.14f, 3.14f)) return "Fail float"
     if (double(2.72, 2.72)) return "Fail double"
 
-    // All byte and boolean values are cached in java.lang.Byte/Boolean.valueOf
+    // All byte and boolean konstues are cached in java.lang.Byte/Boolean.konstueOf
     if (!byte(127, 127)) return "Fail byte"
     if (!boolean(true, true)) return "Fail boolean"
 

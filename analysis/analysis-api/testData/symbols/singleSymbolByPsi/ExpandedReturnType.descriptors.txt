@@ -23,7 +23,7 @@ KtFunctionSymbol:
     type: SecondAlias
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

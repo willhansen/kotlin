@@ -5,11 +5,11 @@
 import kotlin.reflect.KProperty
 
 // Definitions
-class State<S>(var value: S)
-<!NOTHING_TO_INLINE!>inline<!> operator fun <V> State<V>.getValue(thisRef: Any?, property: KProperty<*>): V = value
+class State<S>(var konstue: S)
+<!NOTHING_TO_INLINE!>inline<!> operator fun <V> State<V>.getValue(thisRef: Any?, property: KProperty<*>): V = konstue
 inline fun <M> remember(block: () -> M): M = block()
 
 // list should have a type of List<Int>, not Any?
-val list by remember { State(listOf(0)) }
-val first = list.first()
+konst list by remember { State(listOf(0)) }
+konst first = list.first()
 

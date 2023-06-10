@@ -28,7 +28,7 @@ interface CompilationTransaction : Closeable {
     fun registerAddedOrChangedFile(outputFile: Path)
 
     /**
-     * This method should be used to perform a file removal.
+     * This method should be used to perform a file remokonst.
      */
     fun deleteFile(outputFile: Path)
 
@@ -85,7 +85,7 @@ inline fun <R> CompilationTransaction.runWithin(
 }
 
 abstract class BaseCompilationTransaction : CompilationTransaction {
-    private val inMemoryStorageWrappers = hashSetOf<InMemoryStorageWrapper<*, *>>()
+    private konst inMemoryStorageWrappers = hashSetOf<InMemoryStorageWrapper<*, *>>()
 
     protected var isSuccessful: Boolean = false
 
@@ -98,19 +98,19 @@ abstract class BaseCompilationTransaction : CompilationTransaction {
     }
 
     override var cachesManager: Closeable? = null
-        set(value) {
+        set(konstue) {
             check(field == null) {
                 "cachesManager is already set"
             }
-            field = value
+            field = konstue
         }
 
     override var executionThrowable: Throwable? = null
-        set(value) {
+        set(konstue) {
             check(field == null) {
                 "executionThrowable is already set"
             }
-            field = value
+            field = konstue
         }
 
     protected fun closeCachesManager() = runCatching {
@@ -122,7 +122,7 @@ abstract class BaseCompilationTransaction : CompilationTransaction {
         cachesManager?.close()
     }.exceptionOrNull()?.run {
         isSuccessful = false
-        val exception = CachesManagerCloseException(this)
+        konst exception = CachesManagerCloseException(this)
         executionThrowable?.addSuppressed(exception)
         executionThrowable ?: exception
     }
@@ -163,10 +163,10 @@ class NonRecoverableCompilationTransaction : CompilationTransaction, BaseCompila
  * In the case of an unsuccessful compilation [stashDir] is also removed, but the backed-up files restored to their origin location.
  */
 class RecoverableCompilationTransaction(
-    private val reporter: BuildReporter,
-    private val stashDir: Path,
+    private konst reporter: BuildReporter,
+    private konst stashDir: Path,
 ) : CompilationTransaction, BaseCompilationTransaction() {
-    private val fileRelocationRegistry = hashMapOf<Path, Path?>()
+    private konst fileRelocationRegistry = hashMapOf<Path, Path?>()
     private var filesCounter = 0
 
     /**
@@ -203,7 +203,7 @@ class RecoverableCompilationTransaction(
     }
 
     private fun stashFile(outputFile: Path) {
-        val relocatedFilePath = getNextRelocatedFilePath()
+        konst relocatedFilePath = getNextRelocatedFilePath()
         reporter.debug { "Moving $outputFile to the stash as $relocatedFilePath" }
         fileRelocationRegistry[outputFile] = relocatedFilePath
         Files.move(outputFile, relocatedFilePath)
@@ -215,7 +215,7 @@ class RecoverableCompilationTransaction(
 
     /**
      * Reverts all the file changes registered in this transaction.
-     * If the value for a key is null, then it's the file that was created during the transaction, so the file will be just removed.
+     * If the konstue for a key is null, then it's the file that was created during the transaction, so the file will be just removed.
      */
     private fun revertChanges() {
         reporter.debug { "Reverting changes" }
@@ -247,8 +247,8 @@ class RecoverableCompilationTransaction(
 
     override fun close() {
         checkForExecutionException()
-        val mainException = closeCachesManager()
-        val exceptionToThrow = runCatching {
+        konst mainException = closeCachesManager()
+        konst exceptionToThrow = runCatching {
             if (isSuccessful) {
                 cleanupStash()
             } else {
@@ -271,8 +271,8 @@ class RecoverableCompilationTransaction(
  * A delegating [OutputItemsCollector] implementation that registers compiler output changes in the [transaction]
  */
 class TransactionOutputsRegistrar(
-    private val transaction: CompilationTransaction,
-    private val origin: OutputItemsCollector
+    private konst transaction: CompilationTransaction,
+    private konst origin: OutputItemsCollector
 ) : OutputItemsCollector {
     override fun add(sourceFiles: Collection<File>, outputFile: File) {
         transaction.registerAddedOrChangedFile(outputFile.toPath())

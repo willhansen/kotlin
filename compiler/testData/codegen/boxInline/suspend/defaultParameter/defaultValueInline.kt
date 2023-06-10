@@ -10,7 +10,7 @@ class Controller {
     var res = "FAIL 1"
 }
 
-val defaultController = Controller()
+konst defaultController = Controller()
 
 suspend inline fun test(controller: Controller = defaultController, c: suspend Controller.() -> Unit) {
     controller.c()
@@ -33,7 +33,7 @@ fun box() : String {
         }
     }
     if (defaultController.res != "OK") return defaultController.res
-    val controller = Controller()
+    konst controller = Controller()
     controller.res = "FAIL 2"
     builder {
         test(controller) {

@@ -15,18 +15,18 @@ import org.jetbrains.kotlin.types.error.ErrorTypeKind
 import org.jetbrains.kotlin.types.typeUtil.*
 
 class TypeParameterUpperBoundEraser(
-    val projectionComputer: ErasureProjectionComputer,
-    val options: TypeParameterErasureOptions = TypeParameterErasureOptions(leaveNonTypeParameterTypes = false, intersectUpperBounds = false)
+    konst projectionComputer: ErasureProjectionComputer,
+    konst options: TypeParameterErasureOptions = TypeParameterErasureOptions(leaveNonTypeParameterTypes = false, intersectUpperBounds = false)
 ) {
-    private val storage = LockBasedStorageManager("Type parameter upper bound erasure results")
+    private konst storage = LockBasedStorageManager("Type parameter upper bound erasure results")
 
-    private val erroneousErasedBound by lazy {
+    private konst erroneousErasedBound by lazy {
         ErrorUtils.createErrorType(ErrorTypeKind.CANNOT_COMPUTE_ERASED_BOUND, this.toString())
     }
 
     private data class DataToEraseUpperBound(
-        val typeParameter: TypeParameterDescriptor,
-        val typeAttr: ErasureTypeAttributes
+        konst typeParameter: TypeParameterDescriptor,
+        konst typeAttr: ErasureTypeAttributes
     ) {
         override fun equals(other: Any?): Boolean {
             if (other !is DataToEraseUpperBound) return false
@@ -40,7 +40,7 @@ class TypeParameterUpperBoundEraser(
         }
     }
 
-    private val getErasedUpperBound = storage.createMemoizedFunction<DataToEraseUpperBound, KotlinType> {
+    private konst getErasedUpperBound = storage.createMemoizedFunction<DataToEraseUpperBound, KotlinType> {
         with(it) { getErasedUpperBoundInternal(typeParameter, typeAttr) }
     }
 
@@ -63,7 +63,7 @@ class TypeParameterUpperBoundEraser(
         typeParameter: TypeParameterDescriptor,
         typeAttr: ErasureTypeAttributes
     ): KotlinType {
-        val visitedTypeParameters = typeAttr.visitedTypeParameters
+        konst visitedTypeParameters = typeAttr.visitedTypeParameters
 
         if (visitedTypeParameters != null && typeParameter.original in visitedTypeParameters)
             return getDefaultType(typeAttr)
@@ -74,8 +74,8 @@ class TypeParameterUpperBoundEraser(
          * but it's wrong type: projection(*) != projection(Any).
          * So we should substitute erasure of the corresponding type parameter: `Foo<Foo<Any>, Any>` or `Foo<Foo<*>, *>`.
          */
-        val erasedTypeParameters = typeParameter.defaultType.extractTypeParametersFromUpperBounds(visitedTypeParameters).associate {
-            val boundProjection = if (visitedTypeParameters == null || it !in visitedTypeParameters) {
+        konst erasedTypeParameters = typeParameter.defaultType.extractTypeParametersFromUpperBounds(visitedTypeParameters).associate {
+            konst boundProjection = if (visitedTypeParameters == null || it !in visitedTypeParameters) {
                 projectionComputer.computeProjection(
                     it,
                     typeAttr,
@@ -86,9 +86,9 @@ class TypeParameterUpperBoundEraser(
 
             it.typeConstructor to boundProjection
         }
-        val erasedTypeParametersSubstitutor =
+        konst erasedTypeParametersSubstitutor =
             TypeSubstitutor.create(TypeConstructorSubstitution.createByConstructorsMap(erasedTypeParameters))
-        val erasedUpperBounds =
+        konst erasedUpperBounds =
             erasedTypeParametersSubstitutor.substituteErasedUpperBounds(typeParameter.upperBounds, typeAttr)
 
         if (erasedUpperBounds.isNotEmpty()) {
@@ -109,7 +109,7 @@ class TypeParameterUpperBoundEraser(
         typeAttr: ErasureTypeAttributes
     ): Set<KotlinType> = buildSet {
         for (upperBound in upperBounds) {
-            when (val declaration = upperBound.constructor.declarationDescriptor) {
+            when (konst declaration = upperBound.constructor.declarationDescriptor) {
                 is ClassDescriptor -> add(
                     upperBound.replaceArgumentsOfUpperBound(
                         substitutor = this@substituteErasedUpperBounds,
@@ -137,12 +137,12 @@ class TypeParameterUpperBoundEraser(
             visitedTypeParameters: Set<TypeParameterDescriptor>?,
             leaveNonTypeParameterTypes: Boolean = false
         ): KotlinType {
-            val replacedArguments = replaceArgumentsByParametersWith { typeParameterDescriptor ->
-                val argument = arguments.getOrNull(typeParameterDescriptor.index)
+            konst replacedArguments = replaceArgumentsByParametersWith { typeParameterDescriptor ->
+                konst argument = arguments.getOrNull(typeParameterDescriptor.index)
                 if (leaveNonTypeParameterTypes && argument?.type?.containsTypeParameter() == false)
                     return@replaceArgumentsByParametersWith argument
 
-                val isTypeParameterVisited = visitedTypeParameters != null && typeParameterDescriptor in visitedTypeParameters
+                konst isTypeParameterVisited = visitedTypeParameters != null && typeParameterDescriptor in visitedTypeParameters
 
                 if (argument == null || isTypeParameterVisited || substitutor.substitution[argument.type] == null) {
                     StarProjectionImpl(typeParameterDescriptor)

@@ -16,8 +16,8 @@ class C<X, Y> {
 }
 
 fun box(): String {
-    val tp = C::class.typeParameters
-    val c = C<Any, Any>()
+    konst tp = C::class.typeParameters
+    konst c = C<Any, Any>()
     assertEquals(tp[0], c.createX())
     assertNotEquals(tp[1], c.createX())
     return "OK"

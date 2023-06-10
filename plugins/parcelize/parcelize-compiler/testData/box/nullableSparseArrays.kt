@@ -15,56 +15,56 @@ object TrueParceler: Parceler<Boolean> {
 }
 
 @Parcelize
-data class Data(val a: String, val b: String) : Parcelable
+data class Data(konst a: String, konst b: String) : Parcelable
 
 @Parcelize
 class Box(
-    val a: SparseBooleanArray?,
-    val b: SparseIntArray?,
-    val c: SparseLongArray?,
-    val d: SparseArray<Data>?,
-    val e: SparseArray<Data?>?
+    konst a: SparseBooleanArray?,
+    konst b: SparseIntArray?,
+    konst c: SparseLongArray?,
+    konst d: SparseArray<Data>?,
+    konst e: SparseArray<Data?>?
 ) : Parcelable
 
 @Parcelize
 @TypeParceler<Boolean, TrueParceler>
-class TrueBox(val value: SparseBooleanArray?) : Parcelable
+class TrueBox(konst konstue: SparseBooleanArray?) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val boxNonNull = Box(
+    konst boxNonNull = Box(
         SparseBooleanArray().apply { put(1, true); put(100, false) },
         SparseIntArray().apply { put(1, 5); put(100, -1); put(1000, 0) },
         SparseLongArray().apply { put(3, 2); put(2, 3); put(10, 10) },
         SparseArray<Data>().apply { put(1, Data("A", "B")); put(10, Data("C", "D")); put(105, Data("E", "")) },
         SparseArray<Data?>().apply { put(1, Data("A", "B")); put(10, null) }
     )
-    val boxNull = Box(null, null, null, null, null)
-    val trueBoxNonNull = TrueBox(SparseBooleanArray().apply { put(1, false) })
-    val trueBoxNull = TrueBox(null)
+    konst boxNull = Box(null, null, null, null, null)
+    konst trueBoxNonNull = TrueBox(SparseBooleanArray().apply { put(1, false) })
+    konst trueBoxNull = TrueBox(null)
 
     boxNonNull.writeToParcel(parcel, 0)
     boxNull.writeToParcel(parcel, 0)
     trueBoxNonNull.writeToParcel(parcel, 0)
     trueBoxNull.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val boxNonNull2 = parcelableCreator<Box>().createFromParcel(parcel)
+    konst boxNonNull2 = parcelableCreator<Box>().createFromParcel(parcel)
     assert(compareBoxes(boxNonNull, boxNonNull2))
 
-    val boxNull2 = parcelableCreator<Box>().createFromParcel(parcel)
+    konst boxNull2 = parcelableCreator<Box>().createFromParcel(parcel)
     assert(compareBoxes(boxNull, boxNull2))
 
-    val trueSparseArray = parcelableCreator<TrueBox>().createFromParcel(parcel).value
+    konst trueSparseArray = parcelableCreator<TrueBox>().createFromParcel(parcel).konstue
     assert(trueSparseArray != null)
     assert(trueSparseArray?.size() == 1)
     assert(trueSparseArray?.keyAt(0) == 1)
-    assert(trueSparseArray?.valueAt(0) == true)
+    assert(trueSparseArray?.konstueAt(0) == true)
 
-    val trueBoxNull2 = parcelableCreator<TrueBox>().createFromParcel(parcel)
-    assert(trueBoxNull2.value == null)
+    konst trueBoxNull2 = parcelableCreator<TrueBox>().createFromParcel(parcel)
+    assert(trueBoxNull2.konstue == null)
 }
 
 private fun compareBoxes(first: Box, second: Box): Boolean {
@@ -82,7 +82,7 @@ private fun compareSparseBooleanArrays(first: SparseBooleanArray?, second: Spars
 
     for (i in 0 until first.size()) {
         if (first.keyAt(i) != second.keyAt(i)) return false
-        if (first.valueAt(i) != second.valueAt(i)) return false
+        if (first.konstueAt(i) != second.konstueAt(i)) return false
     }
 
     return true
@@ -95,7 +95,7 @@ private fun compareSparseIntArrays(first: SparseIntArray?, second: SparseIntArra
 
     for (i in 0 until first.size()) {
         if (first.keyAt(i) != second.keyAt(i)) return false
-        if (first.valueAt(i) != second.valueAt(i)) return false
+        if (first.konstueAt(i) != second.konstueAt(i)) return false
     }
 
     return true
@@ -108,7 +108,7 @@ private fun compareSparseLongArrays(first: SparseLongArray?, second: SparseLongA
 
     for (i in 0 until first.size()) {
         if (first.keyAt(i) != second.keyAt(i)) return false
-        if (first.valueAt(i) != second.valueAt(i)) return false
+        if (first.konstueAt(i) != second.konstueAt(i)) return false
     }
 
     return true
@@ -121,7 +121,7 @@ private fun compareSparseArrays(first: SparseArray<*>?, second: SparseArray<*>?)
 
     for (i in 0 until first.size()) {
         if (first.keyAt(i) != second.keyAt(i)) return false
-        if (first.valueAt(i) != second.valueAt(i)) return false
+        if (first.konstueAt(i) != second.konstueAt(i)) return false
     }
 
     return true

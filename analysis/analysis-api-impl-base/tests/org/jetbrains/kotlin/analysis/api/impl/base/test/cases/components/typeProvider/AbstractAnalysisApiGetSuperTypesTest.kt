@@ -20,16 +20,16 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractAnalysisApiGetSuperTypesTest : AbstractAnalysisApiSingleFileTest(){
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val expression = testServices.expressionMarkerProvider.getSelectedElement(ktFile)
+        konst expression = testServices.expressionMarkerProvider.getSelectedElement(ktFile)
         expression as? KtExpression ?: error("unexpected expression kind ${expression::class}")
 
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             analyze(expression) {
-                val expectedType = expression.getKtType() ?: error("expect to get type of expression '${expression.text}'")
-                val directSuperTypes = expectedType.getDirectSuperTypes()
-                val approximatedDirectSuperTypes = expectedType.getDirectSuperTypes(shouldApproximate = true)
-                val allSuperTypes = expectedType.getAllSuperTypes()
-                val approximatedAllSuperTypes = expectedType.getAllSuperTypes(shouldApproximate = true)
+                konst expectedType = expression.getKtType() ?: error("expect to get type of expression '${expression.text}'")
+                konst directSuperTypes = expectedType.getDirectSuperTypes()
+                konst approximatedDirectSuperTypes = expectedType.getDirectSuperTypes(shouldApproximate = true)
+                konst allSuperTypes = expectedType.getAllSuperTypes()
+                konst approximatedAllSuperTypes = expectedType.getAllSuperTypes(shouldApproximate = true)
 
                 buildString {
                     fun List<KtType>.print(name: String) {

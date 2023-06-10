@@ -6,14 +6,14 @@ public fun test(/*0*/ a: A): kotlin.Unit
 public fun </*0*/ T, /*1*/ R> kotlin.sequences.Sequence<T>.myFlatMap(/*0*/ transform: (T) -> kotlin.sequences.Sequence<R>): kotlin.sequences.Sequence<R>
 
 public interface A {
-    public abstract val supertypes: kotlin.collections.Collection<B>
+    public abstract konst supertypes: kotlin.collections.Collection<B>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public interface B {
-    public abstract val descriptors: kotlin.sequences.Sequence<C>?
+    public abstract konst descriptors: kotlin.sequences.Sequence<C>?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

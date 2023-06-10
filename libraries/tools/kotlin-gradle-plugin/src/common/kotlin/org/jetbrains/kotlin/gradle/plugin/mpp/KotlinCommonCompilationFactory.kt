@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.KotlinComp
 import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.KotlinMultiplatformCommonCompilerOptionsFactory
 
 class KotlinCommonCompilationFactory internal constructor(
-    override val target: KotlinOnlyTarget<*>,
-    private val defaultSourceSet: KotlinSourceSet
+    override konst target: KotlinOnlyTarget<*>,
+    private konst defaultSourceSet: KotlinSourceSet
 ) : KotlinCompilationFactory<KotlinCommonCompilation> {
 
-    override val itemClass: Class<KotlinCommonCompilation>
+    override konst itemClass: Class<KotlinCommonCompilation>
         get() = KotlinCommonCompilation::class.java
 
-    private val compilationFactory: KotlinCompilationImplFactory =
+    private konst compilationFactory: KotlinCompilationImplFactory =
         KotlinCompilationImplFactory(
             compilationDependencyConfigurationsFactory = DefaultKotlinCompilationDependencyConfigurationsFactory.WithoutRuntime,
             compilerOptionsFactory = KotlinMultiplatformCommonCompilerOptionsFactory,

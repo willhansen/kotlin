@@ -1,13 +1,13 @@
 // FIR_IDENTICAL
 // !CHECK_TYPE
 class A {
-    val x get() = 1
-    val y get() = id(1)
-    val y2 get() = id(id(2))
-    val z get() = l("")
-    val z2 get() = l(id(l("")))
+    konst x get() = 1
+    konst y get() = id(1)
+    konst y2 get() = id(id(2))
+    konst z get() = l("")
+    konst z2 get() = l(id(l("")))
 
-    val <T> T.u get() = id(this)
+    konst <T> T.u get() = id(this)
 }
 fun <E> id(x: E) = x
 fun <E> l(x: E): List<E> = null!!

@@ -11,9 +11,9 @@ import javax.script.Bindings
 import javax.script.ScriptEngine
 import kotlin.script.experimental.annotations.KotlinScript
 import kotlin.script.experimental.api.ScriptCompilationConfiguration
-import kotlin.script.experimental.api.ScriptEvaluationConfiguration
+import kotlin.script.experimental.api.ScriptEkonstuationConfiguration
 import kotlin.script.experimental.api.refineConfiguration
-import kotlin.script.experimental.api.refineConfigurationBeforeEvaluate
+import kotlin.script.experimental.api.refineConfigurationBeforeEkonstuate
 import kotlin.script.experimental.jvm.jvm
 import kotlin.script.experimental.jvm.jvmTarget
 import kotlin.script.experimental.jvmhost.jsr223.configureProvidedPropertiesFromJsr223Context
@@ -24,33 +24,33 @@ import kotlin.script.templates.standard.ScriptTemplateWithBindings
 @Suppress("unused")
 @KotlinScript(
     compilationConfiguration = KotlinJsr223DefaultScriptCompilationConfiguration::class,
-    evaluationConfiguration = KotlinJsr223DefaultScriptEvaluationConfiguration::class
+    ekonstuationConfiguration = KotlinJsr223DefaultScriptEkonstuationConfiguration::class
 )
-abstract class KotlinJsr223DefaultScript(val jsr223Bindings: Bindings) : ScriptTemplateWithBindings(jsr223Bindings) {
+abstract class KotlinJsr223DefaultScript(konst jsr223Bindings: Bindings) : ScriptTemplateWithBindings(jsr223Bindings) {
 
-    private val myEngine: ScriptEngine? get() = bindings[KOTLIN_SCRIPT_ENGINE_BINDINGS_KEY]?.let { it as? ScriptEngine }
+    private konst myEngine: ScriptEngine? get() = bindings[KOTLIN_SCRIPT_ENGINE_BINDINGS_KEY]?.let { it as? ScriptEngine }
 
     private inline fun <T> withMyEngine(body: (ScriptEngine) -> T): T =
-        myEngine?.let(body) ?: throw IllegalStateException("Script engine for `eval` call is not found")
+        myEngine?.let(body) ?: throw IllegalStateException("Script engine for `ekonst` call is not found")
 
-    fun eval(script: String, newBindings: Bindings): Any? =
+    fun ekonst(script: String, newBindings: Bindings): Any? =
         withMyEngine {
-            val savedState =
+            konst savedState =
                 newBindings[KOTLIN_SCRIPT_STATE_BINDINGS_KEY]?.takeIf { it === this.jsr223Bindings[KOTLIN_SCRIPT_STATE_BINDINGS_KEY] }
                     ?.apply {
                         newBindings[KOTLIN_SCRIPT_STATE_BINDINGS_KEY] = null
                     }
-            val res = it.eval(script, newBindings)
+            konst res = it.ekonst(script, newBindings)
             savedState?.apply {
                 newBindings[KOTLIN_SCRIPT_STATE_BINDINGS_KEY] = savedState
             }
             res
         }
 
-    fun eval(script: String): Any? =
+    fun ekonst(script: String): Any? =
         withMyEngine {
-            val savedState = jsr223Bindings.remove(KOTLIN_SCRIPT_STATE_BINDINGS_KEY)
-            val res = it.eval(script, jsr223Bindings)
+            konst savedState = jsr223Bindings.remove(KOTLIN_SCRIPT_STATE_BINDINGS_KEY)
+            konst res = it.ekonst(script, jsr223Bindings)
             savedState?.apply {
                 jsr223Bindings[KOTLIN_SCRIPT_STATE_BINDINGS_KEY] = savedState
             }
@@ -76,8 +76,8 @@ object KotlinJsr223DefaultScriptCompilationConfiguration : ScriptCompilationConf
     }
 )
 
-object KotlinJsr223DefaultScriptEvaluationConfiguration : ScriptEvaluationConfiguration(
+object KotlinJsr223DefaultScriptEkonstuationConfiguration : ScriptEkonstuationConfiguration(
     {
-        refineConfigurationBeforeEvaluate(::configureProvidedPropertiesFromJsr223Context)
+        refineConfigurationBeforeEkonstuate(::configureProvidedPropertiesFromJsr223Context)
     }
 )

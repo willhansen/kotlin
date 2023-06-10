@@ -30,19 +30,19 @@ import org.jetbrains.kotlin.ir.util.initializeTypeArguments
 import org.jetbrains.kotlin.ir.util.render
 
 class IrCallImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrSimpleFunctionSymbol,
+    override konst symbol: IrSimpleFunctionSymbol,
     typeArgumentsCount: Int,
-    valueArgumentsCount: Int,
+    konstueArgumentsCount: Int,
     override var origin: IrStatementOrigin? = null,
     override var superQualifierSymbol: IrClassSymbol? = null
 ) : IrCall() {
 
-    override val typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
+    override konst typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
 
-    override val valueArguments: Array<IrExpression?> = initializeParameterArguments(valueArgumentsCount)
+    override konst konstueArguments: Array<IrExpression?> = initializeParameterArguments(konstueArgumentsCount)
 
     override var contextReceiversCount = 0
 
@@ -60,11 +60,11 @@ class IrCallImpl(
             type: IrType,
             symbol: IrSimpleFunctionSymbol,
             typeArgumentsCount: Int = symbol.descriptor.typeParametersCount,
-            valueArgumentsCount: Int = symbol.descriptor.valueParameters.size + symbol.descriptor.contextReceiverParameters.size,
+            konstueArgumentsCount: Int = symbol.descriptor.konstueParameters.size + symbol.descriptor.contextReceiverParameters.size,
             origin: IrStatementOrigin? = null,
             superQualifierSymbol: IrClassSymbol? = null,
         ) =
-            IrCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, valueArgumentsCount, origin, superQualifierSymbol)
+            IrCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, konstueArgumentsCount, origin, superQualifierSymbol)
 
         fun fromSymbolOwner(
             startOffset: Int,
@@ -72,11 +72,11 @@ class IrCallImpl(
             type: IrType,
             symbol: IrSimpleFunctionSymbol,
             typeArgumentsCount: Int = symbol.owner.typeParameters.size,
-            valueArgumentsCount: Int = symbol.owner.valueParameters.size,
+            konstueArgumentsCount: Int = symbol.owner.konstueParameters.size,
             origin: IrStatementOrigin? = null,
             superQualifierSymbol: IrClassSymbol? = null,
         ) =
-            IrCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, valueArgumentsCount, origin, superQualifierSymbol)
+            IrCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, konstueArgumentsCount, origin, superQualifierSymbol)
 
         fun fromSymbolOwner(
             startOffset: Int,
@@ -89,7 +89,7 @@ class IrCallImpl(
                 symbol.owner.returnType,
                 symbol,
                 typeArgumentsCount = symbol.owner.typeParameters.size,
-                valueArgumentsCount = symbol.owner.valueParameters.size,
+                konstueArgumentsCount = symbol.owner.konstueParameters.size,
                 origin = null,
                 superQualifierSymbol = null
             )

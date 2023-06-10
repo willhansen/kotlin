@@ -6,4 +6,4 @@ fun a() {
 
 internal fun funA() {}
 
-val a = ""
+konst a = ""

@@ -6,7 +6,7 @@ class A(var a: Int) {
 }
 
 fun box(): String {
-    val result = A(1).a
+    konst result = A(1).a
     if (result != 3) return "fail: $result"
     return "OK"
 }

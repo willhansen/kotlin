@@ -33,10 +33,10 @@ import kotlin.properties.ReadWriteProperty
 
 abstract class AbstractFir2IrLazyFunction<F : FirCallableDeclaration>(
     components: Fir2IrComponents,
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrSimpleFunctionSymbol,
+    override konst symbol: IrSimpleFunctionSymbol,
     override var isFakeOverride: Boolean
 ) : AbstractIrLazyFunction(), AbstractFir2IrLazyDeclaration<F>, Fir2IrTypeParametersContainer, IrLazyFunctionBase,
     Fir2IrComponents by components {
@@ -61,7 +61,7 @@ abstract class AbstractFir2IrLazyFunction<F : FirCallableDeclaration>(
         set(_) = mutationNotSupported()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: FunctionDescriptor
+    override konst descriptor: FunctionDescriptor
         get() = symbol.descriptor
 
     override var isInline: Boolean
@@ -114,14 +114,14 @@ abstract class AbstractFir2IrLazyFunction<F : FirCallableDeclaration>(
         }
     }
 
-    override val factory: IrFactory
+    override konst factory: IrFactory
         get() = super<AbstractFir2IrLazyDeclaration>.factory
 
     override fun createLazyAnnotations(): ReadWriteProperty<Any?, List<IrConstructorCall>> {
         return super<AbstractFir2IrLazyDeclaration>.createLazyAnnotations()
     }
 
-    override val isDeserializationEnabled: Boolean
+    override konst isDeserializationEnabled: Boolean
         get() = extensions.irNeedsDeserialization
 
     override fun lazyParent(): IrDeclarationParent {
@@ -129,6 +129,6 @@ abstract class AbstractFir2IrLazyFunction<F : FirCallableDeclaration>(
     }
 
     companion object {
-        private val JVM_STATIC_CLASS_ID = ClassId.topLevel(JVM_STATIC_ANNOTATION_FQ_NAME)
+        private konst JVM_STATIC_CLASS_ID = ClassId.topLevel(JVM_STATIC_ANNOTATION_FQ_NAME)
     }
 }

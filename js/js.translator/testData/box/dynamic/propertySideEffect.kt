@@ -1,13 +1,13 @@
 // EXPECTED_REACHABLE_NODES: 1282
 external class C
 
-inline val C.foo: String
+inline konst C.foo: String
     get() = asDynamic().foo
 
-external val log: String
+external konst log: String
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     c.foo
     if (log != "foo called") return "fail: $log"
     return "OK"

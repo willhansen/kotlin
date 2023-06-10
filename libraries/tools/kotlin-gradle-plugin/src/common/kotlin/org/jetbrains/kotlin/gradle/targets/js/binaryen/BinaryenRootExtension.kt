@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.gradle.tasks.internal.CleanableStore
 import java.io.Serializable
 import java.net.URL
 
-open class BinaryenRootExtension(@Transient val rootProject: Project) : ConfigurationPhaseAware<BinaryenEnv>(), Serializable {
+open class BinaryenRootExtension(@Transient konst rootProject: Project) : ConfigurationPhaseAware<BinaryenEnv>(), Serializable {
     init {
         check(rootProject.rootProject == rootProject)
     }
 
-    private val gradleHome = rootProject.gradle.gradleUserHomeDir.also {
+    private konst gradleHome = rootProject.gradle.gradleUserHomeDir.also {
         rootProject.logger.kotlinInfo("Storing cached files in $it")
     }
 
@@ -27,15 +27,15 @@ open class BinaryenRootExtension(@Transient val rootProject: Project) : Configur
     var downloadBaseUrl by Property("https://github.com/WebAssembly/binaryen/releases/download/")
     var version by Property("112")
 
-    val setupTaskProvider: TaskProvider<out Copy>
+    konst setupTaskProvider: TaskProvider<out Copy>
         get() = rootProject.tasks.withType(Copy::class.java).named(BinaryenRootPlugin.INSTALL_TASK_NAME)
 
     override fun finalizeConfiguration(): BinaryenEnv {
-        val requiredVersionName = "binaryen-version_$version-${BinaryenPlatform.platform}"
-        val requiredZipName = "$requiredVersionName.tar.gz"
-        val cleanableStore = CleanableStore[installationPath.absolutePath]
-        val targetPath = cleanableStore[requiredVersionName].use()
-        val isWindows = BinaryenPlatform.name == BinaryenPlatform.WIN
+        konst requiredVersionName = "binaryen-version_$version-${BinaryenPlatform.platform}"
+        konst requiredZipName = "$requiredVersionName.tar.gz"
+        konst cleanableStore = CleanableStore[installationPath.absolutePath]
+        konst targetPath = cleanableStore[requiredVersionName].use()
+        konst isWindows = BinaryenPlatform.name == BinaryenPlatform.WIN
 
         return BinaryenEnv(
             cleanableStore = cleanableStore,
@@ -51,6 +51,6 @@ open class BinaryenRootExtension(@Transient val rootProject: Project) : Configur
     }
 
     companion object {
-        const val EXTENSION_NAME: String = "kotlinBinaryen"
+        const konst EXTENSION_NAME: String = "kotlinBinaryen"
     }
 }

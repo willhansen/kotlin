@@ -17,21 +17,21 @@ import org.jetbrains.kotlin.ir.util.constructedClass
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-class WasmArrayConstructorReferenceLowering(val context: WasmBackendContext) : BodyLoweringPass {
+class WasmArrayConstructorReferenceLowering(konst context: WasmBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildrenVoid(WasmArrayConstructorReferenceTransformer(context))
     }
 }
 
-private class WasmArrayConstructorReferenceTransformer(val context: WasmBackendContext) : IrElementTransformerVoid() {
+private class WasmArrayConstructorReferenceTransformer(konst context: WasmBackendContext) : IrElementTransformerVoid() {
     override fun visitFunctionReference(expression: IrFunctionReference): IrExpression {
         expression.transformChildrenVoid()
-        val target = expression.symbol.owner
+        konst target = expression.symbol.owner
 
         if (target !is IrConstructor) return expression
 
         // Array(size, init) -> create###Array(size, init)
-        val creator = when (target.valueParameters.size) {
+        konst creator = when (target.konstueParameters.size) {
             2 -> context.wasmSymbols.primitiveTypeToCreateTypedArray[target.constructedClass.symbol]
             else -> null
         } ?: return expression
@@ -42,12 +42,12 @@ private class WasmArrayConstructorReferenceTransformer(val context: WasmBackendC
             type = expression.type,
             symbol = creator,
             typeArgumentsCount = expression.typeArgumentsCount,
-            valueArgumentsCount = expression.valueArgumentsCount,
+            konstueArgumentsCount = expression.konstueArgumentsCount,
             reflectionTarget = creator,
             origin = expression.origin
         ).also { reference ->
             repeat(expression.typeArgumentsCount) { reference.putTypeArgument(it, expression.getTypeArgument(it)) }
-            repeat(expression.valueArgumentsCount) { reference.putValueArgument(it, expression.getValueArgument(it)) }
+            repeat(expression.konstueArgumentsCount) { reference.putValueArgument(it, expression.getValueArgument(it)) }
         }
     }
 }

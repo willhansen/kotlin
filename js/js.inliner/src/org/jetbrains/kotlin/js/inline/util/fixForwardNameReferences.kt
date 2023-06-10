@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.js.backend.ast.*
 
 fun JsNode.fixForwardNameReferences() {
     accept(object : RecursiveJsVisitor() {
-        val currentScope = mutableMapOf<String, JsName>()
+        konst currentScope = mutableMapOf<String, JsName>()
 
         init {
             currentScope += collectDefinedNames(this@fixForwardNameReferences, skipLabelsAndCatches = true).associateBy { it.ident }
@@ -35,8 +35,8 @@ fun JsNode.fixForwardNameReferences() {
         }
 
         override fun visitFunction(x: JsFunction) {
-            val localVars = x.collectLocalVariables(skipLabelsAndCatches = true).toList()
-            val backup = arrayOfNulls<JsName>(localVars.size)
+            konst localVars = x.collectLocalVariables(skipLabelsAndCatches = true).toList()
+            konst backup = arrayOfNulls<JsName>(localVars.size)
 
             localVars.forEachIndexed { index, localVar ->
                 backup[index] = currentScope[localVar.ident]
@@ -51,8 +51,8 @@ fun JsNode.fixForwardNameReferences() {
         }
 
         override fun visitCatch(x: JsCatch) {
-            val name = x.parameter.name
-            val oldName = currentScope[name.ident]
+            konst name = x.parameter.name
+            konst oldName = currentScope[name.ident]
             currentScope[name.ident] = name
 
             super.visitCatch(x)
@@ -63,8 +63,8 @@ fun JsNode.fixForwardNameReferences() {
         override fun visitNameRef(nameRef: JsNameRef) {
             super.visitNameRef(nameRef)
             if (nameRef.qualifier == null) {
-                val ident = nameRef.ident
-                val name = currentScope[ident]
+                konst ident = nameRef.ident
+                konst name = currentScope[ident]
                 if (name != null) {
                     nameRef.name = name
                 }

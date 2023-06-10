@@ -35,7 +35,7 @@ package foo {
 
     public final class Container {
         public constructor Container()
-        public final val anon: foo.Base
+        public final konst anon: foo.Base
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public final fun someFun(): kotlin.Unit

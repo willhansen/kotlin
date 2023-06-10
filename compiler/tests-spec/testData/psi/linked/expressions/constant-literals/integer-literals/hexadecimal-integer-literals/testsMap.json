@@ -23,7 +23,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Hexadecimal integer literals with invalid or double prefixes.",
+          "description": "Hexadecimal integer literals with inkonstid or double prefixes.",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/integer-literals/hexadecimal-integer-literals/p-1/neg/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -35,7 +35,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Hexadecimal integer literals with underscore symbols in valid places.",
+          "description": "Hexadecimal integer literals with underscore symbols in konstid places.",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/integer-literals/hexadecimal-integer-literals/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -77,7 +77,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Hexadecimal integer literals with valid symbols.",
+          "description": "Hexadecimal integer literals with konstid symbols.",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/integer-literals/hexadecimal-integer-literals/p-1/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"

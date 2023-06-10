@@ -13,7 +13,7 @@ inline fun proxy() = foo()
 // FILE: mainDummy.kt
 // RECOMPILE
 
-val dummy get() = js("\$module\$lib")
+konst dummy get() = js("\$module\$lib")
 
 // FILE: main.kt
 

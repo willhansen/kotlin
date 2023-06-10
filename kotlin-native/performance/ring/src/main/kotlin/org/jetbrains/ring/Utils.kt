@@ -16,18 +16,18 @@
 
 package org.jetbrains.ring
 
-const val BENCHMARK_SIZE = 10000
+const konst BENCHMARK_SIZE = 10000
 
 expect class AtomicRef<T> {
     /**
      * Reading/writing this property maps to read/write of volatile variable.
      */
-    public var value: T
+    public var konstue: T
 
     /**
      * Maps to [AtomicReferenceFieldUpdater.lazySet].
      */
-    public fun lazySet(value: T)
+    public fun lazySet(konstue: T)
 
     /**
      * Maps to [AtomicReferenceFieldUpdater.compareAndSet].
@@ -37,7 +37,7 @@ expect class AtomicRef<T> {
     /**
      * Maps to [AtomicReferenceFieldUpdater.getAndSet].
      */
-    public fun getAndSet(value: T): T
+    public fun getAndSet(konstue: T): T
 }
 
 public expect fun <T> atomic(initial: T): AtomicRef<T>

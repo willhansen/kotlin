@@ -68,14 +68,14 @@ public final class AnnotationsUtils {
         if (annotationDescriptor.getAllValueArguments().isEmpty()) {
             return null;
         }
-        ConstantValue<?> constant = annotationDescriptor.getAllValueArguments().values().iterator().next();
+        ConstantValue<?> constant = annotationDescriptor.getAllValueArguments().konstues().iterator().next();
         //TODO: this is a quick fix for unsupported default args problem
         if (constant == null) {
             return null;
         }
-        Object value = constant.getValue();
-        assert value instanceof String : "Native function annotation should have one String parameter";
-        return (String) value;
+        Object konstue = constant.getValue();
+        assert konstue instanceof String : "Native function annotation should have one String parameter";
+        return (String) konstue;
     }
 
     @Nullable
@@ -167,10 +167,10 @@ public final class AnnotationsUtils {
         AnnotationDescriptor annotation = getJsNameAnnotation(descriptor);
         if (annotation == null || annotation.getAllValueArguments().isEmpty()) return null;
 
-        ConstantValue<?> value = annotation.getAllValueArguments().values().iterator().next();
-        if (value == null) return null;
+        ConstantValue<?> konstue = annotation.getAllValueArguments().konstues().iterator().next();
+        if (konstue == null) return null;
 
-        Object result = value.getValue();
+        Object result = konstue.getValue();
         if (!(result instanceof String)) return null;
 
         return (String) result;
@@ -190,7 +190,7 @@ public final class AnnotationsUtils {
         if (descriptor instanceof MemberDescriptor && ((MemberDescriptor) descriptor).isExpect()) return true;
         if (isEffectivelyExternalMember(descriptor)) return true;
 
-        for (PredefinedAnnotation annotation : PredefinedAnnotation.values()) {
+        for (PredefinedAnnotation annotation : PredefinedAnnotation.konstues()) {
             if (hasAnnotationOrInsideAnnotatedClass(descriptor, annotation)) {
                 return true;
             }
@@ -272,7 +272,7 @@ public final class AnnotationsUtils {
     private static String extractSingleStringArgument(@NotNull AnnotationDescriptor annotation) {
         if (annotation.getAllValueArguments().isEmpty()) return null;
 
-        ConstantValue<?> importValue = annotation.getAllValueArguments().values().iterator().next();
+        ConstantValue<?> importValue = annotation.getAllValueArguments().konstues().iterator().next();
         if (importValue == null) return null;
 
         if (!(importValue.getValue() instanceof String)) return null;

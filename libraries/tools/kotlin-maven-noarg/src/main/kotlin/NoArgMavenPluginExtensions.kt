@@ -22,7 +22,7 @@ import org.codehaus.plexus.component.annotations.*
 import org.codehaus.plexus.logging.*
 import org.jetbrains.kotlin.maven.*
 
-val NOARG_COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.noarg"
+konst NOARG_COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.noarg"
 
 @Component(role = KotlinMavenPluginExtension::class, hint = "no-arg")
 class KotlinNoArgMavenPluginExtension : KotlinMavenPluginExtension {
@@ -42,7 +42,7 @@ class KotlinNoArgMavenPluginExtension : KotlinMavenPluginExtension {
 @Component(role = KotlinMavenPluginExtension::class, hint = "jpa")
 class KotlinJpaMavenPluginExtension : KotlinMavenPluginExtension {
     private companion object {
-        val PRESET_ARG_NAME = "preset"
+        konst PRESET_ARG_NAME = "preset"
     }
 
     override fun getCompilerPluginId() = NOARG_COMPILER_PLUGIN_ID

@@ -24,22 +24,22 @@ private fun getDefaultSourceFile(f: Family): SourceFile = when (f) {
 
 @TemplateDsl
 class MemberBuilder(
-        val allowedPlatforms: Set<Platform>,
-        val target: KotlinTarget,
+        konst allowedPlatforms: Set<Platform>,
+        konst target: KotlinTarget,
         var family: Family,
         var sourceFile: SourceFile = getDefaultSourceFile(family),
         var primitive: PrimitiveType? = null
 ) {
-    lateinit var keyword: Keyword    // fun/val/var
+    lateinit var keyword: Keyword    // fun/konst/var
     lateinit var signature: String   // name and params
 
     var sortingSignature: String? = null
         get() = field ?: signature
         private set
 
-    val f get() = family
+    konst f get() = family
 
-    private val legacyMode = false
+    private konst legacyMode = false
     var hasPlatformSpecializations: Boolean = legacyMode
         private set
 
@@ -47,7 +47,7 @@ class MemberBuilder(
 
     var samples = listOf<String>()
 
-    val sequenceClassification = mutableListOf<SequenceClass>()
+    konst sequenceClassification = mutableListOf<SequenceClass>()
     var deprecate: Deprecation? = null; private set
     var since: String? = null; private set
     var platformName: String? = null; private set
@@ -57,54 +57,54 @@ class MemberBuilder(
     var inline: Inline = Inline.No; private set
     var infix: Boolean = false; private set
     var operator: Boolean = false; private set
-    val typeParams = mutableListOf<String>()
+    konst typeParams = mutableListOf<String>()
     var primaryTypeParameter: String? = null; private set
     var customReceiver: String? = null; private set
     var genericStarProjection: Boolean = false
     var toNullableT: Boolean = false
 
     var returns: String? = null; private set
-    val throwsExceptions = mutableListOf<ThrowsException>()
+    konst throwsExceptions = mutableListOf<ThrowsException>()
     var body: String? = null; private set
-    val annotations: MutableSet<String> = mutableSetOf()
-    val suppressions: MutableList<String> = mutableListOf()
-    val wasExperimentalAnnotations: MutableSet<String> = mutableSetOf()
+    konst annotations: MutableSet<String> = mutableSetOf()
+    konst suppressions: MutableList<String> = mutableListOf()
+    konst wasExperimentalAnnotations: MutableSet<String> = mutableSetOf()
 
     fun sourceFile(file: SourceFile) { sourceFile = file }
 
-    fun deprecate(value: Deprecation) { deprecate = value }
-    fun deprecate(value: String) { deprecate = Deprecation(value) }
-    fun since(value: String) { since = value }
-    fun sinceAtLeast(value: String) {
+    fun deprecate(konstue: Deprecation) { deprecate = konstue }
+    fun deprecate(konstue: String) { deprecate = Deprecation(konstue) }
+    fun since(konstue: String) { since = konstue }
+    fun sinceAtLeast(konstue: String) {
         // TODO: comparing versions as strings, will work only up until Kotlin 1.10 or Kotlin 10.0
-        since = maxOf(since, value, nullsFirst())
+        since = maxOf(since, konstue, nullsFirst())
     }
 
     fun platformName(name: String) { platformName = name }
 
-    fun visibility(value: String) { visibility = value }
-    fun external(value: Boolean = true) { external = value }
-    fun operator(value: Boolean = true) { operator = value }
-    fun infix(value: Boolean = true) { infix = value }
-    fun inline(value: Inline = Inline.Yes, suppressWarning: Boolean = false) {
-        inline = value
+    fun visibility(konstue: String) { visibility = konstue }
+    fun external(konstue: Boolean = true) { external = konstue }
+    fun operator(konstue: Boolean = true) { operator = konstue }
+    fun infix(konstue: Boolean = true) { infix = konstue }
+    fun inline(konstue: Inline = Inline.Yes, suppressWarning: Boolean = false) {
+        inline = konstue
         if (suppressWarning) {
-            require(value == Inline.Yes)
+            require(konstue == Inline.Yes)
             inline = Inline.YesSuppressWarning
         }
     }
     fun inlineOnly() { inline = Inline.Only }
 
-    fun receiver(value: String) { customReceiver = value }
-    @Deprecated("Use receiver()", ReplaceWith("receiver(value)"))
-    fun customReceiver(value: String) = receiver(value)
-    fun signature(value: String, notForSorting: Boolean = false) {
+    fun receiver(konstue: String) { customReceiver = konstue }
+    @Deprecated("Use receiver()", ReplaceWith("receiver(konstue)"))
+    fun customReceiver(konstue: String) = receiver(konstue)
+    fun signature(konstue: String, notForSorting: Boolean = false) {
         if (notForSorting) sortingSignature = signature
-        signature = value
+        signature = konstue
     }
     fun returns(type: String) { returns = type }
-    @Deprecated("Use specialFor", ReplaceWith("specialFor(*fs) { returns(run(valueBuilder)) }"))
-    fun returns(vararg fs: Family, valueBuilder: () -> String) = specialFor(*fs) { returns(run(valueBuilder)) }
+    @Deprecated("Use specialFor", ReplaceWith("specialFor(*fs) { returns(run(konstueBuilder)) }"))
+    fun returns(vararg fs: Family, konstueBuilder: () -> String) = specialFor(*fs) { returns(run(konstueBuilder)) }
 
     fun throws(exceptionType: String, reason: String) { throwsExceptions += ThrowsException(exceptionType, reason) }
 
@@ -132,25 +132,25 @@ class MemberBuilder(
         sequenceClassification += sequenceClass
     }
 
-    fun doc(valueBuilder: DocExtensions.() -> String) {
-        doc = valueBuilder(DocExtensions)
+    fun doc(konstueBuilder: DocExtensions.() -> String) {
+        doc = konstueBuilder(DocExtensions)
     }
 
-    @Deprecated("Use specialFor", ReplaceWith("specialFor(*fs) { doc(valueBuilder) }"))
-    fun doc(vararg fs: Family, valueBuilder: DocExtensions.() -> String) = specialFor(*fs) { doc(valueBuilder) }
+    @Deprecated("Use specialFor", ReplaceWith("specialFor(*fs) { doc(konstueBuilder) }"))
+    fun doc(vararg fs: Family, konstueBuilder: DocExtensions.() -> String) = specialFor(*fs) { doc(konstueBuilder) }
 
     fun sample(vararg sampleRef: String) {
         samples = sampleRef.asList()
     }
 
-    fun body(valueBuilder: () -> String) {
-        body = valueBuilder()
+    fun body(konstueBuilder: () -> String) {
+        body = konstueBuilder()
     }
-    fun body(f: Family, valueBuilder: () -> String) {
-        specialFor(f) { body(valueBuilder) }
+    fun body(f: Family, konstueBuilder: () -> String) {
+        specialFor(f) { body(konstueBuilder) }
     }
-    fun body(vararg families: Family, valueBuilder: () -> String) {
-        specialFor(*families) { body(valueBuilder) }
+    fun body(vararg families: Family, konstueBuilder: () -> String) {
+        specialFor(*families) { body(konstueBuilder) }
     }
 
 
@@ -180,8 +180,8 @@ class MemberBuilder(
 
 
     fun build(builder: Appendable) {
-        val headerOnly: Boolean
-        val isImpl: Boolean
+        konst headerOnly: Boolean
+        konst isImpl: Boolean
         if (!legacyMode) {
             headerOnly = target.platform == Platform.Common && hasPlatformSpecializations
             isImpl = target.platform != Platform.Common && Platform.Common in allowedPlatforms
@@ -189,20 +189,20 @@ class MemberBuilder(
         else {
             // legacy mode when all is headerOnly + no_impl
             // except functions with optional parameters - they are common + no_impl
-            val hasOptionalParams = signature.contains("=")
+            konst hasOptionalParams = signature.contains("=")
             headerOnly =  target.platform == Platform.Common && !hasOptionalParams
             isImpl = false
         }
 
-        val returnType = returns ?: throw RuntimeException("No return type specified for $signature")
-        val primaryTypeParameter = this.primaryTypeParameter ?: "T"
+        konst returnType = returns ?: throw RuntimeException("No return type specified for $signature")
+        konst primaryTypeParameter = this.primaryTypeParameter ?: "T"
 
         fun renderType(expression: String, receiver: String, self: String): String {
-            val t = StringTokenizer(expression, " \t\n,:()<>?.", true)
-            val answer = StringBuilder()
+            konst t = StringTokenizer(expression, " \t\n,:()<>?.", true)
+            konst answer = StringBuilder()
 
             while (t.hasMoreTokens()) {
-                val token = t.nextToken()
+                konst token = t.nextToken()
                 answer.append(when (token) {
                     "RECEIVER" -> receiver
                     "SELF" -> self
@@ -255,8 +255,8 @@ class MemberBuilder(
             return answer.toString()
         }
 
-        val receiverT = if (genericStarProjection) "*" else primaryTypeParameter
-        val self = (when (family) {
+        konst receiverT = if (genericStarProjection) "*" else primaryTypeParameter
+        konst self = (when (family) {
             Iterables -> "Iterable<$receiverT>"
             Collections -> "Collection<$receiverT>"
             Lists -> "List<$receiverT>"
@@ -276,20 +276,20 @@ class MemberBuilder(
             Generic -> primaryTypeParameter
         })
 
-        val receiver = (customReceiver ?: self).let { renderType(it, it, self) }
+        konst receiver = (customReceiver ?: self).let { renderType(it, it, self) }
 
         fun String.renderType(): String = renderType(this, receiver, self)
 
         fun effectiveTypeParams(): List<TypeParameter> {
-            val parameters = typeParams.mapTo(mutableListOf()) { parseTypeParameter(it.renderType()) }
+            konst parameters = typeParams.mapTo(mutableListOf()) { parseTypeParameter(it.renderType()) }
 
             if (family == Generic) {
                 if (parameters.none { it.name == primaryTypeParameter })
                     parameters.add(TypeParameter(primaryTypeParameter))
                 return parameters
             } else if (primitive == null && family != Strings && family != CharSequences) {
-                val mentionedTypes = parseTypeRef(receiver).mentionedTypes() + parameters.flatMap { it.mentionedTypeRefs() }
-                val implicitTypeParameters = mentionedTypes.filter { it.name.all(Char::isUpperCase) }
+                konst mentionedTypes = parseTypeRef(receiver).mentionedTypes() + parameters.flatMap { it.mentionedTypeRefs() }
+                konst implicitTypeParameters = mentionedTypes.filter { it.name.all(Char::isUpperCase) }
                 for (implicit in implicitTypeParameters.reversed()) {
                     if (implicit.name != "*" && parameters.none { it.name == implicit.name }) {
                         parameters.add(0, TypeParameter(implicit.name))
@@ -299,7 +299,7 @@ class MemberBuilder(
                 return parameters
             } else {
                 // substituted T is no longer a parameter
-                val renderedT = primaryTypeParameter.renderType()
+                konst renderedT = primaryTypeParameter.renderType()
                 return parameters.filterNot { it.name == renderedT }
             }
         }
@@ -328,13 +328,13 @@ class MemberBuilder(
 
 
         deprecate?.let { deprecated ->
-            val args = listOfNotNull(
+            konst args = listOfNotNull(
                     "\"${deprecated.message}\"",
                     deprecated.replaceWith?.let { "ReplaceWith(\"$it\")" },
                     deprecated.level.let { if (it != DeprecationLevel.WARNING) "level = DeprecationLevel.$it" else null }
             )
             builder.appendLine("@Deprecated(${args.joinToString(", ")})")
-            val versionArgs = listOfNotNull(
+            konst versionArgs = listOfNotNull(
                 deprecated.warningSince?.let { "warningSince = \"$it\"" },
                 deprecated.errorSince?.let { "errorSince = \"$it\"" },
                 deprecated.hiddenSince?.let { "hiddenSince = \"$it\"" }
@@ -379,15 +379,15 @@ class MemberBuilder(
                 "inline".takeIf { inline.isInline() },
                 "infix".takeIf { infix },
                 "operator".takeIf { operator },
-                keyword.value
+                keyword.konstue
         ).forEach { builder.append(it).append(' ') }
 
-        val types = effectiveTypeParams()
+        konst types = effectiveTypeParams()
         if (!types.isEmpty()) {
             builder.append(types.joinToString(separator = ", ", prefix = "<", postfix = "> ", transform = { it.original }))
         }
 
-        val receiverType = (if (toNullableT) receiver.replace("T>", "T?>") else receiver).renderType()
+        konst receiverType = (if (toNullableT) receiver.replace("T>", "T?>") else receiver).renderType()
 
         builder.append(receiverType)
         if (receiverType.isNotEmpty()) builder.append('.')
@@ -400,16 +400,16 @@ class MemberBuilder(
 
         if (keyword == Keyword.Function) builder.append(" {")
 
-        val body = (body ?:
+        konst body = (body ?:
                 deprecate?.replaceWith?.let { "return $it" } ?:
                 """TODO("Body is not provided")""".also { System.err.println("ERROR: $signature for ${target.fullName}: no body specified for ${family to primitive}") }
                 ).trim('\n')
-        val indent: Int = body.takeWhile { it == ' ' }.length
+        konst indent: Int = body.takeWhile { it == ' ' }.length
 
         builder.append('\n')
         body.lineSequence().forEach {
             var count = indent
-            val line = it.dropWhile { count-- > 0 && it == ' ' }.renderType()
+            konst line = it.dropWhile { count-- > 0 && it == ' ' }.renderType()
             if (!line.isEmpty()) {
                 builder.append("    ").append(line)
                 builder.append("\n")

@@ -1,4 +1,4 @@
-val foo: (Pair<Int, Float>) -> List<Int> = null!!
+konst foo: (Pair<Int, Float>) -> List<Int> = null!!
 /*
 psi: (Pair<Int, Float>) -> List<Int>
 type: (Pair<Int, Float>) -> List<Int>

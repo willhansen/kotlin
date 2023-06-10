@@ -1,5 +1,5 @@
 class First {
-    val x: String
+    konst x: String
 
     init {
         use(<!DEBUG_INFO_LEAKING_THIS!>this<!>) // NPE! Leaking this
@@ -12,7 +12,7 @@ class First {
 fun use(first: First) = first.x.hashCode()
 
 abstract class Second {
-    val x: String
+    konst x: String
 
     init {
         use(<!DEBUG_INFO_LEAKING_THIS!>this<!>) // Leaking this in non-final
@@ -28,7 +28,7 @@ abstract class Second {
 fun use(second: Second) = second.x
 
 class SecondDerived : Second() {
-    val y = x // null!
+    konst y = x // null!
 
     override fun foo() = y
 }
@@ -45,12 +45,12 @@ class ThirdDerived : Third() {
     override var x: String = "Y"
         set(arg) { field = "$arg$y" }
 
-    val y = ""
+    konst y = ""
 }
 
 class Fourth {
-    val x: String
+    konst x: String
         get() = y
 
-    val y = <!DEBUG_INFO_LEAKING_THIS!>x<!> // null!
+    konst y = <!DEBUG_INFO_LEAKING_THIS!>x<!> // null!
 }

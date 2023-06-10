@@ -32,7 +32,7 @@ class Kapt3AndroidExternalIT : Kapt3BaseIT() {
                 assertKaptSuccessful()
                 assertFileInProjectExists("app/build/generated/source/kapt/debug/org/example/kotlin/butterknife/SimpleActivity\$\$ViewBinder.java")
 
-                val butterknifeJavaClassesDir = "app/build/intermediates/javac/debug/classes/org/example/kotlin/butterknife/"
+                konst butterknifeJavaClassesDir = "app/build/intermediates/javac/debug/classes/org/example/kotlin/butterknife/"
                 assertFileInProjectExists(butterknifeJavaClassesDir + "SimpleActivity\$\$ViewBinder.class")
 
                 assertFileInProjectExists("app/build/tmp/kotlin-classes/debug/org/example/kotlin/butterknife/SimpleAdapter\$ViewHolder.class")
@@ -62,7 +62,7 @@ class Kapt3AndroidExternalIT : Kapt3BaseIT() {
                 assertFileInProjectExists("app/build/generated/source/kapt/debug/com/example/dagger/kotlin/DaggerApplicationComponent.java")
                 assertFileInProjectExists("app/build/generated/source/kapt/debug/com/example/dagger/kotlin/ui/HomeActivity_MembersInjector.java")
 
-                val daggerJavaClassesDir =
+                konst daggerJavaClassesDir =
                     "app/build/intermediates/javac/debug/classes/com/example/dagger/kotlin/"
 
                 assertFileInProjectExists(daggerJavaClassesDir + "DaggerApplicationComponent.class")
@@ -101,7 +101,7 @@ class Kapt3AndroidExternalIT : Kapt3BaseIT() {
         agpVersion: String,
         jdkVersion: JdkVersions.ProvidedJdk,
     ) {
-        val realmVersion = if (gradleVersion >= GradleVersion.version(TestVersions.Gradle.G_7_5)) {
+        konst realmVersion = if (gradleVersion >= GradleVersion.version(TestVersions.Gradle.G_7_5)) {
             "10.13.0-transformer-api"
         } else {
             "10.13.0"
@@ -170,7 +170,7 @@ class Kapt3AndroidExternalIT : Kapt3BaseIT() {
             buildOptions = defaultBuildOptions.copy(androidVersion = agpVersion),
             buildJdk = jdkVersion.location
         ) {
-            val safeArgsVersion = if (gradleVersion >= GradleVersion.version(TestVersions.Gradle.G_7_0)) "2.5.3" else "2.3.5"
+            konst safeArgsVersion = if (gradleVersion >= GradleVersion.version(TestVersions.Gradle.G_7_0)) "2.5.3" else "2.3.5"
             build("assembleDebug", "-Psafe_args_version=$safeArgsVersion") {
                 assertFileInProjectExists("build/generated/source/navigation-args/debug/test/androidx/navigation/StartFragmentDirections.java")
                 assertFileInProjectExists("build/tmp/kotlin-classes/debug/test/androidx/navigation/StartFragmentKt.class")

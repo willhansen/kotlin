@@ -9,6 +9,6 @@ class A {
 fun foo(x: MySam) {}
 
 fun main() {
-    val a = A()
+    konst a = A()
     foo(a::bar)
 }

@@ -15,9 +15,9 @@ import java.io.File
 import java.io.FileFilter
 
 fun createMavenSettings(): Settings {
-    val builder: SettingsBuilder = DefaultSettingsBuilderFactory().newInstance()
-    val request: SettingsBuildingRequest = DefaultSettingsBuildingRequest()
-    val user = System.getProperty("org.apache.maven.user-settings")
+    konst builder: SettingsBuilder = DefaultSettingsBuilderFactory().newInstance()
+    konst request: SettingsBuildingRequest = DefaultSettingsBuildingRequest()
+    konst user = System.getProperty("org.apache.maven.user-settings")
     if (user == null) {
         request.userSettingsFile = File(
             File(System.getProperty("user.home")).absoluteFile,
@@ -26,11 +26,11 @@ fun createMavenSettings(): Settings {
     } else {
         request.userSettingsFile = File(user)
     }
-    val global = System.getProperty("org.apache.maven.global-settings")
+    konst global = System.getProperty("org.apache.maven.global-settings")
     if (global != null) {
         request.globalSettingsFile = File(global)
     }
-    val result: SettingsBuildingResult = try {
+    konst result: SettingsBuildingResult = try {
         builder.build(request)
     } catch (ex: SettingsBuildingException) {
         throw IllegalStateException(ex)
@@ -43,17 +43,17 @@ private fun invokers(
     result: SettingsBuildingResult
 ): Settings {
     var main = result.effectiveSettings
-    val files = File(System.getProperty("user.dir"))
+    konst files = File(System.getProperty("user.dir"))
         .parentFile?.listFiles(
             NameFileFilter("interpolated-settings.xml") as FileFilter
         )
-    val settingsFile = files?.singleOrNull()
+    konst settingsFile = files?.singleOrNull()
     if (settingsFile != null) {
-        val irequest =
+        konst irequest =
             DefaultSettingsBuildingRequest()
         irequest.userSettingsFile = settingsFile
         main = try {
-            val isettings = builder.build(irequest)
+            konst isettings = builder.build(irequest)
                 .effectiveSettings
             SettingsUtils.merge(isettings, main, TrackableBase.USER_LEVEL)
             isettings
@@ -84,13 +84,13 @@ private fun getFilePath(filePattern: String): String {
  * This pattern is built in [DefaultMavenSettingsBuilder.getFile] only for
  * one property (basedirSysProp). We allow any system variable name here.
  */
-private val systemPropertyPattern = Regex("\\$\\{([^{}\$]+)}")
+private konst systemPropertyPattern = Regex("\\$\\{([^{}\$]+)}")
 
 private fun substitutePropertiesValues(pattern: String, propValueMapper: (String) -> String = { it }): String {
     return systemPropertyPattern
         .replace(pattern) { match ->
-            val propName = match.groups[1]?.value.orEmpty().trim()
-            val propValue: String? = System.getProperty(propName)
+            konst propName = match.groups[1]?.konstue.orEmpty().trim()
+            konst propValue: String? = System.getProperty(propName)
             propValueMapper(propValue.orEmpty())
         }
 }

@@ -9,10 +9,10 @@ enum class IrTypeOperator {
     /** Explicit cast: `e as Type` */
     CAST,
 
-    /** Implicit cast: value of type `A` is used where a value of type `B` is expected */
+    /** Implicit cast: konstue of type `A` is used where a konstue of type `B` is expected */
     IMPLICIT_CAST,
 
-    /** Implicit cast from a value of nullability flexible type `A!` to non-null type `B`, `B :> A` */
+    /** Implicit cast from a konstue of nullability flexible type `A!` to non-null type `B`, `B :> A` */
     IMPLICIT_NOTNULL,
 
     /** Implicit coercion to Unit: expression of type `A, !(A <: kotlin.Unit)` is used where `kotlin.Unit` is expected */
@@ -35,7 +35,7 @@ enum class IrTypeOperator {
     NOT_INSTANCEOF, // TODO drop and replace with `INSTANCEOF<T>(x).not()`?
 
     /**
-     * SAM conversion: value of functional type F is used where Single Abstract Method interface value is expected.
+     * SAM conversion: konstue of functional type F is used where Single Abstract Method interface konstue is expected.
      */
     SAM_CONVERSION,
 
@@ -47,7 +47,7 @@ enum class IrTypeOperator {
 
     /**
      * C-like reinterpret_cast<T> using as primitive type operation in JS.
-     * On JVM, tells back-end to treat argument as a value of a given type (even though exact JVM types might differ).
+     * On JVM, tells back-end to treat argument as a konstue of a given type (even though exact JVM types might differ).
      */
     REINTERPRET_CAST;
 }

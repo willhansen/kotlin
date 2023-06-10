@@ -39,11 +39,11 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 import org.jetbrains.kotlin.types.typeUtil.makeNullable
 
 interface CallInfo {
-    val context: TranslationContext
-    val resolvedCall: ResolvedCall<out CallableDescriptor>
+    konst context: TranslationContext
+    konst resolvedCall: ResolvedCall<out CallableDescriptor>
 
-    val dispatchReceiver: JsExpression?
-    val extensionReceiver: JsExpression?
+    konst dispatchReceiver: JsExpression?
+    konst extensionReceiver: JsExpression?
 
     fun constructSafeCallIfNeeded(result: JsExpression): JsExpression
 
@@ -52,18 +52,18 @@ interface CallInfo {
 
 abstract class AbstractCallInfo : CallInfo {
     override fun toString(): String {
-        val location = DiagnosticUtils.atLocation(callableDescriptor)
-        val name = callableDescriptor.name.asString()
+        konst location = DiagnosticUtils.atLocation(callableDescriptor)
+        konst name = callableDescriptor.name.asString()
         return "callableDescriptor: $name at $location; dispatchReceiver: $dispatchReceiver; extensionReceiver: $extensionReceiver"
     }
 }
 
-// if value == null, it is get access
-class VariableAccessInfo(callInfo: CallInfo, val value: JsExpression? = null) : AbstractCallInfo(), CallInfo by callInfo
+// if konstue == null, it is get access
+class VariableAccessInfo(callInfo: CallInfo, konst konstue: JsExpression? = null) : AbstractCallInfo(), CallInfo by callInfo
 
 class FunctionCallInfo(
         callInfo: CallInfo,
-        val argumentsInfo: CallArgumentTranslator.ArgumentsInfo
+        konst argumentsInfo: CallArgumentTranslator.ArgumentsInfo
 ) : AbstractCallInfo(), CallInfo by callInfo
 
 
@@ -73,7 +73,7 @@ class FunctionCallInfo(
  * receiver -     extensionOrDispatchReceiver = receiver, extensionReceiver = null
  * both -         extensionOrDispatchReceiver = this,     extensionReceiver = receiver
  */
-class ExplicitReceivers(val extensionOrDispatchReceiver: JsExpression?, val extensionReceiver: JsExpression? = null)
+class ExplicitReceivers(konst extensionOrDispatchReceiver: JsExpression?, konst extensionReceiver: JsExpression? = null)
 
 fun TranslationContext.getCallInfo(
         resolvedCall: ResolvedCall<out CallableDescriptor>,
@@ -87,12 +87,12 @@ fun TranslationContext.getCallInfo(
         resolvedCall: ResolvedCall<out FunctionDescriptor>,
         explicitReceivers: ExplicitReceivers
 ): FunctionCallInfo {
-    val argsBlock = JsBlock()
-    val argumentsInfo = CallArgumentTranslator.translate(resolvedCall, explicitReceivers.extensionOrDispatchReceiver, this, argsBlock)
+    konst argsBlock = JsBlock()
+    konst argumentsInfo = CallArgumentTranslator.translate(resolvedCall, explicitReceivers.extensionOrDispatchReceiver, this, argsBlock)
 
-    val explicitReceiversCorrected =
+    konst explicitReceiversCorrected =
             if (!argsBlock.isEmpty && explicitReceivers.extensionOrDispatchReceiver != null) {
-                val receiverOrThisRef = cacheExpressionIfNeeded(explicitReceivers.extensionOrDispatchReceiver)
+                konst receiverOrThisRef = cacheExpressionIfNeeded(explicitReceivers.extensionOrDispatchReceiver)
                 var receiverRef = explicitReceivers.extensionReceiver
                 if (receiverRef != null) {
                     receiverRef = defineTemporary(explicitReceivers.extensionReceiver!!)
@@ -103,7 +103,7 @@ fun TranslationContext.getCallInfo(
                 explicitReceivers
             }
     this.addStatementsToCurrentBlockFrom(argsBlock)
-    val callInfo = createCallInfo(resolvedCall, explicitReceiversCorrected)
+    konst callInfo = createCallInfo(resolvedCall, explicitReceiversCorrected)
     return FunctionCallInfo(callInfo, argumentsInfo)
 }
 
@@ -115,13 +115,13 @@ private fun TranslationContext.createCallInfo(
         resolvedCall: ResolvedCall<out CallableDescriptor>,
         explicitReceivers: ExplicitReceivers
 ): CallInfo {
-    val receiverKind = resolvedCall.explicitReceiverKind
+    konst receiverKind = resolvedCall.explicitReceiverKind
 
     // I'm not sure if it's a proper code, and why it should work. Just copied similar logic from ExpressionCodegen.generateConstructorCall.
     // See box/classes/inner/instantiateInDerived.kt
     // TODO: revisit this code later, write more tests (or borrow them from JVM backend)
     fun getDispatchReceiver(): JsExpression? {
-        val receiverValue = resolvedCall.dispatchReceiver ?: return null
+        konst receiverValue = resolvedCall.dispatchReceiver ?: return null
         return when (receiverKind) {
             DISPATCH_RECEIVER, BOTH_RECEIVERS -> explicitReceivers.extensionOrDispatchReceiver
             else -> getDispatchReceiver(receiverValue)
@@ -129,7 +129,7 @@ private fun TranslationContext.createCallInfo(
     }
 
     fun getExtensionReceiver(): JsExpression? {
-        val receiverValue = resolvedCall.extensionReceiver ?: return null
+        konst receiverValue = resolvedCall.extensionReceiver ?: return null
         return when (receiverKind) {
             EXTENSION_RECEIVER -> explicitReceivers.extensionOrDispatchReceiver
             BOTH_RECEIVERS -> explicitReceivers.extensionReceiver
@@ -163,7 +163,7 @@ private fun TranslationContext.createCallInfo(
     }
 
     if (dispatchReceiver == null) {
-        val container = resolvedCall.resultingDescriptor.containingDeclaration
+        konst container = resolvedCall.resultingDescriptor.containingDeclaration
         if (DescriptorUtils.isObject(container)) {
             dispatchReceiver = ReferenceTranslator.translateAsValueReference(container, this)
             dispatchReceiverType = (container as ClassDescriptor).defaultType
@@ -182,19 +182,19 @@ private fun TranslationContext.createCallInfo(
 
 
     return object : AbstractCallInfo(), CallInfo {
-        override val context: TranslationContext = this@createCallInfo
-        override val resolvedCall: ResolvedCall<out CallableDescriptor> = resolvedCall
-        override val dispatchReceiver: JsExpression? = dispatchReceiver
-        override val extensionReceiver: JsExpression? = extensionReceiver
+        override konst context: TranslationContext = this@createCallInfo
+        override konst resolvedCall: ResolvedCall<out CallableDescriptor> = resolvedCall
+        override konst dispatchReceiver: JsExpression? = dispatchReceiver
+        override konst extensionReceiver: JsExpression? = extensionReceiver
 
-        val notNullConditionalForSafeCall: JsConditional? = notNullConditional
+        konst notNullConditionalForSafeCall: JsConditional? = notNullConditional
 
         override fun constructSafeCallIfNeeded(result: JsExpression): JsExpression {
             return if (notNullConditionalForSafeCall == null) {
                 result
             }
             else {
-                val type = resolvedCall.getReturnType()
+                konst type = resolvedCall.getReturnType()
                 result.type = type
                 notNullConditionalForSafeCall.thenExpression = TranslationUtils.coerce(context, result, type.makeNullable())
                 notNullConditionalForSafeCall
@@ -206,21 +206,21 @@ private fun TranslationContext.createCallInfo(
                 result
             }
             else {
-                val callElement = resolvedCall.call.callElement
-                val coroutineResult = context.createCoroutineResult(resolvedCall)
-                val nullAssignment = JsAstUtils.assignment(coroutineResult, JsNullLiteral()).source(callElement)
+                konst callElement = resolvedCall.call.callElement
+                konst coroutineResult = context.createCoroutineResult(resolvedCall)
+                konst nullAssignment = JsAstUtils.assignment(coroutineResult, JsNullLiteral()).source(callElement)
 
-                val thenBlock = JsBlock()
+                konst thenBlock = JsBlock()
                 thenBlock.statements += result
-                val thenContext = context.innerBlock(thenBlock)
-                val lhs = coroutineResult.deepCopy()
-                val rhsOriginal = coroutineResult.deepCopy().apply { type = resolvedCall.getReturnType() }
-                val rhs = TranslationUtils.coerce(thenContext, rhsOriginal, resolvedCall.getReturnType().makeNullable())
+                konst thenContext = context.innerBlock(thenBlock)
+                konst lhs = coroutineResult.deepCopy()
+                konst rhsOriginal = coroutineResult.deepCopy().apply { type = resolvedCall.getReturnType() }
+                konst rhs = TranslationUtils.coerce(thenContext, rhsOriginal, resolvedCall.getReturnType().makeNullable())
                 if (rhs != rhsOriginal) {
                     thenBlock.statements += JsAstUtils.asSyntheticStatement(JsAstUtils.assignment(lhs, rhs).source(callElement))
                 }
 
-                val thenStatement = if (thenBlock.statements.size == 1) thenBlock.statements.first() else thenBlock
+                konst thenStatement = if (thenBlock.statements.size == 1) thenBlock.statements.first() else thenBlock
                 JsIf(notNullConditionalForSafeCall.testExpression, thenStatement, nullAssignment.makeStmt())
             }
         }

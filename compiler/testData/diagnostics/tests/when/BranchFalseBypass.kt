@@ -11,7 +11,7 @@
 enum class My { A, B }
 
 fun test(a: My): String {
-    val q: String?
+    konst q: String?
 
     <!DEBUG_INFO_IMPLICIT_EXHAUSTIVE!>when (a) {
         My.A -> q = "1"

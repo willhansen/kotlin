@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.test.services.*
 import java.io.File
 
 class WasmEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(JsEnvironmentConfigurationDirectives)
 
     override fun provideAdditionalAnalysisFlags(
@@ -48,18 +48,18 @@ class WasmEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfi
     }
 
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
-        val registeredDirectives = module.directives
+        konst registeredDirectives = module.directives
         configuration.put(JSConfigurationKeys.MODULE_KIND, ModuleKind.ES)
 
-        val noInline = registeredDirectives.contains(NO_INLINE)
+        konst noInline = registeredDirectives.contains(NO_INLINE)
         configuration.put(CommonConfigurationKeys.DISABLE_INLINE, noInline)
         configuration.put(CommonConfigurationKeys.MODULE_NAME, module.name)
 
-        val sourceDirs = module.files.map { it.originalFile.parent }.distinct()
+        konst sourceDirs = module.files.map { it.originalFile.parent }.distinct()
         configuration.put(JSConfigurationKeys.SOURCE_MAP_SOURCE_ROOTS, sourceDirs)
         configuration.put(JSConfigurationKeys.SOURCE_MAP, true)
 
-        val sourceMapSourceEmbedding = registeredDirectives[SOURCE_MAP_EMBED_SOURCES].singleOrNull() ?: SourceMapSourceEmbedding.NEVER
+        konst sourceMapSourceEmbedding = registeredDirectives[SOURCE_MAP_EMBED_SOURCES].singleOrNull() ?: SourceMapSourceEmbedding.NEVER
         configuration.put(JSConfigurationKeys.SOURCE_MAP_EMBED_SOURCES, sourceMapSourceEmbedding)
 
         configuration.put(CommonConfigurationKeys.EXPECT_ACTUAL_LINKER, EXPECT_ACTUAL_LINKER in registeredDirectives)

@@ -6,7 +6,7 @@ data class MyRec : Record {
 
   }
 
-  val name: String
+  konst name: String
     field = name
     get
 
@@ -25,7 +25,7 @@ data class MyRec : Record {
     when {
       other !is MyRec -> return false
     }
-    val tmp0_other_with_cast: MyRec = other as MyRec
+    konst tmp0_other_with_cast: MyRec = other as MyRec
     when {
       EQEQ(arg0 = <this>.#name, arg1 = tmp0_other_with_cast.#name).not() -> return false
     }

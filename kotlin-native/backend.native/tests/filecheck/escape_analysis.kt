@@ -3,13 +3,13 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-class A(val x: Int)
+class A(konst x: Int)
 
 // CHECK-LABEL: "kfun:#main(){}"
 fun main() {
     // CHECK-DEBUG: call %struct.ObjHeader* @AllocInstance
     // CHECK-OPT: alloca %"kclassbody:A#internal"
-    val a = A(5)
+    konst a = A(5)
     println(a.x)
 // CHECK-LABEL: epilogue
 }

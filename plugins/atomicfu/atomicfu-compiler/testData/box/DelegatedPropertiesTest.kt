@@ -1,24 +1,24 @@
 import kotlinx.atomicfu.*
 import kotlin.test.*
 
-private val _topLevelInt = atomic(42)
+private konst _topLevelInt = atomic(42)
 var topLevelInt: Int by _topLevelInt
 
 private var topLevelVolatile by atomic(56)
 
 class DelegatedProperties {
-    // Delegated properties should be declared in the same scope as the original atomic values
-    private val _a = atomic(42)
+    // Delegated properties should be declared in the same scope as the original atomic konstues
+    private konst _a = atomic(42)
     var a: Int by _a
     private var privateA: Int by _a
 
-    private val _l = atomic(55555555555)
+    private konst _l = atomic(55555555555)
     private var l: Long by _l
 
-    private val _b = atomic(false)
+    private konst _b = atomic(false)
     private var b: Boolean by _b
 
-    private val _ref = atomic(A(B(77)))
+    private konst _ref = atomic(A(B(77)))
     private var ref: A by _ref
 
     private var vInt by atomic(77)
@@ -29,8 +29,8 @@ class DelegatedProperties {
 
     private var vRef by atomic(A(B(77)))
 
-    class A (val b: B)
-    class B (val n: Int)
+    class A (konst b: B)
+    class B (konst n: Int)
 
    fun testDelegatedAtomicInt() {
         assertEquals(42, a)
@@ -42,11 +42,11 @@ class DelegatedProperties {
         _a.compareAndSet(77,  66)
         privateA = 88
         _a.compareAndSet(88,  66)
-        assertEquals(66, _a.value)
+        assertEquals(66, _a.konstue)
         assertEquals(66, a)
         assertEquals(66, privateA)
 
-        val aValue = a + privateA
+        konst aValue = a + privateA
         assertEquals(132, aValue)
     }
 
@@ -56,7 +56,7 @@ class DelegatedProperties {
         assertEquals(55555555556, l)
         l = 7777777777777
         assertTrue(_l.compareAndSet(7777777777777, 66666666666))
-        assertEquals(66666666666, _l.value)
+        assertEquals(66666666666, _l.konstue)
         assertEquals(66666666666, l)
     }
 
@@ -66,7 +66,7 @@ class DelegatedProperties {
         assertEquals(true, b)
         b = false
         assertTrue(_b.compareAndSet(false, true))
-        assertEquals(true, _b.value)
+        assertEquals(true, _b.konstue)
         assertEquals(true, b)
     }
 
@@ -74,10 +74,10 @@ class DelegatedProperties {
         assertEquals(77, ref.b.n)
         _ref.lazySet(A(B(66)))
         assertEquals(66, ref.b.n)
-        assertTrue(_ref.compareAndSet(_ref.value, A(B(56))))
+        assertTrue(_ref.compareAndSet(_ref.konstue, A(B(56))))
         assertEquals(56, ref.b.n)
         ref = A(B(99))
-        assertEquals(99, _ref.value.b.n)
+        assertEquals(99, _ref.konstue.b.n)
     }
 
     fun testVolatileInt() {
@@ -109,7 +109,7 @@ class DelegatedProperties {
     }
 
     fun testScopedVolatileProperties() {
-        val clazz = D()
+        konst clazz = D()
         assertEquals("aaa", clazz.c)
         clazz.c = "bbb"
         assertEquals("bbb", clazz.c)
@@ -117,7 +117,7 @@ class DelegatedProperties {
 
     fun testDelegatedVariablesFlow() {
         _a.lazySet(55)
-        assertEquals(55, _a.value)
+        assertEquals(55, _a.konstue)
         assertEquals(55, a)
         var aValue = a
     }
@@ -142,7 +142,7 @@ fun testTopLevelDelegatedProperties() {
     assertEquals(56, topLevelInt)
     topLevelInt = 77
     _topLevelInt.compareAndSet(77, 66)
-    assertEquals(66, _topLevelInt.value)
+    assertEquals(66, _topLevelInt.konstue)
     assertEquals(66, topLevelInt)
 }
 
@@ -153,7 +153,7 @@ fun testTopLevelVolatileProperties() {
 }
 
 fun box(): String {
-    val testClass = DelegatedProperties()
+    konst testClass = DelegatedProperties()
     testClass.test()
     testTopLevelDelegatedProperties()
     testTopLevelVolatileProperties()

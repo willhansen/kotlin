@@ -11,7 +11,7 @@ public interface J {
     }
 
     @interface OneDefaultValue {
-        String value() default "value";
+        String konstue() default "konstue";
     }
 
     @interface OneNonDefault {
@@ -19,7 +19,7 @@ public interface J {
     }
 
     @interface OneNonDefaultValue {
-        String value();
+        String konstue();
     }
 
     @interface TwoParamsOneDefault {
@@ -28,7 +28,7 @@ public interface J {
     }
 
     @interface TwoParamsOneValueOneDefault {
-        String value();
+        String konstue();
         Class<?> clazz() default Object.class;
     }
 

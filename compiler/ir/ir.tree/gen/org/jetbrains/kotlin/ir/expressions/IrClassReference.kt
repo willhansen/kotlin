@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.classReference]
  */
 abstract class IrClassReference : IrDeclarationReference() {
-    abstract override val symbol: IrClassifierSymbol
+    abstract override konst symbol: IrClassifierSymbol
 
     abstract var classType: IrType
 

@@ -43,39 +43,39 @@ object X1 {
 fun test1(a: IntArray) {
   var i: Int = 0
   { // BLOCK
-    val tmp1_array: IntArray = a
-    val tmp2_index0: Int = { // BLOCK
-      val tmp0: Int = i
+    konst tmp1_array: IntArray = a
+    konst tmp2_index0: Int = { // BLOCK
+      konst tmp0: Int = i
       i = tmp0.inc()
       tmp0
     }
-    val tmp3: Int = tmp1_array.get(index = tmp2_index0)
-    tmp1_array.set(index = tmp2_index0, value = tmp3.inc())
+    konst tmp3: Int = tmp1_array.get(index = tmp2_index0)
+    tmp1_array.set(index = tmp2_index0, konstue = tmp3.inc())
     tmp3
   } /*~> Unit */
 }
 
 fun test2() {
   { // BLOCK
-    val tmp0_this: X1 = X1
+    konst tmp0_this: X1 = X1
     { // BLOCK
-      val tmp1: Int = tmp0_this.<get-x1>()
+      konst tmp1: Int = tmp0_this.<get-x1>()
       tmp0_this.<set-x1>(<set-?> = tmp1.inc())
       tmp1
     }
   } /*~> Unit */
   { // BLOCK
-    val tmp2_this: X2 = X2
+    konst tmp2_this: X2 = X2
     { // BLOCK
-      val tmp3: Int = tmp2_this.<get-x2>()
+      konst tmp3: Int = tmp2_this.<get-x2>()
       tmp2_this.<set-x2>(<set-?> = tmp3.inc())
       tmp3
     }
   } /*~> Unit */
   { // BLOCK
-    val tmp4_this: X3 = X3
+    konst tmp4_this: X3 = X3
     { // BLOCK
-      val tmp5: Int = tmp4_this.<get-x3>()
+      konst tmp5: Int = tmp4_this.<get-x3>()
       tmp4_this.<set-x3>(<set-?> = tmp5.inc())
       tmp5
     }
@@ -105,7 +105,7 @@ object Host {
 
   operator fun B.plusAssign(b: B) {
     { // BLOCK
-      val tmp0_this: B = <this>
+      konst tmp0_this: B = <this>
       tmp0_this.<set-s>(<set-?> = tmp0_this.<get-s>().plus(other = b.<get-s>()))
     }
   }

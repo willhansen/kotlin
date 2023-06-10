@@ -9,7 +9,7 @@ fun concatNonNulls(strings: List<String?>): String {
 }
 
 fun box(): String {
-    val test = concatNonNulls(listOf("abc", null, null, "", null, "def"))
+    konst test = concatNonNulls(listOf("abc", null, null, "", null, "def"))
     if (test != "abcdef") return "Failed: test=$test"
 
     return "OK"

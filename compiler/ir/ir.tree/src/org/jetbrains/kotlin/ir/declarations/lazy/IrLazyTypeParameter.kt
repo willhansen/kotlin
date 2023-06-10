@@ -18,17 +18,17 @@ import org.jetbrains.kotlin.types.Variance
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class IrLazyTypeParameter(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrTypeParameterSymbol,
-    override val descriptor: TypeParameterDescriptor,
+    override konst symbol: IrTypeParameterSymbol,
+    override konst descriptor: TypeParameterDescriptor,
     override var name: Name,
     override var index: Int,
     override var isReified: Boolean,
     override var variance: Variance,
-    override val stubGenerator: DeclarationStubGenerator,
-    override val typeTranslator: TypeTranslator,
+    override konst stubGenerator: DeclarationStubGenerator,
+    override konst typeTranslator: TypeTranslator,
 ) : IrTypeParameter(), IrLazyDeclarationBase {
     init {
         symbol.bind(this)

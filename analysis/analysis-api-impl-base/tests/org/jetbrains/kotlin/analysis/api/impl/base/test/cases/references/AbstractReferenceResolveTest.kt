@@ -44,8 +44,8 @@ abstract class AbstractReferenceResolveTest : AbstractAnalysisApiBasedTest() {
     }
 
     final override fun doTestByModuleStructure(moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val mainModule = moduleStructure.modules.singleOrNull() ?: findMainModule(moduleStructure)
-        val ktFiles = testServices.ktModuleProvider.getModuleFiles(mainModule).filterIsInstance<KtFile>()
+        konst mainModule = moduleStructure.modules.singleOrNull() ?: findMainModule(moduleStructure)
+        konst ktFiles = testServices.ktModuleProvider.getModuleFiles(mainModule).filterIsInstance<KtFile>()
         doTestByFileStructure(ktFiles, mainModule, testServices)
     }
 
@@ -53,16 +53,16 @@ abstract class AbstractReferenceResolveTest : AbstractAnalysisApiBasedTest() {
         moduleStructure.modules.find { it.name == "main" } ?: error("There should be a module named 'main' in the multi-module test.")
 
     fun doTestByFileStructure(ktFiles: List<KtFile>, mainModule: TestModule, testServices: TestServices) {
-        val mainKtFile = ktFiles.singleOrNull() ?: ktFiles.firstOrNull { it.name == "main.kt" } ?: ktFiles.first()
-        val caretPosition = testServices.expressionMarkerProvider.getCaretPosition(mainKtFile)
-        val ktReferences = findReferencesAtCaret(mainKtFile, caretPosition)
+        konst mainKtFile = ktFiles.singleOrNull() ?: ktFiles.firstOrNull { it.name == "main.kt" } ?: ktFiles.first()
+        konst caretPosition = testServices.expressionMarkerProvider.getCaretPosition(mainKtFile)
+        konst ktReferences = findReferencesAtCaret(mainKtFile, caretPosition)
         if (ktReferences.isEmpty()) {
             testServices.assertions.fail { "No references at caret found" }
         }
 
-        val resolvedTo =
+        konst resolvedTo =
             analyseForTest(ktReferences.first().element) {
-                val symbols = ktReferences.flatMap { it.resolveToSymbols() }
+                konst symbols = ktReferences.flatMap { it.resolveToSymbols() }
                 checkReferenceResultForValidity(ktReferences, mainModule, testServices, symbols)
                 renderResolvedTo(symbols, renderingOptions)
             }
@@ -71,7 +71,7 @@ abstract class AbstractReferenceResolveTest : AbstractAnalysisApiBasedTest() {
             return
         }
 
-        val actual = "Resolved to:\n$resolvedTo"
+        konst actual = "Resolved to:\n$resolvedTo"
         testServices.assertions.assertEqualsToTestDataFileSibling(actual)
     }
 
@@ -96,12 +96,12 @@ abstract class AbstractReferenceResolveTest : AbstractAnalysisApiBasedTest() {
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val UNRESOLVED_REFERENCE by directive(
+        konst UNRESOLVED_REFERENCE by directive(
             "Reference should be unresolved",
         )
     }
 
-    private val renderingOptions = KtDeclarationRendererForDebug.WITH_QUALIFIED_NAMES.with {
+    private konst renderingOptions = KtDeclarationRendererForDebug.WITH_QUALIFIED_NAMES.with {
         annotationRenderer = annotationRenderer.with {
             annotationFilter = KtRendererAnnotationsFilter.NONE
         }

@@ -18,8 +18,8 @@ public interface CoroutineContext {
     public operator fun <E : Element> get(key: Key<E>): E?
 
     /**
-     * Accumulates entries of this context starting with [initial] value and applying [operation]
-     * from left to right to current accumulator value and each element of this context.
+     * Accumulates entries of this context starting with [initial] konstue and applying [operation]
+     * from left to right to current accumulator konstue and each element of this context.
      */
     public fun <R> fold(initial: R, operation: (R, Element) -> R): R
 
@@ -30,12 +30,12 @@ public interface CoroutineContext {
     public operator fun plus(context: CoroutineContext): CoroutineContext =
         if (context === EmptyCoroutineContext) this else // fast path -- avoid lambda creation
             context.fold(this) { acc, element ->
-                val removed = acc.minusKey(element.key)
+                konst removed = acc.minusKey(element.key)
                 if (removed === EmptyCoroutineContext) element else {
                     // make sure interceptor is always last in the context (and thus is fast to get when present)
-                    val interceptor = removed[ContinuationInterceptor]
+                    konst interceptor = removed[ContinuationInterceptor]
                     if (interceptor == null) CombinedContext(removed, element) else {
-                        val left = removed.minusKey(ContinuationInterceptor)
+                        konst left = removed.minusKey(ContinuationInterceptor)
                         if (left === EmptyCoroutineContext) CombinedContext(element, interceptor) else
                             CombinedContext(CombinedContext(left, element), interceptor)
                     }
@@ -60,7 +60,7 @@ public interface CoroutineContext {
         /**
          * A key of this coroutine context element.
          */
-        public val key: Key<*>
+        public konst key: Key<*>
 
         public override operator fun <E : Element> get(key: Key<E>): E? =
             @Suppress("UNCHECKED_CAST")

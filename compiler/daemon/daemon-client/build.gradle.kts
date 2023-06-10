@@ -8,7 +8,7 @@ plugins {
     id("jps-compatible")
 }
 
-val nativePlatformVariants = listOf(
+konst nativePlatformVariants = listOf(
     "windows-amd64",
     "windows-i386",
     "osx-amd64",

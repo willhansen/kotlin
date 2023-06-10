@@ -9,7 +9,7 @@ fun test() {
 }
 
 fun testSmartcastInCondition() {
-    val a: Any? = null
+    konst a: Any? = null
     if (a is Boolean) {
         while (a) {}
         do {} while (a)

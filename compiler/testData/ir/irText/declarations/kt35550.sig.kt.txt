@@ -9,12 +9,12 @@ class A : I {
   // CHECK:
   //   Mangled name: A.$$delegate_0
   //   Public signature: /A.$$delegate_0|-7286425919675154353[0]
-  private /* final field */ val $$delegate_0: I
+  private /* final field */ konst $$delegate_0: I
 
   // CHECK:
   //   Mangled name: A@0:0{0§<kotlin.Any?>}id
   //   Public signature: /A.id|6409895071901545951[0]
-  override val <T : Any?> T.id: T
+  override konst <T : Any?> T.id: T
     // CHECK JVM_IR:
     //   Mangled name: A#<get-id>@0:0(){0§<kotlin.Any?>}0:0
     //   Public signature: /A.id.<get-id>|4983271234253098452[0]
@@ -33,7 +33,7 @@ interface I {
   // CHECK:
   //   Mangled name: I@0:0{0§<kotlin.Any?>}id
   //   Public signature: /I.id|6409895071901545951[0]
-  val <T : Any?> T.id: T
+  konst <T : Any?> T.id: T
     // CHECK JVM_IR:
     //   Mangled name: I#<get-id>@0:0(){0§<kotlin.Any?>}0:0
     //   Public signature: /I.id.<get-id>|4983271234253098452[0]

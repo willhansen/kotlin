@@ -29,30 +29,30 @@ internal fun createDefaultDistribution(
 ) =
     DefaultDistribution(project, project.objects.property(targetName), project.objects.property<String>().apply {
         if (name != null) {
-            value(name)
+            konstue(name)
         }
     })
 
 class DefaultDistribution(
-    private val project: Project,
-    private val targetName: Property<String>,
-    override val distributionName: Property<String>,
+    private konst project: Project,
+    private konst targetName: Property<String>,
+    override konst distributionName: Property<String>,
 ) : Distribution {
     @Deprecated("Use `distributionName` instead", ReplaceWith("distributionName"))
     override var name: String?
         get() = distributionName.orNull
-        set(value) {
-            distributionName.set(value)
+        set(konstue) {
+            distributionName.set(konstue)
         }
 
     @Deprecated("Use `outputDirectory` instead", ReplaceWith("outputDirectory"))
     override var directory: File
         get() = outputDirectory.get().asFile
-        set(value) {
-            outputDirectory.set(value)
+        set(konstue) {
+            outputDirectory.set(konstue)
         }
 
-    override val outputDirectory: DirectoryProperty = project.objects.directoryProperty().convention(
+    override konst outputDirectory: DirectoryProperty = project.objects.directoryProperty().convention(
         distributionName.flatMap { project.layout.buildDirectory.dir("$DIST/${targetName.get()}/$it") }.orElse(project.distsDirectory)
     )
 }

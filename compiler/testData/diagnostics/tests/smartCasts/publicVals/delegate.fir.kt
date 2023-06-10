@@ -7,9 +7,9 @@ class Delegate {
 }
 
 class Example {
-    private val p: String? by Delegate()
+    private konst p: String? by Delegate()
 
-    public val r: String? = "xyz"
+    public konst r: String? = "xyz"
 
     public fun foo(): String {
         // Smart cast is not possible if property is delegated
@@ -17,7 +17,7 @@ class Example {
     }
 
     public fun bar(): String {
-        // But is possible for non-delegated value property even if it's public
+        // But is possible for non-delegated konstue property even if it's public
         return if (r != null) r else ""
     }
 }

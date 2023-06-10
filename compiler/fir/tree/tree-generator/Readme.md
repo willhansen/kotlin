@@ -3,7 +3,7 @@
 - All fir elements are listed in `FirTreeBuilder.kt`
 - Syntax of new element declaration: `element(elementName, elementKind: Kind, vararg parents: Element)`
     - `elementName` is a name of declared element. If `elementName = Foo` then it's type will be `FirFoo`
-    - kind describes target package for element. Avaliable kinds:
+    - kind describes target package for element. Akonstiable kinds:
         - `Expression` (package `fir.expression`)
         - `Declaration` (package `fir.declaration`)
         - `Reference` (package `fir.references`)
@@ -66,18 +66,18 @@ elementName.configure {
     - Add parents for implementation class
         - syntax: `parents += parent`
         - `parent` can be only implementation with `kind = Interface`
-    - Configure default values for fields:
+    - Configure default konstues for fields:
         - `default(fieldName: String) { ... }`
             - in configuration lambda you can describe:
-                - `value = _defaultValue_`
+                - `konstue = _defaultValue_`
                 - `withGetter = true/false` (`false` by default)
-                - `delegate = delegateFieldName` (used for generating such fields: `val typeRef: FirTypeRef get() = expression.typeRef`)
-                - `delegateName = fieldNameInDelegateType` (`val expressionTypeRef: FirTypeRef get() = expression.typeRef`)
+                - `delegate = delegateFieldName` (used for generating such fields: `konst typeRef: FirTypeRef get() = expression.typeRef`)
+                - `delegateName = fieldNameInDelegateType` (`konst expressionTypeRef: FirTypeRef get() = expression.typeRef`)
                 - `needAcceptAndTransform = true/false` (`true` by default) -- specify it if you don't want to accept field in `acceptChildren`
                 - `customSetter = setterExpresison`
             - note that by default all fields with fir elements are mutable and others are immutable
         - Also there is some aliases for that default:
-            - `default(fieldName, value)`
+            - `default(fieldName, konstue)`
             - `defaultNull(fieldName, [withGetter: Boolean])`
     - If some fields should be `lateinit` you describe them in call `lateinit(vararg fields: String)`
     - If you use some types that shoub be imported list them in method `useTypes(vararg types: Type/Element)`   

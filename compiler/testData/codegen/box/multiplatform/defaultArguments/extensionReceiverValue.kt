@@ -4,9 +4,9 @@
 
 // FILE: common.kt
 
-class Receiver(val value: String)
+class Receiver(konst konstue: String)
 
-expect fun Receiver.test(result: String = value): String
+expect fun Receiver.test(result: String = konstue): String
 
 // FILE: platform.kt
 

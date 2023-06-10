@@ -1,1 +1,1 @@
-val foo: (: Int) -> Int
+konst foo: (: Int) -> Int

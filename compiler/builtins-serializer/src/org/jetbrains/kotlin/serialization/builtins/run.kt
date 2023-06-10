@@ -33,12 +33,12 @@ found top-level declarations to <destination dir> (*.kotlin_builtins files)"""
         return
     }
 
-    val destDir = File(args[0])
+    konst destDir = File(args[0])
 
-    val srcDirs = args.drop(1).map(::File)
+    konst srcDirs = args.drop(1).map(::File)
     assert(srcDirs.isNotEmpty()) { "At least one source directory should be specified" }
 
-    val missing = srcDirs.filterNot(File::exists)
+    konst missing = srcDirs.filterNot(File::exists)
     assert(missing.isEmpty()) { "These source directories are missing: $missing" }
 
     BuiltInsSerializer.analyzeAndSerialize(destDir, srcDirs, listOf(), dependOnOldBuiltIns = false) { totalSize, totalFiles ->

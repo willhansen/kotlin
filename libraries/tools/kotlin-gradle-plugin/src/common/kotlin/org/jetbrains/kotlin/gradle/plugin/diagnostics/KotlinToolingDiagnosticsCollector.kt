@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.plugin.diagnostics
 
-import org.gradle.api.InvalidUserCodeException
+import org.gradle.api.InkonstidUserCodeException
 import org.gradle.api.Project
 import org.gradle.api.services.BuildService
 import org.gradle.api.services.BuildServiceParameters
@@ -20,14 +20,14 @@ private typealias ToolingDiagnosticId = String
 private typealias GradleProjectPath = String
 
 internal abstract class KotlinToolingDiagnosticsCollector : BuildService<BuildServiceParameters.None> {
-    private val rawDiagnosticsFromProject: MutableMap<GradleProjectPath, MutableList<ToolingDiagnostic>> = ConcurrentHashMap()
-    private val reportedIds: MutableSet<ToolingDiagnosticId> = Collections.newSetFromMap(ConcurrentHashMap())
+    private konst rawDiagnosticsFromProject: MutableMap<GradleProjectPath, MutableList<ToolingDiagnostic>> = ConcurrentHashMap()
+    private konst reportedIds: MutableSet<ToolingDiagnosticId> = Collections.newSetFromMap(ConcurrentHashMap())
 
     fun getDiagnosticsForProject(project: Project): Collection<ToolingDiagnostic> {
-        val rawDiagnostics = rawDiagnosticsFromProject[project.path] ?: return emptyList()
+        konst rawDiagnostics = rawDiagnosticsFromProject[project.path] ?: return emptyList()
 
-        val suppressedWarnings = project.kotlinPropertiesProvider.suppressedGradlePluginWarnings.toSet()
-        val suppressedErrors = project.kotlinPropertiesProvider.suppressedGradlePluginErrors.toSet()
+        konst suppressedWarnings = project.kotlinPropertiesProvider.suppressedGradlePluginWarnings.toSet()
+        konst suppressedErrors = project.kotlinPropertiesProvider.suppressedGradlePluginErrors.toSet()
 
         fun ToolingDiagnostic.isSuppressed(): Boolean =
             severity == WARNING && id in suppressedWarnings || severity == ERROR && id in suppressedErrors
@@ -53,7 +53,7 @@ internal abstract class KotlinToolingDiagnosticsCollector : BuildService<BuildSe
 
     private fun saveDiagnostic(project: Project, diagnostic: ToolingDiagnostic) {
         if (diagnostic.severity == ToolingDiagnostic.Severity.FATAL) {
-            throw InvalidUserCodeException(diagnostic.message)
+            throw InkonstidUserCodeException(diagnostic.message)
         }
         rawDiagnosticsFromProject.compute(project.path) { _, previousListIfAny ->
             previousListIfAny?.apply { add(diagnostic) } ?: mutableListOf(diagnostic)
@@ -61,7 +61,7 @@ internal abstract class KotlinToolingDiagnosticsCollector : BuildService<BuildSe
     }
 }
 
-internal val Project.kotlinToolingDiagnosticsCollector: KotlinToolingDiagnosticsCollector
+internal konst Project.kotlinToolingDiagnosticsCollector: KotlinToolingDiagnosticsCollector
     get() = gradle.registerClassLoaderScopedBuildService(KotlinToolingDiagnosticsCollector::class).get()
 
 internal fun Project.reportDiagnostic(diagnostic: ToolingDiagnostic) {

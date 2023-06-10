@@ -13,7 +13,7 @@ import kotlin.test.assertTrue
 class KotlinAndroidExtensionModelBuilderTest {
     @Test
     fun testCanBuild() {
-        val modelBuilder = KotlinAndroidExtensionModelBuilder()
+        konst modelBuilder = KotlinAndroidExtensionModelBuilder()
         assertTrue(modelBuilder.canBuild(KotlinAndroidExtension::class.java.name))
         assertFalse(modelBuilder.canBuild("wrongModel"))
     }

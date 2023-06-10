@@ -27,8 +27,8 @@ import org.jetbrains.kotlin.name.Name
 @RequiresOptIn
 annotation class FirSymbolProviderInternals
 
-abstract class FirSymbolProvider(val session: FirSession) : FirSessionComponent {
-    abstract val symbolNamesProvider: FirSymbolNamesProvider
+abstract class FirSymbolProvider(konst session: FirSession) : FirSessionComponent {
+    abstract konst symbolNamesProvider: FirSymbolNamesProvider
 
     abstract fun getClassLikeSymbolByClassId(classId: ClassId): FirClassLikeSymbol<*>?
 
@@ -60,27 +60,27 @@ abstract class FirSymbolProvider(val session: FirSession) : FirSessionComponent 
 }
 
 private fun FirSymbolProvider.getClassDeclaredMemberScope(classId: ClassId): FirScope? {
-    val classSymbol = getClassLikeSymbolByClassId(classId) as? FirRegularClassSymbol ?: return null
+    konst classSymbol = getClassLikeSymbolByClassId(classId) as? FirRegularClassSymbol ?: return null
     return session.declaredMemberScope(classSymbol.fir, memberRequiredPhase = null)
 }
 
 fun FirSymbolProvider.getClassDeclaredConstructors(classId: ClassId): List<FirConstructorSymbol> {
-    val classMemberScope = getClassDeclaredMemberScope(classId)
+    konst classMemberScope = getClassDeclaredMemberScope(classId)
     return classMemberScope?.getDeclaredConstructors().orEmpty()
 }
 
 fun FirSymbolProvider.getClassDeclaredFunctionSymbols(classId: ClassId, name: Name): List<FirNamedFunctionSymbol> {
-    val classMemberScope = getClassDeclaredMemberScope(classId)
+    konst classMemberScope = getClassDeclaredMemberScope(classId)
     return classMemberScope?.getFunctions(name).orEmpty()
 }
 
 fun FirSymbolProvider.getClassDeclaredPropertySymbols(classId: ClassId, name: Name): List<FirVariableSymbol<*>> {
-    val classMemberScope = getClassDeclaredMemberScope(classId)
+    konst classMemberScope = getClassDeclaredMemberScope(classId)
     return classMemberScope?.getProperties(name).orEmpty()
 }
 
 inline fun <reified T : FirBasedSymbol<*>> FirSymbolProvider.getSymbolByTypeRef(typeRef: FirTypeRef): T? {
-    val lookupTag = (typeRef.coneTypeSafe<ConeSimpleKotlinType>()?.fullyExpandedType(session) as? ConeLookupTagBasedType)?.lookupTag
+    konst lookupTag = (typeRef.coneTypeSafe<ConeSimpleKotlinType>()?.fullyExpandedType(session) as? ConeLookupTagBasedType)?.lookupTag
         ?: return null
     return getSymbolByLookupTag(lookupTag) as? T
 }
@@ -93,10 +93,10 @@ fun ClassId.toSymbol(session: FirSession): FirClassifierSymbol<*>? {
     return session.symbolProvider.getClassLikeSymbolByClassId(this)
 }
 
-val FirSession.symbolProvider: FirSymbolProvider by FirSession.sessionComponentAccessor()
+konst FirSession.symbolProvider: FirSymbolProvider by FirSession.sessionComponentAccessor()
 
-const val DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY: String = "org.jetbrains.kotlin.fir.resolve.providers.FirDependenciesSymbolProvider"
+const konst DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY: String = "org.jetbrains.kotlin.fir.resolve.providers.FirDependenciesSymbolProvider"
 
-val FirSession.dependenciesSymbolProvider: FirSymbolProvider by FirSession.sessionComponentAccessor(
+konst FirSession.dependenciesSymbolProvider: FirSymbolProvider by FirSession.sessionComponentAccessor(
     DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY
 )

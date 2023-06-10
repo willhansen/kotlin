@@ -22,13 +22,13 @@ import org.jetbrains.kotlin.name.JsStandardClassIds
 
 object FirJsDefinedExternallyCallChecker : FirBasicExpressionChecker() {
     override fun check(expression: FirStatement, context: CheckerContext, reporter: DiagnosticReporter) {
-        val symbol = expression.calleeReference?.toResolvedCallableSymbol() ?: return
+        konst symbol = expression.calleeReference?.toResolvedCallableSymbol() ?: return
 
         if (symbol.callableId !in JsStandardClassIds.Callables.definedExternallyPropertyNames) {
             return
         }
 
-        val container = context.closestNonLocal?.symbol ?: return
+        konst container = context.closestNonLocal?.symbol ?: return
 
         if (!container.isNativeObject(context) && !container.isPredefinedObject(context)) {
             reporter.reportOn(expression.source, FirJsErrors.CALL_TO_DEFINED_EXTERNALLY_FROM_NON_EXTERNAL_DECLARATION, context)

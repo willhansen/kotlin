@@ -1,4 +1,4 @@
 package included
 
-actual val sourceSet: String
+actual konst sourceSet: String
     get() = "jsMain"

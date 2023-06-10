@@ -8,13 +8,13 @@ fun <R> elemAndList(r: R, t: MutableList<R>): R = r
 fun <R> R.elemAndListWithReceiver(r: R, t: MutableList<R>): R = r
 
 fun test() {
-    val s = elemAndList(11, list("72"))
+    konst s = elemAndList(11, list("72"))
 
-    val u = 11.elemAndListWithReceiver(4, list("7"))
+    konst u = 11.elemAndListWithReceiver(4, list("7"))
 }
 
-fun <T> list(value: T) : ArrayList<T> {
-    val list = ArrayList<T>()
-    list.add(value)
+fun <T> list(konstue: T) : ArrayList<T> {
+    konst list = ArrayList<T>()
+    list.add(konstue)
     return list
 }

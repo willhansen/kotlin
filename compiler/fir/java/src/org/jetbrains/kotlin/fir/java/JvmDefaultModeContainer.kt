@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.config.JvmDefaultMode
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.FirSessionComponent
 
-class FirJvmDefaultModeComponent(val jvmDefaultMode: JvmDefaultMode) : FirSessionComponent
+class FirJvmDefaultModeComponent(konst jvmDefaultMode: JvmDefaultMode) : FirSessionComponent
 
-private val FirSession.jvmDefaultModeComponent: FirJvmDefaultModeComponent? by FirSession.nullableSessionComponentAccessor()
+private konst FirSession.jvmDefaultModeComponent: FirJvmDefaultModeComponent? by FirSession.nullableSessionComponentAccessor()
 
-val FirSession.jvmDefaultModeState: JvmDefaultMode?
+konst FirSession.jvmDefaultModeState: JvmDefaultMode?
     get() = jvmDefaultModeComponent?.jvmDefaultMode

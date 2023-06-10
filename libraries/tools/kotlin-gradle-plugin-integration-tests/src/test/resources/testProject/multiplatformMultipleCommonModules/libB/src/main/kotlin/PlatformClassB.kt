@@ -1,7 +1,7 @@
 package foo
 
 expect class PlatformClassB {
-    val valueB: String
+    konst konstueB: String
 }
 
 class CommonClassB

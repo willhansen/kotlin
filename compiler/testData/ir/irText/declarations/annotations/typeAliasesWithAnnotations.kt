@@ -1,5 +1,5 @@
 @Target(AnnotationTarget.TYPEALIAS)
-annotation class TestAnn(val x: String)
+annotation class TestAnn(konst x: String)
 
 @TestAnn("TestTypeAlias")
 typealias TestTypeAlias = String

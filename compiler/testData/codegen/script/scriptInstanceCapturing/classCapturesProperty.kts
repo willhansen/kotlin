@@ -3,9 +3,9 @@
 // expected: rv: abc
 
 // KT-19423
-val used = "abc"
+konst used = "abc"
 class User {
-    val property = used
+    konst property = used
 }
 
-val rv = User().property
+konst rv = User().property

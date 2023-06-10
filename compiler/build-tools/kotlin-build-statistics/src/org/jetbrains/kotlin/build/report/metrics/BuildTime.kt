@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.build.report.metrics
 import java.io.Serializable
 
 @Suppress("Reformat")
-enum class BuildTime(val parent: BuildTime? = null, val readableString: String) : Serializable {
+enum class BuildTime(konst parent: BuildTime? = null, konst readableString: String) : Serializable {
     GRADLE_TASK(readableString = "Total Gradle task time"),
     GRADLE_TASK_PREPARATION(readableString = "Spent time before task action"),
     GRADLE_TASK_ACTION(readableString = "Task action"),
@@ -79,10 +79,10 @@ enum class BuildTime(val parent: BuildTime? = null, val readableString: String) 
     ;
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
 
-        val children by lazy {
-            values().filter { it.parent != null }.groupBy { it.parent }
+        konst children by lazy {
+            konstues().filter { it.parent != null }.groupBy { it.parent }
         }
     }
 }

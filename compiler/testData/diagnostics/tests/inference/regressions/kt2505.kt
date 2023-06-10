@@ -20,6 +20,6 @@ public open class HttpResponse() {
 }
 
 fun <R> test (httpResponse: HttpResponse, rtype: MyClass<R>) {
-    val res = httpResponse.parseAs( rtype )
+    konst res = httpResponse.parseAs( rtype )
     checkSubtype<R>(res) //type mismatch: required R, found T
 }

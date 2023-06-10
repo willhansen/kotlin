@@ -13,7 +13,7 @@ class Foo: Class(), Trait<String> {
 }
 
 fun box(): String {
-    val t: Trait<String> = Foo()
+    konst t: Trait<String> = Foo()
     try {
         t.f()
     } catch (e: UnsupportedOperationException) {

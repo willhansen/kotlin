@@ -30,7 +30,7 @@ package sentence3
 import libPackage.*
 
 fun case1() {
-    val regex = Regex("")
+    konst regex = Regex("")
     <!DEBUG_INFO_CALL("fqName: libPackage.contains; typeCall: infix operator extension function")!>"" contains  regex<!>
 }
 

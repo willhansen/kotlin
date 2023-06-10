@@ -1,6 +1,6 @@
 package
 
-public val model: SortedListModel<Schematic>
+public konst model: SortedListModel<Schematic>
 
 public final class Schematic {
     public constructor Schematic()

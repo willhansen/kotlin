@@ -7,7 +7,7 @@ import android.util.Size
 import android.util.SizeF
 
 @Parcelize
-data class Test(val size: Size, val nullable: Size?) : Parcelable
+data class Test(konst size: Size, konst nullable: Size?) : Parcelable
 
 @Parcelize
-data class TestF(val size: SizeF, val nullable: SizeF?) : Parcelable
+data class TestF(konst size: SizeF, konst nullable: SizeF?) : Parcelable

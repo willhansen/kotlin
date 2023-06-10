@@ -1,4 +1,4 @@
-KtFile: valueParameterRecoveryWithTypes.kt
+KtFile: konstueParameterRecoveryWithTypes.kt
   PACKAGE_DIRECTIVE
     <empty list>
   IMPORT_LIST

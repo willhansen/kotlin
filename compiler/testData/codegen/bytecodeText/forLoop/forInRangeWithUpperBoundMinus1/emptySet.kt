@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val set = emptySet<Int>()
+    konst set = emptySet<Int>()
     var optimized = ""
     for (i in 0..set.size - 1) optimized += set.elementAt(i)
 }

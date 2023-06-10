@@ -6,19 +6,19 @@ import kotlin.test.assertEquals
 
 enum class TestA {
     FIRST {
-        override val label: String = "first A"
+        override konst label: String = "first A"
     },
     SECOND {
-        override val label: String = "second A"
+        override konst label: String = "second A"
     },
     THIRD {
-        override val label: String = "third A"
+        override konst label: String = "third A"
     };
 
-    abstract val label: String
+    abstract konst label: String
 }
 
-enum class TestB(val label: String) {
+enum class TestB(konst label: String) {
     FIRST("first B"),
     SECOND("second B"),
     THIRD("third B");

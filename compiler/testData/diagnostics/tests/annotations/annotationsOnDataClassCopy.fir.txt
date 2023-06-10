@@ -28,13 +28,13 @@ FILE: annotationsOnDataClassCopy.kt
             super<R|kotlin/Any|>()
         }
 
-        @R|Prop|() public final val p1: R|kotlin/Int| = R|<local>/p1|
+        @R|Prop|() public final konst p1: R|kotlin/Int| = R|<local>/p1|
             public get(): R|kotlin/Int|
 
-        public final val p2: R|kotlin/String| = R|<local>/p2|
+        public final konst p2: R|kotlin/String| = R|<local>/p2|
             public get(): R|kotlin/String|
 
-        @PROPERTY:R|NoTarget|() @PROPERTY:R|Both|() public final val p3: R|kotlin/Boolean| = R|<local>/p3|
+        @PROPERTY:R|NoTarget|() @PROPERTY:R|Both|() public final konst p3: R|kotlin/Boolean| = R|<local>/p3|
             public get(): R|kotlin/Boolean|
 
         public final operator fun component1(): R|kotlin/Int|

@@ -15,7 +15,7 @@ public abstract class ObservableProperty<V> : kotlin.properties.ReadWritePropert
 
     public open override operator fun getValue(thisRef: kotlin.Any?, property: kotlin.reflect.KProperty<*>): V
 
-    public open override operator fun setValue(thisRef: kotlin.Any?, property: kotlin.reflect.KProperty<*>, value: V): kotlin.Unit
+    public open override operator fun setValue(thisRef: kotlin.Any?, property: kotlin.reflect.KProperty<*>, konstue: V): kotlin.Unit
 
     public open override fun toString(): kotlin.String
 }
@@ -32,5 +32,5 @@ public fun interface ReadOnlyProperty<in T, out V> {
 public interface ReadWriteProperty<in T, V> : kotlin.properties.ReadOnlyProperty<T, V> {
     public abstract override operator fun getValue(thisRef: T, property: kotlin.reflect.KProperty<*>): V
 
-    public abstract operator fun setValue(thisRef: T, property: kotlin.reflect.KProperty<*>, value: V): kotlin.Unit
+    public abstract operator fun setValue(thisRef: T, property: kotlin.reflect.KProperty<*>, konstue: V): kotlin.Unit
 }

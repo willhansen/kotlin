@@ -22,7 +22,7 @@ interface Signal<E> : Mono<E>
 
 interface AttributeDefinition
 
-val cache: Cache<String, Signal<out AttributeDefinition>> = TODO()
+konst cache: Cache<String, Signal<out AttributeDefinition>> = TODO()
 
 object CacheMonoKotlin {
     fun <K, V> lookup(map: MutableMap<K, in Signal<out V>>, key: K): Mono<V> = TODO()

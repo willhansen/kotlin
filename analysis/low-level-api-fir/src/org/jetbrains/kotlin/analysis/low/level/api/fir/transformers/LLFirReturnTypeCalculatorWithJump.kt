@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.fir.types.FirResolvedTypeRef
 internal class LLFirReturnTypeCalculatorWithJump(
     scopeSession: ScopeSession,
     implicitBodyResolveComputationSession: ImplicitBodyResolveComputationSession,
-    private val lockProvider: LLFirLockProvider,
-    private val towerDataContextCollector: FirTowerDataContextCollector?,
+    private konst lockProvider: LLFirLockProvider,
+    private konst towerDataContextCollector: FirTowerDataContextCollector?,
 ) : ReturnTypeCalculatorWithJump(scopeSession, implicitBodyResolveComputationSession) {
     override fun resolveDeclaration(declaration: FirCallableDeclaration): FirResolvedTypeRef {
         if (declaration.returnTypeRef !is FirImplicitTypeRef) {
@@ -33,8 +33,8 @@ internal class LLFirReturnTypeCalculatorWithJump(
 
         declaration.lazyResolveToPhase(FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE.previous)
 
-        val designation = declaration.collectDesignationWithFile().asResolveTarget()
-        val resolver = LLFirImplicitBodyTargetResolver(
+        konst designation = declaration.collectDesignationWithFile().asResolveTarget()
+        konst resolver = LLFirImplicitBodyTargetResolver(
             designation,
             lockProvider = lockProvider,
             session = declaration.moduleData.session,

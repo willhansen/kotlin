@@ -37,14 +37,14 @@ class NativeDownloadAndPlatformLibsIT : BaseGradleIT() {
             Assume.assumeFalse(HostManager.hostIsMingw)
         }
 
-        private const val KOTLIN_SPACE_DEV = "https://cache-redirector.jetbrains.com/maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
-        private const val MAVEN_CENTRAL = "https://cache-redirector.jetbrains.com/maven-central"
+        private const konst KOTLIN_SPACE_DEV = "https://cache-redirector.jetbrains.com/maven.pkg.jetbrains.space/kotlin/p/kotlin/dev"
+        private const konst MAVEN_CENTRAL = "https://cache-redirector.jetbrains.com/maven-central"
     }
 
-    override val defaultGradleVersion: GradleVersionRequired
+    override konst defaultGradleVersion: GradleVersionRequired
         get() = GradleVersionRequired.FOR_MPP_SUPPORT
 
-    private val currentCompilerVersion = NativeCompilerDownloader.DEFAULT_KONAN_VERSION
+    private konst currentCompilerVersion = NativeCompilerDownloader.DEFAULT_KONAN_VERSION
 
     private fun platformLibrariesProject(vararg targets: String): Project =
         transformProjectWithPluginsDsl("native-platform-libraries").apply {
@@ -59,13 +59,13 @@ class NativeDownloadAndPlatformLibsIT : BaseGradleIT() {
             }
         }
 
-    private val platformName: String = HostManager.platformName()
+    private konst platformName: String = HostManager.platformName()
 
     @BeforeTest
     fun deleteInstalledCompilers() {
-        val currentCompilerDir = DependencyDirectories.localKonanDir
+        konst currentCompilerDir = DependencyDirectories.localKonanDir
             .resolve("kotlin-native-$platformName-$currentCompilerVersion")
-        val prebuiltDistDir = DependencyDirectories.localKonanDir
+        konst prebuiltDistDir = DependencyDirectories.localKonanDir
             .resolve("kotlin-native-prebuilt-$platformName-$currentCompilerVersion")
 
         for (compilerDirectory in listOf(currentCompilerDir, prebuiltDistDir)) {
@@ -90,7 +90,7 @@ class NativeDownloadAndPlatformLibsIT : BaseGradleIT() {
 
     @Test
     fun testLibrariesGeneration() {
-        val rootProject = Project("native-platform-libraries").apply {
+        konst rootProject = Project("native-platform-libraries").apply {
             embedProject(Project("native-platform-libraries"), renameTo = "subproject")
             gradleProperties().apply {
                 configureJvmMemory()
@@ -214,8 +214,8 @@ class NativeDownloadAndPlatformLibsIT : BaseGradleIT() {
     }
 
     private fun mavenUrl(): String {
-        val versionPattern = "(\\d+)\\.(\\d+)(?:\\.(\\d+))?(?:-(\\p{Alpha}*\\p{Alnum}|[\\p{Alpha}-]*))?(?:-(\\d+))?".toRegex()
-        val (_, _, _, metaString, build) = versionPattern.matchEntire(currentCompilerVersion)?.destructured
+        konst versionPattern = "(\\d+)\\.(\\d+)(?:\\.(\\d+))?(?:-(\\p{Alpha}*\\p{Alnum}|[\\p{Alpha}-]*))?(?:-(\\d+))?".toRegex()
+        konst (_, _, _, metaString, build) = versionPattern.matchEntire(currentCompilerVersion)?.destructured
             ?: error("Unable to parse version $currentCompilerVersion")
         return when {
             metaString == "dev" || build.isNotEmpty() -> KOTLIN_SPACE_DEV
@@ -226,7 +226,7 @@ class NativeDownloadAndPlatformLibsIT : BaseGradleIT() {
 
     @Test
     fun `download prebuilt Native bundle with maven`() {
-        val maven = mavenUrl()
+        konst maven = mavenUrl()
         // Don't run this test for build that are not yet published to central
         Assume.assumeTrue(maven != MAVEN_CENTRAL)
 
@@ -235,7 +235,7 @@ class NativeDownloadAndPlatformLibsIT : BaseGradleIT() {
                 "kotlin.native.distribution.downloadFromMaven=true"
             )
             gradleBuildScript().let {
-                val text = it.readText().replaceFirst("// <MavenPlaceholder>", "maven(\"${maven}\")")
+                konst text = it.readText().replaceFirst("// <MavenPlaceholder>", "maven(\"${maven}\")")
                 it.writeText(text)
             }
             build("assemble") {
@@ -248,7 +248,7 @@ class NativeDownloadAndPlatformLibsIT : BaseGradleIT() {
 
     @Test
     fun `download light Native bundle with maven`() {
-        val maven = mavenUrl()
+        konst maven = mavenUrl()
         // Don't run this test for build that are not yet published to central
         Assume.assumeTrue(maven != MAVEN_CENTRAL)
 
@@ -262,7 +262,7 @@ class NativeDownloadAndPlatformLibsIT : BaseGradleIT() {
                 "kotlin.native.distribution.downloadFromMaven=true"
             )
             gradleBuildScript().let {
-                val text = it.readText().replaceFirst("// <MavenPlaceholder>", "maven(\"${maven}\")")
+                konst text = it.readText().replaceFirst("// <MavenPlaceholder>", "maven(\"${maven}\")")
                 it.writeText(text)
             }
             build("assemble", "-Pkotlin.native.distribution.type=light") {

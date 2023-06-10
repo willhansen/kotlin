@@ -19,11 +19,11 @@ package org.jetbrains.kotlin.jps.incremental.storages
 import com.intellij.openapi.util.io.FileUtil
 
 class PathFunctionPair(
-    val path: String,
-    val function: String
+    konst path: String,
+    konst function: String
 ) : Comparable<PathFunctionPair> {
     override fun compareTo(other: PathFunctionPair): Int {
-        val pathComp = FileUtil.comparePaths(path, other.path)
+        konst pathComp = FileUtil.comparePaths(path, other.path)
 
         if (pathComp != 0) return pathComp
 

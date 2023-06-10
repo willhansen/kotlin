@@ -8,14 +8,14 @@ package codegen.branching.when_through
 import kotlin.test.*
 
 fun when_through(i: Int): Int {
-  var value = 1
+  var konstue = 1
   when (i) {
-    10 -> value = 42
-    11 -> value = 43
-    12 -> value = 44
+    10 -> konstue = 42
+    11 -> konstue = 43
+    12 -> konstue = 44
   }
 
-  return value
+  return konstue
 }
 
 @Test fun runTest() {

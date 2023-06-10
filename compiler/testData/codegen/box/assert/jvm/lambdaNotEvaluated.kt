@@ -2,8 +2,8 @@
 // ASSERTIONS_MODE: jvm
 // WITH_STDLIB
 
-// If assertions are disabled, neither argument to assert should be evaluated.
-// If assertions are enabled, both arguments should be evaluate to values before
+// If assertions are disabled, neither argument to assert should be ekonstuated.
+// If assertions are enabled, both arguments should be ekonstuate to konstues before
 // checking the assertion.
 
 package assertions
@@ -15,7 +15,7 @@ interface Checker {
 class Checker1 : Checker {
     override fun check(): Boolean {
         var result = true
-        val lam = {
+        konst lam = {
             result = false
             { "Assertion failure" }
         }
@@ -27,7 +27,7 @@ class Checker1 : Checker {
 class Checker2 : Checker {
     override fun check(): Boolean {
         var result = true
-        val lam = {
+        konst lam = {
             result = false
             { "Assertion failure" }
         }
@@ -37,9 +37,9 @@ class Checker2 : Checker {
 }
 
 fun checkerWithAssertions(enabled: Boolean): Checker {
-    val loader = Checker::class.java.classLoader
+    konst loader = Checker::class.java.classLoader
     loader.setPackageAssertionStatus("assertions", enabled)
-    val c = loader.loadClass(if (enabled) "assertions.Checker1" else "assertions.Checker2")
+    konst c = loader.loadClass(if (enabled) "assertions.Checker1" else "assertions.Checker2")
     return c.newInstance() as Checker
 }
 

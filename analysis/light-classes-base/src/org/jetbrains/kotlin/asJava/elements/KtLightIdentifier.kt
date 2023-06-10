@@ -13,15 +13,15 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.containingClassOrObject
 
 open class KtLightIdentifier @JvmOverloads constructor(
-    private val lightOwner: PsiElement,
-    private val ktDeclaration: KtDeclaration?,
-    private val name: String? = ktDeclaration?.name,
+    private konst lightOwner: PsiElement,
+    private konst ktDeclaration: KtDeclaration?,
+    private konst name: String? = ktDeclaration?.name,
 ) : LightIdentifier(lightOwner.manager, name), PsiElementWithOrigin<PsiElement> {
-    override val origin: PsiElement?
+    override konst origin: PsiElement?
         get() = when (ktDeclaration) {
             is KtSecondaryConstructor -> ktDeclaration.getConstructorKeyword()
             is KtPrimaryConstructor -> ktDeclaration.getConstructorKeyword()
-                ?: ktDeclaration.valueParameterList
+                ?: ktDeclaration.konstueParameterList
                 ?: ktDeclaration.containingClassOrObject?.nameIdentifier
 
             is KtPropertyAccessor -> ktDeclaration.namePlaceholder

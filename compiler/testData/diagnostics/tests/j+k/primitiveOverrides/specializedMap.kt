@@ -34,7 +34,7 @@ public class SpecializedMap extends AbstractSpecializedMap {
     }
 
     @Override
-    public Double put(Integer key, Double value) {
+    public Double put(Integer key, Double konstue) {
         return null;
     }
 
@@ -77,7 +77,7 @@ public class SpecializedMap extends AbstractSpecializedMap {
 
     @NotNull
     @Override
-    public Collection<Double> values() {
+    public Collection<Double> konstues() {
         return null;
     }
 

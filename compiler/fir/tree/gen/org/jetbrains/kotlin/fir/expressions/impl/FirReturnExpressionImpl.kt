@@ -27,9 +27,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirReturnExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val target: FirTarget<FirFunction>,
+    override konst target: FirTarget<FirFunction>,
     override var result: FirExpression,
 ) : FirReturnExpression() {
     override var typeRef: FirTypeRef = FirImplicitNothingTypeRef(source?.fakeElement(KtFakeSourceElementKind.ImplicitTypeRef))

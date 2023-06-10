@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.asJava.canHaveSyntheticGetter
 
 abstract class SyntheticPropertyAccessorReference(
     expression: KtNameReferenceExpression,
-    val getter: Boolean
+    konst getter: Boolean
 ) : KtSimpleReference<KtNameReferenceExpression>(expression) {
     protected fun isAccessorName(name: String): Boolean {
         if (getter) {
@@ -36,6 +36,6 @@ abstract class SyntheticPropertyAccessorReference(
 
     override fun canRename() = true
 
-    override val resolvesByNames: Collection<Name>
+    override konst resolvesByNames: Collection<Name>
         get() = listOf(element.getReferencedNameAsName())
 }

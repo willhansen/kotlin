@@ -2,7 +2,7 @@ package
 
 @An public final data class A {
     public constructor A(/*0*/ @An x: @An kotlin.Int)
-    public final val x: @An kotlin.Int
+    public final konst x: @An kotlin.Int
     public final operator /*synthesized*/ fun component1(): @An kotlin.Int
     @An public final fun copy(/*0*/ @An x: @An kotlin.Int): @An kotlin.Int
     public final /*synthesized*/ fun copy(/*0*/ @An x: @An kotlin.Int = ...): A

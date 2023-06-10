@@ -3,14 +3,14 @@
 import kotlin.test.assertEquals
 
 fun box(): String {
-    val indexList = mutableListOf<Int>()
-    val valueList = mutableListOf<Int>()
+    konst indexList = mutableListOf<Int>()
+    konst konstueList = mutableListOf<Int>()
     for ((i, v) in listOf(4, 5, 6, 7).indices.withIndex()) {
         indexList += i
-        valueList += v
+        konstueList += v
     }
     assertEquals(listOf(0, 1, 2, 3), indexList)
-    assertEquals(listOf(0, 1, 2, 3), valueList)
+    assertEquals(listOf(0, 1, 2, 3), konstueList)
 
     return "OK"
 }

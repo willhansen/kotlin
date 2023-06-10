@@ -8,15 +8,15 @@ package test
 class A {}
 
 fun getMain(className: String): java.lang.reflect.Method {
-    val classLoader = A().javaClass.classLoader
+    konst classLoader = A().javaClass.classLoader
     return classLoader.loadClass(className).getDeclaredMethod("main", Array<String>::class.java)
 }
 
 fun box(): String {
-    val bMain = getMain("pkg.AKt")
-    val cMain = getMain("pkg.BKt")
+    konst bMain = getMain("pkg.AKt")
+    konst cMain = getMain("pkg.BKt")
 
-    val args = Array(1, { "" })
+    konst args = Array(1, { "" })
 
     bMain.invoke(null, args)
     cMain.invoke(null, args)

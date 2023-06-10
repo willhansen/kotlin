@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.pill.model.PProject
 import java.io.File
 import java.util.*
 
-private val USER_HOME_DIR_PATH = System.getProperty("user.home").withSlash()
+private konst USER_HOME_DIR_PATH = System.getProperty("user.home").withSlash()
 
 private fun replacePrefix(path: String, prefix: String, variableName: String): String {
     if (path.startsWith(prefix)) {
@@ -29,7 +29,7 @@ interface PathContext {
     operator fun invoke(file: File): String
 
     fun url(file: File): Pair<String, String> {
-        val path = when {
+        konst path = when {
             file.isFile && file.extension.lowercase(Locale.US) == "jar" -> "jar://" + this(file) + "!/"
             else -> "file://" + this(file)
         }
@@ -38,7 +38,7 @@ interface PathContext {
     }
 }
 
-class ProjectContext private constructor(private val projectDir: File) : PathContext {
+class ProjectContext private constructor(private konst projectDir: File) : PathContext {
     constructor(project: PProject) : this(project.rootDirectory)
     constructor(project: Project) : this(project.projectDir)
 
@@ -47,7 +47,7 @@ class ProjectContext private constructor(private val projectDir: File) : PathCon
     }
 }
 
-class ModuleContext(private val project: PProject, val module: PModule) : PathContext {
+class ModuleContext(private konst project: PProject, konst module: PModule) : PathContext {
     override fun invoke(file: File): String {
         if (!file.startsWith(project.rootDirectory)) {
             return simplifyUserHomeDirPath(file.absolutePath)

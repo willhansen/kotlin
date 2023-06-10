@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.ir.types.IrType
 
 // An IR builder with access to AndroidSymbols and convenience methods to build calls to some of these methods.
 class AndroidIrBuilder internal constructor(
-    val androidSymbols: AndroidSymbols,
+    konst androidSymbols: AndroidSymbols,
     symbol: IrSymbol,
     startOffset: Int,
     endOffset: Int
@@ -38,10 +38,10 @@ class AndroidIrBuilder internal constructor(
         }
     }
 
-    fun parcelWriteInt(receiver: IrExpression, value: IrExpression): IrExpression {
+    fun parcelWriteInt(receiver: IrExpression, konstue: IrExpression): IrExpression {
         return irCall(androidSymbols.parcelWriteInt).apply {
             dispatchReceiver = receiver
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         }
     }
 
@@ -53,10 +53,10 @@ class AndroidIrBuilder internal constructor(
         }
     }
 
-    fun parcelWriteString(receiver: IrExpression, value: IrExpression): IrExpression {
+    fun parcelWriteString(receiver: IrExpression, konstue: IrExpression): IrExpression {
         return irCall(androidSymbols.parcelWriteString).apply {
             dispatchReceiver = receiver
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         }
     }
 
@@ -78,11 +78,11 @@ class AndroidIrBuilder internal constructor(
         return irGetField(null, androidSymbols.textUtilsCharSequenceCreator.owner)
     }
 
-    fun unsafeCoerce(value: IrExpression, fromType: IrType, toType: IrType): IrExpression {
+    fun unsafeCoerce(konstue: IrExpression, fromType: IrType, toType: IrType): IrExpression {
         return IrCallImpl.fromSymbolOwner(UNDEFINED_OFFSET, UNDEFINED_OFFSET, toType, androidSymbols.unsafeCoerceIntrinsic).apply {
             putTypeArgument(0, fromType)
             putTypeArgument(1, toType)
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         }
     }
 }

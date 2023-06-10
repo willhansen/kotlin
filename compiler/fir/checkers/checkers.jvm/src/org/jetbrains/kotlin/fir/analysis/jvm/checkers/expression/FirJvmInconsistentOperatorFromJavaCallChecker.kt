@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
  * leading to an unexpected result. See KT-18053
  */
 object FirJvmInconsistentOperatorFromJavaCallChecker : FirFunctionCallChecker() {
-    private val CONCURRENT_HASH_MAP_CALLABLE_ID = CallableId(
+    private konst CONCURRENT_HASH_MAP_CALLABLE_ID = CallableId(
         ClassId.fromString("java/util/concurrent/ConcurrentHashMap"),
         OperatorNameConventions.CONTAINS
     )
@@ -43,11 +43,11 @@ object FirJvmInconsistentOperatorFromJavaCallChecker : FirFunctionCallChecker() 
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
         // Filter out non-operators
         if (expression.origin != FirFunctionCallOrigin.Operator) return
-        val callableSymbol = expression.calleeReference.toResolvedCallableSymbol() as? FirNamedFunctionSymbol ?: return
+        konst callableSymbol = expression.calleeReference.toResolvedCallableSymbol() as? FirNamedFunctionSymbol ?: return
         // Filter out non-contains
         if (callableSymbol.name != OperatorNameConventions.CONTAINS) return
-        val valueParameterSymbol = callableSymbol.valueParameterSymbols.singleOrNull() ?: return
-        val type = valueParameterSymbol.resolvedReturnTypeRef.coneType.lowerBoundIfFlexible()
+        konst konstueParameterSymbol = callableSymbol.konstueParameterSymbols.singleOrNull() ?: return
+        konst type = konstueParameterSymbol.resolvedReturnTypeRef.coneType.lowerBoundIfFlexible()
         // Filter out handrolled contains with non-Any type
         if (!type.isAny && !type.isNullableAny) return
         callableSymbol.check(expression.calleeReference.source, context, reporter)
@@ -61,8 +61,8 @@ object FirJvmInconsistentOperatorFromJavaCallChecker : FirFunctionCallChecker() 
         }
 
         // Check explicitly overridden contains
-        val containingClass = containingClassLookupTag()?.toFirRegularClassSymbol(context.session) ?: return false
-        val overriddenFunctions = overriddenFunctions(containingClass, context)
+        konst containingClass = containingClassLookupTag()?.toFirRegularClassSymbol(context.session) ?: return false
+        konst overriddenFunctions = overriddenFunctions(containingClass, context)
         for (overriddenFunction in overriddenFunctions) {
             if (overriddenFunction is FirNamedFunctionSymbol && overriddenFunction.check(source, context, reporter)) {
                 return true

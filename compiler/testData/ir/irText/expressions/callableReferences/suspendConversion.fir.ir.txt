@@ -24,11 +24,11 @@ FILE fqName:<root> fileName:/suspendConversion.kt
   FUN name:foo3 visibility:public modality:FINAL <> () returnType:kotlin.Int
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun foo3 (): kotlin.Int declared in <root>'
-        CONST Int type=kotlin.Int value=42
+        CONST Int type=kotlin.Int konstue=42
   FUN name:foo4 visibility:public modality:FINAL <> (i:kotlin.Int) returnType:kotlin.Unit
     VALUE_PARAMETER name:i index:0 type:kotlin.Int
       EXPRESSION_BODY
-        CONST Int type=kotlin.Int value=42
+        CONST Int type=kotlin.Int konstue=42
     BLOCK_BODY
   CLASS CLASS name:C modality:FINAL visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.C

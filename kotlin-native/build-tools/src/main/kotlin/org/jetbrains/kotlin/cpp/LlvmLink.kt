@@ -25,14 +25,14 @@ import javax.inject.Inject
 
 private abstract class LlvmLinkJob : WorkAction<LlvmLinkJob.Parameters> {
     interface Parameters : WorkParameters {
-        val inputFiles: ConfigurableFileCollection
-        val outputFile: RegularFileProperty
-        val arguments: ListProperty<String>
-        val platformManager: Property<PlatformManager>
+        konst inputFiles: ConfigurableFileCollection
+        konst outputFile: RegularFileProperty
+        konst arguments: ListProperty<String>
+        konst platformManager: Property<PlatformManager>
     }
 
     @get:Inject
-    abstract val execOperations: ExecOperations
+    abstract konst execOperations: ExecOperations
 
     override fun execute() {
         with(parameters) {
@@ -51,28 +51,28 @@ abstract class LlvmLink : DefaultTask() {
      * Bitcode files to link together.
      */
     @get:InputFiles
-    abstract val inputFiles: ConfigurableFileCollection
+    abstract konst inputFiles: ConfigurableFileCollection
 
     /**
      * Output file.
      */
     @get:OutputFile
-    abstract val outputFile: RegularFileProperty
+    abstract konst outputFile: RegularFileProperty
 
     /**
      * Extra arguments for `llvm-link`.
      */
     @get:Input
-    abstract val arguments: ListProperty<String>
+    abstract konst arguments: ListProperty<String>
 
     @get:Inject
-    protected abstract val workerExecutor: WorkerExecutor
+    protected abstract konst workerExecutor: WorkerExecutor
 
-    private val platformManager = project.extensions.getByType<PlatformManager>()
+    private konst platformManager = project.extensions.getByType<PlatformManager>()
 
     @TaskAction
     fun link() {
-        val workQueue = workerExecutor.noIsolation()
+        konst workQueue = workerExecutor.noIsolation()
 
         workQueue.submit(LlvmLinkJob::class.java) {
             inputFiles.from(this@LlvmLink.inputFiles)

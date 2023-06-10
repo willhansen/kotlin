@@ -4,7 +4,7 @@
 import kotlin.reflect.KProperty
 
 fun test(i: Int) {
-    val bad by myLazyDelegate {
+    konst bad by myLazyDelegate {
         createSample(i) { it.toString() }
     }
 
@@ -13,7 +13,7 @@ fun test(i: Int) {
 
 fun <T> myLazyDelegate(i: () -> T): LazyDelegate<T> = LazyDelegate(i())
 
-class LazyDelegate<T>(val v: T) {
+class LazyDelegate<T>(konst v: T) {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T = TODO()
 }
 

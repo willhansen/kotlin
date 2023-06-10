@@ -3,28 +3,28 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt(val value: Int)
+konstue class UInt(konst konstue: Int)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ULong(val value: Long)
+konstue class ULong(konst konstue: Long)
 
 fun foo(u: UInt, f: (UInt) -> ULong): ULong = f(u)
 inline fun inlinedFoo(u: UInt, f: (UInt) -> ULong): ULong = f(u)
 
-fun mapUIntToULong(u: UInt): ULong = ULong(u.value.toLong())
+fun mapUIntToULong(u: UInt): ULong = ULong(u.konstue.toLong())
 
 fun box(): String {
-    val u = UInt(123)
-    val l1 = foo(u) {
+    konst u = UInt(123)
+    konst l1 = foo(u) {
         mapUIntToULong(it)
     }
 
-    if (l1.value != 123L) return "fail"
+    if (l1.konstue != 123L) return "fail"
 
-    val l2 = inlinedFoo(UInt(10)) {
+    konst l2 = inlinedFoo(UInt(10)) {
         mapUIntToULong(it)
     }
 
-    if (l2.value != 10L) return "fail"
+    if (l2.konstue != 10L) return "fail"
 
     return "OK"
 }

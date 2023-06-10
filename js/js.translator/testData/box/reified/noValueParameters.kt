@@ -6,7 +6,7 @@ package foo
 class A
 
 inline fun <reified T> test(): String {
-    val a: Any = A()
+    konst a: Any = A()
 
     return if (a is T) "A" else "Unknown"
 }

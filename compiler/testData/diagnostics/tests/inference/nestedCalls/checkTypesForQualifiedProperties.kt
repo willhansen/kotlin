@@ -6,4 +6,4 @@ fun test(c: C) {
 
 fun foo(s: String) = s
 
-class C(val b: Int) {}
+class C(konst b: Int) {}

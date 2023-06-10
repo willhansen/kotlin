@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.konan.util.visibleName
 
 interface KotlinNativePlatform : NativePlatform {
-    val target: KonanTarget
+    konst target: KonanTarget
 }
 
 fun KonanTarget.getGradleOS(): OperatingSystemInternal = family.visibleName.let {
@@ -45,7 +45,7 @@ fun KonanTarget.toTargetMachine(objectFactory: ObjectFactory): TargetMachine = o
             objectFactory.named(MachineArchitecture::class.java, this@toTargetMachine.architecture.visibleName)
 }
 
-class DefaultKotlinNativePlatform(name: String, override val target: KonanTarget) :
+class DefaultKotlinNativePlatform(name: String, override konst target: KonanTarget) :
         DefaultNativePlatform(name, target.getGradleOS(), target.getGradleCPU()),
         KotlinNativePlatform {
     constructor(target: KonanTarget) : this(target.visibleName, target)

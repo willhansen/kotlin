@@ -44,22 +44,22 @@ public final class InitializerVisitor extends TranslatorVisitor<Void> {
     @Override
     public final Void visitProperty(@NotNull KtProperty property, @NotNull TranslationContext context) {
         PropertyDescriptor descriptor = BindingUtils.getPropertyDescriptor(context.bindingContext(), property);
-        JsExpression value = PropertyTranslatorKt.translateDelegateOrInitializerExpression(context, property);
+        JsExpression konstue = PropertyTranslatorKt.translateDelegateOrInitializerExpression(context, property);
         JsStatement statement = null;
 
         KtExpression initializer = property.getInitializer();
         KtExpression delegate = property.getDelegateExpression();
         if (initializer != null) {
-            assert value != null;
+            assert konstue != null;
             KotlinType type = TranslationUtils.isReferenceToSyntheticBackingField(descriptor) ?
                               descriptor.getType() :
                               TranslationUtils.getReturnTypeForCoercion(descriptor);
-            value = TranslationUtils.coerce(context, value, type);
-            statement = generateInitializerForProperty(context, descriptor, value);
+            konstue = TranslationUtils.coerce(context, konstue, type);
+            statement = generateInitializerForProperty(context, descriptor, konstue);
         }
         else if (delegate != null) {
-            assert value != null;
-            statement = generateInitializerForDelegate(context, descriptor, value);
+            assert konstue != null;
+            statement = generateInitializerForDelegate(context, descriptor, konstue);
         }
         else if (Boolean.TRUE.equals(context.bindingContext().get(BindingContext.BACKING_FIELD_REQUIRED, descriptor))) {
             JsNameRef backingFieldReference = TranslationUtils.backingFieldReference(context, descriptor);

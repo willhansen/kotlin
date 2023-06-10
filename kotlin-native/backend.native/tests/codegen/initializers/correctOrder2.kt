@@ -8,9 +8,9 @@ package codegen.initializers.correctOrder2
 import kotlin.test.*
 
 class TestClass {
-    val x: Int
+    konst x: Int
 
-    val y = 42
+    konst y = 42
 
     init {
         x = y

@@ -1,16 +1,16 @@
 // WITH_STDLIB
 
-val a = "INT " + 0x8fffffffU
-val b = "BYTE " + 0x8ffU
-val c = "LONG " + 0xffff_ffff_ffffU
+konst a = "INT " + 0x8fffffffU
+konst b = "BYTE " + 0x8ffU
+konst c = "LONG " + 0xffff_ffff_ffffU
 
-val uint = 0x8fffffffU
-val ubyte = 0x8ffU
-val ulong = 0xffff_ffff_ffffU
+konst uint = 0x8fffffffU
+konst ubyte = 0x8ffU
+konst ulong = 0xffff_ffff_ffffU
 
-val aa = "INT " + uint
-val bb = "BYTE " + ubyte
-val cc = "LONG " + ulong
+konst aa = "INT " + uint
+konst bb = "BYTE " + ubyte
+konst cc = "LONG " + ulong
 
 
 fun box(): String {

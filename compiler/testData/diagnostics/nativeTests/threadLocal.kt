@@ -10,9 +10,9 @@ annotation class ThreadLocal
 import kotlin.native.concurrent.ThreadLocal
 import kotlin.reflect.KProperty
 
-data class Point(val x: Double, val y: Double)
+data class Point(konst x: Double, konst y: Double)
 
-class Person(val name: String) {
+class Person(konst name: String) {
     <!INAPPLICABLE_THREAD_LOCAL_TOP_LEVEL!>@ThreadLocal<!>
     var surname: String? = null
 }
@@ -22,36 +22,36 @@ abstract class Information {
 }
 
 <!INAPPLICABLE_THREAD_LOCAL!>@ThreadLocal<!>
-class Person1(val name: String) {
+class Person1(konst name: String) {
     var surname: String? = null
     <!INAPPLICABLE_THREAD_LOCAL_TOP_LEVEL!>@ThreadLocal<!>
-    val extraInfo: Information = object : Information() {
+    konst extraInfo: Information = object : Information() {
         override var field: String = "extra info"
     }
 }
 
 @ThreadLocal
-val extraInfo: Information = object : Information() {
+konst extraInfo: Information = object : Information() {
     override var field: String = "extra info"
 }
 
 @ThreadLocal
-val point1 = Point(1.0, 1.0)
+konst point1 = Point(1.0, 1.0)
 
 <!INAPPLICABLE_THREAD_LOCAL!>@ThreadLocal<!>
-val cornerPoint: Point
+konst cornerPoint: Point
     get() = point1
 
 @ThreadLocal
-val person = Person1("aaaaa")
+konst person = Person1("aaaaa")
 
 class Delegate {
-    val value: Int = 10
+    konst konstue: Int = 10
     operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
-        return value
+        return konstue
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: Int) {
     }
 }
 

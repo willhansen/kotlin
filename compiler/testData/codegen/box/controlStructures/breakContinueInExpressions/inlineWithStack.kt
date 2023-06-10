@@ -10,7 +10,7 @@ inline fun bar2() : String {
 fun foobar(x: String, y: String, z: String) = x + y + z
 
 fun box(): String {
-    val test = foobar("abc", bar2(), "ghi")
+    konst test = foobar("abc", bar2(), "ghi")
     return if (test == "abcdefghi")
         "OK"
     else "Failed, test=$test"

@@ -67,23 +67,23 @@ internal inline fun <reified T> List<T>.compact(): List<T> =
 internal fun <K, V> Map<K, V>.compact(): Map<K, V> =
     when (size) {
         0 -> emptyMap()
-        1 -> with(entries.iterator().next()) { singletonMap(key, value) }
+        1 -> with(entries.iterator().next()) { singletonMap(key, konstue) }
         2, 3 -> SmartFMap.emptyMap<K, V>().plusAll(this)
         else -> THashMap(this)
     }
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <K : Any, V> compactMapOf(key: K, value: V): Map<K, V> =
-    singletonMap(key, value)
+internal inline fun <K : Any, V> compactMapOf(key: K, konstue: V): Map<K, V> =
+    singletonMap(key, konstue)
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <K : Any, V> compactMapOf(key1: K, value1: V, key2: K, value2: V): Map<K, V> =
-    SmartFMap.emptyMap<K, V>().plus(key1, value1).plus(key2, value2)
+internal inline fun <K : Any, V> compactMapOf(key1: K, konstue1: V, key2: K, konstue2: V): Map<K, V> =
+    SmartFMap.emptyMap<K, V>().plus(key1, konstue1).plus(key2, konstue2)
 
 internal inline fun <reified T> Iterable<T?>.firstNonNull() = firstIsInstance<T>()
 
 internal inline fun <reified T, reified K : Any> Collection<T>.foldToMap(keySelector: (T) -> K): Map<K, List<T>> {
-    val result = fold(THashMap<K, MutableList<T>>()) { accumulator, element ->
+    konst result = fold(THashMap<K, MutableList<T>>()) { accumulator, element ->
         accumulator.getOrPut(keySelector(element)) { ArrayList() } += element
         accumulator
     }
@@ -94,13 +94,13 @@ internal inline fun <reified T, reified K : Any> Collection<T>.foldToMap(keySele
 internal fun Any?.isNull(): Boolean = this == null
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun hashCode(value: Any?): Int = value.hashCode()
+inline fun hashCode(konstue: Any?): Int = konstue.hashCode()
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun hashCode(array: Array<*>?): Int = array?.contentHashCode() ?: 0
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun Int.appendHashCode(value: Any?): Int = 31 * this + hashCode(value)
+inline fun Int.appendHashCode(konstue: Any?): Int = 31 * this + hashCode(konstue)
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun Int.appendHashCode(array: Array<*>?): Int = 31 * this + hashCode(array)
@@ -136,9 +136,9 @@ internal fun <T : Any> List<T>.singleDistinctValueOrNull(): T? = singleDistinctV
 
 internal inline fun <T : Any, R> List<T>.singleDistinctValueOrNull(selector: (T) -> R): R? {
     if (isEmpty()) return null
-    val value = selector(this[0])
+    konst konstue = selector(this[0])
     for (index in 1 until size) {
-        if (value != selector(this[index])) return null
+        if (konstue != selector(this[index])) return null
     }
-    return value
+    return konstue
 }

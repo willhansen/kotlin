@@ -61,14 +61,14 @@ open class FirSimpleFunctionBuilder : FirFunctionBuilder, FirTypeParametersOwner
     override var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     override var containerSource: DeserializedContainerSource? = null
     override var dispatchReceiverType: ConeSimpleKotlinType? = null
-    override val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
-    override val valueParameters: MutableList<FirValueParameter> = mutableListOf()
+    override konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    override konst konstueParameters: MutableList<FirValueParameter> = mutableListOf()
     override var body: FirBlock? = null
     open var contractDescription: FirContractDescription = FirEmptyContractDescription
     open lateinit var name: Name
     open lateinit var symbol: FirNamedFunctionSymbol
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    override val typeParameters: MutableList<FirTypeParameter> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst typeParameters: MutableList<FirTypeParameter> = mutableListOf()
 
     override fun build(): FirSimpleFunction {
         return FirSimpleFunctionImpl(
@@ -84,7 +84,7 @@ open class FirSimpleFunctionBuilder : FirFunctionBuilder, FirTypeParametersOwner
             containerSource,
             dispatchReceiverType,
             contextReceivers.toMutableOrEmpty(),
-            valueParameters,
+            konstueParameters,
             body,
             contractDescription,
             name,
@@ -109,7 +109,7 @@ inline fun buildSimpleFunctionCopy(original: FirSimpleFunction, init: FirSimpleF
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirSimpleFunctionBuilder()
+    konst copyBuilder = FirSimpleFunctionBuilder()
     copyBuilder.source = original.source
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.moduleData = original.moduleData
@@ -122,7 +122,7 @@ inline fun buildSimpleFunctionCopy(original: FirSimpleFunction, init: FirSimpleF
     copyBuilder.containerSource = original.containerSource
     copyBuilder.dispatchReceiverType = original.dispatchReceiverType
     copyBuilder.contextReceivers.addAll(original.contextReceivers)
-    copyBuilder.valueParameters.addAll(original.valueParameters)
+    copyBuilder.konstueParameters.addAll(original.konstueParameters)
     copyBuilder.body = original.body
     copyBuilder.contractDescription = original.contractDescription
     copyBuilder.name = original.name

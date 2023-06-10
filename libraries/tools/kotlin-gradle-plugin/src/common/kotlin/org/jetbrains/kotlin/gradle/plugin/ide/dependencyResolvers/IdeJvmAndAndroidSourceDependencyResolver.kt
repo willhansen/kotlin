@@ -34,9 +34,9 @@ internal object IdeJvmAndAndroidSourceDependencyResolver : IdeDependencyResolver
              */
             .filter { chooseVisibleSourceSets -> chooseVisibleSourceSets.projectDependency(sourceSet.project) != sourceSet.project }
             .flatMap { chooseVisibleSourceSets ->
-                val projectDependency = chooseVisibleSourceSets.projectDependency(sourceSet.project)
+                konst projectDependency = chooseVisibleSourceSets.projectDependency(sourceSet.project)
                     ?: return@flatMap emptyList<IdeaKotlinDependency>()
-                val kotlin = projectDependency.multiplatformExtensionOrNull ?: return@flatMap emptyList<IdeaKotlinDependency>()
+                konst kotlin = projectDependency.multiplatformExtensionOrNull ?: return@flatMap emptyList<IdeaKotlinDependency>()
                 kotlin.sourceSets
                     .filter { sourceSet -> isJvmAndAndroidMain(sourceSet) }
                     .map { sourceSet -> IdeaKotlinSourceDependency(type = Regular, coordinates = IdeaKotlinSourceCoordinates(sourceSet)) }

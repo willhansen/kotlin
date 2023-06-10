@@ -16,18 +16,18 @@ import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 import java.nio.file.Path
 
 internal class KtLibraryModuleImpl(
-    override val directRegularDependencies: List<KtModule>,
-    override val directDependsOnDependencies: List<KtModule>,
-    override val directFriendDependencies: List<KtModule>,
-    override val contentScope: GlobalSearchScope,
-    override val platform: TargetPlatform,
-    override val project: Project,
-    private val binaryRoots: Collection<Path>,
-    override val libraryName: String,
-    override val librarySources: KtLibrarySourceModule?,
+    override konst directRegularDependencies: List<KtModule>,
+    override konst directDependsOnDependencies: List<KtModule>,
+    override konst directFriendDependencies: List<KtModule>,
+    override konst contentScope: GlobalSearchScope,
+    override konst platform: TargetPlatform,
+    override konst project: Project,
+    private konst binaryRoots: Collection<Path>,
+    override konst libraryName: String,
+    override konst librarySources: KtLibrarySourceModule?,
 ) : KtLibraryModule, KtModuleWithPlatform {
-    override val transitiveDependsOnDependencies: List<KtModule> by lazy { computeTransitiveDependsOnDependencies(directDependsOnDependencies) }
-    override val analyzerServices: PlatformDependentAnalyzerServices = super.analyzerServices
+    override konst transitiveDependsOnDependencies: List<KtModule> by lazy { computeTransitiveDependsOnDependencies(directDependsOnDependencies) }
+    override konst analyzerServices: PlatformDependentAnalyzerServices = super.analyzerServices
 
     override fun getBinaryRoots(): Collection<Path> = binaryRoots
 }

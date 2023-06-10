@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.konan.properties.loadProperties
 import org.jetbrains.kotlin.library.*
 
 class BaseKotlinLibraryImpl(
-    val access: BaseLibraryAccess<KotlinLibraryLayout>,
-    override val isDefault: Boolean
+    konst access: BaseLibraryAccess<KotlinLibraryLayout>,
+    override konst isDefault: Boolean
 ) : BaseKotlinLibrary {
-    override val libraryFile get() = access.klib
-    override val libraryName: String by lazy { access.inPlace { it.libraryName } }
+    override konst libraryFile get() = access.klib
+    override konst libraryName: String by lazy { access.inPlace { it.libraryName } }
 
-    private val componentListAndHasPre14Manifest by lazy {
+    private konst componentListAndHasPre14Manifest by lazy {
         access.inPlace { layout ->
-            val listFiles = layout.libFile.listFiles
+            konst listFiles = layout.libFile.listFiles
             listFiles
                 .filter { it.isDirectory }
                 .filter { it.listFiles.map { it.name }.contains(KLIB_MANIFEST_FILE_NAME) }
@@ -39,26 +39,26 @@ class BaseKotlinLibraryImpl(
         }
     }
 
-    override val componentList: List<String> get() = componentListAndHasPre14Manifest.first
+    override konst componentList: List<String> get() = componentListAndHasPre14Manifest.first
 
     override fun toString() = "$libraryName[default=$isDefault]"
 
-    override val has_pre_1_4_manifest: Boolean get() = componentListAndHasPre14Manifest.second
+    override konst has_pre_1_4_manifest: Boolean get() = componentListAndHasPre14Manifest.second
 
-    override val manifestProperties: Properties by lazy {
+    override konst manifestProperties: Properties by lazy {
         access.inPlace { it.manifestFile.loadProperties() }
     }
 
-    override val versions: KotlinLibraryVersioning by lazy {
+    override konst versions: KotlinLibraryVersioning by lazy {
         manifestProperties.readKonanLibraryVersioning()
     }
 }
 
 class MetadataLibraryImpl(
-    val access: MetadataLibraryAccess<MetadataKotlinLibraryLayout>
+    konst access: MetadataLibraryAccess<MetadataKotlinLibraryLayout>
 ) : MetadataLibrary {
 
-    override val moduleHeaderData: ByteArray by lazy {
+    override konst moduleHeaderData: ByteArray by lazy {
         access.inPlace {
             it.moduleHeaderFile.readBytes()
         }
@@ -71,7 +71,7 @@ class MetadataLibraryImpl(
 
     override fun packageMetadataParts(fqName: String): Set<String> =
         access.inPlace { inPlaceaccess ->
-            val fileList =
+            konst fileList =
                 inPlaceaccess.packageFragmentsDir(fqName)
                     .listFiles
                     .mapNotNull {
@@ -87,9 +87,9 @@ class MetadataLibraryImpl(
 }
 
 abstract class IrLibraryImpl(
-    val access: IrLibraryAccess<IrKotlinLibraryLayout>
+    konst access: IrLibraryAccess<IrKotlinLibraryLayout>
 ) : IrLibrary {
-    override val dataFlowGraph by lazy {
+    override konst dataFlowGraph by lazy {
         access.inPlace { it: IrKotlinLibraryLayout ->
             it.dataFlowGraphFile.let { if (it.exists) it.readBytes() else null }
         }
@@ -116,43 +116,43 @@ class IrMonoliticLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : 
     private fun loadIrDeclaration(index: Int, fileIndex: Int) =
         combinedDeclarations.tableItemBytes(fileIndex, DeclarationId(index))
 
-    private val combinedDeclarations: DeclarationIrMultiTableFileReader by lazy {
+    private konst combinedDeclarations: DeclarationIrMultiTableFileReader by lazy {
         DeclarationIrMultiTableFileReader(access.realFiles {
             it.irDeclarations
         })
     }
 
-    private val types: IrMultiArrayFileReader by lazy {
+    private konst types: IrMultiArrayFileReader by lazy {
         IrMultiArrayFileReader(access.realFiles {
             it.irTypes
         })
     }
 
-    private val signatures: IrMultiArrayFileReader by lazy {
+    private konst signatures: IrMultiArrayFileReader by lazy {
         IrMultiArrayFileReader(access.realFiles {
             it.irSignatures
         })
     }
 
-    private val strings: IrMultiArrayFileReader by lazy {
+    private konst strings: IrMultiArrayFileReader by lazy {
         IrMultiArrayFileReader(access.realFiles {
             it.irStrings
         })
     }
 
-    private val bodies: IrMultiArrayFileReader by lazy {
+    private konst bodies: IrMultiArrayFileReader by lazy {
         IrMultiArrayFileReader(access.realFiles {
             it.irBodies
         })
     }
 
-    private val debugInfos: IrMultiArrayFileReader? by lazy {
+    private konst debugInfos: IrMultiArrayFileReader? by lazy {
         access.realFiles {
             it.irDebugInfo.let { diFile -> if (diFile.exists) IrMultiArrayFileReader(diFile) else null }
         }
     }
 
-    private val files: IrArrayFileReader by lazy {
+    private konst files: IrArrayFileReader by lazy {
         IrArrayFileReader(access.realFiles {
             it.irFiles
         })
@@ -181,16 +181,16 @@ class IrMonoliticLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : 
 
 class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : IrLibraryImpl(_access) {
 
-    private val directories by lazy {
+    private konst directories by lazy {
         access.realFiles {
             it.irDir.listFiles.filter { f -> f.isDirectory && f.name.endsWith(".file") }
         }
     }
 
-    private val fileToDeclarationMap = mutableMapOf<Int, DeclarationIrTableFileReader>()
+    private konst fileToDeclarationMap = mutableMapOf<Int, DeclarationIrTableFileReader>()
     override fun irDeclaration(index: Int, fileIndex: Int): ByteArray {
-        val dataReader = fileToDeclarationMap.getOrPut(fileIndex) {
-            val fileDirectory = directories[fileIndex]
+        konst dataReader = fileToDeclarationMap.getOrPut(fileIndex) {
+            konst fileDirectory = directories[fileIndex]
             DeclarationIrTableFileReader(access.realFiles {
                 it.irDeclarations(fileDirectory)
             })
@@ -198,10 +198,10 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
         return dataReader.tableItemBytes(DeclarationId(index))
     }
 
-    private val fileToTypeMap = mutableMapOf<Int, IrArrayFileReader>()
+    private konst fileToTypeMap = mutableMapOf<Int, IrArrayFileReader>()
     override fun type(index: Int, fileIndex: Int): ByteArray {
-        val dataReader = fileToTypeMap.getOrPut(fileIndex) {
-            val fileDirectory = directories[fileIndex]
+        konst dataReader = fileToTypeMap.getOrPut(fileIndex) {
+            konst fileDirectory = directories[fileIndex]
             IrArrayFileReader(access.realFiles {
                 it.irTypes(fileDirectory)
             })
@@ -211,7 +211,7 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
 
     private fun signatureDataReader(fileIndex: Int): IrArrayFileReader {
         return fileToTypeMap.getOrPut(fileIndex) {
-            val fileDirectory = directories[fileIndex]
+            konst fileDirectory = directories[fileIndex]
             IrArrayFileReader(access.realFiles {
                 it.irSignatures(fileDirectory)
             })
@@ -219,14 +219,14 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     }
 
     override fun signature(index: Int, fileIndex: Int): ByteArray {
-        val dataReader = signatureDataReader(fileIndex)
+        konst dataReader = signatureDataReader(fileIndex)
         return dataReader.tableItemBytes(index)
     }
 
-    private val fileToStringMap = mutableMapOf<Int, IrArrayFileReader>()
+    private konst fileToStringMap = mutableMapOf<Int, IrArrayFileReader>()
     override fun string(index: Int, fileIndex: Int): ByteArray {
-        val dataReader = fileToStringMap.getOrPut(fileIndex) {
-            val fileDirectory = directories[fileIndex]
+        konst dataReader = fileToStringMap.getOrPut(fileIndex) {
+            konst fileDirectory = directories[fileIndex]
             IrArrayFileReader(access.realFiles {
                 it.irStrings(fileDirectory)
             })
@@ -234,10 +234,10 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
         return dataReader.tableItemBytes(index)
     }
 
-    private val fileToBodyMap = mutableMapOf<Int, IrArrayFileReader>()
+    private konst fileToBodyMap = mutableMapOf<Int, IrArrayFileReader>()
     override fun body(index: Int, fileIndex: Int): ByteArray {
-        val dataReader = fileToBodyMap.getOrPut(fileIndex) {
-            val fileDirectory = directories[fileIndex]
+        konst dataReader = fileToBodyMap.getOrPut(fileIndex) {
+            konst fileDirectory = directories[fileIndex]
             IrArrayFileReader(access.realFiles {
                 it.irBodies(fileDirectory)
             })
@@ -246,10 +246,10 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     }
 
 
-    private val fileToDebugInfoMap = mutableMapOf<Int, IrArrayFileReader?>()
+    private konst fileToDebugInfoMap = mutableMapOf<Int, IrArrayFileReader?>()
     override fun debugInfo(index: Int, fileIndex: Int): ByteArray? {
-        val dataReader = fileToDebugInfoMap.getOrPut(fileIndex) {
-            val fileDirectory = directories[fileIndex]
+        konst dataReader = fileToDebugInfoMap.getOrPut(fileIndex) {
+            konst fileDirectory = directories[fileIndex]
             access.realFiles {
                 it.irDebugInfo(fileDirectory).let { diFile ->
                     if (diFile.exists) {
@@ -294,9 +294,9 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
 }
 
 class KotlinLibraryImpl(
-    val base: BaseKotlinLibraryImpl,
-    val metadata: MetadataLibraryImpl,
-    val ir: IrLibraryImpl
+    konst base: BaseKotlinLibraryImpl,
+    konst metadata: MetadataLibraryImpl,
+    konst ir: IrLibraryImpl
 ) : KotlinLibrary,
     BaseKotlinLibrary by base,
     MetadataLibrary by metadata,
@@ -326,13 +326,13 @@ fun createKotlinLibrary(
     perFile: Boolean = false,
     zipAccessor: ZipFileSystemAccessor? = null,
 ): KotlinLibrary {
-    val baseAccess = BaseLibraryAccess<KotlinLibraryLayout>(libraryFile, component, zipAccessor)
-    val metadataAccess = MetadataLibraryAccess<MetadataKotlinLibraryLayout>(libraryFile, component, zipAccessor)
-    val irAccess = IrLibraryAccess<IrKotlinLibraryLayout>(libraryFile, component, zipAccessor)
+    konst baseAccess = BaseLibraryAccess<KotlinLibraryLayout>(libraryFile, component, zipAccessor)
+    konst metadataAccess = MetadataLibraryAccess<MetadataKotlinLibraryLayout>(libraryFile, component, zipAccessor)
+    konst irAccess = IrLibraryAccess<IrKotlinLibraryLayout>(libraryFile, component, zipAccessor)
 
-    val base = BaseKotlinLibraryImpl(baseAccess, isDefault)
-    val metadata = MetadataLibraryImpl(metadataAccess)
-    val ir = if (perFile) IrPerFileLibraryImpl(irAccess) else IrMonoliticLibraryImpl(irAccess)
+    konst base = BaseKotlinLibraryImpl(baseAccess, isDefault)
+    konst metadata = MetadataLibraryImpl(metadataAccess)
+    konst ir = if (perFile) IrPerFileLibraryImpl(irAccess) else IrMonoliticLibraryImpl(irAccess)
 
     return KotlinLibraryImpl(base, metadata, ir)
 }
@@ -342,8 +342,8 @@ fun createKotlinLibraryComponents(
     isDefault: Boolean = true,
     zipAccessor: ZipFileSystemAccessor? = null,
 ): List<KotlinLibrary> {
-    val baseAccess = BaseLibraryAccess<KotlinLibraryLayout>(libraryFile, null, zipAccessor)
-    val base = BaseKotlinLibraryImpl(baseAccess, isDefault)
+    konst baseAccess = BaseLibraryAccess<KotlinLibraryLayout>(libraryFile, null, zipAccessor)
+    konst base = BaseKotlinLibraryImpl(baseAccess, isDefault)
     return base.componentList.map {
         createKotlinLibrary(libraryFile, it, isDefault, zipAccessor = zipAccessor)
     }
@@ -359,9 +359,9 @@ fun isKotlinLibrary(libraryFile: File): Boolean = try {
 fun isKotlinLibrary(libraryFile: java.io.File): Boolean =
     isKotlinLibrary(File(libraryFile.absolutePath))
 
-val File.isPre_1_4_Library: Boolean
+konst File.isPre_1_4_Library: Boolean
     get() {
-        val baseAccess = BaseLibraryAccess<KotlinLibraryLayout>(this, null)
-        val base = BaseKotlinLibraryImpl(baseAccess, false)
+        konst baseAccess = BaseLibraryAccess<KotlinLibraryLayout>(this, null)
+        konst base = BaseKotlinLibraryImpl(baseAccess, false)
         return base.has_pre_1_4_manifest
     }

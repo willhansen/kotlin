@@ -12,11 +12,11 @@ annotation class A1 {
 annotation class B1 {
     class Container
 }
-annotation class D1(val value: Array<B1>)
+annotation class D1(konst konstue: Array<B1>)
 
 <!REDUNDANT_REPEATABLE_ANNOTATION!>@Repeatable<!>
 @java.lang.annotation.Repeatable(D2::class)
 annotation class B2 {
     class Container
 }
-annotation class D2(val value: Array<B2>)
+annotation class D2(konst konstue: Array<B2>)

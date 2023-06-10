@@ -1,8 +1,8 @@
 // FIR_IDENTICAL
 interface Test {
     fun foo()
-    val bar: Int
+    konst bar: Int
 }
 
 fun Test?.foo() {}
-val Test?.bar: Int get() = 42
+konst Test?.bar: Int get() = 42

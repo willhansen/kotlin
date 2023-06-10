@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 interface IrInterpreterChecker : IrElementVisitor<Boolean, IrInterpreterCheckerData>
 
 class IrInterpreterCheckerData(
-    val mode: EvaluationMode,
-    val irBuiltIns: IrBuiltIns,
-    val interpreterConfiguration: IrInterpreterConfiguration,
+    konst mode: EkonstuationMode,
+    konst irBuiltIns: IrBuiltIns,
+    konst interpreterConfiguration: IrInterpreterConfiguration,
 )

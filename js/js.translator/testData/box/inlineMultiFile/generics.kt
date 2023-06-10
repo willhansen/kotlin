@@ -19,7 +19,7 @@ fun test1(s: Int): String {
 }
 
 fun box(): String {
-    val result = test1(11)
+    konst result = test1(11)
     if (result != "OK1111") return "fail1: ${result}"
 
     return "OK"

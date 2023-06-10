@@ -8,7 +8,7 @@ declare namespace JS_TESTS {
     }
     namespace foo {
         interface TestInterface {
-            readonly value: string;
+            readonly konstue: string;
             getOwnerName(): string;
             readonly __doNotUseOrImplementIt: {
                 readonly "foo.TestInterface": unique symbol;
@@ -20,8 +20,8 @@ declare namespace JS_TESTS {
             };
         }
         class TestInterfaceImpl implements foo.TestInterface {
-            constructor(value: string);
-            get value(): string;
+            constructor(konstue: string);
+            get konstue(): string;
             getOwnerName(): string;
             readonly __doNotUseOrImplementIt: foo.TestInterface["__doNotUseOrImplementIt"];
         }

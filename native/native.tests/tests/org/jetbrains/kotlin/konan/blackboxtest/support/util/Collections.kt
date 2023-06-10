@@ -12,13 +12,13 @@ internal fun <T> Collection<T>.toIdentitySet(): Set<T> =
     Collections.newSetFromMap(IdentityHashMap<T, Boolean>()).apply { addAll(this@toIdentitySet) }
 
 internal class FailOnDuplicatesSet<E : Any> : Set<E> {
-    private val uniqueElements: MutableSet<E> = hashSetOf()
+    private konst uniqueElements: MutableSet<E> = hashSetOf()
 
     operator fun plusAssign(element: E) {
         assertTrue(uniqueElements.add(element)) { "An attempt to add already existing element: $element" }
     }
 
-    override val size get() = uniqueElements.size
+    override konst size get() = uniqueElements.size
     override fun isEmpty() = uniqueElements.isEmpty()
     override fun contains(element: E) = element in uniqueElements
     override fun containsAll(elements: Collection<E>) = uniqueElements.containsAll(elements)
@@ -30,7 +30,7 @@ internal class FailOnDuplicatesSet<E : Any> : Set<E> {
 internal inline fun <T, R> Iterable<T>.mapToSet(transform: (T) -> R): Set<R> {
     if (this is Collection && isEmpty()) return emptySet()
 
-    val result = hashSetOf<R>()
+    konst result = hashSetOf<R>()
     mapTo(result, transform)
     return result
 }
@@ -38,7 +38,7 @@ internal inline fun <T, R> Iterable<T>.mapToSet(transform: (T) -> R): Set<R> {
 internal inline fun <T, R : Any> Iterable<T>.mapNotNullToSet(transform: (T) -> R?): Set<R> {
     if (this is Collection && isEmpty()) return emptySet()
 
-    val result = hashSetOf<R>()
+    konst result = hashSetOf<R>()
     mapNotNullTo(result, transform)
     return result
 }
@@ -46,7 +46,7 @@ internal inline fun <T, R : Any> Iterable<T>.mapNotNullToSet(transform: (T) -> R
 internal inline fun <T, R : Any> Array<out T>.mapNotNullToSet(transform: (T) -> R?): Set<R> {
     if (isEmpty()) return emptySet()
 
-    val result = hashSetOf<R>()
+    konst result = hashSetOf<R>()
     mapNotNullTo(result, transform)
     return result
 }
@@ -54,7 +54,7 @@ internal inline fun <T, R : Any> Array<out T>.mapNotNullToSet(transform: (T) -> 
 internal inline fun <T, R> Iterable<T>.flatMapToSet(transform: (T) -> Iterable<R>): Set<R> {
     if (this is Collection && isEmpty()) return emptySet()
 
-    val result = hashSetOf<R>()
+    konst result = hashSetOf<R>()
     flatMapTo(result, transform)
     return result
 }

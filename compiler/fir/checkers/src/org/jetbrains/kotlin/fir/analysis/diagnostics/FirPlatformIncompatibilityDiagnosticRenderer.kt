@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility.Incompatible
 
 class FirPlatformIncompatibilityDiagnosticRenderer(
-    private val mode: MultiplatformDiagnosticRenderingMode
+    private konst mode: MultiplatformDiagnosticRenderingMode
 ) : ContextIndependentParameterRenderer<Map<ExpectActualCompatibility<FirBasedSymbol<*>>, Collection<FirBasedSymbol<*>>>> {
     override fun render(
         obj: Map<ExpectActualCompatibility<FirBasedSymbol<*>>, Collection<FirBasedSymbol<*>>>,
@@ -37,12 +37,12 @@ class FirPlatformIncompatibilityDiagnosticRenderer(
 
     companion object {
         @JvmField
-        val TEXT = FirPlatformIncompatibilityDiagnosticRenderer(MultiplatformDiagnosticRenderingMode())
+        konst TEXT = FirPlatformIncompatibilityDiagnosticRenderer(MultiplatformDiagnosticRenderingMode())
     }
 }
 
 class FirIncompatibleExpectedActualClassScopesRenderer(
-    private val mode: MultiplatformDiagnosticRenderingMode
+    private konst mode: MultiplatformDiagnosticRenderingMode
 ) : ContextIndependentParameterRenderer<List<Pair<FirBasedSymbol<*>, Map<Incompatible<FirBasedSymbol<*>>, Collection<FirBasedSymbol<*>>>>>> {
     override fun render(
         obj: List<Pair<FirBasedSymbol<*>, Map<Incompatible<FirBasedSymbol<*>>, Collection<FirBasedSymbol<*>>>>>
@@ -57,7 +57,7 @@ class FirIncompatibleExpectedActualClassScopesRenderer(
 
     companion object {
         @JvmField
-        val TEXT = FirIncompatibleExpectedActualClassScopesRenderer(MultiplatformDiagnosticRenderingMode())
+        konst TEXT = FirIncompatibleExpectedActualClassScopesRenderer(MultiplatformDiagnosticRenderingMode())
     }
 }
 
@@ -113,7 +113,7 @@ private fun StringBuilder.renderIncompatibleClassScopes(
 ) {
     mode.renderList(this, unfulfilled.indices.map { index ->
         {
-            val (descriptor, mapping) = unfulfilled[index]
+            konst (descriptor, mapping) = unfulfilled[index]
             mode.renderSymbol(this, descriptor, indent)
             if (mapping.isNotEmpty()) {
                 mode.newLine(this)
@@ -126,4 +126,4 @@ private fun StringBuilder.renderIncompatibleClassScopes(
     })
 }
 
-private const val INDENTATION_UNIT = "    "
+private const konst INDENTATION_UNIT = "    "

@@ -97,9 +97,9 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
         for (int i = 0; i < unsubstitutedValueParameters.size(); ++i) {
             // TODO fill me
             int firstValueParameterOffset = 0; // receiverParameter.exists() ? 1 : 0;
-            ValueParameterDescriptor valueParameterDescriptor = unsubstitutedValueParameters.get(i);
-            if (valueParameterDescriptor.getIndex() != i + firstValueParameterOffset) {
-                throw new IllegalStateException(valueParameterDescriptor + "index is " + valueParameterDescriptor.getIndex() + " but position is " + i);
+            ValueParameterDescriptor konstueParameterDescriptor = unsubstitutedValueParameters.get(i);
+            if (konstueParameterDescriptor.getIndex() != i + firstValueParameterOffset) {
+                throw new IllegalStateException(konstueParameterDescriptor + "index is " + konstueParameterDescriptor.getIndex() + " but position is " + i);
             }
         }
 
@@ -307,7 +307,7 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
     }
 
     @Override
-    public void validate() {
+    public void konstidate() {
         getTypeParameters();
     }
 
@@ -551,8 +551,8 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
             return this;
         }
 
-        public CopyConfiguration setHasSynthesizedParameterNames(boolean value) {
-            this.newHasSynthesizedParameterNames = value;
+        public CopyConfiguration setHasSynthesizedParameterNames(boolean konstue) {
+            this.newHasSynthesizedParameterNames = konstue;
             return this;
         }
 
@@ -565,8 +565,8 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
 
         @NotNull
         @Override
-        public <V> CopyBuilder<FunctionDescriptor> putUserData(@NotNull UserDataKey<V> userDataKey, V value) {
-            userDataMap.put(userDataKey, value);
+        public <V> CopyBuilder<FunctionDescriptor> putUserData(@NotNull UserDataKey<V> userDataKey, V konstue) {
+            userDataMap.put(userDataKey, konstue);
             return this;
         }
 
@@ -587,8 +587,8 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
         }
 
         @NotNull
-        public CopyConfiguration setJustForTypeSubstitution(boolean value) {
-            justForTypeSubstitution = value;
+        public CopyConfiguration setJustForTypeSubstitution(boolean konstue) {
+            justForTypeSubstitution = konstue;
             return this;
         }
     }
@@ -675,7 +675,7 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
             // E.g.
             // class Base { fun foo() }
             // class Derived : Base
-            // val x: Base
+            // konst x: Base
             // if (x is Derived) {
             //    // `x` shouldn't be marked as smart-cast
             //    // but it would if fake-overridden `foo` had `Derived` as it's dispatch receiver parameter type
@@ -746,7 +746,7 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
             if (newMap.size() == 1) {
                 substitutedDescriptor.userDataMap =
                         Collections.<UserDataKey<?>, Object>singletonMap(
-                                newMap.keySet().iterator().next(), newMap.values().iterator().next());
+                                newMap.keySet().iterator().next(), newMap.konstues().iterator().next());
             }
             else {
                 substitutedDescriptor.userDataMap = newMap;
@@ -902,10 +902,10 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
     }
 
     // Don't use on published descriptors
-    public <V> void putInUserDataMap(UserDataKey<V> key, Object value) {
+    public <V> void putInUserDataMap(UserDataKey<V> key, Object konstue) {
         if (userDataMap == null) {
             userDataMap = new LinkedHashMap<UserDataKey<?>, Object>();
         }
-        userDataMap.put(key, value);
+        userDataMap.put(key, konstue);
     }
 }

@@ -50,7 +50,7 @@ object DescriptorVisibilityUtils {
         return isVisibleWithAnyReceiver(what, from, languageVersionSettings.useSpecialRulesForPrivateSealedConstructors)
     }
 
-    val LanguageVersionSettings.useSpecialRulesForPrivateSealedConstructors: Boolean
+    konst LanguageVersionSettings.useSpecialRulesForPrivateSealedConstructors: Boolean
         get() = !supportsFeature(LanguageFeature.AllowSealedInheritorsInDifferentFilesOfSamePackage) ||
                 !supportsFeature(LanguageFeature.UseConsistentRulesForPrivateConstructorsOfSealedClasses)
 }

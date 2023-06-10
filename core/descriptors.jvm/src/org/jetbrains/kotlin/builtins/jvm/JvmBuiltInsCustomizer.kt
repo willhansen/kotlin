@@ -48,41 +48,41 @@ import java.util.*
 // This class is worth splitting into two implementations of AdditionalClassPartsProvider and PlatformDependentDeclarationFilter
 // But currently, they shares a piece of code and probably it's better to postpone it
 class JvmBuiltInsCustomizer(
-    private val moduleDescriptor: ModuleDescriptor,
+    private konst moduleDescriptor: ModuleDescriptor,
     storageManager: StorageManager,
     settingsComputation: () -> JvmBuiltIns.Settings,
 ) : AdditionalClassPartsProvider, PlatformDependentDeclarationFilter {
-    private val j2kClassMapper = JavaToKotlinClassMapper
+    private konst j2kClassMapper = JavaToKotlinClassMapper
 
-    private val settings by storageManager.createLazyValue(settingsComputation)
+    private konst settings by storageManager.createLazyValue(settingsComputation)
 
-    private val mockSerializableType = storageManager.createMockJavaIoSerializableType()
-    private val cloneableType by storageManager.createLazyValue {
+    private konst mockSerializableType = storageManager.createMockJavaIoSerializableType()
+    private konst cloneableType by storageManager.createLazyValue {
         settings.ownerModuleDescriptor.findNonGenericClassAcrossDependencies(
             JvmBuiltInClassDescriptorFactory.CLONEABLE_CLASS_ID,
             NotFoundClasses(storageManager, settings.ownerModuleDescriptor)
         ).defaultType
     }
 
-    private val javaAnalogueClassesWithCustomSupertypeCache = storageManager.createCacheWithNotNullValues<FqName, ClassDescriptor>()
+    private konst javaAnalogueClassesWithCustomSupertypeCache = storageManager.createCacheWithNotNullValues<FqName, ClassDescriptor>()
 
     // Most this properties are lazy because they depends on KotlinBuiltIns initialization that depends on JvmBuiltInsSettings object
-    private val notConsideredDeprecation by storageManager.createLazyValue {
-        val annotation = moduleDescriptor.builtIns.createDeprecatedAnnotation(
+    private konst notConsideredDeprecation by storageManager.createLazyValue {
+        konst annotation = moduleDescriptor.builtIns.createDeprecatedAnnotation(
             "This member is not fully supported by Kotlin compiler, so it may be absent or have different signature in next major version"
         )
         Annotations.create(listOf(annotation))
     }
 
     private fun StorageManager.createMockJavaIoSerializableType(): KotlinType {
-        val mockJavaIoPackageFragment = object : PackageFragmentDescriptorImpl(moduleDescriptor, FqName("java.io")) {
+        konst mockJavaIoPackageFragment = object : PackageFragmentDescriptorImpl(moduleDescriptor, FqName("java.io")) {
             override fun getMemberScope() = MemberScope.Empty
         }
 
         //NOTE: can't reference anyType right away, because this is sometimes called when JvmBuiltIns are initializing
-        val superTypes = listOf(LazyWrappedType(this) { moduleDescriptor.builtIns.anyType })
+        konst superTypes = listOf(LazyWrappedType(this) { moduleDescriptor.builtIns.anyType })
 
-        val mockSerializableClass = ClassDescriptorImpl(
+        konst mockSerializableClass = ClassDescriptorImpl(
             mockJavaIoPackageFragment, Name.identifier("Serializable"), Modality.ABSTRACT, ClassKind.INTERFACE, superTypes,
             SourceElement.NO_SOURCE, false, this
         )
@@ -92,7 +92,7 @@ class JvmBuiltInsCustomizer(
     }
 
     override fun getSupertypes(classDescriptor: ClassDescriptor): Collection<KotlinType> {
-        val fqName = classDescriptor.fqNameUnsafe
+        konst fqName = classDescriptor.fqNameUnsafe
         return when {
             isArrayOrPrimitiveArray(fqName) -> listOf(cloneableType, mockSerializableType)
             isSerializableInJava(fqName) -> listOf(mockSerializableType)
@@ -122,7 +122,7 @@ class JvmBuiltInsCustomizer(
         return getAdditionalFunctions(classDescriptor) {
             it.getContributedFunctions(name, NoLookupLocation.FROM_BUILTINS)
         }.mapNotNull { additionalMember ->
-            val substitutedWithKotlinTypeParameters =
+            konst substitutedWithKotlinTypeParameters =
                 additionalMember.substitute(
                     createMappedTypeParametersSubstitution(
                         additionalMember.containingDeclaration as ClassDescriptor, classDescriptor
@@ -134,7 +134,7 @@ class JvmBuiltInsCustomizer(
                 setDispatchReceiverParameter(classDescriptor.thisAsReceiverParameter)
                 setPreserveSourceElement()
 
-                val memberStatus = additionalMember.getJdkMethodStatus()
+                konst memberStatus = additionalMember.getJdkMethodStatus()
                 when (memberStatus) {
                     JDKMemberStatus.HIDDEN -> {
                         // hidden methods in final class can't be overridden or called with 'super'
@@ -166,22 +166,22 @@ class JvmBuiltInsCustomizer(
         classDescriptor: ClassDescriptor,
         functionsByScope: (MemberScope) -> Collection<SimpleFunctionDescriptor>
     ): Collection<SimpleFunctionDescriptor> {
-        val javaAnalogueDescriptor = classDescriptor.getJavaAnalogue() ?: return emptyList()
+        konst javaAnalogueDescriptor = classDescriptor.getJavaAnalogue() ?: return emptyList()
 
-        val kotlinClassDescriptors = j2kClassMapper.mapPlatformClass(javaAnalogueDescriptor.fqNameSafe, FallbackBuiltIns.Instance)
-        val kotlinMutableClassIfContainer = kotlinClassDescriptors.lastOrNull() ?: return emptyList()
-        val kotlinVersions = SmartSet.create(kotlinClassDescriptors.map { it.fqNameSafe })
+        konst kotlinClassDescriptors = j2kClassMapper.mapPlatformClass(javaAnalogueDescriptor.fqNameSafe, FallbackBuiltIns.Instance)
+        konst kotlinMutableClassIfContainer = kotlinClassDescriptors.lastOrNull() ?: return emptyList()
+        konst kotlinVersions = SmartSet.create(kotlinClassDescriptors.map { it.fqNameSafe })
 
-        val isMutable = j2kClassMapper.isMutable(classDescriptor)
+        konst isMutable = j2kClassMapper.isMutable(classDescriptor)
 
-        val fakeJavaClassDescriptor = javaAnalogueClassesWithCustomSupertypeCache.computeIfAbsent(javaAnalogueDescriptor.fqNameSafe) {
+        konst fakeJavaClassDescriptor = javaAnalogueClassesWithCustomSupertypeCache.computeIfAbsent(javaAnalogueDescriptor.fqNameSafe) {
             javaAnalogueDescriptor.copy(
                 javaResolverCache = JavaResolverCache.EMPTY,
                 additionalSupertypeClassDescriptor = kotlinMutableClassIfContainer
             )
         }
 
-        val scope = fakeJavaClassDescriptor.unsubstitutedMemberScope
+        konst scope = fakeJavaClassDescriptor.unsubstitutedMemberScope
 
         return functionsByScope(scope)
             .filter { analogueMember ->
@@ -208,8 +208,8 @@ class JvmBuiltInsCustomizer(
     }.build()!!
 
     private fun SimpleFunctionDescriptor.isMutabilityViolation(isMutable: Boolean): Boolean {
-        val owner = containingDeclaration as ClassDescriptor
-        val jvmDescriptor = computeJvmDescriptor()
+        konst owner = containingDeclaration as ClassDescriptor
+        konst jvmDescriptor = computeJvmDescriptor()
 
         if ((SignatureBuildingComponents.signature(owner, jvmDescriptor) in MUTABLE_METHOD_SIGNATURES) xor isMutable) return true
 
@@ -223,8 +223,8 @@ class JvmBuiltInsCustomizer(
     }
 
     private fun FunctionDescriptor.getJdkMethodStatus(): JDKMemberStatus {
-        val owner = containingDeclaration as ClassDescriptor
-        val jvmDescriptor = computeJvmDescriptor()
+        konst owner = containingDeclaration as ClassDescriptor
+        konst jvmDescriptor = computeJvmDescriptor()
         var result: JDKMemberStatus? = null
         return DFS.dfs<ClassDescriptor, JDKMemberStatus>(
             listOf(owner),
@@ -238,7 +238,7 @@ class JvmBuiltInsCustomizer(
             },
             object : DFS.AbstractNodeHandler<ClassDescriptor, JDKMemberStatus>() {
                 override fun beforeChildren(javaClassDescriptor: ClassDescriptor): Boolean {
-                    val signature = SignatureBuildingComponents.signature(javaClassDescriptor, jvmDescriptor)
+                    konst signature = SignatureBuildingComponents.signature(javaClassDescriptor, jvmDescriptor)
                     when (signature) {
                         in HIDDEN_METHOD_SIGNATURES -> result = JDKMemberStatus.HIDDEN
                         in VISIBLE_METHOD_SIGNATURES -> result = JDKMemberStatus.VISIBLE
@@ -264,9 +264,9 @@ class JvmBuiltInsCustomizer(
         // Optimization: only classes under kotlin.* can have Java analogues
         if (!KotlinBuiltIns.isUnderKotlinPackage(this)) return null
 
-        val fqName = fqNameUnsafe
+        konst fqName = fqNameUnsafe
         if (!fqName.isSafe) return null
-        val javaAnalogueFqName = JavaToKotlinClassMap.mapKotlinToJava(fqName)?.asSingleFqName() ?: return null
+        konst javaAnalogueFqName = JavaToKotlinClassMap.mapKotlinToJava(fqName)?.asSingleFqName() ?: return null
 
         return settings.ownerModuleDescriptor.resolveClassByFqName(javaAnalogueFqName, NoLookupLocation.FROM_BUILTINS) as? LazyJavaClassDescriptor
     }
@@ -274,12 +274,12 @@ class JvmBuiltInsCustomizer(
     override fun getConstructors(classDescriptor: ClassDescriptor): Collection<ClassConstructorDescriptor> {
         if (classDescriptor.kind != ClassKind.CLASS || !settings.isAdditionalBuiltInsFeatureSupported) return emptyList()
 
-        val javaAnalogueDescriptor = classDescriptor.getJavaAnalogue() ?: return emptyList()
+        konst javaAnalogueDescriptor = classDescriptor.getJavaAnalogue() ?: return emptyList()
 
-        val defaultKotlinVersion =
+        konst defaultKotlinVersion =
             j2kClassMapper.mapJavaToKotlin(javaAnalogueDescriptor.fqNameSafe, FallbackBuiltIns.Instance) ?: return emptyList()
 
-        val substitutor = createMappedTypeParametersSubstitution(defaultKotlinVersion, javaAnalogueDescriptor).buildSubstitutor()
+        konst substitutor = createMappedTypeParametersSubstitution(defaultKotlinVersion, javaAnalogueDescriptor).buildSubstitutor()
 
         fun ConstructorDescriptor.isEffectivelyTheSameAs(javaConstructor: ConstructorDescriptor) =
             OverridingUtil.getBothWaysOverridability(this, javaConstructor.substitute(substitutor)) ==
@@ -312,12 +312,12 @@ class JvmBuiltInsCustomizer(
     }
 
     override fun isFunctionAvailable(classDescriptor: ClassDescriptor, functionDescriptor: SimpleFunctionDescriptor): Boolean {
-        val javaAnalogueClassDescriptor = classDescriptor.getJavaAnalogue() ?: return true
+        konst javaAnalogueClassDescriptor = classDescriptor.getJavaAnalogue() ?: return true
 
         if (!functionDescriptor.annotations.hasAnnotation(PLATFORM_DEPENDENT_ANNOTATION_FQ_NAME)) return true
         if (!settings.isAdditionalBuiltInsFeatureSupported) return false
 
-        val jvmDescriptor = functionDescriptor.computeJvmDescriptor()
+        konst jvmDescriptor = functionDescriptor.computeJvmDescriptor()
         return javaAnalogueClassDescriptor
             .unsubstitutedMemberScope
             .getContributedFunctions(functionDescriptor.name, NoLookupLocation.FROM_BUILTINS)
@@ -325,8 +325,8 @@ class JvmBuiltInsCustomizer(
     }
 
     private fun ConstructorDescriptor.isTrivialCopyConstructorFor(classDescriptor: ClassDescriptor): Boolean =
-        valueParameters.size == 1 &&
-                valueParameters.single().type.constructor.declarationDescriptor?.fqNameUnsafe == classDescriptor.fqNameUnsafe
+        konstueParameters.size == 1 &&
+                konstueParameters.single().type.constructor.declarationDescriptor?.fqNameUnsafe == classDescriptor.fqNameUnsafe
 }
 
 private class FallbackBuiltIns private constructor() : KotlinBuiltIns(LockBasedStorageManager("FallbackBuiltIns")) {
@@ -336,7 +336,7 @@ private class FallbackBuiltIns private constructor() : KotlinBuiltIns(LockBasedS
 
     companion object {
         @JvmStatic
-        val Instance: KotlinBuiltIns =
+        konst Instance: KotlinBuiltIns =
             FallbackBuiltIns()
     }
 

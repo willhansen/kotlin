@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.gradle.plugin.HasCompilerOptions
 import org.jetbrains.kotlin.gradle.plugin.mpp.external.DecoratedExternalKotlinCompilation
 
 class PrototypeAndroidCompilation(delegate: Delegate) : DecoratedExternalKotlinCompilation(delegate) {
-    override val kotlinOptions: KotlinCommonOptions
+    override konst kotlinOptions: KotlinCommonOptions
         get() = super.kotlinOptions as KotlinJvmOptions
 
     @Suppress("UNCHECKED_CAST")
-    override val compilerOptions: HasCompilerOptions<KotlinJvmCompilerOptions>
+    override konst compilerOptions: HasCompilerOptions<KotlinJvmCompilerOptions>
         get() = super.compilerOptions as HasCompilerOptions<KotlinJvmCompilerOptions>
 
     var androidCompilationSpecificStuff = 10

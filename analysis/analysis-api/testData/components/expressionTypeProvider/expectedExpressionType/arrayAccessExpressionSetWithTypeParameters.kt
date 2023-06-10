@@ -1,5 +1,5 @@
 class A {
-    operator fun <T> set(key: T, value: T) {}
+    operator fun <T> set(key: T, konstue: T) {}
 }
 
 fun test(a: A) {

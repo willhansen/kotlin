@@ -15,12 +15,12 @@ import org.jetbrains.kotlin.utils.DescriptionAware
     level = DeprecationLevel.ERROR
 )
 abstract class IdePlatform<Kind : IdePlatformKind, out Arguments : CommonCompilerArguments> : DescriptionAware {
-    abstract val kind: Kind
-    abstract val version: TargetPlatformVersion
+    abstract konst kind: Kind
+    abstract konst version: TargetPlatformVersion
 
     abstract fun createArguments(init: Arguments.() -> Unit = {}): Arguments
 
-    override val description
+    override konst description
         get() = kind.name + " " + version.description
 
     override fun toString() = description

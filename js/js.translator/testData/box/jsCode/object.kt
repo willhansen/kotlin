@@ -14,7 +14,7 @@ fun getSummizer(): Summizer = js("""
 """);
 
 fun box(): String {
-    val summizer = getSummizer()
+    konst summizer = getSummizer()
     assertEquals(3, summizer.sum(1, 2))
 
     return "OK"

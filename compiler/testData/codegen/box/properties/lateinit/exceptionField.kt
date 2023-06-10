@@ -4,7 +4,7 @@ class A {
 
     public fun getMyStr(): String {
         try {
-            val a = str
+            konst a = str
         } catch (e: RuntimeException) {
             return "OK"
         }
@@ -14,6 +14,6 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     return a.getMyStr()
 }

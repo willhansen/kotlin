@@ -24,21 +24,21 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.resolveFakeOverride
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
-internal val resolveInlineCallsPhase = makeIrModulePhase(
+internal konst resolveInlineCallsPhase = makeIrModulePhase(
     ::ResolveInlineCalls,
     name = "ResolveInlineCalls",
     description = "Statically resolve calls to inline methods to particular implementations"
 )
 
-class ResolveInlineCalls(val context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
+class ResolveInlineCalls(konst context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
     override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
 
     override fun visitCall(expression: IrCall): IrExpression {
         if (!expression.symbol.owner.isInlineFunctionCall(context))
             return super.visitCall(expression)
-        val maybeFakeOverrideOfMultiFileBridge = expression.symbol.owner as? IrSimpleFunction
+        konst maybeFakeOverrideOfMultiFileBridge = expression.symbol.owner as? IrSimpleFunction
             ?: return super.visitCall(expression)
-        val resolved =
+        konst resolved =
             maybeFakeOverrideOfMultiFileBridge.resolveMultiFileFacadeMember() ?: maybeFakeOverrideOfMultiFileBridge.resolveFakeOverride()
             ?: return super.visitCall(expression)
         return super.visitCall(with(expression) {
@@ -48,13 +48,13 @@ class ResolveInlineCalls(val context: JvmBackendContext) : IrElementTransformerV
                 type,
                 resolved.symbol,
                 expression.typeArgumentsCount,
-                expression.valueArgumentsCount,
+                expression.konstueArgumentsCount,
                 expression.origin,
                 superQualifierSymbol
             ).apply {
                 copyTypeAndValueArgumentsFrom(expression)
                 dispatchReceiver?.let { receiver ->
-                    val receiverType = resolved.parentAsClass.defaultType
+                    konst receiverType = resolved.parentAsClass.defaultType
                     dispatchReceiver = IrTypeOperatorCallImpl(
                         receiver.startOffset,
                         receiver.endOffset,

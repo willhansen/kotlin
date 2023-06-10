@@ -24,16 +24,16 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirSmartCastExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var typeRef: FirTypeRef,
     override var originalExpression: FirExpression,
-    override val typesFromSmartCast: Collection<ConeKotlinType>,
+    override konst typesFromSmartCast: Collection<ConeKotlinType>,
     override var smartcastType: FirTypeRef,
     override var smartcastTypeWithoutNullableNothing: FirTypeRef?,
-    override val smartcastStability: SmartcastStability,
+    override konst smartcastStability: SmartcastStability,
 ) : FirSmartCastExpression() {
-    override val isStable: Boolean get() = smartcastStability == SmartcastStability.STABLE_VALUE
+    override konst isStable: Boolean get() = smartcastStability == SmartcastStability.STABLE_VALUE
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotations.forEach { it.accept(visitor, data) }

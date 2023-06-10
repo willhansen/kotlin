@@ -11,7 +11,7 @@ public non-sealed class K extends Base {}
 // FILE: main.kt
 
 fun box(): String {
-    val clazz = Base::class.java
+    konst clazz = Base::class.java
     if (!clazz.isSealed) return "Error: Base is not sealed"
     return clazz.permittedSubclasses.joinToString("") { it.simpleName ?: "_No name provided_" }
 }

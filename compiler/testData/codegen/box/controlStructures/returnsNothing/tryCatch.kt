@@ -2,7 +2,7 @@
 fun exit(): Nothing = null!!
 
 fun box(): String {
-    val a: String
+    konst a: String
     try {
         a = "OK"
     }

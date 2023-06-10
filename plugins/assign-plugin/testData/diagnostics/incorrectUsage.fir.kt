@@ -11,15 +11,15 @@ data class StringProperty(var v: String) {
     fun get(): String = v
 }
 
-data class Task(val input: StringProperty)
+data class Task(konst input: StringProperty)
 
 fun `should report error if type doesn't match`() {
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.<!NONE_APPLICABLE!>input<!> <!NO_APPLICABLE_ASSIGN_METHOD!>=<!> 42
 }
 
 fun `should report error if type doesn't match with apply`() {
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.apply {
         <!NONE_APPLICABLE!>input<!> <!NO_APPLICABLE_ASSIGN_METHOD!>=<!> 42
     }

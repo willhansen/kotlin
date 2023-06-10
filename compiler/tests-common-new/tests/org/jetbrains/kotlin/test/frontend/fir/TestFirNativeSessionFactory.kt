@@ -29,7 +29,7 @@ object TestFirNativeSessionFactory {
         languageVersionSettings: LanguageVersionSettings,
         registerExtraComponents: (FirSession) -> Unit = {},
     ): FirSession {
-        val resolvedLibraries = resolveLibraries(configuration, getAllNativeDependenciesPaths(module, testServices))
+        konst resolvedLibraries = resolveLibraries(configuration, getAllNativeDependenciesPaths(module, testServices))
 
         return FirNativeSessionFactory.createLibrarySession(
             mainModuleName,

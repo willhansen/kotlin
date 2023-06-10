@@ -25,26 +25,26 @@ sourceSets {
     "test" { none() }
 }
 
-val generatorClasspath by configurations.creating
+konst generatorClasspath by configurations.creating
 
 dependencies {
     generatorClasspath(project("checkers-component-generator"))
 }
 
-val generationRoot = projectDir.resolve("gen")
+konst generationRoot = projectDir.resolve("gen")
 
 // Add modules for js and native checkers here
-val platformGenerationRoots = listOf(
+konst platformGenerationRoots = listOf(
     "checkers.jvm",
     "checkers.js",
     "checkers.native",
 ).map { projectDir.resolve(it).resolve("gen") }
 
-val generateCheckersComponents by tasks.registering(NoDebugJavaExec::class) {
+konst generateCheckersComponents by tasks.registering(NoDebugJavaExec::class) {
 
-    val generatorRoot = "$projectDir/checkers-component-generator/src/"
+    konst generatorRoot = "$projectDir/checkers-component-generator/src/"
 
-    val generatorConfigurationFiles = fileTree(generatorRoot) {
+    konst generatorConfigurationFiles = fileTree(generatorRoot) {
         include("**/*.kt")
     }
 
@@ -58,7 +58,7 @@ val generateCheckersComponents by tasks.registering(NoDebugJavaExec::class) {
     systemProperties["line.separator"] = "\n"
 }
 
-val compileKotlin by tasks
+konst compileKotlin by tasks
 
 compileKotlin.dependsOn(generateCheckersComponents)
 

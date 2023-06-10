@@ -17,8 +17,8 @@ suspend fun useSuspendFun(fn : suspend () -> String) = fn()
 suspend fun useSuspendFunInt(fn: suspend (Int) -> String) = fn(42)
 
 suspend fun <T> testIntersection(x: T): String where T : () -> String, T : (Int) -> String {
-    val a = useSuspendFun(x)
-    val b = useSuspendFunInt(x)
+    konst a = useSuspendFun(x)
+    konst b = useSuspendFunInt(x)
     return a + b
 }
 

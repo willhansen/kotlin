@@ -25,22 +25,22 @@ import java.io.InputStream
 import kotlin.test.assertEquals
 
 
-private val COMPILER_CLASS_FQN = "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
+private konst COMPILER_CLASS_FQN = "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
 
 public class CompilerSmokeTest {
 
-    public val _workingDir: TemporaryFolder = TemporaryFolder()
+    public konst _workingDir: TemporaryFolder = TemporaryFolder()
 
     @Rule
     public fun getWorkingDir(): TemporaryFolder = _workingDir
 
-    private val javaExecutable = File( File(System.getProperty("java.home"), "bin"), "java")
+    private konst javaExecutable = File( File(System.getProperty("java.home"), "bin"), "java")
 
-    private val compilerClasspath: List<File> by lazy {
+    private konst compilerClasspath: List<File> by lazy {
         filesFromProp("compilerClasspath", "kotlin-compiler-embeddable.jar")
     }
 
-    private val compilationClasspath: List<File> by lazy {
+    private konst compilationClasspath: List<File> by lazy {
         filesFromProp("compilationClasspath", "kotlin-stdlib.jar", "kotlin-script-runtime.jar")
     }
 
@@ -52,20 +52,20 @@ public class CompilerSmokeTest {
 
     @Test
     fun testSmoke() {
-        val (out, code) = runCompiler(File("testData/projects/smoke/Smoke.kt").absolutePath)
+        konst (out, code) = runCompiler(File("testData/projects/smoke/Smoke.kt").absolutePath)
         assertEquals(0, code, "compilation failed:\n" + out)
     }
 
 
     private fun createProcess(cmd: List<String>, projectDir: File): Process {
-        val builder = ProcessBuilder(cmd)
+        konst builder = ProcessBuilder(cmd)
         builder.directory(projectDir)
         builder.redirectErrorStream(true)
         return builder.start()
     }
 
     private fun runCompiler(vararg arguments: String): Pair<String, Int> {
-        val cmd = listOf(
+        konst cmd = listOf(
             javaExecutable.absolutePath,
             "-Djava.awt.headless=true",
             "-cp",
@@ -74,23 +74,23 @@ public class CompilerSmokeTest {
             "-cp",
             compilationClasspath.joinToString(File.pathSeparator)
         ) + arguments
-        val proc = createProcess(cmd, _workingDir.root)
+        konst proc = createProcess(cmd, _workingDir.root)
         return readOutput(proc)
     }
 
     private fun readOutput(process: Process): Pair<String, Int> {
         fun InputStream.readFully(): String {
-            val text = reader().readText()
+            konst text = reader().readText()
             close()
             return text
         }
 
-        val stdout = process.inputStream!!.readFully()
+        konst stdout = process.inputStream!!.readFully()
         System.out.println(stdout)
-        val stderr = process.errorStream!!.readFully()
+        konst stderr = process.errorStream!!.readFully()
         System.err.println(stderr)
 
-        val result = process.waitFor()
+        konst result = process.waitFor()
         return stdout to result
     }
 }

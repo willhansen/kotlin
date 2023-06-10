@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.test.services.TestServices
 
 class KtSourceModuleFactory : KtModuleFactory {
     override fun createModule(testModule: TestModule, testServices: TestServices, project: Project): KtModuleWithFiles {
-        val psiFiles = TestModuleStructureFactory.createSourcePsiFiles(testModule, testServices, project)
+        konst psiFiles = TestModuleStructureFactory.createSourcePsiFiles(testModule, testServices, project)
 
-        val module = KtSourceModuleImpl(
+        konst module = KtSourceModuleImpl(
             testModule.name,
             testModule.targetPlatform,
             testModule.languageVersionSettings,

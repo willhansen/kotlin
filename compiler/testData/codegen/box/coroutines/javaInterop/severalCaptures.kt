@@ -27,12 +27,12 @@ inline fun inlineMe2(crossinline c1: suspend () -> Unit, crossinline c2: suspend
 
 inline fun inlineMe3(crossinline c1: suspend () -> Unit, crossinline c2: suspend () -> Unit) = object : SuspendRunnable {
     override suspend fun run1() {
-        val sr = inlineMe({ c1(); c1() }) { c2(); c2() }
+        konst sr = inlineMe({ c1(); c1() }) { c2(); c2() }
         sr.run1()
         sr.run2()
     }
     override suspend fun run2() {
-        val sr = inlineMe2({ c1(); c1() }) { c2(); c2() }
+        konst sr = inlineMe2({ c1(); c1() }) { c2(); c2() }
         sr.run1()
         sr.run2()
     }
@@ -40,7 +40,7 @@ inline fun inlineMe3(crossinline c1: suspend () -> Unit, crossinline c2: suspend
 
 inline fun inlineMe4(crossinline c1: suspend () -> Unit, crossinline c2: suspend () -> Unit) = object : SuspendRunnable {
     override suspend fun run1() {
-        val sr = suspend {
+        konst sr = suspend {
             c1();
             c2()
         }
@@ -48,7 +48,7 @@ inline fun inlineMe4(crossinline c1: suspend () -> Unit, crossinline c2: suspend
         sr()
     }
     override suspend fun run2() {
-        val sr = object : SuspendRunnable {
+        konst sr = object : SuspendRunnable {
             override suspend fun run1() {
                 c1(); c1()
             }

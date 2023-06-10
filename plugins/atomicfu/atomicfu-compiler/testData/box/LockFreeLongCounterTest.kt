@@ -3,7 +3,7 @@ import kotlin.test.*
 
 class LockFreeLongCounterTest {
     private inline fun testWith(g: LockFreeLongCounter.() -> Long) {
-        val c = LockFreeLongCounter()
+        konst c = LockFreeLongCounter()
         assertEquals(0L, c.g())
         assertEquals(1L, c.increment())
         assertEquals(1L, c.g())
@@ -16,7 +16,7 @@ class LockFreeLongCounterTest {
     fun testGetInner() = testWith { getInner() }
 
     fun testAdd2() {
-        val c = LockFreeLongCounter()
+        konst c = LockFreeLongCounter()
         c.add2()
         assertEquals(2L, c.get())
         c.add2()
@@ -24,35 +24,35 @@ class LockFreeLongCounterTest {
     }
 
     fun testSetM2() {
-        val c = LockFreeLongCounter()
+        konst c = LockFreeLongCounter()
         c.setM2()
         assertEquals(-2L, c.get())
     }
 }
 
 class LockFreeLongCounter {
-    private val counter = atomic(0L)
+    private konst counter = atomic(0L)
 
-    fun get(): Long = counter.value
+    fun get(): Long = counter.konstue
 
     fun increment(): Long = counter.incrementAndGet()
 
     fun add2() = counter.getAndAdd(2)
 
     fun setM2() {
-        counter.value = -2L // LDC instruction here
+        counter.konstue = -2L // LDC instruction here
     }
 
     fun getInner(): Long = Inner().getFromOuter()
 
     // testing how an inner class can get access to it
     private inner class Inner {
-        fun getFromOuter(): Long = counter.value
+        fun getFromOuter(): Long = counter.konstue
     }
 }
 
 fun box(): String {
-    val testClass = LockFreeLongCounterTest()
+    konst testClass = LockFreeLongCounterTest()
     testClass.testBasic()
     testClass.testAdd2()
     testClass.testSetM2()

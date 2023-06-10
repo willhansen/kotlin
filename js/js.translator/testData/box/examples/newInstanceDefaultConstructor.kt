@@ -4,7 +4,7 @@ class SimpleClass() {
 }
 
 fun box(): String {
-    val c = SimpleClass()
+    konst c = SimpleClass()
     if (c.foo() == 610) {
         return "OK"
     }

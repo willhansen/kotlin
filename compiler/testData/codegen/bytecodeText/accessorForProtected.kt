@@ -6,7 +6,7 @@ open class A {
 
 class BSamePackage: A() {
     fun test(): String {
-        val a = {
+        konst a = {
             protectedFun()
         }
         return a()

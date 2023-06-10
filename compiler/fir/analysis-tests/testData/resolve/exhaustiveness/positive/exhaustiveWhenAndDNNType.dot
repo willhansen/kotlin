@@ -61,7 +61,7 @@ digraph exhaustiveWhenAndDNNType_kt {
             15 [label="Enter block"];
             16 [label="Access qualifier /SomeEnum"];
             17 [label="Access variable R|/SomeEnum.A1|"];
-            18 [label="Variable declaration: lval flag: R|SomeEnum|"];
+            18 [label="Variable declaration: lkonst flag: R|SomeEnum|"];
             subgraph cluster_8 {
                 color=blue
                 19 [label="Enter when"];
@@ -103,7 +103,7 @@ digraph exhaustiveWhenAndDNNType_kt {
                 43 [label="Exit when branch result"];
                 44 [label="Exit when"];
             }
-            45 [label="Variable declaration: lval b: R|B|"];
+            45 [label="Variable declaration: lkonst b: R|B|"];
             46 [label="Access variable R|<local>/b|"];
             47 [label="Function call: R|/takeB|(...)" style="filled" fillcolor=yellow];
             48 [label="Exit block"];
@@ -154,7 +154,7 @@ digraph exhaustiveWhenAndDNNType_kt {
             51 [label="Enter block"];
             52 [label="Access qualifier /SomeEnum"];
             53 [label="Access variable R|/SomeEnum.A1|"];
-            54 [label="Variable declaration: lval flag: R|SomeEnum|"];
+            54 [label="Variable declaration: lkonst flag: R|SomeEnum|"];
             subgraph cluster_15 {
                 color=blue
                 55 [label="Enter when"];
@@ -196,7 +196,7 @@ digraph exhaustiveWhenAndDNNType_kt {
                 79 [label="Exit when branch result"];
                 80 [label="Exit when"];
             }
-            81 [label="Variable declaration: lval b: R|B|"];
+            81 [label="Variable declaration: lkonst b: R|B|"];
             82 [label="Access variable R|<local>/b|"];
             83 [label="Function call: R|/takeB|(...)" style="filled" fillcolor=yellow];
             84 [label="Exit block"];
@@ -247,7 +247,7 @@ digraph exhaustiveWhenAndDNNType_kt {
             87 [label="Enter block"];
             88 [label="Access qualifier /SomeEnum"];
             89 [label="Access variable R|/SomeEnum.A1|"];
-            90 [label="Variable declaration: lval flag: R|SomeEnum|"];
+            90 [label="Variable declaration: lkonst flag: R|SomeEnum|"];
             subgraph cluster_22 {
                 color=blue
                 91 [label="Enter when"];
@@ -288,7 +288,7 @@ digraph exhaustiveWhenAndDNNType_kt {
                 114 [label="Exit when branch result"];
                 115 [label="Exit when"];
             }
-            116 [label="Variable declaration: lval b: R|B|"];
+            116 [label="Variable declaration: lkonst b: R|B|"];
             117 [label="Access variable R|<local>/b|"];
             118 [label="Function call: R|/takeB|(...)" style="filled" fillcolor=yellow];
             119 [label="Exit block"];

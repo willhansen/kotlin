@@ -2,9 +2,9 @@
 annotation class Marker
 
 @Marker
-class Some(val x: Int)
+class Some(konst x: Int)
 
-class Other(val x: Int) {
+class Other(konst x: Int) {
     @OptIn(Marker::class)
     constructor(some: Some): this(some.x)
 
@@ -18,9 +18,9 @@ class Other(val x: Int) {
 fun foo(some: <!OPT_IN_USAGE_ERROR!>Some<!>? = null) {}
 
 fun test() {
-    val o1 = <!OPT_IN_USAGE_ERROR!>Other<!>()
-    val o2 = <!OPT_IN_USAGE_ERROR!>Other<!>(<!OPT_IN_USAGE_ERROR!>Some<!>(0))
-    val o3 = <!OPT_IN_USAGE_ERROR!>Other<!>(444L)
+    konst o1 = <!OPT_IN_USAGE_ERROR!>Other<!>()
+    konst o2 = <!OPT_IN_USAGE_ERROR!>Other<!>(<!OPT_IN_USAGE_ERROR!>Some<!>(0))
+    konst o3 = <!OPT_IN_USAGE_ERROR!>Other<!>(444L)
     <!OPT_IN_USAGE_ERROR!>foo<!>()
     <!OPT_IN_USAGE_ERROR!>foo<!>(null)
 }

@@ -25,7 +25,7 @@ fun box(): String {
     return "fail1: global = $global"
   }
 
-  val c = C()
+  konst c = C()
   if (global == "ABCD") return "OK" else return "fail2: global = $global"
 }
 

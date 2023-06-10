@@ -1,12 +1,12 @@
 // EXPECTED_REACHABLE_NODES: 1294
 package foo
 
-class Data(val rawData: Array<Int>, val width: Int, val height: Int) {
+class Data(konst rawData: Array<Int>, konst width: Int, konst height: Int) {
     operator fun get(x: Int, y: Int): ColorLike {
         return object : ColorLike {
-            override val red: Int = rawData[(y * width + x) * 4 + 0];
-            override val green: Int = rawData[(y * width + x) * 4 + 1];
-            override val blue: Int = rawData[(y * width + x) * 4 + 2];
+            override konst red: Int = rawData[(y * width + x) * 4 + 0];
+            override konst green: Int = rawData[(y * width + x) * 4 + 1];
+            override konst blue: Int = rawData[(y * width + x) * 4 + 2];
         }
     }
 
@@ -26,19 +26,19 @@ class Data(val rawData: Array<Int>, val width: Int, val height: Int) {
 }
 
 class Color(r: Int, g: Int, b: Int) : ColorLike {
-    override val red: Int = r
-    override val green: Int = g
-    override val blue: Int = b
+    override konst red: Int = r
+    override konst green: Int = g
+    override konst blue: Int = b
 }
 
 interface ColorLike {
-    val red: Int;
-    val green: Int;
-    val blue: Int;
+    konst red: Int;
+    konst green: Int;
+    konst blue: Int;
 }
 
 fun box(): String {
-    val d = Data(Array(4) { 0 }, 1, 1)
+    konst d = Data(Array(4) { 0 }, 1, 1)
     if (d[0, 0].red != 0) {
         return "fail1"
     }

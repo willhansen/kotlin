@@ -25,28 +25,28 @@ internal fun ProjectMetadataProvider(
 }
 
 internal class SourceSetMetadataOutputs(
-    val metadata: FileCollection?,
-    val cinterop: CInterop?
+    konst metadata: FileCollection?,
+    konst cinterop: CInterop?
 ) {
     class CInterop(
-        val forCli: FileCollection,
-        val forIde: FileCollection
+        konst forCli: FileCollection,
+        konst forIde: FileCollection
     )
 }
 
 private class ProjectMetadataProviderImpl(
-    private val sourceSetMetadataOutputs: Map<SourceSetName, SourceSetMetadataOutputs>
+    private konst sourceSetMetadataOutputs: Map<SourceSetName, SourceSetMetadataOutputs>
 ) : ProjectMetadataProvider() {
 
     override fun getSourceSetCompiledMetadata(sourceSetName: String): FileCollection? {
-        val metadataOutputs = sourceSetMetadataOutputs[sourceSetName] ?: error("Unexpected source set '$sourceSetName'")
+        konst metadataOutputs = sourceSetMetadataOutputs[sourceSetName] ?: error("Unexpected source set '$sourceSetName'")
         return metadataOutputs.metadata
     }
 
 
     override fun getSourceSetCInteropMetadata(sourceSetName: String, consumer: MetadataConsumer): FileCollection? {
-        val metadataOutputs = sourceSetMetadataOutputs[sourceSetName] ?: error("Unexpected source set '$sourceSetName'")
-        val cinteropMetadata = metadataOutputs.cinterop ?: return null
+        konst metadataOutputs = sourceSetMetadataOutputs[sourceSetName] ?: error("Unexpected source set '$sourceSetName'")
+        konst cinteropMetadata = metadataOutputs.cinterop ?: return null
         return when (consumer) {
             MetadataConsumer.Ide -> cinteropMetadata.forIde
             MetadataConsumer.Cli -> cinteropMetadata.forCli
@@ -55,13 +55,13 @@ private class ProjectMetadataProviderImpl(
 }
 
 internal suspend fun Project.collectSourceSetMetadataOutputs(): Map<SourceSetName, SourceSetMetadataOutputs> {
-    val multiplatformExtension = multiplatformExtensionOrNull ?: return emptyMap()
+    konst multiplatformExtension = multiplatformExtensionOrNull ?: return emptyMap()
 
-    val sourceSetMetadata = multiplatformExtension.sourceSetsMetadataOutputs()
-    val sourceSetCInteropMetadata = multiplatformExtension.cInteropMetadataOfSourceSets(sourceSetMetadata.keys)
+    konst sourceSetMetadata = multiplatformExtension.sourceSetsMetadataOutputs()
+    konst sourceSetCInteropMetadata = multiplatformExtension.cInteropMetadataOfSourceSets(sourceSetMetadata.keys)
 
     return sourceSetMetadata.mapValues { (sourceSet, metadata) ->
-        val cinteropMetadataOutput = sourceSetCInteropMetadata[sourceSet]
+        konst cinteropMetadataOutput = sourceSetCInteropMetadata[sourceSet]
         SourceSetMetadataOutputs(
             metadata = metadata,
             cinterop = cinteropMetadataOutput
@@ -73,7 +73,7 @@ private suspend fun KotlinMultiplatformExtension.sourceSetsMetadataOutputs(): Ma
     KotlinPluginLifecycle.Stage.AfterFinaliseDsl.await()
 
     return sourceSets.associateWith { sourceSet ->
-        when (val compilation = project.findMetadataCompilation(sourceSet)) {
+        when (konst compilation = project.findMetadataCompilation(sourceSet)) {
             null -> null
             is KotlinCommonCompilation -> compilation.output.classesDirs
             is KotlinSharedNativeCompilation -> compilation.output.classesDirs
@@ -85,11 +85,11 @@ private suspend fun KotlinMultiplatformExtension.sourceSetsMetadataOutputs(): Ma
 private suspend fun KotlinMultiplatformExtension.cInteropMetadataOfSourceSets(
     sourceSets: Iterable<KotlinSourceSet>
 ): Map<KotlinSourceSet, SourceSetMetadataOutputs.CInterop?> {
-    val taskForCLI = project.commonizeCInteropTask ?: return emptyMap()
-    val taskForIde = project.copyCommonizeCInteropForIdeTask ?: return emptyMap()
+    konst taskForCLI = project.commonizeCInteropTask ?: return emptyMap()
+    konst taskForIde = project.copyCommonizeCInteropForIdeTask ?: return emptyMap()
 
     return sourceSets.associateWith { sourceSet ->
-        val dependent = CInteropCommonizerDependent.from(sourceSet) ?: return@associateWith null
+        konst dependent = CInteropCommonizerDependent.from(sourceSet) ?: return@associateWith null
         SourceSetMetadataOutputs.CInterop(
             forCli = taskForCLI.get().commonizedOutputLibraries(dependent),
             forIde = taskForIde.get().commonizedOutputLibraries(dependent)

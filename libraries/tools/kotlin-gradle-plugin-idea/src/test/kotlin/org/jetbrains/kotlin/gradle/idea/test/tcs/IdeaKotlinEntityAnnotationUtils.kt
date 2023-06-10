@@ -19,8 +19,8 @@ fun KClass<*>.findIdeaKotlinEntityAnnotations(): List<Annotation> {
     }
 }
 
-val KClass<*>.isIdeaKotlinModel get() = findIdeaKotlinEntityAnnotations().singleOrNull() is IdeaKotlinModel
+konst KClass<*>.isIdeaKotlinModel get() = findIdeaKotlinEntityAnnotations().singleOrNull() is IdeaKotlinModel
 
-val KClass<*>.isIdeaKotlinExtra get() = findIdeaKotlinEntityAnnotations().singleOrNull() is IdeaKotlinExtra
+konst KClass<*>.isIdeaKotlinExtra get() = findIdeaKotlinEntityAnnotations().singleOrNull() is IdeaKotlinExtra
 
-val KClass<*>.isIdeaKotlinService get() = findIdeaKotlinEntityAnnotations().singleOrNull() is IdeaKotlinService
+konst KClass<*>.isIdeaKotlinService get() = findIdeaKotlinEntityAnnotations().singleOrNull() is IdeaKotlinService

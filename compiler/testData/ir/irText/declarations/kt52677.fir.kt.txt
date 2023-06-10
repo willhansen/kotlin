@@ -7,7 +7,7 @@ open annotation class MySerializable : Annotation {
 
   }
 
-  val c: KClass<*>
+  konst c: KClass<*>
     field = c
     get
 
@@ -20,7 +20,7 @@ data class LoginSuccessPacket {
 
   }
 
-  val id: @MySerializable(c = UuidSerializer::class) Uuid1
+  konst id: @MySerializable(c = UuidSerializer::class) Uuid1
     field = id
     get
 
@@ -39,7 +39,7 @@ data class LoginSuccessPacket {
     when {
       other !is LoginSuccessPacket -> return false
     }
-    val tmp0_other_with_cast: LoginSuccessPacket = other as LoginSuccessPacket
+    konst tmp0_other_with_cast: LoginSuccessPacket = other as LoginSuccessPacket
     when {
       EQEQ(arg0 = <this>.#id, arg1 = tmp0_other_with_cast.#id).not() -> return false
     }

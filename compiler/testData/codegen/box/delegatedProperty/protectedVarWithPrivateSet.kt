@@ -3,7 +3,7 @@
 import kotlin.properties.Delegates
 
 open class A<T : Any> {
-    protected var value: T by Delegates.notNull()
+    protected var konstue: T by Delegates.notNull()
         private set
 }
 

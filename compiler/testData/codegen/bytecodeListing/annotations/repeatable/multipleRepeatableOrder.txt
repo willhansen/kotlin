@@ -1,64 +1,64 @@
 @kotlin.jvm.internal.RepeatableContainer
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class test/A$Container {
     // source: 'multipleRepeatableOrder.kt'
-    public abstract method value(): test.A[]
+    public abstract method konstue(): test.A[]
     public inner class test/A$Container
 }
 
 @kotlin.annotation.Repeatable
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Repeatable(value=test.A$Container::class)
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Repeatable(konstue=test.A$Container::class)
 @kotlin.Metadata
 public annotation class test/A {
     // source: 'multipleRepeatableOrder.kt'
-    public abstract method value(): java.lang.String
+    public abstract method konstue(): java.lang.String
     public inner class test/A$Container
 }
 
 @kotlin.jvm.internal.RepeatableContainer
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class test/B$Container {
     // source: 'multipleRepeatableOrder.kt'
-    public abstract method value(): test.B[]
+    public abstract method konstue(): test.B[]
     public inner class test/B$Container
 }
 
 @kotlin.annotation.Repeatable
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Repeatable(value=test.B$Container::class)
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Repeatable(konstue=test.B$Container::class)
 @kotlin.Metadata
 public annotation class test/B {
     // source: 'multipleRepeatableOrder.kt'
-    public abstract method value(): java.lang.String
+    public abstract method konstue(): java.lang.String
     public inner class test/B$Container
 }
 
 @kotlin.jvm.internal.RepeatableContainer
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class test/C$Container {
     // source: 'multipleRepeatableOrder.kt'
-    public abstract method value(): test.C[]
+    public abstract method konstue(): test.C[]
     public inner class test/C$Container
 }
 
 @kotlin.annotation.Repeatable
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Repeatable(value=test.C$Container::class)
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Repeatable(konstue=test.C$Container::class)
 @kotlin.Metadata
 public annotation class test/C {
     // source: 'multipleRepeatableOrder.kt'
-    public abstract method value(): java.lang.String
+    public abstract method konstue(): java.lang.String
     public inner class test/C$Container
 }
 
-@test.A$Container(value=[test.A(value="a1"), test.A(value="a2")])
-@test.B$Container(value=[test.B(value="b1"), test.B(value="b2")])
-@test.Z(value="z")
-@test.C$Container(value=[test.C(value="c1"), test.C(value="c2")])
+@test.A$Container(konstue=[test.A(konstue="a1"), test.A(konstue="a2")])
+@test.B$Container(konstue=[test.B(konstue="b1"), test.B(konstue="b2")])
+@test.Z(konstue="z")
+@test.C$Container(konstue=[test.C(konstue="c1"), test.C(konstue="c2")])
 @kotlin.Metadata
 public final class test/Test {
     // source: 'multipleRepeatableOrder.kt'
@@ -68,9 +68,9 @@ public final class test/Test {
     public inner class test/C$Container
 }
 
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class test/Z {
     // source: 'multipleRepeatableOrder.kt'
-    public abstract method value(): java.lang.String
+    public abstract method konstue(): java.lang.String
 }

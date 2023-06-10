@@ -23,18 +23,18 @@ import org.jetbrains.kotlin.test.services.assertions
 
 public abstract class AbstractPsiDeclarationProviderTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val mainKtFile = ktFiles.singleOrNull() ?: ktFiles.firstOrNull { it.name == "main.kt" } ?: ktFiles.first()
-        val caretPosition = testServices.expressionMarkerProvider.getCaretPosition(mainKtFile)
-        val ktReferences = findReferencesAtCaret(mainKtFile, caretPosition)
+        konst mainKtFile = ktFiles.singleOrNull() ?: ktFiles.firstOrNull { it.name == "main.kt" } ?: ktFiles.first()
+        konst caretPosition = testServices.expressionMarkerProvider.getCaretPosition(mainKtFile)
+        konst ktReferences = findReferencesAtCaret(mainKtFile, caretPosition)
         if (ktReferences.isEmpty()) {
             testServices.assertions.fail { "No references at caret found" }
         }
 
-        val element = ktReferences.first().element
-        val resolvedTo =
+        konst element = ktReferences.first().element
+        konst resolvedTo =
             analyseForTest(element) {
-                val symbols = ktReferences.flatMap { it.resolveToSymbols() }
-                val psiElements = symbols.mapNotNull { psiForTest(it, element.project) }
+                konst symbols = ktReferences.flatMap { it.resolveToSymbols() }
+                konst psiElements = symbols.mapNotNull { psiForTest(it, element.project) }
                 psiElements.joinToString(separator = "\n") { TestPsiElementRenderer.render(it) }
             }
 
@@ -42,7 +42,7 @@ public abstract class AbstractPsiDeclarationProviderTest : AbstractAnalysisApiBa
             return
         }
 
-        val actual = "Resolved to:\n$resolvedTo"
+        konst actual = "Resolved to:\n$resolvedTo"
         testServices.assertions.assertEqualsToTestDataFileSibling(actual)
     }
 
@@ -60,7 +60,7 @@ public abstract class AbstractPsiDeclarationProviderTest : AbstractAnalysisApiBa
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val UNRESOLVED_REFERENCE by directive(
+        konst UNRESOLVED_REFERENCE by directive(
             "Reference should be unresolved",
         )
     }

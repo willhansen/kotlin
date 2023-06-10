@@ -10,45 +10,45 @@ interface ITest {
     var nullableTest: S?
 }
 
-inline class S(val x: String?) : ITest {
+inline class S(konst x: String?) : ITest {
     override var nonNullTest: S
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value.x}$x")
+        set(konstue) {
+            global = S("${konstue.x}$x")
         }
 
     override var nullableTest: S?
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value!!.x}$x")
+        set(konstue) {
+            global = S("${konstue!!.x}$x")
         }
 }
 
-inline class Z(val x: Int) : ITest {
+inline class Z(konst x: Int) : ITest {
     override var nonNullTest: S
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value.x}$x")
+        set(konstue) {
+            global = S("${konstue.x}$x")
         }
 
     override var nullableTest: S?
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value!!.x}$x")
+        set(konstue) {
+            global = S("${konstue!!.x}$x")
         }
 }
 
-inline class A(val x: Any) : ITest {
+inline class A(konst x: Any) : ITest {
     override var nonNullTest: S
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value.x}$x")
+        set(konstue) {
+            global = S("${konstue.x}$x")
         }
 
     override var nullableTest: S?
         get() = S("${global.x}$x")
-        set(value) {
-            global = S("${value!!.x}$x")
+        set(konstue) {
+            global = S("${konstue!!.x}$x")
         }
 }
 

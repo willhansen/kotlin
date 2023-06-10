@@ -4,7 +4,7 @@ KtFile: PropertiesWithFunctionReceiversAnnotations.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -69,7 +69,7 @@ KtFile: PropertiesWithFunctionReceiversAnnotations.kt
           PsiElement(IDENTIFIER)('P')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -149,7 +149,7 @@ KtFile: PropertiesWithFunctionReceiversAnnotations.kt
           PsiElement(IDENTIFIER)('P')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       MODIFIER_LIST
@@ -226,7 +226,7 @@ KtFile: PropertiesWithFunctionReceiversAnnotations.kt
           PsiElement(IDENTIFIER)('P')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_PARAMETER_LIST
       PsiElement(LT)('<')
@@ -286,7 +286,7 @@ KtFile: PropertiesWithFunctionReceiversAnnotations.kt
                   PsiElement(IDENTIFIER)('a')
         PsiElement(RBRACKET)(']')
     PsiWhiteSpace(' ')
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_PARAMETER_LIST
       PsiElement(LT)('<')

@@ -1,6 +1,6 @@
-class Foo private constructor(val param: String = "OK") {
+class Foo private constructor(konst param: String = "OK") {
     companion object {
-        val s = Foo()
+        konst s = Foo()
     }
 }
 

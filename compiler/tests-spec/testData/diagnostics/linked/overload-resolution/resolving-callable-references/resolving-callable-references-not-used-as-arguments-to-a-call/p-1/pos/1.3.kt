@@ -21,29 +21,29 @@ package testsCase1
 
 class Case() {
     fun case(v: V) {
-        val va: () -> String = <!PARENTHESIZED_COMPANION_LHS_DEPRECATION!>(V)<!>::<!DEBUG_INFO_CALL("fqName: testsCase1.a; typeCall: variable")!>a<!>
+        konst va: () -> String = <!PARENTHESIZED_COMPANION_LHS_DEPRECATION!>(V)<!>::<!DEBUG_INFO_CALL("fqName: testsCase1.a; typeCall: variable")!>a<!>
 
-        val vb: () -> String = <!PARENTHESIZED_COMPANION_LHS_DEPRECATION!>(V)<!>::<!DEBUG_INFO_CALL("fqName: testsCase1.V.Companion.b; typeCall: variable")!>b<!>
+        konst vb: () -> String = <!PARENTHESIZED_COMPANION_LHS_DEPRECATION!>(V)<!>::<!DEBUG_INFO_CALL("fqName: testsCase1.V.Companion.b; typeCall: variable")!>b<!>
 
-        val va1: () -> String = v::<!DEBUG_INFO_CALL("fqName: testsCase1.a; typeCall: variable")!>a<!>
-        val vb1: () -> String = <!PARENTHESIZED_COMPANION_LHS_DEPRECATION!>(V)<!>::<!DEBUG_INFO_CALL("fqName: testsCase1.V.Companion.b; typeCall: variable")!>b<!>
+        konst va1: () -> String = v::<!DEBUG_INFO_CALL("fqName: testsCase1.a; typeCall: variable")!>a<!>
+        konst vb1: () -> String = <!PARENTHESIZED_COMPANION_LHS_DEPRECATION!>(V)<!>::<!DEBUG_INFO_CALL("fqName: testsCase1.V.Companion.b; typeCall: variable")!>b<!>
 
     }
 
-    val V.Companion.<!EXTENSION_SHADOWED_BY_MEMBER!>b<!>: String // (3)
+    konst V.Companion.<!EXTENSION_SHADOWED_BY_MEMBER!>b<!>: String // (3)
         get() = "1"
 
 }
 
-val V.a: String
+konst V.a: String
     get() = "1"
 
-val V.Companion.a: String
+konst V.Companion.a: String
     get() = "1"
 
 
 class V {
     companion object {
-        const val b: String = "1"
+        const konst b: String = "1"
     }
 }

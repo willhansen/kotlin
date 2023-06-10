@@ -8,22 +8,22 @@ package org.jetbrains.kotlin.konan.target
 import org.jetbrains.kotlin.konan.util.defaultTargetSubstitutions
 
 abstract class AbstractToolConfig(konanHome: String, userProvidedTargetName: String?, propertyOverrides: Map<String, String>) {
-    private val distribution = Distribution(konanHome, propertyOverrides = propertyOverrides)
-    private val platformManager = PlatformManager(distribution)
-    private val targetManager = platformManager.targetManager(userProvidedTargetName)
-    private val host = HostManager.host
-    val target = targetManager.target
+    private konst distribution = Distribution(konanHome, propertyOverrides = propertyOverrides)
+    private konst platformManager = PlatformManager(distribution)
+    private konst targetManager = platformManager.targetManager(userProvidedTargetName)
+    private konst host = HostManager.host
+    konst target = targetManager.target
 
-    protected val platform = platformManager.platform(target)
+    protected konst platform = platformManager.platform(target)
 
-    val substitutions = defaultTargetSubstitutions(target)
+    konst substitutions = defaultTargetSubstitutions(target)
 
     fun downloadDependencies() = platform.downloadDependencies()
 
-    val llvmHome = platform.absoluteLlvmHome
-    val sysRoot = platform.absoluteTargetSysRoot
+    konst llvmHome = platform.absoluteLlvmHome
+    konst sysRoot = platform.absoluteTargetSysRoot
 
-    val libclang = when (host) {
+    konst libclang = when (host) {
         KonanTarget.MINGW_X64 -> "$llvmHome/bin/libclang.dll"
         else -> "$llvmHome/lib/${System.mapLibraryName("clang")}"
     }

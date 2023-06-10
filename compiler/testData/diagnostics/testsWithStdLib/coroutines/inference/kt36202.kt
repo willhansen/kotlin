@@ -14,10 +14,10 @@ interface Builder<T> {
 }
 
 fun main() {
-    val bar = build {
+    konst bar = build {
         foo { listOf(1, 2, 3).firstOrNull() }
     }
-    val baz = build {
+    konst baz = build {
         foo { listOf(1, 2, 3).firstOrNull() ?: 0 }
     }
 }

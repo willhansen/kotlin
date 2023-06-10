@@ -8,7 +8,7 @@ interface B {
 }
 
 fun test_1(x: Any) {
-    val y = x
+    konst y = x
     if (x is A) {
         x.foo()
         y.foo()
@@ -16,7 +16,7 @@ fun test_1(x: Any) {
 }
 
 fun test_2(x: Any) {
-    val y = x
+    konst y = x
     if (y is A) {
         x.foo()
         y.foo()
@@ -47,13 +47,13 @@ fun test_4(y: Any) {
     }
 }
 
-class D(val any: Any?)
+class D(konst any: Any?)
 
 fun Any.baz() {}
 
 fun test_5(d: D) {
     // Elvis operator is converted into == function call
-    val a = d.any ?: return
+    konst a = d.any ?: return
     a.baz() // should be OK
     d.any.baz() // should be OK
     a as A
@@ -61,7 +61,7 @@ fun test_5(d: D) {
 }
 
 fun test_6(d1: D) {
-    val a = d1.any
+    konst a = d1.any
     a as A
     a.foo() // should be OK
     d1.any.foo() // should be OK
@@ -69,8 +69,8 @@ fun test_6(d1: D) {
 }
 
 fun test_7(d1: D, d2: D) {
-    val a = d1<!UNNECESSARY_SAFE_CALL!>?.<!>any
-    val b = d2<!UNNECESSARY_SAFE_CALL!>?.<!>any
+    konst a = d1<!UNNECESSARY_SAFE_CALL!>?.<!>any
+    konst b = d2<!UNNECESSARY_SAFE_CALL!>?.<!>any
     a as A
     a.foo() // should be OK
     b as B

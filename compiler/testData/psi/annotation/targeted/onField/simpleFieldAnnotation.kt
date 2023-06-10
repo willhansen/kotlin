@@ -1,6 +1,6 @@
 class A {
 
     @field:Deprecated
-    val a = "String"
+    konst a = "String"
 
 }

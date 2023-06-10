@@ -4,7 +4,7 @@
 
 // TESTCASE NUMBER: 1
 
-class Case1<AT: CharSequence>(val x: AT) {
+class Case1<AT: CharSequence>(konst x: AT) {
 
     inner class C() {
         fun case1a(x: Any) {
@@ -23,7 +23,7 @@ class Case1<AT: CharSequence>(val x: AT) {
 
 // TESTCASE NUMBER: 2
 
-class Case2<AT: CharSequence>(val x: AT) {
+class Case2<AT: CharSequence>(konst x: AT) {
 
     inner class C() {
         fun case2a(x: CharSequence) {

@@ -1,5 +1,5 @@
 package common.watchos.app
 
-expect val bitness: Int
+expect konst bitness: Int
 
 actual fun platform(): String = "Device$bitness"

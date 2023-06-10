@@ -5,6 +5,6 @@
 
 package recursiveGenericArguments
 
-class RecList<T: List<T>>(val value: T)
+class RecList<T: List<T>>(konst konstue: T)
 
-class RecFunc<T : () -> T>(val value: T)
+class RecFunc<T : () -> T>(konst konstue: T)

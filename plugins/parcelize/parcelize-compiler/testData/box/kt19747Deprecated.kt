@@ -9,21 +9,21 @@ import android.os.Parcelable
 import java.io.Serializable
 
 class JHelp(var j1: String) {
-    val j2 = 9
+    konst j2 = 9
 }
 
 @Suppress("DEPRECATED_ANNOTATION")
 @Parcelize
-class J(val j: @RawValue JHelp) : Parcelable
+class J(konst j: @RawValue JHelp) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = J(JHelp("A"))
+    konst test = J(JHelp("A"))
 
     var exceptionCaught = false
     try {
         test.writeToParcel(parcel, 0)
     } catch (e: RuntimeException) {
-        if (e.message!!.contains("Parcel: unable to marshal value test.JHelp")) {
+        if (e.message!!.contains("Parcel: unable to marshal konstue test.JHelp")) {
             exceptionCaught = true
         } else {
             throw e

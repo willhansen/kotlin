@@ -1,5 +1,5 @@
 interface X {
-  abstract val xs: MutableList<Any>
+  abstract konst xs: MutableList<Any>
     abstract get
 
   abstract fun f(): MutableList<Any>
@@ -12,14 +12,14 @@ fun test(x: X, nx: X?) {
   x.<get-xs>() as MutableList<Int>.plusAssign<Int>(element = 3)
   x.f() as MutableList<Int>.plusAssign<Int>(element = 4)
   CHECK_NOT_NULL<MutableList<Any>>(arg0 = { // BLOCK
-    val tmp0_safe_receiver: X? = nx
+    konst tmp0_safe_receiver: X? = nx
     when {
       EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
       else -> tmp0_safe_receiver.<get-xs>()
     }
   }).plusAssign<Int>(element = 5)
   CHECK_NOT_NULL<MutableList<Any>>(arg0 = { // BLOCK
-    val tmp1_safe_receiver: X? = nx
+    konst tmp1_safe_receiver: X? = nx
     when {
       EQEQ(arg0 = tmp1_safe_receiver, arg1 = null) -> null
       else -> tmp1_safe_receiver.f()

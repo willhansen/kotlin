@@ -7,8 +7,8 @@ sealed class A {
 fun foo(): A = A.C()
 
 fun box(): String {
-    val a: A = foo()
-    val b: Boolean
+    konst a: A = foo()
+    konst b: Boolean
     when (a) {
         A.B -> b = true
         is A.C -> b = false

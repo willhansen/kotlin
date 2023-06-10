@@ -1,42 +1,42 @@
 package test
 
-// val prop1: null
-val prop1 = A().a
+// konst prop1: null
+konst prop1 = A().a
 
-// val prop2: null
-val prop2 = A().a + 1
+// konst prop2: null
+konst prop2 = A().a + 1
 
 class A() {
     var a = 1
 
-    // val prop3: null
-    val prop3 = a
+    // konst prop3: null
+    konst prop3 = a
 
-    // val prop4: null
-    val prop4 = a + 1
+    // konst prop4: null
+    konst prop4 = a + 1
 
     fun foo() {
-        // val prop5: null
-        val prop5 = A().a
+        // konst prop5: null
+        konst prop5 = A().a
 
-        // val prop6: null
-        val prop6 = A().a + 1
+        // konst prop6: null
+        konst prop6 = A().a + 1
 
-        val b = {
-            // val prop11: null
-            val prop11 = A().a
+        konst b = {
+            // konst prop11: null
+            konst prop11 = A().a
 
-            // val prop12: null
-            val prop12 = A().a + 1
+            // konst prop12: null
+            konst prop12 = A().a + 1
         }
 
-        val c = object: Foo {
+        konst c = object: Foo {
             override fun f() {
-                // val prop9: null
-                val prop9 = A().a
+                // konst prop9: null
+                konst prop9 = A().a
 
-                // val prop10: null
-                val prop10 = A().a + 1
+                // konst prop10: null
+                konst prop10 = A().a + 1
             }
         }
     }
@@ -44,11 +44,11 @@ class A() {
 }
 
 fun foo() {
-    // val prop7: null
-    val prop7 = A().a
+    // konst prop7: null
+    konst prop7 = A().a
 
-    // val prop8: null
-    val prop8 = A().a + 1
+    // konst prop8: null
+    konst prop8 = A().a + 1
 }
 
 interface Foo {

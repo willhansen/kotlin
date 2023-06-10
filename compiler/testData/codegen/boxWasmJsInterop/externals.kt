@@ -69,13 +69,13 @@ external fun createObject(): Obj
 external fun setX(obj: Obj, x: Int)
 external fun getX(obj: Obj): Int
 
-external val readOnlyProp: Int
+external konst readOnlyProp: Int
 external var mutableProp: String
 
 open external class C1 {
     constructor(a: String, b: String)
     var a: String
-    val b: String
+    konst b: String
 
     fun getA(): String
     fun setA(x: String)
@@ -94,24 +94,24 @@ open external class C1 {
 external class C2 : C1 {
     constructor(a: String, b: String)
 
-    val c: String
+    konst c: String
 
     object Object1 {
         object Object2 {
             object Object3 {
-                val x: String
+                konst x: String
             }
         }
     }
 }
 
 external object externalObj {
-    val x: String
+    konst x: String
     object y {
-        val x: String
+        konst x: String
     }
     class c {
-        val x: String
+        konst x: String
     }
 }
 
@@ -119,14 +119,14 @@ external object externalObj {
 external fun testJsName(): String
 
 fun box(): String {
-    val obj = createObject()
+    konst obj = createObject()
     setX(obj, 100)
     if (getX(obj) != 100) return "Fail 2"
 
     if (obj.x != 100) return "Fail 2.1"
     obj.x = 200
     if (getX(obj) != 200) return "Fail 2.2"
-    val objXRef = obj::x
+    konst objXRef = obj::x
     objXRef.set(300)
     if (getX(obj) != 300 || obj.x != 300 || objXRef.get() != 300) return "Fail 2.3"
 
@@ -142,19 +142,19 @@ fun box(): String {
     (::mutableProp).set("40")
     if (mutableProp != "40") return "Fail 7"
 
-    val c1 = C1("A", "B")
+    konst c1 = C1("A", "B")
     if (c1.a != "A" || c1.b != "B") return "Fail 8"
     if (c1.getA() != "A" || c1.getB() != "B") return "Fail 9"
     c1.setA("A2")
     if (c1.a != "A2") return "Fail 10"
     c1.a = "A3"
     if (c1.getA() != "A3") return "Fail 11"
-    val c2 = C2("A", "B")
+    konst c2 = C2("A", "B")
     if (c2.a != "A" || c2.b != "B" || c2.c != "C") return "Fail 12"
-    val c2_as_c1: C1 = c2
+    konst c2_as_c1: C1 = c2
     if (c2_as_c1.a != "A" || c2_as_c1.b != "B") return "Fail 13"
 
-    val nested3 = C1.Nested1.Nested2.Nested3("example")
+    konst nested3 = C1.Nested1.Nested2.Nested3("example")
     if (nested3.foo() != "example from Nested 3") return "Fail 14"
 
     if (C2.Object1.Object2.Object3.x != "C2.Object1.Object2.Object3.x") return "Fail 15"

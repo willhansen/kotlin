@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.platform.TargetPlatform
 
 object ErrorModuleDescriptor : ModuleDescriptor {
-    override val stableName: Name = Name.special(ErrorEntity.ERROR_MODULE.debugText)
-    override val platform: TargetPlatform? = null
-    override val allDependencyModules: List<ModuleDescriptor> = emptyList()
-    override val expectedByModules: List<ModuleDescriptor> = emptyList()
-    override val allExpectedByModules: Set<ModuleDescriptor> = emptySet()
-    override val annotations: Annotations get() = Annotations.EMPTY
-    override val builtIns: KotlinBuiltIns by lazy { DefaultBuiltIns.Instance }
-    override val isValid: Boolean = false
+    override konst stableName: Name = Name.special(ErrorEntity.ERROR_MODULE.debugText)
+    override konst platform: TargetPlatform? = null
+    override konst allDependencyModules: List<ModuleDescriptor> = emptyList()
+    override konst expectedByModules: List<ModuleDescriptor> = emptyList()
+    override konst allExpectedByModules: Set<ModuleDescriptor> = emptySet()
+    override konst annotations: Annotations get() = Annotations.EMPTY
+    override konst builtIns: KotlinBuiltIns by lazy { DefaultBuiltIns.Instance }
+    override konst isValid: Boolean = false
 
     override fun <T> getCapability(capability: ModuleCapability<T>): T? = null
     override fun getSubPackagesOf(fqName: FqName, nameFilter: Function1<Name, Boolean>): Collection<FqName> = emptyList()
@@ -30,7 +30,7 @@ object ErrorModuleDescriptor : ModuleDescriptor {
     override fun getOriginal(): DeclarationDescriptor = this
     override fun getContainingDeclaration(): DeclarationDescriptor? = null
     override fun shouldSeeInternalsOf(targetModule: ModuleDescriptor): Boolean = false
-    override fun assertValid() = throw InvalidModuleException("ERROR_MODULE is not a valid module")
+    override fun assertValid() = throw InkonstidModuleException("ERROR_MODULE is not a konstid module")
     override fun <R, D> accept(visitor: DeclarationDescriptorVisitor<R, D>, data: D): R? = null
     override fun acceptVoid(visitor: DeclarationDescriptorVisitor<Void, Void>) {}
 }

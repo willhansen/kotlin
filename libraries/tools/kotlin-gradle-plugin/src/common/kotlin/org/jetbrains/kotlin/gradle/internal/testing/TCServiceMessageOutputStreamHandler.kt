@@ -23,14 +23,14 @@ import java.io.OutputStream
  * Only messages short than [MESSAGE_LIMIT_BYTES] supported.
  */
 internal class TCServiceMessageOutputStreamHandler(
-    private val client: ServiceMessageParserCallback,
-    private val onException: () -> Unit,
-    private val logger: Logger,
-    private val ignoreTcsmOverflow: Boolean = false,
-    private val messageLimitBytes: Int = MESSAGE_LIMIT_BYTES // for test only
+    private konst client: ServiceMessageParserCallback,
+    private konst onException: () -> Unit,
+    private konst logger: Logger,
+    private konst ignoreTcsmOverflow: Boolean = false,
+    private konst messageLimitBytes: Int = MESSAGE_LIMIT_BYTES // for test only
 ) : OutputStream() {
     private var closed: Boolean = false
-    private val buffer = ByteArrayOutputStream()
+    private konst buffer = ByteArrayOutputStream()
     private var overflowInsideMessage: Boolean = false
 
     @Throws(IOException::class)
@@ -47,7 +47,7 @@ internal class TCServiceMessageOutputStreamHandler(
         fun bytesToAppend() =
             i - last
 
-        val end = off + len
+        konst end = off + len
 
         fun append(len: Int = bytesToAppend()) {
             buffer.write(b, last, i - last)
@@ -55,7 +55,7 @@ internal class TCServiceMessageOutputStreamHandler(
         }
 
         while (i < end) {
-            val c = b[i++]
+            konst c = b[i++]
             if (c == '\n'.toByte()) {
                 append()
                 flushLine()
@@ -77,17 +77,17 @@ internal class TCServiceMessageOutputStreamHandler(
     private fun flushLine() {
         overflowInsideMessage = false
         if (buffer.size() > 0) {
-            val text = buffer.toString("utf-8")
+            konst text = buffer.toString("utf-8")
             parse(text)
             buffer.reset()
         }
     }
 
     private fun overflow() {
-        val text = buffer.toString("utf-8")
+        konst text = buffer.toString("utf-8")
 
         // support messageLimitBytes inside "##teamcity[...]" (including "##teamcity[]").
-        val i = if (overflowInsideMessage) {
+        konst i = if (overflowInsideMessage) {
             if (!ignoreTcsmOverflow && !text.endsWith("]")) {
                 logger.warn(text)
                 overflowInsideMessage = false
@@ -129,7 +129,7 @@ internal class TCServiceMessageOutputStreamHandler(
     }
 
     companion object {
-        private const val MESSAGE_LIMIT_BYTES = 1024 * 1024 // 1Mb
-        const val IGNORE_TCSM_OVERFLOW = "kotlin.ignore.tcsm.overflow"
+        private const konst MESSAGE_LIMIT_BYTES = 1024 * 1024 // 1Mb
+        const konst IGNORE_TCSM_OVERFLOW = "kotlin.ignore.tcsm.overflow"
     }
 }

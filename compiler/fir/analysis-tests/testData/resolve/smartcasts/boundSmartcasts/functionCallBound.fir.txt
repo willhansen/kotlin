@@ -10,7 +10,7 @@ FILE: functionCallBound.kt
             super<R|Base|>()
         }
 
-        public final val data: R|Base| = R|<local>/data|
+        public final konst data: R|Base| = R|<local>/data|
             public get(): R|Base|
 
     }

@@ -25,7 +25,7 @@ fun box(): String {
     var res = "FAIL"
 
     builder {
-        val foo: Foo = object : Foo{}
+        konst foo: Foo = object : Foo{}
         res = foo.foo()
     }
 

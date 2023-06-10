@@ -33,35 +33,35 @@ import org.jetbrains.kotlin.psi.KtPrimaryConstructor
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiConstructorSymbol(
-    override val psi: KtConstructor<*>,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtConstructor<*>,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtConstructorSymbol(), KtFe10PsiSymbol<KtConstructor<*>, ConstructorDescriptor> {
-    override val descriptor: ConstructorDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+    override konst descriptor: ConstructorDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
         bindingContext[BindingContext.CONSTRUCTOR, psi]
     }
 
-    override val isPrimary: Boolean
+    override konst isPrimary: Boolean
         get() = withValidityAssertion { psi is KtPrimaryConstructor }
 
-    override val containingClassIdIfNonLocal: ClassId?
+    override konst containingClassIdIfNonLocal: ClassId?
         get() = withValidityAssertion { psi.getContainingClassOrObject().getClassId() }
 
-    override val valueParameters: List<KtValueParameterSymbol>
-        get() = withValidityAssertion { psi.valueParameters.map { KtFe10PsiValueParameterSymbol(it, analysisContext) } }
+    override konst konstueParameters: List<KtValueParameterSymbol>
+        get() = withValidityAssertion { psi.konstueParameters.map { KtFe10PsiValueParameterSymbol(it, analysisContext) } }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { true }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion {
             descriptor?.returnType?.toKtType(analysisContext) ?: createErrorType()
         }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion { psi.ktVisibility ?: descriptor?.ktVisibility ?: Visibilities.Public }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { psi.typeParameters.map { KtFe10PsiTypeParameterSymbol(it, analysisContext) } }
 
     context(KtAnalysisSession)

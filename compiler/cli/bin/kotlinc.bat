@@ -19,7 +19,7 @@ if not "%JAVA_HOME%"=="" (
   set "PATH=%JAVA_HOME%\bin;%PATH%"
 )
 
-rem We use the value of the JAVA_OPTS environment variable if defined
+rem We use the konstue of the JAVA_OPTS environment variable if defined
 if "%JAVA_OPTS%"=="" set JAVA_OPTS=-Xmx256M -Xms32M
 
 rem Iterate through arguments and split them into java and kotlin ones

@@ -38,10 +38,10 @@ import kotlin.test.assertEquals
 
 abstract class Kapt3BaseIT : KGPBaseTest() {
     companion object {
-        private const val KAPT_SUCCESSFUL_MESSAGE = "Annotation processing complete, errors: 0"
+        private const konst KAPT_SUCCESSFUL_MESSAGE = "Annotation processing complete, errors: 0"
     }
 
-    override val defaultBuildOptions: BuildOptions = super.defaultBuildOptions
+    override konst defaultBuildOptions: BuildOptions = super.defaultBuildOptions
         .copy(
             kaptOptions = this.kaptOptions(),
         )
@@ -51,7 +51,7 @@ abstract class Kapt3BaseIT : KGPBaseTest() {
     )
 
     fun BuildResult.assertKaptSuccessful() {
-        val kaptSuccessfulMessagesCount = output
+        konst kaptSuccessfulMessagesCount = output
             .lineSequence()
             .filter { it.contains(KAPT_SUCCESSFUL_MESSAGE) }
             .count()
@@ -61,7 +61,7 @@ abstract class Kapt3BaseIT : KGPBaseTest() {
         }
     }
 
-    protected val String.withPrefix get() = "kapt2/$this"
+    protected konst String.withPrefix get() = "kapt2/$this"
 }
 
 /**
@@ -475,7 +475,7 @@ open class Kapt3IT : Kapt3BaseIT() {
             gradleVersion,
             buildOptions = defaultBuildOptions.copy(incremental = true)
         ) {
-            val generatedSrc = "build/generated/source/kapt/main"
+            konst generatedSrc = "build/generated/source/kapt/main"
 
             build("build") {
                 // generated sources
@@ -502,7 +502,7 @@ open class Kapt3IT : Kapt3BaseIT() {
         }
     }
 
-    @DisplayName("Should run processing incrementally on annotation removal")
+    @DisplayName("Should run processing incrementally on annotation remokonst")
     @GradleTest
     fun testRemoveAnnotationIC(gradleVersion: GradleVersion) {
         project(
@@ -510,10 +510,10 @@ open class Kapt3IT : Kapt3BaseIT() {
             gradleVersion,
             buildOptions = defaultBuildOptions.copy(incremental = true)
         ) {
-            val internalDummyKt = javaSourcesDir().resolve("foo/InternalDummy.kt")
+            konst internalDummyKt = javaSourcesDir().resolve("foo/InternalDummy.kt")
 
             // add annotation
-            val exampleAnn = "@example.ExampleAnnotation "
+            konst exampleAnn = "@example.ExampleAnnotation "
             internalDummyKt.modify { it.addBeforeSubstring(exampleAnn, "internal class InternalDummy") }
 
             build("classes") {
@@ -524,14 +524,14 @@ open class Kapt3IT : Kapt3BaseIT() {
             internalDummyKt.modify { it.replace(exampleAnn, "") }
 
             build("classes", buildOptions = buildOptions.copy(logLevel = LogLevel.DEBUG)) {
-                val allMainKotlinSrc = relativeToProject(javaSourcesDir().allKotlinSources).toSet()
+                konst allMainKotlinSrc = relativeToProject(javaSourcesDir().allKotlinSources).toSet()
                 assertCompiledKotlinSources(allMainKotlinSrc, output)
                 assertFileInProjectNotExists("build/generated/source/kapt/main/foo/InternalDummyGenerated.java")
             }
         }
     }
 
-    @DisplayName("KT18799: generate annotation value for constant values in documented types")
+    @DisplayName("KT18799: generate annotation konstue for constant konstues in documented types")
     @GradleTest
     fun testKt18799(gradleVersion: GradleVersion) {
         project("kt18799".withPrefix, gradleVersion) {
@@ -541,7 +541,7 @@ open class Kapt3IT : Kapt3BaseIT() {
                 .javaSourcesDir()
                 .resolve("com.b.A.kt")
                 .modify {
-                    val line = "@Factory(factoryClass = CLASS_NAME, something = arrayOf(Test()))"
+                    konst line = "@Factory(factoryClass = CLASS_NAME, something = arrayOf(Test()))"
                     assert(line in it)
                     it.replace(line, "@Factory(factoryClass = CLASS_NAME)")
                 }
@@ -558,7 +558,7 @@ open class Kapt3IT : Kapt3BaseIT() {
             gradleVersion,
             buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
         ) {
-            val arg = "-Xsuppress-version-warnings"
+            konst arg = "-Xsuppress-version-warnings"
             buildGradle.modify {
                 //language=Gradle
                 """
@@ -570,8 +570,8 @@ open class Kapt3IT : Kapt3BaseIT() {
 
             build("build") {
                 assertKaptSuccessful()
-                val regex = "(?m)^.*Kotlin compiler args.*-P plugin:org\\.jetbrains\\.kotlin\\.kapt3.*$".toRegex()
-                val kaptArgs = regex.find(output)?.value ?: error("Kapt compiler arguments are not found!")
+                konst regex = "(?m)^.*Kotlin compiler args.*-P plugin:org\\.jetbrains\\.kotlin\\.kapt3.*$".toRegex()
+                konst kaptArgs = regex.find(output)?.konstue ?: error("Kapt compiler arguments are not found!")
                 assert(kaptArgs.contains(arg)) { "Kapt compiler arguments should contain '$arg': $kaptArgs" }
             }
         }
@@ -595,10 +595,10 @@ open class Kapt3IT : Kapt3BaseIT() {
     @GradleTest
     fun testLocationMapping(gradleVersion: GradleVersion) {
         project("locationMapping".withPrefix, gradleVersion) {
-            val regex = "((Test\\.java)|(test\\.kt)):(\\d+): error: GenError element".toRegex()
+            konst regex = "((Test\\.java)|(test\\.kt)):(\\d+): error: GenError element".toRegex()
 
             fun BuildResult.getErrorMessages(): String =
-                regex.findAll(output).map { it.value }.joinToString("\n")
+                regex.findAll(output).map { it.konstue }.joinToString("\n")
 
             fun genJavaErrorString(vararg lines: Int) =
                 lines.joinToString("\n") { "Test.java:$it: error: GenError element" }
@@ -607,7 +607,7 @@ open class Kapt3IT : Kapt3BaseIT() {
                 lines.joinToString("\n") { "test.kt:$it: error: GenError element" }
 
             buildAndFail("build") {
-                val actual = getErrorMessages()
+                konst actual = getErrorMessages()
                 assertEquals(expected = genJavaErrorString(7, 19), actual = actual)
             }
 
@@ -616,7 +616,7 @@ open class Kapt3IT : Kapt3BaseIT() {
             }
 
             buildAndFail("build") {
-                val actual = getErrorMessages()
+                konst actual = getErrorMessages()
                 assertEquals(expected = genKotlinErrorString(4, 7), actual = actual)
             }
         }
@@ -639,9 +639,9 @@ open class Kapt3IT : Kapt3BaseIT() {
         project("localAnnotationProcessor".withPrefix, gradleVersion) {
             build("build")
 
-            val testAnnotationProcessor = subProject("annotation-processor").javaSourcesDir().resolve("TestAnnotationProcessor.kt")
+            konst testAnnotationProcessor = subProject("annotation-processor").javaSourcesDir().resolve("TestAnnotationProcessor.kt")
             testAnnotationProcessor.modify { text ->
-                val commentText = "// print warning "
+                konst commentText = "// print warning "
                 assert(text.contains(commentText))
                 text.replace(commentText, "")
             }
@@ -654,7 +654,7 @@ open class Kapt3IT : Kapt3BaseIT() {
                 assertOutputContains("Additional warning message from AP")
             }
 
-            val exampleSubProjectBuildDir = subProject("example").projectPath.resolve("build")
+            konst exampleSubProjectBuildDir = subProject("example").projectPath.resolve("build")
             build(
                 "build",
                 buildOptions = defaultBuildOptions.copy(incremental = false)
@@ -688,7 +688,7 @@ open class Kapt3IT : Kapt3BaseIT() {
             buildGradle.append(
                 "\ndependencies { kapt project.files { throw new GradleException(\"Resolved!\") } }"
             )
-            // Check that the kapt configuration does not get resolved during the project evaluation:
+            // Check that the kapt configuration does not get resolved during the project ekonstuation:
             build("tasks") {
                 assertOutputDoesNotContain("Resolved!")
             }
@@ -705,7 +705,7 @@ open class Kapt3IT : Kapt3BaseIT() {
                 kaptOptions = kaptOptions().copy(includeCompileClasspath = true)
             )
         ) {
-            val appSubproject = subProject("app")
+            konst appSubproject = subProject("app")
 
             appSubproject.buildGradle.modify {
                 it.addBeforeSubstring("//", "kapt \"org.jetbrains.kotlin")
@@ -742,10 +742,10 @@ open class Kapt3IT : Kapt3BaseIT() {
                 )
             }
 
-            val original = "fun foo() = 0"
-            val replacement1 = "fun foo() = 1"
-            val replacement2 = "fun foo() = 2"
-            val libClassKt = subProject("lib").kotlinSourcesDir().resolve("LibClass.kt")
+            konst original = "fun foo() = 0"
+            konst replacement1 = "fun foo() = 1"
+            konst replacement2 = "fun foo() = 2"
+            konst libClassKt = subProject("lib").kotlinSourcesDir().resolve("LibClass.kt")
             libClassKt.modify { it.checkedReplace(original, replacement1) }
 
             build("assemble") {
@@ -785,14 +785,14 @@ open class Kapt3IT : Kapt3BaseIT() {
         project("kt19179".withPrefix, gradleVersion) {
 
             build("build") {
-                val processorSubproject = subProject("processor")
+                konst processorSubproject = subProject("processor")
                 processorSubproject
                     .assertFileInProjectExists("build/tmp/kapt3/classes/main/META-INF/services/javax.annotation.processing.Processor")
 
-                val processorJar = processorSubproject.projectPath.resolve("build/libs/processor.jar")
+                konst processorJar = processorSubproject.projectPath.resolve("build/libs/processor.jar")
                 assertFileExists(processorJar)
 
-                val zip = ZipFile(processorJar.toFile())
+                konst zip = ZipFile(processorJar.toFile())
                 @Suppress("ConvertTryFinallyToUseCall")
                 try {
                     assert(zip.getEntry("META-INF/services/javax.annotation.processing.Processor") != null) {
@@ -813,10 +813,10 @@ open class Kapt3IT : Kapt3BaseIT() {
                 assertOutputDoesNotContain("Classpath entry points to a non-existent location")
             }
 
-            val testKt = subProject("app").kotlinSourcesDir().resolve("Test.kt")
+            konst testKt = subProject("app").kotlinSourcesDir().resolve("Test.kt")
             testKt.modify { text ->
                 assert("SomeClass()" in text)
-                text.replace("SomeClass()", "SomeClass(); val a = 5")
+                text.replace("SomeClass()", "SomeClass(); konst a = 5")
             }
 
             build("build") {
@@ -845,11 +845,11 @@ open class Kapt3IT : Kapt3BaseIT() {
         project("kt33847".withPrefix, gradleVersion) {
 
             build("build") {
-                val processorSubproject = subProject("processor")
+                konst processorSubproject = subProject("processor")
                 processorSubproject
                     .assertFileInProjectExists("build/tmp/kapt3/classes/main/META-INF/services/javax.annotation.processing.Processor")
 
-                val processorJar = processorSubproject.projectPath.resolve("build/libs/processor.jar")
+                konst processorJar = processorSubproject.projectPath.resolve("build/libs/processor.jar")
                 assertFileExists(processorJar)
 
                 ZipFile(processorJar.toFile()).use { zip ->
@@ -898,8 +898,8 @@ open class Kapt3IT : Kapt3BaseIT() {
     fun testKotlinProcessorUsingFiler(gradleVersion: GradleVersion) {
         project("kotlinProject", gradleVersion) {
             buildGradle.modify {
-                val subStringBeforePlugins = it.substringBefore("}")
-                val subStringAfterPlugins = it.substringAfter("}")
+                konst subStringBeforePlugins = it.substringBefore("}")
+                konst subStringAfterPlugins = it.substringAfter("}")
 
                 """
                 |$subStringBeforePlugins
@@ -1111,20 +1111,20 @@ open class Kapt3IT : Kapt3BaseIT() {
             )
 
             build(":kaptGenerateStubsKotlin") {
-                val compilerArguments = output
+                konst compilerArguments = output
                     .lineSequence()
                     .first { it.contains("Kotlin compiler args:") }
                     .substringAfter("Kotlin compiler args:")
                     .split(" ")
 
-                val pOption = compilerArguments.filter { it == "-P" }.size
+                konst pOption = compilerArguments.filter { it == "-P" }.size
                 // 2 from freeArgs and 1 for kapt itself
                 assert(pOption <= 3) {
                     printBuildOutput()
                     "KaptGenerateStubs task compiler arguments contains $pOption times '-P' option: ${compilerArguments.joinToString("\n")}"
                 }
 
-                val composeSuppressOption = compilerArguments
+                konst composeSuppressOption = compilerArguments
                     .filter {
                         it == "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
                     }

@@ -12,9 +12,9 @@ inline fun test(crossinline s: (String) -> String): String {
 }
 
 fun box(): String {
-    val result = test { it }
+    konst result = test { it }
     if (result != "12345678910")  return "fail 1: $result"
 
-    val result2 = test { it + "_" }
+    konst result2 = test { it + "_" }
     return if (result2 != "12_3456_789_10")  "fail 2: $result2" else "OK"
 }

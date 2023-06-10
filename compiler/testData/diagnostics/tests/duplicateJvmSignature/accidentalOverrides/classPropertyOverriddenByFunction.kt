@@ -1,5 +1,5 @@
 open class B {
-    val x: Int
+    konst x: Int
         get() = 1
 }
 

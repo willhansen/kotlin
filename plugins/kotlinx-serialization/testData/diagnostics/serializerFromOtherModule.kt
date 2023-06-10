@@ -9,7 +9,7 @@
 import kotlinx.serialization.*
 
 @Serializable
-class Access(val message: String)
+class Access(konst message: String)
 
 // MODULE: main(lib)
 // FILE: test.kt
@@ -18,4 +18,4 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 @Serializable
-class Usage(val access: Access)
+class Usage(konst access: Access)

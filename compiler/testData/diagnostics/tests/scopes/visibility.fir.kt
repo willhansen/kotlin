@@ -6,13 +6,13 @@ package test_visibility
 <!WRONG_MODIFIER_CONTAINING_DECLARATION!>protected<!> class ProtectedClass
 <!WRONG_MODIFIER_CONTAINING_DECLARATION!>protected<!> interface ProtectedTrait
 
-<!WRONG_MODIFIER_TARGET!>protected<!> val protected_val : Int = 4
+<!WRONG_MODIFIER_TARGET!>protected<!> konst protected_konst : Int = 4
 <!WRONG_MODIFIER_TARGET!>protected<!> fun protected_fun() {}
 
-private val private_val : Int = 4
+private konst private_konst : Int = 4
 private fun private_fun() {}
 
-val internal_val : Int = 34
+konst internal_konst : Int = 34
 fun internal_fun() {}
 
 fun test1() {
@@ -26,8 +26,8 @@ class Y {
 }
 
 class A {
-    private val i = 23
-    private val v: B = B()
+    private konst i = 23
+    private konst v: B = B()
     private fun f(i: Int): B = B()
 
     fun test() {
@@ -58,7 +58,7 @@ fun test4(c: C) {
 }
 
 class D : C() {
-    val j = i
+    konst j = i
     fun test6() {
         doSmth(i)
     }

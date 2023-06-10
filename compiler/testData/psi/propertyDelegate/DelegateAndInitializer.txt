@@ -4,7 +4,7 @@ KtFile: DelegateAndInitializer.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiElement(COLON)(':')
@@ -31,7 +31,7 @@ KtFile: DelegateAndInitializer.kt
           PsiElement(RPAR)(')')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('b')
     PsiElement(COLON)(':')
@@ -58,7 +58,7 @@ KtFile: DelegateAndInitializer.kt
           PsiElement(RPAR)(')')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('c')
     PsiElement(COLON)(':')

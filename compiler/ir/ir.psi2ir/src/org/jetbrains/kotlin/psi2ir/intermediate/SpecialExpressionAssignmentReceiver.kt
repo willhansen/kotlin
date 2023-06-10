@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi2ir.generators.StatementGenerator
 
 internal class SpecialExpressionAssignmentReceiver(
-    private val statementGenerator: StatementGenerator,
-    private val ktExpression: KtExpression,
-    private val origin: IrStatementOrigin,
-    override val type: IrType
+    private konst statementGenerator: StatementGenerator,
+    private konst ktExpression: KtExpression,
+    private konst origin: IrStatementOrigin,
+    override konst type: IrType
 ) :
     LValue,
     AssignmentReceiver {

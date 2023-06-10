@@ -1,4 +1,4 @@
-val f = if (true) return else {
+konst f = if (true) return else {
   dfsd
   );;;);;;~;;;
   srgsdfg

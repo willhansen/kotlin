@@ -19,7 +19,7 @@ fun KmAnnotation.writeAnnotation(strings: StringTable): ProtoBuf.Annotation.Buil
         for ((name, argument) in arguments) {
             addArgument(ProtoBuf.Annotation.Argument.newBuilder().apply {
                 nameId = strings.getStringIndex(name)
-                value = argument.writeAnnotationArgument(strings).build()
+                konstue = argument.writeAnnotationArgument(strings).build()
             })
         }
     }
@@ -29,59 +29,59 @@ fun KmAnnotationArgument.writeAnnotationArgument(strings: StringTable): ProtoBuf
         when (this@writeAnnotationArgument) {
             is KmAnnotationArgument.ByteValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.BYTE
-                this.intValue = value.toLong()
+                this.intValue = konstue.toLong()
             }
             is KmAnnotationArgument.CharValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.CHAR
-                this.intValue = value.code.toLong()
+                this.intValue = konstue.code.toLong()
             }
             is KmAnnotationArgument.ShortValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.SHORT
-                this.intValue = value.toLong()
+                this.intValue = konstue.toLong()
             }
             is KmAnnotationArgument.IntValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.INT
-                this.intValue = value.toLong()
+                this.intValue = konstue.toLong()
             }
             is KmAnnotationArgument.LongValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.LONG
-                this.intValue = value
+                this.intValue = konstue
             }
             is KmAnnotationArgument.FloatValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.FLOAT
-                this.floatValue = value
+                this.floatValue = konstue
             }
             is KmAnnotationArgument.DoubleValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.DOUBLE
-                this.doubleValue = value
+                this.doubleValue = konstue
             }
             is KmAnnotationArgument.BooleanValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.BOOLEAN
-                this.intValue = if (value) 1 else 0
+                this.intValue = if (konstue) 1 else 0
             }
             is KmAnnotationArgument.UByteValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.BYTE
-                this.intValue = value.toLong()
+                this.intValue = konstue.toLong()
                 this.flags = Flags.IS_UNSIGNED.toFlags(true)
             }
             is KmAnnotationArgument.UShortValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.SHORT
-                this.intValue = value.toLong()
+                this.intValue = konstue.toLong()
                 this.flags = Flags.IS_UNSIGNED.toFlags(true)
             }
             is KmAnnotationArgument.UIntValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.INT
-                this.intValue = value.toLong()
+                this.intValue = konstue.toLong()
                 this.flags = Flags.IS_UNSIGNED.toFlags(true)
             }
             is KmAnnotationArgument.ULongValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.LONG
-                this.intValue = value.toLong()
+                this.intValue = konstue.toLong()
                 this.flags = Flags.IS_UNSIGNED.toFlags(true)
             }
             is KmAnnotationArgument.StringValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.STRING
-                this.stringValue = strings.getStringIndex(value)
+                this.stringValue = strings.getStringIndex(konstue)
             }
             is KmAnnotationArgument.KClassValue -> {
                 this.type = ProtoBuf.Annotation.Argument.Value.Type.CLASS

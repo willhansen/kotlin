@@ -27,10 +27,10 @@ import kotlin.test.assertEquals
 
 class KT56143CinteropConfigurationAttributes {
 
-    private val targetAttribute = Attribute.of("for.target", String::class.java)
-    private val compilationAttribute = Attribute.of("for.compilation", String::class.java)
+    private konst targetAttribute = Attribute.of("for.target", String::class.java)
+    private konst compilationAttribute = Attribute.of("for.compilation", String::class.java)
 
-    private val project = buildProjectWithMPP {
+    private konst project = buildProjectWithMPP {
         kotlin {
             linuxX64("variantA") {
                 attributes.attribute(targetAttribute, "a")
@@ -44,32 +44,32 @@ class KT56143CinteropConfigurationAttributes {
         }
     }
 
-    private val variantA = project.multiplatformExtension.linuxX64("variantA")
+    private konst variantA = project.multiplatformExtension.linuxX64("variantA")
 
-    private val variantB = project.multiplatformExtension.linuxX64("variantB")
+    private konst variantB = project.multiplatformExtension.linuxX64("variantB")
 
     @Test
     fun `test - cinteropApiElements - contains target attributes`() {
-        project.evaluate()
+        project.ekonstuate()
 
-        val variantAElements = project.locateOrCreateCInteropApiElementsConfiguration(variantA)
+        konst variantAElements = project.locateOrCreateCInteropApiElementsConfiguration(variantA)
         assertEquals("a", variantAElements.attributes.getAttribute(targetAttribute))
 
-        val variantBElements = project.locateOrCreateCInteropApiElementsConfiguration(variantB)
+        konst variantBElements = project.locateOrCreateCInteropApiElementsConfiguration(variantB)
         assertEquals("b", variantBElements.attributes.getAttribute(targetAttribute))
     }
 
     @Test
     fun `test - cinteropDependencies - contains target and compilation attributes`() {
-        project.evaluate()
+        project.ekonstuate()
 
-        val variantADependencies = project.locateOrCreateCInteropDependencyConfiguration(
+        konst variantADependencies = project.locateOrCreateCInteropDependencyConfiguration(
             variantA.compilations.main as KotlinNativeCompilation
         )
         assertEquals("a", variantADependencies.attributes.getAttribute(targetAttribute))
         assertEquals("compilation:a", variantADependencies.attributes.getAttribute(compilationAttribute))
 
-        val variantBDependencies = project.locateOrCreateCInteropDependencyConfiguration(
+        konst variantBDependencies = project.locateOrCreateCInteropDependencyConfiguration(
             variantB.compilations.main as KotlinNativeCompilation
         )
         assertEquals("b", variantBDependencies.attributes.getAttribute(targetAttribute))
@@ -78,7 +78,7 @@ class KT56143CinteropConfigurationAttributes {
 
     @Test
     fun `test - all cinterop configurations contain default attributes`() {
-        project.evaluate()
+        project.ekonstuate()
 
         fun checkConfigurationAttributes(configuration: Configuration) {
             assertEquals(
@@ -101,7 +101,7 @@ class KT56143CinteropConfigurationAttributes {
         }
 
         project.multiplatformExtension.targets.forEach { target ->
-            val cinteropApiElements = project.locateOrCreateCInteropApiElementsConfiguration(target)
+            konst cinteropApiElements = project.locateOrCreateCInteropApiElementsConfiguration(target)
             checkConfigurationAttributes(cinteropApiElements)
 
             target.compilations.forEach { compilation ->

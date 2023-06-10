@@ -15,7 +15,7 @@ public class Collector {
 
 class Serializer() {
     fun serialize() {
-        val messageCollector = createMessageCollector()
+        konst messageCollector = createMessageCollector()
         try {
 
         } catch (e: Throwable) {

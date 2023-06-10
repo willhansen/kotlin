@@ -13,23 +13,23 @@ import javax.lang.model.element.PackageElement
 
 // Useful only for packages with JvmPackageName annotation
 class MappedSymbolBasedPackage(
-    private val originalFqName: FqName,
-    private val childrenPackages: List<SimpleSymbolBasedPackage>,
+    private konst originalFqName: FqName,
+    private konst childrenPackages: List<SimpleSymbolBasedPackage>,
     javac: JavacWrapper
 ) : SymbolBasedElement<PackageElement>(childrenPackages.first().element, javac), SymbolBasedPackage {
-    override val fqName: FqName
+    override konst fqName: FqName
         get() = originalFqName
 
-    override val subPackages: Collection<JavaPackage>
+    override konst subPackages: Collection<JavaPackage>
         get() = childrenPackages.flatMap { javac.findSubPackages(it.fqName) }
 
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = childrenPackages.map { childrenPackage ->
             childrenPackage.element.annotationMirrors.map { annotationMirror -> SymbolBasedAnnotation(annotationMirror, javac) }
         }.flatten()
 
-    override val annotationsByFqName: Map<FqName?, JavaAnnotation> by buildLazyValueForMap()
+    override konst annotationsByFqName: Map<FqName?, JavaAnnotation> by buildLazyValueForMap()
 
     // @JvmPackageName-annotated files cannot have classes
     override fun getClasses(nameFilter: (Name) -> Boolean): List<JavaClass> = emptyList()

@@ -5,8 +5,8 @@
 import org.jetbrains.benchmarksLauncher.assert
 
 fun octoTest() {
-    val tree = OctoTree<Boolean>(4)
-    val to = (2 shl tree.depth)
+    konst tree = OctoTree<Boolean>(4)
+    konst to = (2 shl tree.depth)
 
     var x = 0
     var y = 0
@@ -17,7 +17,7 @@ fun octoTest() {
         while (y < to) {
             z = 0
             while (z < to) {
-                val c = (z + to * y + to * to * x) % 2 == 0
+                konst c = (z + to * y + to * to * x) % 2 == 0
 
                 tree.set(x, y, z, c)
                 z++
@@ -35,9 +35,9 @@ fun octoTest() {
         while (y < to) {
             z = 0
             while (z < to) {
-                val c = (z + to * y + to * to * x) % 2 == 0
+                konst c = (z + to * y + to * to * x) % 2 == 0
 
-                val res = tree.get(x, y, z)
+                konst res = tree.get(x, y, z)
 
                 assert(res == c)
                 z++

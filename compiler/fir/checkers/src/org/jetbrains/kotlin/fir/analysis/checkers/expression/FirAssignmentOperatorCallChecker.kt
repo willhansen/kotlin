@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.fir.types.isUnit
 
 object FirAssignmentOperatorCallChecker : FirFunctionCallChecker() {
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val resolvedCalleeSymbol = expression.calleeReference.toResolvedFunctionSymbol() ?: return
-        val resolvedCalleeName = resolvedCalleeSymbol.name
+        konst resolvedCalleeSymbol = expression.calleeReference.toResolvedFunctionSymbol() ?: return
+        konst resolvedCalleeName = resolvedCalleeSymbol.name
         if (expression.origin != FirFunctionCallOrigin.Operator ||
             resolvedCalleeName !in FirOperationNameConventions.ASSIGNMENT_NAMES
         ) {

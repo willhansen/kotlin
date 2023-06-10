@@ -13,19 +13,19 @@ import android.os.BaseBundle
 import android.os.PersistableBundle
 
 @Parcelize
-data class User(val a: PersistableBundle) : Parcelable
+data class User(konst a: PersistableBundle) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = User(
+    konst test = User(
         PersistableBundle().apply { putLong("A", 1L) }
     )
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = parcelableCreator<User>().createFromParcel(parcel)
+    konst test2 = parcelableCreator<User>().createFromParcel(parcel)
 
     assert(compareBundles(test.a, test2.a))
 }

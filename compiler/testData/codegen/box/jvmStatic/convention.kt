@@ -18,7 +18,7 @@ object A {
 
 fun box(): String {
 
-    val b1 = B(11)
+    konst b1 = B(11)
 
     with(A) {
         b1 += B(1000)
@@ -26,7 +26,7 @@ fun box(): String {
 
     if (b1.s != 1011) return "fail 1"
 
-    val b = B(11)
+    konst b = B(11)
     A.test1(b)
     if (b.s != 1011) return "fail 2"
 

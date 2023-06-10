@@ -25,8 +25,8 @@ import kotlin.native.concurrent.SharedImmutable
  * recursive instance of this tree with 100K nodes:
  *
  * ```
- * class Tree(val left: Tree? = null, val right: Tree? = null)
- * val deepTree = generateSequence(Tree()) { Tree(it) }.take(100_000).last()
+ * class Tree(konst left: Tree? = null, konst right: Tree? = null)
+ * konst deepTree = generateSequence(Tree()) { Tree(it) }.take(100_000).last()
  * ```
  *
  * A regular recursive function can be defined to compute a depth of a tree:
@@ -42,7 +42,7 @@ import kotlin.native.concurrent.SharedImmutable
  * it successfully computes [`depth(deepTree)`][DeepRecursiveFunction.invoke] expression:
  *
  * ```
- * val depth = DeepRecursiveFunction<Tree?, Int> { t ->
+ * konst depth = DeepRecursiveFunction<Tree?, Int> { t ->
  *     if (t == null) 0 else max(callRecursive(t.left), callRecursive(t.right)) + 1
  * }
  * println(depth(deepTree)) // Ok
@@ -53,11 +53,11 @@ import kotlin.native.concurrent.SharedImmutable
  * following pair of mutually recursive functions computes the number of tree nodes at even depth in the tree.
  *
  * ```
- * val mutualRecursion = object {
- *     val even: DeepRecursiveFunction<Tree?, Int> = DeepRecursiveFunction { t ->
+ * konst mutualRecursion = object {
+ *     konst even: DeepRecursiveFunction<Tree?, Int> = DeepRecursiveFunction { t ->
  *         if (t == null) 0 else odd.callRecursive(t.left) + odd.callRecursive(t.right) + 1
  *     }
- *     val odd: DeepRecursiveFunction<Tree?, Int> = DeepRecursiveFunction { t ->
+ *     konst odd: DeepRecursiveFunction<Tree?, Int> = DeepRecursiveFunction { t ->
  *         if (t == null) 0 else even.callRecursive(t.left) + even.callRecursive(t.right)
  *     }
  * }
@@ -70,7 +70,7 @@ import kotlin.native.concurrent.SharedImmutable
 @SinceKotlin("1.7")
 @WasExperimental(ExperimentalStdlibApi::class)
 public class DeepRecursiveFunction<T, R>(
-    internal val block: suspend DeepRecursiveScope<T, R>.(T) -> R
+    internal konst block: suspend DeepRecursiveScope<T, R>.(T) -> R
 )
 
 /**
@@ -82,8 +82,8 @@ public class DeepRecursiveFunction<T, R>(
  */
 @SinceKotlin("1.7")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun <T, R> DeepRecursiveFunction<T, R>.invoke(value: T): R =
-    DeepRecursiveScopeImpl<T, R>(block, value).runCallLoop()
+public operator fun <T, R> DeepRecursiveFunction<T, R>.invoke(konstue: T): R =
+    DeepRecursiveScopeImpl<T, R>(block, konstue).runCallLoop()
 
 /**
  * A scope class for [DeepRecursiveFunction] function declaration that defines [callRecursive] methods to
@@ -100,23 +100,23 @@ public sealed class DeepRecursiveScope<T, R> {
      * Makes recursive call to this [DeepRecursiveFunction] function putting the call activation frame on the heap,
      * as opposed to the actual call stack that is used by a regular recursive call.
      */
-    public abstract suspend fun callRecursive(value: T): R
+    public abstract suspend fun callRecursive(konstue: T): R
 
     /**
      * Makes call to the specified [DeepRecursiveFunction] function putting the call activation frame on the heap,
      * as opposed to the actual call stack that is used by a regular call.
      */
-    public abstract suspend fun <U, S> DeepRecursiveFunction<U, S>.callRecursive(value: U): S
+    public abstract suspend fun <U, S> DeepRecursiveFunction<U, S>.callRecursive(konstue: U): S
 
     @Deprecated(
         level = DeprecationLevel.ERROR,
         message =
         "'invoke' should not be called from DeepRecursiveScope. " +
                 "Use 'callRecursive' to do recursion in the heap instead of the call stack.",
-        replaceWith = ReplaceWith("this.callRecursive(value)")
+        replaceWith = ReplaceWith("this.callRecursive(konstue)")
     )
     @Suppress("UNUSED_PARAMETER")
-    public operator fun DeepRecursiveFunction<*, *>.invoke(value: Any?): Nothing =
+    public operator fun DeepRecursiveFunction<*, *>.invoke(konstue: Any?): Nothing =
         throw UnsupportedOperationException("Should not be called from DeepRecursiveScope")
 }
 
@@ -125,18 +125,18 @@ public sealed class DeepRecursiveScope<T, R> {
 private typealias DeepRecursiveFunctionBlock = suspend DeepRecursiveScope<*, *>.(Any?) -> Any?
 
 @SharedImmutable
-private val UNDEFINED_RESULT = Result.success(COROUTINE_SUSPENDED)
+private konst UNDEFINED_RESULT = Result.success(COROUTINE_SUSPENDED)
 
 @Suppress("UNCHECKED_CAST")
 private class DeepRecursiveScopeImpl<T, R>(
     block: suspend DeepRecursiveScope<T, R>.(T) -> R,
-    value: T
+    konstue: T
 ) : DeepRecursiveScope<T, R>(), Continuation<R> {
     // Active function block
     private var function: DeepRecursiveFunctionBlock = block as DeepRecursiveFunctionBlock
 
     // Value to call function with
-    private var value: Any? = value
+    private var konstue: Any? = konstue
 
     // Continuation of the current call
     private var cont: Continuation<Any?>? = this as Continuation<Any?>
@@ -144,7 +144,7 @@ private class DeepRecursiveScopeImpl<T, R>(
     // Completion result (completion of the whole call stack)
     private var result: Result<Any?> = UNDEFINED_RESULT
 
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
     override fun resumeWith(result: Result<R>) {
@@ -152,18 +152,18 @@ private class DeepRecursiveScopeImpl<T, R>(
         this.result = result
     }
 
-    override suspend fun callRecursive(value: T): R = suspendCoroutineUninterceptedOrReturn { cont ->
+    override suspend fun callRecursive(konstue: T): R = suspendCoroutineUninterceptedOrReturn { cont ->
         // calling the same function that is currently active
         this.cont = cont as Continuation<Any?>
-        this.value = value
+        this.konstue = konstue
         COROUTINE_SUSPENDED
     }
 
-    override suspend fun <U, S> DeepRecursiveFunction<U, S>.callRecursive(value: U): S = suspendCoroutineUninterceptedOrReturn { cont ->
+    override suspend fun <U, S> DeepRecursiveFunction<U, S>.callRecursive(konstue: U): S = suspendCoroutineUninterceptedOrReturn { cont ->
         // calling another recursive function
-        val function = block as DeepRecursiveFunctionBlock
+        konst function = block as DeepRecursiveFunctionBlock
         with(this@DeepRecursiveScopeImpl) {
-            val currentFunction = this.function
+            konst currentFunction = this.function
             if (function !== currentFunction) {
                 // calling a different function -- create a trampoline to restore function ref
                 this.function = function
@@ -172,7 +172,7 @@ private class DeepRecursiveScopeImpl<T, R>(
                 // calling the same function -- direct
                 this.cont = cont as Continuation<Any?>
             }
-            this.value = value
+            this.konstue = konstue
         }
         COROUTINE_SUSPENDED
     }
@@ -192,15 +192,15 @@ private class DeepRecursiveScopeImpl<T, R>(
     fun runCallLoop(): R {
         while (true) {
             // Note: cont is set to null in DeepRecursiveScopeImpl.resumeWith when the whole computation completes
-            val result = this.result
-            val cont = this.cont
+            konst result = this.result
+            konst cont = this.cont
                 ?: return (result as Result<R>).getOrThrow() // done -- final result
             // The order of comparison is important here for that case of rogue class with broken equals
             if (UNDEFINED_RESULT == result) {
-                // call "function" with "value" using "cont" as completion
-                val r = try {
-                    // This is block.startCoroutine(this, value, cont)
-                    function.startCoroutineUninterceptedOrReturn(this, value, cont)
+                // call "function" with "konstue" using "cont" as completion
+                konst r = try {
+                    // This is block.startCoroutine(this, konstue, cont)
+                    function.startCoroutineUninterceptedOrReturn(this, konstue, cont)
                 } catch (e: Throwable) {
                     cont.resumeWithException(e)
                     continue

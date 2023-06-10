@@ -12,7 +12,7 @@ class A {
             operationCounter++
             return 1
         }
-        set(value: Int) {
+        set(konstue: Int) {
             operationCounter++
         }
 }
@@ -20,13 +20,13 @@ class A {
 fun foo() = A()
 
 fun box(): String {
-    val loggingCounter = LoggingCounter()
+    konst loggingCounter = LoggingCounter()
     with(loggingCounter) {
         foo().p += 1
         foo().p = 1
         foo()?.p = 1
         foo().p
     }
-    val operationsTotal = loggingCounter.operationCounter
+    konst operationsTotal = loggingCounter.operationCounter
     return if (operationsTotal == 5) "OK" else "$operationsTotal"
 }

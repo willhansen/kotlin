@@ -26,6 +26,6 @@ import kotlin.test.*
     for (i in 'a' until 0.toChar())    { print(i); print(' ') }
 
 
-    val M = Int.MAX_VALUE / 2
+    konst M = Int.MAX_VALUE / 2
     for (i in M + 4..M + 10 step M)  { print(i); print(' ') }; println()
 }

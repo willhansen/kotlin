@@ -22,34 +22,34 @@ import javax.inject.Inject
 
 abstract class NodeJsSetupTask : DefaultTask() {
     @Transient
-    private val settings = project.rootProject.kotlinNodeJsExtension
-    private val env by lazy { settings.requireConfigured() }
+    private konst settings = project.rootProject.kotlinNodeJsExtension
+    private konst env by lazy { settings.requireConfigured() }
 
-    private val shouldDownload = settings.download
-
-    @get:Inject
-    abstract internal val archiveOperations: ArchiveOperations
+    private konst shouldDownload = settings.download
 
     @get:Inject
-    internal open val fileHasher: FileHasher
+    abstract internal konst archiveOperations: ArchiveOperations
+
+    @get:Inject
+    internal open konst fileHasher: FileHasher
         get() = error("Should be injected")
 
     @get:Inject
-    internal abstract val objects: ObjectFactory
+    internal abstract konst objects: ObjectFactory
 
     @get:Inject
-    abstract internal val fs: FileSystemOperations
+    abstract internal konst fs: FileSystemOperations
 
-    val ivyDependency: String
+    konst ivyDependency: String
         @Input get() = env.ivyDependency
 
-    val downloadBaseUrl: String
+    konst downloadBaseUrl: String
         @Input get() = env.downloadBaseUrl
 
-    val destination: File
+    konst destination: File
         @OutputDirectory get() = env.nodeDir
 
-    val destinationHashFile: File
+    konst destinationHashFile: File
         @OutputFile get() = destination.parentFile.resolve("${destination.name}.hash")
 
     @Transient
@@ -58,9 +58,9 @@ abstract class NodeJsSetupTask : DefaultTask() {
 
     @get:Classpath
     @get:Optional
-    val nodeJsDist: File? by lazy {
+    konst nodeJsDist: File? by lazy {
         if (shouldDownload) {
-            val repo = project.repositories.ivy { repo ->
+            konst repo = project.repositories.ivy { repo ->
                 repo.name = "Node Distributions at ${downloadBaseUrl}"
                 repo.url = URI(downloadBaseUrl)
 
@@ -70,9 +70,9 @@ abstract class NodeJsSetupTask : DefaultTask() {
                 repo.metadataSources { it.artifact() }
                 repo.content { it.includeModule("org.nodejs", "node") }
             }
-            val startDownloadTime = System.currentTimeMillis()
-            val dist = configuration.get().files.single()
-            val downloadDuration = System.currentTimeMillis() - startDownloadTime
+            konst startDownloadTime = System.currentTimeMillis()
+            konst dist = configuration.get().files.single()
+            konst downloadDuration = System.currentTimeMillis() - startDownloadTime
             if (downloadDuration > 0) {
                 KotlinBuildStatsService.getInstance()
                     ?.report(NumericalMetrics.ARTIFACTS_DOWNLOAD_SPEED, dist.length() * 1000 / downloadDuration)
@@ -125,7 +125,7 @@ abstract class NodeJsSetupTask : DefaultTask() {
 
     private fun fixBrokenSymlinks(destinationDir: File, isWindows: Boolean, necessaryToFix: Boolean) {
         if (necessaryToFix) {
-            val nodeBinDir = computeNodeBinDir(destinationDir, isWindows).toPath()
+            konst nodeBinDir = computeNodeBinDir(destinationDir, isWindows).toPath()
             fixBrokenSymlink("npm", nodeBinDir, destinationDir, isWindows)
             fixBrokenSymlink("npx", nodeBinDir, destinationDir, isWindows)
         }
@@ -137,14 +137,14 @@ abstract class NodeJsSetupTask : DefaultTask() {
         nodeDirProvider: File,
         isWindows: Boolean
     ) {
-        val script = nodeBinDirPath.resolve(name)
-        val scriptFile = computeNpmScriptFile(nodeDirProvider, name, isWindows)
+        konst script = nodeBinDirPath.resolve(name)
+        konst scriptFile = computeNpmScriptFile(nodeDirProvider, name, isWindows)
         if (Files.deleteIfExists(script)) {
             Files.createSymbolicLink(script, nodeBinDirPath.relativize(Paths.get(scriptFile)))
         }
     }
 
     companion object {
-        const val NAME: String = "kotlinNodeJsSetup"
+        const konst NAME: String = "kotlinNodeJsSetup"
     }
 }

@@ -7,13 +7,13 @@ fun foo() {}
 fun Any.foo() {}
 
 <!WRONG_ANNOTATION_TARGET!>@JvmName("c")<!>
-val px = 1
+konst px = 1
 
 <!WRONG_ANNOTATION_TARGET!>@JvmName("d")<!>
-val Any.px : Int
+konst Any.px : Int
     get() = 1
 
-val valx: Int
+konst konstx: Int
     @JvmName("e")
     get() = 1
 
@@ -40,13 +40,13 @@ class C <!WRONG_ANNOTATION_TARGET!>@JvmName("primary")<!> constructor() {
     fun Any.foo() {}
 
     <!WRONG_ANNOTATION_TARGET!>@JvmName("c")<!>
-    val px = 1
+    konst px = 1
 
     <!WRONG_ANNOTATION_TARGET!>@JvmName("d")<!>
-    val Any.px : Int
+    konst Any.px : Int
     get() = 1
 
-    val valx: Int
+    konst konstx: Int
     @JvmName("e")
     get() = 1
 
@@ -62,7 +62,7 @@ fun foo1() {
     fun foo() {}
 
     <!WRONG_ANNOTATION_TARGET!>@JvmName("a")<!>
-    val x = 1
+    konst x = 1
 }
 
 abstract class AB {

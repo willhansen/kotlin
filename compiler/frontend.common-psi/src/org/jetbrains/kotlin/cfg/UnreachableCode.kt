@@ -28,9 +28,9 @@ import org.jetbrains.kotlin.psi.KtPsiUtil
 import java.util.*
 
 interface UnreachableCode {
-    val elements: Set<KtElement>
-    val reachableElements: Set<KtElement>
-    val unreachableElements: Set<KtElement>
+    konst elements: Set<KtElement>
+    konst reachableElements: Set<KtElement>
+    konst unreachableElements: Set<KtElement>
 
     companion object {
         fun getUnreachableTextRanges(
@@ -60,10 +60,10 @@ interface UnreachableCode {
             reachableElements: Set<KtElement>,
             unreachableElements: Set<KtElement>
         ): List<PsiElement> {
-            val children = ArrayList<PsiElement>()
+            konst children = ArrayList<PsiElement>()
             acceptChildren(object : PsiElementVisitor() {
                 override fun visitElement(element: PsiElement) {
-                    val isReachable =
+                    konst isReachable =
                         element is KtElement && reachableElements.contains(element) && !element.hasChildrenInSet(unreachableElements)
                     if (isReachable || element.children.isEmpty()) {
                         children.add(element)
@@ -80,12 +80,12 @@ interface UnreachableCode {
                     || this.node?.elementType == KtTokens.COMMA
                     || this is PsiComment
 
-            val childrenToRemove = HashSet<PsiElement>()
+            konst childrenToRemove = HashSet<PsiElement>()
             fun collectSiblingsIfMeaningless(elementIndex: Int, direction: Int) {
-                val index = elementIndex + direction
+                konst index = elementIndex + direction
                 if (index !in 0 until size) return
 
-                val element = this[index]
+                konst element = this[index]
                 if (element.isMeaningless()) {
                     childrenToRemove.add(element)
                     collectSiblingsIfMeaningless(index, direction)
@@ -103,10 +103,10 @@ interface UnreachableCode {
 
 
         private fun List<PsiElement>.mergeAdjacentTextRanges(): List<TextRange> {
-            val result = ArrayList<TextRange>()
-            val lastRange = fold(null as TextRange?) { currentTextRange, element ->
+            konst result = ArrayList<TextRange>()
+            konst lastRange = fold(null as TextRange?) { currentTextRange, element ->
 
-                val elementRange = element.textRange!!
+                konst elementRange = element.textRange!!
                 when {
                     currentTextRange == null -> {
                         elementRange
@@ -130,11 +130,11 @@ interface UnreachableCode {
 }
 
 class UnreachableCodeImpl(
-    override val reachableElements: Set<KtElement>,
-    override val unreachableElements: Set<KtElement>
+    override konst reachableElements: Set<KtElement>,
+    override konst unreachableElements: Set<KtElement>
 ) : UnreachableCode {
 
     // This is needed in order to highlight only '1 < 2' and not '1', '<' and '2' as well
-    override val elements: Set<KtElement> = KtPsiUtil.findRootExpressions(unreachableElements)
+    override konst elements: Set<KtElement> = KtPsiUtil.findRootExpressions(unreachableElements)
 
 }

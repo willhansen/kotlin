@@ -13,8 +13,8 @@ import kotlin.system.exitProcess
 fun main(args: Array<String>) {
     if (args.isEmpty()) printUsageAndExit()
 
-    val tokens = args.iterator()
-    val tasks = mutableListOf<Task>()
+    konst tokens = args.iterator()
+    konst tasks = mutableListOf<Task>()
 
     var taskAlias: String? = tokens.next()
     while (taskAlias != null) {
@@ -24,13 +24,13 @@ fun main(args: Array<String>) {
     // execute tasks in a specific order:
     // - first, execute all informational tasks
     // - then, all commonization tasks
-    Category.values().forEach { category ->
-        val sortedTasks = tasks.filter { it.category == category }.sorted()
+    Category.konstues().forEach { category ->
+        konst sortedTasks = tasks.filter { it.category == category }.sorted()
         if (sortedTasks.isNotEmpty()) {
             category.prologue?.let(::println)
 
             sortedTasks.forEachIndexed { index, task ->
-                val logPrefix = if (category.logEachStep && sortedTasks.size > 1) "[Step ${index + 1} of ${sortedTasks.size}] " else ""
+                konst logPrefix = if (category.logEachStep && sortedTasks.size > 1) "[Step ${index + 1} of ${sortedTasks.size}] " else ""
                 task.execute(logPrefix)
             }
 
@@ -45,24 +45,24 @@ private fun parseTask(
     tokens: Iterator<String>,
     tasks: MutableList<Task>
 ): String? {
-    val taskType = TaskType.getByAlias(taskAlias) ?: printUsageAndExit("Unknown task $taskAlias")
-    val optionTypes = taskType.optionTypes.associateBy { it.alias }
-    val options = mutableMapOf<String, Option<*>>()
+    konst taskType = TaskType.getByAlias(taskAlias) ?: printUsageAndExit("Unknown task $taskAlias")
+    konst optionTypes = taskType.optionTypes.associateBy { it.alias }
+    konst options = mutableMapOf<String, Option<*>>()
 
     fun buildOngoingTask() {
         // check options completeness
-        val missingMandatoryOptions = optionTypes.filterKeys { it !in options }.filterValues { it.mandatory }.keys
+        konst missingMandatoryOptions = optionTypes.filterKeys { it !in options }.filterValues { it.mandatory }.keys
         if (missingMandatoryOptions.isNotEmpty())
             printUsageAndExit(
                 "Mandatory options not specified in task $taskAlias: " + missingMandatoryOptions.joinToString { "-$it" } + "\n" +
                         "Specified options: ${options.keys.joinToString(", ")}"
             )
 
-        tasks += taskType.taskConstructor(options.values)
+        tasks += taskType.taskConstructor(options.konstues)
     }
 
     while (tokens.hasNext()) {
-        val optionAlias = tokens.next().let { token ->
+        konst optionAlias = tokens.next().let { token ->
             if (!token.startsWith('-')) {
                 buildOngoingTask()
 
@@ -73,12 +73,12 @@ private fun parseTask(
             token.trimStart('-')
         }
 
-        if (optionAlias in options) printUsageAndExit("Duplicated value for option -$optionAlias in task $taskAlias")
+        if (optionAlias in options) printUsageAndExit("Duplicated konstue for option -$optionAlias in task $taskAlias")
 
-        val optionType = optionTypes[optionAlias] ?: printUsageAndExit("Unknown option -$optionAlias in task $taskAlias")
+        konst optionType = optionTypes[optionAlias] ?: printUsageAndExit("Unknown option -$optionAlias in task $taskAlias")
 
-        val rawValue = if (tokens.hasNext()) tokens.next() else printUsageAndExit("No value for option -$optionAlias in task $taskAlias")
-        val option = optionType.parse(rawValue) { reason ->
+        konst rawValue = if (tokens.hasNext()) tokens.next() else printUsageAndExit("No konstue for option -$optionAlias in task $taskAlias")
+        konst option = optionType.parse(rawValue) { reason ->
             printUsageAndExit("Failed to parse option -$optionAlias in task $taskAlias: $reason")
         }
 
@@ -101,7 +101,7 @@ private fun printUsageAndExit(errorMessage: String? = null): Nothing {
     }
 
     fun StringBuilder.formatRight(right: String): String {
-        val middleSpace = kotlin.math.max(38 - length, 1)
+        konst middleSpace = kotlin.math.max(38 - length, 1)
         repeat(middleSpace) { append(" ") }
         append(right)
         return this.toString()
@@ -112,11 +112,11 @@ private fun printUsageAndExit(errorMessage: String? = null): Nothing {
     println("Usage: ${::printUsageAndExit.javaClass.`package`.name}.CommonizerCLI <task> <options> [<task> <options>...]")
     println()
     println("Tasks:")
-    for (taskType in TaskType.values()) {
+    for (taskType in TaskType.konstues()) {
         println(formatBoth(1, taskType.alias, taskType.description))
         println(formatLeft(1, if (taskType.optionTypes.isNotEmpty()) "Options:" else "No options."))
         for (optionType in taskType.optionTypes) {
-            val lines = optionType.description.split('\n')
+            konst lines = optionType.description.split('\n')
             println(formatBoth(2, "-${optionType.alias}", lines.first()))
             lines.drop(1).forEach { println(StringBuilder().formatRight(it)) }
         }

@@ -1,4 +1,4 @@
 package test
 
-val c = CAlias()
-val c2 = CAlias2()
+konst c = CAlias()
+konst c2 = CAlias2()

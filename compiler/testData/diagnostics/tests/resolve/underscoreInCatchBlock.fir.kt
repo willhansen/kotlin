@@ -11,10 +11,10 @@ fun foo() {
     try {
         TODO()
     } catch (_: Exception) {
-        val x = {
-            val x2 = {
-                val x3 = { y: Int ->
-                    val x4 = { _: Int ->
+        konst x = {
+            konst x2 = {
+                konst x3 = { y: Int ->
+                    konst x4 = { _: Int ->
                         <!UNRESOLVED_REFERENCE!>`_`<!>
                     }
                     <!UNRESOLVED_REFERENCE!>`_`<!>
@@ -29,8 +29,8 @@ fun foo() {
         }
     } catch (_: Exception) {
         <!UNRESOLVED_REFERENCE!>`_`<!>.stackTrace
-        val y1 = <!UNDERSCORE_USAGE_WITHOUT_BACKTICKS, UNRESOLVED_REFERENCE!>_<!>
-        val y2 = (<!UNRESOLVED_REFERENCE!>`_`<!>)
+        konst y1 = <!UNDERSCORE_USAGE_WITHOUT_BACKTICKS, UNRESOLVED_REFERENCE!>_<!>
+        konst y2 = (<!UNRESOLVED_REFERENCE!>`_`<!>)
     }
     try {
         TODO()
@@ -41,14 +41,14 @@ fun foo() {
             <!UNRESOLVED_REFERENCE!>`_`<!>.stackTrace
         }
     }
-    val boo1 = { `_`: Exception ->
+    konst boo1 = { `_`: Exception ->
         try {
             TODO()
         } catch (x: Exception) {
             `_`.stackTrace
         }
     }
-    val boo2 = { _: Exception ->
+    konst boo2 = { _: Exception ->
         try {
             TODO()
         } catch (x: Exception) {

@@ -24,7 +24,7 @@ class IntArrayList(initialCapacity: Int) {
 
     fun size(): Int = size
 
-    val isEmpty: Boolean get() = size == 0
+    konst isEmpty: Boolean get() = size == 0
 
     operator fun get(index: Int): Int = data[index]
 

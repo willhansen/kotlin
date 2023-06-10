@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val a = ClassA()
+    konst a = ClassA()
     when (stepId) {
         0 -> {
             if (a.testExtension() != "testExtension fakeOverrideExtension 0") return "Fail extension"

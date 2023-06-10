@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.test.util.trimTrailingWhitespacesAndAddNewlineAtEOF
 
 class KaptIntegrationStubsDumpHandler(testServices: TestServices) : AbstractKaptHandler(testServices) {
     companion object {
-        private const val FILE_SUFFIX = ".it"
+        private const konst FILE_SUFFIX = ".it"
     }
 
     override fun processModule(module: TestModule, info: KaptContextBinaryArtifact) {
-        val actualRaw = testServices.kapt3ExtensionProvider[module].savedStubs ?: assertions.fail { "Stubs were not saved" }
-        val actual = StringUtil.convertLineSeparators(actualRaw.trim { it <= ' ' })
+        konst actualRaw = testServices.kapt3ExtensionProvider[module].savedStubs ?: assertions.fail { "Stubs were not saved" }
+        konst actual = StringUtil.convertLineSeparators(actualRaw.trim { it <= ' ' })
             .trimTrailingWhitespacesAndAddNewlineAtEOF()
             .let { removeMetadataAnnotationContents(it) }
         assertions.checkTxtAccordingToBackend(module, actual, FILE_SUFFIX)

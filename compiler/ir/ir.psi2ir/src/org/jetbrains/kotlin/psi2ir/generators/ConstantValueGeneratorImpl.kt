@@ -31,7 +31,7 @@ internal class ConstantValueGeneratorImpl(
         extractOffsets(annotationDescriptor.getSourceForArgument(argumentName))
 
     private fun extractOffsets(sourceElement: SourceElement): Pair<Int, Int> {
-        val psi = sourceElement.getPsi()
+        konst psi = sourceElement.getPsi()
         if (psi == null || psi.containingFile.fileType.isBinary) return UNDEFINED_OFFSET to UNDEFINED_OFFSET
         return Pair(psi.startOffset, psi.endOffset)
     }

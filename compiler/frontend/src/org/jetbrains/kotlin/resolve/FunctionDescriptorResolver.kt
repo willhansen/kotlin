@@ -72,16 +72,16 @@ import org.jetbrains.kotlin.types.typeUtil.replaceAnnotations
 import java.util.*
 
 class FunctionDescriptorResolver(
-    private val typeResolver: TypeResolver,
-    private val descriptorResolver: DescriptorResolver,
-    private val annotationResolver: AnnotationResolver,
-    private val builtIns: KotlinBuiltIns,
-    private val modifiersChecker: ModifiersChecker,
-    private val overloadChecker: OverloadChecker,
-    private val contractParsingServices: ContractParsingServices,
-    private val expressionTypingServices: ExpressionTypingServices,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val storageManager: StorageManager
+    private konst typeResolver: TypeResolver,
+    private konst descriptorResolver: DescriptorResolver,
+    private konst annotationResolver: AnnotationResolver,
+    private konst builtIns: KotlinBuiltIns,
+    private konst modifiersChecker: ModifiersChecker,
+    private konst overloadChecker: OverloadChecker,
+    private konst contractParsingServices: ContractParsingServices,
+    private konst expressionTypingServices: ExpressionTypingServices,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst storageManager: StorageManager
 ) {
     fun resolveFunctionDescriptor(
         containingDescriptor: DeclarationDescriptor,
@@ -122,7 +122,7 @@ class FunctionDescriptorResolver(
         expectedFunctionType: KotlinType,
         inferenceSession: InferenceSession?
     ): SimpleFunctionDescriptor {
-        val functionDescriptor = functionConstructor(
+        konst functionDescriptor = functionConstructor(
             containingDescriptor,
             annotationResolver.resolveAnnotationsWithoutArguments(scope, function.modifierList, trace),
             function.nameAsSafeName,
@@ -159,7 +159,7 @@ class FunctionDescriptorResolver(
             )
         }
 
-        val inferredReturnType = when {
+        konst inferredReturnType = when {
             function.hasBlockBody() ->
                 builtIns.unitType
             function.hasBody() ->
@@ -182,49 +182,49 @@ class FunctionDescriptorResolver(
         dataFlowInfo: DataFlowInfo,
         inferenceSession: InferenceSession?
     ) {
-        val headerScope = LexicalWritableScope(
+        konst headerScope = LexicalWritableScope(
             scope, functionDescriptor, true,
             TraceBasedLocalRedeclarationChecker(trace, overloadChecker), LexicalScopeKind.FUNCTION_HEADER
         )
 
-        val typeParameterDescriptors =
+        konst typeParameterDescriptors =
             descriptorResolver.resolveTypeParametersForDescriptor(functionDescriptor, headerScope, scope, function.typeParameters, trace)
         descriptorResolver.resolveGenericBounds(function, functionDescriptor, headerScope, typeParameterDescriptors, trace)
 
-        val receiverTypeRef = function.receiverTypeReference
-        val receiverType =
+        konst receiverTypeRef = function.receiverTypeReference
+        konst receiverType =
             if (receiverTypeRef != null) {
                 typeResolver.resolveType(headerScope, receiverTypeRef, trace, true)
             } else {
                 if (function is KtFunctionLiteral) expectedFunctionType.getReceiverType() else null
             }
 
-        val contextReceivers = function.contextReceivers
-        val contextReceiverTypes =
+        konst contextReceivers = function.contextReceivers
+        konst contextReceiverTypes =
             if (function is KtFunctionLiteral) expectedFunctionType.getContextReceiversTypes()
             else contextReceivers
                 .mapNotNull {
-                    val typeReference = it.typeReference() ?: return@mapNotNull null
-                    val type = typeResolver.resolveType(headerScope, typeReference, trace, true)
+                    konst typeReference = it.typeReference() ?: return@mapNotNull null
+                    konst type = typeResolver.resolveType(headerScope, typeReference, trace, true)
                     ContextReceiverTypeWithLabel(type, it.labelNameAsName())
                 }
 
 
-        val valueParameterDescriptors =
+        konst konstueParameterDescriptors =
             createValueParameterDescriptors(function, functionDescriptor, headerScope, trace, expectedFunctionType, inferenceSession)
 
         headerScope.freeze()
 
-        val returnType = function.typeReference?.let { typeResolver.resolveType(headerScope, it, trace, true) }
+        konst returnType = function.typeReference?.let { typeResolver.resolveType(headerScope, it, trace, true) }
 
-        val visibility = resolveVisibilityFromModifiers(function, getDefaultVisibility(function, container))
-        val modality = resolveMemberModalityFromModifiers(
+        konst visibility = resolveVisibilityFromModifiers(function, getDefaultVisibility(function, container))
+        konst modality = resolveMemberModalityFromModifiers(
             function, getDefaultModality(container, visibility, function.hasBody()),
             trace.bindingContext, container
         )
 
-        val contractProvider = getContractProvider(functionDescriptor, trace, scope, dataFlowInfo, function, inferenceSession)
-        val userData = mutableMapOf<CallableDescriptor.UserDataKey<*>, Any>().apply {
+        konst contractProvider = getContractProvider(functionDescriptor, trace, scope, dataFlowInfo, function, inferenceSession)
+        konst userData = mutableMapOf<CallableDescriptor.UserDataKey<*>, Any>().apply {
             if (contractProvider != null) {
                 put(ContractProviderKey, contractProvider)
             }
@@ -234,14 +234,14 @@ class FunctionDescriptorResolver(
             }
         }
 
-        val extensionReceiver = receiverType?.let {
-            val splitter = AnnotationSplitter(storageManager, it.annotations, EnumSet.of(AnnotationUseSiteTarget.RECEIVER))
+        konst extensionReceiver = receiverType?.let {
+            konst splitter = AnnotationSplitter(storageManager, it.annotations, EnumSet.of(AnnotationUseSiteTarget.RECEIVER))
             DescriptorFactory.createExtensionReceiverParameterForCallable(
                 functionDescriptor, it, splitter.getAnnotationsForTarget(AnnotationUseSiteTarget.RECEIVER)
             )
         }
-        val contextReceiverDescriptors = contextReceiverTypes.mapIndexedNotNull { index, contextReceiver ->
-            val splitter = AnnotationSplitter(storageManager, contextReceiver.type.annotations, EnumSet.of(AnnotationUseSiteTarget.RECEIVER))
+        konst contextReceiverDescriptors = contextReceiverTypes.mapIndexedNotNull { index, contextReceiver ->
+            konst splitter = AnnotationSplitter(storageManager, contextReceiver.type.annotations, EnumSet.of(AnnotationUseSiteTarget.RECEIVER))
             DescriptorFactory.createContextReceiverParameterForCallable(
                 functionDescriptor,
                 contextReceiver.type,
@@ -252,7 +252,7 @@ class FunctionDescriptorResolver(
         }
 
         if (languageVersionSettings.supportsFeature(LanguageFeature.ContextReceivers)) {
-            val labelNameToReceiverMap = HashMultimap.create<String, ReceiverParameterDescriptor>()
+            konst labelNameToReceiverMap = HashMultimap.create<String, ReceiverParameterDescriptor>()
             if (receiverTypeRef != null && extensionReceiver != null) {
                 receiverTypeRef.nameForReceiverLabel()?.let {
                     labelNameToReceiverMap.put(it, extensionReceiver)
@@ -273,7 +273,7 @@ class FunctionDescriptorResolver(
             getDispatchReceiverParameterIfNeeded(container),
             contextReceiverDescriptors,
             typeParameterDescriptors,
-            valueParameterDescriptors,
+            konstueParameterDescriptors,
             returnType,
             modality,
             visibility,
@@ -291,8 +291,8 @@ class FunctionDescriptorResolver(
         functionDescriptor.isActual = function.hasActualModifier()
 
         receiverType?.let { ForceResolveUtil.forceResolveAllContents(it.annotations) }
-        for (valueParameterDescriptor in valueParameterDescriptors) {
-            ForceResolveUtil.forceResolveAllContents(valueParameterDescriptor.type.annotations)
+        for (konstueParameterDescriptor in konstueParameterDescriptors) {
+            ForceResolveUtil.forceResolveAllContents(konstueParameterDescriptor.type.annotations)
         }
     }
 
@@ -306,8 +306,8 @@ class FunctionDescriptorResolver(
     ): LazyContractProvider? {
         if (function !is KtNamedFunction) return null
 
-        val isContractsEnabled = languageVersionSettings.supportsFeature(LanguageFeature.AllowContractsForCustomFunctions)
-        val isAllowedOnMembers = languageVersionSettings.supportsFeature(LanguageFeature.AllowContractsForNonOverridableMembers)
+        konst isContractsEnabled = languageVersionSettings.supportsFeature(LanguageFeature.AllowContractsForCustomFunctions)
+        konst isAllowedOnMembers = languageVersionSettings.supportsFeature(LanguageFeature.AllowContractsForNonOverridableMembers)
 
         if (!isContractsEnabled || !function.mayHaveContract(isAllowedOnMembers)) return null
 
@@ -326,32 +326,32 @@ class FunctionDescriptorResolver(
         expectedFunctionType: KotlinType,
         inferenceSession: InferenceSession?
     ): List<ValueParameterDescriptor> {
-        val expectedValueParameters = expectedFunctionType.getValueParameters(functionDescriptor)
-        val expectedParameterTypes = expectedValueParameters?.map { it.type.removeParameterNameAnnotation() }
+        konst expectedValueParameters = expectedFunctionType.getValueParameters(functionDescriptor)
+        konst expectedParameterTypes = expectedValueParameters?.map { it.type.removeParameterNameAnnotation() }
         if (expectedValueParameters != null) {
             if (expectedValueParameters.size == 1 && function is KtFunctionLiteral && function.getValueParameterList() == null) {
                 // it parameter for lambda
-                val valueParameterDescriptor = expectedValueParameters.single()
-                val it = ValueParameterDescriptorImpl(
+                konst konstueParameterDescriptor = expectedValueParameters.single()
+                konst it = ValueParameterDescriptorImpl(
                     functionDescriptor, null, 0, Annotations.EMPTY, Name.identifier("it"),
-                    expectedParameterTypes!!.single(), valueParameterDescriptor.declaresDefaultValue(),
-                    valueParameterDescriptor.isCrossinline, valueParameterDescriptor.isNoinline,
-                    valueParameterDescriptor.varargElementType, SourceElement.NO_SOURCE
+                    expectedParameterTypes!!.single(), konstueParameterDescriptor.declaresDefaultValue(),
+                    konstueParameterDescriptor.isCrossinline, konstueParameterDescriptor.isNoinline,
+                    konstueParameterDescriptor.varargElementType, SourceElement.NO_SOURCE
                 )
                 trace.record(BindingContext.AUTO_CREATED_IT, it)
                 return listOf(it)
             }
-            if (function.valueParameters.size != expectedValueParameters.size) {
+            if (function.konstueParameters.size != expectedValueParameters.size) {
                 trace.report(EXPECTED_PARAMETERS_NUMBER_MISMATCH.on(function, expectedParameterTypes!!.size, expectedParameterTypes))
             }
         }
 
-        trace.recordScope(innerScope, function.valueParameterList)
+        trace.recordScope(innerScope, function.konstueParameterList)
 
         return resolveValueParameters(
             functionDescriptor,
             innerScope,
-            function.valueParameters,
+            function.konstueParameters,
             trace,
             expectedParameterTypes,
             inferenceSession
@@ -360,7 +360,7 @@ class FunctionDescriptorResolver(
 
     private fun KotlinType.removeParameterNameAnnotation(): KotlinType {
         if (this is TypeUtils.SpecialType) return this
-        val parameterNameAnnotation = annotations.findAnnotation(StandardNames.FqNames.parameterName) ?: return this
+        konst parameterNameAnnotation = annotations.findAnnotation(StandardNames.FqNames.parameterName) ?: return this
         return replaceAnnotations(Annotations.create(annotations.filter { it != parameterNameAnnotation }))
     }
 
@@ -416,7 +416,7 @@ class FunctionDescriptorResolver(
             false,
             constructor.modifierList,
             constructor,
-            constructor.valueParameters,
+            constructor.konstueParameters,
             trace,
             languageVersionSettings,
             inferenceSession
@@ -429,12 +429,12 @@ class FunctionDescriptorResolver(
         isPrimary: Boolean,
         modifierList: KtModifierList?,
         declarationToTrace: KtPureElement,
-        valueParameters: List<KtParameter>,
+        konstueParameters: List<KtParameter>,
         trace: BindingTrace,
         languageVersionSettings: LanguageVersionSettings,
         inferenceSession: InferenceSession?
     ): ClassConstructorDescriptorImpl {
-        val constructorDescriptor = ClassConstructorDescriptorImpl.create(
+        konst constructorDescriptor = ClassConstructorDescriptorImpl.create(
             classDescriptor,
             annotationResolver.resolveAnnotationsWithoutArguments(scope, modifierList, trace),
             isPrimary,
@@ -444,16 +444,16 @@ class FunctionDescriptorResolver(
         constructorDescriptor.isActual = modifierList?.hasActualModifier() == true ||
                 // We don't require 'actual' for constructors of actual annotations
                 classDescriptor.kind == ClassKind.ANNOTATION_CLASS && classDescriptor.isActual
-        val parameterScope = LexicalWritableScope(
+        konst parameterScope = LexicalWritableScope(
             scope,
             constructorDescriptor,
             false,
             TraceBasedLocalRedeclarationChecker(trace, overloadChecker),
             LexicalScopeKind.CONSTRUCTOR_HEADER
         )
-        val constructor = constructorDescriptor.initialize(
+        konst constructor = constructorDescriptor.initialize(
             resolveValueParameters(
-                constructorDescriptor, parameterScope, valueParameters, trace, null, inferenceSession
+                constructorDescriptor, parameterScope, konstueParameters, trace, null, inferenceSession
             ),
             resolveVisibilityFromModifiers(
                 modifierList,
@@ -462,7 +462,7 @@ class FunctionDescriptorResolver(
         )
         constructor.returnType = classDescriptor.defaultType
         if (DescriptorUtils.isAnnotationClass(classDescriptor)) {
-            CompileTimeConstantUtils.checkConstructorParametersType(valueParameters, trace)
+            CompileTimeConstantUtils.checkConstructorParametersType(konstueParameters, trace)
         }
         if (declarationToTrace is PsiElement)
             trace.record(BindingContext.CONSTRUCTOR, declarationToTrace, constructorDescriptor)
@@ -472,62 +472,62 @@ class FunctionDescriptorResolver(
     private fun resolveValueParameters(
         functionDescriptor: FunctionDescriptor,
         parameterScope: LexicalWritableScope,
-        valueParameters: List<KtParameter>,
+        konstueParameters: List<KtParameter>,
         trace: BindingTrace,
         expectedParameterTypes: List<KotlinType>?,
         inferenceSession: InferenceSession?
     ): List<ValueParameterDescriptor> {
-        val result = ArrayList<ValueParameterDescriptor>()
+        konst result = ArrayList<ValueParameterDescriptor>()
 
-        for (i in valueParameters.indices) {
-            val valueParameter = valueParameters[i]
-            val typeReference = valueParameter.typeReference
-            val expectedType = expectedParameterTypes?.let { if (i < it.size) it[i] else null }?.takeUnless { TypeUtils.noExpectedType(it) }
+        for (i in konstueParameters.indices) {
+            konst konstueParameter = konstueParameters[i]
+            konst typeReference = konstueParameter.typeReference
+            konst expectedType = expectedParameterTypes?.let { if (i < it.size) it[i] else null }?.takeUnless { TypeUtils.noExpectedType(it) }
 
-            val type: KotlinType
+            konst type: KotlinType
             if (typeReference != null) {
                 type = typeResolver.resolveType(parameterScope, typeReference, trace, true)
                 if (expectedType != null) {
                     if (!KotlinTypeChecker.DEFAULT.isSubtypeOf(expectedType, type)) {
-                        trace.report(EXPECTED_PARAMETER_TYPE_MISMATCH.on(valueParameter, expectedType))
+                        trace.report(EXPECTED_PARAMETER_TYPE_MISMATCH.on(konstueParameter, expectedType))
                     }
                 }
             } else {
                 type = if (isFunctionLiteral(functionDescriptor) || isFunctionExpression(functionDescriptor)) {
-                    val containsErrorType = TypeUtils.contains(expectedType) { it.isError }
+                    konst containsErrorType = TypeUtils.contains(expectedType) { it.isError }
                     if (expectedType == null || containsErrorType) {
-                        trace.report(CANNOT_INFER_PARAMETER_TYPE.on(valueParameter))
+                        trace.report(CANNOT_INFER_PARAMETER_TYPE.on(konstueParameter))
                     }
 
                     expectedType ?: TypeUtils.CANNOT_INFER_FUNCTION_PARAM_TYPE
                 } else {
-                    trace.report(VALUE_PARAMETER_WITH_NO_TYPE_ANNOTATION.on(valueParameter))
-                    ErrorUtils.createErrorType(ErrorTypeKind.MISSED_TYPE_FOR_PARAMETER, valueParameter.nameAsSafeName.toString())
+                    trace.report(VALUE_PARAMETER_WITH_NO_TYPE_ANNOTATION.on(konstueParameter))
+                    ErrorUtils.createErrorType(ErrorTypeKind.MISSED_TYPE_FOR_PARAMETER, konstueParameter.nameAsSafeName.toString())
                 }
             }
 
             if (functionDescriptor !is ConstructorDescriptor || !functionDescriptor.isPrimary) {
-                val isConstructor = functionDescriptor is ConstructorDescriptor
+                konst isConstructor = functionDescriptor is ConstructorDescriptor
                 with(modifiersChecker.withTrace(trace)) {
                     checkParameterHasNoValOrVar(
-                        valueParameter,
+                        konstueParameter,
                         if (isConstructor) VAL_OR_VAR_ON_SECONDARY_CONSTRUCTOR_PARAMETER else VAL_OR_VAR_ON_FUN_PARAMETER
                     )
                 }
             }
 
-            val valueParameterDescriptor = descriptorResolver.resolveValueParameterDescriptor(
-                parameterScope, functionDescriptor, valueParameter, i, type, trace, Annotations.EMPTY, inferenceSession
+            konst konstueParameterDescriptor = descriptorResolver.resolveValueParameterDescriptor(
+                parameterScope, functionDescriptor, konstueParameter, i, type, trace, Annotations.EMPTY, inferenceSession
             )
 
             // Do not report NAME_SHADOWING for lambda destructured parameters as they may be not fully resolved at this time
-            ExpressionTypingUtils.checkVariableShadowing(parameterScope, trace, valueParameterDescriptor)
+            ExpressionTypingUtils.checkVariableShadowing(parameterScope, trace, konstueParameterDescriptor)
 
-            parameterScope.addVariableDescriptor(valueParameterDescriptor)
-            result.add(valueParameterDescriptor)
+            parameterScope.addVariableDescriptor(konstueParameterDescriptor)
+            result.add(konstueParameterDescriptor)
         }
         return result
     }
 
-    private data class ContextReceiverTypeWithLabel(val type: KotlinType, val label: Name?)
+    private data class ContextReceiverTypeWithLabel(konst type: KotlinType, konst label: Name?)
 }

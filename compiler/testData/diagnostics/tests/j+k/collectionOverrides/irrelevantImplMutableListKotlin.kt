@@ -54,7 +54,7 @@ public abstract class AImpl {
         throw UnsupportedOperationException()
     }
 
-    val size: Int
+    konst size: Int
         get() = throw UnsupportedOperationException()
 
     fun isEmpty(): Boolean {
@@ -98,7 +98,7 @@ public class A extends AImpl implements List<String> {
 class X : A()
 
 fun main() {
-    val x = X()
+    konst x = X()
     x[0]
     x.size
     x.remove("")

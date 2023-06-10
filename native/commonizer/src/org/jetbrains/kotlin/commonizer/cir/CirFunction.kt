@@ -10,18 +10,18 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.Visibility
 
 data class CirFunction(
-    override val annotations: List<CirAnnotation>,
-    override val name: CirName,
-    override val typeParameters: List<CirTypeParameter>,
-    override val visibility: Visibility,
-    override val modality: Modality,
-    override val containingClass: CirContainingClass?,
-    override var valueParameters: List<CirValueParameter>,
+    override konst annotations: List<CirAnnotation>,
+    override konst name: CirName,
+    override konst typeParameters: List<CirTypeParameter>,
+    override konst visibility: Visibility,
+    override konst modality: Modality,
+    override konst containingClass: CirContainingClass?,
+    override var konstueParameters: List<CirValueParameter>,
     override var hasStableParameterNames: Boolean,
-    override val extensionReceiver: CirExtensionReceiver?,
-    override val returnType: CirType,
-    override val kind: CallableMemberDescriptor.Kind,
-    val modifiers: CirFunctionModifiers
+    override konst extensionReceiver: CirExtensionReceiver?,
+    override konst returnType: CirType,
+    override konst kind: CallableMemberDescriptor.Kind,
+    konst modifiers: CirFunctionModifiers
 ) : CirFunctionOrProperty, CirCallableMemberWithParameters {
     override fun withContainingClass(containingClass: CirContainingClass): CirFunction {
         return copy(containingClass = containingClass)

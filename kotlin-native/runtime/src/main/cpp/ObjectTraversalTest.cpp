@@ -49,10 +49,10 @@ struct Payload {
 
 TEST(ObjectTraversalTest, TraverseFieldsExceptions) {
     static_assert(
-            noexcept(traverseObjectFields(std::declval<ObjHeader*>(), std::declval<CallableWithoutExceptions>())),
+            noexcept(traverseObjectFields(std::declkonst<ObjHeader*>(), std::declkonst<CallableWithoutExceptions>())),
             "Callable is noexcept, so traverse is noexcept");
     static_assert(
-            !noexcept(traverseObjectFields(std::declval<ObjHeader*>(), std::declval<CallableWithExceptions>())),
+            !noexcept(traverseObjectFields(std::declkonst<ObjHeader*>(), std::declkonst<CallableWithExceptions>())),
             "Callable is noexcept(false), so traverse is noexcept(false)");
 }
 
@@ -153,10 +153,10 @@ TEST(ObjectTraversalTest, TraverseArrayFieldsWithException) {
 
 TEST(ObjectTraversalTest, TraverseRefsExceptions) {
     static_assert(
-            noexcept(traverseReferredObjects(std::declval<ObjHeader*>(), std::declval<CallableWithoutExceptions>())),
+            noexcept(traverseReferredObjects(std::declkonst<ObjHeader*>(), std::declkonst<CallableWithoutExceptions>())),
             "Callable is noexcept, so traverse is noexcept");
     static_assert(
-            !noexcept(traverseReferredObjects(std::declval<ObjHeader*>(), std::declval<CallableWithExceptions>())),
+            !noexcept(traverseReferredObjects(std::declkonst<ObjHeader*>(), std::declkonst<CallableWithExceptions>())),
             "Callable is noexcept(false), so traverse is noexcept(false)");
 }
 

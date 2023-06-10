@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.project.model
 
 interface LanguageSettings {
-    val languageVersion: String?
-    val apiVersion: String?
-    val progressiveMode: Boolean
-    val enabledLanguageFeatures: Set<String>
-    val optInAnnotationsInUse: Set<String>
+    konst languageVersion: String?
+    konst apiVersion: String?
+    konst progressiveMode: Boolean
+    konst enabledLanguageFeatures: Set<String>
+    konst optInAnnotationsInUse: Set<String>
 }

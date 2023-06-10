@@ -7,18 +7,18 @@
  * MAIN LINK: expressions, logical-conjunction-expression -> paragraph 1 -> sentence 2
  * PRIMARY LINKS: expressions, logical-conjunction-expression -> paragraph 1 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: operator && does not evaluate the right hand side argument unless the left hand side argument evaluated to false.
+ * DESCRIPTION: operator && does not ekonstuate the right hand side argument unless the left hand side argument ekonstuated to false.
  */
 
 fun box(): String {
 
-    val aval = A()
-    val x = aval.a(true) &&
-            aval.b(true) &&
-            aval.c(false) &&
-            aval.d(false)
+    konst akonst = A()
+    konst x = akonst.a(true) &&
+            akonst.b(true) &&
+            akonst.c(false) &&
+            akonst.d(false)
 
-    if (aval.a && aval.b && aval.c && !aval.d && !x)
+    if (akonst.a && akonst.b && akonst.c && !akonst.d && !x)
         return "OK"
     return "NOK"
 }

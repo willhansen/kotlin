@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_EXPRESSION -UNUSED_PARAMETER -UNUSED_VARIABLE -NOTHING_TO_INLINE -PRIVATE_CLASS_MEMBER_FROM_INLINE
 private class Z public constructor(){
-    public val publicProperty:Int = 12
+    public konst publicProperty:Int = 12
     public fun publicFun() {}
 }
 
@@ -16,9 +16,9 @@ internal inline fun testInternal() {
 }
 
 internal class Z2 {
-    private val privateProperty = 11;
+    private konst privateProperty = 11;
 
-    public val publicProperty:Int = 12
+    public konst publicProperty:Int = 12
 
     private fun privateFun() {}
 

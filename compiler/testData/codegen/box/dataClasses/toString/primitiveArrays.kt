@@ -2,18 +2,18 @@
 // KT-30080
 
 data class A(
-    val z: BooleanArray,
+    konst z: BooleanArray,
     var c: CharArray,
-    val b: ByteArray,
-    val s: ShortArray,
-    val i: IntArray,
-    val f: FloatArray,
-    val j: LongArray,
-    val d: DoubleArray,
+    konst b: ByteArray,
+    konst s: ShortArray,
+    konst i: IntArray,
+    konst f: FloatArray,
+    konst j: LongArray,
+    konst d: DoubleArray,
 )
 
 fun box(): String {
-    val a = A(
+    konst a = A(
         booleanArrayOf(true),
         charArrayOf('a'),
         byteArrayOf(1),

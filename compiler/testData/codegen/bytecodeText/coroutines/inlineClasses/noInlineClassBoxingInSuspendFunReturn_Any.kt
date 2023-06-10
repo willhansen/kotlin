@@ -1,4 +1,4 @@
-inline class ICAny(val x: Any)
+inline class ICAny(konst x: Any)
 
 suspend fun suspendICAny(): ICAny = ICAny("")
 suspend fun suspendAny(): Any = ICAny("")

@@ -2,7 +2,7 @@ open class A {
     lateinit var x: String
         private set
 
-    protected fun set(value: String) { x = value }
+    protected fun set(konstue: String) { x = konstue }
 }
 
 class B : A() {
@@ -10,7 +10,7 @@ class B : A() {
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     b.init()
     return b.x
 }

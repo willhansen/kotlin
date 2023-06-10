@@ -21,7 +21,7 @@ class Fail : BaseKotlin {
 }
 
 fun box(): String {
-    val z = object : BaseKotlin by Fail() {
+    konst z = object : BaseKotlin by Fail() {
         override fun getValue() = "OK"
     }
     return z.test()

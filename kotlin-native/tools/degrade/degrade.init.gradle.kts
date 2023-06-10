@@ -10,11 +10,11 @@ class DegradePlugin : Plugin<Project> {
     }
 }
 
-private class Degrade(val rootProject: Project) {
-    private val scriptDir = rootProject.file("degrade")
+private class Degrade(konst rootProject: Project) {
+    private konst scriptDir = rootProject.file("degrade")
 
     private class TaskLog {
-        val stdout = StringBuilder()
+        konst stdout = StringBuilder()
 
         fun clear() {
             stdout.clear()
@@ -22,16 +22,16 @@ private class Degrade(val rootProject: Project) {
     }
 
     private fun setupTaskLog(task: Task): TaskLog {
-        val log = TaskLog()
+        konst log = TaskLog()
         task.logging.addStandardOutputListener { log.stdout.append(it) }
         return log
     }
 
     fun register() {
         rootProject.gradle.addListener(object : BuildAdapter(), TaskExecutionListener {
-            val taskToLog = mutableMapOf<Task, TaskLog>()
-            val allScripts = mutableListOf<String>()
-            val failedScripts = mutableListOf<String>()
+            konst taskToLog = mutableMapOf<Task, TaskLog>()
+            konst allScripts = mutableListOf<String>()
+            konst failedScripts = mutableListOf<String>()
 
             @Synchronized
             override fun beforeExecute(task: Task) {
@@ -40,8 +40,8 @@ private class Degrade(val rootProject: Project) {
 
             @Synchronized
             override fun afterExecute(task: Task, state: TaskState) {
-                val log = taskToLog[task] ?: return
-                val script = generateScriptForTask(task, log) ?: return
+                konst log = taskToLog[task] ?: return
+                konst script = generateScriptForTask(task, log) ?: return
                 allScripts += script
                 if (state.failure != null) {
                     failedScripts += script
@@ -70,16 +70,16 @@ private class Degrade(val rootProject: Project) {
     }
 
     private fun generateScriptForTask(task: Task, taskLog: TaskLog): String? {
-        val project = task.project
+        konst project = task.project
 
-        val stdoutLinesIterator = taskLog.stdout.split('\n').iterator()
-        val commands = parseKotlinNativeCommands { stdoutLinesIterator.takeIf { it.hasNext() }?.next() }
+        konst stdoutLinesIterator = taskLog.stdout.split('\n').iterator()
+        konst commands = parseKotlinNativeCommands { stdoutLinesIterator.takeIf { it.hasNext() }?.next() }
 
         if (commands.isEmpty()) return null
 
-        val konanHome = project.properties["konanHome"] ?: project.properties["kotlinNativeDist"]
+        konst konanHome = project.properties["konanHome"] ?: project.properties["kotlinNativeDist"]
 
-        val scriptName = task.path.substring(1).replace(':', '_') + ".sh"
+        konst scriptName = task.path.substring(1).replace(':', '_') + ".sh"
 
         generateScript(scriptName) {
             appendLine("""kotlinNativeDist="$konanHome"""")
@@ -102,10 +102,10 @@ private class Degrade(val rootProject: Project) {
     }
 
     private fun parseKotlinNativeCommands(nextLine: () -> String?): List<KotlinNativeCommand> {
-        val result = mutableListOf<KotlinNativeCommand>()
+        konst result = mutableListOf<KotlinNativeCommand>()
 
         while (true) {
-            val line = nextLine() ?: break
+            konst line = nextLine() ?: break
             if (line != "Main class = $kotlinNativeEntryPointClass"
                     && !line.startsWith("Entry point method = $kotlinNativeEntryPointClass.")) continue
 
@@ -114,10 +114,10 @@ private class Degrade(val rootProject: Project) {
                     .takeIf { it == "Transformed arguments = [" }
                     ?: continue
 
-            val transformedArguments = generateSequence(nextLine)
+            konst transformedArguments = generateSequence(nextLine)
                     .takeWhile { it != "]" }
                     .flatMap {
-                        val line = it.trimStart()
+                        konst line = it.trimStart()
                         if (line.startsWith("@")) { // argument with filename containing list of arguments
                             File(line.substringAfter("@"))
                                     .readText()
@@ -134,10 +134,10 @@ private class Degrade(val rootProject: Project) {
         return result
     }
 
-    private class KotlinNativeCommand(val transformedArguments: List<String>)
+    private class KotlinNativeCommand(konst transformedArguments: List<String>)
 
     private companion object {
-        const val kotlinNativeEntryPointClass = "org.jetbrains.kotlin.cli.utilities.MainKt"
+        const konst kotlinNativeEntryPointClass = "org.jetbrains.kotlin.cli.utilities.MainKt"
 
         // appendLine is not available in Kotlin stdlib shipped with older Gradle versions;
         // Copied here:
@@ -145,13 +145,13 @@ private class Degrade(val rootProject: Project) {
         /** Appends a line feed character (`\n`) to this Appendable. */
         private fun Appendable.appendLine(): Appendable = append('\n')
 
-        /** Appends value to the given Appendable and a line feed character (`\n`) after it. */
-        private fun Appendable.appendLine(value: CharSequence?): Appendable = append(value).appendLine()
+        /** Appends konstue to the given Appendable and a line feed character (`\n`) after it. */
+        private fun Appendable.appendLine(konstue: CharSequence?): Appendable = append(konstue).appendLine()
     }
 
     private fun generateScript(name: String, generateBody: Appendable.() -> Unit) {
         scriptDir.mkdirs()
-        val file = File(scriptDir, name)
+        konst file = File(scriptDir, name)
         file.bufferedWriter().use { writer ->
             writer.appendLine("#!/bin/sh")
             writer.appendLine("set -e")

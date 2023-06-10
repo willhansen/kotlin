@@ -13,7 +13,7 @@ class Klass @A constructor()
 fun <@A T> function(@A param: Unit): @A Unit {}
 
 @A
-val property = Unit
+konst property = Unit
 
 enum class Enum {
     @A

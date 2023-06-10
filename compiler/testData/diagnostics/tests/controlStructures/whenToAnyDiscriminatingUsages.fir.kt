@@ -62,13 +62,13 @@ fun testUsage2Generic() =
                        else -> println()
                    })
 
-val testUsage3 =
+konst testUsage3 =
         when {
             true -> 42
             else -> println()
         }
 
-val testUsage4 =
+konst testUsage4 =
         when {
             true -> 42
             true -> 42
@@ -76,7 +76,7 @@ val testUsage4 =
             else -> println()
         }
 
-val testUsage5: Any get() =
+konst testUsage5: Any get() =
         when {
             true -> 42
             else -> println()

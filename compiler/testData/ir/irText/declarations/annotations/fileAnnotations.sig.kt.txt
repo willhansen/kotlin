@@ -9,7 +9,7 @@ open annotation class A : Annotation {
   // CHECK:
   //   Mangled name: test.A{}x
   //   Public signature: test/A.x|-8060530855978347579[0]
-  val x: String
+  konst x: String
     // CHECK JVM_IR:
     //   Mangled name: test.A#<get-x>(){}kotlin.String
     //   Public signature: test/A.x.<get-x>|316111172223894646[0]

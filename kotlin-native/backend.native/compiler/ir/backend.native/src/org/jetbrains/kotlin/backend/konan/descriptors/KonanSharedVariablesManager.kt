@@ -23,23 +23,23 @@ import org.jetbrains.kotlin.ir.symbols.impl.IrVariableSymbolImpl
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.constructors
 
-internal class KonanSharedVariablesManager(val context: KonanBackendContext) : SharedVariablesManager {
+internal class KonanSharedVariablesManager(konst context: KonanBackendContext) : SharedVariablesManager {
 
-    private val refClass = context.ir.symbols.refClass
+    private konst refClass = context.ir.symbols.refClass
 
-    private val refClassConstructor = refClass.constructors.single()
+    private konst refClassConstructor = refClass.constructors.single()
 
-    private val elementProperty = refClass.owner.declarations.filterIsInstance<IrProperty>().single()
+    private konst elementProperty = refClass.owner.declarations.filterIsInstance<IrProperty>().single()
 
     override fun declareSharedVariable(originalDeclaration: IrVariable): IrVariable {
-        val valueType = originalDeclaration.type
+        konst konstueType = originalDeclaration.type
 
-        val refConstructorCall = IrConstructorCallImpl.fromSymbolOwner(
+        konst refConstructorCall = IrConstructorCallImpl.fromSymbolOwner(
                 originalDeclaration.startOffset, originalDeclaration.endOffset,
-                refClass.typeWith(valueType),
+                refClass.typeWith(konstueType),
                 refClassConstructor
         ).apply {
-            putTypeArgument(0, valueType)
+            putTypeArgument(0, konstueType)
         }
 
         return with(originalDeclaration) {
@@ -56,12 +56,12 @@ internal class KonanSharedVariablesManager(val context: KonanBackendContext) : S
     }
 
     override fun defineSharedValue(originalDeclaration: IrVariable, sharedVariableDeclaration: IrVariable): IrStatement {
-        val initializer = originalDeclaration.initializer ?: return sharedVariableDeclaration
+        konst initializer = originalDeclaration.initializer ?: return sharedVariableDeclaration
 
-        val sharedVariableInitialization =
+        konst sharedVariableInitialization =
                 IrCallImpl(initializer.startOffset, initializer.endOffset,
                         context.irBuiltIns.unitType, elementProperty.setter!!.symbol,
-                        elementProperty.setter!!.typeParameters.size, elementProperty.setter!!.valueParameters.size)
+                        elementProperty.setter!!.typeParameters.size, elementProperty.setter!!.konstueParameters.size)
         sharedVariableInitialization.dispatchReceiver =
                 IrGetValueImpl(initializer.startOffset, initializer.endOffset,
                         sharedVariableDeclaration.type, sharedVariableDeclaration.symbol)
@@ -77,7 +77,7 @@ internal class KonanSharedVariablesManager(val context: KonanBackendContext) : S
     override fun getSharedValue(sharedVariableSymbol: IrValueSymbol, originalGet: IrGetValue) =
             IrCallImpl(originalGet.startOffset, originalGet.endOffset,
                     originalGet.type, elementProperty.getter!!.symbol,
-                    elementProperty.getter!!.typeParameters.size, elementProperty.getter!!.valueParameters.size).apply {
+                    elementProperty.getter!!.typeParameters.size, elementProperty.getter!!.konstueParameters.size).apply {
                 dispatchReceiver = IrGetValueImpl(
                         originalGet.startOffset, originalGet.endOffset,
                         sharedVariableSymbol.owner.type, sharedVariableSymbol
@@ -87,12 +87,12 @@ internal class KonanSharedVariablesManager(val context: KonanBackendContext) : S
     override fun setSharedValue(sharedVariableSymbol: IrValueSymbol, originalSet: IrSetValue) =
             IrCallImpl(originalSet.startOffset, originalSet.endOffset, context.irBuiltIns.unitType,
                     elementProperty.setter!!.symbol, elementProperty.setter!!.typeParameters.size,
-                    elementProperty.setter!!.valueParameters.size).apply {
+                    elementProperty.setter!!.konstueParameters.size).apply {
                 dispatchReceiver = IrGetValueImpl(
                         originalSet.startOffset, originalSet.endOffset,
                         sharedVariableSymbol.owner.type, sharedVariableSymbol
                 )
-                putValueArgument(0, originalSet.value)
+                putValueArgument(0, originalSet.konstue)
             }
 
 }

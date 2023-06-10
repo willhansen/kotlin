@@ -28,15 +28,15 @@ public class Test {
 
 fun foo(x: B<*>) {
     // x.foo()  is flexible type instead of raw, because of captured type approximation
-    val q: MutableList<String> = x.foo().getChildrenStubs()
+    konst q: MutableList<String> = x.foo().getChildrenStubs()
 
     // Raw(B).field erased to A<Any!>..A<out Any!>?
     Test.rawB.field = A<String>()
-    val anyA: A<Any> = Test.rawB.field
+    konst anyA: A<Any> = Test.rawB.field
 
     // FIR doesn't work here, because
     // field has a type of just 'A' and it's not clear why should it accept 'String' at consume
     // NB: some kind of BareTypeScope should be in use here
     Test.rawB.field.consume("")
-    val y: Any = Test.rawB.field.produce()
+    konst y: Any = Test.rawB.field.produce()
 }

@@ -18,16 +18,16 @@ fun buildIdeaKpmFragmentDependencyMatchers(notation: Any?): List<TestIdeaKpmFrag
 }
 
 interface TestIdeaKpmFragmentDependencyMatcher : TestIdeaKpmDependencyMatcher<IdeaKpmFragmentDependency> {
-    class DependencyLiteral(private val dependencyLiteral: String) : TestIdeaKpmFragmentDependencyMatcher {
-        override val description: String = dependencyLiteral
+    class DependencyLiteral(private konst dependencyLiteral: String) : TestIdeaKpmFragmentDependencyMatcher {
+        override konst description: String = dependencyLiteral
 
         override fun matches(dependency: IdeaKpmFragmentDependency): Boolean {
             return this.dependencyLiteral == dependency.toString()
         }
     }
 
-    class DependencyRegex(private val dependencyRegex: Regex) : TestIdeaKpmFragmentDependencyMatcher {
-        override val description: String = dependencyRegex.pattern
+    class DependencyRegex(private konst dependencyRegex: Regex) : TestIdeaKpmFragmentDependencyMatcher {
+        override konst description: String = dependencyRegex.pattern
 
         override fun matches(dependency: IdeaKpmFragmentDependency): Boolean {
             return dependencyRegex.matches(dependency.coordinates.toString())

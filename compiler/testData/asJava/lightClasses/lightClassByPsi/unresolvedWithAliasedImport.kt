@@ -3,7 +3,7 @@ package some
 import other.Unresolved as A
 
 class Derived : A {
-    val x: A? = null
+    konst x: A? = null
 
     fun takeA(a: A) {}
 }

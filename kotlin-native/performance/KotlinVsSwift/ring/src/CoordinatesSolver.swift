@@ -35,25 +35,25 @@ class CoordinatesSolverBenchmark {
     struct Field {
         let x: Int
         let y: Int
-        let value: Int8
+        let konstue: Int8
         func northWall() -> Bool {
-            return value & 1 != 0
+            return konstue & 1 != 0
         }
 
         func eastWall() -> Bool {
-            return value & 2 != 0
+            return konstue & 2 != 0
         }
 
         func southWall() -> Bool {
-            return value & 4 != 0
+            return konstue & 4 != 0
         }
 
         func westWall() -> Bool {
-            return value & 8 != 0
+            return konstue & 8 != 0
         }
 
         func hasObject() -> Bool {
-            return value & 16 != 0
+            return konstue & 16 != 0
         }
     }
 
@@ -113,7 +113,7 @@ class CoordinatesSolverBenchmark {
                 var row = [Field?](repeating: nil, count: items.count)
 
                 for col in items.indices {
-                    row[col] = Field(x: rowNum, y: col, value: Int8(items[col]) ?? 0)
+                    row[col] = Field(x: rowNum, y: col, konstue: Int8(items[col]) ?? 0)
                 }
 
                 rows.append(row as! [CoordinatesSolverBenchmark.Field])
@@ -234,10 +234,10 @@ class CoordinatesSolverBenchmark {
             return possibleSteps
         }
 
-        private func solveWithLimit(_ limit: Int, _ start: Coordinate, _ validFn: ([Coordinate]) -> Bool) -> [Coordinate]? {
+        private func solveWithLimit(_ limit: Int, _ start: Coordinate, _ konstidFn: ([Coordinate]) -> Bool) -> [Coordinate]? {
             var steps: [Coordinate]? = findFirstLegitSteps(nil, start, limit)
 
-            while (steps != nil && !validFn(steps!)) {
+            while (steps != nil && !konstidFn(steps!)) {
                 steps = alter(start, nil, &steps!)
             }
 
@@ -359,7 +359,7 @@ class CoordinatesSolverBenchmark {
         let output = solver.solve()
 
         for c in output.steps {
-            let value = (c == nil) ? "felvesz" : "${c.x} ${c.y}"
+            let konstue = (c == nil) ? "felvesz" : "${c.x} ${c.y}"
         }
     }
 }

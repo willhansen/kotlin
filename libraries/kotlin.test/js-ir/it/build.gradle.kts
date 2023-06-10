@@ -16,17 +16,17 @@ node {
     download.set(true)
 }
 
-val jsMainSources by task<Sync> {
+konst jsMainSources by task<Sync> {
     from("$rootDir/libraries/kotlin.test/js/it/src")
     into("$buildDir/jsMainSources")
 }
 
-val jsSources by task<Sync> {
+konst jsSources by task<Sync> {
     from("$rootDir/libraries/kotlin.test/js/it/js")
     into("$buildDir/jsSources")
 }
 
-val ignoreTestFailures by extra(project.kotlinBuildProperties.ignoreTestFailures)
+konst ignoreTestFailures by extra(project.kotlinBuildProperties.ignoreTestFailures)
 
 kotlin {
     js(IR) {
@@ -38,13 +38,13 @@ kotlin {
     }
 
     sourceSets {
-        val test by getting {
+        konst test by getting {
             kotlin.srcDir(jsMainSources.get().destinationDir)
         }
     }
 }
 
-val nodeModules by configurations.registering {
+konst nodeModules by configurations.registering {
     extendsFrom(configurations["api"])
     attributes {
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class.java, KotlinUsages.KOTLIN_RUNTIME))
@@ -52,11 +52,11 @@ val nodeModules by configurations.registering {
     }
 }
 
-val compileTestDevelopmentExecutableKotlinJs = tasks.named<KotlinJsIrLink>("compileTestDevelopmentExecutableKotlinJs") {
+konst compileTestDevelopmentExecutableKotlinJs = tasks.named<KotlinJsIrLink>("compileTestDevelopmentExecutableKotlinJs") {
     kotlinOptions.outputFile = buildDir.resolve("compileSync/js/test/testDevelopmentExecutable/kotlin/kotlin-kotlin-test-js-ir-it-test.js").normalize().absolutePath
 }
 
-val populateNodeModules = tasks.register<Copy>("populateNodeModules") {
+konst populateNodeModules = tasks.register<Copy>("populateNodeModules") {
     dependsOn("compileTestDevelopmentExecutableKotlinJs")
     dependsOn(nodeModules)
     from(compileTestDevelopmentExecutableKotlinJs.map { it.destinationDirectory })
@@ -77,12 +77,12 @@ val populateNodeModules = tasks.register<Copy>("populateNodeModules") {
 fun createFrameworkTest(name: String): TaskProvider<NpmTask> {
     return tasks.register("test$name", NpmTask::class.java) {
         dependsOn(compileTestDevelopmentExecutableKotlinJs, populateNodeModules, "npmInstall")
-        val testName = name
-        val lowerName = name.toLowerCase()
-        val tcOutput = project.file("$buildDir/tc-${lowerName}.log")
-        val stdOutput = "$buildDir/test-${lowerName}.log"
-        val errOutput = "$buildDir/test-${lowerName}.err.log"
-        val exitCodeFile = project.file("$buildDir/test-${lowerName}.exit-code")
+        konst testName = name
+        konst lowerName = name.toLowerCase()
+        konst tcOutput = project.file("$buildDir/tc-${lowerName}.log")
+        konst stdOutput = "$buildDir/test-${lowerName}.log"
+        konst errOutput = "$buildDir/test-${lowerName}.err.log"
+        konst exitCodeFile = project.file("$buildDir/test-${lowerName}.exit-code")
 //        inputs.files(sourceSets.test.output)
         inputs.dir("${buildDir}/node_modules")
         outputs.files(tcOutput, stdOutput, errOutput, exitCodeFile)
@@ -107,7 +107,7 @@ fun createFrameworkTest(name: String): TaskProvider<NpmTask> {
     }
 }
 
-val frameworkTests = listOf(
+konst frameworkTests = listOf(
 //    "Jest",
     "Jasmine",
     "Mocha",

@@ -6,8 +6,8 @@ import kotlin.reflect.full.findAnnotations
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-annotation class Yes(val value: String)
-annotation class No(val value: String)
+annotation class Yes(konst konstue: String)
+annotation class No(konst konstue: String)
 
 @Yes("OK")
 @No("Fail")
@@ -19,7 +19,7 @@ fun box(): String {
     assertNull(Bar::class.findAnnotation<Yes>())
     assertNull(Bar::class.findAnnotation<No>())
 
-    assertEquals("OK", Foo::class.findAnnotations<Yes>().single().value)
+    assertEquals("OK", Foo::class.findAnnotations<Yes>().single().konstue)
 
-    return Foo::class.findAnnotation<Yes>()?.value ?: "Fail: no annotation"
+    return Foo::class.findAnnotation<Yes>()?.konstue ?: "Fail: no annotation"
 }

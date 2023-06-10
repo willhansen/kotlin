@@ -31,16 +31,16 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import java.util.concurrent.ConcurrentHashMap
 
 /**
- * Keeps track of replacement functions and multi-field value class box/unbox functions.
+ * Keeps track of replacement functions and multi-field konstue class box/unbox functions.
  */
 class MemoizedMultiFieldValueClassReplacements(
     irFactory: IrFactory,
     context: JvmBackendContext
-) : MemoizedValueClassAbstractReplacements(irFactory, context, LockBasedStorageManager("multi-field-value-class-replacements")) {
+) : MemoizedValueClassAbstractReplacements(irFactory, context, LockBasedStorageManager("multi-field-konstue-class-replacements")) {
 
-    val originalFunctionForStaticReplacement: MutableMap<IrFunction, IrFunction> = ConcurrentHashMap()
-    val originalFunctionForMethodReplacement: MutableMap<IrFunction, IrFunction> = ConcurrentHashMap()
-    val originalConstructorForConstructorReplacement: MutableMap<IrConstructor, IrConstructor> = ConcurrentHashMap()
+    konst originalFunctionForStaticReplacement: MutableMap<IrFunction, IrFunction> = ConcurrentHashMap()
+    konst originalFunctionForMethodReplacement: MutableMap<IrFunction, IrFunction> = ConcurrentHashMap()
+    konst originalConstructorForConstructorReplacement: MutableMap<IrConstructor, IrConstructor> = ConcurrentHashMap()
 
     private fun IrValueParameter.grouped(
         name: String?,
@@ -48,28 +48,28 @@ class MemoizedMultiFieldValueClassReplacements(
         targetFunction: IrFunction,
         originWhenFlattened: IrDeclarationOrigin,
     ): RemappedParameter {
-        val oldParam = this
+        konst oldParam = this
         if (!type.needsMfvcFlattening()) return RegularMapping(
             targetFunction.addValueParameter {
                 updateFrom(oldParam)
                 this.name = oldParam.name
-                index = targetFunction.valueParameters.size
+                index = targetFunction.konstueParameters.size
             }.apply {
                 defaultValue = oldParam.defaultValue
                 copyAnnotationsFrom(oldParam)
             }
         )
-        val rootMfvcNode = this@MemoizedMultiFieldValueClassReplacements.getRootMfvcNode(type.erasedUpperBound)
+        konst rootMfvcNode = this@MemoizedMultiFieldValueClassReplacements.getRootMfvcNode(type.erasedUpperBound)
         defaultValue?.expression?.let { oldMfvcDefaultArguments.putIfAbsent(this, it) }
-        val newType = type.substitute(substitutionMap) as IrSimpleType
-        val localSubstitutionMap = makeTypeArgumentsFromType(newType)
-        val valueParameters = rootMfvcNode.mapLeaves { leaf ->
+        konst newType = type.substitute(substitutionMap) as IrSimpleType
+        konst localSubstitutionMap = makeTypeArgumentsFromType(newType)
+        konst konstueParameters = rootMfvcNode.mapLeaves { leaf ->
             targetFunction.addValueParameter {
                 updateFrom(oldParam)
                 this.name = Name.identifier("${name ?: oldParam.name}-${leaf.fullFieldName}")
                 type = leaf.type.substitute(localSubstitutionMap)
                 origin = originWhenFlattened
-                index = targetFunction.valueParameters.size
+                index = targetFunction.konstueParameters.size
                 isAssignable = isAssignable || oldParam.defaultValue != null
             }.also { newParam ->
                 newParam.defaultValue = oldParam.defaultValue?.let {
@@ -78,7 +78,7 @@ class MemoizedMultiFieldValueClassReplacements(
                 require(oldParam.annotations.isEmpty()) { "Annotations are not supported for MFVC parameters" }
             }
         }
-        return MultiFieldValueClassMapping(rootMfvcNode, newType, valueParameters)
+        return MultiFieldValueClassMapping(rootMfvcNode, newType, konstueParameters)
     }
 
     private fun List<IrValueParameter>.grouped(
@@ -89,7 +89,7 @@ class MemoizedMultiFieldValueClassReplacements(
     ): List<RemappedParameter> = map { it.grouped(name, substitutionMap, targetFunction, originWhenFlattened) }
 
 
-    val oldMfvcDefaultArguments = ConcurrentHashMap<IrValueParameter, IrExpression>()
+    konst oldMfvcDefaultArguments = ConcurrentHashMap<IrValueParameter, IrExpression>()
 
     private fun buildReplacement(
         function: IrFunction,
@@ -117,7 +117,7 @@ class MemoizedMultiFieldValueClassReplacements(
         substitutionMap: Map<IrTypeParameterSymbol, IrType>,
         targetFunction: IrFunction,
     ): List<RemappedParameter> {
-        val newFlattenedParameters = mutableListOf<RemappedParameter>()
+        konst newFlattenedParameters = mutableListOf<RemappedParameter>()
         if (sourceFunction.dispatchReceiverParameter != null && includeDispatcherReceiver) {
             newFlattenedParameters.add(
                 sourceFunction.parentAsClass.thisReceiver!!.grouped(
@@ -128,9 +128,9 @@ class MemoizedMultiFieldValueClassReplacements(
                 )
             )
         }
-        val contextReceivers = sourceFunction.valueParameters.take(sourceFunction.contextReceiverParametersCount)
-            .mapIndexed { index: Int, valueParameter: IrValueParameter ->
-                valueParameter.grouped(
+        konst contextReceivers = sourceFunction.konstueParameters.take(sourceFunction.contextReceiverParametersCount)
+            .mapIndexed { index: Int, konstueParameter: IrValueParameter ->
+                konstueParameter.grouped(
                     "contextReceiver$index",
                     substitutionMap,
                     targetFunction,
@@ -139,7 +139,7 @@ class MemoizedMultiFieldValueClassReplacements(
             }
         newFlattenedParameters.addAll(contextReceivers)
         sourceFunction.extensionReceiverParameter?.let {
-            val newParameters = it.grouped(
+            konst newParameters = it.grouped(
                 sourceFunction.extensionReceiverName(context.state),
                 substitutionMap,
                 targetFunction,
@@ -147,40 +147,40 @@ class MemoizedMultiFieldValueClassReplacements(
             )
             newFlattenedParameters.add(newParameters)
         }
-        newFlattenedParameters += sourceFunction.valueParameters.drop(sourceFunction.contextReceiverParametersCount)
+        newFlattenedParameters += sourceFunction.konstueParameters.drop(sourceFunction.contextReceiverParametersCount)
             .grouped(name = null, substitutionMap, targetFunction, JvmLoweredDeclarationOrigin.GENERATED_MULTI_FIELD_VALUE_CLASS_PARAMETER)
         return newFlattenedParameters
     }
 
     sealed class RemappedParameter {
 
-        abstract val valueParameters: List<IrValueParameter>
+        abstract konst konstueParameters: List<IrValueParameter>
 
-        data class RegularMapping(val valueParameter: IrValueParameter) : RemappedParameter() {
-            override val valueParameters: List<IrValueParameter> = listOf(valueParameter)
+        data class RegularMapping(konst konstueParameter: IrValueParameter) : RemappedParameter() {
+            override konst konstueParameters: List<IrValueParameter> = listOf(konstueParameter)
             override fun toString(): String {
-                return "RegularMapping(valueParameter=${valueParameter.render()})"
+                return "RegularMapping(konstueParameter=${konstueParameter.render()})"
             }
         }
 
         data class MultiFieldValueClassMapping(
-            val rootMfvcNode: RootMfvcNode,
-            val typeArguments: TypeArguments,
-            override val valueParameters: List<IrValueParameter>,
+            konst rootMfvcNode: RootMfvcNode,
+            konst typeArguments: TypeArguments,
+            override konst konstueParameters: List<IrValueParameter>,
         ) : RemappedParameter() {
             init {
-                require(valueParameters.size > 1) { "MFVC must have > 1 fields" }
+                require(konstueParameters.size > 1) { "MFVC must have > 1 fields" }
             }
 
-            constructor(rootMfvcNode: RootMfvcNode, type: IrSimpleType, valueParameters: List<IrValueParameter>) :
-                    this(rootMfvcNode, makeTypeArgumentsFromType(type), valueParameters)
+            constructor(rootMfvcNode: RootMfvcNode, type: IrSimpleType, konstueParameters: List<IrValueParameter>) :
+                    this(rootMfvcNode, makeTypeArgumentsFromType(type), konstueParameters)
 
-            val boxedType: IrSimpleType = rootMfvcNode.type.substitute(typeArguments) as IrSimpleType
+            konst boxedType: IrSimpleType = rootMfvcNode.type.substitute(typeArguments) as IrSimpleType
             override fun toString(): String {
                 return """MultiFieldValueClassMapping(
                     |    rootMfvcNode=$rootMfvcNode,
-                    |    typeArguments=[${typeArguments.values.joinToString(",") { "\n        " + it.render() }}],
-                    |    valueParameters=[${valueParameters.joinToString(",") { "\n        " + it.render() }}],
+                    |    typeArguments=[${typeArguments.konstues.joinToString(",") { "\n        " + it.render() }}],
+                    |    konstueParameters=[${konstueParameters.joinToString(",") { "\n        " + it.render() }}],
                     |    boxedType=${boxedType.render()}
                     |)""".trimMargin()
             }
@@ -189,14 +189,14 @@ class MemoizedMultiFieldValueClassReplacements(
         }
     }
 
-    val bindingOldFunctionToParameterTemplateStructure: MutableMap<IrFunction, List<RemappedParameter>> = ConcurrentHashMap()
-    val bindingNewFunctionToParameterTemplateStructure: MutableMap<IrFunction, List<RemappedParameter>> =
+    konst bindingOldFunctionToParameterTemplateStructure: MutableMap<IrFunction, List<RemappedParameter>> = ConcurrentHashMap()
+    konst bindingNewFunctionToParameterTemplateStructure: MutableMap<IrFunction, List<RemappedParameter>> =
         object : ConcurrentHashMap<IrFunction, List<RemappedParameter>>() {
-            override fun put(key: IrFunction, value: List<RemappedParameter>): List<RemappedParameter>? {
-                require(key.explicitParametersCount == value.sumOf { it.valueParameters.size }) {
-                    "Illegal structure $value for function ${key.dump()}"
+            override fun put(key: IrFunction, konstue: List<RemappedParameter>): List<RemappedParameter>? {
+                require(key.explicitParametersCount == konstue.sumOf { it.konstueParameters.size }) {
+                    "Illegal structure $konstue for function ${key.dump()}"
                 }
-                return super.put(key, value)
+                return super.put(key, konstue)
             }
         }
 
@@ -205,9 +205,9 @@ class MemoizedMultiFieldValueClassReplacements(
             originalFunctionForStaticReplacement[this] = function
             typeParameters = listOf()
             copyTypeParametersFrom(function.parentAsClass)
-            val substitutionMap = function.parentAsClass.typeParameters.map { it.symbol }.zip(typeParameters.map { it.defaultType }).toMap()
+            konst substitutionMap = function.parentAsClass.typeParameters.map { it.symbol }.zip(typeParameters.map { it.defaultType }).toMap()
             copyTypeParametersFrom(function, parameterMap = (function.parentAsClass.typeParameters zip typeParameters).toMap())
-            val newFlattenedParameters =
+            konst newFlattenedParameters =
                 makeAndAddGroupedValueParametersFrom(function, includeDispatcherReceiver = true, substitutionMap, this)
             bindingOldFunctionToParameterTemplateStructure[function] = newFlattenedParameters
             bindingNewFunctionToParameterTemplateStructure[this] = newFlattenedParameters
@@ -215,18 +215,18 @@ class MemoizedMultiFieldValueClassReplacements(
 
     override fun createMethodReplacement(function: IrFunction): IrSimpleFunction = buildReplacement(function, function.origin) {
         originalFunctionForMethodReplacement[this] = function
-        val remappedParameters = makeMethodLikeRemappedParameters(function)
+        konst remappedParameters = makeMethodLikeRemappedParameters(function)
         bindingOldFunctionToParameterTemplateStructure[function] = remappedParameters
         bindingNewFunctionToParameterTemplateStructure[this] = remappedParameters
     }
 
     private fun createConstructorReplacement(constructor: IrConstructor): IrConstructor {
-        val newConstructor = irFactory.buildConstructor {
+        konst newConstructor = irFactory.buildConstructor {
             updateFrom(constructor)
             returnType = constructor.returnType
         }.apply {
             parent = constructor.parent
-            val remappedParameters = makeMethodLikeRemappedParameters(constructor)
+            konst remappedParameters = makeMethodLikeRemappedParameters(constructor)
             bindingOldFunctionToParameterTemplateStructure[constructor] = remappedParameters
             copyTypeParametersFrom(constructor)
             annotations = constructor.annotations
@@ -242,15 +242,15 @@ class MemoizedMultiFieldValueClassReplacements(
 
     private fun IrFunction.makeMethodLikeRemappedParameters(function: IrFunction): List<RemappedParameter> {
         dispatchReceiverParameter = function.dispatchReceiverParameter?.copyTo(this, index = -1)
-        val newFlattenedParameters = makeAndAddGroupedValueParametersFrom(function, includeDispatcherReceiver = false, mapOf(), this)
-        val receiver = dispatchReceiverParameter
+        konst newFlattenedParameters = makeAndAddGroupedValueParametersFrom(function, includeDispatcherReceiver = false, mapOf(), this)
+        konst receiver = dispatchReceiverParameter
         return if (receiver != null) listOf(RegularMapping(receiver)) + newFlattenedParameters else newFlattenedParameters
     }
 
     /**
      * Get a function replacement for a function or a constructor.
      */
-    override val getReplacementFunctionImpl: (IrFunction) -> IrSimpleFunction? =
+    override konst getReplacementFunctionImpl: (IrFunction) -> IrSimpleFunction? =
         storageManager.createMemoizedFunctionWithNullableValues { function ->
             when {
                 (function.origin == IrDeclarationOrigin.DELEGATED_PROPERTY_ACCESSOR && function.visibility == DescriptorVisibilities.LOCAL) ||
@@ -279,7 +279,7 @@ class MemoizedMultiFieldValueClassReplacements(
 
                 function is IrSimpleFunction && !function.isFromJava() && function.fullValueParameterList.any { it.type.needsMfvcFlattening() } && run {
                     if (!function.isFakeOverride) return@run true
-                    val superDeclaration = findSuperDeclaration(function, false, context.state.jvmDefaultMode)
+                    konst superDeclaration = findSuperDeclaration(function, false, context.state.jvmDefaultMode)
                     getReplacementFunction(superDeclaration) != null
                 } -> createMethodReplacement(function)
 
@@ -287,7 +287,7 @@ class MemoizedMultiFieldValueClassReplacements(
             }
         }
 
-    private val getReplacementForRegularClassConstructorImpl: (IrConstructor) -> IrConstructor? =
+    private konst getReplacementForRegularClassConstructorImpl: (IrConstructor) -> IrConstructor? =
         storageManager.createMemoizedFunctionWithNullableValues { constructor ->
             when {
                 constructor.isFromJava() -> null //is recursive so run once
@@ -297,11 +297,11 @@ class MemoizedMultiFieldValueClassReplacements(
 
     override fun getReplacementForRegularClassConstructor(constructor: IrConstructor): IrConstructor? = when {
         constructor.constructedClass.isMultiFieldValueClass -> null
-        constructor.valueParameters.none { it.type.needsMfvcFlattening() } -> null
+        constructor.konstueParameters.none { it.type.needsMfvcFlattening() } -> null
         else -> getReplacementForRegularClassConstructorImpl(constructor)
     }
 
-    val getRootMfvcNode: (IrClass) -> RootMfvcNode = storageManager.createMemoizedFunction {
+    konst getRootMfvcNode: (IrClass) -> RootMfvcNode = storageManager.createMemoizedFunction {
         require(it.defaultType.needsMfvcFlattening()) { it.defaultType.render() }
         getRootNode(context, it)
     }
@@ -309,35 +309,35 @@ class MemoizedMultiFieldValueClassReplacements(
     fun getRootMfvcNodeOrNull(irClass: IrClass): RootMfvcNode? =
         if (irClass.defaultType.needsMfvcFlattening()) getRootMfvcNode(irClass) else null
 
-    private val getRegularClassMfvcPropertyNodeImpl: (IrProperty) -> IntermediateMfvcNode =
+    private konst getRegularClassMfvcPropertyNodeImpl: (IrProperty) -> IntermediateMfvcNode =
         storageManager.createMemoizedFunction { property: IrProperty ->
-            val parent = property.parentAsClass
+            konst parent = property.parentAsClass
             createIntermediateNodeForMfvcPropertyOfRegularClass(parent, context, property)
         }
 
     private fun IrField.withAddedStaticReplacementIfNeeded(): IrField {
-        val property = this.correspondingPropertySymbol?.owner ?: return this
-        val replacementField = context.cachedDeclarations.getStaticBackingField(property) ?: return this
+        konst property = this.correspondingPropertySymbol?.owner ?: return this
+        konst replacementField = context.cachedDeclarations.getStaticBackingField(property) ?: return this
         property.backingField = replacementField
         return replacementField
     }
 
     private fun IrProperty.withAddedStaticReplacementIfNeeded(): IrProperty {
-        val replacementField = context.cachedDeclarations.getStaticBackingField(this) ?: return this
+        konst replacementField = context.cachedDeclarations.getStaticBackingField(this) ?: return this
         backingField = replacementField
         return this
     }
 
-    private val fieldsToRemove = ConcurrentHashMap<IrClass, MutableSet<IrField>>()
+    private konst fieldsToRemove = ConcurrentHashMap<IrClass, MutableSet<IrField>>()
     fun getFieldsToRemove(clazz: IrClass): Set<IrField> = fieldsToRemove[clazz] ?: emptySet()
     fun addFieldToRemove(clazz: IrClass, field: IrField) {
         fieldsToRemove.getOrPut(clazz) { ConcurrentHashMap<IrField, Unit>().keySet(Unit) }.add(field.withAddedStaticReplacementIfNeeded())
     }
 
     fun getMfvcFieldNode(field: IrField): NameableMfvcNode? {
-        val realField = field.withAddedStaticReplacementIfNeeded()
-        val parent = realField.parent
-        val property = realField.correspondingPropertySymbol?.owner
+        konst realField = field.withAddedStaticReplacementIfNeeded()
+        konst parent = realField.parent
+        konst property = realField.correspondingPropertySymbol?.owner
         return when {
             property?.isDelegated == false -> getMfvcPropertyNode(property)
             parent !is IrClass -> null
@@ -346,14 +346,14 @@ class MemoizedMultiFieldValueClassReplacements(
         }
     }
 
-    private val getMfvcStandaloneFieldNodeImpl: (IrField) -> NameableMfvcNode = storageManager.createMemoizedFunction { field ->
-        val parent = field.parentAsClass
+    private konst getMfvcStandaloneFieldNodeImpl: (IrField) -> NameableMfvcNode = storageManager.createMemoizedFunction { field ->
+        konst parent = field.parentAsClass
         createIntermediateNodeForStandaloneMfvcField(parent, context, field)
     }
 
     private fun getRegularClassMfvcPropertyNode(property: IrProperty): IntermediateMfvcNode? {
-        val parent = property.parent
-        val types = listOfNotNull(
+        konst parent = property.parent
+        konst types = listOfNotNull(
             property.backingFieldIfNotToRemove?.takeUnless { property.isDelegated }?.type, property.getter?.returnType
         )
         return when {
@@ -367,8 +367,8 @@ class MemoizedMultiFieldValueClassReplacements(
     }
 
     fun getMfvcPropertyNode(property: IrProperty): NameableMfvcNode? {
-        val parent = property.parent
-        val realProperty = property.withAddedStaticReplacementIfNeeded()
+        konst parent = property.parent
+        konst realProperty = property.withAddedStaticReplacementIfNeeded()
         return when {
             parent !is IrClass -> null
             useRootNode(parent, realProperty) -> getRootMfvcNode(parent)[realProperty.name]
@@ -377,12 +377,12 @@ class MemoizedMultiFieldValueClassReplacements(
     }
 
     private fun useRootNode(parent: IrClass, property: IrProperty): Boolean {
-        val getter = property.getter
+        konst getter = property.getter
         if (getter != null && (getter.contextReceiverParametersCount > 0 || getter.extensionReceiverParameter != null)) return false
         return parent.isMultiFieldValueClass && (getter?.isStatic ?: property.backingFieldIfNotToRemove?.isStatic) == false
     }
 
-    private val IrProperty.backingFieldIfNotToRemove get() = backingField?.takeUnless { it in getFieldsToRemove(this.parentAsClass) }
+    private konst IrProperty.backingFieldIfNotToRemove get() = backingField?.takeUnless { it in getFieldsToRemove(this.parentAsClass) }
 
     @Suppress("ClassName")
     private object FLATTENED_NOTHING_DEFAULT_VALUE : IrStatementOriginImpl("FLATTENED_NOTHING_DEFAULT_VALUE")
@@ -393,9 +393,9 @@ class MemoizedMultiFieldValueClassReplacements(
         sourceFunction: IrFunction,
         getArgument: (sourceParameter: IrValueParameter, targetParameterType: IrType) -> IrExpression?
     ): Map<IrValueParameter, IrExpression?> {
-        val targetStructure = bindingNewFunctionToParameterTemplateStructure[targetFunction]
+        konst targetStructure = bindingNewFunctionToParameterTemplateStructure[targetFunction]
             ?: targetFunction.explicitParameters.map { RegularMapping(it) }
-        val sourceStructure = bindingNewFunctionToParameterTemplateStructure[sourceFunction]
+        konst sourceStructure = bindingNewFunctionToParameterTemplateStructure[sourceFunction]
             ?: sourceFunction.explicitParameters.map { RegularMapping(it) }
         verifyStructureCompatibility(targetStructure, sourceStructure)
         return buildMap {
@@ -403,33 +403,33 @@ class MemoizedMultiFieldValueClassReplacements(
                 when (targetParameterStructure) {
                     is RegularMapping -> when (sourceParameterStructure) {
                         is RegularMapping -> put(
-                            targetParameterStructure.valueParameter,
-                            getArgument(sourceParameterStructure.valueParameter, targetParameterStructure.valueParameter.type)
+                            targetParameterStructure.konstueParameter,
+                            getArgument(sourceParameterStructure.konstueParameter, targetParameterStructure.konstueParameter.type)
                         )
                         is MultiFieldValueClassMapping -> {
-                            val valueArguments = sourceParameterStructure.valueParameters.map {
+                            konst konstueArguments = sourceParameterStructure.konstueParameters.map {
                                 getArgument(it, it.type) ?: error("Expected an argument for $sourceParameterStructure")
                             }
-                            val newArgument =
-                                if (valueArguments.all { it is IrComposite && it.origin == FLATTENED_NOTHING_DEFAULT_VALUE }) {
-                                    (valueArguments[0] as IrComposite).statements[0] as IrExpression
+                            konst newArgument =
+                                if (konstueArguments.all { it is IrComposite && it.origin == FLATTENED_NOTHING_DEFAULT_VALUE }) {
+                                    (konstueArguments[0] as IrComposite).statements[0] as IrExpression
                                 } else {
                                     sourceParameterStructure.rootMfvcNode.makeBoxedExpression(
                                         irBuilder,
                                         sourceParameterStructure.typeArguments,
-                                        valueArguments,
+                                        konstueArguments,
                                         registerPossibleExtraBoxCreation = {}
                                     )
                                 }
-                            put(targetParameterStructure.valueParameter, newArgument)
+                            put(targetParameterStructure.konstueParameter, newArgument)
                         }
                     }
                     is MultiFieldValueClassMapping -> when (sourceParameterStructure) {
                         is RegularMapping -> with(irBuilder) {
-                            val argument = getArgument(sourceParameterStructure.valueParameter, targetParameterStructure.boxedType)
+                            konst argument = getArgument(sourceParameterStructure.konstueParameter, targetParameterStructure.boxedType)
                                 ?: error("Expected an argument for $sourceParameterStructure")
-                            if (sourceParameterStructure.valueParameter.type.isNothing()) {
-                                for ((index, parameter) in targetParameterStructure.valueParameters.withIndex()) {
+                            if (sourceParameterStructure.konstueParameter.type.isNothing()) {
+                                for ((index, parameter) in targetParameterStructure.konstueParameters.withIndex()) {
                                     put(parameter, irComposite(origin = FLATTENED_NOTHING_DEFAULT_VALUE) {
                                         if (index == 0) +argument
                                         +parameter.type.defaultValue(
@@ -438,22 +438,22 @@ class MemoizedMultiFieldValueClassReplacements(
                                     })
                                 }
                             } else {
-                                val instance = targetParameterStructure.rootMfvcNode.createInstanceFromBox(
+                                konst instance = targetParameterStructure.rootMfvcNode.createInstanceFromBox(
                                     scope = this,
                                     receiver = argument,
                                     accessType = AccessType.ChooseEffective,
                                     saveVariable = { +it }
                                 )
-                                val arguments = instance.makeFlattenedGetterExpressions(
+                                konst arguments = instance.makeFlattenedGetterExpressions(
                                     this, sourceFunction.parents.firstIsInstance<IrClass>(), registerPossibleExtraBoxCreation = {}
                                 )
-                                for ((targetParameter, expression) in targetParameterStructure.valueParameters zip arguments) {
+                                for ((targetParameter, expression) in targetParameterStructure.konstueParameters zip arguments) {
                                     put(targetParameter, expression)
                                 }
                             }
                         }
                         is MultiFieldValueClassMapping -> {
-                            for ((sourceParameter, targetParameter) in sourceParameterStructure.valueParameters zip targetParameterStructure.valueParameters) {
+                            for ((sourceParameter, targetParameter) in sourceParameterStructure.konstueParameters zip targetParameterStructure.konstueParameters) {
                                 put(targetParameter, getArgument(sourceParameter, targetParameter.type))
                             }
                         }
@@ -476,12 +476,12 @@ class MemoizedMultiFieldValueClassReplacements(
             }
         }
         for (extraParameterStructure in targetStructure.slice(sourceStructure.size..<targetStructure.size)) {
-            require(extraParameterStructure is RegularMapping && extraParameterStructure.valueParameter.origin != IrDeclarationOrigin.DEFINED) {
+            require(extraParameterStructure is RegularMapping && extraParameterStructure.konstueParameter.origin != IrDeclarationOrigin.DEFINED) {
                 "Unexpected target MFVC parameter structure:\n$extraParameterStructure inside $targetStructure"
             }
         }
         for (extraParameterStructure in sourceStructure.slice(targetStructure.size..<sourceStructure.size)) {
-            require(extraParameterStructure is RegularMapping && extraParameterStructure.valueParameter.origin != IrDeclarationOrigin.DEFINED) {
+            require(extraParameterStructure is RegularMapping && extraParameterStructure.konstueParameter.origin != IrDeclarationOrigin.DEFINED) {
                 "Unexpected source MFVC parameter structure:\n$extraParameterStructure inside $sourceStructure"
             }
         }

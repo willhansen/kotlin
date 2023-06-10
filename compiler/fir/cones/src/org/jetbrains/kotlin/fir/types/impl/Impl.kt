@@ -13,12 +13,12 @@ import org.jetbrains.kotlin.fir.types.ConeNullability
 import org.jetbrains.kotlin.util.WeakPair
 
 class ConeClassLikeTypeImpl(
-    override val lookupTag: ConeClassLikeLookupTag,
-    override val typeArguments: Array<out ConeTypeProjection>,
+    override konst lookupTag: ConeClassLikeLookupTag,
+    override konst typeArguments: Array<out ConeTypeProjection>,
     isNullable: Boolean,
-    override val attributes: ConeAttributes = ConeAttributes.Empty
+    override konst attributes: ConeAttributes = ConeAttributes.Empty
 ) : ConeClassLikeType() {
-    override val nullability: ConeNullability = ConeNullability.create(isNullable)
+    override konst nullability: ConeNullability = ConeNullability.create(isNullable)
 
     // Cached expanded type and the relevant session
     var cachedExpandedType: WeakPair<*, ConeClassLikeType>? = null

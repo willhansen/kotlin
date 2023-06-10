@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.ir.util.getInlineClassBackingField
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-class VarargLowering(val context: JsIrBackendContext) : BodyLoweringPass {
+class VarargLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildrenVoid(VarargTransformer(context))
@@ -32,7 +32,7 @@ class VarargLowering(val context: JsIrBackendContext) : BodyLoweringPass {
 }
 
 private class VarargTransformer(
-    val context: JsIrBackendContext
+    konst context: JsIrBackendContext
 ) : IrElementTransformerVoid() {
 
     var externalVarargs = mutableSetOf<IrVararg>()
@@ -40,10 +40,10 @@ private class VarargTransformer(
     override fun visitVararg(expression: IrVararg): IrExpression {
         expression.transformChildrenVoid(this)
 
-        val currentList = mutableListOf<IrExpression>()
-        val segments = mutableListOf<IrExpression>()
+        konst currentList = mutableListOf<IrExpression>()
+        konst segments = mutableListOf<IrExpression>()
 
-        val arrayInfo = InlineClassArrayInfo(context, expression.varargElementType, expression.type)
+        konst arrayInfo = InlineClassArrayInfo(context, expression.varargElementType, expression.type)
 
         for (e in expression.elements) {
             when (e) {
@@ -74,8 +74,8 @@ private class VarargTransformer(
 
         // vararg with a single segment => no need to concatenate
         if (segments.size == 1) {
-            val segment = segments.first()
-            val argument = getArgumentFromSingleSegment(
+            konst segment = segments.first()
+            konst argument = getArgumentFromSingleSegment(
                 expression,
                 segment,
                 arrayInfo
@@ -84,26 +84,26 @@ private class VarargTransformer(
             return arrayInfo.boxArrayIfNeeded(argument)
         }
 
-        val arrayLiteral =
+        konst arrayLiteral =
             segments.toArrayLiteral(
                 context,
                 IrSimpleTypeImpl(context.intrinsics.array, false, emptyList(), emptyList()), // TODO: Substitution
                 context.irBuiltIns.anyType
             )
 
-        val concatFun = if (arrayInfo.primitiveArrayType.classifierOrNull in context.intrinsics.primitiveArrays.keys) {
+        konst concatFun = if (arrayInfo.primitiveArrayType.classifierOrNull in context.intrinsics.primitiveArrays.keys) {
             context.intrinsics.primitiveArrayConcat
         } else {
             context.intrinsics.arrayConcat
         }
 
-        val res = IrCallImpl(
+        konst res = IrCallImpl(
             expression.startOffset,
             expression.endOffset,
             arrayInfo.primitiveArrayType,
             concatFun,
             typeArgumentsCount = 0,
-            valueArgumentsCount = 1
+            konstueArgumentsCount = 1
         ).apply {
             putValueArgument(0, arrayLiteral)
         }
@@ -122,8 +122,8 @@ private class VarargTransformer(
         }
 
         return if (expression.elements.any { it is IrSpreadElement }) {
-            val elementType = arrayInfo.primitiveElementType
-            val copyFunction =
+            konst elementType = arrayInfo.primitiveElementType
+            konst copyFunction =
                 if (elementType.isChar() || elementType.isBoolean() || elementType.isLong())
                     context.intrinsics.taggedArrayCopy
                 else
@@ -135,7 +135,7 @@ private class VarargTransformer(
                 arrayInfo.primitiveArrayType,
                 copyFunction,
                 typeArgumentsCount = 1,
-                valueArgumentsCount = 1
+                konstueArgumentsCount = 1
             ).apply {
                 putTypeArgument(0, arrayInfo.primitiveArrayType)
                 putValueArgument(0, segment)
@@ -147,9 +147,9 @@ private class VarargTransformer(
         expression.transformChildrenVoid()
 
         if (expression.symbol.owner.isExternal) {
-            for (i in 0 until expression.valueArgumentsCount) {
-                val parameter = expression.symbol.owner.valueParameters[i]
-                val varargElementType = parameter.varargElementType
+            for (i in 0 until expression.konstueArgumentsCount) {
+                konst parameter = expression.symbol.owner.konstueParameters[i]
+                konst varargElementType = parameter.varargElementType
                 if (varargElementType != null) {
                     (expression.getValueArgument(i) as? IrVararg)?.let {
                         externalVarargs.add(it)
@@ -158,15 +158,15 @@ private class VarargTransformer(
             }
         }
 
-        val size = expression.valueArgumentsCount
+        konst size = expression.konstueArgumentsCount
 
         for (i in 0 until size) {
-            val argument = expression.getValueArgument(i)
-            val parameter = expression.symbol.owner.valueParameters[i]
-            val varargElementType = parameter.varargElementType
+            konst argument = expression.getValueArgument(i)
+            konst parameter = expression.symbol.owner.konstueParameters[i]
+            konst varargElementType = parameter.varargElementType
             if (argument == null && varargElementType != null) {
-                val arrayInfo = InlineClassArrayInfo(context, varargElementType, parameter.type)
-                val emptyArray = with(arrayInfo) {
+                konst arrayInfo = InlineClassArrayInfo(context, varargElementType, parameter.type)
+                konst emptyArray = with(arrayInfo) {
                     boxArrayIfNeeded(toPrimitiveArrayLiteral(emptyList()))
                 }
 
@@ -181,24 +181,24 @@ private class VarargTransformer(
 private fun List<IrExpression>.toArrayLiteral(context: JsIrBackendContext, type: IrType, varargElementType: IrType): IrExpression {
 
     // TODO: Use symbols when builtins symbol table is fixes
-    val primitiveType = context.intrinsics.primitiveArrays.mapKeys { it.key }[type.classifierOrNull]
+    konst primitiveType = context.intrinsics.primitiveArrays.mapKeys { it.key }[type.classifierOrNull]
 
-    val intrinsic =
+    konst intrinsic =
         if (primitiveType != null)
             context.intrinsics.primitiveToLiteralConstructor.getValue(primitiveType)
         else
             context.intrinsics.arrayLiteral
 
-    val startOffset = firstOrNull()?.startOffset ?: UNDEFINED_OFFSET
-    val endOffset = lastOrNull()?.endOffset ?: UNDEFINED_OFFSET
+    konst startOffset = firstOrNull()?.startOffset ?: UNDEFINED_OFFSET
+    konst endOffset = lastOrNull()?.endOffset ?: UNDEFINED_OFFSET
 
-    val irVararg = IrVarargImpl(startOffset, endOffset, type, varargElementType, this)
+    konst irVararg = IrVarargImpl(startOffset, endOffset, type, varargElementType, this)
 
     return IrCallImpl(
         startOffset, endOffset,
         type, intrinsic,
         typeArgumentsCount = if (intrinsic.owner.typeParameters.isNotEmpty()) 1 else 0,
-        valueArgumentsCount = 1
+        konstueArgumentsCount = 1
     ).apply {
         if (typeArgumentsCount == 1) {
             putTypeArgument(0, varargElementType)
@@ -207,15 +207,15 @@ private fun List<IrExpression>.toArrayLiteral(context: JsIrBackendContext, type:
     }
 }
 
-internal class InlineClassArrayInfo(val context: JsIrBackendContext, val elementType: IrType, val arrayType: IrType) {
+internal class InlineClassArrayInfo(konst context: JsIrBackendContext, konst elementType: IrType, konst arrayType: IrType) {
 
     private fun IrType.getInlinedClass() = context.inlineClassesUtils.getInlinedClass(this)
     private fun getInlineClassUnderlyingType(irClass: IrClass) = context.inlineClassesUtils.getInlineClassUnderlyingType(irClass)
 
-    val arrayInlineClass = arrayType.getInlinedClass()
-    val inlined = arrayInlineClass != null
+    konst arrayInlineClass = arrayType.getInlinedClass()
+    konst inlined = arrayInlineClass != null
 
-    val primitiveElementType = when {
+    konst primitiveElementType = when {
         inlined -> getInlineClassUnderlyingType(
             elementType.getInlinedClass() ?: compilationException(
                 "Could not get inlined class",
@@ -225,7 +225,7 @@ internal class InlineClassArrayInfo(val context: JsIrBackendContext, val element
         else -> elementType
     }
 
-    val primitiveArrayType = when {
+    konst primitiveArrayType = when {
         inlined -> getInlineClassUnderlyingType(arrayInlineClass!!)
         else -> arrayType
     }
@@ -249,8 +249,8 @@ internal class InlineClassArrayInfo(val context: JsIrBackendContext, val element
         if (arrayInlineClass == null)
             return element
         else with(element) {
-            val inlinedClass = type.getInlinedClass() ?: return element
-            val field = getInlineClassBackingField(inlinedClass)
+            konst inlinedClass = type.getInlinedClass() ?: return element
+            konst field = getInlineClassBackingField(inlinedClass)
             return IrGetFieldImpl(startOffset, endOffset, field.symbol, field.type, this)
         }
     }

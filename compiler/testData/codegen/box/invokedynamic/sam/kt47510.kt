@@ -6,8 +6,8 @@ import java.util.concurrent.Executor
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
 
-class Wrapper<T>(val pool: Executor, private val cont: Continuation<T>) : Continuation<T> {
-    override val context: CoroutineContext
+class Wrapper<T>(konst pool: Executor, private konst cont: Continuation<T>) : Continuation<T> {
+    override konst context: CoroutineContext
         get() = cont.context
 
     override fun resumeWith(result: Result<T>) {

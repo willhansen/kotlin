@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtConstantExpressionElementType
 class KotlinConstantExpressionStubImpl(
     parent: StubElement<out PsiElement>?,
     elementType: KtConstantExpressionElementType,
-    private val kind: ConstantValueKind,
-    private val value: StringRef
+    private konst kind: ConstantValueKind,
+    private konst konstue: StringRef
 ) : KotlinStubBaseImpl<KtConstantExpression>(parent, elementType), KotlinConstantExpressionStub {
     override fun kind(): ConstantValueKind = kind
-    override fun value(): String = StringRef.toString(value)
+    override fun konstue(): String = StringRef.toString(konstue)
 }

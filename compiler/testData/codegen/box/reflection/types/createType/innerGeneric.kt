@@ -23,7 +23,7 @@ fun foo(): A<Int>.B<Double, Float>.C<Long> = null!!
 fun box(): String {
     fun KClass<*>.inv() = KTypeProjection.invariant(this.createType())
 
-    val type = A.B.C::class.createType(listOf(Long::class.inv(), Double::class.inv(), Float::class.inv(), Int::class.inv()))
+    konst type = A.B.C::class.createType(listOf(Long::class.inv(), Double::class.inv(), Float::class.inv(), Int::class.inv()))
     assertEquals("test.A<kotlin.Int>.B<kotlin.Double, kotlin.Float>.C<kotlin.Long>", type.toString())
 
     assertEquals("test.A.D", A.D::class.createType().toString())

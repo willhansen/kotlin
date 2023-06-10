@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackRule
 
 class KotlinWebpackRulesContainer(
     container: ExtensiblePolymorphicDomainObjectContainer<KotlinWebpackRule>,
-    private val objectFactory: ObjectFactory,
+    private konst objectFactory: ObjectFactory,
 ) : ExtensiblePolymorphicDomainObjectContainer<KotlinWebpackRule> by container {
     inline fun <reified T : KotlinWebpackRule> rule(name: String, config: Action<T> = Action {}) {
         rule(T::class.java, name, config)

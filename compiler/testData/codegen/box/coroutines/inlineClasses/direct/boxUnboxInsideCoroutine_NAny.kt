@@ -9,11 +9,11 @@ fun builder(c: suspend () -> Unit) {
 }
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class IC(val s: Any?)
+inline class IC(konst s: Any?)
 
 class Test1() {
 
-    suspend fun <T> foo(value: T): T = value
+    suspend fun <T> foo(konstue: T): T = konstue
 
     suspend fun qux(ss: IC): IC = IC(ss.s)
 
@@ -29,7 +29,7 @@ class Test1() {
 
 class Test2 {
 
-    suspend fun foo(value: IC): IC = value
+    suspend fun foo(konstue: IC): IC = konstue
 
     suspend fun qux(s: String): IC = IC(s)
 
@@ -43,7 +43,7 @@ class Test2 {
 }
 
 class Test3 {
-    suspend fun <T> foo(value: T): T = value
+    suspend fun <T> foo(konstue: T): T = konstue
 
     suspend fun bar(): IC {
         return foo(IC("OK"))

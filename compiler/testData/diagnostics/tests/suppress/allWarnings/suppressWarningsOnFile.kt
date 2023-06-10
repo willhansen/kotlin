@@ -3,6 +3,6 @@
 
 class C {
     companion object {
-        val foo: String?? = null as Nothing?
+        konst foo: String?? = null as Nothing?
     }
 }

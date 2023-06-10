@@ -6,10 +6,10 @@
 
 package test
 
-inline fun test(s: () -> () -> () -> String = { val z = "Outer"; { { "OK" } } }) =
+inline fun test(s: () -> () -> () -> String = { konst z = "Outer"; { { "OK" } } }) =
         s()
 
-val same = test()
+konst same = test()
 
 // MODULE: main(lib)
 // FILE: B.kt
@@ -17,7 +17,7 @@ val same = test()
 import test.*
 
 fun box(): String {
-    val inlined = test()
+    konst inlined = test()
     if (same::class.java == inlined::class.java) return "fail 1 : ${same::class.java} ==  ${inlined::class.java}"
     if (same()::class.java == inlined()::class.java) return "fail 2 : ${same()::class.java} ==  ${inlined()::class.java}"
     return inlined()()

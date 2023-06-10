@@ -8,7 +8,7 @@ package test
 
 object CrossinlineLambdaContainer {
     inline fun call(crossinline c: () -> Unit) {
-        val l = { c() }
+        konst l = { c() }
         l()
     }
 }
@@ -27,7 +27,7 @@ interface Checker {
 class ShouldBeDisabled : Checker {
     override fun checkTrue(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
         call {
             assert(l())
         }
@@ -36,7 +36,7 @@ class ShouldBeDisabled : Checker {
 
     override fun checkFalse(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
         call {
             assert(l())
         }
@@ -45,7 +45,7 @@ class ShouldBeDisabled : Checker {
 
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
         call {
             assert(l()) { "BOOYA" }
         }
@@ -54,7 +54,7 @@ class ShouldBeDisabled : Checker {
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
         call {
             assert(l()) { "BOOYA" }
         }
@@ -65,7 +65,7 @@ class ShouldBeDisabled : Checker {
 class ShouldBeEnabled : Checker {
     override fun checkTrue(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
         call {
             assert(l())
         }
@@ -74,7 +74,7 @@ class ShouldBeEnabled : Checker {
 
     override fun checkFalse(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
         call {
             assert(l())
         }
@@ -83,7 +83,7 @@ class ShouldBeEnabled : Checker {
 
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
         call {
             assert(l()) { "BOOYA" }
         }
@@ -92,7 +92,7 @@ class ShouldBeEnabled : Checker {
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
         call {
             assert(l()) { "BOOYA" }
         }
@@ -101,9 +101,9 @@ class ShouldBeEnabled : Checker {
 }
 
 fun setDesiredAssertionStatus(v: Boolean): Checker {
-    val loader = Checker::class.java.classLoader
+    konst loader = Checker::class.java.classLoader
     loader.setDefaultAssertionStatus(v)
-    val c = loader.loadClass(if (v) "ShouldBeEnabled" else "ShouldBeDisabled")
+    konst c = loader.loadClass(if (v) "ShouldBeEnabled" else "ShouldBeDisabled")
     return c.newInstance() as Checker
 }
 

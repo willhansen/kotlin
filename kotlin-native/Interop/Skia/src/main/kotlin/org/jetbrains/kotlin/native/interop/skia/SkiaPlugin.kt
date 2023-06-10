@@ -15,16 +15,16 @@ import org.jetbrains.kotlin.native.interop.indexer.NativeLibrary
 import org.jetbrains.kotlin.native.interop.indexer.Type
 
 class SkiaPlugin : Plugin {
-    override val name = "Skia"
+    override konst name = "Skia"
     override fun buildNativeIndex(library: NativeLibrary, verbose: Boolean): IndexerResult =
             buildSkiaNativeIndexImpl(library, verbose)
 
-    override val managedTypePassing = object : ManagedTypePassing() {
-        override val ManagedType.passValue: String get() = "sk_ref_sp<${this.decl.stripSkiaSharedPointer}>"
-        override val ManagedType.returnValue: String get() = ".release()"
+    override konst managedTypePassing = object : ManagedTypePassing() {
+        override konst ManagedType.passValue: String get() = "sk_ref_sp<${this.decl.stripSkiaSharedPointer}>"
+        override konst ManagedType.returnValue: String get() = ".release()"
     }
 
-    override val ManagedType.stringRepresentation: String get() {
+    override konst ManagedType.stringRepresentation: String get() {
         assert(this.decl.isSkiaSharedPointer)
         return "${this.decl.stripSkiaSharedPointer}*"
     }

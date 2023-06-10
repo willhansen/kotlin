@@ -1,8 +1,8 @@
 // WITH_STDLIB
 
-class Wrapper<T>(val value: T)
+class Wrapper<T>(konst konstue: T)
 
 fun box(): String {
-    val ls = listOf("OK").map(::Wrapper)
-    return ls[0].value
+    konst ls = listOf("OK").map(::Wrapper)
+    return ls[0].konstue
 }

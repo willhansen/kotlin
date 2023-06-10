@@ -3,7 +3,7 @@ package foo
 
 interface A {
     companion object {
-        val OK: String = "OK"
+        konst OK: String = "OK"
     }
 }
 

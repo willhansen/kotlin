@@ -3,7 +3,7 @@ package foo
 
 fun bar() = 23
 
-private val bar = 32
+private konst bar = 32
 
 fun box(): String {
     assertEquals(23, bar())

@@ -1,8 +1,8 @@
 fun foo() {
     class B {
-        val a: Int
+        konst a: Int
             get() {
-                val b: Int
+                konst b: Int
                 return b
             }
     }

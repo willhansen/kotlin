@@ -1,3 +1,3 @@
 package test
 
-val prop2 = 2
+konst prop2 = 2

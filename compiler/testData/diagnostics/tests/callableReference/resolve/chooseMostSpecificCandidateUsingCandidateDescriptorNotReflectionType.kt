@@ -3,13 +3,13 @@
 
 fun test() {
     foo(String::extensionReceiver)
-    foo(::valueParameter)
+    foo(::konstueParameter)
 }
 
 fun CharSequence.extensionReceiver(): CharSequence = TODO()
 fun String.extensionReceiver(): String = TODO()
 
-fun valueParameter(c: CharSequence): CharSequence = TODO()
-fun valueParameter(s: String): CharSequence = TODO()
+fun konstueParameter(c: CharSequence): CharSequence = TODO()
+fun konstueParameter(s: String): CharSequence = TODO()
 
 fun <R> foo(f: (String) -> R) {}

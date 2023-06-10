@@ -8,13 +8,13 @@
 // FILE: 1.kt
 
 interface Flow<T> {
-    val result: String
+    konst result: String
 }
 
 inline fun <reified T> foo() =
     object {
         fun test() = object : Flow<T> {
-            override val result: String = "OK"
+            override konst result: String = "OK"
         }
     }.test()
 

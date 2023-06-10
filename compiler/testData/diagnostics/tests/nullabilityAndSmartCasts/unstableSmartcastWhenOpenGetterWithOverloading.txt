@@ -17,7 +17,7 @@ public final class CtxImpl : Ctx {
 
 public open class Test {
     public constructor Test(/*0*/ ctx: Ctx)
-    public open val ctx: Ctx
+    public open konst ctx: Ctx
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun test(): kotlin.Unit

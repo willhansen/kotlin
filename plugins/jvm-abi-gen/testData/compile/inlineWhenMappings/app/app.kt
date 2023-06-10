@@ -2,4 +2,4 @@ package app
 
 import lib.*
 
-fun runAppAndReturnOk(): String = value(E.A)
+fun runAppAndReturnOk(): String = konstue(E.A)

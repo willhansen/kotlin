@@ -8,7 +8,7 @@ public interface I {
 @kotlin.Metadata
 public final class IC1 {
     // source: 'inlineClassEqualsOverride.kt'
-    private final field value: double
+    private final field konstue: double
     private synthetic method <init>(p0: double): void
     public synthetic final static method box-impl(p0: double): IC1
     public static method constructor-impl(p0: double): double
@@ -27,7 +27,7 @@ public final class IC1 {
 @kotlin.Metadata
 public final class IC2 {
     // source: 'inlineClassEqualsOverride.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): IC2
     public static method constructor-impl(p0: int): int
@@ -47,7 +47,7 @@ public final class IC2 {
 @kotlin.Metadata
 public final class IC3 {
     // source: 'inlineClassEqualsOverride.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): IC3
     public static method constructor-impl(p0: int): int
@@ -66,7 +66,7 @@ public final class IC3 {
 @kotlin.Metadata
 public final class IC4 {
     // source: 'inlineClassEqualsOverride.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): IC4
     public static method constructor-impl(p0: int): int
@@ -85,7 +85,7 @@ public final class IC4 {
 @kotlin.Metadata
 public final class IC5 {
     // source: 'inlineClassEqualsOverride.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): IC5
     public static method constructor-impl(p0: int): int
@@ -104,7 +104,7 @@ public final class IC5 {
 @kotlin.Metadata
 public final class IC6 {
     // source: 'inlineClassEqualsOverride.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): IC6
     public static method constructor-impl(p0: int): int

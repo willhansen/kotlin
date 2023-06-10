@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.util.findInterfaceImplementation
 
 class DescriptorBasedFunctionHandleForJvm(
     descriptor: FunctionDescriptor,
-    private val state: GenerationState
+    private konst state: GenerationState
 ) : DescriptorBasedFunctionHandle(descriptor) {
     override fun createHandleForOverridden(overridden: FunctionDescriptor) =
         DescriptorBasedFunctionHandleForJvm(overridden, state)
@@ -32,19 +32,19 @@ class DescriptorBasedFunctionHandleForJvm(
         For non-@JvmDefault interfaces function, its body is generated in a separate place (DefaultImpls) and
         the method in the interface is abstract so we must not generate bridges for such cases.
     */
-    override val isAbstract: Boolean = super.isAbstract || isAbstractOnJvmIgnoringActualModality(descriptor, state.jvmDefaultMode)
+    override konst isAbstract: Boolean = super.isAbstract || isAbstractOnJvmIgnoringActualModality(descriptor, state.jvmDefaultMode)
 
-    override val mayBeUsedAsSuperImplementation: Boolean =
+    override konst mayBeUsedAsSuperImplementation: Boolean =
         super.mayBeUsedAsSuperImplementation || descriptor.isJvmDefaultOrPlatformDependent(state.jvmDefaultMode)
 
-    private val asmMethod by lazy(LazyThreadSafetyMode.NONE) {
+    private konst asmMethod by lazy(LazyThreadSafetyMode.NONE) {
         state.typeMapper.mapAsmMethod(descriptor)
     }
 
-    override val isDeclaration: Boolean =
+    override konst isDeclaration: Boolean =
         descriptor.kind.isReal || needToGenerateDelegationToDefaultImpls(descriptor, state.jvmDefaultMode)
 
-    override val mightBeIncorrectCode: Boolean
+    override konst mightBeIncorrectCode: Boolean
         get() = state.classBuilderMode.mightBeIncorrectCode
 
     override fun hashCode(): Int =
@@ -65,7 +65,7 @@ class DescriptorBasedFunctionHandleForJvm(
 private fun FunctionDescriptor.containerEntityForEqualityAndHashCode(): Any =
     (containingDeclaration as? ClassDescriptor)?.typeConstructor ?: containingDeclaration
 
-private val FunctionDescriptor.isJavaForKotlinOverrideProperty: Boolean
+private konst FunctionDescriptor.isJavaForKotlinOverrideProperty: Boolean
     get() = this is PropertyAccessorDescriptor && correspondingProperty is JavaForKotlinOverridePropertyDescriptor
 
 private fun CallableMemberDescriptor.isJvmDefaultOrPlatformDependent(jvmDefaultMode: JvmDefaultMode) =
@@ -73,7 +73,7 @@ private fun CallableMemberDescriptor.isJvmDefaultOrPlatformDependent(jvmDefaultM
 
 private fun needToGenerateDelegationToDefaultImpls(descriptor: FunctionDescriptor, jvmDefaultMode: JvmDefaultMode): Boolean {
     if (findInterfaceImplementation(descriptor) == null) return false
-    val overriddenFromInterface = findImplementationFromInterface(descriptor) ?: return false
+    konst overriddenFromInterface = findImplementationFromInterface(descriptor) ?: return false
 
     return !overriddenFromInterface.isJvmDefaultOrPlatformDependent(jvmDefaultMode)
 }

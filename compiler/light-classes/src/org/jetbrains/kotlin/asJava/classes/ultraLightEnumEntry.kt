@@ -16,9 +16,9 @@ internal class KtUltraLightEnumEntry(
     modifiers: Set<String>
 ) : KtUltraLightFieldImpl(declaration, name, containingClass, support, modifiers), PsiEnumConstant {
 
-    private val enumEntry get() = declaration as KtEnumEntry
+    private konst enumEntry get() = declaration as KtEnumEntry
 
-    private val _initializingClass by lazyPub {
+    private konst _initializingClass by lazyPub {
         enumEntry.body?.let { KtUltraLightClassForEnumEntry(enumEntry, support, this) }
     }
 

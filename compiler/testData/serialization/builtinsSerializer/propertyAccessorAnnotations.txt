@@ -1,9 +1,9 @@
 package test
 
-@test.Anno(value = "property") public val v1: kotlin.String = ""
-@get:test.Anno(value = "getter") @set:test.Anno(value = "setter") @setparam:test.Anno(value = "setparam") public var v2: kotlin.String
+@test.Anno(konstue = "property") public konst v1: kotlin.String = ""
+@get:test.Anno(konstue = "getter") @set:test.Anno(konstue = "setter") @setparam:test.Anno(konstue = "setparam") public var v2: kotlin.String
 
 public final annotation class Anno : kotlin.Annotation {
-    public constructor Anno(/*0*/ value: kotlin.String)
-    public final val value: kotlin.String
+    public constructor Anno(/*0*/ konstue: kotlin.String)
+    public final konst konstue: kotlin.String
 }

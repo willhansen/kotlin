@@ -14,7 +14,7 @@ class Baz
 object BazSerializer: KSerializer<Baz>
 
 @Serializable
-class Foo1(@Polymorphic val i: Baz)
+class Foo1(@Polymorphic konst i: Baz)
 
 @Serializable
-class Foo2(val li: MutableList<@Serializable(with = BazSerializer::class) Baz>)
+class Foo2(konst li: MutableList<@Serializable(with = BazSerializer::class) Baz>)

@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.assignment.plugin.k2
 
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar
 
-class FirAssignmentPluginExtensionRegistrar(private val annotations: List<String>) : FirExtensionRegistrar() {
+class FirAssignmentPluginExtensionRegistrar(private konst annotations: List<String>) : FirExtensionRegistrar() {
     override fun ExtensionRegistrarContext.configurePlugin() {
         +::FirAssignmentPluginAssignAltererExtension
         +::FirAssignmentPluginCheckersExtension

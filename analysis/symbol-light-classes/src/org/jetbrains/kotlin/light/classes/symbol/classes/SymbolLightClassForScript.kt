@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtScript
 
 internal class SymbolLightClassForScript private constructor(
-    private val script: KtScript,
-    private val symbolPointer: KtSymbolPointer<KtScriptSymbol>,
+    private konst script: KtScript,
+    private konst symbolPointer: KtSymbolPointer<KtScriptSymbol>,
     ktModule: KtModule,
 ) : SymbolLightClassBase(ktModule, script.manager) {
 
@@ -40,14 +40,14 @@ internal class SymbolLightClassForScript private constructor(
     )
 
     private fun MutableList<KtLightMethod>.addScriptDefaultMethods() {
-        val defaultConstructor = SymbolLightMethodForScriptDefaultConstructor(
+        konst defaultConstructor = SymbolLightMethodForScriptDefaultConstructor(
             script,
             this@SymbolLightClassForScript,
             METHOD_INDEX_FOR_DEFAULT_CTOR
         )
         add(defaultConstructor)
 
-        val mainMethod = SymbolLightMethodForScriptMain(
+        konst mainMethod = SymbolLightMethodForScriptMain(
             script,
             this@SymbolLightClassForScript,
             METHOD_INDEX_FOR_SCRIPT_MAIN
@@ -56,7 +56,7 @@ internal class SymbolLightClassForScript private constructor(
     }
 
     override fun getOwnMethods(): List<KtLightMethod> = cachedValue {
-        val result = mutableListOf<KtLightMethod>()
+        konst result = mutableListOf<KtLightMethod>()
 
         result.addScriptDefaultMethods()
 
@@ -83,7 +83,7 @@ internal class SymbolLightClassForScript private constructor(
     override fun copy(): SymbolLightClassForScript =
         SymbolLightClassForScript(script, symbolPointer, ktModule)
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightClassModifierList(
             containingDeclaration = this@SymbolLightClassForScript,
             modifiersBox = InitializedModifiersBox(PsiModifier.PUBLIC, PsiModifier.FINAL)
@@ -94,7 +94,7 @@ internal class SymbolLightClassForScript private constructor(
 
     override fun hasModifierProperty(name: String): Boolean = _modifierList.hasModifierProperty(name)
 
-    private val _containingFile by lazyPub {
+    private konst _containingFile by lazyPub {
         FakeFileForLightClass(
             script.containingKtFile,
             lightClass = this,
@@ -130,7 +130,7 @@ internal class SymbolLightClassForScript private constructor(
 
     override fun isEnum(): Boolean = false
 
-    private val _extendsList: PsiReferenceList by lazyPub {
+    private konst _extendsList: PsiReferenceList by lazyPub {
         KotlinSuperTypeListBuilder(
             this,
             kotlinOrigin = kotlinOrigin?.getSuperTypeList(),
@@ -144,7 +144,7 @@ internal class SymbolLightClassForScript private constructor(
 
     override fun getExtendsList(): PsiReferenceList = _extendsList
 
-    private val _implementsList by lazyPub {
+    private konst _implementsList by lazyPub {
         KotlinSuperTypeListBuilder(
             this,
             kotlinOrigin = kotlinOrigin?.getSuperTypeList(),
@@ -174,7 +174,7 @@ internal class SymbolLightClassForScript private constructor(
 
     override fun isInheritorDeep(baseClass: PsiClass?, classToByPass: PsiClass?): Boolean = false
 
-    override val kotlinOrigin: KtClassOrObject? = null
+    override konst kotlinOrigin: KtClassOrObject? = null
 
-    override val originKind: LightClassOriginKind = LightClassOriginKind.SOURCE
+    override konst originKind: LightClassOriginKind = LightClassOriginKind.SOURCE
 }

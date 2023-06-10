@@ -81,19 +81,19 @@ class B : A {
 //   Public signature: /X|null[0]
 class X {
   // CHECK:
-  //   Mangled name: X{}value
-  //   Public signature: /X.value|1987073854177347439[0]
-  var value: String
+  //   Mangled name: X{}konstue
+  //   Public signature: /X.konstue|1987073854177347439[0]
+  var konstue: String
     // CHECK JVM_IR:
-    //   Mangled name: X#<get-value>(){}kotlin.String
-    //   Public signature: /X.value.<get-value>|-7202092821145242726[0]
+    //   Mangled name: X#<get-konstue>(){}kotlin.String
+    //   Public signature: /X.konstue.<get-konstue>|-7202092821145242726[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: X#<get-value>(){}
-    //   Public signature: /X.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: X#<get-konstue>(){}
+    //   Public signature: /X.konstue.<get-konstue>|3260093555963109437[0]
     get
     // CHECK:
-    //   Mangled name: X#<set-value>(kotlin.String){}
-    //   Public signature: /X.value.<set-value>|7375160065891674826[0]
+    //   Mangled name: X#<set-konstue>(kotlin.String){}
+    //   Public signature: /X.konstue.<set-konstue>|7375160065891674826[0]
     set
 
   // CHECK:

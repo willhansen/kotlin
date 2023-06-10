@@ -17,17 +17,17 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.tree.MethodInsnNode
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
-private val BOXING_CLASS_INTERNAL_NAME =
+private konst BOXING_CLASS_INTERNAL_NAME =
     StandardNames.COROUTINES_JVM_INTERNAL_PACKAGE_FQ_NAME.child(Name.identifier("Boxing")).topLevelClassInternalName()
 
 @OptIn(ExperimentalStdlibApi::class)
 object ChangeBoxingMethodTransformer : MethodTransformer() {
-    private val wrapperToInternalBoxing: Map<String, String>
+    private konst wrapperToInternalBoxing: Map<String, String>
 
     init {
-        val map = hashMapOf<String, String>()
-        for (primitiveType in JvmPrimitiveType.values()) {
-            val name = primitiveType.wrapperFqName.topLevelClassInternalName()
+        konst map = hashMapOf<String, String>()
+        for (primitiveType in JvmPrimitiveType.konstues()) {
+            konst name = primitiveType.wrapperFqName.topLevelClassInternalName()
             map[name] = "box${primitiveType.javaKeywordName.replaceFirstChar(Char::uppercaseChar)}"
         }
         wrapperToInternalBoxing = map
@@ -36,10 +36,10 @@ object ChangeBoxingMethodTransformer : MethodTransformer() {
     override fun transform(internalClassName: String, methodNode: MethodNode) {
         for (boxing in methodNode.instructions.asSequence().filter { it.isPrimitiveBoxing() }) {
             assert(boxing.opcode == Opcodes.INVOKESTATIC) {
-                "boxing shall be INVOKESTATIC wrapper.valueOf"
+                "boxing shall be INVOKESTATIC wrapper.konstueOf"
             }
             boxing as MethodInsnNode
-            val methodName = wrapperToInternalBoxing[boxing.owner].sure {
+            konst methodName = wrapperToInternalBoxing[boxing.owner].sure {
                 "expected primitive wrapper, but got ${boxing.owner}"
             }
             methodNode.instructions.set(

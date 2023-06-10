@@ -24,19 +24,19 @@ import org.jetbrains.kotlin.name.ClassId
 
 class ProtoBasedClassDataFinder(
     proto: ProtoBuf.PackageFragment,
-    private val nameResolver: NameResolver,
-    private val metadataVersion: BinaryVersion,
-    private val classSource: (ClassId) -> SourceElement = { SourceElement.NO_SOURCE }
+    private konst nameResolver: NameResolver,
+    private konst metadataVersion: BinaryVersion,
+    private konst classSource: (ClassId) -> SourceElement = { SourceElement.NO_SOURCE }
 ) : ClassDataFinder {
-    private val classIdToProto =
+    private konst classIdToProto =
         proto.class_List.associateBy { klass ->
             nameResolver.getClassId(klass.fqName)
         }
 
-    val allClassIds: Collection<ClassId> get() = classIdToProto.keys
+    konst allClassIds: Collection<ClassId> get() = classIdToProto.keys
 
     override fun findClassData(classId: ClassId): ClassData? {
-        val classProto = classIdToProto[classId] ?: return null
+        konst classProto = classIdToProto[classId] ?: return null
         return ClassData(nameResolver, classProto, metadataVersion, classSource(classId))
     }
 }

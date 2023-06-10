@@ -6,13 +6,13 @@ package org.jetbrains.kotlin.native.interop.gen
 
 import org.jetbrains.kotlin.native.interop.indexer.ObjCProtocol
 
-private val StubOrigin.ObjCMethod.isOptional: Boolean
+private konst StubOrigin.ObjCMethod.isOptional: Boolean
     get() = container is ObjCProtocol && method.isOptional
 
 fun FunctionStub.isOptionalObjCMethod(): Boolean = this.origin is StubOrigin.ObjCMethod &&
         this.origin.isOptional
 
-val StubContainer.isInterface: Boolean
+konst StubContainer.isInterface: Boolean
     get() = if (this is ClassStub.Simple) {
         modality == ClassStubModality.INTERFACE
     } else {
@@ -33,7 +33,7 @@ fun StubContainer.computeNamesToBeDeclared(pkgName: String): List<String> {
         }
     }
 
-    val classNames = classes.mapNotNull {
+    konst classNames = classes.mapNotNull {
         when (it) {
             is ClassStub.Simple -> it.classifier
             is ClassStub.Companion -> null
@@ -41,17 +41,17 @@ fun StubContainer.computeNamesToBeDeclared(pkgName: String): List<String> {
         }
     }.onEach { checkPackageCorrectness(it) }.map { it.topLevelName }
 
-    val typealiasNames = typealiases
+    konst typealiasNames = typealiases
             .onEach { checkPackageCorrectness(it.alias) }
             .map { it.alias.topLevelName }
 
-    val namesFromNestedContainers = simpleContainers
+    konst namesFromNestedContainers = simpleContainers
             .flatMap { it.computeNamesToBeDeclared(pkgName) }
 
     return classNames + typealiasNames + namesFromNestedContainers
 }
 
-val StubContainer.defaultMemberModality: MemberStubModality
+konst StubContainer.defaultMemberModality: MemberStubModality
     get() = when (this) {
         is SimpleStubContainer -> MemberStubModality.FINAL
         is ClassStub.Simple -> if (this.modality == ClassStubModality.INTERFACE) {
@@ -66,7 +66,7 @@ val StubContainer.defaultMemberModality: MemberStubModality
 /**
  * Returns constructor that should be rendered in class header.
  */
-val ClassStub.explicitPrimaryConstructor: ConstructorStub?
+konst ClassStub.explicitPrimaryConstructor: ConstructorStub?
     get() = functions.filterIsInstance<ConstructorStub>().firstOrNull(ConstructorStub::isPrimary)
 
 fun ClassStub.nestedName(): String =
@@ -91,7 +91,7 @@ fun ConstantStub.determineConstantAnnotationClassifier(): Classifier = when (thi
 /**
  * Returns the original name of the given type.
  */
-val StubType.underlyingTypeFqName: String
+konst StubType.underlyingTypeFqName: String
     get() = when (this) {
         is ClassifierStubType -> classifier.fqName
         is AbbreviatedType -> underlyingType.underlyingTypeFqName

@@ -1,7 +1,7 @@
 // LANGUAGE: -ProhibitImplementingVarByInheritedVal
 
 interface IVal {
-    val a: String
+    konst a: String
 }
 interface IVar {
     var a: String
@@ -9,10 +9,10 @@ interface IVar {
 interface IVarDefault {
     var a: String
         get() = ""
-        set(value) {}
+        set(konstue) {}
 }
 open class CVal {
-    val a: String = "default"
+    konst a: String = "default"
 }
 open class CVar {
     var a: String = "default"
@@ -25,4 +25,4 @@ class C2 : CVal(), IVar
 class C5 : CVar(), IVar
 <!MANY_IMPL_MEMBER_NOT_IMPLEMENTED!>class C6<!> : CVar(), IVarDefault
 <!MANY_IMPL_MEMBER_NOT_IMPLEMENTED!>class C7<!> : CVar(), IVar, IVarDefault
-<!VAR_OVERRIDDEN_BY_VAL_BY_DELEGATION!>class C8<!>(ival: IVal) : IVar, IVal by ival
+<!VAR_OVERRIDDEN_BY_VAL_BY_DELEGATION!>class C8<!>(ikonst: IVal) : IVar, IVal by ikonst

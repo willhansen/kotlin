@@ -29,12 +29,12 @@ import org.jetbrains.kotlin.test.services.sourceProviders.CodegenHelpersSourceFi
 import org.jetbrains.kotlin.test.services.sourceProviders.CoroutineHelpersSourceFilesProvider
 
 abstract class AbstractIrTextTest<FrontendOutput : ResultingArtifact.FrontendOutput<FrontendOutput>>(
-    private val targetPlatform: TargetPlatform,
+    private konst targetPlatform: TargetPlatform,
     targetBackend: TargetBackend
 ) : AbstractKotlinCompilerWithTargetBackendTest(targetBackend) {
-    abstract val frontend: FrontendKind<*>
-    abstract val frontendFacade: Constructor<FrontendFacade<FrontendOutput>>
-    abstract val converter: Constructor<Frontend2BackendConverter<FrontendOutput, IrBackendInput>>
+    abstract konst frontend: FrontendKind<*>
+    abstract konst frontendFacade: Constructor<FrontendFacade<FrontendOutput>>
+    abstract konst converter: Constructor<Frontend2BackendConverter<FrontendOutput, IrBackendInput>>
 
     open fun TestConfigurationBuilder.applyConfigurators() {}
 

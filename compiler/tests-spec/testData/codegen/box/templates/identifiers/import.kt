@@ -2,33 +2,33 @@
 
 package org.jetbrains.<!ELEMENT(1)!>.<!ELEMENT(2)!>
 
-val x1 = false
+konst x1 = false
 
 // FILE: 2_19_2.kt
 
-val <!ELEMENT(5)!> = false
+konst <!ELEMENT(5)!> = false
 
 // FILE: 2_19_3.kt
 
 package <!ELEMENT(3)!>;
 
-val x3 = true
+konst x3 = true
 
 // FILE: 2_19_4.kt
 
 package <!ELEMENT(4)!>
 
-val x4 = false
+konst x4 = false
 
 // FILE: 2_19_5.kt
 
 package org.jetbrains.kotlin
 
-val x5 = true
+konst x5 = true
 
 // FILE: 2_19_6.kt
 
-val <!ELEMENT(6)!> = false
+konst <!ELEMENT(6)!> = false
 
 // FILE: 2_19_7.kt
 

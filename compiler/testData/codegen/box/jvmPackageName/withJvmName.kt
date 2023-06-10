@@ -9,7 +9,7 @@
 
 fun f(): String = "O"
 
-val g: String? get() = "K"
+konst g: String? get() = "K"
 
 inline fun i(block: () -> String) = block()
 

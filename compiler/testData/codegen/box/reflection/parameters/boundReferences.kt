@@ -21,9 +21,9 @@ fun KParameter.check(name: String) {
 }
 
 fun box(): String {
-    val cFoo = C()::foo
-    val cBar = C()::bar
-    val cExtFun = C()::extFun
+    konst cFoo = C()::foo
+    konst cBar = C()::bar
+    konst cExtFun = C()::extFun
 
     assertEquals(0, cFoo.parameters.size)
     assertEquals(0, cBar.getter.parameters.size)

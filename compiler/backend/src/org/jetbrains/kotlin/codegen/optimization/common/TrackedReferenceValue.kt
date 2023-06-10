@@ -23,11 +23,11 @@ interface ReferenceValueDescriptor {
 }
 
 sealed class TrackedReferenceValue(type: Type) : StrictBasicValue(type) {
-    abstract val descriptors: Set<ReferenceValueDescriptor>
+    abstract konst descriptors: Set<ReferenceValueDescriptor>
 }
 
-class ProperTrackedReferenceValue(type: Type, val descriptor: ReferenceValueDescriptor) : TrackedReferenceValue(type) {
-    override val descriptors: Set<ReferenceValueDescriptor>
+class ProperTrackedReferenceValue(type: Type, konst descriptor: ReferenceValueDescriptor) : TrackedReferenceValue(type) {
+    override konst descriptors: Set<ReferenceValueDescriptor>
         get() = setOf(descriptor)
 
     override fun equals(other: Any?): Boolean =
@@ -42,7 +42,7 @@ class ProperTrackedReferenceValue(type: Type, val descriptor: ReferenceValueDesc
 }
 
 
-class MergedTrackedReferenceValue(type: Type, override val descriptors: Set<ReferenceValueDescriptor>) : TrackedReferenceValue(type) {
+class MergedTrackedReferenceValue(type: Type, override konst descriptors: Set<ReferenceValueDescriptor>) : TrackedReferenceValue(type) {
     override fun equals(other: Any?): Boolean =
         other === this ||
                 other is MergedTrackedReferenceValue && other.descriptors == this.descriptors
@@ -55,7 +55,7 @@ class MergedTrackedReferenceValue(type: Type, override val descriptors: Set<Refe
 }
 
 
-class TaintedTrackedReferenceValue(type: Type, override val descriptors: Set<ReferenceValueDescriptor>) : TrackedReferenceValue(type) {
+class TaintedTrackedReferenceValue(type: Type, override konst descriptors: Set<ReferenceValueDescriptor>) : TrackedReferenceValue(type) {
     override fun equals(other: Any?): Boolean =
         other === this ||
                 other is TaintedTrackedReferenceValue && other.descriptors == this.descriptors

@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1279
 // Snippet from stdlib test test.exceptions.ExceptionTest
 
-private val cause = Exception("cause")
+private konst cause = Exception("cause")
 
 fun assertSame(x: Any?, y: Any?) {
     if (x !== y) {

@@ -47,7 +47,7 @@ open class ParcelableResolveExtension : SyntheticResolveExtension {
         }
 
         fun resolveParcelableCreatorClassType(module: ModuleDescriptor): SimpleType? {
-            val creatorClassId = ClassId(FqName("android.os"), FqName("Parcelable.Creator"), false)
+            konst creatorClassId = ClassId(FqName("android.os"), FqName("Parcelable.Creator"), false)
             return module.findClassAcrossModuleDependencies(creatorClassId)?.defaultType
         }
 
@@ -58,7 +58,7 @@ open class ParcelableResolveExtension : SyntheticResolveExtension {
                 returnType: KotlinType,
                 vararg parameters: Pair<String, KotlinType>
         ): SimpleFunctionDescriptor {
-            val functionDescriptor = object : ParcelableSyntheticComponent, SimpleFunctionDescriptorImpl(
+            konst functionDescriptor = object : ParcelableSyntheticComponent, SimpleFunctionDescriptorImpl(
                     classDescriptor,
                     null,
                     Annotations.EMPTY,
@@ -66,13 +66,13 @@ open class ParcelableResolveExtension : SyntheticResolveExtension {
                     CallableMemberDescriptor.Kind.SYNTHESIZED,
                     classDescriptor.source
             ) {
-                override val componentKind = componentKind
+                override konst componentKind = componentKind
             }
 
-            val valueParameters = parameters.mapIndexed { index, (name, type) -> functionDescriptor.makeValueParameter(name, type, index) }
+            konst konstueParameters = parameters.mapIndexed { index, (name, type) -> functionDescriptor.makeValueParameter(name, type, index) }
 
             functionDescriptor.initialize(
-                    null, classDescriptor.thisAsReceiverParameter, emptyList(), emptyList(), valueParameters,
+                    null, classDescriptor.thisAsReceiverParameter, emptyList(), emptyList(), konstueParameters,
                     returnType, modality, DescriptorVisibilities.PUBLIC)
 
             return functionDescriptor
@@ -83,7 +83,7 @@ open class ParcelableResolveExtension : SyntheticResolveExtension {
                     this, null, index, Annotations.EMPTY, Name.identifier(name), type, false, false, false, null, this.source)
         }
 
-        private val parcelizeMethodNames: List<Name> =
+        private konst parcelizeMethodNames: List<Name> =
             listOf(Name.identifier(DESCRIBE_CONTENTS.methodName), Name.identifier(WRITE_TO_PARCEL.methodName))
     }
 
@@ -120,8 +120,8 @@ open class ParcelableResolveExtension : SyntheticResolveExtension {
             && thisDescriptor.isParcelize
             && result.none { it.isWriteToParcel() }
         ) {
-            val builtIns = thisDescriptor.builtIns
-            val parcelClassType = resolveParcelClassType(thisDescriptor.module) ?: ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_PARCEL_TYPE)
+            konst builtIns = thisDescriptor.builtIns
+            konst parcelClassType = resolveParcelClassType(thisDescriptor.module) ?: ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_PARCEL_TYPE)
             result += createMethod(
                 thisDescriptor, WRITE_TO_PARCEL, Modality.OPEN,
                 builtIns.unitType, "parcel" to parcelClassType, "flags" to builtIns.intType
@@ -133,23 +133,23 @@ open class ParcelableResolveExtension : SyntheticResolveExtension {
         return this.kind != CallableMemberDescriptor.Kind.FAKE_OVERRIDE
                && modality != Modality.ABSTRACT
                && typeParameters.isEmpty()
-               && valueParameters.isEmpty()
+               && konstueParameters.isEmpty()
                // Unfortunately, we can't check the return type as it's unresolved in IDE light classes
     }
 }
 
 internal fun SimpleFunctionDescriptor.isWriteToParcel(): Boolean {
     return typeParameters.isEmpty()
-           && valueParameters.size == 2
+           && konstueParameters.size == 2
            // Unfortunately, we can't check the first parameter type as it's unresolved in IDE light classes
-           && KotlinBuiltIns.isInt(valueParameters[1].type)
+           && KotlinBuiltIns.isInt(konstueParameters[1].type)
            && returnType?.let { KotlinBuiltIns.isUnit(it) } == true
 }
 
 interface ParcelableSyntheticComponent {
-    val componentKind: ComponentKind
+    konst componentKind: ComponentKind
 
-    enum class ComponentKind(val methodName: String) {
+    enum class ComponentKind(konst methodName: String) {
         WRITE_TO_PARCEL("writeToParcel"),
         DESCRIBE_CONTENTS("describeContents"),
         NEW_ARRAY("newArray"),
@@ -157,22 +157,22 @@ interface ParcelableSyntheticComponent {
     }
 }
 
-val PARCELIZE_CLASS_FQNAME: FqName = FqName(Parcelize::class.java.canonicalName)
-internal val PARCELER_FQNAME: FqName = FqName(Parceler::class.java.canonicalName)
+konst PARCELIZE_CLASS_FQNAME: FqName = FqName(Parcelize::class.java.canonicalName)
+internal konst PARCELER_FQNAME: FqName = FqName(Parceler::class.java.canonicalName)
 
-private val PARCELIZE_PLUGIN_PACKAGE = FqName("kotlinx.parcelize")
+private konst PARCELIZE_PLUGIN_PACKAGE = FqName("kotlinx.parcelize")
 
-val ClassDescriptor.isParcelize: Boolean
+konst ClassDescriptor.isParcelize: Boolean
     get() {
-        val parcelizeAnnotation = this.annotations.findAnnotation(PARCELIZE_CLASS_FQNAME) ?: return false
+        konst parcelizeAnnotation = this.annotations.findAnnotation(PARCELIZE_CLASS_FQNAME) ?: return false
         if (ApplicationManager.getApplication().isHeadlessEnvironment) {
             // Module check shouldn't affect compilation
             return true
         }
 
-        val module = parcelizeAnnotation.type.constructor.declarationDescriptor?.module ?: return false
+        konst module = parcelizeAnnotation.type.constructor.declarationDescriptor?.module ?: return false
         return module.getPackage(PARCELIZE_PLUGIN_PACKAGE).isEmpty()
     }
 
-val KotlinType.isParceler
+konst KotlinType.isParceler
     get() = constructor.declarationDescriptor?.fqNameSafe == PARCELER_FQNAME

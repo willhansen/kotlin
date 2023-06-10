@@ -166,9 +166,9 @@ public class RawFirBuilderTestCaseGenerated extends AbstractRawFirBuilderTestCas
             runTest("compiler/fir/raw-fir/psi2fir/testData/rawBuilder/declarations/initBlockWithDeclarations.kt");
         }
 
-        @TestMetadata("invalidDestructing.kt")
-        public void testInvalidDestructing() throws Exception {
-            runTest("compiler/fir/raw-fir/psi2fir/testData/rawBuilder/declarations/invalidDestructing.kt");
+        @TestMetadata("inkonstidDestructing.kt")
+        public void testInkonstidDestructing() throws Exception {
+            runTest("compiler/fir/raw-fir/psi2fir/testData/rawBuilder/declarations/inkonstidDestructing.kt");
         }
 
         @TestMetadata("nestedClass.kt")

@@ -1,32 +1,32 @@
 package test
 
-public val arrayConst: dynamic = {1.toByte(), 2.toByte()}
-public val booleanConst: dynamic = true
-public val byteConst: dynamic = 10.toByte()
-public val charConst: dynamic = \u0041 ('A')
-public val doubleConst: dynamic = 3.0.toDouble()
-public val dynamicConst: dynamic = 100
-public val enumConst: dynamic = Weapon.ROCK
-public val floatConst: dynamic = 2.0.toFloat()
-public val intConst: dynamic = 30
-public val longConst: dynamic = 40.toLong()
-public val shortConst: dynamic = 20.toShort()
-public val stringConst: dynamic = "abcd"
+public konst arrayConst: dynamic = {1.toByte(), 2.toByte()}
+public konst booleanConst: dynamic = true
+public konst byteConst: dynamic = 10.toByte()
+public konst charConst: dynamic = \u0041 ('A')
+public konst doubleConst: dynamic = 3.0.toDouble()
+public konst dynamicConst: dynamic = 100
+public konst enumConst: dynamic = Weapon.ROCK
+public konst floatConst: dynamic = 2.0.toFloat()
+public konst intConst: dynamic = 30
+public konst longConst: dynamic = 40.toLong()
+public konst shortConst: dynamic = 20.toShort()
+public konst stringConst: dynamic = "abcd"
 
 public final class Class {
     public constructor Class()
-    public final val arrayConst: dynamic = {1.toByte(), 2.toByte()}
-    public final val booleanConst: dynamic = true
-    public final val byteConst: dynamic = 10.toByte()
-    public final val charConst: dynamic = \u0041 ('A')
-    public final val doubleConst: dynamic = 3.0.toDouble()
-    public final val dynamicConst: dynamic = 100
-    public final val enumConst: dynamic = Weapon.ROCK
-    public final val floatConst: dynamic = 2.0.toFloat()
-    public final val intConst: dynamic = 30
-    public final val longConst: dynamic = 40.toLong()
-    public final val shortConst: dynamic = 20.toShort()
-    public final val stringConst: dynamic = "abcd"
+    public final konst arrayConst: dynamic = {1.toByte(), 2.toByte()}
+    public final konst booleanConst: dynamic = true
+    public final konst byteConst: dynamic = 10.toByte()
+    public final konst charConst: dynamic = \u0041 ('A')
+    public final konst doubleConst: dynamic = 3.0.toDouble()
+    public final konst dynamicConst: dynamic = 100
+    public final konst enumConst: dynamic = Weapon.ROCK
+    public final konst floatConst: dynamic = 2.0.toFloat()
+    public final konst intConst: dynamic = 30
+    public final konst longConst: dynamic = 40.toLong()
+    public final konst shortConst: dynamic = 20.toShort()
+    public final konst stringConst: dynamic = "abcd"
 }
 
 public final enum class Weapon : kotlin.Enum<test.Weapon> {
@@ -37,12 +37,12 @@ public final enum class Weapon : kotlin.Enum<test.Weapon> {
     enum entry SCISSORS
 
     private constructor Weapon()
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: test.Weapon): kotlin.Int
 
     // Static members
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): test.Weapon
-    public final /*synthesized*/ fun values(): kotlin.Array<test.Weapon>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): test.Weapon
+    public final /*synthesized*/ fun konstues(): kotlin.Array<test.Weapon>
 }

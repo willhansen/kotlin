@@ -1,5 +1,5 @@
 fun test() {
 //      <anonymous>
 //      │
-    val x = object {}
+    konst x = object {}
 }

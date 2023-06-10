@@ -8,10 +8,10 @@ import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 
 
 class VersionFilterPlugin : DokkaPlugin() {
-    private val dokkaBase by lazy { plugin<DokkaBase>() }
+    private konst dokkaBase by lazy { plugin<DokkaBase>() }
 
     @Suppress("unused")
-    val versionFilter by extending {
+    konst versionFilter by extending {
         CoreExtensions.documentableTransformer providing ::VersionFilterTransformer order {
             after(dokkaBase.sinceKotlinTransformer)
             before(dokkaBase.extensionsExtractor)

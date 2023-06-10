@@ -6,15 +6,15 @@ fun numberIsInArray(array: IntArray, number: Int): Boolean {
 }
 
 @CompileTimeCalculation
-fun valueIsInArray(array: Array<Any>, value: Any?): Boolean {
-    return value in array
+fun konstueIsInArray(array: Array<Any>, konstue: Any?): Boolean {
+    return konstue in array
 }
 
-const val a1 = <!EVALUATED: `true`!>numberIsInArray(intArrayOf(1, 2, 3), 1)<!>
-const val a2 = <!EVALUATED: `false`!>numberIsInArray(intArrayOf(1, 2, 3), -1)<!>
+const konst a1 = <!EVALUATED: `true`!>numberIsInArray(intArrayOf(1, 2, 3), 1)<!>
+const konst a2 = <!EVALUATED: `false`!>numberIsInArray(intArrayOf(1, 2, 3), -1)<!>
 
-const val b1 = <!EVALUATED: `true`!>valueIsInArray(arrayOf(1, 2, 3), 1)<!>
-const val b2 = <!EVALUATED: `false`!>valueIsInArray(arrayOf(1, 2, 3), -1)<!>
-const val b3 = <!EVALUATED: `true`!>valueIsInArray(arrayOf(1, 2.0f, "3"), "3")<!>
-const val b4 = <!EVALUATED: `false`!>valueIsInArray(arrayOf(1, 2.0f, "3"), null)<!>
-const val b5 = <!EVALUATED: `false`!>valueIsInArray(arrayOf(1, 2.0f, "3"), 1.0f)<!>
+const konst b1 = <!EVALUATED: `true`!>konstueIsInArray(arrayOf(1, 2, 3), 1)<!>
+const konst b2 = <!EVALUATED: `false`!>konstueIsInArray(arrayOf(1, 2, 3), -1)<!>
+const konst b3 = <!EVALUATED: `true`!>konstueIsInArray(arrayOf(1, 2.0f, "3"), "3")<!>
+const konst b4 = <!EVALUATED: `false`!>konstueIsInArray(arrayOf(1, 2.0f, "3"), null)<!>
+const konst b5 = <!EVALUATED: `false`!>konstueIsInArray(arrayOf(1, 2.0f, "3"), 1.0f)<!>

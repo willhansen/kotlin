@@ -37,10 +37,10 @@ public inline fun KtAnalysisSession.buildSubstitutor(
 
 
 public class KtSubstitutorBuilder
-@KtAnalysisApiInternals constructor(override val token: KtLifetimeToken) : KtLifetimeOwner {
-    private val _mapping = mutableMapOf<KtTypeParameterSymbol, KtType>()
+@KtAnalysisApiInternals constructor(override konst token: KtLifetimeToken) : KtLifetimeOwner {
+    private konst _mapping = mutableMapOf<KtTypeParameterSymbol, KtType>()
 
-    public val mappings: Map<KtTypeParameterSymbol, KtType> get() = withValidityAssertion { _mapping }
+    public konst mappings: Map<KtTypeParameterSymbol, KtType> get() = withValidityAssertion { _mapping }
 
     /**
      * Adds a new [typeParameter] -> [type] substitution to the substitutor which is being built.

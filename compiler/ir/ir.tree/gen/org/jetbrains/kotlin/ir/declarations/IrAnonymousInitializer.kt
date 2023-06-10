@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  */
 abstract class IrAnonymousInitializer : IrDeclarationBase() {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: ClassDescriptor
+    abstract override konst descriptor: ClassDescriptor
 
-    abstract override val symbol: IrAnonymousInitializerSymbol
+    abstract override konst symbol: IrAnonymousInitializerSymbol
 
     abstract var isStatic: Boolean
 

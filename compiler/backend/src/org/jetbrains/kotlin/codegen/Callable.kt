@@ -12,32 +12,32 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 interface Callable {
-    val owner: Type
+    konst owner: Type
 
-    val dispatchReceiverType: Type?
+    konst dispatchReceiverType: Type?
 
-    val dispatchReceiverKotlinType: KotlinType?
+    konst dispatchReceiverKotlinType: KotlinType?
 
-    val extensionReceiverType: Type?
+    konst extensionReceiverType: Type?
 
-    val extensionReceiverKotlinType: KotlinType?
+    konst extensionReceiverKotlinType: KotlinType?
 
-    val generateCalleeType: Type?
+    konst generateCalleeType: Type?
 
-    val valueParameterTypes: List<Type>
+    konst konstueParameterTypes: List<Type>
 
-    val parameterTypes: Array<Type>
+    konst parameterTypes: Array<Type>
 
-    val returnType: Type
+    konst returnType: Type
 
-    val returnKotlinType: KotlinType?
+    konst returnKotlinType: KotlinType?
 
     fun genInvokeInstruction(v: InstructionAdapter)
 
     fun isStaticCall(): Boolean
 
     fun invokeMethodWithArguments(resolvedCall: ResolvedCall<*>, receiver: StackValue, codegen: ExpressionCodegen): StackValue {
-        // it's important to use unsubstituted return type here to unbox value if it comes from type variable
+        // it's important to use unsubstituted return type here to unbox konstue if it comes from type variable
         return StackValue.functionCall(returnType, returnKotlinType ?: resolvedCall.resultingDescriptor.original.returnType) {
             codegen.invokeMethodWithArguments(this, resolvedCall, receiver)
         }

@@ -6,6 +6,6 @@ interface I {
     fun foo(): A<String> = A("OK")
 }
 
-inline class A<T: String>(val x: T): I { }
+inline class A<T: String>(konst x: T): I { }
 
 fun box() = A("").foo().x

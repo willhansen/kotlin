@@ -12,5 +12,5 @@ import java.nio.file.Paths
 
 fun Set<File>.relativeTo(project: Project): Set<File> = map { it.relativeTo(project.projectDir) }.toSet()
 
-val resourcesRoot: Path
+konst resourcesRoot: Path
     get() = Paths.get("src", "functionalTest", "resources")

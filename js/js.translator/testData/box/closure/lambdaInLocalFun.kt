@@ -24,7 +24,7 @@ fun box(): String {
     log = ""
     for (t in arrayOf("1", "2", "3")) {
         fun foo() = {
-            val y = t
+            konst y = t
             fun q() = { y }
             q()
         }

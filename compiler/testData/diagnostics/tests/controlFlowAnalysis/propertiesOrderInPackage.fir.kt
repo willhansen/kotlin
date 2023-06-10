@@ -1,4 +1,4 @@
 package a
 
-val a : Int = b
-val b : Int = a
+konst a : Int = b
+konst b : Int = a

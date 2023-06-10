@@ -17,7 +17,7 @@ import kotlin.script.experimental.dependencies.ScriptReport
 interface LegacyResolverWrapper
 
 class ApiChangeDependencyResolverWrapper(
-        override val delegate: kotlin.script.dependencies.ScriptDependenciesResolver
+        override konst delegate: kotlin.script.dependencies.ScriptDependenciesResolver
 ) : kotlin.script.experimental.dependencies.DependenciesResolver,
     DependencyResolverWrapper<ScriptDependenciesResolver>,
     LegacyResolverWrapper {
@@ -28,8 +28,8 @@ class ApiChangeDependencyResolverWrapper(
             scriptContents: kotlin.script.dependencies.ScriptContents,
             environment: Environment
     ): DependenciesResolver.ResolveResult {
-        val reports = ArrayList<ScriptReport>()
-        val legacyDeps = delegate.resolve(
+        konst reports = ArrayList<ScriptReport>()
+        konst legacyDeps = delegate.resolve(
                 scriptContents,
                 environment,
                 { sev, msg, pos ->
@@ -38,7 +38,7 @@ class ApiChangeDependencyResolverWrapper(
                 previousDependencies
         ).get() ?: return DependenciesResolver.ResolveResult.Failure(reports)
 
-        val dependencies = ScriptDependencies(
+        konst dependencies = ScriptDependencies(
                 javaHome = legacyDeps.javaHome?.let(::File),
                 classpath = legacyDeps.classpath.toList(),
                 imports = legacyDeps.imports.toList(),

@@ -2,7 +2,7 @@ package
 
 public fun </*0*/ K> id(/*0*/ x: K): K
 public fun </*0*/ K> materialize(): K
-public fun </*0*/ K> select(/*0*/ vararg values: K /*kotlin.Array<out K>*/): K
+public fun </*0*/ K> select(/*0*/ vararg konstues: K /*kotlin.Array<out K>*/): K
 
 package bar {
     public fun testInference(/*0*/ a: foo.A, /*1*/ b: foo.B): kotlin.Unit

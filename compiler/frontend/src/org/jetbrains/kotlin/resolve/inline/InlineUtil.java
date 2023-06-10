@@ -34,15 +34,15 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall;
 
 public class InlineUtil {
 
-    public static boolean isInlineParameterExceptNullability(@NotNull ParameterDescriptor valueParameterOrReceiver) {
-        return !(valueParameterOrReceiver instanceof ValueParameterDescriptor
-                 && ((ValueParameterDescriptor) valueParameterOrReceiver).isNoinline()) &&
-               FunctionTypesKt.isBuiltinFunctionalType(valueParameterOrReceiver.getOriginal().getType());
+    public static boolean isInlineParameterExceptNullability(@NotNull ParameterDescriptor konstueParameterOrReceiver) {
+        return !(konstueParameterOrReceiver instanceof ValueParameterDescriptor
+                 && ((ValueParameterDescriptor) konstueParameterOrReceiver).isNoinline()) &&
+               FunctionTypesKt.isBuiltinFunctionalType(konstueParameterOrReceiver.getOriginal().getType());
     }
 
-    public static boolean isInlineParameter(@NotNull ParameterDescriptor valueParameterOrReceiver) {
-        return isInlineParameterExceptNullability(valueParameterOrReceiver) &&
-               !valueParameterOrReceiver.getOriginal().getType().isMarkedNullable();
+    public static boolean isInlineParameter(@NotNull ParameterDescriptor konstueParameterOrReceiver) {
+        return isInlineParameterExceptNullability(konstueParameterOrReceiver) &&
+               !konstueParameterOrReceiver.getOriginal().getType().isMarkedNullable();
     }
 
     public static boolean isInline(@Nullable DeclarationDescriptor descriptor) {
@@ -161,10 +161,10 @@ public class InlineUtil {
         CallableDescriptor descriptor = resolvedCall.getResultingDescriptor();
         if (!isInline(descriptor) && !isArrayConstructorWithLambda(descriptor)) return null;
 
-        ValueArgument valueArgument = CallUtilKt.getValueArgumentForExpression(resolvedCall.getCall(), argument);
-        if (valueArgument == null) return null;
+        ValueArgument konstueArgument = CallUtilKt.getValueArgumentForExpression(resolvedCall.getCall(), argument);
+        if (konstueArgument == null) return null;
 
-        ArgumentMapping mapping = resolvedCall.getArgumentMapping(valueArgument);
+        ArgumentMapping mapping = resolvedCall.getArgumentMapping(konstueArgument);
         if (!(mapping instanceof ArgumentMatch)) return null;
 
         ValueParameterDescriptor parameter = ((ArgumentMatch) mapping).getValueParameter();

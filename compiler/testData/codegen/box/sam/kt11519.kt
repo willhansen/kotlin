@@ -32,13 +32,13 @@ class Custom<K, V> {
 import java.util.Arrays
 
 fun box(): String {
-    val instance = Custom<String, String>("O", "K")
+    konst instance = Custom<String, String>("O", "K")
     var result = "fail"
     instance.forEach { a, b ->
         result = a + b
     }
 
-    val superInterfaces = Arrays.toString(Custom.lambdaClass.genericInterfaces)
+    konst superInterfaces = Arrays.toString(Custom.lambdaClass.genericInterfaces)
     if (superInterfaces != "[interface Custom\$MBiConsumer]") {
         return "fail: $superInterfaces"
     }

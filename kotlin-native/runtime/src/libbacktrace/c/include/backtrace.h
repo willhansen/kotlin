@@ -50,8 +50,8 @@ struct backtrace_state;
    This function, if not NULL, will be called for certain error cases.
    The DATA argument is passed to the function that calls this one.
    The MSG argument is an error message.  The ERRNUM argument, if
-   greater than 0, holds an errno value.  The MSG buffer may become
-   invalid after this function returns.
+   greater than 0, holds an errno konstue.  The MSG buffer may become
+   inkonstid after this function returns.
 
    As a special case, the ERRNUM argument will be passed as -1 if no
    debug info can be found for the executable, or if the debug info
@@ -67,7 +67,7 @@ typedef void (*backtrace_error_callback) (void *data, const char *msg,
 					  int errnum);
 
 /* Create state information for the backtrace routines.  This must be
-   called before any of the other routines, and its return value must
+   called before any of the other routines, and its return konstue must
    be passed to all of the other routines.  FILENAME is the path name
    of the executable file; if it is NULL the library will try
    system-specific path names.  If not NULL, FILENAME must point to a
@@ -82,7 +82,7 @@ typedef void (*backtrace_error_callback) (void *data, const char *msg,
    There is no backtrace_free_state function.  The state is used to
    cache information that is expensive to recompute.  Programs are
    expected to call this function at most once and to save the return
-   value for all later calls to backtrace functions.  */
+   konstue for all later calls to backtrace functions.  */
 
 extern struct backtrace_state *backtrace_create_state (
     const char *filename, int threaded,
@@ -95,7 +95,7 @@ extern struct backtrace_state *backtrace_create_state (
    PC, or 0 if not available.  FUNCTION is the name of the function
    containing PC, or NULL if not available.  This should return 0 to
    continuing tracing.  The FILENAME and FUNCTION buffers may become
-   invalid after this function returns.  */
+   inkonstid after this function returns.  */
 
 typedef int (*backtrace_full_callback) (void *data, uintptr_t pc,
 					const char *filename, int lineno, int column,
@@ -104,8 +104,8 @@ typedef int (*backtrace_full_callback) (void *data, uintptr_t pc,
 /* Get a full stack backtrace.  SKIP is the number of frames to skip;
    passing 0 will start the trace with the function calling
    backtrace_full.  DATA is passed to the callback routine.  If any
-   call to CALLBACK returns a non-zero value, the stack backtrace
-   stops, and backtrace returns that value; this may be used to limit
+   call to CALLBACK returns a non-zero konstue, the stack backtrace
+   stops, and backtrace returns that konstue; this may be used to limit
    the number of stack frames desired.  If all calls to CALLBACK
    return 0, backtrace returns 0.  The backtrace_full function will
    make at least one call to either CALLBACK or ERROR_CALLBACK.  This
@@ -124,8 +124,8 @@ typedef int (*backtrace_simple_callback) (void *data, uintptr_t pc);
 
 /* Get a simple backtrace.  SKIP is the number of frames to skip, as
    in backtrace.  DATA is passed to the callback routine.  If any call
-   to CALLBACK returns a non-zero value, the stack backtrace stops,
-   and backtrace_simple returns that value.  Otherwise
+   to CALLBACK returns a non-zero konstue, the stack backtrace stops,
+   and backtrace_simple returns that konstue.  Otherwise
    backtrace_simple returns 0.  The backtrace_simple function will
    make at least one call to either CALLBACK or ERROR_CALLBACK.  This
    function does not require any debug info for the executable.  */
@@ -149,7 +149,7 @@ extern void backtrace_print (struct backtrace_state *state, int skip, FILE *);
    the debugging information contains the necessary information, then
    this may call the callback function multiple times.  This will make
    at least one call to either CALLBACK or ERROR_CALLBACK.  This
-   returns the first non-zero value returned by CALLBACK, or 0.  */
+   returns the first non-zero konstue returned by CALLBACK, or 0.  */
 
 extern int backtrace_pcinfo (struct backtrace_state *state, uintptr_t pc,
 			     backtrace_full_callback callback,
@@ -159,16 +159,16 @@ extern int backtrace_pcinfo (struct backtrace_state *state, uintptr_t pc,
 /* The type of the callback argument to backtrace_syminfo.  DATA and
    PC are the arguments passed to backtrace_syminfo.  SYMNAME is the
    name of the symbol for the corresponding code.  SYMVAL is the
-   value and SYMSIZE is the size of the symbol.  SYMNAME will be NULL
+   konstue and SYMSIZE is the size of the symbol.  SYMNAME will be NULL
    if no error occurred but the symbol could not be found.  */
 
 typedef void (*backtrace_syminfo_callback) (void *data, uintptr_t pc,
 					    const char *symname,
-					    uintptr_t symval,
+					    uintptr_t symkonst,
 					    uintptr_t symsize);
 
 /* Given ADDR, an address or program counter in the current program,
-   call the callback information with the symbol name and value
+   call the callback information with the symbol name and konstue
    describing the function or variable in which ADDR may be found.
    This will call either CALLBACK or ERROR_CALLBACK exactly once.
    This returns 1 on success, 0 on failure.  This function requires

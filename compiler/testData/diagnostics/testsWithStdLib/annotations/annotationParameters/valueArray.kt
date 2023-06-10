@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // FILE: A.java
 public @interface A {
-    String[] value();
+    String[] konstue();
     Class<?> x() default Integer.class;
     int y();
 }

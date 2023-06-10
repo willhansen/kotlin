@@ -37,7 +37,7 @@ object CliSealedClassInheritorsProvider : SealedClassInheritorsProvider() {
     ): Collection<ClassDescriptor> {
         if (sealedClass.modality != Modality.SEALED) return emptyList()
 
-        val result = linkedSetOf<ClassDescriptor>()
+        konst result = linkedSetOf<ClassDescriptor>()
 
         fun collectSubclasses(scope: MemberScope, collectNested: Boolean) {
             for (descriptor in scope.getContributedDescriptors(DescriptorKindFilter.CLASSIFIERS)) {
@@ -47,8 +47,8 @@ object CliSealedClassInheritorsProvider : SealedClassInheritorsProvider() {
                  *   of theirs actuals, so we need to lookup for descriptor once again via
                  *   scope.getContributedClassifier() to match expects (if possible)
                  */
-                val refinedDescriptor = if (descriptor.isExpect) {
-                    when (val actualDescriptor = scope.getContributedClassifier(descriptor.name, NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS)) {
+                konst refinedDescriptor = if (descriptor.isExpect) {
+                    when (konst actualDescriptor = scope.getContributedClassifier(descriptor.name, NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS)) {
                         is ClassDescriptor -> actualDescriptor
                         is TypeAliasDescriptor -> actualDescriptor.classDescriptor
                         else -> null
@@ -67,7 +67,7 @@ object CliSealedClassInheritorsProvider : SealedClassInheritorsProvider() {
             }
         }
 
-        val container = if (!allowSealedInheritorsInDifferentFilesOfSamePackage) {
+        konst container = if (!allowSealedInheritorsInDifferentFilesOfSamePackage) {
             sealedClass.containingDeclaration
         } else {
             sealedClass.parents.firstOrNull { it is PackageFragmentDescriptor }

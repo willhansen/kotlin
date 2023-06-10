@@ -10,17 +10,17 @@ import org.jetbrains.kotlin.serialization.deserialization.IncompatibleVersionErr
 
 interface DeserializedContainerSource : SourceElement {
     // Non-null if this container is loaded from a class with an incompatible binary version
-    val incompatibility: IncompatibleVersionErrorData<*>?
+    konst incompatibility: IncompatibleVersionErrorData<*>?
 
     // True iff this is container is "invisible" because it's loaded from a pre-release class and this compiler is a release
-    val isPreReleaseInvisible: Boolean
+    konst isPreReleaseInvisible: Boolean
 
     // True iff this container was compiled by the new IR backend, this compiler is not using the IR backend right now,
     // and no additional flags to override this behavior were specified.
-    val abiStability: DeserializedContainerAbiStability
+    konst abiStability: DeserializedContainerAbiStability
 
     // This string should only be used in error messages
-    val presentableString: String
+    konst presentableString: String
 }
 
 enum class DeserializedContainerAbiStability {

@@ -63,14 +63,14 @@ class JavacWrapper(
     jvmClasspathRoots: List<File>,
     bootClasspath: List<File>?,
     sourcePath: List<File>?,
-    val kotlinResolver: JavacWrapperKotlinResolver,
-    private val packagePartsProviders: List<PackagePartProvider>,
-    private val compileJava: Boolean,
-    private val outputDirectory: File?,
-    private val context: Context
+    konst kotlinResolver: JavacWrapperKotlinResolver,
+    private konst packagePartsProviders: List<PackagePartProvider>,
+    private konst compileJava: Boolean,
+    private konst outputDirectory: File?,
+    private konst context: Context
 ) : Closeable {
-    private val localFileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)!!
-    private val jarFileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.JAR_PROTOCOL)!!
+    private konst localFileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)!!
+    private konst jarFileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.JAR_PROTOCOL)!!
 
     companion object {
         fun getInstance(project: Project): JavacWrapper = project.getService(JavacWrapper::class.java)
@@ -81,15 +81,15 @@ class JavacWrapper(
             SymbolBasedClassifierType(it.element.asType(), this)
         }
 
-    val JAVA_LANG_OBJECT by lazy {
+    konst JAVA_LANG_OBJECT by lazy {
         createCommonClassifierType(classId("java.lang", "Object"))
     }
 
-    val JAVA_LANG_ENUM by lazy {
+    konst JAVA_LANG_ENUM by lazy {
         findClassInSymbols(classId("java.lang", "Enum"))
     }
 
-    val JAVA_LANG_ANNOTATION_ANNOTATION by lazy {
+    konst JAVA_LANG_ANNOTATION_ANNOTATION by lazy {
         createCommonClassifierType(classId("java.lang.annotation", "Annotation"))
     }
 
@@ -100,13 +100,13 @@ class JavacWrapper(
         }
     }
 
-    private val javac = object : JavaCompiler(context) {
+    private konst javac = object : JavaCompiler(context) {
         override fun parseFiles(files: Iterable<JavaFileObject>?) = compilationUnits
     }
 
-    private val aptOn = arguments == null || "-proc:none" !in arguments
+    private konst aptOn = arguments == null || "-proc:none" !in arguments
 
-    private val fileManager = context[JavaFileManager::class.java] as JavacFileManager
+    private konst fileManager = context[JavaFileManager::class.java] as JavacFileManager
 
     init {
         // keep javadoc comments
@@ -114,7 +114,7 @@ class JavacWrapper(
         // use rt.jar instead of lib/ct.sym
         fileManager.setSymbolFileEnabled(false)
         bootClasspath?.let {
-            val cp = fileManager.getLocation(PLATFORM_CLASS_PATH) + jvmClasspathRoots
+            konst cp = fileManager.getLocation(PLATFORM_CLASS_PATH) + jvmClasspathRoots
             fileManager.setLocation(PLATFORM_CLASS_PATH, it)
             fileManager.setLocation(CLASS_PATH, cp)
         } ?: fileManager.setLocation(CLASS_PATH, jvmClasspathRoots)
@@ -123,26 +123,26 @@ class JavacWrapper(
         }
     }
 
-    private val names = Names.instance(context)
-    private val symbolTable = Symtab.instance(context)
-    private val elements = JavacElements.instance(context)
-    private val types = JavacTypes.instance(context)
-    private val fileObjects = javaFiles.mapTo(ListBuffer()) { fileManager.getRegularFile(it) }.toList()
-    private val compilationUnits: JavacList<JCTree.JCCompilationUnit> = fileObjects.mapTo(ListBuffer(), javac::parse).toList()
+    private konst names = Names.instance(context)
+    private konst symbolTable = Symtab.instance(context)
+    private konst elements = JavacElements.instance(context)
+    private konst types = JavacTypes.instance(context)
+    private konst fileObjects = javaFiles.mapTo(ListBuffer()) { fileManager.getRegularFile(it) }.toList()
+    private konst compilationUnits: JavacList<JCTree.JCCompilationUnit> = fileObjects.mapTo(ListBuffer(), javac::parse).toList()
 
-    private val treeBasedJavaClasses: Map<ClassId, TreeBasedClass>
-    private val treeBasedJavaPackages: Map<FqName, TreeBasedPackage>
+    private konst treeBasedJavaClasses: Map<ClassId, TreeBasedClass>
+    private konst treeBasedJavaPackages: Map<FqName, TreeBasedPackage>
 
     init {
-        val javaClasses = mutableMapOf<ClassId, TreeBasedClass>()
-        val javaPackages = mutableMapOf<FqName, TreeBasedPackage>()
+        konst javaClasses = mutableMapOf<ClassId, TreeBasedClass>()
+        konst javaPackages = mutableMapOf<FqName, TreeBasedPackage>()
         for (unit in compilationUnits) {
-            val packageName = unit.packageName?.toString()
-            val javaPackage = TreeBasedPackage(packageName ?: "<root>", this, unit)
+            konst packageName = unit.packageName?.toString()
+            konst javaPackage = TreeBasedPackage(packageName ?: "<root>", this, unit)
             javaPackages[javaPackage.fqName] = javaPackage
             for (classDeclaration in unit.typeDecls) {
-                val className = (classDeclaration as JCTree.JCClassDecl).simpleName.toString()
-                val classId = classId(packageName ?: "", className)
+                konst className = (classDeclaration as JCTree.JCClassDecl).simpleName.toString()
+                konst classId = classId(packageName ?: "", className)
                 javaClasses[classId] = TreeBasedClass(classDeclaration, unit, this, classId, null)
             }
         }
@@ -150,7 +150,7 @@ class JavacWrapper(
         treeBasedJavaPackages = javaPackages
     }
 
-    private val packageSourceAnnotations = compilationUnits
+    private konst packageSourceAnnotations = compilationUnits
         .filter {
             it.sourceFile.isNameCompatible("package-info", JavaFileObject.Kind.SOURCE) &&
                     it.packageName != null
@@ -158,17 +158,17 @@ class JavacWrapper(
             compilationUnit.packageAnnotations
         }
 
-    private val classifierResolver = ClassifierResolver(this)
-    private val identifierResolver = IdentifierResolver(this)
-    private val kotlinClassifiersCache by lazy { KotlinClassifiersCache(if (javaFiles.isNotEmpty()) kotlinFiles else emptyList(), this) }
-    private val symbolBasedPackagesCache = hashMapOf<String, SymbolBasedPackage?>()
-    private val symbolBasedClassesCache = hashMapOf<ClassId, SymbolBasedClass>()
+    private konst classifierResolver = ClassifierResolver(this)
+    private konst identifierResolver = IdentifierResolver(this)
+    private konst kotlinClassifiersCache by lazy { KotlinClassifiersCache(if (javaFiles.isNotEmpty()) kotlinFiles else emptyList(), this) }
+    private konst symbolBasedPackagesCache = hashMapOf<String, SymbolBasedPackage?>()
+    private konst symbolBasedClassesCache = hashMapOf<ClassId, SymbolBasedClass>()
 
     fun compile(outDir: File? = null): Boolean = with(javac) {
         if (!compileJava) return true
         if (errorCount() > 0) return false
 
-        val javaFilesNumber = fileObjects.length()
+        konst javaFilesNumber = fileObjects.length()
         if (javaFilesNumber == 0) return true
 
         setClassPathForCompilation(outDir)
@@ -176,7 +176,7 @@ class JavacWrapper(
             makeOutputDirectoryClassesVisible()
         }
 
-        val outputPath =
+        konst outputPath =
             // Includes a hack with 'takeIf' for CLI test, to have stable string here (independent from random test directory)
             fileManager.getLocation(CLASS_OUTPUT)?.firstOrNull()?.path?.takeIf { "compilerProject_test" !in it } ?: "test directory"
         context.get(Log.outKey)?.print("Compiling $javaFilesNumber Java source files to [$outputPath]")
@@ -191,8 +191,8 @@ class JavacWrapper(
 
     fun findClass(classId: ClassId, scope: GlobalSearchScope = EverythingGlobalScope()): JavaClass? {
         if (classId.isNestedClass) {
-            val pathSegments = classId.relativeClassName.pathSegments().map { it.asString() }
-            val outerClassId = ClassId(classId.packageFqName, Name.identifier(pathSegments.first()))
+            konst pathSegments = classId.relativeClassName.pathSegments().map { it.asString() }
+            konst outerClassId = ClassId(classId.packageFqName, Name.identifier(pathSegments.first()))
             var outerClass = findClass(outerClassId, scope) ?: return null
 
             pathSegments.drop(1).forEach {
@@ -206,7 +206,7 @@ class JavacWrapper(
             javaClass.virtualFile?.let { if (it in scope) return javaClass }
         }
 
-        val javaClass = symbolBasedClassesCache[classId]
+        konst javaClass = symbolBasedClassesCache[classId]
         if (javaClass != null) {
             javaClass.virtualFile?.let { file ->
                 if (file in scope) return javaClass
@@ -238,10 +238,10 @@ class JavacWrapper(
     fun findSubPackages(fqName: FqName): List<JavaPackage> =
         symbolTable.packages
             .filterKeys { it.toString().startsWith("$fqName.") }
-            .map { SimpleSymbolBasedPackage(it.value, this) } +
+            .map { SimpleSymbolBasedPackage(it.konstue, this) } +
                 treeBasedJavaPackages
                     .filterKeys { it.isSubpackageOf(fqName) && it != fqName }
-                    .map { it.value }
+                    .map { it.konstue }
 
     fun getPackageAnnotationsFromSources(fqName: FqName): List<JCTree.JCAnnotation> =
         packageSourceAnnotations[fqName] ?: emptyList()
@@ -260,7 +260,7 @@ class JavacWrapper(
     fun knownClassNamesInPackage(fqName: FqName): Set<String> =
         treeBasedJavaClasses
             .filterKeys { it.packageFqName == fqName }
-            .mapTo(hashSetOf()) { it.value.name.asString() } +
+            .mapTo(hashSetOf()) { it.konstue.name.asString() } +
                 elements.getPackageElement(fqName.asString())
                     ?.members_field
                     ?.elements
@@ -308,7 +308,7 @@ class JavacWrapper(
         }
 
     private fun findPackageInSymbols(fqName: String): SymbolBasedPackage? {
-        val cachedSymbolBasedPackage = symbolBasedPackagesCache[fqName]
+        konst cachedSymbolBasedPackage = symbolBasedPackagesCache[fqName]
         if (cachedSymbolBasedPackage != null) return cachedSymbolBasedPackage
 
         fun findSimplePackageInSymbols(fqName: String): SimpleSymbolBasedPackage? {
@@ -320,9 +320,9 @@ class JavacWrapper(
             }
         }
 
-        val mappedPackages = mutableListOf<SimpleSymbolBasedPackage>()
+        konst mappedPackages = mutableListOf<SimpleSymbolBasedPackage>()
         for (provider in packagePartsProviders) {
-            val jvmPackageNames = provider.findPackageParts(fqName)
+            konst jvmPackageNames = provider.findPackageParts(fqName)
                 .map { it.substringBeforeLast("/").replace('/', '.') }.filter { it != fqName }.distinct()
             // TODO: check situation with multiple package parts like this (search by FQ name of 'p1')
             //   FILE: foo.kt
@@ -338,7 +338,7 @@ class JavacWrapper(
             }
         }
         if (mappedPackages.isNotEmpty()) {
-            val symbolBasedPackage = MappedSymbolBasedPackage(FqName(fqName), mappedPackages, this)
+            konst symbolBasedPackage = MappedSymbolBasedPackage(FqName(fqName), mappedPackages, this)
             symbolBasedPackagesCache[fqName] = symbolBasedPackage
             return symbolBasedPackage
         }
@@ -350,13 +350,13 @@ class JavacWrapper(
         // TODO: below we have a hacky part with a purpose
         // to make already analyzed classes visible by Javac without reading them again.
         // This works (and necessary!) when javac has "-proc:none" argument, so works without APT
-        val reader = ClassReader.instance(context)
-        val names = Names.instance(context)
-        val outDirName = fileManager.getLocation(CLASS_OUTPUT)?.firstOrNull()?.path ?: ""
+        konst reader = ClassReader.instance(context)
+        konst names = Names.instance(context)
+        konst outDirName = fileManager.getLocation(CLASS_OUTPUT)?.firstOrNull()?.path ?: ""
 
         fileManager.list(CLASS_OUTPUT, "", setOf(JavaFileObject.Kind.CLASS), true)
             .forEach { fileObject ->
-                val fqName = fileObject.name
+                konst fqName = fileObject.name
                     .substringAfter(outDirName)
                     .substringBefore(".class")
                     .replace(File.separator, ".")
@@ -365,7 +365,7 @@ class JavacWrapper(
                     }.let(names::fromString)
 
                 symbolTable.classes[fqName]?.let { symbolTable.classes[fqName] = null }
-                val symbol = reader.enterClass(fqName, fileObject)
+                konst symbol = reader.enterClass(fqName, fileObject)
 
                 (elements.getPackageOf(symbol) as? Symbol.PackageSymbol)?.let { packageSymbol ->
                     packageSymbol.members_field?.enter(symbol)
@@ -390,8 +390,8 @@ class JavacWrapper(
     }
 
     private fun Symbol.PackageSymbol.findClass(classId: ClassId): SymbolBasedClass? {
-        val name = classId.relativeClassName.asString()
-        val nameParts = name.replace("$", ".").split(".")
+        konst name = classId.relativeClassName.asString()
+        konst nameParts = name.replace("$", ".").split(".")
         var symbol = members_field?.getElementsByName(names.fromString(nameParts.first()))
             ?.firstOrNull() as? Symbol.ClassSymbol ?: return null
         if (nameParts.size > 1) {

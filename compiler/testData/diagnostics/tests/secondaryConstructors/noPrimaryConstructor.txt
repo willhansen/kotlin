@@ -1,6 +1,6 @@
 package
 
-public val x: A
+public konst x: A
 
 public final class A {
     public constructor A(/*0*/ x: kotlin.Int)

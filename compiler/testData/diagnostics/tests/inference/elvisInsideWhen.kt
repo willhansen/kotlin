@@ -7,7 +7,7 @@ fun <E> myOut(): Out<E> = TODO()
 interface Out<out T>
 
 fun foo(x: Int, o: Out<String>, oNullable: Out<String>?) {
-    val y: Out<*> = when {
+    konst y: Out<*> = when {
         x > 0 -> when {
             x == 1 -> o
             // Once elvis is being analyzed with expected type Out<*>, because of the @Exact annotation it sticks to that type

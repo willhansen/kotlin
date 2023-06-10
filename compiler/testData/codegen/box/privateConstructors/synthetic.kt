@@ -4,7 +4,7 @@
 
 // private constructors are transformed into synthetic
 class PrivateConstructor private constructor() {
-    class Nested { val a = PrivateConstructor() }
+    class Nested { konst a = PrivateConstructor() }
 }
 
 fun check(klass: Class<*>) {

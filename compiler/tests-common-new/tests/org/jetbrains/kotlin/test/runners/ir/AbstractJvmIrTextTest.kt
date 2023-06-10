@@ -30,12 +30,12 @@ abstract class AbstractJvmIrTextTest<FrontendOutput : ResultingArtifact.Frontend
 
 open class AbstractClassicJvmIrTextTest : AbstractJvmIrTextTest<ClassicFrontendOutputArtifact>() {
 
-    override val frontend: FrontendKind<*>
+    override konst frontend: FrontendKind<*>
         get() = FrontendKinds.ClassicFrontend
 
-    override val frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
 
-    override val converter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
+    override konst converter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
         get() = ::ClassicFrontend2IrConverter
 }

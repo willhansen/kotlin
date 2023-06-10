@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 open class PropertyAccessorInlineLowering(
-    private val context: CommonBackendContext,
+    private konst context: CommonBackendContext,
 ) : BodyLoweringPass {
 
     fun IrProperty.isSafeToInlineInClosedWorld() =
@@ -36,17 +36,17 @@ open class PropertyAccessorInlineLowering(
         isSafeToInlineInClosedWorld()
 
     // TODO: implement general function inlining optimization and replace it with
-    private inner class AccessorInliner(val container: IrDeclaration) : IrElementTransformerVoid() {
+    private inner class AccessorInliner(konst container: IrDeclaration) : IrElementTransformerVoid() {
 
-        private val unitType = context.irBuiltIns.unitType
+        private konst unitType = context.irBuiltIns.unitType
 
         private fun canBeInlined(callee: IrSimpleFunction): Boolean {
-            val property = callee.correspondingPropertySymbol?.owner ?: return false
+            konst property = callee.correspondingPropertySymbol?.owner ?: return false
 
             // Some de-virtualization required here
             if (!property.isSafeToInline(container)) return false
 
-            val parent = property.parent
+            konst parent = property.parent
             if (parent is IrClass) {
                 // TODO: temporary workarounds
                 if (parent.isExpect || property.isExpect) return false
@@ -60,7 +60,7 @@ open class PropertyAccessorInlineLowering(
         override fun visitCall(expression: IrCall): IrExpression {
             expression.transformChildrenVoid(this)
 
-            val callee = expression.symbol.owner
+            konst callee = expression.symbol.owner
 
             if (!canBeInlined(callee)) return expression
 
@@ -71,17 +71,17 @@ open class PropertyAccessorInlineLowering(
 
             if (!canBeInlined(analyzedCallee)) return expression
 
-            val property = analyzedCallee.correspondingPropertySymbol?.owner ?: return expression
+            konst property = analyzedCallee.correspondingPropertySymbol?.owner ?: return expression
 
-            val backingField = property.backingField ?: return expression
+            konst backingField = property.backingField ?: return expression
 
             if (property.isConst) {
-                val initializer =
+                konst initializer =
                     (backingField.initializer ?: error("Constant property has to have a backing field with initializer"))
-                val constExpression = initializer.expression.deepCopyWithSymbols()
-                val receiver = expression.dispatchReceiver
+                konst constExpression = initializer.expression.deepCopyWithSymbols()
+                konst receiver = expression.dispatchReceiver
                 if (receiver != null && !receiver.isPure(true)) {
-                    val builder = context.createIrBuilder(
+                    konst builder = context.createIrBuilder(
                         expression.symbol,
                         expression.startOffset, expression.endOffset
                     )
@@ -109,9 +109,9 @@ open class PropertyAccessorInlineLowering(
         private fun tryInlineSimpleGetter(call: IrCall, callee: IrSimpleFunction, backingField: IrField): IrExpression? {
             if (!isSimpleGetter(callee, backingField)) return null
 
-            val builder = context.createIrBuilder(call.symbol, call.startOffset, call.endOffset)
+            konst builder = context.createIrBuilder(call.symbol, call.startOffset, call.endOffset)
 
-            val getField = call.run {
+            konst getField = call.run {
                 IrGetFieldImpl(startOffset, endOffset, backingField.symbol, backingField.type, call.dispatchReceiver, origin)
             }
 
@@ -123,13 +123,13 @@ open class PropertyAccessorInlineLowering(
         }
 
         private fun isSimpleGetter(callee: IrSimpleFunction, backingField: IrField): Boolean {
-            val body = callee.body?.let { it as IrBlockBody } ?: return false
+            konst body = callee.body?.let { it as IrBlockBody } ?: return false
 
-            val stmt = body.statements.singleOrNull() ?: return false
-            val returnStmt = stmt as? IrReturn ?: return false
-            val getFieldStmt = returnStmt.value as? IrGetField ?: return false
+            konst stmt = body.statements.singleOrNull() ?: return false
+            konst returnStmt = stmt as? IrReturn ?: return false
+            konst getFieldStmt = returnStmt.konstue as? IrGetField ?: return false
             if (getFieldStmt.symbol !== backingField.symbol) return false
-            val receiver = getFieldStmt.receiver
+            konst receiver = getFieldStmt.receiver
 
             if (receiver == null) {
                 assert(callee.dispatchReceiverParameter == null)
@@ -145,30 +145,30 @@ open class PropertyAccessorInlineLowering(
             if (!isSimpleSetter(callee, backingField)) return null
 
             return call.run {
-                val value = getValueArgument(0) ?: error("Setter should have a value argument")
-                IrSetFieldImpl(startOffset, endOffset, backingField.symbol, call.dispatchReceiver, value, unitType, origin)
+                konst konstue = getValueArgument(0) ?: error("Setter should have a konstue argument")
+                IrSetFieldImpl(startOffset, endOffset, backingField.symbol, call.dispatchReceiver, konstue, unitType, origin)
             }
         }
 
         private fun isSimpleSetter(callee: IrSimpleFunction, backingField: IrField): Boolean {
-            val body = callee.body?.let { it as IrBlockBody } ?: return false
-            val statementsSizeCheck = when (body.statements.size) {
+            konst body = callee.body?.let { it as IrBlockBody } ?: return false
+            konst statementsSizeCheck = when (body.statements.size) {
                 1 -> true
                 // In K/N backend this lowering should be called after devirtualization. At this point IrReturns are already added.
-                2 -> (body.statements[1] as? IrReturn)?.value?.type?.isUnit() == true
+                2 -> (body.statements[1] as? IrReturn)?.konstue?.type?.isUnit() == true
                 else -> false
             }
             if (!statementsSizeCheck) return false
-            val stmt = body.statements[0]
-            val setFieldStmt = stmt as? IrSetField ?: return false
+            konst stmt = body.statements[0]
+            konst setFieldStmt = stmt as? IrSetField ?: return false
             if (setFieldStmt.symbol !== backingField.symbol) return false
 
             // TODO: support constant setters
-            val setValue = setFieldStmt.value as? IrGetValue ?: return false
-            val valueSymbol = callee.valueParameters.single().symbol
-            if (setValue.symbol !== valueSymbol) return false
+            konst setValue = setFieldStmt.konstue as? IrGetValue ?: return false
+            konst konstueSymbol = callee.konstueParameters.single().symbol
+            if (setValue.symbol !== konstueSymbol) return false
 
-            val receiver = setFieldStmt.receiver
+            konst receiver = setFieldStmt.receiver
 
             if (receiver == null) {
                 assert(callee.dispatchReceiverParameter == null)

@@ -30,10 +30,10 @@ class HomeActivity : Activity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        val user = User("John", 18)
+        konst user = User("John", 18)
         outState.putParcelable("foo", user)
     }
 }
 
 @Parcelize
-class User(val name: String, val age: Int): Parcelable
+class User(konst name: String, konst age: Int): Parcelable

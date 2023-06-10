@@ -14,9 +14,9 @@ typealias IObsolete = IFoo
 fun test1(x: <!DEPRECATION!>Obsolete<!>) = x
 fun test1a(x: List<<!DEPRECATION!>Obsolete<!>>) = x
 
-val test2 = Obsolete()
+konst test2 = Obsolete()
 
-val test3 = <!DEPRECATION!>Obsolete<!>
+konst test3 = <!DEPRECATION!>Obsolete<!>
 
 class Test4: <!DEPRECATION!>Obsolete<!>()
 class Test4a: <!DEPRECATION!>IObsolete<!>

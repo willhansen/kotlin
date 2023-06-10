@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 
 class F {
     fun <A> foo() {}
-    val <B> B.bar: B get() = this
+    konst <B> B.bar: B get() = this
 }
 
 class C<D> {

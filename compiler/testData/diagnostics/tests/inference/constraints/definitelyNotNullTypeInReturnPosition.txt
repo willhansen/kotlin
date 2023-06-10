@@ -1,8 +1,8 @@
 package
 
-public val </*0*/ K> K?.vfoo0: Foo<Bar<K>>
-public val </*0*/ K> K?.vfoo1: OutBar<Bar<out OutBar<K>>>
-public val </*0*/ K> K?.vfoo2: OutBar<Bar<in OutBar<K>>>
+public konst </*0*/ K> K?.vfoo0: Foo<Bar<K>>
+public konst </*0*/ K> K?.vfoo1: OutBar<Bar<out OutBar<K>>>
+public konst </*0*/ K> K?.vfoo2: OutBar<Bar<in OutBar<K>>>
 public fun </*0*/ K> foo0(/*0*/ x: K?): Bar<K>
 public fun </*0*/ K> foo1(/*0*/ x: K?): Foo<Bar<K>>
 public fun </*0*/ T : J, /*1*/ K : T, /*2*/ S : K, /*3*/ M : S, /*4*/ J : L, /*5*/ L> foo10(/*0*/ x: L?, /*1*/ y: Foo<Bar<T>>): Bar<M>
@@ -114,119 +114,119 @@ public final class Inv2</*0*/ T> {
 
 public final class Main</*0*/ L> {
     public constructor Main</*0*/ L>(/*0*/ x: L?, /*1*/ y: L)
-    public final val vx01: Foo<Bar<L>>
-    public final val vx02: Foo<Bar<L>>
-    public final val vx11: OutBar<Bar<out OutBar<L & Any>>>
-    public final val vx12: OutBar<Bar<out OutBar<L & Any>>>
-    public final val vx21: OutBar<Bar<in OutBar<L>>>
-    public final val vx22: OutBar<Bar<in OutBar<L>>>
-    public final val x00: Bar<L>
-    public final val x01: Bar<L>
-    public final val x10: Foo<Bar<L>>
-    public final val x100: Bar<L>
-    public final val x101: Bar<L>
-    public final val x11: Foo<Bar<L>>
-    public final val x110: Bar<L>
-    public final val x111: Bar<L>
-    public final val x12: Foo<Bar<L & Any>>
-    public final val x120: Bar<L & Any>
-    public final val x121: Bar<L & Any>
-    public final val x122: Bar<L>
-    public final val x123: Bar<L>
-    public final val x13: Foo<Bar<L & Any>>
-    public final val x133: Bar<L?>
-    public final val x135: Bar<L>
-    public final val x137: Bar<L>
-    public final val x138: Bar<L?>
-    public final val x140: Bar<kotlin.String>
-    public final val x141: Bar<kotlin.String>
-    public final val x151: Bar<L?>
-    public final val x152: Bar<L?>
-    public final val x153: Bar<L?>
-    public final val x154: Bar<L?>
-    public final val x161: Bar<L>
-    public final val x162: Bar<L>
-    public final val x163: Bar<L & Any>
-    public final val x164: Bar<L & Any>
-    public final val x170: Bar<L>
-    public final val x171: Bar<L>
-    public final val x180: [Error type: Return type for function cannot be resolved]
-    public final val x181: [Error type: Return type for function cannot be resolved]
-    public final val x20: Foo<Bar<L>>
-    public final val x200: L
-    public final val x201: L
-    public final val x21: Foo<Bar<L>>
-    public final val x210: Foo<Foo<OutBar<L>>>
-    public final val x211: Foo<Foo<OutBar<L>>>
-    public final val x220: Foo<Foo<InBar<L>>>
-    public final val x221: Foo<Foo<InBar<L>>>
-    public final val x230: Foo<Foo<Bar<out L>>>
-    public final val x231: Foo<Foo<Bar<out L>>>
-    public final val x240: Foo<Foo<Bar<in L>>>
-    public final val x241: Foo<Foo<Bar<in L>>>
-    public final val x250: Bar<out L & Any>
-    public final val x251: Bar<out L & Any>
-    public final val x260: Foo<out Foo<out Bar<out L & Any>>>
-    public final val x261: Foo<out Foo<out Bar<out L & Any>>>
-    public final val x270: Foo<out Foo<Bar<out L>>>
-    public final val x271: Foo<out Foo<Bar<out L>>>
-    public final val x280: OutBar<OutBar<OutBar<L & Any>>>
-    public final val x281: OutBar<OutBar<OutBar<L & Any>>>
-    public final val x290: OutBar<Bar<OutBar<L>>>
-    public final val x291: OutBar<Bar<OutBar<L>>>
-    public final val x30: Foo<Bar<L>>
-    public final val x300: OutBar<Bar<out OutBar<L & Any>>>
-    public final val x301: OutBar<Bar<out OutBar<L & Any>>>
-    public final val x31: Foo<Bar<L>>
-    public final val x310: OutBarAliasUseSite<L & Any> /* = Bar<out L & Any> */
-    public final val x311: OutBarAliasUseSite<L & Any> /* = Bar<out L & Any> */
-    public final val x320: OutBarAliasDecSite<L & Any> /* = OutBar<L & Any> */
-    public final val x321: OutBarAliasDecSite<L & Any> /* = OutBar<L & Any> */
-    public final val x330: OutBar<InBar<OutBar<L>>>
-    public final val x331: OutBar<InBar<OutBar<L>>>
-    public final val x340: OutBar<Bar<in OutBar<L>>>
-    public final val x341: OutBar<Bar<in OutBar<L>>>
-    public final val x350: InBar<L>
-    public final val x351: InBar<L>
-    public final val x360: Bar<in L>
-    public final val x361: Bar<in L>
-    public final val x370: Bar<L>
-    public final val x371: Bar<L>
-    public final val x380: Bar<Bar<L>>
-    public final val x381: Bar<Bar<L>>
-    public final val x390: Bar<Bar<Bar<L>>>
-    public final val x391: Bar<Bar<Bar<L>>>
-    public final val x40: Foo<Bar<out L>>
-    public final val x400: Bar<Bar<L>>
-    public final val x401: Bar<Bar<L>>
-    public final val x41: Foo<Bar<out L>>
-    public final val x410: Bar<L>
-    public final val x411: Bar<L>
-    public final val x420: IFoo<L>
-    public final val x421: IFoo<L>
-    public final val x430: kotlin.Any
-    public final val x431: kotlin.Any
-    public final val x440: kotlin.Any
-    public final val x441: kotlin.Any
-    public final val x450: OutBar<OutBar<Bar<L>>>
-    public final val x451: OutBar<OutBar<Bar<L>>>
-    public final val x460: Bar<OutBar<OutBar<L>>>
-    public final val x461: Bar<OutBar<OutBar<L>>>
-    public final val x470: OutBar<OutBar<OutBar<L & Any>>>
-    public final val x471: OutBar<OutBar<OutBar<L & Any>>>
-    public final val x480: Bar<L>
-    public final val x481: Bar<L>
-    public final val x482: Bar<kotlin.Nothing>
-    public final val x50: Bar<in L>
-    public final val x51: Bar<in L>
-    public final val x60: OutBar<L & Any>
-    public final val x61: OutBar<L & Any>
-    public final val x70: InBar<L>
-    public final val x71: InBar<L>
-    public final val x80: Foo<Bar<L>>
-    public final val x81: Foo<Bar<L>>
-    public final val x90: Foo<Bar<L>>
-    public final val x91: Foo<Bar<L>>
+    public final konst vx01: Foo<Bar<L>>
+    public final konst vx02: Foo<Bar<L>>
+    public final konst vx11: OutBar<Bar<out OutBar<L & Any>>>
+    public final konst vx12: OutBar<Bar<out OutBar<L & Any>>>
+    public final konst vx21: OutBar<Bar<in OutBar<L>>>
+    public final konst vx22: OutBar<Bar<in OutBar<L>>>
+    public final konst x00: Bar<L>
+    public final konst x01: Bar<L>
+    public final konst x10: Foo<Bar<L>>
+    public final konst x100: Bar<L>
+    public final konst x101: Bar<L>
+    public final konst x11: Foo<Bar<L>>
+    public final konst x110: Bar<L>
+    public final konst x111: Bar<L>
+    public final konst x12: Foo<Bar<L & Any>>
+    public final konst x120: Bar<L & Any>
+    public final konst x121: Bar<L & Any>
+    public final konst x122: Bar<L>
+    public final konst x123: Bar<L>
+    public final konst x13: Foo<Bar<L & Any>>
+    public final konst x133: Bar<L?>
+    public final konst x135: Bar<L>
+    public final konst x137: Bar<L>
+    public final konst x138: Bar<L?>
+    public final konst x140: Bar<kotlin.String>
+    public final konst x141: Bar<kotlin.String>
+    public final konst x151: Bar<L?>
+    public final konst x152: Bar<L?>
+    public final konst x153: Bar<L?>
+    public final konst x154: Bar<L?>
+    public final konst x161: Bar<L>
+    public final konst x162: Bar<L>
+    public final konst x163: Bar<L & Any>
+    public final konst x164: Bar<L & Any>
+    public final konst x170: Bar<L>
+    public final konst x171: Bar<L>
+    public final konst x180: [Error type: Return type for function cannot be resolved]
+    public final konst x181: [Error type: Return type for function cannot be resolved]
+    public final konst x20: Foo<Bar<L>>
+    public final konst x200: L
+    public final konst x201: L
+    public final konst x21: Foo<Bar<L>>
+    public final konst x210: Foo<Foo<OutBar<L>>>
+    public final konst x211: Foo<Foo<OutBar<L>>>
+    public final konst x220: Foo<Foo<InBar<L>>>
+    public final konst x221: Foo<Foo<InBar<L>>>
+    public final konst x230: Foo<Foo<Bar<out L>>>
+    public final konst x231: Foo<Foo<Bar<out L>>>
+    public final konst x240: Foo<Foo<Bar<in L>>>
+    public final konst x241: Foo<Foo<Bar<in L>>>
+    public final konst x250: Bar<out L & Any>
+    public final konst x251: Bar<out L & Any>
+    public final konst x260: Foo<out Foo<out Bar<out L & Any>>>
+    public final konst x261: Foo<out Foo<out Bar<out L & Any>>>
+    public final konst x270: Foo<out Foo<Bar<out L>>>
+    public final konst x271: Foo<out Foo<Bar<out L>>>
+    public final konst x280: OutBar<OutBar<OutBar<L & Any>>>
+    public final konst x281: OutBar<OutBar<OutBar<L & Any>>>
+    public final konst x290: OutBar<Bar<OutBar<L>>>
+    public final konst x291: OutBar<Bar<OutBar<L>>>
+    public final konst x30: Foo<Bar<L>>
+    public final konst x300: OutBar<Bar<out OutBar<L & Any>>>
+    public final konst x301: OutBar<Bar<out OutBar<L & Any>>>
+    public final konst x31: Foo<Bar<L>>
+    public final konst x310: OutBarAliasUseSite<L & Any> /* = Bar<out L & Any> */
+    public final konst x311: OutBarAliasUseSite<L & Any> /* = Bar<out L & Any> */
+    public final konst x320: OutBarAliasDecSite<L & Any> /* = OutBar<L & Any> */
+    public final konst x321: OutBarAliasDecSite<L & Any> /* = OutBar<L & Any> */
+    public final konst x330: OutBar<InBar<OutBar<L>>>
+    public final konst x331: OutBar<InBar<OutBar<L>>>
+    public final konst x340: OutBar<Bar<in OutBar<L>>>
+    public final konst x341: OutBar<Bar<in OutBar<L>>>
+    public final konst x350: InBar<L>
+    public final konst x351: InBar<L>
+    public final konst x360: Bar<in L>
+    public final konst x361: Bar<in L>
+    public final konst x370: Bar<L>
+    public final konst x371: Bar<L>
+    public final konst x380: Bar<Bar<L>>
+    public final konst x381: Bar<Bar<L>>
+    public final konst x390: Bar<Bar<Bar<L>>>
+    public final konst x391: Bar<Bar<Bar<L>>>
+    public final konst x40: Foo<Bar<out L>>
+    public final konst x400: Bar<Bar<L>>
+    public final konst x401: Bar<Bar<L>>
+    public final konst x41: Foo<Bar<out L>>
+    public final konst x410: Bar<L>
+    public final konst x411: Bar<L>
+    public final konst x420: IFoo<L>
+    public final konst x421: IFoo<L>
+    public final konst x430: kotlin.Any
+    public final konst x431: kotlin.Any
+    public final konst x440: kotlin.Any
+    public final konst x441: kotlin.Any
+    public final konst x450: OutBar<OutBar<Bar<L>>>
+    public final konst x451: OutBar<OutBar<Bar<L>>>
+    public final konst x460: Bar<OutBar<OutBar<L>>>
+    public final konst x461: Bar<OutBar<OutBar<L>>>
+    public final konst x470: OutBar<OutBar<OutBar<L & Any>>>
+    public final konst x471: OutBar<OutBar<OutBar<L & Any>>>
+    public final konst x480: Bar<L>
+    public final konst x481: Bar<L>
+    public final konst x482: Bar<kotlin.Nothing>
+    public final konst x50: Bar<in L>
+    public final konst x51: Bar<in L>
+    public final konst x60: OutBar<L & Any>
+    public final konst x61: OutBar<L & Any>
+    public final konst x70: InBar<L>
+    public final konst x71: InBar<L>
+    public final konst x80: Foo<Bar<L>>
+    public final konst x81: Foo<Bar<L>>
+    public final konst x90: Foo<Bar<L>>
+    public final konst x91: Foo<Bar<L>>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun </*0*/ R> takeLambda(/*0*/ block: () -> R): R

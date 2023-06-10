@@ -4,14 +4,14 @@
 fun box(): String {
     try {
         // Objects
-        val i = Int
-        val d = Double
-        val f = Float
-        val l = Long
-        val sh = Short
-        val b = Byte
-        val ch = Char
-        val st = String
+        konst i = Int
+        konst d = Double
+        konst f = Float
+        konst l = Long
+        konst sh = Short
+        konst b = Byte
+        konst ch = Char
+        konst st = String
 
         test(Int)
         test(Double)

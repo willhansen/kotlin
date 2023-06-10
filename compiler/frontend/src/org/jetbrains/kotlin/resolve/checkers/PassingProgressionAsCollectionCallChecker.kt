@@ -30,10 +30,10 @@ import org.jetbrains.kotlin.types.typeUtil.isTypeParameter
  Please don't use similar logic for other checkers
  */
 @OptIn(ClassicTypeCheckerStateInternals::class)
-class PassingProgressionAsCollectionCallChecker(private val kotlinCallResolver: KotlinCallResolver) : CallCheckerWithAdditionalResolve {
-    private val typeCheckerState = ClassicTypeCheckerState(isErrorTypeEqualsToAnything = false)
+class PassingProgressionAsCollectionCallChecker(private konst kotlinCallResolver: KotlinCallResolver) : CallCheckerWithAdditionalResolve {
+    private konst typeCheckerState = ClassicTypeCheckerState(isErrorTypeEqualsToAnything = false)
 
-    private val iterableProgressions = listOf(
+    private konst iterableProgressions = listOf(
         CHAR_RANGE_FQN, CHAR_PROGRESSION_FQN,
         INT_RANGE_FQN, INT_PROGRESSION_FQN,
         LONG_RANGE_FQN, LONG_PROGRESSION_FQN,
@@ -49,24 +49,24 @@ class PassingProgressionAsCollectionCallChecker(private val kotlinCallResolver: 
         context: BasicCallResolutionContext,
     ) {
         // The stdlib migration is going to be finished in 1.8, checks aren't needed there (DisableCheckingChangedProgressionsResolve has 1.8 since version)
-        val isCheckingDisabled = context.languageVersionSettings.supportsFeature(LanguageFeature.DisableCheckingChangedProgressionsResolve)
+        konst isCheckingDisabled = context.languageVersionSettings.supportsFeature(LanguageFeature.DisableCheckingChangedProgressionsResolve)
 
         if (isCheckingDisabled || resolvedCall !is NewResolvedCallImpl<*>) return
 
-        val kotlinCall = resolvedCall.psiKotlinCall
-        val valueArguments = kotlinCall.argumentsInParenthesis.takeIf { it.isNotEmpty() } ?: return
+        konst kotlinCall = resolvedCall.psiKotlinCall
+        konst konstueArguments = kotlinCall.argumentsInParenthesis.takeIf { it.isNotEmpty() } ?: return
 
-        val progressionOrRangeArgumentTypes = valueArguments.map {
+        konst progressionOrRangeArgumentTypes = konstueArguments.map {
             if (it !is SimpleKotlinCallArgument) return@map null
             getRangeOrProgressionElementType(it.receiver.receiverValue.type, iterableProgressions)
         }
 
         if (progressionOrRangeArgumentTypes.all { it == null }) return
 
-        val builtIns = resolvedCall.candidateDescriptor.builtIns
+        konst builtIns = resolvedCall.candidateDescriptor.builtIns
 
-        val newArguments = valueArguments.replaceTypes(context, resolutionCallbacks) { i, type ->
-            val progressionOrRangeElementType = progressionOrRangeArgumentTypes[i] ?: return@replaceTypes null
+        konst newArguments = konstueArguments.replaceTypes(context, resolutionCallbacks) { i, type ->
+            konst progressionOrRangeElementType = progressionOrRangeArgumentTypes[i] ?: return@replaceTypes null
             intersectTypes(
                 listOf(
                     KotlinTypeFactory.simpleNotNullType(
@@ -78,9 +78,9 @@ class PassingProgressionAsCollectionCallChecker(private val kotlinCallResolver: 
                 )
             )
         }
-        val newCall = kotlinCall.replaceArguments(newArguments, kotlinCall.explicitReceiver)
+        konst newCall = kotlinCall.replaceArguments(newArguments, kotlinCall.explicitReceiver)
 
-        val candidateForCollectionReplacedArgument = kotlinCallResolver.resolveCall(
+        konst candidateForCollectionReplacedArgument = kotlinCallResolver.resolveCall(
             scopeTower, resolutionCallbacks, newCall, expectedType, context.collectAllCandidates
         ).singleOrNull() ?: return
 
@@ -90,29 +90,29 @@ class PassingProgressionAsCollectionCallChecker(private val kotlinCallResolver: 
             !candidateForCollectionReplacedArgument.isSuccessful
         ) return
 
-        val collectionOfAnyType = makeCollectionOfAnyType(builtIns)
+        konst collectionOfAnyType = makeCollectionOfAnyType(builtIns)
 
         for ((i, argument) in newCall.argumentsInParenthesis.withIndex()) {
             // Skip if the argument wasn't a Range/Progression
             if (progressionOrRangeArgumentTypes.getOrNull(i) == null) continue
 
-            val resolvedCallForCollectionReplacedArgument = candidateForCollectionReplacedArgument.resolvedCall
-            val alternativeParameterType =
+            konst resolvedCallForCollectionReplacedArgument = candidateForCollectionReplacedArgument.resolvedCall
+            konst alternativeParameterType =
                 resolvedCallForCollectionReplacedArgument.argumentToCandidateParameter[argument]?.type?.let { type ->
                     if (type.isTypeParameter()) {
-                        val typeVariable = resolvedCallForCollectionReplacedArgument.freshVariablesSubstitutor.freshVariables.find {
+                        konst typeVariable = resolvedCallForCollectionReplacedArgument.freshVariablesSubstitutor.freshVariables.find {
                             it.originalTypeParameter == type.constructor.declarationDescriptor
                         }?.freshTypeConstructor ?: return@let null
                         resolutionCallbacks.findResultType(candidateForCollectionReplacedArgument.getSystem(), typeVariable)
                     } else type
                 } ?: continue
 
-            val alternativeParameterTypeConstructor = alternativeParameterType.upperIfFlexible().constructor
+            konst alternativeParameterTypeConstructor = alternativeParameterType.upperIfFlexible().constructor
 
             if (alternativeParameterTypeConstructor.declarationDescriptor != builtIns.collection && (alternativeParameterTypeConstructor !is IntersectionTypeConstructor || alternativeParameterTypeConstructor.supertypes.none { it.constructor.declarationDescriptor == builtIns.collection })) continue
 
-            val argumentExpression = argument.psiExpression ?: continue
-            val initialArgumentType = resolvedCall.candidateDescriptor.valueParameters.getOrNull(i)?.type?.upperIfFlexible() ?: continue
+            konst argumentExpression = argument.psiExpression ?: continue
+            konst initialArgumentType = resolvedCall.candidateDescriptor.konstueParameters.getOrNull(i)?.type?.upperIfFlexible() ?: continue
 
             // Iterable initial type is an exception, considered as similar to Collection passing candidate
             if (initialArgumentType.constructor.declarationDescriptor == builtIns.iterable) continue
@@ -142,7 +142,7 @@ class PassingProgressionAsCollectionCallChecker(private val kotlinCallResolver: 
     ) {
         if (!overloadResolutionResults.isSingleResult) return
 
-        val resolvedCall = overloadResolutionResults.resultingCall as? NewAbstractResolvedCall<*> ?: return
+        konst resolvedCall = overloadResolutionResults.resultingCall as? NewAbstractResolvedCall<*> ?: return
 
         check(resolvedCall, scopeTower, resolutionCallbacks, expectedType, context)
     }

@@ -7,4 +7,4 @@ import kotlin.arrayOfNulls
 class List {}
 
 fun arrayOfNulls(){}
-val arrayOfNulls: Int = 0
+konst arrayOfNulls: Int = 0

@@ -84,7 +84,7 @@ public interface MutableListIterator<T> : ListIterator<T>, MutableIterator<T> {
      * returned by [next], if any, and after the element that would be returned by [previous], if any.
      * (If the collection contains no elements, the new element becomes the sole element in the collection.)
      * The new element is inserted before the implicit cursor: a subsequent call to [next] would be unaffected,
-     * and a subsequent call to [previous] would return the new element. (This call increases by one the value \
+     * and a subsequent call to [previous] would return the new element. (This call increases by one the konstue \
      * that would be returned by a call to [nextIndex] or [previousIndex].)
      */
     public fun add(element: T): Unit

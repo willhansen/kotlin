@@ -23,25 +23,25 @@ import org.jetbrains.kotlin.descriptors.ConstructorDescriptor
 import org.jetbrains.kotlin.name.ClassId
 
 internal class KtFe10DescConstructorSymbol(
-    override val descriptor: ConstructorDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: ConstructorDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtConstructorSymbol(), KtFe10DescMemberSymbol<ConstructorDescriptor> {
-    override val isPrimary: Boolean
+    override konst isPrimary: Boolean
         get() = withValidityAssertion { descriptor.isPrimary }
 
-    override val containingClassIdIfNonLocal: ClassId?
+    override konst containingClassIdIfNonLocal: ClassId?
         get() = withValidityAssertion { descriptor.constructedClass.classId }
 
-    override val valueParameters: List<KtValueParameterSymbol>
-        get() = withValidityAssertion { descriptor.valueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
+    override konst konstueParameters: List<KtValueParameterSymbol>
+        get() = withValidityAssertion { descriptor.konstueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { descriptor.ktHasStableParameterNames }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.returnType.toKtType(analysisContext) }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion {
             descriptor.typeParameters.mapNotNull {
                 if (it.containingDeclaration != descriptor) return@mapNotNull null
@@ -55,9 +55,9 @@ internal class KtFe10DescConstructorSymbol(
             return it
         }
 
-        val callableId = descriptor.callableIdIfNotLocal
+        konst callableId = descriptor.callableIdIfNotLocal
         if (callableId != null) {
-            val signature = descriptor.getSymbolPointerSignature()
+            konst signature = descriptor.getSymbolPointerSignature()
             return KtFe10DescFunctionLikeSymbolPointer(callableId, signature)
         }
 

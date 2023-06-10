@@ -18,7 +18,7 @@ var booInt: Boolean = false
 var booLambda: Boolean = false
 
 fun boo(a: Int) { booInt = true }
-val boo: (Int) -> Unit = { a: Int -> booLambda = true}
+konst boo: (Int) -> Unit = { a: Int -> booLambda = true}
 
 // FILE: KotlinClass.kt
 package overloadResolution
@@ -27,7 +27,7 @@ var fooInt: Boolean = false
 var fooLambda: Boolean = false
 
 fun foo(a: Int) { fooInt = true }
-val foo: (Int) -> Unit = { a: Int -> fooLambda = true}
+konst foo: (Int) -> Unit = { a: Int -> fooLambda = true}
 
 
 fun box(): String {

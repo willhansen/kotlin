@@ -3,7 +3,7 @@ package example
 annotation class ToBeChecked
 
 @Repeatable
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)
 
 @ToBeChecked
 @Anno("1")

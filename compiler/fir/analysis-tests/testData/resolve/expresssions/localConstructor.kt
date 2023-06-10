@@ -1,5 +1,5 @@
 fun test() {
     class Local
 
-    val l = Local()
+    konst l = Local()
 }

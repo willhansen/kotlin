@@ -14,7 +14,7 @@ enum class E {
 }
 
 fun box(): String {
-    val obj = A::class.companionObject
+    konst obj = A::class.companionObject
     assertNotNull(obj)
     assertEquals("C", obj!!.simpleName)
 

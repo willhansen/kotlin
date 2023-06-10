@@ -25,12 +25,12 @@ import org.jetbrains.kotlin.fir.withFileAnalysisExceptionWrapping
 class FirContractResolveProcessor(session: FirSession, scopeSession: ScopeSession) : FirTransformerBasedResolveProcessor(
     session, scopeSession, FirResolvePhase.CONTRACTS
 ) {
-    override val transformer = FirContractResolveTransformerAdapter(session, scopeSession)
+    override konst transformer = FirContractResolveTransformerAdapter(session, scopeSession)
 }
 
 @AdapterForResolveProcessor
 class FirContractResolveTransformerAdapter(session: FirSession, scopeSession: ScopeSession) : FirTransformer<Any?>() {
-    private val transformer = FirContractResolveTransformer(session, scopeSession)
+    private konst transformer = FirContractResolveTransformer(session, scopeSession)
     override fun <E : FirElement> transformElement(element: E, data: Any?): E {
         return element
     }
@@ -48,11 +48,11 @@ fun <F : FirClassLikeDeclaration> F.runContractResolveForLocalClass(
     outerBodyResolveContext: BodyResolveContext,
     targetedClasses: Set<FirClassLikeDeclaration>
 ): F {
-    val newContext = outerBodyResolveContext.createSnapshotForLocalClasses(
+    konst newContext = outerBodyResolveContext.createSnapshotForLocalClasses(
         ReturnTypeCalculatorForFullBodyResolve,
         targetedClasses
     )
-    val transformer = FirContractResolveTransformer(session, scopeSession, newContext)
+    konst transformer = FirContractResolveTransformer(session, scopeSession, newContext)
 
     return this.transformSingle(transformer, ResolutionMode.ContextIndependent)
 }
@@ -62,7 +62,7 @@ fun <F : FirFunction> F.runContractResolveForFunction(
     scopeSession: ScopeSession,
     outerBodyResolveContext: BodyResolveContext,
 ): F {
-    val transformer = FirContractResolveTransformer(session, scopeSession, outerBodyResolveContext)
+    konst transformer = FirContractResolveTransformer(session, scopeSession, outerBodyResolveContext)
 
     return this.transformSingle(transformer, ResolutionMode.ContextIndependent)
 }

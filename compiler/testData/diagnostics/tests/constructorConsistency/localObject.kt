@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 open class Wise {
 
-    val x = 1
+    konst x = 1
 
     open fun doIt(): Int = 42
 }
@@ -9,7 +9,7 @@ open class Wise {
 class My {
 
     fun foo(): Int {
-        val wise = object: Wise() {
+        konst wise = object: Wise() {
             var xx = 1
             override fun doIt() = super.doIt() + bar(this) + xx
         }

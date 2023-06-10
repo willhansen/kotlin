@@ -20,15 +20,15 @@ import org.jetbrains.kotlin.name.Name
  */
 class AlgebraReceiverInjector(session: FirSession) : FirExpressionResolutionExtension(session) {
     companion object {
-        private val INJECT_ALGEBRA_NAME = Name.identifier("injectAlgebra")
-        private val ALGEBRA_CLASS_ID = ClassId.topLevel(FqName.topLevel(Name.identifier("Algebra")))
+        private konst INJECT_ALGEBRA_NAME = Name.identifier("injectAlgebra")
+        private konst ALGEBRA_CLASS_ID = ClassId.topLevel(FqName.topLevel(Name.identifier("Algebra")))
     }
 
     override fun addNewImplicitReceivers(functionCall: FirFunctionCall): List<ConeKotlinType> {
         if (functionCall.calleeReference.name != INJECT_ALGEBRA_NAME) return emptyList()
-        val typeProjection = functionCall.typeArguments.firstOrNull() as? FirTypeProjectionWithVariance ?: return emptyList()
-        val argumentType = typeProjection.typeRef.coneType
-        val algebraType = ALGEBRA_CLASS_ID.createConeType(session, arrayOf(argumentType))
+        konst typeProjection = functionCall.typeArguments.firstOrNull() as? FirTypeProjectionWithVariance ?: return emptyList()
+        konst argumentType = typeProjection.typeRef.coneType
+        konst algebraType = ALGEBRA_CLASS_ID.createConeType(session, arrayOf(argumentType))
         return listOf(algebraType)
     }
 }

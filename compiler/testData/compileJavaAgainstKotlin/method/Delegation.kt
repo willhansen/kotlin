@@ -2,12 +2,12 @@ package test
 
 interface Trait {
     fun foo()
-    val bar: Int
+    konst bar: Int
 }
 
 class Impl: Trait {
     override fun foo() {}
-    override val bar = 1
+    override konst bar = 1
 }
 
 class Test : Trait by Impl()

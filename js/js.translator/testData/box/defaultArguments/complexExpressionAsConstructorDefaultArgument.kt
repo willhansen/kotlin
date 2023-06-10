@@ -10,15 +10,15 @@ fun bar(): Int {
 
 fun baz() = 1
 
-class A(val x: Int = when (baz()) { 1 -> bar(); else -> 0 })
+class A(konst x: Int = when (baz()) { 1 -> bar(); else -> 0 })
 
 fun box(): String {
     global = ""
-    val a1 = A(10)
+    konst a1 = A(10)
     assertEquals(10, a1.x)
     assertEquals("", global)
 
-    val a2 = A()
+    konst a2 = A()
     assertEquals(100, a2.x)
     assertEquals(":bar:", global)
 

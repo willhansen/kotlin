@@ -29,20 +29,20 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
 class SuspendFunctionGenerationStrategy(
     state: GenerationState,
-    private val originalSuspendDescriptor: FunctionDescriptor,
-    private val declaration: KtFunction,
-    private val containingClassInternalName: String,
-    private val functionCodegen: FunctionCodegen
+    private konst originalSuspendDescriptor: FunctionDescriptor,
+    private konst declaration: KtFunction,
+    private konst containingClassInternalName: String,
+    private konst functionCodegen: FunctionCodegen
 ) : FunctionGenerationStrategy.CodegenBased(state) {
     private lateinit var codegen: ExpressionCodegen
 
-    private val classBuilderForCoroutineState by lazy {
+    private konst classBuilderForCoroutineState by lazy {
         state.factory.newVisitor(
             OtherOrigin(declaration, originalSuspendDescriptor),
             CodegenBinding.asmTypeForAnonymousClass(state.bindingContext, originalSuspendDescriptor),
             declaration.containingFile
         ).also {
-            val coroutineCodegen =
+            konst coroutineCodegen =
                 CoroutineCodegenForNamedFunction.create(it, codegen, originalSuspendDescriptor, declaration)
             coroutineCodegen.generate()
         }
@@ -54,7 +54,7 @@ class SuspendFunctionGenerationStrategy(
         if (originalSuspendDescriptor.isEffectivelyInlineOnly()) {
             return SuspendForInlineOnlyMethodVisitor(mv, access, name, desc)
         }
-        val stateMachineBuilder = createStateMachineBuilder(mv, access, name, desc)
+        konst stateMachineBuilder = createStateMachineBuilder(mv, access, name, desc)
         if (originalSuspendDescriptor.isInline) {
             return SuspendForInlineCopyingMethodVisitor(
                 stateMachineBuilder, access, name, desc, functionCodegen::newMethod, keepAccess = false
@@ -95,7 +95,7 @@ class SuspendFunctionGenerationStrategy(
     }
 
     private fun FunctionDescriptor.allOverriddenFunctionsReturnUnit(): Boolean {
-        val visited = mutableSetOf<FunctionDescriptor>()
+        konst visited = mutableSetOf<FunctionDescriptor>()
 
         fun bfs(descriptor: FunctionDescriptor): Boolean {
             if (!visited.add(descriptor)) return true
@@ -129,13 +129,13 @@ class SuspendFunctionGenerationStrategy(
         signature: String?,
         exceptions: Array<out String>?,
         obtainClassBuilderForCoroutineState: () -> ClassBuilder,
-        private val containingClassInternalName: String,
-        private val needDispatchReceiver: Boolean,
-        private val internalNameForDispatchReceiver: String?,
+        private konst containingClassInternalName: String,
+        private konst needDispatchReceiver: Boolean,
+        private konst internalNameForDispatchReceiver: String?,
     ) : TransformationMethodVisitor(delegate, access, name, desc, signature, exceptions) {
-        private val classBuilderForCoroutineState: ClassBuilder by lazy(obtainClassBuilderForCoroutineState)
+        private konst classBuilderForCoroutineState: ClassBuilder by lazy(obtainClassBuilderForCoroutineState)
         override fun performTransformations(methodNode: MethodNode) {
-            val objectTypeForState = Type.getObjectType(classBuilderForCoroutineState.thisName)
+            konst objectTypeForState = Type.getObjectType(classBuilderForCoroutineState.thisName)
             methodNode.instructions.insert(withInstructionAdapter {
                 addFakeContinuationConstructorCallMarker(this, true)
                 generateContinuationConstructorCall(
@@ -165,16 +165,16 @@ private class SuspendForInlineOnlyMethodVisitor(delegate: MethodVisitor, access:
 // 2) to use from inliner: private one without state machine
 class SuspendForInlineCopyingMethodVisitor(
     delegate: MethodVisitor, access: Int, name: String, desc: String,
-    private val newMethod: (JvmDeclarationOrigin, Int, String, String, String?, Array<String>?) -> MethodVisitor,
-    private val keepAccess: Boolean = true
+    private konst newMethod: (JvmDeclarationOrigin, Int, String, String, String?, Array<String>?) -> MethodVisitor,
+    private konst keepAccess: Boolean = true
 ) : TransformationMethodVisitor(delegate, access, name, desc, null, null) {
     override fun performTransformations(methodNode: MethodNode) {
-        val newMethodNode = with(methodNode) {
-            val newAccess = if (keepAccess) access else
+        konst newMethodNode = with(methodNode) {
+            konst newAccess = if (keepAccess) access else
                 access or Opcodes.ACC_PRIVATE and Opcodes.ACC_PUBLIC.inv() and Opcodes.ACC_PROTECTED.inv()
             MethodNode(newAccess, name + FOR_INLINE_SUFFIX, desc, signature, exceptions.toTypedArray())
         }
-        val newMethodVisitor = with(newMethodNode) {
+        konst newMethodVisitor = with(newMethodNode) {
             newMethod(JvmDeclarationOrigin.NO_ORIGIN, access, name, desc, signature, exceptions.toTypedArray())
         }
         methodNode.instructions.resetLabels()

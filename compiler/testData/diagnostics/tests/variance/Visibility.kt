@@ -1,9 +1,9 @@
 // FIR_IDENTICAL
 interface Test<in I, out O> {
-    val internal_val: <!TYPE_VARIANCE_CONFLICT_ERROR!>I<!>
-    public val public_val: <!TYPE_VARIANCE_CONFLICT_ERROR!>I<!>
-    <!WRONG_MODIFIER_CONTAINING_DECLARATION!>protected<!> val protected_val: <!TYPE_VARIANCE_CONFLICT_ERROR!>I<!>
-    <!PRIVATE_PROPERTY_IN_INTERFACE!>private<!> val private_val: I
+    konst internal_konst: <!TYPE_VARIANCE_CONFLICT_ERROR!>I<!>
+    public konst public_konst: <!TYPE_VARIANCE_CONFLICT_ERROR!>I<!>
+    <!WRONG_MODIFIER_CONTAINING_DECLARATION!>protected<!> konst protected_konst: <!TYPE_VARIANCE_CONFLICT_ERROR!>I<!>
+    <!PRIVATE_PROPERTY_IN_INTERFACE!>private<!> konst private_konst: I
 
     var interlan_private_set: <!TYPE_VARIANCE_CONFLICT_ERROR!>O<!>
         <!PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY!>private<!> set

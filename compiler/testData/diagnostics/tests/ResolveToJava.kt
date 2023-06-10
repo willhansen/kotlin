@@ -12,15 +12,15 @@ import <!UNRESOLVED_REFERENCE!>utils<!>.*
 import java.io.PrintStream
 import <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.lang.Comparable<!> as Com
 
-val l : MutableList<in Int> = ArrayList<Int>()
+konst l : MutableList<in Int> = ArrayList<Int>()
 
 fun test(l : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.util.List<Int><!>) {
-  val x : java.<!UNRESOLVED_REFERENCE!>List<!>
-  val y : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.util.List<Int><!>
-  val b : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.lang.Object<!>
-  val z : java.<!UNRESOLVED_REFERENCE!>utils<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>List<!><Int>
+  konst x : java.<!UNRESOLVED_REFERENCE!>List<!>
+  konst y : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.util.List<Int><!>
+  konst b : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.lang.Object<!>
+  konst z : java.<!UNRESOLVED_REFERENCE!>utils<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>List<!><Int>
 
-  val f : java.io.File? = null
+  konst f : java.io.File? = null
 
   Collections.<!FUNCTION_CALL_EXPECTED, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>emptyList<!>
   Collections.<!FUNCTION_CALL_EXPECTED!>emptyList<Int><!>
@@ -33,7 +33,7 @@ fun test(l : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.util.List<Int><!>) {
   <!RESOLUTION_TO_CLASSIFIER!>List<!><Int>
 
 
-  val o = "sdf" as <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Object<!>
+  konst o = "sdf" as <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Object<!>
 
   try {
     // ...
@@ -44,7 +44,7 @@ fun test(l : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.util.List<Int><!>) {
 
   PrintStream("sdf")
 
-  val c : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Com<Int><!>? = null
+  konst c : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Com<Int><!>? = null
 
   checkSubtype<<!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.lang.Comparable<Int><!>?>(c)
 

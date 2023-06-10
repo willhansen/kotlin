@@ -1,9 +1,9 @@
 interface Foo
 fun foo(): Foo? = null
 
-val foo: Foo = run {
+konst foo: Foo = run {
     run {
-        val x = foo()
+        konst x = foo()
         if (x == null) throw Exception()
         x
     }

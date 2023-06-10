@@ -36,14 +36,14 @@ fun main() {
         x -> <!ARGUMENT_TYPE_MISMATCH, TYPE_MISMATCH!>x.hashCode()<!>
     }
 
-    val block: (String) -> Any? = {
+    konst block: (String) -> Any? = {
         x -> x.hashCode()
     }
 
     A().foo(block)
     A.bar(block)
 
-    val block2: (String) -> CharSequence? = {
+    konst block2: (String) -> CharSequence? = {
         x -> x.toString()
     }
 

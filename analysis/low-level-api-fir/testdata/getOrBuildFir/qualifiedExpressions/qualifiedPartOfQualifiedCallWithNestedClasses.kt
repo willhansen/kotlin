@@ -1,7 +1,7 @@
 class A {
     class B {
         class C {
-            val x = 10
+            konst x = 10
         }
     }
 }

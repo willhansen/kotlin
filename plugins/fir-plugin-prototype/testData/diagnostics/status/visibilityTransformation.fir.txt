@@ -4,7 +4,7 @@ FILE: visibilityTransformation.kt
             super<R|kotlin/Any|>()
         }
 
-        protected final val x: R|kotlin/String| = String()
+        protected final konst x: R|kotlin/String| = String()
             protected get(): R|kotlin/String|
 
         protected final fun foo(): R|kotlin/Unit| {
@@ -26,7 +26,7 @@ FILE: visibilityTransformation.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val x: R|kotlin/String| = String()
+        private final konst x: R|kotlin/String| = String()
             private get(): R|kotlin/String|
 
         private final fun foo(): R|kotlin/Unit| {

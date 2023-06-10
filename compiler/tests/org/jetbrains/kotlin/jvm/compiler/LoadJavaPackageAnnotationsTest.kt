@@ -34,11 +34,11 @@ import java.io.File
 
 class LoadJavaPackageAnnotationsTest : KtUsefulTestCase() {
     companion object {
-        private const val TEST_DATA_PATH = "compiler/testData/loadJavaPackageAnnotations/"
+        private const konst TEST_DATA_PATH = "compiler/testData/loadJavaPackageAnnotations/"
     }
 
     private fun doTest(useJavac: Boolean, configurator: (CompilerConfiguration) -> Unit) {
-        val configuration = KotlinTestUtils.newConfiguration(
+        konst configuration = KotlinTestUtils.newConfiguration(
             ConfigurationKind.ALL, TestJdkKind.FULL_JDK, KtTestUtil.getAnnotationsJar()
         ).apply {
             if (useJavac) {
@@ -51,7 +51,7 @@ class LoadJavaPackageAnnotationsTest : KtUsefulTestCase() {
             )
             configurator(this)
         }
-        val environment = KotlinCoreEnvironment.createForTests(
+        konst environment = KotlinCoreEnvironment.createForTests(
             testRootDisposable,
             configuration,
             EnvironmentConfigFiles.JVM_CONFIG_FILES
@@ -60,16 +60,16 @@ class LoadJavaPackageAnnotationsTest : KtUsefulTestCase() {
                 registerJavac()
             }
         }
-        val moduleDescriptor = JvmResolveUtil.analyze(environment).moduleDescriptor
+        konst moduleDescriptor = JvmResolveUtil.analyze(environment).moduleDescriptor
 
-        val packageFragmentDescriptor = moduleDescriptor.getPackage(FqName("test")).fragments
+        konst packageFragmentDescriptor = moduleDescriptor.getPackage(FqName("test")).fragments
             .singleOrNull { it.getMemberScope().getContributedClassifier(Name.identifier("A"), NoLookupLocation.FROM_TEST) != null }
             .let { assertInstanceOf(it, LazyJavaPackageFragment::class.java) }
 
-        val annotation = packageFragmentDescriptor.annotations.findAnnotation(FqName("test.Ann"))
+        konst annotation = packageFragmentDescriptor.annotations.findAnnotation(FqName("test.Ann"))
         assertNotNull(annotation)
 
-        val singleAnnotation = packageFragmentDescriptor.annotations.singleOrNull()
+        konst singleAnnotation = packageFragmentDescriptor.annotations.singleOrNull()
         assertNotNull(singleAnnotation)
 
         assertEquals(FqName("test.Ann"), singleAnnotation!!.fqName)
@@ -88,7 +88,7 @@ class LoadJavaPackageAnnotationsTest : KtUsefulTestCase() {
     }
 
     fun testAnnotationFromCompiledCode() {
-        val jar = prepareJar()
+        konst jar = prepareJar()
 
         doTest(useJavac = false) {
             it.addJvmClasspathRoot(jar)
@@ -96,7 +96,7 @@ class LoadJavaPackageAnnotationsTest : KtUsefulTestCase() {
     }
 
     fun testAnnotationFromCompiledCodeWithJavac() {
-        val jar = prepareJar()
+        konst jar = prepareJar()
 
         doTest(useJavac = true) {
             it.addJvmClasspathRoot(jar)

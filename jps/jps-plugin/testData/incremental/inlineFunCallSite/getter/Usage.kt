@@ -1,6 +1,6 @@
 package usage
 
 class Usage {
-    val x: Int
+    konst x: Int
         get() = inline.f()
 }

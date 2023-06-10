@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.fir.declarations.FirFile
 
 open class CheckerRunningDiagnosticCollectorVisitor(
     context: CheckerContextForProvider,
-    protected val components: DiagnosticCollectorComponents
+    protected konst components: DiagnosticCollectorComponents
 ) : AbstractDiagnosticCollectorVisitor(context) {
 
     override fun checkElement(element: FirElement) {

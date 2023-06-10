@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1291
 package foo
 
-open class A(private val bar: String = "1") {
+open class A(private konst bar: String = "1") {
     inner class B : A("2") {
         fun foo(a: A): String {
             return bar + a.bar

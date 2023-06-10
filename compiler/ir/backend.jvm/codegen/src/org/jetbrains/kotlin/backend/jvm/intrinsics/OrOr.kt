@@ -14,11 +14,11 @@ import org.jetbrains.org.objectweb.asm.Label
 object OrOr : IntrinsicMethod() {
 
     private class BooleanDisjunction(
-        val arg0: IrExpression, val arg1: IrExpression, codegen: ExpressionCodegen, val data: BlockInfo
+        konst arg0: IrExpression, konst arg1: IrExpression, codegen: ExpressionCodegen, konst data: BlockInfo
     ) : BooleanValue(codegen) {
 
         override fun jumpIfFalse(target: Label) {
-            val stayLabel = Label()
+            konst stayLabel = Label()
             arg0.accept(codegen, data).coerceToBoolean().jumpIfTrue(stayLabel)
             arg1.accept(codegen, data).coerceToBoolean().jumpIfFalse(target)
             mv.visitLabel(stayLabel)
@@ -30,7 +30,7 @@ object OrOr : IntrinsicMethod() {
         }
 
         override fun discard() {
-            val end = Label()
+            konst end = Label()
             arg0.accept(codegen, data).coerceToBoolean().jumpIfTrue(end)
             arg1.accept(codegen, data).discard()
             mv.visitLabel(end)
@@ -38,7 +38,7 @@ object OrOr : IntrinsicMethod() {
     }
 
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue? {
-        val (left, right) = expression.receiverAndArgs()
+        konst (left, right) = expression.receiverAndArgs()
         return BooleanDisjunction(left, right, codegen, data)
     }
 }

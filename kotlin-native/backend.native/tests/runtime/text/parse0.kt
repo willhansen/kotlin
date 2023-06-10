@@ -64,7 +64,7 @@ fun checkDouble() {
             "5.5.3e123d".toDouble()
         }
 
-        // regression of incorrect processing of long lines - such values returned Infinity
+        // regression of incorrect processing of long lines - such konstues returned Infinity
         assertFailsWith<NumberFormatException> {
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".toDouble()
         }
@@ -118,7 +118,7 @@ fun checkFloat() {
             "5.5.3e123f".toFloat()
         }
 
-        // regression of incorrect processing of long lines - such values returned Infinity
+        // regression of incorrect processing of long lines - such konstues returned Infinity
         assertFailsWith<NumberFormatException> {
             // should be more than 38 symbols
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".toFloat()

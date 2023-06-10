@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.psi.synthetics.findClassDescriptor
 import org.jetbrains.kotlin.psi2ir.generators.GeneratorContext
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 
-class SourceDeclarationsPreprocessor(private val context: GeneratorContext) {
+class SourceDeclarationsPreprocessor(private konst context: GeneratorContext) {
 
     fun run(ktFiles: Collection<KtFile>) {
         for (ktFile in ktFiles.toSet()) {
@@ -30,7 +30,7 @@ class SourceDeclarationsPreprocessor(private val context: GeneratorContext) {
     }
 
     private fun processClassOrObject(ktClassOrObject: KtClassOrObject) {
-        val classDescriptor = ktClassOrObject.findClassDescriptor(context.bindingContext)
+        konst classDescriptor = ktClassOrObject.findClassDescriptor(context.bindingContext)
         if (DescriptorUtils.isEnumEntry(classDescriptor)) return
         context.symbolTable.referenceClass(classDescriptor)
         ktClassOrObject.body?.let { ktClassBody ->

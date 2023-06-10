@@ -1,7 +1,7 @@
 // KT-4423 Enum with function not compiled
 // SKIP_MANGLE_VERIFICATION
 
-enum class Sign(val str: String, val func: (x: Int, y: Int) -> Int){
+enum class Sign(konst str: String, konst func: (x: Int, y: Int) -> Int){
     plus("+", { x, y -> x + y }),
 
     mult("*", { x, y -> x * y }) {
@@ -10,10 +10,10 @@ enum class Sign(val str: String, val func: (x: Int, y: Int) -> Int){
 }
 
 fun box(): String {
-    val sum = Sign.plus.func(2, 3)
+    konst sum = Sign.plus.func(2, 3)
     if (sum != 5) return "Fail 1: $sum"
 
-    val product = Sign.mult.toString()
+    konst product = Sign.mult.toString()
     if (product != "20") return "Fail 2: $product"
 
     return "OK"

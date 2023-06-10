@@ -2,7 +2,7 @@
 // WITH_STDLIB
 
 interface Foo {
-    val foos: List<Foo>
+    konst foos: List<Foo>
 }
 
 inline fun <reified T : Any> Sequence<*>.firstIsInstanceOrNull(): T? {

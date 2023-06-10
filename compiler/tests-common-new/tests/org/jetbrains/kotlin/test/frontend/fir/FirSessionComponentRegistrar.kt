@@ -13,4 +13,4 @@ abstract class FirSessionComponentRegistrar : TestService {
     abstract fun registerAdditionalComponent(session: FirSession)
 }
 
-val TestServices.firSessionComponentRegistrar: FirSessionComponentRegistrar? by TestServices.nullableTestServiceAccessor()
+konst TestServices.firSessionComponentRegistrar: FirSessionComponentRegistrar? by TestServices.nullableTestServiceAccessor()

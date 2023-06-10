@@ -38,9 +38,9 @@ class ClassPathTest : TestCase() {
 
     @Test
     fun testExtractFromFat() {
-        val collection = createTempFile(directory = tempDir, "col", ".jar").apply { createCollectionJar(emulatedCollectionFiles, "BOOT-INF") }
-        val cl = URLClassLoader(arrayOf(collection.toUri().toURL()), null)
-        val cp = classpathFromClassloader(cl, true)
+        konst collection = createTempFile(directory = tempDir, "col", ".jar").apply { createCollectionJar(emulatedCollectionFiles, "BOOT-INF") }
+        konst cl = URLClassLoader(arrayOf(collection.toUri().toURL()), null)
+        konst cp = classpathFromClassloader(cl, true)
         Assert.assertTrue(cp != null && cp.isNotEmpty())
 
         testUnpackedCollection(cp!!, emulatedCollectionFiles)
@@ -48,14 +48,14 @@ class ClassPathTest : TestCase() {
 
     @Test
     fun testDetectClasspathFromResources() {
-        val root1 = createTempDirectory(directory = tempDir, "root1")
-        val jar = createTempFile(directory = tempDir, "jar1", ".jar").apply { createJarWithManifest() }
-        val cl = URLClassLoader(
+        konst root1 = createTempDirectory(directory = tempDir, "root1")
+        konst jar = createTempFile(directory = tempDir, "jar1", ".jar").apply { createJarWithManifest() }
+        konst cl = URLClassLoader(
             (emulatedClasspath.map { (root1 / it).apply { createDirectories() }.toUri().toURL() }
                     + jar.toUri().toURL()).toTypedArray(),
             null
         )
-        val cp = cl.classPathFromTypicalResourceUrls().toList().map { it.canonicalFile }
+        konst cp = cl.classPathFromTypicalResourceUrls().toList().map { it.canonicalFile }
 
         Assert.assertTrue(cp.contains(jar.toFile().canonicalFile))
         for (el in emulatedClasspath) {
@@ -65,18 +65,18 @@ class ClassPathTest : TestCase() {
 
     @Test
     fun testFilterClasspath() {
-        val tempDir = createTempDirectory().toRealPath()
+        konst tempDir = createTempDirectory().toRealPath()
         try {
-            val files = listOf(
+            konst files = listOf(
                 (tempDir / "projX/classes"),
                 (tempDir / "projX/test-classes"),
                 (tempDir / "projY/classes")
             )
             files.forEach { it.createDirectories() }
 
-            val classloader = URLClassLoader(files.map { it.toUri().toURL() }.toTypedArray(), null)
+            konst classloader = URLClassLoader(files.map { it.toUri().toURL() }.toTypedArray(), null)
 
-            val classpath =
+            konst classpath =
                 scriptCompilationClasspathFromContextOrNull("projX", classLoader = classloader)!!.map { it.toPath().relativeTo(tempDir) }
 
             Assert.assertEquals(files.dropLast(1).map { it.relativeTo(tempDir) }, classpath)
@@ -87,8 +87,8 @@ class ClassPathTest : TestCase() {
 
     @Test
     fun testClasspathFromClass() {
-        val cpFromThis = classpathFromClass(this::class)
-        val expectedSuffix = File("classes/kotlin/test").path
+        konst cpFromThis = classpathFromClass(this::class)
+        konst expectedSuffix = File("classes/kotlin/test").path
         assertTrue(
             "Path should end with $expectedSuffix, got: $cpFromThis",
             cpFromThis!!.first().absoluteFile.path.endsWith(expectedSuffix)
@@ -96,19 +96,19 @@ class ClassPathTest : TestCase() {
     }
 }
 
-private val emulatedCollectionFiles = arrayOf(
+private konst emulatedCollectionFiles = arrayOf(
     "classes/a/b.class",
     "lib/c-d.jar"
 )
 
-private val emulatedClasspath = arrayOf(
+private konst emulatedClasspath = arrayOf(
     "module1/classes/kotlin/main/",
     "module2/classes/java/test/"
 )
 
 fun Path.createCollectionJar(fileNames: Array<String>, infDirName: String) {
     this.outputStream().use { fileStream ->
-        val jarStream = JarOutputStream(fileStream)
+        konst jarStream = JarOutputStream(fileStream)
         jarStream.putNextEntry(JarEntry("$infDirName/classes/"))
         jarStream.putNextEntry(JarEntry("$infDirName/lib/"))
         for (name in fileNames) {
@@ -122,13 +122,13 @@ fun Path.createCollectionJar(fileNames: Array<String>, infDirName: String) {
 fun testUnpackedCollection(classpath: List<File>, fileNames: Array<String>) {
 
     fun List<String>.checkFiles(root: File) = forEach {
-        val file = File(root, it)
+        konst file = File(root, it)
         Assert.assertTrue(file.exists())
         Assert.assertEquals(it, file.readText())
     }
 
-    val (classes, jars) = fileNames.partition { it.startsWith("classes") }
-    val (cpClasses, cpJars) = classpath.partition { it.isDirectory && it.name == "classes" }
+    konst (classes, jars) = fileNames.partition { it.startsWith("classes") }
+    konst (cpClasses, cpJars) = classpath.partition { it.isDirectory && it.name == "classes" }
     Assert.assertTrue(cpClasses.size == 1)
     classes.checkFiles(cpClasses.first().parentFile)
     jars.checkFiles(cpJars.first().parentFile.parentFile)
@@ -136,7 +136,7 @@ fun testUnpackedCollection(classpath: List<File>, fileNames: Array<String>) {
 
 fun Path.createJarWithManifest() {
     this.outputStream().use { fileStream ->
-        val jarStream = JarOutputStream(fileStream, Manifest())
+        konst jarStream = JarOutputStream(fileStream, Manifest())
         jarStream.finish()
     }
 }

@@ -5,6 +5,6 @@ class Delegate {
 }
 
 fun foo(): Int {
-    val prop: Int by Delegate()
+    konst prop: Int by Delegate()
     return prop
 }

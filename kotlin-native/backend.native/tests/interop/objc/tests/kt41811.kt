@@ -40,11 +40,11 @@ fun testKT41811LoadWeak() {
 
 @Test
 fun testKT41811LoadKotlinWeak() {
-    val kotlinWeak = object : NSObject(), WeakReferenceProtocol {
+    konst kotlinWeak = object : NSObject(), WeakReferenceProtocol {
         lateinit var weakReference: WeakReference<Any>
 
         override fun referent(): Any? {
-            return weakReference.value
+            return weakReference.konstue
         }
 
         override fun setReferent(referent: Any?) {
@@ -77,7 +77,7 @@ private fun testKT41811LoadWeak(weakRef: WeakReferenceProtocol) {
 
 private fun createGarbageDeallocLoadWeak(weakRef: WeakReferenceProtocol) {
     autoreleasepool {
-        val obj = object : DeallocLoadWeak() {}
+        konst obj = object : DeallocLoadWeak() {}
         weakDeallocLoadWeak = weakRef.apply { referent = obj }
         obj.checkWeak()
         assertSame(obj, weakDeallocLoadWeak!!.referent)

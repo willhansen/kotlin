@@ -10,12 +10,12 @@ annotation class Anno
 
 class SampleApt : AbstractProcessor() {
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
-        val writeKotlinFiles = processingEnv.options["kapt.test.writeKotlinFiles"] == "true"
+        konst writeKotlinFiles = processingEnv.options["kapt.test.writeKotlinFiles"] == "true"
 
         for (element in roundEnv.getElementsAnnotatedWith(Anno::class.java)) {
-            val generatedSimpleName = element.simpleName.toString().capitalize()
+            konst generatedSimpleName = element.simpleName.toString().capitalize()
 
-            val file = when (writeKotlinFiles) {
+            konst file = when (writeKotlinFiles) {
                 true -> processingEnv.filer.createResource(StandardLocation.SOURCE_OUTPUT, "generated", "$generatedSimpleName.kt")
                 false -> processingEnv.filer.createSourceFile("generated.$generatedSimpleName")
             }

@@ -25,8 +25,8 @@ fun compute(): String {
 }
 
 fun box() {
-    val result = compute()
-    val localX = x
+    konst result = compute()
+    konst localX = x
 }
 
 // EXPECTATIONS JVM JVM_IR

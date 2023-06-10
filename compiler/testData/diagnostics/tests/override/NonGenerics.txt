@@ -6,7 +6,7 @@ package override {
 
         public abstract class MyAbstractClass {
             public constructor MyAbstractClass()
-            public abstract val prr: kotlin.Unit
+            public abstract konst prr: kotlin.Unit
             public abstract fun bar(): kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -15,8 +15,8 @@ package override {
 
         public final class MyChildClass : override.normal.MyClass {
             public constructor MyChildClass()
-            public open override /*1*/ /*fake_override*/ val pr: kotlin.Unit
-            public open override /*1*/ /*fake_override*/ val prr: kotlin.Unit
+            public open override /*1*/ /*fake_override*/ konst pr: kotlin.Unit
+            public open override /*1*/ /*fake_override*/ konst prr: kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun bar(): kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
@@ -26,8 +26,8 @@ package override {
 
         public final class MyChildClass1 : override.normal.MyClass {
             public constructor MyChildClass1()
-            public final override /*1*/ val pr: kotlin.Unit
-            public open override /*1*/ val prr: kotlin.Unit
+            public final override /*1*/ konst pr: kotlin.Unit
+            public open override /*1*/ konst prr: kotlin.Unit
             public open override /*1*/ fun bar(): kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public final override /*1*/ fun foo(): kotlin.Unit
@@ -37,8 +37,8 @@ package override {
 
         public open class MyClass : override.normal.MyTrait, override.normal.MyAbstractClass {
             public constructor MyClass()
-            public open override /*1*/ val pr: kotlin.Unit
-            public open override /*1*/ val prr: kotlin.Unit
+            public open override /*1*/ konst pr: kotlin.Unit
+            public open override /*1*/ konst prr: kotlin.Unit
             public open override /*1*/ fun bar(): kotlin.Unit
             public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ fun foo(): kotlin.Unit
@@ -48,8 +48,8 @@ package override {
 
         public final class MyIllegalClass : override.normal.MyTrait, override.normal.MyAbstractClass {
             public constructor MyIllegalClass()
-            public abstract override /*1*/ /*fake_override*/ val pr: kotlin.Unit
-            public abstract override /*1*/ /*fake_override*/ val prr: kotlin.Unit
+            public abstract override /*1*/ /*fake_override*/ konst pr: kotlin.Unit
+            public abstract override /*1*/ /*fake_override*/ konst prr: kotlin.Unit
             public abstract override /*1*/ /*fake_override*/ fun bar(): kotlin.Unit
             public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public abstract override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
@@ -59,8 +59,8 @@ package override {
 
         public final class MyIllegalClass2 : override.normal.MyTrait, override.normal.MyAbstractClass {
             public constructor MyIllegalClass2()
-            public open override /*1*/ val pr: kotlin.Unit
-            public open override /*1*/ val prr: kotlin.Unit
+            public open override /*1*/ konst pr: kotlin.Unit
+            public open override /*1*/ konst prr: kotlin.Unit
             public abstract override /*1*/ /*fake_override*/ fun bar(): kotlin.Unit
             public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ fun foo(): kotlin.Unit
@@ -70,8 +70,8 @@ package override {
 
         public final class MyIllegalClass3 : override.normal.MyTrait, override.normal.MyAbstractClass {
             public constructor MyIllegalClass3()
-            public open override /*1*/ val pr: kotlin.Unit
-            public open override /*1*/ val prr: kotlin.Unit
+            public open override /*1*/ konst pr: kotlin.Unit
+            public open override /*1*/ konst prr: kotlin.Unit
             public open override /*1*/ fun bar(): kotlin.Unit
             public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public abstract override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
@@ -81,9 +81,9 @@ package override {
 
         public final class MyIllegalClass4 : override.normal.MyTrait, override.normal.MyAbstractClass {
             public constructor MyIllegalClass4()
-            public open val otherPr: kotlin.Int = 1
-            public final override /*1*/ val pr: kotlin.Unit
-            public abstract override /*1*/ /*fake_override*/ val prr: kotlin.Unit
+            public open konst otherPr: kotlin.Int = 1
+            public final override /*1*/ konst pr: kotlin.Unit
+            public abstract override /*1*/ /*fake_override*/ konst prr: kotlin.Unit
             public abstract override /*1*/ /*fake_override*/ fun bar(): kotlin.Unit
             public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public final override /*1*/ fun foo(): kotlin.Unit
@@ -93,7 +93,7 @@ package override {
         }
 
         public interface MyTrait {
-            public abstract val pr: kotlin.Unit
+            public abstract konst pr: kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public abstract fun foo(): kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

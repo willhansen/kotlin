@@ -15,6 +15,6 @@
 }
 
 -(void)dealloc {
-    deallocated.value = YES;
+    deallocated.konstue = YES;
 }
 @end

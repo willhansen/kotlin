@@ -12,10 +12,10 @@ class A @JvmOverloads constructor(x: String, y: Int = 42) {
 }
 
 fun box(): String {
-    val ctor = A::class.java.getDeclaredConstructor(String::class.java).parameters.toList()
+    konst ctor = A::class.java.getDeclaredConstructor(String::class.java).parameters.toList()
     if (ctor.toString() != "[java.lang.String x]") return "Fail constructor: $ctor"
 
-    val method = A::class.java.getDeclaredMethod("f", Long::class.java).parameters.toList()
+    konst method = A::class.java.getDeclaredMethod("f", Long::class.java).parameters.toList()
     if (method.toString() != "[long a]") return "Fail method: $method"
 
     return "OK"

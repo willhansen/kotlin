@@ -11,7 +11,7 @@ open class B {
 open class C: B(), A
 
 fun box(): String {
-    val a: A = C()
+    konst a: A = C()
     if (a.foo() != "A") return "Fail 1"
     if ((a as B).foo() != "A") return "Fail 2"
     if ((a as C).foo() != "A") return "Fail 3"

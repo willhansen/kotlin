@@ -14,7 +14,7 @@ interface MyInterface {
     fun bar()
 }
 
-val field = object : MyInterface {
+konst field = object : MyInterface {
     @MyAnn
     override fun foo() {}
 

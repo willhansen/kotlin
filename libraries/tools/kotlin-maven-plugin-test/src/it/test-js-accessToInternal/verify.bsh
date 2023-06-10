@@ -15,7 +15,7 @@ if (!testFile.exists() || !testFile.isFile()) {
 String basePath = basedir.getPath();
 ScriptEngine engine = new NashornScriptEngineFactory().getScriptEngine();
 
-engine.eval(new FileReader(basePath + "/target/js/kotlin.js"));
-engine.eval(new FileReader(basePath + "/target/js/test-js-accessToInternal.js"));
-engine.eval(new FileReader(basePath + "/target/test-js/test-js-accessToInternal-tests.js"));
-engine.eval(new FileReader(basePath + "/check.js"));
+engine.ekonst(new FileReader(basePath + "/target/js/kotlin.js"));
+engine.ekonst(new FileReader(basePath + "/target/js/test-js-accessToInternal.js"));
+engine.ekonst(new FileReader(basePath + "/target/test-js/test-js-accessToInternal-tests.js"));
+engine.ekonst(new FileReader(basePath + "/check.js"));

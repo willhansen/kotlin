@@ -28,8 +28,8 @@ import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.psi.KtParameter
 
 internal class SymbolLightSuspendContinuationParameter(
-    private val functionSymbolPointer: KtSymbolPointer<KtFunctionSymbol>,
-    private val containingMethod: SymbolLightMethodBase,
+    private konst functionSymbolPointer: KtSymbolPointer<KtFunctionSymbol>,
+    private konst containingMethod: SymbolLightMethodBase,
 ) : SymbolLightParameterBase(containingMethod) {
     private inline fun <T> withFunctionSymbol(crossinline action: context(KtAnalysisSession) (KtFunctionSymbol) -> T): T {
         return functionSymbolPointer.withSymbol(ktModule, action)
@@ -41,7 +41,7 @@ internal class SymbolLightSuspendContinuationParameter(
 
     override fun getType(): PsiType = _type
 
-    private val _type by lazyPub {
+    private konst _type by lazyPub {
         withFunctionSymbol { functionSymbol ->
             buildClassType(StandardClassIds.Continuation) { argument(functionSymbol.returnType) }
                 .asPsiType(this, allowErrorTypes = true)
@@ -53,7 +53,7 @@ internal class SymbolLightSuspendContinuationParameter(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightClassModifierList(
             containingDeclaration = this,
             annotationsBox = GranularAnnotationsBox(
@@ -70,7 +70,7 @@ internal class SymbolLightSuspendContinuationParameter(
 
     override fun hasModifierProperty(p0: String): Boolean = false
 
-    override val kotlinOrigin: KtParameter? = null
+    override konst kotlinOrigin: KtParameter? = null
 
     override fun equals(other: Any?): Boolean = this === other ||
             other is SymbolLightSuspendContinuationParameter &&

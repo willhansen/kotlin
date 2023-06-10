@@ -3,22 +3,22 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcInt(val i: Int) {
+konstue class IcInt(konst i: Int) {
     fun simple(): String = i.toString()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcLong(val l: Long) {
+konstue class IcLong(konst l: Long) {
     fun simple(): String = l.toString()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny(val a: Any?) {
+konstue class IcAny(konst a: Any?) {
     fun simple(): String = a?.toString() ?: "null"
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcOverIc(val o: IcLong) {
+konstue class IcOverIc(konst o: IcLong) {
     fun simple(): String = o.toString()
 }
 
@@ -29,18 +29,18 @@ fun testBoxed(i: IcInt?, l: IcLong?, a: IcAny?, o: IcOverIc?): String =
     foo(i!!::simple) + foo(l!!::simple) + foo(a!!::simple) + foo(o!!::simple)
 
 fun testLocalVars(): String {
-    val i = IcInt(0)
-    val l = IcLong(1L)
-    val a = IcAny(2)
-    val o = IcOverIc(IcLong(3))
+    konst i = IcInt(0)
+    konst l = IcLong(1L)
+    konst a = IcAny(2)
+    konst o = IcOverIc(IcLong(3))
 
     return foo(i::simple) + foo(l::simple) + foo(a::simple) + foo(o::simple)
 }
 
-val ip = IcInt(1)
-val lp = IcLong(2L)
-val ap = IcAny(3)
-val op = IcOverIc(IcLong(4))
+konst ip = IcInt(1)
+konst lp = IcLong(2L)
+konst ap = IcAny(3)
+konst op = IcOverIc(IcLong(4))
 
 fun testGlobalProperties(): String =
     foo(ip::simple) + foo(lp::simple) + foo(ap::simple) + foo(op::simple)
@@ -55,10 +55,10 @@ fun testCapturedVars(): String {
 inline fun foo(init: () -> String): String = init()
 
 fun box(): String {
-    val i = IcInt(3)
-    val l = IcLong(4)
-    val a = IcAny(5)
-    val o = IcOverIc(IcLong(6))
+    konst i = IcInt(3)
+    konst l = IcLong(4)
+    konst a = IcAny(5)
+    konst o = IcOverIc(IcLong(6))
 
     if (testUnboxed(i, l, a, o) != "345IcLong(l=6)") return "Fail 1 ${testUnboxed(i, l, a, o)}"
     if (testBoxed(i, l, a, o) != "345IcLong(l=6)") return "Fail 2"

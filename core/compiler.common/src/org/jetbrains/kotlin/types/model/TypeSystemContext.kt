@@ -38,7 +38,7 @@ interface TypeSubstitutorMarker
 
 interface AnnotationMarker
 
-enum class TypeVariance(val presentation: String) {
+enum class TypeVariance(konst presentation: String) {
     IN("in"),
     OUT("out"),
     INV("");
@@ -196,8 +196,8 @@ interface TypeSystemInferenceExtensionContext : TypeSystemContext, TypeSystemBui
         return replaceArguments {
             if (it.isStarProjection()) return@replaceArguments it
 
-            val type = it.getType()
-            val newProjection = if (type.argumentsCount() > 0) {
+            konst type = it.getType()
+            konst newProjection = if (type.argumentsCount() > 0) {
                 it.replaceType(type.replaceArgumentsDeeply(replacement))
             } else it
 
@@ -269,13 +269,13 @@ interface TypeSystemInferenceExtensionContext : TypeSystemContext, TypeSystemBui
 
     private fun <T> KotlinTypeMarker.extractTypeOf(to: MutableSet<T>, getIfApplicable: (TypeConstructorMarker) -> T?) {
         for (i in 0 until argumentsCount()) {
-            val argument = getArgument(i)
+            konst argument = getArgument(i)
 
             if (argument.isStarProjection()) continue
 
-            val argumentType = argument.getType()
-            val argumentTypeConstructor = argumentType.typeConstructor()
-            val argumentToAdd = getIfApplicable(argumentTypeConstructor)
+            konst argumentType = argument.getType()
+            konst argumentTypeConstructor = argumentType.typeConstructor()
+            konst argumentToAdd = getIfApplicable(argumentTypeConstructor)
 
             if (argumentToAdd != null) {
                 to.add(argumentToAdd)
@@ -320,12 +320,12 @@ interface TypeSystemInferenceExtensionContext : TypeSystemContext, TypeSystemBui
         typeVariable: TypeVariableTypeConstructorMarker,
         typesForRecursiveTypeParameters: List<KotlinTypeMarker>,
     ): SimpleTypeMarker? {
-        val typeParameter = typeVariable.typeParameter ?: return null
-        val starProjection = createStarProjection(typeParameter)
-        val superType = intersectTypes(
+        konst typeParameter = typeVariable.typeParameter ?: return null
+        konst starProjection = createStarProjection(typeParameter)
+        konst superType = intersectTypes(
             typesForRecursiveTypeParameters.map { type ->
                 type.replaceArgumentsDeeply {
-                    val constructor = it.getType().typeConstructor()
+                    konst constructor = it.getType().typeConstructor()
                     if (constructor is TypeVariableTypeConstructorMarker && constructor == typeVariable) starProjection else it
                 }
             }
@@ -342,7 +342,7 @@ interface TypeSystemInferenceExtensionContext : TypeSystemContext, TypeSystemBui
     private fun computeEffectiveVariance(parameter: TypeParameterMarker, argument: TypeArgumentMarker): TypeVariance? =
         AbstractTypeChecker.effectiveVariance(parameter.getVariance(), argument.getVariance())
 
-    val isK2: Boolean
+    konst isK2: Boolean
 }
 
 
@@ -428,7 +428,7 @@ interface TypeSystemContext : TypeSystemOptimizationContext {
     fun TypeConstructorMarker.getTypeParameterClassifier(): TypeParameterMarker?
     fun TypeConstructorMarker.isTypeParameterTypeConstructor(): Boolean
 
-    val TypeVariableTypeConstructorMarker.typeParameter: TypeParameterMarker?
+    konst TypeVariableTypeConstructorMarker.typeParameter: TypeParameterMarker?
 
     fun TypeParameterMarker.getVariance(): TypeVariance
     fun TypeParameterMarker.upperBoundCount(): Int
@@ -516,7 +516,7 @@ interface TypeSystemContext : TypeSystemOptimizationContext {
         override fun hasNext(): Boolean = argumentIndex < size()
 
         override fun next(): TypeArgumentMarker {
-            val argument = get(argumentIndex)
+            konst argument = get(argumentIndex)
             argumentIndex += 1
             return argument
         }
@@ -571,15 +571,15 @@ inline fun TypeArgumentListMarker.all(
 }
 
 @OptIn(ExperimentalContracts::class)
-fun requireOrDescribe(condition: Boolean, value: Any?) {
+fun requireOrDescribe(condition: Boolean, konstue: Any?) {
     contract {
         returns() implies condition
     }
     require(condition) {
-        val typeInfo = if (value != null) {
-            ", type = '${value::class}'"
+        konst typeInfo = if (konstue != null) {
+            ", type = '${konstue::class}'"
         } else ""
-        "Unexpected: value = '$value'$typeInfo"
+        "Unexpected: konstue = '$konstue'$typeInfo"
     }
 }
 

@@ -29,19 +29,19 @@ internal open class KProperty2Impl<D, E, out V> : KProperty2<D, E, V>, KProperty
 
     constructor(container: KDeclarationContainerImpl, descriptor: PropertyDescriptor) : super(container, descriptor)
 
-    private val _getter = lazy(PUBLICATION) { Getter(this) }
+    private konst _getter = lazy(PUBLICATION) { Getter(this) }
 
-    override val getter: Getter<D, E, V> get() = _getter.value
+    override konst getter: Getter<D, E, V> get() = _getter.konstue
 
     override fun get(receiver1: D, receiver2: E): V = getter.call(receiver1, receiver2)
 
-    private val delegateSource = lazy(PUBLICATION) { computeDelegateSource() }
+    private konst delegateSource = lazy(PUBLICATION) { computeDelegateSource() }
 
-    override fun getDelegate(receiver1: D, receiver2: E): Any? = getDelegateImpl(delegateSource.value, receiver1, receiver2)
+    override fun getDelegate(receiver1: D, receiver2: E): Any? = getDelegateImpl(delegateSource.konstue, receiver1, receiver2)
 
     override fun invoke(receiver1: D, receiver2: E): V = get(receiver1, receiver2)
 
-    class Getter<D, E, out V>(override val property: KProperty2Impl<D, E, V>) : KPropertyImpl.Getter<V>(), KProperty2.Getter<D, E, V> {
+    class Getter<D, E, out V>(override konst property: KProperty2Impl<D, E, V>) : KPropertyImpl.Getter<V>(), KProperty2.Getter<D, E, V> {
         override fun invoke(receiver1: D, receiver2: E): V = property.get(receiver1, receiver2)
     }
 }
@@ -51,14 +51,14 @@ internal class KMutableProperty2Impl<D, E, V> : KProperty2Impl<D, E, V>, KMutabl
 
     constructor(container: KDeclarationContainerImpl, descriptor: PropertyDescriptor) : super(container, descriptor)
 
-    private val _setter = lazy(PUBLICATION) { Setter(this) }
+    private konst _setter = lazy(PUBLICATION) { Setter(this) }
 
-    override val setter: Setter<D, E, V> get() = _setter.value
+    override konst setter: Setter<D, E, V> get() = _setter.konstue
 
-    override fun set(receiver1: D, receiver2: E, value: V) = setter.call(receiver1, receiver2, value)
+    override fun set(receiver1: D, receiver2: E, konstue: V) = setter.call(receiver1, receiver2, konstue)
 
-    class Setter<D, E, V>(override val property: KMutableProperty2Impl<D, E, V>) : KPropertyImpl.Setter<V>(),
+    class Setter<D, E, V>(override konst property: KMutableProperty2Impl<D, E, V>) : KPropertyImpl.Setter<V>(),
         KMutableProperty2.Setter<D, E, V> {
-        override fun invoke(receiver1: D, receiver2: E, value: V): Unit = property.set(receiver1, receiver2, value)
+        override fun invoke(receiver1: D, receiver2: E, konstue: V): Unit = property.set(receiver1, receiver2, konstue)
     }
 }

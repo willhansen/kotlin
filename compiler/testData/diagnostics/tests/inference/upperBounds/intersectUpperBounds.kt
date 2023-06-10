@@ -17,10 +17,10 @@ fun test(inA: In<A>, inB: In<B>, inC: In<C>) {
 
     foo(inA, inB)
 
-    val r = foo(inA, inC)
+    konst r = foo(inA, inC)
     checkSubtype<C>(r)
 
-    val c: C = foo(inA, inB)
+    konst c: C = foo(inA, inB)
 
     use(c)
 }
@@ -28,7 +28,7 @@ fun test(inA: In<A>, inB: In<B>, inC: In<C>) {
 fun <T: C> bar(in1: In<T>): T = throw Exception("$in1")
 
 fun test(inA: In<A>) {
-    val r = bar(inA)
+    konst r = bar(inA)
     checkSubtype<C>(r)
 }
 

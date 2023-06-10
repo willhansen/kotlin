@@ -9,7 +9,7 @@ package test {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public final val OK: kotlin.Array<(out) kotlin.String!>!
+        public final konst OK: kotlin.Array<(out) kotlin.String!>!
     }
 
     public open class J : test.I {
@@ -19,7 +19,7 @@ package test {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public final override /*1*/ /*fake_override*/ val OK: kotlin.Array<(out) kotlin.String!>!
+        public final override /*1*/ /*fake_override*/ konst OK: kotlin.Array<(out) kotlin.String!>!
     }
 }
 

@@ -31,10 +31,10 @@ import kotlin.io.path.writeText
 @JvmGradlePluginTests
 class BuildCacheIT : KGPBaseTest() {
 
-    override val defaultBuildOptions: BuildOptions =
+    override konst defaultBuildOptions: BuildOptions =
         super.defaultBuildOptions.copy(buildCacheEnabled = true)
 
-    private val localBuildCacheDir get() = workingDir.resolve("custom-jdk-build-cache")
+    private konst localBuildCacheDir get() = workingDir.resolve("custom-jdk-build-cache")
 
     @DisplayName("kotlin.caching.enabled flag should enable caching for Kotlin tasks")
     @GradleTest
@@ -79,9 +79,9 @@ class BuildCacheIT : KGPBaseTest() {
                 assertTasksPackedToCache(":compileKotlin")
             }
 
-            val sourceFile = kotlinSourcesDir().resolve("helloWorld.kt")
-            val originalSource: String = sourceFile.readText()
-            val modifiedSource: String = originalSource.replace(" and ", " + ")
+            konst sourceFile = kotlinSourcesDir().resolve("helloWorld.kt")
+            konst originalSource: String = sourceFile.readText()
+            konst modifiedSource: String = originalSource.replace(" and ", " + ")
             sourceFile.writeText(modifiedSource)
 
             build("assemble") {
@@ -155,7 +155,7 @@ class BuildCacheIT : KGPBaseTest() {
                 assertTasksFromCache(":lib:compileKotlin")
                 assertTasksFromCache(":app:compileKotlin")
             }
-            val bKtSourceFile = projectPath.resolve("lib/src/main/kotlin/bar/B.kt")
+            konst bKtSourceFile = projectPath.resolve("lib/src/main/kotlin/bar/B.kt")
 
             bKtSourceFile.modify { it.replace("fun b() {}", "fun b() {}\nfun b2() {}") }
 
@@ -176,14 +176,14 @@ class BuildCacheIT : KGPBaseTest() {
                 assertTasksFromCache(":lib:compileKotlin")
                 assertTasksFromCache(":app:compileKotlin")
             }
-            val bKtSourceFile = projectPath.resolve("lib/src/main/kotlin/bar/B.kt")
+            konst bKtSourceFile = projectPath.resolve("lib/src/main/kotlin/bar/B.kt")
 
             bKtSourceFile.modify { it.replace("fun b() {}", "fun b() {}\nfun b2) {}") }
 
             buildAndFail("assemble", buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)) {
                 assertTasksFailed(":lib:compileKotlin")
                 assertOutputDoesNotContain("On recompilation full rebuild will be performed")
-                val affectedFiles = setOf(
+                konst affectedFiles = setOf(
                     bKtSourceFile,
                 )
                 assertCompiledKotlinSources(affectedFiles.relativizeTo(projectPath), output)
@@ -192,7 +192,7 @@ class BuildCacheIT : KGPBaseTest() {
             bKtSourceFile.modify { it.replace("fun b2) {}", "fun b2() {}") }
 
             build("assemble", buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)) {
-                val affectedFiles = setOf(
+                konst affectedFiles = setOf(
                     bKtSourceFile,
                     subProject("app").kotlinSourcesDir().resolve("foo/BB.kt"),
                 )

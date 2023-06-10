@@ -2,13 +2,13 @@ fun call(f: () -> Unit) {
     f()
 }
 
-enum class E(val f: () -> String) {
+enum class E(konst f: () -> String) {
     A({
-          var value = "Fail"
+          var konstue = "Fail"
           call {
-              value = "OK"
+              konstue = "OK"
           }
-          value
+          konstue
     })
 }
 

@@ -23,7 +23,7 @@ class A : I {
     }
 }
 
-class B(val x: I) : I by x
+class B(konst x: I) : I by x
 
 fun box(): String {
     suspend {

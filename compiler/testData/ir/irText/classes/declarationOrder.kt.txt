@@ -17,11 +17,11 @@ class A {
   fun a() {
   }
 
-  val b: Int
+  konst b: Int
     field = 1
     get
 
-  val a: Int
+  konst a: Int
     field = 2
     get
 
@@ -29,7 +29,7 @@ class A {
     this/*A*/()
   }
 
-  val Int.b: String
+  konst Int.b: String
     get(): String {
       return "b"
     }
@@ -37,7 +37,7 @@ class A {
   fun String.b() {
   }
 
-  val Int.a: String
+  konst Int.a: String
     get(): String {
       return "a"
     }

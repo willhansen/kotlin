@@ -27,10 +27,10 @@ interface K {
 }
 
 fun box(): String {
-    val p = J::foo
+    konst p = J::foo
     assertEquals("foo", p.name)
 
-    val j = J()
+    konst j = J()
     p.set(j, "OK")
     return p.get(j)
 }

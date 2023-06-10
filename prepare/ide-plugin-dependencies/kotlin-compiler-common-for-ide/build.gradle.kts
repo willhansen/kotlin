@@ -2,15 +2,15 @@ plugins {
     kotlin("jvm")
 }
 
-val commonCompilerModules: Array<String> by rootProject.extra
+konst commonCompilerModules: Array<String> by rootProject.extra
 
-val excludedCompilerModules = listOf(
+konst excludedCompilerModules = listOf(
     ":compiler:cli",
     ":compiler:javac-wrapper",
     ":compiler:incremental-compilation-impl"
 )
 
-val projects = commonCompilerModules.asList() - excludedCompilerModules + listOf(
+konst projects = commonCompilerModules.asList() - excludedCompilerModules + listOf(
     ":kotlin-compiler-runner-unshaded",
     ":kotlin-preloader",
     ":daemon-common",

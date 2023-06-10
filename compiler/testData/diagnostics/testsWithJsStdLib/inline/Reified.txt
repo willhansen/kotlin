@@ -1,6 +1,6 @@
 package
 
-public val </*0*/ reified T> T.v: T
+public konst </*0*/ reified T> T.v: T
 public fun </*0*/ reified T> bar(): kotlin.Unit
 
 public final class C</*0*/ reified T> {

@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.ir2cfg.graph.BasicBlock
 import org.jetbrains.kotlin.ir2cfg.graph.BlockConnector
 
 class JoinBlockConnector(
-        override val previousBlocks: List<BasicBlock>,
-        override val element: IrStatement,
+        override konst previousBlocks: List<BasicBlock>,
+        override konst element: IrStatement,
         next: BasicBlock?
 ) : BlockConnector {
 
-    override val nextBlocks = listOfNotNull(next)
+    override konst nextBlocks = listOfNotNull(next)
 }

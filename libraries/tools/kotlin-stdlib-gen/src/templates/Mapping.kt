@@ -11,7 +11,7 @@ import templates.SequenceClass.*
 object Mapping : TemplateGroupBase() {
 
     init {
-        val terminalOperationPattern = Regex("^\\w+To")
+        konst terminalOperationPattern = Regex("^\\w+To")
         defaultBuilder {
             if (sequenceClassification.isEmpty()) {
                 if (terminalOperationPattern in signature)
@@ -26,7 +26,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_withIndex = fn("withIndex()") {
+    konst f_withIndex = fn("withIndex()") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -47,7 +47,7 @@ object Mapping : TemplateGroupBase() {
         body(Sequences) { """return IndexingSequence(this)""" }
     }
 
-    val f_mapIndexed = fn("mapIndexed(transform: (index: Int, T) -> R)") {
+    konst f_mapIndexed = fn("mapIndexed(transform: (index: Int, T) -> R)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -82,7 +82,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_map = fn("map(transform: (T) -> R)") {
+    konst f_map = fn("map(transform: (T) -> R)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -129,7 +129,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_mapNotNull = fn("mapNotNull(transform: (T) -> R?)") {
+    konst f_mapNotNull = fn("mapNotNull(transform: (T) -> R?)") {
         include(Iterables, ArraysOfObjects, Sequences, Maps, CharSequences)
     } builder {
         inline()
@@ -162,7 +162,7 @@ object Mapping : TemplateGroupBase() {
 
     }
 
-    val f_mapIndexedNotNull = fn("mapIndexedNotNull(transform: (index: Int, T) -> R?)") {
+    konst f_mapIndexedNotNull = fn("mapIndexedNotNull(transform: (index: Int, T) -> R?)") {
         include(Iterables, ArraysOfObjects, Sequences, CharSequences)
     } builder {
         inline()
@@ -189,7 +189,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_mapTo = fn("mapTo(destination: C, transform: (T) -> R)") {
+    konst f_mapTo = fn("mapTo(destination: C, transform: (T) -> R)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -215,7 +215,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_mapIndexedTo = fn("mapIndexedTo(destination: C, transform: (index: Int, T) -> R)") {
+    konst f_mapIndexedTo = fn("mapIndexedTo(destination: C, transform: (index: Int, T) -> R)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -235,7 +235,7 @@ object Mapping : TemplateGroupBase() {
         returns("C")
 
         body {
-            fun checkOverflow(value: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($value)" else value
+            fun checkOverflow(konstue: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($konstue)" else konstue
             """
             var index = 0
             for (item in this)
@@ -245,7 +245,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_mapNotNullTo = fn("mapNotNullTo(destination: C, transform: (T) -> R?)") {
+    konst f_mapNotNullTo = fn("mapNotNullTo(destination: C, transform: (T) -> R?)") {
         include(Iterables, ArraysOfObjects, Sequences, Maps, CharSequences)
     } builder {
         inline()
@@ -266,7 +266,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_mapIndexedNotNullTo = fn("mapIndexedNotNullTo(destination: C, transform: (index: Int, T) -> R?)") {
+    konst f_mapIndexedNotNullTo = fn("mapIndexedNotNullTo(destination: C, transform: (index: Int, T) -> R?)") {
         include(Iterables, ArraysOfObjects, Sequences, CharSequences)
     } builder {
         inline()
@@ -289,7 +289,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_flatMap = fn("flatMap(transform: (T) -> Iterable<R>)") {
+    konst f_flatMap = fn("flatMap(transform: (T) -> Iterable<R>)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -323,7 +323,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_flatMapSequence = fn("flatMap(transform: (T) -> Sequence<R>)") {
+    konst f_flatMapSequence = fn("flatMap(transform: (T) -> Sequence<R>)") {
         include(Sequences, Iterables, ArraysOfObjects, Maps)
     } builder {
         inline()
@@ -350,7 +350,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_flatMapTo = fn("flatMapTo(destination: C, transform: (T) -> Iterable<R>)") {
+    konst f_flatMapTo = fn("flatMapTo(destination: C, transform: (T) -> Iterable<R>)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -370,7 +370,7 @@ object Mapping : TemplateGroupBase() {
         body {
             """
             for (element in this) {
-                val list = transform(element)
+                konst list = transform(element)
                 destination.addAll(list)
             }
             return destination
@@ -378,7 +378,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_flatMapToSequence = fn("flatMapTo(destination: C, transform: (T) -> Sequence<R>)") {
+    konst f_flatMapToSequence = fn("flatMapTo(destination: C, transform: (T) -> Sequence<R>)") {
         include(Sequences, Iterables, ArraysOfObjects, Maps)
     } builder {
         inline()
@@ -395,7 +395,7 @@ object Mapping : TemplateGroupBase() {
         body {
             """
             for (element in this) {
-                val list = transform(element)
+                konst list = transform(element)
                 destination.addAll(list)
             }
             return destination
@@ -403,8 +403,8 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_flatMapIndexed = listOf(Iterables, Sequences).map { containerFamily ->
-        val containerClass = containerFamily.name.dropLast(1)
+    konst f_flatMapIndexed = listOf(Iterables, Sequences).map { containerFamily ->
+        konst containerClass = containerFamily.name.dropLast(1)
         fn("flatMapIndexed(transform: (index: Int, T) -> $containerClass<R>)") {
             when (containerFamily) {
                 Iterables -> include(Iterables, Sequences, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned, CharSequences)
@@ -442,8 +442,8 @@ object Mapping : TemplateGroupBase() {
     }
 
 
-    val f_flatMapIndexedTo = listOf(Iterables, Sequences).map { containerFamily ->
-        val containerClass = containerFamily.name.dropLast(1)
+    konst f_flatMapIndexedTo = listOf(Iterables, Sequences).map { containerFamily ->
+        konst containerClass = containerFamily.name.dropLast(1)
         fn("flatMapIndexedTo(destination: C, transform: (index: Int, T) -> $containerClass<R>)") {
             when (containerFamily) {
                 Iterables -> include(Iterables, Sequences, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned, CharSequences)
@@ -468,11 +468,11 @@ object Mapping : TemplateGroupBase() {
             typeParam("C : MutableCollection<in R>")
             returns("C")
             body {
-                fun checkOverflow(value: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($value)" else value
+                fun checkOverflow(konstue: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($konstue)" else konstue
                 """
                 var index = 0
                 for (element in this) {
-                    val list = transform(${checkOverflow("index++")}, element)
+                    konst list = transform(${checkOverflow("index++")}, element)
                     destination.addAll(list)
                 }
                 return destination
@@ -481,7 +481,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_groupBy_key = fn("groupBy(keySelector: (T) -> K)") {
+    konst f_groupBy_key = fn("groupBy(keySelector: (T) -> K)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -503,7 +503,7 @@ object Mapping : TemplateGroupBase() {
         body { "return groupByTo(LinkedHashMap<K, MutableList<T>>(), keySelector)" }
     }
 
-    val f_groupByTo_key = fn("groupByTo(destination: M, keySelector: (T) -> K)") {
+    konst f_groupByTo_key = fn("groupByTo(destination: M, keySelector: (T) -> K)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -526,8 +526,8 @@ object Mapping : TemplateGroupBase() {
         body {
             """
             for (element in this) {
-                val key = keySelector(element)
-                val list = destination.getOrPut(key) { ArrayList<T>() }
+                konst key = keySelector(element)
+                konst list = destination.getOrPut(key) { ArrayList<T>() }
                 list.add(element)
             }
             return destination
@@ -535,7 +535,7 @@ object Mapping : TemplateGroupBase() {
         }
     }
 
-    val f_groupBy_key_value = fn("groupBy(keySelector: (T) -> K, valueTransform: (T) -> V)") {
+    konst f_groupBy_key_konstue = fn("groupBy(keySelector: (T) -> K, konstueTransform: (T) -> V)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -544,9 +544,9 @@ object Mapping : TemplateGroupBase() {
 
         doc {
             """
-            Groups values returned by the [valueTransform] function applied to each ${f.element} of the original ${f.collection}
+            Groups konstues returned by the [konstueTransform] function applied to each ${f.element} of the original ${f.collection}
             by the key returned by the given [keySelector] function applied to the ${f.element}
-            and returns a map where each group key is associated with a list of corresponding values.
+            and returns a map where each group key is associated with a list of corresponding konstues.
 
             The returned map preserves the entry iteration order of the keys produced from the original ${f.collection}.
             """
@@ -556,11 +556,11 @@ object Mapping : TemplateGroupBase() {
         typeParam("K")
         typeParam("V")
         returns("Map<K, List<V>>")
-        body { "return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, valueTransform)" }
+        body { "return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, konstueTransform)" }
     }
 
 
-    val f_groupByTo_key_value = fn("groupByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V)") {
+    konst f_groupByTo_key_konstue = fn("groupByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -573,9 +573,9 @@ object Mapping : TemplateGroupBase() {
 
         doc {
             """
-            Groups values returned by the [valueTransform] function applied to each ${f.element} of the original ${f.collection}
+            Groups konstues returned by the [konstueTransform] function applied to each ${f.element} of the original ${f.collection}
             by the key returned by the given [keySelector] function applied to the ${f.element}
-            and puts to the [destination] map each group key associated with a list of corresponding values.
+            and puts to the [destination] map each group key associated with a list of corresponding konstues.
 
             @return The [destination] map.
             """
@@ -586,16 +586,16 @@ object Mapping : TemplateGroupBase() {
         body {
             """
             for (element in this) {
-                val key = keySelector(element)
-                val list = destination.getOrPut(key) { ArrayList<V>() }
-                list.add(valueTransform(element))
+                konst key = keySelector(element)
+                konst list = destination.getOrPut(key) { ArrayList<V>() }
+                list.add(konstueTransform(element))
             }
             return destination
             """
         }
     }
 
-    val f_groupingBy = fn("groupingBy(crossinline keySelector: (T) -> K)") {
+    konst f_groupingBy = fn("groupingBy(crossinline keySelector: (T) -> K)") {
         include(Iterables, Sequences, ArraysOfObjects, CharSequences)
     } builder {
         since("1.1")

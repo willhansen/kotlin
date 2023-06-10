@@ -28,8 +28,8 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes.CLASS_BODY
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes.MODIFIER_LIST
 
 class KtClassBody : KtElementImplStub<KotlinPlaceHolderStub<KtClassBody>>, KtDeclarationContainer {
-    private val lBraceTokenSet = TokenSet.create(KtTokens.LBRACE)
-    private val rBraceTokenSet = TokenSet.create(KtTokens.RBRACE)
+    private konst lBraceTokenSet = TokenSet.create(KtTokens.LBRACE)
+    private konst rBraceTokenSet = TokenSet.create(KtTokens.RBRACE)
 
     constructor(node: ASTNode) : super(node)
 
@@ -42,39 +42,39 @@ class KtClassBody : KtElementImplStub<KotlinPlaceHolderStub<KtClassBody>>, KtDec
 
     override fun <R, D> accept(visitor: KtVisitor<R, D>, data: D) = visitor.visitClassBody(this, data)
 
-    val anonymousInitializers: List<KtAnonymousInitializer>
+    konst anonymousInitializers: List<KtAnonymousInitializer>
         get() = findChildrenByType(KtNodeTypes.CLASS_INITIALIZER)
 
-    internal val secondaryConstructors: List<KtSecondaryConstructor>
+    internal konst secondaryConstructors: List<KtSecondaryConstructor>
         get() = getStubOrPsiChildrenAsList(KtStubElementTypes.SECONDARY_CONSTRUCTOR)
 
-    val properties: List<KtProperty>
+    konst properties: List<KtProperty>
         get() = getStubOrPsiChildrenAsList(KtStubElementTypes.PROPERTY)
 
-    val functions: List<KtNamedFunction>
+    konst functions: List<KtNamedFunction>
         get() = getStubOrPsiChildrenAsList(KtStubElementTypes.FUNCTION)
 
-    val enumEntries: List<KtEnumEntry>
+    konst enumEntries: List<KtEnumEntry>
         get() = getStubOrPsiChildrenAsList(KtStubElementTypes.ENUM_ENTRY).filterIsInstance<KtEnumEntry>()
 
-    val allCompanionObjects: List<KtObjectDeclaration>
+    konst allCompanionObjects: List<KtObjectDeclaration>
         get() = getStubOrPsiChildrenAsList(KtStubElementTypes.OBJECT_DECLARATION).filter { it.isCompanion() }
 
-    val rBrace: PsiElement?
+    konst rBrace: PsiElement?
         get() = node.getChildren(rBraceTokenSet).singleOrNull()?.psi
 
-    val lBrace: PsiElement?
+    konst lBrace: PsiElement?
         get() = node.getChildren(lBraceTokenSet).singleOrNull()?.psi
 
     /**
      * @return annotations that do not belong to any declaration due to incomplete code or syntax errors
      */
-    val danglingAnnotations: List<KtAnnotationEntry>
+    konst danglingAnnotations: List<KtAnnotationEntry>
         get() = danglingModifierLists.flatMap { it.annotationEntries }
 
     /**
      * @return modifier lists that do not belong to any declaration due to incomplete code or syntax errors
      */
-    val danglingModifierLists: List<KtModifierList>
+    konst danglingModifierLists: List<KtModifierList>
         get() = getStubOrPsiChildrenAsList(MODIFIER_LIST)
 }

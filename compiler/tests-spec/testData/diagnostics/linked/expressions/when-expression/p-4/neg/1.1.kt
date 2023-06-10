@@ -23,8 +23,8 @@ enum JavaEnum {
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val z = JavaEnum.Val_1
-    val when2 = <!NO_ELSE_IN_WHEN!>when<!> (z) {
+    konst z = JavaEnum.Val_1
+    konst when2 = <!NO_ELSE_IN_WHEN!>when<!> (z) {
         JavaEnum.Val_1 -> { }
         <!DUPLICATE_LABEL_IN_WHEN!>JavaEnum.Val_1<!> -> { }
     }
@@ -34,8 +34,8 @@ fun case1() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val b = false
-    val when2: Any = <!NO_ELSE_IN_WHEN!>when<!> (b) {
+    konst b = false
+    konst when2: Any = <!NO_ELSE_IN_WHEN!>when<!> (b) {
         false -> { }
         <!DUPLICATE_LABEL_IN_WHEN!>false<!> -> { }
     }
@@ -44,8 +44,8 @@ fun case2() {
 // TESTCASE NUMBER: 3
 
 fun case3() {
-    val a = false
-    val when2: Any = <!NO_ELSE_IN_WHEN!>when<!> (a) {
+    konst a = false
+    konst when2: Any = <!NO_ELSE_IN_WHEN!>when<!> (a) {
         true -> { }
         <!DUPLICATE_LABEL_IN_WHEN!>true<!> -> { }
     }
@@ -54,8 +54,8 @@ fun case3() {
 // TESTCASE NUMBER: 4
 
 fun case4() {
-    val x: SClass = SClass.B()
-    val when2 = <!NO_ELSE_IN_WHEN!>when<!> (x){
+    konst x: SClass = SClass.B()
+    konst when2 = <!NO_ELSE_IN_WHEN!>when<!> (x){
         is  SClass.A ->{ }
         is  SClass.B ->{ }
         is  <!DUPLICATE_LABEL_IN_WHEN!>SClass.B<!> ->{ }
@@ -71,18 +71,18 @@ sealed class SClass {
 // TESTCASE NUMBER: 5
 
 fun case5() {
-    val b = false
-    val when1: Any = when (b) {
+    konst b = false
+    konst when1: Any = when (b) {
         false -> { }
         !false -> { }
             else -> { }
     }
 
-    val when2: Any = <!NO_ELSE_IN_WHEN!>when<!> (b) {
+    konst when2: Any = <!NO_ELSE_IN_WHEN!>when<!> (b) {
         false -> { }
         !false -> { }
     }
-    val when3: Any = <!NO_ELSE_IN_WHEN!>when<!> (b) {
+    konst when3: Any = <!NO_ELSE_IN_WHEN!>when<!> (b) {
         false -> { }
             <!DUPLICATE_LABEL_IN_WHEN!>false<!> -> { }
         !false -> { }

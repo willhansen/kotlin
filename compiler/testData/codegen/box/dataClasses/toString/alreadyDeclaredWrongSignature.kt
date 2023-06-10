@@ -2,11 +2,11 @@
 
 // WITH_STDLIB
 
-data class A(val x: Int) {
+data class A(konst x: Int) {
   fun toString(other: Any): String = ""
 }
 
-data class B(val x: Int) {
+data class B(konst x: Int) {
   fun toString(other: B, another: Any): String = ""
 }
 

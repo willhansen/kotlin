@@ -52,7 +52,7 @@ abstract class AbstractRawFirBuilderTestCase : KtParsingTestCase(
     override fun getTestDataPath() = KtTestUtil.getHomeDirectory()
 
     private fun createFile(filePath: String, fileType: IElementType): PsiFile {
-        val psiFactory = KtPsiFactory(myProject)
+        konst psiFactory = KtPsiFactory(myProject)
         return when (fileType) {
             KtNodeTypes.EXPRESSION_CODE_FRAGMENT ->
                 psiFactory.createExpressionCodeFragment(loadFile(filePath), null)
@@ -64,10 +64,10 @@ abstract class AbstractRawFirBuilderTestCase : KtParsingTestCase(
     }
 
     protected open fun doRawFirTest(filePath: String) {
-        val file = createKtFile(filePath)
-        val firFile = file.toFirFile(BodyBuildingMode.NORMAL)
-        val firFileDump = FirRenderer.withDeclarationAttributes().renderElementAsString(firFile)
-        val expectedPath = filePath.replace(".kt", ".txt")
+        konst file = createKtFile(filePath)
+        konst firFile = file.toFirFile(BodyBuildingMode.NORMAL)
+        konst firFileDump = FirRenderer.withDeclarationAttributes().renderElementAsString(firFile)
+        konst expectedPath = filePath.replace(".kt", ".txt")
         KotlinTestUtils.assertEqualsToFile(File(expectedPath), firFileDump)
     }
 
@@ -79,7 +79,7 @@ abstract class AbstractRawFirBuilderTestCase : KtParsingTestCase(
     }
 
     protected fun KtFile.toFirFile(bodyBuildingMode: BodyBuildingMode = BodyBuildingMode.NORMAL): FirFile {
-        val session = FirSessionFactoryHelper.createEmptySession()
+        konst session = FirSessionFactoryHelper.createEmptySession()
         return RawFirBuilder(
             session,
             StubFirScopeProvider,
@@ -94,7 +94,7 @@ abstract class AbstractRawFirBuilderTestCase : KtParsingTestCase(
         for (property in this::class.memberProperties) {
             if (hasNoAcceptAndTransform(this::class.simpleName, property.name)) continue
 
-            when (val childElement = property.getter.apply { isAccessible = true }.call(this)) {
+            when (konst childElement = property.getter.apply { isAccessible = true }.call(this)) {
                 is FirNoReceiverExpression -> continue
                 is FirElement -> childElement.traverseChildren(result)
                 is List<*> -> childElement.filterIsInstance<FirElement>().forEach { it.traverseChildren(result) }
@@ -105,7 +105,7 @@ abstract class AbstractRawFirBuilderTestCase : KtParsingTestCase(
         return result
     }
 
-    private val firImplClassPropertiesWithNoAcceptAndTransform = mapOf(
+    private konst firImplClassPropertiesWithNoAcceptAndTransform = mapOf(
         "FirResolvedImportImpl" to "delegate",
         "FirErrorTypeRefImpl" to "delegatedTypeRef",
         "FirResolvedTypeRefImpl" to "delegatedTypeRef"
@@ -117,62 +117,62 @@ abstract class AbstractRawFirBuilderTestCase : KtParsingTestCase(
     }
 
     private fun FirFile.visitChildren(): Set<FirElement> {
-        val result = HashSet<FirElement>()
-        val processor = ConsistencyProcessor(result)
+        konst result = HashSet<FirElement>()
+        konst processor = ConsistencyProcessor(result)
         accept(ConsistencyVisitor(processor))
         return result
     }
 
     private fun FirFile.transformChildren(): Set<FirElement> {
-        val result = HashSet<FirElement>()
-        val processor = ConsistencyProcessor(result)
+        konst result = HashSet<FirElement>()
+        konst processor = ConsistencyProcessor(result)
         transform<FirFile, Unit>(ConsistencyTransformer(processor), Unit)
         return result
     }
 
     protected fun FirFile.checkChildren() {
-        val children = traverseChildren()
-        val visitedChildren = visitChildren()
+        konst children = traverseChildren()
+        konst visitedChildren = visitChildren()
         children.removeAll(visitedChildren)
         if (children.isNotEmpty()) {
-            val element = children.firstOrNull { it !is FirAnnotationArgumentMapping } ?: return
-            val elementDump = element.render()
+            konst element = children.firstOrNull { it !is FirAnnotationArgumentMapping } ?: return
+            konst elementDump = element.render()
             throw AssertionError("FirElement ${element.javaClass} is not visited: $elementDump")
         }
     }
 
     protected fun FirFile.checkTransformedChildren() {
-        val children = traverseChildren()
-        val transformedChildren = transformChildren()
+        konst children = traverseChildren()
+        konst transformedChildren = transformChildren()
         children.removeAll(transformedChildren)
         if (children.isNotEmpty()) {
-            val element = children.firstOrNull { it !is FirAnnotationArgumentMapping } ?: return
-            val elementDump = element.render()
+            konst element = children.firstOrNull { it !is FirAnnotationArgumentMapping } ?: return
+            konst elementDump = element.render()
             throw AssertionError("FirElement ${element.javaClass} is not transformed: $elementDump")
         }
     }
 
-    private class ConsistencyVisitor(private val processor: ConsistencyProcessor) : FirVisitorVoid() {
+    private class ConsistencyVisitor(private konst processor: ConsistencyProcessor) : FirVisitorVoid() {
         override fun visitElement(element: FirElement) {
             processor.process(element) { it.acceptChildren(this@ConsistencyVisitor) }
         }
     }
 
-    private class ConsistencyTransformer(private val processor: ConsistencyProcessor) : FirTransformer<Unit>() {
+    private class ConsistencyTransformer(private konst processor: ConsistencyProcessor) : FirTransformer<Unit>() {
         override fun <E : FirElement> transformElement(element: E, data: Unit): E {
             processor.process(element) { it.transformChildren(this@ConsistencyTransformer, Unit) }
             return element
         }
     }
 
-    private class ConsistencyProcessor(private val result: MutableSet<FirElement>) {
+    private class ConsistencyProcessor(private konst result: MutableSet<FirElement>) {
         private var parent: FirElement? = null
 
         fun process(element: FirElement, processChildren: (FirElement) -> Unit) {
             if (!result.add(element)) {
                 throwTwiceVisitingError(element, parent)
             } else {
-                val oldParent = parent
+                konst oldParent = parent
                 try {
                     parent = element
                     processChildren(element)
@@ -195,14 +195,14 @@ private fun throwTwiceVisitingError(element: FirElement, parent: FirElement?) {
         return
     }
     if (element is FirExpression) {
-        val psiParent = element.source?.psi?.parent
+        konst psiParent = element.source?.psi?.parent
         if (psiParent is KtPropertyDelegate || psiParent?.parent is KtPropertyDelegate) return
     }
 
-    val elementDump = FirRenderer().renderElementAsString(element)
+    konst elementDump = FirRenderer().renderElementAsString(element)
     throw AssertionError("FirElement ${element.javaClass} is visited twice: $elementDump")
 }
 
 
-private val FirElement.isExtensionFunctionAnnotation: Boolean
+private konst FirElement.isExtensionFunctionAnnotation: Boolean
     get() = (this as? FirAnnotation)?.isExtensionFunctionAnnotationCall == true

@@ -6,5 +6,5 @@
 package org.jetbrains.kotlin.utils
 
 @OptIn(ExperimentalStdlibApi::class)
-val String.capitalized: String
+konst String.capitalized: String
     get() = replaceFirstChar { it.uppercase() }

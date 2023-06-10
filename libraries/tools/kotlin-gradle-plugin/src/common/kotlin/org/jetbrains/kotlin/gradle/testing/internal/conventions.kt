@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 import org.jetbrains.kotlin.gradle.utils.isGradleVersionAtLeast
 import java.io.File
 
-internal val Project.testResultsDir: File
+internal konst Project.testResultsDir: File
     get() = project.buildDir.resolve(TestingBasePlugin.TEST_RESULTS_DIR_NAME)
-internal val Project.reportsDir: File
+internal konst Project.reportsDir: File
     get() = project.extensions.getByType(ReportingExtension::class.java).baseDir
 
-internal val Project.testReportsDir: File
+internal konst Project.testReportsDir: File
     get() = reportsDir.resolve(TestingBasePlugin.TESTS_DIR_NAME)
 
 internal fun KotlinTest.configureConventions() {
@@ -32,8 +32,8 @@ internal fun KotlinTest.configureConventions() {
 }
 
 internal fun TestTaskReports.configureConventions(project: Project, name: String) {
-    val htmlReport = DslObject(html)
-    val xmlReport = DslObject(junitXml)
+    konst htmlReport = DslObject(html)
+    konst xmlReport = DslObject(junitXml)
 
     xmlReport.conventionMapping.map("destination") { project.testResultsDir.resolve(name) }
     htmlReport.conventionMapping.map("destination") { project.testReportsDir.resolve(name) }

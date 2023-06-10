@@ -1,41 +1,41 @@
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.VALUE_PARAMETER, kotlin.annotation.AnnotationTarget.TYPE})
 public abstract @interface A0 /* A0*/ {
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.VALUE_PARAMETER, kotlin.annotation.AnnotationTarget.TYPE})
 public abstract @interface A1 /* A1*/ {
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.VALUE_PARAMETER, kotlin.annotation.AnnotationTarget.TYPE})
 public abstract @interface A2 /* A2*/ {
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.VALUE_PARAMETER, kotlin.annotation.AnnotationTarget.TYPE})
 public abstract @interface A3 /* A3*/ {
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.VALUE_PARAMETER, kotlin.annotation.AnnotationTarget.TYPE})
 public abstract @interface A4 /* A4*/ {
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.VALUE_PARAMETER, kotlin.annotation.AnnotationTarget.TYPE})
 public abstract @interface A5 /* A5*/ {
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE})
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.VALUE_PARAMETER, kotlin.annotation.AnnotationTarget.TYPE})
 public abstract @interface A6 /* A6*/ {
 }

@@ -6,12 +6,12 @@ FILE fqName:<root> fileName:/propertiesWithAnnotations.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:TestAnn modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.String declared in <root>.TestAnn.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.TestAnn) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.TestAnn
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.String declared in <root>.TestAnn'
@@ -30,14 +30,14 @@ FILE fqName:<root> fileName:/propertiesWithAnnotations.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Annotation
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-  PROPERTY name:testVal visibility:public modality:FINAL [val]
+  PROPERTY name:testVal visibility:public modality:FINAL [konst]
     annotations:
       TestAnn(x = 'testVal.property')
     FIELD PROPERTY_BACKING_FIELD name:testVal type:kotlin.String visibility:private [final,static]
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-testVal> visibility:public modality:FINAL <> () returnType:kotlin.String
-      correspondingProperty: PROPERTY name:testVal visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:testVal visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-testVal> (): kotlin.String declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:testVal type:kotlin.String visibility:private [final,static]' type=kotlin.String origin=null

@@ -14,7 +14,7 @@
 import java.util.stream.*
 
 fun box(): String {
-    val xs = IntStream.of(1, 1, 4, 5, 1, 4)
+    konst xs = IntStream.of(1, 1, 4, 5, 1, 4)
         .map { a: Int -> a + 1 }
         .map { a: Int -> a - 1 }
         .filter { a: Int -> a > 3 }

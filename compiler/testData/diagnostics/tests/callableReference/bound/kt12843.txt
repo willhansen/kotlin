@@ -1,6 +1,6 @@
 package
 
-public val f: () -> kotlin.Unit
+public konst f: () -> kotlin.Unit
 
 public final class Foo {
     public constructor Foo()

@@ -13,13 +13,13 @@ import kotlin.random.Random
 import kotlin.test.*
 
 class PathExtensionsTest : AbstractPathTest() {
-    private val isCaseInsensitiveFileSystem = Path("C:/") == Path("c:/")
-    private val isBackslashSeparator = FileSystems.getDefault().separator == "\\"
+    private konst isCaseInsensitiveFileSystem = Path("C:/") == Path("c:/")
+    private konst isBackslashSeparator = FileSystems.getDefault().separator == "\\"
 
     @Test
     fun filenameComponents() {
         fun check(path: String, name: String, nameNoExt: String, extension: String) {
-            val p = Path(path)
+            konst p = Path(path)
             assertEquals(name, p.name, "name")
             assertEquals(nameNoExt, p.nameWithoutExtension, "nameWithoutExtension")
             assertEquals(extension, p.extension, "extension")
@@ -37,18 +37,18 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun invariantSeparators() {
-        val path = Path("base") / "nested" / "leaf"
+        konst path = Path("base") / "nested" / "leaf"
         assertEquals("base/nested/leaf", path.invariantSeparatorsPathString)
 
-        val path2 = Path("base", "nested", "terminal")
+        konst path2 = Path("base", "nested", "terminal")
         assertEquals("base/nested/terminal", path2.invariantSeparatorsPathString)
     }
 
     @Test
     fun createNewFile() {
-        val dir = createTempDirectory().cleanupRecursively()
+        konst dir = createTempDirectory().cleanupRecursively()
 
-        val file = dir / "new-file"
+        konst file = dir / "new-file"
 
         assertTrue(file.notExists())
 
@@ -61,14 +61,14 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun createParentDirectories() {
-        val dir = createTempDirectory().cleanupRecursively()
-        val file = dir / "test-dir" / "sub-dir" / "new-file"
-        val parent = file.parent!!
+        konst dir = createTempDirectory().cleanupRecursively()
+        konst file = dir / "test-dir" / "sub-dir" / "new-file"
+        konst parent = file.parent!!
 
         assertTrue(file.notExists())
         assertTrue(parent.notExists())
 
-        val result = file.createParentDirectories()
+        konst result = file.createParentDirectories()
         assertTrue(file.notExists())
         assertTrue(parent.isDirectory())
         assertEquals(file, result)
@@ -82,14 +82,14 @@ class PathExtensionsTest : AbstractPathTest() {
     @Test
     fun createParentDirectoriesRelativePath() {
         run {
-            val path = Path("test_path_without_parent")
+            konst path = Path("test_path_without_parent")
             path.createParentDirectories()
             assertTrue(path.toAbsolutePath().parent!!.isDirectory())
         }
 
         run {
-            val path = Path("build/test_subdirectory/test_path")
-            val parent = path.parent!!
+            konst path = Path("build/test_subdirectory/test_path")
+            konst parent = path.parent!!
             assertTrue(parent.notExists())
             parent.cleanupRecursively()
             path.createParentDirectories()
@@ -100,27 +100,27 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun createParentDirectoriesOverExistingSymlink() {
-        val root = createTempDirectory("createParent-root").cleanupRecursively()
-        val dir = (root / "dir").createDirectory()
-        val link = (root / "link").tryCreateSymbolicLinkTo(dir) ?: return
-        val file = (link / "file")
+        konst root = createTempDirectory("createParent-root").cleanupRecursively()
+        konst dir = (root / "dir").createDirectory()
+        konst link = (root / "link").tryCreateSymbolicLinkTo(dir) ?: return
+        konst file = (link / "file")
         file.createParentDirectories().writeText("txt")
         assertTrue((dir / "file").isRegularFile())
     }
 
     @Test
     fun createTempFileDefaultDir() {
-        val file1 = createTempFile().cleanup()
-        val file2 = createTempFile(directory = null).cleanup()
+        konst file1 = createTempFile().cleanup()
+        konst file2 = createTempFile(directory = null).cleanup()
 
         assertEquals(file1.parent, file2.parent)
     }
 
     @Test
     fun createTempDirectoryDefaultDir() {
-        val dir1 = createTempDirectory().cleanup()
-        val dir2 = createTempDirectory(directory = null).cleanupRecursively()
-        val dir3 = createTempDirectory(dir2)
+        konst dir1 = createTempDirectory().cleanup()
+        konst dir2 = createTempDirectory(directory = null).cleanupRecursively()
+        konst dir3 = createTempDirectory(dir2)
 
         assertEquals(dir1.parent, dir2.parent)
         assertNotEquals(dir2.parent, dir3.parent)
@@ -128,9 +128,9 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun copyTo() {
-        val root = createTempDirectory("copyTo-root").cleanupRecursively()
-        val srcFile = createTempFile(root, "src")
-        val dstFile = createTempFile(root, "dst")
+        konst root = createTempDirectory("copyTo-root").cleanupRecursively()
+        konst srcFile = createTempFile(root, "src")
+        konst dstFile = createTempFile(root, "dst")
 
         srcFile.writeText("Hello, World!")
         assertFailsWith<FileAlreadyExistsException>("copy do not overwrite existing file") {
@@ -149,14 +149,14 @@ class PathExtensionsTest : AbstractPathTest() {
         dst = srcFile.copyTo(dstFile)
         compareFiles(srcFile, dst, "copy to new file")
 
-        val subDst = dstFile.resolve("foo/bar")
+        konst subDst = dstFile.resolve("foo/bar")
         assertFailsWith<FileSystemException> { srcFile.copyTo(subDst) }
         assertFailsWith<FileSystemException> { srcFile.copyTo(subDst, overwrite = true) }
         assertTrue(dstFile.deleteIfExists())
         assertFailsWith<FileSystemException> { srcFile.copyTo(subDst) }
 
         dstFile.createDirectory()
-        val child = dstFile.resolve("child").createFile()
+        konst child = dstFile.resolve("child").createFile()
         assertFailsWith<DirectoryNotEmptyException>("copy with overwrite do not overwrite non-empty dir") {
             srcFile.copyTo(dstFile, overwrite = true)
         }
@@ -198,19 +198,19 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun copyToRestrictedReadSource() {
-        val root = createTempDirectory("copyTo-root").cleanupRecursively()
+        konst root = createTempDirectory("copyTo-root").cleanupRecursively()
 
         // copy file
-        val srcFile = createTempFile(root, "srcFile")
-        val dstFile = root.resolve("dstFile")
+        konst srcFile = createTempFile(root, "srcFile")
+        konst dstFile = root.resolve("dstFile")
 
         withRestrictedRead(srcFile, alsoReset = listOf(dstFile)) {
             assertFailsWith<AccessDeniedException> { srcFile.copyTo(dstFile) } // fails to copy restricted file
         }
 
         // copy directory
-        val srcDirectory = createTempDirectory(root, "srcDirectory")
-        val dstDirectory = root.resolve("dstDirectory")
+        konst srcDirectory = createTempDirectory(root, "srcDirectory")
+        konst dstDirectory = root.resolve("dstDirectory")
 
         withRestrictedRead(srcDirectory, alsoReset = listOf(dstDirectory)) {
             srcDirectory.copyTo(dstDirectory) // successfully copies restricted directory
@@ -220,11 +220,11 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun copyToRestrictedWriteDestination() {
-        val root = createTempDirectory("copyTo-root").cleanupRecursively()
+        konst root = createTempDirectory("copyTo-root").cleanupRecursively()
 
         // copy file
-        val srcFile = createTempFile(root, "srcFile")
-        val dstFile = createTempFile(root, "dstFile")
+        konst srcFile = createTempFile(root, "srcFile")
+        konst dstFile = createTempFile(root, "dstFile")
 
         withRestrictedWrite(dstFile) {
             assertFailsWith<FileAlreadyExistsException> { srcFile.copyTo(dstFile) }
@@ -237,8 +237,8 @@ class PathExtensionsTest : AbstractPathTest() {
         }
 
         // copy directory
-        val srcDirectory = createTempDirectory(root, "srcDirectory")
-        val dstDirectory = createTempDirectory(root, "dstDirectory")
+        konst srcDirectory = createTempDirectory(root, "srcDirectory")
+        konst dstDirectory = createTempDirectory(root, "dstDirectory")
 
         withRestrictedWrite(dstDirectory) {
             assertFailsWith<FileAlreadyExistsException> { srcDirectory.copyTo(dstDirectory) }
@@ -249,13 +249,13 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun copyToSymlinkDestination() {
-        val root = createTempDirectory("copyTo-root").cleanupRecursively()
-        val targetFile = createTempFile(root, "targetFile").also { it.writeText("target file") }
-        val targetDirectory = createTempDirectory(root, "targetDirectory").also { it.resolve("a").createFile() }
+        konst root = createTempDirectory("copyTo-root").cleanupRecursively()
+        konst targetFile = createTempFile(root, "targetFile").also { it.writeText("target file") }
+        konst targetDirectory = createTempDirectory(root, "targetDirectory").also { it.resolve("a").createFile() }
 
         // copy file
-        val srcFile = createTempFile(root, "srcFile").also { it.writeText("source file") }
-        val dstFile = root.resolve("dstFile").tryCreateSymbolicLinkTo(targetFile) ?: return
+        konst srcFile = createTempFile(root, "srcFile").also { it.writeText("source file") }
+        konst dstFile = root.resolve("dstFile").tryCreateSymbolicLinkTo(targetFile) ?: return
 
         assertFailsWith<FileAlreadyExistsException> {
             srcFile.copyTo(dstFile)
@@ -267,8 +267,8 @@ class PathExtensionsTest : AbstractPathTest() {
         assertEquals("target file", dstFile.readText())
 
         // copy directory
-        val srcDirectory = createTempDirectory(root, "srcDirectory")
-        val dstDirectory = root.resolve("dstDirectory").tryCreateSymbolicLinkTo(targetDirectory) ?: return
+        konst srcDirectory = createTempDirectory(root, "srcDirectory")
+        konst dstDirectory = root.resolve("dstDirectory").tryCreateSymbolicLinkTo(targetDirectory) ?: return
 
         assertFailsWith<FileAlreadyExistsException> {
             srcDirectory.copyTo(dstDirectory)
@@ -308,12 +308,12 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun copyToBrokenSymlinkDestination() {
-        val root = createTempDirectory("copyTo-root").cleanupRecursively()
-        val symlinkTarget = root.resolve("target")
+        konst root = createTempDirectory("copyTo-root").cleanupRecursively()
+        konst symlinkTarget = root.resolve("target")
 
         // copy file
-        val srcFile = createTempFile(root, "srcFile").also { it.writeText("source file") }
-        val dstFile = root.resolve("dstFile").tryCreateSymbolicLinkTo(symlinkTarget) ?: return
+        konst srcFile = createTempFile(root, "srcFile").also { it.writeText("source file") }
+        konst dstFile = root.resolve("dstFile").tryCreateSymbolicLinkTo(symlinkTarget) ?: return
 
         assertFailsWith<FileAlreadyExistsException> {
             srcFile.copyTo(dstFile)
@@ -327,8 +327,8 @@ class PathExtensionsTest : AbstractPathTest() {
         }
 
         // copy directory
-        val srcDirectory = createTempDirectory(root, "srcDirectory")
-        val dstDirectory = root.resolve("dstDirectory").tryCreateSymbolicLinkTo(symlinkTarget) ?: return
+        konst srcDirectory = createTempDirectory(root, "srcDirectory")
+        konst dstDirectory = root.resolve("dstDirectory").tryCreateSymbolicLinkTo(symlinkTarget) ?: return
 
         assertFailsWith<FileAlreadyExistsException> {
             srcDirectory.copyTo(dstDirectory)
@@ -366,14 +366,14 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun copyToNameWithoutParent() {
-        val currentDir = Path("").absolute()
-        val srcFile = createTempFile().cleanup()
-        val dstFile = createTempFile(directory = currentDir).cleanup()
+        konst currentDir = Path("").absolute()
+        konst srcFile = createTempFile().cleanup()
+        konst dstFile = createTempFile(directory = currentDir).cleanup()
 
         srcFile.writeText("Hello, World!", Charsets.UTF_8)
         dstFile.deleteExisting()
 
-        val dstRelative = Path(dstFile.name)
+        konst dstRelative = Path(dstFile.name)
 
         srcFile.copyTo(dstRelative)
 
@@ -383,9 +383,9 @@ class PathExtensionsTest : AbstractPathTest() {
     @Test
     fun copyToDstLinkPointingToSrc() {
         for (options in listOf(arrayOf(), arrayOf<CopyOption>(LinkOption.NOFOLLOW_LINKS))) {
-            val root = createTempDirectory().cleanupRecursively()
-            val src = root.resolve("src").createFile()
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(src) ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst src = root.resolve("src").createFile()
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(src) ?: return
 
             assertTrue(src.isSameFileAs(dstLink))
             assertTrue(dstLink.isSameFileAs(src))
@@ -399,9 +399,9 @@ class PathExtensionsTest : AbstractPathTest() {
     @Test
     fun copyToDstLinkPointingToSrcOverwrite() {
         for (options in listOf(arrayOf(), arrayOf<CopyOption>(LinkOption.NOFOLLOW_LINKS))) {
-            val root = createTempDirectory().cleanupRecursively()
-            val src = root.resolve("src").createFile()
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(src) ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst src = root.resolve("src").createFile()
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(src) ?: return
 
             src.copyTo(dstLink, StandardCopyOption.REPLACE_EXISTING, *options)
             assertFalse(dstLink.isSymbolicLink())
@@ -411,10 +411,10 @@ class PathExtensionsTest : AbstractPathTest() {
     @Test
     fun copyToSrcLinkAndDstLinkPointingToSameFile() {
         for (options in listOf(arrayOf(), arrayOf<CopyOption>(LinkOption.NOFOLLOW_LINKS))) {
-            val root = createTempDirectory().cleanupRecursively()
-            val original = root.resolve("original").createFile()
-            val srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst original = root.resolve("original").createFile()
+            konst srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(original) ?: return
 
             assertTrue(srcLink.isSameFileAs(dstLink))
             assertTrue(dstLink.isSameFileAs(srcLink))
@@ -428,10 +428,10 @@ class PathExtensionsTest : AbstractPathTest() {
     @Test
     fun copyToSrcLinkAndDstLinkPointingToSameFileOverwrite() {
         for (options in listOf(arrayOf(), arrayOf<CopyOption>(LinkOption.NOFOLLOW_LINKS))) {
-            val root = createTempDirectory().cleanupRecursively()
-            val original = root.resolve("original").createFile()
-            val srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst original = root.resolve("original").createFile()
+            konst srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(original) ?: return
 
             srcLink.copyTo(dstLink, StandardCopyOption.REPLACE_EXISTING, *options)
 
@@ -446,10 +446,10 @@ class PathExtensionsTest : AbstractPathTest() {
     @Test
     fun copyToSameLinkDifferentRoute() {
         for (options in listOf(arrayOf(), arrayOf<CopyOption>(LinkOption.NOFOLLOW_LINKS))) {
-            val root = createTempDirectory().cleanupRecursively()
-            val original = root.resolve("original").createFile()
-            val srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("srcLink") ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst original = root.resolve("original").createFile()
+            konst srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("srcLink") ?: return
 
             assertTrue(srcLink.isSameFileAs(dstLink))
             assertTrue(dstLink.isSameFileAs(srcLink))
@@ -469,17 +469,17 @@ class PathExtensionsTest : AbstractPathTest() {
     @Test
     fun copyToSameLinkDifferentRouteOverwrite() {
         for (options in listOf(arrayOf(), arrayOf<CopyOption>(LinkOption.NOFOLLOW_LINKS))) {
-            val root = createTempDirectory().cleanupRecursively()
-            val original = root.resolve("original").createFile()
-            val srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("srcLink") ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst original = root.resolve("original").createFile()
+            konst srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("srcLink") ?: return
 
             if (LinkOption.NOFOLLOW_LINKS in options) {
                 srcLink.copyTo(dstLink, StandardCopyOption.REPLACE_EXISTING, *options) // same file
             } else {
                 // dstLink is deleted before srcLink gets copied.
                 // Actually srcLink gets removed because dstLink is srcLink with different path.
-                val error = assertFailsWith<NoSuchFileException> {
+                konst error = assertFailsWith<NoSuchFileException> {
                     srcLink.copyTo(dstLink, StandardCopyOption.REPLACE_EXISTING, *options)
                 }
                 assertEquals(srcLink.toString(), error.file)
@@ -491,9 +491,9 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun copyToSameFileDifferentRoute() {
-        val root = createTempDirectory().cleanupRecursively()
-        val src = root.resolve("src").createFile()
-        val dst = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("src") ?: return
+        konst root = createTempDirectory().cleanupRecursively()
+        konst src = root.resolve("src").createFile()
+        konst dst = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("src") ?: return
 
         assertTrue(src.isSameFileAs(dst))
         assertTrue(dst.isSameFileAs(src))
@@ -502,19 +502,19 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun copyToSameFileDifferentRouteOverwrite() {
-        val root = createTempDirectory().cleanupRecursively()
-        val src = root.resolve("src").createFile()
-        val dst = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("src") ?: return
+        konst root = createTempDirectory().cleanupRecursively()
+        konst src = root.resolve("src").createFile()
+        konst dst = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("src") ?: return
 
         src.copyTo(dst, overwrite = true)
     }
 
     @Test
     fun moveTo() {
-        val root = createTempDirectory("moveTo-root").cleanupRecursively()
-        val original = createTempFile(root, "original")
-        val srcFile = createTempFile(root, "src")
-        val dstFile = createTempFile(root, "dst")
+        konst root = createTempDirectory("moveTo-root").cleanupRecursively()
+        konst original = createTempFile(root, "original")
+        konst srcFile = createTempFile(root, "src")
+        konst dstFile = createTempFile(root, "dst")
         fun restoreSrcFile() { original.copyTo(srcFile, overwrite = true) }
         original.writeText("Hello, World!")
         restoreSrcFile()
@@ -539,14 +539,14 @@ class PathExtensionsTest : AbstractPathTest() {
         compareFiles(original, dst, "move to new file")
 
         restoreSrcFile()
-        val subDst = dstFile.resolve("foo/bar")
+        konst subDst = dstFile.resolve("foo/bar")
         assertFailsWith<FileSystemException> { srcFile.moveTo(subDst) }
         assertFailsWith<FileSystemException> { srcFile.moveTo(subDst, overwrite = true) }
         assertTrue(dstFile.deleteIfExists())
         assertFailsWith<FileSystemException> { srcFile.moveTo(subDst) }
 
         dstFile.createDirectory()
-        val child = dstFile.resolve("child").createFile()
+        konst child = dstFile.resolve("child").createFile()
         assertFailsWith<DirectoryNotEmptyException>("move with overwrite do not overwrite non-empty dir") {
             srcFile.moveTo(dstFile, overwrite = true)
         }
@@ -584,7 +584,7 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun fileSize() {
-        val file = createTempFile().cleanup()
+        konst file = createTempFile().cleanup()
         assertEquals(0, file.fileSize())
 
         file.writeBytes(ByteArray(100))
@@ -599,29 +599,29 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun deleteExisting() {
-        val file = createTempFile().cleanup()
+        konst file = createTempFile().cleanup()
         file.deleteExisting()
         assertFailsWith<NoSuchFileException> { file.deleteExisting() }
 
-        val dir = createTempDirectory().cleanup()
+        konst dir = createTempDirectory().cleanup()
         dir.deleteExisting()
         assertFailsWith<NoSuchFileException> { dir.deleteExisting() }
     }
 
     @Test
     fun deleteIfExists() {
-        val file = createTempFile().cleanup()
+        konst file = createTempFile().cleanup()
         assertTrue(file.deleteIfExists())
         assertFalse(file.deleteIfExists())
 
-        val dir = createTempDirectory().cleanup()
+        konst dir = createTempDirectory().cleanup()
         assertTrue(dir.deleteIfExists())
         assertFalse(dir.deleteIfExists())
     }
 
     @Test
     fun attributeGettersOnFile() {
-        val file = createTempFile("temp", ".file").cleanup()
+        konst file = createTempFile("temp", ".file").cleanup()
         assertTrue(file.exists())
         assertFalse(file.notExists())
         assertTrue(file.isRegularFile())
@@ -631,7 +631,7 @@ class PathExtensionsTest : AbstractPathTest() {
         assertTrue(file.isWritable())
         assertTrue(file.isSameFileAs(file))
 
-        // The default value of these depends on the current operating system, so just check that
+        // The default konstue of these depends on the current operating system, so just check that
         // they don't throw an exception.
         file.isExecutable()
         file.isHidden()
@@ -639,7 +639,7 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun attributeGettersOnDirectory() {
-        val file = createTempDirectory(".tmpdir").cleanup()
+        konst file = createTempDirectory(".tmpdir").cleanup()
         assertTrue(file.exists())
         assertFalse(file.notExists())
         assertFalse(file.isRegularFile())
@@ -655,7 +655,7 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun attributeGettersOnNonExistentPath() {
-        val file = createTempDirectory().cleanup().resolve("foo")
+        konst file = createTempDirectory().cleanup().resolve("foo")
         assertFalse(file.exists())
         assertTrue(file.notExists())
         assertFalse(file.isRegularFile())
@@ -679,8 +679,8 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun readWriteAttributes() {
-        val file = createTempFile().cleanup()
-        val modifiedTime = file.getLastModifiedTime()
+        konst file = createTempFile().cleanup()
+        konst modifiedTime = file.getLastModifiedTime()
         assertEquals(modifiedTime, file.getAttribute("lastModifiedTime"))
         assertEquals(modifiedTime, file.getAttribute("basic:lastModifiedTime"))
         assertEquals(modifiedTime, file.readAttributes<BasicFileAttributes>().lastModifiedTime())
@@ -691,15 +691,15 @@ class PathExtensionsTest : AbstractPathTest() {
         assertFailsWith<UnsupportedOperationException> { file.readAttributes("really_unsupported_view:*") }
         assertFailsWith<IllegalArgumentException> { file.readAttributes("basic:really_unknown_attribute") }
 
-        val newTime1 = FileTime.fromMillis(modifiedTime.toMillis() + 3600_000)
+        konst newTime1 = FileTime.fromMillis(modifiedTime.toMillis() + 3600_000)
         file.setLastModifiedTime(newTime1)
         assertEquals(newTime1, file.getLastModifiedTime())
 
-        val newTime2 = FileTime.fromMillis(modifiedTime.toMillis() + 2 * 3600_000)
+        konst newTime2 = FileTime.fromMillis(modifiedTime.toMillis() + 2 * 3600_000)
         file.setAttribute("lastModifiedTime", newTime2)
         assertEquals(newTime2, file.getLastModifiedTime())
 
-        val newTime3 = FileTime.fromMillis(modifiedTime.toMillis() + 3 * 3600_000)
+        konst newTime3 = FileTime.fromMillis(modifiedTime.toMillis() + 3 * 3600_000)
         file.fileAttributesView<BasicFileAttributeView>().setTimes(newTime3, null, null)
         assertEquals(newTime3, file.getLastModifiedTime())
 
@@ -712,11 +712,11 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun links() {
-        val dir = createTempDirectory().cleanupRecursively()
-        val original = createTempFile(dir)
+        konst dir = createTempDirectory().cleanupRecursively()
+        konst original = createTempFile(dir)
         original.writeBytes(Random.nextBytes(100))
 
-        val link = try {
+        konst link = try {
             (dir / ("link-" + original.fileName)).createLinkPointingTo(original)
         } catch (e: IOException) {
             // may require a privilege
@@ -733,11 +733,11 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun symlinks() {
-        val dir = createTempDirectory().cleanupRecursively()
-        val original = createTempFile(dir)
+        konst dir = createTempDirectory().cleanupRecursively()
+        konst original = createTempFile(dir)
         original.writeBytes(Random.nextBytes(100))
 
-        val symlink = try {
+        konst symlink = try {
             (dir / ("symlink-" + original.fileName)).createSymbolicLinkPointingTo(original)
         } catch (e: IOException) {
             // may require a privilege
@@ -754,13 +754,13 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun directoryEntriesList() {
-        val dir = createTempDirectory().cleanupRecursively()
+        konst dir = createTempDirectory().cleanupRecursively()
         assertEquals(0, dir.listDirectoryEntries().size)
 
-        val file = dir.resolve("f1").createFile()
+        konst file = dir.resolve("f1").createFile()
         assertEquals(listOf(file), dir.listDirectoryEntries())
 
-        val fileTxt = createTempFile(dir, suffix = ".txt")
+        konst fileTxt = createTempFile(dir, suffix = ".txt")
         assertEquals(listOf(fileTxt), dir.listDirectoryEntries("*.txt"))
 
         assertFailsWith<NotDirectoryException> { file.listDirectoryEntries() }
@@ -768,13 +768,13 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun directoryEntriesUseSequence() {
-        val dir = createTempDirectory().cleanupRecursively()
+        konst dir = createTempDirectory().cleanupRecursively()
         assertEquals(0, dir.useDirectoryEntries { it.toList() }.size)
 
-        val file = dir.resolve("f1").createFile()
+        konst file = dir.resolve("f1").createFile()
         assertEquals(listOf(file), dir.useDirectoryEntries { it.toList() })
 
-        val fileTxt = createTempFile(dir, suffix = ".txt")
+        konst fileTxt = createTempFile(dir, suffix = ".txt")
         assertEquals(listOf(fileTxt), dir.useDirectoryEntries("*.txt") { it.toList() })
 
         assertFailsWith<NotDirectoryException> { file.useDirectoryEntries { error("shouldn't get here") } }
@@ -782,13 +782,13 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun directoryEntriesForEach() {
-        val dir = createTempDirectory().cleanupRecursively()
+        konst dir = createTempDirectory().cleanupRecursively()
         dir.forEachDirectoryEntry { error("shouldn't get here, but received $it") }
 
-        val file = createTempFile(dir)
+        konst file = createTempFile(dir)
         dir.forEachDirectoryEntry { assertEquals(file, it) }
 
-        val fileTxt = createTempFile(dir, suffix = ".txt")
+        konst fileTxt = createTempFile(dir, suffix = ".txt")
         dir.forEachDirectoryEntry("*.txt") { assertEquals(fileTxt, it) }
 
         assertFailsWith<NotDirectoryException> { file.forEachDirectoryEntry { error("shouldn't get here, but received $it") } }
@@ -801,12 +801,12 @@ class PathExtensionsTest : AbstractPathTest() {
         testRelativeTo(Path(expected), path, base)
 
     private fun testRelativeTo(expected: Path?, path: Path, base: Path) {
-        val context = "path: '$path', base: '$base'"
+        konst context = "path: '$path', base: '$base'"
         if (expected != null) {
             assertEquals(expected, path.relativeTo(base), context)
         } else {
-            val e = assertFailsWith<IllegalArgumentException>(context) { path.relativeTo(base) }
-            val message = assertNotNull(e.message)
+            konst e = assertFailsWith<IllegalArgumentException>(context) { path.relativeTo(base) }
+            konst message = assertNotNull(e.message)
             assertTrue(path.toString() in message, message)
             assertTrue(base.toString() in message, message)
         }
@@ -816,24 +816,24 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun relativeToRooted() {
-        val file1 = "/foo/bar/baz"
-        val file2 = "/foo/baa/ghoo"
+        konst file1 = "/foo/bar/baz"
+        konst file2 = "/foo/baa/ghoo"
 
         testRelativeTo("../../bar/baz", file1, file2)
 
-        val file3 = "/foo/bar"
+        konst file3 = "/foo/bar"
 
         testRelativeTo("baz", file1, file3)
         testRelativeTo("..", file3, file1)
 
-        val file4 = "/foo/bar/"
+        konst file4 = "/foo/bar/"
 
         testRelativeTo("baz", file1, file4)
         testRelativeTo("..", file4, file1)
         testRelativeTo("", file3, file4)
         testRelativeTo("", file4, file3)
 
-        val file5 = "/foo/baran"
+        konst file5 = "/foo/baran"
 
         testRelativeTo("../bar", file3, file5)
         testRelativeTo("../baran", file5, file3)
@@ -841,14 +841,14 @@ class PathExtensionsTest : AbstractPathTest() {
         testRelativeTo("../baran", file5, file4)
 
         if (isBackslashSeparator) {
-            val file6 = "C:\\Users\\Me"
-            val file7 = "C:\\Users\\Me\\Documents"
+            konst file6 = "C:\\Users\\Me"
+            konst file7 = "C:\\Users\\Me\\Documents"
 
             testRelativeTo("..", file6, file7)
             testRelativeTo("Documents", file7, file6)
 
-            val file8 = """\\my.host\home/user/documents/vip"""
-            val file9 = """\\my.host\home/other/images/nice"""
+            konst file8 = """\\my.host\home/user/documents/vip"""
+            konst file9 = """\\my.host\home/other/images/nice"""
 
             testRelativeTo("../../../user/documents/vip", file8, file9)
             testRelativeTo("../../../other/images/nice", file9, file8)
@@ -861,25 +861,25 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun relativeToRelative() {
-        val nested = Path("foo/bar")
-        val base = Path("foo")
+        konst nested = Path("foo/bar")
+        konst base = Path("foo")
 
         testRelativeTo("bar", nested, base)
         testRelativeTo("..", base, nested)
 
-        val empty = Path("")
-        val current = Path(".")
-        val parent = Path("..")
-        val outOfRoot = Path("../bar")
+        konst empty = Path("")
+        konst current = Path(".")
+        konst parent = Path("..")
+        konst outOfRoot = Path("../bar")
 
         testRelativeTo("../bar", outOfRoot, empty)
         testRelativeTo("../../bar", outOfRoot, base)
         testRelativeTo("bar", outOfRoot, parent)
         testRelativeTo("..", parent, outOfRoot)
 
-        val root = Path("/root")
-        val files = listOf(nested, base, empty, outOfRoot, current, parent)
-        val bases = listOf(nested, base, empty, current)
+        konst root = Path("/root")
+        konst files = listOf(nested, base, empty, outOfRoot, current, parent)
+        konst bases = listOf(nested, base, empty, current)
 
         for (file in files)
             // file should have empty path relative to itself
@@ -888,8 +888,8 @@ class PathExtensionsTest : AbstractPathTest() {
         for (file in files) {
             @Suppress("NAME_SHADOWING")
             for (base in bases) {
-                val rootedFile = root.resolve(file)
-                val rootedBase = root.resolve(base)
+                konst rootedFile = root.resolve(file)
+                konst rootedBase = root.resolve(base)
                 assertEquals(rootedFile.relativeTo(rootedBase), file.relativeTo(base), "nested: $file, base: $base")
             }
         }
@@ -897,12 +897,12 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun relativeToFails() {
-        val absolute = Path("/foo/bar/baz")
-        val relative = Path("foo/bar")
-        val networkShare1 = Path("""\\my.host\share1/folder""")
-        val networkShare2 = Path("""\\my.host\share2\folder""")
+        konst absolute = Path("/foo/bar/baz")
+        konst relative = Path("foo/bar")
+        konst networkShare1 = Path("""\\my.host\share1/folder""")
+        konst networkShare2 = Path("""\\my.host\share2\folder""")
 
-        val allFiles = listOf(absolute, relative) + if (isBackslashSeparator) listOf(networkShare1, networkShare2) else emptyList()
+        konst allFiles = listOf(absolute, relative) + if (isBackslashSeparator) listOf(networkShare1, networkShare2) else emptyList()
         for (file in allFiles) {
             for (base in allFiles) {
                 if (file != base) testRelativeTo(null, file, base)
@@ -929,7 +929,7 @@ class PathExtensionsTest : AbstractPathTest() {
 
     @Test
     fun absolutePaths() {
-        val relative = Path("./example")
+        konst relative = Path("./example")
         assertTrue(relative.absolute().isAbsolute)
         assertEquals(relative.absolute().pathString, relative.absolutePathString())
     }

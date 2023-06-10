@@ -28,39 +28,39 @@ import org.jetbrains.kotlin.fir.types.arrayElementType
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirValueParameterSymbol(
-    override val firSymbol: FirValueParameterSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirValueParameterSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtValueParameterSymbol(), KtFirSymbol<FirValueParameterSymbol> {
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
 
-    override val name: Name get() = withValidityAssertion { firSymbol.name }
+    override konst name: Name get() = withValidityAssertion { firSymbol.name }
 
-    override val isVararg: Boolean get() = withValidityAssertion { firSymbol.isVararg }
+    override konst isVararg: Boolean get() = withValidityAssertion { firSymbol.isVararg }
 
-    override val isImplicitLambdaParameter: Boolean
+    override konst isImplicitLambdaParameter: Boolean
         get() = withValidityAssertion {
             firSymbol.source?.kind == KtFakeSourceElementKind.ItLambdaParameter
         }
 
-    override val isCrossinline: Boolean get() = withValidityAssertion { firSymbol.isCrossinline }
+    override konst isCrossinline: Boolean get() = withValidityAssertion { firSymbol.isCrossinline }
 
-    override val isNoinline: Boolean get() = withValidityAssertion { firSymbol.isNoinline }
+    override konst isNoinline: Boolean get() = withValidityAssertion { firSymbol.isNoinline }
 
-    override val returnType by cached {
-        val returnType = firSymbol.resolvedReturnType
+    override konst returnType by cached {
+        konst returnType = firSymbol.resolvedReturnType
         return@cached if (firSymbol.isVararg) {
             // There SHOULD always be an array element type (even if it is an error type, e.g., unresolved).
-            val arrayElementType = returnType.arrayElementType()
-                ?: error("No array element type for vararg value parameter: ${firSymbol.fir.renderWithType()}")
+            konst arrayElementType = returnType.arrayElementType()
+                ?: error("No array element type for vararg konstue parameter: ${firSymbol.fir.renderWithType()}")
             builder.typeBuilder.buildKtType(arrayElementType)
         } else {
             builder.typeBuilder.buildKtType(returnType)
         }
     }
 
-    override val hasDefaultValue: Boolean get() = withValidityAssertion { firSymbol.hasDefaultValue }
+    override konst hasDefaultValue: Boolean get() = withValidityAssertion { firSymbol.hasDefaultValue }
 
-    override val annotationsList by cached {
+    override konst annotationsList by cached {
         KtFirAnnotationListForDeclaration.create(
             firSymbol,
             analysisSession.useSiteSession,
@@ -68,9 +68,9 @@ internal class KtFirValueParameterSymbol(
         )
     }
 
-    override val generatedPrimaryConstructorProperty: KtKotlinPropertySymbol? by cached {
-        val propertySymbol = firSymbol.fir.correspondingProperty?.symbol ?: return@cached null
-        val ktPropertySymbol = builder.variableLikeBuilder.buildPropertySymbol(propertySymbol)
+    override konst generatedPrimaryConstructorProperty: KtKotlinPropertySymbol? by cached {
+        konst propertySymbol = firSymbol.fir.correspondingProperty?.symbol ?: return@cached null
+        konst ktPropertySymbol = builder.variableLikeBuilder.buildPropertySymbol(propertySymbol)
         check(ktPropertySymbol is KtKotlinPropertySymbol) {
             "Unexpected symbol for primary constructor property ${ktPropertySymbol.javaClass} for fir: ${firSymbol.fir.renderWithType()}"
         }
@@ -82,12 +82,12 @@ internal class KtFirValueParameterSymbol(
     override fun createPointer(): KtSymbolPointer<KtValueParameterSymbol> = withValidityAssertion {
         KtPsiBasedSymbolPointer.createForSymbolFromSource<KtValueParameterSymbol>(this)?.let { return it }
 
-        when (val owner = getContainingSymbol()) {
+        when (konst owner = getContainingSymbol()) {
             is KtFunctionLikeSymbol ->
                 KtFirValueParameterSymbolPointer(
                     owner.createPointer(),
                     name,
-                    (owner.firSymbol.fir as FirFunction).valueParameters.indexOf(firSymbol.fir),
+                    (owner.firSymbol.fir as FirFunction).konstueParameters.indexOf(firSymbol.fir),
                 )
 
             else -> error("${requireNotNull(owner)::class}")

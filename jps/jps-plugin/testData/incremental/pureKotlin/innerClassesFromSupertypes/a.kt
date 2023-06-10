@@ -1,7 +1,7 @@
 package test
 
 abstract class A {
-    inner class Inner(val x: String)
+    inner class Inner(konst x: String)
 }
 abstract class B : A()
 

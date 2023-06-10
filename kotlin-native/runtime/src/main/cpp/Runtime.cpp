@@ -68,12 +68,12 @@ KBoolean g_checkLeaks = false;
 KBoolean g_checkLeakedCleaners = false;
 KBoolean g_forceCheckedShutdown = false;
 
-constexpr RuntimeState* kInvalidRuntime = nullptr;
+constexpr RuntimeState* kInkonstidRuntime = nullptr;
 
-THREAD_LOCAL_VARIABLE RuntimeState* runtimeState = kInvalidRuntime;
+THREAD_LOCAL_VARIABLE RuntimeState* runtimeState = kInkonstidRuntime;
 
 inline bool isValidRuntime() {
-  return ::runtimeState != kInvalidRuntime;
+  return ::runtimeState != kInkonstidRuntime;
 }
 
 volatile int aliveRuntimesCount = 0;
@@ -90,7 +90,7 @@ RuntimeState* initRuntime() {
   SetKonanTerminateHandler();
   initObjectPool();
   RuntimeState* result = new (std_support::kalloc) RuntimeState();
-  if (!result) return kInvalidRuntime;
+  if (!result) return kInkonstidRuntime;
   RuntimeCheck(!isValidRuntime(), "No active runtimes allowed");
   ::runtimeState = result;
 
@@ -182,7 +182,7 @@ void deinitRuntime(RuntimeState* state, bool destroyRuntime) {
   DeinitMemory(state->memoryState, destroyRuntime);
   std_support::kdelete(state);
   WorkerDestroyThreadDataIfNeeded(workerId);
-  ::runtimeState = kInvalidRuntime;
+  ::runtimeState = kInkonstidRuntime;
 }
 
 void Kotlin_deinitRuntimeCallback(void* argument) {
@@ -223,7 +223,7 @@ void Kotlin_deinitRuntimeIfNeeded() {
 // TODO: Consider exporting it to interop API.
 void Kotlin_shutdownRuntime() {
     auto* runtime = ::runtimeState;
-    RuntimeAssert(runtime != kInvalidRuntime, "Current thread must have Kotlin runtime initialized on it");
+    RuntimeAssert(runtime != kInkonstidRuntime, "Current thread must have Kotlin runtime initialized on it");
 
     bool needsFullShutdown = false;
     switch (kotlin::compiler::destroyRuntimeMode()) {
@@ -236,7 +236,7 @@ void Kotlin_shutdownRuntime() {
     }
     if (!needsFullShutdown) {
         auto lastStatus = compareAndSwap(&globalRuntimeStatus, kGlobalRuntimeRunning, kGlobalRuntimeShutdown);
-        RuntimeAssert(lastStatus == kGlobalRuntimeRunning, "Invalid runtime status for shutdown");
+        RuntimeAssert(lastStatus == kGlobalRuntimeRunning, "Inkonstid runtime status for shutdown");
         // The main thread is not doing anything Kotlin anymore, but will stick around to cleanup C++ globals and the like.
         // Mark the thread native, and don't make the GC thread wait on it.
         kotlin::SwitchThreadState(runtime->memoryState, kotlin::ThreadState::kNative);
@@ -257,7 +257,7 @@ void Kotlin_shutdownRuntime() {
 
     // Cleaners are now done, disallow new runtimes.
     auto lastStatus = compareAndSwap(&globalRuntimeStatus, kGlobalRuntimeRunning, kGlobalRuntimeShutdown);
-    RuntimeAssert(lastStatus == kGlobalRuntimeRunning, "Invalid runtime status for shutdown");
+    RuntimeAssert(lastStatus == kGlobalRuntimeRunning, "Inkonstid runtime status for shutdown");
 
     bool canDestroyRuntime = true;
 
@@ -374,7 +374,7 @@ KInt Konan_Platform_getAvailableProcessors() {
     return 1;
 #else
     auto res = std::thread::hardware_concurrency();
-    // C++ standard says that if this function can return 0 if value is not "well defined or not computable"
+    // C++ standard says that if this function can return 0 if konstue is not "well defined or not computable"
     // In current libstdc++ implementation, seems it can happen only on unsupported targets.
     // We consider such systems as single-threaded
     if (res == 0) {
@@ -398,8 +398,8 @@ OBJ_GETTER0(Konan_Platform_getAvailableProcessorsEnv) {
 
 
 
-void Konan_Platform_setMemoryLeakChecker(KBoolean value) {
-  g_checkLeaks = value;
+void Konan_Platform_setMemoryLeakChecker(KBoolean konstue) {
+  g_checkLeaks = konstue;
 }
 
 bool Kotlin_cleanersLeakCheckerEnabled() {
@@ -410,8 +410,8 @@ KBoolean Konan_Platform_getCleanersLeakChecker() {
     return g_checkLeakedCleaners;
 }
 
-void Konan_Platform_setCleanersLeakChecker(KBoolean value) {
-    g_checkLeakedCleaners = value;
+void Konan_Platform_setCleanersLeakChecker(KBoolean konstue) {
+    g_checkLeakedCleaners = konstue;
 }
 
 bool Kotlin_forceCheckedShutdown() {
@@ -422,7 +422,7 @@ KBoolean Kotlin_Debugging_getForceCheckedShutdown() {
     return g_forceCheckedShutdown;
 }
 
-void Kotlin_Debugging_setForceCheckedShutdown(KBoolean value) {
+void Kotlin_Debugging_setForceCheckedShutdown(KBoolean konstue) {
     switch (kotlin::compiler::destroyRuntimeMode()) {
         case kotlin::compiler::DestroyRuntimeMode::kLegacy:
             // Only applicable to ON_SHUTDOWN modes.
@@ -430,7 +430,7 @@ void Kotlin_Debugging_setForceCheckedShutdown(KBoolean value) {
         case kotlin::compiler::DestroyRuntimeMode::kOnShutdown:
             break;
     }
-    g_forceCheckedShutdown = value;
+    g_forceCheckedShutdown = konstue;
 }
 
 KBoolean Kotlin_Debugging_isThreadStateRunnable() {

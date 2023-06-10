@@ -25,12 +25,12 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 
 internal class KtFe10SymbolProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtSymbolProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
-    override val ROOT_PACKAGE_SYMBOL: KtPackageSymbol
+    override konst ROOT_PACKAGE_SYMBOL: KtPackageSymbol
         get() = KtFe10PackageSymbol(FqName.ROOT, analysisContext)
 
     override fun getFileSymbol(psi: KtFile): KtFileSymbol {
@@ -124,17 +124,17 @@ internal class KtFe10SymbolProvider(
     }
 
     override fun getClassOrObjectSymbolByClassId(classId: ClassId): KtClassOrObjectSymbol? {
-        val descriptor = analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(classId) ?: return null
+        konst descriptor = analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(classId) ?: return null
         return descriptor.toKtClassSymbol(analysisContext)
     }
 
     override fun getTypeAliasByClassId(classId: ClassId): KtTypeAliasSymbol? {
-        val descriptor = analysisContext.resolveSession.moduleDescriptor.findTypeAliasAcrossModuleDependencies(classId) ?: return null
+        konst descriptor = analysisContext.resolveSession.moduleDescriptor.findTypeAliasAcrossModuleDependencies(classId) ?: return null
         return descriptor.toKtClassifierSymbol(analysisContext) as? KtTypeAliasSymbol
     }
 
     override fun getTopLevelCallableSymbols(packageFqName: FqName, name: Name): Sequence<KtCallableSymbol> {
-        val packageViewDescriptor = analysisContext.resolveSession.moduleDescriptor.getPackage(packageFqName)
+        konst packageViewDescriptor = analysisContext.resolveSession.moduleDescriptor.getPackage(packageFqName)
         return packageViewDescriptor.memberScope.getContributedDescriptors(DescriptorKindFilter.ALL, nameFilter = { it == name })
             .asSequence()
             .filter { it.name == name }

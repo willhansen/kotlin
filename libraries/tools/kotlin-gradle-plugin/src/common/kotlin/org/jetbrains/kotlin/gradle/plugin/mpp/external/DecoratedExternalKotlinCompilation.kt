@@ -23,6 +23,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.KotlinCompilationI
 @ExternalKotlinTargetApi
 abstract class DecoratedExternalKotlinCompilation(delegate: Delegate) :
     DecoratedKotlinCompilation<KotlinCommonOptions>(delegate.compilation) {
-    open class Delegate internal constructor(internal open val compilation: KotlinCompilationImpl)
+    open class Delegate internal constructor(internal open konst compilation: KotlinCompilationImpl)
 }
 

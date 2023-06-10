@@ -3,11 +3,11 @@
 
 package foo
 
-fun test(caseId: Int, value: Int, expected: Int) {
-    val actual: Int
+fun test(caseId: Int, konstue: Int, expected: Int) {
+    konst actual: Int
     when (caseId) {
-        0 -> if (value < 0) actual = -value else actual = value
-        1 -> actual = if (value < 0) -value else value
+        0 -> if (konstue < 0) actual = -konstue else actual = konstue
+        1 -> actual = if (konstue < 0) -konstue else konstue
         else -> throw Exception("Unexpected case: $caseId")
     }
 

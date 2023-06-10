@@ -2,8 +2,8 @@
 package foo
 
 object A {
-    val x = 23
-    val y = { x }
+    konst x = 23
+    konst y = { x }
     fun foo() = { x }
 }
 

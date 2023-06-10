@@ -9,7 +9,7 @@ class Test {
     private var iv = 1
 
     public fun exec() {
-        val t = object : Thread() {
+        konst t = object : Thread() {
             override fun run() {
                 Test::iv.get(this@Test)
                 Test::iv.set(this@Test, 2)
@@ -23,7 +23,7 @@ class Test {
 }
 
 fun box(): String {
-    val t = Test()
+    konst t = Test()
     t.exec()
     return t.result()
 }

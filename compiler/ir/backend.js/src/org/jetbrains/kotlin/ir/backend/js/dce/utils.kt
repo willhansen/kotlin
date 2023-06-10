@@ -16,12 +16,12 @@ import java.io.File
 
 internal fun IrDeclaration.fqNameForDceDump(): String {
     // TODO: sanitize names
-    val fqn = (this as? IrDeclarationWithName)?.fqNameWhenAvailable?.asString() ?: "<unknown>"
-    val signature = when (this is IrFunction) {
-        true -> this.valueParameters.joinToString(prefix = "(", postfix = ")") { it.type.dumpKotlinLike() }
+    konst fqn = (this as? IrDeclarationWithName)?.fqNameWhenAvailable?.asString() ?: "<unknown>"
+    konst signature = when (this is IrFunction) {
+        true -> this.konstueParameters.joinToString(prefix = "(", postfix = ")") { it.type.dumpKotlinLike() }
         else -> ""
     }
-    val synthetic = when (this.origin == PrimaryConstructorLowering.SYNTHETIC_PRIMARY_CONSTRUCTOR) {
+    konst synthetic = when (this.origin == PrimaryConstructorLowering.SYNTHETIC_PRIMARY_CONSTRUCTOR) {
         true -> "[synthetic]"
         else -> ""
     }
@@ -32,7 +32,7 @@ internal fun IrDeclaration.fqNameForDceDump(): String {
 fun dumpDeclarationIrSizesIfNeed(path: String?, allModules: List<IrModuleFragment>) {
     if (path == null) return
 
-    val declarations = linkedSetOf<IrDeclaration>()
+    konst declarations = linkedSetOf<IrDeclaration>()
 
     allModules.forEach {
         it.acceptChildrenVoid(object : IrElementVisitorVoid {
@@ -55,18 +55,18 @@ fun dumpDeclarationIrSizesIfNeed(path: String?, allModules: List<IrModuleFragmen
         })
     }
 
-    val out = File(path)
-    val (prefix, postfix, separator, indent) = when (out.extension) {
+    konst out = File(path)
+    konst (prefix, postfix, separator, indent) = when (out.extension) {
         "json" -> listOf("{\n", "\n}", ",\n", "    ")
         "js" -> listOf("const kotlinDeclarationsSize = {\n", "\n};\n", ",\n", "    ")
         else -> listOf("", "", "\n", "")
     }
 
-    val value = declarations.joinToString(separator, prefix, postfix) {
-        val fqn = it.fqNameForDceDump()
-        val size = it.dumpKotlinLike().length
+    konst konstue = declarations.joinToString(separator, prefix, postfix) {
+        konst fqn = it.fqNameForDceDump()
+        konst size = it.dumpKotlinLike().length
         "$indent\"$fqn\" : $size"
     }
 
-    out.writeText(value)
+    out.writeText(konstue)
 }

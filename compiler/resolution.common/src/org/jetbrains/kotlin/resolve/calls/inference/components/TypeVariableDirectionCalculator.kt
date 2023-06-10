@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.utils.SmartList
 private typealias Variable = VariableWithConstraints
 
 class TypeVariableDirectionCalculator(
-    private val c: VariableFixationFinder.Context,
-    private val postponedKtPrimitives: List<PostponedResolvedAtomMarker>,
+    private konst c: VariableFixationFinder.Context,
+    private konst postponedKtPrimitives: List<PostponedResolvedAtomMarker>,
     topLevelType: KotlinTypeMarker
 ) {
     enum class ResolveDirection {
@@ -30,11 +30,11 @@ class TypeVariableDirectionCalculator(
         UNKNOWN
     }
 
-    data class NodeWithDirection(val variableWithConstraints: VariableWithConstraints, val direction: ResolveDirection) {
+    data class NodeWithDirection(konst variableWithConstraints: VariableWithConstraints, konst direction: ResolveDirection) {
         override fun toString() = "$variableWithConstraints to $direction"
     }
 
-    private val directions = HashMap<Variable, ResolveDirection>()
+    private konst directions = HashMap<Variable, ResolveDirection>()
 
     init {
         setupDirections(topLevelType)
@@ -59,7 +59,7 @@ class TypeVariableDirectionCalculator(
     private fun enterToNode(variable: Variable, direction: ResolveDirection) {
         if (direction == ResolveDirection.UNKNOWN) return
 
-        val previous = directions[variable]
+        konst previous = directions[variable]
         if (previous != null) {
             if (previous != direction) {
                 directions[variable] = ResolveDirection.UNKNOWN
@@ -111,7 +111,7 @@ class TypeVariableDirectionCalculator(
         startDirection: ResolveDirection,
         action: (variable: Variable, direction: ResolveDirection) -> Unit
     ): Unit = with(c) {
-        val constructor = typeConstructor()
+        konst constructor = typeConstructor()
         if (constructor.isIntersection()) {
             constructor.supertypes().forEach {
                 it.visitType(startDirection, action)
@@ -129,12 +129,12 @@ class TypeVariableDirectionCalculator(
         if (constructor.parametersCount() != argumentsCount()) return // incorrect type
 
         for (index in 0 until constructor.parametersCount()) {
-            val parameter = constructor.getParameter(index)
-            val argument = getArgument(index)
+            konst parameter = constructor.getParameter(index)
+            konst argument = getArgument(index)
             if (argument.isStarProjection()) continue
 
-            val variance = AbstractTypeChecker.effectiveVariance(parameter.getVariance(), argument.getVariance()) ?: TypeVariance.INV
-            val innerDirection = when (variance) {
+            konst variance = AbstractTypeChecker.effectiveVariance(parameter.getVariance(), argument.getVariance()) ?: TypeVariance.INV
+            konst innerDirection = when (variance) {
                 TypeVariance.INV -> ResolveDirection.UNKNOWN
                 TypeVariance.OUT -> startDirection
                 TypeVariance.IN -> startDirection.opposite()

@@ -158,8 +158,8 @@ class TryK2IT : KGPBaseTest() {
             build(":compileKotlinLinuxX64") {
                 assertTasksExecuted(":compileKotlinLinuxX64")
 
-                val compileTaskOutput = getOutputForTask(":compileKotlinLinuxX64")
-                val compilerArgs = parseCompilerArgumentsFromBuildOutput(K2NativeCompilerArguments::class, compileTaskOutput)
+                konst compileTaskOutput = getOutputForTask(":compileKotlinLinuxX64")
+                konst compilerArgs = parseCompilerArgumentsFromBuildOutput(K2NativeCompilerArguments::class, compileTaskOutput)
                 assert(compilerArgs.languageVersion == "2.0") {
                     ":compileKotlinLinuxX64 'languageVersion' is not '2.0': ${compilerArgs.languageVersion}"
                 }
@@ -187,8 +187,8 @@ class TryK2IT : KGPBaseTest() {
 
                 assertCompilerArgument(":p1:compileCommonMainKotlinMetadata", "-language-version 2.0")
                 assertCompilerArgument(":p1:compileConcurrentMainKotlinMetadata", "-language-version 2.0")
-                val taskOutput = getOutputForTask(":p1:compileAppleAndLinuxMainKotlinMetadata")
-                val appleAndLinuxMetadataArgs = parseCompilerArgumentsFromBuildOutput(K2NativeCompilerArguments::class, taskOutput)
+                konst taskOutput = getOutputForTask(":p1:compileAppleAndLinuxMainKotlinMetadata")
+                konst appleAndLinuxMetadataArgs = parseCompilerArgumentsFromBuildOutput(K2NativeCompilerArguments::class, taskOutput)
                 assert(appleAndLinuxMetadataArgs.languageVersion == "2.0") {
                     ":compileAppleAndLinuxMainKotlinMetadata 'languageVersion' is not '2.0': ${appleAndLinuxMetadataArgs.languageVersion}"
                 }

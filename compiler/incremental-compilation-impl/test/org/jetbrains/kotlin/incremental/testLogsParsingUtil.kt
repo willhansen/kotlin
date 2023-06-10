@@ -19,22 +19,22 @@ package org.jetbrains.kotlin.incremental
 import com.intellij.openapi.util.io.FileUtil
 import java.io.File
 
-private const val BEGIN_COMPILED_FILES = "Compiling files:"
-private const val END_COMPILED_FILES = "End of files"
-private const val BEGIN_ERRORS = "COMPILATION FAILED"
+private const konst BEGIN_COMPILED_FILES = "Compiling files:"
+private const konst END_COMPILED_FILES = "End of files"
+private const konst BEGIN_ERRORS = "COMPILATION FAILED"
 
 class BuildStep(
-    val compiledKotlinFiles: MutableSet<String> = hashSetOf(),
-    val compiledJavaFiles: MutableSet<String> = hashSetOf(),
-    val compileErrors: MutableList<String> = arrayListOf()
+    konst compiledKotlinFiles: MutableSet<String> = hashSetOf(),
+    konst compiledJavaFiles: MutableSet<String> = hashSetOf(),
+    konst compileErrors: MutableList<String> = arrayListOf()
 ) {
-    val compileSucceeded: Boolean
+    konst compileSucceeded: Boolean
         get() = compileErrors.isEmpty()
 }
 
 fun parseTestBuildLog(file: File): List<BuildStep> {
     fun splitSteps(lines: List<String>): List<List<String>> {
-        val stepsLines = mutableListOf<MutableList<String>>()
+        konst stepsLines = mutableListOf<MutableList<String>>()
 
         for (line in lines) {
             when {
@@ -65,7 +65,7 @@ fun parseTestBuildLog(file: File): List<BuildStep> {
             }
 
             if (readFiles) {
-                val path = FileUtil.normalize(line.trim())
+                konst path = FileUtil.normalize(line.trim())
 
                 if (path.endsWith(".kt")) {
                     compiledKotlinFiles.add(path)
@@ -79,18 +79,18 @@ fun parseTestBuildLog(file: File): List<BuildStep> {
     }
 
     fun BuildStep.parseErrors(stepLines: List<String>) {
-        val startIndex = stepLines.indexOfLast { it.startsWith(BEGIN_ERRORS) }
+        konst startIndex = stepLines.indexOfLast { it.startsWith(BEGIN_ERRORS) }
 
         if (startIndex > 0) {
             compileErrors.addAll(stepLines.subList(startIndex + 1, stepLines.size))
         }
     }
 
-    val stepsLines = splitSteps(file.readLines())
+    konst stepsLines = splitSteps(file.readLines())
 
 
     return stepsLines.map { stepLines ->
-        val buildStep = BuildStep()
+        konst buildStep = BuildStep()
         buildStep.parseStepCompiledFiles(stepLines)
         buildStep.parseErrors(stepLines)
         buildStep
@@ -100,7 +100,7 @@ fun parseTestBuildLog(file: File): List<BuildStep> {
 // used in gradle integration tests
 @Suppress("unused")
 fun dumpBuildLog(buildSteps: Iterable<BuildStep>): String {
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
 
     for ((i, step) in buildSteps.withIndex()) {
         if (i > 0) {

@@ -30,29 +30,29 @@ class MetadataSymbolProvider(
     session: FirSession,
     moduleDataProvider: ModuleDataProvider,
     kotlinScopeProvider: FirKotlinScopeProvider,
-    private val packageAndMetadataPartProvider: PackageAndMetadataPartProvider,
-    private val kotlinClassFinder: KotlinMetadataFinder,
+    private konst packageAndMetadataPartProvider: PackageAndMetadataPartProvider,
+    private konst kotlinClassFinder: KotlinMetadataFinder,
     defaultDeserializationOrigin: FirDeclarationOrigin = FirDeclarationOrigin.Library
 ) : AbstractFirDeserializedSymbolProvider(
     session, moduleDataProvider, kotlinScopeProvider, defaultDeserializationOrigin, BuiltInSerializerProtocol
 ) {
-    private val classDataFinder = MetadataClassDataFinder(kotlinClassFinder)
+    private konst classDataFinder = MetadataClassDataFinder(kotlinClassFinder)
 
-    private val annotationDeserializer = MetadataBasedAnnotationDeserializer(session)
+    private konst annotationDeserializer = MetadataBasedAnnotationDeserializer(session)
 
-    private val constDeserializer = FirConstDeserializer(session, BuiltInSerializerProtocol)
+    private konst constDeserializer = FirConstDeserializer(session, BuiltInSerializerProtocol)
 
-    private val metadataTopLevelClassesInPackageCache = session.firCachesFactory.createCache(::findMetadataTopLevelClassesInPackage)
+    private konst metadataTopLevelClassesInPackageCache = session.firCachesFactory.createCache(::findMetadataTopLevelClassesInPackage)
 
     override fun computePackagePartsInfos(packageFqName: FqName): List<PackagePartsCacheData> {
         return packageAndMetadataPartProvider.findMetadataPackageParts(packageFqName.asString()).mapNotNull { partName ->
             if (partName in KotlinBuiltins) return@mapNotNull null
-            val classId = ClassId(packageFqName, Name.identifier(partName))
+            konst classId = ClassId(packageFqName, Name.identifier(partName))
 
-            val stream = kotlinClassFinder.findMetadata(classId) ?: return@mapNotNull null
-            val (proto, nameResolver, _) = readProto(stream)
+            konst stream = kotlinClassFinder.findMetadata(classId) ?: return@mapNotNull null
+            konst (proto, nameResolver, _) = readProto(stream)
 
-            val context = FirDeserializationContext.createForPackage(
+            konst context = FirDeserializationContext.createForPackage(
                 packageFqName,
                 proto.`package`,
                 nameResolver,
@@ -71,7 +71,7 @@ class MetadataSymbolProvider(
     override fun knownTopLevelClassesInPackage(packageFqName: FqName) = metadataTopLevelClassesInPackageCache.getValue(packageFqName)
 
     override fun extractClassMetadata(classId: ClassId, parentContext: FirDeserializationContext?): ClassMetadataFindResult? {
-        val classData = classDataFinder.findClassData(classId) ?: return null
+        konst classData = classDataFinder.findClassData(classId) ?: return null
         return ClassMetadataFindResult.Metadata(
             classData.nameResolver,
             classData.classProto,

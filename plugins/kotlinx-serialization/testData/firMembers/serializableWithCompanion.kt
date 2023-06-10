@@ -18,7 +18,7 @@ class NonSerializable {
 }
 
 @Serializable
-data class WithCompanion(val i: Int) {
+data class WithCompanion(konst i: Int) {
     companion object {
         fun foo(): String {
             return "OK"
@@ -27,7 +27,7 @@ data class WithCompanion(val i: Int) {
 }
 
 @Serializable
-data class WithNamedCompanion(val i: Int) {
+data class WithNamedCompanion(konst i: Int) {
     companion object Named {
         fun foo(): String {
             return "OK"
@@ -47,11 +47,11 @@ fun box(): String {
 }
 
 
-private fun <T> encodeAndDecode(serializer: KSerializer<T>, value: T, expectedEncoded: String, expectedDecoded: T? = null): String? {
-    val encoded = Json.encodeToString(serializer, value)
+private fun <T> encodeAndDecode(serializer: KSerializer<T>, konstue: T, expectedEncoded: String, expectedDecoded: T? = null): String? {
+    konst encoded = Json.encodeToString(serializer, konstue)
     if (encoded != expectedEncoded) return encoded
 
-    val decoded = Json.decodeFromString(serializer, encoded)
-    if (decoded != (expectedDecoded ?: value)) return "DECODED=${decoded.toString()}"
+    konst decoded = Json.decodeFromString(serializer, encoded)
+    if (decoded != (expectedDecoded ?: konstue)) return "DECODED=${decoded.toString()}"
     return null
 }

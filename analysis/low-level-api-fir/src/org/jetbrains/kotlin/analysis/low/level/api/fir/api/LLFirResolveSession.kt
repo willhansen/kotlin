@@ -27,11 +27,11 @@ import org.jetbrains.kotlin.psi.KtFile
  * An entry point for a FIR Low Level API resolution. Represents a project view from a use-site [KtModule].
  */
 abstract class LLFirResolveSession {
-    abstract val project: Project
+    abstract konst project: Project
 
-    abstract val useSiteFirSession: LLFirSession
+    abstract konst useSiteFirSession: LLFirSession
 
-    abstract val useSiteKtModule: KtModule
+    abstract konst useSiteKtModule: KtModule
 
     abstract fun getSessionFor(module: KtModule): LLFirSession
 

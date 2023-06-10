@@ -2,7 +2,7 @@
 // FILE: E.java
 public enum E {
     A();
-    public static String values(String s) {
+    public static String konstues(String s) {
         return s;
     }
 }
@@ -10,7 +10,7 @@ public enum E {
 // FILE: test.kt
 
 fun f(e: E) = when (e) {
-    E.A -> E.values("OK")
+    E.A -> E.konstues("OK")
 }
 
 fun box(): String {

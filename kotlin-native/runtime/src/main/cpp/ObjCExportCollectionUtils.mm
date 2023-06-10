@@ -36,7 +36,7 @@ extern "C" {
 OBJ_GETTER0(Kotlin_NSEnumeratorAsKIterator_create);
 
 void Kotlin_NSEnumeratorAsKIterator_done(KRef thiz);
-void Kotlin_NSEnumeratorAsKIterator_setNext(KRef thiz, KRef value);
+void Kotlin_NSEnumeratorAsKIterator_setNext(KRef thiz, KRef konstue);
 
 void Kotlin_ObjCExport_ThrowCollectionTooLarge();
 void Kotlin_ObjCExport_ThrowCollectionConcurrentModification();
@@ -160,9 +160,9 @@ extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsKey(KRef thiz, KRef key) {
   return [dict objectForKey:objCKey] != nullptr;
 }
 
-extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsValue(KRef thiz, KRef value) {
+extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsValue(KRef thiz, KRef konstue) {
   NSDictionary* dict = (NSDictionary*) GetAssociatedObject(thiz);
-  id objCValue = refToObjCOrNSNull(value);
+  id objCValue = refToObjCOrNSNull(konstue);
   kotlin::ThreadStateGuard guard(kotlin::ThreadState::kNative);
   for (id key in dict) {
     if ([[dict objectForKey:key] isEqual:objCValue]) {
@@ -176,32 +176,32 @@ extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsValue(KRef thiz, KRef valu
 extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_get, KRef thiz, KRef key) {
   NSDictionary* dict = (NSDictionary*) GetAssociatedObject(thiz);
   id objCKey = refToObjCOrNSNull(key);
-  id value;
+  id konstue;
   {
     kotlin::ThreadStateGuard guard(kotlin::ThreadState::kNative);
-    value = [dict objectForKey:objCKey];
+    konstue = [dict objectForKey:objCKey];
   }
-  RETURN_RESULT_OF(refFromObjCOrNSNull, value);
+  RETURN_RESULT_OF(refFromObjCOrNSNull, konstue);
 }
 
 extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_getOrThrowConcurrentModification, KRef thiz, KRef key) {
   NSDictionary* dict = (NSDictionary*) GetAssociatedObject(thiz);
   id objCKey = refToObjCOrNSNull(key);
-  id value;
+  id konstue;
   {
     kotlin::ThreadStateGuard guard(kotlin::ThreadState::kNative);
-    value = [dict objectForKey:objCKey];
+    konstue = [dict objectForKey:objCKey];
   }
-  if (value == nullptr) {
+  if (konstue == nullptr) {
     Kotlin_ObjCExport_ThrowCollectionConcurrentModification();
   }
 
-  RETURN_RESULT_OF(refFromObjCOrNSNull, value);
+  RETURN_RESULT_OF(refFromObjCOrNSNull, konstue);
 }
 
-extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsEntry(KRef thiz, KRef key, KRef value) {
+extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsEntry(KRef thiz, KRef key, KRef konstue) {
   NSDictionary* dict = (NSDictionary*) GetAssociatedObject(thiz);
-  id objCValue = refToObjCOrNSNull(value);
+  id objCValue = refToObjCOrNSNull(konstue);
   id objCKey = refToObjCOrNSNull(key);
   kotlin::ThreadStateGuard guard(kotlin::ThreadState::kNative);
   return [objCValue isEqual:[dict objectForKey:objCKey]];
@@ -214,7 +214,7 @@ extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_keyIterator, KRef thiz) {
 }
 
 NO_EXTERNAL_CALLS_CHECK
-extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_valueIterator, KRef thiz) {
+extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_konstueIterator, KRef thiz) {
   NSDictionary* dict = (NSDictionary*) GetAssociatedObject(thiz);
   RETURN_RESULT_OF(CreateKIteratorFromNSEnumerator, [dict objectEnumerator]);
 }
@@ -279,7 +279,7 @@ extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsKey(KRef thiz, KRef key) {
   return false;
 }
 
-extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsValue(KRef thiz, KRef value) {
+extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsValue(KRef thiz, KRef konstue) {
   RuntimeAssert(false, "Objective-C interop is disabled");
   return false;
 }
@@ -294,7 +294,7 @@ extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_getOrThrowConcurrentModification
   RETURN_OBJ(nullptr);
 }
 
-extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsEntry(KRef thiz, KRef key, KRef value) {
+extern "C" KBoolean Kotlin_NSDictionaryAsKMap_containsEntry(KRef thiz, KRef key, KRef konstue) {
   RuntimeAssert(false, "Objective-C interop is disabled");
   return false;
 }
@@ -304,7 +304,7 @@ extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_keyIterator, KRef thiz) {
   RETURN_OBJ(nullptr);
 }
 
-extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_valueIterator, KRef thiz) {
+extern "C" OBJ_GETTER(Kotlin_NSDictionaryAsKMap_konstueIterator, KRef thiz) {
   RuntimeAssert(false, "Objective-C interop is disabled");
   RETURN_OBJ(nullptr);
 }

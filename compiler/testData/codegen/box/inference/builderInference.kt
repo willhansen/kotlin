@@ -9,15 +9,15 @@ interface Flow<out T> {
 }
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
-inline fun <T> Flow<T>.collect(crossinline action: suspend (value: T) -> Unit): Unit {}
+inline fun <T> Flow<T>.collect(crossinline action: suspend (konstue: T) -> Unit): Unit {}
 
 abstract class LiveData<T>
 
 interface LiveDataScope<T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 @OptIn(ExperimentalTypeInference::class)

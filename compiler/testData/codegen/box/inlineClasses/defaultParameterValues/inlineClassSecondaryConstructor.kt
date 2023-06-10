@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int) {
+konstue class Z(konst x: Int) {
     constructor(x: Long = 42L) : this(x.toInt())
 }
 

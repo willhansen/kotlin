@@ -2,15 +2,15 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
-class BoxT<T>(val boxed: T)
-class BoxT2<T: Any>(val boxed: T?)
-class BoxAny(val boxed: Any?)
-class BoxFoo(val boxed: IFoo?)
+class BoxT<T>(konst boxed: T)
+class BoxT2<T: Any>(konst boxed: T?)
+class BoxAny(konst boxed: Any?)
+class BoxFoo(konst boxed: IFoo?)
 
 interface IFoo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class I32<T: Comparable<Int>>(val value: T?) : IFoo where T: Int
+konstue class I32<T: Comparable<Int>>(konst konstue: T?) : IFoo where T: Int
 
 fun <T: Comparable<Int>> boxToTypeParameter(x: I32<T>?) where T: Int = BoxT(x)
 fun <T: Comparable<Int>> boxToTypeParameter2(x: I32<T>?) where T: Int = BoxT2(x)

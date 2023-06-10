@@ -6,7 +6,7 @@ package p
 
 public class A<T>
 public class M1 {
-    public val a: A<Int> = A<Int>()
+    public konst a: A<Int> = A<Int>()
 }
 
 // MODULE: m2

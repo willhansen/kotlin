@@ -2,7 +2,7 @@ open class Base(parameter: String)
 
 fun foo(captured: String) {
     object : Base(captured) {
-        val x = captured
+        konst x = captured
         init { println(captured) }
     }
 }

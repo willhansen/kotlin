@@ -1,7 +1,7 @@
 // SKIP_TXT
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: TypesProvider) {
+fun case_1(konstue_1: TypesProvider) {
     when {
         return -> return
         return == return -> return
@@ -12,7 +12,7 @@ fun case_1(value_1: TypesProvider) {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: TypesProvider) {
+fun case_2(konstue_1: TypesProvider) {
     when {
         throw Exception() -> return
         (throw Exception()) == (throw Exception()) -> return
@@ -23,7 +23,7 @@ fun case_2(value_1: TypesProvider) {
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(value_1: TypesProvider) {
+fun case_3(konstue_1: TypesProvider) {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
@@ -38,7 +38,7 @@ fun case_3(value_1: TypesProvider) {
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(value_1: TypesProvider): String {
+fun case_4(konstue_1: TypesProvider): String {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
@@ -53,19 +53,19 @@ fun case_4(value_1: TypesProvider): String {
 }
 
 // TESTCASE NUMBER: 6
-fun case_6(value_1: Nothing, value_2: TypesProvider): String {
+fun case_6(konstue_1: Nothing, konstue_2: TypesProvider): String {
     when {
-        value_1 -> return ""
-        value_2.getNothing() -> return ""
+        konstue_1 -> return ""
+        konstue_2.getNothing() -> return ""
         getNothing() -> return ""
-        value_1 && (getNothing() == value_2.getNothing()) -> return ""
+        konstue_1 && (getNothing() == konstue_2.getNothing()) -> return ""
     }
 
     return ""
 }
 
 // TESTCASE NUMBER: 5
-fun case_5(value_1: TypesProvider, value_2: Nothing) {
+fun case_5(konstue_1: TypesProvider, konstue_2: Nothing) {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
@@ -75,9 +75,9 @@ fun case_5(value_1: TypesProvider, value_2: Nothing) {
                     continue@loop1 != 10L && (return return) == continue@loop1 -> return
                     return continue@loop1 -> return
                     (throw break@loop1) && break@loop3 -> return
-                    (throw getNothing()) && value_1.getNothing() -> return
-                    return return return value_2 -> return
-                    getNothing() != 10L && (return return) == value_2 -> return
+                    (throw getNothing()) && konstue_1.getNothing() -> return
+                    return return return konstue_2 -> return
+                    getNothing() != 10L && (return return) == konstue_2 -> return
                 }
             }
         }

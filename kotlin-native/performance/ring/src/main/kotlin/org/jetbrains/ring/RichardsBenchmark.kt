@@ -40,7 +40,7 @@
  **/
 class RichardsBenchmark {
     fun runRichards() {
-        val scheduler = Scheduler()
+        konst scheduler = Scheduler()
         scheduler.addIdleTask(ID_IDLE, 0, null, COUNT)
 
         var queue = Packet(null, ID_WORKER, KIND_WORK)
@@ -65,7 +65,7 @@ class RichardsBenchmark {
 
         if (scheduler.queueCount != EXPECTED_QUEUE_COUNT ||
             scheduler.holdCount != EXPECTED_HOLD_COUNT) {
-            val msg =
+            konst msg =
                 "Error during execution: queueCount = " + scheduler.queueCount +
                 ", holdCount = " + scheduler.holdCount + "."
             throw Error(msg)
@@ -186,7 +186,7 @@ class Scheduler {
      * @param {int} id the id of the task to suspend
      */
     fun release(id: Int): TaskControlBlock? {
-        val tcb = this.blocks[id]
+        konst tcb = this.blocks[id]
         if (tcb == null) return tcb
         tcb.markAsNotHeld()
         if (tcb.priority > this.currentTcb!!.priority) {
@@ -223,7 +223,7 @@ class Scheduler {
      * @param {Packet} packet the packet to add
      */
     fun queue(packet: Packet): TaskControlBlock? {
-        val t = this.blocks[packet.id]
+        konst t = this.blocks[packet.id]
         if (t == null) return t
         this.queueCount++
         packet.link = null
@@ -291,7 +291,7 @@ class TaskControlBlock(var link: TaskControlBlock?, var id: Int, var priority: I
      * Runs this task, if it is ready to be run, and returns the next task to run.
      */
     fun run(): TaskControlBlock? {
-        val packet: Packet?
+        konst packet: Packet?
         if (this.state == STATE_SUSPENDED_RUNNABLE) {
             packet = this.queue
             this.queue = packet?.link
@@ -360,7 +360,7 @@ interface Task {
  * An idle task doesn't do any work itself but cycles control between the two
  * device tasks.
  * @param {Scheduler} scheduler the scheduler that manages this task
- * @param {int} v1 a seed value that controls how the device tasks are scheduled
+ * @param {int} v1 a seed konstue that controls how the device tasks are scheduled
  * @param {int} count the number of times this task should be scheduled
  * @constructor
  */
@@ -394,7 +394,7 @@ class DeviceTask(var scheduler: Scheduler): Task {
     override fun run(packet: Packet?): TaskControlBlock? {
         if (packet == null) {
             if (this.v1 == null) return this.scheduler.suspendCurrent()
-            val v = this.v1
+            konst v = this.v1
             this.v1 = null
             return this.scheduler.queue(v!!)
         } else {
@@ -459,17 +459,17 @@ class HandlerTask(var scheduler: Scheduler): Task {
             }
         }
         this.v1?.let { v1 ->
-            val count = this.v1!!.a1
+            konst count = this.v1!!.a1
             if (count < DATA_SIZE) {
                 this.v2?.let { v2 ->
-                    val v = v2
+                    konst v = v2
                     this.v2 = v2.link
                     v.a1 = v1.a2[count]
                     v1.a1 = count + 1
                     return this.scheduler.queue(v)
                 }
             } else {
-                val v = v1
+                konst v = v1
                 this.v1 = v1.link
                 return this.scheduler.queue(v)
             }

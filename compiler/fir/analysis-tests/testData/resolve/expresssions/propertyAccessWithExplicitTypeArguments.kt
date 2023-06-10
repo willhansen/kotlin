@@ -2,8 +2,8 @@
 
 // Case 1: Parameters and local variables
 fun f1(x: Int) {
-    val y = 5
-    val s = "hello"
+    konst y = 5
+    konst s = "hello"
 
     <!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>x<!><Int>
     <!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>x<!><String, String>
@@ -14,14 +14,14 @@ fun f1(x: Int) {
 }
 
 // Case 2: Simple property
-val property: Int = 10
+konst property: Int = 10
 
 fun f2() {
     <!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>property<!><String>
 }
 
 // Case 3: Simple property with getter
-val property2: Int
+konst property2: Int
     get() = 10
 
 fun f3() {
@@ -33,21 +33,21 @@ interface Context<A>
 class ContextImpl<A> : Context<A>
 class Receiver<A>
 
-val <A> Receiver<A>.hello1: String
+konst <A> Receiver<A>.hello1: String
     get() = "hello 1"
 
 context(Context<A>)
-val <A> hello2: String
+konst <A> hello2: String
     get() = "hello 2"
 
 context(Context<B>)
-val <A, B> Receiver<A>.hello3: String
+konst <A, B> Receiver<A>.hello3: String
     get() = "hello 3"
 
 operator fun <A, B> String.invoke(): String = "world"
 
 fun f4() {
-    val receiver = Receiver<Int>()
+    konst receiver = Receiver<Int>()
 
     receiver.hello1
     receiver.<!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>hello1<!><Int>
@@ -74,11 +74,11 @@ fun f4() {
 }
 
 // Case 5: Property with receiver and reified type parameter
-inline val <reified A> Receiver<A>.helloReified: String
+inline konst <reified A> Receiver<A>.helloReified: String
     get() = "hello"
 
 fun f5() {
-    val receiver = Receiver<Int>()
+    konst receiver = Receiver<Int>()
     receiver.helloReified
     receiver.<!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>helloReified<!><Int>
     receiver.<!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>helloReified<!><String>

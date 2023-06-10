@@ -7,9 +7,9 @@ class WrapperFunctions {
 }
 
 fun main() {
-    val wrapper = Wrapper<Long>()
-    val number: Int = 5 // doesn't work
-//    val number: Long = 5 // works
+    konst wrapper = Wrapper<Long>()
+    konst number: Int = 5 // doesn't work
+//    konst number: Long = 5 // works
 
     with (WrapperFunctions()) {
         wrapper <!INFERRED_TYPE_VARIABLE_INTO_EMPTY_INTERSECTION_WARNING!>greaterEq<!> number

@@ -12,7 +12,7 @@ import kotlin.reflect.jvm.javaMethod
 import kotlin.test.fail
 
 @Target(AnnotationTarget.TYPE)
-annotation class TypeAnn(val name: String)
+annotation class TypeAnn(konst name: String)
 
 @Target(AnnotationTarget.TYPE)
 @Retention(AnnotationRetention.BINARY)
@@ -24,7 +24,7 @@ annotation class TypeAnnSource
 
 class Kotlin {
 
-    val valProp: @TypeAnn("1") @TypeAnnBinary @TypeAnnSource String = "123"
+    konst konstProp: @TypeAnn("1") @TypeAnnBinary @TypeAnnSource String = "123"
 
     var varProp: @TypeAnn("1") @TypeAnnBinary @TypeAnnSource String = "123"
 
@@ -36,10 +36,10 @@ class Kotlin {
 
     lateinit var lateinitProp: @TypeAnn("1") @TypeAnnBinary @TypeAnnSource String
 
-    val annotatedGetter: Int
+    konst annotatedGetter: Int
         get(): @TypeAnn("1") @TypeAnnBinary @TypeAnnSource  Int = 123
 
-    val unannotatedGetter: @TypeAnn("1") @TypeAnnBinary @TypeAnnSource Int
+    konst unannotatedGetter: @TypeAnn("1") @TypeAnnBinary @TypeAnnSource Int
         get(): Int = 123
 
     companion object {

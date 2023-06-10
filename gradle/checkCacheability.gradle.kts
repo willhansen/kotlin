@@ -1,8 +1,8 @@
 import org.gradle.api.internal.GeneratedSubclasses
 import org.gradle.api.internal.TaskInternal
 
-val checkCacheability = findProperty("kotlin.build.cache.check.enabled") as String? == "true"
-val isTeamcityBuild = project.hasProperty("teamcity") || System.getenv("TEAMCITY_VERSION") != null
+konst checkCacheability = findProperty("kotlin.build.cache.check.enabled") as String? == "true"
+konst isTeamcityBuild = project.hasProperty("teamcity") || System.getenv("TEAMCITY_VERSION") != null
 
 if (checkCacheability && buildCacheEnabled()) {
     gradle.taskGraph.afterTask {

@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.gradle.idea.testFixtures.kpm
 import org.jetbrains.kotlin.gradle.idea.kpm.IdeaKpmDependency
 
 interface TestIdeaKpmDependencyMatcher<in T : IdeaKpmDependency> {
-    val description: String
+    konst description: String
     fun matches(dependency: T): Boolean
 }

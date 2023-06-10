@@ -50,7 +50,7 @@ union ldshape {
 #ifdef __EMSCRIPTEN__
 /*
  * asm.js doesn't have user-accessible floating point exceptions, so there's
- * no point in trying to force expression evaluations to produce them.
+ * no point in trying to force expression ekonstuations to produce them.
  */
 #define FORCE_EVAL(x)
 #else
@@ -158,7 +158,7 @@ long double __sinl(long double, long double, int);
 long double __cosl(long double, long double);
 long double __tanl(long double, long double, int);
 
-/* polynomial evaluation */
+/* polynomial ekonstuation */
 long double __polevll(long double, const long double *, int);
 long double __p1evll(long double, const long double *, int);
 

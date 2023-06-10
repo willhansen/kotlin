@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.services.TestServices
  *   in separate JVM instance if it somehow differs from default implementation, which is
  *
  * fun main() {
- *     val result = box()
+ *     konst result = box()
  *     if (result != "OK") {
  *         throw AssertionError()
  *     }
@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.test.services.TestServices
  *   see [CodegenTestDirectives.REQUIRES_SEPARATE_PROCESS] directive
  *
  */
-abstract class JvmBoxMainClassProvider(val testServices: TestServices) : TestService {
+abstract class JvmBoxMainClassProvider(konst testServices: TestServices) : TestService {
     abstract fun getMainClassNameAndAdditionalArguments(): List<String>
 }
 
-val TestServices.jvmBoxMainClassProvider: JvmBoxMainClassProvider? by TestServices.nullableTestServiceAccessor()
+konst TestServices.jvmBoxMainClassProvider: JvmBoxMainClassProvider? by TestServices.nullableTestServiceAccessor()

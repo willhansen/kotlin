@@ -15,10 +15,10 @@ enum class FeatureTemplatesType {
 }
 
 class FeatureTemplatesConfig(
-    private val featureTemplatesType: FeatureTemplatesType,
-    private val templatesPath: String? = null,
-    private val templates: Map<String, String>? = null,
-    val validationTransformer: TemplateValidationTransformerType? = null
+    private konst featureTemplatesType: FeatureTemplatesType,
+    private konst templatesPath: String? = null,
+    private konst templates: Map<String, String>? = null,
+    konst konstidationTransformer: TemplateValidationTransformerType? = null
 ) {
     lateinit var testArea: TestArea
     var currentTemplatesIterator = getTemplatesIterator()
@@ -41,14 +41,14 @@ class FeatureTemplatesConfig(
         }
     }
 
-    private fun getTemplatesIterator() = lazy { getTemplates(testArea).value.iterator() }
+    private fun getTemplatesIterator() = lazy { getTemplates(testArea).konstue.iterator() }
 
     fun resetTemplatesIterator() {
         currentTemplatesIterator = getTemplatesIterator()
     }
 
     fun getNextWithRepeat() = let {
-        takeUnless { it.currentTemplatesIterator.value.hasNext() }?.resetTemplatesIterator()
-        currentTemplatesIterator.value.next().value
+        takeUnless { it.currentTemplatesIterator.konstue.hasNext() }?.resetTemplatesIterator()
+        currentTemplatesIterator.konstue.next().konstue
     }
 }

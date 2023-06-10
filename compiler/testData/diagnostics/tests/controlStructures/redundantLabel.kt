@@ -27,7 +27,7 @@ fun testForLoopLabel(xs: List<Any>) {
 }
 
 fun testValLabel() {
-    <!REDUNDANT_LABEL_WARNING!>L@<!> val fn = {}
+    <!REDUNDANT_LABEL_WARNING!>L@<!> konst fn = {}
     fn()
 }
 

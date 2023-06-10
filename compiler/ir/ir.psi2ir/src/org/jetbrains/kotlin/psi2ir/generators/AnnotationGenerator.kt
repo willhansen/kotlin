@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 internal class AnnotationGenerator(context: GeneratorContext) : IrElementVisitorVoid {
-    private val typeTranslator = context.typeTranslator
-    private val constantValueGenerator = context.constantValueGenerator
+    private konst typeTranslator = context.typeTranslator
+    private konst constantValueGenerator = context.constantValueGenerator
 
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -44,7 +44,7 @@ internal class AnnotationGenerator(context: GeneratorContext) : IrElementVisitor
 
         // Delegate field is mapped to a new property descriptor with annotations of the original property delegate
         // (see IrPropertyDelegateDescriptorImpl), but annotations on backing fields should be processed manually here
-        val annotatedDescriptor =
+        konst annotatedDescriptor =
             if (declaration is IrField && declaration.origin != IrDeclarationOrigin.PROPERTY_DELEGATE)
                 declaration.descriptor.backingField
             else

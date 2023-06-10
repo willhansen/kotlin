@@ -28,10 +28,10 @@ import org.jetbrains.kotlin.util.collectionUtils.concat
 import org.jetbrains.kotlin.utils.Printer
 import org.jetbrains.kotlin.utils.SmartList
 
-val HierarchicalScope.parentsWithSelf: Sequence<HierarchicalScope>
+konst HierarchicalScope.parentsWithSelf: Sequence<HierarchicalScope>
     get() = generateSequence(this) { it.parent }
 
-val HierarchicalScope.parents: Sequence<HierarchicalScope>
+konst HierarchicalScope.parents: Sequence<HierarchicalScope>
     get() = parentsWithSelf.drop(1)
 
 /**
@@ -68,7 +68,7 @@ fun HierarchicalScope.collectDescriptorsFiltered(
 fun LexicalScope.findLocalVariable(name: Name): VariableDescriptor? {
     return findFirstFromMeAndParent { originalScope ->
         // Unpacking LexicalScopeWrapper may be important to check that it is not ImportingScope
-        val possiblyUnpackedScope = when (originalScope) {
+        konst possiblyUnpackedScope = when (originalScope) {
             is LexicalScopeWrapper -> originalScope.delegate
             else -> originalScope
         }
@@ -93,7 +93,7 @@ fun DeclarationDescriptor.canBeResolvedWithoutDeprecation(
     location: LookupLocation
 ): Boolean {
     for (scope in scopeForResolution.parentsWithSelf) {
-        val hasNonDeprecatedSuitableCandidate = when (this) {
+        konst hasNonDeprecatedSuitableCandidate = when (this) {
             // Looking for classifier: fair check via special method in ResolutionScope
             is ClassifierDescriptor -> scope.getContributedClassifierIncludeDeprecated(name, location)
                 ?.let { it.descriptor == this && !it.isDeprecated }
@@ -155,7 +155,7 @@ fun HierarchicalScope.takeSnapshot(): HierarchicalScope = if (this is LexicalWri
 fun MemberScope.memberScopeAsImportingScope(parentScope: ImportingScope? = null): ImportingScope =
     MemberScopeToImportingScopeAdapter(parentScope, this)
 
-private class MemberScopeToImportingScopeAdapter(override val parent: ImportingScope?, val memberScope: MemberScope) : ImportingScope {
+private class MemberScopeToImportingScopeAdapter(override konst parent: ImportingScope?, konst memberScope: MemberScope) : ImportingScope {
     override fun getContributedPackage(name: Name): PackageViewDescriptor? = null
 
     override fun getContributedDescriptors(
@@ -202,7 +202,7 @@ private inline fun <T : Any> HierarchicalScope.collectFromMeAndParent(
 ): List<T> {
     var result: MutableList<T>? = null
     processForMeAndParent {
-        val element = collect(it)
+        konst element = collect(it)
         if (element != null) {
             if (result == null) {
                 result = SmartList()
@@ -237,9 +237,9 @@ inline fun <T : Any> HierarchicalScope.findFirstFromImportingScopes(fetch: (Impo
 }
 
 fun LexicalScope.addImportingScopes(importScopes: List<ImportingScope>): LexicalScope {
-    val lastLexicalScope = parentsWithSelf.last { it is LexicalScope }
-    val firstImporting = lastLexicalScope.parent as ImportingScope
-    val newFirstImporting = chainImportingScopes(importScopes, firstImporting)
+    konst lastLexicalScope = parentsWithSelf.last { it is LexicalScope }
+    konst firstImporting = lastLexicalScope.parent as ImportingScope
+    konst newFirstImporting = chainImportingScopes(importScopes, firstImporting)
     return replaceImportingScopes(newFirstImporting)
 }
 
@@ -247,13 +247,13 @@ fun LexicalScope.addImportingScope(importScope: ImportingScope): LexicalScope = 
 
 fun ImportingScope.withParent(newParent: ImportingScope?): ImportingScope {
     return object : ImportingScope by this {
-        override val parent: ImportingScope?
+        override konst parent: ImportingScope?
             get() = newParent
     }
 }
 
 fun LexicalScope.replaceImportingScopes(importingScopeChain: ImportingScope?): LexicalScope {
-    val newImportingScopeChain = importingScopeChain ?: ImportingScope.Empty
+    konst newImportingScopeChain = importingScopeChain ?: ImportingScope.Empty
     if (this is LexicalScopeWrapper) {
         return LexicalScopeWrapper(this.delegate, newImportingScopeChain)
     }
@@ -269,8 +269,8 @@ fun LexicalScope.createScopeForDestructuring(newReceiver: ReceiverParameterDescr
 }
 
 private class LexicalScopeWrapper(
-    val delegate: LexicalScope,
-    private val newImportingScopeChain: ImportingScope
+    konst delegate: LexicalScope,
+    private konst newImportingScopeChain: ImportingScope
 ) : LexicalScope by delegate {
     init {
         assert(delegate !is LexicalScopeWrapper) {
@@ -278,10 +278,10 @@ private class LexicalScopeWrapper(
         }
     }
 
-    override val parent: HierarchicalScope by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+    override konst parent: HierarchicalScope by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         assert(delegate !is ImportingScope)
 
-        val parent = delegate.parent
+        konst parent = delegate.parent
         if (parent is LexicalScope) {
             parent.replaceImportingScopes(newImportingScopeChain)
         } else {
@@ -301,8 +301,8 @@ fun chainImportingScopes(scopes: List<ImportingScope>, tail: ImportingScope? = n
 }
 
 class ErrorLexicalScope : LexicalScope {
-    override val parent: HierarchicalScope = object : HierarchicalScope {
-        override val parent: HierarchicalScope? = null
+    override konst parent: HierarchicalScope = object : HierarchicalScope {
+        override konst parent: HierarchicalScope? = null
 
         override fun printStructure(p: Printer) {
             p.print(ErrorEntity.PARENT_OF_ERROR_SCOPE.debugText)
@@ -324,12 +324,12 @@ class ErrorLexicalScope : LexicalScope {
         p.print(ErrorEntity.ERROR_SCOPE.debugText)
     }
 
-    override val ownerDescriptor: DeclarationDescriptor =
+    override konst ownerDescriptor: DeclarationDescriptor =
         ErrorClassDescriptor(Name.special(ErrorEntity.ERROR_CLASS.debugText.format("unknown")))
-    override val isOwnerDescriptorAccessibleByLabel: Boolean = false
-    override val implicitReceiver: ReceiverParameterDescriptor? = null
-    override val contextReceiversGroup: List<ReceiverParameterDescriptor> = emptyList()
-    override val kind: LexicalScopeKind = LexicalScopeKind.THROWING
+    override konst isOwnerDescriptorAccessibleByLabel: Boolean = false
+    override konst implicitReceiver: ReceiverParameterDescriptor? = null
+    override konst contextReceiversGroup: List<ReceiverParameterDescriptor> = emptyList()
+    override konst kind: LexicalScopeKind = LexicalScopeKind.THROWING
 
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? = null
 

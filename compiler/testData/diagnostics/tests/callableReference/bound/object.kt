@@ -3,7 +3,7 @@
 
 object Obj {
     fun foo() {}
-    val bar = 2
+    konst bar = 2
 }
 
 fun test() {

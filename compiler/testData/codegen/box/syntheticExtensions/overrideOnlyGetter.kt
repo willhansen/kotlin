@@ -3,21 +3,21 @@
 // FILE: JavaClass2.java
 
 class JavaClass1 {
-    protected Object value = null;
+    protected Object konstue = null;
 
     public Object getSomething() { return null; }
-    public void setSomething(Object value) {  this.value = value; }
+    public void setSomething(Object konstue) {  this.konstue = konstue; }
 }
 
 class JavaClass2 extends JavaClass1 {
-    public String getSomething() { return (String)value; }
+    public String getSomething() { return (String)konstue; }
 }
 
 // MODULE: main(lib)
 // FILE: 1.kt
 
 fun box(): String {
-    val javaClass = JavaClass2()
+    konst javaClass = JavaClass2()
     javaClass.something = "OK"
     return javaClass.something
 }

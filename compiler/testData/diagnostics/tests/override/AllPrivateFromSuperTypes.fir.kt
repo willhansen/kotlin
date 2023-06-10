@@ -1,14 +1,14 @@
 package test
 
 interface A {
-    private val a: String
+    private konst a: String
       get() = "AAAA!"
 }
 
 open class C {
-    private val a: String = ""
+    private konst a: String = ""
 }
 
 class Subject : C(), A {
-    val c = <!NONE_APPLICABLE!>a<!>
+    konst c = <!NONE_APPLICABLE!>a<!>
 }

@@ -3,5 +3,5 @@
 class C {
     companion <!CONFLICTING_JVM_DECLARATIONS, REDECLARATION!>object<!> {}
 
-    <!CONFLICTING_JVM_DECLARATIONS!>val <!REDECLARATION!>Companion<!><!> = C
+    <!CONFLICTING_JVM_DECLARATIONS!>konst <!REDECLARATION!>Companion<!><!> = C
 }

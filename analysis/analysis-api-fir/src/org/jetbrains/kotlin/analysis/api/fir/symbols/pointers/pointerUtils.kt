@@ -22,7 +22,7 @@ internal inline fun <reified D : FirCallableDeclaration> FirScope.findDeclaratio
 ): D? {
     var foundSymbol: D? = null
     processor { symbol ->
-        val declaration = symbol.fir
+        konst declaration = symbol.fir
         if (declaration is D && signature.hasTheSameSignature(declaration)) {
             foundSymbol = declaration
         }
@@ -46,7 +46,7 @@ internal inline fun <reified D : FirCallableDeclaration> Collection<FirCallableS
     signature: FirCallableSignature,
 ): D? {
     for (symbol in this) {
-        val declaration = symbol.fir
+        konst declaration = symbol.fir
         if (declaration is D && signature.hasTheSameSignature(declaration)) {
             return declaration
         }

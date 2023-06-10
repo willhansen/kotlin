@@ -13,15 +13,15 @@ import org.jetbrains.kotlin.scripting.configuration.ScriptingConfigurationKeys
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 
 class FirScriptingCompilerExtensionRegistrar(
-    private val hostConfiguration: ScriptingHostConfiguration, private val compilerConfiguration: CompilerConfiguration
+    private konst hostConfiguration: ScriptingHostConfiguration, private konst compilerConfiguration: CompilerConfiguration
 ) : FirExtensionRegistrar() {
 
     override fun ExtensionRegistrarContext.configurePlugin() {
         if (compilerConfiguration.getBoolean(ScriptingConfigurationKeys.DISABLE_SCRIPTING_PLUGIN_OPTION)) return
 
         configureScriptDefinitions(compilerConfiguration, hostConfiguration, this::class.java.classLoader)
-        val definitionSources = compilerConfiguration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_SOURCES)
-        val definitions = compilerConfiguration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS)
+        konst definitionSources = compilerConfiguration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_SOURCES)
+        konst definitions = compilerConfiguration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS)
         if (definitionSources.isNotEmpty() || definitions.isNotEmpty()) {
             +FirScriptDefinitionProviderService.getFactory(definitions, definitionSources)
         }

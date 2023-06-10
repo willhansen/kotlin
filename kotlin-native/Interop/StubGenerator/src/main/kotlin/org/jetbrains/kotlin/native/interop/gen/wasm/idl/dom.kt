@@ -1,7 +1,7 @@
 package org.jetbrains.kotlin.native.interop.gen.wasm.idl
 
 // This shall be an output of Web IDL parser.
-val idlDom = listOf(
+konst idlDom = listOf(
     Interface("Context",
         Attribute("lineWidth", idlInt),
         Attribute("fillStyle", idlString),
@@ -43,7 +43,7 @@ val idlDom = listOf(
         Attribute("document", idlInterfaceRef("Document"), readOnly = true),
 
         Operation("fetch", idlInterfaceRef("Promise"), Arg("url", idlString)),
-        Operation("setInterval", idlVoid, Arg("lambda", idlFunction), Arg("interval", idlInt))
+        Operation("setInterkonst", idlVoid, Arg("lambda", idlFunction), Arg("interkonst", idlInt))
     )
 )
 

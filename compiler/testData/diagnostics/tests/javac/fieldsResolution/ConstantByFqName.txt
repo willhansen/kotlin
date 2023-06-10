@@ -15,7 +15,7 @@ package a {
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
             // Static members
-            public const final val I: kotlin.Int = 42
+            public const final konst I: kotlin.Int = 42
         }
     }
 }
@@ -29,6 +29,6 @@ package b {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val I: kotlin.Int = 42
+        public const final konst I: kotlin.Int = 42
     }
 }

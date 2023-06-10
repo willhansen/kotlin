@@ -1,5 +1,5 @@
 class Outer {
-    val result = "OK"
+    konst result = "OK"
 
     inner class Inner {
         fun foo() = result
@@ -7,6 +7,6 @@ class Outer {
 }
 
 fun box(): String {
-    val f = Outer.Inner::foo
+    konst f = Outer.Inner::foo
     return f(Outer().Inner())
 }

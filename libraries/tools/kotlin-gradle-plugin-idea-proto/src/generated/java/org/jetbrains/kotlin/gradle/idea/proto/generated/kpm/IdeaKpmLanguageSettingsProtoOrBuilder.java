@@ -71,7 +71,7 @@ public interface IdeaKpmLanguageSettingsProtoOrBuilder extends
   java.lang.String getEnabledLanguageFeatures(int index);
   /**
    * <code>repeated string enabled_language_features = 4;</code>
-   * @param index The index of the value to return.
+   * @param index The index of the konstue to return.
    * @return The bytes of the enabledLanguageFeatures at the given index.
    */
   com.google.protobuf.ByteString
@@ -96,7 +96,7 @@ public interface IdeaKpmLanguageSettingsProtoOrBuilder extends
   java.lang.String getOptInAnnotationsInUse(int index);
   /**
    * <code>repeated string opt_in_annotations_in_use = 5;</code>
-   * @param index The index of the value to return.
+   * @param index The index of the konstue to return.
    * @return The bytes of the optInAnnotationsInUse at the given index.
    */
   com.google.protobuf.ByteString
@@ -121,7 +121,7 @@ public interface IdeaKpmLanguageSettingsProtoOrBuilder extends
   java.lang.String getCompilerPluginArguments(int index);
   /**
    * <code>repeated string compiler_plugin_arguments = 6;</code>
-   * @param index The index of the value to return.
+   * @param index The index of the konstue to return.
    * @return The bytes of the compilerPluginArguments at the given index.
    */
   com.google.protobuf.ByteString
@@ -146,7 +146,7 @@ public interface IdeaKpmLanguageSettingsProtoOrBuilder extends
   java.lang.String getCompilerPluginClasspath(int index);
   /**
    * <code>repeated string compiler_plugin_classpath = 7;</code>
-   * @param index The index of the value to return.
+   * @param index The index of the konstue to return.
    * @return The bytes of the compilerPluginClasspath at the given index.
    */
   com.google.protobuf.ByteString
@@ -171,7 +171,7 @@ public interface IdeaKpmLanguageSettingsProtoOrBuilder extends
   java.lang.String getFreeCompilerArgs(int index);
   /**
    * <code>repeated string free_compiler_args = 8;</code>
-   * @param index The index of the value to return.
+   * @param index The index of the konstue to return.
    * @return The bytes of the freeCompilerArgs at the given index.
    */
   com.google.protobuf.ByteString

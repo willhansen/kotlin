@@ -3,13 +3,13 @@
 
 // FILE: inline.kt
 
-inline class IC(val value: Any) {
-    inline fun <T> dispatchInline(): T = value as T
+inline class IC(konst konstue: Any) {
+    inline fun <T> dispatchInline(): T = konstue as T
 }
 
-inline fun <T> IC.extensionInline(): T = value as T
+inline fun <T> IC.extensionInline(): T = konstue as T
 
-inline fun <T> normalInline(a: IC): T = a.value as T
+inline fun <T> normalInline(a: IC): T = a.konstue as T
 
 // FILE: box.kt
 
@@ -29,8 +29,8 @@ interface IFace<T, R> {
     fun call(ic: T): R
 }
 
-fun <T, R> bar(value: T, f: IFace<T, R>): R {
-    return f.call(value)
+fun <T, R> bar(konstue: T, f: IFace<T, R>): R {
+    return f.call(konstue)
 }
 
 fun box(): String {

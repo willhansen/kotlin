@@ -13,14 +13,14 @@ var global:String = ""
 
 var A.ext:String
     get() = ":A.ext ${this.msg}:"
-    set(value) { global = ":A.ext ${value}" }
+    set(konstue) { global = ":A.ext ${konstue}" }
 
 var B.ext:String
     get() = ":B.ext ${this.msg}:"
-    set(value) { global = ":B.ext ${value}" }
+    set(konstue) { global = ":B.ext ${konstue}" }
 
 fun box(): String {
-    val a = A("Test")
+    konst a = A("Test")
 
     var refAExt = A::ext
     var refBExt: KMutableProperty1<B, String> = B::ext

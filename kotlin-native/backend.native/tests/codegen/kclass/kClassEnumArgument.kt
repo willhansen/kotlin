@@ -8,7 +8,7 @@ package codegen.kclass.kClassEnumArgument
 import kotlin.test.*
 import kotlin.reflect.KClass
 
-enum class E(val arg: KClass<*>?) {
+enum class E(konst arg: KClass<*>?) {
     A(null as KClass<*>?),
     B(String::class);
 }

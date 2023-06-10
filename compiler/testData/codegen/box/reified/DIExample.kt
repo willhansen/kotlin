@@ -17,9 +17,9 @@ class Project {
 
 inline operator fun <reified T : Any> Project.getValue(t: Any?, p: KProperty<*>): T = getInstance(T::class.java)
 
-val project = Project()
-val x1: Int by project
-val x2: String by project
+konst project = Project()
+konst x1: Int by project
+konst x2: String by project
 
 fun box(): String {
     assertEquals(1, x1)

@@ -12,7 +12,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class SemVerFixTest(val expected: String, val actual: String) {
+class SemVerFixTest(konst expected: String, konst actual: String) {
     companion object {
         @Parameterized.Parameters(name = "fix({1}) == {0}")
         @JvmStatic

@@ -47,7 +47,7 @@ abstract class AbstractAndroidOnDestroyClassBuilderInterceptorExtension :
         override fun newClassBuilder(origin: JvmDeclarationOrigin): DelegatingClassBuilder =
             AndroidOnDestroyCollectorClassBuilder(delegate.newClassBuilder(origin), origin.hasCache)
 
-        private val JvmDeclarationOrigin.hasCache: Boolean
+        private konst JvmDeclarationOrigin.hasCache: Boolean
             get() = descriptor is ClassDescriptor && element is KtElement &&
                     ContainerOptionsProxy.create(descriptor as ClassDescriptor).let {
                         it.containerType.isFragment && (it.cache ?: getGlobalCacheImpl(element as KtElement)).hasCache
@@ -55,8 +55,8 @@ abstract class AbstractAndroidOnDestroyClassBuilderInterceptorExtension :
     }
 
     private class AndroidOnDestroyCollectorClassBuilder(
-        private val delegate: ClassBuilder,
-        private val hasCache: Boolean
+        private konst delegate: ClassBuilder,
+        private konst hasCache: Boolean
     ) : DelegatingClassBuilder() {
         private lateinit var currentClassName: String
         private lateinit var superClassName: String
@@ -80,7 +80,7 @@ abstract class AbstractAndroidOnDestroyClassBuilderInterceptorExtension :
 
         override fun done(generateSmapCopyToAnnotation: Boolean) {
             if (hasCache && !hasOnDestroy) {
-                val mv = newMethod(
+                konst mv = newMethod(
                     JvmDeclarationOrigin.NO_ORIGIN, Opcodes.ACC_PUBLIC or Opcodes.ACC_SYNTHETIC, ON_DESTROY_METHOD_NAME, "()V",
                     null, null
                 )
@@ -102,7 +102,7 @@ abstract class AbstractAndroidOnDestroyClassBuilderInterceptorExtension :
             signature: String?,
             exceptions: Array<out String>?
         ): MethodVisitor {
-            val mv = super.newMethod(origin, access, name, desc, signature, exceptions)
+            konst mv = super.newMethod(origin, access, name, desc, signature, exceptions)
             if (!hasCache || name != ON_DESTROY_METHOD_NAME || desc != "()V") return mv
             hasOnDestroy = true
             return object : MethodVisitor(Opcodes.API_VERSION, mv) {

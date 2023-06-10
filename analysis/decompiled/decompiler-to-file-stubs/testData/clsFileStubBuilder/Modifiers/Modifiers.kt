@@ -1,7 +1,7 @@
 package test
 import kotlin.coroutines.*
 
-data class Modifiers(val x: Int) {
+data class Modifiers(konst x: Int) {
     external fun extFun()
 
     var extVar: Int = 1

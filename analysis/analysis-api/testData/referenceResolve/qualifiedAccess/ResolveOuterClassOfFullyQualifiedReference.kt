@@ -7,6 +7,6 @@ class AA {
 }
 
 fun test() {
-    val b = foo.bar.baz.A<caret>A.BB
+    konst b = foo.bar.baz.A<caret>A.BB
 }
 

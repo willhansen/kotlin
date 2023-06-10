@@ -51,20 +51,20 @@ import org.jetbrains.kotlin.types.typeUtil.isNothing
 import org.jetbrains.kotlin.util.containingNonLocalDeclaration
 
 internal class KtFe10TypeProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtTypeProvider(), Fe10KtAnalysisSessionComponent {
     @Suppress("SpellCheckingInspection")
-    private val typeApproximator by lazy {
+    private konst typeApproximator by lazy {
         TypeApproximator(
             analysisContext.builtIns,
             analysisContext.resolveSession.languageVersionSettings
         )
     }
 
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
-    override val builtinTypes: KtBuiltinTypes by lazy(LazyThreadSafetyMode.PUBLICATION) { KtFe10BuiltinTypes(analysisContext) }
+    override konst builtinTypes: KtBuiltinTypes by lazy(LazyThreadSafetyMode.PUBLICATION) { KtFe10BuiltinTypes(analysisContext) }
 
     override fun approximateToSuperPublicDenotableType(type: KtType, approximateLocalTypes: Boolean): KtType? {
         require(type is KtFe10Type)
@@ -79,37 +79,37 @@ internal class KtFe10TypeProvider(
     }
 
     override fun buildSelfClassType(symbol: KtNamedClassOrObjectSymbol): KtType {
-        val kotlinType = (getSymbolDescriptor(symbol) as? ClassDescriptor)?.defaultType
+        konst kotlinType = (getSymbolDescriptor(symbol) as? ClassDescriptor)?.defaultType
             ?: ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_CLASS_TYPE, symbol.nameOrAnonymous.toString())
         return kotlinType.toKtType(analysisContext)
     }
 
     override fun commonSuperType(types: Collection<KtType>): KtType {
-        val kotlinTypes = types.map { (it as KtFe10Type).fe10Type }
+        konst kotlinTypes = types.map { (it as KtFe10Type).fe10Type }
         return CommonSupertypes.commonSupertype(kotlinTypes).toKtType(analysisContext)
     }
 
     override fun getKtType(ktTypeReference: KtTypeReference): KtType {
-        val bindingContext = analysisContext.analyze(ktTypeReference, AnalysisMode.PARTIAL)
-        val kotlinType = bindingContext[BindingContext.TYPE, ktTypeReference]
+        konst bindingContext = analysisContext.analyze(ktTypeReference, AnalysisMode.PARTIAL)
+        konst kotlinType = bindingContext[BindingContext.TYPE, ktTypeReference]
             ?: getKtTypeAsTypeArgument(ktTypeReference)
             ?: ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_TYPE, ktTypeReference.text)
         return kotlinType.toKtType(analysisContext)
     }
 
     private fun getKtTypeAsTypeArgument(ktTypeReference: KtTypeReference): KotlinType? {
-        val call = ktTypeReference.getParentOfType<KtCallElement>(strict = true) ?: return null
-        val bindingContext = analysisContext.analyze(ktTypeReference, AnalysisMode.PARTIAL)
-        val resolvedCall = call.getResolvedCall(bindingContext) ?: return null
-        val typeProjection = call.typeArguments.find { it.typeReference == ktTypeReference } ?: return null
-        val index = call.typeArguments.indexOf(typeProjection)
-        val paramDescriptor = resolvedCall.candidateDescriptor.typeParameters.find { it.index == index } ?: return null
+        konst call = ktTypeReference.getParentOfType<KtCallElement>(strict = true) ?: return null
+        konst bindingContext = analysisContext.analyze(ktTypeReference, AnalysisMode.PARTIAL)
+        konst resolvedCall = call.getResolvedCall(bindingContext) ?: return null
+        konst typeProjection = call.typeArguments.find { it.typeReference == ktTypeReference } ?: return null
+        konst index = call.typeArguments.indexOf(typeProjection)
+        konst paramDescriptor = resolvedCall.candidateDescriptor.typeParameters.find { it.index == index } ?: return null
         return resolvedCall.typeArguments[paramDescriptor]
     }
 
     override fun getReceiverTypeForDoubleColonExpression(expression: KtDoubleColonExpression): KtType? {
-        val bindingContext = analysisContext.analyze(expression, AnalysisMode.PARTIAL)
-        val lhs = bindingContext[BindingContext.DOUBLE_COLON_LHS, expression] ?: return null
+        konst bindingContext = analysisContext.analyze(expression, AnalysisMode.PARTIAL)
+        konst lhs = bindingContext[BindingContext.DOUBLE_COLON_LHS, expression] ?: return null
         return lhs.type.toKtType(analysisContext)
     }
 
@@ -123,10 +123,10 @@ internal class KtFe10TypeProvider(
     }
 
     override fun getImplicitReceiverTypesAtPosition(position: KtElement): List<KtType> {
-        val elementToAnalyze = position.containingNonLocalDeclaration() ?: position
-        val bindingContext = analysisContext.analyze(elementToAnalyze)
+        konst elementToAnalyze = position.containingNonLocalDeclaration() ?: position
+        konst bindingContext = analysisContext.analyze(elementToAnalyze)
 
-        val lexicalScope = position.getResolutionScope(bindingContext) ?: return emptyList()
+        konst lexicalScope = position.getResolutionScope(bindingContext) ?: return emptyList()
         return lexicalScope.getImplicitReceiversHierarchy().map { it.type.toKtType(analysisContext) }
     }
 
@@ -142,7 +142,7 @@ internal class KtFe10TypeProvider(
 
     override fun getDispatchReceiverType(symbol: KtCallableSymbol): KtType? {
         require(symbol is KtFe10Symbol)
-        val descriptor = symbol.getDescriptor() as? CallableDescriptor ?: return null
+        konst descriptor = symbol.getDescriptor() as? CallableDescriptor ?: return null
         return descriptor.dispatchReceiverParameter?.type?.toKtType(analysisContext)
     }
 
@@ -151,8 +151,8 @@ internal class KtFe10TypeProvider(
             return true
         }
 
-        val aConstructor = a.constructor
-        val bConstructor = b.constructor
+        konst aConstructor = a.constructor
+        konst bConstructor = b.constructor
 
         if (aConstructor is IntersectionTypeConstructor) {
             return aConstructor.supertypes.all { areTypesCompatible(it, b) }
@@ -162,16 +162,16 @@ internal class KtFe10TypeProvider(
             return bConstructor.supertypes.all { areTypesCompatible(a, it) }
         }
 
-        val intersectionType = intersectWrappedTypes(listOf(a, b))
-        val intersectionTypeConstructor = intersectionType.constructor
+        konst intersectionType = intersectWrappedTypes(listOf(a, b))
+        konst intersectionTypeConstructor = intersectionType.constructor
 
         if (intersectionTypeConstructor is IntersectionTypeConstructor) {
-            val intersectedTypes = intersectionTypeConstructor.supertypes
+            konst intersectedTypes = intersectionTypeConstructor.supertypes
             if (intersectedTypes.all { it.isNullable() }) {
                 return true
             }
 
-            val collectedUpperBounds = intersectedTypes.flatMapTo(mutableSetOf()) { getUpperBounds(it) }
+            konst collectedUpperBounds = intersectedTypes.flatMapTo(mutableSetOf()) { getUpperBounds(it) }
             return areBoundsCompatible(collectedUpperBounds, emptySet())
         } else {
             return !intersectionType.isNothing()
@@ -186,12 +186,12 @@ internal class KtFe10TypeProvider(
             is CapturedType -> return type.constructor.supertypes.flatMap { getUpperBounds(it) }
             is NewCapturedType -> return type.constructor.supertypes.flatMap { getUpperBounds(it) }
             is SimpleType -> {
-                val typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(type)
+                konst typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(type)
                 if (typeParameterDescriptor != null) {
                     return typeParameterDescriptor.upperBounds.flatMap { getUpperBounds(it) }
                 }
 
-                val typeConstructor = type.constructor
+                konst typeConstructor = type.constructor
                 if (typeConstructor is NewTypeVariableConstructor) {
                     return typeConstructor.originalTypeParameter?.upperBounds.orEmpty().flatMap { getUpperBounds(it) }
                 }
@@ -210,15 +210,15 @@ internal class KtFe10TypeProvider(
         lowerBounds: Set<KotlinType>,
         checkedTypeParameters: MutableSet<TypeParameterDescriptor> = mutableSetOf()
     ): Boolean {
-        val upperBoundClasses = upperBounds.mapNotNull { getBoundClass(it) }.toSet()
+        konst upperBoundClasses = upperBounds.mapNotNull { getBoundClass(it) }.toSet()
 
-        val leafClassesOrInterfaces = computeLeafClassesOrInterfaces(upperBoundClasses)
+        konst leafClassesOrInterfaces = computeLeafClassesOrInterfaces(upperBoundClasses)
         if (areClassesOrInterfacesIncompatible(leafClassesOrInterfaces)) {
             return false
         }
 
         if (!lowerBounds.all { lowerBoundType ->
-                val classesSatisfyingLowerBounds = collectSuperClasses(lowerBoundType)
+                konst classesSatisfyingLowerBounds = collectSuperClasses(lowerBoundType)
                 leafClassesOrInterfaces.all { it in classesSatisfyingLowerBounds }
             }
         ) {
@@ -229,7 +229,7 @@ internal class KtFe10TypeProvider(
             return true
         }
 
-        val typeArgumentMapping = collectTypeArgumentMapping(upperBounds)
+        konst typeArgumentMapping = collectTypeArgumentMapping(upperBounds)
         for ((typeParameter, boundTypeArguments) in typeArgumentMapping) {
             if (!boundTypeArguments.isCompatible) {
                 return false
@@ -245,24 +245,24 @@ internal class KtFe10TypeProvider(
     }
 
     private fun collectTypeArgumentMapping(upperBounds: Set<KotlinType>): Map<TypeParameterDescriptor, BoundTypeArguments> {
-        val typeArgumentMapping = LinkedHashMap<TypeParameterDescriptor, BoundTypeArguments>()
+        konst typeArgumentMapping = LinkedHashMap<TypeParameterDescriptor, BoundTypeArguments>()
         for (type in upperBounds) {
-            val mappingForType = type.toTypeArgumentMapping() ?: continue
+            konst mappingForType = type.toTypeArgumentMapping() ?: continue
 
-            val queue = ArrayDeque<TypeArgumentMapping>()
+            konst queue = ArrayDeque<TypeArgumentMapping>()
             queue.addLast(mappingForType)
 
             while (queue.isNotEmpty()) {
-                val (typeParameterOwner, mapping) = queue.removeFirst()
+                konst (typeParameterOwner, mapping) = queue.removeFirst()
                 for (superType in typeParameterOwner.typeConstructor.supertypes) {
-                    val mappingForSupertype = superType.toTypeArgumentMapping(mapping) ?: continue
+                    konst mappingForSupertype = superType.toTypeArgumentMapping(mapping) ?: continue
                     queue.addLast(mappingForSupertype)
                 }
 
                 for ((typeParameterDescriptor, boundTypeArgument) in mapping) {
-                    val boundsForParameter = typeArgumentMapping.computeIfAbsent(typeParameterDescriptor) {
+                    konst boundsForParameter = typeArgumentMapping.computeIfAbsent(typeParameterDescriptor) {
                         var isCompatible = true
-                        val languageVersionSettings = analysisContext.resolveSession.languageVersionSettings
+                        konst languageVersionSettings = analysisContext.resolveSession.languageVersionSettings
                         if (languageVersionSettings.supportsFeature(LanguageFeature.ProhibitComparisonOfIncompatibleEnums)) {
                             isCompatible = isCompatible && typeParameterOwner.classId != StandardClassIds.Enum
                         }
@@ -294,12 +294,12 @@ internal class KtFe10TypeProvider(
             is ErrorType -> return emptySet()
             is CapturedType, is NewCapturedType -> return constructor.supertypes.flatMapTo(mutableSetOf()) { it.collectLowerBounds() }
             is SimpleType -> {
-                val typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(this)
+                konst typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(this)
                 if (typeParameterDescriptor != null) {
                     return emptySet()
                 }
 
-                return when (val typeConstructor = this.constructor) {
+                return when (konst typeConstructor = this.constructor) {
                     is NewTypeVariableConstructor -> emptySet()
                     is IntersectionTypeConstructor -> typeConstructor.supertypes.flatMapTo(mutableSetOf()) { it.collectLowerBounds() }
                     else -> setOf(this)
@@ -317,12 +317,12 @@ internal class KtFe10TypeProvider(
             is ErrorType -> return emptySet()
             is CapturedType, is NewCapturedType -> return constructor.supertypes.flatMapTo(mutableSetOf()) { it.collectUpperBounds() }
             is SimpleType -> {
-                val typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(this)
+                konst typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(this)
                 if (typeParameterDescriptor != null) {
                     return typeParameterDescriptor.upperBounds.flatMapTo(mutableSetOf()) { it.collectUpperBounds() }
                 }
 
-                return when (val typeConstructor = this.constructor) {
+                return when (konst typeConstructor = this.constructor) {
                     is NewTypeVariableConstructor -> typeConstructor.supertypes.flatMapTo(mutableSetOf()) { it.collectUpperBounds() }
                     is IntersectionTypeConstructor -> typeConstructor.supertypes.flatMapTo(mutableSetOf()) { it.collectUpperBounds() }
                     else -> setOf(this)
@@ -336,11 +336,11 @@ internal class KtFe10TypeProvider(
     private fun KotlinType.toTypeArgumentMapping(
         envMapping: Map<TypeParameterDescriptor, BoundTypeArgument> = emptyMap()
     ): TypeArgumentMapping? {
-        val typeParameterOwner = constructor.declarationDescriptor as? ClassifierDescriptorWithTypeParameters ?: return null
+        konst typeParameterOwner = constructor.declarationDescriptor as? ClassifierDescriptorWithTypeParameters ?: return null
 
-        val mapping = mutableMapOf<TypeParameterDescriptor, BoundTypeArgument>()
+        konst mapping = mutableMapOf<TypeParameterDescriptor, BoundTypeArgument>()
         arguments.forEachIndexed { index, typeProjection ->
-            val typeParameter = typeParameterOwner.declaredTypeParameters.getOrNull(index) ?: return@forEachIndexed
+            konst typeParameter = typeParameterOwner.declaredTypeParameters.getOrNull(index) ?: return@forEachIndexed
             var boundTypeArgument: BoundTypeArgument = when {
                 typeProjection.isStarProjection -> return@forEachIndexed
                 typeProjection.projectionKind == Variance.INVARIANT -> {
@@ -353,9 +353,9 @@ internal class KtFe10TypeProvider(
                 else -> BoundTypeArgument(typeProjection.type, typeProjection.projectionKind)
             }
 
-            val typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(boundTypeArgument.type)
+            konst typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(boundTypeArgument.type)
             if (typeParameterDescriptor != null) {
-                val mappedTypeArgument = envMapping[typeParameterDescriptor]
+                konst mappedTypeArgument = envMapping[typeParameterDescriptor]
                 if (mappedTypeArgument != null) {
                     boundTypeArgument = mappedTypeArgument
                 }
@@ -368,17 +368,17 @@ internal class KtFe10TypeProvider(
     }
 
     private data class TypeArgumentMapping(
-        val owner: ClassifierDescriptorWithTypeParameters,
-        val mapping: Map<TypeParameterDescriptor, BoundTypeArgument>
+        konst owner: ClassifierDescriptorWithTypeParameters,
+        konst mapping: Map<TypeParameterDescriptor, BoundTypeArgument>
     )
 
-    private data class BoundTypeArgument(val type: KotlinType, val variance: Variance)
-    private data class BoundTypeArguments(val upper: MutableSet<KotlinType>, val lower: MutableSet<KotlinType>, val isCompatible: Boolean)
+    private data class BoundTypeArgument(konst type: KotlinType, konst variance: Variance)
+    private data class BoundTypeArguments(konst upper: MutableSet<KotlinType>, konst lower: MutableSet<KotlinType>, konst isCompatible: Boolean)
 
     private fun computeLeafClassesOrInterfaces(upperBoundClasses: Set<ClassDescriptor>): Set<ClassDescriptor> {
-        val isLeaf = mutableMapOf<ClassDescriptor, Boolean>()
+        konst isLeaf = mutableMapOf<ClassDescriptor, Boolean>()
         upperBoundClasses.associateWithTo(isLeaf) { true }
-        val queue = ArrayDeque(upperBoundClasses)
+        konst queue = ArrayDeque(upperBoundClasses)
         while (queue.isNotEmpty()) {
             for (superClass in DescriptorUtils.getSuperclassDescriptors(queue.removeFirst())) {
                 when (isLeaf[superClass]) {
@@ -396,7 +396,7 @@ internal class KtFe10TypeProvider(
     }
 
     private fun getBoundClass(type: KotlinType): ClassDescriptor? {
-        return when (val declaration = type.constructor.declarationDescriptor) {
+        return when (konst declaration = type.constructor.declarationDescriptor) {
             is ClassDescriptor -> declaration
             is TypeAliasDescriptor -> getBoundClass(declaration.expandedType)
             else -> null
@@ -404,16 +404,16 @@ internal class KtFe10TypeProvider(
     }
 
     private fun collectSuperClasses(type: KotlinType): Set<ClassDescriptor> {
-        val initialClass = getBoundClass(type) ?: return emptySet()
+        konst initialClass = getBoundClass(type) ?: return emptySet()
 
-        val result = mutableSetOf<ClassDescriptor>()
+        konst result = mutableSetOf<ClassDescriptor>()
         result.add(initialClass)
 
-        val queue = ArrayDeque<ClassDescriptor>()
+        konst queue = ArrayDeque<ClassDescriptor>()
         queue.addLast(initialClass)
         while (queue.isNotEmpty()) {
-            val current = queue.removeFirst()
-            val supertypes = DescriptorUtils.getSuperclassDescriptors(current)
+            konst current = queue.removeFirst()
+            konst supertypes = DescriptorUtils.getSuperclassDescriptors(current)
             supertypes.filterNotTo(queue) { it !in result }
             result.addAll(supertypes)
         }
@@ -422,7 +422,7 @@ internal class KtFe10TypeProvider(
     }
 
     private fun areClassesOrInterfacesIncompatible(classesOrInterfaces: Collection<ClassDescriptor>): Boolean {
-        val classes = classesOrInterfaces.filter { !it.isInterfaceLike }
+        konst classes = classesOrInterfaces.filter { !it.isInterfaceLike }
         return when {
             classes.size >= 2 -> true
             !classes.any { it.isFinalOrEnum } -> false
@@ -432,53 +432,53 @@ internal class KtFe10TypeProvider(
     }
 }
 
-private class KtFe10BuiltinTypes(private val analysisContext: Fe10AnalysisContext) : KtBuiltinTypes() {
-    override val token: KtLifetimeToken
+private class KtFe10BuiltinTypes(private konst analysisContext: Fe10AnalysisContext) : KtBuiltinTypes() {
+    override konst token: KtLifetimeToken
         get() = analysisContext.token
 
-    override val INT: KtType
+    override konst INT: KtType
         get() = withValidityAssertion { analysisContext.builtIns.intType.toKtType(analysisContext) }
 
-    override val LONG: KtType
+    override konst LONG: KtType
         get() = withValidityAssertion { analysisContext.builtIns.longType.toKtType(analysisContext) }
 
-    override val SHORT: KtType
+    override konst SHORT: KtType
         get() = withValidityAssertion { analysisContext.builtIns.shortType.toKtType(analysisContext) }
 
-    override val BYTE: KtType
+    override konst BYTE: KtType
         get() = withValidityAssertion { analysisContext.builtIns.byteType.toKtType(analysisContext) }
 
-    override val FLOAT: KtType
+    override konst FLOAT: KtType
         get() = withValidityAssertion { analysisContext.builtIns.floatType.toKtType(analysisContext) }
 
-    override val DOUBLE: KtType
+    override konst DOUBLE: KtType
         get() = withValidityAssertion { analysisContext.builtIns.doubleType.toKtType(analysisContext) }
 
-    override val BOOLEAN: KtType
+    override konst BOOLEAN: KtType
         get() = withValidityAssertion { analysisContext.builtIns.booleanType.toKtType(analysisContext) }
 
-    override val CHAR: KtType
+    override konst CHAR: KtType
         get() = withValidityAssertion { analysisContext.builtIns.charType.toKtType(analysisContext) }
 
-    override val STRING: KtType
+    override konst STRING: KtType
         get() = withValidityAssertion { analysisContext.builtIns.stringType.toKtType(analysisContext) }
 
-    override val UNIT: KtType
+    override konst UNIT: KtType
         get() = withValidityAssertion { analysisContext.builtIns.unitType.toKtType(analysisContext) }
 
-    override val NOTHING: KtType
+    override konst NOTHING: KtType
         get() = withValidityAssertion { analysisContext.builtIns.nothingType.toKtType(analysisContext) }
 
-    override val ANY: KtType
+    override konst ANY: KtType
         get() = withValidityAssertion { analysisContext.builtIns.anyType.toKtType(analysisContext) }
 
-    override val THROWABLE: KtType
+    override konst THROWABLE: KtType
         get() = withValidityAssertion { analysisContext.builtIns.throwable.defaultType.toKtType(analysisContext) }
 
-    override val NULLABLE_ANY: KtType
+    override konst NULLABLE_ANY: KtType
         get() = withValidityAssertion { analysisContext.builtIns.nullableAnyType.toKtType(analysisContext) }
 
-    override val NULLABLE_NOTHING: KtType
+    override konst NULLABLE_NOTHING: KtType
         get() = withValidityAssertion { analysisContext.builtIns.nullableNothingType.toKtType(analysisContext) }
 
 }

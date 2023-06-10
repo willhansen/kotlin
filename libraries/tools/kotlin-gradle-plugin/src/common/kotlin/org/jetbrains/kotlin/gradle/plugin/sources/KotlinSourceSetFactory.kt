@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.gradle.utils.maybeRegister
 import java.io.File
 
 internal abstract class KotlinSourceSetFactory<T : KotlinSourceSet> internal constructor(
-    protected val project: Project
+    protected konst project: Project
 ) : NamedDomainObjectFactory<KotlinSourceSet> {
 
-    abstract val itemClass: Class<T>
+    abstract konst itemClass: Class<T>
 
     override fun create(name: String): T {
-        val result = doCreateSourceSet(name)
+        konst result = doCreateSourceSet(name)
         setUpSourceSetDefaults(result)
         return result
     }
@@ -69,14 +69,14 @@ internal class DefaultKotlinSourceSetFactory(
     project: Project
 ) : KotlinSourceSetFactory<DefaultKotlinSourceSet>(project) {
 
-    override val itemClass: Class<DefaultKotlinSourceSet>
+    override konst itemClass: Class<DefaultKotlinSourceSet>
         get() = DefaultKotlinSourceSet::class.java
 
     override fun setUpSourceSetDefaults(sourceSet: DefaultKotlinSourceSet) {
         super.setUpSourceSetDefaults(sourceSet)
         sourceSet.resources.srcDir(defaultSourceFolder(project, sourceSet.name, "resources"))
 
-        val dependencyConfigurationWithMetadata = with(sourceSet) {
+        konst dependencyConfigurationWithMetadata = with(sourceSet) {
             @Suppress("DEPRECATION")
             listOf(
                 apiConfigurationName to apiMetadataConfigurationName,
@@ -102,7 +102,7 @@ internal class DefaultKotlinSourceSetFactory(
                     attributes.attribute(Usage.USAGE_ATTRIBUTE, project.usageByName(KotlinUsages.KOTLIN_METADATA))
                 }
 
-                project.afterEvaluate {
+                project.afterEkonstuate {
                     setJsCompilerIfNecessary(sourceSet, this)
                 }
             }
@@ -112,9 +112,9 @@ internal class DefaultKotlinSourceSetFactory(
     // KT-47163
     // It is necessary to set jsCompilerAttribute to configurations which associated with ONLY js source sets
     // Otherwise configuration cannot be resolved because ambiguity between IR and Legacy variants inside one module
-    private val notOnlyJsSourceSets = mutableSetOf<KotlinSourceSet>()
+    private konst notOnlyJsSourceSets = mutableSetOf<KotlinSourceSet>()
 
-    private val jsOnlySourceSetsAttributes = mutableMapOf<KotlinSourceSet, KotlinJsCompilerAttribute>()
+    private konst jsOnlySourceSetsAttributes = mutableMapOf<KotlinSourceSet, KotlinJsCompilerAttribute>()
 
     private fun setJsCompilerIfNecessary(sourceSet: KotlinSourceSet, configuration: Configuration) {
         if (sourceSet in notOnlyJsSourceSets) return
@@ -153,7 +153,7 @@ internal class DefaultKotlinSourceSetFactory(
                     .filterIsInstance<KotlinJsCompilation>()
                     .forEach { compilation ->
                         if (sourceSet in compilation.allKotlinSourceSets) {
-                            val compilerAttribute = chooseCompilerAttribute(target)
+                            konst compilerAttribute = chooseCompilerAttribute(target)
                             jsOnlySourceSetsAttributes[sourceSet] = compilerAttribute
                             configuration.attributes.attribute(KotlinJsCompilerAttribute.jsCompilerAttribute, compilerAttribute)
                             return

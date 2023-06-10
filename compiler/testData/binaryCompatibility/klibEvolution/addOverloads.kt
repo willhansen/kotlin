@@ -42,7 +42,7 @@ fun qux(s: String): String = "initial narrower overload $s"
 // MODULE: mainLib(lib)
 // FILE: mainLib.kt
 
-val x = X()
+konst x = X()
 
 fun lib(): String = when {
     x.foo("first") != "initial overload first" -> "fail 1"

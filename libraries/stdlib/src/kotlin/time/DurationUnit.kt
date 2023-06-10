@@ -47,17 +47,17 @@ public expect enum class DurationUnit {
     DAYS;
 }
 
-/** Converts the given time duration [value] expressed in the specified [sourceUnit] into the specified [targetUnit]. */
+/** Converts the given time duration [konstue] expressed in the specified [sourceUnit] into the specified [targetUnit]. */
 @SinceKotlin("1.3")
-internal expect fun convertDurationUnit(value: Double, sourceUnit: DurationUnit, targetUnit: DurationUnit): Double
+internal expect fun convertDurationUnit(konstue: Double, sourceUnit: DurationUnit, targetUnit: DurationUnit): Double
 
 // overflown result is unspecified
 @SinceKotlin("1.5")
-internal expect fun convertDurationUnitOverflow(value: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long
+internal expect fun convertDurationUnitOverflow(konstue: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long
 
 // overflown result is coerced in the Long range boundaries
 @SinceKotlin("1.5")
-internal expect fun convertDurationUnit(value: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long
+internal expect fun convertDurationUnit(konstue: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long
 
 
 @SinceKotlin("1.3")
@@ -91,7 +91,7 @@ internal fun durationUnitByIsoChar(isoChar: Char, isTimeComponent: Boolean): Dur
         !isTimeComponent -> {
             when (isoChar) {
                 'D' -> DurationUnit.DAYS
-                else -> throw IllegalArgumentException("Invalid or unsupported duration ISO non-time unit: $isoChar")
+                else -> throw IllegalArgumentException("Inkonstid or unsupported duration ISO non-time unit: $isoChar")
             }
         }
         else -> {
@@ -99,7 +99,7 @@ internal fun durationUnitByIsoChar(isoChar: Char, isTimeComponent: Boolean): Dur
                 'H' -> DurationUnit.HOURS
                 'M' -> DurationUnit.MINUTES
                 'S' -> DurationUnit.SECONDS
-                else -> throw IllegalArgumentException("Invalid duration ISO time unit: $isoChar")
+                else -> throw IllegalArgumentException("Inkonstid duration ISO time unit: $isoChar")
             }
         }
     }

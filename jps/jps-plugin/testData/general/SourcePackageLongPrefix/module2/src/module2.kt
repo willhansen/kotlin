@@ -4,8 +4,8 @@ import bad.prefix.KotlinTestInBadPrefix
 import good.prefix.KotlinTestInGoodPrefix
 import good.prefix.JavaTest;
 
-val goodTest = KotlinTestInGoodPrefix()
-val badTest = KotlinTestInBadPrefix()
-val javaTest = JavaTest().bar()
+konst goodTest = KotlinTestInGoodPrefix()
+konst badTest = KotlinTestInBadPrefix()
+konst javaTest = JavaTest().bar()
 
 

@@ -149,16 +149,16 @@ class KotlinGradleIT : KGPBaseTest() {
     @GradleTest
     fun testConvertJavaToKotlin(gradleVersion: GradleVersion) {
         project("convertBetweenJavaAndKotlin", gradleVersion) {
-            val barKt = javaSourcesDir().resolve("foo/Bar.kt")
-            val barKtContent = barKt.readText()
+            konst barKt = javaSourcesDir().resolve("foo/Bar.kt")
+            konst barKtContent = barKt.readText()
             barKt.deleteIfExists()
 
             build("build")
 
-            val barClass = kotlinClassesDir().resolve("foo/Bar.class").toFile()
-            val barClassTimestamp = barClass.lastModified()
+            konst barClass = kotlinClassesDir().resolve("foo/Bar.class").toFile()
+            konst barClassTimestamp = barClass.lastModified()
 
-            val barJava = javaSourcesDir().resolve("foo/Bar.java")
+            konst barJava = javaSourcesDir().resolve("foo/Bar.java")
             barJava.deleteIfExists()
             barKt.writeText(barKtContent)
 
@@ -196,7 +196,7 @@ class KotlinGradleIT : KGPBaseTest() {
     @GradleTest
     fun testFreeCompilerArgs(gradleVersion: GradleVersion) {
         project("kotlinProject", gradleVersion) {
-            val customModuleName = "custom_module_name"
+            konst customModuleName = "custom_module_name"
 
             buildGradle.appendText(
                 //language=Groovy
@@ -218,7 +218,7 @@ class KotlinGradleIT : KGPBaseTest() {
     @GradleTest
     fun testKotlinOptionsViaDeprecatedKotlinJvmOptionsDsl(gradleVersion: GradleVersion) {
         project("kotlinProject", gradleVersion) {
-            val customModuleName = "custom_module_name"
+            konst customModuleName = "custom_module_name"
 
             buildGradle.appendText(
                 //language=Groovy
@@ -263,7 +263,7 @@ class KotlinGradleIT : KGPBaseTest() {
             gradleVersion,
             buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
         ) {
-            val buildGradleContentCopy = buildGradle.readText()
+            konst buildGradleContentCopy = buildGradle.readText()
 
             fun updateBuildGradle(langVersion: String, apiVersion: String) {
                 buildGradle.writeText(
@@ -334,13 +334,13 @@ class KotlinGradleIT : KGPBaseTest() {
     @GradleTest
     fun testArchiveBaseNameForModuleName(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
-            val archivesBaseName = "myArchivesBaseName"
+            konst archivesBaseName = "myArchivesBaseName"
             buildGradle.appendText("\narchivesBaseName = '$archivesBaseName'")
 
             // Add top-level members to force generation of the *.kotlin_module files for the two source sets
-            val mainHelloWorldKt = kotlinSourcesDir().resolve("helloWorld.kt")
+            konst mainHelloWorldKt = kotlinSourcesDir().resolve("helloWorld.kt")
             mainHelloWorldKt.appendText("\nfun topLevelFun() = 1")
-            val deployKotlinSrcKt = kotlinSourcesDir(sourceSet = "deploy").resolve("kotlinSrc.kt")
+            konst deployKotlinSrcKt = kotlinSourcesDir(sourceSet = "deploy").resolve("kotlinSrc.kt")
             deployKotlinSrcKt.appendText("\nfun topLevelFun() = 1")
 
             build("build", "deployClasses") {
@@ -406,7 +406,7 @@ class KotlinGradleIT : KGPBaseTest() {
     @GradleTest
     fun testSourceJar(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
-            val additionalSrcDir = "src/additional/kotlin/"
+            konst additionalSrcDir = "src/additional/kotlin/"
 
             with(projectPath.resolve(additionalSrcDir)) {
                 createDirectories()
@@ -450,7 +450,7 @@ class KotlinGradleIT : KGPBaseTest() {
             )
 
             build("classes") {
-                val metaInfDir = kotlinClassesDir().resolve("META-INF").toFile()
+                konst metaInfDir = kotlinClassesDir().resolve("META-INF").toFile()
                 assertNotNull(
                     metaInfDir.listFiles()?.singleOrNull {
                         it.name.endsWith(".kotlin_module")
@@ -511,7 +511,7 @@ class KotlinGradleIT : KGPBaseTest() {
         @TempDir tempDir: Path
     ) {
         project("internalTest", gradleVersion) {
-            val externalBuildDir = tempDir.resolve("externalBuild")
+            konst externalBuildDir = tempDir.resolve("externalBuild")
             externalBuildDir.createSymbolicLinkPointingTo(projectPath.resolve("build"))
 
             build("build") {
@@ -524,7 +524,7 @@ class KotlinGradleIT : KGPBaseTest() {
     @GradleTest
     fun testJavaLibraryCompatibility(gradleVersion: GradleVersion) {
         project("javaLibraryProject", gradleVersion) {
-            val compileKotlinTasks = arrayOf(":libA:compileKotlin", ":libB:compileKotlin", ":app:compileKotlin")
+            konst compileKotlinTasks = arrayOf(":libA:compileKotlin", ":libB:compileKotlin", ":app:compileKotlin")
             build("build") {
                 assertTasksExecuted(*compileKotlinTasks)
                 assertOutputDoesNotContain("Could not register Kotlin output")
@@ -599,17 +599,17 @@ class KotlinGradleIT : KGPBaseTest() {
                 // Find the benchmark output:
                 assertOutputContains("f ran at the speed of light")
 
-                val moduleDir = projectPath.resolve("build/repo/com/example/new-model/1.0/")
+                konst moduleDir = projectPath.resolve("build/repo/com/example/new-model/1.0/")
 
-                val publishedJar = moduleDir.resolve("new-model-1.0.jar")
+                konst publishedJar = moduleDir.resolve("new-model-1.0.jar")
                 ZipFile(publishedJar.toFile()).use { zip ->
-                    val entries = zip.entries().asSequence().map { it.name }
+                    konst entries = zip.entries().asSequence().map { it.name }
                     assertTrue { "com/example/A.class" in entries }
                 }
 
-                val publishedPom = moduleDir.resolve("new-model-1.0.pom")
-                val kotlinVersion = buildOptions.kotlinVersion
-                val pomText = publishedPom.readText().replace(Regex("\\s+"), "")
+                konst publishedPom = moduleDir.resolve("new-model-1.0.pom")
+                konst kotlinVersion = buildOptions.kotlinVersion
+                konst pomText = publishedPom.readText().replace(Regex("\\s+"), "")
                 assertTrue { "kotlin-gradle-plugin-api</artifactId><version>$kotlinVersion</version><scope>compile</scope>" in pomText }
                 assertTrue { "kotlin-stdlib-jdk8</artifactId><version>$kotlinVersion</version><scope>runtime</scope>" in pomText }
 
@@ -652,9 +652,9 @@ class KotlinGradleIT : KGPBaseTest() {
                             "No matching variant of project :projA was found. The consumer was configured to find an API of a library " +
                                     "compatible with Java 8, preferably in the form of class files, " +
                                     "and its dependencies declared externally, " +
-                                    "as well as attribute 'org.jetbrains.kotlin.platform.type' with value 'jvm', " +
-                                    "attribute 'com.example.compilation' with value 'foo', " +
-                                    "attribute 'com.example.target' with value 'bar' but:"
+                                    "as well as attribute 'org.jetbrains.kotlin.platform.type' with konstue 'jvm', " +
+                                    "attribute 'com.example.compilation' with konstue 'foo', " +
+                                    "attribute 'com.example.target' with konstue 'bar' but:"
                         )
                     }
                     else -> {
@@ -662,9 +662,9 @@ class KotlinGradleIT : KGPBaseTest() {
                             "No matching variant of project :projA was found. The consumer was configured to find an API of a library " +
                                     "compatible with Java 8, preferably in the form of class files, " +
                                     "preferably optimized for standard JVMs, and its dependencies declared externally, " +
-                                    "as well as attribute 'org.jetbrains.kotlin.platform.type' with value 'jvm', " +
-                                    "attribute 'com.example.compilation' with value 'foo', " +
-                                    "attribute 'com.example.target' with value 'bar' but:"
+                                    "as well as attribute 'org.jetbrains.kotlin.platform.type' with konstue 'jvm', " +
+                                    "attribute 'com.example.compilation' with konstue 'foo', " +
+                                    "attribute 'com.example.target' with konstue 'bar' but:"
                         )
                     }
                 }
@@ -684,9 +684,9 @@ class KotlinGradleIT : KGPBaseTest() {
                         assertOutputContains(
                             "No matching variant of project :projA was found. The consumer was configured to find an API of a library " +
                                     "compatible with Java 8, preferably in the form of class files, and its dependencies declared externally, " +
-                                    "as well as attribute 'org.jetbrains.kotlin.platform.type' with value 'jvm', " +
-                                    "attribute 'com.example.compilation' with value 'bar', " +
-                                    "attribute 'com.example.target' with value 'foo' but:"
+                                    "as well as attribute 'org.jetbrains.kotlin.platform.type' with konstue 'jvm', " +
+                                    "attribute 'com.example.compilation' with konstue 'bar', " +
+                                    "attribute 'com.example.target' with konstue 'foo' but:"
                         )
                     }
                     else -> {
@@ -694,9 +694,9 @@ class KotlinGradleIT : KGPBaseTest() {
                             "No matching variant of project :projA was found. The consumer was configured to find an API of a library " +
                                     "compatible with Java 8, preferably in the form of class files, preferably optimized for standard JVMs, " +
                                     "and its dependencies declared externally, " +
-                                    "as well as attribute 'org.jetbrains.kotlin.platform.type' with value 'jvm', " +
-                                    "attribute 'com.example.compilation' with value 'bar', " +
-                                    "attribute 'com.example.target' with value 'foo' but:"
+                                    "as well as attribute 'org.jetbrains.kotlin.platform.type' with konstue 'jvm', " +
+                                    "attribute 'com.example.compilation' with konstue 'bar', " +
+                                    "attribute 'com.example.target' with konstue 'foo' but:"
                         )
                     }
                 }
@@ -708,7 +708,7 @@ class KotlinGradleIT : KGPBaseTest() {
     @GradleTest
     fun testLoadCompilerEmbeddableAfterOtherKotlinArtifacts(gradleVersion: GradleVersion) {
         project("simpleProjectClasspath", gradleVersion) {
-            val buildscriptClasspathPrefix = "buildscript-classpath = "
+            konst buildscriptClasspathPrefix = "buildscript-classpath = "
             buildGradle.appendText(
                 """
                 
@@ -720,7 +720,7 @@ class KotlinGradleIT : KGPBaseTest() {
             lateinit var classpath: List<String>
 
             build("help") {
-                val classpathLine = output.lines().single { buildscriptClasspathPrefix in it }
+                konst classpathLine = output.lines().single { buildscriptClasspathPrefix in it }
                 classpath = classpathLine
                     .substringAfter(buildscriptClasspathPrefix)
                     .removeSurrounding("[", "]")
@@ -728,14 +728,14 @@ class KotlinGradleIT : KGPBaseTest() {
             }
 
             buildGradle.modify {
-                val reorderedClasspath = run {
-                    val (kotlinCompilerEmbeddable, others) = classpath.partition { "kotlin-compiler-embeddable" in it ||
+                konst reorderedClasspath = run {
+                    konst (kotlinCompilerEmbeddable, others) = classpath.partition { "kotlin-compiler-embeddable" in it ||
                                 // build-common should be loaded prior compiler-embedable, otherwise we could depend on old version of
                                 // serializer classes and fail with NSME
                                 "kotlin-build-common" in it}
                     others + kotlinCompilerEmbeddable
                 }
-                val newClasspathString = "classpath files(\n" + reorderedClasspath.joinToString(",\n") { "'$it'" } + "\n)"
+                konst newClasspathString = "classpath files(\n" + reorderedClasspath.joinToString(",\n") { "'$it'" } + "\n)"
                 it.checkedReplace("classpath \"org.jetbrains.kotlin:kotlin-gradle-plugin:${'$'}kotlin_version\"", newClasspathString)
             }
 

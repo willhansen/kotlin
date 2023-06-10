@@ -13,21 +13,21 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import java.io.File
 
 open class KotlinCompileArgumentsProvider<T : AbstractKotlinCompile<out CommonCompilerArguments>>(taskProvider: T) {
-    val logger: Logger = taskProvider.logger
-    val isMultiplatform: Boolean = taskProvider.multiPlatformEnabled.get()
-    private val pluginData = taskProvider.kotlinPluginData?.orNull
-    val pluginClasspath: FileCollection = listOfNotNull(taskProvider.pluginClasspath, pluginData?.classpath).reduce(FileCollection::plus)
-    val pluginOptions: CompilerPluginOptions = taskProvider.pluginOptions.toSingleCompilerPluginOptions() + pluginData?.options
+    konst logger: Logger = taskProvider.logger
+    konst isMultiplatform: Boolean = taskProvider.multiPlatformEnabled.get()
+    private konst pluginData = taskProvider.kotlinPluginData?.orNull
+    konst pluginClasspath: FileCollection = listOfNotNull(taskProvider.pluginClasspath, pluginData?.classpath).reduce(FileCollection::plus)
+    konst pluginOptions: CompilerPluginOptions = taskProvider.pluginOptions.toSingleCompilerPluginOptions() + pluginData?.options
 }
 
 class KotlinJvmCompilerArgumentsProvider
     (taskProvider: KotlinCompile) : KotlinCompileArgumentsProvider<KotlinCompile>(taskProvider) {
-    val taskName: String = taskProvider.name
-    val friendPaths: FileCollection = taskProvider.friendPaths
-    val compileClasspath: Iterable<File> = taskProvider.libraries
-    val destinationDir: File = taskProvider.destinationDirectory.get().asFile
+    konst taskName: String = taskProvider.name
+    konst friendPaths: FileCollection = taskProvider.friendPaths
+    konst compileClasspath: Iterable<File> = taskProvider.libraries
+    konst destinationDir: File = taskProvider.destinationDirectory.get().asFile
     @Suppress("DEPRECATION")
-    val taskModuleName: String? = taskProvider.moduleName.orNull
-    val nagTaskModuleNameUsage: Boolean = taskProvider.nagTaskModuleNameUsage.get()
-    internal val compilerOptions: KotlinJvmCompilerOptions = taskProvider.compilerOptions
+    konst taskModuleName: String? = taskProvider.moduleName.orNull
+    konst nagTaskModuleNameUsage: Boolean = taskProvider.nagTaskModuleNameUsage.get()
+    internal konst compilerOptions: KotlinJvmCompilerOptions = taskProvider.compilerOptions
 }

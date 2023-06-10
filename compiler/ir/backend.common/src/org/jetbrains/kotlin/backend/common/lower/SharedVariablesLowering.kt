@@ -31,20 +31,20 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-val sharedVariablesPhase = makeIrFilePhase(
+konst sharedVariablesPhase = makeIrFilePhase(
     ::SharedVariablesLowering,
     name = "SharedVariables",
     description = "Transform shared variables"
 )
 
-class SharedVariablesLowering(val context: BackendContext) : BodyLoweringPass {
+class SharedVariablesLowering(konst context: BackendContext) : BodyLoweringPass {
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         SharedVariablesTransformer(irBody, container).lowerSharedVariables()
     }
 
-    private inner class SharedVariablesTransformer(val irBody: IrBody, val irDeclaration: IrDeclaration) {
-        private val sharedVariables = HashSet<IrVariable>()
+    private inner class SharedVariablesTransformer(konst irBody: IrBody, konst irDeclaration: IrDeclaration) {
+        private konst sharedVariables = HashSet<IrVariable>()
 
         fun lowerSharedVariables() {
             collectSharedVariables()
@@ -54,25 +54,25 @@ class SharedVariablesLowering(val context: BackendContext) : BodyLoweringPass {
         }
 
         private fun collectSharedVariables() {
-            val skippedFunctionsParents = mutableMapOf<IrFunction, IrDeclarationParent>()
+            konst skippedFunctionsParents = mutableMapOf<IrFunction, IrDeclarationParent>()
             irBody.accept(object : IrElementVisitor<Unit, IrDeclarationParent?> {
-                val relevantVars = HashSet<IrVariable>()
-                val relevantVals = HashSet<IrVariable>()
+                konst relevantVars = HashSet<IrVariable>()
+                konst relevantVals = HashSet<IrVariable>()
 
                 override fun visitElement(element: IrElement, data: IrDeclarationParent?) {
                     element.acceptChildren(this, data)
                 }
 
                 override fun visitCall(expression: IrCall, data: IrDeclarationParent?) {
-                    val callee = expression.symbol.owner
+                    konst callee = expression.symbol.owner
                     if (!callee.isInline) {
                         super.visitCall(expression, data)
                         return
                     }
                     expression.dispatchReceiver?.accept(this, data)
                     expression.extensionReceiver?.accept(this, data)
-                    for (param in callee.valueParameters) {
-                        val arg = expression.getValueArgument(param.index) ?: continue
+                    for (param in callee.konstueParameters) {
+                        konst arg = expression.getValueArgument(param.index) ?: continue
                         if (param.isInlineParameter()
                             // This is somewhat conservative but simple.
                             // If a user put redundant <crossinline> modifier on a parameter,
@@ -98,9 +98,9 @@ class SharedVariablesLowering(val context: BackendContext) : BodyLoweringPass {
                     if (declaration.isVar) {
                         relevantVars.add(declaration)
                     } else if (declaration.initializer == null) {
-                        // A val-variable can be initialized from another container (and thus can require shared variable transformation)
+                        // A konst-variable can be initialized from another container (and thus can require shared variable transformation)
                         // in case that container is a lambda with a corresponding contract, e.g. with invocation kind EXACTLY_ONCE.
-                        // Here, we collect all val-variables without immediate initializer to relevantVals, and later we copy only those
+                        // Here, we collect all konst-variables without immediate initializer to relevantVals, and later we copy only those
                         // variables which are initialized in a foreign container, to sharedVariables.
                         relevantVals.add(declaration)
                     }
@@ -109,16 +109,16 @@ class SharedVariablesLowering(val context: BackendContext) : BodyLoweringPass {
                 override fun visitValueAccess(expression: IrValueAccessExpression, data: IrDeclarationParent?) {
                     expression.acceptChildren(this, data)
 
-                    val value = expression.symbol.owner
-                    if (value in relevantVars && getRealParent(value as IrVariable) != data) {
-                        sharedVariables.add(value)
+                    konst konstue = expression.symbol.owner
+                    if (konstue in relevantVars && getRealParent(konstue as IrVariable) != data) {
+                        sharedVariables.add(konstue)
                     }
                 }
 
                 override fun visitSetValue(expression: IrSetValue, data: IrDeclarationParent?) {
                     super.visitSetValue(expression, data)
 
-                    val variable = expression.symbol.owner
+                    konst variable = expression.symbol.owner
                     if (variable is IrVariable && variable.initializer == null && getRealParent(variable) != data && variable in relevantVals) {
                         sharedVariables.add(variable)
                     }
@@ -131,7 +131,7 @@ class SharedVariablesLowering(val context: BackendContext) : BodyLoweringPass {
         }
 
         private fun rewriteSharedVariables() {
-            val transformedSymbols = HashMap<IrValueSymbol, IrVariableSymbol>()
+            konst transformedSymbols = HashMap<IrValueSymbol, IrVariableSymbol>()
 
             irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
                 override fun visitVariable(declaration: IrVariable): IrStatement {
@@ -139,7 +139,7 @@ class SharedVariablesLowering(val context: BackendContext) : BodyLoweringPass {
 
                     if (declaration !in sharedVariables) return declaration
 
-                    val newDeclaration = context.sharedVariablesManager.declareSharedVariable(declaration)
+                    konst newDeclaration = context.sharedVariablesManager.declareSharedVariable(declaration)
                     newDeclaration.parent = declaration.parent
                     transformedSymbols[declaration.symbol] = newDeclaration.symbol
 
@@ -151,7 +151,7 @@ class SharedVariablesLowering(val context: BackendContext) : BodyLoweringPass {
                 override fun visitGetValue(expression: IrGetValue): IrExpression {
                     expression.transformChildrenVoid(this)
 
-                    val newDeclaration = getTransformedSymbol(expression.symbol) ?: return expression
+                    konst newDeclaration = getTransformedSymbol(expression.symbol) ?: return expression
 
                     return context.sharedVariablesManager.getSharedValue(newDeclaration, expression)
                 }
@@ -159,7 +159,7 @@ class SharedVariablesLowering(val context: BackendContext) : BodyLoweringPass {
                 override fun visitSetValue(expression: IrSetValue): IrExpression {
                     expression.transformChildrenVoid(this)
 
-                    val newDeclaration = getTransformedSymbol(expression.symbol) ?: return expression
+                    konst newDeclaration = getTransformedSymbol(expression.symbol) ?: return expression
 
                     return context.sharedVariablesManager.setSharedValue(newDeclaration, expression)
                 }

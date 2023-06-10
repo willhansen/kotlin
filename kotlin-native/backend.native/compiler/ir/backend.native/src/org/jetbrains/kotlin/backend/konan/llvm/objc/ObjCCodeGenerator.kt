@@ -13,58 +13,58 @@ import llvm.LLVMValueRef
 import org.jetbrains.kotlin.backend.konan.getARCRetainAutoreleasedReturnValueMarker
 import org.jetbrains.kotlin.backend.konan.llvm.*
 
-internal open class ObjCCodeGenerator(val codegen: CodeGenerator) {
-    val generationState = codegen.generationState
-    val context = codegen.context
-    val llvm = codegen.llvm
+internal open class ObjCCodeGenerator(konst codegen: CodeGenerator) {
+    konst generationState = codegen.generationState
+    konst context = codegen.context
+    konst llvm = codegen.llvm
 
-    val dataGenerator = codegen.objCDataGenerator!!
+    konst dataGenerator = codegen.objCDataGenerator!!
 
     fun FunctionGenerationContext.genSelector(selector: String): LLVMValueRef = genObjCSelector(selector)
 
     fun FunctionGenerationContext.genGetLinkedClass(name: String): LLVMValueRef {
-        val classRef = dataGenerator.genClassRef(name)
+        konst classRef = dataGenerator.genClassRef(name)
         return load(classRef.llvm)
     }
 
-    private val objcMsgSend = llvm.externalNativeRuntimeFunction(
+    private konst objcMsgSend = llvm.externalNativeRuntimeFunction(
                     "objc_msgSend",
                     LlvmRetType(llvm.int8PtrType),
                     listOf(LlvmParamType(llvm.int8PtrType), LlvmParamType(llvm.int8PtrType)),
                     isVararg = true
     ).toConstPointer()
 
-    val objcRelease = llvm.externalNativeRuntimeFunction(
+    konst objcRelease = llvm.externalNativeRuntimeFunction(
             "llvm.objc.release",
             LlvmRetType(llvm.voidType),
             listOf(LlvmParamType(llvm.int8PtrType)),
             listOf(LlvmFunctionAttribute.NoUnwind)
     )
 
-    val objcAlloc = llvm.externalNativeRuntimeFunction(
+    konst objcAlloc = llvm.externalNativeRuntimeFunction(
             "objc_alloc",
             LlvmRetType(llvm.int8PtrType),
             listOf(LlvmParamType(llvm.int8PtrType))
     )
 
-    val objcAutoreleaseReturnValue = llvm.externalNativeRuntimeFunction(
+    konst objcAutoreleaseReturnValue = llvm.externalNativeRuntimeFunction(
             "llvm.objc.autoreleaseReturnValue",
             LlvmRetType(llvm.int8PtrType),
             listOf(LlvmParamType(llvm.int8PtrType)),
             listOf(LlvmFunctionAttribute.NoUnwind)
     )
 
-    val objcRetainAutoreleasedReturnValue = llvm.externalNativeRuntimeFunction(
+    konst objcRetainAutoreleasedReturnValue = llvm.externalNativeRuntimeFunction(
             "llvm.objc.retainAutoreleasedReturnValue",
             LlvmRetType(llvm.int8PtrType),
             listOf(LlvmParamType(llvm.int8PtrType)),
             listOf(LlvmFunctionAttribute.NoUnwind)
     )
 
-    val objcRetainAutoreleasedReturnValueMarker: LLVMValueRef? by lazy {
+    konst objcRetainAutoreleasedReturnValueMarker: LLVMValueRef? by lazy {
         // See emitAutoreleasedReturnValueMarker in Clang.
-        val asmString = codegen.context.config.target.getARCRetainAutoreleasedReturnValueMarker() ?: return@lazy null
-        val asmStringBytes = asmString.toByteArray()
+        konst asmString = codegen.context.config.target.getARCRetainAutoreleasedReturnValueMarker() ?: return@lazy null
+        konst asmStringBytes = asmString.toByteArray()
         LLVMGetInlineAsm(
                 Ty = functionType(llvm.voidType, false),
                 AsmString = asmStringBytes.toCValues(),
@@ -86,7 +86,7 @@ internal open class ObjCCodeGenerator(val codegen: CodeGenerator) {
 }
 
 internal fun FunctionGenerationContext.genObjCSelector(selector: String): LLVMValueRef {
-    val selectorRef = codegen.objCDataGenerator!!.genSelectorRef(selector)
+    konst selectorRef = codegen.objCDataGenerator!!.genSelectorRef(selector)
     // TODO: clang emits it with `invariant.load` metadata.
     return load(selectorRef.llvm)
 }

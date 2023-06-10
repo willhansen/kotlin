@@ -10,19 +10,19 @@ import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 
 /**
- *  Information for compilation of code fragments for `evaluate expression`
+ *  Information for compilation of code fragments for `ekonstuate expression`
  *
- *  The expression evaluator works by wrapping a code fragment in a method.
+ *  The expression ekonstuator works by wrapping a code fragment in a method.
  *  The free variables of the fragment are closed over by the parameters of
  *  that method, and finally the method is placed in a class.
  *
  *  This data structure contains "synthesized" descriptors for that class,
  *  method and parameter lay-out.
  */
-class EvaluatorFragmentInfo(
-    val classDescriptor: ClassDescriptor,
-    val methodDescriptor: FunctionDescriptor,
-    val parameters: List<EvaluatorFragmentParameterInfo>,
+class EkonstuatorFragmentInfo(
+    konst classDescriptor: ClassDescriptor,
+    konst methodDescriptor: FunctionDescriptor,
+    konst parameters: List<EkonstuatorFragmentParameterInfo>,
 ) {
 
     companion object {
@@ -32,14 +32,14 @@ class EvaluatorFragmentInfo(
         fun createWithFragmentParameterInfo(
             classDescriptor: ClassDescriptor,
             methodDescriptor: FunctionDescriptor,
-            parametersWithInfo: List<EvaluatorFragmentParameterInfo>
+            parametersWithInfo: List<EkonstuatorFragmentParameterInfo>
         ) =
-            EvaluatorFragmentInfo(classDescriptor, methodDescriptor, parametersWithInfo)
+            EkonstuatorFragmentInfo(classDescriptor, methodDescriptor, parametersWithInfo)
     }
 }
 
 
-data class EvaluatorFragmentParameterInfo(
-    val descriptor: DeclarationDescriptor,
-    val isLValue: Boolean,
+data class EkonstuatorFragmentParameterInfo(
+    konst descriptor: DeclarationDescriptor,
+    konst isLValue: Boolean,
 )

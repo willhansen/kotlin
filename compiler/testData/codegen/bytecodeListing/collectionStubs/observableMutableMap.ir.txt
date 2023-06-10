@@ -18,6 +18,6 @@ public abstract class ObservableMutableMap {
     public final method putAll(@org.jetbrains.annotations.NotNull p0: java.util.Map): void
     public final @org.jetbrains.annotations.Nullable method remove(p0: java.lang.Object): java.lang.Object
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
     public inner class java/util/Map$Entry
 }

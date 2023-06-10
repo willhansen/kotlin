@@ -18,16 +18,16 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 import org.jetbrains.kotlin.resolve.jvm.requiresFunctionNameManglingForReturnType
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DescriptorWithContainerSource
 
-class DelegatedPropertiesCodegenHelper(private val state: GenerationState) {
+class DelegatedPropertiesCodegenHelper(private konst state: GenerationState) {
 
-    private val bindingContext = state.bindingContext
-    private val bindingTrace = state.bindingTrace
-    private val typeMapper = state.typeMapper
+    private konst bindingContext = state.bindingContext
+    private konst bindingTrace = state.bindingTrace
+    private konst typeMapper = state.typeMapper
 
     fun isDelegatedPropertyMetadataRequired(descriptor: VariableDescriptorWithAccessors): Boolean {
-        val provideDelegateResolvedCall = bindingContext[BindingContext.PROVIDE_DELEGATE_RESOLVED_CALL, descriptor]
-        val getValueResolvedCall = descriptor.getter?.let { bindingContext[BindingContext.DELEGATED_PROPERTY_RESOLVED_CALL, it] }
-        val setValueResolvedCall = descriptor.setter?.let { bindingContext[BindingContext.DELEGATED_PROPERTY_RESOLVED_CALL, it] }
+        konst provideDelegateResolvedCall = bindingContext[BindingContext.PROVIDE_DELEGATE_RESOLVED_CALL, descriptor]
+        konst getValueResolvedCall = descriptor.getter?.let { bindingContext[BindingContext.DELEGATED_PROPERTY_RESOLVED_CALL, it] }
+        konst setValueResolvedCall = descriptor.setter?.let { bindingContext[BindingContext.DELEGATED_PROPERTY_RESOLVED_CALL, it] }
 
         return provideDelegateResolvedCall != null && isDelegatedPropertyMetadataRequired(provideDelegateResolvedCall) ||
                 getValueResolvedCall != null && isDelegatedPropertyMetadataRequired(getValueResolvedCall) ||
@@ -35,18 +35,18 @@ class DelegatedPropertiesCodegenHelper(private val state: GenerationState) {
     }
 
     private fun isDelegatedPropertyMetadataRequired(operatorCall: ResolvedCall<FunctionDescriptor>): Boolean {
-        val calleeDescriptor = operatorCall.resultingDescriptor.getActualCallee().original
+        konst calleeDescriptor = operatorCall.resultingDescriptor.getActualCallee().original
 
         if (!calleeDescriptor.isInline) return true
 
-        val metadataParameter = calleeDescriptor.valueParameters[1]
+        konst metadataParameter = calleeDescriptor.konstueParameters[1]
         if (true == bindingContext[BindingContext.UNUSED_DELEGATED_PROPERTY_OPERATOR_PARAMETER, metadataParameter]) {
             return false
         }
 
         if (calleeDescriptor !is DescriptorWithContainerSource) return true
 
-        val cachedResult = bindingTrace[CodegenBinding.PROPERTY_METADATA_REQUIRED_FOR_OPERATOR_CALL, calleeDescriptor]
+        konst cachedResult = bindingTrace[CodegenBinding.PROPERTY_METADATA_REQUIRED_FOR_OPERATOR_CALL, calleeDescriptor]
         if (cachedResult != null) {
             return cachedResult
         }
@@ -66,17 +66,17 @@ class DelegatedPropertiesCodegenHelper(private val state: GenerationState) {
         require(calleeDescriptor is DescriptorWithContainerSource) {
             "Function descriptor from binaries expected: $calleeDescriptor"
         }
-        val metadataParameterIndex = getMetadataParameterIndex(calleeDescriptor)
-        val containerId = KotlinTypeMapper.getContainingClassesForDeserializedCallable(calleeDescriptor).implClassId
-        val asmMethod = state.typeMapper.mapAsmMethod(calleeDescriptor)
-        val isMangled = requiresFunctionNameManglingForReturnType(calleeDescriptor)
-        val methodNode = loadCompiledInlineFunction(containerId, asmMethod, calleeDescriptor.isSuspend, isMangled, state).node
+        konst metadataParameterIndex = getMetadataParameterIndex(calleeDescriptor)
+        konst containerId = KotlinTypeMapper.getContainingClassesForDeserializedCallable(calleeDescriptor).implClassId
+        konst asmMethod = state.typeMapper.mapAsmMethod(calleeDescriptor)
+        konst isMangled = requiresFunctionNameManglingForReturnType(calleeDescriptor)
+        konst methodNode = loadCompiledInlineFunction(containerId, asmMethod, calleeDescriptor.isSuspend, isMangled, state).node
         return methodNode.usesLocalExceptParameterNullCheck(metadataParameterIndex)
     }
 
     private fun getMetadataParameterIndex(calleeDescriptor: FunctionDescriptor): Int {
-        assert(calleeDescriptor.valueParameters.size >= 2) {
-            "Unexpected delegated property operator (should have at least 2 value parameters): $calleeDescriptor"
+        assert(calleeDescriptor.konstueParameters.size >= 2) {
+            "Unexpected delegated property operator (should have at least 2 konstue parameters): $calleeDescriptor"
         }
 
         var index = 0
@@ -89,7 +89,7 @@ class DelegatedPropertiesCodegenHelper(private val state: GenerationState) {
             index += typeMapper.mapType(it.type).size
         }
 
-        index += typeMapper.mapType(calleeDescriptor.valueParameters[0].type).size
+        index += typeMapper.mapType(calleeDescriptor.konstueParameters[0].type).size
 
         return index
     }

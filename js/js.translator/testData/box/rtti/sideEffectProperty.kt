@@ -4,7 +4,7 @@ package foo
 var counter = 0
 
 class A {
-    val x: Any?
+    konst x: Any?
         get() =
             when (counter++) {
                 0 -> "0"

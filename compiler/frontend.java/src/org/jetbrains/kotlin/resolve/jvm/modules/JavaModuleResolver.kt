@@ -26,8 +26,8 @@ interface JavaModuleResolver : JavaModuleAnnotationsProvider {
 
     sealed class AccessError {
         object ModuleDoesNotReadUnnamedModule : AccessError()
-        data class ModuleDoesNotReadModule(val dependencyModuleName: String) : AccessError()
-        data class ModuleDoesNotExportPackage(val dependencyModuleName: String) : AccessError()
+        data class ModuleDoesNotReadModule(konst dependencyModuleName: String) : AccessError()
+        data class ModuleDoesNotExportPackage(konst dependencyModuleName: String) : AccessError()
     }
 
     companion object SERVICE {

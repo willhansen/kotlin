@@ -11,8 +11,8 @@ enum class A {
     },
     Z(5);
 
-    val prop1: String
-    val prop2: String = "const2"
+    konst prop1: String
+    konst prop2: String = "const2"
     var prop3: String = ""
 
     constructor(arg: String) {

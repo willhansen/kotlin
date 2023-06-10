@@ -19,7 +19,7 @@ import kotlin.test.*
 class PathRecursiveFunctionsTest : AbstractPathTest() {
     @Test
     fun deleteFile() {
-        val file = createTempFile()
+        konst file = createTempFile()
 
         assertTrue(file.exists())
         file.deleteRecursively()
@@ -35,7 +35,7 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteDirectory() {
-        val dir = createTestFiles()
+        konst dir = createTestFiles()
 
         assertTrue(dir.exists())
         dir.deleteRecursively()
@@ -45,7 +45,7 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteNotExistingParent() {
-        val basedir = createTempDirectory().cleanupRecursively()
+        konst basedir = createTempDirectory().cleanupRecursively()
         basedir.resolve("a/b").deleteRecursively()
         basedir.resolve("a/b/c").deleteRecursively()
     }
@@ -55,13 +55,13 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteRestrictedRead() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val restrictedEmptyDir = basedir.resolve("6")
-        val restrictedDir = basedir.resolve("1")
-        val restrictedFile = basedir.resolve("7.txt")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst restrictedEmptyDir = basedir.resolve("6")
+        konst restrictedDir = basedir.resolve("1")
+        konst restrictedFile = basedir.resolve("7.txt")
 
         withRestrictedRead(restrictedEmptyDir, restrictedDir, restrictedFile) {
-            val error = assertFailsWith<java.nio.file.FileSystemException>("Expected incomplete recursive deletion") {
+            konst error = assertFailsWith<java.nio.file.FileSystemException>("Expected incomplete recursive deletion") {
                 basedir.deleteRecursively()
             }
 
@@ -75,7 +75,7 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
             // No attempt to delete even when empty directories can be removed without write permission
             assertTrue(restrictedEmptyDir.exists())
             assertTrue(restrictedDir.exists()) // couldn't read directory entries
-            assertFalse(restrictedFile.exists()) // restricted read allows removal of file
+            assertFalse(restrictedFile.exists()) // restricted read allows remokonst of file
 
             restrictedEmptyDir.toFile().setReadable(true)
             restrictedDir.toFile().setReadable(true)
@@ -86,19 +86,19 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteRestrictedWrite() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val restrictedEmptyDir = basedir.resolve("6")
-        val restrictedDir = basedir.resolve("8")
-        val restrictedFile = basedir.resolve("1/3/5.txt")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst restrictedEmptyDir = basedir.resolve("6")
+        konst restrictedDir = basedir.resolve("8")
+        konst restrictedFile = basedir.resolve("1/3/5.txt")
 
         withRestrictedWrite(restrictedEmptyDir, restrictedDir, restrictedFile) {
-            val error = assertFailsWith<java.nio.file.FileSystemException>("Expected incomplete recursive deletion") {
+            konst error = assertFailsWith<java.nio.file.FileSystemException>("Expected incomplete recursive deletion") {
                 basedir.deleteRecursively()
             }
 
             // AccessDeniedException when deleting "8/9.txt", wrapped in FileSystemException if SecureDirectoryStream was used
             // DirectoryNotEmptyException is not thrown from parent directories
-            when (val accessDenied = error.suppressedExceptions.single()) {
+            when (konst accessDenied = error.suppressedExceptions.single()) {
                 is java.nio.file.AccessDeniedException -> {
                     assertEquals(restrictedDir.resolve("9.txt").toString(), accessDenied.file)
                 }
@@ -120,8 +120,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteBaseSymlinkToFile() {
-        val file = createTempFile().cleanup()
-        val link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(file) ?: return
+        konst file = createTempFile().cleanup()
+        konst link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(file) ?: return
 
         link.deleteRecursively()
         assertFalse(link.exists(LinkOption.NOFOLLOW_LINKS))
@@ -130,8 +130,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteBaseSymlinkToDirectory() {
-        val dir = createTestFiles().cleanupRecursively()
-        val link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(dir) ?: return
+        konst dir = createTestFiles().cleanupRecursively()
+        konst link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(dir) ?: return
 
         link.deleteRecursively()
         assertFalse(link.exists(LinkOption.NOFOLLOW_LINKS))
@@ -140,8 +140,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteSymlinkToFile() {
-        val file = createTempFile().cleanup()
-        val dir = createTestFiles().cleanupRecursively().also { it.resolve("8/link").tryCreateSymbolicLinkTo(file) ?: return }
+        konst file = createTempFile().cleanup()
+        konst dir = createTestFiles().cleanupRecursively().also { it.resolve("8/link").tryCreateSymbolicLinkTo(file) ?: return }
 
         dir.deleteRecursively()
         assertFalse(dir.exists())
@@ -150,8 +150,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteSymlinkToDirectory() {
-        val dir1 = createTestFiles().cleanupRecursively()
-        val dir2 = createTestFiles().cleanupRecursively().also { it.resolve("8/link").tryCreateSymbolicLinkTo(dir1) ?: return }
+        konst dir1 = createTestFiles().cleanupRecursively()
+        konst dir2 = createTestFiles().cleanupRecursively().also { it.resolve("8/link").tryCreateSymbolicLinkTo(dir1) ?: return }
 
         dir2.deleteRecursively()
         assertFalse(dir2.exists())
@@ -160,8 +160,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteParentSymlink() {
-        val dir1 = createTestFiles().cleanupRecursively()
-        val dir2 = createTempDirectory().cleanupRecursively().also { it.resolve("link").tryCreateSymbolicLinkTo(dir1) ?: return }
+        konst dir1 = createTestFiles().cleanupRecursively()
+        konst dir2 = createTempDirectory().cleanupRecursively().also { it.resolve("link").tryCreateSymbolicLinkTo(dir1) ?: return }
 
         dir2.resolve("link/8").deleteRecursively()
         assertFalse(dir1.resolve("8").exists())
@@ -172,9 +172,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteSymlinkToSymlink() {
-        val dir = createTestFiles().cleanupRecursively()
-        val link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(dir) ?: return
-        val linkToLink = createTempDirectory().cleanupRecursively().resolve("linkToLink").tryCreateSymbolicLinkTo(link) ?: return
+        konst dir = createTestFiles().cleanupRecursively()
+        konst link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(dir) ?: return
+        konst linkToLink = createTempDirectory().cleanupRecursively().resolve("linkToLink").tryCreateSymbolicLinkTo(link) ?: return
 
         linkToLink.deleteRecursively()
         assertFalse(linkToLink.exists(LinkOption.NOFOLLOW_LINKS))
@@ -184,8 +184,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteSymlinkCyclic() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val original = basedir.resolve("1")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst original = basedir.resolve("1")
         original.resolve("2/link").tryCreateSymbolicLinkTo(original) ?: return
 
         basedir.deleteRecursively()
@@ -194,9 +194,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteSymlinkCyclicWithTwo() {
-        val basedir = createTestFiles().cleanupRecursively()
-        val dir8 = basedir.resolve("8")
-        val dir2 = basedir.resolve("1/2")
+        konst basedir = createTestFiles().cleanupRecursively()
+        konst dir8 = basedir.resolve("8")
+        konst dir2 = basedir.resolve("1/2")
         dir8.resolve("linkTo2").tryCreateSymbolicLinkTo(dir2) ?: return
         dir2.resolve("linkTo8").tryCreateSymbolicLinkTo(dir8) ?: return
 
@@ -206,8 +206,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteSymlinkPointingToItself() {
-        val basedir = createTempDirectory().cleanupRecursively()
-        val link = basedir.resolve("link")
+        konst basedir = createTempDirectory().cleanupRecursively()
+        konst link = basedir.resolve("link")
         link.tryCreateSymbolicLinkTo(link) ?: return
 
         basedir.deleteRecursively()
@@ -216,9 +216,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun deleteSymlinkTwoPointingToEachOther() {
-        val basedir = createTempDirectory().cleanupRecursively()
-        val link1 = basedir.resolve("link1")
-        val link2 = basedir.resolve("link2").tryCreateSymbolicLinkTo(link1) ?: return
+        konst basedir = createTempDirectory().cleanupRecursively()
+        konst link1 = basedir.resolve("link1")
+        konst link2 = basedir.resolve("link2").tryCreateSymbolicLinkTo(link1) ?: return
         link1.tryCreateSymbolicLinkTo(link2) ?: return
 
         basedir.deleteRecursively()
@@ -236,17 +236,17 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     private fun compareDirectories(src: Path, dst: Path) {
         for (srcFile in src.walkIncludeDirectories()) {
-            val dstFile = dst.resolve(srcFile.relativeTo(src))
+            konst dstFile = dst.resolve(srcFile.relativeTo(src))
             compareFiles(srcFile, dstFile)
         }
     }
 
     @Test
     fun copyFileToFile() {
-        val src = createTempFile().cleanup().also { it.writeText("hello") }
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst src = createTempFile().cleanup().also { it.writeText("hello") }
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
-        val copyResult = src.copyToRecursively(dst, followLinks = false)
+        konst copyResult = src.copyToRecursively(dst, followLinks = false)
         assertEquals(dst, copyResult)
         compareFiles(src, dst)
 
@@ -262,8 +262,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyFileToDirectory() {
-        val src = createTempFile().cleanup().also { it.writeText("hello") }
-        val dst = createTestFiles().cleanupRecursively()
+        konst src = createTempFile().cleanup().also { it.writeText("hello") }
+        konst dst = createTestFiles().cleanupRecursively()
 
         assertFailsWith<java.nio.file.FileAlreadyExistsException> {
             src.copyToRecursively(dst, followLinks = false)
@@ -278,7 +278,7 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
         }
         assertTrue(dst.isDirectory())
 
-        val copyResult = src.copyToRecursively(dst, followLinks = false, overwrite = true)
+        konst copyResult = src.copyToRecursively(dst, followLinks = false, overwrite = true)
         assertEquals(dst, copyResult)
         compareFiles(src, dst)
     }
@@ -289,17 +289,17 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyDirectoryToDirectory() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
-        val copyResult = src.copyToRecursively(dst, followLinks = false)
+        konst copyResult = src.copyToRecursively(dst, followLinks = false)
         assertEquals(dst, copyResult)
         compareDirectories(src, dst)
 
         src.resolve("1/3/4.txt").writeText("hello")
         dst.resolve("10").createDirectory()
 
-        val conflictingFiles = mutableListOf<String>()
+        konst conflictingFiles = mutableListOf<String>()
         src.copyToRecursively(dst, followLinks = false, onError = { source, _, exception ->
             assertIs<java.nio.file.FileAlreadyExistsException>(exception)
             conflictingFiles.add(source.relativePathString(src))
@@ -315,10 +315,10 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyDirectoryToFile() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempFile().cleanupRecursively().also { it.writeText("hello") }
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempFile().cleanupRecursively().also { it.writeText("hello") }
 
-        val existsException = assertFailsWith<java.nio.file.FileAlreadyExistsException> {
+        konst existsException = assertFailsWith<java.nio.file.FileAlreadyExistsException> {
             src.copyToRecursively(dst, followLinks = false)
         }
         // attempted to copy only the root directory(src)
@@ -331,8 +331,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyNonExistentSource() {
-        val src = createTempDirectory().also { it.deleteExisting() }
-        val dst = createTempDirectory()
+        konst src = createTempDirectory().also { it.deleteExisting() }
+        konst dst = createTempDirectory()
 
         assertFailsWith<java.nio.file.NoSuchFileException> {
             src.copyToRecursively(dst, followLinks = false)
@@ -346,8 +346,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyNonExistentDestinationParent() {
-        val src = createTempDirectory().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().resolve("parent/dst")
+        konst src = createTempDirectory().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().resolve("parent/dst")
 
         assertFalse(dst.parent.exists())
 
@@ -364,11 +364,11 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyRestrictedReadInSource() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively()
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively()
 
-        val restrictedDir = src.resolve("1/3")
-        val restrictedFile = src.resolve("7.txt")
+        konst restrictedDir = src.resolve("1/3")
+        konst restrictedFile = src.resolve("7.txt")
 
         withRestrictedRead(restrictedDir, restrictedFile, alsoReset = listOf(dst.resolve("1/3"), dst.resolve("7.txt"))) {
             // Restricted directories fail during traversal, while files fail when copied.
@@ -396,14 +396,14 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyRestrictedWriteInSource() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively()
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively()
 
-        val restrictedDir = src.resolve("1/3")
-        val restrictedFile = src.resolve("7.txt")
+        konst restrictedDir = src.resolve("1/3")
+        konst restrictedFile = src.resolve("7.txt")
 
         withRestrictedWrite(restrictedDir, restrictedFile, alsoReset = listOf(dst.resolve("1/3"), dst.resolve("7.txt"))) {
-            val accessDeniedFiles = mutableListOf<String>()
+            konst accessDeniedFiles = mutableListOf<String>()
             src.copyToRecursively(dst, followLinks = false, onError = { _, target, exception ->
                 assertIs<java.nio.file.AccessDeniedException>(exception)
                 assertEquals(target.toString(), exception.file)
@@ -421,17 +421,17 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyRestrictedWriteInDestination() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTestFiles().cleanupRecursively()
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTestFiles().cleanupRecursively()
 
         src.resolve("1/3/4.txt").writeText("hello")
         src.resolve("7.txt").writeText("hi")
 
-        val restrictedDir = dst.resolve("1/3")
-        val restrictedFile = dst.resolve("7.txt")
+        konst restrictedDir = dst.resolve("1/3")
+        konst restrictedFile = dst.resolve("7.txt")
 
         withRestrictedWrite(restrictedDir, restrictedFile) {
-            val accessDeniedFiles = mutableListOf<String>()
+            konst accessDeniedFiles = mutableListOf<String>()
             src.copyToRecursively(dst, followLinks = false, overwrite = true, onError = { _, target, exception ->
                 assertIs<java.nio.file.AccessDeniedException>(exception)
                 assertEquals(target.toString(), exception.file)
@@ -447,10 +447,10 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyBrokenBaseSymlink() {
-        val basedir = createTempDirectory().cleanupRecursively()
-        val target = basedir.resolve("target")
-        val link = basedir.resolve("link").tryCreateSymbolicLinkTo(target) ?: return
-        val dst = basedir.resolve("dst")
+        konst basedir = createTempDirectory().cleanupRecursively()
+        konst target = basedir.resolve("target")
+        konst link = basedir.resolve("link").tryCreateSymbolicLinkTo(target) ?: return
+        konst dst = basedir.resolve("dst")
 
         // the same behavior as link.copyTo(dst, LinkOption.NOFOLLOW_LINKS)
         link.copyToRecursively(dst, followLinks = false)
@@ -472,11 +472,11 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyBrokenSymlink() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
-        val target = createTempDirectory().cleanupRecursively().resolve("target")
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst target = createTempDirectory().cleanupRecursively().resolve("target")
         src.resolve("8/link").tryCreateSymbolicLinkTo(target) ?: return
-        val dstLink = dst.resolve("8/link")
+        konst dstLink = dst.resolve("8/link")
 
         // the same behavior as link.copyTo(dst, LinkOption.NOFOLLOW_LINKS)
         src.copyToRecursively(dst, followLinks = false)
@@ -494,9 +494,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyBaseSymlinkPointingToFile() {
-        val src = createTempFile().cleanup().also { it.writeText("hello") }
-        val link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(src) ?: return
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst src = createTempFile().cleanup().also { it.writeText("hello") }
+        konst link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(src) ?: return
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         link.copyToRecursively(dst, followLinks = false)
         compareFiles(link, dst)
@@ -509,9 +509,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyBaseSymlinkPointingToDirectory() {
-        val src = createTestFiles().cleanupRecursively()
-        val link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(src) ?: return
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst src = createTestFiles().cleanupRecursively()
+        konst link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(src) ?: return
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         link.copyToRecursively(dst, followLinks = false)
         compareFiles(link, dst)
@@ -524,26 +524,26 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copySymlinkPointingToDirectory() {
-        val symlinkTarget = createTestFiles().cleanupRecursively()
-        val src = createTestFiles().cleanupRecursively().also { it.resolve("8/link").tryCreateSymbolicLinkTo(symlinkTarget) ?: return }
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst symlinkTarget = createTestFiles().cleanupRecursively()
+        konst src = createTestFiles().cleanupRecursively().also { it.resolve("8/link").tryCreateSymbolicLinkTo(symlinkTarget) ?: return }
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         src.copyToRecursively(dst, followLinks = false)
-        val srcContent = listOf("", "8/link") + referenceFilenames
+        konst srcContent = listOf("", "8/link") + referenceFilenames
         testVisitedFiles(srcContent, dst.walkIncludeDirectories(), dst)
 
         dst.deleteRecursively()
 
         src.copyToRecursively(dst, followLinks = true)
-        val expectedDstContent = srcContent + referenceFilenames.map { "8/link/$it" }
+        konst expectedDstContent = srcContent + referenceFilenames.map { "8/link/$it" }
         testVisitedFiles(expectedDstContent, dst.walkIncludeDirectories(), dst)
     }
 
     @Test
     fun copyIgnoreExistingDirectoriesFollowLinks() {
-        val src = createTestFiles().cleanupRecursively()
-        val symlinkTarget = createTempDirectory().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().also {
+        konst src = createTestFiles().cleanupRecursively()
+        konst symlinkTarget = createTempDirectory().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().also {
             it.resolve("1").createDirectory()
             it.resolve("1/3").tryCreateSymbolicLinkTo(symlinkTarget) ?: return
         }
@@ -565,9 +565,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyIgnoreExistingDirectoriesNoFollowLinks() {
-        val src = createTestFiles().cleanupRecursively()
-        val symlinkTarget = createTempDirectory().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().also {
+        konst src = createTestFiles().cleanupRecursively()
+        konst symlinkTarget = createTempDirectory().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().also {
             it.resolve("1").createDirectory()
             it.resolve("1/3").tryCreateSymbolicLinkTo(symlinkTarget) ?: return
         }
@@ -589,9 +589,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyParentSymlink() {
-        val source = createTestFiles().cleanupRecursively()
-        val linkToSource = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(source) ?: return
-        val sources = listOf(
+        konst source = createTestFiles().cleanupRecursively()
+        konst linkToSource = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(source) ?: return
+        konst sources = listOf(
             source to referenceFilenames,
             linkToSource.resolve("8") to listOf("9.txt"),
             linkToSource.resolve("1/3") to listOf("4.txt", "5.txt")
@@ -599,9 +599,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
         for ((src, srcContent) in sources) {
             for (followLinks in listOf(false, true)) {
-                val target = createTempDirectory().cleanupRecursively().also { it.resolve("a/b").createDirectories() }
-                val linkToTarget = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(target) ?: return
-                val targets = listOf(
+                konst target = createTempDirectory().cleanupRecursively().also { it.resolve("a/b").createDirectories() }
+                konst linkToTarget = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(target) ?: return
+                konst targets = listOf(
                     target to listOf("a", "a/b"),
                     linkToTarget.resolve("a") to listOf("b"),
                     linkToTarget.resolve("a/b") to listOf()
@@ -609,7 +609,7 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
                 for ((dst, dstContent) in targets) {
                     src.copyToRecursively(dst, followLinks = followLinks)
-                    val expectedDstContent = listOf("") + dstContent + srcContent
+                    konst expectedDstContent = listOf("") + dstContent + srcContent
                     testVisitedFiles(expectedDstContent, dst.walkIncludeDirectories(), dst)
                 }
             }
@@ -618,10 +618,10 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copySymlinkToSymlink() {
-        val src = createTestFiles().cleanupRecursively()
-        val link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(src) ?: return
-        val linkToLink = createTempDirectory().cleanupRecursively().resolve("linkToLink").tryCreateSymbolicLinkTo(link) ?: return
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst src = createTestFiles().cleanupRecursively()
+        konst link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(src) ?: return
+        konst linkToLink = createTempDirectory().cleanupRecursively().resolve("linkToLink").tryCreateSymbolicLinkTo(link) ?: return
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         linkToLink.copyToRecursively(dst, followLinks = true)
         testVisitedFiles(listOf("") + referenceFilenames, dst.walkIncludeDirectories(), dst)
@@ -629,10 +629,10 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copySymlinkCyclic() {
-        val src = createTestFiles().cleanupRecursively()
-        val original = src.resolve("1")
+        konst src = createTestFiles().cleanupRecursively()
+        konst original = src.resolve("1")
         original.resolve("2/link").tryCreateSymbolicLinkTo(original) ?: return
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         src.copyToRecursively(dst, followLinks = true, onError = { source, _, exception ->
             assertIs<java.nio.file.FileSystemLoopException>(exception)
@@ -647,14 +647,14 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copySymlinkCyclicWithTwo() {
-        val src = createTestFiles().cleanupRecursively()
-        val dir8 = src.resolve("8")
-        val dir2 = src.resolve("1/2")
+        konst src = createTestFiles().cleanupRecursively()
+        konst dir8 = src.resolve("8")
+        konst dir2 = src.resolve("1/2")
         dir8.resolve("linkTo2").tryCreateSymbolicLinkTo(dir2) ?: return
         dir2.resolve("linkTo8").tryCreateSymbolicLinkTo(dir8) ?: return
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
-        val loops = mutableListOf<String>()
+        konst loops = mutableListOf<String>()
         src.copyToRecursively(dst, followLinks = true, onError = { source, _, exception ->
             assertIs<java.nio.file.FileSystemLoopException>(exception)
             assertEquals(source.toString(), exception.file)
@@ -664,16 +664,16 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
         assertEquals(listOf("1/2/linkTo8/linkTo2", "8/linkTo2/linkTo8"), loops.sorted())
 
         // partial copy, only "1/2/linkTo8/linkTo2" and "8/linkTo2/linkTo8" are not copied
-        val expected = listOf("", "1/2/linkTo8", "1/2/linkTo8/9.txt", "8/linkTo2") + referenceFilenames
+        konst expected = listOf("", "1/2/linkTo8", "1/2/linkTo8/9.txt", "8/linkTo2") + referenceFilenames
         testVisitedFiles(expected, dst.walkIncludeDirectories(), dst)
     }
 
     @Test
     fun copySymlinkPointingToItself() {
-        val src = createTempDirectory().cleanupRecursively()
-        val link = src.resolve("link")
+        konst src = createTempDirectory().cleanupRecursively()
+        konst link = src.resolve("link")
         link.tryCreateSymbolicLinkTo(link) ?: return
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         assertFailsWith<java.nio.file.FileSystemException> {
             // throws with message "Too many levels of symbolic links"
@@ -683,11 +683,11 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copySymlinkTwoPointingToEachOther() {
-        val src = createTempDirectory().cleanupRecursively()
-        val link1 = src.resolve("link1")
-        val link2 = src.resolve("link2").tryCreateSymbolicLinkTo(link1) ?: return
+        konst src = createTempDirectory().cleanupRecursively()
+        konst link1 = src.resolve("link1")
+        konst link2 = src.resolve("link2").tryCreateSymbolicLinkTo(link1) ?: return
         link1.tryCreateSymbolicLinkTo(link2) ?: return
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         assertFailsWith<java.nio.file.FileSystemException> {
             // throws with message "Too many levels of symbolic links"
@@ -697,9 +697,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyWithNestedCopyToRecursively() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
-        val nested = createTestFiles().cleanupRecursively()
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst nested = createTestFiles().cleanupRecursively()
 
         src.copyToRecursively(dst, followLinks = false) { source, target ->
             if (source.name == "2") {
@@ -710,14 +710,14 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
             CopyActionResult.CONTINUE
         }
 
-        val expected = listOf("") + referenceFilenames + referenceFilenames.map { "1/2/$it" }
+        konst expected = listOf("") + referenceFilenames + referenceFilenames.map { "1/2/$it" }
         testVisitedFiles(expected, dst.walkIncludeDirectories(), dst)
     }
 
     @Test
     fun copyWithSkipSubtree() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         src.copyToRecursively(dst, followLinks = false) { source, target ->
             source.copyToIgnoringExistingDirectory(target, followLinks = false)
@@ -729,8 +729,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
         }
 
         // both "3" and "9.txt" are copied
-        val copied3 = dst.resolve("1/3").exists()
-        val copied9 = dst.resolve("8/9.txt").exists()
+        konst copied3 = dst.resolve("1/3").exists()
+        konst copied9 = dst.resolve("8/9.txt").exists()
         assertTrue(copied3 && copied9)
 
         // content of "3" is not copied
@@ -739,8 +739,8 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyWithTerminate() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         src.copyToRecursively(dst, followLinks = false) { source, target ->
             source.copyToIgnoringExistingDirectory(target, followLinks = false)
@@ -752,16 +752,16 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
         }
 
         // either "3" or "9.txt" is not copied
-        val copied3 = dst.resolve("1/3").exists()
-        val copied9 = dst.resolve("8/9.txt").exists()
+        konst copied3 = dst.resolve("1/3").exists()
+        konst copied9 = dst.resolve("8/9.txt").exists()
         assertTrue(copied3 || copied9)
         assertFalse(copied3 && copied9)
     }
 
     @Test
     fun copyFailureWithTerminate() {
-        val src = createTestFiles().cleanupRecursively()
-        val dst = createTempDirectory().cleanupRecursively().resolve("dst")
+        konst src = createTestFiles().cleanupRecursively()
+        konst dst = createTempDirectory().cleanupRecursively().resolve("dst")
 
         src.copyToRecursively(dst, followLinks = false, onError = { source, _, exception ->
             assertIs<IllegalArgumentException>(exception)
@@ -774,25 +774,25 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
         }
 
         // either "3" or "9.txt" is not copied
-        val copied3 = dst.resolve("1/3").exists()
-        val copied9 = dst.resolve("8/9.txt").exists()
+        konst copied3 = dst.resolve("1/3").exists()
+        konst copied9 = dst.resolve("8/9.txt").exists()
         assertTrue(copied3 || copied9)
         assertFalse(copied3 && copied9)
     }
 
     @Test
     fun copyIntoSourceDirectory() {
-        val source = createTestFiles().cleanupRecursively()
-        val linkToSource = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(source) ?: return
-        val sources = listOf(
+        konst source = createTestFiles().cleanupRecursively()
+        konst linkToSource = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(source) ?: return
+        konst sources = listOf(
             source to source,
             linkToSource.resolve("8") to source.resolve("8"),
             linkToSource.resolve("1/3") to source.resolve("1/3")
         )
 
         for ((src, resolvedSrc) in sources) {
-            val linkToSrc = createTempDirectory().cleanupRecursively().resolve("linkToSrc").tryCreateSymbolicLinkTo(resolvedSrc) ?: return
-            val targets = listOf(
+            konst linkToSrc = createTempDirectory().cleanupRecursively().resolve("linkToSrc").tryCreateSymbolicLinkTo(resolvedSrc) ?: return
+            konst targets = listOf(
                 linkToSrc.resolve("a").createDirectory(),
                 linkToSrc.resolve("a/b").createDirectories()
             )
@@ -802,7 +802,7 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
                     src.copyToRecursively(linkToSrc, followLinks = followLinks)
                 }
                 for (dst in targets) {
-                    val error = assertFailsWith<java.nio.file.FileSystemException> {
+                    konst error = assertFailsWith<java.nio.file.FileSystemException> {
                         src.copyToRecursively(dst, followLinks = followLinks)
                     }
                     assertEquals("Recursively copying a directory into its subdirectory is prohibited.", error.reason)
@@ -813,12 +813,12 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun kt38678() {
-        val src = createTempDirectory().cleanupRecursively()
+        konst src = createTempDirectory().cleanupRecursively()
         src.resolve("test.txt").writeText("plain text file")
 
-        val dst = src.resolve("x")
+        konst dst = src.resolve("x")
 
-        val error = assertFailsWith<java.nio.file.FileSystemException> {
+        konst error = assertFailsWith<java.nio.file.FileSystemException> {
             src.copyToRecursively(dst, followLinks = false)
         }
         assertEquals("Recursively copying a directory into its subdirectory is prohibited.", error.reason)
@@ -829,9 +829,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
         for (src in listOf(createTempFile().cleanupRecursively(), createTestFiles().cleanupRecursively())) {
             src.copyToRecursively(src, followLinks = false)
 
-            val link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(src) ?: return
+            konst link = createTempDirectory().cleanupRecursively().resolve("link").tryCreateSymbolicLinkTo(src) ?: return
 
-            val error = assertFailsWith<java.nio.file.FileAlreadyExistsException> {
+            konst error = assertFailsWith<java.nio.file.FileAlreadyExistsException> {
                 link.copyToRecursively(src, followLinks = false)
             }
             assertEquals(src.toString(), error.file)
@@ -848,9 +848,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
     @Test
     fun copyDstLinkPointingToSrc() {
         for (followLinks in listOf(false, true)) {
-            val root = createTempDirectory().cleanupRecursively()
-            val src = root.resolve("src").createFile()
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(src) ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst src = root.resolve("src").createFile()
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(src) ?: return
 
             assertTrue(src.isSameFileAs(dstLink))
             assertTrue(dstLink.isSameFileAs(src))
@@ -864,9 +864,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
     @Test
     fun copyDstLinkPointingToSrcOverwrite() {
         for (followLinks in listOf(false, true)) {
-            val root = createTempDirectory().cleanupRecursively()
-            val src = root.resolve("src").createFile()
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(src) ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst src = root.resolve("src").createFile()
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(src) ?: return
 
             src.copyToRecursively(dstLink, followLinks = followLinks, overwrite = true)
             assertFalse(dstLink.isSymbolicLink())
@@ -876,10 +876,10 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
     @Test
     fun copySrcLinkAndDstLinkPointingToSameFile() {
         for (followLinks in listOf(false, true)) {
-            val root = createTempDirectory().cleanupRecursively()
-            val original = root.resolve("original").createFile()
-            val srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst original = root.resolve("original").createFile()
+            konst srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(original) ?: return
 
             assertTrue(srcLink.isSameFileAs(dstLink))
             assertTrue(dstLink.isSameFileAs(srcLink))
@@ -893,10 +893,10 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
     @Test
     fun copySrcLinkAndDstLinkPointingToSameFileOverwrite() {
         for (followLinks in listOf(false, true)) {
-            val root = createTempDirectory().cleanupRecursively()
-            val original = root.resolve("original").createFile()
-            val srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst original = root.resolve("original").createFile()
+            konst srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(original) ?: return
 
             srcLink.copyToRecursively(dstLink, followLinks = followLinks, overwrite = true)
 
@@ -911,10 +911,10 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
     @Test
     fun copySameLinkDifferentRoute() {
         for (followLinks in listOf(false, true)) {
-            val root = createTempDirectory().cleanupRecursively()
-            val original = root.resolve("original").createFile()
-            val srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("srcLink") ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst original = root.resolve("original").createFile()
+            konst srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("srcLink") ?: return
 
             assertTrue(srcLink.isSameFileAs(dstLink))
             assertTrue(dstLink.isSameFileAs(srcLink))
@@ -934,17 +934,17 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
     @Test
     fun copySameLinkDifferentRouteOverwrite() {
         for (followLinks in listOf(false, true)) {
-            val root = createTempDirectory().cleanupRecursively()
-            val original = root.resolve("original").createFile()
-            val srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
-            val dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("srcLink") ?: return
+            konst root = createTempDirectory().cleanupRecursively()
+            konst original = root.resolve("original").createFile()
+            konst srcLink = root.resolve("srcLink").tryCreateSymbolicLinkTo(original) ?: return
+            konst dstLink = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("srcLink") ?: return
 
             if (!followLinks) {
                 srcLink.copyToRecursively(dstLink, followLinks = followLinks, overwrite = true) // same file
             } else {
                 // dstLink is deleted before srcLink gets copied.
                 // Actually srcLink gets removed because dstLink is srcLink with different path.
-                val error = assertFailsWith<NoSuchFileException> {
+                konst error = assertFailsWith<NoSuchFileException> {
                     srcLink.copyToRecursively(dstLink, followLinks = followLinks, overwrite = true)
                 }
                 assertEquals(srcLink.toString(), error.file)
@@ -956,9 +956,9 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copySameFileDifferentRoute() {
-        val root = createTempDirectory().cleanupRecursively()
-        val src = root.resolve("src").createFile()
-        val dst = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("src") ?: return
+        konst root = createTempDirectory().cleanupRecursively()
+        konst src = root.resolve("src").createFile()
+        konst dst = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("src") ?: return
 
         assertTrue(src.isSameFileAs(dst))
         assertTrue(dst.isSameFileAs(src))
@@ -967,15 +967,15 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun copyToSameFileDifferentRouteOverwrite() {
-        val root = createTempDirectory().cleanupRecursively()
-        val src = root.resolve("src").createFile()
-        val dst = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("src") ?: return
+        konst root = createTempDirectory().cleanupRecursively()
+        konst src = root.resolve("src").createFile()
+        konst dst = root.resolve("dstLink").tryCreateSymbolicLinkTo(root)?.resolve("src") ?: return
 
         src.copyToRecursively(dst, followLinks = false, overwrite = true)
     }
 
     private fun createZipFile(parent: Path, name: String): Path {
-        val zipRoot = parent.resolve(name)
+        konst zipRoot = parent.resolve(name)
         ZipOutputStream(zipRoot.outputStream()).use { out ->
             out.putNextEntry(ZipEntry("directory/file.txt"))
             out.write("hello".toByteArray())
@@ -986,17 +986,17 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun zipToDefaultPath() {
-        val root = createTempDirectory().cleanupRecursively()
-        val zipRoot = createZipFile(root, "src.zip")
-        val dst = root.resolve("dst")
+        konst root = createTempDirectory().cleanupRecursively()
+        konst zipRoot = createZipFile(root, "src.zip")
+        konst dst = root.resolve("dst")
 
-        val classLoader: ClassLoader? = null
+        konst classLoader: ClassLoader? = null
         FileSystems.newFileSystem(zipRoot, classLoader).use { zipFs ->
-            val src = zipFs.getPath("/directory")
+            konst src = zipFs.getPath("/directory")
 
             src.copyToRecursively(dst, followLinks = false)
 
-            val expected = listOf("", "file.txt")
+            konst expected = listOf("", "file.txt")
             testVisitedFiles(expected, dst.walkIncludeDirectories(), dst)
             assertEquals("hello", dst.resolve("file.txt").readText())
         }
@@ -1004,17 +1004,17 @@ class PathRecursiveFunctionsTest : AbstractPathTest() {
 
     @Test
     fun defaultPathToZip() {
-        val root = createTestFiles().cleanupRecursively()
-        val zipRoot = createZipFile(root, "dst.zip")
-        val src = root.resolve("1").also { it.resolve("3/4.txt").writeText("hello") }
+        konst root = createTestFiles().cleanupRecursively()
+        konst zipRoot = createZipFile(root, "dst.zip")
+        konst src = root.resolve("1").also { it.resolve("3/4.txt").writeText("hello") }
 
-        val classLoader: ClassLoader? = null
+        konst classLoader: ClassLoader? = null
         FileSystems.newFileSystem(zipRoot, classLoader).use { zipFs ->
-            val dst = zipFs.getPath("/directory")
+            konst dst = zipFs.getPath("/directory")
 
             src.copyToRecursively(dst, followLinks = false)
 
-            val expected = listOf("", "2", "3", "3/4.txt", "3/5.txt", "file.txt")
+            konst expected = listOf("", "2", "3", "3/4.txt", "3/5.txt", "file.txt")
             testVisitedFiles(expected, dst.walkIncludeDirectories(), dst)
             assertEquals("hello", zipFs.getPath("/directory/3/4.txt").readText())
         }

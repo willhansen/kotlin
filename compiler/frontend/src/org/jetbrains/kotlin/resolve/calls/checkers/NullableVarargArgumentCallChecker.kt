@@ -27,15 +27,15 @@ object NullableVarargArgumentCallChecker : CallChecker {
             return
         }
         if (resolvedCall !is NewResolvedCallImpl<*>) return
-        for (argument in resolvedCall.argumentMappingByOriginal.values) {
+        for (argument in resolvedCall.argumentMappingByOriginal.konstues) {
             for (arg in argument.arguments) {
                 if (!arg.isSpread || arg !is SimplePSIKotlinCallArgument) continue
 
-                val spreadElement = arg.valueArgument.getSpreadElement() ?: continue
-                val receiver = (arg.receiver as? ReceiverValueWithSmartCastInfo) ?: continue
+                konst spreadElement = arg.konstueArgument.getSpreadElement() ?: continue
+                konst receiver = (arg.receiver as? ReceiverValueWithSmartCastInfo) ?: continue
 
-                val type = if (receiver.stableType.constructor is TypeVariableTypeConstructor) {
-                    context.trace.bindingContext[EXPRESSION_TYPE_INFO, arg.valueArgument.getArgumentExpression()]?.type
+                konst type = if (receiver.stableType.constructor is TypeVariableTypeConstructor) {
+                    context.trace.bindingContext[EXPRESSION_TYPE_INFO, arg.konstueArgument.getArgumentExpression()]?.type
                         ?: receiver.stableType
                 } else {
                     receiver.stableType

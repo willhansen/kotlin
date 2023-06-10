@@ -3,7 +3,7 @@ class Box(var item: String?)
 fun expectString(it: String) {}
 
 fun Box.test() {
-    val other = Box("")
+    konst other = Box("")
     myRun {
         if (item != null) {
             expectString(<!SMARTCAST_IMPOSSIBLE!>item<!>)

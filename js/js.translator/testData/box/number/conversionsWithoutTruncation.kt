@@ -34,7 +34,7 @@ fun box(): String {
     assertEquals(true, 65 == floatX.toInt())
     assertEquals(true, 'A' == floatX.toChar())
 
-    val longX: Long = 65L
+    konst longX: Long = 65L
     assertEquals(true, 65.0 == longX.toDouble())
     assertEquals(true, 65.0f == longX.toFloat())
     assertEquals(true, 65L == longX.toLong())
@@ -43,7 +43,7 @@ fun box(): String {
     assertEquals(true, 65.toByte() == longX.toByte())
     assertEquals(true, 'A' == longX.toChar())
 
-    val intX: Int = 65
+    konst intX: Int = 65
     assertEquals(true, 65.0 == intX.toDouble())
     assertEquals(true, 65.0f == intX.toFloat())
     assertEquals(true, 65L == intX.toLong())
@@ -52,7 +52,7 @@ fun box(): String {
     assertEquals(true, 65.toByte() == intX.toByte())
     assertEquals(true, 'A' == intX.toChar())
 
-    val shortX: Short = 65.toShort()
+    konst shortX: Short = 65.toShort()
     assertEquals(true, 65.0 == shortX.toDouble())
     assertEquals(true, 65.0f == shortX.toFloat())
     assertEquals(true, 65L == shortX.toLong())
@@ -61,7 +61,7 @@ fun box(): String {
     assertEquals(true, 65.toByte() == shortX.toByte())
     assertEquals(true, 'A' == shortX.toChar())
 
-    val byteX: Byte = 65.toByte()
+    konst byteX: Byte = 65.toByte()
     assertEquals(true, 65.0 == byteX.toDouble())
     assertEquals(true, 65.0f == byteX.toFloat())
     assertEquals(true, 65L == byteX.toLong())

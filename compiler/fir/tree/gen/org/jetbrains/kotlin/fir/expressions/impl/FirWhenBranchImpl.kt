@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirWhenBranchImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var condition: FirExpression,
     override var result: FirBlock,
 ) : FirWhenBranch() {

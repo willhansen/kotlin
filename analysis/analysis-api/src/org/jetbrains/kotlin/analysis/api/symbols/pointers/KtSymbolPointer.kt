@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 import org.jetbrains.kotlin.analysis.utils.relfection.renderAsDataClassToString
 
 /**
- * `KtSymbol` is valid only during read action it was created in
+ * `KtSymbol` is konstid only during read action it was created in
  * To pass the symbol from one read action to another the KtSymbolPointer should be used
  *
  * We can restore the symbol
@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.analysis.utils.relfection.renderAsDataClassToString
  */
 public abstract class KtSymbolPointer<out S : KtSymbol> {
     /**
-     * @return restored symbol (possibly the new symbol instance) if one is still valid, `null` otherwise
+     * @return restored symbol (possibly the new symbol instance) if one is still konstid, `null` otherwise
      *
      * Consider using [org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol]
      */
@@ -53,7 +53,7 @@ public inline fun <T : KtSymbol, R : KtSymbol> symbolPointerDelegator(
 ): KtSymbolPointer<R> = object : KtSymbolPointer<R>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): R? = with(analysisSession) {
-        val symbol = pointer.restoreSymbol() ?: return null
+        konst symbol = pointer.restoreSymbol() ?: return null
         transformer(this, symbol)
     }
 }

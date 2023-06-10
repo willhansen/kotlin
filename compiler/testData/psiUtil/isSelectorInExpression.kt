@@ -2,7 +2,7 @@ package testing.groovytest
 
 class Test {
     fun foo(a: Any) = this
-    val test: Test = this
+    konst test: Test = this
     fun test() = this
     fun get(index: Int) = this
 
@@ -13,8 +13,8 @@ class Test {
 fun bar() = Test()
 
 fun test() {
-    val t = Test()
-    val s = t
+    konst t = Test()
+    konst s = t
 
     /*false*/t.test()
     /*false*/t.test()!!
@@ -66,8 +66,8 @@ fun test() {
     t[0]./*true*/i++
     t.test./*true*/i++
 
-    val t1 = 1
-    val t2 = /*false*/t1
+    konst t1 = 1
+    konst t2 = /*false*/t1
 
     /*false*/t1 + /*false*/t2
 }

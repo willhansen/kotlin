@@ -8,7 +8,7 @@ fun <K> bar(x: Foo<K>): Unit {}
 fun <E> foo(block: (Foo<E>) -> Unit): E = null as E
 
 interface FlowCollector<T> {
-    fun emit(value: T)
+    fun emit(konstue: T)
 }
 
 @Suppress("OPT_IN_USAGE_ERROR")

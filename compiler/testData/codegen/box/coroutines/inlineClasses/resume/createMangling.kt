@@ -8,14 +8,14 @@ fun builder(c: suspend () -> Unit) {
     })
 }
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 var c: Continuation<Any>? = null
 
 var res = "FAIL"
 
 fun box(): String {
-    val lambda: suspend (IC, IC) -> String = { _, _ ->
+    konst lambda: suspend (IC, IC) -> String = { _, _ ->
         suspendCoroutine<String> {
             @Suppress("UNCHECKED_CAST")
             c = it as Continuation<Any>

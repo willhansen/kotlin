@@ -2,7 +2,7 @@
 
 // FILE: utils.kt
 
-inline class UInt(val u: Int)
+inline class UInt(konst u: Int)
 
 // FILE: test.kt
 
@@ -20,7 +20,7 @@ fun test(u1: UInt, u2: UInt, us: Array<UInt>) {
 // 0 CHECKCAST \[Ljava/lang/Integer
 
 // 0 intValue
-// 0 valueOf
+// 0 konstueOf
 
 // JVM_TEMPLATES
 // 2 CHECKCAST \[LUInt

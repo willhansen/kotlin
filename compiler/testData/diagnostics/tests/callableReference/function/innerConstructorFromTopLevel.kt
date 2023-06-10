@@ -9,7 +9,7 @@ class A {
 
 fun main() {
     ::<!UNRESOLVED_REFERENCE!>Inner<!>
-    val y = A::Inner
+    konst y = A::Inner
 
     checkSubtype<KFunction1<A, A.Inner>>(y)
 }

@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo(val z: String)
+konstue class Foo(konst z: String)
 
 var f = Foo("zzz")
 

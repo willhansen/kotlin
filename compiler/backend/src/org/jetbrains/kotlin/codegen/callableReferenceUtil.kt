@@ -49,7 +49,7 @@ fun capturedBoundReferenceReceiver(
             if (isInliningStrategy) AsmUtil.CAPTURED_RECEIVER_FIELD else AsmUtil.BOUND_REFERENCE_RECEIVER,
             AsmTypes.OBJECT_TYPE.descriptor
         )
-        val nullableAny = expectedReceiverKotlinType?.run { builtIns.nullableAnyType }
+        konst nullableAny = expectedReceiverKotlinType?.run { builtIns.nullableAnyType }
         StackValue.coerce(AsmTypes.OBJECT_TYPE, nullableAny, expectedReceiverType, expectedReceiverKotlinType, iv)
     }
 
@@ -65,7 +65,7 @@ fun CalculatedClosure.isForBoundCallableReference(): Boolean =
 
 fun InstructionAdapter.loadBoundReferenceReceiverParameter(index: Int, type: Type, kotlinType: KotlinType?) {
     load(index, type)
-    val nullableAny = kotlinType?.run { builtIns.nullableAnyType }
+    konst nullableAny = kotlinType?.run { builtIns.nullableAnyType }
     StackValue.coerce(type, kotlinType, AsmTypes.OBJECT_TYPE, nullableAny, this)
 }
 
@@ -94,7 +94,7 @@ fun InstructionAdapter.generateClosureFieldsInitializationFromParameters(
 }
 
 fun computeExpectedNumberOfReceivers(referencedFunction: FunctionDescriptor, isBound: Boolean): Int {
-    val receivers = referencedFunction.contextReceiverParameters.size +
+    konst receivers = referencedFunction.contextReceiverParameters.size +
             (if (referencedFunction.dispatchReceiverParameter != null) 1 else 0) +
             (if (referencedFunction.extensionReceiverParameter != null) 1 else 0) -
             (if (isBound) 1 else 0)
@@ -116,13 +116,13 @@ internal fun generateCallableReferenceDeclarationContainerClass(
     descriptor: CallableDescriptor,
     state: GenerationState
 ): Boolean {
-    val typeMapper = state.typeMapper
-    val container = descriptor.containingDeclaration
+    konst typeMapper = state.typeMapper
+    konst container = descriptor.containingDeclaration
     when {
         container is ClassDescriptor -> {
             // TODO: would it work for arrays?
-            val containerKotlinType = container.defaultType
-            val containerType = typeMapper.mapClass(container)
+            konst containerKotlinType = container.defaultType
+            konst containerType = typeMapper.mapClass(container)
             DescriptorAsmUtil.putJavaLangClassInstance(iv, containerType, containerKotlinType, typeMapper)
         }
         container is PackageFragmentDescriptor -> {
@@ -179,17 +179,17 @@ internal fun generatePropertyReferenceSignature(iv: InstructionAdapter, callable
 
 private fun getSignatureString(callable: CallableDescriptor, state: GenerationState, isPropertySignature: Boolean = false): String {
     if (callable is LocalVariableDescriptor) {
-        val asmType = state.bindingContext.get(CodegenBinding.DELEGATED_PROPERTY_METADATA_OWNER, callable)
+        konst asmType = state.bindingContext.get(CodegenBinding.DELEGATED_PROPERTY_METADATA_OWNER, callable)
             ?: throw AssertionError("No delegated property metadata owner for $callable")
-        val localDelegatedProperties = CodegenBinding.getLocalDelegatedProperties(state.bindingContext, asmType)
-        val index = localDelegatedProperties?.indexOf(callable) ?: -1
+        konst localDelegatedProperties = CodegenBinding.getLocalDelegatedProperties(state.bindingContext, asmType)
+        konst index = localDelegatedProperties?.indexOf(callable) ?: -1
         if (index < 0) {
             throw AssertionError("Local delegated property is not found in $asmType: $callable")
         }
         return "<v#$index>"
     }
 
-    val accessor = when (callable) {
+    konst accessor = when (callable) {
         is ClassConstructorDescriptor ->
             if (shouldHideConstructorDueToValueClassTypeValueParameters(callable))
                 AccessorForConstructorDescriptor(callable, callable.containingDeclaration, null, AccessorKind.NORMAL)
@@ -202,8 +202,8 @@ private fun getSignatureString(callable: CallableDescriptor, state: GenerationSt
             }
         else -> error("Unsupported callable reference: $callable")
     }
-    val declaration = DescriptorUtils.unwrapFakeOverride(accessor).original
-    val method = when {
+    konst declaration = DescriptorUtils.unwrapFakeOverride(accessor).original
+    konst method = when {
         callable.containingDeclaration.isInlineClass() && !declaration.isGetterOfUnderlyingPropertyOfInlineClass() ->
             state.typeMapper.mapSignatureForInlineErasedClassSkipGeneric(declaration).asmMethod
         isPropertySignature ->

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.analysis.api.scopes.KtScope
 import org.jetbrains.kotlin.analysis.api.scopes.KtTypeScope
 
 internal class KtFe10ScopeSubstitution(
-    override val analysisSession: KtFe10AnalysisSession,
+    override konst analysisSession: KtFe10AnalysisSession,
 ) : KtScopeSubstitution(), Fe10KtAnalysisSessionComponent {
 
     override fun getDeclarationScope(scope: KtTypeScope): KtScope {

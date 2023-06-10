@@ -15,21 +15,21 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
 
 object VolatileAnnotationChecker : DeclarationChecker {
-    private val JVM_VOLATILE_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Volatile")
-    private val CONCURRENT_VOLATILE_ANNOTATION_FQ_NAME = FqName("kotlin.concurrent.Volatile")
+    private konst JVM_VOLATILE_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Volatile")
+    private konst CONCURRENT_VOLATILE_ANNOTATION_FQ_NAME = FqName("kotlin.concurrent.Volatile")
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is PropertyDescriptor) return
 
-        val fieldAnnotation = descriptor.backingField?.findVolatileAnnotation()
+        konst fieldAnnotation = descriptor.backingField?.findVolatileAnnotation()
         if (fieldAnnotation != null && !descriptor.isVar) {
-            val annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(fieldAnnotation) ?: return
+            konst annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(fieldAnnotation) ?: return
             context.trace.report(Errors.VOLATILE_ON_VALUE.on(annotationEntry))
         }
 
-        val delegateAnnotation = descriptor.delegateField?.findVolatileAnnotation()
+        konst delegateAnnotation = descriptor.delegateField?.findVolatileAnnotation()
         if (delegateAnnotation != null) {
-            val annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(delegateAnnotation) ?: return
+            konst annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(delegateAnnotation) ?: return
             context.trace.report(Errors.VOLATILE_ON_DELEGATE.on(annotationEntry))
         }
     }

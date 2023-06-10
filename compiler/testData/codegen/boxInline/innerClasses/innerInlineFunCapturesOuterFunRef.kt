@@ -1,5 +1,5 @@
 // FILE: 1.kt
-class E(val x: String) {
+class E(konst x: String) {
     fun bar() = x
     inner class Inner {
         inline fun foo() = this@E::bar

@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.load.java.structure.impl.source
 import com.intellij.psi.PsiType
 
 abstract class JavaElementTypeSource<TYPE : PsiType> {
-    abstract val type: TYPE
-    abstract val factory: JavaElementSourceFactory
+    abstract konst type: TYPE
+    abstract konst factory: JavaElementSourceFactory
 }
 
 class JavaElementTypeSourceWithFixedType<TYPE : PsiType>(
-    override val type: TYPE,
-    override val factory: JavaElementSourceFactory,
+    override konst type: TYPE,
+    override konst factory: JavaElementSourceFactory,
 ) : JavaElementTypeSource<TYPE>() {
 
     override fun toString(): String {

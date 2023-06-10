@@ -24,7 +24,7 @@ public final class Array<T> {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("TYPE_PARAMETER_AS_REIFIED", "WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> T): this(size) {
@@ -42,14 +42,14 @@ public final class Array<T> {
     /**
      * Returns the number of elements in the array.
      */
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
      * Returns the array element at the specified [index]. This method can be called using the
      * index operator.
      * ```
-     * value = arr[index]
+     * konstue = arr[index]
      * ```
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
@@ -59,17 +59,17 @@ public final class Array<T> {
     external public operator fun get(index: Int): T
 
     /**
-     * Sets the array element at the specified [index] to the specified [value]. This method can
+     * Sets the array element at the specified [index] to the specified [konstue]. This method can
      * be called using the index operator.
      * ```
-     * arr[index] = value
+     * arr[index] = konstue
      * ```
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_Array_set")
-    @PointsTo(0x300, 0x000, 0x000) // this.intestines -> value
-    external public operator fun set(index: Int, value: T): Unit
+    @PointsTo(0x300, 0x000, 0x000) // this.intestines -> konstue
+    external public operator fun set(index: Int, konstue: T): Unit
 
     /**
      * Creates an [Iterator] for iterating over the elements of the array.
@@ -82,7 +82,7 @@ public final class Array<T> {
     external private fun getArrayLength(): Int
 }
 
-private class IteratorImpl<T>(val collection: Array<T>) : Iterator<T> {
+private class IteratorImpl<T>(konst collection: Array<T>) : Iterator<T> {
     var index : Int = 0
 
     public override fun next(): T {

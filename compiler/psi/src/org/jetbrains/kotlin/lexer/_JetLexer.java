@@ -209,8 +209,8 @@ class _JetLexer implements FlexLexer {
     int l = packed.length();
     while (i < l) {
       int count = packed.charAt(i++);
-      int value = packed.charAt(i++);
-      do result[j++] = value; while (--count > 0);
+      int konstue = packed.charAt(i++);
+      do result[j++] = konstue; while (--count > 0);
     }
     return j;
   }
@@ -533,9 +533,9 @@ class _JetLexer implements FlexLexer {
     int l = packed.length();
     while (i < l) {
       int count = packed.charAt(i++);
-      int value = packed.charAt(i++);
-      value--;
-      do result[j++] = value; while (--count > 0);
+      int konstue = packed.charAt(i++);
+      konstue--;
+      do result[j++] = konstue; while (--count > 0);
     }
     return j;
   }
@@ -550,7 +550,7 @@ class _JetLexer implements FlexLexer {
   private static final String[] ZZ_ERROR_MSG = {
     "Unknown internal scanner error",
     "Error: could not match input",
-    "Error: pushback value was too large"
+    "Error: pushback konstue was too large"
   };
 
   /**
@@ -582,8 +582,8 @@ class _JetLexer implements FlexLexer {
     int l = packed.length();
     while (i < l) {
       int count = packed.charAt(i++);
-      int value = packed.charAt(i++);
-      do result[j++] = value; while (--count > 0);
+      int konstue = packed.charAt(i++);
+      do result[j++] = konstue; while (--count > 0);
     }
     return j;
   }
@@ -697,8 +697,8 @@ class _JetLexer implements FlexLexer {
     int j = 0;  /* index in unpacked array */
     while (i < packed.length()) {
       int  count = packed.charAt(i++);
-      char value = packed.charAt(i++);
-      do map[j++] = value; while (--count > 0);
+      char konstue = packed.charAt(i++);
+      do map[j++] = konstue; while (--count > 0);
     }
     return map;
   }
@@ -762,10 +762,10 @@ class _JetLexer implements FlexLexer {
    * Returns the character at position {@code pos} from the
    * matched text.
    *
-   * It is equivalent to yytext().charAt(pos), but faster
+   * It is equikonstent to yytext().charAt(pos), but faster
    *
    * @param pos the position of the character to fetch.
-   *            A value from 0 to yylength()-1.
+   *            A konstue from 0 to yylength()-1.
    *
    * @return the character at position pos
    */

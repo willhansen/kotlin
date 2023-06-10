@@ -67,7 +67,7 @@ fun interface IdeDependencyResolver {
         /**
          * [IdeDependencyResolver] that will just return an empty Set of dependencies (noop)
          */
-        val empty = IdeDependencyResolver { emptySet() }
+        konst empty = IdeDependencyResolver { emptySet() }
 
         /**
          * Special binaryType String that indicates that a certain dependency is only a sources.jar and
@@ -75,7 +75,7 @@ fun interface IdeDependencyResolver {
          * This is only necessary for resolvers that implement sources/documentation resolution as [IdeDependencyResolver]
          * instead of [IdeAdditionalArtifactResolver]
          */
-        const val SOURCES_BINARY_TYPE = "SOURCES"
+        const konst SOURCES_BINARY_TYPE = "SOURCES"
 
         /**
          * Special binaryType String that indicates that a certain dependency is only a javadoc.jar and
@@ -83,7 +83,7 @@ fun interface IdeDependencyResolver {
          * This is only necessary for resolvers that implement sources/documentation resolution as [IdeDependencyResolver]
          * instead of [IdeAdditionalArtifactResolver]
          */
-        const val DOCUMENTATION_BINARY_TYPE = "DOCUMENTATION"
+        const konst DOCUMENTATION_BINARY_TYPE = "DOCUMENTATION"
 
         /**
          * Extra on [IdeaKotlinDependency] to attach the resolver which created/resolved a certain dependency.
@@ -109,7 +109,7 @@ fun interface IdeDependencyResolver {
 fun IdeDependencyResolver(
     resolvers: Iterable<IdeDependencyResolver?>,
 ): IdeDependencyResolver {
-    val resolversList = resolvers.filterNotNull()
+    konst resolversList = resolvers.filterNotNull()
     if (resolversList.isEmpty()) return IdeDependencyResolver.empty
     return IdeCompositeDependencyResolver(resolversList)
 }
@@ -126,7 +126,7 @@ fun IdeDependencyResolver(
 ): IdeDependencyResolver = IdeDependencyResolver(resolvers.toList())
 
 private class IdeCompositeDependencyResolver(
-    val children: List<IdeDependencyResolver>,
+    konst children: List<IdeDependencyResolver>,
 ) : IdeDependencyResolver, IdeDependencyResolver.WithBuildDependencies {
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
         return children.flatMap { child -> child.resolve(sourceSet) }.toSet()

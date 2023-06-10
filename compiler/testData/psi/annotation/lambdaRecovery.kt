@@ -40,4 +40,4 @@ fun foo() {
 }
 
 // No '}'
-val test = {
+konst test = {

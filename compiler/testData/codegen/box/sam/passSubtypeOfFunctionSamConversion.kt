@@ -3,8 +3,8 @@
 // FILE: a.kt
 
 object IntMapper : (Int) -> String {
-    override fun invoke(value: Int): String {
-        return value.toString()
+    override fun invoke(konstue: Int): String {
+        return konstue.toString()
     }
 }
 
@@ -29,10 +29,10 @@ public class Foo {
 // FILE: test.kt
 
 fun box(): String {
-    val a = Foo.bar1(IntMapper)
+    konst a = Foo.bar1(IntMapper)
     if (a != "0") return "Failed 0: $a"
 
-    val b = Foo.bar2(IntMapper, 1)
+    konst b = Foo.bar2(IntMapper, 1)
     if (b != "1") return "Failed 1: $b"
 
     return "OK"

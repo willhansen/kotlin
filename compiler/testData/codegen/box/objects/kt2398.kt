@@ -1,18 +1,18 @@
 class C {
     public object Obj {
-        val o = "O"
+        konst o = "O"
 
         object InnerObj {
           fun k() = "K"
         }
 
         class D {
-            val ko = "KO"
+            konst ko = "KO"
         }
     }
 }
 
 fun box(): String {
-    val res = C.Obj.o + C.Obj.InnerObj.k()  + C.Obj.D().ko
+    konst res = C.Obj.o + C.Obj.InnerObj.k()  + C.Obj.D().ko
     return if (res == "OKKO") "OK" else "Fail: $res"
 }

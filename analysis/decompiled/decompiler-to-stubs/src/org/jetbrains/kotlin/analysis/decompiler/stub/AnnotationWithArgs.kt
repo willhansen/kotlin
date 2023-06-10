@@ -10,4 +10,4 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 
-data class AnnotationWithArgs(val classId: ClassId, val args: Map<Name, ConstantValue<*>>)
+data class AnnotationWithArgs(konst classId: ClassId, konst args: Map<Name, ConstantValue<*>>)

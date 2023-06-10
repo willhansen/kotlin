@@ -1,4 +1,4 @@
-class My(val x: My?, val z: My? = null)
+class My(konst x: My?, konst z: My? = null)
 
 fun baseTest() {
     var y: My? = My(My(null))

@@ -1,7 +1,7 @@
 package foo
 
 open class Super {
-    <!JS_NAME_CLASH!>val foo<!> = 23
+    <!JS_NAME_CLASH!>konst foo<!> = 23
 }
 
 class Sub : Super() {

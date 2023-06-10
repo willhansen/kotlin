@@ -6,8 +6,8 @@ import kotlin.reflect.jvm.isAccessible
 import kotlin.test.assertEquals
 
 @JvmInline
-value class S(val value1: UInt, val value2: Int) {
-    operator fun plus(other: S): S = S(this.value1 + other.value1, this.value2 + other.value2)
+konstue class S(konst konstue1: UInt, konst konstue2: Int) {
+    operator fun plus(other: S): S = S(this.konstue1 + other.konstue1, this.konstue2 + other.konstue2)
 }
 
 class C {
@@ -24,10 +24,10 @@ private var nonNullTopLevel: S = S(UInt.MAX_VALUE, -10)
 private var nullableTopLevel: S? = S(UInt.MAX_VALUE, -10)
 
 fun box(): String {
-    val c = C()
-    val zero = S(0U, 5)
-    val one = S(1U, 10)
-    val two = S(2U, 20)
+    konst c = C()
+    konst zero = S(0U, 5)
+    konst one = S(1U, 10)
+    konst two = S(2U, 20)
 
     assertEquals(Unit, c.nonNullUnboundRef().setter.call(c, zero))
     assertEquals(zero, c.nonNullUnboundRef().call(c))
@@ -45,12 +45,12 @@ fun box(): String {
     assertEquals(one, c.nullableBoundRef().call())
     assertEquals(one, c.nullableBoundRef().getter.call())
 
-    val nonNullTopLevel = ::nonNullTopLevel.apply { isAccessible = true }
+    konst nonNullTopLevel = ::nonNullTopLevel.apply { isAccessible = true }
     assertEquals(Unit, nonNullTopLevel.setter.call(two))
     assertEquals(two, nonNullTopLevel.call())
     assertEquals(two, nonNullTopLevel.getter.call())
 
-    val nullableTopLevel = ::nullableTopLevel.apply { isAccessible = true }
+    konst nullableTopLevel = ::nullableTopLevel.apply { isAccessible = true }
     assertEquals(Unit, nullableTopLevel.setter.call(two))
     assertEquals(two, nullableTopLevel.call())
     assertEquals(two, nullableTopLevel.getter.call())

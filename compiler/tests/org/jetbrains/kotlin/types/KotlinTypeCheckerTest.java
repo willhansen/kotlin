@@ -367,10 +367,10 @@ public class KotlinTypeCheckerTest extends KotlinTestWithEnvironment {
     }
 
     public void testBlocks() {
-        assertType("if (1) {val a = 1; a} else {null}", "Int?");
-        assertType("if (1) { -> val a = 1; a} else { -> null}", "Function0<Int?>");
-        assertType("if (1) (fun (): Boolean { val a = 1; a; var b : Boolean; return b }) else null", "Function0<Boolean>?");
-        assertType("if (1) (fun (): Int { val a = 1; a; var b = a; return b }) else null", "Function0<Int>?");
+        assertType("if (1) {konst a = 1; a} else {null}", "Int?");
+        assertType("if (1) { -> konst a = 1; a} else { -> null}", "Function0<Int?>");
+        assertType("if (1) (fun (): Boolean { konst a = 1; a; var b : Boolean; return b }) else null", "Function0<Boolean>?");
+        assertType("if (1) (fun (): Int { konst a = 1; a; var b = a; return b }) else null", "Function0<Int>?");
     }
 
     public void testNew() {

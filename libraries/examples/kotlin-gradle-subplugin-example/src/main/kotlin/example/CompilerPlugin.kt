@@ -25,24 +25,24 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.CompilerConfigurationKey
 
 public object ExampleConfigurationKeys {
-    public val EXAMPLE_KEY: CompilerConfigurationKey<String> = CompilerConfigurationKey.create<String>("example argument")
+    public konst EXAMPLE_KEY: CompilerConfigurationKey<String> = CompilerConfigurationKey.create<String>("example argument")
 }
 
 public class ExampleCommandLineProcessor : CommandLineProcessor {
     companion object {
-        public const val EXAMPLE_PLUGIN_ID: String = "example.plugin"
-        public val EXAMPLE_OPTION: CliOption = CliOption("exampleKey", "<value>", "")
+        public const konst EXAMPLE_PLUGIN_ID: String = "example.plugin"
+        public konst EXAMPLE_OPTION: CliOption = CliOption("exampleKey", "<konstue>", "")
     }
 
-    override val pluginId: String = EXAMPLE_PLUGIN_ID
-    override val pluginOptions: Collection<CliOption> = listOf(EXAMPLE_OPTION)
+    override konst pluginId: String = EXAMPLE_PLUGIN_ID
+    override konst pluginOptions: Collection<CliOption> = listOf(EXAMPLE_OPTION)
 
     override fun processOption(
         option: AbstractCliOption,
-        value: String, configuration: CompilerConfiguration
+        konstue: String, configuration: CompilerConfiguration
     ) {
         when (option) {
-            EXAMPLE_OPTION -> configuration.put(ExampleConfigurationKeys.EXAMPLE_KEY, value)
+            EXAMPLE_OPTION -> configuration.put(ExampleConfigurationKeys.EXAMPLE_KEY, konstue)
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }
     }
@@ -51,8 +51,8 @@ public class ExampleCommandLineProcessor : CommandLineProcessor {
 @Suppress("DEPRECATION")
 public class ExampleComponentRegistrar : ComponentRegistrar {
     public override fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration) {
-        val exampleValue = configuration.get(ExampleConfigurationKeys.EXAMPLE_KEY)
-        val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
+        konst exampleValue = configuration.get(ExampleConfigurationKeys.EXAMPLE_KEY)
+        konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
         messageCollector.report(CompilerMessageSeverity.INFO, "Project component registration: $exampleValue")
     }
 }

@@ -32,13 +32,13 @@ import org.jetbrains.kotlin.resolve.lazy.ForceResolveUtil
 import org.jetbrains.kotlin.synthetic.SyntheticJavaPropertyDescriptor
 
 internal class KtFe10SymbolInfoProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtSymbolInfoProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun getDeprecation(symbol: KtSymbol): DeprecationInfo? {
-        val descriptor = getSymbolDescriptor(symbol) ?: return null
+        konst descriptor = getSymbolDescriptor(symbol) ?: return null
         ForceResolveUtil.forceResolveAllContents(descriptor)
         return getDeprecation(descriptor)
     }
@@ -68,7 +68,7 @@ internal class KtFe10SymbolInfoProvider(
 
     private fun getDeprecation(descriptor: DeclarationDescriptor): DeprecationInfo? {
         if (descriptor is PropertyDescriptor) {
-            val fieldDescriptor = descriptor.backingField
+            konst fieldDescriptor = descriptor.backingField
             if (fieldDescriptor != null && fieldDescriptor.annotations.hasAnnotation(DeprecationResolver.JAVA_DEPRECATED)) {
                 return SimpleDeprecationInfo(DeprecationLevelValue.WARNING, propagatesToOverrides = false, message = null)
             }
@@ -82,23 +82,23 @@ internal class KtFe10SymbolInfoProvider(
         accessor: KtPropertyAccessorSymbol?,
         accessorDescriptorProvider: (PropertyDescriptor) -> PropertyAccessorDescriptor?
     ): DeprecationInfo? {
-        val propertyDescriptor = getSymbolDescriptor(property) as? PropertyDescriptor ?: return null
+        konst propertyDescriptor = getSymbolDescriptor(property) as? PropertyDescriptor ?: return null
         ForceResolveUtil.forceResolveAllContents(propertyDescriptor)
 
         if (accessor != null) {
-            val accessorDescriptor = getSymbolDescriptor(accessor) as? PropertyAccessorDescriptor
+            konst accessorDescriptor = getSymbolDescriptor(accessor) as? PropertyAccessorDescriptor
             if (accessorDescriptor != null) {
                 ForceResolveUtil.forceResolveAllContents(accessorDescriptor.correspondingProperty)
-                val deprecation = analysisContext.deprecationResolver.getDeprecations(accessorDescriptor).firstOrNull()
+                konst deprecation = analysisContext.deprecationResolver.getDeprecations(accessorDescriptor).firstOrNull()
                 if (deprecation != null) {
                     return deprecation
                 }
             }
         }
 
-        val accessorDescriptor = accessorDescriptorProvider(propertyDescriptor)
+        konst accessorDescriptor = accessorDescriptorProvider(propertyDescriptor)
         if (accessorDescriptor != null) {
-            val deprecation = analysisContext.deprecationResolver.getDeprecations(accessorDescriptor).firstOrNull()
+            konst deprecation = analysisContext.deprecationResolver.getDeprecations(accessorDescriptor).firstOrNull()
             if (deprecation != null) {
                 return deprecation
             }
@@ -116,7 +116,7 @@ internal class KtFe10SymbolInfoProvider(
     }
 
     override fun getJavaGetterName(symbol: KtPropertySymbol): Name {
-        val descriptor = getSymbolDescriptor(symbol) as? PropertyDescriptor
+        konst descriptor = getSymbolDescriptor(symbol) as? PropertyDescriptor
         if (descriptor is SyntheticJavaPropertyDescriptor) {
             return descriptor.getMethod.name
         }
@@ -124,16 +124,16 @@ internal class KtFe10SymbolInfoProvider(
         if (descriptor != null) {
             if (descriptor.hasJvmFieldAnnotation()) return descriptor.name
 
-            val getter = descriptor.getter ?: return SpecialNames.NO_NAME_PROVIDED
+            konst getter = descriptor.getter ?: return SpecialNames.NO_NAME_PROVIDED
             return Name.identifier(DescriptorUtils.getJvmName(getter) ?: JvmAbi.getterName(descriptor.name.asString()))
         }
 
-        val ktPropertyName = (symbol.psi as? KtProperty)?.name ?: return SpecialNames.NO_NAME_PROVIDED
+        konst ktPropertyName = (symbol.psi as? KtProperty)?.name ?: return SpecialNames.NO_NAME_PROVIDED
         return Name.identifier(JvmAbi.getterName(ktPropertyName))
     }
 
     override fun getJavaSetterName(symbol: KtPropertySymbol): Name? {
-        val descriptor = getSymbolDescriptor(symbol) as? PropertyDescriptor
+        konst descriptor = getSymbolDescriptor(symbol) as? PropertyDescriptor
         if (descriptor is SyntheticJavaPropertyDescriptor) {
             return descriptor.setMethod?.name
         }
@@ -145,16 +145,16 @@ internal class KtFe10SymbolInfoProvider(
 
             if (descriptor.hasJvmFieldAnnotation()) return descriptor.name
 
-            val setter = descriptor.setter ?: return SpecialNames.NO_NAME_PROVIDED
+            konst setter = descriptor.setter ?: return SpecialNames.NO_NAME_PROVIDED
             return Name.identifier(DescriptorUtils.getJvmName(setter) ?: JvmAbi.setterName(descriptor.name.asString()))
         }
 
-        val ktPropertyName = (symbol.psi as? KtProperty)?.takeIf { it.isVar }?.name ?: return SpecialNames.NO_NAME_PROVIDED
+        konst ktPropertyName = (symbol.psi as? KtProperty)?.takeIf { it.isVar }?.name ?: return SpecialNames.NO_NAME_PROVIDED
         return Name.identifier(JvmAbi.setterName(ktPropertyName))
     }
 
     override fun getAnnotationApplicableTargets(symbol: KtClassOrObjectSymbol): Set<KotlinTarget>? {
-        val descriptor = getSymbolDescriptor(symbol) as? ClassDescriptor ?: return null
+        konst descriptor = getSymbolDescriptor(symbol) as? ClassDescriptor ?: return null
         if (descriptor.kind != ClassKind.ANNOTATION_CLASS) return null
 
         return AnnotationChecker.applicableTargetSet(descriptor)

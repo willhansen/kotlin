@@ -27,10 +27,10 @@ open class KotlinJsCompilation @Inject internal constructor(
 ) : AbstractKotlinCompilationToRunnableFiles<KotlinJsOptions>(compilation) {
 
     @Suppress("UNCHECKED_CAST")
-    final override val compilerOptions: HasCompilerOptions<KotlinJsCompilerOptions>
+    final override konst compilerOptions: HasCompilerOptions<KotlinJsCompilerOptions>
         get() = compilation.compilerOptions as HasCompilerOptions<KotlinJsCompilerOptions>
 
-    val binaries: KotlinJsBinaryContainer =
+    konst binaries: KotlinJsBinaryContainer =
         compilation.target.project.objects.newInstance(
             KotlinJsBinaryContainer::class.java,
             compilation.target,
@@ -38,31 +38,31 @@ open class KotlinJsCompilation @Inject internal constructor(
         )
 
     var outputModuleName: String? = null
-        set(value) {
+        set(konstue) {
             (target as KotlinJsSubTargetContainerDsl).apply {
                 check(!isBrowserConfigured && !isNodejsConfigured) {
                     "Please set outputModuleName for compilation before initialize browser() or nodejs() on target"
                 }
             }
 
-            field = value
+            field = konstue
         }
 
     @Deprecated("Use compilationName instead", ReplaceWith("compilationName"))
-    val compilationPurpose: String get() = compilationName
+    konst compilationPurpose: String get() = compilationName
 
-    override val processResourcesTaskName: String
+    override konst processResourcesTaskName: String
         get() = disambiguateName("processResources")
 
-    val npmAggregatedConfigurationName
+    konst npmAggregatedConfigurationName
         get() = compilation.disambiguateName("npmAggregated")
 
-    val publicPackageJsonConfigurationName
+    konst publicPackageJsonConfigurationName
         get() = compilation.disambiguateName("publicPackageJsonConfiguration")
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
     @Suppress("DEPRECATION")
-    override val relatedConfigurationNames: List<String>
+    override konst relatedConfigurationNames: List<String>
         get() = super.relatedConfigurationNames + npmAggregatedConfigurationName + publicPackageJsonConfigurationName
 
     override fun getAttributes(): AttributeContainer {
@@ -71,19 +71,19 @@ open class KotlinJsCompilation @Inject internal constructor(
 
     @Suppress("DEPRECATION")
     @Deprecated("Accessing task instance directly is deprecated", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTask: Kotlin2JsCompile
+    override konst compileKotlinTask: Kotlin2JsCompile
         get() = compilation.compileKotlinTask as Kotlin2JsCompile
 
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
     @Deprecated("Replaced with compileTaskProvider", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTaskProvider: TaskProvider<out Kotlin2JsCompile>
+    override konst compileKotlinTaskProvider: TaskProvider<out Kotlin2JsCompile>
         get() = compilation.compileKotlinTaskProvider as TaskProvider<out Kotlin2JsCompile>
 
     @Suppress("UNCHECKED_CAST")
-    override val compileTaskProvider: TaskProvider<Kotlin2JsCompile>
+    override konst compileTaskProvider: TaskProvider<Kotlin2JsCompile>
         get() = compilation.compileTaskProvider as TaskProvider<Kotlin2JsCompile>
 
-    internal val packageJsonHandlers = mutableListOf<PackageJson.() -> Unit>()
+    internal konst packageJsonHandlers = mutableListOf<PackageJson.() -> Unit>()
 
     fun packageJson(handler: PackageJson.() -> Unit) {
         packageJsonHandlers.add(handler)

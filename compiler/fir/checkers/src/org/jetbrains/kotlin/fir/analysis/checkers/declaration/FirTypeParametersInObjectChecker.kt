@@ -29,7 +29,7 @@ object FirTypeParametersInObjectChecker : FirClassChecker() {
                 reporter.reportOn(declaration.source, FirErrors.TYPE_PARAMETERS_IN_OBJECT, context)
             }
             is FirAnonymousObject -> if (declaration.source?.getChild(KtNodeTypes.TYPE_PARAMETER_LIST, depth = 1) != null) {
-                val diagnosticFactory =
+                konst diagnosticFactory =
                     if (context.session.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitTypeParametersInAnonymousObjects)) {
                         FirErrors.TYPE_PARAMETERS_IN_OBJECT
                     } else {

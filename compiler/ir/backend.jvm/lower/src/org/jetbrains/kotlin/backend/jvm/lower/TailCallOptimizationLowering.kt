@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-internal val tailCallOptimizationPhase = makeIrFilePhase(
+internal konst tailCallOptimizationPhase = makeIrFilePhase(
     ::TailCallOptimizationLowering,
     "TailCallOptimization",
     "Add or move returns to suspension points on tail-call positions"
@@ -31,7 +31,7 @@ internal val tailCallOptimizationPhase = makeIrFilePhase(
 
 // Find all tail-calls inside suspend function. We should add IrReturn before them, so the codegen will generate
 // code which is understandable by old BE's tail-call optimizer.
-private class TailCallOptimizationLowering(private val context: JvmBackendContext) : FileLoweringPass {
+private class TailCallOptimizationLowering(private konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transformChildren(object : IrElementTransformer<TailCallOptimizationData?> {
             override fun visitSimpleFunction(declaration: IrSimpleFunction, data: TailCallOptimizationData?) =
@@ -45,7 +45,7 @@ private class TailCallOptimizationLowering(private val context: JvmBackendContex
             }
 
             override fun visitCall(expression: IrCall, data: TailCallOptimizationData?): IrExpression {
-                val transformed = super.visitCall(expression, data) as IrExpression
+                konst transformed = super.visitCall(expression, data) as IrExpression
                 return if (data == null || expression !in data.tailCalls) transformed else IrReturnImpl(
                     data.function.endOffset, data.function.endOffset, context.irBuiltIns.nothingType, data.function.symbol,
                     if (data.returnsUnit) transformed.coerceToUnit() else transformed
@@ -59,9 +59,9 @@ private class TailCallOptimizationLowering(private val context: JvmBackendContex
     )
 }
 
-private class TailCallOptimizationData(val function: IrSimpleFunction) {
-    val returnsUnit = function.returnType.isUnit()
-    val tailCalls = mutableSetOf<IrCall>()
+private class TailCallOptimizationData(konst function: IrSimpleFunction) {
+    konst returnsUnit = function.returnType.isUnit()
+    konst tailCalls = mutableSetOf<IrCall>()
 
     // Collect all tail calls, including those nested in `when`s, which are not arguments to `return`s.
     private fun IrStatement.findCallsOnTailPositionWithoutImmediateReturn(immediateReturn: Boolean = false) {
@@ -74,7 +74,7 @@ private class TailCallOptimizationData(val function: IrSimpleFunction) {
             this is IrWhen ->
                 branches.forEach { it.result.findCallsOnTailPositionWithoutImmediateReturn() }
             this is IrReturn ->
-                value.findCallsOnTailPositionWithoutImmediateReturn(immediateReturn = true)
+                konstue.findCallsOnTailPositionWithoutImmediateReturn(immediateReturn = true)
             this is IrTypeOperatorCall && operator == IrTypeOperator.IMPLICIT_COERCION_TO_UNIT ->
                 argument.findCallsOnTailPositionWithoutImmediateReturn()
             // TODO: Support binary logical operations and elvis, though. KT-23826 and KT-23825
@@ -82,7 +82,7 @@ private class TailCallOptimizationData(val function: IrSimpleFunction) {
     }
 
     init {
-        when (val body = function.body) {
+        when (konst body = function.body) {
             is IrBlockBody -> body.statements.findTailCall(returnsUnit)?.findCallsOnTailPositionWithoutImmediateReturn()
             is IrExpressionBody -> body.expression.findCallsOnTailPositionWithoutImmediateReturn(immediateReturn = true)
         }
@@ -92,9 +92,9 @@ private class TailCallOptimizationData(val function: IrSimpleFunction) {
 // Find tail-call inside a single block. This function is needed, since there can be
 // return statement in the middle of the function and thus we cannot just assume, that its last statement is tail-call
 private fun List<IrStatement>.findTailCall(functionReturnsUnit: Boolean): IrStatement? {
-    val mayBeReturn = find { it is IrReturn } as? IrReturn
-    return when (val value = mayBeReturn?.value) {
-        is IrGetField -> if (functionReturnsUnit && value.isGetFieldOfUnit()) {
+    konst mayBeReturn = find { it is IrReturn } as? IrReturn
+    return when (konst konstue = mayBeReturn?.konstue) {
+        is IrGetField -> if (functionReturnsUnit && konstue.isGetFieldOfUnit()) {
             // This is simple `return` in the middle of a function
             // Tail-call should be just before it
             subList(0, indexOf(mayBeReturn)).findTailCall(functionReturnsUnit)

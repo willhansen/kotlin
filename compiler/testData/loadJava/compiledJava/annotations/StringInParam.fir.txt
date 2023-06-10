@@ -1,9 +1,9 @@
 public abstract interface StringInParam : R|kotlin/Any| {
     public final annotation class Anno : R|kotlin/Annotation| {
-        public constructor(value: R|kotlin/String|): R|test/StringInParam.Anno|
+        public constructor(konstue: R|kotlin/String|): R|test/StringInParam.Anno|
 
     }
-    @R|test/StringInParam.Anno|(value = String(hello)) public open class Class : R|kotlin/Any| {
+    @R|test/StringInParam.Anno|(konstue = String(hello)) public open class Class : R|kotlin/Any| {
         public constructor(): R|test/StringInParam.Class|
 
     }

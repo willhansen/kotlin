@@ -17,7 +17,7 @@ public open class B : A {
 
 public final class C {
     public constructor C()
-    public final val x: B
+    public final konst x: B
     public final fun </*0*/ T> a(/*0*/ x: (T) -> T, /*1*/ y: T): T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

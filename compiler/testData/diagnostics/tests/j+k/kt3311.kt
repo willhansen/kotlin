@@ -14,7 +14,7 @@ public class Sub: Super() {
 }
 
 fun main() {
-    val x = Sub()
+    konst x = Sub()
     x.foo = true
     x.bar = true
 }

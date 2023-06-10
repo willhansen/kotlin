@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val b: String) {
+konstue class A(konst b: String) {
     override fun toString(): String =
         buildString { append(b) }
 }

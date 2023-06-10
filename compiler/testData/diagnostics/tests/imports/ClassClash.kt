@@ -23,19 +23,19 @@ fun test(b: B) {
     b.m1()
     b.<!UNRESOLVED_REFERENCE!>m2<!>()
 
-    val b_: B = B()
+    konst b_: B = B()
     b_.m1()
 
-    val b_1: a.B = B()
+    konst b_1: a.B = B()
     b_1.m1()
 
-    val b_2: B = a.B()
+    konst b_2: B = a.B()
     b_2.m1()
 
-    val b_3: B = B()
+    konst b_3: B = B()
     b_3.m1()
 
-    val b_4: B = a.B()
+    konst b_4: B = a.B()
     b_4.m1()
 }
 
@@ -61,10 +61,10 @@ fun test(b: B) {
     b.m1()
     b.<!UNRESOLVED_REFERENCE!>m2<!>()
 
-    val b_: B = B()
+    konst b_: B = B()
     b_.m1()
 
-    val b_2 = B()
+    konst b_2 = B()
     b_2.m1()
 }
 
@@ -74,9 +74,9 @@ fun test2(b: B) {
     b.m1()
     b.<!UNRESOLVED_REFERENCE!>m2<!>()
 
-    val b_: B = B()
+    konst b_: B = B()
     b_.m1()
 
-    val b_2 = B()
+    konst b_2 = B()
     b_2.m1()
 }

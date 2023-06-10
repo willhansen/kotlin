@@ -27,18 +27,18 @@ class SymbolBasedMethod(
         javac: JavacWrapper
 ) : SymbolBasedMember<ExecutableElement>(element, containingClass, javac), JavaMethod {
 
-    override val typeParameters: List<JavaTypeParameter>
+    override konst typeParameters: List<JavaTypeParameter>
         get() = element.typeParameters.map { SymbolBasedTypeParameter(it, javac) }
 
-    override val valueParameters: List<JavaValueParameter>
-        get() = element.valueParameters(javac)
+    override konst konstueParameters: List<JavaValueParameter>
+        get() = element.konstueParameters(javac)
 
-    override val returnType: JavaType
+    override konst returnType: JavaType
         get() = SymbolBasedType.create(element.returnType, javac)
 
     // TODO: allow nullable names in Symbol-based annotation arguments and pass null instead of a synthetic name
-    override val annotationParameterDefaultValue: JavaAnnotationArgument?
+    override konst annotationParameterDefaultValue: JavaAnnotationArgument?
         get() = element.defaultValue?.let { defaultValue ->
-            SymbolBasedAnnotationArgument.create(defaultValue, Name.identifier("value"), javac)
+            SymbolBasedAnnotationArgument.create(defaultValue, Name.identifier("konstue"), javac)
         }
 }

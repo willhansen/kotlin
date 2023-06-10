@@ -28,12 +28,12 @@ fun intValues(size: Int): Iterable<Int> {
     return 1..size
 }
 
-open class Value(var value: Int) {
-    val text = value.toString().reversed()
+open class Value(var konstue: Int) {
+    konst text = konstue.toString().reversed()
 }
 
 fun filterLoad(v: Value): Boolean {
-    return v.value.toString() in v.text
+    return v.konstue.toString() in v.text
 }
 
 fun mapLoad(v: Value): String = v.text.reversed()

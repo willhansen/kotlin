@@ -15,15 +15,15 @@ fun <T> bar(f: (T) -> Unit): T = TODO()
 
 fun test() {
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>myWith<!>(A()) {
-        val t1 = bar(::foo)
+        konst t1 = bar(::foo)
 
-        val t2 = bar(::baz)
+        konst t2 = bar(::baz)
 
         myWith(B()) {
-            val a: A = bar(::foo)
-            val b: B = bar(::foo)
+            konst a: A = bar(::foo)
+            konst b: B = bar(::foo)
 
-            val t3 = bar(::baz)
+            konst t3 = bar(::baz)
 
             bar(::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>)
         }

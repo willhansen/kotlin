@@ -18,14 +18,14 @@ package org.jetbrains.kotlin.utils
 
 import java.util.*
 
-fun <K, V> Iterable<K>.keysToMap(value: (K) -> V): Map<K, V> {
-    return associateBy({ it }, value)
+fun <K, V> Iterable<K>.keysToMap(konstue: (K) -> V): Map<K, V> {
+    return associateBy({ it }, konstue)
 }
 
-fun <K, V : Any> Iterable<K>.keysToMapExceptNulls(value: (K) -> V?): Map<K, V> {
-    val map = LinkedHashMap<K, V>()
+fun <K, V : Any> Iterable<K>.keysToMapExceptNulls(konstue: (K) -> V?): Map<K, V> {
+    konst map = LinkedHashMap<K, V>()
     for (k in this) {
-        val v = value(k)
+        konst v = konstue(k)
         if (v != null) {
             map[k] = v
         }
@@ -34,7 +34,7 @@ fun <K, V : Any> Iterable<K>.keysToMapExceptNulls(value: (K) -> V?): Map<K, V> {
 }
 
 fun <K> Iterable<K>.mapToIndex(): Map<K, Int> {
-    val map = LinkedHashMap<K, Int>()
+    konst map = LinkedHashMap<K, Int>()
     for ((index, k) in this.withIndex()) {
         map[k] = index
     }
@@ -43,7 +43,7 @@ fun <K> Iterable<K>.mapToIndex(): Map<K, Int> {
 
 inline fun <K, V> MutableMap<K, V>.getOrPutNullable(key: K, defaultValue: () -> V): V {
     return if (!containsKey(key)) {
-        val answer = defaultValue()
+        konst answer = defaultValue()
         put(key, answer)
         answer
     } else {

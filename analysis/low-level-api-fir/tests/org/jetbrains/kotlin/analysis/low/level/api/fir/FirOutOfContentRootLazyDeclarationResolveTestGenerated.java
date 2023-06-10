@@ -572,9 +572,9 @@ public class FirOutOfContentRootLazyDeclarationResolveTestGenerated extends Abst
         }
 
         @Test
-        @TestMetadata("anonymousObjectInInvalidPosition.kt")
-        public void testAnonymousObjectInInvalidPosition() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/lazyResolve/errors/anonymousObjectInInvalidPosition.kt");
+        @TestMetadata("anonymousObjectInInkonstidPosition.kt")
+        public void testAnonymousObjectInInkonstidPosition() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/lazyResolve/errors/anonymousObjectInInkonstidPosition.kt");
         }
     }
 

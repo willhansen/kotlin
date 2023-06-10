@@ -6,11 +6,11 @@ import test.Foo.a
 import test.Foo.foo
 
 object Foo {
-    val a: String = ""
+    konst a: String = ""
     fun foo(): String = ""
 }
 
-val test1 = ::a
-val test1a = Foo::a
-val test2 = ::foo
-val test2a = Foo::foo
+konst test1 = ::a
+konst test1a = Foo::a
+konst test2 = ::foo
+konst test2a = Foo::foo

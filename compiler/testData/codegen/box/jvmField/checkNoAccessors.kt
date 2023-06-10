@@ -4,18 +4,18 @@
 
 import kotlin.test.assertFalse
 
-@JvmField public val field = "OK";
+@JvmField public konst field = "OK";
 
 class A {
-    @JvmField public val field = "OK";
+    @JvmField public konst field = "OK";
 
     companion object {
-        @JvmField public val cfield = "OK";
+        @JvmField public konst cfield = "OK";
     }
 }
 
 object Object {
-    @JvmField public val field = "OK";
+    @JvmField public konst field = "OK";
 }
 
 

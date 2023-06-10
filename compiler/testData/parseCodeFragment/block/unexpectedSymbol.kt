@@ -1,3 +1,3 @@
-val a = 1
+konst a = 1
 }
-val b = 4
+konst b = 4

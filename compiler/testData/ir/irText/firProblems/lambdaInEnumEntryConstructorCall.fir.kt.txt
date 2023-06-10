@@ -13,9 +13,9 @@ class Wrapper {
 }
 
 enum class ConfigurationParameter : Enum<ConfigurationParameter> {
-  BASE_URL = ConfigurationParameter(apply = local fun <anonymous>(value: String, nc: Wrapper) {
-    println(message = "Base url updated from config parameters ".plus(other = nc.<get-baseUrl>()).plus(other = " -> ").plus(other = value))
-    nc.<set-baseUrl>(<set-?> = value)
+  BASE_URL = ConfigurationParameter(apply = local fun <anonymous>(konstue: String, nc: Wrapper) {
+    println(message = "Base url updated from config parameters ".plus(other = nc.<get-baseUrl>()).plus(other = " -> ").plus(other = konstue))
+    nc.<set-baseUrl>(<set-?> = konstue)
   }
 )
 
@@ -25,11 +25,11 @@ enum class ConfigurationParameter : Enum<ConfigurationParameter> {
 
   }
 
-  fun values(): Array<ConfigurationParameter> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<ConfigurationParameter> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): ConfigurationParameter /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): ConfigurationParameter /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<ConfigurationParameter>
+  konst entries: EnumEntries<ConfigurationParameter>
     get(): EnumEntries<ConfigurationParameter> /* Synthetic body for ENUM_ENTRIES */
 
 }

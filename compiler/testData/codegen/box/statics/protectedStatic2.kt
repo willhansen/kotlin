@@ -32,25 +32,25 @@ package anotherPackage
 import Base.Derived
 import Base
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class Kotlin : Base.Derived() {
     fun doTest(): String {
 
-        if (eval { TEST } != "DERIVED") return "fail 1"
-        if (eval { test() } != "DERIVED") return "fail 2"
+        if (ekonst { TEST } != "DERIVED") return "fail 1"
+        if (ekonst { test() } != "DERIVED") return "fail 2"
 
-        if (eval { Derived.TEST } != "DERIVED") return "fail 3"
-        if (eval { Derived.test() } != "DERIVED") return "fail 4"
+        if (ekonst { Derived.TEST } != "DERIVED") return "fail 3"
+        if (ekonst { Derived.test() } != "DERIVED") return "fail 4"
 
-        if (eval { Base.TEST } != "BASE") return "fail 5"
-        if (eval { Base.test() } != "BASE") return "fail 6"
+        if (ekonst { Base.TEST } != "BASE") return "fail 5"
+        if (ekonst { Base.test() } != "BASE") return "fail 6"
 
-        if (eval { Base.BASE_ONLY } != "BASE") return "fail 7"
-        if (eval { Base.baseOnly() } != "BASE") return "fail 8"
+        if (ekonst { Base.BASE_ONLY } != "BASE") return "fail 7"
+        if (ekonst { Base.baseOnly() } != "BASE") return "fail 8"
 
-        if (eval { BASE_ONLY } != "BASE") return "fail 9"
-        if (eval { baseOnly() } != "BASE") return "fail 10"
+        if (ekonst { BASE_ONLY } != "BASE") return "fail 9"
+        if (ekonst { baseOnly() } != "BASE") return "fail 10"
 
         return "OK"
     }

@@ -6,10 +6,10 @@ interface IntfWithDefaultImpls {
 
 interface Intf {
     companion object {
-        val BLACK = 1
-        const val WHITE = 2
+        konst BLACK = 1
+        const konst WHITE = 2
     }
 
-    val color: Int
+    konst color: Int
         get() = BLACK
 }

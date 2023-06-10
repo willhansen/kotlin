@@ -30,7 +30,7 @@ public final class IrTypeParameter extends
   private IrTypeParameter(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -94,10 +94,10 @@ public final class IrTypeParameter extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
@@ -118,7 +118,7 @@ public final class IrTypeParameter extends
     public IrTypeParameter parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrTypeParameter(input, extensionRegistry);
     }
   };
@@ -270,23 +270,23 @@ public final class IrTypeParameter extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter parseFrom(java.io.InputStream input)
@@ -442,7 +442,7 @@ public final class IrTypeParameter extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -470,11 +470,11 @@ public final class IrTypeParameter extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
-      if (value == null) {
+    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      base_ = value;
+      base_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -492,13 +492,13 @@ public final class IrTypeParameter extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
+    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           base_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.getDefaultInstance()) {
         base_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(konstue).buildPartial();
       } else {
-        base_ = value;
+        base_ = konstue;
       }
 
       bitField0_ |= 0x00000001;
@@ -530,9 +530,9 @@ public final class IrTypeParameter extends
     /**
      * <code>required int32 name = 2;</code>
      */
-    public Builder setName(int value) {
+    public Builder setName(int konstue) {
       bitField0_ |= 0x00000002;
-      name_ = value;
+      name_ = konstue;
       
       return this;
     }
@@ -576,18 +576,18 @@ public final class IrTypeParameter extends
      * <code>repeated int32 super_type = 3 [packed = true];</code>
      */
     public Builder setSuperType(
-        int index, int value) {
+        int index, int konstue) {
       ensureSuperTypeIsMutable();
-      superType_.set(index, value);
+      superType_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int32 super_type = 3 [packed = true];</code>
      */
-    public Builder addSuperType(int value) {
+    public Builder addSuperType(int konstue) {
       ensureSuperTypeIsMutable();
-      superType_.add(value);
+      superType_.add(konstue);
       
       return this;
     }
@@ -595,10 +595,10 @@ public final class IrTypeParameter extends
      * <code>repeated int32 super_type = 3 [packed = true];</code>
      */
     public Builder addAllSuperType(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensureSuperTypeIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, superType_);
+          konstues, superType_);
       
       return this;
     }

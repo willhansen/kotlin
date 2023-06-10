@@ -23,11 +23,11 @@ import java.io.File
 
 abstract class AbstractHasCommonSubtypeTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val errors = mutableListOf<String>()
-        val originalText = ktFile.text
-        val actualTextBuilder = StringBuilder()
+        konst errors = mutableListOf<String>()
+        konst originalText = ktFile.text
+        konst actualTextBuilder = StringBuilder()
         analyseForTest(ktFile) {
-            val visitor = object : KtTreeVisitorVoid() {
+            konst visitor = object : KtTreeVisitorVoid() {
                 override fun visitElement(element: PsiElement) {
                     if (element.firstChild == null) {
                         actualTextBuilder.append(element.text)
@@ -36,7 +36,7 @@ abstract class AbstractHasCommonSubtypeTest : AbstractAnalysisApiSingleFileTest(
                 }
 
                 override fun visitCallExpression(expression: KtCallExpression) {
-                    val haveCommonSubtype = when (expression.calleeExpression?.text) {
+                    konst haveCommonSubtype = when (expression.calleeExpression?.text) {
                         "typesHaveCommonSubtype" -> true
                         "typesHaveNoCommonSubtype" -> false
                         else -> {
@@ -44,20 +44,20 @@ abstract class AbstractHasCommonSubtypeTest : AbstractAnalysisApiSingleFileTest(
                             return
                         }
                     }
-                    val valueArguments = expression.valueArguments
-                    require(valueArguments.size == 2) {
+                    konst konstueArguments = expression.konstueArguments
+                    require(konstueArguments.size == 2) {
                         "Illegal call of ${expression.name} at ${expression.positionString}"
                     }
 
-                    val a = valueArguments[0]
-                    val aType = a.getArgumentExpression()?.getKtType()
+                    konst a = konstueArguments[0]
+                    konst aType = a.getArgumentExpression()?.getKtType()
                     if (aType == null) {
                         errors.add("'${a.text}' has no type at ${a.positionString}")
                         super.visitCallExpression(expression)
                         return
                     }
-                    val b = valueArguments[1]
-                    val bType = b.getArgumentExpression()?.getKtType()
+                    konst b = konstueArguments[1]
+                    konst bType = b.getArgumentExpression()?.getKtType()
                     if (bType == null) {
                         errors.add("'${b.text}' has no type at ${b.positionString}")
                         super.visitCallExpression(expression)
@@ -69,7 +69,7 @@ abstract class AbstractHasCommonSubtypeTest : AbstractAnalysisApiSingleFileTest(
                         } else {
                             actualTextBuilder.append("typesHaveCommonSubtype")
                         }
-                        actualTextBuilder.append(expression.valueArgumentList!!.text)
+                        actualTextBuilder.append(expression.konstueArgumentList!!.text)
                     } else {
                         super.visitCallExpression(expression)
                     }
@@ -80,7 +80,7 @@ abstract class AbstractHasCommonSubtypeTest : AbstractAnalysisApiSingleFileTest(
         if (errors.isNotEmpty()) {
             testServices.assertions.fail { errors.joinToString("\n") }
         }
-        val actualText = actualTextBuilder.toString()
+        konst actualText = actualTextBuilder.toString()
         if (actualText != originalText) {
             testServices.assertions.assertEqualsToFile(testDataPath, actualText)
         }
@@ -100,9 +100,9 @@ abstract class AbstractHasCommonSubtypeTest : AbstractAnalysisApiSingleFileTest(
         }
     }
 
-    private val PsiElement.positionString: String
+    private konst PsiElement.positionString: String
         get() {
-            val illegalCallPos = StringUtil.offsetToLineColumn(containingFile.text, textRange.startOffset)
+            konst illegalCallPos = StringUtil.offsetToLineColumn(containingFile.text, textRange.startOffset)
             return "${containingFile.virtualFile.path}:${illegalCallPos.line + 1}:${illegalCallPos.column + 1}"
         }
 }

@@ -10,18 +10,18 @@ import org.jetbrains.kotlin.konan.blackboxtest.support.settings.TestConfiguratio
 
 @Target(AnnotationTarget.CLASS)
 @TestConfiguration(providerClass = PredefinedTestCaseGroupProvider::class)
-internal annotation class PredefinedTestCases(vararg val testCases: PredefinedTestCase)
+internal annotation class PredefinedTestCases(vararg konst testCases: PredefinedTestCase)
 
 @Target()
 internal annotation class PredefinedTestCase(
-    val name: String,
-    val runnerType: TestRunnerType,
-    val freeCompilerArgs: Array<String>,
-    val sourceLocations: Array<String>,
-    val ignoredFiles: Array<String> = [],  // TODO Remove it after fix of KT-55902, KT-56023, KT-56483
-    val ignoredTests: Array<String> = []
+    konst name: String,
+    konst runnerType: TestRunnerType,
+    konst freeCompilerArgs: Array<String>,
+    konst sourceLocations: Array<String>,
+    konst ignoredFiles: Array<String> = [],  // TODO Remove it after fix of KT-55902, KT-56023, KT-56483
+    konst ignoredTests: Array<String> = []
 )
 
 internal object PredefinedPaths {
-    const val KOTLIN_NATIVE_DISTRIBUTION = "\$KOTLIN_NATIVE_DISTRIBUTION\$"
+    const konst KOTLIN_NATIVE_DISTRIBUTION = "\$KOTLIN_NATIVE_DISTRIBUTION\$"
 }

@@ -35,7 +35,7 @@ FILE: danglingAnnotationsClassLevel.kt
                 @Suppress(String()) @MustBeDocumented() <DANGLING MODIFIER: Top level declaration expected>
             }
 
-            lval r: I = object : I {
+            lkonst r: I = object : I {
                 private [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                     super<<implicit>>()
                 }

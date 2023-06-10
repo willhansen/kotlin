@@ -24,40 +24,40 @@ import java.security.MessageDigest
 import java.util.*
 import kotlin.reflect.KMutableProperty1
 
-const val COMPILER_JAR_NAME: String = "kotlin-compiler.jar"
-const val COMPILER_SERVICE_RMI_NAME: String = "KotlinJvmCompilerService"
-const val COMPILER_DAEMON_CLASS_FQN: String = "org.jetbrains.kotlin.daemon.KotlinCompileDaemon"
-const val COMPILE_DAEMON_FIND_PORT_ATTEMPTS: Int = 10
-const val COMPILE_DAEMON_PORTS_RANGE_START: Int = 17001
-const val COMPILE_DAEMON_PORTS_RANGE_END: Int = 18000
-const val COMPILE_DAEMON_CMDLINE_OPTIONS_PREFIX: String = "--daemon-"
-const val COMPILE_DAEMON_DEFAULT_FILES_PREFIX: String = "kotlin-daemon"
-const val COMPILE_DAEMON_TIMEOUT_INFINITE_S: Int = 0
-const val COMPILE_DAEMON_DEFAULT_IDLE_TIMEOUT_S: Int = 7200 // 2 hours
-const val COMPILE_DAEMON_DEFAULT_UNUSED_TIMEOUT_S: Int = 60
-const val COMPILE_DAEMON_DEFAULT_SHUTDOWN_DELAY_MS: Long = 1000L // 1 sec
-const val COMPILE_DAEMON_MEMORY_THRESHOLD_INFINITE: Long = 0L
-const val COMPILE_DAEMON_FORCE_SHUTDOWN_DEFAULT_TIMEOUT_MS: Long = 10000L // 10 secs
-const val COMPILE_DAEMON_TIMEOUT_INFINITE_MS: Long = 0L
-const val COMPILE_DAEMON_IS_READY_MESSAGE = "Kotlin compile daemon is ready"
+const konst COMPILER_JAR_NAME: String = "kotlin-compiler.jar"
+const konst COMPILER_SERVICE_RMI_NAME: String = "KotlinJvmCompilerService"
+const konst COMPILER_DAEMON_CLASS_FQN: String = "org.jetbrains.kotlin.daemon.KotlinCompileDaemon"
+const konst COMPILE_DAEMON_FIND_PORT_ATTEMPTS: Int = 10
+const konst COMPILE_DAEMON_PORTS_RANGE_START: Int = 17001
+const konst COMPILE_DAEMON_PORTS_RANGE_END: Int = 18000
+const konst COMPILE_DAEMON_CMDLINE_OPTIONS_PREFIX: String = "--daemon-"
+const konst COMPILE_DAEMON_DEFAULT_FILES_PREFIX: String = "kotlin-daemon"
+const konst COMPILE_DAEMON_TIMEOUT_INFINITE_S: Int = 0
+const konst COMPILE_DAEMON_DEFAULT_IDLE_TIMEOUT_S: Int = 7200 // 2 hours
+const konst COMPILE_DAEMON_DEFAULT_UNUSED_TIMEOUT_S: Int = 60
+const konst COMPILE_DAEMON_DEFAULT_SHUTDOWN_DELAY_MS: Long = 1000L // 1 sec
+const konst COMPILE_DAEMON_MEMORY_THRESHOLD_INFINITE: Long = 0L
+const konst COMPILE_DAEMON_FORCE_SHUTDOWN_DEFAULT_TIMEOUT_MS: Long = 10000L // 10 secs
+const konst COMPILE_DAEMON_TIMEOUT_INFINITE_MS: Long = 0L
+const konst COMPILE_DAEMON_IS_READY_MESSAGE = "Kotlin compile daemon is ready"
 
-val COMPILE_DAEMON_DEFAULT_RUN_DIR_PATH: String
-    get() = CompilerSystemProperties.COMPILE_DAEMON_CUSTOM_RUN_FILES_PATH_FOR_TESTS.value ?: FileSystem.getRuntimeStateFilesPath(
+konst COMPILE_DAEMON_DEFAULT_RUN_DIR_PATH: String
+    get() = CompilerSystemProperties.COMPILE_DAEMON_CUSTOM_RUN_FILES_PATH_FOR_TESTS.konstue ?: FileSystem.getRuntimeStateFilesPath(
         "kotlin",
         "daemon"
     )
 
-val CLASSPATH_ID_DIGEST = "MD5"
+konst CLASSPATH_ID_DIGEST = "MD5"
 
 
 open class PropMapper<C, V, out P : KMutableProperty1<C, V>>(
-    val dest: C,
-    val prop: P,
-    val names: List<String> = listOf(prop.name),
-    val fromString: (String) -> V,
-    val toString: ((V) -> String?) = { it.toString() },
-    val skipIf: ((V) -> Boolean) = { false },
-    val mergeDelimiter: String? = null
+    konst dest: C,
+    konst prop: P,
+    konst names: List<String> = listOf(prop.name),
+    konst fromString: (String) -> V,
+    konst toString: ((V) -> String?) = { it.toString() },
+    konst skipIf: ((V) -> Boolean) = { false },
+    konst mergeDelimiter: String? = null
 ) {
     open fun toArgs(prefix: String = COMPILE_DAEMON_CMDLINE_OPTIONS_PREFIX): List<String> =
         when {
@@ -108,27 +108,27 @@ class RestPropMapper<C, out P : KMutableProperty1<C, MutableCollection<String>>>
 
 
 // helper function combining find with map, useful for the cases then there is a calculation performed in find, which is nice to return along with
-// found value; mappingPredicate should return the pair of boolean compare predicate result and transformation value, we want to get along with found value
+// found konstue; mappingPredicate should return the pair of boolean compare predicate result and transformation konstue, we want to get along with found konstue
 inline fun <T, R : Any> Iterable<T>.findWithTransform(mappingPredicate: (T) -> Pair<Boolean, R?>): R? {
     for (element in this) {
-        val (found, mapped) = mappingPredicate(element)
+        konst (found, mapped) = mappingPredicate(element)
         if (found) return mapped
     }
     return null
 }
 
 
-// filter-like function, takes list of propmappers, bound to properties of concrete objects, iterates over receiver, extract matching values via appropriate
+// filter-like function, takes list of propmappers, bound to properties of concrete objects, iterates over receiver, extract matching konstues via appropriate
 // mappers into bound properties; if restParser is given, adds all non-matching elements to it, otherwise return them as an iterable
 // note bound properties mutation!
 fun Iterable<String>.filterExtractProps(propMappers: List<PropMapper<*, *, *>>, prefix: String, restParser: RestPropMapper<*, *>? = null): Iterable<String> {
 
-    val iter = iterator()
-    val rest = arrayListOf<String>()
+    konst iter = iterator()
+    konst rest = arrayListOf<String>()
 
     while (iter.hasNext()) {
-        val param = iter.next()
-        val (propMapper, matchingOption) = propMappers.findWithTransform { mapper ->
+        konst param = iter.next()
+        konst (propMapper, matchingOption) = propMappers.findWithTransform { mapper ->
             mapper.names
                     .firstOrNull { param.startsWith(prefix + it) }
                     .let { Pair(it != null, Pair(mapper, it)) }
@@ -136,17 +136,17 @@ fun Iterable<String>.filterExtractProps(propMappers: List<PropMapper<*, *, *>>, 
 
         when {
             propMapper != null -> {
-                val optionLength = prefix.length + matchingOption!!.length
+                konst optionLength = prefix.length + matchingOption!!.length
                 when {
                     propMapper is BoolPropMapper<*, *> -> {
                         if (param.length > optionLength)
-                            throw IllegalArgumentException("Invalid switch option '$param', expecting $prefix$matchingOption without arguments")
+                            throw IllegalArgumentException("Inkonstid switch option '$param', expecting $prefix$matchingOption without arguments")
                         propMapper.apply("")
                     }
                     param.length > optionLength ->
                         if (param[optionLength] != '=') {
                             if (propMapper.mergeDelimiter == null)
-                                throw IllegalArgumentException("Invalid option syntax '$param', expecting $prefix$matchingOption[= ]<arg>")
+                                throw IllegalArgumentException("Inkonstid option syntax '$param', expecting $prefix$matchingOption[= ]<arg>")
                             propMapper.apply(param.substring(optionLength))
                         }
                         else {
@@ -171,7 +171,7 @@ fun String.trimQuotes() = trim('"','\'')
 
 
 interface OptionsGroup : Serializable {
-    val mappers: List<PropMapper<*, *, *>>
+    konst mappers: List<PropMapper<*, *, *>>
 }
 
 fun Iterable<String>.filterExtractProps(vararg groups: OptionsGroup, prefix: String): Iterable<String> =
@@ -184,13 +184,13 @@ data class DaemonJVMOptions(
         var reservedCodeCacheSize: String = "",
         var jvmParams: MutableCollection<String> = arrayListOf()
 ) : OptionsGroup {
-    override val mappers: List<PropMapper<*, *, *>>
+    override konst mappers: List<PropMapper<*, *, *>>
         get() = listOf(StringPropMapper(this, DaemonJVMOptions::maxMemory, listOf("Xmx"), mergeDelimiter = ""),
                        StringPropMapper(this, DaemonJVMOptions::maxMetaspaceSize, listOf("XX:MaxMetaspaceSize"), mergeDelimiter = "="),
                        StringPropMapper(this, DaemonJVMOptions::reservedCodeCacheSize, listOf("XX:ReservedCodeCacheSize"), mergeDelimiter = "="),
                        restMapper)
 
-    val restMapper: RestPropMapper<*, *>
+    konst restMapper: RestPropMapper<*, *>
         get() = RestPropMapper(this, DaemonJVMOptions::jvmParams)
 }
 
@@ -206,10 +206,10 @@ data class DaemonOptions(
         var reportPerf: Boolean = false
 ) : OptionsGroup {
 
-    override val mappers: List<PropMapper<*, *, *>>
+    override konst mappers: List<PropMapper<*, *, *>>
         get() = listOf(PropMapper(this, DaemonOptions::runFilesPath, fromString = String::trimQuotes),
                        PropMapper(this, DaemonOptions::autoshutdownMemoryThreshold, fromString = String::toLong, skipIf = { it == 0L }, mergeDelimiter = "="),
-                // TODO: implement "use default" value without specifying default, so if client and server uses different defaults, it should not lead to many params in the cmd line; use 0 for it and used different val for infinite
+                // TODO: implement "use default" konstue without specifying default, so if client and server uses different defaults, it should not lead to many params in the cmd line; use 0 for it and used different konst for infinite
                        PropMapper(this, DaemonOptions::autoshutdownIdleSeconds, fromString = String::toInt, skipIf = { it == 0 }, mergeDelimiter = "="),
                        PropMapper(this, DaemonOptions::autoshutdownUnusedSeconds, fromString = String::toInt, skipIf = { it == COMPILE_DAEMON_DEFAULT_UNUSED_TIMEOUT_S }, mergeDelimiter = "="),
                        PropMapper(this, DaemonOptions::shutdownDelayMilliseconds, fromString = String::toLong, skipIf = { it == COMPILE_DAEMON_DEFAULT_SHUTDOWN_DELAY_MS }, mergeDelimiter = "="),
@@ -219,7 +219,7 @@ data class DaemonOptions(
 }
 
 // TODO: consider implementing generic approach to it or may be replace getters with ones returning default if necessary
-val DaemonOptions.runFilesPathOrDefault: String
+konst DaemonOptions.runFilesPathOrDefault: String
     get() = if (runFilesPath.isBlank()) COMPILE_DAEMON_DEFAULT_RUN_DIR_PATH else runFilesPath
 
 fun Iterable<String>.distinctStringsDigest(): ByteArray =
@@ -234,7 +234,7 @@ data class CompilerId(
         var compilerVersion: String = ""
 ) : OptionsGroup {
 
-    override val mappers: List<PropMapper<*, *, *>>
+    override konst mappers: List<PropMapper<*, *, *>>
         get() = listOf(PropMapper(this, CompilerId::compilerClasspath, toString = { it.joinToString(File.pathSeparator) }, fromString = { it.trimQuotes().split(File.pathSeparator) }),
                        StringPropMapper(this, CompilerId::compilerVersion))
 
@@ -254,7 +254,7 @@ data class CompilerId(
 }
 
 
-fun isDaemonEnabled(): Boolean = CompilerSystemProperties.COMPILE_DAEMON_ENABLED_PROPERTY.value != null
+fun isDaemonEnabled(): Boolean = CompilerSystemProperties.COMPILE_DAEMON_ENABLED_PROPERTY.konstue != null
 
 fun configureDaemonJVMOptions(opts: DaemonJVMOptions,
                               vararg additionalParams: String,
@@ -273,15 +273,15 @@ fun configureDaemonJVMOptions(opts: DaemonJVMOptions,
 ): DaemonJVMOptions {
     // note: sequence matters, e.g. explicit override in COMPILE_DAEMON_JVM_OPTIONS_PROPERTY should be done after inputArguments processing
     if (inheritMemoryLimits || inheritOtherJvmOptions) {
-        val jvmArguments = ManagementFactory.getRuntimeMXBean().inputArguments
-        val targetOptions = if (inheritMemoryLimits) opts else DaemonJVMOptions()
-        val otherArgs = jvmArguments.filterExtractProps(targetOptions.mappers, prefix = "-")
+        konst jvmArguments = ManagementFactory.getRuntimeMXBean().inputArguments
+        konst targetOptions = if (inheritMemoryLimits) opts else DaemonJVMOptions()
+        konst otherArgs = jvmArguments.filterExtractProps(targetOptions.mappers, prefix = "-")
 
         if (inheritMemoryLimits) {
             if (opts.maxMemory.isBlank()) {
-                val maxMemBytes = Runtime.getRuntime().maxMemory()
+                konst maxMemBytes = Runtime.getRuntime().maxMemory()
                 // rounding up
-                val maxMemMegabytes = maxMemBytes / (1024 * 1024) + if (maxMemBytes % (1024 * 1024) == 0L) 0 else 1
+                konst maxMemMegabytes = maxMemBytes / (1024 * 1024) + if (maxMemBytes % (1024 * 1024) == 0L) 0 else 1
                 opts.maxMemory = "${maxMemMegabytes}m"
             }
         }
@@ -297,7 +297,7 @@ fun configureDaemonJVMOptions(opts: DaemonJVMOptions,
                 })
         }
     }
-    CompilerSystemProperties.COMPILE_DAEMON_JVM_OPTIONS_PROPERTY.value?.let {
+    CompilerSystemProperties.COMPILE_DAEMON_JVM_OPTIONS_PROPERTY.konstue?.let {
         opts.jvmParams.addAll(
                 it.trimQuotes()
                   .split("(?<!\\\\),".toRegex())  // using independent non-capturing group with negative lookahead zero length assertion to split only on non-escaped commas
@@ -310,8 +310,8 @@ fun configureDaemonJVMOptions(opts: DaemonJVMOptions,
     opts.jvmParams.addAll(additionalParams)
 
     if (inheritAdditionalProperties) {
-        CompilerSystemProperties.COMPILE_DAEMON_LOG_PATH_PROPERTY.value?.let { opts.jvmParams.add("D${CompilerSystemProperties.COMPILE_DAEMON_LOG_PATH_PROPERTY.property}=\"$it\"") }
-        CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.value?.let { opts.jvmParams.add("D${CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.property}") }
+        CompilerSystemProperties.COMPILE_DAEMON_LOG_PATH_PROPERTY.konstue?.let { opts.jvmParams.add("D${CompilerSystemProperties.COMPILE_DAEMON_LOG_PATH_PROPERTY.property}=\"$it\"") }
+        CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.konstue?.let { opts.jvmParams.add("D${CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.property}") }
     }
 
     if (opts.jvmParams.none { it.matches(jvmAssertArgsRegex) }) {
@@ -320,7 +320,7 @@ fun configureDaemonJVMOptions(opts: DaemonJVMOptions,
     return opts
 }
 
-private val jvmAssertArgsRegex = "(es?a|ds?a|(enable|disable)(system)?assertions)(${'$'}|:)".toRegex()
+private konst jvmAssertArgsRegex = "(es?a|ds?a|(enable|disable)(system)?assertions)(${'$'}|:)".toRegex()
 
 fun configureDaemonJVMOptions(
     vararg additionalParams: String,
@@ -337,15 +337,15 @@ fun configureDaemonJVMOptions(
     )
 
 fun configureDaemonOptions(opts: DaemonOptions): DaemonOptions {
-    CompilerSystemProperties.COMPILE_DAEMON_OPTIONS_PROPERTY.value?.let {
-        val unrecognized = it.trimQuotes().split(",").filterExtractProps(opts.mappers, "")
+    CompilerSystemProperties.COMPILE_DAEMON_OPTIONS_PROPERTY.konstue?.let {
+        konst unrecognized = it.trimQuotes().split(",").filterExtractProps(opts.mappers, "")
         if (unrecognized.any())
             throw IllegalArgumentException(
                     "Unrecognized daemon options passed via property ${CompilerSystemProperties.COMPILE_DAEMON_OPTIONS_PROPERTY.property}: " + unrecognized.joinToString(" ") +
                     "\nSupported options: " + opts.mappers.joinToString(", ", transform = { it.names.first() }))
     }
-    CompilerSystemProperties.COMPILE_DAEMON_VERBOSE_REPORT_PROPERTY.value?.let { opts.verbose = true }
-    CompilerSystemProperties.COMPILE_DAEMON_REPORT_PERF_PROPERTY.value?.let { opts.reportPerf = true }
+    CompilerSystemProperties.COMPILE_DAEMON_VERBOSE_REPORT_PROPERTY.konstue?.let { opts.verbose = true }
+    CompilerSystemProperties.COMPILE_DAEMON_REPORT_PERF_PROPERTY.konstue?.let { opts.reportPerf = true }
     return opts
 }
 
@@ -353,15 +353,15 @@ fun configureDaemonOptions(opts: DaemonOptions): DaemonOptions {
 fun configureDaemonOptions(): DaemonOptions = configureDaemonOptions(DaemonOptions())
 
 
-private val humanizedMemorySizeRegex = "(\\d+)([kmg]?)".toRegex()
+private konst humanizedMemorySizeRegex = "(\\d+)([kmg]?)".toRegex()
 
 private fun String.memToBytes(): Long? =
         humanizedMemorySizeRegex
             .matchEntire(this.trim().lowercase())
             ?.groups?.let { match ->
-                match[1]?.value?.let {
+                match[1]?.konstue?.let {
                     it.toLong() *
-                    when (match[2]?.value) {
+                    when (match[2]?.konstue) {
                         "k" -> 1 shl 10
                         "m" -> 1 shl 20
                         "g" -> 1 shl 30
@@ -371,7 +371,7 @@ private fun String.memToBytes(): Long? =
             }
 
 
-private val daemonJVMOptionsMemoryProps =
+private konst daemonJVMOptionsMemoryProps =
     listOf(DaemonJVMOptions::maxMemory, DaemonJVMOptions::maxMetaspaceSize, DaemonJVMOptions::reservedCodeCacheSize)
 
 infix fun DaemonJVMOptions.memorywiseFitsInto(other: DaemonJVMOptions): Boolean =
@@ -379,7 +379,7 @@ infix fun DaemonJVMOptions.memorywiseFitsInto(other: DaemonJVMOptions): Boolean 
             .all { (it.get(this).memToBytes() ?: 0) <= (it.get(other).memToBytes() ?: 0) }
 
 fun compareDaemonJVMOptionsMemory(left: DaemonJVMOptions, right: DaemonJVMOptions): Int {
-    val props = daemonJVMOptionsMemoryProps.map { Pair(it.get(left).memToBytes() ?: 0, it.get(right).memToBytes() ?: 0) }
+    konst props = daemonJVMOptionsMemoryProps.map { Pair(it.get(left).memToBytes() ?: 0, it.get(right).memToBytes() ?: 0) }
     return when {
         props.all { it.first == it.second } -> 0
         props.all { it.first <= it.second } -> -1

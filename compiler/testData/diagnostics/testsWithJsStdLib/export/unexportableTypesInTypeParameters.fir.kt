@@ -17,9 +17,9 @@ class A<T : C, S: I>
 interface I2<T> where T : C, T : I
 
 @JsExport
-class B<T>(val a: T, val b: Comparable<T>) {
-    val c: Comparable<T> = b
+class B<T>(konst a: T, konst b: Comparable<T>) {
+    konst c: Comparable<T> = b
 }
 
 @JsExport
-class D<T>(val a: T, val b: Array<T>)
+class D<T>(konst a: T, konst b: Array<T>)

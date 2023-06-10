@@ -21,8 +21,8 @@ import org.jetbrains.benchmarksLauncher.Blackhole
 open class LocalObjectsBenchmark {
     //Benchmark
     fun localArray(): Int {
-        val size = 48
-        val array = IntArray(size)
+        konst size = 48
+        konst array = IntArray(size)
         for (i in 1..size) {
             array[i - 1] = i * 2
         }

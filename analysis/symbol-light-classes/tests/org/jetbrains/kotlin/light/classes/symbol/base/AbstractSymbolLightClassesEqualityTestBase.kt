@@ -23,24 +23,24 @@ import java.nio.file.Path
 
 abstract class AbstractSymbolLightClassesEqualityTestBase(
     configurator: AnalysisApiTestConfigurator,
-    override val currentExtension: String,
-    override val isTestAgainstCompiledCode: Boolean
+    override konst currentExtension: String,
+    override konst isTestAgainstCompiledCode: Boolean
 ) : AbstractSymbolLightClassesTestBase(configurator) {
     override fun getRenderResult(ktFile: KtFile, ktFiles: List<KtFile>, testDataFile: Path, module: TestModule, project: Project): String {
         throw IllegalStateException("This test is not rendering light elements")
     }
 
     final override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val lightClasses = lightClassesToCheck(ktFiles, module, testServices)
+        konst lightClasses = lightClassesToCheck(ktFiles, module, testServices)
         if (lightClasses.isEmpty()) return
-        val project = lightClasses.first().project
-        val modificationTracker = if (isTestAgainstCompiledCode) {
+        konst project = lightClasses.first().project
+        konst modificationTracker = if (isTestAgainstCompiledCode) {
             project.createAllLibrariesModificationTracker()
         } else {
             project.createProjectWideOutOfBlockModificationTracker()
         } as SimpleModificationTracker
 
-        val testVisitor = createTestVisitor(modificationTracker, testServices.assertions)
+        konst testVisitor = createTestVisitor(modificationTracker, testServices.assertions)
         for (lightClass in lightClasses) {
             lightClass.accept(testVisitor)
         }
@@ -51,28 +51,28 @@ abstract class AbstractSymbolLightClassesEqualityTestBase(
         assertions: AssertionsService,
     ): PsiElementVisitor = object : JavaElementVisitor() {
         override fun visitClass(aClass: PsiClass) {
-            compareArrayElementsWithInvalidation(aClass, PsiClass::getMethods)
-            compareArrayElementsWithInvalidation(aClass, PsiClass::getFields)
-            compareArrayElementsWithInvalidation(aClass, PsiClass::getInnerClasses)
+            compareArrayElementsWithInkonstidation(aClass, PsiClass::getMethods)
+            compareArrayElementsWithInkonstidation(aClass, PsiClass::getFields)
+            compareArrayElementsWithInkonstidation(aClass, PsiClass::getInnerClasses)
 
             super.visitClass(aClass)
         }
 
         override fun visitEnumConstant(enumConstant: PsiEnumConstant) {
-            compareElementsWithInvalidation(enumConstant, PsiEnumConstant::getInitializingClass)
+            compareElementsWithInkonstidation(enumConstant, PsiEnumConstant::getInitializingClass)
 
             super.visitEnumConstant(enumConstant)
         }
 
-        private fun <T, R> compareElementsWithInvalidation(
+        private fun <T, R> compareElementsWithInkonstidation(
             element: T,
             accessor: T.() -> R,
             comparator: (before: R, after: R) -> Unit = ::assertElementEquals,
         ) {
-            val before = element.accessor()
+            konst before = element.accessor()
             modificationTracker.incModificationCount()
 
-            val after = element.accessor()
+            konst after = element.accessor()
             comparator(before, after)
         }
 
@@ -80,8 +80,8 @@ abstract class AbstractSymbolLightClassesEqualityTestBase(
             assertions.assertEquals(before, after)
         }
 
-        private fun <T, R : Any> compareArrayElementsWithInvalidation(element: T, accessor: T.() -> Array<R>) {
-            compareElementsWithInvalidation(element, accessor) { before, after ->
+        private fun <T, R : Any> compareArrayElementsWithInkonstidation(element: T, accessor: T.() -> Array<R>) {
+            compareElementsWithInkonstidation(element, accessor) { before, after ->
                 assertions.assertEquals(before.size, after.size) {
                     "Element: $element\nAccessor: $accessor"
                 }
@@ -97,7 +97,7 @@ abstract class AbstractSymbolLightClassesEqualityTestBase(
                 }
 
                 for ((index, expected) in before.withIndex()) {
-                    val actual = after[index]
+                    konst actual = after[index]
                     assertions.assertEquals(expected, actual) {
                         "Element: $element"
                     }

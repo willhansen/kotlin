@@ -17,15 +17,15 @@ interface ReplExceptionReporter {
     }
 }
 
-class IdeReplExceptionReporter(private val replWriter: ReplWriter) :
+class IdeReplExceptionReporter(private konst replWriter: ReplWriter) :
     ReplExceptionReporter {
     override fun report(e: Throwable) {
-        val stringWriter = StringWriter()
-        val printWriter = PrintWriter(stringWriter)
+        konst stringWriter = StringWriter()
+        konst printWriter = PrintWriter(stringWriter)
         e.printStackTrace(printWriter)
 
-        val writerString = stringWriter.toString()
-        val internalErrorText = if (writerString.isEmpty()) "Unknown error" else writerString
+        konst writerString = stringWriter.toString()
+        konst internalErrorText = if (writerString.isEmpty()) "Unknown error" else writerString
 
         replWriter.sendInternalErrorReport(internalErrorText)
     }

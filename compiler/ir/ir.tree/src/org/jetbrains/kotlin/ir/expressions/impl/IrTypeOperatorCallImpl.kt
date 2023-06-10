@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrTypeOperatorCallImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var operator: IrTypeOperator,
     override var typeOperand: IrType,

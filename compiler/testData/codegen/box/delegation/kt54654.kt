@@ -8,15 +8,15 @@ fun getString_1(): String = "O"
 fun getString_2(): String = "K"
 
 interface A {
-    val property get() = getString_1()
+    konst property get() = getString_1()
     fun function() = getString_2()
 }
 
-class B(val a: A) : A by a
+class B(konst a: A) : A by a
 
 class C : A
 
 fun box(): String {
-    val b = B(C())
+    konst b = B(C())
     return accessProperty(b) + accessFunction(b)
 }

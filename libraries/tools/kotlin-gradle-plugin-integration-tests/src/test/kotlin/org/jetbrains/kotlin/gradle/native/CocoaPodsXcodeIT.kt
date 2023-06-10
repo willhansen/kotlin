@@ -24,13 +24,13 @@ import kotlin.test.assertEquals
 @OptIn(EnvironmentalVariablesOverride::class)
 class CocoaPodsXcodeIT : KGPBaseTest() {
 
-    private val podfileImportDirectivePlaceholder = "<import_mode_directive>"
+    private konst podfileImportDirectivePlaceholder = "<import_mode_directive>"
 
-    private val cocoapodsSingleKtPod = "native-cocoapods-single"
-    private val cocoapodsMultipleKtPods = "native-cocoapods-multiple"
-    private val templateProjectName = "native-cocoapods-template"
+    private konst cocoapodsSingleKtPod = "native-cocoapods-single"
+    private konst cocoapodsMultipleKtPods = "native-cocoapods-multiple"
+    private konst templateProjectName = "native-cocoapods-template"
 
-    private val environmentVariables = EnvironmentalVariables(
+    private konst environmentVariables = EnvironmentalVariables(
         mapOf(
             // CocoaPods 1.11 requires UTF-8 locale being set, more details: https://github.com/CocoaPods/CocoaPods/issues/10939
             "LC_ALL" to "en_US.UTF-8"
@@ -142,13 +142,13 @@ class CocoaPodsXcodeIT : KGPBaseTest() {
         mapOf("kotlin-library" to "FirstMultiplatformLibrary", "second-library" to "SecondMultiplatformLibrary")
     )
 
-    private enum class ImportMode(val directive: String) {
+    private enum class ImportMode(konst directive: String) {
         FRAMEWORKS("use_frameworks!"),
         MODULAR_HEADERS("use_modular_headers!")
     }
 
     private fun TestProject.preparePodfile(iosAppLocation: String, mode: ImportMode) {
-        val iosAppDir = projectPath.resolve(iosAppLocation)
+        konst iosAppDir = projectPath.resolve(iosAppLocation)
 
         // Set import mode for Podfile.
         iosAppDir.resolve("Podfile")
@@ -189,14 +189,14 @@ class CocoaPodsXcodeIT : KGPBaseTest() {
 
         for ((subproject, frameworkName) in subprojectsToFrameworkNamesMap) {
 
-            val taskPrefix = if (subproject.isNotEmpty()) ":$subproject" else ""
+            konst taskPrefix = if (subproject.isNotEmpty()) ":$subproject" else ""
 
             // Add property with custom framework name
             frameworkName?.let {
                 useCustomCocoapodsFrameworkName(subproject, it, iosAppLocation)
             }
 
-            val buildOptions = defaultBuildOptions.copy(
+            konst buildOptions = defaultBuildOptions.copy(
                 nativeOptions = defaultBuildOptions.nativeOptions.copy(
                     cocoapodsGenerateWrapper = true
                 )
@@ -212,7 +212,7 @@ class CocoaPodsXcodeIT : KGPBaseTest() {
 
                 projectPath.resolve(it).apply {
                     // Run Xcode build.
-                    val xcodebuildResult = runProcess(
+                    konst xcodebuildResult = runProcess(
                         cmd = listOf(
                             "xcodebuild",
                             "-sdk", "iphonesimulator",

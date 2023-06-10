@@ -1,4 +1,4 @@
-class A<T>(val t: T) {
+class A<T>(konst t: T) {
     fun foo(): T = t
 }
 

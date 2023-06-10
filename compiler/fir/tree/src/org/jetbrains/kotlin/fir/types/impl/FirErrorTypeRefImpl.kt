@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.fir.visitors.transformInplace
 
 internal class FirErrorTypeRefImpl(
-    override val source: KtSourceElement?,
-    override val type: ConeKotlinType,
+    override konst source: KtSourceElement?,
+    override konst type: ConeKotlinType,
     override var delegatedTypeRef: FirTypeRef?,
-    override val diagnostic: ConeDiagnostic,
-    override val isFromStubType: Boolean = false,
+    override konst diagnostic: ConeDiagnostic,
+    override konst isFromStubType: Boolean = false,
     override var partiallyResolvedTypeRef: FirTypeRef? = null,
 ) : FirErrorTypeRef() {
     constructor(
@@ -37,7 +37,7 @@ internal class FirErrorTypeRefImpl(
         partiallyResolvedTypeRef,
     )
 
-    override val annotations: MutableOrEmptyList<FirAnnotation> = MutableOrEmptyList.empty()
+    override konst annotations: MutableOrEmptyList<FirAnnotation> = MutableOrEmptyList.empty()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotations.forEach { it.accept(visitor, data) }

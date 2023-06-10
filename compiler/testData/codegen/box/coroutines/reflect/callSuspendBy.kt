@@ -80,12 +80,12 @@ suspend fun suspending() {
 fun box(): String {
     var res: String? = ""
     builder {
-        val callable = A::class.members.find { it.name == "noArgs" }!!
+        konst callable = A::class.members.find { it.name == "noArgs" }!!
         res = callable.callSuspendBy(mapOf(callable.parameters.first() to A())) as String?
     }
     if (res != "OK") return res ?: "FAIL 1"
     builder {
-        val callable = A::class.members.find { it.name == "twoArgs" }!!
+        konst callable = A::class.members.find { it.name == "twoArgs" }!!
         res = callable.callSuspendBy(mapOf(callable.parameters[0] to A(), callable.parameters[1] to "O", callable.parameters[2] to "K")) as String?
     }
     if (res != "OK") return res ?: "FAIL 2"

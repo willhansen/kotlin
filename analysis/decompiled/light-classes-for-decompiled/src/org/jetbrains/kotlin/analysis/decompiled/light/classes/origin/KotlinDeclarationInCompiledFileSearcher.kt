@@ -30,15 +30,15 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 abstract class KotlinDeclarationInCompiledFileSearcher {
     abstract fun findDeclarationInCompiledFile(file: KtClsFile, member: PsiMember, signature: MemberSignature): KtDeclaration?
     fun findDeclarationInCompiledFile(file: KtClsFile, member: PsiMember): KtDeclaration? {
-        val signature = when (member) {
+        konst signature = when (member) {
             is PsiField -> {
-                val desc = MapPsiToAsmDesc.typeDesc(member.type)
+                konst desc = MapPsiToAsmDesc.typeDesc(member.type)
                 MemberSignature.fromFieldNameAndDesc(member.name, desc)
             }
 
             is PsiMethod -> {
-                val desc = MapPsiToAsmDesc.methodDesc(member)
-                val name = if (member.isConstructor) "<init>" else member.name
+                konst desc = MapPsiToAsmDesc.methodDesc(member)
+                konst name = if (member.isConstructor) "<init>" else member.name
                 MemberSignature.fromMethodNameAndDesc(name, desc)
             }
 
@@ -54,8 +54,8 @@ abstract class KotlinDeclarationInCompiledFileSearcher {
         member: PsiMember,
         memberName: String,
     ): KtDeclaration? {
-        val classOrFile: KtDeclarationContainer = file.declarations.singleOrNull() as? KtClassOrObject ?: file
-        val container: KtDeclarationContainer = if (relativeClassName.isEmpty())
+        konst classOrFile: KtDeclarationContainer = file.declarations.singleOrNull() as? KtClassOrObject ?: file
+        konst container: KtDeclarationContainer = if (relativeClassName.isEmpty())
             classOrFile
         else {
             relativeClassName.fold(classOrFile) { declaration: KtDeclarationContainer?, name: Name ->
@@ -70,11 +70,11 @@ abstract class KotlinDeclarationInCompiledFileSearcher {
                 ?.firstOrNull { doParametersMatch(member, it) }
         }
 
-        val declarations = container.declarations
+        konst declarations = container.declarations
         return when (member) {
             is PsiMethod -> {
-                val names = SmartList(memberName)
-                val setter = if (JvmAbi.isGetterName(memberName) && !PsiType.VOID.equals(member.returnType)) {
+                konst names = SmartList(memberName)
+                konst setter = if (JvmAbi.isGetterName(memberName) && !PsiType.VOID.equals(member.returnType)) {
                     propertyNameByGetMethodName(Name.identifier(memberName))?.let { names.add(it.identifier) }
                     false
                 } else if (JvmAbi.isSetterName(memberName) && PsiType.VOID.equals(member.returnType)) {
@@ -106,28 +106,28 @@ abstract class KotlinDeclarationInCompiledFileSearcher {
 
     private fun getJvmName(declaration: KtDeclaration?): String? {
         if (declaration == null) return null
-        val annotationEntry = declaration.annotationEntries.firstOrNull {
+        konst annotationEntry = declaration.annotationEntries.firstOrNull {
             it.calleeExpression?.constructorReferenceExpression?.getReferencedName() == JvmNames.JVM_NAME_SHORT
         }
         if (annotationEntry != null) {
-            val constantValue = (annotationEntry.stub as? KotlinAnnotationEntryStubImpl)?.valueArguments?.get(Name.identifier("name"))
+            konst constantValue = (annotationEntry.stub as? KotlinAnnotationEntryStubImpl)?.konstueArguments?.get(Name.identifier("name"))
             if (constantValue is StringValue) {
-                return constantValue.value
+                return constantValue.konstue
             }
         }
         return declaration.name
     }
 
     private fun doPropertyMatch(member: PsiMethod, property: KtProperty, setter: Boolean): Boolean {
-        val ktTypes = mutableListOf<KtTypeReference>()
+        konst ktTypes = mutableListOf<KtTypeReference>()
         property.contextReceivers.forEach { ktTypes.add(it.typeReference()!!) }
         property.receiverTypeReference?.let { ktTypes.add(it) }
         property.typeReference?.let { ktTypes.add(it) }
 
-        val psiTypes = mutableListOf<PsiType>()
+        konst psiTypes = mutableListOf<PsiType>()
         member.parameterList.parameters.forEach { psiTypes.add(it.type) }
         if (!setter) {
-            val returnType = member.returnType ?: return false
+            konst returnType = member.returnType ?: return false
             psiTypes.add(returnType)
         }
 
@@ -142,29 +142,29 @@ abstract class KotlinDeclarationInCompiledFileSearcher {
         if (!doTypeParameters(member, ktNamedFunction)) {
             return false
         }
-        val ktTypes = mutableListOf<KtTypeReference>()
+        konst ktTypes = mutableListOf<KtTypeReference>()
         ktNamedFunction.contextReceivers.forEach { ktTypes.add(it.typeReference()!!) }
         ktNamedFunction.receiverTypeReference?.let { ktTypes.add(it) }
-        val parametersCount = member.parameterList.parametersCount
-        val isJvmOverloads = ktNamedFunction.annotationEntries.any {
+        konst parametersCount = member.parameterList.parametersCount
+        konst isJvmOverloads = ktNamedFunction.annotationEntries.any {
             it.calleeExpression?.constructorReferenceExpression?.getReferencedName() ==
                     JvmNames.JVM_OVERLOADS_FQ_NAME.shortName().asString()
         }
-        val firstDefaultParametersToPass = if (isJvmOverloads) {
-            val totalNumberOfParametersWithDefaultValues = ktNamedFunction.valueParameters.filter { it.hasDefaultValue() }.size
-            val numberOfSkippedParameters = ktNamedFunction.valueParameters.size + ktTypes.size - parametersCount
+        konst firstDefaultParametersToPass = if (isJvmOverloads) {
+            konst totalNumberOfParametersWithDefaultValues = ktNamedFunction.konstueParameters.filter { it.hasDefaultValue() }.size
+            konst numberOfSkippedParameters = ktNamedFunction.konstueParameters.size + ktTypes.size - parametersCount
             totalNumberOfParametersWithDefaultValues - numberOfSkippedParameters
         } else 0
         var defaultParamIdx = 0
-        for (valueParameter in ktNamedFunction.valueParameters) {
-            if (isJvmOverloads && valueParameter.hasDefaultValue()) {
+        for (konstueParameter in ktNamedFunction.konstueParameters) {
+            if (isJvmOverloads && konstueParameter.hasDefaultValue()) {
                 if (defaultParamIdx >= firstDefaultParametersToPass) {
                     continue
                 }
                 defaultParamIdx++
             }
 
-            ktTypes.add(valueParameter.typeReference!!)
+            ktTypes.add(konstueParameter.typeReference!!)
         }
         if (parametersCount != ktTypes.size) return false
         member.parameterList.parameters.map { it.type }
@@ -177,15 +177,15 @@ abstract class KotlinDeclarationInCompiledFileSearcher {
 
     private fun doTypeParameters(member: PsiMethod, ktNamedFunction: KtFunction): Boolean {
         if (member.typeParameters.size != ktNamedFunction.typeParameters.size) return false
-        val boundsByName = ktNamedFunction.typeConstraints.groupBy { it.subjectTypeParameterName?.getReferencedName() }
+        konst boundsByName = ktNamedFunction.typeConstraints.groupBy { it.subjectTypeParameterName?.getReferencedName() }
         member.typeParameters.zip(ktNamedFunction.typeParameters) { psiTypeParam, ktTypeParameter ->
             if (psiTypeParam.name.toString() != ktTypeParameter.name) return false
-            val psiBounds = mutableListOf<KtTypeReference>()
+            konst psiBounds = mutableListOf<KtTypeReference>()
             psiBounds.addIfNotNull(ktTypeParameter.extendsBound)
             boundsByName[ktTypeParameter.name]?.forEach {
                 psiBounds.addIfNotNull(it.boundTypeReference)
             }
-            val expectedBounds = psiTypeParam.extendsListTypes
+            konst expectedBounds = psiTypeParam.extendsListTypes
             if (psiBounds.size != expectedBounds.size) return false
             expectedBounds.zip(psiBounds) { expectedBound, candidateBound ->
                 if (!areTypesTheSame(candidateBound, expectedBound, false)) {
@@ -200,7 +200,7 @@ abstract class KotlinDeclarationInCompiledFileSearcher {
      * Compare erased types
      */
     private fun areTypesTheSame(ktTypeRef: KtTypeReference, psiType: PsiType, varArgs: Boolean): Boolean {
-        val qualifiedName =
+        konst qualifiedName =
             getQualifiedName(ktTypeRef.typeElement, ktTypeRef.getAllModifierLists().any { it.hasSuspendModifier() }) ?: return false
         if (psiType is PsiArrayType && psiType.componentType !is PsiPrimitiveType) {
             return qualifiedName == StandardNames.FqNames.array.asString() ||

@@ -2,7 +2,7 @@ FILE: elvis.kt
     public abstract interface A : R|kotlin/Any| {
         public abstract fun foo(): R|kotlin/Unit|
 
-        public abstract val b: R|kotlin/Boolean|
+        public abstract konst b: R|kotlin/Boolean|
             public get(): R|kotlin/Boolean|
 
     }

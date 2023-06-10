@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.ir.declarations.IrOverridableMember
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
 
 interface IrUnimplementedOverridesStrategy {
-    class Customization(val origin: IrDeclarationOrigin?, val modality: Modality?) {
+    class Customization(konst origin: IrDeclarationOrigin?, konst modality: Modality?) {
         companion object {
-            val NO = Customization(null, null)
+            konst NO = Customization(null, null)
         }
     }
 

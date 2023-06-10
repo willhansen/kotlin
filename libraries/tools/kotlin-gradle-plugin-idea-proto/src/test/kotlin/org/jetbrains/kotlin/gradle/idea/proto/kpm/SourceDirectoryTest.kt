@@ -17,7 +17,7 @@ import java.io.File
 
 class SourceDirectoryTest : AbstractSerializationTest<IdeaKpmContentRoot>() {
 
-    override fun serialize(value: IdeaKpmContentRoot) = value.toByteArray(this)
+    override fun serialize(konstue: IdeaKpmContentRoot) = konstue.toByteArray(this)
     override fun deserialize(data: ByteArray) = IdeaKpmContentRoot(data)
 
     @Test

@@ -24,7 +24,7 @@ open class IncrementalJavaChangeDefaultIT : IncrementalCompilationJavaChangesBas
             trackedJavaClassInLib.modify(changeMethodSignature)
 
             build("assemble") {
-                val expectedSources = sourceFilesRelativeToProject(
+                konst expectedSources = sourceFilesRelativeToProject(
                     listOf("foo/TrackedJavaClassChild.kt", "foo/useTrackedJavaClass.kt"),
                     subProjectName = "app"
                 )
@@ -74,8 +74,8 @@ open class IncrementalJavaChangeDefaultIT : IncrementalCompilationJavaChangesBas
         project("typeAlias", gradleVersion) {
             build("build")
 
-            val curryKt = kotlinSourcesDir().resolve("Curry.kt")
-            val useCurryKt = kotlinSourcesDir().resolve("UseCurry.kt")
+            konst curryKt = kotlinSourcesDir().resolve("Curry.kt")
+            konst useCurryKt = kotlinSourcesDir().resolve("UseCurry.kt")
 
             curryKt.modify {
                 it.replace("class Curry", "internal class Curry")
@@ -93,13 +93,13 @@ open class IncrementalJavaChangeDefaultIT : IncrementalCompilationJavaChangesBas
 
 @DisplayName("Default incremental compilation with precise compilation outputs backup")
 open class IncrementalJavaChangePreciseCompilationBackupIT : IncrementalJavaChangeDefaultIT() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }
 
 @DisplayName("Incremental compilation via classpath snapshots with default precise java tracking")
 class IncrementalJavaChangeOldICIT : IncrementalJavaChangeDefaultIT() {
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(useGradleClasspathSnapshot = false)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(useGradleClasspathSnapshot = false)
 
     @DisplayName("Lib: method signature ABI change")
     @GradleTest
@@ -110,7 +110,7 @@ class IncrementalJavaChangeOldICIT : IncrementalJavaChangeDefaultIT() {
             javaClassInLib.modify(changeMethodSignature)
 
             build("assemble") {
-                val expectedToCompileSources = sourceFilesRelativeToProject(
+                konst expectedToCompileSources = sourceFilesRelativeToProject(
                     listOf(
                         "foo/JavaClassChild.kt",
                         "foo/useJavaClass.kt",
@@ -135,7 +135,7 @@ class IncrementalJavaChangeOldICIT : IncrementalJavaChangeDefaultIT() {
             javaClassInLib.modify(changeMethodBody)
 
             build("assemble") {
-                val expectedToCompileSources = sourceFilesRelativeToProject(
+                konst expectedToCompileSources = sourceFilesRelativeToProject(
                     listOf(
                         "foo/JavaClassChild.kt",
                         "foo/useJavaClass.kt",
@@ -166,7 +166,7 @@ class IncrementalJavaChangePreciseIT : IncrementalCompilationJavaChangesBase(
             trackedJavaClassInLib.modify(changeMethodSignature)
 
             build("assemble") {
-                val expectedSources = sourceFilesRelativeToProject(
+                konst expectedSources = sourceFilesRelativeToProject(
                     listOf("foo/TrackedJavaClassChild.kt", "foo/useTrackedJavaClass.kt"),
                     subProjectName = "app"
                 )
@@ -203,7 +203,7 @@ open class IncrementalJavaChangeDisablePreciseIT : IncrementalCompilationJavaCha
             trackedJavaClassInLib.modify(changeMethodSignature)
 
             build("assemble") {
-                val expectedSources = sourceFilesRelativeToProject(
+                konst expectedSources = sourceFilesRelativeToProject(
                     listOf(
                         "foo/TrackedJavaClassChild.kt",
                         "foo/useTrackedJavaClass.kt"
@@ -227,7 +227,7 @@ open class IncrementalJavaChangeDisablePreciseIT : IncrementalCompilationJavaCha
             trackedJavaClassInLib.modify(changeMethodBody)
 
             build("assemble") {
-                val expectedSources = sourceFilesRelativeToProject(
+                konst expectedSources = sourceFilesRelativeToProject(
                     listOf("bar/useTrackedJavaClassSameModule.kt"),
                     subProjectName = "lib"
                 )
@@ -239,22 +239,22 @@ open class IncrementalJavaChangeDisablePreciseIT : IncrementalCompilationJavaCha
 
 @DisplayName("Default incremental compilation with disabled precise java tracking and enabled FIR")
 class IncrementalFirJavaChangeDisablePreciseIT : IncrementalJavaChangeDisablePreciseIT() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(languageVersion = "2.0")
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(languageVersion = "2.0")
 }
 
 @JvmGradlePluginTests
 abstract class IncrementalCompilationJavaChangesBase(
-    val usePreciseJavaTracking: Boolean?
+    konst usePreciseJavaTracking: Boolean?
 ) : IncrementalCompilationBaseIT() {
-    override val defaultProjectName: String
+    override konst defaultProjectName: String
         get() = "incrementalMultiproject"
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseJavaTracking = usePreciseJavaTracking)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseJavaTracking = usePreciseJavaTracking)
 
-    protected val TestProject.javaClassInLib: Path get() = subProject("lib").javaSourcesDir().resolve("bar/JavaClass.java")
-    protected val TestProject.trackedJavaClassInLib: Path get() = subProject("lib").javaSourcesDir().resolve("bar/TrackedJavaClass.java")
-    protected val changeMethodSignature: (String) -> String = { it.replace("String getString", "Object getString") }
-    protected val changeMethodBody: (String) -> String = { it.replace("Hello, World!", "Hello, World!!!!") }
+    protected konst TestProject.javaClassInLib: Path get() = subProject("lib").javaSourcesDir().resolve("bar/JavaClass.java")
+    protected konst TestProject.trackedJavaClassInLib: Path get() = subProject("lib").javaSourcesDir().resolve("bar/TrackedJavaClass.java")
+    protected konst changeMethodSignature: (String) -> String = { it.replace("String getString", "Object getString") }
+    protected konst changeMethodBody: (String) -> String = { it.replace("Hello, World!", "Hello, World!!!!") }
 
     @DisplayName("Lib: tracked method signature ABI change")
     @GradleTest
@@ -266,7 +266,7 @@ abstract class IncrementalCompilationJavaChangesBase(
 
             build("assemble") {
                 // Fewer Kotlin files are recompiled
-                val expectedSources = sourceFilesRelativeToProject(
+                konst expectedSources = sourceFilesRelativeToProject(
                     listOf("foo/JavaClassChild.kt", "foo/useJavaClass.kt"),
                     subProjectName = "app"
                 )

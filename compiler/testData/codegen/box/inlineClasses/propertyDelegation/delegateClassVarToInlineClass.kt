@@ -10,7 +10,7 @@ class Foo {
 var setterInvoked = 0
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Delegate(val default: Int) {
+konstue class Delegate(konst default: Int) {
 
     operator fun getValue(thisRef: Any?, prop: Any?) =
         (thisRef as? Foo)?.a ?: default
@@ -25,7 +25,7 @@ value class Delegate(val default: Int) {
 
 
 fun box(): String {
-    val x = Foo()
+    konst x = Foo()
     if (x.d != 42) throw AssertionError()
 
     x.d = 1234

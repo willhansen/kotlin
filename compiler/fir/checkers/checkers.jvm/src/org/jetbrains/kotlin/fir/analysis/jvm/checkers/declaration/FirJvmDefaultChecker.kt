@@ -21,19 +21,19 @@ import org.jetbrains.kotlin.name.JvmNames.JVM_DEFAULT_WITH_COMPATIBILITY_CLASS_I
 
 object FirJvmDefaultChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val jvmDefaultMode = context.session.jvmDefaultModeState
-        val session = context.session
-        val annotationNoCompatibility = declaration.getAnnotationByClassId(JVM_DEFAULT_NO_COMPATIBILITY_CLASS_ID, session)
+        konst jvmDefaultMode = context.session.jvmDefaultModeState
+        konst session = context.session
+        konst annotationNoCompatibility = declaration.getAnnotationByClassId(JVM_DEFAULT_NO_COMPATIBILITY_CLASS_ID, session)
         if (annotationNoCompatibility != null) {
-            val source = annotationNoCompatibility.source
+            konst source = annotationNoCompatibility.source
             if (jvmDefaultMode?.isEnabled != true) {
                 reporter.reportOn(source, FirJvmErrors.JVM_DEFAULT_IN_DECLARATION, "JvmDefaultWithoutCompatibility", context)
                 return
             }
         }
-        val annotationWithCompatibility = declaration.getAnnotationByClassId(JVM_DEFAULT_WITH_COMPATIBILITY_CLASS_ID, session)
+        konst annotationWithCompatibility = declaration.getAnnotationByClassId(JVM_DEFAULT_WITH_COMPATIBILITY_CLASS_ID, session)
         if (annotationWithCompatibility != null) {
-            val source = annotationWithCompatibility.source
+            konst source = annotationWithCompatibility.source
             when {
                 jvmDefaultMode != JvmDefaultMode.ALL_INCOMPATIBLE -> {
                     reporter.reportOn(source, FirJvmErrors.JVM_DEFAULT_WITH_COMPATIBILITY_IN_DECLARATION, context)

@@ -3,17 +3,17 @@
 
 annotation class NoArg
 
-class Simple(val a: String)
+class Simple(konst a: String)
 
 @NoArg
-class Test(val a: String) {
-    val x = 5
-    val y = Simple("Hello, world!")
-    val z by lazy { "TEST" }
+class Test(konst a: String) {
+    konst x = 5
+    konst y = Simple("Hello, world!")
+    konst z by lazy { "TEST" }
 }
 
 fun box(): String {
-    val test = Test::class.java.newInstance()
+    konst test = Test::class.java.newInstance()
 
     if (test.x != 5) {
         return "Bad 5"

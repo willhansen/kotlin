@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.TestServices
 
 class ProcessorWasCalledHandler(testServices: TestServices) : AbstractKaptHandler(testServices) {
-    override val artifactKind: TestArtifactKind<KaptContextBinaryArtifact>
+    override konst artifactKind: TestArtifactKind<KaptContextBinaryArtifact>
         get() = KaptContextBinaryArtifact.Kind
 
     override fun processModule(module: TestModule, info: KaptContextBinaryArtifact) {

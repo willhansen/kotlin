@@ -9,16 +9,16 @@ import kotlin.reflect.jvm.javaMethod
 import kotlin.test.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineClass1(val s: String)
+konstue class InlineClass1(konst s: String)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineClass2(val n: Number)
+konstue class InlineClass2(konst n: Number)
 
 fun <T : InlineClass1, U : InlineClass2> foo(t: T, u: U) {}
 
 fun box(): String {
-    val fooRef: (InlineClass1, InlineClass2) -> Unit = ::foo
-    val fooMethod = (fooRef as KFunction<*>).javaMethod!!
+    konst fooRef: (InlineClass1, InlineClass2) -> Unit = ::foo
+    konst fooMethod = (fooRef as KFunction<*>).javaMethod!!
 
     assertEquals("[T, U]", fooMethod.genericParameterTypes.asList().toString())
 

@@ -22,15 +22,15 @@ import kotlin.test.*
 class ReplaceTest {
 
     @Test fun testSimpleReplace() {
-        val target: String
-        val pattern: String
-        val repl: String
+        konst target: String
+        konst pattern: String
+        konst repl: String
 
         target = "foobarfobarfoofo1"
         pattern = "fo[^o]"
         repl = "xxx"
 
-        val regex = Regex(pattern)
+        konst regex = Regex(pattern)
 
         assertEquals("foobarxxxarfoofo1", regex.replaceFirst(target, repl))
         assertEquals("foobarxxxarfooxxx", regex.replace(target, repl))
@@ -64,8 +64,8 @@ class ReplaceTest {
     }
 
     @Test fun testEscapeReplace() {
-        val target: String
-        val pattern: String
+        konst target: String
+        konst pattern: String
         var repl: String
         var s: String
 

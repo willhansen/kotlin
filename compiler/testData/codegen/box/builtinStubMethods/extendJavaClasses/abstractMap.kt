@@ -4,12 +4,12 @@ import java.util.AbstractMap
 import java.util.Collections
 
 class A : AbstractMap<Int, String>() {
-    override val entries: MutableSet<MutableMap.MutableEntry<Int, String>> get() = Collections.emptySet()
+    override konst entries: MutableSet<MutableMap.MutableEntry<Int, String>> get() = Collections.emptySet()
 }
 
 fun box(): String {
-    val a = A()
-    val b = A()
+    konst a = A()
+    konst b = A()
 
     a.remove(0)
 
@@ -17,7 +17,7 @@ fun box(): String {
     a.clear()
 
     a.keys
-    a.values
+    a.konstues
     a.entries
 
     return "OK"

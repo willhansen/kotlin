@@ -16,13 +16,13 @@ import org.jetbrains.kotlin.types.ConstantValueKind
 fun <T> buildConstExpression(
     source: KtSourceElement?,
     kind: ConstantValueKind<T>,
-    value: T,
+    konstue: T,
     annotations: MutableList<FirAnnotation> = mutableListOf(),
     setType: Boolean = false
 ): FirConstExpression<T> {
-    return FirConstExpressionImpl(source, annotations.toMutableOrEmpty(), kind, value).also {
+    return FirConstExpressionImpl(source, annotations.toMutableOrEmpty(), kind, konstue).also {
         if (setType) {
-            when (value) {
+            when (konstue) {
                 null -> it.typeRef = FirImplicitNullableAnyTypeRef(null)
                 is String -> it.typeRef = FirImplicitStringTypeRef(null)
                 is Long -> it.typeRef = FirImplicitLongTypeRef(null)

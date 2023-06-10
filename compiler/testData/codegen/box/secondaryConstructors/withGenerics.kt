@@ -16,7 +16,7 @@ class WithGenerics {
 // FILE: WithGenerics.kt
 
 open class A<T> {
-    val prop: String
+    konst prop: String
     constructor(x: String) {
         prop = x
     }
@@ -28,9 +28,9 @@ open class A<T> {
 }
 
 fun box(): String {
-    val a1 = WithGenerics.foo1()
+    konst a1 = WithGenerics.foo1()
     if (a1 != "OK") return "fail1: $a1"
-    val a2 = WithGenerics.foo2()
+    konst a2 = WithGenerics.foo2()
     if (a2 != "123") return "fail2: $a2"
 
     return "OK"

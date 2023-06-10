@@ -3,19 +3,19 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val int: T)
+konstue class Z<T: Int>(konst int: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L<T: Long>(val long: T)
+konstue class L<T: Long>(konst long: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str<T: String>(val string: T)
+konstue class Str<T: String>(konst string: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Obj<T: Any>(val obj: T)
+konstue class Obj<T: Any>(konst obj: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Host<T: Int>(val xx: T) {
+konstue class Host<T: Int>(konst xx: T) {
     inline fun <R> withDefaultZ(fn: (Z<Int>) -> R, x: Z<Int> = Z(xx)) = fn(x)
     inline fun <R> withDefaultL(fn: (L<Long>) -> R, x: L<Long> = L(xx.toLong())) = fn(x)
     inline fun <R> withDefaultL2(x: L<Long> = L(xx.toLong()), fn: (L<Long>) -> R) = fn(x)
@@ -32,7 +32,7 @@ value class Host<T: Int>(val xx: T) {
 }
 
 fun box(): String {
-    val h = Host(42)
+    konst h = Host(42)
     if (h.testWithDefaultZ().int != 43) throw AssertionError()
     if (h.testWithDefaultL().long != 43L) throw AssertionError()
     if (h.testWithDefaultL2().long != 43L) throw AssertionError()

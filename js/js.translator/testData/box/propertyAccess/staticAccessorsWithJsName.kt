@@ -3,14 +3,14 @@
 // EXPECTED_REACHABLE_NODES: 1288
 
 @JsExport
-val x: Int
+konst x: Int
     @JsName("getX_") get() = 23
 
 @JsExport
 var y: Int = 0
     @JsName("getY_") get() = field + 10
-    @JsName("setY_") set(value) {
-        field = value
+    @JsName("setY_") set(konstue) {
+        field = konstue
     }
 
 
@@ -23,7 +23,7 @@ fun box(): String {
     assertEquals(23, y)
 
     y = 0
-    val d = getPackage()
+    konst d = getPackage()
 
     assertEquals(23, d.getX_())
     assertEquals(10, d.getY_())

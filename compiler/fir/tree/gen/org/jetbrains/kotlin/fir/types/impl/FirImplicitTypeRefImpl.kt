@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirImplicitTypeRefImpl(
-    override val source: KtSourceElement,
+    override konst source: KtSourceElement,
 ) : FirImplicitTypeRef() {
-    override val annotations: List<FirAnnotation> get() = emptyList()
+    override konst annotations: List<FirAnnotation> get() = emptyList()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
     }

@@ -16,4 +16,4 @@
 
 package org.jetbrains.kotlin.js.backend.ast
 
-data class JsNameBinding(val key: String, var name: JsName)
+data class JsNameBinding(konst key: String, var name: JsName)

@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.gradle.testbase.TestVersions
 import org.jetbrains.kotlin.gradle.utils.minSupportedGradleVersion
 import org.junit.Assume
 
-sealed class GradleVersionRequired(val minVersion: String, val maxVersion: String?) {
+sealed class GradleVersionRequired(konst minVersion: String, konst maxVersion: String?) {
     companion object {
-        const val OLDEST_SUPPORTED = minSupportedGradleVersion
+        const konst OLDEST_SUPPORTED = minSupportedGradleVersion
 
-        val FOR_MPP_SUPPORT = AtLeast(TestVersions.Gradle.MAX_SUPPORTED)
+        konst FOR_MPP_SUPPORT = AtLeast(TestVersions.Gradle.MAX_SUPPORTED)
     }
 
     class Exact(version: String) : GradleVersionRequired(version, version) {
@@ -53,9 +53,9 @@ sealed class GradleVersionRequired(val minVersion: String, val maxVersion: Strin
 
 
 fun BaseGradleIT.Project.chooseWrapperVersionOrFinishTest(): String {
-    val gradleVersionForTests = System.getProperty("kotlin.gradle.version.for.tests")?.toGradleVersion()
-    val minVersion = max(gradleVersionRequirement.minVersion.toGradleVersion(), OLDEST_SUPPORTED.toGradleVersion())
-    val maxVersion = gradleVersionRequirement.maxVersion?.toGradleVersion()
+    konst gradleVersionForTests = System.getProperty("kotlin.gradle.version.for.tests")?.toGradleVersion()
+    konst minVersion = max(gradleVersionRequirement.minVersion.toGradleVersion(), OLDEST_SUPPORTED.toGradleVersion())
+    konst maxVersion = gradleVersionRequirement.maxVersion?.toGradleVersion()
 
     if (gradleVersionForTests == null) {
         return minVersion.version

@@ -47,8 +47,8 @@ public class KtAnnotationEntryElementType extends KtStubElementType<KotlinAnnota
     public KotlinAnnotationEntryStub createStub(@NotNull KtAnnotationEntry psi, StubElement parentStub) {
         Name shortName = psi.getShortName();
         String resultName = shortName != null ? shortName.asString() : null;
-        KtValueArgumentList valueArgumentList = psi.getValueArgumentList();
-        boolean hasValueArguments = valueArgumentList != null && !valueArgumentList.getArguments().isEmpty();
+        KtValueArgumentList konstueArgumentList = psi.getValueArgumentList();
+        boolean hasValueArguments = konstueArgumentList != null && !konstueArgumentList.getArguments().isEmpty();
         return new KotlinAnnotationEntryStubImpl((StubElement<?>) parentStub, StringRef.fromString(resultName), hasValueArguments, null);
     }
 
@@ -60,10 +60,10 @@ public class KtAnnotationEntryElementType extends KtStubElementType<KotlinAnnota
             Map<Name, ConstantValue<?>> arguments = ((KotlinAnnotationEntryStubImpl) stub).getValueArguments();
             dataStream.writeInt(arguments != null ? arguments.size() : 0);
             if (arguments != null) {
-                for (Map.Entry<Name, ConstantValue<?>> valueEntry : arguments.entrySet()) {
-                    dataStream.writeName(valueEntry.getKey().asString());
-                    ConstantValue<?> value = valueEntry.getValue();
-                    KotlinConstantValueKt.serialize(value, dataStream);
+                for (Map.Entry<Name, ConstantValue<?>> konstueEntry : arguments.entrySet()) {
+                    dataStream.writeName(konstueEntry.getKey().asString());
+                    ConstantValue<?> konstue = konstueEntry.getValue();
+                    KotlinConstantValueKt.serialize(konstue, dataStream);
                 }
             }
         }
@@ -74,9 +74,9 @@ public class KtAnnotationEntryElementType extends KtStubElementType<KotlinAnnota
     public KotlinAnnotationEntryStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
         StringRef text = dataStream.readName();
         boolean hasValueArguments = dataStream.readBoolean();
-        int valueArgCount = dataStream.readInt();
+        int konstueArgCount = dataStream.readInt();
         Map<Name, ConstantValue<?>> args = new LinkedHashMap<>();
-        for (int i = 0; i < valueArgCount; i++) {
+        for (int i = 0; i < konstueArgCount; i++) {
             args.put(Name.identifier(Objects.requireNonNull(dataStream.readNameString())),
                      KotlinConstantValueKt.createConstantValue(dataStream));
         }

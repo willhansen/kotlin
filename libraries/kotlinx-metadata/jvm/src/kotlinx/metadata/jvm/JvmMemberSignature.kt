@@ -15,22 +15,22 @@ import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMemberSignature as J
  */
 sealed class JvmMemberSignature {
 
-    abstract val name: String
-    abstract val descriptor: String
+    abstract konst name: String
+    abstract konst descriptor: String
 
     /**
      * Returns a string representation of the signature.
      *
      * In case of a method it's just [name] and [descriptor] concatenated together, e.g. `equals(Ljava/lang/Object;)Z`
      *
-     * In case of a field [name] and [descriptor] are concatenated with `:` separator, e.g. `value:Ljava/lang/String;`
+     * In case of a field [name] and [descriptor] are concatenated with `:` separator, e.g. `konstue:Ljava/lang/String;`
      */
     abstract override fun toString(): String
 
     // Two following declarations are deprecated since 0.6.1, should be error in 0.7.0+
 
-    @Deprecated("Deprecated for removal. Use descriptor instead", ReplaceWith("descriptor"), level = DeprecationLevel.WARNING)
-    val desc: String get() = descriptor
+    @Deprecated("Deprecated for remokonst. Use descriptor instead", ReplaceWith("descriptor"), level = DeprecationLevel.WARNING)
+    konst desc: String get() = descriptor
 
     @Deprecated(
         "asString() is deprecated as redundant. Use toString() instead",
@@ -47,18 +47,18 @@ sealed class JvmMemberSignature {
  *
  * @see JvmMemberSignature
  */
-data class JvmMethodSignature(override val name: String, override val descriptor: String) : JvmMemberSignature() {
+data class JvmMethodSignature(override konst name: String, override konst descriptor: String) : JvmMemberSignature() {
     override fun toString() = name + descriptor
 }
 
 /**
  * A signature of a JVM field in the JVM-based format.
  *
- * Example: `JvmFieldSignature("value", "Ljava/lang/String;")`.
+ * Example: `JvmFieldSignature("konstue", "Ljava/lang/String;")`.
  *
  * @see JvmMemberSignature
  */
-data class JvmFieldSignature(override val name: String, override val descriptor: String) : JvmMemberSignature() {
+data class JvmFieldSignature(override konst name: String, override konst descriptor: String) : JvmMemberSignature() {
     override fun toString() = "$name:$descriptor"
 }
 

@@ -13,11 +13,11 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 open class IntrinsicCallable(
-        override val returnType: Type,
-        override val valueParameterTypes: List<Type>,
-        override val dispatchReceiverType: Type?,
-        override val extensionReceiverType: Type?,
-        private val invoke: IntrinsicCallable.(v: InstructionAdapter) -> Unit = { throw UnsupportedOperationException() }
+        override konst returnType: Type,
+        override konst konstueParameterTypes: List<Type>,
+        override konst dispatchReceiverType: Type?,
+        override konst extensionReceiverType: Type?,
+        private konst invoke: IntrinsicCallable.(v: InstructionAdapter) -> Unit = { throw UnsupportedOperationException() }
 ) : Callable {
 
     constructor(
@@ -25,7 +25,7 @@ open class IntrinsicCallable(
             invoke: IntrinsicCallable.(v: InstructionAdapter) -> Unit = {}
     ) : this(
             callable.returnType,
-            callable.valueParameterTypes,
+            callable.konstueParameterTypes,
             callable.dispatchReceiverType,
             callable.extensionReceiverType,
             invoke
@@ -39,24 +39,24 @@ open class IntrinsicCallable(
         invoke(v)
     }
 
-    override val parameterTypes: Array<Type>
+    override konst parameterTypes: Array<Type>
         get() = throw UnsupportedOperationException()
 
-    override val dispatchReceiverKotlinType: KotlinType?
+    override konst dispatchReceiverKotlinType: KotlinType?
         get() = null
 
-    override val extensionReceiverKotlinType: KotlinType?
+    override konst extensionReceiverKotlinType: KotlinType?
         get() = null
 
-    override val returnKotlinType: KotlinType?
+    override konst returnKotlinType: KotlinType?
         get() = null
 
     override fun isStaticCall() = false
 
-    override val generateCalleeType: Type?
+    override konst generateCalleeType: Type?
         get() = null
 
-    override val owner: Type
+    override konst owner: Type
         get() = throw UnsupportedOperationException()
 
     fun calcReceiverType(): Type =
@@ -65,14 +65,14 @@ open class IntrinsicCallable(
 
 fun createBinaryIntrinsicCallable(
         returnType: Type,
-        valueParameterType: Type,
+        konstueParameterType: Type,
         thisType: Type? = null,
         receiverType: Type? = null,
         lambda: IntrinsicCallable.(v: InstructionAdapter) -> Unit
 ): IntrinsicCallable {
     assert(AsmUtil.isPrimitive(returnType)) { "Return type of BinaryOp intrinsic should be of primitive type: $returnType" }
 
-    return object : IntrinsicCallable(returnType, listOf(valueParameterType), thisType, receiverType) {
+    return object : IntrinsicCallable(returnType, listOf(konstueParameterType), thisType, receiverType) {
         override fun invokeIntrinsic(v: InstructionAdapter) {
             lambda(v)
         }
@@ -86,14 +86,14 @@ fun createUnaryIntrinsicCallable(
         newThisType: Type? = null,
         invoke: IntrinsicCallable.(v: InstructionAdapter) -> Unit
 ): IntrinsicCallable {
-    val intrinsic = IntrinsicCallable(
+    konst intrinsic = IntrinsicCallable(
             newReturnType ?: callable.returnType,
-            callable.valueParameterTypes,
+            callable.konstueParameterTypes,
             newThisType ?: callable.dispatchReceiverType,
             callable.extensionReceiverType,
             invoke
     )
-    assert(intrinsic.valueParameterTypes.isEmpty()) { "Unary operation should not have any parameters" }
+    assert(intrinsic.konstueParameterTypes.isEmpty()) { "Unary operation should not have any parameters" }
     if (needPrimitiveCheck) {
         assert(AsmUtil.isPrimitive(intrinsic.returnType)) {
             "Return type of UnaryPlus intrinsic should be of primitive type: ${intrinsic.returnType}"

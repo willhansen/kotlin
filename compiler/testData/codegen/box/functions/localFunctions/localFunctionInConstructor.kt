@@ -1,6 +1,6 @@
 class Test {
 
-    val property:Int
+    konst property:Int
     init {
         fun local():Int {
             return 10;

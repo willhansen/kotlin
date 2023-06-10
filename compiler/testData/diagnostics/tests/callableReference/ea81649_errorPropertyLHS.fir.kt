@@ -11,7 +11,7 @@ fun <T> bar(ff: <!UNRESOLVED_REFERENCE!>Err<!>.() -> Unit) {
 // MODULE: m2(m1)
 // FILE: foo.kt
 
-data class User(val surname: String)
+data class User(konst surname: String)
 
 fun foo() {
     bar<String> {

@@ -19,7 +19,7 @@ fun testElvis(a: Int?, b: Int?) {
 
 
 fun testDataFlowInfo1(a: Int?, b: Int?) {
-    val c: Int = a ?: b!!
+    konst c: Int = a ?: b!!
     doInt(c)
     // b is nullable if a != null
     b <!UNSAFE_OPERATOR_CALL!>+<!> 1

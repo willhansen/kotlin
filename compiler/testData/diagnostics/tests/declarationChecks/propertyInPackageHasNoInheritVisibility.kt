@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 package d
 
-<!WRONG_MODIFIER_TARGET!>override<!> val f : ()-> Int = { 12 }
+<!WRONG_MODIFIER_TARGET!>override<!> konst f : ()-> Int = { 12 }
 
 fun test() {
     f()

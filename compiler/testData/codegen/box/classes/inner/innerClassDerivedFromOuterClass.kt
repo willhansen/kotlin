@@ -4,10 +4,10 @@
 
 open class P1<T1> {
     inner class P2<T2>(i : String): P1<T1>() {
-        var value = "Fail"
+        var konstue = "Fail"
 
         init {
-            value = i
+            konstue = i
         }
 
         constructor() : this("OK") {}
@@ -16,4 +16,4 @@ open class P1<T1> {
     fun <T2> createP2(): P2<T2> = P2()
 }
 
-fun box() = P1<Int>().createP2<Unit>().value
+fun box() = P1<Int>().createP2<Unit>().konstue

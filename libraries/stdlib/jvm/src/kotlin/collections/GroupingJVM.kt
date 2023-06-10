@@ -22,21 +22,21 @@ public actual fun <T, K> Grouping<T, K>.eachCount(): Map<K, Int> =
     foldTo(destination = mutableMapOf(),
            initialValueSelector = { _, _ -> kotlin.jvm.internal.Ref.IntRef() },
            operation = { _, acc, _ -> acc.apply { element += 1 } })
-        .mapValuesInPlace { it.value.element }
+        .mapValuesInPlace { it.konstue.element }
 
 /*
 /**
- * Groups elements from the [Grouping] source by key and sums values provided by the [valueSelector] function for elements in each group.
+ * Groups elements from the [Grouping] source by key and sums konstues provided by the [konstueSelector] function for elements in each group.
  *
  * @return a [Map] associating the key of each group with the sum of elements in the group.
  */
 @SinceKotlin("1.X")
-public inline fun <T, K> Grouping<T, K>.eachSumOf(valueSelector: (T) -> Int): Map<K, Int> =
-        // fold(0) { acc, e -> acc + valueSelector(e)} optimized for boxing
+public inline fun <T, K> Grouping<T, K>.eachSumOf(konstueSelector: (T) -> Int): Map<K, Int> =
+        // fold(0) { acc, e -> acc + konstueSelector(e)} optimized for boxing
         foldTo( destination = mutableMapOf(),
                 initialValueSelector = { _, _ -> kotlin.jvm.internal.Ref.IntRef() },
-                operation = { _, acc, e -> acc.apply { element += valueSelector(e) } })
-        .mapValuesInPlace { it.value.element }
+                operation = { _, acc, e -> acc.apply { element += konstueSelector(e) } })
+        .mapValuesInPlace { it.konstue.element }
 */
 
 

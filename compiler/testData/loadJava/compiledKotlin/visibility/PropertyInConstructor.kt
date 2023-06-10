@@ -3,13 +3,13 @@
 package test
 
 open class Base {
-    protected open val prot: Int = { 1 }()
-    internal open val int = { 1 }()
-    public open val pub: Int = { 1 }()
+    protected open konst prot: Int = { 1 }()
+    internal open konst int = { 1 }()
+    public open konst pub: Int = { 1 }()
 }
 
 class Child(
-    override val prot: Int,
-    override val int: Int,
-    override val pub: Int
+    override konst prot: Int,
+    override konst int: Int,
+    override konst pub: Int
 ) : Base()

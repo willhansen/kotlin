@@ -8,7 +8,7 @@
 // 2 java/lang/invoke/LambdaMetafactory
 
 // FILE: simple.kt
-val lambda = { "OK" }
+konst lambda = { "OK" }
 
 fun box() = Sam(lambda).get()
 

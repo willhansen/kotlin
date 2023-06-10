@@ -38,16 +38,16 @@ fun createResolveSessionForFiles(
         syntheticFiles: Collection<KtFile>,
         addBuiltIns: Boolean
 ): ResolveSession {
-    val projectContext = ProjectContext(project, "lazy resolve test utils")
-    val testModule =
+    konst projectContext = ProjectContext(project, "lazy resolve test utils")
+    konst testModule =
         TestModule(project, addBuiltIns)
-    val platformParameters = JvmPlatformParameters(
+    konst platformParameters = JvmPlatformParameters(
         packagePartProviderFactory = { PackagePartProvider.Empty },
         moduleByJavaClass = { testModule },
         useBuiltinsProviderForModule = { false }
     )
 
-    val resolverForProject = ResolverForSingleModuleProject(
+    konst resolverForProject = ResolverForSingleModuleProject(
         "test",
         projectContext,
         testModule,
@@ -59,8 +59,8 @@ fun createResolveSessionForFiles(
     return resolverForProject.resolverForModule(testModule).componentProvider.get<ResolveSession>()
 }
 
-private class TestModule(val project: Project, val dependsOnBuiltIns: Boolean) : TrackableModuleInfo {
-    override val name: Name = Name.special("<Test module for lazy resolve>")
+private class TestModule(konst project: Project, konst dependsOnBuiltIns: Boolean) : TrackableModuleInfo {
+    override konst name: Name = Name.special("<Test module for lazy resolve>")
 
     override fun dependencies() = listOf(this)
     override fun dependencyOnBuiltIns() =
@@ -69,13 +69,13 @@ private class TestModule(val project: Project, val dependsOnBuiltIns: Boolean) :
         else
             ModuleInfo.DependencyOnBuiltIns.NONE
 
-    override val platform: TargetPlatform
+    override konst platform: TargetPlatform
         get() = JvmPlatforms.unspecifiedJvmPlatform
 
     override fun createModificationTracker(): ModificationTracker {
         return ModificationTracker.NEVER_CHANGED
     }
 
-    override val analyzerServices: PlatformDependentAnalyzerServices
+    override konst analyzerServices: PlatformDependentAnalyzerServices
         get() = JvmPlatformAnalyzerServices
 }

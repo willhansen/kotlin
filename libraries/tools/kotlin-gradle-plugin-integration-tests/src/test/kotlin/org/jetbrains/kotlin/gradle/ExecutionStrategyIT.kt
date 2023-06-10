@@ -21,7 +21,7 @@ class ExecutionStrategyJsIT : ExecutionStrategyIT() {
             ) +
                     """
                     |
-                    |afterEvaluate {
+                    |afterEkonstuate {
                     |    tasks.named('compileKotlinJs') {
                     |        kotlinOptions.outputFile = "${'$'}{project.projectDir}/web/js/"
                     |    }
@@ -44,7 +44,7 @@ class ExecutionStrategyJsIT : ExecutionStrategyIT() {
 class ExecutionStrategyJvmIT : ExecutionStrategyIT() {
     override fun BuildResult.checkOutput(project: TestProject) {
         with(project) {
-            val classesDir = subProject("app").kotlinClassesDir().resolve("foo")
+            konst classesDir = subProject("app").kotlinClassesDir().resolve("foo")
             assertFileExists(classesDir.resolve("MainKt.class"))
             assertFileExists(classesDir.resolve("A.class"))
             assertFileExists(classesDir.resolve("B.class"))
@@ -53,7 +53,7 @@ class ExecutionStrategyJvmIT : ExecutionStrategyIT() {
 
     override fun BuildResult.checkOutputAfterChange(project: TestProject) {
         with(project) {
-            val classesDir = subProject("app").kotlinClassesDir().resolve("foo")
+            konst classesDir = subProject("app").kotlinClassesDir().resolve("foo")
             assertFileExists(classesDir.resolve("MainKt.class"))
             assertFileExists(classesDir.resolve("A.class"))
             assertFileNotExists(classesDir.resolve("B.class"))
@@ -62,7 +62,7 @@ class ExecutionStrategyJvmIT : ExecutionStrategyIT() {
 }
 
 abstract class ExecutionStrategyIT : KGPDaemonsBaseTest() {
-    override val defaultBuildOptions: BuildOptions = super.defaultBuildOptions.copy(
+    override konst defaultBuildOptions: BuildOptions = super.defaultBuildOptions.copy(
         logLevel = LogLevel.DEBUG
     )
 
@@ -119,7 +119,7 @@ abstract class ExecutionStrategyIT : KGPDaemonsBaseTest() {
             setupProject(this)
 
             // This task configuration action is registered before all the KGP configuration actions,
-            // so this test also checks if KGP doesn't override value that is set before KGP configuration actions
+            // so this test also checks if KGP doesn't override konstue that is set before KGP configuration actions
             //language=Gradle
             buildGradle.append(
                 """
@@ -149,7 +149,7 @@ abstract class ExecutionStrategyIT : KGPDaemonsBaseTest() {
             shouldConfigureStrategyViaGradleProperty = false
         ) {
             // This task configuration action is registered before all the KGP configuration actions,
-            // so this test also checks if KGP doesn't override value that is set before KGP configuration actions
+            // so this test also checks if KGP doesn't override konstue that is set before KGP configuration actions
             // KT-53617
             //language=Gradle
             buildGradle.append(
@@ -200,7 +200,7 @@ abstract class ExecutionStrategyIT : KGPDaemonsBaseTest() {
             additionalProjectConfiguration()
 
             @OptIn(ExperimentalStdlibApi::class)
-            val args = buildList {
+            konst args = buildList {
                 if (shouldConfigureStrategyViaGradleProperty) {
                     add("-Pkotlin.compiler.execution.strategy=${executionStrategy.propertyValue}")
                 }
@@ -209,8 +209,8 @@ abstract class ExecutionStrategyIT : KGPDaemonsBaseTest() {
                     add("-Pkotlin.daemon.jvmargs=-Xmxqwerty")
                 }
             }.toTypedArray()
-            val expectedFinishStrategy = if (testFallbackStrategy) KotlinCompilerExecutionStrategy.OUT_OF_PROCESS else executionStrategy
-            val finishMessage = "Finished executing kotlin compiler using $expectedFinishStrategy strategy"
+            konst expectedFinishStrategy = if (testFallbackStrategy) KotlinCompilerExecutionStrategy.OUT_OF_PROCESS else executionStrategy
+            konst finishMessage = "Finished executing kotlin compiler using $expectedFinishStrategy strategy"
 
             build("build", *args) {
                 assertOutputContains(finishMessage)
@@ -220,14 +220,14 @@ abstract class ExecutionStrategyIT : KGPDaemonsBaseTest() {
                 if (testFallbackStrategy) {
                     assertOutputContains("Using fallback strategy: Compile without Kotlin daemon")
                 } else if (executionStrategy == KotlinCompilerExecutionStrategy.DAEMON) {
-                    // 256m is the default value for Gradle 5.0+
+                    // 256m is the default konstue for Gradle 5.0+
                     assertKotlinDaemonJvmOptions(
                         listOf("-XX:MaxMetaspaceSize=256m", "-ea")
                     )
                 }
             }
 
-            val classesKt = subProject("app").kotlinSourcesDir().resolve("classes.kt")
+            konst classesKt = subProject("app").kotlinSourcesDir().resolve("classes.kt")
             classesKt.modify {
                 it.checkedReplace("class B", "//class B")
             }

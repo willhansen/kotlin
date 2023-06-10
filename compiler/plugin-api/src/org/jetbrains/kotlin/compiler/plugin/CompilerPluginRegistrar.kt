@@ -14,15 +14,15 @@ import org.jetbrains.kotlin.extensions.ProjectExtensionDescriptor
 @ExperimentalCompilerApi
 abstract class CompilerPluginRegistrar {
     companion object {
-        val COMPILER_PLUGIN_REGISTRARS: CompilerConfigurationKey<MutableList<CompilerPluginRegistrar>> =
+        konst COMPILER_PLUGIN_REGISTRARS: CompilerConfigurationKey<MutableList<CompilerPluginRegistrar>> =
             CompilerConfigurationKey.create("Compiler plugin registrars")
     }
 
     abstract fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration)
 
     class ExtensionStorage {
-        private val _registeredExtensions = mutableMapOf<ProjectExtensionDescriptor<*>, MutableList<Any>>()
-        val registeredExtensions: Map<ProjectExtensionDescriptor<*>, List<Any>>
+        private konst _registeredExtensions = mutableMapOf<ProjectExtensionDescriptor<*>, MutableList<Any>>()
+        konst registeredExtensions: Map<ProjectExtensionDescriptor<*>, List<Any>>
             get() = _registeredExtensions
 
         fun <T : Any> ProjectExtensionDescriptor<T>.registerExtension(extension: T) {
@@ -30,7 +30,7 @@ abstract class CompilerPluginRegistrar {
         }
     }
 
-    abstract val supportsK2: Boolean
+    abstract konst supportsK2: Boolean
 }
 
 fun CompilerPluginRegistrar.ExtensionStorage.registerInProject(
@@ -59,7 +59,7 @@ fun registerExtensionsForTest(
     configuration: CompilerConfiguration,
     register: CompilerPluginRegistrar.ExtensionStorage.(CompilerConfiguration) -> Unit
 ) {
-    val extensionStorage = CompilerPluginRegistrar.ExtensionStorage().apply {
+    konst extensionStorage = CompilerPluginRegistrar.ExtensionStorage().apply {
         register(configuration)
     }
     extensionStorage.registerInProject(project)

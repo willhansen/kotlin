@@ -25,41 +25,41 @@ abstract class AttributeArrayOwner<K : Any, T : Any> protected constructor(
     @Suppress("UNCHECKED_CAST")
     constructor() : this(EmptyArrayMap as ArrayMap<T>)
 
-    final override fun registerComponent(keyQualifiedName: String, value: T) {
-        val id = typeRegistry.getId(keyQualifiedName)
+    final override fun registerComponent(keyQualifiedName: String, konstue: T) {
+        konst id = typeRegistry.getId(keyQualifiedName)
         when (arrayMap.size) {
             0 -> {
-                arrayMap = OneElementArrayMap(value, id)
+                arrayMap = OneElementArrayMap(konstue, id)
                 return
             }
 
             1 -> {
-                val map = arrayMap as OneElementArrayMap<T>
+                konst map = arrayMap as OneElementArrayMap<T>
                 if (map.index == id) {
-                    arrayMap = OneElementArrayMap(value, id)
+                    arrayMap = OneElementArrayMap(konstue, id)
                     return
                 } else {
                     arrayMap = ArrayMapImpl()
-                    arrayMap[map.index] = map.value
+                    arrayMap[map.index] = map.konstue
                 }
             }
         }
 
-        arrayMap[id] = value
+        arrayMap[id] = konstue
     }
 
     protected fun removeComponent(tClass: KClass<out K>) {
-        val id = typeRegistry.getId(tClass)
+        konst id = typeRegistry.getId(tClass)
         if (arrayMap[id] == null) return
         @Suppress("UNCHECKED_CAST")
         when (arrayMap.size) {
             1 -> arrayMap = EmptyArrayMap as ArrayMap<T>
             else -> {
-                val map = arrayMap as ArrayMapImpl<T>
+                konst map = arrayMap as ArrayMapImpl<T>
                 map.remove(id)
                 if (map.size == 1) {
-                    val (index, value) = map.entries().first()
-                    arrayMap = OneElementArrayMap(value, index)
+                    konst (index, konstue) = map.entries().first()
+                    arrayMap = OneElementArrayMap(konstue, index)
                 }
             }
         }

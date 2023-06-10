@@ -24,51 +24,51 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ThisClassReceiver
 class FragmentCompilerSymbolTableDecorator(
     signatureComposer: IdSignatureComposer,
     irFactory: IrFactory,
-    var fragmentInfo: EvaluatorFragmentInfo?,
+    var fragmentInfo: EkonstuatorFragmentInfo?,
     nameProvider: NameProvider = NameProvider.DEFAULT,
 ) : SymbolTable(signatureComposer, irFactory, nameProvider) {
 
     override fun referenceValueParameter(descriptor: ParameterDescriptor): IrValueParameterSymbol {
-        val fi = fragmentInfo ?: return super.referenceValueParameter(descriptor)
+        konst fi = fragmentInfo ?: return super.referenceValueParameter(descriptor)
 
         if (descriptor !is ReceiverParameterDescriptor) return super.referenceValueParameter(descriptor)
 
-        val finderPredicate = when (val receiverValue = descriptor.value) {
-            is ExtensionReceiver, is ContextReceiver -> { (targetDescriptor, _): EvaluatorFragmentParameterInfo ->
-                receiverValue == (targetDescriptor as? ReceiverParameterDescriptor)?.value
+        konst finderPredicate = when (konst receiverValue = descriptor.konstue) {
+            is ExtensionReceiver, is ContextReceiver -> { (targetDescriptor, _): EkonstuatorFragmentParameterInfo ->
+                receiverValue == (targetDescriptor as? ReceiverParameterDescriptor)?.konstue
             }
-            is ThisClassReceiver -> { (targetDescriptor, _): EvaluatorFragmentParameterInfo ->
+            is ThisClassReceiver -> { (targetDescriptor, _): EkonstuatorFragmentParameterInfo ->
                 receiverValue.classDescriptor == targetDescriptor.original
             }
             else -> TODO("Unimplemented")
         }
 
-        val parameterPosition =
+        konst parameterPosition =
             fi.parameters.indexOfFirst(finderPredicate)
         if (parameterPosition > -1) {
-            return super.referenceValueParameter(fi.methodDescriptor.valueParameters[parameterPosition])
+            return super.referenceValueParameter(fi.methodDescriptor.konstueParameters[parameterPosition])
         }
         return super.referenceValueParameter(descriptor)
     }
 
-    override fun referenceValue(value: ValueDescriptor): IrValueSymbol {
-        val fi = fragmentInfo ?: return super.referenceValue(value)
+    override fun referenceValue(konstue: ValueDescriptor): IrValueSymbol {
+        konst fi = fragmentInfo ?: return super.referenceValue(konstue)
 
-        val finderPredicate = when (value) {
-            is AbstractReceiverParameterDescriptor -> { (targetDescriptor, _): EvaluatorFragmentParameterInfo ->
-                value.containingDeclaration == targetDescriptor
+        konst finderPredicate = when (konstue) {
+            is AbstractReceiverParameterDescriptor -> { (targetDescriptor, _): EkonstuatorFragmentParameterInfo ->
+                konstue.containingDeclaration == targetDescriptor
             }
-            else -> { (targetDescriptor, _): EvaluatorFragmentParameterInfo ->
-                targetDescriptor == value
+            else -> { (targetDescriptor, _): EkonstuatorFragmentParameterInfo ->
+                targetDescriptor == konstue
             }
         }
 
-        val parameterPosition =
+        konst parameterPosition =
             fi.parameters.indexOfFirst(finderPredicate)
         if (parameterPosition > -1) {
-            return super.referenceValueParameter(fi.methodDescriptor.valueParameters[parameterPosition])
+            return super.referenceValueParameter(fi.methodDescriptor.konstueParameters[parameterPosition])
         }
 
-        return super.referenceValue(value)
+        return super.referenceValue(konstue)
     }
 }

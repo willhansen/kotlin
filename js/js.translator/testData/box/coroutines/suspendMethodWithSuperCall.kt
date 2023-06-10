@@ -8,14 +8,14 @@ var result = ""
 
 fun builder(c: suspend () -> Unit) {
     c.startCoroutine(object : Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
         override fun resumeWith(result: Result<Unit>) {}
     })
 }
 
 abstract class Parent {
-    val o = "O"
-    val k = "K"
+    konst o = "O"
+    konst k = "K"
     protected fun getO() = o
     protected fun getK() = k
 }

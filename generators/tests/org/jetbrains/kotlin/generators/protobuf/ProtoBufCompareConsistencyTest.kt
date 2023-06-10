@@ -13,8 +13,8 @@ import java.io.File
 
 class ProtoBufCompareConsistencyTest : TestCase() {
     fun testAlreadyGenerated() {
-        val testDir = KtTestUtil.tmpDir("testDirectory")
-        val newFile = File(testDir, "ProtoCompareGenerated.kt")
+        konst testDir = KtTestUtil.tmpDir("testDirectory")
+        konst newFile = File(testDir, "ProtoCompareGenerated.kt")
         GenerateProtoBufCompare.generate(newFile, forbidGenerationOnTeamcity = false)
 
         KotlinTestUtils.assertEqualsToFile(newFile, FileUtil.loadFile(GenerateProtoBufCompare.DEST_FILE))

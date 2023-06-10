@@ -4,8 +4,8 @@ import kotlin.properties.Delegates.notNull
 fun box(): String {
     var bunny by notNull<String>()
 
-    val obj = object {
-        val getBunny = { bunny }
+    konst obj = object {
+        konst getBunny = { bunny }
     }
 
     bunny = "OK"

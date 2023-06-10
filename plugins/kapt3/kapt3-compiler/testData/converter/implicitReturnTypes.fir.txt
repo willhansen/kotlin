@@ -8,7 +8,7 @@ public abstract class Prop<T> {
 
     public abstract int get(T key);
 
-    public abstract void set(T key, int value);
+    public abstract void set(T key, int konstue);
 }
 
 ////////////////////

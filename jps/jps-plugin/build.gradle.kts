@@ -6,10 +6,10 @@ plugins {
     id("jps-compatible")
 }
 
-val compilerModules: Array<String> by rootProject.extra
+konst compilerModules: Array<String> by rootProject.extra
 
 
-val generateTests by generator("org.jetbrains.kotlin.jps.GenerateJpsPluginTestsKt") {
+konst generateTests by generator("org.jetbrains.kotlin.jps.GenerateJpsPluginTestsKt") {
     javaLauncher.set(
         javaToolchains.launcherFor {
             languageVersion.set(JavaLanguageVersion.of(11))
@@ -118,6 +118,6 @@ projectTest(parallel = true) {
 testsJar {}
 
 tasks.withType<KotlinCompilationTask<*>>().configureEach {
-    compilerOptions.apiVersion.value(KotlinVersion.KOTLIN_1_8).finalizeValueOnRead()
-    compilerOptions.languageVersion.value(KotlinVersion.KOTLIN_1_8).finalizeValueOnRead()
+    compilerOptions.apiVersion.konstue(KotlinVersion.KOTLIN_1_8).finalizeValueOnRead()
+    compilerOptions.languageVersion.konstue(KotlinVersion.KOTLIN_1_8).finalizeValueOnRead()
 }

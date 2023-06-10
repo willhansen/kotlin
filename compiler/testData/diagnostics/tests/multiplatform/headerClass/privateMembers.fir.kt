@@ -3,7 +3,7 @@
 
 expect class A {
     <!EXPECTED_PRIVATE_DECLARATION!>private<!> fun foo()
-    <!EXPECTED_PRIVATE_DECLARATION!>private<!> val bar: String
+    <!EXPECTED_PRIVATE_DECLARATION!>private<!> konst bar: String
     <!EXPECTED_PRIVATE_DECLARATION!>private<!> fun Int.memExt(): Any
 
     private class Nested
@@ -14,7 +14,7 @@ expect class A {
 
 actual class A {
     private fun foo() {}
-    private val bar: String = ""
+    private konst bar: String = ""
     actual private fun Int.memExt(): Any = 0
 
     actual private class Nested

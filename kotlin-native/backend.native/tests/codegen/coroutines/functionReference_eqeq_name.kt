@@ -9,18 +9,18 @@ import kotlin.test.*
 
 suspend fun foo(x: Int) = x
 
-class Foo(val x: Int) {
+class Foo(konst x: Int) {
     suspend fun bar() = x
 }
 
 @Test fun runTest() {
-    val ref1 = ::foo
-    val rec = Foo(42)
-    val ref2 = rec::bar
-    val ref3 = ::foo
-    val ref4 = Foo(42)::bar
-    val ref5 = rec::bar
-    val ref6 = Foo::bar
+    konst ref1 = ::foo
+    konst rec = Foo(42)
+    konst ref2 = rec::bar
+    konst ref3 = ::foo
+    konst ref4 = Foo(42)::bar
+    konst ref5 = rec::bar
+    konst ref6 = Foo::bar
     assertEquals("foo", ref1.name)
     assertEquals("bar", ref2.name)
     assertEquals("bar", ref6.name)

@@ -8,20 +8,20 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendWithResult(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-        c.resume(value)
+    suspend fun <T> suspendWithResult(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation)
     return controller.result
 }
 
 fun box(): String {
-    var value = builder {
+    var konstue = builder {
         outer@for (x in listOf("O", "K")) {
             result += suspendWithResult(x)
             for (y in listOf("Q", "W")) {
@@ -33,9 +33,9 @@ fun box(): String {
         }
         result += "."
     }
-    if (value != "OQW.") return "fail: break outer loop: $value"
+    if (konstue != "OQW.") return "fail: break outer loop: $konstue"
 
-    value = builder {
+    konstue = builder {
         for (x in listOf("O", "K")) {
             result += suspendWithResult(x)
             for (y in listOf("Q", "W")) {
@@ -47,7 +47,7 @@ fun box(): String {
         }
         result += "."
     }
-    if (value != "OQKQ.") return "fail: break inner loop: $value"
+    if (konstue != "OQKQ.") return "fail: break inner loop: $konstue"
 
     return "OK"
 }

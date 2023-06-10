@@ -25,14 +25,14 @@ class A {
 
 class B {
     <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
-    val foo = 0
+    konst foo = 0
 
     <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
     object Obj1 {}
 
     companion object {
         <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
-        val foo = 0
+        konst foo = 0
 
         <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
         object Obj2 {}

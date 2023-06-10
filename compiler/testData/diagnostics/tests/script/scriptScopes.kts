@@ -4,8 +4,8 @@
 var b = true
 
 if (b) {
-    val x = 3
+    konst x = 3
 }
 
-val y = <!UNRESOLVED_REFERENCE!>x<!>
+konst y = <!UNRESOLVED_REFERENCE!>x<!>
 

@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.fir.FirPackageDirective
 class FirPackageDirectiveRenderer {
 
     internal lateinit var components: FirRendererComponents
-    private val printer get() = components.printer
+    private konst printer get() = components.printer
 
 
     fun render(packageDirective: FirPackageDirective) {

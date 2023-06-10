@@ -8,9 +8,9 @@ package kotlin.js
 /**
  * Exposes the JavaScript [undefined property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) to Kotlin.
  */
-public external val undefined: Nothing?
+public external konst undefined: Nothing?
 
 /**
- * Exposes the JavaScript [eval function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) to Kotlin.
+ * Exposes the JavaScript [ekonst function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ekonst) to Kotlin.
  */
-public external fun eval(expr: String): dynamic
+public external fun ekonst(expr: String): dynamic

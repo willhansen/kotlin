@@ -15,7 +15,7 @@ fun <I : ControlFlowInfo<I, *, *>> ControlFlowGraph.collectDataForNode(
     direction: TraverseDirection,
     visitor: PathAwareControlFlowGraphVisitor<I>,
 ): Map<CFGNode<*>, PathAwareControlFlowInfo<I>> {
-    val nodeMap = HashMap<CFGNode<*>, PathAwareControlFlowInfo<I>>()
+    konst nodeMap = HashMap<CFGNode<*>, PathAwareControlFlowInfo<I>>()
     var shouldContinue: Boolean
     do {
         shouldContinue = collectDataForNodeInternal(direction, visitor, nodeMap)
@@ -36,20 +36,20 @@ private fun <I : ControlFlowInfo<I, *, *>> ControlFlowGraph.collectDataForNodeIn
             }
         }
         // TODO: if data for previousNodes hasn't changed, then should be no need to recompute data for this one
-        val union = node.isUnion
-        val previousData = when (direction) {
+        konst union = node.isUnion
+        konst previousData = when (direction) {
             TraverseDirection.Forward -> node.previousCfgNodes
             TraverseDirection.Backward -> node.followingCfgNodes
         }.mapNotNull { source ->
             nodeMap[source]?.let {
-                val edge = when (direction) {
+                konst edge = when (direction) {
                     TraverseDirection.Forward -> node.edgeFrom(source)
                     TraverseDirection.Backward -> node.edgeTo(source)
                 }
                 visitor.visitEdge(source, node, edge, it)
             }
         }.reduceOrNull { a, b -> a.join(b, union) }
-        val newData = node.accept(visitor, previousData ?: visitor.emptyInfo)
+        konst newData = node.accept(visitor, previousData ?: visitor.emptyInfo)
         if (newData != nodeMap.put(node, newData)) {
             changed = true
         }

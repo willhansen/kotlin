@@ -12,31 +12,31 @@ import java.util.UUID
 
 @JvmInline
 @Parcelize
-value class ParcelableInt(val value: Int) : Parcelable
+konstue class ParcelableInt(konst konstue: Int) : Parcelable
 
 @JvmInline
 @Parcelize
-value class ParcelableString(val value: String) : Parcelable
+konstue class ParcelableString(konst konstue: String) : Parcelable
 
 @JvmInline
 @Parcelize
-value class ParcelableValueClass(val value: ParcelableInt) : Parcelable
+konstue class ParcelableValueClass(konst konstue: ParcelableInt) : Parcelable
 
 @JvmInline
 @Parcelize
-value class ParcelableNullableValueClass(val value: ParcelableString?) : Parcelable
+konstue class ParcelableNullableValueClass(konst konstue: ParcelableString?) : Parcelable
 
 @Parcelize
 data class Data(
-    val parcelableInt: ParcelableInt,
-    val parcelableString: ParcelableString,
-    val parcelableValueClass: ParcelableValueClass,
-    val parcelableNullableValueClass: ParcelableNullableValueClass,
-    val parcelableNullableValueClassNullable: ParcelableNullableValueClass?,
+    konst parcelableInt: ParcelableInt,
+    konst parcelableString: ParcelableString,
+    konst parcelableValueClass: ParcelableValueClass,
+    konst parcelableNullableValueClass: ParcelableNullableValueClass,
+    konst parcelableNullableValueClassNullable: ParcelableNullableValueClass?,
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val data = Data(
+    konst data = Data(
         ParcelableInt(10),
         ParcelableString(""),
         ParcelableValueClass(ParcelableInt(30)),
@@ -45,10 +45,10 @@ fun box() = parcelTest { parcel ->
     )
     data.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val data2 = parcelableCreator<Data>().createFromParcel(parcel)
+    konst data2 = parcelableCreator<Data>().createFromParcel(parcel)
     assert(data2 == data)
 }

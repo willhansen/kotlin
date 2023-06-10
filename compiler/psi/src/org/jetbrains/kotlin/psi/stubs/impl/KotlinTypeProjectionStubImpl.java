@@ -35,6 +35,6 @@ public class KotlinTypeProjectionStubImpl extends KotlinStubBaseImpl<KtTypeProje
     @NotNull
     @Override
     public KtProjectionKind getProjectionKind() {
-        return KtProjectionKind.values()[projectionKindOrdinal];
+        return KtProjectionKind.konstues()[projectionKindOrdinal];
     }
 }

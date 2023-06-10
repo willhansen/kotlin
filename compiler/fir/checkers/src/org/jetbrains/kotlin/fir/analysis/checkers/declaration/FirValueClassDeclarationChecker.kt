@@ -35,10 +35,10 @@ import org.jetbrains.kotlin.name.StandardClassIds
 
 object FirValueClassDeclarationChecker : FirRegularClassChecker() {
 
-    private val boxAndUnboxNames = setOf("box", "unbox")
-    private val equalsAndHashCodeNames = setOf("equals", "hashCode")
-    private val javaLangFqName = FqName("java.lang")
-    private val cloneableFqName = FqName("Cloneable")
+    private konst boxAndUnboxNames = setOf("box", "unbox")
+    private konst equalsAndHashCodeNames = setOf("equals", "hashCode")
+    private konst javaLangFqName = FqName("java.lang")
+    private konst cloneableFqName = FqName("Cloneable")
 
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!declaration.symbol.isInlineOrValueClass()) {
@@ -67,7 +67,7 @@ object FirValueClassDeclarationChecker : FirRegularClassChecker() {
 
         var primaryConstructor: FirConstructor? = null
         var primaryConstructorParametersByName = mapOf<Name, FirValueParameter>()
-        val primaryConstructorPropertiesByName = mutableMapOf<Name, FirProperty>()
+        konst primaryConstructorPropertiesByName = mutableMapOf<Name, FirProperty>()
         var primaryConstructorParametersSymbolsSet = setOf<FirValueParameterSymbol>()
 
         for (innerDeclaration in declaration.declarations) {
@@ -76,13 +76,13 @@ object FirValueClassDeclarationChecker : FirRegularClassChecker() {
                     when {
                         innerDeclaration.isPrimary -> {
                             primaryConstructor = innerDeclaration
-                            primaryConstructorParametersByName = innerDeclaration.valueParameters.associateBy { it.name }
+                            primaryConstructorParametersByName = innerDeclaration.konstueParameters.associateBy { it.name }
                             primaryConstructorParametersSymbolsSet =
                                 primaryConstructorParametersByName.map { (_, parameter) -> parameter.symbol }.toSet()
                         }
 
                         innerDeclaration.body != null && !context.languageVersionSettings.supportsFeature(LanguageFeature.ValueClassesSecondaryConstructorWithBody) -> {
-                            val body = innerDeclaration.body!!
+                            konst body = innerDeclaration.body!!
                             reporter.reportOn(
                                 body.source, FirErrors.SECONDARY_CONSTRUCTOR_WITH_BODY_INSIDE_VALUE_CLASS, context
                             )
@@ -97,7 +97,7 @@ object FirValueClassDeclarationChecker : FirRegularClassChecker() {
                 }
 
                 is FirSimpleFunction -> {
-                    val functionName = innerDeclaration.name.asString()
+                    konst functionName = innerDeclaration.name.asString()
 
                     if (functionName in boxAndUnboxNames
                         || (functionName in equalsAndHashCodeNames
@@ -111,13 +111,13 @@ object FirValueClassDeclarationChecker : FirRegularClassChecker() {
 
                 is FirField -> {
                     if (innerDeclaration.isSynthetic) {
-                        val symbol = innerDeclaration.initializer?.toResolvedCallableSymbol()
+                        konst symbol = innerDeclaration.initializer?.toResolvedCallableSymbol()
                         if (context.languageVersionSettings.supportsFeature(LanguageFeature.InlineClassImplementationByDelegation) &&
                             symbol != null && symbol in primaryConstructorParametersSymbolsSet
                         ) {
                             continue
                         }
-                        val delegatedTypeRefSource = (innerDeclaration.returnTypeRef as FirResolvedTypeRef).delegatedTypeRef?.source
+                        konst delegatedTypeRefSource = (innerDeclaration.returnTypeRef as FirResolvedTypeRef).delegatedTypeRef?.source
                         reporter.reportOn(
                             delegatedTypeRefSource,
                             FirErrors.VALUE_CLASS_CANNOT_IMPLEMENT_INTERFACE_BY_DELEGATION,
@@ -217,7 +217,7 @@ object FirValueClassDeclarationChecker : FirRegularClassChecker() {
         }
 
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.CustomEqualsInValueClasses)) {
-            val (equalsFromAnyOverriding, typedEquals) = run {
+            konst (equalsFromAnyOverriding, typedEquals) = run {
                 var equalsFromAnyOverriding: FirSimpleFunction? = null
                 var typedEquals: FirSimpleFunction? = null
                 declaration.declarations.forEach {
@@ -237,7 +237,7 @@ object FirValueClassDeclarationChecker : FirRegularClassChecker() {
                         context
                     )
                 }
-                val singleParameterReturnTypeRef = typedEquals.valueParameters.single().returnTypeRef
+                konst singleParameterReturnTypeRef = typedEquals.konstueParameters.single().returnTypeRef
                 if (singleParameterReturnTypeRef.coneType.typeArguments.any { !it.isStarProjection }) {
                     reporter.reportOn(singleParameterReturnTypeRef.source, FirErrors.TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS, context)
                 }
@@ -260,7 +260,7 @@ object FirValueClassDeclarationChecker : FirRegularClassChecker() {
     private fun FirValueParameter.isNotFinalReadOnly(primaryConstructorProperty: FirProperty?): Boolean {
         if (primaryConstructorProperty == null) return true
 
-        val isOpen = hasModifier(KtTokens.OPEN_KEYWORD)
+        konst isOpen = hasModifier(KtTokens.OPEN_KEYWORD)
 
         return isVararg || !primaryConstructorProperty.isVal || isOpen
     }
@@ -272,7 +272,7 @@ object FirValueClassDeclarationChecker : FirRegularClassChecker() {
         if (this.typeArguments.firstOrNull() is ConeStarProjection || !isPotentiallyArray())
             return false
 
-        val arrayElementType = arrayElementType()?.type ?: return false
+        konst arrayElementType = arrayElementType()?.type ?: return false
         return arrayElementType is ConeTypeParameterType ||
                 arrayElementType.isGenericArrayOfTypeParameter()
     }

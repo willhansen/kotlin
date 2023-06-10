@@ -29,7 +29,7 @@ public class SimpleFunctionBuildingContext(
     key: GeneratedDeclarationKey,
     owner: FirClassSymbol<*>?,
     callableId: CallableId,
-    private val returnTypeProvider: (List<FirTypeParameter>) -> ConeKotlinType,
+    private konst returnTypeProvider: (List<FirTypeParameter>) -> ConeKotlinType,
 ) : FunctionBuildingContext<FirSimpleFunction>(callableId, session, key, owner) {
     private var extensionReceiverTypeProvider: ((List<FirTypeParameter>) -> ConeKotlinType)? = null
 
@@ -69,7 +69,7 @@ public class SimpleFunctionBuildingContext(
             initTypeParameterBounds(typeParameters, typeParameters)
             produceContextReceiversTo(contextReceivers, typeParameters)
 
-            this@SimpleFunctionBuildingContext.valueParameters.mapTo(valueParameters) {
+            this@SimpleFunctionBuildingContext.konstueParameters.mapTo(konstueParameters) {
                 generateValueParameter(it, symbol, typeParameters)
             }
             returnTypeRef = returnTypeProvider(typeParameters).toFirResolvedTypeRef()
@@ -87,7 +87,7 @@ public class SimpleFunctionBuildingContext(
 /**
  * Creates a member function for [owner] class with specified [returnType].
  *
- * Type and value parameters can be configured with [config] builder.
+ * Type and konstue parameters can be configured with [config] builder.
  */
 public fun FirExtension.createMemberFunction(
     owner: FirClassSymbol<*>,
@@ -103,7 +103,7 @@ public fun FirExtension.createMemberFunction(
  * Creates a member function for [owner] class with return type provided by [returnTypeProvider].
  * Use this overload when return type references type parameters of created function.
  *
- * Type and value parameters can be configured with [config] builder.
+ * Type and konstue parameters can be configured with [config] builder.
  */
 public fun FirExtension.createMemberFunction(
     owner: FirClassSymbol<*>,
@@ -112,14 +112,14 @@ public fun FirExtension.createMemberFunction(
     returnTypeProvider: (List<FirTypeParameter>) -> ConeKotlinType,
     config: SimpleFunctionBuildingContext.() -> Unit = {}
 ): FirSimpleFunction {
-    val callableId = CallableId(owner.classId, name)
+    konst callableId = CallableId(owner.classId, name)
     return SimpleFunctionBuildingContext(session, key, owner, callableId, returnTypeProvider).apply(config).build()
 }
 
 /**
  * Creates a top-level function with [callableId] and specified [returnType].
  *
- * Type and value parameters can be configured with [config] builder.
+ * Type and konstue parameters can be configured with [config] builder.
  */
 public fun FirExtension.createTopLevelFunction(
     key: GeneratedDeclarationKey,
@@ -134,7 +134,7 @@ public fun FirExtension.createTopLevelFunction(
  * Creates a top-level function with [callableId] and return type provided by [returnTypeProvider].
  * Use this overload when return type references type parameters of created function.
  *
- * Type and value parameters can be configured with [config] builder.
+ * Type and konstue parameters can be configured with [config] builder.
  */
 public fun FirExtension.createTopLevelFunction(
     key: GeneratedDeclarationKey,

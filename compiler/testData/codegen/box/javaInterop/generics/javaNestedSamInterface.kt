@@ -18,5 +18,5 @@ public class A<X extends Number> {
         T compute();
     }
 
-    public <T> T get(I<T> value) { return value.compute(); }
+    public <T> T get(I<T> konstue) { return konstue.compute(); }
 }

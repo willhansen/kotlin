@@ -14,24 +14,24 @@ class SomeClass {
     constructor()
 
     @field:Ann
-    protected val simpleProperty: String = "text"
+    protected konst simpleProperty: String = "text"
 
     @field:[Ann]
-    protected val simplePropertyWithAnnotationList: String = "text"
+    protected konst simplePropertyWithAnnotationList: String = "text"
 
     <!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_BACKING_FIELD!>@field:Ann<!>
-    protected val delegatedProperty: String by CustomDelegate()
+    protected konst delegatedProperty: String by CustomDelegate()
 
     <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@field:Ann<!>
-    val propertyWithCustomGetter: Int
+    konst propertyWithCustomGetter: Int
         get() = 5
 
     <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@field:Ann<!>
     fun anotherFun(<!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@field:Ann<!> s: String) {
         <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@field:Ann<!>
-        val localVariable = 5
+        konst localVariable = 5
     }
 
 }
 
-class WithPrimaryConstructor(@field:Ann val a: String)
+class WithPrimaryConstructor(@field:Ann konst a: String)

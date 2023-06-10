@@ -18,24 +18,24 @@ import java.io.StringWriter
 import javax.inject.Inject
 
 @Suppress("LeakingThis")
-abstract class KotlinWebpackRule @Inject constructor(private val name: String) : Named {
+abstract class KotlinWebpackRule @Inject constructor(private konst name: String) : Named {
     @get:Input
-    abstract val enabled: Property<Boolean>
+    abstract konst enabled: Property<Boolean>
 
     /**
-     * Raw rule `test` field value. Needs to be wrapped in quotes when using string notation.
+     * Raw rule `test` field konstue. Needs to be wrapped in quotes when using string notation.
      */
     @get:Input
-    abstract val test: Property<String>
+    abstract konst test: Property<String>
 
     @get:Input
-    abstract val include: ListProperty<String>
+    abstract konst include: ListProperty<String>
 
     @get:Input
-    abstract val exclude: ListProperty<String>
+    abstract konst exclude: ListProperty<String>
 
     @get:Input
-    protected open val description: String
+    protected open konst description: String
         get() = (this::class.simpleName?.removeSuffix("_Decorated") ?: "KotlinWebpackRule") + "[${getName()}]"
 
     init {
@@ -46,7 +46,7 @@ abstract class KotlinWebpackRule @Inject constructor(private val name: String) :
      * Validates the rule state just before it getting applied.
      * Returning false will skip the rule silently. To terminate the build instead, throw an error.
      */
-    open fun validate(): Boolean = true
+    open fun konstidate(): Boolean = true
 
     /**
      * Provides a list of required npm dependencies for the rule to function.
@@ -59,7 +59,7 @@ abstract class KotlinWebpackRule @Inject constructor(private val name: String) :
     protected abstract fun loaders(): List<Loader>
 
     @get:Internal
-    internal val active: Boolean get() = enabled.get() && validate()
+    internal konst active: Boolean get() = enabled.get() && konstidate()
     internal fun Appendable.appendToWebpackConfig() {
         appendLine(
             """
@@ -67,9 +67,9 @@ abstract class KotlinWebpackRule @Inject constructor(private val name: String) :
             ;(function(config) {
             """.trimIndent()
         )
-        val loaders = loaders()
+        konst loaders = loaders()
         loaders.flatMap(Loader::prerequisites).forEach(::appendLine)
-        val use = loaders.joinToString(
+        konst use = loaders.joinToString(
             separator = ",",
             prefix = "[",
             postfix = "]",
@@ -87,9 +87,9 @@ abstract class KotlinWebpackRule @Inject constructor(private val name: String) :
             """.trimIndent()
         )
 
-        val excluded = exclude.get().takeIf(List<*>::isNotEmpty)
+        konst excluded = exclude.get().takeIf(List<*>::isNotEmpty)
             ?.joinToString(separator = ",", prefix = "[", postfix = "]") ?: "undefined"
-        val included = include.get().takeIf(List<*>::isNotEmpty)
+        konst included = include.get().takeIf(List<*>::isNotEmpty)
             ?.joinToString(separator = ",", prefix = "[", postfix = "]") ?: "undefined"
         appendLine(
             """
@@ -120,16 +120,16 @@ abstract class KotlinWebpackRule @Inject constructor(private val name: String) :
 
     data class Loader(
         /**
-         * Raw `loader` field value. Needs to be wrapped in quotes if using string notation.
+         * Raw `loader` field konstue. Needs to be wrapped in quotes if using string notation.
          */
-        val loader: String,
+        konst loader: String,
         /**
          * Loader options map if any. Will be converted to json object via Gson.
          */
-        val options: Map<String, Any?> = mapOf(),
+        konst options: Map<String, Any?> = mapOf(),
         /**
          * Any prerequisite code to be added before building the loader object.
          */
-        val prerequisites: List<String> = listOf(),
+        konst prerequisites: List<String> = listOf(),
     )
 }

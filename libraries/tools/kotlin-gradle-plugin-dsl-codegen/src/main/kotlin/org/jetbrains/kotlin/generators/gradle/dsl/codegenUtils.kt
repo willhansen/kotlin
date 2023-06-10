@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.generators.gradle.dsl
 
-internal data class TypeName(val fqName: String, val typeArguments: List<TypeName>)
+internal data class TypeName(konst fqName: String, konst typeArguments: List<TypeName>)
 
 internal fun typeName(fqName: String, vararg typeArgumentFlatFqNames: String): TypeName {
     require(typeArgumentFlatFqNames.none { "<" in it }) { "generics won't render to short type names properly, use the full constructor" }
@@ -36,7 +36,7 @@ internal fun TypeName.collectFqNames(): Set<String> =
  * @param skipFirstLine if true doesn't indent first line
  */
 internal fun String.indented(nSpaces: Int = 4, skipFirstLine: Boolean = false): String {
-    val spaces = String(CharArray(nSpaces) { ' ' })
+    konst spaces = String(CharArray(nSpaces) { ' ' })
 
     return lines()
         .withIndex()
@@ -46,4 +46,4 @@ internal fun String.indented(nSpaces: Int = 4, skipFirstLine: Boolean = false): 
         }
 }
 
-internal val outputSourceRoot get() = System.getProperties()["org.jetbrains.kotlin.generators.gradle.dsl.outputSourceRoot"] as String
+internal konst outputSourceRoot get() = System.getProperties()["org.jetbrains.kotlin.generators.gradle.dsl.outputSourceRoot"] as String

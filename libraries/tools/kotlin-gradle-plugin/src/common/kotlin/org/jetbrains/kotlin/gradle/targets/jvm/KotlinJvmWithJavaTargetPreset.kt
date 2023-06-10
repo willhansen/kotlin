@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinTasksProvider
 import org.jetbrains.kotlin.gradle.utils.configureExperimentalTryK2
 
 class KotlinJvmWithJavaTargetPreset(
-    private val project: Project
+    private konst project: Project
 ) : KotlinTargetPreset<KotlinWithJavaTarget<KotlinJvmOptions, KotlinJvmCompilerOptions>> {
 
     override fun getName(): String = PRESET_NAME
@@ -29,21 +29,21 @@ class KotlinJvmWithJavaTargetPreset(
         project.plugins.apply(JavaPlugin::class.java)
 
         @Suppress("UNCHECKED_CAST", "DEPRECATION")
-        val target = (project.objects.newInstance(
+        konst target = (project.objects.newInstance(
             KotlinWithJavaTarget::class.java,
             project,
             KotlinPlatformType.jvm,
             name,
             {
                 object : HasCompilerOptions<KotlinJvmCompilerOptions> {
-                    override val options: KotlinJvmCompilerOptions = project.objects
+                    override konst options: KotlinJvmCompilerOptions = project.objects
                         .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
                         .configureExperimentalTryK2(project)
                 }
             },
             { compilerOptions: KotlinJvmCompilerOptions ->
                 object : KotlinJvmOptions {
-                    override val options: KotlinJvmCompilerOptions
+                    override konst options: KotlinJvmCompilerOptions
                         get() = compilerOptions
                 }
             }
@@ -64,7 +64,7 @@ class KotlinJvmWithJavaTargetPreset(
         }
 
         target.compilations.getByName("test").run {
-            val main = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+            konst main = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
 
             compileDependencyFiles = project.files(
                 main.output.allOutputs,
@@ -81,6 +81,6 @@ class KotlinJvmWithJavaTargetPreset(
     }
 
     companion object {
-        const val PRESET_NAME = "jvmWithJava"
+        const konst PRESET_NAME = "jvmWithJava"
     }
 }

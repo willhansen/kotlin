@@ -37,8 +37,8 @@ import org.jetbrains.org.objectweb.asm.*
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
-class FunctionCodegen(private val irFunction: IrFunction, private val classCodegen: ClassCodegen) {
-    private val context = classCodegen.context
+class FunctionCodegen(private konst irFunction: IrFunction, private konst classCodegen: ClassCodegen) {
+    private konst context = classCodegen.context
 
     fun generate(
         reifiedTypeParameters: ReifiedTypeParametersUsages = classCodegen.reifiedTypeParametersUsages
@@ -52,10 +52,10 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
         }
 
     private fun doGenerate(reifiedTypeParameters: ReifiedTypeParametersUsages): SMAPAndMethodNode {
-        val signature = classCodegen.methodSignatureMapper.mapSignatureWithGeneric(irFunction)
-        val flags = irFunction.calculateMethodFlags()
-        val isSynthetic = flags.and(Opcodes.ACC_SYNTHETIC) != 0
-        val methodNode = MethodNode(
+        konst signature = classCodegen.methodSignatureMapper.mapSignatureWithGeneric(irFunction)
+        konst flags = irFunction.calculateMethodFlags()
+        konst isSynthetic = flags.and(Opcodes.ACC_SYNTHETIC) != 0
+        konst methodNode = MethodNode(
             Opcodes.API_VERSION,
             flags,
             signature.asmMethod.name,
@@ -68,14 +68,14 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
                 },
             getThrownExceptions(irFunction)?.toTypedArray()
         )
-        val methodVisitor: MethodVisitor = wrapWithMaxLocalCalc(methodNode)
+        konst methodVisitor: MethodVisitor = wrapWithMaxLocalCalc(methodNode)
 
         if (context.state.generateParametersMetadata && !isSynthetic) {
             generateParameterNames(irFunction, methodVisitor, context.state)
         }
 
         if (irFunction.isWithAnnotations) {
-            val skipNullabilityAnnotations = flags and Opcodes.ACC_PRIVATE != 0 || flags and Opcodes.ACC_SYNTHETIC != 0
+            konst skipNullabilityAnnotations = flags and Opcodes.ACC_PRIVATE != 0 || flags and Opcodes.ACC_SYNTHETIC != 0
             object : AnnotationCodegen(classCodegen, skipNullabilityAnnotations) {
                 override fun visitAnnotation(descr: String, visible: Boolean): AnnotationVisitor {
                     return methodVisitor.visitAnnotation(descr, visible)
@@ -83,7 +83,7 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
 
                 override fun visitTypeAnnotation(descr: String, path: TypePath?, visible: Boolean): AnnotationVisitor {
                     return methodVisitor.visitTypeAnnotation(
-                        TypeReference.newTypeReference(TypeReference.METHOD_RETURN).value, path, descr, visible
+                        TypeReference.newTypeReference(TypeReference.METHOD_RETURN).konstue, path, descr, visible
                     )
                 }
             }.genAnnotations(irFunction, signature.asmMethod.returnType, irFunction.returnType)
@@ -105,20 +105,20 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
 
         // `$$forInline` versions of suspend functions have the same bodies as the originals, but with different
         // name/flags/annotations and with no state machine.
-        val notForInline = irFunction.suspendForInlineToOriginal()
-        val smap = if (flags.and(Opcodes.ACC_ABSTRACT) != 0 || irFunction.isExternal) {
+        konst notForInline = irFunction.suspendForInlineToOriginal()
+        konst smap = if (flags.and(Opcodes.ACC_ABSTRACT) != 0 || irFunction.isExternal) {
             generateAnnotationDefaultValueIfNeeded(methodVisitor)
             SMAP(listOf())
         } else if (notForInline != null) {
-            val (originalNode, smap) = classCodegen.generateMethodNode(notForInline)
+            konst (originalNode, smap) = classCodegen.generateMethodNode(notForInline)
             originalNode.accept(MethodBodyVisitor(methodVisitor))
             smap
         } else {
-            val sourceMapper = context.getSourceMapper(classCodegen.irClass)
-            val frameMap = irFunction.createFrameMapWithReceivers()
+            konst sourceMapper = context.getSourceMapper(classCodegen.irClass)
+            konst frameMap = irFunction.createFrameMapWithReceivers()
             context.state.globalInlineContext.enterDeclaration(irFunction.suspendFunctionOriginal().toIrBasedDescriptor())
             try {
-                val adapter = InstructionAdapter(methodVisitor)
+                konst adapter = InstructionAdapter(methodVisitor)
                 ExpressionCodegen(irFunction, signature, frameMap, adapter, classCodegen, sourceMapper, reifiedTypeParameters).generate()
             } finally {
                 context.state.globalInlineContext.exitDeclaration()
@@ -163,8 +163,8 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
                     (if (this is IrConstructor) 0 else Opcodes.ACC_STATIC)
         }
 
-        val isVararg = valueParameters.lastOrNull()?.varargElementType != null && !isBridge()
-        val modalityFlag =
+        konst isVararg = konstueParameters.lastOrNull()?.varargElementType != null && !isBridge()
+        konst modalityFlag =
             if (parentAsClass.isAnnotationClass) {
                 if (isStatic) 0 else Opcodes.ACC_ABSTRACT
             } else {
@@ -180,13 +180,13 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
                     else -> if (parentAsClass.isJvmInterface && body == null) Opcodes.ACC_ABSTRACT else 0
                 }
             }
-        val isSynthetic = origin.isSynthetic ||
+        konst isSynthetic = origin.isSynthetic ||
                 hasAnnotation(JVM_SYNTHETIC_ANNOTATION_FQ_NAME) ||
                 isReifiable() ||
                 isDeprecatedHidden()
 
-        val isStrict = hasAnnotation(STRICTFP_ANNOTATION_FQ_NAME) && origin != JvmLoweredDeclarationOrigin.JVM_OVERLOADS_WRAPPER
-        val isSynchronized = hasAnnotation(SYNCHRONIZED_ANNOTATION_FQ_NAME) && origin != JvmLoweredDeclarationOrigin.JVM_OVERLOADS_WRAPPER
+        konst isStrict = hasAnnotation(STRICTFP_ANNOTATION_FQ_NAME) && origin != JvmLoweredDeclarationOrigin.JVM_OVERLOADS_WRAPPER
+        konst isSynchronized = hasAnnotation(SYNCHRONIZED_ANNOTATION_FQ_NAME) && origin != JvmLoweredDeclarationOrigin.JVM_OVERLOADS_WRAPPER
 
         return getVisibilityAccessFlag() or modalityFlag or
                 (if (isDeprecatedFunction(context)) Opcodes.ACC_DEPRECATED else 0) or
@@ -200,7 +200,7 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
     }
 
     private fun IrFunction.isDeprecatedHidden(): Boolean {
-        val mightBeDeprecated = if (this is IrSimpleFunction) {
+        konst mightBeDeprecated = if (this is IrSimpleFunction) {
             allOverridden(true).any {
                 it.isAnnotatedWithDeprecated || it.correspondingPropertySymbol?.owner?.isAnnotatedWithDeprecated == true
             }
@@ -216,7 +216,7 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
         ) return null
 
         // @Throws(vararg exceptionClasses: KClass<out Throwable>)
-        val exceptionClasses = function.getAnnotation(JVM_THROWS_ANNOTATION_FQ_NAME)?.getValueArgument(0) ?: return null
+        konst exceptionClasses = function.getAnnotation(JVM_THROWS_ANNOTATION_FQ_NAME)?.getValueArgument(0) ?: return null
         return (exceptionClasses as IrVararg).elements.map { exceptionClass ->
             classCodegen.typeMapper.mapType((exceptionClass as IrClassReference).classType).internalName
         }
@@ -224,7 +224,7 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
 
     private fun generateAnnotationDefaultValueIfNeeded(methodVisitor: MethodVisitor) {
         getAnnotationDefaultValueExpression()?.let { defaultValueExpression ->
-            val annotationCodegen = object : AnnotationCodegen(classCodegen) {
+            konst annotationCodegen = object : AnnotationCodegen(classCodegen) {
                 override fun visitAnnotation(descr: String, visible: Boolean): AnnotationVisitor {
                     return methodVisitor.visitAnnotationDefault()
                 }
@@ -235,28 +235,28 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
 
     private fun getAnnotationDefaultValueExpression(): IrExpression? {
         if (!classCodegen.irClass.isAnnotationClass) return null
-        // TODO: any simpler way to get to the value expression?
-        // Are there other valid IR structures that represent the default value?
-        val backingField = (irFunction as? IrSimpleFunction)?.correspondingPropertySymbol?.owner?.backingField
-        val getValue = backingField?.initializer?.expression as? IrGetValue
-        val parameter = getValue?.symbol?.owner as? IrValueParameter
+        // TODO: any simpler way to get to the konstue expression?
+        // Are there other konstid IR structures that represent the default konstue?
+        konst backingField = (irFunction as? IrSimpleFunction)?.correspondingPropertySymbol?.owner?.backingField
+        konst getValue = backingField?.initializer?.expression as? IrGetValue
+        konst parameter = getValue?.symbol?.owner as? IrValueParameter
         return parameter?.defaultValue?.expression
     }
 
     private fun IrFunction.createFrameMapWithReceivers(): IrFrameMap {
-        val frameMap = IrFrameMap()
-        val receiver = if (this is IrConstructor) parentAsClass.thisReceiver else dispatchReceiverParameter
+        konst frameMap = IrFrameMap()
+        konst receiver = if (this is IrConstructor) parentAsClass.thisReceiver else dispatchReceiverParameter
         receiver?.let {
             frameMap.enter(it, classCodegen.typeMapper.mapTypeAsDeclaration(it.type))
         }
-        val contextReceivers = valueParameters.subList(0, contextReceiverParametersCount)
+        konst contextReceivers = konstueParameters.subList(0, contextReceiverParametersCount)
         for (contextReceiver in contextReceivers) {
             frameMap.enter(contextReceiver, classCodegen.typeMapper.mapType(contextReceiver.type))
         }
         extensionReceiverParameter?.let {
             frameMap.enter(it, classCodegen.typeMapper.mapType(it))
         }
-        val regularParameters = valueParameters.subList(contextReceiverParametersCount, valueParameters.size)
+        konst regularParameters = konstueParameters.subList(contextReceiverParametersCount, konstueParameters.size)
         for (parameter in regularParameters) {
             frameMap.enter(parameter, classCodegen.typeMapper.mapType(parameter.type))
         }
@@ -271,15 +271,15 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
         classCodegen: ClassCodegen,
         skipNullabilityAnnotations: Boolean = false
     ) {
-        val iterator = irFunction.valueParameters.iterator()
-        val kotlinParameterTypes = jvmSignature.valueParameters
-        val syntheticParameterCount = kotlinParameterTypes.count { it.kind.isSkippedInGenericSignature }
+        konst iterator = irFunction.konstueParameters.iterator()
+        konst kotlinParameterTypes = jvmSignature.konstueParameters
+        konst syntheticParameterCount = kotlinParameterTypes.count { it.kind.isSkippedInGenericSignature }
 
         visitAnnotableParameterCount(mv, kotlinParameterTypes.size - syntheticParameterCount)
 
         kotlinParameterTypes.forEachIndexed { i, parameterSignature ->
-            val kind = parameterSignature.kind
-            val annotated = when (kind) {
+            konst kind = parameterSignature.kind
+            konst annotated = when (kind) {
                 JvmMethodParameterKind.RECEIVER -> irFunction.extensionReceiverParameter
                 else -> iterator.next()
             }
@@ -296,7 +296,7 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
 
                     override fun visitTypeAnnotation(descr: String, path: TypePath?, visible: Boolean): AnnotationVisitor {
                         return mv.visitTypeAnnotation(
-                            TypeReference.newFormalParameterReference(i - syntheticParameterCount).value,
+                            TypeReference.newFormalParameterReference(i - syntheticParameterCount).konstue,
                             path, descr, visible
                         )
                     }
@@ -306,7 +306,7 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
     }
 
     companion object {
-        private val methodOriginsWithoutAnnotations =
+        private konst methodOriginsWithoutAnnotations =
             setOf(
                 // Not generating parameter annotations for default stubs fixes KT-7892, though
                 // this certainly looks like a workaround for a javac bug.
@@ -321,7 +321,7 @@ class FunctionCodegen(private val irFunction: IrFunction, private val classCodeg
                 IrDeclarationOrigin.PROPERTY_DELEGATE,
             )
 
-        private val IrFunction.isWithAnnotations: Boolean
+        private konst IrFunction.isWithAnnotations: Boolean
             get() = when (origin) {
                 in methodOriginsWithoutAnnotations -> false
                 IrDeclarationOrigin.ENUM_CLASS_SPECIAL_MEMBER -> name.asString() == "<get-entries>"
@@ -339,12 +339,12 @@ private fun generateParameterNames(irFunction: IrFunction, mv: MethodVisitor, st
     irFunction.extensionReceiverParameter?.let {
         mv.visitParameter(irFunction.extensionReceiverName(state), 0)
     }
-    for (irParameter in irFunction.valueParameters) {
+    for (irParameter in irFunction.konstueParameters) {
         // A construct emitted by a Java compiler must be marked as synthetic if it does not correspond to a construct declared
         // explicitly or implicitly in source code, unless the emitted construct is a class initialization method (JVMS §2.9).
         // A construct emitted by a Java compiler must be marked as mandated if it corresponds to a formal parameter
         // declared implicitly in source code (§8.8.1, §8.8.9, §8.9.3, §15.9.5.1).
-        val access = when {
+        konst access = when {
             irParameter.origin == JvmLoweredDeclarationOrigin.FIELD_FOR_OUTER_THIS -> Opcodes.ACC_MANDATED
             // TODO mark these backend-common origins as synthetic? (note: ExpressionCodegen is still expected
             //      to generate LVT entries for them)

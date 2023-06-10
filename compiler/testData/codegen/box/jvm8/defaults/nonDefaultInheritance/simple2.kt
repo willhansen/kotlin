@@ -24,12 +24,12 @@ class DerivedClass : Derived
 
 
 fun box(): String {
-    val override = DerivedClass().toOverride()
+    konst override = DerivedClass().toOverride()
     if (override[1] != "Derived\$DefaultImpls.toOverride") return "fail 1: ${override[1]}"
     if (override[2] != "DerivedClass.toOverride") return "fail 2: ${override[2]}"
     if (override[3] != "MainKt.box") return "fail 3: ${override[3]}"
 
-    val nonOverride = DerivedClass().nonOverride()
+    konst nonOverride = DerivedClass().nonOverride()
     if (nonOverride[1] != "Foo.nonOverride") return "fail 3: ${nonOverride[1]}"
     if (nonOverride[2] != "MainKt.box") return "fail 4: ${nonOverride[2]}"
 

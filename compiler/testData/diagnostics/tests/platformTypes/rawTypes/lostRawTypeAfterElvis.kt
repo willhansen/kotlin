@@ -11,7 +11,7 @@ public class Generic<T> {
 import Generic.ML
 
 fun main(w: ML<String>) {
-    val generic2 = Generic.create() ?: return
+    konst generic2 = Generic.create() ?: return
 
     // Not enough information to infer E (both K1 and K2 after KT-41794 is done)
     // Because generic information is erased from the raw type scope of `generic1`

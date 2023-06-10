@@ -36,13 +36,13 @@ class MutableDiagnosticsTest : KotlinTestWithEnvironment() {
         )
     }
 
-    private val BindingTrace.diagnostics: Diagnostics
+    private konst BindingTrace.diagnostics: Diagnostics
         get() = bindingContext.diagnostics
 
     fun testPropagatingModification() {
-        val base = BindingTraceContext()
-        val middle = DelegatingBindingTrace(base.bindingContext, "middle")
-        val derived = DelegatingBindingTrace(middle.bindingContext, "derived")
+        konst base = BindingTraceContext()
+        konst middle = DelegatingBindingTrace(base.bindingContext, "middle")
+        konst derived = DelegatingBindingTrace(middle.bindingContext, "derived")
 
         Assert.assertTrue(base.diagnostics.isEmpty())
         Assert.assertTrue(middle.diagnostics.isEmpty())
@@ -83,21 +83,21 @@ class MutableDiagnosticsTest : KotlinTestWithEnvironment() {
     }
 
     fun testCaching() {
-        val base = BindingTraceContext()
-        val middle = DelegatingBindingTrace(base.bindingContext, "middle")
-        val derived = DelegatingBindingTrace(middle.bindingContext, "derived")
+        konst base = BindingTraceContext()
+        konst middle = DelegatingBindingTrace(base.bindingContext, "middle")
+        konst derived = DelegatingBindingTrace(middle.bindingContext, "derived")
 
         base.reportDiagnostic()
         middle.reportDiagnostic()
         derived.reportDiagnostic()
 
-        val cachedBase = base.diagnostics
-        val cachedMiddle = middle.diagnostics
-        val cachedDerived = derived.diagnostics
+        konst cachedBase = base.diagnostics
+        konst cachedMiddle = middle.diagnostics
+        konst cachedDerived = derived.diagnostics
 
-        val cachedListForBase = cachedBase.contents()
-        val cachedListForMiddle = cachedMiddle.contents()
-        val cachedListForDerived = cachedDerived.contents()
+        konst cachedListForBase = cachedBase.contents()
+        konst cachedListForMiddle = cachedMiddle.contents()
+        konst cachedListForDerived = cachedDerived.contents()
 
         Assert.assertSame(cachedListForBase, base.diagnostics.contents())
         Assert.assertSame(cachedListForMiddle, middle.diagnostics.contents())
@@ -137,18 +137,18 @@ class MutableDiagnosticsTest : KotlinTestWithEnvironment() {
     private class DummyDiagnosticFactory : DiagnosticFactory<DummyDiagnostic>("DUMMY", Severity.ERROR)
 
     private inner class DummyDiagnostic : Diagnostic {
-        override val factory = DummyDiagnosticFactory()
-        private val dummyElement = KtPsiFactory(environment.project).createType("Int")
+        override konst factory = DummyDiagnosticFactory()
+        private konst dummyElement = KtPsiFactory(environment.project).createType("Int")
 
         init {
             dummyElement.containingKtFile.doNotAnalyze = null
         }
 
-        override val severity get() = factory.severity
-        override val psiElement get() = dummyElement
-        override val textRanges get() = unimplemented()
-        override val psiFile get() = unimplemented()
-        override val isValid get() = unimplemented()
+        override konst severity get() = factory.severity
+        override konst psiElement get() = dummyElement
+        override konst textRanges get() = unimplemented()
+        override konst psiFile get() = unimplemented()
+        override konst isValid get() = unimplemented()
 
         private fun unimplemented(): Nothing = throw UnsupportedOperationException()
     }

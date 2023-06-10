@@ -12,7 +12,7 @@ var t = "Failed"
 fun ok(s: String) { t = s }
 
 fun box(): String {
-    val r = Sam(::ok).get("OK")
+    konst r = Sam(::ok).get("OK")
     if (r != Unit) {
         return "Failed: $r"
     }

@@ -49,7 +49,7 @@ extern "C" {
 RUNTIME_NORETURN void ThrowWorkerAlreadyTerminated();
 RUNTIME_NORETURN void ThrowWrongWorkerOrAlreadyTerminated();
 RUNTIME_NORETURN void ThrowCannotTransferOwnership();
-RUNTIME_NORETURN void ThrowFutureInvalidState();
+RUNTIME_NORETURN void ThrowFutureInkonstidState();
 RUNTIME_NORETURN void ThrowWorkerUnsupported();
 OBJ_GETTER(WorkerLaunchpad, KRef);
 
@@ -137,7 +137,7 @@ struct JobCompare {
 };
 
 // Using multiset instead of regular set, because we compare the jobs only by `whenExecute`.
-// So if `whenExecute` of two different jobs is the same, the jobs are considered equivalent,
+// So if `whenExecute` of two different jobs is the same, the jobs are considered equikonstent,
 // and set would simply drop one of them.
 typedef std_support::multiset<Job, JobCompare> DelayedJobSet;
 
@@ -514,7 +514,7 @@ class State {
       if (it == futures_.end()) {
         // Caller checks [stateOfFutureUnlocked] first, so this code is reachable
         // only when trying to consume future twice concurrently.
-        ThrowFutureInvalidState();
+        ThrowFutureInkonstidState();
       }
       future = it->second;
     }
@@ -689,7 +689,7 @@ State* theState() {
 
   State* result = new (std_support::kalloc) State();
 
-  State* old = __sync_val_compare_and_swap(&state, nullptr, result);
+  State* old = __sync_konst_compare_and_swap(&state, nullptr, result);
   if (old != nullptr) {
     std_support::kdelete(result);
     // Someone else inited this data.

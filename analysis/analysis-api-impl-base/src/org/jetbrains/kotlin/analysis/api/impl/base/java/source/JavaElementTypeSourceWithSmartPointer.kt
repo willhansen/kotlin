@@ -11,12 +11,12 @@ import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementSourceFac
 import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementTypeSource
 
 internal class JavaElementTypeSourceWithSmartPointer<TYPE : PsiType>(
-    private val pointer: SmartTypePointer,
-    override val factory: JavaElementSourceFactory,
+    private konst pointer: SmartTypePointer,
+    override konst factory: JavaElementSourceFactory,
 ) : JavaElementTypeSource<TYPE>() {
-    override val type: TYPE
+    override konst type: TYPE
         get() {
-            val type = pointer.type
+            konst type = pointer.type
                 ?: error("Cannot restore a PsiType from $pointer")
 
             @Suppress("UNCHECKED_CAST")

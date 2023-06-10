@@ -18,16 +18,16 @@ import org.jetbrains.kotlin.serialization.SerializerExtensionProtocol
 import org.jetbrains.kotlin.types.ConstantValueKind
 
 open class FirConstDeserializer(
-    val session: FirSession,
-    private val protocol: SerializerExtensionProtocol
+    konst session: FirSession,
+    private konst protocol: SerializerExtensionProtocol
 ) {
-    protected val constantCache = mutableMapOf<CallableId, FirExpression>()
+    protected konst constantCache = mutableMapOf<CallableId, FirExpression>()
 
     open fun loadConstant(propertyProto: ProtoBuf.Property, callableId: CallableId, nameResolver: NameResolver): FirExpression? {
         if (!Flags.HAS_CONSTANT.get(propertyProto.flags)) return null
         constantCache[callableId]?.let { return it }
-        val value = propertyProto.getExtensionOrNull(protocol.compileTimeValue) ?: return null
-        return buildFirConstant(value, null, value.type.name, nameResolver)?.also { constantCache[callableId] = it }
+        konst konstue = propertyProto.getExtensionOrNull(protocol.compileTimeValue) ?: return null
+        return buildFirConstant(konstue, null, konstue.type.name, nameResolver)?.also { constantCache[callableId] = it }
     }
 }
 

@@ -1,6 +1,6 @@
 // !DUMP_CFG
 class A {
-    val s: String = ""
+    konst s: String = ""
 }
 
 fun test_0(list: List<A>) {
@@ -15,7 +15,7 @@ fun test_0(list: List<A>) {
 }
 
 fun test_1(a: A, b: Boolean) {
-    val x: Any
+    konst x: Any
     if (b) {
         x = A()
     } else {
@@ -25,7 +25,7 @@ fun test_1(a: A, b: Boolean) {
 }
 
 fun test_2(a: Any, b: Boolean) {
-    val x: Any
+    konst x: Any
     if (b) {
         //x1
         x = A()
@@ -38,7 +38,7 @@ fun test_2(a: Any, b: Boolean) {
 }
 
 fun test_3(a: Any, b: Boolean) {
-    val x: Any
+    konst x: Any
     if (b) {
         x = A()
     } else {
@@ -49,7 +49,7 @@ fun test_3(a: Any, b: Boolean) {
 }
 
 fun test_4(a: Any, b: Boolean) {
-    val x: Any
+    konst x: Any
     if (b) {
         x = a
     } else {
@@ -61,7 +61,7 @@ fun test_4(a: Any, b: Boolean) {
 }
 
 fun test_5(a: Any, b: Boolean) {
-    val x: Any
+    konst x: Any
     if (b) {
         x = a
     } else {
@@ -73,15 +73,15 @@ fun test_5(a: Any, b: Boolean) {
 }
 
 fun test_6(a: A) {
-    val x: Any
+    konst x: Any
     x = a
     x.s
 }
 
 fun test_7() {
-    val z: String? = null
+    konst z: String? = null
     var y : String? = z
-    val x: String? = y
+    konst x: String? = y
 
     if (x != null) {
         x.length // OK
@@ -121,9 +121,9 @@ fun test_7() {
 }
 
 fun test_8() {
-    val z: String? = null
+    konst z: String? = null
     var y = z
-    val x = y
+    konst x = y
 
     if (x != null) {
         x.length // OK
@@ -164,7 +164,7 @@ fun test_8() {
 
 fun test_9() {
     var a: String? = null
-    val b: String?
+    konst b: String?
     if (a != null) {
         b = a
     } else {

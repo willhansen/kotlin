@@ -17,9 +17,9 @@ import org.w3c.dom.events.*
  * Exposes the JavaScript [MediaSource](https://developer.mozilla.org/en/docs/Web/API/MediaSource) to Kotlin
  */
 public external open class MediaSource : EventTarget, MediaProvider {
-    open val sourceBuffers: SourceBufferList
-    open val activeSourceBuffers: SourceBufferList
-    open val readyState: ReadyState
+    open konst sourceBuffers: SourceBufferList
+    open konst activeSourceBuffers: SourceBufferList
+    open konst readyState: ReadyState
     var duration: Double
     var onsourceopen: ((Event) -> dynamic)?
     var onsourceended: ((Event) -> dynamic)?
@@ -40,12 +40,12 @@ public external open class MediaSource : EventTarget, MediaProvider {
  */
 public external abstract class SourceBuffer : EventTarget {
     open var mode: AppendMode
-    open val updating: Boolean
-    open val buffered: TimeRanges
+    open konst updating: Boolean
+    open konst buffered: TimeRanges
     open var timestampOffset: Double
-    open val audioTracks: AudioTrackList
-    open val videoTracks: VideoTrackList
-    open val textTracks: TextTrackList
+    open konst audioTracks: AudioTrackList
+    open konst videoTracks: VideoTrackList
+    open konst textTracks: TextTrackList
     open var appendWindowStart: Double
     open var appendWindowEnd: Double
     open var onupdatestart: ((Event) -> dynamic)?
@@ -62,7 +62,7 @@ public external abstract class SourceBuffer : EventTarget {
  * Exposes the JavaScript [SourceBufferList](https://developer.mozilla.org/en/docs/Web/API/SourceBufferList) to Kotlin
  */
 public external abstract class SourceBufferList : EventTarget {
-    open val length: Int
+    open konst length: Int
     open var onaddsourcebuffer: ((Event) -> dynamic)?
     open var onremovesourcebuffer: ((Event) -> dynamic)?
 }
@@ -78,11 +78,11 @@ public external interface ReadyState {
     companion object
 }
 
-public inline val ReadyState.Companion.CLOSED: ReadyState get() = "closed".asDynamic().unsafeCast<ReadyState>()
+public inline konst ReadyState.Companion.CLOSED: ReadyState get() = "closed".asDynamic().unsafeCast<ReadyState>()
 
-public inline val ReadyState.Companion.OPEN: ReadyState get() = "open".asDynamic().unsafeCast<ReadyState>()
+public inline konst ReadyState.Companion.OPEN: ReadyState get() = "open".asDynamic().unsafeCast<ReadyState>()
 
-public inline val ReadyState.Companion.ENDED: ReadyState get() = "ended".asDynamic().unsafeCast<ReadyState>()
+public inline konst ReadyState.Companion.ENDED: ReadyState get() = "ended".asDynamic().unsafeCast<ReadyState>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -91,9 +91,9 @@ public external interface EndOfStreamError {
     companion object
 }
 
-public inline val EndOfStreamError.Companion.NETWORK: EndOfStreamError get() = "network".asDynamic().unsafeCast<EndOfStreamError>()
+public inline konst EndOfStreamError.Companion.NETWORK: EndOfStreamError get() = "network".asDynamic().unsafeCast<EndOfStreamError>()
 
-public inline val EndOfStreamError.Companion.DECODE: EndOfStreamError get() = "decode".asDynamic().unsafeCast<EndOfStreamError>()
+public inline konst EndOfStreamError.Companion.DECODE: EndOfStreamError get() = "decode".asDynamic().unsafeCast<EndOfStreamError>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -102,6 +102,6 @@ public external interface AppendMode {
     companion object
 }
 
-public inline val AppendMode.Companion.SEGMENTS: AppendMode get() = "segments".asDynamic().unsafeCast<AppendMode>()
+public inline konst AppendMode.Companion.SEGMENTS: AppendMode get() = "segments".asDynamic().unsafeCast<AppendMode>()
 
-public inline val AppendMode.Companion.SEQUENCE: AppendMode get() = "sequence".asDynamic().unsafeCast<AppendMode>()
+public inline konst AppendMode.Companion.SEQUENCE: AppendMode get() = "sequence".asDynamic().unsafeCast<AppendMode>()

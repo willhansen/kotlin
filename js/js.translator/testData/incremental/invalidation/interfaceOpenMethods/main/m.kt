@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val expected = when (stepId) {
+    konst expected = when (stepId) {
         0 -> 10
         1 -> 13
         2 -> 16
@@ -8,7 +8,7 @@ fun box(stepId: Int): String {
         else -> return "Unknown"
     }
 
-    val x = test()
+    konst x = test()
     if (expected != x) {
         return "Fail $expected != $x"
     }

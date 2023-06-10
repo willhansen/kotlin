@@ -5,7 +5,7 @@ interface Foo
 
 class Bar(f: Foo) : Foo by f {
     // Backing field is renamed to `$$delegate_0$1` in JVM_IR
-    val `$$delegate_0`: Foo? = null
+    konst `$$delegate_0`: Foo? = null
 }
 
 class Bar2(f: Foo) :

@@ -15,7 +15,7 @@ fun box(): String {
 
     builder {
         var shiftSlot: String = ""
-        // Initialize var with String value
+        // Initialize var with String konstue
         try {
             var i: String = "abc"
             i = "123"

@@ -1,8 +1,8 @@
 fun box(): String {
-    val x: String
+    konst x: String
     x = "OK"
     {
-        val y = x
+        konst y = x
     }.let { it() }
     return x
 }

@@ -22,5 +22,5 @@ fun box(): String {
 package test
 
 open class A {
-    @JvmField protected val s = "OK";
+    @JvmField protected konst s = "OK";
 }

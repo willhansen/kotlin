@@ -26,4 +26,4 @@ fun box(): String {
     return "OK"
 }
 
-val isJS = 1 as Any is Double
+konst isJS = 1 as Any is Double

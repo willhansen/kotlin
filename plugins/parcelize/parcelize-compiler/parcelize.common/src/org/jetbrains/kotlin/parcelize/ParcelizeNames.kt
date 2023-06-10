@@ -12,57 +12,57 @@ import org.jetbrains.kotlin.name.Name
 object ParcelizeNames {
     // -------------------- Packages --------------------
 
-    val DEPRECATED_RUNTIME_PACKAGE = FqName("kotlinx.android.parcel")
+    konst DEPRECATED_RUNTIME_PACKAGE = FqName("kotlinx.android.parcel")
 
-    private val PACKAGES_FQ_NAMES = listOf(
+    private konst PACKAGES_FQ_NAMES = listOf(
         FqName("kotlinx.parcelize"),
         DEPRECATED_RUNTIME_PACKAGE
     )
 
     // -------------------- Class ids --------------------
 
-    val PARCELIZE_ID = ClassId(FqName("kotlinx.parcelize"), Name.identifier("Parcelize"))
-    val OLD_PARCELIZE_ID = ClassId(FqName("kotlinx.android.parcel"), Name.identifier("Parcelize"))
-    val PARCEL_ID = ClassId(FqName("android.os"), Name.identifier("Parcel"))
-    val PARCELABLE_ID = ClassId(FqName("android.os"), Name.identifier("Parcelable"))
-    val CREATOR_ID = PARCELABLE_ID.createNestedClassId(Name.identifier("Creator"))
-    val PARCELER_ID = ClassId(FqName("kotlinx.parcelize"), Name.identifier("Parceler"))
-    val OLD_PARCELER_ID = ClassId(FqName("kotlinx.android.parcel"), Name.identifier("Parceler"))
+    konst PARCELIZE_ID = ClassId(FqName("kotlinx.parcelize"), Name.identifier("Parcelize"))
+    konst OLD_PARCELIZE_ID = ClassId(FqName("kotlinx.android.parcel"), Name.identifier("Parcelize"))
+    konst PARCEL_ID = ClassId(FqName("android.os"), Name.identifier("Parcel"))
+    konst PARCELABLE_ID = ClassId(FqName("android.os"), Name.identifier("Parcelable"))
+    konst CREATOR_ID = PARCELABLE_ID.createNestedClassId(Name.identifier("Creator"))
+    konst PARCELER_ID = ClassId(FqName("kotlinx.parcelize"), Name.identifier("Parceler"))
+    konst OLD_PARCELER_ID = ClassId(FqName("kotlinx.android.parcel"), Name.identifier("Parceler"))
 
-    val TYPE_PARCELER_CLASS_IDS = createClassIds("TypeParceler")
-    val WRITE_WITH_CLASS_IDS = createClassIds("WriteWith")
-    val IGNORED_ON_PARCEL_CLASS_IDS = createClassIds("IgnoredOnParcel")
-    val PARCELER_CLASS_IDS = createClassIds("Parceler")
-    val PARCELIZE_CLASS_CLASS_IDS = createClassIds("Parcelize")
-    val RAW_VALUE_ANNOTATION_CLASS_IDS = createClassIds("RawValue")
+    konst TYPE_PARCELER_CLASS_IDS = createClassIds("TypeParceler")
+    konst WRITE_WITH_CLASS_IDS = createClassIds("WriteWith")
+    konst IGNORED_ON_PARCEL_CLASS_IDS = createClassIds("IgnoredOnParcel")
+    konst PARCELER_CLASS_IDS = createClassIds("Parceler")
+    konst PARCELIZE_CLASS_CLASS_IDS = createClassIds("Parcelize")
+    konst RAW_VALUE_ANNOTATION_CLASS_IDS = createClassIds("RawValue")
 
     // -------------------- FQNs --------------------
 
-    val PARCELIZE_FQN = PARCELIZE_ID.asSingleFqName()
-    val OLD_PARCELIZE_FQN = OLD_PARCELIZE_ID.asSingleFqName()
-    val PARCELABLE_FQN = PARCELABLE_ID.asSingleFqName()
-    val CREATOR_FQN = CREATOR_ID.asSingleFqName()
+    konst PARCELIZE_FQN = PARCELIZE_ID.asSingleFqName()
+    konst OLD_PARCELIZE_FQN = OLD_PARCELIZE_ID.asSingleFqName()
+    konst PARCELABLE_FQN = PARCELABLE_ID.asSingleFqName()
+    konst CREATOR_FQN = CREATOR_ID.asSingleFqName()
 
-    val TYPE_PARCELER_FQ_NAMES = TYPE_PARCELER_CLASS_IDS.fqNames()
-    val WRITE_WITH_FQ_NAMES = WRITE_WITH_CLASS_IDS.fqNames()
-    val IGNORED_ON_PARCEL_FQ_NAMES = IGNORED_ON_PARCEL_CLASS_IDS.fqNames()
-    val PARCELIZE_CLASS_FQ_NAMES: List<FqName> = PARCELIZE_CLASS_CLASS_IDS.fqNames()
-    val RAW_VALUE_ANNOTATION_FQ_NAMES = RAW_VALUE_ANNOTATION_CLASS_IDS.fqNames()
+    konst TYPE_PARCELER_FQ_NAMES = TYPE_PARCELER_CLASS_IDS.fqNames()
+    konst WRITE_WITH_FQ_NAMES = WRITE_WITH_CLASS_IDS.fqNames()
+    konst IGNORED_ON_PARCEL_FQ_NAMES = IGNORED_ON_PARCEL_CLASS_IDS.fqNames()
+    konst PARCELIZE_CLASS_FQ_NAMES: List<FqName> = PARCELIZE_CLASS_CLASS_IDS.fqNames()
+    konst RAW_VALUE_ANNOTATION_FQ_NAMES = RAW_VALUE_ANNOTATION_CLASS_IDS.fqNames()
 
-    val PARCELER_FQN = PARCELER_ID.asSingleFqName()
-    val OLD_PARCELER_FQN = OLD_PARCELER_ID.asSingleFqName()
+    konst PARCELER_FQN = PARCELER_ID.asSingleFqName()
+    konst OLD_PARCELER_FQN = OLD_PARCELER_ID.asSingleFqName()
 
     // -------------------- Names --------------------
 
-    val DESCRIBE_CONTENTS_NAME = Name.identifier("describeContents")
-    val WRITE_TO_PARCEL_NAME = Name.identifier("writeToParcel")
-    val NEW_ARRAY_NAME = Name.identifier("newArray")
-    val CREATE_FROM_PARCEL_NAME = Name.identifier("createFromParcel")
+    konst DESCRIBE_CONTENTS_NAME = Name.identifier("describeContents")
+    konst WRITE_TO_PARCEL_NAME = Name.identifier("writeToParcel")
+    konst NEW_ARRAY_NAME = Name.identifier("newArray")
+    konst CREATE_FROM_PARCEL_NAME = Name.identifier("createFromParcel")
 
-    val DEST_NAME = Name.identifier("dest")
-    val FLAGS_NAME = Name.identifier("flags")
+    konst DEST_NAME = Name.identifier("dest")
+    konst FLAGS_NAME = Name.identifier("flags")
 
-    val CREATOR_NAME = Name.identifier("CREATOR")
+    konst CREATOR_NAME = Name.identifier("CREATOR")
 
     // -------------------- Utils --------------------
 

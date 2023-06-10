@@ -35,16 +35,16 @@ import org.jetbrains.kotlin.resolve.inline.InlineUtil
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedCallableMemberDescriptor
 
-class InlinePlatformCompatibilityChecker(val jvmTarget: JvmTarget, languageVersionSettings: LanguageVersionSettings) : CallChecker {
+class InlinePlatformCompatibilityChecker(konst jvmTarget: JvmTarget, languageVersionSettings: LanguageVersionSettings) : CallChecker {
 
-    private val properError = languageVersionSettings.supportsFeature(LanguageFeature.ProperInlineFromHigherPlatformDiagnostic)
+    private konst properError = languageVersionSettings.supportsFeature(LanguageFeature.ProperInlineFromHigherPlatformDiagnostic)
 
-    private val doCheck = doCheck()
+    private konst doCheck = doCheck()
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (!doCheck) return
 
-        val resultingDescriptor = resolvedCall.resultingDescriptor as? CallableMemberDescriptor ?: return
+        konst resultingDescriptor = resolvedCall.resultingDescriptor as? CallableMemberDescriptor ?: return
         if (!InlineUtil.isInline(resultingDescriptor)) {
             if (resultingDescriptor is PropertyDescriptor && InlineUtil.isInline(resultingDescriptor.getter)) {
                 //TODO: we should distinguish setter usage from getter one, now we could report wrong diagnostic on non-inline setter
@@ -60,11 +60,11 @@ class InlinePlatformCompatibilityChecker(val jvmTarget: JvmTarget, languageVersi
             }
         }
 
-        val propertyOrFun = DescriptorUtils.getDirectMember(resultingDescriptor)
+        konst propertyOrFun = DescriptorUtils.getDirectMember(resultingDescriptor)
 
-        val compilingBytecodeVersion = jvmTarget.majorVersion
+        konst compilingBytecodeVersion = jvmTarget.majorVersion
         if (!properError) {
-            val inliningBytecodeVersion = getBytecodeVersionIfDeserializedDescriptor(propertyOrFun, false)
+            konst inliningBytecodeVersion = getBytecodeVersionIfDeserializedDescriptor(propertyOrFun, false)
             if (inliningBytecodeVersion != null && compilingBytecodeVersion < inliningBytecodeVersion) {
                 context.trace.report(
                     ErrorsJvm.INLINE_FROM_HIGHER_PLATFORM.on(
@@ -77,7 +77,7 @@ class InlinePlatformCompatibilityChecker(val jvmTarget: JvmTarget, languageVersi
             }
         }
 
-        val inliningBytecodeVersionProper = getBytecodeVersionIfDeserializedDescriptor(propertyOrFun, true) ?: return
+        konst inliningBytecodeVersionProper = getBytecodeVersionIfDeserializedDescriptor(propertyOrFun, true) ?: return
 
         if (compilingBytecodeVersion < inliningBytecodeVersionProper) {
             if (properError) {
@@ -111,12 +111,12 @@ class InlinePlatformCompatibilityChecker(val jvmTarget: JvmTarget, languageVersi
         ): Int? {
             if (funOrProperty !is DeserializedCallableMemberDescriptor) return null
 
-            val realDeclarationIfFound =
+            konst realDeclarationIfFound =
                 if (useConcreteSuperImplementation) funOrProperty.getConcreteDeclarationForInline() else funOrProperty
-            val containingDeclaration = realDeclarationIfFound.containingDeclaration as ClassOrPackageFragmentDescriptor
+            konst containingDeclaration = realDeclarationIfFound.containingDeclaration as ClassOrPackageFragmentDescriptor
 
-            val source = containingDeclaration.source
-            val binaryClass =
+            konst source = containingDeclaration.source
+            konst binaryClass =
                 when (source) {
                     is KotlinJvmBinarySourceElement -> source.binaryClass
                     is KotlinJvmBinaryPackageSourceElement -> source.getContainingBinaryClass(funOrProperty)
@@ -128,8 +128,8 @@ class InlinePlatformCompatibilityChecker(val jvmTarget: JvmTarget, languageVersi
 
         private fun CallableMemberDescriptor.getConcreteDeclarationForInline(): CallableMemberDescriptor {
             if (!this.kind.isReal) {
-                val superImplementation = overriddenDescriptors.firstOrNull {
-                    val containingDeclaration = it.containingDeclaration
+                konst superImplementation = overriddenDescriptors.firstOrNull {
+                    konst containingDeclaration = it.containingDeclaration
                     !DescriptorUtils.isInterface(containingDeclaration) && !DescriptorUtils.isAnnotationClass(containingDeclaration)
 
                 }

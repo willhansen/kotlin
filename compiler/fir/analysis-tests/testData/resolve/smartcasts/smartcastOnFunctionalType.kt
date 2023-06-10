@@ -1,6 +1,6 @@
 // ISSUE: KT-4113
 
-class MyClass(val provider: (() -> String)?) {
+class MyClass(konst provider: (() -> String)?) {
     fun foo() {
         if (provider != null)
         // NI: [UNSAFE_CALL] Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type (() -> String)?
@@ -13,7 +13,7 @@ class MyClass(val provider: (() -> String)?) {
 }
 
 class Test {
-    val nullableCheckBox: B? = null
+    konst nullableCheckBox: B? = null
     fun fail() {
         if (nullableCheckBox != null) {
             run { nullableCheckBox() }

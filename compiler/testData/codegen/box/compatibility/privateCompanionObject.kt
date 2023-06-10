@@ -1,6 +1,6 @@
 class Test {
     private companion object {
-        val res = "OK"
+        konst res = "OK"
     }
     fun res() = res
 }

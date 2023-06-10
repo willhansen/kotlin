@@ -13,13 +13,13 @@ internal object EmptyIterator : ListIterator<Nothing> {
 }
 
 internal object EmptyList : List<Nothing>, Serializable, RandomAccess {
-    private const val serialVersionUID: Long = -7390468764508069838L
+    private const konst serialVersionUID: Long = -7390468764508069838L
 
     override fun equals(other: Any?): Boolean = other is List<*> && other.isEmpty()
     override fun hashCode(): Int = 1
     override fun toString(): String = "[]"
 
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(element: Nothing): Boolean = false
     override fun containsAll(elements: Collection<Nothing>): Boolean = elements.isEmpty()
@@ -62,15 +62,15 @@ public fun <T : Any> listOfNotNull(element: T?): List<T> = if (element != null) 
 public inline fun <T> List(size: Int, init: (index: Int) -> T): List<T> = MutableList(size, init)
 
 public inline fun <T> MutableList(size: Int, init: (index: Int) -> T): MutableList<T> {
-    val list = ArrayList<T>(size)
+    konst list = ArrayList<T>(size)
     repeat(size) { index -> list.add(init(index)) }
     return list
 }
 
-public val Collection<*>.indices: IntRange
+public konst Collection<*>.indices: IntRange
     get() = 0..size - 1
 
-public val <T> List<T>.lastIndex: Int
+public konst <T> List<T>.lastIndex: Int
     get() = this.size - 1
 
 public inline fun <T> Collection<T>.isNotEmpty(): Boolean = !isEmpty()
@@ -89,10 +89,10 @@ public fun <T> Iterable<T>.single(): T {
     when (this) {
         is List -> return this.single()
         else -> {
-            val iterator = iterator()
+            konst iterator = iterator()
             if (!iterator.hasNext())
                 throw NoSuchElementException("Collection is empty.")
-            val single = iterator.next()
+            konst single = iterator.next()
             if (iterator.hasNext())
                 throw IllegalArgumentException("Collection has more than one element.")
             return single

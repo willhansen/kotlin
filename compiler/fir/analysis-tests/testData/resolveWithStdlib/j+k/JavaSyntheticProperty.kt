@@ -6,4 +6,4 @@ class JavaClass {
 
 // FILE: test.kt
 
-val x = JavaClass().foo
+konst x = JavaClass().foo

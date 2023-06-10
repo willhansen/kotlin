@@ -11,16 +11,16 @@ node {
     download.set(true)
 }
 
-val deployDir = "$buildDir/deploy_to_npm"
-val templateDir = "$projectDir/templates"
-val kotlincDir = "$projectDir/../../dist/kotlinc"
+konst deployDir = "$buildDir/deploy_to_npm"
+konst templateDir = "$projectDir/templates"
+konst kotlincDir = "$projectDir/../../dist/kotlinc"
 
 fun getProperty(name: String, default: String = "") = findProperty(name)?.toString() ?: default
 
-val deployVersion = getProperty("kotlin.deploy.version", "0.0.0")
-val deployTag = getProperty("kotlin.deploy.tag", "dev")
-val authToken = getProperty("kotlin.npmjs.auth.token")
-val dryRun = getProperty("dryRun", "false") // Pack instead of publish
+konst deployVersion = getProperty("kotlin.deploy.version", "0.0.0")
+konst deployTag = getProperty("kotlin.deploy.tag", "dev")
+konst authToken = getProperty("kotlin.npmjs.auth.token")
+konst dryRun = getProperty("dryRun", "false") // Pack instead of publish
 
 fun Project.createCopyTemplateTask(templateName: String): Copy {
   return task<Copy>("copy-$templateName-template") {
@@ -46,10 +46,10 @@ fun Project.createCopyLibraryFilesTask(libraryName: String, fromJar: String): Co
 
 fun Project.createPublishToNpmTask(templateName: String): NpmTask {
   return task<NpmTask>("publish-$templateName-to-npm") {
-    val deployDir = File("$deployDir/$templateName")
+    konst deployDir = File("$deployDir/$templateName")
     workingDir.set(deployDir)
 
-    val deployArgs = listOf("publish", "--//registry.npmjs.org/:_authToken=$authToken", "--tag=$deployTag")
+    konst deployArgs = listOf("publish", "--//registry.npmjs.org/:_authToken=$authToken", "--tag=$deployTag")
     if (dryRun == "true") {
       println("$deployDir \$ npm arguments: $deployArgs");
       args.set(listOf("pack"))
@@ -67,13 +67,13 @@ fun sequential(first: Task, vararg tasks: Task): Task {
   return tasks.last()
 }
 
-val publishKotlinJs = sequential(
+konst publishKotlinJs = sequential(
         createCopyTemplateTask("kotlin"),
         createCopyLibraryFilesTask("kotlin", "$kotlincDir/lib/kotlin-stdlib-js.jar"),
         createPublishToNpmTask("kotlin")
 )
 
-val publishKotlinCompiler = sequential(
+konst publishKotlinCompiler = sequential(
   createCopyTemplateTask("kotlin-compiler"),
   task<Copy>("copy-kotlin-compiler") {
     from(kotlincDir)
@@ -85,7 +85,7 @@ val publishKotlinCompiler = sequential(
   createPublishToNpmTask("kotlin-compiler")
 )
 
-val publishKotlinTest = sequential(
+konst publishKotlinTest = sequential(
         createCopyTemplateTask("kotlin-test"),
         createCopyLibraryFilesTask("kotlin-test", "$kotlincDir/lib/kotlin-test-js.jar"),
         createPublishToNpmTask("kotlin-test")

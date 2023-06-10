@@ -26,11 +26,11 @@ import org.jetbrains.kotlin.types.expressions.OperatorConventions
 class KtOperationReferenceExpression(node: ASTNode) : KtSimpleNameExpressionImpl(node) {
     override fun getReferencedNameElement() = findChildByType<PsiElement?>(KotlinExpressionParsing.ALL_OPERATIONS) ?: this
 
-    val operationSignTokenType: KtSingleValueToken?
+    konst operationSignTokenType: KtSingleValueToken?
         get() = (firstChild as? TreeElement)?.elementType as? KtSingleValueToken
 
     fun isConventionOperator(): Boolean {
-        val tokenType = operationSignTokenType ?: return false
+        konst tokenType = operationSignTokenType ?: return false
         return OperatorConventions.getNameForOperationSymbol(tokenType) != null
     }
 }

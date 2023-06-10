@@ -4,8 +4,8 @@
 
 
 fun box(): String {
-    val list1 = ArrayList<Int>()
-    val range1 = (3 downTo 5).reversed()
+    konst list1 = ArrayList<Int>()
+    konst range1 = (3 downTo 5).reversed()
     for (i in range1) {
         list1.add(i)
         if (list1.size > 23) break
@@ -14,8 +14,8 @@ fun box(): String {
         return "Wrong elements for (3 downTo 5).reversed(): $list1"
     }
 
-    val list2 = ArrayList<Int>()
-    val range2 = (3.toByte() downTo 5.toByte()).reversed()
+    konst list2 = ArrayList<Int>()
+    konst range2 = (3.toByte() downTo 5.toByte()).reversed()
     for (i in range2) {
         list2.add(i)
         if (list2.size > 23) break
@@ -24,8 +24,8 @@ fun box(): String {
         return "Wrong elements for (3.toByte() downTo 5.toByte()).reversed(): $list2"
     }
 
-    val list3 = ArrayList<Int>()
-    val range3 = (3.toShort() downTo 5.toShort()).reversed()
+    konst list3 = ArrayList<Int>()
+    konst range3 = (3.toShort() downTo 5.toShort()).reversed()
     for (i in range3) {
         list3.add(i)
         if (list3.size > 23) break
@@ -34,8 +34,8 @@ fun box(): String {
         return "Wrong elements for (3.toShort() downTo 5.toShort()).reversed(): $list3"
     }
 
-    val list4 = ArrayList<Long>()
-    val range4 = (3L downTo 5L).reversed()
+    konst list4 = ArrayList<Long>()
+    konst range4 = (3L downTo 5L).reversed()
     for (i in range4) {
         list4.add(i)
         if (list4.size > 23) break
@@ -44,8 +44,8 @@ fun box(): String {
         return "Wrong elements for (3L downTo 5L).reversed(): $list4"
     }
 
-    val list5 = ArrayList<Char>()
-    val range5 = ('a' downTo 'c').reversed()
+    konst list5 = ArrayList<Char>()
+    konst range5 = ('a' downTo 'c').reversed()
     for (i in range5) {
         list5.add(i)
         if (list5.size > 23) break

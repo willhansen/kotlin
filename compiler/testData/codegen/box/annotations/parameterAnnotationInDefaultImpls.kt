@@ -5,19 +5,19 @@
 
 package test
 
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)
 
 interface Test {
     fun foo(@Anno("OK") a: String) = "123"
 }
 
 fun box(): String {
-    val testMethod = Class.forName("test.Test\$DefaultImpls").declaredMethods.single()
-    //return (::test.parameters.single().annotations.single() as Simple).value
-    val receiverAnnotations = (testMethod.parameters[0]).annotations
+    konst testMethod = Class.forName("test.Test\$DefaultImpls").declaredMethods.single()
+    //return (::test.parameters.single().annotations.single() as Simple).konstue
+    konst receiverAnnotations = (testMethod.parameters[0]).annotations
     if (receiverAnnotations.isNotEmpty()) return "fail: receiver parameter should not have any annotations, but: ${receiverAnnotations.joinToString()}"
 
-    val value2 = ((testMethod.parameters[1]).annotations.single() as Anno).value
+    konst konstue2 = ((testMethod.parameters[1]).annotations.single() as Anno).konstue
 
-    return value2
+    return konstue2
 }

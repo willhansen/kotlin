@@ -61,7 +61,7 @@ fun String.parseCharacter(): CharacterWithDiagnostic {
     if (length < 2 || this[0] != '\'' || this[length - 1] != '\'') {
         return CharacterWithDiagnostic(DiagnosticKind.IncorrectCharacterLiteral)
     }
-    val text = substring(1, length - 1) // now there is no quotes
+    konst text = substring(1, length - 1) // now there is no quotes
 
     if (text.isEmpty()) {
         return CharacterWithDiagnostic(DiagnosticKind.EmptyCharacterLiteral)
@@ -85,7 +85,7 @@ fun escapedStringToCharacter(text: String): CharacterWithDiagnostic {
     }
 
     // Escape
-    val escape = text.substring(1) // strip the slash
+    konst escape = text.substring(1) // strip the slash
     when (escape.length) {
         0 -> {
             // bare slash
@@ -98,7 +98,7 @@ fun escapedStringToCharacter(text: String): CharacterWithDiagnostic {
         5 -> {
             // unicode escape
             if (escape[0] == 'u') {
-                val intValue = escape.substring(1).toIntOrNull(16)
+                konst intValue = escape.substring(1).toIntOrNull(16)
                 // If error occurs it will be reported below
                 if (intValue != null) {
                     return CharacterWithDiagnostic(intValue.toChar())
@@ -123,17 +123,17 @@ internal fun translateEscape(c: Char): CharacterWithDiagnostic =
     }
 
 class CharacterWithDiagnostic {
-    private val diagnostic: DiagnosticKind?
-    val value: Char?
+    private konst diagnostic: DiagnosticKind?
+    konst konstue: Char?
 
     constructor(diagnostic: DiagnosticKind) {
         this.diagnostic = diagnostic
-        this.value = null
+        this.konstue = null
     }
 
-    constructor(value: Char) {
+    constructor(konstue: Char) {
         this.diagnostic = null
-        this.value = value
+        this.konstue = konstue
     }
 
     fun getDiagnostic(): DiagnosticKind? {
@@ -203,7 +203,7 @@ fun FirExpression.generateContainsOperation(
     baseSource: KtSourceElement?,
     operationReferenceSource: KtSourceElement?
 ): FirFunctionCall {
-    val containsCall = createConventionCall(operationReferenceSource, baseSource, argument, OperatorNameConventions.CONTAINS)
+    konst containsCall = createConventionCall(operationReferenceSource, baseSource, argument, OperatorNameConventions.CONTAINS)
     if (!inverted) return containsCall
 
     return buildFunctionCall {
@@ -227,14 +227,14 @@ fun FirExpression.generateComparisonExpression(
         "$operatorToken is not in ${OperatorConventions.COMPARISON_OPERATIONS}"
     }
 
-    val compareToCall = createConventionCall(
+    konst compareToCall = createConventionCall(
         operationReferenceSource,
         baseSource?.fakeElement(KtFakeSourceElementKind.GeneratedComparisonExpression),
         argument,
         OperatorNameConventions.COMPARE_TO
     )
 
-    val firOperation = when (operatorToken) {
+    konst firOperation = when (operatorToken) {
         KtTokens.LT -> FirOperation.LT
         KtTokens.GT -> FirOperation.GT
         KtTokens.LTEQ -> FirOperation.LT_EQ
@@ -297,14 +297,14 @@ fun generateResolvedAccessExpression(source: KtSourceElement?, variable: FirVari
         }
     }
 
-val FirClassBuilder.ownerRegularOrAnonymousObjectSymbol
+konst FirClassBuilder.ownerRegularOrAnonymousObjectSymbol
     get() = when (this) {
         is FirAnonymousObjectBuilder -> symbol
         is FirRegularClassBuilder -> symbol
         else -> null
     }
 
-val FirClassBuilder.ownerRegularClassTypeParametersCount
+konst FirClassBuilder.ownerRegularClassTypeParametersCount
     get() = if (this is FirRegularClassBuilder) typeParameters.size else null
 
 fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
@@ -315,12 +315,12 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
     isExtension: Boolean,
 ) {
     if (delegateBuilder == null) return
-    val delegateFieldSymbol = FirDelegateFieldSymbol(symbol.callableId).also {
+    konst delegateFieldSymbol = FirDelegateFieldSymbol(symbol.callableId).also {
         this.delegateFieldSymbol = it
     }
 
-    val isMember = ownerRegularOrAnonymousObjectSymbol != null
-    val fakeSource = delegateBuilder.source?.fakeElement(KtFakeSourceElementKind.DelegatedPropertyAccessor)
+    konst isMember = ownerRegularOrAnonymousObjectSymbol != null
+    konst fakeSource = delegateBuilder.source?.fakeElement(KtFakeSourceElementKind.DelegatedPropertyAccessor)
 
     /*
      * If we have delegation with provide delegate then we generate call like
@@ -330,7 +330,7 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
      *  `this` is reference to closest receiver (extension, then dispatch)
      *
      * So for top-level extension properties we should generate
-     *   val A.prop by delegateExpression.provideDelegate(null, ::prop)
+     *   konst A.prop by delegateExpression.provideDelegate(null, ::prop)
      *      get() = delegate.getValue(this@prop, ::prop)
      *
      * And for this case we can pass isForDelegateProviderCall to this reference
@@ -366,7 +366,7 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
         }
     }
 
-    val isVar = this@generateAccessorsByDelegate.isVar
+    konst isVar = this@generateAccessorsByDelegate.isVar
     fun propertyRef() = buildCallableReferenceAccess {
         source = fakeSource
         calleeReference = buildResolvedNamedReference {
@@ -414,9 +414,9 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
     }
     delegate = delegateBuilder.build()
     if (getter == null || getter is FirDefaultPropertyAccessor) {
-        val annotations = getter?.annotations
-        val returnTarget = FirFunctionTarget(null, isLambda = false)
-        val getterStatus = getter?.status
+        konst annotations = getter?.annotations
+        konst returnTarget = FirFunctionTarget(null, isLambda = false)
+        konst getterStatus = getter?.status
         getter = buildPropertyAccessor {
             this.source = fakeSource
             this.moduleData = moduleData
@@ -453,9 +453,9 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
         }
     }
     if (isVar && (setter == null || setter is FirDefaultPropertyAccessor)) {
-        val annotations = setter?.annotations
-        val parameterAnnotations = setter?.valueParameters?.firstOrNull()?.annotations
-        val setterStatus = setter?.status
+        konst annotations = setter?.annotations
+        konst parameterAnnotations = setter?.konstueParameters?.firstOrNull()?.annotations
+        konst setterStatus = setter?.status
         setter = buildPropertyAccessor {
             this.source = fakeSource
             this.moduleData = moduleData
@@ -466,7 +466,7 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
                 isInline = setterStatus?.isInline ?: isInline
             }
             symbol = FirPropertyAccessorSymbol()
-            val parameter = buildValueParameter {
+            konst parameter = buildValueParameter {
                 source = fakeSource
                 containingFunctionSymbol = this@buildPropertyAccessor.symbol
                 this.moduleData = moduleData
@@ -481,7 +481,7 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
                     this.annotations.addAll(parameterAnnotations)
                 }
             }
-            valueParameters += parameter
+            konstueParameters += parameter
             body = FirSingleExpressionBlock(
                 buildFunctionCall {
                     source = fakeSource
@@ -516,7 +516,7 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
 
 fun processLegacyContractDescription(block: FirBlock): FirContractDescription? {
     if (block.isContractPresentFirCheck()) {
-        val contractCall = block.replaceFirstStatement<FirFunctionCall> { FirContractCallBlock(it) }
+        konst contractCall = block.replaceFirstStatement<FirFunctionCall> { FirContractCallBlock(it) }
         return contractCall.toLegacyRawContractDescription()
     }
 
@@ -531,7 +531,7 @@ fun FirFunctionCall.toLegacyRawContractDescription(): FirLegacyRawContractDescri
 }
 
 fun FirBlock.isContractPresentFirCheck(): Boolean {
-    val firstStatement = statements.firstOrNull() ?: return false
+    konst firstStatement = statements.firstOrNull() ?: return false
     return firstStatement.isContractBlockFirCheck()
 }
 
@@ -539,20 +539,20 @@ fun FirBlock.isContractPresentFirCheck(): Boolean {
 fun FirStatement.isContractBlockFirCheck(): Boolean {
     contract { returns(true) implies (this@isContractBlockFirCheck is FirFunctionCall) }
 
-    val contractCall = this as? FirFunctionCall ?: return false
+    konst contractCall = this as? FirFunctionCall ?: return false
     if (contractCall.calleeReference.name.asString() != "contract") return false
-    val receiver = contractCall.explicitReceiver as? FirQualifiedAccessExpression ?: return true
+    konst receiver = contractCall.explicitReceiver as? FirQualifiedAccessExpression ?: return true
     if (!contractCall.checkReceiver("contracts")) return false
     if (!receiver.checkReceiver("kotlin")) return false
-    val receiverOfReceiver = receiver.explicitReceiver as? FirQualifiedAccessExpression ?: return false
+    konst receiverOfReceiver = receiver.explicitReceiver as? FirQualifiedAccessExpression ?: return false
     if (receiverOfReceiver.explicitReceiver != null) return false
     return true
 }
 
 private fun FirExpression.checkReceiver(name: String?): Boolean {
     if (this !is FirQualifiedAccessExpression) return false
-    val receiver = explicitReceiver as? FirQualifiedAccessExpression ?: return false
-    val receiverName = (receiver.calleeReference as? FirNamedReference)?.name?.asString() ?: return false
+    konst receiver = explicitReceiver as? FirQualifiedAccessExpression ?: return false
+    konst receiverName = (receiver.calleeReference as? FirNamedReference)?.name?.asString() ?: return false
     return receiverName == name
 }
 
@@ -560,7 +560,7 @@ private fun FirExpression.checkReceiver(name: String?): Boolean {
 // receiver = <expr>
 // Returns safe call <expr>?.{ f(...) }
 fun FirQualifiedAccessExpression.createSafeCall(receiver: FirExpression, source: KtSourceElement): FirSafeCallExpression {
-    val checkedSafeCallSubject = buildCheckedSafeCallSubject {
+    konst checkedSafeCallSubject = buildCheckedSafeCallSubject {
         @OptIn(FirContractViolation::class)
         this.originalReceiverRef = FirExpressionRef<FirExpression>().apply {
             bind(receiver)
@@ -584,8 +584,8 @@ fun FirQualifiedAccessExpression.createSafeCall(receiver: FirExpression, source:
 // Other patterns remain unchanged
 fun FirExpression.pullUpSafeCallIfNecessary(): FirExpression {
     if (this !is FirQualifiedAccessExpression) return this
-    val safeCall = explicitReceiver as? FirSafeCallExpression ?: return this
-    val safeCallSelector = safeCall.selector as? FirExpression ?: return this
+    konst safeCall = explicitReceiver as? FirSafeCallExpression ?: return this
+    konst safeCallSelector = safeCall.selector as? FirExpression ?: return this
 
     replaceExplicitReceiver(safeCallSelector)
     safeCall.replaceSelector(this)
@@ -603,12 +603,12 @@ fun List<FirAnnotationCall>.filterUseSiteTarget(target: AnnotationUseSiteTarget)
 
 // TODO: avoid mutability KT-55002
 fun FirTypeRef.convertToReceiverParameter(): FirReceiverParameter {
-    val typeRef = this
+    konst typeRef = this
     return buildReceiverParameter {
         source = typeRef.source?.fakeElement(KtFakeSourceElementKind.ReceiverFromType)
         @Suppress("UNCHECKED_CAST")
         annotations += (typeRef.annotations as List<FirAnnotationCall>).filterUseSiteTarget(AnnotationUseSiteTarget.RECEIVER)
-        val filteredTypeRefAnnotations = typeRef.annotations.filterNot { it.useSiteTarget == AnnotationUseSiteTarget.RECEIVER }
+        konst filteredTypeRefAnnotations = typeRef.annotations.filterNot { it.useSiteTarget == AnnotationUseSiteTarget.RECEIVER }
         if (filteredTypeRefAnnotations.size != typeRef.annotations.size) {
             typeRef.replaceAnnotations(filteredTypeRefAnnotations)
         }
@@ -629,13 +629,13 @@ fun <T> currentDispatchReceiverType(context: Context<T>): ConeClassLikeType? {
     return context.dispatchReceiverTypesStack.lastOrNull()
 }
 
-val CharSequence.isUnderscore: Boolean
+konst CharSequence.isUnderscore: Boolean
     get() = all { it == '_' }
 
 data class CalleeAndReceiver(
-    val reference: FirNamedReference,
-    val receiverExpression: FirExpression? = null,
-    val isImplicitInvoke: Boolean = false
+    konst reference: FirNamedReference,
+    konst receiverExpression: FirExpression? = null,
+    konst isImplicitInvoke: Boolean = false
 )
 
 /**
@@ -644,14 +644,14 @@ data class CalleeAndReceiver(
  * [conditions] should contain at least one element, otherwise it will cause StackOverflow
  */
 fun buildBalancedOrExpressionTree(conditions: List<FirExpression>, lower: Int = 0, upper: Int = conditions.lastIndex): FirExpression {
-    val size = upper - lower + 1
-    val middle = size / 2 + lower
+    konst size = upper - lower + 1
+    konst middle = size / 2 + lower
 
     if (lower == upper) {
         return conditions[middle]
     }
-    val leftNode = buildBalancedOrExpressionTree(conditions, lower, middle - 1)
-    val rightNode = buildBalancedOrExpressionTree(conditions, middle, upper)
+    konst leftNode = buildBalancedOrExpressionTree(conditions, lower, middle - 1)
+    konst rightNode = buildBalancedOrExpressionTree(conditions, middle, upper)
 
     return leftNode.generateLazyLogicalOperation(
         rightNode,

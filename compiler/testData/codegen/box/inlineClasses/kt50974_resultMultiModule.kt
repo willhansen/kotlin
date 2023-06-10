@@ -23,7 +23,7 @@ interface UseCaseWithParameter<P, R> {
 // FILE: main.kt
 
 fun box(): String {
-    val useCase = WhateverUseCase()
+    konst useCase = WhateverUseCase()
     return if (useCase(Result.failure(NumberFormatException())) == Result.success(0)) "OK"
         else "Fail"
 }

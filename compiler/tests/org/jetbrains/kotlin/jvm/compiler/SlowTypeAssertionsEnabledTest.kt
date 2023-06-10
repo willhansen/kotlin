@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.types.checker.intersectTypes
 class SlowTypeAssertionsEnabledTest : KotlinTestWithEnvironmentManagement() {
 
     fun testAssertionsForFlexibleTypesAreOn() {
-        val builtIns = DefaultBuiltIns.Instance
+        konst builtIns = DefaultBuiltIns.Instance
 
         try {
             KotlinTypeFactory.flexibleType(builtIns.intType, builtIns.stringType).arguments
@@ -39,10 +39,10 @@ class SlowTypeAssertionsEnabledTest : KotlinTestWithEnvironmentManagement() {
     }
 
     fun testAssertionsForTypeCheckerAreOn() {
-        val builtIns = DefaultBuiltIns.Instance
+        konst builtIns = DefaultBuiltIns.Instance
 
         try {
-            val superType = intersectTypes(listOf(builtIns.charSequence.defaultType, builtIns.comparable.defaultType))
+            konst superType = intersectTypes(listOf(builtIns.charSequence.defaultType, builtIns.comparable.defaultType))
             AbstractNullabilityChecker.isPossibleSubtype(
                 createClassicTypeCheckerState(isErrorTypeEqualsToAnything = true), builtIns.annotationType,
                 superType

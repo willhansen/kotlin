@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 sealed class FirLoop : FirPureAbstractElement(), FirStatement, FirTargetElement {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract val block: FirBlock
-    abstract val condition: FirExpression
-    abstract val label: FirLabel?
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract konst block: FirBlock
+    abstract konst condition: FirExpression
+    abstract konst label: FirLabel?
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitLoop(this, data)
 

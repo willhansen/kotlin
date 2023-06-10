@@ -4,10 +4,10 @@ pluginManagement {
     }
 }
 
-val hostOs = System.getProperty("os.name")
-val isMacos = hostOs == "Mac OS X"
-val isLinux = hostOs == "Linux"
-val isWindows = hostOs.startsWith("Windows")
+konst hostOs = System.getProperty("os.name")
+konst isMacos = hostOs == "Mac OS X"
+konst isLinux = hostOs == "Linux"
+konst isWindows = hostOs.startsWith("Windows")
 
 /*
  * The following projects are only available for certain platforms.

@@ -15,7 +15,7 @@ public interface J2 extends J {
 
 // FILE: main.kt
 fun main() {
-    J <!TYPE_MISMATCH!>{ <!EXPECTED_PARAMETER_TYPE_MISMATCH!>s: String<!> -> s}<!> // should be prohibited, because SAM value parameter has nullable type
+    J <!TYPE_MISMATCH!>{ <!EXPECTED_PARAMETER_TYPE_MISMATCH!>s: String<!> -> s}<!> // should be prohibited, because SAM konstue parameter has nullable type
     J { "" + it<!UNSAFE_CALL!>.<!>length }
     J { <!NULL_FOR_NONNULL_TYPE, NULL_FOR_NONNULL_TYPE!>null<!> }
     J { <!TYPE_MISMATCH, TYPE_MISMATCH!>it?.length?.toString()<!> }

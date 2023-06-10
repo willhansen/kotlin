@@ -1,7 +1,7 @@
 package
 
 package test {
-    public val NAMED_CONSTANT: kotlin.Int = 1
-    public val prop1: kotlin.Int = 1
-    public val prop2: kotlin.Int = 2
+    public konst NAMED_CONSTANT: kotlin.Int = 1
+    public konst prop1: kotlin.Int = 1
+    public konst prop2: kotlin.Int = 2
 }

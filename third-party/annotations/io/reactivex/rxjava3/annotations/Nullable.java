@@ -22,6 +22,6 @@ import java.lang.annotation.*;
  * Indicates that a field/parameter/variable/type parameter/return type may be null.
  */
 @Documented
-@Target(value = {FIELD, METHOD, PARAMETER, LOCAL_VARIABLE, TYPE_PARAMETER, TYPE_USE})
-@Retention(value = CLASS)
+@Target(konstue = {FIELD, METHOD, PARAMETER, LOCAL_VARIABLE, TYPE_PARAMETER, TYPE_USE})
+@Retention(konstue = CLASS)
 public @interface Nullable { }

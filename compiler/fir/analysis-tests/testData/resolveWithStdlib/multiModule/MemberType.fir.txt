@@ -9,7 +9,7 @@ FILE: common.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val list: R|MyList| = R|<local>/list|
+        public final konst list: R|MyList| = R|<local>/list|
             public get(): R|MyList|
 
     }

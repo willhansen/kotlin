@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.fir.types.impl.ConeClassLikeTypeImpl
 import org.jetbrains.kotlin.types.Variance
 
-sealed class DoubleColonLHS(val type: ConeKotlinType) {
+sealed class DoubleColonLHS(konst type: ConeKotlinType) {
     /**
      * [isObjectQualifier] is true iff the LHS of a callable reference is a qualified expression which references a named object.
      * Note that such LHS can be treated both as a type and as an expression, so special handling may be required.
@@ -30,19 +30,19 @@ sealed class DoubleColonLHS(val type: ConeKotlinType) {
      *     (Obj)::class       // not an object qualifier (can only be treated as an expression, not as a type)
      *     { Obj }()::class   // not an object qualifier
      */
-    class Expression(type: ConeKotlinType, val isObjectQualifier: Boolean) : DoubleColonLHS(type)
+    class Expression(type: ConeKotlinType, konst isObjectQualifier: Boolean) : DoubleColonLHS(type)
 
     class Type(type: ConeKotlinType) : DoubleColonLHS(type)
 }
 
 
 // Returns true if this expression has the form "A<B>" which means it's a type on the LHS of a double colon expression
-internal val FirFunctionCall.hasExplicitValueArguments: Boolean
+internal konst FirFunctionCall.hasExplicitValueArguments: Boolean
     get() = true // TODO: hasExplicitArgumentList || hasExplicitLambdaArguments
 
-class FirDoubleColonExpressionResolver(private val session: FirSession) {
+class FirDoubleColonExpressionResolver(private konst session: FirSession) {
 
-    // Returns true if the expression is not a call expression without value arguments (such as "A<B>") or a qualified expression
+    // Returns true if the expression is not a call expression without konstue arguments (such as "A<B>") or a qualified expression
     // which contains such call expression as one of its parts.
     // In this case it's pointless to attempt to type check an expression on the LHS in "A<B>::class", since "A<B>" certainly means a type.
     private fun FirExpression.canBeConsideredProperExpression(): Boolean {
@@ -66,22 +66,22 @@ class FirDoubleColonExpressionResolver(private val session: FirSession) {
     }
 
     private fun shouldTryResolveLHSAsExpression(expression: FirCallableReferenceAccess): Boolean {
-        val lhs = expression.explicitReceiver ?: return false
+        konst lhs = expression.explicitReceiver ?: return false
         return lhs.canBeConsideredProperExpression() && !expression.hasQuestionMarkAtLHS
     }
 
     private fun shouldTryResolveLHSAsType(expression: FirCallableReferenceAccess): Boolean {
-        val lhs = expression.explicitReceiver
+        konst lhs = expression.explicitReceiver
         return lhs != null && lhs.canBeConsideredProperType()
     }
 
     internal fun resolveDoubleColonLHS(doubleColonExpression: FirCallableReferenceAccess): DoubleColonLHS? {
-        val resultForExpr = tryResolveLHS(doubleColonExpression, this::shouldTryResolveLHSAsExpression, this::resolveExpressionOnLHS)
+        konst resultForExpr = tryResolveLHS(doubleColonExpression, this::shouldTryResolveLHSAsExpression, this::resolveExpressionOnLHS)
         if (resultForExpr != null && !resultForExpr.isObjectQualifier) {
             return resultForExpr
         }
 
-        val resultForType = tryResolveLHS(doubleColonExpression, this::shouldTryResolveLHSAsType) { expression ->
+        konst resultForType = tryResolveLHS(doubleColonExpression, this::shouldTryResolveLHSAsType) { expression ->
             resolveTypeOnLHS(expression)
         }
 
@@ -109,7 +109,7 @@ class FirDoubleColonExpressionResolver(private val session: FirSession) {
         criterion: (FirCallableReferenceAccess) -> Boolean,
         resolve: (FirExpression) -> T?
     ): T? {
-        val expression = doubleColonExpression.explicitReceiver ?: return null
+        konst expression = doubleColonExpression.explicitReceiver ?: return null
 
         if (!criterion(doubleColonExpression)) return null
 
@@ -125,10 +125,10 @@ class FirDoubleColonExpressionResolver(private val session: FirSession) {
     }
 
     private fun resolveExpressionOnLHS(expression: FirExpression): DoubleColonLHS.Expression? {
-        val type = expression.typeRef.coneType
+        konst type = expression.typeRef.coneType
 
         if (expression is FirResolvedQualifier) {
-            val firClass = expression.expandedRegularClassIfAny() ?: return null
+            konst firClass = expression.expandedRegularClassIfAny() ?: return null
             if (firClass.classKind == ClassKind.OBJECT) {
                 return DoubleColonLHS.Expression(type, isObjectQualifier = true)
             }
@@ -141,20 +141,20 @@ class FirDoubleColonExpressionResolver(private val session: FirSession) {
     private fun resolveTypeOnLHS(
         expression: FirExpression
     ): DoubleColonLHS.Type? {
-        val resolvedExpression = expression as? FirResolvedQualifier
+        konst resolvedExpression = expression as? FirResolvedQualifier
             ?: return null
 
-        val firClassLikeDeclaration = resolvedExpression.symbol?.fir
+        konst firClassLikeDeclaration = resolvedExpression.symbol?.fir
             ?: return null
 
-        val type = ConeClassLikeTypeImpl(
+        konst type = ConeClassLikeTypeImpl(
             firClassLikeDeclaration.symbol.toLookupTag(),
             Array(firClassLikeDeclaration.typeParameters.size) { index ->
-                val typeArgument = expression.typeArguments.getOrNull(index)
+                konst typeArgument = expression.typeArguments.getOrNull(index)
                 if (typeArgument == null) ConeStarProjection
                 else when (typeArgument) {
                     is FirTypeProjectionWithVariance -> {
-                        val coneType = typeArgument.typeRef.coneType
+                        konst coneType = typeArgument.typeRef.coneType
                         when (typeArgument.variance) {
                             Variance.INVARIANT -> coneType
                             Variance.IN_VARIANCE -> ConeKotlinTypeProjectionIn(coneType)

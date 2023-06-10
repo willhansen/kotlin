@@ -1,6 +1,6 @@
 class MyClass {
     companion object {
-        val intProperty: Int
+        konst intProperty: Int
             inline get() = 6
     }
 }

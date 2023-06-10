@@ -18,10 +18,10 @@ abstract class AbstractSymbolLightClassesParentingTestByFqName(
     stopIfCompilationErrorDirectivePresent: Boolean,
 ) : AbstractSymbolLightClassesParentingTestBase(configurator, currentExtension, stopIfCompilationErrorDirectivePresent) {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val fqName = LightClassTestCommon.fqNameInTestDataFile(testDataPath.toFile())
+        konst fqName = LightClassTestCommon.fqNameInTestDataFile(testDataPath.toFile())
 
-        val ktFile = ktFiles.first()
-        val lightClass = findLightClass(fqName, ktFile.project) ?: return
+        konst ktFile = ktFiles.first()
+        konst lightClass = findLightClass(fqName, ktFile.project) ?: return
 
         ignoreExceptionIfIgnoreDirectivePresent(module) {
             lightClass.accept(createLightElementsVisitor(module.directives, testServices.assertions))

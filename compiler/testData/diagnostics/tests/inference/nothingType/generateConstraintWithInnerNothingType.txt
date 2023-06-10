@@ -18,7 +18,7 @@ public final class Inv</*0*/ K> : Base {
 
 public final class Out</*0*/ out T> {
     public constructor Out</*0*/ out T>(/*0*/ o: T)
-    public final val o: T
+    public final konst o: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -6,7 +6,7 @@ package b
 fun b() {}
 
 // FILE: c.kt
-<!JVM_PACKAGE_NAME_MUST_BE_VALID_NAME!>@file:JvmPackageName("invalid-fq-name")<!>
+<!JVM_PACKAGE_NAME_MUST_BE_VALID_NAME!>@file:JvmPackageName("inkonstid-fq-name")<!>
 package c
 fun c() {}
 
@@ -24,4 +24,4 @@ fun e() {}
 // FILE: f.kt
 @file:JvmPackageName(<!EXPRESSION_EXPECTED_PACKAGE_FOUND!>f<!>)
 package f
-const val name = "f"
+const konst name = "f"

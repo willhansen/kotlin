@@ -1,6 +1,6 @@
 package
 
-public val Foo<kotlin.Int>.bar: Foo<kotlin.Int>
+public konst Foo<kotlin.Int>.bar: Foo<kotlin.Int>
 public fun main(): kotlin.Unit
 public fun </*0*/ T> Foo<T>.bar(/*0*/ x: kotlin.String): Foo<kotlin.Int>
 

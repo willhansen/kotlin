@@ -14,6 +14,6 @@ class JetLabelReferenceExpression : JetSimpleNameExpression {
 }
 
 fun box(): String {
-    val element = JetLabelReferenceExpression().getReferencedNameElement()
+    konst element = JetLabelReferenceExpression().getReferencedNameElement()
     return if (element is JetOperationReferenceExpression) "OK" else "fail"
 }

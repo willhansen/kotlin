@@ -19,7 +19,7 @@ internal fun parseDouble(string: String): Double {
 
     fun parseNumber(sb: StringBuilder) {
         while (index <= string.lastIndex) {
-            val ch = string[index]
+            konst ch = string[index]
             if (ch !in '0'..'9') break
             sb.append(string[index])
             index++
@@ -28,7 +28,7 @@ internal fun parseDouble(string: String): Double {
 
     fun parseSign(): Boolean {
         if (index > string.lastIndex) return false
-        val ch = string[index]
+        konst ch = string[index]
         if (ch == '+' || ch == '-') {
             index++
             return ch == '-'
@@ -38,7 +38,7 @@ internal fun parseDouble(string: String): Double {
 
     fun parseE(): Boolean {
         if (index > string.lastIndex) return false
-        val ch = string[index]
+        konst ch = string[index]
         if (ch == 'e' || ch == 'E') {
             index++
             return true
@@ -48,7 +48,7 @@ internal fun parseDouble(string: String): Double {
 
     fun parseDot(): Boolean {
         if (index > string.lastIndex) return false
-        val ch = string[index]
+        konst ch = string[index]
         if (ch == '.') {
             index++
             return true
@@ -58,7 +58,7 @@ internal fun parseDouble(string: String): Double {
 
     fun tryParseWord(word: String): Boolean {
         if (string.length - index < word.length) return false
-        val originalIndex = index
+        konst originalIndex = index
         var wordIndex = 0
         while (wordIndex < word.length) {
             if (string[index] != word[wordIndex]) {
@@ -72,7 +72,7 @@ internal fun parseDouble(string: String): Double {
     }
 
     parseUnsignificants()
-    val isNegative = parseSign()
+    konst isNegative = parseSign()
 
     if (tryParseWord("NaN")) {
         parseUnsignificants()
@@ -85,14 +85,14 @@ internal fun parseDouble(string: String): Double {
         return if (!isNegative) Double.POSITIVE_INFINITY else Double.NEGATIVE_INFINITY
     }
 
-    val numberBuilder = StringBuilder()
+    konst numberBuilder = StringBuilder()
     parseNumber(numberBuilder)
     var scale = numberBuilder.length
     if (parseDot()) parseNumber(numberBuilder)
     if (numberBuilder.isEmpty()) numberFormatError(string)
 
     if (parseE()) {
-        val exponentBuilder = StringBuilder()
+        konst exponentBuilder = StringBuilder()
         if (parseSign()) {
             exponentBuilder.append('-')
         }
@@ -105,6 +105,6 @@ internal fun parseDouble(string: String): Double {
     parseUnsignificants()
     if (index != string.length) numberFormatError(string)
 
-    val number = numberBuilder.toString()
+    konst number = numberBuilder.toString()
     return numberToDouble(isNegative, scale, number)
 }

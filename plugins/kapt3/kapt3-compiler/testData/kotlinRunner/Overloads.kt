@@ -6,7 +6,7 @@ internal annotation class MyAnnotation
 
 @MyAnnotation
 internal class State @JvmOverloads constructor(
-        val someInt: Int,
-        val someLong: Long,
-        val someString: String = ""
+        konst someInt: Int,
+        konst someLong: Long,
+        konst someString: String = ""
 )

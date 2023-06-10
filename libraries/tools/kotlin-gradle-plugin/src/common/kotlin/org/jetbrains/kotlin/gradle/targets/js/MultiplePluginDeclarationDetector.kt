@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.plugin.MULTIPLE_KOTLIN_PLUGINS_LOADED_WARNING
 
 internal class MultiplePluginDeclarationDetector
 private constructor() {
-    private val pluginInMultipleProjectsHolder = KotlinPluginInMultipleProjectsHolder(
+    private konst pluginInMultipleProjectsHolder = KotlinPluginInMultipleProjectsHolder(
         trackPluginVersionsSeparately = false
     )
 
@@ -38,7 +38,7 @@ private constructor() {
                 return instance!!
             }
 
-            val detector = MultiplePluginDeclarationDetector()
+            konst detector = MultiplePluginDeclarationDetector()
             instance = detector
 
             BuildFinishedListenerService.getInstance(project).onClose { instance = null }

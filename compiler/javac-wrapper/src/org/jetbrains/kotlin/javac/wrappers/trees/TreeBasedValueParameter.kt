@@ -30,10 +30,10 @@ class TreeBasedValueParameter(
         tree: JCTree.JCVariableDecl,
         compilationUnit: CompilationUnitTree,
         javac: JavacWrapper,
-        private val containingElement: JavaElement
+        private konst containingElement: JavaElement
 ) : TreeBasedElement<JCTree.JCVariableDecl>(tree, compilationUnit, javac), JavaValueParameter {
 
-    override val annotations: Collection<TreeBasedAnnotation> by lazy {
+    override konst annotations: Collection<TreeBasedAnnotation> by lazy {
         tree.annotations().map { TreeBasedAnnotation(it, compilationUnit, javac, containingElement) }
     }
 
@@ -42,18 +42,18 @@ class TreeBasedValueParameter(
                     .filter { it.annotation.annotationType.toString().endsWith(fqName.shortName().asString()) }
                     .find { it.classId.asSingleFqName() == fqName }
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = javac.isDeprecatedInJavaDoc(tree, compilationUnit)
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(tree.name.toString())
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
 
-    override val type: JavaType
+    override konst type: JavaType
         get() = TreeBasedType.create(tree.getType(), compilationUnit, javac, annotations, containingElement)
 
-    override val isVararg: Boolean
+    override konst isVararg: Boolean
         get() = tree.modifiers.flags and Flags.VARARGS != 0L
 }

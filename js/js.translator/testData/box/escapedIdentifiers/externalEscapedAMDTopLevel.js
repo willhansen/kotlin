@@ -1,9 +1,9 @@
 define("lib", [], function() {
     return {
-        "@get something-invalid"() {
-            return "something invalid"
+        "@get something-inkonstid"() {
+            return "something inkonstid"
         },
-        "some+value": 42,
+        "some+konstue": 42,
         "+some+object%:": {
             foo: "%%++%%"
         }

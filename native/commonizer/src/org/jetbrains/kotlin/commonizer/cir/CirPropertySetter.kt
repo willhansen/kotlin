@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.Visibility
 
 interface CirPropertySetter : CirDeclaration, CirPropertyAccessor, CirHasVisibility {
-    val parameterAnnotations: List<CirAnnotation>
+    konst parameterAnnotations: List<CirAnnotation>
 
     companion object {
         fun createInterned(
@@ -38,14 +38,14 @@ interface CirPropertySetter : CirDeclaration, CirPropertyAccessor, CirHasVisibil
             isInline = false
         )
 
-        private val interner = Interner<CirPropertySetterInternedImpl>()
+        private konst interner = Interner<CirPropertySetterInternedImpl>()
     }
 }
 
 private data class CirPropertySetterInternedImpl(
-    override val annotations: List<CirAnnotation>,
-    override val parameterAnnotations: List<CirAnnotation>,
-    override val visibility: Visibility,
-    override val isDefault: Boolean,
-    override val isInline: Boolean
+    override konst annotations: List<CirAnnotation>,
+    override konst parameterAnnotations: List<CirAnnotation>,
+    override konst visibility: Visibility,
+    override konst isDefault: Boolean,
+    override konst isInline: Boolean
 ) : CirPropertySetter

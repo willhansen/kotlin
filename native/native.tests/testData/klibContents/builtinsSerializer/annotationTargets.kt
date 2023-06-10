@@ -1,19 +1,19 @@
 package test
 
-annotation class anno(val x: String)
+annotation class anno(konst x: String)
 
 
 @anno("top level function")
 fun f1(@anno("top level function parameter") p: Int) {}
 
 @anno("top level property")
-val p1 = null
+konst p1 = null
 
 @anno("extension function")
 fun Long.f2(@anno("extension function parameter") p: Int) {}
 
 @anno("extension property")
-val Double.p2: Double get() = 0.0
+konst Double.p2: Double get() = 0.0
 
 @anno("top level class")
 class C1 @anno("constructor") constructor() {
@@ -21,13 +21,13 @@ class C1 @anno("constructor") constructor() {
     fun f3(@anno("member function parameter") p: Int) {}
 
     @anno("member property")
-    val p3 = null
+    konst p3 = null
 
     @anno("member extension function")
     fun String.f4() {}
 
     @anno("member extension property")
-    val Int.v4: Int get() = this
+    konst Int.v4: Int get() = this
 
     @anno("nested class")
     class C2

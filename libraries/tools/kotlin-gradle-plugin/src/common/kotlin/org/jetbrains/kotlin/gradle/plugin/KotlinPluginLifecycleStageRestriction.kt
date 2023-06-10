@@ -22,10 +22,10 @@ import kotlin.coroutines.*
  * ```
  */
 internal suspend fun <T> withRestrictedStages(allowed: Set<KotlinPluginLifecycle.Stage>, block: suspend () -> T): T {
-    val newCoroutineContext = coroutineContext + KotlinPluginLifecycleStageRestriction(currentKotlinPluginLifecycle(), allowed)
+    konst newCoroutineContext = coroutineContext + KotlinPluginLifecycleStageRestriction(currentKotlinPluginLifecycle(), allowed)
     return suspendCoroutine { continuation ->
-        val newContinuation = object : Continuation<T> {
-            override val context: CoroutineContext
+        konst newContinuation = object : Continuation<T> {
+            override konst context: CoroutineContext
                 get() = newCoroutineContext
 
             override fun resumeWith(result: Result<T>) {
@@ -37,14 +37,14 @@ internal suspend fun <T> withRestrictedStages(allowed: Set<KotlinPluginLifecycle
 }
 
 private class KotlinPluginLifecycleStageRestriction(
-    private val lifecycle: KotlinPluginLifecycle,
-    private val allowedStages: Set<KotlinPluginLifecycle.Stage>,
+    private konst lifecycle: KotlinPluginLifecycle,
+    private konst allowedStages: Set<KotlinPluginLifecycle.Stage>,
 ) : CoroutineContext.Element, ContinuationInterceptor {
 
-    override val key: CoroutineContext.Key<*> = ContinuationInterceptor
+    override konst key: CoroutineContext.Key<*> = ContinuationInterceptor
 
     override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> = object : Continuation<T> {
-        override val context: CoroutineContext
+        override konst context: CoroutineContext
             get() = continuation.context
 
         override fun resumeWith(result: Result<T>) = when {

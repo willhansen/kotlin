@@ -60,7 +60,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface OnClick {
-    int[] value() default {};
+    int[] konstue() default {};
 }
 
 // FILE: test.kt
@@ -70,51 +70,51 @@ import lib.R as LibR
 import lib.R.id.textView
 import lib.OnClick
 
-annotation class Bind(val id: Int)
+annotation class Bind(konst id: Int)
 
-annotation class MultiValue(val ids: IntArray)
-annotation class MultiValueString(val ids: Array<String>)
-annotation class MultiValueByte(val ids: ByteArray)
+annotation class MultiValue(konst ids: IntArray)
+annotation class MultiValueString(konst ids: Array<String>)
+annotation class MultiValueByte(konst ids: ByteArray)
 
 @Target(AnnotationTarget.FIELD)
-annotation class BindField(val id: Int)
+annotation class BindField(konst id: Int)
 
 annotation class Anno(
-        val a1: Boolean,
-        val a2: Byte,
-        val a3: Int,
-        val a4: Short,
-        val a5: Long,
-        val a6: Char,
-        val a7: Float,
-        val a8: Double,
-        val a9: String)
+        konst a1: Boolean,
+        konst a2: Byte,
+        konst a3: Int,
+        konst a4: Short,
+        konst a5: Long,
+        konst a6: Char,
+        konst a7: Float,
+        konst a8: Double,
+        konst a9: String)
 
 class MyActivity {
     @Bind(LibR.id.textView)
     @BindField(LibR.id.textView)
-    val a = 0
+    konst a = 0
 
     @Bind(lib.R.id.textView)
     @BindField(lib.R.id.textView)
-    val b = 0
+    konst b = 0
 
     @Bind(app.R.layout.mainActivity)
     @BindField(app.R.layout.mainActivity)
-    val c = 0
+    konst c = 0
 
     @Bind(R.layout.mainActivity)
     @BindField(R.layout.mainActivity)
-    val d = 0
+    konst d = 0
 
     @Bind(R2.layout.mainActivity)
     @BindField(R2.layout.mainActivity)
     @Anno(a1 = B.a1, a2 = B.a2, a3 = B.a3, a4 = B.a4, a5 = B.a5, a6 = B.a6, a7 = B.a7, a8 = B.a8, a9 = B.a9)
-    val e = 0
+    konst e = 0
 
     @Bind(B.id.textView)
     @BindField(B.id.textView)
-    val f = 0
+    konst f = 0
 
     @Bind(LibR.id.textView)
     fun foo() {}
@@ -159,17 +159,17 @@ class MyActivity {
     @OnClick(B.id.textView, app.R.layout.mainActivity)
     fun multiJava2() {}
 
-    const val propA = B.id.textView
-    val propB = B.id.textView
+    const konst propA = B.id.textView
+    konst propB = B.id.textView
     var propC = B.id.textView
     @JvmField
-    val propD = B.id.textView
+    konst propD = B.id.textView
     @JvmField
     var propE = B.id.textView
-    val propF = JJ.b.length
+    konst propF = JJ.b.length
 }
 
 object JJ {
-    val b = c()
+    konst b = c()
     fun c() = "42"
 }

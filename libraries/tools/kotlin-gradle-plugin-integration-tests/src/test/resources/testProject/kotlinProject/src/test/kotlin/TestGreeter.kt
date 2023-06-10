@@ -4,7 +4,7 @@ import org.testng.Assert.assertEquals
 
 class TestGreeter {
     fun test() {
-       val greeter = Greeter("Hi!")
+       konst greeter = Greeter("Hi!")
         assertEquals("Hi!", greeter.greeting)
     }
 }

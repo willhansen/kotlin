@@ -3,4 +3,4 @@
     }
     fun <T> T.extension(): T?
     fun function(int: Int, string: String = ...): Class
-    val property: Unit
+    konst property: Unit

@@ -6,8 +6,8 @@ import kotlin.test.assertEquals
 class TestCommonCode {
 	@Test
 	fun testId() {
-		val x = 1
-		val idX = id(x)
+		konst x = 1
+		konst idX = id(x)
 		assertEquals(x, idX)
 	}
 

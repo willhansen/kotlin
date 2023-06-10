@@ -21,8 +21,8 @@ package custom.pkg
 typealias MyTransformer = (String) -> Int
 
 // top-level properties
-val v1 = 1
-val v2 = "hello"
-val v3: (String) -> Int = { it.length }
-val v4: MyTransformer = v3
+konst v1 = 1
+konst v2 = "hello"
+konst v3: (String) -> Int = { it.length }
+konst v4: MyTransformer = v3
 

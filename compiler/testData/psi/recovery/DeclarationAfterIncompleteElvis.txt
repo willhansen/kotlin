@@ -34,7 +34,7 @@ KtFile: DeclarationAfterIncompleteElvis.kt
           <empty list>
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('foo')
         PsiWhiteSpace(' ')
@@ -100,7 +100,7 @@ KtFile: DeclarationAfterIncompleteElvis.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('z')
         PsiWhiteSpace(' ')
@@ -116,7 +116,7 @@ KtFile: DeclarationAfterIncompleteElvis.kt
             <empty list>
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -126,7 +126,7 @@ KtFile: DeclarationAfterIncompleteElvis.kt
           PsiElement(INTEGER_LITERAL)('4')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('y')
         PsiWhiteSpace(' ')
@@ -155,7 +155,7 @@ KtFile: DeclarationAfterIncompleteElvis.kt
           PsiElement(INTEGER_LITERAL)('5')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('q')
         PsiWhiteSpace(' ')

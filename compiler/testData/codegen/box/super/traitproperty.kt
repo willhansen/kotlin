@@ -2,27 +2,27 @@ interface M {
     var backingB : Int
     var b : Int
         get() = backingB
-        set(value: Int) {
-            backingB = value
+        set(konstue: Int) {
+            backingB = konstue
         }
 }
 
 class N() : M {
     public override var backingB : Int = 0
 
-    val a : Int
+    konst a : Int
         get() {
             super.b = super.b + 1
             return super.b + 1
         }
     override var b: Int = a + 1
 
-    val superb : Int
+    konst superb : Int
         get() = super.b
 }
 
 fun box(): String {
-    val n = N()
+    konst n = N()
     n.a
     n.b
     n.superb

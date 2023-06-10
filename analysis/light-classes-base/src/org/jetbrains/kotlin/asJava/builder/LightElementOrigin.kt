@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind
 
 interface LightElementOrigin {
-    val originalElement: PsiElement?
-    val originKind: JvmDeclarationOriginKind?
+    konst originalElement: PsiElement?
+    konst originKind: JvmDeclarationOriginKind?
 
     object None : LightElementOrigin {
-        override val originalElement: PsiElement?
+        override konst originalElement: PsiElement?
             get() = null
-        override val originKind: JvmDeclarationOriginKind?
+        override konst originKind: JvmDeclarationOriginKind?
             get() = null
 
         override fun toString() = "NONE"
@@ -25,34 +25,34 @@ interface LightElementOrigin {
 }
 
 interface LightMemberOrigin : LightElementOrigin {
-    override val originalElement: KtDeclaration?
-    override val originKind: JvmDeclarationOriginKind
-    val parametersForJvmOverloads: List<KtParameter?>? get() = null
-    val auxiliaryOriginalElement: KtDeclaration? get() = null
+    override konst originalElement: KtDeclaration?
+    override konst originKind: JvmDeclarationOriginKind
+    konst parametersForJvmOverloads: List<KtParameter?>? get() = null
+    konst auxiliaryOriginalElement: KtDeclaration? get() = null
 
     fun isValid(): Boolean
 
-    fun isEquivalentTo(other: LightMemberOrigin?): Boolean
-    fun isEquivalentTo(other: PsiElement?): Boolean
+    fun isEquikonstentTo(other: LightMemberOrigin?): Boolean
+    fun isEquikonstentTo(other: PsiElement?): Boolean
 
     fun copy(): LightMemberOrigin
 }
 
 data class LightMemberOriginForDeclaration(
-    override val originalElement: KtDeclaration,
-    override val originKind: JvmDeclarationOriginKind,
-    override val parametersForJvmOverloads: List<KtParameter?>? = null,
-    override val auxiliaryOriginalElement: KtDeclaration? = null
+    override konst originalElement: KtDeclaration,
+    override konst originKind: JvmDeclarationOriginKind,
+    override konst parametersForJvmOverloads: List<KtParameter?>? = null,
+    override konst auxiliaryOriginalElement: KtDeclaration? = null
 ) : LightMemberOrigin {
     override fun isValid(): Boolean = originalElement.isValid
 
-    override fun isEquivalentTo(other: LightMemberOrigin?): Boolean {
+    override fun isEquikonstentTo(other: LightMemberOrigin?): Boolean {
         if (other !is LightMemberOriginForDeclaration) return false
-        return isEquivalentTo(other.originalElement)
+        return isEquikonstentTo(other.originalElement)
     }
 
-    override fun isEquivalentTo(other: PsiElement?): Boolean {
-        return originalElement.isEquivalentTo(other)
+    override fun isEquikonstentTo(other: PsiElement?): Boolean {
+        return originalElement.isEquikonstentTo(other)
     }
 
     override fun copy(): LightMemberOrigin {
@@ -60,6 +60,6 @@ data class LightMemberOriginForDeclaration(
     }
 }
 
-data class DefaultLightElementOrigin(override val originalElement: PsiElement?) : LightElementOrigin {
-    override val originKind: JvmDeclarationOriginKind? get() = null
+data class DefaultLightElementOrigin(override konst originalElement: PsiElement?) : LightElementOrigin {
+    override konst originKind: JvmDeclarationOriginKind? get() = null
 }

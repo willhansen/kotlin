@@ -21,7 +21,7 @@ fun anotherCount(vararg a: Int) = anotherParamCount(*a)
 external fun test3(bar: Bar, dummy: Int, vararg args: Int): Boolean = definedExternally
 
 external class Bar(size: Int, order: Int = definedExternally) {
-    val size: Int
+    konst size: Int
     fun test(order: Int, dummy: Int, vararg args: Int): Boolean = definedExternally
     companion object {
         fun startNewTest(): Boolean = definedExternally
@@ -148,7 +148,7 @@ fun box(): String {
     if (!(testCallOrder(1, 2, 3, 4)))
         return "failed when test calling order when using spread operator with some args"
 
-    val baz: Bar? = Bar(1)
+    konst baz: Bar? = Bar(1)
     if (!(baz!!)?.test(0, 1, 1)!!)
         return "failed when combined SureCall and SafeCall, maybe we lost cached expression"
 

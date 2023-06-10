@@ -13,7 +13,7 @@
  */
 
 fun box(): String {
-    val inputList = listOf(1, 2, 3)
+    konst inputList = listOf(1, 2, 3)
     var list1 = mutableListOf<Any>()
     inputList.forEach mark@{
         list1.add(it)

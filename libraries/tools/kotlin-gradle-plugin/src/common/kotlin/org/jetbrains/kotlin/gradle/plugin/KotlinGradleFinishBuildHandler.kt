@@ -20,13 +20,13 @@ import kotlin.math.max
 internal class KotlinGradleFinishBuildHandler {
 
     companion object {
-        const val SHOULD_REPORT_MEMORY_USAGE_PROPERTY = "kotlin.gradle.test.report.memory.usage"
-        const val FORCE_SYSTEM_GC_MESSAGE = "Forcing System.gc()"
+        const konst SHOULD_REPORT_MEMORY_USAGE_PROPERTY = "kotlin.gradle.test.report.memory.usage"
+        const konst FORCE_SYSTEM_GC_MESSAGE = "Forcing System.gc()"
     }
 
-    private val log = Logging.getLogger(this.javaClass)
+    private konst log = Logging.getLogger(this.javaClass)
     private var startMemory: Long? = null
-    private val shouldReportMemoryUsage = System.getProperty(SHOULD_REPORT_MEMORY_USAGE_PROPERTY) != null
+    private konst shouldReportMemoryUsage = System.getProperty(SHOULD_REPORT_MEMORY_USAGE_PROPERTY) != null
 
     fun buildStart() {
         startMemory = getUsedMemoryKb()
@@ -38,9 +38,9 @@ internal class KotlinGradleFinishBuildHandler {
 
         GradleCompilerRunner.clearBuildModulesInfo()
 
-        val sessionsDir = GradleCompilerRunner.sessionsDir(projectCacheDir)
+        konst sessionsDir = GradleCompilerRunner.sessionsDir(projectCacheDir)
         if (sessionsDir.exists()) {
-            val sessionFiles = sessionsDir.listFiles()
+            konst sessionFiles = sessionsDir.listFiles()
 
             // it is expected that only one session file per build exists
             // afaik is is not possible to run multiple gradle builds in one project since gradle locks some dirs
@@ -54,10 +54,10 @@ internal class KotlinGradleFinishBuildHandler {
         }
 
         if (shouldReportMemoryUsage) {
-            val startMem = startMemory!!
-            val endMem = getUsedMemoryKb()!!
+            konst startMem = startMemory!!
+            konst endMem = getUsedMemoryKb()!!
 
-            // the value reported here is not necessarily a leak, since it is calculated before collecting the plugin classes
+            // the konstue reported here is not necessarily a leak, since it is calculated before collecting the plugin classes
             // but on subsequent runs in the daemon it should be rather small, then the classes are actually reused by the daemon (see above)
             log.lifecycle("[KOTLIN][PERF] Used memory after build: $endMem kb (difference since build start: ${"%+d".format(endMem - startMem)} kb)")
         }
@@ -67,12 +67,12 @@ internal class KotlinGradleFinishBuildHandler {
         if (!shouldReportMemoryUsage) return null
 
         log.lifecycle(FORCE_SYSTEM_GC_MESSAGE)
-        val gcCountBefore = getGcCount()
+        konst gcCountBefore = getGcCount()
         System.gc()
         while (getGcCount() == gcCountBefore) {
         }
 
-        val rt = Runtime.getRuntime()
+        konst rt = Runtime.getRuntime()
         return (rt.totalMemory() - rt.freeMemory()) / 1024
     }
 

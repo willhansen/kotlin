@@ -1,24 +1,24 @@
 class A {
     fun foo() {}
-    val bar = 0
+    konst bar = 0
 }
 
 fun A.qux() {}
 
 fun baz() {}
 
-val test1 = A()::foo
+konst test1 = A()::foo
 
-val test2 = A()::bar
+konst test2 = A()::bar
 
-val test3 = A()::qux
+konst test3 = A()::qux
 
-val test4 = A::foo
+konst test4 = A::foo
 
-val test5 = A::bar
+konst test5 = A::bar
 
-val test6 = A::qux
+konst test6 = A::qux
 
-val test7 = ::baz
+konst test7 = ::baz
 
-val test8 = A?::foo
+konst test8 = A?::foo

@@ -7,7 +7,7 @@ inline fun <reified T> safeAs(x: Any): T? {
 }
 
 fun test() {
-    val x: Any = arrayListOf("abc", "def")
+    konst x: Any = arrayListOf("abc", "def")
     safeAs<MutableList<*>>(x)?.clear()
 }
 

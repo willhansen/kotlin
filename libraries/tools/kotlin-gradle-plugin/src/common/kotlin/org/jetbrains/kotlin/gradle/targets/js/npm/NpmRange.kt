@@ -16,22 +16,22 @@ import org.jetbrains.kotlin.gradle.utils.toSetOrEmpty
 In this case appropriate [startInclusive] or [endInclusive] do no matter
  */
 data class NpmRange(
-    val startVersion: SemVer? = null,
-    val startInclusive: Boolean = false,
-    val endVersion: SemVer? = null,
-    val endInclusive: Boolean = false
+    konst startVersion: SemVer? = null,
+    konst startInclusive: Boolean = false,
+    konst endVersion: SemVer? = null,
+    konst endInclusive: Boolean = false
 ) {
     override fun toString(): String {
         if (startVersion == endVersion && startInclusive && endInclusive) {
             return startVersion.toString()
         }
 
-        val start = if (startVersion != null)
+        konst start = if (startVersion != null)
             "${if (startInclusive) GTEQ else GT}$startVersion"
         else
             ""
 
-        val end = if (endVersion != null)
+        konst end = if (endVersion != null)
             "${if (endInclusive) LTEQ else LT}$endVersion"
         else
             ""
@@ -72,9 +72,9 @@ data class NpmRange(
 infix fun NpmRange.union(other: NpmRange): Set<NpmRange> {
     if (!hasIntersection(other)) return setOf(this, other)
 
-    val startVersion = minStart(this, other)
+    konst startVersion = minStart(this, other)
 
-    val endVersion = maxEnd(this, other)
+    konst endVersion = maxEnd(this, other)
 
     return NpmRange(
         startVersion = startVersion,
@@ -87,7 +87,7 @@ infix fun NpmRange.union(other: NpmRange): Set<NpmRange> {
 fun NpmRange.invert(): Set<NpmRange> {
     if (startVersion == null && endVersion == null) return emptySet()
 
-    val result = mutableSetOf<NpmRange>()
+    konst result = mutableSetOf<NpmRange>()
     if (startVersion != null || endVersion == null) {
         result.add(
             NpmRange(
@@ -118,9 +118,9 @@ infix fun Set<NpmRange>.intersect(others: Set<NpmRange>): Set<NpmRange> = flatMa
 infix fun NpmRange.intersect(other: NpmRange): NpmRange? {
     if (!hasIntersection(other)) return null
 
-    val startVersion = maxStart(this, other)
+    konst startVersion = maxStart(this, other)
 
-    val endVersion = minEnd(this, other)
+    konst endVersion = minEnd(this, other)
 
     return NpmRange(
         startVersion = startVersion,
@@ -131,13 +131,13 @@ infix fun NpmRange.intersect(other: NpmRange): NpmRange? {
 }
 
 infix fun NpmRange.hasIntersection(other: NpmRange): Boolean {
-    val maxStart = maxStart(this, other)
-    val minEnd = minEnd(this, other)
+    konst maxStart = maxStart(this, other)
+    konst minEnd = minEnd(this, other)
 
     return maxStart == null || minEnd == null || maxStart < minEnd ||
             run {
-                val startInclusive = if (maxStart == startVersion) this.startInclusive else other.startInclusive
-                val endInclusive = if (minEnd == endVersion) this.endInclusive else other.endInclusive
+                konst startInclusive = if (maxStart == startVersion) this.startInclusive else other.startInclusive
+                konst endInclusive = if (minEnd == endVersion) this.endInclusive else other.endInclusive
                 startInclusive && endInclusive && maxStart == minEnd
             }
 }

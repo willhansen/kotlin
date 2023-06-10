@@ -20,21 +20,21 @@ import org.jetbrains.kotlin.resolve.lazy.declarations.FileBasedDeclarationProvid
 import org.jetbrains.kotlin.scripting.compiler.plugin.repl.ReplCodeAnalyzerBase
 
 class IdeLikeReplCodeAnalyzer(
-    private val environment: KotlinCoreEnvironment,
+    private konst environment: KotlinCoreEnvironment,
     implicitsResolutionFilter: ImplicitsExtensionsResolutionFilter
 ) : ReplCodeAnalyzerBase(environment, CliBindingTrace(), implicitsResolutionFilter) {
     interface ReplLineAnalysisResultWithStateless : ReplLineAnalysisResult {
         // Result of stateless analyse, which may be used for reporting errors
         // without code generation
         data class Stateless(
-            override val diagnostics: Diagnostics,
-            val bindingContext: BindingContext,
-            val resolutionFacade: KotlinResolutionFacadeForRepl,
-            val moduleDescriptor: ModuleDescriptor,
-            val resultProperty: PropertyDescriptor?,
+            override konst diagnostics: Diagnostics,
+            konst bindingContext: BindingContext,
+            konst resolutionFacade: KotlinResolutionFacadeForRepl,
+            konst moduleDescriptor: ModuleDescriptor,
+            konst resultProperty: PropertyDescriptor?,
         ) :
             ReplLineAnalysisResultWithStateless {
-            override val scriptDescriptor: ClassDescriptorWithResolutionScopes? get() = null
+            override konst scriptDescriptor: ClassDescriptorWithResolutionScopes? get() = null
         }
     }
 
@@ -53,14 +53,14 @@ class IdeLikeReplCodeAnalyzer(
         )
         replState.submitLine(linePsi)
 
-        val context = runAnalyzer(linePsi, importedScripts)
+        konst context = runAnalyzer(linePsi, importedScripts)
 
-        val resultPropertyDescriptor = (context.scripts[linePsi.script] as? ScriptDescriptor)?.resultValue
+        konst resultPropertyDescriptor = (context.scripts[linePsi.script] as? ScriptDescriptor)?.resultValue
 
-        val moduleDescriptor = container.getService(ModuleDescriptor::class.java)
-        val resolutionFacade =
+        konst moduleDescriptor = container.getService(ModuleDescriptor::class.java)
+        konst resolutionFacade =
             KotlinResolutionFacadeForRepl(environment, container)
-        val diagnostics = trace.bindingContext.diagnostics
+        konst diagnostics = trace.bindingContext.diagnostics
         return ReplLineAnalysisResultWithStateless.Stateless(
             diagnostics,
             trace.bindingContext,

@@ -42,7 +42,7 @@ inline fun <reified T> Array<*>.firstIsInstance(): T {
 }
 
 inline fun <reified T> Iterable<*>.filterIsInstanceWithChecker(additionalChecker: (T) -> Boolean): List<T> {
-    val result = arrayListOf<T>()
+    konst result = arrayListOf<T>()
     for (element in this) {
         if (element is T && additionalChecker(element)) {
             result += element
@@ -56,7 +56,7 @@ inline fun <reified T : Any> Iterable<*>.lastIsInstanceOrNull(): T? {
     when (this) {
         is List<*> -> {
             for (i in this.indices.reversed()) {
-                val element = this[i]
+                konst element = this[i]
                 if (element is T) return element
             }
             return null
@@ -69,8 +69,8 @@ inline fun <reified T : Any> Iterable<*>.lastIsInstanceOrNull(): T? {
 }
 
 inline fun <T, reified R> Iterable<T>.partitionIsInstance(): Pair<List<R>, List<T>> {
-    val first = ArrayList<R>()
-    val second = ArrayList<T>()
+    konst first = ArrayList<R>()
+    konst second = ArrayList<T>()
     for (element in this) {
         if (element is R) {
             first.add(element)
@@ -116,22 +116,22 @@ inline fun <reified T : Any> Any?.cast(): T = this as T
 inline fun <reified T : Any> Any?.assertedCast(message: () -> String): T = this as? T ?: throw AssertionError(message())
 
 fun <T : Any> constant(calculator: () -> T): T {
-    val cached = constantMap[calculator]
+    konst cached = constantMap[calculator]
     @Suppress("UNCHECKED_CAST")
     if (cached != null) return cached as T
 
     // safety check
-    val fields = calculator::class.java.declaredFields.filter { it.modifiers.and(Modifier.STATIC) == 0 }
+    konst fields = calculator::class.java.declaredFields.filter { it.modifiers.and(Modifier.STATIC) == 0 }
     assert(fields.isEmpty()) {
         "No fields in the passed lambda expected but ${fields.joinToString()} found"
     }
 
-    val value = calculator()
-    constantMap[calculator] = value
-    return value
+    konst konstue = calculator()
+    constantMap[calculator] = konstue
+    return konstue
 }
 
-private val constantMap = ConcurrentHashMap<Function0<*>, Any>()
+private konst constantMap = ConcurrentHashMap<Function0<*>, Any>()
 
 fun String.indexOfOrNull(char: Char, startIndex: Int = 0, ignoreCase: Boolean = false): Int? =
     indexOf(char, startIndex, ignoreCase).takeIf { it >= 0 }
@@ -148,7 +148,7 @@ fun String.lastIndexOfOrNull(char: Char, startIndex: Int = lastIndex, ignoreCase
 )
 inline fun <T, R : Any> Iterable<T>.firstNotNullResult(transform: (T) -> R?): R? {
     for (element in this) {
-        val result = transform(element)
+        konst result = transform(element)
         if (result != null) return result
     }
     return null
@@ -163,7 +163,7 @@ inline fun <T, R : Any> Iterable<T>.firstNotNullResult(transform: (T) -> R?): R?
 )
 inline fun <T, R : Any> Array<T>.firstNotNullResult(transform: (T) -> R?): R? {
     for (element in this) {
-        val result = transform(element)
+        konst result = transform(element)
         if (result != null) return result
     }
     return null
@@ -182,8 +182,8 @@ inline fun <T, C : Collection<T>, O> C.ifNotEmpty(body: C.() -> O?): O? = if (is
 inline fun <T, O> Array<out T>.ifNotEmpty(body: Array<out T>.() -> O?): O? = if (isNotEmpty()) this.body() else null
 
 inline fun <T> measureTimeMillisWithResult(block: () -> T): Pair<Long, T> {
-    val start = System.currentTimeMillis()
-    val result = block()
+    konst start = System.currentTimeMillis()
+    konst result = block()
     return Pair(System.currentTimeMillis() - start, result)
 }
 
@@ -196,19 +196,19 @@ fun <T, C : MutableCollection<in T>> Iterable<Iterable<T>>.flattenTo(c: C): C {
 
 inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.flatMapToNullable(destination: C, transform: (T) -> Iterable<R>?): C? {
     for (element in this) {
-        val list = transform(element) ?: return null
+        konst list = transform(element) ?: return null
         destination.addAll(list)
     }
     return destination
 }
 
 inline fun <T, R> Iterable<T>.same(extractor: (T) -> R): Boolean {
-    val iterator = iterator()
-    val firstValue = extractor(iterator.next())
+    konst iterator = iterator()
+    konst firstValue = extractor(iterator.next())
     while (iterator.hasNext()) {
-        val item = iterator.next()
-        val value = extractor(item)
-        if (value != firstValue) {
+        konst item = iterator.next()
+        konst konstue = extractor(item)
+        if (konstue != firstValue) {
             return false
         }
     }
@@ -219,7 +219,7 @@ inline fun <R> runIf(condition: Boolean, block: () -> R): R? = if (condition) bl
 inline fun <R> runUnless(condition: Boolean, block: () -> R): R? = if (condition) null else block()
 
 inline fun <T, R> Collection<T>.foldMap(transform: (T) -> R, operation: (R, R) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     var result = transform(iterator.next())
     while (iterator.hasNext()) {
         result = operation(result, transform(iterator.next()))
@@ -232,14 +232,14 @@ fun <E> MutableList<E>.trimToSize(newSize: Int) {
 }
 
 inline fun <K, V, VA : V> MutableMap<K, V>.getOrPut(key: K, defaultValue: (K) -> VA, postCompute: (VA) -> Unit): V {
-    val value = get(key)
-    return if (value == null) {
-        val answer = defaultValue(key)
+    konst konstue = get(key)
+    return if (konstue == null) {
+        konst answer = defaultValue(key)
         put(key, answer)
         postCompute(answer)
         answer
     } else {
-        value
+        konstue
     }
 }
 
@@ -253,7 +253,7 @@ fun <T> Set<T>.compactIfPossible(): Set<T> =
 fun <K, V> Map<K, V>.compactIfPossible(): Map<K, V> =
     when (size) {
         0 -> emptyMap()
-        1 -> Collections.singletonMap(keys.single(), values.single())
+        1 -> Collections.singletonMap(keys.single(), konstues.single())
         else -> this
     }
 
@@ -268,27 +268,27 @@ inline fun <T> Boolean.ifFalse(body: () -> T?): T? =
     if (!this) body() else null
 
 inline fun <T, K> List<T>.flatGroupBy(keySelector: (T) -> Collection<K>): Map<K, List<T>> {
-    return flatGroupBy(keySelector, keyTransformer = { it }, valueTransformer = { it })
+    return flatGroupBy(keySelector, keyTransformer = { it }, konstueTransformer = { it })
 }
 
 inline fun <T, U, K, V> List<T>.flatGroupBy(
     keySelector: (T) -> Collection<U>,
     keyTransformer: (U) -> K,
-    valueTransformer: (T) -> V
+    konstueTransformer: (T) -> V
 ): Map<K, List<V>> {
-    val result = mutableMapOf<K, MutableList<V>>()
+    konst result = mutableMapOf<K, MutableList<V>>()
     for (element in this) {
-        val keys = keySelector(element)
-        val value = valueTransformer(element)
+        konst keys = keySelector(element)
+        konst konstue = konstueTransformer(element)
         for (key in keys) {
-            val transformedKey = keyTransformer(key)
+            konst transformedKey = keyTransformer(key)
             // Map.computeIfAbsent is missing in JDK 1.6
             var list = result[transformedKey]
             if (list == null) {
                 list = mutableListOf()
                 result[transformedKey] = list
             }
-            list += value
+            list += konstue
         }
     }
     return result
@@ -296,9 +296,9 @@ inline fun <T, U, K, V> List<T>.flatGroupBy(
 
 inline fun <T, K> List<T>.flatAssociateBy(selector: (T) -> Collection<K>): Map<K, T> {
     return buildMap {
-        for (value in this@flatAssociateBy) {
-            for (key in selector(value)) {
-                put(key, value)
+        for (konstue in this@flatAssociateBy) {
+            for (key in selector(konstue)) {
+                put(key, konstue)
             }
         }
     }
@@ -314,8 +314,8 @@ fun shouldNotBeCalled(message: String = "should not be called"): Nothing {
 }
 
 private inline fun <T, R> Iterable<T>.zipWithDefault(other: Iterable<R>, leftDefault: () -> T, rightDefault: () -> R): List<Pair<T, R>> {
-    val leftIterator = this.iterator()
-    val rightIterator = other.iterator()
+    konst leftIterator = this.iterator()
+    konst rightIterator = other.iterator()
     return buildList {
         while (leftIterator.hasNext() && rightIterator.hasNext()) {
             add(leftIterator.next() to rightIterator.next())

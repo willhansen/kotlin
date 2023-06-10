@@ -1,5 +1,5 @@
 package foo
 
 actual class PlatformTest {
-    actual val value: PlatformClass = PlatformClass()
+    actual konst konstue: PlatformClass = PlatformClass()
 }

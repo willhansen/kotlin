@@ -1,4 +1,4 @@
-open class Persistent(val p: String)
+open class Persistent(konst p: String)
 interface Hierarchy<T: Persistent > where T : Hierarchy<T>
 
 class Location(): Persistent("OK"), Hierarchy<Location>

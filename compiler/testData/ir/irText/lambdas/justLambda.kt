@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
 
-val test1 = { 42 }
+konst test1 = { 42 }
 
-val test2 = { }
+konst test2 = { }

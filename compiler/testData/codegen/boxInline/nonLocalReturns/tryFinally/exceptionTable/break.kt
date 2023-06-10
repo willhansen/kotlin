@@ -14,7 +14,7 @@ public inline fun doCallAlwaysBreak(block: (i: Int)-> Int) : Int {
     return res
 }
 
-public val z: Boolean = true
+public konst z: Boolean = true
 
 public inline fun doCallAlwaysBreak2(block: (i: Int)-> Int) : Int {
     var res = 0;
@@ -79,16 +79,16 @@ fun test22(): Int {
 
 
 fun box(): String {
-    val test1 = test1()
+    konst test1 = test1()
     if (test1 != 1) return "test1: ${test1}"
 
-    val test11 = test11()
+    konst test11 = test11()
     if (test11 != 0) return "test11: ${test11}"
 
-    val test2 = test2()
+    konst test2 = test2()
     if (test2 != 0) return "test2: ${test2}"
 
-    val test22 = test22()
+    konst test22 = test22()
     if (test22 != 1) return "test22: ${test22}"
 
     return "OK"

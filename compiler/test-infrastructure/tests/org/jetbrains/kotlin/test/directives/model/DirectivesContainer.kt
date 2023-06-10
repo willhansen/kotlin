@@ -16,7 +16,7 @@ sealed class DirectivesContainer {
 }
 
 abstract class SimpleDirectivesContainer : DirectivesContainer() {
-    private val registeredDirectives: MutableMap<String, Directive> = mutableMapOf()
+    private konst registeredDirectives: MutableMap<String, Directive> = mutableMapOf()
 
     override operator fun get(name: String): Directive? = registeredDirectives[name]
 
@@ -40,12 +40,12 @@ abstract class SimpleDirectivesContainer : DirectivesContainer() {
         applicability: DirectiveApplicability = DirectiveApplicability.Global,
         noinline additionalParser: ((String) -> T?)? = null
     ): DirectiveDelegateProvider<ValueDirective<T>> {
-        val possibleValues = enumValues<T>()
-        val parser: (String) -> T? = { value -> possibleValues.firstOrNull { it.name == value } ?: additionalParser?.invoke(value) }
+        konst possibleValues = enumValues<T>()
+        konst parser: (String) -> T? = { konstue -> possibleValues.firstOrNull { it.name == konstue } ?: additionalParser?.invoke(konstue) }
         return DirectiveDelegateProvider { ValueDirective(it, description, applicability, parser) }
     }
 
-    protected fun <T : Any> valueDirective(
+    protected fun <T : Any> konstueDirective(
         description: String,
         applicability: DirectiveApplicability = DirectiveApplicability.Global,
         parser: (String) -> T?
@@ -58,31 +58,31 @@ abstract class SimpleDirectivesContainer : DirectivesContainer() {
     }
 
     override fun contains(directive: Directive): Boolean {
-        return directive in registeredDirectives.values
+        return directive in registeredDirectives.konstues
     }
 
     override fun toString(): String {
         return buildString {
             appendLine("Directive container:")
-            for (directive in registeredDirectives.values) {
+            for (directive in registeredDirectives.konstues) {
                 append("  ")
                 appendLine(directive)
             }
         }
     }
 
-    protected inner class DirectiveDelegateProvider<T : Directive>(val directiveConstructor: (String) -> T) {
+    protected inner class DirectiveDelegateProvider<T : Directive>(konst directiveConstructor: (String) -> T) {
         operator fun provideDelegate(
             thisRef: SimpleDirectivesContainer,
             property: KProperty<*>
         ): ReadOnlyProperty<SimpleDirectivesContainer, T> {
-            val directive = directiveConstructor(property.name).also { thisRef.registerDirective(it) }
+            konst directive = directiveConstructor(property.name).also { thisRef.registerDirective(it) }
             return ReadOnlyProperty { _, _ -> directive }
         }
     }
 }
 
-class ComposedDirectivesContainer(private val containers: Collection<DirectivesContainer>) : DirectivesContainer() {
+class ComposedDirectivesContainer(private konst containers: Collection<DirectivesContainer>) : DirectivesContainer() {
     constructor(vararg containers: DirectivesContainer) : this(containers.toList())
 
     override fun get(name: String): Directive? {

@@ -25,7 +25,7 @@ open class DeserializedAnnotations(
     storageManager: StorageManager,
     compute: () -> List<AnnotationDescriptor>
 ) : Annotations {
-    private val annotations by storageManager.createLazyValue(compute)
+    private konst annotations by storageManager.createLazyValue(compute)
 
     override fun isEmpty(): Boolean = annotations.isEmpty()
 

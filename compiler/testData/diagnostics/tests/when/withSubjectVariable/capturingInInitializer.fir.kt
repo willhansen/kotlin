@@ -8,7 +8,7 @@ fun testSafeCaptureVarInInitializer() {
     x!!
     x.inc()
 
-    val s = when (val y = run { x = 42; 32 }) {
+    konst s = when (konst y = run { x = 42; 32 }) {
         0 -> {
             x.inc() // TODO fix smart casts for captured variables
             "0"
@@ -25,7 +25,7 @@ fun testUnsafeCaptureVarInInitializer() {
     x!!
     x.inc()
 
-    val s = when (val y = run { x = null; 32 }) {
+    konst s = when (konst y = run { x = null; 32 }) {
         0 -> {
             x<!UNSAFE_CALL!>.<!>inc() // NB smart cast should be impossible
             "0"

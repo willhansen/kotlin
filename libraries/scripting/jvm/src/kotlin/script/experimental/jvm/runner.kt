@@ -9,17 +9,17 @@ import kotlin.script.experimental.api.ScriptCompilationConfiguration
 import kotlin.script.experimental.api.baseClass
 import kotlin.script.experimental.api.hostConfiguration
 import kotlin.script.experimental.api.onFailure
-import kotlin.script.experimental.host.createEvaluationConfigurationFromTemplate
+import kotlin.script.experimental.host.createEkonstuationConfigurationFromTemplate
 import kotlin.script.experimental.host.withDefaultsFrom
 import kotlin.script.experimental.impl.internalScriptingRunSuspend
 import kotlin.script.experimental.jvm.impl.createScriptFromClassLoader
 
 @Suppress("unused") // script codegen generates a call to it
 fun runCompiledScript(scriptClass: Class<*>, vararg args: String) {
-    val script = createScriptFromClassLoader(scriptClass.name, scriptClass.classLoader)
-    val evaluator = BasicJvmScriptEvaluator()
-    val evaluationConfiguration =
-        createEvaluationConfigurationFromTemplate(
+    konst script = createScriptFromClassLoader(scriptClass.name, scriptClass.classLoader)
+    konst ekonstuator = BasicJvmScriptEkonstuator()
+    konst ekonstuationConfiguration =
+        createEkonstuationConfigurationFromTemplate(
             script.compilationConfiguration[ScriptCompilationConfiguration.baseClass]!!,
             script.compilationConfiguration[ScriptCompilationConfiguration.hostConfiguration]
                 .withDefaultsFrom(defaultJvmScriptingHostConfiguration),
@@ -31,7 +31,7 @@ fun runCompiledScript(scriptClass: Class<*>, vararg args: String) {
         }
     @Suppress("DEPRECATION_ERROR")
     internalScriptingRunSuspend {
-        evaluator(script, evaluationConfiguration).onFailure {
+        ekonstuator(script, ekonstuationConfiguration).onFailure {
             it.reports.forEach(System.err::println)
         }
     }

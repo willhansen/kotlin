@@ -3,15 +3,15 @@ fun createRemovedClass() {
 }
 
 interface Interface<T> {
-    val value: T
+    konst konstue: T
 }
 
 class InterfaceImplParameterizedByClass : Interface<Class> {
-    override val value: Class = Class()
+    override konst konstue: Class = Class()
 }
 
 class InterfaceImplParameterizedByRemovedClass: Interface<RemovedClass> {
-    override val value: RemovedClass = TODO()
+    override konst konstue: RemovedClass = TODO()
 }
 
 class Checker {
@@ -22,7 +22,7 @@ class Checker {
     fun createAndPassRemovedClassAsValueParameter(): String = useRemovedClassAsValueParameter(null)
 
     var removedClassProperty: RemovedClass? = null
-        protected set(value) { /* Do nothing */ }
+        protected set(konstue) { /* Do nothing */ }
 
     fun writeToRemovedClassProperty(): String {
         removedClassProperty = null
@@ -32,28 +32,28 @@ class Checker {
     fun createClass(): Class = Class()
     fun createClassAndCallFunction(): String = createClass().f()
 
-    val getClass1: Class get() = Class()
-    val getClassAndReadProperty1: String get() = getClass1.p
+    konst getClass1: Class get() = Class()
+    konst getClassAndReadProperty1: String get() = getClass1.p
 
-    val getClass2: Class = Class()
-    val getClassAndReadProperty2: String = getClass2.p
+    konst getClass2: Class = Class()
+    konst getClassAndReadProperty2: String = getClass2.p
 
     fun createRemovedClass(): RemovedClass = TODO()
     fun createRemovedClassAndCallFunction(): String = createRemovedClass().f()
 
-    val getRemovedClass: RemovedClass get() = TODO()
-    val getRemovedClassAndReadProperty: String get() = getRemovedClass.p
+    konst getRemovedClass: RemovedClass get() = TODO()
+    konst getRemovedClassAndReadProperty: String get() = getRemovedClass.p
 
     class CrashesOnCreation {
-        val getRemovedClass: RemovedClass = TODO()
-        val getRemovedClassAndReadBar: String = getRemovedClass.p
+        konst getRemovedClass: RemovedClass = TODO()
+        konst getRemovedClassAndReadBar: String = getRemovedClass.p
     }
 
     fun createInterfaceImplParameterizedByClass(): Interface<Class> = InterfaceImplParameterizedByClass()
-    fun createInterfaceImplParameterizedByClassAndCallFunction(): String = createInterfaceImplParameterizedByClass().value.f()
+    fun createInterfaceImplParameterizedByClassAndCallFunction(): String = createInterfaceImplParameterizedByClass().konstue.f()
 
     fun createInstanceImplParameterizedByRemovedClass(): Interface<RemovedClass> = InterfaceImplParameterizedByRemovedClass()
-    fun createInstanceImplParameterizedByRemovedClassAndCallFunction(): String = createInstanceImplParameterizedByRemovedClass().value.f()
+    fun createInstanceImplParameterizedByRemovedClassAndCallFunction(): String = createInstanceImplParameterizedByRemovedClass().konstue.f()
 }
 
 fun readVariableInFunction() {
@@ -121,7 +121,7 @@ fun writeVariableInAnonymousObject() {
 }
 
 fun readVariableInAnonymousObjectThroughLocalVar() {
-    val obj = object {
+    konst obj = object {
         fun foo() {
             var removed: RemovedClass? = null
             check(removed == null)
@@ -131,7 +131,7 @@ fun readVariableInAnonymousObjectThroughLocalVar() {
 }
 
 fun writeVariableInAnonymousObjectThroughLocalVar() {
-    val obj = object {
+    konst obj = object {
         fun foo() {
             var removed: RemovedClass?
             removed = null
@@ -173,7 +173,7 @@ fun callLocalFunctionInFunctionOfAnonymousObject() {
 }
 
 fun callLocalFunctionInFunctionOfAnonymousObjectThroughLocalVar() {
-    val obj = object {
+    konst obj = object {
         fun foo() {
             fun local(): RemovedClass = TODO()
             local()
@@ -209,8 +209,8 @@ class TopLevelWithCompanionChildOfRemovedInterface {
     companion object : RemovedInterface
 }
 
-val anonymousObjectChildOfRemovedAbstractClass = object : RemovedAbstractClass() {}
-val anonymousObjectChildOfRemovedInterface = object : RemovedInterface {}
+konst anonymousObjectChildOfRemovedAbstractClass = object : RemovedAbstractClass() {}
+konst anonymousObjectChildOfRemovedInterface = object : RemovedInterface {}
 
 fun topLevelFunctionWithLocalClassChildOfRemovedAbstractClass() {
     class LocalClass : RemovedAbstractClass()
@@ -223,24 +223,24 @@ fun topLevelFunctionWithLocalClassChildOfRemovedInterface() {
 }
 
 fun topLevelFunctionWithAnonymousObjectChildOfRemovedAbstractClass() {
-    val anonymousObject = object : RemovedAbstractClass() {}
+    konst anonymousObject = object : RemovedAbstractClass() {}
     anonymousObject.toString()
 }
 
 fun topLevelFunctionWithAnonymousObjectChildOfRemovedInterface() {
-    val anonymousObject = object : RemovedInterface {}
+    konst anonymousObject = object : RemovedInterface {}
     anonymousObject.toString()
 }
 
 open class OpenClassImpl : RemovedOpenClass()
 
 inline fun inlinedFunctionWithRemovedOpenClassVariableType() {
-    val foo: RemovedOpenClass? = null
+    konst foo: RemovedOpenClass? = null
     check(foo == null)
 }
 
 inline fun inlinedFunctionWithOpenClassImplVariableType() {
-    val foo: OpenClassImpl? = null
+    konst foo: OpenClassImpl? = null
     check(foo == null)
 }
 
@@ -261,11 +261,11 @@ inline fun inlinedFunctionWithCreationOfOpenClassImplThroughReference() {
 }
 
 inline fun inlinedFunctionWithRemovedOpenClassAnonymousObject() {
-    val foo = object : RemovedOpenClass() {}
+    konst foo = object : RemovedOpenClass() {}
     check(foo == null)
 }
 
 inline fun inlinedFunctionWithOpenClassImplAnonymousObject() {
-    val foo = object : OpenClassImpl() {}
+    konst foo = object : OpenClassImpl() {}
     check(foo == null)
 }

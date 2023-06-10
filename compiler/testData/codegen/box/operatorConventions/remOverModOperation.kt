@@ -9,7 +9,7 @@ class A() {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
 
     a % 5
 

@@ -38,7 +38,7 @@ public fun Reader.forEachLine(action: (String) -> Unit): Unit = useLines { it.fo
  * Do not use this function for huge files.
  */
 public fun Reader.readLines(): List<String> {
-    val result = arrayListOf<String>()
+    konst result = arrayListOf<String>()
     forEachLine { result.add(it) }
     return result
 }
@@ -46,7 +46,7 @@ public fun Reader.readLines(): List<String> {
 /**
  * Calls the [block] callback giving it a sequence of all the lines in this file and closes the reader once
  * the processing is complete.
- * @return the value returned by [block].
+ * @return the konstue returned by [block].
  */
 public inline fun <T> Reader.useLines(block: (Sequence<String>) -> T): T =
     buffered().use { block(it.lineSequence()) }
@@ -68,7 +68,7 @@ public inline fun String.reader(): StringReader = StringReader(this)
  */
 public fun BufferedReader.lineSequence(): Sequence<String> = LinesSequence(this).constrainOnce()
 
-private class LinesSequence(private val reader: BufferedReader) : Sequence<String> {
+private class LinesSequence(private konst reader: BufferedReader) : Sequence<String> {
     override public fun iterator(): Iterator<String> {
         return object : Iterator<String> {
             private var nextValue: String? = null
@@ -86,7 +86,7 @@ private class LinesSequence(private val reader: BufferedReader) : Sequence<Strin
                 if (!hasNext()) {
                     throw NoSuchElementException()
                 }
-                val answer = nextValue
+                konst answer = nextValue
                 nextValue = null
                 return answer!!
             }
@@ -102,7 +102,7 @@ private class LinesSequence(private val reader: BufferedReader) : Sequence<Strin
  * @return the string with corresponding file content.
  */
 public fun Reader.readText(): String {
-    val buffer = StringWriter()
+    konst buffer = StringWriter()
     copyTo(buffer)
     return buffer.toString()
 }
@@ -118,7 +118,7 @@ public fun Reader.readText(): String {
  */
 public fun Reader.copyTo(out: Writer, bufferSize: Int = DEFAULT_BUFFER_SIZE): Long {
     var charsCopied: Long = 0
-    val buffer = CharArray(bufferSize)
+    konst buffer = CharArray(bufferSize)
     var chars = read(buffer)
     while (chars >= 0) {
         out.write(buffer, 0, chars)

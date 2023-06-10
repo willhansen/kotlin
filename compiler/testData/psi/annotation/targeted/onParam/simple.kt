@@ -1,3 +1,3 @@
-public class A(@param:Ann value: String)
+public class A(@param:Ann konstue: String)
 
-public class B(@param:[Ann Ann2] val n: Int)
+public class B(@param:[Ann Ann2] konst n: Int)

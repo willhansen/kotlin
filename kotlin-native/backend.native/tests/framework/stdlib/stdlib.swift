@@ -95,8 +95,8 @@ class StdlibTests : TestProvider {
         map?["10"] = "Ten as string"
 
         let gen = pair.second as! GenericExtensionClass
-        let value: String? = gen.getFirstValue() as? String
-        try assertEquals(actual: value!, expected: "One", "First value of the map")
+        let konstue: String? = gen.getFirstValue() as? String
+        try assertEquals(actual: konstue!, expected: "One", "First konstue of the map")
 
         let key: Int? = gen.getFirstKey() as? Int
         try assertEquals(actual: key!, expected: 1, "First key of the map")
@@ -153,9 +153,9 @@ class StdlibTests : TestProvider {
 
     func testList() throws {
         let elements = zeroTo(5)
-        elements.set(index: 1, value: nil)
+        elements.set(index: 1, konstue: nil)
         let list = StdlibKt.list(elements: elements) as! NSArray
-        try assertEquals(actual: list.object(at: 2) as! NSNumber, expected: NSNumber(value: 2))
+        try assertEquals(actual: list.object(at: 2) as! NSNumber, expected: NSNumber(konstue: 2))
         try assertEquals(actual: list.object(at: 1) as! NSNull, expected: NSNull())
         try assertEquals(actual: list.count, expected: 5)
     }
@@ -293,9 +293,9 @@ class StdlibTests : TestProvider {
         try applyVoid { $0.setObject(myKey, forKey: myKey) }
         try applyVoid {
             let key = $0.allKeys[0] as! MyKey
-            let value = $0.allValues[0] as! MyKey
+            let konstue = $0.allValues[0] as! MyKey
             try assertFalse(key === myKey)
-            try assertTrue(value === myKey)
+            try assertTrue(konstue === myKey)
         }
 
     }
@@ -317,14 +317,14 @@ class StdlibTests : TestProvider {
 
     func testSet() throws {
         let elements = KotlinArray<AnyObject>(size: 2) { index in nil }
-        elements.set(index: 0, value: nil)
-        elements.set(index: 1, value: 42 as NSNumber)
+        elements.set(index: 0, konstue: nil)
+        elements.set(index: 1, konstue: 42 as NSNumber)
         let set = StdlibKt.set(elements: elements) as! NSSet
         try assertEquals(actual: set.count, expected: 2)
         try assertEquals(actual: set.member(NSNull()) as! NSNull, expected: NSNull())
-        try assertEquals(actual: set.member(42) as! NSNumber, expected: NSNumber(value: 42 as Int32))
+        try assertEquals(actual: set.member(42) as! NSNumber, expected: NSNumber(konstue: 42 as Int32))
         try assertTrue(set.member(17) == nil)
-        try assertFalse(set.member(42) as AnyObject === NSNumber(value: 42 as Int32))
+        try assertFalse(set.member(42) as AnyObject === NSNumber(konstue: 42 as Int32))
         try assertTrue(set.contains(42))
         try assertTrue(set.contains(nil as Any?))
         try assertFalse(set.contains(17))
@@ -334,17 +334,17 @@ class StdlibTests : TestProvider {
 
     func testMap() throws {
         let elements = KotlinArray<AnyObject>(size: 6) { index in nil }
-        elements.set(index: 0, value: nil)
-        elements.set(index: 1, value: 42 as NSNumber)
-        elements.set(index: 2, value: "foo" as NSString)
-        elements.set(index: 3, value: "bar" as NSString)
-        elements.set(index: 4, value: 42 as NSNumber)
-        elements.set(index: 5, value: nil)
+        elements.set(index: 0, konstue: nil)
+        elements.set(index: 1, konstue: 42 as NSNumber)
+        elements.set(index: 2, konstue: "foo" as NSString)
+        elements.set(index: 3, konstue: "bar" as NSString)
+        elements.set(index: 4, konstue: 42 as NSNumber)
+        elements.set(index: 5, konstue: nil)
 
         let map = StdlibKt.map(keysAndValues: elements) as! NSDictionary
         try assertEquals(actual: map.count, expected: 3)
 
-        try assertEquals(actual: map.object(forKey: NSNull()) as! NSNumber, expected: NSNumber(value: 42))
+        try assertEquals(actual: map.object(forKey: NSNull()) as! NSNumber, expected: NSNumber(konstue: 42))
         try assertEquals(actual: map.object(forKey: "foo") as! String, expected: "bar")
         try assertEquals(actual: map.object(forKey: 42) as! NSNull, expected: NSNull())
         try assertTrue(map.object(forKey: "bar") == nil)

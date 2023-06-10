@@ -7,5 +7,5 @@
  * DESCRIPTION: Hexadecimal prefix only suffixed by the long literal mark.
  */
 
-val value = 0xL
-val value = 0XL
+konst konstue = 0xL
+konst konstue = 0XL

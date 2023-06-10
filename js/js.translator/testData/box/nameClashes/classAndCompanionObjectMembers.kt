@@ -4,12 +4,12 @@ package foo
 class A {
     fun foo() = 23
 
-    val bar = 123
+    konst bar = 123
 
     companion object {
         fun foo() = 42
 
-        val bar = 142
+        konst bar = 142
     }
 }
 

@@ -14,16 +14,16 @@ fun checkNotEqual(x: Any, y: Any) {
 }
 
 class V {
-    val memberVal: String = ""
+    konst memberVal: String = ""
     fun memberFun(): String = ""
 }
 
-val topLevelVar: String = ""
+konst topLevelVar: String = ""
 fun topLevelFun(): String = ""
 
 fun box(): String {
-    val v0 = V()
-    val v1 = V()
+    konst v0 = V()
+    konst v1 = V()
 
     checkEqual(::topLevelFun, ::topLevelFun)
     checkEqual(::topLevelFun, referenceTopLevelFunFromOtherFile())

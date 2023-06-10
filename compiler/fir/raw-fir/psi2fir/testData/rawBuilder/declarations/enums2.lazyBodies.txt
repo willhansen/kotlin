@@ -18,20 +18,20 @@ FILE: enums2.kt
             LAZY_super<R|kotlin/Enum<SomeEnum>|>
         }
 
-        public? final? val x: Some = R|<local>/x|
+        public? final? konst x: Some = R|<local>/x|
             public? get(): Some
 
         public final static enum entry FIRST: R|SomeEnum| = LAZY_EXPRESSION
         public final static enum entry SECOND: R|SomeEnum| = LAZY_EXPRESSION
         public? abstract fun check(y: Some): Boolean
 
-        public final static fun values(): R|kotlin/Array<SomeEnum>| {
+        public final static fun konstues(): R|kotlin/Array<SomeEnum>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|SomeEnum| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|SomeEnum| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<SomeEnum>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<SomeEnum>|
             public get(): R|kotlin/enums/EnumEntries<SomeEnum>|
 
     }

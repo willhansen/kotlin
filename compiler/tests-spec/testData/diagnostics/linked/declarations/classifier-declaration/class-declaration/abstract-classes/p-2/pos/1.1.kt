@@ -12,9 +12,9 @@
  */
 
 abstract class Base {
-    abstract val a: Any
+    abstract konst a: Any
     abstract var b: Any
-    internal abstract val c: Any
+    internal abstract konst c: Any
     internal abstract var d: Any
 
     abstract fun foo()
@@ -24,21 +24,21 @@ abstract class Base {
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val base: Base = BaseImplCase1()
-    val base1: BaseImplCase1 = BaseImplCase1()
+    konst base: Base = BaseImplCase1()
+    konst base1: BaseImplCase1 = BaseImplCase1()
 }
 
 class BaseImplCase1() : Base() {
-    override val a: Any
+    override konst a: Any
         get() = TODO()
     override var b: Any
         get() = TODO()
-        set(value) {}
-    override val c: Any
+        set(konstue) {}
+    override konst c: Any
         get() = TODO()
     override var d: Any
         get() = TODO()
-        set(value) {}
+        set(konstue) {}
 
     override fun foo() {
         TODO()
@@ -52,20 +52,20 @@ class BaseImplCase1() : Base() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val base0: Base = BaseImplCase2(1, "1", 1.2, mutableListOf({ 1 }, { 4 }, { throw Exception() }))
-    val base1 = BaseImplCase2(1, "1", 1.2, mutableListOf({ 1 }, { 4 }, { throw Exception() }))
-    val base: BaseImplCase2 = BaseImplCase2(1, "1", 1.2, mutableListOf({ 1 }, { 4 }, { throw Exception() }))
+    konst base0: Base = BaseImplCase2(1, "1", 1.2, mutableListOf({ 1 }, { 4 }, { throw Exception() }))
+    konst base1 = BaseImplCase2(1, "1", 1.2, mutableListOf({ 1 }, { 4 }, { throw Exception() }))
+    konst base: BaseImplCase2 = BaseImplCase2(1, "1", 1.2, mutableListOf({ 1 }, { 4 }, { throw Exception() }))
 
-    val a1: Any = base.a
+    konst a1: Any = base.a
     base.a = 123
 
-    val b1: Any = base.b
+    konst b1: Any = base.b
     base.b = 3
 
-    val c1 = base.c
+    konst c1 = base.c
     base.c = Exception ()
 
-    val d1 = base.d
+    konst d1 = base.d
     base.d = ""
 }
 

@@ -9,8 +9,8 @@ operator fun A.divAssign(y: Int) { x /= y }
 operator fun A.remAssign(y: Int) { x %= y }
 
 fun box(): String {
-  val original = A()
-  val a = original
+  konst original = A()
+  konst a = original
 
   a += 1
   if (a !== original) return "Fail 1: $a !== $original"

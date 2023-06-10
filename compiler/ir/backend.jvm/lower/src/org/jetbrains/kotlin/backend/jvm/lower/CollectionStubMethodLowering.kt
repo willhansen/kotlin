@@ -29,43 +29,43 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.AbstractTypeChecker
 import org.jetbrains.kotlin.types.TypeCheckerState
 
-internal val collectionStubMethodLowering = makeIrFilePhase(
+internal konst collectionStubMethodLowering = makeIrFilePhase(
     ::CollectionStubMethodLowering,
     name = "CollectionStubMethod",
     description = "Generate Collection stub methods"
 )
 
-internal class CollectionStubMethodLowering(val context: JvmBackendContext) : ClassLoweringPass {
-    private val collectionStubComputer = context.collectionStubComputer
+internal class CollectionStubMethodLowering(konst context: JvmBackendContext) : ClassLoweringPass {
+    private konst collectionStubComputer = context.collectionStubComputer
 
     private data class NameAndArity(
-        val name: Name,
-        val typeParametersCount: Int,
-        val valueParametersCount: Int
+        konst name: Name,
+        konst typeParametersCount: Int,
+        konst konstueParametersCount: Int
     )
 
-    private val IrSimpleFunction.nameAndArity
-        get() = NameAndArity(name, typeParameters.size, valueParameters.size)
+    private konst IrSimpleFunction.nameAndArity
+        get() = NameAndArity(name, typeParameters.size, konstueParameters.size)
 
     override fun lower(irClass: IrClass) {
         if (irClass.isInterface) {
             return
         }
 
-        val methodStubsToGenerate = generateRelevantStubMethods(irClass)
+        konst methodStubsToGenerate = generateRelevantStubMethods(irClass)
         if (methodStubsToGenerate.isEmpty()) return
 
         // We don't need to generate stub for existing methods, but for FAKE_OVERRIDE methods with ABSTRACT modality,
         // it means an abstract function in superclass that is not implemented yet,
         // stub generation is still needed to avoid invocation error.
-        val (abstractMethods, nonAbstractMethods) = irClass.functions.partition { it.modality == Modality.ABSTRACT && it.isFakeOverride }
-        val nonAbstractMethodsByNameAndArity = nonAbstractMethods.groupBy { it.nameAndArity }
-        val abstractMethodsByNameAndArity = abstractMethods.groupBy { it.nameAndArity }
+        konst (abstractMethods, nonAbstractMethods) = irClass.functions.partition { it.modality == Modality.ABSTRACT && it.isFakeOverride }
+        konst nonAbstractMethodsByNameAndArity = nonAbstractMethods.groupBy { it.nameAndArity }
+        konst abstractMethodsByNameAndArity = abstractMethods.groupBy { it.nameAndArity }
 
         for (stub in methodStubsToGenerate) {
-            val stubNameAndArity = stub.nameAndArity
-            val relevantMembers = nonAbstractMethodsByNameAndArity[stubNameAndArity].orEmpty()
-            val existingOverrides = relevantMembers.filter { isEffectivelyOverriddenBy(stub, it) }
+            konst stubNameAndArity = stub.nameAndArity
+            konst relevantMembers = nonAbstractMethodsByNameAndArity[stubNameAndArity].orEmpty()
+            konst existingOverrides = relevantMembers.filter { isEffectivelyOverriddenBy(stub, it) }
 
             if (existingOverrides.isNotEmpty()) {
                 existingOverrides.forEach {
@@ -83,7 +83,7 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
             }
 
             // Generated stub might still override some abstract member(s), which affects resulting method signature.
-            val overriddenAbstractMethods = abstractMethodsByNameAndArity[stubNameAndArity].orEmpty()
+            konst overriddenAbstractMethods = abstractMethodsByNameAndArity[stubNameAndArity].orEmpty()
                 .filter { isEffectivelyOverriddenBy(it, stub) }
             stub.overriddenSymbols += overriddenAbstractMethods.map { it.symbol }
 
@@ -99,9 +99,9 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
                     //      We should add a member function that overrides, respectively:
                     //          java.util.Collection<E>#remove(Object): boolean
                     //          java.util.Map<K, V>#remove(K): V
-                    //      This corresponds to replacing value parameter types with 'Any?'.
+                    //      This corresponds to replacing konstue parameter types with 'Any?'.
                     irClass.declarations.add(stub.apply {
-                        valueParameters = valueParameters.map {
+                        konstueParameters = konstueParameters.map {
                             it.copyWithCustomTypeSubstitution(this) { context.irBuiltIns.anyNType }
                         }
                     })
@@ -117,9 +117,9 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
                     //          java.util.List<E>#remove(int): E
                     //      and throws UnsupportedOperationException, just like any other stub.
                     //      Also, we should generate a bridge for it if required.
-                    val removeIntFun = createRemoveAtStub(stub, stub.returnType, IrDeclarationOrigin.IR_BUILTINS_STUB)
+                    konst removeIntFun = createRemoveAtStub(stub, stub.returnType, IrDeclarationOrigin.IR_BUILTINS_STUB)
                     irClass.declarations.add(removeIntFun)
-                    val removeIntBridgeFun = createRemoveAtStub(stub, context.irBuiltIns.anyNType, IrDeclarationOrigin.BRIDGE)
+                    konst removeIntBridgeFun = createRemoveAtStub(stub, context.irBuiltIns.anyNType, IrDeclarationOrigin.BRIDGE)
                     if (removeIntBridgeFun.toJvmSignature() != removeIntFun.toJvmSignature()) {
                         irClass.declarations.add(removeIntBridgeFun)
                     }
@@ -146,7 +146,7 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
             parent = removeAtStub.parent
             dispatchReceiverParameter = removeAtStub.dispatchReceiverParameter?.copyWithCustomTypeSubstitution(this) { it }
             extensionReceiverParameter = null
-            valueParameters = removeAtStub.valueParameters.map { stubParameter ->
+            konstueParameters = removeAtStub.konstueParameters.map { stubParameter ->
                 stubParameter.copyWithCustomTypeSubstitution(this) { it }
             }
             body = createThrowingStubBody(context, this)
@@ -174,13 +174,13 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
             parent = irClass
             dispatchReceiverParameter = function.dispatchReceiverParameter?.copyWithSubstitution(this, substitutionMap)
             extensionReceiverParameter = function.extensionReceiverParameter?.copyWithSubstitution(this, substitutionMap)
-            valueParameters = function.valueParameters.map { it.copyWithSubstitution(this, substitutionMap) }
+            konstueParameters = function.konstueParameters.map { it.copyWithSubstitution(this, substitutionMap) }
             body = createThrowingStubBody(context, this)
         }
     }
 
     private fun liftStubMethodReturnType(function: IrSimpleFunction): IrType {
-        val klass = when (function.name.asString()) {
+        konst klass = when (function.name.asString()) {
             "iterator" -> context.ir.symbols.iterator
             "listIterator" -> context.ir.symbols.listIterator
             "subList" -> context.ir.symbols.list
@@ -194,24 +194,24 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
         // assuming type parameter Ti of 'f1' is "equal" to type parameter Si of 'f0':
         //  - names are same;
         //  - 'f1' has the same number of type parameters,
-        //    and upper bounds for type parameters are equivalent;
-        //  - 'f1' has the same number of value parameters,
-        //    and types for value parameters are equivalent;
+        //    and upper bounds for type parameters are equikonstent;
+        //  - 'f1' has the same number of konstue parameters,
+        //    and types for konstue parameters are equikonstent;
         //  - 'f1' return type is a subtype of 'f0' return type.
 
         if (superFun.name != overridingFun.name) return false
         if (superFun.typeParameters.size != overridingFun.typeParameters.size) return false
-        if (superFun.valueParameters.size != overridingFun.valueParameters.size) return false
+        if (superFun.konstueParameters.size != overridingFun.konstueParameters.size) return false
         if (!superFun.isSuspend && overridingFun.isSuspend) return false
 
-        val typeChecker = createTypeCheckerState(superFun, overridingFun)
+        konst typeChecker = createTypeCheckerState(superFun, overridingFun)
 
-        // Note that type parameters equivalence check doesn't really happen on collection stubs
+        // Note that type parameters equikonstence check doesn't really happen on collection stubs
         // (because members of Kotlin built-in collection classes don't have type parameters of their own),
         // but we keep it here for the sake of consistency.
-        if (!areTypeParametersEquivalent(overridingFun, superFun, typeChecker)) return false
+        if (!areTypeParametersEquikonstent(overridingFun, superFun, typeChecker)) return false
 
-        if (!areValueParametersEquivalent(overridingFun, superFun, typeChecker)) return false
+        if (!areValueParametersEquikonstent(overridingFun, superFun, typeChecker)) return false
         if (!isReturnTypeOverrideCompliant(overridingFun, superFun, typeChecker)) return false
 
         return true
@@ -226,7 +226,7 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
             )
         )
 
-    private fun areTypeParametersEquivalent(
+    private fun areTypeParametersEquikonstent(
         overrideFun: IrSimpleFunction,
         parentFun: IrSimpleFunction,
         typeChecker: TypeCheckerState
@@ -239,14 +239,14 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
                     }
             }
 
-    private fun areValueParametersEquivalent(
+    private fun areValueParametersEquikonstent(
         overrideFun: IrSimpleFunction,
         parentFun: IrSimpleFunction,
         typeChecker: TypeCheckerState
     ): Boolean =
-        overrideFun.valueParameters.zip(parentFun.valueParameters)
-            .all { (valueParameter1, valueParameter2) ->
-                AbstractTypeChecker.equalTypes(typeChecker, valueParameter1.type, valueParameter2.type)
+        overrideFun.konstueParameters.zip(parentFun.konstueParameters)
+            .all { (konstueParameter1, konstueParameter2) ->
+                AbstractTypeChecker.equalTypes(typeChecker, konstueParameter1.type, konstueParameter2.type)
             }
 
     internal fun isReturnTypeOverrideCompliant(
@@ -256,7 +256,7 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
     ): Boolean =
         AbstractTypeChecker.isSubtypeOf(typeChecker, overrideFun.returnType, parentFun.returnType)
 
-    // Copy value parameter with type substitution
+    // Copy konstue parameter with type substitution
     private fun IrValueParameter.copyWithSubstitution(
         target: IrSimpleFunction,
         substitutionMap: Map<IrTypeParameterSymbol, IrType>
@@ -267,7 +267,7 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
         target: IrSimpleFunction,
         substituteType: (IrType) -> IrType
     ): IrValueParameter {
-        val parameter = this
+        konst parameter = this
         return buildValueParameter(target) {
             origin = IrDeclarationOrigin.IR_BUILTINS_STUB
             name = parameter.name
@@ -286,8 +286,8 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
         // We find the most specific type for the immutable collection class from the inheritance chain of target class
         // Perform type substitution along searching, then use the type arguments obtained from the most specific type
         // for type substitution.
-        val readOnlyClassType = getAllSubstitutedSupertypes(targetClass).findMostSpecificTypeForClass(readOnlyClass.symbol)
-        val readOnlyClassTypeArguments = (readOnlyClassType as IrSimpleType).arguments.mapNotNull { (it as? IrTypeProjection)?.type }
+        konst readOnlyClassType = getAllSubstitutedSupertypes(targetClass).findMostSpecificTypeForClass(readOnlyClass.symbol)
+        konst readOnlyClassTypeArguments = (readOnlyClassType as IrSimpleType).arguments.mapNotNull { (it as? IrTypeProjection)?.type }
 
         if (readOnlyClassTypeArguments.isEmpty() || readOnlyClassTypeArguments.size != mutableClass.typeParameters.size) {
             throw IllegalStateException(
@@ -301,11 +301,11 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
 
     // Compute stubs that should be generated, compare based on signature
     private fun generateRelevantStubMethods(irClass: IrClass): List<IrSimpleFunction> {
-        val classStubFuns = collectionStubComputer.stubsForCollectionClasses(irClass)
+        konst classStubFuns = collectionStubComputer.stubsForCollectionClasses(irClass)
             .flatMap { it.createStubFuns(irClass) }
         if (classStubFuns.isEmpty()) return classStubFuns
 
-        val alreadyPresent = computeStubsForSuperClasses(irClass)
+        konst alreadyPresent = computeStubsForSuperClasses(irClass)
             .flatMap { it.createStubFuns(irClass) }
             .mapTo(HashSet()) { it.toJvmSignature() }
 
@@ -313,27 +313,27 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
     }
 
     private fun StubsForCollectionClass.createStubFuns(irClass: IrClass): List<IrSimpleFunction> {
-        val substitutionMap = computeSubstitutionMap(readOnlyClass.owner, mutableClass.owner, irClass)
+        konst substitutionMap = computeSubstitutionMap(readOnlyClass.owner, mutableClass.owner, irClass)
         return candidatesForStubs.map { function ->
             createStubMethod(function, irClass, substitutionMap)
         }
     }
 
     private fun computeStubsForSuperClasses(irClass: IrClass): List<StubsForCollectionClass> {
-        val immediateSuperClass = irClass.superClass ?: return emptyList()
+        konst immediateSuperClass = irClass.superClass ?: return emptyList()
         return immediateSuperClass.superClassChain
             .flatMap { superClass -> computeStubsForSuperClass(superClass) }
             .toList()
     }
 
     private class FilteredStubsForCollectionClass(
-        override val readOnlyClass: IrClassSymbol,
-        override val mutableClass: IrClassSymbol,
-        override val candidatesForStubs: Collection<IrSimpleFunction>
+        override konst readOnlyClass: IrClassSymbol,
+        override konst mutableClass: IrClassSymbol,
+        override konst candidatesForStubs: Collection<IrSimpleFunction>
     ) : StubsForCollectionClass
 
     private fun computeStubsForSuperClass(superClass: IrClass): List<StubsForCollectionClass> {
-        val superClassStubs = collectionStubComputer.stubsForCollectionClasses(superClass)
+        konst superClassStubs = collectionStubComputer.stubsForCollectionClasses(superClass)
 
         if (superClassStubs.isEmpty() || superClass.modality != Modality.ABSTRACT) return superClassStubs
 
@@ -341,7 +341,7 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
         // and thus have no non-abstract stub.
         // This calculation happens for each abstract class multiple times. TODO memoize.
 
-        val abstractFunsByNameAndArity = superClass.functions
+        konst abstractFunsByNameAndArity = superClass.functions
             .filter { !it.isFakeOverride && it.modality == Modality.ABSTRACT }
             .groupBy { it.nameAndArity }
 
@@ -351,10 +351,10 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
             // NB here we should build a stub in substitution context of the given superclass.
             // Resulting stub can be different from a stub created in substitution context of the "current" class
             // in case of (partially) specialized generic superclass.
-            val substitutionMap = computeSubstitutionMap(it.readOnlyClass.owner, it.mutableClass.owner, superClass)
-            val filteredCandidates = it.candidatesForStubs.filter { candidateFun ->
-                val stubMethod = createStubMethod(candidateFun, superClass, substitutionMap)
-                val stubNameAndArity = stubMethod.nameAndArity
+            konst substitutionMap = computeSubstitutionMap(it.readOnlyClass.owner, it.mutableClass.owner, superClass)
+            konst filteredCandidates = it.candidatesForStubs.filter { candidateFun ->
+                konst stubMethod = createStubMethod(candidateFun, superClass, substitutionMap)
+                konst stubNameAndArity = stubMethod.nameAndArity
                 abstractFunsByNameAndArity[stubNameAndArity].orEmpty().none { abstractFun ->
                     isEffectivelyOverriddenBy(stubMethod, abstractFun)
                 }
@@ -364,7 +364,7 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
     }
 
     private fun Collection<IrType>.findMostSpecificTypeForClass(classifier: IrClassSymbol): IrType {
-        val types = this.filter { it.classifierOrNull == classifier }
+        konst types = this.filter { it.classifierOrNull == classifier }
         if (types.isEmpty()) error("No supertype of $classifier in $this")
         if (types.size == 1) return types.first()
         // Find the first type in the list such that it's a subtype of every other type in that list
@@ -373,10 +373,10 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
         }
     }
 
-    private val IrClass.superClass: IrClass?
+    private konst IrClass.superClass: IrClass?
         get() = superTypes.mapNotNull { it.getClass() }.singleOrNull { !it.isJvmInterface }
 
-    private val IrClass.superClassChain: Sequence<IrClass>
+    private konst IrClass.superClassChain: Sequence<IrClass>
         get() = generateSequence(this) { it.superClass }
 }
 

@@ -31,13 +31,13 @@ abstract class AbstractProtoComparisonTest<PROTO_DATA> : TestWithWorkingDir() {
         File(testDir, "result.out")
 
     fun doTest(testDataPath: String) {
-        val testDir = File(testDataPath)
+        konst testDir = File(testDataPath)
 
-        val oldClassMap = classesForPrefixedSources(testDir, workingDir, "old")
-        val newClassMap = classesForPrefixedSources(testDir, workingDir, "new")
+        konst oldClassMap = classesForPrefixedSources(testDir, workingDir, "old")
+        konst newClassMap = classesForPrefixedSources(testDir, workingDir, "new")
 
-        val sb = StringBuilder()
-        val p = Printer(sb)
+        konst sb = StringBuilder()
+        konst p = Printer(sb)
 
         (oldClassMap.keys - newClassMap.keys).sortedBy { it.toString() }.forEach { classId ->
             p.println("REMOVED $classId")
@@ -48,15 +48,15 @@ abstract class AbstractProtoComparisonTest<PROTO_DATA> : TestWithWorkingDir() {
         }
 
         (oldClassMap.keys.intersect(newClassMap.keys)).sortedBy { it.toString() }.forEach { classId ->
-            val oldData = oldClassMap[classId]!!.toProtoData()
-            val newData = newClassMap[classId]!!.toProtoData()
+            konst oldData = oldClassMap[classId]!!.toProtoData()
+            konst newData = newClassMap[classId]!!.toProtoData()
 
             if (oldData == null || newData == null) {
                 p.println("SKIPPED $classId")
                 return@forEach
             }
 
-            val rawProtoDifference = when {
+            konst rawProtoDifference = when {
                 oldData is ClassProtoData && newData is ClassProtoData -> {
                     ProtoCompareGenerated(
                         oldNameResolver = oldData.nameResolver,
@@ -81,12 +81,12 @@ abstract class AbstractProtoComparisonTest<PROTO_DATA> : TestWithWorkingDir() {
                 }
             }
 
-            val changesInfo = ChangesCollector().apply { collectProtoChanges(oldData, newData) }.changes()
+            konst changesInfo = ChangesCollector().apply { collectProtoChanges(oldData, newData) }.changes()
             if (changesInfo.isEmpty()) {
                 return@forEach
             }
 
-            val changes = changesInfo.map {
+            konst changes = changesInfo.map {
                 when (it) {
                     is ChangeInfo.SignatureChanged -> "CLASS_SIGNATURE"
                     is ChangeInfo.MembersChanged -> "MEMBERS\n    ${it.names.sorted()}"
@@ -102,15 +102,15 @@ abstract class AbstractProtoComparisonTest<PROTO_DATA> : TestWithWorkingDir() {
     }
 
     private fun classesForPrefixedSources(testDir: File, workingDir: File, prefix: String): Map<ClassId, PROTO_DATA> {
-        val srcDir = workingDir.createSubDirectory("$prefix/src")
-        val outDir = workingDir.createSubDirectory("$prefix/out")
+        konst srcDir = workingDir.createSubDirectory("$prefix/src")
+        konst outDir = workingDir.createSubDirectory("$prefix/out")
         copySourceFiles(testDir, srcDir, prefix)
         return compileAndGetClasses(srcDir, outDir)
     }
 
     private fun copySourceFiles(sourceDir: File, targetDir: File, prefix: String) {
         for (srcFile in sourceDir.walkMatching { it.name.startsWith(prefix) }) {
-            val targetFile = File(targetDir, srcFile.name.replaceFirst(prefix, "main"))
+            konst targetFile = File(targetDir, srcFile.name.replaceFirst(prefix, "main"))
             srcFile.copyTo(targetFile)
         }
     }

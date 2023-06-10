@@ -20,9 +20,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertSame
 
 class SingleTargetAndroidSourceSetLayoutTest {
-    private val project = ProjectBuilder.builder().build() as ProjectInternal
+    private konst project = ProjectBuilder.builder().build() as ProjectInternal
 
-    private val android: LibraryExtension = run {
+    private konst android: LibraryExtension = run {
         addBuildEventsListenerRegistryMock(project)
         project.plugins.apply(LibraryPlugin::class.java)
         project.extensions.getByName("android") as LibraryExtension
@@ -37,7 +37,7 @@ class SingleTargetAndroidSourceSetLayoutTest {
     @Test
     fun `test - default configuration - AndroidSourceSet has associated KotlinSourceSet`() {
         android.sourceSets.all { androidSourceSet -> project.getKotlinSourceSetOrFail(androidSourceSet) }
-        project.evaluate()
+        project.ekonstuate()
     }
 
     @Test
@@ -50,7 +50,7 @@ class SingleTargetAndroidSourceSetLayoutTest {
                 "Expected Convention 'kotlin' on AndroidSourceSet: ${androidSourceSet.name}"
             )
         }
-        project.evaluate()
+        project.ekonstuate()
     }
 
 
@@ -64,16 +64,16 @@ class SingleTargetAndroidSourceSetLayoutTest {
         android.productFlavors.create("free").dimension = "price"
 
         android.sourceSets.all { androidSourceSet ->
-            val kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
+            konst kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
             assertEquals(androidSourceSet.name, kotlinSourceSet.name)
         }
     }
 
     @Test
     fun `AndroidSourceSet kotlin AndroidSourceDirectorySet`() {
-        project.evaluate()
+        project.ekonstuate()
         android.libraryVariants.all { variant ->
-            val main = variant.sourceSets.first { it.name == "main" }
+            konst main = variant.sourceSets.first { it.name == "main" }
             assertEquals(
                 project.files("src/main/kotlin", "src/main/java").toSet(),
                 main.kotlinDirectories.toSet()
@@ -81,7 +81,7 @@ class SingleTargetAndroidSourceSetLayoutTest {
         }
 
         android.unitTestVariants.all { variant ->
-            val test = variant.sourceSets.first { it.name == "test" }
+            konst test = variant.sourceSets.first { it.name == "test" }
             assertEquals(
                 project.files("src/test/kotlin", "src/test/java").toSet(),
                 test.kotlinDirectories.toSet()
@@ -89,7 +89,7 @@ class SingleTargetAndroidSourceSetLayoutTest {
         }
 
         android.testVariants.all { variant ->
-            val androidTest = variant.sourceSets.first { it.name == "androidTest" }
+            konst androidTest = variant.sourceSets.first { it.name == "androidTest" }
             assertEquals(
                 project.files("src/androidTest/kotlin", "src/androidTest/java").toSet(),
                 androidTest.kotlinDirectories.toSet()

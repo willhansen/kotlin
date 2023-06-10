@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X(val x: Any)
+konstue class X(konst x: Any)
 
 fun useX(x: X): String = x.x as String
 

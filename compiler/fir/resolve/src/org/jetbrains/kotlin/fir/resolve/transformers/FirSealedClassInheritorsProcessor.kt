@@ -37,8 +37,8 @@ class FirSealedClassInheritorsProcessor(
     scopeSession: ScopeSession
 ) : FirGlobalResolveProcessor(session, scopeSession, FirResolvePhase.SEALED_CLASS_INHERITORS) {
     override fun process(files: Collection<FirFile>) {
-        val sealedClassInheritorsMap = mutableMapOf<FirRegularClass, MutableList<ClassId>>()
-        val inheritorsCollector = InheritorsCollector(session)
+        konst sealedClassInheritorsMap = mutableMapOf<FirRegularClass, MutableList<ClassId>>()
+        konst inheritorsCollector = InheritorsCollector(session)
         files.forEach {
             withFileAnalysisExceptionWrapping(it) {
                 it.accept(inheritorsCollector, sealedClassInheritorsMap)
@@ -51,7 +51,7 @@ class FirSealedClassInheritorsProcessor(
         }
     }
 
-    class InheritorsCollector(val session: FirSession) : FirDefaultVisitor<Unit, MutableMap<FirRegularClass, MutableList<ClassId>>>() {
+    class InheritorsCollector(konst session: FirSession) : FirDefaultVisitor<Unit, MutableMap<FirRegularClass, MutableList<ClassId>>>() {
         override fun visitElement(element: FirElement, data: MutableMap<FirRegularClass, MutableList<ClassId>>) {}
 
         override fun visitFile(file: FirFile, data: MutableMap<FirRegularClass, MutableList<ClassId>>) {
@@ -65,20 +65,20 @@ class FirSealedClassInheritorsProcessor(
                 data.computeIfAbsent(regularClass) { mutableListOf() }
             }
 
-            val symbolProvider = session.symbolProvider
+            konst symbolProvider = session.symbolProvider
 
             for (typeRef in regularClass.superTypeRefs) {
-                val parent = extractClassFromTypeRef(symbolProvider, typeRef).takeIf { it?.modality == Modality.SEALED } ?: continue
+                konst parent = extractClassFromTypeRef(symbolProvider, typeRef).takeIf { it?.modality == Modality.SEALED } ?: continue
                 // Inheritors of sealed class are allowed only in same package
                 if (parent.classId.packageFqName != regularClass.classId.packageFqName) continue
-                val inheritors = data.computeIfAbsent(parent) { mutableListOf() }
+                konst inheritors = data.computeIfAbsent(parent) { mutableListOf() }
                 inheritors += regularClass.symbol.classId
             }
         }
 
         private fun extractClassFromTypeRef(symbolProvider: FirSymbolProvider, typeRef: FirTypeRef): FirRegularClass? {
-            val lookupTag = (typeRef.coneType as? ConeLookupTagBasedType)?.lookupTag ?: return null
-            val classLikeSymbol: FirClassifierSymbol<*> = symbolProvider.getSymbolByLookupTag(lookupTag) ?: return null
+            konst lookupTag = (typeRef.coneType as? ConeLookupTagBasedType)?.lookupTag ?: return null
+            konst classLikeSymbol: FirClassifierSymbol<*> = symbolProvider.getSymbolByLookupTag(lookupTag) ?: return null
             return when (classLikeSymbol) {
                 is FirRegularClassSymbol -> classLikeSymbol.fir
                 is FirTypeAliasSymbol -> {
@@ -90,7 +90,7 @@ class FirSealedClassInheritorsProcessor(
         }
     }
 
-    class InheritorsTransformer(private val inheritorsMap: MutableMap<FirRegularClass, MutableList<ClassId>>) : FirTransformer<Any?>() {
+    class InheritorsTransformer(private konst inheritorsMap: MutableMap<FirRegularClass, MutableList<ClassId>>) : FirTransformer<Any?>() {
         override fun <E : FirElement> transformElement(element: E, data: Any?): E {
             return element
         }
@@ -103,7 +103,7 @@ class FirSealedClassInheritorsProcessor(
 
         override fun transformRegularClass(regularClass: FirRegularClass, data: Any?): FirStatement {
             if (regularClass.modality == Modality.SEALED) {
-                val inheritors = inheritorsMap.remove(regularClass)
+                konst inheritors = inheritorsMap.remove(regularClass)
                 if (inheritors != null) {
                     regularClass.setSealedClassInheritors(inheritors)
                 }

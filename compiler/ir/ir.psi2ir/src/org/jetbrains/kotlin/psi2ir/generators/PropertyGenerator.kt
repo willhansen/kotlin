@@ -38,8 +38,8 @@ import org.jetbrains.kotlin.resolve.hasBackingField
 
 internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : DeclarationGeneratorExtension(declarationGenerator) {
     fun generatePropertyDeclaration(ktProperty: KtProperty): IrProperty {
-        val propertyDescriptor = getPropertyDescriptor(ktProperty)
-        val ktDelegate = ktProperty.delegate
+        konst propertyDescriptor = getPropertyDescriptor(ktProperty)
+        konst ktDelegate = ktProperty.delegate
         return if (ktDelegate != null)
             generateDelegatedProperty(ktProperty, ktDelegate, propertyDescriptor)
         else
@@ -47,7 +47,7 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
     }
 
     fun generateDestructuringDeclarationEntryAsPropertyDeclaration(ktEntry: KtDestructuringDeclarationEntry): IrProperty {
-        val propertyDescriptor = getPropertyDescriptor(ktEntry)
+        konst propertyDescriptor = getPropertyDescriptor(ktEntry)
         return context.symbolTable.declareProperty(
             ktEntry.startOffsetSkippingComments, ktEntry.endOffset,
             IrDeclarationOrigin.DEFINED,
@@ -65,7 +65,7 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
     }
 
     fun generatePropertyForPrimaryConstructorParameter(ktParameter: KtParameter, irValueParameter: IrValueParameter): IrDeclaration {
-        val propertyDescriptor = getOrFail(BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, ktParameter)
+        konst propertyDescriptor = getOrFail(BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, ktParameter)
         return generateSyntheticProperty(ktParameter, propertyDescriptor, irValueParameter)
     }
 
@@ -75,7 +75,7 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
         irValueParameter: IrValueParameter?,
         generateSyntheticAccessors: Boolean = false
     ): IrProperty {
-        val irPropertyType = propertyDescriptor.type.toIrType()
+        konst irPropertyType = propertyDescriptor.type.toIrType()
         return generateSyntheticPropertyWithInitializer(ktDeclarationContainer, propertyDescriptor, generateSyntheticAccessors) {
             if (irValueParameter == null)
                 null
@@ -107,7 +107,7 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
         ).also { irProperty ->
             irProperty.backingField = generatePropertyBackingField(ktDeclarationContainer, propertyDescriptor, generateInitializer)
 
-            val getter = propertyDescriptor.getter
+            konst getter = propertyDescriptor.getter
                 ?: if (generateSyntheticAccessors) {
                     PropertyGetterDescriptorImpl(
                         propertyDescriptor,
@@ -125,14 +125,14 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
                 )
 
             if (propertyDescriptor.isVar) {
-                val setter = propertyDescriptor.setter
+                konst setter = propertyDescriptor.setter
                     ?: if (generateSyntheticAccessors) {
                         PropertySetterDescriptorImpl(
                             propertyDescriptor,
                             Annotations.EMPTY, Modality.FINAL, DescriptorVisibilities.PUBLIC, false, false, false,
                             CallableMemberDescriptor.Kind.SYNTHESIZED, null, propertyDescriptor.source
                         ).apply {
-                            val setterValueParameter = ValueParameterDescriptorImpl(
+                            konst setterValueParameter = ValueParameterDescriptorImpl(
                                 this, null, 0, Annotations.EMPTY, DEFAULT_VALUE_PARAMETER, propertyDescriptor.type,
                                 declaresDefaultValue = false, isCrossinline = false, isNoinline = false,
                                 varargElementType = null, source = SourceElement.NO_SOURCE
@@ -190,16 +190,16 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
             irProperty.backingField =
                 if (propertyDescriptor.actuallyHasBackingField(context.bindingContext))
                     generatePropertyBackingField(ktProperty, propertyDescriptor) { irField ->
-                        ktProperty.initializer?.let evaluateInitializer@{ ktInitializer ->
-                            val compileTimeConst = propertyDescriptor.compileTimeInitializer
+                        ktProperty.initializer?.let ekonstuateInitializer@{ ktInitializer ->
+                            konst compileTimeConst = propertyDescriptor.compileTimeInitializer
                             if (compileTimeConst != null) {
-                                val constantInfo = context.bindingContext.get(BindingContext.COMPILE_TIME_VALUE, ktInitializer)
+                                konst constantInfo = context.bindingContext.get(BindingContext.COMPILE_TIME_VALUE, ktInitializer)
                                 if (propertyDescriptor.isConst ||
                                     (constantInfo?.usesNonConstValAsConstant == false &&
                                             (!constantInfo.usesVariableAsConstant ||
                                                     context.languageVersionSettings.supportsFeature(LanguageFeature.InlineConstVals)))
                                 ) {
-                                    return@evaluateInitializer context.irFactory.createExpressionBody(
+                                    return@ekonstuateInitializer context.irFactory.createExpressionBody(
                                         context.constantValueGenerator.generateConstantValueAsExpression(
                                             ktInitializer.startOffsetSkippingComments, ktInitializer.endOffset,
                                             compileTimeConst
@@ -225,8 +225,8 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
     fun generateFakeOverrideProperty(propertyDescriptor: PropertyDescriptor, ktElement: KtPureElement): IrProperty? {
         if (propertyDescriptor.visibility == DescriptorVisibilities.INVISIBLE_FAKE) return null
 
-        val startOffset = ktElement.pureStartOffsetOrUndefined
-        val endOffset = ktElement.pureEndOffsetOrUndefined
+        konst startOffset = ktElement.pureStartOffsetOrUndefined
+        konst endOffset = ktElement.pureEndOffsetOrUndefined
 
         return context.symbolTable.declareProperty(startOffset, endOffset, IrDeclarationOrigin.FAKE_OVERRIDE, propertyDescriptor).apply {
             this.getter = propertyDescriptor.getter?.let {
@@ -248,22 +248,22 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
     }
 
     private fun generateGetterIfRequired(ktProperty: KtVariableDeclaration, property: PropertyDescriptor): IrSimpleFunction? {
-        val getter = property.getter ?: return null
+        konst getter = property.getter ?: return null
         return FunctionGenerator(declarationGenerator).generatePropertyAccessor(getter, ktProperty, (ktProperty as? KtProperty)?.getter)
     }
 
     private fun generateSetterIfRequired(ktProperty: KtVariableDeclaration, property: PropertyDescriptor): IrSimpleFunction? {
         if (!property.isVar) return null
-        val setter = property.setter ?: return null
+        konst setter = property.setter ?: return null
         return FunctionGenerator(declarationGenerator).generatePropertyAccessor(setter, ktProperty, (ktProperty as? KtProperty)?.setter)
     }
 
     private fun getPropertyDescriptor(ktProperty: KtVariableDeclaration): PropertyDescriptor {
-        val variableDescriptor = getOrFail(BindingContext.VARIABLE, ktProperty)
+        konst variableDescriptor = getOrFail(BindingContext.VARIABLE, ktProperty)
         return variableDescriptor as? PropertyDescriptor ?: TODO("not a property: $variableDescriptor")
     }
 
-    private val PropertyDescriptor.fieldVisibility: DescriptorVisibility
+    private konst PropertyDescriptor.fieldVisibility: DescriptorVisibility
         get() = declarationGenerator.context.extensions.computeFieldVisibility(this)
             ?: when {
                 isLateInit -> setter?.visibility ?: visibility

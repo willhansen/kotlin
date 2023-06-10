@@ -22,7 +22,7 @@ import com.sun.tools.javac.tree.JCTree
 import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.Visibility
 import org.jetbrains.kotlin.javac.JavacWrapper
-import org.jetbrains.kotlin.javac.resolve.ConstantEvaluator
+import org.jetbrains.kotlin.javac.resolve.ConstantEkonstuator
 import org.jetbrains.kotlin.load.java.structure.JavaClass
 import org.jetbrains.kotlin.load.java.structure.JavaField
 import org.jetbrains.kotlin.load.java.structure.JavaType
@@ -35,36 +35,36 @@ class TreeBasedField(
         javac: JavacWrapper
 ) : TreeBasedMember<JCTree.JCVariableDecl>(tree, compilationUnit, containingClass, javac), JavaField {
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(tree.name.toString())
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = tree.modifiers.isAbstract
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = containingClass.isInterface || tree.modifiers.isStatic
 
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = containingClass.isInterface || tree.modifiers.isFinal
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = if (containingClass.isInterface) Visibilities.Public else tree.modifiers.visibility
 
-    override val isEnumEntry: Boolean
+    override konst isEnumEntry: Boolean
         get() = tree.modifiers.flags and Flags.ENUM.toLong() != 0L
 
-    override val type: JavaType
+    override konst type: JavaType
         get() = TreeBasedType.create(tree.getType(), compilationUnit, javac, annotations, containingClass)
 
-    override val initializerValue: Any?
+    override konst initializerValue: Any?
         get() = tree.init?.let { initExpr ->
-            if (hasConstantNotNullInitializer) ConstantEvaluator(containingClass, javac, compilationUnit).getValue(initExpr) else null
+            if (hasConstantNotNullInitializer) ConstantEkonstuator(containingClass, javac, compilationUnit).getValue(initExpr) else null
         }
 
-    override val hasConstantNotNullInitializer: Boolean
+    override konst hasConstantNotNullInitializer: Boolean
         get() = tree.init?.let {
-            if (it is JCTree.JCLiteral && it.value == null) return false
-            val type = this.type
+            if (it is JCTree.JCLiteral && it.konstue == null) return false
+            konst type = this.type
 
             isFinal && ((type is TreeBasedPrimitiveType) ||
                         (type is TreeBasedNonGenericClassifierType &&

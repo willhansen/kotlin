@@ -1,10 +1,10 @@
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 public class A {
     fun getFromClass(): Boolean {
         try {
-            val a = str
+            konst a = str
             return false
         } catch (e: RuntimeException) {
             return true
@@ -13,7 +13,7 @@ public class A {
 
     fun getFromLambda(): Boolean {
         try {
-            val a = eval { str }
+            konst a = ekonst { str }
             return false
         } catch (e: RuntimeException) {
             return true
@@ -25,7 +25,7 @@ public class A {
 
         fun getFromCompanion(): Boolean {
             try {
-                val a = str
+                konst a = str
                 return false
             } catch (e: RuntimeException) {
                 return true

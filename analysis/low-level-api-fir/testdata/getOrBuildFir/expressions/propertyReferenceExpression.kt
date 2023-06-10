@@ -1,5 +1,5 @@
 class A {
     fun foo(){}
 }
-val y: A = A()
-val x = <expr>A::foo</expr>
+konst y: A = A()
+konst x = <expr>A::foo</expr>

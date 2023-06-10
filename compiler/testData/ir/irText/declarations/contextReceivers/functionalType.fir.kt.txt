@@ -14,7 +14,7 @@ class C {
 
   }
 
-  val c: Int
+  konst c: Int
     field = 42
     get
 
@@ -27,7 +27,7 @@ class R {
 
   }
 
-  val r: Int
+  konst r: Int
     field = 42
     get
 
@@ -50,21 +50,21 @@ fun f4($context_receiver_0: C, g: Function1<C, Unit>) {
 }
 
 fun test() {
-  val lf1: @ExtensionFunctionType Function3<C, R, Param, Unit> = local fun R.<anonymous>($context_receiver_0: C, <unused var>: Param) {
+  konst lf1: @ExtensionFunctionType Function3<C, R, Param, Unit> = local fun R.<anonymous>($context_receiver_0: C, <unused var>: Param) {
     <this>.<get-r>() /*~> Unit */
     $context_receiver_0.<get-c>() /*~> Unit */
   }
 
-  val lf2: Function2<C, Param, Unit> = local fun <anonymous>($context_receiver_0: C, <unused var>: Param) {
+  konst lf2: Function2<C, Param, Unit> = local fun <anonymous>($context_receiver_0: C, <unused var>: Param) {
     $context_receiver_0.<get-c>() /*~> Unit */
   }
 
-  val lf3: @ExtensionFunctionType Function2<C, R, Unit> = local fun R.<anonymous>($context_receiver_0: C) {
+  konst lf3: @ExtensionFunctionType Function2<C, R, Unit> = local fun R.<anonymous>($context_receiver_0: C) {
     <this>.<get-r>() /*~> Unit */
     $context_receiver_0.<get-c>() /*~> Unit */
   }
 
-  val lf4: Function1<C, Unit> = local fun <anonymous>($context_receiver_0: C) {
+  konst lf4: Function1<C, Unit> = local fun <anonymous>($context_receiver_0: C) {
     $context_receiver_0.<get-c>() /*~> Unit */
   }
 

@@ -20,18 +20,18 @@ abstract class KotlinMultiplatformExtension(project: Project) :
     KotlinTargetContainerWithJsPresetFunctions,
     KotlinTargetContainerWithWasmPresetFunctions,
     KotlinTargetContainerWithNativeShortcuts {
-    override val presets: NamedDomainObjectCollection<KotlinTargetPreset<*>> = project.container(KotlinTargetPreset::class.java)
+    override konst presets: NamedDomainObjectCollection<KotlinTargetPreset<*>> = project.container(KotlinTargetPreset::class.java)
 
-    final override val targets: NamedDomainObjectCollection<KotlinTarget> = project.container(KotlinTarget::class.java)
+    final override konst targets: NamedDomainObjectCollection<KotlinTarget> = project.container(KotlinTarget::class.java)
 
     internal suspend fun awaitTargets(): NamedDomainObjectCollection<KotlinTarget> {
         AfterFinaliseDsl.await()
         return targets
     }
 
-    override val compilerTypeFromProperties: KotlinJsCompilerType? = project.kotlinPropertiesProvider.jsCompiler
+    override konst compilerTypeFromProperties: KotlinJsCompilerType? = project.kotlinPropertiesProvider.jsCompiler
 
-    private val presetExtension = project.objects.newInstance(
+    private konst presetExtension = project.objects.newInstance(
         DefaultTargetsFromPresetExtension::class.java,
         { this },
         targets
@@ -45,15 +45,15 @@ abstract class KotlinMultiplatformExtension(project: Project) :
         configure(presetExtension)
     }
 
-    internal val internalKotlinTargetHierarchy by lazy {
+    internal konst internalKotlinTargetHierarchy by lazy {
         KotlinTargetHierarchyDslImpl(targets, sourceSets)
     }
 
     @ExperimentalKotlinGradlePluginApi
-    val targetHierarchy: KotlinTargetHierarchyDsl get() = internalKotlinTargetHierarchy
+    konst targetHierarchy: KotlinTargetHierarchyDsl get() = internalKotlinTargetHierarchy
 
     @Suppress("unused") // DSL
-    val testableTargets: NamedDomainObjectCollection<KotlinTargetWithTests<*, *>>
+    konst testableTargets: NamedDomainObjectCollection<KotlinTargetWithTests<*, *>>
         get() = targets.withType(KotlinTargetWithTests::class.java)
 
     fun metadata(configure: KotlinOnlyTarget<KotlinMetadataCompilation<*>>.() -> Unit = { }): KotlinOnlyTarget<KotlinMetadataCompilation<*>> =
@@ -83,7 +83,7 @@ abstract class KotlinMultiplatformExtension(project: Project) :
     fun <T : KotlinTarget> targetFromPreset(preset: KotlinTargetPreset<T>, configure: Action<T>) =
         targetFromPreset(preset, preset.name, configure)
 
-    internal val rootSoftwareComponent: KotlinSoftwareComponent by lazy {
+    internal konst rootSoftwareComponent: KotlinSoftwareComponent by lazy {
         KotlinSoftwareComponentWithCoordinatesAndPublication(project, "kotlin", targets)
     }
 }
@@ -109,8 +109,8 @@ interface TargetsFromPresetExtension : NamedDomainObjectCollection<KotlinTarget>
 }
 
 internal abstract class DefaultTargetsFromPresetExtension @Inject constructor(
-    private val targetsContainer: () -> KotlinTargetsContainerWithPresets,
-    val targets: NamedDomainObjectCollection<KotlinTarget>,
+    private konst targetsContainer: () -> KotlinTargetsContainerWithPresets,
+    konst targets: NamedDomainObjectCollection<KotlinTarget>,
 ) : TargetsFromPresetExtension,
     NamedDomainObjectCollection<KotlinTarget> by targets {
 
@@ -137,7 +137,7 @@ internal fun <T : KotlinTarget> KotlinTargetsContainerWithPresets.configureOrCre
     targetPreset: KotlinTargetPreset<T>,
     configure: T.() -> Unit,
 ): T {
-    val existingTarget = targets.findByName(targetName)
+    konst existingTarget = targets.findByName(targetName)
     when {
         existingTarget?.isProducedFromPreset(targetPreset) ?: false -> {
             @Suppress("UNCHECKED_CAST")
@@ -146,14 +146,14 @@ internal fun <T : KotlinTarget> KotlinTargetsContainerWithPresets.configureOrCre
         }
 
         existingTarget == null -> {
-            val newTarget = targetPreset.createTarget(targetName)
+            konst newTarget = targetPreset.createTarget(targetName)
             targets.add(newTarget)
             configure(newTarget)
             return newTarget
         }
 
         else -> {
-            throw InvalidUserCodeException(
+            throw InkonstidUserCodeException(
                 "The target '$targetName' already exists, but it was not created with the '${targetPreset.name}' preset. " +
                         "To configure it, access it by name in `kotlin.targets`" +
                         (" or use the preset function '${existingTarget.preset?.name}'."

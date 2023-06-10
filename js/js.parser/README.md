@@ -7,7 +7,7 @@ The following files were copied from GWT project:
 * src/com/google/gwt/dev/js/rhino/COPYING
 * src/com/google/gwt/dev/js/rhino/ErrorReporter.java
 * src/com/google/gwt/dev/js/rhino/DToA.java
-* src/com/google/gwt/dev/js/rhino/EvaluatorException.java
+* src/com/google/gwt/dev/js/rhino/EkonstuatorException.java
 * src/com/google/gwt/dev/js/rhino/IRFactory.java
 * src/com/google/gwt/dev/js/rhino/JavaScriptException.java
 * src/com/google/gwt/dev/js/rhino/LineBuffer.java

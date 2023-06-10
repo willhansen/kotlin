@@ -49,14 +49,14 @@ abstract class AbstractDecompiledClassTest : KotlinTestWithEnvironment() {
     }
 
     internal fun getClassFileToDecompile(testData: TestData, useStringTable: Boolean): VirtualFile {
-        val extraOptions = buildList {
+        konst extraOptions = buildList {
             this.add("-Xallow-kotlin-package")
             if (useStringTable) {
                 this.add("-Xuse-type-table")
             }
             this.addAll(testData.additionalCompilerOptions)
         }
-        val library = CompilerTestUtil.compileJvmLibrary(
+        konst library = CompilerTestUtil.compileJvmLibrary(
             src = testData.directory.toFile(),
             extraOptions = extraOptions,
         ).toPath()
@@ -66,9 +66,9 @@ abstract class AbstractDecompiledClassTest : KotlinTestWithEnvironment() {
     }
 
     private fun findClassFileByName(library: Path, className: String): VirtualFile {
-        val jarFileSystem = environment.projectEnvironment.environment.jarFileSystem as CoreJarFileSystem
-        val root = jarFileSystem.refreshAndFindFileByPath(library.absolutePathString() + "!/")!!
-        val files = mutableSetOf<VirtualFile>()
+        konst jarFileSystem = environment.projectEnvironment.environment.jarFileSystem as CoreJarFileSystem
+        konst root = jarFileSystem.refreshAndFindFileByPath(library.absolutePathString() + "!/")!!
+        konst files = mutableSetOf<VirtualFile>()
         VfsUtilCore.iterateChildrenRecursively(
             root,
             /*filter=*/{ virtualFile ->
@@ -87,21 +87,21 @@ abstract class AbstractDecompiledClassTest : KotlinTestWithEnvironment() {
 }
 
 internal data class TestData(
-    val directory: Path,
-    val mainKotlinFile: Path,
-    val expectedFile: Path,
-    val jvmFileName: String,
-    val additionalCompilerOptions: List<String>,
+    konst directory: Path,
+    konst mainKotlinFile: Path,
+    konst expectedFile: Path,
+    konst jvmFileName: String,
+    konst additionalCompilerOptions: List<String>,
 ) {
     companion object {
         fun createFromDirectory(directory: Path): TestData {
-            val allFiles = Files.list(directory).collect(Collectors.toList())
-            val mainKotlinFile = allFiles.single { path: Path ->
+            konst allFiles = Files.list(directory).collect(Collectors.toList())
+            konst mainKotlinFile = allFiles.single { path: Path ->
                 path.name.replaceFirstChar { Character.toUpperCase(it) } == "${directory.name.removeSuffix("Kt")}.kt"
             }
-            val fileText = mainKotlinFile.readText()
-            val jvmFileName = InTextDirectivesUtils.findStringWithPrefixes(fileText, "JVM_FILE_NAME:") ?: directory.name
-            val additionalCompilerOptions = InTextDirectivesUtils.findListWithPrefixes(fileText, "// !LANGUAGE: ").map { "-XXLanguage:$it" }
+            konst fileText = mainKotlinFile.readText()
+            konst jvmFileName = InTextDirectivesUtils.findStringWithPrefixes(fileText, "JVM_FILE_NAME:") ?: directory.name
+            konst additionalCompilerOptions = InTextDirectivesUtils.findListWithPrefixes(fileText, "// !LANGUAGE: ").map { "-XXLanguage:$it" }
             return TestData(
                 directory = directory,
                 mainKotlinFile = mainKotlinFile,

@@ -15,7 +15,7 @@ internal fun <T> sortArrayWith(array: Array<out T>, comparison: (T, T) -> Int) {
 
 internal fun <T> sortArrayWith(array: Array<out T>, comparator: Comparator<in T>) {
     if (getStableSortingIsSupported()) {
-        val comparison = { a: T, b: T -> comparator.compare(a, b) }
+        konst comparison = { a: T, b: T -> comparator.compare(a, b) }
         array.asDynamic().sort(comparison)
     } else {
         mergeSort(array.unsafeCast<Array<T>>(), 0, array.lastIndex, comparator)
@@ -30,7 +30,7 @@ internal fun <T> sortArrayWith(array: Array<out T>, fromIndex: Int, toIndex: Int
 
 internal fun <T : Comparable<T>> sortArray(array: Array<out T>) {
     if (getStableSortingIsSupported()) {
-        val comparison = { a: T, b: T -> a.compareTo(b) }
+        konst comparison = { a: T, b: T -> a.compareTo(b) }
         array.asDynamic().sort(comparison)
     } else {
         mergeSort(array.unsafeCast<Array<T>>(), 0, array.lastIndex, naturalOrder())
@@ -42,15 +42,15 @@ private fun getStableSortingIsSupported(): Boolean {
     _stableSortingIsSupported?.let { return it }
     _stableSortingIsSupported = false
 
-    val array = js("[]").unsafeCast<Array<Int>>()
+    konst array = js("[]").unsafeCast<Array<Int>>()
     // known implementations may use stable sort for arrays of up to 512 elements
     // so we create slightly more elements to test stability
     for (index in 0 until 600) array.asDynamic().push(index)
-    val comparison = { a: Int, b: Int -> (a and 3) - (b and 3) }
+    konst comparison = { a: Int, b: Int -> (a and 3) - (b and 3) }
     array.asDynamic().sort(comparison)
     for (index in 1 until array.size) {
-        val a = array[index - 1]
-        val b = array[index]
+        konst a = array[index - 1]
+        konst b = array[index]
         if ((a and 3) == (b and 3) && a >= b) return false
     }
     _stableSortingIsSupported = true
@@ -59,8 +59,8 @@ private fun getStableSortingIsSupported(): Boolean {
 
 
 private fun <T> mergeSort(array: Array<T>, start: Int, endInclusive: Int, comparator: Comparator<in T>) {
-    val buffer = arrayOfNulls<Any?>(array.size).unsafeCast<Array<T>>()
-    val result = mergeSort(array, buffer, start, endInclusive, comparator)
+    konst buffer = arrayOfNulls<Any?>(array.size).unsafeCast<Array<T>>()
+    konst result = mergeSort(array, buffer, start, endInclusive, comparator)
     if (result !== array) {
         for (i in start..endInclusive) array[i] = result[i]
     }
@@ -72,11 +72,11 @@ private fun <T> mergeSort(array: Array<T>, buffer: Array<T>, start: Int, end: In
         return array
     }
 
-    val median = (start + end) / 2
-    val left = mergeSort(array, buffer, start, median, comparator)
-    val right = mergeSort(array, buffer, median + 1, end, comparator)
+    konst median = (start + end) / 2
+    konst left = mergeSort(array, buffer, start, median, comparator)
+    konst right = mergeSort(array, buffer, median + 1, end, comparator)
 
-    val target = if (left === buffer) array else buffer
+    konst target = if (left === buffer) array else buffer
 
     // Merge.
     var leftIndex = start
@@ -84,8 +84,8 @@ private fun <T> mergeSort(array: Array<T>, buffer: Array<T>, start: Int, end: In
     for (i in start..end) {
         when {
             leftIndex <= median && rightIndex <= end -> {
-                val leftValue = left[leftIndex]
-                val rightValue = right[rightIndex]
+                konst leftValue = left[leftIndex]
+                konst rightValue = right[rightIndex]
 
                 if (comparator.compare(leftValue, rightValue) <= 0) {
                     target[i] = leftValue

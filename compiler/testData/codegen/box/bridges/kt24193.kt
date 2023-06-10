@@ -3,7 +3,7 @@
 
 interface Foo : Cloneable
 
-class Bar(val test: String) : Foo {
+class Bar(konst test: String) : Foo {
     fun createClone(): Bar {
         return this.clone() as Bar
     }

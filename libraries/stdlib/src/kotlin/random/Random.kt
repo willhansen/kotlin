@@ -22,7 +22,7 @@ public abstract class Random {
     /**
      * Gets the next random [bitCount] number of bits.
      *
-     * Generates an `Int` whose lower [bitCount] bits are filled with random values and the remaining upper bits are zero.
+     * Generates an `Int` whose lower [bitCount] bits are filled with random konstues and the remaining upper bits are zero.
      *
      * @param bitCount number of bits to generate, must be in range 0..32, otherwise the behavior is unspecified.
      *
@@ -33,7 +33,7 @@ public abstract class Random {
     /**
      * Gets the next random `Int` from the random number generator.
      *
-     * Generates an `Int` random value uniformly distributed between `Int.MIN_VALUE` and `Int.MAX_VALUE` (inclusive).
+     * Generates an `Int` random konstue uniformly distributed between `Int.MIN_VALUE` and `Int.MAX_VALUE` (inclusive).
      *
      * @sample samples.random.Randoms.nextInt
      */
@@ -42,7 +42,7 @@ public abstract class Random {
     /**
      * Gets the next random non-negative `Int` from the random number generator less than the specified [until] bound.
      *
-     * Generates an `Int` random value uniformly distributed between `0` (inclusive) and the specified [until] bound (exclusive).
+     * Generates an `Int` random konstue uniformly distributed between `0` (inclusive) and the specified [until] bound (exclusive).
      *
      * @param until must be positive.
      *
@@ -55,7 +55,7 @@ public abstract class Random {
     /**
      * Gets the next random `Int` from the random number generator in the specified range.
      *
-     * Generates an `Int` random value uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
+     * Generates an `Int` random konstue uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
      *
      * @throws IllegalArgumentException if [from] is greater than or equal to [until].
      *
@@ -63,15 +63,15 @@ public abstract class Random {
      */
     public open fun nextInt(from: Int, until: Int): Int {
         checkRangeBounds(from, until)
-        val n = until - from
+        konst n = until - from
         if (n > 0 || n == Int.MIN_VALUE) {
-            val rnd = if (n and -n == n) {
-                val bitCount = fastLog2(n)
+            konst rnd = if (n and -n == n) {
+                konst bitCount = fastLog2(n)
                 nextBits(bitCount)
             } else {
                 var v: Int
                 do {
-                    val bits = nextInt().ushr(1)
+                    konst bits = nextInt().ushr(1)
                     v = bits % n
                 } while (bits - v + (n - 1) < 0)
                 v
@@ -79,7 +79,7 @@ public abstract class Random {
             return from + rnd
         } else {
             while (true) {
-                val rnd = nextInt()
+                konst rnd = nextInt()
                 if (rnd in from until until) return rnd
             }
         }
@@ -88,7 +88,7 @@ public abstract class Random {
     /**
      * Gets the next random `Long` from the random number generator.
      *
-     * Generates a `Long` random value uniformly distributed between `Long.MIN_VALUE` and `Long.MAX_VALUE` (inclusive).
+     * Generates a `Long` random konstue uniformly distributed between `Long.MIN_VALUE` and `Long.MAX_VALUE` (inclusive).
      *
      * @sample samples.random.Randoms.nextLong
      */
@@ -97,7 +97,7 @@ public abstract class Random {
     /**
      * Gets the next random non-negative `Long` from the random number generator less than the specified [until] bound.
      *
-     * Generates a `Long` random value uniformly distributed between `0` (inclusive) and the specified [until] bound (exclusive).
+     * Generates a `Long` random konstue uniformly distributed between `0` (inclusive) and the specified [until] bound (exclusive).
      *
      * @param until must be positive.
      *
@@ -110,7 +110,7 @@ public abstract class Random {
     /**
      * Gets the next random `Long` from the random number generator in the specified range.
      *
-     * Generates a `Long` random value uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
+     * Generates a `Long` random konstue uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
      *
      * @throws IllegalArgumentException if [from] is greater than or equal to [until].
      *
@@ -118,15 +118,15 @@ public abstract class Random {
      */
     public open fun nextLong(from: Long, until: Long): Long {
         checkRangeBounds(from, until)
-        val n = until - from
+        konst n = until - from
         if (n > 0) {
-            val rnd: Long
+            konst rnd: Long
             if (n and -n == n) {
-                val nLow = n.toInt()
-                val nHigh = (n ushr 32).toInt()
+                konst nLow = n.toInt()
+                konst nHigh = (n ushr 32).toInt()
                 rnd = when {
                     nLow != 0 -> {
-                        val bitCount = fastLog2(nLow)
+                        konst bitCount = fastLog2(nLow)
                         // toUInt().toLong()
                         nextBits(bitCount).toLong() and 0xFFFF_FFFF
                     }
@@ -134,14 +134,14 @@ public abstract class Random {
                         // toUInt().toLong()
                         nextInt().toLong() and 0xFFFF_FFFF
                     else -> {
-                        val bitCount = fastLog2(nHigh)
+                        konst bitCount = fastLog2(nHigh)
                         nextBits(bitCount).toLong().shl(32) + (nextInt().toLong() and 0xFFFF_FFFF)
                     }
                 }
             } else {
                 var v: Long
                 do {
-                    val bits = nextLong().ushr(1)
+                    konst bits = nextLong().ushr(1)
                     v = bits % n
                 } while (bits - v + (n - 1) < 0)
                 rnd = v
@@ -149,21 +149,21 @@ public abstract class Random {
             return from + rnd
         } else {
             while (true) {
-                val rnd = nextLong()
+                konst rnd = nextLong()
                 if (rnd in from until until) return rnd
             }
         }
     }
 
     /**
-     * Gets the next random [Boolean] value.
+     * Gets the next random [Boolean] konstue.
      *
      * @sample samples.random.Randoms.nextBoolean
      */
     public open fun nextBoolean(): Boolean = nextBits(1) != 0
 
     /**
-     * Gets the next random [Double] value uniformly distributed between 0 (inclusive) and 1 (exclusive).
+     * Gets the next random [Double] konstue uniformly distributed between 0 (inclusive) and 1 (exclusive).
      *
      * @sample samples.random.Randoms.nextDouble
      */
@@ -172,7 +172,7 @@ public abstract class Random {
     /**
      * Gets the next random non-negative `Double` from the random number generator less than the specified [until] bound.
      *
-     * Generates a `Double` random value uniformly distributed between 0 (inclusive) and [until] (exclusive).
+     * Generates a `Double` random konstue uniformly distributed between 0 (inclusive) and [until] (exclusive).
      *
      * @throws IllegalArgumentException if [until] is negative or zero.
      *
@@ -183,7 +183,7 @@ public abstract class Random {
     /**
      * Gets the next random `Double` from the random number generator in the specified range.
      *
-     * Generates a `Double` random value uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
+     * Generates a `Double` random konstue uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
      *
      * [from] and [until] must be finite otherwise the behavior is unspecified.
      *
@@ -193,9 +193,9 @@ public abstract class Random {
      */
     public open fun nextDouble(from: Double, until: Double): Double {
         checkRangeBounds(from, until)
-        val size = until - from
-        val r = if (size.isInfinite() && from.isFinite() && until.isFinite()) {
-            val r1 = nextDouble() * (until / 2 - from / 2)
+        konst size = until - from
+        konst r = if (size.isInfinite() && from.isFinite() && until.isFinite()) {
+            konst r1 = nextDouble() * (until / 2 - from / 2)
             from + r1 + r1
         } else {
             from + nextDouble() * size
@@ -204,7 +204,7 @@ public abstract class Random {
     }
 
     /**
-     * Gets the next random [Float] value uniformly distributed between 0 (inclusive) and 1 (exclusive).
+     * Gets the next random [Float] konstue uniformly distributed between 0 (inclusive) and 1 (exclusive).
      *
      * @sample samples.random.Randoms.nextFloat
      */
@@ -222,11 +222,11 @@ public abstract class Random {
         require(fromIndex in 0..array.size && toIndex in 0..array.size) { "fromIndex ($fromIndex) or toIndex ($toIndex) are out of range: 0..${array.size}." }
         require(fromIndex <= toIndex) { "fromIndex ($fromIndex) must be not greater than toIndex ($toIndex)." }
 
-        val steps = (toIndex - fromIndex) / 4
+        konst steps = (toIndex - fromIndex) / 4
 
         var position = fromIndex
         repeat(steps) {
-            val v = nextInt()
+            konst v = nextInt()
             array[position] = v.toByte()
             array[position + 1] = v.ushr(8).toByte()
             array[position + 2] = v.ushr(16).toByte()
@@ -234,8 +234,8 @@ public abstract class Random {
             position += 4
         }
 
-        val remainder = toIndex - position
-        val vr = nextBits(remainder * 8)
+        konst remainder = toIndex - position
+        konst vr = nextBits(remainder * 8)
         for (i in 0 until remainder) {
             array[position + i] = vr.ushr(i * 8).toByte()
         }
@@ -268,10 +268,10 @@ public abstract class Random {
      * @sample samples.random.Randoms.defaultRandom
      */
     companion object Default : Random(), Serializable {
-        private val defaultRandom: Random = defaultPlatformRandom()
+        private konst defaultRandom: Random = defaultPlatformRandom()
 
         private object Serialized : Serializable {
-            private const val serialVersionUID = 0L
+            private const konst serialVersionUID = 0L
 
             private fun readResolve(): Any = Random
         }
@@ -303,12 +303,12 @@ public abstract class Random {
 }
 
 /**
- * Returns a repeatable random number generator seeded with the given [seed] `Int` value.
+ * Returns a repeatable random number generator seeded with the given [seed] `Int` konstue.
  *
- * Two generators with the same seed produce the same sequence of values within the same version of Kotlin runtime.
+ * Two generators with the same seed produce the same sequence of konstues within the same version of Kotlin runtime.
  *
  * *Note:* Future versions of Kotlin may change the algorithm of this seeded number generator so that it will return
- * a sequence of values different from the current one for a given seed.
+ * a sequence of konstues different from the current one for a given seed.
  *
  * On JVM the returned generator is NOT thread-safe. Do not invoke it from multiple threads without proper synchronization.
  *
@@ -318,12 +318,12 @@ public abstract class Random {
 public fun Random(seed: Int): Random = XorWowRandom(seed, seed.shr(31))
 
 /**
- * Returns a repeatable random number generator seeded with the given [seed] `Long` value.
+ * Returns a repeatable random number generator seeded with the given [seed] `Long` konstue.
  *
- * Two generators with the same seed produce the same sequence of values within the same version of Kotlin runtime.
+ * Two generators with the same seed produce the same sequence of konstues within the same version of Kotlin runtime.
  *
  * *Note:* Future versions of Kotlin may change the algorithm of this seeded number generator so that it will return
- * a sequence of values different from the current one for a given seed.
+ * a sequence of konstues different from the current one for a given seed.
  *
  * On JVM the returned generator is NOT thread-safe. Do not invoke it from multiple threads without proper synchronization.
  *
@@ -336,7 +336,7 @@ public fun Random(seed: Long): Random = XorWowRandom(seed.toInt(), seed.shr(32).
 /**
  * Gets the next random `Int` from the random number generator in the specified [range].
  *
- * Generates an `Int` random value uniformly distributed in the specified [range]:
+ * Generates an `Int` random konstue uniformly distributed in the specified [range]:
  * from `range.start` inclusive to `range.endInclusive` inclusive.
  *
  * @throws IllegalArgumentException if [range] is empty.
@@ -352,7 +352,7 @@ public fun Random.nextInt(range: IntRange): Int = when {
 /**
  * Gets the next random `Long` from the random number generator in the specified [range].
  *
- * Generates a `Long` random value uniformly distributed in the specified [range]:
+ * Generates a `Long` random konstue uniformly distributed in the specified [range]:
  * from `range.start` inclusive to `range.endInclusive` inclusive.
  *
  * @throws IllegalArgumentException if [range] is empty.
@@ -369,7 +369,7 @@ public fun Random.nextLong(range: LongRange): Long = when {
 internal expect fun defaultPlatformRandom(): Random
 internal expect fun doubleFromParts(hi26: Int, low27: Int): Double
 
-internal fun fastLog2(value: Int): Int = 31 - value.countLeadingZeroBits()
+internal fun fastLog2(konstue: Int): Int = 31 - konstue.countLeadingZeroBits()
 
 /** Takes upper [bitCount] bits (0..32) from this number. */
 internal fun Int.takeUpperBits(bitCount: Int): Int =

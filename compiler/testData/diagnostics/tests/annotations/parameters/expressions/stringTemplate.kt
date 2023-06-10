@@ -2,13 +2,13 @@
 package test
 
 annotation class Ann(
-        val s1: String,
-        val s2: String,
-        val s3: String,
-        val s4: String
+        konst s1: String,
+        konst s2: String,
+        konst s3: String,
+        konst s4: String
 )
 
-val i = 1
+konst i = 1
 
 @Ann(
     s1 = <!NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION!>"a$i"<!>,

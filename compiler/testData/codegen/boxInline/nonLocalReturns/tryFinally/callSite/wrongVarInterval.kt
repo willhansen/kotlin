@@ -15,7 +15,7 @@ fun test1(): String {
         doCall {
             try {
                 doCall {
-                    val a = 1
+                    konst a = 1
                     if (1 == 1) {
                         return "a"
                     }

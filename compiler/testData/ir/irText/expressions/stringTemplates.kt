@@ -1,17 +1,17 @@
 // FIR_IDENTICAL
 
 fun foo(): String = ""
-val x = 42
+konst x = 42
 
-val test1 = ""
-val test2 = "abc"
-val test3 = """"""
-val test4 = """abc"""
-val test5 = """
+konst test1 = ""
+konst test2 = "abc"
+konst test3 = """"""
+konst test4 = """abc"""
+konst test5 = """
 abc
 """
-val test6 = "$test1 ${foo()}"
+konst test6 = "$test1 ${foo()}"
 
-val test7 = "$test1"
-val test8 = "${foo()}"
-val test9 = "$x"
+konst test7 = "$test1"
+konst test8 = "${foo()}"
+konst test9 = "$x"

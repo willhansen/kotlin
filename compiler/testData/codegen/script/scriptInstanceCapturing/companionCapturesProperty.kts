@@ -4,9 +4,9 @@
 // expected: rv: <nofield>
 
 // KT-30616
-val foo = "hello"
+konst foo = "hello"
 
-class Bar(val s: String) {
+class Bar(konst s: String) {
     companion object {
         fun t() {
             Bar(foo)

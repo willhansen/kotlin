@@ -21,5 +21,5 @@ public interface JavaInterface1 {
 
 // FILE: JavaInterface2.java
 public interface JavaInterface2 {
-    void setSomething(int value);
+    void setSomething(int konstue);
 }

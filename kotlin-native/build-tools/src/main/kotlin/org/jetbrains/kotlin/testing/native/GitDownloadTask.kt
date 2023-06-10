@@ -24,29 +24,29 @@ import javax.inject.Inject
  */
 @Suppress("UnstableApiUsage")
 open class GitDownloadTask @Inject constructor(
-        private val repositoryProvider: Provider<URL>,
-        private val revisionProvider: Provider<String>,
-        private val outputDirectoryProvider: Provider<File>
+        private konst repositoryProvider: Provider<URL>,
+        private konst revisionProvider: Provider<String>,
+        private konst outputDirectoryProvider: Provider<File>
 ) : DefaultTask() {
 
-    private val repository: URL
+    private konst repository: URL
         get() = repositoryProvider.get()
 
-    private val revision: String
+    private konst revision: String
         get() = revisionProvider.get()
 
-    private val outputDirectory: File
+    private konst outputDirectory: File
         get() = outputDirectoryProvider.get()
 
     @Option(option = "refresh",
             description = "Fetch and checkout the revision even if the output directory already contains it. " +
                     "All changes in the output directory will be overwritten")
     @Input
-    val refresh: Property<Boolean> = project.objects.property(Boolean::class.java).apply {
+    konst refresh: Property<Boolean> = project.objects.property(Boolean::class.java).apply {
         set(false)
     }
 
-    private val upToDateChecker = UpToDateChecker()
+    private konst upToDateChecker = UpToDateChecker()
 
     init {
         outputs.upToDateWhen { upToDateChecker.isUpToDate() }
@@ -65,7 +65,7 @@ open class GitDownloadTask @Inject constructor(
             }
 
     private fun tryCloneBranch(): Boolean {
-        val execResult = git(
+        konst execResult = git(
                 "clone", repository.toString(),
                 outputDirectory.absolutePath,
                 "--depth", "1",
@@ -126,7 +126,7 @@ open class GitDownloadTask @Inject constructor(
      */
     private inner class UpToDateChecker() {
 
-        private val revisionInfoFile: File
+        private konst revisionInfoFile: File
             get() = outputDirectory.resolve(".revision")
 
         /**
@@ -148,7 +148,7 @@ open class GitDownloadTask @Inject constructor(
                 revisionInfoFile.exists() && loadRevisionInfo() == RevisionInfo(repository, revision)
 
         fun storeRevisionInfo() {
-            val properties = Properties()
+            konst properties = Properties()
             properties["repository"] = repository.toString()
             properties["revision"] = revision
             revisionInfoFile.bufferedWriter().use {
@@ -158,7 +158,7 @@ open class GitDownloadTask @Inject constructor(
 
         private fun loadRevisionInfo(): RevisionInfo? {
             return try {
-                val properties = Properties()
+                konst properties = Properties()
                 revisionInfoFile.bufferedReader().use {
                     properties.load(it)
                 }
@@ -169,7 +169,7 @@ open class GitDownloadTask @Inject constructor(
         }
     }
 
-    private data class RevisionInfo(val repository: String, val revision: String) {
+    private data class RevisionInfo(konst repository: String, konst revision: String) {
         constructor(repository: URL, revision: String): this(repository.toString(), revision)
     }
 }

@@ -5,8 +5,8 @@ sealed class A {
 }
 
 fun box(): String {
-    val a: A = A.C()
-    val b: Boolean
+    konst a: A = A.C()
+    konst b: Boolean
     when (a) {
         A.B -> b = true
         is A.C -> b = false

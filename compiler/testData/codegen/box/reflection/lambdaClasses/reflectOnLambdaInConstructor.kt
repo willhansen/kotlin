@@ -6,8 +6,8 @@
 import kotlin.reflect.jvm.reflect
 
 class C {
-    val o = { O: String -> }
-    val k = { K: String -> }
+    konst o = { O: String -> }
+    konst k = { K: String -> }
 
     constructor(y: Int)
     constructor(y: String)

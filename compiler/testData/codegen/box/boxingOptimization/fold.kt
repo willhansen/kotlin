@@ -3,7 +3,7 @@
 import kotlin.test.assertEquals
 
 fun box() : String {
-    val x = LongArray(5)
+    konst x = LongArray(5)
     for (i in 0..4) {
         x[i] = (i + 1).toLong()
     }

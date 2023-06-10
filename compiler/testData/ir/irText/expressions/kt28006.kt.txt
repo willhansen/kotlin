@@ -1,24 +1,24 @@
-val test1: String
+konst test1: String
   field = "\uD83E\uDD17"
   get
 
-val test2: String
+konst test2: String
   field = "\uD83E\uDD17\uD83E\uDD17"
   get
 
-const val testConst1: String
+const konst testConst1: String
   field = "\uD83E\uDD17"
   get
 
-const val testConst2: String
+const konst testConst2: String
   field = "\uD83E\uDD17\uD83E\uDD17"
   get
 
-const val testConst3: String
+const konst testConst3: String
   field = "\uD83E\uDD17\uD83E\uDD17\uD83E\uDD17"
   get
 
-const val testConst4: String
+const konst testConst4: String
   field = "\uD83E\uDD17\uD83E\uDD17\uD83E\uDD17\uD83E\uDD17"
   get
 

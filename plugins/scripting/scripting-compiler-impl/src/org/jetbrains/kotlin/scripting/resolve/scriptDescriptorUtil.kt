@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.name.Name
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 
-val KClass<*>.classId: ClassId
+konst KClass<*>.classId: ClassId
     get() = this.java.enclosingClass?.kotlin?.classId?.createNestedClassId(Name.identifier(simpleName!!))
             ?: ClassId.topLevel(FqName(qualifiedName!!))
 
-val KType.classId: ClassId?
+konst KType.classId: ClassId?
     get() = classifier?.let { it as? KClass<*> }?.classId

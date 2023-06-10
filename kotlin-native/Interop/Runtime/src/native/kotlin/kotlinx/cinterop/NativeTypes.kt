@@ -19,7 +19,7 @@ internal typealias NonNullNativePtr = kotlin.native.internal.NonNullNativePtr
 internal inline fun NativePtr.toNonNull() = this.reinterpret<NativePtr, NonNullNativePtr>()
 
 @ExperimentalForeignApi
-inline val nativeNullPtr: NativePtr
+inline konst nativeNullPtr: NativePtr
     get() = NativePtr.NULL
 
 @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
@@ -28,7 +28,7 @@ inline val nativeNullPtr: NativePtr
 fun <T : CVariable> typeOf(): CVariable.Type = throw Error("typeOf() is called with erased argument")
 
 /**
- * Performs type cast of the native pointer to given interop type, including null values.
+ * Performs type cast of the native pointer to given interop type, including null konstues.
  *
  * @param T must not be abstract
  */
@@ -67,9 +67,9 @@ public typealias Vector128Var = Vector128VarOf<Vector128>
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : Vector128> Vector128VarOf<T>.value: T
+public var <T : Vector128> Vector128VarOf<T>.konstue: T
     get() = nativeMemUtils.getVector(this) as T
-    set(value) = nativeMemUtils.putVector(this, value)
+    set(konstue) = nativeMemUtils.putVector(this, konstue)
 
 /**
  * Returns a pointer to C function which calls given Kotlin *static* function.

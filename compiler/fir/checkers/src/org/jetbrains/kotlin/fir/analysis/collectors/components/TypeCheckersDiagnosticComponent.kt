@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.types.*
 class TypeCheckersDiagnosticComponent(
     session: FirSession,
     reporter: DiagnosticReporter,
-    private val checkers: TypeCheckers = session.checkersComponent.typeCheckers,
+    private konst checkers: TypeCheckers = session.checkersComponent.typeCheckers,
 ) : AbstractDiagnosticCollectorComponent(session, reporter) {
     override fun visitElement(element: FirElement, data: CheckerContext) {
         if (element is FirTypeRef) {

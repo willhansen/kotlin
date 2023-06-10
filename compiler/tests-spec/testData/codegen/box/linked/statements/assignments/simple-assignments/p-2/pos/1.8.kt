@@ -17,7 +17,7 @@ var flag = false
 var data = "FooBoo"
 
 fun box(): String {
-    val e: Example? = null
+    konst e: Example? = null
     assert(!flag)
     e?.p = data
     if (!flag && e?.p != data) return "OK"

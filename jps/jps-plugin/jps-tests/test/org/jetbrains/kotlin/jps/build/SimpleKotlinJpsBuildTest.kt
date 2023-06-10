@@ -31,7 +31,7 @@ class SimpleKotlinJpsBuildTest : AbstractKotlinJpsBuildTestCase() {
     }
 
     fun testLoadingKotlinFromDifferentModules() {
-        val aFile = createFile("m1/K.kt",
+        konst aFile = createFile("m1/K.kt",
                                """
                                    package m1;
 
@@ -46,9 +46,9 @@ class SimpleKotlinJpsBuildTest : AbstractKotlinJpsBuildTestCase() {
                                        K bar();
                                    }
                                """)
-        val a = addModule("m1", PathUtilRt.getParentPath(aFile))
+        konst a = addModule("m1", PathUtilRt.getParentPath(aFile))
 
-        val bFile = createFile("m2/m2.kt",
+        konst bFile = createFile("m2/m2.kt",
                                """
                                     import m1.J;
                                     import m1.K;
@@ -57,7 +57,7 @@ class SimpleKotlinJpsBuildTest : AbstractKotlinJpsBuildTestCase() {
                                         override fun bar(): K
                                     }
                                """)
-        val b = addModule("b", PathUtilRt.getParentPath(bFile))
+        konst b = addModule("b", PathUtilRt.getParentPath(bFile))
         JpsJavaExtensionService.getInstance().getOrCreateDependencyExtension(
                 b.dependenciesList.addModuleDependency(a)
         ).isExported = false
@@ -83,7 +83,7 @@ class SimpleKotlinJpsBuildTest : AbstractKotlinJpsBuildTestCase() {
 // java.util.Logger used in the daemon silently forgets to log into a file specified in the config on Windows,
 // if file path is given in windows form (using backslash as a separator); the reason is unknown
 // this function makes a path with forward slashed, that works on windows too
-internal val File.loggerCompatiblePath: String
+internal konst File.loggerCompatiblePath: String
     get() =
     if (OSKind.current == OSKind.Windows) absolutePath.replace('\\', '/')
     else absolutePath

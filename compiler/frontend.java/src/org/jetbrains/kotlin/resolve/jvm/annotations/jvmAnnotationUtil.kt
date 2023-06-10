@@ -18,32 +18,32 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassDescriptor
 import org.jetbrains.kotlin.util.findImplementationFromInterface
 
-val JVM_DEFAULT_FQ_NAME = FqName("kotlin.jvm.JvmDefault")
-val JVM_DEFAULT_NO_COMPATIBILITY_FQ_NAME = FqName("kotlin.jvm.JvmDefaultWithoutCompatibility")
-val JVM_DEFAULT_WITH_COMPATIBILITY_FQ_NAME = FqName("kotlin.jvm.JvmDefaultWithCompatibility")
-val JVM_OVERLOADS_FQ_NAME = FqName("kotlin.jvm.JvmOverloads")
+konst JVM_DEFAULT_FQ_NAME = FqName("kotlin.jvm.JvmDefault")
+konst JVM_DEFAULT_NO_COMPATIBILITY_FQ_NAME = FqName("kotlin.jvm.JvmDefaultWithoutCompatibility")
+konst JVM_DEFAULT_WITH_COMPATIBILITY_FQ_NAME = FqName("kotlin.jvm.JvmDefaultWithCompatibility")
+konst JVM_OVERLOADS_FQ_NAME = FqName("kotlin.jvm.JvmOverloads")
 
 @JvmField
-val JVM_SYNTHETIC_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSynthetic")
-val JVM_RECORD_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmRecord")
+konst JVM_SYNTHETIC_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSynthetic")
+konst JVM_RECORD_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmRecord")
 
 @JvmField
-val SYNCHRONIZED_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Synchronized")
+konst SYNCHRONIZED_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Synchronized")
 
 @JvmField
-val STRICTFP_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Strictfp")
+konst STRICTFP_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Strictfp")
 
 @JvmField
-val VOLATILE_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Volatile")
+konst VOLATILE_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Volatile")
 
 @JvmField
-val TRANSIENT_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Transient")
+konst TRANSIENT_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Transient")
 
 @JvmField
-val TRANSIENT_ANNOTATION_CLASS_ID = ClassId.topLevel(TRANSIENT_ANNOTATION_FQ_NAME)
+konst TRANSIENT_ANNOTATION_CLASS_ID = ClassId.topLevel(TRANSIENT_ANNOTATION_FQ_NAME)
 
 @JvmField
-val JVM_SERIALIZABLE_LAMBDA_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSerializableLambda")
+konst JVM_SERIALIZABLE_LAMBDA_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSerializableLambda")
 
 fun DeclarationDescriptor.findJvmOverloadsAnnotation(): AnnotationDescriptor? =
     annotations.findAnnotation(JVM_OVERLOADS_FQ_NAME)
@@ -58,9 +58,9 @@ fun DeclarationDescriptor.isCallableMemberCompiledToJvmDefault(jvmDefault: JvmDe
     this is CallableMemberDescriptor && isCompiledToJvmDefault(jvmDefault)
 
 fun CallableMemberDescriptor.isCompiledToJvmDefault(jvmDefault: JvmDefaultMode): Boolean {
-    val directMember = DescriptorUtils.getDirectMember(this)
+    konst directMember = DescriptorUtils.getDirectMember(this)
 
-    val clazz = directMember.containingDeclaration
+    konst clazz = directMember.containingDeclaration
 
 //  TODO add checks after fixes in diagnostics
 //    assert(this.kind.isReal && isInterface(clazz) && modality != Modality.ABSTRACT) {
@@ -73,7 +73,7 @@ fun CallableMemberDescriptor.isCompiledToJvmDefault(jvmDefault: JvmDefaultMode):
 }
 
 fun CallableMemberDescriptor.checkIsImplementationCompiledToJvmDefault(jvmDefaultMode: JvmDefaultMode): Boolean {
-    val actualImplementation =
+    konst actualImplementation =
         (if (kind.isReal) this else findImplementationFromInterface(this))
             ?: error("Can't find actual implementation for $this")
     return actualImplementation.isCallableMemberCompiledToJvmDefault(jvmDefaultMode)

@@ -3,7 +3,7 @@
 var a = 12
 
 object C {
-    const val x = 42
+    const konst x = 42
 }
 
 fun getC(): C {
@@ -12,8 +12,8 @@ fun getC(): C {
 }
 
 fun box(): String {
-    val field = getC().x
-    val expectedResult = 123
+    konst field = getC().x
+    konst expectedResult = 123
     if (a == expectedResult)
         return "OK"
     else

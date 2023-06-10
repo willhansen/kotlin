@@ -5,14 +5,14 @@ package foo
 
 var log = ""
 
-class A(val value: Int) {
+class A(konst konstue: Int) {
     operator fun plus(other: A): A {
-        log += "A.plus(${other.value});"
-        return A(value + other.value)
+        log += "A.plus(${other.konstue});"
+        return A(konstue + other.konstue)
     }
 }
 
-val _array = arrayOf(A(2))
+konst _array = arrayOf(A(2))
 
 fun getArray(): Array<A> {
     log += "getArray();"
@@ -24,14 +24,14 @@ fun getArrayIndex(): Int {
     return 0
 }
 
-class B(value: Int) {
-    var a = A(value)
+class B(konstue: Int) {
+    var a = A(konstue)
 }
 
-val _property = B(10)
-val _functionResult = B(100)
+konst _property = B(10)
+konst _functionResult = B(100)
 
-val foo: B
+konst foo: B
     get() {
         log += "foo;"
         return _property
@@ -44,13 +44,13 @@ fun bar(): B {
 
 fun box(): String {
     getArray()[getArrayIndex()] += A(3)
-    assertEquals(5, _array[0].value)
+    assertEquals(5, _array[0].konstue)
 
     foo.a += A(20)
-    assertEquals(30, _property.a.value)
+    assertEquals(30, _property.a.konstue)
 
     bar().a += A(200)
-    assertEquals(300, _functionResult.a.value)
+    assertEquals(300, _functionResult.a.konstue)
 
     assertEquals("getArray();getArrayIndex();A.plus(3);foo;A.plus(20);bar();A.plus(200);", log)
 

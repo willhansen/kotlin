@@ -1,7 +1,7 @@
-    annotation class Anno constructor(value: String) : Annotation {
-        val value: String
+    annotation class Anno constructor(konstue: String) : Annotation {
+        konst konstue: String
     }
-    @Anno(value = "property") val v1: String = ""
+    @Anno(konstue = "property") konst v1: String = ""
     var v2: String
-        @Anno(value = "getter") get
-        @Anno(value = "setter") set
+        @Anno(konstue = "getter") get
+        @Anno(konstue = "setter") set

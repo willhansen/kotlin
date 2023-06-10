@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 class My {
-    val x: Int
+    konst x: Int
 
     constructor(x: Int) {
         this.x = x

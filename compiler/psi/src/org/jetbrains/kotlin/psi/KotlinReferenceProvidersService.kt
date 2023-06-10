@@ -14,7 +14,7 @@ open class KotlinReferenceProvidersService {
     open fun getReferences(psiElement: PsiElement): Array<PsiReference> = PsiReference.EMPTY_ARRAY
 
     companion object {
-        private val NO_REFERENCES_SERVICE = KotlinReferenceProvidersService()
+        private konst NO_REFERENCES_SERVICE = KotlinReferenceProvidersService()
 
         @JvmStatic
         fun getInstance(project: Project): KotlinReferenceProvidersService {

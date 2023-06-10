@@ -4,11 +4,11 @@ interface Flow<T>
 interface MutableSharedFlow<T> : Flow<T>
 
 fun test(output: ((ScrapingOffOutput) -> Unit)) {
-    val p = <!OVERLOAD_RESOLUTION_AMBIGUITY!>presenter<!>(output) { ScrapingOffPresenter() }
+    konst p = <!OVERLOAD_RESOLUTION_AMBIGUITY!>presenter<!>(output) { ScrapingOffPresenter() }
 }
 
 abstract class Presenter<Events, Model, Output>(outputExtraBufferCapacity: Int = 16) {
-    val output: MutableSharedFlow<Output> = null!!
+    konst output: MutableSharedFlow<Output> = null!!
 
     abstract fun Present(events: Events): Model
 }
@@ -27,8 +27,8 @@ fun <Event : Any, Model, Output> presenter(
 ): PresentedData<Model, MutableSharedFlow<Event>> = null!!
 
 data class PresentedData<M, E>(
-    val model: M,
-    val events: E,
+    konst model: M,
+    konst events: E,
 )
 
 private class ScrapingOffPresenter : Presenter<Flow<ScrapingOffEvent>, ScrapingOffModel, ScrapingOffOutput>() {

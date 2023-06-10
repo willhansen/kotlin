@@ -41,24 +41,24 @@ fun funWithReturnsAndInvertCondition(cond: Boolean) {
     if (cond) throw Exception()
 }
 
-fun funWithReturnsAndTypeCheck(value_1: Any?) {
-    contract { returns() implies (value_1 is String) }
-    if (value_1 !is String) throw Exception()
+fun funWithReturnsAndTypeCheck(konstue_1: Any?) {
+    contract { returns() implies (konstue_1 is String) }
+    if (konstue_1 !is String) throw Exception()
 }
 
-fun funWithReturnsAndInvertTypeCheck(value_1: Any?) {
-    contract { returns() implies (value_1 !is String) }
-    if (value_1 is String) throw Exception()
+fun funWithReturnsAndInvertTypeCheck(konstue_1: Any?) {
+    contract { returns() implies (konstue_1 !is String) }
+    if (konstue_1 is String) throw Exception()
 }
 
-fun funWithReturnsAndNotNullCheck(value_1: Any?) {
-    contract { returns() implies (value_1 != null) }
-    if (value_1 == null) throw Exception()
+fun funWithReturnsAndNotNullCheck(konstue_1: Any?) {
+    contract { returns() implies (konstue_1 != null) }
+    if (konstue_1 == null) throw Exception()
 }
 
-fun funWithReturnsAndNullCheck(value_1: Any?) {
-    contract { returns() implies (value_1 == null) }
-    if (value_1 != null) throw Exception()
+fun funWithReturnsAndNullCheck(konstue_1: Any?) {
+    contract { returns() implies (konstue_1 == null) }
+    if (konstue_1 != null) throw Exception()
 }
 
 fun funWithReturnsTrue(cond: Boolean): Boolean {
@@ -71,24 +71,24 @@ fun funWithReturnsTrueAndInvertCondition(cond: Boolean): Boolean {
     return !cond
 }
 
-fun funWithReturnsTrueAndTypeCheck(value_1: Any?): Boolean {
-    contract { returns(true) implies (value_1 is String) }
-    return value_1 is String
+fun funWithReturnsTrueAndTypeCheck(konstue_1: Any?): Boolean {
+    contract { returns(true) implies (konstue_1 is String) }
+    return konstue_1 is String
 }
 
-fun funWithReturnsTrueAndInvertTypeCheck(value_1: Any?): Boolean {
-    contract { returns(true) implies (value_1 !is String) }
-    return value_1 !is String
+fun funWithReturnsTrueAndInvertTypeCheck(konstue_1: Any?): Boolean {
+    contract { returns(true) implies (konstue_1 !is String) }
+    return konstue_1 !is String
 }
 
-fun funWithReturnsTrueAndNotNullCheck(value_1: Any?): Boolean {
-    contract { returns(true) implies (value_1 != null) }
-    return value_1 != null
+fun funWithReturnsTrueAndNotNullCheck(konstue_1: Any?): Boolean {
+    contract { returns(true) implies (konstue_1 != null) }
+    return konstue_1 != null
 }
 
-fun funWithReturnsTrueAndNullCheck(value_1: Any?): Boolean {
-    contract { returns(true) implies (value_1 == null) }
-    return value_1 == null
+fun funWithReturnsTrueAndNullCheck(konstue_1: Any?): Boolean {
+    contract { returns(true) implies (konstue_1 == null) }
+    return konstue_1 == null
 }
 
 fun funWithReturnsFalse(cond: Boolean): Boolean {
@@ -101,24 +101,24 @@ fun funWithReturnsFalseAndInvertCondition(cond: Boolean): Boolean {
     return !cond
 }
 
-fun funWithReturnsFalseAndTypeCheck(value_1: Any?): Boolean {
-    contract { returns(false) implies (value_1 is String) }
-    return value_1 is String
+fun funWithReturnsFalseAndTypeCheck(konstue_1: Any?): Boolean {
+    contract { returns(false) implies (konstue_1 is String) }
+    return konstue_1 is String
 }
 
-fun funWithReturnsFalseAndInvertTypeCheck(value_1: Any?): Boolean {
-    contract { returns(false) implies (value_1 !is String) }
-    return value_1 !is String
+fun funWithReturnsFalseAndInvertTypeCheck(konstue_1: Any?): Boolean {
+    contract { returns(false) implies (konstue_1 !is String) }
+    return konstue_1 !is String
 }
 
-fun funWithReturnsFalseAndNotNullCheck(value_1: Number?): Boolean {
-    contract { returns(false) implies (value_1 != null) }
-    return value_1 != null
+fun funWithReturnsFalseAndNotNullCheck(konstue_1: Number?): Boolean {
+    contract { returns(false) implies (konstue_1 != null) }
+    return konstue_1 != null
 }
 
-fun funWithReturnsFalseAndNullCheck(value_1: Number?): Boolean {
-    contract { returns(false) implies (value_1 == null) }
-    return value_1 == null
+fun funWithReturnsFalseAndNullCheck(konstue_1: Number?): Boolean {
+    contract { returns(false) implies (konstue_1 == null) }
+    return konstue_1 == null
 }
 
 fun funWithReturnsNull(cond: Boolean): Boolean? {
@@ -131,24 +131,24 @@ fun funWithReturnsNullAndInvertCondition(cond: Boolean): Boolean? {
     return !cond
 }
 
-fun funWithReturnsNullAndTypeCheck(value_1: Any?): Boolean? {
-    contract { returns(null) implies (value_1 is String) }
-    return value_1 is String
+fun funWithReturnsNullAndTypeCheck(konstue_1: Any?): Boolean? {
+    contract { returns(null) implies (konstue_1 is String) }
+    return konstue_1 is String
 }
 
-fun funWithReturnsNullAndInvertTypeCheck(value_1: Any?): Boolean? {
-    contract { returns(null) implies (value_1 !is String) }
-    return value_1 !is String
+fun funWithReturnsNullAndInvertTypeCheck(konstue_1: Any?): Boolean? {
+    contract { returns(null) implies (konstue_1 !is String) }
+    return konstue_1 !is String
 }
 
-fun funWithReturnsNullAndNotNullCheck(value_1: Number?): Boolean? {
-    contract { returns(null) implies (value_1 != null) }
-    return value_1 != null
+fun funWithReturnsNullAndNotNullCheck(konstue_1: Number?): Boolean? {
+    contract { returns(null) implies (konstue_1 != null) }
+    return konstue_1 != null
 }
 
-fun funWithReturnsNullAndNullCheck(value_1: Number?): Boolean? {
-    contract { returns(null) implies (value_1 == null) }
-    return value_1 == null
+fun funWithReturnsNullAndNullCheck(konstue_1: Number?): Boolean? {
+    contract { returns(null) implies (konstue_1 == null) }
+    return konstue_1 == null
 }
 
 fun funWithReturnsNotNull(cond: Boolean): Boolean? {
@@ -161,22 +161,22 @@ fun funWithReturnsNotNullAndInvertCondition(cond: Boolean): Boolean? {
     return !cond
 }
 
-fun funWithReturnsNotNullAndTypeCheck(value_1: Any?): Boolean? {
-    contract { returnsNotNull() implies (value_1 is String) }
-    return value_1 is String
+fun funWithReturnsNotNullAndTypeCheck(konstue_1: Any?): Boolean? {
+    contract { returnsNotNull() implies (konstue_1 is String) }
+    return konstue_1 is String
 }
 
-fun funWithReturnsNotNullAndInvertTypeCheck(value_1: Any?): Boolean? {
-    contract { returnsNotNull() implies (value_1 !is String) }
-    return value_1 !is String
+fun funWithReturnsNotNullAndInvertTypeCheck(konstue_1: Any?): Boolean? {
+    contract { returnsNotNull() implies (konstue_1 !is String) }
+    return konstue_1 !is String
 }
 
-fun funWithReturnsNotNullAndNotNullCheck(value_1: Number?): Boolean? {
-    contract { returnsNotNull() implies (value_1 != null) }
-    return value_1 != null
+fun funWithReturnsNotNullAndNotNullCheck(konstue_1: Number?): Boolean? {
+    contract { returnsNotNull() implies (konstue_1 != null) }
+    return konstue_1 != null
 }
 
-fun funWithReturnsNotNullAndNullCheck(value_1: Number?): Boolean? {
-    contract { returnsNotNull() implies (value_1 == null) }
-    return value_1 == null
+fun funWithReturnsNotNullAndNullCheck(konstue_1: Number?): Boolean? {
+    contract { returnsNotNull() implies (konstue_1 == null) }
+    return konstue_1 == null
 }

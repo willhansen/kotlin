@@ -11,11 +11,11 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 @Test fun runTest() {
-    val COUNT = 5
-    val workers = Array(COUNT, { _ -> Worker.start()})
+    konst COUNT = 5
+    konst workers = Array(COUNT, { _ -> Worker.start()})
 
     for (attempt in 1 .. 3) {
-        val futures = Array(workers.size,
+        konst futures = Array(workers.size,
                 { i -> workers[i].execute(TransferMode.SAFE, { "$attempt: Input $i" })
                 { input -> input + " processed" }
         })

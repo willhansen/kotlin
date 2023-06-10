@@ -20,27 +20,27 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.bindingContextUtil.isUsedAsExpression
 
 internal class KtFe10ExpressionInfoProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtExpressionInfoProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun getReturnExpressionTargetSymbol(returnExpression: KtReturnExpression): KtCallableSymbol? {
-        val bindingContext = analysisContext.analyze(returnExpression, AnalysisMode.PARTIAL)
-        val targetLabel = returnExpression.getTargetLabel()
+        konst bindingContext = analysisContext.analyze(returnExpression, AnalysisMode.PARTIAL)
+        konst targetLabel = returnExpression.getTargetLabel()
             ?: return returnExpression.parentOfType<KtNamedFunction>()
                 ?.let { with(analysisSession) { it.getSymbol() as? KtCallableSymbol } }
-        val labelTarget = bindingContext[BindingContext.LABEL_TARGET, targetLabel] as? KtDeclaration ?: return null
+        konst labelTarget = bindingContext[BindingContext.LABEL_TARGET, targetLabel] as? KtDeclaration ?: return null
         return with(analysisSession) { labelTarget.getSymbol() as? KtCallableSymbol }
     }
 
     override fun getWhenMissingCases(whenExpression: KtWhenExpression): List<WhenMissingCase>  {
-        val bindingContext = analysisContext.analyze(whenExpression)
+        konst bindingContext = analysisContext.analyze(whenExpression)
         return WhenChecker.getMissingCases(whenExpression, bindingContext)
     }
 
     override fun isUsedAsExpression(expression: KtExpression): Boolean {
-        val bindingContext = analysisContext.analyze(expression)
+        konst bindingContext = analysisContext.analyze(expression)
         return expression.isUsedAsExpression(bindingContext)
     }
 }

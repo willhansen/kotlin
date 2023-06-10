@@ -15,7 +15,7 @@ open class TL2 : SealedClassWithTopLevelSubclasses()
 // --
 
 sealed class SealedClassWithNestedSubclasses {
-    data class N1(val x: Unit) : SealedClassWithNestedSubclasses()
+    data class N1(konst x: Unit) : SealedClassWithNestedSubclasses()
     object N2 : SealedClassWithNestedSubclasses()
 }
 

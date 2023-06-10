@@ -41,28 +41,28 @@ class TestConfigurationImpl(
     compilerConfigurationProvider: ((TestServices, Disposable, List<AbstractEnvironmentConfigurator>) -> CompilerConfigurationProvider)?,
     runtimeClasspathProviders: List<Constructor<RuntimeClasspathProvider>>,
 
-    override val metaInfoHandlerEnabled: Boolean,
+    override konst metaInfoHandlerEnabled: Boolean,
 
     directives: List<DirectivesContainer>,
-    override val defaultRegisteredDirectives: RegisteredDirectives,
-    override val startingArtifactFactory: (TestModule) -> ResultingArtifact<*>,
+    override konst defaultRegisteredDirectives: RegisteredDirectives,
+    override konst startingArtifactFactory: (TestModule) -> ResultingArtifact<*>,
     additionalServices: List<ServiceRegistrationData>,
 
-    val originalBuilder: TestConfigurationBuilder.ReadOnlyBuilder
+    konst originalBuilder: TestConfigurationBuilder.ReadOnlyBuilder
 ) : TestConfiguration(), TestService {
-    override val rootDisposable: Disposable = TestDisposable()
-    override val testServices: TestServices = TestServices()
+    override konst rootDisposable: Disposable = TestDisposable()
+    override konst testServices: TestServices = TestServices()
 
     init {
         testServices.register(TestConfigurationImpl::class, this)
         testServices.register(KotlinTestInfo::class, testInfo)
-        val runtimeClassPathProviders = runtimeClasspathProviders.map { it.invoke(testServices) }
+        konst runtimeClassPathProviders = runtimeClasspathProviders.map { it.invoke(testServices) }
         testServices.register(RuntimeClasspathProvidersContainer::class, RuntimeClasspathProvidersContainer(runtimeClassPathProviders))
         additionalServices.forEach { testServices.register(it) }
     }
 
-    private val allDirectives = directives.toMutableSet()
-    override val directives: DirectivesContainer by lazy {
+    private konst allDirectives = directives.toMutableSet()
+    override konst directives: DirectivesContainer by lazy {
         when (allDirectives.size) {
             0 -> DirectivesContainer.Empty
             1 -> allDirectives.single()
@@ -70,15 +70,15 @@ class TestConfigurationImpl(
         }
     }
 
-    private val environmentConfigurators: List<AbstractEnvironmentConfigurator> =
+    private konst environmentConfigurators: List<AbstractEnvironmentConfigurator> =
         environmentConfigurators
             .map { it.invoke(testServices) }
             .also { it.registerDirectivesAndServices() }
 
-    override val preAnalysisHandlers: List<PreAnalysisHandler> =
+    override konst preAnalysisHandlers: List<PreAnalysisHandler> =
         preAnalysisHandlers.map { it.invoke(testServices) }
 
-    override val moduleStructureExtractor: ModuleStructureExtractor = ModuleStructureExtractorImpl(
+    override konst moduleStructureExtractor: ModuleStructureExtractor = ModuleStructureExtractorImpl(
         testServices,
         additionalSourceProviders
             .map { it.invoke(testServices) }
@@ -87,11 +87,11 @@ class TestConfigurationImpl(
         this.environmentConfigurators
     )
 
-    override val metaTestConfigurators: List<MetaTestConfigurator> = metaTestConfigurators.map { constructor ->
+    override konst metaTestConfigurators: List<MetaTestConfigurator> = metaTestConfigurators.map { constructor ->
         constructor.invoke(testServices).also { it.registerDirectivesAndServices() }
     }
 
-    override val afterAnalysisCheckers: List<AfterAnalysisChecker> = afterAnalysisCheckers.map { constructor ->
+    override konst afterAnalysisCheckers: List<AfterAnalysisChecker> = afterAnalysisCheckers.map { constructor ->
         constructor.invoke(testServices).also { it.registerDirectivesAndServices() }
     }
 
@@ -99,11 +99,11 @@ class TestConfigurationImpl(
         testServices.apply {
             register(EnvironmentConfiguratorsProvider::class, EnvironmentConfiguratorsProvider(this@TestConfigurationImpl.environmentConfigurators))
             @OptIn(ExperimentalStdlibApi::class)
-            val sourceFilePreprocessors = sourcePreprocessors.map { it.invoke(this@apply) }
-            val sourceFileProvider = SourceFileProviderImpl(this, sourceFilePreprocessors)
+            konst sourceFilePreprocessors = sourcePreprocessors.map { it.invoke(this@apply) }
+            konst sourceFileProvider = SourceFileProviderImpl(this, sourceFilePreprocessors)
             register(SourceFileProvider::class, sourceFileProvider)
 
-            val environmentProvider =
+            konst environmentProvider =
                 compilerConfigurationProvider?.invoke(this, rootDisposable, this@TestConfigurationImpl.environmentConfigurators)
                     ?: CompilerConfigurationProviderImpl(this, rootDisposable, this@TestConfigurationImpl.environmentConfigurators)
             register(CompilerConfigurationProvider::class, environmentProvider)
@@ -113,12 +113,12 @@ class TestConfigurationImpl(
 
             register(DefaultRegisteredDirectivesProvider::class, DefaultRegisteredDirectivesProvider(defaultRegisteredDirectives))
 
-            val metaInfoProcessors = additionalMetaInfoProcessors.map { it.invoke(this) }
+            konst metaInfoProcessors = additionalMetaInfoProcessors.map { it.invoke(this) }
             register(GlobalMetadataInfoHandler::class, GlobalMetadataInfoHandler(this, metaInfoProcessors))
         }
     }
 
-    override val steps: List<TestStep<*, *>> = steps
+    override konst steps: List<TestStep<*, *>> = steps
         .map { it.createTestStep(testServices) }
         .onEach { step ->
             when (step) {
@@ -140,4 +140,4 @@ class TestConfigurationImpl(
 }
 
 @TestInfrastructureInternals
-val TestServices.testConfiguration: TestConfigurationImpl by TestServices.testServiceAccessor()
+konst TestServices.testConfiguration: TestConfigurationImpl by TestServices.testServiceAccessor()

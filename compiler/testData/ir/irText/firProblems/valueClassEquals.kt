@@ -6,6 +6,6 @@
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class Z(val s: String)
+konstue class Z(konst s: String)
 
-val equals = Z::equals
+konst equals = Z::equals

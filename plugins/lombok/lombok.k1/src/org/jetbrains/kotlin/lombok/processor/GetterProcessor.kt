@@ -17,13 +17,13 @@ import org.jetbrains.kotlin.lombok.config.LombokAnnotations.Value
 import org.jetbrains.kotlin.lombok.utils.*
 import org.jetbrains.kotlin.name.Name
 
-class GetterProcessor(private val config: LombokConfig) : Processor {
+class GetterProcessor(private konst config: LombokConfig) : Processor {
 
     context(LazyJavaResolverContext)
     @Suppress("IncorrectFormatting") // KTIJ-22227
     override fun contribute(classDescriptor: ClassDescriptor, partsBuilder: SyntheticPartsBuilder) {
-        val globalAccessors = Accessors.get(classDescriptor, config)
-        val clGetter =
+        konst globalAccessors = Accessors.get(classDescriptor, config)
+        konst clGetter =
             Getter.getOrNull(classDescriptor)
                 ?: Data.getOrNull(classDescriptor)?.asGetter()
                 ?: Value.getOrNull(classDescriptor)?.asGetter()
@@ -43,13 +43,13 @@ class GetterProcessor(private val config: LombokConfig) : Processor {
     ): SimpleFunctionDescriptor? {
         if (getter.visibility == AccessLevel.NONE) return null
 
-        val accessors = Accessors.getIfAnnotated(field, config) ?: globalAccessors
+        konst accessors = Accessors.getIfAnnotated(field, config) ?: globalAccessors
         return field.toAccessorBaseName(accessors)?.let { propertyName ->
-            val functionName =
+            konst functionName =
                 if (accessors.fluent) {
                     propertyName
                 } else {
-                    val prefix = if (field.type.isPrimitiveBoolean() && !accessors.noIsPrefix) AccessorNames.IS else AccessorNames.GET
+                    konst prefix = if (field.type.isPrimitiveBoolean() && !accessors.noIsPrefix) AccessorNames.IS else AccessorNames.GET
                     prefix + propertyName.capitalize()
                 }
             classDescriptor.createFunction(

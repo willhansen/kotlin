@@ -118,7 +118,7 @@ KtFile: PriorityQueueAsPushPop.kt
         MODIFIER_LIST
           PsiElement(override)('override')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('isEmpty')
         PsiWhiteSpace('\n    ')

@@ -1,7 +1,7 @@
 // SKIP_TXT
 import kotlin.coroutines.coroutineContext
 
-val c = ::coroutineContext
+konst c = ::coroutineContext
 
 fun test() {
     c()

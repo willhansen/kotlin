@@ -1,10 +1,10 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class A {
 
     var result: Int = 0;
 
-    private val Int.times3: Int
+    private konst Int.times3: Int
         get() = this * 3
 
     private var Int.times: Int
@@ -14,11 +14,11 @@ class A {
         }
 
     fun test(p: Int):Int {
-        return eval { p.times3 }
+        return ekonst { p.times3 }
     }
 
     fun test2(p: Int, s: Int):Int {
-        eval { p.times = s }
+        ekonst { p.times = s }
         return result
     }
 }

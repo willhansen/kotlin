@@ -36,23 +36,23 @@ import org.jetbrains.kotlin.utils.KotlinJavascriptMetadataUtils
 import java.io.File
 import java.util.*
 
-abstract class TranslationResult protected constructor(val diagnostics: Diagnostics) {
+abstract class TranslationResult protected constructor(konst diagnostics: Diagnostics) {
     class Fail(diagnostics: Diagnostics) : TranslationResult(diagnostics)
 
     abstract class SuccessBase(
-        protected val config: JsConfig,
-        protected val files: List<KtFile>,
+        protected konst config: JsConfig,
+        protected konst files: List<KtFile>,
         diagnostics: Diagnostics,
-        protected val importedModules: List<String>,
-        val moduleDescriptor: ModuleDescriptor,
-        val bindingContext: BindingContext,
-        val packageMetadata: Map<FqName, ByteArray>
+        protected konst importedModules: List<String>,
+        konst moduleDescriptor: ModuleDescriptor,
+        konst bindingContext: BindingContext,
+        konst packageMetadata: Map<FqName, ByteArray>
     ) : TranslationResult(diagnostics) {
 
         abstract fun getOutputFiles(outputFile: File, outputPrefixFile: File?, outputPostfixFile: File?): OutputFileCollection
 
-        protected val sourceFiles = files.map {
-            val virtualFile = it.originalFile.virtualFile
+        protected konst sourceFiles = files.map {
+            konst virtualFile = it.originalFile.virtualFile
 
             when {
                 virtualFile == null -> File(it.name)
@@ -62,22 +62,22 @@ abstract class TranslationResult protected constructor(val diagnostics: Diagnost
 
         protected fun metadataFiles(outputFile: File): List<OutputFile> {
             if (config.configuration.getBoolean(JSConfigurationKeys.META_INFO)) {
-                val metaFileName = KotlinJavascriptMetadataUtils.replaceSuffix(outputFile.name)
-                val moduleDescription = JsModuleDescriptor(
+                konst metaFileName = KotlinJavascriptMetadataUtils.replaceSuffix(outputFile.name)
+                konst moduleDescription = JsModuleDescriptor(
                     name = config.moduleId,
                     data = moduleDescriptor,
                     kind = config.moduleKind,
                     imported = importedModules
                 )
-                val serializedMetadata = KotlinJavascriptSerializationUtil.SerializedMetadata(
+                konst serializedMetadata = KotlinJavascriptSerializationUtil.SerializedMetadata(
                     packageMetadata,
                     moduleDescription,
                     config.configuration.languageVersionSettings,
                     config.configuration.get(CommonConfigurationKeys.METADATA_VERSION) as? JsMetadataVersion ?: JsMetadataVersion.INSTANCE
                 )
-                val metaFileContent = serializedMetadata.asString()
-                val sourceFilesForMetaFile = ArrayList(sourceFiles)
-                val jsMetaFile = SimpleOutputFile(sourceFilesForMetaFile, metaFileName, metaFileContent)
+                konst metaFileContent = serializedMetadata.asString()
+                konst sourceFilesForMetaFile = ArrayList(sourceFiles)
+                konst jsMetaFile = SimpleOutputFile(sourceFilesForMetaFile, metaFileName, metaFileContent)
 
                 return listOf(jsMetaFile) + serializedMetadata.serializedPackages().map { serializedPackage ->
                     kjsmFileForPackage(serializedPackage.fqName, serializedPackage.bytes)
@@ -88,9 +88,9 @@ abstract class TranslationResult protected constructor(val diagnostics: Diagnost
         }
 
         private fun kjsmFileForPackage(packageFqName: FqName, bytes: ByteArray): SimpleOutputBinaryFile {
-            val ktFiles = (bindingContext.get(BindingContext.PACKAGE_TO_FILES, packageFqName) ?: emptyList())
-            val sourceFiles = ktFiles.map { VfsUtilCore.virtualToIoFile(it.virtualFile) }
-            val relativePath = config.moduleId +
+            konst ktFiles = (bindingContext.get(BindingContext.PACKAGE_TO_FILES, packageFqName) ?: emptyList())
+            konst sourceFiles = ktFiles.map { VfsUtilCore.virtualToIoFile(it.virtualFile) }
+            konst relativePath = config.moduleId +
                     VfsUtilCore.VFS_SEPARATOR_CHAR +
                     JsSerializerProtocol.getKjsmFilePath(packageFqName)
             return SimpleOutputBinaryFile(sourceFiles, relativePath, bytes)
@@ -100,7 +100,7 @@ abstract class TranslationResult protected constructor(val diagnostics: Diagnost
     class Success(
         config: JsConfig,
         files: List<KtFile>,
-        val program: JsProgram,
+        konst program: JsProgram,
         diagnostics: Diagnostics,
         importedModules: List<String>,
         moduleDescriptor: ModuleDescriptor,
@@ -109,19 +109,19 @@ abstract class TranslationResult protected constructor(val diagnostics: Diagnost
     ) : SuccessBase(config, files, diagnostics, importedModules, moduleDescriptor, bindingContext, packageMetadata) {
         @Suppress("unused") // Used in kotlin-web-demo in WebDemoTranslatorFacade
         fun getCode(): String {
-            val output = TextOutputImpl()
+            konst output = TextOutputImpl()
             getCode(output, sourceLocationConsumer = null)
             return output.toString()
         }
 
         override fun getOutputFiles(outputFile: File, outputPrefixFile: File?, outputPostfixFile: File?): OutputFileCollection {
-            val output = TextOutputImpl()
+            konst output = TextOutputImpl()
 
-            val sourceMapBuilder = SourceMap3Builder(outputFile, output::getColumn, config.sourceMapPrefix)
-            val sourceMapBuilderConsumer =
+            konst sourceMapBuilder = SourceMap3Builder(outputFile, output::getColumn, config.sourceMapPrefix)
+            konst sourceMapBuilderConsumer =
                 if (config.configuration.getBoolean(JSConfigurationKeys.SOURCE_MAP)) {
-                    val sourceMapContentEmbedding = config.sourceMapContentEmbedding
-                    val pathResolver = SourceFilePathResolver.create(config)
+                    konst sourceMapContentEmbedding = config.sourceMapContentEmbedding
+                    konst pathResolver = SourceFilePathResolver.create(config)
                     SourceMapBuilderConsumer(
                         File("."),
                         sourceMapBuilder,
@@ -137,19 +137,19 @@ abstract class TranslationResult protected constructor(val diagnostics: Diagnost
             if (sourceMapBuilderConsumer != null) {
                 output.addSourceMappingURL(outputFile)
             }
-            val code = output.toString()
+            konst code = output.toString()
 
-            val prefix = outputPrefixFile?.readText() ?: ""
-            val postfix = outputPostfixFile?.readText() ?: ""
+            konst prefix = outputPrefixFile?.readText() ?: ""
+            konst postfix = outputPostfixFile?.readText() ?: ""
 
-            val jsFile = SimpleOutputFile(sourceFiles, outputFile.name, prefix + code + postfix)
-            val outputFiles = arrayListOf<OutputFile>(jsFile)
+            konst jsFile = SimpleOutputFile(sourceFiles, outputFile.name, prefix + code + postfix)
+            konst outputFiles = arrayListOf<OutputFile>(jsFile)
 
             outputFiles += metadataFiles(outputFile)
 
             if (sourceMapBuilderConsumer != null) {
                 sourceMapBuilder.skipLinesAtBeginning(StringUtil.getLineBreakCount(prefix))
-                val sourceMapFile = SimpleOutputFile(sourceFiles, sourceMapBuilder.outFile.name, sourceMapBuilder.build())
+                konst sourceMapFile = SimpleOutputFile(sourceFiles, sourceMapBuilder.outFile.name, sourceMapBuilder.build())
                 outputFiles.add(sourceMapFile)
                 output.addSourceMappingURL(outputFile)
             }

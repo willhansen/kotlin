@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.idea.kpm.IdeaKpmBinaryDependency
 import org.jetbrains.kotlin.gradle.idea.kpm.IdeaKpmFragment
 
 fun parseIdeaKpmBinaryCoordinates(coordinates: String): IdeaKpmBinaryCoordinates {
-    val parts = coordinates.split(":")
+    konst parts = coordinates.split(":")
     if (parts.size == 3) {
         return IdeaKpmBinaryCoordinatesImpl(parts[0], parts[1], parts[2])
     }

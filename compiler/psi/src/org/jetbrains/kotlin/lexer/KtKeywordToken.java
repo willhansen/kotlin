@@ -25,45 +25,45 @@ public class KtKeywordToken extends KtSingleValueToken {
      * Generate keyword (identifier that has a keyword meaning in all possible contexts)
      */
     @Deprecated
-    public static KtKeywordToken keyword(String value) {
-        return keyword(value, value);
+    public static KtKeywordToken keyword(String konstue) {
+        return keyword(konstue, konstue);
     }
 
-    public static KtKeywordToken keyword(String value, int tokenId) {
-        return keyword(value, value, tokenId);
+    public static KtKeywordToken keyword(String konstue, int tokenId) {
+        return keyword(konstue, konstue, tokenId);
     }
 
     @Deprecated
-    public static KtKeywordToken keyword(String debugName, String value) {
-        return new KtKeywordToken(debugName, value, false);
+    public static KtKeywordToken keyword(String debugName, String konstue) {
+        return new KtKeywordToken(debugName, konstue, false);
     }
 
-    public static KtKeywordToken keyword(String debugName, String value, int tokenId) {
-        return new KtKeywordToken(debugName, value, false, tokenId);
+    public static KtKeywordToken keyword(String debugName, String konstue, int tokenId) {
+        return new KtKeywordToken(debugName, konstue, false, tokenId);
     }
 
     /**
      * Generate soft keyword (identifier that has a keyword meaning only in some contexts)
      */
     @Deprecated
-    public static KtKeywordToken softKeyword(String value) {
-        return new KtKeywordToken(value, value, true);
+    public static KtKeywordToken softKeyword(String konstue) {
+        return new KtKeywordToken(konstue, konstue, true);
     }
 
-    public static KtKeywordToken softKeyword(String value, int tokenId) {
-        return new KtKeywordToken(value, value, true, tokenId);
+    public static KtKeywordToken softKeyword(String konstue, int tokenId) {
+        return new KtKeywordToken(konstue, konstue, true, tokenId);
     }
 
     private final boolean myIsSoft;
 
     @Deprecated
-    protected KtKeywordToken(@NotNull @NonNls String debugName, @NotNull @NonNls String value, boolean isSoft) {
-        super(debugName, value);
+    protected KtKeywordToken(@NotNull @NonNls String debugName, @NotNull @NonNls String konstue, boolean isSoft) {
+        super(debugName, konstue);
         myIsSoft = isSoft;
     }
 
-    protected KtKeywordToken(@NotNull @NonNls String debugName, @NotNull @NonNls String value, boolean isSoft, int tokenId) {
-        super(debugName, value, tokenId);
+    protected KtKeywordToken(@NotNull @NonNls String debugName, @NotNull @NonNls String konstue, boolean isSoft, int tokenId) {
+        super(debugName, konstue, tokenId);
         myIsSoft = isSoft;
     }
 

@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.gradle.report.BuildScanExtensionHolder
 import javax.inject.Inject
 
 internal abstract class StatisticsBuildFlowManager @Inject constructor(
-    private val flowScope: FlowScope,
-    private val flowProviders: FlowProviders,
+    private konst flowScope: FlowScope,
+    private konst flowProviders: FlowProviders,
 ) {
     companion object {
         fun getInstance(project: Project) =
@@ -33,8 +33,8 @@ internal abstract class StatisticsBuildFlowManager @Inject constructor(
     }
 
     fun subscribeForBuildScan(project: Project) {
-        val buildScanExtension = project.rootProject.extensions.findByName("buildScan")
-        val buildScanHolder = buildScanExtension?.let { BuildScanExtensionHolder(it) }
+        konst buildScanExtension = project.rootProject.extensions.findByName("buildScan")
+        konst buildScanHolder = buildScanExtension?.let { BuildScanExtensionHolder(it) }
 
         flowScope.always(
             BuildScanFlowAction::class.java
@@ -47,10 +47,10 @@ internal abstract class StatisticsBuildFlowManager @Inject constructor(
 internal class BuildScanFlowAction : FlowAction<BuildScanFlowAction.Parameters> {
     interface Parameters : FlowParameters {
         @get:ServiceReference
-        val buildMetricService: Property<BuildMetricsService?>
+        konst buildMetricService: Property<BuildMetricsService?>
 
         @get: Input
-        val buildScanExtensionHolder: Property<BuildScanExtensionHolder?>
+        konst buildScanExtensionHolder: Property<BuildScanExtensionHolder?>
     }
 
     override fun execute(parameters: Parameters) {
@@ -61,13 +61,13 @@ internal class BuildScanFlowAction : FlowAction<BuildScanFlowAction.Parameters> 
 internal class BuildFinishFlowAction : FlowAction<BuildFinishFlowAction.Parameters> {
     interface Parameters : FlowParameters {
         @get:ServiceReference
-        val buildFlowServiceProperty: Property<BuildFlowService>
+        konst buildFlowServiceProperty: Property<BuildFlowService>
 
         @get:Input
-        val action: Property<String?>
+        konst action: Property<String?>
 
         @get:Input
-        val buildFailed: Property<Boolean>
+        konst buildFailed: Property<Boolean>
 
     }
 

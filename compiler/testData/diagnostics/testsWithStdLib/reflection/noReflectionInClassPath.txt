@@ -19,7 +19,7 @@ public fun y04(): [Error type: Return type for function cannot be resolved]
 
 public final class Foo {
     public constructor Foo(/*0*/ prop: kotlin.Any)
-    public final val prop: kotlin.Any
+    public final konst prop: kotlin.Any
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun func(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

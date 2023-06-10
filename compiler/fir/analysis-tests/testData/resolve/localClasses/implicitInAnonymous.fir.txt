@@ -1,5 +1,5 @@
 FILE: implicitInAnonymous.kt
-    private final val x: R|<anonymous>| = object : R|kotlin/Any| {
+    private final konst x: R|<anonymous>| = object : R|kotlin/Any| {
         private constructor(): R|<anonymous>| {
             super<R|kotlin/Any|>()
         }
@@ -12,12 +12,12 @@ FILE: implicitInAnonymous.kt
             ^bar CMP(>, this@R|/<anonymous>|.R|kotlin/Any.hashCode|().R|kotlin/Int.plus|(R|<local>/y|).R|kotlin/Int.compareTo|(Int(0)))
         }
 
-        public final val w: R|kotlin/Boolean|
+        public final konst w: R|kotlin/Boolean|
             public get(): R|kotlin/Boolean| {
                 ^ this@R|/<anonymous>|.R|/<anonymous>.z|
             }
 
-        public final val z: R|kotlin/Boolean|
+        public final konst z: R|kotlin/Boolean|
             public get(): R|kotlin/Boolean| {
                 ^ ==(this@R|/<anonymous>|.R|kotlin/Any.hashCode|(), Int(0))
             }

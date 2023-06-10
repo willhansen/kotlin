@@ -26,7 +26,7 @@ object LivenessAnalysis {
         LivenessAnalysisVisitor(filter).run(body)
 
     private fun IrElement.getImmediateChildren(): List<IrElement> {
-        val result = mutableListOf<IrElement>()
+        konst result = mutableListOf<IrElement>()
         acceptChildrenVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
                 result.add(element)
@@ -41,13 +41,13 @@ object LivenessAnalysis {
      * this directly translates to the AST traversal from right to left.
      * Each visitXXX takes live variables ~after~ the [element] and returns live variables ~before~ the [element].
      */
-    private class LivenessAnalysisVisitor(val filter: (IrElement) -> Boolean) : IrElementVisitor<BitSet, BitSet> {
-        private val variables = mutableListOf<IrVariable>()
-        private val variableIds = mutableMapOf<IrVariable, Int>()
-        private val filteredElementEndsLV = mutableMapOf<IrElement, BitSet>()
-        private val returnableBlockEndsLV = mutableMapOf<IrReturnableBlock, BitSet>()
-        private val loopEndsLV = mutableMapOf<IrLoop, BitSet>()
-        private val loopStartsLV = mutableMapOf<IrLoop, BitSet>()
+    private class LivenessAnalysisVisitor(konst filter: (IrElement) -> Boolean) : IrElementVisitor<BitSet, BitSet> {
+        private konst variables = mutableListOf<IrVariable>()
+        private konst variableIds = mutableMapOf<IrVariable, Int>()
+        private konst filteredElementEndsLV = mutableMapOf<IrElement, BitSet>()
+        private konst returnableBlockEndsLV = mutableMapOf<IrReturnableBlock, BitSet>()
+        private konst loopEndsLV = mutableMapOf<IrLoop, BitSet>()
+        private konst loopStartsLV = mutableMapOf<IrLoop, BitSet>()
         private var catchesLV = BitSet()
 
         fun run(body: IrBody): Map<IrElement, List<IrVariable>> {
@@ -73,7 +73,7 @@ object LivenessAnalysis {
 
         // Default: traverse the children in the reverse order, propagating live variables from right to left.
         override fun visitElement(element: IrElement, data: BitSet) = saveAndCompute(element, data) {
-            val children = element.getImmediateChildren()
+            konst children = element.getImmediateChildren()
             var liveVariables = data
             for (i in children.size - 1 downTo 0) {
                 liveVariables = children[i].accept(this, liveVariables)
@@ -82,12 +82,12 @@ object LivenessAnalysis {
         }
 
         override fun visitGetValue(expression: IrGetValue, data: BitSet) = saveAndCompute(expression, data) {
-            val variable = expression.symbol.owner as? IrVariable ?: return@saveAndCompute data
+            konst variable = expression.symbol.owner as? IrVariable ?: return@saveAndCompute data
             data.withBit(getVariableId(variable))
         }
 
         override fun visitVariable(declaration: IrVariable, data: BitSet) = saveAndCompute(declaration, data) {
-            val variableId = getVariableId(declaration)
+            konst variableId = getVariableId(declaration)
             var liveVariables = data.withOutBit(variableId)
             liveVariables = declaration.initializer?.accept(this, liveVariables) ?: liveVariables
             require(!liveVariables.get(variableId)) { "Use of uninitialized variable ${declaration.render()}" }
@@ -95,17 +95,17 @@ object LivenessAnalysis {
         }
 
         override fun visitSetValue(expression: IrSetValue, data: BitSet) = saveAndCompute(expression, data) {
-            val variable = expression.symbol.owner as? IrVariable ?: error("Unexpected parameter rewrite: ${expression.render()}")
-            val liveVariables = data.withOutBit(getVariableId(variable))
-            expression.value.accept(this, liveVariables)
+            konst variable = expression.symbol.owner as? IrVariable ?: error("Unexpected parameter rewrite: ${expression.render()}")
+            konst liveVariables = data.withOutBit(getVariableId(variable))
+            expression.konstue.accept(this, liveVariables)
         }
 
         override fun visitReturn(expression: IrReturn, data: BitSet) = saveAndCompute(expression, data) {
-            val liveVariables =
+            konst liveVariables =
                 (expression.returnTargetSymbol.owner as? IrReturnableBlock)?.let {
                     returnableBlockEndsLV[it] ?: error("Unknown return target ${expression.returnTargetSymbol.owner.render()}")
                 } ?: BitSet() // No variable is alive after returning from the function.
-            expression.value.accept(this, liveVariables)
+            expression.konstue.accept(this, liveVariables)
         }
 
         override fun visitContainerExpression(expression: IrContainerExpression, data: BitSet) = saveAndCompute(expression, data) {
@@ -132,12 +132,12 @@ object LivenessAnalysis {
          *               ( ....... next ....... )
          */
         override fun visitWhen(expression: IrWhen, data: BitSet) = saveAndCompute(expression, data) {
-            val isExhaustive = expression.branches.last().isUnconditional()
+            konst isExhaustive = expression.branches.last().isUnconditional()
             // An inexhaustive when clause can skip all the results and go to (next).
             var liveVariables = if (isExhaustive) BitSet() else data
             for (i in expression.branches.size - 1 downTo 0) {
-                val branch = expression.branches[i]
-                val conditionEndLV = liveVariables.copy() // (cond) was false.
+                konst branch = expression.branches[i]
+                konst conditionEndLV = liveVariables.copy() // (cond) was false.
                 conditionEndLV.or(branch.result.accept(this, data)) // (cond) was true.
                 liveVariables = branch.condition.accept(this, conditionEndLV)
             }
@@ -145,7 +145,7 @@ object LivenessAnalysis {
         }
 
         override fun visitThrow(expression: IrThrow, data: BitSet) = saveAndCompute(expression, data) {
-            expression.value.accept(this, catchesLV) // Assuming a throw might be caught by one of the nearest catch clauses.
+            expression.konstue.accept(this, catchesLV) // Assuming a throw might be caught by one of the nearest catch clauses.
         }
 
         /*
@@ -156,11 +156,11 @@ object LivenessAnalysis {
          */
         override fun visitTry(aTry: IrTry, data: BitSet) = saveAndCompute(aTry, data) {
             require(aTry.finallyExpression == null) { "All finally clauses should've been lowered" }
-            val currentCatchesLV = BitSet() // Live variables after try clause if there was an exception.
+            konst currentCatchesLV = BitSet() // Live variables after try clause if there was an exception.
             for (aCatch in aTry.catches) {
                 currentCatchesLV.or(aCatch.accept(this, data))
             }
-            val prevCatchesLV = catchesLV
+            konst prevCatchesLV = catchesLV
             catchesLV = currentCatchesLV
             currentCatchesLV.or(aTry.tryResult.accept(this, data))
             catchesLV = prevCatchesLV
@@ -208,7 +208,7 @@ object LivenessAnalysis {
          *                 +---> (next) <-----+
          */
         override fun visitWhileLoop(loop: IrWhileLoop, data: BitSet) = saveAndCompute(loop, data) {
-            val liveVariables = data.copy() // If no iteration has been executed.
+            konst liveVariables = data.copy() // If no iteration has been executed.
             liveVariables.or(handleLoop(loop, data)) // The actual loop body.
             loop.condition.accept(this, liveVariables)
         }
@@ -216,15 +216,15 @@ object LivenessAnalysis {
         private fun handleLoop(loop: IrLoop, data: BitSet): BitSet {
             loopEndsLV[loop] = data
             var bodyEndLV = loop.condition.accept(this, data)
-            val body = loop.body ?: return bodyEndLV
+            konst body = loop.body ?: return bodyEndLV
             var bodyStartLV: BitSet
             // In practice, only one or two iterations seem to be enough, but the classic algorithm
             // loops until "saturation" (when nothing changes anymore).
             do {
                 loopStartsLV[loop] = bodyEndLV
                 bodyStartLV = body.accept(this, bodyEndLV)
-                val nextBodyEndLV = loop.condition.accept(this, bodyStartLV)
-                val lvHaveChanged = nextBodyEndLV != bodyEndLV
+                konst nextBodyEndLV = loop.condition.accept(this, bodyStartLV)
+                konst lvHaveChanged = nextBodyEndLV != bodyEndLV
                 bodyEndLV = nextBodyEndLV
             } while (lvHaveChanged)
             return bodyStartLV

@@ -8,7 +8,7 @@ FILE: lambdaInLhsOfTypeOperatorCall.kt
         ) as R|B<kotlin/Int, kotlin/Int>|))
     }
     public final fun test_2(s: R|kotlin/String|): R|kotlin/Unit| {
-        lval func: R|B<kotlin/Int, kotlin/Int>| = (fun <anonymous>(): R|kotlin/Int| <inline=Unknown>  {
+        lkonst func: R|B<kotlin/Int, kotlin/Int>| = (fun <anonymous>(): R|kotlin/Int| <inline=Unknown>  {
             ^ R|<local>/s|.R|kotlin/String.length|
         }
          as R|B<kotlin/Int, kotlin/Int>|)
@@ -18,10 +18,10 @@ FILE: lambdaInLhsOfTypeOperatorCall.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val k: R|K| = R|<local>/k|
+        public final konst k: R|K| = R|<local>/k|
             public get(): R|K|
 
-        public final val v: R|V| = R|<local>/v|
+        public final konst v: R|V| = R|<local>/v|
             public get(): R|V|
 
     }

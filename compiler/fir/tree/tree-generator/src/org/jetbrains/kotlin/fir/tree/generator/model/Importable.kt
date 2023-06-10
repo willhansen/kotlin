@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.fir.tree.generator.model
 
 interface Importable {
-    val type: String
-    val packageName: String?
-    val fullQualifiedName: String? get() = packageName?.let { "$it.${type.replace(Regex("<.+>"), "")}" }
+    konst type: String
+    konst packageName: String?
+    konst fullQualifiedName: String? get() = packageName?.let { "$it.${type.replace(Regex("<.+>"), "")}" }
 }

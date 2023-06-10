@@ -26,13 +26,13 @@ internal class IrSyntheticDeclarationGenerator(context: GeneratorContext) : IrEl
         } catch (e: BackendException) {
             throw e
         } catch (e: Throwable) {
-            val psiFile = (file.fileEntry as? PsiIrFileEntry)?.psiFile
+            konst psiFile = (file.fileEntry as? PsiIrFileEntry)?.psiFile
             CodegenUtil.reportBackendException(e, "psi2ir", psiFile?.virtualFile?.path ?: psiFile?.name ?: file.fileEntry.name)
         }
     }
 
-    private val descriptorGenerator = SyntheticDeclarationsGenerator(context)
-    private val symbolTable = context.symbolTable
+    private konst descriptorGenerator = SyntheticDeclarationsGenerator(context)
+    private konst symbolTable = context.symbolTable
 
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -43,7 +43,7 @@ internal class IrSyntheticDeclarationGenerator(context: GeneratorContext) : IrEl
     }
 
     private fun collectDescriptors(descriptor: ClassDescriptor): MutableList<DeclarationDescriptor> {
-        val result = mutableListOf<DeclarationDescriptor>()
+        konst result = mutableListOf<DeclarationDescriptor>()
         result.addAll(DescriptorUtils.getAllDescriptors(descriptor.unsubstitutedMemberScope))
         result.addAll(descriptor.constructors)
         descriptor.companionObjectDescriptor?.let { result.add(it) }
@@ -52,8 +52,8 @@ internal class IrSyntheticDeclarationGenerator(context: GeneratorContext) : IrEl
     }
 
     private fun ensureMemberScope(irClass: IrClass) {
-        val declaredDescriptors = irClass.declarations.map { it.descriptor }
-        val contributedDescriptors = collectDescriptors(irClass.descriptor)
+        konst declaredDescriptors = irClass.declarations.map { it.descriptor }
+        konst contributedDescriptors = collectDescriptors(irClass.descriptor)
 
         contributedDescriptors.removeAll(declaredDescriptors)
 

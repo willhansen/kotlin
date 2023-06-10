@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.types.model.convertVariance
 import org.jetbrains.kotlin.types.typeUtil.immediateSupertypes
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
-sealed class CallableReceiver(val receiver: ReceiverValueWithSmartCastInfo) {
+sealed class CallableReceiver(konst receiver: ReceiverValueWithSmartCastInfo) {
     class UnboundReference(receiver: ReceiverValueWithSmartCastInfo) : CallableReceiver(receiver)
     class BoundValueReference(receiver: ReceiverValueWithSmartCastInfo) : CallableReceiver(receiver)
     class ScopeReceiver(receiver: ReceiverValueWithSmartCastInfo) : CallableReceiver(receiver)
@@ -33,11 +33,11 @@ sealed class CallableReceiver(val receiver: ReceiverValueWithSmartCastInfo) {
 }
 
 class CallableReferenceAdaptation(
-    val argumentTypes: Array<KotlinType>,
-    val coercionStrategy: CoercionStrategy,
-    val defaults: Int,
-    val mappedArguments: Map<ValueParameterDescriptor, ResolvedCallArgument>,
-    val suspendConversionStrategy: SuspendConversionStrategy
+    konst argumentTypes: Array<KotlinType>,
+    konst coercionStrategy: CoercionStrategy,
+    konst defaults: Int,
+    konst mappedArguments: Map<ValueParameterDescriptor, ResolvedCallArgument>,
+    konst suspendConversionStrategy: SuspendConversionStrategy
 )
 
 /**
@@ -49,29 +49,29 @@ class CallableReferenceAdaptation(
  * D.E::foo <-> Expression
  */
 fun createCallableReferenceProcessor(factory: CallableReferencesCandidateFactory): ScopeTowerProcessor<CallableReferenceResolutionCandidate> {
-    when (val lhsResult = factory.kotlinCall.lhsResult) {
+    when (konst lhsResult = factory.kotlinCall.lhsResult) {
         LHSResult.Empty, LHSResult.Error, is LHSResult.Expression -> {
-            val explicitReceiver = (lhsResult as? LHSResult.Expression)?.lshCallArgument?.receiver
+            konst explicitReceiver = (lhsResult as? LHSResult.Expression)?.lshCallArgument?.receiver
             return factory.createCallableProcessor(explicitReceiver)
         }
         is LHSResult.Type -> {
-            val static = lhsResult.qualifier?.let(factory::createCallableProcessor)
-            val unbound = factory.createCallableProcessor(lhsResult.unboundDetailedReceiver)
+            konst static = lhsResult.qualifier?.let(factory::createCallableProcessor)
+            konst unbound = factory.createCallableProcessor(lhsResult.unboundDetailedReceiver)
 
             // note that if we use PrioritizedCompositeScopeTowerProcessor then static will win over unbound members
-            val staticOrUnbound =
+            konst staticOrUnbound =
                 if (static != null)
                     SamePriorityCompositeScopeTowerProcessor(static, unbound)
                 else
                     unbound
 
-            val asValue = lhsResult.qualifier?.classValueReceiverWithSmartCastInfo ?: return staticOrUnbound
+            konst asValue = lhsResult.qualifier?.classValueReceiverWithSmartCastInfo ?: return staticOrUnbound
             return PrioritizedCompositeScopeTowerProcessor(staticOrUnbound, factory.createCallableProcessor(asValue))
         }
         is LHSResult.Object -> {
             // callable reference to nested class constructor
-            val static = factory.createCallableProcessor(lhsResult.qualifier)
-            val boundObjectReference = factory.createCallableProcessor(lhsResult.objectValueReceiver)
+            konst static = factory.createCallableProcessor(lhsResult.qualifier)
+            konst boundObjectReference = factory.createCallableProcessor(lhsResult.objectValueReceiver)
 
             return SamePriorityCompositeScopeTowerProcessor(static, boundObjectReference)
         }
@@ -83,15 +83,15 @@ fun CallableReferenceResolutionCandidate.addConstraints(
     substitutor: FreshVariableNewTypeSubstitutor,
     callableReference: CallableReferenceResolutionAtom
 ) {
-    val lhsResult = callableReference.lhsResult
-    val position = when (callableReference) {
+    konst lhsResult = callableReference.lhsResult
+    konst position = when (callableReference) {
         is CallableReferenceKotlinCallArgument -> ArgumentConstraintPositionImpl(callableReference)
         is CallableReferenceKotlinCall -> CallableReferenceConstraintPositionImpl(callableReference)
     }
 
     if (lhsResult is LHSResult.Type && expectedType != null && !TypeUtils.noExpectedType(expectedType)) {
         // NB: regular objects have lhsResult of `LHSResult.Object` type and won't be proceeded here
-        val isStaticOrCompanionMember =
+        konst isStaticOrCompanionMember =
             DescriptorUtils.isStaticDeclaration(candidate) || candidate.containingDeclaration.isCompanionObject()
         if (!isStaticOrCompanionMember) {
             constraintSystem.addLhsTypeConstraint(lhsResult.unboundDetailedReceiver.stableType, expectedType, position)
@@ -115,10 +115,10 @@ private fun ConstraintSystemOperation.addLhsTypeConstraint(
 ) {
     if (!ReflectionTypes.isNumberedTypeWithOneOrMoreNumber(expectedType)) return
 
-    val expectedTypeProjectionForLHS = expectedType.arguments.first()
-    val expectedTypeForLHS = expectedTypeProjectionForLHS.type
-    val expectedTypeVariance = expectedTypeProjectionForLHS.projectionKind.convertVariance()
-    val effectiveVariance = AbstractTypeChecker.effectiveVariance(
+    konst expectedTypeProjectionForLHS = expectedType.arguments.first()
+    konst expectedTypeForLHS = expectedTypeProjectionForLHS.type
+    konst expectedTypeVariance = expectedTypeProjectionForLHS.projectionKind.convertVariance()
+    konst effectiveVariance = AbstractTypeChecker.effectiveVariance(
         expectedType.constructor.parameters.first().variance.convertVariance(),
         expectedTypeVariance
     ) ?: expectedTypeVariance
@@ -142,13 +142,13 @@ private fun ConstraintSystemOperation.addReceiverConstraint(
         return
     }
 
-    val expectedType = toFreshSubstitutor.safeSubstitute(receiverParameter.value.type.unwrap())
-    val receiverType = receiverArgument.receiver.stableType.let { captureFromExpression(it) ?: it }
+    konst expectedType = toFreshSubstitutor.safeSubstitute(receiverParameter.konstue.type.unwrap())
+    konst receiverType = receiverArgument.receiver.stableType.let { captureFromExpression(it) ?: it }
 
     addSubtypeConstraint(receiverType, expectedType, position)
 }
 
-data class InputOutputTypes(val inputTypes: List<UnwrappedType>, val outputType: UnwrappedType)
+data class InputOutputTypes(konst inputTypes: List<UnwrappedType>, konst outputType: UnwrappedType)
 
 fun extractInputOutputTypesFromCallableReferenceExpectedType(expectedType: UnwrappedType?): InputOutputTypes? {
     if (expectedType == null) return null
@@ -161,17 +161,17 @@ fun extractInputOutputTypesFromCallableReferenceExpectedType(expectedType: Unwra
             InputOutputTypes(emptyList(), expectedType.arguments.single().type.unwrap())
 
         ReflectionTypes.isNumberedKFunction(expectedType) -> {
-            val functionFromSupertype = expectedType.immediateSupertypes().first { it.isFunctionType }.unwrap()
+            konst functionFromSupertype = expectedType.immediateSupertypes().first { it.isFunctionType }.unwrap()
             extractInputOutputTypesFromFunctionType(functionFromSupertype)
         }
 
         ReflectionTypes.isNumberedKSuspendFunction(expectedType) -> {
-            val kSuspendFunctionType = expectedType.immediateSupertypes().first { it.isSuspendFunctionType }.unwrap()
+            konst kSuspendFunctionType = expectedType.immediateSupertypes().first { it.isSuspendFunctionType }.unwrap()
             extractInputOutputTypesFromFunctionType(kSuspendFunctionType)
         }
 
         ReflectionTypes.isNumberedKPropertyOrKMutablePropertyType(expectedType) -> {
-            val functionFromSupertype = expectedType.supertypes().first { it.isFunctionType }.unwrap()
+            konst functionFromSupertype = expectedType.supertypes().first { it.isFunctionType }.unwrap()
             extractInputOutputTypesFromFunctionType(functionFromSupertype)
         }
 
@@ -180,11 +180,11 @@ fun extractInputOutputTypesFromCallableReferenceExpectedType(expectedType: Unwra
 }
 
 private fun extractInputOutputTypesFromFunctionType(functionType: UnwrappedType): InputOutputTypes {
-    val receiver = functionType.getReceiverTypeFromFunctionType()?.unwrap()
-    val parameters = functionType.getValueParameterTypesFromFunctionType().map { it.type.unwrap() }
+    konst receiver = functionType.getReceiverTypeFromFunctionType()?.unwrap()
+    konst parameters = functionType.getValueParameterTypesFromFunctionType().map { it.type.unwrap() }
 
-    val inputTypes = listOfNotNull(receiver) + parameters
-    val outputType = functionType.getReturnTypeFromFunctionType().unwrap()
+    konst inputTypes = listOfNotNull(receiver) + parameters
+    konst outputType = functionType.getReturnTypeFromFunctionType().unwrap()
 
     return InputOutputTypes(inputTypes, outputType)
 }

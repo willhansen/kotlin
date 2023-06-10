@@ -29,7 +29,7 @@ public final class ByteArray {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> Byte): this(size) {
@@ -38,7 +38,7 @@ public final class ByteArray {
         }
     }
 
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
@@ -50,12 +50,12 @@ public final class ByteArray {
     external public operator fun get(index: Int): Byte
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_ByteArray_set")
-    external public operator fun set(index: Int, value: Byte): Unit
+    external public operator fun set(index: Int, konstue: Byte): Unit
 
     @GCUnsafeCall("Kotlin_ByteArray_getArrayLength")
     external private fun getArrayLength(): Int
@@ -66,7 +66,7 @@ public final class ByteArray {
     }
 }
 
-private class ByteIteratorImpl(val collection: ByteArray) : ByteIterator() {
+private class ByteIteratorImpl(konst collection: ByteArray) : ByteIterator() {
     var index : Int = 0
 
     public override fun nextByte(): Byte {
@@ -93,7 +93,7 @@ public final class CharArray {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> Char): this(size) {
@@ -103,7 +103,7 @@ public final class CharArray {
     }
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
@@ -115,12 +115,12 @@ public final class CharArray {
     external public operator fun get(index: Int): Char
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_CharArray_set")
-    external public operator fun set(index: Int, value: Char): Unit
+    external public operator fun set(index: Int, konstue: Char): Unit
 
     @GCUnsafeCall("Kotlin_CharArray_getArrayLength")
     external private fun getArrayLength(): Int
@@ -131,7 +131,7 @@ public final class CharArray {
     }
 }
 
-private class CharIteratorImpl(val collection: CharArray) : CharIterator() {
+private class CharIteratorImpl(konst collection: CharArray) : CharIterator() {
     var index : Int = 0
 
     public override fun nextChar(): Char {
@@ -158,7 +158,7 @@ public final class ShortArray {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> Short): this(size) {
@@ -168,7 +168,7 @@ public final class ShortArray {
     }
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
@@ -180,12 +180,12 @@ public final class ShortArray {
     external public operator fun get(index: Int): Short
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_ShortArray_set")
-    external public operator fun set(index: Int, value: Short): Unit
+    external public operator fun set(index: Int, konstue: Short): Unit
 
     @GCUnsafeCall("Kotlin_ShortArray_getArrayLength")
     external private fun getArrayLength(): Int
@@ -196,7 +196,7 @@ public final class ShortArray {
     }
 }
 
-private class ShortIteratorImpl(val collection: ShortArray) : ShortIterator() {
+private class ShortIteratorImpl(konst collection: ShortArray) : ShortIterator() {
     var index : Int = 0
 
     public override fun nextShort(): Short {
@@ -223,7 +223,7 @@ public final class IntArray {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> Int): this(size) {
@@ -233,7 +233,7 @@ public final class IntArray {
     }
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
@@ -245,12 +245,12 @@ public final class IntArray {
     external public operator fun get(index: Int): Int
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_IntArray_set")
-    external public operator fun set(index: Int, value: Int): Unit
+    external public operator fun set(index: Int, konstue: Int): Unit
 
     @GCUnsafeCall("Kotlin_IntArray_getArrayLength")
     external private fun getArrayLength(): Int
@@ -261,7 +261,7 @@ public final class IntArray {
     }
 }
 
-private class IntIteratorImpl(val collection: IntArray) : IntIterator() {
+private class IntIteratorImpl(konst collection: IntArray) : IntIterator() {
     var index : Int = 0
 
     public override fun nextInt(): Int {
@@ -288,7 +288,7 @@ public final class LongArray {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> Long): this(size) {
@@ -298,7 +298,7 @@ public final class LongArray {
     }
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
@@ -310,12 +310,12 @@ public final class LongArray {
     external public operator fun get(index: Int): Long
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_LongArray_set")
-    external public operator fun set(index: Int, value: Long): Unit
+    external public operator fun set(index: Int, konstue: Long): Unit
 
     @GCUnsafeCall("Kotlin_LongArray_getArrayLength")
     external private fun getArrayLength(): Int
@@ -326,7 +326,7 @@ public final class LongArray {
     }
 }
 
-private class LongIteratorImpl(val collection: LongArray) : LongIterator() {
+private class LongIteratorImpl(konst collection: LongArray) : LongIterator() {
     var index : Int = 0
 
     public override fun nextLong(): Long {
@@ -353,7 +353,7 @@ public final class FloatArray {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> Float): this(size) {
@@ -363,7 +363,7 @@ public final class FloatArray {
     }
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
@@ -375,12 +375,12 @@ public final class FloatArray {
     external public operator fun get(index: Int): Float
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_FloatArray_set")
-    external public operator fun set(index: Int, value: Float): Unit
+    external public operator fun set(index: Int, konstue: Float): Unit
 
     @GCUnsafeCall("Kotlin_FloatArray_getArrayLength")
     external private fun getArrayLength(): Int
@@ -391,7 +391,7 @@ public final class FloatArray {
     }
 }
 
-private class FloatIteratorImpl(val collection: FloatArray) : FloatIterator() {
+private class FloatIteratorImpl(konst collection: FloatArray) : FloatIterator() {
     var index : Int = 0
 
     public override fun nextFloat(): Float {
@@ -414,7 +414,7 @@ public final class DoubleArray {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> Double): this(size) {
@@ -424,7 +424,7 @@ public final class DoubleArray {
     }
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
@@ -436,12 +436,12 @@ public final class DoubleArray {
     external public operator fun get(index: Int): Double
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_DoubleArray_set")
-    external public operator fun set(index: Int, value: Double): Unit
+    external public operator fun set(index: Int, konstue: Double): Unit
 
     @GCUnsafeCall("Kotlin_DoubleArray_getArrayLength")
     external private fun getArrayLength(): Int
@@ -452,7 +452,7 @@ public final class DoubleArray {
     }
 }
 
-private class DoubleIteratorImpl(val collection: DoubleArray) : DoubleIterator() {
+private class DoubleIteratorImpl(konst collection: DoubleArray) : DoubleIterator() {
     var index : Int = 0
 
     public override fun nextDouble(): Double {
@@ -475,7 +475,7 @@ public final class BooleanArray {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     @Suppress("WRONG_MODIFIER_TARGET")
     public inline constructor(size: Int, init: (Int) -> Boolean): this(size) {
@@ -485,7 +485,7 @@ public final class BooleanArray {
     }
 
     /** Returns the number of elements in the array. */
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     /**
@@ -497,12 +497,12 @@ public final class BooleanArray {
     external public operator fun get(index: Int): Boolean
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException].
      */
     @GCUnsafeCall("Kotlin_BooleanArray_set")
-    external public operator fun set(index: Int, value: Boolean): Unit
+    external public operator fun set(index: Int, konstue: Boolean): Unit
 
     @GCUnsafeCall("Kotlin_BooleanArray_getArrayLength")
     external private fun getArrayLength(): Int
@@ -513,7 +513,7 @@ public final class BooleanArray {
     }
 }
 
-private class BooleanIteratorImpl(val collection: BooleanArray) : BooleanIterator() {
+private class BooleanIteratorImpl(konst collection: BooleanArray) : BooleanIterator() {
     var index : Int = 0
 
     public override fun nextBoolean(): Boolean {
@@ -527,7 +527,7 @@ private class BooleanIteratorImpl(val collection: BooleanArray) : BooleanIterato
 }
 
 /**
- * Returns an array of objects of the given type with the given [size], initialized with null values.
+ * Returns an array of objects of the given type with the given [size], initialized with null konstues.
  */
 public inline fun <reified @PureReifiable T> arrayOfNulls(size: Int): Array<T?> =
         @Suppress("NON_PUBLIC_CALL_FROM_PUBLIC_INLINE")
@@ -586,7 +586,7 @@ public inline fun shortArrayOf(vararg elements: Short) = elements
 public inline fun byteArrayOf(vararg elements: Byte) = elements
 
 /**
- * Returns an array containing the specified boolean values.
+ * Returns an array containing the specified boolean konstues.
  */
 @Suppress("NOTHING_TO_INLINE")
 public inline fun booleanArrayOf(vararg elements: Boolean) = elements

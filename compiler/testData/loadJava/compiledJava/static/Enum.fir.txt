@@ -2,19 +2,19 @@ public final enum class Enum : R|kotlin/Enum<test/Enum!>| {
     public final static enum entry A: R|@EnhancedNullability test/Enum|
     public final static enum entry B: R|@EnhancedNullability test/Enum|
     public final static enum entry C: R|@EnhancedNullability test/Enum|
-    public final static fun values(): R|kotlin/Array<test/Enum>| {
+    public final static fun konstues(): R|kotlin/Array<test/Enum>| {
     }
 
-    public final static fun valueOf(value: R|kotlin/String|): R|test/Enum| {
+    public final static fun konstueOf(konstue: R|kotlin/String|): R|test/Enum| {
     }
 
-    public final static val entries: R|kotlin/enums/EnumEntries<test/Enum>|
+    public final static konst entries: R|kotlin/enums/EnumEntries<test/Enum>|
         public get(): R|kotlin/enums/EnumEntries<test/Enum>|
 
     public open inner class Inner : R|kotlin/Any| {
         public/*package*/ open fun bar(): R|kotlin/Unit|
 
-        public/*package*/ open fun valueOf(s: R|kotlin/String!|): R|kotlin/Unit|
+        public/*package*/ open fun konstueOf(s: R|kotlin/String!|): R|kotlin/Unit|
 
         public test/Enum.constructor(): R|test/Enum.Inner|
 
@@ -22,7 +22,7 @@ public final enum class Enum : R|kotlin/Enum<test/Enum!>| {
     public open class Nested : R|kotlin/Any| {
         public/*package*/ open fun foo(): R|kotlin/Unit|
 
-        public/*package*/ open fun values(): R|kotlin/Unit|
+        public/*package*/ open fun konstues(): R|kotlin/Unit|
 
         public constructor(): R|test/Enum.Nested|
 

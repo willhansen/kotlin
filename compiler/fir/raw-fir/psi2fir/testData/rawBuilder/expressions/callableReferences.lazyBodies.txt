@@ -6,25 +6,25 @@ FILE: callableReferences.kt
 
         public? final? fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
 
-        public? final? val bar: <implicit> = LAZY_EXPRESSION
+        public? final? konst bar: <implicit> = LAZY_EXPRESSION
             public? get(): <implicit>
 
     }
     public? final? fun A.qux(): R|kotlin/Unit| { LAZY_BLOCK }
     public? final? fun baz(): R|kotlin/Unit| { LAZY_BLOCK }
-    public? final? val test1: <implicit> = LAZY_EXPRESSION
+    public? final? konst test1: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val test2: <implicit> = LAZY_EXPRESSION
+    public? final? konst test2: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val test3: <implicit> = LAZY_EXPRESSION
+    public? final? konst test3: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val test4: <implicit> = LAZY_EXPRESSION
+    public? final? konst test4: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val test5: <implicit> = LAZY_EXPRESSION
+    public? final? konst test5: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val test6: <implicit> = LAZY_EXPRESSION
+    public? final? konst test6: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val test7: <implicit> = LAZY_EXPRESSION
+    public? final? konst test7: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val test8: <implicit> = LAZY_EXPRESSION
+    public? final? konst test8: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>

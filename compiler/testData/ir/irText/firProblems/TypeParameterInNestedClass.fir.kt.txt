@@ -12,7 +12,7 @@ object Retry {
 
     }
 
-    private val action: SuspendFunction0<B>
+    private konst action: SuspendFunction0<B>
       field = action
       private get
 

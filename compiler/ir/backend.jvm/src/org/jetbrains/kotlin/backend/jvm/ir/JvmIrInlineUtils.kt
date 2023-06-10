@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.resolve.inline.INLINE_ONLY_ANNOTATION_FQ_NAME
 
 fun IrValueParameter.isInlineParameter(): Boolean =
     index >= 0 && !isNoinline && (type.isFunction() || type.isSuspendFunction()) &&
-            // Parameters with default values are always nullable, so check the expression too.
+            // Parameters with default konstues are always nullable, so check the expression too.
             // Note that the frontend has a diagnostic for nullable inline parameters, so actually
             // making this return `false` requires using `@Suppress`.
             (!type.isNullable() || defaultValue?.expression?.type?.isNullable() == false)
@@ -32,7 +32,7 @@ fun IrValueParameter.isInlineParameter(): Boolean =
 // contained in a nested private inline function. This is an over approximation, since private declarations
 // inside of a public inline function can still escape if they are used without being regenerated.
 // See `plugins/jvm-abi-gen/testData/compile/inlineNoRegeneration` for an example.
-val IrDeclaration.inlineScopeVisibility: DescriptorVisibility?
+konst IrDeclaration.inlineScopeVisibility: DescriptorVisibility?
     get() {
         var owner: IrDeclaration? = original
         var result: DescriptorVisibility? = null
@@ -53,11 +53,11 @@ val IrDeclaration.inlineScopeVisibility: DescriptorVisibility?
     }
 
 // True for declarations which are in the scope of an externally visible inline function.
-val IrDeclaration.isInPublicInlineScope: Boolean
+konst IrDeclaration.isInPublicInlineScope: Boolean
     get() = inlineScopeVisibility?.let(DescriptorVisibilities::isPrivate) == false
 
 // Map declarations to original declarations before lowering.
-private val IrDeclaration.original: IrDeclaration
+private konst IrDeclaration.original: IrDeclaration
     get() = (this as? IrAttributeContainer)?.attributeOwnerId as? IrDeclaration ?: this
 
 fun IrStatement.unwrapInlineLambda(): IrFunctionReference? = when (this) {
@@ -85,7 +85,7 @@ fun IrFunction.isReifiable(): Boolean =
     typeParameters.any { it.isReified }
 
 private fun IrAttributeContainer.getDeclarationBeforeInline(): IrDeclaration? {
-    val original = this.originalBeforeInline ?: return null
+    konst original = this.originalBeforeInline ?: return null
     return original.extractRelatedDeclaration()
 }
 
@@ -94,9 +94,9 @@ fun IrAttributeContainer.getAttributeOwnerBeforeInline(): IrAttributeContainer? 
     return generateSequence(this) { it.originalBeforeInline }.last()
 }
 
-val IrDeclaration.fileParentBeforeInline: IrFile
+konst IrDeclaration.fileParentBeforeInline: IrFile
     get() {
-        val original = (this as? IrAttributeContainer)?.getDeclarationBeforeInline()
+        konst original = (this as? IrAttributeContainer)?.getDeclarationBeforeInline()
             ?: this.parentClassOrNull?.getDeclarationBeforeInline()
             ?: this
         return original.fileParent

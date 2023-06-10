@@ -11,8 +11,8 @@ KtInapplicableCallCandidateInfo:
       signature = KtFunctionLikeSignature:
         receiverType = null
         returnType = kotlin.Unit
-        symbol = /C.set(<dispatch receiver>: C, a: kotlin.Int, b: kotlin.String, value: kotlin.Boolean): kotlin.Unit
-        valueParameters = [
+        symbol = /C.set(<dispatch receiver>: C, a: kotlin.Int, b: kotlin.String, konstue: kotlin.Boolean): kotlin.Unit
+        konstueParameters = [
           KtVariableLikeSignature:
             name = a
             receiverType = null
@@ -26,10 +26,10 @@ KtInapplicableCallCandidateInfo:
             symbol = b: kotlin.String
             callableIdIfNonLocal = null,
           KtVariableLikeSignature:
-            name = value
+            name = konstue
             receiverType = null
             returnType = kotlin.Boolean
-            symbol = value: kotlin.Boolean
+            symbol = konstue: kotlin.Boolean
             callableIdIfNonLocal = null
         ]
         callableIdIfNonLocal = /C.set
@@ -48,10 +48,10 @@ KtInapplicableCallCandidateInfo:
         symbol = b: kotlin.String
         callableIdIfNonLocal = null),
       3.14 -> (KtVariableLikeSignature:
-        name = value
+        name = konstue
         receiverType = null
         returnType = kotlin.Boolean
-        symbol = value: kotlin.Boolean
+        symbol = konstue: kotlin.Boolean
         callableIdIfNonLocal = null)
     }
   isInBestCandidates = true

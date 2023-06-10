@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.contracts.description
 
 import org.jetbrains.kotlin.contracts.description.expressions.*
 
-class ContractDescriptionRenderer(private val builder: StringBuilder) : ContractDescriptionVisitor<Unit, Unit> {
+class ContractDescriptionRenderer(private konst builder: StringBuilder) : ContractDescriptionVisitor<Unit, Unit> {
     override fun visitConditionalEffectDeclaration(conditionalEffect: ConditionalEffectDeclaration, data: Unit) {
         conditionalEffect.effect.accept(this, data)
         builder.append(" -> ")
@@ -27,7 +27,7 @@ class ContractDescriptionRenderer(private val builder: StringBuilder) : Contract
 
     override fun visitReturnsEffectDeclaration(returnsEffect: ReturnsEffectDeclaration, data: Unit) {
         builder.append("Returns(")
-        returnsEffect.value.accept(this, data)
+        returnsEffect.konstue.accept(this, data)
         builder.append(")")
     }
 

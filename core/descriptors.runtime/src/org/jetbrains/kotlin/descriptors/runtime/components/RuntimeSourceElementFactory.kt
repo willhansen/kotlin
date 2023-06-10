@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.load.java.structure.JavaElement
 import org.jetbrains.kotlin.descriptors.runtime.structure.ReflectJavaElement
 
 object RuntimeSourceElementFactory : JavaSourceElementFactory {
-    class RuntimeSourceElement(override val javaElement: ReflectJavaElement) : JavaSourceElement {
+    class RuntimeSourceElement(override konst javaElement: ReflectJavaElement) : JavaSourceElement {
         override fun toString() = this::class.java.name + ": " + javaElement.toString()
         override fun getContainingFile(): SourceFile = SourceFile.NO_SOURCE_FILE
     }

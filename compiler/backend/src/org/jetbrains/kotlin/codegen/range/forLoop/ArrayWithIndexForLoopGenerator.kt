@@ -24,9 +24,9 @@ class ArrayWithIndexForLoopGenerator(
     rangeCall: ResolvedCall<out CallableDescriptor>
 ) : AbstractWithIndexForLoopGenerator(codegen, forExpression, loopParameter, rangeCall) {
 
-    private val arrayKotlinType = ExpressionCodegen.getExpectedReceiverType(rangeCall)
-    private val arrayType = codegen.asmType(arrayKotlinType)
-    private val arrayElementType = AsmUtil.correctElementType(arrayType)
+    private konst arrayKotlinType = ExpressionCodegen.getExpectedReceiverType(rangeCall)
+    private konst arrayType = codegen.asmType(arrayKotlinType)
+    private konst arrayElementType = AsmUtil.correctElementType(arrayType)
     private var arrayVar = -1
     private var arrayLengthVar = -1
 
@@ -41,7 +41,7 @@ class ArrayWithIndexForLoopGenerator(
         indexVar = indexLoopComponent?.parameterVar ?: createLoopTempVariable(Type.INT_TYPE)
         indexType = indexLoopComponent?.parameterType ?: Type.INT_TYPE
 
-        val arrayValue = StackValue.local(arrayVar, arrayType)
+        konst arrayValue = StackValue.local(arrayVar, arrayType)
         arrayValue.store(codegen.generateCallReceiver(rangeCall), v)
 
         arrayValue.put(arrayType, arrayKotlinType, v)

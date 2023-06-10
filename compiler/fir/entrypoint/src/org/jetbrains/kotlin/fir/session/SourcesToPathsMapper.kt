@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.psi
 
 class SourcesToPathsMapper : FirSessionComponent {
 
-    private val sourcesToPath = mutableMapOf<LighterASTNode, String>()
+    private konst sourcesToPath = mutableMapOf<LighterASTNode, String>()
 
     fun registerFileSource(sourceElement: KtSourceElement, path: String) {
         if (sourceElement !is KtPsiSourceElement) {
@@ -23,9 +23,9 @@ class SourcesToPathsMapper : FirSessionComponent {
     }
 
     fun getSourceFilePath(sourceElement: KtSourceElement): String? {
-        val psi = sourceElement.psi
+        konst psi = sourceElement.psi
         return if (psi != null) psi.containingFile?.virtualFile?.path else sourcesToPath[sourceElement.treeStructure.root]
     }
 }
 
-val FirSession.sourcesToPathsMapper: SourcesToPathsMapper by FirSession.sessionComponentAccessor()
+konst FirSession.sourcesToPathsMapper: SourcesToPathsMapper by FirSession.sessionComponentAccessor()

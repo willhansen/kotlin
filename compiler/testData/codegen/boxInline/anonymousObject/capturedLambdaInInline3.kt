@@ -14,8 +14,8 @@ public inline fun <T> call(crossinline f: () -> T): T = {{ f() }.let { it() }}.l
 import test.*
 
 fun box(): String {
-    val bar1 = bar {"123"} ()
-    val bar2 = bar2 { "1234" } ()
+    konst bar1 = bar {"123"} ()
+    konst bar2 = bar2 { "1234" } ()
     return if (bar1 == "123" && bar2 == "1234") "OK" else "fail: $bar1 $bar2"
 }
 

@@ -21,7 +21,7 @@ KtFile: kt2172.kt
           PsiElement(LBRACE)('{')
           PsiWhiteSpace('\n        ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiErrorElement:Expecting property name or receiver type
               <empty list>
           PsiWhiteSpace('\n    ')

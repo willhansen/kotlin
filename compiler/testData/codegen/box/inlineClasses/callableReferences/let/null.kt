@@ -3,8 +3,8 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Value(val value: Any)
+konstue class Value(konst konstue: Any)
 
-fun foo(value: Value?) = value?.value as String?
+fun foo(konstue: Value?) = konstue?.konstue as String?
 
 fun box(): String = (null as Value?).let(::foo) ?: "OK"

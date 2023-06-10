@@ -8,7 +8,7 @@ class A {
 }
 
 fun testVal() {
-  val a = A()
+  konst a = A()
   a += 1
   a -= 1
   a *= 1

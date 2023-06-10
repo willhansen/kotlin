@@ -22,7 +22,7 @@ public class BaseClass {
 
 // FILE: main.kt
 
-private val FOO = object : Foo {}
+private konst FOO = object : Foo {}
 
 class Correct : BaseClass() {
     override fun everythingNotNullable(x: Foo): Foo {

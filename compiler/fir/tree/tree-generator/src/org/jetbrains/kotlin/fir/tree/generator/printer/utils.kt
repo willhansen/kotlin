@@ -13,22 +13,22 @@ import org.jetbrains.kotlin.fir.tree.generator.pureAbstractElementType
 import java.io.File
 import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
 
-class GeneratedFile(val file: File, val newText: String)
+class GeneratedFile(konst file: File, konst newText: String)
 
-enum class ImportKind(val postfix: String) {
+enum class ImportKind(konst postfix: String) {
     Element(""), Implementation(".impl"), Builder(".builder")
 }
 
 fun Builder.collectImports(): List<String> {
-    val parents = parents.mapNotNull { it.fullQualifiedName }
-    val builderDsl = "org.jetbrains.kotlin.fir.builder.FirBuilderDsl"
+    konst parents = parents.mapNotNull { it.fullQualifiedName }
+    konst builderDsl = "org.jetbrains.kotlin.fir.builder.FirBuilderDsl"
     return when (this) {
         is LeafBuilder -> implementation.collectImports(
             parents,
             ImportKind.Builder,
         ) + implementation.fullQualifiedName!! + usedTypes.mapNotNull { it.fullQualifiedName } + builderDsl + "kotlin.contracts.*"
         is IntermediateBuilder -> {
-            val fqns = buildList {
+            konst fqns = buildList {
                 addAll(parents)
                 usedTypes.mapNotNullTo(this) { it.fullQualifiedName }
                 for (field in allFields) {
@@ -61,9 +61,9 @@ fun Implementation.collectImports(base: List<String> = emptyList(), kind: Import
 }
 
 fun Element.collectImports(): List<String> {
-    val baseTypes = parents.mapTo(mutableListOf()) { it.fullQualifiedName }
+    konst baseTypes = parents.mapTo(mutableListOf()) { it.fullQualifiedName }
     baseTypes += AbstractFirTreeBuilder.baseFirElement.fullQualifiedName
-    baseTypes += parentsArguments.values.flatMap { it.values }.mapNotNull { it.fullQualifiedName }
+    baseTypes += parentsArguments.konstues.flatMap { it.konstues }.mapNotNull { it.fullQualifiedName }
     if (needPureAbstractElement) {
         baseTypes += pureAbstractElementType.fullQualifiedName!!
     }
@@ -74,11 +74,11 @@ fun Element.collectImports(): List<String> {
 }
 
 private fun Element.collectImportsInternal(base: List<String>, kind: ImportKind): List<String> {
-    val fqns = base + allFields.mapNotNull { it.fullQualifiedName } +
+    konst fqns = base + allFields.mapNotNull { it.fullQualifiedName } +
             allFields.flatMap { it.overridenTypes.mapNotNull { it.fullQualifiedName } + it.arbitraryImportables.mapNotNull { it.fullQualifiedName } } +
             allFields.flatMap { it.arguments.mapNotNull { it.fullQualifiedName } } +
             typeArguments.flatMap { it.upperBounds.mapNotNull { it.fullQualifiedName } }
-    val result = fqns.filterRedundantImports(packageName, kind).toMutableList()
+    konst result = fqns.filterRedundantImports(packageName, kind).toMutableList()
 
     if (allFields.any { it is FieldList && it.isMutableOrEmpty }) {
         result += when (kind) {
@@ -105,18 +105,18 @@ private fun List<String>.filterRedundantImports(
     packageName: String,
     kind: ImportKind,
 ): List<String> {
-    val realPackageName = "$packageName.${kind.postfix}"
+    konst realPackageName = "$packageName.${kind.postfix}"
     return filter { fqn ->
         fqn.dropLastWhile { it != '.' } != realPackageName
     }.distinct().sorted() + "$VISITOR_PACKAGE.*"
 }
 
 
-val KindOwner.needPureAbstractElement: Boolean
+konst KindOwner.needPureAbstractElement: Boolean
     get() = (kind != Kind.Interface && kind != Kind.SealedInterface) && !allParents.any { it.kind == Kind.AbstractClass || it.kind == Kind.SealedClass }
 
 
-val Field.isVal: Boolean
+konst Field.isVal: Boolean
     get() = (this is FieldList && !isMutableOrEmpty) || (this is FieldWithDefault && origin is FieldList && !origin.isMutableOrEmpty) || !isMutable
 
 
@@ -129,10 +129,10 @@ fun transformFunctionDeclaration(transformName: String, returnType: String): Str
 }
 
 fun Field.replaceFunctionDeclaration(overridenType: Importable? = null, forceNullable: Boolean = false): String {
-    val capName = name.replaceFirstChar(Char::uppercaseChar)
-    val type = overridenType?.typeWithArguments ?: typeWithArguments
+    konst capName = name.replaceFirstChar(Char::uppercaseChar)
+    konst type = overridenType?.typeWithArguments ?: typeWithArguments
 
-    val typeWithNullable = if (forceNullable && !type.endsWith("?")) "$type?" else type
+    konst typeWithNullable = if (forceNullable && !type.endsWith("?")) "$type?" else type
 
     return "fun replace$capName(new$capName: $typeWithNullable)"
 }
@@ -151,7 +151,7 @@ fun Field.call(): String = if (nullable) "?." else "."
 
 fun Element.multipleUpperBoundsList(): String {
     return typeArguments.filterIsInstance<TypeArgumentWithMultipleUpperBounds>().takeIf { it.isNotEmpty() }?.let { arguments ->
-        val upperBoundsList = arguments.joinToString(", ", postfix = " ") { argument ->
+        konst upperBoundsList = arguments.joinToString(", ", postfix = " ") { argument ->
             argument.upperBounds.joinToString(", ") { upperBound -> "${argument.name} : ${upperBound.typeWithArguments}" }
         }
         " where $upperBoundsList"
@@ -164,9 +164,9 @@ fun Kind?.braces(): String = when (this) {
     else -> throw IllegalStateException(this.toString())
 }
 
-val Element.safeDecapitalizedName: String get() = if (name == "Class") "klass" else name.replaceFirstChar(Char::lowercaseChar)
+konst Element.safeDecapitalizedName: String get() = if (name == "Class") "klass" else name.replaceFirstChar(Char::lowercaseChar)
 
-val Importable.typeWithArguments: String get() = getTypeWithArguments()
+konst Importable.typeWithArguments: String get() = getTypeWithArguments()
 
 fun Importable.getTypeWithArguments(notNull: Boolean = false): String = when (this) {
     is AbstractElement -> type + generics
@@ -180,23 +180,23 @@ fun Importable.getTypeWithArguments(notNull: Boolean = false): String = when (th
     else -> throw IllegalArgumentException()
 }
 
-val ImplementationWithArg.generics: String
+konst ImplementationWithArg.generics: String
     get() = argument?.let { "<${it.type}>" } ?: ""
 
-val AbstractElement.generics: String
+konst AbstractElement.generics: String
     get() = typeArguments.takeIf { it.isNotEmpty() }
         ?.let { it.joinToString(", ", "<", ">") { it.name } }
         ?: ""
 
-val Field.generics: String
+konst Field.generics: String
     get() = arguments.takeIf { it.isNotEmpty() }
         ?.let { it.joinToString(", ", "<", ">") { it.typeWithArguments } }
         ?: ""
 
-val Element.typeParameters: String
+konst Element.typeParameters: String
     get() = typeArguments.takeIf { it.isNotEmpty() }
         ?.joinToString(", ", "<", "> ")
         ?: ""
 
-val Type.generics: String
+konst Type.generics: String
     get() = arguments.takeIf { it.isNotEmpty() }?.joinToString(",", "<", ">") ?: ""

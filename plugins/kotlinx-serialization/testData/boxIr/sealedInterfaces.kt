@@ -18,9 +18,9 @@ sealed interface SSI
 
 @Serializable
 class Holder(
-    val i: I,
-    val si: SI,
-    val ssi: SSI
+    konst i: I,
+    konst si: SI,
+    konst ssi: SSI
 )
 
 fun SerialDescriptor.checkKind(index: Int, kind: String) {
@@ -28,7 +28,7 @@ fun SerialDescriptor.checkKind(index: Int, kind: String) {
 }
 
 fun box(): String {
-    val desc = Holder.serializer().descriptor
+    konst desc = Holder.serializer().descriptor
     desc.checkKind(0, "OPEN")
     desc.checkKind(1, "OPEN")
     desc.checkKind(2, "SEALED")

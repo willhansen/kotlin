@@ -16,9 +16,9 @@ class B : A<Child> {
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     b.foo(Child())
-    val a: A<Child> = b
+    konst a: A<Child> = b
     a.foo(Child())
     return if (result == "BB") "OK" else "Fail: $result"
 }

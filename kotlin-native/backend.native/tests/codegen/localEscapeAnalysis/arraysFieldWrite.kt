@@ -4,7 +4,7 @@
  */
 
 class ArraysConstructor {
-    private val memberArray: IntArray
+    private konst memberArray: IntArray
     constructor(int1: Int, int2: Int) {
         memberArray = IntArray(2)
         set(int1, int2)
@@ -21,7 +21,7 @@ class ArraysConstructor {
 }
 
 class ArraysDefault {
-    private val memberArray = IntArray(2)
+    private konst memberArray = IntArray(2)
     constructor(int1: Int, int2: Int) {
         set(int1, int2)
     }
@@ -30,14 +30,14 @@ class ArraysDefault {
         memberArray[1] = int2
     }
     fun log() {
-        println("Array (default value init):")
+        println("Array (default konstue init):")
         println("Size: ${memberArray.size}")
         println("Contents: ${memberArray.contentToString()}")
     }
 }
 
 class ArraysInitBlock {
-    private val memberArray : IntArray
+    private konst memberArray : IntArray
     init {
         memberArray = IntArray(2)
     }
@@ -56,17 +56,17 @@ class ArraysInitBlock {
 }
 
 fun main() {
-    val array1 = (::ArraysConstructor)(1, 2)
+    konst array1 = (::ArraysConstructor)(1, 2)
     array1.log()
     array1.set( 3, 4)
     array1.log()
 
-    val array2 = (::ArraysDefault)(1, 2)
+    konst array2 = (::ArraysDefault)(1, 2)
     array2.log()
     array2.set( 3, 4)
     array2.log()
 
-    val array3 = (::ArraysInitBlock)(1, 2)
+    konst array3 = (::ArraysInitBlock)(1, 2)
     array3.log()
     array3.set( 3, 4)
     array3.log()

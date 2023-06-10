@@ -27,7 +27,7 @@ FILE fqName:<root> fileName:/nullCheckOnLambdaReturn.kt
                 RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.Any declared in <root>.test1'
                   TYPE_OP type=kotlin.String origin=IMPLICIT_NOTNULL typeOperand=kotlin.String
                     CALL 'public open fun foo (): @[FlexibleNullability] kotlin.String? declared in <root>.J' type=@[FlexibleNullability] kotlin.String? origin=null
-  PROPERTY name:test2 visibility:public modality:FINAL [val]
+  PROPERTY name:test2 visibility:public modality:FINAL [konst]
     FIELD PROPERTY_BACKING_FIELD name:test2 type:kotlin.Function0<kotlin.Any> visibility:private [final,static]
       EXPRESSION_BODY
         FUN_EXPR type=kotlin.Function0<@[FlexibleNullability] kotlin.String?> origin=LAMBDA
@@ -36,11 +36,11 @@ FILE fqName:<root> fileName:/nullCheckOnLambdaReturn.kt
               RETURN type=kotlin.Nothing from='local final fun <anonymous> (): @[FlexibleNullability] kotlin.String? declared in <root>.test2'
                 CALL 'public open fun foo (): @[FlexibleNullability] kotlin.String? declared in <root>.J' type=@[FlexibleNullability] kotlin.String? origin=null
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test2> visibility:public modality:FINAL <> () returnType:kotlin.Function0<kotlin.Any>
-      correspondingProperty: PROPERTY name:test2 visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:test2 visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-test2> (): kotlin.Function0<kotlin.Any> declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:test2 type:kotlin.Function0<kotlin.Any> visibility:private [final,static]' type=kotlin.Function0<kotlin.Any> origin=null
-  PROPERTY name:test3 visibility:public modality:FINAL [val]
+  PROPERTY name:test3 visibility:public modality:FINAL [konst]
     FIELD PROPERTY_BACKING_FIELD name:test3 type:kotlin.Function0<kotlin.Any> visibility:private [final,static]
       EXPRESSION_BODY
         TYPE_OP type=kotlin.Function0<kotlin.Any> origin=CAST typeOperand=kotlin.Function0<kotlin.Any>
@@ -50,11 +50,11 @@ FILE fqName:<root> fileName:/nullCheckOnLambdaReturn.kt
                 RETURN type=kotlin.Nothing from='local final fun <anonymous> (): @[FlexibleNullability] kotlin.String? declared in <root>.test3'
                   CALL 'public open fun foo (): @[FlexibleNullability] kotlin.String? declared in <root>.J' type=@[FlexibleNullability] kotlin.String? origin=null
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test3> visibility:public modality:FINAL <> () returnType:kotlin.Function0<kotlin.Any>
-      correspondingProperty: PROPERTY name:test3 visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:test3 visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-test3> (): kotlin.Function0<kotlin.Any> declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:test3 type:kotlin.Function0<kotlin.Any> visibility:private [final,static]' type=kotlin.Function0<kotlin.Any> origin=null
-  PROPERTY name:test4 visibility:public modality:FINAL [val]
+  PROPERTY name:test4 visibility:public modality:FINAL [konst]
     FIELD PROPERTY_BACKING_FIELD name:test4 type:kotlin.Function0<kotlin.Any> visibility:private [final,static]
       EXPRESSION_BODY
         CALL 'public final fun id <T> (x: T of <root>.id): T of <root>.id declared in <root>' type=kotlin.Function0<@[FlexibleNullability] kotlin.String?> origin=null
@@ -65,7 +65,7 @@ FILE fqName:<root> fileName:/nullCheckOnLambdaReturn.kt
                 RETURN type=kotlin.Nothing from='local final fun <anonymous> (): @[FlexibleNullability] kotlin.String? declared in <root>.test4'
                   CALL 'public open fun foo (): @[FlexibleNullability] kotlin.String? declared in <root>.J' type=@[FlexibleNullability] kotlin.String? origin=null
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test4> visibility:public modality:FINAL <> () returnType:kotlin.Function0<kotlin.Any>
-      correspondingProperty: PROPERTY name:test4 visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:test4 visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-test4> (): kotlin.Function0<kotlin.Any> declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:test4 type:kotlin.Function0<kotlin.Any> visibility:private [final,static]' type=kotlin.Function0<kotlin.Any> origin=null

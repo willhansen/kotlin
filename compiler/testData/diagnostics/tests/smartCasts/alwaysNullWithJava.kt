@@ -9,7 +9,7 @@ public class My {
 // FILE: Test.kt
 
 fun test() {
-    val my = My.create()
+    konst my = My.create()
     if (my == null) {
         my<!UNSAFE_CALL!>.<!>foo()
     }

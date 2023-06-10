@@ -33,10 +33,10 @@ object CommonKLibResolver {
         logger: Logger,
         zipAccessor: ZipFileSystemAccessor?
     ): KLibResolution {
-        val unresolvedLibraries = libraries.map { UnresolvedLibrary(it, null) }
-        val libraryAbsolutePaths = libraries.map { File(it).absolutePath }
+        konst unresolvedLibraries = libraries.map { UnresolvedLibrary(it, null) }
+        konst libraryAbsolutePaths = libraries.map { File(it).absolutePath }
         // Configure the resolver to only work with absolute paths for now.
-        val libraryResolver = KLibResolverHelper(
+        konst libraryResolver = KLibResolverHelper(
             repositories = emptyList(),
             directLibs = libraryAbsolutePaths,
             distributionKlib = null,
@@ -59,8 +59,8 @@ object CommonKLibResolver {
 }
 
 class KLibResolution(
-    private val libraryResolver: KotlinLibraryResolver<KotlinLibrary>,
-    val libraries: List<KotlinLibrary>
+    private konst libraryResolver: KotlinLibraryResolver<KotlinLibrary>,
+    konst libraries: List<KotlinLibrary>
 ) {
     fun resolveWithDependencies(): KotlinLibraryResolveResult {
         return with(libraryResolver) {
@@ -76,7 +76,7 @@ private class KLibResolverHelper(
     localKotlinDir: String?,
     skipCurrentDir: Boolean,
     logger: Logger,
-    private val zipAccessor: ZipFileSystemAccessor?
+    private konst zipAccessor: ZipFileSystemAccessor?
 ) : KotlinLibraryProperResolverWithAttributes<KotlinLibrary>(
     repositories,
     directLibs,

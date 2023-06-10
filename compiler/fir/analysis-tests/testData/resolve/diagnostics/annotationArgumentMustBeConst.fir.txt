@@ -4,7 +4,7 @@ FILE: annotationArgumentMustBeConst.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/Array<out kotlin/String>| = R|<local>/a|
+        public final konst a: R|kotlin/Array<out kotlin/String>| = R|<local>/a|
             public get(): R|kotlin/Array<out kotlin/String>|
 
     }
@@ -13,7 +13,7 @@ FILE: annotationArgumentMustBeConst.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/IntArray| = R|<local>/a|
+        public final konst a: R|kotlin/IntArray| = R|<local>/a|
             public get(): R|kotlin/IntArray|
 
     }
@@ -22,31 +22,31 @@ FILE: annotationArgumentMustBeConst.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/Array<kotlin/String>| = R|<local>/a|
+        public final konst a: R|kotlin/Array<kotlin/String>| = R|<local>/a|
             public get(): R|kotlin/Array<kotlin/String>|
 
     }
     public final var foo: R|kotlin/String| = String(a)
         public get(): R|kotlin/String|
-        public set(value: R|kotlin/String|): R|kotlin/Unit|
+        public set(konstue: R|kotlin/String|): R|kotlin/Unit|
     public final var bar: R|kotlin/Int| = Int(1)
         public get(): R|kotlin/Int|
-        public set(value: R|kotlin/Int|): R|kotlin/Unit|
+        public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
     public final fun baz(): R|kotlin/Int| {
         ^baz Int(2)
     }
-    public final val arr: R|kotlin/Array<kotlin/String>| = R|kotlin/arrayOf|<R|kotlin/String|>(vararg(String(a), String(b)))
+    public final konst arr: R|kotlin/Array<kotlin/String>| = R|kotlin/arrayOf|<R|kotlin/String|>(vararg(String(a), String(b)))
         public get(): R|kotlin/Array<kotlin/String>|
-    public final val two: R|kotlin/Int| = Int(2)
+    public final konst two: R|kotlin/Int| = Int(2)
         public get(): R|kotlin/Int|
-    public final const val cnst: R|kotlin/Int| = Int(3)
+    public final const konst cnst: R|kotlin/Int| = Int(3)
         public get(): R|kotlin/Int|
     public final class Class : R|kotlin/Any| {
         public constructor(): R|Class| {
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/Int| = Int(1)
+        public final konst a: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
 
     }

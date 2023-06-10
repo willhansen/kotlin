@@ -3,14 +3,14 @@
 // WITH_STDLIB
 
 inline fun <reified T : Any> check(expected: String) {
-    val clazz = T::class.javaPrimitiveType!!
+    konst clazz = T::class.javaPrimitiveType!!
     assert (clazz.canonicalName == expected) {
         "clazz name: ${clazz.canonicalName}"
     }
 }
 
 inline fun <reified T : Any> checkNull() {
-    val clazz = T::class.javaPrimitiveType
+    konst clazz = T::class.javaPrimitiveType
     assert (clazz == null) {
         "clazz should be null: ${clazz!!.canonicalName}"
     }

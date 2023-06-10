@@ -8,13 +8,13 @@ import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
 fun box(): String {
-    val v1 = returnTypeOf { J.nullabilityFlexible() }.toString()
+    konst v1 = returnTypeOf { J.nullabilityFlexible() }.toString()
     if (v1 != "kotlin.String!") return "Fail 1: $v1"
 
-    val v2 = returnTypeOf { J.mutabilityFlexible() }.toString()
+    konst v2 = returnTypeOf { J.mutabilityFlexible() }.toString()
     if (v2 != "kotlin.collections.(Mutable)List<kotlin.String!>") return "Fail 2: $v2"
 
-    val v3 = returnTypeOf { J.bothFlexible() }.toString()
+    konst v3 = returnTypeOf { J.bothFlexible() }.toString()
     if (v3 != "kotlin.collections.(Mutable)List<kotlin.String!>!") return "Fail 3: $v3"
 
     return "OK"

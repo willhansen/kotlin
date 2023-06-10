@@ -29,11 +29,11 @@ class VariableDeclarationInstruction(
 ) : InstructionWithNext(element, blockScope) {
     init {
         assert(element is KtVariableDeclaration || element is KtParameter || element is KtEnumEntry || element is KtObjectDeclaration) {
-            "Invalid element: ${render(element)}}"
+            "Inkonstid element: ${render(element)}}"
         }
     }
 
-    val variableDeclarationElement: KtDeclaration
+    konst variableDeclarationElement: KtDeclaration
         get() = element as KtDeclaration
 
     override fun accept(visitor: InstructionVisitor) {

@@ -3,7 +3,7 @@ class A {
 }
 
 object B {
-    val A.Companion.foo: X get() = X
+    konst A.Companion.foo: X get() = X
 }
 
 object X

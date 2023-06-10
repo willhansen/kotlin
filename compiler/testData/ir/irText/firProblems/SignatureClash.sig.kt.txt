@@ -5,7 +5,7 @@ data class DataClass : Delegate, Derived {
   // CHECK:
   //   Mangled name: DataClass{}delegate
   //   Public signature: /DataClass.delegate|-801742451047326070[0]
-  val delegate: Delegate
+  konst delegate: Delegate
     // CHECK JVM_IR:
     //   Mangled name: DataClass#<get-delegate>(){}Delegate
     //   Public signature: /DataClass.delegate.<get-delegate>|6133163829830511426[0]

@@ -30,8 +30,8 @@ internal object FirSyntheticFunctionInterfaceSourceProvider {
     }
 
     private fun provideSourceForInvokeFunction(function: FirSimpleFunction): PsiElement? {
-        val classId = function.containingClassLookupTag()?.classId ?: return null
-        val classOrObject = classByClassId(classId, function.llFirSession.ktModule) ?: return null
+        konst classId = function.containingClassLookupTag()?.classId ?: return null
+        konst classOrObject = classByClassId(classId, function.llFirSession.ktModule) ?: return null
         return classOrObject.declarations.singleOrNull()
     }
 
@@ -40,8 +40,8 @@ internal object FirSyntheticFunctionInterfaceSourceProvider {
     }
 
     private fun classByClassId(classId: ClassId, ktModule: KtModule): KtClassOrObject? {
-        val project = ktModule.project
-        val correctedClassId = classIdMapping[classId] ?: return null
+        konst project = ktModule.project
+        konst correctedClassId = classIdMapping[classId] ?: return null
         require(ktModule is KtBuiltinsModule) {
             "Expected builtin module but found $ktModule"
         }
@@ -50,7 +50,7 @@ internal object FirSyntheticFunctionInterfaceSourceProvider {
             .firstOrNull { it.containingKtFile.isCompiled }
     }
 
-    private val classIdMapping = (0..23).associate { i ->
+    private konst classIdMapping = (0..23).associate { i ->
         StandardClassIds.FunctionN(i) to ClassId(FqName("kotlin.jvm.functions"), Name.identifier("Function$i"))
     }
 }

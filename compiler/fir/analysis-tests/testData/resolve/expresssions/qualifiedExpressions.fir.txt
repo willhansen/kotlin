@@ -36,27 +36,27 @@ FILE: qualifiedExpressions.kt
         }
 
         public final static enum entry entry: R|a/b/E|
-        public final static fun values(): R|kotlin/Array<a/b/E>| {
+        public final static fun konstues(): R|kotlin/Array<a/b/E>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|a/b/E| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|a/b/E| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<a/b/E>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<a/b/E>|
             public get(): R|kotlin/enums/EnumEntries<a/b/E>|
 
     }
     public final fun foo(): R|kotlin/Unit| {
     }
-    public final val f: R|kotlin/Int| = Int(10)
+    public final konst f: R|kotlin/Int| = Int(10)
         public get(): R|kotlin/Int|
     public final fun main(): R|kotlin/Unit| {
         Q|a/b|.R|a/b/foo|()
         Q|a/b/C|.R|a/b/C.Companion.foo|()
         Q|a/b/C.D|.R|a/b/C.D.foo|()
-        lval x: R|kotlin/Int| = Q|a/b|.R|a/b/f|
+        lkonst x: R|kotlin/Int| = Q|a/b|.R|a/b/f|
         Q|a/b/C|.R|a/b/C.Companion.foo|()
         R|a/b/C.C|().R|a/b/C.foo|()
-        lval e: R|a/b/E| = Q|a/b/E|.R|a/b/E.entry|
-        lval e1: R|a/b/E| = Q|a/b/E|.R|a/b/E.entry|
+        lkonst e: R|a/b/E| = Q|a/b/E|.R|a/b/E.entry|
+        lkonst e1: R|a/b/E| = Q|a/b/E|.R|a/b/E.entry|
     }

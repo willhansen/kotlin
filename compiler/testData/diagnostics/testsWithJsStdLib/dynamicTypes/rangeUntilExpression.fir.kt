@@ -2,9 +2,9 @@
 // !LANGUAGE: +RangeUntilOperator
 
 fun foo() {
-    val a: dynamic = Any()
-    val b: dynamic = Any()
-    val c = C()
+    konst a: dynamic = Any()
+    konst b: dynamic = Any()
+    konst c = C()
     println(<!WRONG_OPERATION_WITH_DYNAMIC!>a..<b<!>)
     println(c..<a)
     println(a.rangeUntil(b))

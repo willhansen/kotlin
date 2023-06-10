@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.gradle.report.ReportingSettings
 import java.io.File
 
 internal class GradleCompilerEnvironment(
-    val compilerClasspath: Iterable<File>,
+    konst compilerClasspath: Iterable<File>,
     messageCollector: GradleErrorMessageCollector,
     outputItemsCollector: OutputItemsCollector,
-    val outputFiles: List<File>,
-    val reportingSettings: ReportingSettings,
-    val incrementalCompilationEnvironment: IncrementalCompilationEnvironment? = null,
-    val kotlinScriptExtensions: Array<String> = emptyArray()
+    konst outputFiles: List<File>,
+    konst reportingSettings: ReportingSettings,
+    konst incrementalCompilationEnvironment: IncrementalCompilationEnvironment? = null,
+    konst kotlinScriptExtensions: Array<String> = emptyArray()
 ) : CompilerEnvironment(Services.EMPTY, messageCollector, outputItemsCollector) {
 
     fun compilerFullClasspath(

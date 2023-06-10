@@ -14,12 +14,12 @@ import helpers.*
 // suspend calls NOT possible inside lambda matching to the parameter
 inline fun test(noinline c: () -> Unit) {
     c()
-    val o = object: Runnable {
+    konst o = object: Runnable {
         override fun run() {
             c()
         }
     }
-    val l = { c() }
+    konst l = { c() }
     c.startCoroutine(EmptyContinuation)
 }
 

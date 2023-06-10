@@ -12,7 +12,7 @@ FILE fqName:<root> fileName:/nnStringVsTXString.kt
       TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
         CALL 'public final fun useTX <T> (x: T of <root>.useTX, fn: kotlin.Function0<T of <root>.useTX>): T of <root>.useTX declared in <root>' type=kotlin.String origin=null
           <T>: kotlin.String
-          x: CONST String type=kotlin.String value=""
+          x: CONST String type=kotlin.String konstue=""
           fn: FUN_EXPR type=kotlin.Function0<kotlin.String> origin=LAMBDA
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String
               BLOCK_BODY

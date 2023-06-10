@@ -9,10 +9,10 @@ import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.config.LanguageVersionSettings
 
 class LanguageFeatureMessageRenderer @JvmOverloads constructor(
-    private val type: Type,
-    private val useHtml: Boolean = false
+    private konst type: Type,
+    private konst useHtml: Boolean = false
 ) : DiagnosticParameterRenderer<Pair<LanguageFeature, LanguageVersionSettings>> {
-    private val additionalFeatureMessages = mapOf(
+    private konst additionalFeatureMessages = mapOf(
         LanguageFeature.UnitConversionsOnArbitraryExpressions to "You can also change the original type of this expression to (...) -> Unit"
     )
 
@@ -22,10 +22,10 @@ class LanguageFeatureMessageRenderer @JvmOverloads constructor(
     }
 
     override fun render(obj: Pair<LanguageFeature, LanguageVersionSettings>, renderingContext: RenderingContext): String {
-        val (feature, settings) = obj
-        val since = feature.sinceVersion
+        konst (feature, settings) = obj
+        konst since = feature.sinceVersion
 
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         sb.append("The feature \"").append(feature.presentableName).append("\" is ")
 
         when (type) {
@@ -44,7 +44,7 @@ class LanguageFeatureMessageRenderer @JvmOverloads constructor(
             Type.WARNING -> sb.append("experimental")
         }
 
-        val hintUrl = feature.hintUrl
+        konst hintUrl = feature.hintUrl
         if (hintUrl != null) {
             if (useHtml) {
                 sb.append(" (").append("see more <a href=\"").append(hintUrl).append("\">here</a>)")

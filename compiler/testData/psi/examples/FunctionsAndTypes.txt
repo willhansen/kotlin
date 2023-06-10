@@ -40,7 +40,7 @@ KtFile: FunctionsAndTypes.kt
         PsiElement(RPAR)(')')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('f1')
     PsiWhiteSpace(' ')
@@ -75,7 +75,7 @@ KtFile: FunctionsAndTypes.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('f1')
     PsiWhiteSpace(' ')
@@ -103,7 +103,7 @@ KtFile: FunctionsAndTypes.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('f1')
     PsiWhiteSpace(' ')
@@ -125,7 +125,7 @@ KtFile: FunctionsAndTypes.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('f1')
     PsiWhiteSpace(' ')

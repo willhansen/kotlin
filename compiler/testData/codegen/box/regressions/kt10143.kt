@@ -4,7 +4,7 @@
 
 package another
 open class Outer {
-    protected class Stage(val run: () -> Unit)
+    protected class Stage(konst run: () -> Unit)
     protected class My(var stage: Stage? = null) {
         fun initStage(f: () -> Unit): Stage {
             stage = Stage(f)
@@ -12,7 +12,7 @@ open class Outer {
         }
     }
     protected fun my(init: My.() -> Unit): My {
-        val result = My()
+        konst result = My()
         result.init()
         return result
     }

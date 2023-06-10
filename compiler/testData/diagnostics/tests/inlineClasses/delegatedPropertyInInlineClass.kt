@@ -6,7 +6,7 @@ class Val {
 
 class Var {
     operator fun getValue(thisRef: Any?, kProp: Any?) = 2
-    operator fun setValue(thisRef: Any?, kProp: Any?, value: Int) {}
+    operator fun setValue(thisRef: Any?, kProp: Any?, konstue: Int) {}
 }
 
 
@@ -16,13 +16,13 @@ object ValObject {
 
 object VarObject {
     operator fun getValue(thisRef: Any?, kProp: Any?) = 2
-    operator fun setValue(thisRef: Any?, kProp: Any?, value: Int) {}
+    operator fun setValue(thisRef: Any?, kProp: Any?, konstue: Int) {}
 }
 
-inline class Z(val data: Int) {
-    val testVal <!DELEGATED_PROPERTY_INSIDE_VALUE_CLASS!>by Val()<!>
+inline class Z(konst data: Int) {
+    konst testVal <!DELEGATED_PROPERTY_INSIDE_VALUE_CLASS!>by Val()<!>
     var testVar <!DELEGATED_PROPERTY_INSIDE_VALUE_CLASS!>by Var()<!>
 
-    val testValBySingleton <!DELEGATED_PROPERTY_INSIDE_VALUE_CLASS!>by ValObject<!>
+    konst testValBySingleton <!DELEGATED_PROPERTY_INSIDE_VALUE_CLASS!>by ValObject<!>
     var testVarBySingleton <!DELEGATED_PROPERTY_INSIDE_VALUE_CLASS!>by VarObject<!>
 }

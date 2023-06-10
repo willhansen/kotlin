@@ -13,4 +13,4 @@ if [ "$ALL_PARAMS" != "" ]; then
   ALL_PARAMS="-PcompilerArgs=$ALL_PARAMS"
 fi
 
-echo "##teamcity[setParameter name='env.konanCompilerArgs' value='$ALL_PARAMS']"
+echo "##teamcity[setParameter name='env.konanCompilerArgs' konstue='$ALL_PARAMS']"

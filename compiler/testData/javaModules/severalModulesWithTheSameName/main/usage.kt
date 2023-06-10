@@ -2,7 +2,7 @@ import foo.Foo
 import bar.Bar
 
 fun usage(): String {
-    val f: Foo = Foo()
-    val b: Bar = Bar()
+    konst f: Foo = Foo()
+    konst b: Bar = Bar()
     return "$f$b"
 }

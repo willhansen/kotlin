@@ -38,7 +38,7 @@ fun KProperty1<*, *>.getExtensionDelegate(): Any? {
  * Returns the instance of a delegated **member extension property**, or `null` if this property is not delegated.
  * Throws an exception if this is not an extension property.
  *
- * @param receiver the instance of the class used to retrieve the value of the property delegate.
+ * @param receiver the instance of the class used to retrieve the konstue of the property delegate.
  *
  * @see [KProperty2.getDelegate]
  */

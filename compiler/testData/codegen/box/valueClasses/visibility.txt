@@ -223,8 +223,8 @@ public final class Internal {
 @kotlin.Metadata
 public final class InternalInternal {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): InternalInternal
     public final static method constructor-impl(p0: int, p1: int): void
@@ -236,17 +236,17 @@ public final class InternalInternal {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Internal
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Internal
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.jvm.JvmInline
 @kotlin.Metadata
 public final class InternalPrivate {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): InternalPrivate
     public final static method constructor-impl(p0: int, p1: int): void
@@ -258,17 +258,17 @@ public final class InternalPrivate {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Private
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Private
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.jvm.JvmInline
 @kotlin.Metadata
 public final class InternalPublic {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): InternalPublic
     public final static method constructor-impl(p0: int, p1: int): void
@@ -280,9 +280,9 @@ public final class InternalPublic {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Public
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Public
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.Metadata
@@ -318,8 +318,8 @@ public final class Private {
 @kotlin.Metadata
 public final class PrivateInternal {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): PrivateInternal
     public final static method constructor-impl(p0: int, p1: int): void
@@ -331,17 +331,17 @@ public final class PrivateInternal {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Internal
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Internal
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.jvm.JvmInline
 @kotlin.Metadata
 public final class PrivatePrivate {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): PrivatePrivate
     public final static method constructor-impl(p0: int, p1: int): void
@@ -353,17 +353,17 @@ public final class PrivatePrivate {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Private
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Private
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.jvm.JvmInline
 @kotlin.Metadata
 public final class PrivatePublic {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): PrivatePublic
     public final static method constructor-impl(p0: int, p1: int): void
@@ -375,9 +375,9 @@ public final class PrivatePublic {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Public
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Public
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.Metadata
@@ -436,8 +436,8 @@ public final class Public {
 @kotlin.Metadata
 public final class PublicInternal {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): PublicInternal
     public final static method constructor-impl(p0: int, p1: int): void
@@ -449,17 +449,17 @@ public final class PublicInternal {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Internal
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Internal
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.jvm.JvmInline
 @kotlin.Metadata
 public final class PublicPrivate {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): PublicPrivate
     public final static method constructor-impl(p0: int, p1: int): void
@@ -471,17 +471,17 @@ public final class PublicPrivate {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Private
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Private
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.jvm.JvmInline
 @kotlin.Metadata
 public final class PublicPublic {
     // source: 'module_main_visibility.kt'
-    private final field value-x: int
-    private final field value-y: int
+    private final field konstue-x: int
+    private final field konstue-y: int
     private synthetic method <init>(p0: int, p1: int): void
     public synthetic final static method box-impl(p0: int, p1: int): PublicPublic
     public final static method constructor-impl(p0: int, p1: int): void
@@ -493,9 +493,9 @@ public final class PublicPublic {
     public static method hashCode-impl(p0: int, p1: int): int
     public @org.jetbrains.annotations.NotNull method toString(): java.lang.String
     public static method toString-impl(p0: int, p1: int): java.lang.String
-    public synthetic final method unbox-impl-value(): Public
-    public synthetic final method unbox-impl-value-x(): int
-    public synthetic final method unbox-impl-value-y(): int
+    public synthetic final method unbox-impl-konstue(): Public
+    public synthetic final method unbox-impl-konstue-x(): int
+    public synthetic final method unbox-impl-konstue-y(): int
 }
 
 @kotlin.Metadata

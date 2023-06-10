@@ -11,6 +11,6 @@ object t {
 }
 
 object n {
-    @JsName("valueOf")
-    fun valueOf() = 42
+    @JsName("konstueOf")
+    fun konstueOf() = 42
 }

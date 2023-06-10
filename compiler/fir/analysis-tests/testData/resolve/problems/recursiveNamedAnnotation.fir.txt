@@ -1,5 +1,5 @@
 FILE: Annotated.kt
-    @R|Service|(value = String(Your)) public final class My : R|kotlin/Any| {
+    @R|Service|(konstue = String(Your)) public final class My : R|kotlin/Any| {
         public constructor(): R|My| {
             super<R|kotlin/Any|>()
         }

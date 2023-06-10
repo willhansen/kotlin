@@ -2,14 +2,14 @@
 fun getNothing(): Nothing = throw Exception()
 fun getNullableNothing(): Nothing? = null
 
-val String?.q: Int get() = 1
-val String.qq: Int get() = 2
+konst String?.q: Int get() = 1
+konst String.qq: Int get() = 2
 
 fun <T> myListOf(x: T): List<T> = null!!
 
 class A {
-    val a: Int = 1
-    val b: Boolean = true
+    konst a: Int = 1
+    konst b: Boolean = true
 }
 
 fun test_0(results: List<Nothing>) {
@@ -25,10 +25,10 @@ fun test_0(results: List<Nothing>) {
 
 fun test_1(a: String?) {
     if (a is Nothing?) {
-        val b = a?.length
+        konst b = a?.length
     }
 
     if (a is Nothing) {
-        val b = a.length
+        konst b = a.length
     }
 }

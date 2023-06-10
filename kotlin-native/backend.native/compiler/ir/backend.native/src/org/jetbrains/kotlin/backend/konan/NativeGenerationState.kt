@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.backend.konan.serialization.SerializedEagerInitializ
 import org.jetbrains.kotlin.backend.konan.serialization.SerializedInlineFunctionReference
 import org.jetbrains.kotlin.ir.declarations.*
 
-internal class InlineFunctionOriginInfo(val irFunction: IrFunction, val irFile: IrFile, val startOffset: Int, val endOffset: Int)
+internal class InlineFunctionOriginInfo(konst irFunction: IrFunction, konst irFile: IrFile, konst startOffset: Int, konst endOffset: Int)
 
 internal class FileLowerState {
     private var functionReferenceCount = 0
@@ -41,41 +41,41 @@ internal class FileLowerState {
 }
 
 internal interface BitcodePostProcessingContext : PhaseContext, LlvmIrHolder {
-    val llvm: BasicLlvmHelpers
-    val llvmContext: LLVMContextRef
+    konst llvm: BasicLlvmHelpers
+    konst llvmContext: LLVMContextRef
 }
 
 internal class BitcodePostProcessingContextImpl(
         config: KonanConfig,
-        override val llvmModule: LLVMModuleRef,
-        override val llvmContext: LLVMContextRef
+        override konst llvmModule: LLVMModuleRef,
+        override konst llvmContext: LLVMContextRef
 ) : BitcodePostProcessingContext, BasicPhaseContext(config) {
-    override val llvm: BasicLlvmHelpers = BasicLlvmHelpers(this, llvmModule)
+    override konst llvm: BasicLlvmHelpers = BasicLlvmHelpers(this, llvmModule)
 }
 
 internal class NativeGenerationState(
         config: KonanConfig,
         // TODO: Get rid of this property completely once transition to the dynamic driver is complete.
         //  It will reduce code coupling and make it easier to create NativeGenerationState instances.
-        val context: Context,
-        val cacheDeserializationStrategy: CacheDeserializationStrategy?,
-        val dependenciesTracker: DependenciesTracker,
-        val llvmModuleSpecification: LlvmModuleSpecification,
-        val outputFiles: OutputFiles,
-        val llvmModuleName: String,
+        konst context: Context,
+        konst cacheDeserializationStrategy: CacheDeserializationStrategy?,
+        konst dependenciesTracker: DependenciesTracker,
+        konst llvmModuleSpecification: LlvmModuleSpecification,
+        konst outputFiles: OutputFiles,
+        konst llvmModuleName: String,
 ) : BasicPhaseContext(config), BackendContextHolder<Context>, LlvmIrHolder, BitcodePostProcessingContext {
-    val outputFile = outputFiles.mainFileName
+    konst outputFile = outputFiles.mainFileName
 
     var klibHash: FingerprintHash = FingerprintHash(Hash128Bits(0U, 0U))
 
-    val inlineFunctionBodies = mutableListOf<SerializedInlineFunctionReference>()
-    val classFields = mutableListOf<SerializedClassFields>()
-    val eagerInitializedFiles = mutableListOf<SerializedEagerInitializedFile>()
-    val calledFromExportedInlineFunctions = mutableSetOf<IrFunction>()
-    val constructedFromExportedInlineFunctions = mutableSetOf<IrClass>()
-    val inlineFunctionOrigins = mutableMapOf<IrFunction, InlineFunctionOriginInfo>()
+    konst inlineFunctionBodies = mutableListOf<SerializedInlineFunctionReference>()
+    konst classFields = mutableListOf<SerializedClassFields>()
+    konst eagerInitializedFiles = mutableListOf<SerializedEagerInitializedFile>()
+    konst calledFromExportedInlineFunctions = mutableSetOf<IrFunction>()
+    konst constructedFromExportedInlineFunctions = mutableSetOf<IrClass>()
+    konst inlineFunctionOrigins = mutableMapOf<IrFunction, InlineFunctionOriginInfo>()
 
-    private val localClassNames = mutableMapOf<IrAttributeContainer, String>()
+    private konst localClassNames = mutableMapOf<IrAttributeContainer, String>()
     fun getLocalClassName(container: IrAttributeContainer): String? = localClassNames[container.attributeOwnerId]
     fun putLocalClassName(container: IrAttributeContainer, name: String) {
         localClassNames[container.attributeOwnerId] = name
@@ -86,22 +86,22 @@ internal class NativeGenerationState(
 
     lateinit var fileLowerState: FileLowerState
 
-    val producedLlvmModuleContainsStdlib get() = llvmModuleSpecification.containsModule(context.stdlibModule)
+    konst producedLlvmModuleContainsStdlib get() = llvmModuleSpecification.containsModule(context.stdlibModule)
 
-    private val runtimeDelegate = lazy { Runtime(llvmContext, config.distribution.compilerInterface(config.target)) }
-    private val llvmDelegate = lazy { CodegenLlvmHelpers(this, LLVMModuleCreateWithNameInContext(llvmModuleName, llvmContext)!!) }
-    private val debugInfoDelegate = lazy { DebugInfo(this) }
+    private konst runtimeDelegate = lazy { Runtime(llvmContext, config.distribution.compilerInterface(config.target)) }
+    private konst llvmDelegate = lazy { CodegenLlvmHelpers(this, LLVMModuleCreateWithNameInContext(llvmModuleName, llvmContext)!!) }
+    private konst debugInfoDelegate = lazy { DebugInfo(this) }
 
-    override val llvmContext = LLVMContextCreate()!!
-    val runtime by runtimeDelegate
-    override val llvm by llvmDelegate
-    val debugInfo by debugInfoDelegate
-    val cStubsManager = CStubsManager(config.target, this)
+    override konst llvmContext = LLVMContextCreate()!!
+    konst runtime by runtimeDelegate
+    override konst llvm by llvmDelegate
+    konst debugInfo by debugInfoDelegate
+    konst cStubsManager = CStubsManager(config.target, this)
     lateinit var llvmDeclarations: LlvmDeclarations
 
-    val virtualFunctionTrampolines = mutableMapOf<IrSimpleFunction, LlvmCallable>()
+    konst virtualFunctionTrampolines = mutableMapOf<IrSimpleFunction, LlvmCallable>()
 
-    val coverage by lazy { CoverageManager(this) }
+    konst coverage by lazy { CoverageManager(this) }
 
     lateinit var objCExport: ObjCExport
 
@@ -116,9 +116,9 @@ internal class NativeGenerationState(
     // A proper solution would be decoupling of logging, error reporting, etc. into a separate (PhaseEnvironment?) object.
     override var inVerbosePhase: Boolean
         get() = super.inVerbosePhase
-        set(value) {
-            super.inVerbosePhase = value
-            context.inVerbosePhase = value
+        set(konstue) {
+            super.inVerbosePhase = konstue
+            context.inVerbosePhase = konstue
         }
 
     override fun dispose() {
@@ -139,9 +139,9 @@ internal class NativeGenerationState(
         isDisposed = true
     }
 
-    override val backendContext: Context
+    override konst backendContext: Context
         get() = context
 
-    override val llvmModule: LLVMModuleRef
+    override konst llvmModule: LLVMModuleRef
         get() = llvm.module
 }

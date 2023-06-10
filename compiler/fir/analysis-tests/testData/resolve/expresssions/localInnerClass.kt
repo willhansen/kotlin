@@ -6,6 +6,6 @@ fun bar() {
             return Derived(42)
         }
 
-        inner class Derived(val x: Int) : Foo
+        inner class Derived(konst x: Int) : Foo
     }
 }

@@ -33,7 +33,7 @@ class InlineCheckerWrapper : CallChecker {
 
         while (parentDescriptor != null) {
             if (InlineUtil.isInline(parentDescriptor)) {
-                val checker = getChecker(parentDescriptor as FunctionDescriptor)
+                konst checker = getChecker(parentDescriptor as FunctionDescriptor)
                 checker.check(resolvedCall, reportOn, context)
             }
 
@@ -42,7 +42,7 @@ class InlineCheckerWrapper : CallChecker {
     }
 
     private fun getChecker(descriptor: FunctionDescriptor): CallChecker {
-        val map = checkersCache?.get() ?: hashMapOf()
+        konst map = checkersCache?.get() ?: hashMapOf()
         checkersCache = checkersCache ?: WeakReference(map)
         return map.getOrPut(descriptor) { InlineChecker(descriptor) }
     }

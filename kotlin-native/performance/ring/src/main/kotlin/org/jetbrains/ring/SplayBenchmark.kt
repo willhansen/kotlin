@@ -47,12 +47,12 @@ import kotlin.random.Random
 
 // A splay tree is a self-balancing binary search tree with the additional
 // property that recently accessed elements are quick to access again.
-// It performs basic operations such as insertion, look-up and removal in
+// It performs basic operations such as insertion, look-up and remokonst in
 // O(log(n)) amortized time.
 class SplayTree<K: Comparable<K>, V> {
 
     // Nodes of the splay tree.
-    class Node<K: Comparable<K>, V>(val key: K, val value: V) {
+    class Node<K: Comparable<K>, V>(konst key: K, konst konstue: V) {
         var left: Node<K, V>? = null
         var right: Node<K, V>? = null
 
@@ -73,22 +73,22 @@ class SplayTree<K: Comparable<K>, V> {
     // Return whether the splay tree is empty.
     fun isEmpty() = root == null
 
-    // Inserts a node into the tree with the specified key and value if
+    // Inserts a node into the tree with the specified key and konstue if
     // the tree does not already contain a node with the specified key. If
-    // the value is inserted, it becomes the root of the tree.
-    fun insert(key: K, value: V) {
+    // the konstue is inserted, it becomes the root of the tree.
+    fun insert(key: K, konstue: V) {
         if (isEmpty()) {
-            root = Node(key, value)
+            root = Node(key, konstue)
             return
         }
         // Splay on the key to move the last node on the search path for
         // the key to the root of the tree.
         splay(key)
-        val r = root!!
+        konst r = root!!
         if (r.key == key) {
             return
         }
-        val node = Node(key, value)
+        konst node = Node(key, konstue)
         if (key > r.key) {
             node.left = r
             node.right = r.right
@@ -109,15 +109,15 @@ class SplayTree<K: Comparable<K>, V> {
             throw Exception("Key not found: $key")
         }
         splay(key)
-        val r = root!!
+        konst r = root!!
         if (r.key != key) {
             throw Exception("Key not found: $key")
         }
-        val removed = r
+        konst removed = r
         if (r.left == null) {
             root = r.right
         } else {
-            val right = r.right
+            konst right = r.right
             root = r.left
             // Splay to make sure that the new root has an empty right child.
             splay(key)
@@ -135,7 +135,7 @@ class SplayTree<K: Comparable<K>, V> {
         return if (root!!.key == key) root else null
     }
 
-    // Returns node having the maximum key value.
+    // Returns node having the maximum key konstue.
     fun findMax(startNode: Node<K, V>? = null): Node<K, V>? {
         if (isEmpty()) return null
         var current = startNode ?: root!!
@@ -145,8 +145,8 @@ class SplayTree<K: Comparable<K>, V> {
         return current
     }
 
-    // Returns node having the maximum key value that is less than the
-    // specified key value.
+    // Returns node having the maximum key konstue that is less than the
+    // specified key konstue.
     fun findGreatestLessThan(key: K): Node<K, V>? {
         if (isEmpty()) return null
         // Splay on the key to move the node with the given key or the last
@@ -154,7 +154,7 @@ class SplayTree<K: Comparable<K>, V> {
         splay(key)
         // Now the result is either the root node or the greatest node in the
         // left subtree.
-        val r = root!!
+        konst r = root!!
         return if (r.key < key) {
             root
         } else if (r.left != null) {
@@ -166,7 +166,7 @@ class SplayTree<K: Comparable<K>, V> {
 
     // Returns a list containing all the keys in the tree's nodes.
     fun exportKeys(): List<K> {
-        val result = mutableListOf<K>()
+        konst result = mutableListOf<K>()
         if (!isEmpty()) {
             root?.traverse { result.add(it.key) }
         }
@@ -185,9 +185,9 @@ class SplayTree<K: Comparable<K>, V> {
         // the L tree of the algorithm.  The left child of the dummy node
         // will hold the R tree of the algorithm.  Using a dummy node, left
         // and right will always be nodes and we avoid special cases.
-        // The key and value for the dummy node will not be used, so we just
-        // use the key and value of the root node for the dummy.
-        val dummy = Node(root!!.key, root!!.value)
+        // The key and konstue for the dummy node will not be used, so we just
+        // use the key and konstue of the root node for the dummy.
+        konst dummy = Node(root!!.key, root!!.konstue)
         var left = dummy
         var right = dummy
 
@@ -199,7 +199,7 @@ class SplayTree<K: Comparable<K>, V> {
                 }
                 if (key < current.left!!.key) {
                     // Rotate right
-                    val tmp = current.left!!
+                    konst tmp = current.left!!
                     current.left = tmp.right
                     tmp.right = current
                     current = tmp
@@ -217,7 +217,7 @@ class SplayTree<K: Comparable<K>, V> {
                 }
                 if (key > current.right!!.key) {
                     // Rotate left.
-                    val tmp = current.right!!
+                    konst tmp = current.right!!
                     current.right = tmp.left
                     tmp.left = current
                     current = tmp
@@ -244,13 +244,13 @@ class SplayTree<K: Comparable<K>, V> {
 
 class SplayBenchmark {
     // Seed random number generator for deterministic "random" number generation.
-    val random = Random(20)
-    val splayTreeSize = 8000;
+    konst random = Random(20)
+    konst splayTreeSize = 8000;
     // Different from the original as the surrounding runner is different. We want
     // enough modifications that GCs will take place and will matter.
-    val splayTreeModifications = 8000;
-    val splayTreePayloadDepth = 5;
-    val splayTree = splaySetup()
+    konst splayTreeModifications = 8000;
+    konst splayTreePayloadDepth = 5;
+    konst splayTree = splaySetup()
 
     fun generateKey(): Int = random.nextInt()
 
@@ -273,14 +273,14 @@ class SplayBenchmark {
     }
 
     fun splaySetup(): SplayTree<Int, Pair<Any, Any>> {
-        val result = SplayTree<Int, Pair<Any, Any>>()
+        konst result = SplayTree<Int, Pair<Any, Any>>()
         for (i in 0 until splayTreeSize) insertNewNode(result, splayTreePayloadDepth)
         return result
     }
 
     fun splayTearDown() {
-        val keys = splayTree.exportKeys()
-        val length = keys.size
+        konst keys = splayTree.exportKeys()
+        konst length = keys.size
         if (length != splayTreeSize) {
             throw Exception("Splay tree has wrong size")
         }
@@ -293,8 +293,8 @@ class SplayBenchmark {
 
     fun runSplay() {
         for (i in 0 until splayTreeModifications) {
-            val key = insertNewNode(splayTree, splayTreePayloadDepth)
-            val greatest = splayTree.findGreatestLessThan(key)
+            konst key = insertNewNode(splayTree, splayTreePayloadDepth)
+            konst greatest = splayTree.findGreatestLessThan(key)
             if (greatest == null) {
                 splayTree.remove(key)
             } else {
@@ -305,29 +305,29 @@ class SplayBenchmark {
 }
 
 class SplayBenchmarkUsingWorkers {
-    val numberOfWorkers = 5;
-    val workers = Array(numberOfWorkers, { _ -> Worker.start() })
-    val splayTrees = Array(numberOfWorkers, { _ -> SplayBenchmark() });
+    konst numberOfWorkers = 5;
+    konst workers = Array(numberOfWorkers, { _ -> Worker.start() })
+    konst splayTrees = Array(numberOfWorkers, { _ -> SplayBenchmark() });
 
     fun runSplayWorkers() {
-        val futures = Array(numberOfWorkers) {i -> workers[i].execute(TransferMode.SAFE, { splayTrees[i] }, {it.runSplay()})};
+        konst futures = Array(numberOfWorkers) {i -> workers[i].execute(TransferMode.SAFE, { splayTrees[i] }, {it.runSplay()})};
         futures.forEach{it.consume {}};
     }
 
     fun splayTearDownWorkers() {
-        val futures = Array(numberOfWorkers) {i -> workers[i].execute(TransferMode.SAFE, { splayTrees[i] }, {it.splayTearDown()})};
+        konst futures = Array(numberOfWorkers) {i -> workers[i].execute(TransferMode.SAFE, { splayTrees[i] }, {it.splayTearDown()})};
         futures.forEach{it.consume {}};
         workers.forEach { it.requestTermination().result }
     }
 }
 
 class SplayBenchmarkWithMarkHelpers {
-    val numberOfMarkHelpers = 5;
-    val markHelpers = Array(numberOfMarkHelpers, { _ -> Worker.start() })
+    konst numberOfMarkHelpers = 5;
+    konst markHelpers = Array(numberOfMarkHelpers, { _ -> Worker.start() })
 
     @Volatile
     var done = false
-    val markHelperJobs = markHelpers.map {
+    konst markHelperJobs = markHelpers.map {
         it.execute(TransferMode.SAFE, { this }) {
             // run some thread-local work in a loop without allocations or external calls
             fun fib(n: Int): Int {
@@ -335,7 +335,7 @@ class SplayBenchmarkWithMarkHelpers {
                 var prev = 0
                 var cur = 1
                 for (i in 2..n) {
-                    val next = cur + prev
+                    konst next = cur + prev
                     prev = cur
                     cur = next
                 }
@@ -350,7 +350,7 @@ class SplayBenchmarkWithMarkHelpers {
         }
     }
 
-    val splay = SplayBenchmark()
+    konst splay = SplayBenchmark()
 
     fun runSplayWithMarkHelpers() {
         splay.runSplay()

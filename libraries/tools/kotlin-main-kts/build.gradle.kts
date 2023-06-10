@@ -8,23 +8,23 @@ plugins {
     id("jps-compatible")
 }
 
-val jarBaseName = property("archivesBaseName") as String
+konst jarBaseName = property("archivesBaseName") as String
 
-val localPackagesToRelocate =
+konst localPackagesToRelocate =
     listOf(
         "kotlinx.coroutines"
     )
 
-val proguardLibraryJars by configurations.creating {
+konst proguardLibraryJars by configurations.creating {
     attributes {
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
         attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.JAR))
     }
 }
 
-val embedded by configurations
+konst embedded by configurations
 
-val relocatedJarContents by configurations.creating {
+konst relocatedJarContents by configurations.creating {
     extendsFrom(embedded)
 }
 
@@ -64,7 +64,7 @@ publish()
 
 noDefaultJar()
 
-val relocatedJar by task<ShadowJar> {
+konst relocatedJar by task<ShadowJar> {
     configurations = listOf(relocatedJarContents)
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     destinationDirectory.set(File(buildDir, "libs"))
@@ -80,7 +80,7 @@ val relocatedJar by task<ShadowJar> {
     }
 }
 
-val proguard by task<CacheableProguardTask> {
+konst proguard by task<CacheableProguardTask> {
     dependsOn(relocatedJar)
     configuration("main-kts.pro")
 
@@ -114,8 +114,8 @@ val proguard by task<CacheableProguardTask> {
     )
 }
 
-val resultJar by task<Jar> {
-    val pack = if (kotlinBuildProperties.proguard) proguard else relocatedJar
+konst resultJar by task<Jar> {
+    konst pack = if (kotlinBuildProperties.proguard) proguard else relocatedJar
     dependsOn(pack)
     setupPublicJar(jarBaseName)
     from {

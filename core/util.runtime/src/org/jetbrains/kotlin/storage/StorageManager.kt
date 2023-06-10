@@ -20,12 +20,12 @@ import java.util.concurrent.ConcurrentMap
 
 interface StorageManager {
     /**
-     * Given a function compute: K -> V create a memoized version of it that computes a value only once for each key
+     * Given a function compute: K -> V create a memoized version of it that computes a konstue only once for each key
      * @param compute the function to be memoized
-     * @param valuesReferenceKind how to store the memoized values
+     * @param konstuesReferenceKind how to store the memoized konstues
      *
      * NOTE: if compute() has side-effects the WEAK reference kind is dangerous: the side-effects will be repeated if
-     *       the value gets collected and then re-computed
+     *       the konstue gets collected and then re-computed
      */
     fun <K, V : Any> createMemoizedFunction(compute: (K) -> V): MemoizedFunctionToNotNull<K, V>
 
@@ -54,7 +54,7 @@ interface StorageManager {
      *                        If {@code onRecursiveCall} is {@code null}, an exception will be thrown on a recursive call,
      *                        otherwise it's executed and its result is returned
      *
-     * @param postCompute is called after the value is computed AND published (and some clients rely on that
+     * @param postCompute is called after the konstue is computed AND published (and some clients rely on that
      *                    behavior - notably, AbstractTypeConstructor). It means that it is up to particular implementation
      *                    to provide (or not to provide) thread-safety guarantees on writes made in postCompute -- see javadoc for
      *                    LockBasedLazyValue for details.

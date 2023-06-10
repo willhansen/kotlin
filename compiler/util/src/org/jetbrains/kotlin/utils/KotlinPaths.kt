@@ -21,71 +21,71 @@ import java.lang.IllegalStateException
 import com.intellij.util.lang.JavaVersion
 
 interface KotlinPaths {
-    val homePath: File
+    konst homePath: File
 
-    val libPath: File
+    konst libPath: File
 
 // TODO: uncomment deprecation and fix usages in the whole project
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.StdLib)"))
-    val stdlibPath: File
+    konst stdlibPath: File
         get() = jar(Jar.StdLib)
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.reflect)"))
-    val reflectPath: File
+    konst reflectPath: File
         get() = jar(Jar.Reflect)
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.scriptRuntime)"))
-    val scriptRuntimePath: File
+    konst scriptRuntimePath: File
         get() = jar(Jar.ScriptRuntime)
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.kotlinTest)"))
-    val kotlinTestPath: File
+    konst kotlinTestPath: File
         get() = jar(Jar.KotlinTest)
 
 //    @Deprecated("Obsolete API", ReplaceWith("sourcesJar(KotlinPaths.Jars.stdLib)!!"))
-    val stdlibSourcesPath: File
+    konst stdlibSourcesPath: File
         get() = sourcesJar(Jar.StdLib)!!
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.jsStdLib)"))
-    val jsStdLibJarPath: File
+    konst jsStdLibJarPath: File
         get() = jar(Jar.JsStdLib)
 
 //    @Deprecated("Obsolete API", ReplaceWith("sourcesJar(KotlinPaths.Jars.JsStdLib)!!"))
-    val jsStdLibSrcJarPath: File
+    konst jsStdLibSrcJarPath: File
         get() = sourcesJar(Jar.JsStdLib)!!
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.jsKotlinTest)"))
-    val jsKotlinTestJarPath: File
+    konst jsKotlinTestJarPath: File
         get() = jar(Jar.JsKotlinTest)
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.allOpenPlugin)"))
-    val allOpenPluginJarPath: File
+    konst allOpenPluginJarPath: File
         get() = jar(Jar.AllOpenPlugin)
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.noArgPlugin)"))
-    val noArgPluginJarPath: File
+    konst noArgPluginJarPath: File
         get() = jar(Jar.NoArgPlugin)
 
-    val lombokPluginJarPath: File
+    konst lombokPluginJarPath: File
         get() = jar(Jar.LombokPlugin)
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.samWithReceiver)"))
-    val samWithReceiverJarPath: File
+    konst samWithReceiverJarPath: File
         get() = jar(Jar.SamWithReceiver)
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.trove4j)"))
-    val trove4jJarPath: File
+    konst trove4jJarPath: File
         get() = jar(Jar.Trove4j)
 
 //    @Deprecated("Obsolete API", ReplaceWith("classPath(KotlinPaths.ClassPaths.Compiler)"))
-    val compilerClasspath: List<File>
+    konst compilerClasspath: List<File>
         get() = classPath(ClassPaths.Compiler)
 
 //    @Deprecated("Obsolete API", ReplaceWith("jar(KotlinPaths.Jars.compiler)"))
-    val compilerPath: File
+    konst compilerPath: File
         get() = jar(Jar.Compiler)
 
-    enum class Jar(val baseName: String) {
+    enum class Jar(konst baseName: String) {
         StdLib(PathUtil.KOTLIN_JAVA_STDLIB_NAME),
         StdLibJdk7(PathUtil.KOTLIN_JAVA_RUNTIME_JDK7_NAME),
         StdLibJdk8(PathUtil.KOTLIN_JAVA_RUNTIME_JDK8_NAME),
@@ -111,7 +111,7 @@ interface KotlinPaths {
     }
 
     // TODO: Maybe we need separate classpaths for compilers with and without the daemon
-    enum class ClassPaths(val contents: List<Jar> = emptyList()) {
+    enum class ClassPaths(konst contents: List<Jar> = emptyList()) {
         Empty(),
         StdLib(Jar.StdLib, gen = {
             when {
@@ -141,14 +141,14 @@ interface KotlinPaths {
     fun classPath(vararg jars: Jar): List<File> = classPath(jars.asSequence())
 }
 
-open class KotlinPathsFromBaseDirectory(val basePath: File) : KotlinPaths {
+open class KotlinPathsFromBaseDirectory(konst basePath: File) : KotlinPaths {
 
-    override val homePath: File
+    override konst homePath: File
         get() {
             throw IllegalStateException("No home path defined")
         }
 
-    override val libPath: File
+    override konst libPath: File
         get() = basePath
 
     override fun jar(jar: KotlinPaths.Jar): File = basePath.resolve(jar.baseName + ".jar")

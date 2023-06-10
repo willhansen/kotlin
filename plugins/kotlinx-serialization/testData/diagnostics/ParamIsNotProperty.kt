@@ -5,4 +5,4 @@
 import kotlinx.serialization.*
 
 <!PRIMARY_CONSTRUCTOR_PARAMETER_IS_NOT_A_PROPERTY!>@Serializable<!>
-class Test(val someData: String, cantBeDeserialized: Int)
+class Test(konst someData: String, cantBeDeserialized: Int)

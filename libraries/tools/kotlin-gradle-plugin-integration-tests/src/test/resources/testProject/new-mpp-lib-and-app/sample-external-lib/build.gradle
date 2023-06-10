@@ -75,8 +75,8 @@ kotlin.sourceSets.each { println it.kotlin.srcDirs }
 
 apply plugin: 'maven-publish'
 
-// Check that a compilation may be created after project evaluation, KT-28896:
-afterEvaluate {
+// Check that a compilation may be created after project ekonstuation, KT-28896:
+afterEkonstuate {
     kotlin {
         jvm('jvm6').compilations.create('benchmark') {
             assemble.dependsOn compileKotlinTask

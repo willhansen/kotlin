@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import org.jetbrains.kotlin.utils.Printer
 
-open class ErrorScope(val kind: ErrorScopeKind, vararg formatParams: String) : MemberScope {
-    protected val debugMessage = kind.debugMessage.format(*formatParams)
+open class ErrorScope(konst kind: ErrorScopeKind, vararg formatParams: String) : MemberScope {
+    protected konst debugMessage = kind.debugMessage.format(*formatParams)
 
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor =
         ErrorClassDescriptor(Name.special(ErrorEntity.ERROR_CLASS.debugText.format(name)))

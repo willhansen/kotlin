@@ -3,7 +3,7 @@
 class Outer<E> {
     inner open class InnerBase<F>
     inner class Inner<H> : InnerBase<H>() {
-        val prop: E = null!!
+        konst prop: E = null!!
     }
 
     fun foo(x: InnerBase<String>, y: Any?, z: Outer<*>.InnerBase<String>) {

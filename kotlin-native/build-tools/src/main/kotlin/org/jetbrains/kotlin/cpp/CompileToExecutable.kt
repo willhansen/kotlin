@@ -27,27 +27,27 @@ import javax.inject.Inject
 
 private abstract class CompileToExecutableJob : WorkAction<CompileToExecutableJob.Parameters> {
     interface Parameters : WorkParameters {
-        val mainFile: RegularFileProperty
-        val inputFiles: ConfigurableFileCollection
-        val llvmLinkFirstStageOutputFile: RegularFileProperty
-        val llvmLinkOutputFile: RegularFileProperty
-        val compilerOutputFile: RegularFileProperty
-        val outputFile: RegularFileProperty
+        konst mainFile: RegularFileProperty
+        konst inputFiles: ConfigurableFileCollection
+        konst llvmLinkFirstStageOutputFile: RegularFileProperty
+        konst llvmLinkOutputFile: RegularFileProperty
+        konst compilerOutputFile: RegularFileProperty
+        konst outputFile: RegularFileProperty
         // TODO: Figure out a way to pass KonanTarget, but it is used as a key into PlatformManager,
         //       so object identity matters, and platform managers are different between project and worker sides.
-        val targetName: Property<String>
-        val clangFlags: ListProperty<String>
-        val linkCommands: ListProperty<List<String>>
-        val platformManager: Property<PlatformManager>
+        konst targetName: Property<String>
+        konst clangFlags: ListProperty<String>
+        konst linkCommands: ListProperty<List<String>>
+        konst platformManager: Property<PlatformManager>
     }
 
     @get:Inject
-    abstract val execOperations: ExecOperations
+    abstract konst execOperations: ExecOperations
 
     @get:Inject
-    abstract val objects: ObjectFactory
+    abstract konst objects: ObjectFactory
 
-    private val target: KonanTarget by lazy {
+    private konst target: KonanTarget by lazy {
         parameters.platformManager.get().targetByName(parameters.targetName.get())
     }
 
@@ -76,9 +76,9 @@ private abstract class CompileToExecutableJob : WorkAction<CompileToExecutableJo
 
     private fun compile() {
         with(parameters) {
-            val execClang = ExecClang.create(objects, platformManager.get())
+            konst execClang = ExecClang.create(objects, platformManager.get())
 
-            val args = clangFlags.get() + listOf(llvmLinkOutputFile.asFile.get().absolutePath, "-o", compilerOutputFile.asFile.get().absolutePath)
+            konst args = clangFlags.get() + listOf(llvmLinkOutputFile.asFile.get().absolutePath, "-o", compilerOutputFile.asFile.get().absolutePath)
 
             compilerOutputFile.asFile.get().parentFile.mkdirs()
 
@@ -100,14 +100,14 @@ private abstract class CompileToExecutableJob : WorkAction<CompileToExecutableJo
         with(parameters) {
             outputFile.asFile.get().parentFile.mkdirs()
 
-            val logging = Logging.getLogger(CompileToExecutableJob::class.java)
+            konst logging = Logging.getLogger(CompileToExecutableJob::class.java)
             for (command in linkCommands.get()) {
                 execOperations.exec {
                     commandLine(command)
                     if (!logging.isInfoEnabled && command[0].endsWith("dsymutil")) {
                         // Suppress dsymutl's warnings.
                         // See: https://bugs.swift.org/browse/SR-11539.
-                        val nullOutputStream = object : OutputStream() {
+                        konst nullOutputStream = object : OutputStream() {
                             override fun write(b: Int) {}
                         }
                         errorOutput = nullOutputStream
@@ -139,33 +139,33 @@ private abstract class CompileToExecutableJob : WorkAction<CompileToExecutableJo
  */
 abstract class CompileToExecutable : DefaultTask() {
 
-    private val platformManager = project.extensions.getByType<PlatformManager>()
+    private konst platformManager = project.extensions.getByType<PlatformManager>()
 
     /**
      * Target for which to compile.
      */
     @get:Input
-    abstract val target: Property<KonanTarget>
+    abstract konst target: Property<KonanTarget>
 
     /**
      * Sanitizer for which to compile.
      */
     @get:Input
     @get:Optional
-    abstract val sanitizer: Property<SanitizerKind>
+    abstract konst sanitizer: Property<SanitizerKind>
 
     // TODO: Should be replaced by a list of libraries to be linked with.
     /**
      * Controls whether linker should add library dependencies.
      */
     @get:Input
-    abstract val mimallocEnabled: Property<Boolean>
+    abstract konst mimallocEnabled: Property<Boolean>
 
     /**
      * Bitcode file with the `main()` entrypoint.
      */
     @get:InputFile
-    abstract val mainFile: RegularFileProperty
+    abstract konst mainFile: RegularFileProperty
 
     /**
      * Bitcode files.
@@ -174,46 +174,46 @@ abstract class CompileToExecutable : DefaultTask() {
      */
     @get:SkipWhenEmpty
     @get:InputFiles
-    abstract val inputFiles: ConfigurableFileCollection
+    abstract konst inputFiles: ConfigurableFileCollection
 
     /**
      * Internal file with first stage llvm-link result.
      */
     @get:Internal
-    abstract val llvmLinkFirstStageOutputFile: RegularFileProperty
+    abstract konst llvmLinkFirstStageOutputFile: RegularFileProperty
 
     /**
      * Internal file with final stage llvm-link result.
      */
     @get:Internal
-    abstract val llvmLinkOutputFile: RegularFileProperty
+    abstract konst llvmLinkOutputFile: RegularFileProperty
 
     /**
      * Internal file with compiler result.
      */
     @get:Internal
-    abstract val compilerOutputFile: RegularFileProperty
+    abstract konst compilerOutputFile: RegularFileProperty
 
     /**
      * Final executable.
      */
     @get:OutputFile
-    abstract val outputFile: RegularFileProperty
+    abstract konst outputFile: RegularFileProperty
 
     /**
      * Extra args to the compiler.
      */
     @get:Input
-    abstract val compilerArgs: ListProperty<String>
+    abstract konst compilerArgs: ListProperty<String>
 
     /**
      * Extra args to the linker.
      */
     @get:Input
-    abstract val linkerArgs: ListProperty<String>
+    abstract konst linkerArgs: ListProperty<String>
 
     @get:Input
-    protected val linkCommands: Provider<List<List<String>>> = project.provider {
+    protected konst linkCommands: Provider<List<List<String>>> = project.provider {
         // Getting link commands requires presence of a target toolchain.
         // Thus we cannot get them at the configuration stage because the toolchain may be not downloaded yet.
         platformManager.platform(target.get()).linker.finalLinkCommands(
@@ -232,14 +232,14 @@ abstract class CompileToExecutable : DefaultTask() {
     }
 
     @get:Inject
-    protected abstract val workerExecutor: WorkerExecutor
+    protected abstract konst workerExecutor: WorkerExecutor
 
     @TaskAction
     fun compile() {
-        val workQueue = workerExecutor.noIsolation()
+        konst workQueue = workerExecutor.noIsolation()
 
-        val defaultClangFlags = buildClangFlags(platformManager.platform(target.get()).configurables)
-        val sanitizerFlags = when (sanitizer.orNull) {
+        konst defaultClangFlags = buildClangFlags(platformManager.platform(target.get()).configurables)
+        konst sanitizerFlags = when (sanitizer.orNull) {
             null -> listOf()
             SanitizerKind.ADDRESS -> listOf("-fsanitize=address")
             SanitizerKind.THREAD -> listOf("-fsanitize=thread")
@@ -269,7 +269,7 @@ private fun buildClangFlags(configurables: Configurables): List<String> = mutabl
     require(configurables is ClangFlags)
     addAll(configurables.clangFlags)
     addAll(configurables.clangNooptFlags)
-    val targetTriple = if (configurables is AppleConfigurables) {
+    konst targetTriple = if (configurables is AppleConfigurables) {
         configurables.targetTriple.withOSVersion(configurables.osVersionMin)
     } else {
         configurables.targetTriple

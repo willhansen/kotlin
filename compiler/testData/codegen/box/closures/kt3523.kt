@@ -4,11 +4,11 @@ open class Base {
     }
 }
 
-class X(val action: () -> Unit) { }
+class X(konst action: () -> Unit) { }
 
 class Foo : Base() {
     inner class Bar() {
-        val x = X({ doSomething() })
+        konst x = X({ doSomething() })
     }
 }
 

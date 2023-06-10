@@ -11,12 +11,12 @@ public class JavaClass {
 
 // FILE: main.kt
 interface Self<E : Self<E>> {
-    val x: E
+    konst x: E
 }
 fun bar(): Self<*> = TODO()
 
 interface OutSelf<out E : OutSelf<E>> {
-    val x: E
+    konst x: E
 }
 fun outBar(): OutSelf<*> = TODO()
 

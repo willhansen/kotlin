@@ -5,6 +5,6 @@ interface B<T> {
 class A: B<Int>
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     return "OK"
 }

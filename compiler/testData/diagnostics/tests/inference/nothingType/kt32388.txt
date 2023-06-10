@@ -11,7 +11,7 @@ public sealed class Either</*0*/ out A, /*1*/ out B> {
 
     public final class Left</*0*/ out A> : Either<A, kotlin.Nothing> {
         public constructor Left</*0*/ out A>(/*0*/ a: A)
-        public final val a: A
+        public final konst a: A
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -19,7 +19,7 @@ public sealed class Either</*0*/ out A, /*1*/ out B> {
 
     public final class Right</*0*/ out B> : Either<kotlin.Nothing, B> {
         public constructor Right</*0*/ out B>(/*0*/ b: B)
-        public final val b: B
+        public final konst b: B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -11,15 +11,15 @@ class Z {
 }
 
 fun box(): String {
-    val clazz = Z::class.java
-    val declaredMethods = clazz.declaredMethods
+    konst clazz = Z::class.java
+    konst declaredMethods = clazz.declaredMethods
 
-    val mangled = declaredMethods.firstOrNull {
+    konst mangled = declaredMethods.firstOrNull {
         it.name.startsWith("mangled$")
     }
     if (mangled == null) return "Class internal function should exist"
 
-    val topLevel = Class.forName("test.FunKt").getMethod("noMangling")
+    konst topLevel = Class.forName("test.FunKt").getMethod("noMangling")
     if (topLevel == null) return "Top level internal function should exist"
 
     return "OK"

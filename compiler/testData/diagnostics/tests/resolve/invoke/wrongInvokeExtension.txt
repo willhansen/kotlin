@@ -1,6 +1,6 @@
 package
 
-public val B.a: () -> kotlin.Int
+public konst B.a: () -> kotlin.Int
 public fun test(/*0*/ a: A, /*1*/ b: B): kotlin.Unit
 
 public final class A {

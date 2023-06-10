@@ -32,18 +32,18 @@ import org.jetbrains.kotlin.resolve.scopes.utils.parentsWithSelf
 
 object ConstructorHeaderCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val dispatchReceiverClass = resolvedCall.dispatchReceiver.classDescriptorForImplicitReceiver
-        val extensionReceiverClass = resolvedCall.extensionReceiver.classDescriptorForImplicitReceiver
+        konst dispatchReceiverClass = resolvedCall.dispatchReceiver.classDescriptorForImplicitReceiver
+        konst extensionReceiverClass = resolvedCall.extensionReceiver.classDescriptorForImplicitReceiver
 
-        val callElement = resolvedCall.call.callElement
-        val labelReferenceClass =
+        konst callElement = resolvedCall.call.callElement
+        konst labelReferenceClass =
             if (callElement is KtInstanceExpressionWithLabel) {
                 context.trace.get(BindingContext.REFERENCE_TARGET, callElement.instanceReference) as? ClassDescriptor
             } else null
 
         if (dispatchReceiverClass == null && extensionReceiverClass == null && labelReferenceClass == null) return
 
-        val classes = setOf(dispatchReceiverClass, extensionReceiverClass, labelReferenceClass)
+        konst classes = setOf(dispatchReceiverClass, extensionReceiverClass, labelReferenceClass)
 
         if (context.scope.parentsWithSelf.any { scope ->
                 scope is LexicalScope && scope.kind == LexicalScopeKind.CONSTRUCTOR_HEADER &&
@@ -54,5 +54,5 @@ object ConstructorHeaderCallChecker : CallChecker {
     }
 }
 
-private val Receiver?.classDescriptorForImplicitReceiver: ClassDescriptor?
+private konst Receiver?.classDescriptorForImplicitReceiver: ClassDescriptor?
     get() = (this as? ImplicitReceiver)?.declarationDescriptor as? ClassDescriptor

@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.konan.target.HostManager
 import org.junit.Test
 
 open class CommonizerHierarchicalIT : BaseGradleIT() {
-    override val defaultGradleVersion: GradleVersionRequired = GradleVersionRequired.FOR_MPP_SUPPORT
+    override konst defaultGradleVersion: GradleVersionRequired = GradleVersionRequired.FOR_MPP_SUPPORT
 
     @Test
     fun `test commonizeHierarchically metadata compilations`() {
@@ -114,7 +114,7 @@ open class CommonizerHierarchicalIT : BaseGradleIT() {
     fun `test platform dependencies on leaf source sets`() {
         with(Project("commonizeHierarchicallyPlatformDependencies")) {
             build(":checkPlatformDependencies") {
-                val klibPlatform = "${File.separator}klib${File.separator}platform${File.separator}".replace("\\", "\\\\")
+                konst klibPlatform = "${File.separator}klib${File.separator}platform${File.separator}".replace("\\", "\\\\")
 
                 assertSuccessful()
                 assertTasksExecuted(":commonizeNativeDistribution")

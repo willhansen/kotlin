@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirErrorImport : FirPureAbstractElement(), FirImport, FirDiagnosticHolder {
-    abstract override val source: KtSourceElement?
-    abstract override val importedFqName: FqName?
-    abstract override val isAllUnder: Boolean
-    abstract override val aliasName: Name?
-    abstract override val aliasSource: KtSourceElement?
-    abstract override val diagnostic: ConeDiagnostic
-    abstract val delegate: FirImport
+    abstract override konst source: KtSourceElement?
+    abstract override konst importedFqName: FqName?
+    abstract override konst isAllUnder: Boolean
+    abstract override konst aliasName: Name?
+    abstract override konst aliasSource: KtSourceElement?
+    abstract override konst diagnostic: ConeDiagnostic
+    abstract konst delegate: FirImport
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitErrorImport(this, data)
 

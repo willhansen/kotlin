@@ -2,14 +2,14 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
-class BoxT<T>(val boxed: T)
-class BoxAny(val boxed: Any?)
-class BoxFoo(val boxed: IFoo?)
+class BoxT<T>(konst boxed: T)
+class BoxAny(konst boxed: Any?)
+class BoxFoo(konst boxed: IFoo?)
 
 interface IFoo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class I32<T: Int>(val value: T): IFoo
+konstue class I32<T: Int>(konst konstue: T): IFoo
 
 fun boxToTypeParameter(x: I32<Int>?) = BoxT(x)
 fun boxToNullableAny(x: I32<Int>?) = BoxAny(x)

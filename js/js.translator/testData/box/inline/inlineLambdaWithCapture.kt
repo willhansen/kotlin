@@ -3,14 +3,14 @@ package foo
 
 // CHECK_CONTAINS_NO_CALLS: maxBySquare except=imul;Unit_getInstance
 
-internal data class Result(var value: Int = 0, var invocationCount: Int = 0)
+internal data class Result(var konstue: Int = 0, var invocationCount: Int = 0)
 
 internal inline fun maxBy(a: Array<Int>, keyFun: (Int) -> Int): Int {
     var maxVal = a[0]
     var maxKey = keyFun(maxVal)
 
     for (element in a) {
-        val key = keyFun(element)
+        konst key = keyFun(element)
 
         if (key > maxKey) {
             maxVal = element
@@ -25,9 +25,9 @@ internal inline fun maxBy(a: Array<Int>, keyFun: (Int) -> Int): Int {
 // CHECK_LABELS_COUNT: function=maxBySquare name=$l$block count=0 TARGET_BACKENDS=JS_IR
 internal fun maxBySquare(a: Array<Int>, r: Result): Result {
     var invocationCount = 0
-    val maxVal = maxBy(a, { x -> invocationCount++; x * x;})
+    konst maxVal = maxBy(a, { x -> invocationCount++; x * x;})
 
-    r.value = maxVal
+    r.konstue = maxVal
     r.invocationCount = invocationCount
 
     return r

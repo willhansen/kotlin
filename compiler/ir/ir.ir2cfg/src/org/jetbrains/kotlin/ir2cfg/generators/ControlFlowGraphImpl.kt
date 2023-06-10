@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.ir2cfg.graph.BlockConnector
 import org.jetbrains.kotlin.ir2cfg.graph.ControlFlowGraph
 
 class ControlFlowGraphImpl(
-        override val function: IrFunction,
-        override val blocks: List<BasicBlock>,
-        override val connectors: List<BlockConnector>
+        override konst function: IrFunction,
+        override konst blocks: List<BasicBlock>,
+        override konst connectors: List<BlockConnector>
 ) : ControlFlowGraph

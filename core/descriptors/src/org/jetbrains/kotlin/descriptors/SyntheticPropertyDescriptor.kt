@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.descriptors
 
 interface SyntheticPropertyDescriptor {
-    val getMethod: FunctionDescriptor
-    val setMethod: FunctionDescriptor?
+    konst getMethod: FunctionDescriptor
+    konst setMethod: FunctionDescriptor?
 }

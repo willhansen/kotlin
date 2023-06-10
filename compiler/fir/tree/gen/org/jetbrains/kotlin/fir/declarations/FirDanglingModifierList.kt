@@ -21,13 +21,13 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 abstract class FirDanglingModifierList : FirDeclaration(), FirDiagnosticHolder {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val diagnostic: ConeDiagnostic
-    abstract override val symbol: FirDanglingModifierSymbol
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst diagnostic: ConeDiagnostic
+    abstract override konst symbol: FirDanglingModifierSymbol
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitDanglingModifierList(this, data)
 

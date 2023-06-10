@@ -12,6 +12,6 @@ fun test(e: KEnum): String {
 }
 
 fun box(): String {
-    val result = test(KEnum.A)
+    konst result = test(KEnum.A)
     return if (result == "class test.KEnum") "OK" else "fail: $result"
 }

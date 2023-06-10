@@ -11,11 +11,11 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class UnsignedIntegerComparisonGenerator(
-    override val comparedType: Type,
-    private val compareMethodName: String
+    override konst comparedType: Type,
+    private konst compareMethodName: String
 ) : ComparisonGenerator {
 
-    private val compareMethodDescriptor = Type.getMethodDescriptor(Type.INT_TYPE, comparedType, comparedType)
+    private konst compareMethodDescriptor = Type.getMethodDescriptor(Type.INT_TYPE, comparedType, comparedType)
 
     override fun jumpIfGreaterOrEqual(v: InstructionAdapter, label: Label) {
         compareAndJump(v, label, Opcodes.IFGE)
@@ -39,5 +39,5 @@ class UnsignedIntegerComparisonGenerator(
     }
 }
 
-val UIntComparisonGenerator = UnsignedIntegerComparisonGenerator(Type.INT_TYPE, "uintCompare")
-val ULongComparisonGenerator = UnsignedIntegerComparisonGenerator(Type.LONG_TYPE, "ulongCompare")
+konst UIntComparisonGenerator = UnsignedIntegerComparisonGenerator(Type.INT_TYPE, "uintCompare")
+konst ULongComparisonGenerator = UnsignedIntegerComparisonGenerator(Type.LONG_TYPE, "ulongCompare")

@@ -4,15 +4,15 @@ FILE: secondaryConstructorCfg.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val p1: R|kotlin/String| = R|<local>/p0|
+        public final konst p1: R|kotlin/String| = R|<local>/p0|
             public get(): R|kotlin/String|
 
-        public final val p2: R|kotlin/Int| = R|<local>/p0|.R|kotlin/String.length|
+        public final konst p2: R|kotlin/Int| = R|<local>/p0|.R|kotlin/String.length|
             public get(): R|kotlin/Int|
 
         public final var p3: R|kotlin/String|
             public get(): R|kotlin/String|
-            public set(value: R|kotlin/String|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/String|): R|kotlin/Unit|
 
         public constructor(p0: R|kotlin/String|, p1: R|kotlin/String|): R|B| {
             this<R|B|>(R|<local>/p0|)

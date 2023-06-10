@@ -14,9 +14,9 @@ class Test {
 import kotlin.reflect.KClass
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Ann(val arg: KClass<*>)
+annotation class Ann(konst arg: KClass<*>)
 
 fun box(): String {
-    val argName = Test::class.java.getAnnotation(Ann::class.java).arg.java.simpleName ?: "fail 1"
+    konst argName = Test::class.java.getAnnotation(Ann::class.java).arg.java.simpleName ?: "fail 1"
     return argName
 }

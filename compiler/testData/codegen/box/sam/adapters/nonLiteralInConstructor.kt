@@ -19,7 +19,7 @@ class JavaClass {
 
 fun box(): String {
     var v = "FAIL"
-    val f = { v = "OK" }
+    konst f = { v = "OK" }
     JavaClass(f).run()
     return v
 }

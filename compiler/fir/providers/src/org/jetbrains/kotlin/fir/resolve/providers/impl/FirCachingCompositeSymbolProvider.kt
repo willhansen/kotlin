@@ -27,19 +27,19 @@ import org.jetbrains.kotlin.name.Name
 @NoMutableState
 class FirCachingCompositeSymbolProvider(
     session: FirSession,
-    val providers: List<FirSymbolProvider>,
+    konst providers: List<FirSymbolProvider>,
     // This property is necessary just to make sure we don't use the hack at `createCopyWithCleanCaches` more than once or in cases
     // we are not assumed to use it.
-    private val expectedCachesToBeCleanedOnce: Boolean = false,
+    private konst expectedCachesToBeCleanedOnce: Boolean = false,
 ) : FirSymbolProvider(session) {
 
-    private val classLikeCache = session.firCachesFactory.createCache(::computeClass)
-    private val topLevelCallableCache = session.firCachesFactory.createCache(::computeTopLevelCallables)
-    private val topLevelFunctionCache = session.firCachesFactory.createCache(::computeTopLevelFunctions)
-    private val topLevelPropertyCache = session.firCachesFactory.createCache(::computeTopLevelProperties)
-    private val packageCache = session.firCachesFactory.createCache(::computePackage)
+    private konst classLikeCache = session.firCachesFactory.createCache(::computeClass)
+    private konst topLevelCallableCache = session.firCachesFactory.createCache(::computeTopLevelCallables)
+    private konst topLevelFunctionCache = session.firCachesFactory.createCache(::computeTopLevelFunctions)
+    private konst topLevelPropertyCache = session.firCachesFactory.createCache(::computeTopLevelProperties)
+    private konst packageCache = session.firCachesFactory.createCache(::computePackage)
 
-    override val symbolNamesProvider: FirSymbolNamesProvider = object : FirCompositeCachedSymbolNamesProvider(
+    override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirCompositeCachedSymbolNamesProvider(
         session,
         providers.map { it.symbolNamesProvider },
     ) {

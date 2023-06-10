@@ -10,7 +10,7 @@ import kotlin.test.*
 class SequenceBuilderTest {
     @Test
     fun testSimple() {
-        val result = sequence {
+        konst result = sequence {
             for (i in 1..3) {
                 yield(2 * i)
             }
@@ -23,11 +23,11 @@ class SequenceBuilderTest {
 
     @Test
     fun testCallHasNextSeveralTimes() {
-        val result = sequence {
+        konst result = sequence {
             yield(1)
         }
 
-        val iterator = result.iterator()
+        konst iterator = result.iterator()
 
         assertTrue(iterator.hasNext())
         assertTrue(iterator.hasNext())
@@ -44,13 +44,13 @@ class SequenceBuilderTest {
 
     @Test
     fun testManualIteration() {
-        val result = sequence {
+        konst result = sequence {
             yield(1)
             yield(2)
             yield(3)
         }
 
-        val iterator = result.iterator()
+        konst iterator = result.iterator()
 
         assertTrue(iterator.hasNext())
         assertTrue(iterator.hasNext())
@@ -72,8 +72,8 @@ class SequenceBuilderTest {
 
     @Test
     fun testEmptySequence() {
-        val result = sequence<Int> {}
-        val iterator = result.iterator()
+        konst result = sequence<Int> {}
+        konst iterator = result.iterator()
 
         assertFalse(iterator.hasNext())
         assertFalse(iterator.hasNext())
@@ -84,17 +84,17 @@ class SequenceBuilderTest {
     @Test
     fun testLaziness() {
         var sharedVar = -2
-        val result = sequence {
+        konst result = sequence {
             while (true) {
                 when (sharedVar) {
                     -1 -> return@sequence
-                    -2 -> error("Invalid state: -2")
+                    -2 -> error("Inkonstid state: -2")
                     else -> yield(sharedVar)
                 }
             }
         }
 
-        val iterator = result.iterator()
+        konst iterator = result.iterator()
 
         sharedVar = 1
         assertTrue(iterator.hasNext())
@@ -116,7 +116,7 @@ class SequenceBuilderTest {
     @Test
     fun testExceptionInCoroutine() {
         var sharedVar = -2
-        val result = sequence {
+        konst result = sequence {
             while (true) {
                 when (sharedVar) {
                     -1 -> return@sequence
@@ -126,7 +126,7 @@ class SequenceBuilderTest {
             }
         }
 
-        val iterator = result.iterator()
+        konst iterator = result.iterator()
 
         sharedVar = 1
         assertEquals(1, iterator.next())
@@ -140,7 +140,7 @@ class SequenceBuilderTest {
     @Test
     fun testParallelIteration() {
         var inc = 0
-        val result = sequence {
+        konst result = sequence {
             for (i in 1..3) {
                 inc++
                 yield(inc * i)
@@ -152,7 +152,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllIterator() {
-        val result = sequence {
+        konst result = sequence {
             yieldAll(listOf(1, 2, 3).iterator())
         }
         assertEquals(listOf(1, 2, 3), result.toList())
@@ -160,7 +160,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllSequence() {
-        val result = sequence {
+        konst result = sequence {
             yieldAll(sequenceOf(1, 2, 3))
         }
         assertEquals(listOf(1, 2, 3), result.toList())
@@ -168,7 +168,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllCollection() {
-        val result = sequence {
+        konst result = sequence {
             yieldAll(listOf(1, 2, 3))
         }
         assertEquals(listOf(1, 2, 3), result.toList())
@@ -176,7 +176,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllCollectionMixedFirst() {
-        val result = sequence {
+        konst result = sequence {
             yield(0)
             yieldAll(listOf(1, 2, 3))
         }
@@ -185,7 +185,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllCollectionMixedLast() {
-        val result = sequence {
+        konst result = sequence {
             yieldAll(listOf(1, 2, 3))
             yield(4)
         }
@@ -194,7 +194,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllCollectionMixedBoth() {
-        val result = sequence {
+        konst result = sequence {
             yield(0)
             yieldAll(listOf(1, 2, 3))
             yield(4)
@@ -204,7 +204,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllCollectionMixedLong() {
-        val result = sequence {
+        konst result = sequence {
             yield(0)
             yieldAll(listOf(1, 2, 3))
             yield(4)
@@ -219,7 +219,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllCollectionOneEmpty() {
-        val result = sequence<Int> {
+        konst result = sequence<Int> {
             yieldAll(listOf())
         }
         assertEquals(listOf(), result.toList())
@@ -227,7 +227,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllCollectionManyEmpty() {
-        val result = sequence<Int> {
+        konst result = sequence<Int> {
             yieldAll(listOf())
             yieldAll(listOf())
             yieldAll(listOf())
@@ -237,8 +237,8 @@ class SequenceBuilderTest {
 
     @Test
     fun testYieldAllSideEffects() {
-        val effects = arrayListOf<Any>()
-        val result = sequence {
+        konst effects = arrayListOf<Any>()
+        konst result = sequence {
             effects.add("a")
             yieldAll(listOf(1, 2))
             effects.add("b")
@@ -276,7 +276,7 @@ class SequenceBuilderTest {
 
     @Test
     fun testInfiniteYieldAll() {
-        val values = iterator {
+        konst konstues = iterator {
             while (true) {
                 yieldAll((1..5).map { it })
             }
@@ -284,7 +284,7 @@ class SequenceBuilderTest {
 
         var sum = 0
         repeat(10) {
-            sum += values.next() //.also(::println)
+            sum += konstues.next() //.also(::println)
         }
         assertEquals(30, sum)
     }

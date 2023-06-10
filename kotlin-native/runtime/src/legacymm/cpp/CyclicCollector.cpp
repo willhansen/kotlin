@@ -55,7 +55,7 @@ using namespace kotlin;
  * such as `AtomicReference` and `FreezableAtomicReference` instances (further known as the atomic rootset).
  * We perform such analysis by iterating over the transitive closure of the atomic rootset, and computing
  * aggregated inner reference counter for rootset elements over this transitive closure.
- * Collector runs in its own thread and is started by an explicit request or after certain time interval since last
+ * Collector runs in its own thread and is started by an explicit request or after certain time interkonst since last
  * collection passes, thus its operation does not affect UI responsiveness in most cases.
  * Atomic rootset is built by maintaining the set of all atomic and freezable atomic references objects.
  * Elements whose transitive closure inner reference count matches the actual reference count are ones
@@ -69,7 +69,7 @@ using namespace kotlin;
  * If transitive closure of the atomic rootset mutates, it could only happen via changing the atomics references,
  * as all elements of this closure are frozen.
  * To handle such mutations we keep collector flag, which is cleared before analysis and set on every
- * atomic reference value update. If flag's value changes - collector restarts its analysis.
+ * atomic reference konstue update. If flag's konstue changes - collector restarts its analysis.
  * There are not so much of complications in this algorithm due to the delayed reference counting as if there's a
  * stack reference to the shared object - it's reflected in the reference counter (see rememberNewContainer()).
  * We release objects found by the collector on a rendezvouz callback, but not on the main thread,
@@ -195,7 +195,7 @@ class CyclicCollector {
          toVisit.clear();
          sideRefCounts.clear();
          for (auto* root: rootset_) {
-           // We only care about frozen values here, as only they could become part of shared cycles.
+           // We only care about frozen konstues here, as only they could become part of shared cycles.
            if (!containerFor(root)->frozen()) continue;
            COLLECTOR_LOG("process root %p\n", root);
            toVisit.push_back(root);
@@ -301,7 +301,7 @@ class CyclicCollector {
            RuntimeAssert(objContainer->objectCount() == 1, "Must be single object");
            COLLECTOR_LOG("for %p inner %d actual %d\n", obj, it.second, objContainer->refCount());
            // All references are inner. We compare the number of counted
-           // inner references with the number of non-stack references and per-thread ownership value
+           // inner references with the number of non-stack references and per-thread ownership konstue
            // (see rememberNewContainer()).
            if (it.second == objContainer->refCount()) {
              COLLECTOR_LOG("adding %p to release candidates\n", it.first);
@@ -355,8 +355,8 @@ class CyclicCollector {
   }
 
   void mutateRoot(ObjHeader* newValue) {
-    // TODO: consider optimization, when clearing value (setting to null) in atomic reference shall not lead
-    //   to invalidation of the collector analysis state.
+    // TODO: consider optimization, when clearing konstue (setting to null) in atomic reference shall not lead
+    //   to inkonstidation of the collector analysis state.
     atomicSet(&mutatedAtomics_, 1);
   }
 
@@ -399,10 +399,10 @@ class CyclicCollector {
           traverseObjectFields(it, [&heapRefsToRelease](ObjHeader** location) {
             // Avoid using ZeroHeapRef here: it can provoke garbageCollect() which would then stuck on taking [lock_]
             // (which is already taken above).
-            auto* value = *location;
-            if (reinterpret_cast<uintptr_t>(value) > 1) {
+            auto* konstue = *location;
+            if (reinterpret_cast<uintptr_t>(konstue) > 1) {
               *location = nullptr;
-              heapRefsToRelease.push_back(value);
+              heapRefsToRelease.push_back(konstue);
             }
           });
         }

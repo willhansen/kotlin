@@ -9,7 +9,7 @@ class Buz
 class FooBar
 
 class Foo {
-    val Buz.foobar: Bar get() = Bar()
+    konst Buz.foobar: Bar get() = Bar()
 
     fun FooBar.chk(buz: Buz) {
         // NB: really this example is unresolvable (in old FE too)

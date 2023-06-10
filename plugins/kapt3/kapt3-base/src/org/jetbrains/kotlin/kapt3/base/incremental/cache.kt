@@ -9,25 +9,25 @@ import java.io.*
 import java.util.ArrayDeque
 
 // TODO(gavra): switch away from Java serialization
-class JavaClassCacheManager(val file: File) : Closeable {
+class JavaClassCacheManager(konst file: File) : Closeable {
 
-    private val javaCacheFile = file.resolve("java-cache.bin")
-    internal val javaCache = maybeGetJavaCacheFromFile()
+    private konst javaCacheFile = file.resolve("java-cache.bin")
+    internal konst javaCache = maybeGetJavaCacheFromFile()
 
-    private val aptCacheFile = file.resolve("apt-cache.bin")
-    private val aptCache = maybeGetAptCacheFromFile()
+    private konst aptCacheFile = file.resolve("apt-cache.bin")
+    private konst aptCache = maybeGetAptCacheFromFile()
 
     private var closed = false
 
     fun updateCache(processors: List<IncrementalProcessor>, failedToAnalyzeSources: Boolean) {
         if (!aptCache.updateCache(processors, failedToAnalyzeSources)) {
-            javaCache.invalidateAll()
+            javaCache.inkonstidateAll()
             return
         }
         // Compilation is fully incremental, record types defined in generated .class files
         processors.forEach { processor ->
             processor.getGeneratedClassFilesToTypes().forEach { (classFile, type) ->
-                val classFileStructure = ClassFileStructure(classFile.toURI(), type)
+                konst classFileStructure = ClassFileStructure(classFile.toURI(), type)
                 javaCache.addSourceStructure(classFileStructure)
             }
         }
@@ -37,7 +37,7 @@ class JavaClassCacheManager(val file: File) : Closeable {
      * From set of changed sources, get list of files to recompile using structural information and dependency information from
      * annotation processing.
      */
-    fun invalidateAndGetDirtyFiles(
+    fun inkonstidateAndGetDirtyFiles(
         changedSources: Collection<File>,
         dirtyClasspathJvmNames: Collection<String>,
         compiledSources: List<File>
@@ -60,30 +60,30 @@ class JavaClassCacheManager(val file: File) : Closeable {
          *
          * However, comparing total numbers is probably good enough, and it should eliminate most of the issues. See KT-41456 for details.
          */
-        val totalDeclaredTypes = javaCache.getSourceFileDefinedTypesCount()
-        val compileOutputHasEnoughClassFiles = checkMinNumberOfClassFiles(compiledSources, totalDeclaredTypes)
+        konst totalDeclaredTypes = javaCache.getSourceFileDefinedTypesCount()
+        konst compileOutputHasEnoughClassFiles = checkMinNumberOfClassFiles(compiledSources, totalDeclaredTypes)
         if (!compileOutputHasEnoughClassFiles) {
             return SourcesToReprocess.FullRebuild
         }
 
-        val dirtyClasspathFqNames = HashSet<String>(dirtyClasspathJvmNames.size)
+        konst dirtyClasspathFqNames = HashSet<String>(dirtyClasspathJvmNames.size)
         dirtyClasspathJvmNames.forEach {
             dirtyClasspathFqNames.add(it.replace("$", ".").replace("/", "."))
         }
 
-        val changes = Changes(changedSources, dirtyClasspathFqNames.toSet())
-        val aggregatingGeneratedTypes = aptCache.getAggregatingGeneratedTypes(javaCache::getTypesForFiles)
-        val impactedTypes = getAllImpactedTypes(changes, aggregatingGeneratedTypes)
-        val isolatingGeneratedTypes = aptCache.getIsolatingGeneratedTypes(javaCache::getTypesForFiles)
+        konst changes = Changes(changedSources, dirtyClasspathFqNames.toSet())
+        konst aggregatingGeneratedTypes = aptCache.getAggregatingGeneratedTypes(javaCache::getTypesForFiles)
+        konst impactedTypes = getAllImpactedTypes(changes, aggregatingGeneratedTypes)
+        konst isolatingGeneratedTypes = aptCache.getIsolatingGeneratedTypes(javaCache::getTypesForFiles)
 
-        val sourcesToReprocess = changedSources.toMutableSet()
-        val classNamesToReprocess = mutableListOf<String>()
+        konst sourcesToReprocess = changedSources.toMutableSet()
+        konst classNamesToReprocess = mutableListOf<String>()
 
         if (changedSources.isNotEmpty() || impactedTypes.isNotEmpty()) {
             for (aggregatingOrigin in aptCache.getAggregatingOrigins()) {
                 if (aggregatingOrigin in impactedTypes) continue
 
-                val originSource = javaCache.getSourceForType(aggregatingOrigin)
+                konst originSource = javaCache.getSourceForType(aggregatingOrigin)
                 if (originSource.extension == "java") {
                     sourcesToReprocess.add(originSource)
                 } else if (originSource.extension == "class") {
@@ -98,11 +98,11 @@ class JavaClassCacheManager(val file: File) : Closeable {
                 sourcesToReprocess.add(javaCache.getSourceForType(impactedType))
             } else if (impactedType in isolatingGeneratedTypes) {
                 // this is a generated type by isolating AP
-                val isolatingOrigin = aptCache.getOriginForGeneratedIsolatingType(impactedType, javaCache::getSourceForType)
+                konst isolatingOrigin = aptCache.getOriginForGeneratedIsolatingType(impactedType, javaCache::getSourceForType)
                 if (isolatingOrigin in impactedTypes || isolatingOrigin in dirtyClasspathFqNames) {
                     continue
                 }
-                val originSource = javaCache.getSourceForType(isolatingOrigin)
+                konst originSource = javaCache.getSourceForType(isolatingOrigin)
                 if (originSource.extension == "java") {
                     sourcesToReprocess.add(originSource)
                 } else if (originSource.extension == "class") {
@@ -112,22 +112,22 @@ class JavaClassCacheManager(val file: File) : Closeable {
         }
 
         if (sourcesToReprocess.isNotEmpty() || classNamesToReprocess.isNotEmpty()) {
-            // Invalidate state only if there are some files that will be reprocessed
-            javaCache.invalidateDataForTypes(impactedTypes)
-            aptCache.invalidateAggregating()
-            // for isolating, invalidate both own types and classpath types
-            aptCache.invalidateIsolatingForOriginTypes(impactedTypes + dirtyClasspathFqNames)
+            // Inkonstidate state only if there are some files that will be reprocessed
+            javaCache.inkonstidateDataForTypes(impactedTypes)
+            aptCache.inkonstidateAggregating()
+            // for isolating, inkonstidate both own types and classpath types
+            aptCache.inkonstidateIsolatingForOriginTypes(impactedTypes + dirtyClasspathFqNames)
         }
 
         return SourcesToReprocess.Incremental(sourcesToReprocess.toList(), impactedTypes, classNamesToReprocess)
     }
 
     private fun getAllImpactedTypes(changes: Changes, aggregatingGeneratedTypes: Set<String>): MutableSet<String> {
-        val impactedTypes = javaCache.getAllImpactedTypes(changes)
+        konst impactedTypes = javaCache.getAllImpactedTypes(changes)
         // check isolating with origins from the classpath
         impactedTypes.addAll(aptCache.getIsolatingGeneratedTypesForOrigins(changes.dirtyFqNamesFromClasspath, javaCache::getTypesForFiles))
         if (changes.sourceChanges.isNotEmpty() || impactedTypes.isNotEmpty()) {
-            // Any source change or any source impacted by type change invalidates aggregating APs generated types
+            // Any source change or any source impacted by type change inkonstidates aggregating APs generated types
             impactedTypes.addAll(aggregatingGeneratedTypes)
         }
         // now check isolating with origins in any of the impacted types
@@ -192,9 +192,9 @@ class JavaClassCacheManager(val file: File) : Closeable {
 
 sealed class SourcesToReprocess {
     class Incremental(
-        val toReprocess: List<File>,
-        val dirtyTypes: Set<String>,
-        val unchangedAggregatedTypes: List<String>
+        konst toReprocess: List<File>,
+        konst dirtyTypes: Set<String>,
+        konst unchangedAggregatedTypes: List<String>
     ) : SourcesToReprocess()
 
     object FullRebuild : SourcesToReprocess()
@@ -204,7 +204,7 @@ sealed class SourcesToReprocess {
 private fun checkMinNumberOfClassFiles(roots: List<File>, required: Int): Boolean {
     var currentlyMissing = required
     roots.filter { it.isDirectory }.forEach {
-        val inThisRoot = countClassFilesUpToLimit(it, currentlyMissing)
+        konst inThisRoot = countClassFilesUpToLimit(it, currentlyMissing)
         currentlyMissing -= inThisRoot
     }
     return currentlyMissing <= 0
@@ -212,10 +212,10 @@ private fun checkMinNumberOfClassFiles(roots: List<File>, required: Int): Boolea
 
 private fun countClassFilesUpToLimit(root: File, limit: Int): Int {
     var cnt = 0;
-    val toVisit = ArrayDeque<File>()
+    konst toVisit = ArrayDeque<File>()
     toVisit.add(root)
     while (cnt < limit && toVisit.isNotEmpty()) {
-        val curr = toVisit.removeFirst()
+        konst curr = toVisit.removeFirst()
         if (curr.isFile && curr.toString().endsWith(".class")) {
             cnt++
         } else if (curr.isDirectory) {

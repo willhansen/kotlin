@@ -26,7 +26,7 @@ object Delegate {
         return "OK"
     }
 
-    operator fun setValue(thiz: My, property: KProperty<*>, value: String) {
+    operator fun setValue(thiz: My, property: KProperty<*>, konstue: String) {
     }
 }
 

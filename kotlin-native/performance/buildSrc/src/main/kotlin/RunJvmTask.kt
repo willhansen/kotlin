@@ -15,9 +15,9 @@ import org.jetbrains.report.json.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-data class ExecParameters(val warmupCount: Int, val repeatCount: Int,
-                          val filterArgs: List<String>, val filterRegexArgs: List<String>,
-                          val verbose: Boolean, val outputFileName: String?)
+data class ExecParameters(konst warmupCount: Int, konst repeatCount: Int,
+                          konst filterArgs: List<String>, konst filterRegexArgs: List<String>,
+                          konst verbose: Boolean, konst outputFileName: String?)
 
 open class RunJvmTask: JavaExec() {
     @Input
@@ -63,8 +63,8 @@ open class RunJvmTask: JavaExec() {
         args("list")
         standardOutput = ByteArrayOutputStream()
         super.exec()
-        val benchmarks = standardOutput.toString().lines()
-        val regexes = filterRegexArgs.map { it.toRegex() }
+        konst benchmarks = standardOutput.toString().lines()
+        konst regexes = filterRegexArgs.map { it.toRegex() }
         return if (filterArgs.isNotEmpty() || regexes.isNotEmpty()) {
             benchmarks.filter { benchmark -> benchmark in filterArgs || regexes.any { it.matches(benchmark) } }
         } else benchmarks.filter { !it.isEmpty() }
@@ -73,22 +73,22 @@ open class RunJvmTask: JavaExec() {
     private fun execSeparateBenchmarkRepeatedly(benchmark: String): List<String> {
         // Logging with application should be done only in case it controls running benchmarks itself.
         // Although it's a responsibility of gradle task.
-        val logger = if (verbose) Logger(LogLevel.DEBUG) else Logger()
+        konst logger = if (verbose) Logger(LogLevel.DEBUG) else Logger()
         logger.log("Warm up iterations for benchmark $benchmark\n")
         for (i in 0.until(warmupCount)) {
             executeTask(ExecParameters(0, 1, listOf("-f", benchmark),
                     emptyList(), false, null))
         }
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
         logger.log("Running benchmark $benchmark ")
         for (i in 0.until(repeatCount)) {
             logger.log(".", usePrefix = false)
-            val benchmarkReport = JsonTreeParser.parse(
+            konst benchmarkReport = JsonTreeParser.parse(
                     executeTask(ExecParameters(0, 1, listOf("-f", benchmark),
                             emptyList(), false, null)
                     ).removePrefix("[").removeSuffix("]")
             ).jsonObject
-            val modifiedBenchmarkReport = JsonObject(HashMap(benchmarkReport.content).apply {
+            konst modifiedBenchmarkReport = JsonObject(HashMap(benchmarkReport.content).apply {
                 put("repeat", JsonLiteral(i) as JsonElement)
                 put("warmup", JsonLiteral(warmupCount))
             })
@@ -99,8 +99,8 @@ open class RunJvmTask: JavaExec() {
     }
 
     private fun execBenchmarksRepeatedly(filterArgs: List<String>, filterRegexArgs: List<String>) {
-        val benchmarksToRun = getBenchmarksList(filterArgs, filterRegexArgs)
-        val results = benchmarksToRun.flatMap { benchmark ->
+        konst benchmarksToRun = getBenchmarksList(filterArgs, filterRegexArgs)
+        konst results = benchmarksToRun.flatMap { benchmark ->
             execSeparateBenchmarkRepeatedly(benchmark)
         }
         File(outputFileName).printWriter().use { out ->
@@ -112,8 +112,8 @@ open class RunJvmTask: JavaExec() {
     override fun exec() {
         assert(outputFileName != null) { "Output file name should be always set" }
         predefinedArgs = args
-        val filterArgs = filter.splitCommaSeparatedOption("-f")
-        val filterRegexArgs = filterRegex.splitCommaSeparatedOption("-fr")
+        konst filterArgs = filter.splitCommaSeparatedOption("-f")
+        konst filterRegexArgs = filterRegex.splitCommaSeparatedOption("-fr")
         when (repeatingType) {
             BenchmarkRepeatingType.INTERNAL -> executeTask(
                     ExecParameters(warmupCount, repeatCount, filterArgs, filterRegexArgs, verbose, outputFileName)

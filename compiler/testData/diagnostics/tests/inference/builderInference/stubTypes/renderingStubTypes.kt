@@ -20,7 +20,7 @@ interface TestInterface<R> {
 fun <U> id(x: U) = x
 
 fun test() {
-    val ret = build {
+    konst ret = build {
         emit("1")
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>get()<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<kotlin.String>")!>getInv()<!>

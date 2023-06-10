@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 import org.jetbrains.kotlin.types.model.TypeVariableMarker
 
 abstract class ConstraintSystemCompletionContext : VariableFixationFinder.Context, ResultTypeResolver.Context {
-    abstract val allTypeVariables: Map<TypeConstructorMarker, TypeVariableMarker>
-    abstract override val notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints>
-    abstract override val fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
-    abstract override val postponedTypeVariables: List<TypeVariableMarker>
+    abstract konst allTypeVariables: Map<TypeConstructorMarker, TypeVariableMarker>
+    abstract override konst notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints>
+    abstract override konst fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
+    abstract override konst postponedTypeVariables: List<TypeVariableMarker>
 
     abstract fun getBuilder(): ConstraintSystemBuilder
 
@@ -42,9 +42,9 @@ abstract class ConstraintSystemCompletionContext : VariableFixationFinder.Contex
         postponedArguments: List<A>,
         analyze: (A) -> Unit
     ): Boolean {
-        val useBuilderInferenceOnlyIfNeeded =
+        konst useBuilderInferenceOnlyIfNeeded =
             languageVersionSettings.supportsFeature(LanguageFeature.UseBuilderInferenceOnlyIfNeeded)
-        val argumentToAnalyze = if (useBuilderInferenceOnlyIfNeeded) {
+        konst argumentToAnalyze = if (useBuilderInferenceOnlyIfNeeded) {
             findPostponedArgumentWithFixedInputTypes(postponedArguments)
         } else {
             findPostponedArgumentWithFixedOrPostponedInputTypes(postponedArguments)
@@ -65,7 +65,7 @@ abstract class ConstraintSystemCompletionContext : VariableFixationFinder.Contex
         analyze: (A) -> Unit
     ): Boolean {
         if (completionMode == ConstraintSystemCompletionMode.FULL) {
-            val argumentWithTypeVariableAsExpectedType = findPostponedArgumentWithRevisableExpectedType(postponedArguments)
+            konst argumentWithTypeVariableAsExpectedType = findPostponedArgumentWithRevisableExpectedType(postponedArguments)
 
             if (argumentWithTypeVariableAsExpectedType != null) {
                 analyze(argumentWithTypeVariableAsExpectedType)
@@ -80,7 +80,7 @@ abstract class ConstraintSystemCompletionContext : VariableFixationFinder.Contex
         postponedArguments: List<A>,
         analyze: (A) -> Unit
     ): Boolean {
-        val remainingNotAnalyzedPostponedArgument = postponedArguments.firstOrNull { !it.analyzed }
+        konst remainingNotAnalyzedPostponedArgument = postponedArguments.firstOrNull { !it.analyzed }
 
         if (remainingNotAnalyzedPostponedArgument != null) {
             analyze(remainingNotAnalyzedPostponedArgument)

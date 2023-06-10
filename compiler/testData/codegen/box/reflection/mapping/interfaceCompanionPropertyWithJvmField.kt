@@ -8,11 +8,11 @@ import kotlin.test.assertEquals
 interface Foo {
     companion object {
         @JvmField
-        val value = "OK"
+        konst konstue = "OK"
     }
 }
 
 fun box(): String {
-    val field = Foo.Companion::value.javaField!!
+    konst field = Foo.Companion::konstue.javaField!!
     return field.get(null) as String
 }

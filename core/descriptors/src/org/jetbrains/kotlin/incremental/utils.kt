@@ -29,8 +29,8 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 
 fun LookupTracker.record(from: LookupLocation, scopeOwner: ClassDescriptor, name: Name) {
     if (this === LookupTracker.DO_NOTHING) return
-    val location = from.location ?: return
-    val position = if (requiresPosition) location.position else Position.NO_POSITION
+    konst location = from.location ?: return
+    konst position = if (requiresPosition) location.position else Position.NO_POSITION
     record(location.filePath, position, DescriptorUtils.getFqName(scopeOwner).asString(), ScopeKind.CLASSIFIER, name.asString())
 }
 
@@ -40,9 +40,9 @@ fun LookupTracker.record(from: LookupLocation, scopeOwner: PackageFragmentDescri
 
 fun LookupTracker.recordPackageLookup(from: LookupLocation, packageFqName: String, name: String) {
     if (this === LookupTracker.DO_NOTHING) return
-    val location = from.location ?: return
-    val position = if (requiresPosition) location.position else Position.NO_POSITION
+    konst location = from.location ?: return
+    konst position = if (requiresPosition) location.position else Position.NO_POSITION
     record(location.filePath, position, packageFqName, ScopeKind.PACKAGE, name)
 }
 
-const val ANDROID_LAYOUT_CONTENT_LOOKUP_NAME = "<LAYOUT-CONTENT>"
+const konst ANDROID_LAYOUT_CONTENT_LOOKUP_NAME = "<LAYOUT-CONTENT>"

@@ -9,18 +9,18 @@ import java.io.File
 import java.io.StringReader
 import java.util.Properties
 
-private const val SYNCED_PROPERTIES_START_LINE = "# Automatically configured by the `internal-gradle-setup` plugin"
+private const konst SYNCED_PROPERTIES_START_LINE = "# Automatically configured by the `internal-gradle-setup` plugin"
 
-internal val SYNCED_PROPERTIES_START_LINES = """
+internal konst SYNCED_PROPERTIES_START_LINES = """
     $SYNCED_PROPERTIES_START_LINE
     # Please do not edit these properties manually, the changes will be lost
-    # If you want to override some values, put them before this section and remove from this section
+    # If you want to override some konstues, put them before this section and remove from this section
 """.trimIndent()
 
-internal const val SYNCED_PROPERTIES_END_LINE = "# the end of automatically configured properties"
+internal const konst SYNCED_PROPERTIES_END_LINE = "# the end of automatically configured properties"
 
-internal class LocalPropertiesModifier(private val localProperties: File) {
-    private val initialUserConfiguredPropertiesContent = getUserConfiguredPropertiesContent()
+internal class LocalPropertiesModifier(private konst localProperties: File) {
+    private konst initialUserConfiguredPropertiesContent = getUserConfiguredPropertiesContent()
 
     private fun getUserConfiguredPropertiesContent(): String {
         if (!localProperties.exists()) return ""
@@ -30,7 +30,7 @@ internal class LocalPropertiesModifier(private val localProperties: File) {
             if (line == SYNCED_PROPERTIES_START_LINE) {
                 insideAutomaticallyConfiguredSection = true
             }
-            val shouldIncludeThisLine = !insideAutomaticallyConfiguredSection
+            konst shouldIncludeThisLine = !insideAutomaticallyConfiguredSection
             if (line == SYNCED_PROPERTIES_END_LINE) {
                 insideAutomaticallyConfiguredSection = false
             }
@@ -47,18 +47,18 @@ internal class LocalPropertiesModifier(private val localProperties: File) {
         if (localProperties.exists() && !localProperties.isFile) {
             error("$localProperties is not a file!")
         }
-        val content = getUserConfiguredPropertiesContent()
-        val manuallyConfiguredProperties = Properties().apply {
+        konst content = getUserConfiguredPropertiesContent()
+        konst manuallyConfiguredProperties = Properties().apply {
             StringReader(content).use {
                 load(it)
             }
         }
-        val propertiesToSetup = setupFile.properties.mapValues {
-            val overridingValue = manuallyConfiguredProperties[it.key]
+        konst propertiesToSetup = setupFile.properties.mapValues {
+            konst overridingValue = manuallyConfiguredProperties[it.key]
             if (overridingValue != null) {
-                PropertyValue.Overridden(it.value, overridingValue.toString())
+                PropertyValue.Overridden(it.konstue, overridingValue.toString())
             } else {
-                PropertyValue.Configured(it.value)
+                PropertyValue.Configured(it.konstue)
             }
         }
         localProperties.writeText(
@@ -83,17 +83,17 @@ private fun String.addSuffix(suffix: String): String {
 }
 
 internal sealed class PropertyValue(
-    val value: String,
+    konst konstue: String,
 ) {
-    class Configured(value: String) : PropertyValue(value)
+    class Configured(konstue: String) : PropertyValue(konstue)
 
-    class Overridden(value: String, val overridingValue: String) : PropertyValue(value)
+    class Overridden(konstue: String, konst overridingValue: String) : PropertyValue(konstue)
 }
 
-internal val Map<String, PropertyValue>.asPropertiesLines: String
-    get() = map { (key, valueWrapper) ->
-        when (valueWrapper) {
-            is PropertyValue.Overridden -> "#$key=${valueWrapper.value} the property is overridden by '${valueWrapper.overridingValue}'"
-            is PropertyValue.Configured -> "$key=${valueWrapper.value}"
+internal konst Map<String, PropertyValue>.asPropertiesLines: String
+    get() = map { (key, konstueWrapper) ->
+        when (konstueWrapper) {
+            is PropertyValue.Overridden -> "#$key=${konstueWrapper.konstue} the property is overridden by '${konstueWrapper.overridingValue}'"
+            is PropertyValue.Configured -> "$key=${konstueWrapper.konstue}"
         }
     }.joinToString("\n")

@@ -9,6 +9,6 @@ class SmartArrayList() : AL {
 }
 
 fun box(): String {
-    val c = SmartArrayList()
+    konst c = SmartArrayList()
     return if (null == c.get(0)) return "OK" else "fail"
 }

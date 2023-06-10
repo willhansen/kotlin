@@ -2,7 +2,7 @@
 // MODULE: m1-common
 // FILE: common.kt
 expect class Foo(
-        val constructorProperty: String,
+        konst constructorProperty: String,
         constructorParameter: String
 ) {
     init {
@@ -15,11 +15,11 @@ expect class Foo(
 
     constructor() : this("no")
 
-    val prop: String = <!EXPECTED_PROPERTY_INITIALIZER!>"no"<!>
+    konst prop: String = <!EXPECTED_PROPERTY_INITIALIZER!>"no"<!>
 
     var getSet: String
         get() = "no"
-        set(value) {}
+        set(konstue) {}
 
     <!EXPECTED_DECLARATION_WITH_BODY!>fun functionWithBody(x: Int): Int<!> {
         return x + 1

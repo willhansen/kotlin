@@ -28,8 +28,8 @@ import org.jetbrains.kotlin.psi
 import org.jetbrains.kotlin.psi.*
 
 internal class KtFirSymbolContainingDeclarationProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken
 ) : KtSymbolContainingDeclarationProvider(), KtFirAnalysisSessionComponent {
     override fun getContainingDeclaration(symbol: KtSymbol): KtDeclarationSymbol? {
         if (symbol is KtReceiverParameterSymbol) {
@@ -51,7 +51,7 @@ internal class KtFirSymbolContainingDeclarationProvider(
             is KtScriptSymbol -> null // Scripts are always top-level
 
             is KtClassInitializerSymbol -> {
-                val outerFirClassifier = symbol.firSymbol.getContainingClassSymbol(symbol.firSymbol.llFirSession)
+                konst outerFirClassifier = symbol.firSymbol.getContainingClassSymbol(symbol.firSymbol.llFirSession)
                     ?: return getParentSymbolByPsi()
                 firSymbolBuilder.buildSymbol(outerFirClassifier) as? KtDeclarationSymbol
             }
@@ -61,15 +61,15 @@ internal class KtFirSymbolContainingDeclarationProvider(
             }
 
             is KtCallableSymbol -> {
-                val outerFirClassifier = symbol.firSymbol.getContainingClassSymbol(symbol.firSymbol.llFirSession)
+                konst outerFirClassifier = symbol.firSymbol.getContainingClassSymbol(symbol.firSymbol.llFirSession)
                     ?: return getParentSymbolByPsi()
                 firSymbolBuilder.buildSymbol(outerFirClassifier) as? KtDeclarationSymbol
             }
 
             is KtClassLikeSymbol -> {
-                val classId = symbol.classIdIfNonLocal ?: return getParentSymbolByPsi() // local
-                val outerClassId = classId.outerClassId ?: return null // toplevel
-                val outerFirClassifier = symbol.firSymbol.llFirSession.firProvider.getFirClassifierByFqName(outerClassId) ?: return null
+                konst classId = symbol.classIdIfNonLocal ?: return getParentSymbolByPsi() // local
+                konst outerClassId = classId.outerClassId ?: return null // toplevel
+                konst outerFirClassifier = symbol.firSymbol.llFirSession.firProvider.getFirClassifierByFqName(outerClassId) ?: return null
                 firSymbolBuilder.buildSymbol(outerFirClassifier) as? KtDeclarationSymbol
             }
         }
@@ -81,8 +81,8 @@ internal class KtFirSymbolContainingDeclarationProvider(
 
 
     private fun getContainingPsi(symbol: KtSymbol): KtDeclaration {
-        val source = symbol.firSymbol.source
-        val thisSource = when (source?.kind) {
+        konst source = symbol.firSymbol.source
+        konst thisSource = when (source?.kind) {
             null -> buildErrorWithAttachment("PSI should present for declaration built by Kotlin code") {
                 withSymbolAttachment("symbolForContainingPsi", symbol, analysisSession)
             }
@@ -111,7 +111,7 @@ internal class KtFirSymbolContainingDeclarationProvider(
     }
 
     private fun PsiElement.getContainingKtDeclaration(): KtDeclaration? =
-        when (val container = this.parentOfType<KtDeclaration>()) {
+        when (konst container = this.parentOfType<KtDeclaration>()) {
             is KtDestructuringDeclaration -> container.parentOfType()
             else -> container
         }?.let { it.originalDeclaration ?: it }

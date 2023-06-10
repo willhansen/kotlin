@@ -17,19 +17,19 @@ sealed class ClasspathChanges : Serializable {
 
     sealed class ClasspathSnapshotEnabled : ClasspathChanges() {
 
-        abstract val classpathSnapshotFiles: ClasspathSnapshotFiles
+        abstract konst classpathSnapshotFiles: ClasspathSnapshotFiles
 
         sealed class IncrementalRun : ClasspathSnapshotEnabled() {
 
-            class NoChanges(override val classpathSnapshotFiles: ClasspathSnapshotFiles) : IncrementalRun()
+            class NoChanges(override konst classpathSnapshotFiles: ClasspathSnapshotFiles) : IncrementalRun()
 
-            class ToBeComputedByIncrementalCompiler(override val classpathSnapshotFiles: ClasspathSnapshotFiles) : IncrementalRun()
+            class ToBeComputedByIncrementalCompiler(override konst classpathSnapshotFiles: ClasspathSnapshotFiles) : IncrementalRun()
         }
 
-        class NotAvailableDueToMissingClasspathSnapshot(override val classpathSnapshotFiles: ClasspathSnapshotFiles) :
+        class NotAvailableDueToMissingClasspathSnapshot(override konst classpathSnapshotFiles: ClasspathSnapshotFiles) :
             ClasspathSnapshotEnabled()
 
-        class NotAvailableForNonIncrementalRun(override val classpathSnapshotFiles: ClasspathSnapshotFiles) : ClasspathSnapshotEnabled()
+        class NotAvailableForNonIncrementalRun(override konst classpathSnapshotFiles: ClasspathSnapshotFiles) : ClasspathSnapshotEnabled()
     }
 
     object ClasspathSnapshotDisabled : ClasspathChanges()
@@ -38,13 +38,13 @@ sealed class ClasspathChanges : Serializable {
 }
 
 class ClasspathSnapshotFiles(
-    val currentClasspathEntrySnapshotFiles: List<File>,
+    konst currentClasspathEntrySnapshotFiles: List<File>,
     classpathSnapshotDir: File
 ) : Serializable {
 
-    val shrunkPreviousClasspathSnapshotFile: File = File(classpathSnapshotDir, "shrunk-classpath-snapshot.bin")
+    konst shrunkPreviousClasspathSnapshotFile: File = File(classpathSnapshotDir, "shrunk-classpath-snapshot.bin")
 
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

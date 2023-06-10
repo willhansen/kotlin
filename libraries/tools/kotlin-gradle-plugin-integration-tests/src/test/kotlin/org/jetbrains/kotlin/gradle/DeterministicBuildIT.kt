@@ -27,9 +27,9 @@ class DeterministicBuildIT : KGPBaseTest() {
                     """
                     class Foo : Bar {
                         // The fields and methods are ordered such that any sorting by KGP will be detected.
-                        val fooField1 = 1
-                        val fooField3 = 3
-                        val fooField2 = 2
+                        konst fooField1 = 1
+                        konst fooField3 = 3
+                        konst fooField2 = 2
                         fun fooMethod1() {}
                         fun fooMethod3() {}
                         fun fooMethod2() {}
@@ -41,9 +41,9 @@ class DeterministicBuildIT : KGPBaseTest() {
                 .writeText(
                     """
                     interface Bar {
-                        val barField1 = 1
-                        val barField3 = 3
-                        val barField2 = 2
+                        konst barField1 = 1
+                        konst barField3 = 3
+                        konst barField2 = 2
                         fun barMethod1() {}
                         fun barMethod3() {}
                         fun barMethod2() {}
@@ -67,7 +67,7 @@ class DeterministicBuildIT : KGPBaseTest() {
             }
 
             // Run the first build
-            val stubFilesAfterFirstBuild = buildAndSnapshotStubFiles()
+            konst stubFilesAfterFirstBuild = buildAndSnapshotStubFiles()
 
             // Make a change
             javaSourcesDir()
@@ -75,9 +75,9 @@ class DeterministicBuildIT : KGPBaseTest() {
                 .writeText(
                     """
                     class Foo : Bar {
-                        val fooField1 = 1
-                        val fooField3 = 3
-                        val fooField2 = 2
+                        konst fooField1 = 1
+                        konst fooField3 = 3
+                        konst fooField2 = 2
                         fun fooMethod1() { println("Method body changed!") }
                         fun fooMethod3() {}
                         fun fooMethod2() {}
@@ -86,13 +86,13 @@ class DeterministicBuildIT : KGPBaseTest() {
                 )
 
             // Run the second build
-            val stubFilesAfterSecondBuild = buildAndSnapshotStubFiles()
+            konst stubFilesAfterSecondBuild = buildAndSnapshotStubFiles()
 
             // Check that the build outputs are deterministic
             assertEquals(stubFilesAfterFirstBuild.size, stubFilesAfterSecondBuild.size)
             for (file in stubFilesAfterFirstBuild.keys) {
-                val fileContentsAfterFirstBuild = stubFilesAfterFirstBuild[file]
-                val fileContentsAfterSecondBuild = stubFilesAfterSecondBuild[file]
+                konst fileContentsAfterFirstBuild = stubFilesAfterFirstBuild[file]
+                konst fileContentsAfterSecondBuild = stubFilesAfterSecondBuild[file]
                 assertEquals(fileContentsAfterFirstBuild, fileContentsAfterSecondBuild)
             }
         }

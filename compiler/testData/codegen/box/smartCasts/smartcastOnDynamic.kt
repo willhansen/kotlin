@@ -8,6 +8,6 @@ fun test_2(x: dynamic): Int = when (x) {
 }
 
 fun box(): String {
-    val result = test_1("a") + test_2("ab")
+    konst result = test_1("a") + test_2("ab")
     return if (result == 3) "OK" else "fail"
 }

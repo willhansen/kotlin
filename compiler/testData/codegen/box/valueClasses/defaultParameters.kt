@@ -5,7 +5,7 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class DPoint(/*inline */val x: Double/* = 1.0*/, /*inline */val y: Double/* = 2.0*/) {
+konstue class DPoint(/*inline */konst x: Double/* = 1.0*/, /*inline */konst y: Double/* = 2.0*/) {
     fun f1(a: Int, b: Int = -1, c: DPoint = DPoint(-2.0, -3.0)) = listOf(this, x, y, a, b, c)
     
     constructor(x: Double, flip: Boolean = false): this(x, if (flip) -x else x)
@@ -20,11 +20,11 @@ object RegularObject {
 }
 
 @JvmInline
-value class DSegment(/*inline */val p1: DPoint/* = DPoint(3.0, 4.0)*/, /*inline */val p2: DPoint/* = DPoint(5.0, 6.0)*/, /*inline */val n: Int/* = 7*/) {
+konstue class DSegment(/*inline */konst p1: DPoint/* = DPoint(3.0, 4.0)*/, /*inline */konst p2: DPoint/* = DPoint(5.0, 6.0)*/, /*inline */konst n: Int/* = 7*/) {
     fun f2(a: Int, b: Int = -1, c: DPoint = DPoint(-2.0, -3.0)) = listOf(this, p1, p2, n, a, b, c)
 }
 
-data class Wrapper(val segment: DSegment = DSegment(DPoint(8.0, 9.0), DPoint(10.0, 11.0), 7), val n: Int = 12) {
+data class Wrapper(konst segment: DSegment = DSegment(DPoint(8.0, 9.0), DPoint(10.0, 11.0), 7), konst n: Int = 12) {
     fun f3(a: Int, b: Int = -1, c: DPoint = DPoint(-2.0, -3.0)) = listOf(this, segment, n, a, b, c)
 }
 
@@ -46,8 +46,8 @@ fun box(): String {
 //    require(DPoint(3.0) == DPoint(3.0, 2.0)) { "${DPoint()} ${DPoint(3.0, 2.0)}" }
 //    require(DPoint(x = 3.0) == DPoint(3.0, 2.0)) { "${DPoint()} ${DPoint(3.0, 2.0)}" }
 //    require(DPoint(y = 3.0) == DPoint(1.0, 3.0)) { "${DPoint()} ${DPoint(1.0, 3.0)}" }
-//    val defaultDPoint = DPoint()
-    val defaultDPoint = DPoint(1.0, 2.0)
+//    konst defaultDPoint = DPoint()
+    konst defaultDPoint = DPoint(1.0, 2.0)
     require(defaultDPoint.f1(4) == listOf(DPoint(1.0, 2.0), 1.0, 2.0, 4, -1, DPoint(-2.0, -3.0))) {
         defaultDPoint.f1(4).toString()
     }
@@ -62,8 +62,8 @@ fun box(): String {
     }
 
 //    require(DSegment() == DSegment(DPoint(3.0, 4.0), DPoint(5.0, 6.0), 7)) { DSegment().toString() }
-//    val defaultDSegment = DSegment()
-    val defaultDSegment = DSegment(DPoint(3.0, 4.0), DPoint(5.0, 6.0), 7)
+//    konst defaultDSegment = DSegment()
+    konst defaultDSegment = DSegment(DPoint(3.0, 4.0), DPoint(5.0, 6.0), 7)
     require(defaultDSegment.f2(100) == listOf(defaultDSegment, DPoint(3.0, 4.0), DPoint(5.0, 6.0), 7, 100, -1, DPoint(-2.0, -3.0))) {
         defaultDSegment.f2(100).toString()
     }

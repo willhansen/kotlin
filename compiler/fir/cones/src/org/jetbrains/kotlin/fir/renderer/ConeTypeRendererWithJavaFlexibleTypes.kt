@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.renderer.typeStringsDifferOnlyInNullability
 
 class ConeTypeRendererWithJavaFlexibleTypes : ConeTypeRenderer {
 
-    private val idRendererCreator: () -> ConeIdRenderer
+    private konst idRendererCreator: () -> ConeIdRenderer
 
     @Suppress("ConvertSecondaryConstructorToPrimary")
     constructor(builder: StringBuilder, idRendererCreator: () -> ConeIdRenderer) : super() {
@@ -24,9 +24,9 @@ class ConeTypeRendererWithJavaFlexibleTypes : ConeTypeRenderer {
     }
 
     override fun render(flexibleType: ConeFlexibleType) {
-        val lowerRenderer = ConeTypeRendererWithJavaFlexibleTypes(StringBuilder(), idRendererCreator)
+        konst lowerRenderer = ConeTypeRendererWithJavaFlexibleTypes(StringBuilder(), idRendererCreator)
         lowerRenderer.render(flexibleType.lowerBound)
-        val upperRenderer = ConeTypeRendererWithJavaFlexibleTypes(StringBuilder(), idRendererCreator)
+        konst upperRenderer = ConeTypeRendererWithJavaFlexibleTypes(StringBuilder(), idRendererCreator)
         upperRenderer.render(flexibleType.upperBound)
         builder.append(renderFlexibleType(lowerRenderer.builder.toString(), upperRenderer.builder.toString()))
     }
@@ -40,10 +40,10 @@ class ConeTypeRendererWithJavaFlexibleTypes : ConeTypeRenderer {
             return "$lowerRendered!"
         }
 
-        val kotlinCollectionsPrefix = StandardNames.COLLECTIONS_PACKAGE_FQ_NAME.asString().replace(".", "/") + "/"
-        val mutablePrefix = "Mutable"
+        konst kotlinCollectionsPrefix = StandardNames.COLLECTIONS_PACKAGE_FQ_NAME.asString().replace(".", "/") + "/"
+        konst mutablePrefix = "Mutable"
         // java.util.List<Foo> -> (Mutable)List<Foo!>!
-        val simpleCollection = replacePrefixesInTypeRepresentations(
+        konst simpleCollection = replacePrefixesInTypeRepresentations(
             lowerRendered,
             kotlinCollectionsPrefix + mutablePrefix,
             upperRendered,
@@ -52,7 +52,7 @@ class ConeTypeRendererWithJavaFlexibleTypes : ConeTypeRenderer {
         )
         if (simpleCollection != null) return simpleCollection
         // java.util.Map.Entry<Foo, Bar> -> (Mutable)Map.(Mutable)Entry<Foo!, Bar!>!
-        val mutableEntry = replacePrefixesInTypeRepresentations(
+        konst mutableEntry = replacePrefixesInTypeRepresentations(
             lowerRendered,
             kotlinCollectionsPrefix + "MutableMap.MutableEntry",
             upperRendered,
@@ -61,9 +61,9 @@ class ConeTypeRendererWithJavaFlexibleTypes : ConeTypeRenderer {
         )
         if (mutableEntry != null) return mutableEntry
 
-        val kotlinPrefix = StandardNames.BUILT_INS_PACKAGE_FQ_NAME.asString() + "/"
+        konst kotlinPrefix = StandardNames.BUILT_INS_PACKAGE_FQ_NAME.asString() + "/"
         // Foo[] -> Array<(out) Foo!>!
-        val array = replacePrefixesInTypeRepresentations(
+        konst array = replacePrefixesInTypeRepresentations(
             lowerRendered = lowerRendered,
             lowerPrefix = kotlinPrefix + "Array<",
             upperRendered = upperRendered,

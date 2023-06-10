@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 class C {
-    val c: C = C()
+    konst c: C = C()
 }
 
 operator fun C.plus(a: Any): C = this
@@ -13,7 +13,7 @@ class C1 {
 }
 
 fun test() {
-    val c = C()
+    konst c = C()
     c.c += ""
     var c1 = C1()
     c1.c <!ASSIGN_OPERATOR_AMBIGUITY!>+=<!> ""

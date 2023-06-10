@@ -16,7 +16,7 @@ package kotlin.collections
  */
 public actual open class LinkedHashSet<E> : HashSet<E>, MutableSet<E> {
     private companion object {
-        private val Empty = LinkedHashSet<Nothing>(0).also {
+        private konst Empty = LinkedHashSet<Nothing>(0).also {
             (it.map as LinkedHashMap<Nothing, Any>).build()
         }
     }

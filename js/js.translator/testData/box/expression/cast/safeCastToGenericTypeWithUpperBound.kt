@@ -10,9 +10,9 @@ fun <T : A> notNullToNullableT(a: Any): T? = a as? T?
 fun <T : A> nullableToNullableT(a: Any?): T? = a as? T?
 
 fun box(): String {
-    val a = A()
-    val b = B()
-    val c = C()
+    konst a = A()
+    konst b = B()
+    konst c = C()
 
     success("notNullToNullableT<A>(a)") { assertEquals(a, notNullToNullableT<A>(a)) }
     success("notNullToNullableT<A>(b)") { assertEquals(b, notNullToNullableT<A>(b)) }

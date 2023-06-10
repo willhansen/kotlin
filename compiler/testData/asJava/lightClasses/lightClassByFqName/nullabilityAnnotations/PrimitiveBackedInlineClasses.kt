@@ -7,7 +7,7 @@
 @JvmName("getNullableInlineClass") fun getNullableUInlineClass(): InlineClass? = null
 
 
-@JvmInline value class InlineClass(val data: Int)
+@JvmInline konstue class InlineClass(konst data: Int)
 
 
 // FIR_COMPARISON

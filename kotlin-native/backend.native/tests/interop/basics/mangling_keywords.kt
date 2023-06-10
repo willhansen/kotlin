@@ -20,7 +20,7 @@ fun main() {
     assertEquals("true", `true`)
     assertEquals("try", `try`)
     assertEquals("typealias", `typealias`)
-    assertEquals("val", `val`)
+    assertEquals("konst", `konst`)
     assertEquals("var", `var`)
     assertEquals("when", `when`)
 }

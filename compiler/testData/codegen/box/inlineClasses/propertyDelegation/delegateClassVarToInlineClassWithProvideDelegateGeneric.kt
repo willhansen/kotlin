@@ -11,7 +11,7 @@ var provideDelegateInvoked = 0
 var setterInvoked = 0
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class DelegateFactory<T: Int>(val default: T) {
+konstue class DelegateFactory<T: Int>(konst default: T) {
     operator fun provideDelegate(thisRef: Any?, prop: Any?): Delegate<T> {
         provideDelegateInvoked++
         return Delegate(default)
@@ -19,7 +19,7 @@ value class DelegateFactory<T: Int>(val default: T) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Delegate<T: Int>(val default: T) {
+konstue class Delegate<T: Int>(konst default: T) {
 
     operator fun getValue(thisRef: Any?, prop: Any?) =
         (thisRef as? Foo)?.a ?: default
@@ -34,7 +34,7 @@ value class Delegate<T: Int>(val default: T) {
 
 
 fun box(): String {
-    val x = Foo()
+    konst x = Foo()
     if (x.d != 42) throw AssertionError()
 
     x.d = 1234

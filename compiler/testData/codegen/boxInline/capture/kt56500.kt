@@ -1,8 +1,8 @@
 // NO_CHECK_LAMBDA_INLINING
 // FILE: 1.kt
-class Box<T>(val value: T) {
+class Box<T>(konst konstue: T) {
     inline fun run(block: (T) -> Unit) {
-        block(value)
+        block(konstue)
     }
 }
 
@@ -10,7 +10,7 @@ class Box<T>(val value: T) {
 fun box(): String {
     var result: String = "fail"
     Box("OK").run { outer ->
-        val block = { result = outer }
+        konst block = { result = outer }
         block()
     }
     return result

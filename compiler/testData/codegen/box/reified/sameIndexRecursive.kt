@@ -11,8 +11,8 @@ inline fun<T1, T2, T3, T4, T5, T6, reified R> recursive(
 }
 
 fun box(): String {
-    val y = createArray(5) { Pair(1, "test") }
-    val x = recursive<Int, Int, Int, Int, Int, Int, String>(){ "abc" }
+    konst y = createArray(5) { Pair(1, "test") }
+    konst x = recursive<Int, Int, Int, Int, Int, Int, String>(){ "abc" }
 
     require(y.first.all { it == 1 } )
     require(y.second.all { it == "test" })

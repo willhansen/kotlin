@@ -25,7 +25,7 @@ import java.lang.reflect.WildcardType
 class ContainerConsistencyException(message: String) : Exception(message)
 
 interface ComponentContainer {
-    val containerId: String
+    konst containerId: String
 
     fun createResolveContext(requestingDescriptor: ValueDescriptor): ValueResolveContext
 }
@@ -41,14 +41,14 @@ object DynamicComponentDescriptor : ValueDescriptor {
 }
 
 class StorageComponentContainer(
-    private val id: String,
+    private konst id: String,
     parent: StorageComponentContainer? = null
 ) : ComponentContainer, ComponentProvider, Closeable {
-    val unknownContext: ComponentResolveContext by lazy {
-        val parentContext = parent?.let { ComponentResolveContext(it, DynamicComponentDescriptor) }
+    konst unknownContext: ComponentResolveContext by lazy {
+        konst parentContext = parent?.let { ComponentResolveContext(it, DynamicComponentDescriptor) }
         ComponentResolveContext(this, DynamicComponentDescriptor, parentContext)
     }
-    private val componentStorage: ComponentStorage = ComponentStorage(id, parent?.componentStorage)
+    private konst componentStorage: ComponentStorage = ComponentStorage(id, parent?.componentStorage)
 
     override fun createResolveContext(requestingDescriptor: ValueDescriptor): ValueResolveContext {
         if (requestingDescriptor == DynamicComponentDescriptor) // cache unknown component descriptor
@@ -77,14 +77,14 @@ class StorageComponentContainer(
 
     private fun resolveIterable(request: Type, context: ValueResolveContext): ValueDescriptor? {
         if (request !is ParameterizedType) return null
-        val rawType = request.rawType
+        konst rawType = request.rawType
         if (rawType != Iterable::class.java) return null
-        val typeArguments = request.actualTypeArguments
+        konst typeArguments = request.actualTypeArguments
         if (typeArguments.size != 1) return null
-        val iterableTypeArgument = typeArguments[0]
-        val iterableType = when (iterableTypeArgument) {
+        konst iterableTypeArgument = typeArguments[0]
+        konst iterableType = when (iterableTypeArgument) {
             is WildcardType -> {
-                val upperBounds = iterableTypeArgument.upperBounds
+                konst upperBounds = iterableTypeArgument.upperBounds
                 if (upperBounds.size != 1) return null
                 upperBounds[0]
             }
@@ -110,15 +110,15 @@ class StorageComponentContainer(
     }
 
     override fun <T> create(request: Class<T>): T {
-        val constructorBinding = request.bindToConstructor(containerId, unknownContext)
-        val args = constructorBinding.argumentDescriptors.map { it.getValue() }.toTypedArray()
+        konst constructorBinding = request.bindToConstructor(containerId, unknownContext)
+        konst args = constructorBinding.argumentDescriptors.map { it.getValue() }.toTypedArray()
         return runWithUnwrappingInvocationException {
             @Suppress("UNCHECKED_CAST")
             constructorBinding.constructor.newInstance(*args) as T
         }
     }
 
-    override val containerId
+    override konst containerId
         get() = "Container: $id"
 
     override fun toString() = containerId

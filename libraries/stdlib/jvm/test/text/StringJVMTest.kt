@@ -14,11 +14,11 @@ import kotlin.test.*
 class StringJVMTest {
 
     @Test fun testSplitByPattern() = withOneCharSequenceArg("ab1cd2def3") { s ->
-        val isDigit = "\\d".toRegex()
+        konst isDigit = "\\d".toRegex()
         assertEquals(listOf("ab", "cd", "def", ""), s.split(isDigit))
         assertEquals(listOf("ab", "cd", "def3"), s.split(isDigit, 3))
 
-        // deprecation replacement equivalence
+        // deprecation replacement equikonstence
         assertEquals("\\d".toPattern().split(s).toList(), s.split("\\d".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray().toList())
 
         assertFails {
@@ -53,16 +53,16 @@ class StringJVMTest {
     }
 
     @Test fun toByteArrayEncodings() {
-        val s = "hello®"
+        konst s = "hello®"
         assertEquals(String(s.toByteArray()), String(s.toByteArray(Charsets.UTF_8)))
     }
 
     @Test fun toCharArray() {
-        val s = "hello"
-        val chars = s.toCharArray()
+        konst s = "hello"
+        konst chars = s.toCharArray()
         assertArrayNotSameButEquals(charArrayOf('h', 'e', 'l', 'l', 'o'), chars)
 
-        val buffer = CharArray(4)
+        konst buffer = CharArray(4)
         s.toCharArray(buffer, 2, 1, 3)
         assertArrayNotSameButEquals(charArrayOf('\u0000', '\u0000', 'e', 'l'), buffer)
     }
@@ -80,7 +80,7 @@ class StringJVMTest {
             assertEquals(expected, string.capitalize())
             assertEquals(expected, string.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
         }
-        // Case mapping that results in multiple characters (validating Character.toUpperCase was not used).
+        // Case mapping that results in multiple characters (konstidating Character.toUpperCase was not used).
         assertEquals("SSßß", "ßßß".capitalize())
         assertEquals("Ssßß", "ßßß".replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() })
 
@@ -114,7 +114,7 @@ class StringJVMTest {
         testCapitalizeLocale("İii", "iii", Locale("tr", "TR"))
         testCapitalizeLocale("Iii", "iii", Locale.US)
 
-        // Case mapping that results in multiple characters (validating Character.toUpperCase was not used).
+        // Case mapping that results in multiple characters (konstidating Character.toUpperCase was not used).
         assertEquals("SSßß", "ßßß".capitalize(Locale.US))
         assertEquals("Ssßß", "ßßß".replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.US) else it.toString() })
 

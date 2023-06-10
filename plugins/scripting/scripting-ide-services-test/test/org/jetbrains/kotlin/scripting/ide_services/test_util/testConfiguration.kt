@@ -19,10 +19,10 @@ import kotlin.script.experimental.util.LinkedSnippet
 import kotlin.system.measureTimeMillis
 
 class TestConf {
-    private val runs = mutableListOf<Run>()
+    private konst runs = mutableListOf<Run>()
 
     fun run(setup: (Run).() -> Unit) {
-        val r = Run()
+        konst r = Run()
         r.setup()
         runs.add(r)
     }
@@ -31,19 +31,19 @@ class TestConf {
 
     class Run {
         private var _doCompile = false
-        val doCompile: Unit
+        konst doCompile: Unit
             get() {
                 _doCompile = true
             }
 
         private var _doComplete = false
-        val doComplete: Unit
+        konst doComplete: Unit
             get() {
                 _doComplete = true
             }
 
         private var _doErrorCheck = false
-        val doErrorCheck: Unit
+        konst doErrorCheck: Unit
             get() {
                 _doErrorCheck = true
             }
@@ -72,19 +72,19 @@ class TestConf {
             ) to _expected.collect()
         }
 
-        class Expected(private val run: Run) {
-            val completions = ExpectedList<SourceCodeCompletionVariant>(run::doComplete)
+        class Expected(private konst run: Run) {
+            konst completions = ExpectedList<SourceCodeCompletionVariant>(run::doComplete)
             fun addCompletion(text: String, displayText: String, tail: String, icon: String, deprecationLevel: DeprecationLevel? = null) {
                 completions.add(SourceCodeCompletionVariant(text, displayText, tail, icon, deprecationLevel))
             }
 
-            val errors = ExpectedList<ScriptDiagnostic>(run::doErrorCheck)
+            konst errors = ExpectedList<ScriptDiagnostic>(run::doErrorCheck)
             fun addError(startLine: Int, startCol: Int, endLine: Int, endCol: Int, message: String, severity: String) {
                 errors.add(
                     ScriptDiagnostic(
                         ScriptDiagnostic.unspecifiedError,
                         message,
-                        ScriptDiagnostic.Severity.valueOf(severity),
+                        ScriptDiagnostic.Severity.konstueOf(severity),
                         location = SourceCode.Location(
                             SourceCode.Position(startLine, startCol),
                             SourceCode.Position(endLine, endCol)
@@ -104,9 +104,9 @@ class TestConf {
 }
 
 fun test(setup: (TestConf).() -> Unit) {
-    val test = TestConf()
+    konst test = TestConf()
     test.setup()
-    runBlocking { checkEvaluateInRepl(simpleScriptCompilationConfiguration, test.collect()) }
+    runBlocking { checkEkonstuateInRepl(simpleScriptCompilationConfiguration, test.collect()) }
 }
 
 enum class ComparisonType {
@@ -114,50 +114,50 @@ enum class ComparisonType {
 }
 
 data class CSVLoggingInfoItem(
-    val writer: Writer,
-    val xValue: Int,
-    val prefix: String = "",
+    konst writer: Writer,
+    konst xValue: Int,
+    konst prefix: String = "",
 ) {
-    fun writeValue(value: Any) {
-        writer.write("$prefix$xValue;$value\n")
+    fun writeValue(konstue: Any) {
+        writer.write("$prefix$xValue;$konstue\n")
         writer.flush()
     }
 }
 
 data class CSVLoggingInfo(
-    val compile: CSVLoggingInfoItem? = null,
-    val complete: CSVLoggingInfoItem? = null,
-    val analyze: CSVLoggingInfoItem? = null,
+    konst compile: CSVLoggingInfoItem? = null,
+    konst complete: CSVLoggingInfoItem? = null,
+    konst analyze: CSVLoggingInfoItem? = null,
 )
 
 data class RunRequest(
-    val cursor: Int?,
-    val code: String,
-    val doCompile: Boolean,
-    val doComplete: Boolean,
-    val doErrorCheck: Boolean,
-    val compilationConfiguration: ScriptCompilationConfiguration?,
-    val loggingInfo: CSVLoggingInfo?,
+    konst cursor: Int?,
+    konst code: String,
+    konst doCompile: Boolean,
+    konst doComplete: Boolean,
+    konst doErrorCheck: Boolean,
+    konst compilationConfiguration: ScriptCompilationConfiguration?,
+    konst loggingInfo: CSVLoggingInfo?,
 )
 
 typealias ListCheck<T> = (List<T>) -> Unit
 
 interface ExpectedOptions<T> {
-    val mode: ComparisonType
-    val size: Int
-    val checkFunction: ListCheck<T>?
+    konst mode: ComparisonType
+    konst size: Int
+    konst checkFunction: ListCheck<T>?
 }
 
-class ExpectedList<T>(private val runProperty: KProperty0<Unit>) : ExpectedOptions<T> {
-    val list = mutableListOf<T>()
+class ExpectedList<T>(private konst runProperty: KProperty0<Unit>) : ExpectedOptions<T> {
+    konst list = mutableListOf<T>()
 
     override var mode = ComparisonType.DONT_CHECK
     override var size = 0
-        set(value) {
+        set(konstue) {
             if (mode == ComparisonType.DONT_CHECK)
                 mode = ComparisonType.COMPARE_SIZE
             runProperty.get()
-            field = value
+            field = konstue
         }
 
     fun add(elem: T) {
@@ -178,26 +178,26 @@ class ExpectedList<T>(private val runProperty: KProperty0<Unit>) : ExpectedOptio
     }
 }
 
-class ExpectedNullableVar<T>(private val runProperty: KProperty0<Unit>) {
+class ExpectedNullableVar<T>(private konst runProperty: KProperty0<Unit>) {
     private var variable: T? = null
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T? = variable
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: T?) {
         runProperty.get()
-        variable = value
+        variable = konstue
     }
 }
 
 data class ExpectedResult(
-    val completions: ExpectedList<SourceCodeCompletionVariant>,
-    val errors: ExpectedList<ScriptDiagnostic>,
-    val resultType: String?,
+    konst completions: ExpectedList<SourceCodeCompletionVariant>,
+    konst errors: ExpectedList<ScriptDiagnostic>,
+    konst resultType: String?,
 )
 
 data class ActualResult(
-    val completions: List<SourceCodeCompletionVariant>,
-    val errors: List<ScriptDiagnostic>,
-    val resultType: String?,
+    konst completions: List<SourceCodeCompletionVariant>,
+    konst errors: List<ScriptDiagnostic>,
+    konst resultType: String?,
 )
 
 private fun nextCodeLine(code: String, lineCounter: AtomicInteger): SourceCode =
@@ -206,23 +206,23 @@ private fun nextCodeLine(code: String, lineCounter: AtomicInteger): SourceCode =
         code
     )
 
-private suspend fun evaluateInRepl(
+private suspend fun ekonstuateInRepl(
     compilationConfiguration: ScriptCompilationConfiguration,
     snippets: List<RunRequest>,
     lineCounter: AtomicInteger
 ): List<ResultWithDiagnostics<ActualResult>> {
-    val compiler = KJvmReplCompilerWithIdeServices()
+    konst compiler = KJvmReplCompilerWithIdeServices()
     return snippets.map { runRequest ->
         with(runRequest) {
-            val newCompilationConfiguration = this.compilationConfiguration?.let {
+            konst newCompilationConfiguration = this.compilationConfiguration?.let {
                 ScriptCompilationConfiguration(compilationConfiguration, it)
             } ?: compilationConfiguration
 
-            val pos = SourceCode.Position(0, 0, cursor)
-            val codeLine = nextCodeLine(code, lineCounter)
-            val completionRes = if (doComplete && cursor != null) {
+            konst pos = SourceCode.Position(0, 0, cursor)
+            konst codeLine = nextCodeLine(code, lineCounter)
+            konst completionRes = if (doComplete && cursor != null) {
                 var res: ResultWithDiagnostics<ReplCompletionResult>?
-                val timeMillis = measureTimeMillis { res = compiler.complete(codeLine, pos, newCompilationConfiguration) }
+                konst timeMillis = measureTimeMillis { res = compiler.complete(codeLine, pos, newCompilationConfiguration) }
 
                 loggingInfo?.complete?.writeValue(timeMillis)
 
@@ -231,12 +231,12 @@ private suspend fun evaluateInRepl(
                 emptyList()
             }
 
-            val analysisResult = if (doErrorCheck) {
-                val codeLineForErrorCheck = nextCodeLine(code, lineCounter)
+            konst analysisResult = if (doErrorCheck) {
+                konst codeLineForErrorCheck = nextCodeLine(code, lineCounter)
 
                 var res: ReplAnalyzerResult?
-                val timeMillis = measureTimeMillis {
-                    res = compiler.analyze(codeLineForErrorCheck, SourceCode.Position(0, 0), newCompilationConfiguration).valueOrNull()
+                konst timeMillis = measureTimeMillis {
+                    res = compiler.analyze(codeLineForErrorCheck, SourceCode.Position(0, 0), newCompilationConfiguration).konstueOrNull()
                 }
 
                 loggingInfo?.analyze?.writeValue(timeMillis)
@@ -246,13 +246,13 @@ private suspend fun evaluateInRepl(
                 null
             } ?: ReplAnalyzerResult()
 
-            val errorsSequence = analysisResult[ReplAnalyzerResult.analysisDiagnostics]!!
-            val resultType = analysisResult[ReplAnalyzerResult.renderedResultType]
+            konst errorsSequence = analysisResult[ReplAnalyzerResult.analysisDiagnostics]!!
+            konst resultType = analysisResult[ReplAnalyzerResult.renderedResultType]
 
             if (doCompile) {
-                val codeLineForCompilation = nextCodeLine(code, lineCounter)
-                val compilationResult: ResultWithDiagnostics<LinkedSnippet<KJvmCompiledScript>>
-                val timeMillis = measureTimeMillis {
+                konst codeLineForCompilation = nextCodeLine(code, lineCounter)
+                konst compilationResult: ResultWithDiagnostics<LinkedSnippet<KJvmCompiledScript>>
+                konst timeMillis = measureTimeMillis {
                     compilationResult = compiler.compile(codeLineForCompilation, newCompilationConfiguration)
                 }
                 if (compilationResult is ResultWithDiagnostics.Failure) {
@@ -289,21 +289,21 @@ private fun <T> checkLists(index: Int, checkName: String, expected: List<T>, act
     }
 }
 
-private suspend fun checkEvaluateInRepl(
+private suspend fun checkEkonstuateInRepl(
     compilationConfiguration: ScriptCompilationConfiguration,
     testData: List<Pair<RunRequest, ExpectedResult>>
 ) {
-    val (snippets, expected) = testData.unzip()
-    val expectedIter = expected.iterator()
-    evaluateInRepl(compilationConfiguration, snippets, AtomicInteger()).forEachIndexed { index, res ->
+    konst (snippets, expected) = testData.unzip()
+    konst expectedIter = expected.iterator()
+    ekonstuateInRepl(compilationConfiguration, snippets, AtomicInteger()).forEachIndexed { index, res ->
         when (res) {
             is ResultWithDiagnostics.Failure -> Assert.fail("#$index: Expected result, got $res")
             is ResultWithDiagnostics.Success -> {
-                val (expectedCompletions, expectedErrors, expectedResultType) = expectedIter.next()
-                val (completionsRes, errorsRes, resultType) = res.value
+                konst (expectedCompletions, expectedErrors, expectedResultType) = expectedIter.next()
+                konst (completionsRes, errorsRes, resultType) = res.konstue
 
                 checkLists(index, "completions", expectedCompletions.list, completionsRes, expectedCompletions)
-                val expectedErrorsWithPath = expectedErrors.list.map {
+                konst expectedErrorsWithPath = expectedErrors.list.map {
                     if (it.location != null) it.copy(sourcePath = errorsRes.firstOrNull()?.sourcePath) else it
                 }
                 checkLists(index, "errors", expectedErrorsWithPath, errorsRes, expectedErrors)

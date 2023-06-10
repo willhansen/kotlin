@@ -1,21 +1,21 @@
 fun box(): String {
-    val aByte: Array<Byte> = arrayOf<Byte>(1)
-    val bByte: ByteArray = byteArrayOf(1)
+    konst aByte: Array<Byte> = arrayOf<Byte>(1)
+    konst bByte: ByteArray = byteArrayOf(1)
     
-    val aShort: Array<Short> = arrayOf<Short>(1)
-    val bShort: ShortArray = shortArrayOf(1)
+    konst aShort: Array<Short> = arrayOf<Short>(1)
+    konst bShort: ShortArray = shortArrayOf(1)
     
-    val aInt: Array<Int> = arrayOf<Int>(1)
-    val bInt: IntArray = intArrayOf(1)
+    konst aInt: Array<Int> = arrayOf<Int>(1)
+    konst bInt: IntArray = intArrayOf(1)
     
-    val aLong: Array<Long> = arrayOf<Long>(1)
-    val bLong: LongArray = longArrayOf(1)
+    konst aLong: Array<Long> = arrayOf<Long>(1)
+    konst bLong: LongArray = longArrayOf(1)
 
-    val aFloat: Array<Float> = arrayOf<Float>(1.0f)
-    val bFloat: FloatArray = floatArrayOf(1.0f)
+    konst aFloat: Array<Float> = arrayOf<Float>(1.0f)
+    konst bFloat: FloatArray = floatArrayOf(1.0f)
     
-    val aDouble: Array<Double> = arrayOf<Double>(1.0)
-    val bDouble: DoubleArray = doubleArrayOf(1.0)
+    konst aDouble: Array<Double> = arrayOf<Double>(1.0)
+    konst bDouble: DoubleArray = doubleArrayOf(1.0)
 
     aByte[0]--
     bByte[0]--

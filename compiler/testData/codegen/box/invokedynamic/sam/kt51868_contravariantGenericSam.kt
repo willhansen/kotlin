@@ -10,7 +10,7 @@
 
 fun box(): String {
     var result = "Fail"
-    val r = Request { obj: CharSequence ->
+    konst r = Request { obj: CharSequence ->
         result = obj as String
     }
     r.deliver("OK")

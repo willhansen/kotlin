@@ -156,7 +156,7 @@ enum class G {
     }
 }
 
-val z = object : A() {
+konst z = object : A() {
     tailrec override fun foo(x: Int) {
         foo(x)
     }

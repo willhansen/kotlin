@@ -37,8 +37,8 @@ interface KonanArtifactWithLibrariesSpec: KonanArtifactSpec {
 interface KonanBuildingSpec: KonanArtifactWithLibrariesSpec {
     fun dumpParameters(flag: Boolean)
 
-    fun extraOpts(vararg values: Any)
-    fun extraOpts(values: List<Any>)
+    fun extraOpts(vararg konstues: Any)
+    fun extraOpts(konstues: List<Any>)
 }
 
 interface KonanCompileSpec: KonanBuildingSpec {
@@ -68,8 +68,8 @@ interface KonanCompileSpec: KonanBuildingSpec {
 
     // DSL. Other parameters.
 
-    fun linkerOpts(vararg values: String)
-    fun linkerOpts(values: List<String>)
+    fun linkerOpts(vararg konstues: String)
+    fun linkerOpts(konstues: List<String>)
 
     fun enableDebug(flag: Boolean)
     fun noStdLib(flag: Boolean)
@@ -95,22 +95,22 @@ interface KonanInteropSpec: KonanBuildingSpec {
 
     fun defFile(file: Any)
 
-    fun packageName(value: String)
+    fun packageName(konstue: String)
 
-    fun compilerOpts(vararg values: String)
+    fun compilerOpts(vararg konstues: String)
 
     fun header(file: Any) = headers(file)
     fun headers(vararg files: Any)
     fun headers(files: FileCollection)
 
-    fun includeDirs(vararg values: Any)
+    fun includeDirs(vararg konstues: Any)
 
     fun includeDirs(closure: Closure<Unit>)
     fun includeDirs(action: Action<IncludeDirectoriesSpec>)
     fun includeDirs(configure: IncludeDirectoriesSpec.() -> Unit)
 
-    fun linkerOpts(vararg values: String)
-    fun linkerOpts(values: List<String>)
+    fun linkerOpts(vararg konstues: String)
+    fun linkerOpts(konstues: List<String>)
 
     fun link(vararg files: Any)
     fun link(files: FileCollection)

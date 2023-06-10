@@ -17,12 +17,12 @@ import kotlin.test.fail
 public class CommonizeLibcurlTest {
 
     @get:Rule
-    public val temporaryOutputDirectory: TemporaryFolder = TemporaryFolder()
+    public konst temporaryOutputDirectory: TemporaryFolder = TemporaryFolder()
 
     @Test
     public fun commonizeSuccessfully() {
-        val libraries = File("testData/libcurl").walkTopDown().filter { it.isFile && it.extension == "klib" }.toSet()
-        val commonizer = CliCommonizer(this::class.java.classLoader)
+        konst libraries = File("testData/libcurl").walkTopDown().filter { it.isFile && it.extension == "klib" }.toSet()
+        konst commonizer = CliCommonizer(this::class.java.classLoader)
 
         commonizer.commonizeLibraries(
             konanHome = konanHome,
@@ -39,7 +39,7 @@ public class CommonizeLibcurlTest {
             logLevel = CommonizerLogLevel.Info
         )
 
-        val commonOutputDirectory = temporaryOutputDirectory.root.resolve(CommonizerTarget(LINUX_X64, LINUX_ARM64).identityString)
+        konst commonOutputDirectory = temporaryOutputDirectory.root.resolve(CommonizerTarget(LINUX_X64, LINUX_ARM64).identityString)
 
         assertTrue(
             commonOutputDirectory.exists(),
@@ -64,8 +64,8 @@ public class CommonizeLibcurlTest {
 
     @Test
     public fun `commonizeSuccessfully with unsupported targets`() {
-        val libraries = File("testData/libcurl").walkTopDown().filter { it.isFile && it.extension == "klib" }.toSet()
-        val commonizer = CliCommonizer(this::class.java.classLoader)
+        konst libraries = File("testData/libcurl").walkTopDown().filter { it.isFile && it.extension == "klib" }.toSet()
+        konst commonizer = CliCommonizer(this::class.java.classLoader)
 
         commonizer.commonizeLibraries(
             konanHome = konanHome,
@@ -81,7 +81,7 @@ public class CommonizeLibcurlTest {
             outputDirectory = temporaryOutputDirectory.root
         )
 
-        val commonOutputDirectory = temporaryOutputDirectory.root
+        konst commonOutputDirectory = temporaryOutputDirectory.root
             .resolve(CommonizerTarget(LINUX_X64, LINUX_ARM64, MACOS_X64).identityString)
 
         assertContainsManifestWithContent(commonOutputDirectory, "native_targets=linux_arm64 linux_x64")
@@ -93,7 +93,7 @@ public class CommonizeLibcurlTest {
 }
 
 private fun assertContainsManifestWithContent(directory: File, content: String) {
-    val manifest = directory.walkTopDown().firstOrNull { it.name == "manifest" }
+    konst manifest = directory.walkTopDown().firstOrNull { it.name == "manifest" }
         ?: fail("${directory.name} does not contain any manifest")
 
     assertTrue(

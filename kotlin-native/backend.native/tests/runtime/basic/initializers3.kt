@@ -7,7 +7,7 @@ package runtime.basic.initializers3
 
 import kotlin.test.*
 
-class Foo(val bar: Int)
+class Foo(konst bar: Int)
 
 var x = Foo(42)
 

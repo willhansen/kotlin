@@ -4,4 +4,4 @@ class A {
     }
 }
 
-val v = <caret>A(1)
+konst v = <caret>A(1)

@@ -14,7 +14,7 @@ class TypeParameterCommonizer(typeCommonizer: TypeCommonizer) : AbstractStandard
     private lateinit var name: CirName
     private var isReified = false
     private lateinit var variance: Variance
-    private val upperBounds = TypeParameterUpperBoundsCommonizer(typeCommonizer)
+    private konst upperBounds = TypeParameterUpperBoundsCommonizer(typeCommonizer)
 
     override fun commonizationResult(): CirTypeParameter? {
         return CirTypeParameter(

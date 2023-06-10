@@ -5,24 +5,24 @@
 package foo
 
 external class A(x: Int) {
-    val x: Int
+    konst x: Int
 
     fun foo(y: Int): Int = definedExternally
 
     class Nested {
-        val y: Int
+        konst y: Int
     }
 }
 
 external object B {
-    val x: Int = definedExternally
+    konst x: Int = definedExternally
 
     fun foo(y: Int): Int = definedExternally
 }
 
 external fun foo(y: Int): Int = definedExternally
 
-external val bar: Int = definedExternally
+external konst bar: Int = definedExternally
 
 external var mbar: Int = definedExternally
 
@@ -30,11 +30,11 @@ external var mbar: Int = definedExternally
 package foo
 
 fun box(): String {
-    val a = A(23)
+    konst a = A(23)
     assertEquals(23, a.x)
     assertEquals(65, a.foo(42))
 
-    val nested = A.Nested()
+    konst nested = A.Nested()
     assertEquals(55, nested.y)
 
     assertEquals(123, B.x)

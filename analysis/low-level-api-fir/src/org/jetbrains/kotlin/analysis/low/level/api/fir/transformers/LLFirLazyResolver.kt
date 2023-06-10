@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.fir.resolve.ScopeSession
 import org.jetbrains.kotlin.fir.resolve.transformers.body.resolve.FirTowerDataContextCollector
 
 internal abstract class LLFirLazyResolver(
-    val resolverPhase: FirResolvePhase,
+    konst resolverPhase: FirResolvePhase,
 ) {
     abstract fun resolve(
         target: LLFirResolveTarget,
@@ -57,7 +57,7 @@ internal abstract class LLFirLazyResolver(
 
     private fun checkFunctionParametersAreResolved(declaration: FirDeclaration) {
         if (declaration is FirFunction) {
-            for (parameter in declaration.valueParameters) {
+            for (parameter in declaration.konstueParameters) {
                 checkIsResolved(parameter)
             }
         }

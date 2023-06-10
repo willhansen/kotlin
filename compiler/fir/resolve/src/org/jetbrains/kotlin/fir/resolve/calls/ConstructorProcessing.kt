@@ -42,8 +42,8 @@ internal fun FirScope.processConstructorsByName(
     includeInnerConstructors: Boolean,
     processor: (FirCallableSymbol<*>) -> Unit
 ) {
-    val (matchedClassifierSymbol, substitutor) = getFirstClassifierOrNull(callInfo, session, bodyResolveComponents) ?: return
-    val matchedClassSymbol = matchedClassifierSymbol as? FirClassLikeSymbol<*> ?: return
+    konst (matchedClassifierSymbol, substitutor) = getFirstClassifierOrNull(callInfo, session, bodyResolveComponents) ?: return
+    konst matchedClassSymbol = matchedClassifierSymbol as? FirClassLikeSymbol<*> ?: return
 
     processConstructors(
         matchedClassSymbol,
@@ -77,7 +77,7 @@ internal fun FirScope.processFunctionsAndConstructorsByName(
     processFunctionsByName(callInfo.name, processor)
 }
 
-private data class SymbolWithSubstitutor(val symbol: FirClassifierSymbol<*>, val substitutor: ConeSubstitutor)
+private data class SymbolWithSubstitutor(konst symbol: FirClassifierSymbol<*>, konst substitutor: ConeSubstitutor)
 
 fun FirScope.getSingleVisibleClassifier(
     session: FirSession,
@@ -106,7 +106,7 @@ private fun FirDeclaration.isInvisibleOrHidden(session: FirSession, bodyResolveC
         }
     }
 
-    val deprecation = symbol.getDeprecationForCallSite(session.languageVersionSettings.apiVersion)
+    konst deprecation = symbol.getDeprecationForCallSite(session.languageVersionSettings.apiVersion)
     return deprecation != null && deprecation.deprecationLevel == DeprecationLevelValue.HIDDEN
 }
 
@@ -119,8 +119,8 @@ private fun FirScope.getFirstClassifierOrNull(
     var isAmbiguousResult = false
     var result: SymbolWithSubstitutor? = null
     processClassifiersByNameWithSubstitution(callInfo.name) { symbol, substitutor ->
-        val classifierDeclaration = symbol.fir
-        val isSuccessCandidate = !classifierDeclaration.isInvisibleOrHidden(session, bodyResolveComponents)
+        konst classifierDeclaration = symbol.fir
+        konst isSuccessCandidate = !classifierDeclaration.isInvisibleOrHidden(session, bodyResolveComponents)
 
         when {
             isSuccessCandidate && !isSuccessResult -> {
@@ -157,7 +157,7 @@ private fun processSyntheticConstructors(
     processor: (FirFunctionSymbol<*>) -> Unit,
     bodyResolveComponents: BodyResolveComponents
 ) {
-    val samConstructor = bodyResolveComponents.samResolver.getSamConstructor(matchedSymbol.fir)
+    konst samConstructor = bodyResolveComponents.samResolver.getSamConstructor(matchedSymbol.fir)
     if (samConstructor != null) {
         processor(samConstructor.symbol)
     }
@@ -172,18 +172,18 @@ private fun processConstructors(
     includeInnerConstructors: Boolean
 ) {
     whileAnalysing(session, matchedSymbol.fir) {
-        val scope = when (matchedSymbol) {
+        konst scope = when (matchedSymbol) {
             is FirTypeAliasSymbol -> {
                 matchedSymbol.lazyResolveToPhase(FirResolvePhase.TYPES)
-                val type = matchedSymbol.fir.expandedTypeRef.coneTypeUnsafe<ConeClassLikeType>().fullyExpandedType(session)
-                val basicScope = type.scope(
+                konst type = matchedSymbol.fir.expandedTypeRef.coneTypeUnsafe<ConeClassLikeType>().fullyExpandedType(session)
+                konst basicScope = type.scope(
                     session,
                     bodyResolveComponents.scopeSession,
                     FakeOverrideTypeCalculator.DoNothing,
                     requiredMembersPhase = FirResolvePhase.STATUS,
                 )
 
-                val outerType = bodyResolveComponents.outerClassManager.outerType(type)
+                konst outerType = bodyResolveComponents.outerClassManager.outerType(type)
 
                 if (basicScope != null &&
                     (matchedSymbol.fir.typeParameters.isNotEmpty() || outerType != null || type.typeArguments.isNotEmpty())
@@ -196,7 +196,7 @@ private fun processConstructors(
                 } else basicScope
             }
             is FirClassSymbol -> {
-                val firClass = matchedSymbol.fir as FirClass
+                konst firClass = matchedSymbol.fir as FirClass
                 when (firClass.classKind) {
                     ClassKind.INTERFACE -> null
                     else -> firClass.scopeForClass(
@@ -220,14 +220,14 @@ private fun processConstructors(
 }
 
 private class TypeAliasConstructorsSubstitutingScope(
-    private val typeAliasSymbol: FirTypeAliasSymbol,
-    private val delegatingScope: FirScope,
-    private val outerType: ConeClassLikeType?,
+    private konst typeAliasSymbol: FirTypeAliasSymbol,
+    private konst delegatingScope: FirScope,
+    private konst outerType: ConeClassLikeType?,
 ) : FirScope() {
 
     override fun processDeclaredConstructors(processor: (FirConstructorSymbol) -> Unit) {
         delegatingScope.processDeclaredConstructors wrapper@{ originalConstructorSymbol ->
-            val typeParameters = typeAliasSymbol.fir.typeParameters
+            konst typeParameters = typeAliasSymbol.fir.typeParameters
 
             processor(
                 buildConstructorCopy(originalConstructorSymbol.fir) {

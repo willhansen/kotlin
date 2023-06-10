@@ -11,11 +11,11 @@ fun f() {
     s1 = s
     s1.length
     // It's just an assignment without smartcast
-    val s2 = s
+    konst s2 = s
     // But smartcast can be done here
     s2.length
     // And also here
-    val s3 = s.toString()
+    konst s3 = s.toString()
     s3.length
   }
 }

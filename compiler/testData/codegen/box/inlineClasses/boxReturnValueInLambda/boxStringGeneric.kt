@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X<T: String>(val x: T)
+konstue class X<T: String>(konst x: T)
 
 fun useX(x: X<String>): String = x.x
 

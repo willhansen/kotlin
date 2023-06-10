@@ -1,8 +1,8 @@
 // FILE: test.kt
-class A(val value: String)
+class A(konst konstue: String)
 
 fun box(): String {
-    val ref = A::value
+    konst ref = A::konstue
     return ref(A("OK"))
 }
 

@@ -137,9 +137,9 @@ public class KtTestUtil {
     }
 
     private static String getStringProperty(@NotNull String propertyName) {
-        String value = System.getProperty(propertyName);
-        if (value != null) {
-            return value;
+        String konstue = System.getProperty(propertyName);
+        if (konstue != null) {
+            return konstue;
         }
         return System.getenv(propertyName);
     }
@@ -195,7 +195,7 @@ public class KtTestUtil {
         File androidJarFile = androidJarProp == null ? null : new File(androidJarProp);
         if (androidJarFile == null || !androidJarFile.isFile()) {
             throw new RuntimeException(
-                    "Unable to get a valid path from 'android.jar' property (" +
+                    "Unable to get a konstid path from 'android.jar' property (" +
                     androidJarProp +
                     "), please point it to the 'android.jar' file location");
         }
@@ -208,7 +208,7 @@ public class KtTestUtil {
         File androidSdkDir = androidSdkProp == null ? null : new File(androidSdkProp);
         if (androidSdkDir == null || !androidSdkDir.isDirectory()) {
             throw new RuntimeException(
-                    "Unable to get a valid path from 'android.sdk' property (" +
+                    "Unable to get a konstid path from 'android.sdk' property (" +
                     androidSdkProp +
                     "), please point it to the android SDK location");
         }
@@ -374,7 +374,7 @@ public class KtTestUtil {
     @Nullable
     public static String getMethodMetadata(Method method) {
         TestMetadata testMetadata = method.getAnnotation(TestMetadata.class);
-        return (testMetadata != null) ? testMetadata.value() : null;
+        return (testMetadata != null) ? testMetadata.konstue() : null;
     }
 
     private static Set<String> collectMethodsMetadata(Class<?> testCaseClass) {
@@ -410,7 +410,7 @@ public class KtTestUtil {
     private static void assertTestClassPresentByMetadata(@NotNull Class<?> outerClass, @NotNull File testDataDir) {
         for (Class<?> nestedClass : outerClass.getDeclaredClasses()) {
             TestMetadata testMetadata = nestedClass.getAnnotation(TestMetadata.class);
-            if (testMetadata != null && testMetadata.value().equals(getFilePath(testDataDir))) {
+            if (testMetadata != null && testMetadata.konstue().equals(getFilePath(testDataDir))) {
                 return;
             }
         }
@@ -420,7 +420,7 @@ public class KtTestUtil {
     public static String getTestsRoot(@NotNull Class<?> testCaseClass) {
         TestMetadata testClassMetadata = testCaseClass.getAnnotation(TestMetadata.class);
         KtAssert.assertNotNull("No metadata for class: " + testCaseClass, testClassMetadata);
-        return testClassMetadata.value();
+        return testClassMetadata.konstue();
     }
 
     public static String nameToCompare(@NotNull String name) {

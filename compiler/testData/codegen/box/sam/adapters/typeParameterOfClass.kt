@@ -5,8 +5,8 @@
 import java.util.*;
 
 class WeirdComparator<T> {
-    public T max(Comparator<T> comparator, T value1, T value2) {
-        return comparator.compare(value1, value2) > 0 ? value1 : value2;
+    public T max(Comparator<T> comparator, T konstue1, T konstue2) {
+        return comparator.compare(konstue1, konstue2) > 0 ? konstue1 : konstue2;
     }
 }
 
@@ -14,8 +14,8 @@ class WeirdComparator<T> {
 // FILE: 1.kt
 
 fun box(): String {
-    val wc = WeirdComparator<String>()
-    val result = wc.max({ a, b -> a.length - b.length }, "java", "kotlin")
+    konst wc = WeirdComparator<String>()
+    konst result = wc.max({ a, b -> a.length - b.length }, "java", "kotlin")
     if (result != "kotlin") return "Wrong: $result"
     return "OK"
 }

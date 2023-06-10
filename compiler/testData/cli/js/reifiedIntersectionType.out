@@ -1,5 +1,5 @@
 compiler/testData/cli/js/reifiedIntersectionType.kt:2:9: warning: variable 'flow' is never used
-    val flow = combine(
+    konst flow = combine(
         ^
 compiler/testData/cli/js/reifiedIntersectionType.kt:11:12: warning: parameter 'flows' is never used
     vararg flows: Flow<T>,
@@ -7,7 +7,7 @@ compiler/testData/cli/js/reifiedIntersectionType.kt:11:12: warning: parameter 'f
 compiler/testData/cli/js/reifiedIntersectionType.kt:12:17: warning: parameter 'transform' is never used
     crossinline transform: suspend (Array<T>) -> R
                 ^
-compiler/testData/cli/js/reifiedIntersectionType.kt:15:16: warning: parameter 'value' is never used
-fun <T> flowOf(value: T): Flow<T> = TODO()
+compiler/testData/cli/js/reifiedIntersectionType.kt:15:16: warning: parameter 'konstue' is never used
+fun <T> flowOf(konstue: T): Flow<T> = TODO()
                ^
 OK

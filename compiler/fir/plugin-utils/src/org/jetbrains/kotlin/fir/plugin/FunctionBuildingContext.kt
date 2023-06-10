@@ -20,30 +20,30 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 public sealed class FunctionBuildingContext<T : FirFunction>(
-    protected val callableId: CallableId,
+    protected konst callableId: CallableId,
     session: FirSession,
     key: GeneratedDeclarationKey,
     owner: FirClassSymbol<*>?
 ) : DeclarationBuildingContext<T>(session, key, owner) {
     protected data class ValueParameterData(
-        val name: Name,
-        val typeProvider: (List<FirTypeParameterRef>) -> ConeKotlinType,
-        val isCrossinline: Boolean,
-        val isNoinline: Boolean,
-        val isVararg: Boolean,
-        val hasDefaultValue: Boolean,
-        val key: GeneratedDeclarationKey
+        konst name: Name,
+        konst typeProvider: (List<FirTypeParameterRef>) -> ConeKotlinType,
+        konst isCrossinline: Boolean,
+        konst isNoinline: Boolean,
+        konst isVararg: Boolean,
+        konst hasDefaultValue: Boolean,
+        konst key: GeneratedDeclarationKey
     )
 
-    protected val valueParameters: MutableList<ValueParameterData> = mutableListOf()
+    protected konst konstueParameters: MutableList<ValueParameterData> = mutableListOf()
 
     /**
-     * Adds value parameter with [type] type to constructed function
+     * Adds konstue parameter with [type] type to constructed function
      *
-     * If you set [hasDefaultValue] to true then you need to generate actual default value
+     * If you set [hasDefaultValue] to true then you need to generate actual default konstue
      *   in [IrGenerationExtension]
      */
-    public fun valueParameter(
+    public fun konstueParameter(
         name: Name,
         type: ConeKotlinType,
         isCrossinline: Boolean = false,
@@ -52,17 +52,17 @@ public sealed class FunctionBuildingContext<T : FirFunction>(
         hasDefaultValue: Boolean = false,
         key: GeneratedDeclarationKey = this@FunctionBuildingContext.key
     ) {
-        valueParameter(name, { type }, isCrossinline, isNoinline, isVararg, hasDefaultValue, key)
+        konstueParameter(name, { type }, isCrossinline, isNoinline, isVararg, hasDefaultValue, key)
     }
 
     /**
-     * Adds value parameter with type provided by [typeProvider] to constructed function
+     * Adds konstue parameter with type provided by [typeProvider] to constructed function
      * Use this overload when parameter type uses type parameters of constructed declaration
      *
-     * If you set [hasDefaultValue] to true then you need to generate actual default value
+     * If you set [hasDefaultValue] to true then you need to generate actual default konstue
      *   in [IrGenerationExtension]
      */
-    public fun valueParameter(
+    public fun konstueParameter(
         name: Name,
         typeProvider: (List<FirTypeParameterRef>) -> ConeKotlinType,
         isCrossinline: Boolean = false,
@@ -71,29 +71,29 @@ public sealed class FunctionBuildingContext<T : FirFunction>(
         hasDefaultValue: Boolean = false,
         key: GeneratedDeclarationKey = this@FunctionBuildingContext.key
     ) {
-        valueParameters += ValueParameterData(name, typeProvider, isCrossinline, isNoinline, isVararg, hasDefaultValue, key)
+        konstueParameters += ValueParameterData(name, typeProvider, isCrossinline, isNoinline, isVararg, hasDefaultValue, key)
     }
 
     protected fun generateValueParameter(
-        valueParameter: ValueParameterData,
+        konstueParameter: ValueParameterData,
         containingFunctionSymbol: FirFunctionSymbol<*>,
         functionTypeParameters: List<FirTypeParameterRef>
     ): FirValueParameter {
         return buildValueParameter {
             resolvePhase = FirResolvePhase.BODY_RESOLVE
             moduleData = session.moduleData
-            origin = valueParameter.key.origin
-            returnTypeRef = valueParameter.typeProvider.invoke(functionTypeParameters).toFirResolvedTypeRef()
-            name = valueParameter.name
+            origin = konstueParameter.key.origin
+            returnTypeRef = konstueParameter.typeProvider.invoke(functionTypeParameters).toFirResolvedTypeRef()
+            name = konstueParameter.name
             symbol = FirValueParameterSymbol(name)
-            if (valueParameter.hasDefaultValue) {
+            if (konstueParameter.hasDefaultValue) {
                 // TODO: check how it will actually work in fir2ir
                 defaultValue = buildExpressionStub { typeRef = session.builtinTypes.nothingType }
             }
             this.containingFunctionSymbol = containingFunctionSymbol
-            isCrossinline = valueParameter.isCrossinline
-            isNoinline = valueParameter.isNoinline
-            isVararg = valueParameter.isVararg
+            isCrossinline = konstueParameter.isCrossinline
+            isNoinline = konstueParameter.isNoinline
+            isVararg = konstueParameter.isVararg
         }
     }
 }

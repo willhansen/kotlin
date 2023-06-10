@@ -17,5 +17,5 @@ fun <T> flow(block: suspend FlowCollector<T>.() -> Unit): Flow<T> = TODO()
 interface Flow<out T>
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }

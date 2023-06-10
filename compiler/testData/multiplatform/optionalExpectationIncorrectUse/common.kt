@@ -14,7 +14,7 @@ annotation class NotAnExpectedClass
 
 
 
-annotation class InOtherAnnotation(val a: A)
+annotation class InOtherAnnotation(konst a: A)
 
 @InOtherAnnotation(A())
 fun useInOtherAnnotation() {}

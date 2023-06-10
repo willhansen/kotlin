@@ -28,7 +28,7 @@ class KtObjectDeclaration : KtClassOrObject {
     constructor(node: ASTNode) : super(node)
     constructor(stub: KotlinObjectStub) : super(stub, KtStubElementTypes.OBJECT_DECLARATION)
 
-    private val _stub: KotlinObjectStub?
+    private konst _stub: KotlinObjectStub?
         get() = stub as? KotlinObjectStub
 
     override fun getName(): String? {
@@ -44,8 +44,8 @@ class KtObjectDeclaration : KtClassOrObject {
 
     override fun setName(@NonNls name: String): PsiElement {
         return if (nameIdentifier == null) {
-            val psiFactory = KtPsiFactory(project)
-            val result = addAfter(psiFactory.createIdentifier(name), getObjectKeyword()!!)
+            konst psiFactory = KtPsiFactory(project)
+            konst result = addAfter(psiFactory.createIdentifier(name), getObjectKeyword()!!)
             addAfter(psiFactory.createWhiteSpace(), getObjectKeyword()!!)
 
             result

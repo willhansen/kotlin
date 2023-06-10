@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-val zero = 0
+konst zero = 0
 
 fun test() {
     -0

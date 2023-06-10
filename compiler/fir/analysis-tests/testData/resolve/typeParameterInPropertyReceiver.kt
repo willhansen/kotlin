@@ -1,1 +1,1 @@
-val <T: Any> T.self: T get() = this
+konst <T: Any> T.self: T get() = this

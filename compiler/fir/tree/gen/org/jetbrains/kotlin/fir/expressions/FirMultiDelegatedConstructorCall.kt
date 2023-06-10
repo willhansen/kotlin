@@ -17,16 +17,16 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirMultiDelegatedConstructorCall : FirDelegatedConstructorCall() {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val argumentList: FirArgumentList
-    abstract override val contextReceiverArguments: List<FirExpression>
-    abstract override val constructedTypeRef: FirTypeRef
-    abstract override val dispatchReceiver: FirExpression
-    abstract override val calleeReference: FirReference
-    abstract override val isThis: Boolean
-    abstract override val isSuper: Boolean
-    abstract val delegatedConstructorCalls: List<FirDelegatedConstructorCall>
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst argumentList: FirArgumentList
+    abstract override konst contextReceiverArguments: List<FirExpression>
+    abstract override konst constructedTypeRef: FirTypeRef
+    abstract override konst dispatchReceiver: FirExpression
+    abstract override konst calleeReference: FirReference
+    abstract override konst isThis: Boolean
+    abstract override konst isSuper: Boolean
+    abstract konst delegatedConstructorCalls: List<FirDelegatedConstructorCall>
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitMultiDelegatedConstructorCall(this, data)
 

@@ -9,7 +9,7 @@ external class A {
     fun invoke(a: String): Int = definedExternally
 
     <!WRONG_ANNOTATION_TARGET!>@nativeInvoke<!>
-    val foo: Int = definedExternally
+    konst foo: Int = definedExternally
 
     <!WRONG_ANNOTATION_TARGET!>@nativeInvoke<!>
     object Obj1 {}
@@ -22,7 +22,7 @@ external class A {
         fun invoke(a: String): Int = definedExternally
 
         <!WRONG_ANNOTATION_TARGET!>@nativeInvoke<!>
-        val foo: Int = definedExternally
+        konst foo: Int = definedExternally
 
         <!WRONG_ANNOTATION_TARGET!>@nativeInvoke<!>
         object Obj2 {}

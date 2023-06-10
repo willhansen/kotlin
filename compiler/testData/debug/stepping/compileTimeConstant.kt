@@ -1,7 +1,7 @@
 // FILE: test.kt
 
 fun box() {
-    val x =
+    konst x =
             42
 }
 

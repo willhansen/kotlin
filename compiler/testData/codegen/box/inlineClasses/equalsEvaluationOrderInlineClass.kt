@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Inner(val x: Int)
+konstue class Inner(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val x: Inner)
+konstue class A(konst x: Inner)
 
 var i = 0
 

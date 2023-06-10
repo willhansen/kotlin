@@ -2,7 +2,7 @@
 
 @JsExport
 interface I {
-    val a: Char
+    konst a: Char
 }
 
 object X : I {
@@ -19,10 +19,10 @@ object Y : I {
         }
 }
 
-val expectedCharRepresentationInProperty = if (testUtils.isLegacyBackend()) "object" else "number"
+konst expectedCharRepresentationInProperty = if (testUtils.isLegacyBackend()) "object" else "number"
 
 fun box(): String {
-    val t = jsTypeOf(X.asDynamic().a)
+    konst t = jsTypeOf(X.asDynamic().a)
     if (t != expectedCharRepresentationInProperty) return "fail1: $t"
 
     Y.a = '@'

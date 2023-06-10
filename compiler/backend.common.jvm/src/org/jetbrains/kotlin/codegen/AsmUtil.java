@@ -83,7 +83,7 @@ public class AsmUtil {
     static {
         ImmutableMap.Builder<Integer, JvmPrimitiveType> typeBySortBuilder = ImmutableMap.builder();
         ImmutableMap.Builder<Type, Type> typeByWrapperBuilder = ImmutableMap.builder();
-        for (JvmPrimitiveType primitiveType : JvmPrimitiveType.values()) {
+        for (JvmPrimitiveType primitiveType : JvmPrimitiveType.konstues()) {
             Type asmType = Type.getType(primitiveType.getDesc());
             typeBySortBuilder.put(asmType.getSort(), primitiveType);
             typeByWrapperBuilder.put(asmTypeByFqNameWithoutInnerClasses(primitiveType.getWrapperFqName()), asmType);
@@ -215,18 +215,18 @@ public class AsmUtil {
         v.xor(Type.INT_TYPE);
     }
 
-    public static void numConst(int value, Type type, InstructionAdapter v) {
+    public static void numConst(int konstue, Type type, InstructionAdapter v) {
         if (type == Type.FLOAT_TYPE) {
-            v.fconst(value);
+            v.fconst(konstue);
         }
         else if (type == Type.DOUBLE_TYPE) {
-            v.dconst(value);
+            v.dconst(konstue);
         }
         else if (type == Type.LONG_TYPE) {
-            v.lconst(value);
+            v.lconst(konstue);
         }
         else if (type == Type.CHAR_TYPE || type == Type.BYTE_TYPE || type == Type.SHORT_TYPE || type == Type.INT_TYPE) {
-            v.iconst(value);
+            v.iconst(konstue);
         }
         else {
             throw new IllegalArgumentException("Primitive numeric type expected, got: " + type);

@@ -16,4 +16,4 @@ abstract class BeforeElementDiagnosticCollectionHandler: FirSessionComponent {
     open fun beforeGoingNestedDeclaration(declaration: FirDeclaration, context: CheckerContext) {}
 }
 
-val FirSession.beforeElementDiagnosticCollectionHandler: BeforeElementDiagnosticCollectionHandler? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.beforeElementDiagnosticCollectionHandler: BeforeElementDiagnosticCollectionHandler? by FirSession.nullableSessionComponentAccessor()

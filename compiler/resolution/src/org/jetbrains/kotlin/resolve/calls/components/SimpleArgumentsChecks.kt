@@ -32,17 +32,17 @@ import org.jetbrains.kotlin.types.typeUtil.makeNotNullable
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 class ReceiverInfo(
-    val isReceiver: Boolean,
-    val shouldReportUnsafeCall: Boolean, // should not report if unsafe implicit invoke has been reported already
-    val reportUnsafeCallAsUnsafeImplicitInvoke: Boolean,
-    val selectorCall: KotlinCall? = null,
+    konst isReceiver: Boolean,
+    konst shouldReportUnsafeCall: Boolean, // should not report if unsafe implicit invoke has been reported already
+    konst reportUnsafeCallAsUnsafeImplicitInvoke: Boolean,
+    konst selectorCall: KotlinCall? = null,
 ) {
     init {
         assert(!reportUnsafeCallAsUnsafeImplicitInvoke || shouldReportUnsafeCall) { "Inconsistent receiver info" }
     }
 
     companion object {
-        val notReceiver = ReceiverInfo(isReceiver = false, shouldReportUnsafeCall = true, reportUnsafeCallAsUnsafeImplicitInvoke = false)
+        konst notReceiver = ReceiverInfo(isReceiver = false, shouldReportUnsafeCall = true, reportUnsafeCallAsUnsafeImplicitInvoke = false)
     }
 }
 
@@ -73,11 +73,11 @@ private fun checkExpressionArgument(
     convertedType: UnwrappedType?,
     selectorCall: KotlinCall?
 ): ResolvedAtom {
-    val resolvedExpression = ResolvedExpressionAtom(expressionArgument)
+    konst resolvedExpression = ResolvedExpressionAtom(expressionArgument)
     if (expectedType == null) return resolvedExpression
 
     // todo run this approximation only once for call
-    val argumentType = convertedType ?: captureFromTypeParameterUpperBoundIfNeeded(expressionArgument.receiver.stableType, expectedType)
+    konst argumentType = convertedType ?: captureFromTypeParameterUpperBoundIfNeeded(expressionArgument.receiver.stableType, expectedType)
 
     fun unstableSmartCastOrSubtypeError(
         unstableType: UnwrappedType?, actualExpectedType: UnwrappedType, position: ConstraintPosition
@@ -99,7 +99,7 @@ private fun checkExpressionArgument(
         return null
     }
 
-    val position =
+    konst position =
         if (isReceiver) ReceiverConstraintPositionImpl(expressionArgument, selectorCall)
         else ArgumentConstraintPositionImpl(expressionArgument)
 
@@ -109,7 +109,7 @@ private fun checkExpressionArgument(
     }
 
     if (expressionArgument.isSafeCall) {
-        val expectedNullableType = expectedType.makeNullableAsSpecified(true)
+        konst expectedNullableType = expectedType.makeNullableAsSpecified(true)
         if (!csBuilder.addSubtypeConstraintIfCompatible(argumentType, expectedNullableType, position)) {
             diagnosticsHolder.addDiagnosticIfNotNull(
                 unstableSmartCastOrSubtypeError(expressionArgument.receiver.unstableType, expectedNullableType, position)
@@ -130,8 +130,8 @@ private fun checkExpressionArgument(
             return resolvedExpression
         }
 
-        val unstableType = expressionArgument.receiver.unstableType
-        val expectedNullableType = expectedType.makeNullableAsSpecified(true)
+        konst unstableType = expressionArgument.receiver.unstableType
+        konst expectedNullableType = expectedType.makeNullableAsSpecified(true)
 
         if (unstableType != null && csBuilder.addSubtypeConstraintIfCompatible(unstableType, expectedType, position)) {
             diagnosticsHolder.addDiagnostic(UnstableSmartCast(expressionArgument, unstableType, isReceiver))
@@ -150,27 +150,27 @@ private fun checkExpressionArgument(
  * fun <Y> bar(l: Inv<Y>): Y = ...
  *
  * fun <X : Inv<out Int>> foo(x: X) {
- *      val xr = bar(x)
+ *      konst xr = bar(x)
  * }
  * Here we try to capture from upper bound from type parameter.
  * We replace type of `x` to `Inv<out Int>`(we chose supertype which contains supertype with expectedTypeConstructor) and capture from this type.
  * It is correct, because it is like this code:
  * fun <X : Inv<out Int>> foo(x: X) {
- *      val inv: Inv<out Int> = x
- *      val xr = bar(inv)
+ *      konst inv: Inv<out Int> = x
+ *      konst xr = bar(inv)
  * }
  *
  */
 fun captureFromTypeParameterUpperBoundIfNeeded(argumentType: UnwrappedType, expectedType: UnwrappedType): UnwrappedType {
-    val expectedTypeConstructor = expectedType.upperIfFlexible().constructor
+    konst expectedTypeConstructor = expectedType.upperIfFlexible().constructor
 
     if (argumentType.lowerIfFlexible().constructor.declarationDescriptor is TypeParameterDescriptor) {
-        val chosenSupertype = argumentType.lowerIfFlexible().supertypes().singleOrNull {
+        konst chosenSupertype = argumentType.lowerIfFlexible().supertypes().singleOrNull {
             it.constructor.declarationDescriptor is ClassifierDescriptorWithTypeParameters &&
                     it.unwrap().hasSupertypeWithGivenTypeConstructor(expectedTypeConstructor)
         }
         if (chosenSupertype != null) {
-            val capturedType = captureFromExpression(chosenSupertype.unwrap())
+            konst capturedType = captureFromExpression(chosenSupertype.unwrap())
             return if (capturedType != null && argumentType.isDefinitelyNotNullType)
                 capturedType.makeDefinitelyNotNullOrNotNull()
             else
@@ -189,20 +189,20 @@ private fun checkSubCallArgument(
     receiverInfo: ReceiverInfo,
     inferenceSession: InferenceSession?
 ): ResolvedAtom {
-    val subCallResult = ResolvedSubCallArgument(
+    konst subCallResult = ResolvedSubCallArgument(
         subCallArgument, receiverInfo.isReceiver && inferenceSession?.resolveReceiverIndependently() == true
     )
 
     if (expectedType == null) return subCallResult
 
-    val expectedNullableType = expectedType.makeNullableAsSpecified(true)
-    val position =
+    konst expectedNullableType = expectedType.makeNullableAsSpecified(true)
+    konst position =
         if (receiverInfo.isReceiver) ReceiverConstraintPositionImpl(subCallArgument, subCallArgument.callResult.resultCallAtom.atom)
         else ArgumentConstraintPositionImpl(subCallArgument)
 
     // subArgument cannot has stable smartcast
     // return type can contains fixed type variables
-    val currentReturnType =
+    konst currentReturnType =
         (csBuilder.buildCurrentSubstitutor() as NewTypeSubstitutor)
             .safeSubstitute(subCallArgument.receiver.receiverValue.type.unwrap())
     if (subCallArgument.isSafeCall) {

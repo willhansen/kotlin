@@ -14,16 +14,16 @@ import org.jetbrains.kotlin.commonizer.utils.firstNonNull
 import org.jetbrains.kotlin.storage.NullableLazyValue
 
 class CirPackageNode(
-    override val targetDeclarations: CommonizedGroup<CirPackage>,
-    override val commonDeclaration: NullableLazyValue<CirPackage>
+    override konst targetDeclarations: CommonizedGroup<CirPackage>,
+    override konst commonDeclaration: NullableLazyValue<CirPackage>
 ) : CirNodeWithMembers<CirPackage, CirPackage> {
 
-    override val properties: MutableMap<PropertyApproximationKey, CirPropertyNode> = THashMap()
-    override val functions: MutableMap<FunctionApproximationKey, CirFunctionNode> = THashMap()
-    override val classes: MutableMap<CirName, CirClassNode> = THashMap()
-    val typeAliases: MutableMap<CirName, CirTypeAliasNode> = THashMap()
+    override konst properties: MutableMap<PropertyApproximationKey, CirPropertyNode> = THashMap()
+    override konst functions: MutableMap<FunctionApproximationKey, CirFunctionNode> = THashMap()
+    override konst classes: MutableMap<CirName, CirClassNode> = THashMap()
+    konst typeAliases: MutableMap<CirName, CirTypeAliasNode> = THashMap()
 
-    val packageName: CirPackageName
+    konst packageName: CirPackageName
         get() = targetDeclarations.firstNonNull().packageName
 
     override fun <T, R> accept(visitor: CirNodeVisitor<T, R>, data: T) =

@@ -1,7 +1,7 @@
 //ALLOW_AST_ACCESS
 package test
 
-// This test checks that we don't accidentally call toString() on an enum value
+// This test checks that we don't accidentally call toString() on an enum konstue
 // to determine which enum entry appears in the annotation, and call name() instead
 
 enum class E {
@@ -10,8 +10,8 @@ enum class E {
     }
 }
 
-annotation class EnumAnno(val value: E)
-annotation class EnumArrayAnno(vararg val value: E)
+annotation class EnumAnno(konst konstue: E)
+annotation class EnumArrayAnno(vararg konst konstue: E)
 
 public class EnumArgumentWithCustomToString {
     @EnumAnno(E.CAKE)

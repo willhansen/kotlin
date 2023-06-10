@@ -8,8 +8,8 @@
 import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 
-const val const = "const"
-val nonConst = "nonConst"
+const konst const = "const"
+konst nonConst = "nonConst"
 
 class A {
     lateinit var lateinit: Unit

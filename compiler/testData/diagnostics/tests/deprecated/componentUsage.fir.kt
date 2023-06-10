@@ -7,5 +7,5 @@ class Data {
 }
 
 fun use() {
-    val (x, y) = Data()
+    konst (x, y) = Data()
 }

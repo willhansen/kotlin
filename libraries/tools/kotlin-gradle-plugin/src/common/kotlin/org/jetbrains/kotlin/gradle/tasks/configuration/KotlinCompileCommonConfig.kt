@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.GradleKpmMetadataCompilationD
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 
 internal class KotlinCompileCommonConfig(
-    private val compilationInfo: KotlinCompilationInfo,
+    private konst compilationInfo: KotlinCompilationInfo,
 ) : AbstractKotlinCompileConfig<KotlinCompileCommon>(compilationInfo) {
     init {
         configureTask { task ->
-            task.expectActualLinker.value(
+            task.expectActualLinker.konstue(
                 providers.provider {
                     (compilationInfo.origin as? KotlinCommonCompilation)?.isKlibCompilation == true ||
                             compilationInfo.origin is GradleKpmMetadataCompilationData<*>

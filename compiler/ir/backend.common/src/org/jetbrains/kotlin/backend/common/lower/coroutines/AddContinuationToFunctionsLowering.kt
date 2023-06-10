@@ -37,10 +37,10 @@ import org.jetbrains.kotlin.utils.memoryOptimizedPlus
  * continuation parameter `$cont` of type [kotlin.coroutines.Continuation].
  *
  * Replaces return type with `Any?` or `Any` (for non-nullable types) to indicate that suspend
- * functions can return special values like [kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED]
+ * functions can return special konstues like [kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED]
  * which might not be a subtype of original return type.
  */
-class AddContinuationToNonLocalSuspendFunctionsLowering(val context: CommonBackendContext) : DeclarationTransformer {
+class AddContinuationToNonLocalSuspendFunctionsLowering(konst context: CommonBackendContext) : DeclarationTransformer {
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? =
         if (declaration is IrSimpleFunction && declaration.isSuspend) {
             listOf(transformSuspendFunction(context, declaration))
@@ -53,7 +53,7 @@ class AddContinuationToNonLocalSuspendFunctionsLowering(val context: CommonBacke
  * Similar to [AddContinuationToNonLocalSuspendFunctionsLowering] but processes local functions.
  * Useful for Kotlin/JS IR backend which keeps local declarations up until code generation.
  */
-class AddContinuationToLocalSuspendFunctionsLowering(val context: CommonBackendContext) : BodyLoweringPass {
+class AddContinuationToLocalSuspendFunctionsLowering(konst context: CommonBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitSimpleFunction(declaration: IrSimpleFunction): IrStatement {
@@ -70,10 +70,10 @@ class AddContinuationToLocalSuspendFunctionsLowering(val context: CommonBackendC
 
 
 private fun transformSuspendFunction(context: CommonBackendContext, function: IrSimpleFunction): IrSimpleFunction {
-    val newFunctionWithContinuation = function.getOrCreateFunctionWithContinuationStub(context)
+    konst newFunctionWithContinuation = function.getOrCreateFunctionWithContinuationStub(context)
     // Using custom mapping because number of parameters doesn't match
-    val parameterMapping : Map<IrValueParameter, IrValueParameter> = function.explicitParameters.zip(newFunctionWithContinuation.explicitParameters).toMap()
-    val newBody = function.moveBodyTo(newFunctionWithContinuation, parameterMapping)
+    konst parameterMapping : Map<IrValueParameter, IrValueParameter> = function.explicitParameters.zip(newFunctionWithContinuation.explicitParameters).toMap()
+    konst newBody = function.moveBodyTo(newFunctionWithContinuation, parameterMapping)
     for ((old, new) in parameterMapping.entries) {
         new.defaultValue = old.defaultValue?.transform(VariableRemapper(parameterMapping), null)
     }
@@ -123,7 +123,7 @@ private fun IrSimpleFunction.createSuspendFunctionStub(context: CommonBackendCon
         function.copyAnnotationsFrom(this)
         function.copyAttributes(this)
         function.copyTypeParametersFrom(this)
-        val substitutionMap = makeTypeParameterSubstitutionMap(this, function)
+        konst substitutionMap = makeTypeParameterSubstitutionMap(this, function)
         function.copyReceiverParametersFrom(this, substitutionMap)
 
         function.overriddenSymbols = function.overriddenSymbols memoryOptimizedPlus overriddenSymbols.map {
@@ -131,7 +131,7 @@ private fun IrSimpleFunction.createSuspendFunctionStub(context: CommonBackendCon
                 it.owner.getOrCreateFunctionWithContinuationStub(context).symbol
             }
         }
-        function.valueParameters = valueParameters.memoryOptimizedMap { it.copyTo(function) }
+        function.konstueParameters = konstueParameters.memoryOptimizedMap { it.copyTo(function) }
 
         function.addValueParameter {
             startOffset = function.startOffset

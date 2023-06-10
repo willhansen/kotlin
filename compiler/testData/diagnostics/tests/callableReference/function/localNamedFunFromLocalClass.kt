@@ -9,9 +9,9 @@ fun main() {
     fun baz() = "OK"
 
     class A {
-        val x = ::foo
-        val y = ::bar
-        val z = ::baz
+        konst x = ::foo
+        konst y = ::bar
+        konst z = ::baz
 
         fun main() {
             checkSubtype<KFunction0<Unit>>(x)

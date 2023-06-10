@@ -50,7 +50,7 @@ open class PrimeListBenchmark {
         primes.addAll(2..BENCHMARK_SIZE)
         var i = 0
         while (i < primes.size) {
-            val divisor = primes[i]
+            konst divisor = primes[i]
             primes.removeAll { it -> it > divisor && it % divisor == 0 }
             i++
         }

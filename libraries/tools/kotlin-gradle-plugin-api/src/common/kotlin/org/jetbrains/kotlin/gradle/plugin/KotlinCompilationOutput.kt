@@ -11,7 +11,7 @@ import java.io.File
 
 interface KotlinCompilationOutput {
     var resourcesDirProvider: Any
-    val resourcesDir: File
-    val classesDirs: ConfigurableFileCollection
-    val allOutputs: FileCollection
+    konst resourcesDir: File
+    konst classesDirs: ConfigurableFileCollection
+    konst allOutputs: FileCollection
 }

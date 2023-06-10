@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.jps.build.dependeciestxt
 import java.io.File
 import java.util.*
 
-class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (TestCase) -> File) {
-    val ModulesTxt.Module.capitalName get() = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+class MppJpsIncTestsGenerator(konst txt: ModulesTxt, konst testCaseDirProvider: (TestCase) -> File) {
+    konst ModulesTxt.Module.capitalName get() = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
-    val testCases: List<TestCase>
+    konst testCases: List<TestCase>
 
     init {
-        val testCases = mutableListOf<TestCase>()
+        konst testCases = mutableListOf<TestCase>()
 
         txt.modules.forEach {
             if (it.edit)
@@ -31,9 +31,9 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
     }
 
     fun actualizeTestCasesDirs(rootDir: File) {
-        val requiredDirs = mutableSetOf<File>()
+        konst requiredDirs = mutableSetOf<File>()
         testCases.forEach {
-            val dir = it.dir
+            konst dir = it.dir
             check(requiredDirs.add(dir)) { "TestCase dir clash $dir" }
 
             if (!dir.exists()) {
@@ -67,20 +67,20 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
     }
 
     data class ModuleContentSettings(
-        val module: ModulesTxt.Module,
-        val serviceNameSuffix: String = "",
-        val generateActualDeclarationsFor: List<ModulesTxt.Module> = module.expectedBy.map { it.to },
-        val generatePlatformDependent: Boolean = true,
+        konst module: ModulesTxt.Module,
+        konst serviceNameSuffix: String = "",
+        konst generateActualDeclarationsFor: List<ModulesTxt.Module> = module.expectedBy.map { it.to },
+        konst generatePlatformDependent: Boolean = true,
         var generateKtFile: Boolean = true,
         var generateJavaFile: Boolean = true
     )
 
-    inner class EditingTestCase(val module: ModulesTxt.Module, val changeJavaClass: Boolean) : TestCase() {
-        override val name: String =
+    inner class EditingTestCase(konst module: ModulesTxt.Module, konst changeJavaClass: Boolean) : TestCase() {
+        override konst name: String =
             if (changeJavaClass) "editing${module.capitalName}Java"
             else "editing${module.capitalName}Kotlin"
 
-        override val dir: File = testCaseDirProvider(this)
+        override konst dir: File = testCaseDirProvider(this)
 
         override fun generate() {
             generateBaseContent()
@@ -121,7 +121,7 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
                 else -> {
                     step("create new service") {
                         // generateKtFile event if changeJavaClass requested (for test calling java from kotlin)
-                        val prevModuleContentsSettings = module.contentsSettings
+                        konst prevModuleContentsSettings = module.contentsSettings
                         module.contentsSettings = module.contentsSettings.copy(generateKtFile = true)
 
 
@@ -154,14 +154,14 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
 
     }
 
-    inner class EditingExpectActualTestCase(val commonModule: ModulesTxt.Module) : TestCase() {
-        override val name: String = "editing${commonModule.capitalName}ExpectActual"
-        override val dir: File = testCaseDirProvider(this)
+    inner class EditingExpectActualTestCase(konst commonModule: ModulesTxt.Module) : TestCase() {
+        override konst name: String = "editing${commonModule.capitalName}ExpectActual"
+        override konst dir: File = testCaseDirProvider(this)
 
         override fun generate() {
             generateBaseContent()
             check(commonModule.isCommonModule)
-            val implModules = commonModule.usages
+            konst implModules = commonModule.usages
                 .asSequence()
                 .filter {
                     it.kind == ModulesTxt.Dependency.Kind.EXPECTED_BY ||
@@ -227,16 +227,16 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
     }
 
     abstract inner class TestCase() {
-        abstract val name: String
+        abstract konst name: String
 
         abstract fun generate()
 
-        abstract val dir: File
+        abstract konst dir: File
 
-        private val modules = mutableMapOf<ModulesTxt.Module, ModuleContentSettings>()
+        private konst modules = mutableMapOf<ModulesTxt.Module, ModuleContentSettings>()
 
         var step = 1
-        val steps = mutableListOf<String>()
+        konst steps = mutableListOf<String>()
 
         protected inline fun step(name: String, body: () -> Unit) {
             body()
@@ -246,8 +246,8 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
 
         var ModulesTxt.Module.contentsSettings: ModuleContentSettings
             get() = modules.getOrPut(this) { ModuleContentSettings(this) }
-            set(value) {
-                modules[this] = value
+            set(konstue) {
+                modules[this] = konstue
             }
 
         protected fun generateStepsTxt() {
@@ -279,14 +279,14 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
             }
         }
 
-        private val ModulesTxt.Module.serviceName
+        private konst ModulesTxt.Module.serviceName
             get() = "$capitalName${contentsSettings.serviceNameSuffix}"
 
-        private val ModulesTxt.Module.javaClassName
+        private konst ModulesTxt.Module.javaClassName
             get() = "${serviceName}JavaClass"
 
         protected fun serviceKtFile(module: ModulesTxt.Module, fileNameSuffix: String = ""): File {
-            val suffix =
+            konst suffix =
                 if (module.isCommonModule) "${module.serviceName}Header"
                 else "${module.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}${module.contentsSettings.serviceNameSuffix}Impl"
 
@@ -297,19 +297,19 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
             return File(dir, "${module.indexedName}_${module.javaClassName}.java$fileNameSuffix")
         }
 
-        private val ModulesTxt.Module.platformDependentFunName: String
+        private konst ModulesTxt.Module.platformDependentFunName: String
             get() {
                 check(isCommonModule)
                 return "${name}_platformDependent$serviceName"
             }
 
-        private val ModulesTxt.Module.platformIndependentFunName: String
+        private konst ModulesTxt.Module.platformIndependentFunName: String
             get() {
                 check(isCommonModule)
                 return "${name}_platformIndependent$serviceName"
             }
 
-        private val ModulesTxt.Module.platformOnlyFunName: String
+        private konst ModulesTxt.Module.platformOnlyFunName: String
             get() {
                 // platformOnly fun names already unique, so no module name prefix required
                 return "${name}_platformOnly${contentsSettings.serviceNameSuffix}"
@@ -319,7 +319,7 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
             module: ModulesTxt.Module,
             fileNameSuffix: String = ""
         ) {
-            val settings = module.contentsSettings
+            konst settings = module.contentsSettings
 
             serviceKtFile(module, fileNameSuffix).setFileContent(buildString {
                 if (settings.generatePlatformDependent)
@@ -335,10 +335,10 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
             module: ModulesTxt.Module,
             fileNameSuffix: String = ""
         ) {
-            val isJvm = module.isJvmModule
-            val settings = module.contentsSettings
+            konst isJvm = module.isJvmModule
+            konst settings = module.contentsSettings
 
-            val javaClassName = module.javaClassName
+            konst javaClassName = module.javaClassName
 
             if (settings.generateKtFile) {
                 serviceKtFile(module, fileNameSuffix).setFileContent(buildString {
@@ -381,7 +381,7 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
             appendLine()
             appendLine("fun Test${module.serviceName}() {")
 
-            val thisAndDependencies = mutableSetOf(module)
+            konst thisAndDependencies = mutableSetOf(module)
             module.collectDependenciesRecursivelyTo(thisAndDependencies)
             thisAndDependencies.forEach { thisOrDependent ->
                 if (thisOrDependent.isCommonModule) {
@@ -409,7 +409,7 @@ class MppJpsIncTestsGenerator(val txt: ModulesTxt, val testCaseDirProvider: (Tes
         ) {
             dependencies.forEach {
                 if (!exportedOnly || it.effectivelyExported) {
-                    val dependentModule = it.to
+                    konst dependentModule = it.to
                     collection.add(dependentModule)
                     dependentModule.collectDependenciesRecursivelyTo(collection, exportedOnly = true)
                 }

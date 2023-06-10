@@ -26,23 +26,23 @@ open class NativePerformanceReport : DefaultTask() {
     lateinit var timeListener: TaskTimerListener
 
     @Internal
-    val reportDirectory = File(project.buildDir, "perfReports")
+    konst reportDirectory = File(project.buildDir, "perfReports")
 
     @OutputFile
-    val outputFile = File(reportDirectory, "${name}.txt")
+    konst outputFile = File(reportDirectory, "${name}.txt")
 
     @Internal
     lateinit var settings: PerformanceExtension
 
     private fun getCompilationResults(tasksPaths: Iterable<String>, success: Boolean): String {
-        val status = success && tasksPaths.all { timeListener.tasksTimes.containsKey(it) }
-        val time = tasksPaths.map { timeListener.getTime(it) }.sum()
+        konst status = success && tasksPaths.all { timeListener.tasksTimes.containsKey(it) }
+        konst time = tasksPaths.map { timeListener.getTime(it) }.sum()
         return "${if (status) "PASSED" else "FAILED"}\nCOMPILE_TIME $time"
     }
 
     // Get compile task and associated with it other compile tasks.
     private fun getAllExecutedTasks(compilation: KotlinCompilation<*>): List<Task> {
-        val tasks = mutableListOf(compilation.compileKotlinTask as Task)
+        konst tasks = mutableListOf(compilation.compileKotlinTask as Task)
         compilation.associateWith.forEach {
             tasks += getAllExecutedTasks(it)
         }
@@ -58,7 +58,7 @@ open class NativePerformanceReport : DefaultTask() {
     }
 
     private fun compilerFlagsFromBinary(): List<String> {
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
         if (binary.buildType.optimized) {
             result.add("-opt")
         }
@@ -75,12 +75,12 @@ open class NativePerformanceReport : DefaultTask() {
 
     @TaskAction
     fun generate() {
-        val compileTasks = if (settings.includeAssociatedTasks)
+        konst compileTasks = if (settings.includeAssociatedTasks)
             getAllExecutedTasks(binary.linkTask.compilation)
         else
             listOf(binary.linkTask.compilation.compileKotlinTask)
-        val allExecutedTasks = listOf(binary.linkTask) + compileTasks
-        val upToDateTasks = allExecutedTasks.filter { it.state.upToDate }.map { it.name }
+        konst allExecutedTasks = listOf(binary.linkTask) + compileTasks
+        konst upToDateTasks = allExecutedTasks.filter { it.state.upToDate }.map { it.name }
         if (upToDateTasks.isNotEmpty()) {
             if (outputFile.exists()) {
                 project.delete(outputFile.absolutePath)
@@ -91,13 +91,13 @@ open class NativePerformanceReport : DefaultTask() {
             )
             return
         }
-        val successStatus = allExecutedTasks.all { it.state.failure == null }
+        konst successStatus = allExecutedTasks.all { it.state.failure == null }
         // Get code size metric.
         var codeSize: String? = null
         if (TrackableMetric.CODE_SIZE in settings.metrics) {
             codeSize = binary.outputFile.let {
                 if (it.exists()) {
-                    val size = if (it.isDirectory) folderSize(it) else it.length()
+                    konst size = if (it.isDirectory) folderSize(it) else it.length()
                     "CODE_SIZE $size"
                 } else null
             }
@@ -115,7 +115,7 @@ open class NativePerformanceReport : DefaultTask() {
         if (!reportDirectory.exists()) {
             project.mkdir(reportDirectory.absolutePath)
         }
-        val name = settings.binaryNamesForReport[binary]!!
+        konst name = settings.binaryNamesForReport[binary]!!
         outputFile.writeText(name)
         outputFile.appendText("\nOPTIONS ${getPerformanceCompilerOptions()}")
         if (compileTime != null) {

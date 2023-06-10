@@ -41,14 +41,14 @@ class HarmonyMath {
     fun assertEquals(message: String?, expected: Long, actual: Long) = assertEquals(expected, actual, message)
 
     fun assertEquals(message: String?, expected: Double, actual: Double, tolerance: Double? = null) {
-        val tolerance_ = tolerance?.let { abs(it) } ?: 0.000000000001
+        konst tolerance_ = tolerance?.let { abs(it) } ?: 0.000000000001
         if (abs(expected - actual) > tolerance_) {
             assertEquals(expected, actual, message)
         }
     }
 
     fun assertEquals(message: String?, expected: Float, actual: Float, tolerance: Float? = null) {
-        val tolerance_ = tolerance?.let { abs(it) } ?: 0.0000001f
+        konst tolerance_ = tolerance?.let { abs(it) } ?: 0.0000001f
         if (abs(expected - actual) > tolerance_) {
             assertEquals(expected, actual, message)
         }
@@ -71,9 +71,9 @@ class HarmonyMath {
     @Test fun absD() {
         // Test for abs(Double): Double
 
-        assertTrue("Incorrect Double abs value",
+        assertTrue("Incorrect Double abs konstue",
                 abs(-1908.8976) == 1908.8976)
-        assertTrue("Incorrect Double abs value",
+        assertTrue("Incorrect Double abs konstue",
                 abs(1908.8976) == 1908.8976)
     }
 
@@ -82,9 +82,9 @@ class HarmonyMath {
      */
     @Test fun absF() {
         // Test for abs(float): float
-        assertTrue("Incorrect float abs value",
+        assertTrue("Incorrect float abs konstue",
                 abs(-1908.8976f) == 1908.8976f)
-        assertTrue("Incorrect float abs value",
+        assertTrue("Incorrect float abs konstue",
                 abs(1908.8976f) == 1908.8976f)
     }
 
@@ -93,8 +93,8 @@ class HarmonyMath {
      */
     @Test fun absI() {
         // Test for abs(int): int
-        assertTrue("Incorrect int abs value", abs(-1908897) == 1908897)
-        assertTrue("Incorrect int abs value", abs(1908897) == 1908897)
+        assertTrue("Incorrect int abs konstue", abs(-1908897) == 1908897)
+        assertTrue("Incorrect int abs konstue", abs(1908897) == 1908897)
     }
 
     /**
@@ -102,9 +102,9 @@ class HarmonyMath {
      */
     @Test fun absJ() {
         // Test for abs(long): long
-        assertTrue("Incorrect long abs value",
+        assertTrue("Incorrect long abs konstue",
                 abs(-19088976000089L) == 19088976000089L)
-        assertTrue("Incorrect long abs value",
+        assertTrue("Incorrect long abs konstue",
                 abs(19088976000089L) == 19088976000089L)
     }
 
@@ -113,9 +113,9 @@ class HarmonyMath {
      */
     @Test fun acosD() {
         // Test for acos(Double): Double
-        val r = cos(acos(ADJ / HYP))
-        val lr = r.toBits()
-        val t = (ADJ / HYP).toBits()
+        konst r = cos(acos(ADJ / HYP))
+        konst lr = r.toBits()
+        konst t = (ADJ / HYP).toBits()
         assertTrue("Returned incorrect arc cosine", lr == t || lr + 1 == t || lr - 1 == t)
     }
 
@@ -124,9 +124,9 @@ class HarmonyMath {
      */
     @Test fun asinD() {
         // Test for asin(Double): Double
-        val r = sin(asin(OPP / HYP))
-        val lr = r.toBits()
-        val t = (OPP / HYP).toBits()
+        konst r = sin(asin(OPP / HYP))
+        konst lr = r.toBits()
+        konst t = (OPP / HYP).toBits()
         assertTrue("Returned incorrect arc sine", lr == t || lr + 1 == t || lr - 1 == t)
     }
 
@@ -135,7 +135,7 @@ class HarmonyMath {
      */
     @Test fun atanD() {
         // Test for atan(Double): Double
-        val answer = tan(atan(1.0))
+        konst answer = tan(atan(1.0))
         assertTrue("Returned incorrect arc tangent: " + answer, answer <= 1.0 && answer >= 9.9999999999999983E-1)
     }
 
@@ -144,7 +144,7 @@ class HarmonyMath {
      */
     @Test fun atan2DD() {
         // Test for atan2(Double, Double): Double
-        val answer = atan(tan(1.0))
+        konst answer = atan(tan(1.0))
         assertTrue("Returned incorrect arc tangent: " + answer, answer <= 1.0 && answer >= 9.9999999999999983E-1)
     }
 
@@ -164,15 +164,15 @@ class HarmonyMath {
      */
     @Test fun withSign_D() {
         for (i in COPYSIGN_DD_CASES.indices) {
-            val magnitude = COPYSIGN_DD_CASES[i]
-            val absMagnitudeBits = abs(magnitude).toBits()
-            val negMagnitudeBits = (-abs(magnitude)).toBits()
+            konst magnitude = COPYSIGN_DD_CASES[i]
+            konst absMagnitudeBits = abs(magnitude).toBits()
+            konst negMagnitudeBits = (-abs(magnitude)).toBits()
 
             assertTrue("The result should be NaN.", Double.isNaN(Double.NaN.withSign(magnitude)))
 
             for (j in COPYSIGN_DD_CASES.indices) {
-                val sign = COPYSIGN_DD_CASES[j]
-                val resultBits = magnitude.withSign(sign).toBits()
+                konst sign = COPYSIGN_DD_CASES[j]
+                konst resultBits = magnitude.withSign(sign).toBits()
 
                 if (sign > 0 || (+0.0).toBits() == sign.toBits() || 0.0.toBits() == sign.toBits()) {
                     assertEquals(
@@ -195,15 +195,15 @@ class HarmonyMath {
      */
     @Test fun withSign_F() {
         for (i in COPYSIGN_FF_CASES.indices) {
-            val magnitude = COPYSIGN_FF_CASES[i]
-            val absMagnitudeBits = abs(magnitude).toBits()
-            val negMagnitudeBits = (-abs(magnitude)).toBits()
+            konst magnitude = COPYSIGN_FF_CASES[i]
+            konst absMagnitudeBits = abs(magnitude).toBits()
+            konst negMagnitudeBits = (-abs(magnitude)).toBits()
 
             assertTrue("The result should be NaN.", Float.isNaN(Float.NaN.withSign(magnitude)))
 
             for (j in COPYSIGN_FF_CASES.indices) {
-                val sign = COPYSIGN_FF_CASES[j]
-                val resultBits = magnitude.withSign(sign).toBits()
+                konst sign = COPYSIGN_FF_CASES[j]
+                konst resultBits = magnitude.withSign(sign).toBits()
                 if (sign > 0 || (+0.0f).toBits() == sign.toBits() || 0.0f.toBits() == sign.toBits()) {
                     assertEquals(
                             "If the sign is positive, the result should be positive.",
@@ -370,7 +370,7 @@ class HarmonyMath {
         // Test for log(Double): Double
         var d = 10.0
         while (d >= -10) {
-            val answer = ln(exp(d))
+            konst answer = ln(exp(d))
             assertTrue("Answer does not equal expected answer for d = " + d
                     + " answer = " + answer, abs(answer - d) <= abs(d * 0.00000001))
             d -= 0.5
@@ -426,11 +426,11 @@ class HarmonyMath {
      */
     @Test fun maxDD() {
         // Test for max(Double, Double): Double
-        assertEquals("Incorrect Double max value", 1908897.6000089, max(-1908897.6000089,
+        assertEquals("Incorrect Double max konstue", 1908897.6000089, max(-1908897.6000089,
                 1908897.6000089), 0.0)
-        assertEquals("Incorrect Double max value",
+        assertEquals("Incorrect Double max konstue",
                 1908897.6000089, max(2.0, 1908897.6000089), 0.0)
-        assertEquals("Incorrect Double max value", -2.0, max(-2.0,
+        assertEquals("Incorrect Double max konstue", -2.0, max(-2.0,
                 -1908897.6000089), 0.0)
 
         // Compare toString representations here since -0.0 = +0.0, and
@@ -448,11 +448,11 @@ class HarmonyMath {
      */
     @Test fun maxFF() {
         // Test for max(float, float): float
-        assertTrue("Incorrect float max value", max(-1908897.600f,
+        assertTrue("Incorrect float max konstue", max(-1908897.600f,
                 1908897.600f) == 1908897.600f)
-        assertTrue("Incorrect float max value",
+        assertTrue("Incorrect float max konstue",
                 max(2.0f, 1908897.600f) == 1908897.600f)
-        assertTrue("Incorrect float max value",
+        assertTrue("Incorrect float max konstue",
                 max(-2.0f, -1908897.600f) == -2.0f)
 
         // Compare toString representations here since -0.0 = +0.0, and
@@ -470,11 +470,11 @@ class HarmonyMath {
      */
     @Test fun maxII() {
         // Test for max(int, int): int
-        assertEquals("Incorrect int max value",
+        assertEquals("Incorrect int max konstue",
                 19088976, max(-19088976, 19088976))
-        assertEquals("Incorrect int max value",
+        assertEquals("Incorrect int max konstue",
                 19088976, max(20, 19088976))
-        assertEquals("Incorrect int max value", -20, max(-20, -19088976))
+        assertEquals("Incorrect int max konstue", -20, max(-20, -19088976))
     }
 
     /**
@@ -482,11 +482,11 @@ class HarmonyMath {
      */
     @Test fun maxJJ() {
         // Test for max(long, long): long
-        assertEquals("Incorrect long max value", 19088976000089L, max(-19088976000089L,
+        assertEquals("Incorrect long max konstue", 19088976000089L, max(-19088976000089L,
                 19088976000089L))
-        assertEquals("Incorrect long max value",
+        assertEquals("Incorrect long max konstue",
                 19088976000089L, max(20, 19088976000089L))
-        assertEquals("Incorrect long max value",
+        assertEquals("Incorrect long max konstue",
                 -20, max(-20, -19088976000089L))
     }
 
@@ -495,13 +495,13 @@ class HarmonyMath {
      */
     @Test fun minDD() {
         // Test for min(Double, Double): Double
-        assertEquals("Incorrect Double min value", -1908897.6000089, min(-1908897.6000089,
+        assertEquals("Incorrect Double min konstue", -1908897.6000089, min(-1908897.6000089,
                 1908897.6000089), 0.0)
-        assertEquals("Incorrect Double min value",
+        assertEquals("Incorrect Double min konstue",
                 2.0, min(2.0, 1908897.6000089), 0.0)
-        assertEquals("Incorrect Double min value", -1908897.6000089, min(-2.0,
+        assertEquals("Incorrect Double min konstue", -1908897.6000089, min(-2.0,
                 -1908897.6000089), 0.0)
-        assertEquals("Incorrect Double min value", 1.0, min(1.0, 1.0))
+        assertEquals("Incorrect Double min konstue", 1.0, min(1.0, 1.0))
 
         // Compare toString representations here since -0.0 = +0.0, and
         // NaN != NaN and we need to distinguish
@@ -518,13 +518,13 @@ class HarmonyMath {
      */
     @Test fun minFF() {
         // Test for min(float, float): float
-        assertTrue("Incorrect float min value", min(-1908897.600f,
+        assertTrue("Incorrect float min konstue", min(-1908897.600f,
                 1908897.600f) == -1908897.600f)
-        assertTrue("Incorrect float min value",
+        assertTrue("Incorrect float min konstue",
                 min(2.0f, 1908897.600f) == 2.0f)
-        assertTrue("Incorrect float min value",
+        assertTrue("Incorrect float min konstue",
                 min(-2.0f, -1908897.600f) == -1908897.600f)
-        assertEquals("Incorrect float min value", 1.0f, min(1.0f, 1.0f))
+        assertEquals("Incorrect float min konstue", 1.0f, min(1.0f, 1.0f))
 
         // Compare toString representations here since -0.0 = +0.0, and
         // NaN != NaN and we need to distinguish
@@ -541,10 +541,10 @@ class HarmonyMath {
      */
     @Test fun minII() {
         // Test for min(int, int): int
-        assertEquals("Incorrect int min value",
+        assertEquals("Incorrect int min konstue",
                 -19088976, min(-19088976, 19088976))
-        assertEquals("Incorrect int min value", 20, min(20, 19088976))
-        assertEquals("Incorrect int min value",
+        assertEquals("Incorrect int min konstue", 20, min(20, 19088976))
+        assertEquals("Incorrect int min konstue",
                 -19088976, min(-20, -19088976))
 
     }
@@ -554,9 +554,9 @@ class HarmonyMath {
      */
     fun test_powDD() {
         // Test for method double java.lang.Math.pow(double, double)
-        assertTrue("pow returned incorrect value",
+        assertTrue("pow returned incorrect konstue",
                 2.0.pow(8.0).toLong() == 256L)
-        assertTrue("pow returned incorrect value",
+        assertTrue("pow returned incorrect konstue",
                 2.0.pow(-8.0) == 0.00390625)
         assertEquals("Incorrect root returned1",
                 2.0, sqrt(sqrt(2.0).pow(4.0)), 0.0)
@@ -706,20 +706,20 @@ class HarmonyMath {
     fun test_ulp_D() {
         // Test for special cases
         assertTrue("Should return NaN", Double.isNaN(ulp(Double.NaN)))
-        assertEquals("Returned incorrect value", Double.POSITIVE_INFINITY, ulp(Double.POSITIVE_INFINITY), 0.0)
-        assertEquals("Returned incorrect value", Double.POSITIVE_INFINITY, ulp(Double.NEGATIVE_INFINITY), 0.0)
-        assertEquals("Returned incorrect value", Double.MIN_VALUE, ulp(0.0), 0.0)
-        assertEquals("Returned incorrect value", Double.MIN_VALUE, ulp(+0.0), 0.0)
-        assertEquals("Returned incorrect value", Double.MIN_VALUE, ulp(-0.0), 0.0)
-        assertEquals("Returned incorrect value", pow(2.0, 971.0), ulp(Double.MAX_VALUE), 0.0)
-        assertEquals("Returned incorrect value", pow(2.0, 971.0), ulp(-Double.MAX_VALUE), 0.0)
+        assertEquals("Returned incorrect konstue", Double.POSITIVE_INFINITY, ulp(Double.POSITIVE_INFINITY), 0.0)
+        assertEquals("Returned incorrect konstue", Double.POSITIVE_INFINITY, ulp(Double.NEGATIVE_INFINITY), 0.0)
+        assertEquals("Returned incorrect konstue", Double.MIN_VALUE, ulp(0.0), 0.0)
+        assertEquals("Returned incorrect konstue", Double.MIN_VALUE, ulp(+0.0), 0.0)
+        assertEquals("Returned incorrect konstue", Double.MIN_VALUE, ulp(-0.0), 0.0)
+        assertEquals("Returned incorrect konstue", pow(2.0, 971.0), ulp(Double.MAX_VALUE), 0.0)
+        assertEquals("Returned incorrect konstue", pow(2.0, 971.0), ulp(-Double.MAX_VALUE), 0.0)
 
-        assertEquals("Returned incorrect value", Double.MIN_VALUE, ulp(Double.MIN_VALUE), 0.0)
-        assertEquals("Returned incorrect value", Double.MIN_VALUE, ulp(-Double.MIN_VALUE), 0.0)
+        assertEquals("Returned incorrect konstue", Double.MIN_VALUE, ulp(Double.MIN_VALUE), 0.0)
+        assertEquals("Returned incorrect konstue", Double.MIN_VALUE, ulp(-Double.MIN_VALUE), 0.0)
 
-        assertEquals("Returned incorrect value", 2.220446049250313E-16, ulp(1.0), 0.0)
-        assertEquals("Returned incorrect value", 2.220446049250313E-16, ulp(-1.0), 0.0)
-        assertEquals("Returned incorrect value", 2.2737367544323206E-13, ulp(1153.0), 0.0)
+        assertEquals("Returned incorrect konstue", 2.220446049250313E-16, ulp(1.0), 0.0)
+        assertEquals("Returned incorrect konstue", 2.220446049250313E-16, ulp(-1.0), 0.0)
+        assertEquals("Returned incorrect konstue", 2.2737367544323206E-13, ulp(1153.0), 0.0)
     }
 
     /**
@@ -728,41 +728,41 @@ class HarmonyMath {
     fun test_ulp_f() {
         // Test for special cases
         assertTrue("Should return NaN", Float.isNaN(ulp(Float.NaN)))
-        assertEquals("Returned incorrect value", Float.POSITIVE_INFINITY, ulp(Float.POSITIVE_INFINITY), 0f)
-        assertEquals("Returned incorrect value", Float.POSITIVE_INFINITY, ulp(Float.NEGATIVE_INFINITY), 0f)
-        assertEquals("Returned incorrect value", Float.MIN_VALUE, ulp(0.0f), 0f)
-        assertEquals("Returned incorrect value", Float.MIN_VALUE, ulp(+0.0f), 0f)
-        assertEquals("Returned incorrect value", Float.MIN_VALUE, ulp(-0.0f), 0f)
-        assertEquals("Returned incorrect value", 2.028241E31f, ulp(Float.MAX_VALUE), 0f)
-        assertEquals("Returned incorrect value", 2.028241E31f, ulp(-Float.MAX_VALUE), 0f)
+        assertEquals("Returned incorrect konstue", Float.POSITIVE_INFINITY, ulp(Float.POSITIVE_INFINITY), 0f)
+        assertEquals("Returned incorrect konstue", Float.POSITIVE_INFINITY, ulp(Float.NEGATIVE_INFINITY), 0f)
+        assertEquals("Returned incorrect konstue", Float.MIN_VALUE, ulp(0.0f), 0f)
+        assertEquals("Returned incorrect konstue", Float.MIN_VALUE, ulp(+0.0f), 0f)
+        assertEquals("Returned incorrect konstue", Float.MIN_VALUE, ulp(-0.0f), 0f)
+        assertEquals("Returned incorrect konstue", 2.028241E31f, ulp(Float.MAX_VALUE), 0f)
+        assertEquals("Returned incorrect konstue", 2.028241E31f, ulp(-Float.MAX_VALUE), 0f)
 
-        assertEquals("Returned incorrect value", 1.4E-45f, ulp(Float.MIN_VALUE), 0f)
-        assertEquals("Returned incorrect value", 1.4E-45f, ulp(-Float.MIN_VALUE), 0f)
+        assertEquals("Returned incorrect konstue", 1.4E-45f, ulp(Float.MIN_VALUE), 0f)
+        assertEquals("Returned incorrect konstue", 1.4E-45f, ulp(-Float.MIN_VALUE), 0f)
 
-        assertEquals("Returned incorrect value", 1.1920929E-7f, ulp(1.0f),
+        assertEquals("Returned incorrect konstue", 1.1920929E-7f, ulp(1.0f),
                 0f)
-        assertEquals("Returned incorrect value", 1.1920929E-7f,
+        assertEquals("Returned incorrect konstue", 1.1920929E-7f,
                 ulp(-1.0f), 0f)
-        assertEquals("Returned incorrect value", 1.2207031E-4f, ulp(1153.0f), 0f)
-        assertEquals("Returned incorrect value", 5.6E-45f, ulp(9.403954E-38f), 0f)
+        assertEquals("Returned incorrect konstue", 1.2207031E-4f, ulp(1153.0f), 0f)
+        assertEquals("Returned incorrect konstue", 5.6E-45f, ulp(9.403954E-38f), 0f)
     }
 
     companion object {
 
-        const val MIN_NORMAL_D: Double = 2.2250738585072014E-308
-        const val MIN_NORMAL_F: Float  = 1.1754943508222875E-38f
+        const konst MIN_NORMAL_D: Double = 2.2250738585072014E-308
+        const konst MIN_NORMAL_F: Float  = 1.1754943508222875E-38f
 
         /**
          * cases for test_copySign_DD in est/Strictest
          */
-        internal val COPYSIGN_DD_CASES = doubleArrayOf(Double.POSITIVE_INFINITY, Double.MAX_VALUE, 3.4E302, 2.3,
+        internal konst COPYSIGN_DD_CASES = doubleArrayOf(Double.POSITIVE_INFINITY, Double.MAX_VALUE, 3.4E302, 2.3,
                 MIN_NORMAL_D, MIN_NORMAL_D / 2, Double.MIN_VALUE, +0.0, 0.0, -0.0, -Double.MIN_VALUE,
                 -MIN_NORMAL_D / 2, -MIN_NORMAL_D, -4.5, -3.4E102, -Double.MAX_VALUE, Double.NEGATIVE_INFINITY)
 
         /**
          * cases for test_copySign_FF in est/Strictest
          */
-        internal val COPYSIGN_FF_CASES = floatArrayOf(Float.POSITIVE_INFINITY, Float.MAX_VALUE, 3.4E12f, 2.3f,
+        internal konst COPYSIGN_FF_CASES = floatArrayOf(Float.POSITIVE_INFINITY, Float.MAX_VALUE, 3.4E12f, 2.3f,
                 MIN_NORMAL_F, MIN_NORMAL_F / 2, Float.MIN_VALUE, +0.0f, 0.0f, -0.0f, -Float.MIN_VALUE,
                 -MIN_NORMAL_F / 2, -MIN_NORMAL_F, -4.5f, -5.6442E21f, -Float.MAX_VALUE, Float.NEGATIVE_INFINITY)
 
@@ -772,7 +772,7 @@ class HarmonyMath {
          * NEXTAFTER_DD_START_CASES[i][1] is the nextUp of start number
          * NEXTAFTER_DD_START_CASES[i][2] is the nextDown of start number
          */
-        internal val NEXTAFTER_DD_START_CASES = arrayOf(
+        internal konst NEXTAFTER_DD_START_CASES = arrayOf(
                 doubleArrayOf(3.4, 3.4000000000000004, 3.3999999999999995),
                 doubleArrayOf(-3.4, -3.3999999999999995, -3.4000000000000004),
                 doubleArrayOf(3.4233E109, 3.4233000000000005E109, 3.4232999999999996E109),
@@ -794,7 +794,7 @@ class HarmonyMath {
          * direction number cases for test_nextTowards_DD/test_nextTowards_FD in
          * est/Strictest
          */
-        internal val NEXTAFTER_DD_FD_DIRECTION_CASES = doubleArrayOf(Double.POSITIVE_INFINITY,
+        internal konst NEXTAFTER_DD_FD_DIRECTION_CASES = doubleArrayOf(Double.POSITIVE_INFINITY,
                 Double.MAX_VALUE, 8.8, 3.4, 1.4, MIN_NORMAL_D, MIN_NORMAL_D / 2,
                 Double.MIN_VALUE, +0.0, 0.0, -0.0, -Double.MIN_VALUE, -MIN_NORMAL_D / 2,
                 -MIN_NORMAL_D, -1.4, -3.4, -8.8, -Double.MAX_VALUE, Double.NEGATIVE_INFINITY)
@@ -805,7 +805,7 @@ class HarmonyMath {
          * NEXTAFTER_FD_START_CASES[i][1] is the nextUp of start number
          * NEXTAFTER_FD_START_CASES[i][2] is the nextDown of start number
          */
-        internal val NEXTAFTER_FD_START_CASES = arrayOf(floatArrayOf(3.4f, 3.4000003f, 3.3999999f),
+        internal konst NEXTAFTER_FD_START_CASES = arrayOf(floatArrayOf(3.4f, 3.4000003f, 3.3999999f),
             floatArrayOf(-3.4f, -3.3999999f, -3.4000003f),
             floatArrayOf(3.4233E19f, 3.4233002E19f, 3.4232998E19f),
             floatArrayOf(-3.4233E19f, -3.4232998E19f, -3.4233002E19f),

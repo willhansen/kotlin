@@ -20,17 +20,17 @@ import org.jetbrains.kotlin.fir.resolve.transformers.ReturnTypeCalculator
 import org.jetbrains.kotlin.name.Name
 
 class MutableCheckerContext private constructor(
-    override val implicitReceiverStack: PersistentImplicitReceiverStack,
-    override val containingDeclarations: MutableList<FirDeclaration>,
-    override val qualifiedAccessOrAssignmentsOrAnnotationCalls: MutableList<FirStatement>,
-    override val getClassCalls: MutableList<FirGetClassCall>,
-    override val annotationContainers: MutableList<FirAnnotationContainer>,
-    override val containingElements: MutableList<FirElement>,
+    override konst implicitReceiverStack: PersistentImplicitReceiverStack,
+    override konst containingDeclarations: MutableList<FirDeclaration>,
+    override konst qualifiedAccessOrAssignmentsOrAnnotationCalls: MutableList<FirStatement>,
+    override konst getClassCalls: MutableList<FirGetClassCall>,
+    override konst annotationContainers: MutableList<FirAnnotationContainer>,
+    override konst containingElements: MutableList<FirElement>,
     override var isContractBody: Boolean,
     override var containingFile: FirFile?,
     sessionHolder: SessionHolder,
     returnTypeCalculator: ReturnTypeCalculator,
-    override val suppressedDiagnostics: PersistentSet<String>,
+    override konst suppressedDiagnostics: PersistentSet<String>,
     allInfosSuppressed: Boolean,
     allWarningsSuppressed: Boolean,
     allErrorsSuppressed: Boolean
@@ -52,9 +52,9 @@ class MutableCheckerContext private constructor(
         allErrorsSuppressed = false
     )
 
-    override fun addImplicitReceiver(name: Name?, value: ImplicitReceiverValue<*>): MutableCheckerContext {
+    override fun addImplicitReceiver(name: Name?, konstue: ImplicitReceiverValue<*>): MutableCheckerContext {
         return MutableCheckerContext(
-            implicitReceiverStack.add(name, value),
+            implicitReceiverStack.add(name, konstue),
             containingDeclarations,
             qualifiedAccessOrAssignmentsOrAnnotationCalls,
             getClassCalls,

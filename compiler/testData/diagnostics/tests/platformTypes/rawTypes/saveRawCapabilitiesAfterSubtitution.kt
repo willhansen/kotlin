@@ -18,4 +18,4 @@ class Test {
 
 // FILE: main.kt
 
-val result = Test.rawAField.Inner<Double>().foo()
+konst result = Test.rawAField.Inner<Double>().foo()

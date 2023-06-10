@@ -3,7 +3,7 @@
 
 import kotlin.test.assertEquals
 
-val String.plusK: String
+konst String.plusK: String
     get() = this + "K"
 
 fun box(): String =

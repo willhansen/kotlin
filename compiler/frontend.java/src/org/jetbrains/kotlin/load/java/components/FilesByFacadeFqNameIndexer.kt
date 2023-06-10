@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.util.slicedMap.Slices
 import org.jetbrains.kotlin.util.slicedMap.WritableSlice
 
 // TODO: this component is actually only needed by CLI, see CliLightClassGenerationSupport
-class FilesByFacadeFqNameIndexer(private val trace: BindingTrace) : FilePreprocessorExtension {
+class FilesByFacadeFqNameIndexer(private konst trace: BindingTrace) : FilePreprocessorExtension {
     override fun preprocessFile(file: KtFile) {
         if (!file.hasTopLevelCallables()) return
 
@@ -27,10 +27,10 @@ class FilesByFacadeFqNameIndexer(private val trace: BindingTrace) : FilePreproce
 
     companion object {
         @JvmField
-        val FACADE_FILES_BY_FQ_NAME: WritableSlice<FqName, MutableCollection<KtFile>> = Slices.createSimpleSlice()
+        konst FACADE_FILES_BY_FQ_NAME: WritableSlice<FqName, MutableCollection<KtFile>> = Slices.createSimpleSlice()
 
         @JvmField
-        val FACADE_FILES_BY_PACKAGE_NAME: WritableSlice<FqName, MutableCollection<KtFile>> = Slices.createSimpleSlice()
+        konst FACADE_FILES_BY_PACKAGE_NAME: WritableSlice<FqName, MutableCollection<KtFile>> = Slices.createSimpleSlice()
 
         init {
             BasicWritableSlice.initSliceDebugNames(FilesByFacadeFqNameIndexer::class.java)

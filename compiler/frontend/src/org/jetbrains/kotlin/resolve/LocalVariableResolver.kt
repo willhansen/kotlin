@@ -44,14 +44,14 @@ import org.jetbrains.kotlin.types.expressions.*
 import org.jetbrains.kotlin.types.expressions.typeInfoFactory.noTypeInfo
 
 class LocalVariableResolver(
-    private val modifiersChecker: ModifiersChecker,
-    private val identifierChecker: IdentifierChecker,
-    private val dataFlowAnalyzer: DataFlowAnalyzer,
-    private val annotationResolver: AnnotationResolver,
-    private val variableTypeAndInitializerResolver: VariableTypeAndInitializerResolver,
-    private val delegatedPropertyResolver: DelegatedPropertyResolver,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val dataFlowValueFactory: DataFlowValueFactory
+    private konst modifiersChecker: ModifiersChecker,
+    private konst identifierChecker: IdentifierChecker,
+    private konst dataFlowAnalyzer: DataFlowAnalyzer,
+    private konst annotationResolver: AnnotationResolver,
+    private konst variableTypeAndInitializerResolver: VariableTypeAndInitializerResolver,
+    private konst delegatedPropertyResolver: DelegatedPropertyResolver,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst dataFlowValueFactory: DataFlowValueFactory
 ) {
 
     fun process(
@@ -60,26 +60,26 @@ class LocalVariableResolver(
         scope: LexicalScope,
         facade: ExpressionTypingFacade
     ): Pair<KotlinTypeInfo, VariableDescriptor> {
-        val context = typingContext.replaceContextDependency(ContextDependency.INDEPENDENT).replaceScope(scope)
-        val receiverTypeRef = property.receiverTypeReference
+        konst context = typingContext.replaceContextDependency(ContextDependency.INDEPENDENT).replaceScope(scope)
+        konst receiverTypeRef = property.receiverTypeReference
         if (receiverTypeRef != null) {
             context.trace.report(LOCAL_EXTENSION_PROPERTY.on(receiverTypeRef))
         }
 
-        val getter = property.getter
+        konst getter = property.getter
         if (getter != null) {
             context.trace.report(LOCAL_VARIABLE_WITH_GETTER.on(getter))
         }
 
-        val setter = property.setter
+        konst setter = property.setter
         if (setter != null) {
             context.trace.report(LOCAL_VARIABLE_WITH_SETTER.on(setter))
         }
 
-        val propertyDescriptor =
+        konst propertyDescriptor =
             resolveLocalVariableDescriptor(scope, property, context.dataFlowInfo, context.inferenceSession, context.trace)
 
-        val delegateExpression = property.delegateExpression
+        konst delegateExpression = property.delegateExpression
         if (delegateExpression != null) {
             if (!languageVersionSettings.supportsFeature(LanguageFeature.LocalDelegatedProperties)) {
                 context.trace.report(
@@ -105,28 +105,28 @@ class LocalVariableResolver(
             }
         }
 
-        val initializer = property.initializer
+        konst initializer = property.initializer
         var typeInfo: KotlinTypeInfo
         if (initializer != null) {
-            val outType = propertyDescriptor.type
+            konst outType = propertyDescriptor.type
             typeInfo = facade.getTypeInfo(initializer, context.replaceExpectedType(outType))
-            val dataFlowInfo = typeInfo.dataFlowInfo
-            val type = typeInfo.type
+            konst dataFlowInfo = typeInfo.dataFlowInfo
+            konst type = typeInfo.type
             if (type != null) {
-                val initializerDataFlowValue = dataFlowValueFactory.createDataFlowValue(initializer, type, context)
+                konst initializerDataFlowValue = dataFlowValueFactory.createDataFlowValue(initializer, type, context)
                 if (!propertyDescriptor.isVar && initializerDataFlowValue.canBeBound) {
                     context.trace.record(BindingContext.BOUND_INITIALIZER_VALUE, propertyDescriptor, initializerDataFlowValue)
                 }
-                // At this moment we do not take initializer value into account if type is given for a property
+                // At this moment we do not take initializer konstue into account if type is given for a property
                 // We can comment this condition to take them into account, like here: var s: String? = "xyz"
                 // In this case s will be not-nullable until it is changed
                 if (property.typeReference == null) {
-                    val variableDataFlowValue = dataFlowValueFactory.createDataFlowValueForProperty(
+                    konst variableDataFlowValue = dataFlowValueFactory.createDataFlowValueForProperty(
                         property, propertyDescriptor, context.trace.bindingContext,
                         DescriptorUtils.getContainingModuleOrNull(scope.ownerDescriptor)
                     )
                     // We cannot say here anything new about initializerDataFlowValue
-                    // except it has the same value as variableDataFlowValue
+                    // except it has the same konstue as variableDataFlowValue
                     typeInfo = typeInfo.replaceDataFlowInfo(
                         dataFlowInfo.assign(
                             variableDataFlowValue, initializerDataFlowValue,
@@ -160,11 +160,11 @@ class LocalVariableResolver(
         inferenceSession: InferenceSession,
         trace: BindingTrace
     ): VariableDescriptor {
-        val containingDeclaration = scope.ownerDescriptor
-        val result: VariableDescriptorWithInitializerImpl
-        val type: KotlinType
+        konst containingDeclaration = scope.ownerDescriptor
+        konst result: VariableDescriptorWithInitializerImpl
+        konst type: KotlinType
         if (KtPsiUtil.isScriptDeclaration(variable)) {
-            val propertyDescriptor = PropertyDescriptorImpl.create(
+            konst propertyDescriptor = PropertyDescriptorImpl.create(
                 containingDeclaration,
                 annotationResolver.resolveAnnotationsWithArguments(scope, variable.modifierList, trace),
                 Modality.FINAL,
@@ -185,13 +185,13 @@ class LocalVariableResolver(
                 propertyDescriptor, scope, variable, dataFlowInfo, inferenceSession, trace, local = true
             )
 
-            val receiverParameter = (containingDeclaration as ScriptDescriptor).thisAsReceiverParameter
+            konst receiverParameter = (containingDeclaration as ScriptDescriptor).thisAsReceiverParameter
             propertyDescriptor.setType(type, emptyList<TypeParameterDescriptor>(), receiverParameter, null, emptyList<ReceiverParameterDescriptor>())
             initializeWithDefaultGetterSetter(propertyDescriptor)
             trace.record(BindingContext.VARIABLE, variable, propertyDescriptor)
             result = propertyDescriptor
         } else {
-            val variableDescriptor = resolveLocalVariableDescriptorWithType(scope, variable, null, trace)
+            konst variableDescriptor = resolveLocalVariableDescriptorWithType(scope, variable, null, trace)
             // For a local variable the type must not be deferred
             type = variableTypeAndInitializerResolver.resolveType(
                 variableDescriptor, scope, variable, dataFlowInfo, inferenceSession, trace, local = true
@@ -229,9 +229,9 @@ class LocalVariableResolver(
         type: KotlinType?,
         trace: BindingTrace
     ): LocalVariableDescriptor {
-        val hasDelegate = variable is KtProperty && variable.hasDelegate()
-        val hasLateinit = variable.hasModifier(KtTokens.LATEINIT_KEYWORD)
-        val variableDescriptor = LocalVariableDescriptor(
+        konst hasDelegate = variable is KtProperty && variable.hasDelegate()
+        konst hasLateinit = variable.hasModifier(KtTokens.LATEINIT_KEYWORD)
+        konst variableDescriptor = LocalVariableDescriptor(
             scope.ownerDescriptor,
             annotationResolver.resolveAnnotationsWithArguments(scope, variable.modifierList, trace),
             // Note, that the same code works both for common local vars and for destructuring declarations,
@@ -252,7 +252,7 @@ class LocalVariableResolver(
 
     private fun VariableAccessorDescriptor.updateAccessorFlagsFromResolvedCallForDelegatedProperty(trace: BindingTrace) {
         if (this is FunctionDescriptorImpl) {
-            val resultingDescriptor = trace.bindingContext.get(BindingContext.DELEGATED_PROPERTY_RESOLVED_CALL, this)?.resultingDescriptor
+            konst resultingDescriptor = trace.bindingContext.get(BindingContext.DELEGATED_PROPERTY_RESOLVED_CALL, this)?.resultingDescriptor
             if (resultingDescriptor != null) {
                 setSuspend(resultingDescriptor.isSuspend)
             }

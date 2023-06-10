@@ -10,115 +10,115 @@ import kotlin.reflect.KProperty
 
 enum class Enum {
     A {
-        val aInside = <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-        val bInside = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-        val cInside = nonInPlaceRun { value }
+        konst aInside = <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+        konst bInside = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+        konst cInside = nonInPlaceRun { konstue }
 
-        val dInside by <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-        val eInside by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-        val fInside by nonInPlaceDelegate { value }
+        konst dInside by <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+        konst eInside by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+        konst fInside by nonInPlaceDelegate { konstue }
     },
     B {
         init {
-            val aInit = <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-            val bInit = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-            val cInit = nonInPlaceRun { value }
+            konst aInit = <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+            konst bInit = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+            konst cInit = nonInPlaceRun { konstue }
 
-            val dInit by <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-            val eInit by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-            val fInit by nonInPlaceDelegate { value }
+            konst dInit by <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+            konst eInit by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+            konst fInit by nonInPlaceDelegate { konstue }
         }
     },
     C {
         init {
             class Local {
-                val aInside = value
-                val bInside = inPlaceRun { value }
-                val cInside = nonInPlaceRun { value }
+                konst aInside = konstue
+                konst bInside = inPlaceRun { konstue }
+                konst cInside = nonInPlaceRun { konstue }
 
-                val dInside by value
-                val eInside by inPlaceDelegate { value }
-                val fInside by nonInPlaceDelegate { value }
+                konst dInside by konstue
+                konst eInside by inPlaceDelegate { konstue }
+                konst fInside by nonInPlaceDelegate { konstue }
 
                 init {
-                    val aInit = value
-                    val bInit = inPlaceRun { value }
-                    val cInit = nonInPlaceRun { value }
+                    konst aInit = konstue
+                    konst bInit = inPlaceRun { konstue }
+                    konst cInit = nonInPlaceRun { konstue }
 
-                    val dInit by value
-                    val eInit by inPlaceDelegate { value }
-                    val fInit by nonInPlaceDelegate { value }
+                    konst dInit by konstue
+                    konst eInit by inPlaceDelegate { konstue }
+                    konst fInit by nonInPlaceDelegate { konstue }
                 }
 
                 fun localFun() {
-                    val a = value
-                    val b = inPlaceRun { value }
-                    val c = nonInPlaceRun { value }
+                    konst a = konstue
+                    konst b = inPlaceRun { konstue }
+                    konst c = nonInPlaceRun { konstue }
 
-                    val d by value
-                    val e by inPlaceDelegate { value }
-                    val f by nonInPlaceDelegate { value }
+                    konst d by konstue
+                    konst e by inPlaceDelegate { konstue }
+                    konst f by nonInPlaceDelegate { konstue }
                 }
             }
         }
     },
     D {
         init {
-            val someObj = object {
-                val aInside = <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-                val bInside = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-                val cInside = nonInPlaceRun { value }
+            konst someObj = object {
+                konst aInside = <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+                konst bInside = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+                konst cInside = nonInPlaceRun { konstue }
 
-                val dInside by <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-                val eInside by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-                val fInside by nonInPlaceDelegate { value }
+                konst dInside by <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+                konst eInside by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+                konst fInside by nonInPlaceDelegate { konstue }
 
                 init {
-                    val aInit = <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-                    val bInit = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-                    val cInit = nonInPlaceRun { value }
+                    konst aInit = <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+                    konst bInit = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+                    konst cInit = nonInPlaceRun { konstue }
 
-                    val dInit by <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-                    val eInit by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-                    val fInit by nonInPlaceDelegate { value }
+                    konst dInit by <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+                    konst eInit by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+                    konst fInit by nonInPlaceDelegate { konstue }
                 }
 
                 fun localFun() {
-                    val a = value
-                    val b = inPlaceRun { value }
-                    val c = nonInPlaceRun { value }
+                    konst a = konstue
+                    konst b = inPlaceRun { konstue }
+                    konst c = nonInPlaceRun { konstue }
 
-                    val d by value
-                    val e by inPlaceDelegate { value }
-                    val f by nonInPlaceDelegate { value }
+                    konst d by konstue
+                    konst e by inPlaceDelegate { konstue }
+                    konst f by nonInPlaceDelegate { konstue }
                 }
             }
         }
     }
     ;
 
-    val a = <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-    val b = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-    val c = nonInPlaceRun { value }
+    konst a = <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+    konst b = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+    konst c = nonInPlaceRun { konstue }
 
-    val d by <!UNINITIALIZED_ENUM_COMPANION!>value<!>
-    val e by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>value<!> }
-    val f by nonInPlaceDelegate { value }
+    konst d by <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>
+    konst e by inPlaceDelegate { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> }
+    konst f by nonInPlaceDelegate { konstue }
 
     companion object {
-        val value = "value"
+        konst konstue = "konstue"
     }
 }
 
-enum class EnumWithConstructor(val a: String, val b: String, val c: String) {
+enum class EnumWithConstructor(konst a: String, konst b: String, konst c: String) {
     A(
-        a = <!UNINITIALIZED_ENUM_COMPANION!>value<!>,
-        b = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>value<!> },
-        c = nonInPlaceRun { value }
+        a = <!UNINITIALIZED_ENUM_COMPANION!>konstue<!>,
+        b = inPlaceRun { <!UNINITIALIZED_ENUM_COMPANION!>konstue<!> },
+        c = nonInPlaceRun { konstue }
     );
 
     companion object {
-        val value = "value"
+        konst konstue = "konstue"
     }
 }
 
@@ -135,8 +135,8 @@ fun <T> nonInPlaceRun(block: () -> T): T {
 
 inline fun <T> inPlaceDelegate(block: () -> T): ReadOnlyProperty<Any?, T> {
     contract { callsInPlace(block) }
-    val value = block()
-    return ReadOnlyProperty { _, _ -> value }
+    konst konstue = block()
+    return ReadOnlyProperty { _, _ -> konstue }
 }
 
 fun <T> nonInPlaceDelegate(block: () -> T): ReadOnlyProperty<Any?, T> {

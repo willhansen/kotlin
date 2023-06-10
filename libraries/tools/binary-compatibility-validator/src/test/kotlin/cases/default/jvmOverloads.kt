@@ -19,7 +19,7 @@ internal fun internalFunWithOverloads(a: Int = 0, b: String? = null) {}
 
 public class JvmOverloadsClass
 @JvmOverloads
-internal constructor(val a: Int = 0, val b: String? = null) {
+internal constructor(konst a: Int = 0, konst b: String? = null) {
 
     @JvmOverloads
     internal fun internalFunWithOverloads(a: Int = 0, b: String? = null) {}

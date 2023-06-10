@@ -16,7 +16,7 @@ class Delegate {
     }
 }
 
-val x: Int by Delegate()
+konst x: Int by Delegate()
 
 @Test fun runTest() {
     println(x)

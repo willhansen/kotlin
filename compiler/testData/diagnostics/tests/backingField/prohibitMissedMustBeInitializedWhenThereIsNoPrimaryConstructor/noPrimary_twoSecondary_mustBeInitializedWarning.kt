@@ -5,7 +5,7 @@ class Foo {
     constructor()
     constructor(x: Int)
     <!MUST_BE_INITIALIZED_WARNING!>var x: String<!>
-        set(value) {}
+        set(konstue) {}
 
     init {
         x = ""

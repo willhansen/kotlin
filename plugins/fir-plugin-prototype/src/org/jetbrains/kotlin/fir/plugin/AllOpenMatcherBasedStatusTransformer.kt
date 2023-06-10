@@ -25,9 +25,9 @@ class AllOpenMatcherBasedStatusTransformer(session: FirSession) : FirStatusTrans
         return when (declaration) {
             is FirRegularClass -> declaration.classKind == ClassKind.CLASS && session.allOpenPredicateMatcher.isAnnotated(declaration.symbol)
             is FirCallableDeclaration -> {
-                val parentClassId = declaration.symbol.callableId.classId ?: return false
+                konst parentClassId = declaration.symbol.callableId.classId ?: return false
                 if (parentClassId.isLocal) return false
-                val parentClassSymbol = session.symbolProvider.getClassLikeSymbolByClassId(parentClassId) as? FirRegularClassSymbol
+                konst parentClassSymbol = session.symbolProvider.getClassLikeSymbolByClassId(parentClassId) as? FirRegularClassSymbol
                     ?: return false
                 session.allOpenPredicateMatcher.isAnnotated(parentClassSymbol)
             }
@@ -46,12 +46,12 @@ class AllOpenMatcherBasedStatusTransformer(session: FirSession) : FirStatusTrans
 
 class AllOpenPredicateMatcher(session: FirSession) : AbstractSimpleClassPredicateMatchingService(session) {
     companion object {
-        private val ALL_OPEN2 = FqName("org.jetbrains.kotlin.fir.plugin.AllOpen2")
+        private konst ALL_OPEN2 = FqName("org.jetbrains.kotlin.fir.plugin.AllOpen2")
     }
 
-    override val predicate = DeclarationPredicate.create {
+    override konst predicate = DeclarationPredicate.create {
         annotated(ALL_OPEN2)
     }
 }
 
-private val FirSession.allOpenPredicateMatcher: AllOpenPredicateMatcher by FirSession.sessionComponentAccessor()
+private konst FirSession.allOpenPredicateMatcher: AllOpenPredicateMatcher by FirSession.sessionComponentAccessor()

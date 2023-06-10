@@ -1,5 +1,5 @@
 class Outer {
-    class Inner(@Foo val name: String) {
+    class Inner(@Foo konst name: String) {
         var x = 1
     }
 }

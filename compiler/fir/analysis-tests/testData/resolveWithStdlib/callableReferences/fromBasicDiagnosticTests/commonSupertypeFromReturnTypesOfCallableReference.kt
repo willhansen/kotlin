@@ -8,5 +8,5 @@ fun bar(): Child2 = TODO()
 fun <K> select(x: K, y: K): K = TODO()
 
 fun test() {
-    val a = select(::foo, ::bar)
+    konst a = select(::foo, ::bar)
 }

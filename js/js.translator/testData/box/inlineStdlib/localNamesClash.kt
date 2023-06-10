@@ -5,7 +5,7 @@ package foo
 
 internal fun test(x: Int, y: Int): Int =
         with (x + x) {
-            val xx = this
+            konst xx = this
 
             with (y + y) {
                 xx + this

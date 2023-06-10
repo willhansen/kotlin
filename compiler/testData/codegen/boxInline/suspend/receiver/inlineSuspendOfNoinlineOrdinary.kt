@@ -21,12 +21,12 @@ class Controller {
     }
 
     suspend inline fun test2(noinline c: Controller.() -> Unit) {
-        val l = { c() }
+        konst l = { c() }
         l()
     }
 
     suspend inline fun test3(noinline c: Controller.() -> Unit) {
-        val r = object: Runnable {
+        konst r = object: Runnable {
             override fun run() {
                 c()
             }
@@ -48,7 +48,7 @@ import kotlin.coroutines.*
 import helpers.*
 
 fun box() : String {
-    val controller = Controller()
+    konst controller = Controller()
     builder(controller) {
         test1 {
             res = "OK"

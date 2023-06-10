@@ -6,11 +6,11 @@
 package org.jetbrains.kotlin.project.model
 
 // TODO: Add better Kotlin Variant Attributes management
-//  Ideally we should respect the nature of Attributes and express values in form of Complete Lattice
+//  Ideally we should respect the nature of Attributes and express konstues in form of Complete Lattice
 //  Moreover we can add support for default and most used Value Types (eg. Enums)
 
 open class KotlinAttributeKey(
-    val uniqueName: String
+    konst uniqueName: String
 ) {
     override fun equals(other: Any?): Boolean =
         other is KotlinAttributeKey && uniqueName == other.uniqueName
@@ -21,10 +21,10 @@ open class KotlinAttributeKey(
 
 // TODO: Introduce ENUM
 object KotlinPlatformTypeAttribute : KotlinAttributeKey("org.jetbrains.kotlin.platform.type") {
-    const val JVM = "jvm"
-    const val ANDROID_JVM = "androidJvm"
-    const val JS = "js"
-    const val NATIVE = "native"
+    const konst JVM = "jvm"
+    const konst ANDROID_JVM = "androidJvm"
+    const konst JS = "js"
+    const konst NATIVE = "native"
 }
 
 object KotlinNativeTargetAttribute : KotlinAttributeKey("org.jetbrains.kotlin.native.target")

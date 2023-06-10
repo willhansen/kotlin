@@ -5,10 +5,10 @@ class A
 
 class B
 
-val A.foo: Int
+konst A.foo: Int
     get() = 32
 
-val B.foo: Int
+konst B.foo: Int
     get() = 42
 
 fun box(): String {

@@ -4,7 +4,7 @@
 package kt559
 
 abstract class A {
-    abstract val i : Int
+    abstract konst i : Int
 
     abstract fun foo() : Int
 
@@ -12,7 +12,7 @@ abstract class A {
 }
 
 abstract class D(): A() {
-    override val i : Int = 34
+    override konst i : Int = 34
 }
 
 <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>class C<!>() : D() {

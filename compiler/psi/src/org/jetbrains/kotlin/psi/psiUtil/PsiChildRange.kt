@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.psi.psiUtil
 
 import com.intellij.psi.PsiElement
 
-data class PsiChildRange(val first: PsiElement?, val last: PsiElement?) : Sequence<PsiElement> {
+data class PsiChildRange(konst first: PsiElement?, konst last: PsiElement?) : Sequence<PsiElement> {
     init {
         if (first == null) {
             assert(last == null)
@@ -27,21 +27,21 @@ data class PsiChildRange(val first: PsiElement?, val last: PsiElement?) : Sequen
         }
     }
 
-    val isEmpty: Boolean
+    konst isEmpty: Boolean
         get() = first == null
 
     override fun iterator(): Iterator<PsiElement> {
-        val sequence = if (first == null) {
+        konst sequence = if (first == null) {
             emptySequence<PsiElement>()
         } else {
-            val afterLast = last!!.nextSibling
+            konst afterLast = last!!.nextSibling
             first.siblings().takeWhile { it != afterLast }
         }
         return sequence.iterator()
     }
 
     companion object {
-        val EMPTY: PsiChildRange = PsiChildRange(null, null)
+        konst EMPTY: PsiChildRange = PsiChildRange(null, null)
 
         fun singleElement(element: PsiElement): PsiChildRange = PsiChildRange(element, element)
     }

@@ -22,20 +22,20 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 sealed class FirCallableDeclaration : FirMemberDeclaration() {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val typeParameters: List<FirTypeParameterRef>
-    abstract override val status: FirDeclarationStatus
-    abstract val returnTypeRef: FirTypeRef
-    abstract val receiverParameter: FirReceiverParameter?
-    abstract val deprecationsProvider: DeprecationsProvider
-    abstract override val symbol: FirCallableSymbol<out FirCallableDeclaration>
-    abstract val containerSource: DeserializedContainerSource?
-    abstract val dispatchReceiverType: ConeSimpleKotlinType?
-    abstract val contextReceivers: List<FirContextReceiver>
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst typeParameters: List<FirTypeParameterRef>
+    abstract override konst status: FirDeclarationStatus
+    abstract konst returnTypeRef: FirTypeRef
+    abstract konst receiverParameter: FirReceiverParameter?
+    abstract konst deprecationsProvider: DeprecationsProvider
+    abstract override konst symbol: FirCallableSymbol<out FirCallableDeclaration>
+    abstract konst containerSource: DeserializedContainerSource?
+    abstract konst dispatchReceiverType: ConeSimpleKotlinType?
+    abstract konst contextReceivers: List<FirContextReceiver>
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitCallableDeclaration(this, data)
 

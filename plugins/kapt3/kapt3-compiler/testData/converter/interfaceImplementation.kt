@@ -1,5 +1,5 @@
 interface Named {
-    val name: String?
+    konst name: String?
 }
 
 class Product2 : Named {

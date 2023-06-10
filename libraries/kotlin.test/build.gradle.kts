@@ -14,12 +14,12 @@ plugins {
 
 open class ComponentsFactoryAccess
 @javax.inject.Inject
-constructor(val factory: SoftwareComponentFactory)
+constructor(konst factory: SoftwareComponentFactory)
 
-val componentFactory = objects.newInstance<ComponentsFactoryAccess>().factory
+konst componentFactory = objects.newInstance<ComponentsFactoryAccess>().factory
 
 
-val jvmApi by configurations.creating {
+konst jvmApi by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -28,7 +28,7 @@ val jvmApi by configurations.creating {
     }
 }
 
-val jvmRuntime by configurations.creating {
+konst jvmRuntime by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -38,7 +38,7 @@ val jvmRuntime by configurations.creating {
     extendsFrom(jvmApi)
 }
 
-val jsApiVariant by configurations.creating {
+konst jsApiVariant by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -46,7 +46,7 @@ val jsApiVariant by configurations.creating {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.js)
     }
 }
-val jsRuntimeVariant by configurations.creating {
+konst jsRuntimeVariant by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -56,7 +56,7 @@ val jsRuntimeVariant by configurations.creating {
     extendsFrom(jsApiVariant)
 }
 
-val wasmApiVariant by configurations.creating {
+konst wasmApiVariant by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -64,7 +64,7 @@ val wasmApiVariant by configurations.creating {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.wasm)
     }
 }
-val wasmRuntimeVariant by configurations.creating {
+konst wasmRuntimeVariant by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -74,7 +74,7 @@ val wasmRuntimeVariant by configurations.creating {
     extendsFrom(wasmApiVariant)
 }
 
-val nativeApiVariant by configurations.creating {
+konst nativeApiVariant by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -83,7 +83,7 @@ val nativeApiVariant by configurations.creating {
     }
 }
 
-val commonVariant by configurations.creating {
+konst commonVariant by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -101,11 +101,11 @@ fun Configuration.sourcesConsumingConfiguration() {
     }
 }
 
-val kotlinTestCommonSources by configurations.creating {
+konst kotlinTestCommonSources by configurations.creating {
     sourcesConsumingConfiguration()
 }
 
-val kotlinTestJvmSources by configurations.creating {
+konst kotlinTestJvmSources by configurations.creating {
     sourcesConsumingConfiguration()
 }
 
@@ -120,16 +120,16 @@ dependencies {
 }
 
 artifacts {
-    val jvmJar = tasks.getByPath(":kotlin-test:kotlin-test-jvm:jar")
+    konst jvmJar = tasks.getByPath(":kotlin-test:kotlin-test-jvm:jar")
     add(jvmApi.name, jvmJar)
     add(jvmRuntime.name, jvmJar)
 }
 
-val combinedSourcesJar by tasks.registering(Jar::class) {
+konst combinedSourcesJar by tasks.registering(Jar::class) {
     dependsOn(kotlinTestCommonSources)
     dependsOn(kotlinTestJvmSources)
     archiveClassifier.set("sources")
-    val archiveOperations = serviceOf<ArchiveOperations>()
+    konst archiveOperations = serviceOf<ArchiveOperations>()
     into("common") {
         from({ archiveOperations.zipTree(kotlinTestCommonSources.singleFile) }) {
             exclude("META-INF/**")
@@ -142,7 +142,7 @@ val combinedSourcesJar by tasks.registering(Jar::class) {
     }
 }
 
-val combinedJvmSourcesJar by configurations.creating {
+konst combinedJvmSourcesJar by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
 }
@@ -151,7 +151,7 @@ artifacts {
     add(combinedJvmSourcesJar.name, combinedSourcesJar)
 }
 
-val rootComponent = componentFactory.adhoc("root").apply {
+konst rootComponent = componentFactory.adhoc("root").apply {
     addVariantsFromConfiguration(jvmApi) {
         mapToMavenScope("compile")
     }
@@ -167,16 +167,16 @@ val rootComponent = componentFactory.adhoc("root").apply {
 }
 
 
-val kotlinTestCapability = "$group:kotlin-test:$version" // add to variants with explicit capabilities when the default one is needed, too
-val baseCapability = "$group:kotlin-test-framework:$version"
-val implCapability = "$group:kotlin-test-framework-impl:$version"
+konst kotlinTestCapability = "$group:kotlin-test:$version" // add to variants with explicit capabilities when the default one is needed, too
+konst baseCapability = "$group:kotlin-test-framework:$version"
+konst implCapability = "$group:kotlin-test-framework-impl:$version"
 
-val jvmTestFrameworks = listOf("junit", "junit5", "testng")
+konst jvmTestFrameworks = listOf("junit", "junit5", "testng")
 
-val frameworkCapabilities = mutableSetOf<String>()
+konst frameworkCapabilities = mutableSetOf<String>()
 
 jvmTestFrameworks.forEach { framework ->
-    val (apiVariant, runtimeVariant) = listOf("api", "runtime").map { usage ->
+    konst (apiVariant, runtimeVariant) = listOf("api", "runtime").map { usage ->
         configurations.create("${framework}${usage.capitalize()}Variant") {
             isCanBeConsumed = true
             isCanBeResolved = false
@@ -197,7 +197,7 @@ jvmTestFrameworks.forEach { framework ->
     rootComponent.addVariantsFromConfiguration(apiVariant) { mapToOptional() }
     rootComponent.addVariantsFromConfiguration(runtimeVariant) { mapToOptional() }
 
-    val (apiElements, runtimeElements) = listOf("api", "runtime").map { usage ->
+    konst (apiElements, runtimeElements) = listOf("api", "runtime").map { usage ->
         configurations.create("${framework}${usage.capitalize()}") {
             isCanBeConsumed = true
             isCanBeResolved = false
@@ -226,7 +226,7 @@ jvmTestFrameworks.forEach { framework ->
     }
 
     artifacts {
-        val jar = tasks.getByPath(":kotlin-test:kotlin-test-$framework:jar")
+        konst jar = tasks.getByPath(":kotlin-test:kotlin-test-$framework:jar")
         add(apiElements.name, jar)
         add(runtimeElements.name, jar)
     }
@@ -253,7 +253,7 @@ commonVariant.apply {
     outgoing.capability(kotlinTestCapability)
 }
 
-val (jsApi, jsRuntime) = listOf("api", "runtime").map { usage ->
+konst (jsApi, jsRuntime) = listOf("api", "runtime").map { usage ->
     configurations.create("js${usage.capitalize()}") {
         isCanBeConsumed = true
         isCanBeResolved = false
@@ -270,12 +270,12 @@ dependencies {
 }
 
 artifacts {
-    val jsJar = tasks.getByPath(":kotlin-test:kotlin-test-js:libraryJarWithIr")
+    konst jsJar = tasks.getByPath(":kotlin-test:kotlin-test-js:libraryJarWithIr")
     add(jsApi.name, jsJar)
     add(jsRuntime.name, jsJar)
 }
 
-val jsComponent = componentFactory.adhoc("js").apply {
+konst jsComponent = componentFactory.adhoc("js").apply {
     addVariantsFromConfiguration(jsApi) {
         mapToMavenScope("compile")
     }
@@ -284,7 +284,7 @@ val jsComponent = componentFactory.adhoc("js").apply {
     }
 }
 
-val (wasmApi, wasmRuntime) = listOf("api", "runtime").map { usage ->
+konst (wasmApi, wasmRuntime) = listOf("api", "runtime").map { usage ->
     configurations.create("wasm${usage.capitalize()}") {
         isCanBeConsumed = true
         isCanBeResolved = false
@@ -301,7 +301,7 @@ dependencies {
 }
 
 artifacts {
-    val wasmKlib = tasks.getByPath(":kotlin-test:kotlin-test-wasm:wasmJar")
+    konst wasmKlib = tasks.getByPath(":kotlin-test:kotlin-test-wasm:wasmJar")
     add(wasmApi.name, wasmKlib) {
         extension = "klib"
     }
@@ -310,7 +310,7 @@ artifacts {
     }
 }
 
-val wasmComponent = componentFactory.adhoc("wasm").apply {
+konst wasmComponent = componentFactory.adhoc("wasm").apply {
     addVariantsFromConfiguration(wasmApi) {
         mapToMavenScope("compile")
     }
@@ -319,7 +319,7 @@ val wasmComponent = componentFactory.adhoc("wasm").apply {
     }
 }
 
-val commonMetadata by configurations.creating {
+konst commonMetadata by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -327,7 +327,7 @@ val commonMetadata by configurations.creating {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.common)
     }
 }
-val annotationsMetadata by configurations.creating {
+konst annotationsMetadata by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = false
     attributes {
@@ -343,18 +343,18 @@ artifacts {
     add(commonMetadata.name, tasks.getByPath(":kotlin-test:kotlin-test-common:jar"))
     add(annotationsMetadata.name, tasks.getByPath(":kotlin-test:kotlin-test-annotations-common:jar"))
 }
-val commonMetadataComponent = componentFactory.adhoc("common").apply {
+konst commonMetadataComponent = componentFactory.adhoc("common").apply {
     addVariantsFromConfiguration(commonMetadata) {
         mapToMavenScope("compile")
     }
 }
-val annotationsMetadataComponent = componentFactory.adhoc("annotations-common").apply {
+konst annotationsMetadataComponent = componentFactory.adhoc("annotations-common").apply {
     addVariantsFromConfiguration(annotationsMetadata) {
         mapToMavenScope("compile")
     }
 }
 
-val emptyJavadocJar by tasks.creating(Jar::class) {
+konst emptyJavadocJar by tasks.creating(Jar::class) {
     archiveClassifier.set("javadoc")
 }
 
@@ -367,8 +367,8 @@ publishing {
             artifact(combinedSourcesJar)
             // Remove all optional dependencies from the root pom
             pom.withXml {
-                val dependenciesNode = (asNode().get("dependencies") as NodeList).filterIsInstance<Node>().single()
-                val optionalDependencies = (dependenciesNode.get("dependency") as NodeList).filterIsInstance<Node>().filter {
+                konst dependenciesNode = (asNode().get("dependencies") as NodeList).filterIsInstance<Node>().single()
+                konst optionalDependencies = (dependenciesNode.get("dependency") as NodeList).filterIsInstance<Node>().filter {
                     ((it.get("optional") as NodeList).singleOrNull() as Node?)?.text() == "true"
                 }
                 optionalDependencies.forEach { dependenciesNode.remove(it) }

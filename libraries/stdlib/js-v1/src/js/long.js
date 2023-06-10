@@ -17,10 +17,10 @@
 
 /**
  * Constructs a 64-bit two's-complement integer, given its low and high 32-bit
- * values as *signed* integers.  See the from* functions below for more
+ * konstues as *signed* integers.  See the from* functions below for more
  * convenient ways of constructing Longs.
  *
- * The internal representation of a long is the two given signed, 32-bit values.
+ * The internal representation of a long is the two given signed, 32-bit konstues.
  * We use 32-bit pieces because these are the size of integers on which
  * Javascript performs bit-operations.  For operations like addition and
  * multiplication, we split each number into 16-bit pieces, which can easily be
@@ -29,7 +29,7 @@
  *
  * In the algorithms below, we frequently reduce the negative case to the
  * positive case by negating the input(s) and then post-processing the result.
- * Note that we must ALWAYS check specially whether those values are MIN_VALUE
+ * Note that we must ALWAYS check specially whether those konstues are MIN_VALUE
  * (-2^63) because -MIN_VALUE == MIN_VALUE (since 2^63 cannot be represented as
  * a positive number, it overflows back into a negative).  Not handling this
  * case would often result in infinite recursion.
@@ -60,12 +60,12 @@ Kotlin.Long.$metadata$ = {
 };
 
 
-// NOTE: Common constant values ZERO, ONE, NEG_ONE, etc. are defined below the
+// NOTE: Common constant konstues ZERO, ONE, NEG_ONE, etc. are defined below the
 // from* methods on which they depend.
 
 
 /**
- * A cache of the Long representations of small integer values.
+ * A cache of the Long representations of small integer konstues.
  * @type {!Object}
  * @private
  */
@@ -73,47 +73,47 @@ Kotlin.Long.IntCache_ = {};
 
 
 /**
- * Returns a Long representing the given (32-bit) integer value.
- * @param {number} value The 32-bit integer in question.
- * @return {!Kotlin.Long} The corresponding Long value.
+ * Returns a Long representing the given (32-bit) integer konstue.
+ * @param {number} konstue The 32-bit integer in question.
+ * @return {!Kotlin.Long} The corresponding Long konstue.
  */
-Kotlin.Long.fromInt = function(value) {
-  if (-128 <= value && value < 128) {
-    var cachedObj = Kotlin.Long.IntCache_[value];
+Kotlin.Long.fromInt = function(konstue) {
+  if (-128 <= konstue && konstue < 128) {
+    var cachedObj = Kotlin.Long.IntCache_[konstue];
     if (cachedObj) {
       return cachedObj;
     }
   }
 
-  var obj = new Kotlin.Long(value | 0, value < 0 ? -1 : 0);
-  if (-128 <= value && value < 128) {
-    Kotlin.Long.IntCache_[value] = obj;
+  var obj = new Kotlin.Long(konstue | 0, konstue < 0 ? -1 : 0);
+  if (-128 <= konstue && konstue < 128) {
+    Kotlin.Long.IntCache_[konstue] = obj;
   }
   return obj;
 };
 
 
 /**
- * Converts this number value to `Long`.
+ * Converts this number konstue to `Long`.
  * The fractional part, if any, is rounded down towards zero.
- * Returns zero if this `Double` value is `NaN`, `Long.MIN_VALUE` if it's less than `Long.MIN_VALUE`,
+ * Returns zero if this `Double` konstue is `NaN`, `Long.MIN_VALUE` if it's less than `Long.MIN_VALUE`,
  * `Long.MAX_VALUE` if it's bigger than `Long.MAX_VALUE`.
- * @param {number} value The number in question.
- * @return {!Kotlin.Long} The corresponding Long value.
+ * @param {number} konstue The number in question.
+ * @return {!Kotlin.Long} The corresponding Long konstue.
  */
-Kotlin.Long.fromNumber = function(value) {
-  if (isNaN(value)) {
+Kotlin.Long.fromNumber = function(konstue) {
+  if (isNaN(konstue)) {
     return Kotlin.Long.ZERO;
-  } else if (value <= -Kotlin.Long.TWO_PWR_63_DBL_) {
+  } else if (konstue <= -Kotlin.Long.TWO_PWR_63_DBL_) {
     return Kotlin.Long.MIN_VALUE;
-  } else if (value + 1 >= Kotlin.Long.TWO_PWR_63_DBL_) {
+  } else if (konstue + 1 >= Kotlin.Long.TWO_PWR_63_DBL_) {
     return Kotlin.Long.MAX_VALUE;
-  } else if (value < 0) {
-    return Kotlin.Long.fromNumber(-value).negate();
+  } else if (konstue < 0) {
+    return Kotlin.Long.fromNumber(-konstue).negate();
   } else {
     return new Kotlin.Long(
-        (value % Kotlin.Long.TWO_PWR_32_DBL_) | 0,
-        (value / Kotlin.Long.TWO_PWR_32_DBL_) | 0);
+        (konstue % Kotlin.Long.TWO_PWR_32_DBL_) | 0,
+        (konstue / Kotlin.Long.TWO_PWR_32_DBL_) | 0);
   }
 };
 
@@ -123,7 +123,7 @@ Kotlin.Long.fromNumber = function(value) {
  * the given high and low bits.  Each is assumed to use 32 bits.
  * @param {number} lowBits The low 32-bits.
  * @param {number} highBits The high 32-bits.
- * @return {!Kotlin.Long} The corresponding Long value.
+ * @return {!Kotlin.Long} The corresponding Long konstue.
  */
 Kotlin.Long.fromBits = function(lowBits, highBits) {
   return new Kotlin.Long(lowBits, highBits);
@@ -135,7 +135,7 @@ Kotlin.Long.fromBits = function(lowBits, highBits) {
  * radix.
  * @param {string} str The textual representation of the Long.
  * @param {number=} opt_radix The radix in which the text is written.
- * @return {!Kotlin.Long} The corresponding Long value.
+ * @return {!Kotlin.Long} The corresponding Long konstue.
  */
 Kotlin.Long.fromString = function(str, opt_radix) {
   if (str.length == 0) {
@@ -160,20 +160,20 @@ Kotlin.Long.fromString = function(str, opt_radix) {
   var result = Kotlin.Long.ZERO;
   for (var i = 0; i < str.length; i += 8) {
     var size = Math.min(8, str.length - i);
-    var value = parseInt(str.substring(i, i + size), radix);
+    var konstue = parseInt(str.substring(i, i + size), radix);
     if (size < 8) {
       var power = Kotlin.Long.fromNumber(Math.pow(radix, size));
-      result = result.multiply(power).add(Kotlin.Long.fromNumber(value));
+      result = result.multiply(power).add(Kotlin.Long.fromNumber(konstue));
     } else {
       result = result.multiply(radixToPower);
-      result = result.add(Kotlin.Long.fromNumber(value));
+      result = result.add(Kotlin.Long.fromNumber(konstue));
     }
   }
   return result;
 };
 
 
-// NOTE: the compiler should inline these constant values below and then remove
+// NOTE: the compiler should inline these constant konstues below and then remove
 // these variables, so there should be no runtime penalty for these.
 
 
@@ -261,26 +261,26 @@ Kotlin.Long.MIN_VALUE = Kotlin.Long.fromBits(0, 0x80000000 | 0);
 Kotlin.Long.TWO_PWR_24_ = Kotlin.Long.fromInt(1 << 24);
 
 
-/** @return {number} The value, assuming it is a 32-bit integer. */
+/** @return {number} The konstue, assuming it is a 32-bit integer. */
 Kotlin.Long.prototype.toInt = function() {
   return this.low_;
 };
 
 
-/** @return {number} The closest floating-point representation to this value. */
+/** @return {number} The closest floating-point representation to this konstue. */
 Kotlin.Long.prototype.toNumber = function() {
   return this.high_ * Kotlin.Long.TWO_PWR_32_DBL_ +
          this.getLowBitsUnsigned();
 };
 
-/** @return {number} The 32-bit hashCode of this value. */
+/** @return {number} The 32-bit hashCode of this konstue. */
 Kotlin.Long.prototype.hashCode = function() {
   return this.high_ ^ this.low_;
 };
 
 /**
  * @param {number=} opt_radix The radix in which the text should be written.
- * @return {string} The textual representation of this value.
+ * @return {string} The textual representation of this konstue.
  * @override
  */
 Kotlin.Long.prototype.toString = function(opt_radix) {
@@ -295,7 +295,7 @@ Kotlin.Long.prototype.toString = function(opt_radix) {
 
   if (this.isNegative()) {
     if (this.equalsLong(Kotlin.Long.MIN_VALUE)) {
-      // We need to change the Long value before it can be negated, so we remove
+      // We need to change the Long konstue before it can be negated, so we remove
       // the bottom-most digit in this base and then recurse to do the rest.
       var radixLong = Kotlin.Long.fromNumber(radix);
       var div = this.div(radixLong);
@@ -314,8 +314,8 @@ Kotlin.Long.prototype.toString = function(opt_radix) {
   var result = '';
   while (true) {
     var remDiv = rem.div(radixToPower);
-    var intval = rem.subtract(remDiv.multiply(radixToPower)).toInt();
-    var digits = intval.toString(radix);
+    var intkonst = rem.subtract(remDiv.multiply(radixToPower)).toInt();
+    var digits = intkonst.toString(radix);
 
     rem = remDiv;
     if (rem.isZero()) {
@@ -330,19 +330,19 @@ Kotlin.Long.prototype.toString = function(opt_radix) {
 };
 
 
-/** @return {number} The high 32-bits as a signed value. */
+/** @return {number} The high 32-bits as a signed konstue. */
 Kotlin.Long.prototype.getHighBits = function() {
   return this.high_;
 };
 
 
-/** @return {number} The low 32-bits as a signed value. */
+/** @return {number} The low 32-bits as a signed konstue. */
 Kotlin.Long.prototype.getLowBits = function() {
   return this.low_;
 };
 
 
-/** @return {number} The low 32-bits as an unsigned value. */
+/** @return {number} The low 32-bits as an unsigned konstue. */
 Kotlin.Long.prototype.getLowBitsUnsigned = function() {
   return (this.low_ >= 0) ?
       this.low_ : Kotlin.Long.TWO_PWR_32_DBL_ + this.low_;
@@ -351,7 +351,7 @@ Kotlin.Long.prototype.getLowBitsUnsigned = function() {
 
 /**
  * @return {number} Returns the number of bits needed to represent the absolute
- *     value of this Long.
+ *     konstue of this Long.
  */
 Kotlin.Long.prototype.getNumBitsAbs = function() {
   if (this.isNegative()) {
@@ -361,9 +361,9 @@ Kotlin.Long.prototype.getNumBitsAbs = function() {
       return this.negate().getNumBitsAbs();
     }
   } else {
-    var val = this.high_ != 0 ? this.high_ : this.low_;
+    var konst = this.high_ != 0 ? this.high_ : this.low_;
     for (var bit = 31; bit > 0; bit--) {
-      if ((val & (1 << bit)) != 0) {
+      if ((konst & (1 << bit)) != 0) {
         break;
       }
     }
@@ -372,19 +372,19 @@ Kotlin.Long.prototype.getNumBitsAbs = function() {
 };
 
 
-/** @return {boolean} Whether this value is zero. */
+/** @return {boolean} Whether this konstue is zero. */
 Kotlin.Long.prototype.isZero = function() {
   return this.high_ == 0 && this.low_ == 0;
 };
 
 
-/** @return {boolean} Whether this value is negative. */
+/** @return {boolean} Whether this konstue is negative. */
 Kotlin.Long.prototype.isNegative = function() {
   return this.high_ < 0;
 };
 
 
-/** @return {boolean} Whether this value is odd. */
+/** @return {boolean} Whether this konstue is odd. */
 Kotlin.Long.prototype.isOdd = function() {
   return (this.low_ & 1) == 1;
 };
@@ -473,7 +473,7 @@ Kotlin.Long.prototype.compare = function(other) {
 };
 
 
-/** @return {!Kotlin.Long} The negation of this value. */
+/** @return {!Kotlin.Long} The negation of this konstue. */
 Kotlin.Long.prototype.negate = function() {
   if (this.equalsLong(Kotlin.Long.MIN_VALUE)) {
     return Kotlin.Long.MIN_VALUE;
@@ -646,13 +646,13 @@ Kotlin.Long.prototype.div = function(other) {
   // Repeat the following until the remainder is less than other:  find a
   // floating-point that approximates remainder / other *from below*, add this
   // into the result, and subtract it from the remainder.  It is critical that
-  // the approximate value is less than or equal to the real value so that the
+  // the approximate konstue is less than or equal to the real konstue so that the
   // remainder never becomes negative.
   var res = Kotlin.Long.ZERO;
   var rem = this;
   while (rem.greaterThanOrEqual(other)) {
     // Approximate the result of division. This may be a little greater or
-    // smaller than the actual value.
+    // smaller than the actual konstue.
     var approx = Math.max(1, Math.floor(rem.toNumber() / other.toNumber()));
 
     // We will tweak the approximate result by changing it in the 48-th digit or
@@ -693,7 +693,7 @@ Kotlin.Long.prototype.modulo = function(other) {
 };
 
 
-/** @return {!Kotlin.Long} The bitwise-NOT of this value. */
+/** @return {!Kotlin.Long} The bitwise-NOT of this konstue. */
 Kotlin.Long.prototype.not = function() {
   return Kotlin.Long.fromBits(~this.low_, ~this.high_);
 };
@@ -821,7 +821,7 @@ Kotlin.Long.prototype.dec = function() {
     return this.add(Kotlin.Long.NEG_ONE);
 };
 
-Kotlin.Long.prototype.valueOf = function() {
+Kotlin.Long.prototype.konstueOf = function() {
     return this.toNumber();
 };
 

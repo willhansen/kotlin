@@ -6,12 +6,12 @@ fun box() {
     var result = ""
     for (x in listOf("A", "B")) {
         try {
-            val y = "y"
+            konst y = "y"
             result += y
             continue
         }
         finally {
-            val z = "z"
+            konst z = "z"
             result += z
         }
     }

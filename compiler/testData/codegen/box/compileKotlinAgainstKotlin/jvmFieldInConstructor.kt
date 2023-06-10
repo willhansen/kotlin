@@ -4,9 +4,9 @@
 // MODULE: lib
 // FILE: A.kt
 
-open class A(@JvmField public val publicField: String = "1",
-             @JvmField internal val internalField: String = "2",
-             @JvmField protected val protectedfield: String = "3")
+open class A(@JvmField public konst publicField: String = "1",
+             @JvmField internal konst internalField: String = "2",
+             @JvmField protected konst protectedfield: String = "3")
 
 open class B : A()
 

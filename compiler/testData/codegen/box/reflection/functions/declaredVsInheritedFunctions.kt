@@ -33,9 +33,9 @@ fun check(c: Collection<KFunction<*>>, names: Set<String>) {
 }
 
 fun box(): String {
-    val any = setOf("equals", "hashCode", "toString")
+    konst any = setOf("equals", "hashCode", "toString")
 
-    val j = J::class
+    konst j = J::class
 
     check(j.staticFunctions,
           setOf("publicStaticJ", "privateStaticJ"))
@@ -50,7 +50,7 @@ fun box(): String {
     check(j.memberFunctions, any + j.declaredMemberFunctions.names())
     check(j.memberExtensionFunctions, emptySet())
 
-    val k = K::class
+    konst k = K::class
 
     check(k.staticFunctions,
           emptySet())
@@ -66,7 +66,7 @@ fun box(): String {
     check(k.functions, any + (k.memberFunctions + k.memberExtensionFunctions).names())
 
 
-    val l = L::class
+    konst l = L::class
 
     check(l.staticFunctions, emptySet())
     check(l.declaredFunctions, emptySet())

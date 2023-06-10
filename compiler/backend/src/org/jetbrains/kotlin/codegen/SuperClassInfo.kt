@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.org.objectweb.asm.Type
 
 class SuperClassInfo(
-    val type: Type,
+    konst type: Type,
     // null means java/lang/Object or irrelevant
-    val kotlinType: KotlinType?
+    konst kotlinType: KotlinType?
 ) {
 
     companion object {
@@ -38,7 +38,7 @@ class SuperClassInfo(
             }
 
             for (supertype in descriptor.typeConstructor.supertypes) {
-                val superClass = supertype.constructor.declarationDescriptor
+                konst superClass = supertype.constructor.declarationDescriptor
                 if (superClass != null && !isJvmInterface(superClass)) {
                     return SuperClassInfo(typeMapper.mapClass(superClass), supertype)
                 }

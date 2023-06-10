@@ -28,11 +28,11 @@ fun <T1, T2, T3, T4, T5, R> kCombine(
 }
 
 data class Quantiple<out T1, out T2, out T3, out T4, out T5>(
-    val first: T1,
-    val second: T2,
-    val third: T3,
-    val fourth: T4,
-    val fifth: T5
+    konst first: T1,
+    konst second: T2,
+    konst third: T3,
+    konst fourth: T4,
+    konst fifth: T5
 )
 
 fun <K1, K2, K3, K4, K5> materialize(): (K1, K2, K3, K4, K5) -> Quantiple<K1, K2, K3, K4, K5> = { _, _, _, _, _ -> TODO() }

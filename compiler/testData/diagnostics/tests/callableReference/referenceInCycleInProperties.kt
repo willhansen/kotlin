@@ -8,9 +8,9 @@ abstract class Parser {
 }
 
 class Some(strings: List<String>) {
-    val parser = object : Parser() {
+    konst parser = object : Parser() {
         override fun parseString(x: String) = listOfInt
     }
-    private val listOfString = strings
-    private val listOfInt: List<Int> = listOfString.map(parser::parse)
+    private konst listOfString = strings
+    private konst listOfInt: List<Int> = listOfString.map(parser::parse)
 }

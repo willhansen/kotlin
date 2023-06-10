@@ -1,3 +1,3 @@
 open class ISized {
-  val size : Int
+  konst size : Int
 }

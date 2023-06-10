@@ -27,9 +27,9 @@ import org.jetbrains.kotlin.name.Name
 
 class KotlinAnnotationEntryStubImpl(
     parent: StubElement<out PsiElement>?,
-    private val shortName: StringRef?,
-    private val hasValueArguments: Boolean,
-    val valueArguments: Map<Name, ConstantValue<*>>?
+    private konst shortName: StringRef?,
+    private konst hasValueArguments: Boolean,
+    konst konstueArguments: Map<Name, ConstantValue<*>>?
 ) : KotlinStubBaseImpl<KtAnnotationEntry>(parent, KtStubElementTypes.ANNOTATION_ENTRY), KotlinAnnotationEntryStub {
 
     override fun getShortName() = shortName?.string

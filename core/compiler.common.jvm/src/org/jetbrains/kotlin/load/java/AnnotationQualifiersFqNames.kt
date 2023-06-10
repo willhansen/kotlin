@@ -10,18 +10,18 @@ import org.jetbrains.kotlin.load.java.typeEnhancement.NullabilityQualifierWithMi
 import org.jetbrains.kotlin.name.FqName
 
 data class JavaDefaultQualifiers(
-    val nullabilityQualifier: NullabilityQualifierWithMigrationStatus,
-    val qualifierApplicabilityTypes: Collection<AnnotationQualifierApplicabilityType>,
-    val definitelyNotNull: Boolean = nullabilityQualifier.qualifier == NullabilityQualifier.NOT_NULL
+    konst nullabilityQualifier: NullabilityQualifierWithMigrationStatus,
+    konst qualifierApplicabilityTypes: Collection<AnnotationQualifierApplicabilityType>,
+    konst definitelyNotNull: Boolean = nullabilityQualifier.qualifier == NullabilityQualifier.NOT_NULL
 )
 
-val TYPE_QUALIFIER_NICKNAME_FQNAME = FqName("javax.annotation.meta.TypeQualifierNickname")
-val TYPE_QUALIFIER_FQNAME = FqName("javax.annotation.meta.TypeQualifier")
-val TYPE_QUALIFIER_DEFAULT_FQNAME = FqName("javax.annotation.meta.TypeQualifierDefault")
+konst TYPE_QUALIFIER_NICKNAME_FQNAME = FqName("javax.annotation.meta.TypeQualifierNickname")
+konst TYPE_QUALIFIER_FQNAME = FqName("javax.annotation.meta.TypeQualifier")
+konst TYPE_QUALIFIER_DEFAULT_FQNAME = FqName("javax.annotation.meta.TypeQualifierDefault")
 
-val MIGRATION_ANNOTATION_FQNAME = FqName("kotlin.annotations.jvm.UnderMigration")
+konst MIGRATION_ANNOTATION_FQNAME = FqName("kotlin.annotations.jvm.UnderMigration")
 
-val DEFAULT_JSPECIFY_APPLICABILITY = listOf(
+konst DEFAULT_JSPECIFY_APPLICABILITY = listOf(
     AnnotationQualifierApplicabilityType.FIELD,
     AnnotationQualifierApplicabilityType.METHOD_RETURN_TYPE,
     AnnotationQualifierApplicabilityType.VALUE_PARAMETER,
@@ -29,7 +29,7 @@ val DEFAULT_JSPECIFY_APPLICABILITY = listOf(
     AnnotationQualifierApplicabilityType.TYPE_USE
 )
 
-val JSPECIFY_DEFAULT_ANNOTATIONS = mapOf(
+konst JSPECIFY_DEFAULT_ANNOTATIONS = mapOf(
     JSPECIFY_OLD_NULL_MARKED to JavaDefaultQualifiers(
         NullabilityQualifierWithMigrationStatus(NullabilityQualifier.NOT_NULL),
         DEFAULT_JSPECIFY_APPLICABILITY,
@@ -42,7 +42,7 @@ val JSPECIFY_DEFAULT_ANNOTATIONS = mapOf(
     )
 )
 
-val BUILT_IN_TYPE_QUALIFIER_DEFAULT_ANNOTATIONS = mapOf(
+konst BUILT_IN_TYPE_QUALIFIER_DEFAULT_ANNOTATIONS = mapOf(
     FqName("javax.annotation.ParametersAreNullableByDefault") to
             JavaDefaultQualifiers(
                 NullabilityQualifierWithMigrationStatus(NullabilityQualifier.NULLABLE),
@@ -55,4 +55,4 @@ val BUILT_IN_TYPE_QUALIFIER_DEFAULT_ANNOTATIONS = mapOf(
             )
 ) + JSPECIFY_DEFAULT_ANNOTATIONS
 
-val BUILT_IN_TYPE_QUALIFIER_FQ_NAMES = setOf(JAVAX_NONNULL_ANNOTATION, JAVAX_CHECKFORNULL_ANNOTATION)
+konst BUILT_IN_TYPE_QUALIFIER_FQ_NAMES = setOf(JAVAX_NONNULL_ANNOTATION, JAVAX_CHECKFORNULL_ANNOTATION)

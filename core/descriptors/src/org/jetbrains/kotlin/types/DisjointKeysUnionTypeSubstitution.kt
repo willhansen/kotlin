@@ -19,8 +19,8 @@ package org.jetbrains.kotlin.types
 import org.jetbrains.kotlin.descriptors.annotations.Annotations
 
 class DisjointKeysUnionTypeSubstitution private constructor(
-    private val first: TypeSubstitution,
-    private val second: TypeSubstitution
+    private konst first: TypeSubstitution,
+    private konst second: TypeSubstitution
 ) : TypeSubstitution() {
     companion object {
         @JvmStatic fun create(first: TypeSubstitution, second: TypeSubstitution): TypeSubstitution {

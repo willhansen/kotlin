@@ -1,7 +1,7 @@
 fun foo(): Int = 42
 
 object ThrowInTryWithCatch {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -13,7 +13,7 @@ object ThrowInTryWithCatch {
 }
 
 object ThrowInTryWithCatchAndFinally {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -26,7 +26,7 @@ object ThrowInTryWithCatchAndFinally {
 }
 
 object ThrowInFinally {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -40,7 +40,7 @@ object ThrowInFinally {
 }
 
 object RethrowInCatch {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -53,7 +53,7 @@ object RethrowInCatch {
 }
 
 object RethrowInCatchWithFinally {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -67,7 +67,7 @@ object RethrowInCatchWithFinally {
 }
 
 object InnerTryWithCatch {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -83,7 +83,7 @@ object InnerTryWithCatch {
 }
 
 object InnerTryWithFinally {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -100,7 +100,7 @@ object InnerTryWithFinally {
 
 
 object InnerTryWithCatchAndFinally {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -117,7 +117,7 @@ object InnerTryWithCatchAndFinally {
 }
 
 object InnerCatch {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -134,7 +134,7 @@ object InnerCatch {
 }
 
 object InnerCatchWithFinally {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -152,7 +152,7 @@ object InnerCatchWithFinally {
 }
 
 object InnerCatchOuterRethrow {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -169,7 +169,7 @@ object InnerCatchOuterRethrow {
 }
 
 object InnerCatchOuterRethrowWithFinally {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -187,7 +187,7 @@ object InnerCatchOuterRethrowWithFinally {
 }
 
 object InnerFinally {
-    private val p: String
+    private konst p: String
 
     init {
         try {
@@ -204,7 +204,7 @@ object InnerFinally {
 }
 
 object InnerFinallyWithCatch {
-    private val p: String
+    private konst p: String
 
     init {
         try {

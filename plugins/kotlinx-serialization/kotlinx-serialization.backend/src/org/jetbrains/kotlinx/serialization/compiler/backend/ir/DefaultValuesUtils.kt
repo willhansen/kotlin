@@ -30,8 +30,8 @@ fun IrBuilderWithScope.getProperty(receiver: IrExpression, property: IrProperty)
 }
 
 /*
-  Create a function that creates `get property value expressions` for given corresponded constructor's param
-    (constructor_params) -> get_property_value_expression
+  Create a function that creates `get property konstue expressions` for given corresponded constructor's param
+    (constructor_params) -> get_property_konstue_expression
  */
 fun IrBuilderWithScope.createPropertyByParamReplacer(
     irClass: IrClass,
@@ -39,7 +39,7 @@ fun IrBuilderWithScope.createPropertyByParamReplacer(
     instance: IrValueParameter
 ): (ValueParameterDescriptor) -> IrExpression? {
     fun IrSerializableProperty.irGet(): IrExpression {
-        val ownerType = instance.symbol.owner.type
+        konst ownerType = instance.symbol.owner.type
         return getProperty(
             irGet(
                 type = ownerType,
@@ -48,9 +48,9 @@ fun IrBuilderWithScope.createPropertyByParamReplacer(
         )
     }
 
-    val serialPropertiesMap = serialProperties.associateBy { it.ir }
+    konst serialPropertiesMap = serialProperties.associateBy { it.ir }
 
-    val transientPropertiesSet =
+    konst transientPropertiesSet =
         irClass.declarations.asSequence()
             .filterIsInstance<IrProperty>()
             .filter { it.backingField != null }
@@ -58,10 +58,10 @@ fun IrBuilderWithScope.createPropertyByParamReplacer(
             .toSet()
 
     return { vpd ->
-        val propertyDescriptor = irClass.properties.find { it.name == vpd.name }
+        konst propertyDescriptor = irClass.properties.find { it.name == vpd.name }
         if (propertyDescriptor != null) {
-            val value = serialPropertiesMap[propertyDescriptor]
-            value?.irGet() ?: run {
+            konst konstue = serialPropertiesMap[propertyDescriptor]
+            konstue?.irGet() ?: run {
                 if (propertyDescriptor in transientPropertiesSet)
                     getProperty(
                         irGet(instance),
@@ -76,8 +76,8 @@ fun IrBuilderWithScope.createPropertyByParamReplacer(
 }
 
 /*
-    Creates an initializer adapter function that can replace IR expressions of getting constructor parameter value by some other expression.
-    Also adapter may replace IR expression of getting `this` value by another expression.
+    Creates an initializer adapter function that can replace IR expressions of getting constructor parameter konstue by some other expression.
+    Also adapter may replace IR expression of getting `this` konstue by another expression.
      */
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 fun createInitializerAdapter(
@@ -85,18 +85,18 @@ fun createInitializerAdapter(
     paramGetReplacer: (ValueParameterDescriptor) -> IrExpression?,
     thisGetReplacer: Pair<IrValueSymbol, () -> IrExpression>? = null
 ): (IrExpressionBody) -> IrExpression {
-    val initializerTransformer = object : IrElementTransformerVoid() {
-        // try to replace `get some value` expression
+    konst initializerTransformer = object : IrElementTransformerVoid() {
+        // try to replace `get some konstue` expression
         override fun visitGetValue(expression: IrGetValue): IrExpression {
-            val symbol = expression.symbol
+            konst symbol = expression.symbol
             if (thisGetReplacer != null && thisGetReplacer.first == symbol) {
-                // replace `get this value` expression
+                // replace `get this konstue` expression
                 return thisGetReplacer.second()
             }
 
-            val descriptor = symbol.descriptor
+            konst descriptor = symbol.descriptor
             if (descriptor is ValueParameterDescriptor) {
-                // replace `get parameter value` expression
+                // replace `get parameter konstue` expression
                 paramGetReplacer(descriptor)?.let { return it }
             }
 
@@ -104,12 +104,12 @@ fun createInitializerAdapter(
             return super.visitGetValue(expression)
         }
     }
-    val defaultsMap = extractDefaultValuesFromConstructor(irClass)
+    konst defaultsMap = extractDefaultValuesFromConstructor(irClass)
     return fun(initializer: IrExpressionBody): IrExpression {
-        val rawExpression = initializer.expression
-        val expression =
+        konst rawExpression = initializer.expression
+        konst expression =
             if (rawExpression.isInitializePropertyFromParameter()) {
-                // this is a primary constructor property, use corresponding default of value parameter
+                // this is a primary constructor property, use corresponding default of konstue parameter
                 defaultsMap.getValue((rawExpression as IrGetValue).symbol)!!
             } else {
                 rawExpression
@@ -120,9 +120,9 @@ fun createInitializerAdapter(
 
 private fun extractDefaultValuesFromConstructor(irClass: IrClass?): Map<IrValueSymbol, IrExpression?> {
     if (irClass == null) return emptyMap()
-    val original = irClass.constructors.singleOrNull { it.isPrimary }
+    konst original = irClass.constructors.singleOrNull { it.isPrimary }
     // default arguments of original constructor
-    val defaultsMap: Map<IrValueSymbol, IrExpression?> =
-        original?.valueParameters?.associate { it.symbol to it.defaultValue?.expression } ?: emptyMap()
+    konst defaultsMap: Map<IrValueSymbol, IrExpression?> =
+        original?.konstueParameters?.associate { it.symbol to it.defaultValue?.expression } ?: emptyMap()
     return defaultsMap + extractDefaultValuesFromConstructor(irClass.getSuperClassNotAny())
 }

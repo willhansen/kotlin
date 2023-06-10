@@ -1,8 +1,8 @@
 // IGNORE_BACKEND_K2: JS_IR, JS_IR_ES6
 
-class Outer(val x: Any) {
+class Outer(konst x: Any) {
     inner class Inner(
-        val fn: () -> String = { x.toString() }
+        konst fn: () -> String = { x.toString() }
     )
 }
 

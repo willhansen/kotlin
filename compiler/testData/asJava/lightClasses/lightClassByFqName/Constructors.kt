@@ -1,6 +1,6 @@
 // Constructors
 
-class Constructors(val valInPrimary: Int) {
+class Constructors(konst konstInPrimary: Int) {
     constructor(parameterInSecondary: String): this(4)
     private constructor(): this(2)
 }

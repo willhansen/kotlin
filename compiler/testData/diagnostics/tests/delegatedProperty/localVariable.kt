@@ -5,7 +5,7 @@ import kotlin.reflect.KProperty
 
 class Local {
     fun foo() {
-        val a: Int by Delegate()
+        konst a: Int by Delegate()
     }
 }
 

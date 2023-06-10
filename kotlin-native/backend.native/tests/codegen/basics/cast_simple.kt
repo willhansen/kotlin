@@ -13,7 +13,7 @@ class B(): A() {}
 fun castSimple(o: Any) : A = o as A
 
 fun castTest(): Boolean {
-  val b = B()
+  konst b = B()
   castSimple(b)
   return true
 }

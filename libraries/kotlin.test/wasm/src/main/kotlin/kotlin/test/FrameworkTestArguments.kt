@@ -11,34 +11,34 @@ internal enum class IgnoredTestSuitesReporting {
 }
 
 internal class FrameworkTestArguments(
-    val includedQualifiers: List<String>,
-    val includedClassMethods: List<Pair<String, String>>,
-    val excludedQualifiers: List<String>,
-    val excludedClassMethods: List<Pair<String, String>>,
-    val ignoredTestSuites: IgnoredTestSuitesReporting,
-    val dryRun: Boolean
+    konst includedQualifiers: List<String>,
+    konst includedClassMethods: List<Pair<String, String>>,
+    konst excludedQualifiers: List<String>,
+    konst excludedClassMethods: List<Pair<String, String>>,
+    konst ignoredTestSuites: IgnoredTestSuitesReporting,
+    konst dryRun: Boolean
 ) {
     companion object {
         fun parse(args: List<String>): FrameworkTestArguments {
             var isInclude = false
             var isExclude = false
 
-            val includesClassMethods = mutableListOf<Pair<String, String>>()
-            val includesQualifiers = mutableListOf<String>()
-            val excludesClassMethods = mutableListOf<Pair<String, String>>()
-            val excludesQualifiers = mutableListOf<String>()
+            konst includesClassMethods = mutableListOf<Pair<String, String>>()
+            konst includesQualifiers = mutableListOf<String>()
+            konst excludesClassMethods = mutableListOf<Pair<String, String>>()
+            konst excludesQualifiers = mutableListOf<String>()
 
             fun addToIncludeOrExcludeList(argument: String) {
                 if (argument.isEmpty()) return
                 if (argument[0].let { it != it.lowercaseChar() }){
-                    val dotIndex = argument.indexOf('.')
-                    val listToAdd = if (isInclude) includesClassMethods else excludesClassMethods
+                    konst dotIndex = argument.indexOf('.')
+                    konst listToAdd = if (isInclude) includesClassMethods else excludesClassMethods
                     if (dotIndex == -1) {
                         listToAdd.add(argument to "*")
                     } else {
                         if (dotIndex < 1 || dotIndex >= argument.lastIndex) return
-                        val className = argument.substring(0, dotIndex)
-                        val methodName = argument.substring(dotIndex + 1)
+                        konst className = argument.substring(0, dotIndex)
+                        konst methodName = argument.substring(dotIndex + 1)
                         listToAdd.add(className to methodName)
                     }
                 } else {
@@ -61,9 +61,9 @@ internal class FrameworkTestArguments(
                 }
 
                 if (isIgnoredTestSuites) {
-                    val value = IgnoredTestSuitesReporting.values().firstOrNull { it.name == arg }
-                    if (value != null) {
-                        ignoredTestSuites = value
+                    konst konstue = IgnoredTestSuitesReporting.konstues().firstOrNull { it.name == arg }
+                    if (konstue != null) {
+                        ignoredTestSuites = konstue
                     }
                     isIgnoredTestSuites = false
                     continue

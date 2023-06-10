@@ -35,7 +35,7 @@ fun case1(a: I) {
     a.<!OVERLOAD_RESOLUTION_AMBIGUITY!>invoke<!>()
     <!OVERLOAD_RESOLUTION_AMBIGUITY!>a<!>()
 
-    val x  = <!OVERLOAD_RESOLUTION_AMBIGUITY!>object : I {}<!> ()
+    konst x  = <!OVERLOAD_RESOLUTION_AMBIGUITY!>object : I {}<!> ()
 }
 
 // FILE: TestCase3.kt
@@ -55,5 +55,5 @@ fun case1(a: I) {
     a.<!OVERLOAD_RESOLUTION_AMBIGUITY!>invoke<!>{}
     <!OVERLOAD_RESOLUTION_AMBIGUITY!>a<!>{}
 
-    val x  = <!OVERLOAD_RESOLUTION_AMBIGUITY!>object : I {}<!> {}
+    konst x  = <!OVERLOAD_RESOLUTION_AMBIGUITY!>object : I {}<!> {}
 }

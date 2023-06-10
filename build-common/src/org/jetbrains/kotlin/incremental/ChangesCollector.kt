@@ -25,21 +25,21 @@ import org.jetbrains.kotlin.protobuf.MessageLite
 import org.jetbrains.kotlin.serialization.deserialization.getClassId
 
 class ChangesCollector {
-    private val removedMembers = hashMapOf<FqName, MutableSet<String>>()
-    private val changedParents = hashMapOf<FqName, MutableSet<FqName>>()
-    private val changedMembers = hashMapOf<FqName, MutableSet<String>>()
-    private val areSubclassesAffected = hashMapOf<FqName, Boolean>()
+    private konst removedMembers = hashMapOf<FqName, MutableSet<String>>()
+    private konst changedParents = hashMapOf<FqName, MutableSet<FqName>>()
+    private konst changedMembers = hashMapOf<FqName, MutableSet<String>>()
+    private konst areSubclassesAffected = hashMapOf<FqName, Boolean>()
 
     //TODO for test only: ProtoData or ProtoBuf
-    private val storage = hashMapOf<FqName, ProtoData>()
-    private val removed = ArrayList<FqName>()
+    private konst storage = hashMapOf<FqName, ProtoData>()
+    private konst removed = ArrayList<FqName>()
 
     //TODO change to immutable map
     fun protoDataChanges(): Map<FqName, ProtoData> = storage
     fun protoDataRemoved(): List<FqName> = removed
 
     fun changes(): List<ChangeInfo> {
-        val changes = arrayListOf<ChangeInfo>()
+        konst changes = arrayListOf<ChangeInfo>()
 
         for ((fqName, members) in removedMembers) {
             if (members.isNotEmpty()) {
@@ -89,18 +89,18 @@ class ChangesCollector {
 
     fun collectProtoChanges(oldData: ProtoData?, newData: ProtoData?, collectAllMembersForNewClass: Boolean = false, packageProtoKey: String? = null) {
         if (oldData == null && newData == null) {
-            throw IllegalStateException("Old and new value are null")
+            throw IllegalStateException("Old and new konstue are null")
         }
 
         if (newData != null) {
             when (newData) {
                 is ClassProtoData -> {
-                    val fqName = newData.nameResolver.getClassId(newData.proto.fqName).asSingleFqName()
+                    konst fqName = newData.nameResolver.getClassId(newData.proto.fqName).asSingleFqName()
                     storage[fqName] = newData
                 }
                 is PackagePartProtoData -> {
                     //TODO fqName is not unique. It's package and can be present in both java and kotlin
-                    val fqName = newData.packageFqName
+                    konst fqName = newData.packageFqName
                     storage[packageProtoKey?.let { FqName(it) } ?: fqName] = newData
                 }
             }
@@ -130,8 +130,8 @@ class ChangesCollector {
             is ClassProtoData -> {
                 when (newData) {
                     is ClassProtoData -> {
-                        val fqName = oldData.nameResolver.getClassId(oldData.proto.fqName).asSingleFqName()
-                        val diff = DifferenceCalculatorForClass(oldData, newData).difference()
+                        konst fqName = oldData.nameResolver.getClassId(oldData.proto.fqName).asSingleFqName()
+                        konst diff = DifferenceCalculatorForClass(oldData, newData).difference()
                         if (diff.isClassAffected) {
                             collectSignature(oldData, diff.areSubclassesAffected)
                         }
@@ -149,7 +149,7 @@ class ChangesCollector {
                         collectSignature(newData, areSubclassesAffected = false)
                     }
                     is PackagePartProtoData -> {
-                        val diff = DifferenceCalculatorForPackageFacade(oldData, newData).difference()
+                        konst diff = DifferenceCalculatorForPackageFacade(oldData, newData).difference()
                         collectChangedMembers(oldData.packageFqName, diff.changedMembersNames)
                     }
                 }
@@ -168,7 +168,7 @@ class ChangesCollector {
         }
 
     private fun PackagePartProtoData.collectAllFromPackage(isRemoved: Boolean) {
-        val memberNames = getNonPrivateMembers()
+        konst memberNames = getNonPrivateMembers()
         if (isRemoved) {
             collectRemovedMembers(packageFqName, memberNames)
         } else {
@@ -177,17 +177,17 @@ class ChangesCollector {
     }
 
     private fun ClassProtoData.collectAllFromClass(isRemoved: Boolean, isAdded: Boolean, collectAllMembersForNewClass: Boolean = false) {
-        val classFqName = nameResolver.getClassId(proto.fqName).asSingleFqName()
+        konst classFqName = nameResolver.getClassId(proto.fqName).asSingleFqName()
 
         if (proto.isCompanionObject) {
-            val memberNames = getNonPrivateMembers()
+            konst memberNames = getNonPrivateMembers()
 
-            val collectMember = if (isRemoved) this@ChangesCollector::collectRemovedMember else this@ChangesCollector::collectChangedMember
+            konst collectMember = if (isRemoved) this@ChangesCollector::collectRemovedMember else this@ChangesCollector::collectChangedMember
             collectMember(classFqName.parent(), classFqName.shortName().asString())
             memberNames.forEach { collectMember(classFqName, it) }
         } else {
             if (!isRemoved && collectAllMembersForNewClass) {
-                val memberNames = getNonPrivateMembers()
+                konst memberNames = getNonPrivateMembers()
                 memberNames.forEach { this@ChangesCollector.collectChangedMember(classFqName, it) }
             }
 
@@ -206,7 +206,7 @@ class ChangesCollector {
     }
 
     private fun ClassProtoData.collectChangedParents(fqName: FqName, parents: Collection<ProtoBuf.Type>) {
-        val changedParentsFqNames = parents.map { type ->
+        konst changedParentsFqNames = parents.map { type ->
             nameResolver.getClassId(type.className).asSingleFqName()
         }
         addChangedParents(fqName, changedParentsFqNames)
@@ -214,7 +214,7 @@ class ChangesCollector {
 
     fun collectMemberIfValueWasChanged(scope: FqName, name: String, oldValue: Any?, newValue: Any?) {
         if (oldValue == null && newValue == null) {
-            throw IllegalStateException("Old and new value are null for $scope#$name")
+            throw IllegalStateException("Old and new konstue are null for $scope#$name")
         }
 
         if (oldValue != null && newValue == null) {
@@ -225,12 +225,12 @@ class ChangesCollector {
     }
 
     private fun collectSignature(classData: ClassProtoData, areSubclassesAffected: Boolean) {
-        val fqName = classData.nameResolver.getClassId(classData.proto.fqName).asSingleFqName()
+        konst fqName = classData.nameResolver.getClassId(classData.proto.fqName).asSingleFqName()
         collectSignature(fqName, areSubclassesAffected)
     }
 
     fun collectSignature(fqName: FqName, areSubclassesAffected: Boolean) {
-        val prevValue = this.areSubclassesAffected[fqName] ?: false
+        konst prevValue = this.areSubclassesAffected[fqName] ?: false
         this.areSubclassesAffected[fqName] = prevValue || areSubclassesAffected
     }
 }

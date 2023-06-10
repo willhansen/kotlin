@@ -9,7 +9,7 @@ fun <T> fooTakeString(x: String): T = TODO()
 fun <T, R> bar(x: T, y: R, f: (T) -> R): Pair<T, R> = TODO()
 fun <T, R> baz(f: (T) -> R, g: (T) -> R): Pair<T, R> = TODO()
 
-class Pair<A, B>(val a: A, val b: B)
+class Pair<A, B>(konst a: A, konst b: B)
 
 fun test1() {
     bar("", 1, ::foo).checkType { _<Pair<String, Int>>() }
@@ -17,7 +17,7 @@ fun test1() {
     bar("", 1, ::fooTakeString).checkType { _<Pair<String, Int>>() }
     bar("", "", ::fooReturnInt).checkType { <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>_<!><Pair<String, Any>>() }
 
-    val x: String = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>bar("", "", ::fooReturnInt)<!>
+    konst x: String = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>bar("", "", ::fooReturnInt)<!>
 
     baz(Int::toString, ::foo).checkType { _<Pair<Int, String>>() }
 }

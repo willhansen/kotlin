@@ -7,14 +7,14 @@ import java.lang.AssertionError
 import kotlin.math.abs
 
 @JvmInline
-value class IC1(val x: Double) {
+konstue class IC1(konst x: Double) {
     fun equals(other: IC1): Boolean {
         return abs(x - other.x) < 0.5
     }
 }
 
 @JvmInline
-value class IC2(val x: Int) {
+konstue class IC2(konst x: Int) {
     override fun equals(other: Any?): Boolean {
         if (other !is IC2) {
             return false
@@ -24,19 +24,19 @@ value class IC2(val x: Int) {
 }
 
 fun box(): String {
-    val a1Typed: IC1 = IC1(1.0)
-    val b1Typed: IC1 = IC1(1.1)
-    val c1Typed: IC1 = IC1(5.0)
-    val a1Untyped: Any = a1Typed
-    val b1Untyped: Any = b1Typed
-    val c1Untyped: Any = c1Typed
+    konst a1Typed: IC1 = IC1(1.0)
+    konst b1Typed: IC1 = IC1(1.1)
+    konst c1Typed: IC1 = IC1(5.0)
+    konst a1Untyped: Any = a1Typed
+    konst b1Untyped: Any = b1Typed
+    konst c1Untyped: Any = c1Typed
 
-    val a2Typed: IC2 = IC2(1)
-    val b2Typed: IC2 = IC2(2)
-    val c2Typed: IC2 = IC2(5)
-    val a2Untyped: Any = a2Typed
-    val b2Untyped: Any = b2Typed
-    val c2Untyped: Any = c2Typed
+    konst a2Typed: IC2 = IC2(1)
+    konst b2Typed: IC2 = IC2(2)
+    konst c2Typed: IC2 = IC2(5)
+    konst a2Untyped: Any = a2Typed
+    konst b2Untyped: Any = b2Typed
+    konst c2Untyped: Any = c2Typed
 
     if ((a1Typed == b1Typed) != (a1Untyped == b1Untyped)) return "Fail 1"
     if ((a1Typed == c1Typed) != (a1Untyped == c1Untyped)) return "Fail 2"

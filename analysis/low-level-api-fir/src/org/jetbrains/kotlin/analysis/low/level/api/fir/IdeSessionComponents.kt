@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.fir.backend.jvm.FirJvmKotlinMangler
 import org.jetbrains.kotlin.fir.signaturer.FirBasedSignatureComposer
 
 @NoMutableState
-data class IdeSessionComponents(val signatureComposer: FirBasedSignatureComposer) : FirSessionComponent {
+data class IdeSessionComponents(konst signatureComposer: FirBasedSignatureComposer) : FirSessionComponent {
     companion object {
         fun create(): IdeSessionComponents = IdeSessionComponents(
             signatureComposer = FirBasedSignatureComposer(FirJvmKotlinMangler())
@@ -20,4 +20,4 @@ data class IdeSessionComponents(val signatureComposer: FirBasedSignatureComposer
     }
 }
 
-val FirSession.ideSessionComponents: IdeSessionComponents by FirSession.sessionComponentAccessor()
+konst FirSession.ideSessionComponents: IdeSessionComponents by FirSession.sessionComponentAccessor()

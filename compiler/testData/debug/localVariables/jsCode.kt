@@ -18,7 +18,7 @@ external fun exclamateAndConcat(`a!`: String, `b!`: String): String
 @JsPolyfill("""
 if (typeof String.prototype.myAwesomePolyfill === "undefined") {
     Object.defineProperty(String.prototype, "myAwesomePolyfill", {
-        value: function () {
+        konstue: function () {
             return this + "!";
         }
     });
@@ -28,8 +28,8 @@ internal inline fun String.myAwesomePolyfill(): Boolean =
     asDynamic()
         .myAwesomePolyfill()
 
-val walter1VarDecl = "var walter1 = _.exclamate('Walter');"
-val jesse1VarDecl = "var jesse1 = _.exclamate(jesse);"
+konst walter1VarDecl = "var walter1 = _.exclamate('Walter');"
+konst jesse1VarDecl = "var jesse1 = _.exclamate(jesse);"
 
 // FILE: test.kt
 
@@ -40,7 +40,7 @@ fun box() {
     exclamateAndConcat(
         "hello",
         "world")
-    val jesse = "Jesse"
+    konst jesse = "Jesse"
     js(
         "_.exclamate(jesse);") // Local variable is captured
     js(
@@ -81,7 +81,7 @@ fun box() {
 // a.kt:6 exclamate: s="Jesse":kotlin.String
 // test.kt:52 box: jesse="Jesse":kotlin.String, walter1="Walter!":kotlin.String, jesse1="Jesse!":kotlin.String
 // a.kt:6 exclamate: s="Jesse!":kotlin.String
-// a.kt:22 value:
+// a.kt:22 konstue:
 // test.kt:63 box: jesse="Jesse":kotlin.String, walter1="Walter!":kotlin.String, jesse1="Jesse!":kotlin.String
 // test.kt:59 localFun: hello="hello":kotlin.String, world="world":kotlin.String
 // test.kt:64 box: jesse="Jesse":kotlin.String, walter1="Walter!":kotlin.String, jesse1="Jesse!":kotlin.String

@@ -17,28 +17,28 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.js.config.JSConfigurationKeys
 
 fun eliminateDeadDeclarations(modules: List<IrModuleFragment>, context: WasmBackendContext) {
-    val printReachabilityInfo =
+    konst printReachabilityInfo =
         context.configuration.getBoolean(JSConfigurationKeys.PRINT_REACHABILITY_INFO) ||
                 java.lang.Boolean.getBoolean("kotlin.wasm.dce.print.reachability.info")
 
-    val dumpReachabilityInfoToFile: String? =
+    konst dumpReachabilityInfoToFile: String? =
         context.configuration.get(JSConfigurationKeys.DUMP_REACHABILITY_INFO_TO_FILE)
             ?: System.getProperty("kotlin.wasm.dce.dump.reachability.info.to.file")
 
-    val usefulDeclarations = WasmUsefulDeclarationProcessor(
+    konst usefulDeclarations = WasmUsefulDeclarationProcessor(
         context = context,
         printReachabilityInfo = printReachabilityInfo,
         dumpReachabilityInfoToFile
     ).collectDeclarations(rootDeclarations = buildRoots(modules, context))
 
-    val remover = WasmUselessDeclarationsRemover(context, usefulDeclarations)
+    konst remover = WasmUselessDeclarationsRemover(context, usefulDeclarations)
     modules.onAllFiles {
         acceptVoid(remover)
     }
 }
 
 private fun buildRoots(modules: List<IrModuleFragment>, context: WasmBackendContext): List<IrDeclaration> = buildList {
-    val declarationsCollector = object : IrElementVisitorVoid {
+    konst declarationsCollector = object : IrElementVisitorVoid {
         override fun visitElement(element: IrElement): Unit = element.acceptChildrenVoid(this)
         override fun visitBody(body: IrBody): Unit = Unit // Skip
 
@@ -63,7 +63,7 @@ private fun buildRoots(modules: List<IrModuleFragment>, context: WasmBackendCont
     add(context.irBuiltIns.unitClass.owner.primaryConstructor!!)
 
     // Remove all functions used to call a kotlin closure from JS side, reachable ones will be added back later.
-    removeAll(context.closureCallExports.values)
+    removeAll(context.closureCallExports.konstues)
 }
 
 private inline fun List<IrModuleFragment>.onAllFiles(body: IrFile.() -> Unit) {

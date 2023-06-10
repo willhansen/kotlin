@@ -8,23 +8,23 @@
 package foo
 
 fun assertContains(expectedName: String, f: () -> Unit) {
-    val s = f.toString()
+    konst s = f.toString()
     assertTrue(s.contains(expectedName), "\"$s\" dosn't contain \"$expectedName\"")
 }
 
 fun box(): String {
-    val d: dynamic = bar
+    konst d: dynamic = bar
 
-    val a = {
-        val somethingBefore = 1
+    konst a = {
+        konst somethingBefore = 1
         d.somethingBefore
     }
 
     assertContains("var somethingBefore = 1;", a)
 
-    val b = {
+    konst b = {
         d.somethingAfter
-        val somethingAfter = 1
+        konst somethingAfter = 1
     }
 
     assertContains("var somethingAfter = 1;", b)

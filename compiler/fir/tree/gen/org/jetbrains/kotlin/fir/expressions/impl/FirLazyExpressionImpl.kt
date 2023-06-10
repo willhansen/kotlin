@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirLazyExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
 ) : FirLazyExpression() {
-    override val typeRef: FirTypeRef get() = error("FirLazyExpression should be calculated before accessing")
-    override val annotations: List<FirAnnotation> get() = error("FirLazyExpression should be calculated before accessing")
+    override konst typeRef: FirTypeRef get() = error("FirLazyExpression should be calculated before accessing")
+    override konst annotations: List<FirAnnotation> get() = error("FirLazyExpression should be calculated before accessing")
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
     }

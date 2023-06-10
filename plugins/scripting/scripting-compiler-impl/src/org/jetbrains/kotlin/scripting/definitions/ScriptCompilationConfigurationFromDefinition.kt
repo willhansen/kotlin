@@ -22,8 +22,8 @@ import kotlin.script.experimental.jvm.jvm
 import kotlin.script.experimental.util.PropertiesCollection
 
 class ScriptCompilationConfigurationFromDefinition(
-    val hostConfiguration: ScriptingHostConfiguration,
-    val scriptDefinition: KotlinScriptDefinition
+    konst hostConfiguration: ScriptingHostConfiguration,
+    konst scriptDefinition: KotlinScriptDefinition
 ) : ScriptCompilationConfiguration(
     {
         hostConfiguration(hostConfiguration)
@@ -48,17 +48,17 @@ class ScriptCompilationConfigurationFromDefinition(
             refineConfiguration {
                 onAnnotations(scriptDefinition.acceptedAnnotations.map(::KotlinType)) { context ->
 
-                    val resolveResult: DependenciesResolver.ResolveResult = scriptDefinition.dependencyResolver.resolve(
+                    konst resolveResult: DependenciesResolver.ResolveResult = scriptDefinition.dependencyResolver.resolve(
                         ScriptContentsFromRefinementContext(context),
                         context.compilationConfiguration[ScriptCompilationConfiguration.hostConfiguration]?.let {
                             it[ScriptingHostConfiguration.getEnvironment]?.invoke()
                         }.orEmpty()
                     )
 
-                    val reports = resolveResult.reports.map {
+                    konst reports = resolveResult.reports.map {
                         ScriptDiagnostic(ScriptDiagnostic.unspecifiedError, it.message, mapLegacyDiagnosticSeverity(it.severity))
                     }
-                    val resolvedDeps = (resolveResult as? DependenciesResolver.ResolveResult.Success)?.dependencies
+                    konst resolvedDeps = (resolveResult as? DependenciesResolver.ResolveResult.Success)?.dependencies
 
                     if (resolvedDeps == null) ResultWithDiagnostics.Failure(reports)
                     else ScriptCompilationConfiguration(context.compilationConfiguration) {
@@ -82,17 +82,17 @@ class ScriptCompilationConfigurationFromDefinition(
     }
 )
 
-private class ScriptContentsFromRefinementContext(val context: ScriptConfigurationRefinementContext) : ScriptContents {
-    override val file: File?
+private class ScriptContentsFromRefinementContext(konst context: ScriptConfigurationRefinementContext) : ScriptContents {
+    override konst file: File?
         get() = (context.script as? FileBasedScriptSource)?.file
-    override val annotations: Iterable<Annotation>
+    override konst annotations: Iterable<Annotation>
         get() = context.collectedData?.get(ScriptCollectedData.foundAnnotations) ?: emptyList()
-    override val text: CharSequence?
+    override konst text: CharSequence?
         get() = context.script.text
 }
 
-val ScriptCompilationConfigurationKeys.annotationsForSamWithReceivers by PropertiesCollection.key<List<KotlinType>>()
+konst ScriptCompilationConfigurationKeys.annotationsForSamWithReceivers by PropertiesCollection.key<List<KotlinType>>()
 
-val ScriptCompilationConfigurationKeys.platform by PropertiesCollection.key<String>()
+konst ScriptCompilationConfigurationKeys.platform by PropertiesCollection.key<String>()
 
-val ScriptingHostConfigurationKeys.getEnvironment by PropertiesCollection.key<() -> Environment?>()
+konst ScriptingHostConfigurationKeys.getEnvironment by PropertiesCollection.key<() -> Environment?>()

@@ -23,7 +23,7 @@ object AnalysisApiPsiTypeProviderTestUtils {
         declaration: KtDeclaration,
         ktFile: KtFile,
     ): KtLightClass {
-        val project = ktFile.project
+        konst project = ktFile.project
         return createLightClassByContainingClass(declaration, project)
             ?: getFacadeLightClass(ktFile, project)
             ?: error("Can't get or create containing KtLightClass for $declaration")
@@ -39,14 +39,14 @@ object AnalysisApiPsiTypeProviderTestUtils {
         declaration: KtDeclaration,
         project: Project
     ): KtLightClass? {
-        val containingClass = declaration.parents.firstIsInstanceOrNull<KtClassOrObject>() ?: return null
+        konst containingClass = declaration.parents.firstIsInstanceOrNull<KtClassOrObject>() ?: return null
         return KotlinAsJavaSupport.getInstance(project).getLightClass(containingClass)
     }
 
     internal fun KtLightClass.findLightDeclarationContext(ktDeclaration: KtDeclaration): KtLightElement<*, *>? {
-        val selfOrParents = listOf(ktDeclaration) + ktDeclaration.parents.filterIsInstance<KtDeclaration>()
+        konst selfOrParents = listOf(ktDeclaration) + ktDeclaration.parents.filterIsInstance<KtDeclaration>()
         var result: KtLightElement<*, *>? = null
-        val visitor = object : PsiElementVisitor() {
+        konst visitor = object : PsiElementVisitor() {
             override fun visitElement(element: PsiElement) {
                 if (element !is KtLightElement<*, *>) return
                 // NB: intentionally visit members first so that `self` can be found first if matched

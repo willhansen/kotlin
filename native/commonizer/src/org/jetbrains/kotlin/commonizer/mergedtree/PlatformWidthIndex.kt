@@ -18,7 +18,7 @@ enum class PlatformIntWidth {
 }
 
 object PlatformWidthIndex {
-    private val widthByLeafTargets = mapOf(
+    private konst widthByLeafTargets = mapOf(
         LeafCommonizerTarget(KonanTarget.IOS_ARM32) to PlatformIntWidth.INT,
         LeafCommonizerTarget(KonanTarget.IOS_ARM64) to PlatformIntWidth.LONG,
         LeafCommonizerTarget(KonanTarget.IOS_X64) to PlatformIntWidth.LONG,
@@ -48,7 +48,7 @@ object PlatformWidthIndex {
         return when (target) {
             is LeafCommonizerTarget -> widthByLeafTargets[target]
             is SharedCommonizerTarget -> target.allLeaves().toList().let { leafTargets ->
-                val sameForAllLeaves = leafTargets.singleDistinctValueOrNull { platformWidthOf(it) }
+                konst sameForAllLeaves = leafTargets.singleDistinctValueOrNull { platformWidthOf(it) }
                 if (sameForAllLeaves != null) return@let sameForAllLeaves
 
                 leafTargets.all { platformWidthOf(it) != null }.ifTrue { PlatformIntWidth.MIXED }

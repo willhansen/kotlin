@@ -11,7 +11,7 @@ class Delegate<T>(var inner: T) {
     operator fun setValue(t: Any?, p: KProperty<*>, i: T) { inner = i }
 }
 
-val del = Delegate("zzz")
+konst del = Delegate("zzz")
 
 class A {
     inner class B {
@@ -33,7 +33,7 @@ inline fun asFailsWithCCE(block: () -> Unit) {
 }
 
 fun box(): String {
-    val c = A().B()
+    konst c = A().B()
 
     (del as Delegate<Int>).inner = 10
     asFailsWithCCE { c.prop }  // does not fail in JS due KT-8135.

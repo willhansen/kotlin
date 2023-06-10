@@ -50,7 +50,7 @@ class AnnotationLoader {
         }
 
         override fun visitAnnotation(): Visitor? {
-          val visitor: Visitor = CHECK_NOT_NULL<Visitor>(arg0 = <this>.loadAnnotation())
+          konst visitor: Visitor = CHECK_NOT_NULL<Visitor>(arg0 = <this>.loadAnnotation())
           return { // BLOCK
             local class <no name provided> : Visitor {
               constructor() /* primary */ {
@@ -59,7 +59,7 @@ class AnnotationLoader {
 
               }
 
-              private /* final field */ val $$delegate_0: Visitor = visitor
+              private /* final field */ konst $$delegate_0: Visitor = visitor
               override fun visitAnnotation(): Visitor? {
                 return <this>.#$$delegate_0.visitAnnotation()
               }

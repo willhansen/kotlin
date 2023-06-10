@@ -1,5 +1,5 @@
 abstract class Base {
-    val result = "OK"
+    konst result = "OK"
 }
 
 class Derived : Base()

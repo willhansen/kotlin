@@ -1,7 +1,7 @@
 package
 
 package d {
-    public val closure: () -> kotlin.Unit
+    public konst closure: () -> kotlin.Unit
 
     public final class A {
         public constructor A()

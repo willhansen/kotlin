@@ -9,34 +9,34 @@ class CustomDelegate {
     operator fun getValue(thisRef: Any?, prop: KProperty<*>): String = prop.name
 }
 
-public class A(@param:Ann <!REPEATED_ANNOTATION!>@Ann<!> val x: Int, @param: RepeatableAnn @Ann val y: Int) {
+public class A(@param:Ann <!REPEATED_ANNOTATION!>@Ann<!> konst x: Int, @param: RepeatableAnn @Ann konst y: Int) {
 
     @field:Ann @property:Ann @RepeatableAnn @property:RepeatableAnn
-    val a: Int = 0
+    konst a: Int = 0
 
     @Ann @field:Ann <!REPEATED_ANNOTATION!>@property:Ann<!>
-    val b: Int = 0
+    konst b: Int = 0
 
     @field:RepeatableAnn @field:RepeatableAnn
-    val c: Int = 0
+    konst c: Int = 0
 
     @property:RepeatableAnn @RepeatableAnn
-    val d: Int = 0
+    konst d: Int = 0
 
     @property:RepeatableAnn @RepeatableAnn @delegate:RepeatableAnn
-    val e: String by CustomDelegate()
+    konst e: String by CustomDelegate()
 
     @property:Ann @delegate:Ann
-    val f: String by CustomDelegate()
+    konst f: String by CustomDelegate()
 
     @Ann @delegate:Ann
-    val g: String by CustomDelegate()
+    konst g: String by CustomDelegate()
 
     @Ann @field:Ann
-    val h: String = ""
+    konst h: String = ""
 
     @property:Ann @field:Ann
-    val i: String = ""
+    konst i: String = ""
 }
 
 @Target(AnnotationTarget.FIELD, AnnotationTarget.PROPERTY)
@@ -45,10 +45,10 @@ annotation class fieldOrPropAnn
 @Target(AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER, AnnotationTarget.VALUE_PARAMETER)
 annotation class getSetAndParamAnn
 
-public class B(<!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@param:fieldOrPropAnn<!> @fieldOrPropAnn val x: Int,
-               @property:fieldOrPropAnn <!REPEATED_ANNOTATION!>@fieldOrPropAnn<!> val y: Int) {
+public class B(<!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@param:fieldOrPropAnn<!> @fieldOrPropAnn konst x: Int,
+               @property:fieldOrPropAnn <!REPEATED_ANNOTATION!>@fieldOrPropAnn<!> konst y: Int) {
     @fieldOrPropAnn @field:fieldOrPropAnn
-    val z: Int = 42
+    konst z: Int = 42
 
     <!WRONG_ANNOTATION_TARGET!>@getSetAndParamAnn<!>
     @setparam:getSetAndParamAnn

@@ -8,10 +8,10 @@ object Second : Bound1, Bound2
 fun <S : Bound1> select(vararg args: S): S = TODO()
 
 class Cls {
-    val property = select(First, Second)
+    konst property = select(First, Second)
 }
 
 fun test() {
-    val v = Cls().property
+    konst v = Cls().property
     v
 }

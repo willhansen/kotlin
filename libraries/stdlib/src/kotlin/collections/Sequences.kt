@@ -11,9 +11,9 @@ package kotlin.sequences
 import kotlin.random.Random
 
 /**
- * Given an [iterator] function constructs a [Sequence] that returns values through the [Iterator]
+ * Given an [iterator] function constructs a [Sequence] that returns konstues through the [Iterator]
  * provided by that function.
- * The values are evaluated lazily, and the sequence is potentially infinite.
+ * The konstues are ekonstuated lazily, and the sequence is potentially infinite.
  *
  * @sample samples.collections.Sequences.Building.sequenceFromIterator
  */
@@ -30,7 +30,7 @@ public inline fun <T> Sequence(crossinline iterator: () -> Iterator<T>): Sequenc
 public fun <T> Iterator<T>.asSequence(): Sequence<T> = Sequence { this }.constrainOnce()
 
 /**
- * Creates a sequence that returns the specified values.
+ * Creates a sequence that returns the specified konstues.
  *
  * @sample samples.collections.Sequences.Building.sequenceOfValues
  */
@@ -64,7 +64,7 @@ public inline fun <T> Sequence<T>?.orEmpty(): Sequence<T> = this ?: emptySequenc
  */
 @SinceKotlin("1.3")
 public fun <T> Sequence<T>.ifEmpty(defaultValue: () -> Sequence<T>): Sequence<T> = sequence {
-    val iterator = this@ifEmpty.iterator()
+    konst iterator = this@ifEmpty.iterator()
     if (iterator.hasNext()) {
         yieldAll(iterator)
     } else {
@@ -100,16 +100,16 @@ private fun <T, R> Sequence<T>.flatten(iterator: (T) -> Iterator<R>): Sequence<R
 
 /**
  * Returns a pair of lists, where
- * *first* list is built from the first values of each pair from this sequence,
- * *second* list is built from the second values of each pair from this sequence.
+ * *first* list is built from the first konstues of each pair from this sequence,
+ * *second* list is built from the second konstues of each pair from this sequence.
  *
  * The operation is _terminal_.
  *
  * @sample samples.collections.Sequences.Transformations.unzip
  */
 public fun <T, R> Sequence<Pair<T, R>>.unzip(): Pair<List<T>, List<R>> {
-    val listT = ArrayList<T>()
-    val listR = ArrayList<R>()
+    konst listT = ArrayList<T>()
+    konst listR = ArrayList<R>()
     for (pair in this) {
         listT.add(pair.first)
         listR.add(pair.second)
@@ -137,37 +137,37 @@ public fun <T> Sequence<T>.shuffled(): Sequence<T> = shuffled(Random)
  */
 @SinceKotlin("1.4")
 public fun <T> Sequence<T>.shuffled(random: Random): Sequence<T> = sequence<T> {
-    val buffer = toMutableList()
+    konst buffer = toMutableList()
     while (buffer.isNotEmpty()) {
-        val j = random.nextInt(buffer.size)
-        val last = buffer.removeLast()
-        val value = if (j < buffer.size) buffer.set(j, last) else last
-        yield(value)
+        konst j = random.nextInt(buffer.size)
+        konst last = buffer.removeLast()
+        konst konstue = if (j < buffer.size) buffer.set(j, last) else last
+        yield(konstue)
     }
 }
 
 
 /**
- * A sequence that returns the values from the underlying [sequence] that either match or do not match
+ * A sequence that returns the konstues from the underlying [sequence] that either match or do not match
  * the specified [predicate].
  *
- * @param sendWhen If `true`, values for which the predicate returns `true` are returned. Otherwise,
- * values for which the predicate returns `false` are returned
+ * @param sendWhen If `true`, konstues for which the predicate returns `true` are returned. Otherwise,
+ * konstues for which the predicate returns `false` are returned
  */
 internal class FilteringSequence<T>(
-    private val sequence: Sequence<T>,
-    private val sendWhen: Boolean = true,
-    private val predicate: (T) -> Boolean
+    private konst sequence: Sequence<T>,
+    private konst sendWhen: Boolean = true,
+    private konst predicate: (T) -> Boolean
 ) : Sequence<T> {
 
     override fun iterator(): Iterator<T> = object : Iterator<T> {
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         var nextState: Int = -1 // -1 for unknown, 0 for done, 1 for continue
         var nextItem: T? = null
 
         private fun calcNext() {
             while (iterator.hasNext()) {
-                val item = iterator.next()
+                konst item = iterator.next()
                 if (predicate(item) == sendWhen) {
                     nextItem = item
                     nextState = 1
@@ -182,7 +182,7 @@ internal class FilteringSequence<T>(
                 calcNext()
             if (nextState == 0)
                 throw NoSuchElementException()
-            val result = nextItem
+            konst result = nextItem
             nextItem = null
             nextState = -1
             @Suppress("UNCHECKED_CAST")
@@ -198,14 +198,14 @@ internal class FilteringSequence<T>(
 }
 
 /**
- * A sequence which returns the results of applying the given [transformer] function to the values
+ * A sequence which returns the results of applying the given [transformer] function to the konstues
  * in the underlying [sequence].
  */
 
 internal class TransformingSequence<T, R>
-constructor(private val sequence: Sequence<T>, private val transformer: (T) -> R) : Sequence<R> {
+constructor(private konst sequence: Sequence<T>, private konst transformer: (T) -> R) : Sequence<R> {
     override fun iterator(): Iterator<R> = object : Iterator<R> {
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         override fun next(): R {
             return transformer(iterator.next())
         }
@@ -221,14 +221,14 @@ constructor(private val sequence: Sequence<T>, private val transformer: (T) -> R
 }
 
 /**
- * A sequence which returns the results of applying the given [transformer] function to the values
- * in the underlying [sequence], where the transformer function takes the index of the value in the underlying
- * sequence along with the value itself.
+ * A sequence which returns the results of applying the given [transformer] function to the konstues
+ * in the underlying [sequence], where the transformer function takes the index of the konstue in the underlying
+ * sequence along with the konstue itself.
  */
 internal class TransformingIndexedSequence<T, R>
-constructor(private val sequence: Sequence<T>, private val transformer: (Int, T) -> R) : Sequence<R> {
+constructor(private konst sequence: Sequence<T>, private konst transformer: (Int, T) -> R) : Sequence<R> {
     override fun iterator(): Iterator<R> = object : Iterator<R> {
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         var index = 0
         override fun next(): R {
             return transformer(checkIndexOverflow(index++), iterator.next())
@@ -241,13 +241,13 @@ constructor(private val sequence: Sequence<T>, private val transformer: (Int, T)
 }
 
 /**
- * A sequence which combines values from the underlying [sequence] with their indices and returns them as
+ * A sequence which combines konstues from the underlying [sequence] with their indices and returns them as
  * [IndexedValue] objects.
  */
 internal class IndexingSequence<T>
-constructor(private val sequence: Sequence<T>) : Sequence<IndexedValue<T>> {
+constructor(private konst sequence: Sequence<T>) : Sequence<IndexedValue<T>> {
     override fun iterator(): Iterator<IndexedValue<T>> = object : Iterator<IndexedValue<T>> {
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         var index = 0
         override fun next(): IndexedValue<T> {
             return IndexedValue(checkIndexOverflow(index++), iterator.next())
@@ -260,19 +260,19 @@ constructor(private val sequence: Sequence<T>) : Sequence<IndexedValue<T>> {
 }
 
 /**
- * A sequence which takes the values from two parallel underlying sequences, passes them to the given
- * [transform] function and returns the values returned by that function. The sequence stops returning
- * values as soon as one of the underlying sequences stops returning values.
+ * A sequence which takes the konstues from two parallel underlying sequences, passes them to the given
+ * [transform] function and returns the konstues returned by that function. The sequence stops returning
+ * konstues as soon as one of the underlying sequences stops returning konstues.
  */
 internal class MergingSequence<T1, T2, V>
 constructor(
-    private val sequence1: Sequence<T1>,
-    private val sequence2: Sequence<T2>,
-    private val transform: (T1, T2) -> V
+    private konst sequence1: Sequence<T1>,
+    private konst sequence2: Sequence<T2>,
+    private konst transform: (T1, T2) -> V
 ) : Sequence<V> {
     override fun iterator(): Iterator<V> = object : Iterator<V> {
-        val iterator1 = sequence1.iterator()
-        val iterator2 = sequence2.iterator()
+        konst iterator1 = sequence1.iterator()
+        konst iterator2 = sequence2.iterator()
         override fun next(): V {
             return transform(iterator1.next(), iterator2.next())
         }
@@ -285,12 +285,12 @@ constructor(
 
 internal class FlatteningSequence<T, R, E>
 constructor(
-    private val sequence: Sequence<T>,
-    private val transformer: (T) -> R,
-    private val iterator: (R) -> Iterator<E>
+    private konst sequence: Sequence<T>,
+    private konst transformer: (T) -> R,
+    private konst iterator: (R) -> Iterator<E>
 ) : Sequence<E> {
     override fun iterator(): Iterator<E> = object : Iterator<E> {
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         var itemIterator: Iterator<E>? = null
 
         override fun next(): E {
@@ -311,8 +311,8 @@ constructor(
                 if (!iterator.hasNext()) {
                     return false
                 } else {
-                    val element = iterator.next()
-                    val nextItemIterator = iterator(transformer(element))
+                    konst element = iterator.next()
+                    konst nextItemIterator = iterator(transformer(element))
                     if (nextItemIterator.hasNext()) {
                         itemIterator = nextItemIterator
                         return true
@@ -328,7 +328,7 @@ internal fun <T, C, R> flatMapIndexed(source: Sequence<T>, transform: (Int, T) -
     sequence {
         var index = 0
         for (element in source) {
-            val result = transform(checkIndexOverflow(index++), element)
+            konst result = transform(checkIndexOverflow(index++), element)
             yieldAll(iterator(result))
         }
     }
@@ -342,13 +342,13 @@ internal interface DropTakeSequence<T> : Sequence<T> {
 }
 
 /**
- * A sequence that skips [startIndex] values from the underlying [sequence]
- * and stops returning values right before [endIndex], i.e. stops at `endIndex - 1`
+ * A sequence that skips [startIndex] konstues from the underlying [sequence]
+ * and stops returning konstues right before [endIndex], i.e. stops at `endIndex - 1`
  */
 internal class SubSequence<T>(
-    private val sequence: Sequence<T>,
-    private val startIndex: Int,
-    private val endIndex: Int
+    private konst sequence: Sequence<T>,
+    private konst startIndex: Int,
+    private konst endIndex: Int
 ) : Sequence<T>, DropTakeSequence<T> {
 
     init {
@@ -357,14 +357,14 @@ internal class SubSequence<T>(
         require(endIndex >= startIndex) { "endIndex should be not less than startIndex, but was $endIndex < $startIndex" }
     }
 
-    private val count: Int get() = endIndex - startIndex
+    private konst count: Int get() = endIndex - startIndex
 
     override fun drop(n: Int): Sequence<T> = if (n >= count) emptySequence() else SubSequence(sequence, startIndex + n, endIndex)
     override fun take(n: Int): Sequence<T> = if (n >= count) this else SubSequence(sequence, startIndex, startIndex + n)
 
     override fun iterator() = object : Iterator<T> {
 
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         var position = 0
 
         // Shouldn't be called from constructor to avoid premature iteration
@@ -391,12 +391,12 @@ internal class SubSequence<T>(
 }
 
 /**
- * A sequence that returns at most [count] values from the underlying [sequence], and stops returning values
+ * A sequence that returns at most [count] konstues from the underlying [sequence], and stops returning konstues
  * as soon as that count is reached.
  */
 internal class TakeSequence<T>(
-    private val sequence: Sequence<T>,
-    private val count: Int
+    private konst sequence: Sequence<T>,
+    private konst count: Int
 ) : Sequence<T>, DropTakeSequence<T> {
 
     init {
@@ -408,7 +408,7 @@ internal class TakeSequence<T>(
 
     override fun iterator(): Iterator<T> = object : Iterator<T> {
         var left = count
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
 
         override fun next(): T {
             if (left == 0)
@@ -424,22 +424,22 @@ internal class TakeSequence<T>(
 }
 
 /**
- * A sequence that returns values from the underlying [sequence] while the [predicate] function returns
- * `true`, and stops returning values once the function returns `false` for the next element.
+ * A sequence that returns konstues from the underlying [sequence] while the [predicate] function returns
+ * `true`, and stops returning konstues once the function returns `false` for the next element.
  */
 internal class TakeWhileSequence<T>
 constructor(
-    private val sequence: Sequence<T>,
-    private val predicate: (T) -> Boolean
+    private konst sequence: Sequence<T>,
+    private konst predicate: (T) -> Boolean
 ) : Sequence<T> {
     override fun iterator(): Iterator<T> = object : Iterator<T> {
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         var nextState: Int = -1 // -1 for unknown, 0 for done, 1 for continue
         var nextItem: T? = null
 
         private fun calcNext() {
             if (iterator.hasNext()) {
-                val item = iterator.next()
+                konst item = iterator.next()
                 if (predicate(item)) {
                     nextState = 1
                     nextItem = item
@@ -455,7 +455,7 @@ constructor(
             if (nextState == 0)
                 throw NoSuchElementException()
             @Suppress("UNCHECKED_CAST")
-            val result = nextItem as T
+            konst result = nextItem as T
 
             // Clean next to avoid keeping reference on yielded instance
             nextItem = null
@@ -472,12 +472,12 @@ constructor(
 }
 
 /**
- * A sequence that skips the specified number of values from the underlying [sequence] and returns
- * all values after that.
+ * A sequence that skips the specified number of konstues from the underlying [sequence] and returns
+ * all konstues after that.
  */
 internal class DropSequence<T>(
-    private val sequence: Sequence<T>,
-    private val count: Int
+    private konst sequence: Sequence<T>,
+    private konst count: Int
 ) : Sequence<T>, DropTakeSequence<T> {
     init {
         require(count >= 0) { "count must be non-negative, but was $count." }
@@ -487,7 +487,7 @@ internal class DropSequence<T>(
     override fun take(n: Int): Sequence<T> = (count + n).let { n1 -> if (n1 < 0) TakeSequence(this, n) else SubSequence(sequence, count, n1) }
 
     override fun iterator(): Iterator<T> = object : Iterator<T> {
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         var left = count
 
         // Shouldn't be called from constructor to avoid premature iteration
@@ -511,23 +511,23 @@ internal class DropSequence<T>(
 }
 
 /**
- * A sequence that skips the values from the underlying [sequence] while the given [predicate] returns `true` and returns
- * all values after that.
+ * A sequence that skips the konstues from the underlying [sequence] while the given [predicate] returns `true` and returns
+ * all konstues after that.
  */
 internal class DropWhileSequence<T>
 constructor(
-    private val sequence: Sequence<T>,
-    private val predicate: (T) -> Boolean
+    private konst sequence: Sequence<T>,
+    private konst predicate: (T) -> Boolean
 ) : Sequence<T> {
 
     override fun iterator(): Iterator<T> = object : Iterator<T> {
-        val iterator = sequence.iterator()
+        konst iterator = sequence.iterator()
         var dropState: Int = -1 // -1 for not dropping, 1 for nextItem, 0 for normal iteration
         var nextItem: T? = null
 
         private fun drop() {
             while (iterator.hasNext()) {
-                val item = iterator.next()
+                konst item = iterator.next()
                 if (!predicate(item)) {
                     nextItem = item
                     dropState = 1
@@ -543,7 +543,7 @@ constructor(
 
             if (dropState == 1) {
                 @Suppress("UNCHECKED_CAST")
-                val result = nextItem as T
+                konst result = nextItem as T
                 nextItem = null
                 dropState = 0
                 return result
@@ -559,17 +559,17 @@ constructor(
     }
 }
 
-internal class DistinctSequence<T, K>(private val source: Sequence<T>, private val keySelector: (T) -> K) : Sequence<T> {
+internal class DistinctSequence<T, K>(private konst source: Sequence<T>, private konst keySelector: (T) -> K) : Sequence<T> {
     override fun iterator(): Iterator<T> = DistinctIterator(source.iterator(), keySelector)
 }
 
-private class DistinctIterator<T, K>(private val source: Iterator<T>, private val keySelector: (T) -> K) : AbstractIterator<T>() {
-    private val observed = HashSet<K>()
+private class DistinctIterator<T, K>(private konst source: Iterator<T>, private konst keySelector: (T) -> K) : AbstractIterator<T>() {
+    private konst observed = HashSet<K>()
 
     override fun computeNext() {
         while (source.hasNext()) {
-            val next = source.next()
-            val key = keySelector(next)
+            konst next = source.next()
+            konst key = keySelector(next)
 
             if (observed.add(key)) {
                 setNext(next)
@@ -582,7 +582,7 @@ private class DistinctIterator<T, K>(private val source: Iterator<T>, private va
 }
 
 
-private class GeneratorSequence<T : Any>(private val getInitialValue: () -> T?, private val getNextValue: (T) -> T?) : Sequence<T> {
+private class GeneratorSequence<T : Any>(private konst getInitialValue: () -> T?, private konst getNextValue: (T) -> T?) : Sequence<T> {
     override fun iterator(): Iterator<T> = object : Iterator<T> {
         var nextItem: T? = null
         var nextState: Int = -2 // -2 for initial unknown, -1 for next unknown, 0 for done, 1 for continue
@@ -598,7 +598,7 @@ private class GeneratorSequence<T : Any>(private val getInitialValue: () -> T?, 
 
             if (nextState == 0)
                 throw NoSuchElementException()
-            val result = nextItem as T
+            konst result = nextItem as T
             // Do not clean nextItem (to avoid keeping reference on yielded instance) -- need to keep state for getNextValue
             nextState = -1
             return result
@@ -613,7 +613,7 @@ private class GeneratorSequence<T : Any>(private val getInitialValue: () -> T?, 
 }
 
 /**
- * Returns a wrapper sequence that provides values of this sequence, but ensures it can be iterated only one time.
+ * Returns a wrapper sequence that provides konstues of this sequence, but ensures it can be iterated only one time.
  *
  * The operation is _intermediate_ and _stateless_.
  *
@@ -628,7 +628,7 @@ public fun <T> Sequence<T>.constrainOnce(): Sequence<T> {
 
 
 /**
- * Returns a sequence which invokes the function to calculate the next value on each iteration until the function returns `null`.
+ * Returns a sequence which invokes the function to calculate the next konstue on each iteration until the function returns `null`.
  *
  * The returned sequence is constrained to be iterated only once.
  *
@@ -642,10 +642,10 @@ public fun <T : Any> generateSequence(nextFunction: () -> T?): Sequence<T> {
 }
 
 /**
- * Returns a sequence defined by the starting value [seed] and the function [nextFunction],
- * which is invoked to calculate the next value based on the previous one on each iteration.
+ * Returns a sequence defined by the starting konstue [seed] and the function [nextFunction],
+ * which is invoked to calculate the next konstue based on the previous one on each iteration.
  *
- * The sequence produces values until it encounters first `null` value.
+ * The sequence produces konstues until it encounters first `null` konstue.
  * If [seed] is `null`, an empty sequence is produced.
  *
  * The sequence can be iterated multiple times, each time starting with [seed].
@@ -662,10 +662,10 @@ public fun <T : Any> generateSequence(seed: T?, nextFunction: (T) -> T?): Sequen
         GeneratorSequence({ seed }, nextFunction)
 
 /**
- * Returns a sequence defined by the function [seedFunction], which is invoked to produce the starting value,
- * and the [nextFunction], which is invoked to calculate the next value based on the previous one on each iteration.
+ * Returns a sequence defined by the function [seedFunction], which is invoked to produce the starting konstue,
+ * and the [nextFunction], which is invoked to calculate the next konstue based on the previous one on each iteration.
  *
- * The sequence produces values until it encounters first `null` value.
+ * The sequence produces konstues until it encounters first `null` konstue.
  * If [seedFunction] returns `null`, an empty sequence is produced.
  *
  * The sequence can be iterated multiple times.

@@ -1,4 +1,4 @@
 package
 
-public val x: kotlin.Int
+public konst x: kotlin.Int
 public fun getX(): kotlin.Int

@@ -31,7 +31,7 @@ internal object LLFirImplicitTypesLazyResolver : LLFirLazyResolver(FirResolvePha
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirImplicitBodyTargetResolver(target, lockProvider, session, scopeSession, towerDataContextCollector)
+        konst resolver = LLFirImplicitBodyTargetResolver(target, lockProvider, session, scopeSession, towerDataContextCollector)
         resolver.resolveDesignation()
     }
 
@@ -68,7 +68,7 @@ internal class LLFirImplicitBodyTargetResolver(
     implicitBodyResolveComputationSession = implicitBodyResolveComputationSession ?: ImplicitBodyResolveComputationSession(),
     isJumpingPhase = true,
 ) {
-    override val transformer = object : FirImplicitAwareBodyResolveTransformer(
+    override konst transformer = object : FirImplicitAwareBodyResolveTransformer(
         session,
         implicitBodyResolveComputationSession = this.implicitBodyResolveComputationSession,
         phase = resolverPhase,
@@ -77,7 +77,7 @@ internal class LLFirImplicitBodyTargetResolver(
         firTowerDataContextCollector = towerDataContextCollector,
         returnTypeCalculator = createReturnTypeCalculator(towerDataContextCollector = towerDataContextCollector),
     ) {
-        override val preserveCFGForClasses: Boolean get() = false
+        override konst preserveCFGForClasses: Boolean get() = false
     }
 
     override fun doLazyResolveUnderLock(target: FirElementWithResolveState) {

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.name.FqName
  *
  */
 
-abstract class AnnotationCompanion<T>(val name: FqName) {
+abstract class AnnotationCompanion<T>(konst name: FqName) {
 
     abstract fun extract(annotation: AnnotationDescriptor): T
 
@@ -28,7 +28,7 @@ abstract class AnnotationCompanion<T>(val name: FqName) {
         annotated.annotations.findAnnotation(name)?.let(this::extract)
 }
 
-abstract class AnnotationAndConfigCompanion<T>(private val annotationName: FqName) {
+abstract class AnnotationAndConfigCompanion<T>(private konst annotationName: FqName) {
 
     abstract fun extract(annotation: AnnotationDescriptor?, config: LombokConfig): T
 
@@ -50,24 +50,24 @@ abstract class AnnotationAndConfigCompanion<T>(private val annotationName: FqNam
 
 object LombokAnnotations {
     class Accessors(
-        val fluent: Boolean = false,
-        val chain: Boolean = false,
-        val noIsPrefix: Boolean = false,
-        val prefix: List<String> = emptyList()
+        konst fluent: Boolean = false,
+        konst chain: Boolean = false,
+        konst noIsPrefix: Boolean = false,
+        konst prefix: List<String> = emptyList()
     ) {
         companion object : AnnotationAndConfigCompanion<Accessors>(LombokNames.ACCESSORS) {
 
             override fun extract(annotation: AnnotationDescriptor?, config: LombokConfig): Accessors {
-                val fluent =
+                konst fluent =
                     annotation?.getBooleanArgument("fluent")
                         ?: config.getBoolean("lombok.accessors.fluent")
                         ?: false
-                val chain =
+                konst chain =
                     annotation?.getBooleanArgument("chain")
                         ?: config.getBoolean("lombok.accessors.chain")
                         ?: fluent
-                val noIsPrefix = config.getBoolean("lombok.getter.noIsPrefix") ?: false
-                val prefix =
+                konst noIsPrefix = config.getBoolean("lombok.getter.noIsPrefix") ?: false
+                konst prefix =
                     annotation?.getStringArrayArgument("prefix")
                         ?: config.getMultiString("lombok.accessors.prefix")
                         ?: emptyList()
@@ -77,7 +77,7 @@ object LombokAnnotations {
         }
     }
 
-    class Getter(val visibility: AccessLevel = AccessLevel.PUBLIC) {
+    class Getter(konst visibility: AccessLevel = AccessLevel.PUBLIC) {
         companion object : AnnotationCompanion<Getter>(LombokNames.GETTER) {
 
             override fun extract(annotation: AnnotationDescriptor): Getter =
@@ -87,7 +87,7 @@ object LombokAnnotations {
         }
     }
 
-    class Setter(val visibility: AccessLevel = AccessLevel.PUBLIC) {
+    class Setter(konst visibility: AccessLevel = AccessLevel.PUBLIC) {
         companion object : AnnotationCompanion<Setter>(LombokNames.SETTER) {
 
             override fun extract(annotation: AnnotationDescriptor): Setter =
@@ -97,7 +97,7 @@ object LombokAnnotations {
         }
     }
 
-    class With(val visibility: AccessLevel = AccessLevel.PUBLIC) {
+    class With(konst visibility: AccessLevel = AccessLevel.PUBLIC) {
         companion object : AnnotationCompanion<With>(LombokNames.WITH) {
 
             override fun extract(annotation: AnnotationDescriptor): With =
@@ -108,13 +108,13 @@ object LombokAnnotations {
     }
 
     interface ConstructorAnnotation {
-        val visibility: DescriptorVisibility
-        val staticName: String?
+        konst visibility: DescriptorVisibility
+        konst staticName: String?
     }
 
     class NoArgsConstructor(
-        override val visibility: DescriptorVisibility,
-        override val staticName: String?
+        override konst visibility: DescriptorVisibility,
+        override konst staticName: String?
     ) : ConstructorAnnotation {
         companion object : AnnotationCompanion<NoArgsConstructor>(LombokNames.NO_ARGS_CONSTRUCTOR) {
 
@@ -127,8 +127,8 @@ object LombokAnnotations {
     }
 
     class AllArgsConstructor(
-        override val visibility: DescriptorVisibility = DescriptorVisibilities.PUBLIC,
-        override val staticName: String? = null
+        override konst visibility: DescriptorVisibility = DescriptorVisibilities.PUBLIC,
+        override konst staticName: String? = null
     ) : ConstructorAnnotation {
         companion object : AnnotationCompanion<AllArgsConstructor>(LombokNames.ALL_ARGS_CONSTRUCTOR) {
 
@@ -141,8 +141,8 @@ object LombokAnnotations {
     }
 
     class RequiredArgsConstructor(
-        override val visibility: DescriptorVisibility = DescriptorVisibilities.PUBLIC,
-        override val staticName: String? = null
+        override konst visibility: DescriptorVisibility = DescriptorVisibilities.PUBLIC,
+        override konst staticName: String? = null
     ) : ConstructorAnnotation {
         companion object : AnnotationCompanion<RequiredArgsConstructor>(LombokNames.REQUIRED_ARGS_CONSTRUCTOR) {
 
@@ -154,7 +154,7 @@ object LombokAnnotations {
         }
     }
 
-    class Data(val staticConstructor: String?) {
+    class Data(konst staticConstructor: String?) {
 
         fun asSetter(): Setter = Setter()
 
@@ -173,7 +173,7 @@ object LombokAnnotations {
         }
     }
 
-    class Value(val staticConstructor: String?) {
+    class Value(konst staticConstructor: String?) {
 
         fun asGetter(): Getter = Getter()
 
@@ -191,18 +191,18 @@ object LombokAnnotations {
     }
 
     class Builder(
-        val builderClassName: String,
-        val buildMethodName: String,
-        val builderMethodName: String,
-        val requiresToBuilder: Boolean,
-        val visibility: AccessLevel,
-        val setterPrefix: String?
+        konst builderClassName: String,
+        konst buildMethodName: String,
+        konst builderMethodName: String,
+        konst requiresToBuilder: Boolean,
+        konst visibility: AccessLevel,
+        konst setterPrefix: String?
     ) {
         companion object : AnnotationAndConfigCompanion<Builder>(LombokNames.BUILDER) {
-            private const val DEFAULT_BUILDER_CLASS_NAME = "*Builder"
-            private const val DEFAULT_BUILD_METHOD_NAME = "build"
-            private const val DEFAULT_BUILDER_METHOD_NAME = "builder"
-            private const val DEFAULT_REQUIRES_TO_BUILDER = false
+            private const konst DEFAULT_BUILDER_CLASS_NAME = "*Builder"
+            private const konst DEFAULT_BUILD_METHOD_NAME = "build"
+            private const konst DEFAULT_BUILDER_METHOD_NAME = "builder"
+            private const konst DEFAULT_REQUIRES_TO_BUILDER = false
 
 
             override fun extract(annotation: AnnotationDescriptor?, config: LombokConfig): Builder {
@@ -221,13 +221,13 @@ object LombokAnnotations {
     }
 
     class Singular(
-        val singularName: String?,
-        val allowNull: Boolean,
+        konst singularName: String?,
+        konst allowNull: Boolean,
     ) {
         companion object : AnnotationCompanion<Singular>(LombokNames.SINGULAR) {
             override fun extract(annotation: AnnotationDescriptor): Singular {
                 return Singular(
-                    singularName = annotation.getStringArgument("value"),
+                    singularName = annotation.getStringArgument("konstue"),
                     allowNull = annotation.getBooleanArgument("ignoreNullCollections") ?: false
                 )
             }

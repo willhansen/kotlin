@@ -5,27 +5,27 @@
 fun f() {
     class MyClass() {
         init {
-            val x: MyClass = MyClass()
+            konst x: MyClass = MyClass()
         }
 
         fun member() {
-            val x: MyClass = MyClass()
+            konst x: MyClass = MyClass()
         }
     }
 
     <!LOCAL_OBJECT_NOT_ALLOWED!>object MyObject<!> {
         init {
-            val obj: MyObject = MyObject
+            konst obj: MyObject = MyObject
         }
     }
 
-    val x: MyClass = MyClass()
+    konst x: MyClass = MyClass()
 }
 
-val closure = {
+konst closure = {
     class MyClass {
         init {
-            val x: MyClass = MyClass()
+            konst x: MyClass = MyClass()
         }
     }
 }

@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.tasks.configuration
 
-import org.gradle.api.InvalidUserDataException
+import org.gradle.api.InkonstidUserDataException
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilationInfo
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsBinaryMode
@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.NpmProject
 import org.jetbrains.kotlin.gradle.targets.js.npm.npmProject
 
 internal open class KotlinJsIrLinkConfig(
-    private val binary: JsIrBinary
+    private konst binary: JsIrBinary
 ) : BaseKotlin2JsCompileConfig<KotlinJsIrLink>(KotlinCompilationInfo(binary.compilation)) {
 
-    private val compilation
+    private konst compilation
         get() = binary.compilation
 
     init {
@@ -51,7 +51,7 @@ internal open class KotlinJsIrLinkConfig(
         task: KotlinJsIrLink,
         compilation: KotlinCompilationInfo
     ) {
-        task.enhancedFreeCompilerArgs.value(
+        task.enhancedFreeCompilerArgs.konstue(
             task.compilerOptions.freeCompilerArgs.zip(task.modeProperty) { freeArgs, mode ->
                 freeArgs.toMutableList().apply {
                     commonJsAdditionalCompilerFlags(compilation)
@@ -70,12 +70,12 @@ internal open class KotlinJsIrLinkConfig(
                                 compilation
                             )
                         }
-                        else -> throw InvalidUserDataException(
+                        else -> throw InkonstidUserDataException(
                             "Unknown KotlinJsBinaryMode to configure the build: $mode"
                         )
                     }
 
-                    val alreadyDefinedOutputMode = any { it.startsWith(PER_MODULE) }
+                    konst alreadyDefinedOutputMode = any { it.startsWith(PER_MODULE) }
                     if (!alreadyDefinedOutputMode) {
                         add(task.outputGranularity.toCompilerArgument())
                     }

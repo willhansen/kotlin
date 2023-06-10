@@ -17,7 +17,7 @@ inline fun <reified T> inlineFun(t: T) = t
 // There should be no error for backward compatibility, despite the missing supertype.
 fun test() {
     @Suppress("UNUSED_VARIABLE")
-    val x: Sub = Sub()
+    konst x: Sub = Sub()
     Test<Sub>()
     useCallRef(::Sub)
     simpleFun(Sub())

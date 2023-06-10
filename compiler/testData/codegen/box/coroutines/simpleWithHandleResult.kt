@@ -13,7 +13,7 @@ fun builder(c: suspend () -> Int): Int {
     var res = 0
 
     c.createCoroutine(object : Continuation<Int> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
 
         override fun resumeWith(data: Result<Int>) {
             res = data.getOrThrow()
@@ -28,7 +28,7 @@ fun builder(c: suspend () -> Int): Int {
 fun box(): String {
     var result = ""
 
-    val handledResult = builder {
+    konst handledResult = builder {
         result = suspendHere()
         56
     }

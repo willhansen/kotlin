@@ -1,4 +1,4 @@
-annotation class A(val a: Int, val c: KClass<*>)
+annotation class A(konst a: Int, konst c: KClass<*>)
 
 @A(1, Int::class)
-val f<caret>oo: Int = 10
+konst f<caret>oo: Int = 10

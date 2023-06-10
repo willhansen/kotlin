@@ -10,11 +10,11 @@ context(Int)
 fun one(dummy: Any?) = this@Int
 
 context(Int)
-val two get() = this@Int
+konst two get() = this@Int
 
 class Foo {
     context(Int)
-    val three get() = this@Int
+    konst three get() = this@Int
 
     context(Int)
     fun four(dummy: Any?) = this@Int

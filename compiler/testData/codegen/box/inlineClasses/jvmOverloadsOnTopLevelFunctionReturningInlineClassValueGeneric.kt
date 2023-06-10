@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 @JvmInline
-value class Str<T: String>(val s: T)
+konstue class Str<T: String>(konst s: T)
 
 @JvmOverloads
 fun test(so: String = "O", sk: String = "K") = Str(so + sk)

@@ -1,6 +1,6 @@
 package
 
-public val x: A<*>
+public konst x: A<*>
 
 public interface A</*0*/ T> {
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

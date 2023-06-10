@@ -29,7 +29,7 @@ object FirExplicitBackingFieldForbiddenChecker : FirBackingFieldChecker() {
         // See: recursiveContractCustomContractFunction.fir.kt#L31
 
         @OptIn(SymbolInternals::class)
-        val status = declaration.propertySymbol.fir.status
+        konst status = declaration.propertySymbol.fir.status
 
         if (status !is FirResolvedDeclarationStatus) {
             return

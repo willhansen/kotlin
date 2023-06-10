@@ -11,7 +11,7 @@ fun now(): Any? = null
 
 context(Transaction)
 fun updateUserSession() {
-    val session = loadSession()
+    konst session = loadSession()
     session.lastAccess = now()
     storeSession(session)
 }

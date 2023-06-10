@@ -5,29 +5,29 @@ annotation class Field
 annotation class Another
 
 @Field
-val x: Int = 42
+konst x: Int = 42
 
 <!WRONG_ANNOTATION_TARGET!>@Field<!>
-val y: Int
+konst y: Int
     get() = 13
 
 <!WRONG_ANNOTATION_TARGET!>@Field<!>
-abstract class My(<!WRONG_ANNOTATION_TARGET!>@Field<!> arg: Int, @Field val w: Int) {
+abstract class My(<!WRONG_ANNOTATION_TARGET!>@Field<!> arg: Int, @Field konst w: Int) {
     @Field
-    val x: Int = arg
+    konst x: Int = arg
 
     <!WRONG_ANNOTATION_TARGET!>@Field<!>
-    val y: Int
+    konst y: Int
         get() = 0
 
     <!WRONG_ANNOTATION_TARGET!>@Field<!>
-    abstract val z: Int
+    abstract konst z: Int
 
     <!WRONG_ANNOTATION_TARGET!>@Field<!>
     fun foo() {}
 
     <!WRONG_ANNOTATION_TARGET!>@Field<!>
-    val v: Int by <!UNRESOLVED_REFERENCE!>Delegates<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>lazy<!> { 42 }
+    konst v: Int by <!UNRESOLVED_REFERENCE!>Delegates<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>lazy<!> { 42 }
 }
 
 enum class Your {
@@ -36,9 +36,9 @@ enum class Your {
 
 interface His {
     <!WRONG_ANNOTATION_TARGET!>@Field<!>
-    val x: Int
+    konst x: Int
 
     <!WRONG_ANNOTATION_TARGET!>@Field<!>
-    val y: Int
+    konst y: Int
         get() = 42
 }

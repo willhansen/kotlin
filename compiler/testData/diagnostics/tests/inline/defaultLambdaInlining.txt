@@ -1,7 +1,7 @@
 package
 
-public val a: Foo
-public val prop: kotlin.String = "OK"
+public konst a: Foo
+public konst prop: kotlin.String = "OK"
 public inline fun default1(/*0*/ s: () -> kotlin.String = ...): kotlin.Unit
 public inline fun default10(/*0*/ s: () -> kotlin.String = ...): kotlin.Unit
 public inline fun default11(/*0*/ s: () -> Derived = ...): kotlin.Unit
@@ -33,7 +33,7 @@ public final class Derived : Base {
 
 public final class Foo {
     public constructor Foo()
-    public final val prop: kotlin.String = "OK"
+    public final konst prop: kotlin.String = "OK"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun test(): kotlin.String
@@ -42,7 +42,7 @@ public final class Foo {
 
 public object FooObject {
     private constructor FooObject()
-    public final val prop: kotlin.String = "OK"
+    public final konst prop: kotlin.String = "OK"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun test(): kotlin.String

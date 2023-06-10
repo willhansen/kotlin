@@ -35,13 +35,13 @@ import org.jetbrains.kotlin.types.typeUtil.*
 
 object JsExportDeclarationChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val trace = context.trace
-        val bindingContext = trace.bindingContext
+        konst trace = context.trace
+        konst bindingContext = trace.bindingContext
 
         fun checkTypeParameter(descriptor: TypeParameterDescriptor) {
             for (upperBound in descriptor.upperBounds) {
                 if (!upperBound.isExportable(bindingContext)) {
-                    val typeParameterDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(descriptor)!!
+                    konst typeParameterDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(descriptor)!!
                     trace.report(ErrorsJs.NON_EXPORTABLE_TYPE.on(typeParameterDeclaration, "upper bound", upperBound))
                 }
             }
@@ -49,8 +49,8 @@ object JsExportDeclarationChecker : DeclarationChecker {
 
         fun checkValueParameter(descriptor: ValueParameterDescriptor) {
             if (!descriptor.type.isExportable(bindingContext)) {
-                val valueParameterDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(descriptor)!!
-                trace.report(ErrorsJs.NON_EXPORTABLE_TYPE.on(valueParameterDeclaration, "parameter", descriptor.type))
+                konst konstueParameterDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(descriptor)!!
+                trace.report(ErrorsJs.NON_EXPORTABLE_TYPE.on(konstueParameterDeclaration, "parameter", descriptor.type))
             }
         }
 
@@ -58,7 +58,7 @@ object JsExportDeclarationChecker : DeclarationChecker {
         if (descriptor !is MemberDescriptor)
             return
 
-        val hasJsName = AnnotationsUtils.getJsNameAnnotation(descriptor) != null
+        konst hasJsName = AnnotationsUtils.getJsNameAnnotation(descriptor) != null
 
         fun reportWrongExportedDeclaration(kind: String) {
             trace.report(ErrorsJs.WRONG_EXPORTED_DECLARATION.on(declaration, kind))
@@ -68,7 +68,7 @@ object JsExportDeclarationChecker : DeclarationChecker {
             reportWrongExportedDeclaration("expect")
         }
 
-        validateDeclarationOnConsumableName(declaration, descriptor, trace)
+        konstidateDeclarationOnConsumableName(declaration, descriptor, trace)
 
         when (descriptor) {
             is FunctionDescriptor -> {
@@ -93,7 +93,7 @@ object JsExportDeclarationChecker : DeclarationChecker {
 
                 // Properties are checked instead of property accessors
                 if (descriptor !is PropertyAccessorDescriptor) {
-                    for (parameter in descriptor.valueParameters) {
+                    for (parameter in descriptor.konstueParameters) {
                         checkValueParameter(parameter)
                     }
 
@@ -121,11 +121,11 @@ object JsExportDeclarationChecker : DeclarationChecker {
                     checkTypeParameter(typeParameter)
                 }
 
-                val wrongDeclaration: String? = when (descriptor.kind) {
+                konst wrongDeclaration: String? = when (descriptor.kind) {
                     ANNOTATION_CLASS -> "annotation class"
                     CLASS -> when {
                         descriptor.isInsideInterface -> "nested class inside exported interface"
-                        descriptor.isInlineClass() -> "${if (descriptor.isInline) "inline " else ""}${if (descriptor.isValue) "value " else ""}class"
+                        descriptor.isInlineClass() -> "${if (descriptor.isInline) "inline " else ""}${if (descriptor.isValue) "konstue " else ""}class"
                         else -> null
                     }
                     else -> if (descriptor.isInsideInterface) {
@@ -180,9 +180,9 @@ object JsExportDeclarationChecker : DeclarationChecker {
 
         currentlyProcessed.remove(this)
 
-        val nonNullable = makeNotNullable()
+        konst nonNullable = makeNotNullable()
 
-        val isPrimitiveExportableType = nonNullable.isAnyOrNullableAny() ||
+        konst isPrimitiveExportableType = nonNullable.isAnyOrNullableAny() ||
                 nonNullable.isTypeParameter() ||
                 nonNullable.isDynamic() ||
                 nonNullable.isBoolean() ||
@@ -195,7 +195,7 @@ object JsExportDeclarationChecker : DeclarationChecker {
 
         if (isPrimitiveExportableType) return true
 
-        val descriptor = constructor.declarationDescriptor
+        konst descriptor = constructor.declarationDescriptor
 
         if (descriptor !is MemberDescriptor) return false
 
@@ -204,18 +204,18 @@ object JsExportDeclarationChecker : DeclarationChecker {
         return descriptor.isEffectivelyExternal() || AnnotationsUtils.isExportedObject(descriptor, bindingContext)
     }
 
-    private fun validateDeclarationOnConsumableName(
+    private fun konstidateDeclarationOnConsumableName(
         declaration: KtDeclaration,
         declarationDescriptor: DeclarationDescriptor,
         trace: BindingTrace
     ) {
         if (!declarationDescriptor.isTopLevelInPackage() || declarationDescriptor.name.isSpecial) return
 
-        val name = declarationDescriptor.getKotlinOrJsName()
+        konst name = declarationDescriptor.getKotlinOrJsName()
 
         if (name in SPECIAL_KEYWORDS || (name !in RESERVED_KEYWORDS && NameSuggestion.sanitizeName(name) == name)) return
 
-        val reportTarget = declarationDescriptor.getJsNameArgument() ?: declaration.getIdentifier()
+        konst reportTarget = declarationDescriptor.getJsNameArgument() ?: declaration.getIdentifier()
 
         trace.report(ErrorsJs.NON_CONSUMABLE_EXPORTED_IDENTIFIER.on(reportTarget, name))
     }
@@ -229,7 +229,7 @@ object JsExportDeclarationChecker : DeclarationChecker {
     }
 
     private fun DeclarationDescriptor.getJsNameArgument(): PsiElement? {
-        val jsNameAnnotation = AnnotationsUtils.getJsNameAnnotation(this) ?: return null
-        return (jsNameAnnotation.source.getPsi() as KtAnnotationEntry).valueArgumentList?.arguments?.first()
+        konst jsNameAnnotation = AnnotationsUtils.getJsNameAnnotation(this) ?: return null
+        return (jsNameAnnotation.source.getPsi() as KtAnnotationEntry).konstueArgumentList?.arguments?.first()
     }
 }

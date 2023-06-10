@@ -16,7 +16,7 @@ open class BaseClass {
 
   }
 
-  val <T : Any?> T.fromClass: T
+  konst <T : Any?> T.fromClass: T
     get(): T {
       return <this>
     }
@@ -47,7 +47,7 @@ object C : BaseClass, I<String> {
     get
     set
 
-  val Int.ext: Int
+  konst Int.ext: Int
     get(): Int {
       return 6
     }
@@ -56,7 +56,7 @@ object C : BaseClass, I<String> {
     return t
   }
 
-  val <T : Any?> T.g2: T
+  konst <T : Any?> T.g2: T
     get(): T {
       return <this>
     }

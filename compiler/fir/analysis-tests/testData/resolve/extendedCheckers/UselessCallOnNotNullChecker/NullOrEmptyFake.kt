@@ -1,4 +1,4 @@
 // WITH_STDLIB
 
-val s: String? = null
-val empty = s.isNullOrEmpty()
+konst s: String? = null
+konst empty = s.isNullOrEmpty()

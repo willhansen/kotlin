@@ -37,8 +37,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Int_ImmediateOK) {
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint()));
         EXPECT_CALL(waitForF, Call(step)).WillOnce(testing::Return(okValue));
     }
-    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
     EXPECT_THAT(result, okValue);
 }
@@ -60,8 +60,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Int_EventualOK) {
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint() + step));
         EXPECT_CALL(waitForF, Call(step)).WillOnce(testing::Return(okValue));
     }
-    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
     EXPECT_THAT(result, okValue);
 }
@@ -85,8 +85,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Int_LastChanceOK) {
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint() + step + step));
         EXPECT_CALL(waitForF, Call(rest)).WillOnce(testing::Return(okValue));
     }
-    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
     EXPECT_THAT(result, okValue);
 }
@@ -110,8 +110,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Int_Timeout) {
         EXPECT_CALL(waitForF, Call(rest)).WillOnce(testing::Return(timeoutValue));
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint() + step + step + rest));
     }
-    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
     EXPECT_THAT(result, timeoutValue);
 }
@@ -129,8 +129,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Int_ImmediateTimeout) {
         testing::InSequence s;
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint() + step + step + step));
     }
-    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
     EXPECT_THAT(result, timeoutValue);
 }
@@ -151,8 +151,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Int_ClockJumpTimeout) {
         // Instead of incrementing by `step`, the clock jumped straight to `until`.
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(until));
     }
-    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
     EXPECT_THAT(result, timeoutValue);
 }
@@ -182,8 +182,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Int_NonconformantWaitTimeout) {
         // Finally waited enough.
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint() + actualStep + actualStep + std::chrono::seconds(9)));
     }
-    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    auto result = internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, timeoutValue, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
     EXPECT_THAT(result, timeoutValue);
 }
@@ -206,8 +206,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Void_Timeout) {
         EXPECT_CALL(waitForF, Call(rest));
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint() + step + step + rest));
     }
-    internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
 }
 
@@ -223,8 +223,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Void_ImmediateTimeout) {
         testing::InSequence s;
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint() + step + step + step));
     }
-    internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
 }
 
@@ -243,8 +243,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Void_ClockJumpTimeout) {
         // Instead of incrementing by `step`, the clock jumped straight to `until`.
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(until));
     }
-    internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
 }
 
@@ -272,8 +272,8 @@ TEST(ClockInternalTest, WaitUntilViaFor_Void_NonconformantWaitTimeout) {
         // Finally waited enough.
         EXPECT_CALL(nowF, Call()).WillOnce(testing::Return(TimePoint() + actualStep + actualStep + std::chrono::seconds(9)));
     }
-    internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, [&](auto interval) {
-        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interval));
+    internal::waitUntilViaFor(nowF.AsStdFunction(), step, until, [&](auto interkonst) {
+        return waitForF.Call(std::chrono::duration_cast<std::chrono::seconds>(interkonst));
     });
 }
 
@@ -323,11 +323,11 @@ using ClockTestTypes = testing::Types<kotlin::steady_clock, kotlin::test_support
 TYPED_TEST_SUITE(ClockTest, ClockTestTypes, ClockTestNames);
 
 TYPED_TEST(ClockTest, SleepFor) {
-    constexpr auto interval = milliseconds(1);
+    constexpr auto interkonst = milliseconds(1);
     auto before = TypeParam::now();
-    TypeParam::sleep_for(interval);
+    TypeParam::sleep_for(interkonst);
     auto after = TypeParam::now();
-    EXPECT_THAT(after - before, testing::Ge(interval));
+    EXPECT_THAT(after - before, testing::Ge(interkonst));
 }
 
 TYPED_TEST(ClockTest, SleepUntil) {
@@ -338,7 +338,7 @@ TYPED_TEST(ClockTest, SleepUntil) {
 }
 
 TYPED_TEST(ClockTest, CVWaitFor_OK) {
-    constexpr auto interval = hours(10);
+    constexpr auto interkonst = hours(10);
     std::condition_variable cv;
     std::mutex m;
     bool ok = false;
@@ -356,14 +356,14 @@ TYPED_TEST(ClockTest, CVWaitFor_OK) {
     std::unique_lock guard(m);
     auto before = TypeParam::now();
     go = true;
-    auto result = TypeParam::wait_for(cv, guard, interval, [&] { return ok; });
+    auto result = TypeParam::wait_for(cv, guard, interkonst, [&] { return ok; });
     auto after = TypeParam::now();
     EXPECT_TRUE(result);
-    EXPECT_THAT(after - before, testing::Lt(interval));
+    EXPECT_THAT(after - before, testing::Lt(interkonst));
 }
 
 TYPED_TEST(ClockTest, CVWaitFor_Timeout) {
-    constexpr auto interval = microseconds(10);
+    constexpr auto interkonst = microseconds(10);
     std::condition_variable cv;
     std::mutex m;
     std::atomic<bool> go = false;
@@ -371,15 +371,15 @@ TYPED_TEST(ClockTest, CVWaitFor_Timeout) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        TypeParam::sleep_for(interval);
+        TypeParam::sleep_for(interkonst);
     });
     std::unique_lock guard(m);
     auto before = TypeParam::now();
     go = true;
-    auto result = TypeParam::wait_for(cv, guard, interval, [] { return false; });
+    auto result = TypeParam::wait_for(cv, guard, interkonst, [] { return false; });
     auto after = TypeParam::now();
     EXPECT_FALSE(result);
-    EXPECT_THAT(after - before, testing::Ge(interval));
+    EXPECT_THAT(after - before, testing::Ge(interkonst));
 }
 
 TYPED_TEST(ClockTest, CVWaitFor_InfiniteTimeout) {
@@ -430,7 +430,7 @@ TYPED_TEST(ClockTest, CVWaitUntil_OK) {
 }
 
 TYPED_TEST(ClockTest, CVWaitUntil_Timeout) {
-    constexpr auto interval = microseconds(10);
+    constexpr auto interkonst = microseconds(10);
     std::condition_variable cv;
     std::mutex m;
     std::atomic<bool> go = false;
@@ -438,10 +438,10 @@ TYPED_TEST(ClockTest, CVWaitUntil_Timeout) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        TypeParam::sleep_for(interval);
+        TypeParam::sleep_for(interkonst);
     });
     std::unique_lock guard(m);
-    auto until = TypeParam::now() + interval;
+    auto until = TypeParam::now() + interkonst;
     go = true;
     auto result = TypeParam::wait_until(cv, guard, until, [] { return false; });
     auto after = TypeParam::now();
@@ -473,7 +473,7 @@ TYPED_TEST(ClockTest, CVWaitUntil_InfiniteTimeout) {
 }
 
 TYPED_TEST(ClockTest, CVAnyWaitFor_OK) {
-    constexpr auto interval = hours(10);
+    constexpr auto interkonst = hours(10);
     std::condition_variable_any cv;
     std::shared_mutex m;
     bool ok = false;
@@ -491,14 +491,14 @@ TYPED_TEST(ClockTest, CVAnyWaitFor_OK) {
     std::unique_lock guard(m);
     auto before = TypeParam::now();
     go = true;
-    auto result = TypeParam::wait_for(cv, guard, interval, [&] { return ok; });
+    auto result = TypeParam::wait_for(cv, guard, interkonst, [&] { return ok; });
     auto after = TypeParam::now();
     EXPECT_TRUE(result);
-    EXPECT_THAT(after - before, testing::Lt(interval));
+    EXPECT_THAT(after - before, testing::Lt(interkonst));
 }
 
 TYPED_TEST(ClockTest, CVAnyWaitFor_Timeout) {
-    constexpr auto interval = microseconds(10);
+    constexpr auto interkonst = microseconds(10);
     std::condition_variable_any cv;
     std::shared_mutex m;
     std::atomic<bool> go = false;
@@ -506,15 +506,15 @@ TYPED_TEST(ClockTest, CVAnyWaitFor_Timeout) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        TypeParam::sleep_for(interval);
+        TypeParam::sleep_for(interkonst);
     });
     std::unique_lock guard(m);
     auto before = TypeParam::now();
     go = true;
-    auto result = TypeParam::wait_for(cv, guard, interval, [] { return false; });
+    auto result = TypeParam::wait_for(cv, guard, interkonst, [] { return false; });
     auto after = TypeParam::now();
     EXPECT_FALSE(result);
-    EXPECT_THAT(after - before, testing::Ge(interval));
+    EXPECT_THAT(after - before, testing::Ge(interkonst));
 }
 
 TYPED_TEST(ClockTest, CVAnyWaitFor_InfiniteTimeout) {
@@ -565,7 +565,7 @@ TYPED_TEST(ClockTest, CVAnyWaitUntil_OK) {
 }
 
 TYPED_TEST(ClockTest, CVAnyWaitUntil_Timeout) {
-    constexpr auto interval = microseconds(10);
+    constexpr auto interkonst = microseconds(10);
     std::condition_variable_any cv;
     std::shared_mutex m;
     std::atomic<bool> go = false;
@@ -573,10 +573,10 @@ TYPED_TEST(ClockTest, CVAnyWaitUntil_Timeout) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        TypeParam::sleep_for(interval);
+        TypeParam::sleep_for(interkonst);
     });
     std::unique_lock guard(m);
-    auto until = TypeParam::now() + interval;
+    auto until = TypeParam::now() + interkonst;
     go = true;
     auto result = TypeParam::wait_until(cv, guard, until, [] { return false; });
     auto after = TypeParam::now();
@@ -608,7 +608,7 @@ TYPED_TEST(ClockTest, CVAnyWaitUntil_InfiniteTimeout) {
 }
 
 TYPED_TEST(ClockTest, FutureWaitFor_OK) {
-    constexpr auto interval = hours(10);
+    constexpr auto interkonst = hours(10);
     std::promise<int> promise;
     std::future<int> future = promise.get_future();
     std::atomic<bool> go = false;
@@ -616,28 +616,28 @@ TYPED_TEST(ClockTest, FutureWaitFor_OK) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        promise.set_value(42);
+        promise.set_konstue(42);
     });
     auto before = TypeParam::now();
     go = true;
-    auto result = TypeParam::wait_for(future, interval);
+    auto result = TypeParam::wait_for(future, interkonst);
     auto after = TypeParam::now();
     EXPECT_THAT(result, std::future_status::ready);
-    EXPECT_THAT(after - before, testing::Lt(interval));
+    EXPECT_THAT(after - before, testing::Lt(interkonst));
 }
 
 TYPED_TEST(ClockTest, FutureWaitFor_Deferred) {
-    constexpr auto interval = hours(10);
+    constexpr auto interkonst = hours(10);
     std::future<int> future = std::async(std::launch::deferred, [] { return 42; });
     auto before = TypeParam::now();
-    auto result = TypeParam::wait_for(future, interval);
+    auto result = TypeParam::wait_for(future, interkonst);
     auto after = TypeParam::now();
     EXPECT_THAT(result, std::future_status::deferred);
-    EXPECT_THAT(after - before, testing::Lt(interval));
+    EXPECT_THAT(after - before, testing::Lt(interkonst));
 }
 
 TYPED_TEST(ClockTest, FutureWaitFor_Timeout) {
-    constexpr auto interval = microseconds(10);
+    constexpr auto interkonst = microseconds(10);
     std::promise<int> promise;
     std::future<int> future = promise.get_future();
     std::atomic<bool> go = false;
@@ -645,14 +645,14 @@ TYPED_TEST(ClockTest, FutureWaitFor_Timeout) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        TypeParam::sleep_for(interval);
+        TypeParam::sleep_for(interkonst);
     });
     auto before = TypeParam::now();
     go = true;
-    auto result = TypeParam::wait_for(future, interval);
+    auto result = TypeParam::wait_for(future, interkonst);
     auto after = TypeParam::now();
     EXPECT_THAT(result, std::future_status::timeout);
-    EXPECT_THAT(after - before, testing::Ge(interval));
+    EXPECT_THAT(after - before, testing::Ge(interkonst));
 }
 
 TYPED_TEST(ClockTest, FutureWaitFor_InfiniteTimeout) {
@@ -665,7 +665,7 @@ TYPED_TEST(ClockTest, FutureWaitFor_InfiniteTimeout) {
         waitForPending<TypeParam>();
         // Wait to see if `TypeParam::wait_for` wakes up from timeout.
         TypeParam::sleep_for(milliseconds(1));
-        promise.set_value(42);
+        promise.set_konstue(42);
     });
     go = true;
     auto result = TypeParam::wait_for(future, microseconds::max());
@@ -680,7 +680,7 @@ TYPED_TEST(ClockTest, FutureWaitUntil_OK) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        promise.set_value(42);
+        promise.set_konstue(42);
     });
     auto until = TypeParam::now() + hours(10);
     go = true;
@@ -700,7 +700,7 @@ TYPED_TEST(ClockTest, FutureWaitUntil_Deferred) {
 }
 
 TYPED_TEST(ClockTest, FutureWaitUntil_Timeout) {
-    constexpr auto interval = microseconds(10);
+    constexpr auto interkonst = microseconds(10);
     std::promise<int> promise;
     std::future<int> future = promise.get_future();
     std::atomic<bool> go = false;
@@ -708,9 +708,9 @@ TYPED_TEST(ClockTest, FutureWaitUntil_Timeout) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        TypeParam::sleep_for(interval);
+        TypeParam::sleep_for(interkonst);
     });
-    auto until = TypeParam::now() + interval;
+    auto until = TypeParam::now() + interkonst;
     go = true;
     auto result = TypeParam::wait_until(future, until);
     auto after = TypeParam::now();
@@ -728,7 +728,7 @@ TYPED_TEST(ClockTest, FutureWaitUntil_InfiniteTimeout) {
         waitForPending<TypeParam>();
         // Wait to see if `TypeParam::wait_until` wakes up from timeout.
         TypeParam::sleep_for(milliseconds(1));
-        promise.set_value(42);
+        promise.set_konstue(42);
     });
     go = true;
     auto result = TypeParam::wait_until(future, TypeParam::time_point::max());
@@ -736,7 +736,7 @@ TYPED_TEST(ClockTest, FutureWaitUntil_InfiniteTimeout) {
 }
 
 TYPED_TEST(ClockTest, SharedFutureWaitFor_OK) {
-    constexpr auto interval = hours(10);
+    constexpr auto interkonst = hours(10);
     std::promise<int> promise;
     std::shared_future<int> future = promise.get_future();
     std::atomic<bool> go = false;
@@ -744,28 +744,28 @@ TYPED_TEST(ClockTest, SharedFutureWaitFor_OK) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        promise.set_value(42);
+        promise.set_konstue(42);
     });
     auto before = TypeParam::now();
     go = true;
-    auto result = TypeParam::wait_for(future, interval);
+    auto result = TypeParam::wait_for(future, interkonst);
     auto after = TypeParam::now();
     EXPECT_THAT(result, std::future_status::ready);
-    EXPECT_THAT(after - before, testing::Lt(interval));
+    EXPECT_THAT(after - before, testing::Lt(interkonst));
 }
 
 TYPED_TEST(ClockTest, SharedFutureWaitFor_Deferred) {
-    constexpr auto interval = hours(10);
+    constexpr auto interkonst = hours(10);
     std::shared_future<int> future = std::async(std::launch::deferred, [] { return 42; });
     auto before = TypeParam::now();
-    auto result = TypeParam::wait_for(future, interval);
+    auto result = TypeParam::wait_for(future, interkonst);
     auto after = TypeParam::now();
     EXPECT_THAT(result, std::future_status::deferred);
-    EXPECT_THAT(after - before, testing::Lt(interval));
+    EXPECT_THAT(after - before, testing::Lt(interkonst));
 }
 
 TYPED_TEST(ClockTest, SharedFutureWaitFor_Timeout) {
-    constexpr auto interval = microseconds(10);
+    constexpr auto interkonst = microseconds(10);
     std::promise<int> promise;
     std::shared_future<int> future = promise.get_future();
     std::atomic<bool> go = false;
@@ -773,14 +773,14 @@ TYPED_TEST(ClockTest, SharedFutureWaitFor_Timeout) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        TypeParam::sleep_for(interval);
+        TypeParam::sleep_for(interkonst);
     });
     auto before = TypeParam::now();
     go = true;
-    auto result = TypeParam::wait_for(future, interval);
+    auto result = TypeParam::wait_for(future, interkonst);
     auto after = TypeParam::now();
     EXPECT_THAT(result, std::future_status::timeout);
-    EXPECT_THAT(after - before, testing::Ge(interval));
+    EXPECT_THAT(after - before, testing::Ge(interkonst));
 }
 
 TYPED_TEST(ClockTest, SharedFutureWaitFor_InfiniteTimeout) {
@@ -793,7 +793,7 @@ TYPED_TEST(ClockTest, SharedFutureWaitFor_InfiniteTimeout) {
         waitForPending<TypeParam>();
         // Wait to see if `TypeParam::wait_for` wakes up from timeout.
         TypeParam::sleep_for(milliseconds(1));
-        promise.set_value(42);
+        promise.set_konstue(42);
     });
     go = true;
     auto result = TypeParam::wait_for(future, microseconds::max());
@@ -808,7 +808,7 @@ TYPED_TEST(ClockTest, SharedFutureWaitUntil_OK) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        promise.set_value(42);
+        promise.set_konstue(42);
     });
     auto until = TypeParam::now() + hours(10);
     go = true;
@@ -828,7 +828,7 @@ TYPED_TEST(ClockTest, SharedFutureWaitUntil_Deferred) {
 }
 
 TYPED_TEST(ClockTest, SharedFutureWaitUntil_Timeout) {
-    constexpr auto interval = microseconds(10);
+    constexpr auto interkonst = microseconds(10);
     std::promise<int> promise;
     std::shared_future<int> future = promise.get_future();
     std::atomic<bool> go = false;
@@ -836,9 +836,9 @@ TYPED_TEST(ClockTest, SharedFutureWaitUntil_Timeout) {
         while (!go.load()) {
         }
         waitForPending<TypeParam>();
-        TypeParam::sleep_for(interval);
+        TypeParam::sleep_for(interkonst);
     });
-    auto until = TypeParam::now() + interval;
+    auto until = TypeParam::now() + interkonst;
     go = true;
     auto result = TypeParam::wait_until(future, until);
     auto after = TypeParam::now();
@@ -856,7 +856,7 @@ TYPED_TEST(ClockTest, SharedFutureWaitUntil_InfiniteTimeout) {
         waitForPending<TypeParam>();
         // Wait to see if `TypeParam::wait_until` wakes up from timeout.
         TypeParam::sleep_for(milliseconds(1));
-        promise.set_value(42);
+        promise.set_konstue(42);
     });
     go = true;
     auto result = TypeParam::wait_until(future, TypeParam::time_point::max());
@@ -961,13 +961,13 @@ TYPED_TEST_SUITE(ClockTypesTest, ClockTypesTestTypes, ClockTypesTestNames);
 TYPED_TEST(ClockTypesTest, SleepFor) {
     using Clock = typename ClockTypesTest<TypeParam>::Clock;
     using Duration = typename ClockTypesTest<TypeParam>::Duration;
-    static_assert(std::is_same_v<void, decltype(Clock::sleep_for(std::declval<Duration>()))>);
+    static_assert(std::is_same_v<void, decltype(Clock::sleep_for(std::declkonst<Duration>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, SleepUntil) {
     using Clock = typename ClockTypesTest<TypeParam>::Clock;
     using Duration = typename ClockTypesTest<TypeParam>::Duration;
-    static_assert(std::is_same_v<void, decltype(Clock::sleep_until(std::declval<std::chrono::time_point<Clock, Duration>>()))>);
+    static_assert(std::is_same_v<void, decltype(Clock::sleep_until(std::declkonst<std::chrono::time_point<Clock, Duration>>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, CVWaitFor) {
@@ -976,8 +976,8 @@ TYPED_TEST(ClockTypesTest, CVWaitFor) {
     static_assert(std::is_same_v<
                   bool,
                   decltype(Clock::wait_for(
-                          std::declval<std::condition_variable&>(), std::declval<std::unique_lock<std::mutex>&>(), std::declval<Duration>(),
-                          std::declval<std::function<bool()>>()))>);
+                          std::declkonst<std::condition_variable&>(), std::declkonst<std::unique_lock<std::mutex>&>(), std::declkonst<Duration>(),
+                          std::declkonst<std::function<bool()>>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, CVWaitUntil) {
@@ -986,8 +986,8 @@ TYPED_TEST(ClockTypesTest, CVWaitUntil) {
     static_assert(std::is_same_v<
                   bool,
                   decltype(Clock::wait_until(
-                          std::declval<std::condition_variable&>(), std::declval<std::unique_lock<std::mutex>&>(),
-                          std::declval<std::chrono::time_point<Clock, Duration>>(), std::declval<std::function<bool()>>()))>);
+                          std::declkonst<std::condition_variable&>(), std::declkonst<std::unique_lock<std::mutex>&>(),
+                          std::declkonst<std::chrono::time_point<Clock, Duration>>(), std::declkonst<std::function<bool()>>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, CVAnyWaitFor) {
@@ -996,8 +996,8 @@ TYPED_TEST(ClockTypesTest, CVAnyWaitFor) {
     static_assert(std::is_same_v<
                   bool,
                   decltype(Clock::wait_for(
-                          std::declval<std::condition_variable_any&>(), std::declval<std::unique_lock<std::shared_mutex>&>(),
-                          std::declval<Duration>(), std::declval<std::function<bool()>>()))>);
+                          std::declkonst<std::condition_variable_any&>(), std::declkonst<std::unique_lock<std::shared_mutex>&>(),
+                          std::declkonst<Duration>(), std::declkonst<std::function<bool()>>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, CVAnyWaitUntil) {
@@ -1006,15 +1006,15 @@ TYPED_TEST(ClockTypesTest, CVAnyWaitUntil) {
     static_assert(std::is_same_v<
                   bool,
                   decltype(Clock::wait_until(
-                          std::declval<std::condition_variable_any&>(), std::declval<std::unique_lock<std::shared_mutex>&>(),
-                          std::declval<std::chrono::time_point<Clock, Duration>>(), std::declval<std::function<bool()>>()))>);
+                          std::declkonst<std::condition_variable_any&>(), std::declkonst<std::unique_lock<std::shared_mutex>&>(),
+                          std::declkonst<std::chrono::time_point<Clock, Duration>>(), std::declkonst<std::function<bool()>>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, FutureWaitFor) {
     using Clock = typename ClockTypesTest<TypeParam>::Clock;
     using Duration = typename ClockTypesTest<TypeParam>::Duration;
     static_assert(std::is_same_v<
-                  std::future_status, decltype(Clock::wait_for(std::declval<const std::future<int>&>(), std::declval<Duration>()))>);
+                  std::future_status, decltype(Clock::wait_for(std::declkonst<const std::future<int>&>(), std::declkonst<Duration>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, FutureWaitUntil) {
@@ -1023,14 +1023,14 @@ TYPED_TEST(ClockTypesTest, FutureWaitUntil) {
     static_assert(std::is_same_v<
                   std::future_status,
                   decltype(Clock::wait_until(
-                          std::declval<const std::future<int>&>(), std::declval<std::chrono::time_point<Clock, Duration>>()))>);
+                          std::declkonst<const std::future<int>&>(), std::declkonst<std::chrono::time_point<Clock, Duration>>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, SharedFutureWaitFor) {
     using Clock = typename ClockTypesTest<TypeParam>::Clock;
     using Duration = typename ClockTypesTest<TypeParam>::Duration;
     static_assert(std::is_same_v<
-                  std::future_status, decltype(Clock::wait_for(std::declval<const std::shared_future<int>&>(), std::declval<Duration>()))>);
+                  std::future_status, decltype(Clock::wait_for(std::declkonst<const std::shared_future<int>&>(), std::declkonst<Duration>()))>);
 }
 
 TYPED_TEST(ClockTypesTest, SharedFutureWaitUntil) {
@@ -1039,7 +1039,7 @@ TYPED_TEST(ClockTypesTest, SharedFutureWaitUntil) {
     static_assert(std::is_same_v<
                   std::future_status,
                   decltype(Clock::wait_until(
-                          std::declval<const std::shared_future<int>&>(), std::declval<std::chrono::time_point<Clock, Duration>>()))>);
+                          std::declkonst<const std::shared_future<int>&>(), std::declkonst<std::chrono::time_point<Clock, Duration>>()))>);
 }
 
 TEST(ManualClockTest, SleepUntil) {

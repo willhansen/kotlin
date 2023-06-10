@@ -13,7 +13,7 @@ KtSuccessCallInfo:
           receiverType = null
           returnType = kotlin.Int
           symbol = kotlin/Int.plus(<dispatch receiver>: kotlin.Int, other: kotlin.Int): kotlin.Int
-          valueParameters = [
+          konstueParameters = [
             KtVariableLikeSignature:
               name = other
               receiverType = null

@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.fir.resolve.providers.firProvider
 import org.jetbrains.kotlin.psi.KtFile
 
 fun FirElementWithResolveState.getContainingFile(): FirFile? {
-    val provider = moduleData.session.firProvider
+    konst provider = moduleData.session.firProvider
     return when (this) {
         is FirFile -> this
         is FirScript -> provider.getFirScriptContainerFile(symbol)
@@ -26,9 +26,9 @@ fun FirElementWithResolveState.getContainingFile(): FirFile? {
         is FirClassLikeDeclaration -> provider.getFirClassifierContainerFileIfAny(symbol)
         is FirAnonymousInitializer -> containingClass().getContainingFile()
         is FirDanglingModifierList -> {
-            val ktFile = psi?.containingFile as? KtFile
+            konst ktFile = psi?.containingFile as? KtFile
                 ?: error("File for dangling modifier list cannot be null")
-            val moduleComponents = llFirResolvableSession?.moduleComponents
+            konst moduleComponents = llFirResolvableSession?.moduleComponents
                 ?: error("LLFirResolvableModuleSession for dangling modifier list cannot be null")
             moduleComponents.cache.getCachedFirFile(ktFile)
                 ?: error("Fir file for dandling modifier list cannot be null")

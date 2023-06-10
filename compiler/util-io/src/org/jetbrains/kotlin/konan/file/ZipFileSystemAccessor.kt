@@ -17,14 +17,14 @@ object ZipFileSystemInPlaceAccessor : ZipFileSystemAccessor {
     }
 }
 
-class ZipFileSystemCacheableAccessor(private val cacheLimit: Int) : ZipFileSystemAccessor {
-    private val loadFactor = 0.75f
-    private val initialCapacity = (1f + cacheLimit.toFloat() / loadFactor).toInt()
+class ZipFileSystemCacheableAccessor(private konst cacheLimit: Int) : ZipFileSystemAccessor {
+    private konst loadFactor = 0.75f
+    private konst initialCapacity = (1f + cacheLimit.toFloat() / loadFactor).toInt()
 
-    private val openedFileSystems = object : LinkedHashMap<File, FileSystem>(initialCapacity, loadFactor, true) {
+    private konst openedFileSystems = object : LinkedHashMap<File, FileSystem>(initialCapacity, loadFactor, true) {
         override fun removeEldestEntry(eldest: Map.Entry<File, FileSystem>?): Boolean {
             if (size > cacheLimit) {
-                eldest?.value?.close()
+                eldest?.konstue?.close()
                 return true
             }
             return false
@@ -32,13 +32,13 @@ class ZipFileSystemCacheableAccessor(private val cacheLimit: Int) : ZipFileSyste
     }
 
     override fun <T> withZipFileSystem(zipFile: File, action: (FileSystem) -> T): T {
-        val fileSystem = openedFileSystems.getOrPut(zipFile) { zipFile.zipFileSystem() }
+        konst fileSystem = openedFileSystems.getOrPut(zipFile) { zipFile.zipFileSystem() }
         return action(fileSystem)
     }
 
     fun reset() {
         var lastException: Exception? = null
-        for (fileSystem in openedFileSystems.values) {
+        for (fileSystem in openedFileSystems.konstues) {
             try {
                 fileSystem.close()
             } catch (e: Exception) {

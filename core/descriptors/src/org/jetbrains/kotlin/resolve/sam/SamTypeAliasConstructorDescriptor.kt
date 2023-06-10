@@ -9,16 +9,16 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.impl.SimpleFunctionDescriptorImpl
 
 interface SamTypeAliasConstructorDescriptor : SamConstructorDescriptor, DeclarationDescriptorWithNavigationSubstitute {
-    val typeAliasDescriptor: TypeAliasDescriptor
-    val expandedConstructorDescriptor: SamConstructorDescriptor
+    konst typeAliasDescriptor: TypeAliasDescriptor
+    konst expandedConstructorDescriptor: SamConstructorDescriptor
 
-    override val substitute: DeclarationDescriptor
+    override konst substitute: DeclarationDescriptor
         get() = typeAliasDescriptor
 }
 
 class SamTypeAliasConstructorDescriptorImpl(
-    override val typeAliasDescriptor: TypeAliasDescriptor,
-    override val expandedConstructorDescriptor: SamConstructorDescriptor
+    override konst typeAliasDescriptor: TypeAliasDescriptor,
+    override konst expandedConstructorDescriptor: SamConstructorDescriptor
 ) : SimpleFunctionDescriptorImpl(
     typeAliasDescriptor.containingDeclaration,
     null,
@@ -30,6 +30,6 @@ class SamTypeAliasConstructorDescriptorImpl(
     override fun getSingleAbstractMethod(): CallableMemberDescriptor =
         expandedConstructorDescriptor.getSingleAbstractMethod()
 
-    override val baseDescriptorForSynthetic: ClassDescriptor
+    override konst baseDescriptorForSynthetic: ClassDescriptor
         get() = expandedConstructorDescriptor.baseDescriptorForSynthetic
 }

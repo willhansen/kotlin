@@ -7,7 +7,7 @@ interface Deprecated {
     fun test() {
     }
 
-    val prop: String
+    konst prop: String
         @java.lang.Deprecated get() = "123"
 
     @java.lang.Deprecated

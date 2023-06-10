@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetPreset
 
 abstract class KotlinOnlyTargetPreset<R : KotlinOnlyTarget<T>, T : KotlinCompilation<*>>(
-    protected val project: Project,
+    protected konst project: Project,
 ) : KotlinTargetPreset<R> {
 
     protected abstract fun createKotlinTargetConfigurator(): AbstractKotlinTargetConfigurator<R>
@@ -29,14 +29,14 @@ abstract class KotlinOnlyTargetPreset<R : KotlinOnlyTarget<T>, T : KotlinCompila
     abstract protected fun instantiateTarget(name: String): R
 
     override fun createTarget(name: String): R {
-        val result = instantiateTarget(name).apply {
+        konst result = instantiateTarget(name).apply {
             targetName = name
             disambiguationClassifier = provideTargetDisambiguationClassifier(this@apply)
             useDisambiguationClassifierAsSourceSetNamePrefix = useDisambiguationClassifierAsSourceSetNamePrefix()
             overrideDisambiguationClassifierOnIdeImport = overrideDisambiguationClassifierOnIdeImport(name)
             preset = this@KotlinOnlyTargetPreset
 
-            val compilationFactory = createCompilationFactory(this)
+            konst compilationFactory = createCompilationFactory(this)
             compilations = project.container(compilationFactory.itemClass, compilationFactory)
         }
 
@@ -46,5 +46,5 @@ abstract class KotlinOnlyTargetPreset<R : KotlinOnlyTarget<T>, T : KotlinCompila
     }
 
     protected abstract fun createCompilationFactory(forTarget: R): KotlinCompilationFactory<T>
-    protected abstract val platformType: KotlinPlatformType
+    protected abstract konst platformType: KotlinPlatformType
 }

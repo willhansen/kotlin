@@ -9,9 +9,9 @@ import kotlin.test.*
 
 fun printInt(x: Int) = println(x)
 
-class Foo(val value: Int?) {
+class Foo(konst konstue: Int?) {
     fun foo() {
-        printInt(if (value != null) value else 42)
+        printInt(if (konstue != null) konstue else 42)
     }
 }
 

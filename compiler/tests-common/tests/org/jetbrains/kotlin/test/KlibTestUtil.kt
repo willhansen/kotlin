@@ -40,16 +40,16 @@ import org.jetbrains.kotlin.konan.file.File as KFile
 
 object KlibTestUtil {
     fun compileCommonSourcesToKlib(sourceFiles: Collection<File>, libraryName: String, klibFile: File) {
-        require(!Name.guessByFirstCharacter(libraryName).isSpecial) { "Invalid library name: $libraryName" }
+        require(!Name.guessByFirstCharacter(libraryName).isSpecial) { "Inkonstid library name: $libraryName" }
 
-        val configuration = KotlinTestUtils.newConfiguration()
+        konst configuration = KotlinTestUtils.newConfiguration()
         configuration.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
         configuration.put(CommonConfigurationKeys.MODULE_NAME, libraryName)
         configuration.addKotlinSourceRoots(sourceFiles.map { it.absolutePath })
 
-        val rootDisposable = Disposer.newDisposable()
-        val module = try {
-            val environment = KotlinCoreEnvironment.createForTests(
+        konst rootDisposable = Disposer.newDisposable()
+        konst module = try {
+            konst environment = KotlinCoreEnvironment.createForTests(
                 parentDisposable = rootDisposable,
                 initialConfiguration = configuration,
                 extensionConfigs = EnvironmentConfigFiles.METADATA_CONFIG_FILES
@@ -75,7 +75,7 @@ object KlibTestUtil {
     fun serializeCommonModuleToKlib(module: ModuleDescriptor, libraryName: String, klibFile: File) {
         require(klibFile.extension == KLIB_FILE_EXTENSION) { "KLIB file must have $KLIB_FILE_EXTENSION extension" }
 
-        val serializer = KlibMetadataMonolithicSerializer(
+        konst serializer = KlibMetadataMonolithicSerializer(
             languageVersionSettings = LanguageVersionSettingsImpl.DEFAULT,
             metadataVersion = KlibMetadataVersion.INSTANCE,
             exportKDoc = false,
@@ -83,12 +83,12 @@ object KlibTestUtil {
             project = null
         )
 
-        val serializedMetadata = serializer.serializeModule(module)
+        konst serializedMetadata = serializer.serializeModule(module)
 
-        val unzippedDir = org.jetbrains.kotlin.konan.file.createTempDir(libraryName)
-        val layout = KotlinLibraryLayoutForWriter(KFile(klibFile.path), unzippedDir)
+        konst unzippedDir = org.jetbrains.kotlin.konan.file.createTempDir(libraryName)
+        konst layout = KotlinLibraryLayoutForWriter(KFile(klibFile.path), unzippedDir)
 
-        val library = KotlinLibraryWriterImpl(
+        konst library = KotlinLibraryWriterImpl(
             moduleName = libraryName,
             versions = KotlinLibraryVersioning(
                 libraryVersion = null,
@@ -108,15 +108,15 @@ object KlibTestUtil {
     }
 
     fun deserializeKlibToCommonModule(klibFile: File): ModuleDescriptorImpl {
-        val library = resolveSingleFileKlib(
+        konst library = resolveSingleFileKlib(
             libraryFile = KFile(klibFile.path),
             logger = DummyLogger,
             strategy = ToolingSingleFileKlibResolveStrategy
         )
 
-        val metadataFactories = KlibMetadataFactories({ DefaultBuiltIns.Instance }, NullFlexibleTypeDeserializer, NativeTypeTransformer())
+        konst metadataFactories = KlibMetadataFactories({ DefaultBuiltIns.Instance }, NullFlexibleTypeDeserializer, NativeTypeTransformer())
 
-        val module = metadataFactories.DefaultDeserializedDescriptorFactory.createDescriptor(
+        konst module = metadataFactories.DefaultDeserializedDescriptorFactory.createDescriptor(
             library = library,
             languageVersionSettings = LanguageVersionSettingsImpl.DEFAULT,
             storageManager = LockBasedStorageManager.NO_LOCKS,

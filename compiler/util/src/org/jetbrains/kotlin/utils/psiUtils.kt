@@ -10,24 +10,24 @@ import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
 
 fun getElementTextWithContext(psiElement: PsiElement): String {
-    if (!psiElement.isValid) return "<invalid element $psiElement>"
+    if (!psiElement.isValid) return "<inkonstid element $psiElement>"
 
     if (psiElement is PsiFile) {
         return psiElement.containingFile.text
     }
 
     // Find parent for element among file children
-    val topLevelElement = PsiTreeUtil.findFirstParent(psiElement) { it.parent is PsiFile }
+    konst topLevelElement = PsiTreeUtil.findFirstParent(psiElement) { it.parent is PsiFile }
         ?: throw AssertionError("For non-file element we should always be able to find parent in file children")
 
-    val startContextOffset = topLevelElement.textRange.startOffset
-    val elementContextOffset = psiElement.textRange.startOffset
+    konst startContextOffset = topLevelElement.textRange.startOffset
+    konst elementContextOffset = psiElement.textRange.startOffset
 
-    val inFileParentOffset = elementContextOffset - startContextOffset
+    konst inFileParentOffset = elementContextOffset - startContextOffset
 
 
-    val containingFile = psiElement.containingFile
-    val isInjected = containingFile is VirtualFileWindow
+    konst containingFile = psiElement.containingFile
+    konst isInjected = containingFile is VirtualFileWindow
     return StringBuilder(topLevelElement.text)
         .insert(inFileParentOffset, "<caret>")
         .insert(0, "File name: ${containingFile.name} Physical: ${containingFile.isPhysical} Injected: $isInjected\n")

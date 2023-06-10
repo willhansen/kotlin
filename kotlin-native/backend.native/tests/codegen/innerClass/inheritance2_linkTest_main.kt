@@ -4,6 +4,6 @@
  */
 
 fun main() {
-    val o = Outer(42).Middle(117).Inner2()
+    konst o = Outer(42).Middle(117).Inner2()
     println(o.foo())
 }

@@ -4,7 +4,7 @@
 
 fun foo(param: String) = "foo before change $param"
 
-class X(val constructorParam: String) {
+class X(konst constructorParam: String) {
     fun bar(param: String) = "bar before change $param and $constructorParam"
 }
 
@@ -13,7 +13,7 @@ class X(val constructorParam: String) {
 
 fun foo(param: String = "none") = "foo after change $param"
 
-class X(val constructorParam: String = "none") {
+class X(konst constructorParam: String = "none") {
     fun bar(param: String = "none") = "bar after change $param and $constructorParam"
 }
 

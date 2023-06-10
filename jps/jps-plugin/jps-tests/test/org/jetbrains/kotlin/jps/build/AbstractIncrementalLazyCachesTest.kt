@@ -33,10 +33,10 @@ import org.jetbrains.kotlin.utils.Printer
 import java.io.File
 
 abstract class AbstractIncrementalLazyCachesTest : AbstractIncrementalJpsTest() {
-    private val expectedCachesFileName: String
+    private konst expectedCachesFileName: String
         get() = "expected-kotlin-caches.txt"
 
-    private val enableICFixture = EnableICFixture()
+    private konst enableICFixture = EnableICFixture()
 
     override fun setUp() {
         super.setUp()
@@ -53,8 +53,8 @@ abstract class AbstractIncrementalLazyCachesTest : AbstractIncrementalJpsTest() 
     override fun doTest(testDataPath: String) {
         super.doTest(testDataPath)
 
-        val actual = dumpKotlinCachesFileNames()
-        val expectedFile = File(testDataPath, expectedCachesFileName)
+        konst actual = dumpKotlinCachesFileNames()
+        konst expectedFile = File(testDataPath, expectedCachesFileName)
         UsefulTestCase.assertSameLinesWithFile(expectedFile.canonicalPath, actual)
     }
 
@@ -64,7 +64,7 @@ abstract class AbstractIncrementalLazyCachesTest : AbstractIncrementalJpsTest() 
         for (modification in modifications) {
             if (modification !is ModifyContent) continue
 
-            val name = File(modification.path).name
+            konst name = File(modification.path).name
 
             when {
                 name.endsWith("incremental-compilation") -> {
@@ -76,7 +76,7 @@ abstract class AbstractIncrementalLazyCachesTest : AbstractIncrementalJpsTest() 
     }
 
     fun File.readAsBool(): Boolean {
-        val content = this.readText()
+        konst content = this.readText()
 
         return when (content.trim()) {
             "on" -> true
@@ -86,11 +86,11 @@ abstract class AbstractIncrementalLazyCachesTest : AbstractIncrementalJpsTest() 
     }
 
     private fun dumpKotlinCachesFileNames(): String {
-        val sb = StringBuilder()
-        val printer = Printer(sb)
-        val chunks = kotlinCompileContext.targetsIndex.chunks
-        val dataManager = projectDescriptor.dataManager
-        val paths = dataManager.dataPaths
+        konst sb = StringBuilder()
+        konst printer = Printer(sb)
+        konst chunks = kotlinCompileContext.targetsIndex.chunks
+        konst dataManager = projectDescriptor.dataManager
+        konst paths = dataManager.dataPaths
 
         dumpCachesForTarget(
             printer,
@@ -99,16 +99,16 @@ abstract class AbstractIncrementalLazyCachesTest : AbstractIncrementalJpsTest() 
             kotlinCompileContext.lookupsCacheAttributesManager.versionManagerForTesting.versionFileForTesting
         )
 
-        data class TargetInChunk(val chunk: KotlinChunk, val target: KotlinModuleBuildTarget<*>)
+        data class TargetInChunk(konst chunk: KotlinChunk, konst target: KotlinModuleBuildTarget<*>)
 
-        val allTargets = chunks.flatMap { chunk ->
+        konst allTargets = chunks.flatMap { chunk ->
             chunk.targets.map { target ->
                 TargetInChunk(chunk, target)
             }
         }.sortedBy { it.target.jpsModuleBuildTarget.presentableName }
 
         allTargets.forEach { (chunk, target) ->
-            val compilerArgumentsFile = chunk.compilerArgumentsFile(target.jpsModuleBuildTarget)
+            konst compilerArgumentsFile = chunk.compilerArgumentsFile(target.jpsModuleBuildTarget)
             dumpCachesForTarget(
                 printer, paths, target.jpsModuleBuildTarget,
                 target.localCacheVersionManager.versionFileForTesting,
@@ -131,7 +131,7 @@ abstract class AbstractIncrementalLazyCachesTest : AbstractIncrementalJpsTest() 
         p.println(target)
         p.pushIndent()
 
-        val dataRoot = paths.getTargetDataRoot(target).let { if (subdirectory != null) File(it, subdirectory) else it }
+        konst dataRoot = paths.getTargetDataRoot(target).let { if (subdirectory != null) File(it, subdirectory) else it }
         cacheVersionsFiles
             .filter(File::exists)
             .sortedBy { it.name }
@@ -143,7 +143,7 @@ abstract class AbstractIncrementalLazyCachesTest : AbstractIncrementalJpsTest() 
     }
 
     private fun kotlinCacheNames(dir: File): List<String> {
-        val result = arrayListOf<String>()
+        konst result = arrayListOf<String>()
 
         for (file in dir.walk()) {
             if (file.isFile && file.extension == BasicMapsOwner.CACHE_EXTENSION) {

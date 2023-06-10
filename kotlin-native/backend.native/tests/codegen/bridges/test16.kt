@@ -22,8 +22,8 @@ open class B: C() {
 fun bar(c: C) = c.foo()
 
 @Test fun runTest() {
-    val b = B()
-    val c: C = b
+    konst b = B()
+    konst c: C = b
     println(bar(b))
     println(bar(c))
 }

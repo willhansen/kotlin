@@ -2,7 +2,7 @@ interface A {
     fun foo(): String
 }
 
-class AImpl(val z: String) : A {
+class AImpl(konst z: String) : A {
     override fun foo(): String = z
 }
 

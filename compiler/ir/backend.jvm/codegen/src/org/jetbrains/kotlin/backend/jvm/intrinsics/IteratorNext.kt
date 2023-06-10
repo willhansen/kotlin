@@ -30,9 +30,9 @@ object IteratorNext : IntrinsicMethod() {
 
     override fun toCallable(expression: IrFunctionAccessExpression, signature: JvmMethodSignature, classCodegen: ClassCodegen): IrIntrinsicFunction {
         // If the array element type is unboxed primitive, do not unbox. Otherwise AsmUtil.unbox throws exception
-        val type = if (AsmUtil.isBoxedPrimitiveType(signature.returnType)) AsmUtil.unboxType(signature.returnType) else signature.returnType
-        val newSignature = signature.newReturnType(type)
-        val primitiveClassName = getKotlinPrimitiveClassName(type)
+        konst type = if (AsmUtil.isBoxedPrimitiveType(signature.returnType)) AsmUtil.unboxType(signature.returnType) else signature.returnType
+        konst newSignature = signature.newReturnType(type)
+        konst primitiveClassName = getKotlinPrimitiveClassName(type)
         return IrIntrinsicFunction.create(expression, newSignature, classCodegen, getPrimitiveIteratorType(primitiveClassName)) {
             it.invokevirtual(
                 getPrimitiveIteratorType(primitiveClassName).internalName,
@@ -50,7 +50,7 @@ object IteratorNext : IntrinsicMethod() {
 
     // "Char" -> type for kotlin.collections.CharIterator
     fun getPrimitiveIteratorType(primitiveClassName: Name): Type {
-        val iteratorName = Name.identifier(primitiveClassName.asString() + "Iterator")
+        konst iteratorName = Name.identifier(primitiveClassName.asString() + "Iterator")
         return Type.getObjectType(COLLECTIONS_PACKAGE_FQ_NAME.child(iteratorName).internalNameWithoutInnerClasses)
     }
 }

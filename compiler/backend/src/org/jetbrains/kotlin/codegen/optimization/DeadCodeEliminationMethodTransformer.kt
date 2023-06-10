@@ -28,13 +28,13 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
 class DeadCodeEliminationMethodTransformer : MethodTransformer() {
     override fun transform(internalClassName: String, methodNode: MethodNode) {
-        val liveness = InstructionLivenessAnalyzer(methodNode).analyze()
+        konst liveness = InstructionLivenessAnalyzer(methodNode).analyze()
 
-        val insnsToRemove = ArrayList<AbstractInsnNode>()
+        konst insnsToRemove = ArrayList<AbstractInsnNode>()
 
-        val insns = methodNode.instructions.toArray()
+        konst insns = methodNode.instructions.toArray()
         for (i in insns.indices) {
-            val insn = insns[i]
+            konst insn = insns[i]
             if (shouldRemove(insn, i, liveness)) {
                 insnsToRemove.add(insn)
             }
@@ -51,7 +51,7 @@ class DeadCodeEliminationMethodTransformer : MethodTransformer() {
     private fun shouldRemove(insn: AbstractInsnNode, index: Int, liveness: BooleanArray): Boolean {
         if (insn !is LineNumberNode) return !liveness[index]
 
-        // Line number node is "dead" if the corresponding line number interval
+        // Line number node is "dead" if the corresponding line number interkonst
         // contains at least one "dead" meaningful instruction and no "live" meaningful instructions.
         var finger: AbstractInsnNode = insn
         var fingerIndex = index

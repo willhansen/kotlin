@@ -16,13 +16,13 @@ class KT37051CInteropArtifactTest {
 
     @Test
     fun `test - cinterop artifact on linuxX64`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
-        val linuxTarget = kotlin.linuxX64()
-        val mainCompilation = linuxTarget.compilations.getByName("main")
-        val cinterop = mainCompilation.cinterops.create("libc")
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
+        konst linuxTarget = kotlin.linuxX64()
+        konst mainCompilation = linuxTarget.compilations.getByName("main")
+        konst cinterop = mainCompilation.cinterops.create("libc")
 
-        val apiElements = project.configurations.getByName(linuxTarget.apiElementsConfigurationName)
+        konst apiElements = project.configurations.getByName(linuxTarget.apiElementsConfigurationName)
 
         if (apiElements.allDependencies.isNotEmpty()) {
             fail("Expected no dependencies in apiElements: ${apiElements.allDependencies}")
@@ -32,7 +32,7 @@ class KT37051CInteropArtifactTest {
             fail("Expected two artifacts in apiElements: main output and cinterop. Found: ${apiElements.artifacts}")
         }
 
-        val cinteropArtifact = apiElements.artifacts.filter { artifact -> artifact.classifier == "cinterop-libc" }
+        konst cinteropArtifact = apiElements.artifacts.filter { artifact -> artifact.classifier == "cinterop-libc" }
             .apply { if (size != 1) fail("Expected only one cinterop artifact: Found $this") }
             .first()
 

@@ -6,17 +6,17 @@ open class MyClass {
 
 class Foo {
 
-    protected val protectedProperty = object : MyClass() {}
+    protected konst protectedProperty = object : MyClass() {}
 
-    public val publicProperty = object : MyClass() {}
+    public konst publicProperty = object : MyClass() {}
 
-    protected val protected2Property : MyClass = object : MyClass() {fun invisible() {}}
+    protected konst protected2Property : MyClass = object : MyClass() {fun invisible() {}}
 
-    public val public2Property : MyClass = object : MyClass() {fun invisible() {}}
+    public konst public2Property : MyClass = object : MyClass() {fun invisible() {}}
 
-    private val privateProperty = object : MyClass() {fun visible() {}}
+    private konst privateProperty = object : MyClass() {fun visible() {}}
 
-    internal val internalProperty = object : MyClass() { fun invisible() {}}
+    internal konst internalProperty = object : MyClass() { fun invisible() {}}
 
 
     fun testProperties() {
@@ -60,17 +60,17 @@ class Foo {
 
     class FooInner {
 
-        public val publicProperty = object : MyClass() {}
+        public konst publicProperty = object : MyClass() {}
 
-        protected val protectedProperty = object : MyClass() {}
+        protected konst protectedProperty = object : MyClass() {}
 
-        protected val protected2Property : MyClass = object : MyClass() {fun invisible() {}}
+        protected konst protected2Property : MyClass = object : MyClass() {fun invisible() {}}
 
-        public val public2Property : MyClass = object : MyClass() {fun invisible() {}}
+        public konst public2Property : MyClass = object : MyClass() {fun invisible() {}}
 
-        private val privateProperty = object : MyClass() {fun visible() {}}
+        private konst privateProperty = object : MyClass() {fun visible() {}}
 
-        internal val internalProperty = object : MyClass() { fun invisible() {}}
+        internal konst internalProperty = object : MyClass() { fun invisible() {}}
 
 
         fun testProperties() {
@@ -113,7 +113,7 @@ class Foo {
     }
 
     fun foo() {
-        val localVar = object : MyClass() {}
+        konst localVar = object : MyClass() {}
         localVar.f1()
         fun foo2() = object : MyClass() {}
         foo2().f1()
@@ -121,15 +121,15 @@ class Foo {
 
 }
 
-<!WRONG_MODIFIER_TARGET!>protected<!> val packageProtectedProperty = object : MyClass() {}
+<!WRONG_MODIFIER_TARGET!>protected<!> konst packageProtectedProperty = object : MyClass() {}
 
-public val packagePublicProperty = object : MyClass() {}
+public konst packagePublicProperty = object : MyClass() {}
 
-public val packagePublic2Property : MyClass = object : MyClass() {fun invisible() {}}
+public konst packagePublic2Property : MyClass = object : MyClass() {fun invisible() {}}
 
-private val packagePrivateProperty = object : MyClass() {fun invisible() {}}
+private konst packagePrivateProperty = object : MyClass() {fun invisible() {}}
 
-internal val packageInternalProperty = object : MyClass() {fun invisible() {}}
+internal konst packageInternalProperty = object : MyClass() {fun invisible() {}}
 
 
 fun testProperties() {
@@ -166,7 +166,7 @@ fun testFunctions() {
 }
 
 fun fooPackage() {
-    val packageLocalVar = object : MyClass() {fun visible() {}}
+    konst packageLocalVar = object : MyClass() {fun visible() {}}
     packageLocalVar.f1()
     packageLocalVar.visible()
 

@@ -1,6 +1,6 @@
 package
 
-public actual val bar2: kotlin.Int
+public actual konst bar2: kotlin.Int
 public actual fun foo2(): kotlin.Int
 
 public actual interface Baz2 {

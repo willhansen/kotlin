@@ -29,20 +29,20 @@ enum class TestEnumClass : Enum<TestEnumClass> {
   //   Public signature: /TestEnumClass.<init>|-5645683436151566731[0]
   private constructor() /* primary */
   // CHECK JVM_IR:
-  //   Mangled name: TestEnumClass#valueOf#static(kotlin.String){}TestEnumClass
-  //   Public signature: /TestEnumClass.valueOf|3258702714702284561[0]
+  //   Mangled name: TestEnumClass#konstueOf#static(kotlin.String){}TestEnumClass
+  //   Public signature: /TestEnumClass.konstueOf|3258702714702284561[0]
   // CHECK JS_IR NATIVE:
-  //   Mangled name: TestEnumClass#valueOf#static(kotlin.String){}
-  //   Public signature: /TestEnumClass.valueOf|-4683474617854611729[0]
-  fun valueOf(value: String): TestEnumClass
+  //   Mangled name: TestEnumClass#konstueOf#static(kotlin.String){}
+  //   Public signature: /TestEnumClass.konstueOf|-4683474617854611729[0]
+  fun konstueOf(konstue: String): TestEnumClass
 
   // CHECK JVM_IR:
-  //   Mangled name: TestEnumClass#values#static(){}kotlin.Array<TestEnumClass>
-  //   Public signature: /TestEnumClass.values|2819729310351736077[0]
+  //   Mangled name: TestEnumClass#konstues#static(){}kotlin.Array<TestEnumClass>
+  //   Public signature: /TestEnumClass.konstues|2819729310351736077[0]
   // CHECK JS_IR NATIVE:
-  //   Mangled name: TestEnumClass#values#static(){}
-  //   Public signature: /TestEnumClass.values|-8715569000920726747[0]
-  fun values(): Array<TestEnumClass>
+  //   Mangled name: TestEnumClass#konstues#static(){}
+  //   Public signature: /TestEnumClass.konstues|-8715569000920726747[0]
+  fun konstues(): Array<TestEnumClass>
 
   // CHECK JVM_IR:
   //   Mangled name: TestEnumClass#clone(){}kotlin.Any
@@ -87,7 +87,7 @@ enum class TestEnumClass : Enum<TestEnumClass> {
   // CHECK:
   //   Mangled name: TestEnumClass#static{}entries
   //   Public signature: /TestEnumClass.entries|-5134227801081826149[0]
-  val entries: EnumEntries<TestEnumClass>
+  konst entries: EnumEntries<TestEnumClass>
     // CHECK JVM_IR:
     //   Mangled name: TestEnumClass#<get-entries>#static(){}kotlin.enums.EnumEntries<TestEnumClass>
     //   Public signature: /TestEnumClass.entries.<get-entries>|-5859730592340272958[0]
@@ -99,7 +99,7 @@ enum class TestEnumClass : Enum<TestEnumClass> {
   // CHECK:
   //   Mangled name: TestEnumClass{}name
   //   Public signature: /TestEnumClass.name|4231860309499509769[0]
-  /* fake */ override val name: String
+  /* fake */ override konst name: String
     // CHECK JVM_IR:
     //   Mangled name: TestEnumClass#<get-name>(){}kotlin.String
     //   Public signature: /TestEnumClass.name.<get-name>|-8006111524522882650[0]
@@ -111,7 +111,7 @@ enum class TestEnumClass : Enum<TestEnumClass> {
   // CHECK:
   //   Mangled name: TestEnumClass{}ordinal
   //   Public signature: /TestEnumClass.ordinal|1912745122988592376[0]
-  /* fake */ override val ordinal: Int
+  /* fake */ override konst ordinal: Int
     // CHECK JVM_IR:
     //   Mangled name: TestEnumClass#<get-ordinal>(){}kotlin.Int
     //   Public signature: /TestEnumClass.ordinal.<get-ordinal>|-6902664390061762634[0]

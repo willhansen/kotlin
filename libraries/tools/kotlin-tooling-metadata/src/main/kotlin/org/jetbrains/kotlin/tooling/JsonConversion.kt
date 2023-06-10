@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.tooling.KotlinToolingMetadataParsingResult.Failure
 import org.jetbrains.kotlin.tooling.KotlinToolingMetadataParsingResult.Success
 
 fun KotlinToolingMetadata.toJsonString(): String {
-    val gson = GsonBuilder().setPrettyPrinting().create()
+    konst gson = GsonBuilder().setPrettyPrinting().create()
     return gson.toJson(toJsonObject())
 }
 
@@ -91,15 +91,15 @@ private fun KotlinToolingMetadata.ProjectTargetMetadata.AndroidExtras.toJsonObje
 }
 
 sealed class KotlinToolingMetadataParsingResult {
-    data class Success(val value: KotlinToolingMetadata) : KotlinToolingMetadataParsingResult()
-    data class Failure(val reason: String) : KotlinToolingMetadataParsingResult()
+    data class Success(konst konstue: KotlinToolingMetadata) : KotlinToolingMetadataParsingResult()
+    data class Failure(konst reason: String) : KotlinToolingMetadataParsingResult()
 }
 
 fun KotlinToolingMetadata.Companion.parseJson(json: String): KotlinToolingMetadataParsingResult {
-    val jsonElement = try {
+    konst jsonElement = try {
         JsonParser.parseString(json)
     } catch (e: JsonParseException) {
-        return Failure("Invalid json: ${e.message}")
+        return Failure("Inkonstid json: ${e.message}")
     }
     if (jsonElement !is JsonObject) {
         return Failure("Expected JsonObject. Found ${json::class.java.canonicalName}")
@@ -111,15 +111,15 @@ fun KotlinToolingMetadata.Companion.parseJson(json: String): KotlinToolingMetada
         )
 }
 
-fun KotlinToolingMetadata.Companion.parseJsonOrThrow(value: String): KotlinToolingMetadata {
-    return when (val result = parseJson(value)) {
-        is Success -> result.value
+fun KotlinToolingMetadata.Companion.parseJsonOrThrow(konstue: String): KotlinToolingMetadata {
+    return when (konst result = parseJson(konstue)) {
+        is Success -> result.konstue
         is Failure -> throw IllegalArgumentException(result.reason)
     }
 }
 
 private fun JsonObject.toKotlinToolingMetadataOrThrow(): KotlinToolingMetadata {
-    val schemaVersion = SchemaVersion.parseStringOrThrow(getOrThrow("schemaVersion").asString)
+    konst schemaVersion = SchemaVersion.parseStringOrThrow(getOrThrow("schemaVersion").asString)
     if (!SchemaVersion.current.isCompatible(schemaVersion)) {
         throw IllegalArgumentException(
             "Incompatible schemaVersion='$schemaVersion' found. Current schemaVersion='${SchemaVersion.current}'"

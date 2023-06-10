@@ -39,7 +39,7 @@ class Concat : IntrinsicMethod() {
         arguments: List<KtExpression>,
         receiver: StackValue
     ): Type {
-        val generator = StringConcatGenerator.create(codegen.state, v)
+        konst generator = StringConcatGenerator.create(codegen.state, v)
         if (element is KtBinaryExpression && element.operationReference.getReferencedNameElementType() == KtTokens.PLUS) {
             // LHS + RHS            
             generator.genStringBuilderConstructorIfNeded()
@@ -71,8 +71,8 @@ class Concat : IntrinsicMethod() {
                     return super.invokeMethodWithArguments(resolvedCall, receiver, codegen)
                 }
                 return StackValue.operation(returnType) {
-                    val arguments = resolvedCall.call.valueArguments.map { it.getArgumentExpression()!! }
-                    val actualType = generateImpl(
+                    konst arguments = resolvedCall.call.konstueArguments.map { it.getArgumentExpression()!! }
+                    konst actualType = generateImpl(
                         codegen, it, returnType,
                         resolvedCall.call.callElement,
                         arguments,

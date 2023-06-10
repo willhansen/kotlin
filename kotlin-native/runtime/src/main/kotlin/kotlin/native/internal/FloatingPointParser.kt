@@ -21,30 +21,30 @@ import kotlin.comparisons.*
 
 /**
  * Takes a String and an integer exponent. The String should hold a positive
- * integer value (or zero). The exponent will be used to calculate the
+ * integer konstue (or zero). The exponent will be used to calculate the
  * floating point number by taking the positive integer the String
  * represents and multiplying by 10 raised to the power of the
- * exponent. Returns the closest double value to the real number.
+ * exponent. Returns the closest double konstue to the real number.
 
  * @param s the String that will be parsed to a floating point
  * @param e an int represent the 10 to part
  * @return the double closest to the real number
- * @exception NumberFormatException if the String doesn't represent a positive integer value
+ * @exception NumberFormatException if the String doesn't represent a positive integer konstue
  */
 @GCUnsafeCall("Kotlin_native_FloatingPointParser_parseDoubleImpl")
 private external fun parseDoubleImpl(s: String, e: Int): Double
 
 /**
  * Takes a String and an integer exponent. The String should hold a positive
- * integer value (or zero). The exponent will be used to calculate the
+ * integer konstue (or zero). The exponent will be used to calculate the
  * floating point number by taking the positive integer the String
  * represents and multiplying by 10 raised to the power of the
- * exponent. Returns the closest float value to the real number.
+ * exponent. Returns the closest float konstue to the real number.
 
  * @param s the String that will be parsed to a floating point
  * @param e an int represent the 10 to part
  * @return the float closest to the real number
- * @exception NumberFormatException if the String doesn't represent a positive integer value
+ * @exception NumberFormatException if the String doesn't represent a positive integer konstue
  */
 @GCUnsafeCall("Kotlin_native_FloatingPointParser_parseFloatImpl")
 private external fun parseFloatImpl(s: String, e: Int): Float
@@ -58,18 +58,18 @@ internal object FloatingPointParser {
      * All number with exponent larger than MAX_EXP can be treated as infinity.
      * All number with exponent smaller than MIN_EXP can be treated as zero.
      * Exponent is 10 based.
-     * Eg. double's min value is 5e-324, so double "1e-325" should be parsed as 0.0
+     * Eg. double's min konstue is 5e-324, so double "1e-325" should be parsed as 0.0
      */
-    private const val FLOAT_MIN_EXP = -46
-    private const val FLOAT_MAX_EXP = 38
-    private const val DOUBLE_MIN_EXP = -324
-    private const val DOUBLE_MAX_EXP = 308
+    private const konst FLOAT_MIN_EXP = -46
+    private const konst FLOAT_MAX_EXP = 38
+    private const konst DOUBLE_MIN_EXP = -324
+    private const konst DOUBLE_MAX_EXP = 308
 
-    private data class StringExponentPair(val s: String, val e: Int, val negative: Boolean)
+    private data class StringExponentPair(konst s: String, konst e: Int, konst negative: Boolean)
 
 
     /**
-     * Adaptor for parsing string and returning the closest Double value to the real number in the string.
+     * Adaptor for parsing string and returning the closest Double konstue to the real number in the string.
      *
      * @param string the String that will be parsed to Double
      * @return the Double number closest to the real number
@@ -80,7 +80,7 @@ internal object FloatingPointParser {
                     0.0, DOUBLE_MAX_EXP, DOUBLE_MIN_EXP, ::parseDoubleImpl, HexStringParser::parseDouble)
 
     /**
-     * Adaptor for parsing string and returning the closest Float value to the real number in the string.
+     * Adaptor for parsing string and returning the closest Float konstue to the real number in the string.
      *
      * @param string the String that will be parsed to a Float
      * @return the Float number closest to the real number
@@ -92,18 +92,18 @@ internal object FloatingPointParser {
 
     /**
      * Common method for parsing floating point number, unified for Double and Float.
-     * Returns the closest Float or Double value to the real number in the string.
+     * Returns the closest Float or Double konstue to the real number in the string.
      *
      * @param string that will be parsed to a Float or a Double
-     * @param negativeInf will be returned if the value is infinitesimal
-     * @param positiveInf will be returned if the value is infinitely large
-     * @param nan will be returned if the value is NaN
-     * @param zero will be returned if the input value is 0.0
+     * @param negativeInf will be returned if the konstue is infinitesimal
+     * @param positiveInf will be returned if the konstue is infinitely large
+     * @param nan will be returned if the konstue is NaN
+     * @param zero will be returned if the input konstue is 0.0
      * @param maxExp maximum exponent size that can be processed, in case the input string has bigger number
      *  will return Infinity
      * @param minExp minimum exponent size that can be processed, in case the input string has bigger number
      *  will return Minus Infinity
-     * @param parserImpl - native method that implements parsing and processing of a float/double value
+     * @param parserImpl - native method that implements parsing and processing of a float/double konstue
      * @param hexParserImpl - a method for parsing of the number in hex format
      * @return the Float or Double number closest to the real number
      * @exception NumberFormatException if the String doesn't represent a number of type T (Double or Float)
@@ -112,26 +112,26 @@ internal object FloatingPointParser {
                                                   maxExp: Int, minExp: Int, parserImpl: (String, Int) -> T,
                                                   hexParserImpl: (String) -> T): T {
         // Trim useless whitespaces.
-        val s = string.trim { it <= ' ' }
-        val length = s.length
+        konst s = string.trim { it <= ' ' }
+        konst length = s.length
 
-        // We should not process empty string values. Such check should not be duplicated in other methods below.
+        // We should not process empty string konstues. Such check should not be duplicated in other methods below.
         if (length == 0) {
             throw NumberFormatException(s)
         }
 
         // Processing for a named number ("Infinity" or "NaN").
-        val last = s[length - 1]
+        konst last = s[length - 1]
         if (last == 'y' || last == 'N') {
             return parseNamed(s, length, negativeInf, positiveInf, nan)
         }
 
-        // Check if the value could be a hexadecimal representation and parse it properly.
+        // Check if the konstue could be a hexadecimal representation and parse it properly.
         if (parseAsHex(s)) {
             return hexParserImpl(s)
         }
 
-        val info = initialParse(s)
+        konst info = initialParse(s)
 
         // Two kinds of situation will directly return 0.0/0.0f:
         // 1. info.s is 0;
@@ -145,19 +145,19 @@ internal object FloatingPointParser {
             return if (info.negative) negativeInf else positiveInf
         }
 
-        val result = parserImpl(info.s, info.e)
+        konst result = parserImpl(info.s, info.e)
         return if (info.negative) unaryMinus(result) else result
     }
 
     /**
-     * To unify the logic of Double and Float parsing we need a common method to calculate a negative value.
+     * To unify the logic of Double and Float parsing we need a common method to calculate a negative konstue.
      * Unfortunately in this case we need to make uncheck cast to generic type T to have a proper return type.
      */
     @Suppress("UNCHECKED_CAST")
-    private inline fun <reified T> unaryMinus(value: T): T {
-        return when (value) {
-            is Float -> -value as T
-            is Double -> -value as T
+    private inline fun <reified T> unaryMinus(konstue: T): T {
+        return when (konstue) {
+            is Float -> -konstue as T
+            is Double -> -konstue as T
             else -> throw NumberFormatException()
         }
     }
@@ -174,20 +174,20 @@ internal object FloatingPointParser {
      * It also violates Kotlin coding practices and should be refactored in the future after stabilizing the logic.
      *
      * @param string the String that will be parsed to a floating point
-     * @return a StringExponentPair with necessary values
+     * @return a StringExponentPair with necessary konstues
      * @exception NumberFormatException if the String doesn't pass basic tests
      */
     private fun initialParse(string: String): StringExponentPair {
         var s = string
         var length = s.length
         var negative = false
-        val decimal: Int
+        konst decimal: Int
         var shift: Int
         var e = 0
         var start = 0
         var c: Char = s[length - 1]
 
-        // Checking that the initial string ends with one of valid prefixes(D/d/F/f) and skipping it.
+        // Checking that the initial string ends with one of konstid prefixes(D/d/F/f) and skipping it.
         if (c == 'D' || c == 'd' || c == 'F' || c == 'f') {
             length--
             if (length == 0)
@@ -209,12 +209,12 @@ internal object FloatingPointParser {
                 if (exponentOffset == length)
                     throw NumberFormatException(s)
             }
-            val strExp = s.substring(exponentOffset, length)
+            konst strExp = s.substring(exponentOffset, length)
             try {
                 e = strExp.toInt()
             } catch (ex: NumberFormatException) {
                 // strExp is not empty, so there are 2 situations the exception be thrown
-                // if the string is invalid we should throw exception, if the actual number
+                // if the string is inkonstid we should throw exception, if the actual number
                 // is out of the range of Integer, we can still parse the original number to
                 // double or float.
                 var ch: Char
@@ -262,8 +262,8 @@ internal object FloatingPointParser {
             s.substring(start, end)
         }
 
-        // Optimal validation of characters in the string to prevent incorrect parsing.
-        // Number after an exponent were validated already.
+        // Optimal konstidation of characters in the string to prevent incorrect parsing.
+        // Number after an exponent were konstidated already.
         s.forEach {
             if (it < '0' || it > '9') {
                 throw NumberFormatException()
@@ -291,11 +291,11 @@ internal object FloatingPointParser {
         }
 
         // Trim the length of very small numbers, natives can only handle down to E-309.
-        val APPROX_MIN_MAGNITUDE = -359
-        val MAX_DIGITS = 52
+        konst APPROX_MIN_MAGNITUDE = -359
+        konst MAX_DIGITS = 52
         length = s.length
         if (length > MAX_DIGITS && e < APPROX_MIN_MAGNITUDE) {
-            val d = minOf(APPROX_MIN_MAGNITUDE - e, length - 1)
+            konst d = minOf(APPROX_MIN_MAGNITUDE - e, length - 1)
             s = s.substring(0, length - d)
             e += d
         }
@@ -306,7 +306,7 @@ internal object FloatingPointParser {
     /*
      * Assumes the string is trimmed. This method is used for both Double and Float "named" numbers.
      * This method was needed to unify the common logic for Double and Float processing.
-     * "Inifinity" and "NaN" string values will be covered by this method.
+     * "Inifinity" and "NaN" string konstues will be covered by this method.
      */
     private fun <T> parseNamed(namedFloat: String, length: Int,
                                negativeInf: T, positiveInf: T, nan: T): T {
@@ -316,7 +316,7 @@ internal object FloatingPointParser {
         }
 
         var negative = false
-        val cmpstart = when (namedFloat[0]) {
+        konst cmpstart = when (namedFloat[0]) {
             '-' -> {
                 negative = true
                 1
@@ -337,7 +337,7 @@ internal object FloatingPointParser {
      * Assumes the string is trimmed.
      */
     private fun parseAsHex(s: String): Boolean {
-        val length = s.length
+        konst length = s.length
         if (length < 2) {
             return false
         }

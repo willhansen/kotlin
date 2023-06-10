@@ -20,7 +20,7 @@ excludedFunctions = KERNEL_AUDIT_TOKEN KERNEL_SECURITY_TOKEN add_profil         
                     addrsel_policy_init                                             \
 		    in6addr_linklocal_allv2routers                                  \
 		    pfctlinput regwnexec_l res_send_setqhook res_send_setrhook      \
-		    unwhiteout zopen profil openat acl_valid_link_np uuid_generate_early_random setgrfile
+		    unwhiteout zopen profil openat acl_konstid_link_np uuid_generate_early_random setgrfile
 excludedFunctions.macos_arm64 = getdirentries longjmperror
 linkerOpts = -ldl -lresolv
 
@@ -30,8 +30,8 @@ static int posix_errno() {
     return errno;
 }
 
-static void set_posix_errno(int value) {
-        errno = value;
+static void set_posix_errno(int konstue) {
+        errno = konstue;
 }
 
 // Wrapper to access h_errno variable.
@@ -39,8 +39,8 @@ static int posix_h_errno() {
     return h_errno;
 }
 
-static void set_posix_h_errno(int value) {
-        h_errno = value;
+static void set_posix_h_errno(int konstue) {
+        h_errno = konstue;
 }
 
 static short posix_htons(short x) {

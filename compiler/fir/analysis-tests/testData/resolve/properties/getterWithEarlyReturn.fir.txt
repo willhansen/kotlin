@@ -5,7 +5,7 @@ FILE: getterWithEarlyReturn.kt
         }
 
     }
-    public final val R|SomeClass|.lore: R|kotlin/collections/List<kotlin/String>|
+    public final konst R|SomeClass|.lore: R|kotlin/collections/List<kotlin/String>|
         public get(): R|kotlin/collections/List<kotlin/String>| {
             this@R|/lore|.R|kotlin/apply|<R|SomeClass|>(<L> = apply@fun R|SomeClass|.<anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
                 ^ R|kotlin/collections/emptyList|<R|kotlin/String|>()

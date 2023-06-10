@@ -5,7 +5,7 @@ open annotation class TestAnnWithIntArray : Annotation {
 
   }
 
-  val x: IntArray
+  konst x: IntArray
     field = x
     get
 
@@ -18,7 +18,7 @@ open annotation class TestAnnWithStringArray : Annotation {
 
   }
 
-  val x: Array<String>
+  konst x: Array<String>
     field = x
     get
 

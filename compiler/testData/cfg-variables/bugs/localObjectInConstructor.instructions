@@ -17,7 +17,7 @@ sink:
 =====================
 == Demo0 ==
 class Demo0 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             println(state) // Ok
         }
@@ -28,7 +28,7 @@ class Demo0 {
 ---------------------
 L0:
   1 <START>                                                                INIT: in: {} out: {}
-    v(private val some = object { fun foo() { println(state) // Ok } })    INIT: in: {} out: {}
+    v(private konst some = object { fun foo() { println(state) // Ok } })    INIT: in: {} out: {}
     mark(object { fun foo() { println(state) // Ok } })                    INIT: in: {} out: {}
     jmp?(L2)
     d(fun foo() { println(state) // Ok })                                                                          USE: in: {state=READ} out: {state=READ}
@@ -66,7 +66,7 @@ sink:
 =====================
 == Demo1 ==
 class Demo1 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true
@@ -80,7 +80,7 @@ class Demo1 {
 ---------------------
 L0:
   1 <START>                                                                                                         INIT: in: {} out: {}
-    v(private val some = object { fun foo() { if (state) state = true println(state) // must be initialized } })    INIT: in: {} out: {}
+    v(private konst some = object { fun foo() { if (state) state = true println(state) // must be initialized } })    INIT: in: {} out: {}
     mark(object { fun foo() { if (state) state = true println(state) // must be initialized } })                    INIT: in: {} out: {}
     jmp?(L2)
     d(fun foo() { if (state) state = true println(state) // must be initialized })                                  INIT: in: {state=I} out: {state=I}      USE: in: {state=READ} out: {state=READ}
@@ -191,7 +191,7 @@ sink:
 =====================
 == Demo2 ==
 class Demo2 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true
@@ -207,7 +207,7 @@ class Demo2 {
 ---------------------
 L0:
   1 <START>                                                                                                           INIT: in: {} out: {}
-    v(private val some = object { fun foo() { if (state) state = true else state = false println(state) // OK } })    INIT: in: {} out: {}
+    v(private konst some = object { fun foo() { if (state) state = true else state = false println(state) // OK } })    INIT: in: {} out: {}
     mark(object { fun foo() { if (state) state = true else state = false println(state) // OK } })                    INIT: in: {} out: {}
     jmp?(L2)
     d(fun foo() { if (state) state = true else state = false println(state) // OK })                                  INIT: in: {state=I} out: {state=I}      USE: in: {state=READ} out: {state=READ}
@@ -264,7 +264,7 @@ sink:
 =====================
 == Demo3 ==
 class Demo3 {
-    private val some = run {
+    private konst some = run {
         if (state)
             state = true
 
@@ -276,7 +276,7 @@ class Demo3 {
 ---------------------
 L0:
   1 <START>                                                                                   INIT: in: {} out: {}
-    v(private val some = run { if (state) state = true println(state) // OK })                INIT: in: {} out: {}
+    v(private konst some = run { if (state) state = true println(state) // OK })                INIT: in: {} out: {}
     magic[IMPLICIT_RECEIVER](run { if (state) state = true println(state) // OK }) -> <v0>    INIT: in: {} out: {}
     mark({ if (state) state = true println(state) // OK })
     jmp?(L2)
@@ -371,7 +371,7 @@ sink:
 =====================
 == Demo4 ==
 class Demo4 {
-    private val some = exec {
+    private konst some = exec {
         if (state)
             state = true
 
@@ -383,7 +383,7 @@ class Demo4 {
 ---------------------
 L0:
   1 <START>                                                                                            INIT: in: {} out: {}
-    v(private val some = exec { if (state) state = true println(state) // must be initialized })       INIT: in: {} out: {}
+    v(private konst some = exec { if (state) state = true println(state) // must be initialized })       INIT: in: {} out: {}
     mark({ if (state) state = true println(state) // must be initialized })                            INIT: in: {} out: {}
     jmp?(L2)
     d({ if (state) state = true println(state) // must be initialized })                               INIT: in: {state=I} out: {state=I}      USE: in: {state=READ} out: {state=READ}
@@ -440,7 +440,7 @@ sink:
 class Demo5 {
     private var state: Boolean = true
 
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true
@@ -455,7 +455,7 @@ L0:
     v(private var state: Boolean = true)                                                           INIT: in: {} out: {state=D}
     r(true) -> <v0>                                                                                INIT: in: {state=D} out: {state=D}
     w(state|<v0>)                                                                                  INIT: in: {state=D} out: {state=ID}
-    v(private val some = object { fun foo() { if (state) state = true println(state) // OK } })    INIT: in: {state=ID} out: {state=ID}
+    v(private konst some = object { fun foo() { if (state) state = true println(state) // OK } })    INIT: in: {state=ID} out: {state=ID}
     mark(object { fun foo() { if (state) state = true println(state) // OK } })                    INIT: in: {state=ID} out: {state=ID}
     jmp?(L2)
     d(fun foo() { if (state) state = true println(state) // OK })                                  INIT: in: {state=I} out: {state=I}      USE: in: {state=READ} out: {state=READ}

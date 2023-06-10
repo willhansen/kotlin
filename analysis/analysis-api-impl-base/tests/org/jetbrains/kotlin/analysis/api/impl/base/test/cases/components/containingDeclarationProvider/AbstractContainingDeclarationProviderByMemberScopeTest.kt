@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractContainingDeclarationProviderByMemberScopeTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtClassOrObject>(ktFile)
+        konst declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtClassOrObject>(ktFile)
 
-        val memberToContainingClass = analyseForTest(declaration) {
-            val symbol = declaration.getClassOrObjectSymbol()!!
+        konst memberToContainingClass = analyseForTest(declaration) {
+            konst symbol = declaration.getClassOrObjectSymbol()!!
             renderScopeWithParentDeclarations(symbol.getMemberScope())
         }
 

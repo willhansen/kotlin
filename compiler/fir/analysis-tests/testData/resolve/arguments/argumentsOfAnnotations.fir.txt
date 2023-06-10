@@ -4,13 +4,13 @@ FILE: argumentsOfAnnotations.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        public final val y: R|kotlin/String| = R|<local>/y|
+        public final konst y: R|kotlin/String| = R|<local>/y|
             public get(): R|kotlin/String|
 
-        public final val z: R|kotlin/String| = R|<local>/z|
+        public final konst z: R|kotlin/String| = R|<local>/z|
             public get(): R|kotlin/String|
 
     }
@@ -25,13 +25,13 @@ FILE: argumentsOfAnnotations.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        public final val y: R|kotlin/Array<out kotlin/String>| = R|<local>/y|
+        public final konst y: R|kotlin/Array<out kotlin/String>| = R|<local>/y|
             public get(): R|kotlin/Array<out kotlin/String>|
 
-        public final val z: R|kotlin/Int| = R|<local>/z|
+        public final konst z: R|kotlin/Int| = R|<local>/z|
             public get(): R|kotlin/Int|
 
     }

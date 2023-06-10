@@ -1,6 +1,6 @@
 package
 
-private val propOfAnonObject: propOfAnonObject.`<no name provided>`
+private konst propOfAnonObject: propOfAnonObject.`<no name provided>`
 private fun createAnonObject(): createAnonObject.`<no name provided>`
 public fun useAnonObject(): kotlin.Unit
 

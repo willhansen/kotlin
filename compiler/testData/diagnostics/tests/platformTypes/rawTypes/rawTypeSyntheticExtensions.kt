@@ -14,7 +14,7 @@ public class Generic<T extends Generic> {
 
 // FILE: main.kt
 fun main() {
-    val generic = Generic.create() // has a type of Generic<(raw) Any..Any?>
+    konst generic = Generic.create() // has a type of Generic<(raw) Any..Any?>
 
     generic.getFoo() // has return type List<(raw) Any..Any?>
     generic.getFoo()[0].<!UNRESOLVED_REFERENCE!>length<!> // Unresolved "length"

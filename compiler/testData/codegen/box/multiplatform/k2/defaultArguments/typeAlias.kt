@@ -5,14 +5,14 @@
 // MODULE: common
 // FILE: common.kt
 
-expect annotation class Foo(val z: String = "OK")
+expect annotation class Foo(konst z: String = "OK")
 
 // MODULE: platform()()(common)
 // FILE: platform.kt
 
 actual typealias Foo = Foo2
 
-annotation class Foo2 (val z: String = "OK")
+annotation class Foo2 (konst z: String = "OK")
 
 @Foo
 fun test() {}

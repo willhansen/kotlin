@@ -6,7 +6,7 @@
 external class C {
     <!WRONG_EXTERNAL_DECLARATION!>private fun a(): Int<!>
 
-    <!WRONG_EXTERNAL_DECLARATION!>private val b: String<!>
+    <!WRONG_EXTERNAL_DECLARATION!>private konst b: String<!>
 
     <!WRONG_EXTERNAL_DECLARATION!>private var c: Float<!>
 
@@ -21,7 +21,7 @@ external class C {
     /*
     private inline fun inline_a(): Int = 23
 
-    private inline val inline_prop: Int
+    private inline konst inline_prop: Int
         get() = 42
     */
 }
@@ -29,7 +29,7 @@ external class C {
 external object O {
     <!WRONG_EXTERNAL_DECLARATION!>private fun a(): Int<!>
 
-    <!WRONG_EXTERNAL_DECLARATION!>private val b: String<!>
+    <!WRONG_EXTERNAL_DECLARATION!>private konst b: String<!>
 
     <!WRONG_EXTERNAL_DECLARATION!>private var c: Float<!>
 
@@ -40,7 +40,7 @@ external object O {
     /*
     private inline fun inline_a(): Int = 23
 
-    private inline val inline_prop: Int
+    private inline konst inline_prop: Int
         get() = 42
     */
 }
@@ -49,7 +49,7 @@ external class Outer {
     class Inner {
         <!WRONG_EXTERNAL_DECLARATION!>private fun a(): Int<!>
 
-        <!WRONG_EXTERNAL_DECLARATION!>private val b: String<!>
+        <!WRONG_EXTERNAL_DECLARATION!>private konst b: String<!>
 
         <!WRONG_EXTERNAL_DECLARATION!>private var c: Float<!>
 
@@ -60,7 +60,7 @@ external class Outer {
         /*
         private inline fun inline_a(): Int = 23
 
-        private inline val inline_prop: Int
+        private inline konst inline_prop: Int
             get() = 42
         */
     }

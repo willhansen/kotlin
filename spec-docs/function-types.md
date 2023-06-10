@@ -29,7 +29,7 @@ So effectively functions and extension functions now have the same type,
 which means that everything which takes a function will work with an extension function and vice versa.
 
 To prevent unpleasant ambiguities, we introduce additional restrictions:
-* A value of an extension function type cannot be **called** as a function, and a value of a non-extension
+* A konstue of an extension function type cannot be **called** as a function, and a konstue of a non-extension
 function type cannot be called as an extension. This requires an additional diagnostic which is only fired
 when a call is resolved to the `invoke` with the wrong extension-ness.
 (Note that this restriction is likely to be lifted, so that extension functions can be called as functions,
@@ -39,7 +39,7 @@ the extension-ness of the corresponding parameter. You can't pass an extension f
 or an extension function expression where a function is expected and vice versa.
 If you really want to do that, change the shape, assign literal to a variable or use the `as` operator.
 
-So basically you can now safely coerce values between function and extension function types,
+So basically you can now safely coerce konstues between function and extension function types,
 but still should invoke them in the format which you specified in their type (with or without `@ExtensionFunctionType`).
 
 With this we'll get rid of classes `ExtensionFunction0`, `ExtensionFunction1`, ...
@@ -58,7 +58,7 @@ both of which should be synthetically produced by the compiler:
 * (declaration) `invoke` with no receiver, with the corresponding number of parameters and return type.
 * (synthesized) `invoke` with first type parameter as the extension receiver type, and the rest as parameters and return type.
 
-Call resolution should use the annotations on the type of the value the call is performed on
+Call resolution should use the annotations on the type of the konstue the call is performed on
 to select the correct `invoke` and to report the diagnostic if the `invoke` is illegal (see the previous block).
 
 On JVM function types are erased to the physical classes defined in package `kotlin.jvm.internal`:
@@ -165,7 +165,7 @@ To support functions with many parameters there's a special interface in JVM run
 package kotlin.jvm.functions
 
 interface FunctionN<out R> : kotlin.Function<R> {
-    val arity: Int
+    konst arity: Int
     fun invokeVararg(vararg p: Any?): R
 }
 ```
@@ -178,7 +178,7 @@ And another type annotation:
 ``` kotlin
 package kotlin.jvm.functions
 
-annotation class arity(val value: Int)
+annotation class arity(konst konstue: Int)
 ```
 
 A lambda type with 42 parameters on JVM is translated to `@arity(42) FunctionN`.
@@ -230,7 +230,7 @@ provided by extensions in **platform-agnostic** built-ins.
 ``` kotlin
 package kotlin
 
-@intrinsic val Function<*>.arity: Int
+@intrinsic konst Function<*>.arity: Int
 @intrinsic fun <R> Function<R>.invokeVararg(vararg p: Any?): R
 ```
 

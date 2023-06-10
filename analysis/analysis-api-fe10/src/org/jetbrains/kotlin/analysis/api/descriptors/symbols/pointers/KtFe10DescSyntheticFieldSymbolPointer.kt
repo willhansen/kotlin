@@ -18,18 +18,18 @@ import org.jetbrains.kotlin.descriptors.PropertyAccessorDescriptor
 import org.jetbrains.kotlin.descriptors.impl.SyntheticFieldDescriptor
 
 class KtFe10DescSyntheticFieldSymbolPointer(
-    private val psiPointer: KtPsiBasedSymbolPointer<KtPropertyAccessorSymbol>
+    private konst psiPointer: KtPsiBasedSymbolPointer<KtPropertyAccessorSymbol>
 ) : KtSymbolPointer<KtBackingFieldSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtBackingFieldSymbol? {
         check(analysisSession is KtFe10AnalysisSession)
-        val analysisContext = analysisSession.analysisContext
+        konst analysisContext = analysisSession.analysisContext
 
         @Suppress("DEPRECATION")
-        val accessorSymbol = psiPointer.restoreSymbol(analysisSession) ?: return null
+        konst accessorSymbol = psiPointer.restoreSymbol(analysisSession) ?: return null
 
-        val accessorDescriptor = getSymbolDescriptor(accessorSymbol) as? PropertyAccessorDescriptor ?: return null
-        val syntheticFieldDescriptor = SyntheticFieldDescriptor(accessorDescriptor, accessorDescriptor.correspondingProperty.source)
+        konst accessorDescriptor = getSymbolDescriptor(accessorSymbol) as? PropertyAccessorDescriptor ?: return null
+        konst syntheticFieldDescriptor = SyntheticFieldDescriptor(accessorDescriptor, accessorDescriptor.correspondingProperty.source)
         return KtFe10DescSyntheticFieldSymbol(syntheticFieldDescriptor, analysisContext)
     }
 

@@ -1,37 +1,37 @@
 FILE: delegateInference.kt
     public final class FreezableVar<T> : R|kotlin/Any| {
-        public constructor<T>(value: R|T|): R|FreezableVar<T>| {
+        public constructor<T>(konstue: R|T|): R|FreezableVar<T>| {
             super<R|kotlin/Any|>()
         }
 
-        private final var value: R|T| = R|<local>/value|
+        private final var konstue: R|T| = R|<local>/konstue|
             private get(): R|T|
-            private set(value: R|T|): R|kotlin/Unit|
+            private set(konstue: R|T|): R|kotlin/Unit|
 
         public final operator fun getValue(thisRef: R|kotlin/Any|, property: R|kotlin/reflect/KProperty<*>|): R|T| {
-            ^getValue this@R|/FreezableVar|.R|/FreezableVar.value|
+            ^getValue this@R|/FreezableVar|.R|/FreezableVar.konstue|
         }
 
-        public final operator fun setValue(thisRef: R|kotlin/Any|, property: R|kotlin/reflect/KProperty<*>|, value: R|T|): R|kotlin/Unit| {
-            this@R|/FreezableVar|.R|/FreezableVar.value| = R|<local>/value|
+        public final operator fun setValue(thisRef: R|kotlin/Any|, property: R|kotlin/reflect/KProperty<*>|, konstue: R|T|): R|kotlin/Unit| {
+            this@R|/FreezableVar|.R|/FreezableVar.konstue| = R|<local>/konstue|
         }
 
     }
     public final class LocalFreezableVar<T> : R|kotlin/Any| {
-        public constructor<T>(value: R|T|): R|LocalFreezableVar<T>| {
+        public constructor<T>(konstue: R|T|): R|LocalFreezableVar<T>| {
             super<R|kotlin/Any|>()
         }
 
-        private final var value: R|T| = R|<local>/value|
+        private final var konstue: R|T| = R|<local>/konstue|
             private get(): R|T|
-            private set(value: R|T|): R|kotlin/Unit|
+            private set(konstue: R|T|): R|kotlin/Unit|
 
         public final operator fun getValue(thisRef: R|kotlin/Nothing?|, property: R|kotlin/reflect/KProperty<*>|): R|T| {
-            ^getValue this@R|/LocalFreezableVar|.R|/LocalFreezableVar.value|
+            ^getValue this@R|/LocalFreezableVar|.R|/LocalFreezableVar.konstue|
         }
 
-        public final operator fun setValue(thisRef: R|kotlin/Nothing?|, property: R|kotlin/reflect/KProperty<*>|, value: R|T|): R|kotlin/Unit| {
-            this@R|/LocalFreezableVar|.R|/LocalFreezableVar.value| = R|<local>/value|
+        public final operator fun setValue(thisRef: R|kotlin/Nothing?|, property: R|kotlin/reflect/KProperty<*>|, konstue: R|T|): R|kotlin/Unit| {
+            this@R|/LocalFreezableVar|.R|/LocalFreezableVar.konstue| = R|<local>/konstue|
         }
 
     }

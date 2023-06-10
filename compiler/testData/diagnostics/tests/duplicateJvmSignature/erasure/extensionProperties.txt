@@ -1,7 +1,7 @@
 package
 
-public val </*0*/ T> G<T>.foo: kotlin.Int
-public val G<kotlin.String>.foo: kotlin.Int
+public konst </*0*/ T> G<T>.foo: kotlin.Int
+public konst G<kotlin.String>.foo: kotlin.Int
 
 public final class G</*0*/ T> {
     public constructor G</*0*/ T>()

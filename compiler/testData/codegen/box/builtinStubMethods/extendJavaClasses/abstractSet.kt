@@ -5,8 +5,8 @@
 class A : HashSet<Long>()
 
 fun box(): String {
-    val a = A()
-    val b = A()
+    konst a = A()
+    konst b = A()
 
     a.iterator()
 

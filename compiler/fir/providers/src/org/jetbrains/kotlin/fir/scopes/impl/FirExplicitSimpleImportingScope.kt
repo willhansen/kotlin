@@ -15,12 +15,12 @@ class FirExplicitSimpleImportingScope(
     session: FirSession,
     scopeSession: ScopeSession
 ) : FirAbstractSimpleImportingScope(session, scopeSession) {
-    override val simpleImports =
+    override konst simpleImports =
         imports.filterIsInstance<FirResolvedImport>()
             .filter { !it.isAllUnder && it.importedName != null }
             .groupBy { it.aliasName ?: it.importedName!! }
 
-    override val scopeOwnerLookupNames: List<String> by lazy(LazyThreadSafetyMode.PUBLICATION) {
-        simpleImports.values.flatMapTo(LinkedHashSet()) { it.map { it.packageFqName.asString() } }.toList()
+    override konst scopeOwnerLookupNames: List<String> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        simpleImports.konstues.flatMapTo(LinkedHashSet()) { it.map { it.packageFqName.asString() } }.toList()
     }
 }

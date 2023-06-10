@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.generators.builtins.functions
 import org.jetbrains.kotlin.generators.builtins.generateBuiltIns.BuiltInsSourceGenerator
 import java.io.PrintWriter
 
-val MAX_PARAM_COUNT = 22
+konst MAX_PARAM_COUNT = 22
 
 class GenerateFunctions(out: PrintWriter) : BuiltInsSourceGenerator(out) {
     override fun getPackage() = "kotlin.jvm.functions"
@@ -53,7 +53,7 @@ class GenerateFunctions(out: PrintWriter) : BuiltInsSourceGenerator(out) {
     }
 
     fun generateDocumentation(i: Int) {
-        val suffix = if (i == 1) "" else "s"
+        konst suffix = if (i == 1) "" else "s"
         out.println("/** A function that takes $i argument${suffix}. */")
     }
 
@@ -74,7 +74,7 @@ class GenerateFunctions(out: PrintWriter) : BuiltInsSourceGenerator(out) {
             out.println("    /** Invokes the function. */")
         }
         else {
-            val suffix = if (i == 1) "" else "s"
+            konst suffix = if (i == 1) "" else "s"
             out.println("    /** Invokes the function with the specified argument${suffix}. */")
         }
         out.print("    public operator fun invoke(")

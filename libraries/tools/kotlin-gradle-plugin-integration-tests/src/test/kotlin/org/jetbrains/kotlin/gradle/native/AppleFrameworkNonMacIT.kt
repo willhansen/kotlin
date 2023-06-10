@@ -16,7 +16,7 @@ import kotlin.test.assertTrue
 
 class AppleFrameworkNonMacIT : BaseGradleIT() {
 
-    override val defaultGradleVersion: GradleVersionRequired
+    override konst defaultGradleVersion: GradleVersionRequired
         get() = GradleVersionRequired.FOR_MPP_SUPPORT
 
     @Test

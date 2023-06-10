@@ -27,7 +27,7 @@ interface Computation {
      * If type is unknown or computation doesn't have a type (e.g. if
      * it is some construction, like "for"-loop), then type is 'null'
      */
-    val type: ESType?
+    konst type: ESType?
 
     /**
      * List of all possible effects of this computation.
@@ -35,5 +35,5 @@ interface Computation {
      * doesn't mention some effect, then it should be interpreted
      * as the absence of information about that effect.
      */
-    val effects: List<ESEffect>
+    konst effects: List<ESEffect>
 }

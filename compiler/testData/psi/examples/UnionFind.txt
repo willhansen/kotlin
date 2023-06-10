@@ -15,7 +15,7 @@ KtFile: UnionFind.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('data')
         PsiWhiteSpace(' ')
@@ -55,7 +55,7 @@ KtFile: UnionFind.kt
           PsiElement(LBRACE)('{')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('size')
             PsiWhiteSpace(' ')
@@ -118,7 +118,7 @@ KtFile: UnionFind.kt
           PsiElement(LBRACE)('{')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('p')
             PsiWhiteSpace(' ')
@@ -164,7 +164,7 @@ KtFile: UnionFind.kt
                 PsiElement(RBRACE)('}')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('result')
             PsiWhiteSpace(' ')
@@ -232,7 +232,7 @@ KtFile: UnionFind.kt
           PsiElement(LBRACE)('{')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('pa')
             PsiWhiteSpace(' ')
@@ -249,7 +249,7 @@ KtFile: UnionFind.kt
                 PsiElement(RPAR)(')')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('pb')
             PsiWhiteSpace(' ')
@@ -359,7 +359,7 @@ KtFile: UnionFind.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE

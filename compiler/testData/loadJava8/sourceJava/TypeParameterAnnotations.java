@@ -5,7 +5,7 @@ public class TypeParameterAnnotations {
     @Target(ElementType.TYPE_PARAMETER)
     @Retention(RetentionPolicy.RUNTIME)
     @interface A {
-        String value() default "";
+        String konstue() default "";
     }
 
     interface G<@A T> {

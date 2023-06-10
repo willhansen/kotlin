@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.FqName
 
-class StringTrimLowering(val context: CommonBackendContext) : FileLoweringPass, IrElementTransformerVoid() {
+class StringTrimLowering(konst context: CommonBackendContext) : FileLoweringPass, IrElementTransformerVoid() {
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(this)
     }
@@ -33,17 +33,17 @@ class StringTrimLowering(val context: CommonBackendContext) : FileLoweringPass, 
     }
 
     private fun maybeComputeTrimIndent(call: IrCall): IrExpression {
-        val receiverString = call.extensionReceiver!!.getConstantString() ?: return call
-        val newString = receiverString.trimIndent()
+        konst receiverString = call.extensionReceiver!!.getConstantString() ?: return call
+        konst newString = receiverString.trimIndent()
         return IrConstImpl.string(call.startOffset, call.endOffset, call.type, newString)
     }
 
     private fun maybeComputeTrimMargin(call: IrCall): IrExpression {
-        val receiverString = call.extensionReceiver!!.getConstantString() ?: return call
+        konst receiverString = call.extensionReceiver!!.getConstantString() ?: return call
 
-        val prefixArgument = call.getValueArgument(0)
-        val newString = if (prefixArgument != null) {
-            val prefixString = prefixArgument.getConstantString() ?: return call
+        konst prefixArgument = call.getValueArgument(0)
+        konst newString = if (prefixArgument != null) {
+            konst prefixString = prefixArgument.getConstantString() ?: return call
             try {
                 receiverString.trimMargin(prefixString)
             } catch (e: IllegalArgumentException) {
@@ -59,26 +59,26 @@ class StringTrimLowering(val context: CommonBackendContext) : FileLoweringPass, 
     companion object {
         private fun IrExpression.getConstantString(): String? {
             if (this is IrConst<*> && kind == IrConstKind.String) {
-                return IrConstKind.String.valueOf(this)
+                return IrConstKind.String.konstueOf(this)
             }
             return null
         }
 
         private fun matchTrimIndent(expression: IrCall): Boolean {
-            val callee = expression.symbol.owner
-            return callee.valueParameters.isEmpty() &&
+            konst callee = expression.symbol.owner
+            return callee.konstueParameters.isEmpty() &&
                     callee.extensionReceiverParameter?.type?.isString() == true &&
                     callee.kotlinFqName == TRIM_INDENT_FQ_NAME
         }
 
         private fun matchTrimMargin(expression: IrCall): Boolean {
-            val callee = expression.symbol.owner
-            return callee.valueParameters.singleOrNull()?.type?.isString() == true &&
+            konst callee = expression.symbol.owner
+            return callee.konstueParameters.singleOrNull()?.type?.isString() == true &&
                     callee.extensionReceiverParameter?.type?.isString() == true &&
                     callee.kotlinFqName == TRIM_MARGIN_FQ_NAME
         }
 
-        private val TRIM_MARGIN_FQ_NAME = FqName("kotlin.text.trimMargin")
-        private val TRIM_INDENT_FQ_NAME = FqName("kotlin.text.trimIndent")
+        private konst TRIM_MARGIN_FQ_NAME = FqName("kotlin.text.trimMargin")
+        private konst TRIM_INDENT_FQ_NAME = FqName("kotlin.text.trimIndent")
     }
 }

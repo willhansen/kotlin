@@ -39,7 +39,7 @@ import base.*
 <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>class Case1<!> : BaseJava() {}
 
 fun case1() {
-    val v = Case1()
+    konst v = Case1()
     v.boo(true)
 }
 
@@ -51,7 +51,7 @@ abstract class AbstractClassCase2 : BaseJava() {}
 <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>class Case2<!> : AbstractClassCase2() {}
 
 fun case2() {
-    val v = Case2()
+    konst v = Case2()
     v.boo(true)
 }
 

@@ -10,7 +10,7 @@ public interface I {
 }
 
 public fun f() {
-    val i = object : I {
+    konst i = object : I {
         internal var foo = 0
         override fun bar() {}
     }

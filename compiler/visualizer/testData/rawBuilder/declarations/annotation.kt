@@ -38,7 +38,7 @@
 
 //constructor base() constructor base()
 //│                  │
-@base class correct(@base val x: Int) {
+@base class correct(@base konst x: Int) {
 //   constructor base()       Int
 //   │                        │
     @base constructor(): this(0)
@@ -73,8 +73,8 @@
 //   │                fun foo.bar(Int): Int
 //   │        Int     │   foo.y: Int
 //   │        │       │   │
-    @base val local = bar(y)
-//         val foo.local: Int
+    @base konst local = bar(y)
+//         konst foo.local: Int
 //         │
     return local
 }
@@ -82,4 +82,4 @@
 //constructor base()
 //│       Int Int
 //│       │   │
-@base val z = 0
+@base konst z = 0

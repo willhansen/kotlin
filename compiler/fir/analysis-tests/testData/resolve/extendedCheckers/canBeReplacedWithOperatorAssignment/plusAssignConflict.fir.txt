@@ -12,6 +12,6 @@ FILE: plusAssignConflict.kt
     }
     public final fun foo(): R|kotlin/Unit| {
         lvar a1: R|A| = R|/A.A|()
-        lval a2: R|A| = R|/A.A|()
+        lkonst a2: R|A| = R|/A.A|()
         R|<local>/a1| = R|<local>/a1|.R|/plus|(R|<local>/a2|)
     }

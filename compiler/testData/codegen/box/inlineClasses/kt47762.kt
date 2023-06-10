@@ -3,14 +3,14 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val a: Int = 1) {
+konstue class A(konst a: Int = 1) {
     companion object {
-        val a: Int = 2
+        konst a: Int = 2
     }
 }
 
 fun box(): String {
     if (A.a != 2) return "FAIL1"
-    val instance = A()
+    konst instance = A()
     return if (instance.a != 1) "FAIL2" else "OK"
 }

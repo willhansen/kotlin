@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun <T> ArrayList<T>.findAll(predicate:  (T) -> Boolean): ArrayList<T> {
-  val result = ArrayList<T>()
+  konst result = ArrayList<T>()
   for(t in this) {
     if (predicate(t)) result.add(t)
   }
@@ -10,12 +10,12 @@ fun <T> ArrayList<T>.findAll(predicate:  (T) -> Boolean): ArrayList<T> {
 
 
 fun box(): String {
-  val list: ArrayList<String> = ArrayList<String>()
+  konst list: ArrayList<String> = ArrayList<String>()
   list.add("Prague")
   list.add("St.Petersburg")
   list.add("Moscow")
   list.add("Munich")
 
-  val m: ArrayList<String> = list.findAll<String>({ name: String -> name.startsWith("M")})
+  konst m: ArrayList<String> = list.findAll<String>({ name: String -> name.startsWith("M")})
   return if (m.size == 2) "OK" else "fail"
 }

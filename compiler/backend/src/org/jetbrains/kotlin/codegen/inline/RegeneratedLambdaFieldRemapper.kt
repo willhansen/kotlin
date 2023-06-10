@@ -25,11 +25,11 @@ import org.jetbrains.org.objectweb.asm.tree.FieldInsnNode
 
 class RegeneratedLambdaFieldRemapper(
     originalLambdaInternalName: String,
-    override val newLambdaInternalName: String,
+    override konst newLambdaInternalName: String,
     parameters: Parameters,
-    val recapturedLambdas: Map<String, LambdaInfo>,
+    konst recapturedLambdas: Map<String, LambdaInfo>,
     remapper: FieldRemapper,
-    private val isConstructor: Boolean
+    private konst isConstructor: Boolean
 ) : FieldRemapper(originalLambdaInternalName, remapper, parameters) {
 
     public override fun canProcess(fieldOwner: String, fieldName: String, isFolding: Boolean) =
@@ -39,7 +39,7 @@ class RegeneratedLambdaFieldRemapper(
         recapturedLambdas.containsKey(owner) && (isFolding || parent !is InlinedLambdaRemapper)
 
     override fun findField(fieldInsnNode: FieldInsnNode, captured: Collection<CapturedParamInfo>): CapturedParamInfo? {
-        val searchInParent = !canProcess(fieldInsnNode.owner, fieldInsnNode.name, false)
+        konst searchInParent = !canProcess(fieldInsnNode.owner, fieldInsnNode.name, false)
         if (searchInParent) {
             return parent!!.findField(fieldInsnNode)
         }
@@ -55,16 +55,16 @@ class RegeneratedLambdaFieldRemapper(
     }
 
     override fun getFieldForInline(node: FieldInsnNode, prefix: StackValue?): StackValue? {
-        val fieldName = node.name
+        konst fieldName = node.name
         assert(fieldName.startsWith(CAPTURED_FIELD_FOLD_PREFIX)) { "Captured field template should start with $CAPTURED_FIELD_FOLD_PREFIX prefix" }
         if (fieldName == CAPTURED_FIELD_FOLD_PREFIX + THIS) {
             assert(originalLambdaInternalName == node.owner) { "Can't unfold '$CAPTURED_FIELD_FOLD_PREFIX$THIS' parameter" }
             return StackValue.LOCAL_0
         }
 
-        val fin = FieldInsnNode(node.opcode, node.owner, fieldName.substringAfter(CAPTURED_FIELD_FOLD_PREFIX), node.desc)
+        konst fin = FieldInsnNode(node.opcode, node.owner, fieldName.substringAfter(CAPTURED_FIELD_FOLD_PREFIX), node.desc)
         var fromParent = false
-        val field = findFieldInSuper(fin) ?:
+        konst field = findFieldInSuper(fin) ?:
         //search in parent
         findFieldInSuper(
             FieldInsnNode(
@@ -74,7 +74,7 @@ class RegeneratedLambdaFieldRemapper(
         )?.also { fromParent = true } ?: throw AssertionError("Couldn't find captured this $originalLambdaInternalName for $fieldName")
 
 
-        val result = StackValue.field(
+        konst result = StackValue.field(
             if (field.isSkipped && field.functionalArgument is LambdaInfo)
                 Type.getObjectType(parent!!.parent!!.newLambdaInternalName)
             else

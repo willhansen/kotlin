@@ -23,14 +23,14 @@ internal fun FirValueParameter.transformVarargTypeToArrayType() {
 }
 
 internal fun FirCallableDeclaration.transformTypeToArrayType() {
-    val returnTypeRef = this.returnTypeRef
+    konst returnTypeRef = this.returnTypeRef
     require(returnTypeRef is FirResolvedTypeRef)
     // If the delegated type is already resolved, it means we have already created a resolved array type for this vararg type declaration.
     // This is because in the buildResolvedTypeRef call below, we set the delegated type ref to the previous (non-vararg) resolved type ref.
     if (returnTypeRef.delegatedTypeRef is FirResolvedTypeRef &&
         returnTypeRef.delegatedTypeRef?.source?.kind == KtFakeSourceElementKind.ArrayTypeFromVarargParameter
     ) return
-    val returnType = returnTypeRef.coneType
+    konst returnType = returnTypeRef.coneType
 
     replaceReturnTypeRef(
         buildResolvedTypeRef {
@@ -44,11 +44,11 @@ internal fun FirCallableDeclaration.transformTypeToArrayType() {
 }
 
 inline fun <T> withScopeCleanup(scopes: MutableList<*>, l: () -> T): T {
-    val sizeBefore = scopes.size
+    konst sizeBefore = scopes.size
     return try {
         l()
     } finally {
-        val size = scopes.size
+        konst size = scopes.size
         assert(size >= sizeBefore)
         repeat(size - sizeBefore) {
             scopes.let { it.removeAt(it.size - 1) }

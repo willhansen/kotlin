@@ -2,10 +2,10 @@ package test
 
 public open class AnnotatedMethod {
     public constructor AnnotatedMethod()
-    @test.AnnotatedMethod.Anno(value = 42) public open fun f(): kotlin.Unit
+    @test.AnnotatedMethod.Anno(konstue = 42) public open fun f(): kotlin.Unit
 
     public final annotation class Anno : kotlin.Annotation {
-        public constructor Anno(/*0*/ value: kotlin.Int)
-        public final val value: kotlin.Int
+        public constructor Anno(/*0*/ konstue: kotlin.Int)
+        public final konst konstue: kotlin.Int
     }
 }

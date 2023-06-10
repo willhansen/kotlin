@@ -1,7 +1,7 @@
 fun box(): String {
-    val a = ""
+    konst a = ""
 
-    val c = fun(): String {
+    konst c = fun(): String {
         if (a != "") return "Fail"
         return "OK"
     }.invoke()

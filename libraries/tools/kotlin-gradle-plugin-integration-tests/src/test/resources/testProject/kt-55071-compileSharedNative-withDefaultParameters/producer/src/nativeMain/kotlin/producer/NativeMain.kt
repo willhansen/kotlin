@@ -1,10 +1,10 @@
 package producer
 
 actual class Producer {
-    actual fun foo(value: String, optionalParameter: Boolean) = Unit
+    actual fun foo(konstue: String, optionalParameter: Boolean) = Unit
 }
 
 fun inProducerNativeMain() {
     producerSecondCommonMain()
-    Producer().foo("") // <-  No value passed for parameter 'optionalParameter'
+    Producer().foo("") // <-  No konstue passed for parameter 'optionalParameter'
 }

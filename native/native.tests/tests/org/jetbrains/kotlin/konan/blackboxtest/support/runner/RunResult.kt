@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.konan.blackboxtest.support.util.TestOutputFilter
 import kotlin.time.Duration
 
 internal data class RunResult(
-    val exitCode: Int?,
-    val timeout: Duration,
-    val duration: Duration,
-    val hasFinishedOnTime: Boolean,
-    val processOutput: ProcessOutput
+    konst exitCode: Int?,
+    konst timeout: Duration,
+    konst duration: Duration,
+    konst hasFinishedOnTime: Boolean,
+    konst processOutput: ProcessOutput
 ) {
     init {
         // null exit code is possible only when test run hasn't finished on time.
@@ -21,4 +21,4 @@ internal data class RunResult(
     }
 }
 
-internal class ProcessOutput(val stdOut: TestOutputFilter.FilteredOutput, val stdErr: String)
+internal class ProcessOutput(konst stdOut: TestOutputFilter.FilteredOutput, konst stdErr: String)

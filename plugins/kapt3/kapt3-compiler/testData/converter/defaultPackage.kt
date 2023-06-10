@@ -17,7 +17,7 @@ import java.lang.annotation.ElementType;
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ClassRefAnnotation {
-    Class<?>[] value();
+    Class<?>[] konstue();
 }
 
 // FILE: a.kt

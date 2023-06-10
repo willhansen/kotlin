@@ -17,26 +17,26 @@ interface SamWithReceiver {
      *
      * @return the version of this model.
      */
-    val modelVersion: Long
+    konst modelVersion: Long
 
     /**
      * Returns the module (Gradle project) name.
      *
      * @return the module name.
      */
-    val name: String
+    konst name: String
 
     /**
      * Return the list of annotations.
      *
      * @return the list of annotations.
      */
-    val annotations: List<String>
+    konst annotations: List<String>
 
     /**
      * Return the list of presets.
      *
      * @return the list of presets.
      */
-    val presets: List<String>
+    konst presets: List<String>
 }

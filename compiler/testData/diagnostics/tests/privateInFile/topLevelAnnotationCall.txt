@@ -1,15 +1,15 @@
 package
 
 package pp {
-    private const val foo: kotlin.String = "O"
-    @pp.A(s = "O") public val p1: kotlin.String = ""
-    @pp.A(s = "O") public val p2: kotlin.String = ""
+    private const konst foo: kotlin.String = "O"
+    @pp.A(s = "O") public konst p1: kotlin.String = ""
+    @pp.A(s = "O") public konst p2: kotlin.String = ""
     @pp.A(s = "O") public fun f1(): kotlin.Unit
     @pp.A(s = "O") public fun f2(): kotlin.Unit
 
     private final annotation class A : kotlin.Annotation {
         public constructor A(/*0*/ s: kotlin.String)
-        public final val s: kotlin.String
+        public final konst s: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

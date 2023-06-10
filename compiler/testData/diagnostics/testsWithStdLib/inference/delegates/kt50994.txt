@@ -7,7 +7,7 @@ public interface Delegate</*0*/ R : Entity, /*1*/ T> : kotlin.properties.ReadWri
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public abstract override /*1*/ /*fake_override*/ fun getValue(/*0*/ thisRef: R, /*1*/ property: kotlin.reflect.KProperty<*>): T
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public abstract override /*1*/ /*fake_override*/ fun setValue(/*0*/ thisRef: R, /*1*/ property: kotlin.reflect.KProperty<*>, /*2*/ value: T): kotlin.Unit
+    public abstract override /*1*/ /*fake_override*/ fun setValue(/*0*/ thisRef: R, /*1*/ property: kotlin.reflect.KProperty<*>, /*2*/ konstue: T): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 

@@ -36,21 +36,21 @@ object FiniteBoundRestrictionChecker {
         classDescriptor: ClassDescriptor,
         diagnosticHolder: DiagnosticSink
     ) {
-        val typeConstructor = classDescriptor.typeConstructor
+        konst typeConstructor = classDescriptor.typeConstructor
         if (typeConstructor.parameters.isEmpty()) return
 
         // For every projection type argument A in every generic type B<…> in the set of constituent types
         // of every type in the B-closure the set of declared upper bounds of every type parameter T add an
         // edge from T to U, where U is the type parameter of the declaration of B<…> corresponding to the type argument A.
         // It is a compile-time error if the graph G has a cycle.
-        val graph = GraphBuilder(typeConstructor).build()
+        konst graph = GraphBuilder(typeConstructor).build()
 
-        val problemNodes = graph.nodes.filter { graph.isInCycle(it) }
+        konst problemNodes = graph.nodes.filter { graph.isInCycle(it) }
         if (problemNodes.isEmpty()) return
 
         for (typeParameter in typeConstructor.parameters) {
             if (typeParameter in problemNodes) {
-                val element = DescriptorToSourceUtils.descriptorToDeclaration(typeParameter) ?: declaration
+                konst element = DescriptorToSourceUtils.descriptorToDeclaration(typeParameter) ?: declaration
                 diagnosticHolder.report(Errors.FINITE_BOUNDS_VIOLATION.on(element))
                 return
             }
@@ -58,20 +58,20 @@ object FiniteBoundRestrictionChecker {
 
         if (problemNodes.any { it.source != SourceElement.NO_SOURCE }) return
 
-        val typeFqNames = problemNodes.map { it.containingDeclaration }.map { it.fqNameUnsafe.asString() }.toSortedSet()
+        konst typeFqNames = problemNodes.map { it.containingDeclaration }.map { it.fqNameUnsafe.asString() }.toSortedSet()
         diagnosticHolder.report(Errors.FINITE_BOUNDS_VIOLATION_IN_JAVA.on(declaration, typeFqNames.joinToString(", ")))
     }
 
-    private class GraphBuilder(val typeConstructor: TypeConstructor) {
-        private val nodes: MutableSet<TypeParameterDescriptor> = hashSetOf()
-        private val edgeLists = hashMapOf<TypeParameterDescriptor, MutableList<TypeParameterDescriptor>>()
-        private val processedTypeConstructors = hashSetOf<TypeConstructor>()
+    private class GraphBuilder(konst typeConstructor: TypeConstructor) {
+        private konst nodes: MutableSet<TypeParameterDescriptor> = hashSetOf()
+        private konst edgeLists = hashMapOf<TypeParameterDescriptor, MutableList<TypeParameterDescriptor>>()
+        private konst processedTypeConstructors = hashSetOf<TypeConstructor>()
 
         fun build(): Graph<TypeParameterDescriptor> {
             buildGraph(typeConstructor)
 
             return object : Graph<TypeParameterDescriptor> {
-                override val nodes = this@GraphBuilder.nodes
+                override konst nodes = this@GraphBuilder.nodes
                 override fun getNeighbors(node: TypeParameterDescriptor) = edgeLists[node] ?: emptyList<TypeParameterDescriptor>()
             }
         }
@@ -80,10 +80,10 @@ object FiniteBoundRestrictionChecker {
 
         private fun buildGraph(typeConstructor: TypeConstructor) {
             typeConstructor.parameters.forEach { typeParameter ->
-                val boundClosure = boundClosure(typeParameter.upperBounds)
-                val constituentTypes = constituentTypes(boundClosure)
+                konst boundClosure = boundClosure(typeParameter.upperBounds)
+                konst constituentTypes = constituentTypes(boundClosure)
                 for (constituentType in constituentTypes) {
-                    val constituentTypeConstructor = constituentType.constructor
+                    konst constituentTypeConstructor = constituentType.constructor
                     if (constituentTypeConstructor !in processedTypeConstructors) {
                         processedTypeConstructors.add(constituentTypeConstructor)
                         buildGraph(constituentTypeConstructor)
@@ -103,16 +103,16 @@ object FiniteBoundRestrictionChecker {
     }
 
     private interface Graph<T> {
-        val nodes: Set<T>
+        konst nodes: Set<T>
         fun getNeighbors(node: T): List<T>
     }
 
     private fun <T> Graph<T>.isInCycle(from: T): Boolean {
         var result = false
 
-        val visited = object : DFS.VisitedWithSet<T>() {
+        konst visited = object : DFS.VisitedWithSet<T>() {
             override fun checkAndMarkVisited(current: T): Boolean {
-                val added = super.checkAndMarkVisited(current)
+                konst added = super.checkAndMarkVisited(current)
                 if (!added && current == from) {
                     result = true
                 }
@@ -121,11 +121,11 @@ object FiniteBoundRestrictionChecker {
 
         }
 
-        val handler = object : DFS.AbstractNodeHandler<T, Unit>() {
+        konst handler = object : DFS.AbstractNodeHandler<T, Unit>() {
             override fun result() {}
         }
 
-        val neighbors = object : DFS.Neighbors<T> {
+        konst neighbors = object : DFS.Neighbors<T> {
             override fun getNeighbors(current: T) = this@isInCycle.getNeighbors(current)
         }
 

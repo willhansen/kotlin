@@ -19,7 +19,7 @@ class A {
         A::class.java.getDeclaredMethods().first { it.name == name }
 
     fun test(): String {
-        val setter = getMethod("set")
+        konst setter = getMethod("set")
         try {
             setter.invoke(this, X(), null, null)
         } catch (e: Throwable) {
@@ -36,8 +36,8 @@ class A {
             }
         }
 
-        val getter = getMethod("get")
-        val s = try {
+        konst getter = getMethod("get")
+        konst s = try {
             getter.invoke(this, X(), null) as String
         } catch (e: Throwable) {
             return "Fail 4"

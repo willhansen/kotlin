@@ -4,7 +4,7 @@
 
 interface Expect<T>
 
-inline val <T> Expect<T>.and: Expect<T> get() = this
+inline konst <T> Expect<T>.and: Expect<T> get() = this
 infix fun <T> Expect<T>.and(assertionCreator: Expect<T>.() -> Unit): Expect<T> = this
 
 fun <K> id(x: K): K = x

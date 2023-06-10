@@ -24,16 +24,16 @@ class IdeCompilerArgumentsResolverTest {
 
     @Test
     fun `test - compilation and compile task resolve same arguments`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val kotlin = multiplatformExtension
+        konst kotlin = multiplatformExtension
         kotlin.linuxX64()
         kotlin.linuxArm64()
         kotlin.jvm()
         KotlinPluginLifecycle.Stage.ReadyForExecution.await()
 
         kotlin.targets.flatMap { it.compilations }.forEach { compilation ->
-            val compileTask = compilation.compileTaskProvider.get()
-            val byCompilation = project.kotlinIdeCompilerArgumentsResolver.resolveCompilerArguments(compilation)
-            val byCompileTask = project.kotlinIdeCompilerArgumentsResolver.resolveCompilerArguments(compileTask)
+            konst compileTask = compilation.compileTaskProvider.get()
+            konst byCompilation = project.kotlinIdeCompilerArgumentsResolver.resolveCompilerArguments(compilation)
+            konst byCompileTask = project.kotlinIdeCompilerArgumentsResolver.resolveCompilerArguments(compileTask)
 
             if (byCompilation.isNullOrEmpty()) fail("Failed resolving arguments for compilation $compilation")
             if (byCompileTask.isNullOrEmpty()) fail("Failed resolving arguments for compileTask: ${compileTask.path}")
@@ -46,17 +46,17 @@ class IdeCompilerArgumentsResolverTest {
 
     @Test
     fun `test - resolved arguments can be correctly parsed`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val kotlin = multiplatformExtension
+        konst kotlin = multiplatformExtension
         kotlin.linuxX64()
         kotlin.linuxArm64()
         kotlin.jvm()
         KotlinPluginLifecycle.Stage.ReadyForExecution.await()
 
         kotlin.targets.flatMap { it.compilations }.forEach { compilation ->
-            val argumentsList = project.kotlinIdeCompilerArgumentsResolver.resolveCompilerArguments(compilation)
+            konst argumentsList = project.kotlinIdeCompilerArgumentsResolver.resolveCompilerArguments(compilation)
                 ?: fail("Missing arguments for $compilation")
 
-            val parsedArguments = when (compilation.platformType) {
+            konst parsedArguments = when (compilation.platformType) {
                 KotlinPlatformType.common -> if (compilation is KotlinSharedNativeCompilation)
                     parseCommandLineArguments<K2NativeCompilerArguments>(argumentsList)
                 else parseCommandLineArguments<K2MetadataCompilerArguments>(argumentsList)
@@ -65,7 +65,7 @@ class IdeCompilerArgumentsResolverTest {
                 KotlinPlatformType.native -> parseCommandLineArguments<K2NativeCompilerArguments>(argumentsList)
             }
 
-            val parsedArgumentsList = parsedArguments.toArgumentStrings(shortArgumentKeys = true, compactArgumentValues = false)
+            konst parsedArgumentsList = parsedArguments.toArgumentStrings(shortArgumentKeys = true, compactArgumentValues = false)
             if (argumentsList != parsedArgumentsList) {
                 /* Mismatch might indicate that something was not correctly parsed */
                 fail("$compilation: Expected parsed arguments list to match origin arguments list")

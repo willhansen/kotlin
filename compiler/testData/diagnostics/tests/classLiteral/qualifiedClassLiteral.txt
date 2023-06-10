@@ -5,8 +5,8 @@ package test {
     package test.foo {
 
         package test.foo.bar {
-            public val k: kotlin.reflect.KClass<test.foo.bar.A>
-            public val l: kotlin.reflect.KClass<java.lang.Class<*>>
+            public konst k: kotlin.reflect.KClass<test.foo.bar.A>
+            public konst l: kotlin.reflect.KClass<java.lang.Class<*>>
 
             public final class A {
                 public constructor A()

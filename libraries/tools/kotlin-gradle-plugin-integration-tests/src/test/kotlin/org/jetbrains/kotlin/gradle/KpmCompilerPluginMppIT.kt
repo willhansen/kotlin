@@ -14,8 +14,8 @@ class KpmCompilerPluginMppIT : BaseGradleIT() {
     @Test
     @Ignore
     fun testTransientPluginOptions() = with(transformProjectWithPluginsDsl("kpmTransientPluginOptions")) {
-        val currentGradleVersion = chooseWrapperVersionOrFinishTest()
-        val options = defaultBuildOptions().suppressDeprecationWarningsSinceGradleVersion(
+        konst currentGradleVersion = chooseWrapperVersionOrFinishTest()
+        konst options = defaultBuildOptions().suppressDeprecationWarningsSinceGradleVersion(
             TestVersions.Gradle.G_7_4,
             currentGradleVersion,
             "Workaround for KT-55751"

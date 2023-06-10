@@ -2,7 +2,7 @@
 @kotlin.Metadata
 public final class A {
     // source: 'kt42879.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): A
     public static method constructor-impl(p0: int): int

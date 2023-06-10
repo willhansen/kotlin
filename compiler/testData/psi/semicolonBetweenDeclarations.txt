@@ -22,7 +22,7 @@ KtFile: semicolonBetweenDeclarations.kt
   PsiElement(SEMICOLON)(';')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')
     PsiWhiteSpace(' ')
@@ -47,7 +47,7 @@ KtFile: semicolonBetweenDeclarations.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -75,7 +75,7 @@ KtFile: semicolonBetweenDeclarations.kt
           PsiElement(SEMICOLON)(';')
           PsiWhiteSpace('\n        ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('x')
             PsiWhiteSpace(' ')
@@ -143,7 +143,7 @@ KtFile: semicolonBetweenDeclarations.kt
     PsiElement(SEMICOLON)(';')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiErrorElement:Expecting property name or receiver type
       <empty list>
     PsiElement(SEMICOLON)(';')
@@ -157,7 +157,7 @@ KtFile: semicolonBetweenDeclarations.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
         PsiElement(SEMICOLON)(';')

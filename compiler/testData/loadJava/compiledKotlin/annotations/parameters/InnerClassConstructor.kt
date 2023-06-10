@@ -1,10 +1,10 @@
 //ALLOW_AST_ACCESS
 package test
 
-annotation class A(val s: String)
+annotation class A(konst s: String)
 
 class Outer {
-    class Nested(@[A("nested")] val x: String)
+    class Nested(@[A("nested")] konst x: String)
 
-    inner class Inner(@[A("inner")] val y: String)
+    inner class Inner(@[A("inner")] konst y: String)
 }

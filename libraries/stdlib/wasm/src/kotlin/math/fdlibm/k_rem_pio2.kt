@@ -27,7 +27,7 @@
  * (2/pi) is represented by an array of 24-bit integers in ipio2[].
  *
  * Input parameters:
- * 	x[]	The input value (must be positive) is broken into nx 
+ * 	x[]	The input konstue (must be positive) is broken into nx 
  *		pieces of 24-bit integers in double precision format.
  *		x[i] will be the i-th 24 bit of x. The scaled exponent 
  *		of x[0] is given in input parameter e0 (i.e., x[0]*2^e0 
@@ -47,7 +47,7 @@
  *			53-bit  precision	2
  *			64-bit  precision	2
  *			113-bit precision	3
- *		The actual value is the sum of them. Thus for 113-bit
+ *		The actual konstue is the sum of them. Thus for 113-bit
  *		precison, one may have to do something like:
  *
  *		long double t,w,r_head, r_tail;
@@ -69,7 +69,7 @@
  *	ipio2[]
  *		integer array, contains the (24*i)-th to (24*i+23)-th 
  *		bit of 2/pi after binary point. The corresponding 
- *		floating value is
+ *		floating konstue is
  *
  *			ipio2[i] * 2^(-24(i+1)).
  *
@@ -80,7 +80,7 @@
  * Here is the description of some local variables:
  *
  * 	jk	jk+1 is the initial number of terms of ipio2[] needed
- *		in the computation. The recommended value is 2,3,4,
+ *		in the computation. The recommended konstue is 2,3,4,
  *		6 for single, double, extended,and quad.
  *
  * 	jz	local integer variable indicating the number of 
@@ -97,7 +97,7 @@
  *
  *	jp	jp+1 is the number of terms in PIo2[] needed, jp = jk.
  *
- * 	q[]	double array with integral value, representing the
+ * 	q[]	double array with integral konstue, representing the
  *		24-bits chunk of the product of x and 2/pi.
  *
  *	q0	the corresponding exponent of q[0]. Note that the
@@ -120,18 +120,18 @@
 
 /*
  * Constants:
- * The hexadecimal values are the intended ones for the following 
- * constants. The decimal values may be used, provided that the 
+ * The hexadecimal konstues are the intended ones for the following 
+ * constants. The decimal konstues may be used, provided that the 
  * compiler will convert from decimal to binary accurately enough 
- * to produce the hexadecimal values shown.
+ * to produce the hexadecimal konstues shown.
  */
 
 package kotlin.math.fdlibm
 
 import kotlin.wasm.internal.wasm_f64_floor as floor
 
-private val init_jk = intArrayOf(2, 3, 4, 6) /* initial value for jk */
-private val PIo2 = doubleArrayOf(
+private konst init_jk = intArrayOf(2, 3, 4, 6) /* initial konstue for jk */
+private konst PIo2 = doubleArrayOf(
     1.57079625129699707031e+00, /* 0x3FF921FB, 0x40000000 */
     7.54978941586159635335e-08, /* 0x3E74442D, 0x00000000 */
     5.39030252995776476554e-15, /* 0x3CF84698, Int.MIN_VALUE */
@@ -143,10 +143,10 @@ private val PIo2 = doubleArrayOf(
 )
 
 
-private const val zero = 0.0
-private const val one = 1.0
-private const val two24 = 1.67772160000000000000e+07 /* 0x41700000, 0x00000000 */
-private const val twon24 = 5.96046447753906250000e-08 /* 0x3E700000, 0x00000000 */
+private const konst zero = 0.0
+private const konst one = 1.0
+private const konst two24 = 1.67772160000000000000e+07 /* 0x41700000, 0x00000000 */
+private const konst twon24 = 5.96046447753906250000e-08 /* 0x3E700000, 0x00000000 */
 
 internal fun __kernel_rem_pio2(x: DoubleArray, y: DoubleArray, e0: Int, nx: Int, prec: Int, ipio2: IntArray): Int {
     var jz: Int
@@ -216,7 +216,7 @@ internal fun __kernel_rem_pio2(x: DoubleArray, y: DoubleArray, e0: Int, nx: Int,
         }
 
         /* compute n */
-        z = scalbn(z, q0)        /* actual value of z */
+        z = scalbn(z, q0)        /* actual konstue of z */
         z -= 8.0 * floor(z * 0.125)        /* trim off integer >= 8 */
         n = z.toInt()
         z -= n.toDouble()
@@ -312,7 +312,7 @@ internal fun __kernel_rem_pio2(x: DoubleArray, y: DoubleArray, e0: Int, nx: Int,
         } else iq[jz] = z.toInt()
     }
 
-    /* convert integer "bit" chunk to floating-point value */
+    /* convert integer "bit" chunk to floating-point konstue */
     fw = scalbn(one, q0)
     //for(i=jz;i>=0;i--) {
     i = jz

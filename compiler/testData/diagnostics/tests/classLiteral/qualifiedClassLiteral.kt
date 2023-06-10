@@ -3,6 +3,6 @@ package test.foo.bar
 
 class A
 
-val k = test.foo.bar.A::class
+konst k = test.foo.bar.A::class
 
-val l = java.lang.Class::class
+konst l = java.lang.Class::class

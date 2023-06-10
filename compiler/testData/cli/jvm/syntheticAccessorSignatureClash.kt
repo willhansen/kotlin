@@ -20,7 +20,7 @@ class Derived : Base() {
 
     private var baz = 1
 
-    private val boo = 1
+    private konst boo = 1
 
     private var bar1 = 1
         get
@@ -31,7 +31,7 @@ class Derived : Base() {
             foo()
             bar += 1
             baz += 1
-            val s = boo
+            konst s = boo
             bar1 += 1
         }
     }

@@ -6,7 +6,7 @@ operator fun KotlinSourceSet.invoke(builder: SourceSetHierarchyBuilder.() -> Uni
     return this
 }
 
-class SourceSetHierarchyBuilder(private val node: KotlinSourceSet) {
+class SourceSetHierarchyBuilder(private konst node: KotlinSourceSet) {
     operator fun KotlinSourceSet.unaryMinus() = this.dependsOn(node)
 }
 
@@ -16,7 +16,7 @@ plugins {
 
 kotlin {
 
-    val nativePlatform = when {
+    konst nativePlatform = when {
         isMac -> macosX64("nativePlatform")
         isLinux -> linuxX64("nativePlatform")
         isWindows -> mingwX64("nativePlatform")
@@ -25,9 +25,9 @@ kotlin {
 
     jvm()
 
-    val commonMain by sourceSets.getting
-    val jvmMain by sourceSets.getting
-    val nativePlatformMain by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst jvmMain by sourceSets.getting
+    konst nativePlatformMain by sourceSets.getting
 
     commonMain {
         -jvmMain
@@ -36,7 +36,7 @@ kotlin {
 
     tasks.register("listNativePlatformMainDependencies") {
         doLast {
-            val intransitiveMetadataConfigurationDependencies = project.configurations.findByName(
+            konst intransitiveMetadataConfigurationDependencies = project.configurations.findByName(
                 "nativePlatformMainIntransitiveDependenciesMetadata"
             )?.files.orEmpty()
 

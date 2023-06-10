@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.utils.keysToMapExceptNulls
 
 
 class DeprecationsPerUseSite(
-    val all: DeprecationInfo?,
-    val bySpecificSite: Map<AnnotationUseSiteTarget, DeprecationInfo>?
+    konst all: DeprecationInfo?,
+    konst bySpecificSite: Map<AnnotationUseSiteTarget, DeprecationInfo>?
 ) {
     fun forUseSite(vararg sites: AnnotationUseSiteTarget): DeprecationInfo? {
         if (bySpecificSite != null) {
@@ -72,7 +72,7 @@ class DeprecationsPerUseSite(
             if (perUseSite.isEmpty()) return EmptyDeprecationsPerUseSite
 
             @Suppress("UNCHECKED_CAST")
-            val specificCallSite = perUseSite.filterKeys { it != null } as Map<AnnotationUseSiteTarget, DeprecationInfo>
+            konst specificCallSite = perUseSite.filterKeys { it != null } as Map<AnnotationUseSiteTarget, DeprecationInfo>
             return DeprecationsPerUseSite(
                 perUseSite[null],
                 specificCallSite.takeIf { it.isNotEmpty() }
@@ -82,4 +82,4 @@ class DeprecationsPerUseSite(
 
 }
 
-val EmptyDeprecationsPerUseSite = DeprecationsPerUseSite(null, null)
+konst EmptyDeprecationsPerUseSite = DeprecationsPerUseSite(null, null)

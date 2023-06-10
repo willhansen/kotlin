@@ -8,13 +8,13 @@ package kotlin.reflect.jvm.internal.calls
 import java.lang.reflect.Type
 
 internal object ThrowingCaller : Caller<Nothing?> {
-    override val member: Nothing?
+    override konst member: Nothing?
         get() = null
 
-    override val parameterTypes: List<Type>
+    override konst parameterTypes: List<Type>
         get() = emptyList()
 
-    override val returnType: Type
+    override konst returnType: Type
         get() = Void.TYPE
 
     override fun call(args: Array<*>): Any? {

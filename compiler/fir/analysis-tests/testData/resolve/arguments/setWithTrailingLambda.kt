@@ -5,7 +5,7 @@ fun test(m: MyMap<EditorData, Any>) {
     m[SomeKey] = { _, _ -> }
 }
 
-data class EditorData(val meta: MyMap<EditorData, Any>)
+data class EditorData(konst meta: MyMap<EditorData, Any>)
 
 interface MyMap<Domain, V : Any> {
     operator fun <T : V> set(k: Key<T, Domain>, v: T)

@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
 // Replaces IrExpressionBody with IrBlockBody returning this expression.
 // Taken from kotlin/native ReturnsInsertionLowering.kt
 
-class ExpressionBodyTransformer(val context: CommonBackendContext) : FileLoweringPass {
+class ExpressionBodyTransformer(konst context: CommonBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.acceptVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
@@ -30,7 +30,7 @@ class ExpressionBodyTransformer(val context: CommonBackendContext) : FileLowerin
                 declaration.acceptChildrenVoid(this)
 
                 context.createIrBuilder(declaration.symbol, declaration.endOffset, declaration.endOffset).run {
-                    val body = declaration.body
+                    konst body = declaration.body
                     if (body is IrExpressionBody)
                         declaration.body = context.irFactory.createBlockBody(body.startOffset, body.endOffset) {
                             statements += irReturn(body.expression)

@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.codeMetaInfo.model
 import org.jetbrains.kotlin.codeMetaInfo.renderConfigurations.ParsedCodeMetaInfoRenderConfiguration
 
 class ParsedCodeMetaInfo(
-    override val start: Int,
-    override val end: Int,
-    override val attributes: MutableList<String>,
-    override val tag: String,
-    val description: String?
+    override konst start: Int,
+    override konst end: Int,
+    override konst attributes: MutableList<String>,
+    override konst tag: String,
+    konst description: String?
 ) : CodeMetaInfo {
-    override val renderConfiguration = ParsedCodeMetaInfoRenderConfiguration
+    override konst renderConfiguration = ParsedCodeMetaInfoRenderConfiguration
 
     override fun asString(): String = renderConfiguration.asString(this)
 

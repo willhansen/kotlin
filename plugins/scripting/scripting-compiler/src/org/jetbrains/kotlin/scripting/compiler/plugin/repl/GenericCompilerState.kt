@@ -14,12 +14,12 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.write
 import kotlin.script.experimental.dependencies.ScriptDependencies
 
-class ReplCompilerStageHistory(private val state: GenericReplCompilerState) : BasicReplStageHistory<ScriptDescriptor>(state.lock) {
+class ReplCompilerStageHistory(private konst state: GenericReplCompilerState) : BasicReplStageHistory<ScriptDescriptor>(state.lock) {
 
     override fun reset(): Iterable<ILineId> {
         lock.write {
-            val removedCompiledLines = super.reset()
-            val removedAnalyzedLines = state.analyzerEngine.reset()
+            konst removedCompiledLines = super.reset()
+            konst removedAnalyzedLines = state.analyzerEngine.reset()
 
             checkConsistent(removedCompiledLines, removedAnalyzedLines)
             return removedCompiledLines
@@ -28,8 +28,8 @@ class ReplCompilerStageHistory(private val state: GenericReplCompilerState) : Ba
 
     override fun resetTo(id: ILineId): Iterable<ILineId> {
         lock.write {
-            val removedCompiledLines = super.resetTo(id)
-            val removedAnalyzedLines = state.analyzerEngine.resetToLine(id)
+            konst removedCompiledLines = super.resetTo(id)
+            konst removedAnalyzedLines = state.analyzerEngine.resetToLine(id)
 
             checkConsistent(removedCompiledLines, removedAnalyzedLines)
             return removedCompiledLines
@@ -48,24 +48,24 @@ class ReplCompilerStageHistory(private val state: GenericReplCompilerState) : Ba
 
 abstract class GenericReplCheckerState : IReplStageState<ScriptDescriptor> {
 
-    // "line" - is the unit of evaluation here, could in fact consists of several character lines
+    // "line" - is the unit of ekonstuation here, could in fact consists of several character lines
     class LineState(
-        val codeLine: ReplCodeLine,
-        val psiFile: KtFile,
-        val errorHolder: DiagnosticMessageHolder
+        konst codeLine: ReplCodeLine,
+        konst psiFile: KtFile,
+        konst errorHolder: DiagnosticMessageHolder
     )
 
     var lastLineState: LineState? = null // for transferring state to the compiler in most typical case
 }
 
-class GenericReplCompilerState(environment: KotlinCoreEnvironment, override val lock: ReentrantReadWriteLock = ReentrantReadWriteLock()) :
+class GenericReplCompilerState(environment: KotlinCoreEnvironment, override konst lock: ReentrantReadWriteLock = ReentrantReadWriteLock()) :
     IReplStageState<ScriptDescriptor>, GenericReplCheckerState() {
 
-    override val history = ReplCompilerStageHistory(this)
+    override konst history = ReplCompilerStageHistory(this)
 
-    override val currentGeneration: Int get() = (history as BasicReplStageHistory<*>).currentGeneration.get()
+    override konst currentGeneration: Int get() = (history as BasicReplStageHistory<*>).currentGeneration.get()
 
-    val analyzerEngine = ReplCodeAnalyzerBase(environment)
+    konst analyzerEngine = ReplCodeAnalyzerBase(environment)
 
     var lastDependencies: ScriptDependencies? = null
 }

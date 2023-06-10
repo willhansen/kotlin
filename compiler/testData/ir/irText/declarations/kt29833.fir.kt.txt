@@ -7,11 +7,11 @@ object Definitions {
 
   }
 
-  const val KT_CONSTANT: String
+  const konst KT_CONSTANT: String
     field = "constant"
     get
 
-  val ktValue: String
+  konst ktValue: String
     field = #CONSTANT
     get
 

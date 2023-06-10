@@ -16,8 +16,8 @@ internal annotation class ExcludedFromCodegen
 @Target(CLASS)
 @Retention(AnnotationRetention.BINARY)
 internal annotation class WasmArrayOf(
-    val type: KClass<*>,
-    val isNullable: Boolean,
+    konst type: KClass<*>,
+    konst isNullable: Boolean,
 )
 
 // When applied to a function it forces codegen to not generate any code for it.
@@ -28,7 +28,7 @@ internal annotation class WasmArrayOf(
 internal annotation class WasmNoOpCast
 
 // This tells backend to insert box/unbox intrinsics around the annotated class. It's used to represent built-in types without making them
-// explicitly "inline" (or "value" in the newest terminology).
+// explicitly "inline" (or "konstue" in the newest terminology).
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
 internal annotation class WasmAutoboxed
@@ -47,7 +47,7 @@ internal annotation class WasmAutoboxed
  */
 
 @ExcludedFromCodegen
-internal val implementedAsIntrinsic: Nothing
+internal konst implementedAsIntrinsic: Nothing
     get() = null!!
 
 /**

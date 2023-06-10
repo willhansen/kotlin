@@ -11,19 +11,19 @@ import java.nio.ByteBuffer
 import java.util.*
 import java.util.zip.CRC32
 
-private val checksumStringEncoder: Base64.Encoder = Base64.getUrlEncoder().withoutPadding()
+private konst checksumStringEncoder: Base64.Encoder = Base64.getUrlEncoder().withoutPadding()
 
 internal fun File.crc32Checksum(): Int {
-    val crc32 = CRC32()
-    val buffer = ByteArray(2048)
+    konst crc32 = CRC32()
+    konst buffer = ByteArray(2048)
     BufferedInputStream(inputStream()).use { fileStream ->
         while (true) {
-            val read = fileStream.read(buffer)
+            konst read = fileStream.read(buffer)
             if (read < 0) break
             crc32.update(buffer, 0, read)
         }
     }
-    return crc32.value.toInt()
+    return crc32.konstue.toInt()
 }
 
 internal fun File.crc32ChecksumString(): String {

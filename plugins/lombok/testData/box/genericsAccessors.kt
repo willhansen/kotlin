@@ -13,7 +13,7 @@ public class GenericsTest<A, B> {
     @Setter private Map<A, B> fieldC;
 
     static void test() {
-        val obj = new GenericsTest<String, Boolean>();
+        konst obj = new GenericsTest<String, Boolean>();
         int age = obj.getAge();
         String a = obj.getFieldA();
         obj.setFieldA("fooo");
@@ -27,11 +27,11 @@ public class GenericsTest<A, B> {
 // FILE: test.kt
 
 fun box(): String {
-    val obj = GenericsTest<String, Boolean>()
-    val age: Int = obj.getAge();
+    konst obj = GenericsTest<String, Boolean>()
+    konst age: Int = obj.getAge();
     obj.setFieldA("fooo");
-    val a: String = obj.getFieldA();
-    val b: Boolean? = obj.getFieldB();
+    konst a: String = obj.getFieldA();
+    konst b: Boolean? = obj.getFieldB();
     obj.setFieldC(java.util.HashMap<String, Boolean>());
     return "OK"
 }

@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt<T: Int>(val u: T) {
+konstue class UInt<T: Int>(konst u: T) {
     override fun toString(): String {
         return "UInt: $u"
     }
@@ -33,7 +33,7 @@ fun bar(x: UInt<Int>?): String {
 }
 
 fun box(): String {
-    val u = UInt(12)
+    konst u = UInt(12)
     if (!u.isUInt()) return "fail"
     if (u.notIsUInt()) return "fail"
 
@@ -44,10 +44,10 @@ fun box(): String {
     if (!u.instanceOf<UInt<Int>>()) return "fail"
     if (1.instanceOf<UInt<Int>>()) return "fail"
 
-    val nullableUInt: UInt<Int>? = UInt(10)
+    konst nullableUInt: UInt<Int>? = UInt(10)
     if (!nullableUInt.instanceOf<UInt<Int>>()) return "fail"
 
-    val nullAsUInt: UInt<Int>? = null
+    konst nullAsUInt: UInt<Int>? = null
     if (nullAsUInt.instanceOf<UInt<Int>>()) return "fail"
     if (!nullAsUInt.instanceOf<UInt<Int>?>()) return "fail"
 

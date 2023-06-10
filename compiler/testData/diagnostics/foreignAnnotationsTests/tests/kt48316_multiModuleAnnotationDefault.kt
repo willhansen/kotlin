@@ -23,7 +23,7 @@ package lib;
 package lib;
 
 public @interface A {
-    Class value() default String.class;
+    Class konstue() default String.class;
 }
 
 // FILE: test.kt

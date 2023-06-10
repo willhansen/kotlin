@@ -3,10 +3,10 @@ fun resolve<caret>Me() {
     withGetterAndSetter = 123
 }
 
-fun receive(value: Int) {}
+fun receive(konstue: Int) {}
 
 var withGetterAndSetter: Int = 42
     get() = field
-    set(value) {
-        field = value
+    set(konstue) {
+        field = konstue
     }

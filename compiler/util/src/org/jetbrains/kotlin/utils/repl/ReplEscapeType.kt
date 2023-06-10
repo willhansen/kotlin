@@ -32,9 +32,9 @@ enum class ReplEscapeType {
     SUCCESS;
 
     companion object {
-        fun valueOfOrNull(string: String): ReplEscapeType? {
+        fun konstueOfOrNull(string: String): ReplEscapeType? {
             return try {
-                valueOf(string)
+                konstueOf(string)
             }
             catch (e: IllegalArgumentException) {
                 null

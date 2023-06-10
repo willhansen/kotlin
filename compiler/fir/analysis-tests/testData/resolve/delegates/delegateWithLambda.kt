@@ -1,7 +1,7 @@
 import kotlin.reflect.KProperty
 
-class LazyDelegate<T>(val value: T) {
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = value
+class LazyDelegate<T>(konst konstue: T) {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = konstue
 }
 
 fun <T> lazy(block: () -> T): LazyDelegate<T> = LazyDelegate(block())
@@ -11,7 +11,7 @@ fun getAny(): Any? = null
 fun <Q> materialize(): Q = null!!
 
 class Test {
-    val x: String by lazy {
+    konst x: String by lazy {
         materialize()
     }
 }

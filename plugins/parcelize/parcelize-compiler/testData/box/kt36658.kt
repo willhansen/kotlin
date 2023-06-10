@@ -15,7 +15,7 @@ private object MyObject : Parcelable
 fun box() = parcelTest { parcel ->
     MyObject.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 

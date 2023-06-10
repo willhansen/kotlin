@@ -13,33 +13,33 @@ import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.fir.types.*
 
 class PrimitiveConeNumericComparisonInfo(
-    val comparisonType: ConeClassLikeType,
-    val leftType: ConeClassLikeType,
-    val rightType: ConeClassLikeType
+    konst comparisonType: ConeClassLikeType,
+    konst leftType: ConeClassLikeType,
+    konst rightType: ConeClassLikeType
 )
 
-val FirComparisonExpression.left: FirExpression
+konst FirComparisonExpression.left: FirExpression
     get() = compareToCall.explicitReceiver ?: error("There should be an explicit receiver for ${compareToCall.render()}")
 
-val FirComparisonExpression.right: FirExpression
+konst FirComparisonExpression.right: FirExpression
     get() = compareToCall.arguments.getOrNull(0) ?: error("There should be a first arg for ${compareToCall.render()}")
 
 fun FirComparisonExpression.inferPrimitiveNumericComparisonInfo(): PrimitiveConeNumericComparisonInfo? =
     inferPrimitiveNumericComparisonInfo(left, right)
 
 fun inferPrimitiveNumericComparisonInfo(left: FirExpression, right: FirExpression): PrimitiveConeNumericComparisonInfo? {
-    val leftType = left.typeRef.coneType
-    val rightType = right.typeRef.coneType
-    val leftPrimitiveOrNullableType = leftType.getPrimitiveTypeOrSupertype() ?: return null
-    val rightPrimitiveOrNullableType = rightType.getPrimitiveTypeOrSupertype() ?: return null
-    val leastCommonType = leastCommonPrimitiveNumericType(leftPrimitiveOrNullableType, rightPrimitiveOrNullableType)
+    konst leftType = left.typeRef.coneType
+    konst rightType = right.typeRef.coneType
+    konst leftPrimitiveOrNullableType = leftType.getPrimitiveTypeOrSupertype() ?: return null
+    konst rightPrimitiveOrNullableType = rightType.getPrimitiveTypeOrSupertype() ?: return null
+    konst leastCommonType = leastCommonPrimitiveNumericType(leftPrimitiveOrNullableType, rightPrimitiveOrNullableType)
 
     return PrimitiveConeNumericComparisonInfo(leastCommonType, leftPrimitiveOrNullableType, rightPrimitiveOrNullableType)
 }
 
 private fun leastCommonPrimitiveNumericType(t1: ConeClassLikeType, t2: ConeClassLikeType): ConeClassLikeType {
-    val pt1 = t1.promoteIntegerTypeToIntIfRequired()
-    val pt2 = t2.promoteIntegerTypeToIntIfRequired()
+    konst pt1 = t1.promoteIntegerTypeToIntIfRequired()
+    konst pt2 = t2.promoteIntegerTypeToIntIfRequired()
 
     return when {
         pt1.isDouble() || pt2.isDouble() -> StandardTypes.Double

@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 class SomethingInTest {
     @Test
     fun someTestInSharediOS() {
-        val callingComm = NSArgumentDomain
+        konst callingComm = NSArgumentDomain
         println(callingComm)
         assertEquals(42, 42)
     }

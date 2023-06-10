@@ -1,2 +1,2 @@
 Resolved to:
-0: (in A) val aa: A?
+0: (in A) konst aa: A?

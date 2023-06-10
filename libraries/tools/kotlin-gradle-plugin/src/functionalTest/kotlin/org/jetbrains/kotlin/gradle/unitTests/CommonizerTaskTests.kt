@@ -17,11 +17,11 @@ import kotlin.test.assertNull
 
 class CommonizerTaskTests {
 
-    private val rootProject = ProjectBuilder.builder().build() as ProjectInternal
-    private val subproject = ProjectBuilder.builder().withName("subproject").withParent(rootProject).build() as ProjectInternal
+    private konst rootProject = ProjectBuilder.builder().build() as ProjectInternal
+    private konst subproject = ProjectBuilder.builder().withName("subproject").withParent(rootProject).build() as ProjectInternal
 
     companion object {
-        const val JVM_ECOSYSTEM_PLUGIN_ID = "jvm-ecosystem"
+        const konst JVM_ECOSYSTEM_PLUGIN_ID = "jvm-ecosystem"
     }
 
     init {
@@ -37,8 +37,8 @@ class CommonizerTaskTests {
         rootProject.enableCInteropCommonization()
         subproject.enableCInteropCommonization()
 
-        rootProject.evaluate()
-        subproject.evaluate()
+        rootProject.ekonstuate()
+        subproject.ekonstuate()
     }
 
     @Test
@@ -56,11 +56,11 @@ class CommonizerTaskTests {
 
     @Test
     fun `test commonizeNativeDistributionTask`() {
-        val commonizeNativeDistributionTaskName = "commonizeNativeDistribution"
+        konst commonizeNativeDistributionTaskName = "commonizeNativeDistribution"
         subproject.assertContainsNoTaskWithName(commonizeNativeDistributionTaskName)
 
         /* Native Distribution Commonization is only done on the root project */
-        val rootProjectCommonizeNativeDistributionTask = rootProject.assertContainsTaskWithName(commonizeNativeDistributionTaskName)
+        konst rootProjectCommonizeNativeDistributionTask = rootProject.assertContainsTaskWithName(commonizeNativeDistributionTaskName)
         rootProject.tasks.getByName("commonize").assertDependsOn(rootProjectCommonizeNativeDistributionTask)
         subproject.tasks.getByName("commonize").assertDependsOn(rootProjectCommonizeNativeDistributionTask)
     }
@@ -72,58 +72,58 @@ class CommonizerTaskTests {
      */
     @Test
     fun `test commonizeNativeDistributionTask applied jvm-ecosystem plugin`() {
-        val rootProject = ProjectBuilder.builder().build() as ProjectInternal
-        val subproject = ProjectBuilder.builder().withParent(rootProject).build() as ProjectInternal
+        konst rootProject = ProjectBuilder.builder().build() as ProjectInternal
+        konst subproject = ProjectBuilder.builder().withParent(rootProject).build() as ProjectInternal
 
-        val jvmEcosystemPluginId = "jvm-ecosystem"
+        konst jvmEcosystemPluginId = "jvm-ecosystem"
         assertNull(rootProject.plugins.findPlugin(jvmEcosystemPluginId))
 
-        val kotlin = subproject.applyMultiplatformPlugin()
+        konst kotlin = subproject.applyMultiplatformPlugin()
         assertNull(rootProject.plugins.findPlugin(jvmEcosystemPluginId))
 
         kotlin.linuxArm64()
         kotlin.linuxX64()
 
-        rootProject.evaluate()
-        subproject.evaluate()
+        rootProject.ekonstuate()
+        subproject.ekonstuate()
 
         assertNotNull(rootProject.plugins.findPlugin(jvmEcosystemPluginId))
     }
 
     @Test
     fun `test commonizeNativeDistributionTask applied jvm-ecosystem plugin - jvm-ecosystem plugin is already applied`() {
-        val rootProject = ProjectBuilder.builder().build() as ProjectInternal
-        val subproject = ProjectBuilder.builder().withParent(rootProject).build() as ProjectInternal
+        konst rootProject = ProjectBuilder.builder().build() as ProjectInternal
+        konst subproject = ProjectBuilder.builder().withParent(rootProject).build() as ProjectInternal
 
         rootProject.plugins.apply(JVM_ECOSYSTEM_PLUGIN_ID)
         assertNotNull(rootProject.plugins.findPlugin(JVM_ECOSYSTEM_PLUGIN_ID))
 
-        val kotlin = subproject.applyMultiplatformPlugin()
+        konst kotlin = subproject.applyMultiplatformPlugin()
 
         kotlin.linuxArm64()
         kotlin.linuxX64()
 
-        rootProject.evaluate()
-        subproject.evaluate()
+        rootProject.ekonstuate()
+        subproject.ekonstuate()
 
         assertNotNull(rootProject.plugins.findPlugin(JVM_ECOSYSTEM_PLUGIN_ID))
     }
 
     @Test
     fun `test commonizeNativeDistributionTask applied jvm-ecosystem plugin - java plugin is already applied`() {
-        val rootProject = ProjectBuilder.builder().build() as ProjectInternal
-        val subproject = ProjectBuilder.builder().withParent(rootProject).build() as ProjectInternal
+        konst rootProject = ProjectBuilder.builder().build() as ProjectInternal
+        konst subproject = ProjectBuilder.builder().withParent(rootProject).build() as ProjectInternal
 
         rootProject.plugins.apply("java")
         assertNotNull(rootProject.plugins.findPlugin(JVM_ECOSYSTEM_PLUGIN_ID))
 
-        val kotlin = subproject.applyMultiplatformPlugin()
+        konst kotlin = subproject.applyMultiplatformPlugin()
 
         kotlin.linuxArm64()
         kotlin.linuxX64()
 
-        rootProject.evaluate()
-        subproject.evaluate()
+        rootProject.ekonstuate()
+        subproject.ekonstuate()
 
         assertNotNull(rootProject.plugins.findPlugin(JVM_ECOSYSTEM_PLUGIN_ID))
     }
@@ -131,8 +131,8 @@ class CommonizerTaskTests {
 
     @Test
     fun `test commonizeCInteropTask`() {
-        val commonizeCInteropTaskName = "commonizeCInterop"
-        val commonizeCInteropTask = subproject.assertContainsTaskWithName(commonizeCInteropTaskName)
+        konst commonizeCInteropTaskName = "commonizeCInterop"
+        konst commonizeCInteropTask = subproject.assertContainsTaskWithName(commonizeCInteropTaskName)
         subproject.tasks.getByName("commonize").assertDependsOn(commonizeCInteropTask)
         rootProject.assertContainsNoTaskWithName(commonizeCInteropTaskName)
     }

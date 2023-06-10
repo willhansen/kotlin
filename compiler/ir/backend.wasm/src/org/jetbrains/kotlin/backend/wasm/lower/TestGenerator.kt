@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 
 fun generateWasmTests(context: WasmBackendContext, moduleFragment: IrModuleFragment) {
-    val generator = TestGenerator(context, true)
+    konst generator = TestGenerator(context, true)
 
     moduleFragment.files.toList().forEach {
         generator.lower(it)
@@ -23,8 +23,8 @@ fun generateWasmTests(context: WasmBackendContext, moduleFragment: IrModuleFragm
         return
     require(context.wasmSymbols.startUnitTests != null) { "kotlin.test package must be present" }
 
-    val builder = context.createIrBuilder(context.wasmSymbols.startUnitTests)
-    val startFunctionBody = context.wasmSymbols.startUnitTests.owner.body as IrBlockBody
+    konst builder = context.createIrBuilder(context.wasmSymbols.startUnitTests)
+    konst startFunctionBody = context.wasmSymbols.startUnitTests.owner.body as IrBlockBody
 
     context.testEntryPoints.forEach { testEntry ->
         startFunctionBody.statements.add(

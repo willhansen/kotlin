@@ -3,7 +3,7 @@
 // TARGET_BACKEND: JVM
 
 fun box(): String {
-    val s: String? = null
+    konst s: String? = null
     try {
         s!!
         return "Fail: KNPE should have been thrown"

@@ -11,9 +11,9 @@ import java.io.IOException
 import kotlin.io.path.*
 
 object GeneratorsFileUtil {
-    val isTeamCityBuild: Boolean = System.getenv("TEAMCITY_VERSION") != null
+    konst isTeamCityBuild: Boolean = System.getenv("TEAMCITY_VERSION") != null
 
-    val GENERATED_MESSAGE = """
+    konst GENERATED_MESSAGE = """
     /*
      * This file was generated automatically
      * DO NOT MODIFY IT MANUALLY
@@ -25,7 +25,7 @@ object GeneratorsFileUtil {
     @JvmOverloads
     @Throws(IOException::class)
     fun writeFileIfContentChanged(file: File, newText: String, logNotChanged: Boolean = true, forbidGenerationOnTeamcity: Boolean = true) {
-        val parentFile = file.parentFile
+        konst parentFile = file.parentFile
         if (!parentFile.exists()) {
             if (forbidGenerationOnTeamcity) {
                 if (failOnTeamCity("Create dir `${parentFile.path}`")) return
@@ -45,9 +45,9 @@ object GeneratorsFileUtil {
         if (forbidGenerationOnTeamcity) {
             if (failOnTeamCity("Write file `${file.toPath()}`")) return
         }
-        val useTempFile = !SystemInfo.isWindows
-        val targetFile = file.toPath()
-        val tempFile =
+        konst useTempFile = !SystemInfo.isWindows
+        konst targetFile = file.toPath()
+        konst tempFile =
             if (useTempFile) createTempDirectory(targetFile.name) / "${targetFile.name}.tmp" else targetFile
         tempFile.writeText(newText, Charsets.UTF_8)
         println("File written: ${tempFile.toAbsolutePath()}")
@@ -77,7 +77,7 @@ object GeneratorsFileUtil {
             }
         }.toString()
 
-        val fullMessage = "[Re-generation needed!] $message\n" +
+        konst fullMessage = "[Re-generation needed!] $message\n" +
                 "Run correspondent (check the log above) Gradle task locally and commit changes."
 
         println("##teamcity[buildProblem description='${fullMessage.escapeForTC()}']")
@@ -85,7 +85,7 @@ object GeneratorsFileUtil {
     }
 
     fun isFileContentChangedIgnoringLineSeparators(file: File, content: String): Boolean {
-        val currentContent: String = try {
+        konst currentContent: String = try {
             StringUtil.convertLineSeparators(file.readText(Charsets.UTF_8))
         } catch (ignored: Throwable) {
             return true
@@ -100,7 +100,7 @@ object GeneratorsFileUtil {
     }
 
     fun removeExtraFilesFromPreviousGeneration(previouslyGeneratedFiles: List<File>, generatedFiles: List<File>) {
-        val generatedFilesPath = generatedFiles.mapTo(mutableSetOf()) { it.absolutePath }
+        konst generatedFilesPath = generatedFiles.mapTo(mutableSetOf()) { it.absolutePath }
 
         for (file in previouslyGeneratedFiles) {
             if (file.absolutePath !in generatedFilesPath) {

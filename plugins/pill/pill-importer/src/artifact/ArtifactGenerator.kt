@@ -14,27 +14,27 @@ import org.jetbrains.kotlin.pill.model.PLibrary
 import org.jetbrains.kotlin.pill.util.ProjectContext
 import java.io.File
 
-class ArtifactGenerator(private val dependencyMapper: ArtifactDependencyMapper) {
+class ArtifactGenerator(private konst dependencyMapper: ArtifactDependencyMapper) {
     fun generateKotlinPluginArtifact(rootProject: Project): PFile {
-        val root = ArtifactElement.Root()
+        konst root = ArtifactElement.Root()
 
         fun Project.getProject(name: String) = findProject(name) ?: error("Cannot find project $name")
 
-        val prepareIdeaPluginProject = rootProject.getProject(":prepare:idea-plugin")
+        konst prepareIdeaPluginProject = rootProject.getProject(":prepare:idea-plugin")
 
         root.add(ArtifactElement.Directory("kotlinc").apply {
-            val kotlincDirectory = rootProject.extra["distKotlinHomeDir"].toString()
+            konst kotlincDirectory = rootProject.extra["distKotlinHomeDir"].toString()
             add(ArtifactElement.DirectoryCopy(File(kotlincDirectory)))
         })
 
         root.add(ArtifactElement.Directory("lib").apply {
-            val librariesConfiguration = prepareIdeaPluginProject.configurations.getByName("libraries")
+            konst librariesConfiguration = prepareIdeaPluginProject.configurations.getByName("libraries")
             add(getArtifactElements(librariesConfiguration, false))
 
             add(ArtifactElement.Directory("jps").apply {
-                val prepareJpsPluginProject = rootProject.getProject(":kotlin-jps-plugin")
+                konst prepareJpsPluginProject = rootProject.getProject(":kotlin-jps-plugin")
                 add(ArtifactElement.Archive(prepareJpsPluginProject.name + ".jar").apply {
-                    val jpsPluginConfiguration = prepareJpsPluginProject.configurations.getByName(EMBEDDED_CONFIGURATION_NAME)
+                    konst jpsPluginConfiguration = prepareJpsPluginProject.configurations.getByName(EMBEDDED_CONFIGURATION_NAME)
                     add(getArtifactElements(jpsPluginConfiguration, true))
                 })
             })
@@ -42,12 +42,12 @@ class ArtifactGenerator(private val dependencyMapper: ArtifactDependencyMapper) 
             add(ArtifactElement.Archive("kotlin-plugin.jar").apply {
                 add(ArtifactElement.FileCopy(File(rootProject.projectDir, "resources/kotlinManifest.properties")))
 
-                val embeddedConfiguration = prepareIdeaPluginProject.configurations.getByName(EMBEDDED_CONFIGURATION_NAME)
+                konst embeddedConfiguration = prepareIdeaPluginProject.configurations.getByName(EMBEDDED_CONFIGURATION_NAME)
                 add(getArtifactElements(embeddedConfiguration, true))
             })
         })
 
-        val artifact = PArtifact("KotlinPlugin", File(rootProject.projectDir, "out/artifacts/Kotlin"), root)
+        konst artifact = PArtifact("KotlinPlugin", File(rootProject.projectDir, "out/artifacts/Kotlin"), root)
         return PFile(
             File(rootProject.projectDir, ".idea/artifacts/${artifact.artifactName}.xml"),
             artifact.render(ProjectContext(rootProject))
@@ -55,12 +55,12 @@ class ArtifactGenerator(private val dependencyMapper: ArtifactDependencyMapper) 
     }
 
     private fun getArtifactElements(configuration: Configuration, extractDependencies: Boolean): List<ArtifactElement> {
-        val artifacts = mutableListOf<ArtifactElement>()
+        konst artifacts = mutableListOf<ArtifactElement>()
 
         fun process(dependency: PDependency) {
             when (dependency) {
                 is PDependency.Module -> {
-                    val moduleOutput = ArtifactElement.ModuleOutput(dependency.name)
+                    konst moduleOutput = ArtifactElement.ModuleOutput(dependency.name)
 
                     if (extractDependencies) {
                         artifacts += moduleOutput
@@ -72,7 +72,7 @@ class ArtifactGenerator(private val dependencyMapper: ArtifactDependencyMapper) 
                 }
                 is PDependency.Library -> artifacts += ArtifactElement.ProjectLibrary(dependency.name)
                 is PDependency.ModuleLibrary -> {
-                    val files = dependency.library.classes
+                    konst files = dependency.library.classes
                     if (extractDependencies) {
                         files.mapTo(artifacts) { ArtifactElement.ExtractedDirectory(it) }
                     } else {
@@ -87,9 +87,9 @@ class ArtifactGenerator(private val dependencyMapper: ArtifactDependencyMapper) 
     }
 
     private fun parseDependencies(configuration: Configuration): List<PDependency> {
-        val dependencies = mutableListOf<PDependency>()
+        konst dependencies = mutableListOf<PDependency>()
         for (file in configuration.resolve()) {
-            val library = PLibrary(file.name, listOf(file))
+            konst library = PLibrary(file.name, listOf(file))
             dependencies += dependencyMapper.map(PDependency.ModuleLibrary(library))
         }
         return dependencies

@@ -11,9 +11,9 @@ public open class JavaClass {
     @kotlin.Deprecated(message = "Deprecated in Java") public open fun getSomething4(): kotlin.Int
     @kotlin.Deprecated(message = "Deprecated in Java") public open fun getSomething5(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public open fun setSomething2(/*0*/ value: kotlin.Int): kotlin.Unit
-    @kotlin.Deprecated(message = "Deprecated in Java") public open fun setSomething3(/*0*/ value: kotlin.Int): kotlin.Unit
-    @kotlin.Deprecated(message = "Deprecated in Java") public open fun setSomething4(/*0*/ value: kotlin.Int): kotlin.Unit
-    @kotlin.Deprecated(message = "Deprecated in Java") public open fun setSomething5(/*0*/ value: kotlin.Int): kotlin.Unit
+    public open fun setSomething2(/*0*/ konstue: kotlin.Int): kotlin.Unit
+    @kotlin.Deprecated(message = "Deprecated in Java") public open fun setSomething3(/*0*/ konstue: kotlin.Int): kotlin.Unit
+    @kotlin.Deprecated(message = "Deprecated in Java") public open fun setSomething4(/*0*/ konstue: kotlin.Int): kotlin.Unit
+    @kotlin.Deprecated(message = "Deprecated in Java") public open fun setSomething5(/*0*/ konstue: kotlin.Int): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }

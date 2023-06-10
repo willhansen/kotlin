@@ -16,11 +16,11 @@ import com.intellij.psi.tree.IElementType
 import com.intellij.util.diff.FlyweightCapableTreeStructure
 
 sealed class KtSourceElementKind {
-    abstract val shouldSkipErrorTypeReporting: Boolean
+    abstract konst shouldSkipErrorTypeReporting: Boolean
 }
 
 object KtRealSourceElementKind : KtSourceElementKind() {
-    override val shouldSkipErrorTypeReporting: Boolean
+    override konst shouldSkipErrorTypeReporting: Boolean
         get() = false
 }
 
@@ -32,7 +32,7 @@ object KtRealSourceElementKind : KtSourceElementKind() {
  *
  * And vice versa, KtRealSourceElementKind means that there's a single FIR node in the resulting tree that has the same source element.
  */
-sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeReporting: Boolean = false) : KtSourceElementKind() {
+sealed class KtFakeSourceElementKind(final override konst shouldSkipErrorTypeReporting: Boolean = false) : KtSourceElementKind() {
     // for some fir expression implicit return typeRef is generated
     // some of them are: break, continue, return, throw, string concat,
     // destruction parameters, function literals, explicitly boolean expressions
@@ -95,9 +95,9 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
 
     //  `for (i in list) { println(i) }` is converted to
     //  ```
-    //  val <iterator>: = list.iterator()
+    //  konst <iterator>: = list.iterator()
     //  while(<iterator>.hasNext()) {
-    //    val i = <iterator>.next()
+    //    konst i = <iterator>.next()
     //    println(i)
     //  }
     //  ```
@@ -112,11 +112,11 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
     // elements. This also applies to `this` and `super` references.
     object ReferenceInAtomicQualifiedAccess : KtFakeSourceElementKind()
 
-    // for enum classes we have valueOf & values functions generated
+    // for enum classes we have konstueOf & konstues functions generated
     // with a fake sources which refers to this the enum class
     object EnumGeneratedDeclaration : KtFakeSourceElementKind()
 
-    // when (x) { "abc" -> 42 } --> when(val $subj = x) { $subj == "abc" -> 42 }
+    // when (x) { "abc" -> 42 } --> when(konst $subj = x) { $subj == "abc" -> 42 }
     // where $subj == "42" has fake psi source which refers to "42" as inner expression
     // and $subj fake source refers to "42" as KtWhenCondition
     object WhenCondition : KtFakeSourceElementKind()
@@ -134,7 +134,7 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
     object ContractBlock : KtFakeSourceElementKind()
 
     // x++ -> x = x.inc()
-    // x = x++ -> x = { val <unary> = x; x = <unary>.inc(); <unary> }
+    // x = x++ -> x = { konst <unary> = x; x = <unary>.inc(); <unary> }
     object DesugaredIncrementOrDecrement : KtFakeSourceElementKind()
 
     // In ++a[1], a.get(1) will be called twice. This kind is used for the second call reference.
@@ -157,7 +157,7 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
     // (vararg x: Int) --> (x: Array<out Int>) where array type ref has a fake source kind
     object ArrayTypeFromVarargParameter : KtFakeSourceElementKind()
 
-    // val (a,b) = x --> val a = x.component1(); val b = x.component2()
+    // konst (a,b) = x --> konst a = x.component1(); konst b = x.component2()
     // where componentN calls will have the fake source elements refer to the corresponding KtDestructuringDeclarationEntry
     object DesugaredComponentFunctionCall : KtFakeSourceElementKind()
 
@@ -182,15 +182,15 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
     // and inner FirFunctionCall will refer to a fake source
     object GeneratedComparisonExpression : KtFakeSourceElementKind()
 
-    // a ?: b --> when(val $subj = a) { .... }
-    // where `val $subj = a` has a fake source
+    // a ?: b --> when(konst $subj = a) { .... }
+    // where `konst $subj = a` has a fake source
     object WhenGeneratedSubject : KtFakeSourceElementKind()
 
     // list[0] -> list.get(0) where name reference will have a fake source element
     object ArrayAccessNameReference : KtFakeSourceElementKind()
 
     // a[b]++
-    // b -> val <index0> = b where b will have fake property
+    // b -> konst <index0> = b where b will have fake property
     object ArrayIndexExpressionReference : KtFakeSourceElementKind()
 
 
@@ -246,12 +246,12 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
     object FromUseSiteTarget : KtFakeSourceElementKind()
 
     // for `@ParameterName` annotation call added to function types with names in the notation
-    // with a fake source that refers to the value parameter in the function type notation
+    // with a fake source that refers to the konstue parameter in the function type notation
     // e.g., `(x: Int) -> Unit` becomes `Function1<@ParameterName("x") Int, Unit>`
     object ParameterNameAnnotationCall : KtFakeSourceElementKind()
 
     // for implicit conversion from int to long with `.toLong` function
-    // e.g. val x: Long = 1 + 1 becomes val x: Long = (1 + 1).toLong()
+    // e.g. konst x: Long = 1 + 1 becomes konst x: Long = (1 + 1).toLong()
     object IntToLongConversion : KtFakeSourceElementKind()
 
     // for extension receiver type the corresponding receiver parameter is generated
@@ -264,7 +264,7 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
     // for when on the LHS of an assignment an error expression appears
     object AssignmentLValueError : KtFakeSourceElementKind()
 
-    // for return type of value parameters in lambdas
+    // for return type of konstue parameters in lambdas
     object ImplicitReturnTypeOfLambdaValueParameter : KtFakeSourceElementKind()
 
     // Synthetic calls for if/when/try/etc.
@@ -278,8 +278,8 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
 }
 
 sealed class AbstractKtSourceElement {
-    abstract val startOffset: Int
-    abstract val endOffset: Int
+    abstract konst startOffset: Int
+    abstract konst endOffset: Int
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is AbstractKtSourceElement) return false
@@ -298,16 +298,16 @@ sealed class AbstractKtSourceElement {
 }
 
 class KtOffsetsOnlySourceElement(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
 ) : AbstractKtSourceElement()
 
 // TODO: consider renaming to something like AstBasedSourceElement
 sealed class KtSourceElement : AbstractKtSourceElement() {
-    abstract val elementType: IElementType?
-    abstract val kind: KtSourceElementKind
-    abstract val lighterASTNode: LighterASTNode
-    abstract val treeStructure: FlyweightCapableTreeStructure<LighterASTNode>
+    abstract konst elementType: IElementType?
+    abstract konst kind: KtSourceElementKind
+    abstract konst lighterASTNode: LighterASTNode
+    abstract konst treeStructure: FlyweightCapableTreeStructure<LighterASTNode>
 
     /** Implementation must compute the hashcode from the source element. */
     abstract override fun hashCode(): Int
@@ -318,26 +318,26 @@ sealed class KtSourceElement : AbstractKtSourceElement() {
 
 // NB: in certain situations, psi.node could be null (see e.g. KT-44152)
 // Potentially exceptions can be provoked by elementType / lighterASTNode
-sealed class KtPsiSourceElement(val psi: PsiElement) : KtSourceElement() {
-    override val elementType: IElementType?
+sealed class KtPsiSourceElement(konst psi: PsiElement) : KtSourceElement() {
+    override konst elementType: IElementType?
         get() = psi.node?.elementType
 
-    override val startOffset: Int
+    override konst startOffset: Int
         get() = psi.textRange.startOffset
 
-    override val endOffset: Int
+    override konst endOffset: Int
         get() = psi.textRange.endOffset
 
-    override val lighterASTNode: LighterASTNode by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst lighterASTNode: LighterASTNode by lazy(LazyThreadSafetyMode.PUBLICATION) {
         TreeBackedLighterAST.wrap(psi.node)
     }
 
-    override val treeStructure: FlyweightCapableTreeStructure<LighterASTNode> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst treeStructure: FlyweightCapableTreeStructure<LighterASTNode> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         WrappedTreeStructure(psi.containingFile)
     }
 
     internal class WrappedTreeStructure(file: PsiFile) : FlyweightCapableTreeStructure<LighterASTNode> {
-        private val lighterAST = TreeBackedLighterAST(file.node)
+        private konst lighterAST = TreeBackedLighterAST(file.node)
 
         fun unwrap(node: LighterASTNode) = lighterAST.unwrap(node)
 
@@ -349,8 +349,8 @@ sealed class KtPsiSourceElement(val psi: PsiElement) : KtSourceElement() {
             unwrap(node).psi.parent?.node?.let { TreeBackedLighterAST.wrap(it) }
 
         override fun getChildren(node: LighterASTNode, nodesRef: Ref<Array<LighterASTNode>>): Int {
-            val psi = unwrap(node).psi
-            val children = mutableListOf<PsiElement>()
+            konst psi = unwrap(node).psi
+            konst children = mutableListOf<PsiElement>()
             var child = psi.firstChild
             while (child != null) {
                 children += child
@@ -419,10 +419,10 @@ sealed class KtPsiSourceElement(val psi: PsiElement) : KtSourceElement() {
 }
 
 class KtRealPsiSourceElement(psi: PsiElement) : KtPsiSourceElement(psi) {
-    override val kind: KtSourceElementKind get() = KtRealSourceElementKind
+    override konst kind: KtSourceElementKind get() = KtRealSourceElementKind
 }
 
-class KtFakeSourceElement(psi: PsiElement, override val kind: KtFakeSourceElementKind) : KtPsiSourceElement(psi) {
+class KtFakeSourceElement(psi: PsiElement, override konst kind: KtFakeSourceElementKind) : KtPsiSourceElement(psi) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -458,13 +458,13 @@ fun KtSourceElement.realElement(): KtSourceElement = when (this) {
 
 
 class KtLightSourceElement(
-    override val lighterASTNode: LighterASTNode,
-    override val startOffset: Int,
-    override val endOffset: Int,
-    override val treeStructure: FlyweightCapableTreeStructure<LighterASTNode>,
-    override val kind: KtSourceElementKind = KtRealSourceElementKind,
+    override konst lighterASTNode: LighterASTNode,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
+    override konst treeStructure: FlyweightCapableTreeStructure<LighterASTNode>,
+    override konst kind: KtSourceElementKind = KtRealSourceElementKind,
 ) : KtSourceElement() {
-    override val elementType: IElementType
+    override konst elementType: IElementType
         get() = lighterASTNode.tokenType
 
     /**
@@ -476,7 +476,7 @@ class KtLightSourceElement(
      */
     fun unwrapToKtPsiSourceElement(): KtPsiSourceElement? {
         if (treeStructure !is KtPsiSourceElement.WrappedTreeStructure) return null
-        val node = treeStructure.unwrap(lighterASTNode)
+        konst node = treeStructure.unwrap(lighterASTNode)
         return node.psi?.toKtPsiSourceElement(kind)
     }
 
@@ -505,9 +505,9 @@ class KtLightSourceElement(
     }
 }
 
-val AbstractKtSourceElement?.psi: PsiElement? get() = (this as? KtPsiSourceElement)?.psi
+konst AbstractKtSourceElement?.psi: PsiElement? get() = (this as? KtPsiSourceElement)?.psi
 
-val KtSourceElement?.text: CharSequence?
+konst KtSourceElement?.text: CharSequence?
     get() = when (this) {
         is KtPsiSourceElement -> psi.text
         is KtLightSourceElement -> treeStructure.toString(lighterASTNode)

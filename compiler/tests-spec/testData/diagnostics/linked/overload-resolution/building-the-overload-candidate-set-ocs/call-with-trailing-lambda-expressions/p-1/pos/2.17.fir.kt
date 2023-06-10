@@ -27,7 +27,7 @@ class Case1() {
     infix fun A.foo(x: ()->Int) = "local extension fun foo"
 
     fun case1() {
-        val a = A()
+        konst a = A()
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>a foo {1}<!>
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>A() foo {1}<!>
     }
@@ -42,7 +42,7 @@ interface Case2 {
     infix fun A.foo(x: ()->Int) = "local extension fun foo"
 
     fun case2() {
-        val a = A()
+        konst a = A()
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>a foo {1}<!>
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>A() foo {1}<!>
     }
@@ -59,7 +59,7 @@ infix fun A.foo(x: ()->Int) = "my package scope top level trim"
 fun case3() {
     infix fun A.foo(x: ()->Int) = "my local scope trim"
 
-    val a = A()
+    konst a = A()
     <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>a foo {1}<!>
     <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>A() foo {1}<!>
 }
@@ -78,7 +78,7 @@ fun case4() {
 
     fun subfun() {
         infix fun A.foo(x: ()->Int) = "my local trim"
-        val a = A()
+        konst a = A()
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>a foo {1}<!>
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>A() foo {1}<!>
     }

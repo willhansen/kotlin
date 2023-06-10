@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.wasm.ir.source.location.SourceLocationMapping
 
 class WasmIrToBinary(
     outputStream: OutputStream,
-    val module: WasmModule,
-    val moduleName: String,
-    val emitNameSection: Boolean,
-    private val sourceMapFileName: String? = null,
-    private val sourceLocationMappings: MutableList<SourceLocationMapping>? = null
+    konst module: WasmModule,
+    konst moduleName: String,
+    konst emitNameSection: Boolean,
+    private konst sourceMapFileName: String? = null,
+    private konst sourceLocationMappings: MutableList<SourceLocationMapping>? = null
 ) {
     private var b: ByteWriter = ByteWriter.OutputStream(outputStream)
 
@@ -35,7 +35,7 @@ class WasmIrToBinary(
         with(module) {
             // type section
             appendSection(1u) {
-                val numRecGroups = if (recGroupTypes.isEmpty()) 0 else 1
+                konst numRecGroups = if (recGroupTypes.isEmpty()) 0 else 1
                 appendVectorSize(functionTypes.size + numRecGroups)
                 functionTypes.forEach { appendFunctionTypeDeclaration(it) }
                 if (!recGroupTypes.isEmpty()) {
@@ -191,7 +191,7 @@ class WasmIrToBinary(
             // Experimental fields name section
             // https://github.com/WebAssembly/gc/issues/193
             appendSection(10u) {
-                val structDeclarations = module.recGroupTypes.filterIsInstance<WasmStructDeclaration>()
+                konst structDeclarations = module.recGroupTypes.filterIsInstance<WasmStructDeclaration>()
                 appendVectorSize(structDeclarations.size)
                 structDeclarations.forEach {
                     appendModuleFieldReference(it)
@@ -210,7 +210,7 @@ class WasmIrToBinary(
             sourceLocationMappings?.add(SourceLocationMapping(offsets + Box(b.written), it))
         }
 
-        val opcode = instr.operator.opcode
+        konst opcode = instr.operator.opcode
 
         if (opcode == WASM_OP_PSEUDO_OPCODE)
             return
@@ -229,41 +229,41 @@ class WasmIrToBinary(
 
     private fun appendImmediate(x: WasmImmediate) {
         when (x) {
-            is WasmImmediate.ConstI32 -> b.writeVarInt32(x.value)
-            is WasmImmediate.ConstI64 -> b.writeVarInt64(x.value)
+            is WasmImmediate.ConstI32 -> b.writeVarInt32(x.konstue)
+            is WasmImmediate.ConstI64 -> b.writeVarInt64(x.konstue)
             is WasmImmediate.ConstF32 -> b.writeUInt32(x.rawBits)
             is WasmImmediate.ConstF64 -> b.writeUInt64(x.rawBits)
-            is WasmImmediate.SymbolI32 -> b.writeVarInt32(x.value.owner)
+            is WasmImmediate.SymbolI32 -> b.writeVarInt32(x.konstue.owner)
             is WasmImmediate.MemArg -> {
                 b.writeVarUInt32(x.align)
                 b.writeVarUInt32(x.offset)
             }
             is WasmImmediate.BlockType -> appendBlockType(x)
-            is WasmImmediate.FuncIdx -> appendModuleFieldReference(x.value.owner)
-            is WasmImmediate.LocalIdx -> appendLocalReference(x.value.owner)
-            is WasmImmediate.GlobalIdx -> appendModuleFieldReference(x.value.owner)
-            is WasmImmediate.TypeIdx -> appendModuleFieldReference(x.value.owner)
-            is WasmImmediate.MemoryIdx -> b.writeVarUInt32(x.value)
-            is WasmImmediate.DataIdx -> b.writeVarUInt32(x.value.owner)
-            is WasmImmediate.TableIdx -> b.writeVarUInt32(x.value.owner)
-            is WasmImmediate.LabelIdx -> b.writeVarUInt32(x.value)
-            is WasmImmediate.TagIdx -> b.writeVarUInt32(x.value)
+            is WasmImmediate.FuncIdx -> appendModuleFieldReference(x.konstue.owner)
+            is WasmImmediate.LocalIdx -> appendLocalReference(x.konstue.owner)
+            is WasmImmediate.GlobalIdx -> appendModuleFieldReference(x.konstue.owner)
+            is WasmImmediate.TypeIdx -> appendModuleFieldReference(x.konstue.owner)
+            is WasmImmediate.MemoryIdx -> b.writeVarUInt32(x.konstue)
+            is WasmImmediate.DataIdx -> b.writeVarUInt32(x.konstue.owner)
+            is WasmImmediate.TableIdx -> b.writeVarUInt32(x.konstue.owner)
+            is WasmImmediate.LabelIdx -> b.writeVarUInt32(x.konstue)
+            is WasmImmediate.TagIdx -> b.writeVarUInt32(x.konstue)
             is WasmImmediate.LabelIdxVector -> {
-                b.writeVarUInt32(x.value.size)
-                for (target in x.value) {
+                b.writeVarUInt32(x.konstue.size)
+                for (target in x.konstue) {
                     b.writeVarUInt32(target)
                 }
             }
-            is WasmImmediate.ElemIdx -> appendModuleFieldReference(x.value)
+            is WasmImmediate.ElemIdx -> appendModuleFieldReference(x.konstue)
             is WasmImmediate.ValTypeVector -> {
-                b.writeVarUInt32(x.value.size)
-                for (type in x.value) {
+                b.writeVarUInt32(x.konstue.size)
+                for (type in x.konstue) {
                     appendType(type)
                 }
             }
-            is WasmImmediate.GcType -> appendModuleFieldReference(x.value.owner)
-            is WasmImmediate.StructFieldIdx -> b.writeVarUInt32(x.value.owner)
-            is WasmImmediate.HeapType -> appendHeapType(x.value)
+            is WasmImmediate.GcType -> appendModuleFieldReference(x.konstue.owner)
+            is WasmImmediate.StructFieldIdx -> b.writeVarUInt32(x.konstue.owner)
+            is WasmImmediate.HeapType -> appendHeapType(x.konstue)
             is WasmImmediate.ConstString ->
                 error("Instructions with pseudo immediates should be skipped")
         }
@@ -275,18 +275,18 @@ class WasmIrToBinary(
     }
 
     private fun withVarUInt32PayloadSizePrepended(fn: () -> Unit) {
-        val box = Box(-1)
-        val previousOffsets = offsets
+        konst box = Box(-1)
+        konst previousOffsets = offsets
         offsets += box
 
-        val previousWriter = b
-        val newWriter = b.createTemp()
+        konst previousWriter = b
+        konst newWriter = b.createTemp()
         b = newWriter
         fn()
         b = previousWriter
         b.writeVarUInt32(newWriter.written)
 
-        box.value = b.written
+        box.konstue = b.written
         offsets = previousOffsets
 
         b.write(newWriter)
@@ -320,7 +320,7 @@ class WasmIrToBinary(
     }
 
     private fun appendStructTypeDeclaration(type: WasmStructDeclaration) {
-        val superType = type.superType
+        konst superType = type.superType
         if (superType != null) {
             b.writeVarInt7(-0x30)
             appendVectorSize(1)
@@ -338,7 +338,7 @@ class WasmIrToBinary(
         appendFiledType(type.field)
     }
 
-    val WasmFunctionType.index: Int
+    konst WasmFunctionType.index: Int
         get() = id!!
 
     private fun appendLimits(limits: WasmLimits) {
@@ -421,18 +421,18 @@ class WasmIrToBinary(
     }
 
     private fun appendElement(element: WasmElement) {
-        val isFuncIndices = element.values.all { it is WasmTable.Value.Function } && element.type == WasmFuncRef
+        konst isFuncIndices = element.konstues.all { it is WasmTable.Value.Function } && element.type == WasmFuncRef
 
-        val funcIndices = if (isFuncIndices) {
-            element.values.map { (it as WasmTable.Value.Function).function.owner.id!! }
+        konst funcIndices = if (isFuncIndices) {
+            element.konstues.map { (it as WasmTable.Value.Function).function.owner.id!! }
         } else null
 
         fun writeElements() {
-            appendVectorSize(element.values.size)
+            appendVectorSize(element.konstues.size)
             if (funcIndices != null) {
                 funcIndices.forEach { b.writeVarUInt32(it) }
             } else {
-                element.values.forEach {
+                element.konstues.forEach {
                     appendExpr((it as WasmTable.Value.Expression).expr)
                 }
             }
@@ -446,14 +446,14 @@ class WasmIrToBinary(
             }
         }
 
-        when (val mode = element.mode) {
+        when (konst mode = element.mode) {
             WasmElement.Mode.Passive -> {
                 b.writeByte(if (isFuncIndices) 0x01 else 0x05)
                 writeTypeOrKind()
                 writeElements()
             }
             is WasmElement.Mode.Active -> {
-                val tableId = mode.table.id!!
+                konst tableId = mode.table.id!!
                 when {
                     tableId == 0 && isFuncIndices -> {
                         b.writeByte(0x0)
@@ -497,7 +497,7 @@ class WasmIrToBinary(
     }
 
     private fun appendData(wasmData: WasmData) {
-        when (val mode = wasmData.mode) {
+        when (konst mode = wasmData.mode) {
             is WasmDataMode.Active -> {
                 if (mode.memoryIdx == 0) {
                     b.writeByte(0)
@@ -515,7 +515,7 @@ class WasmIrToBinary(
     }
 
     fun appendHeapType(type: WasmHeapType) {
-        val code: Int = when (type) {
+        konst code: Int = when (type) {
             is WasmHeapType.Simple -> type.code.toInt()
             is WasmHeapType.Type -> type.type.owner.id!!
         }
@@ -538,7 +538,7 @@ class WasmIrToBinary(
     }
 
     fun appendModuleFieldReference(field: WasmNamedModuleField) {
-        val id = field.id ?: error("${field::class} ${field.name} ID is unlinked")
+        konst id = field.id ?: error("${field::class} ${field.name} ID is unlinked")
         b.writeVarUInt32(id)
     }
 
@@ -547,14 +547,14 @@ class WasmIrToBinary(
     }
 
     private fun ByteWriter.writeString(str: String) {
-        val bytes = str.toByteArray()
+        konst bytes = str.toByteArray()
         this.writeVarUInt32(bytes.size)
         this.writeBytes(bytes)
     }
 }
 
 abstract class ByteWriter {
-    abstract val written: Int
+    abstract konst written: Int
 
     abstract fun write(v: ByteWriter)
     abstract fun writeByte(v: Byte)
@@ -609,12 +609,12 @@ abstract class ByteWriter {
         var v = v
         var remaining = v shr 7
         while (remaining != 0u) {
-            val byte = (v and 0x7fu) or 0x80u
+            konst byte = (v and 0x7fu) or 0x80u
             writeByte(byte.toByte())
             v = remaining
             remaining = remaining shr 7
         }
-        val byte = v and 0x7fu
+        konst byte = v and 0x7fu
         writeByte(byte.toByte())
     }
 
@@ -624,17 +624,17 @@ abstract class ByteWriter {
         var v = v
         var remaining = v shr 7
         var hasMore = true
-        val end = if (v and Long.MIN_VALUE == 0L) 0L else -1L
+        konst end = if (v and Long.MIN_VALUE == 0L) 0L else -1L
         while (hasMore) {
             hasMore = remaining != end || remaining and 1 != (v shr 6) and 1
-            val byte = ((v and 0x7f) or if (hasMore) 0x80 else 0).toInt()
+            konst byte = ((v and 0x7f) or if (hasMore) 0x80 else 0).toInt()
             writeByte(byte.toByte())
             v = remaining
             remaining = remaining shr 7
         }
     }
 
-    class OutputStream(val os: java.io.OutputStream) : ByteWriter() {
+    class OutputStream(konst os: java.io.OutputStream) : ByteWriter() {
         override var written = 0; private set
 
         override fun write(v: ByteWriter) {

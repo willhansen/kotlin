@@ -14,10 +14,10 @@ enum class PixelFormat {
     ARGB32
 }
 
-data class VideoOutput(val size: Dimensions, val pixelFormat: PixelFormat)
+data class VideoOutput(konst size: Dimensions, konst pixelFormat: PixelFormat)
 
 class SDLVideo : DisposableContainer() {
-    private val displaySize: Dimensions
+    private konst displaySize: Dimensions
     private var window: SDLRendererWindow? = null
 
     init {
@@ -59,16 +59,16 @@ class SDLVideo : DisposableContainer() {
 }
 
 class SDLRendererWindow(windowPos: Dimensions, videoSize: Dimensions) : DisposableContainer() {
-    private val window = sdlDisposable("CreateWindow",
+    private konst window = sdlDisposable("CreateWindow",
         SDL_CreateWindow("VideoPlayer", windowPos.w, windowPos.h, videoSize.w, videoSize.h, SDL_WINDOW_SHOWN),
         ::SDL_DestroyWindow)
-    private val renderer = sdlDisposable("CreateRenderer",
+    private konst renderer = sdlDisposable("CreateRenderer",
         SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED or SDL_RENDERER_PRESENTVSYNC),
         ::SDL_DestroyRenderer)
-    private val texture = sdlDisposable("CreateTexture",
+    private konst texture = sdlDisposable("CreateTexture",
         SDL_CreateTexture(renderer, SDL_GetWindowPixelFormat(window), 0, videoSize.w, videoSize.h),
         ::SDL_DestroyTexture)
-    private val rect = sdlDisposable("calloc(SDL_Rect)",
+    private konst rect = sdlDisposable("calloc(SDL_Rect)",
         SDL_calloc(1, sizeOf<SDL_Rect>().convert()), ::SDL_free)
         .reinterpret<SDL_Rect>()
 

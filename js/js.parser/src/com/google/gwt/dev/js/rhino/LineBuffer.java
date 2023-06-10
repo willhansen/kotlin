@@ -56,7 +56,7 @@ final class LineBuffer {
     /*
      * for smooth operation of getLine(), this should be greater than
      * the length of any expected line.  Currently, 256 is 3% slower
-     * than 4096 for large compiles, but seems safer given evaluateString.
+     * than 4096 for large compiles, but seems safer given ekonstuateString.
      * Strings for the scanner are are built with StringBuffers
      * instead of directly out of the buffer whenever a string crosses
      * a buffer boundary, so small buffer sizes will mean that more
@@ -273,7 +273,7 @@ final class LineBuffer {
 
         otherEnd = end;
 
-        // set lineStart to a sentinel value, unless this is the first
+        // set lineStart to a sentinel konstue, unless this is the first
         // time around.
         prevStart = lineStart = (otherBuffer == null) ? 0 : lineStart - end;
 

@@ -23,8 +23,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 
 // NOTE: the lock is local
 // TODO: verify that locla lock doesn't lead to any synch problems
-class RemoteReplCompilerStateHistory(private val state: RemoteReplCompilerState) : IReplStageHistory<Unit>, AbstractList<ReplHistoryRecord<Unit>>() {
-    override val size: Int
+class RemoteReplCompilerStateHistory(private konst state: RemoteReplCompilerState) : IReplStageHistory<Unit>, AbstractList<ReplHistoryRecord<Unit>>() {
+    override konst size: Int
         get() = state.replStateFacade.getHistorySize()
 
     override fun get(index: Int): ReplHistoryRecord<Unit> = ReplHistoryRecord(state.replStateFacade.historyGet(index), Unit)
@@ -45,17 +45,17 @@ class RemoteReplCompilerStateHistory(private val state: RemoteReplCompilerState)
         currentGeneration.incrementAndGet()
     }
 
-    val currentGeneration = AtomicInteger(REPL_CODE_LINE_FIRST_GEN)
+    konst currentGeneration = AtomicInteger(REPL_CODE_LINE_FIRST_GEN)
 
-    override val lock: ReentrantReadWriteLock get() = state.lock
+    override konst lock: ReentrantReadWriteLock get() = state.lock
 }
 
 class RemoteReplCompilerState(
-    internal val replStateFacade: ReplStateFacade,
-    override val lock: ReentrantReadWriteLock = ReentrantReadWriteLock()
+    internal konst replStateFacade: ReplStateFacade,
+    override konst lock: ReentrantReadWriteLock = ReentrantReadWriteLock()
 ) : IReplStageState<Unit> {
 
-    override val currentGeneration: Int get() = (history as RemoteReplCompilerStateHistory).currentGeneration.get()
+    override konst currentGeneration: Int get() = (history as RemoteReplCompilerStateHistory).currentGeneration.get()
 
-    override val history: IReplStageHistory<Unit> = RemoteReplCompilerStateHistory(this)
+    override konst history: IReplStageHistory<Unit> = RemoteReplCompilerStateHistory(this)
 }

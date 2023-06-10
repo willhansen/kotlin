@@ -22,15 +22,15 @@ import kotlin.time.ExperimentalTime
 class NoOpExecutor(
         private var explanation: String? = null,
 ) : Executor {
-    private val logger = Logger.getLogger(NoOpExecutor::class.java.name)
+    private konst logger = Logger.getLogger(NoOpExecutor::class.java.name)
 
     override fun execute(request: ExecuteRequest): ExecuteResponse {
-        val workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
+        konst workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
         logger.info("""
             |Skipping execution${explanation?.let { " ($it)" } ?: ""}
             |Command: ${request.executableAbsolutePath}${request.args.joinToString(separator = " ", prefix = " ")}
             |In working directory: ${workingDirectory.absolutePath}
-            |With additional environment: ${request.environment.entries.joinToString(prefix = "{", postfix = "}") { "\"${it.key}\": \"${it.value}\"" }}
+            |With additional environment: ${request.environment.entries.joinToString(prefix = "{", postfix = "}") { "\"${it.key}\": \"${it.konstue}\"" }}
         """.trimMargin())
         return ExecuteResponse(exitCode = 0, executionTime = Duration.ZERO)
     }

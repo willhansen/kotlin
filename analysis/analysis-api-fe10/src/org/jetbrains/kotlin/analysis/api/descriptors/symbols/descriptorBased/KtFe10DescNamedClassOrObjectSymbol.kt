@@ -29,40 +29,40 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 
 internal class KtFe10DescNamedClassOrObjectSymbol(
-    override val descriptor: ClassDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: ClassDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtNamedClassOrObjectSymbol(), KtFe10DescMemberSymbol<ClassDescriptor> {
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { descriptor.name }
 
-    override val isInner: Boolean
+    override konst isInner: Boolean
         get() = withValidityAssertion { descriptor.isInner }
 
-    override val isData: Boolean
+    override konst isData: Boolean
         get() = withValidityAssertion { descriptor.isData }
 
-    override val isInline: Boolean
+    override konst isInline: Boolean
         get() = withValidityAssertion { descriptor.isInline }
 
-    override val isFun: Boolean
+    override konst isFun: Boolean
         get() = withValidityAssertion { descriptor.isFun }
 
-    override val isExternal: Boolean
+    override konst isExternal: Boolean
         get() = withValidityAssertion { descriptor.isExternal }
 
-    override val companionObject: KtNamedClassOrObjectSymbol?
+    override konst companionObject: KtNamedClassOrObjectSymbol?
         get() {
             withValidityAssertion {
-                val companionObject = descriptor.companionObjectDescriptor ?: return null
+                konst companionObject = descriptor.companionObjectDescriptor ?: return null
                 return KtFe10DescNamedClassOrObjectSymbol(companionObject, analysisContext)
             }
         }
 
-    override val contextReceivers: List<KtContextReceiver>
+    override konst contextReceivers: List<KtContextReceiver>
         get() = withValidityAssertion { descriptor.createContextReceivers(analysisContext) }
 
     @OptIn(KtAnalysisApiInternals::class)
-    override val classKind: KtClassKind
+    override konst classKind: KtClassKind
         get() = withValidityAssertion {
             if (DescriptorUtils.isAnonymousObject(descriptor)) {
                 error("Should be an anonymous object")
@@ -70,18 +70,18 @@ internal class KtFe10DescNamedClassOrObjectSymbol(
             descriptor.kind.toKtClassKind(isCompanionObject = descriptor.isCompanionObject)
         }
 
-    override val superTypes: List<KtType>
+    override konst superTypes: List<KtType>
         get() = withValidityAssertion {
             descriptor.getSupertypesWithAny().map { it.toKtType(analysisContext) }
         }
 
-    override val classIdIfNonLocal: ClassId?
+    override konst classIdIfNonLocal: ClassId?
         get() = withValidityAssertion { descriptor.classId }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion { descriptor.ktSymbolKind }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { descriptor.declaredTypeParameters.map { KtFe10DescTypeParameterSymbol(it, analysisContext) } }
 
     context(KtAnalysisSession)
@@ -90,7 +90,7 @@ internal class KtFe10DescNamedClassOrObjectSymbol(
             return it
         }
 
-        val classId = descriptor.classId
+        konst classId = descriptor.classId
         if (classId != null) {
             return KtFe10DescNamedClassOrObjectSymbolSymbol(classId)
         }

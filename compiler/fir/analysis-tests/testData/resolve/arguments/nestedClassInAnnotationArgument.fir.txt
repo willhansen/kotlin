@@ -4,7 +4,7 @@ FILE: nestedClassInAnnotationArgument.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val kClass: R|kotlin/reflect/KClass<*>| = R|<local>/kClass|
+        public final konst kClass: R|kotlin/reflect/KClass<*>| = R|<local>/kClass|
             public get(): R|kotlin/reflect/KClass<*>|
 
     }

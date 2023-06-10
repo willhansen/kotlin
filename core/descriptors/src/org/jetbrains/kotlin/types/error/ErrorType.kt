@@ -10,16 +10,16 @@ import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
 class ErrorType @JvmOverloads internal constructor(
-    override val constructor: TypeConstructor,
-    override val memberScope: MemberScope,
-    val kind: ErrorTypeKind,
-    override val arguments: List<TypeProjection> = emptyList(),
-    override val isMarkedNullable: Boolean = false,
-    vararg val formatParams: String
+    override konst constructor: TypeConstructor,
+    override konst memberScope: MemberScope,
+    konst kind: ErrorTypeKind,
+    override konst arguments: List<TypeProjection> = emptyList(),
+    override konst isMarkedNullable: Boolean = false,
+    vararg konst formatParams: String
 ) : SimpleType() {
-    val debugMessage = String.format(kind.debugMessage, *formatParams)
+    konst debugMessage = String.format(kind.debugMessage, *formatParams)
 
-    override val attributes: TypeAttributes
+    override konst attributes: TypeAttributes
         get() = TypeAttributes.Empty
 
     override fun replaceAttributes(newAttributes: TypeAttributes): SimpleType = this

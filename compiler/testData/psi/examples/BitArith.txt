@@ -545,7 +545,7 @@ KtFile: BitArith.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('bits')
         PsiWhiteSpace(' ')

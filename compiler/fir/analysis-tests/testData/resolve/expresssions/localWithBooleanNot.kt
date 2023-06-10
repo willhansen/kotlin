@@ -18,6 +18,6 @@ fun foo(): Boolean {
         override fun result() = result
     }
 
-    val some = true
+    konst some = true
     return !some
 }

@@ -1,8 +1,8 @@
 // ClassWithConstructorAndProperties
 
 class ClassWithConstructorAndProperties(
-        val nullable: String?,
-        val notNull: String
+        konst nullable: String?,
+        konst notNull: String
 )
 
 // FIR_COMPARISON

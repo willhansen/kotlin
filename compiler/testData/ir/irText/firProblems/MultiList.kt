@@ -6,7 +6,7 @@
 
 import java.util.ArrayList
 
-data class Some<T>(val value: T)
+data class Some<T>(konst konstue: T)
 
 interface MyList<T> : List<Some<T>>
 

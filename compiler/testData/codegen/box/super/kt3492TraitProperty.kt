@@ -1,5 +1,5 @@
 interface A {
-    open val foo: String
+    open konst foo: String
       get() = "OK"
 }
 
@@ -9,7 +9,7 @@ open class B : A {
 
 class C : B() {
     inner class D {
-        val foo: String = super<B>@C.foo
+        konst foo: String = super<B>@C.foo
     }
 }
 

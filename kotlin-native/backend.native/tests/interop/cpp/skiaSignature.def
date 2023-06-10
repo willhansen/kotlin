@@ -30,9 +30,9 @@ class SkData {
             printf("SkData()\n");
         };
 
-        SkData(int val) {
-            printf("SkData(%d)\n", val);
-            data = val + 100;
+        SkData(int konst) {
+            printf("SkData(%d)\n", konst);
+            data = konst + 100;
         };
 
         SkData(SkData* obj) {
@@ -51,11 +51,11 @@ class SkData {
 
         int data;
 
-        void setData(int val) {
-            data = val;
+        void setData(int konst) {
+            data = konst;
         };
 
-        int checkData(int val) {
-            return val == data;
+        int checkData(int konst) {
+            return konst == data;
         };
 };

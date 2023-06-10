@@ -1,5 +1,5 @@
 // FILE: test.kt
-class MyPair(val x: String, val y: String) {
+class MyPair(konst x: String, konst y: String) {
     operator fun component1(): String {
         return "O"
     }
@@ -10,8 +10,8 @@ class MyPair(val x: String, val y: String) {
 }
 
 fun box(): String {
-    val p = MyPair("X", "Y")
-    val (o, k) = p
+    konst p = MyPair("X", "Y")
+    konst (o, k) = p
     return o + k
 }
 

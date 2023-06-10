@@ -21,7 +21,7 @@ class E : D() {
     internal <!NOTHING_TO_OVERRIDE!>override<!> fun self() = this
 
     fun test() {
-        val s : E = self()
+        konst s : E = self()
     }
 }
 

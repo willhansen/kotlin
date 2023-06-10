@@ -1,8 +1,8 @@
 package test
 
-annotation class JustString(val string: String)
+annotation class JustString(konst string: String)
 
-annotation class StringArray(val stringArray: Array<String>)
+annotation class StringArray(konst stringArray: Array<String>)
 
 @JustString("kotlin")
 @StringArray(arrayOf())

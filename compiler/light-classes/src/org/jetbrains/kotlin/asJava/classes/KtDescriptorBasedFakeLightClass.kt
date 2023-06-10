@@ -22,25 +22,25 @@ import javax.swing.Icon
 class KtDescriptorBasedFakeLightClass(kotlinOrigin: KtClassOrObject) : KtFakeLightClass(kotlinOrigin) {
     override fun copy(): KtFakeLightClass = KtDescriptorBasedFakeLightClass(kotlinOrigin)
 
-    private val _containingClass: KtFakeLightClass? by lazy {
+    private konst _containingClass: KtFakeLightClass? by lazy {
         kotlinOrigin.containingClassOrObject?.let { KtDescriptorBasedFakeLightClass(it) }
     }
 
     override fun getContainingClass(): KtFakeLightClass? = _containingClass
 
     override fun isInheritor(baseClass: PsiClass, checkDeep: Boolean): Boolean {
-        if (manager.areElementsEquivalent(baseClass, this)) return false
+        if (manager.areElementsEquikonstent(baseClass, this)) return false
         LightClassInheritanceHelper.getService(project).isInheritor(this, baseClass, checkDeep).ifSure { return it }
 
-        val baseKtClass = (baseClass as? KtLightClass)?.kotlinOrigin ?: return false
+        konst baseKtClass = (baseClass as? KtLightClass)?.kotlinOrigin ?: return false
 
-        val generationSupport = LightClassGenerationSupport.getInstance(project)
+        konst generationSupport = LightClassGenerationSupport.getInstance(project)
 
-        val baseDescriptor = generationSupport.resolveToDescriptor(baseKtClass) as? ClassDescriptor ?: return false
-        val thisDescriptor = generationSupport.resolveToDescriptor(kotlinOrigin) as? ClassDescriptor ?: return false
+        konst baseDescriptor = generationSupport.resolveToDescriptor(baseKtClass) as? ClassDescriptor ?: return false
+        konst thisDescriptor = generationSupport.resolveToDescriptor(kotlinOrigin) as? ClassDescriptor ?: return false
 
-        val thisFqName = DescriptorUtils.getFqName(thisDescriptor).asString()
-        val baseFqName = DescriptorUtils.getFqName(baseDescriptor).asString()
+        konst thisFqName = DescriptorUtils.getFqName(thisDescriptor).asString()
+        konst baseFqName = DescriptorUtils.getFqName(baseDescriptor).asString()
         if (thisFqName == baseFqName) return false
 
         return if (checkDeep)
@@ -51,7 +51,7 @@ class KtDescriptorBasedFakeLightClass(kotlinOrigin: KtClassOrObject) : KtFakeLig
 }
 
 class KtFakeLightMethod private constructor(
-    val ktDeclaration: KtNamedDeclaration,
+    konst ktDeclaration: KtNamedDeclaration,
     ktClassOrObject: KtClassOrObject
 ) : LightMethod(
     ktDeclaration.manager,
@@ -59,7 +59,7 @@ class KtFakeLightMethod private constructor(
     ktClassOrObject.toFakeLightClass(),
     KotlinLanguage.INSTANCE
 ), KtLightElement<KtNamedDeclaration, PsiMethod> {
-    override val kotlinOrigin get() = ktDeclaration
+    override konst kotlinOrigin get() = ktDeclaration
 
     override fun getName() = ktDeclaration.name ?: ""
 
@@ -69,7 +69,7 @@ class KtFakeLightMethod private constructor(
 
     companion object {
         fun get(ktDeclaration: KtNamedDeclaration): KtFakeLightMethod? {
-            val ktClassOrObject = ktDeclaration.containingClassOrObject ?: return null
+            konst ktClassOrObject = ktDeclaration.containingClassOrObject ?: return null
             return KtFakeLightMethod(ktDeclaration, ktClassOrObject)
         }
     }

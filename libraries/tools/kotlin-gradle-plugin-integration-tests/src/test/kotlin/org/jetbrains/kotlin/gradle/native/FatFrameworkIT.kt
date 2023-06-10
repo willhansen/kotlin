@@ -31,7 +31,7 @@ class FatFrameworkIT : KGPBaseTest() {
                 expectedPlistPlatform = "iPhoneOS"
             )
 
-            val binary = projectPath.resolve("build/fat-framework/smoke.framework/smoke").absolutePathString()
+            konst binary = projectPath.resolve("build/fat-framework/smoke.framework/smoke").absolutePathString()
             assertProcessRunResult(runProcess(listOf("file", binary), projectPath.toFile())) {
                 assertTrue(isSuccessful)
                 assertTrue(output.contains("\\(for architecture x86_64\\):\\s+Mach-O 64-bit dynamically linked shared library x86_64".toRegex()))
@@ -56,7 +56,7 @@ class FatFrameworkIT : KGPBaseTest() {
                 targetPrefix = "watchos",
                 expectedPlistPlatform = "WatchOS"
             )
-            val binary = projectPath.resolve("build/fat-framework/smoke.framework/smoke").absolutePathString()
+            konst binary = projectPath.resolve("build/fat-framework/smoke.framework/smoke").absolutePathString()
             assertProcessRunResult(runProcess(listOf("file", binary), projectPath.toFile())) {
                 assertTrue(isSuccessful)
                 assertTrue(output.contains("\\(for architecture x86_64\\):\\s+Mach-O 64-bit dynamically linked shared library x86_64".toRegex()))
@@ -83,7 +83,7 @@ class FatFrameworkIT : KGPBaseTest() {
                 expectedPlistPlatform = "MacOSX",
                 true
             )
-            val binary = projectPath.resolve("build/fat-framework/smoke.framework/Versions/A/smoke").absolutePathString()
+            konst binary = projectPath.resolve("build/fat-framework/smoke.framework/Versions/A/smoke").absolutePathString()
             assertProcessRunResult(runProcess(listOf("file", binary), projectPath.toFile())) {
                 assertTrue(isSuccessful)
                 assertTrue(output.contains("\\(for architecture x86_64\\):\\s+Mach-O 64-bit dynamically linked shared library x86_64".toRegex()))
@@ -99,14 +99,14 @@ class FatFrameworkIT : KGPBaseTest() {
         isMacosFramework: Boolean = false
     ) {
         build("fat") {
-            val linkTasks = archs.map {
+            konst linkTasks = archs.map {
                 ":linkDebugFramework${targetPrefix.capitalize()}${it.capitalize()}"
             }
 
             assertTasksExecuted(linkTasks)
             assertTasksExecuted(":fat")
 
-            val frameworkLayout = FrameworkLayout(projectPath.resolve("build/fat-framework/smoke.framework").toFile(), isMacosFramework)
+            konst frameworkLayout = FrameworkLayout(projectPath.resolve("build/fat-framework/smoke.framework").toFile(), isMacosFramework)
 
             assertFileExists(frameworkLayout.binary.toPath())
             assertFileExists(frameworkLayout.header.toPath())
@@ -138,7 +138,7 @@ class FatFrameworkIT : KGPBaseTest() {
                 it +
                         //language=kotlin
                         """
-                        val anotherDeviceTarget = kotlin.iosArm64("another") {
+                        konst anotherDeviceTarget = kotlin.iosArm64("another") {
                             binaries.framework("DEBUG")
                         }
                         fat.from(anotherDeviceTarget.binaries.getFramework("DEBUG"))
@@ -158,7 +158,7 @@ class FatFrameworkIT : KGPBaseTest() {
                 it +
                         //language=kotlin
                         """
-                        val macos = kotlin.macosX64 {
+                        konst macos = kotlin.macosX64 {
                             binaries.framework("DEBUG")
                         }
                         fat.from(macos.binaries.getFramework("DEBUG"))
@@ -179,7 +179,7 @@ class FatFrameworkIT : KGPBaseTest() {
             }
 
             build("fat") {
-                val binary = projectPath.resolve("build/fat-framework/custom.framework/custom").absolutePathString()
+                konst binary = projectPath.resolve("build/fat-framework/custom.framework/custom").absolutePathString()
                 assertProcessRunResult(runProcess(listOf("otool", "-D", binary), projectPath.toFile())) {
                     assertTrue(isSuccessful)
                     assertTrue { output.lines().any { it.contains("@rpath/custom.framework/custom") } }
@@ -220,7 +220,7 @@ class FatFrameworkIT : KGPBaseTest() {
     @GradleTest
     fun testDependencyResolution(gradleVersion: GradleVersion) {
         nativeProject("native-fat-framework/smoke", gradleVersion) {
-            val nestedProjectName = "nested"
+            konst nestedProjectName = "nested"
             includeOtherProjectAsSubmodule("smoke", "native-fat-framework", nestedProjectName, true)
             buildGradleKts.appendText("dependencies { \"commonMainImplementation\"(project(\":$nestedProjectName\")) }")
             testResolveAllConfigurations()

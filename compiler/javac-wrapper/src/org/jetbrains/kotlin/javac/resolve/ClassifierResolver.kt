@@ -25,13 +25,13 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-class ClassifierResolver(private val javac: JavacWrapper) {
+class ClassifierResolver(private konst javac: JavacWrapper) {
 
-    private val cache = hashMapOf<Tree, JavaClassifier?>()
-    private val beingResolved = hashSetOf<Tree>()
+    private konst cache = hashMapOf<Tree, JavaClassifier?>()
+    private konst beingResolved = hashSetOf<Tree>()
 
     fun resolve(tree: Tree, unit: CompilationUnitTree, containingElement: JavaElement): JavaClassifier? {
-        val result = cache[tree]
+        konst result = cache[tree]
         if (result != null) return result
         if (tree in beingResolved) return null
         beingResolved(tree)
@@ -66,9 +66,9 @@ class ClassifierResolver(private val javac: JavacWrapper) {
     }
 
     private fun pathSegments(path: String): List<String> {
-        val pathSegments = arrayListOf<String>()
+        konst pathSegments = arrayListOf<String>()
         var numberOfBrackets = 0
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
         path.forEach { char ->
             when (char) {
                 '<' -> numberOfBrackets++
@@ -88,12 +88,12 @@ class ClassifierResolver(private val javac: JavacWrapper) {
     }
 
     private fun tryToResolve(tree: Tree, unit: CompilationUnitTree, containingElement: JavaElement): JavaClassifier? {
-        val pathSegments = pathSegments(tree.toString())
-        val containingClass = when (containingElement) {
+        konst pathSegments = pathSegments(tree.toString())
+        konst containingClass = when (containingElement) {
             is JavaClass -> containingElement
             is JavaTypeParameterListOwner -> {
                 pathSegments.singleOrNull()?.let { pathSegment ->
-                    val identifier = Name.identifier(pathSegment)
+                    konst identifier = Name.identifier(pathSegment)
                     containingElement.typeParameters.find { it.name == identifier }?.let { return it }
                 }
                 (containingElement as JavaMember).containingClass
@@ -107,12 +107,12 @@ class ClassifierResolver(private val javac: JavacWrapper) {
 
 }
 
-private abstract class Scope(protected val javac: JavacWrapper,
-                             protected val compilationUnit: CompilationUnitTree) {
+private abstract class Scope(protected konst javac: JavacWrapper,
+                             protected konst compilationUnit: CompilationUnitTree) {
 
-    protected val helper = ResolveHelper(javac, compilationUnit)
+    protected konst helper = ResolveHelper(javac, compilationUnit)
 
-    abstract val parent: Scope?
+    abstract konst parent: Scope?
 
     /**
      * @param name name of a class to find
@@ -125,7 +125,7 @@ private abstract class Scope(protected val javac: JavacWrapper,
 private class GlobalScope(javac: JavacWrapper,
                           compilationUnit: CompilationUnitTree) : Scope(javac, compilationUnit) {
 
-    override val parent: Scope?
+    override konst parent: Scope?
         get() = null
 
     override fun findClass(name: String, pathSegments: List<String>): JavaClass? {
@@ -139,9 +139,9 @@ private class GlobalScope(javac: JavacWrapper,
     private fun findByFqName(pathSegments: List<String>): JavaClass? {
         pathSegments.forEachIndexed { index, _ ->
             if (index != 0) {
-                val packageFqName = pathSegments.take(index).joinToString(separator = ".")
+                konst packageFqName = pathSegments.take(index).joinToString(separator = ".")
                 helper.findPackage(packageFqName)?.let { packageName ->
-                    val className = pathSegments.drop(index)
+                    konst className = pathSegments.drop(index)
                     helper.findJavaOrKotlinClass(ClassId(packageName, Name.identifier(className.first())))?.let { javaClass ->
                         return helper.getJavaClassFromPathSegments(javaClass, className)
                     }
@@ -160,7 +160,7 @@ private class GlobalScope(javac: JavacWrapper,
 private class ImportOnDemandScope(javac: JavacWrapper,
                                   compilationUnit: CompilationUnitTree) : Scope(javac, compilationUnit) {
 
-    override val parent: Scope
+    override konst parent: Scope
         get() = GlobalScope(javac, compilationUnit)
 
     override fun findClass(name: String, pathSegments: List<String>): JavaClassifier? {
@@ -185,7 +185,7 @@ private class ImportOnDemandScope(javac: JavacWrapper,
 private class PackageScope(javac: JavacWrapper,
                            compilationUnit: CompilationUnitTree) : Scope(javac, compilationUnit) {
 
-    override val parent: Scope
+    override konst parent: Scope
         get() = ImportOnDemandScope(javac, compilationUnit)
 
     override fun findClass(name: String, pathSegments: List<String>): JavaClassifier? {
@@ -202,11 +202,11 @@ private class PackageScope(javac: JavacWrapper,
 private class SingleTypeImportScope(javac: JavacWrapper,
                                     compilationUnit: CompilationUnitTree) : Scope(javac, compilationUnit) {
 
-    override val parent: Scope
+    override konst parent: Scope
         get() = PackageScope(javac, compilationUnit)
 
     override fun findClass(name: String, pathSegments: List<String>): JavaClassifier? {
-        val imports = imports(name).toSet().takeIf { it.isNotEmpty() }
+        konst imports = imports(name).toSet().takeIf { it.isNotEmpty() }
                       ?: return parent.findClass(name, pathSegments)
 
         imports.singleOrNull() ?: return null
@@ -222,13 +222,13 @@ private class SingleTypeImportScope(javac: JavacWrapper,
 
 private class CurrentClassAndInnerScope(javac: JavacWrapper,
                                         compilationUnit: CompilationUnitTree,
-                                        private val containingElement: JavaClass) : Scope(javac, compilationUnit) {
+                                        private konst containingElement: JavaClass) : Scope(javac, compilationUnit) {
 
-    override val parent: Scope
+    override konst parent: Scope
         get() = SingleTypeImportScope(javac, compilationUnit)
 
     override fun findClass(name: String, pathSegments: List<String>): JavaClassifier? {
-        val identifier = Name.identifier(name)
+        konst identifier = Name.identifier(name)
         var enclosingClass: JavaClass? = containingElement
 
         while (enclosingClass != null) {

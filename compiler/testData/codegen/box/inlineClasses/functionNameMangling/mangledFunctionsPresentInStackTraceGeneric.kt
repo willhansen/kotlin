@@ -7,7 +7,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Id<T: String>(val id: T)
+konstue class Id<T: String>(konst id: T)
 
 fun throws() {
     throw RuntimeException()
@@ -22,7 +22,7 @@ fun foo() {
 }
 
 fun box(): String {
-    val stackTrace = try {
+    konst stackTrace = try {
         foo()
         throw AssertionError()
     } catch (e: RuntimeException) {

@@ -1,5 +1,5 @@
 expression: BLOCK
 text: {
-        "value"
+        "konstue"
     }
 isUsedAsExpression: false

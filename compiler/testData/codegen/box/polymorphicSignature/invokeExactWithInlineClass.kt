@@ -7,12 +7,12 @@
 import java.lang.invoke.MethodHandles
 import kotlin.reflect.jvm.javaMethod
 
-inline class Z(val s: String)
+inline class Z(konst s: String)
 
 fun foo(z: Z): String = z.s
 
 fun box(): String {
-    val mh = MethodHandles.lookup().unreflect(::foo.javaMethod!!)
+    konst mh = MethodHandles.lookup().unreflect(::foo.javaMethod!!)
 
     // TODO: it's unclear whether this should throw or not, see KT-28214.
     return try {

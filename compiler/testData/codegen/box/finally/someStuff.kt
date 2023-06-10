@@ -65,7 +65,7 @@ fun test2(): Boolean {
 }
 
 
-// Fallthrough with value on the stack (only needs to compile)
+// Fallthrough with konstue on the stack (only needs to compile)
 fun test3(): Boolean {
     try {
         1
@@ -76,7 +76,7 @@ fun test3(): Boolean {
     return true
 }
 
-// Fallthrough with value on the stack and finally
+// Fallthrough with konstue on the stack and finally
 fun test4(): Boolean {
     var seenFinally = false
 
@@ -92,9 +92,9 @@ fun test4(): Boolean {
     return seenFinally
 }
 
-// Try with return value which is used later
+// Try with return konstue which is used later
 fun test5(): Boolean {
-    val arg = try {
+    konst arg = try {
         ooo()
         1
     } catch (b: Baz) {
@@ -161,7 +161,7 @@ fun test7(): Boolean {
 // Finally throws an exception
 class Baobab: Throwable()
 class Zanzibar: Throwable()
-class Hypo(val catchedBaobab: Boolean, val thrownZanzibar: Boolean, val seenFinally: Boolean): Throwable()
+class Hypo(konst catchedBaobab: Boolean, konst thrownZanzibar: Boolean, konst seenFinally: Boolean): Throwable()
 
 fun golb() {
     throw Baobab()

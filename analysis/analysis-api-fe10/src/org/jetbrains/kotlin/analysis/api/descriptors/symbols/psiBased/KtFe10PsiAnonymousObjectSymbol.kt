@@ -24,15 +24,15 @@ import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiAnonymousObjectSymbol(
-    override val psi: KtObjectDeclaration,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtObjectDeclaration,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtAnonymousObjectSymbol(), KtFe10PsiSymbol<KtObjectDeclaration, ClassDescriptor> {
-    override val descriptor: ClassDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+    override konst descriptor: ClassDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
         bindingContext[BindingContext.CLASS, psi]
     }
 
-    override val superTypes: List<KtType>
+    override konst superTypes: List<KtType>
         get() = withValidityAssertion {
             descriptor?.typeConstructor?.supertypes?.map { it.toKtType(analysisContext) } ?: emptyList()
         }

@@ -10,13 +10,13 @@
 
 @Target(AnnotationTarget.TYPE)
 @Retention(AnnotationRetention.BINARY)
-annotation class TypeAnnotation(val str: String)
+annotation class TypeAnnotation(konst str: String)
 
 open class A
 interface B
 //class C : @TypeAnnotation("AClass" + "Anno") A(), @TypeAnnotation("BInterface" + "Anno") B
 
-val a: @TypeAnnotation("Int" <!EVALUATED("IntAnno")!>+ "Anno"<!>) Int = 1
+konst a: @TypeAnnotation("Int" <!EVALUATED("IntAnno")!>+ "Anno"<!>) Int = 1
 var b: @TypeAnnotation("List" <!EVALUATED("ListAnno")!>+ "Anno"<!>) List<
         @TypeAnnotation("Pair" <!EVALUATED("PairAnno")!>+ "Anno"<!>)Pair<
                 @TypeAnnotation("PairInt1" <!EVALUATED("PairInt1Anno")!>+ "Anno"<!>) Int,
@@ -25,14 +25,14 @@ var b: @TypeAnnotation("List" <!EVALUATED("ListAnno")!>+ "Anno"<!>) List<
     >? = null
 
 fun foo(a: @TypeAnnotation("String" <!EVALUATED("StringAnno")!>+ "Anno"<!>) String): @TypeAnnotation("Any" <!EVALUATED("AnyAnno")!>+ "Anno"<!>) Any {
-    val b : @TypeAnnotation("Double" <!EVALUATED("DoubleAnno")!>+ "Anno"<!>) Double = 1.0
+    konst b : @TypeAnnotation("Double" <!EVALUATED("DoubleAnno")!>+ "Anno"<!>) Double = 1.0
     return b
 }
 
 fun <T: @TypeAnnotation("SuperT" <!EVALUATED("SuperTAnno")!>+ "Anno"<!>) Any> bar(a: @TypeAnnotation("T" <!EVALUATED("TAnno")!>+ "Anno"<!>) T) {}
 
 fun example(computeAny: @TypeAnnotation("Fun" <!EVALUATED("FunAnno")!>+ "Anno"<!>) () -> Any) {
-//    val memoizedFoo: @TypeAnnotation("LocalDelegate" + "Anno") Any by lazy(computeAny)
+//    konst memoizedFoo: @TypeAnnotation("LocalDelegate" + "Anno") Any by lazy(computeAny)
 }
 
 typealias Fun = @TypeAnnotation("TypeAlias" <!EVALUATED("TypeAliasAnno")!>+ "Anno"<!>) (Int, Int) -> Int
@@ -41,14 +41,14 @@ fun memberAccess() {
     bar<@TypeAnnotation("Float" <!EVALUATED("FloatAnno")!>+ "Anno"<!>) Float>(1.0f)
 }
 
-val typeOperator = 1L as @TypeAnnotation("Long" <!EVALUATED("LongAnno")!>+ "Anno"<!>) Long
+konst typeOperator = 1L as @TypeAnnotation("Long" <!EVALUATED("LongAnno")!>+ "Anno"<!>) Long
 
 fun withVararg(vararg args: @TypeAnnotation("Byte" <!EVALUATED("ByteAnno")!>+ "Anno"<!>) Byte) {}
 
 fun withAnonymousObject() {
     object {
         fun bar() {
-            val a: @TypeAnnotation("InsideObject" <!EVALUATED("InsideObjectAnno")!>+ "Anno"<!>) A? = null
+            konst a: @TypeAnnotation("InsideObject" <!EVALUATED("InsideObjectAnno")!>+ "Anno"<!>) A? = null
         }
     }
 }
@@ -65,13 +65,13 @@ fun functionWithLambda(action: (Int, String) -> Any) {
 
 //fun lambda() {
 //    functionWithLambda { integer: @TypeAnnotation("InsideLambdaInt" + "Anno") Int, string ->
-//        val a: @TypeAnnotation("InsideLambda" + "Anno") Int = 0
+//        konst a: @TypeAnnotation("InsideLambda" + "Anno") Int = 0
 //        a
 //    }
 //}
 
-val inProjection: MutableList<in @TypeAnnotation("InProjection" <!EVALUATED("InProjectionAnno")!>+ "Anno"<!>) String> = mutableListOf()
-val outProjection: MutableList<out @TypeAnnotation("OutProjection" <!EVALUATED("OutProjectionAnno")!>+ "Anno"<!>) String> = mutableListOf()
+konst inProjection: MutableList<in @TypeAnnotation("InProjection" <!EVALUATED("InProjectionAnno")!>+ "Anno"<!>) String> = mutableListOf()
+konst outProjection: MutableList<out @TypeAnnotation("OutProjection" <!EVALUATED("OutProjectionAnno")!>+ "Anno"<!>) String> = mutableListOf()
 
 // MODULE: main
 // FILE: main.kt

@@ -52,11 +52,11 @@ fun test_3(x: Any) {
 
 fun <T> runHigherOrder(f: () -> T): T = f()
 
-val String.ext: Int get() = length
+konst String.ext: Int get() = length
 
 fun test_4(a: Any?) {
-    val s = a as? String
-    val length = s?.ext ?: return
+    konst s = a as? String
+    konst length = s?.ext ?: return
     runHigherOrder {
         s.length // Should be OK
     }

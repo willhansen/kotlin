@@ -3,20 +3,20 @@
 
 class PropertyHolder {
     @Deprecated("")
-    val a1 = 1
+    konst a1 = 1
 
     @property:Deprecated("")
     var a2 = ""
 
     @get:Deprecated("")
-    public val withGetter: String = ""
+    public konst withGetter: String = ""
 
     @set:Deprecated("")
     public var withSetter: String = ""
 }
 
 fun fn() {
-    val holder = PropertyHolder()
+    konst holder = PropertyHolder()
 
     holder.<!DEPRECATION!>a1<!>
     holder.<!DEPRECATION!>a2<!>

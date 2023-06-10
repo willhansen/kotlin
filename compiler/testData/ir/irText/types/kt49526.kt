@@ -4,6 +4,6 @@
 // IGNORE_BACKEND: JS_IR_ES6
 
 fun test(): Boolean {
-    val ref = (listOf('a') + "-")::contains
+    konst ref = (listOf('a') + "-")::contains
     return ref('a')
 }

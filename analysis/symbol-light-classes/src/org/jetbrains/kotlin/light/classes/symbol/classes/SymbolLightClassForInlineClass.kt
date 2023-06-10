@@ -47,10 +47,10 @@ internal class SymbolLightClassForInlineClass : SymbolLightClassForClassOrObject
 
     override fun getOwnMethods(): List<PsiMethod> = cachedValue {
         withClassOrObjectSymbol { classOrObjectSymbol ->
-            val result = mutableListOf<KtLightMethod>()
+            konst result = mutableListOf<KtLightMethod>()
 
-            val declaredMemberScope = classOrObjectSymbol.getDeclaredMemberScope()
-            val applicableDeclarations = declaredMemberScope.getCallableSymbols()
+            konst declaredMemberScope = classOrObjectSymbol.getDeclaredMemberScope()
+            konst applicableDeclarations = declaredMemberScope.getCallableSymbols()
                 .filter {
                     (it as? KtPropertySymbol)?.isOverride == true || (it as? KtFunctionSymbol)?.isOverride == true
                 }
@@ -60,17 +60,17 @@ internal class SymbolLightClassForInlineClass : SymbolLightClassForClassOrObject
 
             createMethods(applicableDeclarations, result, suppressStatic = false)
 
-            val inlineClassParameterSymbol = declaredMemberScope.getConstructors()
+            konst inlineClassParameterSymbol = declaredMemberScope.getConstructors()
                 .singleOrNull { it.isPrimary }
-                ?.valueParameters
+                ?.konstueParameters
                 ?.singleOrNull()
 
             if (inlineClassParameterSymbol != null) {
-                val propertySymbol = declaredMemberScope.getCallableSymbols(inlineClassParameterSymbol.name)
+                konst propertySymbol = declaredMemberScope.getCallableSymbols(inlineClassParameterSymbol.name)
                     .singleOrNull { it is KtPropertySymbol && it.isFromPrimaryConstructor } as? KtPropertySymbol
 
                 if (propertySymbol != null) {
-                    // (inline or) value class primary constructor must have only final read-only (val) property parameter
+                    // (inline or) konstue class primary constructor must have only final read-only (konst) property parameter
                     // Even though the property parameter is mutable (for some reasons, e.g., testing or not checked yet),
                     // we can enforce immutability here.
                     createPropertyAccessors(result, propertySymbol, isTopLevel = false, isMutable = false)

@@ -11,38 +11,38 @@ import kotlin.script.experimental.api.*
 import kotlin.script.experimental.util.PropertiesCollection
 
 /**
- * Script definition combines configuration data for script compilation and evaluation
+ * Script definition combines configuration data for script compilation and ekonstuation
  */
 data class ScriptDefinition(
-    val compilationConfiguration: ScriptCompilationConfiguration,
-    val evaluationConfiguration: ScriptEvaluationConfiguration
+    konst compilationConfiguration: ScriptCompilationConfiguration,
+    konst ekonstuationConfiguration: ScriptEkonstuationConfiguration
 )
 
 /**
- * Creates script compilation and evaluation configuration from annotated script base class
+ * Creates script compilation and ekonstuation configuration from annotated script base class
  * @param baseClassType the annotated script base class to construct the configuration from
  * @param baseHostConfiguration base scripting host configuration properties
  * @param contextClass optional context class to extract classloading strategy from
  * @param compilation optional configuration function to add more properties to the compilation configuration
- * @param evaluation optional configuration function to add more properties to the evaluation configuration
+ * @param ekonstuation optional configuration function to add more properties to the ekonstuation configuration
  */
 fun createScriptDefinitionFromTemplate(
     baseClassType: KotlinType,
     baseHostConfiguration: ScriptingHostConfiguration,
     contextClass: KClass<*> = ScriptDefinition::class,
     compilation: ScriptCompilationConfiguration.Builder.() -> Unit = {},
-    evaluation: ScriptEvaluationConfiguration.Builder.() -> Unit = {}
+    ekonstuation: ScriptEkonstuationConfiguration.Builder.() -> Unit = {}
 ): ScriptDefinition {
-    val templateClass: KClass<*> = baseClassType.getTemplateClass(baseHostConfiguration, contextClass)
-    val mainAnnotation = templateClass.kotlinScriptAnnotation
+    konst templateClass: KClass<*> = baseClassType.getTemplateClass(baseHostConfiguration, contextClass)
+    konst mainAnnotation = templateClass.kotlinScriptAnnotation
 
-    val hostConfiguration = constructHostConfiguration(mainAnnotation.hostConfiguration, baseHostConfiguration) {}
+    konst hostConfiguration = constructHostConfiguration(mainAnnotation.hostConfiguration, baseHostConfiguration) {}
 
-    val compilationConfiguration =
+    konst compilationConfiguration =
         constructCompilationConfiguration(mainAnnotation, hostConfiguration, templateClass, baseClassType, compilation)
-    val evaluationConfiguration = constructEvaluationConfiguration(mainAnnotation, hostConfiguration, evaluation)
+    konst ekonstuationConfiguration = constructEkonstuationConfiguration(mainAnnotation, hostConfiguration, ekonstuation)
 
-    return ScriptDefinition(compilationConfiguration, evaluationConfiguration)
+    return ScriptDefinition(compilationConfiguration, ekonstuationConfiguration)
 }
 
 /**
@@ -59,39 +59,39 @@ fun createCompilationConfigurationFromTemplate(
     contextClass: KClass<*> = ScriptCompilationConfiguration::class,
     body: ScriptCompilationConfiguration.Builder.() -> Unit = {}
 ): ScriptCompilationConfiguration {
-    val templateClass: KClass<*> = baseClassType.getTemplateClass(baseHostConfiguration, contextClass)
-    val mainAnnotation = templateClass.kotlinScriptAnnotation
+    konst templateClass: KClass<*> = baseClassType.getTemplateClass(baseHostConfiguration, contextClass)
+    konst mainAnnotation = templateClass.kotlinScriptAnnotation
 
-    val hostConfiguration = constructHostConfiguration(mainAnnotation.hostConfiguration, baseHostConfiguration) {}
+    konst hostConfiguration = constructHostConfiguration(mainAnnotation.hostConfiguration, baseHostConfiguration) {}
 
     return constructCompilationConfiguration(mainAnnotation, hostConfiguration, templateClass, baseClassType, body)
 }
 
 /**
- * Creates evaluation configuration from annotated script base class
+ * Creates ekonstuation configuration from annotated script base class
  * NOTE: it is preferable to use createScriptDefinitionFromTemplate for creating all configurations at once
  * @param baseClassType the annotated script base class to construct the configuration from
  * @param baseHostConfiguration scripting host configuration properties
  * @param contextClass optional context class to extract classloading strategy from
- * @param body optional configuration function to add more properties to the evaluation configuration
+ * @param body optional configuration function to add more properties to the ekonstuation configuration
  */
-fun createEvaluationConfigurationFromTemplate(
+fun createEkonstuationConfigurationFromTemplate(
     baseClassType: KotlinType,
     baseHostConfiguration: ScriptingHostConfiguration,
-    contextClass: KClass<*> = ScriptEvaluationConfiguration::class,
-    body: ScriptEvaluationConfiguration.Builder.() -> Unit = {}
-): ScriptEvaluationConfiguration {
-    val templateClass: KClass<*> = baseClassType.getTemplateClass(baseHostConfiguration, contextClass)
-    val mainAnnotation = templateClass.kotlinScriptAnnotation
+    contextClass: KClass<*> = ScriptEkonstuationConfiguration::class,
+    body: ScriptEkonstuationConfiguration.Builder.() -> Unit = {}
+): ScriptEkonstuationConfiguration {
+    konst templateClass: KClass<*> = baseClassType.getTemplateClass(baseHostConfiguration, contextClass)
+    konst mainAnnotation = templateClass.kotlinScriptAnnotation
 
-    val hostConfiguration = constructHostConfiguration(mainAnnotation.hostConfiguration, baseHostConfiguration) {}
+    konst hostConfiguration = constructHostConfiguration(mainAnnotation.hostConfiguration, baseHostConfiguration) {}
 
-    return constructEvaluationConfiguration(mainAnnotation, hostConfiguration, body)
+    return constructEkonstuationConfiguration(mainAnnotation, hostConfiguration, body)
 }
 
-private const val ERROR_MSG_PREFIX = "Unable to construct script definition: "
+private const konst ERROR_MSG_PREFIX = "Unable to construct script definition: "
 
-private const val SCRIPT_RUNTIME_TEMPLATES_PACKAGE = "kotlin.script.templates.standard"
+private const konst SCRIPT_RUNTIME_TEMPLATES_PACKAGE = "kotlin.script.templates.standard"
 
 @KotlinScript
 private abstract class DummyScriptTemplate
@@ -103,7 +103,7 @@ private fun constructCompilationConfiguration(
     baseClassType: KotlinType,
     body: ScriptCompilationConfiguration.Builder.() -> Unit
 ): ScriptCompilationConfiguration {
-    val compilationConfigurationInstance = scriptConfigInstance(mainAnnotation.compilationConfiguration)
+    konst compilationConfigurationInstance = scriptConfigInstance(mainAnnotation.compilationConfiguration)
         ?: throw IllegalArgumentException("${ERROR_MSG_PREFIX}Illegal argument compilationConfiguration of the KotlinScript annotation: expecting an object or default-constructable class derived from ScriptCompilationConfiguration")
 
     return ScriptCompilationConfiguration(compilationConfigurationInstance) {
@@ -114,15 +114,15 @@ private fun constructCompilationConfiguration(
     }
 }
 
-private fun constructEvaluationConfiguration(
+private fun constructEkonstuationConfiguration(
     mainAnnotation: KotlinScript,
     hostConfiguration: ScriptingHostConfiguration,
-    body: ScriptEvaluationConfiguration.Builder.() -> Unit
-): ScriptEvaluationConfiguration {
-    val evaluationConfigurationInstance = scriptConfigInstance(mainAnnotation.evaluationConfiguration)
-        ?: throw IllegalArgumentException("${ERROR_MSG_PREFIX}Illegal argument evaluationConfiguration of the KotlinScript annotation: expecting an object or default-constructable class derived from ScriptEvaluationConfiguration")
+    body: ScriptEkonstuationConfiguration.Builder.() -> Unit
+): ScriptEkonstuationConfiguration {
+    konst ekonstuationConfigurationInstance = scriptConfigInstance(mainAnnotation.ekonstuationConfiguration)
+        ?: throw IllegalArgumentException("${ERROR_MSG_PREFIX}Illegal argument ekonstuationConfiguration of the KotlinScript annotation: expecting an object or default-constructable class derived from ScriptEkonstuationConfiguration")
 
-    return ScriptEvaluationConfiguration(evaluationConfigurationInstance) {
+    return ScriptEkonstuationConfiguration(ekonstuationConfigurationInstance) {
         // TODO: consider deprecating host configuration updating here, it is better to do it via dedicated annotation parameter
         this.hostConfiguration.update { it.withDefaultsFrom(hostConfiguration) }
         body()
@@ -137,11 +137,11 @@ private fun constructHostConfiguration(
     if (hostConfigurationKClass == ScriptingHostConfiguration::class)
         return ScriptingHostConfiguration(body).withDefaultsFrom(baseHostConfiguration)
 
-    val singleArgConstructor = hostConfigurationKClass.java.constructors.singleOrNull {
+    konst singleArgConstructor = hostConfigurationKClass.java.constructors.singleOrNull {
         it.parameters.isNotEmpty() && it.parameters.first().type.isAssignableFrom(ScriptingHostConfiguration::class.java)
     }
 
-    val hostConfigurationInstance =
+    konst hostConfigurationInstance =
         if (singleArgConstructor != null) singleArgConstructor.newInstance(baseHostConfiguration) as ScriptingHostConfiguration
         else scriptConfigInstance(hostConfigurationKClass)
             ?: throw IllegalArgumentException("${ERROR_MSG_PREFIX}Illegal argument hostConfiguration of the KotlinScript annotation: expecting an object or a class derived from ScriptingHostConfiguration constructable without arguments or from a base configuration")
@@ -165,7 +165,7 @@ private fun ScriptCompilationConfiguration.Builder.propertiesFromTemplate(
     displayName.replaceOnlyDefault(mainAnnotation.displayName)
 }
 
-private val KClass<*>.kotlinScriptAnnotation: KotlinScript
+private konst KClass<*>.kotlinScriptAnnotation: KotlinScript
     get() = findAnnotation()
         ?: when (this@kotlinScriptAnnotation.qualifiedName) {
             // Any is the default template, so use a default annotation
@@ -180,7 +180,7 @@ private val KClass<*>.kotlinScriptAnnotation: KotlinScript
         ?: throw IllegalArgumentException("${ERROR_MSG_PREFIX}Expecting KotlinScript annotation on the $this")
 
 private fun KotlinType.getTemplateClass(hostConfiguration: ScriptingHostConfiguration, contextClass: KClass<*>): KClass<*> {
-    val getScriptingClass = hostConfiguration[ScriptingHostConfiguration.getScriptingClass]
+    konst getScriptingClass = hostConfiguration[ScriptingHostConfiguration.getScriptingClass]
         ?: throw IllegalArgumentException("${ERROR_MSG_PREFIX}Expecting 'getScriptingClass' parameter in the scripting host configuration")
 
     return try {
@@ -196,7 +196,7 @@ private inline fun <reified T : Annotation> KClass<*>.findAnnotation(): T? =
 
 private inline fun <reified T : PropertiesCollection> scriptConfigInstance(kclass: KClass<out T>): T? =
     kclass.objectInstance ?: run {
-        val noArgsConstructor = kclass.java.constructors.singleOrNull { it.parameters.isEmpty() }
+        konst noArgsConstructor = kclass.java.constructors.singleOrNull { it.parameters.isEmpty() }
         noArgsConstructor?.let { it.newInstance() as T }
     }
 

@@ -6,11 +6,11 @@ import java.io.Closeable
 
 class MyException(message: String) : Exception(message)
 
-class Holder(var value: String) {
+class Holder(var konstue: String) {
     operator fun plusAssign(s: String?) {
-        value += s
+        konstue += s
         if (s != "closed") {
-            value += "->"
+            konstue += "->"
         }
     }
 }
@@ -141,35 +141,35 @@ class TestLocal() : Closeable {
 fun box(): String {
     var callable = TestLocal()
     var result = callable.local()
-    if (result.value != "called->closed") return "fail local: " + result.value
+    if (result.konstue != "called->closed") return "fail local: " + result.konstue
 
     callable = TestLocal()
     result = callable.nonLocalSimple()
-    if (result.value != "called->closed") return "fail nonLocalSimple: " + result.value
+    if (result.konstue != "called->closed") return "fail nonLocalSimple: " + result.konstue
 
     callable = TestLocal()
     result = callable.nonLocalWithException()
-    if (result.value != "called->exception->closed") return "fail nonLocalWithException: " + result.value
+    if (result.konstue != "called->exception->closed") return "fail nonLocalWithException: " + result.konstue
 
     callable = TestLocal()
     result = callable.nonLocalWithFinally()
-    if (result.value != "called->finally->closed") return "fail nonLocalWithFinally: " + result.value
+    if (result.konstue != "called->finally->closed") return "fail nonLocalWithFinally: " + result.konstue
 
     callable = TestLocal()
     result = callable.nonLocalWithExceptionAndFinally()
-    if (result.value != "called->exception->finally->closed") return "fail nonLocalWithExceptionAndFinally: " + result.value
+    if (result.konstue != "called->exception->finally->closed") return "fail nonLocalWithExceptionAndFinally: " + result.konstue
 
     callable = TestLocal()
     result = callable.nonLocalWithExceptionAndFinallyWithReturn()
-    if (result.value != "called->exception->finally->closed") return "fail nonLocalWithExceptionAndFinallyWithReturn: " + result.value
+    if (result.konstue != "called->exception->finally->closed") return "fail nonLocalWithExceptionAndFinallyWithReturn: " + result.konstue
 
     callable = TestLocal()
     result = callable.nonLocalNestedWithException()
-    if (result.value != "called->exception->finally1->finally2->closed") return "fail nonLocalNestedWithException: " + result.value
+    if (result.konstue != "called->exception->finally1->finally2->closed") return "fail nonLocalNestedWithException: " + result.konstue
 
     callable = TestLocal()
     result = callable.nonLocalNestedFinally()
-    if (result.value != "called->finally1->finally2->closed") return "fail nonLocalNestedFinally: " + result.value
+    if (result.konstue != "called->finally1->finally2->closed") return "fail nonLocalNestedFinally: " + result.konstue
 
 
     return "OK"

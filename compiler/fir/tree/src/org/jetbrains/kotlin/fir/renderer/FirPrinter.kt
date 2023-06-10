@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.fir.FirElement
 import org.jetbrains.kotlin.utils.Printer
 
 open class FirPrinter(builder: StringBuilder) {
-    private val printer = Printer(builder)
+    private konst printer = Printer(builder)
 
     private var lineBeginning = true
 

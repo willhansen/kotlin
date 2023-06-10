@@ -21,18 +21,18 @@ object DataObjectContentChecker : DeclarationChecker {
         if (descriptor !is FunctionDescriptor) return
         if (descriptor.name != OperatorNameConventions.EQUALS && descriptor.name != OperatorNameConventions.HASH_CODE) return
 
-        val container = descriptor.containingDeclaration
+        konst container = descriptor.containingDeclaration
         if (container !is ClassDescriptor) return
         if (!container.isData || container.kind != ClassKind.OBJECT) return
 
         if (DescriptorUtils.getAllOverriddenDescriptors(descriptor).any(::isDeclaredInAny)) {
-            val target = declaration.modifierList?.getModifier(KtTokens.OVERRIDE_KEYWORD) ?: declaration
+            konst target = declaration.modifierList?.getModifier(KtTokens.OVERRIDE_KEYWORD) ?: declaration
             context.trace.report(Errors.DATA_OBJECT_CUSTOM_EQUALS_OR_HASH_CODE.on(target))
         }
     }
 
     private fun isDeclaredInAny(descriptor: FunctionDescriptor): Boolean {
-        val container = descriptor.containingDeclaration
+        konst container = descriptor.containingDeclaration
         return container is ClassDescriptor && KotlinBuiltIns.isAny(container)
     }
 }

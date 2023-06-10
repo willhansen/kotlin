@@ -7,7 +7,7 @@ package lab
 public class TestClass {
 
     @example.ExampleAnnotation
-    public val testVal: String = "text"
+    public konst testVal: String = "text"
 
     @example.ExampleAnnotation
     public fun testFunction(): TestClassGenerated = TestClassGenerated()

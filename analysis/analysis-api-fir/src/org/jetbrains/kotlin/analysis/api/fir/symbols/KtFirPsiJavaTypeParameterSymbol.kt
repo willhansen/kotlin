@@ -21,24 +21,24 @@ import org.jetbrains.kotlin.types.Variance
  * is requested.
  */
 internal class KtFirPsiJavaTypeParameterSymbol(
-    override val psi: PsiTypeParameter,
-    override val analysisSession: KtFirAnalysisSession,
-    private val computeFirSymbol: () -> FirTypeParameterSymbol,
+    override konst psi: PsiTypeParameter,
+    override konst analysisSession: KtFirAnalysisSession,
+    private konst computeFirSymbol: () -> FirTypeParameterSymbol,
 ) : KtFirTypeParameterSymbolBase(), KtFirPsiSymbol<PsiTypeParameter, FirTypeParameterSymbol> {
-    override val name: Name = withValidityAssertion {
+    override konst name: Name = withValidityAssertion {
         psi.name?.let { Name.identifier(it) } ?: SpecialNames.NO_NAME_PROVIDED
     }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { KtSymbolOrigin.JAVA }
 
-    override val variance: Variance
+    override konst variance: Variance
         get() = withValidityAssertion { Variance.INVARIANT }
 
-    override val isReified: Boolean
+    override konst isReified: Boolean
         get() = withValidityAssertion { false }
 
-    override val firSymbol: FirTypeParameterSymbol by cached {
+    override konst firSymbol: FirTypeParameterSymbol by cached {
         computeFirSymbol()
     }
 }

@@ -24,13 +24,13 @@ object FirFunInterfaceConstructorReferenceChecker : FirQualifiedAccessExpression
         if (expression !is FirCallableReferenceAccess) return
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.KotlinFunInterfaceConstructorReference)) return
 
-        val reference = expression.calleeReference.resolved ?: return
-        val referredSymbol = reference.resolvedSymbol
+        konst reference = expression.calleeReference.resolved ?: return
+        konst referredSymbol = reference.resolvedSymbol
 
         if (referredSymbol is FirNamedFunctionSymbol &&
             referredSymbol.origin == FirDeclarationOrigin.SamConstructor
         ) {
-            val samClassSymbol = referredSymbol.resolvedReturnTypeRef.toRegularClassSymbol(context.session) ?: return
+            konst samClassSymbol = referredSymbol.resolvedReturnTypeRef.toRegularClassSymbol(context.session) ?: return
             if (samClassSymbol.isFun && !samClassSymbol.isJavaOrEnhancement) {
                 reporter.reportOn(reference.source, FUN_INTERFACE_CONSTRUCTOR_REFERENCE, context)
             }

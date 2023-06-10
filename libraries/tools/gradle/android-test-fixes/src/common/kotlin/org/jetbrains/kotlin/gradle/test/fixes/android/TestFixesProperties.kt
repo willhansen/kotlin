@@ -8,15 +8,15 @@ package org.jetbrains.kotlin.gradle.test.fixes.android
 import org.gradle.api.Project
 
 internal class TestFixesProperties(
-    private val project: Project
+    private konst project: Project
 ) {
-    val androidDebugKeystoreLocation: String
+    konst androidDebugKeystoreLocation: String
         get() = project.findProperty(ANDROID_DEBUG_KEYSTORE_LOCATION) as String? ?: throw IllegalArgumentException(
             "$ANDROID_DEBUG_KEYSTORE_LOCATION property was not found in 'gradle.properties'."
         )
 
     companion object {
-        private const val PROP_PREFIX = "test.fixes."
-        private const val ANDROID_DEBUG_KEYSTORE_LOCATION = "${PROP_PREFIX}android.debugKeystore"
+        private const konst PROP_PREFIX = "test.fixes."
+        private const konst ANDROID_DEBUG_KEYSTORE_LOCATION = "${PROP_PREFIX}android.debugKeystore"
     }
 }

@@ -23,7 +23,7 @@ class Foo {
     /**
      * Javadoc comment
      */
-    val x: Int = 42
+    konst x: Int = 42
         // Comment for getter
         get() = field + 1
         // Dangling comment

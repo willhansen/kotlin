@@ -7,4 +7,4 @@ fun test() {
 
 fun <T> generateException(a: T, next: (T) -> T) {}
 
-class Data<out K>(val x: K)
+class Data<out K>(konst x: K)

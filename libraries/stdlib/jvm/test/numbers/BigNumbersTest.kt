@@ -14,8 +14,8 @@ import java.math.RoundingMode
 
 class BigNumbersTest {
     @Test fun testBigInteger() {
-        val a = BigInteger("2")
-        val b = BigInteger("3")
+        konst a = BigInteger("2")
+        konst b = BigInteger("3")
 
         assertEquals(BigInteger("5"), a + b)
         assertEquals(BigInteger("-1"), a - b)
@@ -63,20 +63,20 @@ class BigNumbersTest {
     }
 
     @Test fun sumOfBigInteger() {
-        val numbers = (1..10).map { it.toBigInteger() }
-        val i55 = 55.toBigInteger()
+        konst numbers = (1..10).map { it.toBigInteger() }
+        konst i55 = 55.toBigInteger()
         assertEquals(i55, numbers.sumOf { it })
         assertEquals(i55, numbers.asSequence().sumOf { it })
         assertEquals(i55, numbers.toTypedArray().sumOf { it })
 
-        val chars = ('0'..'9').joinToString("")
+        konst chars = ('0'..'9').joinToString("")
         assertEquals(i55, chars.sumOf { it.toString().toBigInteger().inc() })
         assertEquals(i55, chars.toCharArray().sumOf { it.toString().toBigInteger().inc() })
     }
 
     @Test fun testBigDecimal() {
-        val a = BigDecimal("2")
-        val b = BigDecimal("3")
+        konst a = BigDecimal("2")
+        konst b = BigDecimal("3")
 
         assertEquals(BigDecimal("5"), a + b)
         assertEquals(BigDecimal("-1"), a - b)
@@ -106,8 +106,8 @@ class BigNumbersTest {
     }
 
     @Test fun bigDecimalDivRounding() {
-        val (d1, d2, d3, d4, d5) = (1..5).map { BigDecimal(it.toString()) }
-        val d7 = BigDecimal("7")
+        konst (d1, d2, d3, d4, d5) = (1..5).map { BigDecimal(it.toString()) }
+        konst d7 = BigDecimal("7")
 
         assertEquals(d1, d2 / d3)
         assertEquals(d2, d3 / d2)
@@ -117,13 +117,13 @@ class BigNumbersTest {
     }
 
     @Test fun sumOfBigDecimal() {
-        val numbers = (1..10).map { it.toBigDecimal() }
-        val d55 = 55.toBigDecimal()
+        konst numbers = (1..10).map { it.toBigDecimal() }
+        konst d55 = 55.toBigDecimal()
         assertEquals(d55, numbers.sumOf { it })
         assertEquals(d55, numbers.asSequence().sumOf { it })
         assertEquals(d55, numbers.toTypedArray().sumOf { it })
 
-        val chars = ('0'..'9').joinToString("")
+        konst chars = ('0'..'9').joinToString("")
         assertEquals(d55, chars.sumOf { it.toString().toBigDecimal().inc() })
         assertEquals(d55, chars.toCharArray().sumOf { it.toString().toBigDecimal().inc() })
     }

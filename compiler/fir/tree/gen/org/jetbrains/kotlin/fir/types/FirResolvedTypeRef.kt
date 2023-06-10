@@ -16,11 +16,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirResolvedTypeRef : FirTypeRef() {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract val type: ConeKotlinType
-    abstract val delegatedTypeRef: FirTypeRef?
-    abstract val isFromStubType: Boolean
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract konst type: ConeKotlinType
+    abstract konst delegatedTypeRef: FirTypeRef?
+    abstract konst isFromStubType: Boolean
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitResolvedTypeRef(this, data)
 

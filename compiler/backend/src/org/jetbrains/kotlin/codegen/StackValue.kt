@@ -10,42 +10,42 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class CoercionValue(
-    val value: StackValue,
-    private val castType: Type,
-    private val castKotlinType: KotlinType?,
-    private val underlyingKotlinType: KotlinType? // type of the underlying parameter for inline class
-) : StackValue(castType, castKotlinType, value.canHaveSideEffects()) {
+    konst konstue: StackValue,
+    private konst castType: Type,
+    private konst castKotlinType: KotlinType?,
+    private konst underlyingKotlinType: KotlinType? // type of the underlying parameter for inline class
+) : StackValue(castType, castKotlinType, konstue.canHaveSideEffects()) {
 
     override fun putSelector(type: Type, kotlinType: KotlinType?, v: InstructionAdapter) {
-        value.putSelector(value.type, value.kotlinType, v)
+        konstue.putSelector(konstue.type, konstue.kotlinType, v)
 
         // consider the following example:
 
-        // inline class AsAny(val a: Any)
-        // val a = AsAny(1)
+        // inline class AsAny(konst a: Any)
+        // konst a = AsAny(1)
         //
         // Here we should coerce `Int` (1) to `Any` and remember that resulting type is inline class type `AsAny` (not `Any`)
-        StackValue.coerce(value.type, value.kotlinType, castType, underlyingKotlinType ?: castKotlinType, v)
+        StackValue.coerce(konstue.type, konstue.kotlinType, castType, underlyingKotlinType ?: castKotlinType, v)
         StackValue.coerce(castType, castKotlinType, type, kotlinType, v)
     }
 
     override fun storeSelector(topOfStackType: Type, topOfStackKotlinType: KotlinType?, v: InstructionAdapter) {
-        value.storeSelector(topOfStackType, topOfStackKotlinType, v)
+        konstue.storeSelector(topOfStackType, topOfStackKotlinType, v)
     }
 
     override fun putReceiver(v: InstructionAdapter, isRead: Boolean) {
-        value.putReceiver(v, isRead)
+        konstue.putReceiver(v, isRead)
     }
 
     override fun isNonStaticAccess(isRead: Boolean): Boolean {
-        return value.isNonStaticAccess(isRead)
+        return konstue.isNonStaticAccess(isRead)
     }
 }
 
 
 class StackValueWithLeaveTask(
-    val stackValue: StackValue,
-    val leaveTasks: (StackValue) -> Unit
+    konst stackValue: StackValue,
+    konst leaveTasks: (StackValue) -> Unit
 ) : StackValue(stackValue.type, stackValue.kotlinType) {
 
     override fun putReceiver(v: InstructionAdapter, isRead: Boolean) {
@@ -61,7 +61,7 @@ class StackValueWithLeaveTask(
 open class OperationStackValue(
     resultType: Type,
     resultKotlinType: KotlinType?,
-    val lambda: (v: InstructionAdapter) -> Unit
+    konst lambda: (v: InstructionAdapter) -> Unit
 ) : StackValue(resultType, resultKotlinType) {
 
     override fun putSelector(type: Type, kotlinType: KotlinType?, v: InstructionAdapter) {

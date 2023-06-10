@@ -1,6 +1,6 @@
 package
 
-public val ann: MyAnnotation
+public konst ann: MyAnnotation
 public fun bar(/*0*/ y: MyAnnotation): kotlin.Unit
 public fun foo(/*0*/ x: MyAnnoClass): kotlin.Unit
 

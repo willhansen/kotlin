@@ -28,16 +28,16 @@ import org.jetbrains.kotlin.util.slicedMap.WritableSlice
 
 object JvmBindingContextSlices {
     @JvmField
-    val RUNTIME_ASSERTION_INFO: WritableSlice<KtExpression, RuntimeAssertionInfo> = BasicWritableSlice(RewritePolicy.DO_NOTHING)
+    konst RUNTIME_ASSERTION_INFO: WritableSlice<KtExpression, RuntimeAssertionInfo> = BasicWritableSlice(RewritePolicy.DO_NOTHING)
 
     @JvmField
-    val RECEIVER_RUNTIME_ASSERTION_INFO: WritableSlice<ExpressionReceiver, RuntimeAssertionInfo> = BasicWritableSlice(RewritePolicy.DO_NOTHING)
+    konst RECEIVER_RUNTIME_ASSERTION_INFO: WritableSlice<ExpressionReceiver, RuntimeAssertionInfo> = BasicWritableSlice(RewritePolicy.DO_NOTHING)
 
     @JvmField
-    val BODY_RUNTIME_ASSERTION_INFO: WritableSlice<KtExpression, RuntimeAssertionInfo> = BasicWritableSlice(RewritePolicy.DO_NOTHING)
+    konst BODY_RUNTIME_ASSERTION_INFO: WritableSlice<KtExpression, RuntimeAssertionInfo> = BasicWritableSlice(RewritePolicy.DO_NOTHING)
 
     @JvmField
-    val LOAD_FROM_JAVA_SIGNATURE_ERRORS: WritableSlice<DeclarationDescriptor, List<String>> = Slices.createCollectiveSlice()
+    konst LOAD_FROM_JAVA_SIGNATURE_ERRORS: WritableSlice<DeclarationDescriptor, List<String>> = Slices.createCollectiveSlice()
 
     init {
         BasicWritableSlice.initSliceDebugNames(JvmBindingContextSlices::class.java)

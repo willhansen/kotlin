@@ -262,8 +262,8 @@ abstract class FirVisitorVoid : FirVisitor<Unit, Nothing?>() {
         visitElement(variable)
     }
 
-    open fun visitValueParameter(valueParameter: FirValueParameter) {
-        visitElement(valueParameter)
+    open fun visitValueParameter(konstueParameter: FirValueParameter) {
+        visitElement(konstueParameter)
     }
 
     open fun visitReceiverParameter(receiverParameter: FirReceiverParameter) {
@@ -870,8 +870,8 @@ abstract class FirVisitorVoid : FirVisitor<Unit, Nothing?>() {
         visitVariable(variable)
     }
 
-    final override fun visitValueParameter(valueParameter: FirValueParameter, data: Nothing?) {
-        visitValueParameter(valueParameter)
+    final override fun visitValueParameter(konstueParameter: FirValueParameter, data: Nothing?) {
+        visitValueParameter(konstueParameter)
     }
 
     final override fun visitReceiverParameter(receiverParameter: FirReceiverParameter, data: Nothing?) {

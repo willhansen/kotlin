@@ -2,8 +2,8 @@ package
 
 package uninitialized_reassigned_variables {
     public var x: kotlin.Int
-    public val y: kotlin.Int = 10
-    public val z: kotlin.Int = 10
+    public konst y: kotlin.Int = 10
+    public konst z: kotlin.Int = 10
     public fun doSmth(/*0*/ i: kotlin.Int): kotlin.Unit
     public fun doSmth(/*0*/ s: kotlin.String): kotlin.Unit
     public fun foo(): kotlin.Unit
@@ -31,14 +31,14 @@ package uninitialized_reassigned_variables {
     public final class AnonymousInitializers {
         public constructor AnonymousInitializers(/*0*/ a: kotlin.String, /*1*/ b: kotlin.String)
         public final var a: kotlin.String
-        public final val b: kotlin.String
-        public final val i: kotlin.Int
-        public final val j: kotlin.Int
-        public final val k: kotlin.String
-        public final val l: kotlin.String
+        public final konst b: kotlin.String
+        public final konst i: kotlin.Int
+        public final konst j: kotlin.Int
+        public final konst k: kotlin.String
+        public final konst l: kotlin.String
         public final var m: kotlin.Int
-        public final val n: kotlin.Int
-        public final val o: kotlin.String
+        public final konst n: kotlin.Int
+        public final konst o: kotlin.String
         public final var p: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -53,7 +53,7 @@ package uninitialized_reassigned_variables {
 
         public companion object Companion {
             private constructor Companion()
-            public final val x: kotlin.Int
+            public final konst x: kotlin.Int
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public final fun foo(): kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -63,9 +63,9 @@ package uninitialized_reassigned_variables {
 
     public final class ForwardAccessToBackingField {
         public constructor ForwardAccessToBackingField()
-        public final val a: [Error type: Not found recorded type for a]
-        public final val b: kotlin.Int = 1
-        public final val c: kotlin.Int = 1
+        public final konst a: [Error type: Not found recorded type for a]
+        public final konst b: kotlin.Int = 1
+        public final konst c: kotlin.Int = 1
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -73,11 +73,11 @@ package uninitialized_reassigned_variables {
 
     public final class LocalValsVsProperties : uninitialized_reassigned_variables.Open {
         public constructor LocalValsVsProperties(/*0*/ a: kotlin.Int, /*1*/ w: kotlin.Int)
-        public final val a: kotlin.Int
-        public final val b: kotlin.Int
-        public final val x: kotlin.Int
+        public final konst a: kotlin.Int
+        public final konst b: kotlin.Int
+        public final konst x: kotlin.Int
         public final var xx: kotlin.Int
-        public final val y: kotlin.Int
+        public final konst y: kotlin.Int
         public final var yy: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.Unit
@@ -87,7 +87,7 @@ package uninitialized_reassigned_variables {
 
     public final class M {
         public constructor M()
-        public final val x: kotlin.Int = 11
+        public final konst x: kotlin.Int = 11
         public final var y: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -103,7 +103,7 @@ package uninitialized_reassigned_variables {
 
     public final class Outer {
         public constructor Outer()
-        public final val a: kotlin.Int
+        public final konst a: kotlin.Int
         public final var b: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.Unit
@@ -124,8 +124,8 @@ package uninitialized_reassigned_variables {
         enum entry TALKING
 
         private constructor ProtocolState()
-        @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-        public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+        @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
         protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
         public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: uninitialized_reassigned_variables.ProtocolState): kotlin.Int
         public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -136,15 +136,15 @@ package uninitialized_reassigned_variables {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<uninitialized_reassigned_variables.ProtocolState>
-        public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): uninitialized_reassigned_variables.ProtocolState
-        public final /*synthesized*/ fun values(): kotlin.Array<uninitialized_reassigned_variables.ProtocolState>
+        public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<uninitialized_reassigned_variables.ProtocolState>
+        public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): uninitialized_reassigned_variables.ProtocolState
+        public final /*synthesized*/ fun konstues(): kotlin.Array<uninitialized_reassigned_variables.ProtocolState>
     }
 
     public object TestObjectDeclaration {
         private constructor TestObjectDeclaration()
-        public final val x: kotlin.Int
-        public final val y: kotlin.Int
+        public final konst x: kotlin.Int
+        public final konst y: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -153,7 +153,7 @@ package uninitialized_reassigned_variables {
 
     public final class TestObjectExpression {
         public constructor TestObjectExpression()
-        public final val a: kotlin.Int
+        public final konst a: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -1,9 +1,9 @@
-val p: Int? = 1;
-val z: Int? = 2;
+konst p: Int? = 1;
+konst z: Int? = 2;
 
 fun test3() {
     if (!(p!! < z!!)) {
-        val p = 1
+        konst p = 1
     }
 }
 // 2 checkNotNull \(Ljava/lang/Object;\)V

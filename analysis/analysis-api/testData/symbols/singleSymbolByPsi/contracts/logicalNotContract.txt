@@ -25,7 +25,7 @@ KtFunctionSymbol:
                   isImplicitLambdaParameter: false
                   isNoinline: false
                   isVararg: false
-                  name: value
+                  name: konstue
                   origin: SOURCE
                   receiverParameter: null
                   returnType: KtUsualClassType:
@@ -57,7 +57,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -69,7 +69,7 @@ KtFunctionSymbol:
       isImplicitLambdaParameter: false
       isNoinline: false
       isVararg: false
-      name: value
+      name: konstue
       origin: SOURCE
       receiverParameter: null
       returnType: KtUsualClassType:

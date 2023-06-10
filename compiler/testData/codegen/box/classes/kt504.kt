@@ -4,7 +4,7 @@ public open class Identifier() {
     private var myNullable : Boolean = true
     companion object {
         open public fun init(isNullable : Boolean) : Identifier {
-            val id = Identifier()
+            konst id = Identifier()
             id.myNullable = isNullable
             return id
         }

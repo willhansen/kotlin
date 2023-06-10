@@ -3,7 +3,7 @@ package codegen.controlflow.for_loops_array_nested
 import kotlin.test.*
 
 @Test fun arrayOfArrays() {
-    val metaArray = arrayOf(
+    konst metaArray = arrayOf(
             arrayOf(1, 2, 3),
             arrayOf("Hello"),
             arrayOf<Any>(),

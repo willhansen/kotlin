@@ -17,12 +17,12 @@ internal fun <T> assertIterableContentEquals(
     if (checkReferenceAndNullEquality(typeName, message, expected, actual, Any?::toString)) return
 
     var index = 0
-    val expectedIt = expected.iterator()
-    val actualIt = actual.iterator()
+    konst expectedIt = expected.iterator()
+    konst actualIt = actual.iterator()
 
     while (expectedIt.hasNext() && actualIt.hasNext()) {
-        val expectedElement = expectedIt.next()
-        val actualElement = actualIt.next()
+        konst expectedElement = expectedIt.next()
+        konst actualElement = actualIt.next()
 
         if (expectedElement != actualElement) {
             fail(messagePrefix(message) + elementsDifferMessage(typeName, index, expectedElement, actualElement))
@@ -55,27 +55,27 @@ internal fun <T> assertArrayContentEquals(
 ) {
     if (expected.contentEquals(actual)) return
 
-    val typeName = "Array"
+    konst typeName = "Array"
 
     if (checkReferenceAndNullEquality(typeName, message, expected, actual, contentToString)) return
 
-    val expectedSize = size(expected)
-    val actualSize = size(actual)
+    konst expectedSize = size(expected)
+    konst actualSize = size(actual)
 
     if (expectedSize != actualSize) {
-        val sizesDifferMessage = "$typeName sizes differ. Expected size is $expectedSize, actual size is $actualSize."
-        val toString = "Expected <${expected.contentToString()}>, actual <${actual.contentToString()}>."
+        konst sizesDifferMessage = "$typeName sizes differ. Expected size is $expectedSize, actual size is $actualSize."
+        konst toString = "Expected <${expected.contentToString()}>, actual <${actual.contentToString()}>."
 
         fail(messagePrefix(message) + sizesDifferMessage + "\n" + toString)
     }
 
     for (index in 0 until expectedSize) {
-        val expectedElement = expected.get(index)
-        val actualElement = actual.get(index)
+        konst expectedElement = expected.get(index)
+        konst actualElement = actual.get(index)
 
         if (expectedElement != actualElement) {
-            val elementsDifferMessage = elementsDifferMessage(typeName, index, expectedElement, actualElement)
-            val toString = "Expected <${expected.contentToString()}>, actual <${actual.contentToString()}>."
+            konst elementsDifferMessage = elementsDifferMessage(typeName, index, expectedElement, actualElement)
+            konst toString = "Expected <${expected.contentToString()}>, actual <${actual.contentToString()}>."
 
             fail(messagePrefix(message) + elementsDifferMessage + "\n" + toString)
         }

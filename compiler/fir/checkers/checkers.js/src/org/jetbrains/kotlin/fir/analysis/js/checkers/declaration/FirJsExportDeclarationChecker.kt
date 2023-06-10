@@ -41,14 +41,14 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
             }
         }
 
-        fun checkValueParameter(valueParameter: FirValueParameter) {
-            val type = valueParameter.returnTypeRef.coneType
+        fun checkValueParameter(konstueParameter: FirValueParameter) {
+            konst type = konstueParameter.returnTypeRef.coneType
             if (!type.isExportable(context.session)) {
-                reporter.reportOn(valueParameter.source, FirJsErrors.NON_EXPORTABLE_TYPE, "parameter", type, context)
+                reporter.reportOn(konstueParameter.source, FirJsErrors.NON_EXPORTABLE_TYPE, "parameter", type, context)
             }
         }
 
-        val hasJsName = declaration.hasAnnotation(JsStandardClassIds.Annotations.JsName, context.session)
+        konst hasJsName = declaration.hasAnnotation(JsStandardClassIds.Annotations.JsName, context.session)
 
         fun reportWrongExportedDeclaration(kind: String) {
             reporter.reportOn(declaration.source, FirJsErrors.WRONG_EXPORTED_DECLARATION, kind, context)
@@ -58,7 +58,7 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
             reportWrongExportedDeclaration("expect")
         }
 
-        validateDeclarationOnConsumableName(declaration, context, reporter)
+        konstidateDeclarationOnConsumableName(declaration, context, reporter)
 
         when (declaration) {
             is FirFunction -> {
@@ -85,11 +85,11 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
                     return
                 }
 
-                for (parameter in declaration.valueParameters) {
+                for (parameter in declaration.konstueParameters) {
                     checkValueParameter(parameter)
                 }
 
-                val returnType = declaration.returnTypeRef.coneType
+                konst returnType = declaration.returnTypeRef.coneType
 
                 if (!returnType.isExportable(context.session)) {
                     reporter.reportOn(declaration.source, FirJsErrors.NON_EXPORTABLE_TYPE, "return type", returnType, context)
@@ -106,7 +106,7 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
                     return
                 }
 
-                val returnType = declaration.returnTypeRef.coneType
+                konst returnType = declaration.returnTypeRef.coneType
 
                 if (!returnType.isExportable(context.session)) {
                     reporter.reportOn(declaration.source, FirJsErrors.NON_EXPORTABLE_TYPE, "return type", returnType, context)
@@ -118,11 +118,11 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
                     checkTypeParameter(typeParameter)
                 }
 
-                val wrongDeclaration: String? = when (declaration.classKind) {
+                konst wrongDeclaration: String? = when (declaration.classKind) {
                     ClassKind.ANNOTATION_CLASS -> "annotation class"
                     ClassKind.CLASS -> when {
                         context.isInsideInterface -> "nested class inside exported interface"
-                        declaration.isInline -> "value class"
+                        declaration.isInline -> "konstue class"
                         else -> null
                     }
                     else -> if (context.isInsideInterface) {
@@ -139,13 +139,13 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
         }
     }
 
-    private val CheckerContext.isInsideInterface
+    private konst CheckerContext.isInsideInterface
         get(): Boolean {
-            val parent = containingDeclarations.lastOrNull() as? FirClass
+            konst parent = containingDeclarations.lastOrNull() as? FirClass
             return parent != null && parent.isInterface
         }
 
-    private val FirCallableDeclaration.isInlineWithReified: Boolean
+    private konst FirCallableDeclaration.isInlineWithReified: Boolean
         get() = when (this) {
             is FirPropertyAccessor -> {
                 @OptIn(SymbolInternals::class)
@@ -166,7 +166,7 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
         }
 
         currentlyProcessed.add(this)
-        val hasNonExportableArgument = typeArguments.any { it.type?.isExportable(session, currentlyProcessed) != true }
+        konst hasNonExportableArgument = typeArguments.any { it.type?.isExportable(session, currentlyProcessed) != true }
 
         if (hasNonExportableArgument) {
             currentlyProcessed.remove(this)
@@ -179,10 +179,10 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
             typeArguments.lastOrNull()?.type?.isExportableReturn(session, currentlyProcessed)
         }
 
-        val nonNullable = withNullability(ConeNullability.NOT_NULL, session.typeContext)
-        val isPrimitiveExportableType = nonNullable.isAny || nonNullable.isNullableAny
+        konst nonNullable = withNullability(ConeNullability.NOT_NULL, session.typeContext)
+        konst isPrimitiveExportableType = nonNullable.isAny || nonNullable.isNullableAny
                 || nonNullable is ConeDynamicType || isPrimitiveExportableConeKotlinType
-        val symbol = toSymbol(session)
+        konst symbol = toSymbol(session)
 
         return when {
             isPrimitiveExportableType -> true
@@ -193,7 +193,7 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
         }
     }
 
-    private val ConeKotlinType.isPrimitiveExportableConeKotlinType: Boolean
+    private konst ConeKotlinType.isPrimitiveExportableConeKotlinType: Boolean
         get() = this is ConeTypeParameterType
                 || isBoolean
                 || isThrowableOrNullableThrowable
@@ -202,7 +202,7 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
                 || isNothingOrNullableNothing
                 || isArrayType
 
-    private fun validateDeclarationOnConsumableName(
+    private fun konstidateDeclarationOnConsumableName(
         declaration: FirMemberDeclaration,
         context: CheckerContext,
         reporter: DiagnosticReporter,
@@ -211,9 +211,9 @@ object FirJsExportDeclarationChecker : FirBasicDeclarationChecker() {
             return
         }
 
-        val jsNameArgument = declaration.symbol.getAnnotationFirstArgument(JsStandardClassIds.Annotations.JsName, context.session)
-        val reportTarget = jsNameArgument?.source ?: declaration.source
-        val name = (jsNameArgument as? FirConstExpression<*>)?.value as? String ?: declaration.nameOrSpecialName.asString()
+        konst jsNameArgument = declaration.symbol.getAnnotationFirstArgument(JsStandardClassIds.Annotations.JsName, context.session)
+        konst reportTarget = jsNameArgument?.source ?: declaration.source
+        konst name = (jsNameArgument as? FirConstExpression<*>)?.konstue as? String ?: declaration.nameOrSpecialName.asString()
 
         if (name in SPECIAL_KEYWORDS || (name !in RESERVED_KEYWORDS && sanitizeName(name) == name)) {
             return

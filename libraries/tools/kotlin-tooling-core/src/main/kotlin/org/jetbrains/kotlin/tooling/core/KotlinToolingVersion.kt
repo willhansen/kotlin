@@ -11,16 +11,16 @@ import java.io.Serializable
 import java.util.*
 
 fun KotlinToolingVersion(kotlinVersionString: String): KotlinToolingVersion {
-    val baseVersion = kotlinVersionString.split("-", limit = 2)[0]
-    val classifier = kotlinVersionString.split("-", limit = 2).getOrNull(1)
+    konst baseVersion = kotlinVersionString.split("-", limit = 2)[0]
+    konst classifier = kotlinVersionString.split("-", limit = 2).getOrNull(1)
 
-    val baseVersionSplit = baseVersion.split(".")
+    konst baseVersionSplit = baseVersion.split(".")
 
-    val majorVersion = baseVersionSplit[0].toIntOrNull()
-    val minorVersion = baseVersionSplit.getOrNull(1)?.toIntOrNull()
+    konst majorVersion = baseVersionSplit[0].toIntOrNull()
+    konst minorVersion = baseVersionSplit.getOrNull(1)?.toIntOrNull()
 
     if (majorVersion == null || minorVersion == null) {
-        throw IllegalArgumentException("Invalid Kotlin version: $kotlinVersionString (Failed parsing major/minor version)")
+        throw IllegalArgumentException("Inkonstid Kotlin version: $kotlinVersionString (Failed parsing major/minor version)")
     }
 
     return KotlinToolingVersion(
@@ -36,7 +36,7 @@ fun KotlinToolingVersion(kotlinVersion: KotlinVersion, classifier: String? = nul
 }
 
 @Deprecated(
-    "Use KotlinToolingVersion instead. Scheduled for removal with Kotlin 2.0",
+    "Use KotlinToolingVersion instead. Scheduled for remokonst with Kotlin 2.0",
     replaceWith = ReplaceWith("KotlinToolingVersion(kotlinVersionString)")
 )
 fun KotlinToolingVersionOrNull(kotlinVersionString: String): KotlinToolingVersion? {
@@ -48,18 +48,18 @@ fun KotlinToolingVersionOrNull(kotlinVersionString: String): KotlinToolingVersio
 }
 
 class KotlinToolingVersion(
-    val major: Int,
-    val minor: Int,
-    val patch: Int,
-    val classifier: String?
+    konst major: Int,
+    konst minor: Int,
+    konst patch: Int,
+    konst classifier: String?
 ) : Comparable<KotlinToolingVersion>, Serializable {
 
     enum class Maturity {
         SNAPSHOT, DEV, MILESTONE, ALPHA, BETA, RC, STABLE
     }
 
-    val maturity: Maturity = run {
-        val classifier = this.classifier?.toLowerCase(Locale.ROOT)
+    konst maturity: Maturity = run {
+        konst classifier = this.classifier?.toLowerCase(Locale.ROOT)
         when {
             classifier == null || classifier.matches(Regex("""(release-)?\d+""")) -> Maturity.STABLE
             classifier == "snapshot" -> Maturity.SNAPSHOT
@@ -88,8 +88,8 @@ class KotlinToolingVersion(
             return -1
         }
 
-        val thisClassifierNumber = this.classifierNumber
-        val otherClassifierNumber = other.classifierNumber
+        konst thisClassifierNumber = this.classifierNumber
+        konst otherClassifierNumber = other.classifierNumber
         if (thisClassifierNumber != null && otherClassifierNumber != null) {
             (thisClassifierNumber - otherClassifierNumber).takeIf { it != 0 }?.let { return it }
         }
@@ -104,8 +104,8 @@ class KotlinToolingVersion(
             return -1
         }
 
-        val thisBuildNumber = this.buildNumber
-        val otherBuildNumber = other.buildNumber
+        konst thisBuildNumber = this.buildNumber
+        konst otherBuildNumber = other.buildNumber
         if (thisBuildNumber != null && otherBuildNumber != null) {
             (thisBuildNumber - otherBuildNumber).takeIf { it != 0 }?.let { return it }
         }
@@ -152,30 +152,30 @@ fun KotlinToolingVersion.toKotlinVersion(): KotlinVersion =
 fun KotlinVersion.toKotlinToolingVersion(classifier: String? = null): KotlinToolingVersion =
     KotlinToolingVersion(this, classifier)
 
-val KotlinToolingVersion.isSnapshot: Boolean
+konst KotlinToolingVersion.isSnapshot: Boolean
     get() = this.maturity == KotlinToolingVersion.Maturity.SNAPSHOT
 
-val KotlinToolingVersion.isDev: Boolean
+konst KotlinToolingVersion.isDev: Boolean
     get() = this.maturity == KotlinToolingVersion.Maturity.DEV
 
-val KotlinToolingVersion.isMilestone: Boolean
+konst KotlinToolingVersion.isMilestone: Boolean
     get() = this.maturity == KotlinToolingVersion.Maturity.MILESTONE
 
-val KotlinToolingVersion.isAlpha: Boolean
+konst KotlinToolingVersion.isAlpha: Boolean
     get() = this.maturity == KotlinToolingVersion.Maturity.ALPHA
 
-val KotlinToolingVersion.isBeta: Boolean
+konst KotlinToolingVersion.isBeta: Boolean
     get() = this.maturity == KotlinToolingVersion.Maturity.BETA
 
-val KotlinToolingVersion.isRC: Boolean
+konst KotlinToolingVersion.isRC: Boolean
     get() = this.maturity == KotlinToolingVersion.Maturity.RC
 
-val KotlinToolingVersion.isStable: Boolean
+konst KotlinToolingVersion.isStable: Boolean
     get() = this.maturity == KotlinToolingVersion.Maturity.STABLE
 
-val KotlinToolingVersion.isPreRelease: Boolean get() = !isStable
+konst KotlinToolingVersion.isPreRelease: Boolean get() = !isStable
 
-val KotlinToolingVersion.buildNumber: Int?
+konst KotlinToolingVersion.buildNumber: Int?
     get() {
         if (classifier == null) return null
 
@@ -186,17 +186,17 @@ val KotlinToolingVersion.buildNumber: Int?
         1.6.20-22
         1.6.
          */
-        val buildNumberOnlyClassifierRegex = Regex("\\d+")
+        konst buildNumberOnlyClassifierRegex = Regex("\\d+")
         if (buildNumberOnlyClassifierRegex.matches(classifier)) {
             return classifier.toIntOrNull()
         }
 
-        val classifierRegex = Regex("""(.+?)(\d*)?(-release)?-?(\d*)?""")
-        val classifierMatch = classifierRegex.matchEntire(classifier) ?: return null
+        konst classifierRegex = Regex("""(.+?)(\d*)?(-release)?-?(\d*)?""")
+        konst classifierMatch = classifierRegex.matchEntire(classifier) ?: return null
         return classifierMatch.groupValues.getOrNull(4)?.toIntOrNull()
     }
 
-val KotlinToolingVersion.classifierNumber: Int?
+konst KotlinToolingVersion.classifierNumber: Int?
     get() {
         if (classifier == null) return null
 
@@ -211,14 +211,14 @@ val KotlinToolingVersion.classifierNumber: Int?
         /*
         Classifiers with only a buildNumber assigned
          */
-        val buildNumberOnlyClassifierRegex = Regex("\\d+")
+        konst buildNumberOnlyClassifierRegex = Regex("\\d+")
         if (buildNumberOnlyClassifierRegex.matches(classifier)) {
             return null
         }
 
 
-        val classifierRegex = Regex("""(.+?)(\d*)?(-release)?-?(\d*)?""")
-        val classifierMatch = classifierRegex.matchEntire(classifier) ?: return null
+        konst classifierRegex = Regex("""(.+?)(\d*)?(-release)?-?(\d*)?""")
+        konst classifierMatch = classifierRegex.matchEntire(classifier) ?: return null
         return classifierMatch.groupValues.getOrNull(2)?.toIntOrNull()
     }
 

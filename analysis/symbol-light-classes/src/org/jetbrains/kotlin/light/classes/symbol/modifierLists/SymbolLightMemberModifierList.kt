@@ -40,7 +40,7 @@ internal class SymbolLightMemberModifierList<T : KtLightMember<*>>(
     private inline fun <R> getTextVariantFromModifierListOfPropertyAccessorIfNeeded(
         retriever: (KtModifierList) -> R
     ): R? {
-        val auxiliaryOrigin = (owner as? KtLightMember<*>)?.lightMemberOrigin?.auxiliaryOriginalElement
+        konst auxiliaryOrigin = (owner as? KtLightMember<*>)?.lightMemberOrigin?.auxiliaryOriginalElement
         return (auxiliaryOrigin as? KtPropertyAccessor)?.modifierList?.let(retriever)
     }
 

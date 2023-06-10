@@ -35,7 +35,7 @@ abstract class KotlinJsIrTarget
 constructor(
     project: Project,
     platformType: KotlinPlatformType,
-    internal val mixedMode: Boolean
+    internal konst mixedMode: Boolean
 ) :
     KotlinTargetWithBinaries<KotlinJsIrCompilation, KotlinJsBinaryContainer>(project, platformType),
     KotlinTargetWithTests<JsAggregatingExecutionSource, KotlinJsReportAggregatingTestRun>,
@@ -43,7 +43,7 @@ constructor(
     KotlinWasmTargetDsl,
     KotlinJsSubTargetContainerDsl,
     KotlinWasmSubTargetContainerDsl {
-    private val propertiesProvider = PropertiesProvider(project)
+    private konst propertiesProvider = PropertiesProvider(project)
     override lateinit var testRuns: NamedDomainObjectContainer<KotlinJsReportAggregatingTestRun>
         internal set
 
@@ -54,15 +54,15 @@ constructor(
         internal set
 
     override var moduleName: String? = null
-        set(value) {
+        set(konstue) {
             check(!isBrowserConfigured && !isNodejsConfigured) {
                 "Please set moduleName before initialize browser() or nodejs()"
             }
-            field = value
+            field = konstue
         }
 
     override fun createUsageContexts(producingCompilation: KotlinCompilation<*>): Set<DefaultKotlinUsageContext> {
-        val usageContexts = super.createUsageContexts(producingCompilation)
+        konst usageContexts = super.createUsageContexts(producingCompilation)
 
         if (isMpp!! || mixedMode) return usageContexts
 
@@ -75,7 +75,7 @@ constructor(
                 )
     }
 
-    internal val commonFakeApiElementsConfigurationName: String
+    internal konst commonFakeApiElementsConfigurationName: String
         get() = lowerCamelCaseName(
             if (mixedMode)
                 disambiguationClassifierInPlatform
@@ -84,40 +84,40 @@ constructor(
             "commonFakeApiElements"
         )
 
-    val disambiguationClassifierInPlatform: String?
+    konst disambiguationClassifierInPlatform: String?
         get() = if (mixedMode) {
             disambiguationClassifier?.removeJsCompilerSuffix(KotlinJsCompilerType.IR)
         } else {
             disambiguationClassifier
         }
 
-    override val binaries: KotlinJsBinaryContainer
+    override konst binaries: KotlinJsBinaryContainer
         get() = compilations.withType(KotlinJsIrCompilation::class.java)
             .named(MAIN_COMPILATION_NAME)
             .map { it.binaries }
             .get()
 
-    private val runTaskName get() = lowerCamelCaseName(disambiguationClassifier, runTaskNameSuffix)
-    val runTask: TaskProvider<Task>
+    private konst runTaskName get() = lowerCamelCaseName(disambiguationClassifier, runTaskNameSuffix)
+    konst runTask: TaskProvider<Task>
         get() = project.locateOrRegisterTask(runTaskName) {
             it.description = "Run js on all configured platforms"
         }
 
-    private val configureTestSideEffect: Unit by lazy {
+    private konst configureTestSideEffect: Unit by lazy {
         compilations.matching { it.name == KotlinCompilation.TEST_COMPILATION_NAME }
             .all { compilation ->
                 compilation.binaries.executableIrInternal(compilation)
             }
     }
 
-    private val commonLazy by lazy {
+    private konst commonLazy by lazy {
         NpmResolverPlugin.apply(project)
         compilations.all { compilation ->
             compilation.binaries
                 .withType(JsIrBinary::class.java)
                 .all { binary ->
-                    val syncTask = registerCompileSync(binary)
-                    val tsValidationTask = registerTypeScriptCheckTask(binary)
+                    konst syncTask = registerCompileSync(binary)
+                    konst tsValidationTask = registerTypeScriptCheckTask(binary)
 
                     binary.linkTask.configure {
 
@@ -132,8 +132,8 @@ constructor(
     }
 
     private fun registerCompileSync(binary: JsIrBinary): TaskProvider<DefaultIncrementalSyncTask> {
-        val compilation = binary.compilation
-        val npmProject = compilation.npmProject
+        konst compilation = binary.compilation
+        konst npmProject = compilation.npmProject
 
         return project.registerTask<DefaultIncrementalSyncTask>(
             binary.linkSyncTaskName
@@ -151,11 +151,11 @@ constructor(
     }
 
     private fun registerTypeScriptCheckTask(binary: JsIrBinary): TaskProvider<TypeScriptValidationTask> {
-        val linkTask = binary.linkTask
-        val compilation = binary.compilation
-        return project.registerTask(binary.validateGeneratedTsTaskName, listOf(compilation)) {
+        konst linkTask = binary.linkTask
+        konst compilation = binary.compilation
+        return project.registerTask(binary.konstidateGeneratedTsTaskName, listOf(compilation)) {
             it.inputDir.set(linkTask.flatMap { it.destinationDirectory })
-            it.validationStrategy.set(
+            it.konstidationStrategy.set(
                 when (binary.mode) {
                     KotlinJsBinaryMode.DEVELOPMENT -> propertiesProvider.jsIrGeneratedTypeScriptValidationDevStrategy
                     KotlinJsBinaryMode.PRODUCTION -> propertiesProvider.jsIrGeneratedTypeScriptValidationProdStrategy
@@ -165,12 +165,12 @@ constructor(
     }
 
     //Binaryen
-    private val applyBinaryenHandlers = mutableListOf<(BinaryenExec.() -> Unit) -> Unit>()
+    private konst applyBinaryenHandlers = mutableListOf<(BinaryenExec.() -> Unit) -> Unit>()
 
     private var binaryenApplied: (BinaryenExec.() -> Unit)? = null
 
     override fun whenBinaryenApplied(body: (BinaryenExec.() -> Unit) -> Unit) {
-        val binaryenApplied = binaryenApplied
+        konst binaryenApplied = binaryenApplied
         if (binaryenApplied != null) {
             body(binaryenApplied)
         } else {
@@ -187,7 +187,7 @@ constructor(
     }
 
     //Browser
-    private val browserLazyDelegate = lazy {
+    private konst browserLazyDelegate = lazy {
         commonLazy
         project.objects.newInstance(KotlinBrowserJsIr::class.java, this).also {
             it.configureSubTarget()
@@ -198,11 +198,11 @@ constructor(
         }
     }
 
-    private val browserConfiguredHandlers = mutableListOf<KotlinJsBrowserDsl.() -> Unit>()
+    private konst browserConfiguredHandlers = mutableListOf<KotlinJsBrowserDsl.() -> Unit>()
 
-    override val browser by browserLazyDelegate
+    override konst browser by browserLazyDelegate
 
-    override val isBrowserConfigured: Boolean
+    override konst isBrowserConfigured: Boolean
         get() = browserLazyDelegate.isInitialized()
 
     override fun browser(body: KotlinJsBrowserDsl.() -> Unit) {
@@ -210,7 +210,7 @@ constructor(
     }
 
     //node.js
-    private val nodejsLazyDelegate = lazy {
+    private konst nodejsLazyDelegate = lazy {
         commonLazy
         project.objects.newInstance(KotlinNodeJsIr::class.java, this).also {
             it.configureSubTarget()
@@ -222,11 +222,11 @@ constructor(
         }
     }
 
-    private val nodejsConfiguredHandlers = mutableListOf<KotlinJsNodeDsl.() -> Unit>()
+    private konst nodejsConfiguredHandlers = mutableListOf<KotlinJsNodeDsl.() -> Unit>()
 
-    override val nodejs by nodejsLazyDelegate
+    override konst nodejs by nodejsLazyDelegate
 
-    override val isNodejsConfigured: Boolean
+    override konst isNodejsConfigured: Boolean
         get() = nodejsLazyDelegate.isInitialized()
 
     override fun nodejs(body: KotlinJsNodeDsl.() -> Unit) {
@@ -234,7 +234,7 @@ constructor(
     }
 
     //d8
-    private val d8LazyDelegate = lazy {
+    private konst d8LazyDelegate = lazy {
         commonLazy
         project.objects.newInstance(KotlinD8Ir::class.java, this).also {
             it.configureSubTarget()
@@ -246,11 +246,11 @@ constructor(
         }
     }
 
-    private val d8ConfiguredHandlers = mutableListOf<KotlinWasmD8Dsl.() -> Unit>()
+    private konst d8ConfiguredHandlers = mutableListOf<KotlinWasmD8Dsl.() -> Unit>()
 
-    override val d8 by d8LazyDelegate
+    override konst d8 by d8LazyDelegate
 
-    override val isD8Configured: Boolean
+    override konst isD8Configured: Boolean
         get() = d8LazyDelegate.isInitialized()
 
     private fun KotlinJsIrSubTarget.configureSubTarget() {

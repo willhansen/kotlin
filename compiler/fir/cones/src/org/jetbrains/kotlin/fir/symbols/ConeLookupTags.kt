@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 
 abstract class ConeClassifierLookupTag : TypeConstructorMarker {
-    abstract val name: Name
+    abstract konst name: Name
 
     override fun toString(): String {
         return name.asString()
@@ -18,9 +18,9 @@ abstract class ConeClassifierLookupTag : TypeConstructorMarker {
 }
 
 abstract class ConeClassLikeLookupTag : ConeClassifierLookupTag() {
-    abstract val classId: ClassId
+    abstract konst classId: ClassId
 
-    override val name: Name
+    override konst name: Name
         get() = classId.shortClassName
 }
 

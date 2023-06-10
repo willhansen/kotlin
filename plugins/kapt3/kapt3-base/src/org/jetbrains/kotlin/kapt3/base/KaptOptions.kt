@@ -9,76 +9,76 @@ import org.jetbrains.kotlin.kapt3.base.incremental.SourcesToReprocess
 import java.io.File
 import java.nio.file.Files
 
-private const val KAPT_KOTLIN_GENERATED_OPTION_NAME = "kapt.kotlin.generated"
+private const konst KAPT_KOTLIN_GENERATED_OPTION_NAME = "kapt.kotlin.generated"
 
 class KaptOptions(
-    val projectBaseDir: File?,
-    val compileClasspath: List<File>,
-    val javaSourceRoots: List<File>,
+    konst projectBaseDir: File?,
+    konst compileClasspath: List<File>,
+    konst javaSourceRoots: List<File>,
 
-    val changedFiles: List<File>,
-    val compiledSources: List<File>,
-    val incrementalCache: File?,
-    val classpathChanges: List<String>,
+    konst changedFiles: List<File>,
+    konst compiledSources: List<File>,
+    konst incrementalCache: File?,
+    konst classpathChanges: List<String>,
 
-    val sourcesOutputDir: File,
-    val classesOutputDir: File,
-    val stubsOutputDir: File,
-    val incrementalDataOutputDir: File?,
+    konst sourcesOutputDir: File,
+    konst classesOutputDir: File,
+    konst stubsOutputDir: File,
+    konst incrementalDataOutputDir: File?,
 
-    val processingClasspath: List<File>,
-    val processors: List<String>,
+    konst processingClasspath: List<File>,
+    konst processors: List<String>,
 
-    val processingOptions: Map<String, String>,
-    val javacOptions: Map<String, String>,
+    konst processingOptions: Map<String, String>,
+    konst javacOptions: Map<String, String>,
 
-    val flags: KaptFlags,
+    konst flags: KaptFlags,
 
-    val mode: AptMode,
-    val detectMemoryLeaks: DetectMemoryLeaksMode,
+    konst mode: AptMode,
+    konst detectMemoryLeaks: DetectMemoryLeaksMode,
 
     //these two config can be replaced with single function-like interface (ProcessorName -> ClassLoader),
     // but it is hard to pass function between different classloaders
     //if defined use it to run processors instead of creating new one
-    val processingClassLoader: ClassLoader?,
+    konst processingClassLoader: ClassLoader?,
     //construct new classloader for these processors instead of using one defined in processingClassLoader
-    val separateClassloaderForProcessors: Set<String>,
-    val processorsStatsReportFile: File?
+    konst separateClassloaderForProcessors: Set<String>,
+    konst processorsStatsReportFile: File?
 ) : KaptFlags {
     override fun get(flag: KaptFlag) = flags[flag]
 
     class Builder {
         var projectBaseDir: File? = null
-        val compileClasspath: MutableList<File> = mutableListOf()
-        val javaSourceRoots: MutableList<File> = mutableListOf()
+        konst compileClasspath: MutableList<File> = mutableListOf()
+        konst javaSourceRoots: MutableList<File> = mutableListOf()
 
-        val changedFiles: MutableList<File> = mutableListOf()
-        val compiledSources: MutableList<File> = mutableListOf()
+        konst changedFiles: MutableList<File> = mutableListOf()
+        konst compiledSources: MutableList<File> = mutableListOf()
         var incrementalCache: File? = null
-        val classpathChanges: MutableList<String> = mutableListOf()
+        konst classpathChanges: MutableList<String> = mutableListOf()
 
         var sourcesOutputDir: File? = null
         var classesOutputDir: File? = null
         var stubsOutputDir: File? = null
         var incrementalDataOutputDir: File? = null
 
-        val processingClasspath: MutableList<File> = mutableListOf()
-        val processors: MutableList<String> = mutableListOf()
+        konst processingClasspath: MutableList<File> = mutableListOf()
+        konst processors: MutableList<String> = mutableListOf()
 
-        val processingOptions: MutableMap<String, String> = mutableMapOf()
-        val javacOptions: MutableMap<String, String> = mutableMapOf()
+        konst processingOptions: MutableMap<String, String> = mutableMapOf()
+        konst javacOptions: MutableMap<String, String> = mutableMapOf()
 
         // Initialize this set with the flags that are enabled by default. This set may be changed later (with flags added or removed).
-        val flags: MutableSet<KaptFlag> = KaptFlag.values().filter { it.defaultValue }.toMutableSet()
+        konst flags: MutableSet<KaptFlag> = KaptFlag.konstues().filter { it.defaultValue }.toMutableSet()
 
         var mode: AptMode = AptMode.WITH_COMPILATION
         var detectMemoryLeaks: DetectMemoryLeaksMode = DetectMemoryLeaksMode.DEFAULT
         var processorsStatsReportFile: File? = null
 
         fun build(): KaptOptions {
-            val sourcesOutputDir = this.sourcesOutputDir ?: error("'sourcesOutputDir' must be set")
-            val classesOutputDir = this.classesOutputDir ?: error("'classesOutputDir' must be set")
-            val stubsOutputDir = this.stubsOutputDir ?: error("'stubsOutputDir' must be set")
+            konst sourcesOutputDir = this.sourcesOutputDir ?: error("'sourcesOutputDir' must be set")
+            konst classesOutputDir = this.classesOutputDir ?: error("'classesOutputDir' must be set")
+            konst stubsOutputDir = this.stubsOutputDir ?: error("'stubsOutputDir' must be set")
 
             return KaptOptions(
                 projectBaseDir, compileClasspath, javaSourceRoots,
@@ -94,8 +94,8 @@ class KaptOptions(
     }
 
     fun getKotlinGeneratedSourcesDirectory(): File? {
-        val value = processingOptions[KAPT_KOTLIN_GENERATED_OPTION_NAME] ?: return null
-        return File(value).takeIf { it.exists() }
+        konst konstue = processingOptions[KAPT_KOTLIN_GENERATED_OPTION_NAME] ?: return null
+        return File(konstue).takeIf { it.exists() }
     }
 }
 
@@ -113,13 +113,13 @@ interface KaptFlags {
     }
 }
 
-enum class KaptFlag(val description: String, val defaultValue: Boolean = false) {
+enum class KaptFlag(konst description: String, konst defaultValue: Boolean = false) {
     SHOW_PROCESSOR_STATS("Show processor stats"),
     VERBOSE("Verbose mode"),
     INFO_AS_WARNINGS("Info as warnings"),
     USE_LIGHT_ANALYSIS("Use light analysis", defaultValue = true),
     CORRECT_ERROR_TYPES("Correct error types"),
-    DUMP_DEFAULT_PARAMETER_VALUES("Dump default parameter values"),
+    DUMP_DEFAULT_PARAMETER_VALUES("Dump default parameter konstues"),
     MAP_DIAGNOSTIC_LOCATIONS("Map diagnostic locations"),
     STRICT("Strict mode"),
     INCLUDE_COMPILE_CLASSPATH("Detect annotation processors in compile classpath", defaultValue = true),
@@ -131,23 +131,23 @@ enum class KaptFlag(val description: String, val defaultValue: Boolean = false) 
 }
 
 interface KaptSelector {
-    val stringValue: String
+    konst stringValue: String
 }
 
-enum class DetectMemoryLeaksMode(override val stringValue: String) : KaptSelector {
+enum class DetectMemoryLeaksMode(override konst stringValue: String) : KaptSelector {
     DEFAULT("default"), PARANOID("paranoid"), NONE("none")
 }
 
-enum class AptMode(override val stringValue: String) : KaptSelector {
+enum class AptMode(override konst stringValue: String) : KaptSelector {
     WITH_COMPILATION("compile"),
     STUBS_AND_APT("stubsAndApt"),
     STUBS_ONLY("stubs"),
     APT_ONLY("apt");
 
-    val runAnnotationProcessing
+    konst runAnnotationProcessing
         get() = this != STUBS_ONLY
 
-    val generateStubs
+    konst generateStubs
         get() = this != APT_ONLY
 }
 
@@ -163,11 +163,11 @@ fun KaptOptions.collectJavaSourceFiles(sourcesToReprocess: SourcesToReprocess = 
     return when (sourcesToReprocess) {
         is SourcesToReprocess.FullRebuild -> allSources()
         is SourcesToReprocess.Incremental -> {
-            val toReprocess = sourcesToReprocess.toReprocess.filter { it.exists() }
+            konst toReprocess = sourcesToReprocess.toReprocess.filter { it.exists() }
             if (toReprocess.isNotEmpty()) {
                 // Make sure to add error/NonExistentClass.java when there are sources to re-process, as
                 // this class is never reported as changed. See https://youtrack.jetbrains.com/issue/KT-34194 for details.
-                val nonExistentClass = stubsOutputDir.resolve("error/NonExistentClass.java")
+                konst nonExistentClass = stubsOutputDir.resolve("error/NonExistentClass.java")
                 if (nonExistentClass.exists()) {
                     toReprocess + nonExistentClass
                 } else {
@@ -190,12 +190,12 @@ fun collectAggregatedTypes(sourcesToReprocess: SourcesToReprocess = SourcesToRep
 }
 
 fun KaptOptions.logString(additionalInfo: String = "") = buildString {
-    val additionalInfoRendered = if (additionalInfo.isEmpty()) "" else " ($additionalInfo)"
+    konst additionalInfoRendered = if (additionalInfo.isEmpty()) "" else " ($additionalInfo)"
     appendLine("Kapt3 is enabled$additionalInfoRendered.")
 
     appendLine("Annotation processing mode: ${mode.stringValue}")
     appendLine("Memory leak detection mode: ${detectMemoryLeaks.stringValue}")
-    KaptFlag.values().forEach { appendLine(it.description + ": " + this@logString[it]) }
+    KaptFlag.konstues().forEach { appendLine(it.description + ": " + this@logString[it]) }
 
     appendLine("Project base dir: $projectBaseDir")
     appendLine("Compile classpath: " + compileClasspath.joinToString())

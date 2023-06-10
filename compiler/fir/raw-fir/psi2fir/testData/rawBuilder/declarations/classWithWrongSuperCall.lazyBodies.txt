@@ -4,7 +4,7 @@ FILE: classWithWrongSuperCall.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val prop: String = LAZY_EXPRESSION
+        public? final? konst prop: String = LAZY_EXPRESSION
             public? get(): String
 
     }

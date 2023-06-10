@@ -27,16 +27,16 @@ import org.jetbrains.kotlin.resolve.source.getPsi
 
 object JsNameChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val trace = context.trace
+        konst trace = context.trace
         if (descriptor is PropertyDescriptor) {
-            val namedAccessorCount = descriptor.accessors.count { AnnotationsUtils.getJsName(it) != null }
+            konst namedAccessorCount = descriptor.accessors.count { AnnotationsUtils.getJsName(it) != null }
             if (namedAccessorCount > 0 && namedAccessorCount < descriptor.accessors.size) {
                 trace.report(ErrorsJs.JS_NAME_IS_NOT_ON_ALL_ACCESSORS.on(declaration))
             }
         }
 
-        val jsName = AnnotationsUtils.getJsNameAnnotation(descriptor) ?: return
-        val jsNamePsi = jsName.source.getPsi() ?: declaration
+        konst jsName = AnnotationsUtils.getJsNameAnnotation(descriptor) ?: return
+        konst jsNamePsi = jsName.source.getPsi() ?: declaration
 
         if (AnnotationsUtils.getNameForAnnotatedObject(descriptor, PredefinedAnnotation.NATIVE) != null) {
             trace.report(ErrorsJs.JS_NAME_PROHIBITED_FOR_NAMED_NATIVE.on(jsNamePsi))

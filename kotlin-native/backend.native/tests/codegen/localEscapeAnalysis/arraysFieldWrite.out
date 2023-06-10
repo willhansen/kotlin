@@ -4,10 +4,10 @@ Contents: [1, 2]
 Array (constructor init):
 Size: 2
 Contents: [3, 4]
-Array (default value init):
+Array (default konstue init):
 Size: 2
 Contents: [1, 2]
-Array (default value init):
+Array (default konstue init):
 Size: 2
 Contents: [3, 4]
 Array (init block):

@@ -9,18 +9,18 @@ import kotlinx.serialization.*
 import kotlin.reflect.KClass
 
 @InheritableSerialInfo
-annotation class I(val value: String)
+annotation class I(konst konstue: String)
 
 enum class E { A, B }
 
 @InheritableSerialInfo
-annotation class I2(val e: E, val k: KClass<*>)
+annotation class I2(konst e: E, konst k: KClass<*>)
 
 @Serializable
 @I("a")
 sealed class Result {
     <!INCONSISTENT_INHERITABLE_SERIALINFO!>@I("b")<!>
-    @Serializable class OK(val s: String): Result()
+    @Serializable class OK(konst s: String): Result()
 }
 
 @Serializable

@@ -7,7 +7,7 @@ import kotlin.test.*
 class MemoryAccessTestTest {
     @Test
     fun testPointer() {
-        val p: Pointer = Pointer(19u)
+        konst p: Pointer = Pointer(19u)
         assertEquals(p.address, 19u)
         assertEquals((p + 10u).address, 29u)
         assertEquals((p - 10u).address, 9u)
@@ -15,16 +15,16 @@ class MemoryAccessTestTest {
         assertEquals((p - 10).address, 9u)
     }
 
-    fun <T> testLoadStore(values: List<T>, typeSize: Int, store: (Pointer, T) -> Unit, load: (Pointer) -> T) {
+    fun <T> testLoadStore(konstues: List<T>, typeSize: Int, store: (Pointer, T) -> Unit, load: (Pointer) -> T) {
         withScopedMemoryAllocator { a ->
             // Memory layout: [Long1][T][Long2]
-            val ptrToLong1 = a.allocate(24)
-            val ptrToT = ptrToLong1 + 8
-            val ptrToLong2 = ptrToT + typeSize
+            konst ptrToLong1 = a.allocate(24)
+            konst ptrToT = ptrToLong1 + 8
+            konst ptrToLong2 = ptrToT + typeSize
 
-            for (x in values) {
-                val prevLong = ptrToLong1.loadLong()
-                val nextLong = ptrToLong2.loadLong()
+            for (x in konstues) {
+                konst prevLong = ptrToLong1.loadLong()
+                konst nextLong = ptrToLong2.loadLong()
 
                 store(ptrToT, x)
                 assertEquals(load(ptrToT), x)
@@ -37,13 +37,13 @@ class MemoryAccessTestTest {
 
     @Test
     fun testByte() {
-        val bytes = listOf<Byte>(0, Byte.MIN_VALUE, Byte.MAX_VALUE, -91, -21, -47, -72, -42, 118, 120, 125, 21, -43)
+        konst bytes = listOf<Byte>(0, Byte.MIN_VALUE, Byte.MAX_VALUE, -91, -21, -47, -72, -42, 118, 120, 125, 21, -43)
         testLoadStore(bytes, 1, { p, v -> p.storeByte(v) }, { it.loadByte() })
     }
 
     @Test
     fun testShort() {
-        val shorts = listOf<Short>(
+        konst shorts = listOf<Short>(
             0, Short.MIN_VALUE, Short.MAX_VALUE, 26350, 17667, 5437, 1381,
             21183, 26042, -25961, -22913, 9128, -10684
         )
@@ -52,7 +52,7 @@ class MemoryAccessTestTest {
 
     @Test
     fun testInt() {
-        val ints = listOf<Int>(
+        konst ints = listOf<Int>(
             0, Int.MIN_VALUE, Int.MAX_VALUE,
             1348618689, -299556943, -394977414, -621300994, 1034622853, -1010496662,
             -2102993550, 199131417, 407819728, -1093382545
@@ -62,7 +62,7 @@ class MemoryAccessTestTest {
 
     @Test
     fun testLong() {
-        val longs = listOf<Long>(
+        konst longs = listOf<Long>(
             0, Long.MIN_VALUE, Long.MAX_VALUE,
             6964777768087685094, -3965399897925814666, 6876207943944046195, 7675081221595661767,
             -3388229176969119769, 4265730675328983821, -4893379785828386453, -7516879919690485136,
@@ -74,32 +74,32 @@ class MemoryAccessTestTest {
     @Test
     fun testAccessingWithDifferentTypes() {
         withScopedMemoryAllocator { a ->
-            val size = 16
-            val sizeU = size.toUInt()
-            val pointer = a.allocate(size)
-            val addr = pointer.address
+            konst size = 16
+            konst sizeU = size.toUInt()
+            konst pointer = a.allocate(size)
+            konst addr = pointer.address
 
-            fun fillWith(value: Byte) {
+            fun fillWith(konstue: Byte) {
                 for (ptr in addr..<addr + sizeU) {
-                    Pointer(ptr).storeByte(value)
+                    Pointer(ptr).storeByte(konstue)
                 }
             }
 
-            fun fillWith(value: Short) {
+            fun fillWith(konstue: Short) {
                 for (ptr in addr..<addr + sizeU step 2) {
-                    Pointer(ptr).storeShort(value)
+                    Pointer(ptr).storeShort(konstue)
                 }
             }
 
-            fun fillWith(value: Int) {
+            fun fillWith(konstue: Int) {
                 for (ptr in addr..<addr + sizeU step 4) {
-                    Pointer(ptr).storeInt(value)
+                    Pointer(ptr).storeInt(konstue)
                 }
             }
 
-            fun fillWith(value: Long) {
+            fun fillWith(konstue: Long) {
                 for (ptr in addr..<addr + sizeU step 8) {
-                    Pointer(ptr).storeLong(value)
+                    Pointer(ptr).storeLong(konstue)
                 }
             }
 

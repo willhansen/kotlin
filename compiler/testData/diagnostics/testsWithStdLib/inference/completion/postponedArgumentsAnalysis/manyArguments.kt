@@ -2,9 +2,9 @@
 // !DIAGNOSTICS: -UNUSED_VARIABLE
 
 fun main() {
-    val list: List<Int.() -> Unit> = listOf({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})
+    konst list: List<Int.() -> Unit> = listOf({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})
 
-    val map: Map<Int, Int.() -> Unit> = mapOf(
+    konst map: Map<Int, Int.() -> Unit> = mapOf(
         1 to {},
         2 to {},
         3 to {},

@@ -32,8 +32,8 @@ public abstract class JsUnaryOperation extends JsExpression {
     public void acceptChildren(JsVisitor visitor) {
         if (op.isModifying()) {
             // The delete operator is practically like an assignment of undefined, so
-            // for practical purposes we're treating it as an lvalue.
-            visitor.acceptLvalue(arg);
+            // for practical purposes we're treating it as an lkonstue.
+            visitor.acceptLkonstue(arg);
         }
         else {
             visitor.accept(arg);
@@ -45,9 +45,9 @@ public abstract class JsUnaryOperation extends JsExpression {
         if (op.isModifying()) {
       /*
        * The delete operator is practically like an assignment of undefined, so for practical
-       * purposes we're treating it as an lvalue.
+       * purposes we're treating it as an lkonstue.
        */
-            arg = v.acceptLvalue(arg);
+            arg = v.acceptLkonstue(arg);
         } else {
             arg = v.accept(arg);
         }

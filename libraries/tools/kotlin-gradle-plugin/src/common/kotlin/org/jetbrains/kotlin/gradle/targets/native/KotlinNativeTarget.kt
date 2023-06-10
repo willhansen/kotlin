@@ -34,7 +34,7 @@ import javax.inject.Inject
 
 abstract class KotlinNativeTarget @Inject constructor(
     project: Project,
-    val konanTarget: KonanTarget
+    konst konanTarget: KonanTarget
 ) : KotlinTargetWithBinaries<KotlinNativeCompilation, KotlinNativeBinaryContainer>(
     project,
     KotlinPlatformType.native
@@ -44,35 +44,35 @@ abstract class KotlinNativeTarget @Inject constructor(
         attributes.attribute(konanTargetAttribute, konanTarget.name)
     }
 
-    private val hostSpecificMetadataJarTaskName get() = disambiguateName("MetadataJar")
+    private konst hostSpecificMetadataJarTaskName get() = disambiguateName("MetadataJar")
 
-    internal val hostSpecificMetadataElementsConfigurationName get() = disambiguateName("MetadataElements")
+    internal konst hostSpecificMetadataElementsConfigurationName get() = disambiguateName("MetadataElements")
 
-    override val kotlinComponents: Set<KotlinTargetComponent> by lazy {
+    override konst kotlinComponents: Set<KotlinTargetComponent> by lazy {
         if (!project.isKotlinGranularMetadataEnabled)
             return@lazy super.kotlinComponents
 
-        val mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+        konst mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
 
         // NB: another usage context for the host-specific metadata may be added to this set below
-        val mutableUsageContexts = createUsageContexts(mainCompilation).toMutableSet()
+        konst mutableUsageContexts = createUsageContexts(mainCompilation).toMutableSet()
 
         project.launchInStage(KotlinPluginLifecycle.Stage.AfterFinaliseDsl) {
-            val hostSpecificSourceSets = getHostSpecificSourceSets(project)
+            konst hostSpecificSourceSets = getHostSpecificSourceSets(project)
                 .intersect(mainCompilation.allKotlinSourceSets)
 
             if (hostSpecificSourceSets.isNotEmpty()) {
-                val hostSpecificMetadataJar = project.locateOrRegisterTask<Jar>(hostSpecificMetadataJarTaskName) { metadataJar ->
+                konst hostSpecificMetadataJar = project.locateOrRegisterTask<Jar>(hostSpecificMetadataJarTaskName) { metadataJar ->
                     metadataJar.archiveAppendix.set(project.provider { disambiguationClassifier.orEmpty().toLowerCaseAsciiOnly() })
                     metadataJar.archiveClassifier.set("metadata")
                     metadataJar.group = BasePlugin.BUILD_GROUP
                     metadataJar.description = "Assembles Kotlin metadata of target '${name}'."
 
-                    val publishable = this@KotlinNativeTarget.publishable
+                    konst publishable = this@KotlinNativeTarget.publishable
                     metadataJar.onlyIf { publishable }
 
                     launch {
-                        val metadataCompilations = hostSpecificSourceSets.mapNotNull {
+                        konst metadataCompilations = hostSpecificSourceSets.mapNotNull {
                             project.findMetadataCompilation(it)
                         }
 
@@ -90,7 +90,7 @@ abstract class KotlinNativeTarget @Inject constructor(
                 }
                 project.artifacts.add(Dependency.ARCHIVES_CONFIGURATION, hostSpecificMetadataJar)
 
-                val metadataConfiguration = project.configurations.getByName(hostSpecificMetadataElementsConfigurationName)
+                konst metadataConfiguration = project.configurations.getByName(hostSpecificMetadataElementsConfigurationName)
                 project.artifacts.add(metadataConfiguration.name, hostSpecificMetadataJar) { artifact ->
                     artifact.classifier = "metadata"
                 }
@@ -114,12 +114,12 @@ abstract class KotlinNativeTarget @Inject constructor(
             )
         )
 
-        val result = createKotlinVariant(targetName, mainCompilation, mutableUsageContexts)
+        konst result = createKotlinVariant(targetName, mainCompilation, mutableUsageContexts)
 
         setOf(result)
     }
 
-    override val binaries =
+    override konst binaries =
         // Use newInstance to allow accessing binaries by their names in Groovy using the extension mechanism.
         project.objects.newInstance(
             KotlinNativeBinaryContainer::class.java,
@@ -127,40 +127,40 @@ abstract class KotlinNativeTarget @Inject constructor(
             project.objects.domainObjectSet(NativeBinary::class.java)
         )
 
-    override val artifactsTaskName: String
+    override konst artifactsTaskName: String
         get() = disambiguateName("binaries")
 
-    override val publishable: Boolean
+    override konst publishable: Boolean
         get() = konanTarget.enabledOnCurrentHost
 
     // User-visible constants
-    val DEBUG = NativeBuildType.DEBUG
-    val RELEASE = NativeBuildType.RELEASE
+    konst DEBUG = NativeBuildType.DEBUG
+    konst RELEASE = NativeBuildType.RELEASE
 
-    val EXECUTABLE = NativeOutputKind.EXECUTABLE
-    val FRAMEWORK = NativeOutputKind.FRAMEWORK
-    val DYNAMIC = NativeOutputKind.DYNAMIC
-    val STATIC = NativeOutputKind.STATIC
+    konst EXECUTABLE = NativeOutputKind.EXECUTABLE
+    konst FRAMEWORK = NativeOutputKind.FRAMEWORK
+    konst DYNAMIC = NativeOutputKind.DYNAMIC
+    konst STATIC = NativeOutputKind.STATIC
 
     companion object {
-        val konanTargetAttribute = Attribute.of(
+        konst konanTargetAttribute = Attribute.of(
             "org.jetbrains.kotlin.native.target",
             String::class.java
         )
-        val kotlinNativeBuildTypeAttribute = Attribute.of(
+        konst kotlinNativeBuildTypeAttribute = Attribute.of(
             "org.jetbrains.kotlin.native.build.type",
             String::class.java
         )
-        val kotlinNativeFrameworkNameAttribute = Attribute.of(
+        konst kotlinNativeFrameworkNameAttribute = Attribute.of(
             "org.jetbrains.kotlin.native.framework.name",
             String::class.java
         )
     }
 }
 
-private val hostManager by lazy { HostManager() }
+private konst hostManager by lazy { HostManager() }
 
-private val targetsEnabledOnAllHosts by lazy { hostManager.enabledByHost.values.reduce { acc, targets -> acc intersect targets } }
+private konst targetsEnabledOnAllHosts by lazy { hostManager.enabledByHost.konstues.reduce { acc, targets -> acc intersect targets } }
 
 /**
  * The set of konanTargets is considered 'host specific' if the shared compilation of said set can *not* be built
@@ -182,7 +182,7 @@ internal suspend fun getHostSpecificFragments(
     module.fragments,
     isNativeShared = { it.isNativeShared() },
     getKonanTargets = {
-        val nativeVariants = module.variantsContainingFragment(it).filterIsInstance<GradleKpmNativeVariantInternal>()
+        konst nativeVariants = module.variantsContainingFragment(it).filterIsInstance<GradleKpmNativeVariantInternal>()
         nativeVariants.mapTo(mutableSetOf()) { it.konanTarget }
     }
 )

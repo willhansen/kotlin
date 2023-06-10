@@ -6,31 +6,31 @@
 package org.jetbrains.kotlin.commonizer.cir
 
 object CirClassRecursionMarker : CirClass, CirRecursionMarker {
-    override val annotations get() = unsupported()
-    override val name get() = unsupported()
-    override val typeParameters get() = unsupported()
-    override val visibility get() = unsupported()
-    override val modality get() = unsupported()
-    override val kind get() = unsupported()
+    override konst annotations get() = unsupported()
+    override konst name get() = unsupported()
+    override konst typeParameters get() = unsupported()
+    override konst visibility get() = unsupported()
+    override konst modality get() = unsupported()
+    override konst kind get() = unsupported()
     override var companion: CirName?
         get() = unsupported()
         set(_) = unsupported()
-    override val isCompanion get() = unsupported()
-    override val isData get() = unsupported()
-    override val isValue get() = unsupported()
-    override val isInner get() = unsupported()
-    override val hasEnumEntries: Boolean get() = unsupported()
+    override konst isCompanion get() = unsupported()
+    override konst isData get() = unsupported()
+    override konst isValue get() = unsupported()
+    override konst isInner get() = unsupported()
+    override konst hasEnumEntries: Boolean get() = unsupported()
     override var supertypes: List<CirType>
         get() = unsupported()
         set(_) = unsupported()
 }
 
 object CirTypeAliasRecursionMarker : CirTypeAlias, CirRecursionMarker {
-    override val underlyingType: CirClassOrTypeAliasType get() = unsupported()
-    override val expandedType: CirClassType get() = unsupported()
-    override val annotations get() = unsupported()
-    override val name get() = unsupported()
-    override val typeParameters get() = unsupported()
-    override val visibility get() = unsupported()
-    override val isLiftedUp: Boolean get() = unsupported()
+    override konst underlyingType: CirClassOrTypeAliasType get() = unsupported()
+    override konst expandedType: CirClassType get() = unsupported()
+    override konst annotations get() = unsupported()
+    override konst name get() = unsupported()
+    override konst typeParameters get() = unsupported()
+    override konst visibility get() = unsupported()
+    override konst isLiftedUp: Boolean get() = unsupported()
 }

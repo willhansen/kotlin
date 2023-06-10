@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 // WITH_STDLIB
 
-inline class Foo(val a: Any)
+inline class Foo(konst a: Any)
 
 @JvmName("bar")
 fun bar(f: Foo) {}

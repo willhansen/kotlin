@@ -6,7 +6,7 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, constant-literals, the-types-for-integer-literals -> paragraph 1 -> sentence 2
  * NUMBER: 4
- * DESCRIPTION: Type checking (comparison with invalid types) of too a big integers.
+ * DESCRIPTION: Type checking (comparison with inkonstid types) of too a big integers.
  * HELPERS: checkType
  */
 

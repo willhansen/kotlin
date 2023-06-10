@@ -24,7 +24,7 @@ internal class NativeSingleAbstractMethodLowering(context: Context) : SingleAbst
         return typeOperand.classOrNull?.defaultType ?: error("Unsupported SAM conversion: ${typeOperand.render()}")
     }
 
-    override val IrType.needEqualsHashCodeMethods get() = true
+    override konst IrType.needEqualsHashCodeMethods get() = true
 
     override fun getSuspendFunctionWithoutContinuation(function: IrSimpleFunction) = function.let {
         context.mapping.functionWithContinuationsToSuspendFunctions[it] ?: it

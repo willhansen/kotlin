@@ -20,15 +20,15 @@ class Delegate {
     return <this>.<get-delegateValue>()
   }
 
-  operator fun setValue($context_receiver_0: Int, thisRef: Any?, property: KProperty<*>, value: String) {
+  operator fun setValue($context_receiver_0: Int, thisRef: Any?, property: KProperty<*>, konstue: String) {
     <set-operationScore>(<set-?> = <get-operationScore>().plus(other = $context_receiver_0))
-    <this>.<set-delegateValue>(<set-?> = value)
+    <this>.<set-delegateValue>(<set-?> = konstue)
   }
 
 }
 
 class Result {
-  private /* final field */ val contextReceiverField0: Int
+  private /* final field */ konst contextReceiverField0: Int
   constructor($context_receiver_0: Int) /* primary */ {
     super/*Any*/()
     <this>.#contextReceiverField0 = $context_receiver_0
@@ -42,18 +42,18 @@ class Result {
       return <this>.#s$delegate.getValue($context_receiver_0 = <this>.#contextReceiverField0, thisRef = <this>, property = Result::s)
     }
     set(<set-?>: String) {
-      <this>.#s$delegate.setValue($context_receiver_0 = <this>.#contextReceiverField0, thisRef = <this>, property = Result::s, value = <set-?>)
+      <this>.#s$delegate.setValue($context_receiver_0 = <this>.#contextReceiverField0, thisRef = <this>, property = Result::s, konstue = <set-?>)
     }
 
 }
 
 fun box(): String {
-  val result: Result = with<Int, Result>(receiver = 1, block = local fun Int.<anonymous>(): Result {
+  konst result: Result = with<Int, Result>(receiver = 1, block = local fun Int.<anonymous>(): Result {
     return Result($context_receiver_0 = $this$with)
   }
 )
   result.<set-s>(<set-?> = "OK")
-  val returnValue: String = result.<get-s>()
+  konst returnValue: String = result.<get-s>()
   return when {
     EQEQ(arg0 = <get-operationScore>(), arg1 = 2) -> returnValue
     else -> "fail"

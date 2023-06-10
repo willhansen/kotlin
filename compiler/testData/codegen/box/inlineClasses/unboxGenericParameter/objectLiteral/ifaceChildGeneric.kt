@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 fun <T> underlying(a: IC<FooHolder>): T = bar(a, object : IFace<IC<FooHolder>, T> {
-    override fun call(ic: IC<FooHolder>): T = ic.value.value as T
+    override fun call(ic: IC<FooHolder>): T = ic.konstue.konstue as T
 })
 
 fun <T> extension(a: IC<FooHolder>): T = bar(a, object : IFace<IC<FooHolder>, T> {
@@ -18,25 +18,25 @@ fun <T> normal(a: IC<FooHolder>): T = bar(a, object : IFace<IC<FooHolder>, T> {
     override fun call(ic: IC<FooHolder>): T = normalValue(ic)
 })
 
-fun <T> IC<FooHolder>.extensionValue(): T = value.value as T
+fun <T> IC<FooHolder>.extensionValue(): T = konstue.konstue as T
 
-fun <T> normalValue(ic: IC<FooHolder>): T = ic.value.value as T
+fun <T> normalValue(ic: IC<FooHolder>): T = ic.konstue.konstue as T
 
 interface IFace<T, R> {
     fun call(ic: T): R
 }
 
-fun <T, R> bar(value: T, f: IFace<T, R>): R {
-    return f.call(value)
+fun <T, R> bar(konstue: T, f: IFace<T, R>): R {
+    return f.call(konstue)
 }
 
 interface Foo
 
-class FooHolder(val value: Any): Foo
+class FooHolder(konst konstue: Any): Foo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: FooHolder>(val value: T): Foo {
-    fun <T> dispatchValue(): T = value.value as T
+konstue class IC<T: FooHolder>(konst konstue: T): Foo {
+    fun <T> dispatchValue(): T = konstue.konstue as T
 }
 
 fun box(): String {

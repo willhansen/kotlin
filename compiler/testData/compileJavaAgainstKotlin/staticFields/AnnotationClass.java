@@ -1,11 +1,11 @@
 package test;
 
-@AString(value = Test.vstring)
-@AChar(value = Test.vchar)
-@AInt(value = Test.vint)
-@AByte(value = Test.vbyte)
-@ALong(value = Test.vlong)
-@ADouble(value = Test.vdouble)
-@AFloat(value = Test.vfloat)
+@AString(konstue = Test.vstring)
+@AChar(konstue = Test.vchar)
+@AInt(konstue = Test.vint)
+@AByte(konstue = Test.vbyte)
+@ALong(konstue = Test.vlong)
+@ADouble(konstue = Test.vdouble)
+@AFloat(konstue = Test.vfloat)
 public class AnnotationClass {
 }

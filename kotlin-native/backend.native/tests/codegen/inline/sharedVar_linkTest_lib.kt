@@ -7,9 +7,9 @@ package a
 
 fun IntArray.forEachNoInline(block: (Int) -> Unit) = this.forEach { block(it) }
 
-inline fun fold(initial: Int, values: IntArray, crossinline block: (Int, Int) -> Int): Int {
+inline fun fold(initial: Int, konstues: IntArray, crossinline block: (Int, Int) -> Int): Int {
     var res = initial
-    values.forEachNoInline {
+    konstues.forEachNoInline {
         res = block(res, it)
     }
     return res

@@ -4,7 +4,7 @@ FILE: localObjects.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = Int(0)
+        public final konst x: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
 
     }
@@ -20,7 +20,7 @@ FILE: localObjects.kt
     }
     public final fun test(): R|kotlin/Unit| {
         Q|A|.R|/A.x|
-        lval b: R|<anonymous>| = object : R|Foo| {
+        lkonst b: R|<anonymous>| = object : R|Foo| {
             private constructor(): R|<anonymous>| {
                 super<R|Foo|>()
             }
@@ -40,5 +40,5 @@ FILE: localObjects.kt
 
         Q|B|.R|<local>/foo|()
     }
-    public final val bb: <ERROR TYPE REF: Unresolved name: foo> = <Unresolved name: B>#.<Unresolved name: foo>#()
+    public final konst bb: <ERROR TYPE REF: Unresolved name: foo> = <Unresolved name: B>#.<Unresolved name: foo>#()
         public get(): <ERROR TYPE REF: Unresolved name: foo>

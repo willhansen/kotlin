@@ -12,10 +12,10 @@
 
 fun box(): String {
     var res = BDecrement(1)
-    val res1: Any = --res
+    konst res1: Any = --res
 
     return if (res1 is BDecrement && res.i == -1 && res.j == 0 && res1.i == -1 && res1.j == 0) {
-        val res2: Any? = --res
+        konst res2: Any? = --res
         if (res2 is BDecrement && res.i == -2 && res.j == -1 && res2.i == -2 && res2.j == -1)
             "OK"
         else "NOK"

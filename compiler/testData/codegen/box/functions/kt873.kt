@@ -1,5 +1,5 @@
 fun box() : String {
-  val fps  : Double = 1.toDouble()
+  konst fps  : Double = 1.toDouble()
   var mspf : Long
   {
     if ((fps.toInt() == 0))

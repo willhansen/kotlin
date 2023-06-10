@@ -3,7 +3,7 @@
 
 import kotlin.reflect.KProperty
 
-class FieldStyle2(val index: Int? = 0)
+class FieldStyle2(konst index: Int? = 0)
 
 interface Foo {
     fun <Type : Comparable<*>> getProperty(): Type? = null

@@ -28,15 +28,15 @@ import org.jetbrains.kotlin.resolve.checkers.OptInNames
 object FirOptInUsageTypeRefChecker : FirTypeRefChecker() {
     @OptIn(SymbolInternals::class)
     override fun check(typeRef: FirTypeRef, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = typeRef.source
+        konst source = typeRef.source
         if (source?.kind !is KtRealSourceElementKind) return
         // coneTypeSafe filters out all delegatedTypeRefs from here
-        val coneType = typeRef.coneTypeSafe<ConeClassLikeType>() ?: return
+        konst coneType = typeRef.coneTypeSafe<ConeClassLikeType>() ?: return
 
-        val symbol = coneType.lookupTag.toSymbol(context.session) ?: return
+        konst symbol = coneType.lookupTag.toSymbol(context.session) ?: return
         symbol.lazyResolveToPhase(FirResolvePhase.STATUS)
-        val classId = symbol.classId
-        val lastAnnotationCall = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.lastOrNull() as? FirAnnotation
+        konst classId = symbol.classId
+        konst lastAnnotationCall = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.lastOrNull() as? FirAnnotation
         if (lastAnnotationCall == null || lastAnnotationCall.annotationTypeRef !== typeRef) {
             if (classId == OptInNames.REQUIRES_OPT_IN_CLASS_ID || classId == OptInNames.OPT_IN_CLASS_ID) {
                 reporter.reportOn(source, OPT_IN_CAN_ONLY_BE_USED_AS_ANNOTATION, context)
@@ -47,12 +47,12 @@ object FirOptInUsageTypeRefChecker : FirTypeRefChecker() {
             }
         }
 
-        val isSupertypeRef = typeRef in (context.containingDeclarations.lastOrNull() as? FirClass)?.superTypeRefs.orEmpty()
+        konst isSupertypeRef = typeRef in (context.containingDeclarations.lastOrNull() as? FirClass)?.superTypeRefs.orEmpty()
         with(FirOptInUsageBaseChecker) {
-            val classifierExperimentalities =
+            konst classifierExperimentalities =
                 if (isSupertypeRef) symbol.loadExperimentalitiesFromSupertype(context)
                 else symbol.loadExperimentalities(context, fromSetter = false, dispatchReceiverType = null)
-            val experimentalities =
+            konst experimentalities =
                 classifierExperimentalities + loadExperimentalitiesFromConeArguments(context, coneType.typeArguments.toList())
             reportNotAcceptedExperimentalities(experimentalities, typeRef, context, reporter)
         }

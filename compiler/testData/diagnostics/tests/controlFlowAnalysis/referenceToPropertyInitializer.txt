@@ -4,7 +4,7 @@ package o {
 
     public open class A {
         public constructor A(/*0*/ a: o.A)
-        public final val a: o.A
+        public final konst a: o.A
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -12,8 +12,8 @@ package o {
 
     public final class TestFunctionLiteral {
         public constructor TestFunctionLiteral()
-        public final val foo: () -> kotlin.Unit
-        public final val sum: (kotlin.Int) -> kotlin.Int
+        public final konst foo: () -> kotlin.Unit
+        public final konst sum: (kotlin.Int) -> kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -21,8 +21,8 @@ package o {
 
     public final class TestObjectLiteral {
         public constructor TestObjectLiteral()
-        public final val obj: o.A
-        public final val obj1: o.A
+        public final konst obj: o.A
+        public final konst obj1: o.A
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -30,7 +30,7 @@ package o {
 
     public final class TestOther {
         public constructor TestOther()
-        public final val x: kotlin.Int
+        public final konst x: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

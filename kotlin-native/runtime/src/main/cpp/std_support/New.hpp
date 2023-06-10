@@ -14,7 +14,7 @@ inline constexpr kalloc_t kalloc = kotlin::std_support::kalloc_t{};
 
 } // namespace kotlin::std_support
 
-// TODO: Add align_val_t overloads once we make sure all targets support aligned allocation.
+// TODO: Add align_konst_t overloads once we make sure all targets support aligned allocation.
 //       (also requires removing `-fno-aligned-allocation` compiler flag).
 
 void* operator new(std::size_t count, kotlin::std_support::kalloc_t) noexcept;

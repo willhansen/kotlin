@@ -10,18 +10,18 @@ open class B(var s: String) : A() {
 
 open class C(s: String, var l: ArrayList<Any>): B(s) {
     override fun clone(): C {
-        val result = super.clone() as C
+        konst result = super.clone() as C
         result.l = l.clone() as ArrayList<Any>
         return result
     }
 }
 
 fun box(): String {
-    val l = ArrayList<Any>()
+    konst l = ArrayList<Any>()
     l.add(true)
 
-    val c = C("OK", l)
-    val d = c.clone()
+    konst c = C("OK", l)
+    konst d = c.clone()
 
     if (c.s != d.s) return "Fail s: ${d.s}"
     if (c.l != d.l) return "Fail l: ${d.l}"

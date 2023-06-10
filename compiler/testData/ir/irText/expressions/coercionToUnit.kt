@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 // +JDK
 
-val test1: () -> Unit = { 42 }
+konst test1: () -> Unit = { 42 }
 
 fun test2(mc: MutableCollection<String>) {
     mc.add("")

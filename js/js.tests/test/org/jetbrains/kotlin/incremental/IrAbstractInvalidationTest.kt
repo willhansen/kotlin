@@ -20,31 +20,31 @@ import org.jetbrains.kotlin.serialization.js.ModuleKind
 import org.jetbrains.kotlin.test.TargetBackend
 import java.io.File
 
-abstract class AbstractJsIrInvalidationTest : IrAbstractInvalidationTest(
+abstract class AbstractJsIrInkonstidationTest : IrAbstractInkonstidationTest(
     targetBackend = TargetBackend.JS_IR,
-    workingDirPath = "incrementalOut/invalidation"
+    workingDirPath = "incrementalOut/inkonstidation"
 )
 
-abstract class AbstractJsIrES6InvalidationTest : IrAbstractInvalidationTest(
+abstract class AbstractJsIrES6InkonstidationTest : IrAbstractInkonstidationTest(
     targetBackend = TargetBackend.JS_IR_ES6,
-    workingDirPath = "incrementalOut/invalidationES6"
+    workingDirPath = "incrementalOut/inkonstidationES6"
 )
 
-abstract class AbstractJsIrInvalidationWithPLTest : IrAbstractInvalidationTest(
+abstract class AbstractJsIrInkonstidationWithPLTest : IrAbstractInkonstidationTest(
     targetBackend = TargetBackend.JS_IR,
-    workingDirPath = "incrementalOut/invalidationWithPL"
+    workingDirPath = "incrementalOut/inkonstidationWithPL"
 ) {
     override fun createConfiguration(moduleName: String, language: List<String>, moduleKind: ModuleKind): CompilerConfiguration {
-        val config = super.createConfiguration(moduleName, language, moduleKind)
+        konst config = super.createConfiguration(moduleName, language, moduleKind)
         config.setupPartialLinkageConfig(PartialLinkageConfig(PartialLinkageMode.ENABLE, PartialLinkageLogLevel.WARNING))
         return config
     }
 }
 
-abstract class IrAbstractInvalidationTest(
+abstract class IrAbstractInkonstidationTest(
     targetBackend: TargetBackend,
     workingDirPath: String
-) : AbstractInvalidationTest(targetBackend, workingDirPath) {
+) : AbstractInkonstidationTest(targetBackend, workingDirPath) {
     override fun buildKlib(
         configuration: CompilerConfiguration,
         moduleName: String,
@@ -53,11 +53,11 @@ abstract class IrAbstractInvalidationTest(
         friends: Collection<File>,
         outputKlibFile: File
     ) {
-        val projectJs = environment.project
+        konst projectJs = environment.project
 
-        val sourceFiles = sourceDir.filteredKtFiles().map { environment.createPsiFile(it) }
+        konst sourceFiles = sourceDir.filteredKtFiles().map { environment.createPsiFile(it) }
 
-        val sourceModule = prepareAnalyzedSourceModule(
+        konst sourceModule = prepareAnalyzedSourceModule(
             project = projectJs,
             files = sourceFiles,
             configuration = configuration,
@@ -66,10 +66,10 @@ abstract class IrAbstractInvalidationTest(
             analyzer = AnalyzerWithCompilerReport(configuration)
         )
 
-        val moduleSourceFiles = (sourceModule.mainModule as MainModule.SourceFiles).files
-        val icData = sourceModule.compilerConfiguration.incrementalDataProvider?.getSerializedData(moduleSourceFiles) ?: emptyList()
-        val expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
-        val (moduleFragment, _) = generateIrForKlibSerialization(
+        konst moduleSourceFiles = (sourceModule.mainModule as MainModule.SourceFiles).files
+        konst icData = sourceModule.compilerConfiguration.incrementalDataProvider?.getSerializedData(moduleSourceFiles) ?: emptyList()
+        konst expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
+        konst (moduleFragment, _) = generateIrForKlibSerialization(
             environment.project,
             moduleSourceFiles,
             configuration,
@@ -82,7 +82,7 @@ abstract class IrAbstractInvalidationTest(
         ) {
             sourceModule.getModuleDescriptor(it)
         }
-        val metadataSerializer =
+        konst metadataSerializer =
             KlibMetadataIncrementalSerializer(configuration, sourceModule.project, sourceModule.jsFrontEndResult.hasErrors)
 
         generateKLib(

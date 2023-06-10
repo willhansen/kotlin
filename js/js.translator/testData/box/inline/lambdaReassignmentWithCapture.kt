@@ -24,7 +24,7 @@ fun bar(p: IntPair): Int {
 }
 
 fun box(): String {
-    val p = IntPair(0, 0)
+    konst p = IntPair(0, 0)
     assertEquals(3, bar(p))
     assertEquals(IntPair(2, 1), p)
 

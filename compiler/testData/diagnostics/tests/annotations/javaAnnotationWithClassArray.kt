@@ -2,18 +2,18 @@
 // WITH_STDLIB
 // FILE: AnnRaw.java
 public @interface AnnRaw {
-    Class value();
+    Class konstue();
 }
 
 // FILE: Ann.java
 public @interface Ann {
-    Class<?> value();
+    Class<?> konstue();
 }
 
 // FILE: Utils.java
 public class Utils {
-    public static void foo(Class value) {}
-    public static void fooRaw(Class<?> value) {}
+    public static void foo(Class konstue) {}
+    public static void fooRaw(Class<?> konstue) {}
 }
 
 // FILE: main.kt

@@ -1,7 +1,7 @@
 package
 
-public val e2: E
-public val staticWithExplicitType: LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
+public konst e2: E
+public konst staticWithExplicitType: LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
 public fun </*0*/ K> id(/*0*/ x: K): K
 public fun Receiver.method(/*0*/ param: Parameter): LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
 
@@ -9,8 +9,8 @@ public final enum class E : kotlin.Enum<E> {
     enum entry VALUE
 
     private constructor E()
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: E): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -20,14 +20,14 @@ public final enum class E : kotlin.Enum<E> {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<E>
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): E
-    public final /*synthesized*/ fun values(): kotlin.Array<E>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<E>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): E
+    public final /*synthesized*/ fun konstues(): kotlin.Array<E>
 }
 
 public final class OtherClass {
     public constructor OtherClass()
-    public final val ok: LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
+    public final konst ok: LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -47,9 +47,9 @@ public interface Receiver {
 
 public final class SomeClass {
     public constructor SomeClass()
-    public final val e: E
-    public final val withExplicitType: LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
-    public final val withoutType: LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
+    public final konst e: E
+    public final konst withExplicitType: LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
+    public final konst withoutType: LambdaWithReceiver /* = Receiver.(Parameter) -> kotlin.Unit */
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

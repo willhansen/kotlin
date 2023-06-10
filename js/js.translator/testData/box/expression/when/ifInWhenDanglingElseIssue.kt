@@ -5,11 +5,11 @@
 package foo
 
 
-fun test(caseId: Int, value: Int, expected: Int) {
+fun test(caseId: Int, konstue: Int, expected: Int) {
     var actual: Int = 0
     when (caseId) {
-        2 -> if (value < 0) actual = -value
-        3 -> actual = if (value < 0) {-value} else value
+        2 -> if (konstue < 0) actual = -konstue
+        3 -> actual = if (konstue < 0) {-konstue} else konstue
         else -> throw Exception("Unexpected case: $caseId")
     }
 

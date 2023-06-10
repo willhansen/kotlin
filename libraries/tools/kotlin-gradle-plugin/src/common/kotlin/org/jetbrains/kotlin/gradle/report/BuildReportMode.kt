@@ -13,6 +13,6 @@ enum class BuildReportMode : Serializable {
     VERBOSE;
 
     companion object {
-        const val serialVersionUID: Long = 0
+        const konst serialVersionUID: Long = 0
     }
 }

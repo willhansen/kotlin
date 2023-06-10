@@ -16,16 +16,16 @@ import org.jetbrains.kotlin.js.translate.general.AstGenerationResult
 import org.jetbrains.kotlin.resolve.BindingContext
 
 class JsInliner(
-    val reporter: JsConfig.Reporter,
-    val config: JsConfig,
-    val trace: DiagnosticSink,
-    val bindingContext: BindingContext,
-    val translationResult: AstGenerationResult
+    konst reporter: JsConfig.Reporter,
+    konst config: JsConfig,
+    konst trace: DiagnosticSink,
+    konst bindingContext: BindingContext,
+    konst translationResult: AstGenerationResult
 ) {
 
-    val functionDefinitionLoader = FunctionDefinitionLoader(this)
+    konst functionDefinitionLoader = FunctionDefinitionLoader(this)
 
-    val cycleReporter = InlinerCycleReporter(trace, functionDefinitionLoader)
+    konst cycleReporter = InlinerCycleReporter(trace, functionDefinitionLoader)
 
     fun process() {
         for (fragment in translationResult.newFragments) {
@@ -45,7 +45,7 @@ class JsInliner(
         if (definitionFragment !in translationResult.newFragments) return
 
         cycleReporter.processInlineFunction(inlineFn.fn, call) {
-            val (fn, wrapperBody) = inlineFn.fn
+            konst (fn, wrapperBody) = inlineFn.fn
 
             if (wrapperBody != null) {
                 ImportIntoWrapperInliningScope.process(wrapperBody, definitionFragment) { scope ->
@@ -59,13 +59,13 @@ class JsInliner(
     }
 
     fun inline(scope: InliningScope, call: JsInvocation, currentStatement: JsStatement?): InlineableResult {
-        val definition = functionDefinitionLoader.getFunctionDefinition(call, scope)
+        konst definition = functionDefinitionLoader.getFunctionDefinition(call, scope)
 
-        val function = scope.importFunctionDefinition(definition)
+        konst function = scope.importFunctionDefinition(definition)
 
-        val inliningContext = InliningContext(currentStatement)
+        konst inliningContext = InliningContext(currentStatement)
 
-        val (inlineableBody, resultExpression) = FunctionInlineMutator.getInlineableCallReplacement(call, function, inliningContext)
+        konst (inlineableBody, resultExpression) = FunctionInlineMutator.getInlineableCallReplacement(call, function, inliningContext)
 
         // body of inline function can contain call to lambdas that need to be inlined
         InlineAstVisitor(this, scope).accept<JsNode?>(inlineableBody)

@@ -27,7 +27,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Denotes that a parameter, field or method return value can never be null.
+ * Denotes that a parameter, field or method return konstue can never be null.
  * <p/>
  * This is a marker annotation and it has no specific attributes.
  */

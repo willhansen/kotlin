@@ -1,9 +1,9 @@
 // TARGET_BACKEND: JVM_IR
 
-annotation class MyReplaceWith(val x: String, vararg val y: String)
+annotation class MyReplaceWith(konst x: String, vararg konst y: String)
 
 annotation class MyDeprecated(
-    val replaceWith: MyReplaceWith = MyReplaceWith(""),
+    konst replaceWith: MyReplaceWith = MyReplaceWith(""),
 )
 
 fun getInt(x: String, vararg y: String): Int = 1

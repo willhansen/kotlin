@@ -11,7 +11,7 @@ import com.intellij.openapi.Disposable
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
-import org.jetbrains.kotlin.cli.common.arguments.validateArguments
+import org.jetbrains.kotlin.cli.common.arguments.konstidateArguments
 import org.jetbrains.kotlin.cli.common.checkPluginsArguments
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
@@ -56,13 +56,13 @@ import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.jvm.*
 import kotlin.script.experimental.jvm.util.KotlinJars
 
-const val SCRIPT_BASE_COMPILER_ARGUMENTS_PROPERTY = "kotlin.script.base.compiler.arguments"
+const konst SCRIPT_BASE_COMPILER_ARGUMENTS_PROPERTY = "kotlin.script.base.compiler.arguments"
 
 class SharedScriptCompilationContext(
-    val disposable: Disposable?,
-    val baseScriptCompilationConfiguration: ScriptCompilationConfiguration,
-    val environment: KotlinCoreEnvironment,
-    val ignoredOptionsReportingState: IgnoredOptionsReportingState
+    konst disposable: Disposable?,
+    konst baseScriptCompilationConfiguration: ScriptCompilationConfiguration,
+    konst environment: KotlinCoreEnvironment,
+    konst ignoredOptionsReportingState: IgnoredOptionsReportingState
 )
 
 fun createIsolatedCompilationContext(
@@ -71,11 +71,11 @@ fun createIsolatedCompilationContext(
     messageCollector: ScriptDiagnosticsMessageCollector,
     disposable: Disposable
 ): SharedScriptCompilationContext {
-    val ignoredOptionsReportingState = IgnoredOptionsReportingState()
+    konst ignoredOptionsReportingState = IgnoredOptionsReportingState()
 
-    val (initialScriptCompilationConfiguration, kotlinCompilerConfiguration) =
+    konst (initialScriptCompilationConfiguration, kotlinCompilerConfiguration) =
         createInitialConfigurations(baseScriptCompilationConfiguration, hostConfiguration, messageCollector, ignoredOptionsReportingState)
-    val environment =
+    konst environment =
         KotlinCoreEnvironment.createForProduction(
             disposable, kotlinCompilerConfiguration, EnvironmentConfigFiles.JVM_CONFIG_FILES
         )
@@ -90,9 +90,9 @@ internal fun createCompilationContextFromEnvironment(
     environment: KotlinCoreEnvironment,
     messageCollector: ScriptDiagnosticsMessageCollector
 ): SharedScriptCompilationContext {
-    val ignoredOptionsReportingState = IgnoredOptionsReportingState()
+    konst ignoredOptionsReportingState = IgnoredOptionsReportingState()
 
-    val initialScriptCompilationConfiguration =
+    konst initialScriptCompilationConfiguration =
         baseScriptCompilationConfiguration.withUpdatesFromCompilerConfiguration(environment.configuration)
 
     initialScriptCompilationConfiguration[ScriptCompilationConfiguration.compilerOptions]?.let { compilerOptions ->
@@ -106,9 +106,9 @@ internal fun createCompilationContextFromEnvironment(
 
 // copied with minor modifications from the sam-with-receiver-cli
 // TODO: consider placing into a shared jar
-internal class ScriptingSamWithReceiverComponentContributor(val annotations: List<String>) : StorageComponentContainerContributor {
+internal class ScriptingSamWithReceiverComponentContributor(konst annotations: List<String>) : StorageComponentContainerContributor {
 
-    private class Extension(private val annotations: List<String>) : SamWithReceiverResolver, AnnotationBasedExtension {
+    private class Extension(private konst annotations: List<String>) : SamWithReceiverResolver, AnnotationBasedExtension {
         override fun getAnnotationFqNames(modifierListOwner: KtModifierListOwner?) = annotations
 
         override fun shouldConvertFirstSamParameterToReceiver(function: FunctionDescriptor): Boolean =
@@ -125,9 +125,9 @@ internal class ScriptingSamWithReceiverComponentContributor(val annotations: Lis
 }
 
 internal fun SharedScriptCompilationContext.applyConfigure(): SharedScriptCompilationContext = apply {
-    val samWithReceiverAnnotations = baseScriptCompilationConfiguration[ScriptCompilationConfiguration.annotationsForSamWithReceivers]
+    konst samWithReceiverAnnotations = baseScriptCompilationConfiguration[ScriptCompilationConfiguration.annotationsForSamWithReceivers]
     if (samWithReceiverAnnotations?.isEmpty() == false) {
-        val annotations = samWithReceiverAnnotations.map { it.typeName }
+        konst annotations = samWithReceiverAnnotations.map { it.typeName }
         if (!environment.configuration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
             StorageComponentContainerContributor.registerExtension(
                 environment.project,
@@ -143,7 +143,7 @@ internal fun createInitialConfigurations(
     messageCollector: ScriptDiagnosticsMessageCollector,
     ignoredOptionsReportingState: IgnoredOptionsReportingState
 ): Pair<ScriptCompilationConfiguration, CompilerConfiguration> {
-    val kotlinCompilerConfiguration =
+    konst kotlinCompilerConfiguration =
         createInitialCompilerConfiguration(
             scriptCompilationConfiguration, hostConfiguration, messageCollector, ignoredOptionsReportingState
         )
@@ -152,7 +152,7 @@ internal fun createInitialConfigurations(
         kotlinCompilerConfiguration.updateWithCompilerOptions(it)
     }
 
-    val initialScriptCompilationConfiguration =
+    konst initialScriptCompilationConfiguration =
         scriptCompilationConfiguration.withUpdatesFromCompilerConfiguration(kotlinCompilerConfiguration)
 
     initialScriptCompilationConfiguration[ScriptCompilationConfiguration.compilerOptions]?.let { compilerOptions ->
@@ -169,12 +169,12 @@ private fun CompilerConfiguration.updateWithCompilerOptions(
     isRefinement: Boolean
 ) {
     updateWithCompilerOptions(compilerOptions) {
-        validateArguments(it.errors)?.let { error ->
+        konstidateArguments(it.errors)?.let { error ->
             messageCollector.report(CompilerMessageSeverity.ERROR, error)
             false
         } ?: run {
             messageCollector.reportArgumentParseProblems(it)
-            val error = reportArgumentsNotAllowed(it, messageCollector, ignoredOptionsReportingState)
+            konst error = reportArgumentsNotAllowed(it, messageCollector, ignoredOptionsReportingState)
             reportArgumentsIgnoredGenerally(it, messageCollector, ignoredOptionsReportingState)
             if (isRefinement) {
                 reportArgumentsIgnoredFromRefinement(it, messageCollector, ignoredOptionsReportingState)
@@ -186,14 +186,14 @@ private fun CompilerConfiguration.updateWithCompilerOptions(
 
 internal fun CompilerConfiguration.updateWithCompilerOptions(
     compilerOptions: List<String>,
-    validate: (K2JVMCompilerArguments) -> Boolean = {
-        validateArguments(it.errors)?.let { throw Exception("Error parsing arguments: $it") } ?: true
+    konstidate: (K2JVMCompilerArguments) -> Boolean = {
+        konstidateArguments(it.errors)?.let { throw Exception("Error parsing arguments: $it") } ?: true
     }
 ) {
-    val compilerArguments = K2JVMCompilerArguments()
+    konst compilerArguments = K2JVMCompilerArguments()
     parseCommandLineArguments(compilerOptions, compilerArguments)
 
-    if (!validate(compilerArguments)) return
+    if (!konstidate(compilerArguments)) return
 
     processPluginsCommandLine(compilerArguments)
 
@@ -216,7 +216,7 @@ private fun createInitialCompilerConfiguration(
     reportingState: IgnoredOptionsReportingState
 ): CompilerConfiguration {
 
-    val baseArguments = K2JVMCompilerArguments()
+    konst baseArguments = K2JVMCompilerArguments()
     parseCommandLineArguments(
         scriptCompilationConfiguration[ScriptCompilationConfiguration.compilerOptions] ?: emptyList(),
         baseArguments
@@ -231,9 +231,9 @@ private fun createInitialCompilerConfiguration(
 
         setupJvmSpecificArguments(baseArguments)
 
-        val definedTarget = scriptCompilationConfiguration[ScriptCompilationConfiguration.jvm.jvmTarget]
+        konst definedTarget = scriptCompilationConfiguration[ScriptCompilationConfiguration.jvm.jvmTarget]
         if (definedTarget != null) {
-            val target = JvmTarget.values().find { it.description == definedTarget }
+            konst target = JvmTarget.konstues().find { it.description == definedTarget }
             if (target == null) {
                 messageCollector.report(
                     CompilerMessageSeverity.STRONG_WARNING, "Unknown JVM target \"$definedTarget\", using default"
@@ -243,7 +243,7 @@ private fun createInitialCompilerConfiguration(
             }
         }
 
-        val jdkHomeFromConfigurations = scriptCompilationConfiguration[ScriptCompilationConfiguration.jvm.jdkHome]
+        konst jdkHomeFromConfigurations = scriptCompilationConfiguration[ScriptCompilationConfiguration.jvm.jdkHome]
             // TODO: check if this is redundant and/or incorrect since the default is now taken from the host configuration anyway (the one linked to the compilation config)
             ?: hostConfiguration[ScriptingHostConfiguration.jvm.jdkHome]
         if (jdkHomeFromConfigurations != null) {
@@ -255,7 +255,7 @@ private fun createInitialCompilerConfiguration(
 
         put(JVMConfigurationKeys.RETAIN_OUTPUT_IN_MEMORY, true)
 
-        val isModularJava = isModularJava()
+        konst isModularJava = isModularJava()
 
         scriptCompilationConfiguration[ScriptCompilationConfiguration.dependencies]?.let { dependencies ->
             addJvmClasspathRoots(
@@ -294,9 +294,9 @@ private fun createInitialCompilerConfiguration(
             ScriptDefinition.FromConfigurations(hostConfiguration, scriptCompilationConfiguration, null)
         )
 
-        val pluginClasspaths = baseArguments.pluginClasspaths?.asList().orEmpty()
-        val pluginOptions = baseArguments.pluginOptions?.asList().orEmpty()
-        val pluginConfigurations = baseArguments.pluginConfigurations.orEmpty().toMutableList()
+        konst pluginClasspaths = baseArguments.pluginClasspaths?.asList().orEmpty()
+        konst pluginOptions = baseArguments.pluginOptions?.asList().orEmpty()
+        konst pluginConfigurations = baseArguments.pluginConfigurations.orEmpty().toMutableList()
 
         checkPluginsArguments(messageCollector, false, pluginClasspaths, pluginOptions, pluginConfigurations)
         if (pluginClasspaths.isNotEmpty() || pluginConfigurations.isNotEmpty()) {
@@ -313,8 +313,8 @@ internal fun collectRefinedSourcesAndUpdateEnvironment(
     initialConfiguration: ScriptCompilationConfiguration,
     messageCollector: ScriptDiagnosticsMessageCollector
 ): Pair<List<KtFile>, List<ScriptsCompilationDependencies.SourceDependencies>> {
-    val sourceFiles = arrayListOf(mainKtFile)
-    val (classpath, newSources, sourceDependencies) =
+    konst sourceFiles = arrayListOf(mainKtFile)
+    konst (classpath, newSources, sourceDependencies) =
         collectScriptsCompilationDependencies(
             context.environment.configuration,
             context.environment.project,
@@ -336,8 +336,8 @@ private fun CompilerConfiguration.updateWithRefinedConfigurations(
     sourceFiles: List<KtFile>,
     messageCollector: ScriptDiagnosticsMessageCollector
 ) {
-    val dependenciesProvider = ScriptDependenciesProvider.getInstance(context.environment.project)
-    val updatedCompilerOptions = sourceFiles.flatMapTo(mutableListOf<String>()) {
+    konst dependenciesProvider = ScriptDependenciesProvider.getInstance(context.environment.project)
+    konst updatedCompilerOptions = sourceFiles.flatMapTo(mutableListOf<String>()) {
         dependenciesProvider?.getScriptConfiguration(it)?.configuration?.get(
             ScriptCompilationConfiguration.compilerOptions
         ) ?: emptyList()

@@ -7,7 +7,7 @@ class Message1
 class Task<T>
 object Message2
 enum class Message3
-data class Message4(val x: Int)
+data class Message4(konst x: Int)
 
 sealed class Message5<T> {
     open fun <A : T> execute() {}
@@ -19,10 +19,10 @@ interface Manager<T> {
     fun <T : <!FINAL_UPPER_BOUND!>Message2<!>> execute3() {}
     fun <A : T> execute4() {}
     fun <A : T> execute5() {}
-    val <A : T> A.x get() = 10
+    konst <A : T> A.x get() = 10
     var <A : T> A.y
         get() = 10
-        set(value) {}
+        set(konstue) {}
 }
 
 object MessageManager1 : Manager<Message1> {
@@ -75,7 +75,7 @@ class MessageManager11<A> : Message5<Message5<A>>() {
     override fun <T : Message5<A>> execute() {}
 }
 
-data class MessageManager12(val x: Int) : Message5<Message2>() {
+data class MessageManager12(konst x: Int) : Message5<Message2>() {
     override fun <T : Message2> execute() {}
 }
 
@@ -84,15 +84,15 @@ sealed class MessageManager13<A> : Message5<A>() {
 }
 
 class MessageManager14 : Manager<Message2> {
-    override val <T : Message2> T.x get() = 10
+    override konst <T : Message2> T.x get() = 10
     override var <T : Message2> T.y
         get() = 10
-        set(value) {}
+        set(konstue) {}
 }
 
 object MessageManager15 : Manager<Int> {
-    override val <T : Int> T.x get() = 10
+    override konst <T : Int> T.x get() = 10
     override var <T : Int> T.y
         get() = 10
-        set(value) {}
+        set(konstue) {}
 }

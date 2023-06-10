@@ -13,7 +13,7 @@ class A {
 }
 
 fun f(x: Int): Int {
-    val a = A()
+    konst a = A()
     assertTrue(a.isLocal())
     return a.f(x)
 }

@@ -3,7 +3,7 @@ class Z{
     fun a(s: Int) {}
 
     fun b() {
-        val cr = (Z::a)
+        konst cr = (Z::a)
         cr(Z(), 1)
     }
 }

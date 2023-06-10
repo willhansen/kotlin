@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.js.backend.JsToStringGenerationVisitor
 import org.jetbrains.kotlin.js.backend.ast.*
 import org.jetbrains.kotlin.js.util.TextOutput
 
-class LineOutputToStringVisitor(output: TextOutput, val lineCollector: LineCollector) :
+class LineOutputToStringVisitor(output: TextOutput, konst lineCollector: LineCollector) :
         JsToStringGenerationVisitor(output) {
 
     override fun visitIf(x: JsIf) {

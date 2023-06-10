@@ -29,9 +29,9 @@ open class IndexerTests {
     }
 
     class TempFiles(name: String) {
-        private val tempRootDir = System.getProperty("kotlin.native.interop.indexer.temp") ?: System.getProperty("java.io.tmpdir") ?: "."
+        private konst tempRootDir = System.getProperty("kotlin.native.interop.indexer.temp") ?: System.getProperty("java.io.tmpdir") ?: "."
 
-        val directory: File = File(tempRootDir, name).canonicalFile.also {
+        konst directory: File = File(tempRootDir, name).canonicalFile.also {
             it.mkdirs()
         }
 

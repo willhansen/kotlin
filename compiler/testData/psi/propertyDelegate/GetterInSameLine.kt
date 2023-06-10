@@ -1,1 +1,1 @@
-val a by A(); get() = 1;
+konst a by A(); get() = 1;

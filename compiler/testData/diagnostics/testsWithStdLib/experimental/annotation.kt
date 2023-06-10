@@ -36,7 +36,7 @@ fun parameterType(p: <!WRONG_ANNOTATION_TARGET!>@EAnno<!> String) {}
 fun returnType(): <!WRONG_ANNOTATION_TARGET!>@EAnno<!> Unit {}
 
 @ExperimentalAPI
-@EAnno val property = ""
+@EAnno konst property = ""
 
 @ExperimentalAPI
 @EAnno typealias Typealias = Unit
@@ -45,7 +45,7 @@ fun returnType(): <!WRONG_ANNOTATION_TARGET!>@EAnno<!> Unit {}
 @EAnno class Klass
 
 @ExperimentalAPI
-annotation class AnnotationArgument(val p: EAnno)
+annotation class AnnotationArgument(konst p: EAnno)
 
 @ExperimentalAPI
 fun insideBody() {
@@ -56,10 +56,10 @@ fun insideBody() {
 fun inDefaultArgument(f: () -> Unit = @EAnno fun() {}) {}
 
 @ExperimentalAPI
-val inProperty = @EAnno fun() {}
+konst inProperty = @EAnno fun() {}
 
 @ExperimentalAPI
-val inPropertyAccessor: () -> Unit
+konst inPropertyAccessor: () -> Unit
     get() = @EAnno fun() {}
 
 // FILE: usage-use.kt
@@ -81,7 +81,7 @@ fun parameterType(p: <!WRONG_ANNOTATION_TARGET!>@EAnno<!> String) {}
 fun returnType(): <!WRONG_ANNOTATION_TARGET!>@EAnno<!> Unit {}
 
 @OptIn(ExperimentalAPI::class)
-@EAnno val property = ""
+@EAnno konst property = ""
 
 @OptIn(ExperimentalAPI::class)
 @EAnno typealias Typealias = Unit
@@ -90,7 +90,7 @@ fun returnType(): <!WRONG_ANNOTATION_TARGET!>@EAnno<!> Unit {}
 @EAnno class Klass
 
 @OptIn(ExperimentalAPI::class)
-annotation class AnnotationArgument(val p: EAnno)
+annotation class AnnotationArgument(konst p: EAnno)
 
 fun insideBody() {
     @OptIn(ExperimentalAPI::class) @EAnno fun local() {}
@@ -99,9 +99,9 @@ fun insideBody() {
 fun inDefaultArgument(@OptIn(ExperimentalAPI::class) f: () -> Unit = @EAnno fun() {}) {}
 
 @OptIn(ExperimentalAPI::class)
-val inProperty = @EAnno fun() {}
+konst inProperty = @EAnno fun() {}
 
-val inPropertyAccessor: () -> Unit
+konst inPropertyAccessor: () -> Unit
     @OptIn(ExperimentalAPI::class)
     get() = @EAnno fun() {}
 
@@ -119,13 +119,13 @@ fun parameterType(p: <!WRONG_ANNOTATION_TARGET!>@<!OPT_IN_USAGE!>EAnno<!><!> Str
 
 fun returnType(): <!WRONG_ANNOTATION_TARGET!>@<!OPT_IN_USAGE!>EAnno<!><!> Unit {}
 
-@<!OPT_IN_USAGE!>EAnno<!> val property = ""
+@<!OPT_IN_USAGE!>EAnno<!> konst property = ""
 
 @<!OPT_IN_USAGE!>EAnno<!> typealias Typealias = Unit
 
 @<!OPT_IN_USAGE!>EAnno<!> class Klass
 
-annotation class AnnotationArgument(val p: <!OPT_IN_USAGE!>EAnno<!>)
+annotation class AnnotationArgument(konst p: <!OPT_IN_USAGE!>EAnno<!>)
 
 fun insideBody() {
     @<!OPT_IN_USAGE!>EAnno<!> fun local() {}
@@ -133,7 +133,7 @@ fun insideBody() {
 
 fun inDefaultArgument(f: () -> Unit = @<!OPT_IN_USAGE!>EAnno<!> fun() {}) {}
 
-val inProperty = @<!OPT_IN_USAGE!>EAnno<!> fun() {}
+konst inProperty = @<!OPT_IN_USAGE!>EAnno<!> fun() {}
 
-val inPropertyAccessor: () -> Unit
+konst inPropertyAccessor: () -> Unit
     get() = @<!OPT_IN_USAGE!>EAnno<!> fun() {}

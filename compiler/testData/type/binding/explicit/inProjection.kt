@@ -3,7 +3,7 @@ interface In<in I>
 interface Out<out O>
 
 
-val foo: Inv<in In<in Out<in Int>>> = null!!
+konst foo: Inv<in In<in Out<in Int>>> = null!!
 /*
 psi: Inv<in In<in Out<in Int>>>
 type: Inv<in In<in Out<in Int>>>

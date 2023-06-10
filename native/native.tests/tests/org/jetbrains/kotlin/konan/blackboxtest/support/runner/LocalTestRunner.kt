@@ -12,16 +12,16 @@ import org.jetbrains.kotlin.konan.blackboxtest.support.util.TestReport
 import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
 import org.junit.jupiter.api.Assumptions.assumeFalse
 
-internal class LocalTestRunner(private val testRun: TestRun) : AbstractLocalProcessRunner<Unit>(testRun.checks) {
-    override val visibleProcessName get() = "Tested process"
-    override val executable get() = testRun.executable
+internal class LocalTestRunner(private konst testRun: TestRun) : AbstractLocalProcessRunner<Unit>(testRun.checks) {
+    override konst visibleProcessName get() = "Tested process"
+    override konst executable get() = testRun.executable
 
-    override val programArgs = buildList {
+    override konst programArgs = buildList {
         add(executable.executableFile.path)
         testRun.runParameters.forEach { it.applyTo(this) }
     }
 
-    override val outputFilter: TestOutputFilter
+    override konst outputFilter: TestOutputFilter
         get() = if (testRun.runParameters.has<TestRunParameter.WithTCTestLogger>()) TCTestOutputFilter else TestOutputFilter.NO_FILTERING
 
     override fun getLoggedParameters() = LoggedData.TestRunParameters(
@@ -56,8 +56,8 @@ internal class ResultHandler(
     runResult: RunResult,
     visibleProcessName: String,
     checks: TestRunChecks,
-    private val testRun: TestRun,
-    private val loggedParameters: LoggedData.TestRunParameters
+    private konst testRun: TestRun,
+    private konst loggedParameters: LoggedData.TestRunParameters
 ) : LocalResultHandler<Unit>(runResult, visibleProcessName, checks) {
     override fun getLoggedRun() = LoggedData.TestRun(loggedParameters, runResult)
 

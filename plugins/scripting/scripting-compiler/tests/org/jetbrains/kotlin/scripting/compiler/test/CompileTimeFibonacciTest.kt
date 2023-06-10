@@ -32,15 +32,15 @@ import kotlin.script.experimental.jvm.*
 import kotlin.script.experimental.util.filterByAnnotationType
 
 
-private const val testDataPath = "plugins/scripting/scripting-compiler/testData/compiler/compileTimeFibonacci"
+private const konst testDataPath = "plugins/scripting/scripting-compiler/testData/compiler/compileTimeFibonacci"
 
 class CompileTimeFibonacciTest : TestCase() {
-    private val testRootDisposable: Disposable = TestDisposable()
+    private konst testRootDisposable: Disposable = TestDisposable()
 
     fun testFibonacciWithSupportedNumbersImplementsTheCorrectConstants() {
-        val outputLines = runScript("supported.fib.kts")
-            .valueOr { failure ->
-                val message = failure.reports.joinToString("\n") { it.message }
+        konst outputLines = runScript("supported.fib.kts")
+            .konstueOr { failure ->
+                konst message = failure.reports.joinToString("\n") { it.message }
                 kotlin.test.fail("supported.fib.kts was expected to succeed:\n\n${message}")
             }
             .lines()
@@ -56,20 +56,20 @@ class CompileTimeFibonacciTest : TestCase() {
     // This tests if the annotations delivered with the correct location
     // and that scripts can return error messages at the location of the annotation
     fun testFibonacciWithUnsupportedNumbersEmitsErrorAtLocation() {
-        when (val result = runScript("unsupported.fib.kts")) {
+        when (konst result = runScript("unsupported.fib.kts")) {
             is ResultWithDiagnostics.Success ->
                 kotlin.test.fail("supported.fib.kts was expected to fail with a compiler error from refinement")
 
             is ResultWithDiagnostics.Failure -> {
-                val error = result.reports.first()
+                konst error = result.reports.first()
 
-                val expectedFile = File("plugins/scripting/scripting-compiler/testData/compiler/compileTimeFibonacci/unsupported.fib.kts")
-                val expectedErrorMessage = """
+                konst expectedFile = File("plugins/scripting/scripting-compiler/testData/compiler/compileTimeFibonacci/unsupported.fib.kts")
+                konst expectedErrorMessage = """
                     ($expectedFile:3:1) Fibonacci of non-positive numbers like 0 are not supported
                 """.trimIndent()
                 Assert.assertEquals(expectedErrorMessage, error.message)
                 // TODO: the location is not in the diagnostics because the `MessageCollector` defined in KotlinTestUtils,
-                //  throws the reports as `AssertionException`s. Evaluate using a different compiler configuration.
+                //  throws the reports as `AssertionException`s. Ekonstuate using a different compiler configuration.
 //                Assert.assertEquals(3, error.location?.start?.line)
 //                Assert.assertEquals(1, error.location?.start?.col)
 //                Assert.assertEquals(3, error.location?.end?.line)
@@ -79,13 +79,13 @@ class CompileTimeFibonacciTest : TestCase() {
     }
 
     private fun runScript(scriptPath: String): ResultWithDiagnostics<String> {
-        val source = File(testDataPath, scriptPath).toScriptSource()
+        konst source = File(testDataPath, scriptPath).toScriptSource()
         return compileScript(source)
             .onSuccess { compiled ->
                 captureOut {
-                    val evaluator = BasicJvmScriptEvaluator()
+                    konst ekonstuator = BasicJvmScriptEkonstuator()
                     runBlocking {
-                        evaluator(compiled)
+                        ekonstuator(compiled)
                     }
                 }.asSuccess()
             }
@@ -94,9 +94,9 @@ class CompileTimeFibonacciTest : TestCase() {
     private fun compileScript(
         script: SourceCode
     ): ResultWithDiagnostics<CompiledScript> {
-        val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.FULL_JDK).apply {
+        konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.FULL_JDK).apply {
             updateWithBaseCompilerArguments()
-            val hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration)
+            konst hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration)
             add(
                 ScriptingConfigurationKeys.SCRIPT_DEFINITIONS,
                 ScriptDefinition.FromTemplate(hostConfiguration, CompileTimeFibonacci::class, ScriptDefinition::class)
@@ -104,11 +104,11 @@ class CompileTimeFibonacciTest : TestCase() {
             loadScriptingPlugin(this)
         }
 
-        val environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
-        val scriptCompiler = ScriptJvmCompilerFromEnvironment(environment)
-        val scriptDefinition = ScriptDefinitionProvider.getInstance(environment.project)!!.findDefinition(script)!!
+        konst environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst scriptCompiler = ScriptJvmCompilerFromEnvironment(environment)
+        konst scriptDefinition = ScriptDefinitionProvider.getInstance(environment.project)!!.findDefinition(script)!!
 
-        val scriptCompilationConfiguration = scriptDefinition.compilationConfiguration.with {
+        konst scriptCompilationConfiguration = scriptDefinition.compilationConfiguration.with {
             jvm {
                 dependenciesFromCurrentContext(wholeClasspath = true)
             }
@@ -137,7 +137,7 @@ object CompileTimeFibonacciConfiguration : ScriptCompilationConfiguration(
                 return listOf(1, 1)
             }
 
-            val previous = fibUntil(number - 1)
+            konst previous = fibUntil(number - 1)
             return previous + (previous.secondToLast() + previous.last())
         }
 
@@ -147,7 +147,7 @@ object CompileTimeFibonacciConfiguration : ScriptCompilationConfiguration(
         }
         refineConfiguration {
             onAnnotations(Fib::class) { context: ScriptConfigurationRefinementContext ->
-                val maxFibonacciNumber = context
+                konst maxFibonacciNumber = context
                     .collectedData
                     ?.get(ScriptCollectedData.collectedAnnotations)
                     ?.filterByAnnotationType<Fib>()
@@ -158,14 +158,14 @@ object CompileTimeFibonacciConfiguration : ScriptCompilationConfiguration(
                                 locationWithId = location
                             )
                     }
-                    ?.valueOr { return@onAnnotations it }
+                    ?.konstueOr { return@onAnnotations it }
                     ?.maxOrNull() ?: return@onAnnotations context.compilationConfiguration.asSuccess()
 
-                val sourceCode = fibUntil(maxFibonacciNumber)
-                    .mapIndexed { index, number -> "val FIB_${index + 1} = $number" }
+                konst sourceCode = fibUntil(maxFibonacciNumber)
+                    .mapIndexed { index, number -> "konst FIB_${index + 1} = $number" }
                     .joinToString("\n")
 
-                val file = Files.createTempFile("CompileTimeFibonacci", ".fib.kts").toFile()
+                konst file = Files.createTempFile("CompileTimeFibonacci", ".fib.kts").toFile()
                     .apply {
                         deleteOnExit()
                         writeText(sourceCode)
@@ -182,6 +182,6 @@ object CompileTimeFibonacciConfiguration : ScriptCompilationConfiguration(
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class Fib(val number: Int)
+annotation class Fib(konst number: Int)
 
 private fun <T> List<T>.secondToLast(): T = this[count() - 2]

@@ -1,3 +1,3 @@
 fun box(): String {
-    return (object { val r = "OK" } ?: null)!!.r
+    return (object { konst r = "OK" } ?: null)!!.r
 }

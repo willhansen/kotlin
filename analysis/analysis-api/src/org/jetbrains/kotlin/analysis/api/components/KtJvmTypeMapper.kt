@@ -27,6 +27,6 @@ public interface KtJvmTypeMapperMixIn : KtAnalysisSessionMixIn {
     /**
      * Returns true if the type is backed by a single JVM primitive type
      */
-    public val KtType.isPrimitiveBacked: Boolean
+    public konst KtType.isPrimitiveBacked: Boolean
         get() = withValidityAssertion { analysisSession.jvmTypeMapper.isPrimitiveBacked(this) }
 }

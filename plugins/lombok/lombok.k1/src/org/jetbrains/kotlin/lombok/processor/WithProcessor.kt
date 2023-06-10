@@ -21,7 +21,7 @@ class WithProcessor : Processor {
     context(LazyJavaResolverContext)
     @Suppress("IncorrectFormatting") // KTIJ-22227
     override fun contribute(classDescriptor: ClassDescriptor, partsBuilder: SyntheticPartsBuilder) {
-        val clWith = With.getOrNull(classDescriptor)
+        konst clWith = With.getOrNull(classDescriptor)
 
         classDescriptor
             .getJavaFields()
@@ -37,14 +37,14 @@ class WithProcessor : Processor {
     ): SimpleFunctionDescriptor? {
         if (with.visibility == AccessLevel.NONE) return null
 
-        val rawPropertyName = field.name.identifier
-        val propertyName = if (field.type.isBoolean() && rawPropertyName.startsWith("is")) {
+        konst rawPropertyName = field.name.identifier
+        konst propertyName = if (field.type.isBoolean() && rawPropertyName.startsWith("is")) {
             rawPropertyName.removePrefix("is")
         } else {
             rawPropertyName
         }
 
-        val functionName = "with" + toPropertyNameCapitalized(propertyName)
+        konst functionName = "with" + toPropertyNameCapitalized(propertyName)
 
         return classDescriptor.createFunction(
             Name.identifier(functionName),

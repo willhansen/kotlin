@@ -22,5 +22,5 @@ class FirProjectSessionProvider : FirSessionProvider() {
         sessionCache[moduleData] = session
     }
 
-    private val sessionCache: MutableMap<FirModuleData, FirSession> = mutableMapOf()
+    private konst sessionCache: MutableMap<FirModuleData, FirSession> = mutableMapOf()
 }

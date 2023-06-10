@@ -18,15 +18,15 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirVariableSymbol
 
 internal class KtFirSignatureSubstitutor(
-    override val analysisSession: KtFirAnalysisSession
+    override konst analysisSession: KtFirAnalysisSession
 ) : AbstractKtSignatureSubstitutor(), KtFirAnalysisSessionComponent {
     override fun <S : KtFunctionLikeSymbol> asSignature(symbol: S): KtFunctionLikeSignature<S> {
-        val firSymbol = (symbol as KtFirSymbol<*>).firSymbol as FirFunctionSymbol<*>
+        konst firSymbol = (symbol as KtFirSymbol<*>).firSymbol as FirFunctionSymbol<*>
         return KtFirFunctionLikeDummySignature<S>(analysisSession.token, firSymbol, analysisSession.firSymbolBuilder)
     }
 
     override fun <S : KtVariableLikeSymbol> asSignature(symbol: S): KtVariableLikeSignature<S> {
-        val firSymbol = (symbol as KtFirSymbol<*>).firSymbol as FirVariableSymbol<*>
+        konst firSymbol = (symbol as KtFirSymbol<*>).firSymbol as FirVariableSymbol<*>
         return KtFirVariableLikeDummySignature<S>(analysisSession.token, firSymbol, analysisSession.firSymbolBuilder)
     }
 }

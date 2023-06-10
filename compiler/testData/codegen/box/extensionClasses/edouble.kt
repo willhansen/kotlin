@@ -5,18 +5,18 @@ class EntityContext {
     var d = DoubleArray(16)
 }
 
-class EDouble(val i: Int) {
+class EDouble(konst i: Int) {
     context(EntityContext)
-    var value:   Double
+    var konstue:   Double
         get() = d[i]
-        set(value) { d[i] = value }
+        set(konstue) { d[i] = konstue }
 }
 
 fun box(): String {
-    val entityContext = EntityContext()
+    konst entityContext = EntityContext()
     with(entityContext) {
-        val eDouble = EDouble(0)
-        eDouble.value = .2
-        return if (eDouble.value == .2) "OK" else "fail"
+        konst eDouble = EDouble(0)
+        eDouble.konstue = .2
+        return if (eDouble.konstue == .2) "OK" else "fail"
     }
 }

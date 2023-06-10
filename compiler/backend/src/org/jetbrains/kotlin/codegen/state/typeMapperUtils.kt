@@ -27,23 +27,23 @@ import org.jetbrains.kotlin.resolve.isInlineClass
 import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.typeUtil.asTypeProjection
 
-class ReceiverTypeAndTypeParameters(val receiverType: KotlinType, val typeParameters: List<TypeParameterDescriptor>)
+class ReceiverTypeAndTypeParameters(konst receiverType: KotlinType, konst typeParameters: List<TypeParameterDescriptor>)
 
 fun patchTypeParametersForDefaultImplMethod(function: CallableMemberDescriptor): ReceiverTypeAndTypeParameters {
-    val classDescriptor = function.containingDeclaration as ClassDescriptor
-    val functionTypeParameterNames = function.typeParameters.map { it.name.asString() }
-    val interfaceTypeParameters = classDescriptor.declaredTypeParameters
-    val conflictedTypeParameters = interfaceTypeParameters.filter { it.name.asString() in functionTypeParameterNames }
+    konst classDescriptor = function.containingDeclaration as ClassDescriptor
+    konst functionTypeParameterNames = function.typeParameters.map { it.name.asString() }
+    konst interfaceTypeParameters = classDescriptor.declaredTypeParameters
+    konst conflictedTypeParameters = interfaceTypeParameters.filter { it.name.asString() in functionTypeParameterNames }
 
     if (conflictedTypeParameters.isEmpty())
         return ReceiverTypeAndTypeParameters(classDescriptor.defaultType, interfaceTypeParameters)
 
-    val existingNames = (functionTypeParameterNames + interfaceTypeParameters.map { it.name.asString() }).toMutableSet()
+    konst existingNames = (functionTypeParameterNames + interfaceTypeParameters.map { it.name.asString() }).toMutableSet()
 
-    val mappingForInterfaceTypeParameters = conflictedTypeParameters.associateBy({ it }) { typeParameter ->
+    konst mappingForInterfaceTypeParameters = conflictedTypeParameters.associateBy({ it }) { typeParameter ->
 
-        val newNamePrefix = typeParameter.name.asString() + "_I"
-        val newName = newNamePrefix + generateSequence(1) { x -> x + 1 }.first { index ->
+        konst newNamePrefix = typeParameter.name.asString() + "_I"
+        konst newName = newNamePrefix + generateSequence(1) { x -> x + 1 }.first { index ->
             (newNamePrefix + index) !in existingNames
         }
 
@@ -51,16 +51,16 @@ fun patchTypeParametersForDefaultImplMethod(function: CallableMemberDescriptor):
         function.createTypeParameterWithNewName(typeParameter, newName)
     }
 
-    val substitution = TypeConstructorSubstitution.createByParametersMap(mappingForInterfaceTypeParameters.mapValues {
-        it.value.defaultType.asTypeProjection()
+    konst substitution = TypeConstructorSubstitution.createByParametersMap(mappingForInterfaceTypeParameters.mapValues {
+        it.konstue.defaultType.asTypeProjection()
     })
 
-    val substitutor = TypeSubstitutor.create(substitution)
+    konst substitutor = TypeSubstitutor.create(substitution)
 
-    val additionalTypeParameters = interfaceTypeParameters.map { typeParameter ->
+    konst additionalTypeParameters = interfaceTypeParameters.map { typeParameter ->
         mappingForInterfaceTypeParameters[typeParameter] ?: typeParameter
     }
-    val resultTypeParameters = mutableListOf<TypeParameterDescriptor>()
+    konst resultTypeParameters = mutableListOf<TypeParameterDescriptor>()
     DescriptorSubstitutor.substituteTypeParameters(additionalTypeParameters, substitution, classDescriptor, resultTypeParameters)
 
     return ReceiverTypeAndTypeParameters(substitutor.substitute(classDescriptor.defaultType, Variance.INVARIANT)!!, resultTypeParameters)
@@ -70,7 +70,7 @@ fun CallableMemberDescriptor.createTypeParameterWithNewName(
     descriptor: TypeParameterDescriptor,
     newName: String
 ): TypeParameterDescriptorImpl {
-    val newDescriptor = TypeParameterDescriptorImpl.createForFurtherModification(
+    konst newDescriptor = TypeParameterDescriptorImpl.createForFurtherModification(
         this,
         descriptor.annotations,
         descriptor.isReified,

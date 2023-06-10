@@ -4,7 +4,7 @@
 package foo
 
 class A {
-    @get:JsName("getX_") val x = 23
+    @get:JsName("getX_") konst x = 23
 
     @get:JsName("getY_") @set:JsName("setY_") var y = 0
 
@@ -12,7 +12,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
 
     assertEquals(23, a.x)
     assertEquals(0, a.y)
@@ -21,7 +21,7 @@ fun box(): String {
     a.z = 99
     assertEquals(99, a.z)
 
-    val d: dynamic = A()
+    konst d: dynamic = A()
 
     assertEquals(23, d.getX_())
     assertEquals(0, d.getY_())

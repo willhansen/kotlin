@@ -68,203 +68,203 @@ fun <K, T: OutBar<S>, S: OutBar<K>> foo46(x: K?): Bar<T> = materialize()
 fun <K, T: OutBar<S>, S: OutBar<K>> foo47(x: K?): OutBar<T> = materialize()
 fun <U: Any> foo48(fn: Function0<U?>): Bar<U> = materialize()
 
-val <K> K?.vfoo0: Foo<Bar<K>> get() = materialize()
-val <K> K?.vfoo1: OutBar<Bar<out OutBar<K>>> get() = materialize()
-val <K> K?.vfoo2: OutBar<Bar<in OutBar<K>>> get() = materialize()
+konst <K> K?.vfoo0: Foo<Bar<K>> get() = materialize()
+konst <K> K?.vfoo1: OutBar<Bar<out OutBar<K>>> get() = materialize()
+konst <K> K?.vfoo2: OutBar<Bar<in OutBar<K>>> get() = materialize()
 
 class Main<L>(x: L?, y: L) {
     init {
         if (x != null && y != null) {
-            val x12 = foo1(x)
-            val x13 = foo1(y)
+            konst x12 = foo1(x)
+            konst x13 = foo1(y)
         }
         if (x != null && y != null) {
-            val x120 = foo12(x)
-            val x121 = foo12(y)
+            konst x120 = foo12(x)
+            konst x121 = foo12(y)
         }
         if (x != null) {
-            val x137 = Foo13(y).foo1(x)
+            konst x137 = Foo13(y).foo1(x)
         }
         if (y != null) {
-            val x138 = Foo13(x).foo1(y)
+            konst x138 = Foo13(x).foo1(y)
         }
         if (x != null && y != null) {
-            val x153 = foo15(x)
-            val x154 = foo15(y)
+            konst x153 = foo15(x)
+            konst x154 = foo15(y)
         }
         if (x != null && y != null) {
-            val x163 = foo16(x)
-            val x164 = foo16(y)
+            konst x163 = foo16(x)
+            konst x164 = foo16(y)
         }
     }
 
-    val x00 = foo0(x)
-    val x01 = foo0(y)
+    konst x00 = foo0(x)
+    konst x01 = foo0(y)
 
-    val x10 = foo1(x)
-    val x11 = foo1(y)
+    konst x10 = foo1(x)
+    konst x11 = foo1(y)
 
-    val x12 = foo1(x!!)
-    val x13 = foo1(y!!)
+    konst x12 = foo1(x!!)
+    konst x13 = foo1(y!!)
 
-    val x20 = foo2(x)
-    val x21 = foo2(y)
+    konst x20 = foo2(x)
+    konst x21 = foo2(y)
 
-    val x30 = foo3(x)
-    val x31 = foo3(y)
+    konst x30 = foo3(x)
+    konst x31 = foo3(y)
 
-    val x40 = foo4(x)
-    val x41 = foo4(y)
+    konst x40 = foo4(x)
+    konst x41 = foo4(y)
 
-    val x50 = foo5(x)
-    val x51 = foo5(y)
+    konst x50 = foo5(x)
+    konst x51 = foo5(y)
 
-    val x60 = foo6(x)
-    val x61 = foo6(y)
+    konst x60 = foo6(x)
+    konst x61 = foo6(y)
 
-    val x70 = foo7(x)
-    val x71 = foo7(y)
+    konst x70 = foo7(x)
+    konst x71 = foo7(y)
 
-    val x80 = foo8(x)
-    val x81 = foo8(y)
+    konst x80 = foo8(x)
+    konst x81 = foo8(y)
 
-    val x90 = foo9(x)
-    val x91 = foo9(y)
+    konst x90 = foo9(x)
+    konst x91 = foo9(y)
 
-    val x100 = foo10(x, Foo(Bar()))
-    val x101 = foo10(y, Foo(Bar()))
+    konst x100 = foo10(x, Foo(Bar()))
+    konst x101 = foo10(y, Foo(Bar()))
 
-    val x110 = foo11(x, Foo(Bar()))
-    val x111 = foo11(y, Foo(Bar()))
+    konst x110 = foo11(x, Foo(Bar()))
+    konst x111 = foo11(y, Foo(Bar()))
 
-    val x120 = foo12(x!!)
-    val x121 = foo12(y!!)
+    konst x120 = foo12(x!!)
+    konst x121 = foo12(y!!)
 
-    val x122 = foo12(<!ARGUMENT_TYPE_MISMATCH!>x<!>)
-    val x123 = foo12(<!ARGUMENT_TYPE_MISMATCH!>y<!>)
+    konst x122 = foo12(<!ARGUMENT_TYPE_MISMATCH!>x<!>)
+    konst x123 = foo12(<!ARGUMENT_TYPE_MISMATCH!>y<!>)
 
-    val x133 = Foo13(x).foo1(y)
-    val x135 = Foo13(y).foo1(y)
-    val x137 = Foo13(y).foo1(x!!)
-    val x138 = Foo13(x).foo1(y!!)
+    konst x133 = Foo13(x).foo1(y)
+    konst x135 = Foo13(y).foo1(y)
+    konst x137 = Foo13(y).foo1(x!!)
+    konst x138 = Foo13(x).foo1(y!!)
 
-    val x140 = foo14("y")
-    val x141 = foo14("x")
+    konst x140 = foo14("y")
+    konst x141 = foo14("x")
 
-    val x151 = foo15(x)
-    val x152 = foo15(y)
-    val x153 = foo15(x!!)
-    val x154 = foo15(y!!)
+    konst x151 = foo15(x)
+    konst x152 = foo15(y)
+    konst x153 = foo15(x!!)
+    konst x154 = foo15(y!!)
 
-    val x161 = foo16(x)
-    val x162 = foo16(y)
-    val x163 = foo16(x!!)
-    val x164 = foo16(y!!)
+    konst x161 = foo16(x)
+    konst x162 = foo16(y)
+    konst x163 = foo16(x!!)
+    konst x164 = foo16(y!!)
 
-    val x170 = foo17(x)
-    val x171 = foo17(y)
+    konst x170 = foo17(x)
+    konst x171 = foo17(y)
 
-    val x180 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>Bar<!>().<!UNRESOLVED_REFERENCE!>foo18<!>(x)
-    val x181 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>Bar<!>().<!UNRESOLVED_REFERENCE!>foo18<!>(y)
+    konst x180 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>Bar<!>().<!UNRESOLVED_REFERENCE!>foo18<!>(x)
+    konst x181 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>Bar<!>().<!UNRESOLVED_REFERENCE!>foo18<!>(y)
 
-    val x200: L = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>Bar<!>().<!UNRESOLVED_REFERENCE!>foo19<!>()
-    val x201: L = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>Bar<!>().<!UNRESOLVED_REFERENCE!>foo19<!>()
+    konst x200: L = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>Bar<!>().<!UNRESOLVED_REFERENCE!>foo19<!>()
+    konst x201: L = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>Bar<!>().<!UNRESOLVED_REFERENCE!>foo19<!>()
 
-    val x210 = foo21(x)
-    val x211 = foo21(y)
+    konst x210 = foo21(x)
+    konst x211 = foo21(y)
 
-    val x220 = foo22(x)
-    val x221 = foo22(y)
+    konst x220 = foo22(x)
+    konst x221 = foo22(y)
 
-    val x230 = foo23(x)
-    val x231 = foo23(y)
+    konst x230 = foo23(x)
+    konst x231 = foo23(y)
 
-    val x240 = foo24(x)
-    val x241 = foo24(y)
+    konst x240 = foo24(x)
+    konst x241 = foo24(y)
 
-    val x250 = foo25(x)
-    val x251 = foo25(y)
+    konst x250 = foo25(x)
+    konst x251 = foo25(y)
 
-    val x260 = foo26(x)
-    val x261 = foo26(y)
+    konst x260 = foo26(x)
+    konst x261 = foo26(y)
 
-    val x270 = foo27(x)
-    val x271 = foo27(y)
+    konst x270 = foo27(x)
+    konst x271 = foo27(y)
 
-    val x280 = foo28(x)
-    val x281 = foo28(y)
+    konst x280 = foo28(x)
+    konst x281 = foo28(y)
 
-    val x290 = foo29(x)
-    val x291 = foo29(y)
+    konst x290 = foo29(x)
+    konst x291 = foo29(y)
 
-    val x300 = foo30(x)
-    val x301 = foo30(y)
+    konst x300 = foo30(x)
+    konst x301 = foo30(y)
 
-    val x310 = foo31(x)
-    val x311 = foo31(y)
+    konst x310 = foo31(x)
+    konst x311 = foo31(y)
 
-    val x320 = foo32(x)
-    val x321 = foo32(y)
+    konst x320 = foo32(x)
+    konst x321 = foo32(y)
 
-    val x330 = foo33(x)
-    val x331 = foo33(y)
+    konst x330 = foo33(x)
+    konst x331 = foo33(y)
 
-    val x340 = foo34(x)
-    val x341 = foo34(y)
+    konst x340 = foo34(x)
+    konst x341 = foo34(y)
 
-    val x350 = foo35(x)
-    val x351 = foo35(y)
+    konst x350 = foo35(x)
+    konst x351 = foo35(y)
 
-    val x360 = foo36(x)
-    val x361 = foo36(y)
+    konst x360 = foo36(x)
+    konst x361 = foo36(y)
 
-    val vx01 = x.vfoo0
-    val vx02 = y.vfoo0
+    konst vx01 = x.vfoo0
+    konst vx02 = y.vfoo0
 
-    val vx11 = x.vfoo1
-    val vx12 = y.vfoo1
+    konst vx11 = x.vfoo1
+    konst vx12 = y.vfoo1
 
-    val vx21 = x.vfoo2
-    val vx22 = y.vfoo2
+    konst vx21 = x.vfoo2
+    konst vx22 = y.vfoo2
 
-    val x370 = foo37(x)
-    val x371 = foo37(y)
+    konst x370 = foo37(x)
+    konst x371 = foo37(y)
 
-    val x380 = foo38(x)
-    val x381 = foo38(y)
+    konst x380 = foo38(x)
+    konst x381 = foo38(y)
 
-    val x390 = foo39(x)
-    val x391 = foo39(y)
+    konst x390 = foo39(x)
+    konst x391 = foo39(y)
 
-    val x400 = foo40(x)
-    val x401 = foo40(y)
+    konst x400 = foo40(x)
+    konst x401 = foo40(y)
 
-    val x410 = foo41(x)
-    val x411 = foo41(y)
+    konst x410 = foo41(x)
+    konst x411 = foo41(y)
 
-    val x420 = foo42(x)
-    val x421 = foo42(y)
+    konst x420 = foo42(x)
+    konst x421 = foo42(y)
 
-    val x430 = foo43(x)
-    val x431 = foo43(y)
+    konst x430 = foo43(x)
+    konst x431 = foo43(y)
 
     // Change after fix KT-37380
-    val x440 = foo44(x)
-    val x441 = foo44(y)
+    konst x440 = foo44(x)
+    konst x441 = foo44(y)
 
-    val x450 = foo45(x)
-    val x451 = foo45(y)
+    konst x450 = foo45(x)
+    konst x451 = foo45(y)
 
-    val x460 = foo46(x)
-    val x461 = foo46(y)
+    konst x460 = foo46(x)
+    konst x461 = foo46(y)
 
-    val x470 = foo47(x)
-    val x471 = foo47(y)
+    konst x470 = foo47(x)
+    konst x471 = foo47(y)
 
     fun <R> takeLambda(block: () -> R): R = materialize()
-    val x480 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>takeLambda<!> { foo48 { <!ARGUMENT_TYPE_MISMATCH!>x<!> } }
-    val x481 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>takeLambda<!> { foo48 { <!ARGUMENT_TYPE_MISMATCH!>y<!> } }
-    val x482 = takeLambda { foo48 { null } }
+    konst x480 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>takeLambda<!> { foo48 { <!ARGUMENT_TYPE_MISMATCH!>x<!> } }
+    konst x481 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>takeLambda<!> { foo48 { <!ARGUMENT_TYPE_MISMATCH!>y<!> } }
+    konst x482 = takeLambda { foo48 { null } }
 }
 
 fun <T : Comparable<T>> nullsLast() = null as Foo<T?>

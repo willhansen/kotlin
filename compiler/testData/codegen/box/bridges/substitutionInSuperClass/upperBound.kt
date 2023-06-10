@@ -10,9 +10,9 @@ class Z : B() {
 
 
 fun box(): String {
-    val z = Z()
-    val b: B = z
-    val a: A<Int> = z
+    konst z = Z()
+    konst b: B = z
+    konst a: A<Int> = z
     return when {
         z.foo(0) != "Z" -> "Fail #1"
         b.foo(0) != "Z" -> "Fail #2"

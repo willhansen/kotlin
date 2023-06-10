@@ -9,7 +9,7 @@ package foo.bar
     /*c:foo.bar.A(invoke)*/a()
     /*c:foo.bar.A(invoke) p:foo.bar p:foo.bar(invoke)*/a(1)
 
-    val (/*c:foo.bar.A(component1)*/h, /*c:foo.bar.A(component2) c:foo.bar.A(getComponent2) p:foo.bar(component2)*/t) = /*p:foo.bar(A)*/a;
+    konst (/*c:foo.bar.A(component1)*/h, /*c:foo.bar.A(component2) c:foo.bar.A(getComponent2) p:foo.bar(component2)*/t) = /*p:foo.bar(A)*/a;
 
     for ((/*c:foo.bar.A(component1)*/f, /*c:foo.bar.A(component2) c:foo.bar.A(getComponent2) p:foo.bar(component2)*/s) in /*c:foo.bar.A(getHASNext) c:foo.bar.A(getHasNext) c:foo.bar.A(hasNext) c:foo.bar.A(iterator) c:foo.bar.A(next) p:foo.bar(A) p:foo.bar(hasNext)*/a);
     for ((/*c:foo.bar.A(component1)*/f, /*c:foo.bar.A(component2) c:foo.bar.A(getComponent2) p:foo.bar(component2)*/s) in /*c:foo.bar.A(getHASNext) c:foo.bar.A(getHasNext) c:foo.bar.A(getITERATOR) c:foo.bar.A(getIterator) c:foo.bar.A(hasNext) c:foo.bar.A(iterator) c:foo.bar.A(next) p:foo.bar(A) p:foo.bar(hasNext) p:foo.bar(iterator)*/na);

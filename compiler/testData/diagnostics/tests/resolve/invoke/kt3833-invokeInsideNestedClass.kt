@@ -23,7 +23,7 @@ class X {
 }
 
 object Foo{
-    val v : X = X()
+    konst v : X = X()
 }
 
 class C{

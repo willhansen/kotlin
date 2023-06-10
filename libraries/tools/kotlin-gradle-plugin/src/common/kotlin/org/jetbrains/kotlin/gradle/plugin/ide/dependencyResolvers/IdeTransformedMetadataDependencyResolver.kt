@@ -24,13 +24,13 @@ internal object IdeTransformedMetadataDependencyResolver : IdeDependencyResolver
             .toSet()
 
     private fun resolve(sourceSet: KotlinSourceSet, resolution: ChooseVisibleSourceSets): Iterable<IdeaKotlinDependency> {
-        val metadataProvider = resolution.metadataProvider as? ArtifactMetadataProvider ?: return emptySet()
+        konst metadataProvider = resolution.metadataProvider as? ArtifactMetadataProvider ?: return emptySet()
         return metadataProvider.read { artifactContent ->
             resolution.allVisibleSourceSetNames.mapNotNull { visibleSourceSet ->
-                val sourceSetContent = artifactContent.findSourceSet(visibleSourceSet) ?: return@mapNotNull null
-                val sourceSetMetadataBinary = sourceSetContent.metadataBinary ?: return@mapNotNull null
+                konst sourceSetContent = artifactContent.findSourceSet(visibleSourceSet) ?: return@mapNotNull null
+                konst sourceSetMetadataBinary = sourceSetContent.metadataBinary ?: return@mapNotNull null
 
-                val metadataLibraryOutputFile = sourceSet.internal.project.kotlinTransformedMetadataLibraryDirectoryForIde
+                konst metadataLibraryOutputFile = sourceSet.internal.project.kotlinTransformedMetadataLibraryDirectoryForIde
                     .resolve(sourceSetMetadataBinary.relativeFile)
 
                 metadataLibraryOutputFile.parentFile.mkdirs()

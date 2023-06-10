@@ -8,33 +8,33 @@ package org.jetbrains.kotlin.fir.tree.generator.model
 import org.jetbrains.kotlin.fir.tree.generator.printer.typeWithArguments
 
 sealed class Field : Importable {
-    abstract val name: String
-    open val arguments = mutableListOf<Importable>()
-    abstract val nullable: Boolean
+    abstract konst name: String
+    open konst arguments = mutableListOf<Importable>()
+    abstract konst nullable: Boolean
     abstract var isVolatile: Boolean
     abstract var isFinal: Boolean
     abstract var isLateinit: Boolean
     abstract var isParameter: Boolean
     open var withReplace: Boolean = false
-    abstract val isFirType: Boolean
+    abstract konst isFirType: Boolean
 
     var fromParent: Boolean = false
     open var needsSeparateTransform: Boolean = false
     var parentHasSeparateTransform: Boolean = true
     open var needTransformInOtherChildren: Boolean = false
     open var customInitializationCall: String? = null
-    open val arbitraryImportables: MutableList<Importable> = mutableListOf()
+    open konst arbitraryImportables: MutableList<Importable> = mutableListOf()
     open var optInAnnotation: ArbitraryImportable? = null
 
-    open val defaultValueInImplementation: String? get() = null
+    open konst defaultValueInImplementation: String? get() = null
     abstract var isMutable: Boolean
     abstract var isMutableOrEmpty: Boolean
     open var isMutableInInterface: Boolean = false
-    open val withGetter: Boolean get() = false
-    open val customSetter: String? get() = null
-    open val fromDelegate: Boolean get() = false
+    open konst withGetter: Boolean get() = false
+    open konst customSetter: String? get() = null
+    open konst fromDelegate: Boolean get() = false
 
-    open val overridenTypes: MutableSet<Importable> = mutableSetOf()
+    open konst overridenTypes: MutableSet<Importable> = mutableSetOf()
     open var useNullableForReplace: Boolean = false
     open var notNull: Boolean = false
 
@@ -82,16 +82,16 @@ sealed class Field : Importable {
 
 // ----------- Field with default -----------
 
-class FieldWithDefault(val origin: Field) : Field() {
-    override val name: String get() = origin.name
-    override val type: String get() = origin.type
+class FieldWithDefault(konst origin: Field) : Field() {
+    override konst name: String get() = origin.name
+    override konst type: String get() = origin.type
     override var isVolatile: Boolean = origin.isVolatile
-    override val nullable: Boolean get() = origin.nullable
+    override konst nullable: Boolean get() = origin.nullable
     override var withReplace: Boolean
         get() = origin.withReplace
         set(_) {}
-    override val packageName: String? get() = origin.packageName
-    override val isFirType: Boolean get() = origin.isFirType
+    override konst packageName: String? get() = origin.packageName
+    override konst isFirType: Boolean get() = origin.isFirType
     override var needsSeparateTransform: Boolean
         get() = origin.needsSeparateTransform
         set(_) {}
@@ -100,10 +100,10 @@ class FieldWithDefault(val origin: Field) : Field() {
         get() = origin.needTransformInOtherChildren
         set(_) {}
 
-    override val arguments: MutableList<Importable>
+    override konst arguments: MutableList<Importable>
         get() = origin.arguments
 
-    override val fullQualifiedName: String?
+    override konst fullQualifiedName: String?
         get() = origin.fullQualifiedName
 
     override var isFinal: Boolean
@@ -135,10 +135,10 @@ class FieldWithDefault(val origin: Field) : Field() {
     override var customSetter: String? = null
     override var fromDelegate: Boolean = false
     var needAcceptAndTransform: Boolean = true
-    override val overridenTypes: MutableSet<Importable>
+    override konst overridenTypes: MutableSet<Importable>
         get() = origin.overridenTypes
 
-    override val arbitraryImportables: MutableList<Importable>
+    override konst arbitraryImportables: MutableList<Importable>
         get() = origin.arbitraryImportables
 
     override var useNullableForReplace: Boolean
@@ -157,19 +157,19 @@ class FieldWithDefault(val origin: Field) : Field() {
 }
 
 class SimpleField(
-    override val name: String,
-    override val type: String,
-    override val packageName: String?,
-    val customType: Importable? = null,
-    override val nullable: Boolean,
+    override konst name: String,
+    override konst type: String,
+    override konst packageName: String?,
+    konst customType: Importable? = null,
+    override konst nullable: Boolean,
     override var withReplace: Boolean,
     override var isVolatile: Boolean = false,
     override var isFinal: Boolean = false,
     override var isLateinit: Boolean = false,
     override var isParameter: Boolean = false,
 ) : Field() {
-    override val isFirType: Boolean = false
-    override val fullQualifiedName: String?
+    override konst isFirType: Boolean = false
+    override konst fullQualifiedName: String?
         get() = customType?.fullQualifiedName ?: super.fullQualifiedName
 
     override var isMutable: Boolean = withReplace
@@ -210,9 +210,9 @@ class SimpleField(
 }
 
 class FirField(
-    override val name: String,
-    val element: AbstractElement,
-    override val nullable: Boolean,
+    override konst name: String,
+    konst element: AbstractElement,
+    override konst nullable: Boolean,
     override var withReplace: Boolean,
 ) : Field() {
     init {
@@ -221,11 +221,11 @@ class FirField(
         }
     }
 
-    override val type: String get() = element.type
+    override konst type: String get() = element.type
     override var isVolatile: Boolean = false
     override var isFinal: Boolean = false
-    override val packageName: String? get() = element.packageName
-    override val isFirType: Boolean = true
+    override konst packageName: String? get() = element.packageName
+    override konst isFirType: Boolean = true
 
     override var isMutable: Boolean = true
     override var isMutableOrEmpty: Boolean = false
@@ -247,17 +247,17 @@ class FirField(
 // ----------- Field list -----------
 
 class FieldList(
-    override val name: String,
-    val baseType: Importable,
+    override konst name: String,
+    konst baseType: Importable,
     override var withReplace: Boolean,
     useMutableOrEmpty: Boolean = false
 ) : Field() {
     override var defaultValueInImplementation: String? = null
-    override val packageName: String? get() = baseType.packageName
-    override val fullQualifiedName: String? get() = baseType.fullQualifiedName
-    override val type: String = "List<${baseType.typeWithArguments}>"
+    override konst packageName: String? get() = baseType.packageName
+    override konst fullQualifiedName: String? get() = baseType.fullQualifiedName
+    override konst type: String = "List<${baseType.typeWithArguments}>"
 
-    override val nullable: Boolean
+    override konst nullable: Boolean
         get() = false
 
     override var isVolatile: Boolean = false
@@ -276,5 +276,5 @@ class FieldList(
         )
     }
 
-    override val isFirType: Boolean = baseType is AbstractElement || (baseType is Type && baseType.firType)
+    override konst isFirType: Boolean = baseType is AbstractElement || (baseType is Type && baseType.firType)
 }

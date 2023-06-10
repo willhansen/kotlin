@@ -15,9 +15,9 @@ inline fun inlineFn(a: String, crossinline fn: () -> String, x: Long = 1, crossi
 
 import test.*
 
-private val foo = Foo()
+private konst foo = Foo()
 
 fun box(): String {
-    val result = inlineFn("a", foo::foo, 5, foo::foo2, "end")
+    konst result = inlineFn("a", foo::foo, 5, foo::foo2, "end")
     return if (result == "aOK5OK2end") "OK" else "fail: $result"
 }

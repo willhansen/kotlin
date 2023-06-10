@@ -23,19 +23,19 @@ import java.util.*
 object LabeledBlockToDoWhileTransformation {
     fun apply(root: JsNode) {
         object : JsVisitorWithContextImpl() {
-            val loopOrSwitchStack = Stack<JsStatement>()
-            val newFakeLoops = HashSet<JsDoWhile>()
-            val statementsLabels = HashMap<JsStatement, JsLabel>()
+            konst loopOrSwitchStack = Stack<JsStatement>()
+            konst newFakeLoops = HashSet<JsDoWhile>()
+            konst statementsLabels = HashMap<JsStatement, JsLabel>()
 
             // If labeled block sits in between loop (or switch) and corresponding unlabeled breaks/continues
             // we have to label this loop, breaks and continues in order to preserve their
             // relationships across new fake do-while loop
-            val loopsAndSwitchesToLabel = HashSet<JsStatement>()
+            konst loopsAndSwitchesToLabel = HashSet<JsStatement>()
 
             override fun endVisit(x: JsLabel, ctx: JsContext<JsNode>) {
                 if (x.statement is JsBlock) {
                     loopsAndSwitchesToLabel.addIfNotNull(loopOrSwitchStack.lastOrNull())
-                    val fakeLoop = JsDoWhile(JsBooleanLiteral(false), x.statement)
+                    konst fakeLoop = JsDoWhile(JsBooleanLiteral(false), x.statement)
                     newFakeLoops.add(fakeLoop)
                     x.statement = fakeLoop
                 }
@@ -60,14 +60,14 @@ object LabeledBlockToDoWhileTransformation {
             }
 
             fun endVisitLoopOrSwitch(x: JsStatement, ctx: JsContext<JsNode>) {
-                val top = loopOrSwitchStack.pop()
+                konst top = loopOrSwitchStack.pop()
                 assert(top === x)
 
                 if (loopsAndSwitchesToLabel.contains(x)) {
                     // Reuse loop label if present. Otherwise create new label.
                     var label = statementsLabels[x]
                     if (label == null) {
-                        val labelName = JsScope.declareTemporaryName("loop_label")
+                        konst labelName = JsScope.declareTemporaryName("loop_label")
                         label = JsLabel(labelName, x)
                         statementsLabels[x] = label
                         ctx.replaceMe(label)

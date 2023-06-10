@@ -21,40 +21,40 @@ import java.io.File
 
 abstract class AbstractRawFirBuilderSourceElementMappingTestCase : AbstractRawFirBuilderTestCase() {
     override fun doRawFirTest(filePath: String) {
-        val fileTextWithCaret = loadFile(filePath)!!
-        val fileTextWithoutCaret = fileTextWithCaret.replace(START_EXPRESSION_TAG, "").replace(END_EXPRESSION_TAG, "")
-        val ktFile = createPsiFile(FileUtil.getNameWithoutExtension(PathUtil.getFileName(filePath)), fileTextWithoutCaret) as KtFile
-        val selectedExpression = run {
-            val startCaretPosition = fileTextWithCaret.indexOf(START_EXPRESSION_TAG)
+        konst fileTextWithCaret = loadFile(filePath)!!
+        konst fileTextWithoutCaret = fileTextWithCaret.replace(START_EXPRESSION_TAG, "").replace(END_EXPRESSION_TAG, "")
+        konst ktFile = createPsiFile(FileUtil.getNameWithoutExtension(PathUtil.getFileName(filePath)), fileTextWithoutCaret) as KtFile
+        konst selectedExpression = run {
+            konst startCaretPosition = fileTextWithCaret.indexOf(START_EXPRESSION_TAG)
             if (startCaretPosition < 0) {
                 error("$START_EXPRESSION_TAG was not found in the file")
             }
-            val endCaretPosition = fileTextWithCaret.indexOf(END_EXPRESSION_TAG)
+            konst endCaretPosition = fileTextWithCaret.indexOf(END_EXPRESSION_TAG)
             if (endCaretPosition < 0) {
                 error("$END_EXPRESSION_TAG was not found in the file")
             }
-            val elements = ktFile.elementsInRange(TextRange(startCaretPosition, endCaretPosition - START_EXPRESSION_TAG.length))
+            konst elements = ktFile.elementsInRange(TextRange(startCaretPosition, endCaretPosition - START_EXPRESSION_TAG.length))
             if (elements.size != 1) {
                 error("Expected one element at rage but found ${elements.size} [${elements.joinToString { it.text }}]")
             }
             elements.single() as KtElement
         }
-        val firFile = ktFile.toFirFile()
-        val foundElement = run {
-            val foundElements = FindElementVisitor.find(firFile, selectedExpression)
+        konst firFile = ktFile.toFirFile()
+        konst foundElement = run {
+            konst foundElements = FindElementVisitor.find(firFile, selectedExpression)
             if (foundElements.size != 1) {
                 error("One element expected but found [${foundElements.joinToString { "${it::class.simpleName} `${it.render()}`" }}]")
             }
             foundElements.single()
         }
 
-        val expectedPath = filePath.replace(".kt", ".txt")
+        konst expectedPath = filePath.replace(".kt", ".txt")
         KotlinTestUtils.assertEqualsToFile(File(expectedPath), foundElement.render())
     }
 
     companion object {
-        private const val START_EXPRESSION_TAG = "<expr>"
-        private const val END_EXPRESSION_TAG = "</expr>"
+        private const konst START_EXPRESSION_TAG = "<expr>"
+        private const konst END_EXPRESSION_TAG = "</expr>"
     }
 
     private object FindElementVisitor : FirVisitor<Unit, ElementFindingResult>() {
@@ -71,5 +71,5 @@ abstract class AbstractRawFirBuilderSourceElementMappingTestCase : AbstractRawFi
             ElementFindingResult(element, mutableSetOf()).also { firFile.accept(this, it) }.result
     }
 
-    private data class ElementFindingResult(val psi: KtElement, val result: MutableSet<FirElement>)
+    private data class ElementFindingResult(konst psi: KtElement, konst result: MutableSet<FirElement>)
 }

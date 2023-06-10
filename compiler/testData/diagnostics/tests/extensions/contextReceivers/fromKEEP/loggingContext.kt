@@ -6,7 +6,7 @@ interface Logger {
     fun info(message: String)
 }
 interface LoggingContext {
-    val log: Logger // this context provides reference to logger
+    konst log: Logger // this context provides reference to logger
 }
 
 context(LoggingContext)

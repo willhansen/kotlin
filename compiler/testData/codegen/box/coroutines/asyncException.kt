@@ -15,7 +15,7 @@ fun foobar(x: String, y: String) = x + y
 fun box(): String {
     var result = ""
 
-    val future = async<String>() {
+    konst future = async<String>() {
         try {
             await(exception("OK"))
         } catch (e: Exception) {
@@ -30,7 +30,7 @@ fun box(): String {
 
     if (result != "OK") return "fail notOk"
 
-    val future2 = async<String>() {
+    konst future2 = async<String>() {
         await(exception("OK"))
         "fail"
     }
@@ -46,9 +46,9 @@ fun box(): String {
 }
 
 fun <T> async(c: suspend () -> T): CompletableFuture<T> {
-    val future = CompletableFuture<T>()
+    konst future = CompletableFuture<T>()
     c.startCoroutine(object : Continuation<T> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
 
         override fun resumeWith(data: Result<T>) {
             try {
@@ -62,9 +62,9 @@ fun <T> async(c: suspend () -> T): CompletableFuture<T> {
 }
 
 suspend fun <V> await(f: CompletableFuture<V>) = suspendCoroutineUninterceptedOrReturn<V> { machine ->
-    f.whenComplete { value, throwable ->
+    f.whenComplete { konstue, throwable ->
         if (throwable == null)
-            machine.resume(value)
+            machine.resume(konstue)
         else
             machine.resumeWithException(throwable)
     }

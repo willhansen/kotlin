@@ -64,17 +64,17 @@ abstract class AbstractCompilerBasedTestForFir : AbstractCompilerBasedTest() {
 
     inner class LowLevelFirFrontendFacade(
         testServices: TestServices,
-        private val facadeFactory: LLFirAnalyzerFacadeFactory,
+        private konst facadeFactory: LLFirAnalyzerFacadeFactory,
     ) : FirFrontendFacade(testServices) {
-        override val additionalServices: List<ServiceRegistrationData>
+        override konst additionalServices: List<ServiceRegistrationData>
             get() = emptyList()
 
         override fun analyze(module: TestModule): FirOutputArtifact {
-            val isMppSupported = module.languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)
+            konst isMppSupported = module.languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)
 
-            val sortedModules = if (isMppSupported) sortDependsOnTopologically(module) else listOf(module)
+            konst sortedModules = if (isMppSupported) sortDependsOnTopologically(module) else listOf(module)
 
-            val firOutputPartForDependsOnModules = mutableListOf<FirOutputPartForDependsOnModule>()
+            konst firOutputPartForDependsOnModules = mutableListOf<FirOutputPartForDependsOnModule>()
             for (testModule in sortedModules) {
                 firOutputPartForDependsOnModules.add(analyzeDependsOnModule(testModule))
             }
@@ -83,24 +83,24 @@ abstract class AbstractCompilerBasedTestForFir : AbstractCompilerBasedTest() {
         }
 
         private fun analyzeDependsOnModule(module: TestModule): FirOutputPartForDependsOnModule {
-            val moduleInfoProvider = testServices.ktModuleProvider
-            val ktModule = moduleInfoProvider.getModule(module.name) as KtSourceModuleByCompilerConfiguration
+            konst moduleInfoProvider = testServices.ktModuleProvider
+            konst ktModule = moduleInfoProvider.getModule(module.name) as KtSourceModuleByCompilerConfiguration
 
-            val project = ktModule.project
-            val firResolveSession = LLFirResolveSessionService.getInstance(project).getFirResolveSessionNoCaching(ktModule)
+            konst project = ktModule.project
+            konst firResolveSession = LLFirResolveSessionService.getInstance(project).getFirResolveSessionNoCaching(ktModule)
 
-            val allFirFiles =
+            konst allFirFiles =
                 module.files.filter { it.isKtFile }.zip(
                     ktModule.psiFiles
                         .filterIsInstance<KtFile>()
                         .map { psiFile -> psiFile.getOrBuildFirFile(firResolveSession) }
                 )
 
-            val diagnosticCheckerFilter = if (FirDiagnosticsDirectives.WITH_EXTENDED_CHECKERS in module.directives) {
+            konst diagnosticCheckerFilter = if (FirDiagnosticsDirectives.WITH_EXTENDED_CHECKERS in module.directives) {
                 DiagnosticCheckerFilter.EXTENDED_AND_COMMON_CHECKERS
             } else DiagnosticCheckerFilter.ONLY_COMMON_CHECKERS
 
-            val analyzerFacade = facadeFactory.createFirFacade(firResolveSession, allFirFiles.toMap(), diagnosticCheckerFilter)
+            konst analyzerFacade = facadeFactory.createFirFacade(firResolveSession, allFirFiles.toMap(), diagnosticCheckerFilter)
             return FirOutputPartForDependsOnModule(
                 module,
                 firResolveSession.useSiteFirSession,
@@ -111,7 +111,7 @@ abstract class AbstractCompilerBasedTestForFir : AbstractCompilerBasedTest() {
     }
 
     override fun runTest(filePath: String) {
-        val configuration = testConfiguration(filePath, configuration)
+        konst configuration = testConfiguration(filePath, configuration)
 
         if (ignoreTest(filePath, configuration)) {
             return

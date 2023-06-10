@@ -14,16 +14,16 @@ open class A() {
 
 class D : A.C() {
     fun foo() {
-        val a = A()
-        val ac = A.C()
+        konst a = A()
+        konst ac = A.C()
 
-        val c = <!UNRESOLVED_REFERENCE!>C<!>() // shouldn't resolve
+        konst c = <!UNRESOLVED_REFERENCE!>C<!>() // shouldn't resolve
     }
 }
 
 class E : A() {
     fun foo() {
-        val a = A()
-        val c = C()
+        konst a = A()
+        konst c = C()
     }
 }

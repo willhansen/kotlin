@@ -1,11 +1,11 @@
 fun foo() {
     "before"
-    val bar = object {
+    konst bar = object {
         init {
-            val x = 1
+            konst x = 1
         }
         fun foo() {
-            val a = 2
+            konst a = 2
         }
     }
     "after"

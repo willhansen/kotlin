@@ -3,7 +3,7 @@
 // FILE: box.kt
 
 class C {
-    val x: Int? by J().s::length
+    konst x: Int? by J().s::length
 }
 
 fun box(): String =

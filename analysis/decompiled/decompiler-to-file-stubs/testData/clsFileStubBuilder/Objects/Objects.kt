@@ -1,6 +1,6 @@
 public object Objects {
 
-    val c = 0
+    konst c = 0
 
     fun f() {
     }
@@ -8,7 +8,7 @@ public object Objects {
     fun g() = 1
 
     private object InnerObject : A {
-        val c = 0
+        konst c = 0
 
         fun f() {
         }
@@ -16,7 +16,7 @@ public object Objects {
 
     public object OtherObject : NestedClass() {
 
-        val c = 0
+        konst c = 0
 
         fun f() {
         }

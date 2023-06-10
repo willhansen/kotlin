@@ -1,4 +1,4 @@
 package test
 
-val prop1 = 1
-val prop2 = 2
+konst prop1 = 1
+konst prop2 = 2

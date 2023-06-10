@@ -1,5 +1,5 @@
 class A {
-    val x: Int
+    konst x: Int
 
     init {
         var y = 10

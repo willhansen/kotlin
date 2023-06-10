@@ -32,7 +32,7 @@ class KtNameReferenceExpression : KtExpressionImplStub<KotlinNameReferenceExpres
     constructor(stub: KotlinNameReferenceExpressionStub) : super(stub, KtStubElementTypes.REFERENCE_EXPRESSION)
 
     override fun getReferencedName(): String {
-        val stub = stub
+        konst stub = stub
         if (stub != null) {
             return stub.getReferencedName()
         }
@@ -59,10 +59,10 @@ class KtNameReferenceExpression : KtExpressionImplStub<KotlinNameReferenceExpres
         return visitor.visitSimpleNameExpression(this, data)
     }
 
-    val isPlaceholder: Boolean
+    konst isPlaceholder: Boolean
         get() = getIdentifier()?.text?.equals("_") == true
 
     companion object {
-        private val NAME_REFERENCE_EXPRESSIONS = TokenSet.create(IDENTIFIER, THIS_KEYWORD, SUPER_KEYWORD)
+        private konst NAME_REFERENCE_EXPRESSIONS = TokenSet.create(IDENTIFIER, THIS_KEYWORD, SUPER_KEYWORD)
     }
 }

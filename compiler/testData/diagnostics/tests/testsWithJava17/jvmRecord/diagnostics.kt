@@ -24,27 +24,27 @@ class A3(name: String)
 class A4(var name: String)
 
 <!NON_DATA_CLASS_JVM_RECORD!>@JvmRecord<!>
-class A5(vararg val name: String, y: Int)
+class A5(vararg konst name: String, y: Int)
 
 @JvmRecord
-<!NON_FINAL_JVM_RECORD!>open<!> class A6(val x: String)
+<!NON_FINAL_JVM_RECORD!>open<!> class A6(konst x: String)
 
 @JvmRecord
-<!NON_FINAL_JVM_RECORD!>abstract<!> class A7(val x: String)
+<!NON_FINAL_JVM_RECORD!>abstract<!> class A7(konst x: String)
 
 @JvmRecord
-<!NON_FINAL_JVM_RECORD!>sealed<!> class A8(val x: String)
+<!NON_FINAL_JVM_RECORD!>sealed<!> class A8(konst x: String)
 
 @JvmRecord
-<!ENUM_JVM_RECORD!>enum<!> class A9(val x: String) {
+<!ENUM_JVM_RECORD!>enum<!> class A9(konst x: String) {
     X("");
 }
 
 <!NON_DATA_CLASS_JVM_RECORD!>@JvmRecord<!>
 class A10(
-    val x: String,
-    val y: Int,
-    vararg val z: Double,
+    konst x: String,
+    konst y: Int,
+    vararg konst z: Double,
 )
 
 fun main() {
@@ -54,8 +54,8 @@ fun main() {
 
 class Outer {
     @JvmRecord
-    <!INNER_JVM_RECORD!>inner<!> class Inner(val name: String)
+    <!INNER_JVM_RECORD!>inner<!> class Inner(konst name: String)
 }
 
 @JvmRecord
-data class A11(<!DATA_CLASS_VARARG_PARAMETER, JVM_RECORD_NOT_LAST_VARARG_PARAMETER!>vararg val x: String<!>, val y: Int)
+data class A11(<!DATA_CLASS_VARARG_PARAMETER, JVM_RECORD_NOT_LAST_VARARG_PARAMETER!>vararg konst x: String<!>, konst y: Int)

@@ -7,11 +7,11 @@
  * DESCRIPTION: Integers with underscore symbols before the first digit (it's considered as identifiers).
  */
 
-val value = _5678_90
-val value = _2_3_4_5_6_7_8_9_
-val value = _____________0000
-val value = _______________________________________________________________________________________________________________________________________________________0
-val value = ____________________________________________________
-val value = _
-val value = _0_
-val value = _9_
+konst konstue = _5678_90
+konst konstue = _2_3_4_5_6_7_8_9_
+konst konstue = _____________0000
+konst konstue = _______________________________________________________________________________________________________________________________________________________0
+konst konstue = ____________________________________________________
+konst konstue = _
+konst konstue = _0_
+konst konstue = _9_

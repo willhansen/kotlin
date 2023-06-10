@@ -1,6 +1,6 @@
 /**
-* Represents a value which is either `true` or `false`. On the JVM, non-nullable values of this type are
-* represented as values of the primitive type `boolean`.
+* Represents a konstue which is either `true` or `false`. On the JVM, non-nullable konstues of this type are
+* represented as konstues of the primitive type `boolean`.
 */
 public interface Boolean {
     /**

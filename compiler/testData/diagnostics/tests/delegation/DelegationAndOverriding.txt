@@ -4,7 +4,7 @@ package override {
 
     public open class Br : override.T {
         public constructor Br(/*0*/ t: override.T)
-        public abstract override /*1*/ /*fake_override*/ val v: kotlin.Int
+        public abstract override /*1*/ /*fake_override*/ konst v: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public abstract override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -13,7 +13,7 @@ package override {
 
     public open class Br1 : override.T {
         public constructor Br1(/*0*/ t: override.T)
-        public open override /*1*/ /*delegation*/ val v: kotlin.Int
+        public open override /*1*/ /*delegation*/ konst v: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*delegation*/ fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -22,7 +22,7 @@ package override {
 
     public final class Br2 : override.Br1 {
         public constructor Br2(/*0*/ t: override.T)
-        public open override /*1*/ /*fake_override*/ val v: kotlin.Int
+        public open override /*1*/ /*fake_override*/ konst v: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -31,7 +31,7 @@ package override {
 
     public final class Br3 : override.Br {
         public constructor Br3(/*0*/ t: override.T)
-        public abstract override /*1*/ /*fake_override*/ val v: kotlin.Int
+        public abstract override /*1*/ /*fake_override*/ konst v: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public abstract override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -70,7 +70,7 @@ package override {
     }
 
     public interface T {
-        public abstract val v: kotlin.Int
+        public abstract konst v: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public abstract fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

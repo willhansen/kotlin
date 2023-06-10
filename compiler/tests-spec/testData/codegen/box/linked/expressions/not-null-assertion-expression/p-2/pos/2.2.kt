@@ -7,16 +7,16 @@
  * MAIN LINK: expressions, not-null-assertion-expression -> paragraph 2 -> sentence 2
  * PRIMARY LINKS: expressions, not-null-assertion-expression -> paragraph 2 -> sentence 1
  * NUMBER: 2
- * DESCRIPTION: For an expression e!!, if the type of e is nullable, a not-null assertion expression checks, whether the evaluation result of e is equal to null and, if it is, throws a runtime exception.
+ * DESCRIPTION: For an expression e!!, if the type of e is nullable, a not-null assertion expression checks, whether the ekonstuation result of e is equal to null and, if it is, throws a runtime exception.
  */
 
 
 fun box(): String {
-    val x = A(A(A(A())))
+    konst x = A(A(A(A())))
     if ( x.a!!.a!!.a!!.a == null)
     {
         try {
-           val t = x.a!!.a!!.a!!.a!!
+           konst t = x.a!!.a!!.a!!.a!!
         }catch (e: java.lang.NullPointerException){
             return "OK"
         }
@@ -24,4 +24,4 @@ fun box(): String {
     return "NOK"
 }
 
-class A ( val a: A? = null)
+class A ( konst a: A? = null)

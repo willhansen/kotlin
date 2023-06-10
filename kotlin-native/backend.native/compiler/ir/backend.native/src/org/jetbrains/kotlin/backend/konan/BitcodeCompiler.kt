@@ -14,15 +14,15 @@ typealias ObjectFile = String
 typealias ExecutableFile = String
 
 internal class BitcodeCompiler(
-        private val context: PhaseContext,
+        private konst context: PhaseContext,
 ) {
 
-    private val config = context.config
-    private val platform = config.platform
-    private val optimize = context.shouldOptimize()
-    private val debug = config.debug
+    private konst config = context.config
+    private konst platform = config.platform
+    private konst optimize = context.shouldOptimize()
+    private konst debug = config.debug
 
-    private val overrideClangOptions =
+    private konst overrideClangOptions =
             config.configuration.getList(KonanConfigKeys.OVERRIDE_CLANG_OPTIONS)
 
     private fun MutableList<String>.addNonEmpty(elements: List<String>) {
@@ -35,7 +35,7 @@ internal class BitcodeCompiler(
                     .execute()
 
     private fun targetTool(tool: String, vararg arg: String) {
-        val absoluteToolName = if (platform.configurables is AppleConfigurables) {
+        konst absoluteToolName = if (platform.configurables is AppleConfigurables) {
             "${platform.absoluteTargetToolchain}/usr/bin/$tool"
         } else {
             "${platform.absoluteTargetToolchain}/bin/$tool"
@@ -44,17 +44,17 @@ internal class BitcodeCompiler(
     }
 
     private fun hostLlvmTool(tool: String, vararg arg: String) {
-        val absoluteToolName = "${platform.absoluteLlvmHome}/bin/$tool"
+        konst absoluteToolName = "${platform.absoluteLlvmHome}/bin/$tool"
         runTool(absoluteToolName, *arg)
     }
 
     private fun clang(configurables: ClangFlags, bitcodeFile: File, objectFile: File) {
-        val targetTriple = if (configurables is AppleConfigurables) {
+        konst targetTriple = if (configurables is AppleConfigurables) {
             platform.targetTriple.withOSVersion(configurables.osVersionMin)
         } else {
             platform.targetTriple
         }
-        val flags = overrideClangOptions.takeIf(List<String>::isNotEmpty)
+        konst flags = overrideClangOptions.takeIf(List<String>::isNotEmpty)
                 ?: mutableListOf<String>().apply {
                     addNonEmpty(configurables.clangFlags)
                     addNonEmpty(listOf("-triple", targetTriple.toString()))
@@ -69,8 +69,8 @@ internal class BitcodeCompiler(
                     addNonEmpty(BitcodeEmbedding.getClangOptions(config))
                     addNonEmpty(configurables.currentRelocationMode(context).translateToClangCc1Flag())
                 }
-        val bitcodePath = bitcodeFile.absoluteFile.normalize().path
-        val objectPath = objectFile.absoluteFile.normalize().path
+        konst bitcodePath = bitcodeFile.absoluteFile.normalize().path
+        konst objectPath = objectFile.absoluteFile.normalize().path
         if (configurables is AppleConfigurables && config.configuration.get(BinaryOptions.compileBitcodeWithXcodeLlvm) != false) {
             targetTool("clang++", *flags.toTypedArray(), bitcodePath, "-o", objectPath)
         } else {
@@ -88,7 +88,7 @@ internal class BitcodeCompiler(
      * Compile [bitcodeFile] to [objectFile].
      */
     fun makeObjectFile(bitcodeFile: File, objectFile: File) =
-            when (val configurables = platform.configurables) {
+            when (konst configurables = platform.configurables) {
                 is ClangFlags -> clang(configurables, bitcodeFile, objectFile)
                 else -> error("Unsupported configurables kind: ${configurables::class.simpleName}!")
             }

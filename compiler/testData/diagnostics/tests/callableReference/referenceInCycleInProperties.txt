@@ -12,9 +12,9 @@ public abstract class Parser {
 
 public final class Some {
     public constructor Some(/*0*/ strings: kotlin.collections.List<kotlin.String>)
-    private final val listOfInt: kotlin.collections.List<kotlin.Int>
-    private final val listOfString: kotlin.collections.List<kotlin.String>
-    public final val parser: Parser
+    private final konst listOfInt: kotlin.collections.List<kotlin.Int>
+    private final konst listOfString: kotlin.collections.List<kotlin.String>
+    public final konst parser: Parser
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

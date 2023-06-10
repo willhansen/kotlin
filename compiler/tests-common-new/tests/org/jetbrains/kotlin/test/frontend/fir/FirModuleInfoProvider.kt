@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.test.services.TestService
 import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.dependencyProvider
 
-class FirModuleInfoProvider(private val testServices: TestServices) : TestService {
-    val firSessionProvider = FirProjectSessionProvider()
+class FirModuleInfoProvider(private konst testServices: TestServices) : TestService {
+    konst firSessionProvider = FirProjectSessionProvider()
 
-    private val firModuleDataByModule: MutableMap<TestModule, FirModuleData> = mutableMapOf()
+    private konst firModuleDataByModule: MutableMap<TestModule, FirModuleData> = mutableMapOf()
 
     fun registerModuleData(module: TestModule, moduleData: FirModuleData) {
         // Allow reregistering since tests with several targets are possible (JVM, JS)
@@ -49,4 +49,4 @@ class FirModuleInfoProvider(private val testServices: TestServices) : TestServic
     }
 }
 
-val TestServices.firModuleInfoProvider: FirModuleInfoProvider by TestServices.testServiceAccessor()
+konst TestServices.firModuleInfoProvider: FirModuleInfoProvider by TestServices.testServiceAccessor()

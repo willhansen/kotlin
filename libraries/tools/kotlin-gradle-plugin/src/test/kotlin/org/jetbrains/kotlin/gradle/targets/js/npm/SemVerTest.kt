@@ -47,7 +47,7 @@ class SemVerTest {
 
     @Test
     fun testParseGradleRichVersions() {
-        val maxInt = Int.MAX_VALUE.toBigInteger()
+        konst maxInt = Int.MAX_VALUE.toBigInteger()
         listOf(
             // Version prefix
             SemVer(maxInt, maxInt, maxInt) to SemVer.fromGradleRichVersion("+"),

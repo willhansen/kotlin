@@ -241,7 +241,7 @@ public abstract class AbstractCliTest extends TestCaseWithTmpdir {
         return createTempFileWithPathsReplaced(argument, BUILD_FILE_ARGUMENT_PREFIX, ".xml", testDataDir, tempDir);
     }
 
-    // Create new temporary file with all test paths replaced and return the new argument value with the new file path
+    // Create new temporary file with all test paths replaced and return the new argument konstue with the new file path
     @NotNull
     private static String createTempFileWithPathsReplaced(
             @NotNull String argument,

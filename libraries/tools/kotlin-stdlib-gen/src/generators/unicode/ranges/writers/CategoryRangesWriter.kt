@@ -12,7 +12,7 @@ import generators.unicode.toVarLenBase64
 import generators.unicode.writeIntArray
 import java.io.FileWriter
 
-internal open class CategoryRangesWriter(protected val strategy: RangesWritingStrategy) : RangesWriter {
+internal open class CategoryRangesWriter(protected konst strategy: RangesWritingStrategy) : RangesWriter {
 
     override fun write(rangeStart: List<Int>, rangeEnd: List<Int>, rangeCategory: List<Int>, writer: FileWriter) {
         beforeWritingRanges(writer)
@@ -69,14 +69,14 @@ internal open class CategoryRangesWriter(protected val strategy: RangesWritingSt
          * Returns the Unicode general category of this character as an Int.
          */
         internal fun Char.getCategoryValue(): Int {
-            val ch = this.code
+            konst ch = this.code
 
-            val index = ${indexOf("ch")}
-            val start = ${startAt("index")}
-            val code = ${categoryAt("index")}
-            val value = categoryValueFrom(code, ch - start)
+            konst index = ${indexOf("ch")}
+            konst start = ${startAt("index")}
+            konst code = ${categoryAt("index")}
+            konst konstue = categoryValueFrom(code, ch - start)
 
-            return if (value == $UNASSIGNED_CATEGORY_VALUE_REPLACEMENT) CharCategory.UNASSIGNED.value else value
+            return if (konstue == $UNASSIGNED_CATEGORY_VALUE_REPLACEMENT) CharCategory.UNASSIGNED.konstue else konstue
         }
         """.trimIndent()
 
@@ -102,34 +102,34 @@ internal class VarLenBase64CategoryRangesWriter(strategy: RangesWritingStrategy)
     }
 
     override fun writeInit(rangeStart: List<Int>, rangeEnd: List<Int>, rangeCategory: List<Int>, writer: FileWriter) {
-        val rangeLength = rangeStart.zipWithNext { a, b -> b - a }
-        val base64RangeLength = rangeLength.toVarLenBase64()
+        konst rangeLength = rangeStart.zipWithNext { a, b -> b - a }
+        konst base64RangeLength = rangeLength.toVarLenBase64()
 
-        val base64RangeCategory = rangeCategory.toVarLenBase64()
+        konst base64RangeCategory = rangeCategory.toVarLenBase64()
 
         writer.appendLine(
             """
-            val decodedRangeStart: IntArray
-            val decodedRangeCategory: IntArray
+            konst decodedRangeStart: IntArray
+            konst decodedRangeCategory: IntArray
             
             init {
-                val toBase64 = "$TO_BASE64"
-                val fromBase64 = IntArray(128)
+                konst toBase64 = "$TO_BASE64"
+                konst fromBase64 = IntArray(128)
                 for (i in toBase64.indices) {
                     fromBase64[toBase64[i].code] = i
                 }
                 
                 // rangeStartDiff.length = ${base64RangeLength.length}
-                val rangeStartDiff = "$base64RangeLength"
-                val diff = decodeVarLenBase64(rangeStartDiff, fromBase64, ${rangeLength.size})
-                val start = IntArray(diff.size + 1)
+                konst rangeStartDiff = "$base64RangeLength"
+                konst diff = decodeVarLenBase64(rangeStartDiff, fromBase64, ${rangeLength.size})
+                konst start = IntArray(diff.size + 1)
                 for (i in diff.indices) {
                     start[i + 1] = start[i] + diff[i]
                 }
                 decodedRangeStart = start
                 
                 // rangeCategory.length = ${base64RangeCategory.length}
-                val rangeCategory = "$base64RangeCategory"
+                konst rangeCategory = "$base64RangeCategory"
                 decodedRangeCategory = decodeVarLenBase64(rangeCategory, fromBase64, ${rangeCategory.size})
             }
             """.replaceIndent(strategy.indentation)
@@ -142,12 +142,12 @@ internal class VarLenBase64CategoryRangesWriter(strategy: RangesWritingStrategy)
 
     private fun decodeVarLenBase64() = """
         internal fun decodeVarLenBase64(base64: String, fromBase64: IntArray, resultLength: Int): IntArray {
-            val result = IntArray(resultLength)
+            konst result = IntArray(resultLength)
             var index = 0
             var int = 0
             var shift = 0
             for (char in base64) {
-                val sixBit = fromBase64[char.code]
+                konst sixBit = fromBase64[char.code]
                 int = int or ((sixBit and 0x1f) shl shift)
                 if (sixBit < 0x20) {
                     result[index++] = int

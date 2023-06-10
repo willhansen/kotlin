@@ -18,17 +18,17 @@ import java.io.FileNotFoundException
 import java.io.IOException
 
 class VirtualFileKotlinClass private constructor(
-    val file: VirtualFile,
+    konst file: VirtualFile,
     className: ClassId,
     classVersion: Int,
     classHeader: KotlinClassHeader,
     innerClasses: InnerClassesInfo
 ) : FileBasedKotlinClass(className, classVersion, classHeader, innerClasses) {
 
-    override val location: String
+    override konst location: String
         get() = file.path
 
-    override val containingLibrary: String?
+    override konst containingLibrary: String?
         get() = file.path.split("!/").firstOrNull()
 
     override fun getFileContents(): ByteArray {
@@ -44,17 +44,17 @@ class VirtualFileKotlinClass private constructor(
     override fun toString() = "${this::class.java.simpleName}: $file"
 
     companion object Factory {
-        private val LOG = Logger.getInstance(VirtualFileKotlinClass::class.java)
-        private val perfCounter = PerformanceCounter.create("Binary class from Kotlin file")
+        private konst LOG = Logger.getInstance(VirtualFileKotlinClass::class.java)
+        private konst perfCounter = PerformanceCounter.create("Binary class from Kotlin file")
 
         internal fun create(file: VirtualFile, jvmMetadataVersion: JvmMetadataVersion, fileContent: ByteArray?): KotlinClassFinder.Result? {
             return perfCounter.time {
                 assert(file.extension == JavaClassFileType.INSTANCE.defaultExtension || file.fileType == JavaClassFileType.INSTANCE) { "Trying to read binary data from a non-class file $file" }
 
                 try {
-                    val byteContent = fileContent ?: file.contentsToByteArray(false)
+                    konst byteContent = fileContent ?: file.contentsToByteArray(false)
                     if (byteContent.isNotEmpty()) {
-                        val kotlinJvmBinaryClass = create(byteContent, jvmMetadataVersion) { name, classVersion, header, innerClasses ->
+                        konst kotlinJvmBinaryClass = create(byteContent, jvmMetadataVersion) { name, classVersion, header, innerClasses ->
                             VirtualFileKotlinClass(file, name, classVersion, header, innerClasses)
                         }
 
@@ -72,7 +72,7 @@ class VirtualFileKotlinClass private constructor(
         }
 
         private fun logFileReadingErrorMessage(e: Throwable, file: VirtualFile): Throwable {
-            val errorMessage = renderFileReadingErrorMessage(file)
+            konst errorMessage = renderFileReadingErrorMessage(file)
             LOG.warn(errorMessage, e)
             return IllegalStateException(errorMessage, e)
         }

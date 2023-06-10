@@ -10,10 +10,10 @@ kotlin {
     }
 }
 
-val commonMainSources by task<Sync> {
+konst commonMainSources by task<Sync> {
     dependsOn(":kotlin-stdlib-js-ir:commonMainSources")
     from {
-        val fullCommonMainSources = tasks.getByPath(":kotlin-stdlib-js-ir:commonMainSources")
+        konst fullCommonMainSources = tasks.getByPath(":kotlin-stdlib-js-ir:commonMainSources")
         exclude(
             listOf(
                 "libraries/stdlib/unsigned/src/kotlin/UByteArray.kt",
@@ -58,10 +58,10 @@ val commonMainSources by task<Sync> {
     into("$buildDir/commonMainSources")
 }
 
-val commonMainCollectionSources by task<Sync> {
+konst commonMainCollectionSources by task<Sync> {
     dependsOn(":kotlin-stdlib-js-ir:commonMainSources")
     from {
-        val fullCommonMainSources = tasks.getByPath(":kotlin-stdlib-js-ir:commonMainSources")
+        konst fullCommonMainSources = tasks.getByPath(":kotlin-stdlib-js-ir:commonMainSources")
         include("libraries/stdlib/src/kotlin/collections/PrimitiveIterators.kt")
         fullCommonMainSources.outputs.files.singleFile
     }
@@ -69,11 +69,11 @@ val commonMainCollectionSources by task<Sync> {
     into("$buildDir/commonMainCollectionSources")
 }
 
-val jsMainSources by task<Sync> {
+konst jsMainSources by task<Sync> {
     dependsOn(":kotlin-stdlib-js-ir:jsMainSources")
 
     from {
-        val fullJsMainSources = tasks.getByPath(":kotlin-stdlib-js-ir:jsMainSources")
+        konst fullJsMainSources = tasks.getByPath(":kotlin-stdlib-js-ir:jsMainSources")
         exclude(
             listOf(
                 "libraries/stdlib/js/src/org.w3c/**",
@@ -125,11 +125,11 @@ val jsMainSources by task<Sync> {
 
 kotlin {
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             kotlin.srcDir(files(commonMainSources.map { it.destinationDir }))
             kotlin.srcDir(files(commonMainCollectionSources.map { it.destinationDir }))
         }
-        val jsMain by getting {
+        konst jsMain by getting {
             kotlin.srcDir(files(jsMainSources.map { it.destinationDir }))
         }
     }

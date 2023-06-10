@@ -43,10 +43,10 @@ import java.net.URL
  * [gradleApiVersion] - Gradle API dependency version. Usually should be the same as [minimalSupportedGradleVersion].
  */
 enum class GradlePluginVariant(
-    val sourceSetName: String,
-    val minimalSupportedGradleVersion: String,
-    val gradleApiVersion: String,
-    val gradleApiJavadocUrl: String
+    konst sourceSetName: String,
+    konst minimalSupportedGradleVersion: String,
+    konst gradleApiVersion: String,
+    konst gradleApiJavadocUrl: String
 ) {
     GRADLE_MIN("main", "6.8.3", "6.9", "https://docs.gradle.org/6.9.3/javadoc/"),
     GRADLE_70("gradle70", "7.0", "7.0", "https://docs.gradle.org/7.0.2/javadoc/"),
@@ -58,7 +58,7 @@ enum class GradlePluginVariant(
     GRADLE_81("gradle81", "8.1", "8.1", "https://docs.gradle.org/8.1.1/javadoc/"),
 }
 
-val commonSourceSetName = "common"
+konst commonSourceSetName = "common"
 
 /**
  * Configures common pom configuration parameters
@@ -104,7 +104,7 @@ fun Project.excludeGradleCommonDependencies(sourceSet: SourceSet) {
     configurations[sourceSet.runtimeOnlyConfigurationName].excludeGradleCommonDependencies()
 }
 
-private val testPlugins = setOf(
+private konst testPlugins = setOf(
     "kotlin-gradle-plugin-api",
     "android-test-fixes",
     "gradle-warnings-detector",
@@ -117,11 +117,11 @@ private val testPlugins = setOf(
  * Should contain classes that are independent of Gradle API version or using minimal supported Gradle api.
  */
 fun Project.createGradleCommonSourceSet(): SourceSet {
-    val commonSourceSet = sourceSets.create(commonSourceSetName) {
+    konst commonSourceSet = sourceSets.create(commonSourceSetName) {
         excludeGradleCommonDependencies(this)
 
         // Adding Gradle API to separate configuration, so version will not leak into variants
-        val commonGradleApiConfiguration = configurations.create("commonGradleApiCompileOnly") {
+        konst commonGradleApiConfiguration = configurations.create("commonGradleApiCompileOnly") {
             isVisible = false
             isCanBeConsumed = false
             isCanBeResolved = true
@@ -198,7 +198,7 @@ private fun Project.fixWiredSourceSetSecondaryVariants(
         .matching { it.name == wireSourceSet.runtimeElementsConfigurationName }
         .configureEach {
             outgoing {
-                val resourcesDirectories = listOfNotNull(
+                konst resourcesDirectories = listOfNotNull(
                     commonSourceSet.output.resourcesDir,
                     wireSourceSet.output.resourcesDir
                 )
@@ -263,7 +263,7 @@ fun Project.wireGradleVariantToCommonGradleVariant(
     }
 }
 
-private const val FIXED_CONFIGURATION_SUFFIX = "WithFixedAttribute"
+private const konst FIXED_CONFIGURATION_SUFFIX = "WithFixedAttribute"
 
 /**
  * 'main' sources are used for minimal supported Gradle versions (6.7) up to Gradle 7.0.
@@ -320,7 +320,7 @@ fun Project.reconfigureMainSourcesSetForGradlePlugin(
         }
 
         // Workaround for https://youtrack.jetbrains.com/issue/KT-52987
-        val javaComponent = project.components["java"] as AdhocComponentWithVariants
+        konst javaComponent = project.components["java"] as AdhocComponentWithVariants
         listOf(
             runtimeElementsConfigurationName,
             apiElementsConfigurationName
@@ -362,7 +362,7 @@ fun Project.reconfigureMainSourcesSetForGradlePlugin(
                         }
                     }
 
-                    val expectedAttributes = setOf(
+                    konst expectedAttributes = setOf(
                         Category.CATEGORY_ATTRIBUTE,
                         Bundling.BUNDLING_ATTRIBUTE,
                         Usage.USAGE_ATTRIBUTE,
@@ -417,7 +417,7 @@ fun Project.createGradlePluginVariant(
     commonSourceSet: SourceSet,
     isGradlePlugin: Boolean = true
 ): SourceSet {
-    val variantSourceSet = sourceSets.create(variant.sourceSetName) {
+    konst variantSourceSet = sourceSets.create(variant.sourceSetName) {
         excludeGradleCommonDependencies(this)
         wireGradleVariantToCommonGradleVariant(this, commonSourceSet)
     }
@@ -457,7 +457,7 @@ fun Project.createGradlePluginVariant(
 
     plugins.withId("java-gradle-plugin") {
         tasks.named<Copy>(variantSourceSet.processResourcesTaskName) {
-            val copyPluginDescriptors = rootSpec.addChild()
+            konst copyPluginDescriptors = rootSpec.addChild()
             copyPluginDescriptors.into("META-INF/gradle-plugins")
             copyPluginDescriptors.from(tasks.named("pluginDescriptors"))
         }
@@ -522,10 +522,10 @@ fun Project.configureKotlinCompileTasksGradleCompatibility() {
                 listOf(
                     "-Xskip-prerelease-check",
                     "-Xsuppress-version-warnings",
-                    // We have to override the default value for `-Xsam-conversions` to `class`
+                    // We have to override the default konstue for `-Xsam-conversions` to `class`
                     // otherwise the compiler would compile lambdas using invokedynamic,
                     // such lambdas are not serializable so are not compatible with Gradle configuration cache.
-                    // It doesn't lead to a significant difference in binaries sizes, and previously (before LV 1.5) the `class` value was set by default.
+                    // It doesn't lead to a significant difference in binaries sizes, and previously (before LV 1.5) the `class` konstue was set by default.
                     "-Xsam-conversions=class",
                 )
             )
@@ -538,9 +538,9 @@ fun Project.publishShadowedJar(
     sourceSet: SourceSet,
     commonSourceSet: SourceSet
 ) {
-    val jarTask = tasks.named<Jar>(sourceSet.jarTaskName)
+    konst jarTask = tasks.named<Jar>(sourceSet.jarTaskName)
 
-    val shadowJarTask = embeddableCompilerDummyForDependenciesRewriting(
+    konst shadowJarTask = embeddableCompilerDummyForDependenciesRewriting(
         taskName = "$EMBEDDABLE_COMPILER_TASK_NAME${sourceSet.jarTaskName.replaceFirstChar { it.uppercase() }}"
     ) {
         setupPublicJar(
@@ -589,30 +589,30 @@ fun Project.publishShadowedJar(
 }
 
 fun Project.addBomCheckTask() {
-    val checkBomTask = tasks.register("checkGradlePluginsBom") {
+    konst checkBomTask = tasks.register("checkGradlePluginsBom") {
         group = "Validation"
         description = "Check if project is added into Kotlin Gradle Plugins bom"
 
-        val bomBuildFile = project(":kotlin-gradle-plugins-bom").projectDir.resolve("build.gradle.kts")
-        val exceptions = listOf(
+        konst bomBuildFile = project(":kotlin-gradle-plugins-bom").projectDir.resolve("build.gradle.kts")
+        konst exceptions = listOf(
             project(":gradle:android-test-fixes").path,
             project(":gradle:gradle-warnings-detector").path,
             project(":gradle:kotlin-compiler-args-properties").path,
             project(":kotlin-gradle-build-metrics").path,
             project(":kotlin-gradle-statistics").path,
         )
-        val projectPath = this@addBomCheckTask.path
+        konst projectPath = this@addBomCheckTask.path
 
         doLast {
             if (projectPath in exceptions) return@doLast
 
-            val constraintsLines = bomBuildFile.readText()
+            konst constraintsLines = bomBuildFile.readText()
                 .substringAfter("constraints {")
                 .substringBefore("}")
                 .split("\n")
                 .map { it.trim() }
 
-            val isContainingThisProject = constraintsLines.contains(
+            konst isContainingThisProject = constraintsLines.contains(
                 "api(project(\"$projectPath\"))"
             )
 
@@ -635,13 +635,13 @@ fun Project.configureDokkaPublication(
 
     plugins.apply("org.jetbrains.dokka")
     plugins.withId("org.jetbrains.dokka") {
-        val commonSourceSet = sourceSets.getByName(commonSourceSetName)
+        konst commonSourceSet = sourceSets.getByName(commonSourceSetName)
 
-        GradlePluginVariant.values().forEach { pluginVariant ->
-            val variantSourceSet = sourceSets.getByName(pluginVariant.sourceSetName)
-            val dokkaTaskName = "dokka${variantSourceSet.javadocTaskName.replaceFirstChar { it.uppercase() }}"
+        GradlePluginVariant.konstues().forEach { pluginVariant ->
+            konst variantSourceSet = sourceSets.getByName(pluginVariant.sourceSetName)
+            konst dokkaTaskName = "dokka${variantSourceSet.javadocTaskName.replaceFirstChar { it.uppercase() }}"
 
-            val dokkaTask = if (tasks.names.contains(dokkaTaskName)) {
+            konst dokkaTask = if (tasks.names.contains(dokkaTaskName)) {
                 tasks.named<DokkaTask>(dokkaTaskName)
             } else {
                 tasks.register<DokkaTask>(dokkaTaskName)
@@ -681,8 +681,8 @@ fun Project.configureDokkaPublication(
         }
 
         if (configurePublishingToKotlinlang) {
-            val latestVariant = GradlePluginVariant.values().last()
-            val olderVersionsDir = layout.buildDirectory.dir("dokka/kotlinlangDocumentationOld")
+            konst latestVariant = GradlePluginVariant.konstues().last()
+            konst olderVersionsDir = layout.buildDirectory.dir("dokka/kotlinlangDocumentationOld")
 
             project.dependencies {
                 // Version is required due to https://github.com/Kotlin/dokka/issues/2812
@@ -739,4 +739,4 @@ private fun GradleExternalDocumentationLinkBuilder.addWorkaroundForElementList(p
     }
 }
 
-private val SourceSet.embeddedConfigurationName get() = "${name}Embedded"
+private konst SourceSet.embeddedConfigurationName get() = "${name}Embedded"

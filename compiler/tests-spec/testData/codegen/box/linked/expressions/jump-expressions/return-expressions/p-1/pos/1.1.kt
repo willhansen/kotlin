@@ -22,7 +22,7 @@ fun box(): String {
 class Case1
 
 fun fooCase1(): Case1 {
-    val x = Case1()
+    konst x = Case1()
     return x
     TODO()
 }

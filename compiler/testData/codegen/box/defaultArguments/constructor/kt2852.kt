@@ -1,7 +1,7 @@
 fun box(): String {
-    val o = object {
-        inner class A(val value: String = "OK")
+    konst o = object {
+        inner class A(konst konstue: String = "OK")
     }
 
-    return o.A().value
+    return o.A().konstue
 }

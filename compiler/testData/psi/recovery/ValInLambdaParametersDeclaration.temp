@@ -1,6 +1,6 @@
 fun test() {
-    val list = listOf(1, 2)
+    konst list = listOf(1, 2)
     list.filter {
-        (val a, val b)=some.test
+        (konst a, konst b)=some.test
     }
 }

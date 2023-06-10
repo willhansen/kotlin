@@ -14,11 +14,11 @@ fun createPlatformDependenciesTestTask(sourceSet: DefaultKotlinSourceSet) {
         tasks.maybeCreate("checkPlatformDependencies").dependsOn(this)
 
         // Dependencies forwarded to the IDE will be attached to the intransitiveMetadataConfiguration
-        val dependenciesConfiguration = configurations.getByName(sourceSet.intransitiveMetadataConfigurationName)
+        konst dependenciesConfiguration = configurations.getByName(sourceSet.intransitiveMetadataConfigurationName)
         dependsOn("commonize")
 
         doLast {
-            val dependencies = dependenciesConfiguration.files
+            konst dependencies = dependenciesConfiguration.files
 
             dependencies.forEach { dependency ->
                 logger.quiet("${sourceSet.name} dependency: ${dependency.path}")
@@ -36,7 +36,7 @@ fun createPlatformDependenciesTestTask(sourceSet: DefaultKotlinSourceSet) {
                 throw AssertionError("${sourceSet.name}: Expected at least one platform dependency")
             }
 
-            val platformKlibPattern = "klib${File.separator}platform"
+            konst platformKlibPattern = "klib${File.separator}platform"
             if (dependencies.none { dependency -> platformKlibPattern in dependency.path }) {
                 throw AssertionError("${sourceSet.name}: Expected at least one dependency from '$platformKlibPattern'")
             }

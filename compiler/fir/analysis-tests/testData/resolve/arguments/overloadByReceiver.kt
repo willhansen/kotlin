@@ -12,6 +12,6 @@ fun <T> T.foo(): String where T : A, T : C = ""
 fun takeInt(x: Int) {}
 
 fun test(d: D) {
-    val x = d.foo()
+    konst x = d.foo()
     takeInt(x)
 }

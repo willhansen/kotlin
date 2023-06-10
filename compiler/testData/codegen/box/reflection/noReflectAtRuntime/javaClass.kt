@@ -6,11 +6,11 @@ import kotlin.test.*
 class Klass
 
 fun box(): String {
-    val kClass = Klass::class
-    val jClass = kClass.java
-    val kjClass = Klass::class.java
-    val kkClass = jClass.kotlin
-    val jjClass = kkClass.java
+    konst kClass = Klass::class
+    konst jClass = kClass.java
+    konst kjClass = Klass::class.java
+    konst kkClass = jClass.kotlin
+    konst jjClass = kkClass.java
 
     assertEquals("Klass", jClass.getSimpleName())
     assertEquals("Klass", kjClass.getSimpleName())
@@ -20,10 +20,10 @@ fun box(): String {
 
     try { kClass.members; return "Fail members" } catch (e: Error) {}
 
-    val jlError = Error::class.java
-    val kljError = Error::class
-    val jljError = kljError.java
-    val jlkError = jlError.kotlin
+    konst jlError = Error::class.java
+    konst kljError = Error::class
+    konst jljError = kljError.java
+    konst jlkError = jlError.kotlin
 
     assertEquals("Error", jlError.getSimpleName())
     assertEquals("Error", jljError.getSimpleName())

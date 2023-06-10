@@ -38,10 +38,10 @@ class IncrementalProjectPathCaseChangedTest : AbstractIncrementalJpsTest(checkDu
     }
 
     override fun performAdditionalModifications(modifications: List<Modification>) {
-        val module = myProject.modules[0]
-        val sourceRoot = module.sourceRoots[0].url
+        konst module = myProject.modules[0]
+        konst sourceRoot = module.sourceRoots[0].url
         assert(sourceRoot.endsWith("/src"))
-        val newSourceRoot = sourceRoot.replace("/src", "/SRC")
+        konst newSourceRoot = sourceRoot.replace("/src", "/SRC")
         module.removeSourceRoot(sourceRoot, JavaSourceRootType.SOURCE)
         module.addSourceRoot(newSourceRoot, JavaSourceRootType.SOURCE)
     }

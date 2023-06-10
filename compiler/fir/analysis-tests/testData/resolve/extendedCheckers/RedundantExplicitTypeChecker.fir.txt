@@ -6,7 +6,7 @@ FILE: RedundantExplicitTypeChecker.kt
 
     }
     public final fun annotated(): R|kotlin/Unit| {
-        lval x: R|@R|A|()  kotlin/Int| = Int(1)
+        lkonst x: R|@R|A|()  kotlin/Int| = Int(1)
     }
     public final object SomeObj : R|kotlin/Any| {
         private constructor(): R|SomeObj| {
@@ -15,10 +15,10 @@ FILE: RedundantExplicitTypeChecker.kt
 
     }
     public final fun fer(): R|kotlin/Unit| {
-        lval x: R|kotlin/Any| = Q|SomeObj|
+        lkonst x: R|kotlin/Any| = Q|SomeObj|
     }
     public final fun f2(y: R|kotlin/String?|): R|kotlin/String| {
-        lval f: R|kotlin/reflect/KClass<*>| = <getClass>(R|<local>/y| ?: ^f2 String())
+        lkonst f: R|kotlin/reflect/KClass<*>| = <getClass>(R|<local>/y| ?: ^f2 String())
         ^f2 String()
     }
     public final object Obj : R|kotlin/Any| {
@@ -34,13 +34,13 @@ FILE: RedundantExplicitTypeChecker.kt
     public final fun R|IA|.extFun(x: R|IB|): R|kotlin/Unit| {
     }
     public final fun testWithExpectedType(): R|kotlin/Unit| {
-        lval extFun_AB_A: R|IA.(IB) -> kotlin/Unit| = Q|IA|::R|/extFun|
+        lkonst extFun_AB_A: R|IA.(IB) -> kotlin/Unit| = Q|IA|::R|/extFun|
     }
     public abstract interface Point : R|kotlin/Any| {
-        public abstract val x: R|kotlin/Int|
+        public abstract konst x: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
-        public abstract val y: R|kotlin/Int|
+        public abstract konst y: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
     }
@@ -49,31 +49,31 @@ FILE: RedundantExplicitTypeChecker.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override val x: R|kotlin/Int| = R|<local>/x|
+        public open override konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        public open override val y: R|kotlin/Int| = R|<local>/y|
+        public open override konst y: R|kotlin/Int| = R|<local>/y|
             public get(): R|kotlin/Int|
 
     }
     public final fun foo(): R|kotlin/Unit| {
-        lval s: R|kotlin/String| = <strcat>(String(Hello ), Int(10).R|kotlin/Int.plus|(Int(1)))
-        lval str: R|kotlin/String?| = String()
-        lval o: R|Obj| = Q|Obj|
-        lval p: R|Point| = R|/PointImpl.PointImpl|(Int(1), Int(2))
-        lval a: R|kotlin/Boolean| = Boolean(true)
-        lval i: R|kotlin/Int| = Int(2).R|kotlin/Int.times|(Int(2))
-        lval l: R|kotlin/Long| = Long(1234567890123)
-        lval s1: R|kotlin/String?| = Null(null)
-        lval sh: R|kotlin/Short| = Short(42)
-        lval integer: R|kotlin/Int| = Int(42)
-        lval piFloat: R|kotlin/Float| = Float(3.14)
-        lval piDouble: R|kotlin/Double| = Double(3.14)
-        lval charZ: R|kotlin/Char| = Char(z)
+        lkonst s: R|kotlin/String| = <strcat>(String(Hello ), Int(10).R|kotlin/Int.plus|(Int(1)))
+        lkonst str: R|kotlin/String?| = String()
+        lkonst o: R|Obj| = Q|Obj|
+        lkonst p: R|Point| = R|/PointImpl.PointImpl|(Int(1), Int(2))
+        lkonst a: R|kotlin/Boolean| = Boolean(true)
+        lkonst i: R|kotlin/Int| = Int(2).R|kotlin/Int.times|(Int(2))
+        lkonst l: R|kotlin/Long| = Long(1234567890123)
+        lkonst s1: R|kotlin/String?| = Null(null)
+        lkonst sh: R|kotlin/Short| = Short(42)
+        lkonst integer: R|kotlin/Int| = Int(42)
+        lkonst piFloat: R|kotlin/Float| = Float(3.14)
+        lkonst piDouble: R|kotlin/Double| = Double(3.14)
+        lkonst charZ: R|kotlin/Char| = Char(z)
         lvar alpha: R|kotlin/Int| = Int(0)
     }
     public final fun test(boolean: R|kotlin/Boolean|): R|kotlin/Unit| {
-        lval expectedLong: R|kotlin/Long| = when () {
+        lkonst expectedLong: R|kotlin/Long| = when () {
             R|<local>/boolean| ->  {
                 Long(42)
             }
@@ -88,13 +88,13 @@ FILE: RedundantExplicitTypeChecker.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = Int(1)
+        public final konst x: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
 
     }
-    public final val ZERO: R|kotlin/Int| = Int(0)
+    public final konst ZERO: R|kotlin/Int| = Int(0)
         public get(): R|kotlin/Int|
     public final fun main(): R|kotlin/Unit| {
-        lval id: R|Id| = Int(11)
+        lkonst id: R|Id| = Int(11)
     }
     public final typealias Id = R|kotlin/Int|

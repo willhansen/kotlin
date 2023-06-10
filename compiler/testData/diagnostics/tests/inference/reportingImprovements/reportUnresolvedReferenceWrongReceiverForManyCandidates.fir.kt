@@ -1,5 +1,5 @@
 fun test() {
-    val a = <!NONE_APPLICABLE!>-<!>false
+    konst a = <!NONE_APPLICABLE!>-<!>false
 }
 
 operator fun A.unaryMinus() {}

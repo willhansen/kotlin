@@ -2,8 +2,8 @@
 // IGNORE_BACKEND: JVM
 
 fun box(): String {
-    val capturedInConstructor = 1
-    val capturedInBody = 10
+    konst capturedInConstructor = 1
+    konst capturedInBody = 10
     var log = ""
 
     class A(var x: Int) {
@@ -11,7 +11,7 @@ fun box(): String {
 
         fun copy(): A {
             log += "A.copy;"
-            val result = A(x)
+            konst result = A(x)
             result.y += capturedInBody
             return result
         }
@@ -22,7 +22,7 @@ fun box(): String {
         }
     }
 
-    val a = A(100).copy()
+    konst a = A(100).copy()
     if (a.y != 111) return "fail1a: ${a.y}"
     if (a.x != 100) return "fail1b: ${a.x}"
 
@@ -34,7 +34,7 @@ fun box(): String {
             log += "B.copier;"
             return {
                 log += "B.copy;"
-                val result = B(x)
+                konst result = B(x)
                 result.y += capturedInBody
                 result
             }
@@ -46,7 +46,7 @@ fun box(): String {
         }
     }
 
-    val b = B(100).copier()()
+    konst b = B(100).copier()()
     if (b.y != 111) return "fail2a: ${b.y}"
     if (b.x != 100) return "fail2b: ${b.x}"
 
@@ -56,7 +56,7 @@ fun box(): String {
         inner class D() {
             fun copyOuter(): C {
                 log += "D.copyOuter;"
-                val result = C(x)
+                konst result = C(x)
                 result.y += capturedInBody
                 return result
             }
@@ -68,7 +68,7 @@ fun box(): String {
         }
     }
 
-    val c = C(100).D().copyOuter()
+    konst c = C(100).D().copyOuter()
     if (c.y != 111) return "fail3a: ${c.y}"
     if (c.x != 100) return "fail3b: ${c.x}"
 

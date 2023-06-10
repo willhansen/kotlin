@@ -5,7 +5,7 @@ class A
 fun bar(a: A) = A()
 
 fun box() {
-    val a = A()
+    konst a = A()
     bar(
             bar(
                     bar(a)

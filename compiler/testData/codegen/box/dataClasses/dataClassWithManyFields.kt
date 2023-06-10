@@ -1,49 +1,49 @@
 
 data class DC(
-    val d0: String = "", val d1: String = "", val d2: String = "", val d3: String = "", val d4: String = "", val d5: String = "",
-    val d6: String = "", val d7: String = "", val d8: String = "", val d9: String = "", val d10: String = "", val d11: String = "",
-    val d12: String = "", val d13: String = "", val d14: String = "", val d15: String = "", val d16: String = "", val d17: String = "",
-    val d18: String = "", val d19: String = "", val d20: String = "", val d21: String = "", val d22: String = "", val d23: String = "",
-    val d24: String = "", val d25: String = "", val d26: String = "", val d27: String = "", val d28: String = "", val d29: String = "",
-    val d30: String = "", val d31: String = "", val d32: String = "", val d33: String = "", val d34: String = "", val d35: String = "",
-    val d36: String = "", val d37: String = "", val d38: String = "", val d39: String = "", val d40: String = "", val d41: String = "",
-    val d42: String = "", val d43: String = "", val d44: String = "", val d45: String = "", val d46: String = "", val d47: String = "",
-    val d48: String = "", val d49: String = "", val d50: String = "", val d51: String = "", val d52: String = "", val d53: String = "",
-    val d54: String = "", val d55: String = "", val d56: String = "", val d57: String = "", val d58: String = "", val d59: String = "",
-    val d60: String = "", val d61: String = "", val d62: String = "", val d63: String = "", val d64: String = "", val d65: String = "",
-    val d66: String = "", val d67: String = "", val d68: String = "", val d69: String = "", val d70: String = "", val d71: String = "",
-    val d72: String = "", val d73: String = "", val d74: String = "", val d75: String = "", val d76: String = "", val d77: String = "",
-    val d78: String = "", val d79: String = "", val d80: String = "", val d81: String = "", val d82: String = "", val d83: String = "",
-    val d84: String = "", val d85: String = "", val d86: String = "", val d87: String = "", val d88: String = "", val d89: String = "",
-    val d90: String = "", val d91: String = "", val d92: String = "", val d93: String = "", val d94: String = "", val d95: String = "",
-    val d96: String = "", val d97: String = "", val d98: String = "", val d99: String = "", val d100: String = "", val d101: String = "",
-    val d102: String = "", val d103: String = "", val d104: String = "", val d105: String = "", val d106: String = "", val d107: String = "",
-    val d108: String = "", val d109: String = "", val d110: String = "", val d111: String = "", val d112: String = "", val d113: String = "",
-    val d114: String = "", val d115: String = "", val d116: String = "", val d117: String = "", val d118: String = "", val d119: String = "",
-    val d120: String = "", val d121: String = "", val d122: String = "", val d123: String = "", val d124: String = "", val d125: String = "",
-    val d126: String = "", val d127: String = "", val d128: String = "", val d129: String = "", val d130: String = "", val d131: String = "",
-    val d132: String = "", val d133: String = "", val d134: String = "", val d135: String = "", val d136: String = "", val d137: String = "",
-    val d138: String = "", val d139: String = "", val d140: String = "", val d141: String = "", val d142: String = "", val d143: String = "",
-    val d144: String = "", val d145: String = "", val d146: String = "", val d147: String = "", val d148: String = "", val d149: String = "",
-    val d150: String = "", val d151: String = "", val d152: String = "", val d153: String = "", val d154: String = "", val d155: String = "",
-    val d156: String = "", val d157: String = "", val d158: String = "", val d159: String = "", val d160: String = "", val d161: String = "",
-    val d162: String = "", val d163: String = "", val d164: String = "", val d165: String = "", val d166: String = "", val d167: String = "",
-    val d168: String = "", val d169: String = "", val d170: String = "", val d171: String = "", val d172: String = "", val d173: String = "",
-    val d174: String = "", val d175: String = "", val d176: String = "", val d177: String = "", val d178: String = "", val d179: String = "",
-    val d180: String = "", val d181: String = "", val d182: String = "", val d183: String = "", val d184: String = "", val d185: String = "",
-    val d186: String = "", val d187: String = "", val d188: String = "", val d189: String = "", val d190: String = "", val d191: String = "",
-    val d192: String = "", val d193: String = "", val d194: String = "", val d195: String = "", val d196: String = "", val d197: String = "",
-    val d198: String = "", val d199: String = "", val d200: String = "", val d201: String = "", val d202: String = "", val d203: String = "",
-    val d204: String = "", val d205: String = "", val d206: String = "", val d207: String = "", val d208: String = "", val d209: String = "",
-    val d210: String = "", val d211: String = "", val d212: String = "", val d213: String = "", val d214: String = "", val d215: String = "",
-    val d216: String = "", val d217: String = "", val d218: String = "", val d219: String = "", val d220: String = "", val d221: String = "",
-    val d222: String = "", val d223: String = "", val d224: String = "", val d225: String = "", val d226: String = "", val d227: String = "",
-    val d228: String = "", val d229: String = "", val d230: String = "", val d231: String = "", val d232: String = "", val d233: String = "",
-    val d234: String = "", val d235: String = "", val d236: String = "", val d237: String = "", val d238: String = "", val d239: String = "",
-    val d240: String = ""
+    konst d0: String = "", konst d1: String = "", konst d2: String = "", konst d3: String = "", konst d4: String = "", konst d5: String = "",
+    konst d6: String = "", konst d7: String = "", konst d8: String = "", konst d9: String = "", konst d10: String = "", konst d11: String = "",
+    konst d12: String = "", konst d13: String = "", konst d14: String = "", konst d15: String = "", konst d16: String = "", konst d17: String = "",
+    konst d18: String = "", konst d19: String = "", konst d20: String = "", konst d21: String = "", konst d22: String = "", konst d23: String = "",
+    konst d24: String = "", konst d25: String = "", konst d26: String = "", konst d27: String = "", konst d28: String = "", konst d29: String = "",
+    konst d30: String = "", konst d31: String = "", konst d32: String = "", konst d33: String = "", konst d34: String = "", konst d35: String = "",
+    konst d36: String = "", konst d37: String = "", konst d38: String = "", konst d39: String = "", konst d40: String = "", konst d41: String = "",
+    konst d42: String = "", konst d43: String = "", konst d44: String = "", konst d45: String = "", konst d46: String = "", konst d47: String = "",
+    konst d48: String = "", konst d49: String = "", konst d50: String = "", konst d51: String = "", konst d52: String = "", konst d53: String = "",
+    konst d54: String = "", konst d55: String = "", konst d56: String = "", konst d57: String = "", konst d58: String = "", konst d59: String = "",
+    konst d60: String = "", konst d61: String = "", konst d62: String = "", konst d63: String = "", konst d64: String = "", konst d65: String = "",
+    konst d66: String = "", konst d67: String = "", konst d68: String = "", konst d69: String = "", konst d70: String = "", konst d71: String = "",
+    konst d72: String = "", konst d73: String = "", konst d74: String = "", konst d75: String = "", konst d76: String = "", konst d77: String = "",
+    konst d78: String = "", konst d79: String = "", konst d80: String = "", konst d81: String = "", konst d82: String = "", konst d83: String = "",
+    konst d84: String = "", konst d85: String = "", konst d86: String = "", konst d87: String = "", konst d88: String = "", konst d89: String = "",
+    konst d90: String = "", konst d91: String = "", konst d92: String = "", konst d93: String = "", konst d94: String = "", konst d95: String = "",
+    konst d96: String = "", konst d97: String = "", konst d98: String = "", konst d99: String = "", konst d100: String = "", konst d101: String = "",
+    konst d102: String = "", konst d103: String = "", konst d104: String = "", konst d105: String = "", konst d106: String = "", konst d107: String = "",
+    konst d108: String = "", konst d109: String = "", konst d110: String = "", konst d111: String = "", konst d112: String = "", konst d113: String = "",
+    konst d114: String = "", konst d115: String = "", konst d116: String = "", konst d117: String = "", konst d118: String = "", konst d119: String = "",
+    konst d120: String = "", konst d121: String = "", konst d122: String = "", konst d123: String = "", konst d124: String = "", konst d125: String = "",
+    konst d126: String = "", konst d127: String = "", konst d128: String = "", konst d129: String = "", konst d130: String = "", konst d131: String = "",
+    konst d132: String = "", konst d133: String = "", konst d134: String = "", konst d135: String = "", konst d136: String = "", konst d137: String = "",
+    konst d138: String = "", konst d139: String = "", konst d140: String = "", konst d141: String = "", konst d142: String = "", konst d143: String = "",
+    konst d144: String = "", konst d145: String = "", konst d146: String = "", konst d147: String = "", konst d148: String = "", konst d149: String = "",
+    konst d150: String = "", konst d151: String = "", konst d152: String = "", konst d153: String = "", konst d154: String = "", konst d155: String = "",
+    konst d156: String = "", konst d157: String = "", konst d158: String = "", konst d159: String = "", konst d160: String = "", konst d161: String = "",
+    konst d162: String = "", konst d163: String = "", konst d164: String = "", konst d165: String = "", konst d166: String = "", konst d167: String = "",
+    konst d168: String = "", konst d169: String = "", konst d170: String = "", konst d171: String = "", konst d172: String = "", konst d173: String = "",
+    konst d174: String = "", konst d175: String = "", konst d176: String = "", konst d177: String = "", konst d178: String = "", konst d179: String = "",
+    konst d180: String = "", konst d181: String = "", konst d182: String = "", konst d183: String = "", konst d184: String = "", konst d185: String = "",
+    konst d186: String = "", konst d187: String = "", konst d188: String = "", konst d189: String = "", konst d190: String = "", konst d191: String = "",
+    konst d192: String = "", konst d193: String = "", konst d194: String = "", konst d195: String = "", konst d196: String = "", konst d197: String = "",
+    konst d198: String = "", konst d199: String = "", konst d200: String = "", konst d201: String = "", konst d202: String = "", konst d203: String = "",
+    konst d204: String = "", konst d205: String = "", konst d206: String = "", konst d207: String = "", konst d208: String = "", konst d209: String = "",
+    konst d210: String = "", konst d211: String = "", konst d212: String = "", konst d213: String = "", konst d214: String = "", konst d215: String = "",
+    konst d216: String = "", konst d217: String = "", konst d218: String = "", konst d219: String = "", konst d220: String = "", konst d221: String = "",
+    konst d222: String = "", konst d223: String = "", konst d224: String = "", konst d225: String = "", konst d226: String = "", konst d227: String = "",
+    konst d228: String = "", konst d229: String = "", konst d230: String = "", konst d231: String = "", konst d232: String = "", konst d233: String = "",
+    konst d234: String = "", konst d235: String = "", konst d236: String = "", konst d237: String = "", konst d238: String = "", konst d239: String = "",
+    konst d240: String = ""
 )
 
-val golden = "DC(d0=OK, d1=, d2=, d3=, d4=, d5=, d6=, d7=, d8=, d9=, d10=, d11=, d12=, d13=, d14=, d15=, d16=, d17=, d18=, d19=, d20=, " +
+konst golden = "DC(d0=OK, d1=, d2=, d3=, d4=, d5=, d6=, d7=, d8=, d9=, d10=, d11=, d12=, d13=, d14=, d15=, d16=, d17=, d18=, d19=, d20=, " +
         "d21=, d22=, d23=, d24=, d25=, d26=, d27=, d28=, d29=, d30=, d31=, d32=, d33=, d34=, d35=, d36=, d37=, d38=, d39=, d40=, d41=, " +
         "d42=, d43=, d44=, d45=, d46=, d47=, d48=, d49=, d50=, d51=, d52=, d53=, d54=, d55=, d56=, d57=, d58=, d59=, d60=, d61=, d62=, " +
         "d63=, d64=, d65=, d66=, d67=, d68=, d69=, d70=, d71=, d72=, d73=, d74=, d75=, d76=, d77=, d78=, d79=, d80=, d81=, d82=, d83=, " +
@@ -58,7 +58,7 @@ val golden = "DC(d0=OK, d1=, d2=, d3=, d4=, d5=, d6=, d7=, d8=, d9=, d10=, d11=,
         "d230=, d231=, d232=, d233=, d234=, d235=, d236=, d237=, d238=, d239=, d240=)"
 
 fun box(): String {
-    val dc = DC("OK")
+    konst dc = DC("OK")
     if (dc.toString() != golden) return "Failed: $dc"
     return dc.d0
 }

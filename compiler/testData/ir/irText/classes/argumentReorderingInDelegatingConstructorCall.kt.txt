@@ -5,11 +5,11 @@ open class Base {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
-  val y: Int
+  konst y: Int
     field = y
     get
 

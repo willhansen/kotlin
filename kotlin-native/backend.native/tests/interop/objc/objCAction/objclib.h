@@ -6,4 +6,4 @@ void performSelector1(id target, NSString* selectorName, id arg1);
 void performSelectorInNewThread1(id target, NSString* selectorName, id arg1);
 void performSelector2(id target, NSString* selectorName, id arg1, id arg2);
 void performSelectorInNewThread2(id target, NSString* selectorName, id arg1, id arg2);
-void setProperty(id target, NSString* propertyName, id value);
+void setProperty(id target, NSString* propertyName, id konstue);

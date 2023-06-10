@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.ir.symbols.IrReturnTargetSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrReturnImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var returnTargetSymbol: IrReturnTargetSymbol,
-    override var value: IrExpression
+    override var konstue: IrExpression
 ) : IrReturn()

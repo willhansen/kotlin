@@ -5,6 +5,6 @@
 
 package org.jetbrains.kotlin.statistics
 
-class BuildSession(val buildStartedTime: Long?) {
-    val projectEvaluatedTime = System.currentTimeMillis()
+class BuildSession(konst buildStartedTime: Long?) {
+    konst projectEkonstuatedTime = System.currentTimeMillis()
 }

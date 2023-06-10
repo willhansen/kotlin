@@ -8,13 +8,13 @@ package kotlin.script.experimental.host
 import kotlin.reflect.KClass
 import kotlin.script.experimental.api.KotlinType
 import kotlin.script.experimental.api.ScriptDependency
-import kotlin.script.experimental.api.ScriptEvaluationContextData
+import kotlin.script.experimental.api.ScriptEkonstuationContextData
 import kotlin.script.experimental.util.PropertiesCollection
 
 interface ScriptingHostConfigurationKeys
 
 /**
- * The container for script evaluation configuration
+ * The container for script ekonstuation configuration
  * For usages see actual code examples
  */
 open class ScriptingHostConfiguration(baseScriptingConfigurations: Iterable<ScriptingHostConfiguration>, body: Builder.() -> Unit) :
@@ -37,14 +37,14 @@ open class ScriptingHostConfiguration(baseScriptingConfigurations: Iterable<Scri
  * to the original one, otherwise returns original
  */
 fun ScriptingHostConfiguration?.with(body: ScriptingHostConfiguration.Builder.() -> Unit): ScriptingHostConfiguration {
-    val newConfiguration =
+    konst newConfiguration =
         if (this == null) ScriptingHostConfiguration(body = body)
         else ScriptingHostConfiguration(this, body = body)
     return if (newConfiguration != this) newConfiguration else this
 }
 
 /**
- * Add the values not explicitly set in the receiver from the [defaults] configuration
+ * Add the konstues not explicitly set in the receiver from the [defaults] configuration
  */
 fun ScriptingHostConfiguration?.withDefaultsFrom(defaults: ScriptingHostConfiguration): ScriptingHostConfiguration =
     when {
@@ -56,17 +56,17 @@ fun ScriptingHostConfiguration?.withDefaultsFrom(defaults: ScriptingHostConfigur
 /**
  * The list of all dependencies required for the script base class and refinement callbacks
  */
-val ScriptingHostConfigurationKeys.configurationDependencies by PropertiesCollection.key<List<ScriptDependency>>()
+konst ScriptingHostConfigurationKeys.configurationDependencies by PropertiesCollection.key<List<ScriptDependency>>()
 
 /**
  * The pointer to the generic "class loader" for the types used in the script configurations
  */
-val ScriptingHostConfigurationKeys.getScriptingClass by PropertiesCollection.key<GetScriptingClass>(isTransient = true)
+konst ScriptingHostConfigurationKeys.getScriptingClass by PropertiesCollection.key<GetScriptingClass>(isTransient = true)
 
 /**
- * Evaluation context getter, allows to provide data to the evaluation configuration refinement functions
+ * Ekonstuation context getter, allows to provide data to the ekonstuation configuration refinement functions
  */
-val ScriptingHostConfigurationKeys.getEvaluationContext by PropertiesCollection.key<GetEvaluationContext>(isTransient = true)
+konst ScriptingHostConfigurationKeys.getEkonstuationContext by PropertiesCollection.key<GetEkonstuationContext>(isTransient = true)
 
 /**
  * The interface to the generic "class loader" for the types used in the script configurations
@@ -76,20 +76,20 @@ interface GetScriptingClass {
 }
 
 /**
- * A helper to enable passing lambda directly to the getEvaluationContext "keyword"
+ * A helper to enable passing lambda directly to the getEkonstuationContext "keyword"
  */
-fun ScriptingHostConfiguration.Builder.getEvaluationContext(handler: GetEvaluationContext) {
-    ScriptingHostConfiguration.getEvaluationContext.put(handler)
+fun ScriptingHostConfiguration.Builder.getEkonstuationContext(handler: GetEkonstuationContext) {
+    ScriptingHostConfiguration.getEkonstuationContext.put(handler)
 }
 
 /**
- * The interface to an evaluation context getter
+ * The interface to an ekonstuation context getter
  */
-typealias GetEvaluationContext = (hostConfiguration: ScriptingHostConfiguration) -> ScriptEvaluationContextData
+typealias GetEkonstuationContext = (hostConfiguration: ScriptingHostConfiguration) -> ScriptEkonstuationContextData
 
 // helper method
 fun ScriptingHostConfiguration.getScriptingClass(type: KotlinType, contextClass: KClass<*>): KClass<*> {
-    val getClass = get(ScriptingHostConfiguration.getScriptingClass)
+    konst getClass = get(ScriptingHostConfiguration.getScriptingClass)
         ?: throw IllegalArgumentException("Expecting 'getScriptingClass' property in the scripting host configuration: unable to load scripting class $type")
     return getClass(type, contextClass, this)
 }

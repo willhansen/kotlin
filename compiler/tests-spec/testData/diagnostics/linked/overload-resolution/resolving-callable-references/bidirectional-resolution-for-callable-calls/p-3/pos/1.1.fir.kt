@@ -38,7 +38,7 @@ class Case3() {
 
     fun boo() = ""
 
-    val boo = 1
+    konst boo = 1
 
     fun case() {
         <!DEBUG_INFO_CALL("fqName: Case3.foo; typeCall: function")!>foo(::boo)<!>
@@ -59,7 +59,7 @@ class Case4() {
 
     fun boo() = 1
 
-    val boo = ""
+    konst boo = ""
 
     fun case() {
         <!DEBUG_INFO_CALL("fqName: Case4.foo; typeCall: function")!>foo(::boo)<!>
@@ -79,7 +79,7 @@ class Case5() {
 
     fun boo() = "" as CharSequence
 
-    val boo = ""
+    konst boo = ""
 
     fun case() {
         <!DEBUG_INFO_CALL("fqName: Case5.foo; typeCall: function")!>foo(::boo)<!>
@@ -99,7 +99,7 @@ class Case6() {
 
     fun boo() = ""
 
-    val boo = "" as CharSequence
+    konst boo = "" as CharSequence
 
     fun case() {
         <!DEBUG_INFO_CALL("fqName: Case6.foo; typeCall: function")!>foo(::boo)<!>

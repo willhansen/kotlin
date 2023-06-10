@@ -26,39 +26,39 @@ import org.jetbrains.kotlin.resolve.sam.SamConstructorDescriptor
 import org.jetbrains.kotlin.resolve.sam.SamTypeAliasConstructorDescriptor
 
 internal class KtFe10DescSamConstructorSymbol(
-    override val descriptor: SamConstructorDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: SamConstructorDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtSamConstructorSymbol(), KtFe10DescSymbol<SamConstructorDescriptor> {
-    private val expandedDescriptor: SamConstructorDescriptor
+    private konst expandedDescriptor: SamConstructorDescriptor
         get() = (descriptor as? SamTypeAliasConstructorDescriptor)?.expandedConstructorDescriptor ?: descriptor
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { expandedDescriptor.name }
 
-    override val valueParameters: List<KtValueParameterSymbol>
-        get() = withValidityAssertion { descriptor.valueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
+    override konst konstueParameters: List<KtValueParameterSymbol>
+        get() = withValidityAssertion { descriptor.konstueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { descriptor.ktHasStableParameterNames }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { expandedDescriptor.callableIdIfNotLocal }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.returnTypeOrNothing.toKtType(analysisContext) }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion { descriptor.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext) }
 
-    override val contextReceivers: List<KtContextReceiver>
+    override konst contextReceivers: List<KtContextReceiver>
         get() = withValidityAssertion { descriptor.createContextReceivers(analysisContext) }
 
-    override val isExtension: Boolean
+    override konst isExtension: Boolean
         get() = withValidityAssertion { descriptor.isExtension }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { expandedDescriptor.getSymbolOrigin(analysisContext) }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { descriptor.typeParameters.map { KtFe10DescTypeParameterSymbol(it, analysisContext) } }
 
 
@@ -68,7 +68,7 @@ internal class KtFe10DescSamConstructorSymbol(
             return it
         }
 
-        val classId = descriptor.baseDescriptorForSynthetic.classId
+        konst classId = descriptor.baseDescriptorForSynthetic.classId
         if (classId != null) {
             return KtFe10DescSamConstructorSymbolPointer(classId)
         }

@@ -6,7 +6,7 @@ FILE: mixingImplicitAndExplicitReceivers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val s: R|kotlin/String?| = R|<local>/s|
+        public final konst s: R|kotlin/String?| = R|<local>/s|
             public get(): R|kotlin/String?|
 
         public final fun withThis(): R|kotlin/Unit| {

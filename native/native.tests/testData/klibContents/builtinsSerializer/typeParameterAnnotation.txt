@@ -1,4 +1,4 @@
-    @Retention(value = AnnotationRetention.BINARY) @Target(allowedTargets = {AnnotationTarget.TYPE_PARAMETER}) annotation class Ann constructor(value: String) : Annotation {
-        val value: String
+    @Retention(konstue = AnnotationRetention.BINARY) @Target(allowedTargets = {AnnotationTarget.TYPE_PARAMETER}) annotation class Ann constructor(konstue: String) : Annotation {
+        konst konstue: String
     }
-    inline fun <reified @Ann(value = "abc") T> foo()
+    inline fun <reified @Ann(konstue = "abc") T> foo()

@@ -7,14 +7,14 @@ import kotlin.reflect.full.*
 import kotlin.reflect.jvm.isAccessible
 
 class A {
-    private var value = 0
+    private var konstue = 0
 
     fun ref() = A::class.memberProperties.single() as KMutableProperty1<A, Int>
 }
 
 fun box(): String {
-    val a = A()
-    val p = a.ref()
+    konst a = A()
+    konst p = a.ref()
     try {
         p.set(a, 1)
         return "Fail: private property is accessible by default"

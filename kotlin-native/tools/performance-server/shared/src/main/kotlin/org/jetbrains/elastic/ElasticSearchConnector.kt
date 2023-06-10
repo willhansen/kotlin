@@ -10,8 +10,8 @@ import org.jetbrains.report.json.*
 import org.jetbrains.network.*
 
 // Connector with InfluxDB.
-class ElasticSearchConnector(private val connector: NetworkConnector,
-                             private val user: String? = null, private val password: String? = null) {
+class ElasticSearchConnector(private konst connector: NetworkConnector,
+                             private konst user: String? = null, private konst password: String? = null) {
     // Execute ElasticSearch request.
     fun request(method: RequestMethod, path: String, acceptJsonContentType: Boolean = true, body: String? = null) =
             connector.sendRequest(method, path, user, password, acceptJsonContentType, body)

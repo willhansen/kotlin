@@ -9,7 +9,7 @@ enum class A {
     companion object
 }
 
-val A.Companion.entries: Int get() = 0
+konst A.Companion.entries: Int get() = 0
 
 fun test() {
     A.entries
@@ -24,6 +24,6 @@ fun test() {
         entries
     }
 
-    val aCompanion = A.Companion
+    konst aCompanion = A.Companion
     aCompanion.entries
 }

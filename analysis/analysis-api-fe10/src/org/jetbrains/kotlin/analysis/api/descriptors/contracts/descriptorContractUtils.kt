@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.contracts.description.expressions.*
 internal fun EffectDeclaration.effectDeclarationToAnalysisApi(analysisContext: Fe10AnalysisContext): KtContractEffectDeclaration =
     accept(ContractDescriptionElementToAnalysisApi(analysisContext), Unit) as KtContractEffectDeclaration
 
-private class ContractDescriptionElementToAnalysisApi(val analysisContext: Fe10AnalysisContext) :
+private class ContractDescriptionElementToAnalysisApi(konst analysisContext: Fe10AnalysisContext) :
     ContractDescriptionVisitor<Any, Unit> {
 
     override fun visitConditionalEffectDeclaration(
@@ -34,17 +34,17 @@ private class ContractDescriptionElementToAnalysisApi(val analysisContext: Fe10A
         returnsEffect: ReturnsEffectDeclaration,
         data: Unit
     ): KtContractReturnsContractEffectDeclaration =
-        when (val value = returnsEffect.value) {
+        when (konst konstue = returnsEffect.konstue) {
             ConstantReference.NULL ->
                 KtContractReturnsSpecificValueEffectDeclaration(KtContractConstantValue(KtContractConstantType.NULL, analysisContext.token))
             ConstantReference.NOT_NULL -> KtContractReturnsNotNullEffectDeclaration(analysisContext.token)
             ConstantReference.WILDCARD -> KtContractReturnsSuccessfullyEffectDeclaration(analysisContext.token)
             is BooleanConstantReference -> KtContractReturnsSpecificValueEffectDeclaration(
                 KtContractConstantValue(
-                    when (value) {
+                    when (konstue) {
                         BooleanConstantReference.TRUE -> KtContractConstantType.TRUE
                         BooleanConstantReference.FALSE -> KtContractConstantType.FALSE
-                        else -> error("Can't convert $value to the Analysis API")
+                        else -> error("Can't convert $konstue to the Analysis API")
                     },
                     analysisContext.token
                 )

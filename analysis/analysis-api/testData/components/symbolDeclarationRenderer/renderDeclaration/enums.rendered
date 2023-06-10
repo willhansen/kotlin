@@ -18,14 +18,14 @@ enum class Planet(m: Double, r: Double) {
   abstract fun sayHello()
 
   companion object {
-    const val G: Double
+    const konst G: Double
   }
 
-  internal val r: Double
+  internal konst r: Double
 
-  val g: Double
+  konst g: Double
 
-  val m: Double
+  konst m: Double
 }
 
 enum class PseudoInsn(signature: String) {
@@ -39,6 +39,6 @@ enum class PseudoInsn(signature: String) {
 
   fun emit()
 
-  val signature: String
+  konst signature: String
 }
 

@@ -1,9 +1,9 @@
 package com.example
 
 class ModifiedClassChangedMembers {
-    val unchangedProperty = 0
-    val modifiedProperty = 0
-    val removedProperty = 0
+    konst unchangedProperty = 0
+    konst modifiedProperty = 0
+    konst removedProperty = 0
     fun unchangedFunction() {}
     fun modifiedFunction() {}
     fun removedFunction() {}

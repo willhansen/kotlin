@@ -9,17 +9,17 @@ import android.os.Parcelable
 import android.os.Bundle
 
 @Parcelize
-data class User(val a: Bundle) : Parcelable
+data class User(konst a: Bundle) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = User(Bundle().apply { putChar("A", 'c'); putByte("B", 40.toByte()); putString("C", "ABC") })
+    konst test = User(Bundle().apply { putChar("A", 'c'); putByte("B", 40.toByte()); putString("C", "ABC") })
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = readFromParcel<User>(parcel)
+    konst test2 = readFromParcel<User>(parcel)
 
     assert(compareBundles(test.a, test2.a))
 }

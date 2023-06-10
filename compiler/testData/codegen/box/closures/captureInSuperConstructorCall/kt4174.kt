@@ -1,6 +1,6 @@
-open class C(val f: () -> String)
+open class C(konst f: () -> String)
 
-class B(val x: String) {
+class B(konst x: String) {
     fun foo(): C {
         class A : C({x}) {}
         return A()

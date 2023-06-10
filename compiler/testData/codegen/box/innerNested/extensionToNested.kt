@@ -1,9 +1,9 @@
 class Test {
     class Nested {
-        val value = "OK"
+        konst konstue = "OK"
     }
 }
 
-fun Test.Nested.foo() = value
+fun Test.Nested.foo() = konstue
 
 fun box() = Test.Nested().foo()

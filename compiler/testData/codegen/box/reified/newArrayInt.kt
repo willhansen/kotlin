@@ -6,7 +6,7 @@ inline fun<reified T> createArray(n: Int, crossinline block: () -> T): Array<T> 
 
 fun box(): String {
 
-    val x = createArray<Int>(5) { 3 }
+    konst x = createArray<Int>(5) { 3 }
 
     require(x.all { it == 3 })
     return "OK"

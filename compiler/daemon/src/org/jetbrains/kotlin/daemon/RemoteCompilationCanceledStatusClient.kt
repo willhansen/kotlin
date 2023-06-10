@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.progress.CompilationCanceledStatus
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 
-val CANCELED_STATUS_CHECK_THRESHOLD_NS = TimeUnit.MILLISECONDS.toNanos(100)
+konst CANCELED_STATUS_CHECK_THRESHOLD_NS = TimeUnit.MILLISECONDS.toNanos(100)
 
 class RemoteCompilationCanceledStatusClient(
-    @Suppress("DEPRECATION") val facade: CompilerCallbackServicesFacade,
-    val profiler: Profiler = DummyProfiler()
+    @Suppress("DEPRECATION") konst facade: CompilerCallbackServicesFacade,
+    konst profiler: Profiler = DummyProfiler()
 ): CompilationCanceledStatus {
 
-    private val log by lazy { Logger.getLogger("compiler") }
+    private konst log by lazy { Logger.getLogger("compiler") }
 
     @Volatile var lastChecked: Long = System.nanoTime()
 
@@ -40,7 +40,7 @@ class RemoteCompilationCanceledStatusClient(
             throw CompilationCanceledException()
         }
 
-        val curNanos = System.nanoTime()
+        konst curNanos = System.nanoTime()
         if (curNanos - lastChecked > CANCELED_STATUS_CHECK_THRESHOLD_NS) {
             profiler.withMeasure(this) {
                 try {

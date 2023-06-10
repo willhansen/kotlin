@@ -14,11 +14,11 @@ class A {
         private fun f(p: Int) {}
 
         @JvmStatic
-        private val x = ""
+        private konst x = ""
 
         private var xx: String
             @JvmStatic get() = ""
-            @JvmStatic set(value) {}
+            @JvmStatic set(konstue) {}
     }
 }
 
@@ -27,9 +27,9 @@ object O {
     private fun g(q: Int) {}
 
     @JvmStatic
-    private val y = ""
+    private konst y = ""
 
     private var yy: String
         @JvmStatic get() = ""
-        @JvmStatic set(value) {}
+        @JvmStatic set(konstue) {}
 }

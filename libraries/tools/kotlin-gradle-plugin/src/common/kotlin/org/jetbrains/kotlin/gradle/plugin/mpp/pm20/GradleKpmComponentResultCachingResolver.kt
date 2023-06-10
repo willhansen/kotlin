@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.project.model.KpmModuleDependency
 import org.jetbrains.kotlin.project.model.KpmModuleIdentifier
 
 open class GradleKpmComponentResultCachingResolver {
-    private val cachedResultsByRequestingModule = mutableMapOf<GradleKpmModule, Map<KpmModuleIdentifier, ResolvedComponentResult>>()
+    private konst cachedResultsByRequestingModule = mutableMapOf<GradleKpmModule, Map<KpmModuleIdentifier, ResolvedComponentResult>>()
 
     protected open fun configurationToResolve(requestingModule: GradleKpmModule): Configuration =
         configurationToResolveMetadataDependencies(requestingModule)
 
     protected open fun resolveDependencies(module: GradleKpmModule): Map<KpmModuleIdentifier, ResolvedComponentResult> {
-        val allComponents = configurationToResolve(module).incoming.resolutionResult.allComponents
+        konst allComponents = configurationToResolve(module).incoming.resolutionResult.allComponents
         // FIXME handle multi-component results
         return allComponents.flatMap { component -> component.toKpmModuleIdentifiers().map { it to component } }.toMap()
     }
@@ -36,7 +36,7 @@ open class GradleKpmComponentResultCachingResolver {
 
     companion object {
         fun getForCurrentBuild(project: Project): GradleKpmComponentResultCachingResolver {
-            val extraPropertyName = "org.jetbrains.kotlin.dependencyResolution.gradleComponentResolver.${project.getKotlinPluginVersion()}"
+            konst extraPropertyName = "org.jetbrains.kotlin.dependencyResolution.gradleComponentResolver.${project.getKotlinPluginVersion()}"
             return project.getOrPutRootProjectProperty(extraPropertyName) {
                 GradleKpmComponentResultCachingResolver()
             }

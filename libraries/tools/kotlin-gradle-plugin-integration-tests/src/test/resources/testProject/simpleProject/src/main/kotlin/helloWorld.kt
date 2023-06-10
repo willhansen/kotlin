@@ -4,16 +4,16 @@ import com.google.common.primitives.Ints
 import com.google.common.base.Joiner
 import java.util.ArrayList
 
-class KotlinGreetingJoiner(val greeter : Greeter) {
+class KotlinGreetingJoiner(konst greeter : Greeter) {
 
-    private val names = ArrayList<String?>()
+    private konst names = ArrayList<String?>()
 
     fun addName(name : String?): Unit{
         names.add(name)
     }
 
     fun getJoinedGreeting() : String? {
-        val joiner = Joiner.on(" and ").skipNulls();
+        konst joiner = Joiner.on(" and ").skipNulls();
         return "${greeter.getGreeting()} ${joiner.join(names)}"
     }
 

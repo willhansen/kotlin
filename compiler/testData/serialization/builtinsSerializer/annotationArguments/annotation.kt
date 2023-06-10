@@ -2,9 +2,9 @@ package test
 
 annotation class Empty
 
-annotation class JustAnnotation(val annotation: Empty)
+annotation class JustAnnotation(konst annotation: Empty)
 
-annotation class AnnotationArray(val annotationArray: Array<JustAnnotation>)
+annotation class AnnotationArray(konst annotationArray: Array<JustAnnotation>)
 
 @JustAnnotation(Empty())
 @AnnotationArray(arrayOf())

@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.name.ClassId
 @RequiresOptIn
 annotation class LookupTagInternals
 
-class ConeClassLikeLookupTagImpl(override val classId: ClassId) : ConeClassLikeLookupTag() {
+class ConeClassLikeLookupTagImpl(override konst classId: ClassId) : ConeClassLikeLookupTag() {
 
     init {
         assert(!classId.isLocal) { "You should use ConeClassLookupTagWithFixedSymbol for local $classId!" }

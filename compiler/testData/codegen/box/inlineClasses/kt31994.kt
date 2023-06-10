@@ -7,9 +7,9 @@ fun box(): String =
 fun testBug(test: Test?): String =
     test?.Inner()?.thing ?: "OK"
 
-class Test(val name: String) {
+class Test(konst name: String) {
     inner class Inner {
-        val thing: String
+        konst thing: String
             get() = name
     }
 }

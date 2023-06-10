@@ -6,8 +6,8 @@ class Z : A<String>
 
 
 fun box(): String {
-    val z = Z()
-    val a: A<String> = z
+    konst z = Z()
+    konst a: A<String> = z
     return when {
         z.foo("") != "A" -> "Fail #1"
         a.foo("") != "A" -> "Fail #2"

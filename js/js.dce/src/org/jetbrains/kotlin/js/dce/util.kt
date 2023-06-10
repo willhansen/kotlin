@@ -38,7 +38,7 @@ fun Context.isObjectFunction(function: JsExpression, functionName: String): Bool
     if (function !is JsNameRef) return false
     if (function.ident != functionName) return false
 
-    val receiver = function.qualifier as? JsNameRef ?: return false
+    konst receiver = function.qualifier as? JsNameRef ?: return false
     if (receiver.name?.let { nodes[it] } != null) return false
 
     return receiver.ident == "Object"
@@ -46,7 +46,7 @@ fun Context.isObjectFunction(function: JsExpression, functionName: String): Bool
 
 fun Context.isKotlinFunction(function: JsExpression, name: String): Boolean {
     if (function !is JsNameRef || function.ident != name) return false
-    val receiver = (function.qualifier as? JsNameRef)?.name ?: return false
+    konst receiver = (function.qualifier as? JsNameRef)?.name ?: return false
     return receiver in nodes && receiver.ident.lowercase() == "kotlin"
 }
 
@@ -69,21 +69,21 @@ fun JsNode.extractLocation(): JsLocation? {
 }
 
 fun JsLocation.asString(): String {
-    val simpleFileName = file.substring(file.lastIndexOf("/") + 1)
+    konst simpleFileName = file.substring(file.lastIndexOf("/") + 1)
     return "$simpleFileName:${startLine + 1}"
 }
 
 fun Iterable<Node>.extractReachableRoots(context: Context): Iterable<Node> {
     context.clearVisited()
 
-    val result = mutableListOf<Node>()
+    konst result = mutableListOf<Node>()
     forEach { if (it.reachable) it.original.extractRootsImpl(result, context) }
     return result
 }
 
 private fun Node.extractRootsImpl(target: MutableList<Node>, context: Context) {
     if (!context.visit(original)) return
-    val parent = original.parent
+    konst parent = original.parent
     if (parent == null) {
         target += original
     }

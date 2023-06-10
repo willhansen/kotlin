@@ -28,14 +28,14 @@ import org.jetbrains.kotlin.resolve.jvm.JvmPrimitiveType
 import javax.lang.model.type.TypeKind
 
 abstract class TreeBasedType<out T : JCTree>(
-    val tree: T,
-    val compilationUnit: CompilationUnitTree,
-    val javac: JavacWrapper,
-    private val allAnnotations: Collection<JavaAnnotation>,
-    protected val containingElement: JavaElement
+    konst tree: T,
+    konst compilationUnit: CompilationUnitTree,
+    konst javac: JavacWrapper,
+    private konst allAnnotations: Collection<JavaAnnotation>,
+    protected konst containingElement: JavaElement
 ) : JavaType, JavaAnnotationOwner {
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = allAnnotations.filterTypeAnnotations()
 
     companion object {
@@ -50,8 +50,8 @@ abstract class TreeBasedType<out T : JCTree>(
                 is JCTree.JCWildcard -> TreeBasedWildcardType(tree, compilationUnit, javac, annotations, containingElement)
                 is JCTree.JCTypeApply -> TreeBasedGenericClassifierType(tree, compilationUnit, javac, annotations, containingElement)
                 is JCTree.JCAnnotatedType -> {
-                    val underlyingType = tree.underlyingType
-                    val newAnnotations = tree.annotations
+                    konst underlyingType = tree.underlyingType
+                    konst newAnnotations = tree.annotations
                         .map { TreeBasedAnnotation(it, compilationUnit, javac, containingElement) }
                     create(underlyingType, compilationUnit, javac, newAnnotations, containingElement)
                 }
@@ -62,7 +62,7 @@ abstract class TreeBasedType<out T : JCTree>(
         }
     }
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = false
 
     override fun findAnnotation(fqName: FqName) = annotations.find { it.classId?.asSingleFqName() == fqName }
@@ -83,7 +83,7 @@ class TreeBasedPrimitiveType(
     containingElement: JavaElement
 ) : TreeBasedType<JCTree.JCPrimitiveTypeTree>(tree, compilationUnit, javac, allAnnotations, containingElement), JavaPrimitiveType {
 
-    override val type: PrimitiveType?
+    override konst type: PrimitiveType?
         get() = if (tree.primitiveTypeKind == TypeKind.VOID) {
             null
         } else {
@@ -100,7 +100,7 @@ class TreeBasedArrayType(
     containingElement: JavaElement
 ) : TreeBasedType<JCTree.JCArrayTypeTree>(tree, compilationUnit, javac, allAnnotations, containingElement), JavaArrayType {
 
-    override val componentType: JavaType
+    override konst componentType: JavaType
         get() = create(tree.elemtype, compilationUnit, javac, annotations, containingElement)
 
 }
@@ -113,10 +113,10 @@ class TreeBasedWildcardType(
     containingElement: JavaElement
 ) : TreeBasedType<JCTree.JCWildcard>(tree, compilationUnit, javac, allAnnotations, containingElement), JavaWildcardType {
 
-    override val bound: JavaType?
+    override konst bound: JavaType?
         get() = tree.bound?.let { create(it, compilationUnit, javac, annotations, containingElement) }
 
-    override val isExtends: Boolean
+    override konst isExtends: Boolean
         get() = tree.kind.kind == BoundKind.EXTENDS
 
 }
@@ -129,26 +129,26 @@ sealed class TreeBasedClassifierType<out T : JCTree>(
     containingElement: JavaElement
 ) : TreeBasedType<T>(tree, compilationUnit, javac, allAnnotations, containingElement), JavaClassifierType {
 
-    override val classifier: JavaClassifier?
+    override konst classifier: JavaClassifier?
             by lazy { javac.resolve(tree, compilationUnit, containingElement) }
 
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = (classifier as? JavaClass)?.fqName?.asString() ?: tree.toString().substringBefore("<")
 
-    override val presentableText: String
+    override konst presentableText: String
         get() = classifierQualifiedName
 
-    override val typeArguments: List<JavaType?>
+    override konst typeArguments: List<JavaType?>
         get() {
             var tree: JCTree = tree
             if (tree is JCTree.JCTypeApply) {
                 tree = tree.clazz
             }
             if (tree is JCTree.JCFieldAccess) {
-                val enclosingType = TreeBasedType.create(tree.selected, compilationUnit, javac, annotations, containingElement)
+                konst enclosingType = TreeBasedType.create(tree.selected, compilationUnit, javac, annotations, containingElement)
                 return (enclosingType as? JavaClassifierType)?.typeArguments ?: emptyList()
             } else {
-                val classifier = classifier as? JavaClass ?: return emptyList()
+                konst classifier = classifier as? JavaClass ?: return emptyList()
                 if (classifier is MockKotlinClassifier || classifier.isStatic) return emptyList()
 
                 return arrayListOf<JavaClass>().apply {
@@ -167,26 +167,26 @@ sealed class TreeBasedClassifierType<out T : JCTree>(
 
 }
 
-class TreeBasedTypeParameterType(override val classifier: JavaTypeParameter) : JavaClassifierType {
+class TreeBasedTypeParameterType(override konst classifier: JavaTypeParameter) : JavaClassifierType {
 
-    override val typeArguments: List<JavaType>
+    override konst typeArguments: List<JavaType>
         get() = emptyList()
 
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = false
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = classifier.annotations.filterTypeAnnotations()
 
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = classifier.name.asString()
 
-    override val presentableText: String
+    override konst presentableText: String
         get() = classifierQualifiedName
 
     override fun findAnnotation(fqName: FqName) = annotations.find { it.classId?.asSingleFqName() == fqName }
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = false
 }
 
@@ -198,7 +198,7 @@ class TreeBasedNonGenericClassifierType(
     containingElement: JavaElement
 ) : TreeBasedClassifierType<JCTree.JCExpression>(tree, compilationUnit, javac, annotations, containingElement) {
 
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = (classifier as? MockKotlinClassifier)?.hasTypeParameters
             ?: (classifier as? JavaClass)?.typeParameters?.isNotEmpty()
             ?: false
@@ -213,17 +213,17 @@ class TreeBasedGenericClassifierType(
     containingElement: JavaElement
 ) : TreeBasedClassifierType<JCTree.JCTypeApply>(tree, compilationUnit, javac, annotations, containingElement) {
 
-    override val classifier: JavaClassifier?
+    override konst classifier: JavaClassifier?
             by lazy {
-                val newTree = tree.clazz
+                konst newTree = tree.clazz
                 if (newTree is JCTree.JCAnnotatedType) {
                     javac.resolve(newTree.underlyingType, compilationUnit, containingElement)
                 } else super.classifier
             }
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() {
-            val newTree = tree.clazz
+            konst newTree = tree.clazz
             return (newTree as? JCTree.JCAnnotatedType)?.annotations?.map {
                 TreeBasedAnnotation(
                     it,
@@ -237,12 +237,12 @@ class TreeBasedGenericClassifierType(
                 ?: super.annotations
         }
 
-    override val typeArguments: List<JavaType?>
+    override konst typeArguments: List<JavaType?>
         get() = tree.arguments.map { create(it, compilationUnit, javac, emptyList(), containingElement) }
             .toMutableList<JavaType?>()
             .apply { addAll(super.typeArguments) }
 
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = classifier.let {
             when (it) {
                 is MockKotlinClassifier -> tree.arguments.size != it.typeParametersNumber

@@ -18,55 +18,55 @@ import transitiveStory.midActual.sourceCalls.intemediateCall.SecondModCaller
 class TheVeryTransitiveStory {
     // ========= api calls ==========
     // java
-    val jApiOne = JavaApiContainer()
+    konst jApiOne = JavaApiContainer()
 
     // kotlin
-    val kApiOne = KotlinApiContainer()
+    konst kApiOne = KotlinApiContainer()
 
     // ========= mpp-bottom-actual calls ==========
     // common source set
-    val interCallOne = regularTLfunInTheBottomActualCommmon("Some string from `mpp-mid-actual` module")
-    val interCallTwo = BottomActualDeclarations.inTheCompanionOfBottomActualDeclarations
-    val interCallThree = BottomActualDeclarations().simpleVal
+    konst interCallOne = regularTLfunInTheBottomActualCommmon("Some string from `mpp-mid-actual` module")
+    konst interCallTwo = BottomActualDeclarations.inTheCompanionOfBottomActualDeclarations
+    konst interCallThree = BottomActualDeclarations().simpleVal
 
     // intermediate source set
-    val interCallFour = InBottomActualIntermediate().p
-    val interCallFive = IntermediateMPPClassInBottomActual()
+    konst interCallFour = InBottomActualIntermediate().p
+    konst interCallFive = IntermediateMPPClassInBottomActual()
 
     // ========= jvm18 source set of `mpp-bottom-actual` ==========
     // java
-    val interCallSix = JApiCallerInJVM18()
+    konst interCallSix = JApiCallerInJVM18()
 
     // kotlin
-    val interCallSeven = Jvm18KApiInheritor()
-    val interCallEight = Jvm18JApiInheritor()
-    val interCallNine = IntermediateMPPClassInBottomActual()
+    konst interCallSeven = Jvm18KApiInheritor()
+    konst interCallEight = Jvm18JApiInheritor()
+    konst interCallNine = IntermediateMPPClassInBottomActual()
 
     // ========= mpp-mid-actual calls ==========
     // common source set
-    val midCommonCallOne = regularTLfunInTheMidActualCommmon("The message from `plain-jvm` module")
-    val midCommonCallTwo = SomeMPPInTheCommon().simpleVal
+    konst midCommonCallOne = regularTLfunInTheMidActualCommmon("The message from `plain-jvm` module")
+    konst midCommonCallTwo = SomeMPPInTheCommon().simpleVal
 
     // intermediate source set
-    val midIntermediateCall = SecondModCaller()
+    konst midIntermediateCall = SecondModCaller()
     class TransitiveInheritor : BottomActualDeclarations()
 
     // ========= jvmWithJava source set of `mpp-mid-actual` ==========
     // java
-    val midEndCallOne = TheSameCallsButJava()
+    konst midEndCallOne = TheSameCallsButJava()
 
     // kotlin
-    val midEndCallTwo = INeedAllTheSourceSets()
+    konst midEndCallTwo = INeedAllTheSourceSets()
 
 }
 
 fun main() {
-    val arg = TheVeryTransitiveStory()
+    konst arg = TheVeryTransitiveStory()
     println("Test printing: `${arg.jApiOne}`; \n `${arg.kApiOne}`")
 }
 
 class SomeWComp {
     companion object {
-        val callMe = "sfjn"
+        konst callMe = "sfjn"
     }
 }

@@ -10,21 +10,21 @@ suspend fun foo() {
         ))[0] != 5
     ) failure = true
 
-    val baz = baz(
+    konst baz = baz(
         bar(),
         bar2(),
         bar3()
     )
     if (baz[0] != 5 || baz[1] != 6 || baz[2] != 7) failure = true
 
-    val arrayOf = arrayOf(
+    konst arrayOf = arrayOf(
         bar(),
         bar2(),
         bar3()
     )
     if (arrayOf[0] != 5 || arrayOf[1] != 6 || arrayOf[2] != 7) failure = true
 
-    val baz1 = baz(
+    konst baz1 = baz(
         *arrayOf(
             bar3(),
             bar2(),
@@ -33,7 +33,7 @@ suspend fun foo() {
     )
     if (baz1[0] != 7 || baz1[1] != 6 || baz1[2] != 5) failure = true
 
-    val baz2 = baz(
+    konst baz2 = baz(
         *arrayOf(
             bar3(),
             bar2(),
@@ -42,7 +42,7 @@ suspend fun foo() {
     )
     if (baz2[0] != 7 || baz2[1] != 6 || baz2[2] != 5) failure = true
 
-    val baz3 = bar4(
+    konst baz3 = bar4(
         *baz(
             bar2(),
             bar(),
@@ -51,7 +51,7 @@ suspend fun foo() {
     )
     if (baz3[0] != 6 || baz3[1] != 5 || baz3[2] != 7) failure = true
 
-    val bah = bah(101, bar(), *intArrayOf(bar3(), bar2()), 8)
+    konst bah = bah(101, bar(), *intArrayOf(bar3(), bar2()), 8)
     if (bah[0] != 5 || bah[1] != 7 || bah[2] != 6 || bah[3] != 8 || bah[4] != 101) failure = true
 }
 

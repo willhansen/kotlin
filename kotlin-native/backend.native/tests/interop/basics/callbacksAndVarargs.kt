@@ -63,9 +63,9 @@ fun testVarargs() {
 }
 
 fun testCallableReferences() {
-    val sumRef = ::sum
+    konst sumRef = ::sum
     assertEquals(3, sumRef(1, 2))
 
-    val sumPtr = staticCFunction(::sum)
+    konst sumPtr = staticCFunction(::sum)
     assertEquals(7, sumPtr(3, 4))
 }

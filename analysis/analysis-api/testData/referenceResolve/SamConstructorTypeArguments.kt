@@ -1,2 +1,2 @@
-val c = java.util.<caret>Comparator<Int> { x, y -> 1 }
+konst c = java.util.<caret>Comparator<Int> { x, y -> 1 }
 

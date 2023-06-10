@@ -16,16 +16,16 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 open class BranchedValue(
-    val arg1: StackValue,
-    val arg2: StackValue? = null,
-    val operandType: Type,
-    val opcode: Int
+    konst arg1: StackValue,
+    konst arg2: StackValue? = null,
+    konst operandType: Type,
+    konst opcode: Int
 ) : StackValue(Type.BOOLEAN_TYPE) {
 
     override fun putSelector(type: Type, kotlinType: KotlinType?, v: InstructionAdapter) {
-        val branchJumpLabel = Label()
+        konst branchJumpLabel = Label()
         condJump(branchJumpLabel, v, true)
-        val endLabel = Label()
+        konst endLabel = Label()
         v.iconst(1)
         v.visitJumpInsn(GOTO, endLabel)
         v.visitLabel(branchJumpLabel)
@@ -47,9 +47,9 @@ open class BranchedValue(
     protected open fun patchOpcode(opcode: Int, v: InstructionAdapter): Int = opcode
 
     companion object {
-        val negatedOperations = hashMapOf<Int, Int>()
+        konst negatedOperations = hashMapOf<Int, Int>()
 
-        val TRUE: BranchedValue = object : BranchedValue(StackValue.none()/*not used*/, null, Type.BOOLEAN_TYPE, IFEQ) {
+        konst TRUE: BranchedValue = object : BranchedValue(StackValue.none()/*not used*/, null, Type.BOOLEAN_TYPE, IFEQ) {
             override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
                 v.nop()
                 if (!jumpIfFalse) {
@@ -72,7 +72,7 @@ open class BranchedValue(
             }
         }
 
-        val FALSE: BranchedValue = object : BranchedValue(StackValue.none()/*not used*/, null, Type.BOOLEAN_TYPE, IFEQ) {
+        konst FALSE: BranchedValue = object : BranchedValue(StackValue.none()/*not used*/, null, Type.BOOLEAN_TYPE, IFEQ) {
             override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
                 v.nop()
                 if (jumpIfFalse) {
@@ -110,7 +110,7 @@ open class BranchedValue(
             negatedOperations.put(negatedOp, op)
         }
 
-        fun booleanConstant(value: Boolean): BranchedValue = if (value) TRUE else FALSE
+        fun booleanConstant(konstue: Boolean): BranchedValue = if (konstue) TRUE else FALSE
 
         fun createInvertValue(argument: StackValue): StackValue = Invert(condJump(argument))
 
@@ -143,7 +143,7 @@ class And(
 ) : BranchedValue(BranchedValue.condJump(arg1), BranchedValue.condJump(arg2), Type.BOOLEAN_TYPE, IFEQ) {
 
     override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
-        val stayLabel = Label()
+        konst stayLabel = Label()
         (arg1 as CondJump).condJump(if (jumpIfFalse) jumpLabel else stayLabel, v, true)
         (arg2 as CondJump).condJump(jumpLabel, v, jumpIfFalse)
         v.visitLabel(stayLabel)
@@ -156,21 +156,21 @@ class Or(
 ) : BranchedValue(BranchedValue.condJump(arg1), BranchedValue.condJump(arg2), Type.BOOLEAN_TYPE, IFEQ) {
 
     override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
-        val stayLabel = Label()
+        konst stayLabel = Label()
         (arg1 as CondJump).condJump(if (jumpIfFalse) stayLabel else jumpLabel, v, false)
         (arg2 as CondJump).condJump(jumpLabel, v, jumpIfFalse)
         v.visitLabel(stayLabel)
     }
 }
 
-class Invert(val condition: BranchedValue) : BranchedValue(condition, null, Type.BOOLEAN_TYPE, IFEQ) {
+class Invert(konst condition: BranchedValue) : BranchedValue(condition, null, Type.BOOLEAN_TYPE, IFEQ) {
 
     override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
         condition.condJump(jumpLabel, v, !jumpIfFalse)
     }
 }
 
-class CondJump(val condition: BranchedValue, op: Int) : BranchedValue(condition, null, Type.BOOLEAN_TYPE, op) {
+class CondJump(konst condition: BranchedValue, op: Int) : BranchedValue(condition, null, Type.BOOLEAN_TYPE, op) {
 
     override fun putSelector(type: Type, kotlinType: KotlinType?, v: InstructionAdapter) {
         throw UnsupportedOperationException("Use condJump instead")
@@ -186,7 +186,7 @@ class CondJump(val condition: BranchedValue, op: Int) : BranchedValue(condition,
 }
 
 class NumberCompare(
-    private val opToken: IElementType,
+    private konst opToken: IElementType,
     operandType: Type,
     left: StackValue,
     right: StackValue
@@ -240,7 +240,7 @@ class ObjectCompare(
 
     companion object {
         fun getObjectCompareOpcode(opToken: IElementType): Int = when (opToken) {
-            // "==" and "!=" are here because enum values are compared using reference equality.
+            // "==" and "!=" are here because enum konstues are compared using reference equality.
             KtTokens.EQEQEQ, KtTokens.EQEQ -> IF_ACMPNE
             KtTokens.EXCLEQEQEQ, KtTokens.EXCLEQ -> IF_ACMPEQ
             else -> throw UnsupportedOperationException("don't know how to generate this condjump")

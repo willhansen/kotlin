@@ -12,13 +12,13 @@ import org.jetbrains.kotlin.native.interop.indexer.StructDecl
 import org.jetbrains.kotlin.native.interop.indexer.StructDef
 
 class SkiaStubsBuildingContextImpl(stubIrContext: StubIrContext) : StubsBuildingContextImpl(stubIrContext) {
-    override val declarationMapper = SkiaDeclarationMapperImpl()
+    override konst declarationMapper = SkiaDeclarationMapperImpl()
 
     inner class SkiaDeclarationMapperImpl : DeclarationMapperImpl() {
         override fun getKotlinClassForManaged(structDecl: StructDecl): Classifier {
             assert(structDecl.isSkiaSharedPointer)
-            val struct = structDecl.stripSkiaSharedPointer
-            val structArgument = nativeIndex.structs.singleOrNull {
+            konst struct = structDecl.stripSkiaSharedPointer
+            konst structArgument = nativeIndex.structs.singleOrNull {
                 it.spelling == struct && it.def != null
             } ?: error("Expected to find a single template arg struct by name: ${struct}")
             return getKotlinClassForPointed(structArgument)
@@ -26,7 +26,7 @@ class SkiaStubsBuildingContextImpl(stubIrContext: StubIrContext) : StubsBuilding
     }
 
     override fun isCppClass(spelling: String): Boolean {
-        val decl = nativeIndex.structs.firstOrNull { it.spelling == spelling } ?: return false
+        konst decl = nativeIndex.structs.firstOrNull { it.spelling == spelling } ?: return false
         return decl.def?.kind == StructDef.Kind.CLASS
     }
 

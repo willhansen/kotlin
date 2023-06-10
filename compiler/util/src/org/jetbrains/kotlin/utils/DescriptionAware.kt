@@ -17,5 +17,5 @@
 package org.jetbrains.kotlin.utils
 
 interface DescriptionAware {
-    val description: String
+    konst description: String
 }

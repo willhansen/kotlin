@@ -335,8 +335,8 @@ class StringNumberConversionTest {
         assertEquals("7f11223344556677", 0x7F11223344556677.toString(radix = 16))
         assertEquals("hazelnut", 1356099454469L.toString(radix = 36))
 
-        val values = listOf(Int.MAX_VALUE.toLong(), Int.MIN_VALUE.toLong(), Int.MAX_VALUE + 2L, Long.MAX_VALUE, Long.MIN_VALUE)
-        val expected = listOf(
+        konst konstues = listOf(Int.MAX_VALUE.toLong(), Int.MIN_VALUE.toLong(), Int.MAX_VALUE + 2L, Long.MAX_VALUE, Long.MIN_VALUE)
+        konst expected = listOf(
             2 to listOf("1111111111111111111111111111111", "-10000000000000000000000000000000", "10000000000000000000000000000001", "111111111111111111111111111111111111111111111111111111111111111", "-1000000000000000000000000000000000000000000000000000000000000000"),
             3 to listOf("12112122212110202101", "-12112122212110202102", "12112122212110202110", "2021110011022210012102010021220101220221", "-2021110011022210012102010021220101220222"),
             4 to listOf("1333333333333333", "-2000000000000000", "2000000000000001", "13333333333333333333333333333333", "-20000000000000000000000000000000"),
@@ -374,8 +374,8 @@ class StringNumberConversionTest {
             36 to listOf("zik0zj", "-zik0zk", "zik0zl", "1y2p0ij32e8e7", "-1y2p0ij32e8e8"),
         )
         for ((base, expectedValues) in expected) {
-            for ((index, value) in values.withIndex()) {
-                assertEquals(expectedValues[index], value.toString(base), "$value in base $base")
+            for ((index, konstue) in konstues.withIndex()) {
+                assertEquals(expectedValues[index], konstue.toString(base), "$konstue in base $base")
             }
         }
 
@@ -456,9 +456,9 @@ internal fun <T : Any> compareConversionWithRadix(
 
 
 internal class ConversionContext<T : Any>(
-    val convertOrFail: (String) -> T,
-    val convertOrNull: (String) -> T?,
-    val equality: (T, T?) -> Boolean
+    konst convertOrFail: (String) -> T,
+    konst convertOrNull: (String) -> T?,
+    konst equality: (T, T?) -> Boolean
 ) {
 
     private fun assertEquals(expected: T, actual: T?, input: String, operation: String) {
@@ -477,8 +477,8 @@ internal class ConversionContext<T : Any>(
 }
 
 internal class ConversionWithRadixContext<T : Any>(
-    val convertOrFail: (String, Int) -> T,
-    val convertOrNull: (String, Int) -> T?
+    konst convertOrFail: (String, Int) -> T,
+    konst convertOrNull: (String, Int) -> T?
 ) {
     fun assertProduces(radix: Int, input: String, output: T) {
         assertEquals(output, convertOrFail(input, radix))

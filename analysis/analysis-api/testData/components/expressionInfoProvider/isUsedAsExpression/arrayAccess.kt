@@ -1,3 +1,3 @@
 fun main(args: Array<String>) {
-    val s = <expr>args[0]</expr>
+    konst s = <expr>args[0]</expr>
 }

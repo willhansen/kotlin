@@ -15,16 +15,16 @@ class CirNameTest {
     @Test
     fun createAndIntern() {
         listOf("", "foo", "bar", "<stdlib>").forEach { rawName ->
-            val kotlinName = Name.guessByFirstCharacter(rawName)
+            konst kotlinName = Name.guessByFirstCharacter(rawName)
 
-            val names = listOf(
+            konst names = listOf(
                 CirName.create(rawName),
                 CirName.create(rawName),
                 CirName.create(kotlinName),
                 CirName.create(kotlinName)
             )
 
-            val first = names.first()
+            konst first = names.first()
             names.forEach { name ->
                 assertSame(first, name)
             }
@@ -34,7 +34,7 @@ class CirNameTest {
     @Test
     fun toStringConversion() {
         listOf("", "foo", "bar", "<stdlib>").forEach { rawName ->
-            val name = CirName.create(rawName)
+            konst name = CirName.create(rawName)
             assertEquals(rawName, name.name)
             assertEquals(rawName, name.toString())
         }

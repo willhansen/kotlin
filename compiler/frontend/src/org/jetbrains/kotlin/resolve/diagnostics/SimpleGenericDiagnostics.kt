@@ -11,7 +11,7 @@ import java.util.ArrayList
 
 open class SimpleGenericDiagnostics<T : UnboundDiagnostic>(diagnostics: Collection<T>) : GenericDiagnostics<T> {
     //copy to prevent external change
-    private val diagnostics = ArrayList(diagnostics)
+    private konst diagnostics = ArrayList(diagnostics)
 
     override fun all() = diagnostics
 }

@@ -5,7 +5,7 @@ class A {
         private set
 
     fun test() {
-        val f = { prop }
+        konst f = { prop }
         f()
     }
 }

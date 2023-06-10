@@ -13,62 +13,62 @@ import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.metadata.deserialization.Flags
 
 internal object FirAnnotationArgumentVisitor : AnnotationArgumentVisitor<Unit, FirAnnotationArgumentVisitorData>() {
-    override fun visitAnnotationValue(value: AnnotationValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitAnnotationValue(konstue: AnnotationValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.ANNOTATION
-        data.builder.annotation = data.serializer.serializeAnnotation(value)
+        data.builder.annotation = data.serializer.serializeAnnotation(konstue)
     }
 
-    override fun visitArrayValue(value: ArrayValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitArrayValue(konstue: ArrayValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.ARRAY
-        for (element in value.value) {
-            data.builder.addArrayElement(data.serializer.valueProto(element).build())
+        for (element in konstue.konstue) {
+            data.builder.addArrayElement(data.serializer.konstueProto(element).build())
         }
     }
 
-    override fun visitBooleanValue(value: BooleanValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitBooleanValue(konstue: BooleanValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.BOOLEAN
-        data.builder.intValue = if (value.value) 1 else 0
+        data.builder.intValue = if (konstue.konstue) 1 else 0
     }
 
-    override fun visitByteValue(value: ByteValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitByteValue(konstue: ByteValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.BYTE
-        data.builder.intValue = value.value.toLong()
+        data.builder.intValue = konstue.konstue.toLong()
     }
 
-    override fun visitCharValue(value: CharValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitCharValue(konstue: CharValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.CHAR
-        data.builder.intValue = value.value.code.toLong()
+        data.builder.intValue = konstue.konstue.code.toLong()
     }
 
-    override fun visitDoubleValue(value: DoubleValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitDoubleValue(konstue: DoubleValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.DOUBLE
-        data.builder.doubleValue = value.value
+        data.builder.doubleValue = konstue.konstue
     }
 
-    override fun visitEnumValue(value: EnumValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitEnumValue(konstue: EnumValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.ENUM
-        data.builder.classId = data.stringTable.getQualifiedClassNameIndex(value.enumClassId)
-        data.builder.enumValueId = data.stringTable.getStringIndex(value.enumEntryName.asString())
+        data.builder.classId = data.stringTable.getQualifiedClassNameIndex(konstue.enumClassId)
+        data.builder.enumValueId = data.stringTable.getStringIndex(konstue.enumEntryName.asString())
     }
 
-    override fun visitErrorValue(value: ErrorValue, data: FirAnnotationArgumentVisitorData) {
-        throw UnsupportedOperationException("Error value: $value")
+    override fun visitErrorValue(konstue: ErrorValue, data: FirAnnotationArgumentVisitorData) {
+        throw UnsupportedOperationException("Error konstue: $konstue")
     }
 
-    override fun visitFloatValue(value: FloatValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitFloatValue(konstue: FloatValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.FLOAT
-        data.builder.floatValue = value.value
+        data.builder.floatValue = konstue.konstue
     }
 
-    override fun visitIntValue(value: IntValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitIntValue(konstue: IntValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.INT
-        data.builder.intValue = value.value.toLong()
+        data.builder.intValue = konstue.konstue.toLong()
     }
 
-    override fun visitKClassValue(value: KClassValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitKClassValue(konstue: KClassValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.CLASS
 
-        when (val classValue = value.value) {
+        when (konst classValue = konstue.konstue) {
             is KClassValue.Value.NormalClass -> {
                 data.builder.classId = data.stringTable.getQualifiedClassNameIndex(classValue.classId)
 
@@ -84,7 +84,7 @@ internal object FirAnnotationArgumentVisitor : AnnotationArgumentVisitor<Unit, F
                     arrayDimensions++
                 }
 
-                //val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor
+                //konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor
                 //    ?: error("Type parameters are not allowed in class literal annotation arguments: $classValue")
                 // TODO: classId = stringTable.getFqNameIndex(descriptor)
 
@@ -95,46 +95,46 @@ internal object FirAnnotationArgumentVisitor : AnnotationArgumentVisitor<Unit, F
         }
     }
 
-    override fun visitLongValue(value: LongValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitLongValue(konstue: LongValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.LONG
-        data.builder.intValue = value.value
+        data.builder.intValue = konstue.konstue
     }
 
-    override fun visitNullValue(value: NullValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitNullValue(konstue: NullValue, data: FirAnnotationArgumentVisitorData) {
         throw UnsupportedOperationException("Null should not appear in annotation arguments")
     }
 
-    override fun visitShortValue(value: ShortValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitShortValue(konstue: ShortValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.SHORT
-        data.builder.intValue = value.value.toLong()
+        data.builder.intValue = konstue.konstue.toLong()
     }
 
-    override fun visitStringValue(value: StringValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitStringValue(konstue: StringValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.STRING
-        data.builder.stringValue = data.stringTable.getStringIndex(value.value)
+        data.builder.stringValue = data.stringTable.getStringIndex(konstue.konstue)
     }
 
-    override fun visitUByteValue(value: UByteValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitUByteValue(konstue: UByteValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.BYTE
-        data.builder.intValue = value.value.toLong()
+        data.builder.intValue = konstue.konstue.toLong()
         data.builder.flags = Flags.IS_UNSIGNED.toFlags(true)
     }
 
-    override fun visitUShortValue(value: UShortValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitUShortValue(konstue: UShortValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.SHORT
-        data.builder.intValue = value.value.toLong()
+        data.builder.intValue = konstue.konstue.toLong()
         data.builder.flags = Flags.IS_UNSIGNED.toFlags(true)
     }
 
-    override fun visitUIntValue(value: UIntValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitUIntValue(konstue: UIntValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.INT
-        data.builder.intValue = value.value.toLong()
+        data.builder.intValue = konstue.konstue.toLong()
         data.builder.flags = Flags.IS_UNSIGNED.toFlags(true)
     }
 
-    override fun visitULongValue(value: ULongValue, data: FirAnnotationArgumentVisitorData) {
+    override fun visitULongValue(konstue: ULongValue, data: FirAnnotationArgumentVisitorData) {
         data.builder.type = ProtoBuf.Annotation.Argument.Value.Type.LONG
-        data.builder.intValue = value.value
+        data.builder.intValue = konstue.konstue
         data.builder.flags = Flags.IS_UNSIGNED.toFlags(true)
     }
 }

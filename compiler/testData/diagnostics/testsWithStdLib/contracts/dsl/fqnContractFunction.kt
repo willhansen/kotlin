@@ -13,7 +13,7 @@ inline fun foo(block: () -> Unit) {
 }
 
 fun main() {
-    val x: Int
+    konst x: Int
     foo {
         x = 42
     }

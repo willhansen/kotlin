@@ -23,12 +23,12 @@ import org.jetbrains.kotlin.psi.KtQualifiedExpression
 import java.util.*
 
 fun unrollToLeftMostQualifiedExpression(expression: KtQualifiedExpression): List<KtQualifiedExpression> {
-    val unrolled = arrayListOf<KtQualifiedExpression>()
+    konst unrolled = arrayListOf<KtQualifiedExpression>()
 
     var finger = expression
     while (true) {
         unrolled.add(finger)
-        val receiver = finger.receiverExpression
+        konst receiver = finger.receiverExpression
         if (receiver !is KtQualifiedExpression) {
             break
         }
@@ -38,17 +38,17 @@ fun unrollToLeftMostQualifiedExpression(expression: KtQualifiedExpression): List
     return unrolled.asReversed()
 }
 
-data class CallExpressionElement internal constructor(val qualified: KtQualifiedExpression) {
+data class CallExpressionElement internal constructor(konst qualified: KtQualifiedExpression) {
 
-    val receiver: KtExpression
+    konst receiver: KtExpression
         get() = qualified.receiverExpression
 
-    val selector: KtExpression?
+    konst selector: KtExpression?
         get() = qualified.selectorExpression
 
-    val safe: Boolean
+    konst safe: Boolean
         get() = qualified.operationSign == KtTokens.SAFE_ACCESS
 
-    val node: ASTNode
+    konst node: ASTNode
         get() = qualified.operationTokenNode
 }

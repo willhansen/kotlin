@@ -3,7 +3,7 @@
 package foo
 
 @JsModule("./externalProperty.mjs")
-external val foo: Int = definedExternally
+external konst foo: Int = definedExternally
 
 fun box(): String {
     assertEquals(23, foo)

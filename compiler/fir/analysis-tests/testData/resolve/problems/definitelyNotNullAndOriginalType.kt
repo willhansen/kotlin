@@ -5,11 +5,11 @@
 import org.jetbrains.annotations.NotNull;
 
 public interface SLRUMap<V> {
-    void takeV(@NotNull V value);
+    void takeV(@NotNull V konstue);
 }
 
 // FILE: main.kt
 
-fun <V> SLRUMap<V>.getOrPut(value: V) {
-    takeV(<!ARGUMENT_TYPE_MISMATCH!>value<!>)
+fun <V> SLRUMap<V>.getOrPut(konstue: V) {
+    takeV(<!ARGUMENT_TYPE_MISMATCH!>konstue<!>)
 }

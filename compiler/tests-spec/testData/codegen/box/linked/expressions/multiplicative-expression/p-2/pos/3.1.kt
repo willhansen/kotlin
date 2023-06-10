@@ -27,13 +27,13 @@ class A(var a: Int) {
 }
 
 fun box(): String {
-    val a1 = A(-1)
-    val a2 = A(5)
-    val x = a1 % a2
+    konst a1 = A(-1)
+    konst a2 = A(5)
+    konst x = a1 % a2
 
     if (a1.isCalled && !a2.isCalled) {
-        val a3 = A(3)
-        val y = a3 % 2
+        konst a3 = A(3)
+        konst y = a3 % 2
         if (a3.isCalledInt)
             return "OK"
     }

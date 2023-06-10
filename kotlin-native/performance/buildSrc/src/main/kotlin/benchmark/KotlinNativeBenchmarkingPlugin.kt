@@ -12,13 +12,13 @@ import org.jetbrains.kotlin.konan.target.HostManager
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
-private val NamedDomainObjectContainer<KotlinSourceSet>.jvmMain
+private konst NamedDomainObjectContainer<KotlinSourceSet>.jvmMain
     get() = maybeCreate("jvmMain")
 
-private val Project.jvmWarmup: Int
+private konst Project.jvmWarmup: Int
     get() = (property("jvmWarmup") as String).toInt()
 
-private val Project.jvmBenchResults: String
+private konst Project.jvmBenchResults: String
     get() = property("jvmBenchResults") as String
 
 open class KotlinNativeBenchmarkExtension @Inject constructor(project: Project) : BenchmarkExtension(project) {
@@ -41,12 +41,12 @@ open class KotlinNativeBenchmarkingPlugin: BenchmarkingPlugin() {
             description = "Builds the benchmarking report for Kotlin/JVM."
 
             doLast {
-                val applicationName = benchmark.applicationName
-                val jarPath = (tasks.getByName("jvmJar") as Jar).archiveFile.get().asFile
-                val jvmCompileTime = getJvmCompileTime(project, applicationName)
-                val benchContents = buildDir.resolve(jvmBenchResults).readText()
+                konst applicationName = benchmark.applicationName
+                konst jarPath = (tasks.getByName("jvmJar") as Jar).archiveFile.get().asFile
+                konst jvmCompileTime = getJvmCompileTime(project, applicationName)
+                konst benchContents = buildDir.resolve(jvmBenchResults).readText()
 
-                val properties: Map<String, Any> = commonBenchmarkProperties + mapOf(
+                konst properties: Map<String, Any> = commonBenchmarkProperties + mapOf(
                         "type" to "jvm",
                         "compilerVersion" to kotlinVersion,
                         "benchmarks" to benchContents,
@@ -54,7 +54,7 @@ open class KotlinNativeBenchmarkingPlugin: BenchmarkingPlugin() {
                         "codeSize" to getCodeSizeBenchmark(applicationName, jarPath.absolutePath)
                 )
 
-                val output = createJsonReport(properties)
+                konst output = createJsonReport(properties)
                 buildDir.resolve(jvmJson).writeText(output)
             }
 
@@ -65,8 +65,8 @@ open class KotlinNativeBenchmarkingPlugin: BenchmarkingPlugin() {
     override fun Project.configureJvmTask(): Task {
         return tasks.create("jvmRun", RunJvmTask::class.java) {
             dependsOn("jvmJar")
-            val mainCompilation = kotlin.jvm().compilations.getByName("main")
-            val runtimeDependencies = configurations.getByName(mainCompilation.runtimeDependencyConfigurationName)
+            konst mainCompilation = kotlin.jvm().compilations.getByName("main")
+            konst runtimeDependencies = configurations.getByName(mainCompilation.runtimeDependencyConfigurationName)
             classpath(files(mainCompilation.output.allOutputs, runtimeDependencies))
             mainClass.set("MainKt")
 
@@ -74,7 +74,7 @@ open class KotlinNativeBenchmarkingPlugin: BenchmarkingPlugin() {
             description = "Runs the benchmark for Kotlin/JVM."
 
             // Specify settings configured by a user in the benchmark extension.
-            afterEvaluate {
+            afterEkonstuate {
                 args("-p", "${benchmark.applicationName}::")
                 warmupCount = jvmWarmup
                 repeatCount = attempts
@@ -84,22 +84,22 @@ open class KotlinNativeBenchmarkingPlugin: BenchmarkingPlugin() {
         }
     }
 
-    override val benchmarkExtensionClass: KClass<*>
+    override konst benchmarkExtensionClass: KClass<*>
         get() = KotlinNativeBenchmarkExtension::class
 
-    override val Project.benchmark: KotlinNativeBenchmarkExtension
+    override konst Project.benchmark: KotlinNativeBenchmarkExtension
         get() = extensions.getByName(benchmarkExtensionName) as KotlinNativeBenchmarkExtension
 
-    override val benchmarkExtensionName: String = "benchmark"
+    override konst benchmarkExtensionName: String = "benchmark"
 
-    private val Project.nativeBinary: Executable
+    private konst Project.nativeBinary: Executable
         get() = (kotlin.targets.getByName(NATIVE_TARGET_NAME) as KotlinNativeTarget)
             .binaries.getExecutable(NATIVE_EXECUTABLE_NAME, benchmark.buildType)
 
-    override val Project.nativeExecutable: String
+    override konst Project.nativeExecutable: String
         get() = nativeBinary.outputFile.absolutePath
 
-    override val Project.nativeLinkTask: Task
+    override konst Project.nativeLinkTask: Task
         get() = nativeBinary.linkTask
 
     override fun configureMPPExtension(project: Project) {
@@ -144,6 +144,6 @@ open class KotlinNativeBenchmarkingPlugin: BenchmarkingPlugin() {
     }
 
     companion object {
-        const val BENCHMARK_EXTENSION_NAME = "benchmark"
+        const konst BENCHMARK_EXTENSION_NAME = "benchmark"
     }
 }

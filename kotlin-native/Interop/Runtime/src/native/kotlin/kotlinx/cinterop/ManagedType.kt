@@ -14,7 +14,7 @@ interface SkiaRefCnt
 interface CPlusPlusClass
 
 @ExperimentalForeignApi
-abstract class ManagedType<T : CStructVar>(val cpp: T)
+abstract class ManagedType<T : CStructVar>(konst cpp: T)
 
 @ExperimentalForeignApi
-val <T : CStructVar> ManagedType<T>.ptr: CPointer<T> get() = this.cpp.ptr
+konst <T : CStructVar> ManagedType<T>.ptr: CPointer<T> get() = this.cpp.ptr

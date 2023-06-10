@@ -1,7 +1,7 @@
 package
 
 package a {
-    public val f: kotlin.reflect.KClass<a.Companion>
+    public konst f: kotlin.reflect.KClass<a.Companion>
 
     public final class Companion {
         public constructor Companion()

@@ -29,7 +29,7 @@ import org.junit.Test
 class JsonTest {
     @Test
     fun complex() {
-        val input = """
+        konst input = """
             {
                 "a": [ 1, 2, { "x" : 3 }, [ 5 ] ],
                 "b": 1,
@@ -41,10 +41,10 @@ class JsonTest {
             }
         """.trimIndent()
 
-        val first = org.jetbrains.kotlin.js.parser.sourcemaps.parseJson(input)
-        val second = org.jetbrains.kotlin.js.parser.sourcemaps.parseJson(first.toString())
+        konst first = org.jetbrains.kotlin.js.parser.sourcemaps.parseJson(input)
+        konst second = org.jetbrains.kotlin.js.parser.sourcemaps.parseJson(first.toString())
 
-        val expected = JsonObject(
+        konst expected = JsonObject(
                 "a" to JsonArray(
                         JsonNumber(1.0),
                         JsonNumber(2.0),

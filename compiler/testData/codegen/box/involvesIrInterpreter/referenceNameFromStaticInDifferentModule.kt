@@ -6,7 +6,7 @@
 
 object A {
     @JvmStatic
-    val somePropertyFromObject: Int = 0
+    konst somePropertyFromObject: Int = 0
 
     @JvmStatic
     fun someFunctionFromObject(str: String): String = str
@@ -15,7 +15,7 @@ object A {
 class B {
     companion object {
         @JvmStatic
-        val somePropertyFromCompanionObject: Int = 0
+        konst somePropertyFromCompanionObject: Int = 0
 
         @JvmStatic
         fun someFunctionFromCompanionObject(str: String): String = str
@@ -26,11 +26,11 @@ class B {
 // FILE: main.kt
 
 fun box(): String {
-    // `name` call must be optimized with `ConstEvaluationLowering`
-    val somePropertyFromObjectName = A::somePropertyFromObject.<!EVALUATED("somePropertyFromObject")!>name<!>
-    val someFunctionFromObjectName = A::someFunctionFromObject.<!EVALUATED("someFunctionFromObject")!>name<!>
-    val somePropertyFromCompanionObjectName = B.Companion::somePropertyFromCompanionObject.<!EVALUATED("somePropertyFromCompanionObject")!>name<!>
-    val someFunctionFromCompanionObjectName = B.Companion::someFunctionFromCompanionObject.<!EVALUATED("someFunctionFromCompanionObject")!>name<!>
+    // `name` call must be optimized with `ConstEkonstuationLowering`
+    konst somePropertyFromObjectName = A::somePropertyFromObject.<!EVALUATED("somePropertyFromObject")!>name<!>
+    konst someFunctionFromObjectName = A::someFunctionFromObject.<!EVALUATED("someFunctionFromObject")!>name<!>
+    konst somePropertyFromCompanionObjectName = B.Companion::somePropertyFromCompanionObject.<!EVALUATED("somePropertyFromCompanionObject")!>name<!>
+    konst someFunctionFromCompanionObjectName = B.Companion::someFunctionFromCompanionObject.<!EVALUATED("someFunctionFromCompanionObject")!>name<!>
 
     if (somePropertyFromObjectName != "somePropertyFromObject") return "Fail 1"
     if (someFunctionFromObjectName != "someFunctionFromObject") return "Fail 2"

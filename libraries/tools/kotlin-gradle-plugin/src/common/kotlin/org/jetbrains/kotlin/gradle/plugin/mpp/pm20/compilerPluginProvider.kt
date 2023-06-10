@@ -38,22 +38,22 @@ private fun Project.compilerPluginDataProvider(
     pluginDataList: () -> List<PluginData>
 ): Provider<KotlinCompilerPluginData> {
     return newProperty {
-        val configurationName = compilationData.pluginClasspathConfigurationName()
-        val builder = CompilerPluginOptionsBuilder(project, configurationName)
+        konst configurationName = compilationData.pluginClasspathConfigurationName()
+        konst builder = CompilerPluginOptionsBuilder(project, configurationName)
         builder += pluginDataList()
         builder.build()
     }.apply { disallowUnsafeRead() }
 }
 
 private class CompilerPluginOptionsBuilder(
-    private val project: Project,
-    private val configurationName: String
+    private konst project: Project,
+    private konst configurationName: String
 ) {
-    private val pluginOptions = CompilerPluginOptions()
-    private val artifacts = mutableListOf<String>()
-    private val gradleInputs = mutableMapOf<String, MutableList<String>>()
-    private val gradleInputFiles = mutableSetOf<File>()
-    private val gradleOutputFiles = mutableSetOf<File>()
+    private konst pluginOptions = CompilerPluginOptions()
+    private konst artifacts = mutableListOf<String>()
+    private konst gradleInputs = mutableMapOf<String, MutableList<String>>()
+    private konst gradleInputFiles = mutableSetOf<File>()
+    private konst gradleOutputFiles = mutableSetOf<File>()
 
     operator fun plusAssign(pluginData: PluginData) {
         artifacts += pluginData.artifact.toGradleCoordinates()
@@ -83,12 +83,12 @@ private class CompilerPluginOptionsBuilder(
                 }
             is StringOption -> gradleInputs
                 .getOrPut("${pluginId}.${option.key}") { mutableListOf() }
-                .add(option.value)
+                .add(option.konstue)
         }
     }
 
     fun build(): KotlinCompilerPluginData {
-        val pluginClasspathConfiguration =
+        konst pluginClasspathConfiguration =
             project.configurations.maybeCreate(configurationName).apply {
                 isCanBeConsumed = false
                 isCanBeResolved = true
@@ -109,11 +109,11 @@ private class CompilerPluginOptionsBuilder(
     }
 
     private fun Map<String, List<String>>.flattenWithIndex(): Map<String, String> {
-        val result = mutableMapOf<String, String>()
+        konst result = mutableMapOf<String, String>()
 
-        for ((key, values) in this) {
-            for ((index, value) in values.withIndex()) {
-                result["${key}.$index"] = value
+        for ((key, konstues) in this) {
+            for ((index, konstue) in konstues.withIndex()) {
+                result["${key}.$index"] = konstue
             }
         }
 
@@ -122,7 +122,7 @@ private class CompilerPluginOptionsBuilder(
 
     private fun PluginOption.toSubpluginOption() = when (this) {
         is FilesOption -> FilesSubpluginOption(key, files)
-        is StringOption -> SubpluginOption(key, value)
+        is StringOption -> SubpluginOption(key, konstue)
     }
 
     private fun PluginData.ArtifactCoordinates.toGradleCoordinates(): String =

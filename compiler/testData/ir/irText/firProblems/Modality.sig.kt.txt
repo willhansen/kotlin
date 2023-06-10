@@ -5,7 +5,7 @@ class Atom {
   // CHECK:
   //   Mangled name: Atom{}candidateDescriptor
   //   Public signature: /Atom.candidateDescriptor|-3112599931076785471[0]
-  val candidateDescriptor: CallableDescriptor
+  konst candidateDescriptor: CallableDescriptor
     // CHECK JVM_IR:
     //   Mangled name: Atom#<get-candidateDescriptor>(){}CallableDescriptor
     //   Public signature: /Atom.candidateDescriptor.<get-candidateDescriptor>|4556132200066715385[0]
@@ -25,7 +25,7 @@ class KotlinResolutionCandidate {
   // CHECK:
   //   Mangled name: KotlinResolutionCandidate{}resolvedCall
   //   Public signature: /KotlinResolutionCandidate.resolvedCall|-2429780263902948392[0]
-  val resolvedCall: Atom
+  konst resolvedCall: Atom
     // CHECK JVM_IR:
     //   Mangled name: KotlinResolutionCandidate#<get-resolvedCall>(){}Atom
     //   Public signature: /KotlinResolutionCandidate.resolvedCall.<get-resolvedCall>|49370572931497711[0]

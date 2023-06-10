@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.commonizer.utils
 
 /** Fixed-size ordered collection with no extra space that represents a commonized group of same-rank elements */
 class CommonizedGroup<T : Any>(
-    override val size: Int,
+    override konst size: Int,
     initialize: (Int) -> T?
 ) : AbstractList<T?>() {
     constructor(elements: List<T?>) : this(elements.size, elements::get)
@@ -16,19 +16,19 @@ class CommonizedGroup<T : Any>(
 
     // array constructor requires concrete type which is known only at the call site,
     // so let's use `Any?` instead if `T` here
-    private val elements = Array<Any?>(size, initialize)
+    private konst elements = Array<Any?>(size, initialize)
 
     override operator fun get(index: Int): T? {
         @Suppress("UNCHECKED_CAST")
         return elements[index] as T?
     }
 
-    operator fun set(index: Int, value: T?) {
-        val oldValue = this[index]
-        check(oldValue == null || value == null) {
-            "$oldValue can not be overwritten with $value at index $index"
+    operator fun set(index: Int, konstue: T?) {
+        konst oldValue = this[index]
+        check(oldValue == null || konstue == null) {
+            "$oldValue can not be overwritten with $konstue at index $index"
         }
 
-        elements[index] = value
+        elements[index] = konstue
     }
 }

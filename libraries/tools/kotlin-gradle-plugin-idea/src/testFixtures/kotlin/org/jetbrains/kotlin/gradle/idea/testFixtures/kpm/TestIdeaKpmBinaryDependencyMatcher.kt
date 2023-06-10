@@ -24,9 +24,9 @@ fun buildIdeaKpmBinaryDependencyMatchers(notation: Any?): List<TestIdeaKpmBinary
 
 interface TestIdeaKpmBinaryDependencyMatcher : TestIdeaKpmDependencyMatcher<IdeaKpmBinaryDependency> {
     class Coordinates(
-        private val coordinates: IdeaKpmBinaryCoordinates
+        private konst coordinates: IdeaKpmBinaryCoordinates
     ) : TestIdeaKpmBinaryDependencyMatcher {
-        override val description: String = coordinates.toString()
+        override konst description: String = coordinates.toString()
 
         override fun matches(dependency: IdeaKpmBinaryDependency): Boolean {
             return coordinates == dependency.coordinates
@@ -34,9 +34,9 @@ interface TestIdeaKpmBinaryDependencyMatcher : TestIdeaKpmDependencyMatcher<Idea
     }
 
     class CoordinatesRegex(
-        private val regex: Regex
+        private konst regex: Regex
     ) : TestIdeaKpmBinaryDependencyMatcher {
-        override val description: String = regex.pattern
+        override konst description: String = regex.pattern
 
         override fun matches(dependency: IdeaKpmBinaryDependency): Boolean {
             return regex.matches(dependency.coordinates.toString())
@@ -44,9 +44,9 @@ interface TestIdeaKpmBinaryDependencyMatcher : TestIdeaKpmDependencyMatcher<Idea
     }
 
     class BinaryFile(
-        private val binaryFile: File
+        private konst binaryFile: File
     ) : TestIdeaKpmBinaryDependencyMatcher {
-        override val description: String = binaryFile.path
+        override konst description: String = binaryFile.path
 
         override fun matches(dependency: IdeaKpmBinaryDependency): Boolean {
             return dependency is IdeaKpmResolvedBinaryDependency && dependency.binaryFile == binaryFile
@@ -54,11 +54,11 @@ interface TestIdeaKpmBinaryDependencyMatcher : TestIdeaKpmDependencyMatcher<Idea
     }
 
     class InDirectory(
-        private val parentFile: File
+        private konst parentFile: File
     ) : TestIdeaKpmBinaryDependencyMatcher {
         constructor(parentFilePath: String) : this(File(parentFilePath))
 
-        override val description: String = "$parentFile/**"
+        override konst description: String = "$parentFile/**"
 
         override fun matches(dependency: IdeaKpmBinaryDependency): Boolean {
             return dependency is IdeaKpmResolvedBinaryDependency &&

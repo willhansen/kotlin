@@ -25,18 +25,18 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.unwrapParenthesesLabelsAndAnnotations
 
 internal class KtFirExpressionInfoProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtExpressionInfoProvider(), KtFirAnalysisSessionComponent {
     override fun getReturnExpressionTargetSymbol(returnExpression: KtReturnExpression): KtCallableSymbol? {
-        val fir = returnExpression.getOrBuildFirSafe<FirReturnExpression>(firResolveSession) ?: return null
-        val firTargetSymbol = fir.target.labeledElement
+        konst fir = returnExpression.getOrBuildFirSafe<FirReturnExpression>(firResolveSession) ?: return null
+        konst firTargetSymbol = fir.target.labeledElement
         if (firTargetSymbol is FirErrorFunction) return null
         return firSymbolBuilder.callableBuilder.buildCallableSymbol(firTargetSymbol.symbol)
     }
 
     override fun getWhenMissingCases(whenExpression: KtWhenExpression): List<WhenMissingCase> {
-        val firWhenExpression = whenExpression.getOrBuildFirSafe<FirWhenExpression>(analysisSession.firResolveSession) ?: return emptyList()
+        konst firWhenExpression = whenExpression.getOrBuildFirSafe<FirWhenExpression>(analysisSession.firResolveSession) ?: return emptyList()
         return FirWhenExhaustivenessTransformer.computeAllMissingCases(analysisSession.firResolveSession.useSiteFirSession, firWhenExpression)
     }
 
@@ -213,7 +213,7 @@ internal class KtFirExpressionInfoProvider(
             is KtNamedFunction ->
                 doesNamedFunctionUseBody(parent, child)
 
-            // Function parameter declarations use their default value expressions.
+            // Function parameter declarations use their default konstue expressions.
             is KtParameter ->
                 parent.defaultValue == child
 
@@ -296,7 +296,7 @@ internal class KtFirExpressionInfoProvider(
             is KtWhileExpressionBase ->
                 parent.condition == child
 
-            // Return expressions use the return value
+            // Return expressions use the return konstue
             is KtReturnExpression ->
                 parent.returnedExpression == child
 
@@ -364,7 +364,7 @@ internal class KtFirExpressionInfoProvider(
  *  If it resolves to a non-class declaration, it does _not_ refer to a type.
  */
 private fun doesDoubleColonUseLHS(lhs: PsiElement): Boolean {
-    val reference = when (val inner = lhs.unwrapParenthesesLabelsAndAnnotations()) {
+    konst reference = when (konst inner = lhs.unwrapParenthesesLabelsAndAnnotations()) {
         is KtReferenceExpression ->
             inner.mainReference
         is KtDotQualifiedExpression ->
@@ -372,7 +372,7 @@ private fun doesDoubleColonUseLHS(lhs: PsiElement): Boolean {
         else ->
             return true
     }
-    val resolution = reference.resolve()
+    konst resolution = reference.resolve()
     return resolution != null && resolution !is KtClass
 }
 
@@ -381,7 +381,7 @@ private fun doesDoubleColonUseLHS(lhs: PsiElement): Boolean {
  * consider
  *
  *   1)   fun f() { 54 }; f()
- *   2)   val f = { 54 }; f()
+ *   2)   konst f = { 54 }; f()
  *
  * in which the `f` in 2) is regarded as used and `f` in 1) is not.
  */
@@ -400,7 +400,7 @@ private fun doesPropertyAccessorUseBody(propertyAccessor: KtPropertyAccessor, bo
 }
 
 /**
- * Returns whether the function uses its body as an expression (i.e., the function uses the result value of the expression) or not.
+ * Returns whether the function uses its body as an expression (i.e., the function uses the result konstue of the expression) or not.
  *
  * Named functions do not consider their bodies used if
  *  - the function body is a block e.g., `fun foo(): Int { return bar }` or
@@ -423,7 +423,7 @@ private fun doesNamedFunctionUseBody(namedFunction: KtNamedFunction, body: PsiEl
 
 
 private fun KtAnalysisSession.isSimpleVariableAccessCall(reference: KtReferenceExpression): Boolean =
-    when (val resolution = reference.resolveCall()) {
+    when (konst resolution = reference.resolveCall()) {
         is KtSuccessCallInfo ->
             resolution.call is KtSimpleVariableAccessCall
         else ->

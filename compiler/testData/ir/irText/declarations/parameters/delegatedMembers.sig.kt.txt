@@ -9,7 +9,7 @@ class Test<TT : Any?> : IBase<TT> {
   // CHECK:
   //   Mangled name: Test.$$delegate_0
   //   Public signature: /Test.$$delegate_0|-7286425919675154353[0]
-  private /* final field */ val $$delegate_0: IBase<TT>
+  private /* final field */ konst $$delegate_0: IBase<TT>
   // CHECK:
   //   Mangled name: Test#foo(kotlin.Int){}
   //   Public signature: /Test.foo|-104159190164110731[0]
@@ -23,7 +23,7 @@ class Test<TT : Any?> : IBase<TT> {
   // CHECK:
   //   Mangled name: Test{}bar
   //   Public signature: /Test.bar|-7864284097863469857[0]
-  override val bar: Int
+  override konst bar: Int
     // CHECK JVM_IR:
     //   Mangled name: Test#<get-bar>(){}kotlin.Int
     //   Public signature: /Test.bar.<get-bar>|-7403724005139201014[0]
@@ -52,7 +52,7 @@ interface IBase<T : Any?> {
   // CHECK:
   //   Mangled name: IBase{}bar
   //   Public signature: /IBase.bar|-7864284097863469857[0]
-  abstract val bar: Int
+  abstract konst bar: Int
     // CHECK JVM_IR:
     //   Mangled name: IBase#<get-bar>(){}kotlin.Int
     //   Public signature: /IBase.bar.<get-bar>|-7403724005139201014[0]

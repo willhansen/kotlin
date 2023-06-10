@@ -1,8 +1,8 @@
 class A {
-    open inner class Inner(val result: String = "OK", val int: Int)
+    open inner class Inner(konst result: String = "OK", konst int: Int)
 
     fun box(): String {
-        val o = object : Inner(int = 0) {
+        konst o = object : Inner(int = 0) {
             fun ok() = result
         }
         return o.ok()

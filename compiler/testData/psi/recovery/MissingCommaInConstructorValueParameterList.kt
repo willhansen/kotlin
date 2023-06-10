@@ -1,3 +1,3 @@
-class Test(private val a: Int b: Int private val c: Int) {
+class Test(private konst a: Int b: Int private konst c: Int) {
     override fun toString() = "$a $c"
 }

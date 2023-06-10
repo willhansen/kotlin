@@ -3,7 +3,7 @@
 
 open class X {
     open fun foo() = "base function"
-    open val bar = "base property"
+    open konst bar = "base property"
 }
 
 // MODULE: lib(base)
@@ -17,7 +17,7 @@ open class Y: X()
 
 open class Y: X() {
     override fun foo() = "overridden function"
-    override val bar = "overridden property"
+    override konst bar = "overridden property"
 }
 
 // MODULE: mainLib(lib)
@@ -25,12 +25,12 @@ open class Y: X() {
 
 class Z: Y() {
     override fun foo() = "primordial overridden function"
-    override val bar = "primordial overridden property"
+    override konst bar = "primordial overridden property"
 }
 
 fun lib(): String {
-    val y = Y()
-    val z = Z()
+    konst y = Y()
+    konst z = Z()
     return when {
         y.foo() != "overridden function" -> "fail 1"
         y.bar != "overridden property" -> "fail 2"

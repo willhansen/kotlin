@@ -9,18 +9,18 @@ import kotlin.native.internal.FloatingPointParser
 import kotlin.native.internal.GCUnsafeCall
 
 /**
- * Returns a string representation of this [Byte] value in the specified [radix].
+ * Returns a string representation of this [Byte] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
 public actual inline fun Byte.toString(radix: Int): String = this.toInt().toString(checkRadix(radix))
 
 /**
- * Returns a string representation of this [Short] value in the specified [radix].
+ * Returns a string representation of this [Short] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
@@ -28,12 +28,12 @@ public actual inline fun Short.toString(radix: Int): String = this.toInt().toStr
 
 @GCUnsafeCall("Kotlin_Int_toStringRadix")
 @PublishedApi
-external internal fun intToString(value: Int, radix: Int): String
+external internal fun intToString(konstue: Int, radix: Int): String
 
 /**
- * Returns a string representation of this [Int] value in the specified [radix].
+ * Returns a string representation of this [Int] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
@@ -41,12 +41,12 @@ public actual inline fun Int.toString(radix: Int): String = intToString(this, ch
 
 @GCUnsafeCall("Kotlin_Long_toStringRadix")
 @PublishedApi
-external internal fun longToString(value: Long, radix: Int): String
+external internal fun longToString(konstue: Long, radix: Int): String
 
 /**
- * Returns a string representation of this [Long] value in the specified [radix].
+ * Returns a string representation of this [Long] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
@@ -63,15 +63,15 @@ public actual inline fun String?.toBoolean(): Boolean = this.equals("true", igno
 
 /**
  * Parses the string as a signed [Byte] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 @kotlin.internal.InlineOnly
 public actual inline fun String.toByte(): Byte = toByteOrNull() ?: throw NumberFormatException()
 
 /**
  * Parses the string as a signed [Byte] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
@@ -79,15 +79,15 @@ public actual inline fun String.toByte(radix: Int): Byte = toByteOrNull(radix) ?
 
 /**
  * Parses the string as a [Short] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 @kotlin.internal.InlineOnly
 public actual inline fun String.toShort(): Short = toShortOrNull() ?: throw NumberFormatException()
 
 /**
  * Parses the string as a [Short] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
@@ -95,15 +95,15 @@ public actual inline fun String.toShort(radix: Int): Short = toShortOrNull(radix
 
 /**
  * Parses the string as an [Int] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 @kotlin.internal.InlineOnly
 public actual inline fun String.toInt(): Int = toIntOrNull() ?: throw NumberFormatException()
 
 /**
  * Parses the string as an [Int] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
@@ -111,15 +111,15 @@ public actual inline fun String.toInt(radix: Int): Int = toIntOrNull(radix) ?: t
 
 /**
  * Parses the string as a [Long] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 @kotlin.internal.InlineOnly
 public actual inline fun String.toLong(): Long = toLongOrNull() ?: throw NumberFormatException()
 
 /**
  * Parses the string as a [Long] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
@@ -127,20 +127,20 @@ public actual inline fun String.toLong(radix: Int): Long = toLongOrNull(radix) ?
 
 /**
  * Parses the string as a [Float] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 public actual fun String.toFloat(): Float = FloatingPointParser.parseFloat(this)
 
 
 /**
  * Parses the string as a [Double] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 public actual fun String.toDouble(): Double = FloatingPointParser.parseDouble(this)
 
 /**
  * Parses the string as a [Float] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  */
 @SinceKotlin("1.1")
 public actual fun String.toFloatOrNull(): Float? {
@@ -153,7 +153,7 @@ public actual fun String.toFloatOrNull(): Float? {
 
 /**
  * Parses the string as a [Double] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  */
 @SinceKotlin("1.1")
 public actual fun String.toDoubleOrNull(): Double? {

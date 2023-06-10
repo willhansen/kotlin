@@ -18,25 +18,25 @@ interface ExpressionCodegenExtension {
             "org.jetbrains.kotlin.expressionCodegenExtension", ExpressionCodegenExtension::class.java)
 
     class Context(
-            val codegen: ExpressionCodegen,
-            val typeMapper: KotlinTypeMapper,
-            val v: InstructionAdapter
+            konst codegen: ExpressionCodegen,
+            konst typeMapper: KotlinTypeMapper,
+            konst v: InstructionAdapter
     )
 
     /**
-     *  Used for generating custom byte code for the property value obtain. This function has lazy semantics.
-     *  Returns new stack value.
+     *  Used for generating custom byte code for the property konstue obtain. This function has lazy semantics.
+     *  Returns new stack konstue.
      */
     fun applyProperty(receiver: StackValue, resolvedCall: ResolvedCall<*>, c: Context): StackValue? = null
 
     /**
      *  Used for generating custom byte code for the function call. This function has lazy semantics.
-     *  Returns new stack value.
+     *  Returns new stack konstue.
      */
     fun applyFunction(receiver: StackValue, resolvedCall: ResolvedCall<*>, c: Context): StackValue? = null
 
     fun generateClassSyntheticParts(codegen: ImplementationBodyCodegen) {}
 
-    val shouldGenerateClassSyntheticPartsInLightClassesMode: Boolean
+    konst shouldGenerateClassSyntheticPartsInLightClassesMode: Boolean
         get() = false
 }

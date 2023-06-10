@@ -1,9 +1,9 @@
 // p.Inheritor
 package p
 
-annotation class Anno(vararg val s: String)
+annotation class Anno(vararg konst s: String)
 
-annotation class Bueno(val anno: Anno)
+annotation class Bueno(konst anno: Anno)
 
 class Inheritor: I, I2 {
 

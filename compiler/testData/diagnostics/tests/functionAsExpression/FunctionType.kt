@@ -2,30 +2,30 @@
 // !DIAGNOSTICS: -UNUSED_ANONYMOUS_PARAMETER -UNUSED_VARIABLE
 
 fun testReturnType(foo: String) {
-    val bar = fun () = foo
+    konst bar = fun () = foo
 
     bar.checkType { _<() -> String>() }
 
-    val bas: () -> String = fun () = foo
+    konst bas: () -> String = fun () = foo
 
-    val bag: () -> Int = <!TYPE_MISMATCH!>fun () = foo<!>
+    konst bag: () -> Int = <!TYPE_MISMATCH!>fun () = foo<!>
 }
 
 fun testParamType() {
-    val bar = fun (bal: String){}
+    konst bar = fun (bal: String){}
 
     bar.checkType { _<(String) -> Unit>() }
 
-    val bas: (String) -> Unit = fun (param: String) {}
-    val bag: (Int) -> Unit = <!TYPE_MISMATCH!>fun (<!EXPECTED_PARAMETER_TYPE_MISMATCH!>param: String<!>) {}<!>
+    konst bas: (String) -> Unit = fun (param: String) {}
+    konst bag: (Int) -> Unit = <!TYPE_MISMATCH!>fun (<!EXPECTED_PARAMETER_TYPE_MISMATCH!>param: String<!>) {}<!>
 }
 
 fun testReceiverType() {
-    val bar = fun String.() {}
+    konst bar = fun String.() {}
 
     bar.checkType { _<String.() -> Unit>() }
 
-    val bas: String.() -> Unit = fun String.() {}
+    konst bas: String.() -> Unit = fun String.() {}
 
-    val bag: Int.() -> Unit = <!TYPE_MISMATCH!>fun String.() {}<!>
+    konst bag: Int.() -> Unit = <!TYPE_MISMATCH!>fun String.() {}<!>
 }

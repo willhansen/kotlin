@@ -37,7 +37,7 @@ object RedundantSingleExpressionStringTemplateChecker : FirStringConcatenationCa
     }
 
     private fun FirStatement.stringParentChildrenCount(): Int? {
-        return when (val source = source) {
+        return when (konst source = source) {
             is KtPsiSourceElement -> source.psi.stringParentChildrenCount()
             is KtLightSourceElement -> source.lighterASTNode.stringParentChildrenCount(source)
             null -> null
@@ -50,9 +50,9 @@ object RedundantSingleExpressionStringTemplateChecker : FirStringConcatenationCa
     }
 
     private fun LighterASTNode.stringParentChildrenCount(source: KtLightSourceElement): Int? {
-        val parent = source.treeStructure.getParent(this)
+        konst parent = source.treeStructure.getParent(this)
         return if (parent != null && parent.tokenType == KtNodeTypes.STRING_TEMPLATE) {
-            val childrenOfParent = parent.getChildren(source.treeStructure)
+            konst childrenOfParent = parent.getChildren(source.treeStructure)
             childrenOfParent.filter { it is PsiBuilder.Marker }.size
         } else {
             parent?.stringParentChildrenCount(source)

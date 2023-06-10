@@ -40,10 +40,10 @@ import org.jetbrains.kotlin.types.typeUtil.isTypeParameter
 fun KotlinType.hasEnhancedNullability(): Boolean =
     SimpleClassicTypeSystemContext.hasEnhancedNullability(this)
 
-class JavaTypeEnhancement(private val javaResolverSettings: JavaResolverSettings) {
-    private class Result(val type: KotlinType?, val subtreeSize: Int)
+class JavaTypeEnhancement(private konst javaResolverSettings: JavaResolverSettings) {
+    private class Result(konst type: KotlinType?, konst subtreeSize: Int)
 
-    private class SimpleResult(val type: SimpleType?, val subtreeSize: Int, val forWarnings: Boolean)
+    private class SimpleResult(konst type: SimpleType?, konst subtreeSize: Int, konst forWarnings: Boolean)
 
     // The index in the lambda is the position of the type component:
     // Example: for `A<B, C<D, E>>`, indices go as follows: `0 - A<...>, 1 - B, 2 - C<D, E>, 3 - D, 4 - E`,
@@ -60,11 +60,11 @@ class JavaTypeEnhancement(private val javaResolverSettings: JavaResolverSettings
         if (isError) return Result(null, 1)
         return when (this) {
             is FlexibleType -> {
-                val isRawType = this is RawType
-                val lowerResult = lowerBound.enhanceInflexible(
+                konst isRawType = this is RawType
+                konst lowerResult = lowerBound.enhanceInflexible(
                     qualifiers, index, TypeComponentPosition.FLEXIBLE_LOWER, isRawType, isSuperTypesEnhancement
                 )
-                val upperResult = upperBound.enhanceInflexible(
+                konst upperResult = upperBound.enhanceInflexible(
                     qualifiers, index, TypeComponentPosition.FLEXIBLE_UPPER, isRawType, isSuperTypesEnhancement
                 )
                 assert(lowerResult.subtreeSize == upperResult.subtreeSize) {
@@ -72,11 +72,11 @@ class JavaTypeEnhancement(private val javaResolverSettings: JavaResolverSettings
                             "lower = ($lowerBound, ${lowerResult.subtreeSize}), " +
                             "upper = ($upperBound, ${upperResult.subtreeSize})"
                 }
-                val type = when {
+                konst type = when {
                     lowerResult.type == null && upperResult.type == null -> null
                     lowerResult.forWarnings || upperResult.forWarnings -> {
                         // Both use the same qualifiers, so forWarnings in one result implies forWarnings (or no changes) in the other.
-                        val enhancement = upperResult.type?.let { KotlinTypeFactory.flexibleType(lowerResult.type ?: it, it) }
+                        konst enhancement = upperResult.type?.let { KotlinTypeFactory.flexibleType(lowerResult.type ?: it, it) }
                             ?: lowerResult.type!!
                         wrapEnhancement(enhancement)
                     }
@@ -86,7 +86,7 @@ class JavaTypeEnhancement(private val javaResolverSettings: JavaResolverSettings
                 Result(type, lowerResult.subtreeSize)
             }
             is SimpleType -> {
-                val result = enhanceInflexible(
+                konst result = enhanceInflexible(
                     qualifiers, index, TypeComponentPosition.INFLEXIBLE, isSuperTypesEnhancement = isSuperTypesEnhancement
                 )
                 Result(if (result.forWarnings) wrapEnhancement(result.type) else result.type, result.subtreeSize)
@@ -101,21 +101,21 @@ class JavaTypeEnhancement(private val javaResolverSettings: JavaResolverSettings
         isBoundOfRawType: Boolean = false,
         isSuperTypesEnhancement: Boolean = false
     ): SimpleResult {
-        val shouldEnhance = position.shouldEnhance()
-        val shouldEnhanceArguments = !isSuperTypesEnhancement || !isBoundOfRawType
+        konst shouldEnhance = position.shouldEnhance()
+        konst shouldEnhanceArguments = !isSuperTypesEnhancement || !isBoundOfRawType
         if (!shouldEnhance && arguments.isEmpty()) return SimpleResult(null, 1, false)
 
-        val originalClass = constructor.declarationDescriptor
+        konst originalClass = constructor.declarationDescriptor
             ?: return SimpleResult(null, 1, false)
 
-        val effectiveQualifiers = qualifiers(index)
-        val enhancedClassifier = originalClass.enhanceMutability(effectiveQualifiers, position)
-        val enhancedNullability = getEnhancedNullability(effectiveQualifiers, position)
+        konst effectiveQualifiers = qualifiers(index)
+        konst enhancedClassifier = originalClass.enhanceMutability(effectiveQualifiers, position)
+        konst enhancedNullability = getEnhancedNullability(effectiveQualifiers, position)
 
-        val typeConstructor = enhancedClassifier?.typeConstructor ?: constructor
+        konst typeConstructor = enhancedClassifier?.typeConstructor ?: constructor
         var globalArgIndex = index + 1
-        val enhancedArguments = arguments.zip(typeConstructor.parameters) { arg, parameter ->
-            val enhanced = when {
+        konst enhancedArguments = arguments.zip(typeConstructor.parameters) { arg, parameter ->
+            konst enhanced = when {
                 !shouldEnhanceArguments -> Result(null, 0)
                 !arg.isStarProjection -> arg.type.unwrap().enhancePossiblyFlexible(qualifiers, globalArgIndex, isSuperTypesEnhancement)
                 qualifiers(globalArgIndex).nullability == FORCE_FLEXIBILITY ->
@@ -139,25 +139,25 @@ class JavaTypeEnhancement(private val javaResolverSettings: JavaResolverSettings
             }
         }
 
-        val subtreeSize = globalArgIndex - index
+        konst subtreeSize = globalArgIndex - index
         if (enhancedClassifier == null && enhancedNullability == null && enhancedArguments.all { it == null })
             return SimpleResult(null, subtreeSize, false)
 
-        val newAnnotations = listOfNotNull(
+        konst newAnnotations = listOfNotNull(
             annotations,
             ENHANCED_MUTABILITY_ANNOTATIONS.takeIf { enhancedClassifier != null },
             ENHANCED_NULLABILITY_ANNOTATIONS.takeIf { enhancedNullability != null }
         ).compositeAnnotationsOrSingle()
 
-        val enhancedType = KotlinTypeFactory.simpleType(
+        konst enhancedType = KotlinTypeFactory.simpleType(
             newAnnotations.toDefaultAttributes(),
             typeConstructor,
             enhancedArguments.zip(arguments) { enhanced, original -> enhanced ?: original },
             enhancedNullability ?: isMarkedNullable
         )
 
-        val enhancement = if (effectiveQualifiers.definitelyNotNull) notNullTypeParameter(enhancedType) else enhancedType
-        val nullabilityForWarning = enhancedNullability != null && effectiveQualifiers.isNullabilityQualifierForWarning
+        konst enhancement = if (effectiveQualifiers.definitelyNotNull) notNullTypeParameter(enhancedType) else enhancedType
+        konst nullabilityForWarning = enhancedNullability != null && effectiveQualifiers.isNullabilityQualifierForWarning
         return SimpleResult(enhancement, subtreeSize, nullabilityForWarning)
     }
 
@@ -178,7 +178,7 @@ private fun ClassifierDescriptor.enhanceMutability(
     qualifiers: JavaTypeQualifiers,
     position: TypeComponentPosition
 ): ClassifierDescriptor? {
-    val mapper = JavaToKotlinClassMapper
+    konst mapper = JavaToKotlinClassMapper
     return when {
         !position.shouldEnhance() -> null
         this !is ClassDescriptor -> null
@@ -199,10 +199,10 @@ private fun getEnhancedNullability(qualifiers: JavaTypeQualifiers, position: Typ
     }
 }
 
-val ENHANCED_NULLABILITY_ANNOTATIONS: Annotations = EnhancedTypeAnnotations(JvmAnnotationNames.ENHANCED_NULLABILITY_ANNOTATION)
-private val ENHANCED_MUTABILITY_ANNOTATIONS = EnhancedTypeAnnotations(JvmAnnotationNames.ENHANCED_MUTABILITY_ANNOTATION)
+konst ENHANCED_NULLABILITY_ANNOTATIONS: Annotations = EnhancedTypeAnnotations(JvmAnnotationNames.ENHANCED_NULLABILITY_ANNOTATION)
+private konst ENHANCED_MUTABILITY_ANNOTATIONS = EnhancedTypeAnnotations(JvmAnnotationNames.ENHANCED_MUTABILITY_ANNOTATION)
 
-private class EnhancedTypeAnnotations(private val fqNameToMatch: FqName) : Annotations {
+private class EnhancedTypeAnnotations(private konst fqNameToMatch: FqName) : Annotations {
     override fun isEmpty() = false
 
     override fun findAnnotation(fqName: FqName) = when (fqName) {
@@ -217,19 +217,19 @@ private class EnhancedTypeAnnotations(private val fqNameToMatch: FqName) : Annot
 
 private object EnhancedTypeAnnotationDescriptor : AnnotationDescriptor {
     private fun throwError(): Nothing = error("No methods should be called on this descriptor. Only its presence matters")
-    override val type: KotlinType get() = throwError()
-    override val allValueArguments: Map<Name, ConstantValue<*>> get() = throwError()
-    override val source: SourceElement get() = throwError()
+    override konst type: KotlinType get() = throwError()
+    override konst allValueArguments: Map<Name, ConstantValue<*>> get() = throwError()
+    override konst source: SourceElement get() = throwError()
     override fun toString() = "[EnhancedType]"
 }
 
-internal class NotNullTypeParameterImpl(override val delegate: SimpleType) : NotNullTypeParameter, DelegatingSimpleType() {
+internal class NotNullTypeParameterImpl(override konst delegate: SimpleType) : NotNullTypeParameter, DelegatingSimpleType() {
 
-    override val isTypeParameter: Boolean
+    override konst isTypeParameter: Boolean
         get() = true
 
     override fun substitutionResult(replacement: KotlinType): KotlinType {
-        val unwrappedType = replacement.unwrap()
+        konst unwrappedType = replacement.unwrap()
         if (!unwrappedType.isTypeParameter() && !TypeUtils.isNullableType(unwrappedType)) return unwrappedType
 
         return when (unwrappedType) {
@@ -242,11 +242,11 @@ internal class NotNullTypeParameterImpl(override val delegate: SimpleType) : Not
         }
     }
 
-    override val isMarkedNullable: Boolean
+    override konst isMarkedNullable: Boolean
         get() = false
 
     private fun SimpleType.prepareReplacement(): SimpleType {
-        val result = makeNullableAsSpecified(false)
+        konst result = makeNullableAsSpecified(false)
         if (!this.isTypeParameter()) return result
 
         return NotNullTypeParameterImpl(result)

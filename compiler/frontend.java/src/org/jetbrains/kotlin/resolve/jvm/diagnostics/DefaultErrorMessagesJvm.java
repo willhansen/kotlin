@@ -51,14 +51,14 @@ public class DefaultErrorMessagesJvm implements DefaultErrorMessages.Extension {
         MAP.put(OVERLOADS_PRIVATE, "'@JvmOverloads' annotation has no effect on private declarations");
         MAP.put(OVERLOADS_LOCAL, "'@JvmOverloads' annotation cannot be used on local declarations");
         MAP.put(OVERLOADS_ANNOTATION_CLASS_CONSTRUCTOR, "'@JvmOverloads' annotation cannot be used on constructors of annotation classes");
-        MAP.put(OVERLOADS_ANNOTATION_HIDDEN_CONSTRUCTOR, "'@JvmOverloads' annotation cannot be used on constructors hidden by value class rules");
-        MAP.put(OVERLOADS_ANNOTATION_MANGLED_FUNCTION, "'@JvmOverloads' annotation cannot be used on functions mangled by value class rules");
+        MAP.put(OVERLOADS_ANNOTATION_HIDDEN_CONSTRUCTOR, "'@JvmOverloads' annotation cannot be used on constructors hidden by konstue class rules");
+        MAP.put(OVERLOADS_ANNOTATION_MANGLED_FUNCTION, "'@JvmOverloads' annotation cannot be used on functions mangled by konstue class rules");
         MAP.put(INAPPLICABLE_JVM_NAME, "'@JvmName' annotation is not applicable to this declaration");
         MAP.put(ILLEGAL_JVM_NAME, "Illegal JVM name");
 
         MAP.put(SYNCHRONIZED_ON_ABSTRACT, "'@Synchronized' annotation cannot be used on abstract functions");
         MAP.put(SYNCHRONIZED_ON_INLINE, "'@Synchronized' annotation has no effect on inline functions");
-        MAP.put(SYNCHRONIZED_ON_VALUE_CLASS, "'@Synchronized' annotation has no effect on value classes");
+        MAP.put(SYNCHRONIZED_ON_VALUE_CLASS, "'@Synchronized' annotation has no effect on konstue classes");
         MAP.put(SYNCHRONIZED_IN_INTERFACE, "'@Synchronized' annotation cannot be used on interface members");
         MAP.put(EXTERNAL_DECLARATION_CANNOT_BE_ABSTRACT, "External declaration can not be abstract");
         MAP.put(EXTERNAL_DECLARATION_CANNOT_HAVE_BODY, "External declaration can not have a body");
@@ -71,14 +71,14 @@ public class DefaultErrorMessagesJvm implements DefaultErrorMessages.Extension {
         MAP.put(REPEATED_ANNOTATION_WITH_CONTAINER, "Repeated annotation ''@{0}'' cannot be used on a declaration which is annotated with its container annotation ''@{1}''", TO_STRING, TO_STRING);
         MAP.put(ANNOTATION_IS_NOT_APPLICABLE_TO_MULTIFILE_CLASSES, "Annotation ''@{0}'' is not applicable to the multi-file classes", TO_STRING);
 
-        MAP.put(REPEATABLE_CONTAINER_MUST_HAVE_VALUE_ARRAY, "Container annotation ''{0}'' must have a property ''value'' of type ''Array<{1}>''. This code will be prohibited in Kotlin 1.6", TO_STRING, TO_STRING);
-        MAP.put(REPEATABLE_CONTAINER_HAS_NON_DEFAULT_PARAMETER, "Container annotation ''{0}'' does not have a default value for ''{1}''. This code will be prohibited in Kotlin 1.6", TO_STRING, NAME);
+        MAP.put(REPEATABLE_CONTAINER_MUST_HAVE_VALUE_ARRAY, "Container annotation ''{0}'' must have a property ''konstue'' of type ''Array<{1}>''. This code will be prohibited in Kotlin 1.6", TO_STRING, TO_STRING);
+        MAP.put(REPEATABLE_CONTAINER_HAS_NON_DEFAULT_PARAMETER, "Container annotation ''{0}'' does not have a default konstue for ''{1}''. This code will be prohibited in Kotlin 1.6", TO_STRING, NAME);
         MAP.put(REPEATABLE_CONTAINER_HAS_SHORTER_RETENTION, "Container annotation ''{0}'' has shorter retention (''{1}'') than the repeatable annotation ''{2}'' (''{3}''). This code will be prohibited in Kotlin 1.6", TO_STRING, TO_STRING, TO_STRING, TO_STRING);
         MAP.put(REPEATABLE_CONTAINER_TARGET_SET_NOT_A_SUBSET, "Target set of container annotation ''{0}'' must be a subset of the target set of contained annotation ''{1}''. This code will be prohibited in Kotlin 1.6", TO_STRING, TO_STRING);
         MAP.put(REPEATABLE_ANNOTATION_HAS_NESTED_CLASS_NAMED_CONTAINER, "Repeatable annotation cannot have a nested class named 'Container'. This name is reserved for auto-generated container class");
 
-        MAP.put(JVM_PACKAGE_NAME_CANNOT_BE_EMPTY, "'@JvmPackageName' annotation value cannot be empty");
-        MAP.put(JVM_PACKAGE_NAME_MUST_BE_VALID_NAME, "'@JvmPackageName' annotation value must be a valid dot-qualified name of a package");
+        MAP.put(JVM_PACKAGE_NAME_CANNOT_BE_EMPTY, "'@JvmPackageName' annotation konstue cannot be empty");
+        MAP.put(JVM_PACKAGE_NAME_MUST_BE_VALID_NAME, "'@JvmPackageName' annotation konstue must be a konstid dot-qualified name of a package");
         MAP.put(JVM_PACKAGE_NAME_NOT_SUPPORTED_IN_FILES_WITH_CLASSES, "'@JvmPackageName' annotation is not supported for files with class declarations");
 
         MAP.put(STATE_IN_MULTIFILE_CLASS, "Non-const property with backing field or delegate is not allowed in a multi-file class if -Xmultifile-parts-inherit is enabled");
@@ -174,7 +174,7 @@ public class DefaultErrorMessagesJvm implements DefaultErrorMessages.Extension {
         MAP.put(NON_FINAL_JVM_RECORD, "@JvmRecord class should be final");
         MAP.put(ENUM_JVM_RECORD, "@JvmRecord class should not be an enum");
         MAP.put(JVM_RECORD_WITHOUT_PRIMARY_CONSTRUCTOR_PARAMETERS, "Primary constructor with parameters is required for @JvmRecord class");
-        MAP.put(JVM_RECORD_NOT_VAL_PARAMETER, "Constructor parameter of @JvmRecord class should be a val");
+        MAP.put(JVM_RECORD_NOT_VAL_PARAMETER, "Constructor parameter of @JvmRecord class should be a konst");
         MAP.put(JVM_RECORD_NOT_LAST_VARARG_PARAMETER, "Only the last constructor parameter of @JvmRecord may be a vararg");
         MAP.put(JVM_RECORD_EXTENDS_CLASS, "Record cannot inherit a class" , RENDER_TYPE);
         MAP.put(JVM_RECORD_REQUIRES_JDK15, "Using @JvmRecords requires at least JDK 15");
@@ -187,7 +187,7 @@ public class DefaultErrorMessagesJvm implements DefaultErrorMessages.Extension {
 
         String MESSAGE_FOR_CONCURRENT_HASH_MAP_CONTAINS =
                 "Method 'contains' from ConcurrentHashMap may have unexpected semantics: it calls 'containsValue' instead of 'containsKey'. " +
-                "Use explicit form of the call to 'containsKey'/'containsValue'/'contains' or cast the value to kotlin.collections.Map instead. " +
+                "Use explicit form of the call to 'containsKey'/'containsValue'/'contains' or cast the konstue to kotlin.collections.Map instead. " +
                 "See https://youtrack.jetbrains.com/issue/KT-18053 for more details";
         MAP.put(CONCURRENT_HASH_MAP_CONTAINS_OPERATOR, MESSAGE_FOR_CONCURRENT_HASH_MAP_CONTAINS);
         MAP.put(TAILREC_WITH_DEFAULTS, "Computation order of non-constant default arguments in tail-recursive functions will change in 1.4. See KT-31540 for more details");
@@ -213,7 +213,7 @@ public class DefaultErrorMessagesJvm implements DefaultErrorMessages.Extension {
         MAP.put(DANGEROUS_CHARACTERS, "Name contains characters which can cause problems on Windows: {0}", STRING);
 
         MAP.put(VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION, "Value classes without @JvmInline annotation are not supported yet");
-        MAP.put(JVM_INLINE_WITHOUT_VALUE_CLASS, "@JvmInline annotation is only applicable to value classes");
+        MAP.put(JVM_INLINE_WITHOUT_VALUE_CLASS, "@JvmInline annotation is only applicable to konstue classes");
 
         MAP.put(SYNCHRONIZED_ON_SUSPEND, "@Synchronized annotation is not applicable to suspend functions and lambdas");
 

@@ -17,7 +17,7 @@ inline fun run(func: () -> Unit) = func()
 fun incNoInline(countable: Countable) = run { inc(countable) }
 
 fun box(): String {
-    val c = Countable()
+    konst c = Countable()
 
     incNoInline(c)
     assertEquals(1, c.count)

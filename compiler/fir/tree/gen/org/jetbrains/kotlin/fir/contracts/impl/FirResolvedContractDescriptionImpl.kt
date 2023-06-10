@@ -19,9 +19,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirResolvedContractDescriptionImpl(
-    override val source: KtSourceElement?,
-    override val effects: MutableList<FirEffectDeclaration>,
-    override val unresolvedEffects: MutableList<FirContractElementDeclaration>,
+    override konst source: KtSourceElement?,
+    override konst effects: MutableList<FirEffectDeclaration>,
+    override konst unresolvedEffects: MutableList<FirContractElementDeclaration>,
 ) : FirResolvedContractDescription() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         effects.forEach { it.accept(visitor, data) }

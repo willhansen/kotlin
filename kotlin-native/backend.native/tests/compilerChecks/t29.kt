@@ -4,5 +4,5 @@ import platform.Foundation.*
 
 class Zzz : NSAssertionHandler() {
     @ObjCOutlet
-    val x: NSObject get() = this
+    konst x: NSObject get() = this
 }

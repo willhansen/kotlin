@@ -14,15 +14,15 @@ class KT43599 {
 
 var KT43599.extensionProperty
     get() = "extensionProperty"
-    private set(value) { TODO() }
+    private set(konstue) { TODO() }
 
 var topLevelProperty
     get() = "topLevelProperty"
-    private set(value) { TODO() }
+    private set(konstue) { TODO() }
 
 lateinit var topLevelLateinitProperty: String
     private set
 
-fun setTopLevelLateinitProperty(value: String) {
-    topLevelLateinitProperty = value
+fun setTopLevelLateinitProperty(konstue: String) {
+    topLevelLateinitProperty = konstue
 }

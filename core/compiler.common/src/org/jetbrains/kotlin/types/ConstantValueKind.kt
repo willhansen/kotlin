@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.types
 
-sealed class ConstantValueKind<T>(val asString: kotlin.String) {
+sealed class ConstantValueKind<T>(konst asString: kotlin.String) {
     object Null : ConstantValueKind<Nothing?>("Null")
     object Boolean : ConstantValueKind<kotlin.Boolean>("Boolean")
     object Char : ConstantValueKind<kotlin.Char>("Char")

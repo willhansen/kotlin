@@ -7,6 +7,6 @@ operator fun A.component1() = 1
 operator fun A.component2() = 1
 
 fun main(args: Array<String>) {
-    val (a, <caret>b) = A()
+    konst (a, <caret>b) = A()
 }
 

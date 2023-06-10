@@ -25,9 +25,9 @@ package kotlin.math.fdlibm
 
 import kotlin.wasm.internal.wasm_f64_sqrt as sqrt
 
-private const val one = 1.00000000000000000000e+00 /* 0x3FF00000, 0x00000000 */
-private const val ln2 = 6.93147180559945286227e-01 /* 0x3FE62E42, 0xFEFA39EF */
-private const val huge = 1.00000000000000000000e+300
+private const konst one = 1.00000000000000000000e+00 /* 0x3FF00000, 0x00000000 */
+private const konst ln2 = 6.93147180559945286227e-01 /* 0x3FE62E42, 0xFEFA39EF */
+private const konst huge = 1.00000000000000000000e+300
 
 internal fun asinh(x: Double): Double {
     var t: Double

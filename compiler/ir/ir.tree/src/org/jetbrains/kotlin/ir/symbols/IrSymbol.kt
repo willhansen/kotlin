@@ -58,14 +58,14 @@ interface IrSymbol {
      * **A:** Because we most often need to access a symbol's owner in lowerings, which happen after linkage, at which point all symbols
      * should be already bound. Declaring this property nullable would make working with it more difficult most of the time.
      */
-    val owner: IrSymbolOwner
+    konst owner: IrSymbolOwner
 
     /**
      * If [hasDescriptor] is `true`, returns the [DeclarationDescriptor] of the declaration that this symbol was created for.
      * Otherwise, returns a dummy [IrBasedDeclarationDescriptor] that serves as a descriptor-like view to [owner].
      */
     @ObsoleteDescriptorBasedAPI
-    val descriptor: DeclarationDescriptor
+    konst descriptor: DeclarationDescriptor
 
     /**
      * Returns `true` if this symbol was created from a [DeclarationDescriptor] either emitted by the K1 (aka classic) frontend,
@@ -74,12 +74,12 @@ interface IrSymbol {
      * @see descriptor
      */
     @ObsoleteDescriptorBasedAPI
-    val hasDescriptor: Boolean
+    konst hasDescriptor: Boolean
 
     /**
      * Whether this symbol has already been resolved to its [owner].
      */
-    val isBound: Boolean
+    konst isBound: Boolean
 
     /**
      * If this symbol refers to a publicly accessible declaration (from the binary artifact point of view),
@@ -89,7 +89,7 @@ interface IrSymbol {
      *
      * @see IdSignature.isPubliclyVisible
      */
-    val signature: IdSignature?
+    konst signature: IdSignature?
 
     // TODO: remove once JS IR IC migrates to a different stable tag generation scheme
     // Used to store signatures in private symbols for JS IC
@@ -106,7 +106,7 @@ interface IrSymbol {
  *
  * The symbol doesn't have to be bound.
  */
-val IrSymbol.isPublicApi: Boolean
+konst IrSymbol.isPublicApi: Boolean
     get() = signature != null
 
 /**
@@ -117,10 +117,10 @@ val IrSymbol.isPublicApi: Boolean
  * Only leaf interfaces in the symbol hierarchy inherit from this interface.
  */
 interface IrBindableSymbol<out Descriptor : DeclarationDescriptor, Owner : IrSymbolOwner> : IrSymbol {
-    override val owner: Owner
+    override konst owner: Owner
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: Descriptor
+    override konst descriptor: Descriptor
 
     /**
      * Sets this symbol's owner.
@@ -135,7 +135,7 @@ interface IrBindableSymbol<out Descriptor : DeclarationDescriptor, Owner : IrSym
  */
 sealed interface IrPackageFragmentSymbol : IrSymbol {
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: PackageFragmentDescriptor
+    override konst descriptor: PackageFragmentDescriptor
 }
 
 /**
@@ -185,7 +185,7 @@ interface IrFieldSymbol : IrBindableSymbol<PropertyDescriptor, IrField>
  */
 sealed interface IrClassifierSymbol : IrSymbol, TypeConstructorMarker {
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ClassifierDescriptor
+    override konst descriptor: ClassifierDescriptor
 }
 
 /**
@@ -215,9 +215,9 @@ interface IrTypeParameterSymbol : IrClassifierSymbol, IrBindableSymbol<TypeParam
  */
 sealed interface IrValueSymbol : IrSymbol {
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ValueDescriptor
+    override konst descriptor: ValueDescriptor
 
-    override val owner: IrValueDeclaration
+    override konst owner: IrValueDeclaration
 }
 
 /**
@@ -237,9 +237,9 @@ interface IrVariableSymbol : IrValueSymbol, IrBindableSymbol<VariableDescriptor,
  */
 sealed interface IrReturnTargetSymbol : IrSymbol {
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: FunctionDescriptor
+    override konst descriptor: FunctionDescriptor
 
-    override val owner: IrReturnTarget
+    override konst owner: IrReturnTarget
 }
 
 /**
@@ -248,7 +248,7 @@ sealed interface IrReturnTargetSymbol : IrSymbol {
  * @see IrFunctionReference
  */
 sealed interface IrFunctionSymbol : IrReturnTargetSymbol {
-    override val owner: IrFunction
+    override konst owner: IrFunction
 }
 
 /**

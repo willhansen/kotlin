@@ -8,10 +8,10 @@ class V {
     companion object
 }
 
-val V.a: String
+konst V.a: String
     get() = "1"
 
-val V.Companion.a: Int
+konst V.Companion.a: Int
     get() = 1
 
 // FILE: main.kt

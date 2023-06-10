@@ -33,25 +33,25 @@ internal class HangulDecomposedCharSet(
         /**
          * Decomposed Hangul syllable.
          */
-        private val decomposedChar: CharArray,
+        private konst decomposedChar: CharArray,
         /**
          * Length of useful part of decomposedChar
          * decomposedCharLength <= decomposedChar.length
          */
-        private val decomposedCharLength: Int
+        private konst decomposedCharLength: Int
 ) : SimpleSet() {
 
     /**
      * String representing syllable
      */
-    private val decomposedCharUTF16: String by lazy {
+    private konst decomposedCharUTF16: String by lazy {
         decomposedChar.concatToString(0, decomposedChar.size)
     }
 
-    override val name: String
+    override konst name: String
             get() = "decomposed Hangul syllable: $decomposedCharUTF16"
 
-    override val consumesFixedLength: Boolean
+    override konst consumesFixedLength: Boolean
         get() = true
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
@@ -61,11 +61,11 @@ internal class HangulDecomposedCharSet(
          * All decompositions for Hangul syllables have length that
          * is less or equal Lexer.MAX_DECOMPOSITION_LENGTH
          */
-        val rightBound = testString.length
+        konst rightBound = testString.length
         var SyllIndex = 0
-        val decompSyllable = IntArray(Lexer
+        konst decompSyllable = IntArray(Lexer
                 .MAX_HANGUL_DECOMPOSITION_LENGTH)
-        val decompCurSymb: IntArray?
+        konst decompCurSymb: IntArray?
         var curSymb: Char
 
         /*

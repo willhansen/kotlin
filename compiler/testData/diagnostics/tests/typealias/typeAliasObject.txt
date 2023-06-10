@@ -1,21 +1,21 @@
 package
 
-public val test11: AnObject
-public val test12: TestObject /* = AnObject */
-public val test13: kotlin.String = "OK"
-public val test14: kotlin.String
-public val test21: AnObject
-public val test22: TestObject2 /* = AnObject */
-public val test23: kotlin.String = "OK"
-public val test24: kotlin.String
-public val test35: ClassWithCompanion.Companion
-public val test36: ClassWithCompanion.Companion
-public val test37: kotlin.String = "OK"
-public val test38: kotlin.String
+public konst test11: AnObject
+public konst test12: TestObject /* = AnObject */
+public konst test13: kotlin.String = "OK"
+public konst test14: kotlin.String
+public konst test21: AnObject
+public konst test22: TestObject2 /* = AnObject */
+public konst test23: kotlin.String = "OK"
+public konst test24: kotlin.String
+public konst test35: ClassWithCompanion.Companion
+public konst test36: ClassWithCompanion.Companion
+public konst test37: kotlin.String = "OK"
+public konst test38: kotlin.String
 
 public object AnObject {
     private constructor AnObject()
-    public final val ok: kotlin.String = "OK"
+    public final konst ok: kotlin.String = "OK"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(): kotlin.String
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -30,7 +30,7 @@ public final class ClassWithCompanion {
 
     public companion object Companion {
         private constructor Companion()
-        public final val ok: kotlin.String = "OK"
+        public final konst ok: kotlin.String = "OK"
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.String
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

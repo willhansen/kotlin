@@ -20,7 +20,7 @@ import java.io.File
 class JsIrRecompiledArtifactsIdentityHandler(testServices: TestServices) : JsBinaryArtifactHandler(testServices) {
     override fun processModule(module: TestModule, info: Js) {
         if (info !is Js.IncrementalJsArtifact) return
-        val (originalArtifact, incrementalArtifact) = info
+        konst (originalArtifact, incrementalArtifact) = info
         when {
             originalArtifact is Js.JsIrArtifact && incrementalArtifact is Js.JsIrArtifact -> {
                 compareIrArtifacts(originalArtifact, incrementalArtifact)
@@ -39,28 +39,28 @@ class JsIrRecompiledArtifactsIdentityHandler(testServices: TestServices) : JsBin
     @Suppress("UNUSED_PARAMETER")
     private fun compareIrArtifacts(originalArtifact: Js.JsIrArtifact, incrementalArtifact: Js.JsIrArtifact) {
         // TODO: enable asserts when binary stability is achieved
-        val oldBinaryAsts = originalArtifact.icCache!!
-        val newBinaryAsts = incrementalArtifact.icCache!!
+        konst oldBinaryAsts = originalArtifact.icCache!!
+        konst newBinaryAsts = incrementalArtifact.icCache!!
 
         for (file in newBinaryAsts.keys) {
-            val oldBinaryAst = oldBinaryAsts[file]
-            val newBinaryAst = newBinaryAsts[file]
+            konst oldBinaryAst = oldBinaryAsts[file]
+            konst newBinaryAst = newBinaryAsts[file]
 
             testServices.assertions.assertTrue(oldBinaryAst.contentEquals(newBinaryAst)) {
                 "Binary AST changed after recompilation for file $file"
             }
         }
 
-        val originalFilesToCheck = originalArtifact.allFiles()
-        val recompiledFilesToCheck = incrementalArtifact.allFiles()
+        konst originalFilesToCheck = originalArtifact.allFiles()
+        konst recompiledFilesToCheck = incrementalArtifact.allFiles()
 
         testServices.assertions.assertEquals(originalFilesToCheck.size, recompiledFilesToCheck.size)
 
         for ((originalFile, recompiledFile) in originalFilesToCheck.zip(recompiledFilesToCheck)) {
             testServices.assertions.assertEquals(originalFile.name, recompiledFile.name)
 
-            val originalOutput = FileUtil.loadFile(originalFile)
-            val recompiledOutput = FileUtil.loadFile(recompiledFile)
+            konst originalOutput = FileUtil.loadFile(originalFile)
+            konst recompiledOutput = FileUtil.loadFile(recompiledFile)
 
             testServices.assertions.assertEquals(originalOutput, recompiledOutput) {
                 "Output file changed after recompilation"

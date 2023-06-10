@@ -25,8 +25,8 @@ fun box(): String {
             result = suspendHere("begin#")
         }
 
-        val q2 = foo2 { result += suspendHere(this) + "#"; 1 }
-        val q3 = foo3 { result += suspendHere(it); 2 }
+        konst q2 = foo2 { result += suspendHere(this) + "#"; 1 }
+        konst q3 = foo3 { result += suspendHere(it); 2 }
 
         if (q2 != 1) throw RuntimeException("fail q2")
         if (q3 != 2) throw RuntimeException("fail q3")

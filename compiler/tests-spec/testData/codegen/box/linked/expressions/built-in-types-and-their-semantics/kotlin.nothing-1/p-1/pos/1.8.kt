@@ -10,13 +10,13 @@
  */
 
 fun box(): String {
-    val c = Class()
+    konst c = Class()
     try {
-        val a: () -> Nothing = c.data
+        konst a: () -> Nothing = c.data
         a.invoke()
     } catch (e: IllegalArgumentException) {
         try {
-            val d: () -> Nothing = c.value
+            konst d: () -> Nothing = c.konstue
             d()
         } catch (e: NotImplementedError) {
             return "OK"
@@ -28,7 +28,7 @@ fun box(): String {
 
 open class Class() {
     var data: () -> Nothing = { throwException("data") as Nothing }
-    val value: () -> Nothing
+    konst konstue: () -> Nothing
         get() = { TODO() as Nothing }
 }
 

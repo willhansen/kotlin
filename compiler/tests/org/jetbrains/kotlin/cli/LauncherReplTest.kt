@@ -24,9 +24,9 @@ class LauncherReplTest : TestCaseWithTmpdir() {
         workDirectory: File? = null,
         compilationClasspath: List<File> = emptyList()
     ) {
-        val javaExecutable = File(File(CompilerSystemProperties.JAVA_HOME.safeValue, "bin"), "java")
+        konst javaExecutable = File(File(CompilerSystemProperties.JAVA_HOME.safeValue, "bin"), "java")
 
-        val processBuilder = ProcessBuilder(
+        konst processBuilder = ProcessBuilder(
             javaExecutable.absolutePath,
             "-jar",
             File(PathUtil.kotlinPathsForDistDirectory.homePath, "lib/kotlin-compiler.jar").absolutePath,
@@ -40,16 +40,16 @@ class LauncherReplTest : TestCaseWithTmpdir() {
                 add(compilationClasspath.joinToString(File.pathSeparator) { it.absolutePath })
             }
         }
-        val process = processBuilder.start()
+        konst process = processBuilder.start()
         data class ExceptionContainer(
-            var value: Throwable? = null
+            var konstue: Throwable? = null
         )
 
         fun InputStream.captureStream(): Triple<Thread, ExceptionContainer, ArrayList<String>> {
-            val out = ArrayList<String>()
-            val exceptionContainer = ExceptionContainer()
-            val thread = thread {
-                val promptRegex = Regex("(?:\\u001B\\p{Graph}+)*(?:>>> ?|\\.\\.\\.)")
+            konst out = ArrayList<String>()
+            konst exceptionContainer = ExceptionContainer()
+            konst thread = thread {
+                konst promptRegex = Regex("(?:\\u001B\\p{Graph}+)*(?:>>> ?|\\.\\.\\.)")
                 try {
                     reader().forEachLine { rawLine ->
                         promptRegex.split(rawLine).forEach { line ->
@@ -59,18 +59,18 @@ class LauncherReplTest : TestCaseWithTmpdir() {
                         }
                     }
                 } catch (e: Throwable) {
-                    exceptionContainer.value = e
+                    exceptionContainer.konstue = e
                 }
             }
             return Triple(thread, exceptionContainer, out)
         }
 
-        val (stdoutThread, stdoutException, processOut) = process.inputStream.captureStream()
-        val (stderrThread, stderrException, processErr) = process.errorStream.captureStream()
+        konst (stdoutThread, stdoutException, processOut) = process.inputStream.captureStream()
+        konst (stderrThread, stderrException, processErr) = process.errorStream.captureStream()
 
-        val inputIter = inputsToExpectedOutputs.iterator()
+        konst inputIter = inputsToExpectedOutputs.iterator()
         var stdinException: Throwable? = null
-        val stdinThread =
+        konst stdinThread =
             thread {
                 try {
                     writeInputsToOutStream(process.outputStream, inputIter)
@@ -88,10 +88,10 @@ class LauncherReplTest : TestCaseWithTmpdir() {
             }
             stdoutThread.join(100)
             TestCase.assertFalse("stdout thread not finished", stdoutThread.isAlive)
-            TestCase.assertNull(stdoutException.value)
+            TestCase.assertNull(stdoutException.konstue)
             stderrThread.join(100)
             TestCase.assertFalse("stderr thread not finished", stderrThread.isAlive)
-            TestCase.assertNull(stderrException.value)
+            TestCase.assertNull(stderrException.konstue)
             TestCase.assertFalse("stdin thread not finished", stdinThread.isAlive)
             TestCase.assertNull(stdinException)
             assertOutputMatches(inputsToExpectedOutputs, processOut)
@@ -107,8 +107,8 @@ class LauncherReplTest : TestCaseWithTmpdir() {
     }
 
     private fun writeInputsToOutStream(dataOutStream: OutputStream, inputIter: Iterator<Pair<String?, String>>) {
-        val writer = dataOutStream.writer()
-        val eol = System.getProperty("line.separator")
+        konst writer = dataOutStream.writer()
+        konst eol = System.getProperty("line.separator")
 
         fun writeNextInput(nextInput: String) {
             with(writer) {
@@ -119,7 +119,7 @@ class LauncherReplTest : TestCaseWithTmpdir() {
         }
 
         while (inputIter.hasNext()) {
-            val nextInput = inputIter.next().first ?: continue
+            konst nextInput = inputIter.next().first ?: continue
             writeNextInput(nextInput)
         }
         writeNextInput(":quit")
@@ -129,8 +129,8 @@ class LauncherReplTest : TestCaseWithTmpdir() {
         inputsToExpectedOutputs: Array<out Pair<String?, String>>,
         actualOut: List<String>
     ) {
-        val inputsToExpectedOutputsIter = inputsToExpectedOutputs.iterator()
-        val actualIter = actualOut.iterator()
+        konst inputsToExpectedOutputsIter = inputsToExpectedOutputs.iterator()
+        konst actualIter = actualOut.iterator()
 
         while (true) {
             if (inputsToExpectedOutputsIter.hasNext() && !actualIter.hasNext()) {
@@ -145,7 +145,7 @@ class LauncherReplTest : TestCaseWithTmpdir() {
                 } else if (expectedPattern.isEmpty() && actualLine.isNotEmpty() && inputsToExpectedOutputsIter.hasNext()) {
                     // assuming that on some configs input is not repeated if producing empty output
                     // in this case trying to check the next expected output
-                    val nextInputToOutput = inputsToExpectedOutputsIter.next()
+                    konst nextInputToOutput = inputsToExpectedOutputsIter.next()
                     expectedPattern = nextInputToOutput.second
                     input = nextInputToOutput.first
                     continue
@@ -158,7 +158,7 @@ class LauncherReplTest : TestCaseWithTmpdir() {
         }
     }
 
-    val replOutHeader = arrayOf(
+    konst replOutHeader = arrayOf(
         null to "Welcome to Kotlin version .*",
         null to "Type :help for help, :quit for quit"
     )
@@ -216,7 +216,7 @@ class LauncherReplTest : TestCaseWithTmpdir() {
             "Result.success(\"OK\")" to "res1: kotlin\\.Result<kotlin\\.String> = Success\\(OK\\)",
             "0U-1U" to "res2: kotlin.UInt = 4294967295",
             "10.nanoseconds" to "res3: kotlin.time.Duration = 10ns",
-            "@JvmInline value class Z(val x: Int)" to "",
+            "@JvmInline konstue class Z(konst x: Int)" to "",
             "Z(42)" to "res5: Line_4\\.Z = Z\\(x=42\\)",
         )
     }
@@ -225,7 +225,7 @@ class LauncherReplTest : TestCaseWithTmpdir() {
         runInteractive(
             *replOutHeader,
             // access to any non-inlined object from the jarr passed to classpath shows that the classpath is supplied correctly
-            // both on compilation and on evaluation
+            // both on compilation and on ekonstuation
             "println(org.jetbrains.kotlin.allopen.AllOpenPluginNames.SUPPORTED_PRESETS.size >= 0)" to "true",
             compilationClasspath = KotlinPathsFromHomeDir(PathUtil.kotlinPathsForDistDirectory.homePath)
                 .classPath(KotlinPaths.Jar.AllOpenPlugin)

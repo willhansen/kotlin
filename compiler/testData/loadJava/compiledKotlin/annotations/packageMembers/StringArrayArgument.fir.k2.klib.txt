@@ -1,4 +1,4 @@
-public final val bar: R|kotlin/Int|
+public final konst bar: R|kotlin/Int|
     public get(): R|kotlin/Int|
 
 @R|test/Anno|() public final fun baz(): R|kotlin/Unit|
@@ -6,7 +6,7 @@ public final val bar: R|kotlin/Int|
 @R|test/Anno|(t = String(live)) public final fun foo(): R|kotlin/Unit|
 
 public final annotation class Anno : R|kotlin/Annotation| {
-    public final val t: R|kotlin/Array<out kotlin/String>|
+    public final konst t: R|kotlin/Array<out kotlin/String>|
         public get(): R|kotlin/Array<out kotlin/String>|
 
     public constructor(vararg t: R|kotlin/Array<out kotlin/String>|): R|test/Anno|

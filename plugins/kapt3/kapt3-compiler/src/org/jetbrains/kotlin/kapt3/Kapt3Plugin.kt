@@ -56,14 +56,14 @@ import java.io.File
 import java.io.ObjectInputStream
 import java.util.*
 
-private val KAPT_OPTIONS = CompilerConfigurationKey.create<KaptOptions.Builder>("Kapt options")
+private konst KAPT_OPTIONS = CompilerConfigurationKey.create<KaptOptions.Builder>("Kapt options")
 
 class Kapt3CommandLineProcessor : CommandLineProcessor {
-    override val pluginId: String = ANNOTATION_PROCESSING_COMPILER_PLUGIN_ID
+    override konst pluginId: String = ANNOTATION_PROCESSING_COMPILER_PLUGIN_ID
 
-    override val pluginOptions: Collection<AbstractCliOption> = values().asList()
+    override konst pluginOptions: Collection<AbstractCliOption> = konstues().asList()
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) {
         doOpenInternalPackagesIfRequired()
         if (option !is KaptCliOption) {
             throw CliOptionProcessingException("Unknown option: ${option.optionName}")
@@ -75,69 +75,69 @@ class Kapt3CommandLineProcessor : CommandLineProcessor {
             )
         }
 
-        val kaptOptions = configuration[KAPT_OPTIONS]
+        konst kaptOptions = configuration[KAPT_OPTIONS]
             ?: KaptOptions.Builder().also { configuration.put(KAPT_OPTIONS, it) }
 
         if (option == @Suppress("DEPRECATION") KaptCliOption.CONFIGURATION) {
-            configuration.applyOptionsFrom(decodePluginOptions(value), pluginOptions)
+            configuration.applyOptionsFrom(decodePluginOptions(konstue), pluginOptions)
         } else {
-            kaptOptions.processOption(option, value)
+            kaptOptions.processOption(option, konstue)
         }
     }
 
-    private fun KaptOptions.Builder.processOption(option: KaptCliOption, value: String) {
-        fun setFlag(flag: KaptFlag, value: String) = if (value == "true") flags.add(flag) else flags.remove(flag)
+    private fun KaptOptions.Builder.processOption(option: KaptCliOption, konstue: String) {
+        fun setFlag(flag: KaptFlag, konstue: String) = if (konstue == "true") flags.add(flag) else flags.remove(flag)
 
-        fun <T : KaptSelector> setSelector(values: Array<T>, rawValue: String, selector: (T) -> Unit) {
-            selector(values.firstOrNull { it.stringValue == rawValue }
-                         ?: throw CliOptionProcessingException("Unknown value $rawValue for option ${option.optionName}"))
+        fun <T : KaptSelector> setSelector(konstues: Array<T>, rawValue: String, selector: (T) -> Unit) {
+            selector(konstues.firstOrNull { it.stringValue == rawValue }
+                         ?: throw CliOptionProcessingException("Unknown konstue $rawValue for option ${option.optionName}"))
         }
 
         fun setKeyValue(rawValue: String, apply: (String, String) -> Unit) {
-            val keyValuePair = rawValue.split('=', limit = 2).takeIf { it.size == 2 }
-                ?: throw CliOptionProcessingException("Invalid option format for ${option.optionName}: key=value expected")
+            konst keyValuePair = rawValue.split('=', limit = 2).takeIf { it.size == 2 }
+                ?: throw CliOptionProcessingException("Inkonstid option format for ${option.optionName}: key=konstue expected")
             apply(keyValuePair[0], keyValuePair[1])
         }
 
         @Suppress("DEPRECATION")
         when (option) {
-            SOURCE_OUTPUT_DIR_OPTION -> sourcesOutputDir = File(value)
-            CLASS_OUTPUT_DIR_OPTION -> classesOutputDir = File(value)
-            STUBS_OUTPUT_DIR_OPTION -> stubsOutputDir = File(value)
-            INCREMENTAL_DATA_OUTPUT_DIR_OPTION -> incrementalDataOutputDir = File(value)
+            SOURCE_OUTPUT_DIR_OPTION -> sourcesOutputDir = File(konstue)
+            CLASS_OUTPUT_DIR_OPTION -> classesOutputDir = File(konstue)
+            STUBS_OUTPUT_DIR_OPTION -> stubsOutputDir = File(konstue)
+            INCREMENTAL_DATA_OUTPUT_DIR_OPTION -> incrementalDataOutputDir = File(konstue)
 
-            CHANGED_FILES -> changedFiles.add(File(value))
-            COMPILED_SOURCES_DIR -> compiledSources.addAll(value.split(File.pathSeparator).map { File(it) })
-            INCREMENTAL_CACHE -> incrementalCache = File(value)
-            CLASSPATH_CHANGES -> classpathChanges.add(value)
-            PROCESS_INCREMENTALLY -> setFlag(KaptFlag.INCREMENTAL_APT, value)
+            CHANGED_FILES -> changedFiles.add(File(konstue))
+            COMPILED_SOURCES_DIR -> compiledSources.addAll(konstue.split(File.pathSeparator).map { File(it) })
+            INCREMENTAL_CACHE -> incrementalCache = File(konstue)
+            CLASSPATH_CHANGES -> classpathChanges.add(konstue)
+            PROCESS_INCREMENTALLY -> setFlag(KaptFlag.INCREMENTAL_APT, konstue)
 
-            ANNOTATION_PROCESSOR_CLASSPATH_OPTION -> processingClasspath += File(value)
-            ANNOTATION_PROCESSORS_OPTION -> processors.addAll(value.split(',').map { it.trim() }.filter { it.isNotEmpty() })
+            ANNOTATION_PROCESSOR_CLASSPATH_OPTION -> processingClasspath += File(konstue)
+            ANNOTATION_PROCESSORS_OPTION -> processors.addAll(konstue.split(',').map { it.trim() }.filter { it.isNotEmpty() })
 
-            APT_OPTION_OPTION -> setKeyValue(value) { k, v -> processingOptions[k] = v }
-            JAVAC_OPTION_OPTION -> setKeyValue(value) { k, v -> javacOptions[k] = v }
+            APT_OPTION_OPTION -> setKeyValue(konstue) { k, v -> processingOptions[k] = v }
+            JAVAC_OPTION_OPTION -> setKeyValue(konstue) { k, v -> javacOptions[k] = v }
 
-            VERBOSE_MODE_OPTION -> setFlag(KaptFlag.VERBOSE, value)
-            USE_LIGHT_ANALYSIS_OPTION -> setFlag(KaptFlag.USE_LIGHT_ANALYSIS, value)
-            CORRECT_ERROR_TYPES_OPTION -> setFlag(KaptFlag.CORRECT_ERROR_TYPES, value)
-            DUMP_DEFAULT_PARAMETER_VALUES -> setFlag(KaptFlag.DUMP_DEFAULT_PARAMETER_VALUES, value)
-            MAP_DIAGNOSTIC_LOCATIONS_OPTION -> setFlag(KaptFlag.MAP_DIAGNOSTIC_LOCATIONS, value)
-            INFO_AS_WARNINGS_OPTION -> setFlag(KaptFlag.INFO_AS_WARNINGS, value)
-            STRICT_MODE_OPTION -> setFlag(KaptFlag.STRICT, value)
-            STRIP_METADATA_OPTION -> setFlag(KaptFlag.STRIP_METADATA, value)
-            KEEP_KDOC_COMMENTS_IN_STUBS -> setFlag(KaptFlag.KEEP_KDOC_COMMENTS_IN_STUBS, value)
-            USE_JVM_IR -> setFlag(KaptFlag.USE_JVM_IR, value)
+            VERBOSE_MODE_OPTION -> setFlag(KaptFlag.VERBOSE, konstue)
+            USE_LIGHT_ANALYSIS_OPTION -> setFlag(KaptFlag.USE_LIGHT_ANALYSIS, konstue)
+            CORRECT_ERROR_TYPES_OPTION -> setFlag(KaptFlag.CORRECT_ERROR_TYPES, konstue)
+            DUMP_DEFAULT_PARAMETER_VALUES -> setFlag(KaptFlag.DUMP_DEFAULT_PARAMETER_VALUES, konstue)
+            MAP_DIAGNOSTIC_LOCATIONS_OPTION -> setFlag(KaptFlag.MAP_DIAGNOSTIC_LOCATIONS, konstue)
+            INFO_AS_WARNINGS_OPTION -> setFlag(KaptFlag.INFO_AS_WARNINGS, konstue)
+            STRICT_MODE_OPTION -> setFlag(KaptFlag.STRICT, konstue)
+            STRIP_METADATA_OPTION -> setFlag(KaptFlag.STRIP_METADATA, konstue)
+            KEEP_KDOC_COMMENTS_IN_STUBS -> setFlag(KaptFlag.KEEP_KDOC_COMMENTS_IN_STUBS, konstue)
+            USE_JVM_IR -> setFlag(KaptFlag.USE_JVM_IR, konstue)
 
-            SHOW_PROCESSOR_STATS -> setFlag(KaptFlag.SHOW_PROCESSOR_STATS, value)
-            DUMP_PROCESSOR_STATS -> processorsStatsReportFile = File(value)
-            INCLUDE_COMPILE_CLASSPATH -> setFlag(KaptFlag.INCLUDE_COMPILE_CLASSPATH, value)
+            SHOW_PROCESSOR_STATS -> setFlag(KaptFlag.SHOW_PROCESSOR_STATS, konstue)
+            DUMP_PROCESSOR_STATS -> processorsStatsReportFile = File(konstue)
+            INCLUDE_COMPILE_CLASSPATH -> setFlag(KaptFlag.INCLUDE_COMPILE_CLASSPATH, konstue)
 
-            DETECT_MEMORY_LEAKS_OPTION -> setSelector(enumValues<DetectMemoryLeaksMode>(), value) { detectMemoryLeaks = it }
-            APT_MODE_OPTION -> setSelector(enumValues<AptMode>(), value) { mode = it }
+            DETECT_MEMORY_LEAKS_OPTION -> setSelector(enumValues<DetectMemoryLeaksMode>(), konstue) { detectMemoryLeaks = it }
+            APT_MODE_OPTION -> setSelector(enumValues<AptMode>(), konstue) { mode = it }
 
-            APT_OPTIONS_OPTION -> processingOptions.putAll(decodeMap(value))
-            JAVAC_CLI_OPTIONS_OPTION -> javacOptions.putAll(decodeMap(value))
+            APT_OPTIONS_OPTION -> processingOptions.putAll(decodeMap(konstue))
+            JAVAC_CLI_OPTIONS_OPTION -> javacOptions.putAll(decodeMap(konstue))
             CONFIGURATION -> throw CliOptionProcessingException("${CONFIGURATION.optionName} should be handled earlier")
 
             TOOLS_JAR_OPTION -> throw CliOptionProcessingException("'${TOOLS_JAR_OPTION.optionName}' is only supported in the kapt CLI tool")
@@ -149,17 +149,17 @@ class Kapt3CommandLineProcessor : CommandLineProcessor {
             return emptyMap()
         }
 
-        val map = LinkedHashMap<String, String>()
+        konst map = LinkedHashMap<String, String>()
 
-        val decodedBytes = Base64.getDecoder().decode(options)
-        val bis = ByteArrayInputStream(decodedBytes)
-        val ois = ObjectInputStream(bis)
+        konst decodedBytes = Base64.getDecoder().decode(options)
+        konst bis = ByteArrayInputStream(decodedBytes)
+        konst ois = ObjectInputStream(bis)
 
-        val n = ois.readInt()
+        konst n = ois.readInt()
 
         repeat(n) {
-            val k = ois.readUTF()
-            val v = ois.readUTF()
+            konst k = ois.readUTF()
+            konst v = ois.readUTF()
             map[k] = v
         }
 
@@ -171,19 +171,19 @@ class Kapt3CommandLineProcessor : CommandLineProcessor {
 class Kapt3ComponentRegistrar : ComponentRegistrar {
     override fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration) {
         doOpenInternalPackagesIfRequired()
-        val contentRoots = configuration[CLIConfigurationKeys.CONTENT_ROOTS] ?: emptyList()
+        konst contentRoots = configuration[CLIConfigurationKeys.CONTENT_ROOTS] ?: emptyList()
 
-        val optionsBuilder = (configuration[KAPT_OPTIONS] ?: KaptOptions.Builder()).apply {
+        konst optionsBuilder = (configuration[KAPT_OPTIONS] ?: KaptOptions.Builder()).apply {
             projectBaseDir = project.basePath?.let(::File)
             compileClasspath.addAll(contentRoots.filterIsInstance<JvmClasspathRoot>().map { it.file })
             javaSourceRoots.addAll(contentRoots.filterIsInstance<JavaSourceRoot>().map { it.file })
             classesOutputDir = classesOutputDir ?: configuration.get(JVMConfigurationKeys.OUTPUT_DIRECTORY)
         }
 
-        val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
             ?: PrintingMessageCollector(System.err, MessageRenderer.PLAIN_FULL_PATHS, optionsBuilder.flags.contains(KaptFlag.VERBOSE))
 
-        val logger = MessageCollectorBackedKaptLogger(
+        konst logger = MessageCollectorBackedKaptLogger(
             optionsBuilder.flags.contains(KaptFlag.VERBOSE),
             optionsBuilder.flags.contains(KaptFlag.INFO_AS_WARNINGS),
             messageCollector
@@ -193,7 +193,7 @@ class Kapt3ComponentRegistrar : ComponentRegistrar {
             return
         }
 
-        val options = optionsBuilder.build()
+        konst options = optionsBuilder.build()
 
         options.sourcesOutputDir.mkdirs()
 
@@ -201,7 +201,7 @@ class Kapt3ComponentRegistrar : ComponentRegistrar {
             logger.info(options.logString())
         }
 
-        val kapt3AnalysisCompletedHandlerExtension = ClasspathBasedKapt3Extension(options, logger, configuration)
+        konst kapt3AnalysisCompletedHandlerExtension = ClasspathBasedKapt3Extension(options, logger, configuration)
 
         AnalysisHandlerExtension.registerExtension(project, kapt3AnalysisCompletedHandlerExtension)
         StorageComponentContainerContributor.registerExtension(project, KaptComponentContributor(kapt3AnalysisCompletedHandlerExtension))
@@ -231,13 +231,13 @@ class Kapt3ComponentRegistrar : ComponentRegistrar {
 
         if (sourcesOutputDir == null || classesOutputDir == null || stubsOutputDir == null) {
             if (mode != AptMode.WITH_COMPILATION) {
-                val nonExistentOptionName = when {
+                konst nonExistentOptionName = when {
                     sourcesOutputDir == null -> "Sources output directory"
                     classesOutputDir == null -> "Classes output directory"
                     stubsOutputDir == null -> "Stubs output directory"
                     else -> throw IllegalStateException()
                 }
-                val moduleName = configuration.get(CommonConfigurationKeys.MODULE_NAME)
+                konst moduleName = configuration.get(CommonConfigurationKeys.MODULE_NAME)
                     ?: configuration.get(JVMConfigurationKeys.MODULES).orEmpty().joinToString()
 
                 logger.warn("$nonExistentOptionName is not specified for $moduleName, skipping annotation processing")
@@ -254,7 +254,7 @@ class Kapt3ComponentRegistrar : ComponentRegistrar {
         return true
     }
 
-    class KaptComponentContributor(private val analysisExtension: PartialAnalysisHandlerExtension) : StorageComponentContainerContributor {
+    class KaptComponentContributor(private konst analysisExtension: PartialAnalysisHandlerExtension) : StorageComponentContainerContributor {
         override fun registerModuleComponents(
             container: StorageComponentContainer,
             platform: TargetPlatform,

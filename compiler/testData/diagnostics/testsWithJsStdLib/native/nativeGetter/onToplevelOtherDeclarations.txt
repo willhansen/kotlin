@@ -1,6 +1,6 @@
 package
 
-@kotlin.js.nativeGetter public val toplevelVal: kotlin.Int = 0
+@kotlin.js.nativeGetter public konst toplevelVal: kotlin.Int = 0
 @kotlin.js.nativeGetter public fun toplevelFun(): kotlin.Any
 
 @kotlin.js.nativeGetter public final class Foo {

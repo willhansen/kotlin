@@ -14,7 +14,7 @@ suspend fun <T> suspendHere(x: T): T = suspendCoroutineUninterceptedOrReturn {
     COROUTINE_SUSPENDED
 }
 
-inline class I(val x: Any?)
+inline class I(konst x: Any?)
 
 open class C {
     companion object {

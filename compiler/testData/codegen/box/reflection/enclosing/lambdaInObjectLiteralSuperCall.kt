@@ -2,23 +2,23 @@
 // LAMBDAS: CLASS
 // WITH_REFLECT
 
-open class C(val a: Any)
+open class C(konst a: Any)
 
 fun box(): String {
-    val l = object : C({}) {
+    konst l = object : C({}) {
     }
 
-    val javaClass = l.a.javaClass
+    konst javaClass = l.a.javaClass
     if (javaClass.getEnclosingConstructor() != null) return "ctor should be null"
 
-    val enclosingMethod = javaClass.getEnclosingMethod()!!.getName()
+    konst enclosingMethod = javaClass.getEnclosingMethod()!!.getName()
     if (enclosingMethod != "box") return "method: $enclosingMethod"
 
-    val enclosingClass = javaClass.getEnclosingClass()!!.getName()
+    konst enclosingClass = javaClass.getEnclosingClass()!!.getName()
     if (enclosingClass != "LambdaInObjectLiteralSuperCallKt" || enclosingClass != l.javaClass.getEnclosingClass()!!.getName())
         return "enclosing class: $enclosingClass"
 
-    val declaringClass = javaClass.getDeclaringClass()
+    konst declaringClass = javaClass.getDeclaringClass()
     if (declaringClass != null) return "anonymous function has a declaring class: $declaringClass"
 
     return "OK"

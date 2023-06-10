@@ -23,23 +23,23 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 // Used from the IntelliJ IDEA Kotlin Debugger Plug-In
 @Suppress("unused")
-val fragmentSharedVariablesLowering = makeIrModulePhase(
+konst fragmentSharedVariablesLowering = makeIrModulePhase(
     ::FragmentSharedVariablesLowering,
     name = "FragmentSharedVariablesLowering",
     description = "Promotes captured variables that are modified by the fragment to shared variables"
 )
 
 // This lowering is a preprocessor for IR in order to support the compilation
-// scheme used by the "Evaluate Expression..." mechanism of the IntelliJ plug-in
+// scheme used by the "Ekonstuate Expression..." mechanism of the IntelliJ plug-in
 // for Kotlin debugging.
 //
 // Fragments are compiled as the body of an enclosing function that close the free
-// variables of the fragment as parameters. The values of these are then extracted
+// variables of the fragment as parameters. The konstues of these are then extracted
 // from the stack at the current breakpoint, and the fragment code is invoked with
-// these values to evaluate the expression.
+// these konstues to ekonstuate the expression.
 //
 // If the parameter is a shared variable, e.g. `IntRef` (the same mechanism used to
-// implement captures of lambdas) the value extracted from the stack is
+// implement captures of lambdas) the konstue extracted from the stack is
 // automatically boxed in a `Ref` before being passed to the fragment.
 //
 // Upon return, all `Ref`s are written back into the stack, thus allowing fragments
@@ -56,13 +56,13 @@ val fragmentSharedVariablesLowering = makeIrModulePhase(
 // See `FragmentDeclarationGenerator.kt:declareParameter` for the front half
 // of this logic.
 class FragmentSharedVariablesLowering(
-    val context: JvmBackendContext
+    konst context: JvmBackendContext
 ) : IrElementTransformerVoidWithContext(), FileLoweringPass {
 
     companion object {
         // Echo of GENERATED_FUNCTION_NAME in the JVM Debugger plug-in.
         // TODO: Find a good common dependency of JVM Debugger and IR Compiler and deduplicate this
-        const val GENERATED_FUNCTION_NAME = "generated_for_debugger_fun"
+        const konst GENERATED_FUNCTION_NAME = "generated_for_debugger_fun"
     }
 
     override fun lower(irFile: IrFile) {
@@ -74,16 +74,16 @@ class FragmentSharedVariablesLowering(
             return super.visitFunctionNew(declaration)
         }
 
-        val promotedParameters = promoteParametersForCapturesToRefs(declaration)
+        konst promotedParameters = promoteParametersForCapturesToRefs(declaration)
         replaceUseOfPromotedParametersWithRefs(declaration, promotedParameters)
         return declaration
     }
 
     private fun promoteParametersForCapturesToRefs(declaration: IrFunction): Map<IrValueParameterSymbol, IrValueParameterSymbol> {
-        val promotedParameters = mutableMapOf<IrValueParameterSymbol, IrValueParameterSymbol>()
-        declaration.valueParameters = declaration.valueParameters.map {
+        konst promotedParameters = mutableMapOf<IrValueParameterSymbol, IrValueParameterSymbol>()
+        declaration.konstueParameters = declaration.konstueParameters.map {
             if (it.origin == IrDeclarationOrigin.SHARED_VARIABLE_IN_EVALUATOR_FRAGMENT) {
-                val newParameter =
+                konst newParameter =
                     it.copyTo(
                         declaration,
                         type = context.sharedVariablesManager.getIrType(it.type),
@@ -105,13 +105,13 @@ class FragmentSharedVariablesLowering(
         declaration.body!!.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitGetValue(expression: IrGetValue): IrExpression {
                 expression.transformChildrenVoid(this)
-                val newDeclaration = promotedParameters[expression.symbol] ?: return expression
+                konst newDeclaration = promotedParameters[expression.symbol] ?: return expression
                 return context.sharedVariablesManager.getSharedValue(newDeclaration, expression)
             }
 
             override fun visitSetValue(expression: IrSetValue): IrExpression {
                 expression.transformChildrenVoid(this)
-                val newDeclaration = promotedParameters[expression.symbol] ?: return expression
+                konst newDeclaration = promotedParameters[expression.symbol] ?: return expression
                 return context.sharedVariablesManager.setSharedValue(newDeclaration, expression)
             }
         })

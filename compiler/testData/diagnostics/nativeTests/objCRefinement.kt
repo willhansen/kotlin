@@ -88,17 +88,17 @@ fun multipleSwiftRefinementsFunction() { }
 fun multipleMixedRefinementsFunction() { }
 
 interface InterfaceA {
-    val barA: Int
-    val barB: Int
+    konst barA: Int
+    konst barB: Int
     fun fooA()
     @HiddenFromObjC
     fun fooB()
 }
 
 interface InterfaceB {
-    val barA: Int
+    konst barA: Int
     @ShouldRefineInSwift
-    val barB: Int
+    konst barB: Int
     @HFOC
     fun fooA()
     @HiddenFromObjC
@@ -107,9 +107,9 @@ interface InterfaceB {
 
 open class ClassA: InterfaceA, InterfaceB {
     <!INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE!>@HiddenFromObjC<!>
-    override val barA: Int = 0
+    override konst barA: Int = 0
     <!INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE!>@ShouldRefineInSwift<!>
-    override val barB: Int = 0
+    override konst barB: Int = 0
     <!INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE!>override fun fooA() { }<!>
     override fun fooB() { }
     @HiddenFromObjC

@@ -17,16 +17,16 @@ import java.lang.reflect.AnnotatedParameterizedType
 import kotlin.test.assertTrue
 
 @Target(AnnotationTarget.TYPE)
-annotation class Anno(val value: Int = 0)
+annotation class Anno(konst konstue: Int = 0)
 
 fun box(): String {
-    val method = A::class.java.declaredMethods.single()
-    val methodToString = method.annotatedReturnType.annotations.toList().toString()
-    assertTrue("\\[@Anno\\((value=)?1\\)\\]".toRegex().matches(methodToString), methodToString)
+    konst method = A::class.java.declaredMethods.single()
+    konst methodToString = method.annotatedReturnType.annotations.toList().toString()
+    assertTrue("\\[@Anno\\((konstue=)?1\\)\\]".toRegex().matches(methodToString), methodToString)
     
-    val parameterType = method.parameters.single().annotatedType as AnnotatedParameterizedType
-    val parameterToString = parameterType.annotatedActualTypeArguments.single().annotations.toList().toString()
-    assertTrue("\\[@Anno\\((value=)?2\\)\\]".toRegex().matches(parameterToString), parameterToString)
+    konst parameterType = method.parameters.single().annotatedType as AnnotatedParameterizedType
+    konst parameterToString = parameterType.annotatedActualTypeArguments.single().annotations.toList().toString()
+    assertTrue("\\[@Anno\\((konstue=)?2\\)\\]".toRegex().matches(parameterToString), parameterToString)
 
     return "OK"
 }

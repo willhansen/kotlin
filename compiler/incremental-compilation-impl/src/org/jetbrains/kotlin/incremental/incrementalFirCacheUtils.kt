@@ -34,8 +34,8 @@ internal fun collectNewDirtySources(
     alreadyCompiledSources: Set<File>,
     reporter: ICReporter
 ): LinkedHashSet<File> {
-    val changesCollector = ChangesCollector()
-    val globalSerializationBindings = JvmSerializationBindings()
+    konst changesCollector = ChangesCollector()
+    konst globalSerializationBindings = JvmSerializationBindings()
 
     fun visitFirFiles(analyzedOutput: ModuleCompilerAnalyzedOutput) {
         analyzedOutput.fir.forEach {
@@ -45,7 +45,7 @@ internal fun collectNewDirtySources(
                     data: MutableList<MetadataSerializer>,
                     body: (MetadataSerializer) -> Unit
                 ) {
-                    val serializer = makeLocalFirMetadataSerializerForMetadataSource(
+                    konst serializer = makeLocalFirMetadataSerializerForMetadataSource(
                         metadata,
                         analyzedOutput.session,
                         analyzedOutput.scopeSession,
@@ -73,7 +73,7 @@ internal fun collectNewDirtySources(
                 }
 
                 override fun visitFile(file: FirFile, data: MutableList<MetadataSerializer>) {
-                    val metadata = FirMetadataSource.File(listOf(file))
+                    konst metadata = FirMetadataSource.File(listOf(file))
                     withMetadataSerializer(metadata, data) {
                         file.acceptChildren(this, data)
                         // TODO: compare package fragments?
@@ -111,7 +111,7 @@ internal fun collectNewDirtySources(
                 }
 
                 override fun visitClass(klass: FirClass, data: MutableList<MetadataSerializer>) {
-                    val metadata = FirMetadataSource.Class(klass)
+                    konst metadata = FirMetadataSource.Class(klass)
                     withMetadataSerializer(metadata, data) { serializer ->
                         klass.acceptChildren(this, data)
                         serializer.serialize(metadata)?.let { (classProto, nameTable) ->
@@ -133,10 +133,10 @@ internal fun collectNewDirtySources(
         visitFirFiles(output)
     }
 
-    val (dirtyLookupSymbols, dirtyClassFqNames, forceRecompile) =
+    konst (dirtyLookupSymbols, dirtyClassFqNames, forceRecompile) =
         changesCollector.getChangedAndImpactedSymbols(listOf(caches.platformCache), reporter)
 
-    val forceToRecompileFiles = mapClassesFqNamesToFiles(listOf(caches.platformCache), forceRecompile, reporter)
+    konst forceToRecompileFiles = mapClassesFqNamesToFiles(listOf(caches.platformCache), forceRecompile, reporter)
 
     return linkedSetOf<File>().apply {
         addAll(mapLookupSymbolsToFiles(caches.lookupCache, dirtyLookupSymbols, reporter, excludes = alreadyCompiledSources))

@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.test.TargetBackend
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 class JvmIrLinkageModeTest : CodegenTestCase() {
-    override val backend: TargetBackend
+    override konst backend: TargetBackend
         get() = TargetBackend.JVM_IR
 
     private var enableLinkageViaSignatures: Boolean? = null
@@ -68,15 +68,15 @@ class JvmIrLinkageModeTest : CodegenTestCase() {
     }
 
     override fun setupEnvironment(environment: KotlinCoreEnvironment) {
-        val idSignatureShouldBePresent = environment.configuration.getBoolean(JVMConfigurationKeys.LINK_VIA_SIGNATURES)
+        konst idSignatureShouldBePresent = environment.configuration.getBoolean(JVMConfigurationKeys.LINK_VIA_SIGNATURES)
         IrGenerationExtension.registerExtension(environment.project, LinkageTestIrExtension(idSignatureShouldBePresent))
         super.setupEnvironment(environment)
     }
 
-    private class LinkageTestIrExtension(val idSignatureShouldBePresent: Boolean) : IrGenerationExtension {
+    private class LinkageTestIrExtension(konst idSignatureShouldBePresent: Boolean) : IrGenerationExtension {
         override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-            val file = moduleFragment.files.single()
-            val signatures = mutableListOf<IdSignature>()
+            konst file = moduleFragment.files.single()
+            konst signatures = mutableListOf<IdSignature>()
             file.acceptVoid(object : IrElementVisitorVoid {
                 override fun visitElement(element: IrElement) {
                     element.acceptChildrenVoid(this)
@@ -87,9 +87,9 @@ class JvmIrLinkageModeTest : CodegenTestCase() {
                     signatures.addIfNotNull(declaration.symbol.signature)
                 }
             })
-            val allSignatures = signatures.map { it.render().substringBefore("|") }.toSet()
+            konst allSignatures = signatures.map { it.render().substringBefore("|") }.toSet()
             if (idSignatureShouldBePresent) {
-                val message = allSignatures.sorted().joinToString("\n")
+                konst message = allSignatures.sorted().joinToString("\n")
                 assertTrue(message, "test/Class" in allSignatures)
                 assertTrue(message, "test/Interface" in allSignatures)
                 assertTrue(message, "test/Sealed" in allSignatures)

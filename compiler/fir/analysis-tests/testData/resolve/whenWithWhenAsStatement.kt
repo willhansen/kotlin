@@ -1,7 +1,7 @@
-fun test(value: Int) {
-    when (value) {
+fun test(konstue: Int) {
+    when (konstue) {
         0 -> {}
-        1 -> when (value) {
+        1 -> when (konstue) {
             2 -> false
         }
     }

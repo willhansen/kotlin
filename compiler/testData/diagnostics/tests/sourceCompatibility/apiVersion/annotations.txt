@@ -4,7 +4,7 @@ package
 
 @kotlin.SinceKotlin(version = "1.1") public final annotation class Anno1 : kotlin.Annotation {
     public constructor Anno1(/*0*/ s: kotlin.String)
-    public final val s: kotlin.String
+    public final konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

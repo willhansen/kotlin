@@ -11,20 +11,20 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import kotlin.test.fail
 
-open class ExternalTool(private val path: String) {
+open class ExternalTool(private konst path: String) {
     fun runAndPrint(vararg arguments: String) {
-        val command = arrayOf(path, *arguments)
-        val process = ProcessBuilder(*command)
+        konst command = arrayOf(path, *arguments)
+        konst process = ProcessBuilder(*command)
             .redirectErrorStream(true)
             .start()
 
-        val commandString = command.joinToString(" ") { escapeShellArgument(it) }
+        konst commandString = command.joinToString(" ") { escapeShellArgument(it) }
         println(commandString)
-        val inputStream: InputStream = process.inputStream
-        val input = BufferedReader(InputStreamReader(inputStream))
+        konst inputStream: InputStream = process.inputStream
+        konst input = BufferedReader(InputStreamReader(inputStream))
         while (true) println(input.readLine() ?: break)
 
-        val exitValue = process.waitFor()
+        konst exitValue = process.waitFor()
         if (exitValue != 0) {
             fail("Command \"$commandString\" terminated with exit code $exitValue")
         }
@@ -32,10 +32,10 @@ open class ExternalTool(private val path: String) {
 }
 
 object Wabt {
-    private val wabtBinPath = System.getProperty("wabt.bin.path")
-    private val wasm2watTool = ExternalTool("$wabtBinPath/wasm2wat")
-    private val wat2wasmTool = ExternalTool("$wabtBinPath/wat2wasm")
-    private val wast2jsonTool = ExternalTool("$wabtBinPath/wast2json")
+    private konst wabtBinPath = System.getProperty("wabt.bin.path")
+    private konst wasm2watTool = ExternalTool("$wabtBinPath/wasm2wat")
+    private konst wat2wasmTool = ExternalTool("$wabtBinPath/wat2wasm")
+    private konst wast2jsonTool = ExternalTool("$wabtBinPath/wast2json")
 
     fun wasm2wat(input: File, output: File) {
         wasm2watTool.runAndPrint("--enable-all", input.absolutePath, "-o", output.absolutePath)

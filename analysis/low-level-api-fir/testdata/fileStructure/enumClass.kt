@@ -7,7 +7,7 @@ enum class A {/* NonReanalyzableClassDeclarationStructureElement */
 
     fun foo(){/* ReanalyzableFunctionStructureElement */}
 
-    val x = 10/* NonReanalyzableNonClassDeclarationStructureElement */
+    konst x = 10/* NonReanalyzableNonClassDeclarationStructureElement */
 
     fun bar() = 10/* NonReanalyzableNonClassDeclarationStructureElement */
 }

@@ -2,13 +2,13 @@
 // SKIP_TXT
 
 interface Self<E : Self<E>> {
-    val x: E
+    konst x: E
 }
 fun bar(): Self<*> = TODO()
 fun foo(): Self<*>? = TODO()
 
 interface OutSelf<out E : OutSelf<E>> {
-    val x: E
+    konst x: E
 }
 fun outBar(): OutSelf<*> = TODO()
 fun outFoo(): OutSelf<*>? = TODO()

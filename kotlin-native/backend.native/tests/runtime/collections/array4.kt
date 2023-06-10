@@ -9,55 +9,55 @@ import kotlin.test.*
 
 @Test fun runTest() {
     assertFailsWith<IllegalArgumentException> {
-        val a = Array(-2) { "nope" }
+        konst a = Array(-2) { "nope" }
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = ByteArray(-2)
+        konst a = ByteArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = UByteArray(-2)
+        konst a = UByteArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = ShortArray(-2)
+        konst a = ShortArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = UShortArray(-2)
+        konst a = UShortArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = IntArray(-2)
+        konst a = IntArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = UIntArray(-2)
+        konst a = UIntArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = LongArray(-2)
+        konst a = LongArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = ULongArray(-2)
+        konst a = ULongArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = FloatArray(-2)
+        konst a = FloatArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = DoubleArray(-2)
+        konst a = DoubleArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = BooleanArray(-2)
+        konst a = BooleanArray(-2)
         println(a)
     }
     assertFailsWith<IllegalArgumentException> {
-        val a = CharArray(-2)
+        konst a = CharArray(-2)
         println(a)
     }
     println("OK")

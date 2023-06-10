@@ -5,7 +5,7 @@ package test
 import testing.first.TestClass
 import testing.second.TestClass
 
-val a1: `!`TestClass? = null
+konst a1: `!`TestClass? = null
 
 //FILE:mainToFirst.kt
 //----------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ package test
 import testing.second.TestClass
 import testing.first.TestClass
 
-val a2: `!`TestClass? = null
+konst a2: `!`TestClass? = null
 
 //FILE:importFirst.kt
 //----------------------------------------------------------------------------------

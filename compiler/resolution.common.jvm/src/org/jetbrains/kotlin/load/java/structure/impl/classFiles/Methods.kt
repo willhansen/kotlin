@@ -29,21 +29,21 @@ import java.text.CharacterIterator
 import java.text.StringCharacterIterator
 
 abstract class BinaryJavaMethodBase(
-    override val access: Int,
-    override val containingClass: JavaClass,
-    val valueParameters: List<BinaryJavaValueParameter>,
-    val typeParameters: List<JavaTypeParameter>,
-    override val name: Name
+    override konst access: Int,
+    override konst containingClass: JavaClass,
+    konst konstueParameters: List<BinaryJavaValueParameter>,
+    konst typeParameters: List<JavaTypeParameter>,
+    override konst name: Name
 ) : JavaMember, BinaryJavaModifierListOwner, MutableJavaAnnotationOwner {
-    override val annotations: MutableCollection<JavaAnnotation> = SmartList()
-    override val annotationsByFqName by buildLazyValueForMap()
-    override val isFromSource: Boolean get() = false
+    override konst annotations: MutableCollection<JavaAnnotation> = SmartList()
+    override konst annotationsByFqName by buildLazyValueForMap()
+    override konst isFromSource: Boolean get() = false
 
     companion object {
         private class MethodInfo(
-            val returnType: JavaType,
-            val typeParameters: List<JavaTypeParameter>,
-            val valueParameterTypes: List<JavaType>
+            konst returnType: JavaType,
+            konst typeParameters: List<JavaTypeParameter>,
+            konst konstueParameterTypes: List<JavaType>
         )
 
         fun create(
@@ -55,26 +55,26 @@ abstract class BinaryJavaMethodBase(
             parentContext: ClassifierResolutionContext,
             signatureParser: BinaryClassSignatureParser
         ): Pair<JavaMember, MethodVisitor> {
-            val isConstructor = "<init>" == name
-            val isVarargs = access.isSet(Opcodes.ACC_VARARGS)
+            konst isConstructor = "<init>" == name
+            konst isVarargs = access.isSet(Opcodes.ACC_VARARGS)
 
-            val isInnerClassConstructor = isConstructor && containingClass.outerClass != null && !containingClass.isStatic
-            val isEnumConstructor = containingClass.isEnum && isConstructor
-            val methodInfoFromDescriptor = parseMethodDescription(desc, parentContext, signatureParser).let {
+            konst isInnerClassConstructor = isConstructor && containingClass.outerClass != null && !containingClass.isStatic
+            konst isEnumConstructor = containingClass.isEnum && isConstructor
+            konst methodInfoFromDescriptor = parseMethodDescription(desc, parentContext, signatureParser).let {
                 when {
                     isEnumConstructor ->
                         // skip ordinal/name parameters for enum constructors
-                        MethodInfo(it.returnType, it.typeParameters, it.valueParameterTypes.drop(2))
+                        MethodInfo(it.returnType, it.typeParameters, it.konstueParameterTypes.drop(2))
                     isInnerClassConstructor ->
                         // omit synthetic inner class constructor parameter
-                        MethodInfo(it.returnType, it.typeParameters, it.valueParameterTypes.drop(1))
+                        MethodInfo(it.returnType, it.typeParameters, it.konstueParameterTypes.drop(1))
                     else -> it
                 }
             }
-            val info: MethodInfo =
+            konst info: MethodInfo =
                 if (signature != null) {
-                    val contextForMethod = parentContext.copyForMember()
-                    val methodInforFromSignature = parseMethodSignature(signature, signatureParser, contextForMethod).also {
+                    konst contextForMethod = parentContext.copyForMember()
+                    konst methodInforFromSignature = parseMethodSignature(signature, signatureParser, contextForMethod).also {
                         contextForMethod.addTypeParameters(it.typeParameters)
                     }
                     // JVM specs allows disagreements in parameters between signature and descriptor/serialized method. In particular the
@@ -82,7 +82,7 @@ abstract class BinaryJavaMethodBase(
                     // But in our implementation we are using the parameter infos read here as a "master" so if signature has less params
                     // than the descriptor, we need get missing parameter infos from somewhere.
                     // Since the known cases are rare, it was decided to keep it simple for now and only cover this particular case.
-                    if (methodInforFromSignature.valueParameterTypes.count() < methodInfoFromDescriptor.valueParameterTypes.count()) {
+                    if (methodInforFromSignature.konstueParameterTypes.count() < methodInfoFromDescriptor.konstueParameterTypes.count()) {
                         methodInfoFromDescriptor
                     } else {
                         methodInforFromSignature
@@ -91,14 +91,14 @@ abstract class BinaryJavaMethodBase(
                     methodInfoFromDescriptor
                 }
 
-            val parameterTypes = info.valueParameterTypes
-            val paramCount = parameterTypes.size
-            val parameterList = parameterTypes.mapIndexed { i, type ->
-                val isEllipsisParam = isVarargs && i == paramCount - 1
+            konst parameterTypes = info.konstueParameterTypes
+            konst paramCount = parameterTypes.size
+            konst parameterList = parameterTypes.mapIndexed { i, type ->
+                konst isEllipsisParam = isVarargs && i == paramCount - 1
                 BinaryJavaValueParameter(type, isEllipsisParam)
             }
 
-            val member: BinaryJavaMethodBase =
+            konst member: BinaryJavaMethodBase =
                 if (isConstructor)
                     BinaryJavaConstructor(access, containingClass, parameterList, info.typeParameters)
                 else
@@ -109,7 +109,7 @@ abstract class BinaryJavaMethodBase(
                         Name.identifier(name), info.returnType
                     )
 
-            val paramIgnoreCount = when {
+            konst paramIgnoreCount = when {
                 isEnumConstructor -> 2
                 isInnerClassConstructor -> 1
                 else -> 0
@@ -130,8 +130,8 @@ abstract class BinaryJavaMethodBase(
             context: ClassifierResolutionContext,
             signatureParser: BinaryClassSignatureParser
         ): MethodInfo {
-            val returnType = signatureParser.mapAsmType(Type.getReturnType(desc), context)
-            val parameterTypes = Type.getArgumentTypes(desc).map { signatureParser.mapAsmType(it, context) }
+            konst returnType = signatureParser.mapAsmType(Type.getReturnType(desc), context)
+            konst parameterTypes = Type.getArgumentTypes(desc).map { signatureParser.mapAsmType(it, context) }
 
             return MethodInfo(returnType, emptyList(), parameterTypes)
         }
@@ -141,8 +141,8 @@ abstract class BinaryJavaMethodBase(
             signatureParser: BinaryClassSignatureParser,
             context: ClassifierResolutionContext
         ): MethodInfo {
-            val iterator = StringCharacterIterator(signature)
-            val typeParameters = signatureParser.parseTypeParametersDeclaration(iterator, context)
+            konst iterator = StringCharacterIterator(signature)
+            konst typeParameters = signatureParser.parseTypeParametersDeclaration(iterator, context)
 
             if (iterator.current() != '(') throw ClsFormatException()
             iterator.next()
@@ -160,7 +160,7 @@ abstract class BinaryJavaMethodBase(
             }
             iterator.next()
 
-            val returnType = signatureParser.parseTypeString(iterator, context)
+            konst returnType = signatureParser.parseTypeString(iterator, context)
 
             return MethodInfo(returnType, typeParameters, paramTypes)
         }
@@ -170,30 +170,30 @@ abstract class BinaryJavaMethodBase(
 class BinaryJavaMethod(
     flags: Int,
     containingClass: JavaClass,
-    valueParameters: List<BinaryJavaValueParameter>,
+    konstueParameters: List<BinaryJavaValueParameter>,
     typeParameters: List<JavaTypeParameter>,
     name: Name,
-    override val returnType: JavaType
+    override konst returnType: JavaType
 ) : BinaryJavaMethodBase(
-    flags, containingClass, valueParameters, typeParameters, name
+    flags, containingClass, konstueParameters, typeParameters, name
 ), JavaMethod {
     override var annotationParameterDefaultValue: JavaAnnotationArgument? = null
-        internal set(value) {
+        internal set(konstue) {
             if (field != null) {
                 throw AssertionError(
-                    "Annotation method cannot have two default values: $this (old=$field, new=$value)"
+                    "Annotation method cannot have two default konstues: $this (old=$field, new=$konstue)"
                 )
             }
-            field = value
+            field = konstue
         }
 }
 
 class BinaryJavaConstructor(
     flags: Int,
     containingClass: JavaClass,
-    valueParameters: List<BinaryJavaValueParameter>,
+    konstueParameters: List<BinaryJavaValueParameter>,
     typeParameters: List<JavaTypeParameter>
 ) : BinaryJavaMethodBase(
-    flags, containingClass, valueParameters, typeParameters,
+    flags, containingClass, konstueParameters, typeParameters,
     SpecialNames.NO_NAME_PROVIDED
 ), JavaConstructor

@@ -9,7 +9,7 @@ open class D : B() // B
 class E : D() // B
 class F : C()
 
-val dyn: dynamic = js("({})")
+konst dyn: dynamic = js("({})")
 
 fun nullToNull(aa: Any?) = aa as? B?
 fun notNullToNull(aa: Any) = aa as? B?
@@ -19,21 +19,21 @@ fun notNullToNotNull(aa: Any) = aa as? B
 fun NBtoNB(bb: B?) = bb as? B?
 fun dtoNB(dd: dynamic) = dd as? B?
 
-val an = Any()
+konst an = Any()
 
-val a = A()
-val b = B()
-val c = C()
-val d = D()
-val e = E()
-val f = F()
+konst a = A()
+konst b = B()
+konst c = C()
+konst d = D()
+konst e = E()
+konst f = F()
 
 fun fff() {}
 
-val func = ::fff
-val bool = true
-val num = 42
-val str = "String"
+konst func = ::fff
+konst bool = true
+konst num = 42
+konst str = "String"
 
 fun testClassCastN2N(): String { // ? as? ?
     assertEquals(null, nullToNull(null), "null as? B?")

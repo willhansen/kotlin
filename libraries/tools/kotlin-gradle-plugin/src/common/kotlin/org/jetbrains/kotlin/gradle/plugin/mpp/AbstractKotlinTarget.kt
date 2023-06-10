@@ -29,41 +29,41 @@ import org.jetbrains.kotlin.tooling.core.mutableExtrasOf
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import org.jetbrains.kotlin.utils.addIfNotNull
 
-internal const val PRIMARY_SINGLE_COMPONENT_NAME = "kotlin"
+internal const konst PRIMARY_SINGLE_COMPONENT_NAME = "kotlin"
 
 abstract class AbstractKotlinTarget(
-    final override val project: Project
+    final override konst project: Project
 ) : InternalKotlinTarget {
 
-    final override val extras: MutableExtras = mutableExtrasOf()
+    final override konst extras: MutableExtras = mutableExtrasOf()
 
-    private val attributeContainer = HierarchyAttributeContainer(parent = null)
+    private konst attributeContainer = HierarchyAttributeContainer(parent = null)
 
     override fun getAttributes(): AttributeContainer = attributeContainer
 
-    @Deprecated("Scheduled for removal with Kotlin 2.2")
+    @Deprecated("Scheduled for remokonst with Kotlin 2.2")
     override var useDisambiguationClassifierAsSourceSetNamePrefix: Boolean = true
         internal set
 
-    @Deprecated("Scheduled for removal with Kotlin 2.2")
+    @Deprecated("Scheduled for remokonst with Kotlin 2.2")
     override var overrideDisambiguationClassifierOnIdeImport: String? = null
         internal set
 
-    override val apiElementsConfigurationName: String
+    override konst apiElementsConfigurationName: String
         get() = disambiguateName("apiElements")
 
-    override val runtimeElementsConfigurationName: String
+    override konst runtimeElementsConfigurationName: String
         get() = disambiguateName("runtimeElements")
 
-    override val sourcesElementsConfigurationName: String
+    override konst sourcesElementsConfigurationName: String
         get() = disambiguateName("sourcesElements")
 
-    override val artifactsTaskName: String
+    override konst artifactsTaskName: String
         get() = disambiguateName("jar")
 
     override fun toString(): String = "target $name ($platformType)"
 
-    override val publishable: Boolean
+    override konst publishable: Boolean
         get() = true
 
     override var isSourcesPublishable: Boolean = true
@@ -72,11 +72,11 @@ abstract class AbstractKotlinTarget(
     }
 
     @InternalKotlinGradlePluginApi
-    override val kotlinComponents: Set<KotlinTargetComponent> by lazy {
-        val mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
-        val usageContexts = createUsageContexts(mainCompilation).toMutableSet()
+    override konst kotlinComponents: Set<KotlinTargetComponent> by lazy {
+        konst mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+        konst usageContexts = createUsageContexts(mainCompilation).toMutableSet()
 
-        val componentName =
+        konst componentName =
             if (project.kotlinExtension is KotlinMultiplatformExtension)
                 targetName
             else PRIMARY_SINGLE_COMPONENT_NAME
@@ -89,12 +89,12 @@ abstract class AbstractKotlinTarget(
             )
         )
 
-        val result = createKotlinVariant(componentName, mainCompilation, usageContexts)
+        konst result = createKotlinVariant(componentName, mainCompilation, usageContexts)
 
         setOf(result)
     }
 
-    override val components: Set<SoftwareComponent> by lazy {
+    override konst components: Set<SoftwareComponent> by lazy {
         project.buildAdhocComponentsFromKotlinVariants(kotlinComponents)
     }
 
@@ -103,13 +103,13 @@ abstract class AbstractKotlinTarget(
         compilation: KotlinCompilation<*>,
         usageContexts: Set<DefaultKotlinUsageContext>
     ): KotlinVariant {
-        val kotlinExtension = project.kotlinExtension
+        konst kotlinExtension = project.kotlinExtension
 
-        val result =
+        konst result =
             if (kotlinExtension !is KotlinMultiplatformExtension || targetName == KotlinMultiplatformPlugin.METADATA_TARGET_NAME)
                 KotlinVariantWithCoordinates(compilation, usageContexts)
             else {
-                val metadataTarget =
+                konst metadataTarget =
                     kotlinExtension.targets.getByName(KotlinMultiplatformPlugin.METADATA_TARGET_NAME) as AbstractKotlinTarget
 
                 KotlinVariantWithMetadataVariant(compilation, usageContexts, metadataTarget)
@@ -145,7 +145,7 @@ abstract class AbstractKotlinTarget(
     ): DefaultKotlinUsageContext? {
         // We want to create task anyway, even if sources are not going to be published by KGP
         // So users or other plugins can still use it
-        val sourcesJarTask = sourcesJarTask(producingCompilation, componentName, artifactNameAppendix)
+        konst sourcesJarTask = sourcesJarTask(producingCompilation, componentName, artifactNameAppendix)
         if (!isSourcesPublishable) return null
 
         // If sourcesElements configuration not found, don't create artifact.
@@ -153,7 +153,7 @@ abstract class AbstractKotlinTarget(
         // But we still want to have sourcesJarTask be registered
         project.configurations.findByName(sourcesElementsConfigurationName) ?: return null
 
-        val artifact = project.artifacts.add(sourcesElementsConfigurationName, sourcesJarTask) as ConfigurablePublishArtifact
+        konst artifact = project.artifacts.add(sourcesElementsConfigurationName, sourcesJarTask) as ConfigurablePublishArtifact
         artifact.classifier = dashSeparatedName(classifierPrefix, "sources")
 
         return DefaultKotlinUsageContext(
@@ -167,7 +167,7 @@ abstract class AbstractKotlinTarget(
     }
 
     @Suppress("UNCHECKED_CAST")
-    private val publicationConfigureActions: DomainObjectSet<Action<MavenPublication>> = project.objects
+    private konst publicationConfigureActions: DomainObjectSet<Action<MavenPublication>> = project.objects
         .domainObjectSet(Action::class.java) as DomainObjectSet<Action<MavenPublication>>
 
     override fun mavenPublication(action: Action<MavenPublication>) {
@@ -183,7 +183,7 @@ abstract class AbstractKotlinTarget(
         internal set
 }
 
-private val publishedConfigurationNameSuffix = "-published"
+private konst publishedConfigurationNameSuffix = "-published"
 
 internal fun publishedConfigurationName(originalVariantName: String) = originalVariantName + publishedConfigurationNameSuffix
 internal fun originalVariantNameFromPublished(publishedConfigurationName: String): String? =
@@ -195,24 +195,24 @@ internal fun KotlinTarget.disambiguateName(simpleName: String) =
 internal fun javaApiUsageForMavenScoping() = "java-api-jars"
 
 internal fun Project.buildAdhocComponentsFromKotlinVariants(kotlinVariants: Set<KotlinTargetComponent>): Set<SoftwareComponent> {
-    val softwareComponentFactoryClass = SoftwareComponentFactory::class.java
+    konst softwareComponentFactoryClass = SoftwareComponentFactory::class.java
     // TODO replace internal API access with injection (not possible until we have this class on the compile classpath)
-    val softwareComponentFactory = (project as ProjectInternal).services.get(softwareComponentFactoryClass)
+    konst softwareComponentFactory = (project as ProjectInternal).services.get(softwareComponentFactoryClass)
 
     return kotlinVariants.map { kotlinVariant ->
-        val adhocVariant = softwareComponentFactory.adhoc(kotlinVariant.name)
+        konst adhocVariant = softwareComponentFactory.adhoc(kotlinVariant.name)
 
         project.launchInStage(KotlinPluginLifecycle.Stage.AfterFinaliseCompilations) {
             (kotlinVariant as SoftwareComponentInternal).usages.filterIsInstance<KotlinUsageContext>().forEach { kotlinUsageContext ->
-                val publishedConfigurationName = publishedConfigurationName(kotlinUsageContext.name)
-                val configuration = project.configurations.findByName(publishedConfigurationName)
+                konst publishedConfigurationName = publishedConfigurationName(kotlinUsageContext.name)
+                konst configuration = project.configurations.findByName(publishedConfigurationName)
                     ?: project.configurations.create(publishedConfigurationName).also { configuration ->
                         configuration.isCanBeConsumed = false
                         configuration.isCanBeResolved = false
                         configuration.extendsFrom(project.configurations.getByName(kotlinUsageContext.dependencyConfigurationName))
                         configuration.artifacts.addAll(kotlinUsageContext.artifacts)
 
-                        val attributes = kotlinUsageContext.attributes
+                        konst attributes = kotlinUsageContext.attributes
                         attributes.keySet().forEach {
                             // capture type parameter T
                             fun <T> copyAttribute(key: Attribute<T>, from: AttributeContainer, to: AttributeContainer) {
@@ -223,9 +223,9 @@ internal fun Project.buildAdhocComponentsFromKotlinVariants(kotlinVariants: Set<
                     }
 
                 adhocVariant.addVariantsFromConfiguration(configuration) { configurationVariantDetails ->
-                    val mavenScope = kotlinUsageContext.mavenScope
+                    konst mavenScope = kotlinUsageContext.mavenScope
                     if (mavenScope != null) {
-                        val mavenScopeString = when (mavenScope) {
+                        konst mavenScopeString = when (mavenScope) {
                             COMPILE -> "compile"
                             RUNTIME -> "runtime"
                         }

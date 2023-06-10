@@ -2,11 +2,11 @@
 // !LANGUAGE: +ContextReceivers
 
 class A {
-    val x = 1
+    konst x = 1
 }
 
 context(A) class B {
-    val prop = x + this@A.x
+    konst prop = x + this@A.x
 
     fun f() = x + this@A.x
 }

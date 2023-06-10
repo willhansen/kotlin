@@ -12,7 +12,7 @@ fun id(a: Any?): Any? {
 // CHECK-LABEL: "kfun:#main(){}"
 fun main() {
     // CHECK: call %struct.ObjHeader* @"kfun:#id(kotlin.Any?){}kotlin.Any?"
-    val x = id("Hello")
+    konst x = id("Hello")
     // CHECK: call void @"kfun:kotlin.io#println(kotlin.Any?){}"(%struct.ObjHeader* {{.*}})
     println(x)
 // CHECK-LABEL: epilogue

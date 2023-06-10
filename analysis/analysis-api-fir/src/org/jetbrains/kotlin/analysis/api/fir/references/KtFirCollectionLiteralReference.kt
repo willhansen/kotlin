@@ -23,9 +23,9 @@ class KtFirCollectionLiteralReference(
 ) : KtCollectionLiteralReference(expression), KtFirReference {
     override fun KtAnalysisSession.resolveToSymbols(): Collection<KtSymbol> {
         check(this is KtFirAnalysisSession)
-        val fir = element.getOrBuildFirSafe<FirArrayOfCall>(firResolveSession) ?: return emptyList()
-        val type = fir.typeRef.coneTypeSafe<ConeClassLikeType>() ?: return listOfNotNull(arrayOfSymbol(arrayOf))
-        val call = arrayTypeToArrayOfCall[type.lookupTag.classId] ?: arrayOf
+        konst fir = element.getOrBuildFirSafe<FirArrayOfCall>(firResolveSession) ?: return emptyList()
+        konst type = fir.typeRef.coneTypeSafe<ConeClassLikeType>() ?: return listOfNotNull(arrayOfSymbol(arrayOf))
+        konst call = arrayTypeToArrayOfCall[type.lookupTag.classId] ?: arrayOf
         return listOfNotNull(arrayOfSymbol(call))
     }
 }

@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1295
 package foo
 
-enum class Foo(val a: Int = 1, val b: String = "a") {
+enum class Foo(konst a: Int = 1, konst b: String = "a") {
     A(),
     B(2, "b"),
     C(b = "b"),

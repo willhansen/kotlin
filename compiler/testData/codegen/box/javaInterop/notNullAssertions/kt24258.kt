@@ -3,13 +3,13 @@
 // WITH_STDLIB
 // FILE: kt24258.kt
 
-val lazyNullString: String by lazy { J.nullString() }
+konst lazyNullString: String by lazy { J.nullString() }
 
 
 fun testLazyNullString() {
     try {
-        val s: String = lazyNullString
-        throw Exception("'val s: String = lazyNullString' should throw NullPointerException")
+        konst s: String = lazyNullString
+        throw Exception("'konst s: String = lazyNullString' should throw NullPointerException")
     } catch (e: NullPointerException) {
     }
 }

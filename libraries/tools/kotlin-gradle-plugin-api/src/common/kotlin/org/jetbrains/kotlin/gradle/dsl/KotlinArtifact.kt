@@ -12,44 +12,44 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.konan.target.KonanTarget
 
 interface KotlinArtifact : Named, ExtensionAware {
-    val artifactName: String
-    val modules: Set<Any>
-    val taskName: String
-    val outDir: String
+    konst artifactName: String
+    konst modules: Set<Any>
+    konst taskName: String
+    konst outDir: String
     fun registerAssembleTask(project: Project)
 }
 
 interface KotlinNativeArtifact : KotlinArtifact {
-    val modes: Set<NativeBuildType>
-    val isStatic: Boolean
-    val linkerOptions: List<String>
-    val kotlinOptionsFn: KotlinCommonToolOptions.() -> Unit
-    val toolOptionsConfigure: KotlinCommonCompilerToolOptions.() -> Unit
-    val binaryOptions: Map<String, String>
+    konst modes: Set<NativeBuildType>
+    konst isStatic: Boolean
+    konst linkerOptions: List<String>
+    konst kotlinOptionsFn: KotlinCommonToolOptions.() -> Unit
+    konst toolOptionsConfigure: KotlinCommonCompilerToolOptions.() -> Unit
+    konst binaryOptions: Map<String, String>
 }
 
 interface KotlinNativeLibrary : KotlinNativeArtifact {
-    val target: KonanTarget
+    konst target: KonanTarget
 }
 
 interface KotlinNativeFramework : KotlinNativeArtifact {
-    val target: KonanTarget
-    val embedBitcode: BitcodeEmbeddingMode?
+    konst target: KonanTarget
+    konst embedBitcode: BitcodeEmbeddingMode?
 }
 
 interface KotlinNativeFatFramework : KotlinNativeArtifact {
-    val targets: Set<KonanTarget>
-    val embedBitcode: BitcodeEmbeddingMode?
+    konst targets: Set<KonanTarget>
+    konst embedBitcode: BitcodeEmbeddingMode?
 }
 
 interface KotlinNativeXCFramework : KotlinNativeArtifact {
-    val targets: Set<KonanTarget>
-    val embedBitcode: BitcodeEmbeddingMode?
+    konst targets: Set<KonanTarget>
+    konst embedBitcode: BitcodeEmbeddingMode?
 }
 
 interface KotlinArtifactConfig {
-    val artifactName: String
-    val modules: Set<Any>
+    konst artifactName: String
+    konst modules: Set<Any>
     fun setModules(vararg project: Any)
     fun addModule(project: Any)
     fun createArtifact(extensions: ExtensionAware): KotlinArtifact
@@ -62,7 +62,7 @@ interface KotlinNativeArtifactConfig : KotlinArtifactConfig {
     var linkerOptions: List<String>
     fun kotlinOptions(fn: Action<KotlinCommonToolOptions>)
     fun toolOptions(configure: Action<KotlinCommonCompilerToolOptions>)
-    fun binaryOption(name: String, value: String)
+    fun binaryOption(name: String, konstue: String)
 }
 
 interface KotlinNativeLibraryConfig : KotlinNativeArtifactConfig {
@@ -95,14 +95,14 @@ interface KotlinArtifactsExtension {
     //      (it as ExtensionAware).extensions.create("myConfig", Config::class.java)
     //    }
     //    artifacts.all {
-    //      val config = it.extensions.findByName("myConfig") as Config
+    //      konst config = it.extensions.findByName("myConfig") as Config
     //      //configure additional tasks, etc
     //      //here we can use artifact parameters
     //    }
     //}
-    val artifactConfigs: DomainObjectSet<KotlinArtifactConfig>
-    val artifacts: NamedDomainObjectSet<KotlinArtifact>
-    val Native: KotlinNativeArtifactDSL
+    konst artifactConfigs: DomainObjectSet<KotlinArtifactConfig>
+    konst artifacts: NamedDomainObjectSet<KotlinArtifact>
+    konst Native: KotlinNativeArtifactDSL
 }
 
 interface KotlinNativeArtifactDSL {

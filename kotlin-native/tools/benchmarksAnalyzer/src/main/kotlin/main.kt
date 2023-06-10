@@ -10,7 +10,7 @@ import org.jetbrains.report.*
 import org.jetbrains.report.json.*
 
 abstract class Connector {
-    abstract val connectorPrefix: String
+    abstract konst connectorPrefix: String
 
     fun isCompatible(fileName: String) =
             fileName.startsWith(connectorPrefix)
@@ -19,20 +19,20 @@ abstract class Connector {
 }
 
 object ArtifactoryConnector : Connector() {
-    override val connectorPrefix = "artifactory:"
+    override konst connectorPrefix = "artifactory:"
     lateinit var artifactoryUrl : String
 
     override fun getFileContent(fileLocation: String, user: String?): String {
         if (!this::artifactoryUrl.isInitialized) {
             throw IllegalStateException("--arifactory-url option is required to use artifactory-hosted results")
         }
-        val fileParametersSize = 3
-        val fileDescription = fileLocation.substringAfter(connectorPrefix)
-        val fileParameters = fileDescription.split(':', limit = fileParametersSize)
+        konst fileParametersSize = 3
+        konst fileDescription = fileLocation.substringAfter(connectorPrefix)
+        konst fileParameters = fileDescription.split(':', limit = fileParametersSize)
 
         // Right link to Artifactory file.
         if (fileParameters.size == 1) {
-            val accessFileUrl = "$artifactoryUrl/${fileParameters[0]}"
+            konst accessFileUrl = "$artifactoryUrl/${fileParameters[0]}"
             return sendGetRequest(accessFileUrl, followLocation = true)
         }
         // Used builds description format.
@@ -40,57 +40,57 @@ object ArtifactoryConnector : Connector() {
             error("To get file from Artifactory, please, specify, build number from TeamCity and target" +
                     " in format artifactory:build_number:target:filename")
         }
-        val (buildNumber, target, fileName) = fileParameters
-        val accessFileUrl = "$artifactoryUrl/$target/$buildNumber/$fileName"
+        konst (buildNumber, target, fileName) = fileParameters
+        konst accessFileUrl = "$artifactoryUrl/$target/$buildNumber/$fileName"
         return sendGetRequest(accessFileUrl, followLocation = true)
     }
 }
 
 object TeamCityConnector : Connector() {
-    override val connectorPrefix = "teamcity:"
+    override konst connectorPrefix = "teamcity:"
     lateinit var teamCityUrl : String
 
     override fun getFileContent(fileLocation: String, user: String?): String {
         if (!this::teamCityUrl.isInitialized) {
             throw IllegalStateException("--teamcity-url option is required to use artifactory-hosted results")
         }
-        val fileDescription = fileLocation.substringAfter(connectorPrefix)
-        val buildLocator = fileDescription.substringBeforeLast(':')
-        val fileName = fileDescription.substringAfterLast(':')
+        konst fileDescription = fileLocation.substringAfter(connectorPrefix)
+        konst buildLocator = fileDescription.substringBeforeLast(':')
+        konst fileName = fileDescription.substringAfterLast(':')
         if (fileDescription == fileLocation ||
                 fileDescription == buildLocator || fileName == fileDescription) {
             error("To get file from TeamCity, please, specify, build locator and filename on TeamCity" +
                     " in format teamcity:build_locator:filename")
         }
-        val accessFileUrl = "$teamCityUrl/app/rest/builds/$buildLocator/artifacts/content/$fileName"
-        val userName = user?.substringBefore(':')
-        val password = user?.substringAfter(':')
+        konst accessFileUrl = "$teamCityUrl/app/rest/builds/$buildLocator/artifacts/content/$fileName"
+        konst userName = user?.substringBefore(':')
+        konst password = user?.substringAfter(':')
         return sendGetRequest(accessFileUrl, userName, password)
     }
 }
 
 object DBServerConnector : Connector() {
-    override val connectorPrefix = ""
+    override konst connectorPrefix = ""
     lateinit var serverUrl: String
 
     override fun getFileContent(fileLocation: String, user: String?): String {
         if (!this::serverUrl.isInitialized) {
             throw IllegalStateException("--server-url option is required")
         }
-        val buildNumber = fileLocation.substringBefore(':')
-        val target = fileLocation.substringAfter(':')
+        konst buildNumber = fileLocation.substringBefore(':')
+        konst target = fileLocation.substringAfter(':')
         if (target == buildNumber) {
             error("To get file from database, please, specify, target and build number" +
                     " in format target:build_number")
         }
-        val accessFileUrl = "$serverUrl/report/$target/$buildNumber"
+        konst accessFileUrl = "$serverUrl/report/$target/$buildNumber"
         return sendGetRequest(accessFileUrl)
     }
 
     fun getUnstableBenchmarks(): List<String>? {
         try {
-            val unstableList = sendGetRequest("$serverUrl/unstable")
-            val data = JsonTreeParser.parse(unstableList)
+            konst unstableList = sendGetRequest("$serverUrl/unstable")
+            konst data = JsonTreeParser.parse(unstableList)
             if (data !is JsonArray) {
                 return null
             }
@@ -113,7 +113,7 @@ fun getFileContent(fileName: String, user: String? = null): String {
 }
 
 fun getBenchmarkReport(fileName: String, user: String? = null): List<BenchmarksReport> {
-    val jsonEntity = JsonTreeParser.parse(getFileContent(fileName, user))
+    konst jsonEntity = JsonTreeParser.parse(getFileContent(fileName, user))
     return when (jsonEntity) {
         is JsonObject -> listOf(BenchmarksReport.create(jsonEntity))
         is JsonArray -> jsonEntity.map { BenchmarksReport.create(it) }
@@ -122,13 +122,13 @@ fun getBenchmarkReport(fileName: String, user: String? = null): List<BenchmarksR
 }
 
 fun parseNormalizeResults(results: String): Map<String, Map<String, Double>> {
-    val parsedNormalizeResults = mutableMapOf<String, MutableMap<String, Double>>()
-    val tokensNumber = 3
+    konst parsedNormalizeResults = mutableMapOf<String, MutableMap<String, Double>>()
+    konst tokensNumber = 3
     results.lines().forEach {
         if (!it.isEmpty()) {
-            val tokens = it.split(",").map { it.trim() }
+            konst tokens = it.split(",").map { it.trim() }
             if (tokens.size != tokensNumber) {
-                error("Data for normalization should include benchmark name, metric name and value. Got $it")
+                error("Data for normalization should include benchmark name, metric name and konstue. Got $it")
             }
             parsedNormalizeResults.getOrPut(tokens[0], { mutableMapOf<String, Double>() })[tokens[1]] = tokens[2].toDouble()
         }
@@ -137,9 +137,9 @@ fun parseNormalizeResults(results: String): Map<String, Map<String, Double>> {
 }
 
 fun mergeCompilerFlags(reports: List<BenchmarksReport>): List<String> {
-    val flagsMap = mutableMapOf<String, MutableList<String>>()
+    konst flagsMap = mutableMapOf<String, MutableList<String>>()
     reports.forEach {
-        val benchmarks = it.benchmarks.values.flatten().asSequence().filter { it.metric == BenchmarkResult.Metric.COMPILE_TIME }
+        konst benchmarks = it.benchmarks.konstues.flatten().asSequence().filter { it.metric == BenchmarkResult.Metric.COMPILE_TIME }
                 .map { it.shortName }.toList()
         if (benchmarks.isNotEmpty())
             (flagsMap.getOrPut("${it.compiler.backend.flags.joinToString()}") { mutableListOf<String>() }).addAll(benchmarks)
@@ -150,9 +150,9 @@ fun mergeCompilerFlags(reports: List<BenchmarksReport>): List<String> {
 fun mergeReportsWithDetailedFlags(reports: List<BenchmarksReport>) =
         if (reports.size > 1) {
             // Merge reports.
-            val detailedFlags = mergeCompilerFlags(reports)
+            konst detailedFlags = mergeCompilerFlags(reports)
             reports.map {
-                BenchmarksReport(it.env, it.benchmarks.values.flatten(),
+                BenchmarksReport(it.env, it.benchmarks.konstues.flatten(),
                         Compiler(Compiler.Backend(it.compiler.backend.type, it.compiler.backend.version, detailedFlags),
                                 it.compiler.kotlinVersion))
             }.reduce { result, it -> result + it }
@@ -162,36 +162,36 @@ fun mergeReportsWithDetailedFlags(reports: List<BenchmarksReport>) =
 
 fun main(args: Array<String>) {
     // Parse args.
-    val argParser = ArgParser("benchmarksAnalyzer")
+    konst argParser = ArgParser("benchmarksAnalyzer")
 
-    val mainReport by argParser.argument(ArgType.String, description = "Main report for analysis")
-    val compareToReport by argParser.argument(ArgType.String, description = "Report to compare to").optional()
+    konst mainReport by argParser.argument(ArgType.String, description = "Main report for analysis")
+    konst compareToReport by argParser.argument(ArgType.String, description = "Report to compare to").optional()
 
-    val output by argParser.option(ArgType.String, shortName = "o", description = "Output file")
-    val epsValue by argParser.option(ArgType.Double, "eps", "e",
+    konst output by argParser.option(ArgType.String, shortName = "o", description = "Output file")
+    konst epsValue by argParser.option(ArgType.Double, "eps", "e",
             "Meaningful performance changes").default(1.0)
-    val useShortForm by argParser.option(ArgType.Boolean, "short", "s",
+    konst useShortForm by argParser.option(ArgType.Boolean, "short", "s",
             "Show short version of report").default(false)
-    val renders by argParser.option(ArgType.Choice<RenderType>(), shortName = "r",
+    konst renders by argParser.option(ArgType.Choice<RenderType>(), shortName = "r",
             description = "Renders for showing information").multiple().default(listOf(RenderType.TEXT))
-    val user by argParser.option(ArgType.String, shortName = "u", description = "User access information for authorization")
-    val flatReport by argParser.option(ArgType.Boolean, "flat", "f", "Generate fflat report without splitting into stable and unstable becnhmarks")
+    konst user by argParser.option(ArgType.String, shortName = "u", description = "User access information for authorization")
+    konst flatReport by argParser.option(ArgType.Boolean, "flat", "f", "Generate fflat report without splitting into stable and unstable becnhmarks")
             .default(false)
 
-    val serverUrlArg by argParser.option(ArgType.String, "server-url", description = "Url of performance server")
-    val teamCityUrl by argParser.option(ArgType.String, "teamcity-url", description = "Url of teamcity server")
-    val artifactoryUrl by argParser.option(ArgType.String, "artifactory-url", description = "Url of artifactory server")
+    konst serverUrlArg by argParser.option(ArgType.String, "server-url", description = "Url of performance server")
+    konst teamCityUrl by argParser.option(ArgType.String, "teamcity-url", description = "Url of teamcity server")
+    konst artifactoryUrl by argParser.option(ArgType.String, "artifactory-url", description = "Url of artifactory server")
 
     argParser.parse(args)
 
-    val serverUrl = serverUrlArg ?: getDefaultPerformanceServerUrl()
+    konst serverUrl = serverUrlArg ?: getDefaultPerformanceServerUrl()
 
     teamCityUrl?.let { TeamCityConnector.teamCityUrl = it }
     artifactoryUrl?.let { ArtifactoryConnector.artifactoryUrl = it }
     serverUrl?.let { DBServerConnector.serverUrl = it }
 
     // Get unstable benchmarks.
-    val unstableBenchmarks = if (!flatReport && serverUrl != null) {
+    konst unstableBenchmarks = if (!flatReport && serverUrl != null) {
         DBServerConnector.getUnstableBenchmarks()
     } else {
         null
@@ -201,14 +201,14 @@ fun main(args: Array<String>) {
         println("Failed to get access to server and get unstable benchmarks list, use -f option to assume it's empty.")
 
     // Read contents of file.
-    val mainBenchsReport = mergeReportsWithDetailedFlags(getBenchmarkReport(mainReport, user))
+    konst mainBenchsReport = mergeReportsWithDetailedFlags(getBenchmarkReport(mainReport, user))
 
     var compareToBenchsReport = compareToReport?.let {
         mergeReportsWithDetailedFlags(getBenchmarkReport(it, user))
     }
 
     // Generate comparasion report.
-    val summaryReport = SummaryBenchmarksReport(mainBenchsReport,
+    konst summaryReport = SummaryBenchmarksReport(mainBenchsReport,
             compareToBenchsReport, epsValue,
             unstableBenchmarks ?: emptyList())
 

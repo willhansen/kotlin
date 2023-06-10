@@ -8,4 +8,4 @@ annotation class DelegateAnnotation
 @property:ExplicitPropertyAnnotation
 @delegate:DelegateAnnotation
 @PropertyAnnotation
-val lazyPr<caret>operty by lazy { 1 }
+konst lazyPr<caret>operty by lazy { 1 }

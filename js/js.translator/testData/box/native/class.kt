@@ -14,7 +14,7 @@ fun box(): String {
     if (A(3).m() != 2) {
         return "fail2"
     }
-    val a = A(100)
+    konst a = A(100)
     if (a.g() != 200) {
         return "fail3"
     }

@@ -1,7 +1,7 @@
 // SKIP_TXT
 // ISSUE: KT-45814
 
-class Foo(val bar: String?)
+class Foo(konst bar: String?)
 
 fun test_1(foo: Foo?) {
     foo!!.bar.let {

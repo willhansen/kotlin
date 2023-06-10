@@ -1,10 +1,10 @@
 // FIR_IDENTICAL
-open class C(val x: Int)
+open class C(konst x: Int)
 
 class D : C {
     constructor() : super(
             {
-                val s = ""
+                konst s = ""
                 <!INSTANCE_ACCESS_BEFORE_SUPER_CALL!>s<!>()
                 <!INSTANCE_ACCESS_BEFORE_SUPER_CALL!>""()<!>
                 42

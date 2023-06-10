@@ -1,8 +1,8 @@
 package
 
-public val a: () -> kotlin.Int
-public val b: () -> kotlin.Unit
-public val c: () -> kotlin.Any
-public val d: () -> kotlin.Int
-public val e: () -> kotlin.Int
-public val flag: kotlin.Boolean = true
+public konst a: () -> kotlin.Int
+public konst b: () -> kotlin.Unit
+public konst c: () -> kotlin.Any
+public konst d: () -> kotlin.Int
+public konst e: () -> kotlin.Int
+public konst flag: kotlin.Boolean = true

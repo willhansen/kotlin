@@ -11,26 +11,26 @@ fun box(): String = OK
 @file:[JvmName("MultifileClass") JvmMultifileClass]
 package a
 
-val O: String = "O"
+konst O: String = "O"
 
 // FILE: part2.kt
 
 @file:[JvmName("MultifileClass") JvmMultifileClass]
 package a
 
-val K: String = "K"
+konst K: String = "K"
 
 // FILE: part3.kt
 
 @file:[JvmName("MultifileClass") JvmMultifileClass]
 package a
 
-val OK: String = O + K
+konst OK: String = O + K
 
 // FILE: irrelevant.kt
 
 @file:[JvmName("MultifileClass") JvmMultifileClass]
 package a
 
-val X: Nothing = throw AssertionError("X should not be initialized")
+konst X: Nothing = throw AssertionError("X should not be initialized")
 

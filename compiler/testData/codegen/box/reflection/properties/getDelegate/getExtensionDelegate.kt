@@ -12,18 +12,18 @@ object Delegate {
 }
 
 class Foo {
-    val member: Boolean by Delegate
-    val String.memberExtension: Boolean by Delegate
+    konst member: Boolean by Delegate
+    konst String.memberExtension: Boolean by Delegate
 }
 
-val Foo.extension: Boolean by Delegate
+konst Foo.extension: Boolean by Delegate
 
 fun box(): String {
     // Top level extension
     assertEquals(Delegate, Foo::extension.apply { isAccessible = true }.getExtensionDelegate())
 
     // Member extension
-    val me = Foo::class.members.single { it.name == "memberExtension" } as KProperty2<Foo, String, Boolean>
+    konst me = Foo::class.members.single { it.name == "memberExtension" } as KProperty2<Foo, String, Boolean>
     assertEquals(Delegate, me.apply { isAccessible = true }.getExtensionDelegate(Foo()))
 
     // Member (should fail)

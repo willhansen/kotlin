@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowInfo;
 
 public interface DataFlowInfoForArguments {
     @NotNull
-    DataFlowInfo getInfo(@NotNull ValueArgument valueArgument);
+    DataFlowInfo getInfo(@NotNull ValueArgument konstueArgument);
 
     @NotNull
     DataFlowInfo getResultInfo();

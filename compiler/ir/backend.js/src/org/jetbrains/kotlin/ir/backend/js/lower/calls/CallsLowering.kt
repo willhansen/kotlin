@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
-class CallsLowering(val context: JsIrBackendContext) : BodyLoweringPass {
-    private val transformers = listOf(
+class CallsLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
+    private konst transformers = listOf(
         NumberOperatorCallsTransformer(context),
         NumberConversionCallsTransformer(context),
         EqualityAndComparisonCallsTransformer(context),
@@ -30,7 +30,7 @@ class CallsLowering(val context: JsIrBackendContext) : BodyLoweringPass {
         BuiltInConstructorCalls(context),
         JsonIntrinsics(context),
         NativeGetterSetterTransformer(context),
-        ReplaceCallsWithInvalidTypeArgumentForReifiedParameters(context),
+        ReplaceCallsWithInkonstidTypeArgumentForReifiedParameters(context),
     )
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
@@ -40,11 +40,11 @@ class CallsLowering(val context: JsIrBackendContext) : BodyLoweringPass {
             }
 
             override fun visitFunctionAccess(expression: IrFunctionAccessExpression, data: IrDeclaration): IrElement {
-                val call = super.visitFunctionAccess(expression, data)
-                val doNotIntrinsify = data.hasAnnotation(context.intrinsics.doNotIntrinsifyAnnotationSymbol)
+                konst call = super.visitFunctionAccess(expression, data)
+                konst doNotIntrinsify = data.hasAnnotation(context.intrinsics.doNotIntrinsifyAnnotationSymbol)
                 if (call is IrFunctionAccessExpression) {
                     for (transformer in transformers) {
-                        val newCall = transformer.transformFunctionAccess(call, doNotIntrinsify)
+                        konst newCall = transformer.transformFunctionAccess(call, doNotIntrinsify)
                         if (newCall !== call) {
                             return newCall
                         }

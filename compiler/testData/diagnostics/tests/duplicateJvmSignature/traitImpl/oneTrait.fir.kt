@@ -3,5 +3,5 @@ interface T {
 }
 
 class C : T {
-    val x = 1
+    konst x = 1
 }

@@ -9,7 +9,7 @@ fun foo(b: Boolean): String {
 
     if (b) {
 
-        class L1(private val v: String) {
+        class L1(private konst v: String) {
             open fun foo(
                 block: () -> String = {
                     class L2 {
@@ -28,7 +28,7 @@ fun foo(b: Boolean): String {
 
     } else {
 
-        class L1(private val v: Int) {
+        class L1(private konst v: Int) {
             open fun foo(
                 block: () -> String = {
                     class L2 {
@@ -55,11 +55,11 @@ fun foo(b: Boolean): String {
 
 
 fun box(): String {
-    val r1 = foo(true)
+    konst r1 = foo(true)
 
     if (r1 != "AB") return "FAIL1: $r1"
 
-    val r2 = foo(false)
+    konst r2 = foo(false)
     if (r2 != "4271") return "FAIL2: $r2"
 
     return "OK"

@@ -12,10 +12,10 @@ abstract class FirEnumWhenTrackerComponent : FirSessionComponent {
     abstract fun report(whenExpressionFilePath: String, enumClassFqName: String)
 }
 
-val FirSession.enumWhenTracker: FirEnumWhenTrackerComponent? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.enumWhenTracker: FirEnumWhenTrackerComponent? by FirSession.nullableSessionComponentAccessor()
 
 fun FirEnumWhenTrackerComponent.reportEnumUsageInWhen(path: String?, subjectType: ConeKotlinType?) {
     if (path == null || subjectType == null) return
-    val fqName = subjectType.classId?.asString()?.replace(".", "$")?.replace("/", ".") ?: return
+    konst fqName = subjectType.classId?.asString()?.replace(".", "$")?.replace("/", ".") ?: return
     this.report(path, fqName)
 }

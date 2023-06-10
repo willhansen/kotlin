@@ -17,8 +17,8 @@ package p
 fun bar(x: String) = x
 
 fun test(x: String?): Any {
-    val y = My.create()
-    val z = x ?: y!!
+    konst y = My.create()
+    konst z = x ?: y!!
     bar(<!TYPE_MISMATCH!>y<!>)
     // !! / ?. is necessary here, because y!! above may not be executed
     y?.hashCode()

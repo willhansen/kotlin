@@ -5,7 +5,7 @@ fun box(): String {
 
     var materializer: (() -> String)? = null
 
-    when (val x = y) {
+    when (konst x = y) {
         "OK" -> materializer = { x }
         else -> return "x is $x"
     }

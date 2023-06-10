@@ -16,29 +16,29 @@ import java.io.File
 import java.io.Serializable
 
 sealed interface IdeaKpmContentRoot : Serializable {
-    val extras: Extras
-    val file: File
-    val type: String
+    konst extras: Extras
+    konst file: File
+    konst type: String
 
     companion object {
-        const val SOURCES_TYPE = "source"
-        const val RESOURCES_TYPE = "resource"
+        const konst SOURCES_TYPE = "source"
+        const konst RESOURCES_TYPE = "resource"
     }
 }
 
-val IdeaKpmContentRoot.isSources get() = type == SOURCES_TYPE
+konst IdeaKpmContentRoot.isSources get() = type == SOURCES_TYPE
 
-val IdeaKpmContentRoot.isResources get() = type == RESOURCES_TYPE
+konst IdeaKpmContentRoot.isResources get() = type == RESOURCES_TYPE
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmContentRootImpl(
-    override val file: File,
-    override val type: String,
-    override val extras: Extras = emptyExtras(),
+    override konst file: File,
+    override konst type: String,
+    override konst extras: Extras = emptyExtras(),
 ) : IdeaKpmContentRoot {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

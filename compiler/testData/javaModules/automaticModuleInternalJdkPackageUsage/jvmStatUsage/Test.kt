@@ -1,1 +1,1 @@
-val z: sun.jvmstat.monitor.Monitor? = null
+konst z: sun.jvmstat.monitor.Monitor? = null

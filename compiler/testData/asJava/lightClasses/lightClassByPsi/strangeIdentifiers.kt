@@ -22,14 +22,14 @@ class Test {
     fun strangeFun5(a: `A B`.C) {}
 }
 
-enum class StrangeEnum(val size: String) {
+enum class StrangeEnum(konst size: String) {
 //    `60x60`("60x60"),
 //    `70x70`("70x70"),
 //    `80x80`("80x80"),
-    InvalidFieldName("0x0"),
+    InkonstidFieldName("0x0"),
 }
 
-annotation class Anno(val size: StrangeEnum, val name: String, val `A B`: String)
+annotation class Anno(konst size: StrangeEnum, konst name: String, konst `A B`: String)
 
 class `!A@`
 class `A()B()`

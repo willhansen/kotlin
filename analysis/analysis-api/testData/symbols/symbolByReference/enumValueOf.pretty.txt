@@ -1,1 +1,1 @@
-fun valueOf(value: kotlin.String): MyKotlinEnum
+fun konstueOf(konstue: kotlin.String): MyKotlinEnum

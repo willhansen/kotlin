@@ -13,7 +13,7 @@ inline fun <reified T> executeAsync(queue: NSOperationQueue, crossinline produce
     dispatch_async_f(queue.underlyingQueue, StableRef.create(
         producerConsumer()
     ).asCPointer(), staticCFunction { it ->
-        val result = it!!.asStableRef<Pair<T, (T) -> Unit>>()
+        konst result = it!!.asStableRef<Pair<T, (T) -> Unit>>()
         result.get().second(result.get().first)
         result.dispose()
     })
@@ -57,11 +57,11 @@ inline fun <T1, T2> mainContinuation(singleShot: Boolean = true, noinline block:
 // anywhere and provide result to `after` callback.
 @ThreadLocal
 object Continuator {
-    val map = mutableMapOf<Any, Pair<Int, *>>()
+    konst map = mutableMapOf<Any, Pair<Int, *>>()
 
     fun wrap(operation: () -> Unit, after: () -> Unit): () -> Unit {
         assert(NSThread.isMainThread())
-        val id = Any()
+        konst id = Any()
         map[id] = Pair(0, after)
         return {
             initRuntimeIfNeeded()
@@ -74,11 +74,11 @@ object Continuator {
 
     fun <P> wrap(operation: () -> P, block: (P) -> Unit): () -> Unit {
         assert(NSThread.isMainThread())
-        val id = Any()
+        konst id = Any()
         map[id] = Pair(1, block)
         return {
             initRuntimeIfNeeded()
-            // Note, that operation here must return detachable value (for example, frozen).
+            // Note, that operation here must return detachable konstue (for example, frozen).
             executeAsync(NSOperationQueue.mainQueue) {
                 Pair(Pair(id, operation()), { it: Pair<Any, P> ->
                     Continuator.execute(it.first, it.second)
@@ -88,14 +88,14 @@ object Continuator {
     }
 
     fun execute(id: Any) {
-        val countAndBlock = map.remove(id)
+        konst countAndBlock = map.remove(id)
         assertNotNull(countAndBlock)
         assert(countAndBlock.first == 0)
         (countAndBlock.second as Function0<Unit>)()
     }
 
     fun <P> execute(id: Any, parameter: P) {
-        val countAndBlock = map.remove(id)
+        konst countAndBlock = map.remove(id)
         assertNotNull(countAndBlock)
         assert(countAndBlock.first == 1)
         (countAndBlock.second as Function1<P, Unit>)(parameter)

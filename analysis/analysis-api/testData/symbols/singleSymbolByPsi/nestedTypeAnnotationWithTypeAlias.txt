@@ -40,7 +40,7 @@ KtFunctionSymbol:
     type: kotlin/collections/List<kotlin/collections/List<@R|Anno3|()  SecondTypeAlias>>?
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

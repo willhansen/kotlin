@@ -67,20 +67,20 @@ abstract class AbstractVisualizerBlackBoxTest {
         lateinit var psiRenderResult: String
         lateinit var firRenderResult: String
 
-        val psiConfiguration = createConfiguration(filePath, FrontendKinds.ClassicFrontend, ::ClassicFrontendFacade)
+        konst psiConfiguration = createConfiguration(filePath, FrontendKinds.ClassicFrontend, ::ClassicFrontendFacade)
         TestRunner(psiConfiguration).runTest(filePath) { testConfiguration ->
             testConfiguration.testServices.moduleStructure.modules.forEach { psiModule ->
-                val psiArtifact = testConfiguration.testServices.dependencyProvider.getArtifact(psiModule, FrontendKinds.ClassicFrontend)
-                val psiRenderer = psiArtifact.ktFiles.values.firstOrNull()?.let { PsiVisualizer(it, psiArtifact.analysisResult) }
+                konst psiArtifact = testConfiguration.testServices.dependencyProvider.getArtifact(psiModule, FrontendKinds.ClassicFrontend)
+                konst psiRenderer = psiArtifact.ktFiles.konstues.firstOrNull()?.let { PsiVisualizer(it, psiArtifact.analysisResult) }
                 psiRenderResult = psiRenderer?.render()?.trim() ?: ""
             }
         }
 
-        val firConfiguration = createConfiguration(filePath, FrontendKinds.FIR, ::FirFrontendFacade)
+        konst firConfiguration = createConfiguration(filePath, FrontendKinds.FIR, ::FirFrontendFacade)
         TestRunner(firConfiguration).runTest(filePath) { testConfiguration ->
             testConfiguration.testServices.moduleStructure.modules.forEach { firModule ->
-                val firArtifact = testConfiguration.testServices.dependencyProvider.getArtifact(firModule, FrontendKinds.FIR)
-                val firRenderer = firArtifact.mainFirFiles.values.firstOrNull()?.let { FirVisualizer(it) }
+                konst firArtifact = testConfiguration.testServices.dependencyProvider.getArtifact(firModule, FrontendKinds.FIR)
+                konst firRenderer = firArtifact.mainFirFiles.konstues.firstOrNull()?.let { FirVisualizer(it) }
                 firRenderResult = firRenderer?.render()?.trim() ?: ""
             }
         }

@@ -54,10 +54,10 @@ import kotlin.script.experimental.jvm.util.toValidJvmIdentifier
 
 
 class LazyScriptDescriptor(
-    val resolveSession: ResolveSession,
+    konst resolveSession: ResolveSession,
     containingDeclaration: DeclarationDescriptor,
     name: Name,
-    internal val scriptInfo: KtScriptInfo
+    internal konst scriptInfo: KtScriptInfo
 ) : ScriptDescriptor, LazyClassDescriptor(
     resolveSession,
     containingDeclaration,
@@ -69,13 +69,13 @@ class LazyScriptDescriptor(
         resolveSession.trace.record(BindingContext.SCRIPT, scriptInfo.script, this)
     }
 
-    private val _resultValue: () -> ReplResultPropertyDescriptor? = resolveSession.storageManager.createNullableLazyValue {
-        val expression = scriptInfo.script
+    private konst _resultValue: () -> ReplResultPropertyDescriptor? = resolveSession.storageManager.createNullableLazyValue {
+        konst expression = scriptInfo.script
             .getChildOfType<KtBlockExpression>()
             ?.getChildrenOfType<KtScriptInitializer>()?.lastOrNull()
             ?.getChildOfType<KtExpression>()
 
-        val type = expression?.let {
+        konst type = expression?.let {
             resolveSession.trace.bindingContext.getType(it)
         }
 
@@ -96,9 +96,9 @@ class LazyScriptDescriptor(
 
     fun resultFieldName(): Name? {
         // TODO: implement robust REPL/script selection
-        val replSnippetId =
+        konst replSnippetId =
             scriptInfo.script.getUserData(ScriptPriorities.PRIORITY_KEY)?.toString()
-        val identifier = if (replSnippetId != null) {
+        konst identifier = if (replSnippetId != null) {
             // assuming repl
             scriptCompilationConfiguration()[ScriptCompilationConfiguration.repl.resultFieldPrefix]?.takeIf { it.isNotBlank() }?.let {
                 "$it$replSnippetId"
@@ -109,31 +109,31 @@ class LazyScriptDescriptor(
         return identifier?.let { Name.identifier(it) }
     }
 
-    private val sourceElement = scriptInfo.script.toSourceElement()
+    private konst sourceElement = scriptInfo.script.toSourceElement()
 
     override fun getSource() = sourceElement
 
-    private val priority: Int = ScriptPriorities.getScriptPriority(scriptInfo.script)
-    private val isReplScript: Boolean = ScriptPriorities.isReplScript(scriptInfo.script)
+    private konst priority: Int = ScriptPriorities.getScriptPriority(scriptInfo.script)
+    private konst isReplScript: Boolean = ScriptPriorities.isReplScript(scriptInfo.script)
 
     override fun getPriority() = priority
 
-    val scriptCompilationConfiguration: () -> ScriptCompilationConfiguration = resolveSession.storageManager.createLazyValue {
+    konst scriptCompilationConfiguration: () -> ScriptCompilationConfiguration = resolveSession.storageManager.createLazyValue {
         run {
-            val containingFile = scriptInfo.script.containingKtFile
-            val provider = ScriptDependenciesProvider.getInstance(containingFile.project)
+            konst containingFile = scriptInfo.script.containingKtFile
+            konst provider = ScriptDependenciesProvider.getInstance(containingFile.project)
             provider?.getScriptConfiguration(containingFile)?.configuration
                 ?: containingFile.findScriptDefinition()?.compilationConfiguration
         }
             ?: throw IllegalArgumentException("Unable to find script compilation configuration for the script ${scriptInfo.script.containingFile}")
     }
 
-    private val scriptingHostConfiguration: () -> ScriptingHostConfiguration = resolveSession.storageManager.createLazyValue {
+    private konst scriptingHostConfiguration: () -> ScriptingHostConfiguration = resolveSession.storageManager.createLazyValue {
         // TODO: use platform-specific configuration by default instead
         scriptCompilationConfiguration()[ScriptCompilationConfiguration.hostConfiguration] ?: defaultJvmScriptingHostConfiguration
     }
 
-    private val scriptingClassGetter: () -> GetScriptingClass = resolveSession.storageManager.createLazyValue {
+    private konst scriptingClassGetter: () -> GetScriptingClass = resolveSession.storageManager.createLazyValue {
         scriptingHostConfiguration()[ScriptingHostConfiguration.getScriptingClass]
             ?: throw IllegalArgumentException("Expecting 'getScriptingClass' property in the scripting host configuration for the script ${scriptInfo.script.containingFile}")
     }
@@ -166,12 +166,12 @@ class LazyScriptDescriptor(
 
     override fun getUnsubstitutedPrimaryConstructor() = super.getUnsubstitutedPrimaryConstructor()!!
 
-    internal val baseClassDescriptor: () -> ClassDescriptor? = resolveSession.storageManager.createNullableLazyValue {
-        val scriptBaseType = scriptCompilationConfiguration()[ScriptCompilationConfiguration.baseClass]
+    internal konst baseClassDescriptor: () -> ClassDescriptor? = resolveSession.storageManager.createNullableLazyValue {
+        konst scriptBaseType = scriptCompilationConfiguration()[ScriptCompilationConfiguration.baseClass]
             ?: error("Base class is not configured for the script ${scriptInfo.script.containingFile}")
-        val typeName = scriptBaseType.run { fromClass?.toString()?.replace("class ", "") ?: typeName }
-        val fqnName = FqName(typeName)
-        val classId = ClassId.topLevel(fqnName)
+        konst typeName = scriptBaseType.run { fromClass?.toString()?.replace("class ", "") ?: typeName }
+        konst fqnName = FqName(typeName)
+        konst classId = ClassId.topLevel(fqnName)
 
         findTypeDescriptor(
             classId,
@@ -185,12 +185,12 @@ class LazyScriptDescriptor(
 
     private inner class ImportedScriptDescriptorsFinder {
 
-        val psiManager by lazy(LazyThreadSafetyMode.PUBLICATION) { PsiManager.getInstance(scriptInfo.script.project) }
+        konst psiManager by lazy(LazyThreadSafetyMode.PUBLICATION) { PsiManager.getInstance(scriptInfo.script.project) }
 
         operator fun invoke(importedScript: SourceCode): ScriptDescriptor? {
-            // Note: is not an error now - if import references other valid source file, it is simply compiled along with script
+            // Note: is not an error now - if import references other konstid source file, it is simply compiled along with script
             // TODO: check if this is the behavior we want to have - see #KT-28916
-            val ktScript = getKtFile(importedScript)?.declarations?.firstIsInstanceOrNull<KtScript>()
+            konst ktScript = getKtFile(importedScript)?.declarations?.firstIsInstanceOrNull<KtScript>()
                 ?: return null
             return resolveSession.getScriptDescriptor(ktScript) as ScriptDescriptor
         }
@@ -203,19 +203,19 @@ class LazyScriptDescriptor(
                 return null
             }
 
-            val psiFile = (script as? VirtualFileScriptSource)?.let { psiManager.findFile(it.virtualFile) }
+            konst psiFile = (script as? VirtualFileScriptSource)?.let { psiManager.findFile(it.virtualFile) }
                 ?: return errorKtFile(MISSING_IMPORTED_SCRIPT_PSI)
             return psiFile as? KtFile
         }
     }
 
-    private val scriptImplicitReceivers: () -> List<ClassDescriptor> = resolveSession.storageManager.createLazyValue {
-        val res = ArrayList<ClassDescriptor>()
+    private konst scriptImplicitReceivers: () -> List<ClassDescriptor> = resolveSession.storageManager.createLazyValue {
+        konst res = ArrayList<ClassDescriptor>()
 
-        val importedScriptsFiles = ScriptDependenciesProvider.getInstance(scriptInfo.script.project)
+        konst importedScriptsFiles = ScriptDependenciesProvider.getInstance(scriptInfo.script.project)
             ?.getScriptConfiguration(scriptInfo.script.containingKtFile)?.importedScripts
         if (importedScriptsFiles != null) {
-            val findImportedScriptDescriptor = ImportedScriptDescriptorsFinder()
+            konst findImportedScriptDescriptor = ImportedScriptDescriptorsFinder()
             importedScriptsFiles.mapNotNullTo(res) {
                 findImportedScriptDescriptor(it)
             }
@@ -238,7 +238,7 @@ class LazyScriptDescriptor(
         classId: ClassId?, typeName: String,
         errorDiagnostic: DiagnosticFactory1<PsiElement, String>?
     ): ClassDescriptor? {
-        val typeDescriptor = classId?.let { module.findClassAcrossModuleDependencies(it) }
+        konst typeDescriptor = classId?.let { module.findClassAcrossModuleDependencies(it) }
         if (typeDescriptor == null) {
             reportErrorString1(errorDiagnostic, classId?.asSingleFqName()?.toString() ?: typeName)
         }
@@ -247,7 +247,7 @@ class LazyScriptDescriptor(
 
     private fun reportErrorString1(errorDiagnostic: DiagnosticFactory1<PsiElement, String>?, arg: String) {
         if (errorDiagnostic != null) {
-            // TODO: use PositioningStrategies to highlight some specific place in case of error, instead of treating the whole file as invalid
+            // TODO: use PositioningStrategies to highlight some specific place in case of error, instead of treating the whole file as inkonstid
             resolveSession.trace.report(
                 errorDiagnostic.on(
                     scriptInfo.script.containingFile,
@@ -259,7 +259,7 @@ class LazyScriptDescriptor(
 
     override fun getImplicitReceivers(): List<ClassDescriptor> = scriptImplicitReceivers()
 
-    private val scriptProvidedProperties: () -> List<ScriptProvidedPropertyDescriptor> = resolveSession.storageManager.createLazyValue {
+    private konst scriptProvidedProperties: () -> List<ScriptProvidedPropertyDescriptor> = resolveSession.storageManager.createLazyValue {
         scriptCompilationConfiguration()[ScriptCompilationConfiguration.providedProperties].orEmpty()
             .mapNotNull { (name, type) ->
                 findTypeDescriptor(getScriptingClass(type), Errors.MISSING_SCRIPT_PROVIDED_PROPERTY_CLASS)?.let {
@@ -280,31 +280,31 @@ class LazyScriptDescriptor(
     override fun getScriptProvidedProperties(): List<PropertyDescriptor> = scriptProvidedProperties()
 
     internal class ConstructorWithParams(
-        val constructor: ClassConstructorDescriptorImpl,
-        val earlierScriptsParameter: ValueParameterDescriptor?,
-        val baseClassConstructorParameters: List<ValueParameterDescriptor>,
-        val implicitReceiversParameters: List<ValueParameterDescriptor>,
-        val scriptProvidedPropertiesParameters: List<ValueParameterDescriptor>
+        konst constructor: ClassConstructorDescriptorImpl,
+        konst earlierScriptsParameter: ValueParameterDescriptor?,
+        konst baseClassConstructorParameters: List<ValueParameterDescriptor>,
+        konst implicitReceiversParameters: List<ValueParameterDescriptor>,
+        konst scriptProvidedPropertiesParameters: List<ValueParameterDescriptor>
     )
 
-    internal val scriptPrimaryConstructorWithParams: () -> ConstructorWithParams = resolveSession.storageManager.createLazyValue {
-        val baseConstructorDescriptor = baseClassDescriptor()?.unsubstitutedPrimaryConstructor
-        val inheritedAnnotations = baseConstructorDescriptor?.annotations ?: Annotations.EMPTY
-        val baseExplicitParameters = baseConstructorDescriptor?.valueParameters ?: emptyList()
+    internal konst scriptPrimaryConstructorWithParams: () -> ConstructorWithParams = resolveSession.storageManager.createLazyValue {
+        konst baseConstructorDescriptor = baseClassDescriptor()?.unsubstitutedPrimaryConstructor
+        konst inheritedAnnotations = baseConstructorDescriptor?.annotations ?: Annotations.EMPTY
+        konst baseExplicitParameters = baseConstructorDescriptor?.konstueParameters ?: emptyList()
 
-        val implicitReceiversParamTypes =
+        konst implicitReceiversParamTypes =
             implicitReceivers.mapIndexed { idx, receiver ->
-                val receiverName =
+                konst receiverName =
                     if (receiver is ScriptDescriptor) "${LazyScriptClassMemberScope.IMPORTED_SCRIPT_PARAM_NAME_PREFIX}${receiver.name}"
                     else "${LazyScriptClassMemberScope.IMPLICIT_RECEIVER_PARAM_NAME_PREFIX}$idx"
                 Name.identifier(receiverName) to receiver.defaultType
             }
 
-        val providedPropertiesParamTypes =
+        konst providedPropertiesParamTypes =
             scriptProvidedProperties().map {
                 it.name to it.type
             }
-        val constructorDescriptor = ClassConstructorDescriptorImpl.create(this, inheritedAnnotations, true, source)
+        konst constructorDescriptor = ClassConstructorDescriptorImpl.create(this, inheritedAnnotations, true, source)
 
         var paramsIndexBase = 0
 
@@ -320,13 +320,13 @@ class LazyScriptDescriptor(
                 source = SourceElement.NO_SOURCE
             )
 
-        val earlierScriptsParameter = if (isReplScript) {
+        konst earlierScriptsParameter = if (isReplScript) {
             createValueParameter(Name.special("<earlierScripts>") to builtIns.getArrayType(Variance.INVARIANT, builtIns.anyType))
         } else null
 
-        val explicitParameters = baseExplicitParameters.map { it.copy(constructorDescriptor, it.name, paramsIndexBase++) }
-        val implicitReceiversParameters = implicitReceiversParamTypes.map(::createValueParameter)
-        val providedPropertiesParameters = providedPropertiesParamTypes.map(::createValueParameter)
+        konst explicitParameters = baseExplicitParameters.map { it.copy(constructorDescriptor, it.name, paramsIndexBase++) }
+        konst implicitReceiversParameters = implicitReceiversParamTypes.map(::createValueParameter)
+        konst providedPropertiesParameters = providedPropertiesParamTypes.map(::createValueParameter)
 
         constructorDescriptor.initialize(
             buildList {
@@ -360,7 +360,7 @@ class LazyScriptDescriptor(
     override fun getScriptProvidedPropertiesParameters(): List<ValueParameterDescriptor> =
         scriptPrimaryConstructorWithParams().scriptProvidedPropertiesParameters
 
-    private val scriptOuterScope: () -> LexicalScope = resolveSession.storageManager.createLazyValue {
+    private konst scriptOuterScope: () -> LexicalScope = resolveSession.storageManager.createLazyValue {
         var outerScope = super.getOuterScope()
         for (receiverClassDescriptor in implicitReceivers.asReversed()) {
             outerScope = LexicalScopeImpl(
@@ -379,17 +379,17 @@ class LazyScriptDescriptor(
 
     override fun getOuterScope(): LexicalScope = scriptOuterScope()
 
-    private val scriptClassAnnotations: () -> Annotations = resolveSession.storageManager.createLazyValue {
+    private konst scriptClassAnnotations: () -> Annotations = resolveSession.storageManager.createLazyValue {
         baseClassDescriptor()?.annotations?.let { ann ->
             FilteredAnnotations(ann) { fqname ->
-                val shortName = fqname.shortName().identifier
+                konst shortName = fqname.shortName().identifier
                 // TODO: consider more precise annotation filtering
                 !shortName.startsWith("KotlinScript") && !shortName.startsWith("ScriptTemplate")
             }
         } ?: super.annotations
     }
 
-    override val annotations: Annotations
+    override konst annotations: Annotations
         get() = scriptClassAnnotations()
 
     override fun isReplScript(): Boolean {

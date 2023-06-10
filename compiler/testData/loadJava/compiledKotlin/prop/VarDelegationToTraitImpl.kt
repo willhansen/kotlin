@@ -5,7 +5,7 @@ package test
 interface A {
     open var v: String
         get() = "test"
-        set(value) {
+        set(konstue) {
             throw UnsupportedOperationException()
         }
 }

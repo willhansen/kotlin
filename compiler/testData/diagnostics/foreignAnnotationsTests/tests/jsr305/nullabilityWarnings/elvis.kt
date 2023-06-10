@@ -52,35 +52,35 @@ public class PlainJava {
 
 
 // FILE: main.kt
-val jsr: AnnotatedWithJsr = AnnotatedWithJsr()
-val jsrNullable: AnnotatedWithJsr? = null
+konst jsr: AnnotatedWithJsr = AnnotatedWithJsr()
+konst jsrNullable: AnnotatedWithJsr? = null
 
-val jb: AnnotatedWithJB = AnnotatedWithJB()
-val jbNullable: AnnotatedWithJB? = null
+konst jb: AnnotatedWithJB = AnnotatedWithJB()
+konst jbNullable: AnnotatedWithJB? = null
 
-val platform: PlainJava = PlainJava()
-val platformNullable: PlainJava? = null
+konst platform: PlainJava = PlainJava()
+konst platformNullable: PlainJava? = null
 
 object Elvis {
     fun fromJava() {
-        val a = jsr.string ?: ""
-        val b = jsrNullable?.string ?: ""
+        konst a = jsr.string ?: ""
+        konst b = jsrNullable?.string ?: ""
 
-        val c = jb.string <!USELESS_ELVIS!>?: ""<!>
-        val d = jbNullable?.string ?: ""
+        konst c = jb.string <!USELESS_ELVIS!>?: ""<!>
+        konst d = jbNullable?.string ?: ""
 
-        val e = platform.string ?: ""
-        val f = platformNullable?.string ?: ""
+        konst e = platform.string ?: ""
+        konst f = platformNullable?.string ?: ""
     }
 
     fun toJava(nullableString: String?) {
-        val b = jsr.consumeString(nullableString ?: "")
-        val d = jsrNullable?.consumeString(nullableString ?: "")
+        konst b = jsr.consumeString(nullableString ?: "")
+        konst d = jsrNullable?.consumeString(nullableString ?: "")
 
-        val f = jb.consumeString(nullableString ?: "")
-        val h = jbNullable?.consumeString(nullableString ?: "")
+        konst f = jb.consumeString(nullableString ?: "")
+        konst h = jbNullable?.consumeString(nullableString ?: "")
 
-        val j = platform.consumeString(nullableString ?: "")
-        val l = platformNullable?.consumeString(nullableString ?: "")
+        konst j = platform.consumeString(nullableString ?: "")
+        konst l = platformNullable?.consumeString(nullableString ?: "")
     }
 }

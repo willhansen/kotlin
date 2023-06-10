@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.psi.KtUnaryExpression;
 import org.jetbrains.kotlin.resolve.calls.util.CallUtilKt;
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall;
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 
 import static org.jetbrains.kotlin.js.translate.general.Translation.translateAsExpression;
 import static org.jetbrains.kotlin.js.translate.utils.BindingUtils.getCompileTimeValue;
@@ -60,11 +60,11 @@ public final class UnaryOperationTranslator {
         if (operationToken == KtTokens.MINUS) {
             KtExpression baseExpression = getBaseExpression(expression);
             if (baseExpression instanceof KtConstantExpression) {
-                CompileTimeConstant<?> compileTimeValue = ConstantExpressionEvaluator.getConstant(expression, context.bindingContext());
-                assert compileTimeValue != null : message(expression, "Expression is not compile time value: " + expression.getText() + " ");
-                Object value = getCompileTimeValue(context.bindingContext(), expression, compileTimeValue);
-                if (value instanceof Long) {
-                    return JsAstUtils.newLong((Long) value);
+                CompileTimeConstant<?> compileTimeValue = ConstantExpressionEkonstuator.getConstant(expression, context.bindingContext());
+                assert compileTimeValue != null : message(expression, "Expression is not compile time konstue: " + expression.getText() + " ");
+                Object konstue = getCompileTimeValue(context.bindingContext(), expression, compileTimeValue);
+                if (konstue instanceof Long) {
+                    return JsAstUtils.newLong((Long) konstue);
                 }
             }
         }

@@ -9,7 +9,7 @@ KtValueParameterSymbol:
   isImplicitLambdaParameter: false
   isNoinline: false
   isVararg: false
-  name: value
+  name: konstue
   origin: SOURCE
   receiverParameter: null
   returnType: KtUsualClassType:

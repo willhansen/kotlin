@@ -12,28 +12,28 @@ package kotlin.ranges
 import kotlin.internal.*
 
 /**
- * A range of values of type `UInt`.
+ * A range of konstues of type `UInt`.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
 public class UIntRange(start: UInt, endInclusive: UInt) : UIntProgression(start, endInclusive, 1), ClosedRange<UInt>, OpenEndRange<UInt> {
-    override val start: UInt get() = first
-    override val endInclusive: UInt get() = last
+    override konst start: UInt get() = first
+    override konst endInclusive: UInt get() = last
     
-    @Deprecated("Can throw an exception when it's impossible to represent the value with UInt type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @Deprecated("Can throw an exception when it's impossible to represent the konstue with UInt type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @SinceKotlin("1.9")
     @WasExperimental(ExperimentalStdlibApi::class)
-    override val endExclusive: UInt get() {
+    override konst endExclusive: UInt get() {
         if (last == UInt.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1u
     }
 
-    override fun contains(value: UInt): Boolean = first <= value && value <= last
+    override fun contains(konstue: UInt): Boolean = first <= konstue && konstue <= last
 
     /** 
      * Checks if the range is empty.
      
-     * The range is empty if its start value is greater than the end value.
+     * The range is empty if its start konstue is greater than the end konstue.
      */
     override fun isEmpty(): Boolean = first > last
 
@@ -47,13 +47,13 @@ public class UIntRange(start: UInt, endInclusive: UInt) : UIntProgression(start,
     override fun toString(): String = "$first..$last"
 
     companion object {
-        /** An empty range of values of type UInt. */
-        public val EMPTY: UIntRange = UIntRange(UInt.MAX_VALUE, UInt.MIN_VALUE)
+        /** An empty range of konstues of type UInt. */
+        public konst EMPTY: UIntRange = UIntRange(UInt.MAX_VALUE, UInt.MIN_VALUE)
     }
 }
 
 /**
- * A progression of values of type `UInt`.
+ * A progression of konstues of type `UInt`.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -71,17 +71,17 @@ internal constructor(
     /**
      * The first element in the progression.
      */
-    public val first: UInt = start
+    public konst first: UInt = start
 
     /**
      * The last element in the progression.
      */
-    public val last: UInt = getProgressionLastElement(start, endInclusive, step)
+    public konst last: UInt = getProgressionLastElement(start, endInclusive, step)
 
     /**
      * The step of the progression.
      */
-    public val step: Int = step
+    public konst step: Int = step
 
     final override fun iterator(): Iterator<UInt> = UIntProgressionIterator(first, last, step)
 
@@ -106,7 +106,7 @@ internal constructor(
         /**
          * Creates UIntProgression within the specified bounds of a closed range.
 
-         * The progression starts with the [rangeStart] value and goes toward the [rangeEnd] value not excluding it, with the specified [step].
+         * The progression starts with the [rangeStart] konstue and goes toward the [rangeEnd] konstue not excluding it, with the specified [step].
          * In order to go backwards the [step] must be negative.
          *
          * [step] must be greater than `Int.MIN_VALUE` and not equal to zero.
@@ -117,27 +117,27 @@ internal constructor(
 
 
 /**
- * An iterator over a progression of values of type `UInt`.
- * @property step the number by which the value is incremented on each step.
+ * An iterator over a progression of konstues of type `UInt`.
+ * @property step the number by which the konstue is incremented on each step.
  */
 @SinceKotlin("1.3")
 private class UIntProgressionIterator(first: UInt, last: UInt, step: Int) : Iterator<UInt> {
-    private val finalElement = last
+    private konst finalElement = last
     private var hasNext: Boolean = if (step > 0) first <= last else first >= last
-    private val step = step.toUInt() // use 2-complement math for negative steps
+    private konst step = step.toUInt() // use 2-complement math for negative steps
     private var next = if (hasNext) first else finalElement
 
     override fun hasNext(): Boolean = hasNext
 
     override fun next(): UInt {
-        val value = next
-        if (value == finalElement) {
+        konst konstue = next
+        if (konstue == finalElement) {
             if (!hasNext) throw kotlin.NoSuchElementException()
             hasNext = false
         } else {
             next += step
         }
-        return value
+        return konstue
     }
 }
 

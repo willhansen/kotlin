@@ -1,6 +1,6 @@
 
 var GUEST_USER_ID = 3
-val USER_ID =
+konst USER_ID =
     try {
         getUserIdFromEnvironment()
     }
@@ -8,7 +8,7 @@ val USER_ID =
         ++GUEST_USER_ID
     }
 
-val USER_ID_2 =
+konst USER_ID_2 =
     try {
         getUserIdFromEnvironment()
     }

@@ -33,19 +33,19 @@ import java.nio.file.Path
 class FilePathsInKlibTest : CodegenTestCase() {
 
     companion object {
-        private const val MODULE_NAME = "M"
-        private const val testDataFile = "compiler/testData/ir/klibLayout/multiFiles.kt"
+        private const konst MODULE_NAME = "M"
+        private const konst testDataFile = "compiler/testData/ir/klibLayout/multiFiles.kt"
     }
 
     private fun loadKtFiles(directory: File): List<KtFile> {
-        val psiManager = PsiManager.getInstance(myEnvironment.project)
-        val fileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)
+        konst psiManager = PsiManager.getInstance(myEnvironment.project)
+        konst fileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)
 
-        val vDirectory = fileSystem.findFileByPath(directory.canonicalPath) ?: error("File not found: $directory")
+        konst vDirectory = fileSystem.findFileByPath(directory.canonicalPath) ?: error("File not found: $directory")
         return psiManager.findDirectory(vDirectory)?.files?.map { it as KtFile } ?: error("Cannot load KtFiles")
     }
 
-    private val runtimeKlibPath = "libraries/stdlib/js-ir/build/classes/kotlin/js/main"
+    private konst runtimeKlibPath = "libraries/stdlib/js-ir/build/classes/kotlin/js/main"
 
     private fun analyseKtFiles(configuration: CompilerConfiguration, ktFiles: List<KtFile>): ModulesStructure {
         return prepareAnalyzedSourceModule(
@@ -60,10 +60,10 @@ class FilePathsInKlibTest : CodegenTestCase() {
 
     private fun produceKlib(module: ModulesStructure, destination: File) {
         // TODO: improve API for generateIrForKlibSerialization and related functionality and remove code duplication here and in similar places in the code
-        val sourceFiles = (module.mainModule as MainModule.SourceFiles).files
-        val icData = module.compilerConfiguration.incrementalDataProvider?.getSerializedData(sourceFiles) ?: emptyList()
-        val expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
-        val (moduleFragment, _) = generateIrForKlibSerialization(
+        konst sourceFiles = (module.mainModule as MainModule.SourceFiles).files
+        konst icData = module.compilerConfiguration.incrementalDataProvider?.getSerializedData(sourceFiles) ?: emptyList()
+        konst expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
+        konst (moduleFragment, _) = generateIrForKlibSerialization(
             module.project,
             sourceFiles,
             module.compilerConfiguration,
@@ -77,7 +77,7 @@ class FilePathsInKlibTest : CodegenTestCase() {
             module.getModuleDescriptor(it)
         }
 
-        val metadataSerializer =
+        konst metadataSerializer =
             KlibMetadataIncrementalSerializer(module.compilerConfiguration, module.project, module.jsFrontEndResult.hasErrors)
 
         generateKLib(
@@ -94,7 +94,7 @@ class FilePathsInKlibTest : CodegenTestCase() {
     }
 
     private fun setupEnvironment(): CompilerConfiguration {
-        val configuration = CompilerConfiguration()
+        konst configuration = CompilerConfiguration()
         myEnvironment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JS_CONFIG_FILES)
         configuration.put(CommonConfigurationKeys.MODULE_NAME, MODULE_NAME)
         return configuration
@@ -103,17 +103,17 @@ class FilePathsInKlibTest : CodegenTestCase() {
     private fun File.md5(): Long = readBytes().md5()
 
     private fun File.loadKlibFilePaths(): List<String> {
-        val libs = CommonKLibResolver.resolve(listOf(runtimeKlibPath, canonicalPath), DummyLogger).getFullList()
-        val lib = libs.last()
-        val fileSize = lib.fileCount()
-        val extReg = ExtensionRegistryLite.newInstance()
+        konst libs = CommonKLibResolver.resolve(listOf(runtimeKlibPath, canonicalPath), DummyLogger).getFullList()
+        konst lib = libs.last()
+        konst fileSize = lib.fileCount()
+        konst extReg = ExtensionRegistryLite.newInstance()
 
-        val result = ArrayList<String>(fileSize)
+        konst result = ArrayList<String>(fileSize)
 
         for (i in 0 until fileSize) {
-            val fileStream = lib.file(i).codedInputStream
-            val fileProto = IrFile.parseFrom(fileStream, extReg)
-            val fileName = fileProto.fileEntry.name
+            konst fileStream = lib.file(i).codedInputStream
+            konst fileProto = IrFile.parseFrom(fileStream, extReg)
+            konst fileName = fileProto.fileEntry.name
 
             result.add(fileName)
         }
@@ -122,21 +122,21 @@ class FilePathsInKlibTest : CodegenTestCase() {
     }
 
     private fun createTestFiles(): List<TestFile> {
-        val file = File(testDataFile)
-        val expectedText = KtTestUtil.doLoadFile(file)
+        konst file = File(testDataFile)
+        konst expectedText = KtTestUtil.doLoadFile(file)
 
         return createTestFilesFromFile(file, expectedText)
     }
 
     private fun compileKlib(testFiles: List<TestFile>, configuration: CompilerConfiguration, workingDir: File): File {
         for (testFile in testFiles) {
-            val file = File(workingDir, testFile.name).also { it.parentFile.let { p -> if (!p.exists()) p.mkdirs() } }
+            konst file = File(workingDir, testFile.name).also { it.parentFile.let { p -> if (!p.exists()) p.mkdirs() } }
             file.writeText(testFile.content)
         }
 
-        val ktFiles = loadKtFiles(workingDir)
-        val module = analyseKtFiles(configuration, ktFiles)
-        val artifact = File(workingDir, "$MODULE_NAME.klib")
+        konst ktFiles = loadKtFiles(workingDir)
+        konst module = analyseKtFiles(configuration, ktFiles)
+        konst artifact = File(workingDir, "$MODULE_NAME.klib")
 
         produceKlib(module, artifact)
 
@@ -146,13 +146,13 @@ class FilePathsInKlibTest : CodegenTestCase() {
     fun testStableCompilation() {
         withTempDir { dirA ->
             withTempDir { dirB ->
-                val testFiles = createTestFiles()
-                val configuration = setupEnvironment()
+                konst testFiles = createTestFiles()
+                konst configuration = setupEnvironment()
 
                 configuration.put(CommonConfigurationKeys.KLIB_RELATIVE_PATH_BASES, listOf(dirA.canonicalPath, dirB.canonicalPath))
 
-                val moduleA = compileKlib(testFiles, configuration, dirA)
-                val moduleB = compileKlib(testFiles, configuration, dirB)
+                konst moduleA = compileKlib(testFiles, configuration, dirA)
+                konst moduleB = compileKlib(testFiles, configuration, dirB)
 
                 assertEquals(moduleA.md5(), moduleB.md5())
             }
@@ -161,14 +161,14 @@ class FilePathsInKlibTest : CodegenTestCase() {
 
     fun testRelativePaths() {
         withTempDir { testTempDir ->
-            val testFiles = createTestFiles()
-            val configuration = setupEnvironment()
+            konst testFiles = createTestFiles()
+            konst configuration = setupEnvironment()
 
             configuration.put(CommonConfigurationKeys.KLIB_RELATIVE_PATH_BASES, listOf(testTempDir.canonicalPath))
 
-            val artifact = compileKlib(testFiles, configuration, testTempDir)
-            val modulePaths = artifact.loadKlibFilePaths().map { it.replace("/", File.separator) }
-            val dirPaths = testTempDir.listFiles { _, name -> name.endsWith(".kt") }!!.map { it.relativeTo(testTempDir).path }
+            konst artifact = compileKlib(testFiles, configuration, testTempDir)
+            konst modulePaths = artifact.loadKlibFilePaths().map { it.replace("/", File.separator) }
+            konst dirPaths = testTempDir.listFiles { _, name -> name.endsWith(".kt") }!!.map { it.relativeTo(testTempDir).path }
 
             assertSameElements(modulePaths, dirPaths)
         }
@@ -176,14 +176,14 @@ class FilePathsInKlibTest : CodegenTestCase() {
 
     fun testAbsoluteNormalizedPath() {
         withTempDir { testTempDir ->
-            val testFiles = createTestFiles()
+            konst testFiles = createTestFiles()
 
-            val configuration = setupEnvironment()
+            konst configuration = setupEnvironment()
             configuration.put(CommonConfigurationKeys.KLIB_NORMALIZE_ABSOLUTE_PATH, true)
 
-            val artifact = compileKlib(testFiles, configuration, testTempDir)
-            val modulePaths = artifact.loadKlibFilePaths().map { it.replace("/", File.separator) }
-            val dirCanonicalPaths = testTempDir.listFiles { _, name -> name.endsWith(".kt") }!!.map { it.canonicalPath }
+            konst artifact = compileKlib(testFiles, configuration, testTempDir)
+            konst modulePaths = artifact.loadKlibFilePaths().map { it.replace("/", File.separator) }
+            konst dirCanonicalPaths = testTempDir.listFiles { _, name -> name.endsWith(".kt") }!!.map { it.canonicalPath }
 
             assertSameElements(modulePaths, dirCanonicalPaths)
         }
@@ -193,17 +193,17 @@ class FilePathsInKlibTest : CodegenTestCase() {
 
     fun testUnrelatedBase() {
         withTempDir { testTempDir ->
-            val testFiles = createTestFiles()
-            val dummyPath = kotlin.io.path.createTempDirectory()
-            val dummyFile = dummyPath.toFile().also { assert(it.isDirectory) }
+            konst testFiles = createTestFiles()
+            konst dummyPath = kotlin.io.path.createTempDirectory()
+            konst dummyFile = dummyPath.toFile().also { assert(it.isDirectory) }
 
             try {
-                val configuration = setupEnvironment()
+                konst configuration = setupEnvironment()
                 configuration.put(CommonConfigurationKeys.KLIB_RELATIVE_PATH_BASES, listOf(dummyFile.canonicalPath))
 
-                val artifact = compileKlib(testFiles, configuration, testTempDir)
-                val modulePaths = artifact.loadKlibFilePaths()
-                val dirCanonicalPaths = testTempDir.listFiles { _, name -> name.endsWith(".kt") }!!.map { it.canonicalPath }
+                konst artifact = compileKlib(testFiles, configuration, testTempDir)
+                konst modulePaths = artifact.loadKlibFilePaths()
+                konst dirCanonicalPaths = testTempDir.listFiles { _, name -> name.endsWith(".kt") }!!.map { it.canonicalPath }
 
                 assertSameElements(modulePaths.map { it.normalizePath() }, dirCanonicalPaths.map { it.normalizePath() })
             } finally {
@@ -213,8 +213,8 @@ class FilePathsInKlibTest : CodegenTestCase() {
     }
 
     private fun withTempDir(f: (File) -> Unit) {
-        val workingPath: Path = kotlin.io.path.createTempDirectory()
-        val workingDirFile = workingPath.toFile().also { assert(it.isDirectory) }
+        konst workingPath: Path = kotlin.io.path.createTempDirectory()
+        konst workingDirFile = workingPath.toFile().also { assert(it.isDirectory) }
         try {
             f(workingDirFile)
         } finally {

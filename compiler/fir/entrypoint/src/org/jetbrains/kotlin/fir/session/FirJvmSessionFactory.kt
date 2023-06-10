@@ -113,7 +113,7 @@ object FirJvmSessionFactory : FirAbstractSessionFactory() {
                 var optionalAnnotationClassesProviderForBinariesFromIncrementalCompilation: OptionalAnnotationClassesProvider? = null
                 incrementalCompilationContext?.let {
                     if (it.precompiledBinariesPackagePartProvider != null && it.precompiledBinariesFileScope != null) {
-                        val moduleDataProvider = SingleModuleDataProvider(moduleData)
+                        konst moduleDataProvider = SingleModuleDataProvider(moduleData)
                         symbolProviderForBinariesFromIncrementalCompilation =
                             JvmClassFileBasedSymbolProvider(
                                 session,
@@ -135,7 +135,7 @@ object FirJvmSessionFactory : FirAbstractSessionFactory() {
                     }
                 }
 
-                val javaSymbolProvider =
+                konst javaSymbolProvider =
                     JavaSymbolProvider(session, projectEnvironment.getFirJavaFacade(session, moduleData, javaSourcesScope))
                 session.register(JavaSymbolProvider::class, javaSymbolProvider)
 

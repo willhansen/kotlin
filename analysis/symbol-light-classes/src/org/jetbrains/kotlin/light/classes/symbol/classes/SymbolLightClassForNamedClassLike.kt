@@ -53,7 +53,7 @@ abstract class SymbolLightClassForNamedClassLike : SymbolLightClassForClassLike<
         manager = manager
     )
 
-    protected val isLocal: Boolean by lazyPub {
+    protected konst isLocal: Boolean by lazyPub {
         classOrObjectDeclaration?.isLocal ?: withClassOrObjectSymbol { it.symbolKind == KtSymbolKind.LOCAL }
     }
 
@@ -70,8 +70,8 @@ abstract class SymbolLightClassForNamedClassLike : SymbolLightClassForClassLike<
         result: MutableList<KtLightMethod>,
         classOrObjectSymbol: KtNamedClassOrObjectSymbol,
     ) {
-        val companionObjectSymbol = classOrObjectSymbol.companionObject ?: return
-        val methods = companionObjectSymbol.getDeclaredMemberScope()
+        konst companionObjectSymbol = classOrObjectSymbol.companionObject ?: return
+        konst methods = companionObjectSymbol.getDeclaredMemberScope()
             .getCallableSymbols()
             .filterIsInstance<KtFunctionSymbol>()
             .filter { it.hasJvmStaticAnnotation() }
@@ -91,7 +91,7 @@ abstract class SymbolLightClassForNamedClassLike : SymbolLightClassForClassLike<
             }
     }
 
-    private val isInner: Boolean
+    private konst isInner: Boolean
         get() = classOrObjectDeclaration?.hasModifier(KtTokens.INNER_KEYWORD) ?: withClassOrObjectSymbol { it.isInner }
 
     context(KtAnalysisSession)
@@ -120,7 +120,7 @@ abstract class SymbolLightClassForNamedClassLike : SymbolLightClassForClassLike<
 
     context(KtAnalysisSession)
     protected fun addCompanionObjectFieldIfNeeded(result: MutableList<KtLightField>, classOrObjectSymbol: KtNamedClassOrObjectSymbol) {
-        val companionObjectSymbols: List<KtNamedClassOrObjectSymbol>? = classOrObjectDeclaration?.companionObjects?.mapNotNull {
+        konst companionObjectSymbols: List<KtNamedClassOrObjectSymbol>? = classOrObjectDeclaration?.companionObjects?.mapNotNull {
             it.getNamedClassOrObjectSymbol()
         } ?: classOrObjectSymbol.companionObject?.let(::listOf)
 
@@ -145,7 +145,7 @@ abstract class SymbolLightClassForNamedClassLike : SymbolLightClassForClassLike<
 
         in GranularModifiersBox.MODALITY_MODIFIERS -> GranularModifiersBox.computeSimpleModality(ktModule, classOrObjectSymbolPointer)
         PsiModifier.STATIC -> {
-            val isStatic = !isTopLevel && !isInner
+            konst isStatic = !isTopLevel && !isInner
             mapOf(modifier to isStatic)
         }
 

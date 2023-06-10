@@ -16,11 +16,11 @@ import org.jetbrains.kotlin.test.model.ResultingArtifact
 
 // Old backend (JVM and JS)
 data class ClassicBackendInput(
-    val psiFiles: Collection<KtFile>,
-    val analysisResult: AnalysisResult,
-    val project: Project,
-    val languageVersionSettings: LanguageVersionSettings
+    konst psiFiles: Collection<KtFile>,
+    konst analysisResult: AnalysisResult,
+    konst project: Project,
+    konst languageVersionSettings: LanguageVersionSettings
 ) : ResultingArtifact.BackendInput<ClassicBackendInput>() {
-    override val kind: BackendKinds.ClassicBackend
+    override konst kind: BackendKinds.ClassicBackend
         get() = BackendKinds.ClassicBackend
 }

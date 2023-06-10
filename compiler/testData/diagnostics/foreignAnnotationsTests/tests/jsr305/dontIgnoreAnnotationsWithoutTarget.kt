@@ -44,6 +44,6 @@ class Inv<T>(x: T)
 fun foo(x: Inv<String?>) { }
 
 fun main(a: A) {
-    val x = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<kotlin.String?>")!>Inv(a.bar1())<!>
+    konst x = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<kotlin.String?>")!>Inv(a.bar1())<!>
     foo(x)
 }

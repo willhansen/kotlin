@@ -1,5 +1,5 @@
 fun test_1() {
-    val comp = Comparator<Int> { x, y -> 1 }
+    konst comp = Comparator<Int> { x, y -> 1 }
 }
 
 fun test_3(comparator: java.util.Comparator<Int>) {

@@ -1,3 +1,3 @@
-val a : Int
+konst a : Int
     get() = 0
     get() = 0

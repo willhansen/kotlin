@@ -30,7 +30,7 @@ public final class IrClass extends
   private IrClass(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -170,10 +170,10 @@ public final class IrClass extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
@@ -203,7 +203,7 @@ public final class IrClass extends
     public IrClass parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrClass(input, extensionRegistry);
     }
   };
@@ -370,13 +370,13 @@ public final class IrClass extends
   public static final int MULTI_FIELD_VALUE_CLASS_REPRESENTATION_FIELD_NUMBER = 9;
   private org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multiFieldValueClassRepresentation_;
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
    */
   public boolean hasMultiFieldValueClassRepresentation() {
     return ((bitField0_ & 0x00000010) == 0x00000010);
   }
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation getMultiFieldValueClassRepresentation() {
     return multiFieldValueClassRepresentation_;
@@ -579,23 +579,23 @@ public final class IrClass extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrClass parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrClass parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrClass parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrClass parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrClass parseFrom(java.io.InputStream input)
@@ -853,7 +853,7 @@ public final class IrClass extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrClass parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrClass) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -881,11 +881,11 @@ public final class IrClass extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
-      if (value == null) {
+    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      base_ = value;
+      base_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -903,13 +903,13 @@ public final class IrClass extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
+    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           base_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.getDefaultInstance()) {
         base_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(konstue).buildPartial();
       } else {
-        base_ = value;
+        base_ = konstue;
       }
 
       bitField0_ |= 0x00000001;
@@ -941,9 +941,9 @@ public final class IrClass extends
     /**
      * <code>required int32 name = 2;</code>
      */
-    public Builder setName(int value) {
+    public Builder setName(int konstue) {
       bitField0_ |= 0x00000002;
-      name_ = value;
+      name_ = konstue;
       
       return this;
     }
@@ -973,11 +973,11 @@ public final class IrClass extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter this_receiver = 3;</code>
      */
-    public Builder setThisReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
-      if (value == null) {
+    public Builder setThisReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      thisReceiver_ = value;
+      thisReceiver_ = konstue;
 
       bitField0_ |= 0x00000004;
       return this;
@@ -995,13 +995,13 @@ public final class IrClass extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter this_receiver = 3;</code>
      */
-    public Builder mergeThisReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
+    public Builder mergeThisReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
       if (((bitField0_ & 0x00000004) == 0x00000004) &&
           thisReceiver_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.getDefaultInstance()) {
         thisReceiver_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.newBuilder(thisReceiver_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.newBuilder(thisReceiver_).mergeFrom(konstue).buildPartial();
       } else {
-        thisReceiver_ = value;
+        thisReceiver_ = konstue;
       }
 
       bitField0_ |= 0x00000004;
@@ -1048,12 +1048,12 @@ public final class IrClass extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 4;</code>
      */
     public Builder setTypeParameter(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.set(index, value);
+      typeParameter_.set(index, konstue);
 
       return this;
     }
@@ -1070,12 +1070,12 @@ public final class IrClass extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 4;</code>
      */
-    public Builder addTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+    public Builder addTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.add(value);
+      typeParameter_.add(konstue);
 
       return this;
     }
@@ -1083,12 +1083,12 @@ public final class IrClass extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 4;</code>
      */
     public Builder addTypeParameter(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.add(index, value);
+      typeParameter_.add(index, konstue);
 
       return this;
     }
@@ -1116,10 +1116,10 @@ public final class IrClass extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 4;</code>
      */
     public Builder addAllTypeParameter(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter> konstues) {
       ensureTypeParameterIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, typeParameter_);
+          konstues, typeParameter_);
 
       return this;
     }
@@ -1173,12 +1173,12 @@ public final class IrClass extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 5;</code>
      */
     public Builder setDeclaration(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureDeclarationIsMutable();
-      declaration_.set(index, value);
+      declaration_.set(index, konstue);
 
       return this;
     }
@@ -1195,12 +1195,12 @@ public final class IrClass extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 5;</code>
      */
-    public Builder addDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration value) {
-      if (value == null) {
+    public Builder addDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureDeclarationIsMutable();
-      declaration_.add(value);
+      declaration_.add(konstue);
 
       return this;
     }
@@ -1208,12 +1208,12 @@ public final class IrClass extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 5;</code>
      */
     public Builder addDeclaration(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureDeclarationIsMutable();
-      declaration_.add(index, value);
+      declaration_.add(index, konstue);
 
       return this;
     }
@@ -1241,10 +1241,10 @@ public final class IrClass extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 5;</code>
      */
     public Builder addAllDeclaration(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration> konstues) {
       ensureDeclarationIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, declaration_);
+          konstues, declaration_);
 
       return this;
     }
@@ -1297,18 +1297,18 @@ public final class IrClass extends
      * <code>repeated int32 super_type = 6 [packed = true];</code>
      */
     public Builder setSuperType(
-        int index, int value) {
+        int index, int konstue) {
       ensureSuperTypeIsMutable();
-      superType_.set(index, value);
+      superType_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int32 super_type = 6 [packed = true];</code>
      */
-    public Builder addSuperType(int value) {
+    public Builder addSuperType(int konstue) {
       ensureSuperTypeIsMutable();
-      superType_.add(value);
+      superType_.add(konstue);
       
       return this;
     }
@@ -1316,10 +1316,10 @@ public final class IrClass extends
      * <code>repeated int32 super_type = 6 [packed = true];</code>
      */
     public Builder addAllSuperType(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensureSuperTypeIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, superType_);
+          konstues, superType_);
       
       return this;
     }
@@ -1349,11 +1349,11 @@ public final class IrClass extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation inline_class_representation = 7;</code>
      */
-    public Builder setInlineClassRepresentation(org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation value) {
-      if (value == null) {
+    public Builder setInlineClassRepresentation(org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      inlineClassRepresentation_ = value;
+      inlineClassRepresentation_ = konstue;
 
       bitField0_ |= 0x00000040;
       return this;
@@ -1371,13 +1371,13 @@ public final class IrClass extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation inline_class_representation = 7;</code>
      */
-    public Builder mergeInlineClassRepresentation(org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation value) {
+    public Builder mergeInlineClassRepresentation(org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation konstue) {
       if (((bitField0_ & 0x00000040) == 0x00000040) &&
           inlineClassRepresentation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation.getDefaultInstance()) {
         inlineClassRepresentation_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation.newBuilder(inlineClassRepresentation_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation.newBuilder(inlineClassRepresentation_).mergeFrom(konstue).buildPartial();
       } else {
-        inlineClassRepresentation_ = value;
+        inlineClassRepresentation_ = konstue;
       }
 
       bitField0_ |= 0x00000040;
@@ -1395,31 +1395,31 @@ public final class IrClass extends
 
     private org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multiFieldValueClassRepresentation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation.getDefaultInstance();
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
      */
     public boolean hasMultiFieldValueClassRepresentation() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
      */
     public org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation getMultiFieldValueClassRepresentation() {
       return multiFieldValueClassRepresentation_;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
      */
-    public Builder setMultiFieldValueClassRepresentation(org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation value) {
-      if (value == null) {
+    public Builder setMultiFieldValueClassRepresentation(org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      multiFieldValueClassRepresentation_ = value;
+      multiFieldValueClassRepresentation_ = konstue;
 
       bitField0_ |= 0x00000080;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
      */
     public Builder setMultiFieldValueClassRepresentation(
         org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation.Builder builderForValue) {
@@ -1429,22 +1429,22 @@ public final class IrClass extends
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
      */
-    public Builder mergeMultiFieldValueClassRepresentation(org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation value) {
+    public Builder mergeMultiFieldValueClassRepresentation(org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation konstue) {
       if (((bitField0_ & 0x00000080) == 0x00000080) &&
           multiFieldValueClassRepresentation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation.getDefaultInstance()) {
         multiFieldValueClassRepresentation_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation.newBuilder(multiFieldValueClassRepresentation_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation.newBuilder(multiFieldValueClassRepresentation_).mergeFrom(konstue).buildPartial();
       } else {
-        multiFieldValueClassRepresentation_ = value;
+        multiFieldValueClassRepresentation_ = konstue;
       }
 
       bitField0_ |= 0x00000080;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
      */
     public Builder clearMultiFieldValueClassRepresentation() {
       multiFieldValueClassRepresentation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation.getDefaultInstance();
@@ -1483,18 +1483,18 @@ public final class IrClass extends
      * <code>repeated int64 sealed_subclass = 8 [packed = true];</code>
      */
     public Builder setSealedSubclass(
-        int index, long value) {
+        int index, long konstue) {
       ensureSealedSubclassIsMutable();
-      sealedSubclass_.set(index, value);
+      sealedSubclass_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int64 sealed_subclass = 8 [packed = true];</code>
      */
-    public Builder addSealedSubclass(long value) {
+    public Builder addSealedSubclass(long konstue) {
       ensureSealedSubclassIsMutable();
-      sealedSubclass_.add(value);
+      sealedSubclass_.add(konstue);
       
       return this;
     }
@@ -1502,10 +1502,10 @@ public final class IrClass extends
      * <code>repeated int64 sealed_subclass = 8 [packed = true];</code>
      */
     public Builder addAllSealedSubclass(
-        java.lang.Iterable<? extends java.lang.Long> values) {
+        java.lang.Iterable<? extends java.lang.Long> konstues) {
       ensureSealedSubclassIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, sealedSubclass_);
+          konstues, sealedSubclass_);
       
       return this;
     }

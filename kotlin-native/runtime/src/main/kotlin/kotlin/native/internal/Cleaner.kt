@@ -23,9 +23,9 @@ public interface Cleaner
  * Example of usage:
  * ```
  * class ResourceWrapper {
- *     private val resource = Resource()
+ *     private konst resource = Resource()
  *
- *     private val cleaner = createCleaner(resource) { it.dispose() }
+ *     private konst cleaner = createCleaner(resource) { it.dispose() }
  * }
  * ```
  *
@@ -40,8 +40,8 @@ public interface Cleaner
  * For example, the code below has a leak:
  * ```
  * class LeakingResourceWrapper {
- *     private val resource = Resource()
- *     private val cleaner = createCleaner(this) { it.resource.dispose() }
+ *     private konst resource = Resource()
+ *     private konst cleaner = createCleaner(this) { it.resource.dispose() }
  * }
  * ```
  * In this case cleaner's argument (`LeakingResourceWrapper`) can't be deallocated

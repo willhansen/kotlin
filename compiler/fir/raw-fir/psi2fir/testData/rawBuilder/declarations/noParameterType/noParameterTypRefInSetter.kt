@@ -1,2 +1,2 @@
 var x: Int
-    set(value){}
+    set(konstue){}

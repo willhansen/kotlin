@@ -13,7 +13,7 @@ object Test {
 
     inline fun action(crossinline f: () -> Type<*>?) = f()!!
 
-    class Type<T>(val x: String)
+    class Type<T>(konst x: String)
 
 }
 

@@ -11,6 +11,6 @@ public class A {
 // FILE: main.kt
 
 fun test(a: A) {
-    val int = a.x // <- should be int
-    val string = a.getX()
+    konst int = a.x // <- should be int
+    konst string = a.getX()
 }

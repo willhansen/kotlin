@@ -18,7 +18,7 @@ package a
 
 import test.function
 
-val funRefA = ::function
+konst funRefA = ::function
 
 // FILE: b.kt
 
@@ -26,7 +26,7 @@ package b
 
 import test.function
 
-val funRefB = ::function
+konst funRefB = ::function
 
 // FILE: part.kt
 

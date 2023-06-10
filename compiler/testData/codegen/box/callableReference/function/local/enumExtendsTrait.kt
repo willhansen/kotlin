@@ -1,5 +1,5 @@
 interface Named {
-    val name: String
+    konst name: String
 }
 
 enum class E : Named {

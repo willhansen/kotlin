@@ -5,14 +5,14 @@ package test
 inline fun test(s: () -> () -> () -> String = { { { "OK" } } }) =
         s()
 
-val same = test()
+konst same = test()
 
 // FILE: 2.kt
 
 import test.*
 
 fun box(): String {
-    val inlined = test()
+    konst inlined = test()
     if (same()() != "OK") return "fail 1: ${same()()}"
     return inlined()()
 }

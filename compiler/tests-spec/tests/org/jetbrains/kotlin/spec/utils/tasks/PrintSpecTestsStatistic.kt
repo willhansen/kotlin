@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.spec.utils.SpecTestsStatElement
 import org.jetbrains.kotlin.spec.utils.SpecTestsStatElementType
 import org.jetbrains.kotlin.spec.utils.TestsStatisticCollector
 
-const val PRINT_BASE_INDENT = "  "
+const konst PRINT_BASE_INDENT = "  "
 
 fun linkedSpecTestsPrint() {
     println("LINKED SPEC TESTS STATISTIC")
     println("--------------------------------------------------")
 
-    val statistic = TestsStatisticCollector.collect(SpecTestLinkedType.LINKED)
+    konst statistic = TestsStatisticCollector.collect(SpecTestLinkedType.LINKED)
 
     for ((areaName, areaElement) in statistic) {
         println("$areaName: ${areaElement.number} tests")
@@ -46,7 +46,7 @@ fun notLinkedSpecTestsPrint() {
     println("NOT LINKED SPEC TESTS STATISTIC")
     println("--------------------------------------------------")
 
-    val statistic = TestsStatisticCollector.collect(SpecTestLinkedType.NOT_LINKED)
+    konst statistic = TestsStatisticCollector.collect(SpecTestLinkedType.NOT_LINKED)
 
     for ((areaName, areaElement) in statistic) {
         println("$areaName: ${areaElement.number} tests")

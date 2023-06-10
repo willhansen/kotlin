@@ -3,7 +3,7 @@
 // WITH_STDLIB
 
 inline fun <reified T : Any> check(expected: String) {
-    val clazz = T::class.javaObjectType!!
+    konst clazz = T::class.javaObjectType!!
     assert (clazz.canonicalName == "java.lang.$expected") {
         "clazz name: ${clazz.canonicalName}"
     }

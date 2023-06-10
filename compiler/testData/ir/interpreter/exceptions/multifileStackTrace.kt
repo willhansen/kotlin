@@ -6,7 +6,7 @@ fun callToOtherFile(mustThrowException: Boolean, message: String): Int {
     return 0
 }
 
-const val a = <!WAS_NOT_EVALUATED: `
+const konst a = <!WAS_NOT_EVALUATED: `
 Exception java.lang.Exception: Exception from file1.kt
 	at File1Kt.throwException(file1.kt:19)
 	at MainKt.callToOtherFile(main.kt:5)

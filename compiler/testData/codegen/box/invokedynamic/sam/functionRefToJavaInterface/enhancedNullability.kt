@@ -10,7 +10,7 @@
 fun mul2(x: Int) = x * 2
 
 fun box(): String {
-    val t = Sam(::mul2).get(21)
+    konst t = Sam(::mul2).get(21)
     if (t != 42)
         return "Failed: t=$t"
     return "OK"

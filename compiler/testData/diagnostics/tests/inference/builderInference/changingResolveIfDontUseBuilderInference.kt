@@ -18,12 +18,12 @@ fun <K> id(x: K): K = x
 
 @OptIn(ExperimentalStdlibApi::class)
 fun main() {
-    val x: Map<in String, String> = buildMap {
+    konst x: Map<in String, String> = buildMap {
         put("", "")
         swap(<!TYPE_MISMATCH!>foo()<!>)
     } // `Map<CharSequence, String>` if we use builder inference, `Map<String, String>` if we don't
 
-    val y: MutableMap<String, CharSequence> = build7 {
+    konst y: MutableMap<String, CharSequence> = build7 {
         <!TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH!>id(run { this })<!>
     }
 }

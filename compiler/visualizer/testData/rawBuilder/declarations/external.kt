@@ -4,7 +4,7 @@ external fun foo(): String
 
 //           Int
 //           │
-external val x: Int
+external konst x: Int
 
 class NotExternal {
     external fun bar(): String
@@ -14,7 +14,7 @@ class NotExternal {
         external get
 //          Int
 //          │
-        set(value) {}
+        set(konstue) {}
 }
 
 //  Int

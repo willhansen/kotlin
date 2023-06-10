@@ -25,8 +25,8 @@ object FirTypeAnnotationChecker : FirTypeRefChecker() {
 
         for (annotation in typeRef.annotations) {
             if (annotation.source == null) continue
-            val useSiteTarget = annotation.useSiteTarget
-            val annotationTargets = annotation.getAllowedAnnotationTargets(context.session)
+            konst useSiteTarget = annotation.useSiteTarget
+            konst annotationTargets = annotation.getAllowedAnnotationTargets(context.session)
 
             // Annotations like `@receiver:` go
             // into FirReceiverParameter, not FirTypeRef

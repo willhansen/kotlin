@@ -14,26 +14,26 @@ import org.jetbrains.kotlin.analysis.api.symbols.nameOrAnonymous
 import org.jetbrains.kotlin.name.Name
 
 public sealed interface KtClassTypeQualifier : KtLifetimeOwner {
-    public val name: Name
-    public val typeArguments: List<KtTypeProjection>
+    public konst name: Name
+    public konst typeArguments: List<KtTypeProjection>
 
     public class KtResolvedClassTypeQualifier(
-        private val _symbol: KtClassifierSymbol,
-        private val _typeArguments: List<KtTypeProjection>,
-        override val token: KtLifetimeToken
+        private konst _symbol: KtClassifierSymbol,
+        private konst _typeArguments: List<KtTypeProjection>,
+        override konst token: KtLifetimeToken
     ) : KtClassTypeQualifier {
-        override val name: Name get() = withValidityAssertion { _symbol.nameOrAnonymous }
-        public val symbol: KtClassifierSymbol get() = withValidityAssertion { _symbol }
-        override val typeArguments: List<KtTypeProjection> get() = withValidityAssertion { _typeArguments }
+        override konst name: Name get() = withValidityAssertion { _symbol.nameOrAnonymous }
+        public konst symbol: KtClassifierSymbol get() = withValidityAssertion { _symbol }
+        override konst typeArguments: List<KtTypeProjection> get() = withValidityAssertion { _typeArguments }
     }
 
     public class KtUnresolvedClassTypeQualifier(
-        private val _name: Name,
-        private val _typeArguments: List<KtTypeProjection>,
-        override val token: KtLifetimeToken
+        private konst _name: Name,
+        private konst _typeArguments: List<KtTypeProjection>,
+        override konst token: KtLifetimeToken
     ) : KtClassTypeQualifier {
-        override val name: Name get() = withValidityAssertion { _name }
-        override val typeArguments: List<KtTypeProjection> get() = withValidityAssertion { _typeArguments }
+        override konst name: Name get() = withValidityAssertion { _name }
+        override konst typeArguments: List<KtTypeProjection> get() = withValidityAssertion { _typeArguments }
     }
 }
 

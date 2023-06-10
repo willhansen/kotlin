@@ -31,33 +31,33 @@ class TreeBasedMethod(
         javac: JavacWrapper
 ) : TreeBasedMember<JCTree.JCMethodDecl>(tree, compilationUnit, containingClass, javac), JavaMethod {
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(tree.name.toString())
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = (containingClass.isInterface && !tree.modifiers.hasDefaultModifier && !isStatic) || tree.modifiers.isAbstract
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = tree.modifiers.isStatic
 
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = tree.modifiers.isFinal
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = if (containingClass.isInterface) Visibilities.Public else tree.modifiers.visibility
 
-    override val typeParameters: List<JavaTypeParameter>
+    override konst typeParameters: List<JavaTypeParameter>
         get() = tree.typeParameters.map { TreeBasedTypeParameter(it, compilationUnit, javac, this) }
 
-    override val valueParameters: List<JavaValueParameter>
+    override konst konstueParameters: List<JavaValueParameter>
         get() = tree.parameters.map { TreeBasedValueParameter(it, compilationUnit, javac, this) }
 
-    override val returnType: JavaType
+    override konst returnType: JavaType
         get() = TreeBasedType.create(tree.returnType, compilationUnit, javac, annotations, this)
 
     // TODO: allow nullable names in Tree-based annotation arguments and pass null instead of a synthetic name
-    override val annotationParameterDefaultValue: JavaAnnotationArgument?
+    override konst annotationParameterDefaultValue: JavaAnnotationArgument?
         get() = tree.defaultValue?.let { defaultValue ->
-            createAnnotationArgument(defaultValue, Name.identifier("value"), compilationUnit, javac, containingClass, this)
+            createAnnotationArgument(defaultValue, Name.identifier("konstue"), compilationUnit, javac, containingClass, this)
         }
 }

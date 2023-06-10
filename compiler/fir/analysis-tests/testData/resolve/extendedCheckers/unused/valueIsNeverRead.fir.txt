@@ -1,4 +1,4 @@
-FILE: valueIsNeverRead.kt
+FILE: konstueIsNeverRead.kt
     public final fun foo(): R|kotlin/Unit| {
         lvar a: R|kotlin/Int| = Int(1)
         R|<local>/a| = Int(2)

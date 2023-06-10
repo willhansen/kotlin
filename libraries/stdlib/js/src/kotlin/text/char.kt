@@ -18,7 +18,7 @@ public actual inline fun Char.toLowerCase(): Char = lowercaseChar()
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [lowercase] function.
- * If this character has no mapping equivalent, the character itself is returned.
+ * If this character has no mapping equikonstent, the character itself is returned.
  *
  * @sample samples.text.Chars.lowercase
  */
@@ -55,14 +55,14 @@ public actual inline fun Char.toUpperCase(): Char = uppercaseChar()
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [uppercase] function.
- * If this character has no mapping equivalent, the character itself is returned.
+ * If this character has no mapping equikonstent, the character itself is returned.
  *
  * @sample samples.text.Chars.uppercase
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalStdlibApi::class)
 public actual fun Char.uppercaseChar(): Char {
-    val uppercase = uppercase()
+    konst uppercase = uppercase()
     return if (uppercase.length > 1) this else uppercase[0]
 }
 
@@ -86,7 +86,7 @@ public actual inline fun Char.uppercase(): String = toString().asDynamic().toUpp
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [titlecase] function.
- * If this character has no mapping equivalent, the result of calling [uppercaseChar] is returned.
+ * If this character has no mapping equikonstent, the result of calling [uppercaseChar] is returned.
  *
  * @sample samples.text.Chars.titlecase
  */
@@ -107,8 +107,8 @@ public actual fun Char.isLowSurrogate(): Boolean = this in Char.MIN_LOW_SURROGAT
  * Returns the Unicode general category of this character.
  */
 @SinceKotlin("1.5")
-public actual val Char.category: CharCategory
-    get() = CharCategory.valueOf(getCategoryValue())
+public actual konst Char.category: CharCategory
+    get() = CharCategory.konstueOf(getCategoryValue())
 
 /**
  * Returns `true` if this character (Unicode code point) is defined in Unicode.
@@ -120,7 +120,7 @@ public actual fun Char.isDefined(): Boolean {
     if (this < '\u0080') {
         return true
     }
-    return getCategoryValue() != CharCategory.UNASSIGNED.value
+    return getCategoryValue() != CharCategory.UNASSIGNED.konstue
 }
 
 /**
@@ -230,7 +230,7 @@ public actual fun Char.isTitleCase(): Boolean {
     if (this < '\u0080') {
         return false
     }
-    return getCategoryValue() == CharCategory.TITLECASE_LETTER.value
+    return getCategoryValue() == CharCategory.TITLECASE_LETTER.konstue
 }
 
 /**

@@ -48,11 +48,11 @@ abstract class IrNamerBase : IrNamer {
         getNameForStaticDeclaration(klass)
 
     override fun getRefForExternalClass(klass: IrClass): JsNameRef {
-        val parent = klass.parent
+        konst parent = klass.parent
         if (klass.isCompanion)
             return getRefForExternalClass(parent as IrClass)
 
-        val currentClassName = klass.getJsNameOrKotlinName().identifier
+        konst currentClassName = klass.getJsNameOrKotlinName().identifier
         return when (parent) {
             is IrClass ->
                 JsNameRef(currentClassName, getRefForExternalClass(parent))
@@ -74,7 +74,7 @@ abstract class IrNamerBase : IrNamer {
         }
     }
 
-    private val associatedObjectKeyMap = hashMapOf<IrClass, Int>()
+    private konst associatedObjectKeyMap = hashMapOf<IrClass, Int>()
 
     override fun getAssociatedObjectKey(irClass: IrClass): Int? {
         if (irClass.isAssociatedObjectAnnotatedAnnotation) {

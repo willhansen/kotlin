@@ -4,7 +4,7 @@ import kotlin.reflect.KClass
 
 fun withEffects(): String = "OK"
 
-const val Z = "123"
+const konst Z = "123"
 
 enum class EnumA {
     A

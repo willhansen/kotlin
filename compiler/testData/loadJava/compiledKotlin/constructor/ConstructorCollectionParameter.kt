@@ -1,3 +1,3 @@
 package test
 
-class TestingKotlinCollections(val arguments: Collection<String>)
+class TestingKotlinCollections(konst arguments: Collection<String>)

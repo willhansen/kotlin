@@ -1,7 +1,7 @@
 // DONT_SORT_DECLARATIONS
 
 class Main {
-    val field = A.B.C.C1
+    konst field = A.B.C.C1
 }
 
 class A {

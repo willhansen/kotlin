@@ -18,11 +18,11 @@ package org.jetbrains.ring
 
 open class IntListBenchmark {
     private var _data: List<Int>? = null
-    val data: List<Int>
+    konst data: List<Int>
         get() = _data!!
 
     init {
-        val list = ArrayList<Int>(BENCHMARK_SIZE)
+        konst list = ArrayList<Int>(BENCHMARK_SIZE)
         for (n in intValues(BENCHMARK_SIZE))
             list.add(n)
         _data = list
@@ -35,7 +35,7 @@ open class IntListBenchmark {
 
     //Benchmark
     fun copyManual(): List<Int> {
-        val list = ArrayList<Int>(data.size)
+        konst list = ArrayList<Int>(data.size)
         for (item in data) {
             list.add(item)
         }
@@ -54,11 +54,11 @@ open class IntListBenchmark {
 
     //Benchmark
     fun filterAndMapManual(): ArrayList<String> {
-        val list = ArrayList<String>()
+        konst list = ArrayList<String>()
         for (it in data) {
             if (filterLoad(it)) {
-                val value = mapLoad(it)
-                list.add(value)
+                konst konstue = mapLoad(it)
+                list.add(konstue)
             }
         }
         return list
@@ -71,7 +71,7 @@ open class IntListBenchmark {
 
     //Benchmark
     fun filterManual(): List<Int> {
-        val list = ArrayList<Int>()
+        konst list = ArrayList<Int>()
         for (it in data) {
             if (filterLoad(it))
                 list.add(it)

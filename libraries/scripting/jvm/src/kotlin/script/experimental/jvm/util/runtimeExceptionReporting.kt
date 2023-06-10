@@ -11,7 +11,7 @@ import kotlin.script.experimental.api.ResultValue
 
 fun ResultValue.Error.renderError(stream: PrintStream) {
     var trace = error.stackTrace
-    val wrappingTrace = wrappingException?.stackTrace
+    konst wrappingTrace = wrappingException?.stackTrace
     if (wrappingException == null || trace.size < wrappingTrace!!.size) {
         error.printStackTrace(stream)
     } else {
@@ -28,10 +28,10 @@ fun ResultValue.Error.renderError(stream: PrintStream) {
 
         var current: Throwable? = error.cause
         var wrapping = error
-        val cyclesDetection = hashSetOf(wrapping)
+        konst cyclesDetection = hashSetOf(wrapping)
         while (current != null && cyclesDetection.add(current)) {
             trace = current.stackTrace
-            val sameFramesCount =
+            konst sameFramesCount =
                 trace.asList().asReversed().asSequence()
                     .zip(wrapping.stackTrace.asList().asReversed().asSequence())
                     .takeWhile { it.first == it.second }
@@ -46,7 +46,7 @@ fun ResultValue.Error.renderError(stream: PrintStream) {
 
 fun ResultValue.Error.renderError(): String =
     ByteArrayOutputStream().use { os ->
-        val ps = PrintStream(os)
+        konst ps = PrintStream(os)
         renderError(ps)
         ps.flush()
         os.toString()

@@ -18,11 +18,11 @@ public interface KtCallableParameterRenderer {
     public object PARAMETERS_IN_PARENS : KtCallableParameterRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderValueParameters(symbol: KtCallableSymbol, printer: PrettyPrinter) {
-            val valueParameters = when (symbol) {
-                is KtFunctionLikeSymbol -> symbol.valueParameters
+            konst konstueParameters = when (symbol) {
+                is KtFunctionLikeSymbol -> symbol.konstueParameters
                 else -> return
             }
-            printer.printCollection(valueParameters, prefix = "(", postfix = ")") {
+            printer.printCollection(konstueParameters, prefix = "(", postfix = ")") {
                 renderDeclaration(it, printer)
             }
         }

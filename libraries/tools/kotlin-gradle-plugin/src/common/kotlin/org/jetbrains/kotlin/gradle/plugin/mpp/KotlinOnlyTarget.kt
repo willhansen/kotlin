@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 abstract class KotlinOnlyTarget<T : KotlinCompilation<*>>(
     project: Project,
-    override val platformType: KotlinPlatformType
+    override konst platformType: KotlinPlatformType
 ) : AbstractKotlinTarget(project) {
 
     override lateinit var compilations: NamedDomainObjectContainer<T>

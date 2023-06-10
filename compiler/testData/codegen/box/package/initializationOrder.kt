@@ -6,16 +6,16 @@
 // IGNORE_BACKEND: JS, NATIVE
 
 fun box(): String? {
-    val log = System.getProperty("boxtest.log")
+    konst log = System.getProperty("boxtest.log")
     System.clearProperty("boxtest.log") // test can be run twice
     return if (log == "bca") "OK" else log
 }
 
-val b = log("b")
-val c = log("c")
-val a = log("a")
+konst b = log("b")
+konst c = log("c")
+konst a = log("a")
 
 fun log(message: String) {
-    val value = (System.getProperty("boxtest.log") ?: "") + message
-    System.setProperty("boxtest.log", value)
+    konst konstue = (System.getProperty("boxtest.log") ?: "") + message
+    System.setProperty("boxtest.log", konstue)
 }

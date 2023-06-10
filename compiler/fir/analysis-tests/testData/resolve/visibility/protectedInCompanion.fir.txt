@@ -9,7 +9,7 @@ FILE: protectedInCompanion.kt
                 super<R|kotlin/Any|>()
             }
 
-            protected final val PROTECTED_CONST: R|kotlin/String| = String()
+            protected final konst PROTECTED_CONST: R|kotlin/String| = String()
                 protected get(): R|kotlin/String|
 
         }
@@ -20,7 +20,7 @@ FILE: protectedInCompanion.kt
             super<R|A|>()
         }
 
-        public final val y: R|kotlin/String| = this@R|/A.Companion|.R|/A.Companion.PROTECTED_CONST|
+        public final konst y: R|kotlin/String| = this@R|/A.Companion|.R|/A.Companion.PROTECTED_CONST|
             public get(): R|kotlin/String|
 
     }

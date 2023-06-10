@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 class JvmAnnotationsTargetNonExistentAccessorChecker : DeclarationChecker {
     companion object {
-        private val getterUselessTargets = setOf(PROPERTY_GETTER)
-        private val setterUselessTargets = setOf(PROPERTY_SETTER, SETTER_PARAMETER)
+        private konst getterUselessTargets = setOf(PROPERTY_GETTER)
+        private konst setterUselessTargets = setOf(PROPERTY_SETTER, SETTER_PARAMETER)
     }
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
@@ -36,17 +36,17 @@ class JvmAnnotationsTargetNonExistentAccessorChecker : DeclarationChecker {
 
         if (!DescriptorVisibilities.isPrivate(descriptor.visibility) && !isSpecialStaticProperty(descriptor)) return
 
-        val hasGetterWithBody = declaration is KtProperty && declaration.getter?.hasBody() == true
-        val hasSetterWithBody = declaration is KtProperty && declaration.setter?.hasBody() == true
+        konst hasGetterWithBody = declaration is KtProperty && declaration.getter?.hasBody() == true
+        konst hasSetterWithBody = declaration is KtProperty && declaration.setter?.hasBody() == true
 
         if (hasGetterWithBody && hasSetterWithBody) return
         if (declaration is KtProperty && declaration.hasDelegate()) return
 
-        val declarationName = declaration.name ?: descriptor.name.asString()
+        konst declarationName = declaration.name ?: descriptor.name.asString()
 
         for (annotation in declaration.annotationEntries) {
-            val psiTarget = annotation.useSiteTarget ?: continue
-            val useSiteTarget = psiTarget.getAnnotationUseSiteTarget()
+            konst psiTarget = annotation.useSiteTarget ?: continue
+            konst useSiteTarget = psiTarget.getAnnotationUseSiteTarget()
             if (!hasGetterWithBody && useSiteTarget in getterUselessTargets ||
                 !hasSetterWithBody && useSiteTarget in setterUselessTargets
             ) {
@@ -74,7 +74,7 @@ class JvmAnnotationsTargetNonExistentAccessorChecker : DeclarationChecker {
         declarationName: String,
         context: DeclarationCheckerContext
     ) {
-        val annotationDescriptor = context.trace[BindingContext.ANNOTATION, entry] ?: return
+        konst annotationDescriptor = context.trace[BindingContext.ANNOTATION, entry] ?: return
         if (annotationDescriptor.annotationClass?.getAnnotationRetention() == KotlinRetention.SOURCE) return
 
         context.trace.reportDiagnosticOnce(ErrorsJvm.ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR.on(entry, declarationName))

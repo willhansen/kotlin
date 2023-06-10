@@ -15,7 +15,7 @@ FILE: debugInfoCall.kt
             R|<local>/baz|(Double(1.0))
         }
 
-        public final val bar: R|B| = R|kotlin/TODO|()
+        public final konst bar: R|B| = R|kotlin/TODO|()
             public get(): R|B|
 
     }
@@ -25,7 +25,7 @@ FILE: debugInfoCall.kt
         local final fun R|A|.foo(x: R|kotlin/Double|): R|kotlin/Unit| {
         }
 
-        lval a: R|A| = R|/A.A|()
+        lkonst a: R|A| = R|/A.A|()
         R|<local>/a|.R|/A.foo|(Int(1))
         R|<local>/a|.R|/foo|(String())
         R|<local>/a|.R|<local>/foo|(Double(1.0))

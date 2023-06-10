@@ -12,22 +12,22 @@ import kotlin.system.measureTimeMillis
 
 @ExperimentalNativeApi
 public interface TestCase {
-    val name: String
-    val ignored: Boolean
-    val suite: TestSuite
+    konst name: String
+    konst ignored: Boolean
+    konst suite: TestSuite
 
     fun run()
 }
 
 @ExperimentalNativeApi
-internal val TestCase.prettyName get() = "${suite.name}.$name"
+internal konst TestCase.prettyName get() = "${suite.name}.$name"
 
 @ExperimentalNativeApi
 public interface TestSuite {
-    val name: String
-    val ignored: Boolean
-    val testCases: Map<String, TestCase>
-    val size : Int
+    konst name: String
+    konst ignored: Boolean
+    konst testCases: Map<String, TestCase>
+    konst size : Int
 
     fun doBeforeClass()
     fun doAfterClass()
@@ -42,22 +42,22 @@ public enum class TestFunctionKind {
 }
 
 @ExperimentalNativeApi
-public abstract class AbstractTestSuite<F: Function<Unit>>(override val name: String, override val ignored: Boolean)
+public abstract class AbstractTestSuite<F: Function<Unit>>(override konst name: String, override konst ignored: Boolean)
     : TestSuite {
     override fun toString(): String = name
 
     // TODO: Make inner and remove the type param when the bug is fixed.
     abstract class BasicTestCase<F: Function<Unit>>(
-            override val name: String,
-            override val suite: AbstractTestSuite<F>,
-            val testFunction: F,
-            override val ignored: Boolean
+            override konst name: String,
+            override konst suite: AbstractTestSuite<F>,
+            konst testFunction: F,
+            override konst ignored: Boolean
     ) : TestCase {
         override fun toString(): String = "$name ($suite)"
     }
 
-    private val _testCases = mutableMapOf<String, BasicTestCase<F>>()
-    override val testCases: Map<String, BasicTestCase<F>>
+    private konst _testCases = mutableMapOf<String, BasicTestCase<F>>()
+    override konst testCases: Map<String, BasicTestCase<F>>
         get() = _testCases
 
     private fun registerTestCase(testCase: BasicTestCase<F>) = _testCases.put(testCase.name, testCase)
@@ -71,7 +71,7 @@ public abstract class AbstractTestSuite<F: Function<Unit>>(override val name: St
         registerSuite(this)
     }
 
-    override val size: Int
+    override konst size: Int
         get() = testCases.size
 }
 
@@ -80,13 +80,13 @@ public abstract class BaseClassSuite<INSTANCE, COMPANION>(name: String, ignored:
     : AbstractTestSuite<INSTANCE.() -> Unit>(name, ignored) {
 
     class TestCase<INSTANCE, COMPANION>(name: String,
-                                        override val suite: BaseClassSuite<INSTANCE, COMPANION>,
+                                        override konst suite: BaseClassSuite<INSTANCE, COMPANION>,
                                         testFunction: INSTANCE.() -> Unit,
                                         ignored: Boolean)
         : BasicTestCase<INSTANCE.() -> Unit>(name, suite, testFunction, ignored) {
 
         override fun run() {
-            val instance = suite.createInstance()
+            konst instance = suite.createInstance()
             try {
                 suite.before.forEach { instance.it() }
                 instance.testFunction()
@@ -101,27 +101,27 @@ public abstract class BaseClassSuite<INSTANCE, COMPANION>(name: String, ignored:
     open fun getCompanion(): COMPANION = throw NotImplementedError("Test class has no companion object")
 
     companion object {
-        val INSTANCE_KINDS = listOf(TestFunctionKind.BEFORE_TEST, TestFunctionKind.AFTER_TEST)
-        val COMPANION_KINDS = listOf(TestFunctionKind.BEFORE_CLASS, TestFunctionKind.AFTER_CLASS)
+        konst INSTANCE_KINDS = listOf(TestFunctionKind.BEFORE_TEST, TestFunctionKind.AFTER_TEST)
+        konst COMPANION_KINDS = listOf(TestFunctionKind.BEFORE_CLASS, TestFunctionKind.AFTER_CLASS)
     }
 
-    private val instanceFunctions = mutableMapOf<TestFunctionKind, MutableSet<INSTANCE.() -> Unit>>()
+    private konst instanceFunctions = mutableMapOf<TestFunctionKind, MutableSet<INSTANCE.() -> Unit>>()
     private fun getInstanceFunctions(kind: TestFunctionKind): MutableCollection<INSTANCE.() -> Unit> {
         check(kind in INSTANCE_KINDS)
         return instanceFunctions.getOrPut(kind) { mutableSetOf() }
     }
 
-    private val companionFunction = mutableMapOf<TestFunctionKind, MutableSet<COMPANION.() -> Unit>>()
+    private konst companionFunction = mutableMapOf<TestFunctionKind, MutableSet<COMPANION.() -> Unit>>()
     private fun getCompanionFunctions(kind: TestFunctionKind): MutableCollection<COMPANION.() -> Unit> {
         check(kind in COMPANION_KINDS)
         return companionFunction.getOrPut(kind) { mutableSetOf() }
     }
 
-    val before:      Collection<INSTANCE.() -> Unit>  get() = getInstanceFunctions(TestFunctionKind.BEFORE_TEST)
-    val after:       Collection<INSTANCE.() -> Unit>  get() = getInstanceFunctions(TestFunctionKind.AFTER_TEST)
+    konst before:      Collection<INSTANCE.() -> Unit>  get() = getInstanceFunctions(TestFunctionKind.BEFORE_TEST)
+    konst after:       Collection<INSTANCE.() -> Unit>  get() = getInstanceFunctions(TestFunctionKind.AFTER_TEST)
 
-    val beforeClass: Collection<COMPANION.() -> Unit>  get() = getCompanionFunctions(TestFunctionKind.BEFORE_CLASS)
-    val afterClass:  Collection<COMPANION.() -> Unit>  get() = getCompanionFunctions(TestFunctionKind.AFTER_CLASS)
+    konst beforeClass: Collection<COMPANION.() -> Unit>  get() = getCompanionFunctions(TestFunctionKind.BEFORE_CLASS)
+    konst afterClass:  Collection<COMPANION.() -> Unit>  get() = getCompanionFunctions(TestFunctionKind.AFTER_CLASS)
 
     @Suppress("UNCHECKED_CAST")
     fun registerFunction(kind: TestFunctionKind, function: Function1<*, Unit>) =
@@ -144,7 +144,7 @@ private typealias TopLevelFun = () -> Unit
 @ExperimentalNativeApi
 public class TopLevelSuite(name: String): AbstractTestSuite<TopLevelFun>(name, false) {
 
-    class TestCase(name: String, override val suite: TopLevelSuite, testFunction: TopLevelFun, ignored: Boolean)
+    class TestCase(name: String, override konst suite: TopLevelSuite, testFunction: TopLevelFun, ignored: Boolean)
         : BasicTestCase<TopLevelFun>(name, suite, testFunction, ignored) {
 
         override fun run() {
@@ -157,13 +157,13 @@ public class TopLevelSuite(name: String): AbstractTestSuite<TopLevelFun>(name, f
         }
     }
 
-    private val specialFunctions = mutableMapOf<TestFunctionKind, MutableSet<TopLevelFun>>()
+    private konst specialFunctions = mutableMapOf<TestFunctionKind, MutableSet<TopLevelFun>>()
     private fun getFunctions(type: TestFunctionKind) = specialFunctions.getOrPut(type) { mutableSetOf() }
 
-    val before:      Collection<TopLevelFun>  get() = getFunctions(TestFunctionKind.BEFORE_TEST)
-    val after:       Collection<TopLevelFun>  get() = getFunctions(TestFunctionKind.AFTER_TEST)
-    val beforeClass: Collection<TopLevelFun>  get() = getFunctions(TestFunctionKind.BEFORE_CLASS)
-    val afterClass:  Collection<TopLevelFun>  get() = getFunctions(TestFunctionKind.AFTER_CLASS)
+    konst before:      Collection<TopLevelFun>  get() = getFunctions(TestFunctionKind.BEFORE_TEST)
+    konst after:       Collection<TopLevelFun>  get() = getFunctions(TestFunctionKind.AFTER_TEST)
+    konst beforeClass: Collection<TopLevelFun>  get() = getFunctions(TestFunctionKind.BEFORE_CLASS)
+    konst afterClass:  Collection<TopLevelFun>  get() = getFunctions(TestFunctionKind.AFTER_CLASS)
 
     fun registerFunction(kind: TestFunctionKind, function: TopLevelFun) = getFunctions(kind).add(function)
 

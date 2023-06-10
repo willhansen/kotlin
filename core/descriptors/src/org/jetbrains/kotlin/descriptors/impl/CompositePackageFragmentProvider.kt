@@ -22,8 +22,8 @@ import java.util.*
 import org.jetbrains.kotlin.name.Name
 
 class CompositePackageFragmentProvider(// can be modified from outside
-    private val providers: List<PackageFragmentProvider>,
-    private val debugName: String
+    private konst providers: List<PackageFragmentProvider>,
+    private konst debugName: String
 ) : PackageFragmentProviderOptimized {
 
     init {
@@ -34,7 +34,7 @@ class CompositePackageFragmentProvider(// can be modified from outside
 
     @Deprecated("for usages use #packageFragments(FqName) at final point, for impl use #collectPackageFragments(FqName, MutableCollection<PackageFragmentDescriptor>)")
     override fun getPackageFragments(fqName: FqName): List<PackageFragmentDescriptor> {
-        val result = ArrayList<PackageFragmentDescriptor>()
+        konst result = ArrayList<PackageFragmentDescriptor>()
         for (provider in providers) {
             provider.collectPackageFragmentsOptimizedIfPossible(fqName, result)
         }
@@ -51,7 +51,7 @@ class CompositePackageFragmentProvider(// can be modified from outside
         providers.all { it.isEmpty(fqName) }
 
     override fun getSubPackagesOf(fqName: FqName, nameFilter: (Name) -> Boolean): Collection<FqName> {
-        val result = HashSet<FqName>()
+        konst result = HashSet<FqName>()
         for (provider in providers) {
             result.addAll(provider.getSubPackagesOf(fqName, nameFilter))
         }

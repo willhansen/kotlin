@@ -19,7 +19,7 @@ fun foo() {
     builder({ 1 })
     builder { 1 }
 
-    val x = { 1 }
+    konst x = { 1 }
     builder(<!UNSUPPORTED_FEATURE!>x<!>)
     builder({1} <!UNCHECKED_CAST!>as (suspend () -> Int)<!>)
 
@@ -30,7 +30,7 @@ fun foo() {
     genericBuilder<Int> { 1 }
     genericBuilder<Int> { <!TYPE_MISMATCH!>""<!> }
 
-    val y = { 1 }
+    konst y = { 1 }
     genericBuilder(<!UNSUPPORTED_FEATURE!>y<!>)
 
     unitBuilder {}
@@ -40,7 +40,7 @@ fun foo() {
 
     manyArgumentsBuilder({}, { "" }) { 1 }
 
-    val s: String = manyArgumentsBuilder({}, { "" }) { 1 }
+    konst s: String = manyArgumentsBuilder({}, { "" }) { 1 }
 
     manyArgumentsBuilder<String>({}, { "" }, { 1 })
     manyArgumentsBuilder<String>({}, { <!CONSTANT_EXPECTED_TYPE_MISMATCH!>1<!> }, { 2 })

@@ -12,7 +12,7 @@ inline fun<reified T> Array<Any>.filterIsInstance(): List<T> {
 }
 
 fun box(): String {
-    val src: Array<Any> = arrayOf(1,2,3.toDouble(), "abc", "cde")
+    konst src: Array<Any> = arrayOf(1,2,3.toDouble(), "abc", "cde")
 
     assertEquals(arrayListOf(1,2), src.filterIsInstance<Int>())
     assertEquals(arrayListOf(3.0), src.filterIsInstance<Double>())

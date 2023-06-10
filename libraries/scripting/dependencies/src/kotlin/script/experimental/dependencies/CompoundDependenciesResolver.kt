@@ -12,7 +12,7 @@ import kotlin.script.experimental.api.SourceCode
 import kotlin.script.experimental.api.asSuccess
 import kotlin.script.experimental.dependencies.impl.makeResolveFailureResult
 
-class CompoundDependenciesResolver(private val resolvers: List<ExternalDependenciesResolver>) : ExternalDependenciesResolver {
+class CompoundDependenciesResolver(private konst resolvers: List<ExternalDependenciesResolver>) : ExternalDependenciesResolver {
 
     constructor(vararg resolvers: ExternalDependenciesResolver) : this(resolvers.toList())
 
@@ -31,14 +31,14 @@ class CompoundDependenciesResolver(private val resolvers: List<ExternalDependenc
     ): ResultWithDiagnostics<Boolean> {
         var success = false
         var repositoryAdded = false
-        val reports = mutableListOf<ScriptDiagnostic>()
+        konst reports = mutableListOf<ScriptDiagnostic>()
 
         for (resolver in resolvers) {
             if (resolver.acceptsRepository(repositoryCoordinates)) {
-                when (val resolveResult = resolver.addRepository(repositoryCoordinates, options, sourceCodeLocation)) {
+                when (konst resolveResult = resolver.addRepository(repositoryCoordinates, options, sourceCodeLocation)) {
                     is ResultWithDiagnostics.Success -> {
                         success = true
-                        repositoryAdded = repositoryAdded || resolveResult.value
+                        repositoryAdded = repositoryAdded || resolveResult.konstue
                         reports.addAll(resolveResult.reports)
                     }
                     is ResultWithDiagnostics.Failure -> reports.addAll(resolveResult.reports)
@@ -61,11 +61,11 @@ class CompoundDependenciesResolver(private val resolvers: List<ExternalDependenc
         options: ExternalDependenciesResolver.Options,
         sourceCodeLocation: SourceCode.LocationWithId?
     ): ResultWithDiagnostics<List<File>> {
-        val reports = mutableListOf<ScriptDiagnostic>()
+        konst reports = mutableListOf<ScriptDiagnostic>()
 
         for (resolver in resolvers) {
             if (resolver.acceptsArtifact(artifactCoordinates)) {
-                when (val resolveResult = resolver.resolve(artifactCoordinates, options, sourceCodeLocation)) {
+                when (konst resolveResult = resolver.resolve(artifactCoordinates, options, sourceCodeLocation)) {
                     is ResultWithDiagnostics.Failure -> reports.addAll(resolveResult.reports)
                     else -> return resolveResult
                 }

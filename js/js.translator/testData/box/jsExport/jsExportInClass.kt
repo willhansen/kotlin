@@ -23,14 +23,14 @@ class C() {
 
 // FILE: main.kt
 external interface JsResult {
-    val res: String
+    konst res: String
 }
 
 @JsModule("lib")
 external fun jsBox(): JsResult
 
 fun box(): String {
-    val res = jsBox().res
+    konst res = jsBox().res
     if (res != "pingpong") {
         return "Fail: ${res}"
     }

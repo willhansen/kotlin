@@ -15,8 +15,8 @@ public interface Data {
 }
 
 public final class FlagData : Data {
-    public constructor FlagData(/*0*/ value: kotlin.Boolean)
-    public final val value: kotlin.Boolean
+    public constructor FlagData(/*0*/ konstue: kotlin.Boolean)
+    public final konst konstue: kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -30,7 +30,7 @@ public interface Item {
 
 public final class ListData</*0*/ T : Item> : Data {
     public constructor ListData</*0*/ T : Item>(/*0*/ list: kotlin.collections.List<T>)
-    public final val list: kotlin.collections.List<T>
+    public final konst list: kotlin.collections.List<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -1,15 +1,15 @@
 // EXPECTED_REACHABLE_NODES: 1286
 package foo
 
-open class A(val x: Int, val y: Int) {
-    inner class B(val z: Int) {
+open class A(konst x: Int, konst y: Int) {
+    inner class B(konst z: Int) {
         fun foo() = x + y + z
     }
 }
 
 fun box(): String {
-    val a = A(2, 3)
-    val b = a.B(4)
+    konst a = A(2, 3)
+    konst b = a.B(4)
     return if (b.foo() == 9) "OK" else "failure"
 }
 

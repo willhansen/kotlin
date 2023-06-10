@@ -25,44 +25,44 @@ import javax.inject.Inject
 
 abstract class KotlinWithJavaTarget<KotlinOptionsType : KotlinCommonOptions, CO : KotlinCommonCompilerOptions> @Inject constructor(
     project: Project,
-    override val platformType: KotlinPlatformType,
-    override val targetName: String,
+    override konst platformType: KotlinPlatformType,
+    override konst targetName: String,
     compilerOptionsFactory: () -> HasCompilerOptions<CO>,
     kotlinOptionsFactory: (CO) -> KotlinOptionsType
 ) : AbstractKotlinTarget(project) {
     override var disambiguationClassifier: String? = null
         internal set
 
-    override val apiElementsConfigurationName: String
+    override konst apiElementsConfigurationName: String
         get() = JavaPlugin.API_ELEMENTS_CONFIGURATION_NAME
 
-    override val runtimeElementsConfigurationName: String
+    override konst runtimeElementsConfigurationName: String
         get() = JavaPlugin.RUNTIME_ELEMENTS_CONFIGURATION_NAME
 
-    override val artifactsTaskName: String
+    override konst artifactsTaskName: String
         get() = JavaPlugin.JAR_TASK_NAME
 
-    override val compilations: NamedDomainObjectContainer<KotlinWithJavaCompilation<KotlinOptionsType, CO>> =
+    override konst compilations: NamedDomainObjectContainer<KotlinWithJavaCompilation<KotlinOptionsType, CO>> =
         @Suppress("UNCHECKED_CAST")
         project.container(
             KotlinWithJavaCompilation::class.java as Class<KotlinWithJavaCompilation<KotlinOptionsType, CO>>,
             KotlinWithJavaCompilationFactory(this, compilerOptionsFactory, kotlinOptionsFactory)
         )
 
-    private val layout = project.layout
+    private konst layout = project.layout
 
-    internal val defaultArtifactClassesListFile: Provider<File> =
+    internal konst defaultArtifactClassesListFile: Provider<File> =
         layout.buildDirectory.dir(KOTLIN_BUILD_DIR_NAME).map {
-            val jarTask = project.tasks.getByName(artifactsTaskName) as Jar
+            konst jarTask = project.tasks.getByName(artifactsTaskName) as Jar
             it.file("${sanitizeFileName(jarTask.archiveFileName.get())}-classes.txt").asFile
         }
 
-    internal val buildDir: Provider<Directory> = layout.buildDirectory.dir(KOTLIN_BUILD_DIR_NAME)
+    internal konst buildDir: Provider<Directory> = layout.buildDirectory.dir(KOTLIN_BUILD_DIR_NAME)
 }
 
 private fun sanitizeFileName(candidate: String): String = candidate.filter { it.isLetterOrDigit() }
 
-internal val Project.javaSourceSets: SourceSetContainer
+internal konst Project.javaSourceSets: SourceSetContainer
     get() = variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
         .getInstance(project)
         .sourceSets

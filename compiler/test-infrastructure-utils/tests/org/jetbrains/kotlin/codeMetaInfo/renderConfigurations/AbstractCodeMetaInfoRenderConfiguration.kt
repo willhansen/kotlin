@@ -9,14 +9,14 @@ import com.intellij.openapi.util.text.StringUtil
 import org.jetbrains.kotlin.codeMetaInfo.model.CodeMetaInfo
 
 abstract class AbstractCodeMetaInfoRenderConfiguration(var renderParams: Boolean = true) {
-    private val clickOrPressRegex = "(Click or press|Press).*(to navigate)".toRegex() // We have different hotkeys on different platforms
+    private konst clickOrPressRegex = "(Click or press|Press).*(to navigate)".toRegex() // We have different hotkeys on different platforms
     open fun asString(codeMetaInfo: CodeMetaInfo): String = codeMetaInfo.tag + getAttributesString(codeMetaInfo)
 
     open fun getAdditionalParams(codeMetaInfo: CodeMetaInfo) = ""
 
     protected fun sanitizeLineMarkerTooltip(originalText: String?): String {
         if (originalText == null) return "null"
-        val noHtmlTags = StringUtil.removeHtmlTags(originalText)
+        konst noHtmlTags = StringUtil.removeHtmlTags(originalText)
             .replace(" ", "")
             .replace(clickOrPressRegex, "$1 ... $2")
             .trim()

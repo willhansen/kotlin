@@ -13,18 +13,18 @@ import kotlin.test.Test
 
 class LanguageSettingsTest : AbstractSerializationTest<IdeaKpmLanguageSettings>() {
 
-    override fun serialize(value: IdeaKpmLanguageSettings): ByteArray {
-        return value.toByteArray()
+    override fun serialize(konstue: IdeaKpmLanguageSettings): ByteArray {
+        return konstue.toByteArray()
     }
 
     override fun deserialize(data: ByteArray): IdeaKpmLanguageSettings {
         return IdeaKpmLanguageSettings(data)
     }
 
-    override fun normalize(value: IdeaKpmLanguageSettings): IdeaKpmLanguageSettings {
-        value as IdeaKpmLanguageSettingsImpl
-        return value.copy(
-            compilerPluginClasspath = value.compilerPluginClasspath.map { it.absoluteFile }
+    override fun normalize(konstue: IdeaKpmLanguageSettings): IdeaKpmLanguageSettings {
+        konstue as IdeaKpmLanguageSettingsImpl
+        return konstue.copy(
+            compilerPluginClasspath = konstue.compilerPluginClasspath.map { it.absoluteFile }
         )
     }
 

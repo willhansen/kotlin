@@ -24,7 +24,7 @@ class ObjCMethodSignaturesTest : InteropTestsBase() {
 
     @Test
     fun `ObjC Direct`() {
-        val files = TempFiles("ObjCDirect")
+        konst files = TempFiles("ObjCDirect")
         files.file("header.h", """
             #import <Foundation/Foundation.h>
             
@@ -38,12 +38,12 @@ class ObjCMethodSignaturesTest : InteropTestsBase() {
             - (void)directExt __attribute__((objc_direct));
             @end
         """.trimIndent())
-        val defFile = files.file("direct.def", """
+        konst defFile = files.file("direct.def", """
             language = Objective-C
             headers = header.h
         """.trimIndent())
-        val library = buildNativeLibraryFrom(defFile, files.directory)
-        val index = buildNativeIndex(library, false).index
+        konst library = buildNativeLibraryFrom(defFile, files.directory)
+        konst index = buildNativeIndex(library, false).index
 
         index.objCClasses.find { it.name == "Foo" }.let { cls ->
             assertNotNull(cls, "Class 'Foo' not found in native library $library")

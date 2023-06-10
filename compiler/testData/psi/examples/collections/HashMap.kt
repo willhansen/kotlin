@@ -4,19 +4,19 @@ open class IEquality {
 }
 
 open class IHashable : IEquality {
-  val hashCode : Integer
+  konst hashCode : Integer
     get() = (this as java.lang.Object).hashCode()
 
 }
 
 open class IMap<K, V> {
   fun get(key : K) : V
-  fun set(key : K, value : V) : V
+  fun set(key : K, konstue : V) : V
   fun remove(key : K) : V
   fun containsKey(key : K) : Boolean
 }
 
-class HashableWrapper(val obj : Any) : IHashable
+class HashableWrapper(konst obj : Any) : IHashable
   // equals and hashCode implementations are inherited
 
 @[inline] fun Any.hashable() : HashableWrapper = HashableWrapper(this)

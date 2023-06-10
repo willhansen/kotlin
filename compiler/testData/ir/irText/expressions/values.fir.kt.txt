@@ -7,11 +7,11 @@ enum class Enum : Enum<Enum> {
 
   A = Enum()
 
-  fun values(): Array<Enum> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<Enum> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): Enum /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): Enum /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<Enum>
+  konst entries: EnumEntries<Enum>
     get(): EnumEntries<Enum> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -25,7 +25,7 @@ object A {
 
 }
 
-val a: Int
+konst a: Int
   field = 0
   get
 

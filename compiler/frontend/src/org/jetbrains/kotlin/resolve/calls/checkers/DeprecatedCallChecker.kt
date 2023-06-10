@@ -47,7 +47,7 @@ object DeprecatedCallChecker : CallChecker {
         // Objects will be checked by DeprecatedClassifierUsageChecker
         if (targetDescriptor is FakeCallableDescriptorForObject) return
 
-        val deprecations = deprecationResolver.getDeprecations(targetDescriptor).toMutableList()
+        konst deprecations = deprecationResolver.getDeprecations(targetDescriptor).toMutableList()
 
         // avoid duplicating diagnostic when deprecation for property effectively deprecates setter
         if (targetDescriptor is PropertySetterDescriptor) {
@@ -63,16 +63,16 @@ object DeprecatedCallChecker : CallChecker {
         }
     }
 
-    private val PROPERTY_SET_OPERATIONS = TokenSet.create(*KtTokens.ALL_ASSIGNMENTS.types, KtTokens.PLUSPLUS, KtTokens.MINUSMINUS)
+    private konst PROPERTY_SET_OPERATIONS = TokenSet.create(*KtTokens.ALL_ASSIGNMENTS.types, KtTokens.PLUSPLUS, KtTokens.MINUSMINUS)
 
     internal fun shouldCheckPropertyGetter(expression: PsiElement): Boolean {
         // property getters do not come as callable yet, so we analyse surroundings to check for deprecation annotation on getter
-        val binaryExpression = PsiTreeUtil.getParentOfType<KtBinaryExpression>(expression, KtBinaryExpression::class.java)
+        konst binaryExpression = PsiTreeUtil.getParentOfType<KtBinaryExpression>(expression, KtBinaryExpression::class.java)
         if (binaryExpression != null) {
-            val left = binaryExpression.left
+            konst left = binaryExpression.left
             if (left == expression && binaryExpression.operationToken in PROPERTY_SET_OPERATIONS) return false
 
-            val referenceExpressions = PsiTreeUtil.getChildrenOfType<KtReferenceExpression>(left, KtReferenceExpression::class.java)
+            konst referenceExpressions = PsiTreeUtil.getChildrenOfType<KtReferenceExpression>(left, KtReferenceExpression::class.java)
             if (referenceExpressions != null) {
                 for (expr in referenceExpressions) {
                     // skip binary set operations
@@ -81,11 +81,11 @@ object DeprecatedCallChecker : CallChecker {
             }
         }
 
-        val unaryExpression = PsiTreeUtil.getParentOfType(expression, KtUnaryExpression::class.java)
+        konst unaryExpression = PsiTreeUtil.getParentOfType(expression, KtUnaryExpression::class.java)
         // skip unary set operations
         if (unaryExpression?.operationReference?.getReferencedNameElementType() in PROPERTY_SET_OPERATIONS) return false
 
-        val callableExpression = PsiTreeUtil.getParentOfType(expression, KtCallableReferenceExpression::class.java)
+        konst callableExpression = PsiTreeUtil.getParentOfType(expression, KtCallableReferenceExpression::class.java)
         // skip Type::property
         if (callableExpression != null && callableExpression.callableReference == expression) return false
 

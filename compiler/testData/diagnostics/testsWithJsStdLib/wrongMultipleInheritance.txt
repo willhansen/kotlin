@@ -10,7 +10,7 @@ public open class A {
 
 public abstract class B : A, kotlin.CharSequence {
     public constructor B()
-    public abstract override /*1*/ /*fake_override*/ val length: kotlin.Int
+    public abstract override /*1*/ /*fake_override*/ konst length: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final override /*2*/ /*fake_override*/ fun get(/*0*/ index: kotlin.Int): kotlin.Char
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -30,8 +30,8 @@ public abstract class C : kotlin.collections.CharIterator, I {
 
 public final class CC : kotlin.CharSequence, MyCharSequence {
     public constructor CC(/*0*/ s: kotlin.CharSequence)
-    public open override /*2*/ /*delegation*/ val length: kotlin.Int
-    public final val s: kotlin.CharSequence
+    public open override /*2*/ /*delegation*/ konst length: kotlin.Int
+    public final konst s: kotlin.CharSequence
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*delegation*/ fun get(/*0*/ index: kotlin.Int): kotlin.Char
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -47,7 +47,7 @@ public interface I {
 }
 
 public interface MyCharSequence {
-    public abstract val length: kotlin.Int
+    public abstract konst length: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public abstract operator fun get(/*0*/ index: kotlin.Int): kotlin.Char
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

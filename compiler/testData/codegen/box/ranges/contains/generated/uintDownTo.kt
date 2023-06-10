@@ -3,14 +3,14 @@
 
 
 
-val range0 = 1u downTo 3u
-val range1 = 3u downTo 1u
+konst range0 = 1u downTo 3u
+konst range1 = 3u downTo 1u
 
-val element0 = 0u
-val element1 = 1u
-val element2 = 2u
-val element3 = 3u
-val element4 = 4u
+konst element0 = 0u
+konst element1 = 1u
+konst element2 = 2u
+konst element3 = 3u
+konst element4 = 4u
 
 fun box(): String {
     testR0xE0()

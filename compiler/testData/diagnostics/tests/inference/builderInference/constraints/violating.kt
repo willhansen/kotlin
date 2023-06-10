@@ -15,19 +15,19 @@ fun main() {
     }
     buildList {
         add(<!CONSTANT_EXPECTED_TYPE_MISMATCH!>3<!>)
-        val x: String = get(0)
+        konst x: String = get(0)
     }
     buildList {
         add(<!TYPE_MISMATCH!>"3"<!>)
-        val x: MutableList<Int> = this@buildList
+        konst x: MutableList<Int> = this@buildList
     }
     buildList {
-        val y: CharSequence = ""
+        konst y: CharSequence = ""
         add(<!TYPE_MISMATCH, TYPE_MISMATCH!>y<!>)
-        val x: MutableList<String> = this@buildList
+        konst x: MutableList<String> = this@buildList
     }
     buildList {
         add(<!TYPE_MISMATCH!>""<!>)
-        val x: StringBuilder = get(0)
+        konst x: StringBuilder = get(0)
     }
 }

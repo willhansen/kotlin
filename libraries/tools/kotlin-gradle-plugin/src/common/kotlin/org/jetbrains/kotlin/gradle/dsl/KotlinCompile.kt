@@ -34,10 +34,10 @@ interface KotlinCommonCompile : KotlinCompile<KotlinMultiplatformCommonOptions>
 
 interface KotlinJsDce : Task {
     @get:Internal
-    val dceOptions: KotlinJsDceOptions
+    konst dceOptions: KotlinJsDceOptions
 
     @get:Input
-    val keep: MutableList<String>
+    konst keep: MutableList<String>
 
     fun dceOptions(fn: KotlinJsDceOptions.() -> Unit) {
         dceOptions.fn()

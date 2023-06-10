@@ -10,7 +10,7 @@ class A {
     @JvmName("jvmFoo")
     fun foo(s: String): Int = s.length
 
-    fun mangled(z: Z): Number = z.value
+    fun mangled(z: Z): Number = z.konstue
 
     internal fun internal(s: String): Int = s.length
 
@@ -22,10 +22,10 @@ class A {
 }
 
 @JvmInline
-value class Z(val value: Number)
+konstue class Z(konst konstue: Number)
 
 fun test(f: KFunction<*>) {
-    val javaMethod = f.javaMethod
+    konst javaMethod = f.javaMethod
         ?: error("javaMethod == null for $f")
     assertEquals(f, javaMethod.kotlinFunction, "Incorrect kotlinFunction for $javaMethod")
 }

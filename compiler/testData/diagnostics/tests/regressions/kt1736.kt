@@ -8,4 +8,4 @@ object Obj {
     }
 }
 
-val x = Obj.method<!TOO_MANY_ARGUMENTS!>{ -> }<!>
+konst x = Obj.method<!TOO_MANY_ARGUMENTS!>{ -> }<!>

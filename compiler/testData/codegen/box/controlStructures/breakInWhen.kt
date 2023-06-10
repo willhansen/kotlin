@@ -1,7 +1,7 @@
 // !LANGUAGE: +AllowBreakAndContinueInsideWhen
 
 fun testFor() {
-    val xs = IntArray(10) { i -> i }
+    konst xs = IntArray(10) { i -> i }
     var k = 0
     for (x in xs) {
         when {

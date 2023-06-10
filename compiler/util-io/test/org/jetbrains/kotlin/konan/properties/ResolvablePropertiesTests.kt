@@ -12,16 +12,16 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `trivial symbol resolve`() {
-        val props = propertiesOf(
-            "key1" to "value1",
+        konst props = propertiesOf(
+            "key1" to "konstue1",
             "key2" to "\$key1"
         )
-        assertEquals("value1", props.resolvablePropertyString("key2"))
+        assertEquals("konstue1", props.resolvablePropertyString("key2"))
     }
 
     @Test(expected = IllegalStateException::class)
     fun `trivial circular dependency`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "key1" to "\$key2",
             "key2" to "\$key1"
         )
@@ -30,7 +30,7 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `list and string should have the same behavior`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "v1",
             "k2" to "v2 \$k1"
         )
@@ -40,7 +40,7 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `list expansion`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "v1 v2",
             "k2" to "\$k1 v3",
             "k3" to "\$k2"
@@ -50,7 +50,7 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `double list expansion`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "v1 v2",
             "k2" to "\$k1 \$k1"
         )
@@ -59,7 +59,7 @@ class ResolvablePropertiesTests {
 
     @Test(expected = IllegalStateException::class)
     fun `self-reference`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "\$k1"
         )
         props.resolvablePropertyString("k1")
@@ -67,7 +67,7 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `trivial relative path`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "v1",
             "k2" to "\$k1/sysroot"
         )
@@ -76,7 +76,7 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `two-fold relative path`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "v1",
             "k2" to "\$k1/toolchain",
             "k3" to "\$k2/sysroot"
@@ -86,7 +86,7 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `absolute path`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "/",
             "k2" to "\$k1/bin"
         )
@@ -95,7 +95,7 @@ class ResolvablePropertiesTests {
 
     @Test(expected = java.lang.IllegalStateException::class)
     fun `incorrect relative path`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "v1 v2",
             "k2" to "\$k1/sysroot"
         )
@@ -104,7 +104,7 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `simple prefix`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "k1" to "v1",
             "k2" to "--key=\$k1"
         )
@@ -113,7 +113,7 @@ class ResolvablePropertiesTests {
 
     @Test
     fun `with prefix and relative`() {
-        val props = propertiesOf(
+        konst props = propertiesOf(
             "absoluteTargetSysRoot" to "/",
             "include" to "-I\$absoluteTargetSysRoot/usr/include/c++/4.9.4"
         )

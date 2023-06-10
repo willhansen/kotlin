@@ -10,9 +10,9 @@ inline
 fun <reified T> Any?.castTo(): T? = this as? T?
 
 fun box(): String {
-    val a: Any? = A()
-    val nil: Any? = null
-    val b: Any? = B()
+    konst a: Any? = A()
+    konst nil: Any? = null
+    konst b: Any? = B()
 
     assertEquals(a, a.castTo<A>(), "a")
     assertEquals(null, nil.castTo<A>(), "nil")

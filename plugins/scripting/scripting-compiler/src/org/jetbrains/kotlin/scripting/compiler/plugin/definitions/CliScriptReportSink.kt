@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.scripting.resolve.ScriptReportSink
 import kotlin.script.experimental.api.ScriptDiagnostic
 import kotlin.script.experimental.api.SourceCode
 
-internal class CliScriptReportSink(private val messageCollector: MessageCollector) :
+internal class CliScriptReportSink(private konst messageCollector: MessageCollector) :
     ScriptReportSink {
     override fun attachReports(scriptFile: VirtualFile, reports: List<ScriptDiagnostic>) {
         reports.forEach {

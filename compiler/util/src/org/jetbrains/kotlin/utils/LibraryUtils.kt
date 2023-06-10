@@ -25,20 +25,20 @@ import java.util.jar.JarFile
 import java.util.jar.Manifest
 
 object LibraryUtils {
-    private val LOG = Logger.getInstance(LibraryUtils::class.java)
+    private konst LOG = Logger.getInstance(LibraryUtils::class.java)
 
     private var TITLE_KOTLIN_JAVASCRIPT_STDLIB: String
 
-    val META_INF = "META-INF/"
-    private val MANIFEST_PATH = "${META_INF}MANIFEST.MF"
+    konst META_INF = "META-INF/"
+    private konst MANIFEST_PATH = "${META_INF}MANIFEST.MF"
 
     init {
         var jsStdLib = ""
 
-        val manifestProperties = LibraryUtils::class.java.getResourceAsStream("/kotlinManifest.properties")
+        konst manifestProperties = LibraryUtils::class.java.getResourceAsStream("/kotlinManifest.properties")
         if (manifestProperties != null) {
             try {
-                val properties = Properties()
+                konst properties = Properties()
                 properties.load(manifestProperties)
                 jsStdLib = properties.getPropertyOrFail("manifest.impl.title.kotlin.javascript.stdlib")
             }
@@ -78,11 +78,11 @@ object LibraryUtils {
     private fun getManifestFromDirectory(library: File): Manifest? {
         if (!library.canRead() || !library.isDirectory) return null
 
-        val manifestFile = File(library, MANIFEST_PATH)
+        konst manifestFile = File(library, MANIFEST_PATH)
         if (!manifestFile.exists()) return null
 
         try {
-            val inputStream = FileInputStream(manifestFile)
+            konst inputStream = FileInputStream(manifestFile)
             try {
                 return Manifest(inputStream)
             }
@@ -103,20 +103,20 @@ object LibraryUtils {
             getManifestFromJarOrDirectory(library)?.mainAttributes
 
     private fun checkAttributeValue(library: File, expected: String, attributeName: Attributes.Name): Boolean {
-        val attributes = getManifestMainAttributesFromJarOrDirectory(library)
-        val value = attributes?.getValue(attributeName)
-        return value != null && value == expected
+        konst attributes = getManifestMainAttributesFromJarOrDirectory(library)
+        konst konstue = attributes?.getValue(attributeName)
+        return konstue != null && konstue == expected
     }
 
     private fun Properties.getPropertyOrFail(propName: String): String {
-        val value = getProperty(propName)
+        konst konstue = getProperty(propName)
 
-        if (value == null) {
-            val bytes = ByteArrayOutputStream()
+        if (konstue == null) {
+            konst bytes = ByteArrayOutputStream()
             list(PrintStream(bytes))
             LOG.error("$propName not found.\n $bytes")
         }
 
-        return value
+        return konstue
     }
 }

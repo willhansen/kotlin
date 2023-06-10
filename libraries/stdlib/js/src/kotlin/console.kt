@@ -22,10 +22,10 @@ internal abstract class BaseOutput {
 
 /** JsName used to make the declaration available outside of module to test it */
 @JsName("NodeJsOutput")
-internal class NodeJsOutput(val outputStream: dynamic) : BaseOutput() {
+internal class NodeJsOutput(konst outputStream: dynamic) : BaseOutput() {
     override fun print(message: Any?) {
         // TODO: Using local variable because of bug in block decomposition lowering in IR backend
-        val messageString = String(message)
+        konst messageString = String(message)
         outputStream.write(messageString)
     }
 }
@@ -65,7 +65,7 @@ internal open class BufferedOutput : BaseOutput() {
 internal class BufferedOutputToConsoleLog : BufferedOutput() {
     override fun print(message: Any?) {
         var s = String(message)
-        val i = s.nativeLastIndexOf("\n", 0)
+        konst i = s.nativeLastIndexOf("\n", 0)
         if (i >= 0) {
             buffer += s.substring(0, i)
             flush()
@@ -83,12 +83,12 @@ internal class BufferedOutputToConsoleLog : BufferedOutput() {
 /** JsName used to make the declaration available outside of module to test it and use at try.kotl.in */
 @JsName("output")
 internal var output = run {
-    val isNode: Boolean = js("typeof process !== 'undefined' && process.versions && !!process.versions.node")
+    konst isNode: Boolean = js("typeof process !== 'undefined' && process.versions && !!process.versions.node")
     if (isNode) NodeJsOutput(js("process.stdout")) else BufferedOutputToConsoleLog()
 }
 
 @kotlin.internal.InlineOnly
-private inline fun String(value: Any?): String = js("String")(value)
+private inline fun String(konstue: Any?): String = js("String")(konstue)
 
 /** Prints the line separator to the standard output stream. */
 public actual fun println() {

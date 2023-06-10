@@ -13,7 +13,7 @@ package kotlin
  * Creates a new instance of the [Lazy] that uses the specified initialization function [initializer]
  * and the default thread-safety mode [LazyThreadSafetyMode.SYNCHRONIZED].
  *
- * If the initialization of a value throws an exception, it will attempt to reinitialize the value at next access.
+ * If the initialization of a konstue throws an exception, it will attempt to reinitialize the konstue at next access.
  *
  * Note that the returned instance uses itself to synchronize on. Do not synchronize from external code on
  * the returned instance as it may cause accidental deadlock. Also this behavior can be changed in the future.
@@ -24,7 +24,7 @@ public actual fun <T> lazy(initializer: () -> T): Lazy<T> = SynchronizedLazyImpl
  * Creates a new instance of the [Lazy] that uses the specified initialization function [initializer]
  * and thread-safety [mode].
  *
- * If the initialization of a value throws an exception, it will attempt to reinitialize the value at next access.
+ * If the initialization of a konstue throws an exception, it will attempt to reinitialize the konstue at next access.
  *
  * Note that when the [LazyThreadSafetyMode.SYNCHRONIZED] mode is specified the returned instance uses itself
  * to synchronize on. Do not synchronize from external code on the returned instance as it may cause accidental deadlock.
@@ -41,7 +41,7 @@ public actual fun <T> lazy(mode: LazyThreadSafetyMode, initializer: () -> T): La
  * Creates a new instance of the [Lazy] that uses the specified initialization function [initializer]
  * and the default thread-safety mode [LazyThreadSafetyMode.SYNCHRONIZED].
  *
- * If the initialization of a value throws an exception, it will attempt to reinitialize the value at next access.
+ * If the initialization of a konstue throws an exception, it will attempt to reinitialize the konstue at next access.
  *
  * The returned instance uses the specified [lock] object to synchronize on.
  * When the [lock] is not specified the instance uses itself to synchronize on,
@@ -54,77 +54,77 @@ public actual fun <T> lazy(lock: Any?, initializer: () -> T): Lazy<T> = Synchron
 
 private class SynchronizedLazyImpl<out T>(initializer: () -> T, lock: Any? = null) : Lazy<T>, Serializable {
     private var initializer: (() -> T)? = initializer
-    @Volatile private var _value: Any? = UNINITIALIZED_VALUE
+    @Volatile private var _konstue: Any? = UNINITIALIZED_VALUE
     // final field is required to enable safe publication of constructed instance
-    private val lock = lock ?: this
+    private konst lock = lock ?: this
 
-    override val value: T
+    override konst konstue: T
         get() {
-            val _v1 = _value
+            konst _v1 = _konstue
             if (_v1 !== UNINITIALIZED_VALUE) {
                 @Suppress("UNCHECKED_CAST")
                 return _v1 as T
             }
 
             return synchronized(lock) {
-                val _v2 = _value
+                konst _v2 = _konstue
                 if (_v2 !== UNINITIALIZED_VALUE) {
                     @Suppress("UNCHECKED_CAST") (_v2 as T)
                 } else {
-                    val typedValue = initializer!!()
-                    _value = typedValue
+                    konst typedValue = initializer!!()
+                    _konstue = typedValue
                     initializer = null
                     typedValue
                 }
             }
         }
 
-    override fun isInitialized(): Boolean = _value !== UNINITIALIZED_VALUE
+    override fun isInitialized(): Boolean = _konstue !== UNINITIALIZED_VALUE
 
-    override fun toString(): String = if (isInitialized()) value.toString() else "Lazy value not initialized yet."
+    override fun toString(): String = if (isInitialized()) konstue.toString() else "Lazy konstue not initialized yet."
 
-    private fun writeReplace(): Any = InitializedLazyImpl(value)
+    private fun writeReplace(): Any = InitializedLazyImpl(konstue)
 }
 
 
 private class SafePublicationLazyImpl<out T>(initializer: () -> T) : Lazy<T>, Serializable {
     @Volatile private var initializer: (() -> T)? = initializer
-    @Volatile private var _value: Any? = UNINITIALIZED_VALUE
+    @Volatile private var _konstue: Any? = UNINITIALIZED_VALUE
     // this final field is required to enable safe initialization of the constructed instance
-    private val final: Any = UNINITIALIZED_VALUE
+    private konst final: Any = UNINITIALIZED_VALUE
 
-    override val value: T
+    override konst konstue: T
         get() {
-            val value = _value
-            if (value !== UNINITIALIZED_VALUE) {
+            konst konstue = _konstue
+            if (konstue !== UNINITIALIZED_VALUE) {
                 @Suppress("UNCHECKED_CAST")
-                return value as T
+                return konstue as T
             }
 
-            val initializerValue = initializer
-            // if we see null in initializer here, it means that the value is already set by another thread
+            konst initializerValue = initializer
+            // if we see null in initializer here, it means that the konstue is already set by another thread
             if (initializerValue != null) {
-                val newValue = initializerValue()
-                if (valueUpdater.compareAndSet(this, UNINITIALIZED_VALUE, newValue)) {
+                konst newValue = initializerValue()
+                if (konstueUpdater.compareAndSet(this, UNINITIALIZED_VALUE, newValue)) {
                     initializer = null
                     return newValue
                 }
             }
             @Suppress("UNCHECKED_CAST")
-            return _value as T
+            return _konstue as T
         }
 
-    override fun isInitialized(): Boolean = _value !== UNINITIALIZED_VALUE
+    override fun isInitialized(): Boolean = _konstue !== UNINITIALIZED_VALUE
 
-    override fun toString(): String = if (isInitialized()) value.toString() else "Lazy value not initialized yet."
+    override fun toString(): String = if (isInitialized()) konstue.toString() else "Lazy konstue not initialized yet."
 
-    private fun writeReplace(): Any = InitializedLazyImpl(value)
+    private fun writeReplace(): Any = InitializedLazyImpl(konstue)
 
     companion object {
-        private val valueUpdater = java.util.concurrent.atomic.AtomicReferenceFieldUpdater.newUpdater(
+        private konst konstueUpdater = java.util.concurrent.atomic.AtomicReferenceFieldUpdater.newUpdater(
             SafePublicationLazyImpl::class.java,
             Any::class.java,
-            "_value"
+            "_konstue"
         )
     }
 }

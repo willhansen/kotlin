@@ -7,20 +7,20 @@ package kotlin.collections
 
 internal interface EqualityComparator {
     /**
-     * Subclasses must override to return a value indicating
-     * whether or not two keys or values are equal.
+     * Subclasses must override to return a konstue indicating
+     * whether or not two keys or konstues are equal.
      */
-    abstract fun equals(value1: Any?, value2: Any?): Boolean
+    abstract fun equals(konstue1: Any?, konstue2: Any?): Boolean
 
     /**
      * Subclasses must override to return the hash code of a given key.
      */
-    abstract fun getHashCode(value: Any?): Int
+    abstract fun getHashCode(konstue: Any?): Int
 
 
     object HashCode : EqualityComparator {
-        override fun equals(value1: Any?, value2: Any?): Boolean = value1 == value2
+        override fun equals(konstue1: Any?, konstue2: Any?): Boolean = konstue1 == konstue2
 
-        override fun getHashCode(value: Any?): Int = value?.hashCode() ?: 0
+        override fun getHashCode(konstue: Any?): Int = konstue?.hashCode() ?: 0
     }
 }

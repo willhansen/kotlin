@@ -9,6 +9,6 @@ class B : A<String> {
 class C(a: A<String>) : A<String> by a
 
 fun box(): String {
-    val a: A<String> = C(B())
+    konst a: A<String> = C(B())
     return a.foo()
 }

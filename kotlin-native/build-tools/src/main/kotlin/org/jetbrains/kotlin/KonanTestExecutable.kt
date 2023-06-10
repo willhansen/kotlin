@@ -15,7 +15,7 @@ interface KonanTestExecutable : Task {
      * Test executable to be run by the service.
      */
     @get:Input
-    val executable: String
+    konst executable: String
 
     /**
      * Action that configures task or does some workload before the test will be executed.
@@ -36,5 +36,5 @@ interface KonanTestExecutable : Task {
      * Build tasks that this [executable] depends on, or is built from.
      */
     @get:Internal
-    val buildTasks: List<Task>
+    konst buildTasks: List<Task>
 }

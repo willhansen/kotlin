@@ -5,8 +5,8 @@ class SomeClass {
 
     var property_ChangedType: Int = 0
         get() = field
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
     var property_ChangedGetterImpl: Int = 0
@@ -14,27 +14,27 @@ class SomeClass {
             println("Getter implementation")
             return field
         }
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
     var property_ChangedSetterImpl: Int = 0
         get() = field
-        set(value) {
+        set(konstue) {
             println("Setter implementation")
-            field = value
+            field = konstue
         }
 
     var property_Unchanged: Int = 0
         get() = field
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
     private var privateProperty_ChangedType: Int = 0
         get() = field
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 }
 
@@ -46,8 +46,8 @@ private var privateInlineProperty_ChangedType_BackingField: Int = 0
 
 inline var inlineProperty_ChangedType: Int
     get() = inlineProperty_ChangedType_BackingField
-    set(value) {
-        inlineProperty_ChangedType_BackingField = value
+    set(konstue) {
+        inlineProperty_ChangedType_BackingField = konstue
     }
 
 inline var inlineProperty_ChangedGetterImpl: Int
@@ -55,25 +55,25 @@ inline var inlineProperty_ChangedGetterImpl: Int
         println("Getter implementation")
         return inlineProperty_ChangedGetterImpl_BackingField
     }
-    set(value) {
-        inlineProperty_ChangedGetterImpl_BackingField = value
+    set(konstue) {
+        inlineProperty_ChangedGetterImpl_BackingField = konstue
     }
 
 inline var inlineProperty_ChangedSetterImpl: Int
     get() = inlineProperty_ChangedSetterImpl_BackingField
-    set(value) {
+    set(konstue) {
         println("Setter implementation")
-        inlineProperty_ChangedSetterImpl_BackingField = value
+        inlineProperty_ChangedSetterImpl_BackingField = konstue
     }
 
 inline var inlineProperty_Unchanged: Int
     get() = inlineProperty_Unchanged_BackingField
-    set(value) {
-        inlineProperty_Unchanged_BackingField = value
+    set(konstue) {
+        inlineProperty_Unchanged_BackingField = konstue
     }
 
 private inline var privateInlineProperty_ChangedType: Int
     get() = privateInlineProperty_ChangedType_BackingField
-    set(value) {
-        privateInlineProperty_ChangedType_BackingField = value
+    set(konstue) {
+        privateInlineProperty_ChangedType_BackingField = konstue
     }

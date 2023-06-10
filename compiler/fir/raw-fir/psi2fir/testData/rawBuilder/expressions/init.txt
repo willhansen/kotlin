@@ -4,7 +4,7 @@ FILE: init.kt
             super<R|kotlin/Any|>()
         }
 
-        public? final? val x: Int
+        public? final? konst x: Int
             public? [ContainingClassKey=WithInit] get(): Int
 
         init {

@@ -2,13 +2,13 @@ import java.io.InputStream
 import java.util.jar.Manifest
 import java.util.zip.ZipFile
 
-val isTeamcityBuild = project.hasProperty("teamcity") || System.getenv("TEAMCITY_VERSION") != null
+konst isTeamcityBuild = project.hasProperty("teamcity") || System.getenv("TEAMCITY_VERSION") != null
 
-val distDir: String by rootProject.extra
-val repoDir: String = "${rootProject.buildDir}/repo"
-val kotlinVersion: String by rootProject.extra
+konst distDir: String by rootProject.extra
+konst repoDir: String = "${rootProject.buildDir}/repo"
+konst kotlinVersion: String by rootProject.extra
 
-val checkMavenArtifacts = tasks.register("checkMavenArtifacts") {
+konst checkMavenArtifacts = tasks.register("checkMavenArtifacts") {
     doLast {
         fileTree(repoDir).checkArtifacts { zip ->
             if (!zip.name.endsWith("-sources.jar"))
@@ -19,7 +19,7 @@ val checkMavenArtifacts = tasks.register("checkMavenArtifacts") {
     }
 }
 
-val checkDist = tasks.register("checkDistArtifacts") {
+konst checkDist = tasks.register("checkDistArtifacts") {
     doLast {
         fileTree(distDir).checkArtifacts { zip ->
             zip.checkCompilerVersion(kotlinVersion)
@@ -35,7 +35,7 @@ tasks.register("checkArtifacts") {
 
 fun FileTree.checkArtifacts(action: (zip: ZipFile) -> Unit) {
     filter { it.extension == "jar" }.forEach { jar ->
-        val zip = ZipFile(jar)
+        konst zip = ZipFile(jar)
 
         if (isTeamcityBuild)
             testStarted(zip.testName())
@@ -48,27 +48,27 @@ fun FileTree.checkArtifacts(action: (zip: ZipFile) -> Unit) {
 }
 
 fun ZipFile.checkManifest(version: String) = checkZipEntry("META-INF/MANIFEST.MF") { entryStream ->
-    val implementationVersion = Manifest(entryStream).mainAttributes.getValue("Implementation-Version")
-    "Manifest contains invalid 'Implementation-Version' value, expected: $version found: $implementationVersion".takeIf {
+    konst implementationVersion = Manifest(entryStream).mainAttributes.getValue("Implementation-Version")
+    "Manifest contains inkonstid 'Implementation-Version' konstue, expected: $version found: $implementationVersion".takeIf {
         implementationVersion?.let { it != version } ?: false
     }
 }
 
 fun ZipFile.checkCompilerVersion(version: String) = checkZipEntry("META-INF/compiler.version") {
-    val artifactVersion = it.bufferedReader().readLine()
-    "Invalid compiler.version content, expected: $version found: $artifactVersion"
+    konst artifactVersion = it.bufferedReader().readLine()
+    "Inkonstid compiler.version content, expected: $version found: $artifactVersion"
         .takeIf { artifactVersion != version }
 }
 
 fun ZipFile.checkPluginXmlVersion(version: String) = checkZipEntry("META-INF/plugin.xml") { inputStream ->
-    val pluginVersion = inputStream.bufferedReader()
+    konst pluginVersion = inputStream.bufferedReader()
         .lineSequence()
         .mapNotNull { Regex("""<version>([^<]+)</version>""").find(it) }
         .firstOrNull()
         ?.groupValues
         ?.get(1) ?: return@checkZipEntry "Plugin version not found in plugin.xml"
 
-    "Invalid plugin version, expected version starting with '$version', actual: '$pluginVersion'"
+    "Inkonstid plugin version, expected version starting with '$version', actual: '$pluginVersion'"
         .takeIf { !pluginVersion.startsWith(version) }
 }
 

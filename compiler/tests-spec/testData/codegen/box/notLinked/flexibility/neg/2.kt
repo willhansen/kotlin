@@ -22,7 +22,7 @@ public class Test<T> extends Base<T> {
 
 // FILE: KotlinClass.kt
 
-open class Base<out T>(val prop: T)
+open class Base<out T>(konst prop: T)
 
 class Inheritor<T : Any> {
     companion object {
@@ -31,6 +31,6 @@ class Inheritor<T : Any> {
 }
 
 fun box() {
-    val v: Base<String> = Inheritor.default()
+    konst v: Base<String> = Inheritor.default()
     println(v.prop.length)
 }

@@ -1,2 +1,2 @@
 // FIR_IDENTICAL
-class Test(val x: Int = 0)
+class Test(konst x: Int = 0)

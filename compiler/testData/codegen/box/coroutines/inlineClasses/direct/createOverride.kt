@@ -8,7 +8,7 @@ fun builder(c: suspend () -> Unit) {
     })
 }
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 suspend fun <T> List<T>.onEach(c: suspend (T) -> Unit) {
     for (e in this) {

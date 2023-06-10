@@ -29,8 +29,8 @@ object WasmJsInteropTypesChecker : DeclarationChecker {
         if (descriptor !is MemberDescriptor)
             return
 
-        val trace = context.trace
-        val bindingContext = trace.bindingContext
+        konst trace = context.trace
+        konst bindingContext = trace.bindingContext
 
         fun isExternalJsInteropDeclaration() =
             descriptor.isEffectivelyExternal() &&
@@ -64,7 +64,7 @@ object WasmJsInteropTypesChecker : DeclarationChecker {
         fun TypeParameterDescriptor.checkJsInteropTypeParameter() {
             for (upperBound in this.upperBounds) {
                 if (!isTypeSupportedInJsInterop(upperBound, isInFunctionReturnPosition = false)) {
-                    val reportOn = this.findPsi() ?: declaration
+                    konst reportOn = this.findPsi() ?: declaration
                     trace.report(ErrorsWasm.WRONG_JS_INTEROP_TYPE.on(reportOn, "type parameter upper bound", upperBound))
                 }
             }
@@ -86,8 +86,8 @@ object WasmJsInteropTypesChecker : DeclarationChecker {
                 for (typeParameter in descriptor.typeParameters) {
                     typeParameter.checkJsInteropTypeParameter()
                 }
-                for (parameter in descriptor.valueParameters) {
-                    val typeToCheck = parameter.varargElementType ?: parameter.type
+                for (parameter in descriptor.konstueParameters) {
+                    konst typeToCheck = parameter.varargElementType ?: parameter.type
                     typeToCheck.checkJsInteropType(
                         "external function parameter",
                         reportOn = parameter.findPsi() ?: declaration
@@ -111,7 +111,7 @@ private fun isTypeSupportedInJsInterop(
         return isInFunctionReturnPosition
     }
 
-    val nonNullable = type.makeNotNullable()
+    konst nonNullable = type.makeNotNullable()
     if (
         KotlinBuiltIns.isPrimitiveType(nonNullable) ||
         KotlinBuiltIns.isString(nonNullable)
@@ -125,15 +125,15 @@ private fun isTypeSupportedInJsInterop(
         return true
     }
 
-    val classifierDescriptor = nonNullable.constructor.declarationDescriptor
+    konst classifierDescriptor = nonNullable.constructor.declarationDescriptor
     if (classifierDescriptor is MemberDescriptor && classifierDescriptor.isEffectivelyExternal()) {
         return true
     }
 
     if (type.isFunctionType) {
-        val arguments = type.arguments
+        konst arguments = type.arguments
         for (i in 0 until arguments.lastIndex) {
-            val isArgumentSupported = isTypeSupportedInJsInterop(
+            konst isArgumentSupported = isTypeSupportedInJsInterop(
                 arguments[i].type,
                 isInFunctionReturnPosition = false,
             )

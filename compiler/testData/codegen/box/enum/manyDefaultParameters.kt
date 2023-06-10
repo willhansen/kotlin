@@ -3,9 +3,9 @@ enum class ClassTemplate(
         var code: Int,
         var nameTemplate: Int = 1,
 
-        val parent: Int  = 1,
-        val previous: Int  = 1,
-        val progressionEquivalent: Int  = 1,
+        konst parent: Int  = 1,
+        konst previous: Int  = 1,
+        konst progressionEquikonstent: Int  = 1,
 
         var idDiscipline: Int = 1,
         var strictRunningOrder: Int = 1,
@@ -45,8 +45,8 @@ enum class ClassTemplate(
 }
 
 fun box(): String {
-    val x = ClassTemplate.UNDEFINED
-    val y = ClassTemplate.BLAH
+    konst x = ClassTemplate.UNDEFINED
+    konst y = ClassTemplate.BLAH
 
     if (x.code != 56 || x.nameTemplate != 3 || x.isAddOnAllowed != 1) return "fail 1"
     if (y.code != 57 || y.nameTemplate != 4 || y.isAddOnAllowed != 1) return "fail 2"

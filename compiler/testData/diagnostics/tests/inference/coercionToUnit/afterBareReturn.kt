@@ -9,7 +9,7 @@ fun <T> incomplete(): T = null!!
 fun <T : I> incompatibleI(): T = null!!
 fun <T : C> incompatibleC(): T = null!!
 
-val p = false
+konst p = false
 
 fun expectUnit(x: Unit) = x
 

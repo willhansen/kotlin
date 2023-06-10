@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1284
 package foo
 
-class A(val c: Int) {
+class A(konst c: Int) {
 }
 
 

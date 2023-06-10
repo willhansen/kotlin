@@ -19,7 +19,7 @@ internal interface KotlinCompilationFriendPathsResolver {
 }
 
 internal class DefaultKotlinCompilationFriendPathsResolver(
-    private val friendArtifactResolver: FriendArtifactResolver = DefaultFriendArtifactResolver
+    private konst friendArtifactResolver: FriendArtifactResolver = DefaultFriendArtifactResolver
 ) : KotlinCompilationFriendPathsResolver {
 
 
@@ -53,7 +53,7 @@ internal class DefaultKotlinCompilationFriendPathsResolver(
     }
 
     class CompositeFriendArtifactResolver(
-        private val resolvers: List<FriendArtifactResolver>
+        private konst resolvers: List<FriendArtifactResolver>
     ) : FriendArtifactResolver {
         override fun resolveFriendArtifacts(compilation: InternalKotlinCompilation<*>): FileCollection {
             return compilation.project.files(resolvers.map { resolver -> resolver.resolveFriendArtifacts(compilation) })
@@ -63,14 +63,14 @@ internal class DefaultKotlinCompilationFriendPathsResolver(
     object DefaultFriendArtifactResolver : FriendArtifactResolver {
         override fun resolveFriendArtifacts(compilation: InternalKotlinCompilation<*>): FileCollection {
             return with(compilation.project) {
-                val friendArtifactsTaskProvider = resolveFriendArtifactsTask(compilation) ?: return files()
+                konst friendArtifactsTaskProvider = resolveFriendArtifactsTask(compilation) ?: return files()
                 filesProvider { friendArtifactsTaskProvider.flatMap { it.archiveFile } }
             }
         }
 
         private fun resolveFriendArtifactsTask(compilation: InternalKotlinCompilation<*>): TaskProvider<AbstractArchiveTask>? {
             if (compilation.associateWithClosure.none { it.isMain() }) return null
-            val archiveTasks = compilation.project.tasks.withType(AbstractArchiveTask::class.java)
+            konst archiveTasks = compilation.project.tasks.withType(AbstractArchiveTask::class.java)
             if (compilation.target.artifactsTaskName !in archiveTasks.names) return null
             return archiveTasks.named(compilation.target.artifactsTaskName)
         }
@@ -78,7 +78,7 @@ internal class DefaultKotlinCompilationFriendPathsResolver(
 
     object AdditionalMetadataFriendArtifactResolver : FriendArtifactResolver {
         override fun resolveFriendArtifacts(compilation: InternalKotlinCompilation<*>): FileCollection {
-            val friendSourceSets = getVisibleSourceSetsFromAssociateCompilations(compilation.defaultSourceSet)
+            konst friendSourceSets = getVisibleSourceSetsFromAssociateCompilations(compilation.defaultSourceSet)
             return compilation.project.files(
                 friendSourceSets.mapNotNull { compilation.target.compilations.findByName(it.name)?.output?.classesDirs }
             )

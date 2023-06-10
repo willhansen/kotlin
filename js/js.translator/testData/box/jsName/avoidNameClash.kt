@@ -4,16 +4,16 @@
 object A {
     @JsName("js_method") fun f() = "method"
 
-    @JsName("js_property") val f: String get() = "property"
+    @JsName("js_property") konst f: String get() = "property"
 }
 
 fun test(): dynamic {
-    val a = A.asDynamic()
+    konst a = A.asDynamic()
     return a.js_method() + ";" + a.js_property
 }
 
 fun box(): String {
-    val result = test()
+    konst result = test()
     assertEquals("method;property", result);
     return "OK"
 }

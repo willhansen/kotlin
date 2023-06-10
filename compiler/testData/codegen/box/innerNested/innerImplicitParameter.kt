@@ -1,5 +1,5 @@
 open class C<T> {
-    inner class A<U>(val x: T?, val y: U)
+    inner class A<U>(konst x: T?, konst y: U)
 
     class D : C<Nothing>() {
         fun f() = A<String>(null, "OK")

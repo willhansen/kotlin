@@ -14,50 +14,50 @@ interface TestVersions {
     // https://gradle.org/nightly/
     // Gradle nightly releases retention policy is 3 months
     object Gradle {
-        const val G_6_8 = "6.8.3"
-        const val G_6_9 = "6.9.2"
-        const val G_7_0 = "7.0.2"
-        const val G_7_1 = "7.1.1"
-        const val G_7_2 = "7.2"
-        const val G_7_3 = "7.3.3"
-        const val G_7_4 = "7.4.2"
-        const val G_7_5 = "7.5.1"
-        const val G_7_6 = "7.6"
-        const val G_8_0 = "8.0.2"
-        const val G_8_1 = "8.1"
-        const val MIN_SUPPORTED = minSupportedGradleVersion
-        const val MIN_SUPPORTED_KPM = G_7_0
-        const val MAX_SUPPORTED = G_7_6
+        const konst G_6_8 = "6.8.3"
+        const konst G_6_9 = "6.9.2"
+        const konst G_7_0 = "7.0.2"
+        const konst G_7_1 = "7.1.1"
+        const konst G_7_2 = "7.2"
+        const konst G_7_3 = "7.3.3"
+        const konst G_7_4 = "7.4.2"
+        const konst G_7_5 = "7.5.1"
+        const konst G_7_6 = "7.6"
+        const konst G_8_0 = "8.0.2"
+        const konst G_8_1 = "8.1"
+        const konst MIN_SUPPORTED = minSupportedGradleVersion
+        const konst MIN_SUPPORTED_KPM = G_7_0
+        const konst MAX_SUPPORTED = G_7_6
     }
 
     object Kotlin {
-        const val STABLE_RELEASE = "1.6.21"
-        const val NATIVE_STABLE_RELEASE = "1.8.20"
+        const konst STABLE_RELEASE = "1.6.21"
+        const konst NATIVE_STABLE_RELEASE = "1.8.20"
 
         // Copied from KOTLIN_VERSION.kt file
-        val CURRENT
+        konst CURRENT
             get() = System.getProperty("kotlinVersion") ?: error("Required to specify kotlinVersion system property for tests")
     }
 
     object AGP {
-        const val AGP_42 = "4.2.2"
-        const val AGP_70 = "7.0.4"
-        const val AGP_71 = "7.1.3"
-        const val AGP_72 = "7.2.2"
-        const val AGP_73 = "7.3.1"
-        const val AGP_74 = "7.4.0"
-        const val AGP_80 = "8.0.0-beta05"
-        const val AGP_81 = "8.1.0-alpha08"
+        const konst AGP_42 = "4.2.2"
+        const konst AGP_70 = "7.0.4"
+        const konst AGP_71 = "7.1.3"
+        const konst AGP_72 = "7.2.2"
+        const konst AGP_73 = "7.3.1"
+        const konst AGP_74 = "7.4.0"
+        const konst AGP_80 = "8.0.0-beta05"
+        const konst AGP_81 = "8.1.0-alpha08"
 
-        const val MIN_SUPPORTED = AGP_42 // KotlinAndroidPlugin.minimalSupportedAgpVersion
-        const val MAX_SUPPORTED = AGP_74 // Update once Gradle MAX_SUPPORTED version will be bumped
+        const konst MIN_SUPPORTED = AGP_42 // KotlinAndroidPlugin.minimalSupportedAgpVersion
+        const konst MAX_SUPPORTED = AGP_74 // Update once Gradle MAX_SUPPORTED version will be bumped
     }
 
     enum class AgpCompatibilityMatrix(
-        val version: String,
-        val minSupportedGradleVersion: GradleVersion,
-        val maxSupportedGradleVersion: GradleVersion,
-        val requiredJdkVersion: JavaVersion
+        konst version: String,
+        konst minSupportedGradleVersion: GradleVersion,
+        konst maxSupportedGradleVersion: GradleVersion,
+        konst requiredJdkVersion: JavaVersion
     ) {
         AGP_42(AGP.AGP_42, GradleVersion.version(Gradle.MIN_SUPPORTED), GradleVersion.version(Gradle.G_6_9), JavaVersion.VERSION_1_8),
         AGP_70(AGP.AGP_70, GradleVersion.version(Gradle.G_7_0), GradleVersion.version(Gradle.G_7_4), JavaVersion.VERSION_11),
@@ -71,6 +71,6 @@ interface TestVersions {
     }
 
     object AppleGradlePlugin {
-        const val V222_0_21 = "222.4550-0.21"
+        const konst V222_0_21 = "222.4550-0.21"
     }
 }

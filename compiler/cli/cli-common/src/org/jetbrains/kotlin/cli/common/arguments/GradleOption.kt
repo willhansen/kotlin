@@ -20,14 +20,14 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KVisibility
 
 /**
- * @param value should be one of [DefaultValue] enum values
- * @param gradleInputType should be one of [GradleInputTypes] enum values
+ * @param konstue should be one of [DefaultValue] enum konstues
+ * @param gradleInputType should be one of [GradleInputTypes] enum konstues
  */
 @Retention(AnnotationRetention.RUNTIME)
 annotation class GradleOption(
-    val value: DefaultValue,
-    val gradleInputType: GradleInputTypes,
-    val shouldGenerateDeprecatedKotlinOptions: Boolean = false
+    konst konstue: DefaultValue,
+    konst gradleInputType: GradleInputTypes,
+    konst shouldGenerateDeprecatedKotlinOptions: Boolean = false
 )
 
 enum class DefaultValue {
@@ -46,7 +46,7 @@ enum class DefaultValue {
     JS_SOURCE_MAP_NAMES_POLICY,
 }
 
-enum class GradleInputTypes(val gradleType: String) {
+enum class GradleInputTypes(konst gradleType: String) {
     INPUT("org.gradle.api.tasks.Input"),
     INTERNAL("org.gradle.api.tasks.Internal")
 }

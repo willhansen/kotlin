@@ -8,10 +8,10 @@ class Foo<C : Any> {
 }
 
 fun box(): String {
-    val foo = Foo<String>()
+    konst foo = Foo<String>()
 
-    val list = listOf("OK")
-    val sorted = foo.test(list)
+    konst list = listOf("OK")
+    konst sorted = foo.test(list)
 
     return list.first()
 }

@@ -343,9 +343,9 @@ public class SymbolLightClassesByPsiForLibraryTestGenerated extends AbstractSymb
     }
 
     @Test
-    @TestMetadata("valueClassInSignature.kt")
+    @TestMetadata("konstueClassInSignature.kt")
     public void testValueClassInSignature() throws Exception {
-        runTest("compiler/testData/asJava/lightClasses/lightClassByPsi/valueClassInSignature.kt");
+        runTest("compiler/testData/asJava/lightClasses/lightClassByPsi/konstueClassInSignature.kt");
     }
 
     @Test
@@ -436,9 +436,9 @@ public class SymbolLightClassesByPsiForLibraryTestGenerated extends AbstractSymb
         }
 
         @Test
-        @TestMetadata("valueClassInSignature.kt")
+        @TestMetadata("konstueClassInSignature.kt")
         public void testValueClassInSignature() throws Exception {
-            runTest("compiler/testData/asJava/lightClasses/lightClassByPsi/facades/valueClassInSignature.kt");
+            runTest("compiler/testData/asJava/lightClasses/lightClassByPsi/facades/konstueClassInSignature.kt");
         }
 
         @Test

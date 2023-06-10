@@ -8,7 +8,7 @@
 interface Test<T> {
     var T.test: T
         get() = null!!
-        set(value) {
+        set(konstue) {
             null!!
         }
 }
@@ -16,7 +16,7 @@ interface Test<T> {
 interface Test2 : Test<String> {
     override var String.test: String
         get() = ""
-        set(value) {}
+        set(konstue) {}
 }
 
 class TestClass : Test2
@@ -33,7 +33,7 @@ fun box(): String {
     checkNoMethod(TestClass::class.java, "setTest", String::class.java, String::class.java)
 
     try {
-        val test2DefaultImpls = java.lang.Class.forName("Test2\$DefaultImpls")
+        konst test2DefaultImpls = java.lang.Class.forName("Test2\$DefaultImpls")
         checkNoMethod(test2DefaultImpls, "getTest", Test2::class.java, String::class.java)
         checkNoMethod(test2DefaultImpls, "getTest", Test2::class.java, Any::class.java)
         checkNoMethod(test2DefaultImpls, "setTest", Test2::class.java, Any::class.java, Any::class.java)

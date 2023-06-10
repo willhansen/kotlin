@@ -33,7 +33,7 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
 // The messages in this file describe the definitions found in .proto files.
-// A valid .proto file can be translated directly to a FileDescriptorProto
+// A konstid .proto file can be translated directly to a FileDescriptorProto
 // without any other information (e.g. without reading its imports).
 
 
@@ -107,11 +107,11 @@ message FieldDescriptorProto {
     TYPE_DOUBLE         = 1;
     TYPE_FLOAT          = 2;
     // Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
-    // negative values are likely.
+    // negative konstues are likely.
     TYPE_INT64          = 3;
     TYPE_UINT64         = 4;
     // Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
-    // negative values are likely.
+    // negative konstues are likely.
     TYPE_INT32          = 5;
     TYPE_FIXED64        = 6;
     TYPE_FIXED32        = 7;
@@ -157,12 +157,12 @@ message FieldDescriptorProto {
   // resolved in the same manner as type_name.
   optional string extendee = 2;
 
-  // For numeric types, contains the original text representation of the value.
+  // For numeric types, contains the original text representation of the konstue.
   // For booleans, "true" or "false".
   // For strings, contains the default text contents (not escaped in any way).
-  // For bytes, contains the C escaped value.  All bytes >= 128 are escaped.
+  // For bytes, contains the C escaped konstue.  All bytes >= 128 are escaped.
   // TODO(kenton):  Base-64 encode?
-  optional string default_value = 7;
+  optional string default_konstue = 7;
 
   optional FieldOptions options = 8;
 }
@@ -171,12 +171,12 @@ message FieldDescriptorProto {
 message EnumDescriptorProto {
   optional string name = 1;
 
-  repeated EnumValueDescriptorProto value = 2;
+  repeated EnumValueDescriptorProto konstue = 2;
 
   optional EnumOptions options = 3;
 }
 
-// Describes a value within an enum.
+// Describes a konstue within an enum.
 message EnumValueDescriptorProto {
   optional string name = 1;
   optional int32 number = 2;
@@ -214,7 +214,7 @@ message MethodDescriptorProto {
 //
 // Clients may define custom options as extensions of the *Options messages.
 // These extensions may not yet be known at parsing time, so the parser cannot
-// store the values in them.  Instead it stores them in a field in the *Options
+// store the konstues in them.  Instead it stores them in a field in the *Options
 // message called uninterpreted_option. This field must have the same name
 // across all *Options messages. We then use this field to populate the
 // extensions when we build a descriptor, at which point all protos have been
@@ -249,7 +249,7 @@ message FileOptions {
 
   // If set, all the classes from the .proto file are wrapped in a single
   // outer class with the given name.  This applies to both Proto1
-  // (equivalent to the old "--one_java_file" option) and Proto2 (where
+  // (equikonstent to the old "--one_java_file" option) and Proto2 (where
   // a .proto always translates to a single class, but you may want to
   // explicitly choose the class name).
   optional string java_outer_classname = 8;
@@ -365,7 +365,7 @@ message FieldOptions {
   // form.  The inner message will actually be parsed when it is first accessed.
   //
   // This is only a hint.  Implementations are free to choose whether to use
-  // eager or lazy parsing regardless of the value of this option.  However,
+  // eager or lazy parsing regardless of the konstue of this option.  However,
   // setting this option true suggests that the protocol author believes that
   // using lazy parsing on this field is worth the additional bookkeeping
   // overhead typically needed to implement it.
@@ -400,7 +400,7 @@ message FieldOptions {
   // is the key for this map.  For example, suppose we have:
   //   message Item {
   //     required string name = 1;
-  //     required string value = 2;
+  //     required string konstue = 2;
   //   }
   //   message Config {
   //     repeated Item items = 1 [experimental_map_key="name"];
@@ -422,7 +422,7 @@ message FieldOptions {
 message EnumOptions {
 
   // Set this option to false to disallow mapping different tag names to a same
-  // value.
+  // konstue.
   optional bool allow_alias = 2 [default=true];
 
   // The parser stores options it doesn't recognize here. See above.
@@ -487,14 +487,14 @@ message UninterpretedOption {
   }
   repeated NamePart name = 2;
 
-  // The value of the uninterpreted option, in whatever type the tokenizer
+  // The konstue of the uninterpreted option, in whatever type the tokenizer
   // identified it as during parsing. Exactly one of these should be set.
-  optional string identifier_value = 3;
-  optional uint64 positive_int_value = 4;
-  optional int64 negative_int_value = 5;
-  optional double double_value = 6;
-  optional bytes string_value = 7;
-  optional string aggregate_value = 8;
+  optional string identifier_konstue = 3;
+  optional uint64 positive_int_konstue = 4;
+  optional int64 negative_int_konstue = 5;
+  optional double double_konstue = 6;
+  optional bytes string_konstue = 7;
+  optional string aggregate_konstue = 8;
 }
 
 // ===================================================================

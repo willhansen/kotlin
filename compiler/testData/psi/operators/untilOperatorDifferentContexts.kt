@@ -2,7 +2,7 @@ fun main() {
     0..<n
 }
 
-fun main(val x: Int = 0..<n) {}
+fun main(konst x: Int = 0..<n) {}
 
 @Suppress(0 ..< n)
 fun main() {}

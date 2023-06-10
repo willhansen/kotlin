@@ -6,11 +6,11 @@ import kotlin.js.Date
 var ok = "FAIL"
 
 fun main() {
-    val x = ClassA().value
+    konst x = ClassA().konstue
     if (x == 100) {
         ok = "OK"
     }
-    val date = Date()
+    konst date = Date()
     println(date.extFun())
 }
 

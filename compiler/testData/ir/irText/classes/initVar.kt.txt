@@ -53,8 +53,8 @@ class TestInitVarWithCustomSetter {
   var x: Int
     field = 0
     get
-    set(value: Int) {
-      <this>.#x = value
+    set(konstue: Int) {
+      <this>.#x = konstue
     }
 
 }

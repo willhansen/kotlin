@@ -13,7 +13,7 @@ class ClassSuperTypeCommonizationTest : AbstractInlineSourcesCommonizationTest()
 
     @Test
     fun `test common supertype - from dependencies`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             registerDependency("a", "b", "(a, b)") {
                 source(
@@ -46,7 +46,7 @@ class ClassSuperTypeCommonizationTest : AbstractInlineSourcesCommonizationTest()
 
     @Test
     fun `test common supertype - from sources`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -77,7 +77,7 @@ class ClassSuperTypeCommonizationTest : AbstractInlineSourcesCommonizationTest()
 
     @Test
     fun `test common supertype - from sources - missing interface in one target`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -106,7 +106,7 @@ class ClassSuperTypeCommonizationTest : AbstractInlineSourcesCommonizationTest()
 
     @Test
     fun `test common supertypes - sample 0`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -143,7 +143,7 @@ class ClassSuperTypeCommonizationTest : AbstractInlineSourcesCommonizationTest()
 
     @Test
     fun `test common supertypes - sample 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -178,7 +178,7 @@ class ClassSuperTypeCommonizationTest : AbstractInlineSourcesCommonizationTest()
 
     @Test
     fun `test common supertypes - sample 2`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b, c)")
             simpleSingleSourceTarget(
                 "a", """

@@ -3,31 +3,31 @@
 // LANGUAGE: +ValueClasses
 
 // The purpose of this test is to ensure that we don't generate any primitive boxing in the implementation
-// of a @JvmInline value class. See KT-48635.
+// of a @JvmInline konstue class. See KT-48635.
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VBoolean(val value: Boolean)
+konstue class VBoolean(konst konstue: Boolean)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VByte(val value: Byte)
+konstue class VByte(konst konstue: Byte)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VChar(val value: Char)
+konstue class VChar(konst konstue: Char)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VShort(val value: Short)
+konstue class VShort(konst konstue: Short)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VInt(val value: Int)
+konstue class VInt(konst konstue: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VLong(val value: Long)
+konstue class VLong(konst konstue: Long)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VFloat(val value: Float)
+konstue class VFloat(konst konstue: Float)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VDouble(val value: Double)
+konstue class VDouble(konst konstue: Double)
 
 fun box(): String {
     if (VBoolean(true) == VBoolean(false)) return "Fail 0"
@@ -42,13 +42,13 @@ fun box(): String {
 }
 
 // CHECK_BYTECODE_TEXT
-// 0 java/lang/Boolean.valueOf
-// 0 java/lang/Byte.valueOf
-// 0 java/lang/Character.valueOf
-// 0 java/lang/Short.valueOf
-// 0 java/lang/Integer.valueOf
-// 0 java/lang/Long.valueOf
-// 0 java/lang/Float.valueOf
-// 0 java/lang/Double.valueOf
+// 0 java/lang/Boolean.konstueOf
+// 0 java/lang/Byte.konstueOf
+// 0 java/lang/Character.konstueOf
+// 0 java/lang/Short.konstueOf
+// 0 java/lang/Integer.konstueOf
+// 0 java/lang/Long.konstueOf
+// 0 java/lang/Float.konstueOf
+// 0 java/lang/Double.konstueOf
 // 2 java/lang/Float.compare
 // 2 java/lang/Double.compare

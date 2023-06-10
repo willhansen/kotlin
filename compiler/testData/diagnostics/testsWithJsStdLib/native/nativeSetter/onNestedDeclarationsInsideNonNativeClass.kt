@@ -33,14 +33,14 @@ class A {
 
         class B {
             <!WRONG_ANNOTATION_TARGET!>@nativeSetter<!>
-            val foo = 0
+            konst foo = 0
 
             <!WRONG_ANNOTATION_TARGET!>@nativeSetter<!>
             object Obj1 {}
 
             companion object {
                 <!WRONG_ANNOTATION_TARGET!>@nativeSetter<!>
-                val foo = 0
+                konst foo = 0
 
                 <!WRONG_ANNOTATION_TARGET!>@nativeSetter<!>
                 object Obj2 {}
@@ -102,7 +102,7 @@ class A {
             fun foo(a: Int, <!NATIVE_INDEXER_CAN_NOT_HAVE_DEFAULT_ARGUMENTS!>v: String = "str"<!>)<!> = "OK"
         }
 
-        val anonymous = object {
+        konst anonymous = object {
             <!NATIVE_ANNOTATIONS_ALLOWED_ONLY_ON_MEMBER_OR_EXTENSION_FUN!>@nativeSetter
             fun Int.set(a: String, v: Int)<!> {}
 

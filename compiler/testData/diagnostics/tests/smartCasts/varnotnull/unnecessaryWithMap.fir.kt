@@ -5,7 +5,7 @@ operator fun <K, V> Map<K, V>.iterator(): Iterator<Map.Entry<K, V>> = null!!
 
 operator fun <K, V> Map.Entry<K, V>.component1() = key
 
-operator fun <K, V> Map.Entry<K, V>.component2() = value
+operator fun <K, V> Map.Entry<K, V>.component2() = konstue
 
 class MyClass {
     private var m: Map<String, String>? = null

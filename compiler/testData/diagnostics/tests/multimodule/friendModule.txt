@@ -2,13 +2,13 @@
 package
 
 package p {
-    internal val a: p.A
+    internal konst a: p.A
     internal var v: p.A
     internal fun a(): p.A
 
     public final class A {
         public constructor A()
-        internal final val a: p.A
+        internal final konst a: p.A
         internal final var v: p.A
         internal final fun a(): p.A
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

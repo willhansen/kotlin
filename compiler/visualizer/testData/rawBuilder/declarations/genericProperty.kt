@@ -5,4 +5,4 @@ fun <T> genericFoo(): T = TODO()
 
 //        T                  fun <T> genericFoo<T>(): T
 //        │                  │
-val <T> T.generic: T get() = genericFoo()
+konst <T> T.generic: T get() = genericFoo()

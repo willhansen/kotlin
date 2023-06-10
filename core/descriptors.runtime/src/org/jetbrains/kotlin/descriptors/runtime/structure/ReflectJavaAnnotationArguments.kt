@@ -21,16 +21,16 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 sealed class ReflectJavaAnnotationArgument(
-    override val name: Name?
+    override konst name: Name?
 ) : JavaAnnotationArgument {
     companion object Factory {
-        fun create(value: Any, name: Name?): ReflectJavaAnnotationArgument {
+        fun create(konstue: Any, name: Name?): ReflectJavaAnnotationArgument {
             return when {
-                value::class.java.isEnumClassOrSpecializedEnumEntryClass() -> ReflectJavaEnumValueAnnotationArgument(name, value as Enum<*>)
-                value is Annotation -> ReflectJavaAnnotationAsAnnotationArgument(name, value)
-                value is Array<*> -> ReflectJavaArrayAnnotationArgument(name, value)
-                value is Class<*> -> ReflectJavaClassObjectAnnotationArgument(name, value)
-                else -> ReflectJavaLiteralAnnotationArgument(name, value)
+                konstue::class.java.isEnumClassOrSpecializedEnumEntryClass() -> ReflectJavaEnumValueAnnotationArgument(name, konstue as Enum<*>)
+                konstue is Annotation -> ReflectJavaAnnotationAsAnnotationArgument(name, konstue)
+                konstue is Array<*> -> ReflectJavaArrayAnnotationArgument(name, konstue)
+                konstue is Class<*> -> ReflectJavaClassObjectAnnotationArgument(name, konstue)
+                else -> ReflectJavaLiteralAnnotationArgument(name, konstue)
             }
         }
     }
@@ -38,41 +38,41 @@ sealed class ReflectJavaAnnotationArgument(
 
 class ReflectJavaLiteralAnnotationArgument(
     name: Name?,
-    override val value: Any
+    override konst konstue: Any
 ) : ReflectJavaAnnotationArgument(name), JavaLiteralAnnotationArgument
 
 class ReflectJavaArrayAnnotationArgument(
     name: Name?,
-    private val values: Array<*>
+    private konst konstues: Array<*>
 ) : ReflectJavaAnnotationArgument(name), JavaArrayAnnotationArgument {
-    override fun getElements() = values.map { create(it!!, null) }
+    override fun getElements() = konstues.map { create(it!!, null) }
 }
 
 class ReflectJavaEnumValueAnnotationArgument(
     name: Name?,
-    private val value: Enum<*>
+    private konst konstue: Enum<*>
 ) : ReflectJavaAnnotationArgument(name), JavaEnumValueAnnotationArgument {
-    override val enumClassId: ClassId?
+    override konst enumClassId: ClassId?
         get() {
-            val clazz = value::class.java
-            val enumClass = if (clazz.isEnum) clazz else clazz.enclosingClass
+            konst clazz = konstue::class.java
+            konst enumClass = if (clazz.isEnum) clazz else clazz.enclosingClass
             return enumClass.classId
         }
 
-    override val entryName: Name?
-        get() = Name.identifier(value.name)
+    override konst entryName: Name?
+        get() = Name.identifier(konstue.name)
 }
 
 class ReflectJavaClassObjectAnnotationArgument(
     name: Name?,
-    private val klass: Class<*>
+    private konst klass: Class<*>
 ) : ReflectJavaAnnotationArgument(name), JavaClassObjectAnnotationArgument {
     override fun getReferencedType(): JavaType = ReflectJavaType.create(klass)
 }
 
 class ReflectJavaAnnotationAsAnnotationArgument(
     name: Name?,
-    private val annotation: Annotation
+    private konst annotation: Annotation
 ) : ReflectJavaAnnotationArgument(name), JavaAnnotationAsAnnotationArgument {
     override fun getAnnotation(): JavaAnnotation = ReflectJavaAnnotation(annotation)
 }

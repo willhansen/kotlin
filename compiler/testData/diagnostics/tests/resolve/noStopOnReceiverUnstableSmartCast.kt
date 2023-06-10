@@ -1,10 +1,10 @@
 // FIR_IDENTICAL
 interface Base {
-    val parent: Base
+    konst parent: Base
 }
 
 class Derived : Base {
-    override val parent: Base
+    override konst parent: Base
         get() = TODO()
 }
 

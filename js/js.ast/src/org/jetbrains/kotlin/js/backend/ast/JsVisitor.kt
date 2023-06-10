@@ -17,7 +17,7 @@ abstract class JsVisitor {
         }
     }
 
-    fun acceptLvalue(expression: JsExpression) {
+    fun acceptLkonstue(expression: JsExpression) {
         accept(expression)
     }
 

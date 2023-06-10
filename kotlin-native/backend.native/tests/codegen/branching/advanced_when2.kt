@@ -8,14 +8,14 @@ package codegen.branching.advanced_when2
 import kotlin.test.*
 
 fun advanced_when2(i: Int): Int {
-  var value = 1
+  var konstue = 1
   when (i) {
-    10 -> {val v = 42; value = v}
-    11 -> {val v = 43; value = v}
-    12 -> {val v = 44; value = v}
+    10 -> {konst v = 42; konstue = v}
+    11 -> {konst v = 43; konstue = v}
+    12 -> {konst v = 44; konstue = v}
   }
 
-  return value
+  return konstue
 }
 
 @Test fun runTest() {

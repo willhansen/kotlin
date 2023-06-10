@@ -1,4 +1,4 @@
->>> Integer.valueOf(42)
+>>> Integer.konstueOf(42)
 42
 >>> Integer(239).toInt()
 239

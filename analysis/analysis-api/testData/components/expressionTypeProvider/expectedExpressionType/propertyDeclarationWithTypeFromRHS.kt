@@ -1,5 +1,5 @@
 class C {
-    val av = "foo"
+    konst av = "foo"
     var y = a<caret>v
 }
 

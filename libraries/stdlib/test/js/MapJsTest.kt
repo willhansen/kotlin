@@ -16,10 +16,10 @@ class ComplexMapJsTest : MapJsTest() {
         HashMap<K, Int>(3)
         HashMap<K, Int>(3, 0.5f)
         @Suppress("UNCHECKED_CAST")
-        val map = HashMap<K, Int>(createTestMap() as HashMap<K, Int>)
+        konst map = HashMap<K, Int>(createTestMap() as HashMap<K, Int>)
 
         assertEquals(KEYS.toNormalizedList(), map.keys.toNormalizedList() as List<Any>)
-        assertEquals(VALUES.toNormalizedList(), map.values.toNormalizedList())
+        assertEquals(VALUES.toNormalizedList(), map.konstues.toNormalizedList())
     }
 
     @Test override fun constructors() {
@@ -39,10 +39,10 @@ class PrimitiveMapJsTest : MapJsTest() {
         HashMap<String, Int>(3)
         HashMap<String, Int>(3, 0.5f)
 
-        val map = HashMap<String, Int>(createTestMap())
+        konst map = HashMap<String, Int>(createTestMap())
 
         assertEquals(KEYS.toNormalizedList(), map.keys.toNormalizedList())
-        assertEquals(VALUES.toNormalizedList(), map.values.toNormalizedList())
+        assertEquals(VALUES.toNormalizedList(), map.konstues.toNormalizedList())
     }
 
     override fun <T : kotlin.Comparable<T>> Collection<T>.toNormalizedList(): List<T> = this.sorted()
@@ -50,17 +50,17 @@ class PrimitiveMapJsTest : MapJsTest() {
     override fun emptyMutableMapWithNullableKeyValue(): MutableMap<String?, Int?> = HashMap()
 
     @Test fun compareBehavior() {
-        val specialJsStringMap = stringMapOf<Any>()
+        konst specialJsStringMap = stringMapOf<Any>()
         specialJsStringMap.put("k1", "v1")
         compare(genericHashMapOf("k1" to "v1"), specialJsStringMap) { mapBehavior() }
 
-        val specialJsNumberMap = HashMap<Int, Any>(4)
+        konst specialJsNumberMap = HashMap<Int, Any>(4)
         specialJsNumberMap.put(5, "v5")
         compare(genericHashMapOf(5 to "v5"), specialJsNumberMap) { mapBehavior() }
     }
 
     @Test fun putNull() {
-        val map = stringMapOf("k" to null)
+        konst map = stringMapOf("k" to null)
         assertEquals(1, map.size)
 
         map.put("k", null)
@@ -80,10 +80,10 @@ class LinkedHashMapJsTest : MapJsTest() {
         LinkedHashMap<String, Int>(3)
         LinkedHashMap<String, Int>(3, 0.5f)
 
-        val map = LinkedHashMap<String, Int>(createTestMap())
+        konst map = LinkedHashMap<String, Int>(createTestMap())
 
         assertEquals(KEYS.toNormalizedList(), map.keys.toNormalizedList())
-        assertEquals(VALUES.toNormalizedList(), map.values.toNormalizedList())
+        assertEquals(VALUES.toNormalizedList(), map.konstues.toNormalizedList())
     }
 
     override fun <T : kotlin.Comparable<T>> Collection<T>.toNormalizedList(): List<T> = this.toList()
@@ -93,10 +93,10 @@ class LinkedHashMapJsTest : MapJsTest() {
 
 class LinkedPrimitiveMapJsTest : MapJsTest() {
     @Test override fun constructors() {
-        val map = createTestMap()
+        konst map = createTestMap()
 
         assertEquals(KEYS.toNormalizedList(), map.keys.toNormalizedList())
-        assertEquals(VALUES.toNormalizedList(), map.values.toNormalizedList())
+        assertEquals(VALUES.toNormalizedList(), map.konstues.toNormalizedList())
     }
 
     override fun <T : kotlin.Comparable<T>> Collection<T>.toNormalizedList(): List<T> = this.toList()
@@ -105,49 +105,49 @@ class LinkedPrimitiveMapJsTest : MapJsTest() {
 }
 
 abstract class MapJsTest {
-    val KEYS = listOf("zero", "one", "two", "three")
-    val VALUES = arrayOf(0, 1, 2, 3).toList()
+    konst KEYS = listOf("zero", "one", "two", "three")
+    konst VALUES = arrayOf(0, 1, 2, 3).toList()
 
-    val SPECIAL_NAMES = arrayOf(
+    konst SPECIAL_NAMES = arrayOf(
         "__proto__",
         "constructor",
         "toString",
         "toLocaleString",
-        "valueOf",
+        "konstueOf",
         "hasOwnProperty",
         "isPrototypeOf",
         "propertyIsEnumerable"
     )
 
     @Test fun getOrElse() {
-        val data = emptyMap()
-        val a = data.getOrElse("foo") { 2 }
+        konst data = emptyMap()
+        konst a = data.getOrElse("foo") { 2 }
         assertEquals(2, a)
 
-        val b = data.getOrElse("foo") { 3 }
+        konst b = data.getOrElse("foo") { 3 }
         assertEquals(3, b)
         assertEquals(0, data.size)
     }
 
     @Test fun getOrPut() {
-        val data = emptyMutableMap()
-        val a = data.getOrPut("foo") { 2 }
+        konst data = emptyMutableMap()
+        konst a = data.getOrPut("foo") { 2 }
         assertEquals(2, a)
 
-        val b = data.getOrPut("foo") { 3 }
+        konst b = data.getOrPut("foo") { 3 }
         assertEquals(2, b)
 
         assertEquals(1, data.size)
     }
 
     @Test fun emptyMapGet() {
-        val map = emptyMap()
+        konst map = emptyMap()
         assertEquals(null, map.get("foo"), """failed on map.get("foo")""")
         assertEquals(null, map["bar"], """failed on map["bar"]""")
     }
 
     @Test fun mapGet() {
-        val map = createTestMap()
+        konst map = createTestMap()
         for (i in KEYS.indices) {
             assertEquals(VALUES[i], map.get(KEYS[i]), """failed on map.get(KEYS[$i])""")
             assertEquals(VALUES[i], map[KEYS[i]], """failed on map[KEYS[$i]]""")
@@ -157,7 +157,7 @@ abstract class MapJsTest {
     }
 
     @Test fun mapPut() {
-        val map = emptyMutableMap()
+        konst map = emptyMutableMap()
 
         map.put("foo", 1)
         assertEquals(1, map["foo"])
@@ -173,7 +173,7 @@ abstract class MapJsTest {
     }
 
     @Test fun sizeAndEmptyForEmptyMap() {
-        val data = emptyMap()
+        konst data = emptyMap()
 
         assertTrue(data.isEmpty())
         assertTrue(data.none())
@@ -183,7 +183,7 @@ abstract class MapJsTest {
     }
 
     @Test fun sizeAndEmpty() {
-        val data = createTestMap()
+        konst data = createTestMap()
 
         assertFalse(data.isEmpty())
         assertFalse(data.none())
@@ -193,28 +193,28 @@ abstract class MapJsTest {
 
     // #KT-3035
     @Test fun emptyMapValues() {
-        val emptyMap = emptyMap()
-        assertTrue(emptyMap.values.isEmpty())
+        konst emptyMap = emptyMap()
+        assertTrue(emptyMap.konstues.isEmpty())
     }
 
     @Test fun mapValues() {
-        val map = createTestMap()
-        assertEquals(VALUES.toNormalizedList(), map.values.toNormalizedList())
+        konst map = createTestMap()
+        assertEquals(VALUES.toNormalizedList(), map.konstues.toNormalizedList())
     }
 
     @Test fun mapKeySet() {
-        val map = createTestMap()
+        konst map = createTestMap()
         assertEquals(KEYS.toNormalizedList(), map.keys.toNormalizedList())
     }
 
     @Test fun mapEntrySet() {
-        val map = createTestMap()
+        konst map = createTestMap()
 
-        val actualKeys = ArrayList<String>()
-        val actualValues = ArrayList<Int>()
+        konst actualKeys = ArrayList<String>()
+        konst actualValues = ArrayList<Int>()
         for (e in map.entries) {
             actualKeys.add(e.key)
-            actualValues.add(e.value)
+            actualValues.add(e.konstue)
         }
 
         assertEquals(KEYS.toNormalizedList(), actualKeys.toNormalizedList())
@@ -222,7 +222,7 @@ abstract class MapJsTest {
     }
 
     @Test fun mapContainsKey() {
-        val map = createTestMap()
+        konst map = createTestMap()
 
         assertTrue(map.containsKey(KEYS[0]) &&
                    map.containsKey(KEYS[1]) &&
@@ -234,7 +234,7 @@ abstract class MapJsTest {
     }
 
     @Test fun mapContainsValue() {
-        val map = createTestMap()
+        konst map = createTestMap()
 
         assertTrue(map.containsValue(VALUES[0]) &&
                    map.containsValue(VALUES[1]) &&
@@ -246,23 +246,23 @@ abstract class MapJsTest {
     }
 
     @Test fun mapPutAll() {
-        val map = createTestMap()
-        val newMap = emptyMutableMap()
+        konst map = createTestMap()
+        konst newMap = emptyMutableMap()
         newMap.putAll(map)
         assertEquals(KEYS.size, newMap.size)
     }
 
     @Test fun mapPutAllFromCustomMap() {
-        val newMap = emptyMutableMap()
+        konst newMap = emptyMutableMap()
         newMap.putAll(ConstMap)
         assertEquals(ConstMap.entries.single().toPair(), newMap.entries.single().toPair())
     }
 
     @Test fun mapRemove() {
-        val map = createTestMutableMap()
-        val last = KEYS.size - 1
-        val first = 0
-        val mid = KEYS.size / 2
+        konst map = createTestMutableMap()
+        konst last = KEYS.size - 1
+        konst first = 0
+        konst mid = KEYS.size / 2
 
         assertEquals(KEYS.size, map.size)
 
@@ -276,14 +276,14 @@ abstract class MapJsTest {
     }
 
     @Test fun mapClear() {
-        val map = createTestMutableMap()
+        konst map = createTestMutableMap()
         assertFalse(map.isEmpty())
         map.clear()
         assertTrue(map.isEmpty())
     }
 
     @Test fun nullAsKey() {
-        val map = emptyMutableMapWithNullableKeyValue()
+        konst map = emptyMutableMapWithNullableKeyValue()
 
         assertTrue(map.isEmpty())
         map.put(null, 23)
@@ -296,8 +296,8 @@ abstract class MapJsTest {
     }
 
     @Test fun nullAsValue() {
-        val map = emptyMutableMapWithNullableKeyValue()
-        val KEY = "Key"
+        konst map = emptyMutableMapWithNullableKeyValue()
+        konst KEY = "Key"
 
         assertTrue(map.isEmpty())
         map.put(KEY, null)
@@ -309,7 +309,7 @@ abstract class MapJsTest {
     }
 
     @Test fun setViaIndexOperators() {
-        val map = HashMap<String, String>()
+        konst map = HashMap<String, String>()
         assertTrue{ map.isEmpty() }
         assertEquals(map.size, 0)
 
@@ -321,27 +321,27 @@ abstract class MapJsTest {
     }
 
     @Test fun createUsingPairs() {
-        val map = mapOf(Pair("a", 1), Pair("b", 2))
+        konst map = mapOf(Pair("a", 1), Pair("b", 2))
         assertEquals(2, map.size)
         assertEquals(1, map.get("a"))
         assertEquals(2, map.get("b"))
     }
 
     @Test fun createUsingTo() {
-        val map = mapOf("a" to 1, "b" to 2)
+        konst map = mapOf("a" to 1, "b" to 2)
         assertEquals(2, map.size)
         assertEquals(1, map.get("a"))
         assertEquals(2, map.get("b"))
     }
 
     @Test fun mapIteratorImplicitly() {
-        val map = createTestMap()
+        konst map = createTestMap()
 
-        val actualKeys = ArrayList<String>()
-        val actualValues = ArrayList<Int>()
+        konst actualKeys = ArrayList<String>()
+        konst actualValues = ArrayList<Int>()
         for (e in map) {
             actualKeys.add(e.key)
-            actualValues.add(e.value)
+            actualValues.add(e.konstue)
         }
 
         assertEquals(KEYS.toNormalizedList(), actualKeys.toNormalizedList())
@@ -349,14 +349,14 @@ abstract class MapJsTest {
     }
 
     @Test fun mapIteratorExplicitly() {
-        val map = createTestMap()
+        konst map = createTestMap()
 
-        val actualKeys = ArrayList<String>()
-        val actualValues = ArrayList<Int>()
-        val iterator = map.iterator()
+        konst actualKeys = ArrayList<String>()
+        konst actualValues = ArrayList<Int>()
+        konst iterator = map.iterator()
         for (e in iterator) {
             actualKeys.add(e.key)
-            actualValues.add(e.value)
+            actualValues.add(e.konstue)
         }
 
         assertEquals(KEYS.toNormalizedList(), actualKeys.toNormalizedList())
@@ -364,67 +364,67 @@ abstract class MapJsTest {
     }
 
     @Test fun mapMutableIterator() {
-        val map = createTestMutableMap()
+        konst map = createTestMutableMap()
         map.keys.removeAll { it == KEYS[0] }
         map.entries.removeAll { it.key == KEYS[1] }
-        map.values.removeAll { it == VALUES[3] }
+        map.konstues.removeAll { it == VALUES[3] }
 
         assertEquals(1, map.size, "Expected 1 entry to remain in map, but got: $map")
     }
 
     @Test fun mapCollectionPropertiesAreViews() {
-        val map = createTestMutableMap()
+        konst map = createTestMutableMap()
         assertTrue(map.size >= 3)
-        val keys = map.keys
-        val values = map.values
-        val entries = map.entries
+        konst keys = map.keys
+        konst konstues = map.konstues
+        konst entries = map.entries
 
-        val (key, value) = map.entries.first()
+        konst (key, konstue) = map.entries.first()
 
         map.remove(key)
         assertFalse(key in keys, "remove from map")
-        assertFalse(value in values)
+        assertFalse(konstue in konstues)
         assertFalse(entries.any { it.key == key })
 
-        map.put(key, value)
+        map.put(key, konstue)
         assertTrue(key in keys, "put to map")
-        assertTrue(value in values)
+        assertTrue(konstue in konstues)
         assertTrue(entries.any { it.key == key })
 
         keys -= key
         assertFalse(key in map, "remove from keys")
-        assertFalse(value in values)
+        assertFalse(konstue in konstues)
         assertFalse(entries.any { it.key == key })
 
-        val (key2, value2) = map.entries.first()
-        values -= value2
-        assertFalse(key2 in map, "remove from values")
-        assertFalse(map.containsValue(value2))
-        assertFalse(entries.any { it.value == value2 })
+        konst (key2, konstue2) = map.entries.first()
+        konstues -= konstue2
+        assertFalse(key2 in map, "remove from konstues")
+        assertFalse(map.containsValue(konstue2))
+        assertFalse(entries.any { it.konstue == konstue2 })
 
-        val entry = map.entries.first()
+        konst entry = map.entries.first()
         entries -= entry
         assertFalse(entry.key in map, "remove from entries")
         assertFalse(entry.key in keys)
-        assertFalse(entry.value in values)
+        assertFalse(entry.konstue in konstues)
 
-        val entry2 = map.entries.first()
+        konst entry2 = map.entries.first()
         entry2.setValue(100)
-        assertEquals(100, map[entry2.key], "set value via entry")
+        assertEquals(100, map[entry2.key], "set konstue via entry")
     }
 
     @Test fun mapCollectionPropertiesDoNotSupportAdd() {
-        val map = createTestMutableMap()
-        val entry = map.entries.first()
-        val (key, value) = entry
+        konst map = createTestMutableMap()
+        konst entry = map.entries.first()
+        konst (key, konstue) = entry
 
         assertFailsWith<UnsupportedOperationException> { map.entries += entry }
         assertFailsWith<UnsupportedOperationException> { map.keys += key }
-        assertFailsWith<UnsupportedOperationException> { map.values += value }
+        assertFailsWith<UnsupportedOperationException> { map.konstues += konstue }
     }
 
     @Test fun specialNamesNotContainsInEmptyMap() {
-        val map = emptyMap()
+        konst map = emptyMap()
 
         for (key in SPECIAL_NAMES) {
             assertFalse(map.containsKey(key), "unexpected key: $key")
@@ -432,7 +432,7 @@ abstract class MapJsTest {
     }
 
     @Test fun specialNamesNotContainsInNonEmptyMap() {
-        val map = createTestMap()
+        konst map = createTestMap()
 
         for (key in SPECIAL_NAMES) {
             assertFalse(map.containsKey(key), "unexpected key: $key")
@@ -440,22 +440,22 @@ abstract class MapJsTest {
     }
 
     @Test fun putAndGetSpecialNamesToMap() {
-        val map = createTestMutableMap()
-        var value = 0
+        konst map = createTestMutableMap()
+        var konstue = 0
 
         for (key in SPECIAL_NAMES) {
             assertFalse(map.containsKey(key), "unexpected key: $key")
 
-            map.put(key, value)
+            map.put(key, konstue)
             assertTrue(map.containsKey(key), "key not found: $key")
 
-            val actualValue = map.get(key)
-            assertEquals(value, actualValue, "wrong value fo key: $key")
+            konst actualValue = map.get(key)
+            assertEquals(konstue, actualValue, "wrong konstue fo key: $key")
 
             map.remove(key)
             assertFalse(map.containsKey(key), "unexpected key after remove: $key")
 
-            value += 3
+            konstue += 3
         }
     }
 
@@ -463,7 +463,7 @@ abstract class MapJsTest {
 
     /*
     test fun createLinkedMap() {
-        val map = linkedMapOf("c" to 3, "b" to 2, "a" to 1)
+        konst map = linkedMapOf("c" to 3, "b" to 2, "a" to 1)
         assertEquals(1, map.get("a"))
         assertEquals(2, map.get("b"))
         assertEquals(3, map.get("c"))
@@ -471,14 +471,14 @@ abstract class MapJsTest {
     }
 
     test fun iterate() {
-        val map = TreeMap<String, String>()
+        konst map = TreeMap<String, String>()
         map["beverage"] = "beer"
         map["location"] = "Mells"
         map["name"] = "James"
 
-        val list = arrayList<String>()
+        konst list = arrayList<String>()
         for (e in map) {
-            println("key = ${e.getKey()}, value = ${e.getValue()}")
+            println("key = ${e.getKey()}, konstue = ${e.getValue()}")
             list.add(e.getKey())
             list.add(e.getValue())
         }
@@ -488,16 +488,16 @@ abstract class MapJsTest {
     }
 
     test fun iterateWithProperties() {
-        val map = TreeMap<String, String>()
+        konst map = TreeMap<String, String>()
         map["beverage"] = "beer"
         map["location"] = "Mells"
         map["name"] = "James"
 
-        val list = arrayList<String>()
+        konst list = arrayList<String>()
         for (e in map) {
-            println("key = ${e.key}, value = ${e.value}")
+            println("key = ${e.key}, konstue = ${e.konstue}")
             list.add(e.key)
-            list.add(e.value)
+            list.add(e.konstue)
         }
 
         assertEquals(6, list.size())
@@ -505,29 +505,29 @@ abstract class MapJsTest {
     }
 
     test fun map() {
-        val m1 = TreeMap<String, String>()
+        konst m1 = TreeMap<String, String>()
         m1["beverage"] = "beer"
         m1["location"] = "Mells"
 
-        val list = m1.map{ it.value + " rocks" }
+        konst list = m1.map{ it.konstue + " rocks" }
 
         println("Got new list $list")
         assertEquals(arrayList("beer rocks", "Mells rocks"), list)
     }
 
     test fun mapValues() {
-        val m1 = TreeMap<String, String>()
+        konst m1 = TreeMap<String, String>()
         m1["beverage"] = "beer"
         m1["location"] = "Mells"
 
-        val m2 = m1.mapValues{ it.value + "2" }
+        konst m2 = m1.mapValues{ it.konstue + "2" }
 
         println("Got new map $m2")
-        assertEquals(arrayList("beer2", "Mells2"), m2.values().toList())
+        assertEquals(arrayList("beer2", "Mells2"), m2.konstues().toList())
     }
 
     test fun createSortedMap() {
-        val map = sortedMapOf("c" to 3, "b" to 2, "a" to 1)
+        konst map = sortedMapOf("c" to 3, "b" to 2, "a" to 1)
         assertEquals(1, map.get("a"))
         assertEquals(2, map.get("b"))
         assertEquals(3, map.get("c"))
@@ -535,8 +535,8 @@ abstract class MapJsTest {
     }
 
     test fun toSortedMap() {
-        val map = hashMapOf<String,Int>("c" to 3, "b" to 2, "a" to 1)
-        val sorted = map.toSortedMap<String,Int>()
+        konst map = hashMapOf<String,Int>("c" to 3, "b" to 2, "a" to 1)
+        konst sorted = map.toSortedMap<String,Int>()
         assertEquals(1, sorted.get("a"))
         assertEquals(2, sorted.get("b"))
         assertEquals(3, sorted.get("c"))
@@ -544,12 +544,12 @@ abstract class MapJsTest {
     }
 
     test fun toSortedMapWithComparator() {
-        val map = hashMapOf("c" to 3, "bc" to 2, "bd" to 4, "abc" to 1)
-        val c = comparator<String>{ a, b ->
-            val answer = a.length() - b.length()
+        konst map = hashMapOf("c" to 3, "bc" to 2, "bd" to 4, "abc" to 1)
+        konst c = comparator<String>{ a, b ->
+            konst answer = a.length() - b.length()
             if (answer == 0) a.compareTo(b) else answer
         }
-        val sorted = map.toSortedMap(c)
+        konst sorted = map.toSortedMap(c)
         assertEquals(arrayList("c", "bc", "bd", "abc"), sorted.keySet()!!.toList())
         assertEquals(1, sorted.get("abc"))
         assertEquals(2, sorted.get("bc"))
@@ -557,14 +557,14 @@ abstract class MapJsTest {
     }
 
     test fun compilerBug() {
-        val map = TreeMap<String, String>()
+        konst map = TreeMap<String, String>()
         map["beverage"] = "beer"
         map["location"] = "Mells"
         map["name"] = "James"
 
         var list = arrayList<String>()
         for (e in map) {
-            println("key = ${e.getKey()}, value = ${e.getValue()}")
+            println("key = ${e.getKey()}, konstue = ${e.getValue()}")
             list += e.getKey()
             list += e.getValue()
         }
@@ -576,16 +576,16 @@ abstract class MapJsTest {
     */
 
     private object ConstMap : Map<String, Int> {
-        override val entries: Set<Map.Entry<String, Int>>
+        override konst entries: Set<Map.Entry<String, Int>>
             get() = setOf(object : Map.Entry<String, Int> {
-                override val key: String get() = "key"
-                override val value: Int get() = 42
+                override konst key: String get() = "key"
+                override konst konstue: Int get() = 42
             })
-        override val keys: Set<String> get() = setOf("key")
-        override val size: Int get() = 1
-        override val values = listOf(42)
+        override konst keys: Set<String> get() = setOf("key")
+        override konst size: Int get() = 1
+        override konst konstues = listOf(42)
         override fun containsKey(key: String) = key == "key"
-        override fun containsValue(value: Int) = value == 42
+        override fun containsValue(konstue: Int) = konstue == 42
         override fun get(key: String) = if (key == "key") 42 else null
         override fun isEmpty() = false
     }
@@ -603,12 +603,12 @@ abstract class MapJsTest {
     fun createTestMap(): Map<String, Int> = createTestMutableMap()
 
     fun createTestMutableMap(): MutableMap<String, Int> {
-        val map = emptyMutableMap()
+        konst map = emptyMutableMap()
         for (i in KEYS.indices) {
             map.put(KEYS[i], VALUES[i])
         }
         return map
     }
 
-    fun <K, V> genericHashMapOf(vararg values: Pair<K, V>) = hashMapOf(*values)
+    fun <K, V> genericHashMapOf(vararg konstues: Pair<K, V>) = hashMapOf(*konstues)
 }

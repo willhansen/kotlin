@@ -49,24 +49,24 @@ class ColorsTest : TestCaseWithTmpdir() {
         if (isWindows) return
 
         // Create a source file which yields exactly one error when being compiled.
-        File(tmpdir, "source.kt").writeText("val result: String = 42")
+        File(tmpdir, "source.kt").writeText("konst result: String = 42")
 
-        val log = ByteArrayOutputStream()
+        konst log = ByteArrayOutputStream()
 
-        val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.FULL_JDK).apply {
+        konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.FULL_JDK).apply {
             put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, PrintingMessageCollector(PrintStream(log), renderer, false))
             addKotlinSourceRoot(tmpdir.absolutePath)
             put(JVMConfigurationKeys.OUTPUT_DIRECTORY, tmpdir)
         }
 
-        val environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
         // Compilation should return false, because there's one error.
         assertFalse(KotlinToJVMBytecodeCompiler.compileBunchOfSources(environment))
 
-        val firstBytes = log.toByteArray().take(7)
-        val logStartsWithColors = firstBytes.joinToString(" ") { it.toString(16) } == "1b 5b 31 3b 33 31 6d"
-        val logStartsWithWordError = firstBytes == "error: ".map { it.code.toByte() }
+        konst firstBytes = log.toByteArray().take(7)
+        konst logStartsWithColors = firstBytes.joinToString(" ") { it.toString(16) } == "1b 5b 31 3b 33 31 6d"
+        konst logStartsWithWordError = firstBytes == "error: ".map { it.code.toByte() }
 
         when {
             logStartsWithColors -> if (!colorsShouldBeEnabled) {

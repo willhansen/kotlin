@@ -1,6 +1,6 @@
 FILE: main.kt
     public abstract interface TypeConstructor : R|kotlin/Any| {
-        public abstract val x: R|kotlin/String|
+        public abstract konst x: R|kotlin/String|
             public get(): R|kotlin/String|
 
     }

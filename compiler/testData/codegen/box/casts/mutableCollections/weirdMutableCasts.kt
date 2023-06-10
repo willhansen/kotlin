@@ -5,9 +5,9 @@ fun unsupported(): Nothing = throw UnsupportedOperationException()
 class Weird : Iterator<String>, MutableIterable<String>, MutableMap.MutableEntry<String, String> {
     override fun next(): String = unsupported()
     override fun hasNext(): Boolean = unsupported()
-    override val key: String get() = unsupported()
-    override val value: String get() = unsupported()
-    override fun setValue(value: String): String = unsupported()
+    override konst key: String get() = unsupported()
+    override konst konstue: String get() = unsupported()
+    override fun setValue(konstue: String): String = unsupported()
     override fun iterator(): MutableIterator<String> = unsupported()
 }
 
@@ -35,7 +35,7 @@ inline fun asSucceeds(operation: String, cast: () -> Unit) {
 
 inline fun safeAsReturnsNull(operation: String, cast: () -> Any?) {
     try {
-        val x = cast()
+        konst x = cast()
         require(x == null) { "$operation: should return null, got $x" }
     }
     catch (e: Throwable) {
@@ -45,7 +45,7 @@ inline fun safeAsReturnsNull(operation: String, cast: () -> Any?) {
 
 inline fun safeAsReturnsNonNull(operation: String, cast: () -> Any?) {
     try {
-        val x = cast()
+        konst x = cast()
         require(x != null) { "$operation: should return non-null" }
     }
     catch (e: Throwable) {
@@ -80,7 +80,7 @@ inline fun <reified T> reifiedAsFailsWithCCE(x: Any, operation: String) {
 }
 
 inline fun <reified T> reifiedSafeAsReturnsNonNull(x: Any?, operation: String) {
-    val y = try {
+    konst y = try {
         x as? T
     }
     catch (e: Throwable) {
@@ -92,7 +92,7 @@ inline fun <reified T> reifiedSafeAsReturnsNonNull(x: Any?, operation: String) {
 }
 
 inline fun <reified T> reifiedSafeAsReturnsNull(x: Any?, operation: String) {
-    val y = try {
+    konst y = try {
         x as? T
     }
     catch (e: Throwable) {
@@ -104,7 +104,7 @@ inline fun <reified T> reifiedSafeAsReturnsNull(x: Any?, operation: String) {
 }
 
 fun box(): String {
-    val w: Any = Weird()
+    konst w: Any = Weird()
 
     require(w is Iterator<*>) { "w is Iterator<*>" }
     require(w !is MutableIterator<*>) { "w !is MutableIterator<*>" }

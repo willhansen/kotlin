@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-val progression = 1 .. 3 step 2
+konst progression = 1 .. 3 step 2
 
 fun box(): String = when {
     0 in progression -> "fail 1"

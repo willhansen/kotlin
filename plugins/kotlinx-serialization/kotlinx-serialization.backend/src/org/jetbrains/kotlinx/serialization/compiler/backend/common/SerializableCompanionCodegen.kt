@@ -17,10 +17,10 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.isKSerializer
 import org.jetbrains.kotlinx.serialization.compiler.resolve.isSerializableObject
 
 abstract class SerializableCompanionCodegen(
-    protected val companionDescriptor: ClassDescriptor,
+    protected konst companionDescriptor: ClassDescriptor,
     bindingContext: BindingContext?
 ) : AbstractSerialGenerator(bindingContext, companionDescriptor) {
-    protected val serializableDescriptor: ClassDescriptor = getSerializableClassDescriptorByCompanion(companionDescriptor)!!
+    protected konst serializableDescriptor: ClassDescriptor = getSerializableClassDescriptorByCompanion(companionDescriptor)!!
 
     open fun getSerializerGetterDescriptor(): FunctionDescriptor {
         return findSerializerGetterOnCompanion(serializableDescriptor) ?: throw IllegalStateException(
@@ -30,7 +30,7 @@ abstract class SerializableCompanionCodegen(
     }
 
     fun generate() {
-        val serializerGetterDescriptor = getSerializerGetterDescriptor()
+        konst serializerGetterDescriptor = getSerializerGetterDescriptor()
 
         if (serializableDescriptor.isSerializableObject
             || serializableDescriptor.isAbstractOrSealedSerializableClass()
@@ -50,14 +50,14 @@ abstract class SerializableCompanionCodegen(
 
     companion object {
         fun findSerializerGetterOnCompanion(serializableDescriptor: ClassDescriptor): FunctionDescriptor? {
-            val companionObjectDesc = if (serializableDescriptor.isSerializableObject) serializableDescriptor else serializableDescriptor.companionObjectDescriptor
+            konst companionObjectDesc = if (serializableDescriptor.isSerializableObject) serializableDescriptor else serializableDescriptor.companionObjectDescriptor
             return companionObjectDesc?.unsubstitutedMemberScope?.getContributedFunctions(
                 SERIALIZER_PROVIDER_NAME,
                 NoLookupLocation.FROM_BACKEND
             )?.firstOrNull {
-                it.valueParameters.size == serializableDescriptor.declaredTypeParameters.size
+                it.konstueParameters.size == serializableDescriptor.declaredTypeParameters.size
                         && it.kind == CallableMemberDescriptor.Kind.SYNTHESIZED
-                        && it.valueParameters.all { p -> isKSerializer(p.type) }
+                        && it.konstueParameters.all { p -> isKSerializer(p.type) }
                         && it.returnType != null && isKSerializer(it.returnType)
             }
         }

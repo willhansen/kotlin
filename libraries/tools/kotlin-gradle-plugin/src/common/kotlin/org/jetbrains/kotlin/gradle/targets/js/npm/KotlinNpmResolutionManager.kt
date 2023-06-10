@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.resolver.KotlinRootNpmResolver
 
 internal interface UsesKotlinNpmResolutionManager : Task {
     @get:Internal
-    val npmResolutionManager: Property<KotlinNpmResolutionManager>
+    konst npmResolutionManager: Property<KotlinNpmResolutionManager>
 }
 
 /**
@@ -45,15 +45,15 @@ internal interface UsesKotlinNpmResolutionManager : Task {
 abstract class KotlinNpmResolutionManager : BuildService<KotlinNpmResolutionManager.Parameters> {
 
     interface Parameters : BuildServiceParameters {
-        val resolution: Property<KotlinRootNpmResolution>
+        konst resolution: Property<KotlinRootNpmResolution>
 
         // pulled up from compilation resolver since it was failing with ClassNotFoundException on deserialization, see KT-49061
-        val packageJsonHandlers: MapProperty<String, List<PackageJson.() -> Unit>>
+        konst packageJsonHandlers: MapProperty<String, List<PackageJson.() -> Unit>>
 
-        val gradleNodeModulesProvider: Property<GradleNodeModulesCache>
+        konst gradleNodeModulesProvider: Property<GradleNodeModulesCache>
     }
 
-    val resolution
+    konst resolution
         get() = parameters.resolution
 
     @Volatile
@@ -61,13 +61,13 @@ abstract class KotlinNpmResolutionManager : BuildService<KotlinNpmResolutionMana
 
     sealed class ResolutionState {
 
-        class Configuring(val resolution: KotlinRootNpmResolution) : ResolutionState()
+        class Configuring(konst resolution: KotlinRootNpmResolution) : ResolutionState()
 
-        open class Prepared(val preparedInstallation: Installation) : ResolutionState()
+        open class Prepared(konst preparedInstallation: Installation) : ResolutionState()
 
         class Installed() : ResolutionState()
 
-        class Error(val wrappedException: Throwable) : ResolutionState()
+        class Error(konst wrappedException: Throwable) : ResolutionState()
     }
 
     internal fun isConfiguringState(): Boolean =
@@ -96,7 +96,7 @@ abstract class KotlinNpmResolutionManager : BuildService<KotlinNpmResolutionMana
             }
 
             return try {
-                val installation: Installation = prepareIfNeeded(logger = logger, npmEnvironment, yarnEnvironment)
+                konst installation: Installation = prepareIfNeeded(logger = logger, npmEnvironment, yarnEnvironment)
                 installation.install(args, services, logger, npmEnvironment, yarnEnvironment)
                 state = ResolutionState.Installed()
             } catch (e: Exception) {
@@ -111,7 +111,7 @@ abstract class KotlinNpmResolutionManager : BuildService<KotlinNpmResolutionMana
         npmEnvironment: NpmEnvironment,
         yarnEnvironment: YarnEnvironment,
     ): Installation {
-        val state0 = this.state
+        konst state0 = this.state
         return when (state0) {
             is ResolutionState.Prepared -> {
                 state0.preparedInstallation
@@ -119,7 +119,7 @@ abstract class KotlinNpmResolutionManager : BuildService<KotlinNpmResolutionMana
 
             is ResolutionState.Configuring -> {
                 synchronized(this) {
-                    val state1 = this.state
+                    konst state1 = this.state
                     when (state1) {
                         is ResolutionState.Prepared -> state1.preparedInstallation
                         is ResolutionState.Configuring -> {

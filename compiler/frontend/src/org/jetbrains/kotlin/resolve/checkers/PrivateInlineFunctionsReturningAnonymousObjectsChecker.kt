@@ -20,8 +20,8 @@ object PrivateInlineFunctionsReturningAnonymousObjectsChecker : DeclarationCheck
         if (descriptor !is SimpleFunctionDescriptor || !descriptor.isInline || !DescriptorVisibilities.isPrivate(descriptor.visibility) || declaration !is KtNamedFunction)
             return
 
-        val nameIdentifier = declaration.nameIdentifier ?: return
-        val returnType = descriptor.returnType ?: return
+        konst nameIdentifier = declaration.nameIdentifier ?: return
+        konst returnType = descriptor.returnType ?: return
 
         checkTypeAndArguments(returnType, nameIdentifier, context)
     }
@@ -35,8 +35,8 @@ object PrivateInlineFunctionsReturningAnonymousObjectsChecker : DeclarationCheck
     }
 
     private fun checkType(type: KotlinType, reportOn: PsiElement, context: DeclarationCheckerContext) {
-        val returnTypeConstructor = type.constructor
-        val returnTypeDeclarationDescriptor = returnTypeConstructor.declarationDescriptor ?: return
+        konst returnTypeConstructor = type.constructor
+        konst returnTypeDeclarationDescriptor = returnTypeConstructor.declarationDescriptor ?: return
         if (DescriptorUtils.isAnonymousObject(returnTypeDeclarationDescriptor)) {
             context.trace.report(Errors.PRIVATE_INLINE_FUNCTIONS_RETURNING_ANONYMOUS_OBJECTS.on(reportOn))
         }

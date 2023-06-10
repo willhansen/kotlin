@@ -11,7 +11,7 @@ int test_ConcurrentTerminate() {
 
     std::vector<std::future<void>> futures;
 #ifdef __linux__
-    // TODO: invalid terminate handler called from bridge on non-main thread on Linux X64
+    // TODO: inkonstid terminate handler called from bridge on non-main thread on Linux X64
     throw std::runtime_error("Reporting error!");
 #endif
 

@@ -5,7 +5,7 @@ index 483cc75b1..d24e836ab 100644
 @@ -827,7 +827,7 @@ class ContributesRemoteFeatureCodeGenerator : CodeGenerator {
          }
  
-         // validate functions must be annotated with DefaultValue
+         // konstidate functions must be annotated with DefaultValue
 -        if (boundType.declaredFunctions().any { !it.isAnnotatedWith(Toggle.DefaultValue::class.fqName) }) {
 +        if (boundType.declaredFunctions().any { !it.isAnnotatedWith(listOf(Toggle.DefaultValue::class.fqName)) }) {
              throw AnvilCompilationException(
@@ -59,7 +59,7 @@ index 1a1c2897c..768116f6f 100644
 -        anvil_version = "2.4.1"
 +        anvil_version = "2.4.5"
          gradle_plugin = "7.2.2" // When updating, also update lint_version
-         lint_version = "30.2.2" // This value must always be gradle_plugin + 23
+         lint_version = "30.2.2" // This konstue must always be gradle_plugin + 23
          min_sdk = 23
 @@ -16,6 +15,7 @@ buildscript {
      }

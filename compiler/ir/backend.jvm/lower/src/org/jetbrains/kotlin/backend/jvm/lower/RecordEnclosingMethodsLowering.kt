@@ -22,13 +22,13 @@ import org.jetbrains.kotlin.ir.util.primaryConstructor
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
-internal val recordEnclosingMethodsPhase = makeIrFilePhase(
+internal konst recordEnclosingMethodsPhase = makeIrFilePhase(
     ::RecordEnclosingMethodsLowering,
     name = "RecordEnclosingMethods",
     description = "Find enclosing methods for objects inside inline and dynamic lambdas"
 )
 
-private class RecordEnclosingMethodsLowering(val context: JvmBackendContext) : FileLoweringPass {
+private class RecordEnclosingMethodsLowering(konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) =
         irFile.accept(object : IrElementVisitor<Unit, IrFunction?> {
             override fun visitElement(element: IrElement, data: IrFunction?) =
@@ -38,14 +38,14 @@ private class RecordEnclosingMethodsLowering(val context: JvmBackendContext) : F
                 require(data != null) { "function call not in a method: ${expression.render()}" }
                 when {
                     expression.symbol == context.ir.symbols.indyLambdaMetafactoryIntrinsic -> {
-                        val reference = expression.getValueArgument(1)
+                        konst reference = expression.getValueArgument(1)
                         if (reference is IrFunctionReference && reference.origin.isLambda) {
                             recordEnclosingMethodOverride(reference.symbol.owner, data)
                         }
                     }
                     expression.symbol.owner.isInlineFunctionCall(context) -> {
-                        for (parameter in expression.symbol.owner.valueParameters) {
-                            val lambda = expression.getValueArgument(parameter.index)?.unwrapInlineLambda() ?: continue
+                        for (parameter in expression.symbol.owner.konstueParameters) {
+                            konst lambda = expression.getValueArgument(parameter.index)?.unwrapInlineLambda() ?: continue
                             recordEnclosingMethodOverride(lambda.symbol.owner, data)
                         }
                     }

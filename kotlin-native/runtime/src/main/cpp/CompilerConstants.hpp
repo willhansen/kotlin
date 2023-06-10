@@ -31,7 +31,7 @@ using string_view = std::experimental::string_view;
  * and fixed at the point of compiling caches. So use this way for variables, which are heavily used on performance-critical passes or
  * will significantly increase code size, if not eliminated.
  *
- * Don't forget to adjust cache disabling rules and add value to CompilerGenerated.cpp for tests, when adding a new variable.
+ * Don't forget to adjust cache disabling rules and add konstue to CompilerGenerated.cpp for tests, when adding a new variable.
  */
 extern "C" const int32_t Kotlin_needDebugInfo;
 extern "C" const int32_t Kotlin_runtimeAssertsMode;

@@ -2,7 +2,7 @@ package a
 
 class A {
     companion object Named {
-        val i: Int = 1
+        konst i: Int = 1
     }
 }
 

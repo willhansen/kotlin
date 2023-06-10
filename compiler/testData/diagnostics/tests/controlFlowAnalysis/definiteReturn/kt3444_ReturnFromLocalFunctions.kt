@@ -2,7 +2,7 @@
 package f
 
 
-//KT-3444 Front-end doesn't check if local function or function of anonymous class returns value
+//KT-3444 Front-end doesn't check if local function or function of anonymous class returns konstue
 
 fun box(): Int {
 

@@ -4,8 +4,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/ExplicitApiMode : java/lang/E
 	public static final field Warning Lorg/jetbrains/kotlin/gradle/dsl/ExplicitApiMode;
 	public final fun getCliOption ()Ljava/lang/String;
 	public final fun toCompilerArg ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/ExplicitApiMode;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/ExplicitApiMode;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/ExplicitApiMode;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/ExplicitApiMode;
 }
 
 public final class org/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode : java/lang/Enum {
@@ -13,8 +13,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode : java/lang/
 	public static final field RUNTIME_DIAGNOSTIC_EXCEPTION Lorg/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode;
 	public static final field RUNTIME_DIAGNOSTIC_LOG Lorg/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode;
 	public final fun getMode ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode;
 }
 
 public final class org/jetbrains/kotlin/gradle/dsl/JsDiagnosticMode$Companion {
@@ -26,8 +26,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/JsMainFunctionExecutionMode :
 	public static final field Companion Lorg/jetbrains/kotlin/gradle/dsl/JsMainFunctionExecutionMode$Companion;
 	public static final field NO_CALL Lorg/jetbrains/kotlin/gradle/dsl/JsMainFunctionExecutionMode;
 	public final fun getMode ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsMainFunctionExecutionMode;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/JsMainFunctionExecutionMode;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsMainFunctionExecutionMode;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/JsMainFunctionExecutionMode;
 }
 
 public final class org/jetbrains/kotlin/gradle/dsl/JsMainFunctionExecutionMode$Companion {
@@ -42,8 +42,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/JsModuleKind : java/lang/Enum
 	public static final field MODULE_PLAIN Lorg/jetbrains/kotlin/gradle/dsl/JsModuleKind;
 	public static final field MODULE_UMD Lorg/jetbrains/kotlin/gradle/dsl/JsModuleKind;
 	public final fun getKind ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsModuleKind;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/JsModuleKind;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsModuleKind;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/JsModuleKind;
 }
 
 public final class org/jetbrains/kotlin/gradle/dsl/JsModuleKind$Companion {
@@ -56,8 +56,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/JsSourceMapEmbedMode : java/l
 	public static final field SOURCE_MAP_SOURCE_CONTENT_INLINING Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapEmbedMode;
 	public static final field SOURCE_MAP_SOURCE_CONTENT_NEVER Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapEmbedMode;
 	public final fun getMode ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapEmbedMode;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapEmbedMode;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapEmbedMode;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapEmbedMode;
 }
 
 public final class org/jetbrains/kotlin/gradle/dsl/JsSourceMapEmbedMode$Companion {
@@ -70,8 +70,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/JsSourceMapNamesPolicy : java
 	public static final field SOURCE_MAP_NAMES_POLICY_NO Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapNamesPolicy;
 	public static final field SOURCE_MAP_NAMES_POLICY_SIMPLE_NAMES Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapNamesPolicy;
 	public final fun getPolicy ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapNamesPolicy;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapNamesPolicy;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapNamesPolicy;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/JsSourceMapNamesPolicy;
 }
 
 public final class org/jetbrains/kotlin/gradle/dsl/JsSourceMapNamesPolicy$Companion {
@@ -94,8 +94,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/JvmTarget : java/lang/Enum {
 	public static final field JVM_20 Lorg/jetbrains/kotlin/gradle/dsl/JvmTarget;
 	public static final field JVM_9 Lorg/jetbrains/kotlin/gradle/dsl/JvmTarget;
 	public final fun getTarget ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JvmTarget;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/JvmTarget;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/JvmTarget;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/JvmTarget;
 }
 
 public final class org/jetbrains/kotlin/gradle/dsl/JvmTarget$Companion {
@@ -554,8 +554,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/KotlinVersion : java/lang/Enu
 	public static final field KOTLIN_2_0 Lorg/jetbrains/kotlin/gradle/dsl/KotlinVersion;
 	public static final field KOTLIN_2_1 Lorg/jetbrains/kotlin/gradle/dsl/KotlinVersion;
 	public final fun getVersion ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/KotlinVersion;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/KotlinVersion;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/KotlinVersion;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/KotlinVersion;
 }
 
 public final class org/jetbrains/kotlin/gradle/dsl/KotlinVersion$Companion {
@@ -567,8 +567,8 @@ public final class org/jetbrains/kotlin/gradle/dsl/jvm/JvmTargetValidationMode :
 	public static final field ERROR Lorg/jetbrains/kotlin/gradle/dsl/jvm/JvmTargetValidationMode;
 	public static final field IGNORE Lorg/jetbrains/kotlin/gradle/dsl/jvm/JvmTargetValidationMode;
 	public static final field WARNING Lorg/jetbrains/kotlin/gradle/dsl/jvm/JvmTargetValidationMode;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/jvm/JvmTargetValidationMode;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/dsl/jvm/JvmTargetValidationMode;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/dsl/jvm/JvmTargetValidationMode;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/dsl/jvm/JvmTargetValidationMode;
 }
 
 public abstract class org/jetbrains/kotlin/gradle/plugin/AbstractCompileWithDependenciesTracking : org/gradle/api/tasks/compile/AbstractCompile {
@@ -639,8 +639,8 @@ public abstract interface class org/jetbrains/kotlin/gradle/plugin/ExecutionTask
 
 public final class org/jetbrains/kotlin/gradle/plugin/FilesOptionKind : java/lang/Enum {
 	public static final field INTERNAL Lorg/jetbrains/kotlin/gradle/plugin/FilesOptionKind;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/FilesOptionKind;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/plugin/FilesOptionKind;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/FilesOptionKind;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/plugin/FilesOptionKind;
 }
 
 public final class org/jetbrains/kotlin/gradle/plugin/FilesSubpluginOption : org/jetbrains/kotlin/gradle/plugin/SubpluginOption {
@@ -909,8 +909,8 @@ public final class org/jetbrains/kotlin/gradle/plugin/KotlinJsCompilerType : jav
 	public static final field IR Lorg/jetbrains/kotlin/gradle/plugin/KotlinJsCompilerType;
 	public static final field LEGACY Lorg/jetbrains/kotlin/gradle/plugin/KotlinJsCompilerType;
 	public static final field jsCompilerProperty Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/KotlinJsCompilerType;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/plugin/KotlinJsCompilerType;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/KotlinJsCompilerType;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/plugin/KotlinJsCompilerType;
 }
 
 public final class org/jetbrains/kotlin/gradle/plugin/KotlinJsCompilerType$Companion {
@@ -960,8 +960,8 @@ public final class org/jetbrains/kotlin/gradle/plugin/KotlinPlatformType : java/
 	public static final field wasm Lorg/jetbrains/kotlin/gradle/plugin/KotlinPlatformType;
 	public fun getName ()Ljava/lang/String;
 	public fun toString ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/KotlinPlatformType;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/plugin/KotlinPlatformType;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/KotlinPlatformType;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/plugin/KotlinPlatformType;
 }
 
 public final class org/jetbrains/kotlin/gradle/plugin/KotlinPlatformType$Companion {
@@ -1231,8 +1231,8 @@ public final class org/jetbrains/kotlin/gradle/plugin/mpp/BitcodeEmbeddingMode :
 	public static final field BITCODE Lorg/jetbrains/kotlin/gradle/plugin/mpp/BitcodeEmbeddingMode;
 	public static final field DISABLE Lorg/jetbrains/kotlin/gradle/plugin/mpp/BitcodeEmbeddingMode;
 	public static final field MARKER Lorg/jetbrains/kotlin/gradle/plugin/mpp/BitcodeEmbeddingMode;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/mpp/BitcodeEmbeddingMode;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/plugin/mpp/BitcodeEmbeddingMode;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/mpp/BitcodeEmbeddingMode;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/plugin/mpp/BitcodeEmbeddingMode;
 }
 
 public final class org/jetbrains/kotlin/gradle/plugin/mpp/NativeBuildType : java/lang/Enum, org/gradle/api/Named {
@@ -1243,8 +1243,8 @@ public final class org/jetbrains/kotlin/gradle/plugin/mpp/NativeBuildType : java
 	public final fun getDebuggable ()Z
 	public fun getName ()Ljava/lang/String;
 	public final fun getOptimized ()Z
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/mpp/NativeBuildType;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/plugin/mpp/NativeBuildType;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/mpp/NativeBuildType;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/plugin/mpp/NativeBuildType;
 }
 
 public final class org/jetbrains/kotlin/gradle/plugin/mpp/NativeBuildType$Companion {
@@ -1262,8 +1262,8 @@ public class org/jetbrains/kotlin/gradle/plugin/mpp/NativeOutputKind : java/lang
 	public final fun getCompilerOutputKind ()Lorg/jetbrains/kotlin/konan/target/CompilerOutputKind;
 	public final fun getDescription ()Ljava/lang/String;
 	public final fun getTaskNameClassifier ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/mpp/NativeOutputKind;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/plugin/mpp/NativeOutputKind;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/plugin/mpp/NativeOutputKind;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/plugin/mpp/NativeOutputKind;
 }
 
 public abstract interface class org/jetbrains/kotlin/gradle/tasks/BaseKapt : org/gradle/api/Task {
@@ -1356,8 +1356,8 @@ public final class org/jetbrains/kotlin/gradle/tasks/KotlinCompilerExecutionStra
 	public static final field IN_PROCESS Lorg/jetbrains/kotlin/gradle/tasks/KotlinCompilerExecutionStrategy;
 	public static final field OUT_OF_PROCESS Lorg/jetbrains/kotlin/gradle/tasks/KotlinCompilerExecutionStrategy;
 	public final fun getPropertyValue ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/tasks/KotlinCompilerExecutionStrategy;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/tasks/KotlinCompilerExecutionStrategy;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/tasks/KotlinCompilerExecutionStrategy;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/tasks/KotlinCompilerExecutionStrategy;
 }
 
 public final class org/jetbrains/kotlin/gradle/tasks/KotlinCompilerExecutionStrategy$Companion {

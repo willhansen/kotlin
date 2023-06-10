@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int) {
+konstue class Z(konst x: Int) {
     fun test(y: Int = 42) = x + y
 }
 

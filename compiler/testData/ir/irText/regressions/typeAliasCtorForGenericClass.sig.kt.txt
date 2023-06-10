@@ -5,7 +5,7 @@ class A<Q : Any?> {
   // CHECK:
   //   Mangled name: A{}q
   //   Public signature: /A.q|3274930974999175741[0]
-  val q: Q
+  konst q: Q
     // CHECK JVM_IR:
     //   Mangled name: A#<get-q>(){}1:0
     //   Public signature: /A.q.<get-q>|-447041854451904985[0]

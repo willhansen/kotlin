@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
 open class IrMangleComputer(
     builder: StringBuilder,
     mode: MangleMode,
-    protected val compatibleMode: Boolean,
+    protected konst compatibleMode: Boolean,
     allowOutOfScopeTypeParameters: Boolean = false,
 ) : BaseKotlinMangleComputer<
         /*Declaration=*/IrDeclaration,
@@ -36,7 +36,7 @@ open class IrMangleComputer(
         >(builder, mode, allowOutOfScopeTypeParameters) {
 
     final override fun getTypeSystemContext(session: Nothing?) = object : IrTypeSystemContext {
-        override val irBuiltIns: IrBuiltIns
+        override konst irBuiltIns: IrBuiltIns
             get() = throw UnsupportedOperationException("Builtins are unavailable")
     }
 
@@ -54,8 +54,8 @@ open class IrMangleComputer(
         this
 
     override fun IrDeclaration.visitParentForFunctionMangling() {
-        val declarationParent = parent
-        val realParent = if (declarationParent is IrField && declarationParent.origin == IrDeclarationOrigin.DELEGATE)
+        konst declarationParent = parent
+        konst realParent = if (declarationParent is IrField && declarationParent.origin == IrDeclarationOrigin.DELEGATE)
             declarationParent.parent
         else
             declarationParent
@@ -64,7 +64,7 @@ open class IrMangleComputer(
 
     override fun getContextReceiverTypes(function: IrFunction): List<IrType> =
         function
-            .valueParameters
+            .konstueParameters
             .asSequence()
             .take(function.contextReceiverParametersCount)
             .filterNot { it.isHidden }
@@ -79,7 +79,7 @@ open class IrMangleComputer(
 
     override fun getValueParameters(function: IrFunction): List<IrValueParameter> =
         function
-            .valueParameters
+            .konstueParameters
             .asSequence()
             .drop(function.contextReceiverParametersCount)
             .filterNot { it.isHidden }
@@ -93,7 +93,7 @@ open class IrMangleComputer(
     override fun isUnit(type: IrType) = type.isUnit()
 
     final override fun getEffectiveParent(typeParameter: IrTypeParameterSymbol): IrDeclaration = typeParameter.owner.run {
-        when (val irParent = parent) {
+        when (konst irParent = parent) {
             is IrSimpleFunction -> irParent.correspondingPropertySymbol?.owner ?: irParent
             is IrTypeParametersContainer -> irParent
             else -> error("Unexpected type parameter container ${irParent.render()} for TP ${render()}")
@@ -104,16 +104,16 @@ open class IrMangleComputer(
 
     override fun getTypeParameterName(typeParameter: IrTypeParameterSymbol) = typeParameter.owner.name.asString()
 
-    final override fun isVararg(valueParameter: IrValueParameter) = valueParameter.varargElementType != null
+    final override fun isVararg(konstueParameter: IrValueParameter) = konstueParameter.varargElementType != null
 
-    final override fun getValueParameterType(valueParameter: IrValueParameter) = valueParameter.type
+    final override fun getValueParameterType(konstueParameter: IrValueParameter) = konstueParameter.type
 
     final override fun getIndexOfTypeParameter(typeParameter: IrTypeParameterSymbol, container: IrDeclaration) = typeParameter.owner.index
 
     final override fun mangleType(tBuilder: StringBuilder, type: IrType, declarationSiteSession: Nothing?) {
         when (type) {
             is IrSimpleType -> {
-                when (val classifier = type.classifier) {
+                when (konst classifier = type.classifier) {
                     is IrClassSymbol -> with(copy(MangleMode.FQNAME)) { classifier.owner.visit() }
                     is IrTypeParameterSymbol -> tBuilder.mangleTypeParameterReference(classifier)
                     is IrScriptSymbol -> {}
@@ -148,7 +148,7 @@ open class IrMangleComputer(
         override fun visitClass(declaration: IrClass) {
             typeParameterContainers.add(declaration)
 
-            val className = declaration.name.asString()
+            konst className = declaration.name.asString()
             declaration.mangleSimpleDeclaration(className)
         }
 
@@ -157,7 +157,7 @@ open class IrMangleComputer(
         }
 
         override fun visitProperty(declaration: IrProperty) {
-            val accessor = declaration.run { getter ?: setter }
+            konst accessor = declaration.run { getter ?: setter }
             require(accessor != null || declaration.backingField != null) {
                 "Expected at least one accessor or backing field for property ${declaration.render()}"
             }
@@ -165,13 +165,13 @@ open class IrMangleComputer(
             typeParameterContainers.add(declaration)
             declaration.visitParent()
 
-            val isStaticProperty = if (accessor != null)
+            konst isStaticProperty = if (accessor != null)
                 accessor.let {
                     it.dispatchReceiverParameter == null && declaration.parent !is IrPackageFragment && !declaration.parent.isFacadeClass
                 }
             else {
                 // Fake override for a Java field
-                val backingField = declaration.resolveFakeOverride()?.backingField
+                konst backingField = declaration.resolveFakeOverride()?.backingField
                     ?: error("Expected at least one accessor or a backing field for property ${declaration.render()}")
                 backingField.isStatic
             }
@@ -185,7 +185,7 @@ open class IrMangleComputer(
                 mangleValueParameter(builder, it, null)
             }
 
-            val typeParameters = accessor?.typeParameters ?: emptyList()
+            konst typeParameters = accessor?.typeParameters ?: emptyList()
 
             typeParameters.collectForMangler(builder, MangleConstant.TYPE_PARAMETERS) {
                 mangleTypeParameter(this, it.symbol, it.index, null)
@@ -198,11 +198,11 @@ open class IrMangleComputer(
             }
         }
 
-        private val IrProperty.isSyntheticForJavaField: Boolean
+        private konst IrProperty.isSyntheticForJavaField: Boolean
             get() = origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB && getter == null && setter == null
 
         override fun visitField(declaration: IrField) {
-            val prop = declaration.correspondingPropertySymbol
+            konst prop = declaration.correspondingPropertySymbol
             if (compatibleMode || prop == null) { // act as used to be (KT-48912)
                 // test compiler/testData/codegen/box/ir/serializationRegressions/anonFakeOverride.kt
                 declaration.mangleSimpleDeclaration(declaration.name.asString())
@@ -216,10 +216,10 @@ open class IrMangleComputer(
         }
 
         override fun visitAnonymousInitializer(declaration: IrAnonymousInitializer) {
-            val klass = declaration.parentAsClass
-            val anonInitializers = klass.declarations.filterIsInstance<IrAnonymousInitializer>()
+            konst klass = declaration.parentAsClass
+            konst anonInitializers = klass.declarations.filterIsInstance<IrAnonymousInitializer>()
 
-            val anonName = buildString {
+            konst anonName = buildString {
                 append(MangleConstant.ANON_INIT_NAME_PREFIX)
                 if (anonInitializers.size > 1) {
                     append(MangleConstant.LOCAL_DECLARATION_INDEX_PREFIX)
@@ -241,8 +241,8 @@ open class IrMangleComputer(
         }
 
         override fun visitSimpleFunction(declaration: IrSimpleFunction) {
-            val container = declaration.correspondingPropertySymbol?.owner ?: declaration
-            val isStatic = declaration.dispatchReceiverParameter == null &&
+            konst container = declaration.correspondingPropertySymbol?.owner ?: declaration
+            konst isStatic = declaration.dispatchReceiverParameter == null &&
                     (container.parent !is IrPackageFragment && !container.parent.isFacadeClass)
             declaration.mangleFunction(
                 name = declaration.name,

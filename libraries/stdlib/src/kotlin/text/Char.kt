@@ -9,11 +9,11 @@
 package kotlin.text
 
 /**
- * Returns the numeric value of the decimal digit that this Char represents.
- * Throws an exception if this Char is not a valid decimal digit.
+ * Returns the numeric konstue of the decimal digit that this Char represents.
+ * Throws an exception if this Char is not a konstid decimal digit.
  *
  * A Char is considered to represent a decimal digit if [isDigit] is true for the Char.
- * In this case, the Unicode decimal digit value of the character is returned.
+ * In this case, the Unicode decimal digit konstue of the character is returned.
  *
  * @sample samples.text.Chars.digitToInt
  */
@@ -26,11 +26,11 @@ public fun Char.digitToInt(): Int {
 }
 
 /**
- * Returns the numeric value of the digit that this Char represents in the specified [radix].
- * Throws an exception if the [radix] is not in the range `2..36` or if this Char is not a valid digit in the specified [radix].
+ * Returns the numeric konstue of the digit that this Char represents in the specified [radix].
+ * Throws an exception if the [radix] is not in the range `2..36` or if this Char is not a konstid digit in the specified [radix].
  *
  * A Char is considered to represent a digit in the specified [radix] if at least one of the following is true:
- *  - [isDigit] is `true` for the Char and the Unicode decimal digit value of the character is less than the specified [radix]. In this case the decimal digit value is returned.
+ *  - [isDigit] is `true` for the Char and the Unicode decimal digit konstue of the character is less than the specified [radix]. In this case the decimal digit konstue is returned.
  *  - The Char is one of the uppercase Latin letters 'A' through 'Z' and its [code] is less than `radix + 'A'.code - 10`. In this case, `this.code - 'A'.code + 10` is returned.
  *  - The Char is one of the lowercase Latin letters 'a' through 'z' and its [code] is less than `radix + 'a'.code - 10`. In this case, `this.code - 'a'.code + 10` is returned.
  *  - The Char is one of the fullwidth Latin capital letters '\uFF21' through '\uFF3A' and its [code] is less than `radix + 0xFF21 - 10`. In this case, `this.code - 0xFF21 + 10` is returned.
@@ -46,10 +46,10 @@ public fun Char.digitToInt(radix: Int): Int {
 
 /**
  *
- * Returns the numeric value of the decimal digit that this Char represents, or `null` if this Char is not a valid decimal digit.
+ * Returns the numeric konstue of the decimal digit that this Char represents, or `null` if this Char is not a konstid decimal digit.
  *
  * A Char is considered to represent a decimal digit if [isDigit] is true for the Char.
- * In this case, the Unicode decimal digit value of the character is returned.
+ * In this case, the Unicode decimal digit konstue of the character is returned.
  *
  * @sample samples.text.Chars.digitToIntOrNull
  */
@@ -60,11 +60,11 @@ public fun Char.digitToIntOrNull(): Int? {
 }
 
 /**
- * Returns the numeric value of the digit that this Char represents in the specified [radix], or `null` if this Char is not a valid digit in the specified [radix].
+ * Returns the numeric konstue of the digit that this Char represents in the specified [radix], or `null` if this Char is not a konstid digit in the specified [radix].
  * Throws an exception if the [radix] is not in the range `2..36`.
  *
  * A Char is considered to represent a digit in the specified [radix] if at least one of the following is true:
- *  - [isDigit] is `true` for the Char and the Unicode decimal digit value of the character is less than the specified [radix]. In this case the decimal digit value is returned.
+ *  - [isDigit] is `true` for the Char and the Unicode decimal digit konstue of the character is less than the specified [radix]. In this case the decimal digit konstue is returned.
  *  - The Char is one of the uppercase Latin letters 'A' through 'Z' and its [code] is less than `radix + 'A'.code - 10`. In this case, `this.code - 'A'.code + 10` is returned.
  *  - The Char is one of the lowercase Latin letters 'a' through 'z' and its [code] is less than `radix + 'a'.code - 10`. In this case, `this.code - 'a'.code + 10` is returned.
  *  - The Char is one of the fullwidth Latin capital letters '\uFF21' through '\uFF3A' and its [code] is less than `radix + 0xFF21 - 10`. In this case, `this.code - 0xFF21 + 10` is returned.
@@ -81,9 +81,9 @@ public fun Char.digitToIntOrNull(radix: Int): Int? {
 
 /**
  * Returns the Char that represents this decimal digit.
- * Throws an exception if this value is not in the range `0..9`.
+ * Throws an exception if this konstue is not in the range `0..9`.
  *
- * If this value is in `0..9`, the decimal digit Char with code `'0'.code + this` is returned.
+ * If this konstue is in `0..9`, the decimal digit Char with code `'0'.code + this` is returned.
  *
  * @sample samples.text.Chars.digitToChar
  */
@@ -97,10 +97,10 @@ public fun Int.digitToChar(): Char {
 }
 
 /**
- * Returns the Char that represents this numeric digit value in the specified [radix].
- * Throws an exception if the [radix] is not in the range `2..36` or if this value is not in the range `0 until radix`.
+ * Returns the Char that represents this numeric digit konstue in the specified [radix].
+ * Throws an exception if the [radix] is not in the range `2..36` or if this konstue is not in the range `0 until radix`.
  *
- * If this value is less than `10`, the decimal digit Char with code `'0'.code + this` is returned.
+ * If this konstue is less than `10`, the decimal digit Char with code `'0'.code + this` is returned.
  * Otherwise, the uppercase Latin letter with code `'A'.code + this - 10` is returned.
  *
  * @sample samples.text.Chars.digitToChar
@@ -109,10 +109,10 @@ public fun Int.digitToChar(): Char {
 @WasExperimental(ExperimentalStdlibApi::class)
 public fun Int.digitToChar(radix: Int): Char {
     if (radix !in 2..36) {
-        throw IllegalArgumentException("Invalid radix: $radix. Valid radix values are in range 2..36")
+        throw IllegalArgumentException("Inkonstid radix: $radix. Valid radix konstues are in range 2..36")
     }
     if (this < 0 || this >= radix) {
-        throw IllegalArgumentException("Digit $this does not represent a valid digit in radix $radix")
+        throw IllegalArgumentException("Digit $this does not represent a konstid digit in radix $radix")
     }
     return if (this < 10) {
         '0' + this
@@ -133,7 +133,7 @@ public expect fun Char.toLowerCase(): Char
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [lowercase] function.
- * If this character has no mapping equivalent, the character itself is returned.
+ * If this character has no mapping equikonstent, the character itself is returned.
  *
  * @sample samples.text.Chars.lowercase
  */
@@ -167,7 +167,7 @@ public expect fun Char.toUpperCase(): Char
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [uppercase] function.
- * If this character has no mapping equivalent, the character itself is returned.
+ * If this character has no mapping equikonstent, the character itself is returned.
  *
  * @sample samples.text.Chars.uppercase
  */
@@ -194,7 +194,7 @@ public expect fun Char.uppercase(): String
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [titlecase] function.
- * If this character has no mapping equivalent, the result of calling [uppercaseChar] is returned.
+ * If this character has no mapping equikonstent, the result of calling [uppercaseChar] is returned.
  *
  * @sample samples.text.Chars.titlecase
  */
@@ -234,8 +234,8 @@ public fun Char.equals(other: Char, ignoreCase: Boolean = false): Boolean {
     if (this == other) return true
     if (!ignoreCase) return false
 
-    val thisUpper = this.uppercaseChar()
-    val otherUpper = other.uppercaseChar()
+    konst thisUpper = this.uppercaseChar()
+    konst otherUpper = other.uppercaseChar()
 
     return thisUpper == otherUpper || thisUpper.lowercaseChar() == otherUpper.lowercaseChar()
 }
@@ -249,7 +249,7 @@ public fun Char.isSurrogate(): Boolean = this in Char.MIN_SURROGATE..Char.MAX_SU
  * Returns the Unicode general category of this character.
  */
 @SinceKotlin("1.5")
-public expect val Char.category: CharCategory
+public expect konst Char.category: CharCategory
 
 /**
  * Returns `true` if this character (Unicode code point) is defined in Unicode.

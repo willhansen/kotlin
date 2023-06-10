@@ -16,7 +16,7 @@ FILE: topExtensionVsOuterMember.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val x: R|kotlin/Int| = this@R|/Outer.Inner|.R|/foo|()
+            public final konst x: R|kotlin/Int| = this@R|/Outer.Inner|.R|/foo|()
                 public get(): R|kotlin/Int|
 
         }

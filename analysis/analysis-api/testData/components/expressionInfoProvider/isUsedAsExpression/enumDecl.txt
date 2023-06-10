@@ -1,5 +1,5 @@
 expression: CLASS
-text: enum class Enum(val i: Int) {
+text: enum class Enum(konst i: Int) {
     TEST(45),
     PROBE(45),
     SONDE(45)

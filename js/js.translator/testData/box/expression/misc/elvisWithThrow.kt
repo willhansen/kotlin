@@ -8,7 +8,7 @@ fun bar(): Any? {
 }
 
 fun box(): String {
-    val a: String? = null
+    konst a: String? = null
     try {
         a ?: throw Exception("a")
     }

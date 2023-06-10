@@ -1,8 +1,8 @@
 package
 
-public val p1: Pair<kotlin.Int, kotlin.Int>
-public val test1: kotlin.Int
-public val test2: kotlin.Int
+public konst p1: Pair<kotlin.Int, kotlin.Int>
+public konst test1: kotlin.Int
+public konst test2: kotlin.Int
 public fun C.testExtFun1(/*0*/ x: C.P2 /* = Pair<kotlin.Int, kotlin.Int> */): C.P2 /* = Pair<kotlin.Int, kotlin.Int> */
 public fun C.testExtFun2(): C.P2 /* = Pair<kotlin.Int, kotlin.Int> */
 
@@ -19,8 +19,8 @@ public final class C {
 
 public final class Pair</*0*/ T1, /*1*/ T2> {
     public constructor Pair</*0*/ T1, /*1*/ T2>(/*0*/ x1: T1, /*1*/ x2: T2)
-    public final val x1: T1
-    public final val x2: T2
+    public final konst x1: T1
+    public final konst x2: T2
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

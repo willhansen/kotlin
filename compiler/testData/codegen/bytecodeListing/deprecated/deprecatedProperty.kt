@@ -1,15 +1,15 @@
 @Deprecated("")
-val testVal = 1
+konst testVal = 1
 
 @Deprecated("")
 var testVar = 1
 
 @Deprecated("")
-val testValWithExplicitDefaultGet = 1
+konst testValWithExplicitDefaultGet = 1
     get
 
 @Deprecated("")
-val testValWithExplicitGet
+konst testValWithExplicitGet
     get() = 1
 
 @Deprecated("")
@@ -34,7 +34,7 @@ var testVarWithExplicitGetSet
 lateinit var testLateinitVar: Any
 
 @Deprecated("")
-val Any.testExtVal
+konst Any.testExtVal
     get() = 1
 
 @Deprecated("")
@@ -43,7 +43,7 @@ var Any.textExtVar
     set(v) {}
 
 @Deprecated("")
-val <T> List<T>.testGenExtVal
+konst <T> List<T>.testGenExtVal
     get() = 1
 
 @Deprecated("")
@@ -53,6 +53,6 @@ var <T> List<T>.textGenExtVar
 
 interface I {
     @Deprecated("")
-    val <T> T.id: T
+    konst <T> T.id: T
         get() = this
 }

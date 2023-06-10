@@ -12,7 +12,7 @@ class SimpleEnumerator {
     fun hasMoreElements(): Boolean = counter < 1
 }
 
-class SimpleEnumeratorWrapper(private val enumerator: SimpleEnumerator) {
+class SimpleEnumeratorWrapper(private konst enumerator: SimpleEnumerator) {
     operator fun hasNext(): Boolean = enumerator.hasMoreElements()
 
     operator fun next() = enumerator.getNext()
@@ -24,7 +24,7 @@ operator fun SimpleEnumerator.iterator(): SimpleEnumeratorWrapper {
 
 fun box(): String {
     var o = ""
-    val enumerator = SimpleEnumerator()
+    konst enumerator = SimpleEnumerator()
     for (s in enumerator) {
         o += s;
     }

@@ -5,7 +5,7 @@ import kotlin.coroutines.*
 
 var callback: () -> Unit = {}
 
-val exception = Exception()
+konst exception = Exception()
 
 suspend fun main() {
 

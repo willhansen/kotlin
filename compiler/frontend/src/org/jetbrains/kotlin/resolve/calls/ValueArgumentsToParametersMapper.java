@@ -104,8 +104,8 @@ public class ValueArgumentsToParametersMapper {
             this.languageVersionSettings = languageVersionSettings;
 
             this.parameterByName = new HashMap<>();
-            for (ValueParameterDescriptor valueParameter : parameters) {
-                parameterByName.put(valueParameter.getName(), valueParameter);
+            for (ValueParameterDescriptor konstueParameter : parameters) {
+                parameterByName.put(konstueParameter.getName(), konstueParameter);
             }
         }
 
@@ -113,9 +113,9 @@ public class ValueArgumentsToParametersMapper {
         private ValueParameterDescriptor getParameterByNameInOverriddenMethods(Name name) {
             if (parameterByNameInOverriddenMethods == null) {
                 parameterByNameInOverriddenMethods = new HashMap<>();
-                for (ValueParameterDescriptor valueParameter : parameters) {
-                    for (ValueParameterDescriptor parameterDescriptor : valueParameter.getOverriddenDescriptors()) {
-                        parameterByNameInOverriddenMethods.put(parameterDescriptor.getName(), valueParameter);
+                for (ValueParameterDescriptor konstueParameter : parameters) {
+                    for (ValueParameterDescriptor parameterDescriptor : konstueParameter.getOverriddenDescriptors()) {
+                        parameterByNameInOverriddenMethods.put(parameterDescriptor.getName(), konstueParameter);
                     }
                 }
             }
@@ -184,7 +184,7 @@ public class ValueArgumentsToParametersMapper {
 
                 ValueArgumentName argumentName = argument.getArgumentName();
                 assert argumentName != null;
-                ValueParameterDescriptor valueParameterDescriptor = parameterByName.get(argumentName.getAsName());
+                ValueParameterDescriptor konstueParameterDescriptor = parameterByName.get(argumentName.getAsName());
                 KtSimpleNameExpression nameReference = argumentName.getReferenceExpression();
 
                 if (!languageVersionSettings.supportsFeature(LanguageFeature.YieldIsNoMoreReserved)) {
@@ -213,20 +213,20 @@ public class ValueArgumentsToParametersMapper {
 
                 if (candidate.hasStableParameterNames() && nameReference != null  &&
                     candidate instanceof CallableMemberDescriptor && ((CallableMemberDescriptor)candidate).getKind() == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
-                    if (valueParameterDescriptor == null) {
-                        valueParameterDescriptor = getParameterByNameInOverriddenMethods(argumentName.getAsName());
+                    if (konstueParameterDescriptor == null) {
+                        konstueParameterDescriptor = getParameterByNameInOverriddenMethods(argumentName.getAsName());
                     }
 
-                    if (valueParameterDescriptor != null) {
-                        for (ValueParameterDescriptor parameterFromSuperclass : valueParameterDescriptor.getOverriddenDescriptors()) {
-                            if (OverrideResolver.Companion.shouldReportParameterNameOverrideWarning(valueParameterDescriptor, parameterFromSuperclass)) {
+                    if (konstueParameterDescriptor != null) {
+                        for (ValueParameterDescriptor parameterFromSuperclass : konstueParameterDescriptor.getOverriddenDescriptors()) {
+                            if (OverrideResolver.Companion.shouldReportParameterNameOverrideWarning(konstueParameterDescriptor, parameterFromSuperclass)) {
                                 report(NAME_FOR_AMBIGUOUS_PARAMETER.on(nameReference));
                             }
                         }
                     }
                 }
 
-                if (valueParameterDescriptor == null) {
+                if (konstueParameterDescriptor == null) {
                     if (nameReference != null) {
                         report(NAMED_PARAMETER_NOT_FOUND.on(nameReference, nameReference));
                     }
@@ -234,16 +234,16 @@ public class ValueArgumentsToParametersMapper {
                 }
                 else {
                     if (nameReference != null) {
-                        candidateCall.getTrace().record(REFERENCE_TARGET, nameReference, valueParameterDescriptor);
+                        candidateCall.getTrace().record(REFERENCE_TARGET, nameReference, konstueParameterDescriptor);
                     }
-                    if (!usedParameters.add(valueParameterDescriptor)) {
+                    if (!usedParameters.add(konstueParameterDescriptor)) {
                         if (nameReference != null) {
                             report(ARGUMENT_PASSED_TWICE.on(nameReference));
                         }
                         setStatus(WEAK_ERROR);
                     }
                     else {
-                        putVararg(valueParameterDescriptor, argument);
+                        putVararg(konstueParameterDescriptor, argument);
                     }
                 }
 
@@ -269,15 +269,15 @@ public class ValueArgumentsToParametersMapper {
             boolean isArraySetMethod = call.getCallType() == Call.CallType.ARRAY_SET_METHOD;
             List<? extends ValueArgument> argumentsInParentheses = CallUtilKt.getValueArgumentsInParentheses(call);
             for (Iterator<? extends ValueArgument> iterator = argumentsInParentheses.iterator(); iterator.hasNext(); ) {
-                ValueArgument valueArgument = iterator.next();
-                if (valueArgument.isNamed()) {
-                    state = state.processNamedArgument(valueArgument);
+                ValueArgument konstueArgument = iterator.next();
+                if (konstueArgument.isNamed()) {
+                    state = state.processNamedArgument(konstueArgument);
                 }
                 else if (isArraySetMethod && !iterator.hasNext()) {
-                    state = state.processArraySetRHS(valueArgument);
+                    state = state.processArraySetRHS(konstueArgument);
                 }
                 else {
-                    state = state.processPositionedArgument(valueArgument);
+                    state = state.processPositionedArgument(konstueArgument);
                 }
             }
 
@@ -337,35 +337,35 @@ public class ValueArgumentsToParametersMapper {
         }
 
         private void reportUnmappedParameters() {
-            for (ValueParameterDescriptor valueParameter : parameters) {
-                if (!usedParameters.contains(valueParameter)) {
-                    if (ArgumentsUtilsKt.hasDefaultValue(valueParameter)) {
-                        candidateCall.recordValueArgument(valueParameter, DefaultValueArgument.DEFAULT);
+            for (ValueParameterDescriptor konstueParameter : parameters) {
+                if (!usedParameters.contains(konstueParameter)) {
+                    if (ArgumentsUtilsKt.hasDefaultValue(konstueParameter)) {
+                        candidateCall.recordValueArgument(konstueParameter, DefaultValueArgument.DEFAULT);
                     }
-                    else if (valueParameter.getVarargElementType() != null) {
-                        candidateCall.recordValueArgument(valueParameter, new VarargValueArgument());
+                    else if (konstueParameter.getVarargElementType() != null) {
+                        candidateCall.recordValueArgument(konstueParameter, new VarargValueArgument());
                     }
                     else {
-                        tracing.noValueForParameter(candidateCall.getTrace(), valueParameter);
+                        tracing.noValueForParameter(candidateCall.getTrace(), konstueParameter);
                         setStatus(ERROR);
                     }
                 }
             }
         }
 
-        private void putVararg(ValueParameterDescriptor valueParameterDescriptor, ValueArgument valueArgument) {
-            if (valueParameterDescriptor.getVarargElementType() != null) {
-                VarargValueArgument vararg = varargs.computeIfAbsent(valueParameterDescriptor, k -> new VarargValueArgument());
-                vararg.addArgument(valueArgument);
+        private void putVararg(ValueParameterDescriptor konstueParameterDescriptor, ValueArgument konstueArgument) {
+            if (konstueParameterDescriptor.getVarargElementType() != null) {
+                VarargValueArgument vararg = varargs.computeIfAbsent(konstueParameterDescriptor, k -> new VarargValueArgument());
+                vararg.addArgument(konstueArgument);
             }
             else {
-                LeafPsiElement spread = valueArgument.getSpreadElement();
+                LeafPsiElement spread = konstueArgument.getSpreadElement();
                 if (spread != null) {
                     candidateCall.getTrace().report(NON_VARARG_SPREAD.onError(spread));
                     setStatus(WEAK_ERROR);
                 }
-                ResolvedValueArgument argument = new ExpressionValueArgument(valueArgument);
-                candidateCall.recordValueArgument(valueParameterDescriptor, argument);
+                ResolvedValueArgument argument = new ExpressionValueArgument(konstueArgument);
+                candidateCall.recordValueArgument(konstueParameterDescriptor, argument);
             }
         }
 

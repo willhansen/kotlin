@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.fir.declarations.*
 object FirJsRuntimeAnnotationChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         for (annotation in declaration.annotations) {
-            val annotationClassSymbol = annotation.toAnnotationClassLikeSymbol(context.session) ?: continue
+            konst annotationClassSymbol = annotation.toAnnotationClassLikeSymbol(context.session) ?: continue
             if (annotationClassSymbol.getExplicitAnnotationRetention(context.session) != AnnotationRetention.RUNTIME) continue
 
             if (declaration is FirMemberDeclaration && declaration.symbol.isEffectivelyExternal(context)) {

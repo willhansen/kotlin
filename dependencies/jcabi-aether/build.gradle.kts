@@ -12,12 +12,12 @@ repositories {
     maven(url = "https://oss.sonatype.org/content/repositories/snapshots")
 }
 
-val aether by configurations.creating
+konst aether by configurations.creating
 dependencies {
     aether("com.jcabi:jcabi-aether:1.0-SNAPSHOT")
 }
 
-val jar = tasks.named<Jar>("jar") {
+konst jar = tasks.named<Jar>("jar") {
     from(provider {
         provider {
             zipTree(

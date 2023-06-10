@@ -36,7 +36,7 @@ fun basic(x: Any?) {
 
 fun completedCallExactlyOnce(x: Any?, y: Any?) {
     select(
-        // The value of the type argument is known, so the call is complete and the data can flow.
+        // The konstue of the type argument is known, so the call is complete and the data can flow.
         id(exactlyOnce { y.<!UNRESOLVED_REFERENCE!>inc<!>(); x as Int }),
         y as Int,
         exactlyOnce { x.inc(); y.inc(); 1 }
@@ -132,11 +132,11 @@ fun incompleteCallNoContract(x: Any, y: Any) {
 }
 
 fun expectedType() {
-    val x: Int = select(run { materialize() }, run { materialize() })
+    konst x: Int = select(run { materialize() }, run { materialize() })
     x.inc()
 }
 
 fun expectedTypeNested() {
-    val x: Int = id(noContract { run { materialize() } })
+    konst x: Int = id(noContract { run { materialize() } })
     x.inc()
 }

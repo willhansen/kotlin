@@ -3,7 +3,7 @@ package test
 class A {
 
     companion object {
-        val b: String = "OK"
+        konst b: String = "OK"
 
         @JvmStatic fun test1() {
             b

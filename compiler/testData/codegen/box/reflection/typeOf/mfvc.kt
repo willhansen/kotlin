@@ -9,7 +9,7 @@ import kotlin.reflect.typeOf
 import kotlin.test.assertEquals
 
 @JvmInline
-value class Z(val value1: String, val value2: String)
+konstue class Z(konst konstue1: String, konst konstue2: String)
 
 fun check(expected: String, actual: KType) {
     assertEquals(expected, actual.toString())

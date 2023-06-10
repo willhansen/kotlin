@@ -34,12 +34,12 @@ import kotlin.test.fail
 @DisplayName("Hierarchical multiplatform")
 open class HierarchicalMppIT : KGPBaseTest() {
 
-    private val String.withPrefix get() = "hierarchical-mpp-published-modules/$this"
+    private konst String.withPrefix get() = "hierarchical-mpp-published-modules/$this"
 
     @GradleTest
     @DisplayName("Check build with published third-party library")
     fun testPublishedModules(gradleVersion: GradleVersion, @TempDir tempDir: Path) {
-        val buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
+        konst buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
 
         publishThirdPartyLib(withGranularMetadata = false, gradleVersion = gradleVersion, localRepoDir = tempDir)
 
@@ -97,10 +97,10 @@ open class HierarchicalMppIT : KGPBaseTest() {
             }
 
             testDependencyTransformations { reports ->
-                val thirdPartyLibApiVisibility = reports.filter { report ->
+                konst thirdPartyLibApiVisibility = reports.filter { report ->
                     report.groupAndModule.startsWith("com.example.thirdparty:third-party-lib") && report.scope == "api"
                 }
-                val jvmJsSourceSets = setOf("jvmAndJsMain", "jvmAndJsTest")
+                konst jvmJsSourceSets = setOf("jvmAndJsMain", "jvmAndJsTest")
                 thirdPartyLibApiVisibility.forEach {
                     if (it.sourceSetName in jvmJsSourceSets)
                         assertTrue("$it") { it.allVisibleSourceSets == setOf("commonMain") }
@@ -123,7 +123,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             localRepoDir = tempDir
         ).run {
             testDependencyTransformations { reports ->
-                val testApiTransformationReports =
+                konst testApiTransformationReports =
                     reports.filter { report ->
                         report.groupAndModule.startsWith("com.example.thirdparty:third-party-lib") &&
                                 report.sourceSetName.let { it == "commonTest" || it == "jvmAndJsTest" } &&
@@ -140,7 +140,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
                 }
 
                 // ALso check that the files produced by dependency transformations survive a clean build:
-                val existingFilesFromReports = reports.flatMap { it.useFiles }.filter { it.isFile }
+                konst existingFilesFromReports = reports.flatMap { it.useFiles }.filter { it.isFile }
                 assertTrue { existingFilesFromReports.isNotEmpty() }
                 build("clean") {
                     existingFilesFromReports.forEach { assertTrue("Expected that $it exists after clean build.") { it.isFile } }
@@ -157,7 +157,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             }
 
             testDependencyTransformations { reports ->
-                val testApiTransformationReports =
+                konst testApiTransformationReports =
                     reports.filter { report ->
                         report.groupAndModule.startsWith("com.example.thirdparty") &&
                                 report.sourceSetName.let { it == "commonTest" || it == "jvmAndJsTest" } &&
@@ -222,14 +222,14 @@ open class HierarchicalMppIT : KGPBaseTest() {
     @GradleTest
     @DisplayName("Check that only composite metadata artifacts are transformed")
     fun testOnlyCompositeMetadataArtifactsTransformed(gradleVersion: GradleVersion, @TempDir tempDir: Path) {
-        val buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
+        konst buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
         publishThirdPartyLib(withGranularMetadata = true, gradleVersion = gradleVersion, localRepoDir = tempDir)
 
-        val regex = """artifact: '(.+)'""".toRegex()
+        konst regex = """artifact: '(.+)'""".toRegex()
         fun BuildResult.transformedArtifacts() = output
             .lineSequence()
             .filter { it.contains("Transform composite metadata") }
-            .mapNotNull { regex.find(it)?.groups?.get(1)?.value }
+            .mapNotNull { regex.find(it)?.groups?.get(1)?.konstue }
             .map { File(it).name }
             .toSet()
 
@@ -369,7 +369,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
     }
 
     @GradleTest
-    @DisplayName("KT-54995: compileAppleMainKotlinMetadata fails on default parameters with `No value passed for parameter 'mustExist'")
+    @DisplayName("KT-54995: compileAppleMainKotlinMetadata fails on default parameters with `No konstue passed for parameter 'mustExist'")
     fun testCompileSharedNativeSourceSetWithOKIODependency(gradleVersion: GradleVersion) {
         project(
             projectName = "kt-54995-compileSharedNative-with-okio",
@@ -425,9 +425,9 @@ open class HierarchicalMppIT : KGPBaseTest() {
                 "linuxAndJsMain/default/linkdata/package_com.example/"
             )
 
-            val parsedProjectStructureMetadata: KotlinProjectStructureMetadata = publishedMetadataJar.getProjectStructureMetadata()
+            konst parsedProjectStructureMetadata: KotlinProjectStructureMetadata = publishedMetadataJar.getProjectStructureMetadata()
 
-            val expectedProjectStructureMetadata = expectedProjectStructureMetadata(
+            konst expectedProjectStructureMetadata = expectedProjectStructureMetadata(
                 sourceSetModuleDependencies = mapOf(
                     "jvmAndJsMain" to setOf("com.example.thirdparty" to "third-party-lib"),
                     "linuxAndJsMain" to emptySet(),
@@ -453,7 +453,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
     }
 
     private fun BuildResult.checkMyLibBar(subprojectPrefix: String? = null, localRepoDir: Path) {
-        val taskPrefix = subprojectPrefix?.let { ":$it" }.orEmpty()
+        konst taskPrefix = subprojectPrefix?.let { ":$it" }.orEmpty()
 
         assertTasksExecuted(expectedTasks(subprojectPrefix))
 
@@ -475,9 +475,9 @@ open class HierarchicalMppIT : KGPBaseTest() {
                 "linuxAndJsMain/default/linkdata/package_com.example.bar/"
             )
 
-            val parsedProjectStructureMetadata: KotlinProjectStructureMetadata = publishedMetadataJar.getProjectStructureMetadata()
+            konst parsedProjectStructureMetadata: KotlinProjectStructureMetadata = publishedMetadataJar.getProjectStructureMetadata()
 
-            val expectedProjectStructureMetadata = expectedProjectStructureMetadata(
+            konst expectedProjectStructureMetadata = expectedProjectStructureMetadata(
                 sourceSetModuleDependencies = mapOf(
                     "jvmAndJsMain" to setOf(),
                     "linuxAndJsMain" to emptySet(),
@@ -539,7 +539,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
     }
 
     private fun BuildResult.checkMyApp(subprojectPrefix: String? = null) {
-        val taskPrefix = subprojectPrefix?.let { ":$it" }.orEmpty()
+        konst taskPrefix = subprojectPrefix?.let { ":$it" }.orEmpty()
         assertTasksExecuted(expectedTasks(subprojectPrefix))
 
         checkNamesOnCompileClasspath(
@@ -595,10 +595,10 @@ open class HierarchicalMppIT : KGPBaseTest() {
         shouldInclude: Iterable<Pair<String, String>> = emptyList(),
         shouldNotInclude: Iterable<Pair<String, String>> = emptyList()
     ) {
-        val compilerArgsLine = output.lines().single { "$taskPath Kotlin compiler args:" in it }
-        val classpathItems = compilerArgsLine.substringAfter("-classpath").substringBefore(" -").split(File.pathSeparator)
+        konst compilerArgsLine = output.lines().single { "$taskPath Kotlin compiler args:" in it }
+        konst classpathItems = compilerArgsLine.substringAfter("-classpath").substringBefore(" -").split(File.pathSeparator)
 
-        val actualClasspath = classpathItems.joinToString("\n")
+        konst actualClasspath = classpathItems.joinToString("\n")
 
         shouldInclude.forEach { (module, sourceSet) ->
             assertTrue(
@@ -633,8 +633,8 @@ open class HierarchicalMppIT : KGPBaseTest() {
         sourceSetModuleDependencies: Map<String, Set<Pair<String, String>>>
     ): KotlinProjectStructureMetadata {
 
-        val jvmSourceSets = setOf("commonMain", "jvmAndJsMain")
-        val jsSourceSets = setOf("commonMain", "jvmAndJsMain", "linuxAndJsMain")
+        konst jvmSourceSets = setOf("commonMain", "jvmAndJsMain")
+        konst jsSourceSets = setOf("commonMain", "jvmAndJsMain", "linuxAndJsMain")
         return KotlinProjectStructureMetadata(
             sourceSetNamesByVariantName = mapOf(
                 "jsApiElements" to jsSourceSets,
@@ -662,21 +662,21 @@ open class HierarchicalMppIT : KGPBaseTest() {
     }
 
     private fun ZipFile.checkAllEntryNamesArePresent(vararg expectedEntryNames: String) {
-        val entryNames = entries().asSequence().map { it.name }.toSet()
-        val entryNamesString = entryNames.joinToString()
+        konst entryNames = entries().asSequence().map { it.name }.toSet()
+        konst entryNamesString = entryNames.joinToString()
         expectedEntryNames.forEach {
             assertTrue("expecting entry $it in entry names $entryNamesString") { it in entryNames }
         }
     }
 
     private fun ZipFile.checkExactEntries(vararg expectedEntryNames: String, ignoreDirectories: Boolean = true) {
-        val entryNamesSet = entries()
+        konst entryNamesSet = entries()
             .asSequence()
             .map { it.name }
             .run { if (ignoreDirectories) filterNot { it.endsWith("/") } else this }
             .sorted()
             .joinToString("\n")
-        val expectedEntryNamesSet = expectedEntryNames.toList().sorted().joinToString("\n")
+        konst expectedEntryNamesSet = expectedEntryNames.toList().sorted().joinToString("\n")
         assertEquals(expectedEntryNamesSet, entryNamesSet)
     }
 
@@ -690,7 +690,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
     }
 
     private fun ZipFile.getProjectStructureMetadata(): KotlinProjectStructureMetadata {
-        val json = getInputStream(getEntry("META-INF/$MULTIPLATFORM_PROJECT_METADATA_JSON_FILE_NAME")).reader().readText()
+        konst json = getInputStream(getEntry("META-INF/$MULTIPLATFORM_PROJECT_METADATA_JSON_FILE_NAME")).reader().readText()
         return checkNotNull(parseKotlinSourceSetMetadataFromJson(json))
     }
 
@@ -730,7 +730,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             localRepoDir = tempDir
         )
         with(project("hierarchical-mpp-js-test", gradleVersion)) {
-            val taskToExecute = ":jsNodeTest"
+            konst taskToExecute = ":jsNodeTest"
             build(taskToExecute, "-PthirdPartyRepo=${tempDir.absolutePathString()}") {
                 assertTasksExecuted(taskToExecute)
             }
@@ -748,7 +748,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             localRepoDir = tempDir,
             buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
         ).run {
-            val intermediateMetadataCompileTask = ":compileJvmAndJsMainKotlinMetadata"
+            konst intermediateMetadataCompileTask = ":compileJvmAndJsMainKotlinMetadata"
 
             build(intermediateMetadataCompileTask) {
                 checkNamesOnCompileClasspath(
@@ -808,14 +808,14 @@ open class HierarchicalMppIT : KGPBaseTest() {
 
             fun macOnly(code: () -> List<String>): List<String> = if (OS.MAC.isCurrentOs) code() else emptyList()
 
-            val rootModuleSources = listOf("test/lib/1.0/lib-1.0-sources.jar")
-            val jvmModuleSources = listOf("test/lib-jvm/1.0/lib-jvm-1.0-sources.jar")
-            val jvm2ModuleSources = listOf("test/lib-jvm2/1.0/lib-jvm2-1.0-sources.jar")
-            val linuxX64ModuleSources = listOf("test/lib-linuxx64/1.0/lib-linuxx64-1.0-sources.jar")
-            val linuxArm64ModuleSources = listOf("test/lib-linuxarm64/1.0/lib-linuxarm64-1.0-sources.jar")
-            val iosX64ModuleSources = macOnly { listOf("test/lib-iosx64/1.0/lib-iosx64-1.0-sources.jar") }
-            val iosArm64ModuleSources = macOnly { listOf("test/lib-iosarm64/1.0/lib-iosarm64-1.0-sources.jar") }
-            val allPublishedSources = rootModuleSources +
+            konst rootModuleSources = listOf("test/lib/1.0/lib-1.0-sources.jar")
+            konst jvmModuleSources = listOf("test/lib-jvm/1.0/lib-jvm-1.0-sources.jar")
+            konst jvm2ModuleSources = listOf("test/lib-jvm2/1.0/lib-jvm2-1.0-sources.jar")
+            konst linuxX64ModuleSources = listOf("test/lib-linuxx64/1.0/lib-linuxx64-1.0-sources.jar")
+            konst linuxArm64ModuleSources = listOf("test/lib-linuxarm64/1.0/lib-linuxarm64-1.0-sources.jar")
+            konst iosX64ModuleSources = macOnly { listOf("test/lib-iosx64/1.0/lib-iosx64-1.0-sources.jar") }
+            konst iosArm64ModuleSources = macOnly { listOf("test/lib-iosarm64/1.0/lib-iosarm64-1.0-sources.jar") }
+            konst allPublishedSources = rootModuleSources +
                     jvmModuleSources + jvm2ModuleSources +
                     linuxX64ModuleSources + linuxArm64ModuleSources +
                     iosX64ModuleSources + iosArm64ModuleSources
@@ -823,7 +823,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             infix fun Pair<String, List<String>>.and(that: List<String>) = first to (second + that)
 
             // Here mentioned only source sets that should be published
-            val expectedSourcePublicationLayout = listOf(
+            konst expectedSourcePublicationLayout = listOf(
                 "commonMain" to rootModuleSources
                         and jvmModuleSources and jvm2ModuleSources
                         and iosX64ModuleSources and iosArm64ModuleSources
@@ -843,14 +843,14 @@ open class HierarchicalMppIT : KGPBaseTest() {
                 "linuxArm64Main" to linuxArm64ModuleSources,
             )
 
-            val expectedSourcePublicationLayoutBySourcesFile: Map<String, List<String>> = expectedSourcePublicationLayout
+            konst expectedSourcePublicationLayoutBySourcesFile: Map<String, List<String>> = expectedSourcePublicationLayout
                 .flatMap { (sourceSet, sources) -> sources.map { sourceSet to it } }
                 .groupBy(
                     keySelector = { it.second },
-                    valueTransform = { it.first }
+                    konstueTransform = { it.first }
                 )
 
-            val actualSourcePublicationLayoutBySourcesFile: Map<String, List<String>> = allPublishedSources
+            konst actualSourcePublicationLayoutBySourcesFile: Map<String, List<String>> = allPublishedSources
                 .associateWith { jarPath ->
                     tempDir
                         .resolve(jarPath)
@@ -861,7 +861,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
 
             fun Map<String, List<String>>.stringifyForBeautifulDiff() = entries
                 .sortedBy { it.key }
-                .joinToString("\n") { "${it.key} => ${it.value.sorted()}" }
+                .joinToString("\n") { "${it.key} => ${it.konstue.sorted()}" }
 
             assertEquals(
                 expectedSourcePublicationLayoutBySourcesFile.stringifyForBeautifulDiff(),
@@ -898,7 +898,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
                 )
             """.trimIndent())
 
-            val expectedReports = mapOf(
+            konst expectedReports = mapOf(
                 "common" to SourcesVariantResolutionReport(
                     files = listOf("lib-kotlin-1.0-sources.jar"),
                     dependencyToVariant = mapOf("test:lib:1.0" to "metadataSourcesElements")
@@ -920,8 +920,8 @@ open class HierarchicalMppIT : KGPBaseTest() {
                 ),
             )
 
-            build("help") { // evaluate only
-                val actualReports = SourcesVariantResolutionReport.parse(output, expectedReports.keys)
+            build("help") { // ekonstuate only
+                konst actualReports = SourcesVariantResolutionReport.parse(output, expectedReports.keys)
                 assertEquals(expectedReports, actualReports)
             }
         }
@@ -949,9 +949,9 @@ open class HierarchicalMppIT : KGPBaseTest() {
 
             build("publish")
 
-            val gradleModuleFileContent = tempDir.resolve("test/lib/1.0/lib-1.0.module").readText()
+            konst gradleModuleFileContent = tempDir.resolve("test/lib/1.0/lib-1.0.module").readText()
             fun assertNoSourcesPublished(expectedJarLocation: String, variantName: String) {
-                val jarFile = tempDir.resolve(expectedJarLocation).toFile()
+                konst jarFile = tempDir.resolve(expectedJarLocation).toFile()
                 if (jarFile.exists()) fail("Sources jar '$expectedJarLocation' shouldn't be published")
                 if (gradleModuleFileContent.contains(variantName)) fail("Variant '$variantName' shouldn't be published")
             }
@@ -965,7 +965,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             }
 
             // Check that JVM sources were published
-            val jvmSourcesJar = tempDir.resolve("test/lib-jvm/1.0/lib-jvm-1.0-sources.jar")
+            konst jvmSourcesJar = tempDir.resolve("test/lib-jvm/1.0/lib-jvm-1.0-sources.jar")
             if (!jvmSourcesJar.exists()) {
                 fail("JVM Sources should be published")
             }
@@ -996,14 +996,14 @@ open class HierarchicalMppIT : KGPBaseTest() {
             )
 
             testDependencyTransformations { reports ->
-                val reportsForJvmAndJsMain = reports.filter { it.sourceSetName == "jvmAndJsMain" }
-                val thirdPartyLib = reportsForJvmAndJsMain.singleOrNull {
+                konst reportsForJvmAndJsMain = reports.filter { it.sourceSetName == "jvmAndJsMain" }
+                konst thirdPartyLib = reportsForJvmAndJsMain.singleOrNull {
                     it.scope == "api" && it.groupAndModule.startsWith("com.example")
                 }
-                val coroutinesCore = reportsForJvmAndJsMain.singleOrNull {
+                konst coroutinesCore = reportsForJvmAndJsMain.singleOrNull {
                     it.scope == "implementation" && it.groupAndModule.contains("kotlinx-coroutines-core")
                 }
-                val serialization = reportsForJvmAndJsMain.singleOrNull {
+                konst serialization = reportsForJvmAndJsMain.singleOrNull {
                     it.scope == "compileOnly" && it.groupAndModule.contains("kotlinx-serialization-json")
                 }
                 assertNotNull(thirdPartyLib, "Expected report for third-party-lib")
@@ -1024,7 +1024,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
     fun testNativeLeafTestSourceSetsKt46417(gradleVersion: GradleVersion) {
         with(project("kt-46417-ios-test-source-sets", gradleVersion = gradleVersion)) {
             testDependencyTransformations("p2") { reports ->
-                val report = reports.singleOrNull { it.sourceSetName == "iosArm64Test" && it.scope == "implementation" }
+                konst report = reports.singleOrNull { it.sourceSetName == "iosArm64Test" && it.scope == "implementation" }
                 assertNotNull(report, "No single report for 'iosArm64' and implementation scope")
                 assertEquals(setOf("commonMain", "iosMain"), report.allVisibleSourceSets)
                 assertTrue(report.groupAndModule.endsWith(":p1"))
@@ -1039,7 +1039,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             build(":lib:publish")
             testDependencyTransformations("p1") { reports ->
                 for (leafSourceSetName in listOf("jvmMain", "jsMain", "linuxX64Main")) {
-                    val report = reports.singleOrNull {
+                    konst report = reports.singleOrNull {
                         it.sourceSetName == leafSourceSetName && it.scope == "implementation" && it.groupAndModule == "kt52216:lib"
                     }
                     assertNotNull(report, "No transformation for $leafSourceSetName implementation")
@@ -1057,7 +1057,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             }
 
             testDependencyTransformations("p2") { reports ->
-                val commonReport = reports.singleOrNull {
+                konst commonReport = reports.singleOrNull {
                     it.sourceSetName == "commonMain" && it.scope == "implementation" && it.groupAndModule == "kt52216:lib"
                 }
                 assertNotNull(commonReport, "No transformation for commonMain implementation")
@@ -1069,10 +1069,10 @@ open class HierarchicalMppIT : KGPBaseTest() {
                 }
 
                 for (targetName in listOf("jvm", "js", "linuxX64")) {
-                    val intermediateReport = reports.singleOrNull {
+                    konst intermediateReport = reports.singleOrNull {
                         it.sourceSetName == "${targetName}Intermediate" && it.scope == "implementation" && it.groupAndModule == "kt52216:lib"
                     }
-                    val leafReport = reports.singleOrNull {
+                    konst leafReport = reports.singleOrNull {
                         it.sourceSetName == "${targetName}Main" && it.scope == "implementation" && it.groupAndModule == "kt52216:lib"
                     }
 
@@ -1163,8 +1163,8 @@ open class HierarchicalMppIT : KGPBaseTest() {
             }
 
             build(":libWithDefaultLayout:publish") {
-                val pom = tempDir.resolve("test/libWithDefaultLayout-jvm/1.0/libWithDefaultLayout-jvm-1.0.pom").readText()
-                val expectedDependency = """
+                konst pom = tempDir.resolve("test/libWithDefaultLayout-jvm/1.0/libWithDefaultLayout-jvm-1.0.pom").readText()
+                konst expectedDependency = """
                     |    <dependency>
                     |      <groupId>test</groupId>
                     |      <artifactId>libWithCustomLayout</artifactId>
@@ -1197,7 +1197,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
         project("mpp-project-with-type-safe-accessors", gradleVersion) {
             build("help") {
                 println(output)
-                val actualDependencies = output.lineSequence()
+                konst actualDependencies = output.lineSequence()
                     .filter { it.startsWith("PROJECT_DEPENDENCY: ") }
                     .map { it.removePrefix("PROJECT_DEPENDENCY: ") }
                     .toList()
@@ -1215,16 +1215,16 @@ open class HierarchicalMppIT : KGPBaseTest() {
         subproject: String? = null,
         check: BuildResult.(reports: Iterable<DependencyTransformationReport>) -> Unit
     ) {
-        val buildGradleKts = (subproject?.let { subProject(subproject).buildGradleKts } ?: buildGradleKts).toFile()
+        konst buildGradleKts = (subproject?.let { subProject(subproject).buildGradleKts } ?: buildGradleKts).toFile()
         assert(buildGradleKts.exists()) { "Kotlin scripts are not found." }
         assert(buildGradleKts.extension == "kts") { "Only Kotlin scripts are supported." }
 
-        val testTaskName = "reportDependencyTransformationsForTest"
+        konst testTaskName = "reportDependencyTransformationsForTest"
 
         if (testTaskName !in buildGradleKts.readText()) {
             buildGradleKts.modify {
                 "import ${DefaultKotlinSourceSet::class.qualifiedName}\n" + it + "\n" + """
-                val $testTaskName by tasks.creating {
+                konst $testTaskName by tasks.creating {
                     doFirst {
                         for (scope in listOf("api", "implementation", "compileOnly", "runtimeOnly")) {
                             println("========\n${'$'}scope\n")
@@ -1236,14 +1236,14 @@ open class HierarchicalMppIT : KGPBaseTest() {
                                     .getDependenciesTransformation(
                                         "${'$'}{sourceSet.name}${'$'}{scope.capitalize()}DependenciesMetadata"
                                     ).forEach {
-                                        val line = listOf(
+                                        konst line = listOf(
                                                 "${DependencyTransformationReport.TEST_OUTPUT_MARKER}",
                                                 sourceSet.name,
                                                 scope,
                                                 it.groupId + ":" + it.moduleName,
                                                 it.allVisibleSourceSets.joinToString(","),
                                                 it.useFilesForSourceSets.keys.joinToString(","),
-                                                it.useFilesForSourceSets.values.flatten().joinToString(",")
+                                                it.useFilesForSourceSets.konstues.flatten().joinToString(",")
                                         )
                     
                                         println("        " + line.joinToString(" :: "))
@@ -1259,7 +1259,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
         }
 
         build(":${subproject?.plus(":").orEmpty()}$testTaskName") {
-            val reports = output.lines()
+            konst reports = output.lines()
                 .filter { DependencyTransformationReport.TEST_OUTPUT_MARKER in it }
                 .map { DependencyTransformationReport.parseTestOutputLine(it) }
 
@@ -1268,25 +1268,25 @@ open class HierarchicalMppIT : KGPBaseTest() {
     }
 
     internal data class DependencyTransformationReport(
-        val sourceSetName: String,
-        val scope: String,
-        val groupAndModule: String,
-        val allVisibleSourceSets: Set<String>,
-        val newVisibleSourceSets: Set<String>, // those which the dependsOn parents don't see
-        val useFiles: List<File>
+        konst sourceSetName: String,
+        konst scope: String,
+        konst groupAndModule: String,
+        konst allVisibleSourceSets: Set<String>,
+        konst newVisibleSourceSets: Set<String>, // those which the dependsOn parents don't see
+        konst useFiles: List<File>
     ) {
-        val isExcluded: Boolean get() = allVisibleSourceSets.isEmpty()
+        konst isExcluded: Boolean get() = allVisibleSourceSets.isEmpty()
 
         companion object {
-            const val TEST_OUTPUT_MARKER = "###transformation"
-            const val TEST_OUTPUT_COMPONENT_SEPARATOR = " :: "
-            const val TEST_OUTPUT_ITEMS_SEPARATOR = ","
+            const konst TEST_OUTPUT_MARKER = "###transformation"
+            const konst TEST_OUTPUT_COMPONENT_SEPARATOR = " :: "
+            const konst TEST_OUTPUT_ITEMS_SEPARATOR = ","
 
             private operator fun <T> List<T>.component6() = this[5]
 
             fun parseTestOutputLine(line: String): DependencyTransformationReport {
-                val tail = line.substringAfter(TEST_OUTPUT_MARKER + TEST_OUTPUT_COMPONENT_SEPARATOR)
-                val (sourceSetName, scope, groupAndModule, allVisibleSourceSets, newVisibleSourceSets, useFiles) =
+                konst tail = line.substringAfter(TEST_OUTPUT_MARKER + TEST_OUTPUT_COMPONENT_SEPARATOR)
+                konst (sourceSetName, scope, groupAndModule, allVisibleSourceSets, newVisibleSourceSets, useFiles) =
                     tail.split(TEST_OUTPUT_COMPONENT_SEPARATOR)
                 return DependencyTransformationReport(
                     sourceSetName, scope, groupAndModule,
@@ -1299,12 +1299,12 @@ open class HierarchicalMppIT : KGPBaseTest() {
     }
 
     private data class SourcesVariantResolutionReport(
-        val files: List<String>,
-        val dependencyToVariant: Map<String, String>
+        konst files: List<String>,
+        konst dependencyToVariant: Map<String, String>
     ) {
         companion object {
             fun parse(output: String, targetNames: Iterable<String>): Map<String, SourcesVariantResolutionReport> {
-                val lines = output.lines()
+                konst lines = output.lines()
                 return targetNames.associateWith { targetName -> lines.parseForTarget(targetName) }
             }
 
@@ -1317,8 +1317,8 @@ open class HierarchicalMppIT : KGPBaseTest() {
                 start: String,
                 end: String
             ): List<String> {
-                val startPos = indexOf(start)
-                val endPos = indexOf(end)
+                konst startPos = indexOf(start)
+                konst endPos = indexOf(end)
 
                 return subList(startPos + 1, endPos)
             }

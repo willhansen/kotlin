@@ -11,12 +11,12 @@ import kotlin.test.*
 class MutableCollectionJVMTest {
 
     @Test fun shuffledRnd() {
-        val rnd1 = java.util.Random(42L)
-        val rnd2 = java.util.Random(42L)
+        konst rnd1 = java.util.Random(42L)
+        konst rnd2 = java.util.Random(42L)
 
-        val list = MutableList(100) { it }
-        val shuffled1 = list.shuffled(rnd1)
-        val shuffled2 = list.shuffled(rnd2)
+        konst list = MutableList(100) { it }
+        konst shuffled1 = list.shuffled(rnd1)
+        konst shuffled2 = list.shuffled(rnd2)
 
 
         assertNotEquals(list, shuffled1)

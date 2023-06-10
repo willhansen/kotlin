@@ -1,7 +1,7 @@
 fun foo() {
-    val thread = Thread()
+    konst thread = Thread()
     thread.stop()
     JavaClass().bar("", 1, 2.0)
-    val baz = JavaClass().baz
-    val jc = JavaClass("Omega")
+    konst baz = JavaClass().baz
+    konst jc = JavaClass("Omega")
 }

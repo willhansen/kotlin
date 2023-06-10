@@ -8,66 +8,66 @@ package org.jetbrains.kotlin.analysis.api.annotations
 import org.jetbrains.kotlin.renderer.render
 
 internal object KtAnnotationValueRenderer {
-    fun render(value: KtAnnotationValue): String = buildString {
-        renderConstantValue(value)
+    fun render(konstue: KtAnnotationValue): String = buildString {
+        renderConstantValue(konstue)
     }
 
-    private fun StringBuilder.renderConstantValue(value: KtAnnotationValue) {
-        when (value) {
+    private fun StringBuilder.renderConstantValue(konstue: KtAnnotationValue) {
+        when (konstue) {
             is KtAnnotationApplicationValue -> {
-                renderAnnotationConstantValue(value)
+                renderAnnotationConstantValue(konstue)
             }
             is KtArrayAnnotationValue -> {
-                renderArrayConstantValue(value)
+                renderArrayConstantValue(konstue)
             }
             is KtEnumEntryAnnotationValue -> {
-                renderEnumEntryConstantValue(value)
+                renderEnumEntryConstantValue(konstue)
             }
             is KtConstantAnnotationValue -> {
-                renderConstantAnnotationValue(value)
+                renderConstantAnnotationValue(konstue)
             }
             KtUnsupportedAnnotationValue -> {
-                append("error(\"non-annotation value\")")
+                append("error(\"non-annotation konstue\")")
             }
             is KtKClassAnnotationValue -> {
-                renderKClassAnnotationValue(value)
+                renderKClassAnnotationValue(konstue)
             }
         }
     }
 
-    private fun StringBuilder.renderKClassAnnotationValue(value: KtKClassAnnotationValue) {
-        when (value) {
+    private fun StringBuilder.renderKClassAnnotationValue(konstue: KtKClassAnnotationValue) {
+        when (konstue) {
             is KtKClassAnnotationValue.KtErrorClassAnnotationValue -> append("UNRESOLVED_CLASS")
-            is KtKClassAnnotationValue.KtLocalKClassAnnotationValue -> append(value.ktClass.nameAsName?.render())
-            is KtKClassAnnotationValue.KtNonLocalKClassAnnotationValue -> append(value.classId.asSingleFqName().render())
+            is KtKClassAnnotationValue.KtLocalKClassAnnotationValue -> append(konstue.ktClass.nameAsName?.render())
+            is KtKClassAnnotationValue.KtNonLocalKClassAnnotationValue -> append(konstue.classId.asSingleFqName().render())
         }
         append("::class")
     }
 
-    private fun StringBuilder.renderConstantAnnotationValue(value: KtConstantAnnotationValue) {
-        append(value.constantValue.renderAsKotlinConstant())
+    private fun StringBuilder.renderConstantAnnotationValue(konstue: KtConstantAnnotationValue) {
+        append(konstue.constantValue.renderAsKotlinConstant())
     }
 
-    private fun StringBuilder.renderEnumEntryConstantValue(value: KtEnumEntryAnnotationValue) {
-        append(value.callableId?.asSingleFqName()?.asString())
+    private fun StringBuilder.renderEnumEntryConstantValue(konstue: KtEnumEntryAnnotationValue) {
+        append(konstue.callableId?.asSingleFqName()?.asString())
     }
 
     private fun StringBuilder.renderAnnotationConstantValue(application: KtAnnotationApplicationValue) {
         renderAnnotationApplication(application.annotationValue)
     }
 
-    private fun StringBuilder.renderAnnotationApplication(value: KtAnnotationApplicationWithArgumentsInfo) {
-        append(value.classId)
-        if (value.arguments.isNotEmpty()) {
+    private fun StringBuilder.renderAnnotationApplication(konstue: KtAnnotationApplicationWithArgumentsInfo) {
+        append(konstue.classId)
+        if (konstue.arguments.isNotEmpty()) {
             append("(")
-            renderNamedConstantValueList(value.arguments)
+            renderNamedConstantValueList(konstue.arguments)
             append(")")
         }
     }
 
-    private fun StringBuilder.renderArrayConstantValue(value: KtArrayAnnotationValue) {
+    private fun StringBuilder.renderArrayConstantValue(konstue: KtArrayAnnotationValue) {
         append("[")
-        renderConstantValueList(value.values)
+        renderConstantValueList(konstue.konstues)
         append("]")
     }
 

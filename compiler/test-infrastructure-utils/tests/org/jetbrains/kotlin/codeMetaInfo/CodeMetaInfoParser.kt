@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.codeMetaInfo
 import org.jetbrains.kotlin.codeMetaInfo.model.ParsedCodeMetaInfo
 
 object CodeMetaInfoParser {
-    val openingRegex = """(<!([^"]*?((".*?")(, ".*?")*?)?[^"]*?)!>)""".toRegex()
-    val closingRegex = """(<!>)""".toRegex()
+    konst openingRegex = """(<!([^"]*?((".*?")(, ".*?")*?)?[^"]*?)!>)""".toRegex()
+    konst closingRegex = """(<!>)""".toRegex()
 
-    val openingOrClosingRegex = """(${closingRegex.pattern}|${openingRegex.pattern})""".toRegex()
+    konst openingOrClosingRegex = """(${closingRegex.pattern}|${openingRegex.pattern})""".toRegex()
 
     /*
      * ([\S&&[^,(){}]]+) -- tag, allowing all non-space characters except bracers and curly bracers
@@ -19,9 +19,9 @@ object CodeMetaInfoParser {
      * (\("(.*?)"\))? -- arguments of meta info
      * (, )? -- possible separator between different infos
      */
-    private val tagRegex = """([\S&&[^,(){}]]+)([{](.*?)[}])?(\("(.*?)"\))?(, )?""".toRegex()
+    private konst tagRegex = """([\S&&[^,(){}]]+)([{](.*?)[}])?(\("(.*?)"\))?(, )?""".toRegex()
 
-    private class Opening(val index: Int, val tags: String, val startOffset: Int) {
+    private class Opening(konst index: Int, konst tags: String, konst startOffset: Int) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
@@ -41,18 +41,18 @@ object CodeMetaInfoParser {
     fun getCodeMetaInfoFromText(renderedText: String): List<ParsedCodeMetaInfo> {
         var text = renderedText
 
-        val openings = ArrayDeque<Opening>()
-        val stackOfOpenings = ArrayDeque<Opening>()
-        val closingOffsets = mutableMapOf<Opening, Int>()
-        val result = mutableListOf<ParsedCodeMetaInfo>()
+        konst openings = ArrayDeque<Opening>()
+        konst stackOfOpenings = ArrayDeque<Opening>()
+        konst closingOffsets = mutableMapOf<Opening, Int>()
+        konst result = mutableListOf<ParsedCodeMetaInfo>()
 
         var counter = 0
 
         while (true) {
             var openingStartOffset = Int.MAX_VALUE
             var closingStartOffset = Int.MAX_VALUE
-            val opening = openingRegex.find(text)
-            val closing = closingRegex.find(text)
+            konst opening = openingRegex.find(text)
+            konst closing = closingRegex.find(text)
             if (opening == null && closing == null) break
 
             if (opening != null)
@@ -62,7 +62,7 @@ object CodeMetaInfoParser {
 
             text = if (openingStartOffset < closingStartOffset) {
                 requireNotNull(opening)
-                val openingMatch = Opening(counter++, opening.groups[2]!!.value, opening.range.first)
+                konst openingMatch = Opening(counter++, opening.groups[2]!!.konstue, opening.range.first)
                 openings.addLast(openingMatch)
                 stackOfOpenings.addLast(openingMatch)
                 text.removeRange(openingStartOffset, opening.range.last + 1)
@@ -76,13 +76,13 @@ object CodeMetaInfoParser {
             error("Opening and closing tags counts are not equals")
         }
         while (!openings.isEmpty()) {
-            val openingMatchResult = openings.removeLast()
-            val closingMatchResult = closingOffsets.getValue(openingMatchResult)
-            val allMetaInfos = openingMatchResult.tags
+            konst openingMatchResult = openings.removeLast()
+            konst closingMatchResult = closingOffsets.getValue(openingMatchResult)
+            konst allMetaInfos = openingMatchResult.tags
             tagRegex.findAll(allMetaInfos).map { it.groups }.forEach {
-                val tag = it[1]!!.value
-                val attributes = it[3]?.value?.split(";") ?: emptyList()
-                val description = it[5]?.value
+                konst tag = it[1]!!.konstue
+                konst attributes = it[3]?.konstue?.split(";") ?: emptyList()
+                konst description = it[5]?.konstue
 
                 result.add(
                     ParsedCodeMetaInfo(

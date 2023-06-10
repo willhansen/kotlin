@@ -10,6 +10,6 @@ fun String.bar() = ""
 
 // --------------------------------------------------------
 
-val functions: Map<String, () -> Any> = TODO()
+konst functions: Map<String, () -> Any> = TODO()
 
 fun run(name: String) = <!UNSAFE_IMPLICIT_INVOKE_CALL!>functions[name]<!>()

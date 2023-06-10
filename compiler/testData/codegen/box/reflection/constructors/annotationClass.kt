@@ -7,16 +7,16 @@ import kotlin.test.assertEquals
 
 annotation class A1
 
-annotation class A2(val k: KClass<*>, val s: A1)
+annotation class A2(konst k: KClass<*>, konst s: A1)
 
 fun box(): String {
     assertEquals(1, A1::class.constructors.size)
     assertEquals(A1::class.primaryConstructor, A1::class.constructors.single())
 
-    val cs = A2::class.constructors
+    konst cs = A2::class.constructors
     assertEquals(1, cs.size)
     assertEquals(A2::class.primaryConstructor, cs.single())
-    val params = cs.single().parameters
+    konst params = cs.single().parameters
     assertEquals(listOf("k", "s"), params.map { it.name })
 
     return "OK"

@@ -9,7 +9,7 @@ compiler/testData/multiplatform/classScopes/missingConstructor/jvm.kt:1:14: erro
 
     public constructor Foo(s: String)
 
-    The following declaration is incompatible because number of value parameters is different:
+    The following declaration is incompatible because number of konstue parameters is different:
         public constructor Foo()
 
 actual class Foo

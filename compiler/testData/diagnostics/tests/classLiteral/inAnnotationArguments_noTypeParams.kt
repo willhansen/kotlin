@@ -2,9 +2,9 @@
 
 import kotlin.reflect.KClass
 
-annotation class Ann(vararg val k: KClass<*>)
+annotation class Ann(vararg konst k: KClass<*>)
 
-inline val <reified T> T.test
+inline konst <reified T> T.test
     get() = @Ann(
         <!ANNOTATION_ARGUMENT_KCLASS_LITERAL_OF_TYPE_PARAMETER!>T::class<!>,
         <!ANNOTATION_ARGUMENT_KCLASS_LITERAL_OF_TYPE_PARAMETER!>Array<T>::class<!>,

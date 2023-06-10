@@ -27,5 +27,5 @@ interface BuiltInsPackageFragment : PackageFragmentDescriptor {
      * However, if anything in the source code references anything from the fallback package, this is a compilation error because it means
      * that there's no kotlin-stdlib in the dependencies and the build is compiler version-specific, which could lead to weird issues.
      */
-    val isFallback: Boolean
+    konst isFallback: Boolean
 }

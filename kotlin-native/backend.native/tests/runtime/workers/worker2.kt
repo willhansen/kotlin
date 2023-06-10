@@ -10,15 +10,15 @@ import kotlin.test.*
 
 import kotlin.native.concurrent.*
 
-data class WorkerArgument(val intParam: Int, val stringParam: String)
-data class WorkerResult(val intResult: Int, val stringResult: String)
+data class WorkerArgument(konst intParam: Int, konst stringParam: String)
+data class WorkerResult(konst intResult: Int, konst stringResult: String)
 
 @Test fun runTest() {
-    val COUNT = 5
-    val workers = Array(COUNT, { _ -> Worker.start()})
+    konst COUNT = 5
+    konst workers = Array(COUNT, { _ -> Worker.start()})
 
     for (attempt in 1 .. 3) {
-        val futures = Array(workers.size, { workerIndex -> workers[workerIndex].execute(TransferMode.SAFE, {
+        konst futures = Array(workers.size, { workerIndex -> workers[workerIndex].execute(TransferMode.SAFE, {
             WorkerArgument(workerIndex, "attempt $attempt") }) { input ->
                 var sum = 0
                 for (i in 0..input.intParam * 1000) {
@@ -27,10 +27,10 @@ data class WorkerResult(val intResult: Int, val stringResult: String)
                 WorkerResult(sum, input.stringParam + " result")
             }
         })
-        val futureSet = futures.toSet()
+        konst futureSet = futures.toSet()
         var consumed = 0
         while (consumed < futureSet.size) {
-            val ready = waitForMultipleFutures(futureSet, 10000)
+            konst ready = waitForMultipleFutures(futureSet, 10000)
             ready.forEach {
                 it.consume { result ->
                     if (result.stringResult != "attempt $attempt result") throw Error("Unexpected $result")

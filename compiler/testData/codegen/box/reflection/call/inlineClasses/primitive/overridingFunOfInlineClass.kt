@@ -7,21 +7,21 @@ interface ITest {
     fun test(a: Int, b: Z, c: Z?): String
 }
 
-inline class Z(val x: Int) : ITest {
+inline class Z(konst x: Int) : ITest {
     override fun test(a: Int, b: Z, c: Z?) = "$x$a${b.x}${c!!.x}"
 }
 
-inline class S(val x: String) : ITest {
+inline class S(konst x: String) : ITest {
     override fun test(a: Int, b: Z, c: Z?) = "$x$a${b.x}${c!!.x}"
 }
 
-inline class A(val x: Any) : ITest {
+inline class A(konst x: Any) : ITest {
     override fun test(a: Int, b: Z, c: Z?) = "$x$a${b.x}${c!!.x}"
 }
 
 fun box(): String {
-    val two = Z(2)
-    val four = Z(4)
+    konst two = Z(2)
+    konst four = Z(4)
 
     assertEquals("0124", Z::test.call(Z(0), 1, two, four))
     assertEquals("0124", Z(0)::test.call(1, two, four))

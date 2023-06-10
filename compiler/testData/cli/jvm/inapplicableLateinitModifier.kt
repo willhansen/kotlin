@@ -1,16 +1,16 @@
 object Delegate {
     operator fun getValue(instance: Any?, property: Any) : String = ""
-    operator fun setValue(instance: Any?, property: Any, value: String) {}
+    operator fun setValue(instance: Any?, property: Any, konstue: String) {}
 }
 
 lateinit var kest by Delegate
 
 class A {
-    lateinit val fest = "10"
+    lateinit konst fest = "10"
     lateinit var mest: String
     lateinit var xest: String?
     lateinit var nest: Int
-    lateinit val dest: String
+    lateinit konst dest: String
         get() = "KEKER"
 }
 

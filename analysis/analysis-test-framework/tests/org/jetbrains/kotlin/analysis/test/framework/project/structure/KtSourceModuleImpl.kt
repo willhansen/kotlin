@@ -15,75 +15,75 @@ import org.jetbrains.kotlin.test.getAnalyzerServices
 import java.nio.file.Path
 
 abstract class KtModuleWithModifiableDependencies {
-    abstract val directRegularDependencies: MutableList<KtModule>
-    abstract val directDependsOnDependencies: MutableList<KtModule>
-    abstract val directFriendDependencies: MutableList<KtModule>
+    abstract konst directRegularDependencies: MutableList<KtModule>
+    abstract konst directDependsOnDependencies: MutableList<KtModule>
+    abstract konst directFriendDependencies: MutableList<KtModule>
 
     /**
      * When dependencies are modifiable, transitive `dependsOn` dependencies must be recomputed each time as [directDependsOnDependencies]
      * may have been mutated.
      */
-    val transitiveDependsOnDependencies: List<KtModule>
+    konst transitiveDependsOnDependencies: List<KtModule>
         get() = computeTransitiveDependsOnDependencies(directDependsOnDependencies)
 }
 
 class KtSourceModuleImpl(
-    override val moduleName: String,
-    override val platform: TargetPlatform,
-    override val languageVersionSettings: LanguageVersionSettings,
-    override val project: Project,
-    override val contentScope: GlobalSearchScope,
+    override konst moduleName: String,
+    override konst platform: TargetPlatform,
+    override konst languageVersionSettings: LanguageVersionSettings,
+    override konst project: Project,
+    override konst contentScope: GlobalSearchScope,
 ) : KtModuleWithModifiableDependencies(), KtSourceModule {
-    override val analyzerServices: PlatformDependentAnalyzerServices get() = platform.getAnalyzerServices()
+    override konst analyzerServices: PlatformDependentAnalyzerServices get() = platform.getAnalyzerServices()
 
-    override val directRegularDependencies: MutableList<KtModule> = mutableListOf()
-    override val directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
-    override val directFriendDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directRegularDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directFriendDependencies: MutableList<KtModule> = mutableListOf()
 }
 
 class KtJdkModuleImpl(
-    override val sdkName: String,
-    override val platform: TargetPlatform,
-    override val contentScope: GlobalSearchScope,
-    override val project: Project,
-    private val binaryRoots: Collection<Path>,
+    override konst sdkName: String,
+    override konst platform: TargetPlatform,
+    override konst contentScope: GlobalSearchScope,
+    override konst project: Project,
+    private konst binaryRoots: Collection<Path>,
 ) : KtModuleWithModifiableDependencies(), KtSdkModule {
-    override val analyzerServices: PlatformDependentAnalyzerServices
+    override konst analyzerServices: PlatformDependentAnalyzerServices
         get() = platform.getAnalyzerServices()
 
     override fun getBinaryRoots(): Collection<Path> = binaryRoots
 
-    override val directRegularDependencies: MutableList<KtModule> = mutableListOf()
-    override val directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
-    override val directFriendDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directRegularDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directFriendDependencies: MutableList<KtModule> = mutableListOf()
 }
 
 class KtLibraryModuleImpl(
-    override val libraryName: String,
-    override val platform: TargetPlatform,
-    override val contentScope: GlobalSearchScope,
-    override val project: Project,
-    private val binaryRoots: Collection<Path>,
+    override konst libraryName: String,
+    override konst platform: TargetPlatform,
+    override konst contentScope: GlobalSearchScope,
+    override konst project: Project,
+    private konst binaryRoots: Collection<Path>,
     override var librarySources: KtLibrarySourceModule?,
 ) : KtModuleWithModifiableDependencies(), KtLibraryModule {
-    override val analyzerServices: PlatformDependentAnalyzerServices get() = platform.getAnalyzerServices()
+    override konst analyzerServices: PlatformDependentAnalyzerServices get() = platform.getAnalyzerServices()
     override fun getBinaryRoots(): Collection<Path> = binaryRoots
 
-    override val directRegularDependencies: MutableList<KtModule> = mutableListOf()
-    override val directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
-    override val directFriendDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directRegularDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directFriendDependencies: MutableList<KtModule> = mutableListOf()
 }
 
 class KtLibrarySourceModuleImpl(
-    override val libraryName: String,
-    override val platform: TargetPlatform,
-    override val contentScope: GlobalSearchScope,
-    override val project: Project,
-    override val binaryLibrary: KtLibraryModule,
+    override konst libraryName: String,
+    override konst platform: TargetPlatform,
+    override konst contentScope: GlobalSearchScope,
+    override konst project: Project,
+    override konst binaryLibrary: KtLibraryModule,
 ) : KtModuleWithModifiableDependencies(), KtLibrarySourceModule {
-    override val analyzerServices: PlatformDependentAnalyzerServices get() = platform.getAnalyzerServices()
+    override konst analyzerServices: PlatformDependentAnalyzerServices get() = platform.getAnalyzerServices()
 
-    override val directRegularDependencies: MutableList<KtModule> = mutableListOf()
-    override val directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
-    override val directFriendDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directRegularDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
+    override konst directFriendDependencies: MutableList<KtModule> = mutableListOf()
 }

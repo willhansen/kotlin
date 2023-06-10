@@ -33,7 +33,7 @@ class FirFileAnnotationsContainerBuilder : FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
     var resolvePhase: FirResolvePhase = FirResolvePhase.RAW_FIR
     lateinit var moduleData: FirModuleData
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var containingFileSymbol: FirFileSymbol
 
     override fun build(): FirFileAnnotationsContainer {

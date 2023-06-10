@@ -3,7 +3,7 @@
 // IGNORE_BACKEND: JS, JS_IR, NATIVE
 // IGNORE_BACKEND: JS_IR_ES6
 // IGNORE_BACKEND_K2: JVM_IR, NATIVE
-// FIR status: value: 0 should have type Long
+// FIR status: konstue: 0 should have type Long
 // WITH_STDLIB
 
 // FILE: J.java
@@ -20,8 +20,8 @@ public class J {
 
 // FILE: test.kt
 
-inline fun <reified T> check(value: Any?) {
-    if (value !is T) throw Exception("value: $value should have type ${T::class.simpleName}")
+inline fun <reified T> check(konstue: Any?) {
+    if (konstue !is T) throw Exception("konstue: $konstue should have type ${T::class.simpleName}")
 }
 
 fun <K> selectFirst(vararg xs: K): K = xs[0]
@@ -41,16 +41,16 @@ fun box(): String {
 
     takeNLong(0)
 
-    val cLong: Comparable<Long> = 0L
+    konst cLong: Comparable<Long> = 0L
     check<Long>(selectFirst(0, cLong))
 
-    val cByte: Comparable<Byte> = 0.toByte()
+    konst cByte: Comparable<Byte> = 0.toByte()
     check<Byte>(selectFirst(0, cByte))
 
-    val cShort: Comparable<Short> = 0.toShort()
+    konst cShort: Comparable<Short> = 0.toShort()
     check<Short>(selectFirst(0, cShort))
 
-    val cStar: Comparable<*> = 0L
+    konst cStar: Comparable<*> = 0L
     check<Int>(selectFirst(0, cStar))
 
     check<Long>(selectFirst(0, J.platformLong()))
@@ -62,7 +62,7 @@ fun box(): String {
     check<Int>(selectFirst(0, 0L, 0f))
     check<Int>(selectFirst(0, 0L, 0f, 0.0))
 
-    val r = 0
+    konst r = 0
     check<Int>(
         when (r) {
             0 -> 0

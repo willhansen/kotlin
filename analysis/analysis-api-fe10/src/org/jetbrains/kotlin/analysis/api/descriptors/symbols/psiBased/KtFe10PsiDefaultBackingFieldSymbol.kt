@@ -29,12 +29,12 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiDefaultBackingFieldSymbol(
-    private val propertyPsi: KtProperty,
-    override val owningProperty: KtKotlinPropertySymbol,
-    override val analysisContext: Fe10AnalysisContext
+    private konst propertyPsi: KtProperty,
+    override konst owningProperty: KtKotlinPropertySymbol,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtBackingFieldSymbol(), KtFe10Symbol {
-    val descriptor: FieldDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(propertyPsi, Fe10AnalysisFacade.AnalysisMode.PARTIAL)
+    konst descriptor: FieldDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(propertyPsi, Fe10AnalysisFacade.AnalysisMode.PARTIAL)
         (bindingContext[BindingContext.VARIABLE, propertyPsi] as? PropertyDescriptor)?.backingField
     }
 
@@ -45,13 +45,13 @@ internal class KtFe10PsiDefaultBackingFieldSymbol(
             ?: KtFe10NeverRestoringSymbolPointer()
     }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { owningProperty.returnType }
 
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = owningProperty.token
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFe10AnnotationsList.create(descriptor?.annotations ?: Annotations.EMPTY, analysisContext)
         }

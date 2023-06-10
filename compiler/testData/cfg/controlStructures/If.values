@@ -38,7 +38,7 @@ doSmth(r)                                                                       
 =====================
 == t2 ==
 fun t2(b: Boolean) {
-    val i = 3
+    konst i = 3
     if (b) {
         return;
     }
@@ -61,7 +61,7 @@ i is Int                                                               <v8>: Boo
 return                                                                 !<v9>: *                                                            
 { return; }                                                            !<v9>: *        COPY                                                
 if (i is Int) { return; }                                              <v10>: *        NEW: merge(if (i is Int) { return; }|!<v9>) -> <v10>
-{ val i = 3 if (b) { return; } doSmth(i) if (i is Int) { return; } }   <v10>: *        COPY                                                
+{ konst i = 3 if (b) { return; } doSmth(i) if (i is Int) { return; } }   <v10>: *        COPY                                                
 =====================
 == doSmth ==
 fun doSmth(s: String) {}

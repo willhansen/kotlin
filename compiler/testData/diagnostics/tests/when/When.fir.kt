@@ -15,8 +15,8 @@
 fun Int.foo() : Boolean = true
 
 fun foo() : Int {
-    val s = ""
-    val x = 1
+    konst s = ""
+    konst x = 1
     when (x) {
       is String -> 1
       <!USELESS_IS_CHECK!>!is Int<!> -> 1
@@ -33,11 +33,11 @@ fun foo() : Int {
     return 0
 }
 
-val _type_test : Int = foo() // this is needed to ensure the inferred return type of foo()
+konst _type_test : Int = foo() // this is needed to ensure the inferred return type of foo()
 
 fun test() {
-  val x = 1;
-  val s = "";
+  konst x = 1;
+  konst s = "";
 
   when (x) {
     <!INCOMPATIBLE_TYPES!>s<!> -> 1
@@ -46,7 +46,7 @@ fun test() {
     1 -> 1
   }
 
-  val z = 1
+  konst z = 1
 
   when (z) {
     <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 1

@@ -240,7 +240,7 @@ public final class ClassInitializerTranslator extends AbstractTranslator {
                 }
                 else {
                     // Add `void 0` for the trailing default arguments
-                    // Anonymous object constructor already has all the parameters proxied, including ones with default values
+                    // Anonymous object constructor already has all the parameters proxied, including ones with default konstues
                     if (!DescriptorUtils.isAnonymousObject(classDescriptor)) {
                         int maxValueArgumentIndex = 0;
                         for (ValueParameterDescriptor arg : superCall.getValueArguments().keySet()) {
@@ -281,9 +281,9 @@ public final class ClassInitializerTranslator extends AbstractTranslator {
             ExpressionValueArgument exprArgument = (ExpressionValueArgument) argument;
             assert exprArgument.getValueArgument() != null;
 
-            KtExpression value = exprArgument.getValueArgument().getArgumentExpression();
-            assert value != null;
-            JsExpression jsValue = Translation.translateAsExpression(value, context);
+            KtExpression konstue = exprArgument.getValueArgument().getArgumentExpression();
+            assert konstue != null;
+            JsExpression jsValue = Translation.translateAsExpression(konstue, context);
 
             if (KotlinBuiltIns.isStringOrNullableString(param.getType())) {
                 messageArgument = context.cacheExpressionIfNeeded(jsValue);

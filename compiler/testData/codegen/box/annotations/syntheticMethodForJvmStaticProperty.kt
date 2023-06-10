@@ -13,7 +13,7 @@ class WithCompanionJvmStatic {
 
     companion object {
         @JvmStatic
-        val property: Int
+        konst property: Int
             get() = 42
     }
 }
@@ -24,7 +24,7 @@ interface InterfaceWithCompanionJvmStatic {
 
     companion object {
         @JvmStatic
-        val property: Int
+        konst property: Int
             get() = 42
     }
 }
@@ -38,7 +38,7 @@ fun check(clazz: Class<*>, expected: Boolean = true) {
             assertTrue(method.isSynthetic())
             assertTrue(Modifier.isStatic(method.modifiers))
             assertTrue(Modifier.isPublic(method.modifiers))
-            val str = method.declaredAnnotations.single().toString()
+            konst str = method.declaredAnnotations.single().toString()
             assertTrue("@kotlin.jvm.JvmStatic\\(\\)".toRegex().matches(str), str)
             return
         }

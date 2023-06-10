@@ -4,20 +4,20 @@
 
 // TESTCASE NUMBER: 1
 fun <T> List<T>.case1() {
-    class Case1(val t: T)
-    class A(val t: T)
-    class B(val x: List<T>)
-    class C(val c: () -> T)
-    class E(val n: Nothing, val t: T)
+    class Case1(konst t: T)
+    class A(konst t: T)
+    class B(konst x: List<T>)
+    class C(konst c: () -> T)
+    class E(konst n: Nothing, konst t: T)
 }
 
 // TESTCASE NUMBER: 2
-val <T> List<T>.case2: Int
+konst <T> List<T>.case2: Int
     get() = {
-        class A(val t: T)
-        class B(val x: List<T>)
-        class C(val c: () -> T)
-        class E(val n: Nothing=TODO(), val t: T)
+        class A(konst t: T)
+        class B(konst x: List<T>)
+        class C(konst c: () -> T)
+        class E(konst n: Nothing=TODO(), konst t: T)
 
         fun test() {
             A(this.first())
@@ -32,10 +32,10 @@ val <T> List<T>.case2: Int
 // TESTCASE NUMBER: 3
 var <T> List<T>.case3: Unit
     get() {
-        class A(val t: T)
-        class B(val x: List<T>)
-        class C(val c: () -> T)
-        class E(val n: Nothing = TODO(), t: T)
+        class A(konst t: T)
+        class B(konst x: List<T>)
+        class C(konst c: () -> T)
+        class E(konst n: Nothing = TODO(), t: T)
 
         fun test() {
             A(this.first())
@@ -45,10 +45,10 @@ var <T> List<T>.case3: Unit
         }
     }
     set(i: Unit) {
-        class A(val t: T)
-        class B(val x: List<T>)
-        class C(val c: () -> T)
-        class E( t: T, val n: Nothing)
+        class A(konst t: T)
+        class B(konst x: List<T>)
+        class C(konst c: () -> T)
+        class E( t: T, konst n: Nothing)
 
         fun test() {
             A(this.first())

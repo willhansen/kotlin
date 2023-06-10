@@ -39,7 +39,7 @@ abstract class AbstractDiagnosticsTestWithJsStdLib : AbstractDiagnosticsTest() {
         }, CompilerEnvironment)
     }
 
-    protected val config: JsConfig get() = lazyConfig!!.value
+    protected konst config: JsConfig get() = lazyConfig!!.konstue
 
     override fun tearDown() {
         lazyConfig = null
@@ -67,16 +67,16 @@ abstract class AbstractDiagnosticsTestWithJsStdLib : AbstractDiagnosticsTest() {
     private fun getModuleKind(ktFiles: List<KtFile>): ModuleKind {
         var kind = ModuleKind.PLAIN
         for (file in ktFiles) {
-            val text = file.text
+            konst text = file.text
             for (textLine in StringUtil.splitByLines(text)) {
                 var line = textLine.trim { it <= ' ' }
                 if (!line.startsWith("//")) continue
                 line = line.substring(2).trim { it <= ' ' }
-                val parts = StringUtil.split(line, ":")
+                konst parts = StringUtil.split(line, ":")
                 if (parts.size != 2) continue
 
                 if (parts[0].trim { it <= ' ' } != "MODULE_KIND") continue
-                kind = ModuleKind.valueOf(parts[1].trim { it <= ' ' })
+                kind = ModuleKind.konstueOf(parts[1].trim { it <= ' ' })
             }
         }
 
@@ -92,9 +92,9 @@ abstract class AbstractDiagnosticsTestWithJsStdLib : AbstractDiagnosticsTest() {
         ModuleDescriptorImpl(Name.special("<$moduleName>"), storageManager, JsPlatformAnalyzerServices.builtIns)
 
     override fun createSealedModule(storageManager: StorageManager): ModuleDescriptorImpl {
-        val module = createModule("kotlin-js-test-module", storageManager)
+        konst module = createModule("kotlin-js-test-module", storageManager)
 
-        val dependencies = ArrayList<ModuleDescriptorImpl>()
+        konst dependencies = ArrayList<ModuleDescriptorImpl>()
         dependencies.add(module)
 
         dependencies.addAll(getAdditionalDependencies(module))

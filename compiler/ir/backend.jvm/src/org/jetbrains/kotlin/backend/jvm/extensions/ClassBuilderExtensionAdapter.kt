@@ -35,7 +35,7 @@ internal object ClassBuilderExtensionAdapter {
 }
 
 @Suppress("DEPRECATION_ERROR")
-private class ExtensionAdapter(private val extension: ClassGeneratorExtension) :
+private class ExtensionAdapter(private konst extension: ClassGeneratorExtension) :
     org.jetbrains.kotlin.codegen.extensions.ClassBuilderInterceptorExtension {
     override fun interceptClassBuilderFactory(
         interceptedFactory: ClassBuilderFactory,
@@ -43,8 +43,8 @@ private class ExtensionAdapter(private val extension: ClassGeneratorExtension) :
         diagnostics: DiagnosticSink,
     ): ClassBuilderFactory = object : DelegatingClassBuilderFactory(interceptedFactory) {
         override fun newClassBuilder(origin: JvmDeclarationOrigin): DelegatingClassBuilder {
-            val classBuilder = interceptedFactory.newClassBuilder(origin)
-            val irClass = origin.unwrapOrigin<IrClass>()
+            konst classBuilder = interceptedFactory.newClassBuilder(origin)
+            konst irClass = origin.unwrapOrigin<IrClass>()
             return DelegatingClassBuilderAdapter(
                 extension.generateClass(
                     ClassGeneratorAdapter(irClass, classBuilder),
@@ -56,7 +56,7 @@ private class ExtensionAdapter(private val extension: ClassGeneratorExtension) :
     }
 }
 
-private class ClassGeneratorAdapter(val irClass: IrClass?, val builder: ClassBuilder) : ClassGenerator {
+private class ClassGeneratorAdapter(konst irClass: IrClass?, konst builder: ClassBuilder) : ClassGenerator {
     override fun defineClass(
         version: Int, access: Int, name: String, signature: String?, superName: String, interfaces: Array<out String>
     ) {
@@ -64,9 +64,9 @@ private class ClassGeneratorAdapter(val irClass: IrClass?, val builder: ClassBui
     }
 
     override fun newField(
-        declaration: IrField?, access: Int, name: String, desc: String, signature: String?, value: Any?
+        declaration: IrField?, access: Int, name: String, desc: String, signature: String?, konstue: Any?
     ): FieldVisitor =
-        builder.newField(declaration.wrapToOrigin(), access, name, desc, signature, value)
+        builder.newField(declaration.wrapToOrigin(), access, name, desc, signature, konstue)
 
     override fun newMethod(
         declaration: IrFunction?, access: Int, name: String, desc: String, signature: String?, exceptions: Array<out String>?
@@ -97,8 +97,8 @@ private class ClassGeneratorAdapter(val irClass: IrClass?, val builder: ClassBui
 }
 
 private class DelegatingClassBuilderAdapter(
-    private val generator: ClassGenerator,
-    private val originalClassBuilder: ClassBuilder,
+    private konst generator: ClassGenerator,
+    private konst originalClassBuilder: ClassBuilder,
 ) : DelegatingClassBuilder() {
     override fun getDelegate(): ClassBuilder = originalClassBuilder
 
@@ -109,9 +109,9 @@ private class DelegatingClassBuilderAdapter(
     }
 
     override fun newField(
-        origin: JvmDeclarationOrigin, access: Int, name: String, desc: String, signature: String?, value: Any?
+        origin: JvmDeclarationOrigin, access: Int, name: String, desc: String, signature: String?, konstue: Any?
     ): FieldVisitor =
-        generator.newField(origin.unwrapOrigin(), access, name, desc, signature, value)
+        generator.newField(origin.unwrapOrigin(), access, name, desc, signature, konstue)
 
     override fun newMethod(
         origin: JvmDeclarationOrigin, access: Int, name: String, desc: String, signature: String?, exceptions: Array<out String>?

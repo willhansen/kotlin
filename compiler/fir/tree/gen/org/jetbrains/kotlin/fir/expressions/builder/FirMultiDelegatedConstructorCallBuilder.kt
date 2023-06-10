@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 
 @FirBuilderDsl
 class FirMultiDelegatedConstructorCallBuilder : FirAnnotationContainerBuilder {
-    val delegatedConstructorCalls: MutableList<FirDelegatedConstructorCall> = mutableListOf()
+    konst delegatedConstructorCalls: MutableList<FirDelegatedConstructorCall> = mutableListOf()
 
     @OptIn(FirImplementationDetail::class)
     override fun build(): FirMultiDelegatedConstructorCall {
@@ -47,7 +47,7 @@ class FirMultiDelegatedConstructorCallBuilder : FirAnnotationContainerBuilder {
         }
 
     @Deprecated("Modification of 'annotations' has no impact for FirMultiDelegatedConstructorCallBuilder", level = DeprecationLevel.HIDDEN)
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 }
 
 @OptIn(ExperimentalContracts::class)

@@ -18,7 +18,7 @@
 fun case_1(x: Interface1?) {
     var y = x
     y as Interface2
-    val foo = {
+    konst foo = {
         <!DEBUG_INFO_EXPRESSION_TYPE("Interface1?"), SMARTCAST_IMPOSSIBLE!>y<!>.itest2()
     }
     y = null
@@ -32,7 +32,7 @@ fun case_1(x: Interface1?) {
 fun case_2(x: Interface1?) {
     var y = x
     y as Interface2
-    val foo = fun () {
+    konst foo = fun () {
         <!DEBUG_INFO_EXPRESSION_TYPE("Interface1?"), SMARTCAST_IMPOSSIBLE!>y<!>.itest2()
     }
     y = null

@@ -22,7 +22,7 @@
 
 extern "C" {
 
-// Seeks for the specified id. In case of failure returns a valid pointer to some record, never returns nullptr.
+// Seeks for the specified id. In case of failure returns a konstid pointer to some record, never returns nullptr.
 // It is the caller's responsibility to check if the search has succeeded or not.
 InterfaceTableRecord const* LookupInterfaceTableRecord(InterfaceTableRecord const* interfaceTable,
                                                        int interfaceTableSize, ClassId interfaceId) {

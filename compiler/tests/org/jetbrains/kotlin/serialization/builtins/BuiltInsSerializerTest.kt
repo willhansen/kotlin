@@ -32,7 +32,7 @@ import java.io.FileInputStream
 
 class BuiltInsSerializerTest : TestCaseWithTmpdir() {
     private fun doTest(fileName: String) {
-        val source = "compiler/testData/serialization/builtinsSerializer/$fileName"
+        konst source = "compiler/testData/serialization/builtinsSerializer/$fileName"
         BuiltInsSerializer.analyzeAndSerialize(
             tmpdir,
             srcDirs = listOf(File(source)),
@@ -41,9 +41,9 @@ class BuiltInsSerializerTest : TestCaseWithTmpdir() {
             onComplete = { _, _ -> }
         )
 
-        val module = KotlinTestUtils.createEmptyModule("<module>", DefaultBuiltIns.Instance)
+        konst module = KotlinTestUtils.createEmptyModule("<module>", DefaultBuiltIns.Instance)
 
-        val packageFragmentProvider = BuiltInsLoaderImpl().createBuiltInPackageFragmentProvider(
+        konst packageFragmentProvider = BuiltInsLoaderImpl().createBuiltInPackageFragmentProvider(
             LockBasedStorageManager("BuiltInsSerializerTest"),
             module,
             setOf(TEST_PACKAGE_FQNAME),
@@ -58,7 +58,7 @@ class BuiltInsSerializerTest : TestCaseWithTmpdir() {
         module.initialize(packageFragmentProvider)
         module.setDependencies(module, module.builtIns.builtInsModule)
 
-        RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptorWithFile(
+        RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptorWithFile(
             module.getPackage(TEST_PACKAGE_FQNAME),
             RecursiveDescriptorComparator.DONT_INCLUDE_METHODS_OF_OBJECT,
             File(source.replace(".kt", ".txt"))

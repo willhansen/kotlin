@@ -12,11 +12,11 @@ open class Base {
 }
 
 class C : Base(), IBase {
-    val lambda1 = {
+    konst lambda1 = {
         super.foo()
     }
 
-    val lambda2 = {
+    konst lambda2 = {
         super.bar()
     }
 }

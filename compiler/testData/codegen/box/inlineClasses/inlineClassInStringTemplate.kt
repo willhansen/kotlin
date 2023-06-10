@@ -5,7 +5,7 @@
 import kotlin.test.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val value: Int)
+konstue class Z(konst konstue: Int)
 
 fun test1_1(z: Z) = "$z"
 fun test1_2(z: Z) = "$z$z"
@@ -22,12 +22,12 @@ fun test2_concat2(z: Z?) = "$z" + z
 fun test2_concat3(z: Z?) = "-" + z + z
 
 fun box(): String {
-    assertEquals("Z(value=42)", test1_1(Z(42)))
-    assertEquals("Z(value=42)Z(value=42)", test1_2(Z(42)))
-    assertEquals("Z(value=42) Z(value=42) Z(value=42)", test1_many(Z(42)))
-    assertEquals("-Z(value=42)", test1_concat1(Z(42)))
-    assertEquals("Z(value=42)Z(value=42)", test1_concat2(Z(42)))
-    assertEquals("-Z(value=42)Z(value=42)", test1_concat3(Z(42)))
+    assertEquals("Z(konstue=42)", test1_1(Z(42)))
+    assertEquals("Z(konstue=42)Z(konstue=42)", test1_2(Z(42)))
+    assertEquals("Z(konstue=42) Z(konstue=42) Z(konstue=42)", test1_many(Z(42)))
+    assertEquals("-Z(konstue=42)", test1_concat1(Z(42)))
+    assertEquals("Z(konstue=42)Z(konstue=42)", test1_concat2(Z(42)))
+    assertEquals("-Z(konstue=42)Z(konstue=42)", test1_concat3(Z(42)))
 
     assertEquals("null", test2_1(null))
     assertEquals("nullnull", test2_2(null))
@@ -36,12 +36,12 @@ fun box(): String {
     assertEquals("nullnull", test2_concat2(null))
     assertEquals("-nullnull", test2_concat3(null))
 
-    assertEquals("Z(value=42)", test2_1(Z(42)))
-    assertEquals("Z(value=42)Z(value=42)", test2_2(Z(42)))
-    assertEquals("Z(value=42) Z(value=42) Z(value=42)", test2_many(Z(42)))
-    assertEquals("-Z(value=42)", test2_concat1(Z(42)))
-    assertEquals("Z(value=42)Z(value=42)", test2_concat2(Z(42)))
-    assertEquals("-Z(value=42)Z(value=42)", test2_concat3(Z(42)))
+    assertEquals("Z(konstue=42)", test2_1(Z(42)))
+    assertEquals("Z(konstue=42)Z(konstue=42)", test2_2(Z(42)))
+    assertEquals("Z(konstue=42) Z(konstue=42) Z(konstue=42)", test2_many(Z(42)))
+    assertEquals("-Z(konstue=42)", test2_concat1(Z(42)))
+    assertEquals("Z(konstue=42)Z(konstue=42)", test2_concat2(Z(42)))
+    assertEquals("-Z(konstue=42)Z(konstue=42)", test2_concat3(Z(42)))
 
     return "OK"
 }

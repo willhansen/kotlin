@@ -50,7 +50,7 @@ import static org.jetbrains.kotlin.test.util.DescriptorValidator.ValidationVisit
 import static org.jetbrains.kotlin.test.util.RecursiveDescriptorComparator.DONT_INCLUDE_METHODS_OF_OBJECT;
 import static org.jetbrains.kotlin.test.util.RecursiveDescriptorComparator.RECURSIVE;
 import static org.jetbrains.kotlin.test.util.RecursiveDescriptorComparatorAdaptor.compareDescriptors;
-import static org.jetbrains.kotlin.test.util.RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptorWithFile;
+import static org.jetbrains.kotlin.test.util.RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptorWithFile;
 
 /*
     The generated test compares package descriptors loaded from kotlin sources and read from compiled java.
@@ -161,13 +161,13 @@ public abstract class AbstractLoadJavaTest extends TestCaseWithTmpdir {
             }
         }
 
-        DescriptorValidator.validate(errorTypesForbidden(), packageFromSource);
-        DescriptorValidator.validate(new DeserializedScopeValidationVisitor(), packageFromBinary);
+        DescriptorValidator.konstidate(errorTypesForbidden(), packageFromSource);
+        DescriptorValidator.konstidate(new DeserializedScopeValidationVisitor(), packageFromBinary);
         Configuration comparatorConfiguration = COMPARATOR_CONFIGURATION.checkPrimaryConstructors(true).checkPropertyAccessors(true).checkFunctionContracts(true);
 
         if (InTextDirectivesUtils.isDirectiveDefined(fileContent, "NO_CHECK_SOURCE_VS_BINARY")) {
             // If NO_CHECK_SOURCE_VS_BINARY is enabled, only check that binary descriptors correspond to the .txt file content
-            validateAndCompareDescriptorWithFile(packageFromBinary, comparatorConfiguration, txtFile);
+            konstidateAndCompareDescriptorWithFile(packageFromBinary, comparatorConfiguration, txtFile);
         }
         else {
             compareDescriptors(packageFromSource, packageFromBinary, comparatorConfiguration, txtFile);
@@ -253,7 +253,7 @@ public abstract class AbstractLoadJavaTest extends TestCaseWithTmpdir {
         PackageViewDescriptor packageView = module.getPackage(TEST_PACKAGE_FQNAME);
         assertFalse(packageView.isEmpty());
 
-        validateAndCompareDescriptorWithFile(packageView, COMPARATOR_CONFIGURATION.withValidationStrategy(
+        konstidateAndCompareDescriptorWithFile(packageView, COMPARATOR_CONFIGURATION.withValidationStrategy(
                 new DeserializedScopeValidationVisitor()
         ), expectedFile);
     }
@@ -373,7 +373,7 @@ public abstract class AbstractLoadJavaTest extends TestCaseWithTmpdir {
             fail = true;
         }
 
-        validateAndCompareDescriptorWithFile(javaPackage, configuration, txtFile);
+        konstidateAndCompareDescriptorWithFile(javaPackage, configuration, txtFile);
 
         if (fail) {
             fail("See error above");

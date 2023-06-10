@@ -44,7 +44,7 @@ fun nestedCalls() {
 }
 
 fun directStaticCFunctionCall() {
-    val funPtr = staticCFunction { ->
+    konst funPtr = staticCFunction { ->
         assertRunnableThreadState()
     }
     assertRunnableThreadState()

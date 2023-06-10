@@ -13,44 +13,44 @@ import org.jetbrains.kotlin.spec.utils.models.CommonSpecTestFileInfoElementType
 import org.jetbrains.kotlin.spec.utils.models.SpecTestInfoElements
 import org.jetbrains.kotlin.spec.utils.parsers.CommonParser.splitByComma
 import org.jetbrains.kotlin.spec.utils.parsers.CommonParser.withUnderscores
-import org.jetbrains.kotlin.spec.utils.validators.SpecTestValidationException
-import org.jetbrains.kotlin.spec.utils.validators.SpecTestValidationFailedReason
+import org.jetbrains.kotlin.spec.utils.konstidators.SpecTestValidationException
+import org.jetbrains.kotlin.spec.utils.konstidators.SpecTestValidationFailedReason
 import java.io.File
 
 data class ParsedTestFile(
-    val testArea: TestArea,
-    val testType: TestType,
-    val testNumber: Int,
-    val testDescription: String,
-    val testInfoElements: SpecTestInfoElements<SpecTestInfoElementType>,
-    val testCasesSet: SpecTestCasesSet,
-    val unexpectedBehavior: Boolean,
-    val issues: Set<String>,
-    val helpers: Set<String>?,
-    val exception: TestsExceptionType?
+    konst testArea: TestArea,
+    konst testType: TestType,
+    konst testNumber: Int,
+    konst testDescription: String,
+    konst testInfoElements: SpecTestInfoElements<SpecTestInfoElementType>,
+    konst testCasesSet: SpecTestCasesSet,
+    konst unexpectedBehavior: Boolean,
+    konst issues: Set<String>,
+    konst helpers: Set<String>?,
+    konst exception: TestsExceptionType?
 )
 
 private fun parseTestInfo(testFilePath: String, testFiles: TestFiles, linkedTestType: SpecTestLinkedType): ParsedTestFile {
-    val patterns = linkedTestType.patterns.value
-    val testInfoByFilenameMatcher = patterns.testPathPattern.matcher(testFilePath)
+    konst patterns = linkedTestType.patterns.konstue
+    konst testInfoByFilenameMatcher = patterns.testPathPattern.matcher(testFilePath)
 
     if (!testInfoByFilenameMatcher.find())
         throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_NOT_VALID)
 
-    val testInfoByContentMatcher = patterns.testInfoPattern.matcher(FileUtil.loadFile(File(testFilePath), true))
+    konst testInfoByContentMatcher = patterns.testInfoPattern.matcher(FileUtil.loadFile(File(testFilePath), true))
 
     if (!testInfoByContentMatcher.find())
         throw SpecTestValidationException(SpecTestValidationFailedReason.TESTINFO_NOT_VALID)
 
-    val testInfoElements = CommonParser.parseTestInfoElements(
-        arrayOf(*CommonInfoElementType.values(), *CommonSpecTestFileInfoElementType.values(), *linkedTestType.infoElements.value),
+    konst testInfoElements = CommonParser.parseTestInfoElements(
+        arrayOf(*CommonInfoElementType.konstues(), *CommonSpecTestFileInfoElementType.konstues(), *linkedTestType.infoElements.konstue),
         testInfoByContentMatcher.group("infoElements")
     )
-    val helpers = testInfoElements[CommonSpecTestFileInfoElementType.HELPERS]?.content?.splitByComma()?.toSet()
+    konst helpers = testInfoElements[CommonSpecTestFileInfoElementType.HELPERS]?.content?.splitByComma()?.toSet()
 
     return ParsedTestFile(
-        testArea = TestArea.valueOf(testInfoByContentMatcher.group("testArea").withUnderscores()),
-        testType = TestType.valueOf(testInfoByContentMatcher.group("testType")),
+        testArea = TestArea.konstueOf(testInfoByContentMatcher.group("testArea").withUnderscores()),
+        testType = TestType.konstueOf(testInfoByContentMatcher.group("testType")),
         testNumber = testInfoElements[CommonSpecTestFileInfoElementType.NUMBER]!!.content.toInt(),
         testDescription = testInfoElements[CommonSpecTestFileInfoElementType.DESCRIPTION]!!.content,
         testInfoElements = testInfoElements,
@@ -64,26 +64,26 @@ private fun parseTestInfo(testFilePath: String, testFiles: TestFiles, linkedTest
 
 
 private fun parseImplementationTestInfo(testFilePath: String, linkedTestType: SpecTestLinkedType): ParsedTestFile {
-    val patterns = linkedTestType.patterns.value
-    val testInfoByContentMatcher = patterns.testInfoPattern.matcher(FileUtil.loadFile(File(testFilePath), true))
+    konst patterns = linkedTestType.patterns.konstue
+    konst testInfoByContentMatcher = patterns.testInfoPattern.matcher(FileUtil.loadFile(File(testFilePath), true))
 
     if (!testInfoByContentMatcher.find()) {
         throw SpecTestValidationException(SpecTestValidationFailedReason.TESTINFO_NOT_VALID)
     }
 
-    val testInfoElements = CommonParser.parseTestInfoElements(
+    konst testInfoElements = CommonParser.parseTestInfoElements(
         arrayOf(
-            *CommonInfoElementType.values(),
-            *linkedTestType.infoElements.value
+            *CommonInfoElementType.konstues(),
+            *linkedTestType.infoElements.konstue
         ),
         testInfoByContentMatcher.group("infoElements")
     )
 
-    val fileNameWithoutExtension = testFilePath.split("/").last().replace(".kt", "")
+    konst fileNameWithoutExtension = testFilePath.split("/").last().replace(".kt", "")
 
     return ParsedTestFile(
-        testArea = TestArea.valueOf(testInfoByContentMatcher.group("testArea").withUnderscores()),
-        testType = TestType.valueOf(testInfoByContentMatcher.group("testType")),
+        testArea = TestArea.konstueOf(testInfoByContentMatcher.group("testArea").withUnderscores()),
+        testType = TestType.konstueOf(testInfoByContentMatcher.group("testType")),
         testNumber = testInfoElements[CommonSpecTestFileInfoElementType.NUMBER]?.content?.toInt() ?: 0,
         testDescription = fileNameWithoutExtension.uppercase()[0] + fileNameWithoutExtension.substring(1)
             .replace(Regex("""([A-Z])"""), " $1").lowercase(),

@@ -30,9 +30,9 @@ import org.jetbrains.kotlin.types.expressions.ClassLiteralChecker
 
 class JsNativeRttiChecker : RttiExpressionChecker, ClassLiteralChecker {
     override fun check(rttiInformation: RttiExpressionInformation, reportOn: PsiElement, trace: BindingTrace) {
-        val sourceType = rttiInformation.sourceType
-        val targetType = rttiInformation.targetType
-        val targetDescriptor = targetType?.constructor?.declarationDescriptor
+        konst sourceType = rttiInformation.sourceType
+        konst targetType = rttiInformation.targetType
+        konst targetDescriptor = targetType?.constructor?.declarationDescriptor
         if (sourceType != null && targetDescriptor != null && AnnotationsUtils.isNativeInterface(targetDescriptor)) {
             when (rttiInformation.operation) {
                 RttiOperation.IS,
@@ -45,7 +45,7 @@ class JsNativeRttiChecker : RttiExpressionChecker, ClassLiteralChecker {
     }
 
     override fun check(expression: KtClassLiteralExpression, type: KotlinType, context: ResolutionContext<*>) {
-        val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return
+        konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return
         if (AnnotationsUtils.isNativeInterface(descriptor)) {
             context.trace.report(ErrorsJs.EXTERNAL_INTERFACE_AS_CLASS_LITERAL.on(expression))
         }

@@ -1,5 +1,5 @@
 fun box(): String {
-    val z = 1;
+    konst z = 1;
     return "O" + "K".toString() + z
 }
 

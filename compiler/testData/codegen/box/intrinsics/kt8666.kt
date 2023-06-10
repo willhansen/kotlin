@@ -1,16 +1,16 @@
-val MAX_LONG = "9223372036854775807"
-val PREFIX = "max = "
+konst MAX_LONG = "9223372036854775807"
+konst PREFIX = "max = "
 
 fun customToString(prefix: String, l: Long, concat: (String, Long) -> String) = concat(prefix, l)
 
 fun customToString(l: Long, concat: (Long) -> String) = concat(l)
 
-val stringPlus = String::plus
-val stringNPlus = String?::plus
-val emptyStringPlus = ""::plus
-val emptyStringNPlus = ("" as String?)::plus
-val prefixPlus = PREFIX::plus
-val prefixNPlus = (PREFIX as String?)::plus
+konst stringPlus = String::plus
+konst stringNPlus = String?::plus
+konst emptyStringPlus = ""::plus
+konst emptyStringNPlus = ("" as String?)::plus
+konst prefixPlus = PREFIX::plus
+konst prefixNPlus = (PREFIX as String?)::plus
 
 fun box(): String {
     if (MAX_LONG != "${Long.MAX_VALUE}") return "fail template"

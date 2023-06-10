@@ -31,11 +31,11 @@ import javax.annotation.meta.When;
  * The annotated element could be null under some circumstances.
  * 
  * In general, this means developers will have to read the documentation to
- * determine when a null value is acceptable and whether it is necessary to
- * check for a null value.
+ * determine when a null konstue is acceptable and whether it is necessary to
+ * check for a null konstue.
  * 
  * When this annotation is applied to a method it applies to the method return
- * value.
+ * konstue.
  * 
  * @deprecated - use {@link javax.annotation.Nullable} instead. 
  **/

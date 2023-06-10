@@ -15,91 +15,91 @@ import java.io.File
 import java.util.*
 
 internal class GradleKpmFragmentGranularMetadataResolver(
-    private val requestingFragment: GradleKpmFragment,
-    private val refinesParentResolvers: Lazy<Iterable<GradleKpmFragmentGranularMetadataResolver>>
+    private konst requestingFragment: GradleKpmFragment,
+    private konst refinesParentResolvers: Lazy<Iterable<GradleKpmFragmentGranularMetadataResolver>>
 ) {
-    val resolutions: Iterable<MetadataDependencyResolution> by lazy {
+    konst resolutions: Iterable<MetadataDependencyResolution> by lazy {
         doResolveMetadataDependencies()
     }
 
-    private val project: Project
+    private konst project: Project
         get() = requestingFragment.containingModule.project
 
-    private val parentResultsByModuleIdentifier: Map<KpmModuleIdentifier, List<MetadataDependencyResolution>> by lazy {
-        refinesParentResolvers.value.flatMap { it.resolutions }.groupBy { it.dependency.toSingleKpmModuleIdentifier() }
+    private konst parentResultsByModuleIdentifier: Map<KpmModuleIdentifier, List<MetadataDependencyResolution>> by lazy {
+        refinesParentResolvers.konstue.flatMap { it.resolutions }.groupBy { it.dependency.toSingleKpmModuleIdentifier() }
     }
 
-    private val moduleResolver = GradleKpmModuleDependencyResolver.getForCurrentBuild(project)
-    private val variantResolver = KpmGradleModuleVariantResolver.getForCurrentBuild(project)
-    private val fragmentResolver = KpmDefaultFragmentsResolver(variantResolver)
-    private val dependencyGraphResolver = GradleKpmDependencyGraphResolver(moduleResolver)
+    private konst moduleResolver = GradleKpmModuleDependencyResolver.getForCurrentBuild(project)
+    private konst variantResolver = KpmGradleModuleVariantResolver.getForCurrentBuild(project)
+    private konst fragmentResolver = KpmDefaultFragmentsResolver(variantResolver)
+    private konst dependencyGraphResolver = GradleKpmDependencyGraphResolver(moduleResolver)
 
     @Suppress("UNREACHABLE_CODE", "UNUSED_VARIABLE")
     private fun doResolveMetadataDependencies(): Iterable<MetadataDependencyResolution> {
-        val configurationToResolve = configurationToResolveMetadataDependencies(requestingFragment.containingModule)
-        val resolvedComponentsByModuleId =
+        konst configurationToResolve = configurationToResolveMetadataDependencies(requestingFragment.containingModule)
+        konst resolvedComponentsByModuleId =
             configurationToResolve.incoming.resolutionResult.allComponents.associateBy { it.toSingleKpmModuleIdentifier() }
-        val resolvedDependenciesByModuleId =
+        konst resolvedDependenciesByModuleId =
             configurationToResolve.incoming.resolutionResult.allDependencies.filterIsInstance<ResolvedDependencyResult>()
                 .flatMap { dependency -> dependency.requested.toKpmModuleIdentifiers().map { id -> id to dependency } }.toMap()
 
-        val dependencyGraph = dependencyGraphResolver.resolveDependencyGraph(requestingFragment.containingModule)
+        konst dependencyGraph = dependencyGraphResolver.resolveDependencyGraph(requestingFragment.containingModule)
 
         if (dependencyGraph is KpmDependencyGraphResolution.Unknown)
             error("unexpected failure in dependency graph resolution for $requestingFragment in $project")
 
         dependencyGraph as GradleKpmDependencyGraph // refactor the type hierarchy to avoid this downcast? FIXME?
-        val fragmentsToInclude = requestingFragment.withRefinesClosure
-        val requestedDependencies = dependencyGraph.root.dependenciesByFragment.filterKeys { it in fragmentsToInclude }.values.flatten()
+        konst fragmentsToInclude = requestingFragment.withRefinesClosure
+        konst requestedDependencies = dependencyGraph.root.dependenciesByFragment.filterKeys { it in fragmentsToInclude }.konstues.flatten()
 
-        val visited = mutableSetOf<GradleKpmDependencyGraphNode>()
-        val fragmentResolutionQueue = ArrayDeque<GradleKpmDependencyGraphNode>(requestedDependencies)
+        konst visited = mutableSetOf<GradleKpmDependencyGraphNode>()
+        konst fragmentResolutionQueue = ArrayDeque<GradleKpmDependencyGraphNode>(requestedDependencies)
 
-        val results = mutableSetOf<MetadataDependencyResolution>()
+        konst results = mutableSetOf<MetadataDependencyResolution>()
 
         while (fragmentResolutionQueue.isNotEmpty()) {
-            val dependencyNode = fragmentResolutionQueue.removeFirst()
+            konst dependencyNode = fragmentResolutionQueue.removeFirst()
             if (!visited.add(dependencyNode)) {
                 continue
             }
 
-            val dependencyModule = dependencyNode.module
+            konst dependencyModule = dependencyNode.module
 
-            val fragmentVisibility = fragmentResolver.getChosenFragments(requestingFragment, dependencyModule)
-            val chosenFragments = fragmentVisibility as? KpmFragmentResolution.ChosenFragments
-            val visibleFragments = chosenFragments?.visibleFragments?.toList().orEmpty()
+            konst fragmentVisibility = fragmentResolver.getChosenFragments(requestingFragment, dependencyModule)
+            konst chosenFragments = fragmentVisibility as? KpmFragmentResolution.ChosenFragments
+            konst visibleFragments = chosenFragments?.visibleFragments?.toList().orEmpty()
 
-            val visibleTransitiveDependencies =
-                dependencyNode.dependenciesByFragment.filterKeys { it in visibleFragments }.values.flattenTo(mutableSetOf())
+            konst visibleTransitiveDependencies =
+                dependencyNode.dependenciesByFragment.filterKeys { it in visibleFragments }.konstues.flattenTo(mutableSetOf())
 
             fragmentResolutionQueue.addAll(visibleTransitiveDependencies.filter { it !in visited })
 
-            val resolvedComponentResult = dependencyNode.selectedComponent
-            val result = when (dependencyModule) {
+            konst resolvedComponentResult = dependencyNode.selectedComponent
+            konst result = when (dependencyModule) {
                 is GradleKpmExternalPlainModule -> {
                     MetadataDependencyResolution.KeepOriginalDependency(resolvedComponentResult)
                 }
 
                 else -> run {
 
-                    val metadataSourceComponent = dependencyNode.run { metadataSourceComponent ?: selectedComponent }
+                    konst metadataSourceComponent = dependencyNode.run { metadataSourceComponent ?: selectedComponent }
 
-                    val visibleFragmentNames = visibleFragments.map { it.fragmentName }.toSet()
-                    val visibleFragmentNamesExcludingVisibleByParents =
+                    konst visibleFragmentNames = visibleFragments.map { it.fragmentName }.toSet()
+                    konst visibleFragmentNamesExcludingVisibleByParents =
                         visibleFragmentNames.minus(fragmentsNamesVisibleByParents(metadataSourceComponent.toSingleKpmModuleIdentifier()))
 
                     /*
                     We can safely assume that a metadata extractor can be created, because the project structure metadata already
                     had to be read in order to create the Kotlin module and infer fragment visibility.
                     */
-                    val projectStructureMetadataExtractor: MppDependencyProjectStructureMetadataExtractor =
+                    konst projectStructureMetadataExtractor: MppDependencyProjectStructureMetadataExtractor =
                         TODO("Implement for KPM. As it done for TCS")
 
-                    val projectStructureMetadata = (dependencyModule as? GradleKpmExternalImportedModule)?.projectStructureMetadata
+                    konst projectStructureMetadata = (dependencyModule as? GradleKpmExternalImportedModule)?.projectStructureMetadata
                         ?: checkNotNull(projectStructureMetadataExtractor.getProjectStructureMetadata())
 
 
-                    val metadataProvider = when (projectStructureMetadataExtractor) {
+                    konst metadataProvider = when (projectStructureMetadataExtractor) {
                         is ProjectMppDependencyProjectStructureMetadataExtractor -> TODO("Implement ProjectStructureMetadata for KPM")
 
                         is JarMppDependencyProjectStructureMetadataExtractor -> ArtifactMetadataProvider(
@@ -130,8 +130,8 @@ internal class GradleKpmFragmentGranularMetadataResolver(
         }
 
         // FIXME this code is based on whole components; use module IDs with classifiers instead
-        val resultSourceComponents = results.mapTo(mutableSetOf()) { it.dependency }
-        resolvedComponentsByModuleId.values.minus(resultSourceComponents).forEach {
+        konst resultSourceComponents = results.mapTo(mutableSetOf()) { it.dependency }
+        resolvedComponentsByModuleId.konstues.minus(resultSourceComponents).forEach {
             results.add(MetadataDependencyResolution.Exclude.Unrequested(it))
         }
 
@@ -139,7 +139,7 @@ internal class GradleKpmFragmentGranularMetadataResolver(
     }
 
     private fun fragmentsNamesVisibleByParents(kotlinModuleIdentifier: KpmModuleIdentifier): MutableSet<String> {
-        val parentResolutionsForDependency = parentResultsByModuleIdentifier[kotlinModuleIdentifier].orEmpty()
+        konst parentResolutionsForDependency = parentResultsByModuleIdentifier[kotlinModuleIdentifier].orEmpty()
         return parentResolutionsForDependency.filterIsInstance<MetadataDependencyResolution.ChooseVisibleSourceSets>()
             .flatMapTo(mutableSetOf()) { it.allVisibleSourceSetNames }
     }
@@ -148,20 +148,20 @@ internal class GradleKpmFragmentGranularMetadataResolver(
         dependencyModule: GradleKpmExternalImportedModule,
         chosenFragments: KpmFragmentResolution.ChosenFragments,
     ): Map<String, File> {
-        val visibleFragments = chosenFragments.visibleFragments
-        val variantResolutions = chosenFragments.variantResolutions
-        val hostSpecificFragments = dependencyModule.hostSpecificFragments
+        konst visibleFragments = chosenFragments.visibleFragments
+        konst variantResolutions = chosenFragments.variantResolutions
+        konst hostSpecificFragments = dependencyModule.hostSpecificFragments
         return visibleFragments.intersect(hostSpecificFragments).mapNotNull { hostSpecificFragment ->
-            val relevantVariantResolution = variantResolutions
+            konst relevantVariantResolution = variantResolutions
                 .filterIsInstance<KpmVariantResolution.KpmVariantMatch>()
                 // find some of our variants that resolved a dependency's variant containing the fragment
                 .find { hostSpecificFragment in it.chosenVariant.withRefinesClosure }
             // resolve the dependencies of that variant getting the host-specific metadata artifact
             @Suppress("UNREACHABLE_CODE", "UNUSED_VARIABLE")
             relevantVariantResolution?.let { resolution ->
-                val configurationResolvingPlatformVariant =
+                konst configurationResolvingPlatformVariant =
                     (resolution.requestingVariant as GradleKpmVariant).compileDependenciesConfiguration
-                val hostSpecificArtifact: File? = TODO("Implement host-specific lookup for KPM as it done for TCS")
+                konst hostSpecificArtifact: File? = TODO("Implement host-specific lookup for KPM as it done for TCS")
                 hostSpecificArtifact?.let { hostSpecificFragment.fragmentName to it }
             }
         }.toMap()

@@ -20,7 +20,7 @@ fun fibonacci(): Sequence<Int> {
     var a = 0
     var b = 1
     fun next(): Int {
-        val res = a + b
+        konst res = a + b
         a = b
         b = res
         return res
@@ -60,16 +60,16 @@ open class EulerBenchmark {
     
     //Benchmark
     fun problem4(): Long {
-        val s: Long = BENCHMARK_SIZE.toLong()
-        val maxLimit = (s-1)*(s-1)
-        val minLimit = (s/10)*(s/10)
-        val maxDiv = BENCHMARK_SIZE-1
-        val minDiv = BENCHMARK_SIZE/10
+        konst s: Long = BENCHMARK_SIZE.toLong()
+        konst maxLimit = (s-1)*(s-1)
+        konst minLimit = (s/10)*(s/10)
+        konst maxDiv = BENCHMARK_SIZE-1
+        konst minDiv = BENCHMARK_SIZE/10
         for (i in maxLimit downTo minLimit) {
             if (!i.isPalindrome()) continue;
             for (j in minDiv..maxDiv) {
                 if (i % j == 0L) {
-                    val res = i / j
+                    konst res = i / j
                     if (res in minDiv.toLong()..maxDiv.toLong()) {
                         return i
                     }
@@ -79,7 +79,7 @@ open class EulerBenchmark {
         return -1
     }
 
-    private val veryLongNumber = """
+    private konst veryLongNumber = """
         73167176531330624919225119674426574742355349194934
         96983520312774506326239578318016984801869478851843
         85861560789112949495459501737958331952853208805511
@@ -105,12 +105,12 @@ open class EulerBenchmark {
     
     //Benchmark
     fun problem8(): Long {
-        val productSize = when(BENCHMARK_SIZE) {
+        konst productSize = when(BENCHMARK_SIZE) {
             in 1..10 -> 4
             in 11..1000 -> 8
             else -> 13
         }
-        val digits: MutableList<Int> = ArrayList()
+        konst digits: MutableList<Int> = ArrayList()
         for (digit in veryLongNumber) {
             if (digit in '0'..'9') {
                 digits.add(digit.toInt() - '0'.toInt())
@@ -130,17 +130,17 @@ open class EulerBenchmark {
     
     //Benchmark
     fun problem9(): Long {
-        val BENCHMARK_SIZE = BENCHMARK_SIZE // Looks awful but removes all implicit getSize() calls
+        konst BENCHMARK_SIZE = BENCHMARK_SIZE // Looks awful but removes all implicit getSize() calls
         for (c in BENCHMARK_SIZE/3..BENCHMARK_SIZE-3) {
-            val c2 = c.toLong() * c.toLong()
+            konst c2 = c.toLong() * c.toLong()
             for (b in (BENCHMARK_SIZE-c)/2..c-1) {
                 if (b+c >= BENCHMARK_SIZE)
                     break
-                val a = BENCHMARK_SIZE - b - c
+                konst a = BENCHMARK_SIZE - b - c
                 if (a >= b)
                     continue
-                val b2 = b.toLong() * b.toLong()
-                val a2 = a.toLong() * a.toLong()
+                konst b2 = b.toLong() * b.toLong()
+                konst a2 = a.toLong() * a.toLong()
                 if (c2 == b2 + a2) {
                     return a.toLong() * b.toLong() * c.toLong()
                 }
@@ -149,51 +149,51 @@ open class EulerBenchmark {
         return -1L
     }
 
-    data class Children(val left: Int, val right: Int)
+    data class Children(konst left: Int, konst right: Int)
 
     //Benchmark
     fun problem14(): List<Int> {
-        // Simplified problem is solved here: it's not allowed to leave the interval [0..BENCHMARK_SIZE) inside a number chain
-        val BENCHMARK_SIZE = BENCHMARK_SIZE
+        // Simplified problem is solved here: it's not allowed to leave the interkonst [0..BENCHMARK_SIZE) inside a number chain
+        konst BENCHMARK_SIZE = BENCHMARK_SIZE
         // Build a tree
         // index is produced from first & second
-        val tree = Array(BENCHMARK_SIZE, { i -> Children(i*2, if (i>4 && (i+2) % 6 == 0) (i-1)/3 else 0)})
+        konst tree = Array(BENCHMARK_SIZE, { i -> Children(i*2, if (i>4 && (i+2) % 6 == 0) (i-1)/3 else 0)})
         // Find longest chain by DFS
         fun dfs(begin: Int): List<Int> {
             if (begin == 0 || begin >= BENCHMARK_SIZE)
                 return listOf()
-            val left = dfs(tree[begin].left)
-            val right = dfs(tree[begin].right)
+            konst left = dfs(tree[begin].left)
+            konst right = dfs(tree[begin].right)
             return listOf(begin) + if (left.size > right.size) left else right
         }
         return dfs(1)
     }
 
-    data class Way(val length: Int, val next: Int)
+    data class Way(konst length: Int, konst next: Int)
 
     
     //Benchmark
     fun problem14full(): List<Int> {
-        val BENCHMARK_SIZE = BENCHMARK_SIZE
+        konst BENCHMARK_SIZE = BENCHMARK_SIZE
         // Previous achievements: map (number) -> (length, next)
-        val map: MutableMap<Int, Way> = HashMap()
+        konst map: MutableMap<Int, Way> = HashMap()
         // Starting point
         map.put(1, Way(0, 0))
         // Check all other numbers
         var bestNum = 0
         var bestLen = 0
         fun go(begin: Int): Way {
-            val res = map[begin]
+            konst res = map[begin]
             if (res != null)
                 return res
-            val next = if (begin % 2 == 0) begin/2 else 3*begin+1
-            val childRes = go(next)
-            val myRes = Way(childRes.length + 1, next)
+            konst next = if (begin % 2 == 0) begin/2 else 3*begin+1
+            konst childRes = go(next)
+            konst myRes = Way(childRes.length + 1, next)
             map[begin] = myRes
             return myRes
         }
         for (i in 2..BENCHMARK_SIZE-1) {
-            val res = go(i)
+            konst res = go(i)
             if (res.length > bestLen) {
                 bestLen = res.length
                 bestNum = i
@@ -202,7 +202,7 @@ open class EulerBenchmark {
         fun unroll(begin: Int): List<Int> {
             if (begin == 0)
                 return listOf()
-            val next = map[begin]?.next ?: 0
+            konst next = map[begin]?.next ?: 0
             return listOf(begin) + unroll(next)
         }
         return unroll(bestNum)

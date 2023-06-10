@@ -18,12 +18,12 @@ import org.jetbrains.kotlin.types.expressions.OperatorConventions
 
 class ReadWriteAccessCheckerDescriptorsImpl : ReadWriteAccessChecker {
     override fun readWriteAccessWithFullExpressionByResolve(assignment: KtBinaryExpression): Pair<ReferenceAccess, KtExpression> {
-        val resolvedCall = analyze(assignment) {
+        konst resolvedCall = analyze(assignment) {
             with((this as KtFe10AnalysisSession).analysisContext.analyze(assignment, Fe10AnalysisFacade.AnalysisMode.PARTIAL)) {
                 assignment.getCall(this)?.getResolvedCall(this) ?: return ReferenceAccess.READ_WRITE to assignment
             }
         }
-        return if (resolvedCall.resultingDescriptor.name in OperatorConventions.ASSIGNMENT_OPERATIONS.values)
+        return if (resolvedCall.resultingDescriptor.name in OperatorConventions.ASSIGNMENT_OPERATIONS.konstues)
             ReferenceAccess.READ to assignment
         else
             ReferenceAccess.READ_WRITE to assignment

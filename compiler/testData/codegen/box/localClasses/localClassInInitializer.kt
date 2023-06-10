@@ -6,7 +6,7 @@ class A {
             open fun s() : String = "O"
         }
 
-        val o = object : B() {
+        konst o = object : B() {
             override fun s(): String = "K"
         }
 

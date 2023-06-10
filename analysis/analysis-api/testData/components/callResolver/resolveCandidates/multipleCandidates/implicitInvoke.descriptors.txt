@@ -12,7 +12,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.Int
         returnType = kotlin.Unit
         symbol = /invoke(<extension receiver>: kotlin.Int, i: kotlin.Int): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = i
             receiverType = null
@@ -43,7 +43,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /x(c: kotlin.Char): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = c
             receiverType = null
@@ -73,7 +73,7 @@ KtApplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = x(b: kotlin.Boolean): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = b
             receiverType = null

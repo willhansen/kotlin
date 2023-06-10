@@ -16,6 +16,6 @@ package kotlin.wasm
  */
 @Target(AnnotationTarget.FUNCTION)
 public annotation class WasmImport(
-    val module: String,
-    val name: String = ""
+    konst module: String,
+    konst name: String = ""
 )

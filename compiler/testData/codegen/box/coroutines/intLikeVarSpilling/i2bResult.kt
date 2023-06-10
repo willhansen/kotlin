@@ -24,7 +24,7 @@ fun foo(): Int = 1
 
 fun box(): String {
     builder {
-        val x: Byte = foo().toByte()
+        konst x: Byte = foo().toByte()
         suspendHere()
         setByteRes(x)
     }

@@ -21,20 +21,20 @@ fun box(): String {
         result += x
     }
 
-    val future = async<String> {
+    konst future = async<String> {
         log("start")
-        val x = await(foo())
+        konst x = await(foo())
         log("got '$x'")
-        val y = foobar("123 ", await(bar(x)))
+        konst y = foobar("123 ", await(bar(x)))
         log("got '$y' after '$x'")
         y
     }
 
-    future.whenComplete { value, t ->
-        log("completed with '$value'")
+    future.whenComplete { konstue, t ->
+        log("completed with '$konstue'")
     }.join()
 
-    val expectedResult =
+    konst expectedResult =
     """
     |start
     |got 'foo'
@@ -49,9 +49,9 @@ fun box(): String {
 // LIBRARY CODE
 
 fun <T> async(c: suspend () -> T): CompletableFuture<T> {
-    val future = CompletableFuture<T>()
+    konst future = CompletableFuture<T>()
     c.startCoroutine(object : Continuation<T> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
 
         override fun resumeWith(data: Result<T>) {
             if (data.isSuccess) {
@@ -65,9 +65,9 @@ fun <T> async(c: suspend () -> T): CompletableFuture<T> {
 }
 
 suspend fun <V> await(f: CompletableFuture<V>) = suspendCoroutineUninterceptedOrReturn<V> { machine ->
-    f.whenComplete { value, throwable ->
+    f.whenComplete { konstue, throwable ->
         if (throwable == null)
-            machine.resume(value)
+            machine.resume(konstue)
         else
             machine.resumeWithException(throwable)
     }

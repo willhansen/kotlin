@@ -14,6 +14,6 @@ class A {
 class B(var field: Int)
 
 @Test fun runTest() {
-    val a = A()
+    konst a = A()
     a.field = B(2)
 }

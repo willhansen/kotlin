@@ -56,7 +56,7 @@ class DifferentClassloadersIT : KGPBaseTest() {
                 build("-PmppProjectDependency=true") {
                     assertOutputContains(MULTIPLE_KOTLIN_PLUGINS_LOADED_WARNING)
 
-                    val specificProjectsReported = Regex("$MULTIPLE_KOTLIN_PLUGINS_SPECIFIC_PROJECTS_WARNING((?:'.*'(?:, )?)+)")
+                    konst specificProjectsReported = Regex("$MULTIPLE_KOTLIN_PLUGINS_SPECIFIC_PROJECTS_WARNING((?:'.*'(?:, )?)+)")
                         .find(output)!!.groupValues[1].split(", ").map { it.removeSurrounding("'") }.toSet()
 
                     assertEquals(setOf(":mpp-lib", ":jvm-app", ":js-app"), specificProjectsReported)

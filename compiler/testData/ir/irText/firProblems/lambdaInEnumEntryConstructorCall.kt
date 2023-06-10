@@ -11,9 +11,9 @@ class Wrapper(var baseUrl: String)
 
 enum class ConfigurationParameter {
     BASE_URL(
-        { value, nc ->
-            println("Base url updated from config parameters " + nc.baseUrl + " -> " + value)
-            nc.baseUrl = value
+        { konstue, nc ->
+            println("Base url updated from config parameters " + nc.baseUrl + " -> " + konstue)
+            nc.baseUrl = konstue
         }
     );
 

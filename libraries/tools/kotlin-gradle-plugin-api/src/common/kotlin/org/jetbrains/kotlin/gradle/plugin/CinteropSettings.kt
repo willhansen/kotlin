@@ -25,28 +25,28 @@ interface CInteropSettings : Named {
         "This configuration is no longer used by the plugin, the property shouldn't be accessed",
         level = DeprecationLevel.ERROR
     )
-    val dependencyConfigurationName: String
+    konst dependencyConfigurationName: String
     var dependencyFiles: FileCollection
 
     // DSL.
     fun defFile(file: Any)
 
-    fun packageName(value: String)
+    fun packageName(konstue: String)
 
     fun header(file: Any) = headers(file)
     fun headers(vararg files: Any)
     fun headers(files: FileCollection)
 
-    fun includeDirs(vararg values: Any)
+    fun includeDirs(vararg konstues: Any)
     fun includeDirs(action: Action<IncludeDirectories>)
     fun includeDirs(configure: IncludeDirectories.() -> Unit)
 
-    fun compilerOpts(vararg values: String)
-    fun compilerOpts(values: List<String>)
+    fun compilerOpts(vararg konstues: String)
+    fun compilerOpts(konstues: List<String>)
 
-    fun linkerOpts(vararg values: String)
-    fun linkerOpts(values: List<String>)
+    fun linkerOpts(vararg konstues: String)
+    fun linkerOpts(konstues: List<String>)
 
-    fun extraOpts(vararg values: Any)
-    fun extraOpts(values: List<Any>)
+    fun extraOpts(vararg konstues: Any)
+    fun extraOpts(konstues: List<Any>)
 }

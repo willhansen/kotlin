@@ -3,12 +3,12 @@
 // TODO: Fir2Ir generates overrides as finals.
 
 @JvmInline
-value class Inlined(val value: Int)
+konstue class Inlined(konst konstue: Int)
 
 sealed interface A {
-    val property: Inlined?
+    konst property: Inlined?
 
-    val property2: Inlined
+    konst property2: Inlined
 
     fun foo(): Inlined?
 
@@ -16,9 +16,9 @@ sealed interface A {
 }
 
 class B : A {
-    override val property: Nothing? = null
+    override konst property: Nothing? = null
 
-    override val property2: Nothing
+    override konst property2: Nothing
         get() = error("OK")
 
     override fun foo(): Nothing? = null
@@ -27,7 +27,7 @@ class B : A {
 }
 
 fun box(): String {
-    val a: A = B()
+    konst a: A = B()
     if (a.property != null) return "FAIL 1"
     if (a.foo() != null) return "FAIL 2"
     try {

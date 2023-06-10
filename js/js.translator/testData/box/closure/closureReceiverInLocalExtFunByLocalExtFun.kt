@@ -4,7 +4,7 @@ package foo
 // workaround for Rhino
 var n = 0
 class A {
-    val i = ++n
+    konst i = ++n
 }
 
 fun box(): String {
@@ -14,7 +14,7 @@ fun box(): String {
             assertEquals(2, this.i, "check this.i in A.bar()")
             assertEquals(1, this@foo.i, "check this@foo.i in A.bar()")
         }
-        val b = { assertEquals(1, this.i, "check this.i in b") }
+        konst b = { assertEquals(1, this.i, "check this.i in b") }
 
         assertEquals(1, this.i, "check this.i in A.foo()")
         A().bar()

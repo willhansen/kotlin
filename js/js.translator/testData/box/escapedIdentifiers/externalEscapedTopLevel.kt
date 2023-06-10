@@ -1,25 +1,25 @@
 // IGNORE_BACKEND: JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
 package foo
 
-external fun `@get something-invalid`(): String = definedExternally
+external fun `@get something-inkonstid`(): String = definedExternally
 
-external var `some+value`: Int
+external var `some+konstue`: Int
     get() = definedExternally
     set(a: Int) = definedExternally
 
 external object `+some+object%:` {
-    val foo: String = definedExternally
+    konst foo: String = definedExternally
 }
 
 fun box(): String {
-    assertEquals(42, `some+value`)
+    assertEquals(42, `some+konstue`)
     assertEquals("%%++%%", `+some+object%:`.foo)
-    assertEquals("something invalid", `@get something-invalid`())
+    assertEquals("something inkonstid", `@get something-inkonstid`())
 
-    `some+value` = 43
-    assertEquals(43, `some+value`)
+    `some+konstue` = 43
+    assertEquals(43, `some+konstue`)
 
     return "OK"
 }

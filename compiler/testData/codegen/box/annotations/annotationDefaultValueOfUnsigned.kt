@@ -3,10 +3,10 @@
 // WITH_REFLECT
 // FULL_JDK
 
-annotation class Ann1(val value: UByte = 41u)
-annotation class Ann2(val value: UShort = 42u)
-annotation class Ann3(val value: UInt = 43u)
-annotation class Ann4(val value: ULong = 44u)
+annotation class Ann1(konst konstue: UByte = 41u)
+annotation class Ann2(konst konstue: UShort = 42u)
+annotation class Ann3(konst konstue: UInt = 43u)
+annotation class Ann4(konst konstue: ULong = 44u)
 
 @Ann1
 @Ann2
@@ -15,10 +15,10 @@ annotation class Ann4(val value: ULong = 44u)
 class A
 
 fun box(): String {
-    val default1 = A::class.java.getAnnotation(Ann1::class.java).value
-    val default2 = A::class.java.getAnnotation(Ann2::class.java).value
-    val default3 = A::class.java.getAnnotation(Ann3::class.java).value
-    val default4 = A::class.java.getAnnotation(Ann4::class.java).value
+    konst default1 = A::class.java.getAnnotation(Ann1::class.java).konstue
+    konst default2 = A::class.java.getAnnotation(Ann2::class.java).konstue
+    konst default3 = A::class.java.getAnnotation(Ann3::class.java).konstue
+    konst default4 = A::class.java.getAnnotation(Ann4::class.java).konstue
 
     return if (default1 == 41u.toUByte() &&
         default2 == 42u.toUShort() &&

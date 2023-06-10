@@ -18,18 +18,18 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.util.irMessageLogger
 import org.jetbrains.kotlin.name.FqName
 
-class JvmIrSerializerImpl(private val configuration: CompilerConfiguration) : JvmIrSerializer {
+class JvmIrSerializerImpl(private konst configuration: CompilerConfiguration) : JvmIrSerializer {
 
-    private val declarationTable = DeclarationTable(JvmGlobalDeclarationTable())
+    private konst declarationTable = DeclarationTable(JvmGlobalDeclarationTable())
 
     override fun serializeIrFile(irFile: IrFile): ByteArray? {
-        val fileClassFqName = irFile.getFileClassInfo().fileClassFqName
+        konst fileClassFqName = irFile.getFileClassInfo().fileClassFqName
         return makeSerializerSession(fileClassFqName).serializeJvmIrFile(irFile)?.toByteArray()
     }
 
     override fun serializeTopLevelIrClass(irClass: IrClass): ByteArray? {
         assert(irClass.parent is IrFile)
-        val fileClassFqName = (irClass.parent as IrFile).getFileClassInfo().fileClassFqName
+        konst fileClassFqName = (irClass.parent as IrFile).getFileClassInfo().fileClassFqName
         return makeSerializerSession(fileClassFqName).serializeTopLevelClass(irClass)?.toByteArray()
     }
 

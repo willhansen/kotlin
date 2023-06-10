@@ -16,18 +16,18 @@ import org.jetbrains.kotlin.ir.util.primaryConstructor
 
 // TODO KT-53096
 fun IrPluginContext.generateBodyForDefaultConstructor(declaration: IrConstructor): IrBody? {
-    val type = declaration.returnType as? IrSimpleType ?: return null
+    konst type = declaration.returnType as? IrSimpleType ?: return null
 
-    val delegatingAnyCall = IrDelegatingConstructorCallImpl(
+    konst delegatingAnyCall = IrDelegatingConstructorCallImpl(
         -1,
         -1,
         irBuiltIns.anyType,
         irBuiltIns.anyClass.owner.primaryConstructor?.symbol ?: return null,
         typeArgumentsCount = 0,
-        valueArgumentsCount = 0
+        konstueArgumentsCount = 0
     )
 
-    val initializerCall = IrInstanceInitializerCallImpl(
+    konst initializerCall = IrInstanceInitializerCallImpl(
         -1,
         -1,
         (declaration.parent as? IrClass)?.symbol ?: return null,
@@ -38,6 +38,6 @@ fun IrPluginContext.generateBodyForDefaultConstructor(declaration: IrConstructor
 }
 
 fun IrClass.addDefaultConstructorBodyIfAbsent(ctx: IrPluginContext) {
-    val declaration = primaryConstructor ?: return
+    konst declaration = primaryConstructor ?: return
     if (declaration.body == null) declaration.body = ctx.generateBodyForDefaultConstructor(declaration)
 }

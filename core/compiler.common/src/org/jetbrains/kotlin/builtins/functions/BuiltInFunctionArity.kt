@@ -6,5 +6,5 @@
 package org.jetbrains.kotlin.builtins.functions
 
 object BuiltInFunctionArity {
-    const val BIG_ARITY = 23
+    const konst BIG_ARITY = 23
 }

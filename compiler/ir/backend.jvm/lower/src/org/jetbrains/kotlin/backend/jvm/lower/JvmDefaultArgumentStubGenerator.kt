@@ -43,7 +43,7 @@ class JvmDefaultArgumentStubGenerator(context: JvmBackendContext) : DefaultArgum
         )
             return
 
-        val handlerDeclaration = newIrFunction.valueParameters.last()
+        konst handlerDeclaration = newIrFunction.konstueParameters.last()
         +irIfThen(
             context.irBuiltIns.unitType,
             irNot(irEqualsNull(irGet(handlerDeclaration))),

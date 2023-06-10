@@ -5,7 +5,7 @@ import kotlin.coroutines.intrinsics.*
 import kotlin.coroutines.jvm.internal.*
 
 class TailCallOptimizationCheckerClass {
-    private val stackTrace = arrayListOf<StackTraceElement?>()
+    private konst stackTrace = arrayListOf<StackTraceElement?>()
 
     suspend fun saveStackTrace() = suspendCoroutineUninterceptedOrReturn<Unit> {
         saveStackTrace(it)
@@ -32,4 +32,4 @@ class TailCallOptimizationCheckerClass {
     }
 }
 
-val TailCallOptimizationChecker = TailCallOptimizationCheckerClass()
+konst TailCallOptimizationChecker = TailCallOptimizationCheckerClass()

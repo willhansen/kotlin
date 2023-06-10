@@ -1,7 +1,7 @@
-class Demo(val x: String) {
+class Demo(konst x: String) {
     fun foo() = "foo $x update"
     inline fun foo_inline() = "inline foo $x update"
     inline fun unused_inline() = "unused"
 
-    val field1 = "field1"
+    konst field1 = "field1"
 }

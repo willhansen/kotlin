@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.test.services.TestServices
 abstract class AbstractTypeByDeclarationReturnTypeTest : AbstractTypeTest() {
     context(KtAnalysisSession)
     override fun getType(ktFile: KtFile, module: TestModule, testServices: TestServices): KtType {
-        val declarationAtCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFile)
+        konst declarationAtCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFile)
         return declarationAtCaret.getReturnKtType()
     }
 }

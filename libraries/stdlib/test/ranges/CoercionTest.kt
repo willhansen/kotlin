@@ -16,16 +16,16 @@ class CoercionTest {
         expect(1) { 5.coerceAtMost(1) }
         expect(1) { 1.coerceAtMost(5) }
 
-        for (value in 0..10) {
-            expect(value) { value.coerceIn(null, null) }
-            val min = 2
-            val max = 5
-            val range = min..max
-            expect(value.coerceAtLeast(min)) { value.coerceIn(min, null) }
-            expect(value.coerceAtMost(max)) { value.coerceIn(null, max) }
-            expect(value.coerceAtLeast(min).coerceAtMost(max)) { value.coerceIn(min, max) }
-            expect(value.coerceAtMost(max).coerceAtLeast(min)) { value.coerceIn(range) }
-            assertTrue((value.coerceIn(range)) in range)
+        for (konstue in 0..10) {
+            expect(konstue) { konstue.coerceIn(null, null) }
+            konst min = 2
+            konst max = 5
+            konst range = min..max
+            expect(konstue.coerceAtLeast(min)) { konstue.coerceIn(min, null) }
+            expect(konstue.coerceAtMost(max)) { konstue.coerceIn(null, max) }
+            expect(konstue.coerceAtLeast(min).coerceAtMost(max)) { konstue.coerceIn(min, max) }
+            expect(konstue.coerceAtMost(max).coerceAtLeast(min)) { konstue.coerceIn(range) }
+            assertTrue((konstue.coerceIn(range)) in range)
         }
 
         assertFails { 1.coerceIn(1, 0) }
@@ -39,16 +39,16 @@ class CoercionTest {
         expect(1L) { 5L.coerceAtMost(1L) }
         expect(1L) { 1L.coerceAtMost(5L) }
 
-        for (value in 0L..10L) {
-            expect(value) { value.coerceIn(null, null) }
-            val min = 2L
-            val max = 5L
-            val range = min..max
-            expect(value.coerceAtLeast(min)) { value.coerceIn(min, null) }
-            expect(value.coerceAtMost(max)) { value.coerceIn(null, max) }
-            expect(value.coerceAtLeast(min).coerceAtMost(max)) { value.coerceIn(min, max) }
-            expect(value.coerceAtMost(max).coerceAtLeast(min)) { value.coerceIn(range) }
-            assertTrue((value.coerceIn(range)) in range)
+        for (konstue in 0L..10L) {
+            expect(konstue) { konstue.coerceIn(null, null) }
+            konst min = 2L
+            konst max = 5L
+            konst range = min..max
+            expect(konstue.coerceAtLeast(min)) { konstue.coerceIn(min, null) }
+            expect(konstue.coerceAtMost(max)) { konstue.coerceIn(null, max) }
+            expect(konstue.coerceAtLeast(min).coerceAtMost(max)) { konstue.coerceIn(min, max) }
+            expect(konstue.coerceAtMost(max).coerceAtLeast(min)) { konstue.coerceIn(range) }
+            assertTrue((konstue.coerceIn(range)) in range)
         }
 
         assertFails { 1L.coerceIn(1L, 0L) }
@@ -66,16 +66,16 @@ class CoercionTest {
         expect(1.0) { 1.0.coerceAtMost(5.0) }
         assertTrue { Double.NaN.coerceAtMost(5.0).isNaN() }
 
-        for (value in (0..10).map { it.toDouble() }) {
-            expect(value) { value.coerceIn(null, null) }
-            val min = 2.0
-            val max = 5.0
-            val range = min..max
-            expect(value.coerceAtLeast(min)) { value.coerceIn(min, null) }
-            expect(value.coerceAtMost(max)) { value.coerceIn(null, max) }
-            expect(value.coerceAtLeast(min).coerceAtMost(max)) { value.coerceIn(min, max) }
-            expect(value.coerceAtMost(max).coerceAtLeast(min)) { value.coerceIn(range) }
-            assertTrue((value.coerceIn(range)) in range)
+        for (konstue in (0..10).map { it.toDouble() }) {
+            expect(konstue) { konstue.coerceIn(null, null) }
+            konst min = 2.0
+            konst max = 5.0
+            konst range = min..max
+            expect(konstue.coerceAtLeast(min)) { konstue.coerceIn(min, null) }
+            expect(konstue.coerceAtMost(max)) { konstue.coerceIn(null, max) }
+            expect(konstue.coerceAtLeast(min).coerceAtMost(max)) { konstue.coerceIn(min, max) }
+            expect(konstue.coerceAtMost(max).coerceAtLeast(min)) { konstue.coerceIn(range) }
+            assertTrue((konstue.coerceIn(range)) in range)
         }
 
         assertFails { 1.0.coerceIn(1.0, 0.0) }
@@ -90,26 +90,26 @@ class CoercionTest {
 
     @Test
     fun coercionsComparable() {
-        val v = (0..10).map { ComparableNumber(it) }
+        konst v = (0..10).map { ComparableNumber(it) }
 
-        expect(5) { v[5].coerceAtLeast(v[1]).value }
-        expect(5) { v[1].coerceAtLeast(v[5]).value }
+        expect(5) { v[5].coerceAtLeast(v[1]).konstue }
+        expect(5) { v[1].coerceAtLeast(v[5]).konstue }
         expect(v[5]) { v[5].coerceAtLeast(ComparableNumber(5)) }
 
-        expect(1) { v[5].coerceAtMost(v[1]).value }
-        expect(1) { v[1].coerceAtMost(v[5]).value }
+        expect(1) { v[5].coerceAtMost(v[1]).konstue }
+        expect(1) { v[1].coerceAtMost(v[5]).konstue }
         expect(v[1]) { v[1].coerceAtMost(ComparableNumber(1)) }
 
-        for (value in v) {
-            expect(value) { value.coerceIn(null, null) }
-            val min = v[2]
-            val max = v[5]
-            val range = min..max
-            expect(value.coerceAtLeast(min)) { value.coerceIn(min, null) }
-            expect(value.coerceAtMost(max)) { value.coerceIn(null, max) }
-            expect(value.coerceAtLeast(min).coerceAtMost(max)) { value.coerceIn(min, max) }
-            expect(value.coerceAtMost(max).coerceAtLeast(min)) { value.coerceIn(range) }
-            assertTrue((value.coerceIn(range)) in range)
+        for (konstue in v) {
+            expect(konstue) { konstue.coerceIn(null, null) }
+            konst min = v[2]
+            konst max = v[5]
+            konst range = min..max
+            expect(konstue.coerceAtLeast(min)) { konstue.coerceIn(min, null) }
+            expect(konstue.coerceAtMost(max)) { konstue.coerceIn(null, max) }
+            expect(konstue.coerceAtLeast(min).coerceAtMost(max)) { konstue.coerceIn(min, max) }
+            expect(konstue.coerceAtMost(max).coerceAtLeast(min)) { konstue.coerceIn(range) }
+            assertTrue((konstue.coerceIn(range)) in range)
         }
 
         assertFails { v[1].coerceIn(v[1], v[0]) }
@@ -117,7 +117,7 @@ class CoercionTest {
     }
 }
 
-private class ComparableNumber(val value: Int) : Comparable<ComparableNumber> {
-    override fun compareTo(other: ComparableNumber): Int = this.value - other.value
-    override fun toString(): String = "CV$value"
+private class ComparableNumber(konst konstue: Int) : Comparable<ComparableNumber> {
+    override fun compareTo(other: ComparableNumber): Int = this.konstue - other.konstue
+    override fun toString(): String = "CV$konstue"
 }

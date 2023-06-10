@@ -2,7 +2,7 @@
 package foo
 
 class Foo {
-    val OK = "OK";
+    konst OK = "OK";
     var result: String = ""
     init {
         fun bar(s: String? = null) {

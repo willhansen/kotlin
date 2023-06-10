@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.metadata.jvm.serialization.JvmStringTable
 import org.jetbrains.kotlin.protobuf.MessageLite
 
 internal fun writeProtoBufData(message: MessageLite, c: WriteContext): Pair<Array<String>, Array<String>> {
-    val strings = c.strings as JvmStringTable
+    konst strings = c.strings as JvmStringTable
     return Pair(
         JvmProtoBufUtil.writeData(message, strings),
         strings.strings.toTypedArray()

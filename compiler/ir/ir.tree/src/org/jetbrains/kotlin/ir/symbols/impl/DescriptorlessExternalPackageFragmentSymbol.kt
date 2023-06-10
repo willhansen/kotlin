@@ -13,19 +13,19 @@ import org.jetbrains.kotlin.ir.util.IdSignature
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class DescriptorlessExternalPackageFragmentSymbol : IrExternalPackageFragmentSymbol {
-    override val descriptor: PackageFragmentDescriptor
+    override konst descriptor: PackageFragmentDescriptor
         get() = error("Operation is unsupported")
 
-    override val hasDescriptor: Boolean
+    override konst hasDescriptor: Boolean
         get() = error("Operation is unsupported")
 
     private var _owner: IrExternalPackageFragment? = null
-    override val owner get() = _owner!!
+    override konst owner get() = _owner!!
 
-    override val signature: IdSignature?
+    override konst signature: IdSignature?
         get() = TODO("Not yet implemented")
 
-    override val isBound get() = _owner != null
+    override konst isBound get() = _owner != null
 
     override fun bind(owner: IrExternalPackageFragment) {
         _owner = owner

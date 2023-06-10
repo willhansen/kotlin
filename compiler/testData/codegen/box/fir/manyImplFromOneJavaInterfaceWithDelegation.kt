@@ -20,10 +20,10 @@ public interface C extends A {}
 
 class Adapter : B, C
 
-class D(val adapter: Adapter) : B by adapter, C by adapter
+class D(konst adapter: Adapter) : B by adapter, C by adapter
 
 fun box(): String {
-    val adapter = Adapter()
-    val d = D(adapter)
+    konst adapter = Adapter()
+    konst d = D(adapter)
     return d.foo()
 }

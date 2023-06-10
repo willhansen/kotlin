@@ -25,17 +25,17 @@ import org.jetbrains.kotlin.types.checker.*
 interface DetailedReceiver
 
 class ReceiverValueWithSmartCastInfo(
-    val receiverValue: ReceiverValue,
+    konst receiverValue: ReceiverValue,
     /*
      * It doesn't include receiver.type and is used only to special marking such types (e.g. for IDE green highlighting)
      * but not to construct the resulting type
      */
-    val typesFromSmartCasts: Set<KotlinType>,
-    val isStable: Boolean,
+    konst typesFromSmartCasts: Set<KotlinType>,
+    konst isStable: Boolean,
     originalBaseType: KotlinType = receiverValue.type
 ) : DetailedReceiver {
     // It's used to construct the resulting type
-    val allOriginalTypes = typesFromSmartCasts + originalBaseType
+    konst allOriginalTypes = typesFromSmartCasts + originalBaseType
 
     fun hasTypesFromSmartCasts() = typesFromSmartCasts.isNotEmpty()
 
@@ -43,19 +43,19 @@ class ReceiverValueWithSmartCastInfo(
 }
 
 interface QualifierReceiver : Receiver, DetailedReceiver {
-    val descriptor: DeclarationDescriptor
+    konst descriptor: DeclarationDescriptor
 
-    val staticScope: MemberScope
+    konst staticScope: MemberScope
 
-    val classValueReceiver: ReceiverValue?
+    konst classValueReceiver: ReceiverValue?
 
     // for qualifiers smart cast is impossible
-    val classValueReceiverWithSmartCastInfo: ReceiverValueWithSmartCastInfo?
+    konst classValueReceiverWithSmartCastInfo: ReceiverValueWithSmartCastInfo?
         get() = classValueReceiver?.let { ReceiverValueWithSmartCastInfo(it, emptySet(), true) }
 }
 
 fun ReceiverValueWithSmartCastInfo.prepareReceiverRegardingCaptureTypes(): ReceiverValueWithSmartCastInfo {
-    val preparedBaseType = prepareArgumentTypeRegardingCaptureTypes(receiverValue.type.unwrap()) ?: return this
+    konst preparedBaseType = prepareArgumentTypeRegardingCaptureTypes(receiverValue.type.unwrap()) ?: return this
 
     return ReceiverValueWithSmartCastInfo(receiverValue.replaceType(preparedBaseType), typesFromSmartCasts, isStable, receiverValue.type)
 }

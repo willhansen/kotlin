@@ -1,4 +1,4 @@
 fun test() {
-    val f = fun(): () ->  <expr>Int</expr> = { 54 }
+    konst f = fun(): () ->  <expr>Int</expr> = { 54 }
 
 }

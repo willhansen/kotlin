@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.name.ClassId
 inline fun FirFunctionCall.copyAsImplicitInvokeCall(
     setupCopy: FirImplicitInvokeCallBuilder.() -> Unit
 ): FirImplicitInvokeCall {
-    val original = this
+    konst original = this
 
     return buildImplicitInvokeCall {
         source = original.source
@@ -54,7 +54,7 @@ fun FirTypeRef.resolvedTypeFromPrototype(
         buildResolvedTypeRef {
             source = this@resolvedTypeFromPrototype.source
             this.type = type
-            delegatedTypeRef = when (val original = this@resolvedTypeFromPrototype) {
+            delegatedTypeRef = when (konst original = this@resolvedTypeFromPrototype) {
                 is FirResolvedTypeRef -> original.delegatedTypeRef
                 is FirUserTypeRef -> original
                 else -> null
@@ -87,11 +87,11 @@ fun List<FirAnnotation>.computeTypeAttributes(
         if (predefined.isEmpty()) return ConeAttributes.Empty
         return ConeAttributes.create(predefined)
     }
-    val attributes = mutableListOf<ConeAttribute<*>>()
+    konst attributes = mutableListOf<ConeAttribute<*>>()
     attributes += predefined
-    val customAnnotations = mutableListOf<FirAnnotation>()
+    konst customAnnotations = mutableListOf<FirAnnotation>()
     for (annotation in this) {
-        val classId = when (shouldExpandTypeAliases) {
+        konst classId = when (shouldExpandTypeAliases) {
             true -> annotation.tryExpandClassId(session)
             false -> annotation.typeRef.coneType.classId
         }
@@ -107,7 +107,7 @@ fun List<FirAnnotation>.computeTypeAttributes(
 
             CompilerConeAttributes.UnsafeVariance.ANNOTATION_CLASS_ID -> attributes += CompilerConeAttributes.UnsafeVariance
             else -> {
-                val attributeFromPlugin = session.extensionService.typeAttributeExtensions.firstNotNullOfOrNull {
+                konst attributeFromPlugin = session.extensionService.typeAttributeExtensions.firstNotNullOfOrNull {
                     it.extractAttributeFromAnnotation(annotation)
                 }
                 if (attributeFromPlugin != null) {
@@ -127,11 +127,11 @@ fun List<FirAnnotation>.computeTypeAttributes(
 }
 
 private fun FirAnnotation.tryExpandClassId(session: FirSession): ClassId? {
-    return when (val directlyExpanded = unexpandedConeClassLikeType?.directExpansionType(session) { it.expandedConeType }) {
+    return when (konst directlyExpanded = unexpandedConeClassLikeType?.directExpansionType(session) { it.expandedConeType }) {
         null -> unexpandedConeClassLikeType?.classId // mutually recursive typealiases
         else -> directlyExpanded.fullyExpandedType(session).classId
     }
 }
 
 private fun FirAnnotation.extractContextReceiversCount() =
-    (argumentMapping.mapping[StandardNames.CONTEXT_FUNCTION_TYPE_PARAMETER_COUNT_NAME] as? FirConstExpression<*>)?.value as? Int
+    (argumentMapping.mapping[StandardNames.CONTEXT_FUNCTION_TYPE_PARAMETER_COUNT_NAME] as? FirConstExpression<*>)?.konstue as? Int

@@ -11,7 +11,7 @@ repositories {
     maven("<localRepo>")
 }
 
-val disambiguationAttribute = Attribute.of("disambiguationAttribute", String::class.java)
+konst disambiguationAttribute = Attribute.of("disambiguationAttribute", String::class.java)
 
 
 fun testResolutionToSourcesVariant(
@@ -20,7 +20,7 @@ fun testResolutionToSourcesVariant(
     nativePlatform: String? = null,
     includeDisambiguation: Boolean = true
 ) {
-    val configuration = configurations.create("${targetName}Sources") {
+    konst configuration = configurations.create("${targetName}Sources") {
         isCanBeResolved = true
         isCanBeConsumed = false
 
@@ -45,13 +45,13 @@ fun testResolutionToSourcesVariant(
         project.dependencies.add(name, "test:lib:1.0")
     }
 
-    val files = configuration.resolve()
+    konst files = configuration.resolve()
     println("<RESOLVED SOURCES FILE $targetName>")
     println(files.joinToString("\n") { it.name })
     println("</RESOLVED SOURCES FILE $targetName>")
 
     println("<RESOLVED DEPENDENCIES OF $targetName>")
-    val resolvedVariants = configuration
+    konst resolvedVariants = configuration
         .incoming
         .resolutionResult
         .allDependencies

@@ -19,7 +19,7 @@ fun bbb() {
 }
 
 fun foo(expr: StringBuilder): Int {
-    val c = 'a'
+    konst c = 'a'
     when(c) {
         0.toChar() -> throw Exception("zero")
         else -> throw Exception("nonzero" + c)
@@ -118,7 +118,7 @@ fun blockReturnValueTypeMatch12() : Int {
     else return <!RETURN_TYPE_MISMATCH!>1.0<!>
 }
 fun blockNoReturnIfValDeclaration(): Int {
-    val x = 1
+    konst x = 1
     <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 fun blockNoReturnIfEmptyIf(): Int {
     if (1 < 2) {} else {}
@@ -136,7 +136,7 @@ fun blockNoReturnIfUnitInOneBranch(): Int {
 fun nonBlockReturnIfEmptyIf(): Int = <!RETURN_TYPE_MISMATCH!>if (1 < 2) {} else {}<!>
 fun nonBlockNoReturnIfUnitInOneBranch(): Int = <!RETURN_TYPE_MISMATCH!>if (1 < 2) {} else 2<!>
 
-val <!IMPLICIT_NOTHING_PROPERTY_TYPE!>a<!> = <!RETURN_NOT_ALLOWED!>return<!> 1
+konst <!IMPLICIT_NOTHING_PROPERTY_TYPE!>a<!> = <!RETURN_NOT_ALLOWED!>return<!> 1
 
 class A() {
 }
@@ -170,37 +170,37 @@ class B() {
 }
 
 fun testFunctionLiterals() {
-    val endsWithVarDeclaration : () -> Boolean = <!INITIALIZER_TYPE_MISMATCH!>{
-        val x = 2
+    konst endsWithVarDeclaration : () -> Boolean = <!INITIALIZER_TYPE_MISMATCH!>{
+        konst x = 2
     }<!>
 
-    val endsWithAssignment: () -> Int = <!INITIALIZER_TYPE_MISMATCH!>{
+    konst endsWithAssignment: () -> Int = <!INITIALIZER_TYPE_MISMATCH!>{
         var x = 1
         x = 333
     }<!>
 
-    val endsWithReAssignment: () -> Int = <!INITIALIZER_TYPE_MISMATCH!>{
+    konst endsWithReAssignment: () -> Int = <!INITIALIZER_TYPE_MISMATCH!>{
         var x = 1
         x += 333
     }<!>
 
-    val endsWithFunDeclaration : () -> String = <!INITIALIZER_TYPE_MISMATCH!>{
+    konst endsWithFunDeclaration : () -> String = <!INITIALIZER_TYPE_MISMATCH!>{
         var x = 1
         x = 333
         fun meow() : Unit {}
     }<!>
 
-    val endsWithObjectDeclaration : () -> Int = <!INITIALIZER_TYPE_MISMATCH!>{
+    konst endsWithObjectDeclaration : () -> Int = <!INITIALIZER_TYPE_MISMATCH!>{
         var x = 1
         x = 333
         <!LOCAL_OBJECT_NOT_ALLOWED!>object A<!> {}
     }<!>
 
-    val expectedUnitReturnType1: () -> Unit = {
-        val x = 1
+    konst expectedUnitReturnType1: () -> Unit = {
+        konst x = 1
     }
 
-    val expectedUnitReturnType2: () -> Unit = {
+    konst expectedUnitReturnType2: () -> Unit = {
         fun meow() : Unit {}
         <!LOCAL_OBJECT_NOT_ALLOWED!>object A<!> {}
     }

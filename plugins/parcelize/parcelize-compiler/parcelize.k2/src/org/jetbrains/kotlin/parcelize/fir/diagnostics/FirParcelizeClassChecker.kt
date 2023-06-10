@@ -35,10 +35,10 @@ object FirParcelizeClassChecker : FirClassChecker() {
     }
 
     private fun checkParcelableClass(klass: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val symbol = klass.symbol
+        konst symbol = klass.symbol
         if (!symbol.isParcelize(context.session)) return
-        val source = klass.source ?: return
-        val classKind = klass.classKind
+        konst source = klass.source ?: return
+        konst classKind = klass.classKind
 
         if (klass is FirRegularClass) {
             if (classKind == ClassKind.ANNOTATION_CLASS || classKind == ClassKind.INTERFACE && !klass.isSealed) {
@@ -68,15 +68,15 @@ object FirParcelizeClassChecker : FirClassChecker() {
             reporter.reportOn(source, KtErrorsParcelize.PARCELABLE_SHOULD_BE_INSTANTIABLE, context)
         }
 
-        val supertypes = lookupSuperTypes(klass, lookupInterfaces = true, deep = true, context.session, substituteTypes = false)
+        konst supertypes = lookupSuperTypes(klass, lookupInterfaces = true, deep = true, context.session, substituteTypes = false)
         if (supertypes.none { it.classId == PARCELABLE_ID }) {
             reporter.reportOn(source, KtErrorsParcelize.NO_PARCELABLE_SUPERTYPE, context)
         }
 
         klass.delegateFieldsMap?.forEach { (index, _) ->
-            val superTypeRef = klass.superTypeRefs[index]
-            val superType = superTypeRef.coneType
-            val parcelableType = ConeClassLikeTypeImpl(
+            konst superTypeRef = klass.superTypeRefs[index]
+            konst superType = superTypeRef.coneType
+            konst parcelableType = ConeClassLikeTypeImpl(
                 PARCELABLE_ID.toLookupTag(),
                 emptyArray(),
                 isNullable = false
@@ -86,9 +86,9 @@ object FirParcelizeClassChecker : FirClassChecker() {
             }
         }
 
-        val constructorSymbols = klass.constructors(context.session)
-        val primaryConstructorSymbol = constructorSymbols.find { it.isPrimary }
-        val secondaryConstructorSymbols = constructorSymbols.filterNot { it.isPrimary }
+        konst constructorSymbols = klass.constructors(context.session)
+        konst primaryConstructorSymbol = constructorSymbols.find { it.isPrimary }
+        konst secondaryConstructorSymbols = constructorSymbols.filterNot { it.isPrimary }
         if (primaryConstructorSymbol == null && secondaryConstructorSymbols.isNotEmpty()) {
             reporter.reportOn(source, KtErrorsParcelize.PARCELABLE_SHOULD_HAVE_PRIMARY_CONSTRUCTOR, context)
         }
@@ -98,7 +98,7 @@ object FirParcelizeClassChecker : FirClassChecker() {
         if (klass !is FirRegularClass || klass.isCompanion) return
         for (superTypeRef in klass.superTypeRefs) {
             if (superTypeRef.coneType.classId == OLD_PARCELER_ID) {
-                val strategy = if (klass.name == SpecialNames.NO_NAME_PROVIDED) {
+                konst strategy = if (klass.name == SpecialNames.NO_NAME_PROVIDED) {
                     SourceElementPositioningStrategies.OBJECT_KEYWORD
                 } else {
                     SourceElementPositioningStrategies.NAME_IDENTIFIER
@@ -118,13 +118,13 @@ fun FirClassSymbol<*>?.isParcelize(session: FirSession): Boolean {
     if (this == null) return false
     if (this.annotations.any { it.toAnnotationClassId(session) in PARCELIZE_CLASS_CLASS_IDS }) return true
     return resolvedSuperTypeRefs.any { superTypeRef ->
-        val symbol = superTypeRef.type.fullyExpandedType(session).toRegularClassSymbol(session) ?: return@any false
+        konst symbol = superTypeRef.type.fullyExpandedType(session).toRegularClassSymbol(session) ?: return@any false
         symbol.annotations.any { it.toAnnotationClassId(session) in PARCELIZE_CLASS_CLASS_IDS }
     }
 }
 
 fun FirRegularClass.hasCustomParceler(session: FirSession): Boolean {
-    val companion = companionObjectSymbol ?: return false
+    konst companion = companionObjectSymbol ?: return false
     return lookupSuperTypes(companion, lookupInterfaces = true, deep = true, useSiteSession = session).any {
         it.classId in PARCELER_CLASS_IDS
     }

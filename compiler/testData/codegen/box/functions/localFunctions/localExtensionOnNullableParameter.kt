@@ -1,9 +1,9 @@
-open class T(var value: Int) {}
+open class T(var konstue: Int) {}
 
 fun localExtensionOnNullableParameter(): T {
 
     fun T.local(s: Int) {
-        value += s
+        konstue += s
     }
 
     var t: T? = T(1)
@@ -14,7 +14,7 @@ fun localExtensionOnNullableParameter(): T {
 
 
 fun box(): String {
-    val result = localExtensionOnNullableParameter().value
+    konst result = localExtensionOnNullableParameter().konstue
     if (result != 3) return "fail 2: $result"
 
     return "OK"

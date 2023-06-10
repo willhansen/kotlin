@@ -4,7 +4,7 @@ package test
 import dependency.foo as aliasedFoo
 
 fun usage() {
-    val ref = ::aliasedFoo
+    konst ref = ::aliasedFoo
 }
 
 // FILE: dependency.kt

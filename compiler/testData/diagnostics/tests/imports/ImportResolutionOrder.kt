@@ -4,7 +4,7 @@
 
 package a
   import b.*
-  val x : X = X()
+  konst x : X = X()
 
 // FILE: b.kt
 package b
@@ -15,7 +15,7 @@ package b
 // FILE: c.kt
 package c
   import d.X
-  val x : X = X()
+  konst x : X = X()
 
 // FILE: d.kt
 package d

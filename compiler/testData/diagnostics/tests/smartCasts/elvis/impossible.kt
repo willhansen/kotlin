@@ -3,7 +3,7 @@
 // See KT-20752
 
 class Unstable {
-    val first: String? get() = null
+    konst first: String? get() = null
 }
 
 class StringList {
@@ -23,7 +23,7 @@ fun foo(list: StringList, arg: Unstable) {
 }
 
 class UnstableBoolean {
-    val first: Boolean? get() = null
+    konst first: Boolean? get() = null
 }
 
 class BooleanList {

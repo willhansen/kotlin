@@ -1,1 +1,1 @@
-const val BATCH_SIZE: Int = 16 * 1024
+const konst BATCH_SIZE: Int = 16 * 1024

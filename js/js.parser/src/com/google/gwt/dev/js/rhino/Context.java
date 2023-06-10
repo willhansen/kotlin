@@ -72,7 +72,7 @@ import java.util.MissingResourceException;
  * <a href="#setErrorReporter>setErrorReporter</a>.<p>
  *
  * Different forms of script execution are supported. Scripts may be
- * evaluated from the source directly, or first compiled and then later
+ * ekonstuated from the source directly, or first compiled and then later
  * executed. Interactive execution is also supported.<p>
  *
  * Some aspects of script execution, such as type conversions and
@@ -110,7 +110,7 @@ public class Context {
      *      Context cx = Context.enter();
      *      try {
      *          ...
-     *          cx.evaluateString(...);
+     *          cx.ekonstuateString(...);
      *      }
      *      finally { Context.exit(); }
      * </pre>
@@ -229,7 +229,7 @@ public class Context {
     /**
      * Language versions
      *
-     * All integral values are reserved for future version numbers.
+     * All integral konstues are reserved for future version numbers.
      */
 
     /**
@@ -341,7 +341,7 @@ public class Context {
             cx.errorCount++;
             cx.getErrorReporter().error(message, startPosition, endPosition);
         } else {
-            throw new EvaluatorException(message);
+            throw new EkonstuatorException(message);
         }
     }
 

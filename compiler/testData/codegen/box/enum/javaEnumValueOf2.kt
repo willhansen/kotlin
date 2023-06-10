@@ -3,7 +3,7 @@
 // FILE: E.java
 public enum E {
     OK();
-    public static E valueOf(int x) {
+    public static E konstueOf(int x) {
         if (x == 0) return OK;
         return null;
     }
@@ -13,7 +13,7 @@ public enum E {
 // FILE: test.kt
 
 fun box(): String {
-    return doIt(E.valueOf(0))
+    return doIt(E.konstueOf(0))
 }
 
 fun doIt(e: E) = when (e) {

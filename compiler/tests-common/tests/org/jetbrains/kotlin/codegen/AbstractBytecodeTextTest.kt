@@ -15,7 +15,7 @@ import java.util.*
 @ObsoleteTestInfrastructure
 abstract class AbstractBytecodeTextTest : CodegenTestCase() {
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
-        val isIgnored = InTextDirectivesUtils.isIgnoredTarget(backend, wholeFile)
+        konst isIgnored = InTextDirectivesUtils.isIgnoredTarget(backend, wholeFile)
         createEnvironmentWithMockJdkAndIdeaAnnotations(
             ConfigurationKind.ALL,
             files,
@@ -27,29 +27,29 @@ abstract class AbstractBytecodeTextTest : CodegenTestCase() {
         if (isMultiFileTest(files) && !InTextDirectivesUtils.isDirectiveDefined(wholeFile.readText(), "TREAT_AS_ONE_FILE")) {
             doTestMultiFile(files, !isIgnored)
         } else {
-            val expected = readExpectedOccurrences(wholeFile.path)
-            val actual = generateToText("helpers/")
+            konst expected = readExpectedOccurrences(wholeFile.path)
+            konst actual = generateToText("helpers/")
             checkGeneratedTextAgainstExpectedOccurrences(actual, expected, backend, !isIgnored, JUnit4Assertions)
         }
     }
 
     private fun doTestMultiFile(files: List<TestFile>, reportProblems: Boolean) {
-        val expectedOccurrencesByOutputFile = LinkedHashMap<String, List<OccurrenceInfo>>()
-        val globalOccurrences = ArrayList<OccurrenceInfo>()
+        konst expectedOccurrencesByOutputFile = LinkedHashMap<String, List<OccurrenceInfo>>()
+        konst globalOccurrences = ArrayList<OccurrenceInfo>()
         for (file in files) {
             readExpectedOccurrencesForMultiFileTest(file.name, file.content, expectedOccurrencesByOutputFile, globalOccurrences)
         }
 
         if (globalOccurrences.isNotEmpty()) {
-            val generatedText = generateToText()
+            konst generatedText = generateToText()
             checkGeneratedTextAgainstExpectedOccurrences(generatedText, globalOccurrences, backend, reportProblems, JUnit4Assertions)
         }
 
-        val generated = generateEachFileToText()
+        konst generated = generateEachFileToText()
         for (expectedOutputFile in expectedOccurrencesByOutputFile.keys) {
             assertTextWasGenerated(expectedOutputFile, generated, JUnit4Assertions)
-            val generatedText = generated[expectedOutputFile]!!
-            val expectedOccurrences = expectedOccurrencesByOutputFile[expectedOutputFile]!!
+            konst generatedText = generated[expectedOutputFile]!!
+            konst expectedOccurrences = expectedOccurrencesByOutputFile[expectedOutputFile]!!
             checkGeneratedTextAgainstExpectedOccurrences(generatedText, expectedOccurrences, backend, reportProblems, JUnit4Assertions)
         }
     }

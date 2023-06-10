@@ -9,26 +9,26 @@ import java.io.File
 
 internal class KotlinNativeCommonizerToolRunner(
     context: GradleExecutionContext,
-    private val settings: Settings,
+    private konst settings: Settings,
 ) : KotlinToolRunner(context) {
 
     class Settings(
-        val kotlinPluginVersion: String,
-        val classpath: Set<File>,
-        val customJvmArgs: List<String>
+        konst kotlinPluginVersion: String,
+        konst classpath: Set<File>,
+        konst customJvmArgs: List<String>
     )
 
-    override val displayName get() = "Kotlin/Native KLIB commonizer"
+    override konst displayName get() = "Kotlin/Native KLIB commonizer"
 
-    override val mainClass: String get() = "org.jetbrains.kotlin.commonizer.cli.CommonizerCLI"
+    override konst mainClass: String get() = "org.jetbrains.kotlin.commonizer.cli.CommonizerCLI"
 
-    override val classpath: Set<File> get() = settings.classpath
+    override konst classpath: Set<File> get() = settings.classpath
 
-    override val isolatedClassLoaderCacheKey get() = settings.kotlinPluginVersion
+    override konst isolatedClassLoaderCacheKey get() = settings.kotlinPluginVersion
 
-    override val defaultMaxHeapSize: String get() = "4G"
+    override konst defaultMaxHeapSize: String get() = "4G"
 
-    override val mustRunViaExec get() = true // because it's not enough the standard Gradle wrapper's heap size
+    override konst mustRunViaExec get() = true // because it's not enough the standard Gradle wrapper's heap size
 
     override fun getCustomJvmArgs() = settings.customJvmArgs
 }

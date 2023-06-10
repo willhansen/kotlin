@@ -8,8 +8,8 @@ class A {
 
     inline fun a(f: () -> Any): Any {
         try {
-            val value = f()
-            return value
+            konst konstue = f()
+            return konstue
         } finally {
             field--
         }
@@ -34,7 +34,7 @@ class A {
 import test.*
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.c ({ "OK" })
     if (a.field != -1) return "fail 1: ${a.field}"
 

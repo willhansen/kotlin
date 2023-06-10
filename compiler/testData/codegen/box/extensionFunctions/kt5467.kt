@@ -1,9 +1,9 @@
 fun String.foo() : String {
     fun Int.bar() : String {
         fun Long.baz() : String {
-            val x = this@foo
-            val y = this@bar
-            val z = this@baz
+            konst x = this@foo
+            konst y = this@bar
+            konst z = this@baz
             return "$x $y $z"
         }
         return 0L.baz()
@@ -12,7 +12,7 @@ fun String.foo() : String {
 }
 
 fun box() : String {
-    val result = "OK".foo()
+    konst result = "OK".foo()
 
     if (result != "OK 42 0") return "fail: $result"
 

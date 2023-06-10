@@ -14,9 +14,9 @@ import org.junit.Assert
 
 class KtPsiFactoryTest : KotlinTestWithEnvironment() {
     fun testCreateModifierList() {
-        val psiFactory = KtPsiFactory(project)
+        konst psiFactory = KtPsiFactory(project)
         KtTokens.MODIFIER_KEYWORDS_ARRAY.forEach {
-            val modifier = psiFactory.createModifierList(it)
+            konst modifier = psiFactory.createModifierList(it)
             Assert.assertTrue(modifier.hasModifier(it))
         }
     }

@@ -19,37 +19,37 @@ import org.jetbrains.kotlin.test.services.TestServices
 typealias Constructor<T> = (TestServices) -> T
 
 abstract class TestConfiguration {
-    abstract val rootDisposable: Disposable
+    abstract konst rootDisposable: Disposable
 
-    abstract val testServices: TestServices
+    abstract konst testServices: TestServices
 
-    abstract val directives: DirectivesContainer
+    abstract konst directives: DirectivesContainer
 
-    abstract val defaultRegisteredDirectives: RegisteredDirectives
+    abstract konst defaultRegisteredDirectives: RegisteredDirectives
 
-    abstract val moduleStructureExtractor: ModuleStructureExtractor
+    abstract konst moduleStructureExtractor: ModuleStructureExtractor
 
-    abstract val preAnalysisHandlers: List<PreAnalysisHandler>
+    abstract konst preAnalysisHandlers: List<PreAnalysisHandler>
 
-    abstract val metaTestConfigurators: List<MetaTestConfigurator>
+    abstract konst metaTestConfigurators: List<MetaTestConfigurator>
 
-    abstract val afterAnalysisCheckers: List<AfterAnalysisChecker>
+    abstract konst afterAnalysisCheckers: List<AfterAnalysisChecker>
 
-    abstract val startingArtifactFactory: (TestModule) -> ResultingArtifact<*>
+    abstract konst startingArtifactFactory: (TestModule) -> ResultingArtifact<*>
 
-    abstract val steps: List<TestStep<*, *>>
+    abstract konst steps: List<TestStep<*, *>>
 
-    abstract val metaInfoHandlerEnabled: Boolean
+    abstract konst metaInfoHandlerEnabled: Boolean
 }
 
 // ---------------------------- Utils ----------------------------
 
-fun <T, R> ((TestServices, T) -> R).bind(value: T): Constructor<R> {
-    return { this.invoke(it, value) }
+fun <T, R> ((TestServices, T) -> R).bind(konstue: T): Constructor<R> {
+    return { this.invoke(it, konstue) }
 }
 
-fun <T1, T2, R> ((TestServices, T1, T2) -> R).bind(value1: T1, value2: T2): Constructor<R> {
-    return { this.invoke(it, value1, value2) }
+fun <T1, T2, R> ((TestServices, T1, T2) -> R).bind(konstue1: T1, konstue2: T2): Constructor<R> {
+    return { this.invoke(it, konstue1, konstue2) }
 }
 
 fun <R> (() -> R).coerce(): Constructor<R> {

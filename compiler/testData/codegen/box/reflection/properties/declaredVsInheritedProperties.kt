@@ -17,10 +17,10 @@ import kotlin.reflect.full.*
 import kotlin.test.assertEquals
 
 open class K : J() {
-    public val publicMemberK: String = ""
-    private val privateMemberK: String = ""
-    public val Any.publicMemberExtensionK: String get() = ""
-    private val Any.privateMemberExtensionK: String get() = ""
+    public konst publicMemberK: String = ""
+    private konst privateMemberK: String = ""
+    public konst Any.publicMemberExtensionK: String get() = ""
+    private konst Any.privateMemberExtensionK: String get() = ""
 }
 
 class L : K()
@@ -33,7 +33,7 @@ fun check(c: Collection<KProperty<*>>, names: Set<String>) {
 }
 
 fun box(): String {
-    val j = J::class
+    konst j = J::class
 
     check(j.staticProperties,
           setOf("publicStaticJ", "privateStaticJ"))
@@ -45,7 +45,7 @@ fun box(): String {
     check(j.memberProperties, j.declaredMemberProperties.names())
     check(j.memberExtensionProperties, emptySet())
 
-    val k = K::class
+    konst k = K::class
 
     check(k.staticProperties,
           emptySet())
@@ -58,7 +58,7 @@ fun box(): String {
     check(k.memberExtensionProperties, k.declaredMemberExtensionProperties.names())
 
 
-    val l = L::class
+    konst l = L::class
 
     check(l.staticProperties, emptySet())
     check(l.declaredMemberProperties, emptySet())

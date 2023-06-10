@@ -5,10 +5,10 @@ import kt44283.*
 import kotlin.native.concurrent.AtomicInt
 import kotlin.test.*
 
-val callbackCounter = AtomicInt(0)
+konst callbackCounter = AtomicInt(0)
 
 fun main() {
-    val func = staticCFunction<CValue<TestStruct>, Unit> {
+    konst func = staticCFunction<CValue<TestStruct>, Unit> {
         kotlin.native.runtime.GC.collect() // Helps to ensure that "runtime" is already initialized.
 
         memScoped {
@@ -17,7 +17,7 @@ fun main() {
         callbackCounter.increment()
     }
 
-    assertEquals(0, callbackCounter.value)
+    assertEquals(0, callbackCounter.konstue)
     invokeFromThread(func.reinterpret())
-    assertEquals(1, callbackCounter.value)
+    assertEquals(1, callbackCounter.konstue)
 }

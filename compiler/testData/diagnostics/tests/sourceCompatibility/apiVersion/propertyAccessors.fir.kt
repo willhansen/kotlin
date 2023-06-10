@@ -1,35 +1,35 @@
 // !API_VERSION: 1.0
 
-val v1: String
+konst v1: String
     @SinceKotlin("1.1")
     get() = ""
 
 @SinceKotlin("1.1")
-val v2 = ""
+konst v2 = ""
 
 var v3: String
     @SinceKotlin("1.1")
     get() = ""
-    set(value) {}
+    set(konstue) {}
 
 var v4: String
     get() = ""
     @SinceKotlin("1.1")
-    set(value) {}
+    set(konstue) {}
 
 var v5: String
     @SinceKotlin("1.1")
     get() = ""
     @SinceKotlin("1.1")
-    set(value) {}
+    set(konstue) {}
 
 @SinceKotlin("1.1")
 var v6: String
     get() = ""
-    set(value) {}
+    set(konstue) {}
 
 @SinceKotlin("1.0")
-val v7: String
+konst v7: String
     @SinceKotlin("1.1")
     get() = ""
 

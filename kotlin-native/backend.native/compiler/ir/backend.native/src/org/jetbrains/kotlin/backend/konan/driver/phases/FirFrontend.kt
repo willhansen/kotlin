@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.fir.pipeline.FirResult
 sealed class FirOutput {
     object ShouldNotGenerateCode : FirOutput()
 
-    data class Full(val firResult: FirResult) : FirOutput()
+    data class Full(konst firResult: FirResult) : FirOutput()
 }
 
-internal val FIRPhase = createSimpleNamedCompilerPhase(
+internal konst FIRPhase = createSimpleNamedCompilerPhase(
         "FirFrontend", "Compiler Fir Frontend",
         outputIfNotEnabled = { _, _, _, _ -> FirOutput.ShouldNotGenerateCode }
 ) { context: PhaseContext, input: KotlinCoreEnvironment ->

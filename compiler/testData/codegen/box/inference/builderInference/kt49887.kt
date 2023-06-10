@@ -4,7 +4,7 @@ fun test(): Int = buildList {
     add(1)
     add(2)
 
-    val number = removeLastOrNull() ?: throw Exception()
+    konst number = removeLastOrNull() ?: throw Exception()
 }.singleOrNull() ?: throw Exception()
 
 fun box(): String {

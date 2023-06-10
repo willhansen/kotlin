@@ -21,14 +21,14 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
    type parameters.
 */
 class ScopeValidator(
-    private val reportError: ReportError
+    private konst reportError: ReportError
 ) {
 
     fun check(element: IrElement) {
         element.accept(Checker(), Visibles(emptySet(), mutableSetOf()))
     }
 
-    inner class Visibles(val typeParameters: Set<IrTypeParameter>, val values: MutableSet<IrValueDeclaration>) {
+    inner class Visibles(konst typeParameters: Set<IrTypeParameter>, konst konstues: MutableSet<IrValueDeclaration>) {
         fun visitTypeAccess(element: IrElement, type: IrType) {
             if (type !is IrSimpleType) return
             if (type.classifier is IrTypeParameterSymbol && type.classifier.owner !in this.typeParameters) {
@@ -42,7 +42,7 @@ class ScopeValidator(
         }
 
         fun visitValueAccess(element: IrElement, variable: IrValueDeclaration) {
-            if (variable !in this.values) {
+            if (variable !in this.konstues) {
                 reportError(element, "Value ${variable.render()} not accessible")
             }
         }
@@ -50,7 +50,7 @@ class ScopeValidator(
         fun extend(newTypeParameters: Collection<IrTypeParameter>, newValues: Collection<IrValueDeclaration>): Visibles =
             Visibles(
                 if (newTypeParameters.isEmpty()) typeParameters else typeParameters + newTypeParameters,
-                (values + newValues).toMutableSet()
+                (konstues + newValues).toMutableSet()
             )
     }
 
@@ -60,7 +60,7 @@ class ScopeValidator(
         }
 
         override fun visitClass(declaration: IrClass, data: Visibles) {
-            val newVisibles = data.extend(declaration.typeParameters, listOfNotNull(declaration.thisReceiver))
+            konst newVisibles = data.extend(declaration.typeParameters, listOfNotNull(declaration.thisReceiver))
             for (superType in declaration.superTypes) {
                 newVisibles.visitTypeAccess(declaration, superType)
             }
@@ -68,9 +68,9 @@ class ScopeValidator(
         }
 
         override fun visitFunction(declaration: IrFunction, data: Visibles) {
-            val newVisibles = data.extend(
+            konst newVisibles = data.extend(
                 declaration.typeParameters,
-                listOfNotNull(declaration.dispatchReceiverParameter, declaration.extensionReceiverParameter) + declaration.valueParameters
+                listOfNotNull(declaration.dispatchReceiverParameter, declaration.extensionReceiverParameter) + declaration.konstueParameters
             )
 
             newVisibles.visitTypeAccess(declaration, declaration.returnType)
@@ -78,11 +78,11 @@ class ScopeValidator(
         }
 
         override fun visitAnonymousInitializer(declaration: IrAnonymousInitializer, data: Visibles) {
-            val primaryConstructor = declaration.parentAsClass.primaryConstructor()
+            konst primaryConstructor = declaration.parentAsClass.primaryConstructor()
             if (primaryConstructor == null) {
                 super.visitAnonymousInitializer(declaration, data)
             } else {
-                super.visitAnonymousInitializer(declaration, data.extend(emptySet(), primaryConstructor.valueParameters))
+                super.visitAnonymousInitializer(declaration, data.extend(emptySet(), primaryConstructor.konstueParameters))
             }
         }
 
@@ -91,11 +91,11 @@ class ScopeValidator(
             if (declaration.initializer == null) {
                 return super.visitField(declaration, data)
             }
-            val primaryConstructor = (declaration.parent as? IrClass)?.primaryConstructor()
+            konst primaryConstructor = (declaration.parent as? IrClass)?.primaryConstructor()
             if (primaryConstructor == null) {
                 super.visitField(declaration, data)
             } else {
-                super.visitField(declaration, data.extend(emptySet(), primaryConstructor.valueParameters))
+                super.visitField(declaration, data.extend(emptySet(), primaryConstructor.konstueParameters))
             }
         }
 
@@ -107,11 +107,11 @@ class ScopeValidator(
         override fun visitVariable(declaration: IrVariable, data: Visibles) {
             data.visitTypeAccess(declaration, declaration.type)
             super.visitVariable(declaration, data)
-            data.values.add(declaration)
+            data.konstues.add(declaration)
         }
 
         override fun visitTypeAlias(declaration: IrTypeAlias, data: Visibles) {
-            val newVisibles = data.extend(declaration.typeParameters, emptySet())
+            konst newVisibles = data.extend(declaration.typeParameters, emptySet())
             newVisibles.visitTypeAccess(declaration, declaration.expandedType)
             super.visitTypeAlias(declaration, newVisibles)
         }

@@ -14,7 +14,7 @@ fun box(): String {
 }
 
 
-val p: Int
+konst p: Int
     get() {
         printlnLog("Gotcha")
         return 3

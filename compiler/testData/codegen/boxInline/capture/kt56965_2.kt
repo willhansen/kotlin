@@ -5,8 +5,8 @@
 inline fun foo(block: () -> String) = block()
 
 inline fun bar() = foo {
-    val s = "O"
-    val obj = object {
+    konst s = "O"
+    konst obj = object {
         fun local() = localInline { it }
         inline fun localInline(block: (String) -> String) = block(s) + "K"
     }

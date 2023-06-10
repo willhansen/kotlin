@@ -35,21 +35,21 @@ import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 class FirParcelizeDeclarationGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
     companion object {
-        private val PREDICATE = LookupPredicate.create { annotated(PARCELIZE_FQN, OLD_PARCELIZE_FQN) }
-        private val parcelizeMethodsNames = setOf(DESCRIBE_CONTENTS_NAME, WRITE_TO_PARCEL_NAME)
+        private konst PREDICATE = LookupPredicate.create { annotated(PARCELIZE_FQN, OLD_PARCELIZE_FQN) }
+        private konst parcelizeMethodsNames = setOf(DESCRIBE_CONTENTS_NAME, WRITE_TO_PARCEL_NAME)
     }
 
-    private val matchedClasses by lazy {
+    private konst matchedClasses by lazy {
         session.predicateBasedProvider.getSymbolsByPredicate(PREDICATE)
             .filterIsInstance<FirRegularClassSymbol>()
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
-        val owner = context?.owner ?: return emptyList()
+        konst owner = context?.owner ?: return emptyList()
         require(owner is FirRegularClassSymbol)
-        val function = when (callableId.callableName) {
+        konst function = when (callableId.callableName) {
             DESCRIBE_CONTENTS_NAME -> {
-                val hasDescribeContentImplementation = owner.hasDescribeContentsImplementation() ||
+                konst hasDescribeContentImplementation = owner.hasDescribeContentsImplementation() ||
                         lookupSuperTypes(owner, lookupInterfaces = false, deep = true, session).any {
                             it.fullyExpandedType(session).toRegularClassSymbol(session)?.hasDescribeContentsImplementation() ?: false
                         }
@@ -58,11 +58,11 @@ class FirParcelizeDeclarationGenerator(session: FirSession) : FirDeclarationGene
                 }
             }
             WRITE_TO_PARCEL_NAME -> {
-                val declaredFunctions = owner.declarationSymbols.filterIsInstance<FirNamedFunctionSymbol>()
+                konst declaredFunctions = owner.declarationSymbols.filterIsInstance<FirNamedFunctionSymbol>()
                 runIf(declaredFunctions.none { it.isWriteToParcel() }) {
                     createMemberFunctionForParcelize(owner, callableId.callableName, session.builtinTypes.unitType.type) {
-                        valueParameter(DEST_NAME, PARCEL_ID.createConeType(session))
-                        valueParameter(FLAGS_NAME, session.builtinTypes.intType.type)
+                        konstueParameter(DEST_NAME, PARCEL_ID.createConeType(session))
+                        konstueParameter(FLAGS_NAME, session.builtinTypes.intType.type)
                     }
                 }
             }
@@ -77,14 +77,14 @@ class FirParcelizeDeclarationGenerator(session: FirSession) : FirDeclarationGene
 
     private fun FirNamedFunctionSymbol.isDescribeContentsImplementation(): Boolean {
         if (name != DESCRIBE_CONTENTS_NAME) return false
-        return valueParameterSymbols.isEmpty()
+        return konstueParameterSymbols.isEmpty()
     }
 
     private fun FirNamedFunctionSymbol.isWriteToParcel(): Boolean {
         if (name != WRITE_TO_PARCEL_NAME) return false
-        val parameterSymbols = valueParameterSymbols
+        konst parameterSymbols = konstueParameterSymbols
         if (parameterSymbols.size != 2) return false
-        val (destSymbol, flagsSymbol) = parameterSymbols
+        konst (destSymbol, flagsSymbol) = parameterSymbols
         if (destSymbol.resolvedReturnTypeRef.coneType.classId != PARCEL_ID) return false
         if (!flagsSymbol.resolvedReturnTypeRef.type.isInt) return false
         return true
@@ -108,8 +108,8 @@ class FirParcelizeDeclarationGenerator(session: FirSession) : FirDeclarationGene
             classSymbol.rawStatus.modality == Modality.ABSTRACT || classSymbol.rawStatus.modality == Modality.SEALED -> emptySet()
             classSymbol in matchedClasses && classSymbol.rawStatus.modality != Modality.SEALED -> parcelizeMethodsNames
             else -> {
-                val hasAnnotatedSealedSuperType = classSymbol.resolvedSuperTypeRefs.any {
-                    val superSymbol = it.type.fullyExpandedType(session).toRegularClassSymbol(session) ?: return@any false
+                konst hasAnnotatedSealedSuperType = classSymbol.resolvedSuperTypeRefs.any {
+                    konst superSymbol = it.type.fullyExpandedType(session).toRegularClassSymbol(session) ?: return@any false
                     superSymbol.rawStatus.modality == Modality.SEALED && superSymbol in matchedClasses
                 }
                 if (hasAnnotatedSealedSuperType) {
@@ -121,7 +121,7 @@ class FirParcelizeDeclarationGenerator(session: FirSession) : FirDeclarationGene
         }
     }
 
-    private val key: GeneratedDeclarationKey
+    private konst key: GeneratedDeclarationKey
         get() = ParcelizePluginKey
 
     override fun FirDeclarationPredicateRegistrar.registerPredicates() {

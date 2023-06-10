@@ -9,7 +9,7 @@ class C(var x: Int) {
     var z by ::x
 }
 
-class D(val c: C) {
+class D(konst c: C) {
     var y by c::x
     var C.w by C::x
     var Int.q by Int::x
@@ -26,8 +26,8 @@ var Int.x
 var Int.y by Int::x
 
 inline fun <P : KProperty<*>, R> P.test(delegate: P.() -> R, get: R.() -> Int, set: R.(Int) -> Unit) {
-    val ref = apply { isAccessible = true }.delegate()
-    require(ref.get() == 1) { "$ref initial value is ${ref.get()}, not 1" }
+    konst ref = apply { isAccessible = true }.delegate()
+    require(ref.get() == 1) { "$ref initial konstue is ${ref.get()}, not 1" }
     ref.set(2)
     require(ref.get() == 2) { "$ref after set(2) is ${ref.get()}, not 2" }
     ref.set(1)
@@ -53,10 +53,10 @@ fun box(): String {
     ::z.test()
     Int::y.test({ getExtensionDelegate() as KMutableProperty1<Int, Int> }, { get(100) }, { set(100, it) })
 
-    val w = D::class.members.single { it.name == "w" } as KMutableProperty2<D, C, Int>
+    konst w = D::class.members.single { it.name == "w" } as KMutableProperty2<D, C, Int>
     w.test(D(C(100)), C(1))
 
-    val q = D::class.members.single { it.name == "q" } as KMutableProperty2<D, Int, Int>
+    konst q = D::class.members.single { it.name == "q" } as KMutableProperty2<D, Int, Int>
     q.test({ getExtensionDelegate(D(C(100))) as KMutableProperty1<Int, Int> }, { get(100) }, { set(100, it) })
 
     return "OK"

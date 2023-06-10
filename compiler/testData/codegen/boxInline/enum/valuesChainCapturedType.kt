@@ -4,8 +4,8 @@
 package test
 
 inline fun <reified Y : Enum<Y>> myValues2(): String {
-    val values = { enumValues<Y>() }.let { it() }
-    return values.joinToString("")
+    konst konstues = { enumValues<Y>() }.let { it() }
+    return konstues.joinToString("")
 }
 
 inline fun <reified T : Enum<T>> myValues(): String {

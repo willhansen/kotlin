@@ -9,7 +9,7 @@ import java.util.IdentityHashMap
 
 /**
  * [SmartIdentityTable] is a Map like structure that uses reference identity for keys.
- * It uses 2 arrays to store keys & values until the number of entries stored is larger than [ARRAY_UNTIL_SIZE].
+ * It uses 2 arrays to store keys & konstues until the number of entries stored is larger than [ARRAY_UNTIL_SIZE].
  * At that point it switches to using an IdentityHashMap.
  *
  * This structure can be used instead of [HashMap] when reference identity can be used and
@@ -21,57 +21,57 @@ import java.util.IdentityHashMap
 class SmartIdentityTable<K, V> {
 
     private var keysArray: MutableList<K>? = ArrayList(ARRAY_UNTIL_SIZE)
-    private var valuesArray: MutableList<V>? = ArrayList(ARRAY_UNTIL_SIZE)
+    private var konstuesArray: MutableList<V>? = ArrayList(ARRAY_UNTIL_SIZE)
     private var largeMap: IdentityHashMap<K, V>? = null
 
-    val size: Int
+    konst size: Int
         get() = keysArray?.size ?: largeMap!!.size
 
     operator fun get(key: K): V? {
         return keysArray?.let {
             for ((index, k) in it.withIndex()) {
                 if (k === key) {
-                    return valuesArray!![index]
+                    return konstuesArray!![index]
                 }
             }
             return null
         } ?: largeMap!![key]
     }
 
-    operator fun set(key: K, value: V): V? {
-        val ka = keysArray
+    operator fun set(key: K, konstue: V): V? {
+        konst ka = keysArray
         if (ka != null) {
-            val va = valuesArray!!
+            konst va = konstuesArray!!
             // scan for existing keys in array
             for (i in 0 until ka.size) {
                 if (ka[i] === key) {
-                    val tmp = va[i]
-                    va[i] = value
+                    konst tmp = va[i]
+                    va[i] = konstue
                     return tmp
                 }
             }
             // if a new key, and array has room
             if (ka.size < ARRAY_UNTIL_SIZE) {
                 ka.add(key)
-                va.add(value)
+                va.add(konstue)
                 return null
             }
             convertToHashMap()
         }
         // all other cases, fallback to IdentityHashMap implementation
-        return largeMap!!.put(key, value)
+        return largeMap!!.put(key, konstue)
     }
 
     private fun convertToHashMap() {
-        val map = IdentityHashMap<K, V>()
-        val ka = keysArray!!
-        val va = valuesArray!!
+        konst map = IdentityHashMap<K, V>()
+        konst ka = keysArray!!
+        konst va = konstuesArray!!
         for (i in 0 until ka.size) {
             map[ka[i]] = va[i]
         }
         largeMap = map
         keysArray = null
-        valuesArray = null
+        konstuesArray = null
     }
 
     fun getOrCreate(key: K, factory: () -> V): V {
@@ -81,6 +81,6 @@ class SmartIdentityTable<K, V> {
     }
 
     companion object {
-        private const val ARRAY_UNTIL_SIZE = 10
+        private const konst ARRAY_UNTIL_SIZE = 10
     }
 }

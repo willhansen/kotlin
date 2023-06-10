@@ -15,12 +15,12 @@ import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 
 class FileRecordLogger(file: File) : IRecordLogger {
-    private val channel: FileChannel =
+    private konst channel: FileChannel =
         FileChannel.open(Paths.get(file.toURI()), StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.APPEND)
             ?: throw IOException("Could not open file $file")
 
-    private val outputStream: OutputStream
-    private val lock: FileLock
+    private konst outputStream: OutputStream
+    private konst lock: FileLock
 
     init {
         lock = try {

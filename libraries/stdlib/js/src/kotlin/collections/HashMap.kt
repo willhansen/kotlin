@@ -15,7 +15,7 @@ import kotlin.collections.MutableMap.MutableEntry
 /**
  * Hash table based implementation of the [MutableMap] interface.
  *
- * This implementation makes no guarantees regarding the order of enumeration of [keys], [values] and [entries] collections.
+ * This implementation makes no guarantees regarding the order of enumeration of [keys], [konstues] and [entries] collections.
  */
 // Classes that extend HashMap and implement `build()` (freezing) operation
 // have to make sure mutating methods check `checkIsMutable`.
@@ -40,16 +40,16 @@ public actual open class HashMap<K, V> : AbstractMutableMap<K, V>, MutableMap<K,
             return false
         }
 
-        override val size: Int get() = this@HashMap.size
+        override konst size: Int get() = this@HashMap.size
     }
 
 
     /**
      * Internal implementation of the map: either string-based or hashcode-based.
      */
-    private val internalMap: InternalMap<K, V>
+    private konst internalMap: InternalMap<K, V>
 
-    private val equality: EqualityComparator
+    private konst equality: EqualityComparator
 
     internal constructor(internalMap: InternalMap<K, V>) : super() {
         this.internalMap = internalMap
@@ -110,10 +110,10 @@ public actual open class HashMap<K, V> : AbstractMutableMap<K, V>, MutableMap<K,
 
     actual override fun containsKey(key: K): Boolean = internalMap.contains(key)
 
-    actual override fun containsValue(value: V): Boolean = internalMap.any { equality.equals(it.value, value) }
+    actual override fun containsValue(konstue: V): Boolean = internalMap.any { equality.equals(it.konstue, konstue) }
 
     private var _entries: MutableSet<MutableMap.MutableEntry<K, V>>? = null
-    actual override val entries: MutableSet<MutableMap.MutableEntry<K, V>>
+    actual override konst entries: MutableSet<MutableMap.MutableEntry<K, V>>
         get() {
             if (_entries == null) {
                 _entries = createEntrySet()
@@ -125,11 +125,11 @@ public actual open class HashMap<K, V> : AbstractMutableMap<K, V>, MutableMap<K,
 
     actual override operator fun get(key: K): V? = internalMap.get(key)
 
-    actual override fun put(key: K, value: V): V? = internalMap.put(key, value)
+    actual override fun put(key: K, konstue: V): V? = internalMap.put(key, konstue)
 
     actual override fun remove(key: K): V? = internalMap.remove(key)
 
-    actual override val size: Int get() = internalMap.size
+    actual override konst size: Int get() = internalMap.size
 
 }
 

@@ -1,7 +1,7 @@
 // !CHECK_TYPE
 // !DIAGNOSTICS: -UNUSED_PARAMETER
-data class A(val x: Int, val y: String)
-data class B(val u: Double, val w: Short)
+data class A(konst x: Int, konst y: String)
+data class B(konst u: Double, konst w: Short)
 
 // first parameter of the functional type of 'x' can only be inferred from a lambda parameter explicit type specification
 fun <X, Y> foo(y: Y, x: (X, Y) -> Unit) {}

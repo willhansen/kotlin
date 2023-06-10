@@ -28,7 +28,7 @@ fun threeLevelsReturnNoInitialization(x: Int?): Int? {
     // So, in fact, middle never finished normally
     // Hence 'y = 54' in middle is unreachable, and middle doesn't performs definite initialization
     // Hence, outer doesn't performs definite initialization
-    val y: Int
+    konst y: Int
     myRun outer@ {
         myRun middle@ {
             x.myLet inner@ {
@@ -48,7 +48,7 @@ fun threeLevelsReturnNoInitialization(x: Int?): Int? {
 }
 
 fun threeLevelsReturnWithInitialization(x: Int?): Int? {
-    val y: Int
+    konst y: Int
     myRun outer@ {
         myRun middle@ {
             x.myLet inner@ {
@@ -67,7 +67,7 @@ fun threeLevelsReturnWithInitialization(x: Int?): Int? {
 }
 
 fun threeLevelsReturnWithUnknown(x: Int?): Int? {
-    val y: Int
+    konst y: Int
     myRun outer@ {
         unknownRun middle@ {
             x.myLet inner@ {

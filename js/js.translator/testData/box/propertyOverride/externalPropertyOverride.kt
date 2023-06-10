@@ -1,21 +1,21 @@
 external interface A {
     @JsName("__name")
-    val name: String
+    konst name: String
 
     @JsName("bar")
     fun foo(): String
 }
 
 external class B: A {
-    override val name: String
+    override konst name: String
     override fun foo(): String
 }
 
 fun box(): String {
-    val c = js("{ __name: 'Frodo', bar: function() { return 'Baggins' } }")
+    konst c = js("{ __name: 'Frodo', bar: function() { return 'Baggins' } }")
 
-    val a: A = c
-    val b: B = c
+    konst a: A = c
+    konst b: B = c
 
     assertEquals(a.name, "Frodo")
     assertEquals(a.asDynamic().__name, "Frodo")

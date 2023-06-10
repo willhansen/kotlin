@@ -38,7 +38,7 @@ class JsIrFileSerializer(
     sourceBaseDirs = sourceBaseDirs
 ) {
     companion object {
-        private val JS_EXPORT_FQN = FqName("kotlin.js.JsExport")
+        private konst JS_EXPORT_FQN = FqName("kotlin.js.JsExport")
     }
 
     override fun backendSpecificExplicitRoot(node: IrAnnotationContainer): Boolean {

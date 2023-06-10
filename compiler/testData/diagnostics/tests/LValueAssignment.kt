@@ -1,8 +1,8 @@
-package lvalue_assignment
+package lkonstue_assignment
 
 open class B() {
     var b: Int = 2
-    val c: Int = 34
+    konst c: Int = 34
 }
 
 class C() : B() {
@@ -61,7 +61,7 @@ fun canBe(i0: Int, j: Int) {
 
     (label@ <!VAL_REASSIGNMENT!>j<!>) = 34 //repeat for j
 
-    val a = A()
+    konst a = A()
     (l@ a.a) = 3894
 
     @Ann
@@ -105,13 +105,13 @@ class Test() {
     }
 
     fun testIncompleteSyntax() {
-        val s = "s"
+        konst s = "s"
         <!DEBUG_INFO_MISSING_UNRESOLVED!>++<!>s.<!SYNTAX!><!>
     }
 
     fun testVariables() {
         var a: Int = 34
-        val b: Int = 34
+        konst b: Int = 34
 
         a += 34
         (l@ a) += 34
@@ -127,7 +127,7 @@ class Test() {
     }
 
     fun testVariables1() {
-        val b: Int = 34
+        konst b: Int = 34
 
         (l@ <!VAL_REASSIGNMENT!>b<!>) += 34
         //repeat for b

@@ -20,11 +20,11 @@ import com.intellij.psi.StubBasedPsiElement
 import org.jetbrains.kotlin.psi.KtNamedDeclaration
 
 /**
- * val lambda = fun(x: Int, _: String, `_`: Double) = 1
+ * konst lambda = fun(x: Int, _: String, `_`: Double) = 1
  *
- * This property is true only for second value parameter in the example above
+ * This property is true only for second konstue parameter in the example above
  */
-val KtNamedDeclaration.isSingleUnderscore: Boolean
+konst KtNamedDeclaration.isSingleUnderscore: Boolean
     get() {
         // We don't want to call 'getNameIdentifier' on stubs to prevent text building
         // But it's fine because one-underscore names are prohibited for non-local declarations (only lambda parameters, local vars are allowed)

@@ -19,7 +19,7 @@ import kotlinx.metadata.jvm.internal.jvm
  * If an incorrect index is used, either the `KProperty<*>` object passed to delegate methods will point to the wrong property
  * at runtime, or an exception will be thrown.
  */
-val KmClass.localDelegatedProperties: MutableList<KmProperty>
+konst KmClass.localDelegatedProperties: MutableList<KmProperty>
     get() = jvm.localDelegatedProperties
 
 /**
@@ -27,18 +27,18 @@ val KmClass.localDelegatedProperties: MutableList<KmProperty>
  */
 var KmClass.moduleName: String?
     get() = jvm.moduleName
-    set(value) {
-        jvm.moduleName = value
+    set(konstue) {
+        jvm.moduleName = konstue
     }
 
 /**
- * JVM internal name of the original class this anonymous object is copied from. This value is set for anonymous objects
+ * JVM internal name of the original class this anonymous object is copied from. This konstue is set for anonymous objects
  * copied from bodies of inline functions to the use site by the Kotlin compiler.
  */
 var KmClass.anonymousObjectOriginName: String?
     get() = jvm.anonymousObjectOriginName
-    set(value) {
-        jvm.anonymousObjectOriginName = value
+    set(konstue) {
+        jvm.anonymousObjectOriginName = konstue
     }
 
 /**
@@ -46,8 +46,8 @@ var KmClass.anonymousObjectOriginName: String?
  */
 var KmClass.jvmFlags: Flags
     get() = jvm.jvmFlags
-    set(value) {
-        jvm.jvmFlags = value
+    set(konstue) {
+        jvm.jvmFlags = konstue
     }
 
 /**
@@ -59,7 +59,7 @@ var KmClass.jvmFlags: Flags
  * If an incorrect index is used, either the `KProperty<*>` object passed to delegate methods will point to the wrong property
  * at runtime, or an exception will be thrown.
  */
-val KmPackage.localDelegatedProperties: MutableList<KmProperty>
+konst KmPackage.localDelegatedProperties: MutableList<KmProperty>
     get() = jvm.localDelegatedProperties
 
 /**
@@ -67,8 +67,8 @@ val KmPackage.localDelegatedProperties: MutableList<KmProperty>
  */
 var KmPackage.moduleName: String?
     get() = jvm.moduleName
-    set(value) {
-        jvm.moduleName = value
+    set(konstue) {
+        jvm.moduleName = konstue
     }
 
 /**
@@ -78,18 +78,18 @@ var KmPackage.moduleName: String?
  */
 var KmFunction.signature: JvmMethodSignature?
     get() = jvm.signature
-    set(value) {
-        jvm.signature = value
+    set(konstue) {
+        jvm.signature = konstue
     }
 
 /**
- * JVM internal name of the original class the lambda class for this function is copied from. This value is set for lambdas
+ * JVM internal name of the original class the lambda class for this function is copied from. This konstue is set for lambdas
  * copied from bodies of inline functions to the use site by the Kotlin compiler.
  */
 var KmFunction.lambdaClassOriginName: String?
     get() = jvm.lambdaClassOriginName
-    set(value) {
-        jvm.lambdaClassOriginName = value
+    set(konstue) {
+        jvm.lambdaClassOriginName = konstue
     }
 
 /**
@@ -97,8 +97,8 @@ var KmFunction.lambdaClassOriginName: String?
  */
 var KmProperty.jvmFlags: Flags
     get() = jvm.jvmFlags
-    set(value) {
-        jvm.jvmFlags = value
+    set(konstue) {
+        jvm.jvmFlags = konstue
     }
 
 /**
@@ -108,8 +108,8 @@ var KmProperty.jvmFlags: Flags
  */
 var KmProperty.fieldSignature: JvmFieldSignature?
     get() = jvm.fieldSignature
-    set(value) {
-        jvm.fieldSignature = value
+    set(konstue) {
+        jvm.fieldSignature = konstue
     }
 
 /**
@@ -119,8 +119,8 @@ var KmProperty.fieldSignature: JvmFieldSignature?
  */
 var KmProperty.getterSignature: JvmMethodSignature?
     get() = jvm.getterSignature
-    set(value) {
-        jvm.getterSignature = value
+    set(konstue) {
+        jvm.getterSignature = konstue
     }
 
 /**
@@ -130,8 +130,8 @@ var KmProperty.getterSignature: JvmMethodSignature?
  */
 var KmProperty.setterSignature: JvmMethodSignature?
     get() = jvm.setterSignature
-    set(value) {
-        jvm.setterSignature = value
+    set(konstue) {
+        jvm.setterSignature = konstue
     }
 
 /**
@@ -141,8 +141,8 @@ var KmProperty.setterSignature: JvmMethodSignature?
  */
 var KmProperty.syntheticMethodForAnnotations: JvmMethodSignature?
     get() = jvm.syntheticMethodForAnnotations
-    set(value) {
-        jvm.syntheticMethodForAnnotations = value
+    set(konstue) {
+        jvm.syntheticMethodForAnnotations = konstue
     }
 
 /**
@@ -154,8 +154,8 @@ var KmProperty.syntheticMethodForAnnotations: JvmMethodSignature?
  */
 var KmProperty.syntheticMethodForDelegate: JvmMethodSignature?
     get() = jvm.syntheticMethodForDelegate
-    set(value) {
-        jvm.syntheticMethodForDelegate = value
+    set(konstue) {
+        jvm.syntheticMethodForDelegate = konstue
     }
 
 /**
@@ -165,14 +165,14 @@ var KmProperty.syntheticMethodForDelegate: JvmMethodSignature?
  */
 var KmConstructor.signature: JvmMethodSignature?
     get() = jvm.signature
-    set(value) {
-        jvm.signature = value
+    set(konstue) {
+        jvm.signature = konstue
     }
 
 /**
  * Annotations on the type parameter.
  */
-val KmTypeParameter.annotations: MutableList<KmAnnotation>
+konst KmTypeParameter.annotations: MutableList<KmAnnotation>
     get() = jvm.annotations
 
 /**
@@ -180,12 +180,12 @@ val KmTypeParameter.annotations: MutableList<KmAnnotation>
  */
 var KmType.isRaw: Boolean
     get() = jvm.isRaw
-    set(value) {
-        jvm.isRaw = value
+    set(konstue) {
+        jvm.isRaw = konstue
     }
 
 /**
  * Annotations on the type.
  */
-val KmType.annotations: MutableList<KmAnnotation>
+konst KmType.annotations: MutableList<KmAnnotation>
     get() = jvm.annotations

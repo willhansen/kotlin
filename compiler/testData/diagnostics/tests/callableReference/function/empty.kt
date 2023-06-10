@@ -2,6 +2,6 @@
 class A
 
 fun main() {
-    val x = :: <!SYNTAX!><!>;
-    val y = A::
+    konst x = :: <!SYNTAX!><!>;
+    konst y = A::
 <!SYNTAX!><!>}

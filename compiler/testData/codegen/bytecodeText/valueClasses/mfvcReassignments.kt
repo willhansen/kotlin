@@ -5,9 +5,9 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double)
+konstue class DPoint(konst x: Double, konst y: Double)
 
-class Box(var value: DPoint)
+class Box(var konstue: DPoint)
 
 fun supplier(index: Int) {} // to make usage of the argument
 fun supplier(index: Int, x: DPoint) {} // to make usage of the argument
@@ -32,7 +32,7 @@ fun reassignVariable(x: DPoint, box: Box) {
     supplier(103, p)
     p = x // should not use temporary variables
     supplier(104, p)
-    p = box.value // should use temporary variables
+    p = box.konstue // should use temporary variables
     supplier(105, p)
     p = listOf(p)[0] // should use temporary variables
     supplier(106, p)
@@ -40,19 +40,19 @@ fun reassignVariable(x: DPoint, box: Box) {
 
 fun reassignField(x: DPoint, box: Box) {
     supplier(107)
-    val p = DPoint(`5`(), `6`())
+    konst p = DPoint(`5`(), `6`())
     supplier(108, p)
     var b = Box(p) // should not use temporary variables
     supplier(109)
-    b.value = b.value // should not use temporary variables
+    b.konstue = b.konstue // should not use temporary variables
     supplier(110)
-    b.value = DPoint(`7`(), `8`()) // should use tempVars
+    b.konstue = DPoint(`7`(), `8`()) // should use tempVars
     supplier(111)
-    b.value = x // should not use temporary variables
+    b.konstue = x // should not use temporary variables
     supplier(112)
-    b.value = box.value // should not use temporary variables
+    b.konstue = box.konstue // should not use temporary variables
     supplier(113)
-    b.value = listOf(p)[0] // should use temporary variables
+    b.konstue = listOf(p)[0] // should use temporary variables
     supplier(114)
 }
 

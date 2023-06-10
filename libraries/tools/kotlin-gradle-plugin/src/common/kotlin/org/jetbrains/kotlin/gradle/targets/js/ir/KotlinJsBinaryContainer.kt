@@ -30,26 +30,26 @@ import javax.inject.Inject
 open class KotlinJsBinaryContainer
 @Inject
 constructor(
-    val target: KotlinTargetWithBinaries<KotlinJsCompilation, KotlinJsBinaryContainer>,
+    konst target: KotlinTargetWithBinaries<KotlinJsCompilation, KotlinJsBinaryContainer>,
     backingContainer: DomainObjectSet<JsBinary>
 ) : DomainObjectSet<JsBinary> by backingContainer {
-    val project: Project
+    konst project: Project
         get() = target.project
 
-    private val binaryNames = mutableSetOf<String>()
+    private konst binaryNames = mutableSetOf<String>()
 
-    private val defaultCompilation: KotlinJsCompilation
+    private konst defaultCompilation: KotlinJsCompilation
         get() = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
 
     private fun configureBinaryen(binary: JsIrBinary, binaryenDsl: BinaryenExec.() -> Unit) {
-        val linkTask = binary.linkTask
+        konst linkTask = binary.linkTask
 
-        val compiledWasmFile = linkTask.map { link ->
+        konst compiledWasmFile = linkTask.map { link ->
             link.destinationDirectory.asFile.get().resolve(link.compilerOptions.moduleName.get() + ".wasm")
         }
 
         //TODO This is temporary solution that overrides compiled files that triggers recompile and reoptimize wasm every time (when binaryen is enabled)
-        val binaryenTask = BinaryenExec.create(binary.compilation, "${linkTask.name}Optimize") {
+        konst binaryenTask = BinaryenExec.create(binary.compilation, "${linkTask.name}Optimize") {
             dependsOn(linkTask)
             inputFileProperty.fileProvider(compiledWasmFile)
             outputFileProperty.fileProvider(compiledWasmFile)
@@ -111,10 +111,10 @@ constructor(
         jsBinaryType = KotlinJsBinaryType.EXECUTABLE,
         create = { jsCompilation, name, type ->
             object : JsBinary {
-                override val compilation: KotlinJsCompilation = jsCompilation
-                override val name: String = name
-                override val mode: KotlinJsBinaryMode = type
-                override val distribution: Distribution = createDefaultDistribution(jsCompilation.target.project, jsCompilation.target.targetName)
+                override konst compilation: KotlinJsCompilation = jsCompilation
+                override konst name: String = name
+                override konst mode: KotlinJsBinaryMode = type
+                override konst distribution: Distribution = createDefaultDistribution(jsCompilation.target.project, jsCompilation.target.targetName)
             }
         }
     )
@@ -179,7 +179,7 @@ constructor(
         jsBinaryType: KotlinJsBinaryType,
         create: (compilation: KotlinJsCompilation, name: String, mode: KotlinJsBinaryMode) -> T
     ): JsBinary {
-        val name = generateBinaryName(
+        konst name = generateBinaryName(
             compilation,
             mode,
             jsBinaryType
@@ -191,7 +191,7 @@ constructor(
 
         binaryNames.add(name)
 
-        val binary = create(compilation, name, mode)
+        konst binary = create(compilation, name, mode)
         add(binary)
         // Allow accessing binaries as properties of the container in Groovy DSL.
         if (this is ExtensionAware) {

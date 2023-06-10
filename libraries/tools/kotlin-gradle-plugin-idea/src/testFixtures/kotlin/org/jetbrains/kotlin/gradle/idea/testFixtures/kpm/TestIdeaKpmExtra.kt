@@ -7,4 +7,4 @@ package org.jetbrains.kotlin.gradle.idea.testFixtures.kpm
 
 import java.io.Serializable
 
-data class TestIdeaKpmExtra(val id: Any) : Serializable
+data class TestIdeaKpmExtra(konst id: Any) : Serializable

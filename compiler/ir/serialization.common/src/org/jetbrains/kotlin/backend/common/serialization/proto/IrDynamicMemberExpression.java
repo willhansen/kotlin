@@ -30,7 +30,7 @@ public final class IrDynamicMemberExpression extends
   private IrDynamicMemberExpression(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -73,10 +73,10 @@ public final class IrDynamicMemberExpression extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -94,7 +94,7 @@ public final class IrDynamicMemberExpression extends
     public IrDynamicMemberExpression parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrDynamicMemberExpression(input, extensionRegistry);
     }
   };
@@ -201,23 +201,23 @@ public final class IrDynamicMemberExpression extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression parseFrom(java.io.InputStream input)
@@ -356,7 +356,7 @@ public final class IrDynamicMemberExpression extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -384,9 +384,9 @@ public final class IrDynamicMemberExpression extends
     /**
      * <code>required int32 member_name = 1;</code>
      */
-    public Builder setMemberName(int value) {
+    public Builder setMemberName(int konstue) {
       bitField0_ |= 0x00000001;
-      memberName_ = value;
+      memberName_ = konstue;
       
       return this;
     }
@@ -416,11 +416,11 @@ public final class IrDynamicMemberExpression extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression receiver = 2;</code>
      */
-    public Builder setReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      receiver_ = value;
+      receiver_ = konstue;
 
       bitField0_ |= 0x00000002;
       return this;
@@ -438,13 +438,13 @@ public final class IrDynamicMemberExpression extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression receiver = 2;</code>
      */
-    public Builder mergeReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (((bitField0_ & 0x00000002) == 0x00000002) &&
           receiver_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         receiver_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(receiver_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(receiver_).mergeFrom(konstue).buildPartial();
       } else {
-        receiver_ = value;
+        receiver_ = konstue;
       }
 
       bitField0_ |= 0x00000002;

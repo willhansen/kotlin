@@ -15,7 +15,7 @@ open class ChainableBenchmark {
         private var data: IntArray = IntArray(capacity)
         var size: Int = 0
             private set
-        val capacity get() = data.size
+        konst capacity get() = data.size
         private fun grow(minSize: Int) {
             data = data.copyOf(kotlin.math.max(minSize, capacity * 3))
         }
@@ -25,26 +25,26 @@ open class ChainableBenchmark {
             }
         }
 
-        fun add(value: Int) {
+        fun add(konstue: Int) {
             ensure(1)
-            data[size++] = value
+            data[size++] = konstue
         }
 
-        fun addChainable(value: Int): IntArrayList {
-            add(value)
+        fun addChainable(konstue: Int): IntArrayList {
+            add(konstue)
             return this
         }
 
         operator fun get(index: Int): Int = data[index]
-        operator fun set(index: Int, value: Int) {
-            data[index] = value
+        operator fun set(index: Int, konstue: Int) {
+            data[index] = konstue
         }
     }
-    val size = BENCHMARK_SIZE * 100
+    konst size = BENCHMARK_SIZE * 100
 
     //Benchmark
     fun testChainable() {
-        val list = IntArrayList()
+        konst list = IntArrayList()
         for (i in 0..size) {
             list.addChainable(i)
         }

@@ -1,20 +1,20 @@
 // WITH_STDLIB
 
 interface OneofField<T> {
-    val value: T
-    val number: Int
-    val name: String
+    konst konstue: T
+    konst number: Int
+    konst name: String
 
     data class OneofUint32 constructor(
-        override val value: UInt,
-        override val number: Int = 111,
-        override val name: String = "oneof_uint32"
+        override konst konstue: UInt,
+        override konst number: Int = 111,
+        override konst name: String = "oneof_uint32"
     ) : OneofField<UInt>
 }
 
 fun box(): String {
-    val d = OneofField.OneofUint32(0u)
-    val s = d.toString()
-    if (s != "OneofUint32(value=0, number=111, name=oneof_uint32)") return s
+    konst d = OneofField.OneofUint32(0u)
+    konst s = d.toString()
+    if (s != "OneofUint32(konstue=0, number=111, name=oneof_uint32)") return s
     return "OK"
 }

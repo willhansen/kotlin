@@ -8,20 +8,20 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-data class Foo(val value: Int) : Parcelable
+data class Foo(konst konstue: Int) : Parcelable
 
 @Parcelize
-data class Box<T : Parcelable>(val box: T) : Parcelable
+data class Box<T : Parcelable>(konst box: T) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val foo = Foo(42)
-    val box = Box(foo)
+    konst foo = Foo(42)
+    konst box = Box(foo)
     box.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val boxLoaded = parcelableCreator<Box<Foo>>().createFromParcel(parcel)
+    konst boxLoaded = parcelableCreator<Box<Foo>>().createFromParcel(parcel)
     assert(box == boxLoaded)
 }

@@ -8,28 +8,28 @@ package test
 import kotlin.reflect.KClass
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICInt(val i: Int)
+konstue class ICInt(konst i: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICIntArray(val i: IntArray)
+konstue class ICIntArray(konst i: IntArray)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICIntN(val i: Int?)
+konstue class ICIntN(konst i: Int?)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICIntNArray(val i: Array<Int?>)
+konstue class ICIntNArray(konst i: Array<Int?>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICAny(val a: Any)
+konstue class ICAny(konst a: Any)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICAnyArray(val a: Array<Any>)
+konstue class ICAnyArray(konst a: Array<Any>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICAnyNArray(val a: Array<Any?>)
+konstue class ICAnyNArray(konst a: Array<Any?>)
 
-annotation class Ann(val c: KClass<*>)
-annotation class AnnArray(val c: Array<KClass<*>>)
+annotation class Ann(konst c: KClass<*>)
+annotation class AnnArray(konst c: Array<KClass<*>>)
 
 @Ann(ICInt::class)
 @AnnArray([ICInt::class])

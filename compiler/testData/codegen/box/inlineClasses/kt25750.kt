@@ -5,11 +5,11 @@
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
 
-operator fun <R> KMutableProperty0<R>.setValue(host: Any?, property: KProperty<*>, value: R) = set(value)
+operator fun <R> KMutableProperty0<R>.setValue(host: Any?, property: KProperty<*>, konstue: R) = set(konstue)
 operator fun <R> KMutableProperty0<R>.getValue(host: Any?, property: KProperty<*>): R = get()
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo(val i: Int)
+konstue class Foo(konst i: Int)
 
 var f = Foo(4)
 

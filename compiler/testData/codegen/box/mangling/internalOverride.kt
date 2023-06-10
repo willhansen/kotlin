@@ -1,5 +1,5 @@
 open class A {
-    internal open val field = "AF"
+    internal open konst field = "AF"
 
     internal open fun test(): String = "AM"
 }
@@ -7,7 +7,7 @@ open class A {
 fun invokeOnA(a: A) = a.test() + a.field
 
 class Z : A() {
-    override val field: String = "ZF"
+    override konst field: String = "ZF"
 
     override fun test(): String = "ZM"
 }
@@ -19,10 +19,10 @@ fun box() : String {
     invokeOnA = invokeOnA(Z())
     if (invokeOnA != "ZMZF") return "fail 2: $invokeOnA"
 
-    val z = Z().test()
+    konst z = Z().test()
     if (z != "ZM") return "fail 3: $z"
 
-    val f = Z().field
+    konst f = Z().field
     if (f != "ZF") return "fail 4: $f"
 
     return "OK"

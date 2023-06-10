@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.types.isUnit
 
 object FirParcelizeFunctionChecker : FirSimpleFunctionChecker() {
     override fun check(declaration: FirSimpleFunction, context: CheckerContext, reporter: DiagnosticReporter) {
-        val containingClassSymbol = declaration.dispatchReceiverType?.toRegularClassSymbol(context.session)
+        konst containingClassSymbol = declaration.dispatchReceiverType?.toRegularClassSymbol(context.session)
         if (!containingClassSymbol.isParcelize(context.session)) return
         if (declaration.origin != FirDeclarationOrigin.Source) return
         if (declaration.isWriteToParcel() && declaration.isOverride) {
@@ -29,8 +29,8 @@ object FirParcelizeFunctionChecker : FirSimpleFunctionChecker() {
 
     private fun FirSimpleFunction.isWriteToParcel(): Boolean {
         return typeParameters.isEmpty() &&
-                valueParameters.size == 2 &&
-                valueParameters[1].returnTypeRef.coneType.isInt &&
+                konstueParameters.size == 2 &&
+                konstueParameters[1].returnTypeRef.coneType.isInt &&
                 returnTypeRef.coneType.isUnit
     }
 }

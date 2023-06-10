@@ -95,7 +95,7 @@ public actual abstract class AbstractMutableList<E> protected actual constructor
      * Removes the range of elements from this list starting from [fromIndex] and ending with but not including [toIndex].
      */
     protected open fun removeRange(fromIndex: Int, toIndex: Int) {
-        val iterator = listIterator(fromIndex)
+        konst iterator = listIterator(fromIndex)
         repeat(toIndex - fromIndex) {
             iterator.next()
             iterator.remove()
@@ -115,7 +115,7 @@ public actual abstract class AbstractMutableList<E> protected actual constructor
     }
 
     /**
-     * Returns the hash code value for this list.
+     * Returns the hash code konstue for this list.
      */
     override fun hashCode(): Int = AbstractList.orderedHashCode(this)
 
@@ -176,12 +176,12 @@ public actual abstract class AbstractMutableList<E> protected actual constructor
         }
 
         override fun set(element: E) {
-            check(last != -1) { "Call next() or previous() before updating element value with the iterator." }
+            check(last != -1) { "Call next() or previous() before updating element konstue with the iterator." }
             set(last, element)
         }
     }
 
-    private class SubList<E>(private val list: AbstractMutableList<E>, private val fromIndex: Int, toIndex: Int) : AbstractMutableList<E>(), RandomAccess {
+    private class SubList<E>(private konst list: AbstractMutableList<E>, private konst fromIndex: Int, toIndex: Int) : AbstractMutableList<E>(), RandomAccess {
         private var _size: Int = 0
 
         init {
@@ -205,7 +205,7 @@ public actual abstract class AbstractMutableList<E> protected actual constructor
         override fun removeAt(index: Int): E {
             AbstractList.checkElementIndex(index, _size)
 
-            val result = list.removeAt(fromIndex + index)
+            konst result = list.removeAt(fromIndex + index)
             _size--
             return result
         }
@@ -216,7 +216,7 @@ public actual abstract class AbstractMutableList<E> protected actual constructor
             return list.set(fromIndex + index, element)
         }
 
-        override val size: Int get() = _size
+        override konst size: Int get() = _size
 
         internal override fun checkIsMutable(): Unit = list.checkIsMutable()
     }

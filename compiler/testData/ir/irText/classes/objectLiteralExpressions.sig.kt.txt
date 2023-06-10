@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Any
+konst test1: Any
   field
     // CHECK JVM_IR:
     //   Mangled name (compatible mode: false): {}test1.<no name provided>
@@ -28,7 +28,7 @@ val test1: Any
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: IFoo
+konst test2: IFoo
   field
     // CHECK JVM_IR:
     //   Mangled name (compatible mode: false): {}test2.<no name provided>

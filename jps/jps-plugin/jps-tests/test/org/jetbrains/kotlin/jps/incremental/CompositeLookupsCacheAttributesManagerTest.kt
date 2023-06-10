@@ -12,7 +12,7 @@ import kotlin.io.path.Path
 import kotlin.test.assertEquals
 
 class CompositeLookupsCacheAttributesManagerTest {
-    val manager = CompositeLookupsCacheAttributesManager(Path("not-used"), setOf())
+    konst manager = CompositeLookupsCacheAttributesManager(Path("not-used"), setOf())
 
     @Test
     fun testNothingToJava() {

@@ -18,9 +18,9 @@ operator fun String.getValue(receiver: Any?, p: Any): String =
 
 object Test {
     fun foo() {}
-    @JvmStatic val testO by runLogged("O;") { "O" }
-    @JvmStatic val testK by runLogged("K;") { "K" }
-    @JvmStatic val testOK = runLogged("OK;") { testO + testK }
+    @JvmStatic konst testO by runLogged("O;") { "O" }
+    @JvmStatic konst testK by runLogged("K;") { "K" }
+    @JvmStatic konst testOK = runLogged("OK;") { testO + testK }
 }
 
 fun box(): String {

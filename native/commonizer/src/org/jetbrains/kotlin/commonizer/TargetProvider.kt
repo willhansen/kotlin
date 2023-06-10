@@ -9,26 +9,26 @@ import org.jetbrains.kotlin.library.SerializedMetadata
 import java.io.File
 
 class TargetProvider(
-    val target: CommonizerTarget,
-    val modulesProvider: ModulesProvider
+    konst target: CommonizerTarget,
+    konst modulesProvider: ModulesProvider
 )
 
 interface ModulesProvider {
     open class ModuleInfo(
-        val name: String,
-        val cInteropAttributes: CInteropModuleAttributes?
+        konst name: String,
+        konst cInteropAttributes: CInteropModuleAttributes?
     )
 
     class CInteropModuleAttributes(
-        val mainPackage: String,
-        val exportedForwardDeclarations: Collection<String>
+        konst mainPackage: String,
+        konst exportedForwardDeclarations: Collection<String>
     )
 
     /**
      * Returns information about all modules that can be loaded by this [ModulesProvider] in the form of [ModuleInfo]s.
      * The module infos are expected to be already loaded. Access should be lightweight
      */
-    val moduleInfos: Collection<ModuleInfo>
+    konst moduleInfos: Collection<ModuleInfo>
 
     /**
      * Loads metadata for the specified module.

@@ -9,24 +9,24 @@
 interface A<K, V> : MutableMap<K, V>
 
 class B : A<String, String>, java.util.AbstractMap<String, String>() {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = java.util.HashSet()
 }
 
 interface C<K, V> : MutableMap<K, V> {
-    override fun remove(key: K, value: V) = true
+    override fun remove(key: K, konstue: V) = true
 }
 
 class D : A<String, String>, java.util.AbstractMap<String, String>() {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = java.util.HashSet()
 }
 
 fun box(): String {
-    val x1 = B().remove("1", "2")
+    konst x1 = B().remove("1", "2")
     if (x1) return "fail 1"
 
-    val x2 = D().remove("3", "4")
+    konst x2 = D().remove("3", "4")
     if (x1) return "fail 2"
 
     return "OK"

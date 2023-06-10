@@ -11,7 +11,7 @@ private func testPropertyWithPrivateSetter() throws {
     try assertEquals(actual: Kt43599Kt.topLevelProperty, expected: "topLevelProperty")
 
     // Checking the reported case too:
-    Kt43599Kt.setTopLevelLateinitProperty(value: "topLevelLateinitProperty")
+    Kt43599Kt.setTopLevelLateinitProperty(konstue: "topLevelLateinitProperty")
     try assertEquals(actual: Kt43599Kt.topLevelLateinitProperty, expected: "topLevelLateinitProperty")
 }
 

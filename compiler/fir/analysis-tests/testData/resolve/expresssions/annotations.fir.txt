@@ -1,5 +1,5 @@
 FILE: annotations.kt
-    @R|kotlin/annotation/Retention|(value = Q|kotlin/annotation/AnnotationRetention|.R|kotlin/annotation/AnnotationRetention.SOURCE|) @R|kotlin/annotation/Target|(allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.EXPRESSION|)) public final annotation class MyAnn : R|kotlin/Annotation| {
+    @R|kotlin/annotation/Retention|(konstue = Q|kotlin/annotation/AnnotationRetention|.R|kotlin/annotation/AnnotationRetention.SOURCE|) @R|kotlin/annotation/Target|(allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.EXPRESSION|)) public final annotation class MyAnn : R|kotlin/Annotation| {
         public constructor(): R|MyAnn| {
             super<R|kotlin/Any|>()
         }
@@ -8,10 +8,10 @@ FILE: annotations.kt
     public final fun bar(x: R|kotlin/Int|): R|kotlin/Unit| {
     }
     public final fun foo(): R|kotlin/Unit| {
-        @R|MyAnn|() lval x: R|kotlin/Int|
+        @R|MyAnn|() lkonst x: R|kotlin/Int|
         @R|MyAnn|() R|<local>/x| = @R|MyAnn|() Int(42)
         @R|MyAnn|() R|/bar|(@R|MyAnn|() R|<local>/x|)
-        lval y: R|kotlin/Int| = @R|MyAnn|() when () {
+        lkonst y: R|kotlin/Int| = @R|MyAnn|() when () {
             Boolean(false) ->  {
                 R|<local>/x|
             }
@@ -20,7 +20,7 @@ FILE: annotations.kt
             }
         }
 
-        lval z: R|kotlin/Int| = @R|MyAnn|() try {
+        lkonst z: R|kotlin/Int| = @R|MyAnn|() try {
             R|<local>/x|
         }
         catch (t: R|kotlin/Throwable|) {

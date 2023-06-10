@@ -3,11 +3,11 @@
 // FILE: main.kt
 
 open class A {
-    protected open val x: (String) -> Boolean = { true }
+    protected open konst x: (String) -> Boolean = { true }
 }
 
 class B : A() {
-    override val x = { y: String ->
+    override konst x = { y: String ->
         super.x(y)
     }
 }

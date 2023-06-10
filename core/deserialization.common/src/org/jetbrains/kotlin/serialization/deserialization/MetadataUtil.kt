@@ -13,11 +13,11 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.serialization.deserialization.builtins.BuiltInSerializerProtocol
 import java.io.InputStream
 
-class MetadataClassDataFinder(val finder: KotlinMetadataFinder) : ClassDataFinder {
+class MetadataClassDataFinder(konst finder: KotlinMetadataFinder) : ClassDataFinder {
     override fun findClassData(classId: ClassId): ClassData? {
-        val topLevelClassId = generateSequence(classId, ClassId::getOuterClassId).last()
-        val stream = finder.findMetadata(topLevelClassId) ?: return null
-        val (message, nameResolver, version) = readProto(stream)
+        konst topLevelClassId = generateSequence(classId, ClassId::getOuterClassId).last()
+        konst stream = finder.findMetadata(topLevelClassId) ?: return null
+        konst (message, nameResolver, version) = readProto(stream)
         return message.class_List.firstOrNull { classProto ->
             nameResolver.getClassId(classProto.fqName) == classId
         }?.let { classProto ->
@@ -27,7 +27,7 @@ class MetadataClassDataFinder(val finder: KotlinMetadataFinder) : ClassDataFinde
 }
 
 fun readProto(stream: InputStream): Triple<ProtoBuf.PackageFragment, NameResolverImpl, BuiltInsBinaryVersion> {
-    val version = BuiltInsBinaryVersion.readFrom(stream)
+    konst version = BuiltInsBinaryVersion.readFrom(stream)
 
     if (!version.isCompatibleWithCurrentCompilerVersion()) {
         // TODO: report a proper diagnostic
@@ -38,7 +38,7 @@ fun readProto(stream: InputStream): Triple<ProtoBuf.PackageFragment, NameResolve
         )
     }
 
-    val message = ProtoBuf.PackageFragment.parseFrom(stream, BuiltInSerializerProtocol.extensionRegistry)
-    val nameResolver = NameResolverImpl(message.strings, message.qualifiedNames)
+    konst message = ProtoBuf.PackageFragment.parseFrom(stream, BuiltInSerializerProtocol.extensionRegistry)
+    konst nameResolver = NameResolverImpl(message.strings, message.qualifiedNames)
     return Triple(message, nameResolver, version)
 }

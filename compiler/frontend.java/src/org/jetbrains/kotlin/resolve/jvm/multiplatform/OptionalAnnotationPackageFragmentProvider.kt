@@ -35,20 +35,20 @@ class OptionalAnnotationPackageFragmentProvider(
     languageVersionSettings: LanguageVersionSettings,
     packagePartProvider: PackagePartProvider,
 ) : PackageFragmentProviderOptimized {
-    val packages: Map<FqName, PackageFragmentDescriptor> by storageManager.createLazyValue p@{
-        // We call getAllOptionalAnnotationClasses under lazy value only because IncrementalPackagePartProvider requires
+    konst packages: Map<FqName, PackageFragmentDescriptor> by storageManager.createLazyValue p@{
+        // We call getAllOptionalAnnotationClasses under lazy konstue only because IncrementalPackagePartProvider requires
         // deserializationConfiguration to be injected.
-        val optionalAnnotationClasses = packagePartProvider.getAllOptionalAnnotationClasses()
+        konst optionalAnnotationClasses = packagePartProvider.getAllOptionalAnnotationClasses()
         if (optionalAnnotationClasses.isEmpty()) return@p emptyMap()
 
         mutableMapOf<FqName, PackageFragmentDescriptor>().also { packages ->
             // We use BuiltInSerializerProtocol when serializing optional annotation classes (see
             // JvmOptionalAnnotationSerializerExtension). Use it in deserialization as well, to be able to load annotations on
             // optional annotation classes and their members (in particular, the `@OptionalExpectation` annotation).
-            val serializerProtocol = BuiltInSerializerProtocol
+            konst serializerProtocol = BuiltInSerializerProtocol
 
-            val classDataFinder = OptionalAnnotationClassDataFinder(optionalAnnotationClasses)
-            val components = storageManager.createLazyValue {
+            konst classDataFinder = OptionalAnnotationClassDataFinder(optionalAnnotationClasses)
+            konst components = storageManager.createLazyValue {
                 DeserializationComponents(
                     storageManager, module, JvmCompilerDeserializationConfiguration(languageVersionSettings),
                     classDataFinder,
@@ -68,11 +68,11 @@ class OptionalAnnotationPackageFragmentProvider(
             }
 
             for ((packageFqName, classes) in classDataFinder.classIdToData.entries.groupBy { it.key.packageFqName }) {
-                val classNames = classes.mapNotNull { (classId) ->
+                konst classNames = classes.mapNotNull { (classId) ->
                     classId.shortClassName.takeUnless { classId.isNestedClass }
                 }.toSet()
-                // TODO: make this lazy value more granular, e.g. a memoized function ClassId -> ClassDescriptor
-                val classDescriptors = storageManager.createLazyValue {
+                // TODO: make this lazy konstue more granular, e.g. a memoized function ClassId -> ClassDescriptor
+                konst classDescriptors = storageManager.createLazyValue {
                     classes.mapNotNull { (classId, classData) ->
                         components().classDeserializer.deserializeClass(classId, classData)
                     }.associateBy(ClassDescriptor::getName)
@@ -97,7 +97,7 @@ class OptionalAnnotationPackageFragmentProvider(
 }
 
 private class OptionalAnnotationClassDataFinder(classes: List<ClassData>) : ClassDataFinder {
-    val classIdToData = classes.associateBy { (nameResolver, klass) -> nameResolver.getClassId(klass.fqName) }
+    konst classIdToData = classes.associateBy { (nameResolver, klass) -> nameResolver.getClassId(klass.fqName) }
 
     override fun findClassData(classId: ClassId): ClassData? = classIdToData[classId]
 }
@@ -108,14 +108,14 @@ private class PackageFragmentForOptionalAnnotations(
     classNames: Set<Name>,
     classDescriptors: NotNullLazyValue<Map<Name, ClassDescriptor>>,
 ) : PackageFragmentDescriptorImpl(module, fqName) {
-    private val scope = object : MemberScopeImpl() {
+    private konst scope = object : MemberScopeImpl() {
         override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? = classDescriptors()[name]
 
         override fun getContributedDescriptors(
             kindFilter: DescriptorKindFilter,
             nameFilter: (Name) -> Boolean
         ): Collection<DeclarationDescriptor> =
-            if (kindFilter.acceptsKinds(DescriptorKindFilter.CLASSIFIERS_MASK)) classDescriptors().values else emptyList()
+            if (kindFilter.acceptsKinds(DescriptorKindFilter.CLASSIFIERS_MASK)) classDescriptors().konstues else emptyList()
 
         override fun getClassifierNames(): Set<Name> = classNames
 

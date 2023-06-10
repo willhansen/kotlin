@@ -1,2 +1,2 @@
-val foo: kotlin.Int
+konst foo: kotlin.Int
   get()

@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val hashMap = HashMap<String, Int>()
+    konst hashMap = HashMap<String, Int>()
     hashMap.put("one", 1)
     hashMap.put("two", 2)
-    for ((key, value) in hashMap) {
+    for ((key, konstue) in hashMap) {
     }
 
     return "OK"

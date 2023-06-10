@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * Indicates that the annotated <a href="https://github.com/jspecify/jspecify/wiki/type-usages">type
  * usage</a> (commonly a parameter type or return type) is considered to include {@code null} as a
- * value.
+ * konstue.
  *
  * <p>Example usages:
  *
@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
  *
  * @Nullable String getField() { return field; }
  *
- * void setField(@Nullable String value) { field = value; }
+ * void setField(@Nullable String konstue) { field = konstue; }
  *
  * List<@Nullable String> getList() { … }
  * }</pre>
@@ -50,7 +50,7 @@ import java.lang.annotation.Target;
  * <h2>Meaning per each kind of type usage</h2>
  *
  * <p>The essential meaning of this annotation is always the same: the type it annotates is
- * considered to include {@code null} as a value. But this may affect your code a little differently
+ * considered to include {@code null} as a konstue. But this may affect your code a little differently
  * based on the kind of type usage involved.
  *
  * <ul>

@@ -12,7 +12,7 @@ class ResolverForProjectImpl<M : ModuleInfo, R : ResolverForModule>(
 ) : ResolverForProject<M, R>
 
 fun <M2: ModuleInfo, A: ResolverForModule> foo(delegateResolver: ResolverForProject<M2, A>): ResolverForProject<M2, A> {
-    val descriptorByModule = HashMap<M2, ModuleDescriptorImpl>()
+    konst descriptorByModule = HashMap<M2, ModuleDescriptorImpl>()
     return ResolverForProjectImpl(descriptorByModule, delegateResolver)
 }
 

@@ -3,8 +3,8 @@ package
 public fun foo(/*0*/ x: kotlin.String): @Anno kotlin.String
 
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.TYPE}) public final annotation class Anno : kotlin.Annotation {
-    public constructor Anno(/*0*/ value: kotlin.String)
-    public final val value: kotlin.String
+    public constructor Anno(/*0*/ konstue: kotlin.String)
+    public final konst konstue: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -19,8 +19,8 @@ public abstract class Bar</*0*/ T : @Anno kotlin.Any> {
 
 public abstract class Foo : @Anno kotlin.Throwable {
     public constructor Foo()
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
     public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ exception: kotlin.Throwable!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!

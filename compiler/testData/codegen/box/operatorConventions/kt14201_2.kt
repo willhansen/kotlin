@@ -1,5 +1,5 @@
 class A {
-    val z: String = "OK"
+    konst z: String = "OK"
 }
 
 class B {
@@ -7,13 +7,13 @@ class B {
 }
 
 class ClassB {
-    val x = A()
+    konst x = A()
 
     fun B.test(): String {
-        val value = object {
-            val z = x()
+        konst konstue = object {
+            konst z = x()
         }
-        return value.z
+        return konstue.z
     }
 
     fun call(): String {

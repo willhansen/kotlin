@@ -2,7 +2,7 @@
 // !CHECK_TYPE
 
 interface Clazz<T> {
-    val t: T
+    konst t: T
     fun getSuperClass(): Clazz<in T>
 }
 

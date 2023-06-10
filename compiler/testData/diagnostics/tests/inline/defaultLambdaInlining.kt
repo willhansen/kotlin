@@ -4,16 +4,16 @@
 
 fun test() = "OK"
 
-val prop = "OK"
+konst prop = "OK"
 
 class Foo {
     fun test() = "OK"
-    val prop = "OK"
+    konst prop = "OK"
 }
 
 object FooObject {
     fun test() = "OK"
-    val prop = "OK"
+    konst prop = "OK"
 }
 
 inline fun default1(s : () -> String = {"OK"}) {}
@@ -24,7 +24,7 @@ inline fun default5(s : () -> String = FooObject::prop) {}
 inline fun default6(s : (a: Foo) -> String = Foo::test) {}
 inline fun default7(s : (a: Foo) -> String = Foo::prop) {}
 
-val a = Foo()
+konst a = Foo()
 
 inline fun default8(s : () -> String = a::test) {}
 inline fun default9(s : () -> String = a::prop) {}

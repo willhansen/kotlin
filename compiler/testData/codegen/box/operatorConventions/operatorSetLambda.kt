@@ -2,15 +2,15 @@
 
 object Obj {
     var key = ""
-    var value = ""
+    var konstue = ""
 
     operator fun set(k: String, v: ((String) -> Unit) -> Unit) {
         key += k
-        v { value += it }
+        v { konstue += it }
     }
 }
 
 fun box(): String {
     Obj["O"] = label@{ it("K") }
-    return Obj.key + Obj.value
+    return Obj.key + Obj.konstue
 }

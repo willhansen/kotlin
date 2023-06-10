@@ -12,17 +12,17 @@ import org.jetbrains.kotlin.fir.extensions.AnnotationFqn
  * @see [AbstractPredicate]
  */
 sealed class LookupPredicate : AbstractPredicate<LookupPredicate> {
-    abstract override val annotations: Set<AnnotationFqn>
-    final override val metaAnnotations: Set<AnnotationFqn>
+    abstract override konst annotations: Set<AnnotationFqn>
+    final override konst metaAnnotations: Set<AnnotationFqn>
         get() = emptySet()
 
     abstract override fun <R, D> accept(visitor: PredicateVisitor<LookupPredicate, R, D>, data: D): R
 
     class Or(
-        override val a: LookupPredicate,
-        override val b: LookupPredicate
+        override konst a: LookupPredicate,
+        override konst b: LookupPredicate
     ) : LookupPredicate(), AbstractPredicate.Or<LookupPredicate> {
-        override val annotations: Set<AnnotationFqn> = a.annotations + b.annotations
+        override konst annotations: Set<AnnotationFqn> = a.annotations + b.annotations
 
         override fun <R, D> accept(visitor: PredicateVisitor<LookupPredicate, R, D>, data: D): R {
             return visitor.visitOr(this, data)
@@ -30,17 +30,17 @@ sealed class LookupPredicate : AbstractPredicate<LookupPredicate> {
     }
 
     class And(
-        override val a: LookupPredicate,
-        override val b: LookupPredicate
+        override konst a: LookupPredicate,
+        override konst b: LookupPredicate
     ) : LookupPredicate(), AbstractPredicate.And<LookupPredicate> {
-        override val annotations: Set<AnnotationFqn> = a.annotations + b.annotations
+        override konst annotations: Set<AnnotationFqn> = a.annotations + b.annotations
 
         override fun <R, D> accept(visitor: PredicateVisitor<LookupPredicate, R, D>, data: D): R {
             return visitor.visitAnd(this, data)
         }
     }
 
-    sealed class Annotated(final override val annotations: Set<AnnotationFqn>) : LookupPredicate(), AbstractPredicate.Annotated<LookupPredicate> {
+    sealed class Annotated(final override konst annotations: Set<AnnotationFqn>) : LookupPredicate(), AbstractPredicate.Annotated<LookupPredicate> {
         init {
             require(annotations.isNotEmpty()) {
                 "Annotations should be not empty"

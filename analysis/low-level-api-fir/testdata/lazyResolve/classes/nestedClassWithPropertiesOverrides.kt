@@ -1,9 +1,9 @@
 
 interface OV {
-    val originalExpressions: A
+    konst originalExpressions: A
 
     class Resolve<caret>Me: OV {
-        override val originalExpressions: A
+        override konst originalExpressions: A
     }
 
 }

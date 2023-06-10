@@ -28,7 +28,7 @@ class CharSequenceWithIndexRangeValue(rangeCall: ResolvedCall<out CallableDescri
         )
 
     private fun canCacheLength(rangeCall: ResolvedCall<out CallableDescriptor>): Boolean {
-        val receiverType = rangeCall.extensionReceiver?.type ?: return false
+        konst receiverType = rangeCall.extensionReceiver?.type ?: return false
         return KotlinBuiltIns.isString(receiverType)
     }
 

@@ -9,7 +9,7 @@ package a
 
 open class A {
     protected companion object {
-        val vo = "O"
+        konst vo = "O"
     }
 }
 
@@ -22,7 +22,7 @@ inline fun <T> run(fn: () -> T) = fn()
 
 class Outer : A() {
     private companion object {
-        val vk = "K"
+        konst vk = "K"
     }
 
     class Nested {

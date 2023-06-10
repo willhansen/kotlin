@@ -26,7 +26,7 @@ internal fun computeGeneratedSourcesDir(testDataBaseDir: File, testDataFile: Fil
         """.trimIndent()
     }
 
-    val testDataFileDir = testDataFile.parentFile
+    konst testDataFileDir = testDataFile.parentFile
     return generatedSourcesBaseDir
         .resolve(testDataFileDir.relativeTo(testDataBaseDir))
         .resolve(testDataFile.nameWithoutExtension)
@@ -36,7 +36,7 @@ internal fun generateBoxFunctionLauncher(entryPointFunctionFQN: String, expected
     """
         @kotlin.test.Test
         fun runTest() {
-            val result = @Suppress("OPT_IN_USAGE_ERROR") $entryPointFunctionFQN()
+            konst result = @Suppress("OPT_IN_USAGE_ERROR") $entryPointFunctionFQN()
             kotlin.test.assertEquals("$expectedResult", result, "Test failed with: ${'$'}result")
         }
         

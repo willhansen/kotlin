@@ -2,7 +2,7 @@
 private lateinit var s: String
 
 object C {
-    fun setS(value: String) { s = value }
+    fun setS(konstue: String) { s = konstue }
     fun getS() = s
 }
 

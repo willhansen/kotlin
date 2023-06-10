@@ -2,7 +2,7 @@ inline fun exit(): Nothing =
         throw RuntimeException() // ATHROW
 
 fun box(): String {
-    val a: String
+    konst a: String
     try {
         a = "OK"
     }

@@ -13,4 +13,4 @@ interface BaseInterface
 typealias FirstTypeAlias = @Anno1 BaseInterface
 typealias SecondTypeAlias = @Anno2 FirstTypeAlias
 
-val @Anno3 SecondTypeAlias.fo<caret>o: Int
+konst @Anno3 SecondTypeAlias.fo<caret>o: Int

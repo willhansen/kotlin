@@ -80,8 +80,8 @@ class FirNativeKotlinMangleComputer(
      *  mimics FunctionDescriptor.platformSpecificFunctionName()
      */
     override fun FirFunction.platformSpecificFunctionName(): String? {
-        val session = moduleData.session
-        val scopeSession = ScopeSession()
+        konst session = moduleData.session
+        konst scopeSession = ScopeSession()
         getInitMethodIfObjCConstructor(session, scopeSession)
                 ?.getObjCMethodInfoFromOverriddenFunctions(session, scopeSession)
                 ?.let {
@@ -104,7 +104,7 @@ class FirNativeKotlinMangleComputer(
     }
 
     override fun FirFunction.specialValueParamPrefix(param: FirValueParameter): String {
-        val session = moduleData.session
+        konst session = moduleData.session
         return if (this.hasObjCMethodAnnotation(session) || this.hasObjCFactoryAnnotation(session) || this.isObjCClassMethod(session))
             "${param.name}:"
         else
@@ -113,7 +113,7 @@ class FirNativeKotlinMangleComputer(
 }
 
 private fun FirReceiverParameter.getTypeName(session: FirSession): String {
-    return when (val symbol = typeRef.coneType.toSymbol(session)) {
+    return when (konst symbol = typeRef.coneType.toSymbol(session)) {
         is FirClassLikeSymbol -> symbol.classId.shortClassName.asString()
         is FirTypeParameterSymbol -> symbol.name.asString()
         else -> error("Unexpected symbol class: ${symbol?.javaClass?.name}")

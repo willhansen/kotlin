@@ -24,43 +24,43 @@ import org.jetbrains.org.objectweb.asm.ClassReader
 import org.jetbrains.org.objectweb.asm.ClassVisitor
 
 class BinaryJavaField(
-    override val name: Name,
-    override val access: Int,
-    override val containingClass: JavaClass,
-    override val isEnumEntry: Boolean,
-    override val type: JavaType,
-    override val initializerValue: Any?
+    override konst name: Name,
+    override konst access: Int,
+    override konst containingClass: JavaClass,
+    override konst isEnumEntry: Boolean,
+    override konst type: JavaType,
+    override konst initializerValue: Any?
 ) : JavaField, BinaryJavaModifierListOwner, MutableJavaAnnotationOwner {
-    override val annotations: MutableCollection<JavaAnnotation> = SmartList()
-    override val annotationsByFqName by buildLazyValueForMap()
-    override val isFromSource: Boolean get() = false
+    override konst annotations: MutableCollection<JavaAnnotation> = SmartList()
+    override konst annotationsByFqName by buildLazyValueForMap()
+    override konst isFromSource: Boolean get() = false
 
-    override val hasConstantNotNullInitializer: Boolean
+    override konst hasConstantNotNullInitializer: Boolean
         get() = initializerValue != null
 }
 
 class BinaryJavaTypeParameter(
-    override val name: Name,
-    override val upperBounds: Collection<JavaClassifierType>,
+    override konst name: Name,
+    override konst upperBounds: Collection<JavaClassifierType>,
     // If all bounds are interfaces then a type parameter has implicit Object class bound
-    val hasImplicitObjectClassBound: Boolean
+    konst hasImplicitObjectClassBound: Boolean
 ) : JavaTypeParameter, ListBasedJavaAnnotationOwner, MutableJavaAnnotationOwner {
-    override val annotations: MutableCollection<JavaAnnotation> = SmartList()
-    override val isDeprecatedInJavaDoc = false
-    override val isFromSource: Boolean
+    override konst annotations: MutableCollection<JavaAnnotation> = SmartList()
+    override konst isDeprecatedInJavaDoc = false
+    override konst isFromSource: Boolean
         get() = false
 }
 
 class BinaryJavaValueParameter(
-    override val type: JavaType,
-    override val isVararg: Boolean
+    override konst type: JavaType,
+    override konst isVararg: Boolean
 ) : JavaValueParameter, MapBasedJavaAnnotationOwner, MutableJavaAnnotationOwner {
-    override val annotations: MutableCollection<JavaAnnotation> = SmartList()
-    override val annotationsByFqName by buildLazyValueForMap()
+    override konst annotations: MutableCollection<JavaAnnotation> = SmartList()
+    override konst annotationsByFqName by buildLazyValueForMap()
 
     override var name: Name? = null
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = false
 
     internal fun updateName(newName: Name) {
@@ -70,20 +70,20 @@ class BinaryJavaValueParameter(
 }
 
 class BinaryJavaRecordComponent(
-    override val name: Name,
-    override val containingClass: JavaClass,
-    override val type: JavaType,
-    override val isVararg: Boolean,
+    override konst name: Name,
+    override konst containingClass: JavaClass,
+    override konst type: JavaType,
+    override konst isVararg: Boolean,
 ) : JavaRecordComponent, BinaryJavaModifierListOwner {
-    override val isFromSource: Boolean get() = false
+    override konst isFromSource: Boolean get() = false
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = emptyList()
 
-    override val access: Int
+    override konst access: Int
         get() = 0
 
-    override val annotationsByFqName: Map<FqName?, JavaAnnotation>
+    override konst annotationsByFqName: Map<FqName?, JavaAnnotation>
         get() = emptyMap()
 }
 
@@ -104,7 +104,7 @@ fun isNotTopLevelClass(classContent: ByteArray): Boolean {
             }
 
             override fun visitInnerClass(name: String?, outerName: String?, innerName: String?, access: Int) {
-                // Do not read InnerClasses attribute values where full name != outer + $ + inner; treat those classes as top level instead.
+                // Do not read InnerClasses attribute konstues where full name != outer + $ + inner; treat those classes as top level instead.
                 if (name == internalName && (innerName == null || name == "$outerName$$innerName")) {
                     isNotTopLevelClass = true
                 }

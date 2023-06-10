@@ -35,7 +35,7 @@ fun foo() {
 }
 
 fun foo() {
-  when (val a = e) {
+  when (konst a = e) {
     is Tree -> c
     is a.a<a, b> -> c
     is package.a.a<a, b> -> c
@@ -49,7 +49,7 @@ fun foo() {
 }
 
 fun foo() {
-  when (val a = e) {
+  when (konst a = e) {
     is Tree,
     is a<a, b> -> c
     1, foo(), bar, 2 + 3,
@@ -58,7 +58,7 @@ fun foo() {
 }
 
 fun whenWithoutCondition(i : Int) {
-  val j = 12
+  konst j = 12
   when {
     3 -> -1
     i == 3 -> -1

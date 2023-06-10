@@ -1,14 +1,14 @@
 package test
 
 annotation class PrimitiveArrays(
-        val byteArray: ByteArray,
-        val charArray: CharArray,
-        val shortArray: ShortArray,
-        val intArray: IntArray,
-        val longArray: LongArray,
-        val floatArray: FloatArray,
-        val doubleArray: DoubleArray,
-        val booleanArray: BooleanArray
+        konst byteArray: ByteArray,
+        konst charArray: CharArray,
+        konst shortArray: ShortArray,
+        konst intArray: IntArray,
+        konst longArray: LongArray,
+        konst floatArray: FloatArray,
+        konst doubleArray: DoubleArray,
+        konst booleanArray: BooleanArray
 )
 
 @PrimitiveArrays(

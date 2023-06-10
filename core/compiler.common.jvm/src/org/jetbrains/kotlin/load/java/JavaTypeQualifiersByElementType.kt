@@ -10,7 +10,7 @@ import java.util.*
 typealias QualifierByApplicabilityType =
         EnumMap<AnnotationQualifierApplicabilityType, JavaDefaultQualifiers?>
 
-class JavaTypeQualifiersByElementType(val defaultQualifiers: QualifierByApplicabilityType) {
+class JavaTypeQualifiersByElementType(konst defaultQualifiers: QualifierByApplicabilityType) {
     operator fun get(
         applicabilityType: AnnotationQualifierApplicabilityType?
     ): JavaDefaultQualifiers? {

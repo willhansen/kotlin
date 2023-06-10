@@ -28,7 +28,7 @@ internal fun StorageComponentContainer.initContainer(config: KonanConfig) {
         })
 
         useInstance(object : ObjCExportLazy.Configuration {
-            override val frameworkName: String
+            override konst frameworkName: String
                 get() = config.fullExportedNamePrefix
 
             override fun isIncluded(moduleInfo: ModuleInfo): Boolean = true
@@ -37,16 +37,16 @@ internal fun StorageComponentContainer.initContainer(config: KonanConfig) {
                 TODO()
             }
 
-            override val objcGenerics: Boolean
+            override konst objcGenerics: Boolean
                 get() = config.configuration.getBoolean(KonanConfigKeys.OBJC_GENERICS)
 
-            override val disableSwiftMemberNameMangling: Boolean
+            override konst disableSwiftMemberNameMangling: Boolean
                 get() = config.configuration.getBoolean(BinaryOptions.objcExportDisableSwiftMemberNameMangling)
 
-            override val unitSuspendFunctionExport: UnitSuspendFunctionObjCExport
+            override konst unitSuspendFunctionExport: UnitSuspendFunctionObjCExport
                 get() = config.unitSuspendFunctionObjCExport
 
-            override val ignoreInterfaceMethodCollisions: Boolean
+            override konst ignoreInterfaceMethodCollisions: Boolean
                 get() = config.configuration.getBoolean(BinaryOptions.objcExportIgnoreInterfaceMethodCollisions)
         })
     }
@@ -60,4 +60,4 @@ internal fun ComponentProvider.postprocessComponents(context: FrontendContext, f
     }
 }
 
-class FrontendServices(val deprecationResolver: DeprecationResolver)
+class FrontendServices(konst deprecationResolver: DeprecationResolver)

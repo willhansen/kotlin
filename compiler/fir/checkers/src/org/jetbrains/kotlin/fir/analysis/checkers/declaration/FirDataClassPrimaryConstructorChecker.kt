@@ -22,18 +22,18 @@ object FirDataClassPrimaryConstructorChecker : FirRegularClassChecker() {
             return
         }
 
-        val primaryConstructor = declaration.primaryConstructorIfAny(context.session)
+        konst primaryConstructor = declaration.primaryConstructorIfAny(context.session)
 
         if (primaryConstructor == null || primaryConstructor.source.let { it == null || it.kind is KtFakeSourceElementKind }) {
             reporter.reportOn(declaration.source, FirErrors.PRIMARY_CONSTRUCTOR_REQUIRED_FOR_DATA_CLASS, context)
             return
         }
 
-        val valueParameters = primaryConstructor.valueParameterSymbols
-        if (valueParameters.isEmpty()) {
+        konst konstueParameters = primaryConstructor.konstueParameterSymbols
+        if (konstueParameters.isEmpty()) {
             reporter.reportOn(primaryConstructor.source, FirErrors.DATA_CLASS_WITHOUT_PARAMETERS, context)
         }
-        for (parameter in valueParameters) {
+        for (parameter in konstueParameters) {
             if (parameter.isVararg) {
                 reporter.reportOn(parameter.source, FirErrors.DATA_CLASS_VARARG_PARAMETER, context)
             }

@@ -2,7 +2,7 @@ FILE: simpleClass.kt
     public? final? interface SomeInterface : R|kotlin/Any| {
         public? final? fun foo(x: Int, y: String): String
 
-        public? final? val bar: Boolean
+        public? final? konst bar: Boolean
             public? [ContainingClassKey=SomeInterface] get(): Boolean
 
     }
@@ -11,7 +11,7 @@ FILE: simpleClass.kt
             super<<implicit>>()
         }
 
-        private final? val baz: <implicit> = IntegerLiteral(42)
+        private final? konst baz: <implicit> = IntegerLiteral(42)
             private [ContainingClassKey=SomeClass] get(): <implicit>
 
         public? open? override fun foo(x: Int, y: String): String {
@@ -22,12 +22,12 @@ FILE: simpleClass.kt
             public? [ContainingClassKey=SomeClass] get(): Boolean {
                 ^ Boolean(true)
             }
-            public? [ContainingClassKey=SomeClass] set(value: Boolean): R|kotlin/Unit| {
+            public? [ContainingClassKey=SomeClass] set(konstue: Boolean): R|kotlin/Unit| {
             }
 
         public? final? lateinit var fau: Double
             public? [ContainingClassKey=SomeClass] get(): Double
-            public? [ContainingClassKey=SomeClass] set(value: Double): R|kotlin/Unit|
+            public? [ContainingClassKey=SomeClass] set(konstue: Double): R|kotlin/Unit|
 
     }
     public? final? inline class InlineClass : R|kotlin/Any| {

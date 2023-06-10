@@ -1,5 +1,5 @@
 class A {
-    private val i: Int = 1
+    private konst i: Int = 1
 }
 
 fun test(a: A) {

@@ -44,7 +44,7 @@ void* std_support::malloc(std::size_t size) noexcept {
 
 void* std_support::aligned_malloc(std::size_t alignment, std::size_t size) noexcept {
     // Enforcing alignment requirements of std::aligned_alloc.
-    RuntimeAssert(IsValidAlignment(alignment), "Invalid alignment %zu", alignment);
+    RuntimeAssert(IsValidAlignment(alignment), "Inkonstid alignment %zu", alignment);
     RuntimeAssert(IsAligned(size, alignment), "Size %zu must be aligned to %zu", size, alignment);
     return aligned_malloc_impl(alignment, size);
 }
@@ -79,16 +79,16 @@ constexpr uint32_t WASM_PAGESIZE_EXPONENT = 16;
 constexpr uint32_t WASM_PAGESIZE = 1u << WASM_PAGESIZE_EXPONENT;
 constexpr uint32_t WASM_PAGEMASK = WASM_PAGESIZE - 1;
 
-uint32_t pageAlign(int32_t value) {
-    return (value + WASM_PAGEMASK) & ~(WASM_PAGEMASK);
+uint32_t pageAlign(int32_t konstue) {
+    return (konstue + WASM_PAGEMASK) & ~(WASM_PAGEMASK);
 }
 
 uint32_t inBytes(uint32_t pageCount) {
     return pageCount << WASM_PAGESIZE_EXPONENT;
 }
 
-uint32_t inPages(uint32_t value) {
-    return value >> WASM_PAGESIZE_EXPONENT;
+uint32_t inPages(uint32_t konstue) {
+    return konstue >> WASM_PAGESIZE_EXPONENT;
 }
 
 extern "C" void Konan_notify_memory_grow();

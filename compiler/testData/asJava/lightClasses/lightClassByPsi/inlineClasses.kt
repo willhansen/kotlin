@@ -1,17 +1,17 @@
-inline class UInt(private val value: Int) { }
+inline class UInt(private konst konstue: Int) { }
 
-inline enum class Foo(val x: Int) {
+inline enum class Foo(konst x: Int) {
     A(0), B(1);
 
     fun example() { }
 }
 
 inline class InlinedDelegate<T>(var node: T) {
-    operator fun setValue(thisRef: A, property: KProperty<*>, value: T) {
-        if (node !== value) {
-            thisRef.notify(node, value)
+    operator fun setValue(thisRef: A, property: KProperty<*>, konstue: T) {
+        if (node !== konstue) {
+            thisRef.notify(node, konstue)
         }
-        node = value
+        node = konstue
     }
 
     operator fun getValue(thisRef: A, property: KProperty<*>): T {
@@ -19,10 +19,10 @@ inline class InlinedDelegate<T>(var node: T) {
     }
 }
 
-inline class InlineInheritance(val v: Int) : I {
+inline class InlineInheritance(konst v: Int) : I {
     override fun y() = 4
 
-    override val x get() = 5
+    override konst x get() = 5
 
     fun z() = 7
 }

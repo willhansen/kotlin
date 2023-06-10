@@ -30,7 +30,7 @@ public final class IrDynamicOperatorExpression extends
   private IrDynamicOperatorExpression(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -55,13 +55,13 @@ public final class IrDynamicOperatorExpression extends
           }
           case 8: {
             int rawValue = input.readEnum();
-            org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.IrDynamicOperator value = org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.IrDynamicOperator.valueOf(rawValue);
-            if (value == null) {
+            org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.IrDynamicOperator konstue = org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.IrDynamicOperator.konstueOf(rawValue);
+            if (konstue == null) {
               unknownFieldsCodedOutput.writeRawVarint32(tag);
               unknownFieldsCodedOutput.writeRawVarint32(rawValue);
             } else {
               bitField0_ |= 0x00000001;
-              operator_ = value;
+              operator_ = konstue;
             }
             break;
           }
@@ -88,10 +88,10 @@ public final class IrDynamicOperatorExpression extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
@@ -112,7 +112,7 @@ public final class IrDynamicOperatorExpression extends
     public IrDynamicOperatorExpression parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrDynamicOperatorExpression(input, extensionRegistry);
     }
   };
@@ -371,10 +371,10 @@ public final class IrDynamicOperatorExpression extends
     public static final int INVOKE_VALUE = 30;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() { return konstue; }
 
-    public static IrDynamicOperator valueOf(int value) {
-      switch (value) {
+    public static IrDynamicOperator konstueOf(int konstue) {
+      switch (konstue) {
         case 1: return UNARY_PLUS;
         case 2: return UNARY_MINUS;
         case 3: return EXCL;
@@ -417,14 +417,14 @@ public final class IrDynamicOperatorExpression extends
         internalValueMap =
           new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<IrDynamicOperator>() {
             public IrDynamicOperator findValueByNumber(int number) {
-              return IrDynamicOperator.valueOf(number);
+              return IrDynamicOperator.konstueOf(number);
             }
           };
 
-    private final int value;
+    private final int konstue;
 
-    private IrDynamicOperator(int index, int value) {
-      this.value = value;
+    private IrDynamicOperator(int index, int konstue) {
+      this.konstue = konstue;
     }
 
     // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.IrDynamicOperator)
@@ -576,23 +576,23 @@ public final class IrDynamicOperatorExpression extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression parseFrom(java.io.InputStream input)
@@ -754,7 +754,7 @@ public final class IrDynamicOperatorExpression extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -782,12 +782,12 @@ public final class IrDynamicOperatorExpression extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.IrDynamicOperator operator = 1;</code>
      */
-    public Builder setOperator(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.IrDynamicOperator value) {
-      if (value == null) {
+    public Builder setOperator(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.IrDynamicOperator konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       bitField0_ |= 0x00000001;
-      operator_ = value;
+      operator_ = konstue;
       
       return this;
     }
@@ -817,11 +817,11 @@ public final class IrDynamicOperatorExpression extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression receiver = 2;</code>
      */
-    public Builder setReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      receiver_ = value;
+      receiver_ = konstue;
 
       bitField0_ |= 0x00000002;
       return this;
@@ -839,13 +839,13 @@ public final class IrDynamicOperatorExpression extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression receiver = 2;</code>
      */
-    public Builder mergeReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (((bitField0_ & 0x00000002) == 0x00000002) &&
           receiver_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         receiver_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(receiver_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(receiver_).mergeFrom(konstue).buildPartial();
       } else {
-        receiver_ = value;
+        receiver_ = konstue;
       }
 
       bitField0_ |= 0x00000002;
@@ -892,12 +892,12 @@ public final class IrDynamicOperatorExpression extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression argument = 3;</code>
      */
     public Builder setArgument(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureArgumentIsMutable();
-      argument_.set(index, value);
+      argument_.set(index, konstue);
 
       return this;
     }
@@ -914,12 +914,12 @@ public final class IrDynamicOperatorExpression extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression argument = 3;</code>
      */
-    public Builder addArgument(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder addArgument(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureArgumentIsMutable();
-      argument_.add(value);
+      argument_.add(konstue);
 
       return this;
     }
@@ -927,12 +927,12 @@ public final class IrDynamicOperatorExpression extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression argument = 3;</code>
      */
     public Builder addArgument(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureArgumentIsMutable();
-      argument_.add(index, value);
+      argument_.add(index, konstue);
 
       return this;
     }
@@ -960,10 +960,10 @@ public final class IrDynamicOperatorExpression extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression argument = 3;</code>
      */
     public Builder addAllArgument(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression> konstues) {
       ensureArgumentIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, argument_);
+          konstues, argument_);
 
       return this;
     }

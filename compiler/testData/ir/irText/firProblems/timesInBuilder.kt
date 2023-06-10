@@ -10,7 +10,7 @@ private fun test(x: Long) =
         +(spentTime.select(2 * 60, x))
     }
 
-val spentTime = integer("spentTime")
+konst spentTime = integer("spentTime")
 
 fun integer(name: String) = Column()
 
@@ -24,7 +24,7 @@ class Expression
 class Column
 
 class ArgumentsBuilder {
-    val arguments = mutableListOf<Expression>()
+    konst arguments = mutableListOf<Expression>()
 
     operator fun Expression.unaryPlus() {
         arguments.add(this)

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 class GeneratedDeclarationsIrBodyFiller : IrGenerationExtension {
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-        val transformers = listOf(
+        konst transformers = listOf(
             TransformerForExternalClassGenerator(pluginContext),
             TransformerForCompanionGenerator(pluginContext),
             TransformerForAdditionalMembersGenerator(pluginContext),

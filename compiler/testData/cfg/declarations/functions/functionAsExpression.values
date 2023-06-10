@@ -1,7 +1,7 @@
 == test ==
 fun test() {
-    val f = fun(n: Int): Int { return 1 }
-    val g = fun foo(n: Int) = 2
+    konst f = fun(n: Int): Int { return 1 }
+    konst g = fun foo(n: Int) = 2
 }
 ---------------------
 fun(n: Int): Int { return 1 }   <v0>: {<: (Int) -> Int}   NEW: r(fun(n: Int): Int { return 1 }) -> <v0>

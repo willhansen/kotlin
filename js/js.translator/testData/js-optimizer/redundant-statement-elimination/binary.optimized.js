@@ -4,9 +4,9 @@ function se() {
     return ++global;
 }
 
-function se2(value) {
+function se2(konstue) {
     ++global;
-    return value;
+    return konstue;
 }
 
 function test1() {

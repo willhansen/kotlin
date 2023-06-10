@@ -36,7 +36,7 @@ class KtFe10DestructuringDeclarationEntry(
     }
 
     override fun canRename(): Boolean {
-        val bindingContext = KtFe10ReferenceResolutionHelper.getInstance().partialAnalyze(element) //TODO: should it use full body resolve?
+        konst bindingContext = KtFe10ReferenceResolutionHelper.getInstance().partialAnalyze(element) //TODO: should it use full body resolve?
         return resolveToDescriptors(bindingContext).all {
             it is CallableMemberDescriptor && it.kind == CallableMemberDescriptor.Kind.SYNTHESIZED
         }

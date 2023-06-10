@@ -5,12 +5,12 @@
 @file:kotlin.jvm.JvmName("TestKt")
 package test
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
-private val prop = "O"
+private konst prop = "O"
 
 private fun test() = "K"
 
 fun box(): String {
-    return eval { prop + test() }
+    return ekonst { prop + test() }
 }

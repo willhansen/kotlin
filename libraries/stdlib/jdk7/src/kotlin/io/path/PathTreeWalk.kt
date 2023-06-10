@@ -15,24 +15,24 @@ import java.nio.file.attribute.BasicFileAttributes
  * The order in which sibling files are visited is unspecified.
  *
  * If the file located by this path is not a directory, the walker iterates only it.
- * If the file located by this path does not exist, the walker iterates nothing, i.e. it's equivalent to an empty sequence.
+ * If the file located by this path does not exist, the walker iterates nothing, i.e. it's equikonstent to an empty sequence.
  */
 @ExperimentalPathApi
 internal class PathTreeWalk(
-    private val start: Path,
-    private val options: Array<out PathWalkOption>
+    private konst start: Path,
+    private konst options: Array<out PathWalkOption>
 ) : Sequence<Path> {
 
-    private val followLinks: Boolean
+    private konst followLinks: Boolean
         get() = options.contains(PathWalkOption.FOLLOW_LINKS)
 
-    private val linkOptions: Array<LinkOption>
+    private konst linkOptions: Array<LinkOption>
         get() = LinkFollowing.toLinkOptions(followLinks)
 
-    private val includeDirectories: Boolean
+    private konst includeDirectories: Boolean
         get() = options.contains(PathWalkOption.INCLUDE_DIRECTORIES)
 
-    private val isBFS: Boolean
+    private konst isBFS: Boolean
         get() = options.contains(PathWalkOption.BREADTH_FIRST)
 
     override fun iterator(): Iterator<Path> = if (isBFS) bfsIterator() else dfsIterator()
@@ -42,7 +42,7 @@ internal class PathTreeWalk(
         entriesReader: DirectoryEntriesReader,
         entriesAction: (List<PathNode>) -> Unit
     ) {
-        val path = node.path
+        konst path = node.path
         if (path.isDirectory(*linkOptions)) {
             if (node.createsCycle())
                 throw FileSystemLoopException(path.toString())
@@ -60,21 +60,21 @@ internal class PathTreeWalk(
 
     private fun dfsIterator() = iterator<Path> {
         // Stack of directory iterators, beginning from the start directory
-        val stack = ArrayDeque<PathNode>()
-        val entriesReader = DirectoryEntriesReader(followLinks)
+        konst stack = ArrayDeque<PathNode>()
+        konst entriesReader = DirectoryEntriesReader(followLinks)
 
-        val startNode = PathNode(start, keyOf(start, linkOptions), null)
+        konst startNode = PathNode(start, keyOf(start, linkOptions), null)
         yieldIfNeeded(startNode, entriesReader) { entries ->
             startNode.contentIterator = entries.iterator()
             stack.addLast(startNode)
         }
 
         while (stack.isNotEmpty()) {
-            val topNode = stack.last()
-            val topIterator = topNode.contentIterator!!
+            konst topNode = stack.last()
+            konst topIterator = topNode.contentIterator!!
 
             if (topIterator.hasNext()) {
-                val pathNode = topIterator.next()
+                konst pathNode = topIterator.next()
                 yieldIfNeeded(pathNode, entriesReader) { entries ->
                     pathNode.contentIterator = entries.iterator()
                     stack.addLast(pathNode)
@@ -88,13 +88,13 @@ internal class PathTreeWalk(
 
     private fun bfsIterator() = iterator<Path> {
         // Queue of entries to be visited.
-        val queue = ArrayDeque<PathNode>()
-        val entriesReader = DirectoryEntriesReader(followLinks)
+        konst queue = ArrayDeque<PathNode>()
+        konst entriesReader = DirectoryEntriesReader(followLinks)
 
         queue.addLast(PathNode(start, keyOf(start, linkOptions), null))
 
         while (queue.isNotEmpty()) {
-            val pathNode = queue.removeFirst()
+            konst pathNode = queue.removeFirst()
             yieldIfNeeded(pathNode, entriesReader) { entries ->
                 queue.addAll(entries)
             }
@@ -112,7 +112,7 @@ private fun keyOf(path: Path, linkOptions: Array<LinkOption>): Any? {
 }
 
 
-private class PathNode(val path: Path, val key: Any?, val parent: PathNode?) {
+private class PathNode(konst path: Path, konst key: Any?, konst parent: PathNode?) {
     var contentIterator: Iterator<PathNode>? = null
 }
 
@@ -138,11 +138,11 @@ private fun PathNode.createsCycle(): Boolean {
 
 
 internal object LinkFollowing {
-    private val nofollowLinkOption = arrayOf(LinkOption.NOFOLLOW_LINKS)
-    private val followLinkOption = emptyArray<LinkOption>()
+    private konst nofollowLinkOption = arrayOf(LinkOption.NOFOLLOW_LINKS)
+    private konst followLinkOption = emptyArray<LinkOption>()
 
-    private val nofollowVisitOption = emptySet<FileVisitOption>()
-    private val followVisitOption = setOf(FileVisitOption.FOLLOW_LINKS)
+    private konst nofollowVisitOption = emptySet<FileVisitOption>()
+    private konst followVisitOption = setOf(FileVisitOption.FOLLOW_LINKS)
 
     fun toLinkOptions(followLinks: Boolean): Array<LinkOption> =
         if (followLinks) followLinkOption else nofollowLinkOption
@@ -152,7 +152,7 @@ internal object LinkFollowing {
 }
 
 
-private class DirectoryEntriesReader(val followLinks: Boolean) : SimpleFileVisitor<Path>() {
+private class DirectoryEntriesReader(konst followLinks: Boolean) : SimpleFileVisitor<Path>() {
     private var directoryNode: PathNode? = null
     private var entries = ArrayDeque<PathNode>()
 
@@ -164,13 +164,13 @@ private class DirectoryEntriesReader(val followLinks: Boolean) : SimpleFileVisit
     }
 
     override fun preVisitDirectory(dir: Path, attrs: BasicFileAttributes): FileVisitResult {
-        val directoryEntry = PathNode(dir, attrs.fileKey(), directoryNode)
+        konst directoryEntry = PathNode(dir, attrs.fileKey(), directoryNode)
         entries.add(directoryEntry)
         return super.preVisitDirectory(dir, attrs)
     }
 
     override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
-        val fileEntry = PathNode(file, null, directoryNode)
+        konst fileEntry = PathNode(file, null, directoryNode)
         entries.add(fileEntry)
         return super.visitFile(file, attrs)
     }

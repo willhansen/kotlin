@@ -1,6 +1,6 @@
 // FIR_IGNORE
 // WITH_STDLIB
-data class Tuple(val x: Int, val y: Int)
+data class Tuple(konst x: Int, konst y: Int)
 
 //                                Int
 //                                │ fun ((P1) -> R).invoke(P1): R
@@ -13,25 +13,25 @@ inline fun use(f: (Tuple) -> Int) = f(Tuple(1, 2))
 fun foo(): Int {
 //      (Tuple) -> Int
 //      │
-    val l1 = { t: Tuple ->
+    konst l1 = { t: Tuple ->
 //              foo.<anonymous>.t: Tuple
-//          Int │ val (Tuple).x: Int
+//          Int │ konst (Tuple).x: Int
 //          │   │ │
-        val x = t.x
+        konst x = t.x
 //              foo.<anonymous>.t: Tuple
-//          Int │ val (Tuple).y: Int
+//          Int │ konst (Tuple).y: Int
 //          │   │ │
-        val y = t.y
-//      val foo.<anonymous>.x: Int
+        konst y = t.y
+//      konst foo.<anonymous>.x: Int
 //      │ fun (Int).plus(Int): Int
-//      │ │ val foo.<anonymous>.y: Int
+//      │ │ konst foo.<anonymous>.y: Int
 //      │ │ │
         x + y
     }
 //  fun use((Tuple) -> Int): Int
-//  │               val foo.<anonymous>.x: Int
+//  │               konst foo.<anonymous>.x: Int
 //  │      Int      │ fun (Int).plus(Int): Int
-//  │      │  Int   │ │ val foo.<anonymous>.y: Int
+//  │      │  Int   │ │ konst foo.<anonymous>.y: Int
 //  │      │  │     │ │ │
     use { (x, y) -> x + y }
 
@@ -40,13 +40,13 @@ fun foo(): Int {
     return use {
 //      Unit
 //      │   foo.<anonymous>.it: Tuple
-//      │   │  val (Tuple).x: Int
+//      │   │  konst (Tuple).x: Int
 //      │   │  │ EQ operator call
 //      │   │  │ │  Int           Int
 //      │   │  │ │  │             │
         if (it.x == 0) return@foo 0
 //                 foo.<anonymous>.it: Tuple
-//                 │  val (Tuple).y: Int
+//                 │  konst (Tuple).y: Int
 //                 │  │
         return@use it.y
     }
@@ -58,13 +58,13 @@ fun bar(): Int {
     return use lambda@{
 //      Unit
 //      │   bar.<anonymous>.it: Tuple
-//      │   │  val (Tuple).x: Int
+//      │   │  konst (Tuple).x: Int
 //      │   │  │ EQ operator call
 //      │   │  │ │  Int           Int
 //      │   │  │ │  │             │
         if (it.x == 0) return@bar 0
 //                    bar.<anonymous>.it: Tuple
-//                    │  val (Tuple).y: Int
+//                    │  konst (Tuple).y: Int
 //                    │  │
         return@lambda it.y
     }
@@ -76,10 +76,10 @@ fun test(list: List<Int>) {
 //      collections/MutableMap<Int, String>
 //      │     fun <K, V> collections/mutableMapOf<Int, String>(): collections/MutableMap<K, V>
 //      │     │
-    val map = mutableMapOf<Int, String>()
+    konst map = mutableMapOf<Int, String>()
 //  test.list: collections/List<Int>
 //  │    fun <T> collections/Iterable<T>.forEach<Int>((T) -> Unit): Unit
-//  │    │         val test.map: collections/MutableMap<Int, String>
+//  │    │         konst test.map: collections/MutableMap<Int, String>
 //  │    │         │   fun <K, V> collections/MutableMap<K, V>.getOrPut<Int, String>(K, () -> V): V
 //  │    │         │   │        test.<anonymous>.it: Int
 //  │    │         │   │        │     fun <T> collections/mutableListOf<???>(): collections/MutableList<T>
@@ -90,8 +90,8 @@ fun test(list: List<Int>) {
 
 //  () -> Unit
 //  │
-val simple = { }
+konst simple = { }
 
 //  () -> Int   Int
 //  │           │
-val another = { 42 }
+konst another = { 42 }

@@ -13,7 +13,7 @@ import java.net.URLClassLoader
 interface AsyncProfilerReflected {
     fun execute(command: String): String
     fun stop()
-    val version: String
+    konst version: String
 }
 
 object AsyncProfilerHelper {
@@ -25,25 +25,25 @@ object AsyncProfilerHelper {
         // for example in the compiler daemon scenario.
         instance?.let { return it }
 
-        val profilerClass = loadAsyncProfilerClass(libPath)
-        val getInstanceHandle =
+        konst profilerClass = loadAsyncProfilerClass(libPath)
+        konst getInstanceHandle =
             MethodHandles.lookup().findStatic(profilerClass, "getInstance", MethodType.methodType(profilerClass, String::class.java))
-        val executeHandle =
+        konst executeHandle =
             MethodHandles.lookup().findVirtual(
                 profilerClass,
                 "execute",
                 MethodType.methodType(String::class.java, String::class.java)
             )
-        val stopHandle =
+        konst stopHandle =
             MethodHandles.lookup().findVirtual(profilerClass, "stop", MethodType.methodType(Void.TYPE))
-        val getVersionHandle =
+        konst getVersionHandle =
             MethodHandles.lookup().findVirtual(profilerClass, "getVersion", MethodType.methodType(String::class.java))
 
-        val instance = getInstanceHandle.invokeWithArguments(libPath)
+        konst instance = getInstanceHandle.invokeWithArguments(libPath)
         return object : AsyncProfilerReflected {
-            private val boundExecute = executeHandle.bindTo(instance)
-            private val boundStop = stopHandle.bindTo(instance)
-            private val boundGetVersion = getVersionHandle.bindTo(instance)
+            private konst boundExecute = executeHandle.bindTo(instance)
+            private konst boundStop = stopHandle.bindTo(instance)
+            private konst boundGetVersion = getVersionHandle.bindTo(instance)
 
             override fun execute(command: String): String {
                 return boundExecute.invokeWithArguments(command) as String
@@ -53,25 +53,25 @@ object AsyncProfilerHelper {
                 boundStop.invokeWithArguments()
             }
 
-            override val version: String
+            override konst version: String
                 get() = boundGetVersion.invokeWithArguments() as String
 
         }.also { this.instance = it }
     }
 
     private fun loadAsyncProfilerClass(libPath: String?): Class<*> {
-        val fqName = "one.profiler.AsyncProfiler"
+        konst fqName = "one.profiler.AsyncProfiler"
         return try {
             Class.forName(fqName)
         } catch (e: ClassNotFoundException) {
             if (libPath == null) throw e
             else {
-                val directory = File(libPath).parentFile
+                konst directory = File(libPath).parentFile
                 check(directory.isDirectory) { directory }
-                val apiJar = directory.resolve("async-profiler.jar")
+                konst apiJar = directory.resolve("async-profiler.jar")
                 if (!apiJar.exists())
                     error("To use async-profiler, either add it to the compiler classpath, or put async-profiler.jar at this path: $apiJar")
-                val classLoader = URLClassLoader(arrayOf(apiJar.toURI().toURL()), null)
+                konst classLoader = URLClassLoader(arrayOf(apiJar.toURI().toURL()), null)
                 classLoader.loadClass(fqName)
             }
         }

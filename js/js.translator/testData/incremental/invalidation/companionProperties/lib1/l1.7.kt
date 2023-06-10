@@ -1,5 +1,5 @@
 class MyClass {
     companion object {
-        val intProperty = 3
+        konst intProperty = 3
     }
 }

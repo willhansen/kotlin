@@ -14,8 +14,8 @@ fun <T> ServiceRegistry.operation(
     initialStatus: String? = null,
     body: ProgressLogger.() -> T
 ): T {
-    val progressFactory = get(org.gradle.internal.logging.progress.ProgressLoggerFactory::class.java)
-    val operation = progressFactory.newOperation(ProgressStartEvent.BUILD_OP_CATEGORY)
+    konst progressFactory = get(org.gradle.internal.logging.progress.ProgressLoggerFactory::class.java)
+    konst operation = progressFactory.newOperation(ProgressStartEvent.BUILD_OP_CATEGORY)
     operation.start(description, initialStatus)
     try {
         return operation.body()

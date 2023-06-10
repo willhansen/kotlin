@@ -1,4 +1,4 @@
-annotation class Foo(val a: IntArray, val b: Array<String>, val c: FloatArray)
+annotation class Foo(konst a: IntArray, konst b: Array<String>, konst c: FloatArray)
 
 @Foo([1], ["/"], [1f])
 fun test1() {}
@@ -15,8 +15,8 @@ fun test4() {}
 @Foo([1 + 2], ["Hello, " + "Kotlin"], [<!DIVISION_BY_ZERO!>1 / 0f<!>])
 fun test5() {}
 
-const val ONE = 1
-val two = 2
+const konst ONE = 1
+konst two = 2
 
 @Foo([ONE], [], [])
 fun test6() {}

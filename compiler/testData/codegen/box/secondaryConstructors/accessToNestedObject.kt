@@ -1,7 +1,7 @@
-class A(val result: Int) {
+class A(konst result: Int) {
     object B {
         fun bar(): Int = 4
-        val prop = 5
+        konst prop = 5
     }
     object C {
     }
@@ -10,7 +10,7 @@ class A(val result: Int) {
 }
 
 fun box(): String {
-    val result = A().result
+    konst result = A().result
     if (result != 9) return "fail: $result"
     return "OK"
 }

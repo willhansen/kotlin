@@ -6,7 +6,7 @@ abstract class Base {
     constructor() {
         x = 42
         this.y = 24
-        val temp = this.x
+        konst temp = this.x
         this.x = y
         y = temp
     }

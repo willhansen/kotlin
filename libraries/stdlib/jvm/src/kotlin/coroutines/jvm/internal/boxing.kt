@@ -17,11 +17,11 @@ package kotlin.coroutines.jvm.internal
 
 @SinceKotlin("1.3")
 @PublishedApi
-internal fun boxBoolean(primitive: Boolean): java.lang.Boolean = java.lang.Boolean.valueOf(primitive) as java.lang.Boolean
+internal fun boxBoolean(primitive: Boolean): java.lang.Boolean = java.lang.Boolean.konstueOf(primitive) as java.lang.Boolean
 
 @SinceKotlin("1.3")
 @PublishedApi
-internal fun boxByte(primitive: Byte): java.lang.Byte = java.lang.Byte.valueOf(primitive) as java.lang.Byte
+internal fun boxByte(primitive: Byte): java.lang.Byte = java.lang.Byte.konstueOf(primitive) as java.lang.Byte
 
 @SinceKotlin("1.3")
 @PublishedApi

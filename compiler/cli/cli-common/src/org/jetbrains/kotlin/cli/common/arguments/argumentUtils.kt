@@ -55,13 +55,13 @@ private fun <From : Any, To : Any> copyProperties(
 ): To {
     if (from == to) return to
 
-    val toMemberProperties = to::class.memberProperties.associateBy { it.name }
+    konst toMemberProperties = to::class.memberProperties.associateBy { it.name }
 
     for (fromProperty in propertiesToCopy) {
         @Suppress("UNCHECKED_CAST")
-        val toProperty = toMemberProperties[fromProperty.name] as? KMutableProperty1<To, Any?>
+        konst toProperty = toMemberProperties[fromProperty.name] as? KMutableProperty1<To, Any?>
             ?: continue
-        val fromValue = fromProperty.get(from)
+        konst fromValue = fromProperty.get(from)
         if (filter != null && !filter(fromProperty, fromValue)) continue
         toProperty.set(to, if (deepCopyWhenNeeded) fromValue?.copyValueIfNeeded() else fromValue)
     }
@@ -82,7 +82,7 @@ private fun Any.copyValueIfNeeded(): Any {
 
         is Array<*> -> java.lang.reflect.Array.newInstance(this::class.java.componentType, size).apply {
             this as Array<Any?>
-            (this@copyValueIfNeeded as Array<Any?>).forEachIndexed { i, value -> this[i] = value?.copyValueIfNeeded() }
+            (this@copyValueIfNeeded as Array<Any?>).forEachIndexed { i, konstue -> this[i] = konstue?.copyValueIfNeeded() }
         }
 
         is MutableCollection<*> -> (this as Collection<Any?>).mapTo(this::class.java.newInstance() as MutableCollection<Any?>) { it?.copyValueIfNeeded() }
@@ -98,7 +98,7 @@ private fun Any.copyValueIfNeeded(): Any {
 }
 
 fun <T : Any> collectProperties(kClass: KClass<T>, inheritedOnly: Boolean): List<KProperty1<T, Any?>> {
-    val properties = ArrayList(kClass.memberProperties)
+    konst properties = ArrayList(kClass.memberProperties)
     if (inheritedOnly) {
         properties.removeAll(kClass.declaredMemberProperties)
     }

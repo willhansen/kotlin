@@ -1,8 +1,8 @@
 package
 
 public interface A {
-    @kotlin.Deprecated(message = "") public abstract val a: kotlin.String
-    @kotlin.Deprecated(message = "") public abstract val b: kotlin.String
+    @kotlin.Deprecated(message = "") public abstract konst a: kotlin.String
+    @kotlin.Deprecated(message = "") public abstract konst b: kotlin.String
     @kotlin.Deprecated(message = "") public abstract var c: kotlin.String
     @kotlin.Deprecated(message = "") public abstract var d: kotlin.String
     @kotlin.Deprecated(message = "") public abstract var e: kotlin.String
@@ -14,8 +14,8 @@ public interface A {
 
 public object B : A {
     private constructor B()
-    public open override /*1*/ val a: kotlin.String = ""
-    public open override /*1*/ val b: kotlin.String
+    public open override /*1*/ konst a: kotlin.String = ""
+    public open override /*1*/ konst b: kotlin.String
     public open override /*1*/ var c: kotlin.String
     public open override /*1*/ var d: kotlin.String
     public open override /*1*/ var e: kotlin.String

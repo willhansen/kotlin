@@ -18,7 +18,7 @@ enum class SanitizerKind {
  * "… ${target}${sanitizer.targetSuffix} …"
  * ```
  */
-val SanitizerKind?.targetSuffix: String
+konst SanitizerKind?.targetSuffix: String
     get() = when (this) {
         null -> ""
         SanitizerKind.THREAD -> "_tsan"

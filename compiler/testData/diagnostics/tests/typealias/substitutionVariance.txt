@@ -1,6 +1,6 @@
 package
 
-public val inv1: Inv1<kotlin.Int> /* = Inv<kotlin.Int> */
+public konst inv1: Inv1<kotlin.Int> /* = Inv<kotlin.Int> */
 public fun inIn_In(/*0*/ x: In2<in kotlin.Int> /* = In<in kotlin.Int> */): In2<in kotlin.Int> /* = In<in kotlin.Int> */
 public fun inIn_Inv(/*0*/ x: In2<kotlin.Int> /* = In<in kotlin.Int> */): In2<kotlin.Int> /* = In<in kotlin.Int> */
 public fun inIn_Out(/*0*/ x: In2<out kotlin.Int> /* = In<out kotlin.Int> */): In2<out kotlin.Int> /* = In<out kotlin.Int> */

@@ -41,7 +41,7 @@ fun <U1, V1> qux(u: U1): V1 {
 // FILE: mainLib.kt
 
 fun lib(): String {
-    val a = A<String, String, Int, Int>(19, 17)
+    konst a = A<String, String, Int, Int>(19, 17)
 
     return when {
         a.foo("first") != "first" -> "fail 1"

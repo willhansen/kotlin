@@ -6,7 +6,7 @@ fun test() {
     "foo bar".<!UNRESOLVED_REFERENCE!>split<!>(<!UNSUPPORTED!>[""]<!>)
     <!UNRESOLVED_REFERENCE!>unresolved<!>(<!UNSUPPORTED!>[""]<!>)
     takeArray(<!UNSUPPORTED!>[""]<!>)
-    val v = <!UNSUPPORTED!>[""]<!>
+    konst v = <!UNSUPPORTED!>[""]<!>
     <!UNSUPPORTED!>[""]<!>
     <!UNSUPPORTED!>[1, 2, 3]<!>.size
 }
@@ -16,5 +16,5 @@ fun baz(arg: Array<Int> = <!UNSUPPORTED!>[]<!>) {
 }
 
 class Foo(
-    val v: Array<Int> = <!UNSUPPORTED!>[]<!>
+    konst v: Array<Int> = <!UNSUPPORTED!>[]<!>
 )

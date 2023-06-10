@@ -16,7 +16,7 @@
  * ISSUES: KT-28265
  */
 fun case_1(x: Number?) {
-    val y: Int? = null
+    konst y: Int? = null
 
     if (x == y) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number?")!>x<!>
@@ -26,7 +26,7 @@ fun case_1(x: Number?) {
 
 // TESTCASE NUMBER: 2
 fun case_2(x: Number) {
-    val y: Int? = null
+    konst y: Int? = null
 
     if (x === y) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Number")!>x<!>

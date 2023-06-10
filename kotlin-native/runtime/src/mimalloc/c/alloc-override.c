@@ -61,7 +61,7 @@ terms of the MIT license. A copy of the license can be found in the file
     MI_INTERPOSE_MI(realpath),
     MI_INTERPOSE_MI(posix_memalign),
     MI_INTERPOSE_MI(reallocf),
-    MI_INTERPOSE_MI(valloc),
+    MI_INTERPOSE_MI(konstloc),
     #ifndef MI_OSX_ZONE
     // some code allocates from default zone but deallocates using plain free :-( (like NxHashResizeToCapacity <https://github.com/nneonneo/osx-10.9-opensource/blob/master/objc4-551.1/runtime/hashtable2.mm>)
     MI_INTERPOSE_FUN(free,mi_cfree), // use safe free that checks if pointers are from us
@@ -113,15 +113,15 @@ terms of the MIT license. A copy of the license can be found in the file
   #endif
 
   #if (__cplusplus > 201402L && defined(__cpp_aligned_new)) && (!defined(__GNUC__) || (__GNUC__ > 5))
-  void operator delete  (void* p, std::align_val_t al) noexcept { mi_free_aligned(p, static_cast<size_t>(al)); }
-  void operator delete[](void* p, std::align_val_t al) noexcept { mi_free_aligned(p, static_cast<size_t>(al)); }
-  void operator delete  (void* p, std::size_t n, std::align_val_t al) noexcept { mi_free_size_aligned(p, n, static_cast<size_t>(al)); };
-  void operator delete[](void* p, std::size_t n, std::align_val_t al) noexcept { mi_free_size_aligned(p, n, static_cast<size_t>(al)); };
+  void operator delete  (void* p, std::align_konst_t al) noexcept { mi_free_aligned(p, static_cast<size_t>(al)); }
+  void operator delete[](void* p, std::align_konst_t al) noexcept { mi_free_aligned(p, static_cast<size_t>(al)); }
+  void operator delete  (void* p, std::size_t n, std::align_konst_t al) noexcept { mi_free_size_aligned(p, n, static_cast<size_t>(al)); };
+  void operator delete[](void* p, std::size_t n, std::align_konst_t al) noexcept { mi_free_size_aligned(p, n, static_cast<size_t>(al)); };
 
-  void* operator new( std::size_t n, std::align_val_t al)   noexcept(false) { return mi_new_aligned(n, static_cast<size_t>(al)); }
-  void* operator new[]( std::size_t n, std::align_val_t al) noexcept(false) { return mi_new_aligned(n, static_cast<size_t>(al)); }
-  void* operator new  (std::size_t n, std::align_val_t al, const std::nothrow_t&) noexcept { return mi_new_aligned_nothrow(n, static_cast<size_t>(al)); }
-  void* operator new[](std::size_t n, std::align_val_t al, const std::nothrow_t&) noexcept { return mi_new_aligned_nothrow(n, static_cast<size_t>(al)); }
+  void* operator new( std::size_t n, std::align_konst_t al)   noexcept(false) { return mi_new_aligned(n, static_cast<size_t>(al)); }
+  void* operator new[]( std::size_t n, std::align_konst_t al) noexcept(false) { return mi_new_aligned(n, static_cast<size_t>(al)); }
+  void* operator new  (std::size_t n, std::align_konst_t al, const std::nothrow_t&) noexcept { return mi_new_aligned_nothrow(n, static_cast<size_t>(al)); }
+  void* operator new[](std::size_t n, std::align_konst_t al, const std::nothrow_t&) noexcept { return mi_new_aligned_nothrow(n, static_cast<size_t>(al)); }
   #endif
 
 #elif (defined(__GNUC__) || defined(__clang__))
@@ -134,30 +134,30 @@ terms of the MIT license. A copy of the license can be found in the file
   void _ZdaPv(void* p)            MI_FORWARD0(mi_free,p) // delete[]
   void _ZdlPvm(void* p, size_t n) MI_FORWARD02(mi_free_size,p,n)
   void _ZdaPvm(void* p, size_t n) MI_FORWARD02(mi_free_size,p,n)
-  void _ZdlPvSt11align_val_t(void* p, size_t al)            { mi_free_aligned(p,al); }
-  void _ZdaPvSt11align_val_t(void* p, size_t al)            { mi_free_aligned(p,al); }
-  void _ZdlPvmSt11align_val_t(void* p, size_t n, size_t al) { mi_free_size_aligned(p,n,al); }
-  void _ZdaPvmSt11align_val_t(void* p, size_t n, size_t al) { mi_free_size_aligned(p,n,al); }
+  void _ZdlPvSt11align_konst_t(void* p, size_t al)            { mi_free_aligned(p,al); }
+  void _ZdaPvSt11align_konst_t(void* p, size_t al)            { mi_free_aligned(p,al); }
+  void _ZdlPvmSt11align_konst_t(void* p, size_t n, size_t al) { mi_free_size_aligned(p,n,al); }
+  void _ZdaPvmSt11align_konst_t(void* p, size_t n, size_t al) { mi_free_size_aligned(p,n,al); }
 
   typedef struct mi_nothrow_s { int _tag; } mi_nothrow_t;
   #if (MI_INTPTR_SIZE==8)
     void* _Znwm(size_t n)                             MI_FORWARD1(mi_new,n)  // new 64-bit
     void* _Znam(size_t n)                             MI_FORWARD1(mi_new,n)  // new[] 64-bit
-    void* _ZnwmSt11align_val_t(size_t n, size_t al)   MI_FORWARD2(mi_new_aligned, n, al)
-    void* _ZnamSt11align_val_t(size_t n, size_t al)   MI_FORWARD2(mi_new_aligned, n, al)
+    void* _ZnwmSt11align_konst_t(size_t n, size_t al)   MI_FORWARD2(mi_new_aligned, n, al)
+    void* _ZnamSt11align_konst_t(size_t n, size_t al)   MI_FORWARD2(mi_new_aligned, n, al)
     void* _ZnwmRKSt9nothrow_t(size_t n, mi_nothrow_t tag) { UNUSED(tag); return mi_new_nothrow(n); }
     void* _ZnamRKSt9nothrow_t(size_t n, mi_nothrow_t tag) { UNUSED(tag); return mi_new_nothrow(n); }
-    void* _ZnwmSt11align_val_tRKSt9nothrow_t(size_t n, size_t al, mi_nothrow_t tag) { UNUSED(tag); return mi_new_aligned_nothrow(n,al); }
-    void* _ZnamSt11align_val_tRKSt9nothrow_t(size_t n, size_t al, mi_nothrow_t tag) { UNUSED(tag); return mi_new_aligned_nothrow(n,al); }
+    void* _ZnwmSt11align_konst_tRKSt9nothrow_t(size_t n, size_t al, mi_nothrow_t tag) { UNUSED(tag); return mi_new_aligned_nothrow(n,al); }
+    void* _ZnamSt11align_konst_tRKSt9nothrow_t(size_t n, size_t al, mi_nothrow_t tag) { UNUSED(tag); return mi_new_aligned_nothrow(n,al); }
   #elif (MI_INTPTR_SIZE==4)
     void* _Znwj(size_t n)                             MI_FORWARD1(mi_new,n)  // new 64-bit
     void* _Znaj(size_t n)                             MI_FORWARD1(mi_new,n)  // new[] 64-bit
-    void* _ZnwjSt11align_val_t(size_t n, size_t al)   MI_FORWARD2(mi_new_aligned, n, al)
-    void* _ZnajSt11align_val_t(size_t n, size_t al)   MI_FORWARD2(mi_new_aligned, n, al)
+    void* _ZnwjSt11align_konst_t(size_t n, size_t al)   MI_FORWARD2(mi_new_aligned, n, al)
+    void* _ZnajSt11align_konst_t(size_t n, size_t al)   MI_FORWARD2(mi_new_aligned, n, al)
     void* _ZnwjRKSt9nothrow_t(size_t n, mi_nothrow_t tag) { UNUSED(tag); return mi_new_nothrow(n); }
     void* _ZnajRKSt9nothrow_t(size_t n, mi_nothrow_t tag) { UNUSED(tag); return mi_new_nothrow(n); }
-    void* _ZnwjSt11align_val_tRKSt9nothrow_t(size_t n, size_t al, mi_nothrow_t tag) { UNUSED(tag); return mi_new_aligned_nothrow(n,al); }
-    void* _ZnajSt11align_val_tRKSt9nothrow_t(size_t n, size_t al, mi_nothrow_t tag) { UNUSED(tag); return mi_new_aligned_nothrow(n,al); }
+    void* _ZnwjSt11align_konst_tRKSt9nothrow_t(size_t n, size_t al, mi_nothrow_t tag) { UNUSED(tag); return mi_new_aligned_nothrow(n,al); }
+    void* _ZnajSt11align_konst_tRKSt9nothrow_t(size_t n, size_t al, mi_nothrow_t tag) { UNUSED(tag); return mi_new_aligned_nothrow(n,al); }
   #else
   #error "define overloads for new/delete for this platform (just for performance, can be skipped)"
   #endif
@@ -182,8 +182,8 @@ size_t malloc_usable_size(const void *p) MI_FORWARD1(mi_usable_size,p)
 #endif
 
 // no forwarding here due to aliasing/name mangling issues
-void* valloc(size_t size)                                     { return mi_valloc(size); }
-void* pvalloc(size_t size)                                    { return mi_pvalloc(size); }
+void* konstloc(size_t size)                                     { return mi_konstloc(size); }
+void* pkonstloc(size_t size)                                    { return mi_pkonstloc(size); }
 void* reallocarray(void* p, size_t count, size_t size)        { return mi_reallocarray(p, count, size); }
 void* memalign(size_t alignment, size_t size)                 { return mi_memalign(alignment, size); }
 int   posix_memalign(void** p, size_t alignment, size_t size) { return mi_posix_memalign(p, alignment, size); }
@@ -207,8 +207,8 @@ void* aligned_alloc(size_t alignment, size_t size)   { return mi_aligned_alloc(a
   void  __libc_free(void* p)                        MI_FORWARD0(mi_free,p)
   void  __libc_cfree(void* p)                       MI_FORWARD0(mi_free,p)
 
-  void* __libc_valloc(size_t size)                                { return mi_valloc(size); }
-  void* __libc_pvalloc(size_t size)                               { return mi_pvalloc(size); }
+  void* __libc_konstloc(size_t size)                                { return mi_konstloc(size); }
+  void* __libc_pkonstloc(size_t size)                               { return mi_pkonstloc(size); }
   void* __libc_memalign(size_t alignment, size_t size)            { return mi_memalign(alignment,size); }
   int   __posix_memalign(void** p, size_t alignment, size_t size) { return mi_posix_memalign(p,alignment,size); }
 #endif

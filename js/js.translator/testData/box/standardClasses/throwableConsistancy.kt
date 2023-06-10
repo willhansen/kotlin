@@ -1,13 +1,13 @@
 // IGNORE_BACKEND: JS
 
 fun test(case: String, expctedMessage: String?, expectedCause: Throwable?, expectedToString: String, t: Throwable): String {
-    val actualMessage = t.message
+    konst actualMessage = t.message
     if (actualMessage != expctedMessage) return "$case FAIL message: $actualMessage, expcted: $expctedMessage"
 
-    val actualCause = t.cause
+    konst actualCause = t.cause
     if (actualCause != expectedCause) return "$case FAIL cause: $actualCause, expcted: $expectedCause"
 
-    val actualToString = t.toString()
+    konst actualToString = t.toString()
     if (actualToString != expectedToString) return "$case FAIL toString: $actualToString, expcted: $expectedToString"
 
     return "OK"

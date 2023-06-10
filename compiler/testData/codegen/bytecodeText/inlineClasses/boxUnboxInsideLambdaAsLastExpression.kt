@@ -2,16 +2,16 @@
 
 // FILE: utils.kt
 
-inline class UInt(private val u: Int)
+inline class UInt(private konst u: Int)
 
 // FILE: test.kt
 
 fun test(x: UInt?, y: UInt) {
-    val a = run {
+    konst a = run {
         x!!
     }
 
-    val b = run {
+    konst b = run {
         y
     }
 }
@@ -21,5 +21,5 @@ fun test(x: UInt?, y: UInt) {
 // 0 INVOKESTATIC UInt\.box
 // 1 INVOKEVIRTUAL UInt.unbox
 
-// 0 valueOf
+// 0 konstueOf
 // 0 intValue

@@ -1,6 +1,6 @@
 package
 
-public val test_2: TypeToken<@Ann kotlin.String>
+public konst test_2: TypeToken<@Ann kotlin.String>
 public fun test_1(/*0*/ a: kotlin.Any): kotlin.Unit
 public fun test_3(/*0*/ a: kotlin.Any): kotlin.Unit
 public fun </*0*/ T : @Ann kotlin.Any> test_4(): kotlin.Unit where T : @Ann kotlin.CharSequence

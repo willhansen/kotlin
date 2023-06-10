@@ -12,14 +12,14 @@
 
 // TESTCASE NUMBER: 1, 2
 @Target(AnnotationTarget.TYPE)
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
 /*
  * TESTCASE NUMBER: 1
  * UNEXPECTED BEHAVIOUR
  */
 fun case_1() {
-    val x: (Int) -> @Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) Unit = {} // OK, no error in IDE and in the compiler
+    konst x: (Int) -> @Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) Unit = {} // OK, no error in IDE and in the compiler
 }
 
 /*
@@ -27,10 +27,10 @@ fun case_1() {
  * UNEXPECTED BEHAVIOUR
  */
 fun case_2() {
-    val x: (@Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) Int) -> Unit = { a: Int -> println(a) } // OK, no error in IDE and in the compiler
+    konst x: (@Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) Int) -> Unit = { a: Int -> println(a) } // OK, no error in IDE and in the compiler
 }
 
 // TESTCASE NUMBER: 3
 fun case_3() {
-    val x: (@Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) Int) -> Unit = { a -> println(a) } // ERROR (if argument type isn't specified explicitly)
+    konst x: (@Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) Int) -> Unit = { a -> println(a) } // ERROR (if argument type isn't specified explicitly)
 }

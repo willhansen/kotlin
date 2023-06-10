@@ -16,7 +16,7 @@ external class FieldPath {
     )
 }
 
-external val ctorCallArgs: Array<String>
+external konst ctorCallArgs: Array<String>
 
 fun box(): String {
     FieldPath()

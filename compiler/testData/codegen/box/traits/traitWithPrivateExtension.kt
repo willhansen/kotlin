@@ -1,5 +1,5 @@
 open class B {
-    val p = "OK"
+    konst p = "OK"
 }
 
 class BB : B()

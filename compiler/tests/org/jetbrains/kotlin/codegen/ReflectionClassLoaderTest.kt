@@ -30,8 +30,8 @@ class ReflectionClassLoaderTest : CodegenTestCase() {
     private fun Class<*>.methodByName(name: String) = declaredMethods.single { it.name == name }
 
     fun doTest(cl1: ClassLoader, cl2: ClassLoader) {
-        val t1 = cl1.loadClass("test.Test")
-        val t2 = cl2.loadClass("test.Test")
+        konst t1 = cl1.loadClass("test.Test")
+        konst t2 = cl2.loadClass("test.Test")
 
         fun Class<*>.getKClass() = methodByName("kClass")(newInstance())
 
@@ -70,7 +70,7 @@ class ReflectionClassLoaderTest : CodegenTestCase() {
 
         class ChildClassLoader(parent: ClassLoader) : ClassLoader(parent)
 
-        val parent = createClassLoader()
+        konst parent = createClassLoader()
 
         doTest(
             parent,

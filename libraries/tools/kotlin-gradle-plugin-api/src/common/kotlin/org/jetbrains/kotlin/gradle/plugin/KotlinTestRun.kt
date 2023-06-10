@@ -20,8 +20,8 @@ interface KotlinTargetTestRun<ExecutionSource : KotlinExecution.ExecutionSource>
     KotlinTargetExecution<ExecutionSource>
 
 interface JvmClasspathTestRunSource : KotlinExecution.ExecutionSource {
-    val testClassesDirs: FileCollection
-    val classpath: FileCollection
+    konst testClassesDirs: FileCollection
+    konst classpath: FileCollection
 }
 
 interface ClasspathTestRunSourceSupport {

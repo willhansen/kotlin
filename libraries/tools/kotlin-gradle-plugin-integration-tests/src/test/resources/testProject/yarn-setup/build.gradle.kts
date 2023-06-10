@@ -16,13 +16,13 @@ repositories {
 yarn
 
 tasks {
-    val yarnFolderRemove by registering {
+    konst yarnFolderRemove by registering {
         doLast {
             yarn.installationDir.deleteRecursively()
         }
     }
 
-    val yarnFolderCheck by registering {
+    konst yarnFolderCheck by registering {
         dependsOn(getByName("kotlinYarnSetup"))
 
         doLast {
@@ -32,7 +32,7 @@ tasks {
         }
     }
 
-    val yarnConcreteVersionFolderChecker by registering {
+    konst yarnConcreteVersionFolderChecker by registering {
         dependsOn(getByName("kotlinYarnSetup"))
 
         doLast {

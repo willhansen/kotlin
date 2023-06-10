@@ -5,7 +5,7 @@ package foo
 
    An example:
        fun foo() {
-         val status = "OK"
+         konst status = "OK"
          run { println(status) }
        }
 
@@ -29,7 +29,7 @@ package foo
 // CHECK_NOT_CALLED: box$f_1
 
 inline fun max(getA: ()->Int, b: Int): Int {
-    val a = getA()
+    konst a = getA()
     log("max($a, $b)")
 
     if (a > b) return a
@@ -38,11 +38,11 @@ inline fun max(getA: ()->Int, b: Int): Int {
 }
 
 fun box(): String {
-    val one = 1
-    val two = 2
-    val three = 3
+    konst one = 1
+    konst two = 2
+    konst three = 3
 
-    val test = max({ fizz(one) }, max({ fizz(two) }, buzz(three)))
+    konst test = max({ fizz(one) }, max({ fizz(two) }, buzz(three)))
     assertEquals(3, test)
     assertEquals("buzz(3);fizz(2);max(2, 3);fizz(1);max(1, 3);", pullLog())
 

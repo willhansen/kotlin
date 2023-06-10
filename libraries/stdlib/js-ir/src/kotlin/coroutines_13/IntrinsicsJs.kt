@@ -72,7 +72,7 @@ internal fun <R, P, T> (suspend R.(P) -> T).invokeSuspendSuperTypeWithReceiverAn
 public actual inline fun <T> (suspend () -> T).startCoroutineUninterceptedOrReturn(
     completion: Continuation<T>
 ): Any? {
-    val a = this.asDynamic()
+    konst a = this.asDynamic()
     return if (jsTypeOf(a) == "function") a(completion)
     else this.invokeSuspendSuperType(completion)
 }
@@ -95,7 +95,7 @@ public actual inline fun <R, T> (suspend R.() -> T).startCoroutineUninterceptedO
     receiver: R,
     completion: Continuation<T>
 ): Any? {
-    val a = this.asDynamic()
+    konst a = this.asDynamic()
     return if (jsTypeOf(a) == "function") a(receiver, completion)
     else this.invokeSuspendSuperTypeWithReceiver(receiver, completion)
 }
@@ -106,7 +106,7 @@ internal actual inline fun <R, P, T> (suspend R.(P) -> T).startCoroutineUninterc
     param: P,
     completion: Continuation<T>
 ): Any? {
-    val a = this.asDynamic()
+    konst a = this.asDynamic()
     return if (jsTypeOf(a) == "function") a(receiver, param, completion)
     else this.invokeSuspendSuperTypeWithReceiverAndParam(receiver, param, completion)
 }
@@ -132,7 +132,7 @@ public actual fun <T> (suspend () -> T).createCoroutineUnintercepted(
     completion: Continuation<T>
 ): Continuation<Unit> =
     createCoroutineFromSuspendFunction(completion) {
-        val a = this.asDynamic()
+        konst a = this.asDynamic()
         if (jsTypeOf(a) == "function") a(completion)
         else this.invokeSuspendSuperType(completion)
     }
@@ -159,7 +159,7 @@ public actual fun <R, T> (suspend R.() -> T).createCoroutineUnintercepted(
     completion: Continuation<T>
 ): Continuation<Unit> =
     createCoroutineFromSuspendFunction(completion) {
-        val a = this.asDynamic()
+        konst a = this.asDynamic()
         if (jsTypeOf(a) == "function") a(receiver, completion)
         else this.invokeSuspendSuperTypeWithReceiver(receiver, completion)
     }

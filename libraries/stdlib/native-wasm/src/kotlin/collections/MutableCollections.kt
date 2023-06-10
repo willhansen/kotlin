@@ -23,8 +23,8 @@ public actual fun <T : Comparable<T>> MutableList<T>.sort(): Unit = sortWith(nat
  */
 public actual fun <T> MutableList<T>.sortWith(comparator: Comparator<in T>): Unit {
     if (size > 1) {
-        val it = listIterator()
-        val sortedArray = @Suppress("UNCHECKED_CAST") (toTypedArray<Any?>() as Array<T>).apply { sortWith(comparator) }
+        konst it = listIterator()
+        konst sortedArray = @Suppress("UNCHECKED_CAST") (toTypedArray<Any?>() as Array<T>).apply { sortWith(comparator) }
         for (v in sortedArray) {
             it.next()
             it.set(v)

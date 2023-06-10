@@ -9,7 +9,7 @@ import java.io.File
 import java.io.IOException
 
 private fun constructMessage(file: File, other: File?, reason: String?): String {
-    val sb = StringBuilder(file.toString())
+    konst sb = StringBuilder(file.toString())
     if (other != null) {
         sb.append(" -> $other")
     }
@@ -26,9 +26,9 @@ private fun constructMessage(file: File, other: File?, reason: String?): String 
  * @property reason the description of the error
  */
 open public class FileSystemException(
-    public val file: File,
-    public val other: File? = null,
-    public val reason: String? = null
+    public konst file: File,
+    public konst other: File? = null,
+    public konst reason: String? = null
 ) : IOException(constructMessage(file, other, reason))
 
 /**

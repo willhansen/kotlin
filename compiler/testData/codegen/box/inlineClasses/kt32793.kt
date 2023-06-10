@@ -9,8 +9,8 @@ suspend fun test() {
     suspend fun process(myValue: UInt) {
         if (myValue != 42u) throw AssertionError(myValue)
     }
-    val value: UInt = 42u
-    process(value)
+    konst konstue: UInt = 42u
+    process(konstue)
 }
 
 fun builder(block: suspend () -> Unit) {

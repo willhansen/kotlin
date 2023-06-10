@@ -5,20 +5,20 @@ class TestClass {
     companion object {
         @Deprecated("")
         @JvmStatic
-        val a: Int  = 1
+        konst a: Int  = 1
     }
 }
 
 object TestObject {
     @Deprecated("")
     @JvmStatic
-    val a: Int  = 1
+    konst a: Int  = 1
 }
 
 interface TestInterface {
     companion object {
         @Deprecated("")
         @JvmStatic
-        val a: Int  = 1
+        konst a: Int  = 1
     }
 }

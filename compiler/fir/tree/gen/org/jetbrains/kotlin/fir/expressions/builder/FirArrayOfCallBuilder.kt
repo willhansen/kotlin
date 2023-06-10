@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirArrayOfCallBuilder : FirCallBuilder, FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     override lateinit var argumentList: FirArgumentList
 
     override fun build(): FirArrayOfCall {

@@ -7,7 +7,7 @@ fun foo() {
         "OK"
     }
     
-    val b = if (flag) {
+    konst b = if (flag) {
         "OK"
     } else {
         "OK"

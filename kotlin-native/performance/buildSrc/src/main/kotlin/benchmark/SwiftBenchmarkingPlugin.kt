@@ -44,22 +44,22 @@ open class SwiftBenchmarkingPlugin : BenchmarkingPlugin() {
         }
     }
 
-    override val benchmarkExtensionClass: KClass<*>
+    override konst benchmarkExtensionClass: KClass<*>
         get() = SwiftBenchmarkExtension::class
 
-    override val Project.benchmark: SwiftBenchmarkExtension
+    override konst Project.benchmark: SwiftBenchmarkExtension
         get() = extensions.getByName(benchmarkExtensionName) as SwiftBenchmarkExtension
 
-    override val benchmarkExtensionName: String = "swiftBenchmark"
+    override konst benchmarkExtensionName: String = "swiftBenchmark"
 
-    override val Project.nativeExecutable: String
+    override konst Project.nativeExecutable: String
         get() = Paths.get(buildDir.absolutePath, benchmark.applicationName).toString()
 
-    override val Project.nativeLinkTask: Task
+    override konst Project.nativeLinkTask: Task
         get() = tasks.getByName("buildSwift")
 
     private lateinit var framework: Framework
-    val nativeFrameworkName = "benchmark"
+    konst nativeFrameworkName = "benchmark"
 
     override fun NamedDomainObjectContainer<KotlinSourceSet>.configureSources(project: Project) {
         project.benchmark.let {
@@ -76,21 +76,21 @@ open class SwiftBenchmarkingPlugin : BenchmarkingPlugin() {
     override fun KotlinNativeTarget.configureNativeOutput(project: Project) {
         binaries.framework(nativeFrameworkName, listOf(project.benchmark.buildType)) {
             // Specify settings configured by a user in the benchmark extension.
-            project.afterEvaluate {
+            project.afterEkonstuate {
                 linkerOpts.addAll(project.benchmark.linkerOpts)
             }
         }
     }
 
     override fun Project.configureExtraTasks() {
-        val nativeTarget = kotlin.targets.getByName(NATIVE_TARGET_NAME) as KotlinNativeTarget
+        konst nativeTarget = kotlin.targets.getByName(NATIVE_TARGET_NAME) as KotlinNativeTarget
         // Build executable from swift code.
         framework = nativeTarget.binaries.getFramework(nativeFrameworkName, benchmark.buildType)
         tasks.create("buildSwift") {
             dependsOn(framework.linkTaskName)
             doLast {
-                val frameworkParentDirPath = framework.outputDirectory.absolutePath
-                val options = listOf("-O", "-wmo", "-Xlinker", "-rpath", "-Xlinker", frameworkParentDirPath, "-F", frameworkParentDirPath)
+                konst frameworkParentDirPath = framework.outputDirectory.absolutePath
+                konst options = listOf("-O", "-wmo", "-Xlinker", "-rpath", "-Xlinker", frameworkParentDirPath, "-F", frameworkParentDirPath)
                 compileSwift(project, nativeTarget.konanTarget, benchmark.swiftSources, options,
                         Paths.get(buildDir.absolutePath, benchmark.applicationName), false)
             }
@@ -120,18 +120,18 @@ open class SwiftBenchmarkingPlugin : BenchmarkingPlugin() {
             project: Project, target: KonanTarget, sources: List<String>, options: List<String>,
             output: Path, fullBitcode: Boolean = false
     ) {
-        val platform = project.platformManager.platform(target)
+        konst platform = project.platformManager.platform(target)
         assert(platform.configurables is AppleConfigurables)
-        val configs = platform.configurables as AppleConfigurables
-        val compiler = configs.absoluteTargetToolchain + "/usr/bin/swiftc"
+        konst configs = platform.configurables as AppleConfigurables
+        konst compiler = configs.absoluteTargetToolchain + "/usr/bin/swiftc"
 
-        val swiftTarget = configs.targetTriple.withOSVersion(configs.osVersionMin).toString()
+        konst swiftTarget = configs.targetTriple.withOSVersion(configs.osVersionMin).toString()
 
-        val args = listOf("-sdk", configs.absoluteTargetSysRoot, "-target", swiftTarget) +
+        konst args = listOf("-sdk", configs.absoluteTargetSysRoot, "-target", swiftTarget) +
                 options + "-o" + output.toString() + sources +
                 if (fullBitcode) listOf("-embed-bitcode", "-Xlinker", "-bitcode_verify") else listOf("-embed-bitcode-marker")
 
-        val out = mutableListOf<String>().apply {
+        konst out = mutableListOf<String>().apply {
             add(compiler)
             addAll(args)
         }.toTypedArray().runCommand(timeoutAmount = 240)

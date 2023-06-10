@@ -28,26 +28,26 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 //  -------------------------- Atoms --------------------------
 
 sealed class PostponedResolvedAtom : PostponedResolvedAtomMarker {
-    abstract val atom: FirElement
-    abstract override val inputTypes: Collection<ConeKotlinType>
-    abstract override val outputType: ConeKotlinType?
+    abstract konst atom: FirElement
+    abstract override konst inputTypes: Collection<ConeKotlinType>
+    abstract override konst outputType: ConeKotlinType?
     override var analyzed: Boolean = false
-    abstract override val expectedType: ConeKotlinType?
+    abstract override konst expectedType: ConeKotlinType?
 }
 
 //  ------------- Lambdas -------------
 
 class ResolvedLambdaAtom(
-    override val atom: FirAnonymousFunction,
+    override konst atom: FirAnonymousFunction,
     expectedType: ConeKotlinType?,
-    val expectedFunctionTypeKind: FunctionTypeKind?,
-    val receiver: ConeKotlinType?,
-    val contextReceivers: List<ConeKotlinType>,
-    val parameters: List<ConeKotlinType>,
+    konst expectedFunctionTypeKind: FunctionTypeKind?,
+    konst receiver: ConeKotlinType?,
+    konst contextReceivers: List<ConeKotlinType>,
+    konst parameters: List<ConeKotlinType>,
     var returnType: ConeKotlinType,
     typeVariableForLambdaReturnType: ConeTypeVariableForLambdaReturnType?,
     candidateOfOuterCall: Candidate?,
-    val coerceFirstParameterToExtensionReceiver: Boolean
+    konst coerceFirstParameterToExtensionReceiver: Boolean
 ) : PostponedResolvedAtom() {
     init {
         candidateOfOuterCall?.let {
@@ -63,7 +63,7 @@ class ResolvedLambdaAtom(
 
     lateinit var returnStatements: Collection<FirExpression>
 
-    override val inputTypes: Collection<ConeKotlinType>
+    override konst inputTypes: Collection<ConeKotlinType>
         get() {
             if (receiver == null && contextReceivers.isEmpty()) return parameters
             return ArrayList<ConeKotlinType>(parameters.size + contextReceivers.size + (if (receiver != null) 1 else 0)).apply {
@@ -73,7 +73,7 @@ class ResolvedLambdaAtom(
             }
         }
 
-    override val outputType: ConeKotlinType get() = returnType
+    override konst outputType: ConeKotlinType get() = returnType
 
     fun replaceExpectedType(expectedType: ConeKotlinType, newReturnType: ConeTypeVariableType) {
         this.expectedType = expectedType
@@ -86,9 +86,9 @@ class ResolvedLambdaAtom(
 }
 
 class LambdaWithTypeVariableAsExpectedTypeAtom(
-    override val atom: FirAnonymousFunctionExpression,
-    private val initialExpectedTypeType: ConeKotlinType,
-    val candidateOfOuterCall: Candidate,
+    override konst atom: FirAnonymousFunctionExpression,
+    private konst initialExpectedTypeType: ConeKotlinType,
+    konst candidateOfOuterCall: Candidate,
 ) : PostponedResolvedAtom(), LambdaWithTypeVariableAsExpectedTypeMarker {
     init {
         candidateOfOuterCall.postponedAtoms += this
@@ -103,11 +103,11 @@ class LambdaWithTypeVariableAsExpectedTypeAtom(
         parameterTypesFromDeclaration = types
     }
 
-    override val expectedType: ConeKotlinType
+    override konst expectedType: ConeKotlinType
         get() = revisedExpectedType ?: initialExpectedTypeType
 
-    override val inputTypes: Collection<ConeKotlinType> get() = listOf(initialExpectedTypeType)
-    override val outputType: ConeKotlinType? get() = null
+    override konst inputTypes: Collection<ConeKotlinType> get() = listOf(initialExpectedTypeType)
+    override konst outputType: ConeKotlinType? get() = null
     override var revisedExpectedType: ConeKotlinType? = null
         private set
 
@@ -120,36 +120,36 @@ class LambdaWithTypeVariableAsExpectedTypeAtom(
 //  ------------- References -------------
 
 class ResolvedCallableReferenceAtom(
-    val reference: FirCallableReferenceAccess,
-    private val initialExpectedType: ConeKotlinType?,
-    val lhs: DoubleColonLHS?,
-    private val session: FirSession
+    konst reference: FirCallableReferenceAccess,
+    private konst initialExpectedType: ConeKotlinType?,
+    konst lhs: DoubleColonLHS?,
+    private konst session: FirSession
 ) : PostponedResolvedAtom(), PostponedCallableReferenceMarker {
 
-    override val atom: FirCallableReferenceAccess
+    override konst atom: FirCallableReferenceAccess
         get() = reference
 
     var hasBeenResolvedOnce: Boolean = false
     var hasBeenPostponed: Boolean = false
 
-    val mightNeedAdditionalResolution get() = !hasBeenResolvedOnce || hasBeenPostponed
+    konst mightNeedAdditionalResolution get() = !hasBeenResolvedOnce || hasBeenPostponed
 
     var resultingReference: FirNamedReference? = null
     var resultingTypeForCallableReference: ConeKotlinType? = null
 
-    override val inputTypes: Collection<ConeKotlinType>
+    override konst inputTypes: Collection<ConeKotlinType>
         get() {
             if (!hasBeenPostponed) return emptyList()
             return extractInputOutputTypesFromCallableReferenceExpectedType(expectedType, session)?.inputTypes
                 ?: listOfNotNull(expectedType)
         }
-    override val outputType: ConeKotlinType?
+    override konst outputType: ConeKotlinType?
         get() {
             if (!hasBeenPostponed) return null
             return extractInputOutputTypesFromCallableReferenceExpectedType(expectedType, session)?.outputType
         }
 
-    override val expectedType: ConeKotlinType?
+    override konst expectedType: ConeKotlinType?
         get() = if (!hasBeenPostponed)
             initialExpectedType
         else
@@ -168,7 +168,7 @@ class ResolvedCallableReferenceAtom(
 
 //  -------------------------- Utils --------------------------
 
-internal data class InputOutputTypes(val inputTypes: List<ConeKotlinType>, val outputType: ConeKotlinType)
+internal data class InputOutputTypes(konst inputTypes: List<ConeKotlinType>, konst outputType: ConeKotlinType)
 
 internal fun extractInputOutputTypesFromCallableReferenceExpectedType(
     expectedType: ConeKotlinType?,
@@ -178,23 +178,23 @@ internal fun extractInputOutputTypesFromCallableReferenceExpectedType(
 
     return when {
         expectedType.isSomeFunctionType(session) ->
-            InputOutputTypes(expectedType.valueParameterTypesIncludingReceiver(session), expectedType.returnType(session))
+            InputOutputTypes(expectedType.konstueParameterTypesIncludingReceiver(session), expectedType.returnType(session))
 
 //        ReflectionTypes.isBaseTypeForNumberedReferenceTypes(expectedType) ->
 //            InputOutputTypes(emptyList(), expectedType.arguments.single().type.unwrap())
 //
 //        ReflectionTypes.isNumberedKFunction(expectedType) -> {
-//            val functionFromSupertype = expectedType.immediateSupertypes().first { it.isFunctionType }.unwrap()
+//            konst functionFromSupertype = expectedType.immediateSupertypes().first { it.isFunctionType }.unwrap()
 //            extractInputOutputTypesFromFunctionType(functionFromSupertype)
 //        }
 //
 //        ReflectionTypes.isNumberedKSuspendFunction(expectedType) -> {
-//            val kSuspendFunctionType = expectedType.immediateSupertypes().first { it.isSuspendFunctionType }.unwrap()
+//            konst kSuspendFunctionType = expectedType.immediateSupertypes().first { it.isSuspendFunctionType }.unwrap()
 //            extractInputOutputTypesFromFunctionType(kSuspendFunctionType)
 //        }
 //
 //        ReflectionTypes.isNumberedKPropertyOrKMutablePropertyType(expectedType) -> {
-//            val functionFromSupertype = expectedType.supertypes().first { it.isFunctionType }.unwrap()
+//            konst functionFromSupertype = expectedType.supertypes().first { it.isFunctionType }.unwrap()
 //            extractInputOutputTypesFromFunctionType(functionFromSupertype)
 //        }
 

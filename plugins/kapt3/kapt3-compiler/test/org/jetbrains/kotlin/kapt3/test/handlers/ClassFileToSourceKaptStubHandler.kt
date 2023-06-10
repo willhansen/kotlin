@@ -23,57 +23,57 @@ import java.util.*
 
 class ClassFileToSourceKaptStubHandler(testServices: TestServices) : BaseKaptHandler(testServices) {
     companion object {
-        const val FILE_SEPARATOR = "\n\n////////////////////\n\n"
+        const konst FILE_SEPARATOR = "\n\n////////////////////\n\n"
     }
 
     override fun processModule(module: TestModule, info: KaptContextBinaryArtifact) {
-        val generateNonExistentClass = NON_EXISTENT_CLASS in module.directives
-        val validate = NO_VALIDATION !in module.directives
-        val expectedErrors = module.directives[EXPECTED_ERROR].sorted()
+        konst generateNonExistentClass = NON_EXISTENT_CLASS in module.directives
+        konst konstidate = NO_VALIDATION !in module.directives
+        konst expectedErrors = module.directives[EXPECTED_ERROR].sorted()
 
-        val kaptContext = info.kaptContext
+        konst kaptContext = info.kaptContext
 
-        val convertedFiles = convert(module, kaptContext, generateNonExistentClass)
+        konst convertedFiles = convert(module, kaptContext, generateNonExistentClass)
 
         kaptContext.javaLog.interceptorData.files = convertedFiles.associateBy { it.sourceFile }
-        if (validate) kaptContext.compiler.enterTrees(convertedFiles)
+        if (konstidate) kaptContext.compiler.enterTrees(convertedFiles)
 
-        val actualRaw = convertedFiles
+        konst actualRaw = convertedFiles
             .sortedBy { it.sourceFile.name }
             .joinToString(FILE_SEPARATOR) { it.prettyPrint(kaptContext.context) }
 
-        val actual = StringUtil.convertLineSeparators(actualRaw.trim { it <= ' ' })
+        konst actual = StringUtil.convertLineSeparators(actualRaw.trim { it <= ' ' })
             .trimTrailingWhitespacesAndAddNewlineAtEOF()
             .let { removeMetadataAnnotationContents(it) }
 
         if (kaptContext.compiler.shouldStop(CompileStates.CompileState.ENTER)) {
-            val log = Log.instance(kaptContext.context) as KaptJavaLogBase
+            konst log = Log.instance(kaptContext.context) as KaptJavaLogBase
 
-            val actualErrors = log.reportedDiagnostics
+            konst actualErrors = log.reportedDiagnostics
                 .filter { it.type == JCDiagnostic.DiagnosticType.ERROR }
                 .map {
                     // Unfortunately, we can't use the file name as it can contain temporary prefix
-                    val name = it.source?.name?.substringAfterLast("/") ?: ""
-                    val kind = when (name.substringAfterLast(".").lowercase()) {
+                    konst name = it.source?.name?.substringAfterLast("/") ?: ""
+                    konst kind = when (name.substringAfterLast(".").lowercase()) {
                         "kt" -> "kotlin"
                         "java" -> "java"
                         else -> "other"
                     }
 
-                    val javaLocation = "($kind:${it.lineNumber}:${it.columnNumber}) "
+                    konst javaLocation = "($kind:${it.lineNumber}:${it.columnNumber}) "
                     javaLocation + it.getMessage(Locale.US).lines().first()
                 }
                 .sorted()
 
             log.flush()
 
-            val lineSeparator = System.getProperty("line.separator")
-            val actualErrorsStr = actualErrors.joinToString(lineSeparator) { it.toDirectiveView() }
+            konst lineSeparator = System.getProperty("line.separator")
+            konst actualErrorsStr = actualErrors.joinToString(lineSeparator) { it.toDirectiveView() }
 
             if (expectedErrors.isEmpty()) {
                 assertions.fail { "There were errors during analysis:\n$actualErrorsStr\n\nStubs:\n\n$actual" }
             } else {
-                val expectedErrorsStr = expectedErrors.joinToString(lineSeparator) { it.toDirectiveView() }
+                konst expectedErrorsStr = expectedErrors.joinToString(lineSeparator) { it.toDirectiveView() }
                 if (expectedErrorsStr != actualErrorsStr) {
                     assertions.assertEquals(expectedErrorsStr, actualErrorsStr) {
                         System.err.println(testServices.messageCollectorProvider.getErrorStream(module).toString("UTF8"))

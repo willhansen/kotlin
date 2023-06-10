@@ -4,15 +4,15 @@
 
 interface IFoo {
     fun getO(): String
-    val k: String
+    konst k: String
 
-    val ok: String get() = getO() + k
+    konst ok: String get() = getO() + k
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineFooImpl<T: String>(val s: T): IFoo {
+konstue class InlineFooImpl<T: String>(konst s: T): IFoo {
     override fun getO(): String = s
-    override val k: String get() = "K"
+    override konst k: String get() = "K"
 }
 
 class Test(s: String) : IFoo by InlineFooImpl(s)

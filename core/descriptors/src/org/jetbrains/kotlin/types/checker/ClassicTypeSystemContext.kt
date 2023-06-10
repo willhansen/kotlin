@@ -65,14 +65,14 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
         return declarationDescriptor?.classId?.shortClassName == SpecialNames.ANONYMOUS
     }
 
-    override val TypeVariableTypeConstructorMarker.typeParameter: TypeParameterMarker?
+    override konst TypeVariableTypeConstructorMarker.typeParameter: TypeParameterMarker?
         get() {
             require(this is NewTypeVariableConstructor, this::errorMessage)
             return this.originalTypeParameter
         }
 
     override fun SimpleTypeMarker.possibleIntegerTypes(): Collection<KotlinTypeMarker> {
-        val typeConstructor = typeConstructor()
+        konst typeConstructor = typeConstructor()
         require(typeConstructor is IntegerLiteralTypeConstructor, this::errorMessage)
         return typeConstructor.possibleTypes
     }
@@ -312,13 +312,13 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
 
     override fun TypeConstructorMarker.isFinalClassConstructor(): Boolean {
         require(this is TypeConstructor, this::errorMessage)
-        val classDescriptor = declarationDescriptor as? ClassDescriptor ?: return false
+        konst classDescriptor = declarationDescriptor as? ClassDescriptor ?: return false
         return classDescriptor.isFinalClass
     }
 
     override fun TypeConstructorMarker.isCommonFinalClassConstructor(): Boolean {
         require(this is TypeConstructor, this::errorMessage)
-        val classDescriptor = declarationDescriptor as? ClassDescriptor ?: return false
+        konst classDescriptor = declarationDescriptor as? ClassDescriptor ?: return false
         return classDescriptor.isFinalClass &&
                 classDescriptor.kind != ClassKind.ENUM_ENTRY &&
                 classDescriptor.kind != ClassKind.ANNOTATION_CLASS
@@ -326,7 +326,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
 
     override fun TypeConstructorMarker.isFinalClassOrEnumEntryOrAnnotationClassConstructor(): Boolean {
         require(this is TypeConstructor, this::errorMessage)
-        val classDescriptor = declarationDescriptor
+        konst classDescriptor = declarationDescriptor
         return classDescriptor is ClassDescriptor && classDescriptor.isFinalClass
     }
 
@@ -388,7 +388,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
         require(this is SimpleType, this::errorMessage)
         if (this is TypeUtils.SpecialType) return 0
 
-        val maxInArguments = arguments.maxOfOrNull {
+        konst maxInArguments = arguments.maxOfOrNull {
             if (it.isStarProjection) 1 else it.type.unwrap().typeDepth()
         } ?: 0
 
@@ -458,7 +458,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
         return builtIns.anyType
     }
 
-    val builtIns: KotlinBuiltIns
+    konst builtIns: KotlinBuiltIns
         get() = throw UnsupportedOperationException("Not supported")
 
     override fun KotlinTypeMarker.makeDefinitelyNotNullOrNotNull(): KotlinTypeMarker {
@@ -479,7 +479,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
 
     override fun KotlinTypeMarker.removeExactAnnotation(): KotlinTypeMarker {
         require(this is UnwrappedType, this::errorMessage)
-        val annotationsWithoutExact = this.annotations.filterNot(AnnotationDescriptor::isExactAnnotation)
+        konst annotationsWithoutExact = this.annotations.filterNot(AnnotationDescriptor::isExactAnnotation)
         return this.replaceAnnotations(Annotations.create(annotationsWithoutExact))
     }
 
@@ -542,11 +542,11 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
     ): SimpleTypeMarker {
         require(constructor is TypeConstructor, constructor::errorMessage)
 
-        val ourAnnotations = attributes?.firstIsInstanceOrNull<AnnotationsTypeAttribute>()?.annotations?.toList()
+        konst ourAnnotations = attributes?.firstIsInstanceOrNull<AnnotationsTypeAttribute>()?.annotations?.toList()
 
         fun createExtensionFunctionAnnotation() = BuiltInAnnotationDescriptor(builtIns, FqNames.extensionFunctionType, emptyMap())
 
-        val resultingAnnotations = when {
+        konst resultingAnnotations = when {
             ourAnnotations.isNullOrEmpty() && isExtensionFunction -> Annotations.create(listOf(createExtensionFunctionAnnotation()))
             !ourAnnotations.isNullOrEmpty() && !isExtensionFunction -> Annotations.create(ourAnnotations.filter { it.fqName != FqNames.extensionFunctionType })
             !ourAnnotations.isNullOrEmpty() && isExtensionFunction -> Annotations.create(ourAnnotations + createExtensionFunctionAnnotation())
@@ -668,7 +668,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
     override fun KotlinTypeMarker.replaceCustomAttributes(newAttributes: List<AnnotationMarker>): KotlinTypeMarker {
         require(this is KotlinType)
         @Suppress("UNCHECKED_CAST")
-        val attributes = (newAttributes as List<TypeAttribute<*>>).filterNot { it is AnnotationsTypeAttribute }.toMutableList()
+        konst attributes = (newAttributes as List<TypeAttribute<*>>).filterNot { it is AnnotationsTypeAttribute }.toMutableList()
         attributes.addIfNotNull(this.attributes.annotationsAttribute)
         return this.unwrap().replaceAttributes(
             TypeAttributes.create(attributes)
@@ -722,11 +722,11 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
     }
 
     override fun KotlinTypeMarker.eraseContainingTypeParameters(): KotlinTypeMarker {
-        val eraser = TypeParameterUpperBoundEraser(
+        konst eraser = TypeParameterUpperBoundEraser(
             ErasureProjectionComputer(),
             TypeParameterErasureOptions(leaveNonTypeParameterTypes = true, intersectUpperBounds = true)
         )
-        val typeParameters = this.extractTypeParameters()
+        konst typeParameters = this.extractTypeParameters()
             .map { it as TypeParameterDescriptor }
             .associateWith {
                 TypeProjectionImpl(Variance.OUT_VARIANCE, eraser.getErasedUpperBound(it, ErasureTypeAttributes(TypeUsage.COMMON)))
@@ -755,7 +755,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
 
     override fun KotlinTypeMarker.getAnnotationFirstArgumentValue(fqName: FqName): Any? {
         require(this is KotlinType, this::errorMessage)
-        return annotations.findAnnotation(fqName)?.allValueArguments?.values?.firstOrNull()?.value
+        return annotations.findAnnotation(fqName)?.allValueArguments?.konstues?.firstOrNull()?.konstue
     }
 
     override fun TypeConstructorMarker.getTypeParameterClassifier(): TypeParameterMarker? {
@@ -765,17 +765,17 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
 
     override fun TypeConstructorMarker.isInlineClass(): Boolean {
         require(this is TypeConstructor, this::errorMessage)
-        return (declarationDescriptor as? ClassDescriptor)?.valueClassRepresentation is InlineClassRepresentation
+        return (declarationDescriptor as? ClassDescriptor)?.konstueClassRepresentation is InlineClassRepresentation
     }
 
     override fun TypeConstructorMarker.isMultiFieldValueClass(): Boolean {
         require(this is TypeConstructor, this::errorMessage)
-        return (declarationDescriptor as? ClassDescriptor)?.valueClassRepresentation is MultiFieldValueClassRepresentation
+        return (declarationDescriptor as? ClassDescriptor)?.konstueClassRepresentation is MultiFieldValueClassRepresentation
     }
 
     override fun TypeConstructorMarker.getValueClassProperties(): List<Pair<Name, SimpleTypeMarker>>? {
         require(this is TypeConstructor, this::errorMessage)
-        return (declarationDescriptor as? ClassDescriptor)?.valueClassRepresentation?.underlyingPropertyNamesToTypes
+        return (declarationDescriptor as? ClassDescriptor)?.konstueClassRepresentation?.underlyingPropertyNamesToTypes
     }
 
     override fun TypeConstructorMarker.isInnerClass(): Boolean {
@@ -830,7 +830,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
 
     override fun KotlinTypeMarker.isInterfaceOrAnnotationClass(): Boolean {
         require(this is KotlinType, this::errorMessage)
-        val descriptor = constructor.declarationDescriptor
+        konst descriptor = constructor.declarationDescriptor
         return descriptor is ClassDescriptor && (descriptor.kind == ClassKind.INTERFACE || descriptor.kind == ClassKind.ANNOTATION_CLASS)
     }
 
@@ -842,7 +842,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
         require(secondCandidate is KotlinType, this::errorMessage)
 
         (firstCandidate.constructor as? IntersectionTypeConstructor)?.let { intersectionConstructor ->
-            val intersectionTypeWithAlternative = intersectionConstructor.setAlternative(secondCandidate).createType()
+            konst intersectionTypeWithAlternative = intersectionConstructor.setAlternative(secondCandidate).createType()
             return if (firstCandidate.isMarkedNullable) intersectionTypeWithAlternative.makeNullableAsSpecified(true)
             else intersectionTypeWithAlternative
 
@@ -899,7 +899,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
 
     override fun substitutionSupertypePolicy(type: SimpleTypeMarker): TypeCheckerState.SupertypesPolicy {
         require(type is SimpleType, type::errorMessage)
-        val substitutor = TypeConstructorSubstitution.create(type).buildSubstitutor()
+        konst substitutor = TypeConstructorSubstitution.create(type).buildSubstitutor()
 
         return object : TypeCheckerState.SupertypesPolicy.DoCustomTransform() {
             override fun transformType(state: TypeCheckerState, type: KotlinTypeMarker): SimpleTypeMarker {
@@ -915,7 +915,7 @@ interface ClassicTypeSystemContext : TypeSystemInferenceExtensionContext, TypeSy
         return this is UnwrappedType && constructor is NewTypeVariableConstructor
     }
 
-    override val isK2: Boolean
+    override konst isK2: Boolean
         get() = false
 
     class WA // Workaround for KT-52313

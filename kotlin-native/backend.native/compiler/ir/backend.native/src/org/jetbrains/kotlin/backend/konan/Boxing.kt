@@ -49,7 +49,7 @@ internal object DECLARATION_ORIGIN_INLINE_CLASS_SPECIAL_FUNCTION : IrDeclaration
 
 internal fun Context.getBoxFunction(inlinedClass: IrClass): IrSimpleFunction = mapping.boxFunctions.getOrPut(inlinedClass) {
     require(inlinedClass.isUsedAsBoxClass())
-    val classes = mutableListOf(inlinedClass)
+    konst classes = mutableListOf(inlinedClass)
     var parent = inlinedClass.parent
     while (parent is IrClass) {
         classes.add(parent)
@@ -57,9 +57,9 @@ internal fun Context.getBoxFunction(inlinedClass: IrClass): IrSimpleFunction = m
     }
     require(parent is IrFile || parent is IrExternalPackageFragment) { "Local inline classes are not supported" }
 
-    val isNullable = inlinedClass.inlinedClassIsNullable()
-    val unboxedType = inlinedClass.defaultOrNullableType(isNullable)
-    val boxedType = ir.symbols.any.owner.defaultOrNullableType(isNullable)
+    konst isNullable = inlinedClass.inlinedClassIsNullable()
+    konst unboxedType = inlinedClass.defaultOrNullableType(isNullable)
+    konst boxedType = ir.symbols.any.owner.defaultOrNullableType(isNullable)
 
     irFactory.buildFun {
         startOffset = inlinedClass.startOffset
@@ -74,7 +74,7 @@ internal fun Context.getBoxFunction(inlinedClass: IrClass): IrSimpleFunction = m
         function.addValueParameter {
             startOffset = inlinedClass.startOffset
             endOffset = inlinedClass.endOffset
-            name = Name.identifier("value")
+            name = Name.identifier("konstue")
             type = unboxedType
         }
     }
@@ -82,7 +82,7 @@ internal fun Context.getBoxFunction(inlinedClass: IrClass): IrSimpleFunction = m
 
 internal fun Context.getUnboxFunction(inlinedClass: IrClass): IrSimpleFunction = mapping.unboxFunctions.getOrPut(inlinedClass) {
     require(inlinedClass.isUsedAsBoxClass())
-    val classes = mutableListOf(inlinedClass)
+    konst classes = mutableListOf(inlinedClass)
     var parent = inlinedClass.parent
     while (parent is IrClass) {
         classes.add(parent)
@@ -90,11 +90,11 @@ internal fun Context.getUnboxFunction(inlinedClass: IrClass): IrSimpleFunction =
     }
     require(parent is IrFile || parent is IrExternalPackageFragment) { "Local inline classes are not supported" }
 
-    val symbols = ir.symbols
+    konst symbols = ir.symbols
 
-    val isNullable = inlinedClass.inlinedClassIsNullable()
-    val unboxedType = inlinedClass.defaultOrNullableType(isNullable)
-    val boxedType = symbols.any.owner.defaultOrNullableType(isNullable)
+    konst isNullable = inlinedClass.inlinedClassIsNullable()
+    konst unboxedType = inlinedClass.defaultOrNullableType(isNullable)
+    konst boxedType = symbols.any.owner.defaultOrNullableType(isNullable)
 
     irFactory.buildFun {
         startOffset = inlinedClass.startOffset
@@ -109,7 +109,7 @@ internal fun Context.getUnboxFunction(inlinedClass: IrClass): IrSimpleFunction =
         function.addValueParameter {
             startOffset = inlinedClass.startOffset
             endOffset = inlinedClass.endOffset
-            name = Name.identifier("value")
+            name = Name.identifier("konstue")
             type = boxedType
         }
     }
@@ -120,10 +120,10 @@ internal fun Context.getUnboxFunction(inlinedClass: IrClass): IrSimpleFunction =
  * If output target is native binary then the cache is created.
  */
 internal fun initializeCachedBoxes(generationState: NativeGenerationState) {
-    BoxCache.values().forEach { cache ->
-        val cacheName = "${cache.name}_CACHE"
-        val rangeStart = "${cache.name}_RANGE_FROM"
-        val rangeEnd = "${cache.name}_RANGE_TO"
+    BoxCache.konstues().forEach { cache ->
+        konst cacheName = "${cache.name}_CACHE"
+        konst rangeStart = "${cache.name}_RANGE_FROM"
+        konst rangeEnd = "${cache.name}_RANGE_TO"
         initCache(cache, generationState, cacheName, rangeStart, rangeEnd,
                 declareOnly = !generationState.shouldDefineCachedBoxes
         ).also { generationState.llvm.boxCacheGlobals[cache] = it }
@@ -136,13 +136,13 @@ internal fun initializeCachedBoxes(generationState: NativeGenerationState) {
 private fun initCache(cache: BoxCache, generationState: NativeGenerationState, cacheName: String,
                       rangeStartName: String, rangeEndName: String, declareOnly: Boolean) : StaticData.Global {
 
-    val context = generationState.context
-    val kotlinType = context.irBuiltIns.getKotlinClass(cache)
-    val staticData = generationState.llvm.staticData
-    val llvm = generationState.llvm
-    val llvmType = kotlinType.defaultType.toLLVMType(llvm)
-    val llvmBoxType = llvm.structType(llvm.runtime.objHeaderType, llvmType)
-    val (start, end) = context.config.target.getBoxCacheRange(cache)
+    konst context = generationState.context
+    konst kotlinType = context.irBuiltIns.getKotlinClass(cache)
+    konst staticData = generationState.llvm.staticData
+    konst llvm = generationState.llvm
+    konst llvmType = kotlinType.defaultType.toLLVMType(llvm)
+    konst llvmBoxType = llvm.structType(llvm.runtime.objHeaderType, llvmType)
+    konst (start, end) = context.config.target.getBoxCacheRange(cache)
 
     return if (declareOnly) {
         staticData.createGlobal(LLVMArrayType(llvmBoxType, end - start + 1)!!, cacheName, true)
@@ -153,16 +153,16 @@ private fun initCache(cache: BoxCache, generationState: NativeGenerationState, c
                 .setConstant(true)
         staticData.placeGlobal(rangeEndName, createConstant(llvmType, end), true)
                 .setConstant(true)
-        val values = (start..end).map { staticData.createConstKotlinObjectBody(kotlinType, createConstant(llvmType, it)) }
-        staticData.placeGlobalArray(cacheName, llvmBoxType, values, true).also {
+        konst konstues = (start..end).map { staticData.createConstKotlinObjectBody(kotlinType, createConstant(llvmType, it)) }
+        staticData.placeGlobalArray(cacheName, llvmBoxType, konstues, true).also {
             it.setConstant(true)
         }
     }
 }
 
 internal fun IrConstantPrimitive.toBoxCacheValue(generationState: NativeGenerationState): ConstValue? {
-    val irBuiltIns = generationState.context.irBuiltIns
-    val cacheType = when (value.type) {
+    konst irBuiltIns = generationState.context.irBuiltIns
+    konst cacheType = when (konstue.type) {
         irBuiltIns.booleanType -> BoxCache.BOOLEAN
         irBuiltIns.byteType -> BoxCache.BYTE
         irBuiltIns.shortType -> BoxCache.SHORT
@@ -171,34 +171,34 @@ internal fun IrConstantPrimitive.toBoxCacheValue(generationState: NativeGenerati
         irBuiltIns.longType -> BoxCache.LONG
         else -> return null
     }
-    val value = when (value.kind) {
-        IrConstKind.Boolean -> if (value.value as Boolean) 1L else 0L
-        IrConstKind.Byte -> (value.value as Byte).toLong()
-        IrConstKind.Short -> (value.value as Short).toLong()
-        IrConstKind.Char -> (value.value as Char).code.toLong()
-        IrConstKind.Int -> (value.value as Int).toLong()
-        IrConstKind.Long -> value.value as Long
-        else -> throw IllegalArgumentException("IrConst of kind ${value.kind} can't be converted to box cache")
+    konst konstue = when (konstue.kind) {
+        IrConstKind.Boolean -> if (konstue.konstue as Boolean) 1L else 0L
+        IrConstKind.Byte -> (konstue.konstue as Byte).toLong()
+        IrConstKind.Short -> (konstue.konstue as Short).toLong()
+        IrConstKind.Char -> (konstue.konstue as Char).code.toLong()
+        IrConstKind.Int -> (konstue.konstue as Int).toLong()
+        IrConstKind.Long -> konstue.konstue as Long
+        else -> throw IllegalArgumentException("IrConst of kind ${konstue.kind} can't be converted to box cache")
     }
-    val (start, end) = generationState.config.target.getBoxCacheRange(cacheType)
-    return if (value in start..end) {
+    konst (start, end) = generationState.config.target.getBoxCacheRange(cacheType)
+    return if (konstue in start..end) {
         generationState.llvm.let { llvm ->
-            llvm.boxCacheGlobals[cacheType]?.pointer?.getElementPtr(llvm, value.toInt() - start)?.getElementPtr(llvm, 0)
+            llvm.boxCacheGlobals[cacheType]?.pointer?.getElementPtr(llvm, konstue.toInt() - start)?.getElementPtr(llvm, 0)
         }
     } else {
         null
     }
 }
 
-private fun createConstant(llvmType: LLVMTypeRef, value: Int): ConstValue =
-        constValue(LLVMConstInt(llvmType, value.toLong(), 1)!!)
+private fun createConstant(llvmType: LLVMTypeRef, konstue: Int): ConstValue =
+        constValue(LLVMConstInt(llvmType, konstue.toLong(), 1)!!)
 
 // When start is greater than end then `inRange` check is always false
 // and can be eliminated by LLVM.
-private val emptyRange = 1 to 0
+private konst emptyRange = 1 to 0
 
 // Memory usage is around 20kb.
-private val BoxCache.defaultRange get() = when (this) {
+private konst BoxCache.defaultRange get() = when (this) {
     BoxCache.BOOLEAN -> (0 to 1)
     BoxCache.BYTE -> (-128 to 127)
     BoxCache.SHORT -> (-128 to 127)

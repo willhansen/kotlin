@@ -12,6 +12,6 @@ class M {
 }
 
 fun box(): String {
-  val s = M().doTest()
+  konst s = M().doTest()
   return if (s == "1:2;2:3;3:4;") "OK" else "fail: $s"
 }

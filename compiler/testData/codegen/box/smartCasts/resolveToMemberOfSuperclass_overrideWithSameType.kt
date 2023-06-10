@@ -2,7 +2,7 @@
 // ISSUE: KT-51460
 
 open class Base {
-    protected open val a: CharSequence
+    protected open konst a: CharSequence
         get() = "Fail: Base"
 
 
@@ -16,16 +16,16 @@ open class Base {
 }
 
 class Derived_1: Base() {
-    override val a: CharSequence
+    override konst a: CharSequence
         get() = "Fail: Derived_1"
 }
 
 class Derived_2: Base() {
-    override val a: CharSequence
+    override konst a: CharSequence
         get() = "OK"
 }
 
 fun box(): String {
-    val x = Derived_2()
+    konst x = Derived_2()
     return x.test(x)
 }

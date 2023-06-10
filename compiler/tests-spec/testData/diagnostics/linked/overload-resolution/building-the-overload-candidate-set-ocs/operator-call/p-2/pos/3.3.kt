@@ -21,7 +21,7 @@ import testPackCase1.Case
 import testPackCase1.Case.Inv
 import testPackCase1.Case.E
 
-operator fun Case.E.plus(value: Int) =  Inv()
+operator fun Case.E.plus(konstue: Int) =  Inv()
 operator fun Case.Inv.invoke(i: Int) = 1
 
 // FILE: LibCase12.kt
@@ -31,7 +31,7 @@ import testPackCase1.Case
 import testPackCase1.Case.Inv
 import testPackCase1.Case.E
 
-operator fun Case.E.plus(value: Int) =  Inv()
+operator fun Case.E.plus(konstue: Int) =  Inv()
 operator fun Case.Inv.invoke(i: Int) = 1
 
 
@@ -43,16 +43,16 @@ import libPackage1.invoke
 import libPackage2.*
 class Case() {
 
-    class E(val plus: Inv? = null) {
-        /*operator*/ fun plus(value: Int) = Case()
+    class E(konst plus: Inv? = null) {
+        /*operator*/ fun plus(konstue: Int) = Case()
     }
 
     class Inv() {
-        /*operator*/ fun invoke(value: Int) = Case()
+        /*operator*/ fun invoke(konstue: Int) = Case()
     }
 
     fun foo(e: E) {
-        /*operator*/ fun E.plus(value: Int) = Case()
+        /*operator*/ fun E.plus(konstue: Int) = Case()
 
         run {
             <!DEBUG_INFO_CALL("fqName: libPackage1.plus; typeCall: operator extension function")!>e + 1<!>
@@ -69,7 +69,7 @@ import testPackCase2.Case
 import testPackCase2.Case.Inv
 import testPackCase2.Case.E
 
-operator fun Case.E.plus(value: Int) =  Inv()
+operator fun Case.E.plus(konstue: Int) =  Inv()
 operator fun Case.Inv.invoke(i: Int) = 1
 
 // FILE: LibCase22.kt
@@ -79,7 +79,7 @@ import testPackCase2.Case
 import testPackCase2.Case.Inv
 import testPackCase2.Case.E
 
-operator fun Case.E.plus(value: Int) =  Inv()
+operator fun Case.E.plus(konstue: Int) =  Inv()
 operator fun Case.Inv.invoke(i: Int) = 1
 
 
@@ -91,19 +91,19 @@ import libPackage1.invoke
 import libPackage2.*
 class Case() {
 
-    class E(val plus: Inv? = null) {
-        /*operator*/ fun plus(value: Int) = Case()
+    class E(konst plus: Inv? = null) {
+        /*operator*/ fun plus(konstue: Int) = Case()
     }
 
     class Inv() {
-        /*operator*/ fun invoke(value: Int) = Case()
+        /*operator*/ fun invoke(konstue: Int) = Case()
     }
 
     fun foo(e: E) {
-        /*operator*/ fun E.plus(value: Int) = Case()
+        /*operator*/ fun E.plus(konstue: Int) = Case()
 
         run {
-            /*operator*/ fun E.plus(value: Int) = Case()
+            /*operator*/ fun E.plus(konstue: Int) = Case()
 
             <!DEBUG_INFO_CALL("fqName: libPackage1.plus; typeCall: operator extension function")!>e + 1<!>
         }
@@ -118,7 +118,7 @@ import testPackCase3.Case
 import testPackCase3.Case.Inv
 import testPackCase3.Case.E
 
-operator fun Case.E.plusAssign(value: Int) {}
+operator fun Case.E.plusAssign(konstue: Int) {}
 operator fun Case.Inv.invoke(i: Int) {}
 
 
@@ -130,16 +130,16 @@ import libPackage.invoke
 import libPackage.*
 class Case() {
 
-    class E(val plusAssign: Inv? = null) {
-        /*operator*/ fun plusAssign(value: Int) {}
+    class E(konst plusAssign: Inv? = null) {
+        /*operator*/ fun plusAssign(konstue: Int) {}
     }
 
     class Inv() {
-        /*operator*/ fun invoke(value: Int) {}
+        /*operator*/ fun invoke(konstue: Int) {}
     }
 
     fun foo(e: E) {
-        /*operator*/ fun E.plusAssign(value: Int) {}
+        /*operator*/ fun E.plusAssign(konstue: Int) {}
 
         run {
             <!DEBUG_INFO_CALL("fqName: libPackage.plusAssign; typeCall: operator extension function")!>e += 1<!>
@@ -157,7 +157,7 @@ import testPackCase4.Case
 import testPackCase4.Case.Inv
 import testPackCase4.Case.E
 
-operator fun Case.E.plusAssign(value: Int) {}
+operator fun Case.E.plusAssign(konstue: Int) {}
 operator fun Case.Inv.invoke(i: Int) {}
 
 
@@ -168,23 +168,23 @@ import libPackage.plusAssign
 import libPackage.*
 import libPackage.invoke
 
-operator fun Case.E.plusAssign(value: Int) {}
+operator fun Case.E.plusAssign(konstue: Int) {}
 
 class Case() {
 
-    class E(val plusAssign: Inv? = null) {
-        /*operator*/ fun plusAssign(value: Int) {}
+    class E(konst plusAssign: Inv? = null) {
+        /*operator*/ fun plusAssign(konstue: Int) {}
     }
 
     class Inv() {
-        /*operator*/ fun invoke(value: Int) {}
+        /*operator*/ fun invoke(konstue: Int) {}
     }
 
     fun foo(e: E) {
-        /*operator*/ fun E.plusAssign(value: Int) {}
+        /*operator*/ fun E.plusAssign(konstue: Int) {}
 
         run {
-            /*operator*/ fun E.plusAssign(value: Int) {}
+            /*operator*/ fun E.plusAssign(konstue: Int) {}
 
             <!DEBUG_INFO_CALL("fqName: libPackage.plusAssign; typeCall: operator extension function")!>e += 1<!>
         }

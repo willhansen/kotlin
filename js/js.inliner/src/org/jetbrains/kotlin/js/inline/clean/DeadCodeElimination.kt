@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.js.inline.clean
 
 import org.jetbrains.kotlin.js.backend.ast.*
 
-internal class DeadCodeElimination(private val root: JsStatement) {
+internal class DeadCodeElimination(private konst root: JsStatement) {
     var hasChanges = false
 
     fun apply(): Boolean {
@@ -32,7 +32,7 @@ internal class DeadCodeElimination(private val root: JsStatement) {
         var canContinue = false
 
         override fun visitBreak(x: JsBreak) {
-            val name = x.label?.name
+            konst name = x.label?.name
             if (name != null) {
                 breakLabels.add(name)
             }
@@ -63,7 +63,7 @@ internal class DeadCodeElimination(private val root: JsStatement) {
             for ((index, statement) in statements.withIndex()) {
                 accept(statement)
                 if (!canContinue) {
-                    val removedStatements = statements.subList(index + 1, statements.size)
+                    konst removedStatements = statements.subList(index + 1, statements.size)
                     if (removedStatements.isNotEmpty()) {
                         hasChanges = true
                         removedStatements.clear()
@@ -77,8 +77,8 @@ internal class DeadCodeElimination(private val root: JsStatement) {
             EliminationVisitor().accept(x.condition)
 
             visitLoop(x.body) {
-                val condition = x.condition
-                condition !is JsBooleanLiteral || !condition.value
+                konst condition = x.condition
+                condition !is JsBooleanLiteral || !condition.konstue
             }
         }
 
@@ -101,7 +101,7 @@ internal class DeadCodeElimination(private val root: JsStatement) {
         }
 
         private fun visitLoop(body: JsStatement?, additionalExitCondition: () -> Boolean) {
-            val localBreakExistsBackup = localBreakExists
+            konst localBreakExistsBackup = localBreakExists
 
             localBreakExists = false
             if (body != null) {
@@ -124,7 +124,7 @@ internal class DeadCodeElimination(private val root: JsStatement) {
                 result = true
             }
 
-            val elseStatement = x.elseStatement
+            konst elseStatement = x.elseStatement
             if (elseStatement != null) {
                 accept(x.elseStatement)
                 if (canContinue) {
@@ -153,7 +153,7 @@ internal class DeadCodeElimination(private val root: JsStatement) {
                 }
             }
 
-            val finallyBlock = x.finallyBlock
+            konst finallyBlock = x.finallyBlock
             if (finallyBlock != null) {
                 accept(finallyBlock)
                 if (!canContinue) {
@@ -171,7 +171,7 @@ internal class DeadCodeElimination(private val root: JsStatement) {
 
         override fun visit(x: JsSwitch) {
             EliminationVisitor().accept(x.expression)
-            val localBreakExistsBackup = localBreakExists
+            konst localBreakExistsBackup = localBreakExists
 
             var defaultCanContinue = true
             var allCasesCantContinue = true

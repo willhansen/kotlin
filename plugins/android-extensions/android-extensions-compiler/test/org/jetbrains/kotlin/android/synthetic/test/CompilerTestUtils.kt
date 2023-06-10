@@ -32,10 +32,10 @@ fun KtUsefulTestCase.createTestEnvironment(configuration: CompilerConfiguration,
     configuration.put(AndroidConfigurationKeys.VARIANT, resDirectories)
     configuration.put(AndroidConfigurationKeys.PACKAGE, "test")
 
-    val myEnvironment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
-    val project = myEnvironment.project
+    konst myEnvironment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+    konst project = myEnvironment.project
 
-    val variants = listOf(AndroidVariant.createMainVariant(resDirectories))
+    konst variants = listOf(AndroidVariant.createMainVariant(resDirectories))
     (project as MockProject).registerService(AndroidLayoutXmlFileManager::class.java, CliAndroidLayoutXmlFileManager(project, "test", variants))
 
     ExpressionCodegenExtension.registerExtension(project, CliAndroidExtensionsExpressionCodegenExtension(true, CacheImplementation.DEFAULT))
@@ -53,7 +53,7 @@ fun KtUsefulTestCase.createTestEnvironment(configuration: CompilerConfiguration,
 
 fun addAndroidExtensionsRuntimeLibrary(environment: KotlinCoreEnvironment) {
     environment.apply {
-        val runtimeLibrary = File(PathUtil.kotlinPathsForCompiler.libPath, "android-extensions-compiler.jar")
+        konst runtimeLibrary = File(PathUtil.kotlinPathsForCompiler.libPath, "android-extensions-compiler.jar")
         updateClasspath(listOf(JvmClasspathRoot(runtimeLibrary)))
     }
 }

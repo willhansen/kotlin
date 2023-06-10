@@ -6,11 +6,11 @@
 package org.jetbrains.kotlin.spec.utils
 
 object GeneralConfiguration {
-    const val TESTDATA_PATH = "compiler/testData"
-    const val SPEC_MODULE_PATH = "compiler/tests-spec"
-    const val SPEC_TESTDATA_PATH = "$SPEC_MODULE_PATH/testData"
-    const val SPEC_TEST_PATH = "$SPEC_MODULE_PATH/tests"
-    const val LINKED_TESTS_PATH = "linked"
-    const val TESTS_MAP_FILENAME = "testsMap.json"
-    const val SECTIONS_TESTS_MAP_FILENAME = "sectionsMap.json"
+    const konst TESTDATA_PATH = "compiler/testData"
+    const konst SPEC_MODULE_PATH = "compiler/tests-spec"
+    const konst SPEC_TESTDATA_PATH = "$SPEC_MODULE_PATH/testData"
+    const konst SPEC_TEST_PATH = "$SPEC_MODULE_PATH/tests"
+    const konst LINKED_TESTS_PATH = "linked"
+    const konst TESTS_MAP_FILENAME = "testsMap.json"
+    const konst SECTIONS_TESTS_MAP_FILENAME = "sectionsMap.json"
 }

@@ -31,18 +31,18 @@ class RedundantNopsCleanupMethodTransformer : MethodTransformer() {
     override fun transform(internalClassName: String, methodNode: MethodNode) {
         LabelNormalizationMethodTransformer().transform(internalClassName, methodNode)
 
-        val requiredNops = HashSet<AbstractInsnNode>()
+        konst requiredNops = HashSet<AbstractInsnNode>()
 
         // NOP instruction is required, if it is a sole bytecode instruction in a try-catch block (TCB)
         recordNopsRequiredForTryCatchBlocks(methodNode, requiredNops)
 
-        // NOP instruction is required, if it is a sole bytecode instruction in a debugger stepping interval
+        // NOP instruction is required, if it is a sole bytecode instruction in a debugger stepping interkonst
         recordNopsRequiredForDebugger(methodNode, requiredNops)
 
         var current: AbstractInsnNode? = methodNode.instructions.first
         while (current != null) {
             if (current.opcode == Opcodes.NOP && !requiredNops.contains(current)) {
-                val toRemove = current
+                konst toRemove = current
                 current = current.next
                 methodNode.instructions.remove(toRemove)
             } else {
@@ -64,8 +64,8 @@ class RedundantNopsCleanupMethodTransformer : MethodTransformer() {
         //
         // We enumerate all special labels, and make sure to leave nops if they are the only real
         // instruction between a line number label and any other special label.
-        val specialLabels = run {
-            val localVarLables = hashSetOf<LabelNode>().apply {
+        konst specialLabels = run {
+            konst localVarLables = hashSetOf<LabelNode>().apply {
                 for (localVariable in methodNode.localVariables) {
                     add(localVariable.start)
                     add(localVariable.end)
@@ -76,8 +76,8 @@ class RedundantNopsCleanupMethodTransformer : MethodTransformer() {
         }
 
         for (i in 0..specialLabels.size - 2) {
-            val begin = specialLabels[i]
-            val end = specialLabels[i + 1]
+            konst begin = specialLabels[i]
+            konst end = specialLabels[i + 1]
             if (begin is LineNumberNode) {
                 requiredNops.addIfNotNull(getRequiredNopInRange(begin, end))
             }
@@ -86,7 +86,7 @@ class RedundantNopsCleanupMethodTransformer : MethodTransformer() {
 
     private fun recordNopsRequiredForTryCatchBlocks(methodNode: MethodNode, requiredNops: MutableSet<AbstractInsnNode>) {
         for (tcb in methodNode.tryCatchBlocks) {
-            val nop = tcb.start.findNextOrNull { it.isMeaningful }
+            konst nop = tcb.start.findNextOrNull { it.isMeaningful }
             if (nop?.opcode == Opcodes.NOP) {
                 requiredNops.add(nop)
             }

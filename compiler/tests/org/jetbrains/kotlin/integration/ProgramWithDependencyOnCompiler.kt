@@ -13,17 +13,17 @@ import org.jetbrains.kotlin.utils.PathUtil
 import java.io.File
 
 class ProgramWithDependencyOnCompiler(
-    private val tmpdir: File,
-    private val programText: String,
+    private konst tmpdir: File,
+    private konst programText: String,
 ) {
     private lateinit var program: File
 
     fun compile() {
-        val programSource = File(tmpdir, "program.kt")
+        konst programSource = File(tmpdir, "program.kt")
         programSource.writeText(programText)
 
         program = File(tmpdir, "program")
-        val (output, exitCode) = AbstractCliTest.executeCompilerGrabOutput(
+        konst (output, exitCode) = AbstractCliTest.executeCompilerGrabOutput(
             K2JVMCompiler(),
             listOf(
                 programSource.path,
@@ -46,11 +46,11 @@ class ProgramWithDependencyOnCompiler(
     )
 
     private fun runJava(workingDirectory: File, vararg arguments: String): String {
-        val pb = ProcessBuilder()
+        konst pb = ProcessBuilder()
             .directory(workingDirectory)
             .command(KotlinIntegrationTestBase.getJavaRuntime().absolutePath, *arguments).redirectErrorStream(true)
-        val process = pb.start()
-        val stdout = StringBuilder()
+        konst process = pb.start()
+        konst stdout = StringBuilder()
 
         process.inputStream.bufferedReader().useLines {
             it.forEach { string ->

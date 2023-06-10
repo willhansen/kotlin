@@ -1,9 +1,9 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-class Wrapper<T> (val x: T)
+class Wrapper<T> (konst x: T)
 
-inline fun <T, R> Wrapper<T>.unwrap(validator: (T) -> R): R = validator(x)
+inline fun <T, R> Wrapper<T>.unwrap(konstidator: (T) -> R): R = konstidator(x)
 
 fun <T> select(x: T) {}
 

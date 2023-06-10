@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirExplicitThisReference(
-    override val source: KtSourceElement?,
-    override val labelName: String?,
+    override konst source: KtSourceElement?,
+    override konst labelName: String?,
     override var contextReceiverNumber: Int,
 ) : FirThisReference() {
     override var boundSymbol: FirBasedSymbol<*>? = null

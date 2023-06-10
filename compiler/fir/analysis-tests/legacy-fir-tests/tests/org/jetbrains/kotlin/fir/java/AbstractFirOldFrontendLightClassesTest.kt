@@ -19,24 +19,24 @@ abstract class AbstractFirOldFrontendLightClassesTest : AbstractFirOldFrontendDi
     override fun checkResultingFirFiles(firFiles: List<FirFile>, testDataFile: File) {
         super.checkResultingFirFiles(firFiles, testDataFile)
 
-        val ourFinders = PsiElementFinder.EP.getPoint(project).extensions.filterIsInstance<FirJavaElementFinder>()
+        konst ourFinders = PsiElementFinder.EP.getPoint(project).extensions.filterIsInstance<FirJavaElementFinder>()
 
         assertNotEmpty(ourFinders)
 
-        val stringBuilder = StringBuilder()
+        konst stringBuilder = StringBuilder()
 
         for (qualifiedName in InTextDirectivesUtils.findListWithPrefixes(testDataFile.readText(), "// LIGHT_CLASS_FQ_NAME: ")) {
-            val fqName = FqName(qualifiedName)
-            val packageName = fqName.parent().asString()
+            konst fqName = FqName(qualifiedName)
+            konst packageName = fqName.parent().asString()
 
-            val ourFinder = ourFinders.firstOrNull { finder -> finder.findPackage(packageName) != null }
+            konst ourFinder = ourFinders.firstOrNull { finder -> finder.findPackage(packageName) != null }
             assertNotNull("PsiPackage for ${fqName.parent()} was not found", ourFinder)
             ourFinder!!
 
-            val psiPackage = ourFinder.findPackage(fqName.parent().asString())
+            konst psiPackage = ourFinder.findPackage(fqName.parent().asString())
             assertNotNull("PsiPackage for ${fqName.parent()} is null", psiPackage)
 
-            val psiClass = assertInstanceOf(
+            konst psiClass = assertInstanceOf(
                 ourFinder.findClass(qualifiedName, GlobalSearchScope.allScope(project)),
                 ClsClassImpl::class.java
             )
@@ -45,7 +45,7 @@ abstract class AbstractFirOldFrontendLightClassesTest : AbstractFirOldFrontendDi
             stringBuilder.appendLine()
         }
 
-        val expectedPath = testDataFile.path.replace(".kt", ".txt")
+        konst expectedPath = testDataFile.path.replace(".kt", ".txt")
         KotlinTestUtils.assertEqualsToFile(File(expectedPath), stringBuilder.toString())
     }
 

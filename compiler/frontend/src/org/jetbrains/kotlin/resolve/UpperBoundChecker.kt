@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.types.typeUtil.containsTypeAliasParameters
 
 @DefaultImplementation(impl = UpperBoundChecker::class)
 open class UpperBoundChecker(
-    private val typeChecker: KotlinTypeChecker,
+    private konst typeChecker: KotlinTypeChecker,
 ) {
     open fun checkBoundsOfExpandedTypeAlias(type: KotlinType, expression: KtExpression, trace: BindingTrace) {
         // do nothing in the strict mode as the errors are already reported in the type inference if necessary
@@ -41,7 +41,7 @@ open class UpperBoundChecker(
     ) {
         if (typeParameterDescriptor.upperBounds.isEmpty()) return
 
-        val diagnosticsReporter =
+        konst diagnosticsReporter =
             UpperBoundViolatedReporter(trace, argumentType, typeParameterDescriptor, diagnosticForTypeAliases = diagnosticForTypeAliases)
 
         for (bound in typeParameterDescriptor.upperBounds) {
@@ -57,13 +57,13 @@ open class UpperBoundChecker(
     ) {
         if (type.isError) return
 
-        val typeElement = typeReference.typeElement ?: return
-        val parameters = type.constructor.parameters
-        val arguments = type.arguments
+        konst typeElement = typeReference.typeElement ?: return
+        konst parameters = type.constructor.parameters
+        konst arguments = type.arguments
 
         assert(parameters.size == arguments.size)
 
-        val ktTypeArguments = typeElement.typeArgumentsAsTypes
+        konst ktTypeArguments = typeElement.typeArgumentsAsTypes
 
         // A type reference from Kotlin code can yield a flexible type only if it's `ft<T1, T2>`, whose bounds should not be checked
         if (type.isFlexible() && !type.isDynamic()) {
@@ -72,7 +72,7 @@ open class UpperBoundChecker(
                         + typeReference.getElementTextWithContext())
             }
             // it's really ft<Foo, Bar>
-            val flexibleType = type.asFlexibleType()
+            konst flexibleType = type.asFlexibleType()
             checkBoundsInSupertype(ktTypeArguments[0], flexibleType.lowerBound, trace, languageVersionSettings)
             checkBoundsInSupertype(ktTypeArguments[1], flexibleType.upperBound, trace, languageVersionSettings)
             return
@@ -94,10 +94,10 @@ open class UpperBoundChecker(
         // If the numbers of type arguments do not match, the error has been already reported in TypeResolver
         if (ktTypeArguments.size != arguments.size) return
 
-        val substitutor = TypeSubstitutor.create(type)
+        konst substitutor = TypeSubstitutor.create(type)
 
         for (i in ktTypeArguments.indices) {
-            val ktTypeArgument = ktTypeArguments[i] ?: continue
+            konst ktTypeArgument = ktTypeArguments[i] ?: continue
             checkBoundsInSupertype(ktTypeArgument, arguments[i].type, trace, languageVersionSettings)
             checkBounds(ktTypeArgument, arguments[i].type, parameters[i], substitutor, trace)
         }
@@ -109,11 +109,11 @@ open class UpperBoundChecker(
         typeReference: KtTypeReference,
         reportWarning: Boolean
     ) {
-        val parameters = type.constructor.parameters
-        val arguments = type.arguments
-        val substitutor = TypeSubstitutor.create(type)
+        konst parameters = type.constructor.parameters
+        konst arguments = type.arguments
+        konst substitutor = TypeSubstitutor.create(type)
 
-        val diagnostic =
+        konst diagnostic =
             if (reportWarning)
                 UPPER_BOUND_VIOLATED_IN_TYPEALIAS_EXPANSION_WARNING
             else
@@ -121,7 +121,7 @@ open class UpperBoundChecker(
 
         for (i in arguments.indices) {
             if (arguments[i].isStarProjection) continue
-            val argumentType = arguments[i].type
+            konst argumentType = arguments[i].type
 
             checkBoundsForAbbreviatedSupertype(argumentType, trace, typeReference, reportWarning)
 
@@ -141,7 +141,7 @@ open class UpperBoundChecker(
         typeAliasUsageElement: KtElement? = null,
         upperBoundViolatedReporter: UpperBoundViolatedReporter
     ): Boolean {
-        val substitutedBound = substitutor.safeSubstitute(bound, Variance.INVARIANT)
+        konst substitutedBound = substitutor.safeSubstitute(bound, Variance.INVARIANT)
 
         if (!typeChecker.isSubtypeOf(argumentType, substitutedBound)) {
             if (argumentReference != null) {
@@ -157,11 +157,11 @@ open class UpperBoundChecker(
 }
 
 class UpperBoundViolatedReporter(
-    private val trace: BindingTrace,
-    private val argumentType: KotlinType,
-    private val typeParameterDescriptor: TypeParameterDescriptor,
-    private val baseDiagnostic: DiagnosticFactory2<KtTypeReference, KotlinType, KotlinType> = UPPER_BOUND_VIOLATED,
-    private val diagnosticForTypeAliases: DiagnosticFactory3<KtElement, KotlinType, KotlinType, ClassifierDescriptor> = UPPER_BOUND_VIOLATED_IN_TYPEALIAS_EXPANSION
+    private konst trace: BindingTrace,
+    private konst argumentType: KotlinType,
+    private konst typeParameterDescriptor: TypeParameterDescriptor,
+    private konst baseDiagnostic: DiagnosticFactory2<KtTypeReference, KotlinType, KotlinType> = UPPER_BOUND_VIOLATED,
+    private konst diagnosticForTypeAliases: DiagnosticFactory3<KtElement, KotlinType, KotlinType, ClassifierDescriptor> = UPPER_BOUND_VIOLATED_IN_TYPEALIAS_EXPANSION
 ) {
     fun report(typeArgumentReference: KtTypeReference, substitutedBound: KotlinType) {
         trace.reportDiagnosticOnce(baseDiagnostic.on(typeArgumentReference, substitutedBound, argumentType))

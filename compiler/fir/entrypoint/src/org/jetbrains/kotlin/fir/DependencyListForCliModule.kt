@@ -13,10 +13,10 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 class DependencyListForCliModule(
-    val regularDependencies: List<FirModuleData>,
-    val dependsOnDependencies: List<FirModuleData>,
-    val friendsDependencies: List<FirModuleData>,
-    val moduleDataProvider: ModuleDataProvider,
+    konst regularDependencies: List<FirModuleData>,
+    konst dependsOnDependencies: List<FirModuleData>,
+    konst friendsDependencies: List<FirModuleData>,
+    konst moduleDataProvider: ModuleDataProvider,
 ) {
     companion object {
         inline fun build(binaryModuleData: BinaryModuleData, init: Builder.() -> Unit = {}): DependencyListForCliModule {
@@ -24,12 +24,12 @@ class DependencyListForCliModule(
         }
     }
 
-    class Builder(val binaryModuleData: BinaryModuleData) {
-        private val allRegularDependencies = mutableListOf<FirModuleData>()
-        private val allFriendsDependencies = mutableListOf<FirModuleData>()
-        private val allDependsOnDependencies = mutableListOf<FirModuleData>()
+    class Builder(konst binaryModuleData: BinaryModuleData) {
+        private konst allRegularDependencies = mutableListOf<FirModuleData>()
+        private konst allFriendsDependencies = mutableListOf<FirModuleData>()
+        private konst allDependsOnDependencies = mutableListOf<FirModuleData>()
 
-        private val filtersMap =
+        private konst filtersMap =
             listOf(
                 binaryModuleData.dependsOn,
                 binaryModuleData.friends,
@@ -99,9 +99,9 @@ class DependencyListForCliModule(
         }
 
         fun build(): DependencyListForCliModule {
-            val pathFiltersMap: MutableMap<FirModuleData, LibraryPathFilter> = filtersMap
+            konst pathFiltersMap: MutableMap<FirModuleData, LibraryPathFilter> = filtersMap
                 .filterValues { it.isNotEmpty() }
-                .mapValues { LibraryPathFilter.LibraryList(it.value) }
+                .mapValues { LibraryPathFilter.LibraryList(it.konstue) }
                 .toMutableMap()
 
             allRegularDependencies += binaryModuleData.regular
@@ -120,7 +120,7 @@ class DependencyListForCliModule(
                 allDependsOnDependencies += binaryModuleData.dependsOn
             }
 
-            val moduleDataProvider = MultipleModuleDataProvider(pathFiltersMap)
+            konst moduleDataProvider = MultipleModuleDataProvider(pathFiltersMap)
             pathFiltersMap.putIfAbsent(binaryModuleData.regular, LibraryPathFilter.TakeAll)
             return DependencyListForCliModule(
                 allRegularDependencies,

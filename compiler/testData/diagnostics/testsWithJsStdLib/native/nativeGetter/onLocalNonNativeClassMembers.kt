@@ -15,7 +15,7 @@ fun foo() {
 
     class B {
         <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
-        val foo = 0
+        konst foo = 0
     }
 
     class C {

@@ -19,50 +19,50 @@ package org.jetbrains.kotlin.android.synthetic
 import org.jetbrains.kotlin.android.synthetic.res.ResourceIdentifier
 
 object AndroidConst {
-    val SYNTHETIC_PACKAGE: String = "kotlinx.android.synthetic"
-    val SYNTHETIC_PACKAGE_PATH_LENGTH = SYNTHETIC_PACKAGE.count { it == '.' } + 1
+    konst SYNTHETIC_PACKAGE: String = "kotlinx.android.synthetic"
+    konst SYNTHETIC_PACKAGE_PATH_LENGTH = SYNTHETIC_PACKAGE.count { it == '.' } + 1
 
-    val SYNTHETIC_SUBPACKAGES: List<String> = SYNTHETIC_PACKAGE.split('.').fold(arrayListOf<String>()) { list, segment ->
-        val prevSegment = list.lastOrNull()?.let { "$it." } ?: ""
+    konst SYNTHETIC_SUBPACKAGES: List<String> = SYNTHETIC_PACKAGE.split('.').fold(arrayListOf<String>()) { list, segment ->
+        konst prevSegment = list.lastOrNull()?.let { "$it." } ?: ""
         list += "$prevSegment$segment"
         list
     }
 
-    val ANDROID_NAMESPACE: String = "http://schemas.android.com/apk/res/android"
-    val ID_ATTRIBUTE_NO_NAMESPACE: String = "id"
-    val CLASS_ATTRIBUTE_NO_NAMESPACE: String = "class"
+    konst ANDROID_NAMESPACE: String = "http://schemas.android.com/apk/res/android"
+    konst ID_ATTRIBUTE_NO_NAMESPACE: String = "id"
+    konst CLASS_ATTRIBUTE_NO_NAMESPACE: String = "class"
 
-    private val IDENTIFIER_WORD_REGEX = "[(?:\\p{L}\\p{M}*)0-9_\\.\\:\\-]+"
-    val IDENTIFIER_REGEX = "^@(\\+)?(($IDENTIFIER_WORD_REGEX)\\:)?id\\/($IDENTIFIER_WORD_REGEX)$".toRegex()
+    private konst IDENTIFIER_WORD_REGEX = "[(?:\\p{L}\\p{M}*)0-9_\\.\\:\\-]+"
+    konst IDENTIFIER_REGEX = "^@(\\+)?(($IDENTIFIER_WORD_REGEX)\\:)?id\\/($IDENTIFIER_WORD_REGEX)$".toRegex()
 
-    val CLEAR_FUNCTION_NAME = "clearFindViewByIdCache"
+    konst CLEAR_FUNCTION_NAME = "clearFindViewByIdCache"
 
 
     //TODO FqName / ClassId
 
-    val VIEW_FQNAME = "android.view.View"
-    val VIEWSTUB_FQNAME = "android.view.ViewStub"
+    konst VIEW_FQNAME = "android.view.View"
+    konst VIEWSTUB_FQNAME = "android.view.ViewStub"
 
-    val ACTIVITY_FQNAME = "android.app.Activity"
-    val FRAGMENT_FQNAME = "android.app.Fragment"
-    val DIALOG_FQNAME = "android.app.Dialog"
-    val SUPPORT_V4_PACKAGE = "android.support.v4"
-    val SUPPORT_FRAGMENT_FQNAME = "$SUPPORT_V4_PACKAGE.app.Fragment"
-    val SUPPORT_FRAGMENT_ACTIVITY_FQNAME = "$SUPPORT_V4_PACKAGE.app.FragmentActivity"
-    val ANDROIDX_SUPPORT_FRAGMENT_FQNAME = "androidx.fragment.app.Fragment"
-    val ANDROIDX_SUPPORT_FRAGMENT_ACTIVITY_FQNAME = "androidx.fragment.app.FragmentActivity"
+    konst ACTIVITY_FQNAME = "android.app.Activity"
+    konst FRAGMENT_FQNAME = "android.app.Fragment"
+    konst DIALOG_FQNAME = "android.app.Dialog"
+    konst SUPPORT_V4_PACKAGE = "android.support.v4"
+    konst SUPPORT_FRAGMENT_FQNAME = "$SUPPORT_V4_PACKAGE.app.Fragment"
+    konst SUPPORT_FRAGMENT_ACTIVITY_FQNAME = "$SUPPORT_V4_PACKAGE.app.FragmentActivity"
+    konst ANDROIDX_SUPPORT_FRAGMENT_FQNAME = "androidx.fragment.app.Fragment"
+    konst ANDROIDX_SUPPORT_FRAGMENT_ACTIVITY_FQNAME = "androidx.fragment.app.FragmentActivity"
 
-    val IGNORED_XML_WIDGET_TYPES = setOf("requestFocus", "merge", "tag", "check", "blink")
+    konst IGNORED_XML_WIDGET_TYPES = setOf("requestFocus", "merge", "tag", "check", "blink")
 
-    val FQNAME_RESOLVE_PACKAGES = listOf("android.widget", "android.webkit", "android.view")
+    konst FQNAME_RESOLVE_PACKAGES = listOf("android.widget", "android.webkit", "android.view")
 }
 
 fun androidIdToName(id: String): ResourceIdentifier? {
-    val values = AndroidConst.IDENTIFIER_REGEX.matchEntire(id)?.groupValues ?: return null
-    val packageName = values[3]
+    konst konstues = AndroidConst.IDENTIFIER_REGEX.matchEntire(id)?.groupValues ?: return null
+    konst packageName = konstues[3]
 
     return ResourceIdentifier(
-        getJavaIdentifierNameForResourceName(values[4]),
+        getJavaIdentifierNameForResourceName(konstues[4]),
         if (packageName.isEmpty()) null else packageName
     )
 }
@@ -82,7 +82,7 @@ fun isWidgetTypeIgnored(xmlType: String): Boolean {
 }
 
 internal fun <T> List<T>.forEachUntilLast(operation: (T) -> Unit) {
-    val lastIndex = lastIndex
+    konst lastIndex = lastIndex
     forEachIndexed { i, t ->
         if (i < lastIndex) {
             operation(t)

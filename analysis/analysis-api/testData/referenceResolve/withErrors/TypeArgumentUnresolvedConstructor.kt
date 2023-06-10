@@ -1,2 +1,2 @@
-val v: UnknownClass<<caret>String>()
+konst v: UnknownClass<<caret>String>()
 

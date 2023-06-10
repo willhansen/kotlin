@@ -61,7 +61,7 @@ public interface ResolvedCall<D extends CallableDescriptor> {
     @NotNull
     D getResultingDescriptor();
 
-    /** If the target was an extension function or property, this is the value for its receiver parameter */
+    /** If the target was an extension function or property, this is the konstue for its receiver parameter */
     @Nullable
     ReceiverValue getExtensionReceiver();
 
@@ -69,7 +69,7 @@ public interface ResolvedCall<D extends CallableDescriptor> {
     @Nullable
     ReceiverValue getDispatchReceiver();
 
-    /** If the target was a function or property with context receivers, this is the value for its context receiver parameters */
+    /** If the target was a function or property with context receivers, this is the konstue for its context receiver parameters */
     @NotNull
     List<ReceiverValue> getContextReceivers();
 
@@ -77,17 +77,17 @@ public interface ResolvedCall<D extends CallableDescriptor> {
     @NotNull
     ExplicitReceiverKind getExplicitReceiverKind();
 
-    /** Values (arguments) for value parameters */
+    /** Values (arguments) for konstue parameters */
     @NotNull
     Map<ValueParameterDescriptor, ResolvedValueArgument> getValueArguments();
 
-    /** Values (arguments) for value parameters indexed by parameter index */
+    /** Values (arguments) for konstue parameters indexed by parameter index */
     @Nullable
     List<ResolvedValueArgument> getValueArgumentsByIndex();
 
-    /** The result of mapping the value argument to a parameter */
+    /** The result of mapping the konstue argument to a parameter */
     @NotNull
-    ArgumentMapping getArgumentMapping(@NotNull ValueArgument valueArgument);
+    ArgumentMapping getArgumentMapping(@NotNull ValueArgument konstueArgument);
 
     /** What's substituted for type parameters */
     @NotNull

@@ -13,7 +13,7 @@ public abstract class Expr</*0*/ T> {
 
 public final class Sum</*0*/ K> : Expr<K?> {
     public constructor Sum</*0*/ K>(/*0*/ e: Expr<K>)
-    public final val e: Expr<K>
+    public final konst e: Expr<K>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

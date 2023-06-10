@@ -6,7 +6,7 @@ import kotlin.test.*
 
 data object DataObject
 
-val doppelganger = DataObject::class.java.declaredConstructors[0].apply { isAccessible = true }.newInstance()
+konst doppelganger = DataObject::class.java.declaredConstructors[0].apply { isAccessible = true }.newInstance()
 
 fun box(): String {
     assertFalse(DataObject === doppelganger)

@@ -1,23 +1,23 @@
 open class B {
-    val x = 1
+    konst x = 1
 }
 
 class A : B() {
     fun getX() = 1
 
     fun getA(): Int = 1
-    val a: Int = 1
+    konst a: Int = 1
 }
 
 fun getB(): Int = 1
-val b: Int = 1
+konst b: Int = 1
 
 interface Tr {
     fun getTr() = 1
 }
 
 class SubTr : Tr {
-    val tr = 1
+    konst tr = 1
 }
 
 // Clashing synthetic accessors are only reported in compiler, IDE doesn't see them

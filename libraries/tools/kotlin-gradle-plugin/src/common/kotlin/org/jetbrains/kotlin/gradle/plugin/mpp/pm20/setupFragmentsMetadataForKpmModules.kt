@@ -37,10 +37,10 @@ internal fun setupFragmentsMetadataForKpmModules(project: Project) {
 }
 
 private fun configureMetadataResolutionAndBuild(module: GradleKpmModule) {
-    val project = module.project
+    konst project = module.project
     createResolvableMetadataConfigurationForModule(module)
 
-    val metadataCompilationRegistry = MetadataCompilationRegistry()
+    konst metadataCompilationRegistry = MetadataCompilationRegistry()
     project.metadataCompilationRegistryByModuleId[module.moduleIdentifier] =
         metadataCompilationRegistry
 
@@ -51,7 +51,7 @@ private fun configureMetadataResolutionAndBuild(module: GradleKpmModule) {
 }
 
 private fun configureMetadataExposure(module: GradleKpmModule) {
-    val project = module.project
+    konst project = module.project
     project.configurations.create(metadataElementsConfigurationName(module)).apply {
         isCanBeConsumed = false
         module.ifMadePublic {
@@ -68,13 +68,13 @@ private fun configureMetadataExposure(module: GradleKpmModule) {
         setModuleCapability(this, module)
     }
 
-    val sourcesArtifactAppendix = dashSeparatedName(module.moduleClassifier, "all", "sources")
-    val sourcesArtifact = sourcesJarTaskNamed(
+    konst sourcesArtifactAppendix = dashSeparatedName(module.moduleClassifier, "all", "sources")
+    konst sourcesArtifact = sourcesJarTaskNamed(
         module.disambiguateName("allSourcesJar"),
         module.name,
         project,
         project.future {
-            GradleKpmFragmentSourcesProvider().getAllFragmentSourcesAsMap(module).entries.associate { it.key.fragmentName to it.value.get() }
+            GradleKpmFragmentSourcesProvider().getAllFragmentSourcesAsMap(module).entries.associate { it.key.fragmentName to it.konstue.get() }
         },
         sourcesArtifactAppendix,
         "module",
@@ -94,8 +94,8 @@ fun sourceElementsConfigurationName(module: GradleKpmModule) =
 private fun generateAndExportProjectStructureMetadata(
     module: GradleKpmModule
 ) {
-    val project = module.project
-    val projectStructureMetadata = project.createGenerateProjectStructureMetadataTask(module)
+    konst project = module.project
+    konst projectStructureMetadata = project.createGenerateProjectStructureMetadataTask(module)
     project.tasks.withType<Jar>().named(metadataJarName(module)).configure { jar ->
         jar.from(projectStructureMetadata.map { it.resultFile }) { spec ->
             spec.into("META-INF")
@@ -108,7 +108,7 @@ private fun generateAndExportProjectStructureMetadata(
 }
 
 private fun createResolvableMetadataConfigurationForModule(module: GradleKpmModule) {
-    val project = module.project
+    konst project = module.project
     project.configurations.create(module.resolvableMetadataConfigurationName).apply {
         isCanBeConsumed = false
         isCanBeResolved = true
@@ -126,13 +126,13 @@ private fun configureMetadataCompilationsAndCreateRegistry(
     module: GradleKpmModule,
     metadataCompilationRegistry: MetadataCompilationRegistry
 ) {
-    val project = module.project
-    val metadataResolverFactory = GradleKpmFragmentGranularMetadataResolverFactory()
+    konst project = module.project
+    konst metadataResolverFactory = GradleKpmFragmentGranularMetadataResolverFactory()
     module.fragments.all { fragment ->
-        val metadataResolver = metadataResolverFactory.getOrCreate(fragment)
+        konst metadataResolver = metadataResolverFactory.getOrCreate(fragment)
         createExtractMetadataTask(project, fragment, metadataResolver)
     }
-    val compileAllTask = project.registerTask<DefaultTask>(lowerCamelCaseName(module.moduleClassifier, "metadataClasses"))
+    konst compileAllTask = project.registerTask<DefaultTask>(lowerCamelCaseName(module.moduleClassifier, "metadataClasses"))
     module.fragments.all { fragment ->
         createCommonMetadataCompilation(fragment, compileAllTask, metadataCompilationRegistry)
         createNativeMetadataCompilation(fragment, compileAllTask, metadataCompilationRegistry)
@@ -148,8 +148,8 @@ private fun configureMetadataJarTask(
     module: GradleKpmModule,
     registry: MetadataCompilationRegistry
 ) {
-    val project = module.project
-    val allMetadataJar = project.registerTask<Jar>(metadataJarName(module)) { task ->
+    konst project = module.project
+    konst allMetadataJar = project.registerTask<Jar>(metadataJarName(module)) { task ->
         if (module.moduleClassifier != null) {
             task.archiveClassifier.set(module.moduleClassifier)
         }
@@ -158,8 +158,8 @@ private fun configureMetadataJarTask(
     }
     module.fragments.all { fragment ->
         allMetadataJar.configure { jar ->
-            val metadataOutput = project.filesProvider {
-                val compilationData = registry.getForFragmentOrNull(fragment)
+            konst metadataOutput = project.filesProvider {
+                konst compilationData = registry.getForFragmentOrNull(fragment)
                     .takeIf { !fragment.isNativeHostSpecific() }
                     ?: return@filesProvider emptyList<Any>()
                 project.filesWithUnpackedArchives(compilationData.output.allOutputs, setOf(KLIB_FILE_EXTENSION))
@@ -179,10 +179,10 @@ private fun createCommonMetadataCompilation(
     compileAllTask: TaskProvider<DefaultTask>,
     metadataCompilationRegistry: MetadataCompilationRegistry
 ) {
-    val module = fragment.containingModule
-    val project = module.project
+    konst module = fragment.containingModule
+    konst project = module.project
 
-    val metadataCompilationData =
+    konst metadataCompilationData =
         GradleKpmCommonFragmentMetadataCompilationDataImpl(
             project,
             fragment,
@@ -200,10 +200,10 @@ private fun createNativeMetadataCompilation(
     compileAllTask: TaskProvider<DefaultTask>,
     metadataCompilationRegistry: MetadataCompilationRegistry
 ) {
-    val module = fragment.containingModule
-    val project = module.project
+    konst module = fragment.containingModule
+    konst project = module.project
 
-    val metadataCompilationData =
+    konst metadataCompilationData =
         GradleKpmNativeFragmentMetadataCompilationDataImpl(
             project,
             fragment,
@@ -222,8 +222,8 @@ private class GradleKpmMetadataCompilationTasksConfigurator(project: Project) : 
         compilationData: GradleKpmCommonFragmentMetadataCompilationData
     ) {
         KotlinCommonSourceSetProcessor(KotlinCompilationInfo.KPM(compilationData), KotlinTasksProvider()).run()
-        val allSources = getSourcesForFragmentCompilation(fragment)
-        val commonSources = getCommonSourcesForFragmentCompilation(fragment)
+        konst allSources = getSourcesForFragmentCompilation(fragment)
+        konst commonSources = getCommonSourcesForFragmentCompilation(fragment)
 
         addSourcesToKotlinCompileTask(project, compilationData.compileKotlinTaskName, emptyList()) { allSources }
         addCommonSourcesToKotlinCompileTask(project, compilationData.compileKotlinTaskName, emptyList()) { commonSources }
@@ -281,8 +281,8 @@ private fun createExtractMetadataTask(
 private fun disableMetadataCompilationIfNotYetSupported(
     metadataCompilationData: GradleKpmAbstractFragmentMetadataCompilationData<*>
 ) {
-    val fragment = metadataCompilationData.fragment
-    val platforms = fragment.containingVariants.map { it.platformType }.toSet()
+    konst fragment = metadataCompilationData.fragment
+    konst platforms = fragment.containingVariants.map { it.platformType }.toSet()
     if (platforms != setOf(KotlinPlatformType.native) && platforms.size == 1
         || platforms == setOf(KotlinPlatformType.jvm, KotlinPlatformType.androidJvm)
     ) {

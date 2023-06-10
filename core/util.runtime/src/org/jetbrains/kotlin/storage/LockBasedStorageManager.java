@@ -153,7 +153,7 @@ public class LockBasedStorageManager implements StorageManager {
             @NotNull
             @Override
             protected RecursionDetectedResult<V> recursionDetected(K input, boolean firstTime) {
-                return RecursionDetectedResult.value(onRecursiveCall.invoke(input, firstTime));
+                return RecursionDetectedResult.konstue(onRecursiveCall.invoke(input, firstTime));
             }
         };
     }
@@ -189,7 +189,7 @@ public class LockBasedStorageManager implements StorageManager {
             @NotNull
             @Override
             protected RecursionDetectedResult<T> recursionDetected(boolean firstTime) {
-                return RecursionDetectedResult.value(onRecursiveCall.invoke(firstTime));
+                return RecursionDetectedResult.konstue(onRecursiveCall.invoke(firstTime));
             }
         };
     }
@@ -203,7 +203,7 @@ public class LockBasedStorageManager implements StorageManager {
             @NotNull
             @Override
             protected RecursionDetectedResult<T> recursionDetected(boolean firstTime) {
-                return RecursionDetectedResult.value(onRecursiveCall);
+                return RecursionDetectedResult.konstue(onRecursiveCall);
             }
 
             @Override
@@ -227,12 +227,12 @@ public class LockBasedStorageManager implements StorageManager {
                 if (onRecursiveCall == null) {
                     return super.recursionDetected(firstTime);
                 }
-                return RecursionDetectedResult.value(onRecursiveCall.invoke(firstTime));
+                return RecursionDetectedResult.konstue(onRecursiveCall.invoke(firstTime));
             }
 
             @Override
-            protected void doPostCompute(@NotNull T value) {
-                postCompute.invoke(value);
+            protected void doPostCompute(@NotNull T konstue) {
+                postCompute.invoke(konstue);
             }
 
             @Override
@@ -255,7 +255,7 @@ public class LockBasedStorageManager implements StorageManager {
             @NotNull
             @Override
             protected RecursionDetectedResult<T> recursionDetected(boolean firstTime) {
-                return RecursionDetectedResult.value(onRecursiveCall);
+                return RecursionDetectedResult.konstue(onRecursiveCall);
             }
 
             @Override
@@ -272,8 +272,8 @@ public class LockBasedStorageManager implements StorageManager {
     ) {
         return new LockBasedLazyValueWithPostCompute<T>(this, computable) {
             @Override
-            protected void doPostCompute(T value) {
-                postCompute.invoke(value);
+            protected void doPostCompute(T konstue) {
+                postCompute.invoke(konstue);
             }
 
             @Override
@@ -318,8 +318,8 @@ public class LockBasedStorageManager implements StorageManager {
     private static class RecursionDetectedResult<T> {
 
         @NotNull
-        public static <T> RecursionDetectedResult<T> value(T value) {
-            return new RecursionDetectedResult<T>(value, false);
+        public static <T> RecursionDetectedResult<T> konstue(T konstue) {
+            return new RecursionDetectedResult<T>(konstue, false);
         }
 
         @NotNull
@@ -327,17 +327,17 @@ public class LockBasedStorageManager implements StorageManager {
             return new RecursionDetectedResult<T>(null, true);
         }
 
-        private final T value;
+        private final T konstue;
         private final boolean fallThrough;
 
-        private RecursionDetectedResult(T value, boolean fallThrough) {
-            this.value = value;
+        private RecursionDetectedResult(T konstue, boolean fallThrough) {
+            this.konstue = konstue;
             this.fallThrough = fallThrough;
         }
 
         public T getValue() {
-            assert !fallThrough : "A value requested from FALL_THROUGH in " + this;
-            return value;
+            assert !fallThrough : "A konstue requested from FALL_THROUGH in " + this;
+            return konstue;
         }
 
         public boolean isFallThrough() {
@@ -346,7 +346,7 @@ public class LockBasedStorageManager implements StorageManager {
 
         @Override
         public String toString() {
-            return isFallThrough() ? "FALL_THROUGH" : String.valueOf(value);
+            return isFallThrough() ? "FALL_THROUGH" : String.konstueOf(konstue);
         }
     }
 
@@ -361,7 +361,7 @@ public class LockBasedStorageManager implements StorageManager {
         private final Function0<? extends T> computable;
 
         @Nullable
-        private volatile Object value = NotValue.NOT_COMPUTED;
+        private volatile Object konstue = NotValue.NOT_COMPUTED;
 
         public LockBasedLazyValue(@NotNull LockBasedStorageManager storageManager, @NotNull Function0<? extends T> computable) {
             this.storageManager = storageManager;
@@ -370,60 +370,60 @@ public class LockBasedStorageManager implements StorageManager {
 
         @Override
         public boolean isComputed() {
-            return value != NotValue.NOT_COMPUTED && value != NotValue.COMPUTING;
+            return konstue != NotValue.NOT_COMPUTED && konstue != NotValue.COMPUTING;
         }
 
         @Override
         public boolean isComputing() {
-            return value == NotValue.COMPUTING;
+            return konstue == NotValue.COMPUTING;
         }
 
         @Override
         public T invoke() {
-            Object _value = value;
-            if (!(_value instanceof NotValue)) return WrappedValues.unescapeThrowable(_value);
+            Object _konstue = konstue;
+            if (!(_konstue instanceof NotValue)) return WrappedValues.unescapeThrowable(_konstue);
 
             storageManager.lock.lock();
             try {
-                _value = value;
-                if (!(_value instanceof NotValue)) return WrappedValues.unescapeThrowable(_value);
+                _konstue = konstue;
+                if (!(_konstue instanceof NotValue)) return WrappedValues.unescapeThrowable(_konstue);
 
-                if (_value == NotValue.COMPUTING) {
-                    value = NotValue.RECURSION_WAS_DETECTED;
+                if (_konstue == NotValue.COMPUTING) {
+                    konstue = NotValue.RECURSION_WAS_DETECTED;
                     RecursionDetectedResult<T> result = recursionDetected(/*firstTime = */ true);
                     if (!result.isFallThrough()) {
                         return result.getValue();
                     }
                 }
 
-                if (_value == NotValue.RECURSION_WAS_DETECTED) {
+                if (_konstue == NotValue.RECURSION_WAS_DETECTED) {
                     RecursionDetectedResult<T> result = recursionDetected(/*firstTime = */ false);
                     if (!result.isFallThrough()) {
                         return result.getValue();
                     }
                 }
 
-                value = NotValue.COMPUTING;
+                konstue = NotValue.COMPUTING;
                 try {
                     T typedValue = computable.invoke();
 
-                    // Don't publish computed value till post compute is finished as it may cause a race condition
-                    // if post compute modifies value internals.
+                    // Don't publish computed konstue till post compute is finished as it may cause a race condition
+                    // if post compute modifies konstue internals.
                     postCompute(typedValue);
 
-                    value = typedValue;
+                    konstue = typedValue;
                     return typedValue;
                 }
                 catch (Throwable throwable) {
                     if (ExceptionUtilsKt.isProcessCanceledException(throwable)) {
-                        value = NotValue.NOT_COMPUTED;
+                        konstue = NotValue.NOT_COMPUTED;
                         //noinspection ConstantConditions
                         throw (RuntimeException)throwable;
                     }
 
-                    if (value == NotValue.COMPUTING) {
+                    if (konstue == NotValue.COMPUTING) {
                         // Store only if it's a genuine result, not something thrown through recursionDetected()
-                        value = WrappedValues.escapeThrowable(throwable);
+                        konstue = WrappedValues.escapeThrowable(throwable);
                     }
                     throw storageManager.exceptionHandlingStrategy.handleException(throwable);
                 }
@@ -435,15 +435,15 @@ public class LockBasedStorageManager implements StorageManager {
 
         /**
          * @param firstTime {@code true} when recursion has been just detected, {@code false} otherwise
-         * @return a value to be returned on a recursive call or subsequent calls
+         * @return a konstue to be returned on a recursive call or subsequent calls
          */
         @NotNull
         protected RecursionDetectedResult<T> recursionDetected(boolean firstTime) {
-            return storageManager.recursionDetectedDefault("in a lazy value", null);
+            return storageManager.recursionDetectedDefault("in a lazy konstue", null);
         }
 
-        protected void postCompute(T value) {
-            // Default post compute implementation doesn't publish the value till it is finished
+        protected void postCompute(T konstue) {
+            // Default post compute implementation doesn't publish the konstue till it is finished
         }
 
         @NotNull
@@ -457,12 +457,12 @@ public class LockBasedStorageManager implements StorageManager {
     }
 
     /**
-     * Computed value has an early publication and accessible from the same thread while executing a post-compute lambda.
-     * For other threads value will be accessible only after post-compute lambda is finished (when a real lock is used).
+     * Computed konstue has an early publication and accessible from the same thread while executing a post-compute lambda.
+     * For other threads konstue will be accessible only after post-compute lambda is finished (when a real lock is used).
      */
     private static abstract class LockBasedLazyValueWithPostCompute<T> extends LockBasedLazyValue<T> {
         @Nullable
-        private volatile SingleThreadValue<T> valuePostCompute = null;
+        private volatile SingleThreadValue<T> konstuePostCompute = null;
 
         public LockBasedLazyValueWithPostCompute(
                 @NotNull LockBasedStorageManager storageManager,
@@ -473,7 +473,7 @@ public class LockBasedStorageManager implements StorageManager {
 
         @Override
         public T invoke() {
-            SingleThreadValue<T> postComputeCache = valuePostCompute;
+            SingleThreadValue<T> postComputeCache = konstuePostCompute;
             if (postComputeCache != null && postComputeCache.hasValue()) {
                 return postComputeCache.getValue();
             }
@@ -483,18 +483,18 @@ public class LockBasedStorageManager implements StorageManager {
 
         // Doing something in post-compute helps prevent infinite recursion
         @Override
-        protected final void postCompute(T value) {
+        protected final void postCompute(T konstue) {
             // Protected from rewrites in other threads because it is executed under lock in invoke().
             // May be overwritten when NO_LOCK is used.
-            valuePostCompute = new SingleThreadValue<T>(value);
+            konstuePostCompute = new SingleThreadValue<T>(konstue);
             try {
-                doPostCompute(value);
+                doPostCompute(konstue);
             } finally {
-                valuePostCompute = null;
+                konstuePostCompute = null;
             }
         }
 
-        protected abstract void doPostCompute(T value);
+        protected abstract void doPostCompute(T konstue);
     }
 
     private static abstract class LockBasedNotNullLazyValueWithPostCompute<T> extends LockBasedLazyValueWithPostCompute<T>
@@ -548,29 +548,29 @@ public class LockBasedStorageManager implements StorageManager {
         @Override
         @Nullable
         public V invoke(K input) {
-            Object value = cache.get(input);
-            if (value != null && value != NotValue.COMPUTING) return WrappedValues.unescapeExceptionOrNull(value);
+            Object konstue = cache.get(input);
+            if (konstue != null && konstue != NotValue.COMPUTING) return WrappedValues.unescapeExceptionOrNull(konstue);
 
             storageManager.lock.lock();
             try {
-                value = cache.get(input);
+                konstue = cache.get(input);
 
-                if (value == NotValue.COMPUTING) {
-                    value = NotValue.RECURSION_WAS_DETECTED;
+                if (konstue == NotValue.COMPUTING) {
+                    konstue = NotValue.RECURSION_WAS_DETECTED;
                     RecursionDetectedResult<V> result = recursionDetected(input, /*firstTime = */ true);
                     if (!result.isFallThrough()) {
                         return result.getValue();
                     }
                 }
 
-                if (value == NotValue.RECURSION_WAS_DETECTED) {
+                if (konstue == NotValue.RECURSION_WAS_DETECTED) {
                     RecursionDetectedResult<V> result = recursionDetected(input, /*firstTime = */ false);
                     if (!result.isFallThrough()) {
                         return result.getValue();
                     }
                 }
 
-                if (value != null) return WrappedValues.unescapeExceptionOrNull(value);
+                if (konstue != null) return WrappedValues.unescapeExceptionOrNull(konstue);
 
                 AssertionError error = null;
                 try {
@@ -620,15 +620,15 @@ public class LockBasedStorageManager implements StorageManager {
         @NotNull
         private AssertionError raceCondition(K input, Object oldValue) {
             return sanitizeStackTrace(
-                    new AssertionError("Race condition detected on input " + input + ". Old value is " + oldValue +
+                    new AssertionError("Race condition detected on input " + input + ". Old konstue is " + oldValue +
                                        " under " + storageManager)
             );
         }
 
         @Override
         public boolean isComputed(K key) {
-            Object value = cache.get(key);
-            return value != null && value != NotValue.COMPUTING;
+            Object konstue = cache.get(key);
+            return konstue != null && konstue != NotValue.COMPUTING;
         }
 
         protected LockBasedStorageManager getStorageManager() {
@@ -661,7 +661,7 @@ public class LockBasedStorageManager implements StorageManager {
 
         int firstNonStorage = -1;
         for (int i = 0; i < size; i++) {
-            // Skip everything (memoized functions and lazy values) from package org.jetbrains.kotlin.storage
+            // Skip everything (memoized functions and lazy konstues) from package org.jetbrains.kotlin.storage
             if (!stackTrace[i].getClassName().startsWith(PACKAGE_NAME)) {
                 firstNonStorage = i;
                 break;

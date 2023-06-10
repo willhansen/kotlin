@@ -26,40 +26,40 @@ import org.jetbrains.kotlin.ir.visitors.*
  * The algorithm tries to find and remove matching pairs of box/unbox calls.
  *
  * - The leaf points are either a call to a matching box/unbox function or a constant primitive with appropriate type:
- *   box<T>(unbox<T>(value)) --> value
- *   unbox<T>(const<Any>(value)) --> const<T>(value)
+ *   box<T>(unbox<T>(konstue)) --> konstue
+ *   unbox<T>(const<Any>(konstue)) --> const<T>(konstue)
  *
- * - In case of a when clause or a returnable block, the algorithm tries to propagate the coercion to subvalues if possible:
+ * - In case of a when clause or a returnable block, the algorithm tries to propagate the coercion to subkonstues if possible:
  *   box<T>(when {
- *       predicate1 -> unbox<T>(value1)
- *       predicate2 -> value2
+ *       predicate1 -> unbox<T>(konstue1)
+ *       predicate2 -> konstue2
  *   }) --> when {
- *       predicate1 -> value1
- *       predicate2 -> box<T>(value2)
+ *       predicate1 -> konstue1
+ *       predicate2 -> box<T>(konstue2)
  *   }
  *   box<T>(block {
  *     ..
- *     return@block unbox<T>(value1)
+ *     return@block unbox<T>(konstue1)
  *     ..
- *     return@block value2
+ *     return@block konstue2
  *   }) --> block {
  *     ..
- *     return@block value1
+ *     return@block konstue1
  *     ..
- *     return@block box<T>(value2)
+ *     return@block box<T>(konstue2)
  *   }
  *
  *   - There might be also some casts in between matching box/unbox pair, the algorithm assumes that in the correct IR
  *     such casts are redundant and eliminates them.
  */
-internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPass {
+internal class RedundantCoercionsCleaner(konst context: Context) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transformChildren(transformer, null)
     }
 
-    private class TransformerState(val coercion: IrCall) {
+    private class TransformerState(konst coercion: IrCall) {
         var folded = false
-        val casts = mutableListOf<IrTypeOperatorCall>()
+        konst casts = mutableListOf<IrTypeOperatorCall>()
 
         fun copy() = TransformerState(coercion).also {
             it.folded = folded
@@ -69,14 +69,14 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
         fun applyCoercion(expression: IrExpression): IrExpression {
             var result = expression
             for (i in casts.size - 1 downTo 0) {
-                val cast = casts[i]
+                konst cast = casts[i]
                 result = with(cast) {
                     IrTypeOperatorCallImpl(startOffset, endOffset, type, operator, typeOperand, result)
                 }
             }
             return with(coercion) {
                 IrCallImpl(
-                        startOffset, endOffset, type, symbol, typeArgumentsCount, valueArgumentsCount, origin
+                        startOffset, endOffset, type, symbol, typeArgumentsCount, konstueArgumentsCount, origin
                 ).apply {
                     putValueArgument(0, result)
                 }
@@ -86,7 +86,7 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
 
     private fun IrFunction.getCoercedClass(): IrClass {
         if (name.asString().endsWith("-box>"))
-            return valueParameters[0].type.classifierOrFail.owner as IrClass
+            return konstueParameters[0].type.classifierOrFail.owner as IrClass
         if (name.asString().endsWith("-unbox>"))
             return returnType.classifierOrFail.owner as IrClass
         error("Unexpected coercion: ${this.render()}")
@@ -95,9 +95,9 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
     private fun IrTypeOperator.isCast() =
             this == IrTypeOperator.CAST || this == IrTypeOperator.IMPLICIT_CAST || this == IrTypeOperator.SAFE_CAST
 
-    private data class PossiblyFoldedExpression(val expression: IrExpression, val folded: Boolean)
+    private data class PossiblyFoldedExpression(konst expression: IrExpression, konst folded: Boolean)
 
-    private val transformer = object : IrElementTransformer<TransformerState?> {
+    private konst transformer = object : IrElementTransformer<TransformerState?> {
         override fun visitElement(element: IrElement, data: TransformerState?) = super.visitElement(element, null)
         override fun visitDeclaration(declaration: IrDeclarationBase, data: TransformerState?) = super.visitDeclaration(declaration, null)
         override fun visitExpression(expression: IrExpression, data: TransformerState?) = super.visitExpression(expression, null)
@@ -109,13 +109,13 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
             if (!expression.isBoxOrUnboxCall())
                 return super.visitCall(expression, null)
 
-            val argument = expression.getValueArgument(0)!!
+            konst argument = expression.getValueArgument(0)!!
             return if (expression.symbol.owner.getCoercedClass() == data?.coercion?.symbol?.owner?.getCoercedClass()) {
                 data.folded = true
                 argument.transform(this, null)
             } else {
-                val state = TransformerState(expression)
-                val result = argument.transform(this, state)
+                konst state = TransformerState(expression)
+                konst result = argument.transform(this, state)
                 if (state.folded)
                     result
                 else
@@ -128,7 +128,7 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
                 return super.visitTypeOperator(expression, null)
 
             data?.casts?.push(expression)
-            val argument = expression.argument.transform(this, data)
+            konst argument = expression.argument.transform(this, data)
             data?.casts?.pop()
             return if (data?.folded == true)
                 argument
@@ -136,9 +136,9 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
         }
 
         override fun visitConstantPrimitive(expression: IrConstantPrimitive, data: TransformerState?): IrConstantValue {
-            if (expression.value.type == data?.coercion?.type) {
+            if (expression.konstue.type == data?.coercion?.type) {
                 data.folded = true
-                expression.type = expression.value.type
+                expression.type = expression.konstue.type
             }
             return expression
         }
@@ -147,10 +147,10 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
             if (data == null)
                 return super.visitWhen(expression, null)
 
-            val branchResults = expression.branches.map { branch ->
+            konst branchResults = expression.branches.map { branch ->
                 branch.condition = branch.condition.transform(this, null)
-                val result = branch.result.transform(this, data)
-                val folded = data.folded
+                konst result = branch.result.transform(this, data)
+                konst folded = data.folded
                 data.folded = false
                 PossiblyFoldedExpression(result, folded)
             }
@@ -171,17 +171,17 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
             return expression
         }
 
-        val returnableBlockStates = mutableMapOf<IrReturnableBlock, TransformerState>()
-        val foldedReturnableBlocks = mutableSetOf<IrReturnableBlock>()
-        val foldedReturns = mutableSetOf<IrReturn>()
+        konst returnableBlockStates = mutableMapOf<IrReturnableBlock, TransformerState>()
+        konst foldedReturnableBlocks = mutableSetOf<IrReturnableBlock>()
+        konst foldedReturns = mutableSetOf<IrReturn>()
 
         override fun visitReturn(expression: IrReturn, data: TransformerState?): IrExpression {
-            val returnableBlock = expression.returnTargetSymbol.owner as? IrReturnableBlock
+            konst returnableBlock = expression.returnTargetSymbol.owner as? IrReturnableBlock
             return if (returnableBlock == null)
                 super.visitReturn(expression, data)
             else {
-                val state = returnableBlockStates[returnableBlock]?.copy()
-                expression.value = expression.value.transform(this, state)
+                konst state = returnableBlockStates[returnableBlock]?.copy()
+                expression.konstue = expression.konstue.transform(this, state)
                 if (state?.folded == true) {
                     foldedReturnableBlocks.add(returnableBlock)
                     foldedReturns.add(expression)
@@ -194,21 +194,21 @@ internal class RedundantCoercionsCleaner(val context: Context) : FileLoweringPas
             if (data == null)
                 return super.visitBlock(expression, null)
 
-            val returnableBlock = expression as? IrReturnableBlock
+            konst returnableBlock = expression as? IrReturnableBlock
             if (returnableBlock != null)
                 returnableBlockStates[returnableBlock] = data
-            val statements = expression.statements
+            konst statements = expression.statements
             for (i in statements.indices) {
-                val state = data.takeIf { i == statements.lastIndex && returnableBlock == null }
+                konst state = data.takeIf { i == statements.lastIndex && returnableBlock == null }
                 statements[i] = statements[i].transform(this, state) as IrStatement
             }
             if (returnableBlock in foldedReturnableBlocks) {
                 expression.transformChildrenVoid(object : IrElementTransformerVoid() {
                     override fun visitReturn(expression: IrReturn): IrExpression {
-                        val value = expression.value.transform(this, null)
-                        expression.value = if (expression.returnTargetSymbol.owner == returnableBlock && expression !in foldedReturns)
-                            data.applyCoercion(value)
-                        else value
+                        konst konstue = expression.konstue.transform(this, null)
+                        expression.konstue = if (expression.returnTargetSymbol.owner == returnableBlock && expression !in foldedReturns)
+                            data.applyCoercion(konstue)
+                        else konstue
                         return expression
                     }
                 })

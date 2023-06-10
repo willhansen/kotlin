@@ -21,12 +21,12 @@ class Controller {
     }
 
     suspend inline fun test2(crossinline c: suspend Controller.() -> Unit) {
-        val l: suspend Controller.() -> Unit = { c() }
+        konst l: suspend Controller.() -> Unit = { c() }
         l()
     }
 
     suspend inline fun test3(crossinline c: suspend Controller.() -> Unit) {
-        val sr = object : SuspendRunnable {
+        konst sr = object : SuspendRunnable {
             override suspend fun run() {
                 c()
             }
@@ -46,7 +46,7 @@ fun builder(controller: Controller, c: suspend Controller.() -> Unit) {
 suspend fun calculate() = "OK"
 
 fun box() : String {
-    val controller = Controller()
+    konst controller = Controller()
     builder(controller) {
         test1 {
             res = calculate()

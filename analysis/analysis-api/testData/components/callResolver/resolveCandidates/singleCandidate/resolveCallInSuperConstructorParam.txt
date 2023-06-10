@@ -11,7 +11,7 @@ KtApplicableCallCandidateInfo:
         receiverType = kotlin.Int
         returnType = kotlin.Int
         symbol = /to(<extension receiver>: A, other: B): A
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = other
             receiverType = null

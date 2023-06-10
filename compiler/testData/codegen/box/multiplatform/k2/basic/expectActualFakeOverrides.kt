@@ -8,11 +8,11 @@
 expect class A() {
     fun foo(s: String): String
 
-    val bar: String
+    konst bar: String
 }
 
 fun test(s: String): String {
-    val a = A()
+    konst a = A()
     return a.foo(s) + a.bar
 }
 
@@ -22,7 +22,7 @@ fun test(s: String): String {
 open class B {
     fun foo(s: String) = s
 
-    val bar: String = "K"
+    konst bar: String = "K"
 }
 
 actual class A : B()

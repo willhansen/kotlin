@@ -1,4 +1,4 @@
 package
 
-private const val a: kotlin.String = ""
+private const konst a: kotlin.String = ""
 @kotlin.Deprecated(message = "") public fun test(): kotlin.Unit

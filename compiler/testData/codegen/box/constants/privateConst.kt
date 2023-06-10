@@ -1,7 +1,7 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
-private const val z = "OK";
+private const konst z = "OK";
 
 fun box(): String {
-    return eval { z }
+    return ekonst { z }
 }

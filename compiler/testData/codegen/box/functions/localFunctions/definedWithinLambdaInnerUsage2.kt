@@ -6,7 +6,7 @@ inline fun foo(x: String, block: (String) -> String) = block(x)
 fun noInlineFoo(x: String, block: (String) -> String) = block(x)
 
 fun box(): String {
-    val res = foo("abc") {
+    konst res = foo("abc") {
         fun bar(y: String) = y + "cde"
         noInlineFoo(it) { bar(it) }
     }

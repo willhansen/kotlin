@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 
-val configurations4 = listOf(
+konst configurations4 = listOf(
     3 to mapOf(
         2 to listOf(
             1 to listOf(
@@ -12,7 +12,7 @@ val configurations4 = listOf(
     )
 )
 
-val configurations3 = listOf(
+konst configurations3 = listOf(
     3 to mapOf(
         2 to listOf(
             {
@@ -22,7 +22,7 @@ val configurations3 = listOf(
     )
 )
 
-val configurations2 = mapOf(
+konst configurations2 = mapOf(
     2 to listOf(
         {
             2
@@ -30,7 +30,7 @@ val configurations2 = mapOf(
     )
 )
 
-val configurations1 = listOf(
+konst configurations1 = listOf(
     {
         2
     }

@@ -14,7 +14,7 @@ buildscript {
         maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-dependencies")
         mavenCentral()
     }
-    val buildGradlePluginVersion = extra["kotlin.build.gradlePlugin.version"]
+    konst buildGradlePluginVersion = extra["kotlin.build.gradlePlugin.version"]
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:$buildGradlePluginVersion")
     }

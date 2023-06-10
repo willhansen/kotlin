@@ -5,7 +5,7 @@ class TestClass {
   // CHECK:
   //   Mangled name: TestClass{}test
   //   Public signature: /TestClass.test|-5712650070209114719[0]
-  val test: Int
+  konst test: Int
     // CHECK JVM_IR:
     //   Mangled name: TestClass#<get-test>(){}kotlin.Int
     //   Public signature: /TestClass.test.<get-test>|3701432460336260723[0]
@@ -34,5 +34,5 @@ var testProp: Any
   // CHECK:
   //   Mangled name: #<set-testProp>(kotlin.Any){}
   //   Public signature: /testProp.<set-testProp>|602902979763786235[0]
-  set(value: Any): Unit
+  set(konstue: Any): Unit
 

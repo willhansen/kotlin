@@ -16,8 +16,8 @@ interface SyntheticJavaResolveExtension {
         "org.jetbrains.kotlin.syntheticJavaResolveExtension", SyntheticJavaResolveExtension::class.java
     ) {
         fun getProvider(project: Project): SyntheticJavaPartsProvider {
-            val instances = getInstances(project)
-            val providers = instances.map { it.buildProvider() }
+            konst instances = getInstances(project)
+            konst providers = instances.map { it.buildProvider() }
             return if (providers.isEmpty()) {
                 SyntheticJavaPartsProvider.EMPTY
             } else {

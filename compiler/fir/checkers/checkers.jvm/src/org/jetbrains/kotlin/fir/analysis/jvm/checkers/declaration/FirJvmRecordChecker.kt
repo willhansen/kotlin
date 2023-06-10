@@ -36,9 +36,9 @@ object FirJvmRecordChecker : FirRegularClassChecker() {
             }
         }
 
-        val annotationSource = declaration.getAnnotationByClassId(JVM_RECORD_ANNOTATION_CLASS_ID, context.session)?.source ?: return
+        konst annotationSource = declaration.getAnnotationByClassId(JVM_RECORD_ANNOTATION_CLASS_ID, context.session)?.source ?: return
 
-        val languageVersionSettings = context.session.languageVersionSettings
+        konst languageVersionSettings = context.session.languageVersionSettings
         if (!languageVersionSettings.supportsFeature(LanguageFeature.JvmRecordSupport)) {
             reporter.reportOn(
                 annotationSource,
@@ -74,7 +74,7 @@ object FirJvmRecordChecker : FirRegularClassChecker() {
             return
         }
 
-        declaration.primaryConstructorIfAny(context.session)?.valueParameterSymbols?.let { params ->
+        declaration.primaryConstructorIfAny(context.session)?.konstueParameterSymbols?.let { params ->
             if (params.isEmpty()) {
                 reporter.reportOn(annotationSource, FirJvmErrors.JVM_RECORD_WITHOUT_PRIMARY_CONSTRUCTOR_PARAMETERS, context)
                 return
@@ -88,7 +88,7 @@ object FirJvmRecordChecker : FirRegularClassChecker() {
 
         declaration.declarations.forEach { decl ->
             if (decl is FirProperty) {
-                val fromConstructor = decl.source?.kind == KtFakeSourceElementKind.PropertyFromParameter
+                konst fromConstructor = decl.source?.kind == KtFakeSourceElementKind.PropertyFromParameter
                 if (decl.isVar && fromConstructor) {
                     reporter.reportOn(decl.source, FirJvmErrors.JVM_RECORD_NOT_VAL_PARAMETER, context)
                 } else if (!fromConstructor && (decl.hasBackingField || decl.delegateFieldSymbol != null)) {

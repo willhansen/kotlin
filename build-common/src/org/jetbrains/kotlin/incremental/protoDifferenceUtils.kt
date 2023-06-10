@@ -31,28 +31,28 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptorVisibility
 import org.jetbrains.kotlin.serialization.deserialization.getClassId
 
 data class Difference(
-    val isClassAffected: Boolean = false,
-    val areSubclassesAffected: Boolean = false,
-    val changedMembersNames: Set<String> = emptySet(),
-    val changedSupertypes: Set<FqName> = emptySet()
+    konst isClassAffected: Boolean = false,
+    konst areSubclassesAffected: Boolean = false,
+    konst changedMembersNames: Set<String> = emptySet(),
+    konst changedSupertypes: Set<FqName> = emptySet()
 )
 
 sealed class ProtoData
-data class ClassProtoData(val proto: ProtoBuf.Class, val nameResolver: NameResolver) : ProtoData()
-data class PackagePartProtoData(val proto: ProtoBuf.Package, val nameResolver: NameResolver, val packageFqName: FqName) : ProtoData()
+data class ClassProtoData(konst proto: ProtoBuf.Class, konst nameResolver: NameResolver) : ProtoData()
+data class PackagePartProtoData(konst proto: ProtoBuf.Package, konst nameResolver: NameResolver, konst packageFqName: FqName) : ProtoData()
 
 fun ProtoMapValue.toProtoData(packageFqName: FqName): ProtoData =
     if (isPackageFacade) {
-        val (nameResolver, packageProto) = JvmProtoBufUtil.readPackageDataFrom(bytes, strings)
+        konst (nameResolver, packageProto) = JvmProtoBufUtil.readPackageDataFrom(bytes, strings)
         PackagePartProtoData(packageProto, nameResolver, packageFqName)
     } else {
-        val (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(bytes, strings)
+        konst (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(bytes, strings)
         ClassProtoData(classProto, nameResolver)
     }
 
-internal val MessageLite.isPrivate: Boolean
+internal konst MessageLite.isPrivate: Boolean
     get() {
-        val visibility = when (this) {
+        konst visibility = when (this) {
             is ProtoBuf.Constructor -> Flags.VISIBILITY.get(flags)
             is ProtoBuf.Function -> Flags.VISIBILITY.get(flags)
             is ProtoBuf.Property -> Flags.VISIBILITY.get(flags)
@@ -77,14 +77,14 @@ private fun MessageLite.name(nameResolver: NameResolver): String {
 internal fun List<MessageLite>.names(nameResolver: NameResolver): List<String> = map { it.name(nameResolver) }
 
 abstract class DifferenceCalculator {
-    protected abstract val compareObject: ProtoCompareGenerated
+    protected abstract konst compareObject: ProtoCompareGenerated
 
     abstract fun difference(): Difference
 
     protected fun calcDifferenceForMembers(oldList: List<MessageLite>, newList: List<MessageLite>): Collection<String> {
-        val result = hashSetOf<String>()
+        konst result = hashSetOf<String>()
 
-        val oldMap =
+        konst oldMap =
             oldList.groupBy {
                 it.getHashCode(
                     compareObject::oldGetIndexOfString,
@@ -92,7 +92,7 @@ abstract class DifferenceCalculator {
                     compareObject::oldGetTypeById
                 )
             }
-        val newMap =
+        konst newMap =
             newList.groupBy {
                 it.getHashCode(
                     compareObject::newGetIndexOfString,
@@ -101,12 +101,12 @@ abstract class DifferenceCalculator {
                 )
             }
 
-        val hashes = oldMap.keys + newMap.keys
+        konst hashes = oldMap.keys + newMap.keys
         for (hash in hashes) {
-            val oldMembers = oldMap[hash]
-            val newMembers = newMap[hash]
+            konst oldMembers = oldMap[hash]
+            konst newMembers = newMap[hash]
 
-            val differentMembers = when {
+            konst differentMembers = when {
                 newMembers == null -> oldMembers!!.names(compareObject.oldNameResolver)
                 oldMembers == null -> newMembers.names(compareObject.newNameResolver)
                 else -> calcDifferenceForEqualHashes(oldMembers, newMembers)
@@ -121,11 +121,11 @@ abstract class DifferenceCalculator {
         oldList: List<MessageLite>,
         newList: List<MessageLite>
     ): Collection<String> {
-        val result = hashSetOf<String>()
-        val newSet = HashSet(newList)
+        konst result = hashSetOf<String>()
+        konst newSet = HashSet(newList)
 
         oldList.forEach { oldMember ->
-            val newMember = newSet.firstOrNull { compareObject.checkEquals(oldMember, it) }
+            konst newMember = newSet.firstOrNull { compareObject.checkEquals(oldMember, it) }
             if (newMember != null) {
                 newSet.remove(newMember)
             } else {
@@ -144,8 +144,8 @@ abstract class DifferenceCalculator {
         oldList: List<Int>,
         newList: List<Int>
     ): Collection<String> {
-        val oldNames = oldList.map { compareObject.oldNameResolver.getString(it) }.toSet()
-        val newNames = newList.map { compareObject.newNameResolver.getString(it) }.toSet()
+        konst oldNames = oldList.map { compareObject.oldNameResolver.getString(it) }.toSet()
+        konst newNames = newList.map { compareObject.newNameResolver.getString(it) }.toSet()
         return oldNames.union(newNames) - oldNames.intersect(newNames)
     }
 
@@ -171,10 +171,10 @@ abstract class DifferenceCalculator {
 }
 
 class DifferenceCalculatorForClass(
-    private val oldData: ClassProtoData,
-    private val newData: ClassProtoData
+    private konst oldData: ClassProtoData,
+    private konst newData: ClassProtoData
 ) : DifferenceCalculator() {
-    override val compareObject = ProtoCompareGenerated(
+    override konst compareObject = ProtoCompareGenerated(
         oldNameResolver = oldData.nameResolver,
         newNameResolver = newData.nameResolver,
         oldTypeTable = oldData.proto.typeTableOrNull,
@@ -182,29 +182,29 @@ class DifferenceCalculatorForClass(
     )
 
     override fun difference(): Difference {
-        val (oldProto, oldNameResolver) = oldData
-        val (newProto, newNameResolver) = newData
+        konst (oldProto, oldNameResolver) = oldData
+        konst (newProto, newNameResolver) = newData
 
-        val diff = compareObject.difference(oldProto, newProto)
+        konst diff = compareObject.difference(oldProto, newProto)
 
         var isClassAffected = false
         var areSubclassesAffected = false
-        val changedSupertypes = HashSet<FqName>()
-        val names = hashSetOf<String>()
-        val classIsSealed = newProto.isSealed && oldProto.isSealed
+        konst changedSupertypes = HashSet<FqName>()
+        konst names = hashSetOf<String>()
+        konst classIsSealed = newProto.isSealed && oldProto.isSealed
 
         fun Int.oldToNames() = names.add(oldNameResolver.getString(this))
         fun Int.newToNames() = names.add(newNameResolver.getString(this))
 
         fun calcDifferenceForNonPrivateMembers(members: (ProtoBuf.Class) -> List<MessageLite>): Collection<String> {
-            val oldMembers = members(oldProto).filterNot { it.isPrivate }
-            val newMembers = members(newProto).filterNot { it.isPrivate }
+            konst oldMembers = members(oldProto).filterNot { it.isPrivate }
+            konst newMembers = members(newProto).filterNot { it.isPrivate }
             return calcDifferenceForMembers(oldMembers, newMembers)
         }
 
         for (kind in diff) {
             @Suppress("UNUSED_VARIABLE") // To make this 'when' exhaustive
-            val unused: Any = when (kind!!) {
+            konst unused: Any = when (kind!!) {
                 ProtoBufClassKind.COMPANION_OBJECT_NAME -> {
                     if (oldProto.hasCompanionObjectName()) oldProto.companionObjectName.oldToNames()
                     if (newProto.hasCompanionObjectName()) newProto.companionObjectName.newToNames()
@@ -220,7 +220,7 @@ class DifferenceCalculatorForClass(
                     names.addAll(calcDifferenceForNames(oldProto.nestedClassNameList, newProto.nestedClassNameList))
                 }
                 ProtoBufClassKind.CONSTRUCTOR_LIST -> {
-                    val differentNonPrivateConstructors = calcDifferenceForNonPrivateMembers(ProtoBuf.Class::getConstructorList)
+                    konst differentNonPrivateConstructors = calcDifferenceForNonPrivateMembers(ProtoBuf.Class::getConstructorList)
                     isClassAffected = isClassAffected || differentNonPrivateConstructors.isNotEmpty()
                 }
                 ProtoBufClassKind.FUNCTION_LIST ->
@@ -260,9 +260,9 @@ class DifferenceCalculatorForClass(
                     isClassAffected = true
                     areSubclassesAffected = true
 
-                    val oldSupertypes = oldProto.supertypeList.map { oldNameResolver.getClassId(it.className).asSingleFqName() }
-                    val newSupertypes = newProto.supertypeList.map { newNameResolver.getClassId(it.className).asSingleFqName() }
-                    val changed = (oldSupertypes union newSupertypes) subtract (oldSupertypes intersect newSupertypes)
+                    konst oldSupertypes = oldProto.supertypeList.map { oldNameResolver.getClassId(it.className).asSingleFqName() }
+                    konst newSupertypes = newProto.supertypeList.map { newNameResolver.getClassId(it.className).asSingleFqName() }
+                    konst changed = (oldSupertypes union newSupertypes) subtract (oldSupertypes intersect newSupertypes)
                     changedSupertypes.addAll(changed)
                 }
                 ProtoBufClassKind.JVM_EXT_CLASS_MODULE_NAME,
@@ -312,7 +312,7 @@ class DifferenceCalculatorForClass(
     companion object {
 
         fun ClassProtoData.getNonPrivateMembers(): List<String> {
-            val membersResolvers: List<(ProtoBuf.Class) -> List<MessageLite>> = listOf(
+            konst membersResolvers: List<(ProtoBuf.Class) -> List<MessageLite>> = listOf(
                 // This list must match the logic in `DifferenceCalculatorForClass.difference`
                 // TODO: Consider adding COMPANION_OBJECT_NAME and NESTED_CLASS_NAME_LIST as they are also members of a class (see
                 // `DifferenceCalculatorForClass.difference`)
@@ -330,10 +330,10 @@ class DifferenceCalculatorForClass(
 }
 
 class DifferenceCalculatorForPackageFacade(
-    private val oldData: PackagePartProtoData,
-    private val newData: PackagePartProtoData
+    private konst oldData: PackagePartProtoData,
+    private konst newData: PackagePartProtoData
 ) : DifferenceCalculator() {
-    override val compareObject = ProtoCompareGenerated(
+    override konst compareObject = ProtoCompareGenerated(
         oldNameResolver = oldData.nameResolver,
         newNameResolver = newData.nameResolver,
         oldTypeTable = oldData.proto.typeTableOrNull,
@@ -341,22 +341,22 @@ class DifferenceCalculatorForPackageFacade(
     )
 
     override fun difference(): Difference {
-        val oldProto = oldData.proto
-        val newProto = newData.proto
+        konst oldProto = oldData.proto
+        konst newProto = newData.proto
 
-        val diff = compareObject.difference(oldProto, newProto)
+        konst diff = compareObject.difference(oldProto, newProto)
 
-        val names = hashSetOf<String>()
+        konst names = hashSetOf<String>()
 
         fun calcDifferenceForNonPrivateMembers(members: (ProtoBuf.Package) -> List<MessageLite>): Collection<String> {
-            val oldMembers = members(oldProto).filterNot { it.isPrivate }
-            val newMembers = members(newProto).filterNot { it.isPrivate }
+            konst oldMembers = members(oldProto).filterNot { it.isPrivate }
+            konst newMembers = members(newProto).filterNot { it.isPrivate }
             return calcDifferenceForMembers(oldMembers, newMembers)
         }
 
         for (kind in diff) {
             @Suppress("UNUSED_VARIABLE") // To make this 'when' exhaustive
-            val unused: Any = when (kind!!) {
+            konst unused: Any = when (kind!!) {
                 ProtoBufPackageKind.FUNCTION_LIST ->
                     names.addAll(calcDifferenceForNonPrivateMembers(ProtoBuf.Package::getFunctionList))
                 ProtoBufPackageKind.PROPERTY_LIST ->
@@ -386,7 +386,7 @@ class DifferenceCalculatorForPackageFacade(
     companion object {
 
         fun PackagePartProtoData.getNonPrivateMembers(): List<String> {
-            val membersResolvers: List<(ProtoBuf.Package) -> List<MessageLite>> = listOf(
+            konst membersResolvers: List<(ProtoBuf.Package) -> List<MessageLite>> = listOf(
                 // This list must match the logic in `DifferenceCalculatorForPackageFacade.difference`
                 ProtoBuf.Package::getFunctionList,
                 ProtoBuf.Package::getPropertyList,
@@ -399,16 +399,16 @@ class DifferenceCalculatorForPackageFacade(
     }
 }
 
-private val ProtoBuf.Class.isSealed: Boolean
+private konst ProtoBuf.Class.isSealed: Boolean
     get() = ProtoBuf.Modality.SEALED == Flags.MODALITY.get(flags)
 
-internal val ProtoBuf.Class.isCompanionObject: Boolean
+internal konst ProtoBuf.Class.isCompanionObject: Boolean
     get() = ProtoBuf.Class.Kind.COMPANION_OBJECT == Flags.CLASS_KIND.get(flags)
 
-val ProtoBuf.Class.typeTableOrNull: ProtoBuf.TypeTable?
+konst ProtoBuf.Class.typeTableOrNull: ProtoBuf.TypeTable?
     get() = if (hasTypeTable()) typeTable else null
 
-val ProtoBuf.Package.typeTableOrNull: ProtoBuf.TypeTable?
+konst ProtoBuf.Package.typeTableOrNull: ProtoBuf.TypeTable?
     get() = if (hasTypeTable()) typeTable else null
 
 internal fun ClassProtoData.getCompanionObjectName(): String? {

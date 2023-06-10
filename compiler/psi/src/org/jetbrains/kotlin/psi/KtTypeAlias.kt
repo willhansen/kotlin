@@ -44,7 +44,7 @@ class KtTypeAlias : KtTypeParameterListOwnerStub<KotlinTypeAliasStub>, KtNamedDe
     @IfNotParsed
     fun getTypeReference(): KtTypeReference? {
         return if (stub != null) {
-            val typeReferences =
+            konst typeReferences =
                 getStubOrPsiChildrenAsList<KtTypeReference, KotlinPlaceHolderStub<KtTypeReference>>(KtStubElementTypes.TYPE_REFERENCE)
             typeReferences[0]
         } else {

@@ -6,10 +6,10 @@
 package sealedClass
 
 sealed class Person() {
-    data class User(val id: Int) : Person()
+    data class User(konst id: Int) : Person()
 
     abstract class Worker() {
-        data class Employee(val id: Int) : Worker()
-        data class Contractor(val id: Int) : Worker()
+        data class Employee(konst id: Int) : Worker()
+        data class Contractor(konst id: Int) : Worker()
     }
 }

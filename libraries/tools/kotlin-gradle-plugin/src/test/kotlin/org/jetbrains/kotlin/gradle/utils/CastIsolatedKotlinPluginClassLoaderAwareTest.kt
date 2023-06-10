@@ -18,8 +18,8 @@ class CastIsolatedKotlinPluginClassLoaderAwareTest {
     interface A
     interface B : A
 
-    private val isolatedClassLoader by lazy {
-        val thisClassLoader = this::class.java.classLoader as? URLClassLoader
+    private konst isolatedClassLoader by lazy {
+        konst thisClassLoader = this::class.java.classLoader as? URLClassLoader
             ?: throw AssumptionViolatedException(
                 "Test required to load classes with ${URLClassLoader::class.java.name}. " +
                         "Found ${this::class.java.classLoader.javaClass.name}"
@@ -30,20 +30,20 @@ class CastIsolatedKotlinPluginClassLoaderAwareTest {
 
     @Test
     fun `test downcast`() {
-        val b = object : B {}
-        val a = b.castIsolatedKotlinPluginClassLoaderAware<A>()
+        konst b = object : B {}
+        konst a = b.castIsolatedKotlinPluginClassLoaderAware<A>()
         assertSame(b, a)
     }
 
     @Test
     fun `test impossible cast`() {
-        val a = object : A {}
+        konst a = object : A {}
         assertNull(
             a.castIsolatedKotlinPluginClassLoaderAware<B?>(),
             "Expected impossible cast to return null since the type parameter is marked nullable"
         )
 
-        val exception = assertThrows<ClassCastException>(
+        konst exception = assertThrows<ClassCastException>(
             "Expected impossible cast to throw 'ClassCastException' because type parameter is not marked nullable"
         ) { a.castIsolatedKotlinPluginClassLoaderAware<B>() }
 
@@ -57,10 +57,10 @@ class CastIsolatedKotlinPluginClassLoaderAwareTest {
     fun `test downcast - with isolated classpath`() {
         class BImpl : B
 
-        val isolatedBInstance = isolatedClassLoader.loadClass(BImpl::class.java.name).constructors.single().newInstance()
+        konst isolatedBInstance = isolatedClassLoader.loadClass(BImpl::class.java.name).constructors.single().newInstance()
 
         run {
-            val exception = assertThrows<IsolatedKotlinClasspathClassCastException>(
+            konst exception = assertThrows<IsolatedKotlinClasspathClassCastException>(
                 "Expected 'ClassCastException' because of classloader isolation"
             ) { isolatedBInstance.castIsolatedKotlinPluginClassLoaderAware<A>() }
 
@@ -71,7 +71,7 @@ class CastIsolatedKotlinPluginClassLoaderAwareTest {
         }
 
         run {
-            val exception = assertThrows<IsolatedKotlinClasspathClassCastException> {
+            konst exception = assertThrows<IsolatedKotlinClasspathClassCastException> {
                 isolatedBInstance.castIsolatedKotlinPluginClassLoaderAware<A?>()
             }
 
@@ -83,10 +83,10 @@ class CastIsolatedKotlinPluginClassLoaderAwareTest {
     fun `test impossible cast - with isolated classpath`() {
         class AImpl : A
 
-        val isolatedAInstance = isolatedClassLoader.loadClass(AImpl::class.java.name).constructors.single().newInstance()
+        konst isolatedAInstance = isolatedClassLoader.loadClass(AImpl::class.java.name).constructors.single().newInstance()
 
         run {
-            val exception = assertThrows<IsolatedKotlinClasspathClassCastException>(
+            konst exception = assertThrows<IsolatedKotlinClasspathClassCastException>(
                 "Expected 'ClassCastException' because of classloader isolation"
             ) { isolatedAInstance.castIsolatedKotlinPluginClassLoaderAware<B>() }
 

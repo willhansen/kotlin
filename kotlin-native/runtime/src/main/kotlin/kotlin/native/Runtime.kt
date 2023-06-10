@@ -5,7 +5,7 @@
 package kotlin.native
 
 import kotlin.experimental.ExperimentalNativeApi
-import kotlin.native.concurrent.InvalidMutabilityException
+import kotlin.native.concurrent.InkonstidMutabilityException
 import kotlin.native.internal.ExportForCppRuntime
 import kotlin.native.internal.GCUnsafeCall
 import kotlin.native.internal.UnhandledExceptionHookHolder
@@ -62,8 +62,8 @@ public typealias ReportUnhandledExceptionHook = Function1<Throwable, Unit>
 public fun setUnhandledExceptionHook(hook: ReportUnhandledExceptionHook?): ReportUnhandledExceptionHook? {
     try {
         return UnhandledExceptionHookHolder.hook.swap(hook)
-    } catch (e: InvalidMutabilityException) {
-        throw InvalidMutabilityException("Unhandled exception hook must be frozen")
+    } catch (e: InkonstidMutabilityException) {
+        throw InkonstidMutabilityException("Unhandled exception hook must be frozen")
     }
 }
 
@@ -73,8 +73,8 @@ public fun setUnhandledExceptionHook(hook: ReportUnhandledExceptionHook?): Repor
 public fun setUnhandledExceptionHook(hook: ReportUnhandledExceptionHook): ReportUnhandledExceptionHook? {
     try {
         return UnhandledExceptionHookHolder.hook.swap(hook)
-    } catch (e: InvalidMutabilityException) {
-        throw InvalidMutabilityException("Unhandled exception hook must be frozen")
+    } catch (e: InkonstidMutabilityException) {
+        throw InkonstidMutabilityException("Unhandled exception hook must be frozen")
     }
 }
 
@@ -85,7 +85,7 @@ public fun setUnhandledExceptionHook(hook: ReportUnhandledExceptionHook): Report
 @SinceKotlin("1.6")
 @OptIn(FreezingIsDeprecated::class)
 public fun getUnhandledExceptionHook(): ReportUnhandledExceptionHook? {
-    return UnhandledExceptionHookHolder.hook.value
+    return UnhandledExceptionHookHolder.hook.konstue
 }
 
 /**

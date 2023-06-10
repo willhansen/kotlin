@@ -15,32 +15,32 @@ import org.jetbrains.kotlin.analysis.api.types.KtSubstitutor
 import org.jetbrains.kotlin.analysis.api.types.KtType
 
 internal class KtFe10FunctionLikeSignature<out S : KtFunctionLikeSymbol>(
-    private val _symbol: S,
-    private val _returnType: KtType,
-    private val _receiverType: KtType?,
-    private val _valueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>>,
+    private konst _symbol: S,
+    private konst _returnType: KtType,
+    private konst _receiverType: KtType?,
+    private konst _konstueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>>,
 ) : KtFunctionLikeSignature<S>() {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = _symbol.token
-    override val symbol: S
+    override konst symbol: S
         get() = withValidityAssertion { _symbol }
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { _returnType }
-    override val receiverType: KtType?
+    override konst receiverType: KtType?
         get() = withValidityAssertion { _receiverType }
-    override val valueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>>
-        get() = withValidityAssertion { _valueParameters }
+    override konst konstueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>>
+        get() = withValidityAssertion { _konstueParameters }
 
     override fun substitute(substitutor: KtSubstitutor): KtFunctionLikeSignature<S> = withValidityAssertion {
         KtFe10FunctionLikeSignature(
             symbol,
             substitutor.substitute(returnType),
             receiverType?.let { substitutor.substitute(it) },
-            valueParameters.map { valueParameter ->
+            konstueParameters.map { konstueParameter ->
                 KtFe10VariableLikeSignature<KtValueParameterSymbol>(
-                    valueParameter.symbol,
-                    substitutor.substitute(valueParameter.returnType),
-                    valueParameter.receiverType?.let { substitutor.substitute(it) }
+                    konstueParameter.symbol,
+                    substitutor.substitute(konstueParameter.returnType),
+                    konstueParameter.receiverType?.let { substitutor.substitute(it) }
                 )
             }
         )
@@ -55,7 +55,7 @@ internal class KtFe10FunctionLikeSignature<out S : KtFunctionLikeSymbol>(
         if (symbol != other.symbol) return false
         if (returnType != other.returnType) return false
         if (receiverType != other.receiverType) return false
-        if (valueParameters != other.valueParameters) return false
+        if (konstueParameters != other.konstueParameters) return false
 
         return true
     }
@@ -64,7 +64,7 @@ internal class KtFe10FunctionLikeSignature<out S : KtFunctionLikeSymbol>(
         var result = symbol.hashCode()
         result = 31 * result + returnType.hashCode()
         result = 31 * result + (receiverType?.hashCode() ?: 0)
-        result = 31 * result + valueParameters.hashCode()
+        result = 31 * result + konstueParameters.hashCode()
         return result
     }
 }

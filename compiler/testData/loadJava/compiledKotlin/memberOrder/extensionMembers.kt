@@ -11,14 +11,14 @@ class A {
     fun Int.f1() {
     }
 
-    val Int.c: Int
+    konst Int.c: Int
         get() = 1
 
-    val c: Int = { 2 }()
+    konst c: Int = { 2 }()
 
-    val d: Int = { 2 }()
+    konst d: Int = { 2 }()
 
-    val Int.d: Int
+    konst Int.d: Int
         get() = 1
 
     fun String.f2() {

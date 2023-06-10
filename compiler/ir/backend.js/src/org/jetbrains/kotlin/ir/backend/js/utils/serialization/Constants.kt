@@ -6,67 +6,67 @@
 package org.jetbrains.kotlin.ir.backend.js.utils.serialization
 
 // TODO: is it OK to just use UTF_8?
-val SerializationCharset = Charsets.UTF_8
+konst SerializationCharset = Charsets.UTF_8
 
 object StatementIds {
-    const val RETURN = 0
-    const val THROW = 1
-    const val BREAK = 2
-    const val CONTINUE = 3
-    const val DEBUGGER = 4
-    const val EXPRESSION = 5
-    const val VARS = 6
-    const val BLOCK = 7
-    const val COMPOSITE_BLOCK = 8
-    const val LABEL = 9
-    const val IF = 10
-    const val SWITCH = 11
-    const val WHILE = 12
-    const val DO_WHILE = 13
-    const val FOR = 14
-    const val FOR_IN = 15
-    const val TRY = 16
-    const val EMPTY = 17
-    const val SINGLE_LINE_COMMENT = 18
-    const val MULTI_LINE_COMMENT = 19
-    const val IMPORT = 20
-    const val EXPORT = 21
+    const konst RETURN = 0
+    const konst THROW = 1
+    const konst BREAK = 2
+    const konst CONTINUE = 3
+    const konst DEBUGGER = 4
+    const konst EXPRESSION = 5
+    const konst VARS = 6
+    const konst BLOCK = 7
+    const konst COMPOSITE_BLOCK = 8
+    const konst LABEL = 9
+    const konst IF = 10
+    const konst SWITCH = 11
+    const konst WHILE = 12
+    const konst DO_WHILE = 13
+    const konst FOR = 14
+    const konst FOR_IN = 15
+    const konst TRY = 16
+    const konst EMPTY = 17
+    const konst SINGLE_LINE_COMMENT = 18
+    const konst MULTI_LINE_COMMENT = 19
+    const konst IMPORT = 20
+    const konst EXPORT = 21
 }
 
 object ImportType {
-    const val ALL = 0
-    const val ITEMS = 1
-    const val DEFAULT = 2
+    const konst ALL = 0
+    const konst ITEMS = 1
+    const konst DEFAULT = 2
 }
 
 object ExportType {
-    const val ALL = 0
-    const val ITEMS = 1
+    const konst ALL = 0
+    const konst ITEMS = 1
 }
 
 object ExpressionIds {
-    const val THIS_REF = 0
-    const val NULL = 1
-    const val TRUE_LITERAL = 2
-    const val FALSE_LITERAL = 3
-    const val STRING_LITERAL = 4
-    const val REG_EXP = 5
-    const val INT_LITERAL = 6
-    const val DOUBLE_LITERAL = 7
-    const val ARRAY_LITERAL = 8
-    const val OBJECT_LITERAL = 9
-    const val FUNCTION = 10
-    const val DOC_COMMENT = 11
-    const val BINARY_OPERATION = 12
-    const val PREFIX_OPERATION = 13
-    const val POSTFIX_OPERATION = 14
-    const val CONDITIONAL = 15
-    const val ARRAY_ACCESS = 16
-    const val NAME_REFERENCE = 17
-    const val SIMPLE_NAME_REFERENCE = 18
-    const val PROPERTY_REFERENCE = 19
-    const val INVOCATION = 20
-    const val NEW = 21
-    const val CLASS = 22
-    const val SUPER_REF = 23
+    const konst THIS_REF = 0
+    const konst NULL = 1
+    const konst TRUE_LITERAL = 2
+    const konst FALSE_LITERAL = 3
+    const konst STRING_LITERAL = 4
+    const konst REG_EXP = 5
+    const konst INT_LITERAL = 6
+    const konst DOUBLE_LITERAL = 7
+    const konst ARRAY_LITERAL = 8
+    const konst OBJECT_LITERAL = 9
+    const konst FUNCTION = 10
+    const konst DOC_COMMENT = 11
+    const konst BINARY_OPERATION = 12
+    const konst PREFIX_OPERATION = 13
+    const konst POSTFIX_OPERATION = 14
+    const konst CONDITIONAL = 15
+    const konst ARRAY_ACCESS = 16
+    const konst NAME_REFERENCE = 17
+    const konst SIMPLE_NAME_REFERENCE = 18
+    const konst PROPERTY_REFERENCE = 19
+    const konst INVOCATION = 20
+    const konst NEW = 21
+    const konst CLASS = 22
+    const konst SUPER_REF = 23
 }

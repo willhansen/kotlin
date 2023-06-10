@@ -7,21 +7,21 @@ class Delegate() {
     operator fun getValue(instance: Any, property: KProperty<*>) : Int = 1
 
     @Deprecated("text")
-    operator fun setValue(instance: Any, property: KProperty<*>, value: Int) {}
+    operator fun setValue(instance: Any, property: KProperty<*>, konstue: Int) {}
 }
 
 class PropertyHolder {
     @Deprecated("text")
-    val x = 1
+    konst x = 1
 
     @Deprecated("text")
     var name = "String"
 
-    val valDelegate by <!DEPRECATION!>Delegate()<!>
+    konst konstDelegate by <!DEPRECATION!>Delegate()<!>
     var varDelegate by <!DEPRECATION, DEPRECATION!>Delegate()<!>
 
-    public val test1: String = ""
-        @Deprecated("val-getter") get
+    public konst test1: String = ""
+        @Deprecated("konst-getter") get
 
     public var test2: String = ""
         @Deprecated("var-getter") get
@@ -52,11 +52,11 @@ fun fn() {
     PropertyHolder().test4
     PropertyHolder().<!DEPRECATION!>test4<!> = ""
 
-    val a = PropertyHolder().<!DEPRECATION!>x<!>
-    val b = PropertyHolder().<!DEPRECATION!>name<!>
-    PropertyHolder().<!DEPRECATION!>name<!> = "value"
+    konst a = PropertyHolder().<!DEPRECATION!>x<!>
+    konst b = PropertyHolder().<!DEPRECATION!>name<!>
+    PropertyHolder().<!DEPRECATION!>name<!> = "konstue"
 
-    val d = PropertyHolder().valDelegate
+    konst d = PropertyHolder().konstDelegate
     PropertyHolder().varDelegate = 1
 }
 

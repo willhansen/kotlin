@@ -3,13 +3,13 @@
 
 import kotlin.contracts.*
 
-inline fun <reified T> requreIsInstance(value: Any) contract <!UNSUPPORTED_FEATURE!>[
-    returns() implies (value is T)
+inline fun <reified T> requreIsInstance(konstue: Any) contract <!UNSUPPORTED_FEATURE!>[
+    returns() implies (konstue is T)
 ]<!> {
-    if (value !is T) throw IllegalArgumentException()
+    if (konstue !is T) throw IllegalArgumentException()
 }
 
-val Any?.myLength: Int?
+konst Any?.myLength: Int?
     get() contract <!CONTRACT_NOT_ALLOWED, UNSUPPORTED_FEATURE!>[
         <!ERROR_IN_CONTRACT_DESCRIPTION!>returnsNotNull() implies (this@length is String)<!>
     ]<!> = (this as? String)?.length

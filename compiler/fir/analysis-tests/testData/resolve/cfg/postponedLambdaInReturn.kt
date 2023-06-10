@@ -3,22 +3,22 @@
 import kotlin.contracts.*
 
 class Lateinit<R : Any> {
-    lateinit var value: R
+    lateinit var konstue: R
 }
 
 @OptIn(ExperimentalContracts::class)
 public inline fun <R : Any> build(crossinline builder: Lateinit<R>.() -> Unit): R {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
-    return Lateinit<R>().apply(builder).value
+    return Lateinit<R>().apply(builder).konstue
 }
 
-val p = false
+konst p = false
 
 fun test1() {
     var y: String? = null
-    val x: String = run {
+    konst x: String = run {
         if (p)
-            return@run build { y as String; value = "..." }
+            return@run build { y as String; konstue = "..." }
         else
             return@run ""
     }
@@ -26,10 +26,10 @@ fun test1() {
 }
 
 fun test2() {
-    val x: String = run {
+    konst x: String = run {
         while (true) {
             try {
-                return@run build { value = "..." }
+                return@run build { konstue = "..." }
             } catch (e: Throwable) {}
         }
         throw Exception()
@@ -40,9 +40,9 @@ fun test2() {
 fun test3() {
     var y: String?
     y = ""
-    val x: String = run {
+    konst x: String = run {
         if (!p)
-            return@run build { y = null; value = "..." }
+            return@run build { y = null; konstue = "..." }
         else
             return@run ""
     }

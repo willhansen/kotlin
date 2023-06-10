@@ -1,2 +1,2 @@
 @JsExport
-val topLevelForLazy = { println(">>> TEST OUT: TOP LEVEL!"); 0 }()
+konst topLevelForLazy = { println(">>> TEST OUT: TOP LEVEL!"); 0 }()

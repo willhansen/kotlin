@@ -34,7 +34,7 @@ class A {
 
   }
 
-  val a: Any?
+  konst a: Any?
     field = a
     get
 

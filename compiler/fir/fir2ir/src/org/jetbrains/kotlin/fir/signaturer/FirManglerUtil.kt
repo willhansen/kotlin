@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.name.SpecialNames
  * `<get-foo>` and `<set-foo>` for property accessors, name as is for variables and simple functions,
  * and `<anonymous>` for anonymous functions.
  */
-val FirCallableDeclaration.irName: Name
+konst FirCallableDeclaration.irName: Name
     get() = when (this) {
         is FirConstructor -> SpecialNames.INIT
         is FirSimpleFunction -> this.name
@@ -28,9 +28,9 @@ val FirCallableDeclaration.irName: Name
  *
  * If the corresponding property has name `foo`, this will return `<get-foo>` or `<set-foo>`.
  */
-val FirPropertyAccessor.irName: Name
+konst FirPropertyAccessor.irName: Name
     get() {
-        val prefix = when {
+        konst prefix = when {
             isGetter -> "<get-"
             isSetter -> "<set-"
             else -> error("unknown property accessor kind $this")

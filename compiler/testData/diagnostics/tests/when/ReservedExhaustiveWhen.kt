@@ -11,12 +11,12 @@
 
 infix fun Any.sealed(a: Any?) {}
 
-val x = 1 <!UNSUPPORTED!>sealed<!> when (1) {
+konst x = 1 <!UNSUPPORTED!>sealed<!> when (1) {
     1 -> 1
     else -> 2
 }
 
-val x1 = 1 <!UNSUPPORTED!>sealed<!> /**/ when (1) {
+konst x1 = 1 <!UNSUPPORTED!>sealed<!> /**/ when (1) {
     1 -> 1
     else -> 2
 }

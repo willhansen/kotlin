@@ -4,7 +4,7 @@
 
 package x
 
-inline class A(val value: String)
+inline class A(konst konstue: String)
 
 fun interface B {
     fun method(a: A): String
@@ -17,6 +17,6 @@ package y
 
 import x.*
 
-val b = B { it.value }
+konst b = B { it.konstue }
 
 fun box(): String = b.method(A("OK"))

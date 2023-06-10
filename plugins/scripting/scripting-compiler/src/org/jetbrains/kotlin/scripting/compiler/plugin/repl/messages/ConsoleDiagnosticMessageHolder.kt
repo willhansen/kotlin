@@ -14,9 +14,9 @@ import java.io.PrintStream
 
 class ConsoleDiagnosticMessageHolder : MessageCollectorBasedReporter,
     DiagnosticMessageHolder {
-    private val outputStream = ByteArrayOutputStream()
+    private konst outputStream = ByteArrayOutputStream()
 
-    override val messageCollector: GroupingMessageCollector = GroupingMessageCollector(
+    override konst messageCollector: GroupingMessageCollector = GroupingMessageCollector(
         PrintingMessageCollector(PrintStream(outputStream), MessageRenderer.WITHOUT_PATHS, false),
         false
     )

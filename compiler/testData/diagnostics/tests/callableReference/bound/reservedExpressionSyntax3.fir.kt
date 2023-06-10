@@ -15,15 +15,15 @@ class a {
 fun Int.foo() = Right
 
 class Test {
-    val a: List<Int> = null!!
+    konst a: List<Int> = null!!
 
-    val <T> List<T>.b: Int get() = 42
+    konst <T> List<T>.b: Int get() = 42
 
-    val Int.c: Int get() = 42
+    konst Int.c: Int get() = 42
 
-    val test1: () -> Right = a.b.c::foo
-    val test1a: () -> Right = a.<!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>b<!><Int>.c::foo
+    konst test1: () -> Right = a.b.c::foo
+    konst test1a: () -> Right = a.<!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>b<!><Int>.c::foo
 
-    val test2: () -> Right = a.b.c?::foo
-    val test2a: () -> Right = a.<!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>b<!><Int>.c?::foo
+    konst test2: () -> Right = a.b.c?::foo
+    konst test2a: () -> Right = a.<!EXPLICIT_TYPE_ARGUMENTS_IN_PROPERTY_ACCESS!>b<!><Int>.c?::foo
 }

@@ -79,80 +79,80 @@ public final class Another9 {
 }
 
 public final class Bar1</*0*/ T> {
-    public constructor Bar1</*0*/ T>(/*0*/ value: Foo1<T>)
-    public final val value: Foo1<T>
+    public constructor Bar1</*0*/ T>(/*0*/ konstue: Foo1<T>)
+    public final konst konstue: Foo1<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar10</*0*/ T> {
-    public constructor Bar10</*0*/ T>(/*0*/ value: Foo10<T>)
-    public final val value: Foo10<T>
+    public constructor Bar10</*0*/ T>(/*0*/ konstue: Foo10<T>)
+    public final konst konstue: Foo10<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar2</*0*/ T> {
-    public constructor Bar2</*0*/ T>(/*0*/ value: Foo2<T>)
-    public final val value: Foo2<T>
+    public constructor Bar2</*0*/ T>(/*0*/ konstue: Foo2<T>)
+    public final konst konstue: Foo2<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar3</*0*/ T> {
-    public constructor Bar3</*0*/ T>(/*0*/ value: Foo3<T>)
-    public final val value: Foo3<T>
+    public constructor Bar3</*0*/ T>(/*0*/ konstue: Foo3<T>)
+    public final konst konstue: Foo3<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar4</*0*/ T> {
-    public constructor Bar4</*0*/ T>(/*0*/ value: Foo4<T>)
-    public final val value: Foo4<T>
+    public constructor Bar4</*0*/ T>(/*0*/ konstue: Foo4<T>)
+    public final konst konstue: Foo4<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar5 {
-    public constructor Bar5(/*0*/ value: Foo5)
-    public final val value: Foo5
+    public constructor Bar5(/*0*/ konstue: Foo5)
+    public final konst konstue: Foo5
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar6</*0*/ T> {
-    public constructor Bar6</*0*/ T>(/*0*/ value: Foo6<T>)
-    public final val value: Foo6<T>
+    public constructor Bar6</*0*/ T>(/*0*/ konstue: Foo6<T>)
+    public final konst konstue: Foo6<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar7</*0*/ T> {
-    public constructor Bar7</*0*/ T>(/*0*/ value: Foo7<T>)
-    public final val value: Foo7<T>
+    public constructor Bar7</*0*/ T>(/*0*/ konstue: Foo7<T>)
+    public final konst konstue: Foo7<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar8</*0*/ T> {
-    public constructor Bar8</*0*/ T>(/*0*/ value: Foo8<T>)
-    public final val value: Foo8<T>
+    public constructor Bar8</*0*/ T>(/*0*/ konstue: Foo8<T>)
+    public final konst konstue: Foo8<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final class Bar9</*0*/ T> {
-    public constructor Bar9</*0*/ T>(/*0*/ value: Foo9<T>)
-    public final val value: Foo9<T>
+    public constructor Bar9</*0*/ T>(/*0*/ konstue: Foo9<T>)
+    public final konst konstue: Foo9<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

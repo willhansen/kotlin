@@ -18,13 +18,13 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitorVoid
 object UnreachableCodeChecker : FirControlFlowChecker() {
 
     override fun analyze(graph: ControlFlowGraph, reporter: DiagnosticReporter, context: CheckerContext) {
-        val nodes = graph.allNodes()
-        val (unreachableNodes, reachableNodes) = nodes.filterNot { it.skipNode() }.partition { it.isDead }
+        konst nodes = graph.allNodes()
+        konst (unreachableNodes, reachableNodes) = nodes.filterNot { it.skipNode() }.partition { it.isDead }
         if (unreachableNodes.isEmpty()) return
-        val unreachableSources = unreachableNodes.mapNotNull { it.fir.source }.toSet()
-        val reachableSources = reachableNodes.mapNotNull { it.fir.source }.toSet()
-        val unreachableElements = unreachableNodes.map { it.fir }
-        val innerNodes = mutableSetOf<FirElement>()
+        konst unreachableSources = unreachableNodes.mapNotNull { it.fir.source }.toSet()
+        konst reachableSources = reachableNodes.mapNotNull { it.fir.source }.toSet()
+        konst unreachableElements = unreachableNodes.map { it.fir }
+        konst innerNodes = mutableSetOf<FirElement>()
         unreachableElements.forEach { it.collectInnerNodes(innerNodes) }
         unreachableElements.distinctBy { it.source }.forEach { element ->
             if (element !in innerNodes) {
@@ -39,14 +39,14 @@ object UnreachableCodeChecker : FirControlFlowChecker() {
         return acc
     }
 
-    private val sourceKindsToSkip = setOf(
+    private konst sourceKindsToSkip = setOf(
         KtFakeSourceElementKind.ImplicitReturn.FromExpressionBody,
         KtFakeSourceElementKind.ImplicitReturn.FromLastStatement,
         KtFakeSourceElementKind.DesugaredForLoop
     )
 
     private fun CFGNode<*>.skipNode(): Boolean {
-        val skipType = this is ExitNodeMarker ||
+        konst skipType = this is ExitNodeMarker ||
                 this is EnterNodeMarker ||
                 this is StubNode ||
                 this is SplitPostponedLambdasNode ||
@@ -57,7 +57,7 @@ object UnreachableCodeChecker : FirControlFlowChecker() {
                 this is WhenSyntheticElseBranchNode ||
                 this is WhenBranchResultEnterNode ||
                 this is WhenBranchResultExitNode
-        val allowType = this is LoopEnterNode ||
+        konst allowType = this is LoopEnterNode ||
                 this is LoopBlockEnterNode ||
                 this is TryExpressionEnterNode
         return !allowType && (skipType || sourceKindsToSkip.contains(this.fir.source?.kind))
@@ -68,7 +68,7 @@ object UnreachableCodeChecker : FirControlFlowChecker() {
         acceptChildren(CollectNodesVisitor(nodes))
     }
 
-    private class CollectNodesVisitor(private val nodes: MutableSet<FirElement>) : FirVisitorVoid() {
+    private class CollectNodesVisitor(private konst nodes: MutableSet<FirElement>) : FirVisitorVoid() {
         override fun visitElement(element: FirElement) {
             nodes.add(element)
             element.acceptChildren(this)

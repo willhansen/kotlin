@@ -3,10 +3,10 @@
 // FIR_IDENTICAL
 
 class C {
-    val s: String by this
+    konst s: String by this
 }
 
-val c = C()
+konst c = C()
 
 operator fun C.getValue(thisRef: Any?, property: Any?) =
     if (this == c && thisRef == c) "OK" else "Failed"

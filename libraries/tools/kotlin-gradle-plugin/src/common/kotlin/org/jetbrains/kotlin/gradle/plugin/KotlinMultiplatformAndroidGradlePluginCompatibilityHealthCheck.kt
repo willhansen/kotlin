@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 internal object KotlinMultiplatformAndroidGradlePluginCompatibilityHealthCheck {
 
-    val compatibleAndroidGradlePluginVersionRange = AndroidGradlePluginVersionRange(
+    konst compatibleAndroidGradlePluginVersionRange = AndroidGradlePluginVersionRange(
         minSupportedVersion = AndroidGradlePluginVersionRange.Version(7, 0),
         maxSupportedVersion = AndroidGradlePluginVersionRange.Version(8, 2)
     )
@@ -27,11 +27,11 @@ internal object KotlinMultiplatformAndroidGradlePluginCompatibilityHealthCheck {
     /**
      * Used to store project paths that executed this health check
      */
-    const val PROPERTY_KEY_EXECUTED_PROJECT_PATHS = "KotlinMultiplatformAndroidGradlePluginCompatibilityHealthCheck.executedProjects"
+    const konst PROPERTY_KEY_EXECUTED_PROJECT_PATHS = "KotlinMultiplatformAndroidGradlePluginCompatibilityHealthCheck.executedProjects"
 
     data class AndroidGradlePluginVersionRange(
-        val minSupportedVersion: Version,
-        val maxSupportedVersion: Version
+        konst minSupportedVersion: Version,
+        konst maxSupportedVersion: Version
     ) {
 
         constructor(
@@ -42,7 +42,7 @@ internal object KotlinMultiplatformAndroidGradlePluginCompatibilityHealthCheck {
             maxSupportedVersion = Version(maxSupportedVersionMajor, maxSupportedVersionMinor)
         )
 
-        data class Version(val major: Int, val minor: Int)
+        data class Version(konst major: Int, konst minor: Int)
 
         fun isTooHigh(version: AndroidGradlePluginVersion): Boolean {
             if (version.major > this.maxSupportedVersion.major) return true
@@ -70,7 +70,7 @@ internal object KotlinMultiplatformAndroidGradlePluginCompatibilityHealthCheck {
     fun Project.runMultiplatformAndroidGradlePluginCompatibilityHealthCheckWhenAndroidIsApplied(
         androidGradlePluginVersionProvider: AndroidGradlePluginVersionProvider = AndroidGradlePluginVersionProvider.Default
     ) {
-        val executed = AtomicBoolean(false)
+        konst executed = AtomicBoolean(false)
         androidPluginIds.forEach { id ->
             plugins.withId(id) {
                 if (!executed.getAndSet(true)) {
@@ -91,16 +91,16 @@ internal object KotlinMultiplatformAndroidGradlePluginCompatibilityHealthCheck {
         /* Return when no android plugin is applied */
         findAppliedAndroidPluginIdOrNull() ?: return@check
 
-        val collector = project.kotlinToolingDiagnosticsCollector
-        val androidGradlePluginVersion = androidGradlePluginVersionProvider.getAndroidGradlePluginVersion()
+        konst collector = project.kotlinToolingDiagnosticsCollector
+        konst androidGradlePluginVersion = androidGradlePluginVersionProvider.getAndroidGradlePluginVersion()
         if (androidGradlePluginVersion == null) {
             collector.reportOncePerGradleBuild(project, FailedToGetAgpVersionWarning())
             return@check
         }
 
-        val minSupportedRendered = compatibleAndroidGradlePluginVersionRange.minSupportedVersion.major.toString() +
+        konst minSupportedRendered = compatibleAndroidGradlePluginVersionRange.minSupportedVersion.major.toString() +
                 "." + compatibleAndroidGradlePluginVersionRange.minSupportedVersion.minor
-        val maxTestedRendered = compatibleAndroidGradlePluginVersionRange.maxSupportedVersion.major.toString() +
+        konst maxTestedRendered = compatibleAndroidGradlePluginVersionRange.maxSupportedVersion.major.toString() +
                 "." + compatibleAndroidGradlePluginVersionRange.maxSupportedVersion.minor
 
         if (compatibleAndroidGradlePluginVersionRange.isTooLow(androidGradlePluginVersion)) {

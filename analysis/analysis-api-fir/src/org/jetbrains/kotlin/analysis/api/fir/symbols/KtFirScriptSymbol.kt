@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.fir.psi
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirScriptSymbol(
-    override val firSymbol: FirScriptSymbol,
-    override val analysisSession: KtFirAnalysisSession
+    override konst firSymbol: FirScriptSymbol,
+    override konst analysisSession: KtFirAnalysisSession
 ) : KtScriptSymbol(), KtFirSymbol<FirScriptSymbol> {
-    override val psi: PsiElement?
+    override konst psi: PsiElement?
         get() = withValidityAssertion { firSymbol.fir.psi }
 
-    override val annotationsList by cached {
+    override konst annotationsList by cached {
         KtFirAnnotationListForDeclaration.create(
             firSymbol,
             analysisSession.useSiteSession,
@@ -34,10 +34,10 @@ internal class KtFirScriptSymbol(
         )
     }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { emptyList() }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { firSymbol.fir.name }
 
     context(KtAnalysisSession)

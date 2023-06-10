@@ -6,11 +6,11 @@
 @file:JsExport
 
 open class A<T> {
-    open fun foo(value: T): T = value
+    open fun foo(konstue: T): T = konstue
 }
 
 class B: A<String>() {
-    override fun foo(value: String): String = value
+    override fun foo(konstue: String): String = konstue
 }
 
 // FILE: entry.mjs

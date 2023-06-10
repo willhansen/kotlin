@@ -2,10 +2,10 @@
 
 package test
 
-class W(val value: Any)
+class W(konst konstue: Any)
 
 inline fun W.safe(body : Any.() -> Unit) {
-    this.value?.body()
+    this.konstue?.body()
 }
 
 // FILE: 2.kt

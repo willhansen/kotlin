@@ -5,7 +5,7 @@
 
 import kotlin.test.*
 
-val p: Nothing = error("FAIL")
+konst p: Nothing = error("FAIL")
 
 fun main() {
     println("in kotlin main")

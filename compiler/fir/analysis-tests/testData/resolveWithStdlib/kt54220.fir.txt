@@ -1,5 +1,5 @@
 FILE: kt54220.kt
-    public final const val c: R|kotlin/UInt| = UInt(1).R|kotlin/UInt.plus|(UInt(2))
+    public final const konst c: R|kotlin/UInt| = UInt(1).R|kotlin/UInt.plus|(UInt(2))
         public get(): R|kotlin/UInt|
     public final fun box(): R|kotlin/String| {
         ^box when () {

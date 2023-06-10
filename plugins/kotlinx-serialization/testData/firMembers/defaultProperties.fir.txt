@@ -4,19 +4,19 @@ FILE: defaultProperties.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val ctor: R|kotlin/Int| = R|<local>/ctor|
+        public final konst ctor: R|kotlin/Int| = R|<local>/ctor|
             public get(): R|kotlin/Int|
 
-        public final val ctorDependent: R|kotlin/Int| = R|<local>/ctorDependent|
+        public final konst ctorDependent: R|kotlin/Int| = R|<local>/ctorDependent|
             public get(): R|kotlin/Int|
 
         public final var body: R|kotlin/String| = String()
             public get(): R|kotlin/String|
-            public set(value: R|kotlin/String|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/String|): R|kotlin/Unit|
 
         public final var bodyDependent: R|kotlin/Int| = this@R|/SomeClass|.R|/SomeClass.ctor|.R|kotlin/Int.plus|(Int(2))
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
         public final operator fun component1(): R|kotlin/Int|
 
@@ -34,11 +34,11 @@ FILE: defaultProperties.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<SomeClass>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|SomeClass|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|SomeClass|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|SomeClass|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -51,22 +51,22 @@ FILE: defaultProperties.kt
 
     }
     public final fun test(targetString: R|kotlin/String|): R|kotlin/String| {
-        lval json: R|kotlinx/serialization/json/Json| = R|kotlinx/serialization/json/Json|(<L> = Json@fun R|kotlinx/serialization/json/JsonBuilder|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        lkonst json: R|kotlinx/serialization/json/Json| = R|kotlinx/serialization/json/Json|(<L> = Json@fun R|kotlinx/serialization/json/JsonBuilder|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|kotlinx/serialization/json/JsonBuilder.encodeDefaults| = Boolean(true)
         }
         )
-        lval c: R|SomeClass| = R|/SomeClass.SomeClass|(Int(1)).R|kotlin/apply|<R|SomeClass|>(<L> = apply@fun R|SomeClass|.<anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
+        lkonst c: R|SomeClass| = R|/SomeClass.SomeClass|(Int(1)).R|kotlin/apply|<R|SomeClass|>(<L> = apply@fun R|SomeClass|.<anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
             this@R|special/anonymous|.R|/SomeClass.body| = String(x)
         }
         )
-        lval s: R|kotlin/String| = R|<local>/json|.R|kotlinx/serialization/json/Json.encodeToString|<R|SomeClass|>(Q|SomeClass|.R|/SomeClass.Companion.serializer|(), R|<local>/c|)
+        lkonst s: R|kotlin/String| = R|<local>/json|.R|kotlinx/serialization/json/Json.encodeToString|<R|SomeClass|>(Q|SomeClass|.R|/SomeClass.Companion.serializer|(), R|<local>/c|)
         when () {
             !=(R|<local>/s|, R|<local>/targetString|) ->  {
                 ^test R|<local>/s|
             }
         }
 
-        lval i2: R|SomeClass| = R|<local>/json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|SomeClass|>(Q|SomeClass|.R|/SomeClass.Companion.serializer|(), String({}))
+        lkonst i2: R|SomeClass| = R|<local>/json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|SomeClass|>(Q|SomeClass|.R|/SomeClass.Companion.serializer|(), String({}))
         when () {
             !=(R|<local>/i2|.R|/SomeClass.ctor|, Int(42)) ->  {
                 ^test String(Incorrect default ctor)

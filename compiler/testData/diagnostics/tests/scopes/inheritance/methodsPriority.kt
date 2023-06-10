@@ -10,7 +10,7 @@ fun foo() = ""
 
 open class B: A() {
     init {
-        val a: Int = <!DEBUG_INFO_LEAKING_THIS!>foo<!>()
+        konst a: Int = <!DEBUG_INFO_LEAKING_THIS!>foo<!>()
     }
 }
 
@@ -19,7 +19,7 @@ fun test() {
 
     class B: A() {
         init {
-            val a: Int = <!TYPE_MISMATCH!>foo()<!> // todo
+            konst a: Int = <!TYPE_MISMATCH!>foo()<!> // todo
         }
     }
 }
@@ -28,6 +28,6 @@ class E: A() {
     fun <!VIRTUAL_MEMBER_HIDDEN!>foo<!>() = A()
 
     init {
-        val a: A = foo() // todo: discuss
+        konst a: A = foo() // todo: discuss
     }
 }

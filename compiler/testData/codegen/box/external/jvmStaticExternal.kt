@@ -10,14 +10,14 @@ class WithNative {
     companion object {
         @JvmStatic external fun bar(l: Long, s: String): Double
 
-        @JvmStatic val prop: String external get
+        @JvmStatic konst prop: String external get
     }
 }
 
 object ObjWithNative {
     @JvmStatic external fun bar(l: Long, s: String): Double
 
-    @JvmStatic val prop: String external get
+    @JvmStatic konst prop: String external get
 }
 
 fun check(vararg allowed: String, block: () -> Unit) {

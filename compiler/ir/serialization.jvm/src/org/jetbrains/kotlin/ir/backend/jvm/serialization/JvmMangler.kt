@@ -52,14 +52,14 @@ object JvmIrMangler : IrBasedKotlinManglerImpl() {
         JvmIrManglerComputer(StringBuilder(256), mode, compatibleMode)
 }
 
-class JvmDescriptorMangler(private val mainDetector: MainFunctionDetector?) : DescriptorBasedKotlinManglerImpl() {
+class JvmDescriptorMangler(private konst mainDetector: MainFunctionDetector?) : DescriptorBasedKotlinManglerImpl() {
     private object ExportChecker : DescriptorExportCheckerVisitor() {
         override fun DeclarationDescriptor.isPlatformSpecificExported() = true
     }
 
     private class JvmDescriptorManglerComputer(
         builder: StringBuilder,
-        private val mainDetector: MainFunctionDetector?,
+        private konst mainDetector: MainFunctionDetector?,
         mode: MangleMode
     ) : DescriptorMangleComputer(builder, mode) {
         override fun addReturnTypeSpecialCase(function: FunctionDescriptor): Boolean = true

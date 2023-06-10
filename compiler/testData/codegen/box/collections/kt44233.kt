@@ -4,12 +4,12 @@
 import java.util.concurrent.ConcurrentSkipListSet
 
 class StringIterable : Iterable<String> {
-    private val strings = ConcurrentSkipListSet<String>()
+    private konst strings = ConcurrentSkipListSet<String>()
     override fun iterator() = strings.iterator()
 }
 
 fun box(): String {
-    val si = StringIterable()
+    konst si = StringIterable()
     return if (si.iterator().hasNext())
         "Failed"
     else

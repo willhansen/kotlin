@@ -29,10 +29,10 @@ class KotlinJvmTargetPreset(
     override fun createKotlinTargetConfigurator(): AbstractKotlinTargetConfigurator<KotlinJvmTarget> =
         KotlinJvmTargetConfigurator()
 
-    override val platformType: KotlinPlatformType
+    override konst platformType: KotlinPlatformType
         get() = KotlinPlatformType.jvm
 
     companion object {
-        const val PRESET_NAME = "jvm"
+        const konst PRESET_NAME = "jvm"
     }
 }

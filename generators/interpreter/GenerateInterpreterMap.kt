@@ -18,22 +18,22 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.Printer
 import java.io.File
 
-val DESTINATION = File("compiler/ir/ir.interpreter/src/org/jetbrains/kotlin/ir/interpreter/builtins/IrBuiltInsMapGenerated.kt")
+konst DESTINATION = File("compiler/ir/ir.interpreter/src/org/jetbrains/kotlin/ir/interpreter/builtins/IrBuiltInsMapGenerated.kt")
 
-private val integerTypes = listOf(PrimitiveType.BYTE, PrimitiveType.SHORT, PrimitiveType.INT, PrimitiveType.LONG).map { it.typeName.asString() }
-private val fpTypes = listOf(PrimitiveType.FLOAT, PrimitiveType.DOUBLE).map { it.typeName.asString() }
-private val numericTypes = PrimitiveType.NUMBER_TYPES.map { it.typeName.asString() }
+private konst integerTypes = listOf(PrimitiveType.BYTE, PrimitiveType.SHORT, PrimitiveType.INT, PrimitiveType.LONG).map { it.typeName.asString() }
+private konst fpTypes = listOf(PrimitiveType.FLOAT, PrimitiveType.DOUBLE).map { it.typeName.asString() }
+private konst numericTypes = PrimitiveType.NUMBER_TYPES.map { it.typeName.asString() }
 
 fun main() {
     GeneratorsFileUtil.writeFileIfContentChanged(DESTINATION, generateMap())
 }
 
 fun generateMap(): String {
-    val sb = StringBuilder()
-    val p = Printer(sb)
+    konst sb = StringBuilder()
+    konst p = Printer(sb)
     printPreamble(p)
 
-    val unaryOperations = getOperationMap(1).apply {
+    konst unaryOperations = getOperationMap(1).apply {
         this += Operation(BuiltInOperatorNames.CHECK_NOT_NULL, listOf("T0?"), customExpression = "a!!")
         this += Operation("toString", listOf("Any?"), customExpression = "a?.toString() ?: \"null\"")
         this += Operation("code", listOf("Char"), customExpression = "(a as Char).code")
@@ -41,9 +41,9 @@ fun generateMap(): String {
         this += Operation("toString", listOf("Unit"), customExpression = "Unit.toString()")
     }
 
-    val binaryOperations = getOperationMap(2) + getBinaryIrOperationMap() + getExtensionOperationMap()
+    konst binaryOperations = getOperationMap(2) + getBinaryIrOperationMap() + getExtensionOperationMap()
 
-    val ternaryOperations = getOperationMap(3)
+    konst ternaryOperations = getOperationMap(3)
 
     generateInterpretUnaryFunction(p, unaryOperations)
     generateInterpretBinaryFunction(p, binaryOperations)
@@ -97,7 +97,7 @@ private fun generateInterpretBinaryFunction(p: Printer, binaryOperations: List<O
         p.println("\"$name\" -> when (typeA) {")
         p.pushIndent()
         for ((typeA, operationsOnTypeA) in operations.groupBy(Operation::typeA)) {
-            val singleOperation = operationsOnTypeA.singleOrNull()
+            konst singleOperation = operationsOnTypeA.singleOrNull()
             if (singleOperation != null) {
                 // Slightly improve readability if there's only one operation with such name and typeA.
                 p.println("\"$typeA\" -> if (typeB == \"${singleOperation.typeB}\") return ${singleOperation.expressionString}")
@@ -147,18 +147,18 @@ private fun generateInterpretTernaryFunction(p: Printer, ternaryOperations: List
 }
 
 private data class Operation(
-    val name: String,
-    private val parameterTypes: List<String>,
-    val isFunction: Boolean = true,
-    val customExpression: String? = null,
+    konst name: String,
+    private konst parameterTypes: List<String>,
+    konst isFunction: Boolean = true,
+    konst customExpression: String? = null,
 ) {
-    val typeA: String get() = parameterTypes[0].addKotlinPackage()
-    val typeB: String get() = parameterTypes[1].addKotlinPackage()
-    val typeC: String get() = parameterTypes[2].addKotlinPackage()
+    konst typeA: String get() = parameterTypes[0].addKotlinPackage()
+    konst typeB: String get() = parameterTypes[1].addKotlinPackage()
+    konst typeC: String get() = parameterTypes[2].addKotlinPackage()
 
-    val expressionString: String
+    konst expressionString: String
         get() {
-            val receiver = castValueParenthesized("a", parameterTypes[0])
+            konst receiver = castValueParenthesized("a", parameterTypes[0])
             return when {
                 name == BuiltInOperatorNames.EQEQEQ -> "if (a is Proxy && b is Proxy) a.state === b.state else a === b"
                 customExpression != null -> customExpression
@@ -214,31 +214,31 @@ private data class Operation(
 }
 
 private fun getOperationMap(argumentsCount: Int): MutableList<Operation> {
-    val builtIns = DefaultBuiltIns.Instance
-    val operationMap = mutableListOf<Operation>()
-    val allPrimitiveTypes = PrimitiveType.values().map { builtIns.getBuiltInClassByFqName(it.typeFqName) }
-    val arrays = PrimitiveType.values().map { builtIns.getPrimitiveArrayClassDescriptor(it) } + builtIns.array
-    val additionalBuiltIns = listOf(
+    konst builtIns = DefaultBuiltIns.Instance
+    konst operationMap = mutableListOf<Operation>()
+    konst allPrimitiveTypes = PrimitiveType.konstues().map { builtIns.getBuiltInClassByFqName(it.typeFqName) }
+    konst arrays = PrimitiveType.konstues().map { builtIns.getPrimitiveArrayClassDescriptor(it) } + builtIns.array
+    konst additionalBuiltIns = listOf(
         builtIns.string, builtIns.any, builtIns.charSequence, builtIns.number, builtIns.comparable, builtIns.throwable
     )
 
     fun CallableDescriptor.isFakeOverride(classDescriptor: ClassDescriptor): Boolean {
-        val isPrimitive = KotlinBuiltIns.isPrimitiveClass(classDescriptor) || KotlinBuiltIns.isString(classDescriptor.defaultType)
-        val isFakeOverridden = (this as? FunctionDescriptor)?.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE
+        konst isPrimitive = KotlinBuiltIns.isPrimitiveClass(classDescriptor) || KotlinBuiltIns.isString(classDescriptor.defaultType)
+        konst isFakeOverridden = (this as? FunctionDescriptor)?.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE
         return !isPrimitive && isFakeOverridden
     }
 
-    val excludedBinaryOperations = listOf("rangeUntil").map { Name.identifier(it) }
+    konst excludedBinaryOperations = listOf("rangeUntil").map { Name.identifier(it) }
 
     for (classDescriptor in allPrimitiveTypes + additionalBuiltIns + arrays) {
-        val compileTimeFunctions = classDescriptor.unsubstitutedMemberScope.getContributedDescriptors()
+        konst compileTimeFunctions = classDescriptor.unsubstitutedMemberScope.getContributedDescriptors()
             .filterIsInstance<CallableDescriptor>()
-            .filter { !it.isFakeOverride(classDescriptor) && it.valueParameters.size + 1 == argumentsCount }
+            .filter { !it.isFakeOverride(classDescriptor) && it.konstueParameters.size + 1 == argumentsCount }
             .filter { it.name !in excludedBinaryOperations }
 
         for (function in compileTimeFunctions) {
-            val parameterTypes = listOf(classDescriptor.defaultType.constructor.toString()) +
-                    function.valueParameters.map { it.type.toString() }
+            konst parameterTypes = listOf(classDescriptor.defaultType.constructor.toString()) +
+                    function.konstueParameters.map { it.type.toString() }
             operationMap.add(Operation(function.name.asString(), parameterTypes, function is FunctionDescriptor))
         }
     }
@@ -247,13 +247,13 @@ private fun getOperationMap(argumentsCount: Int): MutableList<Operation> {
 }
 
 private fun getBinaryIrOperationMap(): List<Operation> {
-    val operationMap = mutableListOf<Operation>()
+    konst operationMap = mutableListOf<Operation>()
 
     fun addOperation(function: String, type: String) {
         operationMap.add(Operation(function, listOf(type, type)))
     }
 
-    val compareFunction = setOf(
+    konst compareFunction = setOf(
         BuiltInOperatorNames.LESS, BuiltInOperatorNames.LESS_OR_EQUAL, BuiltInOperatorNames.GREATER, BuiltInOperatorNames.GREATER_OR_EQUAL
     )
 
@@ -279,7 +279,7 @@ private fun getBinaryIrOperationMap(): List<Operation> {
 
 // TODO can be drop after serialization introduction
 private fun getExtensionOperationMap(): List<Operation> {
-    val operationMap = mutableListOf<Operation>()
+    konst operationMap = mutableListOf<Operation>()
 
     for (type in integerTypes) {
         for (otherType in integerTypes) {

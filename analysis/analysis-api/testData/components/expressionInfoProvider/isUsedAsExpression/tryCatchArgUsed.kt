@@ -1,5 +1,5 @@
 fun test() {
-    val x = try {
+    konst x = try {
         4
     } catch (<expr>e: Exception</expr>) {
         5

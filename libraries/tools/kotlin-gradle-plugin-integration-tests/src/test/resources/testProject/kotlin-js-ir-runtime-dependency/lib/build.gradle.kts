@@ -4,7 +4,7 @@ plugins {
 
 kotlin {
     js {
-        val otherCompilation = compilations.create("other")
+        konst otherCompilation = compilations.create("other")
         tasks.register<Zip>("otherKlib") {
             from(otherCompilation.output.allOutputs)
             archiveExtension.set("klib")
@@ -16,13 +16,13 @@ kotlin {
     }
 
     sourceSets {
-        val main by getting {
+        konst main by getting {
             kotlin.exclude("**/other/**")
             dependencies {
                 runtimeOnly(files(tasks.named("otherKlib")))
             }
         }
-        val other by getting {
+        konst other by getting {
             kotlin.srcDirs("src/main/kotlin/other")
             dependencies {
                 implementation(project(path = project.path))

@@ -19,7 +19,7 @@ public interface KtAnnotationQualifierRenderer {
     public object WITH_QUALIFIED_NAMES : KtAnnotationQualifierRenderer {
         context(KtAnalysisSession, KtAnnotationRenderer)
         override fun renderQualifier(annotation: KtAnnotationApplication, owner: KtAnnotated, printer: PrettyPrinter): Unit = printer {
-            val classId = annotation.classId
+            konst classId = annotation.classId
             if (classId != null) {
                 append(classId.asSingleFqName().render())
             } else {
@@ -31,7 +31,7 @@ public interface KtAnnotationQualifierRenderer {
     public object WITH_SHORT_NAMES : KtAnnotationQualifierRenderer {
         context(KtAnalysisSession, KtAnnotationRenderer)
         override fun renderQualifier(annotation: KtAnnotationApplication, owner: KtAnnotated, printer: PrettyPrinter): Unit = printer {
-            val classId = annotation.classId
+            konst classId = annotation.classId
             if (classId != null) {
                 printer.append(classId.shortClassName.render())
             } else {

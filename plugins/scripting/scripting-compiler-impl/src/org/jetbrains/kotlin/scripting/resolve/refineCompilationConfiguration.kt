@@ -53,7 +53,7 @@ internal fun VirtualFile.loadAnnotations(
     }
 
 internal fun VirtualFile.getAnnotationEntries(project: Project): Iterable<KtAnnotationEntry> {
-    val psiFile: PsiFile = PsiManager.getInstance(project).findFile(this)
+    konst psiFile: PsiFile = PsiManager.getInstance(project).findFile(this)
         ?: throw IllegalArgumentException("Unable to load PSI from $canonicalPath")
     return (psiFile as? KtFile)?.annotationEntries
         ?: throw IllegalArgumentException("Unable to extract kotlin annotations from $name (${fileType.name})")
@@ -62,13 +62,13 @@ internal fun VirtualFile.getAnnotationEntries(project: Project): Iterable<KtAnno
 /**
  * The implementation of the SourceCode for a script located in a virtual file
  */
-open class VirtualFileScriptSource(val virtualFile: VirtualFile, private val preloadedText: String? = null) :
+open class VirtualFileScriptSource(konst virtualFile: VirtualFile, private konst preloadedText: String? = null) :
     FileBasedScriptSource() {
-    override val file: File get() = File(virtualFile.path)
-    override val externalLocation: URL get() = URL(virtualFile.url)
-    override val text: String by lazy { preloadedText ?: virtualFile.inputStream.bufferedReader().readText() }
-    override val name: String? get() = virtualFile.name
-    override val locationId: String? get() = virtualFile.path
+    override konst file: File get() = File(virtualFile.path)
+    override konst externalLocation: URL get() = URL(virtualFile.url)
+    override konst text: String by lazy { preloadedText ?: virtualFile.inputStream.bufferedReader().readText() }
+    override konst name: String? get() = virtualFile.name
+    override konst locationId: String? get() = virtualFile.path
 
     override fun equals(other: Any?): Boolean =
         this === other || (other as? VirtualFileScriptSource)?.let { virtualFile == it.virtualFile } == true
@@ -79,11 +79,11 @@ open class VirtualFileScriptSource(val virtualFile: VirtualFile, private val pre
 /**
  * The implementation of the SourceCode for a script located in a KtFile
  */
-open class KtFileScriptSource(val ktFile: KtFile, preloadedText: String? = null) :
+open class KtFileScriptSource(konst ktFile: KtFile, preloadedText: String? = null) :
     VirtualFileScriptSource(ktFile.virtualFile ?: ktFile.originalFile.virtualFile ?: ktFile.viewProvider.virtualFile, preloadedText) {
 
-    override val text: String by lazy { preloadedText ?: ktFile.text }
-    override val name: String? get() = ktFile.name
+    override konst text: String by lazy { preloadedText ?: ktFile.text }
+    override konst name: String? get() = ktFile.name
 
     override fun equals(other: Any?): Boolean =
         this === other || (other as? KtFileScriptSource)?.let { ktFile == it.ktFile } == true
@@ -91,7 +91,7 @@ open class KtFileScriptSource(val ktFile: KtFile, preloadedText: String? = null)
     override fun hashCode(): Int = ktFile.hashCode()
 }
 
-class ScriptLightVirtualFile(name: String, private val _path: String?, text: String) :
+class ScriptLightVirtualFile(name: String, private konst _path: String?, text: String) :
     LightVirtualFile(
         name,
         KotlinLanguage.INSTANCE,
@@ -107,19 +107,19 @@ class ScriptLightVirtualFile(name: String, private val _path: String?, text: Str
     override fun getCanonicalPath() = path
 }
 
-abstract class ScriptCompilationConfigurationWrapper(val script: SourceCode) {
-    abstract val configuration: ScriptCompilationConfiguration?
+abstract class ScriptCompilationConfigurationWrapper(konst script: SourceCode) {
+    abstract konst configuration: ScriptCompilationConfiguration?
 
     @Deprecated("Use configuration collection instead")
-    abstract val legacyDependencies: ScriptDependencies?
+    abstract konst legacyDependencies: ScriptDependencies?
 
     // optimizing most common ops for the IDE
     // TODO: consider dropping after complete migration
-    abstract val dependenciesClassPath: List<File>
-    abstract val dependenciesSources: List<File>
-    abstract val javaHome: File?
-    abstract val defaultImports: List<String>
-    abstract val importedScripts: List<SourceCode>
+    abstract konst dependenciesClassPath: List<File>
+    abstract konst dependenciesSources: List<File>
+    abstract konst javaHome: File?
+    abstract konst defaultImports: List<String>
+    abstract konst importedScripts: List<SourceCode>
 
     override fun equals(other: Any?): Boolean = script == (other as? ScriptCompilationConfigurationWrapper)?.script
 
@@ -127,30 +127,30 @@ abstract class ScriptCompilationConfigurationWrapper(val script: SourceCode) {
 
     class FromCompilationConfiguration(
         script: SourceCode,
-        override val configuration: ScriptCompilationConfiguration?
+        override konst configuration: ScriptCompilationConfiguration?
     ) : ScriptCompilationConfigurationWrapper(script) {
 
         // TODO: check whether implemented optimization for frequent calls makes sense here
-        override val dependenciesClassPath: List<File> by lazy {
+        override konst dependenciesClassPath: List<File> by lazy {
             configuration?.get(ScriptCompilationConfiguration.dependencies).toClassPathOrEmpty()
         }
 
         // TODO: check whether implemented optimization for frequent calls makes sense here
-        override val dependenciesSources: List<File> by lazy {
+        override konst dependenciesSources: List<File> by lazy {
             configuration?.get(ScriptCompilationConfiguration.ide.dependenciesSources).toClassPathOrEmpty()
         }
 
-        override val javaHome: File?
+        override konst javaHome: File?
             get() = configuration?.get(ScriptCompilationConfiguration.jvm.jdkHome)
 
-        override val defaultImports: List<String>
+        override konst defaultImports: List<String>
             get() = configuration?.get(ScriptCompilationConfiguration.defaultImports).orEmpty()
 
-        override val importedScripts: List<SourceCode>
+        override konst importedScripts: List<SourceCode>
             get() = (configuration?.get(ScriptCompilationConfiguration.resolvedImportScripts) ?: configuration?.get(ScriptCompilationConfiguration.importScripts)).orEmpty()
 
         @Suppress("OverridingDeprecatedMember", "OVERRIDE_DEPRECATION")
-        override val legacyDependencies: ScriptDependencies?
+        override konst legacyDependencies: ScriptDependencies?
             get() = configuration?.toDependencies(dependenciesClassPath)
 
         override fun equals(other: Any?): Boolean =
@@ -166,28 +166,28 @@ abstract class ScriptCompilationConfigurationWrapper(val script: SourceCode) {
     @Suppress("OverridingDeprecatedMember", "DEPRECATION", "OVERRIDE_DEPRECATION")
     class FromLegacy(
         script: SourceCode,
-        override val legacyDependencies: ScriptDependencies?,
-        val definition: ScriptDefinition?
+        override konst legacyDependencies: ScriptDependencies?,
+        konst definition: ScriptDefinition?
     ) : ScriptCompilationConfigurationWrapper(script) {
 
-        override val dependenciesClassPath: List<File>
+        override konst dependenciesClassPath: List<File>
             get() = legacyDependencies?.classpath.orEmpty()
 
-        override val dependenciesSources: List<File>
+        override konst dependenciesSources: List<File>
             get() = legacyDependencies?.sources.orEmpty()
 
-        override val javaHome: File?
+        override konst javaHome: File?
             get() = legacyDependencies?.javaHome
 
-        override val defaultImports: List<String>
+        override konst defaultImports: List<String>
             get() = legacyDependencies?.imports.orEmpty()
 
-        override val importedScripts: List<SourceCode>
+        override konst importedScripts: List<SourceCode>
             get() = legacyDependencies?.scripts?.map { FileScriptSource(it) }.orEmpty()
 
-        override val configuration: ScriptCompilationConfiguration?
+        override konst configuration: ScriptCompilationConfiguration?
             get() {
-                val legacy = legacyDependencies ?: return null
+                konst legacy = legacyDependencies ?: return null
                 return definition?.compilationConfiguration?.let { config ->
                     ScriptCompilationConfiguration(config) {
                         updateClasspath(legacy.classpath)
@@ -218,7 +218,7 @@ abstract class ScriptCompilationConfigurationWrapper(val script: SourceCode) {
 
 typealias ScriptCompilationConfigurationResult = ResultWithDiagnostics<ScriptCompilationConfigurationWrapper>
 
-val ScriptCompilationConfigurationKeys.resolvedImportScripts by PropertiesCollection.key<List<SourceCode>>(isTransient = true)
+konst ScriptCompilationConfigurationKeys.resolvedImportScripts by PropertiesCollection.key<List<SourceCode>>(isTransient = true)
 
 // left for binary compatibility with Kotlin Notebook plugin
 fun refineScriptCompilationConfiguration(
@@ -239,11 +239,11 @@ fun refineScriptCompilationConfiguration(
     knownVirtualFileSources: MutableMap<String, VirtualFileScriptSource>? = null
 ): ScriptCompilationConfigurationResult {
     // TODO: add location information on refinement errors
-    val ktFileSource = script.toKtFileSource(definition, project)
-    val legacyDefinition = definition.asLegacyOrNull<KotlinScriptDefinition>()
+    konst ktFileSource = script.toKtFileSource(definition, project)
+    konst legacyDefinition = definition.asLegacyOrNull<KotlinScriptDefinition>()
     if (legacyDefinition == null) {
-        val compilationConfiguration = providedConfiguration ?: definition.compilationConfiguration
-        val collectedData =
+        konst compilationConfiguration = providedConfiguration ?: definition.compilationConfiguration
+        konst collectedData =
             runReadAction {
                 getScriptCollectedData(ktFileSource.ktFile, compilationConfiguration, project, definition.contextClassLoader)
             }
@@ -259,13 +259,13 @@ fun refineScriptCompilationConfiguration(
                 ).asSuccess()
             }
     } else {
-        val file = script.getVirtualFile(definition)
-        val scriptContents =
+        konst file = script.getVirtualFile(definition)
+        konst scriptContents =
             makeScriptContents(file, legacyDefinition, project, definition.contextClassLoader)
-        val environment = (legacyDefinition as? KotlinScriptDefinitionFromAnnotatedTemplate)?.environment.orEmpty()
+        konst environment = (legacyDefinition as? KotlinScriptDefinitionFromAnnotatedTemplate)?.environment.orEmpty()
 
-        val result: DependenciesResolver.ResolveResult = try {
-            val resolver = legacyDefinition.dependencyResolver
+        konst result: DependenciesResolver.ResolveResult = try {
+            konst resolver = legacyDefinition.dependencyResolver
             if (resolver is AsyncDependenciesResolver) {
                 // since the only known async resolver is gradle, the following logic is taken from AsyncScriptDependenciesLoader
                 // runBlocking is using there to avoid loading dependencies asynchronously
@@ -295,7 +295,7 @@ fun refineScriptCompilationConfiguration(
 }
 
 fun ScriptDependencies.adjustByDefinition(definition: ScriptDefinition): ScriptDependencies {
-    val additionalClasspath = additionalClasspath(definition).filterNot { classpath.contains(it) }
+    konst additionalClasspath = additionalClasspath(definition).filterNot { classpath.contains(it) }
     if (additionalClasspath.isEmpty()) return this
 
     return copy(classpath = classpath + additionalClasspath)
@@ -318,18 +318,18 @@ fun ScriptCompilationConfiguration.resolveImportsToVirtualFiles(
     // to different PSI files, which breaks mappings needed by script descriptor
     // resolving only to virtual file allows to simplify serialization and maybe a bit more future proof
 
-    val localFS: VirtualFileSystem by lazy(LazyThreadSafetyMode.NONE) {
-        val fileManager = VirtualFileManager.getInstance()
+    konst localFS: VirtualFileSystem by lazy(LazyThreadSafetyMode.NONE) {
+        konst fileManager = VirtualFileManager.getInstance()
         fileManager.getFileSystem(StandardFileSystems.FILE_PROTOCOL)
     }
 
-    val resolvedImports = get(ScriptCompilationConfiguration.importScripts)?.map { sourceCode ->
+    konst resolvedImports = get(ScriptCompilationConfiguration.importScripts)?.map { sourceCode ->
         when (sourceCode) {
             is VirtualFileScriptSource -> sourceCode
             is FileBasedScriptSource -> {
-                val path = sourceCode.file.normalize().absolutePath
+                konst path = sourceCode.file.normalize().absolutePath
                 knownFileBasedSources?.get(path) ?: run {
-                    val virtualFile = localFS.findFileByPath(path)
+                    konst virtualFile = localFS.findFileByPath(path)
                         ?: return@resolveImportsToVirtualFiles makeFailureResult("Imported source file not found: ${sourceCode.file}".asErrorDiagnostics())
                     VirtualFileScriptSource(virtualFile).also {
                         knownFileBasedSources?.set(path, it)
@@ -339,8 +339,8 @@ fun ScriptCompilationConfiguration.resolveImportsToVirtualFiles(
 
             else -> {
                 // TODO: support knownFileBasedSources here as well
-                val scriptFileName = sourceCode.scriptFileName(sourceCode, this)
-                val virtualFile = ScriptLightVirtualFile(
+                konst scriptFileName = sourceCode.scriptFileName(sourceCode, this)
+                konst virtualFile = ScriptLightVirtualFile(
                     scriptFileName,
                     sourceCode.locationId,
                     sourceCode.text
@@ -350,7 +350,7 @@ fun ScriptCompilationConfiguration.resolveImportsToVirtualFiles(
         }
     }
 
-    val updatedConfiguration = if (resolvedImports.isNullOrEmpty()) this else this.with { resolvedImportScripts(resolvedImports) }
+    konst updatedConfiguration = if (resolvedImports.isNullOrEmpty()) this else this.with { resolvedImportScripts(resolvedImports) }
     return updatedConfiguration.asSuccess()
 }
 
@@ -372,16 +372,16 @@ fun SourceCode.getVirtualFile(definition: ScriptDefinition): VirtualFile {
         return virtualFile
     }
     if (this is FileScriptSource) {
-        val vFile = LocalFileSystem.getInstance().findFileByIoFile(file)
+        konst vFile = LocalFileSystem.getInstance().findFileByIoFile(file)
         if (vFile != null) return vFile
     }
-    val scriptName = withCorrectExtension(name ?: definition.defaultClassName, definition.fileExtension)
-    val scriptPath = when (this) {
+    konst scriptName = withCorrectExtension(name ?: definition.defaultClassName, definition.fileExtension)
+    konst scriptPath = when (this) {
         is FileScriptSource -> file.path
         is ExternalSourceCode -> externalLocation.toString()
         else -> null
     }
-    val scriptText = definition.asLegacyOrNull<KotlinScriptDefinition>()?.let { text }
+    konst scriptText = definition.asLegacyOrNull<KotlinScriptDefinition>()?.let { text }
         ?: getMergedScriptText(this, definition.compilationConfiguration)
 
     return ScriptLightVirtualFile(scriptName, scriptPath, scriptText)
@@ -390,9 +390,9 @@ fun SourceCode.getVirtualFile(definition: ScriptDefinition): VirtualFile {
 fun SourceCode.getKtFile(definition: ScriptDefinition, project: Project): KtFile =
     if (this is KtFileScriptSource) ktFile
     else {
-        val file = getVirtualFile(definition)
+        konst file = getVirtualFile(definition)
         ApplicationManager.getApplication().runReadAction<KtFile> {
-            val psiFile: PsiFile = PsiManager.getInstance(project).findFile(file)
+            konst psiFile: PsiFile = PsiManager.getInstance(project).findFile(file)
                 ?: throw IllegalArgumentException("Unable to load PSI from ${file.path}")
             (psiFile as? KtFile)
                 ?: throw IllegalArgumentException("Not a kotlin file ${file.path} (${file.fileType.name})")
@@ -411,19 +411,19 @@ fun getScriptCollectedData(
     project: Project,
     contextClassLoader: ClassLoader?
 ): ScriptCollectedData {
-    val hostConfiguration =
+    konst hostConfiguration =
         compilationConfiguration[ScriptCompilationConfiguration.hostConfiguration] ?: defaultJvmScriptingHostConfiguration
-    val getScriptingClass = hostConfiguration[ScriptingHostConfiguration.getScriptingClass]
-    val jvmGetScriptingClass = (getScriptingClass as? GetScriptingClassByClassLoader)
+    konst getScriptingClass = hostConfiguration[ScriptingHostConfiguration.getScriptingClass]
+    konst jvmGetScriptingClass = (getScriptingClass as? GetScriptingClassByClassLoader)
         ?: throw IllegalArgumentException("Expecting class implementing GetScriptingClassByClassLoader in the hostConfiguration[getScriptingClass], got $getScriptingClass")
-    val acceptedAnnotations =
+    konst acceptedAnnotations =
         compilationConfiguration[ScriptCompilationConfiguration.refineConfigurationOnAnnotations]?.flatMap {
             it.annotations.mapNotNull { ann ->
                 @Suppress("UNCHECKED_CAST")
                 jvmGetScriptingClass(ann, contextClassLoader, hostConfiguration) as? KClass<Annotation> // TODO errors
             }
         }.orEmpty()
-    val annotations = scriptFile.annotationEntries.construct(
+    konst annotations = scriptFile.annotationEntries.construct(
         contextClassLoader,
         acceptedAnnotations,
         project,
@@ -470,13 +470,13 @@ private fun Iterable<KtAnnotationEntry>.construct(
     }
 
 private fun PsiElement.location(document: Document): SourceCode.Location {
-    val start = document.offsetToPosition(startOffset)
-    val end = if (endOffset > startOffset) document.offsetToPosition(endOffset) else null
+    konst start = document.offsetToPosition(startOffset)
+    konst end = if (endOffset > startOffset) document.offsetToPosition(endOffset) else null
     return SourceCode.Location(start, end)
 }
 
 private fun Document.offsetToPosition(offset: Int): SourceCode.Position {
-    val line = getLineNumber(offset)
-    val column = offset - getLineStartOffset(line)
+    konst line = getLineNumber(offset)
+    konst column = offset - getLineStartOffset(line)
     return SourceCode.Position(line + 1, column + 1, offset)
 }

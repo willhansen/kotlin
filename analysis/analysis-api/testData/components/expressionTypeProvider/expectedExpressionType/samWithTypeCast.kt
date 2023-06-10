@@ -1,1 +1,1 @@
-val a = {<caret> /* Type Cast */ } as java.lang.Runnable
+konst a = {<caret> /* Type Cast */ } as java.lang.Runnable

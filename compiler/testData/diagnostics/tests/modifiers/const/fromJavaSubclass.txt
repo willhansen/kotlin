@@ -1,7 +1,7 @@
 package
 
-public const val K1: kotlin.String = "foo"
-public const val K2: kotlin.String = "foo"
+public const konst K1: kotlin.String = "foo"
+public const konst K2: kotlin.String = "foo"
 
 public open class A {
     public constructor A()
@@ -10,7 +10,7 @@ public open class A {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final val FOO: kotlin.String = "foo"
+    public const final konst FOO: kotlin.String = "foo"
 }
 
 public open class B : A {
@@ -20,5 +20,5 @@ public open class B : A {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final override /*1*/ /*fake_override*/ val FOO: kotlin.String = "foo"
+    public const final override /*1*/ /*fake_override*/ konst FOO: kotlin.String = "foo"
 }

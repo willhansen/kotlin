@@ -11,7 +11,7 @@ public inline fun <R> doCall(block: ()-> R) : R {
 import test.*
 
 fun test1(b: Boolean): String {
-    val localResult = doCall ((local@ {
+    konst localResult = doCall ((local@ {
         if (b) {
             return@local "local"
         } else {
@@ -23,16 +23,16 @@ fun test1(b: Boolean): String {
 }
 
 fun test2(nonLocal: String): String {
-    val localResult = doCall {
+    konst localResult = doCall {
         return nonLocal
     }
 }
 
 fun box(): String {
-    val test1 = test1(true)
+    konst test1 = test1(true)
     if (test1 != "result=local") return "test1: ${test1}"
 
-    val test2 = test1(false)
+    konst test2 = test1(false)
     if (test2 != "nonLocal") return "test2: ${test2}"
 
     return "OK"

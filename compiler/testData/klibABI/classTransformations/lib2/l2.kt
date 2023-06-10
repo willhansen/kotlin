@@ -117,28 +117,28 @@ inline fun getInnerToNestedNestedNameInline() = InnerClassContainer().InnerToNes
 fun getInnerToNestedInnerName() = InnerClassContainer().InnerToNested().Inner().name()
 inline fun getInnerToNestedInnerNameInline() = InnerClassContainer().InnerToNested().Inner().name()
 
-annotation class AnnotationClassWithParameterThatBecomesRegularClass(val x: AnnotationClassThatBecomesRegularClass)
-annotation class AnnotationClassWithParameterOfParameterThatBecomesRegularClass(val x: AnnotationClassWithParameterThatBecomesRegularClass)
-annotation class AnnotationClassWithParameterThatDisappears(val x: AnnotationClassThatDisappears)
-annotation class AnnotationClassWithParameterOfParameterThatDisappears(val x: AnnotationClassWithParameterThatDisappears)
-annotation class AnnotationClassWithClassReferenceParameterThatDisappears1(val x: kotlin.reflect.KClass<RemovedClass> = RemovedClass::class)
-annotation class AnnotationClassWithClassReferenceParameterThatDisappears2(val x: kotlin.reflect.KClass<*> = RemovedClass::class)
-annotation class AnnotationClassWithClassReferenceParameterOfParameterThatDisappears1(val x: AnnotationClassWithClassReferenceParameterThatDisappears1 = AnnotationClassWithClassReferenceParameterThatDisappears1())
-annotation class AnnotationClassWithClassReferenceParameterOfParameterThatDisappears2(val x: AnnotationClassWithClassReferenceParameterThatDisappears2 = AnnotationClassWithClassReferenceParameterThatDisappears2())
-annotation class AnnotationClassWithRemovedEnumEntryParameter(val x: EnumClassWithDisappearingEntry = EnumClassWithDisappearingEntry.REMOVED)
-annotation class AnnotationClassWithRemovedEnumEntryParameterOfParameter(val x: AnnotationClassWithRemovedEnumEntryParameter = AnnotationClassWithRemovedEnumEntryParameter())
-annotation class AnnotationClassWithParameterThatBecomesPrivate1(val x: PublicTopLevelLib1.AnnotationClassThatBecomesPrivate = PublicTopLevelLib1.AnnotationClassThatBecomesPrivate())
-annotation class AnnotationClassWithParameterThatBecomesPrivate2(val x: kotlin.reflect.KClass<PublicTopLevelLib1.ClassThatBecomesPrivate> = PublicTopLevelLib1.ClassThatBecomesPrivate::class)
-annotation class AnnotationClassWithParameterOfParameterThatBecomesPrivate2(val x: AnnotationClassWithParameterThatBecomesPrivate2 = AnnotationClassWithParameterThatBecomesPrivate2())
-annotation class AnnotationClassWithParameterThatBecomesPrivate3(val x: kotlin.reflect.KClass<*> = PublicTopLevelLib1.ClassThatBecomesPrivate::class)
-annotation class AnnotationClassWithParameterOfParameterThatBecomesPrivate3(val x: AnnotationClassWithParameterThatBecomesPrivate3 = AnnotationClassWithParameterThatBecomesPrivate3())
-annotation class AnnotationClassWithParameterThatBecomesPrivate4(val x: PublicTopLevelLib1.EnumClassThatBecomesPrivate = PublicTopLevelLib1.EnumClassThatBecomesPrivate.ENTRY)
-annotation class AnnotationClassWithParameterOfParameterThatBecomesPrivate4(val x: AnnotationClassWithParameterThatBecomesPrivate4 = AnnotationClassWithParameterThatBecomesPrivate4())
+annotation class AnnotationClassWithParameterThatBecomesRegularClass(konst x: AnnotationClassThatBecomesRegularClass)
+annotation class AnnotationClassWithParameterOfParameterThatBecomesRegularClass(konst x: AnnotationClassWithParameterThatBecomesRegularClass)
+annotation class AnnotationClassWithParameterThatDisappears(konst x: AnnotationClassThatDisappears)
+annotation class AnnotationClassWithParameterOfParameterThatDisappears(konst x: AnnotationClassWithParameterThatDisappears)
+annotation class AnnotationClassWithClassReferenceParameterThatDisappears1(konst x: kotlin.reflect.KClass<RemovedClass> = RemovedClass::class)
+annotation class AnnotationClassWithClassReferenceParameterThatDisappears2(konst x: kotlin.reflect.KClass<*> = RemovedClass::class)
+annotation class AnnotationClassWithClassReferenceParameterOfParameterThatDisappears1(konst x: AnnotationClassWithClassReferenceParameterThatDisappears1 = AnnotationClassWithClassReferenceParameterThatDisappears1())
+annotation class AnnotationClassWithClassReferenceParameterOfParameterThatDisappears2(konst x: AnnotationClassWithClassReferenceParameterThatDisappears2 = AnnotationClassWithClassReferenceParameterThatDisappears2())
+annotation class AnnotationClassWithRemovedEnumEntryParameter(konst x: EnumClassWithDisappearingEntry = EnumClassWithDisappearingEntry.REMOVED)
+annotation class AnnotationClassWithRemovedEnumEntryParameterOfParameter(konst x: AnnotationClassWithRemovedEnumEntryParameter = AnnotationClassWithRemovedEnumEntryParameter())
+annotation class AnnotationClassWithParameterThatBecomesPrivate1(konst x: PublicTopLevelLib1.AnnotationClassThatBecomesPrivate = PublicTopLevelLib1.AnnotationClassThatBecomesPrivate())
+annotation class AnnotationClassWithParameterThatBecomesPrivate2(konst x: kotlin.reflect.KClass<PublicTopLevelLib1.ClassThatBecomesPrivate> = PublicTopLevelLib1.ClassThatBecomesPrivate::class)
+annotation class AnnotationClassWithParameterOfParameterThatBecomesPrivate2(konst x: AnnotationClassWithParameterThatBecomesPrivate2 = AnnotationClassWithParameterThatBecomesPrivate2())
+annotation class AnnotationClassWithParameterThatBecomesPrivate3(konst x: kotlin.reflect.KClass<*> = PublicTopLevelLib1.ClassThatBecomesPrivate::class)
+annotation class AnnotationClassWithParameterOfParameterThatBecomesPrivate3(konst x: AnnotationClassWithParameterThatBecomesPrivate3 = AnnotationClassWithParameterThatBecomesPrivate3())
+annotation class AnnotationClassWithParameterThatBecomesPrivate4(konst x: PublicTopLevelLib1.EnumClassThatBecomesPrivate = PublicTopLevelLib1.EnumClassThatBecomesPrivate.ENTRY)
+annotation class AnnotationClassWithParameterOfParameterThatBecomesPrivate4(konst x: AnnotationClassWithParameterThatBecomesPrivate4 = AnnotationClassWithParameterThatBecomesPrivate4())
 
 object PublicTopLevelLib2 {
     private class PrivateClass
-    annotation class AnnotationClassWithParameterWithPrivateDefaultValue(val x: kotlin.reflect.KClass<*> = PrivateClass::class)
-    annotation class AnnotationClassWithParameterOfParameterWithPrivateDefaultValue(val x: AnnotationClassWithParameterWithPrivateDefaultValue = AnnotationClassWithParameterWithPrivateDefaultValue())
+    annotation class AnnotationClassWithParameterWithPrivateDefaultValue(konst x: kotlin.reflect.KClass<*> = PrivateClass::class)
+    annotation class AnnotationClassWithParameterOfParameterWithPrivateDefaultValue(konst x: AnnotationClassWithParameterWithPrivateDefaultValue = AnnotationClassWithParameterWithPrivateDefaultValue())
 }
 
 fun getAnnotationClassWithChangedParameterType(): AnnotationClassWithChangedParameterType = AnnotationClassWithChangedParameterType(101)
@@ -375,7 +375,7 @@ fun getClassToValueAsAny(): Any = ClassToValue(3)
 inline fun getClassToValueAsAnyInline(): Any = ClassToValue(4)
 
 fun getSumFromDataClass(): Int {
-    val (x, y) = DataToClass(1, 2)
+    konst (x, y) = DataToClass(1, 2)
     return x + y
 }
 
@@ -388,22 +388,22 @@ fun instantiationOfAbstractClass() {
 // This is required to check that enum entry classes are correctly handled in partial linkage.
 enum class StableEnum {
     FOO {
-        val x = "OK"
+        konst x = "OK"
 
         inner class Inner {
-            val y = x
+            konst y = x
         }
 
-        val z = Inner()
+        konst z = Inner()
 
-        override val test: String
+        override konst test: String
             get() = z.y
     },
     BAR {
-        override val test = "OK"
+        override konst test = "OK"
     };
 
-    abstract val test: String
+    abstract konst test: String
 }
 
 // This is required to check that the guard condition initially added in commit
@@ -421,12 +421,12 @@ fun testStableInheritorOfClassThatUsesPrivateTopLevelClass(): String = buildStri
 }
 
 fun getFunctionalInterfaceToInterface(answer: Int): FunctionalInterfaceToInterface {
-    val worker = FunctionalInterfaceToInterface { answer }
+    konst worker = FunctionalInterfaceToInterface { answer }
     return worker
 }
 
 fun getFunctionalInterfaceToInterfaceAsObject(answer: Int): FunctionalInterfaceToInterface {
-    val worker = object : FunctionalInterfaceToInterface {
+    konst worker = object : FunctionalInterfaceToInterface {
         override fun answer() = answer
     }
     return worker
@@ -443,12 +443,12 @@ fun interface FunctionalInterfaceWith3AbstractFunctions : XAnswer, XFunction1, X
 fun interface FunctionalInterfaceWithAbstractProperty : XAnswer, XFunction1Default, XFunction2Default, XProperty1, XProperty2Default
 
 fun getFunctionalInterfaceWith0AbstractFunctions(answer: Int): FunctionalInterfaceWith0AbstractFunctions {
-    val worker = FunctionalInterfaceWith0AbstractFunctions { answer }
+    konst worker = FunctionalInterfaceWith0AbstractFunctions { answer }
     return worker
 }
 
 fun getFunctionalInterfaceWith0AbstractFunctionsAsObject(answer: Int): FunctionalInterfaceWith0AbstractFunctions {
-    val worker = object : FunctionalInterfaceWith0AbstractFunctions {
+    konst worker = object : FunctionalInterfaceWith0AbstractFunctions {
         override fun answer() = answer
     }
     return worker
@@ -459,12 +459,12 @@ fun getFunctionalInterfaceWith0AbstractFunctionsAnswer(answer: Int): Int {
 }
 
 fun getFunctionalInterfaceWith1AbstractFunction(answer: Int): FunctionalInterfaceWith1AbstractFunction {
-    val worker = FunctionalInterfaceWith1AbstractFunction { answer }
+    konst worker = FunctionalInterfaceWith1AbstractFunction { answer }
     return worker
 }
 
 fun getFunctionalInterfaceWith1AbstractFunctionAsObject(answer: Int): FunctionalInterfaceWith1AbstractFunction {
-    val worker = object : FunctionalInterfaceWith1AbstractFunction {
+    konst worker = object : FunctionalInterfaceWith1AbstractFunction {
         override fun answer() = answer
     }
     return worker
@@ -475,12 +475,12 @@ fun getFunctionalInterfaceWith1AbstractFunctionAnswer(answer: Int): Int {
 }
 
 fun getFunctionalInterfaceWith2AbstractFunctions(answer: Int): FunctionalInterfaceWith2AbstractFunctions {
-    val worker = FunctionalInterfaceWith2AbstractFunctions { answer }
+    konst worker = FunctionalInterfaceWith2AbstractFunctions { answer }
     return worker
 }
 
 fun getFunctionalInterfaceWith2AbstractFunctionsAsObject(answer: Int): FunctionalInterfaceWith2AbstractFunctions {
-    val worker = object : FunctionalInterfaceWith2AbstractFunctions {
+    konst worker = object : FunctionalInterfaceWith2AbstractFunctions {
         override fun answer() = answer
     }
     return worker
@@ -491,12 +491,12 @@ fun getFunctionalInterfaceWith2AbstractFunctionsAnswer(answer: Int): Int {
 }
 
 fun getFunctionalInterfaceWith3AbstractFunctions(answer: Int): FunctionalInterfaceWith3AbstractFunctions {
-    val worker = FunctionalInterfaceWith3AbstractFunctions { answer }
+    konst worker = FunctionalInterfaceWith3AbstractFunctions { answer }
     return worker
 }
 
 fun getFunctionalInterfaceWith3AbstractFunctionsAsObject(answer: Int): FunctionalInterfaceWith3AbstractFunctions {
-    val worker = object : FunctionalInterfaceWith3AbstractFunctions {
+    konst worker = object : FunctionalInterfaceWith3AbstractFunctions {
         override fun answer() = answer
     }
     return worker
@@ -507,12 +507,12 @@ fun getFunctionalInterfaceWith3AbstractFunctionsAnswer(answer: Int): Int {
 }
 
 fun getFunctionalInterfaceWithAbstractProperty(answer: Int): FunctionalInterfaceWithAbstractProperty {
-    val worker = FunctionalInterfaceWithAbstractProperty { answer }
+    konst worker = FunctionalInterfaceWithAbstractProperty { answer }
     return worker
 }
 
 fun getFunctionalInterfaceWithAbstractPropertyAsObject(answer: Int): FunctionalInterfaceWithAbstractProperty {
-    val worker = object : FunctionalInterfaceWithAbstractProperty {
+    konst worker = object : FunctionalInterfaceWithAbstractProperty {
         override fun answer() = answer
     }
     return worker

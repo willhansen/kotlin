@@ -16,17 +16,17 @@ enum class EB : I {
     B
 }
 fun case1(a: Any) {
-    val x1 = if (true) EA.A else EB.B
+    konst x1 = if (true) EA.A else EB.B
     checkSubtype<Enum<*>>(x1)
     checkSubtype<I>(x1)
     <!DEBUG_INFO_EXPRESSION_TYPE("I & kotlin.Enum<*>")!>x1<!>
 
-    val x2 = if (true) EB.B else EA.A
+    konst x2 = if (true) EB.B else EA.A
     checkSubtype<Enum<*>>(x2)
     checkSubtype<I>(x2)
     <!DEBUG_INFO_EXPRESSION_TYPE("I & kotlin.Enum<*>")!>x2<!>
 
-    val x3 = when(a){
+    konst x3 = when(a){
         is Int -> EA.A
         else -> EB.B
     }
@@ -46,15 +46,15 @@ enum class B : IB {
     B
 }
 fun case2(a: Any) {
-    val x1 = if (true) A.A else B.B
+    konst x1 = if (true) A.A else B.B
     checkSubtype<Enum<*>>(x1)
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Enum<*>")!>x1<!>
 
-    val x2 = if (true) B.B else A.A
+    konst x2 = if (true) B.B else A.A
     checkSubtype<Enum<*>>(x2)
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Enum<*>")!>x2<!>
 
-    val x3 = when(a){
+    konst x3 = when(a){
         is Int -> A.A
         else -> B.B
     }

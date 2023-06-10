@@ -10,19 +10,19 @@ import org.jetbrains.kotlin.platform.PlatformSpecificDiagnosticComponents
 import org.jetbrains.kotlin.renderer.DescriptorRenderer
 
 data class DeclarationWithDiagnosticComponents(
-    val declaration: DeclarationDescriptor,
-    val diagnosticComponents: PlatformSpecificDiagnosticComponents
+    konst declaration: DeclarationDescriptor,
+    konst diagnosticComponents: PlatformSpecificDiagnosticComponents
 ) : Iterable<Any> {
     override fun iterator() =
         sequenceOf(declaration, diagnosticComponents).iterator()
 }
 
 class AnnotationsWhitelistDescriptorRenderer(
-    private val baseRenderer: DescriptorRenderer,
-    private val toParameterRenderer: DescriptorRenderer.() -> DiagnosticParameterRenderer<DeclarationDescriptor>
+    private konst baseRenderer: DescriptorRenderer,
+    private konst toParameterRenderer: DescriptorRenderer.() -> DiagnosticParameterRenderer<DeclarationDescriptor>
 ) : DiagnosticParameterRenderer<DeclarationWithDiagnosticComponents> {
     override fun render(obj: DeclarationWithDiagnosticComponents, renderingContext: RenderingContext): String {
-        val (descriptor, diagnosticComponents) = obj
+        konst (descriptor, diagnosticComponents) = obj
         return baseRenderer.withOptions {
             annotationFilter = { annotation ->
                 diagnosticComponents.isNullabilityAnnotation(annotation, descriptor)

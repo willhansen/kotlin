@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.js.backend.ast.metadata.synthetic
 import org.jetbrains.kotlin.js.inline.util.replaceNames
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
-class NamingContext(private val previousStatements: MutableList<JsStatement>) {
-    private val renamings = mutableMapOf<JsName, JsNameRef>()
-    private val declarations = mutableListOf<JsVars>()
+class NamingContext(private konst previousStatements: MutableList<JsStatement>) {
+    private konst renamings = mutableMapOf<JsName, JsNameRef>()
+    private konst declarations = mutableListOf<JsVars>()
     private var addedDeclarations = false
 
     fun applyRenameTo(target: JsNode): JsNode {
@@ -41,8 +41,8 @@ class NamingContext(private val previousStatements: MutableList<JsStatement>) {
         renamings.put(name, replacement)
     }
 
-    fun newVar(name: JsName, value: JsExpression? = null, source: Any?) {
-        val vars = JsAstUtils.newVar(name, value)
+    fun newVar(name: JsName, konstue: JsExpression? = null, source: Any?) {
+        konst vars = JsAstUtils.newVar(name, konstue)
         vars.synthetic = true
         vars.source = source
         declarations.add(vars)

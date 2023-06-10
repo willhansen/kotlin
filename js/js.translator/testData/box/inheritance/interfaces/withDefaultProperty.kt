@@ -1,6 +1,6 @@
 // EXPECTED_REACHABLE_NODES: 1288
 interface I {
-    val foo: String
+    konst foo: String
         get() = "OK"
 }
 

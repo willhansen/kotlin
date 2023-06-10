@@ -6,7 +6,7 @@ import generated.Test as TestGenerated
 @Anno
 class Test {
     @field:Anno
-    val property: String = ""
+    konst property: String = ""
 
     @Anno
     fun function() {

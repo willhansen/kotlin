@@ -25,24 +25,24 @@ import org.jetbrains.kotlin.ir.types.isMarkedNullable
 import org.jetbrains.kotlin.ir.types.makeNullable
 
 class IrConstImpl<T>(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var kind: IrConstKind<T>,
-    override var value: T
+    override var konstue: T
 ) : IrConst<T>() {
     companion object {
-        fun string(startOffset: Int, endOffset: Int, type: IrType, value: String): IrConstImpl<String> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.String, value)
+        fun string(startOffset: Int, endOffset: Int, type: IrType, konstue: String): IrConstImpl<String> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.String, konstue)
 
-        fun int(startOffset: Int, endOffset: Int, type: IrType, value: Int): IrConstImpl<Int> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.Int, value)
+        fun int(startOffset: Int, endOffset: Int, type: IrType, konstue: Int): IrConstImpl<Int> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.Int, konstue)
 
         fun constNull(startOffset: Int, endOffset: Int, type: IrType): IrConstImpl<Nothing?> =
             IrConstImpl(startOffset, endOffset, type, IrConstKind.Null, null)
 
-        fun boolean(startOffset: Int, endOffset: Int, type: IrType, value: Boolean): IrConstImpl<Boolean> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.Boolean, value)
+        fun boolean(startOffset: Int, endOffset: Int, type: IrType, konstue: Boolean): IrConstImpl<Boolean> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.Boolean, konstue)
 
         fun constTrue(startOffset: Int, endOffset: Int, type: IrType): IrConstImpl<Boolean> =
             boolean(startOffset, endOffset, type, true)
@@ -50,23 +50,23 @@ class IrConstImpl<T>(
         fun constFalse(startOffset: Int, endOffset: Int, type: IrType): IrConstImpl<Boolean> =
             boolean(startOffset, endOffset, type, false)
 
-        fun long(startOffset: Int, endOffset: Int, type: IrType, value: Long): IrConstImpl<Long> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.Long, value)
+        fun long(startOffset: Int, endOffset: Int, type: IrType, konstue: Long): IrConstImpl<Long> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.Long, konstue)
 
-        fun float(startOffset: Int, endOffset: Int, type: IrType, value: Float): IrConstImpl<Float> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.Float, value)
+        fun float(startOffset: Int, endOffset: Int, type: IrType, konstue: Float): IrConstImpl<Float> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.Float, konstue)
 
-        fun double(startOffset: Int, endOffset: Int, type: IrType, value: Double): IrConstImpl<Double> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.Double, value)
+        fun double(startOffset: Int, endOffset: Int, type: IrType, konstue: Double): IrConstImpl<Double> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.Double, konstue)
 
-        fun char(startOffset: Int, endOffset: Int, type: IrType, value: Char): IrConstImpl<Char> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.Char, value)
+        fun char(startOffset: Int, endOffset: Int, type: IrType, konstue: Char): IrConstImpl<Char> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.Char, konstue)
 
-        fun byte(startOffset: Int, endOffset: Int, type: IrType, value: Byte): IrConstImpl<Byte> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.Byte, value)
+        fun byte(startOffset: Int, endOffset: Int, type: IrType, konstue: Byte): IrConstImpl<Byte> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.Byte, konstue)
 
-        fun short(startOffset: Int, endOffset: Int, type: IrType, value: Short): IrConstImpl<Short> =
-            IrConstImpl(startOffset, endOffset, type, IrConstKind.Short, value)
+        fun short(startOffset: Int, endOffset: Int, type: IrType, konstue: Short): IrConstImpl<Short> =
+            IrConstImpl(startOffset, endOffset, type, IrConstKind.Short, konstue)
 
         fun defaultValueForType(startOffset: Int, endOffset: Int, type: IrType): IrConstImpl<*> {
             if (type.isMarkedNullable()) return constNull(startOffset, endOffset, type)
@@ -86,4 +86,4 @@ class IrConstImpl<T>(
 }
 
 fun <T> IrConst<T>.copyWithOffsets(startOffset: Int, endOffset: Int) =
-    IrConstImpl(startOffset, endOffset, type, kind, value)
+    IrConstImpl(startOffset, endOffset, type, kind, konstue)

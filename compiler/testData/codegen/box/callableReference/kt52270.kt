@@ -21,7 +21,7 @@ fun <K> foo4(): K = 2 as K
 
 fun test1(): String {
     takesOtherLambda {
-        val reference: () -> Unit = if (Random.nextBoolean()) {
+        konst reference: () -> Unit = if (Random.nextBoolean()) {
             ::fun1
         } else {
             ::fun2
@@ -33,7 +33,7 @@ fun test1(): String {
 
 fun test2(): String {
     takesOtherLambda {
-        val reference: () -> Unit = if (Random.nextBoolean())
+        konst reference: () -> Unit = if (Random.nextBoolean())
             ::fun1
         else
             ::fun2
@@ -44,7 +44,7 @@ fun test2(): String {
 
 fun test3(): String {
     takesOtherLambda {
-        val reference: () -> Unit = if (Random.nextBoolean()) {
+        konst reference: () -> Unit = if (Random.nextBoolean()) {
             foo()
             ::fun1
         } else {

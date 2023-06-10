@@ -17,43 +17,43 @@ import java.io.File
 
 class ScriptingCommandLineProcessor : CommandLineProcessor {
     companion object {
-        val DISABLE_SCRIPTING_PLUGIN_OPTION = CliOption(
+        konst DISABLE_SCRIPTING_PLUGIN_OPTION = CliOption(
             "disable", "true/false", "Disable scripting plugin",
             required = false, allowMultipleOccurrences = false
         )
-        val SCRIPT_DEFINITIONS_OPTION = CliOption(
+        konst SCRIPT_DEFINITIONS_OPTION = CliOption(
             "script-definitions", "<fully qualified class name[,]>", "Script definition classes",
             required = false, allowMultipleOccurrences = true
         )
-        val SCRIPT_DEFINITIONS_CLASSPATH_OPTION = CliOption(
+        konst SCRIPT_DEFINITIONS_CLASSPATH_OPTION = CliOption(
             "script-definitions-classpath", "<classpath entry[:]>", "Additional classpath for the script definitions",
             required = false, allowMultipleOccurrences = true
         )
-        val DISABLE_STANDARD_SCRIPT_DEFINITION_OPTION = CliOption(
+        konst DISABLE_STANDARD_SCRIPT_DEFINITION_OPTION = CliOption(
             "disable-standard-script", "true/false", "Disable standard kotlin script support",
             required = false, allowMultipleOccurrences = false
         )
-        val DISABLE_SCRIPT_DEFINITIONS_FROM_CLSSPATH_OPTION = CliOption(
+        konst DISABLE_SCRIPT_DEFINITIONS_FROM_CLSSPATH_OPTION = CliOption(
             "disable-script-definitions-from-classpath", "true/false", "Do not extract script definitions from the compilation classpath",
             required = false, allowMultipleOccurrences = false
         )
-        val DISABLE_SCRIPT_DEFINITIONS_AUTOLOADING_OPTION = CliOption(
+        konst DISABLE_SCRIPT_DEFINITIONS_AUTOLOADING_OPTION = CliOption(
             "disable-script-definitions-autoloading", "true/false", "Do not automatically load compiler-supplied script definitions, like main-kts",
             required = false, allowMultipleOccurrences = false
         )
-        val LEGACY_SCRIPT_TEMPLATES_OPTION = CliOption(
+        konst LEGACY_SCRIPT_TEMPLATES_OPTION = CliOption(
             "script-templates", "<fully qualified class name[,]>", "Script definition template classes",
             required = false, allowMultipleOccurrences = true
         )
-        val LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION = CliOption(
-            "script-resolver-environment", "<key=value[,]>",
-            "Script resolver environment in key-value pairs (the value could be quoted and escaped)",
+        konst LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION = CliOption(
+            "script-resolver-environment", "<key=konstue[,]>",
+            "Script resolver environment in key-konstue pairs (the konstue could be quoted and escaped)",
             required = false, allowMultipleOccurrences = true
         )
     }
 
-    override val pluginId = KOTLIN_SCRIPTING_PLUGIN_ID
-    override val pluginOptions =
+    override konst pluginId = KOTLIN_SCRIPTING_PLUGIN_ID
+    override konst pluginOptions =
         listOf(
             DISABLE_SCRIPTING_PLUGIN_OPTION,
             SCRIPT_DEFINITIONS_OPTION,
@@ -65,55 +65,55 @@ class ScriptingCommandLineProcessor : CommandLineProcessor {
             LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION
         )
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) = when (option) {
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) = when (option) {
         DISABLE_SCRIPTING_PLUGIN_OPTION -> {
             configuration.put(
                 ScriptingConfigurationKeys.DISABLE_SCRIPTING_PLUGIN_OPTION,
-                value.takeUnless { it.isBlank() }?.toBoolean() ?: true
+                konstue.takeUnless { it.isBlank() }?.toBoolean() ?: true
             )
         }
 
         SCRIPT_DEFINITIONS_OPTION, LEGACY_SCRIPT_TEMPLATES_OPTION -> {
-            val currentDefs = configuration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_CLASSES).toMutableList()
-            currentDefs.addAll(value.split(','))
+            konst currentDefs = configuration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_CLASSES).toMutableList()
+            currentDefs.addAll(konstue.split(','))
             configuration.put(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_CLASSES, currentDefs)
         }
         SCRIPT_DEFINITIONS_CLASSPATH_OPTION -> {
-            val currentCP = configuration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_CLASSPATH).toMutableList()
-            currentCP.addAll(value.split(File.pathSeparatorChar).map(::File))
+            konst currentCP = configuration.getList(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_CLASSPATH).toMutableList()
+            currentCP.addAll(konstue.split(File.pathSeparatorChar).map(::File))
             configuration.put(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS_CLASSPATH, currentCP)
         }
         DISABLE_STANDARD_SCRIPT_DEFINITION_OPTION -> {
             configuration.put(
                 JVMConfigurationKeys.DISABLE_STANDARD_SCRIPT_DEFINITION,
-                value.takeUnless { it.isBlank() }?.toBoolean() ?: true
+                konstue.takeUnless { it.isBlank() }?.toBoolean() ?: true
             )
         }
         DISABLE_SCRIPT_DEFINITIONS_FROM_CLSSPATH_OPTION -> {
             configuration.put(
                 ScriptingConfigurationKeys.DISABLE_SCRIPT_DEFINITIONS_FROM_CLASSPATH_OPTION,
-                value.takeUnless { it.isBlank() }?.toBoolean() ?: true
+                konstue.takeUnless { it.isBlank() }?.toBoolean() ?: true
             )
         }
         DISABLE_SCRIPT_DEFINITIONS_AUTOLOADING_OPTION -> {
             configuration.put(
                 ScriptingConfigurationKeys.DISABLE_SCRIPT_DEFINITIONS_AUTOLOADING_OPTION,
-                value.takeUnless { it.isBlank() }?.toBoolean() ?: true
+                konstue.takeUnless { it.isBlank() }?.toBoolean() ?: true
             )
         }
         LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION -> {
-            val currentEnv = configuration.getMap(ScriptingConfigurationKeys.LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION).toMutableMap()
-            // parses key/value pairs in the form <key>=<value>, where
+            konst currentEnv = configuration.getMap(ScriptingConfigurationKeys.LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION).toMutableMap()
+            // parses key/konstue pairs in the form <key>=<konstue>, where
             //   <key> - is a single word (\w+ pattern)
-            //   <value> - optionally quoted string with allowed escaped chars (only double-quote, comma and backslash chars are supported)
+            //   <konstue> - optionally quoted string with allowed escaped chars (only double-quote, comma and backslash chars are supported)
             // TODO: implement generic unescaping
             // TODO: consider switching to simple parser - current approach is too complicated already and doesn't handle quoted commas (unless they are escaped)
-            val envParseRe = """(\w+)=(?:"([^"\\]*(\\.[^"\\]*)*)"|([^\s]*))""".toRegex()
-            val unescapeRe = """\\(["\\,])""".toRegex()
-            val splitRe = """(?:\\.|[^,\\]++)*""".toRegex()
-            val splitMatches = splitRe.findAll(value)
-            for (envParam in splitMatches.map { it.value }.filter { it.isNotBlank() }) {
-                val match = envParseRe.matchEntire(envParam)
+            konst envParseRe = """(\w+)=(?:"([^"\\]*(\\.[^"\\]*)*)"|([^\s]*))""".toRegex()
+            konst unescapeRe = """\\(["\\,])""".toRegex()
+            konst splitRe = """(?:\\.|[^,\\]++)*""".toRegex()
+            konst splitMatches = splitRe.findAll(konstue)
+            for (envParam in splitMatches.map { it.konstue }.filter { it.isNotBlank() }) {
+                konst match = envParseRe.matchEntire(envParam)
                 if (match == null || match.groupValues.size < 4 || match.groupValues[1].isBlank()) {
                     throw CliOptionProcessingException("Unable to parse script-resolver-environment argument $envParam")
                 }

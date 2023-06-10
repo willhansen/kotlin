@@ -28,25 +28,25 @@ import org.jetbrains.kotlin.incremental.components.ScopeKind
 import org.jetbrains.kotlin.utils.createStringInterner
 
 class RemoteLookupTrackerClient(
-    @Suppress("DEPRECATION") val facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
+    @Suppress("DEPRECATION") konst facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
     eventManager: EventManager,
-    val profiler: Profiler = DummyProfiler()
+    konst profiler: Profiler = DummyProfiler()
 ) : LookupTracker {
-    private val isDoNothing = profiler.withMeasure(this) { facade.lookupTracker_isDoNothing() }
+    private konst isDoNothing = profiler.withMeasure(this) { facade.lookupTracker_isDoNothing() }
 
     // Map: FileName -> (ScopeFqName -> Set<Name[String] | LookupInfo>)
-    private val lookups = THashMap<String, MutableMap<String, MutableSet<Any>>>()
-    private val interner = createStringInterner()
+    private konst lookups = THashMap<String, MutableMap<String, MutableSet<Any>>>()
+    private konst interner = createStringInterner()
 
-    override val requiresPosition: Boolean = profiler.withMeasure(this) { facade.lookupTracker_requiresPosition() }
+    override konst requiresPosition: Boolean = profiler.withMeasure(this) { facade.lookupTracker_requiresPosition() }
 
     override fun record(filePath: String, position: Position, scopeFqName: String, scopeKind: ScopeKind, name: String) {
         if (isDoNothing) return
 
-        val internedSymbolFqName = interner.intern(scopeFqName)
-        val internedName = interner.intern(name)
+        konst internedSymbolFqName = interner.intern(scopeFqName)
+        konst internedName = interner.intern(name)
 
-        val objectToPut: Any =
+        konst objectToPut: Any =
             if (requiresPosition)
                 LookupInfo(filePath, position, scopeFqName, scopeKind, name)
             else

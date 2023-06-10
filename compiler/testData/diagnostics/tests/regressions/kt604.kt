@@ -12,9 +12,9 @@ interface ChannelPipelineFactory{
     fun getPipeline() : ChannelPipeline
 }
 
-class StandardPipelineFactory(val config:  ChannelPipeline.()->Unit) : ChannelPipelineFactory {
+class StandardPipelineFactory(konst config:  ChannelPipeline.()->Unit) : ChannelPipelineFactory {
     override fun getPipeline() : ChannelPipeline {
-        val pipeline = DefaultChannelPipeline()
+        konst pipeline = DefaultChannelPipeline()
         pipeline.config ()
         return pipeline
     }

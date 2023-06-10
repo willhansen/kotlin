@@ -9,15 +9,15 @@ class X {
 }
 
 class A {
-    val x = X()
+    konst x = X()
 
-    val y = object : I {
+    konst y = object : I {
         override var z: String by x::p
     }
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.y.z = "OK"
     return a.y.z
 }

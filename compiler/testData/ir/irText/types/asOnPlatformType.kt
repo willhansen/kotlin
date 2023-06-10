@@ -2,8 +2,8 @@
 // TARGET_BACKEND: JVM
 // FILE: asOnPlatformType.kt
 fun test() {
-    val nullStr = JavaClass.nullString()
-    val nonnullStr = JavaClass.nonnullString()
+    konst nullStr = JavaClass.nullString()
+    konst nonnullStr = JavaClass.nonnullString()
 
     nullStr.foo()
     nonnullStr.foo()

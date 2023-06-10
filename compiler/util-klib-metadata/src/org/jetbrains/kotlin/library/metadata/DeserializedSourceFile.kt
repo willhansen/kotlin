@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.descriptors.SourceFile
 import org.jetbrains.kotlin.library.KotlinLibrary
 
 class DeserializedSourceFile(
-    val name_: String, val library: KotlinLibrary
+    konst name_: String, konst library: KotlinLibrary
 ) : SourceFile {
     override fun getName(): String? = name_
 

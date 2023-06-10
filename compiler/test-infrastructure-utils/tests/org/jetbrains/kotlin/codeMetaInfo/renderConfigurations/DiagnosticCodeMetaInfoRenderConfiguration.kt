@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.diagnostics.Diagnostic
 import org.jetbrains.kotlin.diagnostics.rendering.*
 
 open class DiagnosticCodeMetaInfoRenderConfiguration(
-    val withNewInference: Boolean = true,
-    val renderSeverity: Boolean = false
+    konst withNewInference: Boolean = true,
+    konst renderSeverity: Boolean = false
 ) : AbstractCodeMetaInfoRenderConfiguration() {
-    private val crossPlatformLineBreak = """\r?\n""".toRegex()
+    private konst crossPlatformLineBreak = """\r?\n""".toRegex()
 
     override fun asString(codeMetaInfo: CodeMetaInfo): String {
         if (codeMetaInfo !is DiagnosticCodeMetaInfo) return ""
@@ -27,10 +27,10 @@ open class DiagnosticCodeMetaInfoRenderConfiguration(
 
     private fun getParamsString(codeMetaInfo: DiagnosticCodeMetaInfo): String {
         if (!renderParams) return ""
-        val params = mutableListOf<String>()
+        konst params = mutableListOf<String>()
 
         @Suppress("UNCHECKED_CAST")
-        val renderer = when (codeMetaInfo.diagnostic.factory) {
+        konst renderer = when (codeMetaInfo.diagnostic.factory) {
             is DebugInfoDiagnosticFactory1 -> DiagnosticWithParameters1Renderer(
                 "{0}",
                 Renderers.TO_STRING

@@ -31,7 +31,7 @@ fun String.asFsdAddress(): String {
 }
 
 fun box(): String {
-    val state = Test().state
+    konst state = Test().state
     if (state is GoBuildingRunningState<*>) {
         state.buildingWorkingDirectory.asFsdAddress()
     }

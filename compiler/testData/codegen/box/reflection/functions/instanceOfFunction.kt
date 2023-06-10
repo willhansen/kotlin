@@ -24,7 +24,7 @@ class Foo {
 }
 
 fun box(): String {
-    val bar = Foo::class.members.single { it.name == "bar" }
+    konst bar = Foo::class.members.single { it.name == "bar" }
 
     if (bar is Function1<*, *>) return "Fail 1"
     if (bar !is Function2<*, *, *>) return "Fail 2"

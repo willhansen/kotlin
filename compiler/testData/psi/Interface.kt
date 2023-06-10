@@ -1,4 +1,4 @@
 interface Foo {
   fun f()
-  val a
+  konst a
 }

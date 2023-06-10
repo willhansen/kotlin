@@ -1,12 +1,12 @@
 // EXPECTED_REACHABLE_NODES: 1291
 package foo
 
-val NUMBER = 1
-val STRING = 2
-val BOOLEAN = 3
-val OBJECT = 4
-val FUNCTION = 5
-val FUNCTION0 = FUNCTION // right now we can't distinguish functions with different arity
+konst NUMBER = 1
+konst STRING = 2
+konst BOOLEAN = 3
+konst OBJECT = 4
+konst FUNCTION = 5
+konst FUNCTION0 = FUNCTION // right now we can't distinguish functions with different arity
 
 fun testNullable(a: Any?, actualType: Int) {
     assertEquals(a == null || actualType == NUMBER, a is Int?, "$a is Int?")

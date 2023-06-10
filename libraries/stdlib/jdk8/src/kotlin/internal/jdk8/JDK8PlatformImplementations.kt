@@ -30,7 +30,7 @@ internal open class JDK8PlatformImplementations : JDK7PlatformImplementations() 
     // to avoid having a non-public cross-module dependency
     private object ReflectSdkVersion {
         @JvmField
-        public val sdkVersion: Int? = try {
+        public konst sdkVersion: Int? = try {
             Class.forName("android.os.Build\$VERSION").getField("SDK_INT").get(null) as? Int
         } catch (e: Throwable) {
             null
@@ -40,9 +40,9 @@ internal open class JDK8PlatformImplementations : JDK7PlatformImplementations() 
     private fun sdkIsNullOrAtLeast(version: Int): Boolean = ReflectSdkVersion.sdkVersion == null || ReflectSdkVersion.sdkVersion >= version
 
     override fun getMatchResultNamedGroup(matchResult: MatchResult, name: String): MatchGroup? {
-        val matcher = matchResult as? Matcher ?: throw UnsupportedOperationException("Retrieving groups by name is not supported on this platform.")
+        konst matcher = matchResult as? Matcher ?: throw UnsupportedOperationException("Retrieving groups by name is not supported on this platform.")
 
-        val range = matcher.start(name)..matcher.end(name) - 1
+        konst range = matcher.start(name)..matcher.end(name) - 1
         return if (range.start >= 0)
             MatchGroup(matcher.group(name), range)
         else
@@ -52,7 +52,7 @@ internal open class JDK8PlatformImplementations : JDK7PlatformImplementations() 
     override fun defaultPlatformRandom(): Random =
         // while ThreadLocalRandom is available since SDK 21 (as documented), it has bugs in the implementation,
         // so we don't use it for the same reasons as why we don't use it in JDK7. ThreadLocalRandom worked on
-        // SDK 24, but starting SDK 25 it had bugs in seeding so that it would return the same sequence of values
+        // SDK 24, but starting SDK 25 it had bugs in seeding so that it would return the same sequence of konstues
         // for all application starts. That will be fixed in SDK 34. Therefore, do not use ThreadLocalRandom until
         // then.
         if (sdkIsNullOrAtLeast(34)) PlatformThreadLocalRandom() else super.defaultPlatformRandom()

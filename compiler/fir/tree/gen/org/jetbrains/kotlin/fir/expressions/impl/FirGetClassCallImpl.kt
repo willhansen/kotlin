@@ -23,12 +23,12 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirGetClassCallImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var typeRef: FirTypeRef,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var argumentList: FirArgumentList,
 ) : FirGetClassCall() {
-    override val argument: FirExpression get() = argumentList.arguments.first()
+    override konst argument: FirExpression get() = argumentList.arguments.first()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         typeRef.accept(visitor, data)

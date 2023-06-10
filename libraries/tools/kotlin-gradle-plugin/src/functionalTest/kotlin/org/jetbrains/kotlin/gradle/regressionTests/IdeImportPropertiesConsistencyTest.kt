@@ -31,7 +31,7 @@ class IdeImportPropertiesConsistencyTest {
     this code is copied into this test here and checked for consistency!
      */
     private fun Project.getProperty(property: GradleImportProperties): Boolean {
-        val explicitValueIfAny = try {
+        konst explicitValueIfAny = try {
             (findProperty(property.id) as? String)?.toBoolean()
         } catch (e: Exception) {
             logger.error("Error while trying to read property $property from project $project", e)
@@ -41,7 +41,7 @@ class IdeImportPropertiesConsistencyTest {
         return explicitValueIfAny ?: property.defaultValue
     }
 
-    private enum class GradleImportProperties(val id: String, val defaultValue: Boolean) {
+    private enum class GradleImportProperties(konst id: String, konst defaultValue: Boolean) {
         IS_HMPP_ENABLED("kotlin.mpp.enableGranularSourceSetsMetadata", false),
         ENABLE_NATIVE_DEPENDENCY_PROPAGATION("kotlin.native.enableDependencyPropagation", true),
         /* IDE only relevant cases omitted */
@@ -54,14 +54,14 @@ class IdeImportPropertiesConsistencyTest {
 
     @Test
     fun `test simple project`() {
-        val project = ProjectBuilder.builder().build()
+        konst project = ProjectBuilder.builder().build()
         project.applyMultiplatformPlugin()
         project.assertPropertiesMatch()
     }
 
     @Test
     fun `test simple project with new hmpp flag`() {
-        val project = ProjectBuilder.builder().build()
+        konst project = ProjectBuilder.builder().build()
         project.enableHierarchicalStructureByDefault()
         project.applyMultiplatformPlugin()
         project.assertPropertiesMatch()
@@ -69,16 +69,16 @@ class IdeImportPropertiesConsistencyTest {
 
     @Test
     fun `test sub project with new hmpp flag`() {
-        val rootProject = ProjectBuilder.builder().build()
-        val project = ProjectBuilder.builder().withParent(rootProject).build()
+        konst rootProject = ProjectBuilder.builder().build()
+        konst project = ProjectBuilder.builder().withParent(rootProject).build()
         rootProject.enableHierarchicalStructureByDefault()
         project.applyMultiplatformPlugin()
         project.assertPropertiesMatch()
     }
 
     private fun Project.assertPropertiesMatch() {
-        val isHmppValueUsedInCli = project.isKotlinGranularMetadataEnabled
-        val isHmppValueUsedInIde = project.getProperty(GradleImportProperties.IS_HMPP_ENABLED)
+        konst isHmppValueUsedInCli = project.isKotlinGranularMetadataEnabled
+        konst isHmppValueUsedInIde = project.getProperty(GradleImportProperties.IS_HMPP_ENABLED)
         assertEquals(
             isHmppValueUsedInCli, isHmppValueUsedInIde,
             """
@@ -87,8 +87,8 @@ class IdeImportPropertiesConsistencyTest {
             """.trimIndent()
         )
 
-        val dependencyPropagationEnabledInCli = project.isNativeDependencyPropagationEnabled
-        val dependencyPropagationEnabledInIde = project.getProperty(GradleImportProperties.ENABLE_NATIVE_DEPENDENCY_PROPAGATION)
+        konst dependencyPropagationEnabledInCli = project.isNativeDependencyPropagationEnabled
+        konst dependencyPropagationEnabledInIde = project.getProperty(GradleImportProperties.ENABLE_NATIVE_DEPENDENCY_PROPAGATION)
         assertEquals(
             dependencyPropagationEnabledInCli, dependencyPropagationEnabledInIde,
             """

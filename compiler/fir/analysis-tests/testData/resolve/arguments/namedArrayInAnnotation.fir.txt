@@ -4,7 +4,7 @@ FILE: namedArrayInAnnotation.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val strings: R|kotlin/Array<out kotlin/String>| = R|<local>/strings|
+        public final konst strings: R|kotlin/Array<out kotlin/String>| = R|<local>/strings|
             public get(): R|kotlin/Array<out kotlin/String>|
 
     }

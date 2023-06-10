@@ -24,7 +24,7 @@ class Host {
   }
 
   fun testBoundReceiverLocalVal() {
-    val h: Host = Host()
+    konst h: Host = Host()
     use(fn = { // BLOCK
       local fun Host.withVararg(p0: Int) {
         receiver.withVararg(xs = [p0])

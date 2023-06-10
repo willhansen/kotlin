@@ -14,7 +14,7 @@ import kotlin.test.assertTrue
 class DeserializationFailureTest {
     @Test
     fun sample1() {
-        val result = KotlinToolingMetadata.parseJson("")
+        konst result = KotlinToolingMetadata.parseJson("")
         assertTrue(
             result is KotlinToolingMetadataParsingResult.Failure,
             "Expected empty String to produce Failure. Actual: $result"
@@ -25,7 +25,7 @@ class DeserializationFailureTest {
 
     @Test
     fun `sample2 missing buildPluginVersion`() {
-        @Language("JSON") val json =
+        @Language("JSON") konst json =
             """
             {
               "schemaVersion": ${SchemaVersion.current},
@@ -40,13 +40,13 @@ class DeserializationFailureTest {
             }
             """.trimIndent()
 
-        val result = KotlinToolingMetadata.parseJson(json)
+        konst result = KotlinToolingMetadata.parseJson(json)
         assertTrue(
             result is KotlinToolingMetadataParsingResult.Failure,
             "Expected parsing failure, because of missing pluginVersion. Actual: $result"
         )
 
-        val exception = assertFailsWith<IllegalArgumentException> { KotlinToolingMetadata.parseJsonOrThrow(json) }
+        konst exception = assertFailsWith<IllegalArgumentException> { KotlinToolingMetadata.parseJsonOrThrow(json) }
         assertTrue(
             "buildPluginVersion" in exception.message.orEmpty(),
             "Expected 'buildPluginVersion' mentioned in error message\n${exception.message}"
@@ -55,8 +55,8 @@ class DeserializationFailureTest {
 
     @Test
     fun `sample3 incompatible schemaVersion`() {
-        val majorUpgradeVersion = SchemaVersion.current.copy(major = SchemaVersion.current.major + 1)
-        val metadataString = KotlinToolingMetadata(
+        konst majorUpgradeVersion = SchemaVersion.current.copy(major = SchemaVersion.current.major + 1)
+        konst metadataString = KotlinToolingMetadata(
             schemaVersion = majorUpgradeVersion.toString(),
             buildSystem = "",
             buildSystemVersion = "",
@@ -66,7 +66,7 @@ class DeserializationFailureTest {
             projectTargets = emptyList()
         ).toJsonString()
 
-        val exception = assertFailsWith<IllegalArgumentException> { KotlinToolingMetadata.parseJsonOrThrow(metadataString) }
+        konst exception = assertFailsWith<IllegalArgumentException> { KotlinToolingMetadata.parseJsonOrThrow(metadataString) }
         assertTrue(
             majorUpgradeVersion.toString() in exception.message.orEmpty(),
             "Expected bad schemaVersion mentioned in error message\n${exception.message}"

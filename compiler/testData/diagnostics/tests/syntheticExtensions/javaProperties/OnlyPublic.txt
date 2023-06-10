@@ -8,7 +8,7 @@ public open class JavaClass {
     protected/*protected and package*/ open fun getSomethingProtected(): kotlin.Int
     public open fun getSomethingPublic(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    protected/*protected and package*/ open fun setSomethingPublic(/*0*/ value: kotlin.Int): kotlin.Unit
+    protected/*protected and package*/ open fun setSomethingPublic(/*0*/ konstue: kotlin.Int): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 

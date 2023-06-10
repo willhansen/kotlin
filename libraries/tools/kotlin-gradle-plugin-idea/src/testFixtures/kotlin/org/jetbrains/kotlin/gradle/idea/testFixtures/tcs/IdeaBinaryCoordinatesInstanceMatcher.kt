@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinBinaryDependency
 import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinDependency
 
 internal class IdeaBinaryCoordinatesInstanceMatcher(
-    private val coordinates: IdeaKotlinBinaryCoordinates
+    private konst coordinates: IdeaKotlinBinaryCoordinates
 ) : IdeaKotlinDependencyMatcher {
-    override val description: String
+    override konst description: String
         get() = "coordinates:$coordinates"
 
     override fun matches(dependency: IdeaKotlinDependency): Boolean {

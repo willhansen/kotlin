@@ -4,7 +4,7 @@ package cases.private
 
 
 // const
-private const val privateConst: Int = 4
+private const konst privateConst: Int = 4
 
 // fun
 @Suppress("UNUSED_PARAMETER")

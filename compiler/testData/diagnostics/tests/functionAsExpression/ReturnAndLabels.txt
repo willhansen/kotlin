@@ -1,4 +1,4 @@
 package
 
-public val label_fun: () -> kotlin.Unit
-public val parenthesized_label_fun: () -> kotlin.Unit
+public konst label_fun: () -> kotlin.Unit
+public konst parenthesized_label_fun: () -> kotlin.Unit

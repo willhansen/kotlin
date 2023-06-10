@@ -23,64 +23,64 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 class FirSyntheticPropertyAccessor(
-    val delegate: FirSimpleFunction,
-    override val isGetter: Boolean,
-    override val propertySymbol: FirPropertySymbol,
+    konst delegate: FirSimpleFunction,
+    override konst isGetter: Boolean,
+    override konst propertySymbol: FirPropertySymbol,
 ) : FirPropertyAccessor() {
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = delegate.source
 
-    override val moduleData: FirModuleData
+    override konst moduleData: FirModuleData
         get() = delegate.moduleData
 
-    override val origin: FirDeclarationOrigin
+    override konst origin: FirDeclarationOrigin
         get() = FirDeclarationOrigin.Synthetic
 
-    override val returnTypeRef: FirTypeRef
+    override konst returnTypeRef: FirTypeRef
         get() = delegate.returnTypeRef
 
-    override val status: FirDeclarationStatus
+    override konst status: FirDeclarationStatus
         get() = delegate.status
 
-    override val dispatchReceiverType: ConeSimpleKotlinType?
+    override konst dispatchReceiverType: ConeSimpleKotlinType?
         get() = delegate.dispatchReceiverType
 
-    override val receiverParameter: FirReceiverParameter?
+    override konst receiverParameter: FirReceiverParameter?
         get() = null
 
-    override val deprecationsProvider: DeprecationsProvider
+    override konst deprecationsProvider: DeprecationsProvider
         get() = delegate.deprecationsProvider
 
-    override val valueParameters: List<FirValueParameter>
-        get() = delegate.valueParameters
+    override konst konstueParameters: List<FirValueParameter>
+        get() = delegate.konstueParameters
 
-    override val annotations: List<FirAnnotation>
+    override konst annotations: List<FirAnnotation>
         get() = delegate.annotations
 
-    override val typeParameters: List<FirTypeParameter>
+    override konst typeParameters: List<FirTypeParameter>
         get() = emptyList()
 
-    override val isSetter: Boolean
+    override konst isSetter: Boolean
         get() = !isGetter
 
-    override val body: FirBlock?
+    override konst body: FirBlock?
         get() = delegate.body
 
-    override val attributes: FirDeclarationAttributes
+    override konst attributes: FirDeclarationAttributes
         get() = delegate.attributes
 
-    override val symbol: FirPropertyAccessorSymbol = FirPropertyAccessorSymbol().apply {
+    override konst symbol: FirPropertyAccessorSymbol = FirPropertyAccessorSymbol().apply {
         bind(this@FirSyntheticPropertyAccessor)
     }
 
-    override val contextReceivers: List<FirContextReceiver>
+    override konst contextReceivers: List<FirContextReceiver>
         get() = emptyList()
 
-    override val controlFlowGraphReference: FirControlFlowGraphReference? = null
+    override konst controlFlowGraphReference: FirControlFlowGraphReference? = null
 
-    override val contractDescription: FirContractDescription = FirEmptyContractDescription
+    override konst contractDescription: FirContractDescription = FirEmptyContractDescription
 
-    override val containerSource: DeserializedContainerSource? get() = null
+    override konst containerSource: DeserializedContainerSource? get() = null
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         delegate.accept(visitor, data)

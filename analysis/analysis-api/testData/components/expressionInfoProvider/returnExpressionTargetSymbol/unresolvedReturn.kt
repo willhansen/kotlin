@@ -2,10 +2,10 @@ fun test() {
     return@blah/* null */
 }
 
-val i = {
+konst i = {
     return/* null */
 }
 
-val i = {
+konst i = {
     return@i/* null */
 }

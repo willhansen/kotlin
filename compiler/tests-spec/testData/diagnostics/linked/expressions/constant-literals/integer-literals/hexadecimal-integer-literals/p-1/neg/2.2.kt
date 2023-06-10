@@ -9,34 +9,34 @@
  */
 
 // TESTCASE NUMBER: 1
-val value_1 = <!UNRESOLVED_REFERENCE!>_____0x3_4_5_6_7_8<!>
+konst konstue_1 = <!UNRESOLVED_REFERENCE!>_____0x3_4_5_6_7_8<!>
 
 // TESTCASE NUMBER: 2
-val value_2 = <!UNRESOLVED_REFERENCE!>_0X4_______5_______6_______7<!>
+konst konstue_2 = <!UNRESOLVED_REFERENCE!>_0X4_______5_______6_______7<!>
 
 // TESTCASE NUMBER: 3
-val value_3 = <!UNRESOLVED_REFERENCE!>_0_0X4_3_4_5_6_7_8_9<!>
+konst konstue_3 = <!UNRESOLVED_REFERENCE!>_0_0X4_3_4_5_6_7_8_9<!>
 
 // TESTCASE NUMBER: 4
-val value_4 = <!UNRESOLVED_REFERENCE!>_0X000000000<!>
+konst konstue_4 = <!UNRESOLVED_REFERENCE!>_0X000000000<!>
 
 // TESTCASE NUMBER: 5
-val value_5 = <!UNRESOLVED_REFERENCE!>_0000000000x<!>
+konst konstue_5 = <!UNRESOLVED_REFERENCE!>_0000000000x<!>
 
 // TESTCASE NUMBER: 6
-val value_6 = <!UNRESOLVED_REFERENCE!>_0_9x<!>
+konst konstue_6 = <!UNRESOLVED_REFERENCE!>_0_9x<!>
 
 // TESTCASE NUMBER: 7
-val value_7 = <!UNRESOLVED_REFERENCE!>____________0x<!>
+konst konstue_7 = <!UNRESOLVED_REFERENCE!>____________0x<!>
 
 // TESTCASE NUMBER: 8
-val value_8 = <!UNRESOLVED_REFERENCE!>_0_x_0<!>
+konst konstue_8 = <!UNRESOLVED_REFERENCE!>_0_x_0<!>
 
 // TESTCASE NUMBER: 9
-val value_9 = <!UNRESOLVED_REFERENCE!>_x_0<!>
+konst konstue_9 = <!UNRESOLVED_REFERENCE!>_x_0<!>
 
 // TESTCASE NUMBER: 10
-val value_10 = <!UNRESOLVED_REFERENCE!>_x<!>
+konst konstue_10 = <!UNRESOLVED_REFERENCE!>_x<!>
 
 // TESTCASE NUMBER: 11
-val value_11 = <!UNRESOLVED_REFERENCE!>_x_<!>
+konst konstue_11 = <!UNRESOLVED_REFERENCE!>_x_<!>

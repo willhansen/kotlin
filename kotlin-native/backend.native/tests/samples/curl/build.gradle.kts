@@ -2,16 +2,16 @@ plugins {
     kotlin("multiplatform")
 }
 
-//val mingwPath = File(System.getenv("MINGW64_DIR") ?: "C:/msys64/mingw64")
-val mingwPath = File("C:/msys64/mingw64") // use only preinstalled verions from this path, otherwise fail with linkage errors
+//konst mingwPath = File(System.getenv("MINGW64_DIR") ?: "C:/msys64/mingw64")
+konst mingwPath = File("C:/msys64/mingw64") // use only preinstalled verions from this path, otherwise fail with linkage errors
 
 kotlin {
     // Determine host preset.
-    val hostOs = System.getProperty("os.name")
-    val isMingwX64 = hostOs.startsWith("Windows")
+    konst hostOs = System.getProperty("os.name")
+    konst isMingwX64 = hostOs.startsWith("Windows")
 
     // Create target for the host platform.
-    val hostTarget = when {
+    konst hostTarget = when {
         hostOs == "Mac OS X" -> macosX64("curl")
         hostOs == "Linux" -> linuxX64("curl")
         isMingwX64 -> mingwX64("curl")
@@ -33,7 +33,7 @@ kotlin {
     }
 
     sourceSets {
-        val curlMain by getting {
+        konst curlMain by getting {
             dependencies {
                 implementation(project(":libcurl"))
             }

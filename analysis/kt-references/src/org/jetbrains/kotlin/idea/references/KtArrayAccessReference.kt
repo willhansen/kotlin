@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 abstract class KtArrayAccessReference(
     expression: KtArrayAccessExpression
 ) : KtSimpleReference<KtArrayAccessExpression>(expression), MultiRangeReference {
-    override val resolvesByNames: Collection<Name>
+    override konst resolvesByNames: Collection<Name>
         get() = NAMES
 
     override fun getRangeInElement() = element.textRange.shiftRight(-element.textOffset)
@@ -29,6 +29,6 @@ abstract class KtArrayAccessReference(
     override fun canRename() = true
 
     companion object {
-        private val NAMES = listOf(OperatorNameConventions.GET, OperatorNameConventions.SET)
+        private konst NAMES = listOf(OperatorNameConventions.GET, OperatorNameConventions.SET)
     }
 }

@@ -22,11 +22,11 @@ fun <D : IrAttributeContainer> D.copyAttributes(other: IrAttributeContainer?): D
     }
 }
 
-val IrClass.isSingleFieldValueClass: Boolean
-    get() = valueClassRepresentation is InlineClassRepresentation
+konst IrClass.isSingleFieldValueClass: Boolean
+    get() = konstueClassRepresentation is InlineClassRepresentation
 
-val IrClass.isMultiFieldValueClass: Boolean
-    get() = valueClassRepresentation is MultiFieldValueClassRepresentation
+konst IrClass.isMultiFieldValueClass: Boolean
+    get() = konstueClassRepresentation is MultiFieldValueClassRepresentation
 
 fun IrClass.addMember(member: IrDeclaration) {
     declarations.add(member)
@@ -36,9 +36,9 @@ fun IrClass.addAll(members: List<IrDeclaration>) {
     declarations.addAll(members)
 }
 
-val IrFile.path: String get() = fileEntry.name
-val IrFile.name: String get() = File(path).name
-val IrFile.nameWithPackage: String get() = packageFqName.child(Name.identifier(name)).asString()
+konst IrFile.path: String get() = fileEntry.name
+konst IrFile.name: String get() = File(path).name
+konst IrFile.nameWithPackage: String get() = packageFqName.child(Name.identifier(name)).asString()
 
 @ObsoleteDescriptorBasedAPI
 fun IrFunction.getIrValueParameter(parameter: ValueParameterDescriptor): IrValueParameter =
@@ -46,7 +46,7 @@ fun IrFunction.getIrValueParameter(parameter: ValueParameterDescriptor): IrValue
 
 @ObsoleteDescriptorBasedAPI
 fun IrFunction.getIrValueParameter(parameter: ParameterDescriptor, index: Int): IrValueParameter =
-    valueParameters.getOrElse(index) {
+    konstueParameters.getOrElse(index) {
         throw AssertionError("No IrValueParameter for $parameter")
     }.also { found ->
         assert(found.descriptor == parameter) {
@@ -59,15 +59,15 @@ fun IrFunction.putDefault(parameter: ValueParameterDescriptor, expressionBody: I
     getIrValueParameter(parameter).defaultValue = expressionBody
 }
 
-val IrFunction.isStaticMethodOfClass: Boolean
+konst IrFunction.isStaticMethodOfClass: Boolean
     get() = this is IrSimpleFunction && parent is IrClass && dispatchReceiverParameter == null
 
-val IrFunction.isPropertyAccessor: Boolean
+konst IrFunction.isPropertyAccessor: Boolean
     get() = this is IrSimpleFunction && correspondingPropertySymbol != null
 
 
-val IrClass.multiFieldValueClassRepresentation: MultiFieldValueClassRepresentation<IrSimpleType>?
-    get() = valueClassRepresentation as? MultiFieldValueClassRepresentation<IrSimpleType>
+konst IrClass.multiFieldValueClassRepresentation: MultiFieldValueClassRepresentation<IrSimpleType>?
+    get() = konstueClassRepresentation as? MultiFieldValueClassRepresentation<IrSimpleType>
 
-val IrClass.inlineClassRepresentation: InlineClassRepresentation<IrSimpleType>?
-    get() = valueClassRepresentation as? InlineClassRepresentation<IrSimpleType>
+konst IrClass.inlineClassRepresentation: InlineClassRepresentation<IrSimpleType>?
+    get() = konstueClassRepresentation as? InlineClassRepresentation<IrSimpleType>

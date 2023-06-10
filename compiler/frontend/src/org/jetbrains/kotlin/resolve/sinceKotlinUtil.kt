@@ -19,28 +19,28 @@ sealed class SinceKotlinAccessibility {
     object Accessible : SinceKotlinAccessibility()
 
     data class NotAccessibleButWasExperimental(
-        val version: ApiVersion,
-        val markerClasses: List<ClassDescriptor>
+        konst version: ApiVersion,
+        konst markerClasses: List<ClassDescriptor>
     ) : SinceKotlinAccessibility()
 
     data class NotAccessible(
-        val version: ApiVersion
+        konst version: ApiVersion
     ) : SinceKotlinAccessibility()
 }
 
 fun DeclarationDescriptor.checkSinceKotlinVersionAccessibility(languageVersionSettings: LanguageVersionSettings): SinceKotlinAccessibility {
-    val value =
+    konst konstue =
         if (this is CallableMemberDescriptor && !kind.isReal) getSinceKotlinVersionByOverridden(this)
         else getOwnSinceKotlinVersion()
-    val version = value?.apiVersion
+    konst version = konstue?.apiVersion
 
     // Allow access in the following cases:
     // 1) There's no @SinceKotlin annotation for this descriptor
-    // 2) There's a @SinceKotlin annotation but its value is some unrecognizable nonsense
-    // 3) The value as a version is not greater than our API version
+    // 2) There's a @SinceKotlin annotation but its konstue is some unrecognizable nonsense
+    // 3) The konstue as a version is not greater than our API version
     if (version == null || version <= languageVersionSettings.apiVersion) return SinceKotlinAccessibility.Accessible
 
-    val wasExperimentalFqNames = value.wasExperimentalMarkerClasses
+    konst wasExperimentalFqNames = konstue.wasExperimentalMarkerClasses
     if (wasExperimentalFqNames.isNotEmpty()) {
         return SinceKotlinAccessibility.NotAccessibleButWasExperimental(version, wasExperimentalFqNames)
     }
@@ -49,13 +49,13 @@ fun DeclarationDescriptor.checkSinceKotlinVersionAccessibility(languageVersionSe
 }
 
 private data class SinceKotlinValue(
-    val apiVersion: ApiVersion,
-    val wasExperimentalMarkerClasses: List<ClassDescriptor>
+    konst apiVersion: ApiVersion,
+    konst wasExperimentalMarkerClasses: List<ClassDescriptor>
 )
 
 /**
  * @return null if there are no overridden members or if there's at least one declaration in the hierarchy not annotated with [SinceKotlin],
- *         or the minimal value of the version from all declarations annotated with [SinceKotlin] otherwise.
+ *         or the minimal konstue of the version from all declarations annotated with [SinceKotlin] otherwise.
  */
 private fun getSinceKotlinVersionByOverridden(descriptor: CallableMemberDescriptor): SinceKotlinValue? {
     // TODO: combine wasExperimentalMarkerClasses in case of several members with the same minimal API version
@@ -64,7 +64,7 @@ private fun getSinceKotlinVersionByOverridden(descriptor: CallableMemberDescript
 }
 
 /**
- * @return the maximal value of API version required by the declaration or any of its "associated" declarations (class for constructor,
+ * @return the maximal konstue of API version required by the declaration or any of its "associated" declarations (class for constructor,
  *         property for accessor, underlying class for type alias) along with experimental marker FQ names mentioned in the @WasExperimental
  */
 private fun DeclarationDescriptor.getOwnSinceKotlinVersion(): SinceKotlinValue? {
@@ -72,7 +72,7 @@ private fun DeclarationDescriptor.getOwnSinceKotlinVersion(): SinceKotlinValue? 
 
     // TODO: use-site targeted annotations
     fun DeclarationDescriptor.consider() {
-        val apiVersion = (annotations.findAnnotation(SINCE_KOTLIN_FQ_NAME)?.allValueArguments?.values?.singleOrNull()?.value as? String)
+        konst apiVersion = (annotations.findAnnotation(SINCE_KOTLIN_FQ_NAME)?.allValueArguments?.konstues?.singleOrNull()?.konstue as? String)
             ?.let(ApiVersion.Companion::parse)
         if (apiVersion != null) {
             // TODO: combine wasExperimentalMarkerClasses in case of several associated declarations with the same maximal API version
@@ -87,7 +87,7 @@ private fun DeclarationDescriptor.getOwnSinceKotlinVersion(): SinceKotlinValue? 
     (this as? ConstructorDescriptor)?.containingDeclaration?.consider()
     (this as? PropertyAccessorDescriptor)?.correspondingProperty?.consider()
 
-    val typeAlias = this as? TypeAliasDescriptor
+    konst typeAlias = this as? TypeAliasDescriptor
         ?: (this as? TypeAliasConstructorDescriptor)?.typeAliasDescriptor
         ?: (this as? FakeCallableDescriptorForTypeAliasObject)?.typeAliasDescriptor
 
@@ -103,11 +103,11 @@ private fun DeclarationDescriptor.getOwnSinceKotlinVersion(): SinceKotlinValue? 
 }
 
 private fun DeclarationDescriptor.loadWasExperimentalMarkerClasses(): List<ClassDescriptor> {
-    val wasExperimental = annotations.findAnnotation(OptInNames.WAS_EXPERIMENTAL_FQ_NAME)
+    konst wasExperimental = annotations.findAnnotation(OptInNames.WAS_EXPERIMENTAL_FQ_NAME)
     if (wasExperimental != null) {
-        val annotationClasses = wasExperimental.allValueArguments[OptInNames.WAS_EXPERIMENTAL_ANNOTATION_CLASS]
+        konst annotationClasses = wasExperimental.allValueArguments[OptInNames.WAS_EXPERIMENTAL_ANNOTATION_CLASS]
         if (annotationClasses is ArrayValue) {
-            return annotationClasses.value.mapNotNull { annotationClass ->
+            return annotationClasses.konstue.mapNotNull { annotationClass ->
                 (annotationClass as? KClassValue)?.getArgumentType(module)?.constructor?.declarationDescriptor as? ClassDescriptor
             }
         }

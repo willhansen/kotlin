@@ -1,8 +1,8 @@
  object Outer {
-     val x = 0
+     konst x = 0
      fun Nested.foo() {}
      class Nested {
-         val y = x
+         konst y = x
          fun test() {
              foo()
          }

@@ -17,18 +17,18 @@ import kotlin.native.ref.createCleaner
 import kotlin.native.runtime.GC
 
 class AtomicBoolean(initialValue: Boolean) {
-    private val impl = AtomicInt(if (initialValue) 1 else 0)
+    private konst impl = AtomicInt(if (initialValue) 1 else 0)
 
     init {
         freeze()
     }
 
-    public var value: Boolean
-        get() = impl.value != 0
-        set(new) { impl.value = if (new) 1 else 0 }
+    public var konstue: Boolean
+        get() = impl.konstue != 0
+        set(new) { impl.konstue = if (new) 1 else 0 }
 }
 
-class FunBox(private val impl: () -> Unit) {
+class FunBox(private konst impl: () -> Unit) {
     fun call() {
         impl()
     }
@@ -36,26 +36,26 @@ class FunBox(private val impl: () -> Unit) {
 
 @Test
 fun testCleanerLambda() {
-    val called = AtomicBoolean(false);
+    konst called = AtomicBoolean(false);
     var funBoxWeak: WeakReference<FunBox>? = null
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = {
-            val funBox = FunBox { called.value = true }.freeze()
+        konst cleaner = {
+            konst funBox = FunBox { called.konstue = true }.freeze()
             funBoxWeak = WeakReference(funBox)
             createCleaner(funBox) { it.call() }
         }()
         GC.collect()  // Make sure local funBox reference is gone
         cleanerWeak = WeakReference(cleaner)
-        assertFalse(called.value)
+        assertFalse(called.konstue)
     }()
 
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
-    assertTrue(called.value)
-    assertNull(funBoxWeak!!.value)
+    assertNull(cleanerWeak!!.konstue)
+    assertTrue(called.konstue)
+    assertNull(funBoxWeak!!.konstue)
 }
 
 @Test
@@ -64,50 +64,50 @@ fun testCleanerNonSharedLambda() {
     if (Platform.memoryModel != MemoryModel.EXPERIMENTAL) {
         return
     }
-    val called = AtomicBoolean(false);
+    konst called = AtomicBoolean(false);
     var funBoxWeak: WeakReference<FunBox>? = null
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = {
-            val funBox = FunBox { called.value = true }
+        konst cleaner = {
+            konst funBox = FunBox { called.konstue = true }
             funBoxWeak = WeakReference(funBox)
             createCleaner(funBox) { it.call() }
         }()
         GC.collect()  // Make sure local funBox reference is gone
         cleanerWeak = WeakReference(cleaner)
-        assertFalse(called.value)
+        assertFalse(called.konstue)
     }()
 
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
-    assertTrue(called.value)
-    assertNull(funBoxWeak!!.value)
+    assertNull(cleanerWeak!!.konstue)
+    assertTrue(called.konstue)
+    assertNull(funBoxWeak!!.konstue)
 }
 
 @Test
 fun testCleanerAnonymousFunction() {
-    val called = AtomicBoolean(false);
+    konst called = AtomicBoolean(false);
     var funBoxWeak: WeakReference<FunBox>? = null
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = {
-            val funBox = FunBox { called.value = true }.freeze()
+        konst cleaner = {
+            konst funBox = FunBox { called.konstue = true }.freeze()
             funBoxWeak = WeakReference(funBox)
             createCleaner(funBox, fun (it: FunBox) { it.call() })
         }()
         GC.collect()  // Make sure local funBox reference is gone
         cleanerWeak = WeakReference(cleaner)
-        assertFalse(called.value)
+        assertFalse(called.konstue)
     }()
 
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
-    assertTrue(called.value)
-    assertNull(funBoxWeak!!.value)
+    assertNull(cleanerWeak!!.konstue)
+    assertTrue(called.konstue)
+    assertNull(funBoxWeak!!.konstue)
 }
 
 @Test
@@ -116,50 +116,50 @@ fun testCleanerNonSharedAnonymousFunction() {
     if (Platform.memoryModel != MemoryModel.EXPERIMENTAL) {
         return
     }
-    val called = AtomicBoolean(false);
+    konst called = AtomicBoolean(false);
     var funBoxWeak: WeakReference<FunBox>? = null
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = {
-            val funBox = FunBox { called.value = true }
+        konst cleaner = {
+            konst funBox = FunBox { called.konstue = true }
             funBoxWeak = WeakReference(funBox)
             createCleaner(funBox, fun (it: FunBox) { it.call() })
         }()
         GC.collect()  // Make sure local funBox reference is gone
         cleanerWeak = WeakReference(cleaner)
-        assertFalse(called.value)
+        assertFalse(called.konstue)
     }()
 
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
-    assertTrue(called.value)
-    assertNull(funBoxWeak!!.value)
+    assertNull(cleanerWeak!!.konstue)
+    assertTrue(called.konstue)
+    assertNull(funBoxWeak!!.konstue)
 }
 
 @Test
 fun testCleanerFunctionReference() {
-    val called = AtomicBoolean(false);
+    konst called = AtomicBoolean(false);
     var funBoxWeak: WeakReference<FunBox>? = null
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = {
-            val funBox = FunBox { called.value = true }.freeze()
+        konst cleaner = {
+            konst funBox = FunBox { called.konstue = true }.freeze()
             funBoxWeak = WeakReference(funBox)
             createCleaner(funBox, FunBox::call)
         }()
         GC.collect()  // Make sure local funBox reference is gone
         cleanerWeak = WeakReference(cleaner)
-        assertFalse(called.value)
+        assertFalse(called.konstue)
     }()
 
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
-    assertTrue(called.value)
-    assertNull(funBoxWeak!!.value)
+    assertNull(cleanerWeak!!.konstue)
+    assertTrue(called.konstue)
+    assertNull(funBoxWeak!!.konstue)
 }
 
 @Test
@@ -168,26 +168,26 @@ fun testCleanerNonSharedFunctionReference() {
     if (Platform.memoryModel != MemoryModel.EXPERIMENTAL) {
         return
     }
-    val called = AtomicBoolean(false);
+    konst called = AtomicBoolean(false);
     var funBoxWeak: WeakReference<FunBox>? = null
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = {
-            val funBox = FunBox { called.value = true }
+        konst cleaner = {
+            konst funBox = FunBox { called.konstue = true }
             funBoxWeak = WeakReference(funBox)
             createCleaner(funBox, FunBox::call)
         }()
         GC.collect()  // Make sure local funBox reference is gone
         cleanerWeak = WeakReference(cleaner)
-        assertFalse(called.value)
+        assertFalse(called.konstue)
     }()
 
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
-    assertTrue(called.value)
-    assertNull(funBoxWeak!!.value)
+    assertNull(cleanerWeak!!.konstue)
+    assertTrue(called.konstue)
+    assertNull(funBoxWeak!!.konstue)
 }
 
 @Test
@@ -196,7 +196,7 @@ fun testCleanerFailWithNonShareableArgument() {
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
         return
     }
-    val funBox = FunBox {}
+    konst funBox = FunBox {}
     assertFailsWith<IllegalArgumentException> {
         createCleaner(funBox) {}
     }
@@ -204,85 +204,85 @@ fun testCleanerFailWithNonShareableArgument() {
 
 @Test
 fun testCleanerCleansWithoutGC() {
-    val called = AtomicBoolean(false);
+    konst called = AtomicBoolean(false);
     var funBoxWeak: WeakReference<FunBox>? = null
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = {
-            val funBox = FunBox { called.value = true }.freeze()
+        konst cleaner = {
+            konst funBox = FunBox { called.konstue = true }.freeze()
             funBoxWeak = WeakReference(funBox)
             createCleaner(funBox) { it.call() }
         }()
         GC.collect()  // Make sure local funBox reference is gone
         cleaner.freeze()
         cleanerWeak = WeakReference(cleaner)
-        assertFalse(called.value)
+        assertFalse(called.konstue)
     }()
 
     GC.collect()
 
-    assertNull(cleanerWeak!!.value)
+    assertNull(cleanerWeak!!.konstue)
 
     waitCleanerWorker()
 
-    assertTrue(called.value)
+    assertTrue(called.konstue)
 
     // Only for legacy MM.
     if (Platform.memoryModel != MemoryModel.EXPERIMENTAL) {
         // If this fails, GC has somehow ran on the cleaners worker.
-        assertNotNull(funBoxWeak!!.value)
+        assertNotNull(funBoxWeak!!.konstue)
     }
 }
 
-val globalInt = AtomicInt(0)
+konst globalInt = AtomicInt(0)
 
 @Test
 fun testCleanerWithInt() {
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = createCleaner(42) {
-            globalInt.value = it
+        konst cleaner = createCleaner(42) {
+            globalInt.konstue = it
         }.freeze()
         cleanerWeak = WeakReference(cleaner)
-        assertEquals(0, globalInt.value)
+        assertEquals(0, globalInt.konstue)
     }()
 
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
-    assertEquals(42, globalInt.value)
+    assertNull(cleanerWeak!!.konstue)
+    assertEquals(42, globalInt.konstue)
 }
 
-val globalPtr = AtomicNativePtr(NativePtr.NULL)
+konst globalPtr = AtomicNativePtr(NativePtr.NULL)
 
 @Test
 fun testCleanerWithNativePtr() {
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val cleaner = createCleaner(NativePtr.NULL + 42L) {
-            globalPtr.value = it
+        konst cleaner = createCleaner(NativePtr.NULL + 42L) {
+            globalPtr.konstue = it
         }
         cleanerWeak = WeakReference(cleaner)
-        assertEquals(NativePtr.NULL, globalPtr.value)
+        assertEquals(NativePtr.NULL, globalPtr.konstue)
     }()
 
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
-    assertEquals(NativePtr.NULL + 42L, globalPtr.value)
+    assertNull(cleanerWeak!!.konstue)
+    assertEquals(NativePtr.NULL + 42L, globalPtr.konstue)
 }
 
 @Test
 fun testCleanerWithException() {
-    val called = AtomicBoolean(false);
+    konst called = AtomicBoolean(false);
     var funBoxWeak: WeakReference<FunBox>? = null
     var cleanerWeak: WeakReference<Cleaner>? = null
     {
-        val funBox = FunBox { called.value = true }.freeze()
+        konst funBox = FunBox { called.konstue = true }.freeze()
         funBoxWeak = WeakReference(funBox)
-        val cleaner = createCleaner(funBox) {
+        konst cleaner = createCleaner(funBox) {
             it.call()
             error("Cleaner block failed")
         }
@@ -292,9 +292,9 @@ fun testCleanerWithException() {
     GC.collect()
     performGCOnCleanerWorker()
 
-    assertNull(cleanerWeak!!.value)
+    assertNull(cleanerWeak!!.konstue)
     // Cleaners block started executing.
-    assertTrue(called.value)
+    assertTrue(called.konstue)
     // Even though the block failed, the captured funBox is freed.
-    assertNull(funBoxWeak!!.value)
+    assertNull(funBoxWeak!!.konstue)
 }

@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.test.util.KtTestUtil
 import org.jetbrains.kotlin.utils.Printer
 
 object KpmCoreCaseTestMethodGenerator : MethodGenerator<KpmCoreCaseTestMethodModel>() {
-    override val kind: MethodModel.Kind
+    override konst kind: MethodModel.Kind
         get() = KpmCoreCaseTestMethodModel.Kind
 
     override fun generateSignature(method: KpmCoreCaseTestMethodModel, p: Printer) {
@@ -19,7 +19,7 @@ object KpmCoreCaseTestMethodGenerator : MethodGenerator<KpmCoreCaseTestMethodMod
     }
 
     override fun generateBody(method: KpmCoreCaseTestMethodModel, p: Printer) {
-        val filePath = KtTestUtil.getFilePath(method.pathToTestCase)
+        konst filePath = KtTestUtil.getFilePath(method.pathToTestCase)
         p.println("runTest(SourcesKt.addSourcesFromCanonicalFileStructure(kpmCase, new File(\"$filePath\")));")
     }
 }

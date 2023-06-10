@@ -29,7 +29,7 @@ object SourceMapParser {
 
     @Throws(IOException::class)
     fun parse(content: String): SourceMapParseResult {
-        val jsonObject = try {
+        konst jsonObject = try {
             parseJson(content)
         }
         catch (e: JsonSyntaxException) {
@@ -42,26 +42,26 @@ object SourceMapParser {
     private fun parse(jsonObject: JsonNode): SourceMapParseResult {
         if (jsonObject !is JsonObject) return SourceMapError("Top-level object expected")
 
-        val version = jsonObject.properties["version"] ?: return SourceMapError("Version not defined")
+        konst version = jsonObject.properties["version"] ?: return SourceMapError("Version not defined")
         version.let {
-            if (version !is JsonNumber || version.value != 3.0) return SourceMapError("Unsupported version: $it")
+            if (version !is JsonNumber || version.konstue != 3.0) return SourceMapError("Unsupported version: $it")
         }
 
-        val sourceRoot = jsonObject.properties["sourceRoot"].let {
+        konst sourceRoot = jsonObject.properties["sourceRoot"].let {
             if (it != null) {
-                (it as? JsonString ?: return SourceMapError("'sourceRoot' property is not of string type")).value
+                (it as? JsonString ?: return SourceMapError("'sourceRoot' property is not of string type")).konstue
             }
             else {
                 ""
             }
         }
 
-        val sources = jsonObject.properties["sources"].let {
+        konst sources = jsonObject.properties["sources"].let {
             if (it != null) {
-                val sourcesProperty = it as? JsonArray ?:
+                konst sourcesProperty = it as? JsonArray ?:
                                       return SourceMapError("'sources' property is not of array type")
                 sourcesProperty.elements.map {
-                    (it as? JsonString ?: return SourceMapError("'sources' array must contain strings")).value
+                    (it as? JsonString ?: return SourceMapError("'sources' array must contain strings")).konstue
                 }
             }
             else {
@@ -69,14 +69,14 @@ object SourceMapParser {
             }
         }
 
-        val sourcesContent: List<String?> = jsonObject.properties["sourcesContent"].let {
+        konst sourcesContent: List<String?> = jsonObject.properties["sourcesContent"].let {
             if (it != null) {
-                val sourcesContentProperty = it as? JsonArray ?:
+                konst sourcesContentProperty = it as? JsonArray ?:
                                              return SourceMapError("'sourcesContent' property is not of array type")
                 sourcesContentProperty.elements.map {
                     when (it) {
                         is JsonNull -> null
-                        is JsonString -> it.value
+                        is JsonString -> it.konstue
                         else -> return SourceMapError("'sources' array must contain strings")
                     }
                 }
@@ -86,20 +86,20 @@ object SourceMapParser {
             }
         }
 
-        val names = jsonObject.properties["names"].let {
+        konst names = jsonObject.properties["names"].let {
             if (it != null) {
-                val namesProperty = it as? JsonArray ?: return SourceMapError("'names' property is not of array type")
+                konst namesProperty = it as? JsonArray ?: return SourceMapError("'names' property is not of array type")
                 namesProperty.elements.map {
-                    (it as? JsonString ?: return SourceMapError("'names' array must contain strings")).value
+                    (it as? JsonString ?: return SourceMapError("'names' array must contain strings")).konstue
                 }
             } else {
                 emptyList()
             }
         }
 
-        val sourcePathToContent = sources.zip(sourcesContent).associate { it }
+        konst sourcePathToContent = sources.zip(sourcesContent).associate { it }
 
-        val mappings = jsonObject.properties["mappings"] ?: return SourceMapError("'mappings' property not found")
+        konst mappings = jsonObject.properties["mappings"] ?: return SourceMapError("'mappings' property not found")
         if (mappings !is JsonString) return SourceMapError("'mappings' property is not of string type")
 
         var jsColumn = 0
@@ -107,8 +107,8 @@ object SourceMapParser {
         var sourceColumn = 0
         var sourceIndex = 0
         var nameIndex = 0
-        val stream = MappingStream(mappings.value)
-        val sourceMap = SourceMap { sourcePathToContent[it]?.let { StringReader(it) } }
+        konst stream = MappingStream(mappings.konstue)
+        konst sourceMap = SourceMap { sourcePathToContent[it]?.let { StringReader(it) } }
         var currentGroup = SourceMapGroup().also { sourceMap.groups += it }
 
         while (!stream.isEof) {
@@ -125,7 +125,7 @@ object SourceMapParser {
                 sourceIndex += stream.readInt() ?: return stream.createError("VLQ-encoded source index expected")
                 sourceLine += stream.readInt() ?: return stream.createError("VLQ-encoded source line expected")
                 sourceColumn += stream.readInt() ?: return stream.createError("VLQ-encoded source column expected")
-                val name = if (stream.isEncodedInt) {
+                konst name = if (stream.isEncodedInt) {
                     nameIndex += stream.readInt() ?: return stream.createError("VLQ-encoded name index expected")
                     if (nameIndex !in names.indices) {
                         return stream.createError("Name index $nameIndex is out of bounds ${names.indices}")
@@ -155,40 +155,40 @@ object SourceMapParser {
         return SourceMapSuccess(sourceMap)
     }
 
-    internal class MappingStream(val string: String) {
+    internal class MappingStream(konst string: String) {
         var position = 0
 
-        val isEof: Boolean get() = position == string.length
+        konst isEof: Boolean get() = position == string.length
 
-        val isSegmentTerminator: Boolean get() = string[position] == ','
+        konst isSegmentTerminator: Boolean get() = string[position] == ','
 
-        val isGroupTerminator: Boolean get() = string[position] == ';'
+        konst isGroupTerminator: Boolean get() = string[position] == ';'
 
-        val isEncodedInt: Boolean get() = !isEof && !isSegmentTerminator && !isGroupTerminator
+        konst isEncodedInt: Boolean get() = !isEof && !isSegmentTerminator && !isGroupTerminator
 
         fun skipChar() {
             position++
         }
 
         fun readInt(): Int? {
-            var value = 0
+            var konstue = 0
             var shift = 0
             while (true) {
                 if (isEof) return null
-                val digit = base64value(string[position++]) ?: return null
+                konst digit = base64konstue(string[position++]) ?: return null
 
-                val digitValue = digit and 0x1F
-                value = value or (digitValue shl shift)
+                konst digitValue = digit and 0x1F
+                konstue = konstue or (digitValue shl shift)
 
                 if ((digit and 0x20) == 0) break
                 shift += 5
             }
 
-            val unsignedValue = value ushr 1
-            return if ((value and 1) == 0) unsignedValue else -unsignedValue
+            konst unsignedValue = konstue ushr 1
+            return if ((konstue and 1) == 0) unsignedValue else -unsignedValue
         }
 
-        private fun base64value(c: Char): Int? = when (c) {
+        private fun base64konstue(c: Char): Int? = when (c) {
             in 'A'..'Z' -> c.toInt() - 'A'.toInt()
             in 'a'..'z' -> c.toInt() - 'a'.toInt() + 26
             in '0'..'9' -> c.toInt() - '0'.toInt() + 52

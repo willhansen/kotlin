@@ -6,8 +6,8 @@
 import kotlin.test.*
 
 fun box(): String {
-    val actualIndices = mutableListOf<Int>()
-    val actualValues = mutableListOf<Int>()
+    konst actualIndices = mutableListOf<Int>()
+    konst actualValues = mutableListOf<Int>()
     for ((index, i: Int) in J.listOfMaybeNullable().withIndex()) {
         actualIndices += index
         actualValues += i

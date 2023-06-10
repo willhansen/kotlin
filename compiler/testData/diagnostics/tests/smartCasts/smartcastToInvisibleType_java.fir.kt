@@ -32,7 +32,7 @@ fun testSmartcast(x: Any) {
 }
 
 fun testInference(a: A, b: B) {
-    val x = <!DEBUG_INFO_EXPRESSION_TYPE("foo.PackagePrivateInterface")!>select(a, b)<!>
+    konst x = <!DEBUG_INFO_EXPRESSION_TYPE("foo.PackagePrivateInterface")!>select(a, b)<!>
     x.<!INVISIBLE_REFERENCE!>foo<!>()
 }
 
@@ -48,6 +48,6 @@ fun testSmartcast(x: Any) {
 }
 
 fun testInference(a: A, b: B) {
-    val x = <!DEBUG_INFO_EXPRESSION_TYPE("foo.PackagePrivateInterface")!>select(a, b)<!>
+    konst x = <!DEBUG_INFO_EXPRESSION_TYPE("foo.PackagePrivateInterface")!>select(a, b)<!>
     x.foo()
 }

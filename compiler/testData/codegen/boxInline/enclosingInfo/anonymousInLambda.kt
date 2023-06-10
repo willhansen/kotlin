@@ -12,7 +12,7 @@ inline fun <R> call(s: () -> R) = s()
 import test.*
 
 fun box(): String {
-    val res = call {
+    konst res = call {
         { "OK" }
     }
 

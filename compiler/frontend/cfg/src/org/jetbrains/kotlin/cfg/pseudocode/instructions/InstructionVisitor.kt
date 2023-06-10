@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.cfg.pseudocode.instructions
 
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.jumps.*
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.special.*
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.*
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.*
 
 open class InstructionVisitor {
     open fun visitAccessInstruction(instruction: AccessValueInstruction) {

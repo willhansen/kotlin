@@ -9,12 +9,12 @@ class DP {
 
 class H1 {
     companion object {
-        val property: String by DP()
+        konst property: String by DP()
     }
 }
 
 class H2 {
     companion object {
-        val property: String by lazy { "OK" }
+        konst property: String by lazy { "OK" }
     }
 }

@@ -86,8 +86,8 @@ abstract class AbstractNode implements JsNode, HasMetadata {
     }
 
     @Override
-    public <T> void setData(@NotNull String key, T value) {
-        getInternals().setData(key, value);
+    public <T> void setData(@NotNull String key, T konstue) {
+        getInternals().setData(key, konstue);
     }
 
     @Override

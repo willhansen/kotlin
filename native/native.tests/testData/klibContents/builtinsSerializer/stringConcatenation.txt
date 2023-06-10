@@ -1,6 +1,6 @@
 package <root> {
     @Deprecated(message = "O/{id}") class Foo constructor()
     object Obj {
-        const val O: String = "O"
-        val concat: String = "OK"
+        const konst O: String = "O"
+        konst concat: String = "OK"
     }

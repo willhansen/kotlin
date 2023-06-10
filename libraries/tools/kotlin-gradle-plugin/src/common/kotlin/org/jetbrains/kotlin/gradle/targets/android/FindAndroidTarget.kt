@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 
 internal fun Project.findAndroidTarget(): KotlinAndroidTarget? {
-    return when (val kotlinExtension = project.kotlinExtension) {
+    return when (konst kotlinExtension = project.kotlinExtension) {
         is KotlinMultiplatformExtension -> kotlinExtension.targets.withType(KotlinAndroidTarget::class.java).singleOrNull()
         is KotlinAndroidProjectExtension -> kotlinExtension.target
         else -> null

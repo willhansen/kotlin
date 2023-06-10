@@ -11,7 +11,7 @@ internal inline fun <T : Any, R> withLinkageErrorLogger(receiver: T, block: T.()
     try {
         return receiver.block()
     } catch (e: LinkageError) {
-        val logger = Logger.getInstance(receiver::class.java)
+        konst logger = Logger.getInstance(receiver::class.java)
         logger.error("${receiver::class.java.name} caused LinkageError", e)
         throw e
     }

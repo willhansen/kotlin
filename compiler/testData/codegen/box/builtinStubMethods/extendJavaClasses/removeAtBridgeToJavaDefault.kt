@@ -7,7 +7,7 @@
 class Test : IntArrayList()
 
 fun box(): String {
-    val t = Test()
+    konst t = Test()
     t.add(1)
     try {
         t.removeAt(0)
@@ -22,7 +22,7 @@ import java.util.List;
 
 public interface IntList extends List<Integer> {
     default Integer remove(int index) {
-        return Integer.valueOf(removeInt(index));
+        return Integer.konstueOf(removeInt(index));
     }
 
     int removeInt(int index);

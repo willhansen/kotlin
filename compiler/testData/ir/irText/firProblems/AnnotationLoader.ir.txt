@@ -7,12 +7,12 @@ FILE fqName:<root> fileName:/AnnotationLoader.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.Visitor
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun visitArray (): <root>.Visitor? declared in <root>.Visitor'
-          CONST Null type=kotlin.Nothing? value=null
+          CONST Null type=kotlin.Nothing? konstue=null
     FUN name:visitAnnotation visibility:public modality:OPEN <> ($this:<root>.Visitor) returnType:<root>.Visitor?
       $this: VALUE_PARAMETER name:<this> type:<root>.Visitor
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun visitAnnotation (): <root>.Visitor? declared in <root>.Visitor'
-          CONST Null type=kotlin.Nothing? value=null
+          CONST Null type=kotlin.Nothing? konstue=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -95,7 +95,7 @@ FILE fqName:<root> fileName:/AnnotationLoader.kt
                   public open fun visitAnnotation (): <root>.Visitor? declared in <root>.Visitor
                 $this: VALUE_PARAMETER name:<this> type:<root>.AnnotationLoader.loadAnnotation.<no name provided>
                 BLOCK_BODY
-                  VAR name:visitor type:<root>.Visitor [val]
+                  VAR name:visitor type:<root>.Visitor [konst]
                     CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=<root>.Visitor origin=EXCLEXCL
                       <T0>: <root>.Visitor
                       arg0: CALL 'public final fun loadAnnotation (): <root>.Visitor? declared in <root>.AnnotationLoader' type=<root>.Visitor? origin=null
@@ -110,7 +110,7 @@ FILE fqName:<root> fileName:/AnnotationLoader.kt
                             INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[<root>.Visitor]'
                         FIELD DELEGATE name:$$delegate_0 type:<root>.Visitor visibility:private [final]
                           EXPRESSION_BODY
-                            GET_VAR 'val visitor: <root>.Visitor declared in <root>.AnnotationLoader.loadAnnotation.<no name provided>.visitAnnotation' type=<root>.Visitor origin=null
+                            GET_VAR 'konst visitor: <root>.Visitor declared in <root>.AnnotationLoader.loadAnnotation.<no name provided>.visitAnnotation' type=<root>.Visitor origin=null
                         FUN DELEGATED_MEMBER name:visitAnnotation visibility:public modality:OPEN <> ($this:<root>.AnnotationLoader.loadAnnotation.<no name provided>.visitAnnotation.<no name provided>) returnType:<root>.Visitor?
                           overridden:
                             public open fun visitAnnotation (): <root>.Visitor? declared in <root>.Visitor

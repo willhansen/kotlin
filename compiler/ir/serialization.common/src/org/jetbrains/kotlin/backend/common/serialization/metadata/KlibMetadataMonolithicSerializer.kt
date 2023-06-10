@@ -32,7 +32,7 @@ class KlibMetadataMonolithicSerializer(
 
     private fun serializePackageFragment(fqName: FqName, module: ModuleDescriptor): List<ProtoBuf.PackageFragment> {
 
-        val fragments = if (includeOnlyModuleContent) {
+        konst fragments = if (includeOnlyModuleContent) {
             module.packageFragmentProviderForModuleContentWithoutDependencies.packageFragments(fqName)
         } else {
             module.getPackage(fqName).fragments.filter { it.module == module }
@@ -40,13 +40,13 @@ class KlibMetadataMonolithicSerializer(
 
         if (fragments.isEmpty()) return emptyList()
 
-        val classifierDescriptors = DescriptorSerializer.sort(
+        konst classifierDescriptors = DescriptorSerializer.sort(
             fragments.flatMap {
                 it.getMemberScope().getDescriptorsFiltered(DescriptorKindFilter.CLASSIFIERS)
             }
         )
 
-        val topLevelDescriptors = DescriptorSerializer.sort(
+        konst topLevelDescriptors = DescriptorSerializer.sort(
             fragments.flatMap { fragment ->
                 fragment.getMemberScope().getDescriptorsFiltered(DescriptorKindFilter.CALLABLES)
             }
@@ -57,16 +57,16 @@ class KlibMetadataMonolithicSerializer(
 
     fun serializeModule(moduleDescriptor: ModuleDescriptor): SerializedMetadata {
 
-        val fragments = mutableListOf<List<ByteArray>>()
-        val fragmentNames = mutableListOf<String>()
-        val emptyPackages = mutableListOf<String>()
+        konst fragments = mutableListOf<List<ByteArray>>()
+        konst fragmentNames = mutableListOf<String>()
+        konst emptyPackages = mutableListOf<String>()
 
         for (packageFqName in getPackagesFqNames(moduleDescriptor)) {
-            val packageProtos =
+            konst packageProtos =
                 serializePackageFragment(packageFqName, moduleDescriptor)
             if (packageProtos.isEmpty()) continue
 
-            val packageFqNameStr = packageFqName.asString()
+            konst packageFqNameStr = packageFqName.asString()
 
             if (packageProtos.all { it.getExtension(KlibMetadataProtoBuf.isEmpty) }) {
                 emptyPackages.add(packageFqNameStr)
@@ -75,16 +75,16 @@ class KlibMetadataMonolithicSerializer(
             fragmentNames.add(packageFqNameStr)
 
         }
-        val header = serializeHeader(moduleDescriptor, fragmentNames, emptyPackages)
+        konst header = serializeHeader(moduleDescriptor, fragmentNames, emptyPackages)
 
-        val libraryAsByteArray = header.toByteArray()
+        konst libraryAsByteArray = header.toByteArray()
         return SerializedMetadata(libraryAsByteArray, fragments, fragmentNames)
     }
 
     // For platform libraries we get HUGE files.
     // Indexing them in IDEA takes ages.
     // So we split them into chunks.
-    override val TOP_LEVEL_DECLARATION_COUNT_PER_FILE = 128
-    override val TOP_LEVEL_CLASS_DECLARATION_COUNT_PER_FILE = 64
+    override konst TOP_LEVEL_DECLARATION_COUNT_PER_FILE = 128
+    override konst TOP_LEVEL_CLASS_DECLARATION_COUNT_PER_FILE = 64
 
 }

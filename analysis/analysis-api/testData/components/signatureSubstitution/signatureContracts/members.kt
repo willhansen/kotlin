@@ -9,8 +9,8 @@ class X<T> {
 
     fun <A, B : Collection<A>, C : A> foo4(a: A, T): B {}
 
-    val <A> A.bar1: T get() = 10
+    konst <A> A.bar1: T get() = 10
 
-    val <A> A.bar2: Map<A, T> get() = mapOf()
+    konst <A> A.bar2: Map<A, T> get() = mapOf()
 
 }

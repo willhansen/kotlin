@@ -32,7 +32,7 @@ fun box(): String? {
     if (s != "OK") return s
 
     s = "FAIL for wrapper"
-    val function: (String?) -> Thread? = { s = "OK"; null }
+    konst function: (String?) -> Thread? = { s = "OK"; null }
     JavaClass.samAdapter(function)
     if (s != "OK") return s
 

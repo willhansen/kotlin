@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-private const val a = ""
+private const konst a = ""
 
 @Deprecated("$a")
 fun test() {}

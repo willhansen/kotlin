@@ -1,6 +1,6 @@
 internal fun doTest() : Int {
     foo()
-    val y = baz()
+    konst y = baz()
     return y + fooX - 10
 }
 

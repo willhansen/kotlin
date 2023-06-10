@@ -1,3 +1,3 @@
 package test
 
-val prop = ":)"
+konst prop = ":)"

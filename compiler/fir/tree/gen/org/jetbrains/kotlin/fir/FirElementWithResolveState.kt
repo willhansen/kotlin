@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 abstract class FirElementWithResolveState : FirPureAbstractElement(), FirElement {
-    abstract override val source: KtSourceElement?
+    abstract override konst source: KtSourceElement?
     @Volatile
     @ResolveStateAccess
     lateinit var resolveState: FirResolveState
-    abstract val moduleData: FirModuleData
+    abstract konst moduleData: FirModuleData
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitElementWithResolveState(this, data)
 

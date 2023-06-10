@@ -1,3 +1,3 @@
-val s = <expr>get()</expr>
+konst s = <expr>get()</expr>
 
 fun get() : MutableList<*>

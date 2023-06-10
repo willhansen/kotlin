@@ -20,7 +20,7 @@ public fun <K,V> Map<K,V>.iterator(): Iterator<Map.Entry<K,V>> {<!NO_RETURN_IN_F
 
 //-------------
 fun foo() : Boolean {
-    val nullableList = getNullableList()
+    konst nullableList = getNullableList()
     return nullableList<!UNSAFE_CALL!>.<!>contains("")
 
 }

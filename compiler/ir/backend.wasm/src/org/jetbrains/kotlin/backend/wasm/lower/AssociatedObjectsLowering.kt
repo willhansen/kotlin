@@ -39,13 +39,13 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
  *   addAssociatedObject(mapToInit, C.klassId, Key.klassId, OBJ)
  * }
  */
-class AssociatedObjectsLowering(val context: WasmBackendContext) : FileLoweringPass {
+class AssociatedObjectsLowering(konst context: WasmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.acceptChildrenVoid(visitor)
     }
 
-    private val visitor = object : IrElementVisitorVoid {
-        val initFunctionStatements = (context.wasmSymbols.initAssociatedObjects.owner.body as IrBlockBody).statements
+    private konst visitor = object : IrElementVisitorVoid {
+        konst initFunctionStatements = (context.wasmSymbols.initAssociatedObjects.owner.body as IrBlockBody).statements
 
         override fun visitElement(element: IrElement) {
             if (element is IrClass) {
@@ -58,14 +58,14 @@ class AssociatedObjectsLowering(val context: WasmBackendContext) : FileLoweringP
 
             var cachedBuilder: IrBuilderWithScope? = null
             for (klassAnnotation in declaration.annotations) {
-                val annotationClass = klassAnnotation.symbol.owner.parentClassOrNull ?: continue
-                if (klassAnnotation.valueArgumentsCount != 1) continue
-                val associatedObject = klassAnnotation.associatedObject() ?: continue
+                konst annotationClass = klassAnnotation.symbol.owner.parentClassOrNull ?: continue
+                if (klassAnnotation.konstueArgumentsCount != 1) continue
+                konst associatedObject = klassAnnotation.associatedObject() ?: continue
 
-                val builder = cachedBuilder ?: context.createIrBuilder(context.wasmSymbols.initAssociatedObjects)
+                konst builder = cachedBuilder ?: context.createIrBuilder(context.wasmSymbols.initAssociatedObjects)
                 cachedBuilder = builder
 
-                val addCall = builder.createAssociatedObjectAdd(
+                konst addCall = builder.createAssociatedObjectAdd(
                     wasmSymbols = context.wasmSymbols,
                     irBuiltIns = context.irBuiltIns,
                     targetClass = declaration.symbol,
@@ -88,7 +88,7 @@ private fun IrBuilderWithScope.createAssociatedObjectAdd(
     irCall(wasmSymbols.addAssociatedObject, irBuiltIns.unitType).also { addCall ->
         addCall.putValueArgument(
             0,
-            irGet(wasmSymbols.initAssociatedObjects.owner.valueParameters[0])
+            irGet(wasmSymbols.initAssociatedObjects.owner.konstueParameters[0])
         )
         addCall.putValueArgument(
             1,

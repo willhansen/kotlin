@@ -29,12 +29,12 @@ class IdeStdlibResolutionTest {
 
     @Test
     fun `test single jvm target`() {
-        val project = createProjectWithDefaultStdlibEnabled()
+        konst project = createProjectWithDefaultStdlibEnabled()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonMain"), jvmStdlibDependencies(kotlin))
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonTest"), jvmStdlibDependencies(kotlin))
@@ -44,12 +44,12 @@ class IdeStdlibResolutionTest {
 
     @Test
     fun `test single native target`() {
-        val project = createProjectWithDefaultStdlibEnabled()
+        konst project = createProjectWithDefaultStdlibEnabled()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.linuxX64("linux")
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonMain"), nativeStdlibDependency(kotlin))
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonTest"), nativeStdlibDependency(kotlin))
@@ -59,12 +59,12 @@ class IdeStdlibResolutionTest {
 
     @Test
     fun `test single js target`() {
-        val project = createProjectWithDefaultStdlibEnabled()
+        konst project = createProjectWithDefaultStdlibEnabled()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.js(KotlinJsCompilerType.IR)
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonMain"), jsStdlibDependency(kotlin))
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonTest"), jsStdlibDependency(kotlin))
@@ -74,14 +74,14 @@ class IdeStdlibResolutionTest {
 
     @Test
     fun `test jvm+native shared simple project`() {
-        val project = createProjectWithDefaultStdlibEnabled()
+        konst project = createProjectWithDefaultStdlibEnabled()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         kotlin.jvm()
         kotlin.linuxX64("linux")
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonMain"), commonStdlibDependency(kotlin))
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonTest"), commonStdlibDependency(kotlin))
@@ -93,26 +93,26 @@ class IdeStdlibResolutionTest {
 
     @Test
     fun `test bamboo jvm`() {
-        val project = createProjectWithDefaultStdlibEnabled()
+        konst project = createProjectWithDefaultStdlibEnabled()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.linuxX64("linux")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
-        val jvmIntermediateMain = kotlin.sourceSets.create("jvmIntermediateMain") {
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst jvmIntermediateMain = kotlin.sourceSets.create("jvmIntermediateMain") {
             it.dependsOn(commonMain)
             jvmMain.dependsOn(it)
         }
-        val jvmIntermediateTest = kotlin.sourceSets.create("jvmIntermediateTest") {
+        konst jvmIntermediateTest = kotlin.sourceSets.create("jvmIntermediateTest") {
             it.dependsOn(commonTest)
             jvmTest.dependsOn(it)
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertStdlibDependencies(commonMain, commonStdlibDependency(kotlin))
         project.assertStdlibDependencies(commonTest, commonStdlibDependency(kotlin))
@@ -122,26 +122,26 @@ class IdeStdlibResolutionTest {
 
     @Test
     fun `test bamboo linux`() {
-        val project = createProjectWithDefaultStdlibEnabled()
+        konst project = createProjectWithDefaultStdlibEnabled()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.linuxX64("linux")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val linuxIntermediateMain = kotlin.sourceSets.create("linuxIntermediateMain") {
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst linuxIntermediateMain = kotlin.sourceSets.create("linuxIntermediateMain") {
             it.dependsOn(commonMain)
             linuxMain.dependsOn(it)
         }
-        val linuxIntermediateTest = kotlin.sourceSets.create("linuxIntermediateTest") {
+        konst linuxIntermediateTest = kotlin.sourceSets.create("linuxIntermediateTest") {
             it.dependsOn(commonTest)
             linuxTest.dependsOn(it)
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertStdlibDependencies(linuxIntermediateMain, nativeStdlibDependency(kotlin))
         project.assertStdlibDependencies(linuxIntermediateTest, nativeStdlibDependency(kotlin))
@@ -149,31 +149,31 @@ class IdeStdlibResolutionTest {
 
     @Test
     fun `test nativeShared`() {
-        val project = createProjectWithDefaultStdlibEnabled()
+        konst project = createProjectWithDefaultStdlibEnabled()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.linuxX64("x64")
         kotlin.linuxArm64("arm64")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val x64Main = kotlin.sourceSets.getByName("x64Main")
-        val x64Test = kotlin.sourceSets.getByName("x64Test")
-        val arm64Main = kotlin.sourceSets.getByName("arm64Main")
-        val arm64Test = kotlin.sourceSets.getByName("arm64Test")
-        val linuxSharedMain = kotlin.sourceSets.create("linuxSharedMain") {
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst x64Main = kotlin.sourceSets.getByName("x64Main")
+        konst x64Test = kotlin.sourceSets.getByName("x64Test")
+        konst arm64Main = kotlin.sourceSets.getByName("arm64Main")
+        konst arm64Test = kotlin.sourceSets.getByName("arm64Test")
+        konst linuxSharedMain = kotlin.sourceSets.create("linuxSharedMain") {
             it.dependsOn(commonMain)
             x64Main.dependsOn(it)
             arm64Main.dependsOn(it)
         }
-        val linuxSharedTest = kotlin.sourceSets.create("linuxSharedTest") {
+        konst linuxSharedTest = kotlin.sourceSets.create("linuxSharedTest") {
             it.dependsOn(commonTest)
             x64Test.dependsOn(it)
             arm64Test.dependsOn(it)
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertStdlibDependencies(
             linuxSharedMain, listOf(
@@ -195,13 +195,13 @@ class IdeStdlibResolutionTest {
 
     @Test
     fun `test jvm + android`() {
-        val project = createProjectWithAndroidAndDefaultStdlibEnabled()
+        konst project = createProjectWithAndroidAndDefaultStdlibEnabled()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.androidTarget()
         kotlin.jvm()
 
-        project.evaluate()
+        project.ekonstuate()
 
         // TODO think about jvm + android stdlib
         project.assertStdlibDependencies(kotlin.sourceSets.getByName("commonMain"), emptyList<Any>())

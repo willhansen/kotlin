@@ -33,11 +33,11 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.inline.isEffectivelyInlineOnly
 import org.jetbrains.kotlin.resolve.source.getPsi
 
-internal class DeclarationExporter(val context: StaticContext) {
-    private val objectLikeKinds = setOf(ClassKind.OBJECT, ClassKind.ENUM_ENTRY)
-    private val exportedDeclarations = mutableSetOf<MemberDescriptor>()
-    private val localPackageNames = mutableMapOf<FqName, JsName>()
-    private val statements: MutableList<JsStatement>
+internal class DeclarationExporter(konst context: StaticContext) {
+    private konst objectLikeKinds = setOf(ClassKind.OBJECT, ClassKind.ENUM_ENTRY)
+    private konst exportedDeclarations = mutableSetOf<MemberDescriptor>()
+    private konst localPackageNames = mutableMapOf<FqName, JsName>()
+    private konst statements: MutableList<JsStatement>
         get() = context.fragment.exportBlock.statements
 
     fun export(descriptor: MemberDescriptor, force: Boolean) {
@@ -46,13 +46,13 @@ internal class DeclarationExporter(val context: StaticContext) {
         if (isNativeObject(descriptor) || isLibraryObject(descriptor)) return
         if (descriptor.isEffectivelyInlineOnly()) return
 
-        val suggestedName = context.nameSuggestion.suggest(descriptor, context.bindingContext) ?: return
+        konst suggestedName = context.nameSuggestion.suggest(descriptor, context.bindingContext) ?: return
 
-        val container = suggestedName.scope
+        konst container = suggestedName.scope
         if (!descriptor.shouldBeExported(force)) return
         exportedDeclarations.add(descriptor)
 
-        val qualifier = when {
+        konst qualifier = when {
             container is PackageFragmentDescriptor -> {
                 getLocalPackageName(container.fqName).makeRef()
             }
@@ -78,9 +78,9 @@ internal class DeclarationExporter(val context: StaticContext) {
     }
 
     private fun assign(descriptor: DeclarationDescriptor, qualifier: JsExpression) {
-        val exportedName = context.getInnerNameForDescriptor(descriptor)
-        val expression = exportedName.makeRef()
-        val propertyName = context.getNameForDescriptor(descriptor)
+        konst exportedName = context.getInnerNameForDescriptor(descriptor)
+        konst expression = exportedName.makeRef()
+        konst propertyName = context.getNameForDescriptor(descriptor)
         if (propertyName.staticRef == null && exportedName != propertyName) {
             propertyName.staticRef = expression
         }
@@ -88,23 +88,23 @@ internal class DeclarationExporter(val context: StaticContext) {
     }
 
     private fun exportObject(declaration: ClassDescriptor, qualifier: JsExpression) {
-        val name = context.getNameForDescriptor(declaration)
-        val expression = JsAstUtils.defineGetter(qualifier, name.ident,
+        konst name = context.getNameForDescriptor(declaration)
+        konst expression = JsAstUtils.defineGetter(qualifier, name.ident,
                                                  context.getNameForObjectInstance(declaration).makeRef())
         statements += expression.exportStatement(declaration)
     }
 
     private fun exportProperty(declaration: PropertyDescriptor, qualifier: JsExpression) {
-        val propertyLiteral = JsObjectLiteral(true)
+        konst propertyLiteral = JsObjectLiteral(true)
 
-        val name = context.getNameForDescriptor(declaration).ident
-        val simpleProperty = JsDescriptorUtils.isSimpleFinalProperty(declaration) &&
+        konst name = context.getNameForDescriptor(declaration).ident
+        konst simpleProperty = JsDescriptorUtils.isSimpleFinalProperty(declaration) &&
                              !TranslationUtils.shouldAccessViaFunctions(declaration)
 
-        val exportedName: JsName
-        val getterBody: JsExpression = if (simpleProperty) {
+        konst exportedName: JsName
+        konst getterBody: JsExpression = if (simpleProperty) {
             exportedName = context.getInnerNameForDescriptor(declaration)
-            val accessToField = JsReturn(exportedName.makeRef())
+            konst accessToField = JsReturn(exportedName.makeRef())
             JsFunction(context.fragment.scope, JsBlock(accessToField), "$declaration getter")
         }
         else {
@@ -114,13 +114,13 @@ internal class DeclarationExporter(val context: StaticContext) {
         propertyLiteral.propertyInitializers += JsPropertyInitializer(JsNameRef("get"), getterBody)
 
         if (declaration.isVar) {
-            val setterBody: JsExpression = if (simpleProperty) {
-                val statements = mutableListOf<JsStatement>()
-                val function = JsFunction(context.fragment.scope, JsBlock(statements), "$declaration setter")
+            konst setterBody: JsExpression = if (simpleProperty) {
+                konst statements = mutableListOf<JsStatement>()
+                konst function = JsFunction(context.fragment.scope, JsBlock(statements), "$declaration setter")
                 function.source = declaration.source.getPsi()
-                val valueName = JsScope.declareTemporaryName("value")
-                function.parameters += JsParameter(valueName)
-                statements += assignment(context.getInnerNameForDescriptor(declaration).makeRef(), valueName.makeRef()).makeStmt()
+                konst konstueName = JsScope.declareTemporaryName("konstue")
+                function.parameters += JsParameter(konstueName)
+                statements += assignment(context.getInnerNameForDescriptor(declaration).makeRef(), konstueName.makeRef()).makeStmt()
                 function
             }
             else {

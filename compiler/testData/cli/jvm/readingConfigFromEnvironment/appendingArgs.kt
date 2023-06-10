@@ -1,5 +1,5 @@
 package kotlin
 
 fun main() {
-    val x = 1?.dec()
+    konst x = 1?.dec()
 }

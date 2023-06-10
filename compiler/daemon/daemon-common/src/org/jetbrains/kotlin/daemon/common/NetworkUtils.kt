@@ -27,27 +27,27 @@ import java.rmi.server.RMIClientSocketFactory
 import java.rmi.server.RMIServerSocketFactory
 import java.util.*
 
-const val SOCKET_ANY_FREE_PORT = 0
-const val DEFAULT_SERVER_SOCKET_BACKLOG_SIZE = 50
-const val DEFAULT_SOCKET_CONNECT_ATTEMPTS = 3
-const val DEFAULT_SOCKET_CONNECT_INTERVAL_MS = 10L
+const konst SOCKET_ANY_FREE_PORT = 0
+const konst DEFAULT_SERVER_SOCKET_BACKLOG_SIZE = 50
+const konst DEFAULT_SOCKET_CONNECT_ATTEMPTS = 3
+const konst DEFAULT_SOCKET_CONNECT_INTERVAL_MS = 10L
 
 object LoopbackNetworkInterface {
 
-    const val IPV4_LOOPBACK_INET_ADDRESS = "127.0.0.1"
-    const val IPV6_LOOPBACK_INET_ADDRESS = "::1"
+    const konst IPV4_LOOPBACK_INET_ADDRESS = "127.0.0.1"
+    const konst IPV6_LOOPBACK_INET_ADDRESS = "::1"
 
     // size of the requests queue for daemon services, so far seems that we don't need any big numbers here
     // but if we'll start getting "connection refused" errors, that could be the first place to try to fix it
-    val SERVER_SOCKET_BACKLOG_SIZE by lazy { CompilerSystemProperties.DAEMON_RMI_SOCKET_BACKLOG_SIZE_PROPERTY.value?.toIntOrNull() ?: DEFAULT_SERVER_SOCKET_BACKLOG_SIZE }
-    val SOCKET_CONNECT_ATTEMPTS by lazy { CompilerSystemProperties.DAEMON_RMI_SOCKET_CONNECT_ATTEMPTS_PROPERTY.value?.toIntOrNull() ?: DEFAULT_SOCKET_CONNECT_ATTEMPTS }
-    val SOCKET_CONNECT_INTERVAL_MS by lazy { CompilerSystemProperties.DAEMON_RMI_SOCKET_CONNECT_INTERVAL_PROPERTY.value?.toLongOrNull() ?: DEFAULT_SOCKET_CONNECT_INTERVAL_MS }
+    konst SERVER_SOCKET_BACKLOG_SIZE by lazy { CompilerSystemProperties.DAEMON_RMI_SOCKET_BACKLOG_SIZE_PROPERTY.konstue?.toIntOrNull() ?: DEFAULT_SERVER_SOCKET_BACKLOG_SIZE }
+    konst SOCKET_CONNECT_ATTEMPTS by lazy { CompilerSystemProperties.DAEMON_RMI_SOCKET_CONNECT_ATTEMPTS_PROPERTY.konstue?.toIntOrNull() ?: DEFAULT_SOCKET_CONNECT_ATTEMPTS }
+    konst SOCKET_CONNECT_INTERVAL_MS by lazy { CompilerSystemProperties.DAEMON_RMI_SOCKET_CONNECT_INTERVAL_PROPERTY.konstue?.toLongOrNull() ?: DEFAULT_SOCKET_CONNECT_INTERVAL_MS }
 
-    val serverLoopbackSocketFactory by lazy { ServerLoopbackSocketFactory() }
-    val clientLoopbackSocketFactory by lazy { ClientLoopbackSocketFactory() }
+    konst serverLoopbackSocketFactory by lazy { ServerLoopbackSocketFactory() }
+    konst clientLoopbackSocketFactory by lazy { ClientLoopbackSocketFactory() }
 
     // TODO switch to InetAddress.getLoopbackAddress on java 7+
-    val loopbackInetAddressName by lazy {
+    konst loopbackInetAddressName by lazy {
         try {
             if (InetAddress.getByName(null) is Inet6Address) IPV6_LOOPBACK_INET_ADDRESS else IPV4_LOOPBACK_INET_ADDRESS
         }
@@ -97,14 +97,14 @@ object LoopbackNetworkInterface {
 }
 
 
-private val portSelectionRng = Random()
+private konst portSelectionRng = Random()
 
 fun findPortAndCreateRegistry(attempts: Int, portRangeStart: Int, portRangeEnd: Int) : Pair<Registry, Int> {
     var i = 0
     var lastException: RemoteException? = null
 
     while (i++ < attempts) {
-        val port = portSelectionRng.nextInt(portRangeEnd - portRangeStart) + portRangeStart
+        konst port = portSelectionRng.nextInt(portRangeEnd - portRangeStart) + portRangeStart
         try {
             return Pair(LocateRegistry.createRegistry(port, LoopbackNetworkInterface.clientLoopbackSocketFactory, LoopbackNetworkInterface.serverLoopbackSocketFactory), port)
         }
@@ -121,7 +121,7 @@ fun findPortAndCreateRegistry(attempts: Int, portRangeStart: Int, portRangeEnd: 
  * which may be slow and can cause a timeout when there is a network problem/misconfiguration.
  */
 fun ensureServerHostnameIsSetUp() {
-    if (CompilerSystemProperties.JAVA_RMI_SERVER_HOSTNAME.value == null) {
-        CompilerSystemProperties.JAVA_RMI_SERVER_HOSTNAME.value = LoopbackNetworkInterface.loopbackInetAddressName
+    if (CompilerSystemProperties.JAVA_RMI_SERVER_HOSTNAME.konstue == null) {
+        CompilerSystemProperties.JAVA_RMI_SERVER_HOSTNAME.konstue = LoopbackNetworkInterface.loopbackInetAddressName
     }
 }

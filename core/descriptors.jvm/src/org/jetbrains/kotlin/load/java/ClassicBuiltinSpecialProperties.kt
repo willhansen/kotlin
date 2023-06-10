@@ -16,7 +16,7 @@ object ClassicBuiltinSpecialProperties {
     fun CallableMemberDescriptor.getBuiltinSpecialPropertyGetterName(): String? {
         assert(KotlinBuiltIns.isBuiltIn(this)) { "This method is defined only for builtin members, but $this found" }
 
-        val descriptor = propertyIfAccessor.firstOverridden { hasBuiltinSpecialPropertyFqName(it) } ?: return null
+        konst descriptor = propertyIfAccessor.firstOverridden { hasBuiltinSpecialPropertyFqName(it) } ?: return null
         return BuiltinSpecialProperties.PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP[descriptor.fqNameSafe]?.asString()
     }
 
@@ -27,7 +27,7 @@ object ClassicBuiltinSpecialProperties {
     }
 
     private fun CallableMemberDescriptor.hasBuiltinSpecialPropertyFqNameImpl(): Boolean {
-        if (fqNameOrNull() in BuiltinSpecialProperties.SPECIAL_FQ_NAMES && valueParameters.isEmpty()) return true
+        if (fqNameOrNull() in BuiltinSpecialProperties.SPECIAL_FQ_NAMES && konstueParameters.isEmpty()) return true
         if (!KotlinBuiltIns.isBuiltIn(this)) return false
 
         return overriddenDescriptors.any { hasBuiltinSpecialPropertyFqName(it) }

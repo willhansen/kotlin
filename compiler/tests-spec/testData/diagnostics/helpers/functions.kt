@@ -2,8 +2,8 @@ fun funWithoutArgs(): Int {
     return Any().hashCode().toInt()
 }
 
-fun funWithAnyArg(value_1: Any): Int {
-    return value_1.hashCode()
+fun funWithAnyArg(konstue_1: Any): Int {
+    return konstue_1.hashCode()
 }
 
 fun <K> select(vararg x: K): K = x[0]

@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.util.OperatorNameConventions.RANGE_UNTIL
 
 object UnsupportedUntilRangeDeclarationChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val isRangeUntilOperatorSupported = context.languageVersionSettings.supportsFeature(LanguageFeature.RangeUntilOperator)
+        konst isRangeUntilOperatorSupported = context.languageVersionSettings.supportsFeature(LanguageFeature.RangeUntilOperator)
 
         if (!isRangeUntilOperatorSupported && descriptor is FunctionDescriptor && descriptor.isOperator && descriptor.name == RANGE_UNTIL) {
-            val operatorKeyword = declaration.modifierList?.getModifier(KtTokens.OPERATOR_KEYWORD) ?: return
+            konst operatorKeyword = declaration.modifierList?.getModifier(KtTokens.OPERATOR_KEYWORD) ?: return
             context.trace.report(
                 Errors.UNSUPPORTED_FEATURE.on(operatorKeyword, LanguageFeature.RangeUntilOperator to context.languageVersionSettings)
             )

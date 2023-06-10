@@ -1,7 +1,7 @@
 class A {
     constructor() : superr(1,2) {}
-    val x: Int
+    konst x: Int
 }
 
 
-val x: Int = 1
+konst x: Int = 1

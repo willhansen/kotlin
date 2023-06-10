@@ -26,8 +26,8 @@ class Sub extends Super {
 // FILE: 1.kt
 
 fun box(): String {
-    val sub = Sub()
-    val sup: Super = sub
+    konst sub = Sub()
+    konst sup: Super = sub
 
     sup.foo{ }
     if (sub.lastCalled != "super") {

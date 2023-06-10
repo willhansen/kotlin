@@ -5,7 +5,7 @@ open class Base {
 
   }
 
-  val f1: Function0<Any>
+  konst f1: Function0<Any>
     field = f1
     get
 

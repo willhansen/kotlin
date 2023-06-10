@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinProjectArtifactDependency
 import org.jetbrains.kotlin.tooling.core.extrasKeyOf
 import org.jetbrains.kotlin.tooling.core.lazyProperty
 
-val projectArtifactsClasspathKey = extrasKeyOf<IdeaKotlinClasspath>("artifactsClasspath")
+konst projectArtifactsClasspathKey = extrasKeyOf<IdeaKotlinClasspath>("artifactsClasspath")
 
 /**
  * Classpath used inside IntelliJ/Kotlin to figure out the set of SourceSets that this dependency represents.
@@ -20,4 +20,4 @@ val projectArtifactsClasspathKey = extrasKeyOf<IdeaKotlinClasspath>("artifactsCl
  *
  * Note: Plugins like Android might use custom/different approaches on how to resolve this [IdeaKotlinProjectArtifactDependency]
  */
-val IdeaKotlinProjectArtifactDependency.artifactsClasspath by projectArtifactsClasspathKey.lazyProperty { IdeaKotlinClasspath() }
+konst IdeaKotlinProjectArtifactDependency.artifactsClasspath by projectArtifactsClasspathKey.lazyProperty { IdeaKotlinClasspath() }

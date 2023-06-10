@@ -1,13 +1,13 @@
 open class Base {
     companion object {
-        val some = 0
+        konst some = 0
     }
 }
 
 class Outer {
-    val codegen = ""
+    konst codegen = ""
 
     inner class Inner : Base() {
-        val c = codegen
+        konst c = codegen
     }
 }

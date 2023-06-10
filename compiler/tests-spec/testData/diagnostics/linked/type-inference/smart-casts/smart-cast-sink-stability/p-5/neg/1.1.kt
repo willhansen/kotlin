@@ -16,10 +16,10 @@
 // TESTCASE NUMBER: 1
 class Case1() {
 
-    class E(val plus: Inv? = null, val value: Inv? = null)
+    class E(konst plus: Inv? = null, konst konstue: Inv? = null)
 
     class Inv() {
-        operator fun invoke(value: Int) = Case1()
+        operator fun invoke(konstue: Int) = Case1()
     }
 
     fun foo(e: E) {

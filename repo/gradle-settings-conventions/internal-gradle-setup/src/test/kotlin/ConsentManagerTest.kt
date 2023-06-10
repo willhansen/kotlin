@@ -21,11 +21,11 @@ class ConsentManagerTest {
     @TempDir
     lateinit var workingDir: Path
 
-    private val localPropertiesFile by lazy {
+    private konst localPropertiesFile by lazy {
         workingDir.resolve("local.properties")
     }
 
-    private val modifier by lazy {
+    private konst modifier by lazy {
         LocalPropertiesModifier(localPropertiesFile.toFile())
     }
 
@@ -74,14 +74,14 @@ class ConsentManagerTest {
         consentDetailsLink: String? = null,
     ) {
         StringInputStream(prompt).bufferedReader().use { input ->
-            val outputStream = ByteArrayOutputStream(255)
+            konst outputStream = ByteArrayOutputStream(255)
             PrintStream(outputStream).use { printStream ->
-                val consentManager = ConsentManager(modifier, input, printStream)
-                val userDecision = consentManager.askForConsent(consentDetailsLink)
+                konst consentManager = ConsentManager(modifier, input, printStream)
+                konst userDecision = consentManager.askForConsent(consentDetailsLink)
                 assertEquals(expectedDecision, userDecision)
-                val content = Files.readAllLines(localPropertiesFile)
+                konst content = Files.readAllLines(localPropertiesFile)
                 assertTrue(content.contains(expectedLine))
-                val output = String(outputStream.toByteArray())
+                konst output = String(outputStream.toByteArray())
                 assertContainsExactTimes(output, USER_CONSENT_REQUEST, 1)
                 assertContainsExactTimes(output, PROMPT_REQUEST, promptCount)
 

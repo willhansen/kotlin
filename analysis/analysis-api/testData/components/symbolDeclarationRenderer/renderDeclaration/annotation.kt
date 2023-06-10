@@ -2,7 +2,7 @@
 
 @base annotation class derived
 
-@base class correct(@base val x: Int) {
+@base class correct(@base konst x: Int) {
     @base constructor(): this(0)
 }
 
@@ -13,8 +13,8 @@
 
 @base fun foo(@base y: @base Int): Int {
     @base fun bar(@base z: @base Int) = z + 1
-    @base val local = bar(y)
+    @base konst local = bar(y)
     return local
 }
 
-@base val z = 0
+@base konst z = 0

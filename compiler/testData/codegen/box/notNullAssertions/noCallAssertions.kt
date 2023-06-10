@@ -48,7 +48,7 @@ public class A {
 // MODULE: main(lib)
 // FILE: noCallAssertions.kt
 
-class AssertionChecker(val nullPointerExceptionExpected: Boolean) {
+class AssertionChecker(konst nullPointerExceptionExpected: Boolean) {
     operator fun invoke(name: String, f: () -> Any) {
         try {
             f()
@@ -73,7 +73,7 @@ class Delegated : Tr by Derived() {
 }
 
 fun checkAssertions(nullPointerExceptionExpected: Boolean) {
-    val check = AssertionChecker(nullPointerExceptionExpected)
+    konst check = AssertionChecker(nullPointerExceptionExpected)
 
     // simple call
     check("foo") { A().foo() }

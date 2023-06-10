@@ -22,15 +22,15 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinWithJavaCompilation
 import org.jetbrains.kotlin.gradle.utils.providerWithLazyConvention
 import org.jetbrains.kotlin.gradle.utils.withType
 
-internal const val KOTLIN_MODULE_GROUP = "org.jetbrains.kotlin"
-internal const val KOTLIN_COMPILER_EMBEDDABLE = "kotlin-compiler-embeddable"
-internal const val KOTLIN_BUILD_TOOLS_API_IMPL = "kotlin-build-tools-impl"
-internal const val PLATFORM_INTEGERS_SUPPORT_LIBRARY = "platform-integers"
+internal const konst KOTLIN_MODULE_GROUP = "org.jetbrains.kotlin"
+internal const konst KOTLIN_COMPILER_EMBEDDABLE = "kotlin-compiler-embeddable"
+internal const konst KOTLIN_BUILD_TOOLS_API_IMPL = "kotlin-build-tools-impl"
+internal const konst PLATFORM_INTEGERS_SUPPORT_LIBRARY = "platform-integers"
 
 internal fun customizeKotlinDependencies(project: Project) {
-    val topLevelExtension = project.topLevelExtension
-    val propertiesProvider = PropertiesProvider(project)
-    val coreLibrariesVersion = project.objects.providerWithLazyConvention {
+    konst topLevelExtension = project.topLevelExtension
+    konst propertiesProvider = PropertiesProvider(project)
+    konst coreLibrariesVersion = project.objects.providerWithLazyConvention {
         topLevelExtension.coreLibrariesVersion
     }
 
@@ -78,7 +78,7 @@ private fun ConfigurationContainer.configureDefaultVersionsResolutionStrategy(
 }
 
 private fun excludeStdlibAndKotlinTestCommonFromPlatformCompilations(project: Project) {
-    val multiplatformExtension = project.multiplatformExtensionOrNull ?: return
+    konst multiplatformExtension = project.multiplatformExtensionOrNull ?: return
 
     multiplatformExtension.targets.matching { it !is KotlinMetadataTarget }.configureEach {
         it.excludeStdlibAndKotlinTestCommonFromPlatformCompilations()

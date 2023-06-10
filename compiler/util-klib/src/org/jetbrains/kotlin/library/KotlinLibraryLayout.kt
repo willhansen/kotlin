@@ -18,32 +18,32 @@ package org.jetbrains.kotlin.library
 
 import org.jetbrains.kotlin.konan.file.File
 
-const val KLIB_MANIFEST_FILE_NAME = "manifest"
-const val KLIB_MODULE_METADATA_FILE_NAME = "module"
-const val KLIB_IR_FOLDER_NAME = "ir"
+const konst KLIB_MANIFEST_FILE_NAME = "manifest"
+const konst KLIB_MODULE_METADATA_FILE_NAME = "module"
+const konst KLIB_IR_FOLDER_NAME = "ir"
 
 /**
  * This scheme describes the Kotlin/Native Library (KLIB) layout.
  */
 interface KotlinLibraryLayout {
-    val libFile: File
-    val libraryName: String
+    konst libFile: File
+    konst libraryName: String
         get() = libFile.path
-    val component: String?
-    val componentDir: File
+    konst component: String?
+    konst componentDir: File
         get() = File(libFile, component!!)
-    val manifestFile
+    konst manifestFile
         get() = File(componentDir, KLIB_MANIFEST_FILE_NAME)
-    val resourcesDir
+    konst resourcesDir
         get() = File(componentDir, "resources")
-    val pre_1_4_manifest: File
+    konst pre_1_4_manifest: File
         get() = File(libFile, KLIB_MANIFEST_FILE_NAME)
 }
 
 interface MetadataKotlinLibraryLayout : KotlinLibraryLayout {
-    val metadataDir
+    konst metadataDir
         get() = File(componentDir, "linkdata")
-    val moduleHeaderFile
+    konst moduleHeaderFile
         get() = File(metadataDir, KLIB_MODULE_METADATA_FILE_NAME)
 
     fun packageFragmentsDir(packageName: String) =
@@ -54,23 +54,23 @@ interface MetadataKotlinLibraryLayout : KotlinLibraryLayout {
 }
 
 interface IrKotlinLibraryLayout : KotlinLibraryLayout {
-    val irDir
+    konst irDir
         get() = File(componentDir, KLIB_IR_FOLDER_NAME)
-    val irDeclarations
+    konst irDeclarations
         get() = File(irDir, "irDeclarations.knd")
-    val irTypes
+    konst irTypes
         get() = File(irDir, "types.knt")
-    val irSignatures
+    konst irSignatures
         get() = File(irDir, "signatures.knt")
-    val irStrings
+    konst irStrings
         get() = File(irDir, "strings.knt")
-    val irBodies
+    konst irBodies
         get() = File(irDir, "bodies.knb")
-    val irFiles
+    konst irFiles
         get() = File(irDir, "files.knf")
-    val dataFlowGraphFile
+    konst dataFlowGraphFile
         get() = File(irDir, "module_data_flow_graph")
-    val irDebugInfo
+    konst irDebugInfo
         get() = File(irDir, "debugInfo.knd")
 
     fun irDeclarations(file: File): File = File(file, "irDeclarations.knd")

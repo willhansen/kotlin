@@ -16,7 +16,7 @@ public final class A()B() /* A()B()*/ {
   public  A()B()();//  .ctor()
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 public abstract @interface Anno /* Anno*/ {
   public abstract StrangeEnum size();//  size()
 
@@ -30,15 +30,15 @@ public static final class C /* A B.C*/ {
 }
 
 public enum StrangeEnum /* StrangeEnum*/ {
-  InvalidFieldName;
+  InkonstidFieldName;
 
   private final java.lang.String size;
 
   @org.jetbrains.annotations.NotNull()
-  public static StrangeEnum valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static StrangeEnum konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static StrangeEnum[] values();//  values()
+  public static StrangeEnum[] konstues();//  konstues()
 
   private  StrangeEnum(java.lang.String);//  .ctor(java.lang.String)
 

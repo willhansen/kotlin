@@ -13,10 +13,10 @@ import kotlinx.serialization.json.*
 import kotlinx.serialization.descriptors.*
 
 @Serializable
-class Basic(val name: String, val age: UInt)
+class Basic(konst name: String, konst age: UInt)
 
 @Serializable
-class WithCompanion(val name: String, val age: UInt) {
+class WithCompanion(konst name: String, konst age: UInt) {
     companion object {
         fun foo() = "Test"
     }

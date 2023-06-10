@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val map = emptyMap<Int, Int>()
+    konst map = emptyMap<Int, Int>()
     var optimized = ""
     for (i in 0..map.size - 1) optimized += map[i]
 }

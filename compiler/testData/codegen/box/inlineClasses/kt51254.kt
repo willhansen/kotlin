@@ -2,7 +2,7 @@
 // WORKS_WHEN_VALUE_CLASS
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Inlined(val value: Int)
+konstue class Inlined(konst konstue: Int)
 
 sealed interface A <T: Inlined> {
     fun foo(i: T?)
@@ -13,7 +13,7 @@ class B : A<Nothing> {
 }
 
 fun box(): String {
-    val a: A<*> = B()
+    konst a: A<*> = B()
     a.foo(null)
     return "OK"
 }

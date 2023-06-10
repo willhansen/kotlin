@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.name.FqName
  *
  * In general, distinguishable declarations in Kotlin have to have different signatures.
  *
- * Some way to look at klib could be a map of [IdSignature] as a key and [org.jetbrains.kotlin.ir.declarations.IrDeclaration] as a value.
+ * Some way to look at klib could be a map of [IdSignature] as a key and [org.jetbrains.kotlin.ir.declarations.IrDeclaration] as a konstue.
  *
  * There is a bunch of existing signatures which are used to reference different kinds of declaration.
  * Some of them may look weird because of some Kotlin specifics on one hand, and on the other hand, klib structure now is something similar
@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.name.FqName
  * package foo.bar
  * public class C<TP1, TP2> {
  *   fun qux() { ... }
- *   val p
+ *   konst p
  * }
  * ```
  *
@@ -224,7 +224,7 @@ sealed class IdSignature {
     /**
      * Used for some special kinds of declarations like `expect`, or synthetic Java accessors.
      */
-    enum class Flags(val recursive: Boolean) {
+    enum class Flags(konst recursive: Boolean) {
         IS_EXPECT(true),
         IS_JAVA_FOR_KOTLIN_OVERRIDE_PROPERTY(false),
         IS_NATIVE_INTEROP_LIBRARY(true),
@@ -237,7 +237,7 @@ sealed class IdSignature {
     /**
      * Whether the signature has cross-module visibility.
      */
-    abstract val isPubliclyVisible: Boolean
+    abstract konst isPubliclyVisible: Boolean
 
     open fun isPackageSignature(): Boolean = false
 
@@ -254,12 +254,12 @@ sealed class IdSignature {
 
     protected open fun flags(): Long = 0
 
-    open val hasTopLevel: Boolean get() = !isPackageSignature()
+    open konst hasTopLevel: Boolean get() = !isPackageSignature()
 
-    open val isLocal: Boolean get() = !isPubliclyVisible
+    open konst isLocal: Boolean get() = !isPubliclyVisible
 
     // TODO: this API is a bit hacky, consider to act somehow else
-    open val visibleCrossFile: Boolean get() = true
+    open konst visibleCrossFile: Boolean get() = true
 
     override fun toString(): String =
         "${if (isLocal) "local " else ""}${render()}"
@@ -267,19 +267,19 @@ sealed class IdSignature {
     /**
      * This signature corresponds to a publicly accessible Kotlin declaration.
      */
-    class CommonSignature(val packageFqName: String, val declarationFqName: String, val id: Long?, val mask: Long) : IdSignature() {
-        override val isPubliclyVisible: Boolean get() = true
+    class CommonSignature(konst packageFqName: String, konst declarationFqName: String, konst id: Long?, konst mask: Long) : IdSignature() {
+        override konst isPubliclyVisible: Boolean get() = true
 
         override fun packageFqName(): FqName = FqName(packageFqName)
 
-        val shortName: String get() = declarationFqName.substringAfterLast('.')
+        konst shortName: String get() = declarationFqName.substringAfterLast('.')
 
-        val firstNameSegment: String get() = declarationFqName.substringBefore('.')
+        konst firstNameSegment: String get() = declarationFqName.substringBefore('.')
 
-        val nameSegments: List<String> get() = declarationFqName.split('.')
+        konst nameSegments: List<String> get() = declarationFqName.split('.')
 
         private fun adaptMask(old: Long): Long =
-            old xor Flags.values().fold(0L) { a, f ->
+            old xor Flags.konstues().fold(0L) { a, f ->
                 if (!f.recursive) a or (old and (1L shl f.ordinal))
                 else a
             }
@@ -291,8 +291,8 @@ sealed class IdSignature {
                 return this
             }
 
-            val nameSegments = nameSegments
-            val adaptedMask = adaptMask(mask)
+            konst nameSegments = nameSegments
+            konst adaptedMask = adaptMask(mask)
             if (nameSegments.size == 1 && mask == adaptedMask) return this
 
             return CommonSignature(packageFqName, nameSegments.first(), null, adaptedMask)
@@ -312,7 +312,7 @@ sealed class IdSignature {
             other is CommonSignature && packageFqName == other.packageFqName && declarationFqName == other.declarationFqName &&
                     id == other.id && mask == other.mask
 
-        private val hashCode = ((packageFqName.hashCode() * 31 + declarationFqName.hashCode()) * 31 + id.hashCode()) * 31 + mask.hashCode()
+        private konst hashCode = ((packageFqName.hashCode() * 31 + declarationFqName.hashCode()) * 31 + id.hashCode()) * 31 + mask.hashCode()
 
         override fun hashCode(): Int = hashCode
     }
@@ -320,14 +320,14 @@ sealed class IdSignature {
     /**
      * This signature is a container that contains 2 signatures ([container] and [inner] parts)
      */
-    class CompositeSignature(val container: IdSignature, val inner: IdSignature) : IdSignature() {
-        override val isPubliclyVisible: Boolean
+    class CompositeSignature(konst container: IdSignature, konst inner: IdSignature) : IdSignature() {
+        override konst isPubliclyVisible: Boolean
             get() = true
 
-        override val isLocal: Boolean
+        override konst isLocal: Boolean
             get() = inner.isLocal
 
-        override val visibleCrossFile: Boolean
+        override konst visibleCrossFile: Boolean
             get() = container.visibleCrossFile
 
         override fun topLevelSignature(): IdSignature {
@@ -369,8 +369,8 @@ sealed class IdSignature {
      * @property propertySignature A signature of the property that this accessor corresponds to.
      * @property accessorSignature A signature of the accessor function for the property.
      */
-    class AccessorSignature(val propertySignature: IdSignature, val accessorSignature: CommonSignature) : IdSignature() {
-        override val isPubliclyVisible: Boolean get() = true
+    class AccessorSignature(konst propertySignature: IdSignature, konst accessorSignature: CommonSignature) : IdSignature() {
+        override konst isPubliclyVisible: Boolean get() = true
 
         override fun topLevelSignature(): IdSignature = propertySignature.topLevelSignature()
 
@@ -388,7 +388,7 @@ sealed class IdSignature {
             if (other is AccessorSignature) accessorSignature == other.accessorSignature
             else accessorSignature == other
 
-        private val hashCode = accessorSignature.hashCode()
+        private konst hashCode = accessorSignature.hashCode()
 
         override fun hashCode(): Int = hashCode
     }
@@ -404,9 +404,9 @@ sealed class IdSignature {
      * @property fileName The name/path of the file entry.
      */
     class FileSignature(
-        private val id: Any,
-        private val fqName: FqName,
-        val fileName: String
+        private konst id: Any,
+        private konst fqName: FqName,
+        konst fileName: String
     ) : IdSignature() {
 
         constructor(fileSymbol: IrFileSymbol) : this(
@@ -417,10 +417,10 @@ sealed class IdSignature {
 
         override fun hashCode(): Int = id.hashCode()
 
-        override val isPubliclyVisible: Boolean
+        override konst isPubliclyVisible: Boolean
             get() = true
 
-        override val visibleCrossFile: Boolean
+        override konst visibleCrossFile: Boolean
             get() = false
 
         override fun isPackageSignature(): Boolean = true
@@ -437,7 +437,7 @@ sealed class IdSignature {
             return "File '$fileName'"
         }
 
-        override val hasTopLevel: Boolean
+        override konst hasTopLevel: Boolean
             get() = false
     }
 
@@ -446,11 +446,11 @@ sealed class IdSignature {
      *
      * This signature is not navigatable through files.
      */
-    class LocalSignature(val localFqn: String, val hashSig: Long?, val description: String?) : IdSignature() {
-        override val isPubliclyVisible: Boolean
+    class LocalSignature(konst localFqn: String, konst hashSig: Long?, konst description: String?) : IdSignature() {
+        override konst isPubliclyVisible: Boolean
             get() = false
 
-        override val isLocal: Boolean
+        override konst isLocal: Boolean
             get() = true
 
         fun index(): Int = hashSig?.toInt() ?: error("Expected index in ${render()}")
@@ -509,16 +509,16 @@ sealed class IdSignature {
      * NB: A similar clash is possible for generic member extension properties as well
      *
      * For each fake override `foo` we collect non-fake overrides overridden by `foo`
-     * such that their value parameter types contain type parameters of 'Base',
+     * such that their konstue parameter types contain type parameters of 'Base',
      * sorted by the fully-qualified name of the containing class.
      *
      * NB: this special case of [IdSignature] is JVM-specific.
      */
     class SpecialFakeOverrideSignature(
-        val memberSignature: IdSignature,
-        val overriddenSignatures: List<IdSignature>
+        konst memberSignature: IdSignature,
+        konst overriddenSignatures: List<IdSignature>
     ) : IdSignature() {
-        override val isPubliclyVisible: Boolean
+        override konst isPubliclyVisible: Boolean
             get() = memberSignature.isPubliclyVisible
 
         override fun topLevelSignature(): IdSignature =
@@ -548,7 +548,7 @@ sealed class IdSignature {
             return true
         }
 
-        private val hashCode = 31 * memberSignature.hashCode() + overriddenSignatures.hashCode()
+        private konst hashCode = 31 * memberSignature.hashCode() + overriddenSignatures.hashCode()
 
         override fun hashCode(): Int = hashCode
     }
@@ -561,16 +561,16 @@ sealed class IdSignature {
      *
      * @property id A hash of the member’s signature, not an ordered index, because it has to be stable.
      */
-    class FileLocalSignature(val container: IdSignature, val id: Long, val description: String? = null) : IdSignature() {
-        override val isPubliclyVisible: Boolean get() = false
+    class FileLocalSignature(konst container: IdSignature, konst id: Long, konst description: String? = null) : IdSignature() {
+        override konst isPubliclyVisible: Boolean get() = false
 
         override fun packageFqName(): FqName = container.packageFqName()
 
-        override val visibleCrossFile: Boolean
+        override konst visibleCrossFile: Boolean
             get() = false
 
         override fun topLevelSignature(): IdSignature {
-            val topLevelContainer = container.topLevelSignature()
+            konst topLevelContainer = container.topLevelSignature()
             if (topLevelContainer === container) {
                 if (topLevelContainer is CommonSignature && topLevelContainer.declarationFqName.isEmpty()) {
                     // private top level
@@ -587,26 +587,26 @@ sealed class IdSignature {
         override fun equals(other: Any?): Boolean =
             other is FileLocalSignature && id == other.id && container == other.container
 
-        private val hashCode = container.hashCode() * 31 + id.hashCode()
+        private konst hashCode = container.hashCode() * 31 + id.hashCode()
 
         override fun hashCode(): Int = hashCode
     }
 
     /**
-     * Used to reference local declarations like a variable, value parameters, or anonymous initializers.
+     * Used to reference local declarations like a variable, konstue parameters, or anonymous initializers.
      *
      * This signature is not navigatable through files.
      */
-    class ScopeLocalDeclaration(val id: Int, _description: String? = null) : IdSignature() {
+    class ScopeLocalDeclaration(konst id: Int, _description: String? = null) : IdSignature() {
 
-        val description: String = _description ?: "<no description>"
+        konst description: String = _description ?: "<no description>"
 
-        override val isPubliclyVisible: Boolean get() = false
+        override konst isPubliclyVisible: Boolean get() = false
 
-        override val visibleCrossFile: Boolean
+        override konst visibleCrossFile: Boolean
             get() = false
 
-        override val hasTopLevel: Boolean get() = false
+        override konst hasTopLevel: Boolean get() = false
 
         override fun topLevelSignature(): IdSignature = error("Is not supported for Local ID")
 
@@ -625,12 +625,12 @@ sealed class IdSignature {
     /**
      * A special signature to reference lowered declarations in PIR incremental cache.
      */
-    class LoweredDeclarationSignature(val original: IdSignature, val stage: Int, val index: Int) : IdSignature() {
-        override val isPubliclyVisible: Boolean get() = original.isPubliclyVisible
+    class LoweredDeclarationSignature(konst original: IdSignature, konst stage: Int, konst index: Int) : IdSignature() {
+        override konst isPubliclyVisible: Boolean get() = original.isPubliclyVisible
 
-        override val hasTopLevel: Boolean get() = true
+        override konst hasTopLevel: Boolean get() = true
 
-        override val visibleCrossFile: Boolean
+        override konst visibleCrossFile: Boolean
             get() = original.visibleCrossFile
 
         override fun topLevelSignature(): IdSignature = this
@@ -645,7 +645,7 @@ sealed class IdSignature {
             return other is LoweredDeclarationSignature && original == other.original && stage == other.stage && index == other.index
         }
 
-        private val hashCode = (index * 31 + stage) * 31 + original.hashCode()
+        private konst hashCode = (index * 31 + stage) * 31 + original.hashCode()
 
         override fun hashCode(): Int = hashCode
     }
@@ -659,5 +659,5 @@ interface IdSignatureComposer {
 
     fun withFileSignature(fileSignature: IdSignature.FileSignature, body: () -> Unit)
 
-    val mangler: KotlinMangler.DescriptorMangler
+    konst mangler: KotlinMangler.DescriptorMangler
 }

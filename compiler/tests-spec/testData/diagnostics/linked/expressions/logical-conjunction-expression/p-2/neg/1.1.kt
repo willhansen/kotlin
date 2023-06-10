@@ -33,27 +33,27 @@ fun foo() = run { false && <!TYPE_MISMATCH!>JavaClass.VALUE<!> && throw Exceptio
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val a: Boolean? = false
+    konst a: Boolean? = false
     checkSubtype<Boolean?>(a)
-    val x4 = <!TYPE_MISMATCH!>a<!> && true
+    konst x4 = <!TYPE_MISMATCH!>a<!> && true
     x4 checkType { check<Boolean>() }
 }
 
 // TESTCASE NUMBER: 2
 fun case2() {
-    val a: Any = false
+    konst a: Any = false
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>a<!>
-    val x4 = <!TYPE_MISMATCH!>a<!> && true
+    konst x4 = <!TYPE_MISMATCH!>a<!> && true
     x4 checkType { check<Boolean>() }
 }
 
 // TESTCASE NUMBER: 3
 fun case3() {
-    val a1 = false
-    val a2 = JavaClass.VALUE
+    konst a1 = false
+    konst a2 = JavaClass.VALUE
     <!DEBUG_INFO_EXPRESSION_TYPE("(kotlin.Any..kotlin.Any?)")!>a2<!>
 
-    val x3 = a1 && <!TYPE_MISMATCH!>a2<!>
+    konst x3 = a1 && <!TYPE_MISMATCH!>a2<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Boolean")!>x3<!>
 
     x3 checkType { check<Boolean>() }

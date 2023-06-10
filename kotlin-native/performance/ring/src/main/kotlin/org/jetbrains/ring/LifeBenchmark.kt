@@ -5,19 +5,19 @@ import kotlin.concurrent.*
 import org.jetbrains.benchmarksLauncher.Blackhole
 import org.jetbrains.benchmarksLauncher.Random
 
-data class Pos(val i: Int, val j: Int)
+data class Pos(konst i: Int, konst j: Int)
 
-data class Cell(val isAlive: Boolean = false)
+data class Cell(konst isAlive: Boolean = false)
 
-class Generation(private val width: Int, private val height: Int) {
-    val cells = Array(height) { _ -> Array(width) { _ -> Cell() } }
+class Generation(private konst width: Int, private konst height: Int) {
+    konst cells = Array(height) { _ -> Array(width) { _ -> Cell() } }
 
     fun evolve(): Generation {
-        val newGen = Generation(width, height)
+        konst newGen = Generation(width, height)
 
         for (i in 0 until height) {
             for (j in 0 until width) {
-                val neighborhood = mutableListOf<Pos>()
+                konst neighborhood = mutableListOf<Pos>()
                 for (di in -1..1) {
                     for (dj in -1..1) {
                         if (di != 0 || dj != 0) {
@@ -26,12 +26,12 @@ class Generation(private val width: Int, private val height: Int) {
                     }
                 }
                 assert(neighborhood.size == 8)
-                val aliveNeighbours = neighborhood
+                konst aliveNeighbours = neighborhood
                         .map { wrapOverEdge(it) }
                         .map { cells[it.i][it.j] }
                         .count { it.isAlive }
 
-                val newAlive =
+                konst newAlive =
                         if (cells[i][j].isAlive) aliveNeighbours in 2..3
                         else aliveNeighbours == 3
 
@@ -57,7 +57,7 @@ class Generation(private val width: Int, private val height: Int) {
 
     companion object {
         fun random(width: Int, height: Int): Generation {
-            val gen = Generation(width, height)
+            konst gen = Generation(width, height)
 
             for (i in 0 until height) {
                 for (j in 0 until width) {
@@ -70,7 +70,7 @@ class Generation(private val width: Int, private val height: Int) {
     }
 }
 
-class Universe(val width: Int, val height: Int) {
+class Universe(konst width: Int, konst height: Int) {
     var gen = Generation.random(width, height)
 
     fun evolve() {
@@ -79,9 +79,9 @@ class Universe(val width: Int, val height: Int) {
 }
 
 fun run(space: Int, time: Int) {
-    val width = space
-    val height = space
-    val universe = Universe(width, height)
+    konst width = space
+    konst height = space
+    konst universe = Universe(width, height)
     for (i in 0 until time) {
         universe.evolve()
     }
@@ -89,8 +89,8 @@ fun run(space: Int, time: Int) {
 }
 
 open class LifeBenchmark {
-    val spaceScale = BENCHMARK_SIZE / 40
-    val timeScale = 5
+    konst spaceScale = BENCHMARK_SIZE / 40
+    konst timeScale = 5
 
     fun bench() {
         run(spaceScale, timeScale)
@@ -98,12 +98,12 @@ open class LifeBenchmark {
 }
 
 class LifeWithMarkHelpersBenchmark : LifeBenchmark() {
-    val numberOfMarkHelpers = 5;
+    konst numberOfMarkHelpers = 5;
 
     @Volatile
     var done = false
-    val markHelpers = Array(numberOfMarkHelpers, { _ -> Worker.start() })
-    val markHelperJobs = markHelpers.map {
+    konst markHelpers = Array(numberOfMarkHelpers, { _ -> Worker.start() })
+    konst markHelperJobs = markHelpers.map {
         it.execute(TransferMode.SAFE, { this }) {
             // run some thread-local work in a loop without allocations or external calls
             fun fib(n: Int): Int {
@@ -111,7 +111,7 @@ class LifeWithMarkHelpersBenchmark : LifeBenchmark() {
                 var prev = 0
                 var cur = 1
                 for (i in 2..n) {
-                    val next = cur + prev
+                    konst next = cur + prev
                     prev = cur
                     cur = next
                 }

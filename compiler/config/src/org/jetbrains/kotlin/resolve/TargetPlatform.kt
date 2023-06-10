@@ -11,5 +11,5 @@ package org.jetbrains.kotlin.resolve
     level = DeprecationLevel.ERROR
 )
 interface TargetPlatform {
-    val platformName: String
+    konst platformName: String
 }

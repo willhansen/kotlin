@@ -34,45 +34,45 @@ import org.jetbrains.org.objectweb.asm.tree.*
 import org.jetbrains.org.objectweb.asm.tree.analysis.BasicValue
 import org.jetbrains.org.objectweb.asm.tree.analysis.Frame
 
-class RedundantBoxingMethodTransformer(private val generationState: GenerationState) : MethodTransformer() {
+class RedundantBoxingMethodTransformer(private konst generationState: GenerationState) : MethodTransformer() {
 
     override fun transform(internalClassName: String, node: MethodNode) {
-        val insns = node.instructions.toArray()
+        konst insns = node.instructions.toArray()
         if (insns.none { it.isBoxing(generationState) || it.isMethodInsnWith(Opcodes.INVOKEINTERFACE) { name == "next" } })
             return
 
-        val interpreter = RedundantBoxingInterpreter(node, generationState)
-        val frames = BoxingAnalyzer(internalClassName, node, interpreter).analyze()
+        konst interpreter = RedundantBoxingInterpreter(node, generationState)
+        konst frames = BoxingAnalyzer(internalClassName, node, interpreter).analyze()
 
         interpretPopInstructionsForBoxedValues(interpreter, node, frames)
 
-        val valuesToOptimize = interpreter.candidatesBoxedValues
+        konst konstuesToOptimize = interpreter.candidatesBoxedValues
 
-        if (!valuesToOptimize.isEmpty) {
-            // has side effect on valuesToOptimize
-            removeValuesFromTaintedProgressionIterators(valuesToOptimize)
+        if (!konstuesToOptimize.isEmpty) {
+            // has side effect on konstuesToOptimize
+            removeValuesFromTaintedProgressionIterators(konstuesToOptimize)
 
-            // has side effect on valuesToOptimize and frames, containing BoxedBasicValues that are unsafe to remove
-            removeValuesClashingWithVariables(valuesToOptimize, node, frames)
+            // has side effect on konstuesToOptimize and frames, containing BoxedBasicValues that are unsafe to remove
+            removeValuesClashingWithVariables(konstuesToOptimize, node, frames)
 
             // cannot replace them inplace because replaced variables indexes are known after remapping
-            val variablesForReplacement = adaptLocalSingleVariableTableForBoxedValuesAndPrepareMultiVariables(node, frames)
+            konst variablesForReplacement = adaptLocalSingleVariableTableForBoxedValuesAndPrepareMultiVariables(node, frames)
 
-            node.remapLocalVariables(buildVariablesRemapping(valuesToOptimize, node))
+            node.remapLocalVariables(buildVariablesRemapping(konstuesToOptimize, node))
 
             replaceVariables(node, variablesForReplacement)
 
-            sortAdaptableInstructionsForBoxedValues(node, valuesToOptimize)
+            sortAdaptableInstructionsForBoxedValues(node, konstuesToOptimize)
 
-            adaptInstructionsForBoxedValues(node, valuesToOptimize)
+            adaptInstructionsForBoxedValues(node, konstuesToOptimize)
         }
     }
 
-    private fun sortAdaptableInstructionsForBoxedValues(node: MethodNode, valuesToOptimize: RedundantBoxedValuesCollection) {
-        val indexes = node.instructions.withIndex().associate { (index, insn) -> insn to index }
-        for (value in valuesToOptimize) {
-            value.sortAssociatedInsns(indexes)
-            value.sortUnboxingWithCastInsns(indexes)
+    private fun sortAdaptableInstructionsForBoxedValues(node: MethodNode, konstuesToOptimize: RedundantBoxedValuesCollection) {
+        konst indexes = node.instructions.withIndex().associate { (index, insn) -> insn to index }
+        for (konstue in konstuesToOptimize) {
+            konstue.sortAssociatedInsns(indexes)
+            konstue.sortUnboxingWithCastInsns(indexes)
         }
     }
 
@@ -89,14 +89,14 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
         frames: Array<out Frame<BasicValue>?>
     ) {
         for (i in frames.indices) {
-            val insn = node.instructions[i]
+            konst insn = node.instructions[i]
             if (insn.opcode != Opcodes.POP && insn.opcode != Opcodes.POP2) {
                 continue
             }
 
-            val frame = frames[i] ?: continue
+            konst frame = frames[i] ?: continue
 
-            val top = frame.top()!!
+            konst top = frame.top()!!
             interpreter.processPopInstruction(insn, top)
 
             if (top.size == 1 && insn.opcode == Opcodes.POP2) {
@@ -106,17 +106,17 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
     }
 
     private fun removeValuesClashingWithVariables(
-        values: RedundantBoxedValuesCollection,
+        konstues: RedundantBoxedValuesCollection,
         node: MethodNode,
         frames: Array<Frame<BasicValue>?>
     ) {
-        while (removeValuesClashingWithVariablesPass(values, node, frames)) {
+        while (removeValuesClashingWithVariablesPass(konstues, node, frames)) {
             // do nothing
         }
     }
 
     private fun removeValuesClashingWithVariablesPass(
-        values: RedundantBoxedValuesCollection,
+        konstues: RedundantBoxedValuesCollection,
         node: MethodNode,
         frames: Array<out Frame<BasicValue>?>
     ): Boolean {
@@ -127,18 +127,18 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
                 continue
             }
 
-            val variableValues = getValuesStoredOrLoadedToVariable(localVariableNode, node, frames)
+            konst variableValues = getValuesStoredOrLoadedToVariable(localVariableNode, node, frames)
 
-            val boxed = variableValues.filterIsInstance<BoxedBasicValue>()
+            konst boxed = variableValues.filterIsInstance<BoxedBasicValue>()
 
             if (boxed.isEmpty()) continue
 
-            val firstBoxed = boxed.first().descriptor
+            konst firstBoxed = boxed.first().descriptor
             if (isUnsafeToRemoveBoxingForConnectedValues(variableValues, firstBoxed.unboxedTypes)) {
-                for (value in boxed) {
-                    val descriptor = value.descriptor
+                for (konstue in boxed) {
+                    konst descriptor = konstue.descriptor
                     if (descriptor.isSafeToRemove) {
-                        values.remove(descriptor)
+                        konstues.remove(descriptor)
                         needToRepeat = true
                     }
                 }
@@ -148,11 +148,11 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
         return needToRepeat
     }
 
-    private fun removeValuesFromTaintedProgressionIterators(valuesToOptimize: RedundantBoxedValuesCollection) {
-        for (descriptor in valuesToOptimize.toList()) {
-            val progressionIterator = descriptor?.progressionIterator ?: continue
+    private fun removeValuesFromTaintedProgressionIterators(konstuesToOptimize: RedundantBoxedValuesCollection) {
+        for (descriptor in konstuesToOptimize.toList()) {
+            konst progressionIterator = descriptor?.progressionIterator ?: continue
             if (progressionIterator.tainted) {
-                valuesToOptimize.remove(descriptor)
+                konstuesToOptimize.remove(descriptor)
             }
         }
     }
@@ -162,33 +162,33 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
             if (input === StrictBasicValue.UNINITIALIZED_VALUE) return@any false
             if (input !is CleanBoxedValue) return@any true
 
-            val descriptor = input.descriptor
+            konst descriptor = input.descriptor
             !descriptor.isSafeToRemove || descriptor.unboxedTypes != unboxedTypes
         }
 
     private fun adaptLocalSingleVariableTableForBoxedValuesAndPrepareMultiVariables(
         node: MethodNode, frames: Array<Frame<BasicValue>?>
     ): Map<LocalVariableNode, List<LocalVariableNode>> {
-        val localVariablesReplacement = mutableMapOf<LocalVariableNode, List<LocalVariableNode>>()
+        konst localVariablesReplacement = mutableMapOf<LocalVariableNode, List<LocalVariableNode>>()
         for (localVariableNode in node.localVariables) {
             if (Type.getType(localVariableNode.desc).sort != Type.OBJECT) {
                 continue
             }
 
-            for (value in getValuesStoredOrLoadedToVariable(localVariableNode, node, frames)) {
-                if (value !is BoxedBasicValue) continue
+            for (konstue in getValuesStoredOrLoadedToVariable(localVariableNode, node, frames)) {
+                if (konstue !is BoxedBasicValue) continue
 
-                val descriptor = value.descriptor
+                konst descriptor = konstue.descriptor
                 if (!descriptor.isSafeToRemove) continue
-                val unboxedType = descriptor.unboxedTypes.singleOrNull()
+                konst unboxedType = descriptor.unboxedTypes.singleOrNull()
                 if (unboxedType == null) {
                     var offset = 0
                     localVariablesReplacement[localVariableNode] =
                         descriptor.multiFieldValueClassUnboxInfo!!.unboxedTypesAndMethodNamesAndFieldNames.map { (type, _, fieldName) ->
-                            val newVarName = "${localVariableNode.name}-$fieldName"
-                            val newStart = localVariableNode.start
-                            val newEnd = localVariableNode.end
-                            val newOffset = offset
+                            konst newVarName = "${localVariableNode.name}-$fieldName"
+                            konst newStart = localVariableNode.start
+                            konst newEnd = localVariableNode.end
+                            konst newOffset = offset
                             offset += type.size
                             LocalVariableNode(newVarName, type.descriptor, null, newStart, newEnd, newOffset)
                         }
@@ -205,47 +205,47 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
         node: MethodNode,
         frames: Array<out Frame<BasicValue>?>
     ): List<BasicValue> {
-        val values = ArrayList<BasicValue>()
-        val insnList = node.instructions
-        val localVariableStart = insnList.indexOf(localVariableNode.start)
-        val localVariableEnd = insnList.indexOf(localVariableNode.end)
+        konst konstues = ArrayList<BasicValue>()
+        konst insnList = node.instructions
+        konst localVariableStart = insnList.indexOf(localVariableNode.start)
+        konst localVariableEnd = insnList.indexOf(localVariableNode.end)
 
         frames[localVariableStart]?.let { frameForStartInsn ->
             frameForStartInsn.getLocal(localVariableNode.index)?.let { localVarValue ->
-                values.add(localVarValue)
+                konstues.add(localVarValue)
             }
         }
 
         for (i in localVariableStart until localVariableEnd) {
             if (i < 0 || i >= insnList.size()) continue
-            val frame = frames[i] ?: continue
-            val insn = insnList[i]
+            konst frame = frames[i] ?: continue
+            konst insn = insnList[i]
             if ((insn.opcode == Opcodes.ASTORE || insn.opcode == Opcodes.ALOAD) &&
                 (insn as VarInsnNode).`var` == localVariableNode.index
             ) {
                 if (insn.getOpcode() == Opcodes.ASTORE) {
-                    values.add(frame.top()!!)
+                    konstues.add(frame.top()!!)
                 } else {
-                    values.add(frame.getLocal(insn.`var`))
+                    konstues.add(frame.getLocal(insn.`var`))
                 }
             }
         }
 
-        return values
+        return konstues
     }
 
-    private fun buildVariablesRemapping(values: RedundantBoxedValuesCollection, node: MethodNode): IntArray {
-        val wideVars2SizeMinusOne = HashMap<Int, Int>()
-        for (valueDescriptor in values) {
-            val size = valueDescriptor.getTotalUnboxSize()
+    private fun buildVariablesRemapping(konstues: RedundantBoxedValuesCollection, node: MethodNode): IntArray {
+        konst wideVars2SizeMinusOne = HashMap<Int, Int>()
+        for (konstueDescriptor in konstues) {
+            konst size = konstueDescriptor.getTotalUnboxSize()
             if (size < 2) continue
-            for (index in valueDescriptor.getVariablesIndexes()) {
+            for (index in konstueDescriptor.getVariablesIndexes()) {
                 wideVars2SizeMinusOne.merge(index, size - 1, ::maxOf)
             }
         }
 
-        node.maxLocals += wideVars2SizeMinusOne.values.sum()
-        val remapping = IntArray(node.maxLocals)
+        node.maxLocals += wideVars2SizeMinusOne.konstues.sum()
+        konst remapping = IntArray(node.maxLocals)
         for (i in remapping.indices) {
             remapping[i] = i
         }
@@ -261,39 +261,39 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
 
     private fun adaptInstructionsForBoxedValues(
         node: MethodNode,
-        values: RedundantBoxedValuesCollection
+        konstues: RedundantBoxedValuesCollection
     ) {
-        for (value in values) {
-            adaptInstructionsForBoxedValue(node, value)
+        for (konstue in konstues) {
+            adaptInstructionsForBoxedValue(node, konstue)
         }
     }
 
-    private fun adaptInstructionsForBoxedValue(node: MethodNode, value: BoxedValueDescriptor) {
-        adaptBoxingInstruction(node, value)
+    private fun adaptInstructionsForBoxedValue(node: MethodNode, konstue: BoxedValueDescriptor) {
+        adaptBoxingInstruction(node, konstue)
 
-        for (cast in value.getUnboxingWithCastInsns()) {
-            adaptCastInstruction(node, value, cast)
+        for (cast in konstue.getUnboxingWithCastInsns()) {
+            adaptCastInstruction(node, konstue, cast)
         }
 
         var extraSlotsUsed = 0
-        for (insn in value.getAssociatedInsns()) {
-            extraSlotsUsed = maxOf(extraSlotsUsed, adaptInstruction(node, insn, value))
+        for (insn in konstue.getAssociatedInsns()) {
+            extraSlotsUsed = maxOf(extraSlotsUsed, adaptInstruction(node, insn, konstue))
         }
         node.maxLocals += extraSlotsUsed
     }
 
-    private fun adaptBoxingInstruction(node: MethodNode, value: BoxedValueDescriptor) {
-        if (!value.isFromProgressionIterator()) {
-            node.instructions.remove(value.boxingInsn)
+    private fun adaptBoxingInstruction(node: MethodNode, konstue: BoxedValueDescriptor) {
+        if (!konstue.isFromProgressionIterator()) {
+            node.instructions.remove(konstue.boxingInsn)
         } else {
-            val iterator = value.progressionIterator ?: error("iterator should not be null because isFromProgressionIterator returns true")
+            konst iterator = konstue.progressionIterator ?: error("iterator should not be null because isFromProgressionIterator returns true")
 
             //add checkcast to kotlin/<T>Iterator before next() call
-            node.instructions.insertBefore(value.boxingInsn, TypeInsnNode(Opcodes.CHECKCAST, iterator.type.internalName))
+            node.instructions.insertBefore(konstue.boxingInsn, TypeInsnNode(Opcodes.CHECKCAST, iterator.type.internalName))
 
             //invoke concrete method (kotlin/<T>iterator.next<T>())
             node.instructions.set(
-                value.boxingInsn,
+                konstue.boxingInsn,
                 MethodInsnNode(
                     Opcodes.INVOKEVIRTUAL,
                     iterator.type.internalName, iterator.nextMethodName, iterator.nextMethodDesc,
@@ -305,13 +305,13 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
 
     private fun adaptCastInstruction(
         node: MethodNode,
-        value: BoxedValueDescriptor,
+        konstue: BoxedValueDescriptor,
         castWithType: Pair<AbstractInsnNode, Type>
     ) {
-        val castInsn = castWithType.getFirst()
-        val castInsnsListener = MethodNode(Opcodes.API_VERSION)
+        konst castInsn = castWithType.getFirst()
+        konst castInsnsListener = MethodNode(Opcodes.API_VERSION)
         InstructionAdapter(castInsnsListener)
-            .cast(value.getUnboxTypeOrOtherwiseMethodReturnType(castInsn as? MethodInsnNode), castWithType.getSecond())
+            .cast(konstue.getUnboxTypeOrOtherwiseMethodReturnType(castInsn as? MethodInsnNode), castWithType.getSecond())
 
 
         for (insn in castInsnsListener.instructions.toArray()) {
@@ -322,29 +322,29 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
     }
 
     private fun adaptInstruction(
-        node: MethodNode, insn: AbstractInsnNode, value: BoxedValueDescriptor
+        node: MethodNode, insn: AbstractInsnNode, konstue: BoxedValueDescriptor
     ): Int {
         var usedExtraSlots = 0
 
         when (insn.opcode) {
             Opcodes.POP -> {
-                val newPops = makePops(value.unboxedTypes)
+                konst newPops = makePops(konstue.unboxedTypes)
                 node.instructions.insert(insn, newPops)
                 node.instructions.remove(insn)
             }
 
-            Opcodes.DUP -> when (value.getTotalUnboxSize()) {
+            Opcodes.DUP -> when (konstue.getTotalUnboxSize()) {
                 1 -> Unit
                 2 -> node.instructions.set(insn, InsnNode(Opcodes.DUP2))
                 else -> {
-                    usedExtraSlots = value.getTotalUnboxSize()
+                    usedExtraSlots = konstue.getTotalUnboxSize()
                     var currentSlot = node.maxLocals
-                    val slotIndices = value.unboxedTypes.map { type -> currentSlot.also { currentSlot += type.size } }
-                    for ((type, index) in (value.unboxedTypes zip slotIndices).asReversed()) {
+                    konst slotIndices = konstue.unboxedTypes.map { type -> currentSlot.also { currentSlot += type.size } }
+                    for ((type, index) in (konstue.unboxedTypes zip slotIndices).asReversed()) {
                         node.instructions.insertBefore(insn, VarInsnNode(type.getOpcode(Opcodes.ISTORE), index))
                     }
                     repeat(2) {
-                        for ((type, index) in (value.unboxedTypes zip slotIndices)) {
+                        for ((type, index) in (konstue.unboxedTypes zip slotIndices)) {
                             node.instructions.insertBefore(insn, VarInsnNode(type.getOpcode(Opcodes.ILOAD), index))
                         }
                     }
@@ -353,21 +353,21 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
             }
 
             Opcodes.ASTORE, Opcodes.ALOAD -> {
-                val isStore = insn.opcode == Opcodes.ASTORE
-                val singleUnboxedType = value.unboxedTypes.singleOrNull()
+                konst isStore = insn.opcode == Opcodes.ASTORE
+                konst singleUnboxedType = konstue.unboxedTypes.singleOrNull()
                 if (singleUnboxedType == null) {
-                    val newInstructions = mutableListOf<VarInsnNode>()
+                    konst newInstructions = mutableListOf<VarInsnNode>()
                     var offset = 0
-                    for (unboxedType in value.unboxedTypes) {
-                        val opcode = unboxedType.getOpcode(if (isStore) Opcodes.ISTORE else Opcodes.ILOAD)
-                        val newIndex = (insn as VarInsnNode).`var` + offset
+                    for (unboxedType in konstue.unboxedTypes) {
+                        konst opcode = unboxedType.getOpcode(if (isStore) Opcodes.ISTORE else Opcodes.ILOAD)
+                        konst newIndex = (insn as VarInsnNode).`var` + offset
                         newInstructions.add(VarInsnNode(opcode, newIndex))
                         offset += unboxedType.size
                     }
                     if (isStore) {
-                        val previousInstructions = generateSequence(insn.previous) { it.previous }
-                            .take(value.unboxedTypes.size).toList().asReversed()
-                        if (value.unboxedTypes.map { it.getOpcode(Opcodes.ILOAD) } == previousInstructions.map { it.opcode }) {
+                        konst previousInstructions = generateSequence(insn.previous) { it.previous }
+                            .take(konstue.unboxedTypes.size).toList().asReversed()
+                        if (konstue.unboxedTypes.map { it.getOpcode(Opcodes.ILOAD) } == previousInstructions.map { it.opcode }) {
                             // help optimizer and put each xSTORE after the corresponding xLOAD
                             for ((load, store) in previousInstructions zip newInstructions) {
                                 newInstructions.remove(store)
@@ -385,22 +385,22 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
                     }
                     node.instructions.remove(insn)
                 } else {
-                    val storeOpcode = singleUnboxedType.getOpcode(if (isStore) Opcodes.ISTORE else Opcodes.ILOAD)
+                    konst storeOpcode = singleUnboxedType.getOpcode(if (isStore) Opcodes.ISTORE else Opcodes.ILOAD)
                     node.instructions.set(insn, VarInsnNode(storeOpcode, (insn as VarInsnNode).`var`))
                 }
             }
 
             Opcodes.INSTANCEOF -> {
-                node.instructions.insertBefore(insn, makePops(value.unboxedTypes))
+                node.instructions.insertBefore(insn, makePops(konstue.unboxedTypes))
                 node.instructions.set(insn, InsnNode(Opcodes.ICONST_1))
             }
 
             Opcodes.INVOKESTATIC -> {
                 when {
                     insn.isAreEqualIntrinsic() ->
-                        adaptAreEqualIntrinsic(node, insn, value)
+                        adaptAreEqualIntrinsic(node, insn, konstue)
                     insn.isJavaLangComparableCompareTo() ->
-                        adaptJavaLangComparableCompareTo(node, insn, value)
+                        adaptJavaLangComparableCompareTo(node, insn, konstue)
                     insn.isJavaLangClassBoxing() ||
                             insn.isJavaLangClassUnboxing() ->
                         node.instructions.remove(insn)
@@ -411,7 +411,7 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
 
             Opcodes.INVOKEINTERFACE -> {
                 if (insn.isJavaLangComparableCompareTo()) {
-                    adaptJavaLangComparableCompareTo(node, insn, value)
+                    adaptJavaLangComparableCompareTo(node, insn, konstue)
                 } else {
                     throwCannotAdaptInstruction(insn)
                 }
@@ -419,18 +419,18 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
 
             Opcodes.CHECKCAST -> node.instructions.remove(insn)
             Opcodes.INVOKEVIRTUAL -> {
-                if (value.unboxedTypes.size != 1) {
-                    val unboxMethodCall = insn as MethodInsnNode
-                    val unboxMethodIndex = value.multiFieldValueClassUnboxInfo!!.unboxedMethodNames.indexOf(unboxMethodCall.name)
-                    val unboxedType = value.unboxedTypes[unboxMethodIndex]
+                if (konstue.unboxedTypes.size != 1) {
+                    konst unboxMethodCall = insn as MethodInsnNode
+                    konst unboxMethodIndex = konstue.multiFieldValueClassUnboxInfo!!.unboxedMethodNames.indexOf(unboxMethodCall.name)
+                    konst unboxedType = konstue.unboxedTypes[unboxMethodIndex]
 
                     var canRemoveInsns = true
                     var savedToVariable = false
-                    for ((i, type) in value.unboxedTypes.withIndex().toList().asReversed()) {
+                    for ((i, type) in konstue.unboxedTypes.withIndex().toList().asReversed()) {
                         fun canRemoveInsn(includeDup: Boolean): Boolean {
                             if (!canRemoveInsns) return false
-                            val insnToCheck = if (i < unboxMethodIndex) unboxMethodCall.previous.previous else unboxMethodCall.previous
-                            val result = when (insnToCheck.opcode) {
+                            konst insnToCheck = if (i < unboxMethodIndex) unboxMethodCall.previous.previous else unboxMethodCall.previous
+                            konst result = when (insnToCheck.opcode) {
                                 type.getOpcode(Opcodes.ILOAD) -> true
                                 Opcodes.DUP2 -> includeDup && type.size == 2
                                 Opcodes.DUP -> includeDup && type.size == 1
@@ -482,9 +482,9 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
     private fun adaptAreEqualIntrinsic(
         node: MethodNode,
         insn: AbstractInsnNode,
-        value: BoxedValueDescriptor
+        konstue: BoxedValueDescriptor
     ) {
-        val unboxedType = value.unboxedTypes.singleOrNull()
+        konst unboxedType = konstue.unboxedTypes.singleOrNull()
 
         when (unboxedType?.sort) {
             Type.BOOLEAN, Type.BYTE, Type.SHORT, Type.INT, Type.CHAR ->
@@ -500,7 +500,7 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
 
     private fun adaptAreEqualIntrinsicForInt(node: MethodNode, insn: AbstractInsnNode) {
         node.instructions.run {
-            val next = insn.next
+            konst next = insn.next
             if (next != null && (next.opcode == Opcodes.IFEQ || next.opcode == Opcodes.IFNE)) {
                 fuseAreEqualWithBranch(node, insn, Opcodes.IF_ICMPNE, Opcodes.IF_ICMPEQ)
                 remove(insn)
@@ -515,7 +515,7 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
     private fun adaptAreEqualIntrinsicForLong(node: MethodNode, insn: AbstractInsnNode) {
         node.instructions.run {
             insertBefore(insn, InsnNode(Opcodes.LCMP))
-            val next = insn.next
+            konst next = insn.next
             if (next != null && (next.opcode == Opcodes.IFEQ || next.opcode == Opcodes.IFNE)) {
                 fuseAreEqualWithBranch(node, insn, Opcodes.IFNE, Opcodes.IFEQ)
                 remove(insn)
@@ -534,9 +534,9 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
         ifNotEqualOpcode: Int
     ) {
         node.instructions.run {
-            val next = insn.next
+            konst next = insn.next
             assert(next is JumpInsnNode) { "JumpInsnNode expected: $next" }
-            val nextLabel = (next as JumpInsnNode).label
+            konst nextLabel = (next as JumpInsnNode).label
             when {
                 next.getOpcode() == Opcodes.IFEQ ->
                     insertBefore(insn, JumpInsnNode(ifEqualOpcode, nextLabel))
@@ -550,8 +550,8 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
 
     private fun ifEqual1Else0(node: MethodNode, insn: AbstractInsnNode, ifneOpcode: Int) {
         node.instructions.run {
-            val lNotEqual = LabelNode(Label())
-            val lDone = LabelNode(Label())
+            konst lNotEqual = LabelNode(Label())
+            konst lDone = LabelNode(Label())
             insertBefore(insn, JumpInsnNode(ifneOpcode, lNotEqual))
             insertBefore(insn, InsnNode(Opcodes.ICONST_1))
             insertBefore(insn, JumpInsnNode(Opcodes.GOTO, lDone))
@@ -564,9 +564,9 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
     private fun adaptJavaLangComparableCompareTo(
         node: MethodNode,
         insn: AbstractInsnNode,
-        value: BoxedValueDescriptor
+        konstue: BoxedValueDescriptor
     ) {
-        val unboxedType = value.unboxedTypes.single()
+        konst unboxedType = konstue.unboxedTypes.single()
 
         when (unboxedType.sort) {
             Type.BOOLEAN, Type.BYTE, Type.SHORT, Type.INT, Type.CHAR ->
@@ -584,8 +584,8 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
 
     private fun adaptJavaLangComparableCompareToForInt(node: MethodNode, insn: AbstractInsnNode) {
         node.instructions.run {
-            val next = insn.next
-            val next2 = next?.next
+            konst next = insn.next
+            konst next2 = next?.next
             when {
                 next != null && next2 != null &&
                         next.opcode == Opcodes.ICONST_0 &&
@@ -598,8 +598,8 @@ class RedundantBoxingMethodTransformer(private val generationState: GenerationSt
                 next != null &&
                         next.opcode >= Opcodes.IFEQ && next.opcode <= Opcodes.IFLE -> {
                     // Fuse: compareTo + IFxx -> IF_ICMPxx
-                    val nextLabel = (next as JumpInsnNode).label
-                    val ifCmpOpcode = next.opcode - Opcodes.IFEQ + Opcodes.IF_ICMPEQ
+                    konst nextLabel = (next as JumpInsnNode).label
+                    konst ifCmpOpcode = next.opcode - Opcodes.IFEQ + Opcodes.IF_ICMPEQ
                     insertBefore(insn, JumpInsnNode(ifCmpOpcode, nextLabel))
                     remove(insn)
                     remove(next)

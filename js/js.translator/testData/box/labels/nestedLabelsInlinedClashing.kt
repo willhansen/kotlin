@@ -7,12 +7,12 @@ package foo
 // CHECK_LABELS_COUNT: function=test name=loop_1 count=1
 
 class State() {
-    public var value: Int = 0
+    public var konstue: Int = 0
 }
 
 internal inline fun test1(state: State) {
     loop@ for (i in 1..10) {
-        state.value++
+        state.konstue++
         if (i == 2) break@loop
     }
 }
@@ -36,9 +36,9 @@ internal fun test(state: State) {
 }
 
 fun box(): String {
-    val state = State()
+    konst state = State()
     test(state)
-    assertEquals(8, state.value)
+    assertEquals(8, state.konstue)
 
     return "OK"
 }

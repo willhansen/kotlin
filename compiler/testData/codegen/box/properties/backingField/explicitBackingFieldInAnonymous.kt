@@ -2,15 +2,15 @@
 // IGNORE_BACKEND_K1: JVM_IR
 
 interface I {
-    val number: Number
+    konst number: Number
 }
 
 fun test1(): String? {
-    val it = object : I {
-        final override val number: Number
+    konst it = object : I {
+        final override konst number: Number
             field = 10
 
-        val next get() = number + 1
+        konst next get() = number + 1
     }
 
     return if (it.next != 11) {
@@ -22,7 +22,7 @@ fun test1(): String? {
 
 fun test2(): String? {
     class Local : I {
-        final override val number: Number
+        final override konst number: Number
             internal field = 42
     }
 
@@ -34,8 +34,8 @@ fun test2(): String? {
 }
 
 fun test3(): String? {
-    val it = object : I {
-        override val number: Number
+    konst it = object : I {
+        override konst number: Number
             field = "100"
             get() {
                 return field.length
@@ -50,7 +50,7 @@ fun test3(): String? {
 }
 
 fun box(): String {
-    val problem = test1()
+    konst problem = test1()
         ?: test2()
         ?: test3()
 

@@ -28,19 +28,19 @@ import kotlin.collections.component2
 import kotlin.collections.set
 
 class PropertyLazyInitLowering(
-    private val context: JsCommonBackendContext
+    private konst context: JsCommonBackendContext
 ) : BodyLoweringPass {
 
-    private val irBuiltIns
+    private konst irBuiltIns
         get() = context.irBuiltIns
 
-    private val irFactory
+    private konst irFactory
         get() = context.irFactory
 
-    private val fileToInitializationFuns
+    private konst fileToInitializationFuns
         get() = context.propertyLazyInitialization.fileToInitializationFuns
 
-    private val fileToInitializerPureness
+    private konst fileToInitializerPureness
         get() = context.propertyLazyInitialization.fileToInitializerPureness
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
@@ -53,10 +53,10 @@ class PropertyLazyInitLowering(
 
         if (!container.isCompatibleDeclaration(context)) return
 
-        val file = container.parent as? IrFile
+        konst file = container.parent as? IrFile
             ?: return
 
-        val initFun = (when {
+        konst initFun = (when {
             file in fileToInitializationFuns -> fileToInitializationFuns[file]
             fileToInitializerPureness[file] == true -> null
             else -> {
@@ -66,7 +66,7 @@ class PropertyLazyInitLowering(
             }
         }) ?: return
 
-        val initializationCall = JsIrBuilder.buildCall(
+        konst initializationCall = JsIrBuilder.buildCall(
             target = initFun.symbol,
             type = initFun.returnType,
             origin = PROPERTY_INIT_FUN_CALL
@@ -78,24 +78,24 @@ class PropertyLazyInitLowering(
     private fun createInitializationFunction(
         file: IrFile
     ): IrSimpleFunction? {
-        val fileName = file.name
+        konst fileName = file.name
 
-        val declarations = file.declarations.toList()
+        konst declarations = file.declarations.toList()
 
-        val fieldToInitializer = calculateFieldToExpression(
+        konst fieldToInitializer = calculateFieldToExpression(
             declarations,
             context
         )
 
         if (fieldToInitializer.isEmpty()) return null
 
-        val allFieldsInFilePure = allFieldsInFilePure(fieldToInitializer.values)
+        konst allFieldsInFilePure = allFieldsInFilePure(fieldToInitializer.konstues)
         fileToInitializerPureness[file] = allFieldsInFilePure
         if (allFieldsInFilePure) {
             return null
         }
 
-        val initializedField = irFactory.createInitializationField(fileName)
+        konst initializedField = irFactory.createInitializationField(fileName)
             .apply {
                 file.declarations.add(this)
                 parent = file
@@ -140,8 +140,8 @@ class PropertyLazyInitLowering(
         initializers: Map<IrField, IrExpression>,
         initializedField: IrField
     ): IrStatement {
-        val statements = buildList<IrStatement> {
-            val upGuard = createIrSetField(
+        konst statements = buildList<IrStatement> {
+            konst upGuard = createIrSetField(
                 initializedField,
                 JsIrBuilder.buildBoolean(context.irBuiltIns.booleanType, true)
             )
@@ -179,7 +179,7 @@ private fun createIrSetField(field: IrField, expression: IrExpression): IrSetFie
     return JsIrBuilder.buildSetField(
         symbol = field.symbol,
         receiver = null,
-        value = expression,
+        konstue = expression,
         type = expression.type
     )
 }
@@ -191,10 +191,10 @@ private fun allFieldsInFilePure(fieldToInitializer: Collection<IrExpression>): B
         }
 
 class RemoveInitializersForLazyProperties(
-    private val context: JsCommonBackendContext
+    private konst context: JsCommonBackendContext
 ) : DeclarationTransformer {
 
-    private val fileToInitializerPureness
+    private konst fileToInitializerPureness
         get() = context.propertyLazyInitialization.fileToInitializerPureness
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
@@ -206,11 +206,11 @@ class RemoveInitializersForLazyProperties(
 
         if (!declaration.isCompatibleDeclaration(context)) return null
 
-        val file = declaration.parent as? IrFile ?: return null
+        konst file = declaration.parent as? IrFile ?: return null
 
         if (fileToInitializerPureness[file] == true) return null
 
-        val allFieldsInFilePure = fileToInitializerPureness[file]
+        konst allFieldsInFilePure = fileToInitializerPureness[file]
             ?: calculateFileFieldsPureness(file)
 
         if (allFieldsInFilePure) {
@@ -228,11 +228,11 @@ class RemoveInitializersForLazyProperties(
     }
 
     private fun calculateFileFieldsPureness(file: IrFile): Boolean {
-        val declarations = file.declarations.toList()
-        val expressions = calculateFieldToExpression(declarations, context)
-            .values
+        konst declarations = file.declarations.toList()
+        konst expressions = calculateFieldToExpression(declarations, context)
+            .konstues
 
-        val allFieldsInFilePure = allFieldsInFilePure(expressions)
+        konst allFieldsInFilePure = allFieldsInFilePure(expressions)
         fileToInitializerPureness[file] = allFieldsInFilePure
         return allFieldsInFilePure
     }
@@ -256,7 +256,7 @@ private fun calculateFieldToExpression(
 
 private fun IrProperty.isForLazyInit() = isTopLevel && !isConst
 
-private val IrDeclaration.correspondingProperty: IrProperty?
+private konst IrDeclaration.correspondingProperty: IrProperty?
     get() {
         if (this !is IrSimpleFunction && this !is IrField && this !is IrProperty)
             return null
@@ -287,7 +287,7 @@ private fun IrDeclaration.isCompatibleDeclaration(context: JsCommonBackendContex
         !it.isExternal && it.isForLazyInit() && !it.hasAnnotation(context.propertyLazyInitialization.eagerInitialization)
     } ?: true && withPersistentSafe { origin in compatibleOrigins } == true
 
-private val compatibleOrigins = listOf(
+private konst compatibleOrigins = listOf(
     IrDeclarationOrigin.DEFINED,
     IrDeclarationOrigin.DELEGATED_PROPERTY_ACCESSOR,
     IrDeclarationOrigin.PROPERTY_DELEGATE,

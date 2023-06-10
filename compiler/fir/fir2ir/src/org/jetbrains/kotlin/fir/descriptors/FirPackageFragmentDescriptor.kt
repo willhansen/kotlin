@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
-open class FirPackageFragmentDescriptor(override val fqName: FqName, val moduleDescriptor: ModuleDescriptor) : PackageFragmentDescriptor {
+open class FirPackageFragmentDescriptor(override konst fqName: FqName, konst moduleDescriptor: ModuleDescriptor) : PackageFragmentDescriptor {
     override fun getContainingDeclaration(): ModuleDescriptor {
         return moduleDescriptor
     }
@@ -42,7 +42,7 @@ open class FirPackageFragmentDescriptor(override val fqName: FqName, val moduleD
         visitor?.visitPackageFragmentDescriptor(this, null)
     }
 
-    override val annotations: Annotations
+    override konst annotations: Annotations
         get() = Annotations.EMPTY
 
 }

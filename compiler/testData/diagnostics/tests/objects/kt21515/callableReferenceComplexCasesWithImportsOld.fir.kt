@@ -17,7 +17,7 @@ object A {
     }
 
     class Derived : Base() {
-        val a = FromABaseCompanion::foo
+        konst a = FromABaseCompanion::foo
     }
 }
 
@@ -35,7 +35,7 @@ object B {
     }
 
     class Derived : Base() {
-        val a = FromBBaseCompanion::foo
+        konst a = FromBBaseCompanion::foo
     }
 }
 
@@ -53,7 +53,7 @@ object C {
     }
 
     class Derived : Base() {
-        val a = FromCBaseCompanion::foo
+        konst a = FromCBaseCompanion::foo
     }
 }
 
@@ -69,6 +69,6 @@ object D {
     }
 
     class Derived : Base() {
-        val a = FromDBaseCompanion::foo
+        konst a = FromDBaseCompanion::foo
     }
 }

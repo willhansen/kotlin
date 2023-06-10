@@ -8,4 +8,4 @@
 
 class User(var property: String = drop(4))
 
-val rv = User().property
+konst rv = User().property

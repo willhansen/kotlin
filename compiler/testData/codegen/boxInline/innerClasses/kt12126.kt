@@ -5,7 +5,7 @@
 package test
 
 open class A {
-    val v = "OK"
+    konst v = "OK"
 
     open inner class AA {
         protected inline fun inAA(crossinline modifier: (String) -> String): String = modifier(v)

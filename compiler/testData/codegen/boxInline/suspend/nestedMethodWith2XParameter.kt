@@ -4,7 +4,7 @@
 // FILE: a.kt
 
 inline suspend fun f(crossinline lambda: suspend (Double) -> Double): Double {
-    val obj = object {
+    konst obj = object {
         suspend fun g(x: Double): Double = lambda(x)
     }
     return obj.g(1.0)

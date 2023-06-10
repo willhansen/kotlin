@@ -12,7 +12,7 @@ class Example : JClass {
     var result: String? = null
 
     init {
-        val lambda = { result = obj?.test() }
+        konst lambda = { result = obj?.test() }
         lambda()
     }
 }
@@ -25,14 +25,14 @@ class Example2 : JClass {
     var result: String? = null
 
     init {
-        val lambda = { result = obj?.test() }
+        konst lambda = { result = obj?.test() }
         lambda()
     }
 }
 
 
 fun box(): String {
-    val result = Example().result
+    konst result = Example().result
     if (result != null) "fail 1: $result"
 
     return Example2().result!!

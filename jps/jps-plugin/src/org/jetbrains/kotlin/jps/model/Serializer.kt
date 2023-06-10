@@ -56,12 +56,12 @@ object JpsKotlinFacetConfigurationSerializer : JpsFacetConfigurationSerializer<J
 
 abstract class BaseJpsCompilerSettingsSerializer<in T : Any>(
     componentName: String,
-    private val settingsFactory: () -> T
+    private konst settingsFactory: () -> T
 ) : JpsProjectExtensionSerializer(SettingConstants.KOTLIN_COMPILER_SETTINGS_FILE, componentName) {
     protected abstract fun onLoad(project: JpsProject, settings: T)
 
     override fun loadExtension(project: JpsProject, componentTag: Element) {
-        val settings = settingsFactory().apply {
+        konst settings = settingsFactory().apply {
             if (this is CommonCompilerArguments) {
                 freeArgs = ArrayList()
             }

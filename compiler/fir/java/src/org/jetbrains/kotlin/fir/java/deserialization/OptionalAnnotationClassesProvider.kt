@@ -26,18 +26,18 @@ class OptionalAnnotationClassesProvider(
     session: FirSession,
     moduleDataProvider: ModuleDataProvider,
     kotlinScopeProvider: FirKotlinScopeProvider,
-    val packagePartProvider: PackagePartProvider,
+    konst packagePartProvider: PackagePartProvider,
     defaultDeserializationOrigin: FirDeclarationOrigin = FirDeclarationOrigin.Library
 ) : AbstractFirDeserializedSymbolProvider(
     session, moduleDataProvider, kotlinScopeProvider, defaultDeserializationOrigin, BuiltInSerializerProtocol
 ) {
 
-    private val optionalAnnotationClassesAndPackages by lazy(LazyThreadSafetyMode.PUBLICATION) {
-        val optionalAnnotationClasses = mutableMapOf<ClassId, ClassData>()
-        val optionalAnnotationPackages = mutableSetOf<String>()
+    private konst optionalAnnotationClassesAndPackages by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        konst optionalAnnotationClasses = mutableMapOf<ClassId, ClassData>()
+        konst optionalAnnotationPackages = mutableSetOf<String>()
 
         for (klass in packagePartProvider.getAllOptionalAnnotationClasses()) {
-            val classId = klass.nameResolver.getClassId(klass.classProto.fqName)
+            konst classId = klass.nameResolver.getClassId(klass.classProto.fqName)
             optionalAnnotationClasses[classId] = klass
             optionalAnnotationPackages.add(classId.packageFqName.asString())
         }
@@ -45,7 +45,7 @@ class OptionalAnnotationClassesProvider(
         return@lazy Pair(optionalAnnotationClasses, optionalAnnotationPackages)
     }
 
-    private val optionalAnnotationClassNamesByPackage: Map<FqName, Set<String>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst optionalAnnotationClassNamesByPackage: Map<FqName, Set<String>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         buildMap<FqName, MutableSet<String>> {
             for (classId in optionalAnnotationClassesAndPackages.first.keys) {
                 getOrPut(classId.packageFqName, ::mutableSetOf).add(classId.shortClassName.asString())
@@ -66,7 +66,7 @@ class OptionalAnnotationClassesProvider(
         classId: ClassId,
         parentContext: FirDeserializationContext?
     ): ClassMetadataFindResult? {
-        val optionalAnnotationClass = optionalAnnotationClassesAndPackages.first[classId] ?: return null
+        konst optionalAnnotationClass = optionalAnnotationClassesAndPackages.first[classId] ?: return null
 
         return ClassMetadataFindResult.Metadata(
             optionalAnnotationClass.nameResolver,

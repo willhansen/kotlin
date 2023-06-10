@@ -4,5 +4,5 @@
  */
 
 expect class LibCommonClass {
-    val platform: String
+    konst platform: String
 }

@@ -1,15 +1,15 @@
-annotation class A(val x: String)
+annotation class A(konst x: String)
 
-class Cell(var value: Int) {
-    operator fun getValue(thisRef: Any?, kProp: Any?) = value
+class Cell(var konstue: Int) {
+    operator fun getValue(thisRef: Any?, kProp: Any?) = konstue
 
     operator fun setValue(thisRef: Any?, kProp: Any?, newValue: Int) {
-        value = newValue
+        konstue = newValue
     }
 }
 
 @get:A("test1.get")
-val test1 by Cell(1)
+konst test1 by Cell(1)
 
 @get:A("test2.get")
 @set:A("test2.set")

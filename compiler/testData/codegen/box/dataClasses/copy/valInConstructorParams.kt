@@ -1,24 +1,24 @@
-data class A(val a: Int, val b: String) {}
+data class A(konst a: Int, konst b: String) {}
 
 fun box() : String {
     var result = ""
-    val a = A(1, "a")
-    val b = a.copy()
+    konst a = A(1, "a")
+    konst b = a.copy()
     if (b.a == 1 && b.b == "a") {
         result += "1"
     }
 
-    val c = a.copy(a = 2)
+    konst c = a.copy(a = 2)
     if (c.a == 2 && c.b == "a") {
         result += "2"
     }
 
-    val d = a.copy(b = "b")
+    konst d = a.copy(b = "b")
     if (d.a == 1 && d.b == "b") {
         result += "3"
     }
 
-    val e = a.copy(a = 2, b = "b")
+    konst e = a.copy(a = 2, b = "b")
     if (e.a == 2 && e.b == "b") {
         result += "4"
     }

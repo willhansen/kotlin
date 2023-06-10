@@ -11,9 +11,9 @@ sealed interface X {
 // do not forget to update this test with custom serialinfo annotation when serialization 1.3.0 is released
 @Serializable
 sealed class Result: X {
-    @Serializable class OK(val s: String): Result()
+    @Serializable class OK(konst s: String): Result()
     @Serializable object Err: Result()
 }
 
 @Serializable
-class Container(val r: Result)
+class Container(konst r: Result)

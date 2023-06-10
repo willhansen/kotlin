@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
 import org.jetbrains.kotlin.ir.types.IrType
 
 class JvmTailrecLowering(context: JvmBackendContext) : TailrecLowering(context) {
-    override val useProperComputationOrderOfTailrecDefaultParameters: Boolean =
+    override konst useProperComputationOrderOfTailrecDefaultParameters: Boolean =
         context.ir.context.configuration.languageVersionSettings.supportsFeature(LanguageFeature.ProperComputationOrderOfTailrecDefaultParameters)
 
     override fun followFunctionReference(reference: IrFunctionReference): Boolean =

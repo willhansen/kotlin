@@ -9,7 +9,7 @@ inline fun <T> String.test(default: T, cb: String.(T) -> T): T = cb(default)
 import test.*
 
 fun box(): String {
-    val p = "".test(50.0) {
+    konst p = "".test(50.0) {
         it
     }
 

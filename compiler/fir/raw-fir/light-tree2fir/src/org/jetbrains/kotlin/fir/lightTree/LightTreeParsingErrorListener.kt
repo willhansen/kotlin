@@ -22,9 +22,9 @@ fun DiagnosticReporter.toKotlinParsingErrorListener(
     sourceFile: KtSourceFile,
     languageVersionSettings: LanguageVersionSettings
 ): LightTreeParsingErrorListener {
-    val diagnosticContext = object : DiagnosticContext {
-        override val containingFilePath = sourceFile.path
-        override val languageVersionSettings: LanguageVersionSettings get() = languageVersionSettings
+    konst diagnosticContext = object : DiagnosticContext {
+        override konst containingFilePath = sourceFile.path
+        override konst languageVersionSettings: LanguageVersionSettings get() = languageVersionSettings
         override fun isDiagnosticSuppressed(diagnostic: KtDiagnostic): Boolean = false
     }
     return LightTreeParsingErrorListener { startOffset, endOffset, message ->

@@ -23,18 +23,18 @@ import java.io.Serializable
 import java.util.*
 
 open class CompilationOptions(
-        val compilerMode: CompilerMode,
-        val targetPlatform: CompileService.TargetPlatform,
+        konst compilerMode: CompilerMode,
+        konst targetPlatform: CompileService.TargetPlatform,
         /** @See [ReportCategory] */
-        val reportCategories: Array<Int>,
+        konst reportCategories: Array<Int>,
         /** @See [ReportSeverity] */
-        val reportSeverity: Int,
+        konst reportSeverity: Int,
         /** @See [CompilationResultCategory]] */
-        val requestedCompilationResults: Array<Int>,
-        val kotlinScriptExtensions: Array<String>? = null
+        konst requestedCompilationResults: Array<Int>,
+        konst kotlinScriptExtensions: Array<String>? = null
 ) : Serializable {
     companion object {
-        const val serialVersionUID: Long = 0
+        const konst serialVersionUID: Long = 0
     }
 
     override fun toString(): String {
@@ -50,11 +50,11 @@ open class CompilationOptions(
 }
 
 class IncrementalCompilationOptions(
-    val areFileChangesKnown: Boolean,
-    val modifiedFiles: List<File>?,
-    val deletedFiles: List<File>?,
-    val classpathChanges: ClasspathChanges,
-    val workingDir: File,
+    konst areFileChangesKnown: Boolean,
+    konst modifiedFiles: List<File>?,
+    konst deletedFiles: List<File>?,
+    konst classpathChanges: ClasspathChanges,
+    konst workingDir: File,
     compilerMode: CompilerMode,
     targetPlatform: CompileService.TargetPlatform,
     /** @See [ReportCategory] */
@@ -63,17 +63,17 @@ class IncrementalCompilationOptions(
         reportSeverity: Int,
     /** @See [CompilationResultCategory]] */
         requestedCompilationResults: Array<Int>,
-    val usePreciseJavaTracking: Boolean,
+    konst usePreciseJavaTracking: Boolean,
     /**
      * Directories that should be cleared when IC decides to rebuild
      */
-    val outputFiles: List<File>,
-    val multiModuleICSettings: MultiModuleICSettings,
-    val modulesInfo: IncrementalModuleInfo,
+    konst outputFiles: List<File>,
+    konst multiModuleICSettings: MultiModuleICSettings,
+    konst modulesInfo: IncrementalModuleInfo,
     kotlinScriptExtensions: Array<String>? = null,
-    val withAbiSnapshot: Boolean = false,
-    val preciseCompilationResultsBackup: Boolean = false,
-    val keepIncrementalCompilationCachesInMemory: Boolean = false,
+    konst withAbiSnapshot: Boolean = false,
+    konst preciseCompilationResultsBackup: Boolean = false,
+    konst keepIncrementalCompilationCachesInMemory: Boolean = false,
 ) : CompilationOptions(
     compilerMode,
     targetPlatform,
@@ -83,7 +83,7 @@ class IncrementalCompilationOptions(
     kotlinScriptExtensions
 ) {
     companion object {
-        const val serialVersionUID: Long = 2
+        const konst serialVersionUID: Long = 2
     }
 
     override fun toString(): String {
@@ -102,11 +102,11 @@ class IncrementalCompilationOptions(
 }
 
 data class MultiModuleICSettings(
-    val buildHistoryFile: File,
-    val useModuleDetection: Boolean
+    konst buildHistoryFile: File,
+    konst useModuleDetection: Boolean
 ) : Serializable {
     companion object {
-        const val serialVersionUID: Long = 0
+        const konst serialVersionUID: Long = 0
     }
 }
 

@@ -9,15 +9,15 @@ annotation class ParameterAnno
 
 annotation class Anno
 
-class Foo(@FieldAnno @PropertyAnno @ParameterAnno @Anno val a: String)
+class Foo(@FieldAnno @PropertyAnno @ParameterAnno @Anno konst a: String)
 
 class Bar {
     @FieldAnno @PropertyAnno @Anno
-    val a: String = ""
+    konst a: String = ""
 }
 
 class Baz {
     @FieldAnno @Anno
     @JvmField
-    val a: String = ""
+    konst a: String = ""
 }

@@ -25,7 +25,7 @@ open class ManyValsBenchmark : AbstractSimpleFileBenchmark(){
     override fun buildText() =
             """
             |fun bar() {
-            |${(1..size).joinToString("\n") { "    val x$it: Int = 1" }}
+            |${(1..size).joinToString("\n") { "    konst x$it: Int = 1" }}
             |}
             """.trimMargin()
 }

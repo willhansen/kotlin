@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.targets.jvm
 
-import org.gradle.api.InvalidUserCodeException
+import org.gradle.api.InkonstidUserCodeException
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileCollection
@@ -45,7 +45,7 @@ abstract class KotlinJvmTarget @Inject constructor(
 
     override lateinit var testRuns: NamedDomainObjectContainer<KotlinJvmTestRun>
 
-    internal val mainRun: Future<KotlinJvmRunDslImpl?> = project.future { registerMainRunTask() }
+    internal konst mainRun: Future<KotlinJvmRunDslImpl?> = project.future { registerMainRunTask() }
 
     /**
      * ### ⚠️ KotlinJvmTarget 'mainRun' is experimental
@@ -99,7 +99,7 @@ abstract class KotlinJvmTarget @Inject constructor(
 
         project.multiplatformExtension.targets.find { it is KotlinJvmTarget && it.withJavaEnabled }
             ?.let { existingJavaTarget ->
-                throw InvalidUserCodeException(
+                throw InkonstidUserCodeException(
                     "Only one of the JVM targets can be configured to work with Java. The target '${existingJavaTarget.name}' is " +
                             "already set up to work with Java; cannot setup another target '$targetName'"
                 )
@@ -108,7 +108,7 @@ abstract class KotlinJvmTarget @Inject constructor(
         withJavaEnabled = true
 
         project.plugins.apply(JavaPlugin::class.java)
-        val javaSourceSets = project.variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
+        konst javaSourceSets = project.variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
             .getInstance(project)
             .sourceSets
         AbstractKotlinPlugin.setUpJavaSourceSets(this, duplicateJavaSourceSetsAsKotlinSourceSets = false)
@@ -120,12 +120,12 @@ abstract class KotlinJvmTarget @Inject constructor(
         // * the Java outputs contain the outputs produced by Kotlin as well
 
         javaSourceSets.all { javaSourceSet ->
-            val compilation = compilations.getByName(javaSourceSet.name)
-            val compileJavaTask = project.tasks.withType<AbstractCompile>().named(javaSourceSet.compileJavaTaskName)
+            konst compilation = compilations.getByName(javaSourceSet.name)
+            konst compileJavaTask = project.tasks.withType<AbstractCompile>().named(javaSourceSet.compileJavaTaskName)
 
             setupJavaSourceSetSourcesAndResources(javaSourceSet, compilation)
 
-            val javaClasses = project.files(compileJavaTask.map { it.destinationDirectory })
+            konst javaClasses = project.files(compileJavaTask.map { it.destinationDirectory })
 
             compilation.output.classesDirs.from(javaClasses)
 
@@ -138,14 +138,14 @@ abstract class KotlinJvmTarget @Inject constructor(
             setupDependenciesCrossInclusionForJava(compilation, javaSourceSet)
         }
 
-        project.afterEvaluate {
+        project.afterEkonstuate {
             javaSourceSets.all { javaSourceSet ->
                 copyUserDefinedAttributesToJavaConfigurations(javaSourceSet)
             }
         }
 
         // Eliminate the Java output configurations from dependency resolution to avoid ambiguity between them and
-        // the equivalent configurations created for the target:
+        // the equikonstent configurations created for the target:
         listOf(JavaPlugin.API_ELEMENTS_CONFIGURATION_NAME, JavaPlugin.RUNTIME_ELEMENTS_CONFIGURATION_NAME)
             .forEach { outputConfigurationName ->
                 project.configurations.findByName(outputConfigurationName)?.isCanBeConsumed = false
@@ -186,7 +186,7 @@ abstract class KotlinJvmTarget @Inject constructor(
     private fun disableJavaPluginTasks(javaSourceSet: SourceSetContainer) {
         // A 'normal' build should not do redundant job like running the tests twice or building two JARs,
         // so disable some tasks and just make them depend on the others:
-        val targetJar = project.tasks.withType(Jar::class.java).named(artifactsTaskName)
+        konst targetJar = project.tasks.withType(Jar::class.java).named(artifactsTaskName)
 
         project.tasks.withType(Jar::class.java).named(javaSourceSet.getByName("main").jarTaskName) { javaJar ->
             (javaJar.source as? ConfigurableFileCollection)?.setFrom(targetJar.map { it.source })
@@ -227,7 +227,7 @@ abstract class KotlinJvmTarget @Inject constructor(
 
         // Add the Java source set dependencies to the Kotlin compilation compile & runtime configurations:
 
-        val compileConfigurationName = if (areRuntimeOrCompileConfigurationsAvailable()) {
+        konst compileConfigurationName = if (areRuntimeOrCompileConfigurationsAvailable()) {
             javaSourceSet::class
                 .functions
                 .find { it.name == "getCompileConfigurationName" }
@@ -245,7 +245,7 @@ abstract class KotlinJvmTarget @Inject constructor(
             project.addExtendsFromRelation(compilation.compileDependencyConfigurationName, configurationName)
         }
 
-        val runtimeConfigurationName = if (areRuntimeOrCompileConfigurationsAvailable()) {
+        konst runtimeConfigurationName = if (areRuntimeOrCompileConfigurationsAvailable()) {
             javaSourceSet::class
                 .functions
                 .find { it.name == "getRuntimeConfigurationName" }
@@ -265,7 +265,7 @@ abstract class KotlinJvmTarget @Inject constructor(
     }
 
     private fun copyUserDefinedAttributesToJavaConfigurations(javaSourceSet: SourceSet) {
-        val compileConfigurationName = if (areRuntimeOrCompileConfigurationsAvailable()) {
+        konst compileConfigurationName = if (areRuntimeOrCompileConfigurationsAvailable()) {
             javaSourceSet::class
                 .functions
                 .find { it.name == "getCompileConfigurationName" }
@@ -274,7 +274,7 @@ abstract class KotlinJvmTarget @Inject constructor(
                 ?.takeIf { project.configurations.findByName(it) != null }
         } else null
 
-        val runtimeConfigurationName = if (areRuntimeOrCompileConfigurationsAvailable()) {
+        konst runtimeConfigurationName = if (areRuntimeOrCompileConfigurationsAvailable()) {
             javaSourceSet::class
                 .functions
                 .find { it.name == "getRuntimeConfigurationName" }

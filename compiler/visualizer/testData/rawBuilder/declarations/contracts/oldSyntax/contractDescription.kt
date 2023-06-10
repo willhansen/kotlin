@@ -49,7 +49,7 @@ var test_3: Int = 1
     }
 //      Int
 //      │
-    set(value) {
+    set(konstue) {
 //                       fun contracts/contract(contracts/ContractBuilder.() -> Unit): Unit
 //                       │        contract@0
 //                       │        │

@@ -18,10 +18,10 @@ class Cls {
     }
 }
 
-val Cls.nullableExtensionProperty: MemberInvokeOwner?
+konst Cls.nullableExtensionProperty: MemberInvokeOwner?
     get() = null
 
-val Cls.extensionProperty: MemberInvokeOwner
+konst Cls.extensionProperty: MemberInvokeOwner
     get() = TODO()
 
 fun testNullableReceiver(nullable: Cls?) {
@@ -35,7 +35,7 @@ fun testNotNullableReceiver(notNullable: Cls) {
 }
 
 fun testFlexibleReceiver() {
-    val flexible = JavaClass.createFlexible()
+    konst flexible = JavaClass.createFlexible()
     flexible.extensionProperty()
     flexible?.extensionProperty()
     flexible.<!UNSAFE_IMPLICIT_INVOKE_CALL!>nullableExtensionProperty<!>()

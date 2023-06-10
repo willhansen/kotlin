@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.name.Name
 
 object ClsClassFinder {
     fun findMultifileClassParts(file: VirtualFile, classId: ClassId, partNames: List<String>): List<KotlinJvmBinaryClass> {
-        val packageFqName = classId.packageFqName
-        val partsFinder = DirectoryBasedClassFinder(file.parent!!, packageFqName)
+        konst packageFqName = classId.packageFqName
+        konst partsFinder = DirectoryBasedClassFinder(file.parent!!, packageFqName)
 
         return partNames.mapNotNull {
             partsFinder.findKotlinClass(
@@ -37,13 +37,13 @@ object ClsClassFinder {
             return false
         }
 
-        val clsKotlinBinaryClassCache = ClsKotlinBinaryClassCache.getInstance()
+        konst clsKotlinBinaryClassCache = ClsKotlinBinaryClassCache.getInstance()
 
         if (!clsKotlinBinaryClassCache.isKotlinJvmCompiledFile(file, fileContent)) {
             return false
         }
 
-        val innerClass =
+        konst innerClass =
             try {
                 if (fileContent == null) {
                     ClassFileViewProvider.isInnerClass(file)
@@ -62,7 +62,7 @@ object ClsClassFinder {
             return true
         }
 
-        val header = clsKotlinBinaryClassCache.getKotlinBinaryClassHeaderData(file, fileContent) ?: return false
+        konst header = clsKotlinBinaryClassCache.getKotlinBinaryClassHeaderData(file, fileContent) ?: return false
         if (header.classId.isLocal) return true
 
         return header.kind == KotlinClassHeader.Kind.SYNTHETIC_CLASS ||
@@ -73,12 +73,12 @@ object ClsClassFinder {
         if (!file.isValidAndExists(fileContent)) {
             return false
         }
-        val clsKotlinBinaryClassCache = ClsKotlinBinaryClassCache.getInstance()
-        val headerData = clsKotlinBinaryClassCache.getKotlinBinaryClassHeaderData(file, fileContent)
+        konst clsKotlinBinaryClassCache = ClsKotlinBinaryClassCache.getInstance()
+        konst headerData = clsKotlinBinaryClassCache.getKotlinBinaryClassHeaderData(file, fileContent)
         return headerData?.kind == KotlinClassHeader.Kind.MULTIFILE_CLASS_PART
     }
 
-    // Don't crash on invalid files (EA-97751)
+    // Don't crash on inkonstid files (EA-97751)
     private fun VirtualFile.isValidAndExists(fileContent: ByteArray? = null): Boolean =
         this.isValid && fileContent?.size != 0 && this.exists()
 }

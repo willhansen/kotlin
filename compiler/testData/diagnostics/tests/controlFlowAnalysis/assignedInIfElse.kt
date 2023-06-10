@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 fun foo(arg: Boolean) {
-    val x : Int
+    konst x : Int
     if (arg) {
         x = 4
     } else {

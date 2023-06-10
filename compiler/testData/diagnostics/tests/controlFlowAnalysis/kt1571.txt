@@ -1,7 +1,7 @@
 package
 
 package kt1571 {
-    public val a: kt1571.A
+    public konst a: kt1571.A
     public var c0: kotlin.Int
     public var c1: kotlin.Int
     public var c2: kotlin.Int

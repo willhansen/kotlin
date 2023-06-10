@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.js.backend.ast.JsCompositeBlock
 import org.jetbrains.kotlin.js.backend.ast.JsName
 
-class InlineFunctionContext(val descriptor: CallableDescriptor) {
-    val imports = mutableMapOf<String, JsName>()
-    val importBlock = JsCompositeBlock()
-    val prototypeBlock = JsCompositeBlock()
-    val declarationsBlock = JsCompositeBlock()
+class InlineFunctionContext(konst descriptor: CallableDescriptor) {
+    konst imports = mutableMapOf<String, JsName>()
+    konst importBlock = JsCompositeBlock()
+    konst prototypeBlock = JsCompositeBlock()
+    konst declarationsBlock = JsCompositeBlock()
 }

@@ -8,7 +8,7 @@
     AnnotationTarget.TYPE
 ) annotation class base
 
-@base class correct(@base val x: Int) {
+@base class correct(@base konst x: Int) {
     @base constructor(): this(0)
 }
 
@@ -19,13 +19,13 @@
 
 @base fun foo(@base y: @base Int): Int {
     @base fun bar(@base z: @base Int) = z + 1
-    @base val local = bar(y)
+    @base konst local = bar(y)
     return local
 }
 
-@base val z = 0
+@base konst z = 0
 
-@base val x: Map<@base Int, List<@base Int>> = mapOf()
+@base konst x: Map<@base Int, List<@base Int>> = mapOf()
 @Target(
     AnnotationTarget.CLASS,
     AnnotationTarget.PROPERTY,
@@ -34,9 +34,9 @@
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.FUNCTION,
     AnnotationTarget.TYPE
-) @base annotation class derived(val x: Int): base
+) @base annotation class derived(konst x: Int): base
 
-@derived(1) class correctDerived(@derived(1) val x: Int) {
+@derived(1) class correctDerived(@derived(1) konst x: Int) {
     @base constructor(): this(0)
 }
 
@@ -47,10 +47,10 @@
 
 @derived(1) fun fooDerived(@derived(1) y: @derived(1) Int): Int {
     @derived(1) fun bar(@derived(1) z: @derived(1) Int) = z + 1
-    @derived(1) val local = bar(y)
+    @derived(1) konst local = bar(y)
     return local
 }
 
-@derived(1) val zDerived = 0
+@derived(1) konst zDerived = 0
 
-@derived(1) val xDerived: Map<@derived(1) Int, List<@derived(1) Int>> = mapOf()
+@derived(1) konst xDerived: Map<@derived(1) Int, List<@derived(1) Int>> = mapOf()

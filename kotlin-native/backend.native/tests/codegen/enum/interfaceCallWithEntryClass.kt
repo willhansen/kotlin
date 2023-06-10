@@ -25,7 +25,7 @@ enum class Zzz: A {
 
 @Test fun runTest() {
     println(Zzz.Z1.f() + Zzz.Z2.f())
-    val a1: A = Zzz.Z1
-    val a2: A = Zzz.Z2
+    konst a1: A = Zzz.Z1
+    konst a2: A = Zzz.Z2
     println(a1.f() + a2.f())
 }

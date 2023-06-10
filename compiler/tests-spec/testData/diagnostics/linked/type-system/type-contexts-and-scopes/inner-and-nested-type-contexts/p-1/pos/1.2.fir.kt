@@ -4,11 +4,11 @@
 
 // TESTCASE NUMBER: 1
 
-class Case1<AT: CharSequence>(val x: AT) {
+class Case1<AT: CharSequence>(konst x: AT) {
 
-    inner class B(val y: AT) {
+    inner class B(konst y: AT) {
         fun case1a() {
-            val k: AT = x
+            konst k: AT = x
 
             if (k is AT) {
                 ""
@@ -16,7 +16,7 @@ class Case1<AT: CharSequence>(val x: AT) {
         }
 
         fun case1b() {
-            val k: AT = x
+            konst k: AT = x
 
             when (k) {
                 is AT -> ""
@@ -34,11 +34,11 @@ class Case1<AT: CharSequence>(val x: AT) {
 
 // TESTCASE NUMBER: 2
 
-class Case2<AT: CharSequence>(val x: AT) {
+class Case2<AT: CharSequence>(konst x: AT) {
 
-    inner class B(val y: AT) {
+    inner class B(konst y: AT) {
         fun case2a() {
-            val k: AT = x
+            konst k: AT = x
 
             if (k is AT) {
                 ""
@@ -46,7 +46,7 @@ class Case2<AT: CharSequence>(val x: AT) {
         }
 
         fun case2b() {
-            val k: AT = x
+            konst k: AT = x
 
             when (k) {
                 is AT -> ""

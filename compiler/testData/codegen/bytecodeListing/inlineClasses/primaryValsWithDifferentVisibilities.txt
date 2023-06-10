@@ -8,7 +8,7 @@ public interface IValue {
 @kotlin.Metadata
 public final class TestInternal {
     // source: 'primaryValsWithDifferentVisibilities.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): TestInternal
     public static method constructor-impl(p0: int): int
@@ -26,7 +26,7 @@ public final class TestInternal {
 @kotlin.Metadata
 public final class TestOverriding {
     // source: 'primaryValsWithDifferentVisibilities.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): TestOverriding
     public static method constructor-impl(p0: int): int
@@ -45,7 +45,7 @@ public final class TestOverriding {
 @kotlin.Metadata
 public final class TestPrivate {
     // source: 'primaryValsWithDifferentVisibilities.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): TestPrivate
     public static method constructor-impl(p0: int): int
@@ -63,7 +63,7 @@ public final class TestPrivate {
 @kotlin.Metadata
 public final class TestPublic {
     // source: 'primaryValsWithDifferentVisibilities.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): TestPublic
     public static method constructor-impl(p0: int): int

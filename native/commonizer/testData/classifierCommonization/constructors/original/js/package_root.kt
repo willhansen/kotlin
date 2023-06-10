@@ -52,7 +52,7 @@ class E {
     constructor(a: Any, b: Int)
 }
 
-enum class F(val alias: String) {
+enum class F(konst alias: String) {
     FOO("foo"),
     BAR("bar"),
     BAZ("baz")

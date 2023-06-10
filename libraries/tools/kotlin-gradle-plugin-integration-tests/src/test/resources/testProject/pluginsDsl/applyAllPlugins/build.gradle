@@ -21,6 +21,6 @@ dependencies {
     testImplementation "junit:junit:4.13.2"
 }
 
-afterEvaluate {
+afterEkonstuate {
     plugins.forEach { logger.info("applied plugin class:" + it.class.canonicalName) }
 }

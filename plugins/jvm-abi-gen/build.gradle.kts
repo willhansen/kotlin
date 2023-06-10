@@ -12,7 +12,7 @@ sourceSets {
     "test" { projectDefault() }
 }
 
-val embedded by configurations
+konst embedded by configurations
 embedded.isTransitive = false
 configurations.getByName("compileOnly").extendsFrom(embedded)
 configurations.getByName("testApi").extendsFrom(embedded)

@@ -2,14 +2,14 @@ Module: lib
 FILE: module_lib_contractFromOtherModule_samePackage.kt
     package main
 
-    public final fun requireIsTrue(value: R|kotlin/Boolean|): R|kotlin/Unit|
+    public final fun requireIsTrue(konstue: R|kotlin/Boolean|): R|kotlin/Unit|
         [R|Contract description]
          <
-            Returns(WILDCARD) -> value
+            Returns(WILDCARD) -> konstue
         >
      {
         when () {
-            R|<local>/value|.R|kotlin/Boolean.not|() ->  {
+            R|<local>/konstue|.R|kotlin/Boolean.not|() ->  {
                 throw R|java/lang/IllegalArgumentException.IllegalArgumentException|()
             }
         }

@@ -17,32 +17,32 @@ import org.jetbrains.kotlin.types.upperIfFlexible
 import org.jetbrains.org.objectweb.asm.Type
 
 class CallBasedArgumentGenerator(
-    private val codegen: ExpressionCodegen,
-    private val callGenerator: CallGenerator,
-    private val valueParameters: List<ValueParameterDescriptor>,
-    private val valueParameterTypes: List<Type>
+    private konst codegen: ExpressionCodegen,
+    private konst callGenerator: CallGenerator,
+    private konst konstueParameters: List<ValueParameterDescriptor>,
+    private konst konstueParameterTypes: List<Type>
 ) : ArgumentGenerator() {
-    private val isVarargInvoke: Boolean =
-        JvmCodegenUtil.isDeclarationOfBigArityFunctionInvoke(valueParameters.firstOrNull()?.containingDeclaration)
+    private konst isVarargInvoke: Boolean =
+        JvmCodegenUtil.isDeclarationOfBigArityFunctionInvoke(konstueParameters.firstOrNull()?.containingDeclaration)
 
-    private val isPolymorphicSignature: Boolean =
+    private konst isPolymorphicSignature: Boolean =
         codegen.state.languageVersionSettings.supportsFeature(LanguageFeature.PolymorphicSignature) &&
-        (valueParameters.firstOrNull()?.containingDeclaration as? FunctionDescriptor)?.let { function ->
+        (konstueParameters.firstOrNull()?.containingDeclaration as? FunctionDescriptor)?.let { function ->
             JvmCodegenUtil.isPolymorphicSignature(function)
         } == true
 
     init {
         if (!isVarargInvoke && !isPolymorphicSignature) {
-            assert(valueParameters.size == valueParameterTypes.size) {
-                "Value parameters and their types mismatch in sizes: ${valueParameters.size} != ${valueParameterTypes.size}"
+            assert(konstueParameters.size == konstueParameterTypes.size) {
+                "Value parameters and their types mismatch in sizes: ${konstueParameters.size} != ${konstueParameterTypes.size}"
             }
         }
     }
 
     override fun generateExpression(i: Int, argument: ExpressionValueArgument) {
         callGenerator.genValueAndPut(
-            valueParameters[i],
-            argument.valueArgument!!.getArgumentExpression()!!,
+            konstueParameters[i],
+            argument.konstueArgument!!.getArgumentExpression()!!,
             if (isVarargInvoke) JvmKotlinType(OBJECT_TYPE) else getJvmKotlinType(i),
             i
         )
@@ -51,8 +51,8 @@ class CallBasedArgumentGenerator(
     override fun generateDefault(i: Int, argument: DefaultValueArgument) {
         callGenerator.putValueIfNeeded(
             getJvmKotlinType(i),
-            StackValue.createDefaultValue(valueParameterTypes[i]),
-            if (InlineUtil.isInlineParameter(valueParameters[i])) ValueKind.DEFAULT_INLINE_PARAMETER else ValueKind.DEFAULT_PARAMETER,
+            StackValue.createDefaultValue(konstueParameterTypes[i]),
+            if (InlineUtil.isInlineParameter(konstueParameters[i])) ValueKind.DEFAULT_INLINE_PARAMETER else ValueKind.DEFAULT_PARAMETER,
             i
         )
     }
@@ -60,8 +60,8 @@ class CallBasedArgumentGenerator(
     override fun generateVararg(i: Int, argument: VarargValueArgument) {
         if (isPolymorphicSignature) {
             for ((index, arg) in argument.arguments.withIndex()) {
-                val expression = arg.getArgumentExpression()!!
-                val type = JvmKotlinType(valueParameterTypes[index], codegen.kotlinType(expression))
+                konst expression = arg.getArgumentExpression()!!
+                konst type = JvmKotlinType(konstueParameterTypes[index], codegen.kotlinType(expression))
                 callGenerator.genValueAndPut(null, expression, type, index)
             }
             return
@@ -69,17 +69,17 @@ class CallBasedArgumentGenerator(
 
         // Upper bound for type of vararg parameter should always have a form of 'Array<out T>',
         // while its lower bound may be Nothing-typed after approximation
-        val lazyVararg = codegen.genVarargs(argument, valueParameters[i].type.upperIfFlexible())
+        konst lazyVararg = codegen.genVarargs(argument, konstueParameters[i].type.upperIfFlexible())
         callGenerator.putValueIfNeeded(getJvmKotlinType(i), lazyVararg, ValueKind.GENERAL_VARARG, i)
     }
 
     override fun reorderArgumentsIfNeeded(args: List<ArgumentAndDeclIndex>) {
-        callGenerator.reorderArgumentsIfNeeded(args, valueParameterTypes)
+        callGenerator.reorderArgumentsIfNeeded(args, konstueParameterTypes)
     }
 
     private fun getJvmKotlinType(i: Int): JvmKotlinType =
-        JvmKotlinType(valueParameterTypes[i], valueParameters[i].unsubstitutedType)
+        JvmKotlinType(konstueParameterTypes[i], konstueParameters[i].unsubstitutedType)
 
-    private val ValueParameterDescriptor.unsubstitutedType
-        get() = containingDeclaration.original.valueParameters[index].type
+    private konst ValueParameterDescriptor.unsubstitutedType
+        get() = containingDeclaration.original.konstueParameters[index].type
 }

@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.gradle.idea.testFixtures.serialize
 import org.jetbrains.kotlin.gradle.idea.serialize.IdeaKotlinSerializationContext
 
 class TestIdeaKotlinSerializationContext : IdeaKotlinSerializationContext {
-    override val logger = TestIdeaKotlinSerializationLogger()
-    override val extrasSerializationExtension = TestIdeaExtrasSerializationExtension
+    override konst logger = TestIdeaKotlinSerializationLogger()
+    override konst extrasSerializationExtension = TestIdeaExtrasSerializationExtension
 }

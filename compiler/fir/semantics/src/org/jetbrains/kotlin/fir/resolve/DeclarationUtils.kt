@@ -22,10 +22,10 @@ fun FirClassLikeDeclaration.getContainingDeclaration(session: FirSession): FirCl
         @OptIn(LookupTagInternals::class)
         return (this as? FirRegularClass)?.containingClassForLocalAttr?.toFirRegularClass(session)
     } else {
-        val classId = symbol.classId
-        val parentId = classId.relativeClassName.parent()
+        konst classId = symbol.classId
+        konst parentId = classId.relativeClassName.parent()
         if (!parentId.isRoot) {
-            val containingDeclarationId = ClassId(classId.packageFqName, parentId, false)
+            konst containingDeclarationId = ClassId(classId.packageFqName, parentId, false)
             return session.symbolProvider.getClassLikeSymbolByClassId(containingDeclarationId)?.fir
         }
     }
@@ -42,7 +42,7 @@ fun isValidTypeParameterFromOuterDeclaration(
         return true  // Extra check is required because of classDeclaration will be resolved later
     }
 
-    val visited = mutableSetOf<FirDeclaration>()
+    konst visited = mutableSetOf<FirDeclaration>()
 
     fun containsTypeParameter(currentDeclaration: FirDeclaration?): Boolean {
         if (currentDeclaration == null || !visited.add(currentDeclaration)) {
@@ -55,11 +55,11 @@ fun isValidTypeParameterFromOuterDeclaration(
             }
 
             if (currentDeclaration is FirCallableDeclaration) {
-                val containingClassId = currentDeclaration.symbol.callableId.classId ?: return true
+                konst containingClassId = currentDeclaration.symbol.callableId.classId ?: return true
                 return containsTypeParameter(session.symbolProvider.getClassLikeSymbolByClassId(containingClassId)?.fir)
             } else if (currentDeclaration is FirClass) {
                 for (superTypeRef in currentDeclaration.superTypeRefs) {
-                    val superClassFir = superTypeRef.firClassLike(session)
+                    konst superClassFir = superTypeRef.firClassLike(session)
                     if (superClassFir == null || superClassFir is FirRegularClass && containsTypeParameter(superClassFir)) {
                         return true
                     }
@@ -74,7 +74,7 @@ fun isValidTypeParameterFromOuterDeclaration(
 }
 
 fun FirTypeRef.firClassLike(session: FirSession): FirClassLikeDeclaration? {
-    val type = coneTypeSafe<ConeClassLikeType>() ?: return null
+    konst type = coneTypeSafe<ConeClassLikeType>() ?: return null
     return type.lookupTag.toSymbol(session)?.fir
 }
 
@@ -85,14 +85,14 @@ private object TypeAliasConstructorKey : FirDeclarationDataKey()
 
 var FirConstructor.originalConstructorIfTypeAlias: FirConstructor? by FirDeclarationDataRegistry.data(TypeAliasConstructorKey)
 
-val FirConstructorSymbol.isTypeAliasedConstructor: Boolean
+konst FirConstructorSymbol.isTypeAliasedConstructor: Boolean
     get() = fir.originalConstructorIfTypeAlias != null
 
 fun FirSimpleFunction.isEquals(): Boolean {
     if (name != OperatorNameConventions.EQUALS) return false
-    if (valueParameters.size != 1) return false
+    if (konstueParameters.size != 1) return false
     if (contextReceivers.isNotEmpty()) return false
     if (receiverParameter != null) return false
-    val parameter = valueParameters.first()
+    konst parameter = konstueParameters.first()
     return parameter.returnTypeRef.isNullableAny
 }

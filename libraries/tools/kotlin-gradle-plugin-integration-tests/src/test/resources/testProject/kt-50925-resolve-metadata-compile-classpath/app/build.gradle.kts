@@ -15,7 +15,7 @@ kotlin {
     linuxX64()
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation("kt50925:lib:1.0")
                 implementation(project(":subproject"))

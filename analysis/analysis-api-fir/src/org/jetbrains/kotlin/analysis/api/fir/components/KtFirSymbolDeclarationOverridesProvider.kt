@@ -28,15 +28,15 @@ import org.jetbrains.kotlin.fir.symbols.lazyResolveToPhase
 import org.jetbrains.kotlin.fir.types.toRegularClassSymbol
 
 internal class KtFirSymbolDeclarationOverridesProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken
 ) : KtSymbolDeclarationOverridesProvider(), KtFirAnalysisSessionComponent {
 
     override fun <T : KtSymbol> getAllOverriddenSymbols(
         callableSymbol: T,
     ): List<KtCallableSymbol> {
         if (callableSymbol is KtFirBackingFieldSymbol) return emptyList()
-        val overriddenElement = mutableSetOf<FirCallableSymbol<*>>()
+        konst overriddenElement = mutableSetOf<FirCallableSymbol<*>>()
         processOverrides(callableSymbol) { firTypeScope, firCallableDeclaration ->
             firTypeScope.processAllOverriddenDeclarations(firCallableDeclaration) { overriddenDeclaration ->
                 overriddenDeclaration.symbol.collectIntersectionOverridesSymbolsTo(overriddenElement)
@@ -47,7 +47,7 @@ internal class KtFirSymbolDeclarationOverridesProvider(
 
     override fun <T : KtSymbol> getDirectlyOverriddenSymbols(callableSymbol: T): List<KtCallableSymbol> {
         if (callableSymbol is KtFirBackingFieldSymbol) return emptyList()
-        val overriddenElement = mutableSetOf<FirCallableSymbol<*>>()
+        konst overriddenElement = mutableSetOf<FirCallableSymbol<*>>()
         processOverrides(callableSymbol) { firTypeScope, firCallableDeclaration ->
             firTypeScope.processDirectOverriddenDeclarations(firCallableDeclaration) { overriddenDeclaration ->
                 overriddenDeclaration.symbol.collectIntersectionOverridesSymbolsTo(overriddenElement)
@@ -97,7 +97,7 @@ internal class KtFirSymbolDeclarationOverridesProvider(
         crossinline process: (FirTypeScope, FirDeclaration) -> Unit
     ) {
         require(callableSymbol is KtFirSymbol<*>)
-        val containingDeclaration = with(analysisSession) {
+        konst containingDeclaration = with(analysisSession) {
             (callableSymbol as? KtCallableSymbol)?.originalContainingClassForOverride
         } ?: return
         when (containingDeclaration) {
@@ -113,11 +113,11 @@ internal class KtFirSymbolDeclarationOverridesProvider(
         crossinline process: (FirTypeScope, FirDeclaration) -> Unit
     ) {
         containingDeclaration.firSymbol.lazyResolveToPhase(FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE)
-        val firContainer = containingDeclaration.firSymbol.fir
-        val firCallableDeclaration = callableSymbol.firSymbol.fir
+        konst firContainer = containingDeclaration.firSymbol.fir
+        konst firCallableDeclaration = callableSymbol.firSymbol.fir
 
-        val firSession = callableSymbol.analysisSession.useSiteSession
-        val firTypeScope = firContainer.unsubstitutedScope(
+        konst firSession = callableSymbol.analysisSession.useSiteSession
+        konst firTypeScope = firContainer.unsubstitutedScope(
             firSession,
             analysisSession.getScopeSessionFor(firSession),
             withForcedTypeCalculator = false,
@@ -169,7 +169,7 @@ internal class KtFirSymbolDeclarationOverridesProvider(
         if (subClass.superConeTypes.any { it.toRegularClassSymbol(rootModuleSession) == superClass.symbol }) return true
         if (!checkDeep) return false
         subClass.superConeTypes.forEach { superType ->
-            val superOfSub = superType.toRegularClassSymbol(rootModuleSession) ?: return@forEach
+            konst superOfSub = superType.toRegularClassSymbol(rootModuleSession) ?: return@forEach
             superOfSub.lazyResolveToPhase(FirResolvePhase.SUPER_TYPES)
             if (isSubClassOf(superOfSub.fir, superClass, checkDeep = true)) return true
         }

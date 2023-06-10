@@ -14,7 +14,7 @@ internal class KonanDistributionRepository(
     targets: Set<KonanTarget>,
     libraryLoader: NativeLibraryLoader,
 ) : Repository {
-    private val librariesByTarget: Map<KonanTarget, Lazy<Set<NativeLibrary>>> =
+    private konst librariesByTarget: Map<KonanTarget, Lazy<Set<NativeLibrary>>> =
         targets.associateWith { target ->
             lazy {
                 konanDistribution.platformLibsDir
@@ -28,7 +28,7 @@ internal class KonanDistributionRepository(
         }
 
     override fun getLibraries(target: CommonizerTarget): Set<NativeLibrary> {
-        val singleTarget = target.konanTargets.singleOrNull() ?: return emptySet()
-        return librariesByTarget[singleTarget]?.value ?: error("Missing target libraries for $target")
+        konst singleTarget = target.konanTargets.singleOrNull() ?: return emptySet()
+        return librariesByTarget[singleTarget]?.konstue ?: error("Missing target libraries for $target")
     }
 }

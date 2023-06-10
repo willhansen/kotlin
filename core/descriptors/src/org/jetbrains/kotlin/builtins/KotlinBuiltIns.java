@@ -71,7 +71,7 @@ public abstract class KotlinBuiltIns {
                 Map<PrimitiveType, SimpleType> primitiveTypeToArrayKotlinType = new EnumMap<PrimitiveType, SimpleType>(PrimitiveType.class);
                 Map<KotlinType, SimpleType> primitiveKotlinTypeToKotlinArrayType = new HashMap<KotlinType, SimpleType>();
                 Map<SimpleType, SimpleType> kotlinArrayTypeToPrimitiveKotlinType = new HashMap<SimpleType, SimpleType>();
-                for (PrimitiveType primitive : PrimitiveType.values()) {
+                for (PrimitiveType primitive : PrimitiveType.konstues()) {
                     SimpleType type = getBuiltInTypeByClassName(primitive.getTypeName().asString());
                     SimpleType arrayType = getBuiltInTypeByClassName(primitive.getArrayTypeName().asString());
 

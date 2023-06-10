@@ -13,9 +13,9 @@ plugins {
 }
 
 data class ResolutionRequest(
-    val name: String? = null,
-    val buildType: NativeBuildType,
-    val targets: List<KonanTarget>
+    konst name: String? = null,
+    konst buildType: NativeBuildType,
+    konst targets: List<KonanTarget>
 ) {
     constructor(buildType: NativeBuildType, vararg targets: KonanTarget) : this(null, buildType, targets.toList())
     constructor(name: String, buildType: NativeBuildType, vararg targets: KonanTarget) : this(name, buildType, targets.toList())
@@ -25,7 +25,7 @@ data class ResolutionRequest(
  * Create a configuration with given input and try to resolve a variant from :producer project
  */
 fun Project.resolve(request: ResolutionRequest): String? {
-    val configuration = configurations.detachedConfiguration(dependencies.create(project(":producer")))
+    konst configuration = configurations.detachedConfiguration(dependencies.create(project(":producer")))
 
     configuration.apply {
         isCanBeResolved = true
@@ -51,7 +51,7 @@ fun Project.resolve(request: ResolutionRequest): String? {
 }
 
 infix fun ResolutionRequest.shouldResolveTo(variantName: String) {
-    val actualVariant = resolve(this)
+    konst actualVariant = resolve(this)
     if (variantName == actualVariant) {
         println("i: RESOLUTION_SUCCESS:$variantName")
     } else {

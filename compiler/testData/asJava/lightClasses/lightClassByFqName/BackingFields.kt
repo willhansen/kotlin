@@ -2,54 +2,54 @@
 package one;
 
 class BackingFields {
-    val withoutBackingFieldPropertyWithLocalDeclaration: Int
+    konst withoutBackingFieldPropertyWithLocalDeclaration: Int
         get() {
-            val field = 1
+            konst field = 1
             return field
         }
 
-    val withoutBackingFieldPropertyWithNestedLocalDeclaration: Int
+    konst withoutBackingFieldPropertyWithNestedLocalDeclaration: Int
         get() {
             return run {
-                val field = 2
+                konst field = 2
                 field
             }
         }
 
-    val withoutBackingFieldPropertyWithNestedLocalDeclarationAsExpressionBody: Int
+    konst withoutBackingFieldPropertyWithNestedLocalDeclarationAsExpressionBody: Int
         get() = run {
-            val field = 3
+            konst field = 3
             field
         }
 
-    val withoutBackingFieldPropertyWithOuterLocalDeclaration: Int
+    konst withoutBackingFieldPropertyWithOuterLocalDeclaration: Int
         get() {
-            val field = 4
+            konst field = 4
             return run {
                 field
             }
         }
 
-    val withBackingFieldPropertyWithLocalDeclaration: Int = 5
+    konst withBackingFieldPropertyWithLocalDeclaration: Int = 5
         get() {
             field
-            val field = 6
+            konst field = 6
             return field
         }
 
-    val withBackingFieldPropertyWithNestedLocalDeclaration: Int = 7
+    konst withBackingFieldPropertyWithNestedLocalDeclaration: Int = 7
         get() {
             run {
-                val field = 8
+                konst field = 8
                 field
             }
 
             return field
         }
 
-    val withBackingFieldProperty: Int = 9
+    konst withBackingFieldProperty: Int = 9
 
-    val withBackingFieldPropertyWithDummyGetter: Int = 10
+    konst withBackingFieldPropertyWithDummyGetter: Int = 10
         get
 
     var withBackingFieldVariableWithDummyGetterAndSetter: Int = 11
@@ -64,32 +64,32 @@ class BackingFields {
 
     var withoutBackingFieldVariableWithLocalDeclarationInsideSetter: Int
         get() = 14
-        set(value) {
-            val field = 15
+        set(konstue) {
+            konst field = 15
             field
         }
 
     var withoutBackingFieldVariableWithNestedLocalDeclarationInsideSetter: Int
         get() = 16
-        set(value) {
+        set(konstue) {
             run {
-                val field = 17
+                konst field = 17
                 field
             }
         }
 
     var withoutBackingFieldVariableWithNestedLocalDeclarationInsideSetterAsExpressionBody: Int
         get() = 18
-        set(value) = run {
-            val field = 19
+        set(konstue) = run {
+            konst field = 19
             field
             Unit
         }
 
     var withoutBackingFieldVariableWithOuterLocalDeclarationInsideSetter: Int
         get() = 20
-        set(value) {
-            val field = 21
+        set(konstue) {
+            konst field = 21
             run {
                 field
             }
@@ -97,43 +97,43 @@ class BackingFields {
 
     var withoutBackingFieldVariableWithLocalDeclarationInsideGetter: Int
         get() {
-            val field = 22
+            konst field = 22
             field
             return field
         }
-        set(value) {
+        set(konstue) {
 
         }
 
     var withoutBackingFieldVariableWithNestedLocalDeclarationInsideGetter: Int
         get() {
             run {
-                val field = 23
+                konst field = 23
                 field
             }
             return 24
         }
-        set(value) {
+        set(konstue) {
         }
 
     var withoutBackingFieldVariableWithNestedLocalDeclarationInsideGetterAsExpressionBody: Int
         get() = run {
-            val field = 25
+            konst field = 25
             field
         }
-        set(value) {
+        set(konstue) {
         }
 
     var withoutBackingFieldVariableWithOuterLocalDeclarationInsideGetter: Int
         get() {
-            val field = 26
+            konst field = 26
             run {
                 field
             }
 
             return field
         }
-        set(value) {
+        set(konstue) {
 
         }
 }

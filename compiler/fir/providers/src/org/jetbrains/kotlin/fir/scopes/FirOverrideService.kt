@@ -21,17 +21,17 @@ import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.types.AbstractTypeChecker
 import java.util.*
 
-class FirOverrideService(val session: FirSession) : FirSessionComponent {
+class FirOverrideService(konst session: FirSession) : FirSessionComponent {
     fun <D : FirCallableSymbol<*>> createOverridableGroups(
         members: Collection<MemberWithBaseScope<D>>,
         overrideChecker: FirOverrideChecker
     ): List<List<MemberWithBaseScope<D>>> {
         if (members.size <= 1) return listOf(members.toList())
-        val queue = LinkedList(members)
-        val result = mutableListOf<List<MemberWithBaseScope<D>>>()
+        konst queue = LinkedList(members)
+        konst result = mutableListOf<List<MemberWithBaseScope<D>>>()
         while (queue.isNotEmpty()) {
-            val nextHandle = queue.first()
-            val overridableGroup = extractBothWaysOverridable(nextHandle, queue, overrideChecker)
+            konst nextHandle = queue.first()
+            konst overridableGroup = extractBothWaysOverridable(nextHandle, queue, overrideChecker)
             result += overridableGroup
         }
         return result
@@ -42,13 +42,13 @@ class FirOverrideService(val session: FirSession) : FirSessionComponent {
         members: MutableCollection<MemberWithBaseScope<D>>,
         overrideChecker: FirOverrideChecker,
     ): MutableList<MemberWithBaseScope<D>> {
-        val result = mutableListOf<MemberWithBaseScope<D>>().apply { add(overrider) }
+        konst result = mutableListOf<MemberWithBaseScope<D>>().apply { add(overrider) }
 
-        val iterator = members.iterator()
+        konst iterator = members.iterator()
 
-        val overrideCandidate = overrider.member.fir
+        konst overrideCandidate = overrider.member.fir
         while (iterator.hasNext()) {
-            val next = iterator.next()
+            konst next = iterator.next()
             if (next == overrider) {
                 iterator.remove()
                 continue
@@ -72,17 +72,17 @@ class FirOverrideService(val session: FirSession) : FirSessionComponent {
             return overridables
         }
 
-        val maximums: MutableList<MemberWithBaseScopeAndReturnType<D>> = ArrayList(2)
+        konst maximums: MutableList<MemberWithBaseScopeAndReturnType<D>> = ArrayList(2)
         skipCandidate@ for (candidate in overridables) {
-            val withReturnType = MemberWithBaseScopeAndReturnType(candidate, returnTypeCalculator)
+            konst withReturnType = MemberWithBaseScopeAndReturnType(candidate, returnTypeCalculator)
             // 1. Remove those members that are less specific than the current one;
             // 2. Add this member if none of the existing ones are more or equally specific.
             // The former, at least in theory, implies the latter, otherwise `compare` does not
             // define a correct partial order (there are a and b such that a < candidate < b, but
-            // not a < b), so `skip = true` is equivalent to `continue`.
+            // not a < b), so `skip = true` is equikonstent to `continue`.
             var skip = false
-            val toRemove = BooleanArray(maximums.size) { i ->
-                val c = maximums[i].compareTo(withReturnType) ?: return@BooleanArray false
+            konst toRemove = BooleanArray(maximums.size) { i ->
+                konst c = maximums[i].compareTo(withReturnType) ?: return@BooleanArray false
                 if (c >= 0) {
                     skip = true
                 }
@@ -109,10 +109,10 @@ class FirOverrideService(val session: FirSession) : FirSessionComponent {
     }
 
     private class MemberWithBaseScopeAndReturnType<out D : FirCallableSymbol<*>>(
-        val memberWithBaseScope: MemberWithBaseScope<D>,
+        konst memberWithBaseScope: MemberWithBaseScope<D>,
         returnTypeCalculator: ReturnTypeCalculator
     ) {
-        val returnType: ConeKotlinType? = returnTypeCalculator.tryCalculateReturnTypeOrNull(memberWithBaseScope.member.fir)?.type
+        konst returnType: ConeKotlinType? = returnTypeCalculator.tryCalculateReturnTypeOrNull(memberWithBaseScope.member.fir)?.type
     }
 
     private fun MemberWithBaseScopeAndReturnType<*>.compareTo(other: MemberWithBaseScopeAndReturnType<*>): Int? {
@@ -123,23 +123,23 @@ class FirOverrideService(val session: FirSession) : FirSessionComponent {
             else -> null
         }
 
-        val aFir = memberWithBaseScope.member.fir
-        val bFir = other.memberWithBaseScope.member.fir
-        val byVisibility = Visibilities.compare(aFir.visibility, bFir.visibility) ?: 0
+        konst aFir = memberWithBaseScope.member.fir
+        konst bFir = other.memberWithBaseScope.member.fir
+        konst byVisibility = Visibilities.compare(aFir.visibility, bFir.visibility) ?: 0
 
-        val substitutor = buildSubstitutorForOverridesCheck(aFir, bFir, session) ?: return null
+        konst substitutor = buildSubstitutorForOverridesCheck(aFir, bFir, session) ?: return null
         // NB: these lines throw CCE in modularized tests when changed to just .coneType (FirImplicitTypeRef)
         //  See also KT-41917 and the corresponding test (compiler/fir/analysis-tests/testData/resolveWithStdlib/delegates/kt41917.kt)
-        val aReturnType = returnType?.let(substitutor::substituteOrSelf) ?: return null
-        val bReturnType = other.returnType ?: return null
+        konst aReturnType = returnType?.let(substitutor::substituteOrSelf) ?: return null
+        konst bReturnType = other.returnType ?: return null
 
-        val typeCheckerState = session.typeContext.newTypeCheckerState(
+        konst typeCheckerState = session.typeContext.newTypeCheckerState(
             errorTypesEqualToAnything = false,
             stubTypesEqualToAnything = false
         )
-        val aSubtypesB = AbstractTypeChecker.isSubtypeOf(typeCheckerState, aReturnType, bReturnType)
-        val bSubtypesA = AbstractTypeChecker.isSubtypeOf(typeCheckerState, bReturnType, aReturnType)
-        val byVisibilityAndType = when {
+        konst aSubtypesB = AbstractTypeChecker.isSubtypeOf(typeCheckerState, aReturnType, bReturnType)
+        konst bSubtypesA = AbstractTypeChecker.isSubtypeOf(typeCheckerState, bReturnType, aReturnType)
+        konst byVisibilityAndType = when {
             // Could be that one of them is flexible, in which case the types are not equal but still subtypes of one another;
             // make the inflexible one more specific.
             aSubtypesB && bSubtypesA -> merge(aReturnType !is ConeFlexibleType, bReturnType !is ConeFlexibleType, byVisibility)
@@ -159,8 +159,8 @@ class FirOverrideService(val session: FirSession) : FirSessionComponent {
             is FirProperty -> {
                 require(bFir is FirProperty) { "b is " + bFir.javaClass }
                 // At least one of `subtypes` is true here, so `!xSubtypesY` implies `ySubtypesX`, meaning y's type
-                // is a *strict* subtype of x's. Vars are more specific than vals, so if one is a var and another
-                // has a strict subtype, then they are unorderable - one is a val with a more specific type than
+                // is a *strict* subtype of x's. Vars are more specific than konsts, so if one is a var and another
+                // has a strict subtype, then they are unorderable - one is a konst with a more specific type than
                 // the other var, or both are vars of different types.
                 if (aFir.isVar && !aSubtypesB) return null
                 if (bFir.isVar && !bSubtypesA) return null
@@ -172,4 +172,4 @@ class FirOverrideService(val session: FirSession) : FirSessionComponent {
     }
 }
 
-val FirSession.overrideService: FirOverrideService by FirSession.sessionComponentAccessor()
+konst FirSession.overrideService: FirOverrideService by FirSession.sessionComponentAccessor()

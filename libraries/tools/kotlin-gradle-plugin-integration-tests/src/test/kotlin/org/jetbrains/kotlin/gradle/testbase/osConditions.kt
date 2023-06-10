@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.gradle.testbase
 
 import org.junit.jupiter.api.condition.OS
-import org.junit.jupiter.api.extension.ConditionEvaluationResult
+import org.junit.jupiter.api.extension.ConditionEkonstuationResult
 import org.junit.jupiter.api.extension.ExecutionCondition
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -36,34 +36,34 @@ import java.util.*
 @Retention(AnnotationRetention.RUNTIME)
 @ExtendWith(ExecutionOnOsCondition::class)
 annotation class OsCondition(
-    val supportedOn: Array<OS> = [OS.LINUX, OS.MAC, OS.WINDOWS],
-    val enabledOnCI: Array<OS> = [OS.LINUX, OS.WINDOWS],
+    konst supportedOn: Array<OS> = [OS.LINUX, OS.MAC, OS.WINDOWS],
+    konst enabledOnCI: Array<OS> = [OS.LINUX, OS.WINDOWS],
 )
 
 internal class ExecutionOnOsCondition : ExecutionCondition {
 
-    private val logger = LoggerFactory.getLogger(ExecutionOnOsCondition::class.java)
+    private konst logger = LoggerFactory.getLogger(ExecutionOnOsCondition::class.java)
 
-    private val isUnderTeamcity = System.getenv("TEAMCITY_VERSION") != null
+    private konst isUnderTeamcity = System.getenv("TEAMCITY_VERSION") != null
 
-    private val enabledOnCurrentOs = "Enabled on operating system: " + System.getProperty("os.name")
-    private val notSupportedOnCurrentOs = "Test is not supported on operating system: " + System.getProperty("os.name")
-    private val disabledForCI = "Disabled for operating system: " + System.getProperty("os.name") + " on CI"
+    private konst enabledOnCurrentOs = "Enabled on operating system: " + System.getProperty("os.name")
+    private konst notSupportedOnCurrentOs = "Test is not supported on operating system: " + System.getProperty("os.name")
+    private konst disabledForCI = "Disabled for operating system: " + System.getProperty("os.name") + " on CI"
 
-    override fun evaluateExecutionCondition(context: ExtensionContext): ConditionEvaluationResult {
-        val annotation = findAnnotation<OsCondition>(context)
+    override fun ekonstuateExecutionCondition(context: ExtensionContext): ConditionEkonstuationResult {
+        konst annotation = findAnnotation<OsCondition>(context)
 
-        val supportedOn = annotation.supportedOn
-        val enabledOnCI = annotation.enabledOnCI
+        konst supportedOn = annotation.supportedOn
+        konst enabledOnCI = annotation.enabledOnCI
 
         return if (supportedOn.none { it.isCurrentOs }) {
             logger.info { createDisabledMessage(context.element.get(), "local", supportedOn) }
-            ConditionEvaluationResult.disabled(notSupportedOnCurrentOs)
+            ConditionEkonstuationResult.disabled(notSupportedOnCurrentOs)
         } else if (isUnderTeamcity && enabledOnCI.none { it.isCurrentOs }) {
             logger.info { createDisabledMessage(context.element.get(), "TeamCity", enabledOnCI) }
-            ConditionEvaluationResult.disabled(disabledForCI)
+            ConditionEkonstuationResult.disabled(disabledForCI)
         } else {
-            ConditionEvaluationResult.enabled(enabledOnCurrentOs)
+            ConditionEkonstuationResult.enabled(enabledOnCurrentOs)
         }
     }
 

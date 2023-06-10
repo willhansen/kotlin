@@ -59,7 +59,7 @@ open class ParcelizeResolveExtension : SyntheticResolveExtension {
             returnType: KotlinType,
             vararg parameters: Pair<String, KotlinType>
         ): SimpleFunctionDescriptor {
-            val functionDescriptor = object : ParcelizeSyntheticComponent, SimpleFunctionDescriptorImpl(
+            konst functionDescriptor = object : ParcelizeSyntheticComponent, SimpleFunctionDescriptorImpl(
                 classDescriptor,
                 null,
                 Annotations.EMPTY,
@@ -67,13 +67,13 @@ open class ParcelizeResolveExtension : SyntheticResolveExtension {
                 CallableMemberDescriptor.Kind.SYNTHESIZED,
                 classDescriptor.source
             ) {
-                override val componentKind = componentKind
+                override konst componentKind = componentKind
             }
 
-            val valueParameters = parameters.mapIndexed { index, (name, type) -> functionDescriptor.makeValueParameter(name, type, index) }
+            konst konstueParameters = parameters.mapIndexed { index, (name, type) -> functionDescriptor.makeValueParameter(name, type, index) }
 
             functionDescriptor.initialize(
-                null, classDescriptor.thisAsReceiverParameter, emptyList(), emptyList(), valueParameters,
+                null, classDescriptor.thisAsReceiverParameter, emptyList(), emptyList(), konstueParameters,
                 returnType, modality, DescriptorVisibilities.PUBLIC
             )
 
@@ -96,7 +96,7 @@ open class ParcelizeResolveExtension : SyntheticResolveExtension {
             )
         }
 
-        private val parcelizeMethodNames: List<Name> =
+        private konst parcelizeMethodNames: List<Name> =
             listOf(Name.identifier(DESCRIBE_CONTENTS.methodName), Name.identifier(WRITE_TO_PARCEL.methodName))
     }
 
@@ -118,7 +118,7 @@ open class ParcelizeResolveExtension : SyntheticResolveExtension {
         result: MutableCollection<SimpleFunctionDescriptor>
     ) {
         fun isParcelizePluginEnabled(): Boolean {
-            val sourceElement = (thisDescriptor.source as? PsiSourceElement)?.psi ?: return false
+            konst sourceElement = (thisDescriptor.source as? PsiSourceElement)?.psi ?: return false
             return isAvailable(sourceElement)
         }
 
@@ -136,8 +136,8 @@ open class ParcelizeResolveExtension : SyntheticResolveExtension {
             && isParcelizePluginEnabled()
             && result.none { it.isWriteToParcel() }
         ) {
-            val builtIns = thisDescriptor.builtIns
-            val parcelClassType = resolveParcelClassType(thisDescriptor.module) ?: ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_PARCEL_TYPE)
+            konst builtIns = thisDescriptor.builtIns
+            konst parcelClassType = resolveParcelClassType(thisDescriptor.module) ?: ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_PARCEL_TYPE)
             result += createMethod(
                 thisDescriptor, WRITE_TO_PARCEL, Modality.OPEN,
                 builtIns.unitType, "parcel" to parcelClassType, "flags" to builtIns.intType
@@ -149,23 +149,23 @@ open class ParcelizeResolveExtension : SyntheticResolveExtension {
         return this.kind != CallableMemberDescriptor.Kind.FAKE_OVERRIDE
                 && modality != Modality.ABSTRACT
                 && typeParameters.isEmpty()
-                && valueParameters.isEmpty()
+                && konstueParameters.isEmpty()
         // Unfortunately, we can't check the return type as it's unresolved in IDE light classes
     }
 }
 
 internal fun SimpleFunctionDescriptor.isWriteToParcel(): Boolean {
     return typeParameters.isEmpty()
-            && valueParameters.size == 2
+            && konstueParameters.size == 2
             // Unfortunately, we can't check the first parameter type as it's unresolved in IDE light classes
-            && KotlinBuiltIns.isInt(valueParameters[1].type)
+            && KotlinBuiltIns.isInt(konstueParameters[1].type)
             && returnType?.let { KotlinBuiltIns.isUnit(it) } == true
 }
 
 interface ParcelizeSyntheticComponent {
-    val componentKind: ComponentKind
+    konst componentKind: ComponentKind
 
-    enum class ComponentKind(val methodName: String) {
+    enum class ComponentKind(konst methodName: String) {
         WRITE_TO_PARCEL(WRITE_TO_PARCEL_NAME.identifier),
         DESCRIBE_CONTENTS(DESCRIBE_CONTENTS_NAME.identifier),
         NEW_ARRAY(NEW_ARRAY_NAME.identifier),
@@ -173,20 +173,20 @@ interface ParcelizeSyntheticComponent {
     }
 }
 
-val ClassDescriptor.hasParcelizeAnnotation: Boolean
+konst ClassDescriptor.hasParcelizeAnnotation: Boolean
     get() = PARCELIZE_CLASS_FQ_NAMES.any(annotations::hasAnnotation)
 
-val ClassDescriptor.isParcelize: Boolean
+konst ClassDescriptor.isParcelize: Boolean
     get() = hasParcelizeAnnotation
             || getSuperClassNotAny()?.takeIf(DescriptorUtils::isSealedClass)?.hasParcelizeAnnotation == true
             || getSuperInterfaces().any { DescriptorUtils.isSealedClass(it) && it.hasParcelizeAnnotation }
 
-val KotlinType.isParceler: Boolean
+konst KotlinType.isParceler: Boolean
     get() = constructor.declarationDescriptor?.fqNameSafe == PARCELER_FQN
 
 fun Annotated.findAnyAnnotation(fqNames: List<FqName>): AnnotationDescriptor? {
     for (fqName in fqNames) {
-        val annotation = annotations.findAnnotation(fqName)
+        konst annotation = annotations.findAnnotation(fqName)
         if (annotation != null) {
             return annotation
         }
@@ -206,10 +206,10 @@ fun Annotated.hasAnyAnnotation(fqNames: List<FqName>): Boolean {
 }
 
 fun getTypeParcelers(annotations: Annotations): List<TypeParcelerMapping> {
-    val serializers = mutableListOf<TypeParcelerMapping>()
+    konst serializers = mutableListOf<TypeParcelerMapping>()
 
     for (annotation in annotations.filter { it.fqName in ParcelizeNames.TYPE_PARCELER_FQ_NAMES }) {
-        val (mappedType, parcelerType) = annotation.type.arguments.takeIf { it.size == 2 } ?: continue
+        konst (mappedType, parcelerType) = annotation.type.arguments.takeIf { it.size == 2 } ?: continue
         serializers += TypeParcelerMapping(mappedType.type, parcelerType.type)
     }
 

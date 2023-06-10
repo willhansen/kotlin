@@ -22,7 +22,7 @@ abstract class DefaultAuthorizableClient<ServerType : ServerBase> : Client<Serve
     override suspend fun connectToServer() {
         class NextObjectQuery
 
-        val nextObjectQuery = NextObjectQuery()
+        konst nextObjectQuery = NextObjectQuery()
 
         builder {
             consumeEach { nextObjectQuery }

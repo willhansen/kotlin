@@ -66,9 +66,9 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
             @NotNull String name,
             @NotNull String desc,
             @Nullable String signature,
-            @Nullable Object value
+            @Nullable Object konstue
     ) {
-        FieldVisitor visitor = getVisitor().visitField(access, name, desc, signature, value);
+        FieldVisitor visitor = getVisitor().visitField(access, name, desc, signature, konstue);
         if (visitor == null) {
             return EMPTY_FIELD_VISITOR;
         }
@@ -119,7 +119,7 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
         getVisitor().visitSource(sourceName, debugInfo);
         if (generateSmapCopyToAnnotation && debugInfo != null) {
             AnnotationVisitor v =
-                    getVisitor().visitAnnotation(JvmAnnotationNames.SOURCE_DEBUG_EXTENSION_DESC, false).visitArray("value");
+                    getVisitor().visitAnnotation(JvmAnnotationNames.SOURCE_DEBUG_EXTENSION_DESC, false).visitArray("konstue");
             for (String part : CodegenUtilKt.splitStringConstant(debugInfo)) {
                 v.visit(null, part);
             }

@@ -12,14 +12,14 @@ repositories {
 }
 
 kotlin {
-    val targets = listOf(
+    konst targets = listOf(
         jvm(),
         js(),
         linuxX64()
     )
 
     sourceSets {
-        val commonMain by getting
+        konst commonMain by getting
 
         for (target in targets) {
             getByName(target.leafSourceSetName) {
@@ -32,5 +32,5 @@ kotlin {
     }
 }
 
-val org.jetbrains.kotlin.gradle.plugin.KotlinTarget.leafSourceSetName: String
+konst org.jetbrains.kotlin.gradle.plugin.KotlinTarget.leafSourceSetName: String
     get() = "${name}Main"

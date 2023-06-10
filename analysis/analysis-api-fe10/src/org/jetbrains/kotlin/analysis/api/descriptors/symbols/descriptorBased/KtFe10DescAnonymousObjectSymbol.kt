@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.analysis.api.types.KtType
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 
 internal class KtFe10DescAnonymousObjectSymbol(
-    override val descriptor: ClassDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: ClassDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtAnonymousObjectSymbol(), KtFe10DescMemberSymbol<ClassDescriptor> {
-    override val superTypes: List<KtType>
+    override konst superTypes: List<KtType>
         get() = withValidityAssertion { descriptor.typeConstructor.supertypes.map { it.toKtType(analysisContext) } }
 
     context(KtAnalysisSession)

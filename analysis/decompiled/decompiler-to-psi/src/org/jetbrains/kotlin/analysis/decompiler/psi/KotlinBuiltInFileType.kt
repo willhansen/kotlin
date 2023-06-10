@@ -25,5 +25,5 @@ object KotlinBuiltInFileType : FileType {
 
     override fun getCharset(file: VirtualFile, content: ByteArray): String? = null
 
-    private const val DEFAULT_DESCRIPTION = "Kotlin built-in declarations"
+    private const konst DEFAULT_DESCRIPTION = "Kotlin built-in declarations"
 }

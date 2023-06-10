@@ -1,6 +1,6 @@
 package test
 
 class ExtValPIntInClass<P> {
-    val P.asas: Int
+    konst P.asas: Int
         get() = throw Exception()
 }

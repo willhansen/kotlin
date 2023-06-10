@@ -23,10 +23,10 @@ open class Case1() {
         operator fun invoke() {}
     }
 
-    val propVal: Int = 1
-    val propVar: Int = 1
+    konst propVal: Int = 1
+    konst propVar: Int = 1
     fun function() {}
-    val markerObj = object : Marker {}
+    konst markerObj = object : Marker {}
 
     fun innerFun() {
         <!DEBUG_INFO_CALL("fqName: tests.test2.Case1.foo.invoke; typeCall: variable&invoke")!>foo()<!>

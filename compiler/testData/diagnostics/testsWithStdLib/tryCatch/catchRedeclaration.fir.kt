@@ -2,13 +2,13 @@
 // SKIP_TXT
 
 class MyException : Exception() {
-    val myField = "field"
+    konst myField = "field"
 
     fun myFun() {}
 }
 
 fun test1() {
-    val e = "something"
+    konst e = "something"
     try {}
     catch (e: Exception) {
         e.message
@@ -19,7 +19,7 @@ fun test1() {
 fun test2() {
     try {}
     catch (e: Exception) {
-        val e = "something"
+        konst e = "something"
         e.<!UNRESOLVED_REFERENCE!>message<!>
         e.length
     }
@@ -35,19 +35,19 @@ fun test3() {
 fun test4() {
     try {}
     catch (e: Exception) {
-        val <!REDECLARATION!>a<!> = 42
-        val <!REDECLARATION!>a<!> = "foo"
+        konst <!REDECLARATION!>a<!> = 42
+        konst <!REDECLARATION!>a<!> = "foo"
     }
 }
 
 fun test5() {
     try {}
     catch (e: Exception) {
-        val a: Int = 42
+        konst a: Int = 42
         try {}
         catch (e: MyException) {
             e.myFun()
-            val a: String = ""
+            konst a: String = ""
             a.length
         }
     }

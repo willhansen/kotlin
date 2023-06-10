@@ -58,17 +58,17 @@ internal class DynamicCompilerDriver : CompilerDriver() {
      * - Binary (if -Xomit-framework-binary is not passed).
      */
     private fun produceObjCFramework(engine: PhaseEngine<PhaseContext>, config: KonanConfig, environment: KotlinCoreEnvironment) {
-        val frontendOutput = engine.runFrontend(config, environment) ?: return
-        val objCExportedInterface = engine.runPhase(ProduceObjCExportInterfacePhase, frontendOutput)
+        konst frontendOutput = engine.runFrontend(config, environment) ?: return
+        konst objCExportedInterface = engine.runPhase(ProduceObjCExportInterfacePhase, frontendOutput)
         engine.runPhase(CreateObjCFrameworkPhase, CreateObjCFrameworkInput(frontendOutput.moduleDescriptor, objCExportedInterface))
         if (config.omitFrameworkBinary) {
             return
         }
-        val (psiToIrOutput, objCCodeSpec) = engine.runPsiToIr(frontendOutput, isProducingLibrary = false) {
+        konst (psiToIrOutput, objCCodeSpec) = engine.runPsiToIr(frontendOutput, isProducingLibrary = false) {
             it.runPhase(CreateObjCExportCodeSpecPhase, objCExportedInterface)
         }
         require(psiToIrOutput is PsiToIrOutput.ForBackend)
-        val backendContext = createBackendContext(config, frontendOutput, psiToIrOutput) {
+        konst backendContext = createBackendContext(config, frontendOutput, psiToIrOutput) {
             it.objCExportedInterface = objCExportedInterface
             it.objCExportCodeSpec = objCCodeSpec
         }
@@ -76,19 +76,19 @@ internal class DynamicCompilerDriver : CompilerDriver() {
     }
 
     private fun produceCLibrary(engine: PhaseEngine<PhaseContext>, config: KonanConfig, environment: KotlinCoreEnvironment) {
-        val frontendOutput = engine.runFrontend(config, environment) ?: return
-        val (psiToIrOutput, cAdapterElements) = engine.runPsiToIr(frontendOutput, isProducingLibrary = false) {
+        konst frontendOutput = engine.runFrontend(config, environment) ?: return
+        konst (psiToIrOutput, cAdapterElements) = engine.runPsiToIr(frontendOutput, isProducingLibrary = false) {
             it.runPhase(BuildCExports, frontendOutput)
         }
         require(psiToIrOutput is PsiToIrOutput.ForBackend)
-        val backendContext = createBackendContext(config, frontendOutput, psiToIrOutput) {
+        konst backendContext = createBackendContext(config, frontendOutput, psiToIrOutput) {
             it.cAdapterExportedElements = cAdapterElements
         }
         engine.runBackend(backendContext, psiToIrOutput.irModule)
     }
 
     private fun produceKlib(engine: PhaseEngine<PhaseContext>, config: KonanConfig, environment: KotlinCoreEnvironment) {
-        val serializerOutput = if (environment.configuration.getBoolean(CommonConfigurationKeys.USE_FIR))
+        konst serializerOutput = if (environment.configuration.getBoolean(CommonConfigurationKeys.USE_FIR))
             serializeKLibK2(engine, environment)
         else
             serializeKlibK1(engine, config, environment)
@@ -99,14 +99,14 @@ internal class DynamicCompilerDriver : CompilerDriver() {
             engine: PhaseEngine<PhaseContext>,
             environment: KotlinCoreEnvironment
     ): SerializerOutput? {
-        val frontendOutput = engine.runFirFrontend(environment)
+        konst frontendOutput = engine.runFirFrontend(environment)
         if (frontendOutput is FirOutput.ShouldNotGenerateCode) return null
         require(frontendOutput is FirOutput.Full)
 
         return if (environment.configuration.getBoolean(KonanConfigKeys.METADATA_KLIB)) {
             engine.runFirSerializer(frontendOutput)
         } else {
-            val fir2IrOutput = engine.runFir2Ir(frontendOutput)
+            konst fir2IrOutput = engine.runFir2Ir(frontendOutput)
             engine.runK2SpecialBackendChecks(fir2IrOutput)
             engine.runFir2IrSerializer(fir2IrOutput)
         }
@@ -117,8 +117,8 @@ internal class DynamicCompilerDriver : CompilerDriver() {
             config: KonanConfig,
             environment: KotlinCoreEnvironment
     ): SerializerOutput? {
-        val frontendOutput = engine.runFrontend(config, environment) ?: return null
-        val psiToIrOutput = if (config.metadataKlib) {
+        konst frontendOutput = engine.runFrontend(config, environment) ?: return null
+        konst psiToIrOutput = if (config.metadataKlib) {
             null
         } else {
             engine.runPsiToIr(frontendOutput, isProducingLibrary = true) as PsiToIrOutput.ForKlib
@@ -130,21 +130,21 @@ internal class DynamicCompilerDriver : CompilerDriver() {
      * Produce a single binary artifact.
      */
     private fun produceBinary(engine: PhaseEngine<PhaseContext>, config: KonanConfig, environment: KotlinCoreEnvironment) {
-        val frontendOutput = engine.runFrontend(config, environment) ?: return
-        val psiToIrOutput = engine.runPsiToIr(frontendOutput, isProducingLibrary = false)
+        konst frontendOutput = engine.runFrontend(config, environment) ?: return
+        konst psiToIrOutput = engine.runPsiToIr(frontendOutput, isProducingLibrary = false)
         require(psiToIrOutput is PsiToIrOutput.ForBackend)
-        val backendContext = createBackendContext(config, frontendOutput, psiToIrOutput)
+        konst backendContext = createBackendContext(config, frontendOutput, psiToIrOutput)
         engine.runBackend(backendContext, psiToIrOutput.irModule)
     }
 
     private fun produceBinaryFromBitcode(engine: PhaseEngine<PhaseContext>, config: KonanConfig, bitcodeFilePath: String) {
-        val llvmContext = LLVMContextCreate()!!
+        konst llvmContext = LLVMContextCreate()!!
         var llvmModule: CPointer<LLVMOpaqueModule>? = null
         try {
             llvmModule = parseBitcodeFile(llvmContext, bitcodeFilePath)
-            val context = BitcodePostProcessingContextImpl(config, llvmModule, llvmContext)
-            val depsPath = config.readSerializedDependencies
-            val dependencies = if (depsPath.isNullOrEmpty()) DependenciesTrackingResult(emptyList(), emptyList(), emptyList()).also {
+            konst context = BitcodePostProcessingContextImpl(config, llvmModule, llvmContext)
+            konst depsPath = config.readSerializedDependencies
+            konst dependencies = if (depsPath.isNullOrEmpty()) DependenciesTrackingResult(emptyList(), emptyList(), emptyList()).also {
                 config.configuration.report(CompilerMessageSeverity.WARNING, "No backend dependencies provided.")
             } else DependenciesTrackingResult.deserialize(depsPath, File(depsPath).readStrings(), config)
             engine.runBitcodeBackend(context, dependencies)

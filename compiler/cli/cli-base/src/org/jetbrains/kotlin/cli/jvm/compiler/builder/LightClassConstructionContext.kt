@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
 
 open class LightClassConstructionContext(
-    val bindingContext: BindingContext,
-    val module: ModuleDescriptor,
-    val languageVersionSettings: LanguageVersionSettings?,
-    val jvmTarget: JvmTarget,
+    konst bindingContext: BindingContext,
+    konst module: ModuleDescriptor,
+    konst languageVersionSettings: LanguageVersionSettings?,
+    konst jvmTarget: JvmTarget,
 )

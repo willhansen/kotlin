@@ -28,18 +28,18 @@ import org.jetbrains.kotlin.types.KotlinType
 class ForInRangeInstanceLoopGenerator(
     codegen: ExpressionCodegen,
     forExpression: KtForExpression,
-    private val rangeExpression: KtExpression,
+    private konst rangeExpression: KtExpression,
     comparisonGenerator: ComparisonGenerator,
-    private val reversed: Boolean
+    private konst reversed: Boolean
 ) : AbstractForInRangeLoopGenerator(codegen, forExpression, if (reversed) -1 else 1, comparisonGenerator) {
 
     override fun storeRangeStartAndEnd() {
-        val asmLoopRangeType = codegen.asmType(rangeKotlinType)
+        konst asmLoopRangeType = codegen.asmType(rangeKotlinType)
         codegen.gen(rangeExpression, asmLoopRangeType, rangeKotlinType)
         v.dup()
 
-        val firstName = rangeKotlinType.getPropertyGetterName("first")
-        val lastName = rangeKotlinType.getPropertyGetterName("last")
+        konst firstName = rangeKotlinType.getPropertyGetterName("first")
+        konst lastName = rangeKotlinType.getPropertyGetterName("last")
 
         // ranges inherit first and last from corresponding progressions
         if (reversed) {

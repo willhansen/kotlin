@@ -14,7 +14,7 @@ class Outer {
             @Suppress("") @MustBeDocumented
         }
 
-        val r : I = object : I {
+        konst r : I = object : I {
             @Suppress("") @MustBeDocumented
         }
     }

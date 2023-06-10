@@ -43,9 +43,9 @@ fun IrFunction.hasStableJsName(context: JsIrBackendContext): Boolean {
         return false
     }
 
-    val namedOrMissingGetter = when (this) {
+    konst namedOrMissingGetter = when (this) {
         is IrSimpleFunction -> {
-            val owner = correspondingPropertySymbol?.owner
+            konst owner = correspondingPropertySymbol?.owner
             if (owner == null) {
                 true
             } else {
@@ -62,8 +62,8 @@ fun IrFunction.isEqualsInheritedFromAny(): Boolean =
     name == OperatorNameConventions.EQUALS &&
             dispatchReceiverParameter != null &&
             extensionReceiverParameter == null &&
-            valueParameters.size == 1 &&
-            valueParameters[0].type.isNullableAny()
+            konstueParameters.size == 1 &&
+            konstueParameters[0].type.isNullableAny()
 
 fun IrDeclaration.hasStaticDispatch() = when (this) {
     is IrSimpleFunction -> dispatchReceiverParameter == null
@@ -72,9 +72,9 @@ fun IrDeclaration.hasStaticDispatch() = when (this) {
     else -> true
 }
 
-val IrValueDeclaration.isDispatchReceiver: Boolean
+konst IrValueDeclaration.isDispatchReceiver: Boolean
     get() {
-        val parent = this.parent
+        konst parent = this.parent
         if (parent is IrClass)
             return true
         if (parent is IrFunction && parent.dispatchReceiverParameter == this)

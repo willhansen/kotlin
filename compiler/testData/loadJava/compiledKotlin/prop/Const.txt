@@ -1,11 +1,11 @@
 package test
 
-private const val topLevel: kotlin.Int = 1
+private const konst topLevel: kotlin.Int = 1
     private fun `<get-topLevel>`(): kotlin.Int
 
 public object A {
     /*primary*/ private constructor A()
-    internal const final val inObject: kotlin.Int = 2
+    internal const final konst inObject: kotlin.Int = 2
         internal final fun `<get-inObject>`(): kotlin.Int
 }
 
@@ -14,7 +14,7 @@ public final class B {
 
     public companion object Companion {
         /*primary*/ private constructor Companion()
-        public const final val inCompanion: kotlin.Int = 3
+        public const final konst inCompanion: kotlin.Int = 3
             public final fun `<get-inCompanion>`(): kotlin.Int
     }
 }

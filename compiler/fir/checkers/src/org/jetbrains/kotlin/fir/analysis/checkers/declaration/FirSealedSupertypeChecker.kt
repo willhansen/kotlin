@@ -32,22 +32,22 @@ object FirSealedSupertypeChecker : FirClassChecker() {
     }
 
     private fun checkGlobalDeclaration(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val subclassPackage = declaration.classId.packageFqName
+        konst subclassPackage = declaration.classId.packageFqName
         for (superTypeRef in declaration.superTypeRefs) {
-            val superClassId = superTypeRef.coneType.classId ?: continue
+            konst superClassId = superTypeRef.coneType.classId ?: continue
 
             if (superClassId.isLocal) {
                 continue
             }
 
-            val superClass = context.session.symbolProvider.getClassLikeSymbolByClassId(superClassId) as? FirRegularClassSymbol ?: continue
+            konst superClass = context.session.symbolProvider.getClassLikeSymbolByClassId(superClassId) as? FirRegularClassSymbol ?: continue
 
             if (!superClass.isSealed) continue
             if (superClass.origin is FirDeclarationOrigin.Java) {
                 reporter.reportOn(superTypeRef.source, FirErrors.CLASS_INHERITS_JAVA_SEALED_CLASS, context)
                 continue
             }
-            val superClassPackage = superClass.classId.packageFqName
+            konst superClassPackage = superClass.classId.packageFqName
             if (superClassPackage != subclassPackage) {
                 reporter.reportOn(superTypeRef.source, FirErrors.SEALED_INHERITOR_IN_DIFFERENT_PACKAGE, context)
             }
@@ -60,16 +60,16 @@ object FirSealedSupertypeChecker : FirClassChecker() {
 
     private fun checkLocalDeclaration(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
         for (it in declaration.superTypeRefs) {
-            val classId = it.coneType.classId ?: continue
+            konst classId = it.coneType.classId ?: continue
 
             if (classId.isLocal) {
                 continue
             }
 
-            val superClassSymbol = context.session.symbolProvider.getClassLikeSymbolByClassId(classId) as? FirRegularClassSymbol ?: continue
+            konst superClassSymbol = context.session.symbolProvider.getClassLikeSymbolByClassId(classId) as? FirRegularClassSymbol ?: continue
 
             if (superClassSymbol.modality == Modality.SEALED) {
-                val declarationType = if (declaration is FirAnonymousObject) "Anonymous object" else "Local class"
+                konst declarationType = if (declaration is FirAnonymousObject) "Anonymous object" else "Local class"
                 reporter.reportOn(
                     it.source,
                     FirErrors.SEALED_SUPERTYPE_IN_LOCAL_CLASS,

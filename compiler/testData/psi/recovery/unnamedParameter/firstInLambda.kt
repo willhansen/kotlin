@@ -1,1 +1,1 @@
-val foo = { : Int -> 0 }
+konst foo = { : Int -> 0 }

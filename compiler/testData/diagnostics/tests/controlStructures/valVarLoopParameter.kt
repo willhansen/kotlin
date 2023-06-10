@@ -15,7 +15,7 @@ class It {
 
 
 fun f() {
-    for (<!VAL_OR_VAR_ON_LOOP_PARAMETER!>val<!> i in 1..4) {
+    for (<!VAL_OR_VAR_ON_LOOP_PARAMETER!>konst<!> i in 1..4) {
 
     }
 
@@ -23,7 +23,7 @@ fun f() {
 
     }
 
-    for (<!VAL_OR_VAR_ON_LOOP_PARAMETER!>val<!> (i,j) in Coll()) {
+    for (<!VAL_OR_VAR_ON_LOOP_PARAMETER!>konst<!> (i,j) in Coll()) {
 
     }
 

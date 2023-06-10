@@ -5,7 +5,7 @@
 expect open class C1() {
     fun f(): String
 
-    val p: Int
+    konst p: Int
 }
 
 class C2 : C1()
@@ -13,5 +13,5 @@ class C2 : C1()
 actual open class C1 {
     actual fun f() = "O"
 
-    actual val p = 42
+    actual konst p = 42
 }

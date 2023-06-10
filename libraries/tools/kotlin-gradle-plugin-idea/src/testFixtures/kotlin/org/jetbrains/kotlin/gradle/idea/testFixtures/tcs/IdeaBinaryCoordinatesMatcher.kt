@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinBinaryDependency
 import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinDependency
 
 internal class IdeaBinaryCoordinatesMatcher(
-    private val regex: Regex
+    private konst regex: Regex
 ) : IdeaKotlinDependencyMatcher {
-    override val description: String
+    override konst description: String
         get() = "coordinates:${regex.pattern}"
 
     override fun matches(dependency: IdeaKotlinDependency): Boolean {

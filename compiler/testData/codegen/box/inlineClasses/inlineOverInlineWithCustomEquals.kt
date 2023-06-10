@@ -4,44 +4,44 @@
 
 
 @JvmInline
-value class A(val x: Int) {
+konstue class A(konst x: Int) {
     operator fun equals(other: A) = true
 }
 
 class C
 
 @JvmInline
-value class B1(val x: A)
+konstue class B1(konst x: A)
 
 @JvmInline
-value class B2(val x: A?)
+konstue class B2(konst x: A?)
 
 
 @JvmInline
-value class D1(val x: C) {
+konstue class D1(konst x: C) {
     operator fun equals(other: D1) = true
 }
 
 
 @JvmInline
-value class D2(val x: C?) {
+konstue class D2(konst x: C?) {
     operator fun equals(other: D2) = true
 }
 
 @JvmInline
-value class E1(val x: D1)
+konstue class E1(konst x: D1)
 
 @JvmInline
-value class E2(val x: D2)
+konstue class E2(konst x: D2)
 
 @JvmInline
-value class F<T>(val x: T)
+konstue class F<T>(konst x: T)
 
 @JvmInline
-value class G<T : D1>(val x: T)
+konstue class G<T : D1>(konst x: T)
 
 @JvmInline
-value class H<T>(val x: F<T>)
+konstue class H<T>(konst x: F<T>)
 
 fun box(): String {
     if (E1(D1(C())) != E1(D1(C()))) return "Fail 1"

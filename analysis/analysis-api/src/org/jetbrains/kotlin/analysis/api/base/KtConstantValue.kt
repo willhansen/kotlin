@@ -10,134 +10,134 @@ import org.jetbrains.kotlin.types.ConstantValueKind
 
 
 /**
- * A Kotlin constant value. This value amy be used as `const val` initializer or annotation argument.
- * Also, may represent evaluated constant value. So, `1 + 2` will be represented as `KtIntConstantValue(3)`
+ * A Kotlin constant konstue. This konstue amy be used as `const konst` initializer or annotation argument.
+ * Also, may represent ekonstuated constant konstue. So, `1 + 2` will be represented as `KtIntConstantValue(3)`
  *
- * For more info about constant values please see [official Kotlin documentation](https://kotlinlang.org/docs/properties.html#compile-time-constants])
+ * For more info about constant konstues please see [official Kotlin documentation](https://kotlinlang.org/docs/properties.html#compile-time-constants])
  */
-public sealed class KtConstantValue(public val constantValueKind: ConstantValueKind<*>) {
+public sealed class KtConstantValue(public konst constantValueKind: ConstantValueKind<*>) {
     /**
-     * The constant value. The type of this value is always the type specified in its name, i.e, it is `Boolean` for [KtBooleanConstantValue]
+     * The constant konstue. The type of this konstue is always the type specified in its name, i.e, it is `Boolean` for [KtBooleanConstantValue]
      *
      * It is null only for [KtNullConstantValue]
      */
-    public abstract val value: Any?
+    public abstract konst konstue: Any?
 
     /**
-     * Source element from which the value was created. May be null for constants from non-source files.
+     * Source element from which the konstue was created. May be null for constants from non-source files.
      */
-    public abstract val sourcePsi: KtElement?
+    public abstract konst sourcePsi: KtElement?
 
     /**
-     * Constant value represented as Kotlin code. E.g: `1`, `2f, `3u` `null`, `"str"`
+     * Constant konstue represented as Kotlin code. E.g: `1`, `2f, `3u` `null`, `"str"`
      */
     public abstract fun renderAsKotlinConstant(): String
 
-    public class KtNullConstantValue(override val sourcePsi: KtElement?) : KtConstantValue(ConstantValueKind.Null) {
-        override val value: Nothing? get() = null
+    public class KtNullConstantValue(override konst sourcePsi: KtElement?) : KtConstantValue(ConstantValueKind.Null) {
+        override konst konstue: Nothing? get() = null
         override fun renderAsKotlinConstant(): String = "null"
     }
 
     public class KtBooleanConstantValue(
-        override val value: Boolean,
-        override val sourcePsi: KtElement?
+        override konst konstue: Boolean,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.Boolean) {
-        override fun renderAsKotlinConstant(): String = value.toString()
+        override fun renderAsKotlinConstant(): String = konstue.toString()
     }
 
     public class KtCharConstantValue(
-        override val value: Char,
-        override val sourcePsi: KtElement?
+        override konst konstue: Char,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.Char) {
-        override fun renderAsKotlinConstant(): String = "`$value`"
+        override fun renderAsKotlinConstant(): String = "`$konstue`"
     }
 
     public class KtByteConstantValue(
-        override val value: Byte,
-        override val sourcePsi: KtElement?
+        override konst konstue: Byte,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.Byte) {
-        override fun renderAsKotlinConstant(): String = value.toString()
+        override fun renderAsKotlinConstant(): String = konstue.toString()
     }
 
     public class KtUnsignedByteConstantValue(
-        override val value: UByte,
-        override val sourcePsi: KtElement?
+        override konst konstue: UByte,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.UnsignedByte) {
-        override fun renderAsKotlinConstant(): String = "${value}u"
+        override fun renderAsKotlinConstant(): String = "${konstue}u"
     }
 
     public class KtShortConstantValue(
-        override val value: Short,
-        override val sourcePsi: KtElement?
+        override konst konstue: Short,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.Short) {
-        override fun renderAsKotlinConstant(): String = value.toString()
+        override fun renderAsKotlinConstant(): String = konstue.toString()
     }
 
     public class KtUnsignedShortConstantValue(
-        override val value: UShort,
-        override val sourcePsi: KtElement?
+        override konst konstue: UShort,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.UnsignedShort) {
-        override fun renderAsKotlinConstant(): String = "${value}u"
+        override fun renderAsKotlinConstant(): String = "${konstue}u"
     }
 
     public class KtIntConstantValue(
-        override val value: Int,
-        override val sourcePsi: KtElement?
+        override konst konstue: Int,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.Int) {
-        override fun renderAsKotlinConstant(): String = value.toString()
+        override fun renderAsKotlinConstant(): String = konstue.toString()
     }
 
     public class KtUnsignedIntConstantValue(
-        override val value: UInt,
-        override val sourcePsi: KtElement?
+        override konst konstue: UInt,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.UnsignedInt) {
-        override fun renderAsKotlinConstant(): String = "${value}u"
+        override fun renderAsKotlinConstant(): String = "${konstue}u"
     }
 
     public class KtLongConstantValue(
-        override val value: Long,
-        override val sourcePsi: KtElement?
+        override konst konstue: Long,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.Long) {
-        override fun renderAsKotlinConstant(): String = value.toString()
+        override fun renderAsKotlinConstant(): String = konstue.toString()
     }
 
     public class KtUnsignedLongConstantValue(
-        override val value: ULong,
-        override val sourcePsi: KtElement?
+        override konst konstue: ULong,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.UnsignedLong) {
-        override fun renderAsKotlinConstant(): String = "${value}uL"
+        override fun renderAsKotlinConstant(): String = "${konstue}uL"
     }
 
     public class KtStringConstantValue(
-        override val value: String,
-        override val sourcePsi: KtElement?
+        override konst konstue: String,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.String) {
-        override fun renderAsKotlinConstant(): String = "\"${value}\""
+        override fun renderAsKotlinConstant(): String = "\"${konstue}\""
     }
 
     public class KtFloatConstantValue(
-        override val value: Float,
-        override val sourcePsi: KtElement?
+        override konst konstue: Float,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.Float) {
-        override fun renderAsKotlinConstant(): String = "${value}f"
+        override fun renderAsKotlinConstant(): String = "${konstue}f"
     }
 
     public class KtDoubleConstantValue(
-        override val value: Double,
-        override val sourcePsi: KtElement?
+        override konst konstue: Double,
+        override konst sourcePsi: KtElement?
     ) : KtConstantValue(ConstantValueKind.Double) {
-        override fun renderAsKotlinConstant(): String = value.toString()
+        override fun renderAsKotlinConstant(): String = konstue.toString()
     }
 
     /**
-     * Value which is not cosntant or there was an error (e.g, division by 0) bug during value evaluation
+     * Value which is not cosntant or there was an error (e.g, division by 0) bug during konstue ekonstuation
      */
     public class KtErrorConstantValue(
-        public val errorMessage: String,
-        override val sourcePsi: KtElement?,
+        public konst errorMessage: String,
+        override konst sourcePsi: KtElement?,
     ) : KtConstantValue(ConstantValueKind.Error) {
-        override val value: Nothing
-            get() = error("Cannot get value for KtErrorConstantValue")
+        override konst konstue: Nothing
+            get() = error("Cannot get konstue for KtErrorConstantValue")
 
         override fun renderAsKotlinConstant(): String {
             return "error(\"$errorMessage\")"

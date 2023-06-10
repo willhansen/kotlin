@@ -9,4 +9,4 @@ package kotlin.jvm
 annotation class JvmInline
 
 @JvmInline
-value class Test(val x: Int = 42)
+konstue class Test(konst x: Int = 42)

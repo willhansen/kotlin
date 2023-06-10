@@ -17,22 +17,22 @@ import java.io.File
 
 interface UsesKotlinJavaToolchain : Task {
     @get:Nested
-    val kotlinJavaToolchainProvider: Provider<out KotlinJavaToolchain>
+    konst kotlinJavaToolchainProvider: Provider<out KotlinJavaToolchain>
 
     @get:Internal
-    val kotlinJavaToolchain: KotlinJavaToolchain
+    konst kotlinJavaToolchain: KotlinJavaToolchain
         get() = kotlinJavaToolchainProvider.get()
 }
 
 interface KotlinJavaToolchain {
     @get:Input
-    val javaVersion: Provider<JavaVersion>
+    konst javaVersion: Provider<JavaVersion>
 
     @get:Internal
-    val jdk: JdkSetter
+    konst jdk: JdkSetter
 
     @get:Internal
-    val toolchain: JavaToolchainSetter
+    konst toolchain: JavaToolchainSetter
 
     interface JdkSetter {
         /**

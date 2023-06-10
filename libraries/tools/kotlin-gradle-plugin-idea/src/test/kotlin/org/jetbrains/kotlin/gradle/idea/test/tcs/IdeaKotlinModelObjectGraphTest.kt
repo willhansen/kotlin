@@ -22,7 +22,7 @@ import kotlin.reflect.full.memberProperties
 import kotlin.test.*
 
 @RunWith(Parameterized::class)
-class IdeaKotlinModelObjectGraphTest(private val node: KClass<*>, private val clazzName: String) {
+class IdeaKotlinModelObjectGraphTest(private konst node: KClass<*>, private konst clazzName: String) {
 
     @Test
     fun `test - node is sealed`() {
@@ -47,7 +47,7 @@ class IdeaKotlinModelObjectGraphTest(private val node: KClass<*>, private val cl
     }
 
     companion object {
-        private val ignoredNodes = setOf(
+        private konst ignoredNodes = setOf(
             /*
              Extras interface and AbstractExtras are okay for now:
              Let's check known implementations for correctness
@@ -58,21 +58,21 @@ class IdeaKotlinModelObjectGraphTest(private val node: KClass<*>, private val cl
         @JvmStatic
         @Parameters(name = "{1}")
         fun findClasses(): List<Array<Any>> {
-            val classes = mutableSetOf<KClass<*>>()
+            konst classes = mutableSetOf<KClass<*>>()
 
-            val resolveQueue = ArrayDeque<KClass<*>>()
+            konst resolveQueue = ArrayDeque<KClass<*>>()
 
             resolveQueue += ideaTcsReflections.getAllKotlinClasses()
                 .filter { it.isIdeaKotlinModel }
 
             while (resolveQueue.isNotEmpty()) {
-                val next = resolveQueue.removeFirst()
+                konst next = resolveQueue.removeFirst()
                 if (!classes.add(next)) continue
 
                 next.resolveReachableClasses().forEach { child ->
                     resolveQueue.add(child)
                     if (child.java.isInterface || Modifier.isAbstract(child.java.modifiers)) {
-                        val subtypes = kotlinReflections.getSubTypesOf(child.java).map { it.kotlin }
+                        konst subtypes = kotlinReflections.getSubTypesOf(child.java).map { it.kotlin }
                         assertTrue(subtypes.isNotEmpty(), "Missing implementations for $child")
                         resolveQueue.addAll(subtypes)
                     }

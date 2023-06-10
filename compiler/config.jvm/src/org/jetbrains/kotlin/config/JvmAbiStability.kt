@@ -5,13 +5,13 @@
 
 package org.jetbrains.kotlin.config
 
-enum class JvmAbiStability(val description: String) {
+enum class JvmAbiStability(konst description: String) {
     STABLE("stable"),
     UNSTABLE("unstable"),
     ;
 
     companion object {
         fun fromStringOrNull(string: String?): JvmAbiStability? =
-            values().find { it.description == string }
+            konstues().find { it.description == string }
     }
 }

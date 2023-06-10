@@ -30,19 +30,19 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.*
 
 class ClassicDiagnosticsHandler(testServices: TestServices) : ClassicFrontendAnalysisHandler(testServices) {
-    override val directiveContainers: List<DirectivesContainer> =
+    override konst directiveContainers: List<DirectivesContainer> =
         listOf(DiagnosticsDirectives)
 
-    override val additionalServices: List<ServiceRegistrationData> =
+    override konst additionalServices: List<ServiceRegistrationData> =
         listOf(service(::DiagnosticsService))
 
-    private val globalMetadataInfoHandler: GlobalMetadataInfoHandler
+    private konst globalMetadataInfoHandler: GlobalMetadataInfoHandler
         get() = testServices.globalMetadataInfoHandler
 
-    private val diagnosticsService: DiagnosticsService
+    private konst diagnosticsService: DiagnosticsService
         get() = testServices.diagnosticsService
 
-    private val reporter = ClassicDiagnosticReporter(testServices)
+    private konst reporter = ClassicDiagnosticReporter(testServices)
 
     @OptIn(ExperimentalStdlibApi::class)
     override fun processModule(module: TestModule, info: ClassicFrontendOutputArtifact) {
@@ -54,12 +54,12 @@ class ClassicDiagnosticsHandler(testServices: TestServices) : ClassicFrontendAna
             allDiagnostics = allDiagnostics.filter { it.factory.name != Errors.NEWER_VERSION_IN_SINCE_KOTLIN.name }
         }
 
-        val diagnosticsPerFile = allDiagnostics.groupBy { it.psiFile }
-        val withNewInferenceModeEnabled = testServices.withNewInferenceModeEnabled()
-        val configuration = reporter.createConfiguration(module)
+        konst diagnosticsPerFile = allDiagnostics.groupBy { it.psiFile }
+        konst withNewInferenceModeEnabled = testServices.withNewInferenceModeEnabled()
+        konst configuration = reporter.createConfiguration(module)
 
         for ((file, ktFile) in info.ktFiles) {
-            val diagnostics = diagnosticsPerFile[ktFile] ?: emptyList()
+            konst diagnostics = diagnosticsPerFile[ktFile] ?: emptyList()
             for (diagnostic in diagnostics) {
                 if (!diagnostic.isValid) continue
                 if (!diagnosticsService.shouldRenderDiagnostic(module, diagnostic.factory.name, diagnostic.severity)) continue
@@ -75,12 +75,12 @@ class ClassicDiagnosticsHandler(testServices: TestServices) : ClassicFrontendAna
     private fun computeJvmSignatureDiagnostics(info: ClassicFrontendOutputArtifact): Set<Diagnostic> {
         if (testServices.moduleStructure.modules.any { !it.targetPlatform.isJvm() }) return emptySet()
         if (REPORT_JVM_DIAGNOSTICS_ON_FRONTEND !in testServices.moduleStructure.allDirectives) return emptySet()
-        val bindingContext = info.analysisResult.bindingContext
-        val jvmSignatureDiagnostics = HashSet<Diagnostic>()
-        for (ktFile in info.ktFiles.values) {
-            val declarations = PsiTreeUtil.findChildrenOfType(ktFile, KtDeclaration::class.java)
+        konst bindingContext = info.analysisResult.bindingContext
+        konst jvmSignatureDiagnostics = HashSet<Diagnostic>()
+        for (ktFile in info.ktFiles.konstues) {
+            konst declarations = PsiTreeUtil.findChildrenOfType(ktFile, KtDeclaration::class.java)
             for (declaration in declarations) {
-                val diagnostics = getJvmSignatureDiagnostics(
+                konst diagnostics = getJvmSignatureDiagnostics(
                     declaration,
                     bindingContext.diagnostics,
                 ) ?: continue
@@ -100,13 +100,13 @@ class ClassicDiagnosticsHandler(testServices: TestServices) : ClassicFrontendAna
         info: ClassicFrontendOutputArtifact,
         withNewInferenceModeEnabled: Boolean
     ) {
-        val diagnosedRanges = globalMetadataInfoHandler.getExistingMetaInfosForFile(file)
+        konst diagnosedRanges = globalMetadataInfoHandler.getExistingMetaInfosForFile(file)
             .groupBy(
                 keySelector = { it.start..it.end },
-                valueTransform = { it.tag }
+                konstueTransform = { it.tag }
             )
             .mapValues { (_, it) -> it.toMutableSet() }
-        val debugAnnotations = CheckerTestUtil.getDebugInfoDiagnostics(
+        konst debugAnnotations = CheckerTestUtil.getDebugInfoDiagnostics(
             ktFile,
             info.analysisResult.bindingContext,
             markDynamicCalls = MARK_DYNAMIC_CALLS in module.directives,
@@ -116,9 +116,9 @@ class ClassicDiagnosticsHandler(testServices: TestServices) : ClassicFrontendAna
             info.analysisResult.moduleDescriptor as ModuleDescriptorImpl,
             diagnosedRanges = diagnosedRanges
         )
-        val onlyExplicitlyDefined = DiagnosticsDirectives.REPORT_ONLY_EXPLICITLY_DEFINED_DEBUG_INFO in module.directives
+        konst onlyExplicitlyDefined = DiagnosticsDirectives.REPORT_ONLY_EXPLICITLY_DEFINED_DEBUG_INFO in module.directives
         for (debugAnnotation in debugAnnotations) {
-            val factory = debugAnnotation.diagnostic.factory
+            konst factory = debugAnnotation.diagnostic.factory
             if (!diagnosticsService.shouldRenderDiagnostic(module, factory.name, factory.severity)) continue
             if (onlyExplicitlyDefined && !debugAnnotation.diagnostic.textRanges.any { it.startOffset..it.endOffset in diagnosedRanges }) {
                 continue

@@ -12,9 +12,9 @@ import kotlin.jvm.*
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @JvmInline
-public value class UByteArray
+public konstue class UByteArray
 @PublishedApi
-internal constructor(@PublishedApi internal val storage: ByteArray) : Collection<UByte> {
+internal constructor(@PublishedApi internal konst storage: ByteArray) : Collection<UByte> {
 
     /** Creates a new array of the specified [size], with all elements initialized to zero. */
     public constructor(size: Int) : this(ByteArray(size))
@@ -28,22 +28,22 @@ internal constructor(@PublishedApi internal val storage: ByteArray) : Collection
     public operator fun get(index: Int): UByte = storage[index].toUByte()
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException] except in Kotlin/JS
      * where the behavior is unspecified.
      */
-    public operator fun set(index: Int, value: UByte) {
-        storage[index] = value.toByte()
+    public operator fun set(index: Int, konstue: UByte) {
+        storage[index] = konstue.toByte()
     }
 
     /** Returns the number of elements in the array. */
-    public override val size: Int get() = storage.size
+    public override konst size: Int get() = storage.size
 
     /** Creates an iterator over the elements of the array. */
     public override operator fun iterator(): kotlin.collections.Iterator<UByte> = Iterator(storage)
 
-    private class Iterator(private val array: ByteArray) : kotlin.collections.Iterator<UByte> {
+    private class Iterator(private konst array: ByteArray) : kotlin.collections.Iterator<UByte> {
         private var index = 0
         override fun hasNext() = index < array.size
         override fun next() = if (index < array.size) array[index++].toUByte() else throw NoSuchElementException(index.toString())
@@ -70,7 +70,7 @@ internal constructor(@PublishedApi internal val storage: ByteArray) : Collection
  * [init] function.
  *
  * The function [init] is called for each array element sequentially starting from the first one.
- * It should return the value for an array element given its index.
+ * It should return the konstue for an array element given its index.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes

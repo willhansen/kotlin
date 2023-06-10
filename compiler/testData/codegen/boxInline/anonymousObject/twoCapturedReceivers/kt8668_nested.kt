@@ -1,7 +1,7 @@
 // FILE: 1.kt
 package test
 
-class C(val x: String) {
+class C(konst x: String) {
     fun f(y: String) = C(y).g { x }
 
     inline fun g(crossinline h: () -> String) =

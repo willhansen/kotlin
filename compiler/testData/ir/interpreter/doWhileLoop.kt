@@ -16,7 +16,7 @@ fun firstNotNull(array: Array<Int?>): Int {
     var i = 0
 
     do {
-        val y = array[i++]
+        konst y = array[i++]
     } while (y == null)
 
     return array[i - 1]!!
@@ -29,6 +29,6 @@ fun singleExpressionLoop(incrementTo: Int): Int {
     return i
 }
 
-const val a = <!EVALUATED: `720`!>factorialDoWhile(6)<!>
-const val b = <!EVALUATED: `1`!>firstNotNull(arrayOf<Int?>(null, null, 1, 2, null))<!>
-const val c = <!EVALUATED: `10`!>singleExpressionLoop(10)<!>
+const konst a = <!EVALUATED: `720`!>factorialDoWhile(6)<!>
+const konst b = <!EVALUATED: `1`!>firstNotNull(arrayOf<Int?>(null, null, 1, 2, null))<!>
+const konst c = <!EVALUATED: `10`!>singleExpressionLoop(10)<!>

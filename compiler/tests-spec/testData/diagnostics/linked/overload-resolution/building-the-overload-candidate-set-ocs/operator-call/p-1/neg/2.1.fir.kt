@@ -14,7 +14,7 @@ fun C?.boo( c: ()->Any) {} //(1)
 
 @JvmName("aa1")
 fun C?.boo( c: ()->C) : String { //(2)
-    val x = {1}
+    konst x = {1}
     this.<!DEBUG_INFO_CALL("fqName: testPackCase1.boo; typeCall: extension function")!>boo( x )<!>// ok to (1)
     this.boo( x )
 
@@ -35,7 +35,7 @@ fun C?.boo( c: ()->Any) {} //(1)
 
 @JvmName("aa1")
 fun C?.boo( c: ()->C, x : Int = 1) : String { //(2)
-    val x = {1}
+    konst x = {1}
     this.<!DEBUG_INFO_CALL("fqName: testPackCase2.boo; typeCall: extension function")!>boo( x )<!>// ok to (1)
     this.boo( x )
 

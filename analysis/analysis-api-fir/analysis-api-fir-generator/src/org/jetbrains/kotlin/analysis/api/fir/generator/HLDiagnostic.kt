@@ -11,20 +11,20 @@ import org.jetbrains.kotlin.fir.checkers.generator.diagnostics.model.DiagnosticP
 import kotlin.reflect.KType
 
 data class HLDiagnostic(
-    val original: DiagnosticData,
-    val severity: Severity?,
-    val className: String,
-    val implClassName: String,
-    val parameters: List<HLDiagnosticParameter>,
+    konst original: DiagnosticData,
+    konst severity: Severity?,
+    konst className: String,
+    konst implClassName: String,
+    konst parameters: List<HLDiagnosticParameter>,
 )
 
-data class HLDiagnosticList(val diagnostics: List<HLDiagnostic>)
+data class HLDiagnosticList(konst diagnostics: List<HLDiagnostic>)
 
 data class HLDiagnosticParameter(
-    val original: DiagnosticParameter,
-    val name: String,
-    val type: KType,
-    val originalParameterName: String,
-    val conversion: HLParameterConversion,
-    val importsToAdd: List<String>
+    konst original: DiagnosticParameter,
+    konst name: String,
+    konst type: KType,
+    konst originalParameterName: String,
+    konst conversion: HLParameterConversion,
+    konst importsToAdd: List<String>
 )

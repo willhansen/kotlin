@@ -4,11 +4,11 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class MyUInt(val x: Int)
+konstue class MyUInt(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class MyUIntArray(private val storage: IntArray) : Collection<MyUInt> {
-    public override val size: Int get() = storage.size
+konstue class MyUIntArray(private konst storage: IntArray) : Collection<MyUInt> {
+    public override konst size: Int get() = storage.size
 
     override operator fun iterator() = TODO()
     override fun contains(element: MyUInt): Boolean = storage.contains(element.x)
@@ -21,11 +21,11 @@ fun <T> checkBoxed(c: Collection<T>, element: T): Boolean {
 }
 
 fun box(): String {
-    val uints = MyUIntArray(intArrayOf(0, 1, 42))
+    konst uints = MyUIntArray(intArrayOf(0, 1, 42))
 
     if (MyUInt(42) !in uints) return "Fail 1"
 
-    val ints = listOf(MyUInt(1), MyUInt(0))
+    konst ints = listOf(MyUInt(1), MyUInt(0))
     if (!uints.containsAll(ints)) return "Fail 2"
 
     if (!checkBoxed(uints, MyUInt(0))) return "Fail 3"

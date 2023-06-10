@@ -1,7 +1,7 @@
 // test.AnnotatedParameterInInnerClassConstructor
 package test
 
-annotation class Anno(val x: String)
+annotation class Anno(konst x: String)
 
 class AnnotatedParameterInInnerClassConstructor {
 

@@ -8,7 +8,7 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 open class TypeLiteral<T> {
-    val type: Type
+    konst type: Type
         get() = (javaClass.getGenericSuperclass() as ParameterizedType).getActualTypeArguments()[0]
 }
 
@@ -25,7 +25,7 @@ fun box(): String {
     return "OK"
 }
 
-val Type.canonicalName: String
+konst Type.canonicalName: String
     get() = when (this) {
         is Class<*> -> this.canonicalName
         is java.lang.reflect.GenericArrayType -> this.getGenericComponentType().canonicalName + "[]"

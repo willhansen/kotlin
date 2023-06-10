@@ -7,5 +7,5 @@ fun foo() {
 
     return (@f 3)
 
-    val x = 1
+    konst x = 1
 }

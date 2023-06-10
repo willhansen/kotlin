@@ -9,11 +9,11 @@ package foo
 // A copy of stdlib run function.
 // Copied to not to depend on run implementation.
 // It's important, that the body is just `return fn()`.
-internal inline fun <T> evaluate(fn: ()->T): T = fn()
+internal inline fun <T> ekonstuate(fn: ()->T): T = fn()
 
 internal fun test(x: Int): Int =
-        evaluate {
-            evaluate { 2 } * evaluate { x }
+        ekonstuate {
+            ekonstuate { 2 } * ekonstuate { x }
         }
 
 fun box(): String {

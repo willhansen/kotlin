@@ -9,7 +9,7 @@ plugins {
     id("swift-benchmarking")
 }
 
-val toolsPath = "../../../tools"
+konst toolsPath = "../../../tools"
 
 swiftBenchmark {
     applicationName = "Ring"

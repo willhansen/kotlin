@@ -27,32 +27,32 @@ import org.jetbrains.kotlin.name.Name
 
 class JvmSharedVariablesManager(
     module: ModuleDescriptor,
-    val symbols: JvmSymbols,
-    val irBuiltIns: IrBuiltIns,
+    konst symbols: JvmSymbols,
+    konst irBuiltIns: IrBuiltIns,
     irFactory: IrFactory,
 ) : SharedVariablesManager {
-    private val jvmInternalPackage = IrExternalPackageFragmentImpl.createEmptyExternalPackageFragment(
+    private konst jvmInternalPackage = IrExternalPackageFragmentImpl.createEmptyExternalPackageFragment(
         module, FqName("kotlin.jvm.internal")
     )
 
-    private val refNamespaceClass = irFactory.addClass(jvmInternalPackage) {
+    private konst refNamespaceClass = irFactory.addClass(jvmInternalPackage) {
         name = Name.identifier("Ref")
     }
 
-    class RefProvider(val refClass: IrClass, elementType: IrType) {
-        val refConstructor = refClass.addConstructor {
+    class RefProvider(konst refClass: IrClass, elementType: IrType) {
+        konst refConstructor = refClass.addConstructor {
             origin = IrDeclarationOrigin.IR_BUILTINS_STUB
         }
 
-        val elementField = refClass.addField {
+        konst elementField = refClass.addField {
             origin = IrDeclarationOrigin.IR_BUILTINS_STUB
             name = Name.identifier("element")
             type = elementType
         }
     }
 
-    private val primitiveRefProviders = irBuiltIns.primitiveIrTypes.associate { primitiveType ->
-        val refClass = irFactory.addClass(refNamespaceClass) {
+    private konst primitiveRefProviders = irBuiltIns.primitiveIrTypes.associate { primitiveType ->
+        konst refClass = irFactory.addClass(refNamespaceClass) {
             origin = IrDeclarationOrigin.IR_BUILTINS_STUB
             name = Name.identifier(primitiveType.classOrNull!!.owner.name.asString() + "Ref")
         }.apply {
@@ -61,8 +61,8 @@ class JvmSharedVariablesManager(
         primitiveType.classifierOrFail to RefProvider(refClass, primitiveType)
     }
 
-    private val objectRefProvider = run {
-        val refClass = irFactory.addClass(refNamespaceClass) {
+    private konst objectRefProvider = run {
+        konst refClass = irFactory.addClass(refNamespaceClass) {
             origin = IrDeclarationOrigin.IR_BUILTINS_STUB
             name = Name.identifier("ObjectRef")
         }.apply {
@@ -75,18 +75,18 @@ class JvmSharedVariablesManager(
         RefProvider(refClass, refClass.typeParameters[0].defaultType)
     }
 
-    fun getProvider(valueType: IrType): RefProvider =
-        if (valueType.isPrimitiveType())
-            primitiveRefProviders.getValue(valueType.classifierOrFail)
+    fun getProvider(konstueType: IrType): RefProvider =
+        if (konstueType.isPrimitiveType())
+            primitiveRefProviders.getValue(konstueType.classifierOrFail)
         else
             objectRefProvider
 
     override fun declareSharedVariable(originalDeclaration: IrVariable): IrVariable {
-        val valueType = originalDeclaration.type
-        val provider = getProvider(InlineClassAbi.unboxType(valueType) ?: valueType)
-        val typeArguments = provider.refClass.typeParameters.map { valueType }
-        val refType = provider.refClass.typeWith(typeArguments)
-        val refConstructorCall = IrConstructorCallImpl.fromSymbolOwner(
+        konst konstueType = originalDeclaration.type
+        konst provider = getProvider(InlineClassAbi.unboxType(konstueType) ?: konstueType)
+        konst typeArguments = provider.refClass.typeParameters.map { konstueType }
+        konst refType = provider.refClass.typeWith(typeArguments)
+        konst refConstructorCall = IrConstructorCallImpl.fromSymbolOwner(
             originalDeclaration.startOffset, originalDeclaration.startOffset, refType, provider.refConstructor.symbol
         ).apply {
             typeArguments.forEachIndexed(::putTypeArgument)
@@ -95,7 +95,7 @@ class JvmSharedVariablesManager(
             IrVariableImpl(
                 startOffset, endOffset, origin, IrVariableSymbolImpl(), name, refType,
                 isVar = false, // writes are remapped to field stores
-                isConst = false, // const vals could not possibly require ref wrappers
+                isConst = false, // const konsts could not possibly require ref wrappers
                 isLateinit = false
             ).apply {
                 initializer = refConstructorCall
@@ -104,16 +104,16 @@ class JvmSharedVariablesManager(
     }
 
     override fun defineSharedValue(originalDeclaration: IrVariable, sharedVariableDeclaration: IrVariable): IrStatement {
-        val initializer = originalDeclaration.initializer ?: return sharedVariableDeclaration
-        val default = IrConstImpl.defaultValueForType(initializer.startOffset, initializer.endOffset, originalDeclaration.type)
-        if (initializer is IrConst<*> && initializer.value == default.value) {
-            // The field is preinitialized to the default value, so an explicit set is not required.
+        konst initializer = originalDeclaration.initializer ?: return sharedVariableDeclaration
+        konst default = IrConstImpl.defaultValueForType(initializer.startOffset, initializer.endOffset, originalDeclaration.type)
+        if (initializer is IrConst<*> && initializer.konstue == default.konstue) {
+            // The field is preinitialized to the default konstue, so an explicit set is not required.
             return sharedVariableDeclaration
         }
-        val initializationStatement = with(originalDeclaration) {
+        konst initializationStatement = with(originalDeclaration) {
             IrSetValueImpl(startOffset, endOffset, irBuiltIns.unitType, symbol, initializer, null)
         }
-        val sharedVariableInitialization = setSharedValue(sharedVariableDeclaration.symbol, initializationStatement)
+        konst sharedVariableInitialization = setSharedValue(sharedVariableDeclaration.symbol, initializationStatement)
         return with(originalDeclaration) {
             IrCompositeImpl(
                 startOffset, endOffset, irBuiltIns.unitType, null,
@@ -122,35 +122,35 @@ class JvmSharedVariablesManager(
         }
     }
 
-    private fun unsafeCoerce(value: IrExpression, from: IrType, to: IrType): IrExpression =
-        IrCallImpl.fromSymbolOwner(value.startOffset, value.endOffset, to, symbols.unsafeCoerceIntrinsic).apply {
+    private fun unsafeCoerce(konstue: IrExpression, from: IrType, to: IrType): IrExpression =
+        IrCallImpl.fromSymbolOwner(konstue.startOffset, konstue.endOffset, to, symbols.unsafeCoerceIntrinsic).apply {
             putTypeArgument(0, from)
             putTypeArgument(1, to)
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         }
 
     override fun getSharedValue(sharedVariableSymbol: IrValueSymbol, originalGet: IrGetValue): IrExpression =
         with(originalGet) {
-            val unboxedType = InlineClassAbi.unboxType(symbol.owner.type)
-            val provider = getProvider(unboxedType ?: symbol.owner.type)
-            val receiver = IrGetValueImpl(startOffset, endOffset, sharedVariableSymbol)
-            val unboxedRead = IrGetFieldImpl(startOffset, endOffset, provider.elementField.symbol, unboxedType ?: type, receiver, origin)
+            konst unboxedType = InlineClassAbi.unboxType(symbol.owner.type)
+            konst provider = getProvider(unboxedType ?: symbol.owner.type)
+            konst receiver = IrGetValueImpl(startOffset, endOffset, sharedVariableSymbol)
+            konst unboxedRead = IrGetFieldImpl(startOffset, endOffset, provider.elementField.symbol, unboxedType ?: type, receiver, origin)
             unboxedType?.let { unsafeCoerce(unboxedRead, it, symbol.owner.type) } ?: unboxedRead
         }
 
     override fun setSharedValue(sharedVariableSymbol: IrValueSymbol, originalSet: IrSetValue): IrExpression =
         with(originalSet) {
-            val unboxedType = InlineClassAbi.unboxType(symbol.owner.type)
-            val unboxedValue = unboxedType?.let { unsafeCoerce(value, symbol.owner.type, it) } ?: value
-            val provider = getProvider(unboxedType ?: symbol.owner.type)
-            val receiver = IrGetValueImpl(startOffset, endOffset, sharedVariableSymbol)
+            konst unboxedType = InlineClassAbi.unboxType(symbol.owner.type)
+            konst unboxedValue = unboxedType?.let { unsafeCoerce(konstue, symbol.owner.type, it) } ?: konstue
+            konst provider = getProvider(unboxedType ?: symbol.owner.type)
+            konst receiver = IrGetValueImpl(startOffset, endOffset, sharedVariableSymbol)
             IrSetFieldImpl(startOffset, endOffset, provider.elementField.symbol, receiver, unboxedValue, type, origin)
         }
 
     @Suppress("MemberVisibilityCanBePrivate") // Used by FragmentSharedVariablesLowering
     fun getIrType(originalType: IrType): IrType {
-        val provider = getProvider(InlineClassAbi.unboxType(originalType) ?: originalType)
-        val typeArguments = provider.refClass.typeParameters.map { originalType }
+        konst provider = getProvider(InlineClassAbi.unboxType(originalType) ?: originalType)
+        konst typeArguments = provider.refClass.typeParameters.map { originalType }
         return provider.refClass.typeWith(typeArguments)
     }
 }

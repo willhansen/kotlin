@@ -20,7 +20,7 @@ public class JavaClass {
 
 fun box(): String {
 
-    val jClass = JavaClass()
+    konst jClass = JavaClass()
 
     if ((jClass.minus0() as Double) < (jClass.plus0() as Double)) return "fail 2"
     if ((jClass.minus0() as Double) != (jClass.plus0() as Double)) return "fail 5"

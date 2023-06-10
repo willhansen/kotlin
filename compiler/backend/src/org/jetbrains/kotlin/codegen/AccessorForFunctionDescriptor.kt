@@ -24,11 +24,11 @@ import org.jetbrains.kotlin.name.Name
 import java.util.*
 
 class AccessorForFunctionDescriptor(
-    override val calleeDescriptor: FunctionDescriptor,
+    override konst calleeDescriptor: FunctionDescriptor,
     containingDeclaration: DeclarationDescriptor,
-    override val superCallTarget: ClassDescriptor?,
-    private val nameSuffix: String,
-    override val accessorKind: AccessorKind
+    override konst superCallTarget: ClassDescriptor?,
+    private konst nameSuffix: String,
+    override konst accessorKind: AccessorKind
 ) : AbstractAccessorForFunctionDescriptor(containingDeclaration, Name.identifier("access$$nameSuffix")),
     AccessorForCallableDescriptor<FunctionDescriptor> {
 

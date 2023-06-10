@@ -19,15 +19,15 @@ import org.jetbrains.kotlin.test.model.FrontendKind
 import org.jetbrains.kotlin.test.model.FrontendKinds
 import org.jetbrains.kotlin.test.runners.codegen.FirPsiCodegenTest
 
-abstract class AbstractFirJsIrTextTestBase(private val parser: FirParser) : AbstractJsIrTextTestBase<FirOutputArtifact>() {
+abstract class AbstractFirJsIrTextTestBase(private konst parser: FirParser) : AbstractJsIrTextTestBase<FirOutputArtifact>() {
 
-    override val frontend: FrontendKind<*>
+    override konst frontend: FrontendKind<*>
         get() = FrontendKinds.FIR
 
-    override val frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
         get() = ::FirFrontendFacade
 
-    override val converter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
+    override konst converter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
         get() = ::Fir2IrJsResultsConverter
 
     override fun configure(builder: TestConfigurationBuilder) {

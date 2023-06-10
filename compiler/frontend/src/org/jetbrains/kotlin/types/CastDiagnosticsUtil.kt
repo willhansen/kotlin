@@ -43,12 +43,12 @@ object CastDiagnosticsUtil {
         rhsType: KotlinType,
         platformToKotlinClassMapper: PlatformToKotlinClassMapper
     ): Boolean {
-        val typeConstructor = lhsType.constructor
+        konst typeConstructor = lhsType.constructor
         if (typeConstructor is IntersectionTypeConstructor) {
             return typeConstructor.supertypes.any { isCastPossible(it, rhsType, platformToKotlinClassMapper) }
         }
-        val rhsNullable = TypeUtils.isNullableType(rhsType)
-        val lhsNullable = TypeUtils.isNullableType(lhsType)
+        konst rhsNullable = TypeUtils.isNullableType(rhsType)
+        konst lhsNullable = TypeUtils.isNullableType(lhsType)
         if (KotlinBuiltIns.isNothing(lhsType)) return true
         if (KotlinBuiltIns.isNullableNothing(lhsType) && !rhsNullable) return false
         if (KotlinBuiltIns.isNothing(rhsType)) return false
@@ -57,7 +57,7 @@ object CastDiagnosticsUtil {
         if (lhsType.isError) return true
         if (isRelated(lhsType, rhsType, platformToKotlinClassMapper)) return true
         // This is an oversimplification (which does not render the method incomplete):
-        // we consider any type parameter capable of taking any value, which may be made more precise if we considered bounds
+        // we consider any type parameter capable of taking any konstue, which may be made more precise if we considered bounds
         if (TypeUtils.isTypeParameter(lhsType) || TypeUtils.isTypeParameter(rhsType)) return true
 
         if (isFinal(lhsType) || isFinal(rhsType)) return false
@@ -75,8 +75,8 @@ object CastDiagnosticsUtil {
      * (i.e. java.lang.String -> kotlin.String) and ignore mappings that go the other way.
      */
     private fun isRelated(a: KotlinType, b: KotlinType, platformToKotlinClassMapper: PlatformToKotlinClassMapper): Boolean {
-        val aClasses = mapToPlatformIndependentClasses(a, platformToKotlinClassMapper)
-        val bClasses = mapToPlatformIndependentClasses(b, platformToKotlinClassMapper)
+        konst aClasses = mapToPlatformIndependentClasses(a, platformToKotlinClassMapper)
+        konst bClasses = mapToPlatformIndependentClasses(b, platformToKotlinClassMapper)
 
         return aClasses.any { DescriptorUtils.isSubtypeOfClass(b, it) } || bClasses.any { DescriptorUtils.isSubtypeOfClass(a, it) }
     }
@@ -85,7 +85,7 @@ object CastDiagnosticsUtil {
         type: KotlinType,
         platformToKotlinClassMapper: PlatformToKotlinClassMapper
     ): List<ClassDescriptor> {
-        val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return listOf()
+        konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return listOf()
 
         return platformToKotlinClassMapper.mapPlatformClass(descriptor) + descriptor
     }
@@ -101,13 +101,13 @@ object CastDiagnosticsUtil {
      */
     @JvmStatic
     fun isCastErased(supertype: KotlinType, subtype: KotlinType, typeChecker: KotlinTypeChecker): Boolean {
-        val isNonReifiedTypeParameter = TypeUtils.isNonReifiedTypeParameter(subtype)
-        val isUpcast = typeChecker.isSubtypeOf(supertype, subtype)
+        konst isNonReifiedTypeParameter = TypeUtils.isNonReifiedTypeParameter(subtype)
+        konst isUpcast = typeChecker.isSubtypeOf(supertype, subtype)
 
         // here we want to restrict cases such as `x is T` for x = T?, when T might have nullable upper bound
         if (isNonReifiedTypeParameter && !isUpcast) {
             // hack to save previous behavior in case when `x is T`, where T is not nullable, see IsErasedNullableTasT.kt
-            val nullableToDefinitelyNotNull = !TypeUtils.isNullableType(subtype) && supertype.makeNotNullable() == subtype
+            konst nullableToDefinitelyNotNull = !TypeUtils.isNullableType(subtype) && supertype.makeNotNullable() == subtype
             if (!nullableToDefinitelyNotNull) {
                 return true
             }
@@ -128,7 +128,7 @@ object CastDiagnosticsUtil {
         // NOTE: this does not account for 'as Array<List<T>>'
         if (allParametersReified(subtype)) return false
 
-        val staticallyKnownSubtype = findStaticallyKnownSubtype(supertype, subtype.constructor).resultingType ?: return true
+        konst staticallyKnownSubtype = findStaticallyKnownSubtype(supertype, subtype.constructor).resultingType ?: return true
 
         // If the substitution failed, it means that the result is an impossible type, e.g. something like Out<in Foo>
         // In this case, we can't guarantee anything, so the cast is considered to be erased
@@ -160,19 +160,19 @@ object CastDiagnosticsUtil {
 
         // Assume we are casting an expression of type Collection<Foo> to List<Bar>
         // First, let's make List<T>, where T is a type variable
-        val descriptor = subtypeConstructor.declarationDescriptor ?: error("Can't create default type for " + subtypeConstructor)
-        val subtypeWithVariables = descriptor.defaultType
+        konst descriptor = subtypeConstructor.declarationDescriptor ?: error("Can't create default type for " + subtypeConstructor)
+        konst subtypeWithVariables = descriptor.defaultType
 
         // Now, let's find a supertype of List<T> that is a Collection of something,
         // in this case it will be Collection<T>
-        val supertypeWithVariables = TypeCheckingProcedure.findCorrespondingSupertype(subtypeWithVariables, supertype)
+        konst supertypeWithVariables = TypeCheckingProcedure.findCorrespondingSupertype(subtypeWithVariables, supertype)
 
-        val variables = subtypeWithVariables.constructor.parameters
-        val variableConstructors = variables.map(TypeParameterDescriptor::getTypeConstructor).toSet()
+        konst variables = subtypeWithVariables.constructor.parameters
+        konst variableConstructors = variables.map(TypeParameterDescriptor::getTypeConstructor).toSet()
 
-        val substitution: MutableMap<TypeConstructor, TypeProjection> = if (supertypeWithVariables != null) {
+        konst substitution: MutableMap<TypeConstructor, TypeProjection> = if (supertypeWithVariables != null) {
             // Now, let's try to unify Collection<T> and Collection<Foo> solution is a map from T to Foo
-            val solution = TypeUnifier.unify(
+            konst solution = TypeUnifier.unify(
                 TypeProjectionImpl(supertype), TypeProjectionImpl(supertypeWithVariables), variableConstructors::contains
             )
             Maps.newHashMap(solution.substitution)
@@ -186,8 +186,8 @@ object CastDiagnosticsUtil {
         // let's put stars instead, so that we can only cast to something like List<*>, e.g. (a: Any) as List<*>
         var allArgumentsInferred = true
         for (variable in variables) {
-            val value = substitution[variable.typeConstructor]
-            if (value == null) {
+            konst konstue = substitution[variable.typeConstructor]
+            if (konstue == null) {
                 substitution.put(
                     variable.typeConstructor,
                     TypeUtils.makeStarProjection(variable)
@@ -196,9 +196,9 @@ object CastDiagnosticsUtil {
             }
         }
 
-        // At this point we have values for all type parameters of List
+        // At this point we have konstues for all type parameters of List
         // Let's make a type by substituting them: List<T> -> List<Foo>
-        val substituted = TypeSubstitutor.create(substitution).substitute(subtypeWithVariables, Variance.INVARIANT)
+        konst substituted = TypeSubstitutor.create(substitution).substitute(subtypeWithVariables, Variance.INVARIANT)
 
         return TypeReconstructionResult(substituted, allArgumentsInferred)
     }
@@ -212,8 +212,8 @@ object CastDiagnosticsUtil {
         actualType: KotlinType
     ): Boolean {
         // Here: x as? Type <=> x as Type?
-        val refinedTargetType = if (KtPsiUtil.isSafeCast(expression)) TypeUtils.makeNullable(targetType) else targetType
-        val possibleTypes = DataFlowAnalyzer.getAllPossibleTypes(expression.left, actualType, context)
+        konst refinedTargetType = if (KtPsiUtil.isSafeCast(expression)) TypeUtils.makeNullable(targetType) else targetType
+        konst possibleTypes = DataFlowAnalyzer.getAllPossibleTypes(expression.left, actualType, context)
         return isRefinementUseless(possibleTypes, refinedTargetType, shouldCheckForExactType(expression, context.expectedType))
     }
 
@@ -223,7 +223,7 @@ object CastDiagnosticsUtil {
         targetType: KotlinType,
         shouldCheckForExactType: Boolean
     ): Boolean {
-        val intersectedType = TypeIntersector.intersectTypes(possibleTypes.map { it.upperIfFlexible() }) ?: return false
+        konst intersectedType = TypeIntersector.intersectTypes(possibleTypes.map { it.upperIfFlexible() }) ?: return false
 
         return if (shouldCheckForExactType)
             isExactTypeCast(intersectedType, targetType)
@@ -269,7 +269,7 @@ object CastDiagnosticsUtil {
             is KtValueArgument -> true
 
             is KtQualifiedExpression -> {
-                val receiver = parent.receiverExpression
+                konst receiver = parent.receiverExpression
                 PsiTreeUtil.isAncestor(receiver, expression, false)
             }
 

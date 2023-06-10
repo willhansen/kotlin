@@ -2,7 +2,7 @@
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 suspend fun foo(x: String = "OK") = suspendCoroutineUninterceptedOrReturn<IC> {
     it.resume(IC(x))

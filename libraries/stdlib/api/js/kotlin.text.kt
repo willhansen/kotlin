@@ -1,12 +1,12 @@
 @kotlin.SinceKotlin(version = "1.2")
-public val kotlin.String.Companion.CASE_INSENSITIVE_ORDER: kotlin.Comparator<kotlin.String> { get; }
+public konst kotlin.String.Companion.CASE_INSENSITIVE_ORDER: kotlin.Comparator<kotlin.String> { get; }
 
 @kotlin.SinceKotlin(version = "1.5")
-public val kotlin.Char.category: kotlin.text.CharCategory { get; }
+public konst kotlin.Char.category: kotlin.text.CharCategory { get; }
 
-public val kotlin.CharSequence.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.CharSequence.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.CharSequence.lastIndex: kotlin.Int { get; }
+public konst kotlin.CharSequence.lastIndex: kotlin.Int { get; }
 
 @kotlin.ExperimentalStdlibApi
 @kotlin.SinceKotlin(version = "1.9")
@@ -36,15 +36,15 @@ public fun kotlin.CharSequence.any(): kotlin.Boolean
 
 public inline fun kotlin.CharSequence.any(predicate: (kotlin.Char) -> kotlin.Boolean): kotlin.Boolean
 
-public fun <T : kotlin.text.Appendable> T.append(vararg value: kotlin.CharSequence?): T
+public fun <T : kotlin.text.Appendable> T.append(vararg konstue: kotlin.CharSequence?): T
 
-@kotlin.Deprecated(level = DeprecationLevel.WARNING, message = "Use append(value: Any?) instead", replaceWith = kotlin.ReplaceWith(expression = "append(value = obj)", imports = {}))
+@kotlin.Deprecated(level = DeprecationLevel.WARNING, message = "Use append(konstue: Any?) instead", replaceWith = kotlin.ReplaceWith(expression = "append(konstue = obj)", imports = {}))
 @kotlin.internal.InlineOnly
 public inline fun kotlin.text.StringBuilder.append(obj: kotlin.Any?): kotlin.text.StringBuilder
 
-public fun kotlin.text.StringBuilder.append(vararg value: kotlin.Any?): kotlin.text.StringBuilder
+public fun kotlin.text.StringBuilder.append(vararg konstue: kotlin.Any?): kotlin.text.StringBuilder
 
-public fun kotlin.text.StringBuilder.append(vararg value: kotlin.String?): kotlin.text.StringBuilder
+public fun kotlin.text.StringBuilder.append(vararg konstue: kotlin.String?): kotlin.text.StringBuilder
 
 @kotlin.Deprecated(level = DeprecationLevel.ERROR, message = "Use appendRange instead.", replaceWith = kotlin.ReplaceWith(expression = "this.appendRange(str, offset, offset + len)", imports = {}))
 @kotlin.internal.InlineOnly
@@ -56,11 +56,11 @@ public inline fun kotlin.text.Appendable.appendLine(): kotlin.text.Appendable
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun kotlin.text.Appendable.appendLine(value: kotlin.Char): kotlin.text.Appendable
+public inline fun kotlin.text.Appendable.appendLine(konstue: kotlin.Char): kotlin.text.Appendable
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun kotlin.text.Appendable.appendLine(value: kotlin.CharSequence?): kotlin.text.Appendable
+public inline fun kotlin.text.Appendable.appendLine(konstue: kotlin.CharSequence?): kotlin.text.Appendable
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
@@ -68,39 +68,39 @@ public inline fun kotlin.text.StringBuilder.appendLine(): kotlin.text.StringBuil
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun kotlin.text.StringBuilder.appendLine(value: kotlin.Any?): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.appendLine(konstue: kotlin.Any?): kotlin.text.StringBuilder
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun kotlin.text.StringBuilder.appendLine(value: kotlin.Boolean): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.appendLine(konstue: kotlin.Boolean): kotlin.text.StringBuilder
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun kotlin.text.StringBuilder.appendLine(value: kotlin.Char): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.appendLine(konstue: kotlin.Char): kotlin.text.StringBuilder
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun kotlin.text.StringBuilder.appendLine(value: kotlin.CharArray): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.appendLine(konstue: kotlin.CharArray): kotlin.text.StringBuilder
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun kotlin.text.StringBuilder.appendLine(value: kotlin.CharSequence?): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.appendLine(konstue: kotlin.CharSequence?): kotlin.text.StringBuilder
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun kotlin.text.StringBuilder.appendLine(value: kotlin.String?): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.appendLine(konstue: kotlin.String?): kotlin.text.StringBuilder
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public fun <T : kotlin.text.Appendable> T.appendRange(value: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): T
+public fun <T : kotlin.text.Appendable> T.appendRange(konstue: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): T
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public inline fun kotlin.text.StringBuilder.appendRange(value: kotlin.CharArray, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.appendRange(konstue: kotlin.CharArray, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public inline fun kotlin.text.StringBuilder.appendRange(value: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.appendRange(konstue: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
 
 public fun kotlin.CharSequence.asIterable(): kotlin.collections.Iterable<kotlin.Char>
 
@@ -110,19 +110,19 @@ public inline fun <K, V> kotlin.CharSequence.associate(transform: (kotlin.Char) 
 
 public inline fun <K> kotlin.CharSequence.associateBy(keySelector: (kotlin.Char) -> K): kotlin.collections.Map<K, kotlin.Char>
 
-public inline fun <K, V> kotlin.CharSequence.associateBy(keySelector: (kotlin.Char) -> K, valueTransform: (kotlin.Char) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.CharSequence.associateBy(keySelector: (kotlin.Char) -> K, konstueTransform: (kotlin.Char) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Char>> kotlin.CharSequence.associateByTo(destination: M, keySelector: (kotlin.Char) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.CharSequence.associateByTo(destination: M, keySelector: (kotlin.Char) -> K, valueTransform: (kotlin.Char) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.CharSequence.associateByTo(destination: M, keySelector: (kotlin.Char) -> K, konstueTransform: (kotlin.Char) -> V): M
 
 public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.CharSequence.associateTo(destination: M, transform: (kotlin.Char) -> kotlin.Pair<K, V>): M
 
 @kotlin.SinceKotlin(version = "1.3")
-public inline fun <V> kotlin.CharSequence.associateWith(valueSelector: (kotlin.Char) -> V): kotlin.collections.Map<kotlin.Char, V>
+public inline fun <V> kotlin.CharSequence.associateWith(konstueSelector: (kotlin.Char) -> V): kotlin.collections.Map<kotlin.Char, V>
 
 @kotlin.SinceKotlin(version = "1.3")
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Char, in V>> kotlin.CharSequence.associateWithTo(destination: M, valueSelector: (kotlin.Char) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Char, in V>> kotlin.CharSequence.associateWithTo(destination: M, konstueSelector: (kotlin.Char) -> V): M
 
 @kotlin.Deprecated(message = "Use replaceFirstChar instead.", replaceWith = kotlin.ReplaceWith(expression = "replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }", imports = {}))
 @kotlin.DeprecatedSinceKotlin(warningSince = "1.5")
@@ -191,7 +191,7 @@ public fun kotlin.ByteArray.decodeToString(): kotlin.String
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public fun kotlin.ByteArray.decodeToString(startIndex: kotlin.Int = ..., endIndex: kotlin.Int = ..., throwOnInvalidSequence: kotlin.Boolean = ...): kotlin.String
+public fun kotlin.ByteArray.decodeToString(startIndex: kotlin.Int = ..., endIndex: kotlin.Int = ..., throwOnInkonstidSequence: kotlin.Boolean = ...): kotlin.String
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
@@ -255,7 +255,7 @@ public fun kotlin.String.encodeToByteArray(): kotlin.ByteArray
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public fun kotlin.String.encodeToByteArray(startIndex: kotlin.Int = ..., endIndex: kotlin.Int = ..., throwOnInvalidSequence: kotlin.Boolean = ...): kotlin.ByteArray
+public fun kotlin.String.encodeToByteArray(startIndex: kotlin.Int = ..., endIndex: kotlin.Int = ..., throwOnInkonstidSequence: kotlin.Boolean = ...): kotlin.ByteArray
 
 public fun kotlin.CharSequence.endsWith(char: kotlin.Char, ignoreCase: kotlin.Boolean = ...): kotlin.Boolean
 
@@ -349,11 +349,11 @@ public fun kotlin.CharSequence.getOrNull(index: kotlin.Int): kotlin.Char?
 
 public inline fun <K> kotlin.CharSequence.groupBy(keySelector: (kotlin.Char) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Char>>
 
-public inline fun <K, V> kotlin.CharSequence.groupBy(keySelector: (kotlin.Char) -> K, valueTransform: (kotlin.Char) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.CharSequence.groupBy(keySelector: (kotlin.Char) -> K, konstueTransform: (kotlin.Char) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Char>>> kotlin.CharSequence.groupByTo(destination: M, keySelector: (kotlin.Char) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.CharSequence.groupByTo(destination: M, keySelector: (kotlin.Char) -> K, valueTransform: (kotlin.Char) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.CharSequence.groupByTo(destination: M, keySelector: (kotlin.Char) -> K, konstueTransform: (kotlin.Char) -> V): M
 
 @kotlin.SinceKotlin(version = "1.1")
 public inline fun <K> kotlin.CharSequence.groupingBy(crossinline keySelector: (kotlin.Char) -> K): kotlin.collections.Grouping<kotlin.Char, K>
@@ -428,11 +428,11 @@ public inline fun kotlin.CharSequence.indexOfLast(predicate: (kotlin.Char) -> ko
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public inline fun kotlin.text.StringBuilder.insertRange(index: kotlin.Int, value: kotlin.CharArray, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.insertRange(index: kotlin.Int, konstue: kotlin.CharArray, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public inline fun kotlin.text.StringBuilder.insertRange(index: kotlin.Int, value: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.insertRange(index: kotlin.Int, konstue: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
 
 public fun kotlin.CharSequence.isBlank(): kotlin.Boolean
 
@@ -859,11 +859,11 @@ public inline fun <R> kotlin.CharSequence.scanIndexed(initial: R, operation: (in
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public inline operator fun kotlin.text.StringBuilder.set(index: kotlin.Int, value: kotlin.Char): kotlin.Unit
+public inline operator fun kotlin.text.StringBuilder.set(index: kotlin.Int, konstue: kotlin.Char): kotlin.Unit
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public inline fun kotlin.text.StringBuilder.setRange(startIndex: kotlin.Int, endIndex: kotlin.Int, value: kotlin.String): kotlin.text.StringBuilder
+public inline fun kotlin.text.StringBuilder.setRange(startIndex: kotlin.Int, endIndex: kotlin.Int, konstue: kotlin.String): kotlin.text.StringBuilder
 
 public fun kotlin.CharSequence.single(): kotlin.Char
 
@@ -1291,10 +1291,10 @@ public inline fun kotlin.String.trimEnd(predicate: (kotlin.Char) -> kotlin.Boole
 
 public fun kotlin.String.trimEnd(vararg chars: kotlin.Char): kotlin.String
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 public fun kotlin.String.trimIndent(): kotlin.String
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 public fun kotlin.String.trimMargin(marginPrefix: kotlin.String = ...): kotlin.String
 
 public fun kotlin.CharSequence.trimStart(): kotlin.CharSequence
@@ -1349,11 +1349,11 @@ public fun kotlin.CharSequence.zipWithNext(): kotlin.collections.List<kotlin.Pai
 public inline fun <R> kotlin.CharSequence.zipWithNext(transform: (a: kotlin.Char, b: kotlin.Char) -> R): kotlin.collections.List<R>
 
 public interface Appendable {
-    public abstract fun append(value: kotlin.Char): kotlin.text.Appendable
+    public abstract fun append(konstue: kotlin.Char): kotlin.text.Appendable
 
-    public abstract fun append(value: kotlin.CharSequence?): kotlin.text.Appendable
+    public abstract fun append(konstue: kotlin.CharSequence?): kotlin.text.Appendable
 
-    public abstract fun append(value: kotlin.CharSequence?, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.Appendable
+    public abstract fun append(konstue: kotlin.CharSequence?, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.Appendable
 }
 
 @kotlin.SinceKotlin(version = "1.5")
@@ -1418,7 +1418,7 @@ public final enum class CharCategory : kotlin.Enum<kotlin.text.CharCategory> {
 
     enum entry FINAL_QUOTE_PUNCTUATION
 
-    public final val code: kotlin.String { get; }
+    public final konst code: kotlin.String { get; }
 
     public final operator fun contains(char: kotlin.Char): kotlin.Boolean
 
@@ -1437,18 +1437,18 @@ public open class CharacterCodingException : kotlin.Exception {
 @kotlin.ExperimentalStdlibApi
 @kotlin.SinceKotlin(version = "1.9")
 public final class HexFormat {
-    public final val bytes: kotlin.text.HexFormat.BytesHexFormat { get; }
+    public final konst bytes: kotlin.text.HexFormat.BytesHexFormat { get; }
 
-    public final val number: kotlin.text.HexFormat.NumberHexFormat { get; }
+    public final konst number: kotlin.text.HexFormat.NumberHexFormat { get; }
 
-    public final val upperCase: kotlin.Boolean { get; }
+    public final konst upperCase: kotlin.Boolean { get; }
 
     public open override fun toString(): kotlin.String
 
     public final class Builder {
-        public final val bytes: kotlin.text.HexFormat.BytesHexFormat.Builder { get; }
+        public final konst bytes: kotlin.text.HexFormat.BytesHexFormat.Builder { get; }
 
-        public final val number: kotlin.text.HexFormat.NumberHexFormat.Builder { get; }
+        public final konst number: kotlin.text.HexFormat.NumberHexFormat.Builder { get; }
 
         public final var upperCase: kotlin.Boolean { get; set; }
 
@@ -1460,17 +1460,17 @@ public final class HexFormat {
     }
 
     public final class BytesHexFormat {
-        public final val bytePrefix: kotlin.String { get; }
+        public final konst bytePrefix: kotlin.String { get; }
 
-        public final val byteSeparator: kotlin.String { get; }
+        public final konst byteSeparator: kotlin.String { get; }
 
-        public final val byteSuffix: kotlin.String { get; }
+        public final konst byteSuffix: kotlin.String { get; }
 
-        public final val bytesPerGroup: kotlin.Int { get; }
+        public final konst bytesPerGroup: kotlin.Int { get; }
 
-        public final val bytesPerLine: kotlin.Int { get; }
+        public final konst bytesPerLine: kotlin.Int { get; }
 
-        public final val groupSeparator: kotlin.String { get; }
+        public final konst groupSeparator: kotlin.String { get; }
 
         public open override fun toString(): kotlin.String
 
@@ -1490,17 +1490,17 @@ public final class HexFormat {
     }
 
     public companion object of HexFormat {
-        public final val Default: kotlin.text.HexFormat { get; }
+        public final konst Default: kotlin.text.HexFormat { get; }
 
-        public final val UpperCase: kotlin.text.HexFormat { get; }
+        public final konst UpperCase: kotlin.text.HexFormat { get; }
     }
 
     public final class NumberHexFormat {
-        public final val prefix: kotlin.String { get; }
+        public final konst prefix: kotlin.String { get; }
 
-        public final val removeLeadingZeros: kotlin.Boolean { get; }
+        public final konst removeLeadingZeros: kotlin.Boolean { get; }
 
-        public final val suffix: kotlin.String { get; }
+        public final konst suffix: kotlin.String { get; }
 
         public open override fun toString(): kotlin.String
 
@@ -1515,13 +1515,13 @@ public final class HexFormat {
 }
 
 public final data class MatchGroup {
-    public constructor MatchGroup(value: kotlin.String)
+    public constructor MatchGroup(konstue: kotlin.String)
 
-    public final val value: kotlin.String { get; }
+    public final konst konstue: kotlin.String { get; }
 
     public final operator fun component1(): kotlin.String
 
-    public final fun copy(value: kotlin.String = ...): kotlin.text.MatchGroup
+    public final fun copy(konstue: kotlin.String = ...): kotlin.text.MatchGroup
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -1540,20 +1540,20 @@ public interface MatchNamedGroupCollection : kotlin.text.MatchGroupCollection {
 }
 
 public interface MatchResult {
-    public open val destructured: kotlin.text.MatchResult.Destructured { get; }
+    public open konst destructured: kotlin.text.MatchResult.Destructured { get; }
 
-    public abstract val groupValues: kotlin.collections.List<kotlin.String> { get; }
+    public abstract konst groupValues: kotlin.collections.List<kotlin.String> { get; }
 
-    public abstract val groups: kotlin.text.MatchGroupCollection { get; }
+    public abstract konst groups: kotlin.text.MatchGroupCollection { get; }
 
-    public abstract val range: kotlin.ranges.IntRange { get; }
+    public abstract konst range: kotlin.ranges.IntRange { get; }
 
-    public abstract val value: kotlin.String { get; }
+    public abstract konst konstue: kotlin.String { get; }
 
     public abstract fun next(): kotlin.text.MatchResult?
 
     public final class Destructured {
-        public final val match: kotlin.text.MatchResult { get; }
+        public final konst match: kotlin.text.MatchResult { get; }
 
         @kotlin.internal.InlineOnly
         public final inline operator fun component1(): kotlin.String
@@ -1596,9 +1596,9 @@ public final class Regex {
 
     public constructor Regex(pattern: kotlin.String, option: kotlin.text.RegexOption)
 
-    public final val options: kotlin.collections.Set<kotlin.text.RegexOption> { get; }
+    public final konst options: kotlin.collections.Set<kotlin.text.RegexOption> { get; }
 
-    public final val pattern: kotlin.String { get; }
+    public final konst pattern: kotlin.String { get; }
 
     public final fun containsMatchIn(input: kotlin.CharSequence): kotlin.Boolean
 
@@ -1646,7 +1646,7 @@ public final enum class RegexOption : kotlin.Enum<kotlin.text.RegexOption> {
 
     enum entry MULTILINE
 
-    public final val value: kotlin.String { get; }
+    public final konst konstue: kotlin.String { get; }
 }
 
 public final class StringBuilder : kotlin.text.Appendable, kotlin.CharSequence {
@@ -1658,33 +1658,33 @@ public final class StringBuilder : kotlin.text.Appendable, kotlin.CharSequence {
 
     public constructor StringBuilder(content: kotlin.String)
 
-    public open override val length: kotlin.Int { get; }
+    public open override konst length: kotlin.Int { get; }
 
-    public final fun append(value: kotlin.Any?): kotlin.text.StringBuilder
-
-    @kotlin.SinceKotlin(version = "1.3")
-    public final fun append(value: kotlin.Boolean): kotlin.text.StringBuilder
-
-    public open override fun append(value: kotlin.Char): kotlin.text.StringBuilder
-
-    @kotlin.SinceKotlin(version = "1.4")
-    @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun append(value: kotlin.CharArray): kotlin.text.StringBuilder
-
-    public open override fun append(value: kotlin.CharSequence?): kotlin.text.StringBuilder
-
-    public open override fun append(value: kotlin.CharSequence?, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+    public final fun append(konstue: kotlin.Any?): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.3")
-    public final fun append(value: kotlin.String?): kotlin.text.StringBuilder
+    public final fun append(konstue: kotlin.Boolean): kotlin.text.StringBuilder
+
+    public open override fun append(konstue: kotlin.Char): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun appendRange(value: kotlin.CharArray, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+    public final fun append(konstue: kotlin.CharArray): kotlin.text.StringBuilder
+
+    public open override fun append(konstue: kotlin.CharSequence?): kotlin.text.StringBuilder
+
+    public open override fun append(konstue: kotlin.CharSequence?, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+
+    @kotlin.SinceKotlin(version = "1.3")
+    public final fun append(konstue: kotlin.String?): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun appendRange(value: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+    public final fun appendRange(konstue: kotlin.CharArray, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+
+    @kotlin.SinceKotlin(version = "1.4")
+    @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
+    public final fun appendRange(konstue: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.3")
     @kotlin.Deprecated(level = DeprecationLevel.WARNING, message = "Obtaining StringBuilder capacity is not supported in JS and common code.")
@@ -1717,35 +1717,35 @@ public final class StringBuilder : kotlin.text.Appendable, kotlin.CharSequence {
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun insert(index: kotlin.Int, value: kotlin.Any?): kotlin.text.StringBuilder
+    public final fun insert(index: kotlin.Int, konstue: kotlin.Any?): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun insert(index: kotlin.Int, value: kotlin.Boolean): kotlin.text.StringBuilder
+    public final fun insert(index: kotlin.Int, konstue: kotlin.Boolean): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun insert(index: kotlin.Int, value: kotlin.Char): kotlin.text.StringBuilder
+    public final fun insert(index: kotlin.Int, konstue: kotlin.Char): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun insert(index: kotlin.Int, value: kotlin.CharArray): kotlin.text.StringBuilder
+    public final fun insert(index: kotlin.Int, konstue: kotlin.CharArray): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun insert(index: kotlin.Int, value: kotlin.CharSequence?): kotlin.text.StringBuilder
+    public final fun insert(index: kotlin.Int, konstue: kotlin.CharSequence?): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun insert(index: kotlin.Int, value: kotlin.String?): kotlin.text.StringBuilder
+    public final fun insert(index: kotlin.Int, konstue: kotlin.String?): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun insertRange(index: kotlin.Int, value: kotlin.CharArray, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+    public final fun insertRange(index: kotlin.Int, konstue: kotlin.CharArray, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun insertRange(index: kotlin.Int, value: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
+    public final fun insertRange(index: kotlin.Int, konstue: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
@@ -1759,7 +1759,7 @@ public final class StringBuilder : kotlin.text.Appendable, kotlin.CharSequence {
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final operator fun set(index: kotlin.Int, value: kotlin.Char): kotlin.Unit
+    public final operator fun set(index: kotlin.Int, konstue: kotlin.Char): kotlin.Unit
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
@@ -1767,7 +1767,7 @@ public final class StringBuilder : kotlin.text.Appendable, kotlin.CharSequence {
 
     @kotlin.SinceKotlin(version = "1.4")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public final fun setRange(startIndex: kotlin.Int, endIndex: kotlin.Int, value: kotlin.String): kotlin.text.StringBuilder
+    public final fun setRange(startIndex: kotlin.Int, endIndex: kotlin.Int, konstue: kotlin.String): kotlin.text.StringBuilder
 
     public open override fun subSequence(startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.CharSequence
 
@@ -1791,91 +1791,91 @@ public final class StringBuilder : kotlin.text.Appendable, kotlin.CharSequence {
 }
 
 public object Typography {
-    public const final val almostEqual: kotlin.Char = \u2248 ('≈') { get; }
+    public const final konst almostEqual: kotlin.Char = \u2248 ('≈') { get; }
 
-    public const final val amp: kotlin.Char = \u0026 ('&') { get; }
+    public const final konst amp: kotlin.Char = \u0026 ('&') { get; }
 
-    public const final val bullet: kotlin.Char = \u2022 ('•') { get; }
+    public const final konst bullet: kotlin.Char = \u2022 ('•') { get; }
 
-    public const final val cent: kotlin.Char = \u00A2 ('¢') { get; }
+    public const final konst cent: kotlin.Char = \u00A2 ('¢') { get; }
 
-    public const final val copyright: kotlin.Char = \u00A9 ('©') { get; }
+    public const final konst copyright: kotlin.Char = \u00A9 ('©') { get; }
 
-    public const final val dagger: kotlin.Char = \u2020 ('†') { get; }
+    public const final konst dagger: kotlin.Char = \u2020 ('†') { get; }
 
-    public const final val degree: kotlin.Char = \u00B0 ('°') { get; }
+    public const final konst degree: kotlin.Char = \u00B0 ('°') { get; }
 
-    public const final val dollar: kotlin.Char = \u0024 ('$') { get; }
+    public const final konst dollar: kotlin.Char = \u0024 ('$') { get; }
 
-    public const final val doubleDagger: kotlin.Char = \u2021 ('‡') { get; }
+    public const final konst doubleDagger: kotlin.Char = \u2021 ('‡') { get; }
 
-    public const final val doublePrime: kotlin.Char = \u2033 ('″') { get; }
+    public const final konst doublePrime: kotlin.Char = \u2033 ('″') { get; }
 
-    public const final val ellipsis: kotlin.Char = \u2026 ('…') { get; }
+    public const final konst ellipsis: kotlin.Char = \u2026 ('…') { get; }
 
-    public const final val euro: kotlin.Char = \u20AC ('€') { get; }
+    public const final konst euro: kotlin.Char = \u20AC ('€') { get; }
 
-    public const final val greater: kotlin.Char = \u003E ('>') { get; }
+    public const final konst greater: kotlin.Char = \u003E ('>') { get; }
 
-    public const final val greaterOrEqual: kotlin.Char = \u2265 ('≥') { get; }
+    public const final konst greaterOrEqual: kotlin.Char = \u2265 ('≥') { get; }
 
-    public const final val half: kotlin.Char = \u00BD ('½') { get; }
+    public const final konst half: kotlin.Char = \u00BD ('½') { get; }
 
-    public const final val leftDoubleQuote: kotlin.Char = \u201C ('“') { get; }
+    public const final konst leftDoubleQuote: kotlin.Char = \u201C ('“') { get; }
 
     @kotlin.SinceKotlin(version = "1.6")
-    public const final val leftGuillemet: kotlin.Char = \u00AB ('«') { get; }
+    public const final konst leftGuillemet: kotlin.Char = \u00AB ('«') { get; }
 
     @kotlin.Deprecated(message = "This constant has a typo in the name. Use leftGuillemet instead.", replaceWith = kotlin.ReplaceWith(expression = "Typography.leftGuillemet", imports = {}))
     @kotlin.DeprecatedSinceKotlin(warningSince = "1.6")
-    public const final val leftGuillemete: kotlin.Char = \u00AB ('«') { get; }
+    public const final konst leftGuillemete: kotlin.Char = \u00AB ('«') { get; }
 
-    public const final val leftSingleQuote: kotlin.Char = \u2018 ('‘') { get; }
+    public const final konst leftSingleQuote: kotlin.Char = \u2018 ('‘') { get; }
 
-    public const final val less: kotlin.Char = \u003C ('<') { get; }
+    public const final konst less: kotlin.Char = \u003C ('<') { get; }
 
-    public const final val lessOrEqual: kotlin.Char = \u2264 ('≤') { get; }
+    public const final konst lessOrEqual: kotlin.Char = \u2264 ('≤') { get; }
 
-    public const final val lowDoubleQuote: kotlin.Char = \u201E ('„') { get; }
+    public const final konst lowDoubleQuote: kotlin.Char = \u201E ('„') { get; }
 
-    public const final val lowSingleQuote: kotlin.Char = \u201A ('‚') { get; }
+    public const final konst lowSingleQuote: kotlin.Char = \u201A ('‚') { get; }
 
-    public const final val mdash: kotlin.Char = \u2014 ('—') { get; }
+    public const final konst mdash: kotlin.Char = \u2014 ('—') { get; }
 
-    public const final val middleDot: kotlin.Char = \u00B7 ('·') { get; }
+    public const final konst middleDot: kotlin.Char = \u00B7 ('·') { get; }
 
-    public const final val nbsp: kotlin.Char = \u00A0 (' ') { get; }
+    public const final konst nbsp: kotlin.Char = \u00A0 (' ') { get; }
 
-    public const final val ndash: kotlin.Char = \u2013 ('–') { get; }
+    public const final konst ndash: kotlin.Char = \u2013 ('–') { get; }
 
-    public const final val notEqual: kotlin.Char = \u2260 ('≠') { get; }
+    public const final konst notEqual: kotlin.Char = \u2260 ('≠') { get; }
 
-    public const final val paragraph: kotlin.Char = \u00B6 ('¶') { get; }
+    public const final konst paragraph: kotlin.Char = \u00B6 ('¶') { get; }
 
-    public const final val plusMinus: kotlin.Char = \u00B1 ('±') { get; }
+    public const final konst plusMinus: kotlin.Char = \u00B1 ('±') { get; }
 
-    public const final val pound: kotlin.Char = \u00A3 ('£') { get; }
+    public const final konst pound: kotlin.Char = \u00A3 ('£') { get; }
 
-    public const final val prime: kotlin.Char = \u2032 ('′') { get; }
+    public const final konst prime: kotlin.Char = \u2032 ('′') { get; }
 
-    public const final val quote: kotlin.Char = \u0022 ('"') { get; }
+    public const final konst quote: kotlin.Char = \u0022 ('"') { get; }
 
-    public const final val registered: kotlin.Char = \u00AE ('®') { get; }
+    public const final konst registered: kotlin.Char = \u00AE ('®') { get; }
 
-    public const final val rightDoubleQuote: kotlin.Char = \u201D ('”') { get; }
+    public const final konst rightDoubleQuote: kotlin.Char = \u201D ('”') { get; }
 
     @kotlin.SinceKotlin(version = "1.6")
-    public const final val rightGuillemet: kotlin.Char = \u00BB ('»') { get; }
+    public const final konst rightGuillemet: kotlin.Char = \u00BB ('»') { get; }
 
     @kotlin.Deprecated(message = "This constant has a typo in the name. Use rightGuillemet instead.", replaceWith = kotlin.ReplaceWith(expression = "Typography.rightGuillemet", imports = {}))
     @kotlin.DeprecatedSinceKotlin(warningSince = "1.6")
-    public const final val rightGuillemete: kotlin.Char = \u00BB ('»') { get; }
+    public const final konst rightGuillemete: kotlin.Char = \u00BB ('»') { get; }
 
-    public const final val rightSingleQuote: kotlin.Char = \u2019 ('’') { get; }
+    public const final konst rightSingleQuote: kotlin.Char = \u2019 ('’') { get; }
 
-    public const final val section: kotlin.Char = \u00A7 ('§') { get; }
+    public const final konst section: kotlin.Char = \u00A7 ('§') { get; }
 
-    public const final val times: kotlin.Char = \u00D7 ('×') { get; }
+    public const final konst times: kotlin.Char = \u00D7 ('×') { get; }
 
-    public const final val tm: kotlin.Char = \u2122 ('™') { get; }
+    public const final konst tm: kotlin.Char = \u2122 ('™') { get; }
 }

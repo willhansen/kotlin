@@ -45,23 +45,23 @@ object FirProjectionRelationChecker : FirBasicDeclarationChecker() {
         reporter: DiagnosticReporter
     ) {
         if (typeRef.source?.kind?.shouldSkipErrorTypeReporting != false) return
-        val type = typeRef.coneTypeSafe<ConeClassLikeType>()
-        val fullyExpandedType = type?.fullyExpandedType(context.session) ?: return
-        val declaration = fullyExpandedType.toSymbol(context.session) as? FirRegularClassSymbol ?: return
-        val typeParameters = declaration.typeParameterSymbols
-        val typeArguments = type.typeArguments
+        konst type = typeRef.coneTypeSafe<ConeClassLikeType>()
+        konst fullyExpandedType = type?.fullyExpandedType(context.session) ?: return
+        konst declaration = fullyExpandedType.toSymbol(context.session) as? FirRegularClassSymbol ?: return
+        konst typeParameters = declaration.typeParameterSymbols
+        konst typeArguments = type.typeArguments
 
-        val size = minOf(typeParameters.size, typeArguments.size)
+        konst size = minOf(typeParameters.size, typeArguments.size)
 
-        val typeRefAndSourcesForArguments = extractArgumentsTypeRefAndSource(typeRef) ?: return
+        konst typeRefAndSourcesForArguments = extractArgumentsTypeRefAndSource(typeRef) ?: return
         for (it in 0 until size) {
-            val proto = typeParameters[it]
-            val actual = typeArguments[it]
-            val fullyExpandedProjection = fullyExpandedType.typeArguments[it]
+            konst proto = typeParameters[it]
+            konst actual = typeArguments[it]
+            konst fullyExpandedProjection = fullyExpandedType.typeArguments[it]
 
-            val protoVariance = proto.variance
+            konst protoVariance = proto.variance
 
-            val projectionRelation = if (fullyExpandedProjection is ConeKotlinTypeConflictingProjection ||
+            konst projectionRelation = if (fullyExpandedProjection is ConeKotlinTypeConflictingProjection ||
                 actual is ConeKotlinTypeProjectionIn && protoVariance == Variance.OUT_VARIANCE ||
                 actual is ConeKotlinTypeProjectionOut && protoVariance == Variance.IN_VARIANCE
             ) {
@@ -74,7 +74,7 @@ object FirProjectionRelationChecker : FirBasicDeclarationChecker() {
                 ProjectionRelation.None
             }
 
-            val argTypeRefSource = typeRefAndSourcesForArguments.getOrNull(it) ?: continue
+            konst argTypeRefSource = typeRefAndSourcesForArguments.getOrNull(it) ?: continue
 
             if (projectionRelation != ProjectionRelation.None && typeRef.source?.kind !is KtFakeSourceElementKind) {
                 reporter.reportOn(

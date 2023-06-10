@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_OLD
 
 interface T {
-    val x: Int
+    konst x: Int
         get() = 1
 }
 

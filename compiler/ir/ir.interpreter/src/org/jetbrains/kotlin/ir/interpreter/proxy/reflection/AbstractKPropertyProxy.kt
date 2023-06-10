@@ -14,35 +14,35 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
 import kotlin.reflect.*
 
 internal abstract class AbstractKPropertyProxy(
-    override val state: KPropertyState, override val callInterceptor: CallInterceptor
+    override konst state: KPropertyState, override konst callInterceptor: CallInterceptor
 ) : ReflectionProxy, KProperty<Any?> {
-    protected val propertyType: IrType
+    protected konst propertyType: IrType
         get() = state.property.getter!!.returnType
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = state.property.modality == Modality.ABSTRACT
-    override val isConst: Boolean
+    override konst isConst: Boolean
         get() = state.property.isConst
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = state.property.modality == Modality.FINAL
-    override val isLateinit: Boolean
+    override konst isLateinit: Boolean
         get() = state.property.isLateinit
-    override val isOpen: Boolean
+    override konst isOpen: Boolean
         get() = state.property.modality == Modality.OPEN
-    override val isSuspend: Boolean
+    override konst isSuspend: Boolean
         get() = false
-    override val name: String
+    override konst name: String
         get() = state.property.name.asString()
 
-    override val annotations: List<Annotation>
+    override konst annotations: List<Annotation>
         get() = TODO("not implemented")
-    override val parameters: List<KParameter>
+    override konst parameters: List<KParameter>
         get() = state.getParameters(callInterceptor)
-    override val returnType: KType
+    override konst returnType: KType
         get() = state.getReturnType(callInterceptor)
-    override val typeParameters: List<KTypeParameter>
+    override konst typeParameters: List<KTypeParameter>
         get() = listOf()
-    override val visibility: KVisibility?
+    override konst visibility: KVisibility?
         get() = state.property.visibility.toKVisibility()
 
     override fun call(vararg args: Any?): Any? = getter.call(*args)
@@ -55,54 +55,54 @@ internal abstract class AbstractKPropertyProxy(
         }
     }
 
-    abstract inner class Getter(val getter: IrSimpleFunction) : KProperty.Getter<Any?> {
-        override val property: KProperty<Any?> = this@AbstractKPropertyProxy
+    abstract inner class Getter(konst getter: IrSimpleFunction) : KProperty.Getter<Any?> {
+        override konst property: KProperty<Any?> = this@AbstractKPropertyProxy
 
-        override val name: String = "<get-${this@AbstractKPropertyProxy.name.capitalizeAsciiOnly()}>"
-        override val annotations: List<Annotation>
+        override konst name: String = "<get-${this@AbstractKPropertyProxy.name.capitalizeAsciiOnly()}>"
+        override konst annotations: List<Annotation>
             get() = this@AbstractKPropertyProxy.annotations
-        override val parameters: List<KParameter>
+        override konst parameters: List<KParameter>
             get() = this@AbstractKPropertyProxy.parameters
-        override val returnType: KType
+        override konst returnType: KType
             get() = this@AbstractKPropertyProxy.returnType
-        override val typeParameters: List<KTypeParameter>
+        override konst typeParameters: List<KTypeParameter>
             get() = this@AbstractKPropertyProxy.typeParameters
 
-        override val isInline: Boolean = getter.isInline
-        override val isExternal: Boolean = getter.isExternal
-        override val isOperator: Boolean = getter.isOperator
-        override val isInfix: Boolean = getter.isInfix
-        override val isSuspend: Boolean = getter.isSuspend
+        override konst isInline: Boolean = getter.isInline
+        override konst isExternal: Boolean = getter.isExternal
+        override konst isOperator: Boolean = getter.isOperator
+        override konst isInfix: Boolean = getter.isInfix
+        override konst isSuspend: Boolean = getter.isSuspend
 
-        override val visibility: KVisibility? = getter.visibility.toKVisibility()
-        override val isFinal: Boolean = getter.modality == Modality.FINAL
-        override val isOpen: Boolean = getter.modality == Modality.OPEN
-        override val isAbstract: Boolean = getter.modality == Modality.ABSTRACT
+        override konst visibility: KVisibility? = getter.visibility.toKVisibility()
+        override konst isFinal: Boolean = getter.modality == Modality.FINAL
+        override konst isOpen: Boolean = getter.modality == Modality.OPEN
+        override konst isAbstract: Boolean = getter.modality == Modality.ABSTRACT
     }
 
-    abstract inner class Setter(val setter: IrSimpleFunction) : KMutableProperty.Setter<Any?> {
-        override val property: KProperty<Any?> = this@AbstractKPropertyProxy
+    abstract inner class Setter(konst setter: IrSimpleFunction) : KMutableProperty.Setter<Any?> {
+        override konst property: KProperty<Any?> = this@AbstractKPropertyProxy
 
-        override val name: String = "<set-${this@AbstractKPropertyProxy.name.capitalizeAsciiOnly()}>"
-        override val annotations: List<Annotation>
+        override konst name: String = "<set-${this@AbstractKPropertyProxy.name.capitalizeAsciiOnly()}>"
+        override konst annotations: List<Annotation>
             get() = this@AbstractKPropertyProxy.annotations
-        override val parameters: List<KParameter>
+        override konst parameters: List<KParameter>
             get() = this@AbstractKPropertyProxy.parameters
-        override val returnType: KType
+        override konst returnType: KType
             get() = this@AbstractKPropertyProxy.returnType
-        override val typeParameters: List<KTypeParameter>
+        override konst typeParameters: List<KTypeParameter>
             get() = this@AbstractKPropertyProxy.typeParameters
 
-        override val isInline: Boolean = setter.isInline
-        override val isExternal: Boolean = setter.isExternal
-        override val isOperator: Boolean = setter.isOperator
-        override val isInfix: Boolean = setter.isInfix
-        override val isSuspend: Boolean = setter.isSuspend
+        override konst isInline: Boolean = setter.isInline
+        override konst isExternal: Boolean = setter.isExternal
+        override konst isOperator: Boolean = setter.isOperator
+        override konst isInfix: Boolean = setter.isInfix
+        override konst isSuspend: Boolean = setter.isSuspend
 
-        override val visibility: KVisibility? = setter.visibility.toKVisibility()
-        override val isFinal: Boolean = setter.modality == Modality.FINAL
-        override val isOpen: Boolean = setter.modality == Modality.OPEN
-        override val isAbstract: Boolean = setter.modality == Modality.ABSTRACT
+        override konst visibility: KVisibility? = setter.visibility.toKVisibility()
+        override konst isFinal: Boolean = setter.modality == Modality.FINAL
+        override konst isOpen: Boolean = setter.modality == Modality.OPEN
+        override konst isAbstract: Boolean = setter.modality == Modality.ABSTRACT
     }
 
     override fun equals(other: Any?): Boolean {

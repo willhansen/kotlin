@@ -1,3 +1,3 @@
 package org.sample
 
-val bar = 1
+konst bar = 1

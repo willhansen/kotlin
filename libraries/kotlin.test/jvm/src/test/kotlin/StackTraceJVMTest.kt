@@ -14,7 +14,7 @@ class StackTraceJVMTest {
 
     @Test
     fun testCurrentStackTrace() {
-/* <-- line number */ val topFrame = currentStackTrace()[0]
+/* <-- line number */ konst topFrame = currentStackTrace()[0]
         assertEquals("StackTraceJVMTest.kt", topFrame.fileName)
         assertEquals(17, topFrame.lineNumber)
     }

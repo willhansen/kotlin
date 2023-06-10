@@ -7,13 +7,13 @@ fun foo() {
         return
     }
     
-    val t = try {
+    konst t = try {
         mightThrow2()
     } catch (e: Throwable) {
         return
     }
 
-    val x = try {
+    konst x = try {
         mightThrow3()
     } catch (e: Throwable) {
         return

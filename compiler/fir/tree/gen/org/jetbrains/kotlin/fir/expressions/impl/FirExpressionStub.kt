@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 class FirExpressionStub @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var typeRef: FirTypeRef,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
 ) : FirExpression() {

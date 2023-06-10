@@ -14,6 +14,6 @@ import org.jetbrains.kotlin.fir.PrivateSessionConstructor
 internal class LLFirScriptSession @PrivateSessionConstructor constructor(
     ktModule: KtScriptModule,
     dependencyTracker: ModificationTracker,
-    override val moduleComponents: LLFirModuleResolveComponents,
+    override konst moduleComponents: LLFirModuleResolveComponents,
     builtinTypes: BuiltinTypes
 ) : LLFirResolvableModuleSession(ktModule, dependencyTracker, builtinTypes)

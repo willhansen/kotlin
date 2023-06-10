@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.util.fields
 import org.jetbrains.kotlin.name.Name
 
-internal val renameFieldsPhase = makeIrFilePhase<CommonBackendContext>(
+internal konst renameFieldsPhase = makeIrFilePhase<CommonBackendContext>(
     { RenameFieldsLowering() },
     name = "RenameFields",
     description = "Rename private fields (including fields copied from companion object) to avoid JVM declaration clash"
@@ -20,7 +20,7 @@ internal val renameFieldsPhase = makeIrFilePhase<CommonBackendContext>(
 
 private class RenameFieldsLowering : ClassLoweringPass {
     override fun lower(irClass: IrClass) {
-        val fields = irClass.fields.toMutableList()
+        konst fields = irClass.fields.toMutableList()
         fields.sortBy {
             when {
                 // We never rename public ABI fields (public and protected visibility) since they are accessible from Java
@@ -37,10 +37,10 @@ private class RenameFieldsLowering : ClassLoweringPass {
             }
         }
 
-        val count = hashMapOf<Name, Int>()
+        konst count = hashMapOf<Name, Int>()
         for (field in fields) {
-            val oldName = field.name
-            val index = count[oldName] ?: 0
+            konst oldName = field.name
+            konst index = count[oldName] ?: 0
             if (index != 0 && !field.visibility.isPublicAPI) {
                 field.name = Name.identifier("$oldName$$index")
             }

@@ -6,7 +6,7 @@
  * ISSUES: KT-11727
  */
 fun case_1(): Int? {
-    val x: Int? = null
+    konst x: Int? = null
     return when (x != null) {
         true -> {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -21,7 +21,7 @@ fun case_1(): Int? {
  * ISSUES: KT-11727
  */
 fun case_2(): Int? {
-    val x: Int? = null
+    konst x: Int? = null
     return when (x != null) {
         false -> {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>x<!>
@@ -35,7 +35,7 @@ fun case_2(): Int? {
  * ISSUES: KT-11727
  */
 fun case_3(): Int? {
-    val x: Int? = null
+    konst x: Int? = null
     return when (x == null) {
         false -> {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -49,7 +49,7 @@ fun case_3(): Int? {
  * ISSUES: KT-11727
  */
 fun case_4(): Int? {
-    val x: Int? = null
+    konst x: Int? = null
     return when (x == null) {
         true -> {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>x<!>

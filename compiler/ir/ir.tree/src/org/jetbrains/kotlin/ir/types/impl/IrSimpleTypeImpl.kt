@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class IrAbstractSimpleType(kotlinType: KotlinType?) : IrSimpleType(kotlinType) {
 
-    override val variance: Variance
+    override konst variance: Variance
         get() = Variance.INVARIANT
 
-    abstract override val classifier: IrClassifierSymbol
-    abstract override val nullability: SimpleTypeNullability
-    abstract override val arguments: List<IrTypeArgument>
-    abstract override val annotations: List<IrConstructorCall>
-    abstract override val abbreviation: IrTypeAbbreviation?
+    abstract override konst classifier: IrClassifierSymbol
+    abstract override konst nullability: SimpleTypeNullability
+    abstract override konst arguments: List<IrTypeArgument>
+    abstract override konst annotations: List<IrConstructorCall>
+    abstract override konst abbreviation: IrTypeAbbreviation?
 
     override fun equals(other: Any?): Boolean =
         other is IrAbstractSimpleType &&
@@ -39,30 +39,30 @@ abstract class IrAbstractSimpleType(kotlinType: KotlinType?) : IrSimpleType(kotl
 
 abstract class IrDelegatedSimpleType(kotlinType: KotlinType? = null) : IrAbstractSimpleType(kotlinType) {
 
-    protected abstract val delegate: IrSimpleType
+    protected abstract konst delegate: IrSimpleType
 
-    override val classifier: IrClassifierSymbol
+    override konst classifier: IrClassifierSymbol
         get() = delegate.classifier
-    override val nullability: SimpleTypeNullability
+    override konst nullability: SimpleTypeNullability
         get() = delegate.nullability
-    override val arguments: List<IrTypeArgument>
+    override konst arguments: List<IrTypeArgument>
         get() = delegate.arguments
-    override val abbreviation: IrTypeAbbreviation?
+    override konst abbreviation: IrTypeAbbreviation?
         get() = delegate.abbreviation
-    override val annotations: List<IrConstructorCall>
+    override konst annotations: List<IrConstructorCall>
         get() = delegate.annotations
 }
 
 class IrSimpleTypeImpl(
     kotlinType: KotlinType?,
-    override val classifier: IrClassifierSymbol,
+    override konst classifier: IrClassifierSymbol,
     nullability: SimpleTypeNullability,
-    override val arguments: List<IrTypeArgument>,
-    override val annotations: List<IrConstructorCall>,
-    override val abbreviation: IrTypeAbbreviation? = null
+    override konst arguments: List<IrTypeArgument>,
+    override konst annotations: List<IrConstructorCall>,
+    override konst abbreviation: IrTypeAbbreviation? = null
 ) : IrAbstractSimpleType(kotlinType) {
 
-    override val nullability =
+    override konst nullability =
         if (classifier !is IrTypeParameterSymbol && nullability == SimpleTypeNullability.NOT_SPECIFIED)
             SimpleTypeNullability.DEFINITELY_NOT_NULL
         else
@@ -126,8 +126,8 @@ inline fun IrSimpleType.buildSimpleType(b: IrSimpleTypeBuilder.() -> Unit): IrSi
     toBuilder().apply(b).buildSimpleType()
 
 class IrTypeProjectionImpl internal constructor(
-    override val type: IrType,
-    override val variance: Variance
+    override konst type: IrType,
+    override konst variance: Variance
 ) : IrTypeProjection {
     override fun equals(other: Any?): Boolean =
         other is IrTypeProjectionImpl && type == other.type && variance == other.variance

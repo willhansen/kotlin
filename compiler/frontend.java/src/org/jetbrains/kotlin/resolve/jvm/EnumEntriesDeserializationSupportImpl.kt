@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.platform.jvm.isJvm
 import org.jetbrains.kotlin.serialization.deserialization.EnumEntriesDeserializationSupport
 
 class EnumEntriesDeserializationSupportImpl(
-    private val platform: TargetPlatform?,
+    private konst platform: TargetPlatform?,
 ) : EnumEntriesDeserializationSupport {
     override fun canSynthesizeEnumEntries(): Boolean = platform.isJvm()
 }

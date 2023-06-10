@@ -14,7 +14,7 @@ package kotlin.native.internal
 public object Debugging {
     public var forceCheckedShutdown: Boolean by kotlin.native.runtime.Debugging::forceCheckedShutdown
 
-    public val isThreadStateRunnable: Boolean by kotlin.native.runtime.Debugging::isThreadStateRunnable
+    public konst isThreadStateRunnable: Boolean by kotlin.native.runtime.Debugging::isThreadStateRunnable
 }
 
 @GCUnsafeCall("Kotlin_Debugging_isPermanent")

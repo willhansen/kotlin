@@ -1,6 +1,6 @@
 fun foo(x: Any) {
     x.
-    val foo = 1
+    konst foo = 1
 
     x.
     fun bar() = 2
@@ -13,13 +13,13 @@ fun foo(x: Any) {
 }
 
 class A {
-    val z = "a".
-    val x = 4
+    konst z = "a".
+    konst x = 4
 
-    val y = "b".
+    konst y = "b".
     fun baz() = 5
 
-    val q = "c".
+    konst q = "c".
     fun String.() = 6
 
     var a = 24.

@@ -32,11 +32,11 @@ class ExternalAndroidTargetPrototypeSmokeTest {
     }
 
     @Test
-    fun `apply prototype - evaluate - compilations exist`() {
-        val project = buildProjectWithMPP()
+    fun `apply prototype - ekonstuate - compilations exist`() {
+        konst project = buildProjectWithMPP()
         project.androidLibrary { compileSdk = 31 }
-        val androidTargetPrototype = project.multiplatformExtension.androidTargetPrototype()
-        project.evaluate()
+        konst androidTargetPrototype = project.multiplatformExtension.androidTargetPrototype()
+        project.ekonstuate()
 
         assertEquals(
             setOf("main", "unitTest", "instrumentedTest"),
@@ -45,15 +45,15 @@ class ExternalAndroidTargetPrototypeSmokeTest {
     }
 
     @Test
-    fun `apply prototype - evaluate - configurations can be resolved`() {
-        val project = buildProjectWithMPP()
+    fun `apply prototype - ekonstuate - configurations can be resolved`() {
+        konst project = buildProjectWithMPP()
         setAndroidSdkDirProperty(project)
         project.androidLibrary { compileSdk = 31 }
 
-        val androidTargetPrototype = project.multiplatformExtension.androidTargetPrototype()
+        konst androidTargetPrototype = project.multiplatformExtension.androidTargetPrototype()
         project.repositories.mavenLocal()
         project.repositories.mavenCentralCacheRedirector()
-        project.evaluate()
+        project.ekonstuate()
 
         androidTargetPrototype.compilations.all { compilation ->
             compilation.compileDependencyFiles.files
@@ -63,22 +63,22 @@ class ExternalAndroidTargetPrototypeSmokeTest {
 
     @Test
     fun `apply prototype - with maven publish plugin - publication exists`() {
-        val project = buildProjectWithMPP()
+        konst project = buildProjectWithMPP()
         project.androidLibrary { compileSdk = 31 }
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.multiplatformExtension.androidTargetPrototype()
-        project.evaluate()
+        project.ekonstuate()
 
-        val publishing = project.extensions.getByType<PublishingExtension>()
-        val androidPublication = publishing.publications.getByName("android") as MavenPublication
+        konst publishing = project.extensions.getByType<PublishingExtension>()
+        konst androidPublication = publishing.publications.getByName("android") as MavenPublication
         if (androidPublication.artifacts.size != 1) fail("Expected one artifact. Found ${androidPublication.artifacts}")
-        val aarArtifact = androidPublication.artifacts.first()
+        konst aarArtifact = androidPublication.artifacts.first()
         assertEquals("aar", aarArtifact.extension)
     }
 
     @Test
     fun `apply prototype - resolve androidPrototypeMain dependencies - contains android bootstrap classpath`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDefaultStdlibDependency(false)
             enableDependencyVerification(false)
             applyMultiplatformPlugin()
@@ -87,9 +87,9 @@ class ExternalAndroidTargetPrototypeSmokeTest {
         setAndroidSdkDirProperty(project)
         project.androidLibrary { compileSdk = 31 }
         project.multiplatformExtension.androidTargetPrototype()
-        project.evaluate()
+        project.ekonstuate()
 
-        val androidPrototypeMain = project.multiplatformExtension.sourceSets.getByName("prototypeAndroidMain")
+        konst androidPrototypeMain = project.multiplatformExtension.sourceSets.getByName("prototypeAndroidMain")
 
         project.kotlinIdeMultiplatformImport.resolveDependencies(androidPrototypeMain).assertMatches(
             binaryCoordinates(Regex("com\\.android:sdk:.*")),

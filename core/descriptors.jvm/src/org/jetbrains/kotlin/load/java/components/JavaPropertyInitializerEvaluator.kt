@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.load.java.structure.JavaField
 import org.jetbrains.kotlin.resolve.constants.ConstantValue
 
-interface JavaPropertyInitializerEvaluator {
+interface JavaPropertyInitializerEkonstuator {
     fun getInitializerConstant(field: JavaField, descriptor: PropertyDescriptor): ConstantValue<*>?
 
-    object DoNothing : JavaPropertyInitializerEvaluator {
+    object DoNothing : JavaPropertyInitializerEkonstuator {
         override fun getInitializerConstant(field: JavaField, descriptor: PropertyDescriptor): ConstantValue<*>? = null
     }
 }

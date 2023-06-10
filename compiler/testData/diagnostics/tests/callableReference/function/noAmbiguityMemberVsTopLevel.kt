@@ -14,7 +14,7 @@ class A {
     fun foo() {}
 
     fun main() {
-        val x = ::foo
+        konst x = ::foo
 
         checkSubtype<KFunction0<Unit>>(x)
 

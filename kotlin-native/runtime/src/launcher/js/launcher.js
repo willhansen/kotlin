@@ -97,23 +97,23 @@ function twoIntsToDouble(upper, lower) {
     return doubles[0];
 }
 
-function doubleToTwoInts(value) {
+function doubleToTwoInts(konstue) {
     const buffer = new ArrayBuffer(8);
     const ints = new Int32Array(buffer);
     const doubles = new Float64Array(buffer);
-    doubles[0] = value;
+    doubles[0] = konstue;
     return {upper: ints[1], lower: ints[0]}
 }
 
-function int32ToHeap(value, pointer) {
-    heap[pointer] = value & 0xff;
-    heap[pointer + 1] = (value & 0xff00) >>> 8;
-    heap[pointer + 2] = (value & 0xff0000) >>> 16;
-    heap[pointer + 3] = (value & 0xff000000) >>> 24;
+function int32ToHeap(konstue, pointer) {
+    heap[pointer] = konstue & 0xff;
+    heap[pointer + 1] = (konstue & 0xff00) >>> 8;
+    heap[pointer + 2] = (konstue & 0xff0000) >>> 16;
+    heap[pointer + 3] = (konstue & 0xff000000) >>> 24;
 }
 
-function doubleToReturnSlot(value) {
-    const twoInts = doubleToTwoInts(value);
+function doubleToReturnSlot(konstue) {
+    const twoInts = doubleToTwoInts(konstue);
     instance.exports.ReturnSlot_setDouble(twoInts.upper, twoInts.lower);
 }
 

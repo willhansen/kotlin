@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.fir.declarations.FirFile
 import org.jetbrains.kotlin.fir.declarations.FirRegularClass
 
 class LLFirClassWithSpecificMembersResolveTarget(
-    override val firFile: FirFile,
-    override val path: List<FirRegularClass>,
-    val target: FirRegularClass,
-    val members: List<FirDeclaration>
+    override konst firFile: FirFile,
+    override konst path: List<FirRegularClass>,
+    konst target: FirRegularClass,
+    konst members: List<FirDeclaration>
 ) : LLFirResolveTarget() {
     override fun forEachTarget(action: (FirElementWithResolveState) -> Unit) {
         action(target)

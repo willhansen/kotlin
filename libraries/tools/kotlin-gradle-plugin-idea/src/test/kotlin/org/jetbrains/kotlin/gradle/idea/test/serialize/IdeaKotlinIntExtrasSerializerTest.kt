@@ -14,8 +14,8 @@ import kotlin.test.assertEquals
 class IdeaKotlinIntExtrasSerializerTest {
 
     @Test
-    fun `test - values`() {
-        val context = TestIdeaKotlinSerializationContext()
+    fun `test - konstues`() {
+        konst context = TestIdeaKotlinSerializationContext()
         assertEquals(2411, deserialize(context, serialize(context, 2411)))
         assertEquals(-2411, deserialize(context, serialize(context, -2411)))
         assertEquals(Int.MAX_VALUE, deserialize(context, serialize(context, Int.MAX_VALUE)))

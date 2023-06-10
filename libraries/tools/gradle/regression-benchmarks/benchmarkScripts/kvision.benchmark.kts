@@ -15,7 +15,7 @@
 
 import java.io.File
 
-val repoPatch = {
+konst repoPatch = {
     "kvision-kotlin-current.patch" to File("benchmarkScripts/files/kvision-kotlin-repo.patch")
         .readText()
         .run { replace("<kotlin_version>", currentKotlinVersion) }

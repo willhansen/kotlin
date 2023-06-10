@@ -5,11 +5,11 @@ import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KMutableProperty2
 import kotlin.reflect.full.*
 
-class C(val token: Int) {
+class C(konst token: Int) {
     var member = 42
     var String.memberExtension: Int
         get() = 42
-        set(value) {}
+        set(konstue) {}
 
     override fun equals(other: Any?): Boolean =
         other is C && token == other.token
@@ -17,7 +17,7 @@ class C(val token: Int) {
 
 var String.topLevel: String
     get() = this
-    set(value) {}
+    set(konstue) {}
 
 fun checkEqual(a: Any, b: Any) {
     if (a != b || b != a) throw AssertionError("Objects should be equal")
@@ -29,23 +29,23 @@ fun checkNotEqual(a: Any, b: Any) {
 }
 
 fun box(): String {
-    val unboundMember = C::member
-    val unboundMemberReflect = C::class.memberProperties.single { it.name == "member" } as KMutableProperty1
-    val unboundTopLevel = String::topLevel
+    konst unboundMember = C::member
+    konst unboundMemberReflect = C::class.memberProperties.single { it.name == "member" } as KMutableProperty1
+    konst unboundTopLevel = String::topLevel
 
     checkEqual(unboundMember.getter, unboundMemberReflect.getter)
     checkEqual(unboundMember.setter, unboundMemberReflect.setter)
     checkNotEqual(unboundMember.getter, unboundMember.setter)
 
-    val boundMember = C(42)::member
-    val boundTopLevel = ""::topLevel
+    konst boundMember = C(42)::member
+    konst boundTopLevel = ""::topLevel
 
     checkEqual(boundMember.getter, boundMember.getter)
     checkEqual(boundMember.setter, boundMember.setter)
     checkEqual(unboundMember.getter, C::member.getter)
     checkEqual(unboundMember.setter, C::member.setter)
 
-    val memberExtension = C::class.memberExtensionProperties.single { it.name == "memberExtension" } as KMutableProperty2
+    konst memberExtension = C::class.memberExtensionProperties.single { it.name == "memberExtension" } as KMutableProperty2
 
     // Accessors of KProperty0, KProperty1 and KProperty2 are not equal to each other
     checkNotEqual(boundMember.getter, unboundMember.getter)
@@ -61,7 +61,7 @@ fun box(): String {
     checkNotEqual(unboundTopLevel.getter, boundTopLevel.getter)
     checkNotEqual(unboundTopLevel.setter, boundTopLevel.setter)
 
-    // Check that receiver value has effect on equals
+    // Check that receiver konstue has effect on equals
     checkNotEqual(C(42)::member.getter, C(43)::member.getter)
     checkNotEqual(C(42)::member.setter, C(43)::member.setter)
 

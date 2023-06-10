@@ -30,12 +30,12 @@ import org.jetbrains.kotlin.konan.target.AppleConfigurables
  */
 open class CoverageTest : DefaultTask() {
 
-    private val target = project.testTarget
-    private val platform = project.platformManager.platform(target)
-    private val configurables = platform.configurables
+    private konst target = project.testTarget
+    private konst platform = project.platformManager.platform(target)
+    private konst configurables = platform.configurables
 
     // Use the same LLVM version as compiler when producing machine code:
-    private val llvmToolsDir = if (configurables is AppleConfigurables) {
+    private konst llvmToolsDir = if (configurables is AppleConfigurables) {
         "${configurables.absoluteTargetToolchain}/usr/bin"
     } else {
         "${configurables.absoluteLlvmHome}/bin"
@@ -51,22 +51,22 @@ open class CoverageTest : DefaultTask() {
     var numberOfCoveredLines: Int? = null
 
     @get:Internal
-    val profrawFile: String by lazy {
+    konst profrawFile: String by lazy {
         "${project.buildDir.absolutePath}/$binaryName.profraw"
     }
 
-    private val profdataFile: String by lazy {
+    private konst profdataFile: String by lazy {
         "${project.buildDir.absolutePath}/$binaryName.profdata"
     }
 
-    private val outputDir: String by lazy {
+    private konst outputDir: String by lazy {
         project.file(project.property("testOutputCoverage")!!).absolutePath
     }
 
     override fun configure(closure: Closure<Any>): Task {
         super.configure(closure)
         dependsOnDist()
-        val compileBinaryTask = project.tasks.named("compileKonan$binaryName").configure {
+        konst compileBinaryTask = project.tasks.named("compileKonan$binaryName").configure {
             konanOldPluginTaskDependenciesWalker {
                 dependsOnDist()
             }
@@ -77,19 +77,19 @@ open class CoverageTest : DefaultTask() {
 
     @TaskAction
     fun run() {
-        val suffix = target.family.exeSuffix
-        val pathToBinary = "$outputDir/$binaryName/$target/$binaryName.$suffix"
+        konst suffix = target.family.exeSuffix
+        konst pathToBinary = "$outputDir/$binaryName/$target/$binaryName.$suffix"
         runProcess({ project.executor.execute(it) }, pathToBinary)
                 .ensureSuccessful(pathToBinary)
         exec("llvm-profdata", "merge", profrawFile, "-o", profdataFile)
-        val llvmCovResult = exec("llvm-cov", "export", pathToBinary, "-instr-profile", profdataFile)
-        val jsonReport = llvmCovResult.stdOut
-        val llvmCovReport = parseLlvmCovReport(jsonReport)
+        konst llvmCovResult = exec("llvm-cov", "export", pathToBinary, "-instr-profile", profdataFile)
+        konst jsonReport = llvmCovResult.stdOut
+        konst llvmCovReport = parseLlvmCovReport(jsonReport)
         try {
-            CoverageValidator(numberOfCoveredFunctions, numberOfCoveredLines).validateReport(llvmCovReport)
+            CoverageValidator(numberOfCoveredFunctions, numberOfCoveredLines).konstidateReport(llvmCovReport)
         } catch (e: TestFailedException) {
             // Show report in message to make debug easier.
-            val show = exec("llvm-cov", "show", pathToBinary, "-instr-profile", profdataFile).stdOut
+            konst show = exec("llvm-cov", "show", pathToBinary, "-instr-profile", profdataFile).stdOut
             // llvm-cov output contains '|' so another symbol is used as margin prefix.
             throw TestFailedException("""
                 >${e.message}
@@ -99,8 +99,8 @@ open class CoverageTest : DefaultTask() {
     }
 
     private fun exec(llvmTool: String, vararg args: String): ProcessOutput {
-        val executable = "$llvmToolsDir/$llvmTool"
-        val result = runProcess(localExecutor(project), executable, args.toList())
+        konst executable = "$llvmToolsDir/$llvmTool"
+        konst result = runProcess(localExecutor(project), executable, args.toList())
         result.ensureSuccessful(llvmTool)
         return result
     }
@@ -121,11 +121,11 @@ open class CoverageTest : DefaultTask() {
 }
 
 private class CoverageValidator(
-        val numberOfCoveredFunctions: Int?,
-        val numberOfCoveredLines: Int?
+        konst numberOfCoveredFunctions: Int?,
+        konst numberOfCoveredLines: Int?
 ) {
-    fun validateReport(report: LlvmCovReport) {
-        val data = report.data
+    fun konstidateReport(report: LlvmCovReport) {
+        konst data = report.data
         if (data.isEmpty()) {
             failTest("Report data should not be empty!")
         }

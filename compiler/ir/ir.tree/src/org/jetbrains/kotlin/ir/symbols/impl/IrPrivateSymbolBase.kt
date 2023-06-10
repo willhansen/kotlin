@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.ir.util.render
  */
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 abstract class IrSymbolBase<out Descriptor : DeclarationDescriptor>(
-    private val _descriptor: Descriptor?
+    private konst _descriptor: Descriptor?
 ) : IrSymbol {
     @ObsoleteDescriptorBasedAPI
     @Suppress("UNCHECKED_CAST")
-    override val descriptor: Descriptor
+    override konst descriptor: Descriptor
         get() = _descriptor ?: (owner as IrDeclaration).toIrBasedDescriptor() as Descriptor
 
     @ObsoleteDescriptorBasedAPI
-    override val hasDescriptor: Boolean
+    override konst hasDescriptor: Boolean
         get() = _descriptor != null
 
     override fun toString(): String {
@@ -52,7 +52,7 @@ abstract class IrBindableSymbolBase<out Descriptor, Owner>(
             "Substituted descriptor $descriptor for ${descriptor!!.original}"
         }
         if (descriptor != null) {
-            val containingDeclaration = descriptor.containingDeclaration
+            konst containingDeclaration = descriptor.containingDeclaration
             assert(containingDeclaration == null || isOriginalDescriptor(containingDeclaration)) {
                 "Substituted containing declaration: $containingDeclaration\nfor descriptor: $descriptor"
             }
@@ -60,12 +60,12 @@ abstract class IrBindableSymbolBase<out Descriptor, Owner>(
     }
 
     private fun isOriginalDescriptor(descriptor: DeclarationDescriptor): Boolean =
-        // TODO fix declaring/referencing value parameters: compute proper original descriptor
+        // TODO fix declaring/referencing konstue parameters: compute proper original descriptor
         descriptor is ValueParameterDescriptor && isOriginalDescriptor(descriptor.containingDeclaration) ||
                 descriptor == descriptor.original
 
     private var _owner: Owner? = null
-    override val owner: Owner
+    override konst owner: Owner
         get() = _owner ?: throw IllegalStateException("Symbol with ${javaClass.simpleName} is unbound")
 
     override fun bind(owner: Owner) {
@@ -76,10 +76,10 @@ abstract class IrBindableSymbolBase<out Descriptor, Owner>(
         }
     }
 
-    override val signature: IdSignature?
+    override konst signature: IdSignature?
         get() = null
 
-    override val isBound: Boolean
+    override konst isBound: Boolean
         get() = _owner != null
 
     override var privateSignature: IdSignature? = null

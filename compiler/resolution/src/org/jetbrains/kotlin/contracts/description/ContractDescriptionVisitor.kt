@@ -43,7 +43,7 @@ interface ContractDescriptionVisitor<out R, in D> {
     fun visitIsNullPredicate(isNullPredicate: IsNullPredicate, data: D): R = visitBooleanExpression(isNullPredicate, data)
 
     // Values
-    fun visitValue(value: ContractDescriptionValue, data: D): R = visitContractDescriptionElement(value, data)
+    fun visitValue(konstue: ContractDescriptionValue, data: D): R = visitContractDescriptionElement(konstue, data)
 
     fun visitConstantDescriptor(constantReference: ConstantReference, data: D): R = visitValue(constantReference, data)
     fun visitBooleanConstantDescriptor(booleanConstantDescriptor: BooleanConstantReference, data: D): R =

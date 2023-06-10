@@ -18,12 +18,12 @@ import org.jetbrains.kotlin.fir.types.coneType
 
 object FirSuperReferenceChecker : FirQualifiedAccessExpressionChecker() {
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
-        val superReference = (expression.calleeReference as? FirSuperReference)?.takeIf { it.hadExplicitTypeInSource() } ?: return
+        konst superReference = (expression.calleeReference as? FirSuperReference)?.takeIf { it.hadExplicitTypeInSource() } ?: return
 
-        val superTypeRef = superReference.superTypeRef
-        val delegatedTypeRef = (superTypeRef as? FirResolvedTypeRef)?.delegatedTypeRef as? FirUserTypeRef ?: return
-        val typeArgumentList = delegatedTypeRef.qualifier.firstOrNull()?.typeArgumentList ?: return
-        val superType = superTypeRef.coneType
+        konst superTypeRef = superReference.superTypeRef
+        konst delegatedTypeRef = (superTypeRef as? FirResolvedTypeRef)?.delegatedTypeRef as? FirUserTypeRef ?: return
+        konst typeArgumentList = delegatedTypeRef.qualifier.firstOrNull()?.typeArgumentList ?: return
+        konst superType = superTypeRef.coneType
 
         if (superType !is ConeErrorType &&
             typeArgumentList.typeArguments.isNotEmpty() &&

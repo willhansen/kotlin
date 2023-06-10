@@ -7,18 +7,18 @@
  * DESCRIPTION: Real literals with a not allowed exponent mark at the beginning.
  */
 
-val value = E0
-val value = e000
+konst konstue = E0
+konst konstue = e000
 
-val value = E+0
-val value = e00
+konst konstue = E+0
+konst konstue = e00
 
-val value = e+1
-val value = e22
-val value = E-333
-val value = e4444
-val value = e-55555
-val value = e666666
-val value = E7777777
-val value = e-88888888
-val value = E+999999999
+konst konstue = e+1
+konst konstue = e22
+konst konstue = E-333
+konst konstue = e4444
+konst konstue = e-55555
+konst konstue = e666666
+konst konstue = E7777777
+konst konstue = e-88888888
+konst konstue = E+999999999

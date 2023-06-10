@@ -20,24 +20,24 @@ import java.io.PipedOutputStream
 import kotlin.concurrent.thread
 
 internal fun ServiceRegistry.execWithProgress(description: String, readStdErr: Boolean = false, body: (ExecAction) -> Unit): ExecResult {
-    val stderr = ByteArrayOutputStream()
-    val stdout = StringBuilder()
-    val stdInPipe = PipedInputStream()
-    val exec = get(ExecActionFactory::class.java).newExecAction()
+    konst stderr = ByteArrayOutputStream()
+    konst stdout = StringBuilder()
+    konst stdInPipe = PipedInputStream()
+    konst exec = get(ExecActionFactory::class.java).newExecAction()
     body(exec)
     return operation(description) {
         progress(description)
         exec.standardOutput = PipedOutputStream(stdInPipe)
-        val outputReaderThread = thread(name = "output reader for [$description]") {
+        konst outputReaderThread = thread(name = "output reader for [$description]") {
             stdInPipe.reader().use { reader ->
-                val buffer = StringBuilder()
+                konst buffer = StringBuilder()
                 while (true) {
-                    val read = reader.read()
+                    konst read = reader.read()
                     if (read == -1) break
-                    val ch = read.toChar()
+                    konst ch = read.toChar()
                     if (ch == '\b' || ch == '\n' || ch == '\r') {
                         if (buffer.isNotEmpty()) {
-                            val str = buffer.toString()
+                            konst str = buffer.toString()
                             stdout.append(str)
                             progress(str.trim())
                             buffer.setLength(0)
@@ -53,7 +53,7 @@ internal fun ServiceRegistry.execWithProgress(description: String, readStdErr: B
             exec.errorOutput = System.err
         }
         exec.isIgnoreExitValue = true
-        val result = exec.execute()
+        konst result = exec.execute()
         outputReaderThread.join()
         if (result.exitValue != 0) {
             error(
@@ -72,12 +72,12 @@ internal fun ServiceRegistry.execWithErrorLogger(
     description: String,
     body: (ExecAction, ProgressLogger) -> Pair<TeamCityMessageCommonClient, TeamCityMessageCommonClient>
 ): ExecResult {
-    val exec = get(ExecActionFactory::class.java).newExecAction()
+    konst exec = get(ExecActionFactory::class.java).newExecAction()
     return operation(description) {
         progress(description)
-        val (standardClient, errorClient) = body(exec, this)
+        konst (standardClient, errorClient) = body(exec, this)
         exec.isIgnoreExitValue = true
-        val result = exec.execute()
+        konst result = exec.execute()
         if (result.exitValue != 0) {
             error(
                 errorClient.testFailedMessage()

@@ -27,9 +27,9 @@ open class StubGeneratorExtensions {
 
 
     // Extension point for the JVM Debugger IDEA plug-in: it compiles fragments
-    // (conditions on breakpoints, "Evaluate expression...", watches, etc...)
+    // (conditions on breakpoints, "Ekonstuate expression...", watches, etc...)
     // in the context of an open intellij project that is being debugged. These
-    // classes are supplied to the fragment evaluator as PSI, not class files,
+    // classes are supplied to the fragment ekonstuator as PSI, not class files,
     // as the old backend assumes for external declarations. Hence, we need to
     // intercept and supply "fake" deserialized sources.
     open fun getContainerSource(descriptor: DeclarationDescriptor): DeserializedContainerSource? = null
@@ -53,7 +53,7 @@ open class StubGeneratorExtensions {
         parent: IrDeclarationParent,
     ): Boolean = false
 
-    open val enhancedNullability: EnhancedNullability
+    open konst enhancedNullability: EnhancedNullability
         get() = EnhancedNullability
 
     open class EnhancedNullability {
@@ -64,24 +64,24 @@ open class StubGeneratorExtensions {
         companion object Instance : EnhancedNullability()
     }
 
-    open val irDeserializationEnabled: Boolean = false
+    open konst irDeserializationEnabled: Boolean = false
 
-    open val flexibleNullabilityAnnotationConstructor: IrConstructor?
+    open konst flexibleNullabilityAnnotationConstructor: IrConstructor?
         get() = null
 
-    open val flexibleMutabilityAnnotationConstructor: IrConstructor?
+    open konst flexibleMutabilityAnnotationConstructor: IrConstructor?
         get() = null
 
-    open val enhancedNullabilityAnnotationConstructor: IrConstructor?
+    open konst enhancedNullabilityAnnotationConstructor: IrConstructor?
         get() = null
 
-    open val rawTypeAnnotationConstructor: IrConstructor?
+    open konst rawTypeAnnotationConstructor: IrConstructor?
         get() = null
 
     open fun registerDeclarations(symbolTable: SymbolTable) {}
 
     companion object {
         @JvmField
-        val EMPTY = StubGeneratorExtensions()
+        konst EMPTY = StubGeneratorExtensions()
     }
 }

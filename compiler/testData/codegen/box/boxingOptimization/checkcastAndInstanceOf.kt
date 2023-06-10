@@ -10,10 +10,10 @@
 import kotlin.test.assertEquals
 
 inline fun <R, T> foo(x : R, y : R, block : (R) -> T) : T {
-    val a = x is Number
-    val b = x is Object
+    konst a = x is Number
+    konst b = x is Object
 
-    val b1 = x as Object
+    konst b1 = x as Object
 
     if (a && b) {
         return block(x)

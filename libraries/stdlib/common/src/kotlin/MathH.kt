@@ -15,10 +15,10 @@ package kotlin.math
 
 /** Ratio of the circumference of a circle to its diameter, approximately 3.14159. */
 @SinceKotlin("1.2")
-public const val PI: Double = 3.141592653589793
+public const konst PI: Double = 3.141592653589793
 /** Base of the natural logarithms, approximately 2.71828. */
 @SinceKotlin("1.2")
-public const val E: Double = 2.718281828459045
+public const konst E: Double = 2.718281828459045
 
 // region ================ Double Math ========================================
 
@@ -47,8 +47,8 @@ public expect fun cos(x: Double): Double
 public expect fun tan(x: Double): Double
 
 /**
- * Computes the arc sine of the value [x];
- * the returned value is an angle in the range from `-PI/2` to `PI/2` radians.
+ * Computes the arc sine of the konstue [x];
+ * the returned konstue is an angle in the range from `-PI/2` to `PI/2` radians.
  *
  * Special cases:
  *    - `asin(x)` is `NaN`, when `abs(x) > 1` or x is `NaN`
@@ -57,8 +57,8 @@ public expect fun tan(x: Double): Double
 public expect fun asin(x: Double): Double
 
 /**
- * Computes the arc cosine of the value [x];
- * the returned value is an angle in the range from `0.0` to `PI` radians.
+ * Computes the arc cosine of the konstue [x];
+ * the returned konstue is an angle in the range from `0.0` to `PI` radians.
  *
  * Special cases:
  *    - `acos(x)` is `NaN`, when `abs(x) > 1` or x is `NaN`
@@ -67,8 +67,8 @@ public expect fun asin(x: Double): Double
 public expect fun acos(x: Double): Double
 
 /**
- * Computes the arc tangent of the value [x];
- * the returned value is an angle in the range from `-PI/2` to `PI/2` radians.
+ * Computes the arc tangent of the konstue [x];
+ * the returned konstue is an angle in the range from `-PI/2` to `PI/2` radians.
  *
  * Special cases:
  *   - `atan(NaN)` is `NaN`
@@ -78,8 +78,8 @@ public expect fun atan(x: Double): Double
 
 /**
  * Returns the angle `theta` of the polar coordinates `(r, theta)` that correspond
- * to the rectangular coordinates `(x, y)` by computing the arc tangent of the value [y] / [x];
- * the returned value is an angle in the range from `-PI` to `PI` radians.
+ * to the rectangular coordinates `(x, y)` by computing the arc tangent of the konstue [y] / [x];
+ * the returned konstue is an angle in the range from `-PI` to `PI` radians.
  *
  * Special cases:
  *   - `atan2(0.0, 0.0)` is `0.0`
@@ -96,7 +96,7 @@ public expect fun atan(x: Double): Double
 public expect fun atan2(y: Double, x: Double): Double
 
 /**
- * Computes the hyperbolic sine of the value [x].
+ * Computes the hyperbolic sine of the konstue [x].
  *
  * Special cases:
  *   - `sinh(NaN)` is `NaN`
@@ -107,7 +107,7 @@ public expect fun atan2(y: Double, x: Double): Double
 public expect fun sinh(x: Double): Double
 
 /**
- * Computes the hyperbolic cosine of the value [x].
+ * Computes the hyperbolic cosine of the konstue [x].
  *
  * Special cases:
  *   - `cosh(NaN)` is `NaN`
@@ -117,7 +117,7 @@ public expect fun sinh(x: Double): Double
 public expect fun cosh(x: Double): Double
 
 /**
- * Computes the hyperbolic tangent of the value [x].
+ * Computes the hyperbolic tangent of the konstue [x].
  *
  * Special cases:
  *   - `tanh(NaN)` is `NaN`
@@ -128,9 +128,9 @@ public expect fun cosh(x: Double): Double
 public expect fun tanh(x: Double): Double
 
 /**
- * Computes the inverse hyperbolic sine of the value [x].
+ * Computes the inverse hyperbolic sine of the konstue [x].
  *
- * The returned value is `y` such that `sinh(y) == x`.
+ * The returned konstue is `y` such that `sinh(y) == x`.
  *
  * Special cases:
  *   - `asinh(NaN)` is `NaN`
@@ -141,9 +141,9 @@ public expect fun tanh(x: Double): Double
 public expect fun asinh(x: Double): Double
 
 /**
- * Computes the inverse hyperbolic cosine of the value [x].
+ * Computes the inverse hyperbolic cosine of the konstue [x].
  *
- * The returned value is positive `y` such that `cosh(y) == x`.
+ * The returned konstue is positive `y` such that `cosh(y) == x`.
  *
  * Special cases:
  *   - `acosh(NaN)` is `NaN`
@@ -154,9 +154,9 @@ public expect fun asinh(x: Double): Double
 public expect fun acosh(x: Double): Double
 
 /**
- * Computes the inverse hyperbolic tangent of the value [x].
+ * Computes the inverse hyperbolic tangent of the konstue [x].
  *
- * The returned value is `y` such that `tanh(y) == x`.
+ * The returned konstue is `y` such that `tanh(y) == x`.
  *
  * Special cases:
  *   - `tanh(NaN)` is `NaN`
@@ -178,7 +178,7 @@ public expect fun atanh(x: Double): Double
 public expect fun hypot(x: Double, y: Double): Double
 
 /**
- * Computes the positive square root of the value [x].
+ * Computes the positive square root of the konstue [x].
  *
  * Special cases:
  *   - `sqrt(x)` is `NaN` when `x < 0` or `x` is `NaN`
@@ -187,7 +187,7 @@ public expect fun hypot(x: Double, y: Double): Double
 public expect fun sqrt(x: Double): Double
 
 /**
- * Computes Euler's number `e` raised to the power of the value [x].
+ * Computes Euler's number `e` raised to the power of the konstue [x].
  *
  * Special cases:
  *   - `exp(NaN)` is `NaN`
@@ -213,7 +213,7 @@ public expect fun exp(x: Double): Double
 public expect fun expm1(x: Double): Double
 
 /**
- * Computes the logarithm of the value [x] to the given [base].
+ * Computes the logarithm of the konstue [x] to the given [base].
  *
  * Special cases:
  *   - `log(x, b)` is `NaN` if either `x` or `b` are `NaN`
@@ -228,7 +228,7 @@ public expect fun expm1(x: Double): Double
 public expect fun log(x: Double, base: Double): Double
 
 /**
- * Computes the natural logarithm (base `E`) of the value [x].
+ * Computes the natural logarithm (base `E`) of the konstue [x].
  *
  * Special cases:
  *   - `ln(NaN)` is `NaN`
@@ -240,7 +240,7 @@ public expect fun log(x: Double, base: Double): Double
 public expect fun ln(x: Double): Double
 
 /**
- * Computes the common logarithm (base 10) of the value [x].
+ * Computes the common logarithm (base 10) of the konstue [x].
  *
  * @see [ln] function for special cases.
  */
@@ -248,7 +248,7 @@ public expect fun ln(x: Double): Double
 public expect fun log10(x: Double): Double
 
 /**
- * Computes the binary logarithm (base 2) of the value [x].
+ * Computes the binary logarithm (base 2) of the konstue [x].
  *
  * @see [ln] function for special cases.
  */
@@ -273,9 +273,9 @@ public expect fun log2(x: Double): Double
 public expect fun ln1p(x: Double): Double
 
 /**
- * Rounds the given value [x] to an integer towards positive infinity.
+ * Rounds the given konstue [x] to an integer towards positive infinity.
 
- * @return the smallest double value that is greater than or equal to the given value [x] and is a mathematical integer.
+ * @return the smallest double konstue that is greater than or equal to the given konstue [x] and is a mathematical integer.
  *
  * Special cases:
  *   - `ceil(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -284,9 +284,9 @@ public expect fun ln1p(x: Double): Double
 public expect fun ceil(x: Double): Double
 
 /**
- * Rounds the given value [x] to an integer towards negative infinity.
+ * Rounds the given konstue [x] to an integer towards negative infinity.
 
- * @return the largest double value that is smaller than or equal to the given value [x] and is a mathematical integer.
+ * @return the largest double konstue that is smaller than or equal to the given konstue [x] and is a mathematical integer.
  *
  * Special cases:
  *   - `floor(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -295,9 +295,9 @@ public expect fun ceil(x: Double): Double
 public expect fun floor(x: Double): Double
 
 /**
- * Rounds the given value [x] to an integer towards zero.
+ * Rounds the given konstue [x] to an integer towards zero.
  *
- * @return the value [x] having its fractional part truncated.
+ * @return the konstue [x] having its fractional part truncated.
  *
  * Special cases:
  *   - `truncate(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -306,7 +306,7 @@ public expect fun floor(x: Double): Double
 public expect fun truncate(x: Double): Double
 
 /**
- * Rounds the given value [x] towards the closest integer with ties rounded towards even integer.
+ * Rounds the given konstue [x] towards the closest integer with ties rounded towards even integer.
  *
  * Special cases:
  *   - `round(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -315,7 +315,7 @@ public expect fun truncate(x: Double): Double
 public expect fun round(x: Double): Double
 
 /**
- * Returns the absolute value of the given value [x].
+ * Returns the absolute konstue of the given konstue [x].
  *
  * Special cases:
  *   - `abs(NaN)` is `NaN`
@@ -326,10 +326,10 @@ public expect fun round(x: Double): Double
 public expect fun abs(x: Double): Double
 
 /**
- * Returns the sign of the given value [x]:
- *   - `-1.0` if the value is negative,
- *   - zero if the value is zero,
- *   - `1.0` if the value is positive
+ * Returns the sign of the given konstue [x]:
+ *   - `-1.0` if the konstue is negative,
+ *   - zero if the konstue is zero,
+ *   - `1.0` if the konstue is positive
  *
  * Special case:
  *   - `sign(NaN)` is `NaN`
@@ -339,17 +339,17 @@ public expect fun sign(x: Double): Double
 
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  *
- * If either value is `NaN`, then the result is `NaN`.
+ * If either konstue is `NaN`, then the result is `NaN`.
  */
 @SinceKotlin("1.2")
 public expect fun min(a: Double, b: Double): Double
 
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  *
- * If either value is `NaN`, then the result is `NaN`.
+ * If either konstue is `NaN`, then the result is `NaN`.
  */
 @SinceKotlin("1.2")
 public expect fun max(a: Double, b: Double): Double
@@ -357,8 +357,8 @@ public expect fun max(a: Double, b: Double): Double
 
 /**
  * Returns the cube root of [x]. For any `x`, `cbrt(-x) == -cbrt(x)`;
- * that is, the cube root of a negative value is the negative of the cube root
- * of that value's magnitude. Special cases:
+ * that is, the cube root of a negative konstue is the negative of the cube root
+ * of that konstue's magnitude. Special cases:
  *
  * Special cases:
  *   - If the argument is `NaN`, then the result is `NaN`.
@@ -373,7 +373,7 @@ public expect fun cbrt(x: Double): Double
 // extensions
 
 /**
- * Raises this value to the power [x].
+ * Raises this konstue to the power [x].
  *
  * Special cases:
  *   - `b.pow(0.0)` is `1.0`
@@ -387,7 +387,7 @@ public expect fun cbrt(x: Double): Double
 public expect fun Double.pow(x: Double): Double
 
 /**
- * Raises this value to the integer power [n].
+ * Raises this konstue to the integer power [n].
  *
  * See the other overload of [pow] for details.
  */
@@ -395,7 +395,7 @@ public expect fun Double.pow(x: Double): Double
 public expect fun Double.pow(n: Int): Double
 
 /**
- * Returns the absolute value of this value.
+ * Returns the absolute konstue of this konstue.
  *
  * Special cases:
  *   - `NaN.absoluteValue` is `NaN`
@@ -403,22 +403,22 @@ public expect fun Double.pow(n: Int): Double
  * @see abs function
  */
 @SinceKotlin("1.2")
-public expect val Double.absoluteValue: Double
+public expect konst Double.absoluteValue: Double
 
 /**
- * Returns the sign of this value:
- *   - `-1.0` if the value is negative,
- *   - zero if the value is zero,
- *   - `1.0` if the value is positive
+ * Returns the sign of this konstue:
+ *   - `-1.0` if the konstue is negative,
+ *   - zero if the konstue is zero,
+ *   - `1.0` if the konstue is positive
  *
  * Special case:
  *   - `NaN.sign` is `NaN`
  */
 @SinceKotlin("1.2")
-public expect val Double.sign: Double
+public expect konst Double.sign: Double
 
 /**
- * Returns this value with the sign bit same as of the [sign] value.
+ * Returns this konstue with the sign bit same as of the [sign] konstue.
  *
  * If [sign] is `NaN` the sign of the result is undefined.
  */
@@ -426,15 +426,15 @@ public expect val Double.sign: Double
 public expect fun Double.withSign(sign: Double): Double
 
 /**
- * Returns this value with the sign bit same as of the [sign] value.
+ * Returns this konstue with the sign bit same as of the [sign] konstue.
  */
 @SinceKotlin("1.2")
 public expect fun Double.withSign(sign: Int): Double
 
 /**
- * Returns the ulp (unit in the last place) of this value.
+ * Returns the ulp (unit in the last place) of this konstue.
  *
- * An ulp is a positive distance between this value and the next nearest [Double] value larger in magnitude.
+ * An ulp is a positive distance between this konstue and the next nearest [Double] konstue larger in magnitude.
  *
  * Special Cases:
  *   - `NaN.ulp` is `NaN`
@@ -442,22 +442,22 @@ public expect fun Double.withSign(sign: Int): Double
  *   - `0.0.ulp` is `Double.MIN_VALUE`
  */
 @SinceKotlin("1.2")
-public expect val Double.ulp: Double
+public expect konst Double.ulp: Double
 
 /**
- * Returns the [Double] value nearest to this value in direction of positive infinity.
+ * Returns the [Double] konstue nearest to this konstue in direction of positive infinity.
  */
 @SinceKotlin("1.2")
 public expect fun Double.nextUp(): Double
 
 /**
- * Returns the [Double] value nearest to this value in direction of negative infinity.
+ * Returns the [Double] konstue nearest to this konstue in direction of negative infinity.
  */
 @SinceKotlin("1.2")
 public expect fun Double.nextDown(): Double
 
 /**
- * Returns the [Double] value nearest to this value in direction from this value towards the value [to].
+ * Returns the [Double] konstue nearest to this konstue in direction from this konstue towards the konstue [to].
  *
  * Special cases:
  *   - `x.nextTowards(y)` is `NaN` if either `x` or `y` are `NaN`
@@ -468,27 +468,27 @@ public expect fun Double.nextDown(): Double
 public expect fun Double.nextTowards(to: Double): Double
 
 /**
- * Rounds this [Double] value to the nearest integer and converts the result to [Int].
+ * Rounds this [Double] konstue to the nearest integer and converts the result to [Int].
  * Ties are rounded towards positive infinity.
  *
  * Special cases:
  *   - `x.roundToInt() == Int.MAX_VALUE` when `x > Int.MAX_VALUE`
  *   - `x.roundToInt() == Int.MIN_VALUE` when `x < Int.MIN_VALUE`
  *
- * @throws IllegalArgumentException when this value is `NaN`
+ * @throws IllegalArgumentException when this konstue is `NaN`
  */
 @SinceKotlin("1.2")
 public expect fun Double.roundToInt(): Int
 
 /**
- * Rounds this [Double] value to the nearest integer and converts the result to [Long].
+ * Rounds this [Double] konstue to the nearest integer and converts the result to [Long].
  * Ties are rounded towards positive infinity.
  *
  * Special cases:
  *   - `x.roundToLong() == Long.MAX_VALUE` when `x > Long.MAX_VALUE`
  *   - `x.roundToLong() == Long.MIN_VALUE` when `x < Long.MIN_VALUE`
  *
- * @throws IllegalArgumentException when this value is `NaN`
+ * @throws IllegalArgumentException when this konstue is `NaN`
  */
 @SinceKotlin("1.2")
 public expect fun Double.roundToLong(): Long
@@ -524,8 +524,8 @@ public expect fun cos(x: Float): Float
 public expect fun tan(x: Float): Float
 
 /**
- * Computes the arc sine of the value [x];
- * the returned value is an angle in the range from `-PI/2` to `PI/2` radians.
+ * Computes the arc sine of the konstue [x];
+ * the returned konstue is an angle in the range from `-PI/2` to `PI/2` radians.
  *
  * Special cases:
  *    - `asin(x)` is `NaN`, when `abs(x) > 1` or x is `NaN`
@@ -534,8 +534,8 @@ public expect fun tan(x: Float): Float
 public expect fun asin(x: Float): Float
 
 /**
- * Computes the arc cosine of the value [x];
- * the returned value is an angle in the range from `0.0` to `PI` radians.
+ * Computes the arc cosine of the konstue [x];
+ * the returned konstue is an angle in the range from `0.0` to `PI` radians.
  *
  * Special cases:
  *    - `acos(x)` is `NaN`, when `abs(x) > 1` or x is `NaN`
@@ -544,8 +544,8 @@ public expect fun asin(x: Float): Float
 public expect fun acos(x: Float): Float
 
 /**
- * Computes the arc tangent of the value [x];
- * the returned value is an angle in the range from `-PI/2` to `PI/2` radians.
+ * Computes the arc tangent of the konstue [x];
+ * the returned konstue is an angle in the range from `-PI/2` to `PI/2` radians.
  *
  * Special cases:
  *   - `atan(NaN)` is `NaN`
@@ -555,8 +555,8 @@ public expect fun atan(x: Float): Float
 
 /**
  * Returns the angle `theta` of the polar coordinates `(r, theta)` that correspond
- * to the rectangular coordinates `(x, y)` by computing the arc tangent of the value [y] / [x];
- * the returned value is an angle in the range from `-PI` to `PI` radians.
+ * to the rectangular coordinates `(x, y)` by computing the arc tangent of the konstue [y] / [x];
+ * the returned konstue is an angle in the range from `-PI` to `PI` radians.
  *
  * Special cases:
  *   - `atan2(0.0, 0.0)` is `0.0`
@@ -573,7 +573,7 @@ public expect fun atan(x: Float): Float
 public expect fun atan2(y: Float, x: Float): Float
 
 /**
- * Computes the hyperbolic sine of the value [x].
+ * Computes the hyperbolic sine of the konstue [x].
  *
  * Special cases:
  *   - `sinh(NaN)` is `NaN`
@@ -584,7 +584,7 @@ public expect fun atan2(y: Float, x: Float): Float
 public expect fun sinh(x: Float): Float
 
 /**
- * Computes the hyperbolic cosine of the value [x].
+ * Computes the hyperbolic cosine of the konstue [x].
  *
  * Special cases:
  *   - `cosh(NaN)` is `NaN`
@@ -594,7 +594,7 @@ public expect fun sinh(x: Float): Float
 public expect fun cosh(x: Float): Float
 
 /**
- * Computes the hyperbolic tangent of the value [x].
+ * Computes the hyperbolic tangent of the konstue [x].
  *
  * Special cases:
  *   - `tanh(NaN)` is `NaN`
@@ -605,9 +605,9 @@ public expect fun cosh(x: Float): Float
 public expect fun tanh(x: Float): Float
 
 /**
- * Computes the inverse hyperbolic sine of the value [x].
+ * Computes the inverse hyperbolic sine of the konstue [x].
  *
- * The returned value is `y` such that `sinh(y) == x`.
+ * The returned konstue is `y` such that `sinh(y) == x`.
  *
  * Special cases:
  *   - `asinh(NaN)` is `NaN`
@@ -618,9 +618,9 @@ public expect fun tanh(x: Float): Float
 public expect fun asinh(x: Float): Float
 
 /**
- * Computes the inverse hyperbolic cosine of the value [x].
+ * Computes the inverse hyperbolic cosine of the konstue [x].
  *
- * The returned value is positive `y` such that `cosh(y) == x`.
+ * The returned konstue is positive `y` such that `cosh(y) == x`.
  *
  * Special cases:
  *   - `acosh(NaN)` is `NaN`
@@ -631,9 +631,9 @@ public expect fun asinh(x: Float): Float
 public expect fun acosh(x: Float): Float
 
 /**
- * Computes the inverse hyperbolic tangent of the value [x].
+ * Computes the inverse hyperbolic tangent of the konstue [x].
  *
- * The returned value is `y` such that `tanh(y) == x`.
+ * The returned konstue is `y` such that `tanh(y) == x`.
  *
  * Special cases:
  *   - `tanh(NaN)` is `NaN`
@@ -655,7 +655,7 @@ public expect fun atanh(x: Float): Float
 public expect fun hypot(x: Float, y: Float): Float
 
 /**
- * Computes the positive square root of the value [x].
+ * Computes the positive square root of the konstue [x].
  *
  * Special cases:
  *   - `sqrt(x)` is `NaN` when `x < 0` or `x` is `NaN`
@@ -664,7 +664,7 @@ public expect fun hypot(x: Float, y: Float): Float
 public expect fun sqrt(x: Float): Float
 
 /**
- * Computes Euler's number `e` raised to the power of the value [x].
+ * Computes Euler's number `e` raised to the power of the konstue [x].
  *
  * Special cases:
  *   - `exp(NaN)` is `NaN`
@@ -690,7 +690,7 @@ public expect fun exp(x: Float): Float
 public expect fun expm1(x: Float): Float
 
 /**
- * Computes the logarithm of the value [x] to the given [base].
+ * Computes the logarithm of the konstue [x] to the given [base].
  *
  * Special cases:
  *   - `log(x, b)` is `NaN` if either `x` or `b` are `NaN`
@@ -705,7 +705,7 @@ public expect fun expm1(x: Float): Float
 public expect fun log(x: Float, base: Float): Float
 
 /**
- * Computes the natural logarithm (base `E`) of the value [x].
+ * Computes the natural logarithm (base `E`) of the konstue [x].
  *
  * Special cases:
  *   - `ln(NaN)` is `NaN`
@@ -717,7 +717,7 @@ public expect fun log(x: Float, base: Float): Float
 public expect fun ln(x: Float): Float
 
 /**
- * Computes the common logarithm (base 10) of the value [x].
+ * Computes the common logarithm (base 10) of the konstue [x].
  *
  * @see [ln] function for special cases.
  */
@@ -725,7 +725,7 @@ public expect fun ln(x: Float): Float
 public expect fun log10(x: Float): Float
 
 /**
- * Computes the binary logarithm (base 2) of the value [x].
+ * Computes the binary logarithm (base 2) of the konstue [x].
  *
  * @see [ln] function for special cases.
  */
@@ -750,9 +750,9 @@ public expect fun log2(x: Float): Float
 public expect fun ln1p(x: Float): Float
 
 /**
- * Rounds the given value [x] to an integer towards positive infinity.
+ * Rounds the given konstue [x] to an integer towards positive infinity.
 
- * @return the smallest Float value that is greater than or equal to the given value [x] and is a mathematical integer.
+ * @return the smallest Float konstue that is greater than or equal to the given konstue [x] and is a mathematical integer.
  *
  * Special cases:
  *   - `ceil(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -761,9 +761,9 @@ public expect fun ln1p(x: Float): Float
 public expect fun ceil(x: Float): Float
 
 /**
- * Rounds the given value [x] to an integer towards negative infinity.
+ * Rounds the given konstue [x] to an integer towards negative infinity.
 
- * @return the largest Float value that is smaller than or equal to the given value [x] and is a mathematical integer.
+ * @return the largest Float konstue that is smaller than or equal to the given konstue [x] and is a mathematical integer.
  *
  * Special cases:
  *   - `floor(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -772,9 +772,9 @@ public expect fun ceil(x: Float): Float
 public expect fun floor(x: Float): Float
 
 /**
- * Rounds the given value [x] to an integer towards zero.
+ * Rounds the given konstue [x] to an integer towards zero.
  *
- * @return the value [x] having its fractional part truncated.
+ * @return the konstue [x] having its fractional part truncated.
  *
  * Special cases:
  *   - `truncate(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -783,7 +783,7 @@ public expect fun floor(x: Float): Float
 public expect fun truncate(x: Float): Float
 
 /**
- * Rounds the given value [x] towards the closest integer with ties rounded towards even integer.
+ * Rounds the given konstue [x] towards the closest integer with ties rounded towards even integer.
  *
  * Special cases:
  *   - `round(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -793,7 +793,7 @@ public expect fun round(x: Float): Float
 
 
 /**
- * Returns the absolute value of the given value [x].
+ * Returns the absolute konstue of the given konstue [x].
  *
  * Special cases:
  *   - `abs(NaN)` is `NaN`
@@ -804,10 +804,10 @@ public expect fun round(x: Float): Float
 public expect fun abs(x: Float): Float
 
 /**
- * Returns the sign of the given value [x]:
- *   - `-1.0` if the value is negative,
- *   - zero if the value is zero,
- *   - `1.0` if the value is positive
+ * Returns the sign of the given konstue [x]:
+ *   - `-1.0` if the konstue is negative,
+ *   - zero if the konstue is zero,
+ *   - `1.0` if the konstue is positive
  *
  * Special case:
  *   - `sign(NaN)` is `NaN`
@@ -818,17 +818,17 @@ public expect fun sign(x: Float): Float
 
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  *
- * If either value is `NaN`, then the result is `NaN`.
+ * If either konstue is `NaN`, then the result is `NaN`.
  */
 @SinceKotlin("1.2")
 public expect fun min(a: Float, b: Float): Float
 
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  *
- * If either value is `NaN`, then the result is `NaN`.
+ * If either konstue is `NaN`, then the result is `NaN`.
  */
 @SinceKotlin("1.2")
 public expect fun max(a: Float, b: Float): Float
@@ -836,8 +836,8 @@ public expect fun max(a: Float, b: Float): Float
 
 /**
  * Returns the cube root of [x]. For any `x`, `cbrt(-x) == -cbrt(x)`;
- * that is, the cube root of a negative value is the negative of the cube root
- * of that value's magnitude. Special cases:
+ * that is, the cube root of a negative konstue is the negative of the cube root
+ * of that konstue's magnitude. Special cases:
  *
  * Special cases:
  *   - If the argument is `NaN`, then the result is `NaN`.
@@ -853,7 +853,7 @@ public expect fun cbrt(x: Float): Float
 
 
 /**
- * Raises this value to the power [x].
+ * Raises this konstue to the power [x].
  *
  * Special cases:
  *   - `b.pow(0.0)` is `1.0`
@@ -867,7 +867,7 @@ public expect fun cbrt(x: Float): Float
 public expect fun Float.pow(x: Float): Float
 
 /**
- * Raises this value to the integer power [n].
+ * Raises this konstue to the integer power [n].
  *
  * See the other overload of [pow] for details.
  */
@@ -875,7 +875,7 @@ public expect fun Float.pow(x: Float): Float
 public expect fun Float.pow(n: Int): Float
 
 /**
- * Returns the absolute value of this value.
+ * Returns the absolute konstue of this konstue.
  *
  * Special cases:
  *   - `NaN.absoluteValue` is `NaN`
@@ -883,22 +883,22 @@ public expect fun Float.pow(n: Int): Float
  * @see abs function
  */
 @SinceKotlin("1.2")
-public expect val Float.absoluteValue: Float
+public expect konst Float.absoluteValue: Float
 
 /**
- * Returns the sign of this value:
- *   - `-1.0` if the value is negative,
- *   - zero if the value is zero,
- *   - `1.0` if the value is positive
+ * Returns the sign of this konstue:
+ *   - `-1.0` if the konstue is negative,
+ *   - zero if the konstue is zero,
+ *   - `1.0` if the konstue is positive
  *
  * Special case:
  *   - `NaN.sign` is `NaN`
  */
 @SinceKotlin("1.2")
-public expect val Float.sign: Float
+public expect konst Float.sign: Float
 
 /**
- * Returns this value with the sign bit same as of the [sign] value.
+ * Returns this konstue with the sign bit same as of the [sign] konstue.
  *
  * If [sign] is `NaN` the sign of the result is undefined.
  */
@@ -906,34 +906,34 @@ public expect val Float.sign: Float
 public expect fun Float.withSign(sign: Float): Float
 
 /**
- * Returns this value with the sign bit same as of the [sign] value.
+ * Returns this konstue with the sign bit same as of the [sign] konstue.
  */
 @SinceKotlin("1.2")
 public expect fun Float.withSign(sign: Int): Float
 
 
 /**
- * Rounds this [Float] value to the nearest integer and converts the result to [Int].
+ * Rounds this [Float] konstue to the nearest integer and converts the result to [Int].
  * Ties are rounded towards positive infinity.
  *
  * Special cases:
  *   - `x.roundToInt() == Int.MAX_VALUE` when `x > Int.MAX_VALUE`
  *   - `x.roundToInt() == Int.MIN_VALUE` when `x < Int.MIN_VALUE`
  *
- * @throws IllegalArgumentException when this value is `NaN`
+ * @throws IllegalArgumentException when this konstue is `NaN`
  */
 @SinceKotlin("1.2")
 public expect fun Float.roundToInt(): Int
 
 /**
- * Rounds this [Float] value to the nearest integer and converts the result to [Long].
+ * Rounds this [Float] konstue to the nearest integer and converts the result to [Long].
  * Ties are rounded towards positive infinity.
  *
  * Special cases:
  *   - `x.roundToLong() == Long.MAX_VALUE` when `x > Long.MAX_VALUE`
  *   - `x.roundToLong() == Long.MIN_VALUE` when `x < Long.MIN_VALUE`
  *
- * @throws IllegalArgumentException when this value is `NaN`
+ * @throws IllegalArgumentException when this konstue is `NaN`
  */
 @SinceKotlin("1.2")
 public expect fun Float.roundToLong(): Long
@@ -945,7 +945,7 @@ public expect fun Float.roundToLong(): Long
 
 
 /**
- * Returns the absolute value of the given value [n].
+ * Returns the absolute konstue of the given konstue [n].
  *
  * Special cases:
  *   - `abs(Int.MIN_VALUE)` is `Int.MIN_VALUE` due to an overflow
@@ -956,19 +956,19 @@ public expect fun Float.roundToLong(): Long
 public expect fun abs(n: Int): Int
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  */
 @SinceKotlin("1.2")
 public expect fun min(a: Int, b: Int): Int
 
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  */
 @SinceKotlin("1.2")
 public expect fun max(a: Int, b: Int): Int
 
 /**
- * Returns the absolute value of this value.
+ * Returns the absolute konstue of this konstue.
  *
  * Special cases:
  *   - `Int.MIN_VALUE.absoluteValue` is `Int.MIN_VALUE` due to an overflow
@@ -976,21 +976,21 @@ public expect fun max(a: Int, b: Int): Int
  * @see abs function
  */
 @SinceKotlin("1.2")
-public expect val Int.absoluteValue: Int
+public expect konst Int.absoluteValue: Int
 
 /**
- * Returns the sign of this value:
- *   - `-1` if the value is negative,
- *   - `0` if the value is zero,
- *   - `1` if the value is positive
+ * Returns the sign of this konstue:
+ *   - `-1` if the konstue is negative,
+ *   - `0` if the konstue is zero,
+ *   - `1` if the konstue is positive
  */
 @SinceKotlin("1.2")
-public expect val Int.sign: Int
+public expect konst Int.sign: Int
 
 
 
 /**
- * Returns the absolute value of the given value [n].
+ * Returns the absolute konstue of the given konstue [n].
  *
  * Special cases:
  *   - `abs(Long.MIN_VALUE)` is `Long.MIN_VALUE` due to an overflow
@@ -1001,19 +1001,19 @@ public expect val Int.sign: Int
 public expect fun abs(n: Long): Long
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  */
 @SinceKotlin("1.2")
 public expect fun min(a: Long, b: Long): Long
 
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  */
 @SinceKotlin("1.2")
 public expect fun max(a: Long, b: Long): Long
 
 /**
- * Returns the absolute value of this value.
+ * Returns the absolute konstue of this konstue.
  *
  * Special cases:
  *   - `Long.MIN_VALUE.absoluteValue` is `Long.MIN_VALUE` due to an overflow
@@ -1021,16 +1021,16 @@ public expect fun max(a: Long, b: Long): Long
  * @see abs function
  */
 @SinceKotlin("1.2")
-public expect val Long.absoluteValue: Long
+public expect konst Long.absoluteValue: Long
 
 /**
- * Returns the sign of this value:
- *   - `-1` if the value is negative,
- *   - `0` if the value is zero,
- *   - `1` if the value is positive
+ * Returns the sign of this konstue:
+ *   - `-1` if the konstue is negative,
+ *   - `0` if the konstue is zero,
+ *   - `1` if the konstue is positive
  */
 @SinceKotlin("1.2")
-public expect val Long.sign: Int
+public expect konst Long.sign: Int
 
 
 // endregion

@@ -2,12 +2,12 @@
 // SKIP_TXT
 
 class B(var a: Int) {
-    operator fun plus(value: Int): B {
-        a= a + value
+    operator fun plus(konstue: Int): B {
+        a= a + konstue
         return this
     }
-    operator fun plusAssign(value: Int): Unit {
-        a= a + value
+    operator fun plusAssign(konstue: Int): Unit {
+        a= a + konstue
     }
 }
 

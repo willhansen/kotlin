@@ -1,6 +1,6 @@
 // ISSUE: KT-7389
 
-class Inv<T> (val value: T) where T: A, T: B
+class Inv<T> (konst konstue: T) where T: A, T: B
 
 interface A {
     fun doA()
@@ -11,6 +11,6 @@ interface B {
 }
 
 fun process(c: Inv<*>) {
-    c.value.doA()
-    c.value.doB()
+    c.konstue.doA()
+    c.konstue.doB()
 }

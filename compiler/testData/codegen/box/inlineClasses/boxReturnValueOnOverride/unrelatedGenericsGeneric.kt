@@ -11,15 +11,15 @@ interface IFoo2<out T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X<T: String>(val x: T)
+konstue class X<T: String>(konst x: T)
 
 class Test : IFoo1<X<String>>, IFoo2<X<String>> {
     override fun foo(): X<String> = X("OK")
 }
 
 fun box(): String {
-    val t1: IFoo1<Any> = Test()
-    val foo1 = t1.foo()
+    konst t1: IFoo1<Any> = Test()
+    konst foo1 = t1.foo()
     if (foo1 !is X<*>) {
         throw AssertionError("foo1 !is X: $foo1")
     }
@@ -27,8 +27,8 @@ fun box(): String {
         throw AssertionError("foo1.x != 'OK': $foo1")
     }
 
-    val t2: IFoo2<Any> = Test()
-    val foo2 = t2.foo()
+    konst t2: IFoo2<Any> = Test()
+    konst foo2 = t2.foo()
     if (foo2 !is X<*>) {
         throw AssertionError("foo2 !is X: $foo2")
     }

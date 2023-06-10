@@ -15,7 +15,7 @@ import test.*
 
 fun bar(): Int {
     return foo(21) { x ->
-        val o = object : Foo {
+        konst o = object : Foo {
             override fun compute(): Int {
                 return call { x * 2 }
             }

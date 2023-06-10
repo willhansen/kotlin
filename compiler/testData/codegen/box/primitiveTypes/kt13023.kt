@@ -3,13 +3,13 @@
 import kotlin.test.assertEquals
 
 fun box(): String {
-    val b = 'b'
-    val c = 'c'
+    konst b = 'b'
+    konst c = 'c'
     assertEquals('c', b + 1)
     assertEquals('a', b - 1)
     assertEquals(1, c - b)
 
-    val list = listOf('b', 'a')
+    konst list = listOf('b', 'a')
     assertEquals('c', list[0] + 1)
     assertEquals('a', list[0] - 1)
     assertEquals(1, list[0] - list[1])

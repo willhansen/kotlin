@@ -24,17 +24,17 @@ fun case_1(x: Out<<!REDUNDANT_PROJECTION!>out<!> Int?>?) {
  */
 fun case_2(a: Out<<!REDUNDANT_PROJECTION!>out<!> Out<<!REDUNDANT_PROJECTION!>out<!> Out<<!REDUNDANT_PROJECTION!>out<!> Out<<!REDUNDANT_PROJECTION!>out<!> Out<<!REDUNDANT_PROJECTION!>out<!> Out<<!REDUNDANT_PROJECTION!>out<!> Int?>?>?>?>?>?>?) {
     if (a != null) {
-        val b = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>?>?>? & Out<out Out<out Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>?>?>")!>a<!>.get()
+        konst b = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>?>?>? & Out<out Out<out Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>?>?>")!>a<!>.get()
         if (b != null) {
-            val c = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>?>? & Out<out Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>?>")!>b<!>.get()
+            konst c = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>?>? & Out<out Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>?>")!>b<!>.get()
             if (c != null) {
-                val d = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>? & Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>")!>c<!>.get()
+                konst d = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>? & Out<out Out<out Out<out Out<out kotlin.Int?>?>?>?>")!>c<!>.get()
                 if (d != null) {
-                    val e = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out Out<out kotlin.Int?>?>?>? & Out<out Out<out Out<out kotlin.Int?>?>?>")!>d<!>.get()
+                    konst e = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out Out<out kotlin.Int?>?>?>? & Out<out Out<out Out<out kotlin.Int?>?>?>")!>d<!>.get()
                     if (e != null) {
-                        val f = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out kotlin.Int?>?>? & Out<out Out<out kotlin.Int?>?>")!>e<!>.get()
+                        konst f = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out Out<out kotlin.Int?>?>? & Out<out Out<out kotlin.Int?>?>")!>e<!>.get()
                         if (f != null) {
-                            val g = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out kotlin.Int?>? & Out<out kotlin.Int?>")!>f<!>.get()
+                            konst g = <!DEBUG_INFO_EXPRESSION_TYPE("Out<out kotlin.Int?>? & Out<out kotlin.Int?>")!>f<!>.get()
                             if (g != null) {
                                 <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>g<!>
                                 <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>g<!>.equals(null)
@@ -58,7 +58,7 @@ fun case_2(a: Out<<!REDUNDANT_PROJECTION!>out<!> Out<<!REDUNDANT_PROJECTION!>out
 // TESTCASE NUMBER: 3
 fun case_3(a: Inv<out Int>?) {
     if (a != null) {
-        val b = a
+        konst b = a
         if (<!SENSELESS_COMPARISON!>a == null<!>)
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out kotlin.Int>? & kotlin.Nothing")!>b<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out kotlin.Int>? & Inv<out kotlin.Int>")!>b<!>.equals(null)
@@ -89,7 +89,7 @@ fun case_4(a: Out<<!REDUNDANT_PROJECTION!>out<!> Int>?, b: Out<<!REDUNDANT_PROJE
 }
 
 // TESTCASE NUMBER: 5
-val x: Out<<!REDUNDANT_PROJECTION!>out<!> Int>? = null
+konst x: Out<<!REDUNDANT_PROJECTION!>out<!> Int>? = null
 
 fun case_5() {
     if (x != null) {
@@ -108,7 +108,7 @@ fun case_5() {
 
 // TESTCASE NUMBER: 6
 fun case_6() {
-    val x: Inv<out Int>? = null
+    konst x: Inv<out Int>? = null
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out kotlin.Int>? & Inv<out kotlin.Int>")!>x<!>
@@ -235,7 +235,7 @@ fun case_8(x: ClassWithThreeTypeParameters<out Int?, out Short?, ClassWithThreeT
 // TESTCASE NUMBER: 9
 fun case_9(a: (Inv<out Int>) -> Inv<out Int>?, b: Inv<out Int>?) {
     if (b != null) {
-        val c = a(b)
+        konst c = a(b)
         if (c != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out kotlin.Int>? & Inv<out kotlin.Int>")!>c<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out kotlin.Int>? & Inv<out kotlin.Int>")!>c<!>.equals(null)
@@ -269,7 +269,7 @@ fun case_9(a: Inv<*>?) {
 
 // TESTCASE NUMBER: 11
 fun case_10() {
-    val a10: Out<*>? = null
+    konst a10: Out<*>? = null
 
     if (a10 != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<*>? & Out<*>")!>a10<!>
@@ -287,7 +287,7 @@ fun case_10() {
 
 // TESTCASE NUMBER: 12
 fun case_11() {
-    val a: In<*>? = null
+    konst a: In<*>? = null
 
     if (a != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("In<*>? & In<*>")!>a<!>
@@ -380,17 +380,17 @@ fun case_16(a: Any?) {
  */
 fun case_17(a: Inv<out Out<Out<Out<Out<Out<Int?>?>?>?>?>?>?) {
     if (a != null) {
-        val b = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out Out<Out<Out<Out<Out<kotlin.Int?>?>?>?>?>?>? & Inv<out Out<Out<Out<Out<Out<kotlin.Int?>?>?>?>?>?>")!>a<!>.get()
+        konst b = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out Out<Out<Out<Out<Out<kotlin.Int?>?>?>?>?>?>? & Inv<out Out<Out<Out<Out<Out<kotlin.Int?>?>?>?>?>?>")!>a<!>.get()
         if (b != null) {
-            val c = <!DEBUG_INFO_EXPRESSION_TYPE("Out<Out<Out<Out<Out<kotlin.Any?>?>?>?>?>? & Out<Out<Out<Out<Out<kotlin.Any?>?>?>?>?>")!>b<!>.get()
+            konst c = <!DEBUG_INFO_EXPRESSION_TYPE("Out<Out<Out<Out<Out<kotlin.Any?>?>?>?>?>? & Out<Out<Out<Out<Out<kotlin.Any?>?>?>?>?>")!>b<!>.get()
             if (c != null) {
-                val d = <!DEBUG_INFO_EXPRESSION_TYPE("Out<Out<Out<Out<kotlin.Any?>?>?>?>? & Out<Out<Out<Out<kotlin.Any?>?>?>?>")!>c<!>.get()
+                konst d = <!DEBUG_INFO_EXPRESSION_TYPE("Out<Out<Out<Out<kotlin.Any?>?>?>?>? & Out<Out<Out<Out<kotlin.Any?>?>?>?>")!>c<!>.get()
                 if (d != null) {
-                    val e = <!DEBUG_INFO_EXPRESSION_TYPE("Out<Out<Out<kotlin.Any?>?>?>? & Out<Out<Out<kotlin.Any?>?>?>")!>d<!>.get()
+                    konst e = <!DEBUG_INFO_EXPRESSION_TYPE("Out<Out<Out<kotlin.Any?>?>?>? & Out<Out<Out<kotlin.Any?>?>?>")!>d<!>.get()
                     if (e != null) {
-                        val f = <!DEBUG_INFO_EXPRESSION_TYPE("Out<Out<kotlin.Any?>?>? & Out<Out<kotlin.Any?>?>")!>e<!>.get()
+                        konst f = <!DEBUG_INFO_EXPRESSION_TYPE("Out<Out<kotlin.Any?>?>? & Out<Out<kotlin.Any?>?>")!>e<!>.get()
                         if (f != null) {
-                            val g = <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Any?>? & Out<kotlin.Any?>")!>f<!>.get()
+                            konst g = <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Any?>? & Out<kotlin.Any?>")!>f<!>.get()
                             if (g != null) {
                                 <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any? & kotlin.Any")!>g<!>
                                 <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any? & kotlin.Any")!>g<!>.equals(null)
@@ -617,8 +617,8 @@ fun case_29(a: Inv<in Nothing>) {
 
 // TESTCASE NUMBER: 30
 fun case_30() {
-    val a = In<Number?>()
-    val b = a.getWithUpperBoundT<Int?>(10)
+    konst a = In<Number?>()
+    konst b = a.getWithUpperBoundT<Int?>(10)
 
     if (b != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>b<!>
@@ -636,7 +636,7 @@ fun case_30() {
 
 // TESTCASE NUMBER: 31
 fun case_31(y: Inv<Int?>) {
-    val x = y.get()
+    konst x = y.get()
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -654,7 +654,7 @@ fun case_31(y: Inv<Int?>) {
 
 // TESTCASE NUMBER: 32
 fun case_32(y: Inv<Int>) {
-    val x = y.getNullable()
+    konst x = y.getNullable()
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -672,7 +672,7 @@ fun case_32(y: Inv<Int>) {
 
 // TESTCASE NUMBER: 33
 fun case_33(y: Inv<Int>) {
-    val x = y.getNullable()
+    konst x = y.getNullable()
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -690,7 +690,7 @@ fun case_33(y: Inv<Int>) {
 
 // TESTCASE NUMBER: 34
 fun case_34(y: Inv<Int>) {
-    val x = y.getNullable()
+    konst x = y.getNullable()
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>

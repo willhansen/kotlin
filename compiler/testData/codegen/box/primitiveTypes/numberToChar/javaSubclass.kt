@@ -8,14 +8,14 @@
 // FILE: MyNumber.java
 
 public class MyNumber extends Number {
-    private final int value;
+    private final int konstue;
 
-    public MyNumber(int value) {
-        this.value = value;
+    public MyNumber(int konstue) {
+        this.konstue = konstue;
     }
 
     @Override
-    public int intValue() { return value; }
+    public int intValue() { return konstue; }
 
     @Override
     public long longValue() { return 0; }
@@ -30,10 +30,10 @@ public class MyNumber extends Number {
 // FILE: box.kt
 
 fun box(): String {
-    val x = MyNumber('*'.code).toChar()
+    konst x = MyNumber('*'.code).toChar()
     if (x != '*') return "Fail 1: $x"
 
-    val y = java.lang.Integer('+'.code).toChar()
+    konst y = java.lang.Integer('+'.code).toChar()
     if (y != '+') return "Fail 2: $y"
 
     return "OK"

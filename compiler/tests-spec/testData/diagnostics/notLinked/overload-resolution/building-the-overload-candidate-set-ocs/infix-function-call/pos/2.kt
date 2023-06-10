@@ -11,13 +11,13 @@
  * ISSUES: KT-36786
  */
 
-class B(val memberVal: Any)
+class B(konst memberVal: Any)
 class C() {
     infix operator fun invoke(i: Int) { } //(1)
 }
 // TESTCASE NUMBER: 1
 fun case1() {
-    val b: B = B(C())
+    konst b: B = B(C())
     b <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>memberVal<!> 1           //nok UNRESOLVED_REFERENCE_WRONG_RECEIVER
     b.memberVal.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>invoke<!>(2)   //nok UNRESOLVED_REFERENCE_WRONG_RECEIVER
     b.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>memberVal<!>(1)          //nok UNRESOLVED_REFERENCE_WRONG_RECEIVER

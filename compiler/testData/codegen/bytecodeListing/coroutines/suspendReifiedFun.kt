@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 open class AbstractStuff() {
-    inline suspend fun<reified T> hello(value: T): T = println("Hello, ${T::class}").let { value }
+    inline suspend fun<reified T> hello(konstue: T): T = println("Hello, ${T::class}").let { konstue }
 }
 
 class Stuff: AbstractStuff() {

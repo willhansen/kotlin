@@ -7,17 +7,17 @@ interface I {
     fun o(k: String = "K"): String = "O$k"
 }
 
-inline class IC<T: I>(val i: T): I by i
+inline class IC<T: I>(konst i: T): I by i
 
 fun box(): String {
-    val i = object : I {}
-    val ic1 = IC(i)
+    konst i = object : I {}
+    konst ic1 = IC(i)
     var res = ic1.o()
     if (res != "OK") return "FAIL 1: $res"
     res = ic1.o("KK")
     if (res != "OKK") return "FAIL 2: $res"
 
-    val ic2: I = IC(i)
+    konst ic2: I = IC(i)
     res = ic2.o()
     if (res != "OK") return "FAIL 3: $res"
     res = ic2.o("KK")

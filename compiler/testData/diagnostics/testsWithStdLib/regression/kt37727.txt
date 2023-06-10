@@ -2,7 +2,7 @@ package
 
 public final data class A {
     public constructor A(/*0*/ x: kotlin.collections.Set<[Error type: Unresolved type for CLassNotFound]> = ...)
-    public final val x: kotlin.collections.Set<[Error type: Unresolved type for CLassNotFound]>
+    public final konst x: kotlin.collections.Set<[Error type: Unresolved type for CLassNotFound]>
     public final operator /*synthesized*/ fun component1(): kotlin.collections.Set<[Error type: Unresolved type for CLassNotFound]>
     public final /*synthesized*/ fun copy(/*0*/ x: kotlin.collections.Set<[Error type: Unresolved type for CLassNotFound]> = ...): A
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

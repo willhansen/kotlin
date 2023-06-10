@@ -24,12 +24,12 @@ import org.jetbrains.kotlin.fir.analysis.checkers.typeParameterSymbols
  * [KtFirTypeParameterSymbolBase] provides shared implementations for [KtFirTypeParameterSymbol] and [KtFirPsiJavaTypeParameterSymbol].
  */
 internal sealed class KtFirTypeParameterSymbolBase : KtTypeParameterSymbol(), KtFirSymbol<FirTypeParameterSymbol> {
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
         }
 
-    override val upperBounds: List<KtType> by cached {
+    override konst upperBounds: List<KtType> by cached {
         firSymbol.resolvedBounds.mapNotNull { type ->
             if (type.isNullableAny) return@mapNotNull null
             builder.typeBuilder.buildKtType(type)
@@ -40,8 +40,8 @@ internal sealed class KtFirTypeParameterSymbolBase : KtTypeParameterSymbol(), Kt
     override fun createPointer(): KtSymbolPointer<KtTypeParameterSymbol> = withValidityAssertion {
         KtPsiBasedSymbolPointer.createForSymbolFromSource<KtTypeParameterSymbol>(this)?.let { return it }
 
-        val containingDeclarationSymbol = firSymbol.containingDeclarationSymbol
-        val typeParameters = containingDeclarationSymbol.typeParameterSymbols
+        konst containingDeclarationSymbol = firSymbol.containingDeclarationSymbol
+        konst typeParameters = containingDeclarationSymbol.typeParameterSymbols
         requireNotNull(typeParameters) { "Containing declaration symbol: ${containingDeclarationSymbol::class.simpleName}" }
 
         KtFirTypeParameterSymbolPointer(

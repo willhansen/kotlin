@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.metadata.deserialization.BinaryVersion
  * Please note that [JvmMetadataVersion] is different compared to other [BinaryVersion]s. The version bump **DOESN'T** obey [BinaryVersion]
  * rules. Starting from Kotlin 1.4, [JvmMetadataVersion] major and minor tokens always match the compilers corresponding version tokens.
  **/
-class JvmMetadataVersion(versionArray: IntArray, val isStrictSemantics: Boolean) : BinaryVersion(*versionArray) {
+class JvmMetadataVersion(versionArray: IntArray, konst isStrictSemantics: Boolean) : BinaryVersion(*versionArray) {
     constructor(vararg numbers: Int) : this(numbers, isStrictSemantics = false)
 
     fun lastSupportedVersionWithThisLanguageVersion(isStrictSemantics: Boolean): JvmMetadataVersion {
         // * Compiler of deployVersion X (INSTANCE) with LV Y (metadataVersionFromLanguageVersion)
         //   * can read metadata with version <= max(X+1, Y)
-        val forwardCompatibility = if (isStrictSemantics) INSTANCE else INSTANCE_NEXT
+        konst forwardCompatibility = if (isStrictSemantics) INSTANCE else INSTANCE_NEXT
         return if (forwardCompatibility.newerThan(this)) forwardCompatibility else this
     }
 
@@ -31,7 +31,7 @@ class JvmMetadataVersion(versionArray: IntArray, val isStrictSemantics: Boolean)
     fun isCompatible(metadataVersionFromLanguageVersion: JvmMetadataVersion): Boolean {
         // Special case for bootstrap: 1.8 can read 2.0
         if (major == 2 && minor == 0 && INSTANCE.major == 1 && INSTANCE.minor == 8) return true
-        val limitVersion = metadataVersionFromLanguageVersion.lastSupportedVersionWithThisLanguageVersion(isStrictSemantics)
+        konst limitVersion = metadataVersionFromLanguageVersion.lastSupportedVersionWithThisLanguageVersion(isStrictSemantics)
         return isCompatibleInternal(limitVersion)
     }
 
@@ -59,12 +59,12 @@ class JvmMetadataVersion(versionArray: IntArray, val isStrictSemantics: Boolean)
 
     companion object {
         @JvmField
-        val INSTANCE = JvmMetadataVersion(1, 9, 0)
+        konst INSTANCE = JvmMetadataVersion(1, 9, 0)
 
         @JvmField
-        val INSTANCE_NEXT = INSTANCE.next()
+        konst INSTANCE_NEXT = INSTANCE.next()
 
         @JvmField
-        val INVALID_VERSION = JvmMetadataVersion()
+        konst INVALID_VERSION = JvmMetadataVersion()
     }
 }

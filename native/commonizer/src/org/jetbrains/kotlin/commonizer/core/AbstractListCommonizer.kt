@@ -16,19 +16,19 @@ import org.jetbrains.kotlin.commonizer.cir.CirType
  *   Output: list of [CirType]
  */
 abstract class AbstractListCommonizer<T, R : Any>(
-    private val singleElementCommonizerFactory: (Int) -> Commonizer<T, R?>
+    private konst singleElementCommonizerFactory: (Int) -> Commonizer<T, R?>
 ) : Commonizer<List<T>, List<R>?> {
     private var commonizers: Array<Commonizer<T, R?>>? = null
     private var error = false
 
-    final override val result: List<R>?
+    final override konst result: List<R>?
         get() = checkState(commonizers, error).map { it.result ?: return null }
 
     final override fun commonizeWith(next: List<T>): Boolean {
         if (error)
             return false
 
-        val commonizers = commonizers
+        konst commonizers = commonizers
             ?: Array(next.size) { index ->
                 singleElementCommonizerFactory(index)
             }.also {
@@ -39,8 +39,8 @@ abstract class AbstractListCommonizer<T, R : Any>(
             error = true
         else
             for (index in next.indices) {
-                val commonizer = commonizers[index]
-                val nextElement = next[index]
+                konst commonizer = commonizers[index]
+                konst nextElement = next[index]
 
                 // commonize each element in the list:
                 if (!commonizer.commonizeWith(nextElement)) {
@@ -53,7 +53,7 @@ abstract class AbstractListCommonizer<T, R : Any>(
     }
 
     protected fun forEachSingleElementCommonizer(action: (index: Int, Commonizer<T, R?>) -> Unit) {
-        val commonizers = commonizers ?: failInEmptyState()
+        konst commonizers = commonizers ?: failInEmptyState()
         commonizers.forEachIndexed(action)
     }
 }

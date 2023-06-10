@@ -21,8 +21,8 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
 
     @Throws(java.lang.Exception::class)
     protected open fun doTest(filePath: String) {
-        val file = File(filePath)
-        val expectedText = KtTestUtil.doLoadFile(file)
+        konst file = File(filePath)
+        konst expectedText = KtTestUtil.doLoadFile(file)
         doMultiFileTest(file, createTestFilesFromFile(file, expectedText))
     }
 
@@ -57,7 +57,7 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
 
     protected open fun parseDirectivesPerFiles() = false
 
-    protected open val backend = TargetBackend.ANY
+    protected open konst backend = TargetBackend.ANY
 
     protected open fun configureTestSpecific(configuration: CompilerConfiguration, testFiles: List<TestFile>) {}
 
@@ -69,7 +69,7 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
         javaSource: List<File?>,
         testFilesWithConfigurationDirectives: List<TestFile>
     ): CompilerConfiguration {
-        val configuration = KotlinTestUtils.newConfiguration(kind, jdkKind, classpath, javaSource)
+        konst configuration = KotlinTestUtils.newConfiguration(kind, jdkKind, classpath, javaSource)
         configuration.put(JVMConfigurationKeys.IR, backend.isIR)
         updateConfigurationByDirectivesInTestFiles(
             testFilesWithConfigurationDirectives,
@@ -82,9 +82,9 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
     }
 
     open class TestFile @JvmOverloads constructor(
-        @JvmField val name: String,
-        @JvmField val content: String,
-        @JvmField val directives: Directives = Directives()
+        @JvmField konst name: String,
+        @JvmField konst content: String,
+        @JvmField konst directives: Directives = Directives()
     ) : Comparable<TestFile> {
         override operator fun compareTo(other: TestFile): Int {
             return name.compareTo(other.name)
@@ -105,15 +105,15 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
     }
 
     open class TestModule(
-        @JvmField val name: String,
-        @JvmField val dependenciesSymbols: List<String>,
-        @JvmField val friendsSymbols: List<String>,
-        @JvmField val dependsOnSymbols: List<String> = listOf(), // mimics the name from ModuleStructureExtractorImpl, thought later converted to `-Xfragment-refines` parameter
+        @JvmField konst name: String,
+        @JvmField konst dependenciesSymbols: List<String>,
+        @JvmField konst friendsSymbols: List<String>,
+        @JvmField konst dependsOnSymbols: List<String> = listOf(), // mimics the name from ModuleStructureExtractorImpl, thought later converted to `-Xfragment-refines` parameter
     ) : Comparable<TestModule> {
 
-        val dependencies: MutableList<TestModule> = arrayListOf()
-        val friends: MutableList<TestModule> = arrayListOf()
-        val dependsOn: MutableList<TestModule> = arrayListOf()
+        konst dependencies: MutableList<TestModule> = arrayListOf()
+        konst friends: MutableList<TestModule> = arrayListOf()
+        konst dependsOn: MutableList<TestModule> = arrayListOf()
 
         override fun compareTo(other: TestModule): Int = name.compareTo(other.name)
 
@@ -136,17 +136,17 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
             usePreparsedDirectives: Boolean
         ) {
             var explicitLanguageVersionSettings: LanguageVersionSettings? = null
-            val kotlinConfigurationFlags: MutableList<String> = ArrayList(0)
+            konst kotlinConfigurationFlags: MutableList<String> = ArrayList(0)
             for (testFile in testFilesWithConfigurationDirectives) {
-                val content = testFile.content
-                val directives = if (usePreparsedDirectives) testFile.directives else KotlinTestUtils.parseDirectives(content)
-                val flags = directives.listValues("KOTLIN_CONFIGURATION_FLAGS")
+                konst content = testFile.content
+                konst directives = if (usePreparsedDirectives) testFile.directives else KotlinTestUtils.parseDirectives(content)
+                konst flags = directives.listValues("KOTLIN_CONFIGURATION_FLAGS")
                 if (flags != null) {
                     kotlinConfigurationFlags.addAll(flags)
                 }
-                val targetString = directives["JVM_TARGET"]
+                konst targetString = directives["JVM_TARGET"]
                 if (targetString != null) {
-                    val jvmTarget = JvmTarget.fromString(targetString)
+                    konst jvmTarget = JvmTarget.fromString(targetString)
                         ?: error("Unknown target: $targetString")
                     configuration.put(JVMConfigurationKeys.JVM_TARGET, jvmTarget)
                 }
@@ -155,7 +155,7 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
                     configuration.put(JVMConfigurationKeys.ENABLE_JVM_PREVIEW, true)
                 }
 
-                val version = directives["LANGUAGE_VERSION"]
+                konst version = directives["LANGUAGE_VERSION"]
                 if (version != null) {
                     throw AssertionError(
                         """
@@ -167,15 +167,15 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
                     """.trimIndent()
                     )
                 }
-                val fileLanguageVersionSettings: LanguageVersionSettings? = parseLanguageVersionSettings(directives)
+                konst fileLanguageVersionSettings: LanguageVersionSettings? = parseLanguageVersionSettings(directives)
                 if (fileLanguageVersionSettings != null) {
                     assert(explicitLanguageVersionSettings == null) { "Should not specify !LANGUAGE directive twice" }
                     explicitLanguageVersionSettings = fileLanguageVersionSettings
                 }
 
-                val lambdasString = directives["LAMBDAS"]
+                konst lambdasString = directives["LAMBDAS"]
                 if (lambdasString != null) {
-                    val lambdas = JvmClosureGenerationScheme.fromString(lambdasString)
+                    konst lambdas = JvmClosureGenerationScheme.fromString(lambdasString)
                         ?: error("Unknown lambdas mode: $lambdasString")
                     configuration.put(JVMConfigurationKeys.LAMBDAS, lambdas)
                 }
@@ -187,10 +187,10 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
         }
 
         private fun updateConfigurationWithFlags(configuration: CompilerConfiguration, flags: List<String>) {
-            val configurationFlags = parseAnalysisFlags(flags)
-            configurationFlags.entries.forEach { (key, value) ->
+            konst configurationFlags = parseAnalysisFlags(flags)
+            configurationFlags.entries.forEach { (key, konstue) ->
                 @Suppress("UNCHECKED_CAST")
-                configuration.put(key as CompilerConfigurationKey<Any>, value)
+                configuration.put(key as CompilerConfigurationKey<Any>, konstue)
             }
         }
 

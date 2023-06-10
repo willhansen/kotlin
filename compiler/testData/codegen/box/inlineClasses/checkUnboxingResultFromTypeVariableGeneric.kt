@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Result<T>(val a: T) {
+konstue class Result<T>(konst a: T) {
     fun typed(): T = a
 }
 
@@ -13,10 +13,10 @@ fun takeInt(i: Int) {}
 
 
 fun box(): String {
-    val asInt = Result<Int>(19)
-    val asString = Result<String>("sample")
-    val asResult = Result<Result<Int>>(asInt)
-    val asResultCtor = Result<Result<Int>>(Result<Int>(10))
+    konst asInt = Result<Int>(19)
+    konst asString = Result<String>("sample")
+    konst asResult = Result<Result<Int>>(asInt)
+    konst asResultCtor = Result<Result<Int>>(Result<Int>(10))
 
     takeResult(asInt)
     takeResult(asString)
@@ -26,10 +26,10 @@ fun box(): String {
     takeResultOfInt(asInt)
     takeInt(asInt.typed())
 
-    val unboxedInt = asInt.typed()
-    val unboxedString = asString.typed()
-    val unboxedResult = asResult.typed()
-    val unboxedAsCtor = asResultCtor.typed()
+    konst unboxedInt = asInt.typed()
+    konst unboxedString = asString.typed()
+    konst unboxedResult = asResult.typed()
+    konst unboxedAsCtor = asResultCtor.typed()
 
     if (unboxedInt != 19) return "fail 1"
     if (unboxedString != "sample") return "fail 2"

@@ -11,7 +11,7 @@ fun test() {
     fun test4(): Int = 0
     fun test4(): String = ""
 
-    class Test5(val x: Int) {
+    class Test5(konst x: Int) {
         constructor(): this(0)
     }
     fun Test5() {}
@@ -30,7 +30,7 @@ fun test() {
         fun test4(): Int = 0
         fun test4(): String = ""
 
-        class Test5(val x: Int) {
+        class Test5(konst x: Int) {
             constructor(): this(0)
         }
         fun Test5() {}
@@ -52,7 +52,7 @@ class Test {
         fun test4(): Int = 0
         fun test4(): String = ""
 
-        class Test5(val x: Int) {
+        class Test5(konst x: Int) {
             constructor(): this(0)
         }
         fun Test5() {}
@@ -72,14 +72,14 @@ class Test {
         fun test4(): Int = 0
         fun test4(): String = ""
 
-        class Test5(val x: Int) {
+        class Test5(konst x: Int) {
             constructor(): this(0)
         }
         fun Test5() {}
         fun Test5(x: Int) = x
     }
 
-    val property: Any get() {
+    konst property: Any get() {
         fun test1() {}
         fun test1() {}
 
@@ -92,7 +92,7 @@ class Test {
         fun test4(): Int = 0
         fun test4(): String = ""
 
-        class Test5(val x: Int) {
+        class Test5(konst x: Int) {
             constructor(): this(0)
         }
         fun Test5() {}
@@ -102,7 +102,7 @@ class Test {
     }
 }
 
-val property: Any get() {
+konst property: Any get() {
     fun test1() {}
     fun test1() {}
 
@@ -115,7 +115,7 @@ val property: Any get() {
     fun test4(): Int = 0
     fun test4(): String = ""
 
-    class Test5(val x: Int) {
+    class Test5(konst x: Int) {
         constructor(): this(0)
     }
     fun Test5() {}
@@ -138,14 +138,14 @@ object Object {
         fun test4(): Int = 0
         fun test4(): String = ""
 
-        class Test5(val x: Int) {
+        class Test5(konst x: Int) {
             constructor(): this(0)
         }
         fun Test5() {}
         fun Test5(x: Int) = x
     }
 
-    val property: Any get() {
+    konst property: Any get() {
         fun test1() {}
         fun test1() {}
 
@@ -158,7 +158,7 @@ object Object {
         fun test4(): Int = 0
         fun test4(): String = ""
 
-        class Test5(val x: Int) {
+        class Test5(konst x: Int) {
             constructor(): this(0)
         }
         fun Test5() {}
@@ -168,7 +168,7 @@ object Object {
     }
 }
 
-val obj = object {
+konst obj = object {
     fun test() {
         fun test1() {}
         fun test1() {}
@@ -182,14 +182,14 @@ val obj = object {
         fun test4(): Int = 0
         fun test4(): String = ""
 
-        class Test5(val x: Int) {
+        class Test5(konst x: Int) {
             constructor(): this(0)
         }
         fun Test5() {}
         fun Test5(x: Int) = x
     }
 
-    val property: Any get() {
+    konst property: Any get() {
         fun test1() {}
         fun test1() {}
 
@@ -202,7 +202,7 @@ val obj = object {
         fun test4(): Int = 0
         fun test4(): String = ""
 
-        class Test5(val x: Int) {
+        class Test5(konst x: Int) {
             constructor(): this(0)
         }
         fun Test5() {}

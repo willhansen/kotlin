@@ -23,4 +23,4 @@ class Tests {
     }
 }
 
-external val process: dynamic
+external konst process: dynamic

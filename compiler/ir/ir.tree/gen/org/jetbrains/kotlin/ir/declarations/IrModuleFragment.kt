@@ -24,18 +24,18 @@ import org.jetbrains.kotlin.name.Name
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.moduleFragment]
  */
 abstract class IrModuleFragment : IrElementBase(), IrElement {
-    abstract val descriptor: ModuleDescriptor
+    abstract konst descriptor: ModuleDescriptor
 
-    abstract val name: Name
+    abstract konst name: Name
 
-    abstract val irBuiltins: IrBuiltIns
+    abstract konst irBuiltins: IrBuiltIns
 
-    abstract val files: MutableList<IrFile>
+    abstract konst files: MutableList<IrFile>
 
-    override val startOffset: Int
+    override konst startOffset: Int
         get() = UNDEFINED_OFFSET
 
-    override val endOffset: Int
+    override konst endOffset: Int
         get() = UNDEFINED_OFFSET
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =

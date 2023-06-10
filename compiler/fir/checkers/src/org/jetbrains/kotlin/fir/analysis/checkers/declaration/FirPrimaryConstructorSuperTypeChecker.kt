@@ -39,7 +39,7 @@ object FirPrimaryConstructorSuperTypeChecker : FirClassChecker() {
 
         if (declaration.classKind.isEnumEntry) return
 
-        val primaryConstructorSymbol = declaration.primaryConstructorIfAny(context.session)
+        konst primaryConstructorSymbol = declaration.primaryConstructorIfAny(context.session)
 
         if (primaryConstructorSymbol == null) {
             checkSupertypeInitializedWithoutPrimaryConstructor(declaration, reporter, context)
@@ -63,12 +63,12 @@ object FirPrimaryConstructorSuperTypeChecker : FirClassChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val containingClass = context.containingDeclarations.lastIsInstanceOrNull<FirRegularClass>()
-        val delegatedConstructorCall = primaryConstructorSymbol.resolvedDelegatedConstructorCall ?: return
+        konst containingClass = context.containingDeclarations.lastIsInstanceOrNull<FirRegularClass>()
+        konst delegatedConstructorCall = primaryConstructorSymbol.resolvedDelegatedConstructorCall ?: return
         // No need to check implicit call to the constructor of `kotlin.Any`.
-        val constructedTypeRef = delegatedConstructorCall.constructedTypeRef
+        konst constructedTypeRef = delegatedConstructorCall.constructedTypeRef
         if (constructedTypeRef is FirImplicitAnyTypeRef) return
-        val superClassSymbol = constructedTypeRef.coneType.toRegularClassSymbol(context.session) ?: return
+        konst superClassSymbol = constructedTypeRef.coneType.toRegularClassSymbol(context.session) ?: return
         // Subclassing a singleton should be reported as SINGLETON_IN_SUPERTYPE
         if (superClassSymbol.classKind.isSingleton) return
         if (regularClass.isEffectivelyExpect(containingClass, context) ||
@@ -76,7 +76,7 @@ object FirPrimaryConstructorSuperTypeChecker : FirClassChecker() {
         ) {
             return
         }
-        val delegatedCallSource = delegatedConstructorCall.source ?: return
+        konst delegatedCallSource = delegatedConstructorCall.source ?: return
         if (delegatedCallSource.kind !is KtFakeSourceElementKind) return
         if (superClassSymbol.classId == StandardClassIds.Enum || superClassSymbol.classId == StandardClassIds.Java.Record) return
         if (delegatedCallSource.elementType != KtNodeTypes.SUPER_TYPE_CALL_ENTRY) {

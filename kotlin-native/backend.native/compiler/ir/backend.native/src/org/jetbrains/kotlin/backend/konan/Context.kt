@@ -35,54 +35,54 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import java.util.concurrent.ConcurrentHashMap
 
 internal class NativeMapping : DefaultMapping() {
-    data class BridgeKey(val target: IrSimpleFunction, val bridgeDirections: BridgeDirections)
+    data class BridgeKey(konst target: IrSimpleFunction, konst bridgeDirections: BridgeDirections)
     enum class AtomicFunctionType {
         COMPARE_AND_EXCHANGE, COMPARE_AND_SET, GET_AND_SET, GET_AND_ADD;
     }
-    data class AtomicFunctionKey(val field: IrField, val type: AtomicFunctionType)
+    data class AtomicFunctionKey(konst field: IrField, konst type: AtomicFunctionType)
 
-    val outerThisFields = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrField>()
-    val enumValueGetters = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrFunction>()
-    val enumEntriesMaps = mutableMapOf<IrClass, Map<Name, LoweredEnumEntryDescription>>()
-    val bridges = ConcurrentHashMap<BridgeKey, IrSimpleFunction>()
-    val partiallyLoweredInlineFunctions = mutableMapOf<IrFunctionSymbol, IrFunction>()
-    val outerThisCacheAccessors = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
-    val lateinitPropertyCacheAccessors = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrProperty, IrSimpleFunction>()
-    val objectInstanceGetter = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
-    val boxFunctions = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
-    val unboxFunctions = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
-    val loweredInlineClassConstructors = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrSimpleFunction>()
-    val volatileFieldToAtomicFunction = mutableMapOf<AtomicFunctionKey, IrSimpleFunction>()
-    val functionToVolatileField = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrSimpleFunction, IrField>()
+    konst outerThisFields = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrField>()
+    konst enumValueGetters = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrFunction>()
+    konst enumEntriesMaps = mutableMapOf<IrClass, Map<Name, LoweredEnumEntryDescription>>()
+    konst bridges = ConcurrentHashMap<BridgeKey, IrSimpleFunction>()
+    konst partiallyLoweredInlineFunctions = mutableMapOf<IrFunctionSymbol, IrFunction>()
+    konst outerThisCacheAccessors = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
+    konst lateinitPropertyCacheAccessors = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrProperty, IrSimpleFunction>()
+    konst objectInstanceGetter = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
+    konst boxFunctions = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
+    konst unboxFunctions = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
+    konst loweredInlineClassConstructors = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrSimpleFunction>()
+    konst volatileFieldToAtomicFunction = mutableMapOf<AtomicFunctionKey, IrSimpleFunction>()
+    konst functionToVolatileField = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrSimpleFunction, IrField>()
 }
 
 // TODO: Can be renamed or merged with KonanBackendContext
 internal class Context(
         config: KonanConfig,
-        val sourcesModules: Set<ModuleDescriptor>,
-        override val builtIns: KonanBuiltIns,
-        override val irBuiltIns: IrBuiltIns,
-        val irModules: Map<String, IrModuleFragment>,
-        val irLinker: KonanIrLinker,
+        konst sourcesModules: Set<ModuleDescriptor>,
+        override konst builtIns: KonanBuiltIns,
+        override konst irBuiltIns: IrBuiltIns,
+        konst irModules: Map<String, IrModuleFragment>,
+        konst irLinker: KonanIrLinker,
         symbols: KonanSymbols,
 ) : KonanBackendContext(config) {
 
-    override val ir: KonanIr = KonanIr(this, symbols)
+    override konst ir: KonanIr = KonanIr(this, symbols)
 
-    override val configuration get() = config.configuration
+    override konst configuration get() = config.configuration
 
-    override val internalPackageFqn: FqName = RuntimeNames.kotlinNativeInternalPackageName
+    override konst internalPackageFqn: FqName = RuntimeNames.kotlinNativeInternalPackageName
 
-    override val optimizeLoopsOverUnsignedArrays = true
+    override konst optimizeLoopsOverUnsignedArrays = true
 
-    val innerClassesSupport by lazy { InnerClassesSupport(mapping, irFactory) }
-    val bridgesSupport by lazy { BridgesSupport(mapping, irBuiltIns, irFactory) }
-    val inlineFunctionsSupport by lazy { InlineFunctionsSupport(mapping) }
-    val enumsSupport by lazy { EnumsSupport(mapping, irBuiltIns, irFactory) }
-    val cachesAbiSupport by lazy { CachesAbiSupport(mapping, irFactory) }
+    konst innerClassesSupport by lazy { InnerClassesSupport(mapping, irFactory) }
+    konst bridgesSupport by lazy { BridgesSupport(mapping, irBuiltIns, irFactory) }
+    konst inlineFunctionsSupport by lazy { InlineFunctionsSupport(mapping) }
+    konst enumsSupport by lazy { EnumsSupport(mapping, irBuiltIns, irFactory) }
+    konst cachesAbiSupport by lazy { CachesAbiSupport(mapping, irFactory) }
 
     // TODO: Remove after adding special <userData> property to IrDeclaration.
-    private val layoutBuilders = ConcurrentHashMap<IrClass, ClassLayoutBuilder>()
+    private konst layoutBuilders = ConcurrentHashMap<IrClass, ClassLayoutBuilder>()
 
     fun getLayoutBuilder(irClass: IrClass): ClassLayoutBuilder =
             (irClass.metadata as? KonanMetadata.Class)?.layoutBuilder
@@ -90,7 +90,7 @@ internal class Context(
 
     lateinit var globalHierarchyAnalysisResult: GlobalHierarchyAnalysisResult
 
-    override val typeSystem: IrTypeSystemContext
+    override konst typeSystem: IrTypeSystemContext
         get() = IrTypeSystemContextImpl(irBuiltIns)
 
     var cAdapterExportedElements: CAdapterExportedElements? = null
@@ -99,25 +99,25 @@ internal class Context(
 
     fun ghaEnabled() = ::globalHierarchyAnalysisResult.isInitialized
 
-    val stdlibModule
+    konst stdlibModule
         get() = this.builtIns.any.module
 
-    val declaredLocalArrays: MutableMap<String, LLVMTypeRef> = HashMap()
+    konst declaredLocalArrays: MutableMap<String, LLVMTypeRef> = HashMap()
 
-    val targetAbiInfo = config.target.abiInfo
+    konst targetAbiInfo = config.target.abiInfo
 
-    val memoryModel = config.memoryModel
+    konst memoryModel = config.memoryModel
 
     override fun dispose() {}
 
-    override val partialLinkageSupport = createPartialLinkageSupportForLowerings(
+    override konst partialLinkageSupport = createPartialLinkageSupportForLowerings(
             config.partialLinkageConfig,
             irBuiltIns,
             configuration.irMessageLogger
     )
 }
 
-internal class ContextLogger(val context: LoggingContext) {
+internal class ContextLogger(konst context: LoggingContext) {
     operator fun String.unaryPlus() = context.log { this }
 }
 

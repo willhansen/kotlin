@@ -14,19 +14,19 @@ abstract class G<T> {
 }
 
 class C {
-    private val propA = object : A() {
+    private konst propA = object : A() {
         override fun bar() = "propA.bar"
 
         fun x() = "OK"
     }
 
-    private val propI = object : I {
+    private konst propI = object : I {
         override fun foo() = "propI.foo"
 
         fun x() = "OK"
     }
 
-    private val propAI = object : A(), I {
+    private konst propAI = object : A(), I {
         override fun foo() = "propAI.foo"
 
         override fun bar() = "propAI.bar"
@@ -34,27 +34,27 @@ class C {
         fun x() = "OK"
     }
 
-    private val propG = object : G<String>() {
+    private konst propG = object : G<String>() {
         override fun baz() = "propG.baz"
 
         fun x() = "OK"
     }
 
-    private val propOI = object {
+    private konst propOI = object {
         inner class D {
             fun df() {}
         }
         fun d(): D = D()
     }.d()
 
-    private val propL = run {
+    private konst propL = run {
         class L {
             fun l() = "propL.l"
         }
         L()
     }
 
-    private val propL2 = run {
+    private konst propL2 = run {
         class L {
             inner class L1 {
                 inner class L2 {

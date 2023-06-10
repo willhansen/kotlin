@@ -15,5 +15,5 @@ package org.jetbrains.kotlin.ir.declarations
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.declarationContainer]
  */
 interface IrDeclarationContainer : IrDeclarationParent {
-    val declarations: MutableList<IrDeclaration>
+    konst declarations: MutableList<IrDeclaration>
 }

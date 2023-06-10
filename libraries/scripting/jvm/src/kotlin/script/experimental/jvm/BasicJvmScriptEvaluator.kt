@@ -9,45 +9,45 @@ import java.lang.reflect.InvocationTargetException
 import kotlin.reflect.KClass
 import kotlin.script.experimental.api.*
 
-open class BasicJvmScriptEvaluator : ScriptEvaluator {
+open class BasicJvmScriptEkonstuator : ScriptEkonstuator {
 
     override suspend operator fun invoke(
         compiledScript: CompiledScript,
-        scriptEvaluationConfiguration: ScriptEvaluationConfiguration
-    ): ResultWithDiagnostics<EvaluationResult> = try {
-        compiledScript.getClass(scriptEvaluationConfiguration).onSuccess { scriptClass ->
+        scriptEkonstuationConfiguration: ScriptEkonstuationConfiguration
+    ): ResultWithDiagnostics<EkonstuationResult> = try {
+        compiledScript.getClass(scriptEkonstuationConfiguration).onSuccess { scriptClass ->
 
             // configuration shared between all module scripts
-            val sharedConfiguration = scriptEvaluationConfiguration.getOrPrepareShared(scriptClass.java.classLoader)
-            val configurationForOtherScripts by lazy {
+            konst sharedConfiguration = scriptEkonstuationConfiguration.getOrPrepareShared(scriptClass.java.classLoader)
+            konst configurationForOtherScripts by lazy {
                 sharedConfiguration.with {
-                    reset(ScriptEvaluationConfiguration.previousSnippets)
+                    reset(ScriptEkonstuationConfiguration.previousSnippets)
                 }
             }
-            val sharedScripts = sharedConfiguration[ScriptEvaluationConfiguration.jvm.scriptsInstancesSharingMap]
+            konst sharedScripts = sharedConfiguration[ScriptEkonstuationConfiguration.jvm.scriptsInstancesSharingMap]
 
             sharedScripts?.get(scriptClass)?.asSuccess()
                 ?: compiledScript.otherScripts.mapSuccess {
                     invoke(it, configurationForOtherScripts)
-                }.onSuccess { importedScriptsEvalResults ->
+                }.onSuccess { importedScriptsEkonstResults ->
 
-                    val refinedEvalConfiguration =
+                    konst refinedEkonstConfiguration =
                         sharedConfiguration.with {
                             compilationConfiguration(compiledScript.compilationConfiguration)
-                        }.refineBeforeEvaluation(compiledScript).valueOr {
+                        }.refineBeforeEkonstuation(compiledScript).konstueOr {
                             return@invoke ResultWithDiagnostics.Failure(it.reports)
                         }
 
-                    val resultValue = try {
+                    konst resultValue = try {
                         // in the future, when (if) we'll stop to compile everything into constructor
                         // run as SAM
                         // return res
 
-                        val instance =
-                            scriptClass.evalWithConfigAndOtherScriptsResults(refinedEvalConfiguration, importedScriptsEvalResults)
+                        konst instance =
+                            scriptClass.ekonstWithConfigAndOtherScriptsResults(refinedEkonstConfiguration, importedScriptsEkonstResults)
 
                         compiledScript.resultField?.let { (resultFieldName, resultType) ->
-                            val resultField = scriptClass.java.getDeclaredField(resultFieldName).apply { isAccessible = true }
+                            konst resultField = scriptClass.java.getDeclaredField(resultFieldName).apply { isAccessible = true }
                             ResultValue.Value(resultFieldName, resultField.get(instance), resultType.typeName, scriptClass, instance)
                         } ?: ResultValue.Unit(scriptClass, instance)
 
@@ -55,7 +55,7 @@ open class BasicJvmScriptEvaluator : ScriptEvaluator {
                         ResultValue.Error(e.targetException ?: e, e, scriptClass)
                     }
 
-                    EvaluationResult(resultValue, refinedEvalConfiguration).let {
+                    EkonstuationResult(resultValue, refinedEkonstConfiguration).let {
                         sharedScripts?.put(scriptClass, it)
                         ResultWithDiagnostics.Success(it)
                     }
@@ -67,38 +67,38 @@ open class BasicJvmScriptEvaluator : ScriptEvaluator {
         )
     }
 
-    private fun KClass<*>.evalWithConfigAndOtherScriptsResults(
-        refinedEvalConfiguration: ScriptEvaluationConfiguration,
-        importedScriptsEvalResults: List<EvaluationResult>
+    private fun KClass<*>.ekonstWithConfigAndOtherScriptsResults(
+        refinedEkonstConfiguration: ScriptEkonstuationConfiguration,
+        importedScriptsEkonstResults: List<EkonstuationResult>
     ): Any {
-        val args = ArrayList<Any?>()
+        konst args = ArrayList<Any?>()
 
-        refinedEvalConfiguration[ScriptEvaluationConfiguration.previousSnippets]?.let {
+        refinedEkonstConfiguration[ScriptEkonstuationConfiguration.previousSnippets]?.let {
             args.add(it.toTypedArray())
         }
 
-        refinedEvalConfiguration[ScriptEvaluationConfiguration.constructorArgs]?.let {
+        refinedEkonstConfiguration[ScriptEkonstuationConfiguration.constructorArgs]?.let {
             args.addAll(it)
         }
 
-        importedScriptsEvalResults.forEach {
+        importedScriptsEkonstResults.forEach {
             args.add(it.returnValue.scriptInstance)
         }
 
-        refinedEvalConfiguration[ScriptEvaluationConfiguration.implicitReceivers]?.let {
+        refinedEkonstConfiguration[ScriptEkonstuationConfiguration.implicitReceivers]?.let {
             args.addAll(it)
         }
-        refinedEvalConfiguration[ScriptEvaluationConfiguration.providedProperties]?.forEach {
-            args.add(it.value)
+        refinedEkonstConfiguration[ScriptEkonstuationConfiguration.providedProperties]?.forEach {
+            args.add(it.konstue)
         }
 
-        val ctor = java.constructors.single()
+        konst ctor = java.constructors.single()
 
         @Suppress("UNCHECKED_CAST")
-        val wrapper: ScriptExecutionWrapper<Any>? =
-            refinedEvalConfiguration[ScriptEvaluationConfiguration.scriptExecutionWrapper] as ScriptExecutionWrapper<Any>?
+        konst wrapper: ScriptExecutionWrapper<Any>? =
+            refinedEkonstConfiguration[ScriptEkonstuationConfiguration.scriptExecutionWrapper] as ScriptExecutionWrapper<Any>?
 
-        val saveClassLoader = Thread.currentThread().contextClassLoader
+        konst saveClassLoader = Thread.currentThread().contextClassLoader
         Thread.currentThread().contextClassLoader = this.java.classLoader
         return try {
             if (wrapper == null) {
@@ -112,13 +112,13 @@ open class BasicJvmScriptEvaluator : ScriptEvaluator {
     }
 }
 
-private fun ScriptEvaluationConfiguration.getOrPrepareShared(classLoader: ClassLoader): ScriptEvaluationConfiguration =
-    if (this[ScriptEvaluationConfiguration.jvm.actualClassLoader] != null)
+private fun ScriptEkonstuationConfiguration.getOrPrepareShared(classLoader: ClassLoader): ScriptEkonstuationConfiguration =
+    if (this[ScriptEkonstuationConfiguration.jvm.actualClassLoader] != null)
         this
     else
         with {
-            ScriptEvaluationConfiguration.jvm.actualClassLoader(classLoader)
-            if (this[ScriptEvaluationConfiguration.scriptsInstancesSharing] == true) {
-                ScriptEvaluationConfiguration.jvm.scriptsInstancesSharingMap(mutableMapOf())
+            ScriptEkonstuationConfiguration.jvm.actualClassLoader(classLoader)
+            if (this[ScriptEkonstuationConfiguration.scriptsInstancesSharing] == true) {
+                ScriptEkonstuationConfiguration.jvm.scriptsInstancesSharingMap(mutableMapOf())
             }
         }

@@ -47,15 +47,15 @@ object R {
 object S {
     var lastResult = 0
 
-    inline operator fun set(i: Int, value: Int) {
-        lastResult = i + value
+    inline operator fun set(i: Int, konstue: Int) {
+        lastResult = i + konstue
     }
 }
 
-class N(val value: Int) {
-    inline operator fun minus(other: Int) = N(value - other)
+class N(konst konstue: Int) {
+    inline operator fun minus(other: Int) = N(konstue - other)
 
-    inline operator fun dec() = N(value - 1)
+    inline operator fun dec() = N(konstue - 1)
 }
 
 // CHECK_BREAKS_COUNT: function=box count=0 TARGET_BACKENDS=JS_IR
@@ -82,9 +82,9 @@ fun box(): String {
 
     var n = N(10)
     n--
-    if (n.value != 9) return "fail: decrement: ${n.value}"
+    if (n.konstue != 9) return "fail: decrement: ${n.konstue}"
     n -= 3
-    if (n.value != 6) return "fail: augmented assignment: ${n.value}"
+    if (n.konstue != 6) return "fail: augmented assignment: ${n.konstue}"
 
     return "OK"
 }

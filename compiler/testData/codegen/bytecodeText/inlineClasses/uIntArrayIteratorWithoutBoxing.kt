@@ -1,12 +1,12 @@
 // !LANGUAGE: +InlineClasses
 
-inline class UInt(private val value: Int)
+inline class UInt(private konst konstue: Int)
 
-inline class UIntArray(private val intArray: IntArray) {
+inline class UIntArray(private konst intArray: IntArray) {
     operator fun iterator(): UIntIterator = UIntIterator(intArray.iterator()) // create iterator
 }
 
-inline class UIntIterator(private val intIterator: IntIterator) : Iterator<UInt> {
+inline class UIntIterator(private konst intIterator: IntIterator) : Iterator<UInt> {
     override fun next(): UInt {
         return UInt(intIterator.next()) // box inside bridge that returns java/lang/Object
     }
@@ -19,7 +19,7 @@ inline class UIntIterator(private val intIterator: IntIterator) : Iterator<UInt>
 fun uIntArrayOf(vararg u: Int): UIntArray = UIntArray(u)
 
 fun test() {
-    val a = uIntArrayOf(1, 2, 3, 4)
+    konst a = uIntArrayOf(1, 2, 3, 4)
     for (element in a) {
         takeUInt(element)
     }
@@ -35,4 +35,4 @@ fun takeUInt(u: UInt) {}
 
 // 0 intValue
 
-// 0 valueOf
+// 0 konstueOf

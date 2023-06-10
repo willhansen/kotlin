@@ -21,37 +21,37 @@ import javax.inject.Inject
 
 open class KotlinJvmAndroidCompilation @Inject internal constructor(
     compilation: KotlinCompilationImpl,
-    val androidVariant: BaseVariant
+    konst androidVariant: BaseVariant
 ) : AbstractKotlinCompilationToRunnableFiles<KotlinJvmOptions>(compilation) {
 
-    override val target: KotlinAndroidTarget = compilation.target as KotlinAndroidTarget
+    override konst target: KotlinAndroidTarget = compilation.target as KotlinAndroidTarget
 
-    override val compilerOptions: HasCompilerOptions<KotlinJvmCompilerOptions> =
+    override konst compilerOptions: HasCompilerOptions<KotlinJvmCompilerOptions> =
         compilation.compilerOptions.castCompilerOptionsType()
 
-    internal val testedVariantArtifacts: Property<FileCollection> =
+    internal konst testedVariantArtifacts: Property<FileCollection> =
         compilation.project.objects.property(FileCollection::class.java)
 
     @Suppress("DEPRECATION")
     @Deprecated("Accessing task instance directly is deprecated", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTask: org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+    override konst compileKotlinTask: org.jetbrains.kotlin.gradle.tasks.KotlinCompile
         get() = compilation.compileKotlinTask as org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
     @Deprecated("Replaced with compileTaskProvider", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTaskProvider: TaskProvider<out org.jetbrains.kotlin.gradle.tasks.KotlinCompile>
+    override konst compileKotlinTaskProvider: TaskProvider<out org.jetbrains.kotlin.gradle.tasks.KotlinCompile>
         get() = compilation.compileKotlinTaskProvider as TaskProvider<out org.jetbrains.kotlin.gradle.tasks.KotlinCompile>
 
     @Suppress("UNCHECKED_CAST")
-    override val compileTaskProvider: TaskProvider<out KotlinCompilationTask<KotlinJvmCompilerOptions>>
+    override konst compileTaskProvider: TaskProvider<out KotlinCompilationTask<KotlinJvmCompilerOptions>>
         get() = compilation.compileTaskProvider as TaskProvider<KotlinCompilationTask<KotlinJvmCompilerOptions>>
 
-    val compileJavaTaskProvider: TaskProvider<out JavaCompile>
+    konst compileJavaTaskProvider: TaskProvider<out JavaCompile>
         get() = androidVariant.getJavaTaskProvider()
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
     @Suppress("DEPRECATION")
-    override val relatedConfigurationNames: List<String>
+    override konst relatedConfigurationNames: List<String>
         get() = compilation.relatedConfigurationNames + listOf(
             "${androidVariant.name}ApiElements",
             "${androidVariant.name}RuntimeElements",

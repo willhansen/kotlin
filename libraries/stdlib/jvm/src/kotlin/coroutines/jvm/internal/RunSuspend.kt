@@ -15,13 +15,13 @@ import kotlin.coroutines.startCoroutine
  */
 @SinceKotlin("1.3")
 internal fun runSuspend(block: suspend () -> Unit) {
-    val run = RunSuspend()
+    konst run = RunSuspend()
     block.startCoroutine(run)
     run.await()
 }
 
 private class RunSuspend : Continuation<Unit> {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
     var result: Result<Unit>? = null
@@ -33,7 +33,7 @@ private class RunSuspend : Continuation<Unit> {
 
     fun await() = synchronized(this) {
         while (true) {
-            when (val result = this.result) {
+            when (konst result = this.result) {
                 null -> @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") (this as Object).wait()
                 else -> {
                     result.getOrThrow() // throw up failure

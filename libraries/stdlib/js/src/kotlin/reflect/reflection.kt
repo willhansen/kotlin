@@ -44,12 +44,12 @@ internal fun <T : Any> getKClassFromExpression(e: T): KClass<T> =
                 e is KClass<*> -> KClass::class
                 e is Array<*> -> PrimitiveClasses.arrayClass
                 else -> {
-                    val constructor = js("Object").getPrototypeOf(e).constructor
+                    konst constructor = js("Object").getPrototypeOf(e).constructor
                     when {
                         constructor === js("Object") -> PrimitiveClasses.anyClass
                         constructor === js("Error") -> PrimitiveClasses.throwableClass
                         else -> {
-                            val jsClass: JsClass<T> = constructor
+                            konst jsClass: JsClass<T> = constructor
                             getKClass1(jsClass)
                         }
                     }
@@ -62,11 +62,11 @@ internal fun <T : Any> getKClassFromExpression(e: T): KClass<T> =
 internal fun <T : Any> getKClass1(jClass: JsClass<T>): KClass<T> {
     if (jClass === js("String")) return PrimitiveClasses.stringClass.unsafeCast<KClass<T>>()
 
-    val metadata = jClass.asDynamic().`$metadata$`
+    konst metadata = jClass.asDynamic().`$metadata$`
 
     return if (metadata != null) {
         if (metadata.`$kClass$` == null) {
-            val kClass = SimpleKClassImpl(jClass)
+            konst kClass = SimpleKClassImpl(jClass)
             metadata.`$kClass$` = kClass
             kClass
         } else {

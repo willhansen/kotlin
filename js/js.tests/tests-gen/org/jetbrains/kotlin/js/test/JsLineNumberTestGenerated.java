@@ -290,9 +290,9 @@ public class JsLineNumberTestGenerated extends AbstractJsLineNumberTest {
     }
 
     @Test
-    @TestMetadata("valParameter.kt")
+    @TestMetadata("konstParameter.kt")
     public void testValParameter() throws Exception {
-        runTest("js/js.translator/testData/lineNumbers/valParameter.kt");
+        runTest("js/js.translator/testData/lineNumbers/konstParameter.kt");
     }
 
     @Test

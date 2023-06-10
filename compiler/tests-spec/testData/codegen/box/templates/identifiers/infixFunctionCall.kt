@@ -1,7 +1,7 @@
-infix fun Int.<!ELEMENT(1)!>(value: Int) = value > 100
+infix fun Int.<!ELEMENT(1)!>(konstue: Int) = konstue > 100
 
-infix fun Int.<!ELEMENT(2)!>(value: Int): Int {
-    return value - 90
+infix fun Int.<!ELEMENT(2)!>(konstue: Int): Int {
+    return konstue - 90
 }
 
 fun box(): String? {

@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.gradle.utils.androidPluginIds
 import org.jetbrains.kotlin.gradle.utils.checkGradleCompatibility
 
 internal open class KotlinAndroidPlugin(
-    private val registry: ToolingModelBuilderRegistry
+    private konst registry: ToolingModelBuilderRegistry
 ) : Plugin<Project> {
 
     override fun apply(project: Project) {
@@ -37,19 +37,19 @@ internal open class KotlinAndroidPlugin(
                     "",
                     project
                 ).also { target ->
-                    val kotlinAndroidExtension = project.kotlinExtension as KotlinAndroidProjectExtension
+                    konst kotlinAndroidExtension = project.kotlinExtension as KotlinAndroidProjectExtension
                     kotlinAndroidExtension.target = target
                     project.configureCompilerOptionsForTarget(
                         kotlinAndroidExtension.compilerOptions,
                         target.compilations
                     )
-                    kotlinAndroidExtension.compilerOptions.noJdk.value(true).disallowChanges()
+                    kotlinAndroidExtension.compilerOptions.noJdk.konstue(true).disallowChanges()
 
-                    @Suppress("DEPRECATION") val kotlinOptions = object : KotlinJvmOptions {
-                        override val options: KotlinJvmCompilerOptions
+                    @Suppress("DEPRECATION") konst kotlinOptions = object : KotlinJvmOptions {
+                        override konst options: KotlinJvmCompilerOptions
                             get() = kotlinAndroidExtension.compilerOptions
                     }
-                    val ext = project.extensions.getByName("android") as BaseExtension
+                    konst ext = project.extensions.getByName("android") as BaseExtension
                     ext.addExtension(KOTLIN_OPTIONS_DSL_NAME, kotlinOptions)
                 }
             }
@@ -57,15 +57,15 @@ internal open class KotlinAndroidPlugin(
             applyUserDefinedAttributes(androidTarget)
             customizeKotlinDependencies(project)
             registry.register(KotlinModelBuilder(project.getKotlinPluginVersion(), androidTarget))
-            project.whenEvaluated { project.components.addAll(androidTarget.components) }
+            project.whenEkonstuated { project.components.addAll(androidTarget.components) }
         }
     }
 
     companion object {
-        private val minimalSupportedAgpVersion = AndroidGradlePluginVersion(4, 2, 2)
+        private konst minimalSupportedAgpVersion = AndroidGradlePluginVersion(4, 2, 2)
         fun androidTargetHandler(): AndroidProjectHandler {
-            val tasksProvider = KotlinTasksProvider()
-            val androidGradlePluginVersion = AndroidGradlePluginVersion.currentOrNull
+            konst tasksProvider = KotlinTasksProvider()
+            konst androidGradlePluginVersion = AndroidGradlePluginVersion.currentOrNull
 
             if (androidGradlePluginVersion != null) {
                 if (androidGradlePluginVersion < minimalSupportedAgpVersion) {
@@ -88,13 +88,13 @@ internal open class KotlinAndroidPlugin(
             androidPluginIds.forEach { pluginId ->
                 plugins.withId(pluginId) {
                     wasConfigured = true
-                    val target = kotlinAndroidTargetProvider()
+                    konst target = kotlinAndroidTargetProvider()
                     androidTargetHandler().configureTarget(target)
                     additionalConfiguration(target)
                 }
             }
 
-            afterEvaluate {
+            afterEkonstuate {
                 if (!wasConfigured) {
                     throw GradleException(
                         """

@@ -16,11 +16,11 @@ import kotlin.test.assertEquals
 
 class CommonizerQueueTest {
 
-    data class CommonizerInvocation(val inputs: TargetDependent<CirTreeRoot?>, val output: SharedCommonizerTarget)
+    data class CommonizerInvocation(konst inputs: TargetDependent<CirTreeRoot?>, konst output: SharedCommonizerTarget)
 
     @Test
     fun `test retained targets`() {
-        val queue = CommonizerQueue(
+        konst queue = CommonizerQueue(
             storageManager = LockBasedStorageManager.NO_LOCKS,
             outputTargets = setOf("(a, b)", "(a, b, c)").map(::parseCommonizerTarget).map { it as SharedCommonizerTarget }.toSet(),
             deserializers = EagerTargetDependent(
@@ -88,14 +88,14 @@ class CommonizerQueueTest {
 
     @Test
     fun `test commonizer being called`() {
-        val commonizerInvocations = mutableListOf<CommonizerInvocation>()
-        val storageManager = LockBasedStorageManager.NO_LOCKS
-        val providedTargets = setOf("a", "b", "c").map(::parseCommonizerTarget).toSet()
-        val abOutputTarget = parseCommonizerTarget("(a, b)") as SharedCommonizerTarget
-        val abcOutputTarget = parseCommonizerTarget("(a, b, c)") as SharedCommonizerTarget
-        val outputTargets = setOf(abOutputTarget, abcOutputTarget)
+        konst commonizerInvocations = mutableListOf<CommonizerInvocation>()
+        konst storageManager = LockBasedStorageManager.NO_LOCKS
+        konst providedTargets = setOf("a", "b", "c").map(::parseCommonizerTarget).toSet()
+        konst abOutputTarget = parseCommonizerTarget("(a, b)") as SharedCommonizerTarget
+        konst abcOutputTarget = parseCommonizerTarget("(a, b, c)") as SharedCommonizerTarget
+        konst outputTargets = setOf(abOutputTarget, abcOutputTarget)
 
-        val queue = CommonizerQueue(
+        konst queue = CommonizerQueue(
             storageManager = storageManager,
             outputTargets = outputTargets,
             deserializers = EagerTargetDependent(providedTargets) { CommonizerQueue.Deserializer { null } },
@@ -120,14 +120,14 @@ class CommonizerQueueTest {
             "Expected specified output targets to be invoked"
         )
 
-        val abInvocation = commonizerInvocations.single { it.output == abOutputTarget }
+        konst abInvocation = commonizerInvocations.single { it.output == abOutputTarget }
         assertEquals(
             selectInputTargets(providedTargets + outputTargets, abOutputTarget),
             abInvocation.inputs.targets.toSet(),
             "Expected commonizer being invoked with selected targets for abInvocation"
         )
 
-        val abcInvocation = commonizerInvocations.single { it.output == abcOutputTarget }
+        konst abcInvocation = commonizerInvocations.single { it.output == abcOutputTarget }
         assertEquals(
             selectInputTargets(providedTargets + outputTargets, abcOutputTarget),
             abcInvocation.inputs.targets.toSet(),
@@ -137,9 +137,9 @@ class CommonizerQueueTest {
 
     @Test
     fun `test diamond output targets`() {
-        val commonizerInvocations = mutableListOf<CommonizerInvocation>()
+        konst commonizerInvocations = mutableListOf<CommonizerInvocation>()
 
-        val queue = CommonizerQueue(
+        konst queue = CommonizerQueue(
             storageManager = LockBasedStorageManager.NO_LOCKS,
             outputTargets = setOf("(a, b)", "(b, c)", "(a, b, c)")
                 .map(::parseCommonizerTarget).map { it as SharedCommonizerTarget }

@@ -49,7 +49,7 @@ fun doWhileInContract(x: Any?) {
 
 fun localValInContract(x: Any?) {
     contract {
-        <!ERROR_IN_CONTRACT_DESCRIPTION("unexpected construction in contract description")!>val y: Int = 42<!>
+        <!ERROR_IN_CONTRACT_DESCRIPTION("unexpected construction in contract description")!>konst y: Int = 42<!>
         returns() implies (x is String)
     }
 }

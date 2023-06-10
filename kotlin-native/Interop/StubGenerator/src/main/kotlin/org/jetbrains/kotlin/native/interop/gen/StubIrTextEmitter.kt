@@ -17,20 +17,20 @@ import java.lang.IllegalStateException
  * [omitEmptyLines] is useful for testing output (e.g. diff calculating).
  */
 class StubIrTextEmitter(
-        private val context: StubIrContext,
-        private val builderResult: StubIrBuilderResult,
-        private val bridgeBuilderResult: BridgeBuilderResult,
-        private val omitEmptyLines: Boolean = false
+        private konst context: StubIrContext,
+        private konst builderResult: StubIrBuilderResult,
+        private konst bridgeBuilderResult: BridgeBuilderResult,
+        private konst omitEmptyLines: Boolean = false
 ) {
-    private val kotlinFile = bridgeBuilderResult.kotlinFile
-    private val nativeBridges = bridgeBuilderResult.nativeBridges
-    private val propertyAccessorBridgeBodies = bridgeBuilderResult.propertyAccessorBridgeBodies
-    private val functionBridgeBodies = bridgeBuilderResult.functionBridgeBodies
+    private konst kotlinFile = bridgeBuilderResult.kotlinFile
+    private konst nativeBridges = bridgeBuilderResult.nativeBridges
+    private konst propertyAccessorBridgeBodies = bridgeBuilderResult.propertyAccessorBridgeBodies
+    private konst functionBridgeBodies = bridgeBuilderResult.functionBridgeBodies
 
-    private val pkgName: String
+    private konst pkgName: String
         get() = context.configuration.pkgName
 
-    private val StubContainer.isTopLevelContainer: Boolean
+    private konst StubContainer.isTopLevelContainer: Boolean
         get() = this == builderResult.stubs || this in builderResult.stubs.simpleContainers
 
     /**
@@ -48,7 +48,7 @@ class StubIrTextEmitter(
     }
 
     private fun <R> withOutput(output: (String) -> Unit, action: () -> R): R {
-        val oldOut = out
+        konst oldOut = out
         out = output
         try {
             return action()
@@ -62,24 +62,24 @@ class StubIrTextEmitter(
     }
 
     private fun generateLinesBy(action: () -> Unit): List<String> {
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
         withOutput({ result.add(it) }, action)
         return result
     }
 
     private fun generateKotlinFragmentBy(block: () -> Unit): Sequence<String> {
-        val lines = generateLinesBy(block)
+        konst lines = generateLinesBy(block)
         return lines.asSequence()
     }
 
     private fun <R> indent(action: () -> R): R {
-        val oldOut = out
+        konst oldOut = out
         return withOutput({ oldOut("    $it") }, action)
     }
 
     private fun <R> block(header: String, body: () -> R): R {
         out("$header {")
-        val res = indent {
+        konst res = indent {
             body()
         }
         out("}")
@@ -94,7 +94,7 @@ class StubIrTextEmitter(
             out("@file:kotlinx.cinterop.InteropStubs")
         }
 
-        val suppress = mutableListOf("UNUSED_VARIABLE", "UNUSED_EXPRESSION").apply {
+        konst suppress = mutableListOf("UNUSED_VARIABLE", "UNUSED_EXPRESSION").apply {
             add("DEPRECATION") // CVariable.Type and CEnum companion deprecations.
             if (context.configuration.library.language == Language.OBJECTIVE_C) {
                 add("CONFLICTING_OVERLOADS")
@@ -102,7 +102,7 @@ class StubIrTextEmitter(
                 add("PROPERTY_TYPE_MISMATCH_ON_INHERITANCE") // Multiple-inheriting property with conflicting types
                 add("VAR_TYPE_MISMATCH_ON_INHERITANCE") // Multiple-inheriting mutable property with conflicting types
                 add("RETURN_TYPE_MISMATCH_ON_OVERRIDE")
-                add("WRONG_MODIFIER_CONTAINING_DECLARATION") // For `final val` in interface.
+                add("WRONG_MODIFIER_CONTAINING_DECLARATION") // For `final konst` in interface.
                 add("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
                 add("UNUSED_PARAMETER") // For constructors.
                 add("MANY_IMPL_MEMBER_NOT_IMPLEMENTED") // Workaround for multiple-inherited properties.
@@ -117,7 +117,7 @@ class StubIrTextEmitter(
         out("@file:Suppress(${suppress.joinToString { it.quoteAsKotlinLiteral() }})")
         out("@file:OptIn(ExperimentalForeignApi::class)")
         if (pkgName != "") {
-            out("package ${context.validPackageName}")
+            out("package ${context.konstidPackageName}")
             out("")
         }
         if (context.platform == KotlinPlatform.NATIVE) {
@@ -137,7 +137,7 @@ class StubIrTextEmitter(
     fun emit(ktFile: Appendable) {
 
         // Stubs generation may affect imports list so do it before header generation.
-        val stubLines = generateKotlinFragmentBy {
+        konst stubLines = generateKotlinFragmentBy {
             printer.visitSimpleStubContainer(builderResult.stubs, null)
         }
 
@@ -146,16 +146,16 @@ class StubIrTextEmitter(
             stubLines.forEach(out)
             nativeBridges.kotlinLines.forEach(out)
             if (context.platform == KotlinPlatform.JVM)
-                out("private val loadLibrary = loadKonanLibrary(\"${context.libName}\")")
+                out("private konst loadLibrary = loadKonanLibrary(\"${context.libName}\")")
         }
     }
-    private val printer = object : StubIrVisitor<StubContainer?, Unit> {
+    private konst printer = object : StubIrVisitor<StubContainer?, Unit> {
 
         override fun visitClass(element: ClassStub, data: StubContainer?) {
             element.annotations.forEach {
                 out(renderAnnotation(it))
             }
-            val header = renderClassHeader(element)
+            konst header = renderClassHeader(element)
             when {
                 element.children.isEmpty() -> out(header)
                 else -> block(header) {
@@ -177,20 +177,20 @@ class StubIrTextEmitter(
         }
 
         override fun visitTypealias(element: TypealiasStub, data: StubContainer?) {
-            val alias = renderClassifierDeclaration(element.alias)
-            val aliasee = renderStubType(element.aliasee)
+            konst alias = renderClassifierDeclaration(element.alias)
+            konst aliasee = renderStubType(element.aliasee)
             out("typealias $alias = $aliasee")
         }
 
         override fun visitFunction(element: FunctionStub, data: StubContainer?) {
             if (element in bridgeBuilderResult.excludedStubs) return
 
-            val header = run {
-                val parameters = element.parameters.joinToString(prefix = "(", postfix = ")") { renderFunctionParameter(it) }
-                val receiver = element.receiver?.let { renderFunctionReceiver(it) + "." } ?: ""
-                val typeParameters = renderTypeParameters(element.typeParameters)
-                val override = if (element.isOverride) "override " else ""
-                val modality = renderMemberModality(element.modality, data)
+            konst header = run {
+                konst parameters = element.parameters.joinToString(prefix = "(", postfix = ")") { renderFunctionParameter(it) }
+                konst receiver = element.receiver?.let { renderFunctionReceiver(it) + "." } ?: ""
+                konst typeParameters = renderTypeParameters(element.typeParameters)
+                konst override = if (element.isOverride) "override " else ""
+                konst modality = renderMemberModality(element.modality, data)
                 "$override${modality}fun$typeParameters $receiver${element.name.asSimpleName()}$parameters: ${renderStubType(element.returnType)}"
             }
             if (!nativeBridges.isSupported(element)) {
@@ -207,7 +207,7 @@ class StubIrTextEmitter(
                 element.external -> out("external $header")
                 element.isOptionalObjCMethod() -> out("$header = optional()")
                 element.origin is StubOrigin.Synthetic.EnumByValue ->
-                    out("$header = values().find { it.value == value }!!")
+                    out("$header = konstues().find { it.konstue == konstue }!!")
                 data != null && data.isInterface -> out(header)
                 else -> block(header) {
                     functionBridgeBodies.getValue(element).forEach(out)
@@ -222,7 +222,7 @@ class StubIrTextEmitter(
             constructorStub.annotations.forEach {
                 out(renderAnnotation(it))
             }
-            val visibility = renderVisibilityModifier(constructorStub.visibility)
+            konst visibility = renderVisibilityModifier(constructorStub.visibility)
             out("${visibility}constructor(${constructorStub.parameters.joinToString { renderFunctionParameter(it) }}) {}")
         }
 
@@ -271,63 +271,63 @@ class StubIrTextEmitter(
     }
 
     private fun emitEnumVarClass(enum: ClassStub.Enum) {
-        val simpleKotlinName = enum.classifier.topLevelName.asSimpleName()
-        val typeMirror = builderResult.bridgeGenerationComponents.enumToTypeMirror.getValue(enum)
-        val basePointedTypeName = typeMirror.pointedType.render(kotlinFile)
+        konst simpleKotlinName = enum.classifier.topLevelName.asSimpleName()
+        konst typeMirror = builderResult.bridgeGenerationComponents.enumToTypeMirror.getValue(enum)
+        konst basePointedTypeName = typeMirror.pointedType.render(kotlinFile)
         block("class Var(rawPtr: NativePtr) : CEnumVar(rawPtr)") {
             out("@Deprecated(\"Use sizeOf<T>() or alignOf<T>() instead.\")")
             out("companion object : Type(sizeOf<$basePointedTypeName>().toInt())")
-            out("var value: $simpleKotlinName")
-            out("    get() = byValue(this.reinterpret<$basePointedTypeName>().value)")
-            out("    set(value) { this.reinterpret<$basePointedTypeName>().value = value.value }")
+            out("var konstue: $simpleKotlinName")
+            out("    get() = byValue(this.reinterpret<$basePointedTypeName>().konstue)")
+            out("    set(konstue) { this.reinterpret<$basePointedTypeName>().konstue = konstue.konstue }")
         }
     }
 
     private fun emitProperty(element: PropertyStub, owner: StubContainer?) {
         if (element in bridgeBuilderResult.excludedStubs) return
 
-        val override = if (element.isOverride) "override " else ""
-        val modality = "$override${renderMemberModality(element.modality, owner)}"
-        val receiver = if (element.receiverType != null) "${renderStubType(element.receiverType)}." else ""
-        val name = if (owner?.isTopLevelContainer == true) {
+        konst override = if (element.isOverride) "override " else ""
+        konst modality = "$override${renderMemberModality(element.modality, owner)}"
+        konst receiver = if (element.receiverType != null) "${renderStubType(element.receiverType)}." else ""
+        konst name = if (owner?.isTopLevelContainer == true) {
             getTopLevelPropertyDeclarationName(kotlinFile, element).asSimpleName()
         } else {
             element.name.asSimpleName()
         }
-        val header = "$receiver$name: ${renderStubType(element.type)}"
+        konst header = "$receiver$name: ${renderStubType(element.type)}"
 
         if (element.kind is PropertyStub.Kind.Val && !nativeBridges.isSupported(element.kind.getter)
                 || element.kind is PropertyStub.Kind.Var && !nativeBridges.isSupported(element.kind.getter)) {
             out(annotationForUnableToImport)
-            out("val $header")
+            out("konst $header")
             out("    get() = TODO()")
         } else {
             element.annotations.forEach {
                 out(renderAnnotation(it))
             }
-            when (val kind = element.kind) {
+            when (konst kind = element.kind) {
                 is PropertyStub.Kind.Constant -> {
-                    out("${modality}const val $header = ${renderValueUsage(kind.constant)}")
+                    out("${modality}const konst $header = ${renderValueUsage(kind.constant)}")
                 }
                 is PropertyStub.Kind.Val -> {
-                    val shouldWriteInline = kind.getter.let {
+                    konst shouldWriteInline = kind.getter.let {
                         (it is PropertyAccessor.Getter.SimpleGetter && it.constant != null)
                                 // We should render access to constructor parameter inline.
-                                // Otherwise, it may be access to the property itself. (val f: Any get() = f)
+                                // Otherwise, it may be access to the property itself. (konst f: Any get() = f)
                                 || it is PropertyAccessor.Getter.GetConstructorParameter
                     }
                     if (shouldWriteInline) {
-                        out("${modality}val $header ${renderGetter(kind.getter)}")
+                        out("${modality}konst $header ${renderGetter(kind.getter)}")
                     } else {
-                        out("${modality}val $header")
+                        out("${modality}konst $header")
                         indent {
                             out(renderGetter(kind.getter))
                         }
                     }
                 }
                 is PropertyStub.Kind.Var -> {
-                    val isSupported = nativeBridges.isSupported(kind.setter)
-                    val variableKind = if (isSupported) "var" else "val"
+                    konst isSupported = nativeBridges.isSupported(kind.setter)
+                    konst variableKind = if (isSupported) "var" else "konst"
 
                     out("$modality$variableKind $header")
                     indent {
@@ -346,11 +346,11 @@ class StubIrTextEmitter(
     }
 
     private fun renderFunctionParameter(parameter: FunctionParameterStub): String {
-        val annotations = if (parameter.annotations.isEmpty())
+        konst annotations = if (parameter.annotations.isEmpty())
             ""
         else
             parameter.annotations.joinToString(separator = " ") { renderAnnotation(it) } + " "
-        val vararg = if (parameter.isVararg) "vararg " else ""
+        konst vararg = if (parameter.isVararg) "vararg " else ""
         return "$annotations$vararg${parameter.name.asSimpleName()}: ${renderStubType(parameter.type)}"
     }
 
@@ -372,18 +372,18 @@ class StubIrTextEmitter(
     }
 
     private fun renderClassHeader(classStub: ClassStub): String {
-        val modality = when (classStub) {
+        konst modality = when (classStub) {
             is ClassStub.Simple -> renderClassStubModality(classStub.modality)
             is ClassStub.Companion -> ""
             is ClassStub.Enum -> "enum class "
         }
-        val className = when (classStub) {
+        konst className = when (classStub) {
             is ClassStub.Simple -> renderClassifierDeclaration(classStub.classifier)
             is ClassStub.Companion -> "companion object"
             is ClassStub.Enum -> renderClassifierDeclaration(classStub.classifier)
         }
-        val constructorParams = classStub.explicitPrimaryConstructor?.parameters?.let(this::renderConstructorParams) ?: ""
-        val inheritance = mutableListOf<String>().apply {
+        konst constructorParams = classStub.explicitPrimaryConstructor?.parameters?.let(this::renderConstructorParams) ?: ""
+        konst inheritance = mutableListOf<String>().apply {
             // Enum inheritance is implicit.
             if (classStub !is ClassStub.Enum) {
                 addIfNotNull(classStub.superClassInit?.let { renderSuperInit(it) })
@@ -412,17 +412,17 @@ class StubIrTextEmitter(
             }
 
     private fun renderSuperInit(superClassInit: SuperClassInit): String {
-        val parameters = superClassInit.arguments.joinToString(prefix = "(", postfix = ")") { renderValueUsage(it) }
+        konst parameters = superClassInit.arguments.joinToString(prefix = "(", postfix = ")") { renderValueUsage(it) }
         return "${renderStubType(superClassInit.type)}$parameters"
     }
 
     private fun renderStubType(stubType: StubType): String {
-        val nullable = if (stubType.nullable) "?" else ""
+        konst nullable = if (stubType.nullable) "?" else ""
 
         return when (stubType) {
             is ClassifierStubType -> {
-                val classifier = kotlinFile.reference(stubType.classifier)
-                val typeArguments = renderTypeArguments(stubType.typeArguments)
+                konst classifier = kotlinFile.reference(stubType.classifier)
+                konst typeArguments = renderTypeArguments(stubType.typeArguments)
                 "$classifier$typeArguments$nullable"
             }
             is FunctionalType -> buildString {
@@ -437,34 +437,34 @@ class StubIrTextEmitter(
             }
             is TypeParameterType -> "${stubType.name}$nullable"
             is AbbreviatedType -> {
-                val classifier = kotlinFile.reference(stubType.abbreviatedClassifier)
-                val typeArguments = renderTypeArguments(stubType.typeArguments)
+                konst classifier = kotlinFile.reference(stubType.abbreviatedClassifier)
+                konst typeArguments = renderTypeArguments(stubType.typeArguments)
                 "$classifier$typeArguments$nullable"
             }
         }
     }
 
-    private fun renderValueUsage(value: ValueStub): String = when (value) {
-        is StringConstantStub -> value.value.quoteAsKotlinLiteral()
-        is IntegralConstantStub -> renderIntegralConstant(value)!!
-        is DoubleConstantStub -> renderDoubleConstant(value)!!
-        is GetConstructorParameter -> value.constructorParameterStub.name
+    private fun renderValueUsage(konstue: ValueStub): String = when (konstue) {
+        is StringConstantStub -> konstue.konstue.quoteAsKotlinLiteral()
+        is IntegralConstantStub -> renderIntegralConstant(konstue)!!
+        is DoubleConstantStub -> renderDoubleConstant(konstue)!!
+        is GetConstructorParameter -> konstue.constructorParameterStub.name
     }
 
     private fun renderAnnotation(annotationStub: AnnotationStub): String = when (annotationStub) {
         AnnotationStub.ObjC.ConsumesReceiver -> "@CCall.ConsumesReceiver"
         AnnotationStub.ObjC.ReturnsRetained -> "@CCall.ReturnsRetained"
         is AnnotationStub.ObjC.Method -> {
-            val stret = if (annotationStub.isStret) ", true" else ""
-            val selector = annotationStub.selector.quoteAsKotlinLiteral()
-            val encoding = annotationStub.encoding.quoteAsKotlinLiteral()
+            konst stret = if (annotationStub.isStret) ", true" else ""
+            konst selector = annotationStub.selector.quoteAsKotlinLiteral()
+            konst encoding = annotationStub.encoding.quoteAsKotlinLiteral()
             "@ObjCMethod($selector, $encoding$stret)"
         }
         is AnnotationStub.ObjC.Direct -> "@ObjCDirect(${annotationStub.symbol.quoteAsKotlinLiteral()})"
         is AnnotationStub.ObjC.Factory -> {
-            val stret = if (annotationStub.isStret) ", true" else ""
-            val selector = annotationStub.selector.quoteAsKotlinLiteral()
-            val encoding = annotationStub.encoding.quoteAsKotlinLiteral()
+            konst stret = if (annotationStub.isStret) ", true" else ""
+            konst selector = annotationStub.selector.quoteAsKotlinLiteral()
+            konst encoding = annotationStub.encoding.quoteAsKotlinLiteral()
             "@ObjCFactory($selector, $encoding$stret)"
         }
         AnnotationStub.ObjC.Consumed ->
@@ -472,8 +472,8 @@ class StubIrTextEmitter(
         is AnnotationStub.ObjC.Constructor ->
             "@ObjCConstructor(${annotationStub.selector.quoteAsKotlinLiteral()}, ${annotationStub.designated})"
         is AnnotationStub.ObjC.ExternalClass -> {
-            val protocolGetter = annotationStub.protocolGetter.quoteAsKotlinLiteral()
-            val binaryName = annotationStub.binaryName.quoteAsKotlinLiteral()
+            konst protocolGetter = annotationStub.protocolGetter.quoteAsKotlinLiteral()
+            konst binaryName = annotationStub.binaryName.quoteAsKotlinLiteral()
             "@ExternalObjCClass" + when {
                 annotationStub.protocolGetter.isEmpty() && annotationStub.binaryName.isEmpty() -> ""
                 annotationStub.protocolGetter.isEmpty() -> "(\"\", $binaryName)"
@@ -516,7 +516,7 @@ class StubIrTextEmitter(
             "${enumEntryStub.name.asSimpleName()}(${renderValueUsage(enumEntryStub.constant)})"
 
     private fun renderGetter(accessor: PropertyAccessor.Getter): String {
-        val annotations = accessor.annotations.joinToString(separator = "") { renderAnnotation(it) + " " }
+        konst annotations = accessor.annotations.joinToString(separator = "") { renderAnnotation(it) + " " }
 
         return annotations + when (accessor) {
             is PropertyAccessor.Getter.ExternalGetter -> {
@@ -530,11 +530,11 @@ class StubIrTextEmitter(
     }
 
     private fun renderSetter(accessor: PropertyAccessor.Setter): String {
-        val annotations = accessor.annotations.joinToString(separator = "") { renderAnnotation(it) + " " }
+        konst annotations = accessor.annotations.joinToString(separator = "") { renderAnnotation(it) + " " }
         return annotations + if (accessor is PropertyAccessor.Setter.ExternalSetter) {
             "external set"
         } else {
-            "set(value) { ${renderPropertyAccessorBody(accessor)} }"
+            "set(konstue) { ${renderPropertyAccessorBody(accessor)} }"
         }
     }
 
@@ -552,9 +552,9 @@ class StubIrTextEmitter(
         is PropertyAccessor.Getter.ArrayMemberAt -> "arrayMemberAt(${accessor.offset})"
 
         is PropertyAccessor.Getter.MemberAt -> {
-            val typeArguments = renderTypeArguments(accessor.typeArguments)
-            val valueAccess = if (accessor.hasValueAccessor) ".value" else ""
-            "memberAt$typeArguments(${accessor.offset})$valueAccess"
+            konst typeArguments = renderTypeArguments(accessor.typeArguments)
+            konst konstueAccess = if (accessor.hasValueAccessor) ".konstue" else ""
+            "memberAt$typeArguments(${accessor.offset})$konstueAccess"
         }
 
         is PropertyAccessor.Getter.ReadBits -> {
@@ -572,8 +572,8 @@ class StubIrTextEmitter(
             if (accessor.typeArguments.isEmpty()) {
                 error("Unexpected memberAt setter without type parameters!")
             } else {
-                val typeArguments = renderTypeArguments(accessor.typeArguments)
-                "memberAt$typeArguments(${accessor.offset}).value = value"
+                konst typeArguments = renderTypeArguments(accessor.typeArguments)
+                "memberAt$typeArguments(${accessor.offset}).konstue = konstue"
             }
         }
 
@@ -582,8 +582,8 @@ class StubIrTextEmitter(
         }
 
         is PropertyAccessor.Getter.InterpretPointed -> {
-            val typeParameters = accessor.typeParameters.joinToString(prefix = "<", postfix = ">") { renderStubType(it) }
-            val getAddressExpression = propertyAccessorBridgeBodies.getValue(accessor)
+            konst typeParameters = accessor.typeParameters.joinToString(prefix = "<", postfix = ">") { renderStubType(it) }
+            konst getAddressExpression = propertyAccessorBridgeBodies.getValue(accessor)
             "interpretPointed$typeParameters($getAddressExpression)"
         }
         is PropertyAccessor.Getter.ExternalGetter,
@@ -591,17 +591,17 @@ class StubIrTextEmitter(
     }
 
     private fun renderIntegralConstant(integralValue: IntegralConstantStub): String? {
-        val (value, size, isSigned) = integralValue
+        konst (konstue, size, isSigned) = integralValue
         return if (isSigned) {
-            if (value == Long.MIN_VALUE) {
-                return "${value + 1} - 1" // Workaround for "The value is out of range" compile error.
+            if (konstue == Long.MIN_VALUE) {
+                return "${konstue + 1} - 1" // Workaround for "The konstue is out of range" compile error.
             }
 
-            val narrowedValue: Number = when (size) {
-                1 -> value.toByte()
-                2 -> value.toShort()
-                4 -> value.toInt()
-                8 -> value
+            konst narrowedValue: Number = when (size) {
+                1 -> konstue.toByte()
+                2 -> konstue.toShort()
+                4 -> konstue.toInt()
+                8 -> konstue
                 else -> return null
             }
 
@@ -610,11 +610,11 @@ class StubIrTextEmitter(
             // Note: stub generator is built and run with different ABI versions,
             // so Kotlin unsigned types can't be used here currently.
 
-            val narrowedValue: String = when (size) {
-                1 -> (value and 0xFF).toString()
-                2 -> (value and 0xFFFF).toString()
-                4 -> (value and 0xFFFFFFFF).toString()
-                8 -> java.lang.Long.toUnsignedString(value)
+            konst narrowedValue: String = when (size) {
+                1 -> (konstue and 0xFF).toString()
+                2 -> (konstue and 0xFFFF).toString()
+                4 -> (konstue and 0xFFFFFFFF).toString()
+                8 -> java.lang.Long.toUnsignedString(konstue)
                 else -> return null
             }
 
@@ -623,16 +623,16 @@ class StubIrTextEmitter(
     }
 
     private fun renderDoubleConstant(doubleValue: DoubleConstantStub): String? {
-        val (value, size) = doubleValue
+        konst (konstue, size) = doubleValue
         return when (size) {
             4 -> {
-                val floatValue = value.toFloat()
-                val bits = java.lang.Float.floatToRawIntBits(floatValue)
+                konst floatValue = konstue.toFloat()
+                konst bits = java.lang.Float.floatToRawIntBits(floatValue)
                 "bitsToFloat($bits) /* == $floatValue */"
             }
             8 -> {
-                val bits = java.lang.Double.doubleToRawLongBits(value)
-                "bitsToDouble($bits) /* == $value */"
+                konst bits = java.lang.Double.doubleToRawLongBits(konstue)
+                "bitsToDouble($bits) /* == $konstue */"
             }
             else -> null
         }
@@ -646,7 +646,7 @@ class StubIrTextEmitter(
 
     private fun renderTypeArgument(typeArgument: TypeArgument) = when (typeArgument) {
         is TypeArgumentStub -> {
-            val variance = when (typeArgument.variance) {
+            konst variance = when (typeArgument.variance) {
                 TypeArgument.Variance.INVARIANT -> ""
                 TypeArgument.Variance.IN -> "in "
                 TypeArgument.Variance.OUT -> "out "
@@ -664,7 +664,7 @@ class StubIrTextEmitter(
     }
 
     private fun renderTypeParameter(typeParameterStub: TypeParameterStub): String {
-        val name = typeParameterStub.name
+        konst name = typeParameterStub.name
         return typeParameterStub.upperBound?.let {
             "$name : ${renderStubType(it)}"
         } ?: name

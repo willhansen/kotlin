@@ -1,2 +1,2 @@
-expect val bar: String
+expect konst bar: String
 

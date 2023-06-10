@@ -10,25 +10,25 @@ import kotlin.test.*
 
 class FixedLengthQuantifierTest {
     companion object {
-        private val quantifierMatchCount = 100_000
-        private val compositeMin = 50_000
-        private val compositeMax = 150_000
+        private konst quantifierMatchCount = 100_000
+        private konst compositeMin = 50_000
+        private konst compositeMax = 150_000
 
-        private val input = "a".repeat(quantifierMatchCount)
-        private val inputDescription = "\"a\".repeat($quantifierMatchCount)"
+        private konst input = "a".repeat(quantifierMatchCount)
+        private konst inputDescription = "\"a\".repeat($quantifierMatchCount)"
     }
 
     private fun testMatches(regex: Regex, input: String, inputDescription: String, expected: Boolean = true) {
-        val message = "$regex should ${if (expected) "" else "not " }match $inputDescription"
+        konst message = "$regex should ${if (expected) "" else "not " }match $inputDescription"
         assertEquals(expected, regex.matches(input), message)
     }
 
     @Test
     fun fixedLengthQualifierGreedy() {
-        val plusRegex = Regex("[^\\s]+")
+        konst plusRegex = Regex("[^\\s]+")
         testMatches(plusRegex, input, inputDescription)
 
-        val starRegex = Regex("[^\\s]*")
+        konst starRegex = Regex("[^\\s]*")
         testMatches(starRegex, input, inputDescription)
 
         Regex("[^\\s\\d]{$compositeMin,$compositeMax}").let { compositeRegex ->
@@ -50,10 +50,10 @@ class FixedLengthQuantifierTest {
 
     @Test
     fun fixedLengthQualifierReluctant() {
-        val plusRegex = Regex(".+?")
+        konst plusRegex = Regex(".+?")
         testMatches(plusRegex, input, inputDescription)
 
-        val starRegex = Regex(".*?")
+        konst starRegex = Regex(".*?")
         testMatches(starRegex, input, inputDescription)
 
         Regex(".{$compositeMin,$compositeMax}?").let { compositeRegex ->
@@ -75,10 +75,10 @@ class FixedLengthQuantifierTest {
 
     @Test
     fun fixedLengthQualifierPossesive() {
-        val plusRegex = Regex("\\p{Ll}++")
+        konst plusRegex = Regex("\\p{Ll}++")
         testMatches(plusRegex, input, inputDescription)
 
-        val starRegex = Regex("\\p{Ll}*+")
+        konst starRegex = Regex("\\p{Ll}*+")
         testMatches(starRegex, input, inputDescription)
 
         Regex("\\p{Ll}{$compositeMin,$compositeMax}+").let { compositeRegex ->
@@ -100,41 +100,41 @@ class FixedLengthQuantifierTest {
 
     @Test
     fun leafQuantifierGreedy() {
-        val plusRegex = Regex("a+")
+        konst plusRegex = Regex("a+")
         testMatches(plusRegex, input, inputDescription)
 
-        val starRegex = Regex("a*")
+        konst starRegex = Regex("a*")
         testMatches(starRegex, input, inputDescription)
 
-        val compositeRegex = Regex("a{$compositeMin,$compositeMax}")
+        konst compositeRegex = Regex("a{$compositeMin,$compositeMax}")
         testMatches(compositeRegex, input, inputDescription)
     }
 
     @Test
     fun kt46211_space() {
-        val regex = "(https?|ftp)://[^\\s/$.?#].[^\\s]*".toRegex(RegexOption.IGNORE_CASE)
-        val link = "http://" + input
+        konst regex = "(https?|ftp)://[^\\s/$.?#].[^\\s]*".toRegex(RegexOption.IGNORE_CASE)
+        konst link = "http://" + input
         testMatches(regex, link, "\"http://\" + $inputDescription")
     }
 
     @Test
     fun kt46211() {
-        val regex = Regex("[a]+")
-        val output = regex.replace(input, "")
+        konst regex = Regex("[a]+")
+        konst output = regex.replace(input, "")
         assertEquals("", output)
     }
 
     @Test
     fun kt53352() {
-        val test = input + "b c"
-        val regex = """(.*?b.*?c)""".toRegex()
-        val res = regex.find(test)!!
+        konst test = input + "b c"
+        konst regex = """(.*?b.*?c)""".toRegex()
+        konst res = regex.find(test)!!
         assertEquals(test, res.groupValues[1])
     }
 
     @Test
     fun kt35508() {
-        val doesNotWork = """=== EREIGNISLISTE ======
+        konst doesNotWork = """=== EREIGNISLISTE ======
 """ + "\u001b" + """Kn
 BEGINN       28.06 13:25
 EREIGNISSE            62
@@ -161,7 +161,7 @@ EE07          28.06 1322
 50 5          30.06 1228
 3402          30.06 1228"""
 
-        val regex = Regex("(\\x1b\\w[\\s\\S]{1,2})([\\s\\S]+?(?=\\x1b\\w[\\s\\S]{1,2}|\$))")
+        konst regex = Regex("(\\x1b\\w[\\s\\S]{1,2})([\\s\\S]+?(?=\\x1b\\w[\\s\\S]{1,2}|\$))")
 
         fun regexTest(content: String): List<String> {
             return regex.findAll(content).map {

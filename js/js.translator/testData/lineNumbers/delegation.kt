@@ -8,13 +8,13 @@ interface I {
     var bar: Int
 }
 
-val o = object : I {
+konst o = object : I {
     override fun foo(): String = "foo"
 
     override var bar: Int
         get() = 23
-        set(value) {
-            println(value)
+        set(konstue) {
+            println(konstue)
         }
 }
 

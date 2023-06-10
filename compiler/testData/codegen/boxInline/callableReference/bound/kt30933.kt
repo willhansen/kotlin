@@ -4,11 +4,11 @@
 package test
 
 class Path {
-    val events: String = "OK"
+    konst events: String = "OK"
 }
 
 inline fun doSomething(path: Path): String {
-    val f = path::events
+    konst f = path::events
     return f()
 }
 

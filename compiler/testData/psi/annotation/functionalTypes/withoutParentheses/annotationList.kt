@@ -1,29 +1,29 @@
 // Issue: KT-31734
 
-val x: (@[Foo] suspend (Int) -> Unit) get() = {}
+konst x: (@[Foo] suspend (Int) -> Unit) get() = {}
 
-val x: (@[Foo] () -> Unit) get() = {}
+konst x: (@[Foo] () -> Unit) get() = {}
 
-val x: (@[Foo] suspend () -> Unit) get() = {}
+konst x: (@[Foo] suspend () -> Unit) get() = {}
 
-val x: @[Foo] ((x: @[Foo] (@[Foo Foo] () -> Int) -> Int) -> Unit) get() = {}
+konst x: @[Foo] ((x: @[Foo] (@[Foo Foo] () -> Int) -> Int) -> Unit) get() = {}
 
-val x: suspend @[Foo] (x: @[Foo Foo] (@[Foo Foo] (x: kotlin.Any) -> Int) -> Int) -> Unit get() = {}
+konst x: suspend @[Foo] (x: @[Foo Foo] (@[Foo Foo] (x: kotlin.Any) -> Int) -> Int) -> Unit get() = {}
 
-val x: Comparable<@[Foo] @[Bar(10)] @[Foo] () -> Unit> get() = {}
+konst x: Comparable<@[Foo] @[Bar(10)] @[Foo] () -> Unit> get() = {}
 
-val x: Any = {} as @[Foo Foo] suspend (x: @[Foo] Foo) -> (y: @[Foo] Bar) -> Unit
+konst x: Any = {} as @[Foo Foo] suspend (x: @[Foo] Foo) -> (y: @[Foo] Bar) -> Unit
 
 fun foo(x: (@Foo ()->()->Unit)) = x
 
 fun foo(x: suspend @[Foo Foo(10)] @[Bar] (kotlin.Any) -> Unit = { x: Int -> x }) {}
 
 fun foo() {
-    val x: @[Foo(10)] @[Bar] (Coomparable<kotlin.Any>) -> Unit = {}
+    konst x: @[Foo(10)] @[Bar] (Coomparable<kotlin.Any>) -> Unit = {}
 }
 
 fun foo() {
-    val x = { x: suspend @[Foo Bar] (Coomparable<@[Foo Bar Bar Bar Bar Bar] @[Bar(10)] @[Foo Bar] () -> Unit>) -> () -> Unit -> x }
+    konst x = { x: suspend @[Foo Bar] (Coomparable<@[Foo Bar Bar Bar Bar Bar] @[Bar(10)] @[Foo Bar] () -> Unit>) -> () -> Unit -> x }
 }
 
 abstract class A {
@@ -36,7 +36,7 @@ fun foo(): @[Foo.Bar Foo.Bar(1)] suspend () -> Unit = {}
 
 fun foo(): () -> @[Foo.Bar] () -> Unit = {}
 
-val x: Any get() = fun(): @[Foo()] (Coomparable<Nothing>) -> Unit {}
+konst x: Any get() = fun(): @[Foo()] (Coomparable<Nothing>) -> Unit {}
 
 fun foo() {
     var x: (@[Foo Bar] (()->Unit)-> ()->Unit) -> Unit = {}

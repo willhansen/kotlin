@@ -1,6 +1,6 @@
 import test.*
 
 fun test(f: Foo) {
-    val bar = f.getBar()
+    konst bar = f.getBar()
     bar.bar()
 }

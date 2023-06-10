@@ -7,4 +7,4 @@ class A {
 
 fun create() = A()
 
-val foo = create()
+konst foo = create()

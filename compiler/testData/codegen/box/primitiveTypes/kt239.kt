@@ -1,5 +1,5 @@
 fun box() : String {
-    val i : Int? = 0
-    val j = i?.plus(3) //verify error
+    konst i : Int? = 0
+    konst j = i?.plus(3) //verify error
     return "OK"
 }

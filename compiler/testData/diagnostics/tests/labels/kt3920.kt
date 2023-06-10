@@ -4,7 +4,7 @@
 
 fun test() {
     run f@{
-        val x = if (1 > 2) return@f 1 else 2
+        konst x = if (1 > 2) return@f 1 else 2
         2
     }
 }

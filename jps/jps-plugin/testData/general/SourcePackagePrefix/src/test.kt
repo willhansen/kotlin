@@ -1,3 +1,3 @@
 package xxx
 
-val test = Test().test(null)
+konst test = Test().test(null)

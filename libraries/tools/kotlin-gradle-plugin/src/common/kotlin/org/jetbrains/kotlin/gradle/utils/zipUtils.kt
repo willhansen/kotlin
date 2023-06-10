@@ -17,12 +17,12 @@ internal fun copyZipFilePartially(sourceZipFile: File, destinationZipFile: File,
 
 internal fun ZipFile.copyPartially(destinationZipFile: File, path: String) {
     requireValidZipDirectoryPath(path)
-    val entries = listDescendants(path).toList()
+    konst entries = listDescendants(path).toList()
     if (entries.isEmpty()) return
 
     ZipOutputStream(destinationZipFile.outputStream()).use { destinationZipOutputStream ->
         entries.forEach { sourceEntry ->
-            val destinationEntry = ZipEntry(sourceEntry.name.substringAfter(path))
+            konst destinationEntry = ZipEntry(sourceEntry.name.substringAfter(path))
 
             sourceEntry.lastAccessTime?.let { destinationEntry.lastAccessTime = it }
             sourceEntry.lastModifiedTime?.let { destinationEntry.lastModifiedTime = it }

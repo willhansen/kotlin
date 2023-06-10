@@ -38,10 +38,10 @@ public abstract class JsVisitorWithContext {
         return doAccept(node);
     }
 
-    public JsExpression acceptLvalue(JsExpression expr) {
+    public JsExpression acceptLkonstue(JsExpression expr) {
         if (expr == null) return null;
 
-        return doAcceptLvalue(expr);
+        return doAcceptLkonstue(expr);
     }
 
     public final <T extends JsNode> void acceptList(List<T> collection) {
@@ -427,7 +427,7 @@ public abstract class JsVisitorWithContext {
 
     protected abstract  <T extends JsNode> T doAccept(T node);
 
-    protected abstract JsExpression doAcceptLvalue(JsExpression expr);
+    protected abstract JsExpression doAcceptLkonstue(JsExpression expr);
 
     protected abstract <T extends JsNode> void doAcceptList(List<T> collection);
 

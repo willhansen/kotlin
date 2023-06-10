@@ -15,17 +15,17 @@ class C() {
 }
 
 class B() {
-    val memberValC
+    konst memberValC
         get() = c
 }
-val c = C()
+konst c = C()
 
-val B.extensionValC: C
+konst B.extensionValC: C
     get() = c
 
 
 fun box(): String{
-    val b = B()
+    konst b = B()
     b memberValC 3         //resolved to (1)
     if (b.memberValC.isInvokeCalled) {
         c.isInvokeCalled = false

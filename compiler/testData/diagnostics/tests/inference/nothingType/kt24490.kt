@@ -8,6 +8,6 @@ fun dontRun(body: () -> Unit) = Unit
 
 class Case1 {
     fun test() {
-        dontRun { val x = bar(bar { -> bar { -> 2} }) }
+        dontRun { konst x = bar(bar { -> bar { -> 2} }) }
     }
 }

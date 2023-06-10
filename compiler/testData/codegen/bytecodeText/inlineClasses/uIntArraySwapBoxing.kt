@@ -2,15 +2,15 @@
 
 // FILE: utils.kt
 
-inline class UInt(private val value: Int) {
-    fun asInt() = value
+inline class UInt(private konst konstue: Int) {
+    fun asInt() = konstue
 }
 
-inline class UIntArray(private val intArray: IntArray) {
+inline class UIntArray(private konst intArray: IntArray) {
     operator fun get(index: Int): UInt = UInt(intArray[index])
 
-    operator fun set(index: Int, value: UInt) {
-        intArray[index] = value.asInt()
+    operator fun set(index: Int, konstue: UInt) {
+        intArray[index] = konstue.asInt()
     }
 }
 
@@ -25,4 +25,4 @@ fun UIntArray.swap(i: Int, j: Int) {
 // 0 INVOKESTATIC UInt\$Erased.box
 // 0 INVOKESTATIC UInt\.box
 // 0 intValue
-// 0 valueOf
+// 0 konstueOf

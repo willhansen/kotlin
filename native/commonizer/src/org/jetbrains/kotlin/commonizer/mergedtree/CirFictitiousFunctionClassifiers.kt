@@ -15,13 +15,13 @@ import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.types.Variance
 
 object CirFictitiousFunctionClassifiers : CirProvidedClassifiers {
-    private const val MIN_ARITY = 0
-    private const val MAX_ARITY = 255
+    private const konst MIN_ARITY = 0
+    private const konst MAX_ARITY = 255
 
-    private val FUNCTION_PREFIXES = arrayOf("Function", "SuspendFunction")
-    private val PACKAGE_NAME = CirPackageName.create("kotlin")
+    private konst FUNCTION_PREFIXES = arrayOf("Function", "SuspendFunction")
+    private konst PACKAGE_NAME = CirPackageName.create("kotlin")
 
-    private val classifiers: Map<CirEntityId, CirProvided.RegularClass> = THashMap<CirEntityId, CirProvided.RegularClass>().apply {
+    private konst classifiers: Map<CirEntityId, CirProvided.RegularClass> = THashMap<CirEntityId, CirProvided.RegularClass>().apply {
         (MIN_ARITY..MAX_ARITY).forEach { arity ->
             FUNCTION_PREFIXES.forEach { prefix ->
                 buildFictitiousFunctionClass(prefix, arity, this::set)
@@ -34,15 +34,15 @@ object CirFictitiousFunctionClassifiers : CirProvidedClassifiers {
     override fun findTypeAliasesWithUnderlyingType(underlyingClassifier: CirEntityId): List<CirEntityId> = emptyList()
 
     private inline fun buildFictitiousFunctionClass(prefix: String, arity: Int, consumer: (CirEntityId, CirProvided.RegularClass) -> Unit) {
-        val typeParameters = List(arity + 1) { index ->
+        konst typeParameters = List(arity + 1) { index ->
             CirProvided.TypeParameter(
                 index = index,
                 variance = if (index == arity) Variance.OUT_VARIANCE else Variance.IN_VARIANCE
             )
         }
 
-        val classId = CirEntityId.create(PACKAGE_NAME, CirName.create("$prefix$arity"))
-        val clazz = CirProvided.RegularClass(typeParameters, emptyList(), Visibilities.Public, ClassKind.INTERFACE)
+        konst classId = CirEntityId.create(PACKAGE_NAME, CirName.create("$prefix$arity"))
+        konst clazz = CirProvided.RegularClass(typeParameters, emptyList(), Visibilities.Public, ClassKind.INTERFACE)
 
         consumer(classId, clazz)
     }

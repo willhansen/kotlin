@@ -20,14 +20,14 @@ suspend fun <S> GenericController<S>.safeExtensionYield(s: S) {}
 
 fun <S> generate(g: suspend GenericController<S>.() -> Unit): List<S> = TODO()
 
-val normal = generate {
+konst normal = generate {
     yield(42)
 }
 
-val extension = generate {
+konst extension = generate {
     extensionYield("foo")
 }
 
-val safeExtension = generate {
+konst safeExtension = generate {
     safeExtensionYield("foo")
 }

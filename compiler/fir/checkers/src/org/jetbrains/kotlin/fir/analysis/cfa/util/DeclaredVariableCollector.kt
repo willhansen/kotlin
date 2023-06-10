@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
 // Note that [PreliminaryLoopVisitor] in FIR DFA collects assigned variable names.
 // This one collects declared variable symbols per capturing statements.
 class DeclaredVariableCollector {
-    val declaredVariablesPerElement: SetMultimap<FirStatement, FirPropertySymbol> = setMultimapOf()
+    konst declaredVariablesPerElement: SetMultimap<FirStatement, FirPropertySymbol> = setMultimapOf()
 
     fun enterCapturingStatement(statement: FirStatement): Set<FirPropertySymbol> {
         assert(statement is FirLoop || statement is FirClass || statement is FirFunction)
@@ -39,7 +39,7 @@ class DeclaredVariableCollector {
     }
 
     // FirStatement -- closest statement (loop/lambda/local declaration) which may contain reassignments
-    private val visitor = object : FirVisitor<Unit, FirStatement?>() {
+    private konst visitor = object : FirVisitor<Unit, FirStatement?>() {
         override fun visitElement(element: FirElement, data: FirStatement?) {
             element.acceptChildren(this, data)
         }

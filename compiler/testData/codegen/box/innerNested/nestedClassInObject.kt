@@ -4,7 +4,7 @@ object A {
 }
 
 fun box(): String {
-    val b = A.B()
-    val c = A.C<String>()
+    konst b = A.B()
+    konst c = A.C<String>()
     return "OK"
 }

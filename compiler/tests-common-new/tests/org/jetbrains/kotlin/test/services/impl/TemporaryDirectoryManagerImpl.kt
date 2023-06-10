@@ -14,24 +14,24 @@ import java.io.File
 import java.util.*
 
 class TemporaryDirectoryManagerImpl(testServices: TestServices) : TemporaryDirectoryManager(testServices) {
-    private val cache = mutableMapOf<String, File>()
-    private val rootTempDir: File = run {
-        val testInfo = testServices.testInfo
-        val className = testInfo.className
-        val methodName = testInfo.methodName
+    private konst cache = mutableMapOf<String, File>()
+    private konst rootTempDir: File = run {
+        konst testInfo = testServices.testInfo
+        konst className = testInfo.className
+        konst methodName = testInfo.methodName
         if (!onWindows && className.length + methodName.length < 255) {
             return@run KtTestUtil.tmpDirForTest(className, methodName)
         }
 
         // This code will simplify directory name for windows. This is needed because there can occur errors due to long name
-        val lastDot = className.lastIndexOf('.')
-        val packageName = className.substring(0, lastDot + 1)
-        val simplifiedClassName = className.substring(lastDot + 1).getOnlyUpperCaseSymbols()
-        val simplifiedMethodName = methodName.getOnlyUpperCaseSymbols()
+        konst lastDot = className.lastIndexOf('.')
+        konst packageName = className.substring(0, lastDot + 1)
+        konst simplifiedClassName = className.substring(lastDot + 1).getOnlyUpperCaseSymbols()
+        konst simplifiedMethodName = methodName.getOnlyUpperCaseSymbols()
         KtTestUtil.tmpDirForTest(packageName + simplifiedClassName, "test$simplifiedMethodName")
     }
 
-    override val rootDir: File
+    override konst rootDir: File
         get() = rootTempDir
 
     override fun getOrCreateTempDirectory(name: String): File {
@@ -44,7 +44,7 @@ class TemporaryDirectoryManagerImpl(testServices: TestServices) : TemporaryDirec
     }
 
     companion object {
-        private val onWindows: Boolean = System.getProperty("os.name").lowercase(Locale.getDefault()).contains("windows")
+        private konst onWindows: Boolean = System.getProperty("os.name").lowercase(Locale.getDefault()).contains("windows")
 
         private fun String.getOnlyUpperCaseSymbols(): String {
             return this.filter { it.isUpperCase() || it == '$' }.toList().joinToString(separator = "")

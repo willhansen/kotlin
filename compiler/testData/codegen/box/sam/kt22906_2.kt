@@ -6,9 +6,9 @@ package test
 
 class C {
     fun startTemplate(): String {
-        val y = object {
+        konst y = object {
             fun foo(): String {
-                val job = { "OK" }
+                konst job = { "OK" }
                 return java.util.concurrent.Callable(job).call()
             }
 
@@ -17,9 +17,9 @@ class C {
     }
 
     fun foo() {
-        val y = object {
+        konst y = object {
             fun foo(): String {
-                val job = { "OK2" }
+                konst job = { "OK2" }
                 return java.util.concurrent.Callable(job).call()
             }
 

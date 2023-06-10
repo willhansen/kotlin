@@ -16,7 +16,7 @@
 
 package org.jetbrains.kotlin.gradle.plugin.konan
 
-import org.gradle.api.InvalidUserDataException
+import org.gradle.api.InkonstidUserDataException
 import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.Input
@@ -33,22 +33,22 @@ import org.jetbrains.kotlin.library.SearchPathResolver
 import java.io.File
 
 open class KonanLibrariesSpec(
-        @Internal val task: KonanArtifactWithLibrariesTask,
-        @Internal val project: Project
+        @Internal konst task: KonanArtifactWithLibrariesTask,
+        @Internal konst project: Project
 ) {
 
-    @InputFiles val files = mutableSetOf<FileCollection>()
+    @InputFiles konst files = mutableSetOf<FileCollection>()
 
-    @Input val namedKlibs = mutableSetOf<String>()
+    @Input konst namedKlibs = mutableSetOf<String>()
 
-    @Internal val artifacts = mutableListOf<KonanBuildingTask>()
+    @Internal konst artifacts = mutableListOf<KonanBuildingTask>()
 
-    val artifactFiles: List<File>
+    konst artifactFiles: List<File>
         @InputFiles get() = artifacts.map { it.artifact }
 
-    @Internal val explicitRepos = mutableSetOf<File>()
+    @Internal konst explicitRepos = mutableSetOf<File>()
 
-    val repos: Set<File>
+    konst repos: Set<File>
         @Input get() = mutableSetOf<File>().apply {
             addAll(explicitRepos)
             add(task.destinationDir) // TODO: Check if task is a library - create a Library interface
@@ -58,13 +58,13 @@ open class KonanLibrariesSpec(
             addAll(task.platformConfiguration.files.map { it.parentFile })
         }
 
-    val target: KonanTarget
+    konst target: KonanTarget
         @Internal get() = task.konanTarget
 
-    private val friendsTasks = mutableSetOf<KonanBuildingTask>()
+    private konst friendsTasks = mutableSetOf<KonanBuildingTask>()
 
     @get:Internal // Taken into account by tasks's dependOn.
-    val friends: Set<File> get() = mutableSetOf<File>().apply {
+    konst friends: Set<File> get() = mutableSetOf<File>().apply {
         addAll(friendsTasks.map { it.artifact })
     }
 
@@ -82,14 +82,14 @@ open class KonanLibrariesSpec(
 
     private fun klibInternal(lib: KonanBuildingConfig<*>, friend: Boolean) {
         if (!(lib is KonanLibrary || lib is KonanInteropLibrary)) {
-            throw InvalidUserDataException("Config ${lib.name} is not a library")
+            throw InkonstidUserDataException("Config ${lib.name} is not a library")
         }
 
-        val libraryTask = lib[target]?.get() ?:
-            throw InvalidUserDataException("Library ${lib.name} has no target ${target.visibleName}")
+        konst libraryTask = lib[target]?.get() ?:
+            throw InkonstidUserDataException("Library ${lib.name} has no target ${target.visibleName}")
 
         if (libraryTask == task) {
-            throw InvalidUserDataException("Attempt to use a library as its own dependency: " +
+            throw InkonstidUserDataException("Attempt to use a library as its own dependency: " +
                     "${task.name} (in project: ${project.path})")
         }
         artifacts.add(libraryTask)
@@ -104,7 +104,7 @@ open class KonanLibrariesSpec(
 
     /** Artifact in the specified project by name */
     fun artifact(libraryProject: Project, name: String, friend: Boolean) {
-        project.evaluationDependsOn(libraryProject)
+        project.ekonstuationDependsOn(libraryProject)
         klibInternal(libraryProject.konanArtifactsContainer.getByName(name), friend)
     }
 
@@ -122,7 +122,7 @@ open class KonanLibrariesSpec(
     private fun allArtifactsFromInternal(libraryProjects: Array<out Project>,
                                          filter: (KonanBuildingConfig<*>) -> Boolean) {
         libraryProjects.forEach { prj ->
-            project.evaluationDependsOn(prj)
+            project.ekonstuationDependsOn(prj)
             prj.konanArtifactsContainer.filter(filter).forEach {
                 klibInternal(it, false)
             }
@@ -146,8 +146,8 @@ open class KonanLibrariesSpec(
     /** Add repos for library search */
     fun useRepos(directories: Iterable<Any>) = directories.forEach { useRepo(it) }
 
-    private fun Project.evaluationDependsOn(another: Project) {
-        if (this != another) { evaluationDependsOn(another.path) }
+    private fun Project.ekonstuationDependsOn(another: Project) {
+        if (this != another) { ekonstuationDependsOn(another.path) }
     }
 
     fun asFiles(): List<File> = asFiles(

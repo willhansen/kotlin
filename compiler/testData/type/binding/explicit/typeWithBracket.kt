@@ -1,6 +1,6 @@
 interface Inv<I>
 
-val foo: Inv<out ((Inv<Int>)?)> = null!!
+konst foo: Inv<out ((Inv<Int>)?)> = null!!
 /*
 psi: Inv<out ((Inv<Int>)?)>
 type: Inv<out Inv<Int>?>

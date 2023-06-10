@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC(val x: Int)
+konstue class IC(konst x: Int)
 
 abstract class A<T> {
     var t: T? = null
@@ -20,15 +20,15 @@ class B2: A<IC>(), I
 
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     b.t = IC(10)
     if (b.foo() != IC(10)) return "Fail 1"
 
-    val b2 = B2()
+    konst b2 = B2()
     b2.t = IC(10)
     if (b2.foo() != IC(10)) return "Fail 2"
 
-    val b2i: I = b2
+    konst b2i: I = b2
     if (b2i.foo() != IC(10)) return "Fail 3"
 
     return "OK"

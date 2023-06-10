@@ -12,7 +12,7 @@ inline fun max(a: Int, b: Int): Int {
 }
 
 fun box(): String {
-    val test = max(fizz(1), max(fizz(2), buzz(3)))
+    konst test = max(fizz(1), max(fizz(2), buzz(3)))
     assertEquals(3, test)
     assertEquals("fizz(1);fizz(2);buzz(3);max(2, 3);max(1, 3);", pullLog())
 

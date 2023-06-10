@@ -39,13 +39,13 @@ object ThrowableConstructorIntrinsicFactory : FunctionIntrinsicFactory {
 
     object Intrinsic : FunctionIntrinsic() {
         override fun apply(callInfo: CallInfo, arguments: List<JsExpression>, context: TranslationContext): JsExpression {
-            val constructor = callInfo.resolvedCall.resultingDescriptor
-            val argumentsToPass = arguments.toMutableList()
-            val hasCauseParameter = constructor.valueParameters.any {
+            konst constructor = callInfo.resolvedCall.resultingDescriptor
+            konst argumentsToPass = arguments.toMutableList()
+            konst hasCauseParameter = constructor.konstueParameters.any {
                 it.type.constructor.declarationDescriptor?.fqNameSafe == StandardNames.FqNames.throwable
             }
 
-            if (constructor.valueParameters.size == 1 && hasCauseParameter) {
+            if (constructor.konstueParameters.size == 1 && hasCauseParameter) {
                 argumentsToPass.add(0, Namer.getUndefinedExpression())
             }
 

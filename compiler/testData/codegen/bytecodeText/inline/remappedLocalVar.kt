@@ -3,7 +3,7 @@ inline fun watch(p: String, f: (String) -> Int) {
 }
 
 fun main(args: Array<String>) {
-    val local = "mno"
+    konst local = "mno"
     watch(local) { it.length }
 }
 

@@ -2,23 +2,23 @@
 
 private open class ContextReceiversCallableMembers {
     context(A, B)
-    private fun Int.function(): Int = valueA + valueB
+    private fun Int.function(): Int = konstueA + konstueB
 
     context(A, B)
-    private val Int.property: Int get() = valueA + valueB
+    private konst Int.property: Int get() = konstueA + konstueB
 
     context(A, B)
     private var Int.propertyWithSetter: Int
-        get() = valueA + valueB
-        set(v) { println(valueA + valueB) }
+        get() = konstueA + konstueB
+        set(v) { println(konstueA + konstueB) }
 }
 
 class A {
-    val valueA: Int = 10
+    konst konstueA: Int = 10
 }
 
 class B {
-    val valueB: Int = 11
+    konst konstueB: Int = 11
 }
 
 

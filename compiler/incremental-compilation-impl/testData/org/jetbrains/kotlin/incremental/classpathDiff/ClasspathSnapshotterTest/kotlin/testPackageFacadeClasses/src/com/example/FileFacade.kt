@@ -1,4 +1,4 @@
 package com.example
 
-val propertyInFileFacade = "propertyInFileFacade's value"
+konst propertyInFileFacade = "propertyInFileFacade's konstue"
 fun functionInFileFacade() = "functionInFileFacade's body"

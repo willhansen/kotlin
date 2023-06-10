@@ -8,7 +8,7 @@ open class Foo(y: Int) {
 class T : <!SUPERTYPE_NOT_INITIALIZED!>Foo<!> {}
 
 object A : <!SUPERTYPE_NOT_INITIALIZED!>Foo<!> {
-    val x: Int = 2
+    konst x: Int = 2
 
     fun test(): Int {
         return x + foo()
@@ -17,11 +17,11 @@ object A : <!SUPERTYPE_NOT_INITIALIZED!>Foo<!> {
 
 object B : <!SINGLETON_IN_SUPERTYPE!>A<!> {}
 
-val c = object : <!SUPERTYPE_NOT_INITIALIZED!>Foo<!> {}
+konst c = object : <!SUPERTYPE_NOT_INITIALIZED!>Foo<!> {}
 
-val x = A.foo()
+konst x = A.foo()
 
-val y = object : Foo(x) {
+konst y = object : Foo(x) {
     init {
         x + 12
     }
@@ -29,4 +29,4 @@ val y = object : Foo(x) {
     override fun foo(): Int = 1
 }
 
-val z = y.foo()
+konst z = y.foo()

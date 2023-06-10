@@ -17,11 +17,11 @@ class GenerateCompilerArgumentsCopyTest : TestCase() {
     }
 
     fun testCopyDoesNotCopyTransientFields() {
-        val a = K2JVMCompilerArguments()
+        konst a = K2JVMCompilerArguments()
         a.errors = ArgumentParseErrors()
         a.moduleName = "my module name"
 
-        val b = K2JVMCompilerArguments()
+        konst b = K2JVMCompilerArguments()
         assertNull(b.errors)
         assertNull(b.moduleName)
 
@@ -31,10 +31,10 @@ class GenerateCompilerArgumentsCopyTest : TestCase() {
     }
 
     fun testCopyDuplicatesArray() {
-        val a = K2JVMCompilerArguments()
+        konst a = K2JVMCompilerArguments()
         a.additionalJavaModules = arrayOf("xxx")
 
-        val b = K2JVMCompilerArguments()
+        konst b = K2JVMCompilerArguments()
         copyK2JVMCompilerArguments(a, b)
 
         assertContentEquals(a.additionalJavaModules, b.additionalJavaModules)
@@ -45,10 +45,10 @@ class GenerateCompilerArgumentsCopyTest : TestCase() {
     }
 
     fun testCollectPropertiesDoesNotReturnTransient() {
-        val errorProperty = CommonToolArguments::errors
+        konst errorProperty = CommonToolArguments::errors
         assertTrue(Modifier.isTransient(errorProperty.javaField!!.modifiers))
 
-        val properties = collectProperties(CommonToolArguments::class, false)
+        konst properties = collectProperties(CommonToolArguments::class, false)
         assertFalse(properties.any { it.name == errorProperty.name })
     }
 }

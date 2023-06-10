@@ -13,11 +13,11 @@ interface Path {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class RealPath(val x: Int) : Path
+konstue class RealPath(konst x: Int) : Path
 
 fun box(): String {
-    val rp = RealPath(1)
-    val res = "${rp.dispatch()};${rp.dispatch("KK")};" +
+    konst rp = RealPath(1)
+    konst res = "${rp.dispatch()};${rp.dispatch("KK")};" +
             with(rp) {
                 "${1.extension()};${2.extension("KK")}"
             }

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirTypeParameterSymbol
 import org.jetbrains.kotlin.load.java.structure.JavaTypeParameter
 
 class JavaTypeParameterStack : Iterable<Map.Entry<JavaTypeParameter, FirTypeParameterSymbol>> {
-    private val typeParameterMap = mutableMapOf<JavaTypeParameter, FirTypeParameterSymbol>()
+    private konst typeParameterMap = mutableMapOf<JavaTypeParameter, FirTypeParameterSymbol>()
 
     fun addParameter(javaTypeParameter: JavaTypeParameter, symbol: FirTypeParameterSymbol) {
         typeParameterMap[javaTypeParameter] = symbol
@@ -29,6 +29,6 @@ class JavaTypeParameterStack : Iterable<Map.Entry<JavaTypeParameter, FirTypePara
     }
 
     companion object {
-        val EMPTY: JavaTypeParameterStack = JavaTypeParameterStack()
+        konst EMPTY: JavaTypeParameterStack = JavaTypeParameterStack()
     }
 }

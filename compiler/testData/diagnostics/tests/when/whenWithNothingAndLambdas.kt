@@ -12,17 +12,17 @@
  * overload-resolution, determining-function-applicability-for-a-specific-call, description -> paragraph 1 -> sentence 3
  */
 
-val test1 = when {
+konst test1 = when {
     true -> { { true } }
     else -> TODO()
 }
 
-val test1a: () -> Boolean = when {
+konst test1a: () -> Boolean = when {
     true -> { { true } }
     else -> TODO()
 }
 
-val test2 = when {
+konst test2 = when {
     true -> { { true } }
     else -> when {
         true -> { { true } }
@@ -30,7 +30,7 @@ val test2 = when {
     }
 }
 
-val test2a: () -> Boolean = when {
+konst test2a: () -> Boolean = when {
     true -> { { true } }
     else -> when {
         true -> { { true } } // TODO
@@ -38,13 +38,13 @@ val test2a: () -> Boolean = when {
     }
 }
 
-val test3 = when {
+konst test3 = when {
     true -> { { true } }
     true -> { { true } }
     else -> TODO()
 }
 
-val test3a: () -> Boolean = when {
+konst test3a: () -> Boolean = when {
     true -> { { true } }
     true -> { { true } }
     else -> TODO()

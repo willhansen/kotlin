@@ -16,14 +16,14 @@
 
 package org.jetbrains.kotlin.konan.file
 
-val String.isJavaScript 
+konst String.isJavaScript 
     get() = this.endsWith(".js")
 
-val String.isUnixStaticLib
+konst String.isUnixStaticLib
     get() = this.endsWith(".a")
 
-val String.isWindowsStaticLib
+konst String.isWindowsStaticLib
     get() = this.endsWith(".lib")
 
-val String.isBitcode
+konst String.isBitcode
     get() = this.endsWith(".bc")

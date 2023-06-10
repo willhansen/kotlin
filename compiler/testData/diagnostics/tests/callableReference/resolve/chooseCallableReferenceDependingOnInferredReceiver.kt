@@ -17,17 +17,17 @@ fun <T> bar(f: (T) -> Unit): T = TODO()
 
 fun test() {
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>myWith<!>(A()) {
-        val t1 = bar(::foo)
+        konst t1 = bar(::foo)
         <!DEBUG_INFO_EXPRESSION_TYPE("A")!>t1<!>
 
-        val t2 = bar(::baz)
+        konst t2 = bar(::baz)
         <!DEBUG_INFO_EXPRESSION_TYPE("A")!>t2<!>
 
         <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>myWith<!>(B()) {
-            val a: A = bar(::foo)
-            val b: B = bar(::foo)
+            konst a: A = bar(::foo)
+            konst b: B = bar(::foo)
 
-            val t3 = bar(::baz)
+            konst t3 = bar(::baz)
             <!DEBUG_INFO_EXPRESSION_TYPE("B")!>t3<!>
 
             <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>bar<!>(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>foo<!>)

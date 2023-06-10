@@ -4,10 +4,10 @@ FILE: lambda.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val x: Int = R|<local>/x|
+        public? final? konst x: Int = R|<local>/x|
             public? get(): Int
 
-        public? final? val y: Int = R|<local>/y|
+        public? final? konst y: Int = R|<local>/y|
             public? get(): Int
 
         public? final operator fun component1(): Int
@@ -21,9 +21,9 @@ FILE: lambda.kt
     public? final? fun foo(): Int { LAZY_BLOCK }
     public? final? fun bar(): Int { LAZY_BLOCK }
     public? final? fun test(list: List<Int>): R|kotlin/Unit| { LAZY_BLOCK }
-    public? final? val simple: <implicit> = LAZY_EXPRESSION
+    public? final? konst simple: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val simpleWithArrow: <implicit> = LAZY_EXPRESSION
+    public? final? konst simpleWithArrow: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val another: <implicit> = LAZY_EXPRESSION
+    public? final? konst another: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>

@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-sealed class Operation(val left: Int, val right: Int) {
+sealed class Operation(konst left: Int, konst right: Int) {
     abstract fun exec(): Int
     class Plus(left: Int, right: Int): Operation(left, right) {
         override fun exec(): Int = left + right

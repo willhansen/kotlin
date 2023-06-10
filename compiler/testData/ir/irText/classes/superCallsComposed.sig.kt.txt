@@ -5,7 +5,7 @@ open class Base {
   // CHECK:
   //   Mangled name: Base{}bar
   //   Public signature: /Base.bar|-7864284097863469857[0]
-  open val bar: String
+  open konst bar: String
     // CHECK JVM_IR:
     //   Mangled name: Base#<get-bar>(){}kotlin.String
     //   Public signature: /Base.bar.<get-bar>|3423724227669014303[0]
@@ -43,7 +43,7 @@ class Derived : Base, BaseI {
   // CHECK:
   //   Mangled name: Derived{}bar
   //   Public signature: /Derived.bar|-7864284097863469857[0]
-  override val bar: String
+  override konst bar: String
     // CHECK JVM_IR:
     //   Mangled name: Derived#<get-bar>(){}kotlin.String
     //   Public signature: /Derived.bar.<get-bar>|3423724227669014303[0]
@@ -67,7 +67,7 @@ interface BaseI {
   // CHECK:
   //   Mangled name: BaseI{}bar
   //   Public signature: /BaseI.bar|-7864284097863469857[0]
-  abstract val bar: String
+  abstract konst bar: String
     // CHECK JVM_IR:
     //   Mangled name: BaseI#<get-bar>(){}kotlin.String
     //   Public signature: /BaseI.bar.<get-bar>|3423724227669014303[0]

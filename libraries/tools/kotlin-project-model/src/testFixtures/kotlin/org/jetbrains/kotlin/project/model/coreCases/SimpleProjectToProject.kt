@@ -15,8 +15,8 @@ object SimpleProjectToProject : KpmTestCaseDescriptor {
             macosX64()
         }
 
-        val a = project("a")
-        val b = project("b")
+        konst a = project("a")
+        konst b = project("b")
 
         a.depends(b)
     }

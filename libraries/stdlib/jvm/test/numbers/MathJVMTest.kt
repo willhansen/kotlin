@@ -11,7 +11,7 @@ import kotlin.math.*
 class MathJVMTest {
 
     @Test fun IEEEremainder() {
-        val data = arrayOf(  //  a    a IEEErem 2.5
+        konst data = arrayOf(  //  a    a IEEErem 2.5
                 doubleArrayOf(-2.0,   0.5),
                 doubleArrayOf(-1.25, -1.25),
                 doubleArrayOf( 0.0,   0.0),

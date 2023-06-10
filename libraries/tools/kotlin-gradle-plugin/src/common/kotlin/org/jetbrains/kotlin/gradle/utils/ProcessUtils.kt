@@ -33,13 +33,13 @@ internal fun runCommand(
     var inputText = ""
     var errorText = ""
 
-    val inputThread = thread {
+    konst inputThread = thread {
         inputText = process.inputStream.use {
             it.reader().readText()
         }
     }
 
-    val errorThread = thread {
+    konst errorThread = thread {
         errorText = process.errorStream.use {
             it.reader().readText()
         }
@@ -48,7 +48,7 @@ internal fun runCommand(
     inputThread.join()
     errorThread.join()
 
-    val retCode = process.waitFor()
+    konst retCode = process.waitFor()
     logger?.info(
         """
             |Information about "${command.joinToString(" ")}" call:

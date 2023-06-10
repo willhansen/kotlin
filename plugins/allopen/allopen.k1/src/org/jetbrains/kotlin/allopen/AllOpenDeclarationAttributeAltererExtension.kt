@@ -26,14 +26,14 @@ import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPrivate
 
 class CliAllOpenDeclarationAttributeAltererExtension(
-    private val allOpenAnnotationFqNames: List<String>
+    private konst allOpenAnnotationFqNames: List<String>
 ) : AbstractAllOpenDeclarationAttributeAltererExtension() {
     override fun getAnnotationFqNames(modifierListOwner: KtModifierListOwner?) = allOpenAnnotationFqNames
 }
 
 abstract class AbstractAllOpenDeclarationAttributeAltererExtension : DeclarationAttributeAltererExtension, AnnotationBasedExtension {
     companion object {
-        val ANNOTATIONS_FOR_TESTS = listOf("AllOpen", "AllOpen2", "test.AllOpen")
+        konst ANNOTATIONS_FOR_TESTS = listOf("AllOpen", "AllOpen2", "test.AllOpen")
     }
 
     override fun refineDeclarationModality(
@@ -47,7 +47,7 @@ abstract class AbstractAllOpenDeclarationAttributeAltererExtension : Declaration
             return null
         }
 
-        val descriptor = declaration as? ClassDescriptor ?: containingDeclaration ?: return null
+        konst descriptor = declaration as? ClassDescriptor ?: containingDeclaration ?: return null
         if (descriptor.hasSpecialAnnotation(modifierListOwner)) {
             return if (!isImplicitModality && modifierListOwner.hasModifier(KtTokens.FINAL_KEYWORD))
                 Modality.FINAL // Explicit final

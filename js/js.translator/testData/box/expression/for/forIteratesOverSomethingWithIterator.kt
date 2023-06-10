@@ -1,13 +1,13 @@
 // EXPECTED_REACHABLE_NODES: 1291
 package foo
 
-class Iter(val upper: Int) {
+class Iter(konst upper: Int) {
     var count: Int = 0
     operator fun hasNext(): Boolean = count < upper
     operator fun next(): Int = count++
 }
 
-class A(val upper: Int) {
+class A(konst upper: Int) {
     operator fun iterator(): Iter = Iter(upper)
 }
 

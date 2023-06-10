@@ -18,29 +18,29 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 interface FirResolvedDeclarationStatus : FirDeclarationStatus {
-    override val source: KtSourceElement?
-    override val visibility: Visibility
-    override val modality: Modality?
-    override val isExpect: Boolean
-    override val isActual: Boolean
-    override val isOverride: Boolean
-    override val isOperator: Boolean
-    override val isInfix: Boolean
-    override val isInline: Boolean
-    override val isTailRec: Boolean
-    override val isExternal: Boolean
-    override val isConst: Boolean
-    override val isLateInit: Boolean
-    override val isInner: Boolean
-    override val isCompanion: Boolean
-    override val isData: Boolean
-    override val isSuspend: Boolean
-    override val isStatic: Boolean
-    override val isFromSealedClass: Boolean
-    override val isFromEnumClass: Boolean
-    override val isFun: Boolean
-    override val hasStableParameterNames: Boolean
-    val effectiveVisibility: EffectiveVisibility
+    override konst source: KtSourceElement?
+    override konst visibility: Visibility
+    override konst modality: Modality?
+    override konst isExpect: Boolean
+    override konst isActual: Boolean
+    override konst isOverride: Boolean
+    override konst isOperator: Boolean
+    override konst isInfix: Boolean
+    override konst isInline: Boolean
+    override konst isTailRec: Boolean
+    override konst isExternal: Boolean
+    override konst isConst: Boolean
+    override konst isLateInit: Boolean
+    override konst isInner: Boolean
+    override konst isCompanion: Boolean
+    override konst isData: Boolean
+    override konst isSuspend: Boolean
+    override konst isStatic: Boolean
+    override konst isFromSealedClass: Boolean
+    override konst isFromEnumClass: Boolean
+    override konst isFun: Boolean
+    override konst hasStableParameterNames: Boolean
+    konst effectiveVisibility: EffectiveVisibility
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitResolvedDeclarationStatus(this, data)
 

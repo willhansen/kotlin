@@ -22,8 +22,8 @@ class RawProjectionComputer : ErasureProjectionComputer() {
             return super.computeProjection(parameter, typeAttr, typeParameterUpperBoundEraser, erasedUpperBound)
         }
 
-        // if erasure happens due to invalid arguments number, use star projections instead
-        val newTypeAttr = if (typeAttr.isRaw) typeAttr else typeAttr.withFlexibility(JavaTypeFlexibility.INFLEXIBLE)
+        // if erasure happens due to inkonstid arguments number, use star projections instead
+        konst newTypeAttr = if (typeAttr.isRaw) typeAttr else typeAttr.withFlexibility(JavaTypeFlexibility.INFLEXIBLE)
 
         return when (newTypeAttr.flexibility) {
             // Raw(List<T>) => (List<Any?>..List<*>)

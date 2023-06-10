@@ -5,7 +5,7 @@
 // FILE: 1.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class C<T: String>(val x: T)
+konstue class C<T: String>(konst x: T)
 
 // FILE: 2.kt
 @file:JvmMultifileClass
@@ -15,7 +15,7 @@ private var result: String? = null
 
 var String.k: C<String>
     get() = C(this + result!!)
-    set(value) { result = value.x }
+    set(konstue) { result = konstue.x }
 
 // FILE: 3.kt
 fun box(): String {

@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 external abstract open class A(
     o: String
 ) {
-    abstract val k: String
+    abstract konst k: String
 
     fun test(): String
 }
@@ -14,7 +14,7 @@ external abstract open class A(
 class B(
     o: String
 ) : A(o) {
-    override val k = "K"
+    override konst k = "K"
 }
 
 external fun test(

@@ -8,14 +8,14 @@ package org.jetbrains.kotlin.resolve.calls.model
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 
 interface PostponedResolvedAtomMarker {
-    val inputTypes: Collection<KotlinTypeMarker>
-    val outputType: KotlinTypeMarker?
-    val expectedType: KotlinTypeMarker?
-    val analyzed: Boolean
+    konst inputTypes: Collection<KotlinTypeMarker>
+    konst outputType: KotlinTypeMarker?
+    konst expectedType: KotlinTypeMarker?
+    konst analyzed: Boolean
 }
 
 interface PostponedAtomWithRevisableExpectedType : PostponedResolvedAtomMarker {
-    val revisedExpectedType: KotlinTypeMarker?
+    konst revisedExpectedType: KotlinTypeMarker?
 
     fun reviseExpectedType(expectedType: KotlinTypeMarker)
 }
@@ -23,7 +23,7 @@ interface PostponedAtomWithRevisableExpectedType : PostponedResolvedAtomMarker {
 interface PostponedCallableReferenceMarker : PostponedAtomWithRevisableExpectedType
 
 interface LambdaWithTypeVariableAsExpectedTypeMarker : PostponedAtomWithRevisableExpectedType {
-    val parameterTypesFromDeclaration: List<KotlinTypeMarker?>?
+    konst parameterTypesFromDeclaration: List<KotlinTypeMarker?>?
 
     fun updateParameterTypesFromDeclaration(types: List<KotlinTypeMarker?>?)
 }

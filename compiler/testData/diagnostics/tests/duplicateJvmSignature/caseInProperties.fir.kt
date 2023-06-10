@@ -1,2 +1,2 @@
-val aa = 1
-val Aa = 1
+konst aa = 1
+konst Aa = 1

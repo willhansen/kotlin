@@ -3,15 +3,15 @@
 // FILE: Test.java
 
 public abstract class Test<F> {
-    protected final F value = null;
+    protected final F konstue = null;
 }
 
 // FILE: test.kt
 // See KT-5445: Bad access to protected data in getfield
 
 class A : Test<String>() {
-    fun foo(): String? = value
-    fun bar(): String? = this.value
+    fun foo(): String? = konstue
+    fun bar(): String? = this.konstue
 }
 
 fun box(): String {

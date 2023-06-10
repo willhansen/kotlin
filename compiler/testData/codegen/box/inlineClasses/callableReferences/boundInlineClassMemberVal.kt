@@ -3,18 +3,18 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int) {
-    val xx get() = x
+konstue class Z(konst x: Int) {
+    konst xx get() = x
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L(val x: Long) {
-    val xx get() = x
+konstue class L(konst x: Long) {
+    konst xx get() = x
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val x: String) {
-    val xx get() = x
+konstue class S(konst x: String) {
+    konst xx get() = x
 }
 
 fun box(): String {

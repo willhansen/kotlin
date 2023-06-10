@@ -26,20 +26,20 @@ import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.psi2ir.generators.GeneratorWithScope
 
 internal class SafeCallReceiver(
-    val generator: GeneratorWithScope,
-    val startOffset: Int,
-    val endOffset: Int,
-    val extensionReceiver: IntermediateValue?,
-    val contextReceivers: List<IntermediateValue>,
-    val dispatchReceiver: IntermediateValue?,
-    val isStatement: Boolean
+    konst generator: GeneratorWithScope,
+    konst startOffset: Int,
+    konst endOffset: Int,
+    konst extensionReceiver: IntermediateValue?,
+    konst contextReceivers: List<IntermediateValue>,
+    konst dispatchReceiver: IntermediateValue?,
+    konst isStatement: Boolean
 ) : CallReceiver {
     override fun call(builder: CallExpressionBuilder): IrExpression {
-        val irTmp = generator.scope.createTemporaryVariable(extensionReceiver?.load() ?: dispatchReceiver!!.load(), "safe_receiver")
-        val safeReceiverValue = VariableLValue(generator.context, irTmp)
+        konst irTmp = generator.scope.createTemporaryVariable(extensionReceiver?.load() ?: dispatchReceiver!!.load(), "safe_receiver")
+        konst safeReceiverValue = VariableLValue(generator.context, irTmp)
 
-        val dispatchReceiverValue: IntermediateValue?
-        val extensionReceiverValue: IntermediateValue?
+        konst dispatchReceiverValue: IntermediateValue?
+        konst extensionReceiverValue: IntermediateValue?
         if (extensionReceiver != null) {
             dispatchReceiverValue = dispatchReceiver
             extensionReceiverValue = safeReceiverValue
@@ -48,15 +48,15 @@ internal class SafeCallReceiver(
             extensionReceiverValue = null
         }
 
-        val irResult = builder.withReceivers(dispatchReceiverValue, extensionReceiverValue, contextReceivers)
+        konst irResult = builder.withReceivers(dispatchReceiverValue, extensionReceiverValue, contextReceivers)
 
-        val resultType = if (isStatement) generator.context.irBuiltIns.unitType else irResult.type.makeNullable()
+        konst resultType = if (isStatement) generator.context.irBuiltIns.unitType else irResult.type.makeNullable()
 
-        val irBlock = IrBlockImpl(startOffset, endOffset, resultType, IrStatementOrigin.SAFE_CALL)
+        konst irBlock = IrBlockImpl(startOffset, endOffset, resultType, IrStatementOrigin.SAFE_CALL)
 
         irBlock.statements.add(irTmp)
 
-        val irIfThenElse =
+        konst irIfThenElse =
             generator.buildStatement(startOffset, endOffset, IrStatementOrigin.SAFE_CALL) {
                 irIfNull(resultType, safeReceiverValue.load(), irNull(), irResult)
             }

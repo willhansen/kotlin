@@ -25,7 +25,7 @@ public final class Order : Entity<kotlin.Int> {
 
 public abstract class SecuredEntity</*0*/ out E : Entity<kotlin.Int>> where E : SecurityCodeAware<*, *> {
     public constructor SecuredEntity</*0*/ out E : Entity<kotlin.Int>>(/*0*/ entity: E) where E : SecurityCodeAware<*, *>
-    public final val entity: E
+    public final konst entity: E
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -33,7 +33,7 @@ public abstract class SecuredEntity</*0*/ out E : Entity<kotlin.Int>> where E : 
 
 public final class SecuredOrder : SecuredEntity<Order> {
     public constructor SecuredOrder(/*0*/ order: Order)
-    public final override /*1*/ /*fake_override*/ val entity: Order
+    public final override /*1*/ /*fake_override*/ konst entity: Order
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

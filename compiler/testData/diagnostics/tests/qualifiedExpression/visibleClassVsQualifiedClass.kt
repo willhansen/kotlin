@@ -25,7 +25,7 @@ class a {}
 fun test(a_: a.<!UNRESOLVED_REFERENCE!>b<!>) {
     <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>a_<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>a_b<!>()
 
-    val a_2 = a.<!UNRESOLVED_REFERENCE!>b<!>()
+    konst a_2 = a.<!UNRESOLVED_REFERENCE!>b<!>()
     <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>a_2<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>a_b<!>()
     <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>a_2<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>some_ab<!>()
     <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>a_2<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>a_<!>()
@@ -43,7 +43,7 @@ class a {
 fun test(_ab: a.b) {
     _ab.other2_ab()
 
-    val _ab2 = a.b()
+    konst _ab2 = a.b()
     _ab2.other2_ab()
 }
 
@@ -53,6 +53,6 @@ package some
 fun test(_ab: a.b) {
     _ab.some_ab()
 
-    val _ab2 = a.b()
+    konst _ab2 = a.b()
     _ab2.some_ab()
 }

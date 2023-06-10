@@ -72,7 +72,7 @@ public actual inline fun UShortArray.elementAt(index: Int): UShort {
 @ExperimentalUnsignedTypes
 public actual fun UIntArray.asList(): List<UInt> {
     return object : AbstractList<UInt>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: UInt): Boolean = this@asList.contains(element)
         override fun get(index: Int): UInt = this@asList[index]
@@ -88,7 +88,7 @@ public actual fun UIntArray.asList(): List<UInt> {
 @ExperimentalUnsignedTypes
 public actual fun ULongArray.asList(): List<ULong> {
     return object : AbstractList<ULong>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: ULong): Boolean = this@asList.contains(element)
         override fun get(index: Int): ULong = this@asList[index]
@@ -104,7 +104,7 @@ public actual fun ULongArray.asList(): List<ULong> {
 @ExperimentalUnsignedTypes
 public actual fun UByteArray.asList(): List<UByte> {
     return object : AbstractList<UByte>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: UByte): Boolean = this@asList.contains(element)
         override fun get(index: Int): UByte = this@asList[index]
@@ -120,7 +120,7 @@ public actual fun UByteArray.asList(): List<UByte> {
 @ExperimentalUnsignedTypes
 public actual fun UShortArray.asList(): List<UShort> {
     return object : AbstractList<UShort>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: UShort): Boolean = this@asList.contains(element)
         override fun get(index: Int): UShort = this@asList[index]
@@ -151,13 +151,13 @@ public actual fun UShortArray.asList(): List<UShort> {
 @ExperimentalUnsignedTypes
 public fun UIntArray.binarySearch(element: UInt, fromIndex: Int = 0, toIndex: Int = size): Int {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val signedElement = element.toInt()
+    konst signedElement = element.toInt()
     var low = fromIndex
     var high = toIndex - 1
     while (low <= high) {
-        val mid = (low + high).ushr(1) // safe from overflows
-        val midVal = storage[mid]
-        val cmp = uintCompare(midVal, signedElement)
+        konst mid = (low + high).ushr(1) // safe from overflows
+        konst midVal = storage[mid]
+        konst cmp = uintCompare(midVal, signedElement)
         if (cmp < 0)
             low = mid + 1
         else if (cmp > 0)
@@ -190,13 +190,13 @@ public fun UIntArray.binarySearch(element: UInt, fromIndex: Int = 0, toIndex: In
 @ExperimentalUnsignedTypes
 public fun ULongArray.binarySearch(element: ULong, fromIndex: Int = 0, toIndex: Int = size): Int {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val signedElement = element.toLong()
+    konst signedElement = element.toLong()
     var low = fromIndex
     var high = toIndex - 1
     while (low <= high) {
-        val mid = (low + high).ushr(1) // safe from overflows
-        val midVal = storage[mid]
-        val cmp = ulongCompare(midVal, signedElement)
+        konst mid = (low + high).ushr(1) // safe from overflows
+        konst midVal = storage[mid]
+        konst cmp = ulongCompare(midVal, signedElement)
         if (cmp < 0)
             low = mid + 1
         else if (cmp > 0)
@@ -229,13 +229,13 @@ public fun ULongArray.binarySearch(element: ULong, fromIndex: Int = 0, toIndex: 
 @ExperimentalUnsignedTypes
 public fun UByteArray.binarySearch(element: UByte, fromIndex: Int = 0, toIndex: Int = size): Int {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val signedElement = element.toInt()
+    konst signedElement = element.toInt()
     var low = fromIndex
     var high = toIndex - 1
     while (low <= high) {
-        val mid = (low + high).ushr(1) // safe from overflows
-        val midVal = storage[mid]
-        val cmp = uintCompare(midVal.toInt(), signedElement)
+        konst mid = (low + high).ushr(1) // safe from overflows
+        konst midVal = storage[mid]
+        konst cmp = uintCompare(midVal.toInt(), signedElement)
         if (cmp < 0)
             low = mid + 1
         else if (cmp > 0)
@@ -268,13 +268,13 @@ public fun UByteArray.binarySearch(element: UByte, fromIndex: Int = 0, toIndex: 
 @ExperimentalUnsignedTypes
 public fun UShortArray.binarySearch(element: UShort, fromIndex: Int = 0, toIndex: Int = size): Int {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val signedElement = element.toInt()
+    konst signedElement = element.toInt()
     var low = fromIndex
     var high = toIndex - 1
     while (low <= high) {
-        val mid = (low + high).ushr(1) // safe from overflows
-        val midVal = storage[mid]
-        val cmp = uintCompare(midVal.toInt(), signedElement)
+        konst mid = (low + high).ushr(1) // safe from overflows
+        konst midVal = storage[mid]
+        konst cmp = uintCompare(midVal.toInt(), signedElement)
         if (cmp < 0)
             low = mid + 1
         else if (cmp > 0)
@@ -510,7 +510,7 @@ public fun UShortArray.minWith(comparator: Comparator<in UShort>): UShort? {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -528,7 +528,7 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> java.math.BigDecimal): jav
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -546,7 +546,7 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> java.math.BigDecimal): j
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -564,7 +564,7 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> java.math.BigDecimal): j
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -582,7 +582,7 @@ public inline fun UShortArray.sumOf(selector: (UShort) -> java.math.BigDecimal):
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -600,7 +600,7 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> java.math.BigInteger): jav
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -618,7 +618,7 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> java.math.BigInteger): j
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -636,7 +636,7 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> java.math.BigInteger): j
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)

@@ -66,8 +66,8 @@ open class StubIndexService protected constructor() {
 
     @Throws(IOException::class)
     open fun deserializeFileStub(dataStream: StubInputStream): KotlinFileStub {
-        val packageFqNameAsString = dataStream.readName()
-        val isScript = dataStream.readBoolean()
+        konst packageFqNameAsString = dataStream.readName()
+        konst isScript = dataStream.readBoolean()
         return KotlinFileStubImpl(null, packageFqNameAsString!!.string, isScript)
     }
 
@@ -77,6 +77,6 @@ open class StubIndexService protected constructor() {
             return ApplicationManager.getApplication().getService(StubIndexService::class.java) ?: NO_INDEX
         }
 
-        private val NO_INDEX = StubIndexService()
+        private konst NO_INDEX = StubIndexService()
     }
 }

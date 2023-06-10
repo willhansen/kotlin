@@ -32,7 +32,7 @@ namespace internal {
 // TODO: Consider merging with `MultiSourceQueue` somehow.
 template <size_t DataAlignment, typename Allocator, typename DataSizeProvider>
 class ObjectFactoryStorage : private Pinned {
-    static_assert(IsValidAlignment(DataAlignment), "DataAlignment is not a valid alignment");
+    static_assert(IsValidAlignment(DataAlignment), "DataAlignment is not a konstid alignment");
 
     template <typename T>
     class Deleter {

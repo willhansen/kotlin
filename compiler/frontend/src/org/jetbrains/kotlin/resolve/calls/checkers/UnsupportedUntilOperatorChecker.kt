@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 
 object UnsupportedUntilOperatorChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val calleeExpression = resolvedCall.call.calleeExpression as? KtOperationReferenceExpression ?: return
-        val isRangeUntilOperatorSupported = context.languageVersionSettings.supportsFeature(LanguageFeature.RangeUntilOperator)
+        konst calleeExpression = resolvedCall.call.calleeExpression as? KtOperationReferenceExpression ?: return
+        konst isRangeUntilOperatorSupported = context.languageVersionSettings.supportsFeature(LanguageFeature.RangeUntilOperator)
 
         if (calleeExpression.operationSignTokenType == KtTokens.RANGE_UNTIL && !isRangeUntilOperatorSupported) {
             context.trace.report(

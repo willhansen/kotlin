@@ -31,10 +31,10 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 import java.util.*
 
 class KotlinClassInnerStuffCache(
-    private val myClass: KtExtensibleLightClass,
-    private val dependencies: List<Any>,
-    private val lazyCreator: LazyCreator,
-    private val generateEnumMethods: Boolean = true,
+    private konst myClass: KtExtensibleLightClass,
+    private konst dependencies: List<Any>,
+    private konst lazyCreator: LazyCreator,
+    private konst generateEnumMethods: Boolean = true,
 ) {
     abstract class LazyCreator {
         abstract fun <T : Any> get(initializer: () -> T, dependencies: List<Any>): Lazy<T>
@@ -42,22 +42,22 @@ class KotlinClassInnerStuffCache(
 
     private fun <T : Any> cache(initializer: () -> T): Lazy<T> = lazyCreator.get(initializer, dependencies)
 
-    private val constructorsCache = cache { PsiImplUtil.getConstructors(myClass) }
+    private konst constructorsCache = cache { PsiImplUtil.getConstructors(myClass) }
 
-    val constructors: Array<PsiMethod>
-        get() = copy(constructorsCache.value)
+    konst constructors: Array<PsiMethod>
+        get() = copy(constructorsCache.konstue)
 
-    private val fieldsCache = cache {
-        val own = myClass.ownFields
-        val ext = collectAugments(myClass, PsiField::class.java)
+    private konst fieldsCache = cache {
+        konst own = myClass.ownFields
+        konst ext = collectAugments(myClass, PsiField::class.java)
         ArrayUtil.mergeCollections(own, ext, PsiField.ARRAY_FACTORY)
     }
 
-    val fields: Array<PsiField>
-        get() = copy(fieldsCache.value)
+    konst fields: Array<PsiField>
+        get() = copy(fieldsCache.konstue)
 
-    private val methodsCache = cache {
-        val own = myClass.ownMethods
+    private konst methodsCache = cache {
+        konst own = myClass.ownMethods
         var ext = collectAugments(myClass, PsiMethod::class.java)
         if (generateEnumMethods && myClass.isEnum) {
             ext = ArrayList<PsiMethod>(ext.size + 2).also {
@@ -70,20 +70,20 @@ class KotlinClassInnerStuffCache(
         ArrayUtil.mergeCollections(own, ext, PsiMethod.ARRAY_FACTORY)
     }
 
-    val methods: Array<PsiMethod>
-        get() = copy(methodsCache.value)
+    konst methods: Array<PsiMethod>
+        get() = copy(methodsCache.konstue)
 
-    private val innerClassesCache = cache {
-        val own = myClass.ownInnerClasses
-        val ext = collectAugments(myClass, PsiClass::class.java)
+    private konst innerClassesCache = cache {
+        konst own = myClass.ownInnerClasses
+        konst ext = collectAugments(myClass, PsiClass::class.java)
         ArrayUtil.mergeCollections(own, ext, PsiClass.ARRAY_FACTORY)
     }
 
-    val innerClasses: Array<out PsiClass>
-        get() = copy(innerClassesCache.value)
+    konst innerClasses: Array<out PsiClass>
+        get() = copy(innerClassesCache.konstue)
 
-    private val fieldByNameCache = cache {
-        val fields = this.fields.takeIf { it.isNotEmpty() } ?: return@cache emptyMap()
+    private konst fieldByNameCache = cache {
+        konst fields = this.fields.takeIf { it.isNotEmpty() } ?: return@cache emptyMap()
         Collections.unmodifiableMap(THashMap<String, PsiField>(fields.size).apply {
             for (field in fields) {
                 putIfAbsent(field.name, field)
@@ -95,12 +95,12 @@ class KotlinClassInnerStuffCache(
         return if (checkBases) {
             PsiClassImplUtil.findFieldByName(myClass, name, true)
         } else {
-            fieldByNameCache.value[name]
+            fieldByNameCache.konstue[name]
         }
     }
 
-    private val methodByNameCache = cache {
-        val methods = this.methods.takeIf { it.isNotEmpty() } ?: return@cache emptyMap()
+    private konst methodByNameCache = cache {
+        konst methods = this.methods.takeIf { it.isNotEmpty() } ?: return@cache emptyMap()
         Collections.unmodifiableMap(THashMap<String, Array<PsiMethod>>().apply {
             for ((key, list) in methods.groupByTo(HashMap()) { it.name }) {
                 put(key, list.toTypedArray())
@@ -112,16 +112,16 @@ class KotlinClassInnerStuffCache(
         return if (checkBases) {
             PsiClassImplUtil.findMethodsByName(myClass, name, true)
         } else {
-            copy(methodByNameCache.value[name] ?: PsiMethod.EMPTY_ARRAY)
+            copy(methodByNameCache.konstue[name] ?: PsiMethod.EMPTY_ARRAY)
         }
     }
 
-    private val innerClassByNameCache = cache {
-        val classes = this.innerClasses.takeIf { it.isNotEmpty() } ?: return@cache emptyMap()
+    private konst innerClassByNameCache = cache {
+        konst classes = this.innerClasses.takeIf { it.isNotEmpty() } ?: return@cache emptyMap()
 
         Collections.unmodifiableMap(THashMap<String, PsiClass>().apply {
             for (psiClass in classes) {
-                val name = psiClass.name
+                konst name = psiClass.name
                 if (name == null) {
                     Logger.getInstance(KotlinClassInnerStuffCache::class.java).error(psiClass)
                 } else if (psiClass !is ExternallyDefinedPsiElement || !containsKey(name)) {
@@ -135,25 +135,25 @@ class KotlinClassInnerStuffCache(
         return if (checkBases) {
             PsiClassImplUtil.findInnerByName(myClass, name, true)
         } else {
-            innerClassByNameCache.value[name]
+            innerClassByNameCache.konstue[name]
         }
     }
 
-    private val valuesMethodCache = cache { KotlinEnumSyntheticMethod(myClass, KotlinEnumSyntheticMethod.Kind.VALUES) }
+    private konst konstuesMethodCache = cache { KotlinEnumSyntheticMethod(myClass, KotlinEnumSyntheticMethod.Kind.VALUES) }
 
     private fun getValuesMethod(): PsiMethod? {
         if (myClass.isEnum && !myClass.isAnonymous && !isClassNameSealed()) {
-            return valuesMethodCache.value
+            return konstuesMethodCache.konstue
         }
 
         return null
     }
 
-    private val valueOfMethodCache = cache { KotlinEnumSyntheticMethod(myClass, KotlinEnumSyntheticMethod.Kind.VALUE_OF) }
+    private konst konstueOfMethodCache = cache { KotlinEnumSyntheticMethod(myClass, KotlinEnumSyntheticMethod.Kind.VALUE_OF) }
 
     fun getValueOfMethod(): PsiMethod? {
         if (myClass.isEnum && !myClass.isAnonymous) {
-            return valueOfMethodCache.value
+            return konstueOfMethodCache.konstue
         }
 
         return null
@@ -165,28 +165,28 @@ class KotlinClassInnerStuffCache(
 }
 
 private class KotlinEnumSyntheticMethod(
-    private val enumClass: KtExtensibleLightClass,
-    private val kind: Kind
+    private konst enumClass: KtExtensibleLightClass,
+    private konst kind: Kind
 ) : LightElement(enumClass.manager, enumClass.language), KtLightMethod, SyntheticElement {
-    enum class Kind(val methodName: String) {
-        VALUE_OF("valueOf"), VALUES("values"), ENTRIES("getEntries"),
+    enum class Kind(konst methodName: String) {
+        VALUE_OF("konstueOf"), VALUES("konstues"), ENTRIES("getEntries"),
     }
 
-    private val returnType = run {
-        val elementFactory = JavaPsiFacade.getElementFactory(project)
-        val enumTypeWithoutAnnotation = elementFactory.createType(enumClass)
-        val enumType = enumTypeWithoutAnnotation
+    private konst returnType = run {
+        konst elementFactory = JavaPsiFacade.getElementFactory(project)
+        konst enumTypeWithoutAnnotation = elementFactory.createType(enumClass)
+        konst enumType = enumTypeWithoutAnnotation
             .annotate { arrayOf(makeNotNullAnnotation(enumClass)) }
 
         when (kind) {
             Kind.VALUE_OF -> enumType
             Kind.VALUES -> enumType.createArrayType().annotate { arrayOf(makeNotNullAnnotation(enumClass)) }
             Kind.ENTRIES -> {
-                val enumEntriesClass = JavaPsiFacade.getInstance(project).findClass(
+                konst enumEntriesClass = JavaPsiFacade.getInstance(project).findClass(
                     /* qualifiedName = */ StandardClassIds.EnumEntries.asFqNameString(),
                     /* scope = */ resolveScope
                 )
-                val type = if (enumEntriesClass != null) {
+                konst type = if (enumEntriesClass != null) {
                     elementFactory.createType(enumEntriesClass, enumTypeWithoutAnnotation)
                 } else {
                     elementFactory.createTypeFromText(
@@ -199,10 +199,10 @@ private class KotlinEnumSyntheticMethod(
         }
     }
 
-    private val parameterList = LightParameterListBuilder(manager, language).apply {
+    private konst parameterList = LightParameterListBuilder(manager, language).apply {
         if (kind == Kind.VALUE_OF) {
-            val stringType = PsiType.getJavaLangString(manager, GlobalSearchScope.allScope(project))
-            val valueParameter =
+            konst stringType = PsiType.getJavaLangString(manager, GlobalSearchScope.allScope(project))
+            konst konstueParameter =
                 object : LightParameter(
                     DEFAULT_VALUE_PARAMETER.identifier,
                     stringType,
@@ -210,8 +210,8 @@ private class KotlinEnumSyntheticMethod(
                     language,
                     false
                 ), KtLightParameter {
-                    override val method: KtLightMethod get() = this@KotlinEnumSyntheticMethod
-                    override val kotlinOrigin: KtParameter? get() = null
+                    override konst method: KtLightMethod get() = this@KotlinEnumSyntheticMethod
+                    override konst kotlinOrigin: KtParameter? get() = null
                     override fun getParent(): PsiElement = this@KotlinEnumSyntheticMethod
                     override fun getContainingFile(): PsiFile = this@KotlinEnumSyntheticMethod.containingFile
 
@@ -219,14 +219,14 @@ private class KotlinEnumSyntheticMethod(
                     override fun getTextRange(): TextRange = TextRange.EMPTY_RANGE
                 }
 
-            addParameter(valueParameter)
+            addParameter(konstueParameter)
         }
     }
 
-    private val modifierList = object : LightModifierList(manager, language, PsiModifier.PUBLIC, PsiModifier.STATIC) {
+    private konst modifierList = object : LightModifierList(manager, language, PsiModifier.PUBLIC, PsiModifier.STATIC) {
         override fun getParent() = this@KotlinEnumSyntheticMethod
 
-        private val annotations = arrayOf(makeNotNullAnnotation(enumClass))
+        private konst annotations = arrayOf(makeNotNullAnnotation(enumClass))
 
         override fun findAnnotation(fqn: String): PsiAnnotation? = annotations.firstOrNull { it.hasQualifiedName(fqn) }
         override fun getAnnotations(): Array<PsiAnnotation> = copy(annotations)
@@ -288,9 +288,9 @@ private class KotlinEnumSyntheticMethod(
     override fun getTypeParameterList(): PsiTypeParameterList? = null
     override fun getTypeParameters(): Array<PsiTypeParameter> = PsiTypeParameter.EMPTY_ARRAY
 
-    override val isMangled: Boolean get() = false
-    override val lightMemberOrigin: LightMemberOrigin? get() = null
-    override val kotlinOrigin: KtDeclaration? get() = null
+    override konst isMangled: Boolean get() = false
+    override konst lightMemberOrigin: LightMemberOrigin? get() = null
+    override konst kotlinOrigin: KtDeclaration? get() = null
 
     override fun getText(): String = ""
     override fun getTextRange(): TextRange = TextRange.EMPTY_RANGE
@@ -305,11 +305,11 @@ private class KotlinEnumSyntheticMethod(
     }
 }
 
-private val PsiClass.isAnonymous: Boolean
+private konst PsiClass.isAnonymous: Boolean
     get() = name == null || this is PsiAnonymousClass
 
-private fun <T> copy(value: Array<T>): Array<T> {
-    return if (value.isEmpty()) value else value.clone()
+private fun <T> copy(konstue: Array<T>): Array<T> {
+    return if (konstue.isEmpty()) konstue else konstue.clone()
 }
 
 fun getEnumEntriesPsiMethod(enumClass: KtExtensibleLightClass): PsiMethod =

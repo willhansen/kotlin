@@ -24,7 +24,7 @@ KtFile: simpleFieldAnnotation.kt
                   REFERENCE_EXPRESSION
                     PsiElement(IDENTIFIER)('Deprecated')
         PsiWhiteSpace('\n    ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')

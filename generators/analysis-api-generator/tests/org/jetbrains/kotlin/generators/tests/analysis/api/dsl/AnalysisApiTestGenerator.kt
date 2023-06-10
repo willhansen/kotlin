@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.generators.tests.analysis.api.dsl
 import org.jetbrains.kotlin.generators.TestGroupSuite
 import org.jetbrains.kotlin.generators.generateTestGroupSuiteWithJUnit5
 
-internal class AnalysisApiTestGenerator(val suite: TestGroupSuite) {
+internal class AnalysisApiTestGenerator(konst suite: TestGroupSuite) {
     fun group(init: AnalysisApiTestGroup.() -> Unit) {
         AnalysisApiTestGroup(this, { true }, null).init()
     }

@@ -13,7 +13,7 @@ fun interface Cmp<T> {
 fun cmp(c: Cmp<*>) = c
 
 fun box(): String {
-    val c = cmp { _, _ -> 0 } as Cmp<Any>
+    konst c = cmp { _, _ -> 0 } as Cmp<Any>
     if (c.compare(1, 2) != 0)
         return "Failed"
     return "OK"

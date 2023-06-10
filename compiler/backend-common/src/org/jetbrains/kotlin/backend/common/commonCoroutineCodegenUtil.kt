@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.descriptors.isTopLevelInPackage
 import org.jetbrains.kotlin.name.Name
 
-val COROUTINE_SUSPENDED_NAME = Name.identifier("COROUTINE_SUSPENDED")
+konst COROUTINE_SUSPENDED_NAME = Name.identifier("COROUTINE_SUSPENDED")
 
 fun FunctionDescriptor.isBuiltInSuspendCoroutineUninterceptedOrReturn(): Boolean =
     isTopLevelInPackage(

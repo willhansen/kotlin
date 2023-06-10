@@ -23,11 +23,11 @@ open class JvmScriptingHostConfigurationBuilder : JvmScriptingHostConfigurationK
 }
 
 @Deprecated("Unused")
-val JvmScriptingHostConfigurationKeys.javaHome by PropertiesCollection.key<File>(File(System.getProperty("java.home")))
+konst JvmScriptingHostConfigurationKeys.javaHome by PropertiesCollection.key<File>(File(System.getProperty("java.home")))
 
-val JvmScriptingHostConfigurationKeys.jdkHome by PropertiesCollection.key<File>()
+konst JvmScriptingHostConfigurationKeys.jdkHome by PropertiesCollection.key<File>()
 
-val JvmScriptingHostConfigurationKeys.baseClassLoader by PropertiesCollection.key<ClassLoader>(
+konst JvmScriptingHostConfigurationKeys.baseClassLoader by PropertiesCollection.key<ClassLoader>(
     {
         get(ScriptingHostConfiguration.configurationDependencies)?.let {
             URLClassLoader(it.toClassPathOrEmpty().map { f -> f.toURI().toURL() }.toTypedArray(), null)
@@ -37,10 +37,10 @@ val JvmScriptingHostConfigurationKeys.baseClassLoader by PropertiesCollection.ke
 )
 
 @Suppress("unused")
-val ScriptingHostConfigurationKeys.jvm
+konst ScriptingHostConfigurationKeys.jvm
     get() = JvmScriptingHostConfigurationBuilder()
 
-val defaultJvmScriptingHostConfiguration
+konst defaultJvmScriptingHostConfiguration
     get() = ScriptingHostConfiguration {
         getScriptingClass(JvmGetScriptingClass())
     }
@@ -58,7 +58,7 @@ class JvmGetScriptingClass : GetScriptingClassByClassLoader, Serializable {
     private var classLoader: ClassLoader? = null
 
     @Transient
-    // TODO: find out whether Transient fields are initialized on deserialization and if so, convert back to not-nullable val
+    // TODO: find out whether Transient fields are initialized on deserialization and if so, convert back to not-nullable konst
     private var baseClassLoaderIsInitialized: Boolean? = null
 
     @Transient
@@ -75,14 +75,14 @@ class JvmGetScriptingClass : GetScriptingClassByClassLoader, Serializable {
     ): KClass<*> {
 
         // checking if class already loaded in the same context
-        val fromClass = classType.fromClass
+        konst fromClass = classType.fromClass
         if (fromClass != null) {
             if (fromClass.java.classLoader == null) return fromClass // root classloader
-            val actualClassLoadersChain = generateSequence(contextClassLoader) { it.parent }
+            konst actualClassLoadersChain = generateSequence(contextClassLoader) { it.parent }
             if (actualClassLoadersChain.any { it == fromClass.java.classLoader }) return fromClass
         }
 
-        val newDeps = hostConfiguration[ScriptingHostConfiguration.configurationDependencies]
+        konst newDeps = hostConfiguration[ScriptingHostConfiguration.configurationDependencies]
         if (dependencies == null) {
             dependencies = newDeps
         } else {
@@ -97,12 +97,12 @@ class JvmGetScriptingClass : GetScriptingClassByClassLoader, Serializable {
         }
         // TODO: this check breaks testLazyScriptDefinition, find out the reason and fix
 //        else if (baseClassLoader != null) {
-//            val baseClassLoadersChain = generateSequence(baseClassLoader) { it.parent }
+//            konst baseClassLoadersChain = generateSequence(baseClassLoader) { it.parent }
 //            if (baseClassLoadersChain.none { it == contextClassloader }) throw IllegalArgumentException("scripting class instantiation context changed")
 //        }
 
         if (classLoader == null) {
-            val classpath = dependencies?.flatMap { dependency ->
+            konst classpath = dependencies?.flatMap { dependency ->
                 when (dependency) {
                     is JvmDependency -> dependency.classpath.map { it.toURI().toURL() }
                     else -> throw IllegalArgumentException("unknown dependency type $dependency")
@@ -137,6 +137,6 @@ class JvmGetScriptingClass : GetScriptingClassByClassLoader, Serializable {
     }
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

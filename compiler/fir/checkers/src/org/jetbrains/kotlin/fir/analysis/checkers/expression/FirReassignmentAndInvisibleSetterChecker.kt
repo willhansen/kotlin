@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.fir.analysis.checkers.expression
 import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.reportOn
-import org.jetbrains.kotlin.fir.analysis.cfa.evaluatedInPlace
+import org.jetbrains.kotlin.fir.analysis.cfa.ekonstuatedInPlace
 import org.jetbrains.kotlin.fir.analysis.cfa.requiresInitialization
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.context.findClosest
@@ -44,7 +44,7 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker()
     ) {
         fun shouldInvisibleSetterBeReported(symbol: FirPropertySymbol): Boolean {
             @OptIn(SymbolInternals::class)
-            val setterFir = symbol.setterSymbol?.fir ?: symbol.originalForSubstitutionOverride?.setterSymbol?.fir
+            konst setterFir = symbol.setterSymbol?.fir ?: symbol.originalForSubstitutionOverride?.setterSymbol?.fir
             if (setterFir != null) {
                 return !context.session.visibilityChecker.isVisible(
                     setterFir,
@@ -58,12 +58,12 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker()
             return false
         }
 
-        val callableSymbol = expression.calleeReference?.toResolvedCallableSymbol()
+        konst callableSymbol = expression.calleeReference?.toResolvedCallableSymbol()
         if (callableSymbol is FirPropertySymbol && shouldInvisibleSetterBeReported(callableSymbol)) {
-            val explicitReceiver = expression.explicitReceiver
+            konst explicitReceiver = expression.explicitReceiver
             // Try to get type from smartcast
             if (explicitReceiver is FirSmartCastExpression) {
-                val symbol = explicitReceiver.originalExpression.typeRef.toRegularClassSymbol(context.session)
+                konst symbol = explicitReceiver.originalExpression.typeRef.toRegularClassSymbol(context.session)
                 if (symbol != null) {
                     for (declarationSymbol in symbol.declarationSymbols) {
                         if (declarationSymbol is FirPropertySymbol && declarationSymbol.name == callableSymbol.name) {
@@ -90,10 +90,10 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker()
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val backingFieldReference = expression.calleeReference as? FirBackingFieldReference ?: return
-        val propertySymbol = backingFieldReference.resolvedSymbol
+        konst backingFieldReference = expression.calleeReference as? FirBackingFieldReference ?: return
+        konst propertySymbol = backingFieldReference.resolvedSymbol
         if (propertySymbol.isVar) return
-        val closestGetter = context.findClosest<FirPropertyAccessor> { it.isGetter }?.symbol ?: return
+        konst closestGetter = context.findClosest<FirPropertyAccessor> { it.isGetter }?.symbol ?: return
         if (propertySymbol.getterSymbol != closestGetter) return
 
         reporter.reportOn(backingFieldReference.source, FirErrors.VAL_REASSIGNMENT_VIA_BACKING_FIELD, propertySymbol, context)
@@ -104,8 +104,8 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker()
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val valueParameter = expression.calleeReference?.toResolvedValueParameterSymbol() ?: return
-        reporter.reportOn(expression.lValue.source, FirErrors.VAL_REASSIGNMENT, valueParameter, context)
+        konst konstueParameter = expression.calleeReference?.toResolvedValueParameterSymbol() ?: return
+        reporter.reportOn(expression.lValue.source, FirErrors.VAL_REASSIGNMENT, konstueParameter, context)
     }
 
     private fun checkVariableExpected(
@@ -113,7 +113,7 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker()
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val calleeReference = expression.calleeReference
+        konst calleeReference = expression.calleeReference
 
         if (expression.unwrapLValue() !is FirPropertyAccessExpression ||
             (calleeReference?.isConflictingError() != true && calleeReference?.toResolvedVariableSymbol() == null)
@@ -125,7 +125,7 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker()
     private fun FirReference.isConflictingError(): Boolean {
         if (!isError()) return false
 
-        return when (val it = diagnostic) {
+        return when (konst it = diagnostic) {
             is ConeSimpleDiagnostic -> it.kind == DiagnosticKind.VariableExpected
             is ConeUnresolvedNameError -> true
             is ConeDiagnosticWithCandidates -> it.candidates.any { it.symbol is FirPropertySymbol }
@@ -134,9 +134,9 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker()
     }
 
     private fun checkValReassignment(expression: FirVariableAssignment, context: CheckerContext, reporter: DiagnosticReporter) {
-        val property = expression.calleeReference?.toResolvedPropertySymbol() ?: return
+        konst property = expression.calleeReference?.toResolvedPropertySymbol() ?: return
         if (property.isVar) return
-        // Assignments of uninitialized `val`s must be checked via CFG, since the first one is OK.
+        // Assignments of uninitialized `konst`s must be checked via CFG, since the first one is OK.
         // See `FirPropertyInitializationAnalyzer` for locals and `FirMemberPropertiesChecker` for backing fields in initializers.
         if (property.isLocal && property.requiresInitialization(isForClassInitialization = false)) return
         if (
@@ -148,11 +148,11 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker()
     }
 
     private fun isInOwnersInitializer(receiver: FirExpression, context: CheckerContext): Boolean {
-        val uninitializedThisSymbol = (receiver as? FirThisReceiverExpression)?.calleeReference?.boundSymbol ?: return false
+        konst uninitializedThisSymbol = (receiver as? FirThisReceiverExpression)?.calleeReference?.boundSymbol ?: return false
         var foundInitializer = false
         for ((i, declaration) in context.containingDeclarations.withIndex()) {
             if (declaration is FirClass) {
-                foundInitializer = if (context.containingDeclarations.getOrNull(i + 1)?.evaluatedInPlace == false) {
+                foundInitializer = if (context.containingDeclarations.getOrNull(i + 1)?.ekonstuatedInPlace == false) {
                     // In member function of a class, assume all outer classes are already initialized
                     // by the time this function is called.
                     false

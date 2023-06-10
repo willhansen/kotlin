@@ -18,34 +18,34 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 import org.jetbrains.kotlin.types.*
 
 class NewCallableReferenceResolvedCall<D : CallableDescriptor>(
-    val resolvedAtom: ResolvedCallableReferenceAtom,
-    override val typeApproximator: TypeApproximator,
-    override val languageVersionSettings: LanguageVersionSettings,
+    konst resolvedAtom: ResolvedCallableReferenceAtom,
+    override konst typeApproximator: TypeApproximator,
+    override konst languageVersionSettings: LanguageVersionSettings,
     substitutor: NewTypeSubstitutor? = null,
 ) : NewAbstractResolvedCall<D>() {
-    override val positionDependentApproximation: Boolean = true
-    override val argumentMappingByOriginal: Map<ValueParameterDescriptor, ResolvedCallArgument> = emptyMap()
-    override val diagnostics: Collection<KotlinCallDiagnostic> = emptyList()
+    override konst positionDependentApproximation: Boolean = true
+    override konst argumentMappingByOriginal: Map<ValueParameterDescriptor, ResolvedCallArgument> = emptyMap()
+    override konst diagnostics: Collection<KotlinCallDiagnostic> = emptyList()
 
-    override val resolvedCallAtom: ResolvedCallableReferenceCallAtom?
+    override konst resolvedCallAtom: ResolvedCallableReferenceCallAtom?
         get() = when (resolvedAtom) {
             is ResolvedCallableReferenceCallAtom -> resolvedAtom
             is ResolvedCallableReferenceArgumentAtom -> resolvedAtom.candidate?.resolvedCall
         }
 
-    override val psiKotlinCall: PSIKotlinCall =
+    override konst psiKotlinCall: PSIKotlinCall =
         when (resolvedAtom) {
             is ResolvedCallableReferenceCallAtom -> resolvedAtom.atom.psiKotlinCall
             is ResolvedCallableReferenceArgumentAtom -> resolvedAtom.atom.call.psiKotlinCall
         }
 
-    override val freshSubstitutor: FreshVariableNewTypeSubstitutor?
+    override konst freshSubstitutor: FreshVariableNewTypeSubstitutor?
         get() = when (resolvedAtom) {
             is ResolvedCallableReferenceCallAtom -> resolvedAtom.freshVariablesSubstitutor
             is ResolvedCallableReferenceArgumentAtom -> resolvedAtom.candidate?.freshVariablesSubstitutor
         }
 
-    override val kotlinCall: KotlinCall?
+    override konst kotlinCall: KotlinCall?
         get() = when (resolvedAtom) {
             is ResolvedCallableReferenceArgumentAtom -> resolvedAtom.candidate?.kotlinCall?.call
             is ResolvedCallableReferenceCallAtom -> resolvedAtom.atom
@@ -90,10 +90,10 @@ class NewCallableReferenceResolvedCall<D : CallableDescriptor>(
     }
 
     override fun getResultingDescriptor(): D = resultingDescriptor
-    override fun getArgumentMapping(valueArgument: ValueArgument): ArgumentMapping = ArgumentUnmapped
+    override fun getArgumentMapping(konstueArgument: ValueArgument): ArgumentMapping = ArgumentUnmapped
 
     override fun getTypeArguments(): Map<TypeParameterDescriptor, KotlinType> {
-        val typeParameters = candidateDescriptor.typeParameters.takeIf { it.isNotEmpty() } ?: return emptyMap()
+        konst typeParameters = candidateDescriptor.typeParameters.takeIf { it.isNotEmpty() } ?: return emptyMap()
         return typeParameters.zip(typeArguments).toMap()
     }
 
@@ -118,7 +118,7 @@ class NewCallableReferenceResolvedCall<D : CallableDescriptor>(
 
         freshSubstitutor?.let { freshSubstitutor ->
             typeArguments = freshSubstitutor.freshVariables.map {
-                val substituted = (substitutor ?: FreshVariableNewTypeSubstitutor.Empty).safeSubstitute(it.defaultType)
+                konst substituted = (substitutor ?: FreshVariableNewTypeSubstitutor.Empty).safeSubstitute(it.defaultType)
                 typeApproximator.approximateToSuperType(substituted, TypeApproximatorConfiguration.IntegerLiteralsTypesApproximation)
                     ?: substituted
             }
@@ -129,7 +129,7 @@ class NewCallableReferenceResolvedCall<D : CallableDescriptor>(
 
     override fun argumentToParameterMap(
         resultingDescriptor: CallableDescriptor,
-        valueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>
+        konstueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>
     ): Map<ValueArgument, ArgumentMatchImpl> = emptyMap()
 
     init {

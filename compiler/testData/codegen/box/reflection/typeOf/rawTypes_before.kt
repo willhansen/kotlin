@@ -12,16 +12,16 @@ import kotlin.reflect.typeOf
 class C<T, U : Number>
 
 fun box(): String {
-    val v1 = returnTypeOf { J.raw() }.toString()
+    konst v1 = returnTypeOf { J.raw() }.toString()
     if (v1 != "test.C<kotlin.Any?, kotlin.Number>") return "Fail 1: $v1"
 
-    val v2 = returnTypeOf { J.rawNotNull() }.toString()
+    konst v2 = returnTypeOf { J.rawNotNull() }.toString()
     if (v2 != "test.C<kotlin.Any?, kotlin.Number>") return "Fail 2: $v2"
 
-    val v3 = returnTypeOf { J.rawList() }.toString()
+    konst v3 = returnTypeOf { J.rawList() }.toString()
     if (v3 != "kotlin.collections.List<kotlin.Any?>") return "Fail 3: $v3"
 
-    val v4 = returnTypeOf { J.rawNotNullMap() }.toString()
+    konst v4 = returnTypeOf { J.rawNotNullMap() }.toString()
     if (v4 != "kotlin.collections.Map<kotlin.Any?, kotlin.Any?>") return "Fail 4: $v4"
 
     return "OK"

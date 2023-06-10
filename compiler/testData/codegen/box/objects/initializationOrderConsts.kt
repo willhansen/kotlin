@@ -3,9 +3,9 @@
 var result = "OK"
 
 object A {
-    val x = "O${foo()}"
+    konst x = "O${foo()}"
     fun foo() = y
-    const val y = "K"
+    const konst y = "K"
 }
 
 fun box(): String {

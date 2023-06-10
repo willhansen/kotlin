@@ -27,16 +27,16 @@ import java.util.jar.JarFile
 class JarOutputTest : TestCaseWithTmpdir() {
 
     fun testDeterministicOutput() {
-        val fooKt = tmpdir.resolve("foo.kt").also {
+        konst fooKt = tmpdir.resolve("foo.kt").also {
             it.writeText("class Foo")
         }
 
-        val firstJar = tmpdir.resolve("first.jar")
+        konst firstJar = tmpdir.resolve("first.jar")
         AbstractCliTest.executeCompilerGrabOutput(
             K2JVMCompiler(),
             listOf(fooKt.path, "-d", firstJar.path, "-include-runtime"))
 
-        val secondJar = tmpdir.resolve("second.jar")
+        konst secondJar = tmpdir.resolve("second.jar")
         AbstractCliTest.executeCompilerGrabOutput(
             K2JVMCompiler(),
             listOf(fooKt.path, "-d", secondJar.path, "-include-runtime"))
@@ -50,10 +50,10 @@ class JarOutputTest : TestCaseWithTmpdir() {
     }
 
     fun testNoResetJarTimestamps() {
-        val fooKt = tmpdir.resolve("foo.kt").also {
+        konst fooKt = tmpdir.resolve("foo.kt").also {
             it.writeText("class Foo")
         }
-        val jar = tmpdir.resolve("jarWithTimestamps.jar")
+        konst jar = tmpdir.resolve("jarWithTimestamps.jar")
         AbstractCliTest.executeCompilerGrabOutput(
             K2JVMCompiler(),
             listOf(fooKt.path, "-d", jar.path, "-include-runtime", "-Xno-reset-jar-timestamps"))
@@ -65,10 +65,10 @@ class JarOutputTest : TestCaseWithTmpdir() {
      *  KT-44078
      */
     fun testNoModuleInfoClass() {
-        val fooKt = tmpdir.resolve("foo.kt").also {
+        konst fooKt = tmpdir.resolve("foo.kt").also {
             it.writeText("class Foo")
         }
-        val jar = tmpdir.resolve("jarWithoutModuleInfoClass.jar")
+        konst jar = tmpdir.resolve("jarWithoutModuleInfoClass.jar")
         AbstractCliTest.executeCompilerGrabOutput(
             K2JVMCompiler(),
             listOf(fooKt.path, "-d", jar.path, "-include-runtime")

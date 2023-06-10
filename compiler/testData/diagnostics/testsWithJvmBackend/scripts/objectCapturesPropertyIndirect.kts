@@ -3,10 +3,10 @@
 
 fun foo() = B.bar()
 
-val life = 42
+konst life = 42
 
 class A {
-    val x = life
+    konst x = life
 }
 
 <!SCRIPT_CAPTURING_OBJECT!>object B<!> {

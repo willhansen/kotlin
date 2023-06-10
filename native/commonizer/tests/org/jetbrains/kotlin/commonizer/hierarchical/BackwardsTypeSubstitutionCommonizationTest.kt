@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class BackwardsTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test sample 0`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -58,7 +58,7 @@ class BackwardsTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommoniz
     }
 
     fun `test sample 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(

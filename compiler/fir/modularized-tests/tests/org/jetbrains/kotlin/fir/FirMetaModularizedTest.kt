@@ -23,26 +23,26 @@ class FirMetaModularizedTest {
 
     @Test
     fun doTest() {
-        val runtimeBean = ManagementFactory.getRuntimeMXBean()
-        val javaExePath = when {
+        konst runtimeBean = ManagementFactory.getRuntimeMXBean()
+        konst javaExePath = when {
             SystemInfo.isWindows -> "\\bin\\java.exe"
             else -> "/bin/java"
         }
-        val jvmCommand = System.getProperty("java.home") + javaExePath
+        konst jvmCommand = System.getProperty("java.home") + javaExePath
 
-        val runCount = System.getProperty("fir.bench.multirun.count").toInt()
+        konst runCount = System.getProperty("fir.bench.multirun.count").toInt()
 
 
-        val startTimestamp = System.currentTimeMillis()
-        val file = FileUtil.createTempFile("classpath_container", ".jar")
+        konst startTimestamp = System.currentTimeMillis()
+        konst file = FileUtil.createTempFile("classpath_container", ".jar")
         file.deleteOnExit()
-        val manifest = Manifest()
+        konst manifest = Manifest()
         manifest.mainAttributes.putValue(Attributes.Name.MANIFEST_VERSION.toString(), "1.0")
         manifest.mainAttributes.putValue(Attributes.Name.MAIN_CLASS.toString(), StandaloneModularizedTestRunner::class.java.canonicalName)
         manifest.mainAttributes.putValue(
             Attributes.Name.CLASS_PATH.toString(),
             runtimeBean.classPath.split(File.pathSeparator).joinToString(" ") {
-                val f = File(it)
+                konst f = File(it)
                 f.toURI().toString()
             }
         )
@@ -52,7 +52,7 @@ class FirMetaModularizedTest {
 
 
         for (i in 0 until runCount) {
-            val pb = ProcessBuilder()
+            konst pb = ProcessBuilder()
                 .inheritIO()
                 .command(
                     jvmCommand,
@@ -62,7 +62,7 @@ class FirMetaModularizedTest {
                 )
                 .directory(File("").absoluteFile)
 
-            val process = pb.start()
+            konst process = pb.start()
 
             assertEquals(0, process.waitFor(), "Forked test should complete normally")
         }

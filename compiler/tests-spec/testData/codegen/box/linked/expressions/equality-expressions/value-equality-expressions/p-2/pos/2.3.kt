@@ -4,17 +4,17 @@
  * KOTLIN CODEGEN BOX SPEC TEST (POSITIVE)
  *
  * SPEC VERSION: 0.1-218
- * MAIN LINK: expressions, equality-expressions, value-equality-expressions -> paragraph 2 -> sentence 2
+ * MAIN LINK: expressions, equality-expressions, konstue-equality-expressions -> paragraph 2 -> sentence 2
  * NUMBER: 3
- * DESCRIPTION: check value-equality-expression
+ * DESCRIPTION: check konstue-equality-expression
  */
 
 
 //A != B is exactly the same as !((A as? Any)?.equals(B) ?: (B === null)) where equals is the method of kotlin.Any.
 
 fun box():String{
-    val x = null
-    val y = A(true)
+    konst x = null
+    konst y = A(true)
 
     if ((x != y) == checkNotEquals(x, y)) {
             return "OK"
@@ -27,7 +27,7 @@ fun checkNotEquals(A: Any?, B: Any?): Boolean {
 }
 
 
-data class A(val a: Boolean) {
+data class A(konst a: Boolean) {
     var isEqualsCalled = false
 
     override operator fun equals(anObject: Any?): Boolean {

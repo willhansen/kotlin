@@ -17,7 +17,7 @@ public sealed class Tree {
 
     public final class Leaf : Tree {
         public constructor Leaf(/*0*/ x: kotlin.Int)
-        public final val x: kotlin.Int
+        public final konst x: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public final override /*1*/ /*fake_override*/ fun max(): kotlin.Int
@@ -26,8 +26,8 @@ public sealed class Tree {
 
     public final class Node : Tree {
         public constructor Node(/*0*/ left: Tree, /*1*/ right: Tree)
-        public final val left: Tree
-        public final val right: Tree
+        public final konst left: Tree
+        public final konst right: Tree
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public final override /*1*/ /*fake_override*/ fun max(): kotlin.Int

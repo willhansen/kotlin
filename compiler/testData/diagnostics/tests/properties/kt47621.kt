@@ -6,7 +6,7 @@ package j;
 
 public class J {
     public int getX() { return 1; }
-    protected void setX(int value) { throw new RuntimeException(); }
+    protected void setX(int konstue) { throw new RuntimeException(); }
 }
 
 // FILE: main.kt

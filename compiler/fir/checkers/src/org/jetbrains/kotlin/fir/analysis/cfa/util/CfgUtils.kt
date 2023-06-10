@@ -13,9 +13,9 @@ fun ControlFlowGraph.getNodesInOrder(direction: TraverseDirection): List<CFGNode
     TraverseDirection.Backward -> nodes.asReversed()
 }
 
-val CFGNode<*>.previousCfgNodes: List<CFGNode<*>>
+konst CFGNode<*>.previousCfgNodes: List<CFGNode<*>>
     get() = previousNodes.filter {
-        val kind = edgeFrom(it).kind
+        konst kind = edgeFrom(it).kind
         if (this.isDead) {
             kind.usedInCfa
         } else {
@@ -23,8 +23,8 @@ val CFGNode<*>.previousCfgNodes: List<CFGNode<*>>
         }
     }
 
-val CFGNode<*>.followingCfgNodes: List<CFGNode<*>>
+konst CFGNode<*>.followingCfgNodes: List<CFGNode<*>>
     get() = followingNodes.filter {
-        val kind = edgeTo(it).kind
+        konst kind = edgeTo(it).kind
         kind.usedInCfa && !kind.isDead
     }

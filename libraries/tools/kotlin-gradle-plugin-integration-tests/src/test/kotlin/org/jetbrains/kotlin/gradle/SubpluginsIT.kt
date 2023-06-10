@@ -39,9 +39,9 @@ class SubpuginsIT : KGPBaseTest() {
     fun testAllOpenPlugin(gradleVersion: GradleVersion) {
         project("allOpenSimple", gradleVersion) {
             build("assemble") {
-                val classesDir = kotlinClassesDir()
-                val openClass = classesDir.resolve("test/OpenClass.class")
-                val closedClass = classesDir.resolve("test/ClosedClass.class")
+                konst classesDir = kotlinClassesDir()
+                konst openClass = classesDir.resolve("test/OpenClass.class")
+                konst closedClass = classesDir.resolve("test/ClosedClass.class")
                 assertFileExists(openClass)
                 assertFileExists(closedClass)
 
@@ -66,9 +66,9 @@ class SubpuginsIT : KGPBaseTest() {
         project("allOpenSpring", gradleVersion) {
             build("assemble") {
 
-                val classesDir = kotlinClassesDir()
-                val openClass = classesDir.resolve("test/OpenClass.class")
-                val closedClass = classesDir.resolve("test/ClosedClass.class")
+                konst classesDir = kotlinClassesDir()
+                konst openClass = classesDir.resolve("test/OpenClass.class")
+                konst closedClass = classesDir.resolve("test/ClosedClass.class")
 
                 assertFileExists(openClass)
                 assertFileExists(closedClass)
@@ -93,10 +93,10 @@ class SubpuginsIT : KGPBaseTest() {
     fun testKotlinJpaPlugin(gradleVersion: GradleVersion) {
         project("noArgJpa", gradleVersion) {
             build("assemble") {
-                val classesDir = kotlinClassesDir()
+                konst classesDir = kotlinClassesDir()
 
                 fun checkClass(name: String) {
-                    val testClass = classesDir.resolve("test/$name.class")
+                    konst testClass = classesDir.resolve("test/$name.class")
                     assertFileExists(testClass)
                     checkBytecodeContains(testClass.toFile(), "public <init>()V")
                 }
@@ -136,7 +136,7 @@ class SubpuginsIT : KGPBaseTest() {
     fun testAllOpenFromNestedBuildscript(gradleVersion: GradleVersion) {
         project("allOpenFromNestedBuildscript", gradleVersion) {
             build("build") {
-                val nestedSubproject = subProject("a/b")
+                konst nestedSubproject = subProject("a/b")
                 assertFileExists(nestedSubproject.kotlinClassesDir().resolve("MyClass.class"))
                 assertFileExists(nestedSubproject.kotlinClassesDir("test").resolve("MyTestClass.class"))
             }
@@ -210,7 +210,7 @@ class SubpuginsIT : KGPBaseTest() {
                 }
                 
                 buildscript {
-                    val kotlin_version: String by extra
+                    konst kotlin_version: String by extra
                     repositories {
                         mavenLocal()
                     }

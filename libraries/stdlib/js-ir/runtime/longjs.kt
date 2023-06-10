@@ -34,11 +34,11 @@ internal fun Long.toStringImpl(radix: Int): String {
 
     if (isNegative()) {
         if (equalsLong(MIN_VALUE)) {
-            // We need to change the Long value before it can be negated, so we remove
+            // We need to change the Long konstue before it can be negated, so we remove
             // the bottom-most digit in this base and then recurse to do the rest.
-            val radixLong = fromInt(radix)
-            val div = div(radixLong)
-            val rem = div.multiply(radixLong).subtract(this).toInt()
+            konst radixLong = fromInt(radix)
+            konst div = div(radixLong)
+            konst rem = div.multiply(radixLong).subtract(this).toInt()
             // Using rem.asDynamic() to break dependency on "kotlin.text" package
             return div.toStringImpl(radix) + rem.asDynamic().toString(radix).unsafeCast<String>()
         } else {
@@ -48,21 +48,21 @@ internal fun Long.toStringImpl(radix: Int): String {
 
     // Do several digits each time through the loop, so as to
     // minimize the calls to the very expensive emulated div.
-    val digitsPerTime = when {
+    konst digitsPerTime = when {
         radix == 2 -> 31
         radix <= 10 -> 9
         radix <= 21 -> 7
         radix <= 35 -> 6
         else -> 5
     }
-    val radixToPower = fromNumber(JsMath.pow(radix.toDouble(), digitsPerTime.toDouble()))
+    konst radixToPower = fromNumber(JsMath.pow(radix.toDouble(), digitsPerTime.toDouble()))
 
     var rem = this
     var result = ""
     while (true) {
-        val remDiv = rem.div(radixToPower)
-        val intval = rem.subtract(remDiv.multiply(radixToPower)).toInt()
-        var digits = intval.asDynamic().toString(radix).unsafeCast<String>()
+        konst remDiv = rem.div(radixToPower)
+        konst intkonst = rem.subtract(remDiv.multiply(radixToPower)).toInt()
+        var digits = intkonst.asDynamic().toString(radix).unsafeCast<String>()
 
         rem = remDiv
         if (rem.isZero()) {
@@ -99,8 +99,8 @@ internal fun Long.compare(other: Long): Int {
         return 0;
     }
 
-    val thisNeg = isNegative();
-    val otherNeg = other.isNegative();
+    konst thisNeg = isNegative();
+    konst otherNeg = other.isNegative();
 
     return when {
         thisNeg && !otherNeg -> -1
@@ -114,15 +114,15 @@ internal fun Long.compare(other: Long): Int {
 internal fun Long.add(other: Long): Long {
     // Divide each number into 4 chunks of 16 bits, and then sum the chunks.
 
-    val a48 = high ushr 16
-    val a32 = high and 0xFFFF
-    val a16 = low ushr 16
-    val a00 = low and 0xFFFF
+    konst a48 = high ushr 16
+    konst a32 = high and 0xFFFF
+    konst a16 = low ushr 16
+    konst a00 = low and 0xFFFF
 
-    val b48 = other.high ushr 16
-    val b32 = other.high and 0xFFFF
-    val b16 = other.low ushr 16
-    val b00 = other.low and 0xFFFF
+    konst b48 = other.high ushr 16
+    konst b32 = other.high and 0xFFFF
+    konst b16 = other.low ushr 16
+    konst b00 = other.low and 0xFFFF
 
     var c48 = 0
     var c32 = 0
@@ -175,15 +175,15 @@ internal fun Long.multiply(other: Long): Long {
     // Divide each long into 4 chunks of 16 bits, and then add up 4x4 products.
     // We can skip products that would overflow.
 
-    val a48 = high ushr 16
-    val a32 = high and 0xFFFF
-    val a16 = low ushr 16
-    val a00 = low and 0xFFFF
+    konst a48 = high ushr 16
+    konst a32 = high and 0xFFFF
+    konst a16 = low ushr 16
+    konst a00 = low and 0xFFFF
 
-    val b48 = other.high ushr 16
-    val b32 = other.high and 0xFFFF
-    val b16 = other.low ushr 16
-    val b00 = other.low and 0xFFFF
+    konst b48 = other.high ushr 16
+    konst b32 = other.high and 0xFFFF
+    konst b16 = other.low ushr 16
+    konst b00 = other.low and 0xFFFF
 
     var c48 = 0
     var c32 = 0
@@ -226,12 +226,12 @@ internal fun Long.divide(other: Long): Long {
             return ONE
         } else {
             // At this point, we have |other| >= 2, so |this/other| < |MIN_VALUE|.
-            val halfThis = shiftRight(1)
-            val approx = halfThis.div(other).shiftLeft(1)
+            konst halfThis = shiftRight(1)
+            konst approx = halfThis.div(other).shiftLeft(1)
             if (approx.equalsLong(ZERO)) {
                 return if (other.isNegative()) ONE else NEG_ONE
             } else {
-                val rem = subtract(other.multiply(approx))
+                konst rem = subtract(other.multiply(approx))
                 return approx.add(rem.div(other))
             }
         }
@@ -252,20 +252,20 @@ internal fun Long.divide(other: Long): Long {
     // Repeat the following until the remainder is less than other:  find a
     // floating-point that approximates remainder / other *from below*, add this
     // into the result, and subtract it from the remainder.  It is critical that
-    // the approximate value is less than or equal to the real value so that the
+    // the approximate konstue is less than or equal to the real konstue so that the
     // remainder never becomes negative.
     var res = ZERO
     var rem = this
     while (rem.greaterThanOrEqual(other)) {
         // Approximate the result of division. This may be a little greater or
-        // smaller than the actual value.
-        val approxDouble = rem.toNumber() / other.toNumber()
+        // smaller than the actual konstue.
+        konst approxDouble = rem.toNumber() / other.toNumber()
         var approx2 = JsMath.max(1.0, JsMath.floor(approxDouble))
 
         // We will tweak the approximate result by changing it in the 48-th digit or
         // the smallest non-fractional digit, whichever is larger.
-        val log2 = JsMath.ceil(JsMath.log(approx2) / JsMath.LN2)
-        val delta = if (log2 <= 48) 1.0 else JsMath.pow(2.0, log2 - 48)
+        konst log2 = JsMath.ceil(JsMath.log(approx2) / JsMath.LN2)
+        konst delta = if (log2 <= 48) 1.0 else JsMath.pow(2.0, log2 - 48)
 
         // Decrease the approximation until it is smaller than the remainder.  Note
         // that if it is too large, the product overflows and is negative.
@@ -293,7 +293,7 @@ internal fun Long.modulo(other: Long) = subtract(div(other).multiply(other))
 
 internal fun Long.shiftLeft(numBits: Int): Long {
     @Suppress("NAME_SHADOWING")
-    val numBits = numBits and 63
+    konst numBits = numBits and 63
     if (numBits == 0) {
         return this
     } else {
@@ -307,7 +307,7 @@ internal fun Long.shiftLeft(numBits: Int): Long {
 
 internal fun Long.shiftRight(numBits: Int): Long {
     @Suppress("NAME_SHADOWING")
-    val numBits = numBits and 63
+    konst numBits = numBits and 63
     if (numBits == 0) {
         return this
     } else {
@@ -321,7 +321,7 @@ internal fun Long.shiftRight(numBits: Int): Long {
 
 internal fun Long.shiftRightUnsigned(numBits: Int): Long {
     @Suppress("NAME_SHADOWING")
-    val numBits = numBits and 63
+    konst numBits = numBits and 63
     if (numBits == 0) {
         return this
     } else {
@@ -336,60 +336,60 @@ internal fun Long.shiftRightUnsigned(numBits: Int): Long {
 }
 
 /**
- * Returns a Long representing the given (32-bit) integer value.
- * @param {number} value The 32-bit integer in question.
- * @return {!Kotlin.Long} The corresponding Long value.
+ * Returns a Long representing the given (32-bit) integer konstue.
+ * @param {number} konstue The 32-bit integer in question.
+ * @return {!Kotlin.Long} The corresponding Long konstue.
  */
 // TODO: cache
-internal fun fromInt(value: Int) = Long(value, if (value < 0) -1 else 0)
+internal fun fromInt(konstue: Int) = Long(konstue, if (konstue < 0) -1 else 0)
 
 /**
- * Converts this [Double] value to [Long].
+ * Converts this [Double] konstue to [Long].
  * The fractional part, if any, is rounded down towards zero.
- * Returns zero if this `Double` value is `NaN`, [Long.MIN_VALUE] if it's less than `Long.MIN_VALUE`,
+ * Returns zero if this `Double` konstue is `NaN`, [Long.MIN_VALUE] if it's less than `Long.MIN_VALUE`,
  * [Long.MAX_VALUE] if it's bigger than `Long.MAX_VALUE`.
  */
-internal fun fromNumber(value: Double): Long {
-    if (value.isNaN()) {
+internal fun fromNumber(konstue: Double): Long {
+    if (konstue.isNaN()) {
         return ZERO;
-    } else if (value <= -TWO_PWR_63_DBL_) {
+    } else if (konstue <= -TWO_PWR_63_DBL_) {
         return MIN_VALUE;
-    } else if (value + 1 >= TWO_PWR_63_DBL_) {
+    } else if (konstue + 1 >= TWO_PWR_63_DBL_) {
         return MAX_VALUE;
-    } else if (value < 0) {
-        return fromNumber(-value).negate();
+    } else if (konstue < 0) {
+        return fromNumber(-konstue).negate();
     } else {
-        val twoPwr32 = TWO_PWR_32_DBL_
+        konst twoPwr32 = TWO_PWR_32_DBL_
         return Long(
-            jsBitwiseOr(value.rem(twoPwr32), 0),
-            jsBitwiseOr(value / twoPwr32, 0)
+            jsBitwiseOr(konstue.rem(twoPwr32), 0),
+            jsBitwiseOr(konstue / twoPwr32, 0)
         )
     }
 }
 
-private const val TWO_PWR_16_DBL_ = (1 shl 16).toDouble()
+private const konst TWO_PWR_16_DBL_ = (1 shl 16).toDouble()
 
-private const val TWO_PWR_24_DBL_ = (1 shl 24).toDouble()
+private const konst TWO_PWR_24_DBL_ = (1 shl 24).toDouble()
 
-//private val TWO_PWR_32_DBL_ = TWO_PWR_16_DBL_ * TWO_PWR_16_DBL_
-private const val TWO_PWR_32_DBL_ = (1 shl 16).toDouble() * (1 shl 16).toDouble()
+//private konst TWO_PWR_32_DBL_ = TWO_PWR_16_DBL_ * TWO_PWR_16_DBL_
+private const konst TWO_PWR_32_DBL_ = (1 shl 16).toDouble() * (1 shl 16).toDouble()
 
-//private val TWO_PWR_64_DBL_ = TWO_PWR_32_DBL_ * TWO_PWR_32_DBL_
-private const val TWO_PWR_64_DBL_ = ((1 shl 16).toDouble() * (1 shl 16).toDouble()) * ((1 shl 16).toDouble() * (1 shl 16).toDouble())
+//private konst TWO_PWR_64_DBL_ = TWO_PWR_32_DBL_ * TWO_PWR_32_DBL_
+private const konst TWO_PWR_64_DBL_ = ((1 shl 16).toDouble() * (1 shl 16).toDouble()) * ((1 shl 16).toDouble() * (1 shl 16).toDouble())
 
-//private val TWO_PWR_63_DBL_ = TWO_PWR_64_DBL_ / 2
-private const val TWO_PWR_63_DBL_ = (((1 shl 16).toDouble() * (1 shl 16).toDouble()) * ((1 shl 16).toDouble() * (1 shl 16).toDouble())) / 2
+//private konst TWO_PWR_63_DBL_ = TWO_PWR_64_DBL_ / 2
+private const konst TWO_PWR_63_DBL_ = (((1 shl 16).toDouble() * (1 shl 16).toDouble()) * ((1 shl 16).toDouble() * (1 shl 16).toDouble())) / 2
 
-private val ZERO = fromInt(0)
+private konst ZERO = fromInt(0)
 
-private val ONE = fromInt(1)
+private konst ONE = fromInt(1)
 
-private val NEG_ONE = fromInt(-1)
+private konst NEG_ONE = fromInt(-1)
 
-private val MAX_VALUE = Long(-1, -1 ushr 1)
+private konst MAX_VALUE = Long(-1, -1 ushr 1)
 
-private val MIN_VALUE = Long(0, 1 shl 31)
+private konst MIN_VALUE = Long(0, 1 shl 31)
 
-private val TWO_PWR_24_ = fromInt(1 shl 24)
+private konst TWO_PWR_24_ = fromInt(1 shl 24)
 
 

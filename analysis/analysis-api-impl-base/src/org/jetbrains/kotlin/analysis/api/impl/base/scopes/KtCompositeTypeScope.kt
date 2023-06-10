@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.name.Name
 
 @KtAnalysisApiInternals
 class KtCompositeTypeScope(
-    val subScopes: List<KtTypeScope>,
-    override val token: KtLifetimeToken
+    konst subScopes: List<KtTypeScope>,
+    override konst token: KtLifetimeToken
 ) : KtTypeScope {
     override fun getAllPossibleNames(): Set<Name> = withValidityAssertion {
         buildSet {

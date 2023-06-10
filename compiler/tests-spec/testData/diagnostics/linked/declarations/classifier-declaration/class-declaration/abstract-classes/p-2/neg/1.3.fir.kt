@@ -3,7 +3,7 @@
 
 // TESTCASE NUMBER: 1
 abstract class Base {
-    abstract val a: CharSequence
+    abstract konst a: CharSequence
     abstract var b: CharSequence
 
     abstract fun foo(): CharSequence
@@ -15,11 +15,11 @@ class Case1 : Base() {
         return ""
     }
 
-    override val a: <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE!>Any?<!>
+    override konst a: <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE!>Any?<!>
     get() = TODO()
     override var b: <!VAR_TYPE_MISMATCH_ON_OVERRIDE!>String<!>
     get() = TODO()
-    set(value)
+    set(konstue)
     {}
 }
 
@@ -28,7 +28,7 @@ class Case1 : Base() {
 * TESTCASE NUMBER: 2
 */
 
-class Case2(override val a: String, override var b: <!VAR_TYPE_MISMATCH_ON_OVERRIDE!>String<!>) : Base() {
+class Case2(override konst a: String, override var b: <!VAR_TYPE_MISMATCH_ON_OVERRIDE!>String<!>) : Base() {
     override fun foo(): <!RETURN_TYPE_MISMATCH_ON_OVERRIDE!>CharSequence?<!> {
         return ""
     }
@@ -45,7 +45,7 @@ class Case3 {
 
 class MainClass {
     abstract class Base1() {
-        abstract val a: CharSequence
+        abstract konst a: CharSequence
         abstract var b: CharSequence
 
         abstract fun foo(): CharSequence

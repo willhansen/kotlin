@@ -13,7 +13,7 @@ annotation class Prop
 annotation class Both
 
 data class Foo(
-    @NoTarget @Param @Prop @Both val p1: Int,
-    @param:NoTarget @param:Both val p2: String,
-    @property:NoTarget @property:Both val p3: Boolean,
+    @NoTarget @Param @Prop @Both konst p1: Int,
+    @param:NoTarget @param:Both konst p2: String,
+    @property:NoTarget @property:Both konst p3: Boolean,
 )

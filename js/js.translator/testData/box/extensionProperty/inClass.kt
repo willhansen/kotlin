@@ -2,7 +2,7 @@
 class A
 
 class B {
-    val A.x: String
+    konst A.x: String
         get() = "OK"
 
     fun result(a: A) = a.x

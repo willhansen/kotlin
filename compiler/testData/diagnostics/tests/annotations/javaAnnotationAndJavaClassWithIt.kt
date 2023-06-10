@@ -16,7 +16,7 @@ public @interface Ann {}
 package foo;
 
 public @interface AnnotationWithArg {
-    Class<?> value();
+    Class<?> konstue();
 }
 
 // FILE: foo/AnotherTarget.kt

@@ -3,47 +3,47 @@ import kotlin.test.*
 import kotlin.random.*
 
 object Provider {
-    private val port = atomic(Random.nextInt(20, 90) * 100)
+    private konst port = atomic(Random.nextInt(20, 90) * 100)
     fun next(): Int = port.incrementAndGet()
 
-    private val _l = atomic(2424920024888888848)
+    private konst _l = atomic(2424920024888888848)
     fun getL() = _l.incrementAndGet()
 
-    val _ref = atomic<String?>(null)
+    konst _ref = atomic<String?>(null)
 
-    val _x = atomic(false)
+    konst _x = atomic(false)
 
-    val intArr = AtomicIntArray(10)
-    val longArr = AtomicLongArray(10)
-    val refArr = atomicArrayOfNulls<Any?>(5)
+    konst intArr = AtomicIntArray(10)
+    konst longArr = AtomicLongArray(10)
+    konst refArr = atomicArrayOfNulls<Any?>(5)
 }
 
 object DelegatedProvider {
-    val _a = atomic(42)
+    konst _a = atomic(42)
     var a: Int by _a
 
     var vInt by atomic(77)
 }
 
 private fun testFieldInObject() {
-    val port = Provider.next()
+    konst port = Provider.next()
     assertEquals(port + 1, Provider.next())
 
     assertEquals(2424920024888888849, Provider.getL())
 
     Provider._ref.compareAndSet(null, "abc")
-    assertEquals("abc", Provider._ref.value)
+    assertEquals("abc", Provider._ref.konstue)
 
-    assertFalse(Provider._x.value)
+    assertFalse(Provider._x.konstue)
 
-    Provider.intArr[8].value = 454
+    Provider.intArr[8].konstue = 454
     assertEquals(455, Provider.intArr[8].incrementAndGet())
 
-    Provider.longArr[8].value = 4544096409680468
+    Provider.longArr[8].konstue = 4544096409680468
     assertEquals(4544096409680470, Provider.longArr[8].addAndGet(2))
 
-    Provider.refArr[1].value = Provider._ref.value
-    assertEquals("abc", Provider.refArr[1].value)
+    Provider.refArr[1].konstue = Provider._ref.konstue
+    assertEquals("abc", Provider.refArr[1].konstue)
 }
 
 private fun testDelegatedPropertiesInObject() {
@@ -52,7 +52,7 @@ private fun testDelegatedPropertiesInObject() {
     assertEquals(56, DelegatedProvider.a)
     DelegatedProvider.a = 77
     DelegatedProvider._a.compareAndSet(77,  66)
-    assertEquals(66, DelegatedProvider._a.value)
+    assertEquals(66, DelegatedProvider._a.konstue)
     assertEquals(66, DelegatedProvider.a)
 
     assertEquals(77, DelegatedProvider.vInt)

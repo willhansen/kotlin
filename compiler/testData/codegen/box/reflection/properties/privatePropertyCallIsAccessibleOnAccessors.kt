@@ -9,14 +9,14 @@ import kotlin.test.*
 class A(private var foo: String)
 
 fun box(): String {
-    val a = A("")
-    val foo = A::class.memberProperties.single() as KMutableProperty1<A, String>
+    konst a = A("")
+    konst foo = A::class.memberProperties.single() as KMutableProperty1<A, String>
 
     assertTrue(!foo.isAccessible)
     assertTrue(!foo.getter.isAccessible)
     assertTrue(!foo.setter.isAccessible)
 
-    val setter = foo.setter
+    konst setter = foo.setter
     setter.isAccessible = true
     assertTrue(setter.isAccessible)
     assertTrue(foo.setter.isAccessible)
@@ -33,7 +33,7 @@ fun box(): String {
     assertFalse(foo.getter.isAccessible)
     assertFalse(foo.isAccessible)
 
-    val getter = foo.getter
+    konst getter = foo.getter
     getter.isAccessible = true
     assertTrue(setter.isAccessible)
     assertTrue(foo.setter.isAccessible)

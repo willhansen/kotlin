@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
 import org.jetbrains.kotlin.cli.common.fir.FirDiagnosticsCompilerResultsReporter
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.languageVersionSettings
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.descriptors.deserialization.PlatformDependentTypeTransformer
 import org.jetbrains.kotlin.descriptors.isEmpty
 import org.jetbrains.kotlin.descriptors.konan.isNativeStdlib
@@ -37,21 +37,21 @@ import org.jetbrains.kotlin.library.metadata.KlibMetadataFactories
 import org.jetbrains.kotlin.library.metadata.impl.ForwardDeclarationKind
 import org.jetbrains.kotlin.storage.LockBasedStorageManager
 
-internal val KlibFactories = KlibMetadataFactories(::KonanBuiltIns, DynamicTypeDeserializer, PlatformDependentTypeTransformer.None)
+internal konst KlibFactories = KlibMetadataFactories(::KonanBuiltIns, DynamicTypeDeserializer, PlatformDependentTypeTransformer.None)
 
 internal fun PhaseContext.fir2Ir(
         input: FirOutput.Full,
 ): Fir2IrOutput {
-    val fir2IrExtensions = Fir2IrExtensions.Default
+    konst fir2IrExtensions = Fir2IrExtensions.Default
 
     var builtInsModule: KotlinBuiltIns? = null
 
-    val resolvedLibraries = config.resolvedLibraries.getFullResolvedList()
-    val configuration = config.configuration
-    val librariesDescriptors = resolvedLibraries.map { resolvedLibrary ->
-        val storageManager = LockBasedStorageManager("ModulesStructure")
+    konst resolvedLibraries = config.resolvedLibraries.getFullResolvedList()
+    konst configuration = config.configuration
+    konst librariesDescriptors = resolvedLibraries.map { resolvedLibrary ->
+        konst storageManager = LockBasedStorageManager("ModulesStructure")
 
-        val moduleDescriptor = KlibFactories.DefaultDeserializedDescriptorFactory.createDescriptorOptionalBuiltIns(
+        konst moduleDescriptor = KlibFactories.DefaultDeserializedDescriptorFactory.createDescriptorOptionalBuiltIns(
                 resolvedLibrary.library,
                 configuration.languageVersionSettings,
                 storageManager,
@@ -60,7 +60,7 @@ internal fun PhaseContext.fir2Ir(
                 lookupTracker = LookupTracker.DO_NOTHING
         )
 
-        val isBuiltIns = moduleDescriptor.isNativeStdlib()
+        konst isBuiltIns = moduleDescriptor.isNativeStdlib()
         if (isBuiltIns) builtInsModule = moduleDescriptor.builtIns
 
         moduleDescriptor
@@ -70,15 +70,15 @@ internal fun PhaseContext.fir2Ir(
         // Yes, just to all of them.
         moduleDescriptor.setDependencies(ArrayList(librariesDescriptors))
     }
-    val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
+    konst diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
 
-    val (irModuleFragment, components, pluginContext, irActualizedResult) = input.firResult.convertToIrAndActualize(
+    konst (irModuleFragment, components, pluginContext, irActualizedResult) = input.firResult.convertToIrAndActualize(
             fir2IrExtensions,
             Fir2IrConfiguration(
                     languageVersionSettings = configuration.languageVersionSettings,
                     linkViaSignatures = false,
-                    evaluatedConstTracker = configuration
-                            .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EvaluatedConstTracker.create()),
+                    ekonstuatedConstTracker = configuration
+                            .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EkonstuatedConstTracker.create()),
             ),
             IrGenerationExtension.getInstances(config.project),
             signatureComposer = DescriptorSignatureComposerStub(KonanManglerDesc),
@@ -100,26 +100,26 @@ internal fun PhaseContext.fir2Ir(
         "`${irModuleFragment.name}` must be Name.special, since it's required by KlibMetadataModuleDescriptorFactoryImpl.createDescriptorOptionalBuiltIns()"
     }
 
-    val usedPackages = buildSet {
+    konst usedPackages = buildSet {
         components.symbolTable.forEachDeclarationSymbol {
-            val p = it.owner as? IrDeclaration ?: return@forEachDeclarationSymbol
-            val fragment = (p.getPackageFragment() as? IrExternalPackageFragment) ?: return@forEachDeclarationSymbol
+            konst p = it.owner as? IrDeclaration ?: return@forEachDeclarationSymbol
+            konst fragment = (p.getPackageFragment() as? IrExternalPackageFragment) ?: return@forEachDeclarationSymbol
             add(fragment.packageFqName)
         }
         // This packages exists in all platform libraries, but can contain only synthetic declarations.
         // These declarations are not really located in klib, so we don't need to depend on klib to use them.
-        removeAll(ForwardDeclarationKind.values().map { it.packageFqName })
+        removeAll(ForwardDeclarationKind.konstues().map { it.packageFqName })
     }.toList()
 
 
-    val usedLibraries = librariesDescriptors.zip(resolvedLibraries).filter { (module, _) ->
+    konst usedLibraries = librariesDescriptors.zip(resolvedLibraries).filter { (module, _) ->
         usedPackages.any { !module.packageFragmentProviderForModuleContentWithoutDependencies.isEmpty(it) }
     }.map { it.second }.toSet()
 
 
-    val symbols = createKonanSymbols(components, pluginContext)
+    konst symbols = createKonanSymbols(components, pluginContext)
 
-    val renderDiagnosticNames = configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
+    konst renderDiagnosticNames = configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
     FirDiagnosticsCompilerResultsReporter.reportToMessageCollector(diagnosticsReporter, messageCollector, renderDiagnosticNames)
 
     if (diagnosticsReporter.hasErrors) {
@@ -133,7 +133,7 @@ private fun PhaseContext.createKonanSymbols(
         components: Fir2IrComponents,
         pluginContext: Fir2IrPluginContext,
 ): KonanSymbols {
-    val symbolTable = SymbolTable(KonanIdSignaturer(KonanManglerDesc), pluginContext.irFactory)
+    konst symbolTable = SymbolTable(KonanIdSignaturer(KonanManglerDesc), pluginContext.irFactory)
 
     return KonanSymbols(this, SymbolOverIrLookupUtils(), components.irBuiltIns, symbolTable.lazyWrapper)
 }

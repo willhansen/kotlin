@@ -9,10 +9,10 @@ class A {
 
         class Nested2
 
-        val c: Int = 1
+        konst c: Int = 1
 
         object Obj2 {
-            val c: Int = 1
+            konst c: Int = 1
         }
     }
 

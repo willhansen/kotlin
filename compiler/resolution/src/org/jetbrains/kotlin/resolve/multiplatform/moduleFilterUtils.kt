@@ -13,7 +13,7 @@ typealias ModuleFilter = (ModuleDescriptor) -> Boolean
 
 fun onlyFromThisModule(module: ModuleDescriptor): ModuleFilter = { it == module }
 
-val ALL_MODULES: ModuleFilter = { true }
+konst ALL_MODULES: ModuleFilter = { true }
 
 fun allModulesProvidingExpectsFor(platformModule: ModuleDescriptor): ModuleFilter = {
     it == platformModule || it in platformModule.allExpectedByModules

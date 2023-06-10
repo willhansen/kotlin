@@ -34,7 +34,7 @@ internal interface RangePattern {
     fun rangeEnd(): Int
 
     /**
-     * An integer value that contains information about the category of each char in this range.
+     * An integer konstue that contains information about the category of each char in this range.
      */
     fun category(): Int
 

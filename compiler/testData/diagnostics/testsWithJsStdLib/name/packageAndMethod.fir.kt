@@ -8,4 +8,4 @@ fun bar() = 23
 
 package foo.bar
 
-val x = 42
+konst x = 42

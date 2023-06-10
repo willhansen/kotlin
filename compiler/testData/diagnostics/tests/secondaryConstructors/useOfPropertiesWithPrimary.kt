@@ -1,14 +1,14 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
-class A(val w: Int) {
-    val x: Int
-    val useUnitialized = <!UNINITIALIZED_VARIABLE!>x<!> +
+class A(konst w: Int) {
+    konst x: Int
+    konst useUnitialized = <!UNINITIALIZED_VARIABLE!>x<!> +
                          <!UNINITIALIZED_VARIABLE!>y<!> +
                          <!UNINITIALIZED_VARIABLE!>v<!>
     var y: Int
-    val v = -1
-    val useInitialized = useUnitialized + v + w
+    konst v = -1
+    konst useInitialized = useUnitialized + v + w
 
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val uninitialized: Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst uninitialized: Int<!>
 
     constructor(): this(1) {
         x + y + v + uninitialized + w

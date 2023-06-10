@@ -3,8 +3,8 @@ package t
 class Reproduce {
 
     fun test(): String {
-        data class Foo(val bar: String, val baz: Int)
-        val foo = Foo("OK", 5)
+        data class Foo(konst bar: String, konst baz: Int)
+        konst foo = Foo("OK", 5)
         return foo.bar
     }
 }

@@ -13,7 +13,7 @@ open class CopyCommonSources : DefaultTask() {
     var zipSources: Boolean = false
 
     @InputFiles
-    val sourcePaths: ConfigurableFileCollection = project.files()
+    konst sourcePaths: ConfigurableFileCollection = project.files()
 
     @OutputDirectory
     var outputDir: File = project.buildDir.resolve("sources")
@@ -43,10 +43,10 @@ open class CopyCommonSources : DefaultTask() {
 
     private fun copyAndZip() {
         for (sourcePath in sourcePaths) {
-            val filePrefix = sourcePath.name.replace(Regex("-\\d+.*"), "")
-            val targetFileName = "$filePrefix-sources.zip"
+            konst filePrefix = sourcePath.name.replace(Regex("-\\d+.*"), "")
+            konst targetFileName = "$filePrefix-sources.zip"
 
-            val tempDir = project.buildDir.resolve(name).resolve(filePrefix).also {
+            konst tempDir = project.buildDir.resolve(name).resolve(filePrefix).also {
                 it.deleteRecursively()
                 it.mkdirs()
             }
@@ -64,7 +64,7 @@ open class CopyCommonSources : DefaultTask() {
     }
 
     private fun File.copyFilteredTo(destinationDir: File) {
-        val fileTree = if (isFile) project.zipTree(this) else project.fileTree(this)
+        konst fileTree = if (isFile) project.zipTree(this) else project.fileTree(this)
 
         project.copy {
             from(fileTree)

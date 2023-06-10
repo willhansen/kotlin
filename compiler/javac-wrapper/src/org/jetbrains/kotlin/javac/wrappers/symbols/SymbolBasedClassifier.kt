@@ -28,15 +28,15 @@ abstract class SymbolBasedClassifier<out T : Element>(
         javac: JavacWrapper
 ) : SymbolBasedElement<T>(element, javac), JavaClassifier, JavaAnnotationOwner {
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = element.annotationMirrors.map { SymbolBasedAnnotation(it, javac) }
 
     override fun findAnnotation(fqName: FqName) = element.findAnnotation(fqName, javac)
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = javac.isDeprecated(element)
 
 }

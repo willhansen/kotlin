@@ -88,22 +88,22 @@ internal enum class ElementKind {
     ClassType, InnerClass, TypeVariable, PrimitiveType, ArrayType
 }
 
-private class SignatureNode(val kind: ElementKind, val name: String? = null) {
-    val children: MutableList<SignatureNode> = SmartList<SignatureNode>()
+private class SignatureNode(konst kind: ElementKind, konst name: String? = null) {
+    konst children: MutableList<SignatureNode> = SmartList<SignatureNode>()
 }
 
-class SignatureParser(private val treeMaker: KaptTreeMaker) {
+class SignatureParser(private konst treeMaker: KaptTreeMaker) {
     class ClassGenericSignature(
-        val typeParameters: JavacList<JCTypeParameter>,
-        val superClass: JCExpression,
-        val interfaces: JavacList<JCExpression>
+        konst typeParameters: JavacList<JCTypeParameter>,
+        konst superClass: JCExpression,
+        konst interfaces: JavacList<JCExpression>
     )
 
     class MethodGenericSignature(
-        val typeParameters: JavacList<JCTypeParameter>,
-        val parameterTypes: JavacList<JCVariableDecl>,
-        val exceptionTypes: JavacList<JCExpression>,
-        val returnType: JCExpression?
+        konst typeParameters: JavacList<JCTypeParameter>,
+        konst parameterTypes: JavacList<JCVariableDecl>,
+        konst exceptionTypes: JavacList<JCExpression>,
+        konst returnType: JCExpression?
     )
 
     fun parseClassSignature(
@@ -115,15 +115,15 @@ class SignatureParser(private val treeMaker: KaptTreeMaker) {
             return ClassGenericSignature(JavacList.nil(), rawSuperClass, rawInterfaces)
         }
 
-        val root = parse(signature)
-        val typeParameters = smartList()
-        val superClasses = smartList()
-        val interfaces = smartList()
+        konst root = parse(signature)
+        konst typeParameters = smartList()
+        konst superClasses = smartList()
+        konst interfaces = smartList()
         root.split(typeParameters, TypeParameter, superClasses, SuperClass, interfaces, Interface)
 
-        val jcTypeParameters = mapJList(typeParameters) { parseTypeParameter(it) }
-        val jcSuperClass = parseType(superClasses.single().children.single())
-        val jcInterfaces = mapJList(interfaces) { parseType(it.children.single()) }
+        konst jcTypeParameters = mapJList(typeParameters) { parseTypeParameter(it) }
+        konst jcSuperClass = parseType(superClasses.single().children.single())
+        konst jcInterfaces = mapJList(interfaces) { parseType(it.children.single()) }
         return ClassGenericSignature(jcTypeParameters, jcSuperClass, jcInterfaces)
     }
 
@@ -135,31 +135,31 @@ class SignatureParser(private val treeMaker: KaptTreeMaker) {
         nonErrorParameterTypeProvider: (Int, () -> JCExpression) -> JCExpression
     ): MethodGenericSignature {
         if (signature == null) {
-            val parameters = mapJListIndexed(rawParameters) { index, it ->
-                val nonErrorType = nonErrorParameterTypeProvider(index) { it.vartype }
+            konst parameters = mapJListIndexed(rawParameters) { index, it ->
+                konst nonErrorType = nonErrorParameterTypeProvider(index) { it.vartype }
                 treeMaker.VarDef(it.modifiers, it.getName(), nonErrorType, it.initializer)
             }
             return MethodGenericSignature(JavacList.nil(), parameters, rawExceptionTypes, rawReturnType)
         }
 
-        val root = parse(signature)
-        val typeParameters = smartList()
-        val parameterTypes = smartList()
-        val exceptionTypes = smartList()
-        val returnTypes = smartList()
+        konst root = parse(signature)
+        konst typeParameters = smartList()
+        konst parameterTypes = smartList()
+        konst exceptionTypes = smartList()
+        konst returnTypes = smartList()
         root.split(typeParameters, TypeParameter, parameterTypes, ParameterType, exceptionTypes, ExceptionType, returnTypes, ReturnType)
 
-        val jcTypeParameters = mapJList(typeParameters) { parseTypeParameter(it) }
+        konst jcTypeParameters = mapJList(typeParameters) { parseTypeParameter(it) }
         assert(rawParameters.size >= parameterTypes.size)
-        val offset = rawParameters.size - parameterTypes.size
-        val jcParameters = mapJListIndexed(parameterTypes) { index, it ->
-            val rawParameter = rawParameters[index + offset]
-            val nonErrorType = nonErrorParameterTypeProvider(index) { parseType(it.children.single()) }
+        konst offset = rawParameters.size - parameterTypes.size
+        konst jcParameters = mapJListIndexed(parameterTypes) { index, it ->
+            konst rawParameter = rawParameters[index + offset]
+            konst nonErrorType = nonErrorParameterTypeProvider(index) { parseType(it.children.single()) }
 
             treeMaker.VarDef(rawParameter.modifiers, rawParameter.getName(), nonErrorType, rawParameter.initializer)
         }
-        val jcExceptionTypes = mapJList(exceptionTypes) { parseType(it) }
-        val jcReturnType = if (rawReturnType == null) null else parseType(returnTypes.single().children.single())
+        konst jcExceptionTypes = mapJList(exceptionTypes) { parseType(it) }
+        konst jcReturnType = if (rawReturnType == null) null else parseType(returnTypes.single().children.single())
         return MethodGenericSignature(jcTypeParameters, jcParameters, jcExceptionTypes, jcReturnType)
     }
 
@@ -169,8 +169,8 @@ class SignatureParser(private val treeMaker: KaptTreeMaker) {
     ): JCExpression {
         if (signature == null) return rawType
 
-        val root = parse(signature)
-        val superClass = root.children.single()
+        konst root = parse(signature)
+        konst superClass = root.children.single()
         assert(superClass.kind == SuperClass)
 
         return parseType(superClass.children.single())
@@ -179,14 +179,14 @@ class SignatureParser(private val treeMaker: KaptTreeMaker) {
     private fun parseTypeParameter(node: SignatureNode): JCTypeParameter {
         assert(node.kind == TypeParameter)
 
-        val classBounds = smartList()
-        val interfaceBounds = smartList()
+        konst classBounds = smartList()
+        konst interfaceBounds = smartList()
         node.split(classBounds, ClassBound, interfaceBounds, InterfaceBound)
         assert(classBounds.size <= 1)
 
-        val jcClassBound = classBounds.firstOrNull()?.let { parseBound(it) }
-        val jcInterfaceBounds = mapJList(interfaceBounds) { parseBound(it) }
-        val allBounds = if (jcClassBound != null) jcInterfaceBounds.prepend(jcClassBound) else jcInterfaceBounds
+        konst jcClassBound = classBounds.firstOrNull()?.let { parseBound(it) }
+        konst jcInterfaceBounds = mapJList(interfaceBounds) { parseBound(it) }
+        konst allBounds = if (jcClassBound != null) jcInterfaceBounds.prepend(jcClassBound) else jcInterfaceBounds
         return treeMaker.TypeParameter(treeMaker.name(node.name!!), allBounds)
     }
 
@@ -196,11 +196,11 @@ class SignatureParser(private val treeMaker: KaptTreeMaker) {
     }
 
     private fun parseType(node: SignatureNode): JCExpression {
-        val kind = node.kind
+        konst kind = node.kind
         return when (kind) {
             ClassType -> {
-                val typeArgs = mutableListOf<SignatureNode>()
-                val innerClasses = mutableListOf<SignatureNode>()
+                konst typeArgs = mutableListOf<SignatureNode>()
+                konst innerClasses = mutableListOf<SignatureNode>()
                 node.split(typeArgs, TypeArgument, innerClasses, InnerClass)
 
                 var expression = makeExpressionForClassTypeWithArguments(treeMaker.FqName(node.name!!), typeArgs)
@@ -219,7 +219,7 @@ class SignatureParser(private val treeMaker: KaptTreeMaker) {
             TypeVariable -> treeMaker.SimpleName(node.name!!)
             ArrayType -> treeMaker.TypeArray(parseType(node.children.single()))
             PrimitiveType -> {
-                val typeTag = when (node.name!!.single()) {
+                konst typeTag = when (node.name!!.single()) {
                     'V' -> TypeTag.VOID
                     'Z' -> TypeTag.BOOLEAN
                     'C' -> TypeTag.CHAR
@@ -243,9 +243,9 @@ class SignatureParser(private val treeMaker: KaptTreeMaker) {
 
         return treeMaker.TypeApply(fqNameExpression, mapJList(args) { arg ->
             assert(arg.kind == TypeArgument) { "Unexpected kind ${arg.kind}, $TypeArgument expected" }
-            val variance = arg.name ?: return@mapJList treeMaker.Wildcard(treeMaker.TypeBoundKind(BoundKind.UNBOUND), null)
+            konst variance = arg.name ?: return@mapJList treeMaker.Wildcard(treeMaker.TypeBoundKind(BoundKind.UNBOUND), null)
 
-            val argType = parseType(arg.children.single())
+            konst argType = parseType(arg.children.single())
             when (variance.single()) {
                 '=' -> argType
                 '+' -> treeMaker.Wildcard(treeMaker.TypeBoundKind(BoundKind.EXTENDS), argType)
@@ -256,7 +256,7 @@ class SignatureParser(private val treeMaker: KaptTreeMaker) {
     }
 
     private fun parse(signature: String): SignatureNode {
-        val parser = SignatureParserVisitor()
+        konst parser = SignatureParserVisitor()
         SignatureReader(signature).accept(parser)
         return parser.root
     }
@@ -266,7 +266,7 @@ private fun smartList() = SmartList<SignatureNode>()
 
 private fun SignatureNode.split(l1: MutableList<SignatureNode>, e1: ElementKind, l2: MutableList<SignatureNode>, e2: ElementKind) {
     for (child in children) {
-        val kind = child.kind
+        konst kind = child.kind
         when (kind) {
             e1 -> l1 += child
             e2 -> l2 += child
@@ -284,7 +284,7 @@ private fun SignatureNode.split(
     e3: ElementKind
 ) {
     for (child in children) {
-        val kind = child.kind
+        konst kind = child.kind
         when (kind) {
             e1 -> l1 += child
             e2 -> l2 += child
@@ -305,7 +305,7 @@ private fun SignatureNode.split(
     e4: ElementKind
 ) {
     for (child in children) {
-        val kind = child.kind
+        konst kind = child.kind
         when (kind) {
             e1 -> l1 += child
             e2 -> l2 += child
@@ -317,8 +317,8 @@ private fun SignatureNode.split(
 }
 
 private class SignatureParserVisitor : SignatureVisitor(Opcodes.API_VERSION) {
-    val root = SignatureNode(Root)
-    private val stack = ArrayDeque<SignatureNode>(5).apply { add(root) }
+    konst root = SignatureNode(Root)
+    private konst stack = ArrayDeque<SignatureNode>(5).apply { add(root) }
 
     private fun popUntil(kind: ElementKind?) {
         if (kind != null) {
@@ -337,7 +337,7 @@ private class SignatureParserVisitor : SignatureVisitor(Opcodes.API_VERSION) {
     private fun push(kind: ElementKind, parent: ElementKind? = null, name: String? = null) {
         popUntil(parent)
 
-        val newNode = SignatureNode(kind, name)
+        konst newNode = SignatureNode(kind, name)
         stack.peek().children += newNode
         stack.push(newNode)
     }

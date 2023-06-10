@@ -1,10 +1,10 @@
 class A {
     companion object {
-        val s: String
+        konst s: String
             get() = "Ok"
         var v : String
             get() = "NOT OK"
-            set(value) {}
+            set(konstue) {}
     }
 
     inline fun f(): String = s

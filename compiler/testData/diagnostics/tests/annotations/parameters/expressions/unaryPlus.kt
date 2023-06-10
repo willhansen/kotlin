@@ -2,12 +2,12 @@
 package test
 
 annotation class Ann(
-        val b1: Byte,
-        val b2: Short,
-        val b3: Int,
-        val b4: Long,
-        val b5: Double,
-        val b6: Float
+        konst b1: Byte,
+        konst b2: Short,
+        konst b3: Int,
+        konst b4: Long,
+        konst b5: Double,
+        konst b6: Float
 )
 
 @Ann(+1, +1, +1, +1, +1.0, +1.0.toFloat()) class MyClass

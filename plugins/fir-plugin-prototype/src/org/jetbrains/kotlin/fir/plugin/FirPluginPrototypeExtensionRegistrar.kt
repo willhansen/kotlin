@@ -40,7 +40,7 @@ class FirPluginPrototypeExtensionRegistrar : FirExtensionRegistrar() {
 }
 
 class FirPluginPrototypeComponentRegistrar : CompilerPluginRegistrar() {
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {

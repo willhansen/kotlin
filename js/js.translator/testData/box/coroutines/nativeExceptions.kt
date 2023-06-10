@@ -18,7 +18,7 @@ fun build(c: suspend () -> Unit) {
             stopped = true
         }
 
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
     })
 }
 

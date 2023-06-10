@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 
 internal object MultiplatformLayoutV2DependsOnConfigurator : KotlinAndroidSourceSetConfigurator {
     override fun configure(target: KotlinAndroidTarget, kotlinSourceSet: KotlinSourceSet, androidSourceSet: AndroidSourceSet) {
-        val androidBaseSourceSetName = AndroidBaseSourceSetName.byName(androidSourceSet.name) ?: return
+        konst androidBaseSourceSetName = AndroidBaseSourceSetName.byName(androidSourceSet.name) ?: return
         setDefaultDependsOn(target, kotlinSourceSet, androidBaseSourceSetName.variantType)
     }
 
@@ -37,15 +37,15 @@ internal object MultiplatformLayoutV2DependsOnConfigurator : KotlinAndroidSource
                 return@launchInStage
             }
 
-            val sourceSetTree = when (variantType) {
+            konst sourceSetTree = when (variantType) {
                 AndroidVariantType.Main -> target.mainVariant.sourceSetTree.awaitFinalValue()
                 AndroidVariantType.UnitTest -> target.unitTestVariant.sourceSetTree.awaitFinalValue()
                 AndroidVariantType.InstrumentedTest -> target.instrumentedTestVariant.sourceSetTree.awaitFinalValue()
                 AndroidVariantType.Unknown -> null
             } ?: return@launchInStage
 
-            val commonSourceSetName = lowerCamelCaseName("common", sourceSetTree.name)
-            val commonSourceSet = target.project.kotlinExtension.sourceSets.findByName(commonSourceSetName) ?: return@launchInStage
+            konst commonSourceSetName = lowerCamelCaseName("common", sourceSetTree.name)
+            konst commonSourceSet = target.project.kotlinExtension.sourceSets.findByName(commonSourceSetName) ?: return@launchInStage
             kotlinSourceSet.dependsOn(commonSourceSet)
         }
     }

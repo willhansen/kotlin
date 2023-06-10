@@ -21,7 +21,7 @@ Exit code: ABORT
 ------------------------------------------
 COMPILATION FAILED
 'f' overrides nothing
-Null can not be a value of a non-null type String
+Null can not be a konstue of a non-null type String
 
 ================ Step #2 =================
 

@@ -1,4 +1,4 @@
-open class C(val f: () -> Unit) {
+open class C(konst f: () -> Unit) {
     fun test() {
         f()
     }
@@ -12,7 +12,7 @@ class B(var x: Int) {
 
 
 fun box() : String {
-    val b = B(1)
+    konst b = B(1)
     b.foo()
     return if (b.x != 3) "fail: b.x = ${b.x}" else "OK"
 }

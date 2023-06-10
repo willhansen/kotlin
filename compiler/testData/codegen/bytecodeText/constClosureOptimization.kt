@@ -3,7 +3,7 @@
 fun test() {
 
     fun local(){
-        val lam = {
+        konst lam = {
             //static instance access
             local()
         }
@@ -11,14 +11,14 @@ fun test() {
     }
 
     //static instance access
-    val lam = {
+    konst lam = {
         //static instance access
         local()
     }
     lam()
 
     //static instance access
-    val cr = ::local
+    konst cr = ::local
     cr()
 }
 

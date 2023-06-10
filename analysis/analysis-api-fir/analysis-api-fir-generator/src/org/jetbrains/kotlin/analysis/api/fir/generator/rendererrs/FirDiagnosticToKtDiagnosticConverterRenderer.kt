@@ -20,7 +20,7 @@ object FirDiagnosticToKtDiagnosticConverterRenderer : AbstractDiagnosticsDataCla
     }
 
     private fun SmartPrinter.printDiagnosticConverter(diagnosticList: HLDiagnosticList) {
-        inBracketsWithIndent("internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConverter") {
+        inBracketsWithIndent("internal konst KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConverter") {
             for (diagnostic in diagnosticList.diagnostics) {
                 printConverter(diagnostic)
             }
@@ -57,7 +57,7 @@ object FirDiagnosticToKtDiagnosticConverterRenderer : AbstractDiagnosticsDataCla
     }
 
     private fun SmartPrinter.printParameter(parameter: HLDiagnosticParameter) {
-        val expression = parameter.conversion.convertExpression(
+        konst expression = parameter.conversion.convertExpression(
             "firDiagnostic.${parameter.originalParameterName}",
             ConversionContext(getCurrentIndentInUnits(), getIndentUnit())
         )
@@ -67,7 +67,7 @@ object FirDiagnosticToKtDiagnosticConverterRenderer : AbstractDiagnosticsDataCla
     override fun collectImportsForDiagnosticParameter(diagnosticParameter: HLDiagnosticParameter): Collection<String> =
         diagnosticParameter.importsToAdd
 
-    override val defaultImports = listOf(
+    override konst defaultImports = listOf(
         "org.jetbrains.kotlin.diagnostics.KtPsiDiagnostic",
         "org.jetbrains.kotlin.fir.builder.FirSyntaxErrors",
         "org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors",

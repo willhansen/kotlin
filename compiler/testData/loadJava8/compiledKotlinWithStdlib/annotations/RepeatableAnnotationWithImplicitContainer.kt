@@ -2,7 +2,7 @@ package test
 
 @Repeatable
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS)
-annotation class Anno(val code: Int)
+annotation class Anno(konst code: Int)
 
 @Anno(1)
 @Anno(2)

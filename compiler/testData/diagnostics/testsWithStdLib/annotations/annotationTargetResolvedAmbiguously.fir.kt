@@ -11,7 +11,7 @@ object Some {
     @Target(<!AMBIGUOUS_ANNOTATION_ARGUMENT!>FIELD<!>)
     annotation class Ann2
 
-    const val FIELD = ""
+    const konst FIELD = ""
 }
 
 object SomeMore {
@@ -28,7 +28,7 @@ object SomeMore {
 }
 
 abstract class Base {
-    annotation class Target(val target: AnnotationTarget)
+    annotation class Target(konst target: AnnotationTarget)
 
     enum class AnnotationTarget {
         TYPE

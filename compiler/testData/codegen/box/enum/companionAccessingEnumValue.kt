@@ -1,6 +1,6 @@
 private var logs = ""
 
-enum class Foo(val text: String) {
+enum class Foo(konst text: String) {
     FOO("foo"),
     BAR("bar"),
     PING("foo");
@@ -13,7 +13,7 @@ enum class Foo(val text: String) {
         init {
             logs += "StatA;"
         }
-        val first = values()[0]
+        konst first = konstues()[0]
         init {
             logs += "Stat${first.text};"
         }

@@ -6,13 +6,13 @@
 package org.jetbrains.kotlin.build.report.statistics
 
 internal fun formatTime(ms: Long): String {
-    val seconds = ms.toDouble() / 1_000
+    konst seconds = ms.toDouble() / 1_000
     return seconds.asString(2) + " s"
 }
 
-private const val kbSize = 1024
-private const val mbSize = kbSize * 1024
-private const val gbSize = mbSize * 1024
+private const konst kbSize = 1024
+private const konst mbSize = kbSize * 1024
+private const konst gbSize = mbSize * 1024
 
 fun formatSize(sizeInBytes: Long): String = when {
     sizeInBytes / gbSize >= 1 -> "${(sizeInBytes.toDouble() / gbSize).asString(1)} GB"

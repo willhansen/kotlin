@@ -1,8 +1,8 @@
 package playground
 
-val callMeFromMPP = 42
+konst callMeFromMPP = 42
 
-val moduleName = "api-jvm"
+konst moduleName = "api-jvm"
 
 class SomeUsefulInfo
 

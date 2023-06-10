@@ -12,7 +12,7 @@ open class C2 : C1()
 expect open class C1() {
     fun o(): String
 
-    val k: String
+    konst k: String
 }
 
 fun foo(c3: C3) = c3.o() + c3.k
@@ -23,7 +23,7 @@ fun foo(c3: C3) = c3.o() + c3.k
 actual open class C1 {
     actual fun o() = "O"
 
-    actual val k = "K"
+    actual konst k = "K"
 }
 
 fun box() = foo(C3())

@@ -75,10 +75,10 @@ If a receiver of a call is dynamic, the following resolution rules apply:
 - first, we are looking for matching members of the upper bound of the representing dynamic type (`Any` unless we implement bounded dynamics,
   see Appendix below).
 - next, we are looking for extensions declared for dynamic types (no extensions for static types are considered at this point)
-- lastly, we create a synthetic candidate that is bound to match the call (i.e. has the appropriate name, numbers of type- and value parameters,
-  value parameters have appropriate names, if named arguments are used, etc.). Notes:
+- lastly, we create a synthetic candidate that is bound to match the call (i.e. has the appropriate name, numbers of type- and konstue parameters,
+  konstue parameters have appropriate names, if named arguments are used, etc.). Notes:
   - Augmented assignments on dynamic receivers (e.g. `dyn += foo`) are resolved to `plusAssign()` function, not `plus`, for generality:
-    this permits calling them on vals (e.g. those holding collection-like objects)
+    this permits calling them on konsts (e.g. those holding collection-like objects)
   - The invoke convention is limited so that for calls like `dyn.foo()` we do not look for property `foo` that has `invoke` defined on it
     (same for other cases like `+dyn` etc)
 - dynamic candidates with no explicit dispatch receiver are discriminated against all other candidate, i.e. for a call `foo()`, we first try

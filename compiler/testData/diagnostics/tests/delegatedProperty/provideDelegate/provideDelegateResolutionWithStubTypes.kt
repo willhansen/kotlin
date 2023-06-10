@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-val test: String by materializeDelegate()
+konst test: String by materializeDelegate()
 
 fun <T> materializeDelegate(): Delegate<T> = Delegate()
 

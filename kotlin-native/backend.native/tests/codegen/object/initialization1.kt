@@ -20,7 +20,7 @@ class TestClass {
         println("init")
     }
 
-    val f = println("field")
+    konst f = println("field")
 }
 
 @Test fun runTest() {

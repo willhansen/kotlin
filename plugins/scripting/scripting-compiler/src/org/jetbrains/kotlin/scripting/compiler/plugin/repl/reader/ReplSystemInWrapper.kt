@@ -15,8 +15,8 @@ import java.io.InputStream
 import javax.xml.parsers.DocumentBuilderFactory
 
 class ReplSystemInWrapper(
-    private val stdin: InputStream,
-    private val replWriter: ReplWriter
+    private konst stdin: InputStream,
+    private konst replWriter: ReplWriter
 ) : InputStream() {
     private var isXmlIncomplete = true
     private var isLastByteProcessed = false
@@ -25,7 +25,7 @@ class ReplSystemInWrapper(
     private var curBytePos = 0
     private var inputByteArray = byteArrayOf()
 
-    private val isAtBufferEnd: Boolean
+    private konst isAtBufferEnd: Boolean
         get() = curBytePos == inputByteArray.size
 
     @Volatile
@@ -58,14 +58,14 @@ class ReplSystemInWrapper(
             }
         }
 
-        val nextByte = inputByteArray[curBytePos++].toInt()
+        konst nextByte = inputByteArray[curBytePos++].toInt()
         resetBufferIfNeeded()
         return nextByte
     }
 
     private fun parseInput(): String {
-        val xmlInput = byteBuilder.toString()
-        val unescapedXml = parseXml(xmlInput)
+        konst xmlInput = byteBuilder.toString()
+        konst unescapedXml = parseXml(xmlInput)
 
         return if (isReplScriptExecuting)
             unescapedXml.replUnescapeLineBreaks()
@@ -86,10 +86,10 @@ class ReplSystemInWrapper(
 private fun parseXml(inputMessage: String): String {
     fun strToSource(s: String) = InputSource(ByteArrayInputStream(s.toByteArray()))
 
-    val docFactory = DocumentBuilderFactory.newInstance()
-    val docBuilder = docFactory.newDocumentBuilder()
-    val input = docBuilder.parse(strToSource(inputMessage))
+    konst docFactory = DocumentBuilderFactory.newInstance()
+    konst docBuilder = docFactory.newDocumentBuilder()
+    konst input = docBuilder.parse(strToSource(inputMessage))
 
-    val root = input.firstChild as Element
+    konst root = input.firstChild as Element
     return root.textContent
 }

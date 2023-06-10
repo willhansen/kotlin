@@ -13,7 +13,7 @@ import kotlin.coroutines.Continuation
 abstract class CheckerSink {
     abstract fun reportDiagnostic(diagnostic: ResolutionDiagnostic)
 
-    abstract val needYielding: Boolean
+    abstract konst needYielding: Boolean
 
     @PrivateForInline
     abstract suspend fun yield()
@@ -32,9 +32,9 @@ suspend inline fun CheckerSink.yieldDiagnostic(diagnostic: ResolutionDiagnostic)
 }
 
 class CheckerSinkImpl(
-    private val candidate: Candidate,
+    private konst candidate: Candidate,
     var continuation: Continuation<Unit>? = null,
-    val stopOnFirstError: Boolean = true,
+    konst stopOnFirstError: Boolean = true,
 ) : CheckerSink() {
     override fun reportDiagnostic(diagnostic: ResolutionDiagnostic) {
         candidate.addDiagnostic(diagnostic)
@@ -46,7 +46,7 @@ class CheckerSinkImpl(
         kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
     }
 
-    override val needYielding: Boolean
+    override konst needYielding: Boolean
         get() = stopOnFirstError && !candidate.isSuccessful
 }
 

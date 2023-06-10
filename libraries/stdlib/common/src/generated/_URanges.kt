@@ -224,64 +224,64 @@ public inline operator fun ULongRange.contains(element: ULong?): Boolean {
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
-public operator fun UIntRange.contains(value: UByte): Boolean {
-    return contains(value.toUInt())
+public operator fun UIntRange.contains(konstue: UByte): Boolean {
+    return contains(konstue.toUInt())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
-public operator fun ULongRange.contains(value: UByte): Boolean {
-    return contains(value.toULong())
+public operator fun ULongRange.contains(konstue: UByte): Boolean {
+    return contains(konstue.toULong())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
-public operator fun ULongRange.contains(value: UInt): Boolean {
-    return contains(value.toULong())
+public operator fun ULongRange.contains(konstue: UInt): Boolean {
+    return contains(konstue.toULong())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
-public operator fun UIntRange.contains(value: ULong): Boolean {
-    return (value shr UInt.SIZE_BITS) == 0uL && contains(value.toUInt())
+public operator fun UIntRange.contains(konstue: ULong): Boolean {
+    return (konstue shr UInt.SIZE_BITS) == 0uL && contains(konstue.toUInt())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
-public operator fun UIntRange.contains(value: UShort): Boolean {
-    return contains(value.toUInt())
+public operator fun UIntRange.contains(konstue: UShort): Boolean {
+    return contains(konstue.toUInt())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
-public operator fun ULongRange.contains(value: UShort): Boolean {
-    return contains(value.toULong())
+public operator fun ULongRange.contains(konstue: UShort): Boolean {
+    return contains(konstue.toULong())
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -290,10 +290,10 @@ public infix fun UByte.downTo(to: UByte): UIntProgression {
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -302,10 +302,10 @@ public infix fun UInt.downTo(to: UInt): UIntProgression {
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -314,10 +314,10 @@ public infix fun ULong.downTo(to: ULong): ULongProgression {
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -364,9 +364,9 @@ public infix fun ULongProgression.step(step: Long): ULongProgression {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -376,9 +376,9 @@ public infix fun UByte.until(to: UByte): UIntRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -388,9 +388,9 @@ public infix fun UInt.until(to: UInt): UIntRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -400,9 +400,9 @@ public infix fun ULong.until(to: ULong): ULongRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -412,9 +412,9 @@ public infix fun UShort.until(to: UShort): UIntRange {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeastUnsigned
  */
@@ -425,9 +425,9 @@ public fun UInt.coerceAtLeast(minimumValue: UInt): UInt {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeastUnsigned
  */
@@ -438,9 +438,9 @@ public fun ULong.coerceAtLeast(minimumValue: ULong): ULong {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeastUnsigned
  */
@@ -451,9 +451,9 @@ public fun UByte.coerceAtLeast(minimumValue: UByte): UByte {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeastUnsigned
  */
@@ -464,9 +464,9 @@ public fun UShort.coerceAtLeast(minimumValue: UShort): UShort {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMostUnsigned
  */
@@ -477,9 +477,9 @@ public fun UInt.coerceAtMost(maximumValue: UInt): UInt {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMostUnsigned
  */
@@ -490,9 +490,9 @@ public fun ULong.coerceAtMost(maximumValue: ULong): ULong {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMostUnsigned
  */
@@ -503,9 +503,9 @@ public fun UByte.coerceAtMost(maximumValue: UByte): UByte {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMostUnsigned
  */
@@ -516,73 +516,73 @@ public fun UShort.coerceAtMost(maximumValue: UShort): UShort {
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceInUnsigned
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
 public fun UInt.coerceIn(minimumValue: UInt, maximumValue: UInt): UInt {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceInUnsigned
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
 public fun ULong.coerceIn(minimumValue: ULong, maximumValue: ULong): ULong {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceInUnsigned
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
 public fun UByte.coerceIn(minimumValue: UByte, maximumValue: UByte): UByte {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceInUnsigned
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
 public fun UShort.coerceIn(minimumValue: UShort, maximumValue: UShort): UShort {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified [range].
+ * Ensures that this konstue lies in the specified [range].
  * 
- * @return this value if it's in the [range], or `range.start` if this value is less than `range.start`, or `range.endInclusive` if this value is greater than `range.endInclusive`.
+ * @return this konstue if it's in the [range], or `range.start` if this konstue is less than `range.start`, or `range.endInclusive` if this konstue is greater than `range.endInclusive`.
  * 
  * @sample samples.comparisons.ComparableOps.coerceInUnsigned
  */
@@ -592,7 +592,7 @@ public fun UInt.coerceIn(range: ClosedRange<UInt>): UInt {
     if (range is ClosedFloatingPointRange) {
         return this.coerceIn<UInt>(range)
     }
-    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce value to an empty range: $range.")
+    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce konstue to an empty range: $range.")
     return when {
         this < range.start -> range.start
         this > range.endInclusive -> range.endInclusive
@@ -601,9 +601,9 @@ public fun UInt.coerceIn(range: ClosedRange<UInt>): UInt {
 }
 
 /**
- * Ensures that this value lies in the specified [range].
+ * Ensures that this konstue lies in the specified [range].
  * 
- * @return this value if it's in the [range], or `range.start` if this value is less than `range.start`, or `range.endInclusive` if this value is greater than `range.endInclusive`.
+ * @return this konstue if it's in the [range], or `range.start` if this konstue is less than `range.start`, or `range.endInclusive` if this konstue is greater than `range.endInclusive`.
  * 
  * @sample samples.comparisons.ComparableOps.coerceInUnsigned
  */
@@ -613,7 +613,7 @@ public fun ULong.coerceIn(range: ClosedRange<ULong>): ULong {
     if (range is ClosedFloatingPointRange) {
         return this.coerceIn<ULong>(range)
     }
-    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce value to an empty range: $range.")
+    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce konstue to an empty range: $range.")
     return when {
         this < range.start -> range.start
         this > range.endInclusive -> range.endInclusive

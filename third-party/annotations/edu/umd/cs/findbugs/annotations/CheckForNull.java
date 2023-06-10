@@ -32,7 +32,7 @@ import javax.annotation.meta.When;
  * null.
  * 
  * When this annotation is applied to a method it applies to the method return
- * value.
+ * konstue.
  * 
  * @deprecated - use {@link javax.annotation.CheckForNull} instead. 
  **/

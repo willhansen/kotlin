@@ -2,7 +2,7 @@ fun <R> materialize(): R = null!!
 
 fun test_1() {
     <!UNRESOLVED_REFERENCE!>myRun<!> {
-        val x = 1
+        konst x = 1
         x * 2
     }
 }

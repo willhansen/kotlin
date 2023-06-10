@@ -106,7 +106,7 @@ public class AsmTypes {
     }
 
     @NotNull
-    public static Type valueTypeForPrimitive(PrimitiveType primitiveType) {
+    public static Type konstueTypeForPrimitive(PrimitiveType primitiveType) {
         switch (primitiveType) {
             case BOOLEAN:
                 return Type.BOOLEAN_TYPE;

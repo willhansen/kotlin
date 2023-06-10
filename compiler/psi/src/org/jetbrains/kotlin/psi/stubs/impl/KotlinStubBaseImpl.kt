@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.psi.stubs.KotlinClassifierStub
 import org.jetbrains.kotlin.psi.stubs.KotlinStubWithFqName
 import java.lang.reflect.Method
 
-val STUB_TO_STRING_PREFIX = "KotlinStub$"
+konst STUB_TO_STRING_PREFIX = "KotlinStub$"
 
 open class KotlinStubBaseImpl<T : KtElementImplStub<*>>(parent: StubElement<*>?, elementType: IStubElementType<*, *>) :
     StubBase<T>(parent, elementType) {
@@ -37,12 +37,12 @@ open class KotlinStubBaseImpl<T : KtElementImplStub<*>>(parent: StubElement<*>?,
         super.getStubType() as IStubElementType<out StubElement<*>, *>
 
     override fun toString(): String {
-        val stubInterface = this::class.java.interfaces.single { it.name.contains("Stub") }
-        val propertiesValues = renderPropertyValues(stubInterface)
+        konst stubInterface = this::class.java.interfaces.single { it.name.contains("Stub") }
+        konst propertiesValues = renderPropertyValues(stubInterface)
         if (propertiesValues.isEmpty()) {
             return "$STUB_TO_STRING_PREFIX$stubType"
         }
-        val properties = propertiesValues.joinToString(separator = ", ", prefix = "[", postfix = "]")
+        konst properties = propertiesValues.joinToString(separator = ", ", prefix = "[", postfix = "]")
         return "$STUB_TO_STRING_PREFIX$stubType$properties"
     }
 
@@ -51,7 +51,7 @@ open class KotlinStubBaseImpl<T : KtElementImplStub<*>>(parent: StubElement<*>?,
     }
 
     private fun collectProperties(stubInterface: Class<*>): Collection<Method> {
-        val result = ArrayList<Method>()
+        konst result = ArrayList<Method>()
         result.addAll(stubInterface.declaredMethods.filter { it.parameterTypes!!.isEmpty() })
         for (baseInterface in stubInterface.interfaces) {
             if (baseInterface in BASE_STUB_INTERFACES) {
@@ -63,9 +63,9 @@ open class KotlinStubBaseImpl<T : KtElementImplStub<*>>(parent: StubElement<*>?,
 
     private fun renderProperty(property: Method): String? {
         return try {
-            val value = property.invoke(this)
-            val name = getPropertyName(property)
-            "$name=$value"
+            konst konstue = property.invoke(this)
+            konst name = getPropertyName(property)
+            "$name=$konstue"
         } catch (e: Exception) {
             LOGGER.error(e)
             null
@@ -73,7 +73,7 @@ open class KotlinStubBaseImpl<T : KtElementImplStub<*>>(parent: StubElement<*>?,
     }
 
     private fun getPropertyName(method: Method): String {
-        val methodName = method.name!!
+        konst methodName = method.name!!
         if (methodName.startsWith("get")) {
             return methodName.substring(3).replaceFirstChar(Char::lowercaseChar)
         }
@@ -81,9 +81,9 @@ open class KotlinStubBaseImpl<T : KtElementImplStub<*>>(parent: StubElement<*>?,
     }
 
     companion object {
-        private val LOGGER: Logger = Logger.getInstance(KotlinStubBaseImpl::class.java)
+        private konst LOGGER: Logger = Logger.getInstance(KotlinStubBaseImpl::class.java)
 
-        private val BASE_STUB_INTERFACES = listOf(
+        private konst BASE_STUB_INTERFACES = listOf(
             KotlinStubWithFqName::class.java,
             KotlinClassifierStub::class.java,
             KotlinClassOrObjectStub::class.java,

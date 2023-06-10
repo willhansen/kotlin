@@ -7,7 +7,7 @@ FILE: RedundantVisibilityModifierCheckerWithExplicitApiMode.kt
 
             public final var foo: R|kotlin/Int| = Int(0)
                 public get(): R|kotlin/Int|
-                public set(value: R|kotlin/Int|): R|kotlin/Unit|
+                public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
         }
 
@@ -27,10 +27,10 @@ FILE: RedundantVisibilityModifierCheckerWithExplicitApiMode.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val foo: R|kotlin/Int| = Int(0)
+        public final konst foo: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
 
-        public final val z: R|kotlin/Any| = object : R|kotlin/Any| {
+        public final konst z: R|kotlin/Any| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -52,10 +52,10 @@ FILE: RedundantVisibilityModifierCheckerWithExplicitApiMode.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val foo: R|kotlin/Int| = Int(0)
+        public final konst foo: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
 
-        public final val z: R|kotlin/Any| = object : R|kotlin/Any| {
+        public final konst z: R|kotlin/Any| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -106,16 +106,16 @@ FILE: RedundantVisibilityModifierCheckerWithExplicitApiMode.kt
     }
     public final var baz1: R|kotlin/Int| = Int(0)
         public get(): R|kotlin/Int|
-        public set(value: R|kotlin/Int|): R|kotlin/Unit|
+        public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
     public final var baz2: R|kotlin/Int| = Int(0)
         public get(): R|kotlin/Int|
-        public set(value: R|kotlin/Int|): R|kotlin/Unit|
+        public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
     public final class J1 : R|kotlin/Any| {
         public constructor(): R|J1| {
             super<R|kotlin/Any|>()
         }
 
-        protected final val baz: R|kotlin/Int| = Int(0)
+        protected final konst baz: R|kotlin/Int| = Int(0)
             protected get(): R|kotlin/Int| {
                 ^ this@R|/J1|.F|/J1.baz|.R|kotlin/Int.times|(Int(2))
             }
@@ -124,23 +124,23 @@ FILE: RedundantVisibilityModifierCheckerWithExplicitApiMode.kt
             public get(): R|kotlin/Int| {
                 ^ Int(1)
             }
-            public set(value: R|kotlin/Int|): R|kotlin/Unit| {
-                this@R|/J1|.F|/J1.baf| = R|<local>/value|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+                this@R|/J1|.F|/J1.baf| = R|<local>/konstue|
             }
 
         public final var buf: R|kotlin/Int| = Int(0)
             private get(): R|kotlin/Int| {
                 ^ Int(42)
             }
-            protected set(value: R|kotlin/Int|): R|kotlin/Unit| {
-                this@R|/J1|.F|/J1.buf| = R|<local>/value|
+            protected set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+                this@R|/J1|.F|/J1.buf| = R|<local>/konstue|
             }
 
         public final var bar: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int| {
                 ^ Double(3.1415926535)
             }
-            public set(value: R|kotlin/Int|): R|kotlin/Unit| {
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
             }
 
     }
@@ -149,7 +149,7 @@ FILE: RedundantVisibilityModifierCheckerWithExplicitApiMode.kt
             super<R|kotlin/Any|>()
         }
 
-        protected final val baz: R|kotlin/Int| = Int(0)
+        protected final konst baz: R|kotlin/Int| = Int(0)
             protected get(): R|kotlin/Int| {
                 ^ this@R|/J2|.F|/J2.baz|.R|kotlin/Int.times|(Int(2))
             }
@@ -158,23 +158,23 @@ FILE: RedundantVisibilityModifierCheckerWithExplicitApiMode.kt
             public get(): R|kotlin/Int| {
                 ^ Int(1)
             }
-            public set(value: R|kotlin/Int|): R|kotlin/Unit| {
-                this@R|/J2|.F|/J2.baf| = R|<local>/value|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+                this@R|/J2|.F|/J2.baf| = R|<local>/konstue|
             }
 
         public final var buf: R|kotlin/Int| = Int(0)
             private get(): R|kotlin/Int| {
                 ^ Int(42)
             }
-            protected set(value: R|kotlin/Int|): R|kotlin/Unit| {
-                this@R|/J2|.F|/J2.buf| = R|<local>/value|
+            protected set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+                this@R|/J2|.F|/J2.buf| = R|<local>/konstue|
             }
 
         public final var bar: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int| {
                 ^ Double(3.1415926535)
             }
-            public set(value: R|kotlin/Int|): R|kotlin/Unit| {
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
             }
 
     }

@@ -11,6 +11,6 @@ private open class D
 
 fun f(): Int {
     // Local from private: Ok
-    val x = object : D() { }
+    konst x = object : D() { }
     return x.hashCode()
 }

@@ -1,1 +1,1 @@
-inline class Foo(val x: Int)
+inline class Foo(konst x: Int)

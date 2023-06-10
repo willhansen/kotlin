@@ -22,30 +22,30 @@ import org.jetbrains.kotlin.platform.impl.isJvm
 import kotlin.system.measureTimeMillis
 
 class KotlinTargetsIndex(
-    val byJpsTarget: Map<ModuleBuildTarget, KotlinModuleBuildTarget<*>>,
-    val chunks: List<KotlinChunk>,
-    val chunksByJpsRepresentativeTarget: Map<ModuleBuildTarget, KotlinChunk>
+    konst byJpsTarget: Map<ModuleBuildTarget, KotlinModuleBuildTarget<*>>,
+    konst chunks: List<KotlinChunk>,
+    konst chunksByJpsRepresentativeTarget: Map<ModuleBuildTarget, KotlinChunk>
 )
 
 internal class KotlinTargetsIndexBuilder internal constructor(
-    private val uninitializedContext: KotlinCompileContext
+    private konst uninitializedContext: KotlinCompileContext
 ) {
-    private val byJpsModuleBuildTarget = mutableMapOf<ModuleBuildTarget, KotlinModuleBuildTarget<*>>()
-    private val chunks = mutableListOf<KotlinChunk>()
+    private konst byJpsModuleBuildTarget = mutableMapOf<ModuleBuildTarget, KotlinModuleBuildTarget<*>>()
+    private konst chunks = mutableListOf<KotlinChunk>()
 
     fun build(): KotlinTargetsIndex {
-        val time = measureTimeMillis {
-            val jpsContext = uninitializedContext.jpsContext
+        konst time = measureTimeMillis {
+            konst jpsContext = uninitializedContext.jpsContext
 
             // visit all kotlin build targets
             jpsContext.projectDescriptor.buildTargetIndex.getSortedTargetChunks(jpsContext).forEach { chunk ->
-                val moduleBuildTargets = chunk.targets.mapNotNull {
+                konst moduleBuildTargets = chunk.targets.mapNotNull {
                     if (it is ModuleBuildTarget) ensureLoaded(it)
                     else null
                 }
 
                 if (moduleBuildTargets.isNotEmpty()) {
-                    val kotlinChunk = KotlinChunk(uninitializedContext, moduleBuildTargets)
+                    konst kotlinChunk = KotlinChunk(uninitializedContext, moduleBuildTargets)
                     moduleBuildTargets.forEach {
                         it.chunk = kotlinChunk
                     }
@@ -68,7 +68,7 @@ internal class KotlinTargetsIndexBuilder internal constructor(
 
     private fun ensureLoaded(target: ModuleBuildTarget): KotlinModuleBuildTarget<*> {
         return byJpsModuleBuildTarget.computeIfAbsent(target) {
-            val platform = target.module.platform?.idePlatformKind ?: JvmPlatforms.defaultJvmPlatform.idePlatformKind
+            konst platform = target.module.platform?.idePlatformKind ?: JvmPlatforms.defaultJvmPlatform.idePlatformKind
 
             when {
                 platform.isCommon -> KotlinCommonModuleBuildTarget(uninitializedContext, target)

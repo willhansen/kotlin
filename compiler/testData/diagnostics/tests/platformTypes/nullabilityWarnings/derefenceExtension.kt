@@ -17,11 +17,11 @@ public class J {
 
 fun test() {
     // @NotNull platform type
-    val platformNN = J.staticNN
+    konst platformNN = J.staticNN
     // @Nullable platform type
-    val platformN = J.staticN
+    konst platformN = J.staticN
     // platform type with no annotation
-    val platformJ = J.staticJ
+    konst platformJ = J.staticJ
 
     platformNN.foo()
     platformN<!UNSAFE_CALL!>.<!>foo()

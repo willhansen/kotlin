@@ -7,15 +7,15 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendAndLog(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-        result += "suspend($value);"
-        c.resume(value)
+    suspend fun <T> suspendAndLog(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+        result += "suspend($konstue);"
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 }
 
 fun builder(c: suspend Controller.() -> String): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, handleResultContinuation {
         controller.result += "return($it);"
     })
@@ -23,17 +23,17 @@ fun builder(c: suspend Controller.() -> String): String {
 }
 
 fun builderUnit(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, handleResultContinuation {
         controller.result += "return;"
     })
     return controller.result
 }
 
-fun <T> id(value: T) = value
+fun <T> id(konstue: T) = konstue
 
 fun box(): String {
-    var value = builder {
+    var konstue = builder {
         try {
             if (id(23) == 23) {
                 return@builder suspendAndLog("OK")
@@ -45,9 +45,9 @@ fun box(): String {
         result += "afterFinally;"
         "shouldNotReach"
     }
-    if (value != "suspend(OK);finally;return(OK);") return "fail1: $value"
+    if (konstue != "suspend(OK);finally;return(OK);") return "fail1: $konstue"
 
-    value = builderUnit {
+    konstue = builderUnit {
         try {
             if (id(23) == 23) {
                 suspendAndLog("OK")
@@ -60,7 +60,7 @@ fun box(): String {
         result += "afterFinally;"
         "shouldNotReach"
     }
-    if (value != "suspend(OK);finally;return;") return "fail2: $value"
+    if (konstue != "suspend(OK);finally;return;") return "fail2: $konstue"
 
     return "OK"
 }

@@ -14,4 +14,4 @@ if (typeof ArrayBuffer.isView === "undefined") {
     };
 }
 """)
-internal external fun arrayBufferIsView(value: Any?): Boolean
+internal external fun arrayBufferIsView(konstue: Any?): Boolean

@@ -1,11 +1,11 @@
 package test
 
 annotation class Ann(
-        val p1: Int,
-        val p2: Int,
-        val p3: Long,
-        val p4: Long,
-        val p5: Int
+        konst p1: Int,
+        konst p2: Int,
+        konst p3: Long,
+        konst p4: Long,
+        konst p5: Int
 )
 
 @Ann(

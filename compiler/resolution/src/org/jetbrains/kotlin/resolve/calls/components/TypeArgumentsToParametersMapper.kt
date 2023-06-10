@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.types.KotlinType
 
 class TypeArgumentsToParametersMapper {
 
-    sealed class TypeArgumentsMapping(val diagnostics: List<KotlinCallDiagnostic>) :
+    sealed class TypeArgumentsMapping(konst diagnostics: List<KotlinCallDiagnostic>) :
         Iterable<Map.Entry<TypeParameterDescriptor, KotlinType?>> {
 
         abstract fun getTypeArgument(typeParameterDescriptor: TypeParameterDescriptor): TypeArgument
 
         object NoExplicitArguments : TypeArgumentsMapping(emptyList()) {
-            private val emptyIterator = mapOf<Nothing, Nothing>().iterator()
+            private konst emptyIterator = mapOf<Nothing, Nothing>().iterator()
 
             override fun getTypeArgument(typeParameterDescriptor: TypeParameterDescriptor): TypeArgument =
                 TypeArgumentPlaceholder
@@ -39,12 +39,12 @@ class TypeArgumentsToParametersMapper {
 
         class TypeArgumentsMappingImpl(
             diagnostics: List<KotlinCallDiagnostic>,
-            private val typeParameterToArgumentMap: Map<TypeParameterDescriptor, TypeArgument>
+            private konst typeParameterToArgumentMap: Map<TypeParameterDescriptor, TypeArgument>
         ) : TypeArgumentsMapping(diagnostics) {
             override fun getTypeArgument(typeParameterDescriptor: TypeParameterDescriptor): TypeArgument =
                 typeParameterToArgumentMap[typeParameterDescriptor] ?: TypeArgumentPlaceholder
 
-            override fun iterator() = typeParameterToArgumentMap.mapValues { (it.value as? SimpleTypeArgument)?.type }.iterator()
+            override fun iterator() = typeParameterToArgumentMap.mapValues { (it.konstue as? SimpleTypeArgument)?.type }.iterator()
         }
     }
 
@@ -58,7 +58,7 @@ class TypeArgumentsToParametersMapper {
                 listOf(WrongCountOfTypeArguments(descriptor, call.typeArguments.size)), emptyMap()
             )
         } else {
-            val typeParameterToArgumentMap = descriptor.typeParameters.zip(call.typeArguments).associate { it }
+            konst typeParameterToArgumentMap = descriptor.typeParameters.zip(call.typeArguments).associate { it }
             return TypeArgumentsMapping.TypeArgumentsMappingImpl(listOf(), typeParameterToArgumentMap)
         }
     }

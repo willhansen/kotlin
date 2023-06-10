@@ -44,7 +44,7 @@ public class ReadKotlinClassHeaderAnnotationVisitor implements AnnotationVisitor
         try {
             IGNORE_OLD_METADATA = "true".equals(System.getProperty("kotlin.ignore.old.metadata"));
         } catch (AccessControlException e) {
-            // Use default value if the Security Manager blocks reading system variables
+            // Use default konstue if the Security Manager blocks reading system variables
             IGNORE_OLD_METADATA = false;
         }
     }
@@ -150,9 +150,9 @@ public class ReadKotlinClassHeaderAnnotationVisitor implements AnnotationVisitor
     }
 
     /**
-     * JVM bytecode format doesn't allow {@code null} as the annotation argument value, so we use the default value of the argument's type
+     * JVM bytecode format doesn't allow {@code null} as the annotation argument konstue, so we use the default konstue of the argument's type
      * to signify that the argument is absent. So if we read an empty string, for example, we should interpret it as if there was no
-     * value at all.
+     * konstue at all.
      * <p>
      * If we didn't, it could lead to problems for arguments like {@link ReadKotlinClassHeaderAnnotationVisitor#packageName}
      * (corresponding to {@link kotlin.Metadata#pn}): the class could be loaded as if it's JVM package name is the default package,
@@ -160,33 +160,33 @@ public class ReadKotlinClassHeaderAnnotationVisitor implements AnnotationVisitor
      */
     private class KotlinMetadataArgumentVisitor implements AnnotationArgumentVisitor {
         @Override
-        public void visit(@Nullable Name name, @Nullable Object value) {
+        public void visit(@Nullable Name name, @Nullable Object konstue) {
             if (name == null) return;
 
             String string = name.asString();
             if (KIND_FIELD_NAME.equals(string)) {
-                if (value instanceof Integer) {
-                    headerKind = KotlinClassHeader.Kind.getById((Integer) value);
+                if (konstue instanceof Integer) {
+                    headerKind = KotlinClassHeader.Kind.getById((Integer) konstue);
                 }
             }
             else if (METADATA_VERSION_FIELD_NAME.equals(string)) {
-                if (value instanceof int[]) {
-                    metadataVersionArray = (int[]) value;
+                if (konstue instanceof int[]) {
+                    metadataVersionArray = (int[]) konstue;
                 }
             }
             else if (METADATA_EXTRA_STRING_FIELD_NAME.equals(string)) {
-                if (value instanceof String && !((String) value).isEmpty()) {
-                    extraString = (String) value;
+                if (konstue instanceof String && !((String) konstue).isEmpty()) {
+                    extraString = (String) konstue;
                 }
             }
             else if (METADATA_EXTRA_INT_FIELD_NAME.equals(string)) {
-                if (value instanceof Integer) {
-                    extraInt = (Integer) value;
+                if (konstue instanceof Integer) {
+                    extraInt = (Integer) konstue;
                 }
             }
             else if (METADATA_PACKAGE_NAME_FIELD_NAME.equals(string)) {
-                if (value instanceof String && !((String) value).isEmpty()) {
-                    packageName = (String) value;
+                if (konstue instanceof String && !((String) konstue).isEmpty()) {
+                    packageName = (String) konstue;
                 }
             }
         }
@@ -247,17 +247,17 @@ public class ReadKotlinClassHeaderAnnotationVisitor implements AnnotationVisitor
 
     private class OldDeprecatedAnnotationArgumentVisitor implements AnnotationArgumentVisitor {
         @Override
-        public void visit(@Nullable Name name, @Nullable Object value) {
+        public void visit(@Nullable Name name, @Nullable Object konstue) {
             if (name == null) return;
 
             String string = name.asString();
             if ("version".equals(string)) {
-                if (value instanceof int[]) {
-                    metadataVersionArray = (int[]) value;
+                if (konstue instanceof int[]) {
+                    metadataVersionArray = (int[]) konstue;
                 }
             }
             else if ("multifileClassName".equals(string)) {
-                extraString = value instanceof String ? (String) value : null;
+                extraString = konstue instanceof String ? (String) konstue : null;
             }
         }
 
@@ -317,7 +317,7 @@ public class ReadKotlinClassHeaderAnnotationVisitor implements AnnotationVisitor
 
     private class KotlinSerializedIrArgumentVisitor implements AnnotationArgumentVisitor {
         @Override
-        public void visit(@Nullable Name name, @Nullable Object value) {
+        public void visit(@Nullable Name name, @Nullable Object konstue) {
         }
 
         @Override
@@ -369,9 +369,9 @@ public class ReadKotlinClassHeaderAnnotationVisitor implements AnnotationVisitor
         }
 
         @Override
-        public void visit(@Nullable Object value) {
-            if (value instanceof String) {
-                strings.add((String) value);
+        public void visit(@Nullable Object konstue) {
+            if (konstue instanceof String) {
+                strings.add((String) konstue);
             }
         }
 

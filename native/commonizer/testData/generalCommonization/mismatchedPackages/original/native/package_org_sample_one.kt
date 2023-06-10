@@ -1,3 +1,3 @@
 package org.sample.one
 
-val baz = 1
+konst baz = 1

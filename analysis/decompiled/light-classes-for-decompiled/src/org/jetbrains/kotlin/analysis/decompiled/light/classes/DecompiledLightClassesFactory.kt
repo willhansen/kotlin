@@ -32,8 +32,8 @@ object DecompiledLightClassesFactory {
         if (decompiledClassOrObject is KtEnumEntry) {
             return null
         }
-        val containingKtFile = decompiledClassOrObject.containingFile as? KtClsFile ?: return null
-        val rootLightClassForDecompiledFile = createLightClassForDecompiledKotlinFile(containingKtFile, project) ?: return null
+        konst containingKtFile = decompiledClassOrObject.containingFile as? KtClsFile ?: return null
+        konst rootLightClassForDecompiledFile = createLightClassForDecompiledKotlinFile(containingKtFile, project) ?: return null
 
         return findCorrespondingLightClass(decompiledClassOrObject, rootLightClassForDecompiledFile)
     }
@@ -42,17 +42,17 @@ object DecompiledLightClassesFactory {
         decompiledClassOrObject: KtClassOrObject,
         rootLightClassForDecompiledFile: KtLightClassForDecompiledDeclaration
     ): KtLightClassForDecompiledDeclaration? {
-        val relativeFqName = getClassRelativeName(decompiledClassOrObject) ?: return null
-        val iterator = relativeFqName.pathSegments().iterator()
-        val base = iterator.next()
+        konst relativeFqName = getClassRelativeName(decompiledClassOrObject) ?: return null
+        konst iterator = relativeFqName.pathSegments().iterator()
+        konst base = iterator.next()
 
         // In case class files have been obfuscated (i.e., SomeClass belongs to a.class file), just ignore them
         if (rootLightClassForDecompiledFile.name != base.asString()) return null
 
         var current: KtLightClassForDecompiledDeclaration = rootLightClassForDecompiledFile
         while (iterator.hasNext()) {
-            val name = iterator.next()
-            val innerClass = current.findInnerClassByName(name.asString(), false)
+            konst name = iterator.next()
+            konst innerClass = current.findInnerClassByName(name.asString(), false)
             checkWithAttachment(
                 innerClass != null,
                 { "Could not find corresponding inner/nested class " + relativeFqName + " in class " + decompiledClassOrObject.fqName + "\nFile: " + decompiledClassOrObject.containingKtFile.virtualFile.name },
@@ -74,8 +74,8 @@ object DecompiledLightClassesFactory {
     }
 
     private fun getClassRelativeName(decompiledClassOrObject: KtClassOrObject): FqName? {
-        val name = decompiledClassOrObject.nameAsName ?: return null
-        val parent = PsiTreeUtil.getParentOfType(
+        konst name = decompiledClassOrObject.nameAsName ?: return null
+        konst parent = PsiTreeUtil.getParentOfType(
             decompiledClassOrObject,
             KtClassOrObject::class.java,
             true
@@ -98,9 +98,9 @@ object DecompiledLightClassesFactory {
         file: KtClsFile,
         builder: (kotlinClsFile: KtClsFile, javaClsClass: PsiClass, classOrObject: KtClassOrObject?) -> T
     ): T? {
-        val virtualFile = file.virtualFile ?: return null
-        val classOrObject = file.declarations.filterIsInstance<KtClassOrObject>().singleOrNull()
-        val javaClsClass = createClsJavaClassFromVirtualFile(
+        konst virtualFile = file.virtualFile ?: return null
+        konst classOrObject = file.declarations.filterIsInstance<KtClassOrObject>().singleOrNull()
+        konst javaClsClass = createClsJavaClassFromVirtualFile(
             mirrorFile = file,
             classFile = virtualFile,
             correspondingClassOrObject = classOrObject,
@@ -116,7 +116,7 @@ object DecompiledLightClassesFactory {
         files: List<KtFile>,
     ): KtLightClassForFacade? {
         assert(files.all(KtFile::isCompiled))
-        val file = files.firstOrNull { it.javaFileFacadeFqName == facadeClassFqName } as? KtClsFile
+        konst file = files.firstOrNull { it.javaFileFacadeFqName == facadeClassFqName } as? KtClsFile
             ?: error("Can't find the representative decompiled file for $facadeClassFqName in ${files.map { it.name }}")
 
         return createLightClassForDecompiledKotlinFile(project, file) { kotlinClsFile, javaClsClass, classOrObject ->
@@ -130,10 +130,10 @@ object DecompiledLightClassesFactory {
         correspondingClassOrObject: KtClassOrObject?,
         project: Project,
     ): ClsClassImpl? {
-        val javaFileStub = ClsJavaStubByVirtualFileCache.getInstance(project).get(classFile) ?: return null
+        konst javaFileStub = ClsJavaStubByVirtualFileCache.getInstance(project).get(classFile) ?: return null
         javaFileStub.psiFactory = ClsWrapperStubPsiFactory.INSTANCE
-        val manager = PsiManager.getInstance(mirrorFile.project)
-        val fakeFile = object : ClsFileImpl(ClassFileViewProvider(manager, classFile)) {
+        konst manager = PsiManager.getInstance(mirrorFile.project)
+        konst fakeFile = object : ClsFileImpl(ClassFileViewProvider(manager, classFile)) {
             override fun getNavigationElement(): PsiElement {
                 if (correspondingClassOrObject != null) {
                     return correspondingClassOrObject.navigationElement.containingFile

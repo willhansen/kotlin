@@ -5,7 +5,7 @@ fun constant(): String {
     """.trimIndent()
 }
 
-private const val HAS_INDENT = """Hello,
+private const konst HAS_INDENT = """Hello,
         World"""
 fun interpolatedUsingConstant(): String {
     return """
@@ -15,9 +15,9 @@ fun interpolatedUsingConstant(): String {
     """.trimIndent()
 }
 
-private const val SPACES = "    "
-private const val HELLO = "Hello"
-private const val WORLD = "World"
+private const konst SPACES = "    "
+private const konst HELLO = "Hello"
+private const konst WORLD = "World"
 fun reliesOnNestedStringBuilderFlatteningAndConstantConcatenation(): String {
     return ("" + '\n' + SPACES + "${SPACES}Hey" + """
         ${HELLO + HELLO},

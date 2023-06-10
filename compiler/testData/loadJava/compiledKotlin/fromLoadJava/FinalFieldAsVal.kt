@@ -2,5 +2,5 @@
 package test
 
 public class FinalFieldAsVal() {
-    public val f: Int = { 1 }()
+    public konst f: Int = { 1 }()
 }

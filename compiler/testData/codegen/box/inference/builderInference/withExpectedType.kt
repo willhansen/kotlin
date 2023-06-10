@@ -2,7 +2,7 @@
 // WITH_STDLIB
 // !DIAGNOSTICS: -OPT_IN_USAGE_ERROR -CAST_NEVER_SUCCEEDS
 // IGNORE_BACKEND_K2: JVM_IR, JS_IR, NATIVE
-// FIR status: Initializer type mismatch at first val x = : expected kotlin/collections/MutableList<kotlin/CharSequence>, actual kotlin/collections/MutableList<kotlin/String>
+// FIR status: Initializer type mismatch at first konst x = : expected kotlin/collections/MutableList<kotlin/CharSequence>, actual kotlin/collections/MutableList<kotlin/String>
 
 import kotlin.experimental.ExperimentalTypeInference
 
@@ -33,10 +33,10 @@ fun <K : V, V : CharSequence> build7(@BuilderInference builderAction: MutableMap
 fun box(): String {
     buildList {
         add("")
-        val x: MutableList<CharSequence> = this@buildList
+        konst x: MutableList<CharSequence> = this@buildList
     }
     buildMap {
-        val x: Function2<String, Char, Char?> = ::put
+        konst x: Function2<String, Char, Char?> = ::put
     }
 
     build {
@@ -45,17 +45,17 @@ fun box(): String {
     }
 
     build2 {
-        val x: String = this.values.first()
+        konst x: String = this.konstues.first()
         1
     }
 
     build2 {
-        take(this.values.first())
+        take(this.konstues.first())
         1
     }
 
     build3 { key: String ->
-        take(this.values.first())
+        take(this.konstues.first())
     }
 
     build3 { this.foo() }
@@ -70,7 +70,7 @@ fun box(): String {
     build5 { id(run { this }) }
     build6 { id(run { this }) }
 
-    val x: MutableMap<String, CharSequence> = build7 {
+    konst x: MutableMap<String, CharSequence> = build7 {
         id(run { this })
     }
 

@@ -23,19 +23,19 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 import org.jetbrains.kotlin.types.*
 
 class NewResolvedCallImpl<D : CallableDescriptor>(
-    override val resolvedCallAtom: ResolvedCallAtom,
+    override konst resolvedCallAtom: ResolvedCallAtom,
     substitutor: NewTypeSubstitutor?,
     diagnostics: Collection<KotlinCallDiagnostic>,
-    override val typeApproximator: TypeApproximator,
-    override val languageVersionSettings: LanguageVersionSettings,
+    override konst typeApproximator: TypeApproximator,
+    override konst languageVersionSettings: LanguageVersionSettings,
 ) : NewAbstractResolvedCall<D>() {
-    override val psiKotlinCall: PSIKotlinCall = resolvedCallAtom.atom.psiKotlinCall
-    override val kotlinCall: KotlinCall = resolvedCallAtom.atom
+    override konst psiKotlinCall: PSIKotlinCall = resolvedCallAtom.atom.psiKotlinCall
+    override konst kotlinCall: KotlinCall = resolvedCallAtom.atom
 
-    override val freshSubstitutor: FreshVariableNewTypeSubstitutor
+    override konst freshSubstitutor: FreshVariableNewTypeSubstitutor
         get() = resolvedCallAtom.freshVariablesSubstitutor
 
-    override val argumentMappingByOriginal: Map<ValueParameterDescriptor, ResolvedCallArgument>
+    override konst argumentMappingByOriginal: Map<ValueParameterDescriptor, ResolvedCallArgument>
         get() = resolvedCallAtom.argumentMappingByOriginal
 
     override var diagnostics: Collection<KotlinCallDiagnostic> = diagnostics
@@ -79,7 +79,7 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
     override fun getStatus(): ResolutionStatus = getResultApplicability(diagnostics).toResolutionStatus()
 
     override fun getTypeArguments(): Map<TypeParameterDescriptor, KotlinType> {
-        val typeParameters = candidateDescriptor.typeParameters.takeIf { it.isNotEmpty() } ?: return emptyMap()
+        konst typeParameters = candidateDescriptor.typeParameters.takeIf { it.isNotEmpty() } ?: return emptyMap()
         return typeParameters.zip(typeArguments).toMap()
     }
 
@@ -89,7 +89,7 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
     override fun getSmartCastDispatchReceiverType(): KotlinType? = smartCastDispatchReceiverType
 
     override fun setResultingSubstitutor(substitutor: NewTypeSubstitutor?) {
-        //clear cached values
+        //clear cached konstues
         updateArgumentsMapping(null)
         updateValueArguments(null)
 
@@ -99,7 +99,7 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
         resultingDescriptor = substitutedResultingDescriptor(substitutor) as D
 
         typeArguments = freshSubstitutor.freshVariables.map {
-            val substituted = (substitutor ?: FreshVariableNewTypeSubstitutor.Empty).safeSubstitute(it.defaultType)
+            konst substituted = (substitutor ?: FreshVariableNewTypeSubstitutor.Empty).safeSubstitute(it.defaultType)
             typeApproximator
                 .approximateToSuperType(substituted, TypeApproximatorConfiguration.IntegerLiteralsTypesApproximation)
                 ?: substituted
@@ -113,15 +113,15 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
 
     override fun argumentToParameterMap(
         resultingDescriptor: CallableDescriptor,
-        valueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>,
+        konstueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>,
     ): Map<ValueArgument, ArgumentMatchImpl> {
-        val argumentErrors = collectErrorPositions()
+        konst argumentErrors = collectErrorPositions()
 
         return LinkedHashMap<ValueArgument, ArgumentMatchImpl>().also { result ->
-            for (parameter in resultingDescriptor.valueParameters) {
-                val resolvedArgument = valueArguments[parameter] ?: continue
+            for (parameter in resultingDescriptor.konstueParameters) {
+                konst resolvedArgument = konstueArguments[parameter] ?: continue
                 for (argument in resolvedArgument.arguments) {
-                    val status = argumentErrors[argument]?.let {
+                    konst status = argumentErrors[argument]?.let {
                         ArgumentMatchStatus.TYPE_MISMATCH
                     } ?: ArgumentMatchStatus.SUCCESS
                     result[argument] = ArgumentMatchImpl(parameter).apply { recordMatchStatus(status) }
@@ -147,19 +147,19 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
         diagnostics = completedDiagnostics
     }
 
-    fun getArgumentTypeForConstantConvertedArgument(valueArgument: ValueArgument): IntegerValueTypeConstant? {
-        val expression = valueArgument.getArgumentExpression() ?: return null
+    fun getArgumentTypeForConstantConvertedArgument(konstueArgument: ValueArgument): IntegerValueTypeConstant? {
+        konst expression = konstueArgument.getArgumentExpression() ?: return null
         return argumentTypeForConstantConvertedMap?.get(expression)
     }
 
-    fun getExpectedTypeForSamConvertedArgument(valueArgument: ValueArgument): UnwrappedType? =
-        expectedTypeForSamConvertedArgumentMap?.get(valueArgument)
+    fun getExpectedTypeForSamConvertedArgument(konstueArgument: ValueArgument): UnwrappedType? =
+        expectedTypeForSamConvertedArgumentMap?.get(konstueArgument)
 
-    fun getExpectedTypeForSuspendConvertedArgument(valueArgument: ValueArgument): UnwrappedType? =
-        expectedTypeForSuspendConvertedArgumentMap?.get(valueArgument)
+    fun getExpectedTypeForSuspendConvertedArgument(konstueArgument: ValueArgument): UnwrappedType? =
+        expectedTypeForSuspendConvertedArgumentMap?.get(konstueArgument)
 
-    fun getExpectedTypeForUnitConvertedArgument(valueArgument: ValueArgument): UnwrappedType? =
-        expectedTypeForUnitConvertedArgumentMap?.get(valueArgument)
+    fun getExpectedTypeForUnitConvertedArgument(konstueArgument: ValueArgument): UnwrappedType? =
+        expectedTypeForUnitConvertedArgumentMap?.get(konstueArgument)
 
     private fun calculateExpectedTypeForConvertedArguments(
         arguments: Map<KotlinCallArgument, UnwrappedType>,
@@ -167,11 +167,11 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
     ): Map<ValueArgument, UnwrappedType>? {
         if (arguments.isEmpty()) return null
 
-        val expectedTypeForConvertedArguments = hashMapOf<ValueArgument, UnwrappedType>()
+        konst expectedTypeForConvertedArguments = hashMapOf<ValueArgument, UnwrappedType>()
         for ((argument, convertedType) in arguments) {
-            val typeWithFreshVariables = resolvedCallAtom.freshVariablesSubstitutor.safeSubstitute(convertedType)
-            val expectedType = substitutor?.safeSubstitute(typeWithFreshVariables) ?: typeWithFreshVariables
-            expectedTypeForConvertedArguments[argument.psiCallArgument.valueArgument] = expectedType
+            konst typeWithFreshVariables = resolvedCallAtom.freshVariablesSubstitutor.safeSubstitute(convertedType)
+            konst expectedType = substitutor?.safeSubstitute(typeWithFreshVariables) ?: typeWithFreshVariables
+            expectedTypeForConvertedArguments[argument.psiCallArgument.konstueArgument] = expectedType
         }
 
         return expectedTypeForConvertedArguments
@@ -180,10 +180,10 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
     private fun calculateExpectedTypeForConstantConvertedArgumentMap() {
         if (resolvedCallAtom.argumentsWithConstantConversion.isEmpty()) return
 
-        val expectedTypeForConvertedArguments = hashMapOf<KtExpression, IntegerValueTypeConstant>()
+        konst expectedTypeForConvertedArguments = hashMapOf<KtExpression, IntegerValueTypeConstant>()
 
         for ((argument, convertedConstant) in resolvedCallAtom.argumentsWithConstantConversion) {
-            val expression = argument.psiExpression ?: continue
+            konst expression = argument.psiExpression ?: continue
             expectedTypeForConvertedArguments[expression] = convertedConstant
         }
 
@@ -192,7 +192,7 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
 
     private fun calculateExpectedTypeForSamConvertedArgumentMap(substitutor: NewTypeSubstitutor?) {
         expectedTypeForSamConvertedArgumentMap = calculateExpectedTypeForConvertedArguments(
-            resolvedCallAtom.argumentsWithConversion.mapValues { it.value.convertedTypeByCandidateParameter },
+            resolvedCallAtom.argumentsWithConversion.mapValues { it.konstue.convertedTypeByCandidateParameter },
             substitutor
         )
     }
@@ -210,7 +210,7 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
     }
 
     private fun collectErrorPositions(): Map<ValueArgument, List<KotlinCallDiagnostic>> {
-        val result = mutableListOf<Pair<ValueArgument, KotlinCallDiagnostic>>()
+        konst result = mutableListOf<Pair<ValueArgument, KotlinCallDiagnostic>>()
 
         fun ConstraintPosition.originalPosition(): ConstraintPosition =
             if (this is IncorporationConstraintPosition) {
@@ -220,14 +220,14 @@ class NewResolvedCallImpl<D : CallableDescriptor>(
             }
 
         diagnostics.forEach {
-            val position = when (val error = it.constraintSystemError) {
+            konst position = when (konst error = it.constraintSystemError) {
                 is NewConstraintError -> error.position.originalPosition()
                 is CapturedTypeFromSubtyping -> error.position.originalPosition()
                 is ConstrainingTypeIsError -> error.position.originalPosition()
                 else -> null
             } as? ArgumentConstraintPositionImpl ?: return@forEach
 
-            val argument = (position.argument as? PSIKotlinCallArgument)?.valueArgument ?: return@forEach
+            konst argument = (position.argument as? PSIKotlinCallArgument)?.konstueArgument ?: return@forEach
             result += argument to it
         }
 

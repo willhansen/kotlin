@@ -5,4 +5,4 @@
 
 package org.jetbrains.kotlin.gradle.targets.js.ir
 
-const val KLIB_TYPE = "klib"
+const konst KLIB_TYPE = "klib"

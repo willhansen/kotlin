@@ -11,8 +11,8 @@ fun runOnce(action: () -> Unit) {
 }
 
 fun ok(): String {
-    val res: String
-    when (val o = "OK") {
+    konst res: String
+    when (konst o = "OK") {
         else -> runOnce {
             res = o
         }

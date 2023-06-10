@@ -19,9 +19,9 @@ interface CirFunctionOrProperty :
     CirHasModality,
     CirMaybeCallableMemberOfClass {
 
-    val extensionReceiver: CirExtensionReceiver?
-    val returnType: CirType
-    val kind: CallableMemberDescriptor.Kind
+    konst extensionReceiver: CirExtensionReceiver?
+    konst returnType: CirType
+    konst kind: CallableMemberDescriptor.Kind
 
     fun isVirtual(): Boolean =
         visibility != Visibilities.Private

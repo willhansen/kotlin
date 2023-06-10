@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.resolve.source.getPsi
 
 object JsExportAnnotationChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val trace = context.trace
+        konst trace = context.trace
 
-        val jsExport = AnnotationsUtils.getJsExportAnnotation(descriptor) ?: return
-        val jsExportPsi = jsExport.source.getPsi() ?: declaration
+        konst jsExport = AnnotationsUtils.getJsExportAnnotation(descriptor) ?: return
+        konst jsExportPsi = jsExport.source.getPsi() ?: declaration
 
         if (descriptor !is PackageFragmentDescriptor && !DescriptorUtils.isTopLevelDeclaration(descriptor)) {
             trace.report(ErrorsJs.NESTED_JS_EXPORT.on(jsExportPsi))

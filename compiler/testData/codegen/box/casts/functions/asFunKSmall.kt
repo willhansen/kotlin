@@ -31,10 +31,10 @@ inline fun asSucceeds(operation: String, block: () -> Unit) {
 class MyFun: Function<Any>
 
 fun box(): String {
-    val f0 = ::fn0 as Any
-    val f1 = ::fn1 as Any
+    konst f0 = ::fn0 as Any
+    konst f1 = ::fn1 as Any
 
-    val myFun = MyFun() as Any
+    konst myFun = MyFun() as Any
 
     asSucceeds("f0 as Function0<*>") { f0 as Function0<*> }
     asFailsWithCCE("f0 as Function1<*, *>") { f0 as Function1<*, *> }

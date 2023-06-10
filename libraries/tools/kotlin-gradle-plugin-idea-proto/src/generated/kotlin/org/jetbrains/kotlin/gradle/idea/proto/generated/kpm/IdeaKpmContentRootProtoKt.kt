@@ -10,7 +10,7 @@ object IdeaKpmContentRootProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmContentRootProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmContentRootProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKpmContentRootProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKpmContentRootProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKpmContentRootProtoKt {
       @JvmName("getAbsolutePath")
       get() = _builder.getAbsolutePath()
       @JvmName("setAbsolutePath")
-      set(value) {
-        _builder.setAbsolutePath(value)
+      set(konstue) {
+        _builder.setAbsolutePath(konstue)
       }
     /**
      * <code>optional string absolute_path = 2;</code>
@@ -79,8 +79,8 @@ object IdeaKpmContentRootProtoKt {
       @JvmName("getType")
       get() = _builder.getType()
       @JvmName("setType")
-      set(value) {
-        _builder.setType(value)
+      set(konstue) {
+        _builder.setType(konstue)
       }
     /**
      * <code>optional string type = 3;</code>
@@ -101,6 +101,6 @@ object IdeaKpmContentRootProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 

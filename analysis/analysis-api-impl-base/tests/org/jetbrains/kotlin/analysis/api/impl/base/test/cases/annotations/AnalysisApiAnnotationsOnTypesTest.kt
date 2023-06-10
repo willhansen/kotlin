@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.test.services.assertions
 abstract class AbstractAnalysisApiAnnotationsOnTypesTest : AbstractAnalysisApiSingleFileTest() {
 
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val ktTypeReference = testServices.expressionMarkerProvider
+        konst ktTypeReference = testServices.expressionMarkerProvider
             .getElementOfTypeAtCaret<KtTypeReference>(ktFile)
-        val actual = analyseForTest(ktTypeReference) {
-            val ktType = ktTypeReference.getKtType()
-            val annotations = ktType.annotations
+        konst actual = analyseForTest(ktTypeReference) {
+            konst ktType = ktTypeReference.getKtType()
+            konst annotations = ktType.annotations
             buildString {
                 appendLine("KtTypeReference: ${ktTypeReference.text}")
                 appendLine("annotations: [")

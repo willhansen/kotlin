@@ -17,69 +17,69 @@ import org.junit.jupiter.api.condition.OS
 import java.util.*
 
 data class BuildOptions(
-    val logLevel: LogLevel = LogLevel.INFO,
-    val kotlinVersion: String = TestVersions.Kotlin.CURRENT,
-    val warningMode: WarningMode = WarningMode.Fail,
-    val configurationCache: Boolean = false,
-    val projectIsolation: Boolean = false,
-    val configurationCacheProblems: BaseGradleIT.ConfigurationCacheProblems = BaseGradleIT.ConfigurationCacheProblems.FAIL,
-    val parallel: Boolean = true,
-    val incremental: Boolean? = null,
-    val useGradleClasspathSnapshot: Boolean? = null,
-    val useICClasspathSnapshot: Boolean? = null,
-    val maxWorkers: Int = (Runtime.getRuntime().availableProcessors() / 4 - 1).coerceAtLeast(2),
+    konst logLevel: LogLevel = LogLevel.INFO,
+    konst kotlinVersion: String = TestVersions.Kotlin.CURRENT,
+    konst warningMode: WarningMode = WarningMode.Fail,
+    konst configurationCache: Boolean = false,
+    konst projectIsolation: Boolean = false,
+    konst configurationCacheProblems: BaseGradleIT.ConfigurationCacheProblems = BaseGradleIT.ConfigurationCacheProblems.FAIL,
+    konst parallel: Boolean = true,
+    konst incremental: Boolean? = null,
+    konst useGradleClasspathSnapshot: Boolean? = null,
+    konst useICClasspathSnapshot: Boolean? = null,
+    konst maxWorkers: Int = (Runtime.getRuntime().availableProcessors() / 4 - 1).coerceAtLeast(2),
     // On Windows OS enabling watch-fs prevents deleting temp directory, which fails the tests
-    val fileSystemWatchEnabled: Boolean = !OS.WINDOWS.isCurrentOs,
-    val buildCacheEnabled: Boolean = false,
-    val kaptOptions: KaptOptions? = null,
-    val androidVersion: String? = null,
-    val jsOptions: JsOptions? = null,
-    val buildReport: List<BuildReportType> = emptyList(),
-    val usePreciseJavaTracking: Boolean? = null,
-    val languageVersion: String? = null,
-    val languageApiVersion: String? = null,
-    val freeArgs: List<String> = emptyList(),
-    val statisticsForceValidation: Boolean = true,
-    val usePreciseOutputsBackup: Boolean? = null,
-    val keepIncrementalCompilationCachesInMemory: Boolean? = null,
-    val useDaemonFallbackStrategy: Boolean = false,
-    val verboseDiagnostics: Boolean = true,
-    val nativeOptions: NativeOptions = NativeOptions(),
+    konst fileSystemWatchEnabled: Boolean = !OS.WINDOWS.isCurrentOs,
+    konst buildCacheEnabled: Boolean = false,
+    konst kaptOptions: KaptOptions? = null,
+    konst androidVersion: String? = null,
+    konst jsOptions: JsOptions? = null,
+    konst buildReport: List<BuildReportType> = emptyList(),
+    konst usePreciseJavaTracking: Boolean? = null,
+    konst languageVersion: String? = null,
+    konst languageApiVersion: String? = null,
+    konst freeArgs: List<String> = emptyList(),
+    konst statisticsForceValidation: Boolean = true,
+    konst usePreciseOutputsBackup: Boolean? = null,
+    konst keepIncrementalCompilationCachesInMemory: Boolean? = null,
+    konst useDaemonFallbackStrategy: Boolean = false,
+    konst verboseDiagnostics: Boolean = true,
+    konst nativeOptions: NativeOptions = NativeOptions(),
 ) {
-    val safeAndroidVersion: String
+    konst safeAndroidVersion: String
         get() = androidVersion ?: error("AGP version is expected to be set")
 
     data class KaptOptions(
-        val verbose: Boolean = false,
-        val incrementalKapt: Boolean = false,
-        val includeCompileClasspath: Boolean = false,
-        val classLoadersCacheSize: Int? = null
+        konst verbose: Boolean = false,
+        konst incrementalKapt: Boolean = false,
+        konst includeCompileClasspath: Boolean = false,
+        konst classLoadersCacheSize: Int? = null
     )
 
     data class JsOptions(
-        val useIrBackend: Boolean? = null,
-        val jsCompilerType: KotlinJsCompilerType? = null,
-        val incrementalJs: Boolean? = null,
-        val incrementalJsKlib: Boolean? = null,
-        val incrementalJsIr: Boolean? = null,
-        val compileNoWarn: Boolean = true,
+        konst useIrBackend: Boolean? = null,
+        konst jsCompilerType: KotlinJsCompilerType? = null,
+        konst incrementalJs: Boolean? = null,
+        konst incrementalJsKlib: Boolean? = null,
+        konst incrementalJsIr: Boolean? = null,
+        konst compileNoWarn: Boolean = true,
     )
 
     data class NativeOptions(
-        val cacheKind: NativeCacheKind = NativeCacheKind.NONE,
-        val cocoapodsGenerateWrapper: Boolean? = null,
-        val distributionType: String? = null,
-        val distributionDownloadFromMaven: Boolean? = null,
-        val platformLibrariesMode: String? = null,
-        val reinstall: Boolean? = null,
-        val restrictedDistribution: Boolean? = null,
-        val version: String? = null,
+        konst cacheKind: NativeCacheKind = NativeCacheKind.NONE,
+        konst cocoapodsGenerateWrapper: Boolean? = null,
+        konst distributionType: String? = null,
+        konst distributionDownloadFromMaven: Boolean? = null,
+        konst platformLibrariesMode: String? = null,
+        konst reinstall: Boolean? = null,
+        konst restrictedDistribution: Boolean? = null,
+        konst version: String? = null,
     )
 
     fun toArguments(
         gradleVersion: GradleVersion
     ): List<String> {
-        val arguments = mutableListOf<String>()
+        konst arguments = mutableListOf<String>()
         when (logLevel) {
             LogLevel.DEBUG -> arguments.add("--debug")
             LogLevel.INFO -> arguments.add("--info")
@@ -162,7 +162,7 @@ data class BuildOptions(
         }
 
         if (statisticsForceValidation) {
-            arguments.add("-Pkotlin_performance_profile_force_validation=true")
+            arguments.add("-Pkotlin_performance_profile_force_konstidation=true")
         }
 
         if (usePreciseOutputsBackup != null) {

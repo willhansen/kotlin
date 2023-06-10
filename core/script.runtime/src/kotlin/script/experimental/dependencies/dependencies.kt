@@ -19,13 +19,13 @@ package kotlin.script.experimental.dependencies
 import java.io.File
 
 data class ScriptDependencies(
-        val javaHome: File? = null,
-        val classpath: List<File> = emptyList(),
-        val imports: List<String> = emptyList(),
-        val sources: List<File> = emptyList(),
-        val scripts: List<File> = emptyList()
+        konst javaHome: File? = null,
+        konst classpath: List<File> = emptyList(),
+        konst imports: List<String> = emptyList(),
+        konst sources: List<File> = emptyList(),
+        konst scripts: List<File> = emptyList()
 ) {
     companion object {
-        val Empty = ScriptDependencies()
+        konst Empty = ScriptDependencies()
     }
 }

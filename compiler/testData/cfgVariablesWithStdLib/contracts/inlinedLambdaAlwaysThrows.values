@@ -28,7 +28,7 @@ callsInPlace(block, InvocationKind.EXACTLY_ONCE)   <v3>: *                      
 == test ==
 fun test() {
     myRun { throw java.lang.IllegalArgumentException() }
-    val x: Int = 42
+    konst x: Int = 42
 }
 ---------------------
 { throw java.lang.IllegalArgumentException() }         <v0>: {<: () -> Unit}   NEW: r({ throw java.lang.IllegalArgumentException() }) -> <v0>

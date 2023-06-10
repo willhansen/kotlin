@@ -22,7 +22,7 @@ open class DatabaseEntity
 class Issue: DatabaseEntity()
 
 fun box(): String {
-    val sprintIssues = Derived()
+    konst sprintIssues = Derived()
     if (!sprintIssues.remove(Issue())) return "Fail"
 
     return "OK"

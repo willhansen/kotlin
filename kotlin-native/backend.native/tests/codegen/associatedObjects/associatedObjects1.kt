@@ -21,17 +21,17 @@ fun testBasics1() {
 @OptIn(ExperimentalAssociatedObjects::class)
 @AssociatedObjectKey
 @Retention(AnnotationRetention.BINARY)
-annotation class Associated1(val kClass: KClass<*>)
+annotation class Associated1(konst kClass: KClass<*>)
 
 @OptIn(ExperimentalAssociatedObjects::class)
 @AssociatedObjectKey
 @Retention(AnnotationRetention.BINARY)
-annotation class Associated2(val kClass: KClass<*>)
+annotation class Associated2(konst kClass: KClass<*>)
 
 @OptIn(ExperimentalAssociatedObjects::class)
 @AssociatedObjectKey
 @Retention(AnnotationRetention.BINARY)
-annotation class Associated3(val kClass: KClass<*>)
+annotation class Associated3(konst kClass: KClass<*>)
 
 @Associated1(Bar::class)
 @Associated2(Baz::class)
@@ -43,9 +43,9 @@ object Baz
 @Test
 @OptIn(ExperimentalAssociatedObjects::class)
 fun testGlobalOptimizations1() {
-    val i1 = I1ImplHolder::class.findAssociatedObject<Associated1>()!! as I1
+    konst i1 = I1ImplHolder::class.findAssociatedObject<Associated1>()!! as I1
     assertEquals(42, i1.foo())
-    val c = C(null)
+    konst c = C(null)
     i1.bar(c)
     assertEquals("zzz", c.list!![0])
 }
@@ -70,7 +70,7 @@ private class I1ImplHolder
 @Test
 @OptIn(ExperimentalAssociatedObjects::class)
 fun testGlobalOptimizations2() {
-    val i2 = I2ImplHolder()::class.findAssociatedObject<Associated1>()!! as I2
+    konst i2 = I2ImplHolder()::class.findAssociatedObject<Associated1>()!! as I2
     assertEquals(17, i2.foo())
 }
 

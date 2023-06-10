@@ -15,14 +15,14 @@ class B(var a: Int) {
     var div = false
     var divAssign = false
 
-    operator fun div(value: Int): B {
+    operator fun div(konstue: Int): B {
         div = true
-        return B(a / value)
+        return B(a / konstue)
     }
 
-    operator fun divAssign(value: Int) {
+    operator fun divAssign(konstue: Int) {
         divAssign = true
-        a = a / value
+        a = a / konstue
     }
 }
 

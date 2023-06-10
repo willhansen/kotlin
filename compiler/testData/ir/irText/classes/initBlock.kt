@@ -7,7 +7,7 @@ class Test1 {
     }
 }
 
-class Test2(val x: Int) {
+class Test2(konst x: Int) {
     init {
         println()
     }

@@ -36,25 +36,25 @@ class AndFunctor : AbstractBinaryFunctor() {
          with Returns(1) (note that they still *return* as guaranteed by AbstractSequentialBinaryFunctor).
          We will just ignore such clauses in order to make smartcasting robust while typing */
 
-        val leftTrue = left.filter { it.simpleEffect.isReturns { value.isTrue } }
-        val leftFalse = left.filter { it.simpleEffect.isReturns { value.isFalse } }
-        val rightTrue = right.filter { it.simpleEffect.isReturns { value.isTrue } }
-        val rightFalse = right.filter { it.simpleEffect.isReturns { value.isFalse } }
+        konst leftTrue = left.filter { it.simpleEffect.isReturns { konstue.isTrue } }
+        konst leftFalse = left.filter { it.simpleEffect.isReturns { konstue.isFalse } }
+        konst rightTrue = right.filter { it.simpleEffect.isReturns { konstue.isTrue } }
+        konst rightFalse = right.filter { it.simpleEffect.isReturns { konstue.isFalse } }
 
-        val whenLeftReturnsTrue = foldConditionsWithOr(leftTrue)
-        val whenRightReturnsTrue = foldConditionsWithOr(rightTrue)
-        val whenLeftReturnsFalse = foldConditionsWithOr(leftFalse)
-        val whenRightReturnsFalse = foldConditionsWithOr(rightFalse)
+        konst whenLeftReturnsTrue = foldConditionsWithOr(leftTrue)
+        konst whenRightReturnsTrue = foldConditionsWithOr(rightTrue)
+        konst whenLeftReturnsFalse = foldConditionsWithOr(leftFalse)
+        konst whenRightReturnsFalse = foldConditionsWithOr(rightFalse)
 
         // Even if one of 'Returns(true)' is missing, we still can argue that other condition
         // *must* be true when whole functor returns true
-        val conditionWhenTrue = applyWithDefault(whenLeftReturnsTrue, whenRightReturnsTrue) { l, r -> ESAnd(l, r) }
+        konst conditionWhenTrue = applyWithDefault(whenLeftReturnsTrue, whenRightReturnsTrue) { l, r -> ESAnd(l, r) }
 
         // When whole And-functor returns false, we can only argue that one of arguments was false, and to do so we
         // have to know *both* 'Returns(false)'-conditions
-        val conditionWhenFalse = applyIfBothNotNull(whenLeftReturnsFalse, whenRightReturnsFalse) { l, r -> ESOr(l, r) }
+        konst conditionWhenFalse = applyIfBothNotNull(whenLeftReturnsFalse, whenRightReturnsFalse) { l, r -> ESOr(l, r) }
 
-        val result = mutableListOf<ConditionalEffect>()
+        konst result = mutableListOf<ConditionalEffect>()
 
         if (conditionWhenTrue != null) {
             result.add(ConditionalEffect(conditionWhenTrue, ESReturns(ESConstants.trueValue)))

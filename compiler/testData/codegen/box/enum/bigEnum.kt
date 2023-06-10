@@ -405,8 +405,8 @@ enum class BigEnum {
 }
 
 fun box(): String {
-    if (BigEnum.values().size != 4000) {
-        return BigEnum.values().size.toString()
+    if (BigEnum.konstues().size != 4000) {
+        return BigEnum.konstues().size.toString()
     }
     return "OK"
 }

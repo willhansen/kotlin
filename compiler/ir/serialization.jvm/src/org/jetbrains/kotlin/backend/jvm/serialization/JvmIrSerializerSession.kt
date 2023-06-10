@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.synthetic.isVisibleOutside
 
 class JvmIrSerializerSession(
     messageLogger: IrMessageLogger,
-    private val declarationTable: DeclarationTable,
+    private konst declarationTable: DeclarationTable,
     expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
-    private val mode: JvmSerializeIrMode,
-    private val fileClassFqName: FqName,
+    private konst mode: JvmSerializeIrMode,
+    private konst fileClassFqName: FqName,
     languageVersionSettings: LanguageVersionSettings,
     skipExpects: Boolean = false,
 ) : IrFileSerializer(
@@ -41,7 +41,7 @@ class JvmIrSerializerSession(
 
     fun serializeJvmIrFile(irFile: IrFile): JvmIr.ClassOrFile? {
         var anySaved = false
-        val proto = JvmIr.ClassOrFile.newBuilder()
+        konst proto = JvmIr.ClassOrFile.newBuilder()
 
         declarationTable.inFile(irFile) {
             irFile.declarations.filter { it !is IrClass }.forEach { topDeclaration ->
@@ -60,7 +60,7 @@ class JvmIrSerializerSession(
     }
 
     fun serializeTopLevelClass(irClass: IrClass): JvmIr.ClassOrFile? {
-        val proto = JvmIr.ClassOrFile.newBuilder()
+        konst proto = JvmIr.ClassOrFile.newBuilder()
         declarationTable.inFile(irClass.parent as IrFile) {
             forEveryDeclarationToSerialize(irClass, mode) { declaration ->
                 proto.addDeclaration(serializeDeclaration(declaration))
@@ -118,7 +118,7 @@ private object ForVisibleInlineFunctionsVisitor : IrElementVisitor<Unit, (IrDecl
     }
 
     override fun visitSimpleFunction(declaration: IrSimpleFunction, data: (IrDeclaration) -> Unit) {
-        val action = data
+        konst action = data
         if (declaration.visibility.isVisibleOutside() &&
             declaration.isInline &&
             !declaration.isFakeOverride

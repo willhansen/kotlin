@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.native.interop.gen
 /**
  * The type which has exact counterparts on both Kotlin and native side and can be directly passed through bridges.
  */
-enum class BridgedType(val kotlinType: KotlinClassifierType, val convertor: String? = null) {
+enum class BridgedType(konst kotlinType: KotlinClassifierType, konst convertor: String? = null) {
     BYTE(KotlinTypes.byte, "toByte"),
     SHORT(KotlinTypes.short, "toShort"),
     INT(KotlinTypes.int, "toInt"),
@@ -36,8 +36,8 @@ enum class BridgedType(val kotlinType: KotlinClassifierType, val convertor: Stri
     VOID(KotlinTypes.unit)
 }
 
-data class BridgeTypedKotlinValue(val type: BridgedType, val value: KotlinExpression)
-data class BridgeTypedNativeValue(val type: BridgedType, val value: NativeExpression)
+data class BridgeTypedKotlinValue(konst type: BridgedType, konst konstue: KotlinExpression)
+data class BridgeTypedNativeValue(konst type: BridgedType, konst konstue: NativeExpression)
 
 /**
  * The entity which depends on native bridges.
@@ -45,14 +45,14 @@ data class BridgeTypedNativeValue(val type: BridgedType, val value: NativeExpres
 interface NativeBacked
 
 /**
- * Generates simple bridges between Kotlin and native, passing [BridgedType] values.
+ * Generates simple bridges between Kotlin and native, passing [BridgedType] konstues.
  */
 interface SimpleBridgeGenerator {
 
-    val topLevelNativeScope: NativeScope
+    konst topLevelNativeScope: NativeScope
 
     /**
-     * Generates the expression to convert given Kotlin values to native counterparts, pass through the bridge,
+     * Generates the expression to convert given Kotlin konstues to native counterparts, pass through the bridge,
      * use inside the native code produced by [block] and then return the result back.
      *
      * @param block produces native code lines into the builder and returns the expression to be used as the result.
@@ -66,7 +66,7 @@ interface SimpleBridgeGenerator {
     ): KotlinExpression
 
     /**
-     * Generates the expression to convert given native values to Kotlin counterparts, pass through the bridge,
+     * Generates the expression to convert given native konstues to Kotlin counterparts, pass through the bridge,
      * use inside the Kotlin code produced by [block] and then return the result back.
      */
     fun nativeToKotlin(
@@ -95,7 +95,7 @@ interface NativeBridges {
      */
     fun isSupported(nativeBacked: NativeBacked): Boolean
 
-    val kotlinLines: Sequence<String>
-    val nativeLines: Sequence<String>
+    konst kotlinLines: Sequence<String>
+    konst nativeLines: Sequence<String>
 }
 

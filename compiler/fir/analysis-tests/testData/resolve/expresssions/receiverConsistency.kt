@@ -12,10 +12,10 @@ class C {
 }
 
 fun test() {
-    val c = C()
+    konst c = C()
     foo()
     c.bar()
 
-    val err = C()
+    konst err = C()
     err.<!UNRESOLVED_REFERENCE!>foo<!>()
 }

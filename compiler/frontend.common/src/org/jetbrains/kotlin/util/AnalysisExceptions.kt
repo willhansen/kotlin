@@ -11,10 +11,10 @@ import com.intellij.openapi.project.IndexNotReadyException
 import com.intellij.util.diff.FlyweightCapableTreeStructure
 import org.jetbrains.kotlin.*
 
-val Throwable.classNameAndMessage get() = "${this::class.qualifiedName}: $message"
+konst Throwable.classNameAndMessage get() = "${this::class.qualifiedName}: $message"
 
-class SourceCodeAnalysisException(val source: KtSourceElement, override val cause: Throwable) : Exception() {
-    override val message get() = cause.classNameAndMessage
+class SourceCodeAnalysisException(konst source: KtSourceElement, override konst cause: Throwable) : Exception() {
+    override konst message get() = cause.classNameAndMessage
 }
 
 
@@ -30,13 +30,13 @@ fun Throwable.wrapIntoSourceCodeAnalysisExceptionIfNeeded(element: KtSourceEleme
 }
 
 class FileAnalysisException(
-    private val path: String,
-    override val cause: Throwable,
-    private val lineAndOffset: Pair<Int, Int>? = null,
+    private konst path: String,
+    override konst cause: Throwable,
+    private konst lineAndOffset: Pair<Int, Int>? = null,
 ) : Exception() {
-    override val message
+    override konst message
         get(): String {
-            val (line, offset) = lineAndOffset ?: return "Somewhere in file $path: ${cause.classNameAndMessage}"
+            konst (line, offset) = lineAndOffset ?: return "Somewhere in file $path: ${cause.classNameAndMessage}"
             return "While analysing $path:${line + 1}:${offset + 1}: ${cause.classNameAndMessage}"
         }
 }
@@ -63,8 +63,8 @@ fun Throwable.wrapIntoFileAnalysisExceptionIfNeeded(
 }
 
 private fun KtSourceElement.isDefinitelyNotInsideFile(fileSource: KtSourceElement): Boolean {
-    val thisPsi = psi
-    val otherPsi = fileSource.psi
+    konst thisPsi = psi
+    konst otherPsi = fileSource.psi
 
     return when {
         thisPsi != null && otherPsi != null -> thisPsi.containingFile != otherPsi
@@ -73,13 +73,13 @@ private fun KtSourceElement.isDefinitelyNotInsideFile(fileSource: KtSourceElemen
 }
 
 private fun reportFileMismatch(source: KtSourceElement, fileSource: KtSourceElement, cause: Throwable): Throwable {
-    val thisPsi = source.psi
-    val otherPsi = fileSource.psi
-    val comparison = "This:\n\n${source.text?.asQuote}\n\n...is not present in"
+    konst thisPsi = source.psi
+    konst otherPsi = fileSource.psi
+    konst comparison = "This:\n\n${source.text?.asQuote}\n\n...is not present in"
 
-    val expectedFileMessage = if (thisPsi != null && otherPsi != null) {
-        val actualPath = thisPsi.containingFile.virtualFile.path
-        val expectedPath = otherPsi.containingFile.virtualFile.path
+    konst expectedFileMessage = if (thisPsi != null && otherPsi != null) {
+        konst actualPath = thisPsi.containingFile.virtualFile.path
+        konst expectedPath = otherPsi.containingFile.virtualFile.path
         "$expectedPath, but rather in $actualPath"
     } else {
         "...${fileSource.text?.asQuote}"
@@ -91,7 +91,7 @@ private fun reportFileMismatch(source: KtSourceElement, fileSource: KtSourceElem
     )
 }
 
-private val CharSequence.asQuote: String
+private konst CharSequence.asQuote: String
     get() = split("\n").joinToString("\n") { "> $it" }
 
 private fun LighterASTNode.isInside(other: LighterASTNode, tree: FlyweightCapableTreeStructure<LighterASTNode>): Boolean {

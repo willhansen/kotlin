@@ -3,4 +3,4 @@ interface A {
     var foo: String
 }
 
-class B(override <!VAR_OVERRIDDEN_BY_VAL!>val<!> foo: String) : A
+class B(override <!VAR_OVERRIDDEN_BY_VAL!>konst<!> foo: String) : A

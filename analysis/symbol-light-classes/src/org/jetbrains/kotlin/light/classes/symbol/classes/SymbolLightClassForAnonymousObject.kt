@@ -39,7 +39,7 @@ internal class SymbolLightClassForAnonymousObject : SymbolLightClassForClassLike
         manager: PsiManager,
     ) : super(classOrObjectDeclaration, classOrObjectSymbolPointer, ktModule, manager)
 
-    private val _baseClassType: PsiClassType by lazyPub {
+    private konst _baseClassType: PsiClassType by lazyPub {
         extendsListTypes.firstOrNull()
             ?: implementsListTypes.firstOrNull()
             ?: PsiType.getJavaLangObject(manager, resolveScope)
@@ -50,13 +50,13 @@ internal class SymbolLightClassForAnonymousObject : SymbolLightClassForClassLike
 
     override fun getBaseClassType(): PsiClassType = _baseClassType
 
-    private val _extendsList by lazyPub {
+    private konst _extendsList by lazyPub {
         withClassOrObjectSymbol {
             createInheritanceList(forExtendsList = true, it.superTypes)
         }
     }
 
-    private val _implementsList by lazyPub {
+    private konst _implementsList by lazyPub {
         withClassOrObjectSymbol {
             createInheritanceList(forExtendsList = false, it.superTypes)
         }
@@ -67,8 +67,8 @@ internal class SymbolLightClassForAnonymousObject : SymbolLightClassForClassLike
 
     override fun getOwnMethods(): List<PsiMethod> = cachedValue {
         withClassOrObjectSymbol {
-            val result = mutableListOf<KtLightMethod>()
-            val declaredMemberScope = it.getDeclaredMemberScope()
+            konst result = mutableListOf<KtLightMethod>()
+            konst declaredMemberScope = it.getDeclaredMemberScope()
 
             createMethods(declaredMemberScope.getCallableSymbols(), result)
             createConstructors(declaredMemberScope.getConstructors(), result)
@@ -77,8 +77,8 @@ internal class SymbolLightClassForAnonymousObject : SymbolLightClassForClassLike
     }
 
     override fun getOwnFields(): List<KtLightField> = cachedValue {
-        val result = mutableListOf<KtLightField>()
-        val nameGenerator = SymbolLightField.FieldNameGenerator()
+        konst result = mutableListOf<KtLightField>()
+        konst nameGenerator = SymbolLightField.FieldNameGenerator()
 
         withClassOrObjectSymbol {
             it.getDeclaredMemberScope().getCallableSymbols()

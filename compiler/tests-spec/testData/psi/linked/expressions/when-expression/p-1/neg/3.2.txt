@@ -19,7 +19,7 @@ KtFile: 3.2.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         REFERENCE_EXPRESSION
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
         PsiElement(RPAR)(')')
         PsiErrorElement:Expecting '{'
           <empty list>

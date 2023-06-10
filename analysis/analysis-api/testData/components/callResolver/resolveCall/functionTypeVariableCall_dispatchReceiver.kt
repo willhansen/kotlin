@@ -1,5 +1,5 @@
 class A {
-    val f: String.() -> Unit = {}
+    konst f: String.() -> Unit = {}
     fun test() {
         "".<expr>f()</expr>
     }

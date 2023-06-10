@@ -26,6 +26,6 @@ class bar {
 // FILE: test.kt
 
 fun box(): String {
-    val obj = lib.foo.bar()
+    konst obj = lib.foo.bar()
     return if (obj.get() == 0) "OK" else "ERROR"
 }

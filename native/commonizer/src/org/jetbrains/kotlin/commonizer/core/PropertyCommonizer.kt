@@ -14,19 +14,19 @@ import org.jetbrains.kotlin.descriptors.Modality
 class PropertyCommonizer(
     functionOrPropertyBaseCommonizer: FunctionOrPropertyBaseCommonizer
 ) : AbstractStandardCommonizer<CirProperty, CirProperty?>() {
-    private val setter = PropertySetterCommonizer.asNullableCommonizer()
+    private konst setter = PropertySetterCommonizer.asNullableCommonizer()
     private lateinit var constCommonizationState: ConstCommonizationState
-    private val functionOrPropertyBaseCommonizer = functionOrPropertyBaseCommonizer.asCommonizer()
+    private konst functionOrPropertyBaseCommonizer = functionOrPropertyBaseCommonizer.asCommonizer()
 
     override fun commonizationResult(): CirProperty? {
-        val functionOrPropertyBase = functionOrPropertyBaseCommonizer.result ?: return null
+        konst functionOrPropertyBase = functionOrPropertyBaseCommonizer.result ?: return null
 
-        val setter = setter.result?.takeIf { setter ->
+        konst setter = setter.result?.takeIf { setter ->
             setter !== PropertySetterCommonizer.privateFallbackSetter || functionOrPropertyBase.modality == Modality.FINAL
         }
 
-        val constCommonizationState = constCommonizationState
-        val constCompileTimeInitializer = (constCommonizationState as? ConstSameValue)?.compileTimeInitializer
+        konst constCommonizationState = constCommonizationState
+        konst constCompileTimeInitializer = (constCommonizationState as? ConstSameValue)?.compileTimeInitializer
 
         return CirProperty(
             annotations = functionOrPropertyBase.additionalAnnotations,
@@ -64,7 +64,7 @@ class PropertyCommonizer(
             return false
         }
 
-        val constCommonizationState = constCommonizationState
+        konst constCommonizationState = constCommonizationState
         if (next.isConst) {
             // const properties should be lifted up
             // otherwise commonization should fail: expect property can't be const because expect can't have initializer
@@ -87,7 +87,7 @@ class PropertyCommonizer(
             this.constCommonizationState = NonConst
         }
 
-        val result = functionOrPropertyBaseCommonizer.commonizeWith(next)
+        konst result = functionOrPropertyBaseCommonizer.commonizeWith(next)
                 && setter.commonizeWith(next.setter)
 
         return result
@@ -98,7 +98,7 @@ class PropertyCommonizer(
 
         abstract class Const : ConstCommonizationState()
 
-        class ConstSameValue(val compileTimeInitializer: CirConstantValue) : Const() {
+        class ConstSameValue(konst compileTimeInitializer: CirConstantValue) : Const() {
             init {
                 check(compileTimeInitializer != CirConstantValue.NullValue)
             }

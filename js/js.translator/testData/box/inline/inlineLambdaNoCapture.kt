@@ -7,7 +7,7 @@ internal inline fun filteredReduce(a: Array<Int>, predicate: (Int) -> Boolean, r
     var result = 0
 
     for (element in a) {
-        val satisfyPred = predicate(element)
+        konst satisfyPred = predicate(element)
         if (satisfyPred) {
             result = reduceFun(result, element)
         }

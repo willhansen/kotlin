@@ -1,30 +1,30 @@
 // IGNORE_BACKEND: JS
 // RUN_PLAIN_BOX_FUNCTION
 // INFER_MAIN_MODULE
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
-// MODULE: export_invalid_name_class
+// MODULE: export_inkonstid_name_class
 // FILE: lib.kt
 
 @JsExport
-class `invalid@class-name `() {
+class `inkonstid@class-name `() {
     companion object {
-        val `@invalid val@`: Int = 23
-        fun `invalid fun`(): Int = 42
+        konst `@inkonstid konst@`: Int = 23
+        fun `inkonstid fun`(): Int = 42
     }
 }
 
 // FILE: test.js
 function box() {
-    var InvalidClass = this["export_invalid_name_class"]["invalid@class-name "]
+    var InkonstidClass = this["export_inkonstid_name_class"]["inkonstid@class-name "]
 
-    if (InvalidClass.Companion["@invalid val@"] !== 23)
-        return "false: expect exproted class static variable '@invalid val@' to be 23 but it equals " + InvalidClass.Companion["@invalud val@"]
+    if (InkonstidClass.Companion["@inkonstid konst@"] !== 23)
+        return "false: expect exproted class static variable '@inkonstid konst@' to be 23 but it equals " + InkonstidClass.Companion["@inkonstud konst@"]
 
-    var result = InvalidClass.Companion["invalid fun"]()
+    var result = InkonstidClass.Companion["inkonstid fun"]()
 
     if (result !== 42)
-        return "false: expect exproted class static function 'invalid fun' to return 23 but it equals " + result
+        return "false: expect exproted class static function 'inkonstid fun' to return 23 but it equals " + result
 
     return "OK"
 }

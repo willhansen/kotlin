@@ -10,9 +10,9 @@ class Foo {
     fun foo(a: Int) {}
 
     @Deprecated("Deprecated property")
-    val prop = 0
+    konst prop = 0
 
     var foo: Int
         @Deprecated("Deprecated getter") get() = 0
-        @Deprecated("Deprecated setter") set(value) {}
+        @Deprecated("Deprecated setter") set(konstue) {}
 }

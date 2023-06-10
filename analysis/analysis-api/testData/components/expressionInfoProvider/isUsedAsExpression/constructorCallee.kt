@@ -1,4 +1,4 @@
-class C(val x: Int)
+class C(konst x: Int)
 
 fun test() {
     <expr>C</expr>(55)

@@ -30,22 +30,22 @@ import kotlin.properties.Delegates
 
 @OptIn(FirImplementationDetail::class)
 class FirJavaConstructor @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
-    override val moduleData: FirModuleData,
-    override val symbol: FirConstructorSymbol,
-    override val origin: FirDeclarationOrigin.Java,
-    override val isPrimary: Boolean,
+    override konst source: KtSourceElement?,
+    override konst moduleData: FirModuleData,
+    override konst symbol: FirConstructorSymbol,
+    override konst origin: FirDeclarationOrigin.Java,
+    override konst isPrimary: Boolean,
     override var returnTypeRef: FirTypeRef,
-    override val valueParameters: MutableList<FirValueParameter>,
-    override val typeParameters: MutableList<FirTypeParameterRef>,
+    override konst konstueParameters: MutableList<FirValueParameter>,
+    override konst typeParameters: MutableList<FirTypeParameterRef>,
     annotationBuilder: () -> List<FirAnnotation>,
     override var status: FirDeclarationStatus,
     resolvePhase: FirResolvePhase,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
 ) : FirConstructor() {
-    override val receiverParameter: FirReceiverParameter? get() = null
+    override konst receiverParameter: FirReceiverParameter? get() = null
     override var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
-    override val contractDescription: FirContractDescription get() = FirEmptyContractDescription
+    override konst contractDescription: FirContractDescription get() = FirEmptyContractDescription
 
     init {
         symbol.bind(this)
@@ -54,23 +54,23 @@ class FirJavaConstructor @FirImplementationDetail constructor(
         this.resolveState = resolvePhase.asResolveState()
     }
 
-    override val delegatedConstructor: FirDelegatedConstructorCall?
+    override konst delegatedConstructor: FirDelegatedConstructorCall?
         get() = null
 
-    override val body: FirBlock?
+    override konst body: FirBlock?
         get() = null
 
-    override val attributes: FirDeclarationAttributes = FirDeclarationAttributes()
+    override konst attributes: FirDeclarationAttributes = FirDeclarationAttributes()
 
-    override val controlFlowGraphReference: FirControlFlowGraphReference? get() = null
+    override konst controlFlowGraphReference: FirControlFlowGraphReference? get() = null
 
-    override val annotations: List<FirAnnotation> by lazy { annotationBuilder() }
+    override konst annotations: List<FirAnnotation> by lazy { annotationBuilder() }
 
-    override val contextReceivers: List<FirContextReceiver>
+    override konst contextReceivers: List<FirContextReceiver>
         get() = emptyList()
 
     override fun <D> transformValueParameters(transformer: FirTransformer<D>, data: D): FirJavaConstructor {
-        valueParameters.transformInplace(transformer, data)
+        konstueParameters.transformInplace(transformer, data)
         return this
     }
 
@@ -83,7 +83,7 @@ class FirJavaConstructor @FirImplementationDetail constructor(
         returnTypeRef.accept(visitor, data)
         controlFlowGraphReference?.accept(visitor, data)
         typeParameters.forEach { it.accept(visitor, data) }
-        valueParameters.forEach { it.accept(visitor, data) }
+        konstueParameters.forEach { it.accept(visitor, data) }
         status.accept(visitor, data)
         annotations.forEach { it.accept(visitor, data) }
     }
@@ -138,8 +138,8 @@ class FirJavaConstructor @FirImplementationDetail constructor(
     }
 
     override fun replaceValueParameters(newValueParameters: List<FirValueParameter>) {
-        valueParameters.clear()
-        valueParameters += newValueParameters
+        konstueParameters.clear()
+        konstueParameters += newValueParameters
     }
 
     override fun replaceDelegatedConstructor(newDelegatedConstructor: FirDelegatedConstructorCall?) {
@@ -187,7 +187,7 @@ class FirJavaConstructorBuilder : FirConstructorBuilder() {
             origin = javaOrigin(isFromSource),
             isPrimary,
             returnTypeRef,
-            valueParameters,
+            konstueParameters,
             typeParameters,
             annotationBuilder,
             status,
@@ -199,35 +199,35 @@ class FirJavaConstructorBuilder : FirConstructorBuilder() {
     @Deprecated("Modification of 'body' has no impact for FirJavaConstructorBuilder", level = DeprecationLevel.HIDDEN)
     override var body: FirBlock?
         get() = throw IllegalStateException()
-        set(@Suppress("UNUSED_PARAMETER") value) {
+        set(@Suppress("UNUSED_PARAMETER") konstue) {
             throw IllegalStateException()
         }
 
     @Deprecated("Modification of 'delegatedConstructor' has no impact for FirJavaConstructorBuilder", level = DeprecationLevel.HIDDEN)
     override var delegatedConstructor: FirDelegatedConstructorCall?
         get() = throw IllegalStateException()
-        set(@Suppress("UNUSED_PARAMETER") value) {
+        set(@Suppress("UNUSED_PARAMETER") konstue) {
             throw IllegalStateException()
         }
 
     @Deprecated("Modification of 'resolvePhase' has no impact for FirJavaConstructorBuilder", level = DeprecationLevel.HIDDEN)
     override var resolvePhase: FirResolvePhase
         get() = throw IllegalStateException()
-        set(@Suppress("UNUSED_PARAMETER") value) {
+        set(@Suppress("UNUSED_PARAMETER") konstue) {
             throw IllegalStateException()
         }
 
     @Deprecated("Modification of 'receiverParameter' has no impact for FirJavaConstructorBuilder", level = DeprecationLevel.HIDDEN)
     override var receiverParameter: FirReceiverParameter?
         get() = throw IllegalStateException()
-        set(@Suppress("UNUSED_PARAMETER") value) {
+        set(@Suppress("UNUSED_PARAMETER") konstue) {
             throw IllegalStateException()
         }
 
     @Deprecated("Modification of 'origin' has no impact for FirJavaConstructorBuilder", level = DeprecationLevel.HIDDEN)
     override var origin: FirDeclarationOrigin
         get() = throw IllegalStateException()
-        set(@Suppress("UNUSED_PARAMETER") value) {
+        set(@Suppress("UNUSED_PARAMETER") konstue) {
             throw IllegalStateException()
         }
 }

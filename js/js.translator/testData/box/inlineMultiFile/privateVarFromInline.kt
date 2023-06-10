@@ -18,7 +18,7 @@ var log = ""
 internal class C {
     private var tokenPosition: String = "FAIL"
         get() { logg("G"); return field  }
-        set(value) { logg("S"); field = value }
+        set(konstue) { logg("S"); field = konstue }
 
     private fun logg(s: String) { log += s }
 
@@ -31,10 +31,10 @@ package foo
 
 fun box(): String {
 
-    val c = C()
+    konst c = C()
 
     bar(c)
-    val r = foo(c)
+    konst r = foo(c)
     if (log != "SG") return "FAIL1: $log"
 
     return r

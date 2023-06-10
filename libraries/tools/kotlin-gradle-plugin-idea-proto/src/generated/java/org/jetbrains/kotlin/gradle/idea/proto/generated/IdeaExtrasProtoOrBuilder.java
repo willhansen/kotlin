@@ -8,11 +8,11 @@ public interface IdeaExtrasProtoOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
   int getValuesCount();
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
   boolean containsValues(
       java.lang.String key);
@@ -23,12 +23,12 @@ public interface IdeaExtrasProtoOrBuilder extends
   java.util.Map<java.lang.String, com.google.protobuf.ByteString>
   getValues();
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
   java.util.Map<java.lang.String, com.google.protobuf.ByteString>
   getValuesMap();
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
 
   /* nullable */
@@ -37,7 +37,7 @@ com.google.protobuf.ByteString getValuesOrDefault(
       /* nullable */
 com.google.protobuf.ByteString defaultValue);
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
 
   com.google.protobuf.ByteString getValuesOrThrow(

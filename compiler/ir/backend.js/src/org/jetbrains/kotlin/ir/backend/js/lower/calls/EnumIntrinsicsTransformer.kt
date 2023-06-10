@@ -24,9 +24,9 @@ object EnumIntrinsicsUtils {
         call: IrFunctionAccessExpression,
         staticMethodPredicate: (IrSimpleFunction) -> Boolean
     ): IrExpression {
-        val enum = call.getTypeArgument(0)?.getClass() ?: return call
+        konst enum = call.getTypeArgument(0)?.getClass() ?: return call
         if (!enum.isEnumClass) return call
-        val staticMethod = enum.findDeclaration(staticMethodPredicate)
+        konst staticMethod = enum.findDeclaration(staticMethodPredicate)
         if (staticMethod == null || !staticMethod.isStaticMethodOfClass)
             compilationException(
                 "Enum class should have static method for ${call.symbol.owner.name}",
@@ -37,17 +37,17 @@ object EnumIntrinsicsUtils {
     }
 
     fun transformEnumValueOfIntrinsic(call: IrFunctionAccessExpression) = transformEnumTopLevelIntrinsic(call) {
-        it.name == Name.identifier("valueOf") &&
-                it.valueParameters.count() == 1 &&
-                it.valueParameters[0].type.isString()
+        it.name == Name.identifier("konstueOf") &&
+                it.konstueParameters.count() == 1 &&
+                it.konstueParameters[0].type.isString()
     }
 
     fun transformEnumValuesIntrinsic(call: IrFunctionAccessExpression) = transformEnumTopLevelIntrinsic(call) {
-        it.name == Name.identifier("values") && it.valueParameters.count() == 0
+        it.name == Name.identifier("konstues") && it.konstueParameters.count() == 0
     }
 }
 
-class EnumIntrinsicsTransformer(private val context: JsIrBackendContext) : CallsTransformer {
+class EnumIntrinsicsTransformer(private konst context: JsIrBackendContext) : CallsTransformer {
     override fun transformFunctionAccess(call: IrFunctionAccessExpression, doNotIntrinsify: Boolean) = when (call.symbol) {
         context.intrinsics.enumValueOfIntrinsic -> EnumIntrinsicsUtils.transformEnumValueOfIntrinsic(call)
         context.intrinsics.enumValuesIntrinsic -> EnumIntrinsicsUtils.transformEnumValuesIntrinsic(call)

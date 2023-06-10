@@ -24,7 +24,7 @@ class Test {
 fun <T> arrayOf(): Array<T> = null!!
 
 fun main() {
-    val raw = Test.rawAField
+    konst raw = Test.rawAField
 
     raw.charSequences = arrayOf<String>()
     raw.charSequences = <!ASSIGNMENT_TYPE_MISMATCH!>arrayOf<Double>()<!>

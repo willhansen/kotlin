@@ -19,9 +19,9 @@ object ClassInheritsJavaSealedClassChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is ClassDescriptor || declaration !is KtClassOrObject) return
         for (superTypeListEntry in declaration.superTypeListEntries) {
-            val typeReference = superTypeListEntry.typeReference ?: continue
-            val superType = typeReference.getAbbreviatedTypeOrType(context.trace.bindingContext)?.unwrap() ?: continue
-            val superClass = superType.constructor.declarationDescriptor as? LazyJavaClassDescriptor ?: continue
+            konst typeReference = superTypeListEntry.typeReference ?: continue
+            konst superType = typeReference.getAbbreviatedTypeOrType(context.trace.bindingContext)?.unwrap() ?: continue
+            konst superClass = superType.constructor.declarationDescriptor as? LazyJavaClassDescriptor ?: continue
             if (superClass.jClass.isSealed) {
                 context.trace.report(Errors.CLASS_INHERITS_JAVA_SEALED_CLASS.on(typeReference))
             }

@@ -17,7 +17,7 @@ fun testTrivial() {
     assertEquals(1, testTrivialCreateBlock(1)())
 }
 
-class Block(val block: () -> Int)
+class Block(konst block: () -> Int)
 
 fun testWrapBlockCreate(flag: Boolean): Block {
     return (if (flag) Block { 11 } else null) ?: Block { 22 }
@@ -32,16 +32,16 @@ fun testWrapBlock() {
 // The Flow code below is taken from kotlinx.coroutines (some unrelated details removed).
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 interface Flow<out T> {
     suspend fun collect(collector: FlowCollector<T>)
 }
 
-suspend inline fun <T> Flow<T>.collect(crossinline action: suspend (value: T) -> Unit): Unit =
+suspend inline fun <T> Flow<T>.collect(crossinline action: suspend (konstue: T) -> Unit): Unit =
         collect(object : FlowCollector<T> {
-            override suspend fun emit(value: T) = action(value)
+            override suspend fun emit(konstue: T) = action(konstue)
         })
 
 inline fun <T> unsafeFlow(crossinline block: suspend FlowCollector<T>.() -> Unit): Flow<T> {
@@ -53,24 +53,24 @@ inline fun <T> unsafeFlow(crossinline block: suspend FlowCollector<T>.() -> Unit
 }
 
 inline fun <T, R> Flow<T>.unsafeTransform(
-        crossinline transform: suspend FlowCollector<R>.(value: T) -> Unit
+        crossinline transform: suspend FlowCollector<R>.(konstue: T) -> Unit
 ): Flow<R> = unsafeFlow {
-    collect { value ->
-        return@collect transform(value)
+    collect { konstue ->
+        return@collect transform(konstue)
     }
 }
 
-inline fun <T, R: Any> Flow<T>.mapNotNull(crossinline transform: suspend (value: T) -> R?): Flow<R> = unsafeTransform { value ->
-    val transformed = transform(value) ?: return@unsafeTransform
+inline fun <T, R: Any> Flow<T>.mapNotNull(crossinline transform: suspend (konstue: T) -> R?): Flow<R> = unsafeTransform { konstue ->
+    konst transformed = transform(konstue) ?: return@unsafeTransform
     return@unsafeTransform emit(transformed)
 }
 
-fun <T> flowOf(value: T): Flow<T> = unsafeFlow {
-    emit(value)
+fun <T> flowOf(konstue: T): Flow<T> = unsafeFlow {
+    emit(konstue)
 }
 
 suspend fun <T> Flow<T>.toList(): List<T> {
-    val result = mutableListOf<T>()
+    konst result = mutableListOf<T>()
     collect {
         result.add(it)
     }
@@ -100,7 +100,7 @@ fun testWithFlow() {
     assertEquals(0, list2.size)
 }
 
-open class EmptyContinuation(override val context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
+open class EmptyContinuation(override konst context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
     companion object : EmptyContinuation()
     override fun resumeWith(result: Result<Any?>) { result.getOrThrow() }
 }

@@ -4,19 +4,19 @@ import kotlin.test.*
 
 fun box(): String {
     assertFailsWith<IllegalArgumentException> {
-        val intProgression = 1 until 8
+        konst intProgression = 1 until 8
         for (i in intProgression step 2 step 0) {
         }
     }
 
     assertFailsWith<IllegalArgumentException> {
-        val longProgression = 1L until 8L
+        konst longProgression = 1L until 8L
         for (i in longProgression step 2L step 0L) {
         }
     }
 
     assertFailsWith<IllegalArgumentException> {
-        val charProgression = 'a' until 'h'
+        konst charProgression = 'a' until 'h'
         for (i in charProgression step 2 step 0) {
         }
     }

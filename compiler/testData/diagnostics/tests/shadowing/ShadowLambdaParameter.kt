@@ -10,4 +10,4 @@ fun bar(x: Int, y: Int) {
     foo3 { (x, y) -> x + y }
 }
 
-data class Pair(val a: Int, val b: Int)
+data class Pair(konst a: Int, konst b: Int)

@@ -9,9 +9,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 fun lambda() {
-    val f = { x: Int, y: String? -> }
+    konst f = { x: Int, y: String? -> }
 
-    val g = f.reflect()!!
+    konst g = f.reflect()!!
 
     // TODO: maybe change this name
     assertEquals("<anonymous>", g.name)
@@ -20,9 +20,9 @@ fun lambda() {
 }
 
 fun funExpr() {
-    val f = fun(x: Int, y: String?) {}
+    konst f = fun(x: Int, y: String?) {}
 
-    val g = f.reflect()!!
+    konst g = f.reflect()!!
 
     // TODO: maybe change this name
     assertEquals("<no name provided>", g.name)
@@ -31,9 +31,9 @@ fun funExpr() {
 }
 
 fun extensionFunExpr() {
-    val f = fun String.(): String = this
+    konst f = fun String.(): String = this
 
-    val g = f.reflect()!!
+    konst g = f.reflect()!!
 
     assertEquals(KParameter.Kind.EXTENSION_RECEIVER, g.parameters.single().kind)
     assertEquals(null, g.parameters.single().name)

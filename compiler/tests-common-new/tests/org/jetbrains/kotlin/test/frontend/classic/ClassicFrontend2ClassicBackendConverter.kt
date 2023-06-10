@@ -20,9 +20,9 @@ class ClassicFrontend2ClassicBackendConverter(
         module: TestModule,
         inputArtifact: ClassicFrontendOutputArtifact
     ): ClassicBackendInput {
-        val (psiFiles, analysisResults, project, languageVersionSettings) = inputArtifact
+        konst (psiFiles, analysisResults, project, languageVersionSettings) = inputArtifact
         return ClassicBackendInput(
-            psiFiles.values,
+            psiFiles.konstues,
             analysisResults,
             project,
             languageVersionSettings

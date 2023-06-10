@@ -14,9 +14,9 @@ FILE: Child.kt
         }
 
         public final fun foo(): R|kotlin/Unit| {
-            lval x: R|kotlin/String| = Q|javapackage/PublicParentClass|.R|javapackage/PackagePrivateGrandparentInterface.publicStaticField|
-            lval y: R|kotlin/String| = Q|javapackage/PublicParentClass|.R|javapackage/PackagePrivateGrandparentInterface.publicStaticField|
-            lval z: <ERROR TYPE REF: Unresolved name: publicStaticField> = Q|javapackage/KotlinParentClass|.<Unresolved name: publicStaticField>#
+            lkonst x: R|kotlin/String| = Q|javapackage/PublicParentClass|.R|javapackage/PackagePrivateGrandparentInterface.publicStaticField|
+            lkonst y: R|kotlin/String| = Q|javapackage/PublicParentClass|.R|javapackage/PackagePrivateGrandparentInterface.publicStaticField|
+            lkonst z: <ERROR TYPE REF: Unresolved name: publicStaticField> = Q|javapackage/KotlinParentClass|.<Unresolved name: publicStaticField>#
         }
 
     }

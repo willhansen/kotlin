@@ -30,5 +30,5 @@ fun baz() {
 
     a.A3("") checkType { _<String>() }
 
-    val x: a.<!INVISIBLE_REFERENCE!>A2<!> = B("") // A2 is unresolved because it's private in file, OK
+    konst x: a.<!INVISIBLE_REFERENCE!>A2<!> = B("") // A2 is unresolved because it's private in file, OK
 }

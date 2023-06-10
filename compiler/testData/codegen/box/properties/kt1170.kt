@@ -1,5 +1,5 @@
 public abstract class BaseClass() {
-    open val kind : String = "BaseClass "
+    open konst kind : String = "BaseClass "
 
     fun getKindValue() : String {
         return kind
@@ -7,10 +7,10 @@ public abstract class BaseClass() {
 }
 
 public class Subclass : BaseClass() {
-    override val kind : String = "Subclass "
+    override konst kind : String = "Subclass "
 }
 
 fun box(): String {
-    val r = Subclass().getKindValue() + Subclass().kind
+    konst r = Subclass().getKindValue() + Subclass().kind
     return if(r == "Subclass Subclass ") "OK" else "fail"
 }

@@ -1,7 +1,7 @@
 enum class Foo {
     BLA("bla");
 
-    val bla: String
+    konst bla: String
 
     constructor(bla: String) {
         this.bla = bla

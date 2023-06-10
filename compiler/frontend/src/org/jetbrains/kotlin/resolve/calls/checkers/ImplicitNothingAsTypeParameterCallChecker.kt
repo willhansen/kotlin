@@ -52,20 +52,20 @@ object ImplicitNothingAsTypeParameterCallChecker : CallChecker {
         reportOn: PsiElement,
         context: CallCheckerContext,
     ): Boolean {
-        val resultingDescriptor = resolvedCall.resultingDescriptor
-        val expectedType = context.resolutionContext.expectedType
-        val inferredReturnType = resultingDescriptor.returnType ?: return false
-        val isBuiltinFunctionalType =
-            resolvedCall.resultingDescriptor.dispatchReceiverParameter?.value?.type?.isBuiltinFunctionalType == true
+        konst resultingDescriptor = resolvedCall.resultingDescriptor
+        konst expectedType = context.resolutionContext.expectedType
+        konst inferredReturnType = resultingDescriptor.returnType ?: return false
+        konst isBuiltinFunctionalType =
+            resolvedCall.resultingDescriptor.dispatchReceiverParameter?.konstue?.type?.isBuiltinFunctionalType == true
 
         if (inferredReturnType is DeferredType || isBuiltinFunctionalType) return false
         if (resultingDescriptor.name in SPECIAL_FUNCTION_NAMES || resolvedCall.call.typeArguments.isNotEmpty()) return false
 
-        val lambdasFromArgumentsReturnTypes =
-            resolvedCall.candidateDescriptor.valueParameters.filter { it.type.isFunctionOrSuspendFunctionType }
+        konst lambdasFromArgumentsReturnTypes =
+            resolvedCall.candidateDescriptor.konstueParameters.filter { it.type.isFunctionOrSuspendFunctionType }
                 .map { it.returnType?.arguments?.last()?.type }.toSet()
-        val unsubstitutedReturnType = resultingDescriptor.original.returnType ?: return false
-        val hasImplicitNothing = inferredReturnType.isNothingOrNullableNothing()
+        konst unsubstitutedReturnType = resultingDescriptor.original.returnType ?: return false
+        konst hasImplicitNothing = inferredReturnType.isNothingOrNullableNothing()
                 && unsubstitutedReturnType.isTypeParameter()
                 && (isOwnTypeParameter(unsubstitutedReturnType, resultingDescriptor.original) || isDelegationContext(context))
                 && (TypeUtils.noExpectedType(expectedType) || !expectedType.isNothing())
@@ -86,7 +86,7 @@ object ImplicitNothingAsTypeParameterCallChecker : CallChecker {
     }
 
     private fun isOwnTypeParameter(type: KotlinType, declaration: CallableDescriptor): Boolean {
-        val typeParameter = type.constructor.declarationDescriptor as? TypeParameterDescriptor ?: return false
+        konst typeParameter = type.constructor.declarationDescriptor as? TypeParameterDescriptor ?: return false
         return typeParameter.containingDeclaration == declaration
     }
 
@@ -96,8 +96,8 @@ object ImplicitNothingAsTypeParameterCallChecker : CallChecker {
     private fun ResolvedAtom.getResolvedCallAtom(bindingContext: BindingContext): ResolvedCallAtom? {
         if (this is SingleCallResolutionResult) return resultCallAtom
 
-        val resolutionAtom = atom as? KotlinCallArgument ?: return null
-        val resolvedCall = resolutionAtom.psiExpression.getResolvedCall(bindingContext)
+        konst resolutionAtom = atom as? KotlinCallArgument ?: return null
+        konst resolvedCall = resolutionAtom.psiExpression.getResolvedCall(bindingContext)
 
         return if (resolvedCall is NewResolvedCallImpl) resolvedCall.resolvedCallAtom else null
     }
@@ -106,25 +106,25 @@ object ImplicitNothingAsTypeParameterCallChecker : CallChecker {
         var hasAlreadyReportedAtDepth = false
 
         for (resolvedAtom in resolvedAtoms) {
-            val subResolveAtoms = resolvedAtom.subResolvedAtoms
+            konst subResolveAtoms = resolvedAtom.subResolvedAtoms
 
             if (!subResolveAtoms.isNullOrEmpty() && findFunctionsWithImplicitNothingAndReport(subResolveAtoms, context)) {
                 hasAlreadyReportedAtDepth = true
                 continue
             }
 
-            val resolvedCallAtom = resolvedAtom.getResolvedCallAtom(context.trace.bindingContext) ?: continue
-            val atom = resolvedAtom.atom
+            konst resolvedCallAtom = resolvedAtom.getResolvedCallAtom(context.trace.bindingContext) ?: continue
+            konst atom = resolvedAtom.atom
 
             if (atom is SimpleKotlinCallArgument && !atom.receiver.stableType.isNothingOrNullableNothing())
                 continue
 
-            val candidateDescriptor = resolvedCallAtom.candidateDescriptor
-            val isReturnTypeOwnTypeParameter = candidateDescriptor.typeParameters.any {
+            konst candidateDescriptor = resolvedCallAtom.candidateDescriptor
+            konst isReturnTypeOwnTypeParameter = candidateDescriptor.typeParameters.any {
                 it.typeConstructor == candidateDescriptor.returnType?.constructor
             }
-            val isSpecialCall = candidateDescriptor.name in SPECIAL_FUNCTION_NAMES
-            val hasExplicitTypeArguments = resolvedCallAtom.atom.psiKotlinCall.typeArguments.isNotEmpty() // not required
+            konst isSpecialCall = candidateDescriptor.name in SPECIAL_FUNCTION_NAMES
+            konst hasExplicitTypeArguments = resolvedCallAtom.atom.psiKotlinCall.typeArguments.isNotEmpty() // not required
 
             if (!isSpecialCall && isReturnTypeOwnTypeParameter && !hasExplicitTypeArguments) {
                 context.trace.reportDiagnosticOnceWrtDiagnosticFactoryList(
@@ -147,28 +147,28 @@ object ImplicitNothingAsTypeParameterCallChecker : CallChecker {
     ): List<ResolvedAtom>? {
         if (resolvedCall !is NewResolvedCallImpl) return null
 
-        val hasNotNothingExpectedType = !TypeUtils.noExpectedType(expectedType) && !expectedType.isNothingOrNullableNothing()
-        val hasNothingReturnType = resolvedCall.resultingDescriptor.returnType?.isNothingOrNullableNothing() == true
-        val isSubResolvedAtomsNotEmpty = !resolvedCall.resolvedCallAtom.subResolvedAtoms.isNullOrEmpty()
+        konst hasNotNothingExpectedType = !TypeUtils.noExpectedType(expectedType) && !expectedType.isNothingOrNullableNothing()
+        konst hasNothingReturnType = resolvedCall.resultingDescriptor.returnType?.isNothingOrNullableNothing() == true
+        konst isSubResolvedAtomsNotEmpty = !resolvedCall.resolvedCallAtom.subResolvedAtoms.isNullOrEmpty()
 
         if (hasNotNothingExpectedType && hasNothingReturnType && isSubResolvedAtomsNotEmpty) {
             return resolvedCall.resolvedCallAtom.subResolvedAtoms
         }
 
-        val resolvedAtomsFromArguments = resolvedCall.valueArguments.values.mapNotNull { argument ->
+        konst resolvedAtomsFromArguments = resolvedCall.konstueArguments.konstues.mapNotNull { argument ->
             if (argument !is ExpressionValueArgument) return@mapNotNull null
 
-            val resolvedCallForArgument =
-                argument.valueArgument?.getArgumentExpression()?.getResolvedCall(bindingContext) as? NewResolvedCallImpl
+            konst resolvedCallForArgument =
+                argument.konstueArgument?.getArgumentExpression()?.getResolvedCall(bindingContext) as? NewResolvedCallImpl
                     ?: return@mapNotNull null
-            val expectedTypeForArgument = resolvedCall.getParameterForArgument(argument.valueArgument)?.type ?: return@mapNotNull null
+            konst expectedTypeForArgument = resolvedCall.getParameterForArgument(argument.konstueArgument)?.type ?: return@mapNotNull null
 
             getSubResolvedAtomsToAnalyze(resolvedCallForArgument, expectedTypeForArgument, bindingContext)
         }.flatten()
 
-        val extensionReceiver = resolvedCall.resolvedCallAtom.extensionReceiverArgument?.psiExpression
-        val resolvedAtomsFromExtensionReceiver = extensionReceiver?.run {
-            val extensionReceiverResolvedCall = getResolvedCall(bindingContext)
+        konst extensionReceiver = resolvedCall.resolvedCallAtom.extensionReceiverArgument?.psiExpression
+        konst resolvedAtomsFromExtensionReceiver = extensionReceiver?.run {
+            konst extensionReceiverResolvedCall = getResolvedCall(bindingContext)
             // It's needed to exclude invoke with extension (when resolved call for extension equals to common resolved call)
             if (extensionReceiverResolvedCall == resolvedCall) return@run null
 
@@ -185,7 +185,7 @@ object ImplicitNothingAsTypeParameterCallChecker : CallChecker {
     }
 
     private fun checkAgainstNotNothingExpectedType(resolvedCall: ResolvedCall<*>, context: CallCheckerContext): Boolean {
-        val subResolvedAtoms =
+        konst subResolvedAtoms =
             getSubResolvedAtomsToAnalyze(resolvedCall, context.resolutionContext.expectedType, context.trace.bindingContext) ?: return false
 
         return findFunctionsWithImplicitNothingAndReport(subResolvedAtoms, context)

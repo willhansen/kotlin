@@ -25,41 +25,41 @@ import javax.inject.Inject
  */
 @UntrackedTask(because = "Formatter should always run when asked")
 abstract class GitClangFormat : DefaultTask() {
-    private val platformManager = project.extensions.getByType<PlatformManager>()
+    private konst platformManager = project.extensions.getByType<PlatformManager>()
 
     /**
      * Parent branch for the current branch.
      */
     @get:Option(option = "parent", description = "base parent of the branch; by default origin/master")
     @get:Input
-    abstract val parent: Property<String>
+    abstract konst parent: Property<String>
 
     /**
      * Directory in which to format sources.
      */
     @get:Option(option = "directory", description = "directory in which to format sources; by default project's source directory")
     @get:Input
-    abstract val directory: Property<String>
+    abstract konst directory: Property<String>
 
     /**
      * Whether to run the tool in interactive mode.
      */
     @get:Option(option = "interactive", description = "interactively ask about each change before applying; by default false")
     @get:Input
-    abstract val interactive: Property<Boolean>
+    abstract konst interactive: Property<Boolean>
 
     @get:Inject
-    protected abstract val execOperations: ExecOperations
+    protected abstract konst execOperations: ExecOperations
 
     @TaskAction
     fun run() {
-        val gitClangFormat = platformManager.resolveLlvmUtility("git-clang-format")
-        val clangFormat = platformManager.resolveLlvmUtility("clang-format")
-        val parent = this.parent.get()
-        val directory = this.directory.get()
-        val interactive = this.interactive.get()
+        konst gitClangFormat = platformManager.resolveLlvmUtility("git-clang-format")
+        konst clangFormat = platformManager.resolveLlvmUtility("clang-format")
+        konst parent = this.parent.get()
+        konst directory = this.directory.get()
+        konst interactive = this.interactive.get()
 
-        val commit = ByteArrayOutputStream().let {
+        konst commit = ByteArrayOutputStream().let {
             execOperations.exec {
                 executable = "git"
                 args("merge-base", parent, "HEAD")

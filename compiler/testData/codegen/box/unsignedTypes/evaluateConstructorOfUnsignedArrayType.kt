@@ -1,24 +1,24 @@
 // WITH_REFLECT
 // TARGET_BACKEND: JVM
 
-annotation class AnnoUB(val ub: UByteArray)
-annotation class AnnoUS(val us: UShortArray)
-annotation class AnnoUI(val ui: UIntArray)
-annotation class AnnoUL(val ul: ULongArray)
+annotation class AnnoUB(konst ub: UByteArray)
+annotation class AnnoUS(konst us: UShortArray)
+annotation class AnnoUI(konst ui: UIntArray)
+annotation class AnnoUL(konst ul: ULongArray)
 
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
-const val ub0 = UByte(1)
+const konst ub0 = UByte(1)
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
-const val us0 = UShort(2)
+const konst us0 = UShort(2)
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
-const val ul0 = ULong(3)
+const konst ul0 = ULong(3)
 
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
-const val ui0 = UInt(-1)
+const konst ui0 = UInt(-1)
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
-const val ui1 = UInt(0)
+const konst ui1 = UInt(0)
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
-const val ui2 = UInt(40 + 2)
+const konst ui2 = UInt(40 + 2)
 
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 object Foo {
@@ -36,7 +36,7 @@ object Foo {
 }
 
 fun <T> check(ann: Annotation, f: T.() -> Boolean) {
-    val result = (ann as T).f()
+    konst result = (ann as T).f()
     if (!result) throw RuntimeException("fail for $ann")
 }
 

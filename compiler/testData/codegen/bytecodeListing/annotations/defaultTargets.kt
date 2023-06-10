@@ -21,11 +21,11 @@ annotation class AnnTypeField
 
 public class A(
         @AnnProperty @AnnField @AnnFieldProperty @AnnParameterProperty @AnnParameterField @AnnTypeField
-        public val x: Int
+        public konst x: Int
 ) {
 
     @AnnProperty @AnnField @AnnFieldProperty @AnnParameterProperty @AnnParameterField @AnnTypeField
-    public val a: Int = 1
+    public konst a: Int = 1
 
 }
 
@@ -33,5 +33,5 @@ public class A(
 annotation class Anno
 
 @Anno
-val p2: Int = 4
+konst p2: Int = 4
     get() = field

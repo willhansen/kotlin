@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.ir.interpreter.transformer
 
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrFile
@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrVarargImpl
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreter
-import org.jetbrains.kotlin.ir.interpreter.checker.EvaluationMode
+import org.jetbrains.kotlin.ir.interpreter.checker.EkonstuationMode
 import org.jetbrains.kotlin.ir.interpreter.checker.IrInterpreterChecker
 import org.jetbrains.kotlin.ir.interpreter.isPrimitiveArray
 import org.jetbrains.kotlin.ir.interpreter.toIrConst
@@ -22,13 +22,13 @@ import org.jetbrains.kotlin.ir.types.*
 internal abstract class IrConstAnnotationTransformer(
     interpreter: IrInterpreter,
     irFile: IrFile,
-    mode: EvaluationMode,
+    mode: EkonstuationMode,
     checker: IrInterpreterChecker,
-    evaluatedConstTracker: EvaluatedConstTracker?,
+    ekonstuatedConstTracker: EkonstuatedConstTracker?,
     onWarning: (IrFile, IrElement, IrErrorExpression) -> Unit,
     onError: (IrFile, IrElement, IrErrorExpression) -> Unit,
     suppressExceptions: Boolean,
-) : IrConstTransformer(interpreter, irFile, mode, checker, evaluatedConstTracker, onWarning, onError, suppressExceptions) {
+) : IrConstTransformer(interpreter, irFile, mode, checker, ekonstuatedConstTracker, onWarning, onError, suppressExceptions) {
     protected fun transformAnnotations(annotationContainer: IrAnnotationContainer) {
         annotationContainer.annotations.forEach { annotation ->
             transformAnnotation(annotation)
@@ -36,24 +36,24 @@ internal abstract class IrConstAnnotationTransformer(
     }
 
     private fun transformAnnotation(annotation: IrConstructorCall) {
-        for (i in 0 until annotation.valueArgumentsCount) {
-            val arg = annotation.getValueArgument(i) ?: continue
-            annotation.putValueArgument(i, transformAnnotationArgument(arg, annotation.symbol.owner.valueParameters[i]))
+        for (i in 0 until annotation.konstueArgumentsCount) {
+            konst arg = annotation.getValueArgument(i) ?: continue
+            annotation.putValueArgument(i, transformAnnotationArgument(arg, annotation.symbol.owner.konstueParameters[i]))
         }
     }
 
-    protected fun transformAnnotationArgument(argument: IrExpression, valueParameter: IrValueParameter): IrExpression {
+    protected fun transformAnnotationArgument(argument: IrExpression, konstueParameter: IrValueParameter): IrExpression {
         return when (argument) {
             is IrVararg -> argument.transformVarArg()
-            else -> argument.transformSingleArg(valueParameter.type)
+            else -> argument.transformSingleArg(konstueParameter.type)
         }
     }
 
     private fun IrVararg.transformVarArg(): IrVararg {
         if (elements.isEmpty()) return this
-        val newIrVararg = IrVarargImpl(this.startOffset, this.endOffset, this.type, this.varargElementType)
+        konst newIrVararg = IrVarargImpl(this.startOffset, this.endOffset, this.type, this.varargElementType)
         for (element in this.elements) {
-            when (val arg = (element as? IrSpreadElement)?.expression ?: element) {
+            when (konst arg = (element as? IrSpreadElement)?.expression ?: element) {
                 is IrVararg -> arg.transformVarArg().elements.forEach { newIrVararg.addElement(it) }
                 is IrExpression -> newIrVararg.addElement(arg.transformSingleArg(this.varargElementType))
                 else -> newIrVararg.addElement(arg)
@@ -76,7 +76,7 @@ internal abstract class IrConstAnnotationTransformer(
             this !is IrConst<*> || type is IrErrorType -> this
             type.isArray() -> this.convertToConstIfPossible((type as IrSimpleType).arguments.single().typeOrNull!!)
             type.isPrimitiveArray() -> this.convertToConstIfPossible(this.type)
-            else -> this.value.toIrConst(type, this.startOffset, this.endOffset)
+            else -> this.konstue.toIrConst(type, this.startOffset, this.endOffset)
         }
     }
 }

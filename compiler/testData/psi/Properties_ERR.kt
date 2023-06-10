@@ -1,18 +1,18 @@
 var - {}
 var f {}
 var f :
-val foo :
-val :
-val : Int
-val @[a foo = foo
-val foo.bar.
-val foo.
-val @a foo : = bar
-val foo.bar
+konst foo :
+konst :
+konst : Int
+konst @[a foo = foo
+konst foo.bar.
+konst foo.
+konst @a foo : = bar
+konst foo.bar
    public () {}
    () = foo
 
-val f.d.- = f
+konst f.d.- = f
 
-val foo
+konst foo
     get() -

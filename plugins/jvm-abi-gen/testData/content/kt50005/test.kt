@@ -4,7 +4,7 @@ package test
 // and thus part of the public ABI of a library.
 class A {
     @JvmField
-    val b: Int = 0
+    konst b: Int = 0
     lateinit var a: String
 
     fun g() {}

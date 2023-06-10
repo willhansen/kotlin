@@ -664,12 +664,12 @@ public class LazyClassDescriptor extends ClassDescriptorBase implements ClassDes
         }
 
         ClassConstructorDescriptor constructor = getUnsubstitutedPrimaryConstructor();
-        // Don't crash on invalid code.
-        InlineClassRepresentation<SimpleType> invalidValueClassRepresentation = new InlineClassRepresentation<>(
+        // Don't crash on inkonstid code.
+        InlineClassRepresentation<SimpleType> inkonstidValueClassRepresentation = new InlineClassRepresentation<>(
                 SpecialNames.SAFE_IDENTIFIER_FOR_NO_NAME, c.getModuleDescriptor().getBuiltIns().getAnyType()
         );
         if (constructor == null) {
-            return invalidValueClassRepresentation;
+            return inkonstidValueClassRepresentation;
         }
         List<ValueParameterDescriptor> parameters = constructor.getValueParameters();
         SimpleClassicTypeSystemContext context = SimpleClassicTypeSystemContext.INSTANCE;
@@ -677,7 +677,7 @@ public class LazyClassDescriptor extends ClassDescriptorBase implements ClassDes
             return new InlineClassRepresentation<>(parameters.get(0).getName(), (SimpleType) parameters.get(0).getType());
         }
         if (parameters.size() == 0) {
-            return invalidValueClassRepresentation;
+            return inkonstidValueClassRepresentation;
         }
         List<Pair<Name, SimpleType>> fields = parameters.stream()
                 .map(parameter -> new Pair<>(parameter.getName(), (SimpleType) parameter.getType()))
@@ -704,7 +704,7 @@ public class LazyClassDescriptor extends ClassDescriptorBase implements ClassDes
     }
 
     @Override
-    public void validate() {
+    public void konstidate() {
         if (parameters == null) {
             throw new IllegalStateException("parameters == null for " + this);
         }

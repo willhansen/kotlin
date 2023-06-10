@@ -37,7 +37,7 @@ private inline fun isInsideSpecificClass(
 
 internal fun FirMemberDeclaration.isEffectivelyFinal(context: CheckerContext): Boolean {
     if (this.isFinal) return true
-    val containingClass = context.containingDeclarations.lastOrNull() as? FirRegularClass ?: return true
+    konst containingClass = context.containingDeclarations.lastOrNull() as? FirRegularClass ?: return true
     if (containingClass.isEnumClass) {
         // Enum class has enum entries and hence is not considered final.
         return false
@@ -62,7 +62,7 @@ internal fun FirMemberDeclaration.isEffectivelyExternal(
 
     if (this is FirPropertyAccessor) {
         // Check containing property
-        val property = context.containingDeclarations.last() as FirProperty
+        konst property = context.containingDeclarations.last() as FirProperty
         return property.isEffectivelyExternal(containingClass, context)
     }
 
@@ -76,13 +76,13 @@ internal fun FirMemberDeclaration.isEffectivelyExternal(
     return containingClass != null && isInsideExternalClass(containingClass, context)
 }
 
-internal val FirClass.canHaveOpenMembers: Boolean get() = modality() != Modality.FINAL || classKind == ClassKind.ENUM_CLASS
+internal konst FirClass.canHaveOpenMembers: Boolean get() = modality() != Modality.FINAL || classKind == ClassKind.ENUM_CLASS
 
 // contract: returns(true) implies (this is FirMemberDeclaration<*>)
-val FirDeclaration.isLocalMember: Boolean
+konst FirDeclaration.isLocalMember: Boolean
     get() = symbol.isLocalMember
 
-internal val FirBasedSymbol<*>.isLocalMember: Boolean
+internal konst FirBasedSymbol<*>.isLocalMember: Boolean
     get() = when (this) {
         is FirPropertySymbol -> this.isLocal
         is FirRegularClassSymbol -> this.isLocal
@@ -90,10 +90,10 @@ internal val FirBasedSymbol<*>.isLocalMember: Boolean
         else -> false
     }
 
-internal val FirCallableDeclaration.isExtensionMember: Boolean
+internal konst FirCallableDeclaration.isExtensionMember: Boolean
     get() = symbol.isExtensionMember
 
-internal val FirCallableSymbol<*>.isExtensionMember: Boolean
+internal konst FirCallableSymbol<*>.isExtensionMember: Boolean
     get() = resolvedReceiverTypeRef != null && dispatchReceiverType != null
 
 fun FirClassSymbol<*>.primaryConstructorSymbol(): FirConstructorSymbol? {
@@ -109,8 +109,8 @@ fun FirTypeRef.needsMultiFieldValueClassFlattening(session: FirSession) = with(s
     coneType.typeConstructor().isMultiFieldValueClass() && !coneType.isNullable
 }
 
-val FirCallableSymbol<*>.hasExplicitReturnType: Boolean
+konst FirCallableSymbol<*>.hasExplicitReturnType: Boolean
     get() {
-        val returnTypeRef = resolvedReturnTypeRef
+        konst returnTypeRef = resolvedReturnTypeRef
         return returnTypeRef.delegatedTypeRef != null || returnTypeRef is FirImplicitUnitTypeRef
     }

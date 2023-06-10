@@ -8,7 +8,7 @@
 package dependency
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double)
+konstue class DPoint(konst x: Double, konst y: Double)
 
 fun f() = dependency.DPoint(1.0, 2.0)
 inline fun inlined() = dependency.DPoint(1.0, 2.0)

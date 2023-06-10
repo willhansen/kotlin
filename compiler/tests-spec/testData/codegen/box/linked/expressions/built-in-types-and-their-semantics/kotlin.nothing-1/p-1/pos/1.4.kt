@@ -11,7 +11,7 @@
 
 
 fun box(): String {
-    val bar = ::exit
+    konst bar = ::exit
     try {
         bar(enter())
     } catch (e: NotImplementedError) {

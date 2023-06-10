@@ -2,7 +2,7 @@
 package foo
 
 open class Base {
-    val c: Int
+    konst c: Int
 
     constructor(a: Int, b: Int = 3) {
         c = a + b

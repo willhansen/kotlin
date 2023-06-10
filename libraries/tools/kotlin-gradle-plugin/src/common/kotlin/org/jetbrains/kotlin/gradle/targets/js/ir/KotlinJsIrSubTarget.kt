@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.gradle.plugin.AbstractKotlinTargetConfigurator
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetWithTests
 import org.jetbrains.kotlin.gradle.plugin.mpp.isMain
-import org.jetbrains.kotlin.gradle.plugin.whenEvaluated
+import org.jetbrains.kotlin.gradle.plugin.whenEkonstuated
 import org.jetbrains.kotlin.gradle.targets.js.KotlinJsPlatformTestRun
 import org.jetbrains.kotlin.gradle.targets.js.dsl.Distribution
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
@@ -32,17 +32,17 @@ import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 import org.jetbrains.kotlin.gradle.utils.newFileProperty
 
 abstract class KotlinJsIrSubTarget(
-    val target: KotlinJsIrTarget,
-    private val disambiguationClassifier: String
+    konst target: KotlinJsIrTarget,
+    private konst disambiguationClassifier: String
 ) : KotlinJsSubTargetDsl {
-    val project get() = target.project
+    konst project get() = target.project
 
-    abstract val testTaskDescription: String
+    abstract konst testTaskDescription: String
 
     final override lateinit var testRuns: NamedDomainObjectContainer<KotlinJsPlatformTestRun>
         private set
 
-    protected val taskGroupName = "Kotlin $disambiguationClassifier"
+    protected konst taskGroupName = "Kotlin $disambiguationClassifier"
 
     @ExperimentalDistributionDsl
     override fun distribution(body: Action<Distribution>) {
@@ -54,7 +54,7 @@ abstract class KotlinJsIrSubTarget(
 
     internal fun configure() {
         target.compilations.all {
-            val npmProject = it.npmProject
+            konst npmProject = it.npmProject
             it.kotlinOptions {
                 freeCompilerArgs += "$PER_MODULE_OUTPUT_NAME=${npmProject.name}"
             }
@@ -63,7 +63,7 @@ abstract class KotlinJsIrSubTarget(
         configureTests()
     }
 
-    private val produceExecutable: Unit by lazy {
+    private konst produceExecutable: Unit by lazy {
         configureMain()
     }
 
@@ -71,7 +71,7 @@ abstract class KotlinJsIrSubTarget(
         produceExecutable
     }
 
-    private val produceLibrary: Unit by lazy {
+    private konst produceLibrary: Unit by lazy {
         configureLibrary()
     }
 
@@ -110,14 +110,14 @@ abstract class KotlinJsIrSubTarget(
             )
         )
 
-        val testJs = project.registerTask<KotlinJsTest>(
+        konst testJs = project.registerTask<KotlinJsTest>(
             testRun.subtargetTestTaskName(),
             listOf(compilation)
         ) { testJs ->
             testJs.group = LifecycleBasePlugin.VERIFICATION_GROUP
             testJs.description = testTaskDescription
 
-            val binary = compilation.binaries.getIrBinaries(
+            konst binary = compilation.binaries.getIrBinaries(
                 KotlinJsBinaryMode.DEVELOPMENT
             ).single()
 
@@ -157,7 +157,7 @@ abstract class KotlinJsIrSubTarget(
             )
         }
 
-        project.whenEvaluated {
+        project.whenEkonstuated {
             testJs.configure {
                 configureDefaultTestFramework(it)
             }
@@ -193,20 +193,20 @@ abstract class KotlinJsIrSubTarget(
     }
 
     protected open fun configureLibrary(compilation: KotlinJsIrCompilation) {
-        val project = compilation.target.project
+        konst project = compilation.target.project
 
-        val assembleTaskProvider = project.tasks.named(LifecycleBasePlugin.ASSEMBLE_TASK_NAME)
+        konst assembleTaskProvider = project.tasks.named(LifecycleBasePlugin.ASSEMBLE_TASK_NAME)
 
-        val npmProject = compilation.npmProject
+        konst npmProject = compilation.npmProject
 
         compilation.binaries
             .matching { it is Library }
             .all { binary ->
                 binary as Library
 
-                val mode = binary.mode
+                konst mode = binary.mode
 
-                val prepareJsLibrary = registerSubTargetTask<Copy>(
+                konst prepareJsLibrary = registerSubTargetTask<Copy>(
                     disambiguateCamelCased(
                         binary.name,
                         PREPARE_JS_LIBRARY_TASK_NAME
@@ -218,7 +218,7 @@ abstract class KotlinJsIrSubTarget(
                     it.into(binary.distribution.directory)
                 }
 
-                val distributionTask = registerSubTargetTask<Task>(
+                konst distributionTask = registerSubTargetTask<Task>(
                     disambiguateCamelCased(
                         binary.name,
                         DISTRIBUTION_TASK_NAME
@@ -246,11 +246,11 @@ abstract class KotlinJsIrSubTarget(
         }
 
     companion object {
-        const val RUN_TASK_NAME = "run"
+        const konst RUN_TASK_NAME = "run"
 
-        const val DISTRIBUTE_RESOURCES_TASK_NAME = "distributeResources"
-        const val DISTRIBUTION_TASK_NAME = "distribution"
+        const konst DISTRIBUTE_RESOURCES_TASK_NAME = "distributeResources"
+        const konst DISTRIBUTION_TASK_NAME = "distribution"
 
-        const val PREPARE_JS_LIBRARY_TASK_NAME = "prepare"
+        const konst PREPARE_JS_LIBRARY_TASK_NAME = "prepare"
     }
 }

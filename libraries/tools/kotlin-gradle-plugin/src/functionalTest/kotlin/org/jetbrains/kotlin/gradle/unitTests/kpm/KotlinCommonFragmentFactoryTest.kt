@@ -15,13 +15,13 @@ import kotlin.test.assertTrue
 class KotlinCommonFragmentFactoryTest : AbstractKpmExtensionTest() {
     @Test
     fun `test fragmentName`() {
-        val fragment = GradleKpmCommonFragmentFactory(kotlin.main).create("common")
+        konst fragment = GradleKpmCommonFragmentFactory(kotlin.main).create("common")
         assertEquals("common", fragment.fragmentName)
     }
 
     @Test
     fun `test has source roots`() {
-        val fragment = GradleKpmCommonFragmentFactory(kotlin.main).create("common")
+        konst fragment = GradleKpmCommonFragmentFactory(kotlin.main).create("common")
         assertTrue(fragment.kotlinSourceRoots.srcDirs.isNotEmpty())
     }
 }

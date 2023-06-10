@@ -1,10 +1,10 @@
 open class B {
-    val name: String
+    konst name: String
         get() = "OK"
 }
 
 interface A {
-    val name: String
+    konst name: String
 }
 
 class C : B(), A {

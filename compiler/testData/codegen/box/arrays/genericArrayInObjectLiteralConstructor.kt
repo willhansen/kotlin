@@ -1,10 +1,10 @@
 // WITH_STDLIB
 abstract class Table<T>(
-        val content: Array<Array<T>>
+        konst content: Array<Array<T>>
 )
 
 fun box(): String {
-    val x = object : Table<String>(
+    konst x = object : Table<String>(
             Array(1, {
                 x-> Array(1, {y -> "OK"})
             })

@@ -7,7 +7,7 @@ repositories {
     maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies")
 }
 
-val jflexPath by configurations.creating
+konst jflexPath by configurations.creating
 
 dependencies {
     api(project(":core:compiler.common"))

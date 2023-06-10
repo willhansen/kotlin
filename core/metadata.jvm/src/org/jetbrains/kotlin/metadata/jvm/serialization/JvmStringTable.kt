@@ -16,10 +16,10 @@ import java.io.OutputStream
 
 // TODO: optimize by reordering records to minimize storage of 'range' fields
 open class JvmStringTable(nameResolver: JvmNameResolver? = null) : StringTable {
-    val strings = ArrayList<String>()
-    private val records = ArrayList<Record.Builder>()
-    private val map = HashMap<String, Int>()
-    private val localNames = LinkedHashSet<Int>()
+    konst strings = ArrayList<String>()
+    private konst records = ArrayList<Record.Builder>()
+    private konst map = HashMap<String, Int>()
+    private konst localNames = LinkedHashSet<Int>()
 
     init {
         if (nameResolver != null) {
@@ -37,7 +37,7 @@ open class JvmStringTable(nameResolver: JvmNameResolver? = null) : StringTable {
             strings.size.apply {
                 strings.add(string)
 
-                val lastRecord = records.lastOrNull()
+                konst lastRecord = records.lastOrNull()
                 if (lastRecord != null && lastRecord.isTrivial()) {
                     lastRecord.range = lastRecord.range + 1
                 } else records.add(Record.newBuilder())
@@ -65,18 +65,18 @@ open class JvmStringTable(nameResolver: JvmNameResolver? = null) : StringTable {
             }
         }
 
-        val index = strings.size
+        konst index = strings.size
         if (isLocal) {
             localNames.add(index)
         }
 
-        val record = Record.newBuilder()
+        konst record = Record.newBuilder()
 
         // If the class is local or any of its outer class names contains '$', store a literal string
         if (isLocal || '$' in className) {
             strings.add(className)
         } else {
-            val predefinedIndex = JvmNameResolverBase.getPredefinedStringIndex(className)
+            konst predefinedIndex = JvmNameResolverBase.getPredefinedStringIndex(className)
             if (predefinedIndex != null) {
                 record.predefinedIndex = predefinedIndex
                 // TODO: move all records with predefined names to the end and do not write associated strings for them (since they are ignored)

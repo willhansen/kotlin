@@ -23,7 +23,7 @@ class Z @A("constructor1") @A("constructor2") constructor() {
         @A("propertyGetter1") @A("propertyGetter2")
         get() = 0
         @A("propertySetter1") @A("propertySetter2")
-        set(value) {}
+        set(konstue) {}
 }
 
 @A("topLevelFunction1") @A("topLevelFunction2")
@@ -37,13 +37,13 @@ var String.z: Z
     @A("propertyGetter1") @A("propertyGetter2")
     get() = Z()
     @A("propertySetter1") @A("propertySetter2")
-    set(value) {}
+    set(konstue) {}
 
 @get:A("useSitePropertyGetter1")
 @get:A("useSitePropertyGetter2")
 @field:A("field1")
 @field:A("field2")
-val o: String = ""
+konst o: String = ""
 
 // FILE: test/A.java
 
@@ -54,7 +54,7 @@ import java.lang.annotation.*;
 @Repeatable(As.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface A {
-    String value();
+    String konstue();
 }
 
 // FILE: test/As.java
@@ -65,5 +65,5 @@ import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface As {
-    A[] value();
+    A[] konstue();
 }

@@ -27,16 +27,16 @@ import javax.lang.model.element.AnnotationMirror
 import javax.lang.model.element.TypeElement
 
 open class SymbolBasedAnnotation(
-        val annotationMirror: AnnotationMirror,
-        val javac: JavacWrapper
+        konst annotationMirror: AnnotationMirror,
+        konst javac: JavacWrapper
 ) : JavaElement, JavaAnnotation {
 
-    override val arguments: Collection<JavaAnnotationArgument>
-        get() = annotationMirror.elementValues.map { (key, value) ->
-            SymbolBasedAnnotationArgument.create(value.value, Name.identifier(key.simpleName.toString()), javac)
+    override konst arguments: Collection<JavaAnnotationArgument>
+        get() = annotationMirror.elementValues.map { (key, konstue) ->
+            SymbolBasedAnnotationArgument.create(konstue.konstue, Name.identifier(key.simpleName.toString()), javac)
         }
 
-    override val classId: ClassId
+    override konst classId: ClassId
         get() = (annotationMirror.annotationType.asElement() as TypeElement).computeClassId()!!
 
     override fun resolve() = with(annotationMirror.annotationType.asElement() as Symbol.ClassSymbol) { javac.findClass(classId) }

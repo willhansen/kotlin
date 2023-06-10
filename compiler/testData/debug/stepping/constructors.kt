@@ -17,7 +17,7 @@ fun box() {
 }
 
 class B()
-class C(val a: Int)
+class C(konst a: Int)
 class D {
     constructor()
 }
@@ -26,36 +26,36 @@ class E {
 }
 class F {
     constructor() {
-        val a = 1
+        konst a = 1
     }
 }
 class G {
     constructor(i: Int) {
-        val a = 1
+        konst a = 1
     }
 }
 class J {
     init {
-        val a = 1
+        konst a = 1
     }
 }
-class K(val i: Int) {
+class K(konst i: Int) {
     init {
-        val a = 1
+        konst a = 1
     }
 }
 class L {
     constructor() {
-        val a = 1
+        konst a = 1
     }
 
     init {
-        val a = 1
+        konst a = 1
     }
 }
 class M {
     constructor(): this(1) {
-        val a = 1
+        konst a = 1
     }
 
     constructor(i: Int) {
@@ -63,7 +63,7 @@ class M {
 }
 class N {
     constructor(i: Int): this() {
-        val a = 1
+        konst a = 1
     }
 
     constructor() {

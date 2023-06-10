@@ -21,9 +21,9 @@ allprojects {
     }
 }
 
-val useIrBackend = (findProperty("kotlin.js.useIrBackend") as? String?)?.toBoolean() ?: false
+konst useIrBackend = (findProperty("kotlin.js.useIrBackend") as? String?)?.toBoolean() ?: false
 
-val backend = if (useIrBackend) {
+konst backend = if (useIrBackend) {
     KotlinJsCompilerType.IR
 } else {
     KotlinJsCompilerType.LEGACY

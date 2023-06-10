@@ -7,7 +7,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = kotlin.jvm.JvmName
         symbol = <constructor>(name: kotlin.String): kotlin.jvm.JvmName
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = name
             receiverType = null

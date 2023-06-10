@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.analysis.low.level.api.fir.lazy.resolve
 
 import org.jetbrains.kotlin.psi.*
 
-internal data class RawFirReplacement(val from: KtElement, val to: KtElement) {
+internal data class RawFirReplacement(konst from: KtElement, konst to: KtElement) {
     companion object {
         fun isApplicableForReplacement(element: KtElement) = when (element) {
             is KtFile, is KtScript, is KtClassInitializer, is KtClassOrObject, is KtObjectLiteralExpression, is KtTypeAlias,

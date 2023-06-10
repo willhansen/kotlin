@@ -1,7 +1,7 @@
 fun println(obj: Any?) {}
 
 class Demo0 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             println(state) // Ok
         }
@@ -11,7 +11,7 @@ class Demo0 {
 }
 
 class Demo1 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true
@@ -35,7 +35,7 @@ class Demo1A {
 }
 
 class Demo2 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true
@@ -50,7 +50,7 @@ class Demo2 {
 }
 
 class Demo3 {
-    private val some = run {
+    private konst some = run {
         if (state)
             state = true
 
@@ -64,7 +64,7 @@ fun <T, R> T.run(f: T.() -> R) = f()
 fun <T> exec(f: () -> T): T = f()
 
 class Demo4 {
-    private val some = exec {
+    private konst some = exec {
         if (state)
             state = true
 
@@ -77,7 +77,7 @@ class Demo4 {
 class Demo5 {
     private var state: Boolean = true
 
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true

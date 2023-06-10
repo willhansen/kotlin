@@ -4,16 +4,16 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z1<T: String>(val x: T)
+konstue class Z1<T: String>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z2<T: Z1<String>>(val z: T)
+konstue class Z2<T: Z1<String>>(konst z: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZN<T: Z1<String>?>(val z: T)
+konstue class ZN<T: Z1<String>?>(konst z: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZN2<T: ZN<Z1<String>?>>(val z: T)
+konstue class ZN2<T: ZN<Z1<String>?>>(konst z: T)
 
 fun wrap1(x: String): Z1<String>? = if (x.length == 0) null else Z1(x)
 fun wrap2(x: String): Z2<Z1<String>>? = if (x.length == 0) null else Z2(Z1(x))

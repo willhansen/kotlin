@@ -54,7 +54,7 @@ abstract class KotlinJsDce @Inject constructor(
         include("js".fileExtensionCasePermutations().map { "**/*.$it" })
     }
 
-    override val toolOptions: KotlinJsDceCompilerToolOptions = objectFactory.newInstance<KotlinJsDceCompilerToolOptionsDefault>()
+    override konst toolOptions: KotlinJsDceCompilerToolOptions = objectFactory.newInstance<KotlinJsDceCompilerToolOptionsDefault>()
 
     override fun createCompilerArguments(context: CreateCompilerArgumentsContext) = context.create<K2JSDceArguments> {
         primitive { args ->
@@ -70,13 +70,13 @@ abstract class KotlinJsDce @Inject constructor(
     var kotlinFilesOnly: Boolean = false
 
     @get:Internal
-    override val dceOptions: KotlinJsDceOptions = object : KotlinJsDceOptions {
-        override val options: KotlinJsDceCompilerToolOptions
+    override konst dceOptions: KotlinJsDceOptions = object : KotlinJsDceOptions {
+        override konst options: KotlinJsDceCompilerToolOptions
             get() = toolOptions
     }
 
     @get:Input
-    override val keep: MutableList<String> = mutableListOf()
+    override konst keep: MutableList<String> = mutableListOf()
 
     override fun keep(vararg fqn: String) {
         keep += fqn
@@ -91,30 +91,30 @@ abstract class KotlinJsDce @Inject constructor(
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    override val sources: FileCollection = super.sources
+    override konst sources: FileCollection = super.sources
 
     @get:Incremental
     @get:InputFiles
     @get:NormalizeLineEndings
-    abstract override val libraries: ConfigurableFileCollection
+    abstract override konst libraries: ConfigurableFileCollection
 
-    private val buildDir = project.layout.buildDirectory
+    private konst buildDir = project.layout.buildDirectory
 
-    private val isDevMode
+    private konst isDevMode
         get() = toolOptions.devMode.get() || toolOptions.freeCompilerArgs.get().contains("-dev-mode")
 
-    private val isExplicitDevModeAllStrategy
+    private konst isExplicitDevModeAllStrategy
         get() = strategyAllArg in toolOptions.freeCompilerArgs.get() ||
                 strategyOlderArg !in toolOptions.freeCompilerArgs.get() &&
                 System.getProperty("kotlin.js.dce.devmode.overwriting.strategy") == DevModeOverwritingStrategies.ALL
 
     @TaskAction
     fun performDce(inputChanges: InputChanges) {
-        validateCompilerClasspath()
+        konstidateCompilerClasspath()
         // in case of explicit `all` strategy do not perform incremental copy
-        val shouldPerformIncrementalCopy = isDevMode && !isExplicitDevModeAllStrategy
+        konst shouldPerformIncrementalCopy = isDevMode && !isExplicitDevModeAllStrategy
 
-        val classpathFiles = if (shouldPerformIncrementalCopy) {
+        konst classpathFiles = if (shouldPerformIncrementalCopy) {
             inputChanges.getFileChanges(libraries)
                 .filter { it.changeType == ChangeType.MODIFIED || it.changeType == ChangeType.ADDED }
                 .map { it.file }
@@ -122,14 +122,14 @@ abstract class KotlinJsDce @Inject constructor(
             libraries.asFileTree.files
         }
 
-        val inputFiles = sources.asFileTree.files.plus(classpathFiles)
+        konst inputFiles = sources.asFileTree.files.plus(classpathFiles)
             .filter { !kotlinFilesOnly || isDceCandidate(it) }
             .map { it.path }
 
-        val arguments = createCompilerArguments()
+        konst arguments = createCompilerArguments()
         arguments.freeArgs += inputFiles
 
-        val exitCode = runToolInSeparateProcess(
+        konst exitCode = runToolInSeparateProcess(
             ArgumentUtils.convertArgumentsToStringList(arguments).toTypedArray(),
             K2JSDce::class.java.name,
             defaultCompilerClasspath,
@@ -153,8 +153,8 @@ abstract class KotlinJsDce @Inject constructor(
     }
 
     companion object {
-        const val strategyAllArg = "-Xdev-mode-overwriting-strategy=${DevModeOverwritingStrategies.ALL}"
-        const val strategyOlderArg = "-Xdev-mode-overwriting-strategy=${DevModeOverwritingStrategies.OLDER}"
+        const konst strategyAllArg = "-Xdev-mode-overwriting-strategy=${DevModeOverwritingStrategies.ALL}"
+        const konst strategyOlderArg = "-Xdev-mode-overwriting-strategy=${DevModeOverwritingStrategies.OLDER}"
     }
 
     @Suppress("DeprecatedCallableAddReplaceWith")

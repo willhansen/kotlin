@@ -9,28 +9,28 @@ import org.jetbrains.kotlin.fir.analysis.checkers.expression.*
 import org.jetbrains.kotlin.fir.analysis.checkers.extended.*
 
 object ExtendedExpressionCheckers : ExpressionCheckers() {
-    override val basicExpressionCheckers: Set<FirBasicExpressionChecker>
+    override konst basicExpressionCheckers: Set<FirBasicExpressionChecker>
         get() = setOf(
             ArrayEqualityCanBeReplacedWithEquals,
         )
 
-    override val variableAssignmentCheckers: Set<FirVariableAssignmentChecker>
+    override konst variableAssignmentCheckers: Set<FirVariableAssignmentChecker>
         get() = setOf(
             CanBeReplacedWithOperatorAssignmentChecker,
         )
 
-    override val qualifiedAccessExpressionCheckers: Set<FirQualifiedAccessExpressionChecker>
+    override konst qualifiedAccessExpressionCheckers: Set<FirQualifiedAccessExpressionChecker>
         get() = setOf(
             RedundantCallOfConversionMethod,
             UselessCallOnNotNullChecker,
         )
 
-    override val functionCallCheckers: Set<FirFunctionCallChecker>
+    override konst functionCallCheckers: Set<FirFunctionCallChecker>
         get() = setOf(
             EmptyRangeChecker,
         )
 
-    override val stringConcatenationCallCheckers: Set<FirStringConcatenationCallChecker>
+    override konst stringConcatenationCallCheckers: Set<FirStringConcatenationCallChecker>
         get() = setOf(
             RedundantSingleExpressionStringTemplateChecker,
         )

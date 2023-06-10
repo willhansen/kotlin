@@ -5,11 +5,11 @@ package a
 import b.B        //class
 import b.foo      //function
 import b.ext      //extension function
-import b.value    //property
+import b.konstue    //property
 import b.C.Companion.bar    //function from companion object
 import b.C.Companion.cValue //property from companion object
-import b.<!UNRESOLVED_REFERENCE!>constant<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>fff<!>     //function from val
-import b.<!UNRESOLVED_REFERENCE!>constant<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>dValue<!>  //property from val
+import b.<!UNRESOLVED_REFERENCE!>constant<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>fff<!>     //function from konst
+import b.<!UNRESOLVED_REFERENCE!>constant<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>dValue<!>  //property from konst
 import <!UNRESOLVED_REFERENCE!>smth<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>illegal<!>
 import b.C.<!UNRESOLVED_REFERENCE!>smth<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>illegal<!>
 
@@ -19,10 +19,10 @@ import b.<!UNRESOLVED_REFERENCE!>bar<!>.*
 import b.<!UNRESOLVED_REFERENCE!>unr<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>unr<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>unr<!>
 import <!UNRESOLVED_REFERENCE!>unr<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>unr<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>unr<!>
 import b.constant
-import b.E.Companion.f      //val from companion object
+import b.E.Companion.f      //konst from companion object
 
 fun test(arg: B) {
-    foo(value)
+    foo(konstue)
     arg.ext()
 
     bar()
@@ -44,25 +44,25 @@ fun foo(i: Int) = i
 
 fun B.ext() {}
 
-val value = 0
+konst konstue = 0
 
 class C() {
     companion object {
         fun bar() {}
-        val cValue = 1
+        konst cValue = 1
     }
 }
 
 class D() {
     fun fff(s: String) = s
-    val dValue = "w"
+    konst dValue = "w"
 }
 
-val constant = D()
+konst constant = D()
 
 class E() {
     companion object {
-        val f = F()
+        konst f = F()
     }
 }
 
@@ -80,7 +80,7 @@ import c.<!CANNOT_ALL_UNDER_IMPORT_FROM_SINGLETON!>C<!>.*
 object C {
     fun f() {
     }
-    val i = 348
+    konst i = 348
 }
 
 fun foo() {
@@ -93,8 +93,8 @@ package d
 import d.A.Companion.B
 import d.A.Companion.C
 
-val b : B = B()
-val c : B = C
+konst b : B = B()
+konst c : B = C
 
 class A() {
     companion object {

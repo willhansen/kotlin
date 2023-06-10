@@ -1,3 +1,3 @@
 actual class ClassWithImplByExtension
-actual val ClassWithImplByExtension.extensionVal: Int
+actual konst ClassWithImplByExtension.extensionVal: Int
     get() = 0

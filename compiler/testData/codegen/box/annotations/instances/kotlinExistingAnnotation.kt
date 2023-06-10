@@ -15,7 +15,7 @@ fun f(): Metadata = Metadata(
 )
 
 fun box(): String {
-    val m = f()
+    konst m = f()
     if (m.toString() == """@kotlin.Metadata(bytecodeVersion=[1, 0, 3], data1=[], data2=[], extraInt=0, extraString=, kind=0, metadataVersion=[], packageName=foo)""")
         return "OK"
     return m.toString()

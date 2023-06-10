@@ -21,8 +21,8 @@ import kotlin.contracts.ExperimentalContracts
  */
 interface WriteContextExtension
 
-open class WriteContext(val strings: StringTable, val contextExtensions: List<WriteContextExtension> = emptyList()) {
-    val versionRequirements: MutableVersionRequirementTable = MutableVersionRequirementTable()
+open class WriteContext(konst strings: StringTable, konst contextExtensions: List<WriteContextExtension> = emptyList()) {
+    konst versionRequirements: MutableVersionRequirementTable = MutableVersionRequirementTable()
 
     operator fun get(string: String): Int =
         strings.getStringIndex(string)
@@ -36,7 +36,7 @@ private fun writeTypeParameter(
     output: (ProtoBuf.TypeParameter.Builder) -> Unit
 ): KmTypeParameterVisitor =
     object : KmTypeParameterVisitor() {
-        private val t = ProtoBuf.TypeParameter.newBuilder()
+        private konst t = ProtoBuf.TypeParameter.newBuilder()
 
         override fun visitUpperBound(flags: Flags): KmTypeVisitor? =
             writeType(c, flags) { t.addUpperBound(it) }
@@ -49,7 +49,7 @@ private fun writeTypeParameter(
         override fun visitEnd() {
             t.name = c[name]
             t.id = id
-            val reified = Flag.TypeParameter.IS_REIFIED(flags)
+            konst reified = Flag.TypeParameter.IS_REIFIED(flags)
             if (reified != ProtoBuf.TypeParameter.getDefaultInstance().reified) {
                 t.reified = reified
             }
@@ -64,7 +64,7 @@ private fun writeTypeParameter(
 
 private fun writeType(c: WriteContext, flags: Flags, output: (ProtoBuf.Type.Builder) -> Unit): KmTypeVisitor =
     object : KmTypeVisitor() {
-        private val t = ProtoBuf.Type.newBuilder()
+        private konst t = ProtoBuf.Type.newBuilder()
 
         override fun visitClass(name: ClassName) {
             t.className = c.getClassName(name)
@@ -119,7 +119,7 @@ private fun writeType(c: WriteContext, flags: Flags, output: (ProtoBuf.Type.Buil
             if (Flag.Type.IS_NULLABLE(flags)) {
                 t.nullable = true
             }
-            val flagsToWrite = flags shr 1
+            konst flagsToWrite = flags shr 1
             if (flagsToWrite != ProtoBuf.Type.getDefaultInstance().flags) {
                 t.flags = flagsToWrite
             }
@@ -129,7 +129,7 @@ private fun writeType(c: WriteContext, flags: Flags, output: (ProtoBuf.Type.Buil
 
 private fun writeConstructor(c: WriteContext, flags: Flags, output: (ProtoBuf.Constructor.Builder) -> Unit): KmConstructorVisitor =
     object : KmConstructorVisitor() {
-        val t = ProtoBuf.Constructor.newBuilder()
+        konst t = ProtoBuf.Constructor.newBuilder()
 
         override fun visitValueParameter(flags: Flags, name: String): KmValueParameterVisitor? =
             writeValueParameter(c, flags, name) { t.addValueParameter(it.build()) }
@@ -152,7 +152,7 @@ private fun writeConstructor(c: WriteContext, flags: Flags, output: (ProtoBuf.Co
 
 private fun writeFunction(c: WriteContext, flags: Flags, name: String, output: (ProtoBuf.Function.Builder) -> Unit): KmFunctionVisitor =
     object : KmFunctionVisitor() {
-        val t = ProtoBuf.Function.newBuilder()
+        konst t = ProtoBuf.Function.newBuilder()
 
         override fun visitTypeParameter(flags: Flags, name: String, id: Int, variance: KmVariance): KmTypeParameterVisitor? =
             writeTypeParameter(c, flags, name, id, variance) { t.addTypeParameter(it) }
@@ -194,7 +194,7 @@ private fun writeFunction(c: WriteContext, flags: Flags, name: String, output: (
 fun writeProperty(
     c: WriteContext, flags: Flags, name: String, getterFlags: Flags, setterFlags: Flags, output: (ProtoBuf.Property.Builder) -> Unit
 ): KmPropertyVisitor = object : KmPropertyVisitor() {
-    val t = ProtoBuf.Property.newBuilder()
+    konst t = ProtoBuf.Property.newBuilder()
 
     override fun visitTypeParameter(flags: Flags, name: String, id: Int, variance: KmVariance): KmTypeParameterVisitor? =
         writeTypeParameter(c, flags, name, id, variance) { t.addTypeParameter(it) }
@@ -236,7 +236,7 @@ private fun writeValueParameter(
     c: WriteContext, flags: Flags, name: String,
     output: (ProtoBuf.ValueParameter.Builder) -> Unit
 ): KmValueParameterVisitor = object : KmValueParameterVisitor() {
-    val t = ProtoBuf.ValueParameter.newBuilder()
+    konst t = ProtoBuf.ValueParameter.newBuilder()
 
     override fun visitType(flags: Flags): KmTypeVisitor? =
         writeType(c, flags) { t.type = it.build() }
@@ -262,7 +262,7 @@ private fun writeTypeAlias(
     c: WriteContext, flags: Flags, name: String,
     output: (ProtoBuf.TypeAlias.Builder) -> Unit
 ): KmTypeAliasVisitor = object : KmTypeAliasVisitor() {
-    val t = ProtoBuf.TypeAlias.newBuilder()
+    konst t = ProtoBuf.TypeAlias.newBuilder()
 
     override fun visitTypeParameter(flags: Flags, name: String, id: Int, variance: KmVariance): KmTypeParameterVisitor? =
         writeTypeParameter(c, flags, name, id, variance) { t.addTypeParameter(it) }
@@ -301,7 +301,7 @@ private fun writeVersionRequirement(
 
     override fun visit(kind: KmVersionRequirementVersionKind, level: KmVersionRequirementLevel, errorCode: Int?, message: String?) {
         t = ProtoBuf.VersionRequirement.newBuilder().apply {
-            val versionKind = when (kind) {
+            konst versionKind = when (kind) {
                 KmVersionRequirementVersionKind.LANGUAGE_VERSION -> ProtoBuf.VersionRequirement.VersionKind.LANGUAGE_VERSION
                 KmVersionRequirementVersionKind.COMPILER_VERSION -> ProtoBuf.VersionRequirement.VersionKind.COMPILER_VERSION
                 KmVersionRequirementVersionKind.API_VERSION -> ProtoBuf.VersionRequirement.VersionKind.API_VERSION
@@ -309,7 +309,7 @@ private fun writeVersionRequirement(
             if (versionKind != defaultInstanceForType.versionKind) {
                 this.versionKind = versionKind
             }
-            val requirementLevel = when (level) {
+            konst requirementLevel = when (level) {
                 KmVersionRequirementLevel.WARNING -> ProtoBuf.VersionRequirement.Level.WARNING
                 KmVersionRequirementLevel.ERROR -> ProtoBuf.VersionRequirement.Level.ERROR
                 KmVersionRequirementLevel.HIDDEN -> ProtoBuf.VersionRequirement.Level.HIDDEN
@@ -347,7 +347,7 @@ private fun writeVersionRequirement(
 @ExperimentalContracts
 private fun writeContract(c: WriteContext, output: (ProtoBuf.Contract.Builder) -> Unit): KmContractVisitor =
     object : KmContractVisitor() {
-        val t = ProtoBuf.Contract.newBuilder()
+        konst t = ProtoBuf.Contract.newBuilder()
 
         override fun visitEffect(type: KmEffectType, invocationKind: KmEffectInvocationKind?): KmEffectVisitor? =
             writeEffect(c, type, invocationKind) { t.addEffect(it) }
@@ -362,7 +362,7 @@ private fun writeEffect(
     c: WriteContext, type: KmEffectType, invocationKind: KmEffectInvocationKind?,
     output: (ProtoBuf.Effect.Builder) -> Unit
 ): KmEffectVisitor = object : KmEffectVisitor() {
-    val t = ProtoBuf.Effect.newBuilder()
+    konst t = ProtoBuf.Effect.newBuilder()
 
     override fun visitConstructorArgument(): KmEffectExpressionVisitor? =
         writeEffectExpression(c) { t.addEffectConstructorArgument(it) }
@@ -372,12 +372,12 @@ private fun writeEffect(
 
     @Suppress("UNUSED_VARIABLE") // force exhaustive whens
     override fun visitEnd() {
-        val unused = when (type) {
+        konst unused = when (type) {
             KmEffectType.RETURNS_CONSTANT -> t.effectType = ProtoBuf.Effect.EffectType.RETURNS_CONSTANT
             KmEffectType.CALLS -> t.effectType = ProtoBuf.Effect.EffectType.CALLS
             KmEffectType.RETURNS_NOT_NULL -> t.effectType = ProtoBuf.Effect.EffectType.RETURNS_NOT_NULL
         }
-        val unused2 = when (invocationKind) {
+        konst unused2 = when (invocationKind) {
             KmEffectInvocationKind.AT_MOST_ONCE -> t.kind = ProtoBuf.Effect.InvocationKind.AT_MOST_ONCE
             KmEffectInvocationKind.EXACTLY_ONCE -> t.kind = ProtoBuf.Effect.InvocationKind.EXACTLY_ONCE
             KmEffectInvocationKind.AT_LEAST_ONCE -> t.kind = ProtoBuf.Effect.InvocationKind.AT_LEAST_ONCE
@@ -390,23 +390,23 @@ private fun writeEffect(
 @ExperimentalContracts
 private fun writeEffectExpression(c: WriteContext, output: (ProtoBuf.Expression.Builder) -> Unit): KmEffectExpressionVisitor =
     object : KmEffectExpressionVisitor() {
-        val t = ProtoBuf.Expression.newBuilder()
+        konst t = ProtoBuf.Expression.newBuilder()
 
         override fun visit(flags: Flags, parameterIndex: Int?) {
             if (flags != ProtoBuf.Expression.getDefaultInstance().flags) {
                 t.flags = flags
             }
             if (parameterIndex != null) {
-                t.valueParameterReference = parameterIndex
+                t.konstueParameterReference = parameterIndex
             }
         }
 
-        override fun visitConstantValue(value: Any?) {
-            when (value) {
+        override fun visitConstantValue(konstue: Any?) {
+            when (konstue) {
                 true -> t.constantValue = ProtoBuf.Expression.ConstantValue.TRUE
                 false -> t.constantValue = ProtoBuf.Expression.ConstantValue.FALSE
                 null -> t.constantValue = ProtoBuf.Expression.ConstantValue.NULL
-                else -> throw IllegalArgumentException("Only true, false or null constant values are allowed for effects (was=$value)")
+                else -> throw IllegalArgumentException("Only true, false or null constant konstues are allowed for effects (was=$konstue)")
             }
         }
 
@@ -425,8 +425,8 @@ private fun writeEffectExpression(c: WriteContext, output: (ProtoBuf.Expression.
     }
 
 open class ClassWriter(stringTable: StringTable, contextExtensions: List<WriteContextExtension> = emptyList()) : KmClassVisitor() {
-    protected val t = ProtoBuf.Class.newBuilder()!!
-    protected val c: WriteContext = WriteContext(stringTable, contextExtensions)
+    protected konst t = ProtoBuf.Class.newBuilder()!!
+    protected konst c: WriteContext = WriteContext(stringTable, contextExtensions)
 
     override fun visit(flags: Flags, name: ClassName) {
         if (flags != ProtoBuf.Class.getDefaultInstance().flags) {
@@ -498,8 +498,8 @@ open class ClassWriter(stringTable: StringTable, contextExtensions: List<WriteCo
 }
 
 open class PackageWriter(stringTable: StringTable, contextExtensions: List<WriteContextExtension> = emptyList()) : KmPackageVisitor() {
-    protected val t = ProtoBuf.Package.newBuilder()!!
-    protected val c: WriteContext = WriteContext(stringTable, contextExtensions)
+    protected konst t = ProtoBuf.Package.newBuilder()!!
+    protected konst c: WriteContext = WriteContext(stringTable, contextExtensions)
 
     override fun visitFunction(flags: Flags, name: String): KmFunctionVisitor? =
         writeFunction(c, flags, name) { t.addFunction(it) }
@@ -524,8 +524,8 @@ open class PackageWriter(stringTable: StringTable, contextExtensions: List<Write
 
 open class ModuleFragmentWriter(stringTable: StringTable, contextExtensions: List<WriteContextExtension> = emptyList()) :
     KmModuleFragmentVisitor() {
-    protected val t = ProtoBuf.PackageFragment.newBuilder()!!
-    protected val c: WriteContext = WriteContext(stringTable, contextExtensions)
+    protected konst t = ProtoBuf.PackageFragment.newBuilder()!!
+    protected konst c: WriteContext = WriteContext(stringTable, contextExtensions)
 
     override fun visitPackage(): KmPackageVisitor? = object : PackageWriter(c.strings, c.contextExtensions) {
         override fun visitEnd() {
@@ -549,7 +549,7 @@ open class ModuleFragmentWriter(stringTable: StringTable, contextExtensions: Lis
 
 open class LambdaWriter(stringTable: StringTable) : KmLambdaVisitor() {
     protected var t: ProtoBuf.Function.Builder? = null
-    protected val c = WriteContext(stringTable)
+    protected konst c = WriteContext(stringTable)
 
     override fun visitFunction(flags: Flags, name: String): KmFunctionVisitor? =
         writeFunction(c, flags, name) { t = it }

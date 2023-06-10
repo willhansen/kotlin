@@ -60,10 +60,10 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
         }
     }
 
-    protected open val useLightTree: Boolean
+    protected open konst useLightTree: Boolean
         get() = false
 
-    protected open val useLazyBodiesModeForRawFir: Boolean
+    protected open konst useLazyBodiesModeForRawFir: Boolean
         get() = false
 
     override fun setupEnvironment(environment: KotlinCoreEnvironment) {
@@ -71,18 +71,18 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
     }
 
     open fun analyzeAndCheckUnhandled(testDataFile: File, files: List<TestFile>, useLightTree: Boolean = false) {
-        val groupedByModule = files.groupBy(TestFile::module)
+        konst groupedByModule = files.groupBy(TestFile::module)
 
-        val modules = createModules(groupedByModule)
+        konst modules = createModules(groupedByModule)
 
-        val sessionProvider = FirProjectSessionProvider()
+        konst sessionProvider = FirProjectSessionProvider()
 
         //For BuiltIns, registered in sessionProvider automatically
-        val allProjectScope = GlobalSearchScope.allScope(project)
+        konst allProjectScope = GlobalSearchScope.allScope(project)
 
-        val configToSession = modules.mapValues { (config, info) ->
-            val moduleFiles = groupedByModule.getValue(config)
-            val scope = TopDownAnalyzerFacadeForJVM.newModuleSearchScope(
+        konst configToSession = modules.mapValues { (config, info) ->
+            konst moduleFiles = groupedByModule.getValue(config)
+            konst scope = TopDownAnalyzerFacadeForJVM.newModuleSearchScope(
                 project,
                 moduleFiles.mapNotNull { it.ktFile })
             FirSessionFactoryHelper.createSessionWithDependencies(
@@ -107,15 +107,15 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
             }
         }
 
-        val firFilesPerSession = mutableMapOf<FirSession, List<FirFile>>()
+        konst firFilesPerSession = mutableMapOf<FirSession, List<FirFile>>()
 
         // TODO: make module/session/transformer handling like in AbstractFirMultiModuleTest (IDE)
         for ((testModule, testFilesInModule) in groupedByModule) {
-            val ktFiles = getKtFiles(testFilesInModule, true)
+            konst ktFiles = getKtFiles(testFilesInModule, true)
 
-            val session = configToSession.getValue(testModule)
+            konst session = configToSession.getValue(testModule)
 
-            val firFiles = mutableListOf<FirFile>()
+            konst firFiles = mutableListOf<FirFile>()
             mapKtFilesToFirFiles(session, ktFiles, firFiles, useLightTree)
             firFilesPerSession[session] = firFiles
         }
@@ -124,11 +124,11 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
     }
 
     private fun mapKtFilesToFirFiles(session: FirSession, ktFiles: List<KtFile>, firFiles: MutableList<FirFile>, useLightTree: Boolean) {
-        val firProvider = (session.firProvider as FirProviderImpl)
+        konst firProvider = (session.firProvider as FirProviderImpl)
         if (useLightTree) {
-            val lightTreeBuilder = LightTree2Fir(session, firProvider.kotlinScopeProvider)
+            konst lightTreeBuilder = LightTree2Fir(session, firProvider.kotlinScopeProvider)
             ktFiles.mapTo(firFiles) {
-                val firFile =
+                konst firFile =
                     lightTreeBuilder.buildFirFile(
                         it.text,
                         KtInMemoryTextSourceFile(it.name, it.virtualFilePath, it.text),
@@ -138,13 +138,13 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
                 firFile
             }
         } else {
-            val firBuilder = RawFirBuilder(
+            konst firBuilder = RawFirBuilder(
                 session,
                 firProvider.kotlinScopeProvider,
                 bodyBuildingMode = BodyBuildingMode.lazyBodies(useLazyBodiesModeForRawFir)
             )
             ktFiles.mapTo(firFiles) {
-                val firFile = firBuilder.buildFirFile(it)
+                konst firFile = firBuilder.buildFirFile(it)
                 firProvider.recordFile(firFile)
                 firFile
             }
@@ -156,11 +156,11 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
     private fun createModules(
         groupedByModule: Map<TestModule?, List<TestFile>>
     ): MutableMap<TestModule?, ModuleInfo> {
-        val modules =
+        konst modules =
             HashMap<TestModule?, ModuleInfo>()
 
         for (testModule in groupedByModule.keys) {
-            val module = if (testModule == null)
+            konst module = if (testModule == null)
                 createSealedModule()
             else
                 createModule(testModule.name)
@@ -171,8 +171,8 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
         for (testModule in groupedByModule.keys) {
             if (testModule == null) continue
 
-            val module = modules[testModule]!!
-            val dependencies = ArrayList<ModuleInfo>()
+            konst module = modules[testModule]!!
+            konst dependencies = ArrayList<ModuleInfo>()
             dependencies.add(module)
             for (dependency in testModule.dependencies) {
                 dependencies.add(modules[dependency as TestModule?]!!)
@@ -187,19 +187,19 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
         return modules
     }
 
-    private val builtInsModuleInfo = BuiltInModuleInfo(Name.special("<built-ins>"))
+    private konst builtInsModuleInfo = BuiltInModuleInfo(Name.special("<built-ins>"))
 
     protected open fun createModule(moduleName: String): TestModuleInfo {
         parseModulePlatformByName(moduleName)
         return TestModuleInfo(Name.special("<$moduleName>"))
     }
 
-    class BuiltInModuleInfo(override val name: Name) :
+    class BuiltInModuleInfo(override konst name: Name) :
         ModuleInfo {
-        override val platform: TargetPlatform
+        override konst platform: TargetPlatform
             get() = JvmPlatforms.unspecifiedJvmPlatform
 
-        override val analyzerServices: PlatformDependentAnalyzerServices
+        override konst analyzerServices: PlatformDependentAnalyzerServices
             get() = JvmPlatformAnalyzerServices
 
         override fun dependencies(): List<ModuleInfo> {
@@ -207,15 +207,15 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
         }
     }
 
-    protected class TestModuleInfo(override val name: Name) :
+    protected class TestModuleInfo(override konst name: Name) :
         ModuleInfo {
-        override val platform: TargetPlatform
+        override konst platform: TargetPlatform
             get() = JvmPlatforms.unspecifiedJvmPlatform
 
-        override val analyzerServices: PlatformDependentAnalyzerServices
+        override konst analyzerServices: PlatformDependentAnalyzerServices
             get() = JvmPlatformAnalyzerServices
 
-        val dependencies = mutableListOf<ModuleInfo>(this)
+        konst dependencies = mutableListOf<ModuleInfo>(this)
         override fun dependencies(): List<ModuleInfo> {
             return dependencies
         }
@@ -230,7 +230,7 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
         ktDiagnostics: Iterable<KtDiagnostic>,
         actualText: StringBuilder
     ): Boolean {
-        val ktFile = this.ktFile
+        konst ktFile = this.ktFile
         if (ktFile == null) {
             // TODO: check java files too
             actualText.append(this.clearText)
@@ -241,15 +241,15 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
 
         // TODO: report JVM signature diagnostics also for implementing modules
 
-        val ok = booleanArrayOf(true)
-        val diagnostics = ktDiagnostics.toActualDiagnostic(ktFile)
-        val filteredDiagnostics = diagnostics // TODO
+        konst ok = booleanArrayOf(true)
+        konst diagnostics = ktDiagnostics.toActualDiagnostic(ktFile)
+        konst filteredDiagnostics = diagnostics // TODO
 
         actualDiagnostics.addAll(filteredDiagnostics)
 
-        val uncheckedDiagnostics = mutableListOf<PositionalTextDiagnostic>()
+        konst uncheckedDiagnostics = mutableListOf<PositionalTextDiagnostic>()
 
-        val diagnosticToExpectedDiagnostic =
+        konst diagnosticToExpectedDiagnostic =
             CheckerTestUtil.diagnosticsDiff(
                 diagnosedRanges,
                 filteredDiagnostics,
@@ -259,7 +259,7 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
                         expectedStart: Int,
                         expectedEnd: Int
                     ) {
-                        val message =
+                        konst message =
                             "Missing " + diagnostic.description + PsiDiagnosticUtils.atLocation(
                                 ktFile,
                                 TextRange(
@@ -277,7 +277,7 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
                         start: Int,
                         end: Int
                     ) {
-                        val message = "Parameters of diagnostic not equal at position " +
+                        konst message = "Parameters of diagnostic not equal at position " +
                                 PsiDiagnosticUtils.atLocation(
                                     ktFile,
                                     TextRange(
@@ -295,7 +295,7 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
                         actualStart: Int,
                         actualEnd: Int
                     ) {
-                        val message =
+                        konst message =
                             "Unexpected ${diagnostic.description}${PsiDiagnosticUtils.atLocation(
                                 ktFile,
                                 TextRange(
@@ -340,7 +340,7 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
     }
 
     private fun Iterable<KtDiagnostic>.toActualDiagnostic(root: PsiElement): List<ActualDiagnostic> {
-        val result = mutableListOf<ActualDiagnostic>()
+        konst result = mutableListOf<ActualDiagnostic>()
         filterIsInstance<Diagnostic>().mapTo(result) {
             ActualDiagnostic(it, null, true)
         }

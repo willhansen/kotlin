@@ -8,5 +8,5 @@ interface I {
 }
 
 class A(
-    private val p: I
+    private konst p: I
 ) : I by p

@@ -26,10 +26,10 @@ import java.util.*
 
 interface ResolutionResultsCache {
     data class CachedData(
-        val resolutionResults: OverloadResolutionResultsImpl<*>,
-        val deferredComputation: BasicCallResolutionContext,
-        val tracing: TracingStrategy,
-        val resolutionTrace: DelegatingBindingTrace
+        konst resolutionResults: OverloadResolutionResultsImpl<*>,
+        konst deferredComputation: BasicCallResolutionContext,
+        konst tracing: TracingStrategy,
+        konst resolutionTrace: DelegatingBindingTrace
     )
 
     fun record(
@@ -44,7 +44,7 @@ interface ResolutionResultsCache {
 }
 
 class ResolutionResultsCacheImpl : ResolutionResultsCache {
-    private val data = HashMap<Call, CachedData>()
+    private konst data = HashMap<Call, CachedData>()
 
     override fun record(
         call: Call,
@@ -63,8 +63,8 @@ class ResolutionResultsCacheImpl : ResolutionResultsCache {
     }
 }
 
-class TemporaryResolutionResultsCache(private val parentCache: ResolutionResultsCache) : ResolutionResultsCache {
-    private val innerCache = ResolutionResultsCacheImpl()
+class TemporaryResolutionResultsCache(private konst parentCache: ResolutionResultsCache) : ResolutionResultsCache {
+    private konst innerCache = ResolutionResultsCacheImpl()
 
     override fun record(
         call: Call,

@@ -1,7 +1,7 @@
 // FILE: kotlin.kt
 
 fun bar() {
-    val xx = JavaClass::<expr>foo</expr>
+    konst xx = JavaClass::<expr>foo</expr>
 }
 
 // FILE: JavaClass.java

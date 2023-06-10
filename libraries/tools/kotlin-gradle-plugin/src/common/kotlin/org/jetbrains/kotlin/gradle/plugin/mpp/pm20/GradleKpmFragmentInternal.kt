@@ -18,30 +18,30 @@ import org.jetbrains.kotlin.gradle.plugin.sources.DefaultLanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.plugin.sources.FragmentConsistencyChecker
 import org.jetbrains.kotlin.gradle.plugin.sources.FragmentConsistencyChecks
 import org.jetbrains.kotlin.gradle.utils.addExtendsFromRelation
-import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEvaluated
+import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEkonstuated
 import org.jetbrains.kotlin.project.model.KpmModuleDependency
 import org.jetbrains.kotlin.tooling.core.MutableExtras
 import org.jetbrains.kotlin.tooling.core.mutableExtrasOf
 import javax.inject.Inject
 
 abstract class GradleKpmFragmentInternal @Inject constructor(
-    final override val containingModule: GradleKpmModule,
-    final override val fragmentName: String,
+    final override konst containingModule: GradleKpmModule,
+    final override konst fragmentName: String,
     dependencyConfigurations: GradleKpmFragmentDependencyConfigurations
 ) : GradleKpmFragment,
     GradleKpmFragmentDependencyConfigurations by dependencyConfigurations {
 
     final override fun getName(): String = fragmentName
 
-    final override val project: Project // overriding with final to avoid warnings
+    final override konst project: Project // overriding with final to avoid warnings
         get() = super.project
 
-    override val extras: MutableExtras = mutableExtrasOf()
+    override konst extras: MutableExtras = mutableExtrasOf()
 
     // TODO pull up to KotlinModuleFragment
     // FIXME apply to compilation
     // FIXME check for consistency
-    override val languageSettings: LanguageSettingsBuilder = DefaultLanguageSettingsBuilder()
+    override konst languageSettings: LanguageSettingsBuilder = DefaultLanguageSettingsBuilder()
 
     override fun refines(other: GradleKpmFragment) {
         checkCanRefine(other)
@@ -64,7 +64,7 @@ abstract class GradleKpmFragmentInternal @Inject constructor(
             this.transitiveRuntimeOnlyConfiguration.name, other.get().transitiveRuntimeOnlyConfiguration.name
         )
 
-        project.runProjectConfigurationHealthCheckWhenEvaluated {
+        project.runProjectConfigurationHealthCheckWhenEkonstuated {
             kotlinGradleFragmentConsistencyChecker.runAllChecks(this@GradleKpmFragmentInternal, other.get())
         }
     }
@@ -81,27 +81,27 @@ abstract class GradleKpmFragmentInternal @Inject constructor(
     override fun dependencies(configure: Action<KotlinDependencyHandler>) =
         dependencies { configure.execute(this) }
 
-    private val _declaredRefinesDependencies = mutableSetOf<Provider<GradleKpmFragment>>()
+    private konst _declaredRefinesDependencies = mutableSetOf<Provider<GradleKpmFragment>>()
 
-    override val declaredRefinesDependencies: Iterable<GradleKpmFragment>
+    override konst declaredRefinesDependencies: Iterable<GradleKpmFragment>
         get() = _declaredRefinesDependencies.map { it.get() }.toSet()
 
     // TODO: separate the declared module dependencies and exported module dependencies? we need this to keep implementation dependencies
     //       out of the consumer's metadata compilations compile classpath; however, Native variants must expose implementation as API
     //       anyway, so for now all fragments follow that behavior
-    override val declaredModuleDependencies: Iterable<KpmModuleDependency>
+    override konst declaredModuleDependencies: Iterable<KpmModuleDependency>
         get() = listOf(apiConfiguration, implementationConfiguration).flatMapTo(mutableSetOf()) { exportConfiguration ->
             exportConfiguration.allDependencies.map { dependency -> dependency.toKpmModuleDependency(project) }
         }
 
-    override val kotlinSourceRoots: SourceDirectorySet =
+    override konst kotlinSourceRoots: SourceDirectorySet =
         project.objects.sourceDirectorySet(
             "$fragmentName.kotlin", "Kotlin sources for fragment $fragmentName"
         )
 
     override fun toString(): String = "fragment $fragmentName in $containingModule"
 
-    private val kotlinGradleFragmentConsistencyChecker =
+    private konst kotlinGradleFragmentConsistencyChecker =
         FragmentConsistencyChecker(
             unitsName = "fragments",
             name = { name },

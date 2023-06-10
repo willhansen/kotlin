@@ -22,12 +22,12 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeSubstitutor
 
 interface ConstraintSystem {
-    val status: ConstraintSystemStatus
+    konst status: ConstraintSystemStatus
 
     /**
      * Returns a set of all registered type variables.
      */
-    val typeVariables: Set<TypeVariable>
+    konst typeVariables: Set<TypeVariable>
 
     /**
      * Returns the resulting type constraints of solving the constraint system for specific type parameter descriptor.
@@ -44,13 +44,13 @@ interface ConstraintSystem {
      * If the addition of the 'expected type' constraint made the system fail,
      * this constraint is not included in the resulting substitution.
      */
-    val resultingSubstitutor: TypeSubstitutor
+    konst resultingSubstitutor: TypeSubstitutor
 
     /**
      * Returns the current result of solving the constraint system (mapping from the type variable to the resulting type projection).
      * If there is no information for type parameter, returns type projection for DONT_CARE type.
      */
-    val currentSubstitutor: TypeSubstitutor
+    konst currentSubstitutor: TypeSubstitutor
 
     fun toBuilder(filterConstraintPosition: (ConstraintPosition) -> Boolean = { true }): Builder
 
@@ -77,7 +77,7 @@ interface ConstraintSystem {
          * type parameter descriptors of the candidate descriptor of that call -> type variables of the system.
          * Those are the same substitutors that are returned by [registerTypeVariables] at the time of variable registration.
          */
-        val typeVariableSubstitutors: Map<CallHandle, TypeSubstitutor>
+        konst typeVariableSubstitutors: Map<CallHandle, TypeSubstitutor>
 
         /**
          * Add all variables and constraints from the other system to this one. The other system may not have any common variables

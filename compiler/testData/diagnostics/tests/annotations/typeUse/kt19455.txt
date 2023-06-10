@@ -1,7 +1,7 @@
 package
 
 package test {
-    public val test: test.TypeToken<@test.TypeAnn kotlin.String>
+    public konst test: test.TypeToken<@test.TypeAnn kotlin.String>
 
     public object Test : test.TypeToken<@test.TypeAnn kotlin.String> {
         private constructor Test()

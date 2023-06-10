@@ -4,23 +4,23 @@
 // KJS_WITH_FULL_RUNTIME
 
 // FILE: A.kt
-val a1 = "a".let {
+konst a1 = "a".let {
     throw Error()
     it + "a"
 }
 
-val b1 by lazy {
+konst b1 by lazy {
     "b1"
 }
 
 object A {
-    private val foo = "foo"
-    val foo2 = foo
-    val ok = "OK"
+    private konst foo = "foo"
+    konst foo2 = foo
+    konst ok = "OK"
 }
 
-class B(private val foo: String) {
-    val ok = foo
+class B(private konst foo: String) {
+    konst ok = foo
 
     constructor(arg: Int) : this(arg.toString())
 }
@@ -29,16 +29,16 @@ enum class C {
     OK
 }
 
-const val b = "b"
+const konst b = "b"
 
 // FILE: main.kt
 fun box(): String {
-    val foo = A.ok
-    val bar = B("foo").ok
-    val bay = B(1).ok
+    konst foo = A.ok
+    konst bar = B("foo").ok
+    konst bay = B(1).ok
     C.OK
-    C.values()
-    C.valueOf("OK")
-    val baz = b
+    C.konstues()
+    C.konstueOf("OK")
+    konst baz = b
     return "OK"
 }

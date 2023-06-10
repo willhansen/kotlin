@@ -1,7 +1,7 @@
 package foo
 
 open class Super {
-    val foo = 23
+    konst foo = 23
 }
 
 class Sub : Super() {

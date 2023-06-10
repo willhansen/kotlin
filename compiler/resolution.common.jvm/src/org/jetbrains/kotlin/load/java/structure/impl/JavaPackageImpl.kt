@@ -24,30 +24,30 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 class JavaPackageImpl(
-    psiPackageSource: JavaElementPsiSource<PsiPackage>, private val scope: GlobalSearchScope,
-    private val mayHaveAnnotations: Boolean = true,
+    psiPackageSource: JavaElementPsiSource<PsiPackage>, private konst scope: GlobalSearchScope,
+    private konst mayHaveAnnotations: Boolean = true,
 ) : JavaElementImpl<PsiPackage>(psiPackageSource), JavaPackage, MapBasedJavaAnnotationOwner {
 
     override fun getClasses(nameFilter: (Name) -> Boolean): Collection<JavaClass> {
-        val psiClasses = psi.getClasses(scope).filter {
-            val name = it.name
+        konst psiClasses = psi.getClasses(scope).filter {
+            konst name = it.name
             name != null && nameFilter(Name.identifier(name))
         }
         return classes(psiClasses, sourceFactory)
     }
 
-    override val subPackages: Collection<JavaPackage>
+    override konst subPackages: Collection<JavaPackage>
         get() = packages(psi.getSubPackages(scope), scope, sourceFactory)
 
-    override val fqName: FqName
+    override konst fqName: FqName
         get() = FqName(psi.qualifiedName)
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() =
             if (mayHaveAnnotations)
                 org.jetbrains.kotlin.load.java.structure.impl.annotations(psi.annotationList?.annotations.orEmpty(), sourceFactory)
             else
                 emptyList()
 
-    override val annotationsByFqName: Map<FqName?, JavaAnnotation> by buildLazyValueForMap()
+    override konst annotationsByFqName: Map<FqName?, JavaAnnotation> by buildLazyValueForMap()
 }

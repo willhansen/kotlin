@@ -9,7 +9,7 @@ annotation class NoArg
 // MODULE: a(annotations)
 
 @NoArg
-abstract class Base(val x: Int)
+abstract class Base(konst x: Int)
 
 // MODULE: b(a, annotations)
 

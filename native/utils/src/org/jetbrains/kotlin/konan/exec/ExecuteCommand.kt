@@ -24,15 +24,15 @@ import java.lang.ProcessBuilder.Redirect
 import java.nio.file.Files
 
 
-open class Command(initialCommand: List<String>, val redirectInputFile: File? = null) {
+open class Command(initialCommand: List<String>, konst redirectInputFile: File? = null) {
 
     constructor(tool: String) : this(listOf(tool)) 
     constructor(vararg command: String) : this(command.toList<String>()) 
-    protected val command = initialCommand.toMutableList()
+    protected konst command = initialCommand.toMutableList()
 
-    val argsWithExecutable: List<String> = command
+    konst argsWithExecutable: List<String> = command
 
-    val args: List<String> 
+    konst args: List<String> 
         get() = command.drop(1)
 
     operator fun String.unaryPlus(): Command {
@@ -56,7 +56,7 @@ open class Command(initialCommand: List<String>, val redirectInputFile: File? = 
 
     open fun runProcess(): Int {
         stdError = emptyList()
-        val builder = ProcessBuilder(command)
+        konst builder = ProcessBuilder(command)
 
         builder.redirectOutput(Redirect.INHERIT)
         if (redirectInputFile == null) {
@@ -65,18 +65,18 @@ open class Command(initialCommand: List<String>, val redirectInputFile: File? = 
           builder.redirectInput(redirectInputFile)
         }
 
-        val process = builder.start()
+        konst process = builder.start()
 
-        val reader = BufferedReader(InputStreamReader(process.errorStream))
+        konst reader = BufferedReader(InputStreamReader(process.errorStream))
         stdError = reader.readLines()
 
-        val exitCode = process.waitFor()
+        konst exitCode = process.waitFor()
         return exitCode
     }
 
     open fun execute() {
         log()
-        val code = runProcess()
+        konst code = runProcess()
         handleExitCode(code, stdError)
     }
 
@@ -89,11 +89,11 @@ open class Command(initialCommand: List<String>, val redirectInputFile: File? = 
     fun getResult(withErrors: Boolean, handleError: Boolean = false): Result {
         log()
 
-        val outputFile = Files.createTempFile(null, null).toFile()
+        konst outputFile = Files.createTempFile(null, null).toFile()
         outputFile.deleteOnExit()
 
         try {
-            val builder = ProcessBuilder(command)
+            konst builder = ProcessBuilder(command)
 
             if (redirectInputFile == null) {
               builder.redirectInput(Redirect.INHERIT)
@@ -107,8 +107,8 @@ open class Command(initialCommand: List<String>, val redirectInputFile: File? = 
             // however this would require managing a thread to read `process.inputStream` because
             // it may have limited capacity.
 
-            val process = builder.start()
-            val code = process.waitFor()
+            konst process = builder.start()
+            konst code = process.waitFor()
             if (handleError) handleExitCode(code, outputFile.readLines())
 
             return Result(code, outputFile.readLines())
@@ -117,7 +117,7 @@ open class Command(initialCommand: List<String>, val redirectInputFile: File? = 
         }
     }
 
-    class Result(val exitCode: Int, val outputLines: List<String>)
+    class Result(konst exitCode: Int, konst outputLines: List<String>)
 
     private fun handleExitCode(code: Int, output: List<String> = emptyList()) {
         if (code != 0) throw KonanExternalToolFailure("""

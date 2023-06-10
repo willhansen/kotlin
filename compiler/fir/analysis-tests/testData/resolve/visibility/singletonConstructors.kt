@@ -7,7 +7,7 @@ class A {
 }
 
 object B {
-    private val x = <!UNRESOLVED_REFERENCE!>B<!>()
+    private konst x = <!UNRESOLVED_REFERENCE!>B<!>()
 }
 
 class D {

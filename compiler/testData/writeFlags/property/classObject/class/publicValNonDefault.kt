@@ -1,6 +1,6 @@
 class Test {
   companion object {
-    public val prop: Int = 0
+    public konst prop: Int = 0
       get() {
         return field
       }

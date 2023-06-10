@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.commonizer.cir
 import org.jetbrains.kotlin.commonizer.utils.Interner
 
 interface CirFunctionModifiers {
-    val isOperator: Boolean
-    val isInfix: Boolean
-    val isInline: Boolean
-    val isSuspend: Boolean
+    konst isOperator: Boolean
+    konst isInfix: Boolean
+    konst isInline: Boolean
+    konst isSuspend: Boolean
 
     companion object {
         fun createInterned(
@@ -28,13 +28,13 @@ interface CirFunctionModifiers {
             )
         )
 
-        private val interner = Interner<CirFunctionModifiersInternedImpl>()
+        private konst interner = Interner<CirFunctionModifiersInternedImpl>()
     }
 }
 
 private data class CirFunctionModifiersInternedImpl(
-    override val isOperator: Boolean,
-    override val isInfix: Boolean,
-    override val isInline: Boolean,
-    override val isSuspend: Boolean,
+    override konst isOperator: Boolean,
+    override konst isInfix: Boolean,
+    override konst isInline: Boolean,
+    override konst isSuspend: Boolean,
 ) : CirFunctionModifiers

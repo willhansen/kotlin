@@ -149,7 +149,7 @@ public class RunUtils {
             String timeoutAsString = System.getenv("kotlin.tests.android.timeout");
             if (timeoutAsString == null) {
                 timeoutAsString = "30";
-                System.err.println("Default value for timeout used: timeout = 30 min. You can change it using 'kotlin.tests.android.timeout' environment variable");
+                System.err.println("Default konstue for timeout used: timeout = 30 min. You can change it using 'kotlin.tests.android.timeout' environment variable");
             }
             int timeout;
             try {

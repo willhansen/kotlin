@@ -8,7 +8,7 @@ public final class Outer {
 
     private final data class Nested {
         public constructor Nested(/*0*/ c: kotlin.Int)
-        public final val c: kotlin.Int
+        public final konst c: kotlin.Int
         public final operator /*synthesized*/ fun component1(): kotlin.Int
         public final /*synthesized*/ fun copy(/*0*/ c: kotlin.Int = ...): Outer.Nested
         public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

@@ -209,7 +209,7 @@ public final class JvmModuleProtoBuf {
     private Module(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -301,10 +301,10 @@ public final class JvmModuleProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -337,7 +337,7 @@ public final class JvmModuleProtoBuf {
       public Module parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Module(input, extensionRegistry);
       }
     };
@@ -791,23 +791,23 @@ public final class JvmModuleProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.Module parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.Module parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.Module parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.Module parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.Module parseFrom(java.io.InputStream input)
@@ -1049,7 +1049,7 @@ public final class JvmModuleProtoBuf {
         org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.Module parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.Module) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -1108,12 +1108,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setPackageParts(
-          int index, org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensurePackagePartsIsMutable();
-        packageParts_.set(index, value);
+        packageParts_.set(index, konstue);
 
         return this;
       }
@@ -1138,12 +1138,12 @@ public final class JvmModuleProtoBuf {
        * Names of .class files for each package
        * </pre>
        */
-      public Builder addPackageParts(org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts value) {
-        if (value == null) {
+      public Builder addPackageParts(org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensurePackagePartsIsMutable();
-        packageParts_.add(value);
+        packageParts_.add(konstue);
 
         return this;
       }
@@ -1155,12 +1155,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addPackageParts(
-          int index, org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensurePackagePartsIsMutable();
-        packageParts_.add(index, value);
+        packageParts_.add(index, konstue);
 
         return this;
       }
@@ -1200,10 +1200,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllPackageParts(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts> konstues) {
         ensurePackagePartsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, packageParts_);
+            konstues, packageParts_);
 
         return this;
       }
@@ -1281,12 +1281,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setMetadataParts(
-          int index, org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureMetadataPartsIsMutable();
-        metadataParts_.set(index, value);
+        metadataParts_.set(index, konstue);
 
         return this;
       }
@@ -1311,12 +1311,12 @@ public final class JvmModuleProtoBuf {
        * Names of .kotlin_metadata files for each package
        * </pre>
        */
-      public Builder addMetadataParts(org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts value) {
-        if (value == null) {
+      public Builder addMetadataParts(org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureMetadataPartsIsMutable();
-        metadataParts_.add(value);
+        metadataParts_.add(konstue);
 
         return this;
       }
@@ -1328,12 +1328,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addMetadataParts(
-          int index, org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureMetadataPartsIsMutable();
-        metadataParts_.add(index, value);
+        metadataParts_.add(index, konstue);
 
         return this;
       }
@@ -1373,10 +1373,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllMetadataParts(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts> konstues) {
         ensureMetadataPartsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, metadataParts_);
+            konstues, metadataParts_);
 
         return this;
       }
@@ -1469,12 +1469,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setJvmPackageName(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureJvmPackageNameIsMutable();
-        jvmPackageName_.set(index, value);
+        jvmPackageName_.set(index, konstue);
         
         return this;
       }
@@ -1487,12 +1487,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addJvmPackageName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureJvmPackageNameIsMutable();
-        jvmPackageName_.add(value);
+        jvmPackageName_.add(konstue);
         
         return this;
       }
@@ -1505,10 +1505,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllJvmPackageName(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureJvmPackageNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, jvmPackageName_);
+            konstues, jvmPackageName_);
         
         return this;
       }
@@ -1535,12 +1535,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addJvmPackageNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureJvmPackageNameIsMutable();
-        jvmPackageName_.add(value);
+        jvmPackageName_.add(konstue);
         
         return this;
       }
@@ -1561,11 +1561,11 @@ public final class JvmModuleProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.StringTable string_table = 4;</code>
        */
-      public Builder setStringTable(org.jetbrains.kotlin.metadata.ProtoBuf.StringTable value) {
-        if (value == null) {
+      public Builder setStringTable(org.jetbrains.kotlin.metadata.ProtoBuf.StringTable konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        stringTable_ = value;
+        stringTable_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -1583,13 +1583,13 @@ public final class JvmModuleProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.StringTable string_table = 4;</code>
        */
-      public Builder mergeStringTable(org.jetbrains.kotlin.metadata.ProtoBuf.StringTable value) {
+      public Builder mergeStringTable(org.jetbrains.kotlin.metadata.ProtoBuf.StringTable konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             stringTable_ != org.jetbrains.kotlin.metadata.ProtoBuf.StringTable.getDefaultInstance()) {
           stringTable_ =
-            org.jetbrains.kotlin.metadata.ProtoBuf.StringTable.newBuilder(stringTable_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.metadata.ProtoBuf.StringTable.newBuilder(stringTable_).mergeFrom(konstue).buildPartial();
         } else {
-          stringTable_ = value;
+          stringTable_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -1621,11 +1621,11 @@ public final class JvmModuleProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.QualifiedNameTable qualified_name_table = 5;</code>
        */
-      public Builder setQualifiedNameTable(org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable value) {
-        if (value == null) {
+      public Builder setQualifiedNameTable(org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        qualifiedNameTable_ = value;
+        qualifiedNameTable_ = konstue;
 
         bitField0_ |= 0x00000010;
         return this;
@@ -1643,13 +1643,13 @@ public final class JvmModuleProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.QualifiedNameTable qualified_name_table = 5;</code>
        */
-      public Builder mergeQualifiedNameTable(org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable value) {
+      public Builder mergeQualifiedNameTable(org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable konstue) {
         if (((bitField0_ & 0x00000010) == 0x00000010) &&
             qualifiedNameTable_ != org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable.getDefaultInstance()) {
           qualifiedNameTable_ =
-            org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable.newBuilder(qualifiedNameTable_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable.newBuilder(qualifiedNameTable_).mergeFrom(konstue).buildPartial();
         } else {
-          qualifiedNameTable_ = value;
+          qualifiedNameTable_ = konstue;
         }
 
         bitField0_ |= 0x00000010;
@@ -1712,12 +1712,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setAnnotation(
-          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Annotation value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Annotation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAnnotationIsMutable();
-        annotation_.set(index, value);
+        annotation_.set(index, konstue);
 
         return this;
       }
@@ -1742,12 +1742,12 @@ public final class JvmModuleProtoBuf {
        * Annotations on the whole module
        * </pre>
        */
-      public Builder addAnnotation(org.jetbrains.kotlin.metadata.ProtoBuf.Annotation value) {
-        if (value == null) {
+      public Builder addAnnotation(org.jetbrains.kotlin.metadata.ProtoBuf.Annotation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAnnotationIsMutable();
-        annotation_.add(value);
+        annotation_.add(konstue);
 
         return this;
       }
@@ -1759,12 +1759,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAnnotation(
-          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Annotation value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Annotation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAnnotationIsMutable();
-        annotation_.add(index, value);
+        annotation_.add(index, konstue);
 
         return this;
       }
@@ -1804,10 +1804,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllAnnotation(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.ProtoBuf.Annotation> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.ProtoBuf.Annotation> konstues) {
         ensureAnnotationIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, annotation_);
+            konstues, annotation_);
 
         return this;
       }
@@ -1897,12 +1897,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setOptionalAnnotationClass(
-          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Class value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Class konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureOptionalAnnotationClassIsMutable();
-        optionalAnnotationClass_.set(index, value);
+        optionalAnnotationClass_.set(index, konstue);
 
         return this;
       }
@@ -1933,12 +1933,12 @@ public final class JvmModuleProtoBuf {
        * it to the corresponding class with the resolution capabilities of common modules.
        * </pre>
        */
-      public Builder addOptionalAnnotationClass(org.jetbrains.kotlin.metadata.ProtoBuf.Class value) {
-        if (value == null) {
+      public Builder addOptionalAnnotationClass(org.jetbrains.kotlin.metadata.ProtoBuf.Class konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureOptionalAnnotationClassIsMutable();
-        optionalAnnotationClass_.add(value);
+        optionalAnnotationClass_.add(konstue);
 
         return this;
       }
@@ -1953,12 +1953,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addOptionalAnnotationClass(
-          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Class value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Class konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureOptionalAnnotationClassIsMutable();
-        optionalAnnotationClass_.add(index, value);
+        optionalAnnotationClass_.add(index, konstue);
 
         return this;
       }
@@ -2007,10 +2007,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllOptionalAnnotationClass(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.ProtoBuf.Class> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.ProtoBuf.Class> konstues) {
         ensureOptionalAnnotationClassIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, optionalAnnotationClass_);
+            konstues, optionalAnnotationClass_);
 
         return this;
       }
@@ -2140,7 +2140,7 @@ public final class JvmModuleProtoBuf {
      *
      * <pre>
      * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-     * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+     * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
      * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
      * </pre>
      */
@@ -2150,7 +2150,7 @@ public final class JvmModuleProtoBuf {
      *
      * <pre>
      * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-     * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+     * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
      * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
      * </pre>
      */
@@ -2160,7 +2160,7 @@ public final class JvmModuleProtoBuf {
      *
      * <pre>
      * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-     * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+     * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
      * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
      * </pre>
      */
@@ -2295,7 +2295,7 @@ public final class JvmModuleProtoBuf {
      * <pre>
      * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
      * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-     * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+     * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
      * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
      * when a bunch of files from the same Kotlin package have the same JVM package name.
      * </pre>
@@ -2307,7 +2307,7 @@ public final class JvmModuleProtoBuf {
      * <pre>
      * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
      * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-     * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+     * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
      * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
      * when a bunch of files from the same Kotlin package have the same JVM package name.
      * </pre>
@@ -2319,7 +2319,7 @@ public final class JvmModuleProtoBuf {
      * <pre>
      * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
      * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-     * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+     * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
      * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
      * when a bunch of files from the same Kotlin package have the same JVM package name.
      * </pre>
@@ -2353,7 +2353,7 @@ public final class JvmModuleProtoBuf {
     private PackageParts(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -2474,10 +2474,10 @@ public final class JvmModuleProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -2513,7 +2513,7 @@ public final class JvmModuleProtoBuf {
       public PackageParts parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new PackageParts(input, extensionRegistry);
       }
     };
@@ -2642,7 +2642,7 @@ public final class JvmModuleProtoBuf {
      *
      * <pre>
      * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-     * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+     * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
      * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
      * </pre>
      */
@@ -2655,7 +2655,7 @@ public final class JvmModuleProtoBuf {
      *
      * <pre>
      * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-     * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+     * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
      * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
      * </pre>
      */
@@ -2667,7 +2667,7 @@ public final class JvmModuleProtoBuf {
      *
      * <pre>
      * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-     * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+     * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
      * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
      * </pre>
      */
@@ -2837,7 +2837,7 @@ public final class JvmModuleProtoBuf {
      * <pre>
      * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
      * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-     * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+     * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
      * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
      * when a bunch of files from the same Kotlin package have the same JVM package name.
      * </pre>
@@ -2852,7 +2852,7 @@ public final class JvmModuleProtoBuf {
      * <pre>
      * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
      * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-     * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+     * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
      * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
      * when a bunch of files from the same Kotlin package have the same JVM package name.
      * </pre>
@@ -2866,7 +2866,7 @@ public final class JvmModuleProtoBuf {
      * <pre>
      * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
      * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-     * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+     * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
      * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
      * when a bunch of files from the same Kotlin package have the same JVM package name.
      * </pre>
@@ -3031,23 +3031,23 @@ public final class JvmModuleProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts parseFrom(java.io.InputStream input)
@@ -3273,7 +3273,7 @@ public final class JvmModuleProtoBuf {
         org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.jvm.JvmModuleProtoBuf.PackageParts) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -3345,12 +3345,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setPackageFqName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        packageFqName_ = value;
+        packageFqName_ = konstue;
         
         return this;
       }
@@ -3375,12 +3375,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setPackageFqNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        packageFqName_ = value;
+        packageFqName_ = konstue;
         
         return this;
       }
@@ -3457,12 +3457,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setShortClassName(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureShortClassNameIsMutable();
-        shortClassName_.set(index, value);
+        shortClassName_.set(index, konstue);
         
         return this;
       }
@@ -3477,12 +3477,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addShortClassName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureShortClassNameIsMutable();
-        shortClassName_.add(value);
+        shortClassName_.add(konstue);
         
         return this;
       }
@@ -3497,10 +3497,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllShortClassName(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureShortClassNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, shortClassName_);
+            konstues, shortClassName_);
         
         return this;
       }
@@ -3531,12 +3531,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addShortClassNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureShortClassNameIsMutable();
-        shortClassName_.add(value);
+        shortClassName_.add(konstue);
         
         return this;
       }
@@ -3553,7 +3553,7 @@ public final class JvmModuleProtoBuf {
        *
        * <pre>
        * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-       * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+       * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
        * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
        * </pre>
        */
@@ -3566,7 +3566,7 @@ public final class JvmModuleProtoBuf {
        *
        * <pre>
        * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-       * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+       * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
        * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
        * </pre>
        */
@@ -3578,7 +3578,7 @@ public final class JvmModuleProtoBuf {
        *
        * <pre>
        * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-       * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+       * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
        * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
        * </pre>
        */
@@ -3590,14 +3590,14 @@ public final class JvmModuleProtoBuf {
        *
        * <pre>
        * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-       * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+       * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
        * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
        * </pre>
        */
       public Builder setMultifileFacadeShortNameId(
-          int index, int value) {
+          int index, int konstue) {
         ensureMultifileFacadeShortNameIdIsMutable();
-        multifileFacadeShortNameId_.set(index, value);
+        multifileFacadeShortNameId_.set(index, konstue);
         
         return this;
       }
@@ -3606,13 +3606,13 @@ public final class JvmModuleProtoBuf {
        *
        * <pre>
        * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-       * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+       * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
        * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
        * </pre>
        */
-      public Builder addMultifileFacadeShortNameId(int value) {
+      public Builder addMultifileFacadeShortNameId(int konstue) {
         ensureMultifileFacadeShortNameIdIsMutable();
-        multifileFacadeShortNameId_.add(value);
+        multifileFacadeShortNameId_.add(konstue);
         
         return this;
       }
@@ -3621,15 +3621,15 @@ public final class JvmModuleProtoBuf {
        *
        * <pre>
        * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-       * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+       * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
        * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
        * </pre>
        */
       public Builder addAllMultifileFacadeShortNameId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureMultifileFacadeShortNameIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, multifileFacadeShortNameId_);
+            konstues, multifileFacadeShortNameId_);
         
         return this;
       }
@@ -3638,7 +3638,7 @@ public final class JvmModuleProtoBuf {
        *
        * <pre>
        * For each name in short_class_name, index of the name of the corresponding multi-file facade class in multifile_facade_short_name + 1,
-       * or 0 if the class is not a multi-file part. If there's no value in this list at some index, the value is assumed to be 0.
+       * or 0 if the class is not a multi-file part. If there's no konstue in this list at some index, the konstue is assumed to be 0.
        * (e.g. if there are no multi-file classes in the module, this list is not going to exist at all)
        * </pre>
        */
@@ -3721,12 +3721,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setMultifileFacadeShortName(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureMultifileFacadeShortNameIsMutable();
-        multifileFacadeShortName_.set(index, value);
+        multifileFacadeShortName_.set(index, konstue);
         
         return this;
       }
@@ -3741,12 +3741,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addMultifileFacadeShortName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureMultifileFacadeShortNameIsMutable();
-        multifileFacadeShortName_.add(value);
+        multifileFacadeShortName_.add(konstue);
         
         return this;
       }
@@ -3761,10 +3761,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllMultifileFacadeShortName(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureMultifileFacadeShortNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, multifileFacadeShortName_);
+            konstues, multifileFacadeShortName_);
         
         return this;
       }
@@ -3795,12 +3795,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addMultifileFacadeShortNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureMultifileFacadeShortNameIsMutable();
-        multifileFacadeShortName_.add(value);
+        multifileFacadeShortName_.add(konstue);
         
         return this;
       }
@@ -3867,12 +3867,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setClassWithJvmPackageNameShortName(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureClassWithJvmPackageNameShortNameIsMutable();
-        classWithJvmPackageNameShortName_.set(index, value);
+        classWithJvmPackageNameShortName_.set(index, konstue);
         
         return this;
       }
@@ -3885,12 +3885,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addClassWithJvmPackageNameShortName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureClassWithJvmPackageNameShortNameIsMutable();
-        classWithJvmPackageNameShortName_.add(value);
+        classWithJvmPackageNameShortName_.add(konstue);
         
         return this;
       }
@@ -3903,10 +3903,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllClassWithJvmPackageNameShortName(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureClassWithJvmPackageNameShortNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, classWithJvmPackageNameShortName_);
+            konstues, classWithJvmPackageNameShortName_);
         
         return this;
       }
@@ -3933,12 +3933,12 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addClassWithJvmPackageNameShortNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureClassWithJvmPackageNameShortNameIsMutable();
-        classWithJvmPackageNameShortName_.add(value);
+        classWithJvmPackageNameShortName_.add(konstue);
         
         return this;
       }
@@ -4005,9 +4005,9 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder setClassWithJvmPackageNameMultifileFacadeShortNameId(
-          int index, int value) {
+          int index, int konstue) {
         ensureClassWithJvmPackageNameMultifileFacadeShortNameIdIsMutable();
-        classWithJvmPackageNameMultifileFacadeShortNameId_.set(index, value);
+        classWithJvmPackageNameMultifileFacadeShortNameId_.set(index, konstue);
         
         return this;
       }
@@ -4022,9 +4022,9 @@ public final class JvmModuleProtoBuf {
        * multifile_facade_short_name + 1, or 0 if the class is not a multi-file part.
        * </pre>
        */
-      public Builder addClassWithJvmPackageNameMultifileFacadeShortNameId(int value) {
+      public Builder addClassWithJvmPackageNameMultifileFacadeShortNameId(int konstue) {
         ensureClassWithJvmPackageNameMultifileFacadeShortNameIdIsMutable();
-        classWithJvmPackageNameMultifileFacadeShortNameId_.add(value);
+        classWithJvmPackageNameMultifileFacadeShortNameId_.add(konstue);
         
         return this;
       }
@@ -4040,10 +4040,10 @@ public final class JvmModuleProtoBuf {
        * </pre>
        */
       public Builder addAllClassWithJvmPackageNameMultifileFacadeShortNameId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureClassWithJvmPackageNameMultifileFacadeShortNameIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, classWithJvmPackageNameMultifileFacadeShortNameId_);
+            konstues, classWithJvmPackageNameMultifileFacadeShortNameId_);
         
         return this;
       }
@@ -4078,7 +4078,7 @@ public final class JvmModuleProtoBuf {
        * <pre>
        * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
        * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-       * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+       * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
        * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
        * when a bunch of files from the same Kotlin package have the same JVM package name.
        * </pre>
@@ -4093,7 +4093,7 @@ public final class JvmModuleProtoBuf {
        * <pre>
        * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
        * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-       * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+       * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
        * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
        * when a bunch of files from the same Kotlin package have the same JVM package name.
        * </pre>
@@ -4107,7 +4107,7 @@ public final class JvmModuleProtoBuf {
        * <pre>
        * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
        * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-       * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+       * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
        * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
        * when a bunch of files from the same Kotlin package have the same JVM package name.
        * </pre>
@@ -4121,15 +4121,15 @@ public final class JvmModuleProtoBuf {
        * <pre>
        * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
        * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-       * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+       * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
        * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
        * when a bunch of files from the same Kotlin package have the same JVM package name.
        * </pre>
        */
       public Builder setClassWithJvmPackageNamePackageId(
-          int index, int value) {
+          int index, int konstue) {
         ensureClassWithJvmPackageNamePackageIdIsMutable();
-        classWithJvmPackageNamePackageId_.set(index, value);
+        classWithJvmPackageNamePackageId_.set(index, konstue);
         
         return this;
       }
@@ -4139,14 +4139,14 @@ public final class JvmModuleProtoBuf {
        * <pre>
        * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
        * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-       * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+       * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
        * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
        * when a bunch of files from the same Kotlin package have the same JVM package name.
        * </pre>
        */
-      public Builder addClassWithJvmPackageNamePackageId(int value) {
+      public Builder addClassWithJvmPackageNamePackageId(int konstue) {
         ensureClassWithJvmPackageNamePackageIdIsMutable();
-        classWithJvmPackageNamePackageId_.add(value);
+        classWithJvmPackageNamePackageId_.add(konstue);
         
         return this;
       }
@@ -4156,16 +4156,16 @@ public final class JvmModuleProtoBuf {
        * <pre>
        * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
        * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-       * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+       * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
        * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
        * when a bunch of files from the same Kotlin package have the same JVM package name.
        * </pre>
        */
       public Builder addAllClassWithJvmPackageNamePackageId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureClassWithJvmPackageNamePackageIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, classWithJvmPackageNamePackageId_);
+            konstues, classWithJvmPackageNamePackageId_);
         
         return this;
       }
@@ -4175,7 +4175,7 @@ public final class JvmModuleProtoBuf {
        * <pre>
        * For each name in class_with_jvm_package_name_short_name, the index (into PackageTable#jvm_package_name) of the JVM package name.
        * This list should have at least one element, otherwise classes with JVM package names are going to be ignored completely.
-       * If there's no value in this list at some index other than 0, the value is assumed to be the same as the value of the last element
+       * If there's no konstue in this list at some index other than 0, the konstue is assumed to be the same as the konstue of the last element
        * of this list. The intended use case for this optimization is to have just a list of a single element in the most frequent case
        * when a bunch of files from the same Kotlin package have the same JVM package name.
        * </pre>

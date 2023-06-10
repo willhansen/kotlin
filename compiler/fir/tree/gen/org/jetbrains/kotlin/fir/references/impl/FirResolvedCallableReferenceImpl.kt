@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirResolvedCallableReferenceImpl(
-    override val source: KtSourceElement?,
-    override val name: Name,
-    override val resolvedSymbol: FirBasedSymbol<*>,
-    override val inferredTypeArguments: MutableList<ConeKotlinType>,
-    override val mappedArguments: CallableReferenceMappedArguments,
+    override konst source: KtSourceElement?,
+    override konst name: Name,
+    override konst resolvedSymbol: FirBasedSymbol<*>,
+    override konst inferredTypeArguments: MutableList<ConeKotlinType>,
+    override konst mappedArguments: CallableReferenceMappedArguments,
 ) : FirResolvedCallableReference() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

@@ -410,34 +410,34 @@ private static final long serialVersionUID = 0L;
 
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto parseFrom(
       java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto parseFrom(
       com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto parseFrom(java.io.InputStream input)
@@ -601,8 +601,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.setField(field, value);
+        java.lang.Object konstue) {
+      return super.setField(field, konstue);
     }
     @java.lang.Override
     public Builder clearField(
@@ -617,14 +617,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return super.setRepeatedField(field, index, value);
+        int index, java.lang.Object konstue) {
+      return super.setRepeatedField(field, index, konstue);
     }
     @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.addRepeatedField(field, value);
+        java.lang.Object konstue) {
+      return super.addRepeatedField(field, konstue);
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -722,7 +722,7 @@ private static final long serialVersionUID = 0L;
             } // default:
           } // switch (tag)
         } // while (!done)
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.unwrapIOException();
       } finally {
         onChanged();
@@ -774,16 +774,16 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string group = 1;</code>
-     * @param value The group to set.
+     * @param konstue The group to set.
      * @return This builder for chaining.
      */
     public Builder setGroup(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-      group_ = value;
+      group_ = konstue;
       onChanged();
       return this;
     }
@@ -799,17 +799,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string group = 1;</code>
-     * @param value The bytes for group to set.
+     * @param konstue The bytes for group to set.
      * @return This builder for chaining.
      */
     public Builder setGroupBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
+        com.google.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  checkByteStringIsUtf8(konstue);
       bitField0_ |= 0x00000001;
-      group_ = value;
+      group_ = konstue;
       onChanged();
       return this;
     }
@@ -857,16 +857,16 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string module = 2;</code>
-     * @param value The module to set.
+     * @param konstue The module to set.
      * @return This builder for chaining.
      */
     public Builder setModule(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-      module_ = value;
+      module_ = konstue;
       onChanged();
       return this;
     }
@@ -882,17 +882,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string module = 2;</code>
-     * @param value The bytes for module to set.
+     * @param konstue The bytes for module to set.
      * @return This builder for chaining.
      */
     public Builder setModuleBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
+        com.google.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  checkByteStringIsUtf8(konstue);
       bitField0_ |= 0x00000002;
-      module_ = value;
+      module_ = konstue;
       onChanged();
       return this;
     }
@@ -940,16 +940,16 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string version = 3;</code>
-     * @param value The version to set.
+     * @param konstue The version to set.
      * @return This builder for chaining.
      */
     public Builder setVersion(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000004;
-      version_ = value;
+      version_ = konstue;
       onChanged();
       return this;
     }
@@ -965,17 +965,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string version = 3;</code>
-     * @param value The bytes for version to set.
+     * @param konstue The bytes for version to set.
      * @return This builder for chaining.
      */
     public Builder setVersionBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
+        com.google.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  checkByteStringIsUtf8(konstue);
       bitField0_ |= 0x00000004;
-      version_ = value;
+      version_ = konstue;
       onChanged();
       return this;
     }
@@ -1023,16 +1023,16 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string kotlin_module_name = 4;</code>
-     * @param value The kotlinModuleName to set.
+     * @param konstue The kotlinModuleName to set.
      * @return This builder for chaining.
      */
     public Builder setKotlinModuleName(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000008;
-      kotlinModuleName_ = value;
+      kotlinModuleName_ = konstue;
       onChanged();
       return this;
     }
@@ -1048,17 +1048,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string kotlin_module_name = 4;</code>
-     * @param value The bytes for kotlinModuleName to set.
+     * @param konstue The bytes for kotlinModuleName to set.
      * @return This builder for chaining.
      */
     public Builder setKotlinModuleNameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
+        com.google.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  checkByteStringIsUtf8(konstue);
       bitField0_ |= 0x00000008;
-      kotlinModuleName_ = value;
+      kotlinModuleName_ = konstue;
       onChanged();
       return this;
     }
@@ -1106,16 +1106,16 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string kotlin_fragment_name = 5;</code>
-     * @param value The kotlinFragmentName to set.
+     * @param konstue The kotlinFragmentName to set.
      * @return This builder for chaining.
      */
     public Builder setKotlinFragmentName(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000010;
-      kotlinFragmentName_ = value;
+      kotlinFragmentName_ = konstue;
       onChanged();
       return this;
     }
@@ -1131,17 +1131,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string kotlin_fragment_name = 5;</code>
-     * @param value The bytes for kotlinFragmentName to set.
+     * @param konstue The bytes for kotlinFragmentName to set.
      * @return This builder for chaining.
      */
     public Builder setKotlinFragmentNameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
+        com.google.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  checkByteStringIsUtf8(konstue);
       bitField0_ |= 0x00000010;
-      kotlinFragmentName_ = value;
+      kotlinFragmentName_ = konstue;
       onChanged();
       return this;
     }
@@ -1177,16 +1177,16 @@ private static final long serialVersionUID = 0L;
     public IdeaKpmBinaryCoordinatesProto parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        throws com.google.protobuf.InkonstidProtocolBufferException {
       Builder builder = newBuilder();
       try {
         builder.mergeFrom(input, extensionRegistry);
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
       } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        throw e.asInkonstidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+        throw new com.google.protobuf.InkonstidProtocolBufferException(e)
             .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();

@@ -3,11 +3,11 @@
 import kotlin.native.concurrent.*
 
 @ThreadLocal
-val x: String = computeX()
+konst x: String = computeX()
 
 fun computeX(): String = error("1")
 
-val y: String = computeY()
+konst y: String = computeY()
 
 fun computeY(): String = "2"
 
@@ -17,7 +17,7 @@ fun box() : String {
         x
         return "FAIL 1"
     } catch(t: Error) {
-        val cause = t.cause
+        konst cause = t.cause
         if (cause !is IllegalStateException) return "FAIL 2"
         if (cause.message != "1") return "FAIL 3"
     }

@@ -64,21 +64,21 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
     }
 
     private fun IrFunction.introduceDefaultResolution(): IrFunction {
-        val irBuilder = context.createIrBuilder(symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET)
+        konst irBuilder = context.createIrBuilder(symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET)
 
-        val variables = hashMapOf<IrValueParameter, IrValueParameter>()
+        konst variables = hashMapOf<IrValueParameter, IrValueParameter>()
 
-        valueParameters = valueParameters.memoryOptimizedMap { param ->
+        konstueParameters = konstueParameters.memoryOptimizedMap { param ->
             param.takeIf { it.defaultValue != null }
                 ?.copyTo(this, isAssignable = true, origin = JsLoweredDeclarationOrigin.JS_SHADOWED_DEFAULT_PARAMETER)
                 ?.also { new -> variables[param] = new } ?: param
         }
 
-        val blockBody = body as? IrBlockBody
+        konst blockBody = body as? IrBlockBody
 
         if (blockBody != null && variables.isNotEmpty()) {
             blockBody.transformChildren(VariableRemapper(variables), null)
-            blockBody.statements.addAll(0, valueParameters.mapNotNull {
+            blockBody.statements.addAll(0, konstueParameters.mapNotNull {
                 irBuilder.createResolutionStatement(it, it.defaultValue?.expression)
             })
         }
@@ -97,7 +97,7 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
             return listOf(declaration.introduceDefaultResolution())
         }
 
-        val (originalFun, defaultFunStub) = super.transformFlat(declaration) ?: return null
+        konst (originalFun, defaultFunStub) = super.transformFlat(declaration) ?: return null
 
         if (originalFun !is IrFunction || defaultFunStub !is IrFunction) {
             return listOf(originalFun, defaultFunStub)
@@ -105,7 +105,7 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
 
         if (!defaultFunStub.isFakeOverride) {
             with(defaultFunStub) {
-                valueParameters.forEach {
+                konstueParameters.forEach {
                     if (it.defaultValue != null) {
                         it.origin = JsLoweredDeclarationOrigin.JS_SHADOWED_DEFAULT_PARAMETER
                     }
@@ -122,7 +122,7 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
             }
         }
 
-        val (exportAnnotations, irrelevantAnnotations) = originalFun.annotations
+        konst (exportAnnotations, irrelevantAnnotations) = originalFun.annotations
             .map { it.deepCopyWithSymbols(originalFun as? IrDeclarationParent) }
             .partition {
                 it.isAnnotation(JsAnnotations.jsExportFqn) || (it.isAnnotation(JsAnnotations.jsNameFqn))
@@ -136,23 +136,23 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
     }
 
     override fun IrFunction.generateDefaultStubBody(originalDeclaration: IrFunction): IrBody {
-        val ctx = context
-        val irBuilder = context.createIrBuilder(symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET)
+        konst ctx = context
+        konst irBuilder = context.createIrBuilder(symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET)
 
-        val variables = hashMapOf<IrValueParameter, IrValueDeclaration>().apply {
+        konst variables = hashMapOf<IrValueParameter, IrValueDeclaration>().apply {
             originalDeclaration.dispatchReceiverParameter?.let {
                 set(it, dispatchReceiverParameter!!)
             }
             originalDeclaration.extensionReceiverParameter?.let {
                 set(it, extensionReceiverParameter!!)
             }
-            originalDeclaration.valueParameters.forEachIndexed { index, param ->
-                set(param, valueParameters[index])
+            originalDeclaration.konstueParameters.forEachIndexed { index, param ->
+                set(param, konstueParameters[index])
             }
         }
 
         return irBuilder.irBlockBody(UNDEFINED_OFFSET, UNDEFINED_OFFSET) {
-            +valueParameters.zip(originalDeclaration.valueParameters)
+            +konstueParameters.zip(originalDeclaration.konstueParameters)
                 .mapNotNull { (new, original) ->
                     createResolutionStatement(
                         new,
@@ -160,29 +160,29 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
                     )
                 }
 
-            val wrappedFunctionCall = irCall(originalDeclaration, JsStatementOrigins.IMPLEMENTATION_DELEGATION_CALL).apply {
+            konst wrappedFunctionCall = irCall(originalDeclaration, JsStatementOrigins.IMPLEMENTATION_DELEGATION_CALL).apply {
                 passTypeArgumentsFrom(originalDeclaration)
                 dispatchReceiver = dispatchReceiverParameter?.let { irGet(it) }
                 extensionReceiver = extensionReceiverParameter?.let { irGet(it) }
 
-                originalDeclaration.valueParameters.forEachIndexed { index, irValueParameter ->
-                    putValueArgument(index, irGet(variables[irValueParameter] ?: valueParameters[index]))
+                originalDeclaration.konstueParameters.forEachIndexed { index, irValueParameter ->
+                    putValueArgument(index, irGet(variables[irValueParameter] ?: konstueParameters[index]))
                 }
             }
 
             var superContextValueParam: IrValueParameter? = null
 
-            val superFunCall = runIf(wrappedFunctionCall.dispatchReceiver != null && !originalDeclaration.isExported(ctx)) {
-                val superContext = valueParameters.last().also {
+            konst superFunCall = runIf(wrappedFunctionCall.dispatchReceiver != null && !originalDeclaration.isExported(ctx)) {
+                konst superContext = konstueParameters.last().also {
                     superContextValueParam = it
                 }
-                val realOverrideTarget = originalDeclaration.realOverrideTarget.takeIf {
+                konst realOverrideTarget = originalDeclaration.realOverrideTarget.takeIf {
                     it !is IrOverridableMember || it.modality !== Modality.ABSTRACT
                 }
                 if (realOverrideTarget?.parentClassOrNull?.isInterface == true) {
                     irCall(realOverrideTarget).apply {
                         extensionReceiver = wrappedFunctionCall.extensionReceiver?.deepCopyWithSymbols()
-                        (0 until wrappedFunctionCall.valueArgumentsCount).forEach {
+                        (0 until wrappedFunctionCall.konstueArgumentsCount).forEach {
                             putValueArgument(it, wrappedFunctionCall.getValueArgument(it)?.deepCopyWithSymbols())
                         }
                     }
@@ -198,7 +198,7 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
                         )
                         putValueArgument(2, irVararg(ctx.dynamicType, buildList {
                             addIfNotNull(wrappedFunctionCall.extensionReceiver?.deepCopyWithSymbols())
-                            (0 until wrappedFunctionCall.valueArgumentsCount).forEach {
+                            (0 until wrappedFunctionCall.konstueArgumentsCount).forEach {
                                 addIfNotNull(wrappedFunctionCall.getValueArgument(it)?.deepCopyWithSymbols())
                             }
                         }))
@@ -222,7 +222,7 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
     }
 
     private fun IrFunction.generateJsNameAnnotationCall(): IrConstructorCall {
-        val builder = context.createIrBuilder(symbol, startOffset, endOffset)
+        konst builder = context.createIrBuilder(symbol, startOffset, endOffset)
 
         return with(context) {
             builder.irCall(intrinsics.jsNameAnnotationSymbol.constructors.single())
@@ -240,5 +240,5 @@ class JsDefaultArgumentStubGenerator(context: JsIrBackendContext) :
     }
 
     private fun IrFunction.hasDefaultArgs(): Boolean =
-        valueParameters.any { it.defaultValue != null }
+        konstueParameters.any { it.defaultValue != null }
 }

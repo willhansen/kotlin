@@ -1,8 +1,8 @@
-annotation class Anno(val s: String)
+annotation class Anno(konst s: String)
 
 @Deprecated("FirstClass")
 @Anno("FirstClass")
-class FirstClass @Deprecated("constructor") @Anno("constructor") constructor(@Deprecated("constructorProperty") @Anno("constructorProperty") val a: Int) {
+class FirstClass @Deprecated("constructor") @Anno("constructor") constructor(@Deprecated("constructorProperty") @Anno("constructorProperty") konst a: Int) {
     @Deprecated("memberFunction")
     @Anno("memberFunction")
     fun memberFunction() {
@@ -10,11 +10,11 @@ class FirstClass @Deprecated("constructor") @Anno("constructor") constructor(@De
 
     @Deprecated("memberProperty")
     @Anno("memberProperty")
-    val memberProperty = 32
+    konst memberProperty = 32
 
     @Deprecated("NestedClass")
     @Anno("NestedClass")
-    class NestedClass @Deprecated("constructor") @Anno("constructor") constructor(@Deprecated("constructorProperty") @Anno("constructorProperty") val a: Int) {
+    class NestedClass @Deprecated("constructor") @Anno("constructor") constructor(@Deprecated("constructorProperty") @Anno("constructorProperty") konst a: Int) {
         @Deprecated("memberFunction")
         @Anno("memberFunction")
         fun member<caret>Function() {
@@ -22,7 +22,7 @@ class FirstClass @Deprecated("constructor") @Anno("constructor") constructor(@De
 
         @Deprecated("memberProperty")
         @Anno("memberProperty")
-        val memberProperty = 32
+        konst memberProperty = 32
     }
 
     @Deprecated("companion")
@@ -35,7 +35,7 @@ class FirstClass @Deprecated("constructor") @Anno("constructor") constructor(@De
 
         @Deprecated("memberProperty")
         @Anno("memberProperty")
-        val memberProperty = 32
+        konst memberProperty = 32
     }
 }
 

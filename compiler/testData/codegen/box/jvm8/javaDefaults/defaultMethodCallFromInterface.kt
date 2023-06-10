@@ -22,7 +22,7 @@ interface KInterface : Simple {
 class Test : KInterface {}
 
 fun box(): String {
-    val test = Test().bar()
+    konst test = Test().bar()
     if (test != "OKOK") return "fail $test"
 
     return "OK"

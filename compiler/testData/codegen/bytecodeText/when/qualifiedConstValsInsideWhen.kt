@@ -1,11 +1,11 @@
 object Constants {
-    const val A = 30
-    const val B = 40
+    const konst A = 30
+    const konst B = 40
 }
 
 class ClassConstants {
     companion object {
-        const val C = 50
+        const konst C = 50
     }
 }
 fun foo(state: Int) {

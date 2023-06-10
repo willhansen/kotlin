@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.library.impl.*
 class KonanLibraryLayoutForWriter(
     libFile: File,
     unzippedDir: File,
-    override val target: KonanTarget
+    override konst target: KonanTarget
 ) : KonanLibraryLayout, KotlinLibraryLayoutForWriter(libFile, unzippedDir)
 
 /**
@@ -32,7 +32,7 @@ class KonanLibraryWriterImpl(
         nopack: Boolean = false,
         shortName: String? = null,
 
-        val layout: KonanLibraryLayoutForWriter,
+        konst layout: KonanLibraryLayoutForWriter,
 
         base: BaseWriter = BaseWriterImpl(layout, moduleName, versions, builtInsPlatform, listOf(target.visibleName), nopack, shortName),
         bitcode: BitcodeWriter = BitcodeWriterImpl(layout),
@@ -57,10 +57,10 @@ fun buildLibrary(
     dataFlowGraph: ByteArray?
 ): KonanLibraryLayout {
 
-    val libFile = File(output)
-    val unzippedDir = if (nopack) libFile else org.jetbrains.kotlin.konan.file.createTempDir("klib")
-    val layout = KonanLibraryLayoutForWriter(libFile, unzippedDir, target)
-    val library = KonanLibraryWriterImpl(
+    konst libFile = File(output)
+    konst unzippedDir = if (nopack) libFile else org.jetbrains.kotlin.konan.file.createTempDir("klib")
+    konst layout = KonanLibraryLayoutForWriter(libFile, unzippedDir, target)
+    konst library = KonanLibraryWriterImpl(
             moduleName,
             versions,
             target,

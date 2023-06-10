@@ -25,7 +25,7 @@ object OptionalExpectationChecker {
 
     private fun getOptionalExpectationEntry(declaration: KtDeclaration, trace: BindingTrace): KtAnnotationEntry? =
         declaration.annotationEntries.find { entry ->
-            val annotationDescriptor = trace.get(BindingContext.ANNOTATION, entry)
+            konst annotationDescriptor = trace.get(BindingContext.ANNOTATION, entry)
             annotationDescriptor?.fqName == OptionalAnnotationUtil.OPTIONAL_EXPECTATION_FQ_NAME
         }
 }

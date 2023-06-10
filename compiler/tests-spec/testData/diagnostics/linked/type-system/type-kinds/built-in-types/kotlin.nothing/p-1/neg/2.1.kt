@@ -13,10 +13,10 @@
 
 
 // TESTCASE NUMBER: 1
-class Case1(val nothing: Nothing)
+class Case1(konst nothing: Nothing)
 
 fun case1() {
-    val res = Case1(<!INVISIBLE_MEMBER!>Nothing<!>())
+    konst res = Case1(<!INVISIBLE_MEMBER!>Nothing<!>())
 }
 
 
@@ -26,6 +26,6 @@ class Case2 {
 }
 
 fun case2(c: Case2) {
-    val testValue = c.data ?: throw IllegalArgumentException("data required")
+    konst testValue = c.data ?: throw IllegalArgumentException("data required")
     testValue checkType { <!NONE_APPLICABLE!>check<!><Nothing>() }
 }

@@ -1,1 +1,1 @@
-fun foo() = <expr>java.lang.String.valueOf(1)</expr>
+fun foo() = <expr>java.lang.String.konstueOf(1)</expr>

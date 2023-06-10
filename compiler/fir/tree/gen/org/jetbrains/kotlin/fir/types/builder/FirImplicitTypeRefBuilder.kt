@@ -46,7 +46,7 @@ inline fun buildImplicitTypeRefCopy(original: FirImplicitTypeRef, init: FirImpli
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirImplicitTypeRefBuilder()
+    konst copyBuilder = FirImplicitTypeRefBuilder()
     original.source?.let { copyBuilder.source = it }
     return copyBuilder.apply(init).build()
 }

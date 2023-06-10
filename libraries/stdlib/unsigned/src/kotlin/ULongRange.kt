@@ -12,28 +12,28 @@ package kotlin.ranges
 import kotlin.internal.*
 
 /**
- * A range of values of type `ULong`.
+ * A range of konstues of type `ULong`.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
 public class ULongRange(start: ULong, endInclusive: ULong) : ULongProgression(start, endInclusive, 1), ClosedRange<ULong>, OpenEndRange<ULong> {
-    override val start: ULong get() = first
-    override val endInclusive: ULong get() = last
+    override konst start: ULong get() = first
+    override konst endInclusive: ULong get() = last
     
-    @Deprecated("Can throw an exception when it's impossible to represent the value with ULong type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @Deprecated("Can throw an exception when it's impossible to represent the konstue with ULong type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @SinceKotlin("1.9")
     @WasExperimental(ExperimentalStdlibApi::class)
-    override val endExclusive: ULong get() {
+    override konst endExclusive: ULong get() {
         if (last == ULong.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1u
     }
 
-    override fun contains(value: ULong): Boolean = first <= value && value <= last
+    override fun contains(konstue: ULong): Boolean = first <= konstue && konstue <= last
 
     /** 
      * Checks if the range is empty.
      
-     * The range is empty if its start value is greater than the end value.
+     * The range is empty if its start konstue is greater than the end konstue.
      */
     override fun isEmpty(): Boolean = first > last
 
@@ -47,13 +47,13 @@ public class ULongRange(start: ULong, endInclusive: ULong) : ULongProgression(st
     override fun toString(): String = "$first..$last"
 
     companion object {
-        /** An empty range of values of type ULong. */
-        public val EMPTY: ULongRange = ULongRange(ULong.MAX_VALUE, ULong.MIN_VALUE)
+        /** An empty range of konstues of type ULong. */
+        public konst EMPTY: ULongRange = ULongRange(ULong.MAX_VALUE, ULong.MIN_VALUE)
     }
 }
 
 /**
- * A progression of values of type `ULong`.
+ * A progression of konstues of type `ULong`.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -71,17 +71,17 @@ internal constructor(
     /**
      * The first element in the progression.
      */
-    public val first: ULong = start
+    public konst first: ULong = start
 
     /**
      * The last element in the progression.
      */
-    public val last: ULong = getProgressionLastElement(start, endInclusive, step)
+    public konst last: ULong = getProgressionLastElement(start, endInclusive, step)
 
     /**
      * The step of the progression.
      */
-    public val step: Long = step
+    public konst step: Long = step
 
     final override fun iterator(): Iterator<ULong> = ULongProgressionIterator(first, last, step)
 
@@ -106,7 +106,7 @@ internal constructor(
         /**
          * Creates ULongProgression within the specified bounds of a closed range.
 
-         * The progression starts with the [rangeStart] value and goes toward the [rangeEnd] value not excluding it, with the specified [step].
+         * The progression starts with the [rangeStart] konstue and goes toward the [rangeEnd] konstue not excluding it, with the specified [step].
          * In order to go backwards the [step] must be negative.
          *
          * [step] must be greater than `Long.MIN_VALUE` and not equal to zero.
@@ -117,27 +117,27 @@ internal constructor(
 
 
 /**
- * An iterator over a progression of values of type `ULong`.
- * @property step the number by which the value is incremented on each step.
+ * An iterator over a progression of konstues of type `ULong`.
+ * @property step the number by which the konstue is incremented on each step.
  */
 @SinceKotlin("1.3")
 private class ULongProgressionIterator(first: ULong, last: ULong, step: Long) : Iterator<ULong> {
-    private val finalElement = last
+    private konst finalElement = last
     private var hasNext: Boolean = if (step > 0) first <= last else first >= last
-    private val step = step.toULong() // use 2-complement math for negative steps
+    private konst step = step.toULong() // use 2-complement math for negative steps
     private var next = if (hasNext) first else finalElement
 
     override fun hasNext(): Boolean = hasNext
 
     override fun next(): ULong {
-        val value = next
-        if (value == finalElement) {
+        konst konstue = next
+        if (konstue == finalElement) {
             if (!hasNext) throw kotlin.NoSuchElementException()
             hasNext = false
         } else {
             next += step
         }
-        return value
+        return konstue
     }
 }
 

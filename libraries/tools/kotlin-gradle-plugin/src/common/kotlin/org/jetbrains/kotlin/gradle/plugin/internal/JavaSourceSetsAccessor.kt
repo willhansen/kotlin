@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.gradle.utils.findByType
 import org.jetbrains.kotlin.gradle.utils.getByType
 
 interface JavaSourceSetsAccessor {
-    val sourceSets: SourceSetContainer
+    konst sourceSets: SourceSetContainer
 
-    val sourceSetsIfAvailable: SourceSetContainer?
+    konst sourceSetsIfAvailable: SourceSetContainer?
 
     interface JavaSourceSetsAccessorVariantFactory : VariantImplementationFactories.VariantImplementationFactory {
         fun getInstance(project: Project): JavaSourceSetsAccessor
@@ -28,11 +28,11 @@ internal class DefaultJavaSourceSetsAccessorVariantFactory : JavaSourceSetsAcces
 }
 
 internal class DefaultJavaSourceSetsAccessor(
-    private val projectExtensions: ExtensionContainer
+    private konst projectExtensions: ExtensionContainer
 ) : JavaSourceSetsAccessor {
-    override val sourceSets: SourceSetContainer
+    override konst sourceSets: SourceSetContainer
         get() = projectExtensions.getByType<JavaPluginExtension>().sourceSets
 
-    override val sourceSetsIfAvailable: SourceSetContainer?
+    override konst sourceSetsIfAvailable: SourceSetContainer?
         get() = projectExtensions.findByType<JavaPluginExtension>()?.sourceSets
 }

@@ -5,13 +5,13 @@ open annotation class TestAnn : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 
 }
 
-val test1: String
+konst test1: String
   @TestAnn(x = "test1.get")
   get(): String {
     return ""
@@ -23,10 +23,10 @@ var test2: String
     return ""
   }
   @TestAnn(x = "test2.set")
-  set(value: String) {
+  set(konstue: String) {
   }
 
-val test3: String
+konst test3: String
   field = ""
   @TestAnn(x = "test3.get")
   get

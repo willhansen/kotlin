@@ -38,8 +38,8 @@ import org.jetbrains.kotlin.metadata.jvm.deserialization.serializeToByteArray
  */
 @UnstableMetadataApi
 class KotlinModuleMetadata private constructor(
-    @Suppress("MemberVisibilityCanBePrivate") val bytes: ByteArray,
-    @get:IgnoreInApiDump internal val data: ModuleMapping
+    @Suppress("MemberVisibilityCanBePrivate") konst bytes: ByteArray,
+    @get:IgnoreInApiDump internal konst data: ModuleMapping
 ) {
     /**
      * Visits metadata of this module with a new [KmModule] instance and returns that instance.
@@ -55,7 +55,7 @@ class KotlinModuleMetadata private constructor(
      */
     @Deprecated("Writer API is deprecated as excessive and cumbersome. Please use KotlinModuleMetadata.write(kmModule, metadataVersion)")
     class Writer : KmModuleVisitor() {
-        private val b = JvmModuleProtoBuf.Module.newBuilder()
+        private konst b = JvmModuleProtoBuf.Module.newBuilder()
 
         override fun visitPackageParts(fqName: String, fileFacades: List<String>, multiFileClassParts: Map<String, String>) {
             PackageParts(fqName).apply {
@@ -98,7 +98,7 @@ class KotlinModuleMetadata private constructor(
          */
         @Deprecated("Writer API is deprecated as excessive and cumbersome. Please use KotlinModuleMetadata.write(kmModule, metadataVersion)")
         fun write(metadataVersion: IntArray = COMPATIBLE_METADATA_VERSION): KotlinModuleMetadata {
-            val bytes = b.build().serializeToByteArray(JvmMetadataVersion(*metadataVersion), 0)
+            konst bytes = b.build().serializeToByteArray(JvmMetadataVersion(*metadataVersion), 0)
             return KotlinModuleMetadata(bytes, dataFromBytes(bytes))
         }
     }
@@ -111,7 +111,7 @@ class KotlinModuleMetadata private constructor(
     @Deprecated(VISITOR_API_MESSAGE)
     fun accept(v: KmModuleVisitor) {
         for ((fqName, parts) in data.packageFqName2Parts) {
-            val (fileFacades, multiFileClassParts) = parts.parts.partition { parts.getMultifileFacadeName(it) == null }
+            konst (fileFacades, multiFileClassParts) = parts.parts.partition { parts.getMultifileFacadeName(it) == null }
             v.visitPackageParts(fqName, fileFacades, multiFileClassParts.associateWith { parts.getMultifileFacadeName(it)!! })
         }
 
@@ -140,7 +140,7 @@ class KotlinModuleMetadata private constructor(
         @UnstableMetadataApi
         fun read(bytes: ByteArray): KotlinModuleMetadata {
             return wrapIntoMetadataExceptionWhenNeeded {
-                val result = dataFromBytes(bytes)
+                konst result = dataFromBytes(bytes)
                 when (result) {
                     ModuleMapping.EMPTY, ModuleMapping.CORRUPTED ->
                         throw InconsistentKotlinMetadataException("Data is not the content of a .kotlin_module file, or it has been corrupted.")
@@ -180,7 +180,7 @@ class KotlinModuleMetadata private constructor(
  */
 @Deprecated(VISITOR_API_MESSAGE)
 @UnstableMetadataApi
-abstract class KmModuleVisitor(private val delegate: KmModuleVisitor? = null) {
+abstract class KmModuleVisitor(private konst delegate: KmModuleVisitor? = null) {
     /**
      * Visits the table of all single- and multi-file facades declared in some package of this module.
      *
@@ -189,7 +189,7 @@ abstract class KmModuleVisitor(private val delegate: KmModuleVisitor? = null) {
      * @param fqName the fully qualified name of the package, separated by '.'
      * @param fileFacades the list of single-file facades in this package
      * @param multiFileClassParts the map of multi-file classes where keys are names of multi-file class parts,
-     *   and values are names of the corresponding multi-file facades
+     *   and konstues are names of the corresponding multi-file facades
      */
     open fun visitPackageParts(fqName: String, fileFacades: List<String>, multiFileClassParts: Map<String, String>) {
         delegate?.visitPackageParts(fqName, fileFacades, multiFileClassParts)
@@ -233,12 +233,12 @@ class KmModule : KmModuleVisitor() {
     /**
      * Table of all single- and multi-file facades declared in some package of this module, where keys are '.'-separated package names.
      */
-    val packageParts: MutableMap<String, KmPackageParts> = LinkedHashMap()
+    konst packageParts: MutableMap<String, KmPackageParts> = LinkedHashMap()
 
     /**
      * Annotations on the module.
      */
-    val annotations: MutableList<KmAnnotation> = ArrayList(0)
+    konst annotations: MutableList<KmAnnotation> = ArrayList(0)
 
     /**
      * `@OptionalExpectation`-annotated annotation classes declared in this module.
@@ -248,7 +248,7 @@ class KmModule : KmModuleVisitor() {
      * Multiplatform projects are an experimental feature of Kotlin, and their behavior and/or binary format
      * may change in a subsequent release.
      */
-    val optionalAnnotationClasses: MutableList<KmClass> = ArrayList(0)
+    konst optionalAnnotationClasses: MutableList<KmClass> = ArrayList(0)
 
     @Deprecated(VISITOR_API_MESSAGE)
     override fun visitPackageParts(fqName: String, fileFacades: List<String>, multiFileClassParts: Map<String, String>) {
@@ -286,10 +286,10 @@ class KmModule : KmModuleVisitor() {
  *
  * @property fileFacades the list of single-file facades in this package
  * @property multiFileClassParts the map of multi-file classes where keys are names of multi-file class parts,
- *   and values are names of the corresponding multi-file facades
+ *   and konstues are names of the corresponding multi-file facades
  */
 @UnstableMetadataApi
 class KmPackageParts(
-    val fileFacades: MutableList<String>,
-    val multiFileClassParts: MutableMap<String, String>
+    konst fileFacades: MutableList<String>,
+    konst multiFileClassParts: MutableMap<String, String>
 )

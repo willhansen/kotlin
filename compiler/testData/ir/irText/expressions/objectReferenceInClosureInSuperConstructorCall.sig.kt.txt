@@ -5,7 +5,7 @@ abstract class Base {
   // CHECK:
   //   Mangled name: Base{}lambda
   //   Public signature: /Base.lambda|2089663330466279497[0]
-  val lambda: Function0<Any>
+  konst lambda: Function0<Any>
     // CHECK JVM_IR:
     //   Mangled name: Base#<get-lambda>(){}kotlin.Function0<kotlin.Any>
     //   Public signature: /Base.lambda.<get-lambda>|7399510716625048505[0]
@@ -33,7 +33,7 @@ object Test : Base {
   // CHECK:
   //   Mangled name: Test{}lambda
   //   Public signature: /Test.lambda|2089663330466279497[0]
-  /* fake */ override val lambda: Function0<Any>
+  /* fake */ override konst lambda: Function0<Any>
     // CHECK JVM_IR:
     //   Mangled name: Test#<get-lambda>(){}kotlin.Function0<kotlin.Any>
     //   Public signature: /Test.lambda.<get-lambda>|7399510716625048505[0]

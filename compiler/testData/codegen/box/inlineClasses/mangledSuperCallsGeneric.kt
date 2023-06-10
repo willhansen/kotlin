@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class I<T: Int>(val i: T)
+konstue class I<T: Int>(konst i: T)
 
 abstract class A {
     abstract fun f(i: I<Int>): String

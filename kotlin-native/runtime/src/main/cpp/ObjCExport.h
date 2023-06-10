@@ -130,8 +130,8 @@ inline static id GetAssociatedObject(ObjHeader* obj) {
 }
 
 // Note: this function shall not be used on shared objects.
-inline static void SetAssociatedObject(ObjHeader* obj, id value) {
-    obj->SetAssociatedObject((void*)value);
+inline static void SetAssociatedObject(ObjHeader* obj, id konstue) {
+    obj->SetAssociatedObject((void*)konstue);
 }
 
 inline static id AtomicCompareAndSwapAssociatedObject(ObjHeader* obj, id expectedValue, id newValue) {

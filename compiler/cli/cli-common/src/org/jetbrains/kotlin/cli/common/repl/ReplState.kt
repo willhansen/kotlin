@@ -22,11 +22,11 @@ import kotlin.concurrent.write
 
 
 interface ILineId : Comparable<ILineId> {
-    val no: Int
-    val generation: Int
+    konst no: Int
+    konst generation: Int
 }
 
-data class ReplHistoryRecord<out T> (val id: ILineId, val item: T)
+data class ReplHistoryRecord<out T> (konst id: ILineId, konst item: T)
 
 interface IReplStageHistory<T> : List<ReplHistoryRecord<T>> {
 
@@ -45,15 +45,15 @@ interface IReplStageHistory<T> : List<ReplHistoryRecord<T>> {
 
     fun resetTo(id: ILineId): Iterable<ILineId>
 
-    val lock: ReentrantReadWriteLock
+    konst lock: ReentrantReadWriteLock
 }
 
 interface IReplStageState<T> {
-    val history: IReplStageHistory<T>
+    konst history: IReplStageHistory<T>
 
-    val lock: ReentrantReadWriteLock
+    konst lock: ReentrantReadWriteLock
 
-    val currentGeneration: Int
+    konst currentGeneration: Int
 
     fun getNextLineNo(): Int = history.peek()?.id?.no?.let { it + 1 } ?: REPL_CODE_LINE_FIRST_NO // TODO: it should be more robust downstream (e.g. use atomic)
 

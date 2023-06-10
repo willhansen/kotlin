@@ -10,10 +10,10 @@ internal annotation class InternalFileAnnotation()
 @Retention(AnnotationRetention.SOURCE)
 internal annotation class InternalClassAnnotation()
 
-abstract class ClassA1(internal val member: Int)
+abstract class ClassA1(internal konst member: Int)
 
 abstract class ClassB1 {
-    internal abstract val member: Int
+    internal abstract konst member: Int
 }
 
 class ClassD: InternalClass2()

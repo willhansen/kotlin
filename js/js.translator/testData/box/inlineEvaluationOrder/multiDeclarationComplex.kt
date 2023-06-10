@@ -5,7 +5,7 @@ package foo
 // CHECK_NOT_CALLED: component3
 // CHECK_NOT_CALLED: component5
 
-class A(val a: Int, val b: Int, val c: Int, val d: Int, val e: Int)
+class A(konst a: Int, konst b: Int, konst c: Int, konst d: Int, konst e: Int)
 
 operator fun A.component1(): Int = fizz(a)
 
@@ -18,7 +18,7 @@ operator fun A.component4(): Int = fizz(d)
 inline operator fun A.component5(): Int = buzz(e)
 
 fun box(): String {
-    val (a, b, c, d, e) = A(1, 2, 3, 4, 5)
+    konst (a, b, c, d, e) = A(1, 2, 3, 4, 5)
 
     assertEquals(1, a)
     assertEquals(2, b)

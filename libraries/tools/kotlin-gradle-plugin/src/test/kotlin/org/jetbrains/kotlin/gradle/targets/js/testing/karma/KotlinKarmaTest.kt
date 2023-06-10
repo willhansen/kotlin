@@ -12,10 +12,10 @@ import kotlin.test.assertEquals
 class KotlinKarmaTest {
     @Test
     fun checkLoadWasm() {
-        val npmProjectDir = createTempDirectory("tmp")
-        val executableFile = npmProjectDir.resolve("kotlin/main.mjs")
+        konst npmProjectDir = createTempDirectory("tmp")
+        konst executableFile = npmProjectDir.resolve("kotlin/main.mjs")
 
-        val loadWasm = createLoadWasm(npmProjectDir.toFile(), executableFile.toFile())
+        konst loadWasm = createLoadWasm(npmProjectDir.toFile(), executableFile.toFile())
 
         assertEquals(
             "static/load.js",

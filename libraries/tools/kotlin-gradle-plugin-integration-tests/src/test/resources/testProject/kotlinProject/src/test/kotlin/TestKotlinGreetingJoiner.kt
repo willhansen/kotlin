@@ -6,7 +6,7 @@ import org.testng.annotations.Test as test
 class TestKotlinGreetingJoiner() {
     @test
     fun test() {
-        val example : KotlinGreetingJoiner = KotlinGreetingJoiner(Greeter("Hi"))
+        konst example : KotlinGreetingJoiner = KotlinGreetingJoiner(Greeter("Hi"))
         example.addName("Harry")
         example.addName("Ron")
         example.addName("Hermione")

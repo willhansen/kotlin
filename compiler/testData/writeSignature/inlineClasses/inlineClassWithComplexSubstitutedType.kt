@@ -1,9 +1,9 @@
 // !LANGUAGE: +InlineClasses
 
-inline class UInt(val value: Int)
+inline class UInt(konst konstue: Int)
 
-inline class AsList<T>(val list: List<T>)
-inline class AsCmp<T>(val cmp: Comparable<T>)
+inline class AsList<T>(konst list: List<T>)
+inline class AsCmp<T>(konst cmp: Comparable<T>)
 
 object Test {
     fun withInlineClassArgumentOut(a: AsList<UInt>) {}

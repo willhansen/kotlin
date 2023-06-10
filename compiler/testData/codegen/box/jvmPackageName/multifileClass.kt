@@ -9,7 +9,7 @@
 @file:JvmMultifileClass
 package foo.bar
 
-val g: S? get() = f().substring(0, 0) + "K"
+konst g: S? get() = f().substring(0, 0) + "K"
 
 // FILE: A2.kt
 

@@ -20,14 +20,14 @@ object JsPlatforms {
     object CompatJsPlatform : TargetPlatform(setOf(DefaultSimpleJsPlatform)),
         // Needed for backward compatibility, because old code uses INSTANCEOF checks instead of calling extensions
         org.jetbrains.kotlin.js.resolve.JsPlatform {
-        override val platformName: String
+        override konst platformName: String
             get() = "JS"
     }
 
-    val defaultJsPlatform: TargetPlatform
+    konst defaultJsPlatform: TargetPlatform
         get() = CompatJsPlatform
 
-    val allJsPlatforms: List<TargetPlatform> = listOf(defaultJsPlatform)
+    konst allJsPlatforms: List<TargetPlatform> = listOf(defaultJsPlatform)
 }
 
 @Deprecated(

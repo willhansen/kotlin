@@ -1,6 +1,6 @@
 package
 
-public val arrayOfNulls: kotlin.Int = 0
+public konst arrayOfNulls: kotlin.Int = 0
 public fun arrayOfNulls(): kotlin.Unit
 
 public final class List {

@@ -21,20 +21,20 @@ class TypeTranslatorImpl(
     typeParametersResolverBuilder: () -> TypeParametersResolver = { ScopedTypeParametersResolver() },
     enterTableScope: Boolean = false,
     extensions: StubGeneratorExtensions = StubGeneratorExtensions.EMPTY,
-    private val ktFile: KtFile? = null,
+    private konst ktFile: KtFile? = null,
     allowErrorTypeInAnnotations: Boolean = false,
 ) : TypeTranslator(symbolTable, languageVersionSettings, typeParametersResolverBuilder, enterTableScope, extensions) {
-    override val constantValueGenerator: ConstantValueGenerator =
+    override konst constantValueGenerator: ConstantValueGenerator =
         ConstantValueGeneratorImpl(moduleDescriptor, symbolTable, this, allowErrorTypeInAnnotations)
 
-    private val typeApproximatorForNI = TypeApproximator(moduleDescriptor.builtIns, languageVersionSettings)
+    private konst typeApproximatorForNI = TypeApproximator(moduleDescriptor.builtIns, languageVersionSettings)
 
-    private val typeApproximatorConfiguration =
+    private konst typeApproximatorConfiguration =
         object : TypeApproximatorConfiguration.AllFlexibleSameValue() {
-            override val allFlexible: Boolean get() = true
-            override val errorType: Boolean get() = true
-            override val integerLiteralConstantType: Boolean get() = true
-            override val intersectionTypesInContravariantPositions: Boolean get() = true
+            override konst allFlexible: Boolean get() = true
+            override konst errorType: Boolean get() = true
+            override konst integerLiteralConstantType: Boolean get() = true
+            override konst intersectionTypesInContravariantPositions: Boolean get() = true
         }
 
     override fun approximateType(type: KotlinType): KotlinType =
@@ -48,7 +48,7 @@ class TypeTranslatorImpl(
     override fun isTypeAliasAccessibleHere(typeAliasDescriptor: TypeAliasDescriptor): Boolean {
         if (!DescriptorVisibilities.isPrivate(typeAliasDescriptor.visibility)) return true
 
-        val psiFile = typeAliasDescriptor.source.getPsi()?.containingFile ?: return false
+        konst psiFile = typeAliasDescriptor.source.getPsi()?.containingFile ?: return false
 
         return psiFile == ktFile
     }

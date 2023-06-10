@@ -15,13 +15,13 @@ package org.jetbrains.kotlin.parcelize
  * reflection, as well as all objects, enums, and function types (since they are implicitly serializable).
  */
 object BuiltinParcelableTypes {
-    val PARCELABLE_SUPERTYPE_FQNAMES = setOf(
+    konst PARCELABLE_SUPERTYPE_FQNAMES = setOf(
         "android.os.Parcelable",
         "android.os.IBinder",
         "java.io.Serializable"
     )
 
-    val PARCELABLE_BASE_TYPE_FQNAMES = setOf(
+    konst PARCELABLE_BASE_TYPE_FQNAMES = setOf(
         "android.os.Bundle",
         "android.os.PersistableBundle",
         "android.util.Size",
@@ -67,7 +67,7 @@ object BuiltinParcelableTypes {
         "kotlin.UShortArray",
     ) + PARCELABLE_SUPERTYPE_FQNAMES
 
-    val PARCELABLE_CONTAINER_FQNAMES = setOf(
+    konst PARCELABLE_CONTAINER_FQNAMES = setOf(
         "android.util.SparseArray",
         "java.util.ArrayDeque",
         "java.util.ArrayList",

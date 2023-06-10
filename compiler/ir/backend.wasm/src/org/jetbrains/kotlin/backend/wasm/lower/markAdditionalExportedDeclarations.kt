@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.name.FqName
 fun markExportedDeclarations(context: WasmBackendContext, irFile: IrFile, exportedFqNames: Set<FqName>) {
     for (declaration in irFile.declarations) {
         if (declaration is IrFunction && declaration.fqNameWhenAvailable in exportedFqNames) {
-            val builder = context.createIrBuilder(irFile.symbol)
+            konst builder = context.createIrBuilder(irFile.symbol)
             declaration.annotations +=
                 builder.irCallConstructor(context.wasmSymbols.jsExportConstructor, typeArguments = emptyList())
         }

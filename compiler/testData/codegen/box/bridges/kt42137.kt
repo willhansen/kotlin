@@ -1,16 +1,16 @@
 interface A<out T> {
-    val value: T
+    konst konstue: T
 }
 
 interface B<out T : CharSequence> : A<T>
 
-open class C(override val value: String) : B<CharSequence>
+open class C(override konst konstue: String) : B<CharSequence>
 
 interface X {
-    val value: CharSequence
+    konst konstue: CharSequence
 }
 
-class Y(value: String) : C(value), X
+class Y(konstue: String) : C(konstue), X
 
 fun box(): String =
-    (Y("OK") as X).value.toString()
+    (Y("OK") as X).konstue.toString()

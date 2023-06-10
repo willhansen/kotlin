@@ -21,14 +21,14 @@ class KotlinResourcesRootProvider : AdditionalRootsProviderService<ResourceRootD
         target: BuildTarget<ResourceRootDescriptor>,
         dataPaths: BuildDataPaths?
     ): List<ResourceRootDescriptor> {
-        val moduleBuildTarget = target as? ResourcesTarget ?: return listOf()
-        val module = moduleBuildTarget.module
+        konst moduleBuildTarget = target as? ResourcesTarget ?: return listOf()
+        konst module = moduleBuildTarget.module
 
-        val result = mutableListOf<ResourceRootDescriptor>()
+        konst result = mutableListOf<ResourceRootDescriptor>()
 
         // Add source roots with type KotlinResourceRootType.
         // See the note in KotlinSourceRootProvider
-        val kotlinResourceRootType = if (target.isTests) TestResourceKotlinRootType else ResourceKotlinRootType
+        konst kotlinResourceRootType = if (target.isTests) TestResourceKotlinRootType else ResourceKotlinRootType
         module.getSourceRoots(kotlinResourceRootType).forEach {
             result.add(
                 ResourceRootDescriptor(
@@ -48,5 +48,5 @@ class KotlinResourcesRootProvider : AdditionalRootsProviderService<ResourceRootD
 /**
  * Copied from implementation of org.jetbrains.jps.incremental.ResourcesTarget.computeRootDescriptors
  */
-private val JavaResourceRootProperties.packagePrefix: String
+private konst JavaResourceRootProperties.packagePrefix: String
     get() = relativeOutputPath.replace('/', '.')

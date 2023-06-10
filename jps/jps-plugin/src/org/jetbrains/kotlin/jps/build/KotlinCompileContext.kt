@@ -31,18 +31,18 @@ import java.util.concurrent.atomic.AtomicBoolean
  *  It is initialized lazily, and only before building of first chunk with kotlin code,
  *  and will be disposed on build finish.
  */
-internal val CompileContext.kotlin: KotlinCompileContext
+internal konst CompileContext.kotlin: KotlinCompileContext
     get() {
-        val userData = getUserData(kotlinCompileContextKey)
+        konst userData = getUserData(kotlinCompileContextKey)
         if (userData != null) return userData
 
         // here is error (KotlinCompilation available only at build phase)
         // let's also check for concurrent initialization
-        val errorMessage = "KotlinCompileContext available only at build phase " +
+        konst errorMessage = "KotlinCompileContext available only at build phase " +
                 "(between first KotlinBuilder.chunkBuildStarted and KotlinBuilder.buildFinished)"
 
         synchronized(kotlinCompileContextKey) {
-            val newUsedData = getUserData(kotlinCompileContextKey)
+            konst newUsedData = getUserData(kotlinCompileContextKey)
             if (newUsedData != null) {
                 error("Concurrent CompileContext.kotlin getter call and KotlinCompileContext initialization detected: $errorMessage")
             }
@@ -51,47 +51,47 @@ internal val CompileContext.kotlin: KotlinCompileContext
         error(errorMessage)
     }
 
-internal val kotlinCompileContextKey = GlobalContextKey<KotlinCompileContext>("kotlin")
+internal konst kotlinCompileContextKey = GlobalContextKey<KotlinCompileContext>("kotlin")
 
-class KotlinCompileContext(val jpsContext: CompileContext) {
-    val dataManager = jpsContext.projectDescriptor.dataManager
-    val dataPaths = dataManager.dataPaths
-    val testingLogger: TestingBuildLogger?
+class KotlinCompileContext(konst jpsContext: CompileContext) {
+    konst dataManager = jpsContext.projectDescriptor.dataManager
+    konst dataPaths = dataManager.dataPaths
+    konst testingLogger: TestingBuildLogger?
         get() = jpsContext.testingContext?.buildLogger
 
-    val targetsIndex: KotlinTargetsIndex = KotlinTargetsIndexBuilder(this).build()
+    konst targetsIndex: KotlinTargetsIndex = KotlinTargetsIndexBuilder(this).build()
 
-    val targetsBinding
+    konst targetsBinding
         get() = targetsIndex.byJpsTarget
 
-    val lookupsCacheAttributesManager: CompositeLookupsCacheAttributesManager = makeLookupsCacheAttributesManager()
+    konst lookupsCacheAttributesManager: CompositeLookupsCacheAttributesManager = makeLookupsCacheAttributesManager()
 
-    val shouldCheckCacheVersions = System.getProperty(KotlinBuilder.SKIP_CACHE_VERSION_CHECK_PROPERTY) == null
+    konst shouldCheckCacheVersions = System.getProperty(KotlinBuilder.SKIP_CACHE_VERSION_CHECK_PROPERTY) == null
 
-    val hasKotlinMarker = HasKotlinMarker(dataManager)
+    konst hasKotlinMarker = HasKotlinMarker(dataManager)
 
-    val isInstrumentationEnabled: Boolean by lazy {
-        val value = System.getProperty("kotlin.jps.instrument.bytecode")?.toBoolean() ?: false
-        if (value) {
-            val message = KotlinJpsBundle.message("compiler.text.experimental.bytecode.instrumentation.for.kotlin.classes.is.enabled")
+    konst isInstrumentationEnabled: Boolean by lazy {
+        konst konstue = System.getProperty("kotlin.jps.instrument.bytecode")?.toBoolean() ?: false
+        if (konstue) {
+            konst message = KotlinJpsBundle.message("compiler.text.experimental.bytecode.instrumentation.for.kotlin.classes.is.enabled")
             jpsContext.processMessage(CompilerMessage(KOTLIN_COMPILER_NAME, BuildMessage.Kind.INFO, message))
         }
-        value
+        konstue
     }
 
-    val fileToPathConverter: FileToPathConverter =
+    konst fileToPathConverter: FileToPathConverter =
         JpsFileToPathConverter(jpsContext.projectDescriptor.project)
 
-    val icContext = IncrementalCompilationContext(pathConverter = fileToPathConverter)
+    konst icContext = IncrementalCompilationContext(pathConverter = fileToPathConverter)
 
-    val lookupStorageManager = JpsLookupStorageManager(dataManager, icContext)
+    konst lookupStorageManager = JpsLookupStorageManager(dataManager, icContext)
 
     /**
      * Flag to prevent rebuilding twice.
      *
      * TODO: looks like it is not required since cache version checking are refactored
      */
-    val rebuildAfterCacheVersionChanged = RebuildAfterCacheVersionChangeMarker(dataManager)
+    konst rebuildAfterCacheVersionChanged = RebuildAfterCacheVersionChangeMarker(dataManager)
 
     var rebuildingAllKotlin = false
 
@@ -99,10 +99,10 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
      * Note, [loadLookupsCacheStateDiff] should be initialized last as it requires initialized
      * [targetsIndex], [hasKotlinMarker] and [rebuildAfterCacheVersionChanged] (see [markChunkForRebuildBeforeBuild])
      */
-    private val initialLookupsCacheStateDiff: CacheAttributesDiff<*> = loadLookupsCacheStateDiff()
+    private konst initialLookupsCacheStateDiff: CacheAttributesDiff<*> = loadLookupsCacheStateDiff()
 
     private fun makeLookupsCacheAttributesManager(): CompositeLookupsCacheAttributesManager {
-        val expectedLookupsCacheComponents = mutableSetOf<String>()
+        konst expectedLookupsCacheComponents = mutableSetOf<String>()
 
         targetsIndex.chunks.forEach { chunk ->
             chunk.targets.forEach { target ->
@@ -112,12 +112,12 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
             }
         }
 
-        val lookupsCacheRootPath = dataPaths.getTargetDataRoot(KotlinDataContainerTarget)
+        konst lookupsCacheRootPath = dataPaths.getTargetDataRoot(KotlinDataContainerTarget)
         return CompositeLookupsCacheAttributesManager(lookupsCacheRootPath.toPath(), expectedLookupsCacheComponents)
     }
 
     private fun loadLookupsCacheStateDiff(): CacheAttributesDiff<CompositeLookupsCacheAttributes> {
-        val diff = lookupsCacheAttributesManager.loadDiff()
+        konst diff = lookupsCacheAttributesManager.loadDiff()
 
         if (diff.status == CacheStatus.VALID) {
             // try to perform a lookup
@@ -155,7 +155,7 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
             CacheStatus.INVALID -> {
                 // global cache needs to be rebuilt
 
-                testingLogger?.invalidOrUnusedCache(null, null, initialLookupsCacheStateDiff)
+                testingLogger?.inkonstidOrUnusedCache(null, null, initialLookupsCacheStateDiff)
 
                 if (initialLookupsCacheStateDiff.actual != null) {
                     markAllKotlinForRebuild("Kotlin incremental cache settings or format was changed")
@@ -166,7 +166,7 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
             }
             CacheStatus.VALID -> Unit
             CacheStatus.SHOULD_BE_CLEARED -> {
-                jpsContext.testingContext?.buildLogger?.invalidOrUnusedCache(null, null, initialLookupsCacheStateDiff)
+                jpsContext.testingContext?.buildLogger?.inkonstidOrUnusedCache(null, null, initialLookupsCacheStateDiff)
                 KotlinBuilder.LOG.info("Removing global cache as it is not required anymore: $initialLookupsCacheStateDiff")
 
                 clearAllCaches()
@@ -175,7 +175,7 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
         }
     }
 
-    private val lookupAttributesSaved = AtomicBoolean(false)
+    private konst lookupAttributesSaved = AtomicBoolean(false)
 
     /**
      * Called on every successful compilation
@@ -250,7 +250,7 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
                     KotlinBuilder.LOG.info(
                         "$target caches is cleared as not required anymore: ${target.initialLocalCacheAttributesDiff}"
                     )
-                    testingLogger?.invalidOrUnusedCache(null, target, target.initialLocalCacheAttributesDiff)
+                    testingLogger?.inkonstidOrUnusedCache(null, target, target.initialLocalCacheAttributesDiff)
                     target.initialLocalCacheAttributesDiff.manager.writeVersion(null)
                     dataManager.getKotlinCache(target)?.clean()
                 }
@@ -263,7 +263,7 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
     }
 
     fun getChunk(rawChunk: ModuleChunk): KotlinChunk? {
-        val rawRepresentativeTarget = rawChunk.representativeTarget()
+        konst rawRepresentativeTarget = rawChunk.representativeTarget()
         if (rawRepresentativeTarget !in targetsBinding) return null
 
         return targetsIndex.chunksByJpsRepresentativeTarget[rawRepresentativeTarget]
@@ -273,10 +273,10 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
     fun reportUnsupportedTargets() {
         // group all KotlinUnsupportedModuleBuildTarget by kind
         // only representativeTarget will be added
-        val byKind = mutableMapOf<String?, MutableList<KotlinUnsupportedModuleBuildTarget>>()
+        konst byKind = mutableMapOf<String?, MutableList<KotlinUnsupportedModuleBuildTarget>>()
 
         targetsIndex.chunks.forEach {
-            val target = it.representativeTarget
+            konst target = it.representativeTarget
             if (target is KotlinUnsupportedModuleBuildTarget) {
                 if (target.sourceFiles.isNotEmpty()) {
                     byKind.getOrPut(target.kind) { mutableListOf() }.add(target)
@@ -286,10 +286,10 @@ class KotlinCompileContext(val jpsContext: CompileContext) {
 
         byKind.forEach { (kind, targets) ->
             targets.sortBy { it.module.name }
-            val chunkNames = targets.map { it.chunk.presentableShortName }
-            val presentableChunksListString = chunkNames.joinToReadableString()
+            konst chunkNames = targets.map { it.chunk.presentableShortName }
+            konst presentableChunksListString = chunkNames.joinToReadableString()
 
-            val msg =
+            konst msg =
                 if (kind == null) {
                     KotlinJpsBundle.message("compiler.text.0.is.not.yet.supported.in.idea.internal.build.system.please.use.gradle.to.build.them.enable.delegate.ide.build.run.actions.to.gradle.in.settings", presentableChunksListString)
                 } else {

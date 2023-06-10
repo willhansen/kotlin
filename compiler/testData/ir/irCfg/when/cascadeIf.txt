@@ -21,26 +21,26 @@ INCOMING <- BB 1
     CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=LT
 CONTENT
 OUTGOING -> BB 5
-    CONST Boolean type=kotlin.Boolean value=true
+    CONST Boolean type=kotlin.Boolean konstue=true
 BB 3
 INCOMING <- BB 0
     CALL 'public final fun greater (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=GT
 CONTENT
-      1 CONST Int type=kotlin.Int value=1
+      1 CONST Int type=kotlin.Int konstue=1
 OUTGOING -> BB 6
     When exit: WHEN type=kotlin.Int origin=IF
 BB 4
 INCOMING <- BB 1
     CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=LT
 CONTENT
-      1 CONST Int type=kotlin.Int value=-1
+      1 CONST Int type=kotlin.Int konstue=-1
 OUTGOING -> BB 6
     When exit: WHEN type=kotlin.Int origin=IF
 BB 5
 INCOMING <- BB 2
-    CONST Boolean type=kotlin.Boolean value=true
+    CONST Boolean type=kotlin.Boolean konstue=true
 CONTENT
-      1 CONST Int type=kotlin.Int value=0
+      1 CONST Int type=kotlin.Int konstue=0
 OUTGOING -> BB 6
     When exit: WHEN type=kotlin.Int origin=IF
 BB 6

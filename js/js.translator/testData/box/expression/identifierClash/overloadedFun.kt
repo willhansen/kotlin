@@ -15,7 +15,7 @@ class A : B() {
 }
 
 fun box(): String {
-    val result = A().foo("OK")
+    konst result = A().foo("OK")
     if (result != "foo(String)") return "fail: $result"
 
     return "OK"

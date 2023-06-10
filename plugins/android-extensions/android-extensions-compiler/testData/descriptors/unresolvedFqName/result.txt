@@ -17,12 +17,12 @@ kotlinx.android.synthetic.main
 
 kotlinx.android.synthetic.main.test
 
-    public val android.app.Activity.MyView: android.view.View!
-    public val android.app.Dialog.MyView: android.view.View!
-    public val android.app.Fragment.MyView: android.view.View!
-    public val kotlinx.android.extensions.LayoutContainer.MyView: android.view.View!
+    public konst android.app.Activity.MyView: android.view.View!
+    public konst android.app.Dialog.MyView: android.view.View!
+    public konst android.app.Fragment.MyView: android.view.View!
+    public konst kotlinx.android.extensions.LayoutContainer.MyView: android.view.View!
 
 
 kotlinx.android.synthetic.main.test.view
 
-    public val android.view.View.MyView: android.view.View!
+    public konst android.view.View.MyView: android.view.View!

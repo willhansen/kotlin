@@ -1,20 +1,20 @@
 // FIR_IDENTICAL
 // IGNORE_BACKEND_K2: JS_IR
-val test1 = 1
-val test2 = -1
-val test3 = true
-val test4 = false
-val test5 = "abc"
-val test6 = null
-val test7 = 1L
-val test8 = -1L
-val test9 = 1.0
-val test10 = -1.0
-val test11 = 1.0f
-val test12 = -1.0f
-val test13 = 'a'
+konst test1 = 1
+konst test2 = -1
+konst test3 = true
+konst test4 = false
+konst test5 = "abc"
+konst test6 = null
+konst test7 = 1L
+konst test8 = -1L
+konst test9 = 1.0
+konst test10 = -1.0
+konst test11 = 1.0f
+konst test12 = -1.0f
+konst test13 = 'a'
 
-val testB: Byte = 1
-val testS: Short = 1
-val testI: Int = 1
-val testL: Long = 1
+konst testB: Byte = 1
+konst testS: Short = 1
+konst testI: Int = 1
+konst testL: Long = 1

@@ -24,13 +24,13 @@ private fun ConeKotlinType.classId(session: FirSession): ClassId? {
 }
 
 fun ConeKotlinType.isKProperty(session: FirSession): Boolean {
-    val classId = classId(session) ?: return false
+    konst classId = classId(session) ?: return false
     return classId.packageFqName == StandardClassIds.BASE_REFLECT_PACKAGE &&
             classId.shortClassName.identifier.startsWith("KProperty")
 }
 
 fun ConeKotlinType.isKMutableProperty(session: FirSession): Boolean {
-    val classId = classId(session) ?: return false
+    konst classId = classId(session) ?: return false
     return classId.packageFqName == StandardClassIds.BASE_REFLECT_PACKAGE &&
             classId.shortClassName.identifier.startsWith("KMutableProperty")
 }
@@ -39,8 +39,8 @@ fun ConeKotlinType.isKClassType(): Boolean {
     return classId == StandardClassIds.KClass
 }
 
-val FirAnonymousFunction.returnType: ConeKotlinType? get() = returnTypeRef.coneTypeSafe()
-val FirAnonymousFunction.receiverType: ConeKotlinType? get() = receiverParameter?.typeRef?.coneTypeSafe()
+konst FirAnonymousFunction.returnType: ConeKotlinType? get() = returnTypeRef.coneTypeSafe()
+konst FirAnonymousFunction.receiverType: ConeKotlinType? get() = receiverParameter?.typeRef?.coneTypeSafe()
 
 fun ConeTypeContext.isTypeMismatchDueToNullability(
     actualType: ConeKotlinType,

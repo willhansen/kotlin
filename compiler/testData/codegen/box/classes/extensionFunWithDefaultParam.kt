@@ -1,5 +1,5 @@
 open class MyLogic {
-    protected open val postfix = "ZZZ"
+    protected open konst postfix = "ZZZ"
     open fun String.foo(prefix: String = "XXX"): String = transform(prefix + this + postfix)
     protected fun transform(a: String) = "$a:$a"
     fun result(): String {
@@ -7,7 +7,7 @@ open class MyLogic {
     }
 }
 open class MyLogicWithDifferentPostfix : MyLogic() {
-    override val postfix = "WWW"
+    override konst postfix = "WWW"
 }
 
 class MyLogicSpecified : MyLogic() {
@@ -15,17 +15,17 @@ class MyLogicSpecified : MyLogic() {
 }
 
 fun box(): String {
-    val result1 = MyLogic().result()
+    konst result1 = MyLogic().result()
     if (result1 != "XXXYYYZZZ:XXXYYYZZZ") {
         return "fail1: ${result1}"
     }
 
-    val result2 = MyLogicWithDifferentPostfix().result()
+    konst result2 = MyLogicWithDifferentPostfix().result()
     if (result2 != "XXXYYYWWW:XXXYYYWWW") {
         return "fail2: ${result2}"
     }
 
-    val result3 = MyLogicSpecified().result()
+    konst result3 = MyLogicSpecified().result()
     if (result3 != "XXX::YYY::ZZZ") {
         return "fail3: ${result3}"
     }

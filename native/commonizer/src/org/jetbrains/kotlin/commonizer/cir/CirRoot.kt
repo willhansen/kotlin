@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.commonizer.cir
 import org.jetbrains.kotlin.commonizer.CommonizerTarget
 
 interface CirRoot : CirDeclaration {
-    val target: CommonizerTarget
+    konst target: CommonizerTarget
 
     companion object {
         @Suppress("NOTHING_TO_INLINE")
@@ -17,5 +17,5 @@ interface CirRoot : CirDeclaration {
 }
 
 data class CirRootImpl(
-    override val target: CommonizerTarget
+    override konst target: CommonizerTarget
 ) : CirRoot

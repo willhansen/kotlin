@@ -18,7 +18,7 @@ package org.jetbrains.benchmarksLauncher
 
 expect fun writeToFile(fileName: String, text: String)
 
-expect fun assert(value: Boolean)
+expect fun assert(konstue: Boolean)
 
 expect inline fun measureNanoTime(block: () -> Unit): Long
 
@@ -33,7 +33,7 @@ expect fun nanoTime(): Long
 expect class Blackhole {
     companion object {
         var consumer: Int
-        fun consume(value: Any)
+        fun consume(konstue: Any)
     }
 }
 

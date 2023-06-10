@@ -2,7 +2,7 @@
 
 class Outer {
     fun function() = 42
-    val property = ""
+    konst property = ""
     
     class Nested {
         fun f() = <!UNRESOLVED_REFERENCE!>function<!>()
@@ -13,9 +13,9 @@ class Outer {
     
     inner class Inner {
         fun innerFun() = function()
-        val innerProp = property
+        konst innerProp = property
         fun innerThisFun() = this@Outer.function()
-        val innerThisProp = this@Outer.property
+        konst innerThisProp = this@Outer.property
         
         inner class InnerInner {
             fun f() = innerFun()

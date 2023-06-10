@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.dependsOnDist
 abstract class KonanBuildingTask: KonanArtifactWithLibrariesTask(), KonanBuildingSpec {
 
     @get:Internal
-    internal abstract val toolRunner: KonanToolRunner
+    internal abstract konst toolRunner: KonanToolRunner
 
     override fun init(config: KonanBuildingConfig<*>, destinationDir: File, artifactName: String, target: KonanTarget) {
         super.init(config, destinationDir, artifactName, target)
@@ -39,9 +39,9 @@ abstract class KonanBuildingTask: KonanArtifactWithLibrariesTask(), KonanBuildin
     var dumpParameters: Boolean = false
 
     @Input
-    val extraOpts = mutableListOf<String>()
+    konst extraOpts = mutableListOf<String>()
 
-    val konanHome
+    konst konanHome
         @Input get() = project.konanHome
 
     @TaskAction
@@ -53,8 +53,8 @@ abstract class KonanBuildingTask: KonanArtifactWithLibrariesTask(), KonanBuildin
         dumpParameters = flag
     }
 
-    override fun extraOpts(vararg values: Any) = extraOpts(values.toList())
-    override fun extraOpts(values: List<Any>) {
-        extraOpts.addAll(values.map { it.toString() })
+    override fun extraOpts(vararg konstues: Any) = extraOpts(konstues.toList())
+    override fun extraOpts(konstues: List<Any>) {
+        extraOpts.addAll(konstues.map { it.toString() })
     }
 }

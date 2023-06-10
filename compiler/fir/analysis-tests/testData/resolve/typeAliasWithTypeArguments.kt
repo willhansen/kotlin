@@ -58,12 +58,12 @@ interface In<in T> {
     fun take(x: T)
 }
 interface Out<out T> {
-    fun value(): T
+    fun konstue(): T
 }
 
 interface Invariant<T> {
     fun take(x: T)
-    fun value(): T
+    fun konstue(): T
 }
 
 typealias In1<X> = In<X>
@@ -78,15 +78,15 @@ fun test_5(a: A, in1: In1<A>, in2: In1<<!REDUNDANT_PROJECTION!>in<!> A>, in3: In
 }
 
 fun test_6(a: A, out1: Out1<A>, out2: Out1<<!CONFLICTING_PROJECTION_IN_TYPEALIAS_EXPANSION!>in<!> A>, out3: Out1<<!REDUNDANT_PROJECTION!>out<!> A>) {
-    out1.value().foo()
-    out2.<!UNRESOLVED_REFERENCE!>value<!>().foo()
-    out3.value().foo()
+    out1.konstue().foo()
+    out2.<!UNRESOLVED_REFERENCE!>konstue<!>().foo()
+    out3.konstue().foo()
 }
 
 fun test_7(a: A, inv1: Invariant1<A>, inv2: Invariant1<in A>, inv3: Invariant1<out A>) {
-    inv1.value().foo()
-    inv2.value().<!UNRESOLVED_REFERENCE!>foo<!>()
-    inv3.value().foo()
+    inv1.konstue().foo()
+    inv2.konstue().<!UNRESOLVED_REFERENCE!>foo<!>()
+    inv3.konstue().foo()
 
     inv1.take(a)
     inv2.take(a)

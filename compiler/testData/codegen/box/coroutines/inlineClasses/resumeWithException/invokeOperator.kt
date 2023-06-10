@@ -12,7 +12,7 @@ fun builder(c: suspend () -> Unit) {
     })
 }
 
-inline class IC(val a: Any?)
+inline class IC(konst a: Any?)
 
 var c: Continuation<Any>? = null
 
@@ -25,13 +25,13 @@ class GetResult {
     suspend operator fun invoke(): IC = suspendMe()
 }
 
-inline class IC1(val a: String) {
+inline class IC1(konst a: String) {
     suspend operator fun invoke(): IC = suspendMe()
 }
 
 fun box(): String {
     builder {
-        val getResult = GetResult()
+        konst getResult = GetResult()
         getResult()
     }
     c?.resumeWithException(IllegalStateException("OK"))
@@ -39,7 +39,7 @@ fun box(): String {
 
     result = "FAIL 2"
     builder {
-        val getResult = GetResult()
+        konst getResult = GetResult()
         getResult.invoke()
     }
     c?.resumeWithException(IllegalStateException("OK"))
@@ -54,7 +54,7 @@ fun box(): String {
 
     result = "FAIL 4"
     builder {
-        val getResult = IC1("OK")
+        konst getResult = IC1("OK")
         getResult()
     }
     c?.resumeWithException(IllegalStateException("OK"))
@@ -62,7 +62,7 @@ fun box(): String {
 
     result = "FAIL 5"
     builder {
-        val getResult = IC1("OK")
+        konst getResult = IC1("OK")
         getResult.invoke()
     }
     c?.resumeWithException(IllegalStateException("OK"))

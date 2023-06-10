@@ -11,7 +11,7 @@ class AssertContainsTest {
 
     @Test
     fun testAssertContainsIterable() {
-        val list = listOf(1, 2, 3)
+        konst list = listOf(1, 2, 3)
 
         assertContains(list, 2)
 
@@ -25,7 +25,7 @@ class AssertContainsTest {
 
     @Test
     fun testAssertContainsSequence() {
-        val sequence = generateSequence(1) { it + 1 }.take(3)
+        konst sequence = generateSequence(1) { it + 1 }.take(3)
 
         assertContains(sequence, 2)
 
@@ -39,7 +39,7 @@ class AssertContainsTest {
 
     @Test
     fun testAssertContainsArray() {
-        val array = arrayOf("Kot", "lin", "test")
+        konst array = arrayOf("Kot", "lin", "test")
 
         assertContains(array, "test")
 
@@ -54,7 +54,7 @@ class AssertContainsTest {
 
     @Test
     fun testAssertContainsCharArray() {
-        val array = charArrayOf('x', 'y', 'z')
+        konst array = charArrayOf('x', 'y', 'z')
 
         assertContains(array, 'z')
 
@@ -66,7 +66,7 @@ class AssertContainsTest {
     @OptIn(ExperimentalUnsignedTypes::class)
     @Test
     fun testAssertContainsUnsignedArray() {
-        val array = ulongArrayOf(0u, ULong.MAX_VALUE, 2u)
+        konst array = ulongArrayOf(0u, ULong.MAX_VALUE, 2u)
 
         assertContains(array, ULong.MAX_VALUE)
 
@@ -77,34 +77,34 @@ class AssertContainsTest {
 
     @Test
     fun testAssertContainsIntRange() {
-        val range = -5..5
+        konst range = -5..5
 
         assertContains(range, 0)
 
-        testFailureMessage("Expected the range <-5..5> to contain the value <10>.") {
+        testFailureMessage("Expected the range <-5..5> to contain the konstue <10>.") {
             assertContains(range, 10)
         }
     }
 
     @Test
     fun testAssertContainsCharRange() {
-        val range = 'a'..'y'
+        konst range = 'a'..'y'
 
         assertContains(range, 'f')
 
-        testFailureMessage("Expected the range <a..y> to contain the value <A>.") {
+        testFailureMessage("Expected the range <a..y> to contain the konstue <A>.") {
             assertContains(range, 'A')
         }
     }
 
     @Test
     fun testAssertContainsDoubleRange() {
-        val range = 0.5..0.55
+        konst range = 0.5..0.55
 
         assertContains(range, 0.52)
 
-        val one = 1.0
-        testFailureMessage("Expected the range <$range> to contain the value <$one>.") {
+        konst one = 1.0
+        testFailureMessage("Expected the range <$range> to contain the konstue <$one>.") {
             assertContains(range, one)
         }
     }
@@ -112,18 +112,18 @@ class AssertContainsTest {
     @Test
     @OptIn(ExperimentalStdlibApi::class)
     fun assertContainsOpenRange() {
-        val range = 0.0.rangeUntil(1.0) // TODO: replace with ..< by 1.8
+        konst range = 0.0.rangeUntil(1.0) // TODO: replace with ..< by 1.8
         assertContains(range, 0.99)
 
-        val one = 1.0
-        testFailureMessage("Expected the range <$range> to contain the value <$one>.") {
+        konst one = 1.0
+        testFailureMessage("Expected the range <$range> to contain the konstue <$one>.") {
             assertContains(range, one)
         }
     }
 
     @Test
     fun testAssertContainsMap() {
-        val map = mapOf(
+        konst map = mapOf(
             "apple" to "green",
             "banana" to "yellow",
             "orange" to "orange",
@@ -138,7 +138,7 @@ class AssertContainsTest {
 
     @Test
     fun testAssertContainsCharSequence() {
-        val string = "Pineapple"
+        konst string = "Pineapple"
 
         assertContains(string, 'e')
         assertContains(string, 'N', ignoreCase = true)
@@ -159,7 +159,7 @@ class AssertContainsTest {
             assertContains(string, "Appleseed", ignoreCase = true)
         }
 
-        val digit = Regex("[0-9]")
+        konst digit = Regex("[0-9]")
         testFailureMessage("Expected the char sequence to contain the regular expression.\nCharSequence <$string>, regex <$digit>.") {
             assertContains(string, digit)
         }

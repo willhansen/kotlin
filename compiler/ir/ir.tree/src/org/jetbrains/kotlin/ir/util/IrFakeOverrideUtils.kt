@@ -9,22 +9,22 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
 
-val IrDeclaration.isReal: Boolean get() = !isFakeOverride
+konst IrDeclaration.isReal: Boolean get() = !isFakeOverride
 
-val IrDeclaration.isFakeOverride: Boolean
+konst IrDeclaration.isFakeOverride: Boolean
     get() = when (this) {
         is IrSimpleFunction -> isFakeOverride
         is IrProperty -> isFakeOverride
         else -> false
     }
 
-val IrSimpleFunction.target: IrSimpleFunction
+konst IrSimpleFunction.target: IrSimpleFunction
     get() = if (modality == Modality.ABSTRACT)
         this
     else
         resolveFakeOverride() ?: error("Could not resolveFakeOverride() for ${this.render()}")
 
-val IrFunction.target: IrFunction get() = when (this) {
+konst IrFunction.target: IrFunction get() = when (this) {
     is IrSimpleFunction -> this.target
     is IrConstructor -> this
     else -> error(this)
@@ -47,8 +47,8 @@ fun <S : IrSymbol, T : IrOverridableDeclaration<S>> Collection<T>.collectAndFilt
     filter: (T) -> Boolean = { false }
 ): Set<T> {
 
-    val visited = mutableSetOf<T>()
-    val realOverrides = mutableMapOf<Any, T>()
+    konst visited = mutableSetOf<T>()
+    konst realOverrides = mutableMapOf<Any, T>()
 
     /*
         Due to IR copying in performByIrFile, overrides should only be distinguished up to their signatures.
@@ -73,7 +73,7 @@ fun <S : IrSymbol, T : IrOverridableDeclaration<S>> Collection<T>.collectAndFilt
 
         member.overriddenSymbols.forEach {
             @Suppress("UNCHECKED_CAST")
-            val owner = it.owner as T
+            konst owner = it.owner as T
             realOverrides.remove(owner.toKey())
             excludeRepeated(owner)
         }
@@ -82,7 +82,7 @@ fun <S : IrSymbol, T : IrOverridableDeclaration<S>> Collection<T>.collectAndFilt
     visited.clear()
     realOverrides.toList().forEach { excludeRepeated(it.second) }
 
-    return realOverrides.values.toSet()
+    return realOverrides.konstues.toSet()
 }
 
 @Suppress("UNCHECKED_CAST")

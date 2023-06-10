@@ -1,14 +1,14 @@
 interface FirTypeScope
 
 interface AbstractFirBasedSymbol<E> where E : FirSymbolOwner<E>, E : FirDeclaration {
-    val fir: E
+    konst fir: E
 }
 
 interface FirCallableSymbol<D : FirCallableDeclaration<D>> : AbstractFirBasedSymbol<D>
 
 interface FirElement
 interface FirSymbolOwner<E> : FirElement where E : FirSymbolOwner<E>, E : FirDeclaration {
-    val symbol:  AbstractFirBasedSymbol<E>
+    konst symbol:  AbstractFirBasedSymbol<E>
 }
 interface FirDeclaration : FirElement
 interface FirCallableDeclaration<F : FirCallableDeclaration<F>> : FirDeclaration, FirSymbolOwner<F>

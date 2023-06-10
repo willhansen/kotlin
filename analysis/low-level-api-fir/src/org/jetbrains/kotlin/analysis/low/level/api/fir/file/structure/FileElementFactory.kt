@@ -60,7 +60,7 @@ internal object FileElementFactory {
     }
 
     private fun lazyResolveClassWithGeneratedMembers(firClass: FirRegularClass, moduleComponents: LLFirModuleResolveComponents) {
-        val classMembersToResolve = buildList {
+        konst classMembersToResolve = buildList {
             for (member in firClass.declarations) {
                 when {
                     member is FirPrimaryConstructor && member.source?.kind == KtFakeSourceElementKind.ImplicitConstructor -> {
@@ -82,8 +82,8 @@ internal object FileElementFactory {
             }
         }
 
-        val firClassDesignation = firClass.collectDesignationWithFile()
-        val designationWithMembers = LLFirClassWithSpecificMembersResolveTarget(
+        konst firClassDesignation = firClass.collectDesignationWithFile()
+        konst designationWithMembers = LLFirClassWithSpecificMembersResolveTarget(
             firClassDesignation.firFile,
             firClassDesignation.path,
             firClass,
@@ -116,5 +116,5 @@ private fun KtNamedFunction.isReanalyzableContainer() =
 private fun KtProperty.isReanalyzableContainer() =
     name != null && typeReference != null
 
-private val KtNamedFunction.hasExplicitTypeOrUnit
+private konst KtNamedFunction.hasExplicitTypeOrUnit
     get() = hasBlockBody() || typeReference != null

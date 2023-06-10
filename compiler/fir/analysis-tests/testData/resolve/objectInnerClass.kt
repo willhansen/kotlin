@@ -4,33 +4,33 @@
  * ISSUES: KT-37120
  */
 
-val case1 = object : A {
+konst case1 = object : A {
     inner class Child(property: B) : Base(property) {
         fun Base.zoo() {
-            val x = property
+            konst x = property
         }
 
         fun foo() {
             baseFun()
-            val x = property
+            konst x = property
             zoo()
             hoo()
         }
     }
     fun Child.voo() {
-        val x = property
+        konst x = property
     }
 
     fun Base.hoo() {
-        val x = property
+        konst x = property
     }
 
-    open inner class Base(/*protected*/ val property: B) {
+    open inner class Base(/*protected*/ konst property: B) {
         fun baseFun() {}
     }
 
     fun caseForBase() {
-        val base = Base(B())
+        konst base = Base(B())
         /*member of Base*/
         base.baseFun()
         base.property
@@ -39,7 +39,7 @@ val case1 = object : A {
     }
 
     fun caseForChild() {
-        val child = Child(B())
+        konst child = Child(B())
         /*member of Base*/
         child.baseFun()
         child.property
@@ -53,15 +53,15 @@ val case1 = object : A {
 
 
 class Case2() {
-    val x = object : Base(B()) {
+    konst x = object : Base(B()) {
         fun Base.zoo() {
-            val x = property
+            konst x = property
 
         }
 
         fun foo() {
             baseFun()
-            val x = property
+            konst x = property
             zoo()
             hoo()
         }
@@ -69,15 +69,15 @@ class Case2() {
 
 
     fun Base.hoo() {
-        val x = property
+        konst x = property
     }
 
-    open inner class Base(/*protected*/ val property: B) {
+    open inner class Base(/*protected*/ konst property: B) {
         fun baseFun() {}
     }
 
     fun caseForBase() {
-        val base = Base(B())
+        konst base = Base(B())
         /*member of Base*/
         base.baseFun()
         base.property
@@ -86,7 +86,7 @@ class Case2() {
     }
 
     fun caseForChild() {
-        val child = x
+        konst child = x
         /*member of Base*/
         child.baseFun()
         child.property
@@ -97,33 +97,33 @@ class Case2() {
 
 
 class Case3() {
-    val x = object : A {
+    konst x = object : A {
         inner class Child(property: B) : Base(property) {
             fun Base.zoo() {
-                val x = property
+                konst x = property
             }
 
             fun foo() {
                 baseFun()
-                val x = property
+                konst x = property
                 zoo()
                 hoo()
             }
         }
 
         fun Child.voo() {
-            val x = property
+            konst x = property
         }
         fun Base.hoo() {
-            val x = property
+            konst x = property
         }
 
-        open inner class Base(/*protected*/ val property: B) {
+        open inner class Base(/*protected*/ konst property: B) {
             fun baseFun() {}
         }
 
         fun caseForBase() {
-            val base = Base(B())
+            konst base = Base(B())
             /*member of Base*/
             base.baseFun()
             base.property
@@ -132,7 +132,7 @@ class Case3() {
         }
 
         fun caseForChild() {
-            val child = Child(B())
+            konst child = Child(B())
             /*member of Base*/
             child.baseFun()
             child.property

@@ -20,8 +20,8 @@ internal fun uintRemainder(v1: UInt, v2: UInt): UInt = (v1.toLong() % v2.toLong(
 
 @PublishedApi
 internal fun ulongDivide(v1: ULong, v2: ULong): ULong {
-    val dividend = v1.toLong()
-    val divisor = v2.toLong()
+    konst dividend = v1.toLong()
+    konst divisor = v2.toLong()
     if (divisor < 0) { // i.e., divisor >= 2^63:
         return if (v1 < v2) ULong(0) else ULong(1)
     }
@@ -32,16 +32,16 @@ internal fun ulongDivide(v1: ULong, v2: ULong): ULong {
     }
 
     // Otherwise, approximate the quotient, check, and correct if necessary.
-    val quotient = ((dividend ushr 1) / divisor) shl 1
-    val rem = dividend - quotient * divisor
+    konst quotient = ((dividend ushr 1) / divisor) shl 1
+    konst rem = dividend - quotient * divisor
     return ULong(quotient + if (ULong(rem) >= ULong(divisor)) 1 else 0)
 
 }
 
 @PublishedApi
 internal fun ulongRemainder(v1: ULong, v2: ULong): ULong {
-    val dividend = v1.toLong()
-    val divisor = v2.toLong()
+    konst dividend = v1.toLong()
+    konst divisor = v2.toLong()
     if (divisor < 0) { // i.e., divisor >= 2^63:
         return if (v1 < v2) {
             v1 // dividend < divisor
@@ -56,8 +56,8 @@ internal fun ulongRemainder(v1: ULong, v2: ULong): ULong {
     }
 
     // Otherwise, approximate the quotient, check, and correct if necessary.
-    val quotient = ((dividend ushr 1) / divisor) shl 1
-    val rem = dividend - quotient * divisor
+    konst quotient = ((dividend ushr 1) / divisor) shl 1
+    konst rem = dividend - quotient * divisor
     return ULong(rem - if (ULong(rem) >= ULong(divisor)) divisor else 0)
 }
 
@@ -77,7 +77,7 @@ internal fun doubleToULong(v: Double): ULong = when {
     v >= ULong.MAX_VALUE.toDouble() -> ULong.MAX_VALUE
     v < Long.MAX_VALUE -> v.toLong().toULong()
 
-    // Real values from Long.MAX_VALUE to (Long.MAX_VALUE + 1) are not representable in Double, so don't handle them.
+    // Real konstues from Long.MAX_VALUE to (Long.MAX_VALUE + 1) are not representable in Double, so don't handle them.
     else -> (v - 9223372036854775808.0).toLong().toULong() + 9223372036854775808uL      // Long.MAX_VALUE + 1 < v < ULong.MAX_VALUE
 }
 

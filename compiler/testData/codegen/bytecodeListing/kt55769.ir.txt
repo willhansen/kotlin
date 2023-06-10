@@ -9,10 +9,10 @@ public final enum class A$B$C {
     private synthetic final static field $VALUES: A$B$C[]
     private synthetic final static field $ENTRIES: kotlin.enums.EnumEntries
     private method <init>(p0: java.lang.String, p1: int): void
-    public static method values(): A$B$C[]
-    public static method valueOf(p0: java.lang.String): A$B$C
+    public static method konstues(): A$B$C[]
+    public static method konstueOf(p0: java.lang.String): A$B$C
     public static @org.jetbrains.annotations.NotNull method getEntries(): kotlin.enums.EnumEntries
-    private synthetic final static method $values(): A$B$C[]
+    private synthetic final static method $konstues(): A$B$C[]
     static method <clinit>(): void
 }
 

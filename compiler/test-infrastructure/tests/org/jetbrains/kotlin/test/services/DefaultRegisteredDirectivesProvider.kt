@@ -8,12 +8,12 @@ package org.jetbrains.kotlin.test.services
 import org.jetbrains.kotlin.test.directives.model.RegisteredDirectives
 
 class DefaultRegisteredDirectivesProvider(defaultGlobalDirectives: RegisteredDirectives) : TestService {
-    val defaultDirectives: RegisteredDirectives by lazy {
+    konst defaultDirectives: RegisteredDirectives by lazy {
         defaultGlobalDirectives
     }
 }
 
-private val TestServices.defaultRegisteredDirectivesProvider: DefaultRegisteredDirectivesProvider by TestServices.testServiceAccessor()
+private konst TestServices.defaultRegisteredDirectivesProvider: DefaultRegisteredDirectivesProvider by TestServices.testServiceAccessor()
 
-val TestServices.defaultDirectives: RegisteredDirectives
+konst TestServices.defaultDirectives: RegisteredDirectives
     get() = defaultRegisteredDirectivesProvider.defaultDirectives

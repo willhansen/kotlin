@@ -3,5 +3,5 @@
 [INFO] Applied plugin: 'test-me'
 [INFO] Configuring test plugin with arguments
 [INFO] Plugin applied
-[INFO] Option value: my-special-value
+[INFO] Option konstue: my-special-konstue
 [WARNING] No sources found skipping Kotlin compile

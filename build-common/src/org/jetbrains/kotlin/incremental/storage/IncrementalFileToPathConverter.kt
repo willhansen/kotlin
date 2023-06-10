@@ -7,12 +7,12 @@ package org.jetbrains.kotlin.incremental.storage
 
 import java.io.File
 
-open class IncrementalFileToPathConverter(val rootProjectDir: File?) : FileToPathConverter {
+open class IncrementalFileToPathConverter(konst rootProjectDir: File?) : FileToPathConverter {
     //project root dir
-    private val projectDirPath = rootProjectDir?.normalize()?.absolutePath
+    private konst projectDirPath = rootProjectDir?.normalize()?.absolutePath
 
     override fun toPath(file: File): String {
-        val path = file.normalize().absolutePath
+        konst path = file.normalize().absolutePath
         return when {
             projectDirPath == null || !path.startsWith(projectDirPath) -> path
             else -> PROJECT_DIR_PLACEHOLDER + path.substring(projectDirPath.length)
@@ -26,9 +26,9 @@ open class IncrementalFileToPathConverter(val rootProjectDir: File?) : FileToPat
         }
 
     private companion object {
-        private const val PROJECT_DIR_PLACEHOLDER = "${'$'}PROJECT_DIR$"
+        private const konst PROJECT_DIR_PLACEHOLDER = "${'$'}PROJECT_DIR$"
         //use only for prefix length because it OS dependent
-        private const val PATH_PREFIX = "$PROJECT_DIR_PLACEHOLDER/"
+        private const konst PATH_PREFIX = "$PROJECT_DIR_PLACEHOLDER/"
 
     }
 }

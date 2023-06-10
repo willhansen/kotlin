@@ -11,7 +11,7 @@ public open class Either</*0*/ out L> {
 
     public final class Left</*0*/ out L> : Either<L> {
         public constructor Left</*0*/ out L>(/*0*/ a: L)
-        public final val a: L
+        public final konst a: L
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

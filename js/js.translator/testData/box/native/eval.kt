@@ -2,18 +2,18 @@
 // WASM_MUTE_REASON: UNSUPPORTED_JS_INTEROP
 // SKIP_MINIFICATION
 
-val top = "TOP LEVEL"
+konst top = "TOP LEVEL"
 
 fun box(): String {
     // Does't work in Rhino, but should.
-    // val v = 1
-    // assertEquals(3, eval("v + 2"))
+    // konst v = 1
+    // assertEquals(3, ekonst("v + 2"))
 
-    assertEquals(5, eval("3 + 2"))
+    assertEquals(5, ekonst("3 + 2"))
 
     if (testUtils.isLegacyBackend()) {
-        val PACKAGE = "main"
-        assertEquals(top, eval("$PACKAGE.top"))
+        konst PACKAGE = "main"
+        assertEquals(top, ekonst("$PACKAGE.top"))
     }
 
     return "OK"

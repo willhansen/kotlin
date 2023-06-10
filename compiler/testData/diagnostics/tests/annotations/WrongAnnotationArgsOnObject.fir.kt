@@ -3,6 +3,6 @@ package test
 @BadAnnotation(<!ARGUMENT_TYPE_MISMATCH!>1<!>)
 object SomeObject
 
-val some = SomeObject
+konst some = SomeObject
 
-annotation class BadAnnotation(val s: String)
+annotation class BadAnnotation(konst s: String)

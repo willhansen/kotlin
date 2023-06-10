@@ -3,4 +3,4 @@ class A {
     constructor(x: Int)
 }
 
-val x = <!NO_VALUE_FOR_PARAMETER!>A()<!>
+konst x = <!NO_VALUE_FOR_PARAMETER!>A()<!>

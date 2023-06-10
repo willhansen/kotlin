@@ -28,14 +28,14 @@ object CommonPlatforms {
             unspecifiedNativePlatform.single()
         )
     ), org.jetbrains.kotlin.analyzer.common.CommonPlatform {
-        override val platformName: String
+        override konst platformName: String
             get() = "Default"
     }
 
-    val defaultCommonPlatform: TargetPlatform
+    konst defaultCommonPlatform: TargetPlatform
         get() = CompatCommonPlatform
 
-    val allSimplePlatforms: List<TargetPlatform>
+    konst allSimplePlatforms: List<TargetPlatform>
         // TODO(auskov): migrate to SimplePlatform?
         get() = sequence {
             yieldAll(allJvmPlatforms)
@@ -46,7 +46,7 @@ object CommonPlatforms {
             // TODO(dsavvinov): extensions points?
         }.toList()
 
-    val allDefaultTargetPlatforms: List<TargetPlatform>
+    konst allDefaultTargetPlatforms: List<TargetPlatform>
         get() = sequence {
             yieldAll(allSimplePlatforms)
             yieldAll(listOf(defaultCommonPlatform))

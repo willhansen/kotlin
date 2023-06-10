@@ -1,11 +1,11 @@
 // IGNORE_BACKEND: JVM_IR
 // FILE: test.kt
 class A {
-    val a = 1
+    konst a = 1
     fun bar() = 2
     fun foo() {
         3
-            //Breakpoint! from the Evaluate Expression test suite.
+            //Breakpoint! from the Ekonstuate Expression test suite.
             .toString()
     }
 }

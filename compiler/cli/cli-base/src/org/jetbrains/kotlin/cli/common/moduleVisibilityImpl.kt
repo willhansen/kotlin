@@ -19,25 +19,25 @@ import java.io.File
 
 class ModuleVisibilityHelperImpl : ModuleVisibilityHelper {
     override fun isInFriendModule(what: DeclarationDescriptor, from: DeclarationDescriptor): Boolean {
-        val fromSource = getSourceElement(from)
+        konst fromSource = getSourceElement(from)
         // We should check accessibility of 'from' in current module (some set of source files, which are compiled together),
         // so we can assume that 'from' should have sources or is a LazyPackageDescriptor with some package files.
-        val project: Project = if (fromSource is KotlinSourceElement) {
+        konst project: Project = if (fromSource is KotlinSourceElement) {
             fromSource.psi.project
         } else {
             (from as? LazyPackageDescriptor)?.declarationProvider?.getPackageFiles()?.firstOrNull()?.project ?: return true
         }
 
-        val moduleVisibilityManager = ModuleVisibilityManager.SERVICE.getInstance(project)
+        konst moduleVisibilityManager = ModuleVisibilityManager.SERVICE.getInstance(project)
         if (!moduleVisibilityManager.enabled) return true
 
         moduleVisibilityManager.friendPaths.forEach {
             if (isContainedByCompiledPartOfOurModule(what, File(it))) return true
         }
 
-        val modules = moduleVisibilityManager.chunk
+        konst modules = moduleVisibilityManager.chunk
 
-        val whatSource = getSourceElement(what)
+        konst whatSource = getSourceElement(what)
         if (whatSource is KotlinSourceElement) {
             if (modules.size > 1 && fromSource is KotlinSourceElement) {
                 return findModule(what, modules) === findModule(from, modules)
@@ -54,7 +54,7 @@ class ModuleVisibilityHelperImpl : ModuleVisibilityHelper {
     }
 
     private fun findModule(descriptor: DeclarationDescriptor, modules: Collection<Module>): Module? {
-        val sourceElement = getSourceElement(descriptor)
+        konst sourceElement = getSourceElement(descriptor)
         return if (sourceElement is KotlinSourceElement) {
             modules.singleOrNull() ?: modules.firstOrNull { sourceElement.psi.containingKtFile.virtualFile.path in it.getSourceFiles() }
         } else {
@@ -70,9 +70,9 @@ class ModuleVisibilityHelperImpl : ModuleVisibilityHelper {
    At the moment, there is no proper support for module infrastructure in the compiler.
    So we add try to remember given list of interdependent modules and use it for checking visibility.
  */
-class CliModuleVisibilityManagerImpl(override val enabled: Boolean) : ModuleVisibilityManager, Disposable {
-    override val chunk: MutableList<Module> = arrayListOf()
-    override val friendPaths: MutableList<String> = arrayListOf()
+class CliModuleVisibilityManagerImpl(override konst enabled: Boolean) : ModuleVisibilityManager, Disposable {
+    override konst chunk: MutableList<Module> = arrayListOf()
+    override konst friendPaths: MutableList<String> = arrayListOf()
 
     override fun addModule(module: Module) {
         chunk.add(module)

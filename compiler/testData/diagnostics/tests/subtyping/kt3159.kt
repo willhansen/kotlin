@@ -1,10 +1,10 @@
 // FIR_IDENTICAL
 interface Super {
     var v: CharSequence
-    val v2: CharSequence
+    konst v2: CharSequence
 }
 
 class Sub: Super {
     override var v: <!VAR_TYPE_MISMATCH_ON_OVERRIDE!>String<!> = "fail"
-    override val v2: String = "ok"
+    override konst v2: String = "ok"
 }

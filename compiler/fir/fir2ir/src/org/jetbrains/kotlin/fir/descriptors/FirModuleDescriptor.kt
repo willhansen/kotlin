@@ -17,18 +17,18 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.platform.TargetPlatform
 
 class FirModuleDescriptor(
-    val session: FirSession,
-    override val builtIns: KotlinBuiltIns
+    konst session: FirSession,
+    override konst builtIns: KotlinBuiltIns
 ) : ModuleDescriptor {
     override fun shouldSeeInternalsOf(targetModule: ModuleDescriptor): Boolean {
         return false
     }
 
-    override val platform: TargetPlatform
+    override konst platform: TargetPlatform
         get() = session.moduleData.platform
 
     override fun getPackage(fqName: FqName): PackageViewDescriptor {
-        val symbolProvider = session.symbolProvider
+        konst symbolProvider = session.symbolProvider
         if (symbolProvider.getPackage(fqName) != null) {
             return FirPackageViewDescriptor(fqName, this)
         }
@@ -41,16 +41,16 @@ class FirModuleDescriptor(
 
     override var allDependencyModules: List<ModuleDescriptor> = emptyList()
 
-    override val expectedByModules: List<ModuleDescriptor>
+    override konst expectedByModules: List<ModuleDescriptor>
         get() = TODO("not implemented")
-    override val allExpectedByModules: Set<ModuleDescriptor>
+    override konst allExpectedByModules: Set<ModuleDescriptor>
         get() = TODO("not implemented")
 
     override fun <T> getCapability(capability: ModuleCapability<T>): T? {
         return null
     }
 
-    override val isValid: Boolean
+    override konst isValid: Boolean
         get() = true
 
     override fun assertValid() {
@@ -65,13 +65,13 @@ class FirModuleDescriptor(
         return session.moduleData.name
     }
 
-    override val stableName: Name
+    override konst stableName: Name
         get() = name
 
     override fun acceptVoid(visitor: DeclarationDescriptorVisitor<Void, Void>?) {
         TODO("not implemented")
     }
 
-    override val annotations: Annotations
+    override konst annotations: Annotations
         get() = Annotations.EMPTY
 }

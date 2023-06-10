@@ -170,8 +170,8 @@ public class TypeUnifierTest extends KotlinTestWithEnvironment {
         putResult(map, success);
         for (int i = 0; i < strs.length; i += 2) {
             String key = strs[i];
-            String value = strs[i + 1];
-            map.put(key, value);
+            String konstue = strs[i + 1];
+            map.put(key, konstue);
         }
         return map;
     }
@@ -192,7 +192,7 @@ public class TypeUnifierTest extends KotlinTestWithEnvironment {
     }
 
     private static void putResult(Map<String, String> result, boolean success) {
-        result.put("_RESULT_", String.valueOf(success));
+        result.put("_RESULT_", String.konstueOf(success));
     }
 
     private TypeProjection makeType(String typeStr) {

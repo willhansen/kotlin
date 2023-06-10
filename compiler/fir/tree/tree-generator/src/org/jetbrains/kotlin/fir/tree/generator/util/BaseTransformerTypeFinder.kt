@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.fir.tree.generator.model.FieldList
 import org.jetbrains.kotlin.fir.tree.generator.model.FirField
 
 fun detectBaseTransformerTypes(builder: AbstractFirTreeBuilder) {
-    val usedAsFieldType = mutableMapOf<AbstractElement, Boolean>().withDefault { false }
+    konst usedAsFieldType = mutableMapOf<AbstractElement, Boolean>().withDefault { false }
     for (element in builder.elements) {
         for (field in element.allFirFields) {
-            val fieldElement = when (field) {
+            konst fieldElement = when (field) {
                 is FirField -> field.element
                 is FieldList -> field.baseType as AbstractElement
                 else -> throw IllegalArgumentException()

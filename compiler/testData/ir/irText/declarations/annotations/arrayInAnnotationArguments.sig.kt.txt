@@ -5,7 +5,7 @@ open annotation class TestAnnWithIntArray : Annotation {
   // CHECK:
   //   Mangled name: TestAnnWithIntArray{}x
   //   Public signature: /TestAnnWithIntArray.x|-8060530855978347579[0]
-  val x: IntArray
+  konst x: IntArray
     // CHECK JVM_IR:
     //   Mangled name: TestAnnWithIntArray#<get-x>(){}kotlin.IntArray
     //   Public signature: /TestAnnWithIntArray.x.<get-x>|-5699461780158713262[0]
@@ -28,7 +28,7 @@ open annotation class TestAnnWithStringArray : Annotation {
   // CHECK:
   //   Mangled name: TestAnnWithStringArray{}x
   //   Public signature: /TestAnnWithStringArray.x|-8060530855978347579[0]
-  val x: Array<String>
+  konst x: Array<String>
     // CHECK JVM_IR:
     //   Mangled name: TestAnnWithStringArray#<get-x>(){}kotlin.Array<kotlin.String>
     //   Public signature: /TestAnnWithStringArray.x.<get-x>|-709321774523398734[0]

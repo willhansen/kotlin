@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.commonizer.core
 import org.jetbrains.kotlin.commonizer.mergedtree.*
 
 internal class CommonizationVisitor(
-    private val root: CirRootNode
+    private konst root: CirRootNode
 ) : CirNodeVisitor<Unit, Unit> {
     override fun visitRootNode(node: CirRootNode, data: Unit) {
         check(node === root)
         check(node.commonDeclaration() != null) // root should already be commonized
 
-        node.modules.values.forEach { module ->
+        node.modules.konstues.forEach { module ->
             module.accept(this, Unit)
         }
     }
@@ -22,7 +22,7 @@ internal class CommonizationVisitor(
     override fun visitModuleNode(node: CirModuleNode, data: Unit) {
         node.commonDeclaration() // commonize module
 
-        node.packages.values.forEach { pkg ->
+        node.packages.konstues.forEach { pkg ->
             pkg.accept(this, Unit)
         }
     }
@@ -31,19 +31,19 @@ internal class CommonizationVisitor(
     override fun visitPackageNode(node: CirPackageNode, data: Unit) {
         node.commonDeclaration() // commonize package
 
-        node.properties.values.forEach { property ->
+        node.properties.konstues.forEach { property ->
             property.accept(this, Unit)
         }
 
-        node.functions.values.forEach { function ->
+        node.functions.konstues.forEach { function ->
             function.accept(this, Unit)
         }
 
-        node.classes.values.forEach { clazz ->
+        node.classes.konstues.forEach { clazz ->
             clazz.accept(this, Unit)
         }
 
-        node.typeAliases.values.forEach { typeAlias ->
+        node.typeAliases.konstues.forEach { typeAlias ->
             typeAlias.accept(this, Unit)
         }
     }
@@ -58,29 +58,29 @@ internal class CommonizationVisitor(
 
     @Suppress("DuplicatedCode")
     override fun visitClassNode(node: CirClassNode, data: Unit) {
-        val commonClass = node.commonDeclaration() ?: return // No need to commonize class members
+        konst commonClass = node.commonDeclaration() ?: return // No need to commonize class members
 
-        node.constructors.values.forEach { constructor ->
+        node.constructors.konstues.forEach { constructor ->
             constructor.accept(this, Unit)
         }
 
-        node.properties.values.forEach { property ->
+        node.properties.konstues.forEach { property ->
             property.accept(this, Unit)
         }
 
-        node.functions.values.forEach { function ->
+        node.functions.konstues.forEach { function ->
             function.accept(this, Unit)
         }
 
-        node.classes.values.forEach { clazz ->
+        node.classes.konstues.forEach { clazz ->
             clazz.accept(this, Unit)
         }
 
 
         // companion object should have the same name for each target class, then it could be set to common class
-        val companionObjectName = node.targetDeclarations.mapTo(HashSet()) { it!!.companion }.singleOrNull()
+        konst companionObjectName = node.targetDeclarations.mapTo(HashSet()) { it!!.companion }.singleOrNull()
         if (companionObjectName != null) {
-            val companionObjectNode = node.classes[companionObjectName]
+            konst companionObjectNode = node.classes[companionObjectName]
                 ?: error("Can't find node for companion object $companionObjectName in node for class ${node.classifierName}")
 
             if (companionObjectNode.commonDeclaration() != null) {

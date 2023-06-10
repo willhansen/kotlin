@@ -47,7 +47,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getContainingModule: KtSourceModule "Sources of main"
     deprecationStatus: null
@@ -100,7 +100,7 @@ KtKotlinPropertySymbol:
       isImplicitLambdaParameter: false
       isNoinline: false
       isVararg: false
-      name: value
+      name: konstue
       origin: SOURCE
       receiverParameter: null
       returnType: KtUsualClassType:
@@ -118,7 +118,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Unit
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: [
+    konstueParameters: [
       KtValueParameterSymbol:
         annotationsList: [
           SetparamAnnotation()
@@ -133,7 +133,7 @@ KtKotlinPropertySymbol:
         isImplicitLambdaParameter: false
         isNoinline: false
         isVararg: false
-        name: value
+        name: konstue
         origin: SOURCE
         receiverParameter: null
         returnType: KtUsualClassType:

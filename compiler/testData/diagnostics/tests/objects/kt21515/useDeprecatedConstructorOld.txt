@@ -2,23 +2,23 @@ package
 
 public final class C : O.B {
     public constructor C()
-    public final val a: [Error type: Not found recorded type for A()]
-    public final val b: [Error type: Not found recorded type for B()]
-    public final val c: O.A.FromA
-    public final val d: O.B.FromB
-    public final val e: O.A.Companion.FromCompanionA
-    public final val f: O.B.Companion.FromCompanionB
-    public final val g: [Error type: Not found recorded type for Alpha()]
-    public final val h: [Error type: Not found recorded type for Beta()]
-    public final val i: [Error type: Not found recorded type for Gamma()]
-    public final val k: O.Alpha.FromAlpha
-    public final val l: O.Beta.FromBeta
-    public final val m: O.Gamma.FromGamma
-    public final val n: C.Companion.FromCompanionC
-    public final val o: [Error type: Not found recorded type for FromCompanionAlpha()]
-    public final val p: [Error type: Not found recorded type for FromCompanionBeta()]
-    public final val q: [Error type: Not found recorded type for FromCompanionGamma()]
-    public final val r: Delta.FromDelta
+    public final konst a: [Error type: Not found recorded type for A()]
+    public final konst b: [Error type: Not found recorded type for B()]
+    public final konst c: O.A.FromA
+    public final konst d: O.B.FromB
+    public final konst e: O.A.Companion.FromCompanionA
+    public final konst f: O.B.Companion.FromCompanionB
+    public final konst g: [Error type: Not found recorded type for Alpha()]
+    public final konst h: [Error type: Not found recorded type for Beta()]
+    public final konst i: [Error type: Not found recorded type for Gamma()]
+    public final konst k: O.Alpha.FromAlpha
+    public final konst l: O.Beta.FromBeta
+    public final konst m: O.Gamma.FromGamma
+    public final konst n: C.Companion.FromCompanionC
+    public final konst o: [Error type: Not found recorded type for FromCompanionAlpha()]
+    public final konst p: [Error type: Not found recorded type for FromCompanionBeta()]
+    public final konst q: [Error type: Not found recorded type for FromCompanionGamma()]
+    public final konst r: Delta.FromDelta
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

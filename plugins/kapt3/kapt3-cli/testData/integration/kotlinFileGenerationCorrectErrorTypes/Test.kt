@@ -8,7 +8,7 @@ import generated.Property
 class Test {
 
     @field:Anno
-    val property: String = ""
+    konst property: String = ""
 
     @Anno
     fun function() {

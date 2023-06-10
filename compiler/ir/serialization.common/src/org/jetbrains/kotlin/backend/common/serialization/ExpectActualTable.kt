@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.resolve.multiplatform.findActuals
 import org.jetbrains.kotlin.resolve.multiplatform.findExpects
 
-class ExpectActualTable(val expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>) {
-    val table = mutableMapOf<DeclarationDescriptor, IrSymbol>()
+class ExpectActualTable(konst expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>) {
+    konst table = mutableMapOf<DeclarationDescriptor, IrSymbol>()
 
     private fun IrElement.recordActuals(rightHandSide: Map<DeclarationDescriptor, IrSymbol>, inModule: ModuleDescriptor) {
         this.acceptVoid(object : IrElementVisitorVoid {
@@ -23,7 +23,7 @@ class ExpectActualTable(val expectDescriptorToSymbol: MutableMap<DeclarationDesc
                 expectDescriptorToSymbol.put(declaration.descriptor, (declaration as IrSymbolOwner).symbol)
 
                 declaration.descriptor.findActuals(inModule).forEach {
-                    val realActual = if (it is TypeAliasDescriptor)
+                    konst realActual = if (it is TypeAliasDescriptor)
                         it.expandedType.constructor.declarationDescriptor as? ClassDescriptor
                             ?: error("Unexpected actual typealias right hand side: $it")
                     else it
@@ -62,7 +62,7 @@ class ExpectActualTable(val expectDescriptorToSymbol: MutableMap<DeclarationDesc
     }
 
     private fun IrDeclaration.recordRightHandSide(): Map<DeclarationDescriptor, IrSymbol> {
-        val rightHandSide = hashMapOf<DeclarationDescriptor, IrSymbol>()
+        konst rightHandSide = hashMapOf<DeclarationDescriptor, IrSymbol>()
 
         this.acceptVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
@@ -91,10 +91,10 @@ class ExpectActualTable(val expectDescriptorToSymbol: MutableMap<DeclarationDesc
     fun findExpectsForActuals(declaration: IrDeclaration) {
         if (declaration.descriptor !is MemberDescriptor) return
 
-        val descriptor = declaration.symbol.descriptor
+        konst descriptor = declaration.symbol.descriptor
 
         if (declaration is IrTypeAlias && declaration.isActual) {
-            val rightHandSide = declaration.expandedType.classOrNull?.owner?.recordRightHandSide()
+            konst rightHandSide = declaration.expandedType.classOrNull?.owner?.recordRightHandSide()
                 ?: error("Unexpected right hand side of actual typealias: ${declaration.descriptor}")
 
 
@@ -104,7 +104,7 @@ class ExpectActualTable(val expectDescriptorToSymbol: MutableMap<DeclarationDesc
             return
         }
 
-        val expects: List<MemberDescriptor> = if (descriptor is ClassConstructorDescriptor && descriptor.isPrimary) {
+        konst expects: List<MemberDescriptor> = if (descriptor is ClassConstructorDescriptor && descriptor.isPrimary) {
             descriptor.containingDeclaration.findExpects().mapNotNull {
                 (it as ClassDescriptor).unsubstitutedPrimaryConstructor
             }

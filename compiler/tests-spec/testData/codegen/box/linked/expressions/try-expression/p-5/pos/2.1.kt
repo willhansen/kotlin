@@ -7,7 +7,7 @@
  * MAIN LINK: expressions, try-expression -> paragraph 5 -> sentence 2
  * PRIMARY LINKS: expressions, try-expression -> paragraph 4 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: the finally block is evaluated after the evaluation of the matching catch block.
+ * DESCRIPTION: the finally block is ekonstuated after the ekonstuation of the matching catch block.
  */
 
 fun throwException(b: Boolean) = run { if (b) throw Exception() }

@@ -5,5 +5,5 @@ import kotlin.jvm.JvmField
 class Another {
 
     @JvmField
-    val dsf = 324
+    konst dsf = 324
 }

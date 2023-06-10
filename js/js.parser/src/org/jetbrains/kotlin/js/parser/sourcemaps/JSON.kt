@@ -30,35 +30,35 @@ object JsonNull : JsonNode() {
     }
 }
 
-class JsonBoolean private constructor(val value: Boolean) : JsonNode() {
-    private val stringValue = value.toString()
+class JsonBoolean private constructor(konst konstue: Boolean) : JsonNode() {
+    private konst stringValue = konstue.toString()
 
     override fun write(writer: Writer) {
         writer.append(stringValue)
     }
 
     companion object {
-        val TRUE = JsonBoolean(true)
-        val FALSE = JsonBoolean(false)
+        konst TRUE = JsonBoolean(true)
+        konst FALSE = JsonBoolean(false)
 
-        fun of(value: Boolean): JsonBoolean = if (value) TRUE else FALSE
+        fun of(konstue: Boolean): JsonBoolean = if (konstue) TRUE else FALSE
     }
 }
 
-data class JsonObject(val properties: MutableMap<String, JsonNode>) : JsonNode() {
+data class JsonObject(konst properties: MutableMap<String, JsonNode>) : JsonNode() {
     constructor(vararg properties: Pair<String, JsonNode>) : this(properties.toMap().toMutableMap())
 
     override fun write(writer: Writer) {
         writer.append('{')
         var first = true
-        for ((key, value) in properties) {
+        for ((key, konstue) in properties) {
             if (!first) {
                 writer.append(',')
             }
             first = false
             JsonString(key).write(writer)
             writer.append(':')
-            value.write(writer)
+            konstue.write(writer)
         }
         writer.append('}')
     }
@@ -66,7 +66,7 @@ data class JsonObject(val properties: MutableMap<String, JsonNode>) : JsonNode()
     override fun toString(): String = super.toString()
 }
 
-data class JsonArray(val elements: MutableList<JsonNode>) : JsonNode() {
+data class JsonArray(konst elements: MutableList<JsonNode>) : JsonNode() {
     constructor(vararg elements: JsonNode) : this(elements.toMutableList())
 
     override fun write(writer: Writer) {
@@ -83,10 +83,10 @@ data class JsonArray(val elements: MutableList<JsonNode>) : JsonNode() {
     }
 }
 
-data class JsonString(val value: String) : JsonNode() {
+data class JsonString(konst konstue: String) : JsonNode() {
     override fun write(writer: Writer) {
         writer.append('"')
-        for (c in value) {
+        for (c in konstue) {
             when (c) {
                 '\\' -> writer.append("\\\\")
                 '"' -> writer.append("\\\"")
@@ -101,7 +101,7 @@ data class JsonString(val value: String) : JsonNode() {
                     var shift = 16
                     repeat(4) {
                         shift -= 4
-                        val digit = (c.toInt() ushr shift) and 0xF
+                        konst digit = (c.toInt() ushr shift) and 0xF
                         writer.append(if (digit < 10) (digit + '0'.toInt()).toChar() else (digit - 10 + 'a'.toInt()).toChar())
                     }
                 }
@@ -113,26 +113,26 @@ data class JsonString(val value: String) : JsonNode() {
     override fun toString(): String = super.toString()
 }
 
-data class JsonNumber(val value: Double) : JsonNode() {
+data class JsonNumber(konst konstue: Double) : JsonNode() {
     override fun write(writer: Writer) {
-        if (value.toLong().toDouble() == value) {
-            writer.append(value.toLong().toString())
+        if (konstue.toLong().toDouble() == konstue) {
+            writer.append(konstue.toLong().toString())
         } else {
-            writer.append(value.toString())
+            writer.append(konstue.toString())
         }
     }
 
     override fun toString(): String = super.toString()
 }
 
-class JsonSyntaxException(val offset: Int, val line: Int, val column: Int, val text: String) :
+class JsonSyntaxException(konst offset: Int, konst line: Int, konst column: Int, konst text: String) :
     RuntimeException("JSON syntax error at ${line + 1}, ${column + 1}: $text")
 
 fun parseJson(file: File): JsonNode = parseJson(file.readText(Charsets.UTF_8))
 
 fun parseJson(text: String): JsonNode = JsonParser(text).parse()
 
-private class JsonParser(val content: String) {
+private class JsonParser(konst content: String) {
     private var index = -1
     private var charCode = content.getOrNull(++index)?.toInt() ?: -1
     private var offset = 0
@@ -141,7 +141,7 @@ private class JsonParser(val content: String) {
     private var wasCR = false
 
     fun parse(): JsonNode {
-        val result = parseNode()
+        konst result = parseNode()
         skipSpaces()
         if (charCode != -1) error("End of input expected")
         return result
@@ -188,7 +188,7 @@ private class JsonParser(val content: String) {
 
     private fun parseArray(): JsonArray {
         advance()
-        val result = JsonArray()
+        konst result = JsonArray()
         while (true) {
             skipSpaces()
             if (charCode == ']'.toInt()) {
@@ -206,7 +206,7 @@ private class JsonParser(val content: String) {
 
     private fun parseObject(): JsonObject {
         advance()
-        val result = JsonObject()
+        konst result = JsonObject()
         while (true) {
             skipSpaces()
             if (charCode == '}'.toInt()) {
@@ -218,7 +218,7 @@ private class JsonParser(val content: String) {
                 }
 
                 skipSpaces()
-                val key = parseString()
+                konst key = parseString()
                 if (key in result.properties) {
                     error("Duplicate property name: $key")
                 }
@@ -235,14 +235,14 @@ private class JsonParser(val content: String) {
     private fun parseString(): String {
         expectCharAndAdvance('"')
 
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
 
         var leftIndex = index
         while (index < content.length) {
             charCode = content[index].toInt()
 
             if (charCode < ' '.toInt()) {
-                error("Invalid character in string literal")
+                error("Inkonstid character in string literal")
             }
 
             when (charCode) {
@@ -274,28 +274,28 @@ private class JsonParser(val content: String) {
             'f'.toInt() -> advanceAndThen { '\u000C' }
             't'.toInt() -> advanceAndThen { '\t' }
             'u'.toInt() -> parseHexEscapeSequence()
-            else -> error("Invalid escape sequence")
+            else -> error("Inkonstid escape sequence")
         }
     }
 
     private fun parseHexEscapeSequence(): Char {
         advance()
-        var value = 0
+        var konstue = 0
         repeat(4) {
-            value *= 16
-            value += when (charCode) {
+            konstue *= 16
+            konstue += when (charCode) {
                 in '0'.toInt()..'9'.toInt() -> charCode - '0'.toInt()
                 in 'a'.toInt()..'f'.toInt() -> charCode - 'a'.toInt() + 10
                 in 'A'.toInt()..'F'.toInt() -> charCode - 'A'.toInt() + 10
-                else -> error("Invalid escape sequence, hexadecimal char expected")
+                else -> error("Inkonstid escape sequence, hexadecimal char expected")
             }
             advance()
         }
-        return value.toChar()
+        return konstue.toChar()
     }
 
     private fun parseNumber(): Double {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         takeIntegerDigitsTo(sb)
         if (sb.startsWith('0') && sb.length > 1) error("Number must not start with zero")
 
@@ -324,7 +324,7 @@ private class JsonParser(val content: String) {
             advance()
             size++
         }
-        if (size == 0) error("Invalid char, decimal digit expected")
+        if (size == 0) error("Inkonstid char, decimal digit expected")
     }
 
     private fun takeExponentTo(buffer: StringBuilder) {

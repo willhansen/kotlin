@@ -1,7 +1,7 @@
 // IGNORE_BACKEND: JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
-// Names with spaces are not valid according to the dex specification
+// Names with spaces are not konstid according to the dex specification
 // before DEX version 040. Therefore, do not attempt to dex the resulting
 // class file with a min api below 30.
 //
@@ -9,7 +9,7 @@
 // IGNORE_BACKEND: ANDROID
 
 fun `method with spaces`(): String {
-    data class C(val s: String = "OK")
+    data class C(konst s: String = "OK")
     return C().s
 }
 

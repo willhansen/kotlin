@@ -29,14 +29,14 @@ import org.jetbrains.kotlin.types.KotlinType
  * Also, it's abstracted away from PSI
  */
 class MutableContextInfo private constructor(
-    val firedEffects: MutableList<ESEffect>,
-    val subtypes: MutableMap<ESValue, MutableSet<KotlinType>>,
-    val notSubtypes: MutableMap<ESValue, MutableSet<KotlinType>>,
-    val equalValues: MutableMap<ESValue, MutableSet<ESValue>>,
-    val notEqualValues: MutableMap<ESValue, MutableSet<ESValue>>
+    konst firedEffects: MutableList<ESEffect>,
+    konst subtypes: MutableMap<ESValue, MutableSet<KotlinType>>,
+    konst notSubtypes: MutableMap<ESValue, MutableSet<KotlinType>>,
+    konst equalValues: MutableMap<ESValue, MutableSet<ESValue>>,
+    konst notEqualValues: MutableMap<ESValue, MutableSet<ESValue>>
 ) {
     companion object {
-        val EMPTY: MutableContextInfo
+        konst EMPTY: MutableContextInfo
             get() = MutableContextInfo(
                 firedEffects = mutableListOf(),
                 subtypes = mutableMapOf(),
@@ -46,9 +46,9 @@ class MutableContextInfo private constructor(
             )
     }
 
-    fun subtype(value: ESValue, type: KotlinType) = apply { subtypes.initAndAdd(value, type) }
+    fun subtype(konstue: ESValue, type: KotlinType) = apply { subtypes.initAndAdd(konstue, type) }
 
-    fun notSubtype(value: ESValue, type: KotlinType) = apply { notSubtypes.initAndAdd(value, type) }
+    fun notSubtype(konstue: ESValue, type: KotlinType) = apply { notSubtypes.initAndAdd(konstue, type) }
 
     fun equal(left: ESValue, right: ESValue) = apply {
         equalValues.initAndAdd(left, right)
@@ -79,43 +79,43 @@ class MutableContextInfo private constructor(
     )
 
     private fun <D> MutableMap<ESValue, MutableSet<D>>.intersect(that: MutableMap<ESValue, MutableSet<D>>): MutableMap<ESValue, MutableSet<D>> {
-        val result = mutableMapOf<ESValue, MutableSet<D>>()
+        konst result = mutableMapOf<ESValue, MutableSet<D>>()
 
-        val allKeys = this.keys.intersect(that.keys)
+        konst allKeys = this.keys.intersect(that.keys)
         allKeys.forEach {
-            val newValues = this[it]!!.intersect(that[it]!!)
+            konst newValues = this[it]!!.intersect(that[it]!!)
             if (newValues.isNotEmpty()) result[it] = newValues.toMutableSet()
         }
         return result
     }
 
     private fun <D> Map<ESValue, MutableSet<D>>.union(that: Map<ESValue, MutableSet<D>>): MutableMap<ESValue, MutableSet<D>> {
-        val result = mutableMapOf<ESValue, MutableSet<D>>()
+        konst result = mutableMapOf<ESValue, MutableSet<D>>()
         result.putAll(this)
         that.entries.forEach { (thatKey, thatValue) ->
-            val oldValue = result[thatKey] ?: mutableSetOf()
+            konst oldValue = result[thatKey] ?: mutableSetOf()
             oldValue.addAll(thatValue)
             result[thatKey] = oldValue
         }
         return result
     }
 
-    private fun <D> MutableMap<ESValue, MutableSet<D>>.initAndAdd(key: ESValue, value: D) {
+    private fun <D> MutableMap<ESValue, MutableSet<D>>.initAndAdd(key: ESValue, konstue: D) {
         this.compute(key) { _, maybeValues ->
-            val setOfValues = maybeValues ?: mutableSetOf()
-            setOfValues.add(value)
+            konst setOfValues = maybeValues ?: mutableSetOf()
+            setOfValues.add(konstue)
             setOfValues
         }
     }
 
     fun print(): String = buildString {
-        val info = this@MutableContextInfo
+        konst info = this@MutableContextInfo
 
         fun <D> Map<ESValue, Set<D>>.printMapEntriesWithSeparator(separator: String) {
-            this.entries.filter { it.value.isNotEmpty() }.forEach { (key, value) ->
+            this.entries.filter { it.konstue.isNotEmpty() }.forEach { (key, konstue) ->
                 append(key.toString())
                 append(" $separator ")
-                appendLine(value.toString())
+                appendLine(konstue.toString())
             }
         }
 

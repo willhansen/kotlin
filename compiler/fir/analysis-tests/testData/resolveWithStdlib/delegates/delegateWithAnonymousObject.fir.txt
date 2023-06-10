@@ -32,8 +32,8 @@ FILE: delegateWithAnonymousObject.kt
                     ^getValue R|/IssueListView.IssueListView|()
                 }
 
-                public open override operator fun setValue(thisRef: R|IssuesListUserProfile|, property: R|kotlin/reflect/KProperty<*>|, value: R|IssueListView|): R|kotlin/Unit| {
-                    ^setValue R|/IssueListView.IssueListView|().R|/IssueListView.updateFrom|(R|<local>/value|)
+                public open override operator fun setValue(thisRef: R|IssuesListUserProfile|, property: R|kotlin/reflect/KProperty<*>|, konstue: R|IssueListView|): R|kotlin/Unit| {
+                    ^setValue R|/IssueListView.IssueListView|().R|/IssueListView.updateFrom|(R|<local>/konstue|)
                 }
 
             }

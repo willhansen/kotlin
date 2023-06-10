@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R<T: Any>(val x: T)
+konstue class R<T: Any>(konst x: T)
 
 fun useR(r: R<String>) {
     if (r.x as String != "OK") throw AssertionError("$r")

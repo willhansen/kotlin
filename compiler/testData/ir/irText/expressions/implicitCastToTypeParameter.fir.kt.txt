@@ -9,7 +9,7 @@ interface Foo<T : Any?> {
 
 }
 
-val <reified T : Any> Foo<T>.asT: T?
+konst <reified T : Any> Foo<T>.asT: T?
   inline get(): T? {
     return when {
       <this> is T -> <this> /*as T */

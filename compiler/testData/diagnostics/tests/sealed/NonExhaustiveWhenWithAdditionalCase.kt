@@ -1,13 +1,13 @@
 // FIR_IDENTICAL
-sealed class Sealed(val x: Int) {
+sealed class Sealed(konst x: Int) {
     interface ITuple {
-        val x: Int
-        val y: Int
+        konst x: Int
+        konst y: Int
     }
-    class Tuple(override val x: Int, override val y: Int): ITuple
+    class Tuple(override konst x: Int, override konst y: Int): ITuple
     object First: Sealed(12)
     open class NonFirst(tuple: Tuple): Sealed(tuple.x), ITuple {
-        override val y: Int = tuple.y
+        override konst y: Int = tuple.y
         object Second: NonFirst(Tuple(34, 2))
         class Third: NonFirst(Tuple(56, 3))
     }

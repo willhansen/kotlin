@@ -26,29 +26,29 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirAnonymousFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.isExtension
 
 internal class KtFirAnonymousFunctionSymbol(
-    override val firSymbol: FirAnonymousFunctionSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirAnonymousFunctionSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtAnonymousFunctionSymbol(), KtFirSymbol<FirAnonymousFunctionSymbol> {
 
-    override val psi: PsiElement? = withValidityAssertion { firSymbol.fir.getAllowedPsi() }
+    override konst psi: PsiElement? = withValidityAssertion { firSymbol.fir.getAllowedPsi() }
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
         }
 
-    override val returnType: KtType get() = withValidityAssertion { firSymbol.returnType(analysisSession.firSymbolBuilder) }
-    override val receiverParameter: KtReceiverParameterSymbol? get() = withValidityAssertion { firSymbol.receiver(builder) }
+    override konst returnType: KtType get() = withValidityAssertion { firSymbol.returnType(analysisSession.firSymbolBuilder) }
+    override konst receiverParameter: KtReceiverParameterSymbol? get() = withValidityAssertion { firSymbol.receiver(builder) }
 
-    override val contextReceivers: List<KtContextReceiver> by cached { firSymbol.createContextReceivers(builder) }
+    override konst contextReceivers: List<KtContextReceiver> by cached { firSymbol.createContextReceivers(builder) }
 
-    override val valueParameters: List<KtValueParameterSymbol> by cached { firSymbol.createKtValueParameters(builder) }
+    override konst konstueParameters: List<KtValueParameterSymbol> by cached { firSymbol.createKtValueParameters(builder) }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion {
             firSymbol.fir.hasStableParameterNames
         }
-    override val isExtension: Boolean get() = withValidityAssertion { firSymbol.isExtension }
+    override konst isExtension: Boolean get() = withValidityAssertion { firSymbol.isExtension }
 
 
     context(KtAnalysisSession)

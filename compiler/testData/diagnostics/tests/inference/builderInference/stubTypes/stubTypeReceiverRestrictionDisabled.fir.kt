@@ -19,7 +19,7 @@ fun test1() {
 
 fun test2() {
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>a<!> {
-        val v = this.get(0)
+        konst v = this.get(0)
         v.extension()
         use(v::extension)
         use(it::extension)
@@ -29,20 +29,20 @@ fun test2() {
 fun test3() {
     operator fun <T> T.getValue(thisRef: Any?, prop: Any?): T = this
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>a<!> {
-        val v by this.get(0)
+        konst v by this.get(0)
         v.extension()
         use(v::extension)
         use(it::extension)
     }
 }
 
-class Box<TIn>(val t: TIn)
+class Box<TIn>(konst t: TIn)
 
 fun test4() {
     operator fun <T> T.provideDelegate(thisRef: Any?, prop: Any?): Box<T> = Box(this)
     operator fun <T> Box<T>.getValue(thisRef: Any?, prop: Any?): T = this.t
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>a<!> {
-        val v by this.get(0)
+        konst v by this.get(0)
         v.extension()
         use(v::extension)
         use(it::extension)
@@ -61,7 +61,7 @@ fun test5() {
     }
 }
 
-val <T> T.genericLambda: T.((T) -> Unit) -> Unit get() = {}
+konst <T> T.genericLambda: T.((T) -> Unit) -> Unit get() = {}
 
 fun test6() {
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>b<!> {

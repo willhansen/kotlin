@@ -1,10 +1,10 @@
 package
 
 package a {
-    public val mc: a.MyJavaClass
-    public val x: kotlin.Int
-    public val y: kotlin.Int
-    public val z: a.MyJavaClass.NestedClass
+    public konst mc: a.MyJavaClass
+    public konst x: kotlin.Int
+    public konst y: kotlin.Int
+    public konst z: a.MyJavaClass.NestedClass
 
     public/*package*/ open class MyJavaClass {
         public/*package*/ constructor MyJavaClass()
@@ -27,16 +27,16 @@ package a {
     }
 
     package a.c {
-        public val mc1: a.MyJavaClass
-        public val x: kotlin.Int
-        public val y: kotlin.Int
-        public val z: a.MyJavaClass.NestedClass
+        public konst mc1: a.MyJavaClass
+        public konst x: kotlin.Int
+        public konst y: kotlin.Int
+        public konst z: a.MyJavaClass.NestedClass
     }
 }
 
 package b {
-    public val mc1: a.MyJavaClass
-    public val x: kotlin.Int
-    public val y: kotlin.Int
-    public val z: a.MyJavaClass.NestedClass
+    public konst mc1: a.MyJavaClass
+    public konst x: kotlin.Int
+    public konst y: kotlin.Int
+    public konst z: a.MyJavaClass.NestedClass
 }

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.element.builder.FirTowerC
 import org.jetbrains.kotlin.fir.declarations.FirTowerDataContext
 import org.jetbrains.kotlin.psi.KtElement
 
-internal class TowerProviderForElementForState(private val firResolveSession: LLFirResolveSession) : FirTowerContextProvider {
+internal class TowerProviderForElementForState(private konst firResolveSession: LLFirResolveSession) : FirTowerContextProvider {
     override fun getClosestAvailableParentContext(ktElement: KtElement): FirTowerDataContext? {
         if (firResolveSession is LLFirResolveSessionDepended) {
             firResolveSession.towerProviderBuiltUponElement

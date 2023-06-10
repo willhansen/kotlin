@@ -10,12 +10,12 @@ import org.jetbrains.kotlin.descriptors.ClassifierDescriptorWithTypeParameters
 import org.jetbrains.kotlin.descriptors.TypeParameterDescriptor
 import org.jetbrains.kotlin.ir.descriptors.IrBasedTypeParameterDescriptor
 
-val TypeParameterDescriptor.originalTypeParameter: TypeParameterDescriptor
+konst TypeParameterDescriptor.originalTypeParameter: TypeParameterDescriptor
     get() =
         if (this is IrBasedTypeParameterDescriptor) {
             original
         } else {
-            when (val container = containingDeclaration.original) {
+            when (konst container = containingDeclaration.original) {
                 is ClassifierDescriptorWithTypeParameters ->
                     container.declaredTypeParameters[index]
                 is CallableDescriptor ->

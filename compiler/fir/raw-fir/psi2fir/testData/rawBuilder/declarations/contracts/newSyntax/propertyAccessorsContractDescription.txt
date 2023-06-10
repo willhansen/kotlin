@@ -12,8 +12,8 @@ FILE: propertyAccessorsContractDescription.kt
              {
                 ^ IntegerLiteral(1)
             }
-            public? [ContainingClassKey=MyClass] set(value: Int): R|kotlin/Unit| {
-                field# = value#.times#(IntegerLiteral(10))
+            public? [ContainingClassKey=MyClass] set(konstue: Int): R|kotlin/Unit| {
+                field# = konstue#.times#(IntegerLiteral(10))
             }
 
     }
@@ -30,12 +30,12 @@ FILE: propertyAccessorsContractDescription.kt
              {
                 ^ IntegerLiteral(1)
             }
-            public? [ContainingClassKey=AnotherClass] set(value: Int): R|kotlin/Unit|
+            public? [ContainingClassKey=AnotherClass] set(konstue: Int): R|kotlin/Unit|
                 [Contract description] <
                     returns#()
                 >
              {
-                field# = value#.times#(multiplier#)
+                field# = konstue#.times#(multiplier#)
             }
 
     }
@@ -52,13 +52,13 @@ FILE: propertyAccessorsContractDescription.kt
              {
                 ^ IntegerLiteral(1)
             }
-            public? [ContainingClassKey=SomeClass] set(value: Int): R|kotlin/Unit|
+            public? [ContainingClassKey=SomeClass] set(konstue: Int): R|kotlin/Unit|
                 [Contract description] <
-                    returns#().implies#(!=(value#, Null(null)))
+                    returns#().implies#(!=(konstue#, Null(null)))
                 >
              {
-                value# ?: throw NullArgumentException#()
-                field# = value#
+                konstue# ?: throw NullArgumentException#()
+                field# = konstue#
             }
 
     }

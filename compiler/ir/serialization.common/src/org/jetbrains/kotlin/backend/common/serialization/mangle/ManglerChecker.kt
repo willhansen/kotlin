@@ -17,21 +17,21 @@ import org.jetbrains.kotlin.name.SpecialNames
 
 class ManglerChecker(
     vararg _manglers: KotlinMangler<IrDeclaration>,
-    private val needsChecking: (IrDeclarationBase) -> Boolean = hasDescriptor
+    private konst needsChecking: (IrDeclarationBase) -> Boolean = hasDescriptor
 ) : IrElementVisitorVoid {
 
     companion object {
-        val hasDescriptor: (IrDeclarationBase) -> Boolean = { it.symbol.hasDescriptor }
-        val hasMetadata: (IrDeclarationBase) -> Boolean = { (it as? IrMetadataSourceOwner)?.metadata != null }
+        konst hasDescriptor: (IrDeclarationBase) -> Boolean = { it.symbol.hasDescriptor }
+        konst hasMetadata: (IrDeclarationBase) -> Boolean = { (it as? IrMetadataSourceOwner)?.metadata != null }
     }
 
-    private val manglers = _manglers.toList()
+    private konst manglers = _manglers.toList()
 
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
     }
 
-    private val skipper = object : IrElementVisitor<Boolean, Nothing?> {
+    private konst skipper = object : IrElementVisitor<Boolean, Nothing?> {
         override fun visitElement(element: IrElement, data: Nothing?): Boolean {
             error("unexpected element: ${element.render()}")
         }
@@ -40,7 +40,7 @@ class ManglerChecker(
             if (!needsChecking(declaration)) return true
 
             if (declaration.parent is IrPackageFragment) {
-                val vis = declaration as IrDeclarationWithVisibility
+                konst vis = declaration as IrDeclarationWithVisibility
                 return DescriptorVisibilities.isPrivate(vis.visibility)
             }
 
@@ -78,7 +78,7 @@ class ManglerChecker(
                 r = it.op()
                 prev = it
             } else {
-                val tmp = it.op()
+                konst tmp = it.op()
                 if (r != tmp) {
                     onError(prev, r, it, tmp)
                 }
@@ -94,7 +94,7 @@ class ManglerChecker(
 
         if (declaration is IrErrorDeclaration) return
 
-        val exported = manglers.checkAllEqual(false, { isExportCheck(declaration) }) { m1, r1, m2, r2 ->
+        konst exported = manglers.checkAllEqual(false, { isExportCheck(declaration) }) { m1, r1, m2, r2 ->
             error("isExportCheck: ${declaration.render()}\n ${m1.manglerName}: $r1\n ${m2.manglerName}: $r2\n")
         }
 

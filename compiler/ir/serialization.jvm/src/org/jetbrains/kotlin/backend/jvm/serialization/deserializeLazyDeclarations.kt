@@ -45,9 +45,9 @@ fun deserializeFromByteArray(
     toplevelParent: IrClass,
     typeSystemContext: IrTypeSystemContext,
 ) {
-    val internationService = IrInterningService()
-    val irProto = JvmIr.ClassOrFile.parseFrom(byteArray.codedInputStream)
-    val irLibraryFile = IrLibraryFileFromAnnotation(
+    konst internationService = IrInterningService()
+    konst irProto = JvmIr.ClassOrFile.parseFrom(byteArray.codedInputStream)
+    konst irLibraryFile = IrLibraryFileFromAnnotation(
         irProto.typeList,
         irProto.signatureList,
         irProto.stringList,
@@ -56,11 +56,11 @@ fun deserializeFromByteArray(
     )
 
     // Only needed for local signature computation.
-    val dummyIrFile = IrFileImpl(NaiveSourceBasedFileEntryImpl("<unknown>"), IrFileSymbolImpl(), toplevelParent.packageFqName!!)
+    konst dummyIrFile = IrFileImpl(NaiveSourceBasedFileEntryImpl("<unknown>"), IrFileSymbolImpl(), toplevelParent.packageFqName!!)
     // On JVM, file-scope private declarations are uniquely identified by file facade's fq name.
-    val dummyFileSignature = IdSignature.FileSignature(irProto.fileFacadeFqName, toplevelParent.packageFqName!!, "<unknown>")
+    konst dummyFileSignature = IdSignature.FileSignature(irProto.fileFacadeFqName, toplevelParent.packageFqName!!, "<unknown>")
 
-    val symbolDeserializer = IrSymbolDeserializer(
+    konst symbolDeserializer = IrSymbolDeserializer(
         symbolTable,
         irLibraryFile,
         fileSymbol = dummyIrFile.symbol,
@@ -73,13 +73,13 @@ fun deserializeFromByteArray(
         referencePublicSymbol(symbolTable, idSignature, symbolKind)
     }
 
-    val lazyIrFactory = LazyIrFactory(irBuiltIns.irFactory)
+    konst lazyIrFactory = LazyIrFactory(irBuiltIns.irFactory)
 
-    val fakeOverrideBuilder = makeSimpleFakeOverrideBuilder(symbolTable, typeSystemContext, symbolDeserializer)
+    konst fakeOverrideBuilder = makeSimpleFakeOverrideBuilder(symbolTable, typeSystemContext, symbolDeserializer)
 
-    // We have to supply topLevelParent here, but this results in wrong values for parent fields in deeply embedded declarations.
+    // We have to supply topLevelParent here, but this results in wrong konstues for parent fields in deeply embedded declarations.
     // Patching will be needed.
-    val deserializer = IrDeclarationDeserializer(
+    konst deserializer = IrDeclarationDeserializer(
         irBuiltIns, symbolTable, lazyIrFactory, irLibraryFile, toplevelParent,
         allowErrorNodes = false,
         deserializeInlineFunctions = true,
@@ -103,11 +103,11 @@ fun deserializeFromByteArray(
 }
 
 private class IrLibraryFileFromAnnotation(
-    private val types: List<ProtoType>,
-    private val signatures: List<ProtoIdSignature>,
-    private val strings: List<String>,
-    private val bodies: List<JvmIr.XStatementOrExpression>,
-    private val debugInfo: List<String>
+    private konst types: List<ProtoType>,
+    private konst signatures: List<ProtoIdSignature>,
+    private konst strings: List<String>,
+    private konst bodies: List<JvmIr.XStatementOrExpression>,
+    private konst debugInfo: List<String>
 ) : IrLibraryFile() {
     override fun declaration(index: Int): ProtoDeclaration {
         error("This method is never supposed to be called")
@@ -176,7 +176,7 @@ private fun buildFakeOverridesForLocalClasses(
     symbolDeserializer: IrSymbolDeserializer,
     toplevel: IrClass
 ) {
-    val builder = makeSimpleFakeOverrideBuilder(symbolTable, typeSystemContext, symbolDeserializer)
+    konst builder = makeSimpleFakeOverrideBuilder(symbolTable, typeSystemContext, symbolDeserializer)
     toplevel.acceptChildrenVoid(
         object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
@@ -195,7 +195,7 @@ private fun buildFakeOverridesForLocalClasses(
 class PrePopulatedDeclarationTable(
     sig2symbol: Map<IdSignature, IrSymbol>
 ) : FakeOverrideDeclarationTable(JvmIrMangler, signatureSerializerFactory = ::IdSignatureSerializer) {
-    private val symbol2Sig = sig2symbol.entries.associate { (x, y) -> y to x }
+    private konst symbol2Sig = sig2symbol.entries.associate { (x, y) -> y to x }
 
     override fun tryComputeBackendSpecificSignature(declaration: IrDeclaration): IdSignature? {
         symbol2Sig[declaration.symbol]?.let { return it }

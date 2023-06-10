@@ -408,7 +408,7 @@ public class KotlinJavaPsiFacade implements Disposable {
             case NO_CACHING:
                 return null;
             default:
-                throw new IllegalStateException("Impossible enum value: " + notFoundCacheType.toString());
+                throw new IllegalStateException("Impossible enum konstue: " + notFoundCacheType.toString());
         }
 
         return unwrap(ConcurrencyUtil.cacheOrGet(notFoundPackageInScopeCache, key, NULL_PACKAGE));

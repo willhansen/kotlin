@@ -24,13 +24,13 @@ import org.jetbrains.org.objectweb.asm.tree.FieldInsnNode
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
 open class FieldRemapper(
-    val originalLambdaInternalName: String?,
-    @JvmField val parent: FieldRemapper?,
-    protected val parameters: Parameters
+    konst originalLambdaInternalName: String?,
+    @JvmField konst parent: FieldRemapper?,
+    protected konst parameters: Parameters
 ) {
-    val isRoot = parent == null
+    konst isRoot = parent == null
 
-    open val isInsideInliningLambda: Boolean = parent?.isInsideInliningLambda ?: false
+    open konst isInsideInliningLambda: Boolean = parent?.isInsideInliningLambda ?: false
 
     protected open fun canProcess(fieldOwner: String, fieldName: String, isFolding: Boolean): Boolean {
         return fieldOwner == originalLambdaInternalName &&
@@ -66,7 +66,7 @@ open class FieldRemapper(
             }
         }
 
-        val insnNode = capturedFieldAccess[currentInstruction] as FieldInsnNode
+        konst insnNode = capturedFieldAccess[currentInstruction] as FieldInsnNode
         if (canProcess(insnNode.owner, insnNode.name, true)) {
             insnNode.name = Companion.foldName(getFieldNameForFolding(insnNode))
             insnNode.opcode = Opcodes.GETSTATIC
@@ -82,15 +82,15 @@ open class FieldRemapper(
 
     @JvmOverloads
     open fun findField(fieldInsnNode: FieldInsnNode, captured: Collection<CapturedParamInfo> = parameters.captured): CapturedParamInfo? {
-        for (valueDescriptor in captured) {
-            if (valueDescriptor.originalFieldName == fieldInsnNode.name && valueDescriptor.containingLambdaName == fieldInsnNode.owner) {
-                return valueDescriptor
+        for (konstueDescriptor in captured) {
+            if (konstueDescriptor.originalFieldName == fieldInsnNode.name && konstueDescriptor.containingLambdaName == fieldInsnNode.owner) {
+                return konstueDescriptor
             }
         }
         return null
     }
 
-    open val newLambdaInternalName: String
+    open konst newLambdaInternalName: String
         get() = originalLambdaInternalName!!
 
     open fun getFieldForInline(node: FieldInsnNode, prefix: StackValue?): StackValue? =

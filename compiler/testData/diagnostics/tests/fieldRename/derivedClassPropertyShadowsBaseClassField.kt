@@ -18,21 +18,21 @@ public class Base {
 // FILE: test.kt
 
 open class Derived : Base() {
-    val regular = "aa"
+    konst regular = "aa"
 
-    val withGetter get() = "bb"
+    konst withGetter get() = "bb"
 
     lateinit var lateInit: String
 
-    val lazyProp by lazy { "dd" }
+    konst lazyProp by lazy { "dd" }
 
     var withSetter: String = "ee"
-        set(value) {
-            println(value)
-            field = value
+        set(konstue) {
+            println(konstue)
+            field = konstue
         }
 
-    open val openProp = "ff"
+    open konst openProp = "ff"
 }
 
 fun test(d: Derived) {

@@ -28,7 +28,7 @@ fun main() {
         ""
     }
 
-    val block: (Map<String, Int>) -> CharSequence = { x -> x.toString() }
+    konst block: (Map<String, Int>) -> CharSequence = { x -> x.toString() }
     A().foo(block)
     A.bar(block)
 }

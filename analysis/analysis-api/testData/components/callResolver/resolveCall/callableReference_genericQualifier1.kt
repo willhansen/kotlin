@@ -6,4 +6,4 @@ class Test<T> {
 
 class Bar
 
-val bar = <expr>Test<Bar></expr>::foo
+konst bar = <expr>Test<Bar></expr>::foo

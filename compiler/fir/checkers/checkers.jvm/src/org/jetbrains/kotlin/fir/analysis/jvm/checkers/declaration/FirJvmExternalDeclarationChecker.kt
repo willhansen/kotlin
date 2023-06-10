@@ -46,24 +46,24 @@ object FirJvmExternalDeclarationChecker : FirBasicDeclarationChecker() {
         }
 
         if (!declaration.isExternal) return
-        val source = declaration.source ?: return
+        konst source = declaration.source ?: return
         if (source.kind is KtFakeSourceElementKind) return
 
         // WRONG_MODIFIER_TARGET on external constructor is intentionally NOT covered in this checker.
         if (declaration !is FirFunction) {
-            val target = when (declaration) {
+            konst target = when (declaration) {
                 is FirProperty -> "property"
                 is FirRegularClass -> "class"
                 else -> "non-function declaration"
             }
-            val externalModifier = declaration.getModifier(KtTokens.EXTERNAL_KEYWORD)
+            konst externalModifier = declaration.getModifier(KtTokens.EXTERNAL_KEYWORD)
             externalModifier?.let {
                 reporter.reportOn(it.source, FirErrors.WRONG_MODIFIER_TARGET, it.token, target, context)
             }
             return
         }
 
-        val containingClassSymbol = declaration.symbol.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
+        konst containingClassSymbol = declaration.symbol.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
         if (containingClassSymbol != null) {
             if (containingClassSymbol.isInterface) {
                 reporter.reportOn(declaration.source, FirJvmErrors.EXTERNAL_DECLARATION_IN_INTERFACE, context)

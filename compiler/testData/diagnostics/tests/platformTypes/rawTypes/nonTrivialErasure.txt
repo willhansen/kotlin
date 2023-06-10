@@ -1,6 +1,6 @@
 package
 
-public val strList: kotlin.collections.List<kotlin.String>
+public konst strList: kotlin.collections.List<kotlin.String>
 public fun main(): kotlin.Unit
 
 public/*package*/ open class A</*0*/ T : A<(raw) A<*, *, *>, (raw) A<*, *, *>, (raw) kotlin.collections.(Mutable)List<*>!>!, /*1*/ E : T!, /*2*/ F : (kotlin.collections.MutableList<out kotlin.Double!>..kotlin.collections.List<kotlin.Double!>?)> {

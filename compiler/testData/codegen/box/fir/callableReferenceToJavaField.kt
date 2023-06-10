@@ -20,7 +20,7 @@ package foo
 import kotlin.reflect.jvm.javaField
 import bar.Base
 
-class A(val s: String)
+class A(konst s: String)
 
 class Derived : Base() {
     override fun foo() {

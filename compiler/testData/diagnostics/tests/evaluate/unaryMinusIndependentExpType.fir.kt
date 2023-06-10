@@ -1,29 +1,29 @@
-val p1: Int = -1
-val p2: Long = -1
-val p3: Byte = -1
-val p4: Short = -1
+konst p1: Int = -1
+konst p2: Long = -1
+konst p3: Byte = -1
+konst p4: Short = -1
 
-val lp1: Int = <!INITIALIZER_TYPE_MISMATCH!>-1111111111111111111<!>
-val lp2: Long = -1111111111111111111
-val lp3: Byte = <!INITIALIZER_TYPE_MISMATCH!>-1111111111111111111<!>
-val lp4: Short = <!INITIALIZER_TYPE_MISMATCH!>-1111111111111111111<!>
+konst lp1: Int = <!INITIALIZER_TYPE_MISMATCH!>-1111111111111111111<!>
+konst lp2: Long = -1111111111111111111
+konst lp3: Byte = <!INITIALIZER_TYPE_MISMATCH!>-1111111111111111111<!>
+konst lp4: Short = <!INITIALIZER_TYPE_MISMATCH!>-1111111111111111111<!>
 
-val l1: Long = -1.toLong()
-val l2: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
-val l3: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
-val l4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
+konst l1: Long = -1.toLong()
+konst l2: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
+konst l3: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
+konst l4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
 
-val b1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
-val b2: Int = -1.toByte()
-val b3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
-val b4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
+konst b1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
+konst b2: Int = -1.toByte()
+konst b3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
+konst b4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
 
-val i1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
-val i2: Int = -1.toInt()
-val i3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
-val i4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
+konst i1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
+konst i2: Int = -1.toInt()
+konst i3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
+konst i4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
 
-val s1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
-val s2: Int = -1.toShort()
-val s3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
-val s4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
+konst s1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
+konst s2: Int = -1.toShort()
+konst s3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
+konst s4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>

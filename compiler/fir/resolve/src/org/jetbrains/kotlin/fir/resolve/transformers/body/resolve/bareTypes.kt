@@ -25,21 +25,21 @@ fun BodyResolveComponents.computeRepresentativeTypeForBareType(type: ConeClassLi
     }
 
     if (originalType is ConeIntersectionType) {
-        val candidatesFromIntersectedTypes = originalType.intersectedTypes.mapNotNull { computeRepresentativeTypeForBareType(type, it) }
+        konst candidatesFromIntersectedTypes = originalType.intersectedTypes.mapNotNull { computeRepresentativeTypeForBareType(type, it) }
         candidatesFromIntersectedTypes.firstOrNull { it.typeArguments.isNotEmpty() }?.let { return it }
         return candidatesFromIntersectedTypes.firstOrNull()
     }
 
-    val originalClassLookupTag = (originalType as? ConeClassLikeType)?.fullyExpandedType(session)?.lookupTag ?: return null
+    konst originalClassLookupTag = (originalType as? ConeClassLikeType)?.fullyExpandedType(session)?.lookupTag ?: return null
 
-    val castTypeAlias = type.lookupTag.toSymbol(session)?.fir as? FirTypeAlias
+    konst castTypeAlias = type.lookupTag.toSymbol(session)?.fir as? FirTypeAlias
     if (castTypeAlias != null && !canBeUsedAsBareType(castTypeAlias)) return null
 
-    val expandedCastType = type.fullyExpandedType(session)
-    val castClass = expandedCastType.lookupTag.toSymbol(session)?.fir as? FirRegularClass ?: return null
+    konst expandedCastType = type.fullyExpandedType(session)
+    konst castClass = expandedCastType.lookupTag.toSymbol(session)?.fir as? FirRegularClass ?: return null
 
-    val superTypeWithParameters = with(session.typeContext) {
-        val correspondingSupertype = AbstractTypeChecker.findCorrespondingSupertypes(
+    konst superTypeWithParameters = with(session.typeContext) {
+        konst correspondingSupertype = AbstractTypeChecker.findCorrespondingSupertypes(
             newTypeCheckerState(errorTypesEqualToAnything = false, stubTypesEqualToAnything = false),
             castClass.defaultType(), originalClassLookupTag,
         ).firstOrNull() as? ConeClassLikeType ?: return null
@@ -50,27 +50,27 @@ fun BodyResolveComponents.computeRepresentativeTypeForBareType(type: ConeClassLi
             correspondingSupertype
     }
 
-    val substitution = mutableMapOf<FirTypeParameterSymbol, ConeTypeProjection>()
-    val typeParameters = castClass.typeParameters.mapTo(mutableSetOf()) { it.symbol }
+    konst substitution = mutableMapOf<FirTypeParameterSymbol, ConeTypeProjection>()
+    konst typeParameters = castClass.typeParameters.mapTo(mutableSetOf()) { it.symbol }
     if (!session.doUnify(originalType, superTypeWithParameters, typeParameters, substitution)) return null
 
-    val newArguments = castClass.typeParameters.map { substitution[it.symbol] ?: return@computeRepresentativeTypeForBareType null }
+    konst newArguments = castClass.typeParameters.map { substitution[it.symbol] ?: return@computeRepresentativeTypeForBareType null }
     return expandedCastType.withArguments(newArguments.toTypedArray())
 }
 
 private fun canBeUsedAsBareType(firTypeAlias: FirTypeAlias): Boolean {
     firTypeAlias.lazyResolveToPhase(FirResolvePhase.TYPES)
 
-    val typeAliasParameters = firTypeAlias.typeParameters.toSet()
-    val usedTypeParameters = mutableSetOf<FirTypeParameter>()
+    konst typeAliasParameters = firTypeAlias.typeParameters.toSet()
+    konst usedTypeParameters = mutableSetOf<FirTypeParameter>()
 
-    val expandedType = firTypeAlias.expandedConeType ?: return false
+    konst expandedType = firTypeAlias.expandedConeType ?: return false
     for (argument in expandedType.typeArguments) {
         if (argument.kind == ProjectionKind.STAR) continue
         if (argument.kind != ProjectionKind.INVARIANT) return false
 
-        val type = argument.type!!
-        val typeParameter = (type as? ConeTypeParameterType)?.lookupTag?.typeParameterSymbol?.fir ?: return false
+        konst type = argument.type!!
+        konst typeParameter = (type as? ConeTypeParameterType)?.lookupTag?.typeParameterSymbol?.fir ?: return false
         if (typeParameter !in typeAliasParameters || typeParameter in usedTypeParameters) return false
 
         usedTypeParameters.add(typeParameter)

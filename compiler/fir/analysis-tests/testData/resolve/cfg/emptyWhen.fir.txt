@@ -10,7 +10,7 @@ FILE: emptyWhen.kt
 
     }
     public final fun test_3(x: R|kotlin/Int|): R|kotlin/Unit| {
-        when (lval y: R|kotlin/Int| = R|<local>/x|) {
+        when (lkonst y: R|kotlin/Int| = R|<local>/x|) {
         }
 
     }

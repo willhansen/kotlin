@@ -9,8 +9,8 @@ import kotlin.native.internal.ExportForCppRuntime
 import kotlin.native.internal.GCUnsafeCall
 
 @BetaInteropApi
-public class ForeignException internal constructor(val nativeException: Any?) : Exception() {
-    override val message: String = nativeException?.let {
+public class ForeignException internal constructor(konst nativeException: Any?) : Exception() {
+    override konst message: String = nativeException?.let {
         kotlin_ObjCExport_ExceptionDetails(nativeException)
     }?: ""
 

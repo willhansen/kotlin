@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.gradle.testbase.*
 import java.nio.file.Files
 import kotlin.test.assertTrue
 
-private const val RESOLVE_ALL_CONFIGURATIONS_TASK_NAME = "resolveAllConfigurations"
-private const val UNRESOLVED_MARKER = "<<!>>UNRESOLVED:"
-private val unresolvedConfigurationRegex = "${Regex.escape(UNRESOLVED_MARKER)}(.*)".toRegex()
+private const konst RESOLVE_ALL_CONFIGURATIONS_TASK_NAME = "resolveAllConfigurations"
+private const konst UNRESOLVED_MARKER = "<<!>>UNRESOLVED:"
+private konst unresolvedConfigurationRegex = "${Regex.escape(UNRESOLVED_MARKER)}(.*)".toRegex()
 
 fun BaseGradleIT.Project.testResolveAllConfigurations(
     subproject: String? = null,
@@ -26,7 +26,7 @@ fun BaseGradleIT.Project.testResolveAllConfigurations(
     if (!skipSetup) {
         setupWorkingDir()
         gradleBuildScript(subproject).run {
-            val taskCode = when (extension) {
+            konst taskCode = when (extension) {
                 "gradle" -> generateResolveAllConfigurationsTask(excludeConfigurations)
                 "kts" -> generateResolveAllConfigurationsTaskKts(excludeConfigurations)
                 else -> error("Unexpected build script extension $extension")
@@ -38,7 +38,7 @@ fun BaseGradleIT.Project.testResolveAllConfigurations(
     build(RESOLVE_ALL_CONFIGURATIONS_TASK_NAME, options = options) {
         assertSuccessful()
         assertTasksExecuted(":${subproject?.let { "$it:" }.orEmpty()}$RESOLVE_ALL_CONFIGURATIONS_TASK_NAME")
-        val unresolvedConfigurations = unresolvedConfigurationRegex.findAll(output).map { it.groupValues[1] }.toList()
+        konst unresolvedConfigurations = unresolvedConfigurationRegex.findAll(output).map { it.groupValues[1] }.toList()
         withUnresolvedConfigurationNames(unresolvedConfigurations)
     }
 }
@@ -53,7 +53,7 @@ fun TestProject.testResolveAllConfigurations(
     }
 ) {
     if (!skipSetup) {
-        val targetProject = subproject?.let { subProject(it) } ?: this
+        konst targetProject = subproject?.let { subProject(it) } ?: this
         when {
             Files.exists(targetProject.buildGradle) -> targetProject.buildGradle
                 .append("\n${generateResolveAllConfigurationsTask(excludeConfigurations)}")
@@ -65,7 +65,7 @@ fun TestProject.testResolveAllConfigurations(
 
     build(RESOLVE_ALL_CONFIGURATIONS_TASK_NAME, buildOptions = options) {
         assertTasksExecuted(":${subproject?.let { "$it:" }.orEmpty()}$RESOLVE_ALL_CONFIGURATIONS_TASK_NAME")
-        val unresolvedConfigurations = unresolvedConfigurationRegex.findAll(output).map { it.groupValues[1] }.toList()
+        konst unresolvedConfigurations = unresolvedConfigurationRegex.findAll(output).map { it.groupValues[1] }.toList()
         withUnresolvedConfigurationNames(unresolvedConfigurations, this)
     }
 }
@@ -102,14 +102,14 @@ private fun generateResolveAllConfigurationsTaskKts(excludes: List<String>) =
     """
         tasks.create("$RESOLVE_ALL_CONFIGURATIONS_TASK_NAME") {
             doFirst {
-                val excludeConfigs = mutableListOf("default", "archives")
+                konst excludeConfigs = mutableListOf("default", "archives")
                 ${computeExcludeConfigurations(excludes)}
 
                 project.configurations
                     .filter { it.isCanBeResolved }
                     .filterNot { excludeConfigs.contains(it.name) }
                     .forEach { configuration ->
-                        val path = (configuration as org.gradle.api.internal.artifacts.configurations.ConfigurationInternal).path
+                        konst path = (configuration as org.gradle.api.internal.artifacts.configurations.ConfigurationInternal).path
                         try {
                             println("Resolving ${'$'}path")
                             configuration.files.forEach { println(">> ${'$'}path --> ${'$'}{it.name}") }
@@ -128,7 +128,7 @@ private fun generateResolveAllConfigurationsTaskKts(excludes: List<String>) =
     """.trimIndent()
 
 private fun computeExcludeConfigurations(excludes: List<String>): String {
-    val deprecatedConfigurations = listOf("compile", "runtime", "compileOnly", "runtimeOnly")
+    konst deprecatedConfigurations = listOf("compile", "runtime", "compileOnly", "runtimeOnly")
     return """
         sourceSets.forEach { sourceSet ->
             "${deprecatedConfigurations.joinToString()}".split(", ").toList().forEach {

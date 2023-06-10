@@ -2,11 +2,11 @@ interface T {
     fun result(): String
 }
 
-class A(val x: String) {
+class A(konst x: String) {
     fun getx() = x
 
     fun foo() = object : T {
-        val bar = getx()
+        konst bar = getx()
 
         override fun result() = bar
     }

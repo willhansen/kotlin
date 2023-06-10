@@ -3,7 +3,7 @@
 fun test() = uintArrayOf(1u).size
 
 fun box(): String {
-    val test = test()
+    konst test = test()
     if (test != 1) return "Failed: $test"
     return "OK"
 }

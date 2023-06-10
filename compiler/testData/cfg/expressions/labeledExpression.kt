@@ -1,4 +1,4 @@
 fun foo(): Int {
-    val t = x@ (1 + 2)
+    konst t = x@ (1 + 2)
     return t
 }

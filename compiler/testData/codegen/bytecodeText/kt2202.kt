@@ -10,7 +10,7 @@ class A {
 
 class B {
     var foo = 1
-        private set(value) { field = value }
+        private set(konstue) { field = konstue }
 
     fun foo() {
        foo = 2

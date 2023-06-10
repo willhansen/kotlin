@@ -13,7 +13,7 @@ open class Base {
 
     protected open fun method(): String = "O"
 
-    protected open val prop = "K"
+    protected open konst prop = "K"
 }
 
 // FILE: 2.kt
@@ -23,7 +23,7 @@ class A : Base() {
 
     override fun method() = "fail method"
 
-    override val prop = "fail property"
+    override konst prop = "fail property"
 
     fun test1(): String {
         return call {
@@ -41,7 +41,7 @@ class A : Base() {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.test1() != "OK") return "fail 1: ${a.test1()}"
     return a.test2()
 }

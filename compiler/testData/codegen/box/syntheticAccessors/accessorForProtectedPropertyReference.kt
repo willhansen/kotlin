@@ -2,7 +2,7 @@
 package a
 
 open class A {
-    protected val v = "O"
+    protected konst v = "O"
     protected var w = ""
 }
 

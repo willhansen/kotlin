@@ -1,6 +1,6 @@
 package
 
-public val `"a"+"b"`: kotlin.String = "c"
+public konst `"a"+"b"`: kotlin.String = "c"
 public fun `?*"|%`(): kotlin.Int
 
 public final class `A"B` {

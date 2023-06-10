@@ -19,7 +19,7 @@ class Test {
 
 // FILE: main.kt
 
-val doubleList: List<Double?> = null!!
+konst doubleList: List<Double?> = null!!
 
 fun main() {
     Test.rawField.foo("", doubleList)

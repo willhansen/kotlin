@@ -11,9 +11,9 @@ import kotlin.test.assertEquals
 class NodeJsStackTraceParserKtTest {
     @Test
     fun parseNodeJsStackTrace() {
-        val parsed = parseNodeJsStackTrace(
+        konst parsed = parseNodeJsStackTrace(
             """
-AssertionError: Expected value to be true.
+AssertionError: Expected konstue to be true.
     at AssertionError_init_0 (/Users/jetbrains/IdeaProjects/mpplib2/build/tmp/expandedArchives/kotlin-stdlib-js-1.3-SNAPSHOT.jar_730a1b227513cf16a9b639e009a985fc/kotlin/exceptions.kt:102:37)
     at DefaultJsAsserter.failWithMessage_0 (/Users/jetbrains/IdeaProjects/mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:80:19)
     at DefaultJsAsserter.assertTrue_o10pc4${'$'} (/Users/jetbrains/IdeaProjects/mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:60:13)
@@ -29,7 +29,7 @@ AssertionError: Expected value to be true.
         assertEquals(
             """
 NodeJsStackTrace(
-message="AssertionError: Expected value to be true.",
+message="AssertionError: Expected konstue to be true.",
 stacktrace=[
 NodeJsStackTraceElement(className=AssertionError, methodName=init, fileName=/Users/jetbrains/IdeaProjects/mpplib2/build/tmp/expandedArchives/kotlin-stdlib-js-1.3-SNAPSHOT.jar_730a1b227513cf16a9b639e009a985fc/kotlin/exceptions.kt, lineNumber=102, colNumber=37)
 NodeJsStackTraceElement(className=DefaultJsAsserter, methodName=failWithMessage, fileName=/Users/jetbrains/IdeaProjects/mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt, lineNumber=80, colNumber=19)

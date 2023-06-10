@@ -6,7 +6,7 @@ class Foo {
 }
 
 suspend fun main() {
-    val retry = Foo()
+    konst retry = Foo()
     try {
         retry { 1 } // Before the fix: "Suspend function 'invoke' should be called only from a coroutine or another suspend function"
     } catch (e: Exception) { }

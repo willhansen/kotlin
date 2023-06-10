@@ -11,10 +11,10 @@ class Outer {
     class Nested(x: Int = 1, y: String = "")
 }
 
-sealed class A(val x: String? = null) {
+sealed class A(konst x: String? = null) {
     class C : A()
 }
 
 class ClassWithPrivateCtor private constructor(
-    public val property: Set<Int>
+    public konst property: Set<Int>
 )

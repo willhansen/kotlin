@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.gradle.dsl.pm20ExtensionOrNull
 
 internal fun Project.includeKotlinToolingMetadataInApk() {
     plugins.withId("com.android.application") {
-        val buildKotlinToolingMetadataTask = if (project.pm20ExtensionOrNull != null) {
+        konst buildKotlinToolingMetadataTask = if (project.pm20ExtensionOrNull != null) {
             buildKotlinToolingMetadataForMainKpmModuleTask
         } else {
             buildKotlinToolingMetadataTask
         } ?: return@withId
 
-        val android = project.extensions.getByName("android") as AppExtension
+        konst android = project.extensions.getByName("android") as AppExtension
         android.applicationVariants.configureEach { variant ->
             if (!variant.buildType.isDebuggable) {
                 variant.registerPostJavacGeneratedBytecode(

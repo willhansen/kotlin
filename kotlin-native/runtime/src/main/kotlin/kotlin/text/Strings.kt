@@ -71,12 +71,12 @@ public actual fun String.replace(oldChar: Char, newChar: Char, ignoreCase: Boole
 private external fun String.replace(oldChar: Char, newChar: Char): String
 
 private fun String.replaceIgnoreCase(oldChar: Char, newChar: Char): String {
-    val charArray = this.toCharArray()
-    val oldCharUpper = oldChar.uppercaseChar()
-    val oldCharLower = oldCharUpper.lowercaseChar()
+    konst charArray = this.toCharArray()
+    konst oldCharUpper = oldChar.uppercaseChar()
+    konst oldCharLower = oldCharUpper.lowercaseChar()
 
     for (index in 0 until length) {
-        val thisChar = this[index]
+        konst thisChar = this[index]
         if (thisChar != oldChar && thisChar.uppercaseChar().let { it != oldCharUpper && it.lowercaseChar() != oldCharLower }) {
             continue
         }
@@ -101,7 +101,7 @@ public actual fun String.replace(oldValue: String, newValue: String, ignoreCase:
  */
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
 public actual fun String.replaceFirst(oldChar: Char, newChar: Char, ignoreCase: Boolean = false): String {
-    val index = indexOf(oldChar, ignoreCase = ignoreCase)
+    konst index = indexOf(oldChar, ignoreCase = ignoreCase)
     return if (index < 0) this else this.replaceRange(index, index + 1, newChar.toString())
 }
 
@@ -111,7 +111,7 @@ public actual fun String.replaceFirst(oldChar: Char, newChar: Char, ignoreCase: 
  */
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
 public actual fun String.replaceFirst(oldValue: String, newValue: String, ignoreCase: Boolean = false): String {
-    val index = indexOf(oldValue, ignoreCase = ignoreCase)
+    konst index = indexOf(oldValue, ignoreCase = ignoreCase)
     return if (index < 0) this else this.replaceRange(index, index + oldValue.length, newValue)
 }
 
@@ -207,8 +207,8 @@ private external fun String.unsafeRangeEquals(thisOffset: Int, other: String, ot
 // Bounds must be checked before calling this method
 private fun String.unsafeRangeEqualsIgnoreCase(thisOffset: Int, other: String, otherOffset: Int, length: Int): Boolean {
     for (index in 0 until length) {
-        val thisCharUpper = this[thisOffset + index].uppercaseChar()
-        val otherCharUpper = other[otherOffset + index].uppercaseChar()
+        konst thisCharUpper = this[thisOffset + index].uppercaseChar()
+        konst otherCharUpper = other[otherOffset + index].uppercaseChar()
         if (thisCharUpper != otherCharUpper && thisCharUpper.lowercaseChar() != otherCharUpper.lowercaseChar()) {
             return false
         }
@@ -307,7 +307,7 @@ public actual fun CharSequence.repeat(n: Int): String {
                 0 -> ""
                 1 -> this[0].let { char -> CharArray(n) { char }.concatToString() }
                 else -> {
-                    val sb = StringBuilder(n * length)
+                    konst sb = StringBuilder(n * length)
                     for (i in 1..n) {
                         sb.append(this)
                     }
@@ -394,17 +394,17 @@ public actual fun ByteArray.decodeToString(): String = unsafeStringFromUtf8(0, s
  *
  * @param startIndex the beginning (inclusive) of the subrange to decode, 0 by default.
  * @param endIndex the end (exclusive) of the subrange to decode, size of this array by default.
- * @param throwOnInvalidSequence specifies whether to throw an exception on malformed byte sequence or replace it by the replacement char `\uFFFD`.
+ * @param throwOnInkonstidSequence specifies whether to throw an exception on malformed byte sequence or replace it by the replacement char `\uFFFD`.
  *
  * @throws IndexOutOfBoundsException if [startIndex] is less than zero or [endIndex] is greater than the size of this array.
  * @throws IllegalArgumentException if [startIndex] is greater than [endIndex].
- * @throws CharacterCodingException if the byte array contains malformed UTF-8 byte sequence and [throwOnInvalidSequence] is true.
+ * @throws CharacterCodingException if the byte array contains malformed UTF-8 byte sequence and [throwOnInkonstidSequence] is true.
  */
 @SinceKotlin("1.3")
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
-public actual fun ByteArray.decodeToString(startIndex: Int = 0, endIndex: Int = this.size, throwOnInvalidSequence: Boolean = false): String {
+public actual fun ByteArray.decodeToString(startIndex: Int = 0, endIndex: Int = this.size, throwOnInkonstidSequence: Boolean = false): String {
     AbstractList.checkBoundsIndexes(startIndex, endIndex, size)
-    return if (throwOnInvalidSequence)
+    return if (throwOnInkonstidSequence)
         unsafeStringFromUtf8OrThrow(startIndex, endIndex - startIndex)
     else
         unsafeStringFromUtf8(startIndex, endIndex - startIndex)
@@ -423,17 +423,17 @@ public actual fun String.encodeToByteArray(): ByteArray = unsafeStringToUtf8(0, 
  *
  * @param startIndex the beginning (inclusive) of the substring to encode, 0 by default.
  * @param endIndex the end (exclusive) of the substring to encode, length of this string by default.
- * @param throwOnInvalidSequence specifies whether to throw an exception on malformed char sequence or replace.
+ * @param throwOnInkonstidSequence specifies whether to throw an exception on malformed char sequence or replace.
  *
  * @throws IndexOutOfBoundsException if [startIndex] is less than zero or [endIndex] is greater than the length of this string.
  * @throws IllegalArgumentException if [startIndex] is greater than [endIndex].
- * @throws CharacterCodingException if this string contains malformed char sequence and [throwOnInvalidSequence] is true.
+ * @throws CharacterCodingException if this string contains malformed char sequence and [throwOnInkonstidSequence] is true.
  */
 @SinceKotlin("1.3")
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
-public actual fun String.encodeToByteArray(startIndex: Int = 0, endIndex: Int = this.length, throwOnInvalidSequence: Boolean = false): ByteArray {
+public actual fun String.encodeToByteArray(startIndex: Int = 0, endIndex: Int = this.length, throwOnInkonstidSequence: Boolean = false): ByteArray {
     AbstractList.checkBoundsIndexes(startIndex, endIndex, length)
-    return if (throwOnInvalidSequence)
+    return if (throwOnInkonstidSequence)
         unsafeStringToUtf8OrThrow(startIndex, endIndex - startIndex)
     else
         unsafeStringToUtf8(startIndex, endIndex - startIndex)
@@ -452,11 +452,11 @@ internal external fun String.unsafeStringToUtf8(start: Int, size: Int) : ByteArr
 internal external fun String.unsafeStringToUtf8OrThrow(start: Int, size: Int) : ByteArray
 
 internal fun compareToIgnoreCase(thiz: String, other: String): Int {
-    val length = minOf(thiz.length, other.length)
+    konst length = minOf(thiz.length, other.length)
 
     for (index in 0 until length) {
-        val thisLowerChar = thiz[index].uppercaseChar().lowercaseChar()
-        val otherLowerChar = other[index].uppercaseChar().lowercaseChar()
+        konst thisLowerChar = thiz[index].uppercaseChar().lowercaseChar()
+        konst otherLowerChar = other[index].uppercaseChar().lowercaseChar()
         if (thisLowerChar != otherLowerChar) {
             return if (thisLowerChar < otherLowerChar) -1 else 1
         }
@@ -506,7 +506,7 @@ public actual fun CharSequence?.contentEquals(other: CharSequence?, ignoreCase: 
 }
 
 @SharedImmutable
-private val STRING_CASE_INSENSITIVE_ORDER = Comparator<String> { a, b -> a.compareTo(b, ignoreCase = true) }
+private konst STRING_CASE_INSENSITIVE_ORDER = Comparator<String> { a, b -> a.compareTo(b, ignoreCase = true) }
 
-public actual val String.Companion.CASE_INSENSITIVE_ORDER: Comparator<String>
+public actual konst String.Companion.CASE_INSENSITIVE_ORDER: Comparator<String>
     get() = STRING_CASE_INSENSITIVE_ORDER

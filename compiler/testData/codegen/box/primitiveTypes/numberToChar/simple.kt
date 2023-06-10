@@ -4,8 +4,8 @@
 // ISSUE: KT-46465
 // WITH_STDLIB
 
-class MyNumber(val value: Int) : Number() {
-    override fun toInt(): Int = value
+class MyNumber(konst konstue: Int) : Number() {
+    override fun toInt(): Int = konstue
 
     override fun toByte(): Byte = toInt().toByte()
     override fun toDouble(): Double = toInt().toDouble()
@@ -15,6 +15,6 @@ class MyNumber(val value: Int) : Number() {
 }
 
 fun box(): String {
-    val x = MyNumber('*'.code).toChar()
+    konst x = MyNumber('*'.code).toChar()
     return if (x == '*') "OK" else "Fail: $x"
 }

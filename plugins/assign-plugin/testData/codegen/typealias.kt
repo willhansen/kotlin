@@ -27,8 +27,8 @@ data class KotlinClassStringProperty(private var v: String) {
 }
 
 fun `should work with annotation on Kotlin interface`(): String {
-    data class Task(val input: KotlinStringProperty)
-    val task = Task(KotlinStringProperty("Fail"))
+    data class Task(konst input: KotlinStringProperty)
+    konst task = Task(KotlinStringProperty("Fail"))
     task.input = "OK"
 
     return if (task.input.get() != "OK") {
@@ -39,8 +39,8 @@ fun `should work with annotation on Kotlin interface`(): String {
 }
 
 fun `should work with annotation on Kotlin class`(): String {
-    data class Task(val input: KotlinClassStringProperty)
-    val task = Task(KotlinClassStringProperty("Fail"))
+    data class Task(konst input: KotlinClassStringProperty)
+    konst task = Task(KotlinClassStringProperty("Fail"))
     task.input = "OK"
 
     return if (task.input.get() != "OK") {

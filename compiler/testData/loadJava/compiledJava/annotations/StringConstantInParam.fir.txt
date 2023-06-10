@@ -2,10 +2,10 @@ public abstract interface StringConstantInParam : R|kotlin/Any| {
     public final static field HEL: R|kotlin/String| = String(hel)
 
     public final annotation class Anno : R|kotlin/Annotation| {
-        public constructor(value: R|kotlin/String|): R|test/StringConstantInParam.Anno|
+        public constructor(konstue: R|kotlin/String|): R|test/StringConstantInParam.Anno|
 
     }
-    @R|test/StringConstantInParam.Anno|(value = String(hello)) public open class Class : R|kotlin/Any| {
+    @R|test/StringConstantInParam.Anno|(konstue = String(hello)) public open class Class : R|kotlin/Any| {
         public constructor(): R|test/StringConstantInParam.Class|
 
     }

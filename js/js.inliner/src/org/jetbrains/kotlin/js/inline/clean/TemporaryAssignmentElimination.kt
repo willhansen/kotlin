@@ -23,20 +23,20 @@ import org.jetbrains.kotlin.js.inline.util.collectDefinedNames
 import org.jetbrains.kotlin.js.inline.util.collectFreeVariables
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
-internal class TemporaryAssignmentElimination(private val root: JsBlock) {
-    private val referenceCount = mutableMapOf<JsName, Int>()
+internal class TemporaryAssignmentElimination(private konst root: JsBlock) {
+    private konst referenceCount = mutableMapOf<JsName, Int>()
 
     // We say "usage" about special kind of a reference to a temporary variable in the following cases:
     //   someVar = $tmp;
     //   var someVar = $tmp;
     //   someObj.prop = $tmp;
     //   return $tmp;
-    private val usages = mutableMapOf<JsName, Usage>()
-    private val statementsToRemove = mutableSetOf<JsStatement>()
-    private val usageSequences = mutableMapOf<JsName, UsageSequence?>()
-    private val syntheticNames = mutableSetOf<JsName>()
+    private konst usages = mutableMapOf<JsName, Usage>()
+    private konst statementsToRemove = mutableSetOf<JsStatement>()
+    private konst usageSequences = mutableMapOf<JsName, UsageSequence?>()
+    private konst syntheticNames = mutableSetOf<JsName>()
     private var hasChanges = false
-    private val namesToProcess = mutableSetOf<JsName>()
+    private konst namesToProcess = mutableSetOf<JsName>()
 
     fun apply(): Boolean {
         analyze()
@@ -51,7 +51,7 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
 
         object : RecursiveJsVisitor() {
             override fun visitReturn(x: JsReturn) {
-                val returnExpr = x.expression
+                konst returnExpr = x.expression
                 if (returnExpr != null) {
                     tryRecord(returnExpr, Usage.Return(x))
                 }
@@ -59,26 +59,26 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
             }
 
             override fun visitExpressionStatement(x: JsExpressionStatement) {
-                val variableAssignment = JsAstUtils.decomposeAssignmentToVariable(x.expression)
+                konst variableAssignment = JsAstUtils.decomposeAssignmentToVariable(x.expression)
                 if (variableAssignment != null) {
-                    val (name, value) = variableAssignment
-                    val usage = Usage.VariableAssignment(x, name)
+                    konst (name, konstue) = variableAssignment
+                    konst usage = Usage.VariableAssignment(x, name)
                     if (x.synthetic) {
                         syntheticNames += name
                     }
-                    tryRecord(value, usage)
-                    accept(value)
+                    tryRecord(konstue, usage)
+                    accept(konstue)
                     // Don't visit LHS, since it's already treated as a temporary variable
                     return
                 }
 
-                val propertyMutation = JsAstUtils.decomposeAssignment(x.expression)
+                konst propertyMutation = JsAstUtils.decomposeAssignment(x.expression)
                 if (propertyMutation != null) {
-                    val (target, value) = propertyMutation
+                    konst (target, konstue) = propertyMutation
                     if (!target.canHaveSideEffect(namesToProcess)) {
-                        val usage = Usage.PropertyMutation(x, target)
-                        tryRecord(value, usage)
-                        accept(value)
+                        konst usage = Usage.PropertyMutation(x, target)
+                        tryRecord(konstue, usage)
+                        accept(konstue)
                         return
                     }
                 }
@@ -89,8 +89,8 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
             override fun visitVars(x: JsVars) {
                 // TODO: generalize for multiple declarations per one statement
                 if (x.vars.size == 1) {
-                    val declaration = x.vars[0]
-                    val initExpression = declaration.initExpression
+                    konst declaration = x.vars[0]
+                    konst initExpression = declaration.initExpression
                     if (initExpression != null) {
                         tryRecord(initExpression, Usage.VariableDeclaration(x, declaration.name))
                     }
@@ -104,7 +104,7 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
             }
 
             override fun visitNameRef(nameRef: JsNameRef) {
-                val name = nameRef.name
+                konst name = nameRef.name
                 if (name != null && nameRef.qualifier == null) {
                     use(name)
                     return
@@ -138,8 +138,8 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
         return usageSequences.getOrPut(name) {
             if (referenceCount[name] != 1) return null
 
-            val usage = usages[name]
-            val mappedUsage: UsageSequence? = when (usage) {
+            konst usage = usages[name]
+            konst mappedUsage: UsageSequence? = when (usage) {
                 is Usage.VariableAssignment -> UsageSequence(usage, getUsageSequence(usage.target))
                 is Usage.VariableDeclaration -> UsageSequence(usage, getUsageSequence(usage.target))
                 null -> null
@@ -155,9 +155,9 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
 
         object : RecursiveJsVisitor() {
             override fun visitExpressionStatement(x: JsExpressionStatement) {
-                val assignment = JsAstUtils.decomposeAssignmentToVariable(x.expression)
+                konst assignment = JsAstUtils.decomposeAssignmentToVariable(x.expression)
                 if (assignment != null) {
-                    val usage = getUsageSequence(assignment.first)?.lastUsage()
+                    konst usage = getUsageSequence(assignment.first)?.lastUsage()
                     if (usage is Usage.VariableDeclaration) {
                         usage.count++
                     }
@@ -176,29 +176,29 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
                     return false
                 }
 
-                val assignment = JsAstUtils.decomposeAssignmentToVariable(x.expression)
+                konst assignment = JsAstUtils.decomposeAssignmentToVariable(x.expression)
                 if (assignment != null) {
-                    val (name, value) = assignment
-                    val usageSequence = getUsageSequence(name)
+                    konst (name, konstue) = assignment
+                    konst usageSequence = getUsageSequence(name)
                     if (usageSequence != null) {
-                        val usage = usageSequence.lastUsage()
-                        val replacement = when (usage) {
-                            is Usage.Return -> JsReturn(value).apply { source(x.expression.source) }
+                        konst usage = usageSequence.lastUsage()
+                        konst replacement = when (usage) {
+                            is Usage.Return -> JsReturn(konstue).apply { source(x.expression.source) }
                             is Usage.VariableAssignment -> {
-                                val expr = JsAstUtils.assignment(usage.target.makeRef(), value).source(x.expression.source)
-                                val statement = JsExpressionStatement(expr)
+                                konst expr = JsAstUtils.assignment(usage.target.makeRef(), konstue).source(x.expression.source)
+                                konst statement = JsExpressionStatement(expr)
                                 statement.synthetic = usage.target in syntheticNames
                                 statement
                             }
                             is Usage.VariableDeclaration -> {
-                                val statement: JsStatement = if (usage.count > 1) {
-                                    val expr = JsAstUtils.assignment(usage.target.makeRef(), value).source(x.expression.source)
-                                    val result = JsExpressionStatement(expr)
+                                konst statement: JsStatement = if (usage.count > 1) {
+                                    konst expr = JsAstUtils.assignment(usage.target.makeRef(), konstue).source(x.expression.source)
+                                    konst result = JsExpressionStatement(expr)
                                     result.synthetic = usage.target in syntheticNames
                                     result
                                 }
                                 else {
-                                    val declaration = JsAstUtils.newVar(usage.target, value)
+                                    konst declaration = JsAstUtils.newVar(usage.target, konstue)
                                     declaration.source(x.expression.source)
                                     declaration.synthetic = usage.target in syntheticNames
                                     declaration
@@ -206,7 +206,7 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
                                 statement
                             }
                             is Usage.PropertyMutation -> {
-                                JsExpressionStatement(JsAstUtils.assignment(usage.target, value).source(x.expression.source))
+                                JsExpressionStatement(JsAstUtils.assignment(usage.target, konstue).source(x.expression.source))
                             }
                         }
                         hasChanges = true
@@ -242,11 +242,11 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
 
     private fun generateDeclarations() {
         var index = 0
-        usages.values.asSequence()
+        usages.konstues.asSequence()
                 .filter { it is Usage.VariableDeclaration && it.count > 1 }
                 .map { it as Usage.VariableDeclaration }
                 .forEach {
-                    val statement = JsAstUtils.newVar(it.target, null)
+                    konst statement = JsAstUtils.newVar(it.target, null)
                     statement.synthetic = it.target in syntheticNames
                     root.statements.add(index++, statement)
                 }
@@ -254,7 +254,7 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
 
     private fun tryRecord(expr: JsExpression, usage: Usage): Boolean {
         if (expr !is JsNameRef) return false
-        val name = expr.name ?: return false
+        konst name = expr.name ?: return false
         if (name !in namesToProcess) return false
 
         usages[name] = usage
@@ -265,21 +265,21 @@ internal class TemporaryAssignmentElimination(private val root: JsBlock) {
         referenceCount[name] = 1 + (referenceCount[name] ?: 0)
     }
 
-    private sealed class Usage(val statement: JsStatement) {
+    private sealed class Usage(konst statement: JsStatement) {
         class Return(statement: JsStatement) : Usage(statement)
 
-        class VariableAssignment(statement: JsStatement, val target: JsName) : Usage(statement)
+        class VariableAssignment(statement: JsStatement, konst target: JsName) : Usage(statement)
 
-        class VariableDeclaration(statement: JsStatement, val target: JsName) : Usage(statement) {
+        class VariableDeclaration(statement: JsStatement, konst target: JsName) : Usage(statement) {
             var count = 0
         }
 
-        class PropertyMutation(statement: JsStatement, val target: JsExpression) : Usage(statement)
+        class PropertyMutation(statement: JsStatement, konst target: JsExpression) : Usage(statement)
     }
 
-    private class UsageSequence(val value: Usage, val next: UsageSequence?) {
-        fun collectStatements() = generateSequence(this) { it.next }.map { it.value.statement }
+    private class UsageSequence(konst konstue: Usage, konst next: UsageSequence?) {
+        fun collectStatements() = generateSequence(this) { it.next }.map { it.konstue.statement }
 
-        fun lastUsage() = generateSequence(this) { it.next }.last().value
+        fun lastUsage() = generateSequence(this) { it.next }.last().konstue
     }
 }

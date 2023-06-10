@@ -9,7 +9,7 @@ FILE: returnFromWhen.kt
         R|<local>/name|.R|kotlin/String.length|
     }
     public final fun test_2(name: R|kotlin/String?|): R|kotlin/Unit| {
-        when (lval s: R|kotlin/String?| = R|<local>/name|) {
+        when (lkonst s: R|kotlin/String?| = R|<local>/name|) {
             ==($subj$, Null(null)) ->  {
                 ^test_2 Unit
             }

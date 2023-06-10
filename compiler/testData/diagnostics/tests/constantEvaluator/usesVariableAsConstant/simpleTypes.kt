@@ -1,23 +1,23 @@
 package test
 
-// val prop1: false
-<!DEBUG_INFO_CONSTANT_VALUE("false")!>val prop1 = 1<!>
+// konst prop1: false
+<!DEBUG_INFO_CONSTANT_VALUE("false")!>konst prop1 = 1<!>
 
-// val prop2: false
-<!DEBUG_INFO_CONSTANT_VALUE("false")!>val prop2 = "hello"<!>
+// konst prop2: false
+<!DEBUG_INFO_CONSTANT_VALUE("false")!>konst prop2 = "hello"<!>
 
-// val prop3: false
-<!DEBUG_INFO_CONSTANT_VALUE("false")!>val prop3 = true<!>
+// konst prop3: false
+<!DEBUG_INFO_CONSTANT_VALUE("false")!>konst prop3 = true<!>
 
-// val prop4: false
-<!DEBUG_INFO_CONSTANT_VALUE("false")!>val prop4 = false<!>
+// konst prop4: false
+<!DEBUG_INFO_CONSTANT_VALUE("false")!>konst prop4 = false<!>
 
-// val prop5: false
-<!DEBUG_INFO_CONSTANT_VALUE("false")!>val prop5 = -7453<!>
+// konst prop5: false
+<!DEBUG_INFO_CONSTANT_VALUE("false")!>konst prop5 = -7453<!>
 
-// val prop6: false
-<!DEBUG_INFO_CONSTANT_VALUE("false")!>val prop6 = 3.56<!>
+// konst prop6: false
+<!DEBUG_INFO_CONSTANT_VALUE("false")!>konst prop6 = 3.56<!>
 
-// val prop7: false
-<!DEBUG_INFO_CONSTANT_VALUE("false")!>val prop7 = 5464564L<!>
+// konst prop7: false
+<!DEBUG_INFO_CONSTANT_VALUE("false")!>konst prop7 = 5464564L<!>
 

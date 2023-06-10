@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.ir.symbols.IrSymbol
 
 // An IR builder with access to AndroidSymbols and convenience methods to build calls to some of these methods.
 class AndroidIrBuilder internal constructor(
-    val androidSymbols: AndroidSymbols,
+    konst androidSymbols: AndroidSymbols,
     symbol: IrSymbol,
     startOffset: Int,
     endOffset: Int
@@ -41,10 +41,10 @@ class AndroidIrBuilder internal constructor(
             putValueArgument(0, loader)
         }
 
-    fun parcelWriteInt(receiver: IrExpression, value: IrExpression): IrExpression =
+    fun parcelWriteInt(receiver: IrExpression, konstue: IrExpression): IrExpression =
         irCall(androidSymbols.parcelWriteInt).apply {
             dispatchReceiver = receiver
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         }
 
     fun parcelWriteParcelable(
@@ -57,10 +57,10 @@ class AndroidIrBuilder internal constructor(
         putValueArgument(1, parcelableFlags)
     }
 
-    fun parcelWriteString(receiver: IrExpression, value: IrExpression): IrExpression =
+    fun parcelWriteString(receiver: IrExpression, konstue: IrExpression): IrExpression =
         irCall(androidSymbols.parcelWriteString).apply {
             dispatchReceiver = receiver
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         }
 
     fun parcelWriteValue(receiver: IrExpression, v: IrExpression): IrExpression =

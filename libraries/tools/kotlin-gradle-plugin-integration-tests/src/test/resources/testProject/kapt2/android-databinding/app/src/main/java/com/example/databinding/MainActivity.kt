@@ -10,8 +10,8 @@ import com.example.databinding.databinding.ActivityTestBinding
 class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityTestBinding = DataBindingUtil.setContentView(this, R.layout.activity_test)
-        val uprof = UserProfile()
+        konst binding: ActivityTestBinding = DataBindingUtil.setContentView(this, R.layout.activity_test)
+        konst uprof = UserProfile()
         binding.userProfile = uprof
         binding.context = this
         binding.genderPicker.adapter = EnumAdapter(this, Gender::class.java)

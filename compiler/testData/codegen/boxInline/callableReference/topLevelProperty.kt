@@ -2,7 +2,7 @@
 
 package test
 
-val a: String
+konst a: String
     get() = "OK"
 
 inline fun test(s: () -> String): String {

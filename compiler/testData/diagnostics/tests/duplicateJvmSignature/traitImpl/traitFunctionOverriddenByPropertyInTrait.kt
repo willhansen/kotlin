@@ -3,6 +3,6 @@ interface T {
 }
 
 interface <!CONFLICTING_JVM_DECLARATIONS!>C<!> : T {
-    val x: Int
+    konst x: Int
         get() = 1
 }

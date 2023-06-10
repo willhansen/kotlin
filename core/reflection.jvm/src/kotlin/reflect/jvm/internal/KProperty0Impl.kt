@@ -28,19 +28,19 @@ internal open class KProperty0Impl<out V> : KProperty0<V>, KPropertyImpl<V> {
         container, name, signature, boundReceiver
     )
 
-    private val _getter = lazy(PUBLICATION) { Getter(this) }
+    private konst _getter = lazy(PUBLICATION) { Getter(this) }
 
-    override val getter: Getter<V> get() = _getter.value
+    override konst getter: Getter<V> get() = _getter.konstue
 
     override fun get(): V = getter.call()
 
-    private val delegateValue = lazy(PUBLICATION) { getDelegateImpl(computeDelegateSource(), null, null) }
+    private konst delegateValue = lazy(PUBLICATION) { getDelegateImpl(computeDelegateSource(), null, null) }
 
-    override fun getDelegate(): Any? = delegateValue.value
+    override fun getDelegate(): Any? = delegateValue.konstue
 
     override fun invoke(): V = get()
 
-    class Getter<out R>(override val property: KProperty0Impl<R>) : KPropertyImpl.Getter<R>(), KProperty0.Getter<R> {
+    class Getter<out R>(override konst property: KProperty0Impl<R>) : KPropertyImpl.Getter<R>(), KProperty0.Getter<R> {
         override fun invoke(): R = property.get()
     }
 }
@@ -52,13 +52,13 @@ internal class KMutableProperty0Impl<V> : KProperty0Impl<V>, KMutableProperty0<V
         container, name, signature, boundReceiver
     )
 
-    private val _setter = lazy(PUBLICATION) { Setter(this) }
+    private konst _setter = lazy(PUBLICATION) { Setter(this) }
 
-    override val setter: Setter<V> get() = _setter.value
+    override konst setter: Setter<V> get() = _setter.konstue
 
-    override fun set(value: V) = setter.call(value)
+    override fun set(konstue: V) = setter.call(konstue)
 
-    class Setter<R>(override val property: KMutableProperty0Impl<R>) : KPropertyImpl.Setter<R>(), KMutableProperty0.Setter<R> {
-        override fun invoke(value: R): Unit = property.set(value)
+    class Setter<R>(override konst property: KMutableProperty0Impl<R>) : KPropertyImpl.Setter<R>(), KMutableProperty0.Setter<R> {
+        override fun invoke(konstue: R): Unit = property.set(konstue)
     }
 }

@@ -16,14 +16,14 @@ public abstract class Enum<E : Enum<E>>(name: String, ordinal: Int): Comparable<
     /**
      * Returns the name of this enum constant, exactly as declared in its enum declaration.
      */
-    @kotlin.internal.IntrinsicConstEvaluation
-    public final val name: String
+    @kotlin.internal.IntrinsicConstEkonstuation
+    public final konst name: String
 
     /**
      * Returns the ordinal of this enumeration constant (its position in its enum declaration, where the initial constant
      * is assigned an ordinal of zero).
      */
-    public final val ordinal: Int
+    public final konst ordinal: Int
 
     public override final fun compareTo(other: E): Int
 
@@ -40,12 +40,12 @@ public abstract class Enum<E : Enum<E>>(name: String, ordinal: Int): Comparable<
     /**
      * Returns an array containing the constants of this enum type, in the order they're declared.
      * This method may be used to iterate over the constants.
-     * @values
+     * @konstues
      */
 
     /**
      * Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
      * @throws IllegalArgumentException if this enum type has no constant with the specified name
-     * @valueOf
+     * @konstueOf
      */
 }

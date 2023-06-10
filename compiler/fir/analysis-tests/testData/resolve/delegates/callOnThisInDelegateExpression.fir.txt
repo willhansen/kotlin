@@ -15,7 +15,7 @@ FILE: callOnThisInDelegateExpression.kt
             super<R|kotlin/Any|>()
         }
 
-        public abstract val type: R|java/lang/Class<R>|
+        public abstract konst type: R|java/lang/Class<R>|
             public get(): R|java/lang/Class<R>|
 
         public final var bundle: R|R?|by this@R|/SomeImpl|.R|/delegateOf|<R|SomeImpl<R>|, R|R|>(this@R|/SomeImpl|.R|/SomeImpl.type|).R|SubstitutionOverride</Delegate.resource: R|Delegate<SomeImpl<R>, R?>|>|(this@R|/SomeImpl|.R|/SomeImpl.getFactory|<R|SomeImpl<R>|, R|R|>())

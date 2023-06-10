@@ -1,14 +1,14 @@
 package
 
-public const val aConst: kotlin.Int = 1
-public const val bConst: kotlin.Int = 2
-public const val boolVal: kotlin.Boolean = true
-public const val stringInterpolation: kotlin.String = "Result: true"
+public const konst aConst: kotlin.Int = 1
+public const konst bConst: kotlin.Int = 2
+public const konst boolVal: kotlin.Boolean = true
+public const konst stringInterpolation: kotlin.String = "Result: true"
 
 public object A {
     private constructor A()
-    public const final val boolVal: kotlin.Boolean = true
-    public const final val recursive1: kotlin.Int
+    public const final konst boolVal: kotlin.Boolean = true
+    public const final konst recursive1: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -22,8 +22,8 @@ public final class B {
 
     public companion object Companion {
         private constructor Companion()
-        public const final val boolVal: kotlin.Boolean = true
-        public const final val recursive2: kotlin.Int
+        public const final konst boolVal: kotlin.Boolean = true
+        public const final konst recursive2: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

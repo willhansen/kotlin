@@ -1,8 +1,8 @@
 // !LANGUAGE: +ContextReceivers
 
-class A<T>(val a: T)
-class B(val b: Any)
-class C(val c: Any)
+class A<T>(konst a: T)
+class B(konst b: Any)
+class C(konst c: Any)
 
 context(A<String>, B) var p: Int
     get() {
@@ -11,11 +11,11 @@ context(A<String>, B) var p: Int
         <!NO_THIS!>this<!>
         return 1
     }
-    set(value) {
+    set(konstue) {
         this@A.a.length
         this@B.b
         <!NO_THIS!>this<!>
-        <!UNRESOLVED_REFERENCE!>field<!> = value
+        <!UNRESOLVED_REFERENCE!>field<!> = konstue
     }
 
 context(A<Int>, A<String>, B) var p: Int
@@ -26,14 +26,14 @@ context(A<Int>, A<String>, B) var p: Int
         <!NO_THIS!>this<!>
         return 1
     }
-    set(value) {
+    set(konstue) {
         this<!AMBIGUOUS_LABEL!>@A<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>a<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>length<!>
         this@B.b
         <!NO_THIS!>this<!>
-        <!UNRESOLVED_REFERENCE!>field<!> = value
+        <!UNRESOLVED_REFERENCE!>field<!> = konstue
     }
 
-context(A<Int>, A<String>, B) val C.p: Int
+context(A<Int>, A<String>, B) konst C.p: Int
     get() {
         this<!AMBIGUOUS_LABEL!>@A<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>a<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>length<!>
         this@B.b

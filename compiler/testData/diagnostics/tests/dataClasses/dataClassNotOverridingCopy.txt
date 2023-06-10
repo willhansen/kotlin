@@ -2,8 +2,8 @@ package
 
 public final data class Test : WithCopy<kotlin.String> {
     public constructor Test(/*0*/ str: kotlin.String, /*1*/ int: kotlin.Int)
-    public final val int: kotlin.Int
-    public final val str: kotlin.String
+    public final konst int: kotlin.Int
+    public final konst str: kotlin.String
     public final operator /*synthesized*/ fun component1(): kotlin.String
     public final operator /*synthesized*/ fun component2(): kotlin.Int
     public open override /*1*/ fun copy(/*0*/ str: kotlin.String): Test

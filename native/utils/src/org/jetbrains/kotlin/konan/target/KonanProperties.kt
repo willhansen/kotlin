@@ -30,18 +30,18 @@ interface TargetableExternalStorage {
     fun hostList(key: String): List<String> 
     fun hostTargetString(key: String): String? 
     fun hostTargetList(key: String): List<String> 
-    fun absolute(value: String?): String
+    fun absolute(konstue: String?): String
     fun downloadDependencies()
 }
 
-abstract class KonanPropertiesLoader(override val target: KonanTarget,
-                                     val properties: Properties,
-                                     private val baseDir: String? = null,
-                                     private val host: KonanTarget = HostManager.host) : Configurables {
-    private val predefinedLlvmDistributions: Set<String> =
+abstract class KonanPropertiesLoader(override konst target: KonanTarget,
+                                     konst properties: Properties,
+                                     private konst baseDir: String? = null,
+                                     private konst host: KonanTarget = HostManager.host) : Configurables {
+    private konst predefinedLlvmDistributions: Set<String> =
             properties.propertyList("predefinedLlvmDistributions").toSet()
 
-    private val predefinedLibffiVersions: Set<String> =
+    private konst predefinedLibffiVersions: Set<String> =
             properties.propertyList("predefinedLibffiVersions").toSet()
 
     private fun getPredefinedDependencyOrNull(
@@ -50,7 +50,7 @@ abstract class KonanPropertiesLoader(override val target: KonanTarget,
             predefinedDependencies: Set<String>
     ): String? {
         // Store into variable to avoid repeated resolve.
-        val dependency = dependencyAccessor()
+        konst dependency = dependencyAccessor()
                 ?: error("Undefined $dependencyName!")
         return when (dependency) {
             in predefinedDependencies -> dependency
@@ -63,7 +63,7 @@ abstract class KonanPropertiesLoader(override val target: KonanTarget,
             getPredefinedDependencyOrNull("libffi version", this::libffiDir, predefinedLibffiVersions)
     )
 
-    open val dependencies: List<String>
+    open konst dependencies: List<String>
         get() = hostTargetList("dependencies") + compilerDependencies()
 
     override fun downloadDependencies() {
@@ -84,9 +84,9 @@ abstract class KonanPropertiesLoader(override val target: KonanTarget,
     override fun hostTargetList(key: String): List<String> 
         = properties.hostTargetList(key, target, host)
 
-    override fun absolute(value: String?): String =
-            dependencyProcessor!!.resolve(value!!).absolutePath
-    private val dependencyProcessor  by lazy {
+    override fun absolute(konstue: String?): String =
+            dependencyProcessor!!.resolve(konstue!!).absolutePath
+    private konst dependencyProcessor  by lazy {
         baseDir?.let {
             DependencyProcessor(
                     dependenciesRoot = File(baseDir),

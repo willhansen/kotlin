@@ -19,22 +19,22 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtScript
 import javax.swing.Icon
 
-abstract class KtLightClassForScript(val script: KtScript) : KtLightClassBase(script.manager) {
-    private val modifierList: PsiModifierList = LightModifierList(
+abstract class KtLightClassForScript(konst script: KtScript) : KtLightClassBase(script.manager) {
+    private konst modifierList: PsiModifierList = LightModifierList(
         manager,
         KotlinLanguage.INSTANCE,
         PsiModifier.PUBLIC, PsiModifier.FINAL
     )
 
-    private val scriptImplementsList: LightEmptyImplementsList = LightEmptyImplementsList(manager)
+    private konst scriptImplementsList: LightEmptyImplementsList = LightEmptyImplementsList(manager)
 
-    private val scriptExtendsList: PsiReferenceList by lazyPub {
+    private konst scriptExtendsList: PsiReferenceList by lazyPub {
         KotlinLightReferenceListBuilder(manager, PsiReferenceList.Role.EXTENDS_LIST).also {
             it.addReference("kotlin.script.templates.standard.ScriptTemplateWithArgs")
         }
     }
 
-    private val _containingFile by lazyPub {
+    private konst _containingFile by lazyPub {
         FakeFileForLightClass(
             script.containingKtFile,
             lightClass = this,
@@ -42,9 +42,9 @@ abstract class KtLightClassForScript(val script: KtScript) : KtLightClassBase(sc
         )
     }
 
-    override val kotlinOrigin: KtClassOrObject? get() = null
+    override konst kotlinOrigin: KtClassOrObject? get() = null
 
-    val fqName: FqName get() = script.fqName
+    konst fqName: FqName get() = script.fqName
 
     override fun getModifierList() = modifierList
 
@@ -90,14 +90,14 @@ abstract class KtLightClassForScript(val script: KtScript) : KtLightClassBase(sc
 
     override fun getNavigationElement() = script
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean =
+    override fun isEquikonstentTo(another: PsiElement?): Boolean =
         equals(another) ||
                 (another is KtLightClassForScript && fqName == another.fqName)
 
     override fun getElementIcon(flags: Int): Icon? =
         throw UnsupportedOperationException("This should be done by KotlinIconProvider")
 
-    override val originKind: LightClassOriginKind get() = LightClassOriginKind.SOURCE
+    override konst originKind: LightClassOriginKind get() = LightClassOriginKind.SOURCE
 
     override fun getLBrace(): PsiElement? = null
 
@@ -138,7 +138,7 @@ abstract class KtLightClassForScript(val script: KtScript) : KtLightClassBase(sc
             return false
         }
 
-        val lightClass = other as? KtLightClassForScript ?: return false
+        konst lightClass = other as? KtLightClassForScript ?: return false
         if (this === other) return true
 
         if (script != lightClass.script) return false

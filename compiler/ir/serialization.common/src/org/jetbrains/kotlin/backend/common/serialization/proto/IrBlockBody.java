@@ -30,7 +30,7 @@ public final class IrBlockBody extends
   private IrBlockBody(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -63,10 +63,10 @@ public final class IrBlockBody extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -87,7 +87,7 @@ public final class IrBlockBody extends
     public IrBlockBody parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrBlockBody(input, extensionRegistry);
     }
   };
@@ -184,23 +184,23 @@ public final class IrBlockBody extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody parseFrom(java.io.InputStream input)
@@ -330,7 +330,7 @@ public final class IrBlockBody extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -373,12 +373,12 @@ public final class IrBlockBody extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement statement = 1;</code>
      */
     public Builder setStatement(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureStatementIsMutable();
-      statement_.set(index, value);
+      statement_.set(index, konstue);
 
       return this;
     }
@@ -395,12 +395,12 @@ public final class IrBlockBody extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement statement = 1;</code>
      */
-    public Builder addStatement(org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement value) {
-      if (value == null) {
+    public Builder addStatement(org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureStatementIsMutable();
-      statement_.add(value);
+      statement_.add(konstue);
 
       return this;
     }
@@ -408,12 +408,12 @@ public final class IrBlockBody extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement statement = 1;</code>
      */
     public Builder addStatement(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureStatementIsMutable();
-      statement_.add(index, value);
+      statement_.add(index, konstue);
 
       return this;
     }
@@ -441,10 +441,10 @@ public final class IrBlockBody extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement statement = 1;</code>
      */
     public Builder addAllStatement(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement> konstues) {
       ensureStatementIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, statement_);
+          konstues, statement_);
 
       return this;
     }

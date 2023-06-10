@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtTypeParameterSymbol
 import org.jetbrains.kotlin.name.Name
 
 public interface KtPossiblyNamedSymbol : KtSymbol {
-    public val name: Name?
+    public konst name: Name?
 }
 
 public interface KtNamedSymbol : KtPossiblyNamedSymbol {
-    override val name: Name
+    override konst name: Name
 }
 
 public interface KtSymbolWithTypeParameters : KtSymbol {
-    public val typeParameters: List<KtTypeParameterSymbol>
+    public konst typeParameters: List<KtTypeParameterSymbol>
 }

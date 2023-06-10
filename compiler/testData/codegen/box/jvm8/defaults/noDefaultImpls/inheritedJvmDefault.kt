@@ -29,7 +29,7 @@ interface KInterface2 : KInterface {
 
 
 fun box(): String {
-    val result = Foo().test()
+    konst result = Foo().test()
     if (result != "OK") return "fail 1: ${result}"
 
     return Foo().test2()

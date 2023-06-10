@@ -4,20 +4,20 @@ import java.util.ArrayList
 import java.util.HashMap
 
 //KT-250 Incorrect variable resolve in constructor arguments of superclass
-open class A(val x: Int)
+open class A(konst x: Int)
 class B(y: Int) : A(<!UNRESOLVED_REFERENCE!>x<!>)  //x is resolved as a property in a, so no error is generated
 
 //KT-617 Prohibit dollars in call to superclass constructors
 open class M(p: Int)
-class N(val p: Int) : A(<!SYNTAX!><!SYNTAX!><!>$p<!><!SYNTAX!>)<!>
+class N(konst p: Int) : A(<!SYNTAX!><!SYNTAX!><!>$p<!><!SYNTAX!>)<!>
 
 //KT-10 Don't allow to use properties in supertype initializers
 open class Element()
 class TextElement(name: String) : Element()
 
-abstract class Tag(val name : String) {
-  val children = ArrayList<Element>()
-  val attributes = HashMap<String, String>()
+abstract class Tag(konst name : String) {
+  konst children = ArrayList<Element>()
+  konst attributes = HashMap<String, String>()
 }
 
 abstract class TagWithText(name : String) : Tag(name) {
@@ -37,13 +37,13 @@ class Body1() : BodyTag(<!NO_THIS!>this<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>name
 //more tests
 
 open class X(p: Int, r: Int) {
-    val s = "s"
+    konst s = "s"
 }
 
 class Y(i: Int) : X(i, <!UNRESOLVED_REFERENCE!>rrr<!>) {
-    val rrr = 3
+    konst rrr = 3
 }
 
-class Z(val i: Int) : X(<!UNRESOLVED_REFERENCE!>s<!>, <!UNRESOLVED_REFERENCE!>x<!>) {
-    val x = 2
+class Z(konst i: Int) : X(<!UNRESOLVED_REFERENCE!>s<!>, <!UNRESOLVED_REFERENCE!>x<!>) {
+    konst x = 2
 }

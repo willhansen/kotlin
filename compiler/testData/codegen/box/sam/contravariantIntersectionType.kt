@@ -19,7 +19,7 @@ fun box(): String {
 }
 
 fun example(input: Int) {
-    val instance = when (input) {
+    konst instance = when (input) {
         0 -> GenericHolder<ConcreteType>()
         else -> GenericHolder<ConcreteType2>()
     }

@@ -37,9 +37,9 @@ import org.jetbrains.kotlin.types.expressions.OperatorConventions
 import org.jetbrains.kotlin.utils.Printer
 import java.util.*
 
-class DynamicCallableDescriptors(private val storageManager: StorageManager, builtIns: KotlinBuiltIns) {
+class DynamicCallableDescriptors(private konst storageManager: StorageManager, builtIns: KotlinBuiltIns) {
 
-    val dynamicType by storageManager.createLazyValue {
+    konst dynamicType by storageManager.createLazyValue {
         createDynamicType(builtIns)
     }
 
@@ -51,7 +51,7 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
         override fun getContributedFunctions(name: Name, location: LookupLocation): Collection<SimpleFunctionDescriptor> {
             if (isAugmentedAssignmentConvention(name)) return listOf()
             if (call.callType == Call.CallType.INVOKE
-                && call.valueArgumentList == null && call.functionLiteralArguments.isEmpty()
+                && call.konstueArgumentList == null && call.functionLiteralArguments.isEmpty()
             ) {
                 // this means that we are looking for "imaginary" invokes,
                 // e.g. in `+d` we are looking for property "plus" with member "invoke"
@@ -64,12 +64,12 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
          * Detects the case when name "plusAssign" is requested for "+=" call,
          * since both "plus" and "plusAssign" are resolvable on dynamic receivers,
          * we have to prefer ne of them, and prefer "plusAssign" for generality:
-         * it may be called even on a val
+         * it may be called even on a konst
          */
         private fun isAugmentedAssignmentConvention(name: Name): Boolean {
-            val callee = call.calleeExpression
+            konst callee = call.calleeExpression
             if (callee is KtOperationReferenceExpression) {
-                val token = callee.getReferencedNameElementType()
+                konst token = callee.getReferencedNameElementType()
                 if (token in KtTokens.AUGMENTED_ASSIGNMENTS && OperatorConventions.ASSIGNMENT_OPERATIONS[token] != name) {
                     return true
                 }
@@ -78,14 +78,14 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
         }
 
         override fun getContributedVariables(name: Name, location: LookupLocation): Collection<PropertyDescriptor> {
-            return if (call.valueArgumentList == null && call.valueArguments.isEmpty()) {
+            return if (call.konstueArgumentList == null && call.konstueArguments.isEmpty()) {
                 listOf(createDynamicProperty(owner, name, call))
             } else listOf()
         }
     }
 
     private fun createDynamicProperty(owner: DeclarationDescriptor, name: Name, call: Call): PropertyDescriptorImpl {
-        val propertyDescriptor = PropertyDescriptorImpl.create(
+        konst propertyDescriptor = PropertyDescriptorImpl.create(
             owner,
             Annotations.EMPTY,
             Modality.FINAL,
@@ -109,9 +109,9 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
             emptyList()
         )
 
-        val getter = DescriptorFactory.createDefaultGetter(propertyDescriptor, Annotations.EMPTY)
+        konst getter = DescriptorFactory.createDefaultGetter(propertyDescriptor, Annotations.EMPTY)
         getter.initialize(propertyDescriptor.type)
-        val setter = DescriptorFactory.createDefaultSetter(propertyDescriptor, Annotations.EMPTY, Annotations.EMPTY)
+        konst setter = DescriptorFactory.createDefaultSetter(propertyDescriptor, Annotations.EMPTY, Annotations.EMPTY)
 
         propertyDescriptor.initialize(getter, setter)
 
@@ -119,7 +119,7 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
     }
 
     private fun createDynamicFunction(owner: DeclarationDescriptor, name: Name, call: Call): SimpleFunctionDescriptorImpl {
-        val functionDescriptor = SimpleFunctionDescriptorImpl.create(
+        konst functionDescriptor = SimpleFunctionDescriptorImpl.create(
             owner,
             Annotations.EMPTY,
             name,
@@ -160,10 +160,10 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
         }
 
     private fun createValueParameters(owner: FunctionDescriptor, call: Call): List<ValueParameterDescriptor> {
-        val parameters = ArrayList<ValueParameterDescriptor>()
+        konst parameters = ArrayList<ValueParameterDescriptor>()
 
         fun addParameter(arg: ValueArgument, outType: KotlinType, varargElementType: KotlinType?) {
-            val index = parameters.size
+            konst index = parameters.size
 
             parameters.add(
                 ValueParameterDescriptorImpl(
@@ -183,22 +183,22 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
         }
 
         fun getFunctionType(funLiteralExpr: KtLambdaExpression): KotlinType {
-            val funLiteral = funLiteralExpr.functionLiteral
+            konst funLiteral = funLiteralExpr.functionLiteral
 
-            val receiverType = funLiteral.receiverTypeReference?.let { dynamicType }
-            val contextReceiversTypes = funLiteral.contextReceivers.map { dynamicType }
+            konst receiverType = funLiteral.receiverTypeReference?.let { dynamicType }
+            konst contextReceiversTypes = funLiteral.contextReceivers.map { dynamicType }
 
-            val parameterTypes = funLiteral.valueParameters.map { dynamicType }
+            konst parameterTypes = funLiteral.konstueParameters.map { dynamicType }
 
             return createFunctionType(owner.builtIns, Annotations.EMPTY, receiverType, contextReceiversTypes, parameterTypes, null, dynamicType)
         }
 
-        for (arg in call.valueArguments) {
-            val outType: KotlinType
-            val varargElementType: KotlinType?
+        for (arg in call.konstueArguments) {
+            konst outType: KotlinType
+            konst varargElementType: KotlinType?
             var hasSpreadOperator = false
 
-            val argExpression = KtPsiUtil.deparenthesize(arg.getArgumentExpression())
+            konst argExpression = KtPsiUtil.deparenthesize(arg.getArgumentExpression())
 
             when {
                 argExpression is KtLambdaExpression -> {
@@ -238,6 +238,6 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
 
 fun DeclarationDescriptor.isDynamic(): Boolean {
     if (this !is CallableDescriptor) return false
-    val dispatchReceiverParameter = dispatchReceiverParameter
+    konst dispatchReceiverParameter = dispatchReceiverParameter
     return dispatchReceiverParameter != null && dispatchReceiverParameter.type.isDynamic()
 }

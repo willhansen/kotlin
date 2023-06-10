@@ -5,8 +5,8 @@ package a {
 }
 
 package b {
-    public val constant: b.D
-    public val value: kotlin.Int = 0
+    public konst constant: b.D
+    public konst konstue: kotlin.Int = 0
     public fun bar(): kotlin.Unit
     public fun foo(/*0*/ i: kotlin.Int): kotlin.Int
     public fun b.B.ext(): kotlin.Unit
@@ -26,7 +26,7 @@ package b {
 
         public companion object Companion {
             private constructor Companion()
-            public final val cValue: kotlin.Int = 1
+            public final konst cValue: kotlin.Int = 1
             public final fun bar(): kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -36,7 +36,7 @@ package b {
 
     public final class D {
         public constructor D()
-        public final val dValue: kotlin.String = "w"
+        public final konst dValue: kotlin.String = "w"
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun fff(/*0*/ s: kotlin.String): kotlin.String
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -51,7 +51,7 @@ package b {
 
         public companion object Companion {
             private constructor Companion()
-            public final val f: b.F
+            public final konst f: b.F
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -72,7 +72,7 @@ package c {
 
     public object C {
         private constructor C()
-        public final val i: kotlin.Int = 348
+        public final konst i: kotlin.Int = 348
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun f(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -81,8 +81,8 @@ package c {
 }
 
 package d {
-    public val b: d.A.Companion.B
-    public val c: d.A.Companion.B
+    public konst b: d.A.Companion.B
+    public konst c: d.A.Companion.B
 
     public final class A {
         public constructor A()

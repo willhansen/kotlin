@@ -163,7 +163,7 @@ public expect enum class CharCategory {
     /**
      * Two-letter code of this general category in the Unicode specification.
      */
-    public val code: String
+    public konst code: String
 
     /**
      * Returns `true` if [char] character belongs to this category.

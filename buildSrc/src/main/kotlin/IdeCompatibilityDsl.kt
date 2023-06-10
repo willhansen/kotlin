@@ -17,7 +17,7 @@ interface CompatibilityPredicate {
     }
 }
 
-val CompatibilityPredicate.not: CompatibilityPredicate get() = object : CompatibilityPredicate {
+konst CompatibilityPredicate.not: CompatibilityPredicate get() = object : CompatibilityPredicate {
     override fun matches(ide: Ide) = !this@not.matches(ide)
 }
 
@@ -28,56 +28,56 @@ fun CompatibilityPredicate.or(other: CompatibilityPredicate): CompatibilityPredi
 enum class Platform : CompatibilityPredicate {
     P213;
 
-    val version: Int = name.drop(1).toInt()
+    konst version: Int = name.drop(1).toInt()
 
-    val displayVersion: String = "20${name.drop(1).dropLast(1)}.${name.last()}"
+    konst displayVersion: String = "20${name.drop(1).dropLast(1)}.${name.last()}"
 
     override fun matches(ide: Ide) = ide.platform == this
 
     companion object {
         operator fun get(version: Int): Platform {
-            return Platform.values().firstOrNull { it.version == version }
+            return Platform.konstues().firstOrNull { it.version == version }
                 ?: error("Can't find platform $version")
         }
     }
 }
 
-enum class Ide(val platform: Platform) : CompatibilityPredicate {
+enum class Ide(konst platform: Platform) : CompatibilityPredicate {
     IJ213(Platform.P213);
 
-    val kind = Kind.values().first { it.shortName == name.take(2) }
-    val version = name.dropWhile { !it.isDigit() }.toInt()
+    konst kind = Kind.konstues().first { it.shortName == name.take(2) }
+    konst version = name.dropWhile { !it.isDigit() }.toInt()
 
-    val displayVersion: String = when (kind) {
+    konst displayVersion: String = when (kind) {
         Kind.IntelliJ -> "IJ${platform.displayVersion}"
         Kind.AndroidStudio -> "Studio${name.substringAfter("AS").toCharArray().joinToString(separator = ".")}"
     }
 
     override fun matches(ide: Ide) = ide == this
 
-    enum class Kind(val shortName: String) {
+    enum class Kind(konst shortName: String) {
         AndroidStudio("AS"), IntelliJ("IJ")
     }
 
     companion object {
-        val IJ: CompatibilityPredicate = IdeKindPredicate(Kind.IntelliJ)
-        val AS: CompatibilityPredicate = IdeKindPredicate(Kind.AndroidStudio)
+        konst IJ: CompatibilityPredicate = IdeKindPredicate(Kind.IntelliJ)
+        konst AS: CompatibilityPredicate = IdeKindPredicate(Kind.AndroidStudio)
     }
 }
 
-val Platform.orHigher get() = object : CompatibilityPredicate {
+konst Platform.orHigher get() = object : CompatibilityPredicate {
     override fun matches(ide: Ide) = ide.platform.version >= version
 }
 
-val Platform.orLower get() = object : CompatibilityPredicate {
+konst Platform.orLower get() = object : CompatibilityPredicate {
     override fun matches(ide: Ide) = ide.platform.version <= version
 }
 
-val Ide.orHigher get() = object : CompatibilityPredicate {
+konst Ide.orHigher get() = object : CompatibilityPredicate {
     override fun matches(ide: Ide) = ide.kind == kind && ide.version >= version
 }
 
-val Ide.orLower get() = object : CompatibilityPredicate {
+konst Ide.orLower get() = object : CompatibilityPredicate {
     override fun matches(ide: Ide) = ide.kind == kind && ide.version <= version
 }
 
@@ -85,12 +85,12 @@ object IdeVersionConfigurator {
     lateinit var currentIde: Ide
 
     fun setCurrentIde(project: Project) {
-        val platformVersion = project.rootProject.extensions.extraProperties["versions.platform"].toString()
-        val ideName = if (platformVersion.startsWith("AS")) platformVersion else "IJ$platformVersion"
-        currentIde = Ide.valueOf(ideName)
+        konst platformVersion = project.rootProject.extensions.extraProperties["versions.platform"].toString()
+        konst ideName = if (platformVersion.startsWith("AS")) platformVersion else "IJ$platformVersion"
+        currentIde = Ide.konstueOf(ideName)
     }
 }
 
-private class IdeKindPredicate(val kind: Ide.Kind) : CompatibilityPredicate {
+private class IdeKindPredicate(konst kind: Ide.Kind) : CompatibilityPredicate {
     override fun matches(ide: Ide) = ide.kind == kind
 }

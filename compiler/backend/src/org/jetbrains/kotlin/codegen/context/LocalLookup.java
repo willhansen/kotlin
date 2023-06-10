@@ -187,7 +187,7 @@ public interface LocalLookup {
             else {
                 assert declarationDescriptor != null : "No declaration descriptor for " + d;
                 StackValue capturedValue = codegen.findCapturedValue(declarationDescriptor);
-                assert capturedValue != null : "Unresolved captured value for " + d;
+                assert capturedValue != null : "Unresolved captured konstue for " + d;
                 return capturedValue;
             }
         }

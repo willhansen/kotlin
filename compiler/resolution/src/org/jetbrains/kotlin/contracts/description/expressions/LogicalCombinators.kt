@@ -19,17 +19,17 @@ package org.jetbrains.kotlin.contracts.description.expressions
 import org.jetbrains.kotlin.contracts.description.BooleanExpression
 import org.jetbrains.kotlin.contracts.description.ContractDescriptionVisitor
 
-class LogicalOr(val left: BooleanExpression, val right: BooleanExpression) : BooleanExpression {
+class LogicalOr(konst left: BooleanExpression, konst right: BooleanExpression) : BooleanExpression {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitLogicalOr(this, data)
 }
 
-class LogicalAnd(val left: BooleanExpression, val right: BooleanExpression) : BooleanExpression {
+class LogicalAnd(konst left: BooleanExpression, konst right: BooleanExpression) : BooleanExpression {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitLogicalAnd(this, data)
 }
 
-class LogicalNot(val arg: BooleanExpression) : BooleanExpression {
+class LogicalNot(konst arg: BooleanExpression) : BooleanExpression {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitLogicalNot(this, data)
 }

@@ -22,7 +22,7 @@ fun box(): String {
     assertEquals(19, 3.bar(0))
 
     fun f() = 11
-    val v = 3
+    konst v = 3
     fun Int.baz(a: Int): Int {
         if (a == 0) {
             return this.baz(v) + baz(f()) + this

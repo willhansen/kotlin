@@ -22,7 +22,7 @@ import org.gradle.api.Project
 class KotlinJpaSubplugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply(NoArgGradleSubplugin::class.java)
-        val noArgExtension = NoArgGradleSubplugin.getNoArgExtension(project)
+        konst noArgExtension = NoArgGradleSubplugin.getNoArgExtension(project)
         noArgExtension.myPresets += "jpa"
     }
 }

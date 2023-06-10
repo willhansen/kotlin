@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.diagnostics.rendering.RootDiagnosticRendererFactory
 
 object FirSyntaxErrors {
     // Syntax
-    val SYNTAX by error1<PsiElement, String>()
+    konst SYNTAX by error1<PsiElement, String>()
 
     init {
         RootDiagnosticRendererFactory.registerFactory(FirSyntaxErrorsDefaultMessages)

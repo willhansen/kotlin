@@ -41,22 +41,22 @@ import org.jetbrains.kotlin.ir.linkage.partial.PartialLinkageUtils.File as PLFil
 import org.jetbrains.kotlin.ir.linkage.partial.PartialLinkageUtils.Module as PLModule
 
 internal class PartiallyLinkedIrTreePatcher(
-    private val builtIns: IrBuiltIns,
-    private val classifierExplorer: ClassifierExplorer,
-    private val stubGenerator: MissingDeclarationStubGenerator,
+    private konst builtIns: IrBuiltIns,
+    private konst classifierExplorer: ClassifierExplorer,
+    private konst stubGenerator: MissingDeclarationStubGenerator,
     logger: PartialLinkageLogger
 ) {
     // Avoid revisiting roots that already have been visited.
-    private val visitedModuleFragments = hashSetOf<IrModuleFragment>()
-    private val visitedDeclarations = hashSetOf<IrDeclaration>()
+    private konst visitedModuleFragments = hashSetOf<IrModuleFragment>()
+    private konst visitedDeclarations = hashSetOf<IrDeclaration>()
 
-    private val stdlibModule by lazy { PLModule.determineModuleFor(builtIns.anyClass.owner) }
+    private konst stdlibModule by lazy { PLModule.determineModuleFor(builtIns.anyClass.owner) }
 
-    private val PLModule.shouldBeSkipped: Boolean get() = this == PLModule.SyntheticBuiltInFunctions || this == stdlibModule
-    private val IrModuleFragment.shouldBeSkipped: Boolean get() = files.isEmpty() || name.asString() == stdlibModule.name
+    private konst PLModule.shouldBeSkipped: Boolean get() = this == PLModule.SyntheticBuiltInFunctions || this == stdlibModule
+    private konst IrModuleFragment.shouldBeSkipped: Boolean get() = files.isEmpty() || name.asString() == stdlibModule.name
 
     // Used only to generate IR expressions that throw linkage errors.
-    private val supportForLowerings by lazy { PartialLinkageSupportForLoweringsImpl(builtIns, logger) }
+    private konst supportForLowerings by lazy { PartialLinkageSupportForLoweringsImpl(builtIns, logger) }
 
     fun shouldBeSkipped(declaration: IrDeclaration): Boolean = PLModule.determineModuleFor(declaration).shouldBeSkipped
 
@@ -73,7 +73,7 @@ internal class PartiallyLinkedIrTreePatcher(
 
     fun patchDeclarations(roots: Collection<IrDeclaration>) {
         roots.forEach { root ->
-            val startingFile = PLFile.determineFileFor(root)
+            konst startingFile = PLFile.determineFileFor(root)
             // Optimization: Don't patch already visited declarations and declarations from stdlib/built-ins.
             if (!startingFile.module.shouldBeSkipped && visitedDeclarations.add(root)) {
                 root.transformVoid(DeclarationTransformer(startingFile))
@@ -88,20 +88,20 @@ internal class PartiallyLinkedIrTreePatcher(
     }
 
     private sealed class DeclarationTransformerContext {
-        private val scheduledForRemoval = HashSet<IrDeclaration>()
+        private konst scheduledForRemokonst = HashSet<IrDeclaration>()
 
-        fun scheduleForRemoval(declaration: IrDeclaration) {
-            scheduledForRemoval += declaration
+        fun scheduleForRemokonst(declaration: IrDeclaration) {
+            scheduledForRemokonst += declaration
         }
 
-        abstract fun performRemoval()
+        abstract fun performRemokonst()
 
-        protected fun performRemoval(declarations: MutableList<out IrStatement>, container: IrElement) {
-            val expectedToRemove = scheduledForRemoval.size
+        protected fun performRemokonst(declarations: MutableList<out IrStatement>, container: IrElement) {
+            konst expectedToRemove = scheduledForRemokonst.size
             if (expectedToRemove == 0) return
 
             var removed = declarations.size
-            declarations.removeAll(scheduledForRemoval)
+            declarations.removeAll(scheduledForRemokonst)
             removed -= declarations.size
 
             assert(expectedToRemove == removed) {
@@ -109,56 +109,56 @@ internal class PartiallyLinkedIrTreePatcher(
             }
         }
 
-        class DeclarationContainer(val declarationContainer: IrDeclarationContainer) : DeclarationTransformerContext() {
-            override fun performRemoval() = performRemoval(declarationContainer.declarations, declarationContainer)
+        class DeclarationContainer(konst declarationContainer: IrDeclarationContainer) : DeclarationTransformerContext() {
+            override fun performRemokonst() = performRemokonst(declarationContainer.declarations, declarationContainer)
         }
 
-        class StatementContainer(val statementContainer: IrStatementContainer) : DeclarationTransformerContext() {
-            override fun performRemoval() = performRemoval(statementContainer.statements, statementContainer)
+        class StatementContainer(konst statementContainer: IrStatementContainer) : DeclarationTransformerContext() {
+            override fun performRemokonst() = performRemokonst(statementContainer.statements, statementContainer)
         }
     }
 
     // Declarations are transformed top-down.
     private inner class DeclarationTransformer(startingFile: PLFile?) : FileAwareIrElementTransformerVoid(startingFile) {
-        private val stack = ArrayDeque<DeclarationTransformerContext>()
+        private konst stack = ArrayDeque<DeclarationTransformerContext>()
 
         private fun <T : IrDeclaration> T.transformChildren(): T {
             transformChildrenVoid()
             return this
         }
 
-        private fun <T : IrDeclarationContainer> T.transformChildrenWithRemoval(): T =
-            transformChildrenWithRemoval(DeclarationTransformerContext.DeclarationContainer(this))
+        private fun <T : IrDeclarationContainer> T.transformChildrenWithRemokonst(): T =
+            transformChildrenWithRemokonst(DeclarationTransformerContext.DeclarationContainer(this))
 
-        private fun <T : IrStatementContainer> T.transformChildrenWithRemoval(): T =
-            transformChildrenWithRemoval(DeclarationTransformerContext.StatementContainer(this))
+        private fun <T : IrStatementContainer> T.transformChildrenWithRemokonst(): T =
+            transformChildrenWithRemokonst(DeclarationTransformerContext.StatementContainer(this))
 
-        private fun <T : IrElement> T.transformChildrenWithRemoval(context: DeclarationTransformerContext): T {
+        private fun <T : IrElement> T.transformChildrenWithRemokonst(context: DeclarationTransformerContext): T {
             stack.push(context)
             transformChildrenVoid()
             assert(stack.pop() === context)
 
-            context.performRemoval()
+            context.performRemokonst()
 
             return this
         }
 
-        private fun IrDeclaration.scheduleForRemoval() {
+        private fun IrDeclaration.scheduleForRemokonst() {
             // The declarations with origin = PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION are already effectively removed.
             if (origin != PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION)
-                stack.peek().scheduleForRemoval(this)
+                stack.peek().scheduleForRemokonst(this)
         }
 
         override fun visitPackageFragment(declaration: IrPackageFragment): IrPackageFragment {
-            return declaration.transformChildrenWithRemoval()
+            return declaration.transformChildrenWithRemokonst()
         }
 
         override fun visitClass(declaration: IrClass): IrStatement {
             // Discover the reason why the class itself is unusable.
-            val unusableClass = declaration.symbol.explore()
+            konst unusableClass = declaration.symbol.explore()
             if (unusableClass != null) {
                 // Transform the reason into the most appropriate linkage case.
-                val partialLinkageCase = when (unusableClass) {
+                konst partialLinkageCase = when (unusableClass) {
                     is ExploredClassifier.Unusable.CanBeRootCause -> UnusableClassifier(unusableClass)
                     is ExploredClassifier.Unusable.DueToOtherClassifier -> DeclarationWithUnusableClassifier(
                         declaration.symbol,
@@ -167,7 +167,7 @@ internal class PartiallyLinkedIrTreePatcher(
                 }
 
                 // Get anonymous initializer.
-                val anonInitializer = declaration.declarations.firstNotNullOfOrNull { it as? IrAnonymousInitializer }
+                konst anonInitializer = declaration.declarations.firstNotNullOfOrNull { it as? IrAnonymousInitializer }
                     ?: builtIns.irFactory.createAnonymousInitializer(
                         declaration.startOffset,
                         declaration.endOffset,
@@ -200,43 +200,43 @@ internal class PartiallyLinkedIrTreePatcher(
                  * - It is an inner class
                  * - It is a class without non-inner underlying classes
                  *
-                 * The removal of local/inner class leads to removal of all underlying declarations including any classes declared
+                 * The remokonst of local/inner class leads to remokonst of all underlying declarations including any classes declared
                  * under the removed class. In all cases that could be only inner classes that share state with their containing
                  * class and that become unusable together with the containing class.
                  *
-                 * The removal of class of any other type is not performed: Such class may have nested classes that do not share
+                 * The remokonst of class of any other type is not performed: Such class may have nested classes that do not share
                  * their state with the containing class and not necessarily become unusable together with the containing class.
                  */
                 if (declaration.isLocal || declaration.isInner || declaration.declarations.none { (it as? IrClass)?.isInner == false }) {
-                    declaration.scheduleForRemoval() // Don't process underlying declarations.
+                    declaration.scheduleForRemokonst() // Don't process underlying declarations.
                     return declaration
                 }
             }
 
             // Process underlying declarations. Collect declarations to remove.
-            return declaration.transformChildrenWithRemoval()
+            return declaration.transformChildrenWithRemokonst()
         }
 
         override fun visitConstructor(declaration: IrConstructor): IrStatement {
             // IMPORTANT: It's necessary to overwrite types. Please don't move the statement below.
-            val unusableClassifierInSignature = declaration.rewriteTypesInFunction()
+            konst unusableClassifierInSignature = declaration.rewriteTypesInFunction()
 
-            val invalidConstructorDelegation = declaration.checkConstructorDelegation()
+            konst inkonstidConstructorDelegation = declaration.checkConstructorDelegation()
 
             // Compute the linkage case.
-            val partialLinkageCase = if (declaration.origin == PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION)
+            konst partialLinkageCase = if (declaration.origin == PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION)
                 MissingDeclaration(declaration.symbol)
             else
                 unusableClassifierInSignature?.let { DeclarationWithUnusableClassifier(declaration.symbol, it) }
-                    ?: invalidConstructorDelegation
+                    ?: inkonstidConstructorDelegation
 
             if (partialLinkageCase != null) {
                 // Note: Block body is missing for MISSING_DECLARATION.
-                val blockBody = declaration.body as? IrBlockBody
+                konst blockBody = declaration.body as? IrBlockBody
                     ?: builtIns.irFactory.createBlockBody(declaration.startOffset, declaration.endOffset).apply { declaration.body = this }
 
-                if (invalidConstructorDelegation != null) {
-                    // Drop invalid delegating constructor call. Otherwise it may break some lowerings.
+                if (inkonstidConstructorDelegation != null) {
+                    // Drop inkonstid delegating constructor call. Otherwise it may break some lowerings.
                     blockBody.statements.removeIf { it is IrDelegatingConstructorCall }
                 }
 
@@ -260,10 +260,10 @@ internal class PartiallyLinkedIrTreePatcher(
             declaration.filterOverriddenSymbols()
 
             // IMPORTANT: It's necessary to overwrite types. Please don't move the statement below.
-            val unusableClassifierInSignature = declaration.rewriteTypesInFunction()
+            konst unusableClassifierInSignature = declaration.rewriteTypesInFunction()
 
             // Compute the linkage case.
-            val partialLinkageCase = when (declaration.origin) {
+            konst partialLinkageCase = when (declaration.origin) {
                 PartiallyLinkedDeclarationOrigin.UNIMPLEMENTED_ABSTRACT_CALLABLE_MEMBER -> UnimplementedAbstractCallable(declaration)
                 PartiallyLinkedDeclarationOrigin.AMBIGUOUS_NON_OVERRIDDEN_CALLABLE_MEMBER -> AmbiguousNonOverriddenCallable(declaration)
                 PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION -> MissingDeclaration(declaration.symbol)
@@ -272,7 +272,7 @@ internal class PartiallyLinkedIrTreePatcher(
 
             if (partialLinkageCase != null) {
                 // Note: Block body is missing for UNIMPLEMENTED_ABSTRACT_CALLABLE_MEMBER and MISSING_DECLARATION.
-                val blockBody = declaration.body as? IrBlockBody
+                konst blockBody = declaration.body as? IrBlockBody
                     ?: builtIns.irFactory.createBlockBody(declaration.startOffset, declaration.endOffset).apply { declaration.body = this }
 
                 // Clean initializer body. Don't process underlying statements.
@@ -291,12 +291,12 @@ internal class PartiallyLinkedIrTreePatcher(
                 if (!declaration.isInline) {
                     if (declaration.isTopLevelDeclaration) {
                         // Optimization: Remove unlinked top-level functions.
-                        declaration.scheduleForRemoval()
+                        declaration.scheduleForRemokonst()
                     } else {
                         // Optimization: Remove unlinked top-level properties.
-                        val property = declaration.correspondingPropertySymbol?.owner
+                        konst property = declaration.correspondingPropertySymbol?.owner
                         if (property?.isTopLevelDeclaration == true)
-                            property.scheduleForRemoval()
+                            property.scheduleForRemokonst()
                     }
                 }
 
@@ -311,30 +311,30 @@ internal class PartiallyLinkedIrTreePatcher(
         /**
          * Checks if there is an issue with constructor delegation.
          */
-        private fun IrConstructor.checkConstructorDelegation(): InvalidConstructorDelegation? {
+        private fun IrConstructor.checkConstructorDelegation(): InkonstidConstructorDelegation? {
             if (origin == PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION)
                 return null
 
-            val statements = (body as? IrBlockBody)?.statements ?: return null
+            konst statements = (body as? IrBlockBody)?.statements ?: return null
 
-            val constructedClass = parentAsClass
-            val constructedClassSymbol = constructedClass.symbol
+            konst constructedClass = parentAsClass
+            konst constructedClassSymbol = constructedClass.symbol
 
-            val actualSuperClassSymbol = constructedClass.superTypes.firstNotNullOfOrNull { superType ->
-                val superClassSymbol = (superType as? IrSimpleType)?.classifier as? IrClassSymbol ?: return@firstNotNullOfOrNull null
+            konst actualSuperClassSymbol = constructedClass.superTypes.firstNotNullOfOrNull { superType ->
+                konst superClassSymbol = (superType as? IrSimpleType)?.classifier as? IrClassSymbol ?: return@firstNotNullOfOrNull null
                 if (superClassSymbol.owner.isClass) superClassSymbol else null
             } ?: builtIns.anyClass
-            val actualSuperClass = actualSuperClassSymbol.owner
+            konst actualSuperClass = actualSuperClassSymbol.owner
 
             statements.forEach { statement ->
                 if (statement !is IrDelegatingConstructorCall) return@forEach
 
-                val calledConstructorSymbol = statement.symbol
-                val calledConstructor = calledConstructorSymbol.owner
+                konst calledConstructorSymbol = statement.symbol
+                konst calledConstructor = calledConstructorSymbol.owner
 
-                val invalidConstructorDelegationFound =
+                konst inkonstidConstructorDelegationFound =
                     if (calledConstructor.origin != PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION) {
-                        val constructedSuperClassSymbol = calledConstructor.parentAsClass.symbol
+                        konst constructedSuperClassSymbol = calledConstructor.parentAsClass.symbol
                         // Note: Constructor of an external class may delegate to kotlin.Any
                         constructedSuperClassSymbol != constructedClassSymbol
                                 && constructedSuperClassSymbol != actualSuperClassSymbol
@@ -342,7 +342,7 @@ internal class PartiallyLinkedIrTreePatcher(
                     } else {
                         // Fallback to signatures.
                         (calledConstructorSymbol.signature as? IdSignature.CommonSignature)?.let { constructorSignature ->
-                            val constructedSuperClassId = DeclarationId(
+                            konst constructedSuperClassId = DeclarationId(
                                 constructorSignature.packageFqName,
                                 constructorSignature.declarationFqName.substringBeforeLast('.')
                             )
@@ -351,8 +351,8 @@ internal class PartiallyLinkedIrTreePatcher(
                         } ?: false
                     }
 
-                if (invalidConstructorDelegationFound)
-                    return InvalidConstructorDelegation(
+                if (inkonstidConstructorDelegationFound)
+                    return InkonstidConstructorDelegation(
                         constructorSymbol = symbol,
                         superClassSymbol = actualSuperClassSymbol,
                         unexpectedSuperClassConstructorSymbol = calledConstructorSymbol
@@ -370,7 +370,7 @@ internal class PartiallyLinkedIrTreePatcher(
             var result: ExploredClassifier.Unusable? by Delegates.vetoable(null) { _, oldValue, _ -> oldValue == null }
 
             fun IrValueParameter.fixType() {
-                val newType = type.toPartiallyLinkedMarkerTypeOrNull() ?: return
+                konst newType = type.toPartiallyLinkedMarkerTypeOrNull() ?: return
                 type = newType
                 if (varargElementType != null) varargElementType = newType
                 defaultValue = null
@@ -380,7 +380,7 @@ internal class PartiallyLinkedIrTreePatcher(
 
             dispatchReceiverParameter?.fixType() // The dispatcher (aka this) is intentionally the first one.
             extensionReceiverParameter?.fixType()
-            valueParameters.forEach { it.fixType() }
+            konstueParameters.forEach { it.fixType() }
 
             returnType.toPartiallyLinkedMarkerTypeOrNull()?.let { newReturnType ->
                 returnType = newReturnType
@@ -404,10 +404,10 @@ internal class PartiallyLinkedIrTreePatcher(
 
         override fun visitField(declaration: IrField): IrStatement {
             return declaration.type.toPartiallyLinkedMarkerTypeOrNull()?.let { newType ->
-                val property = declaration.correspondingPropertySymbol?.owner
+                konst property = declaration.correspondingPropertySymbol?.owner
                 if (property?.isTopLevelDeclaration == true) {
                     // Optimization: Remove unlinked top-level properties.
-                    property.scheduleForRemoval()
+                    property.scheduleForRemokonst()
                 }
 
                 declaration.type = newType
@@ -425,17 +425,17 @@ internal class PartiallyLinkedIrTreePatcher(
         }
 
         override fun visitBlockBody(body: IrBlockBody): IrBody {
-            return body.transformChildrenWithRemoval()
+            return body.transformChildrenWithRemokonst()
         }
 
         override fun visitContainerExpression(expression: IrContainerExpression): IrExpression {
-            return expression.transformChildrenWithRemoval()
+            return expression.transformChildrenWithRemokonst()
         }
 
         private fun <S : IrSymbol> IrOverridableDeclaration<S>.filterOverriddenSymbols() {
             if (overriddenSymbols.isNotEmpty()) {
                 overriddenSymbols = overriddenSymbols.filterTo(ArrayList(overriddenSymbols.size)) { symbol ->
-                    val owner = symbol.owner as IrDeclaration
+                    konst owner = symbol.owner as IrDeclaration
                     owner.origin != PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION
                             // Handle the case when the overridden declaration became private.
                             && (owner as? IrDeclarationWithVisibility)?.visibility != DescriptorVisibilities.PRIVATE
@@ -582,7 +582,7 @@ internal class PartiallyLinkedIrTreePatcher(
                 stubGenerator.getDeclaration(symbol)
             }
 
-            when (val owner = symbol.owner) {
+            when (konst owner = symbol.owner) {
                 is IrDeclaration -> {
                     if (owner.origin == PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION
                         || (owner as? IrLazyDeclarationBase)?.isEffectivelyMissingLazyIrDeclaration() == true
@@ -594,7 +594,7 @@ internal class PartiallyLinkedIrTreePatcher(
                 else -> return null // Not a declaration.
             }
 
-            val partialLinkageCase = when (symbol) {
+            konst partialLinkageCase = when (symbol) {
                 is IrClassifierSymbol -> symbol.explore()?.let { ExpressionWithUnusableClassifier(this, it) }
 
                 is IrEnumEntrySymbol -> checkReferencedDeclaration(symbol.owner.correspondingClass?.symbol, checkVisibility = false)
@@ -607,7 +607,7 @@ internal class PartiallyLinkedIrTreePatcher(
                     is IrFunctionSymbol -> with(symbol.owner) {
                         dispatchReceiverParameter?.type?.precalculatedUnusableClassifier()
                             ?: extensionReceiverParameter?.type?.precalculatedUnusableClassifier()
-                            ?: valueParameters.firstNotNullOfOrNull { it.type.precalculatedUnusableClassifier() }
+                            ?: konstueParameters.firstNotNullOfOrNull { it.type.precalculatedUnusableClassifier() }
                             ?: returnType.precalculatedUnusableClassifier()
                             ?: typeParameters.firstNotNullOfOrNull { it.superTypes.precalculatedUnusableClassifier() }
                     }
@@ -629,7 +629,7 @@ internal class PartiallyLinkedIrTreePatcher(
             // Do the minimal visibility check: Make sure that private declaration is not used outside its declaring entity.
             // This should be enough to fix KT-54469 (cases #1-#3).
 
-            val signature = symbol.signature
+            konst signature = symbol.signature
             if (signature != null
                 && (!signature.isPubliclyVisible || (signature as? IdSignature.CompositeSignature)?.container is IdSignature.FileSignature)
             ) {
@@ -637,12 +637,12 @@ internal class PartiallyLinkedIrTreePatcher(
                 return null
             }
 
-            val declaration: IrDeclarationWithVisibility = when (val symbolOwner = symbol.owner) {
+            konst declaration: IrDeclarationWithVisibility = when (konst symbolOwner = symbol.owner) {
                 is IrDeclarationWithVisibility -> symbolOwner
                 is IrEnumEntry -> symbolOwner.parent as? IrClass ?: return null
                 else -> return null
             }
-            val containingModule = PLModule.determineModuleFor(declaration)
+            konst containingModule = PLModule.determineModuleFor(declaration)
 
             return when {
                 containingModule == currentFile.module -> {
@@ -658,7 +658,7 @@ internal class PartiallyLinkedIrTreePatcher(
                     null
                 }
                 else -> {
-                    val declaringModule = if (declaration is IrOverridableDeclaration<*> && declaration.isFakeOverride) {
+                    konst declaringModule = if (declaration is IrOverridableDeclaration<*> && declaration.isFakeOverride) {
                         // Compute the declaring module.
                         declaration.allOverridden()
                             .firstOrNull { !it.isFakeOverride }
@@ -692,9 +692,9 @@ internal class PartiallyLinkedIrTreePatcher(
             checkDefaultArgument: (index: Int, defaultArgumentExpressionBody: IrExpressionBody?) -> Boolean =
                 { _, defaultArgumentExpressionBody -> defaultArgumentExpressionBody != null }
         ): PartialLinkageCase? {
-            val function = symbol.owner
+            konst function = symbol.owner
 
-            val expressionEffectivelyHasDispatchReceiver = when {
+            konst expressionEffectivelyHasDispatchReceiver = when {
                 dispatchReceiver != null -> true
                 this is IrFunctionReference -> run {
                     // For function references it really depends on whether the reference was obtained on a class or on an instance.
@@ -708,23 +708,23 @@ internal class PartiallyLinkedIrTreePatcher(
                     //   }
                     //
                     //   fun test() {
-                    //     val a: KFunction0<C> = ::C                     //    IrConstructor.dispatchReceiverParameter == null, IrFunctionReference.dispatchReceiver == null
-                    //     val b: KFunction2<C, Int, String> = C::foo     // IrSimpleFunction.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver == null
-                    //     val c: KFunction1<Int, String> = C()::foo      // IrSimpleFunction.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver != null
-                    //     val d: KFunction1<C, C.I> = C::I               //    IrConstructor.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver == null
-                    //     val e: KFunction0<C.I> = C()::I                //    IrConstructor.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver != null
-                    //     val f: KFunction2<C.I, Int, String> = C.I::bar // IrSimpleFunction.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver == null
-                    //     val g: KFunction1<Int, String> = C().I()::bar  // IrSimpleFunction.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver != null
+                    //     konst a: KFunction0<C> = ::C                     //    IrConstructor.dispatchReceiverParameter == null, IrFunctionReference.dispatchReceiver == null
+                    //     konst b: KFunction2<C, Int, String> = C::foo     // IrSimpleFunction.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver == null
+                    //     konst c: KFunction1<Int, String> = C()::foo      // IrSimpleFunction.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver != null
+                    //     konst d: KFunction1<C, C.I> = C::I               //    IrConstructor.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver == null
+                    //     konst e: KFunction0<C.I> = C()::I                //    IrConstructor.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver != null
+                    //     konst f: KFunction2<C.I, Int, String> = C.I::bar // IrSimpleFunction.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver == null
+                    //     konst g: KFunction1<Int, String> = C().I()::bar  // IrSimpleFunction.dispatchReceiverParameter != null, IrFunctionReference.dispatchReceiver != null
                     //   }
-                    val expectedDispatchReceiverClassifier: IrClassSymbol = when (symbol) {
+                    konst expectedDispatchReceiverClassifier: IrClassSymbol = when (symbol) {
                         is IrSimpleFunctionSymbol -> function.parent as? IrClass
                         is IrConstructorSymbol -> (function.parent as? IrClass)?.takeIf { it.isInner }?.parent as? IrClass
                     }?.symbol ?: return@run false
 
-                    val referenceType: IrSimpleType = type as? IrSimpleType ?: return@run false
+                    konst referenceType: IrSimpleType = type as? IrSimpleType ?: return@run false
                     if (!referenceType.classifier.isKFunction() && !referenceType.classifier.isKSuspendFunction()) return@run false
 
-                    val actualDispatchReceiverClassifier: IrClassifierSymbol? =
+                    konst actualDispatchReceiverClassifier: IrClassifierSymbol? =
                         (referenceType.arguments.firstOrNull() as? IrSimpleType)?.classifier
 
                     /*
@@ -752,7 +752,7 @@ internal class PartiallyLinkedIrTreePatcher(
                 }
                 else -> false
             }
-            val functionHasDispatchReceiver = function.dispatchReceiverParameter != null
+            konst functionHasDispatchReceiver = function.dispatchReceiverParameter != null
 
             if (expressionEffectivelyHasDispatchReceiver != functionHasDispatchReceiver)
                 return MemberAccessExpressionArgumentsMismatch(
@@ -780,9 +780,9 @@ internal class PartiallyLinkedIrTreePatcher(
                 }
             }
 
-            // Default values are not kept in value parameters of fake override/delegated/override functions.
-            // So we need to look up for default value across all overridden functions.
-            val functionsToCheckDefaultValues by lazy {
+            // Default konstues are not kept in konstue parameters of fake override/delegated/override functions.
+            // So we need to look up for default konstue across all overridden functions.
+            konst functionsToCheckDefaultValues by lazy {
                 if (function !is IrSimpleFunction)
                     listOf(function)
                 else
@@ -790,18 +790,18 @@ internal class PartiallyLinkedIrTreePatcher(
                         .filterNot { it.isFakeOverride || it.origin == IrDeclarationOrigin.DELEGATED_MEMBER }
             }
 
-            val expressionValueArgumentCount = (0 until valueArgumentsCount).count { index ->
+            konst expressionValueArgumentCount = (0 until konstueArgumentsCount).count { index ->
                 if (getValueArgument(index) != null)
                     return@count true
 
-                val defaultArgumentExpressionBody = functionsToCheckDefaultValues.firstNotNullOfOrNull {
-                    it.valueParameters.getOrNull(index)?.defaultValue
+                konst defaultArgumentExpressionBody = functionsToCheckDefaultValues.firstNotNullOfOrNull {
+                    it.konstueParameters.getOrNull(index)?.defaultValue
                 }
 
                 return@count checkDefaultArgument(index, defaultArgumentExpressionBody)
-                        || function.valueParameters.getOrNull(index)?.isVararg == true
+                        || function.konstueParameters.getOrNull(index)?.isVararg == true
             }
-            val functionValueParameterCount = function.valueParameters.size
+            konst functionValueParameterCount = function.konstueParameters.size
 
             return if (expressionValueArgumentCount != functionValueParameterCount)
                 MemberAccessExpressionArgumentsMismatch(
@@ -818,9 +818,9 @@ internal class PartiallyLinkedIrTreePatcher(
         private fun IrTypeOperatorCall.checkSamConversion(): PartialLinkageCase? {
             if (operator != IrTypeOperator.SAM_CONVERSION) return null
 
-            val funInterface: IrClass = typeOperand.classOrNull?.owner ?: return null
+            konst funInterface: IrClass = typeOperand.classOrNull?.owner ?: return null
 
-            val abstractFunctionSymbols = newHashSetWithExpectedSize<IrSimpleFunctionSymbol>(funInterface.declarations.size)
+            konst abstractFunctionSymbols = newHashSetWithExpectedSize<IrSimpleFunctionSymbol>(funInterface.declarations.size)
             funInterface.declarations.forEach { member ->
                 when (member) {
                     is IrSimpleFunction -> {
@@ -829,7 +829,7 @@ internal class PartiallyLinkedIrTreePatcher(
                     }
                     is IrProperty -> {
                         if (member.modality == Modality.ABSTRACT)
-                            return InvalidSamConversion(
+                            return InkonstidSamConversion(
                                 expression = this,
                                 abstractFunctionSymbols = emptySet(),
                                 abstractPropertySymbol = member.symbol
@@ -839,7 +839,7 @@ internal class PartiallyLinkedIrTreePatcher(
             }
 
             return if (abstractFunctionSymbols.size != 1)
-                InvalidSamConversion(
+                InkonstidSamConversion(
                     expression = this,
                     abstractFunctionSymbols = abstractFunctionSymbols,
                     abstractPropertySymbol = null
@@ -849,7 +849,7 @@ internal class PartiallyLinkedIrTreePatcher(
         }
 
         private fun IrConstructorCall.checkNotAbstractClass(): PartialLinkageCase? {
-            val createdClass = symbol.owner.parentAsClass
+            konst createdClass = symbol.owner.parentAsClass
             return if (createdClass.modality == Modality.ABSTRACT || createdClass.modality == Modality.SEALED)
                 AbstractClassInstantiation(this, createdClass.symbol)
             else
@@ -866,7 +866,7 @@ internal class PartiallyLinkedIrTreePatcher(
             if (annotations.isNotEmpty()) {
                 annotations = annotations.filterTo(ArrayList(annotations.size)) { annotation ->
                     // Visit the annotation as an expression.
-                    val checker = AnnotationChecker(currentFile)
+                    konst checker = AnnotationChecker(currentFile)
                     annotation.transformVoid(checker)
 
                     if (checker.isUsableAnnotation) {
@@ -887,8 +887,8 @@ internal class PartiallyLinkedIrTreePatcher(
     }
 
     private inner class AnnotationChecker(currentFile: PLFile) : ExpressionTransformer(currentFile) {
-        private val currentErrorMessagesCount get() = supportForLowerings.errorMessagesRendered
-        private val initialErrorMessagesCount = currentErrorMessagesCount // Memoize the number of PL errors generated to this moment.
+        private konst currentErrorMessagesCount get() = supportForLowerings.errorMessagesRendered
+        private konst initialErrorMessagesCount = currentErrorMessagesCount // Memoize the number of PL errors generated to this moment.
 
         var isUsableAnnotation = true
             private set
@@ -904,21 +904,21 @@ internal class PartiallyLinkedIrTreePatcher(
             checkReferencedDeclarationType(symbol.owner.parentAsClass, "annotation class") { constructedClass ->
                 constructedClass.kind == ClassKind.ANNOTATION_CLASS
             } ?: run {
-                val annotationFile by lazy { PLFile.determineFileFor(symbol.owner) }
+                konst annotationFile by lazy { PLFile.determineFileFor(symbol.owner) }
 
                 checkArgumentsAndValueParameters { index, defaultArgumentExpressionBody ->
-                    val defaultArgument = defaultArgumentExpressionBody?.expression
+                    konst defaultArgument = defaultArgumentExpressionBody?.expression
                     when {
                         defaultArgument == null -> {
                             // A workaround for KT-59030. See also KT-58651.
-                            val valueParameter = symbol.owner.valueParameters.getOrNull(index)
-                            return@checkArgumentsAndValueParameters valueParameter?.hasEqualFqName(REPLACE_WITH_CONSTRUCTOR_EXPRESSION_FIELD_FQN) == true
+                            konst konstueParameter = symbol.owner.konstueParameters.getOrNull(index)
+                            return@checkArgumentsAndValueParameters konstueParameter?.hasEqualFqName(REPLACE_WITH_CONSTRUCTOR_EXPRESSION_FIELD_FQN) == true
                         }
                         defaultArgument is IrConst<*> -> {
                             // Nothing can be unlinked here.
                         }
                         defaultArgument is IrErrorExpression -> {
-                            // Such expression is used as a placeholder for a real default value in Lazy IR.
+                            // Such expression is used as a placeholder for a real default konstue in Lazy IR.
                             // Nothing to check here specifically.
                         }
                         defaultArgument.isPartialLinkageRuntimeError() -> {
@@ -935,7 +935,7 @@ internal class PartiallyLinkedIrTreePatcher(
                             }
                         }
                     }
-                    true // Count the current default value as non-missing.
+                    true // Count the current default konstue as non-missing.
                 }
             }
     }
@@ -949,9 +949,9 @@ internal class PartiallyLinkedIrTreePatcher(
     private fun List<IrType>.toPartiallyLinkedMarkerTypeOrNull(): PartiallyLinkedMarkerType? =
         firstNotNullOfOrNull { it.toPartiallyLinkedMarkerTypeOrNull() }
 
-    private data class DirectChildren(val statements: List<IrStatement>, val hasPartialLinkageRuntimeError: Boolean) {
+    private data class DirectChildren(konst statements: List<IrStatement>, konst hasPartialLinkageRuntimeError: Boolean) {
         companion object {
-            val EMPTY = DirectChildren(emptyList(), false)
+            konst EMPTY = DirectChildren(emptyList(), false)
         }
     }
 
@@ -960,52 +960,52 @@ internal class PartiallyLinkedIrTreePatcher(
      * if effectively dead code and do not need to be kept in the IR tree).
      */
     private class DirectChildrenStatementsCollector : IrElementVisitorVoid {
-        private val children = mutableListOf<IrStatement>()
+        private konst children = mutableListOf<IrStatement>()
         private var hasPartialLinkageRuntimeError = false
 
         fun getResult() = DirectChildren(children, hasPartialLinkageRuntimeError)
 
         override fun visitElement(element: IrElement) {
             if (hasPartialLinkageRuntimeError) return
-            val statement = element as? IrStatement ?: error("Not a statement: $element")
+            konst statement = element as? IrStatement ?: error("Not a statement: $element")
             children += statement
             hasPartialLinkageRuntimeError = statement.isPartialLinkageRuntimeError()
         }
     }
 
     private sealed interface ReturnTargetContext {
-        val validReturnTargets: Set<IrReturnTargetSymbol>
+        konst konstidReturnTargets: Set<IrReturnTargetSymbol>
 
         data object Empty : ReturnTargetContext {
-            override val validReturnTargets: Set<IrReturnTargetSymbol> get() = emptySet()
+            override konst konstidReturnTargets: Set<IrReturnTargetSymbol> get() = emptySet()
         }
 
         class InFunction(
-            override val validReturnTargets: Set<IrReturnTargetSymbol>,
-            val function: IrFunction,
-            val isInlined: Boolean
+            override konst konstidReturnTargets: Set<IrReturnTargetSymbol>,
+            konst function: IrFunction,
+            konst isInlined: Boolean
         ) : ReturnTargetContext
 
         class InFunctionBody(
-            override val validReturnTargets: Set<IrReturnTargetSymbol>
+            override konst konstidReturnTargets: Set<IrReturnTargetSymbol>
         ) : ReturnTargetContext
 
         class InInlinedCall(
-            override val validReturnTargets: Set<IrReturnTargetSymbol>,
-            val inlinedLambdaArgumentsWithPermittedNonLocalReturns: Set<IrFunctionSymbol>
+            override konst konstidReturnTargets: Set<IrReturnTargetSymbol>,
+            konst inlinedLambdaArgumentsWithPermittedNonLocalReturns: Set<IrFunctionSymbol>
         ) : ReturnTargetContext
     }
 
     private inner class NonLocalReturnsPatcher(startingFile: PLFile?) : FileAwareIrElementTransformerVoid(startingFile) {
-        private val stack = ArrayDeque<ReturnTargetContext>()
-        private val currentContext: ReturnTargetContext get() = stack.peek() ?: ReturnTargetContext.Empty
+        private konst stack = ArrayDeque<ReturnTargetContext>()
+        private konst currentContext: ReturnTargetContext get() = stack.peek() ?: ReturnTargetContext.Empty
 
         private inline fun <R> withContext(
             getNewContext: (oldContext: ReturnTargetContext) -> ReturnTargetContext = { it },
             block: (newContext: ReturnTargetContext) -> R
         ): R {
-            val oldContext: ReturnTargetContext = currentContext
-            val newContext: ReturnTargetContext = getNewContext(oldContext)
+            konst oldContext: ReturnTargetContext = currentContext
+            konst newContext: ReturnTargetContext = getNewContext(oldContext)
 
             if (newContext !== oldContext) stack.push(newContext)
 
@@ -1019,7 +1019,7 @@ internal class PartiallyLinkedIrTreePatcher(
         override fun visitFunction(declaration: IrFunction) = withContext(
             { oldContext ->
                 ReturnTargetContext.InFunction(
-                    validReturnTargets = oldContext.validReturnTargets,
+                    konstidReturnTargets = oldContext.konstidReturnTargets,
                     function = declaration,
                     isInlined = oldContext is ReturnTargetContext.InInlinedCall && declaration.symbol in oldContext.inlinedLambdaArgumentsWithPermittedNonLocalReturns
                 )
@@ -1032,8 +1032,8 @@ internal class PartiallyLinkedIrTreePatcher(
                     return@withContext oldContext
 
                 ReturnTargetContext.InFunctionBody(
-                    validReturnTargets = if (oldContext.isInlined)
-                        oldContext.validReturnTargets + oldContext.function.symbol // Extend the set of valid return targets.
+                    konstidReturnTargets = if (oldContext.isInlined)
+                        oldContext.konstidReturnTargets + oldContext.function.symbol // Extend the set of konstid return targets.
                     else
                         setOf(oldContext.function.symbol)
                 )
@@ -1043,13 +1043,13 @@ internal class PartiallyLinkedIrTreePatcher(
         // Allows visiting any type of call: IrCall, IrConstructorCall, IrEnumConstructorCall, IrDelegatingConstructorCall.
         override fun visitFunctionAccess(expression: IrFunctionAccessExpression) = withContext(
             { oldContext ->
-                val functionSymbol = expression.symbol
-                val function = if (functionSymbol.isBound) functionSymbol.owner else return@withContext oldContext
+                konst functionSymbol = expression.symbol
+                konst function = if (functionSymbol.isBound) functionSymbol.owner else return@withContext oldContext
                 if (!function.isInline && !function.isInlineArrayConstructor(builtIns)) return@withContext oldContext
 
                 fun IrValueParameter?.canHaveNonLocalReturns(): Boolean = this != null && !isCrossinline && !isNoinline
 
-                val inlinedLambdaArgumentsWithPermittedNonLocalReturns = ArrayList<IrFunctionSymbol>(function.valueParameters.size + 1)
+                konst inlinedLambdaArgumentsWithPermittedNonLocalReturns = ArrayList<IrFunctionSymbol>(function.konstueParameters.size + 1)
 
                 fun IrExpression?.countInAsInlinedLambdaArgumentWithPermittedNonLocalReturns() {
                     inlinedLambdaArgumentsWithPermittedNonLocalReturns.addIfNotNull((this as? IrFunctionExpression)?.function?.symbol)
@@ -1058,8 +1058,8 @@ internal class PartiallyLinkedIrTreePatcher(
                 if (function.extensionReceiverParameter.canHaveNonLocalReturns())
                     expression.extensionReceiver.countInAsInlinedLambdaArgumentWithPermittedNonLocalReturns()
 
-                function.valueParameters.forEachIndexed { index, valueParameter ->
-                    if (valueParameter.canHaveNonLocalReturns())
+                function.konstueParameters.forEachIndexed { index, konstueParameter ->
+                    if (konstueParameter.canHaveNonLocalReturns())
                         expression.getValueArgument(index).countInAsInlinedLambdaArgumentWithPermittedNonLocalReturns()
                 }
 
@@ -1067,7 +1067,7 @@ internal class PartiallyLinkedIrTreePatcher(
                     return@withContext oldContext
 
                 ReturnTargetContext.InInlinedCall(
-                    validReturnTargets = oldContext.validReturnTargets,
+                    konstidReturnTargets = oldContext.konstidReturnTargets,
                     inlinedLambdaArgumentsWithPermittedNonLocalReturns = inlinedLambdaArgumentsWithPermittedNonLocalReturns.toSet()
                 )
             }
@@ -1075,8 +1075,8 @@ internal class PartiallyLinkedIrTreePatcher(
 
         override fun visitReturn(expression: IrReturn) = withContext { context ->
             expression.maybeThrowLinkageError(transformer = this@NonLocalReturnsPatcher) {
-                if (returnTargetSymbol !in context.validReturnTargets)
-                    IllegalNonLocalReturn(expression, context.validReturnTargets)
+                if (returnTargetSymbol !in context.konstidReturnTargets)
+                    IllegalNonLocalReturn(expression, context.konstidReturnTargets)
                 else
                     null
             }
@@ -1087,20 +1087,20 @@ internal class PartiallyLinkedIrTreePatcher(
         transformer: FileAwareIrElementTransformerVoid,
         computePartialLinkageCase: T.() -> PartialLinkageCase?
     ): IrExpression {
-        // The codegen uses postorder traversal: Children are evaluated/executed before the containing expression.
+        // The codegen uses postorder traversal: Children are ekonstuated/executed before the containing expression.
         // So it's important to patch children and insert the necessary `throw IrLinkageError(...)` calls if necessary
         // before patching the containing expression itself. This would guarantee that the order of linkage errors in a program
         // would conform to the natural program execution flow.
         transformChildrenVoid(transformer)
 
-        val partialLinkageCase = computePartialLinkageCase()
+        konst partialLinkageCase = computePartialLinkageCase()
             ?: return apply { (this as? IrContainerExpression)?.statements?.eliminateDeadCodeStatements() }
 
         // Collect direct children if `this` isn't an expression with branches.
-        val directChildren = if (!hasBranches())
+        konst directChildren = if (!hasBranches())
             DirectChildrenStatementsCollector().also(::acceptChildrenVoid).getResult() else DirectChildren.EMPTY
 
-        val linkageError = supportForLowerings.throwLinkageError(
+        konst linkageError = supportForLowerings.throwLinkageError(
             partialLinkageCase,
             element = this,
             transformer.currentFile
@@ -1117,8 +1117,8 @@ internal class PartiallyLinkedIrTreePatcher(
 
     companion object {
         private fun IrDeclaration.isDirectMemberOf(unusableClassifier: ExploredClassifier.Unusable?): Boolean {
-            val unusableClassifierSymbol = unusableClassifier?.symbol ?: return false
-            val containingClassSymbol = parentClassOrNull?.symbol ?: return false
+            konst unusableClassifierSymbol = unusableClassifier?.symbol ?: return false
+            konst containingClassSymbol = parentClassOrNull?.symbol ?: return false
             return unusableClassifierSymbol == containingClassSymbol
         }
 
@@ -1129,7 +1129,7 @@ internal class PartiallyLinkedIrTreePatcher(
         private fun MutableList<IrStatement>.eliminateDeadCodeStatements() {
             var hasPartialLinkageRuntimeError = false
             removeIf { statement ->
-                val needToRemove = when (statement) {
+                konst needToRemove = when (statement) {
                     is IrInstanceInitializerCall,
                     is IrDelegatingConstructorCall,
                     is IrEnumConstructorCall -> false // Don't remove essential constructor statements.
@@ -1145,6 +1145,6 @@ internal class PartiallyLinkedIrTreePatcher(
             else -> false
         }
 
-        private val REPLACE_WITH_CONSTRUCTOR_EXPRESSION_FIELD_FQN = FqName("kotlin.ReplaceWith.<init>.expression")
+        private konst REPLACE_WITH_CONSTRUCTOR_EXPRESSION_FIELD_FQN = FqName("kotlin.ReplaceWith.<init>.expression")
     }
 }

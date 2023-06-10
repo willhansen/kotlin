@@ -18,6 +18,6 @@ public class PlatformDataKeys extends CommonDataKeys {
 // FILE: main.kt
 
 fun test() {
-    val project = PlatformDataKeys.PROJECT
-    val member = PlatformDataKeys().MEMBER
+    konst project = PlatformDataKeys.PROJECT
+    konst member = PlatformDataKeys().MEMBER
 }

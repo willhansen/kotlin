@@ -12,7 +12,7 @@ FILE: [ResolvedTo(RAW_FIR)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -32,7 +32,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -52,7 +52,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -72,7 +72,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -92,7 +92,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -112,7 +112,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -132,7 +132,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -152,7 +152,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -172,7 +172,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -192,7 +192,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -220,7 +220,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -248,7 +248,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: AnotherAnnotation = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: AnotherAnnotation = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
@@ -276,7 +276,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|one/two/AnotherAnnotation| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|one/two/AnotherAnnotation| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=KotlinAnnotation] get(): R|one/two/AnotherAnnotation|
 
     }
@@ -304,7 +304,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val s: R|one/two/AnotherAnnotation| = R|<local>/s|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst s: R|one/two/AnotherAnnotation| = R|<local>/s|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=KotlinAnnotation] get(): R|one/two/AnotherAnnotation|
 
     }

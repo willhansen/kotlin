@@ -36,15 +36,15 @@ import org.jetbrains.org.objectweb.asm.tree.AbstractInsnNode
 import org.jetbrains.org.objectweb.asm.tree.InsnList
 
 class IrInlineIntrinsicsSupport(
-    private val classCodegen: ClassCodegen,
-    private val reportErrorsOn: IrExpression,
-    private val containingFile: IrFile,
+    private konst classCodegen: ClassCodegen,
+    private konst reportErrorsOn: IrExpression,
+    private konst containingFile: IrFile,
 ) : ReifiedTypeInliner.IntrinsicsSupport<IrType> {
-    override val state: GenerationState
+    override konst state: GenerationState
         get() = classCodegen.context.state
 
     // todo: this likely need to be moved up as IrInlineIntrinsicsSupport is recreated every time in getOrCreateCallGenerator
-    private val pluginExtensions = IrGenerationExtension.getInstances(classCodegen.context.state.project)
+    private konst pluginExtensions = IrGenerationExtension.getInstances(classCodegen.context.state.project)
         .mapNotNull { it.getPlatformIntrinsicExtension(classCodegen.context) as? JvmIrIntrinsicExtension }
 
     override fun putClassInstance(v: InstructionAdapter, type: IrType) {
@@ -54,7 +54,7 @@ class IrInlineIntrinsicsSupport(
     override fun generateTypeParameterContainer(v: InstructionAdapter, typeParameter: TypeParameterMarker) {
         require(typeParameter is IrTypeParameterSymbol)
 
-        when (val parent = typeParameter.owner.parent) {
+        when (konst parent = typeParameter.owner.parent) {
             is IrClass -> putClassInstance(v, parent.defaultType).also { AsmUtil.wrapJavaClassIntoKClass(v) }
             is IrSimpleFunction -> {
                 check(classCodegen.context.state.generateOptimizedCallableReferenceSuperClasses) {
@@ -62,7 +62,7 @@ class IrInlineIntrinsicsSupport(
                             "Please make sure API version is set to 1.4, and -Xno-optimized-callable-references is NOT used.\n" +
                             "Container: $parent"
                 }
-                val property = parent.correspondingPropertySymbol
+                konst property = parent.correspondingPropertySymbol
                 if (property != null) {
                     generatePropertyReference(v, property.owner)
                 } else {
@@ -80,10 +80,10 @@ class IrInlineIntrinsicsSupport(
     private fun generatePropertyReference(v: InstructionAdapter, property: IrProperty) {
         // We're sure that this property has a getter because if a property is generic, it necessarily has extension receiver and
         // thus cannot have a backing field, and is required to have a getter.
-        val getter = property.getter
+        konst getter = property.getter
             ?: error("Property without getter: ${property.render()}")
-        val arity = getter.allParametersCount
-        val implClass = (if (property.isVar) MUTABLE_PROPERTY_REFERENCE_IMPL else PROPERTY_REFERENCE_IMPL).getOrNull(arity)
+        konst arity = getter.allParametersCount
+        konst implClass = (if (property.isVar) MUTABLE_PROPERTY_REFERENCE_IMPL else PROPERTY_REFERENCE_IMPL).getOrNull(arity)
             ?: error("No property reference impl class with arity $arity (${property.render()}")
 
         generateCallableReference(v, property, getter, implClass, false)
@@ -102,7 +102,7 @@ class IrInlineIntrinsicsSupport(
         // TODO: generate correct signature for functions and property accessors which have inline class types in the signature.
         SignatureString.generateSignatureString(v, function, classCodegen)
         v.iconst(declaration.getCallableReferenceTopLevelFlag())
-        val parameterTypes =
+        konst parameterTypes =
             (if (withArity) listOf(INT_TYPE) else emptyList()) +
                     listOf(JAVA_CLASS_TYPE, JAVA_STRING_TYPE, JAVA_STRING_TYPE, INT_TYPE)
         v.invokespecial(
@@ -113,7 +113,7 @@ class IrInlineIntrinsicsSupport(
     }
 
     override fun isMutableCollectionType(type: IrType): Boolean {
-        val classifier = type.classOrNull
+        konst classifier = type.classOrNull
         return classifier != null && JavaToKotlinClassMap.isMutable(classifier.owner.fqNameWhenAvailable?.toUnsafe())
     }
 

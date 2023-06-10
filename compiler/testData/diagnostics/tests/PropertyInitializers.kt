@@ -1,13 +1,13 @@
 // WITH_STDLIB
 
-class Foo(val a: Int, b: Int) {
-    val c = a + b
+class Foo(konst a: Int, b: Int) {
+    konst c = a + b
 
-    val d: Int
+    konst d: Int
         get() = a
 
-    val e: Int
+    konst e: Int
         get() = <!UNRESOLVED_REFERENCE!>b<!>
 
-    val map: Map<String, Int> = <!TYPE_MISMATCH("String; Int"), TYPE_MISMATCH("Int; String"), TYPE_MISMATCH("Map<String, Int>; Map<String, String>")!>mapOf(1 to "hello")<!>
+    konst map: Map<String, Int> = <!TYPE_MISMATCH("String; Int"), TYPE_MISMATCH("Int; String"), TYPE_MISMATCH("Map<String, Int>; Map<String, String>")!>mapOf(1 to "hello")<!>
 }

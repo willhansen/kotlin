@@ -15,6 +15,6 @@ abstract class AbstractKaptHandler(testServices: TestServices) : AnalysisHandler
     failureDisablesNextSteps = true,
     doNotRunIfThereWerePreviousFailures = true
 ) {
-    override val artifactKind: TestArtifactKind<KaptContextBinaryArtifact>
+    override konst artifactKind: TestArtifactKind<KaptContextBinaryArtifact>
         get() = KaptContextBinaryArtifact.Kind
 }

@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.fir.analysis.checkers.type
 import org.jetbrains.kotlin.*
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.reportOn
-import org.jetbrains.kotlin.diagnostics.valOrVarKeyword
+import org.jetbrains.kotlin.diagnostics.konstOrVarKeyword
 import org.jetbrains.kotlin.fir.FirFunctionTypeParameter
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.getModifierList
@@ -32,25 +32,25 @@ object FirUnsupportedModifiersInFunctionTypeParameterChecker : FirFunctionalType
     }
 
     private fun checkValOrVarKeyword(source: KtSourceElement, reporter: DiagnosticReporter, context: CheckerContext) {
-        val keyword = when (source) {
+        konst keyword = when (source) {
             is KtPsiSourceElement ->
-                (source.psi as? KtValVarKeywordOwner)?.valOrVarKeyword?.toKtPsiSourceElement()
+                (source.psi as? KtValVarKeywordOwner)?.konstOrVarKeyword?.toKtPsiSourceElement()
 
             is KtLightSourceElement ->
-                source.treeStructure.valOrVarKeyword(source.lighterASTNode)?.toKtLightSourceElement(source.treeStructure)
+                source.treeStructure.konstOrVarKeyword(source.lighterASTNode)?.toKtLightSourceElement(source.treeStructure)
 
         } ?: return
 
         reporter.reportOn(
             keyword,
             FirErrors.UNSUPPORTED,
-            "val or var on parameter in function type",
+            "konst or var on parameter in function type",
             context
         )
     }
 
     private fun checkModifiers(source: KtSourceElement, reporter: DiagnosticReporter, context: CheckerContext): Boolean {
-        val modifiersList = source.getModifierList() ?: return true
+        konst modifiersList = source.getModifierList() ?: return true
         for (modifier in modifiersList.modifiers) {
             reporter.reportOn(
                 modifier.source,

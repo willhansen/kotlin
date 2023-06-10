@@ -4,11 +4,11 @@ open class B(x: Int)
     <v0>: Int   NEW: magic[FAKE_INITIALIZER](x: Int) -> <v0>
 =====================
 == A ==
-class A(val w: Char, u: Int = 2) : B(w.toInt() + u) {
-    val x: Int
+class A(konst w: Char, u: Int = 2) : B(w.toInt() + u) {
+    konst x: Int
     var y: Int
-    val z: Int
-    val v = -1
+    konst z: Int
+    konst v = -1
 
     constructor(): this('a') {
         y = 2
@@ -30,7 +30,7 @@ class A(val w: Char, u: Int = 2) : B(w.toInt() + u) {
     }
 }
 ---------------------
-                   <v0>: Char   NEW: magic[FAKE_INITIALIZER](val w: Char) -> <v0>
+                   <v0>: Char   NEW: magic[FAKE_INITIALIZER](konst w: Char) -> <v0>
                    <v11>: A     NEW: magic[IMPLICIT_RECEIVER](x) -> <v11>
                    <v12>: A     NEW: magic[IMPLICIT_RECEIVER](w) -> <v12>
                    <v14>: A     NEW: magic[IMPLICIT_RECEIVER](z) -> <v14>

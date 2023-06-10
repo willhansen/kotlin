@@ -16,7 +16,7 @@ suspend fun suspendHere() {}
 
 suspend inline fun test(c: suspend () -> String): String {
     suspendHere()
-    val result = c()
+    konst result = c()
     suspendHere()
     return result
 }

@@ -13,7 +13,7 @@ digraph initBlock_kt {
                 color=blue
                 2 [label="Enter block"];
                 3 [label="Const: Int(1)"];
-                4 [label="Variable declaration: lval x: R|kotlin/Int|"];
+                4 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
                 5 [label="Exit block"];
             }
             6 [label="Exit init block" style="filled" fillcolor=red];
@@ -49,12 +49,12 @@ digraph initBlock_kt {
                 color=blue
                 13 [label="Enter block"];
                 14 [label="Const: Int(1)"];
-                15 [label="Variable declaration: lval x: R|kotlin/Int|"];
+                15 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
                 16 [label="Function call: R|java/lang/Exception.Exception|()" style="filled" fillcolor=yellow];
                 17 [label="Throw: throw R|java/lang/Exception.Exception|()"];
                 18 [label="Stub" style="filled" fillcolor=gray];
                 19 [label="Const: Int(2)" style="filled" fillcolor=gray];
-                20 [label="Variable declaration: lval y: R|kotlin/Int|" style="filled" fillcolor=gray];
+                20 [label="Variable declaration: lkonst y: R|kotlin/Int|" style="filled" fillcolor=gray];
                 21 [label="Exit block" style="filled" fillcolor=gray];
             }
             22 [label="Exit init block" style="filled" fillcolor=gray];

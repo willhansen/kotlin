@@ -97,7 +97,7 @@ class TestInitVarWithCustomSetter {
     // CHECK:
     //   Mangled name: TestInitVarWithCustomSetter#<set-x>(kotlin.Int){}
     //   Public signature: /TestInitVarWithCustomSetter.x.<set-x>|-740209739415615559[0]
-    set(value: Int): Unit
+    set(konstue: Int): Unit
 
   // CHECK:
   //   Mangled name: TestInitVarWithCustomSetter#<init>(){}

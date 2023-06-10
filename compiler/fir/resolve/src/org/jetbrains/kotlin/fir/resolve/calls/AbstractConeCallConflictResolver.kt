@@ -31,13 +31,13 @@ import org.jetbrains.kotlin.types.model.requireOrDescribe
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 abstract class AbstractConeCallConflictResolver(
-    private val specificityComparator: TypeSpecificityComparator,
-    protected val inferenceComponents: InferenceComponents,
-    private val transformerComponents: BodyResolveComponents,
-    private val considerMissingArgumentsInSignatures: Boolean,
+    private konst specificityComparator: TypeSpecificityComparator,
+    protected konst inferenceComponents: InferenceComponents,
+    private konst transformerComponents: BodyResolveComponents,
+    private konst considerMissingArgumentsInSignatures: Boolean,
 ) : ConeCallConflictResolver() {
 
-    private val samResolver: FirSamResolver get() = transformerComponents.samResolver
+    private konst samResolver: FirSamResolver get() = transformerComponents.samResolver
 
     /**
      * Returns `true` if [call1] is definitely more or equally specific [call2],
@@ -50,8 +50,8 @@ abstract class AbstractConeCallConflictResolver(
         useOriginalSamTypes: Boolean
     ): Boolean {
         if (discriminateGenerics) {
-            val isGeneric1 = call1.isGeneric
-            val isGeneric2 = call2.isGeneric
+            konst isGeneric1 = call1.isGeneric
+            konst isGeneric2 = call2.isGeneric
             // generic loses to non-generic
             if (isGeneric1 && !isGeneric2) return false
             if (!isGeneric1 && isGeneric2) return true
@@ -75,13 +75,13 @@ abstract class AbstractConeCallConflictResolver(
     }
 
     @Suppress("PrivatePropertyName")
-    private val SpecificityComparisonWithNumerics = object : SpecificityComparisonCallbacks {
+    private konst SpecificityComparisonWithNumerics = object : SpecificityComparisonCallbacks {
         override fun isNonSubtypeNotLessSpecific(specific: KotlinTypeMarker, general: KotlinTypeMarker): Boolean {
             requireOrDescribe(specific is ConeKotlinType, specific)
             requireOrDescribe(general is ConeKotlinType, general)
 
-            val specificClassId = specific.lowerBoundIfFlexible().classId ?: return false
-            val generalClassId = general.upperBoundIfFlexible().classId ?: return false
+            konst specificClassId = specific.lowerBoundIfFlexible().classId ?: return false
+            konst generalClassId = general.upperBoundIfFlexible().classId ?: return false
 
             // any signed >= any unsigned
 
@@ -110,11 +110,11 @@ abstract class AbstractConeCallConflictResolver(
             return specificClassId == Double && generalClassId == Float
         }
 
-        private val ClassId.isUnsigned get() = this in StandardClassIds.unsignedTypes
+        private konst ClassId.isUnsigned get() = this in StandardClassIds.unsignedTypes
     }
 
     protected fun createFlatSignature(call: Candidate): FlatSignature<Candidate> {
-        return when (val declaration = call.symbol.fir) {
+        return when (konst declaration = call.symbol.fir) {
             is FirSimpleFunction -> createFlatSignature(call, declaration)
             is FirConstructor -> createFlatSignature(call, declaration)
             is FirVariable -> createFlatSignature(call, declaration)
@@ -128,7 +128,7 @@ abstract class AbstractConeCallConflictResolver(
         return FlatSignature(
             origin = call,
             typeParameters = (variable as? FirProperty)?.typeParameters?.map { it.symbol.toLookupTag() }.orEmpty(),
-            valueParameterTypes = computeSignatureTypes(call, variable),
+            konstueParameterTypes = computeSignatureTypes(call, variable),
             hasExtensionReceiver = variable.receiverParameter != null,
             contextReceiverCount = variable.contextReceivers.size,
             hasVarargs = false,
@@ -142,11 +142,11 @@ abstract class AbstractConeCallConflictResolver(
         return FlatSignature(
             origin = call,
             typeParameters = constructor.typeParameters.map { it.symbol.toLookupTag() },
-            valueParameterTypes = computeSignatureTypes(call, constructor),
+            konstueParameterTypes = computeSignatureTypes(call, constructor),
             //constructor.receiverParameter != null,
             hasExtensionReceiver = false,
             contextReceiverCount = constructor.contextReceivers.size,
-            hasVarargs = constructor.valueParameters.any { it.isVararg },
+            hasVarargs = constructor.konstueParameters.any { it.isVararg },
             numDefaults = call.numDefaults,
             isExpect = constructor.isExpect,
             isSyntheticMember = false // TODO
@@ -157,10 +157,10 @@ abstract class AbstractConeCallConflictResolver(
         return FlatSignature(
             origin = call,
             typeParameters = function.typeParameters.map { it.symbol.toLookupTag() },
-            valueParameterTypes = computeSignatureTypes(call, function),
+            konstueParameterTypes = computeSignatureTypes(call, function),
             hasExtensionReceiver = function.receiverParameter != null,
             contextReceiverCount = function.contextReceivers.size,
-            hasVarargs = function.valueParameters.any { it.isVararg },
+            hasVarargs = function.konstueParameters.any { it.isVararg },
             numDefaults = call.numDefaults,
             isExpect = function.isExpect,
             isSyntheticMember = false // TODO
@@ -168,7 +168,7 @@ abstract class AbstractConeCallConflictResolver(
     }
 
     private fun FirValueParameter.argumentType(): ConeKotlinType {
-        val type = returnTypeRef.coneType
+        konst type = returnTypeRef.coneType
         if (isVararg) return type.arrayElementType()!!
         return type
     }
@@ -178,9 +178,9 @@ abstract class AbstractConeCallConflictResolver(
         called: FirCallableDeclaration
     ): List<TypeWithConversion> {
         return buildList {
-            val session = inferenceComponents.session
+            konst session = inferenceComponents.session
             addIfNotNull(called.receiverParameter?.typeRef?.coneType?.fullyExpandedType(session)?.let { TypeWithConversion(it) })
-            val typeForCallableReference = call.resultingTypeForCallableReference
+            konst typeForCallableReference = call.resultingTypeForCallableReference
             if (typeForCallableReference != null) {
                 // Return type isn't needed here       v
                 typeForCallableReference.typeArguments.dropLast(1)
@@ -202,7 +202,7 @@ abstract class AbstractConeCallConflictResolver(
                     // Here, no argument is passed for the parameters b and c, but the signatures will be different.
                     call.diagnostics.mapNotNullTo(this) {
                         if (it !is NoValueForParameter) return@mapNotNullTo null
-                        it.valueParameter.toTypeWithConversion(session, call)
+                        it.konstueParameter.toTypeWithConversion(session, call)
                     }
                 }
             }
@@ -210,11 +210,11 @@ abstract class AbstractConeCallConflictResolver(
     }
 
     private fun FirValueParameter.toTypeWithConversion(session: FirSession, call: Candidate): TypeWithConversion {
-        val argumentType = argumentType().fullyExpandedType(session)
+        konst argumentType = argumentType().fullyExpandedType(session)
         return if (!call.usesSAM) {
             TypeWithConversion(argumentType)
         } else {
-            val functionType = samResolver.getFunctionTypeForPossibleSamType(argumentType)
+            konst functionType = samResolver.getFunctionTypeForPossibleSamType(argumentType)
             if (functionType == null) TypeWithConversion(argumentType)
             else TypeWithConversion(functionType, argumentType)
         }

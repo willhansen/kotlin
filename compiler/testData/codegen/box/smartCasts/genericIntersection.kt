@@ -2,7 +2,7 @@
 class A
 
 fun <T> test(v: T): T {
-    val a: T = if (v !is A) v else v
+    konst a: T = if (v !is A) v else v
     return a
 }
 

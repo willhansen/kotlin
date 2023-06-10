@@ -7,7 +7,7 @@ package p1.yield
 import p1.yield.yield
 import p1.yield.foo
 
-val yield = 5
+konst yield = 5
 fun foo(){}
 
 fun bar(yield: Int = 4) {}
@@ -17,8 +17,8 @@ fun yield(yield: Int) {
     "${<!YIELD_IS_RESERVED!>yield<!>}"
 
     <!YIELD_IS_RESERVED!>yield<!>
-    val foo = <!YIELD_IS_RESERVED!>yield<!> + <!YIELD_IS_RESERVED!>yield<!>
-    val foo2 = <!YIELD_IS_RESERVED!>yield<!>
+    konst foo = <!YIELD_IS_RESERVED!>yield<!> + <!YIELD_IS_RESERVED!>yield<!>
+    konst foo2 = <!YIELD_IS_RESERVED!>yield<!>
 
     bar(yield = 5)
 
@@ -30,7 +30,7 @@ fun yield(yield: Int) {
     return@<!YIELD_IS_RESERVED!>yield<!>
     return@<!YIELD_IS_RESERVED!>yield<!> Unit
 
-    val foo5: <!YIELD_IS_RESERVED!>yield<!><*>
+    konst foo5: <!YIELD_IS_RESERVED!>yield<!><*>
 }
 
 fun yield(i: (Int) -> Unit) {}
@@ -42,7 +42,7 @@ package p2.yield
 import p2.yield.yield
 import p2.yield.foo
 
-val yield = 5
+konst yield = 5
 fun foo(){}
 
 fun bar(yield: Int = 4) {}
@@ -52,8 +52,8 @@ fun yield(yield: Int) {
     "${`yield`}"
 
     `yield`
-    val foo = `yield` + `yield`
-    val foo2 = `yield`
+    konst foo = `yield` + `yield`
+    konst foo2 = `yield`
 
     bar(`yield` = 5)
 
@@ -65,7 +65,7 @@ fun yield(yield: Int) {
     return@`yield`
     return@`yield` Unit
 
-    val foo5: `yield`<*>
+    konst foo5: `yield`<*>
 }
 
 fun yield(i: (Int) -> Unit) {}

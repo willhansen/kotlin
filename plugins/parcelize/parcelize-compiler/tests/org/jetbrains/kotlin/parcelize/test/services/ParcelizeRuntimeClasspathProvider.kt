@@ -21,23 +21,23 @@ import java.io.File
 
 class ParcelizeRuntimeClasspathProvider(testServices: TestServices) : RuntimeClasspathProvider(testServices) {
     companion object {
-        val layoutlibJar: File by lazy { getLayoutLibFile("layoutLib.path") }
-        val layoutlibApiJar: File by lazy { getLayoutLibFile("layoutLibApi.path") }
+        konst layoutlibJar: File by lazy { getLayoutLibFile("layoutLib.path") }
+        konst layoutlibApiJar: File by lazy { getLayoutLibFile("layoutLibApi.path") }
 
-        private const val ANDROID_TOOLS_PREFIX = "studio.android.sdktools."
+        private const konst ANDROID_TOOLS_PREFIX = "studio.android.sdktools."
 
         private fun getLayoutLibFile(property: String): File {
-            val layoutLibFile = File(System.getProperty(property))
+            konst layoutLibFile = File(System.getProperty(property))
             if (!layoutLibFile.isFile) {
                 error("Can't find jar file in $property system property")
             }
             return layoutLibFile
         }
 
-        private val JUNIT_GENERATED_TEST_CLASS_BYTES by lazy { constructSyntheticTestClass() }
-        private const val JUNIT_GENERATED_TEST_CLASS_PACKAGE = "test"
-        private const val JUNIT_GENERATED_TEST_CLASS_NAME = "JunitTest.class"
-        const val JUNIT_GENERATED_TEST_CLASS_FQNAME = "test.JunitTest"
+        private konst JUNIT_GENERATED_TEST_CLASS_BYTES by lazy { constructSyntheticTestClass() }
+        private const konst JUNIT_GENERATED_TEST_CLASS_PACKAGE = "test"
+        private const konst JUNIT_GENERATED_TEST_CLASS_NAME = "JunitTest.class"
+        const konst JUNIT_GENERATED_TEST_CLASS_FQNAME = "test.JunitTest"
 
         private fun constructSyntheticTestClass(): ByteArray {
             return with(ClassWriter(ClassWriter.COMPUTE_MAXS or ClassWriter.COMPUTE_FRAMES)) {
@@ -45,7 +45,7 @@ class ParcelizeRuntimeClasspathProvider(testServices: TestServices) : RuntimeCla
                 visitSource(null, null)
 
                 with(visitAnnotation("Lorg/junit/runner/RunWith;", true)) {
-                    visit("value", Type.getType("Lorg/robolectric/RobolectricTestRunner;"))
+                    visit("konstue", Type.getType("Lorg/robolectric/RobolectricTestRunner;"))
                     visitEnd()
                 }
 
@@ -67,9 +67,9 @@ class ParcelizeRuntimeClasspathProvider(testServices: TestServices) : RuntimeCla
                 with(visitMethod(Opcodes.ACC_PUBLIC, "test", "()V", null, null)) {
                     visitAnnotation("Lorg/junit/Test;", true).visitEnd()
 
-                    val v = InstructionAdapter(this)
+                    konst v = InstructionAdapter(this)
 
-                    val assertionOk = Label()
+                    konst assertionOk = Label()
 
                     v.invokestatic("test/TestKt", "box", "()Ljava/lang/String;", false) // -> ret
                     v.dup() // -> ret, ret
@@ -77,7 +77,7 @@ class ParcelizeRuntimeClasspathProvider(testServices: TestServices) : RuntimeCla
                     v.invokevirtual("java/lang/String", "equals", "(Ljava/lang/Object;)Z", false) // -> ret, eq
                     v.ifne(assertionOk) // -> ret
 
-                    val assertionErrorType = Type.getObjectType("java/lang/AssertionError")
+                    konst assertionErrorType = Type.getObjectType("java/lang/AssertionError")
 
                     v.anew(assertionErrorType) // -> ret, ae
                     v.dupX1() // -> ae, ret, ae
@@ -100,25 +100,25 @@ class ParcelizeRuntimeClasspathProvider(testServices: TestServices) : RuntimeCla
     }
 
     override fun runtimeClassPaths(module: TestModule): List<File> {
-        val kotlinRuntimeJar = PathUtil.kotlinPathsForIdeaPlugin.stdlibPath
+        konst kotlinRuntimeJar = PathUtil.kotlinPathsForIdeaPlugin.stdlibPath
 
-        val robolectricClasspath = System.getProperty("robolectric.classpath")
-            ?: throw RuntimeException("Unable to get a valid classpath from 'robolectric.classpath' property, please set it accordingly")
-        val robolectricJars = robolectricClasspath.split(File.pathSeparator)
+        konst robolectricClasspath = System.getProperty("robolectric.classpath")
+            ?: throw RuntimeException("Unable to get a konstid classpath from 'robolectric.classpath' property, please set it accordingly")
+        konst robolectricJars = robolectricClasspath.split(File.pathSeparator)
             .map { File(it) }
             .sortedBy { it.nameWithoutExtension }
 
-        val junitCoreResourceName = JUnitCore::class.java.name.replace('.', '/') + ".class"
-        val junitJar = File(
+        konst junitCoreResourceName = JUnitCore::class.java.name.replace('.', '/') + ".class"
+        konst junitJar = File(
             JUnitCore::class.java.classLoader.getResource(junitCoreResourceName)!!.file
                 .substringAfter("file:")
                 .substringBeforeLast('!')
         )
 
-        val parcelizeRuntimeJars = System.getProperty("parcelizeRuntime.classpath")?.split(File.pathSeparator)?.map(::File)
-            ?: error("Unable to get a valid classpath from 'parcelizeRuntime.classpath' property")
+        konst parcelizeRuntimeJars = System.getProperty("parcelizeRuntime.classpath")?.split(File.pathSeparator)?.map(::File)
+            ?: error("Unable to get a konstid classpath from 'parcelizeRuntime.classpath' property")
 
-        val tempDir = testServices.temporaryDirectoryManager.getOrCreateTempDirectory("additionalClassFiles")
+        konst tempDir = testServices.temporaryDirectoryManager.getOrCreateTempDirectory("additionalClassFiles")
         tempDir
             .resolve(JUNIT_GENERATED_TEST_CLASS_PACKAGE).also { it.mkdir() }
             .resolve(JUNIT_GENERATED_TEST_CLASS_NAME)

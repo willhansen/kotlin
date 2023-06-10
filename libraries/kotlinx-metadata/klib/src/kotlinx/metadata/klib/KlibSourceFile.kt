@@ -6,6 +6,6 @@
 package kotlinx.metadata.klib
 
 class KlibSourceFile(
-    val name: String
+    konst name: String
 )
 

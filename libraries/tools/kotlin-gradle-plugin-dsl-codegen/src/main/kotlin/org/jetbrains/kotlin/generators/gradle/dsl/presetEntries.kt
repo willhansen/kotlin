@@ -12,55 +12,55 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.konan.target.presetName
 
 internal class KotlinPresetEntry(
-    val presetName: String,
-    val presetType: TypeName,
-    val targetType: TypeName,
-    val deprecation: Deprecation? = null,
-    val entityName: String = presetName,
+    konst presetName: String,
+    konst presetType: TypeName,
+    konst targetType: TypeName,
+    konst deprecation: Deprecation? = null,
+    konst entityName: String = presetName,
     // Adds `.also { $alsoBlockAfterConfiguration }` after configureOrCreate(...)
-    val alsoBlockAfterConfiguration: String? = null,
+    konst alsoBlockAfterConfiguration: String? = null,
     // Extra declarations will be inserted before functions are generated
-    val extraTopLevelDeclarations: List<String> = emptyList(),
+    konst extraTopLevelDeclarations: List<String> = emptyList(),
 ) {
     class Deprecation(
-        val message: String,
-        val level: DeprecationLevel,
-        val replaceWithOtherPreset: String? = null // when set, it will generate ReplaceWith with related argument names
+        konst message: String,
+        konst level: DeprecationLevel,
+        konst replaceWithOtherPreset: String? = null // when set, it will generate ReplaceWith with related argument names
     )
 }
 
 internal fun KotlinPresetEntry.typeNames(): Set<TypeName> = setOf(presetType, targetType)
 
-internal const val MPP_PACKAGE = "org.jetbrains.kotlin.gradle.plugin.mpp"
+internal const konst MPP_PACKAGE = "org.jetbrains.kotlin.gradle.plugin.mpp"
 
 internal object NativeFQNames {
     object Targets {
-        const val base = "$MPP_PACKAGE.KotlinNativeTarget"
-        const val withHostTests = "$MPP_PACKAGE.KotlinNativeTargetWithHostTests"
-        const val withSimulatorTests = "$MPP_PACKAGE.KotlinNativeTargetWithSimulatorTests"
+        const konst base = "$MPP_PACKAGE.KotlinNativeTarget"
+        const konst withHostTests = "$MPP_PACKAGE.KotlinNativeTargetWithHostTests"
+        const konst withSimulatorTests = "$MPP_PACKAGE.KotlinNativeTargetWithSimulatorTests"
     }
 
     object Presets {
-        const val simple = "$MPP_PACKAGE.KotlinNativeTargetPreset"
-        const val withHostTests = "$MPP_PACKAGE.KotlinNativeTargetWithHostTestsPreset"
-        const val withSimulatorTests = "$MPP_PACKAGE.KotlinNativeTargetWithSimulatorTestsPreset"
+        const konst simple = "$MPP_PACKAGE.KotlinNativeTargetPreset"
+        const konst withHostTests = "$MPP_PACKAGE.KotlinNativeTargetWithHostTestsPreset"
+        const konst withSimulatorTests = "$MPP_PACKAGE.KotlinNativeTargetWithSimulatorTestsPreset"
     }
 }
 
-internal val jvmPresetEntry = KotlinPresetEntry(
+internal konst jvmPresetEntry = KotlinPresetEntry(
     "jvm",
     typeName("$MPP_PACKAGE.KotlinJvmTargetPreset"),
     typeName("org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget")
 )
 
-internal val androidTargetPresetEntry = KotlinPresetEntry(
+internal konst androidTargetPresetEntry = KotlinPresetEntry(
     "androidTarget",
     typeName("$MPP_PACKAGE.KotlinAndroidTargetPreset"),
     typeName("$MPP_PACKAGE.KotlinAndroidTarget"),
     entityName = "android",
 )
 
-internal val androidPresetEntry = KotlinPresetEntry(
+internal konst androidPresetEntry = KotlinPresetEntry(
     "android",
     typeName("$MPP_PACKAGE.KotlinAndroidTargetPreset"),
     typeName("$MPP_PACKAGE.KotlinAndroidTarget"),
@@ -70,7 +70,7 @@ internal val androidPresetEntry = KotlinPresetEntry(
         replaceWithOtherPreset = "androidTarget"
     ),
     extraTopLevelDeclarations = listOf(
-        "private const val ANDROID_TARGET_MIGRATION_MESSAGE" +
+        "private const konst ANDROID_TARGET_MIGRATION_MESSAGE" +
                 " = \"Please use androidTarget() instead. Learn more here: https://kotl.in/android-target-dsl\""
     ),
     alsoBlockAfterConfiguration = """
@@ -84,9 +84,9 @@ internal val androidPresetEntry = KotlinPresetEntry(
 )
 
 // Note: modifying these sets should also be reflected in the MPP plugin code, see 'setupDefaultPresets'
-private val nativeTargetsWithHostTests =
+private konst nativeTargetsWithHostTests =
     setOf(KonanTarget.LINUX_X64, KonanTarget.MACOS_X64, KonanTarget.MACOS_ARM64, KonanTarget.MINGW_X64)
-private val nativeTargetsWithSimulatorTests =
+private konst nativeTargetsWithSimulatorTests =
     setOf(
         KonanTarget.IOS_X64,
         KonanTarget.IOS_SIMULATOR_ARM64,
@@ -99,10 +99,10 @@ private val nativeTargetsWithSimulatorTests =
         KonanTarget.TVOS_SIMULATOR_ARM64
     )
 
-internal val nativePresetEntries = HostManager().targets
+internal konst nativePresetEntries = HostManager().targets
     .map { (_, target) ->
 
-        val (presetType, targetType) = when (target) {
+        konst (presetType, targetType) = when (target) {
             in nativeTargetsWithHostTests ->
                 Presets.withHostTests to Targets.withHostTests
             in nativeTargetsWithSimulatorTests ->
@@ -111,14 +111,14 @@ internal val nativePresetEntries = HostManager().targets
                 Presets.simple to Targets.base
         }
 
-        val deprecation = KotlinPresetEntry.Deprecation(
+        konst deprecation = KotlinPresetEntry.Deprecation(
             message = "DEPRECATED_TARGET_MESSAGE",
             level = DeprecationLevel.ERROR
         ).takeIf { target in KonanTarget.deprecatedTargets }
         KotlinPresetEntry(target.presetName, typeName(presetType), typeName(targetType), deprecation)
     }
 
-internal val allPresetEntries = listOf(
+internal konst allPresetEntries = listOf(
     jvmPresetEntry,
     androidTargetPresetEntry,
     androidPresetEntry

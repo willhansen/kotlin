@@ -22,7 +22,7 @@ As these APIs represent different paradigms, migration can't be automated and re
  * Visitor that gets names of all public functions which start with 'test'
  */
 class TestFunctionFinder : KmClassVisitor() {
-    val result = mutableListOf<String>()
+    konst result = mutableListOf<String>()
 
     override fun visitFunction(flags: Flags, name: String): KmFunctionVisitor? {
         if (Flag.Common.IS_PUBLIC(flags) && name.startsWith("test")) result.add(name)
@@ -74,10 +74,10 @@ To migrate, simply replace calls to writers with new functions:
 **Before:**
 ```kotlin
 fun saveClass(kmClass: KmClass) {
-    val writer = KotlinClassMetadata.Class.Writer()
+    konst writer = KotlinClassMetadata.Class.Writer()
     kmClass.accept(writer)
-    val classMetadata: KotlinClassMetadata.Class = writer.write()
-    val kotlinClassHeader: KotlinClassHeader = classMetadata.header
+    konst classMetadata: KotlinClassMetadata.Class = writer.write()
+    konst kotlinClassHeader: KotlinClassHeader = classMetadata.header
     
     // Write kotlinClassHeader.data1, data2, etc using ASM
 }
@@ -86,8 +86,8 @@ fun saveClass(kmClass: KmClass) {
 **After:**
 ```kotlin
 fun saveClass(kmClass: KmClass) {
-    val classMetadata: KotlinClassMetadata.Class = KotlinClassMetadata.writeClass(kmClass)
-    val metadata: Metadata = classMetadata.annotationData
+    konst classMetadata: KotlinClassMetadata.Class = KotlinClassMetadata.writeClass(kmClass)
+    konst metadata: Metadata = classMetadata.annotationData
 
     // Write Metadata.data1, data2, etc using ASM
 }

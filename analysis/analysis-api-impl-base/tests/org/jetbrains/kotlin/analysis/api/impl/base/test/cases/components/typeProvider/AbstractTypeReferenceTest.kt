@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractTypeReferenceTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val expressionAtCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret(ktFile) as KtTypeReference
+        konst expressionAtCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret(ktFile) as KtTypeReference
 
-        val actual = analyseForTest(expressionAtCaret) {
-            val ktType = expressionAtCaret.getKtType()
+        konst actual = analyseForTest(expressionAtCaret) {
+            konst ktType = expressionAtCaret.getKtType()
             buildString {
                 appendLine("expression: ${expressionAtCaret.text}")
                 appendLine("ktType: ${ktType.render(position = Variance.INVARIANT)}")

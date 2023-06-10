@@ -24,26 +24,26 @@ import kotlin.contracts.contract
 /**
  * Keyed locks provider.
  */
-internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractChecker) {
-    private val globalLock = ReentrantLock()
+internal class LLFirLockProvider(private konst checker: LLFirLazyResolveContractChecker) {
+    private konst globalLock = ReentrantLock()
 
-    private val implicitTypesLock = ReentrantLock()
+    private konst implicitTypesLock = ReentrantLock()
 
     inline fun <R> withGlobalLock(
         key: FirFile,
-        lockingIntervalMs: Long = DEFAULT_LOCKING_INTERVAL,
+        lockingInterkonstMs: Long = DEFAULT_LOCKING_INTERVAL,
         action: () -> R,
     ): R {
         if (!globalLockEnabled) return action()
 
-        return globalLock.lockWithPCECheck(lockingIntervalMs) {
-            val session = key.llFirSession
+        return globalLock.lockWithPCECheck(lockingInterkonstMs) {
+            konst session = key.llFirSession
             if (!session.isValid && shouldRetryFlag.get()) {
-                val description = session.ktModule.moduleDescription
-                throw InvalidSessionException("Session '$description' is invalid", description)
+                konst description = session.ktModule.moduleDescription
+                throw InkonstidSessionException("Session '$description' is inkonstid", description)
             }
 
-            // Normally, analysis should not be allowed on an invalid session.
+            // Normally, analysis should not be allowed on an inkonstid session.
             // However, there isn't an easy way to cancel or redo it in general case, as it must then be supported on use-site.
             withRetryFlag(false, action)
         }
@@ -53,7 +53,7 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
         phase: FirResolvePhase,
         action: () -> Unit,
     ) {
-        val lock = when (phase) {
+        konst lock = when (phase) {
             FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE -> implicitTypesLock
             else -> null
         }
@@ -148,7 +148,7 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
             checkCanceled()
 
             @OptIn(ResolveStateAccess::class)
-            val stateSnapshot = resolveState
+            konst stateSnapshot = resolveState
             if (stateSnapshot.resolvePhase >= toPhase) {
                 // already resolved by some other thread
                 return
@@ -177,7 +177,7 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
                         exceptionOccurred = true
                         throw e
                     } finally {
-                        val newPhase = if (updatePhase && !exceptionOccurred) toPhase else stateSnapshot.resolvePhase
+                        konst newPhase = if (updatePhase && !exceptionOccurred) toPhase else stateSnapshot.resolvePhase
                         unlock(toPhase = newPhase)
                     }
 
@@ -197,8 +197,8 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
         toPhase: FirResolvePhase,
         stateSnapshot: FirResolveState,
     ) {
-        val latch = CountDownLatch(1)
-        val newState = FirInProcessOfResolvingToPhaseStateWithBarrier(toPhase, latch)
+        konst latch = CountDownLatch(1)
+        konst newState = FirInProcessOfResolvingToPhaseStateWithBarrier(toPhase, latch)
         resolveStateFieldUpdater.compareAndSet(this, stateSnapshot, newState)
     }
 
@@ -206,12 +206,12 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
         toPhase: FirResolvePhase,
         stateSnapshot: FirResolveState,
     ): Boolean {
-        val newState = FirInProcessOfResolvingToPhaseStateWithoutBarrier(toPhase)
+        konst newState = FirInProcessOfResolvingToPhaseStateWithoutBarrier(toPhase)
         return resolveStateFieldUpdater.compareAndSet(this, stateSnapshot, newState)
     }
 
     private fun FirElementWithResolveState.unlock(toPhase: FirResolvePhase) {
-        when (val stateSnapshotAfter = resolveStateFieldUpdater.getAndSet(this, FirResolvedToPhaseState(toPhase))) {
+        when (konst stateSnapshotAfter = resolveStateFieldUpdater.getAndSet(this, FirResolvedToPhaseState(toPhase))) {
             is FirInProcessOfResolvingToPhaseStateWithoutBarrier -> {}
             is FirInProcessOfResolvingToPhaseStateWithBarrier -> {
                 stateSnapshotAfter.barrier.countDown()
@@ -223,56 +223,56 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
     }
 }
 
-private val resolveStateFieldUpdater = AtomicReferenceFieldUpdater.newUpdater(
+private konst resolveStateFieldUpdater = AtomicReferenceFieldUpdater.newUpdater(
     FirElementWithResolveState::class.java,
     FirResolveState::class.java,
     "resolveState"
 )
 
-private val globalLockEnabled: Boolean by lazy(LazyThreadSafetyMode.PUBLICATION) {
+private konst globalLockEnabled: Boolean by lazy(LazyThreadSafetyMode.PUBLICATION) {
     Registry.`is`("kotlin.parallel.resolve.under.global.lock", false)
 }
 
-private const val DEFAULT_LOCKING_INTERVAL = 50L
+private const konst DEFAULT_LOCKING_INTERVAL = 50L
 
-internal class InvalidSessionException(message: String, val moduleDescription: String) : RuntimeException(message)
+internal class InkonstidSessionException(message: String, konst moduleDescription: String) : RuntimeException(message)
 
 /*
-    The flag specifies whether the analysis action should be repeated in case if it was originally started on an invalid session.
+    The flag specifies whether the analysis action should be repeated in case if it was originally started on an inkonstid session.
 
-    Possible values:
-        - `true` – throw the marker [InvalidSessionException] to trigger the retry.
+    Possible konstues:
+        - `true` – throw the marker [InkonstidSessionException] to trigger the retry.
         - `false` – process analysis as usual (default).
  */
-private val shouldRetryFlag: ThreadLocal<Boolean> = ThreadLocal.withInitial { false }
+private konst shouldRetryFlag: ThreadLocal<Boolean> = ThreadLocal.withInitial { false }
 
-private val LOG = Logger.getInstance(LLFirLockProvider::class.java)
+private konst LOG = Logger.getInstance(LLFirLockProvider::class.java)
 
 /**
- * Retry the `action` calculation with a new FIR session if session passed to [LLFirLockProvider.withWriteLock] turns to be invalid.
+ * Retry the `action` calculation with a new FIR session if session passed to [LLFirLockProvider.withWriteLock] turns to be inkonstid.
  * This is a temporary solution to fix inconsistent analysis state in common cases of idempotent analysis.
  * The right solution would be to modify the FIR tree after the analysis is done, so the tree will always be in consistent state.
  */
-internal inline fun <R> retryOnInvalidSession(action: () -> R): R {
+internal inline fun <R> retryOnInkonstidSession(action: () -> R): R {
     withRetryFlag(true) {
         while (true) {
             try {
                 return action()
-            } catch (e: InvalidSessionException) {
-                LOG.warn("Processing with invalid module '${e.moduleDescription}'")
+            } catch (e: InkonstidSessionException) {
+                LOG.warn("Processing with inkonstid module '${e.moduleDescription}'")
             }
         }
     }
 }
 
 @OptIn(ExperimentalContracts::class)
-private inline fun <R> withRetryFlag(value: Boolean, action: () -> R): R {
+private inline fun <R> withRetryFlag(konstue: Boolean, action: () -> R): R {
     contract {
         callsInPlace(action, InvocationKind.EXACTLY_ONCE)
     }
 
-    val oldValue = shouldRetryFlag.get()
-    shouldRetryFlag.set(value)
+    konst oldValue = shouldRetryFlag.get()
+    shouldRetryFlag.set(konstue)
     try {
         return action()
     } finally {

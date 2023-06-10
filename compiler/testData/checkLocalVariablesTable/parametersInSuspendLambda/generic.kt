@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-data class A<T, F>(val x: T, val y: F)
+data class A<T, F>(konst x: T, konst y: F)
 
 suspend fun <X, Y> foo(a: A<X, Y>, block: suspend (A<X, Y>) -> String) = block(a)
 

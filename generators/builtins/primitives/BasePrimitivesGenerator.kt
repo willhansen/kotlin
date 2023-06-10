@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.generators.builtins.PrimitiveType
 import org.jetbrains.kotlin.generators.builtins.generateBuiltIns.BuiltInsGenerator
 import java.io.PrintWriter
 
-abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltInsGenerator {
+abstract class BasePrimitivesGenerator(private konst writer: PrintWriter) : BuiltInsGenerator {
     companion object {
-        internal val binaryOperators: List<String> = listOf(
+        internal konst binaryOperators: List<String> = listOf(
             "plus",
             "minus",
             "times",
@@ -19,25 +19,25 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
             "rem",
         )
 
-        internal val unaryPlusMinusOperators: Map<String, String> = mapOf(
-            "unaryPlus" to "Returns this value.",
-            "unaryMinus" to "Returns the negative of this value."
+        internal konst unaryPlusMinusOperators: Map<String, String> = mapOf(
+            "unaryPlus" to "Returns this konstue.",
+            "unaryMinus" to "Returns the negative of this konstue."
         )
 
-        internal val shiftOperators: Map<String, String> = mapOf(
-            "shl" to "Shifts this value left by the [bitCount] number of bits.",
-            "shr" to "Shifts this value right by the [bitCount] number of bits, filling the leftmost bits with copies of the sign bit.",
-            "ushr" to "Shifts this value right by the [bitCount] number of bits, filling the leftmost bits with zeros."
+        internal konst shiftOperators: Map<String, String> = mapOf(
+            "shl" to "Shifts this konstue left by the [bitCount] number of bits.",
+            "shr" to "Shifts this konstue right by the [bitCount] number of bits, filling the leftmost bits with copies of the sign bit.",
+            "ushr" to "Shifts this konstue right by the [bitCount] number of bits, filling the leftmost bits with zeros."
         )
 
-        internal val bitwiseOperators: Map<String, String> = mapOf(
-            "and" to "Performs a bitwise AND operation between the two values.",
-            "or" to "Performs a bitwise OR operation between the two values.",
-            "xor" to "Performs a bitwise XOR operation between the two values."
+        internal konst bitwiseOperators: Map<String, String> = mapOf(
+            "and" to "Performs a bitwise AND operation between the two konstues.",
+            "or" to "Performs a bitwise OR operation between the two konstues.",
+            "xor" to "Performs a bitwise XOR operation between the two konstues."
         )
 
         internal fun shiftOperatorsDocDetail(kind: PrimitiveType): String {
-            val bitsUsed = when (kind) {
+            konst bitsUsed = when (kind) {
                 PrimitiveType.INT -> "five"
                 PrimitiveType.LONG -> "six"
                 else -> throw IllegalArgumentException("Bit shift operation is not implemented for $kind")
@@ -49,41 +49,41 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
         }
 
         internal fun incDecOperatorsDoc(name: String): String {
-            val diff = if (name == "inc") "incremented" else "decremented"
+            konst diff = if (name == "inc") "incremented" else "decremented"
 
             return """
-                Returns this value $diff by one.
+                Returns this konstue $diff by one.
 
                 @sample samples.misc.Builtins.$name
             """.trimIndent()
         }
 
         internal fun binaryOperatorDoc(operator: String, operand1: PrimitiveType, operand2: PrimitiveType): String = when (operator) {
-            "plus" -> "Adds the other value to this value."
-            "minus" -> "Subtracts the other value from this value."
-            "times" -> "Multiplies this value by the other value."
+            "plus" -> "Adds the other konstue to this konstue."
+            "minus" -> "Subtracts the other konstue from this konstue."
+            "times" -> "Multiplies this konstue by the other konstue."
             "div" -> {
                 if (operand1.isIntegral && operand2.isIntegral)
-                    "Divides this value by the other value, truncating the result to an integer that is closer to zero."
+                    "Divides this konstue by the other konstue, truncating the result to an integer that is closer to zero."
                 else
-                    "Divides this value by the other value."
+                    "Divides this konstue by the other konstue."
             }
             "floorDiv" ->
-                "Divides this value by the other value, flooring the result to an integer that is closer to negative infinity."
+                "Divides this konstue by the other konstue, flooring the result to an integer that is closer to negative infinity."
             "rem" -> {
                 """
-                Calculates the remainder of truncating division of this value (dividend) by the other value (divisor).
+                Calculates the remainder of truncating division of this konstue (dividend) by the other konstue (divisor).
                 
-                The result is either zero or has the same sign as the _dividend_ and has the absolute value less than the absolute value of the divisor.
+                The result is either zero or has the same sign as the _dividend_ and has the absolute konstue less than the absolute konstue of the divisor.
                 """.trimIndent()
             }
             "mod" -> {
                 """
-                Calculates the remainder of flooring division of this value (dividend) by the other value (divisor).
+                Calculates the remainder of flooring division of this konstue (dividend) by the other konstue (divisor).
 
-                The result is either zero or has the same sign as the _divisor_ and has the absolute value less than the absolute value of the divisor.
+                The result is either zero or has the same sign as the _divisor_ and has the absolute konstue less than the absolute konstue of the divisor.
                 """.trimIndent() + if (operand1.isFloatingPoint)
-                    "\n\n" + "If the result cannot be represented exactly, it is rounded to the nearest representable number. In this case the absolute value of the result can be less than or _equal to_ the absolute value of the divisor."
+                    "\n\n" + "If the result cannot be represented exactly, it is rounded to the nearest representable number. In this case the absolute konstue of the result can be less than or _equal to_ the absolute konstue of the divisor."
                 else ""
             }
             else -> error("No documentation for operator $operator")
@@ -97,17 +97,17 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
             require(fromFloating.isFloatingPoint)
             require(toIntegral.isIntegral)
 
-            val thisName = fromFloating.capitalized
-            val otherName = toIntegral.capitalized
+            konst thisName = fromFloating.capitalized
+            konst otherName = toIntegral.capitalized
 
             return if (compareByDomainCapacity(toIntegral, PrimitiveType.INT) < 0) {
                 """
-             The resulting `$otherName` value is equal to `this.toInt().to$otherName()`.
+             The resulting `$otherName` konstue is equal to `this.toInt().to$otherName()`.
             """.trimIndent()
             } else {
                 """
              The fractional part, if any, is rounded down towards zero.
-             Returns zero if this `$thisName` value is `NaN`, [$otherName.MIN_VALUE] if it's less than `$otherName.MIN_VALUE`,
+             Returns zero if this `$thisName` konstue is `NaN`, [$otherName.MIN_VALUE] if it's less than `$otherName.MIN_VALUE`,
              [$otherName.MAX_VALUE] if it's bigger than `$otherName.MAX_VALUE`.
             """.trimIndent()
             }
@@ -117,18 +117,18 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
             require(fromFloating.isFloatingPoint)
             require(toFloating.isFloatingPoint)
 
-            val thisName = fromFloating.capitalized
-            val otherName = toFloating.capitalized
+            konst thisName = fromFloating.capitalized
+            konst otherName = toFloating.capitalized
 
             return if (compareByDomainCapacity(toFloating, fromFloating) < 0) {
                 """
-             The resulting value is the closest `$otherName` to this `$thisName` value.
-             In case when this `$thisName` value is exactly between two `$otherName`s,
+             The resulting konstue is the closest `$otherName` to this `$thisName` konstue.
+             In case when this `$thisName` konstue is exactly between two `$otherName`s,
              the one with zero at least significant bit of mantissa is selected.
             """.trimIndent()
             } else {
                 """
-             The resulting `$otherName` value represents the same numerical value as this `$thisName`.
+             The resulting `$otherName` konstue represents the same numerical konstue as this `$thisName`.
             """.trimIndent()
             }
         }
@@ -137,41 +137,41 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
             require(fromIntegral.isIntegral)
             require(toIntegral.isIntegral)
 
-            val thisName = fromIntegral.capitalized
-            val otherName = toIntegral.capitalized
+            konst thisName = fromIntegral.capitalized
+            konst otherName = toIntegral.capitalized
 
             return if (toIntegral == PrimitiveType.CHAR) {
                 when (fromIntegral) {
                     PrimitiveType.SHORT -> """
-                        The resulting `Char` code is equal to this value reinterpreted as an unsigned number,
+                        The resulting `Char` code is equal to this konstue reinterpreted as an unsigned number,
                         i.e. it has the same binary representation as this `Short`.
                         """.trimIndent()
                     PrimitiveType.BYTE -> """
-                        If this value is non-negative, the resulting `Char` code is equal to this value.
+                        If this konstue is non-negative, the resulting `Char` code is equal to this konstue.
                         
-                        The least significant 8 bits of the resulting `Char` code are the same as the bits of this `Byte` value,
-                        whereas the most significant 8 bits are filled with the sign bit of this value.
+                        The least significant 8 bits of the resulting `Char` code are the same as the bits of this `Byte` konstue,
+                        whereas the most significant 8 bits are filled with the sign bit of this konstue.
                         """.trimIndent()
                     else -> """
-                        If this value is in the range of `Char` codes `Char.MIN_VALUE..Char.MAX_VALUE`,
-                        the resulting `Char` code is equal to this value.
+                        If this konstue is in the range of `Char` codes `Char.MIN_VALUE..Char.MAX_VALUE`,
+                        the resulting `Char` code is equal to this konstue.
                         
-                        The resulting `Char` code is represented by the least significant 16 bits of this `$thisName` value.
+                        The resulting `Char` code is represented by the least significant 16 bits of this `$thisName` konstue.
                         """.trimIndent()
                 }
             } else if (compareByDomainCapacity(toIntegral, fromIntegral) < 0) {
                 """
-             If this value is in [$otherName.MIN_VALUE]..[$otherName.MAX_VALUE], the resulting `$otherName` value represents
-             the same numerical value as this `$thisName`.
+             If this konstue is in [$otherName.MIN_VALUE]..[$otherName.MAX_VALUE], the resulting `$otherName` konstue represents
+             the same numerical konstue as this `$thisName`.
              
-             The resulting `$otherName` value is represented by the least significant ${toIntegral.bitSize} bits of this `$thisName` value.
+             The resulting `$otherName` konstue is represented by the least significant ${toIntegral.bitSize} bits of this `$thisName` konstue.
             """.trimIndent()
             } else {
                 """
-             The resulting `$otherName` value represents the same numerical value as this `$thisName`.
+             The resulting `$otherName` konstue represents the same numerical konstue as this `$thisName`.
              
-             The least significant ${fromIntegral.bitSize} bits of the resulting `$otherName` value are the same as the bits of this `$thisName` value,
-             whereas the most significant ${toIntegral.bitSize - fromIntegral.bitSize} bits are filled with the sign bit of this value.
+             The least significant ${fromIntegral.bitSize} bits of the resulting `$otherName` konstue are the same as the bits of this `$thisName` konstue,
+             whereas the most significant ${toIntegral.bitSize - fromIntegral.bitSize} bits are filled with the sign bit of this konstue.
             """.trimIndent()
             }
         }
@@ -180,18 +180,18 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
             require(fromIntegral.isIntegral)
             require(toFloating.isFloatingPoint)
 
-            val thisName = fromIntegral.capitalized
-            val otherName = toFloating.capitalized
+            konst thisName = fromIntegral.capitalized
+            konst otherName = toFloating.capitalized
 
             return if (fromIntegral == PrimitiveType.LONG || fromIntegral == PrimitiveType.INT && toFloating == PrimitiveType.FLOAT) {
                 """
-             The resulting value is the closest `$otherName` to this `$thisName` value.
-             In case when this `$thisName` value is exactly between two `$otherName`s,
+             The resulting konstue is the closest `$otherName` to this `$thisName` konstue.
+             In case when this `$thisName` konstue is exactly between two `$otherName`s,
              the one with zero at least significant bit of mantissa is selected.
             """.trimIndent()
             } else {
                 """
-             The resulting `$otherName` value represents the same numerical value as this `$thisName`.
+             The resulting `$otherName` konstue represents the same numerical konstue as this `$thisName`.
             """.trimIndent()
             }
         }
@@ -207,7 +207,7 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
         }
     }
 
-    private val typeDescriptions: Map<PrimitiveType, String> = mapOf(
+    private konst typeDescriptions: Map<PrimitiveType, String> = mapOf(
         PrimitiveType.DOUBLE to "double-precision 64-bit IEEE 754 floating point number",
         PrimitiveType.FLOAT to "single-precision 32-bit IEEE 754 floating point number",
         PrimitiveType.LONG to "64-bit signed integer",
@@ -239,7 +239,7 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
 
     private fun FileBuilder.generateClasses() {
         for (thisKind in PrimitiveType.onlyNumeric.filter { it.shouldGenerate() }) {
-            val className = thisKind.capitalized
+            konst className = thisKind.capitalized
 
             klass {
                 appendDoc("Represents a ${typeDescriptions[thisKind]}.")
@@ -267,69 +267,69 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
 
     private fun ClassBuilder.generateCompanionObject(thisKind: PrimitiveType) {
         companionObject {
-            val className = thisKind.capitalized
+            konst className = thisKind.capitalized
             if (thisKind == PrimitiveType.FLOAT || thisKind == PrimitiveType.DOUBLE) {
-                val (minValue, maxValue, posInf, negInf, nan) = primitiveConstants(thisKind)
+                konst (minValue, maxValue, posInf, negInf, nan) = primitiveConstants(thisKind)
                 property {
-                    appendDoc("A constant holding the smallest *positive* nonzero value of $className.")
+                    appendDoc("A constant holding the smallest *positive* nonzero konstue of $className.")
                     name = "MIN_VALUE"
                     type = className
-                    value = minValue.toString()
+                    konstue = minValue.toString()
                 }.modifyGeneratedCompanionObjectProperty(thisKind)
 
                 property {
-                    appendDoc("A constant holding the largest positive finite value of $className.")
+                    appendDoc("A constant holding the largest positive finite konstue of $className.")
                     name = "MAX_VALUE"
                     type = className
-                    value = maxValue.toString()
+                    konstue = maxValue.toString()
                 }.modifyGeneratedCompanionObjectProperty(thisKind)
 
                 property {
-                    appendDoc("A constant holding the positive infinity value of $className.")
+                    appendDoc("A constant holding the positive infinity konstue of $className.")
                     name = "POSITIVE_INFINITY"
                     type = className
-                    value = posInf.toString()
+                    konstue = posInf.toString()
                 }.modifyGeneratedCompanionObjectProperty(thisKind)
 
                 property {
-                    appendDoc("A constant holding the negative infinity value of $className.")
+                    appendDoc("A constant holding the negative infinity konstue of $className.")
                     name = "NEGATIVE_INFINITY"
                     type = className
-                    value = negInf.toString()
+                    konstue = negInf.toString()
                 }.modifyGeneratedCompanionObjectProperty(thisKind)
 
                 property {
-                    appendDoc("A constant holding the \"not a number\" value of $className.")
+                    appendDoc("A constant holding the \"not a number\" konstue of $className.")
                     name = "NaN"
                     type = className
-                    value = nan.toString()
+                    konstue = nan.toString()
                 }.modifyGeneratedCompanionObjectProperty(thisKind)
             }
 
             if (thisKind == PrimitiveType.INT || thisKind == PrimitiveType.LONG || thisKind == PrimitiveType.SHORT || thisKind == PrimitiveType.BYTE) {
-                val (minValue, maxValue) = primitiveConstants(thisKind)
+                konst (minValue, maxValue) = primitiveConstants(thisKind)
                 property {
-                    appendDoc("A constant holding the minimum value an instance of $className can have.")
+                    appendDoc("A constant holding the minimum konstue an instance of $className can have.")
                     name = "MIN_VALUE"
                     type = className
-                    value = minValue.toString()
+                    konstue = minValue.toString()
                 }.modifyGeneratedCompanionObjectProperty(thisKind)
 
                 property {
-                    appendDoc("A constant holding the maximum value an instance of $className can have.")
+                    appendDoc("A constant holding the maximum konstue an instance of $className can have.")
                     name = "MAX_VALUE"
                     type = className
-                    value = maxValue.toString()
+                    konstue = maxValue.toString()
                 }.modifyGeneratedCompanionObjectProperty(thisKind)
             }
 
-            val sizeSince = if (thisKind.isFloatingPoint) "1.4" else "1.3"
+            konst sizeSince = if (thisKind.isFloatingPoint) "1.4" else "1.3"
             property {
                 appendDoc("The number of bytes used to represent an instance of $className in a binary form.")
                 annotations += mutableListOf("SinceKotlin(\"$sizeSince\")")
                 name = "SIZE_BYTES"
                 type = "Int"
-                value = thisKind.byteSize.toString()
+                konstue = thisKind.byteSize.toString()
             }.modifyGeneratedCompanionObjectProperty(thisKind)
 
             property {
@@ -337,22 +337,22 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
                 annotations += mutableListOf("SinceKotlin(\"$sizeSince\")")
                 name = "SIZE_BITS"
                 type = "Int"
-                value = thisKind.bitSize.toString()
+                konstue = thisKind.bitSize.toString()
             }.modifyGeneratedCompanionObjectProperty(thisKind)
         }.modifyGeneratedCompanionObject(thisKind)
     }
 
     private fun ClassBuilder.generateCompareTo(thisKind: PrimitiveType) {
         for (otherKind in PrimitiveType.onlyNumeric) {
-            val doc = """
-                    Compares this value with the specified value for order.
-                    Returns zero if this value is equal to the specified other value, a negative number if it's less than other,
+            konst doc = """
+                    Compares this konstue with the specified konstue for order.
+                    Returns zero if this konstue is equal to the specified other konstue, a negative number if it's less than other,
                     or a positive number if it's greater than other.
                 """.trimIndent()
 
             method {
                 appendDoc(doc)
-                annotations += "kotlin.internal.IntrinsicConstEvaluation"
+                annotations += "kotlin.internal.IntrinsicConstEkonstuation"
                 signature {
                     isOverride = otherKind == thisKind
                     isOperator = true
@@ -375,11 +375,11 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
 
     private fun ClassBuilder.generateOperator(operatorName: String, thisKind: PrimitiveType) {
         for (otherKind in PrimitiveType.onlyNumeric) {
-            val opReturnType = getOperatorReturnType(thisKind, otherKind)
+            konst opReturnType = getOperatorReturnType(thisKind, otherKind)
 
-            val annotationsToAdd = buildList {
+            konst annotationsToAdd = buildList {
                 if (operatorName == "rem") add("SinceKotlin(\"1.1\")")
-                add("kotlin.internal.IntrinsicConstEvaluation")
+                add("kotlin.internal.IntrinsicConstEkonstuation")
             }
 
             method {
@@ -411,14 +411,14 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
         }
 
         for ((operatorName, doc) in unaryPlusMinusOperators) {
-            val opReturnType = when (thisKind) {
+            konst opReturnType = when (thisKind) {
                 in listOf(PrimitiveType.SHORT, PrimitiveType.BYTE, PrimitiveType.CHAR) -> PrimitiveType.INT.capitalized
                 else -> thisKind.capitalized
             }
 
             method {
                 appendDoc(doc)
-                annotations += "kotlin.internal.IntrinsicConstEvaluation"
+                annotations += "kotlin.internal.IntrinsicConstEkonstuation"
                 signature {
                     isOperator = true
                     methodName = operatorName
@@ -430,14 +430,14 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
 
     private fun ClassBuilder.generateRangeTo(thisKind: PrimitiveType) {
         for (otherKind in PrimitiveType.onlyNumeric) {
-            val opReturnType = maxByDomainCapacity(maxByDomainCapacity(thisKind, otherKind), PrimitiveType.INT)
+            konst opReturnType = maxByDomainCapacity(maxByDomainCapacity(thisKind, otherKind), PrimitiveType.INT)
 
             if (opReturnType == PrimitiveType.DOUBLE || opReturnType == PrimitiveType.FLOAT) {
                 continue
             }
 
             method {
-                appendDoc("Creates a range from this value to the specified [other] value.")
+                appendDoc("Creates a range from this konstue to the specified [other] konstue.")
                 signature {
                     isOperator = true
                     methodName = "rangeTo"
@@ -453,7 +453,7 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
 
     private fun ClassBuilder.generateRangeUntil(thisKind: PrimitiveType) {
         for (otherKind in PrimitiveType.onlyNumeric) {
-            val opReturnType = maxByDomainCapacity(maxByDomainCapacity(thisKind, otherKind), PrimitiveType.INT)
+            konst opReturnType = maxByDomainCapacity(maxByDomainCapacity(thisKind, otherKind), PrimitiveType.INT)
 
             if (opReturnType == PrimitiveType.DOUBLE || opReturnType == PrimitiveType.FLOAT) {
                 continue
@@ -462,9 +462,9 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
             method {
                 appendDoc(
                     """
-                        Creates a range from this value up to but excluding the specified [other] value.
+                        Creates a range from this konstue up to but excluding the specified [other] konstue.
                         
-                        If the [other] value is less than or equal to `this` value, then the returned range is empty.
+                        If the [other] konstue is less than or equal to `this` konstue, then the returned range is empty.
                     """.trimIndent()
                 )
                 annotations += mutableListOf("SinceKotlin(\"1.9\")", "WasExperimental(ExperimentalStdlibApi::class)")
@@ -482,12 +482,12 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
     }
 
     private fun ClassBuilder.generateBitShiftOperators(thisKind: PrimitiveType) {
-        val className = thisKind.capitalized
-        val detail = shiftOperatorsDocDetail(thisKind)
+        konst className = thisKind.capitalized
+        konst detail = shiftOperatorsDocDetail(thisKind)
         for ((operatorName, doc) in shiftOperators) {
             method {
                 appendDoc(doc + END_LINE + END_LINE + detail)
-                annotations += "kotlin.internal.IntrinsicConstEvaluation"
+                annotations += "kotlin.internal.IntrinsicConstEkonstuation"
                 signature {
                     isInfix = true
                     methodName = operatorName
@@ -505,7 +505,7 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
         for ((operatorName, doc) in bitwiseOperators) {
             method {
                 appendDoc(doc)
-                annotations += "kotlin.internal.IntrinsicConstEvaluation"
+                annotations += "kotlin.internal.IntrinsicConstEkonstuation"
                 signature {
                     isInfix = true
                     methodName = operatorName
@@ -520,8 +520,8 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
         }
 
         method {
-            appendDoc("Inverts the bits in this value.")
-            annotations += "kotlin.internal.IntrinsicConstEvaluation"
+            appendDoc("Inverts the bits in this konstue.")
+            annotations += "kotlin.internal.IntrinsicConstEkonstuation"
             signature {
                 methodName = "inv"
                 returnType = thisKind.capitalized
@@ -538,13 +538,13 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
             return thisKind != PrimitiveType.INT && otherKind == PrimitiveType.CHAR
         }
 
-        val thisName = thisKind.capitalized
+        konst thisName = thisKind.capitalized
         for (otherKind in PrimitiveType.exceptBoolean) {
-            val otherName = otherKind.capitalized
-            val doc = if (thisKind == otherKind) {
-                "Returns this value."
+            konst otherName = otherKind.capitalized
+            konst doc = if (thisKind == otherKind) {
+                "Returns this konstue."
             } else {
-                val detail = if (thisKind in PrimitiveType.integral) {
+                konst detail = if (thisKind in PrimitiveType.integral) {
                     if (otherKind.isIntegral) {
                         docForConversionFromIntegralToIntegral(thisKind, otherKind)
                     } else {
@@ -558,10 +558,10 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
                     }
                 }
 
-                "Converts this [$thisName] value to [$otherName].$END_LINE$END_LINE$detail"
+                "Converts this [$thisName] konstue to [$otherName].$END_LINE$END_LINE$detail"
             }
 
-            val annotationsToAdd = mutableListOf<String>()
+            konst annotationsToAdd = mutableListOf<String>()
             if (isFpToIntConversionDeprecated(otherKind)) {
                 annotationsToAdd += "Deprecated(\"Unclear conversion. To achieve the same result convert to Int explicitly and then to $otherName.\", ReplaceWith(\"toInt().to$otherName()\"))"
                 annotationsToAdd += "DeprecatedSinceKotlin(warningSince = \"1.3\", errorSince = \"1.5\")"
@@ -574,7 +574,7 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
                 annotationsToAdd += "Suppress(\"OVERRIDE_DEPRECATION\")"
             }
 
-            annotationsToAdd += "kotlin.internal.IntrinsicConstEvaluation"
+            annotationsToAdd += "kotlin.internal.IntrinsicConstEkonstuation"
             method {
                 appendDoc(doc)
                 annotations += annotationsToAdd
@@ -589,7 +589,7 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
 
     private fun ClassBuilder.generateEquals(thisKind: PrimitiveType) {
         method {
-            annotations += "kotlin.internal.IntrinsicConstEvaluation"
+            annotations += "kotlin.internal.IntrinsicConstEkonstuation"
             signature {
                 isOverride = true
                 methodName = "equals"
@@ -604,7 +604,7 @@ abstract class BasePrimitivesGenerator(private val writer: PrintWriter) : BuiltI
 
     private fun ClassBuilder.generateToString(thisKind: PrimitiveType) {
         method {
-            annotations += "kotlin.internal.IntrinsicConstEvaluation"
+            annotations += "kotlin.internal.IntrinsicConstEkonstuation"
             signature {
                 isOverride = true
                 methodName = "toString"

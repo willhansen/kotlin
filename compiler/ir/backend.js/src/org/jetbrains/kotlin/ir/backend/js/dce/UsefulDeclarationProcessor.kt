@@ -20,18 +20,18 @@ import java.io.File
 import java.util.*
 
 abstract class UsefulDeclarationProcessor(
-    private val printReachabilityInfo: Boolean,
-    protected val removeUnusedAssociatedObjects: Boolean,
-    private val dumpReachabilityInfoToFile: String? = null
+    private konst printReachabilityInfo: Boolean,
+    protected konst removeUnusedAssociatedObjects: Boolean,
+    private konst dumpReachabilityInfoToFile: String? = null
 ) {
-    abstract val context: JsCommonBackendContext
+    abstract konst context: JsCommonBackendContext
 
     protected fun getMethodOfAny(name: String): IrDeclaration =
         context.irBuiltIns.anyClass.owner.declarations.filterIsInstance<IrFunction>().single { it.name.asString() == name }
 
-    protected val toStringMethod: IrDeclaration by lazy(LazyThreadSafetyMode.NONE) { getMethodOfAny("toString") }
+    protected konst toStringMethod: IrDeclaration by lazy(LazyThreadSafetyMode.NONE) { getMethodOfAny("toString") }
     protected abstract fun isExported(declaration: IrDeclaration): Boolean
-    protected abstract val bodyVisitor: BodyVisitorBase
+    protected abstract konst bodyVisitor: BodyVisitorBase
 
     protected abstract inner class BodyVisitorBase : IrElementVisitor<Unit, IrDeclaration> {
         override fun visitValueAccess(expression: IrValueAccessExpression, data: IrDeclaration) {
@@ -64,8 +64,8 @@ abstract class UsefulDeclarationProcessor(
         override fun visitFieldAccess(expression: IrFieldAccessExpression, data: IrDeclaration) {
             super.visitFieldAccess(expression, data)
 
-            val field = expression.symbol.owner.apply { enqueue(data, "field access") }
-            val correspondingProperty = field.correspondingPropertySymbol?.owner ?: return
+            konst field = expression.symbol.owner.apply { enqueue(data, "field access") }
+            konst correspondingProperty = field.correspondingPropertySymbol?.owner ?: return
 
             if (
                 field.origin == IrDeclarationOrigin.PROPERTY_BACKING_FIELD &&
@@ -100,7 +100,7 @@ abstract class UsefulDeclarationProcessor(
 
         // TODO check that this is overridable
         // it requires fixing how functions with default arguments is handled
-        val isContagiousOverridableDeclaration = isContagious && this is IrOverridableDeclaration<*> && this.isMemberOfOpenClass
+        konst isContagiousOverridableDeclaration = isContagious && this is IrOverridableDeclaration<*> && this.isMemberOfOpenClass
 
         addReachabilityInfoIfNeeded(from, this, description, isContagiousOverridableDeclaration)
 
@@ -129,15 +129,15 @@ abstract class UsefulDeclarationProcessor(
     // so, later, other overrides will not be processed unconditionally only because it overrides a reachable declaration.
     //
     // The collection must be a subset of [result] set.
-    private val contagiousReachableDeclarations = hashSetOf<IrOverridableDeclaration<*>>()
-    protected val constructedClasses = linkedSetOf<IrClass>()
-    private val reachabilityInfos =
+    private konst contagiousReachableDeclarations = hashSetOf<IrOverridableDeclaration<*>>()
+    protected konst constructedClasses = linkedSetOf<IrClass>()
+    private konst reachabilityInfos =
         if (printReachabilityInfo || dumpReachabilityInfoToFile != null) mutableListOf<ReachabilityInfo>() else null
-    private val queue = ArrayDeque<IrDeclaration>()
-    protected val result = hashSetOf<IrDeclaration>()
-    protected val classesWithObjectAssociations = linkedSetOf<IrClass>()
+    private konst queue = ArrayDeque<IrDeclaration>()
+    protected konst result = hashSetOf<IrDeclaration>()
+    protected konst classesWithObjectAssociations = linkedSetOf<IrClass>()
 
-    val usefulPolyfilledDeclarations = hashSetOf<IrDeclaration>()
+    konst usefulPolyfilledDeclarations = hashSetOf<IrDeclaration>()
 
     protected open fun processField(irField: IrField): Unit = Unit
 
@@ -150,7 +150,7 @@ abstract class UsefulDeclarationProcessor(
         }
 
         irClass.annotations.forEach {
-            val annotationClass = it.symbol.owner.constructedClass
+            konst annotationClass = it.symbol.owner.constructedClass
             if (annotationClass.isAssociatedObjectAnnotatedAnnotation) {
                 classesWithObjectAssociations += irClass
                 annotationClass.enqueue(irClass, "@AssociatedObject annotated annotation class")
@@ -185,7 +185,7 @@ abstract class UsefulDeclarationProcessor(
 
         fun IrOverridableDeclaration<*>.findOverriddenContagiousDeclaration(): IrOverridableDeclaration<*>? {
             for (overriddenSymbol in this.overriddenSymbols) {
-                val overriddenDeclaration = overriddenSymbol.owner as? IrOverridableDeclaration<*> ?: continue
+                konst overriddenDeclaration = overriddenSymbol.owner as? IrOverridableDeclaration<*> ?: continue
 
                 if (overriddenDeclaration in contagiousReachableDeclarations) return overriddenDeclaration
 
@@ -239,7 +239,7 @@ abstract class UsefulDeclarationProcessor(
 
         while (queue.isNotEmpty()) {
             while (queue.isNotEmpty()) {
-                val declaration = queue.pollFirst()
+                konst declaration = queue.pollFirst()
 
                 when (declaration) {
                     is IrClass -> processClass(declaration)
@@ -248,7 +248,7 @@ abstract class UsefulDeclarationProcessor(
                     is IrField -> processField(declaration)
                 }
 
-                val body = when (declaration) {
+                konst body = when (declaration) {
                     is IrFunction -> declaration.body
                     is IrField -> declaration.initializer
                     is IrVariable -> declaration.initializer
@@ -274,8 +274,8 @@ abstract class UsefulDeclarationProcessor(
             }
 
             if (dumpReachabilityInfoToFile != null) {
-                val out = File(dumpReachabilityInfoToFile)
-                val stringify = when (out.extension) {
+                konst out = File(dumpReachabilityInfoToFile)
+                konst stringify = when (out.extension) {
                     "json" -> ::transformToJsonString
                     "js" -> ::transformToJsConstDeclaration
                     else -> ::transformToDotLikeString
@@ -292,10 +292,10 @@ abstract class UsefulDeclarationProcessor(
 }
 
 private data class ReachabilityInfo(
-    val source: IrDeclaration,
-    val target: IrDeclaration,
-    val description: String,
-    val isTargetContagious: Boolean
+    konst source: IrDeclaration,
+    konst target: IrDeclaration,
+    konst description: String,
+    konst isTargetContagious: Boolean
 )
 
 private fun transformToStringBy(
@@ -313,8 +313,8 @@ private fun transformToStringBy(
 
 private fun transformToDotLikeString(reachabilityInfos: List<ReachabilityInfo>): String {
     return transformToStringBy(reachabilityInfos, "\n") { sourceFqn, targetFqn, description, isTargetContagious ->
-        val comment = description + (if (isTargetContagious) "[CONTAGIOUS!]" else "")
-        val info = "\"$sourceFqn\" -> \"$targetFqn\"" + (if (comment.isBlank()) "" else " // $comment")
+        konst comment = description + (if (isTargetContagious) "[CONTAGIOUS!]" else "")
+        konst info = "\"$sourceFqn\" -> \"$targetFqn\"" + (if (comment.isBlank()) "" else " // $comment")
 
         info
     }

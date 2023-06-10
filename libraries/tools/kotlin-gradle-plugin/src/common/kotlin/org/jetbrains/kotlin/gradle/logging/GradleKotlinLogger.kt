@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.logging
 import org.gradle.api.logging.Logger
 import org.jetbrains.kotlin.compilerRunner.KotlinLogger
 
-internal class GradleKotlinLogger(private val log: Logger) : KotlinLogger {
+internal class GradleKotlinLogger(private konst log: Logger) : KotlinLogger {
     override fun debug(msg: String) {
         log.debug(msg)
     }
@@ -29,6 +29,6 @@ internal class GradleKotlinLogger(private val log: Logger) : KotlinLogger {
         log.lifecycle(msg)
     }
 
-    override val isDebugEnabled: Boolean
+    override konst isDebugEnabled: Boolean
         get() = log.isDebugEnabled
 }

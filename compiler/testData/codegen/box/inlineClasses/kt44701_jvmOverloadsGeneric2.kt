@@ -5,6 +5,6 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Location <T : String> @JvmOverloads constructor(val value: T? = "OK" as T)
+konstue class Location <T : String> @JvmOverloads constructor(konst konstue: T? = "OK" as T)
 
-fun box(): String = Location<String>().value!!
+fun box(): String = Location<String>().konstue!!

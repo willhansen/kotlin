@@ -66,15 +66,15 @@ public inline operator fun BigDecimal.inc(): BigDecimal = this.add(BigDecimal.ON
 public inline operator fun BigDecimal.dec(): BigDecimal = this.subtract(BigDecimal.ONE)
 
 /**
- * Returns the value of this [Int] number as a [BigDecimal].
+ * Returns the konstue of this [Int] number as a [BigDecimal].
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
-public inline fun Int.toBigDecimal(): BigDecimal = BigDecimal.valueOf(this.toLong())
+public inline fun Int.toBigDecimal(): BigDecimal = BigDecimal.konstueOf(this.toLong())
 
 
 /**
- * Returns the value of this [Int] number as a [BigDecimal].
+ * Returns the konstue of this [Int] number as a [BigDecimal].
  * @param mathContext specifies the precision and the rounding mode.
  */
 @SinceKotlin("1.2")
@@ -82,14 +82,14 @@ public inline fun Int.toBigDecimal(): BigDecimal = BigDecimal.valueOf(this.toLon
 public inline fun Int.toBigDecimal(mathContext: MathContext): BigDecimal = BigDecimal(this, mathContext)
 
 /**
- * Returns the value of this [Long] number as a [BigDecimal].
+ * Returns the konstue of this [Long] number as a [BigDecimal].
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
-public inline fun Long.toBigDecimal(): BigDecimal = BigDecimal.valueOf(this)
+public inline fun Long.toBigDecimal(): BigDecimal = BigDecimal.konstueOf(this)
 
 /**
- * Returns the value of this [Long] number as a [BigDecimal].
+ * Returns the konstue of this [Long] number as a [BigDecimal].
  * @param mathContext specifies the precision and the rounding mode.
  */
 @SinceKotlin("1.2")
@@ -98,7 +98,7 @@ public inline fun Long.toBigDecimal(mathContext: MathContext): BigDecimal = BigD
 
 
 /**
- * Returns the value of this [Float] number as a [BigDecimal].
+ * Returns the konstue of this [Float] number as a [BigDecimal].
  *
  * The number is converted to a string and then the string is converted to a [BigDecimal].
  */
@@ -107,7 +107,7 @@ public inline fun Long.toBigDecimal(mathContext: MathContext): BigDecimal = BigD
 public inline fun Float.toBigDecimal(): BigDecimal = BigDecimal(this.toString())
 
 /**
- * Returns the value of this [Float] number as a [BigDecimal].
+ * Returns the konstue of this [Float] number as a [BigDecimal].
  *
  * The number is converted to a string and then the string is converted to a [BigDecimal].
  *
@@ -118,7 +118,7 @@ public inline fun Float.toBigDecimal(): BigDecimal = BigDecimal(this.toString())
 public inline fun Float.toBigDecimal(mathContext: MathContext): BigDecimal = BigDecimal(this.toString(), mathContext)
 
 /**
- * Returns the value of this [Double] number as a [BigDecimal].
+ * Returns the konstue of this [Double] number as a [BigDecimal].
  *
  * The number is converted to a string and then the string is converted to a [BigDecimal].
  */
@@ -127,7 +127,7 @@ public inline fun Float.toBigDecimal(mathContext: MathContext): BigDecimal = Big
 public inline fun Double.toBigDecimal(): BigDecimal = BigDecimal(this.toString())
 
 /**
- * Returns the value of this [Double] number as a [BigDecimal].
+ * Returns the konstue of this [Double] number as a [BigDecimal].
  *
  * The number is converted to a string and then the string is converted to a [BigDecimal].
  *

@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.psi.KtFile
 @OptIn(KtAnalysisApiInternals::class)
 @Suppress("LeakingThis")
 class KtFe10AnalysisSession(
-    val analysisContext: Fe10AnalysisContext,
-    override val useSiteModule: KtModule
+    konst analysisContext: Fe10AnalysisContext,
+    override konst useSiteModule: KtModule
 ) : KtAnalysisSession(analysisContext.token) {
     constructor(project: Project, contextElement: KtElement, token: KtLifetimeToken) : this(
         Fe10AnalysisContext(Fe10AnalysisFacade.getInstance(project), contextElement, token),
@@ -34,42 +34,42 @@ class KtFe10AnalysisSession(
     )
 
 
-    override val smartCastProviderImpl: KtSmartCastProvider = KtFe10SmartCastProvider(this)
-    override val diagnosticProviderImpl: KtDiagnosticProvider = KtFe10DiagnosticProvider(this)
-    override val scopeProviderImpl: KtScopeProvider = KtFe10ScopeProvider(this)
-    override val containingDeclarationProviderImpl: KtSymbolContainingDeclarationProvider = KtFe10SymbolContainingDeclarationProvider(this)
-    override val symbolProviderImpl: KtSymbolProvider = KtFe10SymbolProvider(this)
-    override val callResolverImpl: KtCallResolver = KtFe10CallResolver(this)
-    override val completionCandidateCheckerImpl: KtCompletionCandidateChecker = KtFe10CompletionCandidateChecker(this)
-    override val symbolDeclarationOverridesProviderImpl: KtSymbolDeclarationOverridesProvider =
+    override konst smartCastProviderImpl: KtSmartCastProvider = KtFe10SmartCastProvider(this)
+    override konst diagnosticProviderImpl: KtDiagnosticProvider = KtFe10DiagnosticProvider(this)
+    override konst scopeProviderImpl: KtScopeProvider = KtFe10ScopeProvider(this)
+    override konst containingDeclarationProviderImpl: KtSymbolContainingDeclarationProvider = KtFe10SymbolContainingDeclarationProvider(this)
+    override konst symbolProviderImpl: KtSymbolProvider = KtFe10SymbolProvider(this)
+    override konst callResolverImpl: KtCallResolver = KtFe10CallResolver(this)
+    override konst completionCandidateCheckerImpl: KtCompletionCandidateChecker = KtFe10CompletionCandidateChecker(this)
+    override konst symbolDeclarationOverridesProviderImpl: KtSymbolDeclarationOverridesProvider =
         KtFe10SymbolDeclarationOverridesProvider(this)
-    override val referenceShortenerImpl: KtReferenceShortener = KtFe10ReferenceShortener(this)
-    override val symbolDeclarationRendererProviderImpl: KtSymbolDeclarationRendererProvider = KtRendererProviderImpl(this, token)
-    override val expressionTypeProviderImpl: KtExpressionTypeProvider = KtFe10ExpressionTypeProvider(this)
-    override val psiTypeProviderImpl: KtPsiTypeProvider = KtFe10PsiTypeProvider(this)
-    override val typeProviderImpl: KtTypeProvider = KtFe10TypeProvider(this)
-    override val typeInfoProviderImpl: KtTypeInfoProvider = KtFe10TypeInfoProvider(this)
-    override val subtypingComponentImpl: KtSubtypingComponent = KtFe10SubtypingComponent(this)
-    override val expressionInfoProviderImpl: KtExpressionInfoProvider = KtFe10ExpressionInfoProvider(this)
-    override val compileTimeConstantProviderImpl: KtCompileTimeConstantProvider = KtFe10CompileTimeConstantProvider(this)
-    override val visibilityCheckerImpl: KtVisibilityChecker = KtFe10VisibilityChecker(this)
-    override val overrideInfoProviderImpl: KtOverrideInfoProvider = KtFe10OverrideInfoProvider(this)
-    override val multiplatformInfoProviderImpl: KtMultiplatformInfoProvider = KtFe10MultiplatformInfoProvider(this)
-    override val originalPsiProviderImpl: KtOriginalPsiProvider = KtFe10OriginalPsiProvider(this)
-    override val inheritorsProviderImpl: KtInheritorsProvider = KtFe10InheritorsProvider(this)
-    override val typesCreatorImpl: KtTypeCreator = KtFe10TypeCreator(this)
-    override val samResolverImpl: KtSamResolver = KtFe10SamResolver(this)
-    override val importOptimizerImpl: KtImportOptimizer = KtFe10ImportOptimizer(this)
-    override val jvmTypeMapperImpl: KtJvmTypeMapper = KtFe10JvmTypeMapper(this)
-    override val symbolInfoProviderImpl: KtSymbolInfoProvider = KtFe10SymbolInfoProvider(this)
-    override val analysisScopeProviderImpl: KtAnalysisScopeProvider =
+    override konst referenceShortenerImpl: KtReferenceShortener = KtFe10ReferenceShortener(this)
+    override konst symbolDeclarationRendererProviderImpl: KtSymbolDeclarationRendererProvider = KtRendererProviderImpl(this, token)
+    override konst expressionTypeProviderImpl: KtExpressionTypeProvider = KtFe10ExpressionTypeProvider(this)
+    override konst psiTypeProviderImpl: KtPsiTypeProvider = KtFe10PsiTypeProvider(this)
+    override konst typeProviderImpl: KtTypeProvider = KtFe10TypeProvider(this)
+    override konst typeInfoProviderImpl: KtTypeInfoProvider = KtFe10TypeInfoProvider(this)
+    override konst subtypingComponentImpl: KtSubtypingComponent = KtFe10SubtypingComponent(this)
+    override konst expressionInfoProviderImpl: KtExpressionInfoProvider = KtFe10ExpressionInfoProvider(this)
+    override konst compileTimeConstantProviderImpl: KtCompileTimeConstantProvider = KtFe10CompileTimeConstantProvider(this)
+    override konst visibilityCheckerImpl: KtVisibilityChecker = KtFe10VisibilityChecker(this)
+    override konst overrideInfoProviderImpl: KtOverrideInfoProvider = KtFe10OverrideInfoProvider(this)
+    override konst multiplatformInfoProviderImpl: KtMultiplatformInfoProvider = KtFe10MultiplatformInfoProvider(this)
+    override konst originalPsiProviderImpl: KtOriginalPsiProvider = KtFe10OriginalPsiProvider(this)
+    override konst inheritorsProviderImpl: KtInheritorsProvider = KtFe10InheritorsProvider(this)
+    override konst typesCreatorImpl: KtTypeCreator = KtFe10TypeCreator(this)
+    override konst samResolverImpl: KtSamResolver = KtFe10SamResolver(this)
+    override konst importOptimizerImpl: KtImportOptimizer = KtFe10ImportOptimizer(this)
+    override konst jvmTypeMapperImpl: KtJvmTypeMapper = KtFe10JvmTypeMapper(this)
+    override konst symbolInfoProviderImpl: KtSymbolInfoProvider = KtFe10SymbolInfoProvider(this)
+    override konst analysisScopeProviderImpl: KtAnalysisScopeProvider =
         KtAnalysisScopeProviderImpl(this, token, shadowedScope = GlobalSearchScope.EMPTY_SCOPE)
-    override val referenceResolveProviderImpl: KtReferenceResolveProvider = KtFe10ReferenceResolveProvider(this)
-    override val signatureSubstitutorImpl: KtSignatureSubstitutor = KtFe10SignatureSubstitutor(this)
-    override val scopeSubstitutionImpl: KtScopeSubstitution = KtFe10ScopeSubstitution(this)
-    override val substitutorFactoryImpl: KtSubstitutorFactory = KtFe10SubstitutorFactory(this)
-    override val symbolProviderByJavaPsiImpl: KtSymbolProviderByJavaPsi = KtFe10SymbolProviderByJavaPsi(this)
-    override val resolveExtensionProviderImpl: KtSymbolFromResolveExtensionProvider = KtFe10SymbolFromResolveExtensionProvider(this)
+    override konst referenceResolveProviderImpl: KtReferenceResolveProvider = KtFe10ReferenceResolveProvider(this)
+    override konst signatureSubstitutorImpl: KtSignatureSubstitutor = KtFe10SignatureSubstitutor(this)
+    override konst scopeSubstitutionImpl: KtScopeSubstitution = KtFe10ScopeSubstitution(this)
+    override konst substitutorFactoryImpl: KtSubstitutorFactory = KtFe10SubstitutorFactory(this)
+    override konst symbolProviderByJavaPsiImpl: KtSymbolProviderByJavaPsi = KtFe10SymbolProviderByJavaPsi(this)
+    override konst resolveExtensionProviderImpl: KtSymbolFromResolveExtensionProvider = KtFe10SymbolFromResolveExtensionProvider(this)
 
     override fun createContextDependentCopy(originalKtFile: KtFile, elementToReanalyze: KtElement): KtAnalysisSession =
         withValidityAssertion {

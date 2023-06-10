@@ -90,7 +90,7 @@ public class ScriptRuntime {
                  * answer.
                  */
                 try {
-                    return Double.valueOf(s.substring(start, end)).doubleValue();
+                    return Double.konstueOf(s.substring(start, end)).doubleValue();
                 } catch (NumberFormatException nfe) {
                     return NaN;
                 }
@@ -98,7 +98,7 @@ public class ScriptRuntime {
                        radix == 16 || radix == 32)
             {
                 /* The number may also be inaccurate for one of these bases.
-                 * This happens if the addition in value*radix + digit causes
+                 * This happens if the addition in konstue*radix + digit causes
                  * a round-down to an even least significant mantissa bit
                  * when the first dropped bit is a one.  If any of the
                  * following digits in the number (which haven't been added

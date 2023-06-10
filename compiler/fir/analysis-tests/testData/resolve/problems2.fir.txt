@@ -33,13 +33,13 @@ FILE: problems2.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val x: R|kotlin/Int| = R|<local>/x|
+            public final konst x: R|kotlin/Int| = R|<local>/x|
                 public get(): R|kotlin/Int|
 
-            public final val arr: R|kotlin/Array<kotlin/String>?| = R|<local>/arr|
+            public final konst arr: R|kotlin/Array<kotlin/String>?| = R|<local>/arr|
                 public get(): R|kotlin/Array<kotlin/String>?|
 
-            public final val s: R|kotlin/String?| = R|<local>/s|
+            public final konst s: R|kotlin/String?| = R|<local>/s|
                 public get(): R|kotlin/String?|
 
             public final operator fun component1(): R|kotlin/Int|
@@ -61,11 +61,11 @@ FILE: problems2.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val name: R|kotlin/String| = R|<local>/name|
+        public final konst name: R|kotlin/String| = R|<local>/name|
             public get(): R|kotlin/String|
 
     }
-    public final val R|KonanTarget|.presetName: R|kotlin/String|
+    public final konst R|KonanTarget|.presetName: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ this@R|/presetName|.R|/KonanTarget.name|
         }

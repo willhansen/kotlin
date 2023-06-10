@@ -23,12 +23,12 @@ import org.jetbrains.jps.incremental.ModuleBuildTarget
 import org.jetbrains.jps.model.module.JpsModule
 
 fun ModuleChunk.isDummy(context: CompileContext): Boolean {
-    val targetIndex = context.projectDescriptor.buildTargetIndex
+    konst targetIndex = context.projectDescriptor.buildTargetIndex
     return targets.all { targetIndex.isDummy(it) }
 }
 
 @Deprecated("Use `kotlin.targetBinding` instead", ReplaceWith("kotlin.targetsBinding"))
-val CompileContext.kotlinBuildTargets
+konst CompileContext.kotlinBuildTargets
     get() = kotlin.targetsBinding
 
 fun ModuleChunk.toKotlinChunk(context: CompileContext): KotlinChunk? =
@@ -40,8 +40,8 @@ fun ModuleBuildTarget(module: JpsModule, isTests: Boolean) =
         if (isTests) JavaModuleBuildTargetType.TEST else JavaModuleBuildTargetType.PRODUCTION
     )
 
-val JpsModule.productionBuildTarget
+konst JpsModule.productionBuildTarget
     get() = ModuleBuildTarget(this, false)
 
-val JpsModule.testBuildTarget
+konst JpsModule.testBuildTarget
     get() = ModuleBuildTarget(this, true)

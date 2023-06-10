@@ -13,7 +13,7 @@ class D {
 import kotlin.reflect.KFunction1
 
 fun main() {
-    val x = a.b.c.D::foo
+    konst x = a.b.c.D::foo
 
     checkSubtype<KFunction1<a.b.c.D, Int>>(x)
 }

@@ -187,6 +187,6 @@ public class TopDownAnalysisContext implements BodiesResolveContext {
 
     @NotNull
     public Collection<ClassDescriptorWithResolutionScopes> getAllClasses() {
-        return CollectionsKt.plus(getDeclaredClasses().values(), getScripts().values());
+        return CollectionsKt.plus(getDeclaredClasses().konstues(), getScripts().konstues());
     }
 }

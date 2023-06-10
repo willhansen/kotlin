@@ -17,4 +17,4 @@ public inline fun forEachNonKotlinPsiElementFinder(project: Project, action: (Ps
     }
 }
 
-public const val KOTLIN_JAVA_ELEMENT_FINDER_CLASS_NAME: String = "org.jetbrains.kotlin.asJava.finder.JavaElementFinder"
+public const konst KOTLIN_JAVA_ELEMENT_FINDER_CLASS_NAME: String = "org.jetbrains.kotlin.asJava.finder.JavaElementFinder"

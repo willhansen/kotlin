@@ -3,14 +3,14 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsAny(val a: Any?) {
+konstue class AsAny(konst a: Any?) {
     fun myEq(other: Any?): Boolean {
         return other is AsAny && other.a == a
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsInt(val a: Int) {
+konstue class AsInt(konst a: Int) {
     fun myEq(other: Any?): Boolean {
         return other is AsInt && other.a == a
     }
@@ -33,8 +33,8 @@ object Primitive {
 }
 
 fun box(): String {
-    val a = AsAny(42)
-    val b = AsAny(40 + 2)
+    konst a = AsAny(42)
+    konst b = AsAny(40 + 2)
 
     if (!a.myEq(b)) return "Fail 1"
     if (a.myEq(42)) return "Fail 2"
@@ -47,8 +47,8 @@ fun box(): String {
     if (!Reference.isNullableNotNullable(a)) return "Fail 8"
     if (Reference.isNullableNotNullable(null)) return "Fail 9"
 
-    val c = AsInt(42)
-    val d = AsInt(40 + 2)
+    konst c = AsInt(42)
+    konst d = AsInt(40 + 2)
     if (!c.myEq(d)) return "Fail 10"
     if (c.myEq(42)) return "Fail 11"
     if (c.myEq("other")) return "Fail 12"

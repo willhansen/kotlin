@@ -14,7 +14,7 @@ enum class Foo {
             l += "Foo.CO;"
         }
 
-        val boo = 22
+        konst boo = 22
     }
 }
 
@@ -31,7 +31,7 @@ enum class Foo2 {
             l += "Foo2.CO;"
         }
 
-        val boo = 22
+        konst boo = 22
     }
 }
 

@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.memoryOptimizedPlus
 
-private val STATIC_THIS_PARAMETER = object : IrDeclarationOriginImpl("STATIC_THIS_PARAMETER") {}
+private konst STATIC_THIS_PARAMETER = object : IrDeclarationOriginImpl("STATIC_THIS_PARAMETER") {}
 
-class PrivateMembersLowering(val context: JsIrBackendContext) : DeclarationTransformer {
+class PrivateMembersLowering(konst context: JsIrBackendContext) : DeclarationTransformer {
 
     private var IrFunction.correspondingStatic by context.mapping.privateMemberToCorrespondingStatic
 
@@ -51,9 +51,9 @@ class PrivateMembersLowering(val context: JsIrBackendContext) : DeclarationTrans
     private fun transformMemberToStaticFunction(function: IrSimpleFunction): IrSimpleFunction? {
 
         if (function.visibility != DescriptorVisibilities.PRIVATE || function.dispatchReceiverParameter == null) return null
-        val newVisibility = if (function.isLocal) DescriptorVisibilities.LOCAL else function.visibility
+        konst newVisibility = if (function.isLocal) DescriptorVisibilities.LOCAL else function.visibility
 
-        val staticFunction = context.irFactory.buildFun {
+        konst staticFunction = context.irFactory.buildFun {
             updateFrom(function)
             name = function.name
             returnType = function.returnType
@@ -66,7 +66,7 @@ class PrivateMembersLowering(val context: JsIrBackendContext) : DeclarationTrans
             staticFunction.typeParameters memoryOptimizedPlus function.typeParameters.map { it.deepCopyWithSymbols(staticFunction) }
 
         staticFunction.extensionReceiverParameter = function.extensionReceiverParameter?.copyTo(staticFunction)
-        staticFunction.valueParameters = staticFunction.valueParameters memoryOptimizedPlus buildValueParameter(staticFunction) {
+        staticFunction.konstueParameters = staticFunction.konstueParameters memoryOptimizedPlus buildValueParameter(staticFunction) {
             origin = STATIC_THIS_PARAMETER
             name = Name.identifier("\$this")
             index = 0
@@ -75,19 +75,19 @@ class PrivateMembersLowering(val context: JsIrBackendContext) : DeclarationTrans
 
         function.correspondingStatic = staticFunction
 
-        staticFunction.valueParameters = staticFunction.valueParameters memoryOptimizedPlus function.valueParameters.map {
-            // TODO better way to avoid copying default value
+        staticFunction.konstueParameters = staticFunction.konstueParameters memoryOptimizedPlus function.konstueParameters.map {
+            // TODO better way to avoid copying default konstue
             it.copyTo(staticFunction, index = it.index + 1, defaultValue = null)
         }
 
-        val oldParameters =
-            listOfNotNull(function.extensionReceiverParameter, function.dispatchReceiverParameter) + function.valueParameters
-        val newParameters = listOfNotNull(staticFunction.extensionReceiverParameter) + staticFunction.valueParameters
+        konst oldParameters =
+            listOfNotNull(function.extensionReceiverParameter, function.dispatchReceiverParameter) + function.konstueParameters
+        konst newParameters = listOfNotNull(staticFunction.extensionReceiverParameter) + staticFunction.konstueParameters
         assert(oldParameters.size == newParameters.size)
 
-        val parameterMapping = oldParameters.zip(newParameters).toMap()
+        konst parameterMapping = oldParameters.zip(newParameters).toMap()
 
-        val parameterTransformer = object : IrElementTransformerVoid() {
+        konst parameterTransformer = object : IrElementTransformerVoid() {
             override fun visitGetValue(expression: IrGetValue) = parameterMapping[expression.symbol.owner]?.let {
                 expression.run { IrGetValueImpl(startOffset, endOffset, type, it.symbol, origin) }
             } ?: expression
@@ -99,8 +99,8 @@ class PrivateMembersLowering(val context: JsIrBackendContext) : DeclarationTrans
             }
         }
 
-        function.valueParameters.forEach {
-            // TODO better way to avoid copying default value
+        function.konstueParameters.forEach {
+            // TODO better way to avoid copying default konstue
 
             parameterMapping[it]?.apply {
                 it.defaultValue?.let { originalDefault ->
@@ -131,7 +131,7 @@ class PrivateMembersLowering(val context: JsIrBackendContext) : DeclarationTrans
     }
 }
 
-class PrivateMemberBodiesLowering(val context: JsIrBackendContext) : BodyLoweringPass {
+class PrivateMemberBodiesLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
 
     private var IrFunction.correspondingStatic by context.mapping.privateMemberToCorrespondingStatic
 
@@ -154,7 +154,7 @@ class PrivateMemberBodiesLowering(val context: JsIrBackendContext) : BodyLowerin
                             expression.startOffset, expression.endOffset,
                             expression.type,
                             it.symbol, expression.typeArgumentsCount,
-                            expression.valueArgumentsCount, expression.reflectionTarget, expression.origin
+                            expression.konstueArgumentsCount, expression.reflectionTarget, expression.origin
                         )
                     }
                 } ?: expression
@@ -163,8 +163,8 @@ class PrivateMemberBodiesLowering(val context: JsIrBackendContext) : BodyLowerin
             override fun visitPropertyReference(expression: IrPropertyReference): IrExpression {
                 super.visitPropertyReference(expression)
 
-                val staticGetter = expression.getter?.owner?.correspondingStatic
-                val staticSetter = expression.setter?.owner?.correspondingStatic
+                konst staticGetter = expression.getter?.owner?.correspondingStatic
+                konst staticSetter = expression.setter?.owner?.correspondingStatic
 
                 return if (staticGetter != null || staticSetter != null) {
                     transformPrivateToStaticReference(expression) {
@@ -183,12 +183,12 @@ class PrivateMemberBodiesLowering(val context: JsIrBackendContext) : BodyLowerin
             }
 
             private fun transformPrivateToStaticCall(expression: IrCall, staticTarget: IrSimpleFunction): IrCall {
-                val newExpression = IrCallImpl(
+                konst newExpression = IrCallImpl(
                     expression.startOffset, expression.endOffset,
                     expression.type,
                     staticTarget.symbol,
                     typeArgumentsCount = expression.typeArgumentsCount,
-                    valueArgumentsCount = expression.valueArgumentsCount + 1,
+                    konstueArgumentsCount = expression.konstueArgumentsCount + 1,
                     origin = expression.origin,
                     superQualifierSymbol = expression.superQualifierSymbol
                 )
@@ -196,7 +196,7 @@ class PrivateMemberBodiesLowering(val context: JsIrBackendContext) : BodyLowerin
                 newExpression.extensionReceiver = expression.extensionReceiver
                 expression.dispatchReceiver?.let { newExpression.putValueArgument(0, it) }
 
-                for (i in 0 until expression.valueArgumentsCount) {
+                for (i in 0 until expression.konstueArgumentsCount) {
                     newExpression.putValueArgument(i + 1, expression.getValueArgument(i))
                 }
                 newExpression.copyTypeArgumentsFrom(expression)
@@ -209,12 +209,12 @@ class PrivateMemberBodiesLowering(val context: JsIrBackendContext) : BodyLowerin
                 builder: () -> IrCallableReference<*>
             ): IrCallableReference<*> {
 
-                val newExpression = builder()
+                konst newExpression = builder()
 
                 newExpression.extensionReceiver = expression.extensionReceiver
 
                 newExpression.dispatchReceiver = expression.dispatchReceiver
-                for (i in 0 until expression.valueArgumentsCount) {
+                for (i in 0 until expression.konstueArgumentsCount) {
                     newExpression.putValueArgument(i, expression.getValueArgument(i))
                 }
                 newExpression.copyTypeArgumentsFrom(expression)

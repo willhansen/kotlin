@@ -4,7 +4,7 @@
 open class Foo1(x: Int = 10, y: Float = 0f<!UNSUPPORTED_FEATURE!>,<!>)
 
 class Foo2(
-    val x: Int = 10,
+    konst x: Int = 10,
     var y: Float<!UNSUPPORTED_FEATURE!>,<!>
 ): Foo1(x, y<!UNSUPPORTED_FEATURE!>,<!>) {
     constructor(
@@ -14,7 +14,7 @@ class Foo2(
 
     var x1: Int
         get() = 10
-        set(value<!UNSUPPORTED_FEATURE!>,<!>) {
+        set(konstue<!UNSUPPORTED_FEATURE!>,<!>) {
 
         }
 
@@ -43,14 +43,14 @@ fun foo6(vararg x: Int<!UNSUPPORTED_FEATURE!>,<!>) {}
 
 fun foo7(y: Float, vararg x: Int<!UNSUPPORTED_FEATURE!>,<!>) {}
 
-val foo8: (Int, Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int = fun(
+konst foo8: (Int, Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int = fun(
     x,
     y<!UNSUPPORTED_FEATURE!>,<!>
     ): Int {
     return x + y
 }
 
-val foo9: (Int, Int, Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int =
+konst foo9: (Int, Int, Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int =
     fun (x, y: Int, z<!UNSUPPORTED_FEATURE!>,<!>): Int {
         return x + y
     }
@@ -70,17 +70,17 @@ class Foo12: Foo10 {
 }
 
 fun main() {
-    val x1 = {
+    konst x1 = {
             x: Comparable<Comparable<Number>>,
             y: Iterable<Iterable<Number>><!UNSUPPORTED_FEATURE!>,<!>
         ->
         println("1")
     }
-    val x2 = { x: Comparable<Comparable<Number>><!UNSUPPORTED_FEATURE!>,<!>
+    konst x2 = { x: Comparable<Comparable<Number>><!UNSUPPORTED_FEATURE!>,<!>
         -> println("1")
     }
-    val x3: ((Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int) -> Unit = { x: (Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int<!UNSUPPORTED_FEATURE!>,<!> -> println("1") }
-    val x4: ((Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int) -> Unit = { x<!UNSUPPORTED_FEATURE!>,<!> -> println("1") }
+    konst x3: ((Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int) -> Unit = { x: (Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int<!UNSUPPORTED_FEATURE!>,<!> -> println("1") }
+    konst x4: ((Int<!UNSUPPORTED_FEATURE!>,<!>) -> Int) -> Unit = { x<!UNSUPPORTED_FEATURE!>,<!> -> println("1") }
 
     fun foo10(x:Int,y:Int<!UNSUPPORTED_FEATURE!>,<!>) {
         fun foo10(x:Int,y:Int<!UNSUPPORTED_FEATURE!>,<!>) {}

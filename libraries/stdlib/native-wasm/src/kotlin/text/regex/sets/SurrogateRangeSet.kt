@@ -93,7 +93,7 @@ package kotlin.text.regex
 internal class SurrogateRangeSet(surrChars: AbstractCharClass) : RangeSet(surrChars) {
 
     override fun accepts(startIndex: Int, testString: CharSequence): Int {
-        val result = super.accepts(startIndex, testString)
+        konst result = super.accepts(startIndex, testString)
         when {
             result < 0 ||
             testString.isHighSurrogate(startIndex - 1) && testString.isLowSurrogate(startIndex) ||

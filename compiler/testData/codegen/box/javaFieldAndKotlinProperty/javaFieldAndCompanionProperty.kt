@@ -14,7 +14,7 @@ public class Base {
 
 class Sub : Base() {
     companion object {
-        val TAG = "FAIL"
+        konst TAG = "FAIL"
     }
 
     fun log() = TAG

@@ -19,7 +19,7 @@
 
 // TESTCASE NUMBER: 1
 class Case1 {
-    class A(val x: Any?) {
+    class A(konst x: Any?) {
         init {
             x checkType { check<Any?>() }
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any?")!>x<!>
@@ -31,7 +31,7 @@ class Case1 {
         }
     }
 
-    class B(val x: Any) {
+    class B(konst x: Any) {
         init {
             x checkType { check<Any>() }
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>x<!>
@@ -43,7 +43,7 @@ class Case1 {
         }
     }
 
-    class C(val x: () -> Any) {
+    class C(konst x: () -> Any) {
         init {
             x checkType { check<() -> Any>() }
             <!DEBUG_INFO_EXPRESSION_TYPE("() -> kotlin.Any")!>x<!>
@@ -55,7 +55,7 @@ class Case1 {
         }
     }
 
-    class D(val x: Enum<*>) {
+    class D(konst x: Enum<*>) {
         init {
             x checkType { check<Enum<*>>() }
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Enum<*>")!>x<!>
@@ -67,7 +67,7 @@ class Case1 {
         }
     }
 
-    class E(val x: Nothing) {
+    class E(konst x: Nothing) {
         init {
             x checkType { check<Nothing>() }
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing")!>x<!>
@@ -79,7 +79,7 @@ class Case1 {
         }
     }
 
-    class F<T>(val x: T) {
+    class F<T>(konst x: T) {
         init {
             x checkType { check<T>() }
             <!DEBUG_INFO_EXPRESSION_TYPE("T")!>x<!>
@@ -95,10 +95,10 @@ class Case1 {
 
 // TESTCASE NUMBER: 2
 class Case2<T>() {
-    class A<T : CharSequence>(val e: T)
-    class B<T : java.util.AbstractCollection<Int>>(val e: T)
-    class C<T : java.lang.Exception>(val e: T)
-    class D<T : Enum<*>>(val e: T)
-    class F<T>(val t: T)
+    class A<T : CharSequence>(konst e: T)
+    class B<T : java.util.AbstractCollection<Int>>(konst e: T)
+    class C<T : java.lang.Exception>(konst e: T)
+    class D<T : Enum<*>>(konst e: T)
+    class F<T>(konst t: T)
 }
 

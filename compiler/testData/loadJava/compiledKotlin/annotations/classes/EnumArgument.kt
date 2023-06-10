@@ -4,7 +4,7 @@ package test
 
 import java.lang.annotation.ElementType
 
-annotation class Anno(val t: ElementType)
+annotation class Anno(konst t: ElementType)
 
 @Anno(ElementType.METHOD) class Class {
     @Anno(ElementType.PARAMETER) inner class Inner

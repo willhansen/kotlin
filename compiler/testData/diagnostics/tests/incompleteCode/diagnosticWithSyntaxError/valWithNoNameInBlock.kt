@@ -6,46 +6,46 @@ fun println(x: String) {
 
 fun run(block: () -> Unit) {}
 
-val propertyNameOnTheNextLine = 1
+konst propertyNameOnTheNextLine = 1
 
 fun foo() {
-    val<!SYNTAX!><!>
+    konst<!SYNTAX!><!>
     println("abc")
 
-    val<!SYNTAX!><!>
+    konst<!SYNTAX!><!>
     run {
         println("abc")
     }
 
-    val<!SYNTAX!><!>
+    konst<!SYNTAX!><!>
     if (1 == 1) {
 
     }
 
-    val<!SYNTAX!><!>
+    konst<!SYNTAX!><!>
     (1 + 2)
 
     // `propertyNameOnTheNextLine` parsed as simple name expression
-    val<!SYNTAX!><!>
+    konst<!SYNTAX!><!>
     propertyNameOnTheNextLine
 
-    val<!SYNTAX!><!>
+    konst<!SYNTAX!><!>
     // comment
     propertyNameOnTheNextLine
 
-    val<!SYNTAX!><!> /* comment */
+    konst<!SYNTAX!><!> /* comment */
     propertyNameOnTheNextLine
 
     // Correct properties
-    val
+    konst
     property1 = 1
 
-    val
+    konst
     propertyWithBy by <!UNRESOLVED_REFERENCE!>lazy<!> { 1 }
 
-    val
+    konst
     propertyWithType: Int
 
-    val
+    konst
     (a, b) = <!COMPONENT_FUNCTION_MISSING, COMPONENT_FUNCTION_MISSING!>1<!>
 }

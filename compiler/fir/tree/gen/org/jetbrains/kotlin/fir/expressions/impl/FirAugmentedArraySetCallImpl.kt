@@ -24,13 +24,13 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirAugmentedArraySetCallImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var lhsGetCall: FirFunctionCall,
     override var rhs: FirExpression,
-    override val operation: FirOperation,
+    override konst operation: FirOperation,
     override var calleeReference: FirReference,
-    override val arrayAccessSource: KtSourceElement?,
+    override konst arrayAccessSource: KtSourceElement?,
 ) : FirAugmentedArraySetCall() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotations.forEach { it.accept(visitor, data) }

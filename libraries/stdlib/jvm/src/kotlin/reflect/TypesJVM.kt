@@ -23,7 +23,7 @@ import kotlin.jvm.internal.KTypeBase
 @SinceKotlin("1.4")
 @ExperimentalStdlibApi
 @LowPriorityInOverloadResolution // To make non-experimental kotlin.reflect.full.javaType always win in overload resolution
-public val KType.javaType: Type
+public konst KType.javaType: Type
     get() {
         if (this is KTypeBase) {
             // Use kotlin-reflect implementation for types which are position-dependent, e.g. "Unit" in a callable's return type.
@@ -35,23 +35,23 @@ public val KType.javaType: Type
 
 @ExperimentalStdlibApi
 private fun KType.computeJavaType(forceWrapper: Boolean = false): Type {
-    when (val classifier = classifier) {
+    when (konst classifier = classifier) {
         is KTypeParameter -> return TypeVariableImpl(classifier)
         is KClass<*> -> {
-            val jClass = if (forceWrapper) classifier.javaObjectType else classifier.java
-            val arguments = arguments
+            konst jClass = if (forceWrapper) classifier.javaObjectType else classifier.java
+            konst arguments = arguments
             if (arguments.isEmpty()) return jClass
 
             if (jClass.isArray) {
                 if (jClass.componentType.isPrimitive) return jClass
 
-                val (variance, elementType) = arguments.singleOrNull()
+                konst (variance, elementType) = arguments.singleOrNull()
                     ?: throw IllegalArgumentException("kotlin.Array must have exactly one type argument: $this")
                 return when (variance) {
                     // Array<in ...> is always erased to Object[], and Array<*> is Object[].
                     null, KVariance.IN -> jClass
                     KVariance.INVARIANT, KVariance.OUT -> {
-                        val javaElementType = elementType!!.computeJavaType()
+                        konst javaElementType = elementType!!.computeJavaType()
                         if (javaElementType is Class<*>) jClass else GenericArrayTypeImpl(javaElementType)
                     }
                 }
@@ -65,12 +65,12 @@ private fun KType.computeJavaType(forceWrapper: Boolean = false): Type {
 
 @ExperimentalStdlibApi
 private fun createPossiblyInnerType(jClass: Class<*>, arguments: List<KTypeProjection>): Type {
-    val ownerClass = jClass.declaringClass
+    konst ownerClass = jClass.declaringClass
         ?: return ParameterizedTypeImpl(jClass, null, arguments.map(KTypeProjection::javaType))
     if (Modifier.isStatic(jClass.modifiers))
         return ParameterizedTypeImpl(jClass, ownerClass, arguments.map(KTypeProjection::javaType))
 
-    val n = jClass.typeParameters.size
+    konst n = jClass.typeParameters.size
     return ParameterizedTypeImpl(
         jClass,
         createPossiblyInnerType(ownerClass, arguments.subList(n, arguments.size)),
@@ -79,10 +79,10 @@ private fun createPossiblyInnerType(jClass: Class<*>, arguments: List<KTypeProje
 }
 
 @ExperimentalStdlibApi
-private val KTypeProjection.javaType: Type
+private konst KTypeProjection.javaType: Type
     get() {
-        val variance = variance ?: return WildcardTypeImpl.STAR
-        val type = type!!
+        konst variance = variance ?: return WildcardTypeImpl.STAR
+        konst type = type!!
         // TODO: JvmSuppressWildcards
         return when (variance) {
             KVariance.INVARIANT -> {
@@ -107,7 +107,7 @@ private interface TypeImpl : Type {
 // because `AnnotatedType` has only appeared in JDK 8.
 @Suppress("ABSTRACT_MEMBER_NOT_IMPLEMENTED")
 @ExperimentalStdlibApi
-private class TypeVariableImpl(private val typeParameter: KTypeParameter) : TypeVariable<GenericDeclaration>, TypeImpl {
+private class TypeVariableImpl(private konst typeParameter: KTypeParameter) : TypeVariable<GenericDeclaration>, TypeImpl {
     override fun getName(): String = typeParameter.name
 
     override fun getGenericDeclaration(): GenericDeclaration =
@@ -142,7 +142,7 @@ private class TypeVariableImpl(private val typeParameter: KTypeParameter) : Type
 }
 
 @ExperimentalStdlibApi
-private class GenericArrayTypeImpl(private val elementType: Type) : GenericArrayType, TypeImpl {
+private class GenericArrayTypeImpl(private konst elementType: Type) : GenericArrayType, TypeImpl {
     override fun getGenericComponentType(): Type = elementType
 
     override fun getTypeName(): String = "${typeToString(elementType)}[]"
@@ -155,7 +155,7 @@ private class GenericArrayTypeImpl(private val elementType: Type) : GenericArray
 }
 
 @ExperimentalStdlibApi
-private class WildcardTypeImpl(private val upperBound: Type?, private val lowerBound: Type?) : WildcardType, TypeImpl {
+private class WildcardTypeImpl(private konst upperBound: Type?, private konst lowerBound: Type?) : WildcardType, TypeImpl {
     override fun getUpperBounds(): Array<Type> =
         arrayOf(upperBound ?: Any::class.java)
 
@@ -177,17 +177,17 @@ private class WildcardTypeImpl(private val upperBound: Type?, private val lowerB
     override fun toString(): String = getTypeName()
 
     companion object {
-        val STAR = WildcardTypeImpl(null, null)
+        konst STAR = WildcardTypeImpl(null, null)
     }
 }
 
 @ExperimentalStdlibApi
 private class ParameterizedTypeImpl(
-    private val rawType: Class<*>,
-    private val ownerType: Type?,
+    private konst rawType: Class<*>,
+    private konst ownerType: Type?,
     typeArguments: List<Type>
 ) : ParameterizedType, TypeImpl {
-    private val typeArguments = typeArguments.toTypedArray()
+    private konst typeArguments = typeArguments.toTypedArray()
 
     override fun getRawType(): Type = rawType
 
@@ -223,7 +223,7 @@ private class ParameterizedTypeImpl(
 private fun typeToString(type: Type): String =
     if (type is Class<*>) {
         if (type.isArray) {
-            val unwrap = generateSequence(type, Class<*>::getComponentType)
+            konst unwrap = generateSequence(type, Class<*>::getComponentType)
             unwrap.last().name + "[]".repeat(unwrap.count())
         } else type.name
     } else type.toString()

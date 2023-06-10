@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.diagnostics.rendering.Renderers.RENDER_CLASS_OR_OBJE
 import org.jetbrains.kotlin.diagnostics.rendering.Renderers.RENDER_TYPE_WITH_ANNOTATIONS
 
 object DefaultErrorMessagesParcelize : DefaultErrorMessages.Extension {
-    private val MAP = DiagnosticFactoryToRendererMap("Parcelize")
+    private konst MAP = DiagnosticFactoryToRendererMap("Parcelize")
     override fun getMap() = MAP
 
     init {
@@ -73,7 +73,7 @@ object DefaultErrorMessagesParcelize : DefaultErrorMessages.Extension {
 
         MAP.put(
             ErrorsParcelize.PARCELABLE_CONSTRUCTOR_PARAMETER_SHOULD_BE_VAL_OR_VAR,
-            "'Parcelable' constructor parameter should be 'val' or 'var'"
+            "'Parcelable' constructor parameter should be 'konst' or 'var'"
         )
 
         MAP.put(
@@ -132,7 +132,7 @@ object DefaultErrorMessagesParcelize : DefaultErrorMessages.Extension {
 
         MAP.put(
             ErrorsParcelize.INAPPLICABLE_IGNORED_ON_PARCEL_CONSTRUCTOR_PROPERTY,
-            "'@IgnoredOnParcel' is inapplicable to properties without default value declared in the primary constructor"
+            "'@IgnoredOnParcel' is inapplicable to properties without default konstue declared in the primary constructor"
         )
 
         MAP.put(

@@ -2,7 +2,7 @@ fun interface A {
     operator fun invoke()
 }
 
-val globalA: A = A {}
+konst globalA: A = A {}
 
 fun foo() {
     globalA.invo<caret>ke()

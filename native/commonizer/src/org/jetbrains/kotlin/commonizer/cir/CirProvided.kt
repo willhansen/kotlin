@@ -18,71 +18,71 @@ import org.jetbrains.kotlin.types.Variance
 object CirProvided {
     /* Classifiers */
     sealed interface Classifier: AnyClassifier {
-        val typeParameters: List<TypeParameter>
+        konst typeParameters: List<TypeParameter>
     }
 
     sealed interface Class : Classifier, AnyClass {
-        override val visibility: Visibility
-        val supertypes: List<Type>
+        override konst visibility: Visibility
+        konst supertypes: List<Type>
     }
 
     data class RegularClass(
-        override val typeParameters: List<TypeParameter>,
-        override val supertypes: List<Type>,
-        override val visibility: Visibility,
-        val kind: ClassKind
+        override konst typeParameters: List<TypeParameter>,
+        override konst supertypes: List<Type>,
+        override konst visibility: Visibility,
+        konst kind: ClassKind
     ) : Class
 
-    data class ExportedForwardDeclarationClass(val syntheticClassId: CirEntityId) : Class {
+    data class ExportedForwardDeclarationClass(konst syntheticClassId: CirEntityId) : Class {
         init {
             check(syntheticClassId.packageName.isUnderKotlinNativeSyntheticPackages)
         }
 
-        override val typeParameters: List<TypeParameter> get() = emptyList()
-        override val visibility: Visibility get() = Visibilities.Public
-        override val supertypes: List<Type> = syntheticClassId.artificialSupertypes()
+        override konst typeParameters: List<TypeParameter> get() = emptyList()
+        override konst visibility: Visibility get() = Visibilities.Public
+        override konst supertypes: List<Type> = syntheticClassId.artificialSupertypes()
     }
 
     data class TypeAlias(
-        override val typeParameters: List<TypeParameter>,
-        override val underlyingType: ClassOrTypeAliasType
+        override konst typeParameters: List<TypeParameter>,
+        override konst underlyingType: ClassOrTypeAliasType
     ) : Classifier, AnyTypeAlias
 
     /* Type parameter */
-    data class TypeParameter(val index: Int, val variance: Variance)
+    data class TypeParameter(konst index: Int, konst variance: Variance)
 
     /* Types */
     sealed interface Type: AnyType {
-        override val isMarkedNullable: Boolean
+        override konst isMarkedNullable: Boolean
     }
 
     sealed interface ClassOrTypeAliasType : Type, AnyClassOrTypeAliasType {
-        override val classifierId: CirEntityId
-        val arguments: List<TypeProjection>
+        override konst classifierId: CirEntityId
+        konst arguments: List<TypeProjection>
     }
 
     data class TypeParameterType(
-        val index: Int,
-        override val isMarkedNullable: Boolean
+        konst index: Int,
+        override konst isMarkedNullable: Boolean
     ) : Type
 
     data class ClassType(
-        override val classifierId: CirEntityId,
-        override val arguments: List<TypeProjection>,
-        override val isMarkedNullable: Boolean,
-        val outerType: ClassType?
+        override konst classifierId: CirEntityId,
+        override konst arguments: List<TypeProjection>,
+        override konst isMarkedNullable: Boolean,
+        konst outerType: ClassType?
     ) : ClassOrTypeAliasType
 
     data class TypeAliasType(
-        override val classifierId: CirEntityId,
-        override val arguments: List<TypeProjection>,
-        override val isMarkedNullable: Boolean
+        override konst classifierId: CirEntityId,
+        override konst arguments: List<TypeProjection>,
+        override konst isMarkedNullable: Boolean
     ) : ClassOrTypeAliasType
 
     /* Type projections */
     sealed interface TypeProjection
     object StarTypeProjection : TypeProjection
-    data class RegularTypeProjection(val variance: Variance, val type: Type) : TypeProjection
+    data class RegularTypeProjection(konst variance: Variance, konst type: Type) : TypeProjection
 }
 
 /**
@@ -97,9 +97,9 @@ private object ArtificialSupertypes {
         )
     }
 
-    private val cOpaqueType = listOf(createType("kotlinx/cinterop/COpaque"))
-    private val objcObjectBase = listOf(createType("kotlinx/cinterop/ObjCObjectBase"))
-    private val objcCObject = listOf(createType("kotlinx/cinterop/ObjCObject"))
+    private konst cOpaqueType = listOf(createType("kotlinx/cinterop/COpaque"))
+    private konst objcObjectBase = listOf(createType("kotlinx/cinterop/ObjCObjectBase"))
+    private konst objcCObject = listOf(createType("kotlinx/cinterop/ObjCObject"))
 
     fun CirEntityId.artificialSupertypes(): List<CirProvided.Type> {
         return when (packageName) {

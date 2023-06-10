@@ -14,14 +14,14 @@ import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmName
 
 /**
- * A discriminated union that encapsulates a successful outcome with a value of type [T]
+ * A discriminated union that encapsulates a successful outcome with a konstue of type [T]
  * or a failure with an arbitrary [Throwable] exception.
  */
 @SinceKotlin("1.3")
 @JvmInline
-public value class Result<out T> @PublishedApi internal constructor(
+public konstue class Result<out T> @PublishedApi internal constructor(
     @PublishedApi
-    internal val value: Any?
+    internal konst konstue: Any?
 ) : Serializable {
     // discovery
 
@@ -29,18 +29,18 @@ public value class Result<out T> @PublishedApi internal constructor(
      * Returns `true` if this instance represents a successful outcome.
      * In this case [isFailure] returns `false`.
      */
-    public val isSuccess: Boolean get() = value !is Failure
+    public konst isSuccess: Boolean get() = konstue !is Failure
 
     /**
      * Returns `true` if this instance represents a failed outcome.
      * In this case [isSuccess] returns `false`.
      */
-    public val isFailure: Boolean get() = value is Failure
+    public konst isFailure: Boolean get() = konstue is Failure
 
-    // value & exception retrieval
+    // konstue & exception retriekonst
 
     /**
-     * Returns the encapsulated value if this instance represents [success][Result.isSuccess] or `null`
+     * Returns the encapsulated konstue if this instance represents [success][Result.isSuccess] or `null`
      * if it is [failure][Result.isFailure].
      *
      * This function is a shorthand for `getOrElse { null }` (see [getOrElse]) or
@@ -50,7 +50,7 @@ public value class Result<out T> @PublishedApi internal constructor(
     public inline fun getOrNull(): T? =
         when {
             isFailure -> null
-            else -> value as T
+            else -> konstue as T
         }
 
     /**
@@ -60,20 +60,20 @@ public value class Result<out T> @PublishedApi internal constructor(
      * This function is a shorthand for `fold(onSuccess = { null }, onFailure = { it })` (see [fold]).
      */
     public fun exceptionOrNull(): Throwable? =
-        when (value) {
-            is Failure -> value.exception
+        when (konstue) {
+            is Failure -> konstue.exception
             else -> null
         }
 
     /**
      * Returns a string `Success(v)` if this instance represents [success][Result.isSuccess]
-     * where `v` is a string representation of the value or a string `Failure(x)` if
+     * where `v` is a string representation of the konstue or a string `Failure(x)` if
      * it is [failure][isFailure] where `x` is a string representation of the exception.
      */
     public override fun toString(): String =
-        when (value) {
-            is Failure -> value.toString() // "Failure($exception)"
-            else -> "Success($value)"
+        when (konstue) {
+            is Failure -> konstue.toString() // "Failure($exception)"
+            else -> "Success($konstue)"
         }
 
     // companion with constructors
@@ -84,13 +84,13 @@ public value class Result<out T> @PublishedApi internal constructor(
      */
     public companion object {
         /**
-         * Returns an instance that encapsulates the given [value] as successful value.
+         * Returns an instance that encapsulates the given [konstue] as successful konstue.
          */
         @Suppress("INAPPLICABLE_JVM_NAME")
         @InlineOnly
         @JvmName("success")
-        public inline fun <T> success(value: T): Result<T> =
-            Result(value)
+        public inline fun <T> success(konstue: T): Result<T> =
+            Result(konstue)
 
         /**
          * Returns an instance that encapsulates the given [Throwable] [exception] as failure.
@@ -104,7 +104,7 @@ public value class Result<out T> @PublishedApi internal constructor(
 
     internal class Failure(
         @JvmField
-        val exception: Throwable
+        konst exception: Throwable
     ) : Serializable {
         override fun equals(other: Any?): Boolean = other is Failure && exception == other.exception
         override fun hashCode(): Int = exception.hashCode()
@@ -129,7 +129,7 @@ internal fun createFailure(exception: Throwable): Any =
 @PublishedApi
 @SinceKotlin("1.3")
 internal fun Result<*>.throwOnFailure() {
-    if (value is Result.Failure) throw value.exception
+    if (konstue is Result.Failure) throw konstue.exception
 }
 
 /**
@@ -147,7 +147,7 @@ public inline fun <R> runCatching(block: () -> R): Result<R> {
 }
 
 /**
- * Calls the specified function [block] with `this` value as its receiver and returns its encapsulated result if invocation was successful,
+ * Calls the specified function [block] with `this` konstue as its receiver and returns its encapsulated result if invocation was successful,
  * catching any [Throwable] exception that was thrown from the [block] function execution and encapsulating it as a failure.
  */
 @InlineOnly
@@ -163,7 +163,7 @@ public inline fun <T, R> T.runCatching(block: T.() -> R): Result<R> {
 // -- extensions ---
 
 /**
- * Returns the encapsulated value if this instance represents [success][Result.isSuccess] or throws the encapsulated [Throwable] exception
+ * Returns the encapsulated konstue if this instance represents [success][Result.isSuccess] or throws the encapsulated [Throwable] exception
  * if it is [failure][Result.isFailure].
  *
  * This function is a shorthand for `getOrElse { throw it }` (see [getOrElse]).
@@ -172,11 +172,11 @@ public inline fun <T, R> T.runCatching(block: T.() -> R): Result<R> {
 @SinceKotlin("1.3")
 public inline fun <T> Result<T>.getOrThrow(): T {
     throwOnFailure()
-    return value as T
+    return konstue as T
 }
 
 /**
- * Returns the encapsulated value if this instance represents [success][Result.isSuccess] or the
+ * Returns the encapsulated konstue if this instance represents [success][Result.isSuccess] or the
  * result of [onFailure] function for the encapsulated [Throwable] exception if it is [failure][Result.isFailure].
  *
  * Note, that this function rethrows any [Throwable] exception thrown by [onFailure] function.
@@ -189,14 +189,14 @@ public inline fun <R, T : R> Result<T>.getOrElse(onFailure: (exception: Throwabl
     contract {
         callsInPlace(onFailure, InvocationKind.AT_MOST_ONCE)
     }
-    return when (val exception = exceptionOrNull()) {
-        null -> value as T
+    return when (konst exception = exceptionOrNull()) {
+        null -> konstue as T
         else -> onFailure(exception)
     }
 }
 
 /**
- * Returns the encapsulated value if this instance represents [success][Result.isSuccess] or the
+ * Returns the encapsulated konstue if this instance represents [success][Result.isSuccess] or the
  * [defaultValue] if it is [failure][Result.isFailure].
  *
  * This function is a shorthand for `getOrElse { defaultValue }` (see [getOrElse]).
@@ -205,11 +205,11 @@ public inline fun <R, T : R> Result<T>.getOrElse(onFailure: (exception: Throwabl
 @SinceKotlin("1.3")
 public inline fun <R, T : R> Result<T>.getOrDefault(defaultValue: R): R {
     if (isFailure) return defaultValue
-    return value as T
+    return konstue as T
 }
 
 /**
- * Returns the result of [onSuccess] for the encapsulated value if this instance represents [success][Result.isSuccess]
+ * Returns the result of [onSuccess] for the encapsulated konstue if this instance represents [success][Result.isSuccess]
  * or the result of [onFailure] function for the encapsulated [Throwable] exception if it is [failure][Result.isFailure].
  *
  * Note, that this function rethrows any [Throwable] exception thrown by [onSuccess] or by [onFailure] function.
@@ -217,15 +217,15 @@ public inline fun <R, T : R> Result<T>.getOrDefault(defaultValue: R): R {
 @InlineOnly
 @SinceKotlin("1.3")
 public inline fun <R, T> Result<T>.fold(
-    onSuccess: (value: T) -> R,
+    onSuccess: (konstue: T) -> R,
     onFailure: (exception: Throwable) -> R
 ): R {
     contract {
         callsInPlace(onSuccess, InvocationKind.AT_MOST_ONCE)
         callsInPlace(onFailure, InvocationKind.AT_MOST_ONCE)
     }
-    return when (val exception = exceptionOrNull()) {
-        null -> onSuccess(value as T)
+    return when (konst exception = exceptionOrNull()) {
+        null -> onSuccess(konstue as T)
         else -> onFailure(exception)
     }
 }
@@ -233,7 +233,7 @@ public inline fun <R, T> Result<T>.fold(
 // transformation
 
 /**
- * Returns the encapsulated result of the given [transform] function applied to the encapsulated value
+ * Returns the encapsulated result of the given [transform] function applied to the encapsulated konstue
  * if this instance represents [success][Result.isSuccess] or the
  * original encapsulated [Throwable] exception if it is [failure][Result.isFailure].
  *
@@ -242,18 +242,18 @@ public inline fun <R, T> Result<T>.fold(
  */
 @InlineOnly
 @SinceKotlin("1.3")
-public inline fun <R, T> Result<T>.map(transform: (value: T) -> R): Result<R> {
+public inline fun <R, T> Result<T>.map(transform: (konstue: T) -> R): Result<R> {
     contract {
         callsInPlace(transform, InvocationKind.AT_MOST_ONCE)
     }
     return when {
-        isSuccess -> Result.success(transform(value as T))
-        else -> Result(value)
+        isSuccess -> Result.success(transform(konstue as T))
+        else -> Result(konstue)
     }
 }
 
 /**
- * Returns the encapsulated result of the given [transform] function applied to the encapsulated value
+ * Returns the encapsulated result of the given [transform] function applied to the encapsulated konstue
  * if this instance represents [success][Result.isSuccess] or the
  * original encapsulated [Throwable] exception if it is [failure][Result.isFailure].
  *
@@ -262,17 +262,17 @@ public inline fun <R, T> Result<T>.map(transform: (value: T) -> R): Result<R> {
  */
 @InlineOnly
 @SinceKotlin("1.3")
-public inline fun <R, T> Result<T>.mapCatching(transform: (value: T) -> R): Result<R> {
+public inline fun <R, T> Result<T>.mapCatching(transform: (konstue: T) -> R): Result<R> {
     return when {
-        isSuccess -> runCatching { transform(value as T) }
-        else -> Result(value)
+        isSuccess -> runCatching { transform(konstue as T) }
+        else -> Result(konstue)
     }
 }
 
 /**
  * Returns the encapsulated result of the given [transform] function applied to the encapsulated [Throwable] exception
  * if this instance represents [failure][Result.isFailure] or the
- * original encapsulated value if it is [success][Result.isSuccess].
+ * original encapsulated konstue if it is [success][Result.isSuccess].
  *
  * Note, that this function rethrows any [Throwable] exception thrown by [transform] function.
  * See [recoverCatching] for an alternative that encapsulates exceptions.
@@ -283,7 +283,7 @@ public inline fun <R, T : R> Result<T>.recover(transform: (exception: Throwable)
     contract {
         callsInPlace(transform, InvocationKind.AT_MOST_ONCE)
     }
-    return when (val exception = exceptionOrNull()) {
+    return when (konst exception = exceptionOrNull()) {
         null -> this
         else -> Result.success(transform(exception))
     }
@@ -292,7 +292,7 @@ public inline fun <R, T : R> Result<T>.recover(transform: (exception: Throwable)
 /**
  * Returns the encapsulated result of the given [transform] function applied to the encapsulated [Throwable] exception
  * if this instance represents [failure][Result.isFailure] or the
- * original encapsulated value if it is [success][Result.isSuccess].
+ * original encapsulated konstue if it is [success][Result.isSuccess].
  *
  * This function catches any [Throwable] exception thrown by [transform] function and encapsulates it as a failure.
  * See [recover] for an alternative that rethrows exceptions.
@@ -300,13 +300,13 @@ public inline fun <R, T : R> Result<T>.recover(transform: (exception: Throwable)
 @InlineOnly
 @SinceKotlin("1.3")
 public inline fun <R, T : R> Result<T>.recoverCatching(transform: (exception: Throwable) -> R): Result<R> {
-    return when (val exception = exceptionOrNull()) {
+    return when (konst exception = exceptionOrNull()) {
         null -> this
         else -> runCatching { transform(exception) }
     }
 }
 
-// "peek" onto value/exception and pipe
+// "peek" onto konstue/exception and pipe
 
 /**
  * Performs the given [action] on the encapsulated [Throwable] exception if this instance represents [failure][Result.isFailure].
@@ -323,16 +323,16 @@ public inline fun <T> Result<T>.onFailure(action: (exception: Throwable) -> Unit
 }
 
 /**
- * Performs the given [action] on the encapsulated value if this instance represents [success][Result.isSuccess].
+ * Performs the given [action] on the encapsulated konstue if this instance represents [success][Result.isSuccess].
  * Returns the original `Result` unchanged.
  */
 @InlineOnly
 @SinceKotlin("1.3")
-public inline fun <T> Result<T>.onSuccess(action: (value: T) -> Unit): Result<T> {
+public inline fun <T> Result<T>.onSuccess(action: (konstue: T) -> Unit): Result<T> {
     contract {
         callsInPlace(action, InvocationKind.AT_MOST_ONCE)
     }
-    if (isSuccess) action(value as T)
+    if (isSuccess) action(konstue as T)
     return this
 }
 

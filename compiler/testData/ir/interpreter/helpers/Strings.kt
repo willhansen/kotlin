@@ -9,8 +9,8 @@ public inline fun CharSequence.trim(predicate: (Char) -> Boolean): CharSequence 
     var startFound = false
 
     while (startIndex <= endIndex) {
-        val index = if (!startFound) startIndex else endIndex
-        val match = predicate(this[index])
+        konst index = if (!startFound) startIndex else endIndex
+        konst match = predicate(this[index])
 
         if (!startFound) {
             if (!match)
@@ -50,10 +50,10 @@ public fun CharSequence.first(): Char {
     return this[0]
 }
 
-public val CharSequence.indices: IntRange
+public konst CharSequence.indices: IntRange
     get() = 0..length - 1
 
-public val CharSequence.lastIndex: Int
+public konst CharSequence.lastIndex: Int
     get() = this.length - 1
 
 public inline fun CharSequence.substring(startIndex: Int, endIndex: Int = length): String = subSequence(startIndex, endIndex).toString()

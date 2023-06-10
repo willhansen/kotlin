@@ -2,7 +2,7 @@
 @kotlin.Metadata
 public final class Z {
     // source: 'publishedApiAnnotationOnInlineClassConstructor.kt'
-    private final field value: int
+    private final field konstue: int
     private synthetic @kotlin.PublishedApi method <init>(p0: int): void
     public synthetic final static method box-impl(p0: int): Z
     public static @kotlin.PublishedApi method constructor-impl(p0: int): int

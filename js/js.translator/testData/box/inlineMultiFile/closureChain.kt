@@ -8,7 +8,7 @@
 package foo
 
 fun test1(): Int {
-    val inlineX = Inline()
+    konst inlineX = Inline()
     return inlineX.foo({ z: Int -> "" + z}, 25, { -> this.length })
 }
 

@@ -46,23 +46,23 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 
-internal class TestProcessor (val context: Context) {
+internal class TestProcessor (konst context: Context) {
 
     object TEST_SUITE_CLASS: IrDeclarationOriginImpl("TEST_SUITE_CLASS")
     object TEST_SUITE_GENERATED_MEMBER: IrDeclarationOriginImpl("TEST_SUITE_GENERATED_MEMBER")
 
     companion object {
-        val COMPANION_GETTER_NAME = Name.identifier("getCompanion")
-        val INSTANCE_GETTER_NAME = Name.identifier("createInstance")
+        konst COMPANION_GETTER_NAME = Name.identifier("getCompanion")
+        konst INSTANCE_GETTER_NAME = Name.identifier("createInstance")
 
-        val IGNORE_FQ_NAME = FqName.fromSegments(listOf("kotlin", "test" , "Ignore"))
+        konst IGNORE_FQ_NAME = FqName.fromSegments(listOf("kotlin", "test" , "Ignore"))
     }
 
-    private val symbols = context.ir.symbols
+    private konst symbols = context.ir.symbols
 
-    private val baseClassSuite = symbols.baseClassSuite.owner
+    private konst baseClassSuite = symbols.baseClassSuite.owner
 
-    private val topLevelSuiteNames = mutableSetOf<String>()
+    private konst topLevelSuiteNames = mutableSetOf<String>()
 
     // region Useful extensions.
     private var testSuiteCnt = 0
@@ -71,7 +71,7 @@ internal class TestProcessor (val context: Context) {
     private fun String.synthesizeSuiteClassName() = "$this\$test\$${testSuiteCnt++}".synthesizedName
 
     // IrFile always uses a forward slash as a directory separator.
-    private val IrFile.fileName
+    private konst IrFile.fileName
         get() = name.substringAfterLast('/')
 
     private fun MutableList<TestFunction>.registerFunction(
@@ -101,10 +101,10 @@ internal class TestProcessor (val context: Context) {
                     putValueArgument(1, IrFunctionReferenceImpl(
                             it.function.startOffset,
                             it.function.endOffset,
-                            registerTestCase.valueParameters[1].type,
+                            registerTestCase.konstueParameters[1].type,
                             it.function.symbol,
                             typeArgumentsCount = 0,
-                            valueArgumentsCount = 0,
+                            konstueArgumentsCount = 0,
                             reflectionTarget = null))
                     putValueArgument(2, irBoolean(it.ignored))
                 }
@@ -112,7 +112,7 @@ internal class TestProcessor (val context: Context) {
                 // Call registerFunction(kind: TestFunctionKind, () -> Unit) method.
                 +irCall(registerFunction).apply {
                     dispatchReceiver = irGet(receiver)
-                    val testKindEntry = it.kind.runtimeKind
+                    konst testKindEntry = it.kind.runtimeKind
                     putValueArgument(0, IrGetEnumValueImpl(
                             it.function.startOffset,
                             it.function.endOffset,
@@ -122,10 +122,10 @@ internal class TestProcessor (val context: Context) {
                     putValueArgument(1, IrFunctionReferenceImpl(
                             it.function.startOffset,
                             it.function.endOffset,
-                            registerFunction.valueParameters[1].type,
+                            registerFunction.konstueParameters[1].type,
                             it.function.symbol,
                             typeArgumentsCount = 0,
-                            valueArgumentsCount = 0,
+                            konstueArgumentsCount = 0,
                             reflectionTarget = null))
                 }
             }
@@ -134,53 +134,53 @@ internal class TestProcessor (val context: Context) {
     // endregion
 
     // region Classes for annotation collection.
-    internal enum class FunctionKind(annotationNameString: String, val runtimeKindString: String) {
+    internal enum class FunctionKind(annotationNameString: String, konst runtimeKindString: String) {
         TEST("kotlin.test.Test", ""),
         BEFORE_TEST("kotlin.test.BeforeTest", "BEFORE_TEST"),
         AFTER_TEST("kotlin.test.AfterTest", "AFTER_TEST"),
         BEFORE_CLASS("kotlin.test.BeforeClass", "BEFORE_CLASS"),
         AFTER_CLASS("kotlin.test.AfterClass", "AFTER_CLASS");
 
-        val annotationFqName = FqName(annotationNameString)
+        konst annotationFqName = FqName(annotationNameString)
 
         companion object {
-            val INSTANCE_KINDS = listOf(TEST, BEFORE_TEST, AFTER_TEST)
-            val COMPANION_KINDS = listOf(BEFORE_CLASS, AFTER_CLASS)
+            konst INSTANCE_KINDS = listOf(TEST, BEFORE_TEST, AFTER_TEST)
+            konst COMPANION_KINDS = listOf(BEFORE_CLASS, AFTER_CLASS)
         }
     }
 
-    private val FunctionKind.runtimeKind: IrEnumEntrySymbol
+    private konst FunctionKind.runtimeKind: IrEnumEntrySymbol
         get() = symbols.getTestFunctionKind(this)
 
     private fun IrType.isTestFunctionKind() = classifierOrNull == symbols.testFunctionKind
 
     private data class TestFunction(
-            val function: IrFunction,
-            val kind: FunctionKind,
-            val ignored: Boolean
+            konst function: IrFunction,
+            konst kind: FunctionKind,
+            konst ignored: Boolean
     ) {
-        val functionName: String get() = function.name.identifier
+        konst functionName: String get() = function.name.identifier
     }
 
-    private inner class TestClass(val ownerClass: IrClass) {
+    private inner class TestClass(konst ownerClass: IrClass) {
         var companion: IrClass? = null
-        val functions = mutableListOf<TestFunction>()
+        konst functions = mutableListOf<TestFunction>()
 
-        val suiteClassId: ClassId = ownerClass.classId ?: error(ownerClass.render())
-        val suiteName: String get() = suiteClassId.asFqNameString()
+        konst suiteClassId: ClassId = ownerClass.classId ?: error(ownerClass.render())
+        konst suiteName: String get() = suiteClassId.asFqNameString()
 
         fun registerFunction(function: IrFunction, kind: FunctionKind, ignored: Boolean) =
                 functions.registerFunction(function, kind, ignored)
     }
 
-    private inner class AnnotationCollector(val irFile: IrFile) : IrElementVisitorVoid {
-        val testClasses = mutableMapOf<IrClass, TestClass>()
+    private inner class AnnotationCollector(konst irFile: IrFile) : IrElementVisitorVoid {
+        konst testClasses = mutableMapOf<IrClass, TestClass>()
 
-        val topLevelFunctions = mutableListOf<TestFunction>()
-        val topLevelSuiteClassId: ClassId by lazy {
+        konst topLevelFunctions = mutableListOf<TestFunction>()
+        konst topLevelSuiteClassId: ClassId by lazy {
             ClassId(irFile.packageFqName, PackagePartClassUtils.getFilePartShortName(irFile.fileName).let(Name::identifier))
         }
-        val topLevelSuiteName: String get() = topLevelSuiteClassId.asFqNameString()
+        konst topLevelSuiteName: String get() = topLevelSuiteClassId.asFqNameString()
 
         private fun MutableMap<IrClass, TestClass>.getTestClass(key: IrClass) =
                 getOrPut(key) { TestClass(key) }
@@ -198,8 +198,8 @@ internal class TestProcessor (val context: Context) {
          * If the annotation isn't found or found only in interface methods, returns null.
          */
         fun IrFunctionSymbol.findAnnotatedFunction(testAnnotation: FqName): IrFunctionSymbol? {
-            val owner = this.owner
-            val parent = owner.parent
+            konst owner = this.owner
+            konst parent = owner.parent
             if (parent is IrClass && parent.isInterface) {
                 return null
             }
@@ -222,7 +222,7 @@ internal class TestProcessor (val context: Context) {
             fun warn(msg: String) = context.reportWarning(msg, irFile, function)
 
             kinds.forEach { (kind, ignored) ->
-                val annotation = kind.annotationFqName
+                konst annotation = kind.annotationFqName
                 when (kind) {
                     in FunctionKind.INSTANCE_KINDS -> with(irClass) {
                         when {
@@ -237,7 +237,7 @@ internal class TestProcessor (val context: Context) {
                             isCompanion ->
                                 warn("Annotation $annotation is not allowed for methods of a companion object")
 
-                            constructors.none { it.valueParameters.size == 0 } ->
+                            constructors.none { it.konstueParameters.size == 0 } ->
                                 warn("Test class has no default constructor: $fqNameForIrSerialization")
 
                             else ->
@@ -247,8 +247,8 @@ internal class TestProcessor (val context: Context) {
                     in FunctionKind.COMPANION_KINDS ->
                         when {
                             irClass.isCompanion -> {
-                                val containingClass = irClass.parentAsClass
-                                val testClass = testClasses.getTestClass(containingClass)
+                                konst containingClass = irClass.parentAsClass
+                                konst testClass = testClasses.getTestClass(containingClass)
                                 testClass.companion = irClass
                                 testClass.registerFunction(function, kind, ignored)
                             }
@@ -272,7 +272,7 @@ internal class TestProcessor (val context: Context) {
                         "Test function must return Unit: $fqNameForIrSerialization", irFile, this
                 )
             }
-            if (valueParameters.isNotEmpty()) {
+            if (konstueParameters.isNotEmpty()) {
                 context.reportCompilationError(
                         "Test function must have no arguments: $fqNameForIrSerialization", irFile, this
                 )
@@ -306,11 +306,11 @@ internal class TestProcessor (val context: Context) {
 
         // TODO: Use symbols instead of containingDeclaration when such information is available.
         override fun visitFunction(declaration: IrFunction) {
-            val symbol = declaration.symbol
-            val parent = declaration.parent
+            konst symbol = declaration.symbol
+            konst parent = declaration.parent
 
             warnAboutLoneIgnore(symbol)
-            val kinds = FunctionKind.values().mapNotNull { kind ->
+            konst kinds = FunctionKind.konstues().mapNotNull { kind ->
                 symbol.findAnnotatedFunction(kind.annotationFqName)?.let { annotatedFunction ->
                     warnAboutInheritedAnnotations(kind, symbol, annotatedFunction)
                     kind to (kind == FunctionKind.TEST && annotatedFunction.hasAnnotation(IGNORE_FQ_NAME))
@@ -359,8 +359,8 @@ internal class TestProcessor (val context: Context) {
         ).apply {
             parent = owner
 
-            val superFunction = baseClassSuite.simpleFunctions()
-                    .single { it.name == getterName && it.valueParameters.isEmpty() }
+            konst superFunction = baseClassSuite.simpleFunctions()
+                    .single { it.name == getterName && it.konstueParameters.isEmpty() }
 
             createDispatchReceiverParameter()
             overriddenSymbols += superFunction.symbol
@@ -397,22 +397,22 @@ internal class TestProcessor (val context: Context) {
         ).apply {
             parent = owner
 
-            val superFunction = baseClassSuite.simpleFunctions()
-                    .single { it.name == getterName && it.valueParameters.isEmpty() }
+            konst superFunction = baseClassSuite.simpleFunctions()
+                    .single { it.name == getterName && it.konstueParameters.isEmpty() }
 
             createDispatchReceiverParameter()
             overriddenSymbols += superFunction.symbol
 
             body = context.createIrBuilder(symbol, symbol.owner.startOffset, symbol.owner.endOffset).irBlockBody {
-                val constructor = classSymbol.owner.constructors.single { it.valueParameters.isEmpty() }
+                konst constructor = classSymbol.owner.constructors.single { it.konstueParameters.isEmpty() }
                 +irReturn(irCall(constructor))
             }
         }
 
-    private val baseClassSuiteConstructor = baseClassSuite.constructors.single {
-        it.valueParameters.size == 2
-                && it.valueParameters[0].type.isString()  // name: String
-                && it.valueParameters[1].type.isBoolean() // ignored: Boolean
+    private konst baseClassSuiteConstructor = baseClassSuite.constructors.single {
+        it.konstueParameters.size == 2
+                && it.konstueParameters[0].type.isString()  // name: String
+                && it.konstueParameters[1].type.isBoolean() // ignored: Boolean
     }
 
     /**
@@ -444,16 +444,16 @@ internal class TestProcessor (val context: Context) {
             fun IrClass.getFunction(name: String, predicate: (IrSimpleFunction) -> Boolean) =
                     simpleFunctions().single { it.name.asString() == name && predicate(it) }
 
-            val registerTestCase = baseClassSuite.getFunction("registerTestCase") {
-                it.valueParameters.size == 3
-                        && it.valueParameters[0].type.isString()   // name: String
-                        && it.valueParameters[1].type.isFunction() // function: testClassType.() -> Unit
-                        && it.valueParameters[2].type.isBoolean()  // ignored: Boolean
+            konst registerTestCase = baseClassSuite.getFunction("registerTestCase") {
+                it.konstueParameters.size == 3
+                        && it.konstueParameters[0].type.isString()   // name: String
+                        && it.konstueParameters[1].type.isFunction() // function: testClassType.() -> Unit
+                        && it.konstueParameters[2].type.isBoolean()  // ignored: Boolean
             }
-            val registerFunction = baseClassSuite.getFunction("registerFunction") {
-                it.valueParameters.size == 2
-                        && it.valueParameters[0].type.isTestFunctionKind() // kind: TestFunctionKind
-                        && it.valueParameters[1].type.isFunction()         // function: () -> Unit
+            konst registerFunction = baseClassSuite.getFunction("registerFunction") {
+                it.konstueParameters.size == 2
+                        && it.konstueParameters[0].type.isTestFunctionKind() // kind: TestFunctionKind
+                        && it.konstueParameters[1].type.isFunction()         // function: () -> Unit
             }
 
             body = context.createIrBuilder(symbol, symbol.owner.startOffset, symbol.owner.endOffset).irBlockBody {
@@ -469,7 +469,7 @@ internal class TestProcessor (val context: Context) {
             }
         }
 
-    private val IrClass.ignored: Boolean get() = annotations.hasAnnotation(IGNORE_FQ_NAME)
+    private konst IrClass.ignored: Boolean get() = annotations.hasAnnotation(IGNORE_FQ_NAME)
 
     /**
      * Builds a test suite class representing a test class (any class in the original IrFile with method(s)
@@ -501,19 +501,19 @@ internal class TestProcessor (val context: Context) {
             irFile.addChild(this)
             createParameterDeclarations()
 
-            val testClassType = testClass.defaultType
-            val testCompanionType = if (testClass.kind == ClassKind.OBJECT) {
+            konst testClassType = testClass.defaultType
+            konst testCompanionType = if (testClass.kind == ClassKind.OBJECT) {
                 testClassType
             } else {
                 testCompanion?.defaultType ?: context.irBuiltIns.nothingType
             }
 
-            val constructor = buildClassSuiteConstructor(
+            konst constructor = buildClassSuiteConstructor(
                     suiteName, testClassType, testCompanionType, symbol, this, functions, testClass.ignored
             )
 
-            val instanceGetter: IrFunction
-            val companionGetter: IrFunction?
+            konst instanceGetter: IrFunction
+            konst companionGetter: IrFunction?
 
             if (testClass.kind == ClassKind.OBJECT) {
                 instanceGetter = buildObjectGetter(testClass.symbol, this, INSTANCE_GETTER_NAME)
@@ -538,8 +538,8 @@ internal class TestProcessor (val context: Context) {
     // region IR generation methods
     private fun generateClassSuite(irFile: IrFile, testClass: TestClass) =
             with(buildClassSuite(testClass.suiteName, testClass.ownerClass, testClass.companion, testClass.functions, irFile)) {
-                val irConstructor = constructors.single()
-                val irBuilder = context.createIrBuilder(irFile.symbol, testClass.ownerClass.startOffset, testClass.ownerClass.endOffset)
+                konst irConstructor = constructors.single()
+                konst irBuilder = context.createIrBuilder(irFile.symbol, testClass.ownerClass.startOffset, testClass.ownerClass.endOffset)
                 irBuilder.irCall(irConstructor)
             }
 
@@ -553,36 +553,36 @@ internal class TestProcessor (val context: Context) {
         return true
     }
 
-    private val topLevelSuite = symbols.topLevelSuite.owner
-    private val topLevelSuiteConstructor = topLevelSuite.constructors.single {
-        it.valueParameters.size == 1
-                && it.valueParameters[0].type.isString()
+    private konst topLevelSuite = symbols.topLevelSuite.owner
+    private konst topLevelSuiteConstructor = topLevelSuite.constructors.single {
+        it.konstueParameters.size == 1
+                && it.konstueParameters[0].type.isString()
     }
-    private val topLevelSuiteRegisterFunction = topLevelSuite.simpleFunctions().single {
+    private konst topLevelSuiteRegisterFunction = topLevelSuite.simpleFunctions().single {
         it.name.asString() == "registerFunction"
-                && it.valueParameters.size == 2
-                && it.valueParameters[0].type.isTestFunctionKind()
-                && it.valueParameters[1].type.isFunction()
+                && it.konstueParameters.size == 2
+                && it.konstueParameters[0].type.isTestFunctionKind()
+                && it.konstueParameters[1].type.isFunction()
     }
-    private val topLevelSuiteRegisterTestCase = topLevelSuite.simpleFunctions().single {
+    private konst topLevelSuiteRegisterTestCase = topLevelSuite.simpleFunctions().single {
         it.name.asString() == "registerTestCase"
-                && it.valueParameters.size == 3
-                && it.valueParameters[0].type.isString()
-                && it.valueParameters[1].type.isFunction()
-                && it.valueParameters[2].type.isBoolean()
+                && it.konstueParameters.size == 3
+                && it.konstueParameters[0].type.isString()
+                && it.konstueParameters[1].type.isFunction()
+                && it.konstueParameters[2].type.isBoolean()
     }
 
     private fun generateTopLevelSuite(irFile: IrFile, topLevelSuiteName: String, functions: Collection<TestFunction>): IrExpression? {
-        val irBuilder = context.createIrBuilder(irFile.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET)
+        konst irBuilder = context.createIrBuilder(irFile.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET)
         if (!checkTopLevelSuiteName(irFile, topLevelSuiteName)) {
             return null
         }
 
         return irBuilder.irBlock {
-            val constructorCall = irCall(topLevelSuiteConstructor).apply {
+            konst constructorCall = irCall(topLevelSuiteConstructor).apply {
                 putValueArgument(0, irString(topLevelSuiteName))
             }
-            val testSuiteVal = irTemporary(constructorCall, "topLevelTestSuite")
+            konst testSuiteVal = irTemporary(constructorCall, "topLevelTestSuite")
             generateFunctionRegistration(testSuiteVal,
                     topLevelSuiteRegisterTestCase,
                     topLevelSuiteRegisterFunction,
@@ -591,14 +591,14 @@ internal class TestProcessor (val context: Context) {
     }
 
     private fun createTestSuites(irFile: IrFile, annotationCollector: AnnotationCollector) {
-        val statements = mutableListOf<IrStatement>()
+        konst statements = mutableListOf<IrStatement>()
 
         // There is no specified order on fake override functions, so to ensure all the tests are run deterministically,
         // sort the fake override functions by name.
-        for (testClass in annotationCollector.testClasses.values) {
-            val functions = testClass.functions.toList()
+        for (testClass in annotationCollector.testClasses.konstues) {
+            konst functions = testClass.functions.toList()
             testClass.functions.clear()
-            val fakeOverrideFunctions = mutableListOf<TestFunction>()
+            konst fakeOverrideFunctions = mutableListOf<TestFunction>()
             for (function in functions) {
                 if (function.function.isFakeOverride)
                     fakeOverrideFunctions.add(function)
@@ -610,7 +610,7 @@ internal class TestProcessor (val context: Context) {
         }
 
         annotationCollector.testClasses.filter {
-            it.value.functions.any { it.kind == FunctionKind.TEST }
+            it.konstue.functions.any { it.kind == FunctionKind.TEST }
         }.forEach { (_, testClass) ->
             statements.add(generateClassSuite(irFile, testClass))
         }
@@ -644,10 +644,10 @@ internal class TestProcessor (val context: Context) {
 
     // region test functions to be dumped
     private fun recordTestFunctions(annotationCollector: AnnotationCollector) {
-        val testDumpFile = context.config.testDumpFile ?: return
+        konst testDumpFile = context.config.testDumpFile ?: return
 
         /* test suite class -> test function names */
-        val testCasesToDump = mutableMapOf<ClassId, MutableCollection<String>>()
+        konst testCasesToDump = mutableMapOf<ClassId, MutableCollection<String>>()
 
         fun recordFunction(suiteClassId: ClassId, function: TestFunction) {
             if (function.kind == FunctionKind.TEST)
@@ -658,7 +658,7 @@ internal class TestProcessor (val context: Context) {
             recordFunction(annotationCollector.topLevelSuiteClassId, function)
         }
 
-        annotationCollector.testClasses.values.forEach { testClass ->
+        annotationCollector.testClasses.konstues.forEach { testClass ->
             testClass.functions.forEach { function -> recordFunction(testClass.suiteClassId, function) }
         }
 
@@ -671,7 +671,7 @@ internal class TestProcessor (val context: Context) {
         testDumpFile.appendLines(
                 testCasesToDump
                         .flatMap { (suiteClassId, functionNames) ->
-                            val suiteName = suiteClassId.asString()
+                            konst suiteName = suiteClassId.asString()
                             functionNames.asSequence().map { "$suiteName:$it" }
                         }
         )
@@ -689,7 +689,7 @@ internal class TestProcessor (val context: Context) {
             return
         }
 
-        val annotationCollector = AnnotationCollector(irFile)
+        konst annotationCollector = AnnotationCollector(irFile)
         irFile.acceptChildrenVoid(annotationCollector)
         createTestSuites(irFile, annotationCollector)
         recordTestFunctions(annotationCollector)

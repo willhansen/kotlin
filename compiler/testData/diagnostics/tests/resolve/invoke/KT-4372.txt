@@ -1,14 +1,14 @@
 package
 
-public val </*0*/ T> T.javaClass: java.lang.Class<T>
+public konst </*0*/ T> T.javaClass: java.lang.Class<T>
 public fun </*0*/ reified T> javaClass(): java.lang.Class<T>
 public fun </*0*/ TInner, /*1*/ TOuter> Foo<TInner, TOuter>.invoke(/*0*/ name: kotlin.String, /*1*/ content: TInner.() -> kotlin.Unit): kotlin.Unit
 
 public final enum class EnumClass : kotlin.Enum<EnumClass> {
     private constructor EnumClass(/*0*/ x: kotlin.String)
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
-    public final val x: kotlin.String
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
+    public final konst x: kotlin.String
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: EnumClass): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -18,9 +18,9 @@ public final enum class EnumClass : kotlin.Enum<EnumClass> {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<EnumClass>
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): EnumClass
-    public final /*synthesized*/ fun values(): kotlin.Array<EnumClass>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<EnumClass>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): EnumClass
+    public final /*synthesized*/ fun konstues(): kotlin.Array<EnumClass>
 }
 
 public final class Foo</*0*/ TInner, /*1*/ TOuter> {
@@ -33,7 +33,7 @@ public final class Foo</*0*/ TInner, /*1*/ TOuter> {
 
 public object Y {
     private constructor Y()
-    public final val x: java.lang.Class<EnumClass>
+    public final konst x: java.lang.Class<EnumClass>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

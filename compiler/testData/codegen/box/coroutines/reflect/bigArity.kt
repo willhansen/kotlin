@@ -23,7 +23,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     var res = "FAIL 1"
     builder {
         res = A::foo.callSuspend(a, 1L, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, "OK")

@@ -9,7 +9,7 @@
 
 // TESTCASE NUMBER: 1, 2
 @Target(AnnotationTarget.TYPE)
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
 // TESTCASE NUMBER: 1
 abstract class Bar<T : @Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) Any>

@@ -25,20 +25,20 @@ import org.jetbrains.kotlin.psi.KtFile
 import kotlin.reflect.KClass
 
 internal class KtFe10DiagnosticProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtDiagnosticProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun getDiagnosticsForElement(element: KtElement, filter: KtDiagnosticCheckerFilter): Collection<KtDiagnosticWithPsi<*>> {
-        val bindingContext = analysisContext.analyze(element, AnalysisMode.PARTIAL_WITH_DIAGNOSTICS)
-        val diagnostics = bindingContext.diagnostics.forElement(element)
+        konst bindingContext = analysisContext.analyze(element, AnalysisMode.PARTIAL_WITH_DIAGNOSTICS)
+        konst diagnostics = bindingContext.diagnostics.forElement(element)
         return diagnostics.map { KtFe10Diagnostic(it, token) }
     }
 
     override fun collectDiagnosticsForFile(ktFile: KtFile, filter: KtDiagnosticCheckerFilter): Collection<KtDiagnosticWithPsi<*>> {
-        val bindingContext = analysisContext.analyze(ktFile)
-        val result = mutableListOf<KtDiagnosticWithPsi<*>>()
+        konst bindingContext = analysisContext.analyze(ktFile)
+        konst result = mutableListOf<KtDiagnosticWithPsi<*>>()
         for (diagnostic in bindingContext.diagnostics) {
             if (diagnostic.psiFile == ktFile) {
                 result += KtFe10Diagnostic(diagnostic, token)
@@ -48,28 +48,28 @@ internal class KtFe10DiagnosticProvider(
     }
 }
 
-internal class KtFe10Diagnostic(private val diagnostic: Diagnostic, override val token: KtLifetimeToken) : KtDiagnosticWithPsi<PsiElement> {
-    override val severity: Severity
+internal class KtFe10Diagnostic(private konst diagnostic: Diagnostic, override konst token: KtLifetimeToken) : KtDiagnosticWithPsi<PsiElement> {
+    override konst severity: Severity
         get() = withValidityAssertion { diagnostic.severity }
 
-    override val factoryName: String
+    override konst factoryName: String
         get() = withValidityAssertion { diagnostic.factory.name }
 
-    override val defaultMessage: String
+    override konst defaultMessage: String
         get() = withValidityAssertion {
             @Suppress("UNCHECKED_CAST")
-            val factory = diagnostic.factory as DiagnosticFactory<UnboundDiagnostic>?
+            konst factory = diagnostic.factory as DiagnosticFactory<UnboundDiagnostic>?
             return factory?.defaultRenderer?.render(diagnostic)
                 ?: DefaultErrorMessages.getRendererForDiagnostic(diagnostic)?.render(diagnostic)
                 ?: ""
         }
 
-    override val psi: PsiElement
+    override konst psi: PsiElement
         get() = withValidityAssertion { diagnostic.psiElement }
 
-    override val textRanges: Collection<TextRange>
+    override konst textRanges: Collection<TextRange>
         get() = withValidityAssertion { diagnostic.textRanges }
 
-    override val diagnosticClass: KClass<out KtDiagnosticWithPsi<PsiElement>>
+    override konst diagnosticClass: KClass<out KtDiagnosticWithPsi<PsiElement>>
         get() = withValidityAssertion { KtFe10Diagnostic::class }
 }

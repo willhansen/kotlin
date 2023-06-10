@@ -25,20 +25,20 @@ package kotlin.text.regex
 /**
  * Represents node accepting single character from the given char class.
  */
-open internal class RangeSet(charClass: AbstractCharClass, val ignoreCase: Boolean = false) : LeafSet() {
+open internal class RangeSet(charClass: AbstractCharClass, konst ignoreCase: Boolean = false) : LeafSet() {
 
-    val chars: AbstractCharClass = charClass.instance
+    konst chars: AbstractCharClass = charClass.instance
 
     override fun accepts(startIndex: Int, testString: CharSequence): Int {
         if (ignoreCase) {
-            val char = testString[startIndex]
+            konst char = testString[startIndex]
             return if (chars.contains(char.uppercaseChar()) || chars.contains(char.lowercaseChar())) 1 else -1
         } else {
             return if (chars.contains(testString[startIndex])) 1 else -1
         }
     }
 
-    override val name: String
+    override konst name: String
         get() = "range:" + (if (chars.alt) "^ " else " ") + chars.toString()
 
     override fun first(set: AbstractSet): Boolean {

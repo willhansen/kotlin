@@ -4,9 +4,9 @@ class A() {
 
   infix fun infix(a: String) = "O" + a
 
-  val property = "OK"
+  konst property = "OK"
 
-  val a : A
+  konst a : A
     get() = A()
 }
 

@@ -13,7 +13,7 @@ import kotlin.test.assertTrue
 class KaptModelBuilderTest {
     @Test
     fun testCanBuild() {
-        val modelBuilder = KaptModelBuilder()
+        konst modelBuilder = KaptModelBuilder()
         assertTrue(modelBuilder.canBuild(Kapt::class.java.name))
         assertFalse(modelBuilder.canBuild("wrongModel"))
     }

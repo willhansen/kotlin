@@ -197,9 +197,9 @@ public class Fe10IdeNormalAnalysisSourceModuleSymbolByReferenceTestGenerated ext
     }
 
     @Test
-    @TestMetadata("valueParameter.kt")
+    @TestMetadata("konstueParameter.kt")
     public void testValueParameter() throws Exception {
-        runTest("analysis/analysis-api/testData/symbols/symbolByReference/valueParameter.kt");
+        runTest("analysis/analysis-api/testData/symbols/symbolByReference/konstueParameter.kt");
     }
 
     @Nested

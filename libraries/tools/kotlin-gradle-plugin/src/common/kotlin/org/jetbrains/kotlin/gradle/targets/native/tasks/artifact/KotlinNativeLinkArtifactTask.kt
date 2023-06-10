@@ -35,75 +35,75 @@ import javax.inject.Inject
 
 @Suppress("LeakingThis")
 abstract class KotlinNativeLinkArtifactTask @Inject constructor(
-    @get:Input val konanTarget: KonanTarget,
-    @get:Input val outputKind: CompilerOutputKind,
-    private val objectFactory: ObjectFactory,
-    private val execOperations: ExecOperations,
-    private val projectLayout: ProjectLayout
+    @get:Input konst konanTarget: KonanTarget,
+    @get:Input konst outputKind: CompilerOutputKind,
+    private konst objectFactory: ObjectFactory,
+    private konst execOperations: ExecOperations,
+    private konst projectLayout: ProjectLayout
 ) : DefaultTask(),
     KotlinToolTask<KotlinCommonCompilerToolOptions> {
 
     @get:Input
-    abstract val baseName: Property<String>
+    abstract konst baseName: Property<String>
 
     @get:OutputDirectory
-    abstract val destinationDir: DirectoryProperty
+    abstract konst destinationDir: DirectoryProperty
 
     @get:Input
-    abstract val optimized: Property<Boolean>
+    abstract konst optimized: Property<Boolean>
 
     @get:Input
-    abstract val debuggable: Property<Boolean>
+    abstract konst debuggable: Property<Boolean>
 
     @Deprecated(
         "Please declare explicit dependency on kotlinx-cli. This option has no longer effect since 1.9.0",
         level = DeprecationLevel.ERROR
     )
     @get:Input
-    abstract val enableEndorsedLibs: Property<Boolean>
+    abstract konst enableEndorsedLibs: Property<Boolean>
 
     @get:Input
-    abstract val processTests: Property<Boolean>
+    abstract konst processTests: Property<Boolean>
 
     @get:Optional
     @get:Input
-    abstract val entryPoint: Property<String>
+    abstract konst entryPoint: Property<String>
 
     @get:Input
-    abstract val staticFramework: Property<Boolean>
+    abstract konst staticFramework: Property<Boolean>
 
     @get:Input
-    abstract val embedBitcode: Property<BitcodeEmbeddingMode>
+    abstract konst embedBitcode: Property<BitcodeEmbeddingMode>
 
     @get:Classpath
-    abstract val libraries: ConfigurableFileCollection
+    abstract konst libraries: ConfigurableFileCollection
 
     @get:Classpath
-    abstract val exportLibraries: ConfigurableFileCollection
+    abstract konst exportLibraries: ConfigurableFileCollection
 
     @get:Classpath
-    abstract val includeLibraries: ConfigurableFileCollection
+    abstract konst includeLibraries: ConfigurableFileCollection
 
     @get:Input
-    abstract val linkerOptions: ListProperty<String>
+    abstract konst linkerOptions: ListProperty<String>
 
     @get:Input
-    abstract val binaryOptions: MapProperty<String, String>
+    abstract konst binaryOptions: MapProperty<String, String>
 
-    private val nativeBinaryOptions = PropertiesProvider(project).nativeBinaryOptions
+    private konst nativeBinaryOptions = PropertiesProvider(project).nativeBinaryOptions
 
     @get:Input
-    internal val allBinaryOptions: Provider<Map<String, String>> = binaryOptions.map { it + nativeBinaryOptions }
+    internal konst allBinaryOptions: Provider<Map<String, String>> = binaryOptions.map { it + nativeBinaryOptions }
 
-    override val toolOptions: KotlinCommonCompilerToolOptions = objectFactory
+    override konst toolOptions: KotlinCommonCompilerToolOptions = objectFactory
         .newInstance<KotlinCommonCompilerToolOptionsDefault>()
         .apply {
             freeCompilerArgs.addAll(PropertiesProvider(project).nativeLinkArgs)
         }
 
     @get:Internal
-    val kotlinOptions = object : KotlinCommonToolOptions {
-        override val options: KotlinCommonCompilerToolOptions
+    konst kotlinOptions = object : KotlinCommonToolOptions {
+        override konst options: KotlinCommonCompilerToolOptions
             get() = toolOptions
     }
 
@@ -120,7 +120,7 @@ abstract class KotlinNativeLinkArtifactTask @Inject constructor(
         replaceWith = ReplaceWith("toolOptions.allWarningsAsErrors.get()")
     )
     @get:Internal
-    val allWarningsAsErrors: Boolean
+    konst allWarningsAsErrors: Boolean
         get() = toolOptions.allWarningsAsErrors.get()
 
     @Deprecated(
@@ -128,7 +128,7 @@ abstract class KotlinNativeLinkArtifactTask @Inject constructor(
         replaceWith = ReplaceWith("toolOptions.suppressWarnings.get()")
     )
     @get:Internal
-    val suppressWarnings: Boolean
+    konst suppressWarnings: Boolean
         get() = toolOptions.suppressWarnings.get()
 
     @Deprecated(
@@ -136,7 +136,7 @@ abstract class KotlinNativeLinkArtifactTask @Inject constructor(
         replaceWith = ReplaceWith("toolOptions.verbose.get()")
     )
     @get:Internal
-    val verbose: Boolean
+    konst verbose: Boolean
         get() = toolOptions.verbose.get()
 
     @Deprecated(
@@ -144,42 +144,42 @@ abstract class KotlinNativeLinkArtifactTask @Inject constructor(
         replaceWith = ReplaceWith("toolOptions.freeCompilerArgs.get()")
     )
     @get:Internal
-    val freeCompilerArgs: List<String>
+    konst freeCompilerArgs: List<String>
         get() = toolOptions.freeCompilerArgs.get()
 
     @get:Internal
-    val outputFile: Provider<File> = project.provider {
-        val outFileName = "${outputKind.prefix(konanTarget)}${baseName.get()}${outputKind.suffix(konanTarget)}".replace('-', '_')
+    konst outputFile: Provider<File> = project.provider {
+        konst outFileName = "${outputKind.prefix(konanTarget)}${baseName.get()}${outputKind.suffix(konanTarget)}".replace('-', '_')
         destinationDir.asFile.get().resolve(outFileName)
     }
 
-    private val runnerSettings = KotlinNativeCompilerRunner.Settings.fromProject(project)
+    private konst runnerSettings = KotlinNativeCompilerRunner.Settings.fromProject(project)
 
     init {
         baseName.convention(project.name)
         debuggable.convention(true)
         optimized.convention(false)
         @Suppress("DEPRECATION_ERROR")
-        enableEndorsedLibs.value(false).finalizeValue()
+        enableEndorsedLibs.konstue(false).finalizeValue()
         processTests.convention(false)
         staticFramework.convention(false)
         embedBitcode.convention(BitcodeEmbeddingMode.DISABLE)
         destinationDir.convention(debuggable.flatMap {
-            val kind = outputKind.visibleName
-            val target = konanTarget.visibleName
-            val type = if (it) "debug" else "release"
+            konst kind = outputKind.visibleName
+            konst target = konanTarget.visibleName
+            konst type = if (it) "debug" else "release"
             projectLayout.buildDirectory.dir("out/$kind/$target/$type")
         })
     }
 
     @TaskAction
     fun link() {
-        val outFile = outputFile.get()
+        konst outFile = outputFile.get()
         outFile.ensureParentDirsCreated()
 
         fun FileCollection.klibs() = files.filter { it.extension == "klib" }
 
-        val buildArgs = buildKotlinNativeBinaryLinkerArgs(
+        konst buildArgs = buildKotlinNativeBinaryLinkerArgs(
             outFile = outFile,
             optimized = optimized.get(),
             debuggable = debuggable.get(),

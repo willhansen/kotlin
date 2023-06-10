@@ -7,14 +7,14 @@ package org.jetbrains.kotlin.js.backend.ast;
 import org.jetbrains.annotations.NotNull;
 
 public final class JsStringLiteral extends JsLiteral.JsValueLiteral {
-    private final String value;
+    private final String konstue;
 
-    public JsStringLiteral(String value) {
-        this.value = value;
+    public JsStringLiteral(String konstue) {
+        this.konstue = konstue;
     }
 
     public String getValue() {
-    return value;
+    return konstue;
   }
 
     @Override
@@ -31,6 +31,6 @@ public final class JsStringLiteral extends JsLiteral.JsValueLiteral {
     @NotNull
     @Override
     public JsStringLiteral deepCopy() {
-        return new JsStringLiteral(value).withMetadataFrom(this);
+        return new JsStringLiteral(konstue).withMetadataFrom(this);
     }
 }

@@ -33,11 +33,11 @@ class ResolveKotlinSourceSetsTest {
 
     @Test
     fun resolveAllSourceSetsDependingOn() {
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val linuxMain = kotlin.sourceSets.create("linuxMain")
-        val macosMain = kotlin.sourceSets.create("macosMain")
-        val jvmMain = kotlin.sourceSets.create("jvmMain")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst linuxMain = kotlin.sourceSets.create("linuxMain")
+        konst macosMain = kotlin.sourceSets.create("macosMain")
+        konst jvmMain = kotlin.sourceSets.create("jvmMain")
 
         jvmMain.dependsOn(commonMain)
         nativeMain.dependsOn(commonMain)
@@ -61,11 +61,11 @@ class ResolveKotlinSourceSetsTest {
 
     @Test
     fun resolveAllDependsOnSourceSets() {
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val linuxMain = kotlin.sourceSets.create("linuxMain")
-        val macosMain = kotlin.sourceSets.create("macosMain")
-        val jvmMain = kotlin.sourceSets.create("jvmMain")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst linuxMain = kotlin.sourceSets.create("linuxMain")
+        konst macosMain = kotlin.sourceSets.create("macosMain")
+        konst jvmMain = kotlin.sourceSets.create("jvmMain")
 
         jvmMain.dependsOn(commonMain)
         nativeMain.dependsOn(commonMain)

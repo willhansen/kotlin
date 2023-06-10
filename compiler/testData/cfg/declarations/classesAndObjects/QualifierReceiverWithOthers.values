@@ -6,7 +6,7 @@ class A {
 =====================
 == B ==
 object B {
-    val A.Companion.foo: X get() = X
+    konst A.Companion.foo: X get() = X
 }
 ---------------------
 =====================

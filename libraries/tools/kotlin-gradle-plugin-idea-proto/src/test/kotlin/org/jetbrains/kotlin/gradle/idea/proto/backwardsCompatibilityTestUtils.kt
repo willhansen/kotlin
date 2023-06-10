@@ -9,12 +9,12 @@ import java.io.File
 import java.net.URLClassLoader
 
 fun classLoaderForBackwardsCompatibleClasses(): ClassLoader {
-    val uris = classpathForBackwardsCompatibleClasses().map { file -> file.toURI().toURL() }.toTypedArray()
+    konst uris = classpathForBackwardsCompatibleClasses().map { file -> file.toURI().toURL() }.toTypedArray()
     return URLClassLoader.newInstance(uris, null)
 }
 
 fun classpathForBackwardsCompatibleClasses(): List<File> {
-    val compatibilityTestClasspath = System.getProperty("compatibilityTestClasspath")
+    konst compatibilityTestClasspath = System.getProperty("compatibilityTestClasspath")
         ?: error("Missing compatibilityTestClasspath system property")
 
     return compatibilityTestClasspath.split(";").map { path -> File(path) }

@@ -1,10 +1,10 @@
 fun box(): String {
     fun foo(): String {
         fun bar() = "OK"
-        val ref = ::bar
+        konst ref = ::bar
         return ref()
     }
 
-    val ref = ::foo
+    konst ref = ::foo
     return ref()
 }

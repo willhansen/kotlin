@@ -43,7 +43,7 @@ interface IrTypeTransformerVoid<in D> : IrElementTransformer<D> {
     }
 
     override fun visitClass(declaration: IrClass, data: D): IrStatement {
-        declaration.valueClassRepresentation?.mapUnderlyingType {
+        declaration.konstueClassRepresentation?.mapUnderlyingType {
             transformType(declaration, it, data)
         }
         declaration.superTypes = declaration.superTypes.map { transformType(declaration, it, data) }

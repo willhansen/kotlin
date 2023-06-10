@@ -9,19 +9,19 @@ import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension.Cocoapods
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension.SpecRepos
 
 interface MissingInfoMessage<T> {
-    val missingInfo: T
-    val missingMessage: String
+    konst missingInfo: T
+    konst missingMessage: String
 }
 
-class MissingSpecReposMessage(override val missingInfo: SpecRepos) : MissingInfoMessage<SpecRepos> {
-    override val missingMessage: String
+class MissingSpecReposMessage(override konst missingInfo: SpecRepos) : MissingInfoMessage<SpecRepos> {
+    override konst missingMessage: String
         get() = missingInfo.getAll().joinToString(separator = "\n") { "source '$it'" }
 }
 
 class MissingCocoapodsMessage(
-    override val missingInfo: CocoapodsDependency
+    override konst missingInfo: CocoapodsDependency
 ) : MissingInfoMessage<CocoapodsDependency> {
-    override val missingMessage: String
+    override konst missingMessage: String
         get() = "pod '${missingInfo.name}'${missingInfo.source?.let { ", ${it.getPodSourcePath()}" }.orEmpty()}"
 }
 

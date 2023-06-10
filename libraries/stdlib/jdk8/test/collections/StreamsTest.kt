@@ -24,8 +24,8 @@ import kotlin.test.*
 class StreamsTest {
 
     @Test fun toList() {
-        val data = arrayOf<Any?>(1, 2L, 1.23, null)
-        val streamBuilder = { Stream.of(*data) }
+        konst data = arrayOf<Any?>(1, 2L, 1.23, null)
+        konst streamBuilder = { Stream.of(*data) }
 
         assertEquals(data.asList(), streamBuilder().toList())
         assertEquals(listOf(1),     streamBuilder().filter { it is Int }.mapToInt { it as Int }.toList())
@@ -35,7 +35,7 @@ class StreamsTest {
 
 
     @Test fun asSequence() {
-        val data = arrayOf(1, 2L, 1.23, null)
+        konst data = arrayOf(1, 2L, 1.23, null)
 
         fun<T> assertSequenceContent(expected: List<T>, actual: Sequence<T>) {
             assertEquals(expected, actual.toList())
@@ -50,19 +50,19 @@ class StreamsTest {
     }
 
     @Test fun asStream() {
-        val sequence = generateSequence(0) { it -> it * it + 1 }
-        val stream = sequence.asStream()
-        val expected = Stream.iterate(0) { it -> it * it + 1 }
+        konst sequence = generateSequence(0) { it -> it * it + 1 }
+        konst stream = sequence.asStream()
+        konst expected = Stream.iterate(0) { it -> it * it + 1 }
 
         assertEquals(expected.limit(7).toList(), stream.limit(7).toList())
     }
 
     @Test fun asParallelStream() {
-        val sequence = generateSequence(0) { it + 2 } // even numbers
-        val stream = sequence.asStream().parallel().map { it / 2 }
+        konst sequence = generateSequence(0) { it + 2 } // even numbers
+        konst stream = sequence.asStream().parallel().map { it / 2 }
 
-        val n = 100000
-        val expected = (0 until n).toList()
+        konst n = 100000
+        konst expected = (0 until n).toList()
 
         assertEquals(expected, stream.limit(n.toLong()).toList())
     }

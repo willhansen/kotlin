@@ -21,6 +21,6 @@ abstract class FirAnalysisHandler(
     failureDisablesNextSteps,
     doNotRunIfThereWerePreviousFailures
 ) {
-    protected val File.nameWithoutFirExtension: String
+    protected konst File.nameWithoutFirExtension: String
         get() = nameWithoutExtension.removeSuffix(".fir")
 }

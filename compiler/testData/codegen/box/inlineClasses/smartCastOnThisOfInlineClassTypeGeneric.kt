@@ -13,7 +13,7 @@ interface IFoo : IBase {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class B<T: String>(val x: T) : IFoo {
+konstue class B<T: String>(konst x: T) : IFoo {
     override fun foo() = x
 }
 

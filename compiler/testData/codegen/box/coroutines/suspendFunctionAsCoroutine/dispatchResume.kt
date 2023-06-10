@@ -11,43 +11,43 @@ class Controller {
 
     var callback: (() -> Unit)? = null
 
-    suspend fun <T> suspendWithValue(value: T): T = suspendCoroutine { continuation ->
-        log += "suspend($value);"
+    suspend fun <T> suspendWithValue(konstue: T): T = suspendCoroutine { continuation ->
+        log += "suspend($konstue);"
         callback = {
-            continuation.resume(value)
+            continuation.resume(konstue)
         }
     }
 
-    suspend fun suspendWithException(value: String): Unit = suspendCoroutine { continuation ->
-        log += "error($value);"
+    suspend fun suspendWithException(konstue: String): Unit = suspendCoroutine { continuation ->
+        log += "error($konstue);"
         callback = {
-            continuation.resumeWithException(RuntimeException(value))
+            continuation.resumeWithException(RuntimeException(konstue))
         }
     }
 }
 
 abstract class ContinuationDispatcher : AbstractCoroutineContextElement(ContinuationInterceptor), ContinuationInterceptor {
-    abstract fun <T> dispatchResumeWith(value: Result<T>, continuation: Continuation<T>): Boolean
+    abstract fun <T> dispatchResumeWith(konstue: Result<T>, continuation: Continuation<T>): Boolean
     override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> = DispatchedContinuation(this, continuation)
 }
 
 private class DispatchedContinuation<T>(
-    val dispatcher: ContinuationDispatcher,
-    val continuation: Continuation<T>
+    konst dispatcher: ContinuationDispatcher,
+    konst continuation: Continuation<T>
 ): Continuation<T> {
-    override val context: CoroutineContext = continuation.context
+    override konst context: CoroutineContext = continuation.context
 
-    override fun resumeWith(value: Result<T>) {
-        if (!dispatcher.dispatchResumeWith(value, continuation))
-            continuation.resumeWith(value)
+    override fun resumeWith(konstue: Result<T>) {
+        if (!dispatcher.dispatchResumeWith(konstue, continuation))
+            continuation.resumeWith(konstue)
     }
 }
 
 fun test(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation(object: ContinuationDispatcher() {
         private fun dispatchResume(block: () -> Unit) {
-            val id = controller.resumeIndex++
+            konst id = controller.resumeIndex++
             controller.log += "before $id;"
             block()
             controller.log += "after $id;"
@@ -62,7 +62,7 @@ fun test(c: suspend Controller.() -> Unit): String {
     }))
 
     while (controller.callback != null) {
-        val c = controller.callback!!
+        konst c = controller.callback!!
         controller.callback = null
         c()
     }
@@ -73,8 +73,8 @@ fun test(c: suspend Controller.() -> Unit): String {
 suspend fun Controller.foo() = suspendWithValue("") + suspendWithValue("O")
 
 suspend fun Controller.test1() {
-    val o = foo()
-    val k = suspendWithValue("K")
+    konst o = foo()
+    konst k = suspendWithValue("K")
     log += "$o$k;"
 }
 

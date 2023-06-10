@@ -1,9 +1,9 @@
 class A<T>(var t: T) {}
-class B<R>(val r: R) {}
+class B<R>(konst r: R) {}
 
 fun box() : String {
-    val ai = A<Int>(1)
-    val aai = A<A<Int>>(ai)
+    konst ai = A<Int>(1)
+    konst aai = A<A<Int>>(ai)
     if(aai.t.t != 1)  return "fail"
 /*
     aai.t.t = 2
@@ -13,7 +13,7 @@ fun box() : String {
     if(aai.t != ai)  return "fail"
     if(aai.t !== ai) return "fail"
 
-    val abi = A<B<Int>>(B<Int>(1))
+    konst abi = A<B<Int>>(B<Int>(1))
     if(abi.t.r != 1) return "fail"
 */
     return "OK"

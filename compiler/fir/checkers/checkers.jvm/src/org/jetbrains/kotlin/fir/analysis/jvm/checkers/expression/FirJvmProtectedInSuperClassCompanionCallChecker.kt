@@ -30,18 +30,18 @@ import org.jetbrains.kotlin.types.AbstractTypeChecker
 
 object FirJvmProtectedInSuperClassCompanionCallChecker : FirBasicExpressionChecker() {
     override fun check(expression: FirStatement, context: CheckerContext, reporter: DiagnosticReporter) {
-        val dispatchReceiver = when (expression) {
+        konst dispatchReceiver = when (expression) {
             is FirQualifiedAccessExpression -> expression.dispatchReceiver
             is FirVariableAssignment -> expression.dispatchReceiver
             else -> null
         } ?: return
 
         if (dispatchReceiver is FirNoReceiverExpression) return
-        val dispatchClassSymbol = dispatchReceiver.typeRef.toRegularClassSymbol(context.session) ?: return
-        val calleeReference = expression.calleeReference
-        val resolvedSymbol = calleeReference?.toResolvedCallableSymbol() ?: return
+        konst dispatchClassSymbol = dispatchReceiver.typeRef.toRegularClassSymbol(context.session) ?: return
+        konst calleeReference = expression.calleeReference
+        konst resolvedSymbol = calleeReference?.toResolvedCallableSymbol() ?: return
 
-        val visibility = if (resolvedSymbol is FirPropertySymbol) {
+        konst visibility = if (resolvedSymbol is FirPropertySymbol) {
             if (expression is FirVariableAssignment)
                 resolvedSymbol.setterSymbol?.visibility ?: resolvedSymbol.visibility
             else
@@ -52,11 +52,11 @@ object FirJvmProtectedInSuperClassCompanionCallChecker : FirBasicExpressionCheck
         if (visibility != Visibilities.Protected) return
         if (resolvedSymbol.getAnnotationByClassId(JVM_STATIC_ANNOTATION_CLASS_ID, context.session) != null) return
         if (!dispatchClassSymbol.isCompanion) return
-        val companionContainingClassSymbol =
+        konst companionContainingClassSymbol =
             dispatchClassSymbol.getContainingDeclarationSymbol(context.session) as? FirRegularClassSymbol ?: return
 
         // Called from within a derived class
-        val companionContainingType = companionContainingClassSymbol.defaultType()
+        konst companionContainingType = companionContainingClassSymbol.defaultType()
         if (context.findClosest<FirClass> {
                 AbstractTypeChecker.isSubtypeOf(context.session.typeContext, it.symbol.defaultType(), companionContainingType)
             } == null

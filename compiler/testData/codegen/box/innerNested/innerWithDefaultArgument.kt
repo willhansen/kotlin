@@ -2,13 +2,13 @@
 // KT-40771
 
 
-class Outer(val o: String, val oo: String = o) {
-    inner class Inner(val k: String, val kk: String = k)
+class Outer(konst o: String, konst oo: String = o) {
+    inner class Inner(konst k: String, konst kk: String = k)
 }
 
 fun box(): String {
-    val o = Outer("O")
-    val i = o.Inner("K")
+    konst o = Outer("O")
+    konst i = o.Inner("K")
 
     return o.oo + i.kk
 }

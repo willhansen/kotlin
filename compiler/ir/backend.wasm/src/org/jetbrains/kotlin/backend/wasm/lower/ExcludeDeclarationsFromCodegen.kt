@@ -24,7 +24,7 @@ fun excludeDeclarationsFromCodegen(context: WasmBackendContext, module: IrModule
             return true
 
         // ... or files as a whole
-        val parentFile = declaration.parent as? IrFile
+        konst parentFile = declaration.parent as? IrFile
         if (parentFile?.hasExcludedFromCodegenAnnotation() == true)
             return true
 
@@ -32,9 +32,9 @@ fun excludeDeclarationsFromCodegen(context: WasmBackendContext, module: IrModule
     }
 
     for (file in module.files) {
-        val it = file.declarations.iterator()
+        konst it = file.declarations.iterator()
         while (it.hasNext()) {
-            val d = it.next() as? IrDeclarationWithName ?: continue
+            konst d = it.next() as? IrDeclarationWithName ?: continue
             if (isExcluded(d)) {
                 it.remove()
                 // Move to "excluded" package fragment preserving fq-name

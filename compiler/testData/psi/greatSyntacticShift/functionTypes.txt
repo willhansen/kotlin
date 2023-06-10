@@ -51,7 +51,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')
@@ -66,7 +66,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a1')
         PsiWhiteSpace(' ')
@@ -84,7 +84,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a2')
         PsiWhiteSpace(' ')
@@ -103,7 +103,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a3')
         PsiWhiteSpace(' ')
@@ -120,7 +120,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a31')
         PsiWhiteSpace(' ')
@@ -141,7 +141,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a4')
         PsiWhiteSpace(' ')
@@ -158,7 +158,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a5')
         PsiWhiteSpace(' ')
@@ -177,7 +177,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a6')
         PsiWhiteSpace(' ')
@@ -196,7 +196,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a7')
         PsiWhiteSpace(' ')
@@ -228,7 +228,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a8')
         PsiWhiteSpace(' ')
@@ -267,12 +267,12 @@ KtFile: functionTypes.kt
                 REFERENCE_EXPRESSION
                   PsiElement(IDENTIFIER)('B')
       PsiWhiteSpace('\n\n')
-      PsiComment(EOL_COMMENT)('//val a9 : (A, B)')
+      PsiComment(EOL_COMMENT)('//konst a9 : (A, B)')
       PsiWhiteSpace('\n')
-      PsiComment(EOL_COMMENT)('//val a10 : (B)? -> B')
+      PsiComment(EOL_COMMENT)('//konst a10 : (B)? -> B')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a11')
         PsiWhiteSpace(' ')
@@ -306,7 +306,7 @@ KtFile: functionTypes.kt
           PsiElement(null)('null')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a12')
         PsiWhiteSpace(' ')
@@ -345,7 +345,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a13')
         PsiWhiteSpace(' ')
@@ -379,7 +379,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a14')
         PsiWhiteSpace(' ')
@@ -417,7 +417,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a15')
         PsiWhiteSpace(' ')
@@ -454,7 +454,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a152')
         PsiWhiteSpace(' ')
@@ -492,7 +492,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a151')
         PsiWhiteSpace(' ')
@@ -528,7 +528,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a16')
         PsiWhiteSpace(' ')
@@ -569,7 +569,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a17')
         PsiWhiteSpace(' ')
@@ -618,7 +618,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a18')
         PsiWhiteSpace(' ')
@@ -661,7 +661,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a19')
         PsiWhiteSpace(' ')
@@ -719,7 +719,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a7')
         PsiWhiteSpace(' ')
@@ -755,7 +755,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a8')
         PsiWhiteSpace(' ')
@@ -803,11 +803,11 @@ KtFile: functionTypes.kt
                   PsiElement(IDENTIFIER)('B')
       PsiWhiteSpace('\n')
       PROPERTY
-        PsiComment(EOL_COMMENT)('//val a9 : (A, B)')
+        PsiComment(EOL_COMMENT)('//konst a9 : (A, B)')
         PsiWhiteSpace('\n')
-        PsiComment(EOL_COMMENT)('//val a10 : (B)? -> B')
+        PsiComment(EOL_COMMENT)('//konst a10 : (B)? -> B')
         PsiWhiteSpace('\n    ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a11')
         PsiWhiteSpace(' ')
@@ -845,7 +845,7 @@ KtFile: functionTypes.kt
           PsiElement(null)('null')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a12')
         PsiWhiteSpace(' ')
@@ -888,7 +888,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a13')
         PsiWhiteSpace(' ')
@@ -926,7 +926,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a14')
         PsiWhiteSpace(' ')
@@ -968,7 +968,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a15')
         PsiWhiteSpace(' ')
@@ -1009,7 +1009,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a152')
         PsiWhiteSpace(' ')
@@ -1051,7 +1051,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a151')
         PsiWhiteSpace(' ')
@@ -1091,7 +1091,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a16')
         PsiWhiteSpace(' ')
@@ -1140,7 +1140,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a17')
         PsiWhiteSpace(' ')
@@ -1197,7 +1197,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a18')
         PsiWhiteSpace(' ')
@@ -1248,7 +1248,7 @@ KtFile: functionTypes.kt
         MODIFIER_LIST
           PsiElement(abstract)('abstract')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a19')
         PsiWhiteSpace(' ')

@@ -71,7 +71,7 @@ var OBJECT_HASH_CODE_PROPERTY_NAME = "kotlinHashCodeValue$";
 function getObjectHashCode(obj) {
     if (!(OBJECT_HASH_CODE_PROPERTY_NAME in obj)) {
         var hash = (Math.random() * POW_2_32) | 0; // Make 32-bit singed integer.
-        Object.defineProperty(obj, OBJECT_HASH_CODE_PROPERTY_NAME, { value:  hash, enumerable: false });
+        Object.defineProperty(obj, OBJECT_HASH_CODE_PROPERTY_NAME, { konstue:  hash, enumerable: false });
     }
     return obj[OBJECT_HASH_CODE_PROPERTY_NAME];
 }

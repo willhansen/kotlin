@@ -5,7 +5,7 @@ class My {
         private set
 
     // Error: Variable 'delegate' must be initialized
-    val another: String = delegate
+    konst another: String = delegate
 
     var delegateWithBackingField: String by kotlin.properties.Delegates.notNull()
         <!ACCESSOR_FOR_DELEGATED_PROPERTY!>private set(arg) { <!UNRESOLVED_REFERENCE!>field<!> = arg }<!>

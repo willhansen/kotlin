@@ -1,11 +1,11 @@
 package
 
-public val a: (???) -> ???
-public val b: (kotlin.Int) -> kotlin.Int
-public val c: (kotlin.Int, kotlin.String) -> kotlin.Int
-public val d: (kotlin.Int, kotlin.String) -> kotlin.Int
-public val e: (kotlin.Int, kotlin.String) -> kotlin.Int
-public val f: (kotlin.Int) -> kotlin.Int
+public konst a: (???) -> ???
+public konst b: (kotlin.Int) -> kotlin.Int
+public konst c: (kotlin.Int, kotlin.String) -> kotlin.Int
+public konst d: (kotlin.Int, kotlin.String) -> kotlin.Int
+public konst e: (kotlin.Int, kotlin.String) -> kotlin.Int
+public konst f: (kotlin.Int) -> kotlin.Int
 public fun test1(/*0*/ a: (kotlin.Int) -> kotlin.Unit): kotlin.Unit
 public fun test2(/*0*/ a: (kotlin.Int) -> kotlin.Unit): kotlin.Unit
 public fun test3(/*0*/ a: (kotlin.Int, kotlin.String) -> kotlin.Unit): kotlin.Unit

@@ -14,7 +14,7 @@ abstract class Father {
 }
 
 class Child : Father() {
-    val ChildInClass : InClass
+    konst ChildInClass : InClass
 
     init {
         ChildInClass =  object : Father.InClass() {

@@ -2,39 +2,39 @@
 // FILE: A.kt
 
 class A {
-    val a: Number
+    konst a: Number
         private field = 1
 
-    val b: Number
+    konst b: Number
         internal field = 2
 
-    val c: Number
+    konst c: Number
         <!WRONG_MODIFIER_TARGET!>protected<!> field = 3
 
-    val d: Number
+    konst d: Number
         <!WRONG_MODIFIER_TARGET!>public<!> field = 5
 
     fun rest() {
-        val aI = A().a <!UNRESOLVED_REFERENCE!>+<!> 10
-        val bI = A().b <!UNRESOLVED_REFERENCE!>+<!> 20
-        val cI = A().c <!UNRESOLVED_REFERENCE!>+<!> 30
-        val dI = A().d <!UNRESOLVED_REFERENCE!>+<!> 40
+        konst aI = A().a <!UNRESOLVED_REFERENCE!>+<!> 10
+        konst bI = A().b <!UNRESOLVED_REFERENCE!>+<!> 20
+        konst cI = A().c <!UNRESOLVED_REFERENCE!>+<!> 30
+        konst dI = A().d <!UNRESOLVED_REFERENCE!>+<!> 40
     }
 }
 
 fun test() {
-    val aA = A().a <!UNRESOLVED_REFERENCE!>+<!> 10
-    val bA = A().b <!UNRESOLVED_REFERENCE!>+<!> 20
-    val cA = A().c <!UNRESOLVED_REFERENCE!>+<!> 30
-    val dA = A().d <!UNRESOLVED_REFERENCE!>+<!> 40
+    konst aA = A().a <!UNRESOLVED_REFERENCE!>+<!> 10
+    konst bA = A().b <!UNRESOLVED_REFERENCE!>+<!> 20
+    konst cA = A().c <!UNRESOLVED_REFERENCE!>+<!> 30
+    konst dA = A().d <!UNRESOLVED_REFERENCE!>+<!> 40
 }
 
 // MODULE: main(lib)
 // FILE: B.kt
 
 fun main() {
-    val aB = A().a <!UNRESOLVED_REFERENCE!>+<!> 10
-    val bB = A().b <!UNRESOLVED_REFERENCE!>+<!> 20
-    val cB = A().c <!UNRESOLVED_REFERENCE!>+<!> 30
-    val dB = A().d <!UNRESOLVED_REFERENCE!>+<!> 40
+    konst aB = A().a <!UNRESOLVED_REFERENCE!>+<!> 10
+    konst bB = A().b <!UNRESOLVED_REFERENCE!>+<!> 20
+    konst cB = A().c <!UNRESOLVED_REFERENCE!>+<!> 30
+    konst dB = A().d <!UNRESOLVED_REFERENCE!>+<!> 40
 }

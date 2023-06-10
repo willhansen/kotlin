@@ -3,7 +3,7 @@
 package test
 
 class A {
-    val foo = fun(call: () -> Unit) =
+    konst foo = fun(call: () -> Unit) =
         ext {
             fun send() {
                 call()

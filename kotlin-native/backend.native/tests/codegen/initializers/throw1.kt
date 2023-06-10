@@ -4,7 +4,7 @@
  */
 
 // FILE: lib.kt
-val x = computeX()
+konst x = computeX()
 
 private fun computeX() = 42
 

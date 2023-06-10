@@ -47,8 +47,8 @@ class MppDiagnosticsFunctionalTest {
                 linuxX64()
 
                 sourceSets.apply {
-                    val myCustomCommonMain = create("myCustomCommonMain")
-                    val myCustomCommonMain2 = create("myCustomCommonMain2")
+                    konst myCustomCommonMain = create("myCustomCommonMain")
+                    konst myCustomCommonMain2 = create("myCustomCommonMain2")
 
                     commonMain {
                         dependsOn(myCustomCommonMain)
@@ -76,14 +76,14 @@ class MppDiagnosticsFunctionalTest {
                 linuxX64()
 
                 sourceSets.apply {
-                    val unused1 = create("unused1")
+                    konst unused1 = create("unused1")
                     // Check that dependsOn doesn't make source set "used"
                     create("unused2").dependsOn(unused1)
                     // Check that depending on used source sets doesn't make source set "used"
                     create("unusedWithDependsOnUsed").dependsOn(commonMain)
 
                     // Check that custom intermediate source set isn't reported as unused
-                    val intermediate = create("intermediate")
+                    konst intermediate = create("intermediate")
                     jvmMain.dependsOn(intermediate)
                     intermediate.dependsOn(commonMain)
                 }
@@ -115,7 +115,7 @@ class MppDiagnosticsFunctionalTest {
                 linuxX64()
 
                 sourceSets.apply {
-                    val intermediateBetweenAndroid = create("intermediate")
+                    konst intermediateBetweenAndroid = create("intermediate")
                     androidMain.dependsOn(intermediateBetweenAndroid)
                     intermediateBetweenAndroid.dependsOn(commonMain)
                 }

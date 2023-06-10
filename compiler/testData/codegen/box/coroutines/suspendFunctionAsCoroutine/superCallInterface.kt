@@ -5,7 +5,7 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 interface A {
-    val v: String
+    konst v: String
 
     suspend fun suspendThere(v: String): String = suspendCoroutineUninterceptedOrReturn { x ->
         x.resume(v)
@@ -19,7 +19,7 @@ interface A2 : A {
     override suspend fun suspendHere(): String = super.suspendHere() + suspendThere("56")
 }
 
-class B(override val v: String) : A2
+class B(override konst v: String) : A2
 
 fun builder(c: suspend A.() -> Unit) {
     c.startCoroutine(B("K"), EmptyContinuation)

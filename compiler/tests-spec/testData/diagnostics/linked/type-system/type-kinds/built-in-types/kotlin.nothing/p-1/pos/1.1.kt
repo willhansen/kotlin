@@ -20,13 +20,13 @@
 package testPackCase1
 import checkSubtype
 class NothingWrapper() {
-    val data: Nothing = TODO()
+    konst data: Nothing = TODO()
 }
 
 class CustomClass() {}
 
 fun case1() {
-    val wrapper: NothingWrapper = NothingWrapper()
+    konst wrapper: NothingWrapper = NothingWrapper()
     checkSubtype<Any>(wrapper.data)
     checkSubtype<Any>(wrapper.data)
 
@@ -45,7 +45,7 @@ fun case1() {
 package testPackCase2
 import checkSubtype
 class NothingWrapper() {
-    val data: Nothing = TODO()
+    konst data: Nothing = TODO()
 }
 
 class CustomClass() {}

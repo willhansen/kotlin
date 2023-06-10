@@ -41,7 +41,7 @@ import org.jetbrains.org.objectweb.asm.Type
 import kotlin.collections.set
 
 class IrFrameMap : FrameMapBase<IrSymbol>() {
-    private val typeMap = mutableMapOf<IrSymbol, Type>()
+    private konst typeMap = mutableMapOf<IrSymbol, Type>()
 
     override fun enter(key: IrSymbol, type: Type): Int {
         typeMap[key] = type
@@ -57,7 +57,7 @@ class IrFrameMap : FrameMapBase<IrSymbol>() {
         ?: error("No mapping for symbol: ${symbol.owner.render()}")
 }
 
-internal val IrFunction.isStatic
+internal konst IrFunction.isStatic
     get() = (this.dispatchReceiverParameter == null && this !is IrConstructor)
 
 fun IrFrameMap.enter(irDeclaration: IrSymbolOwner, type: Type): Int {
@@ -69,17 +69,17 @@ fun IrFrameMap.leave(irDeclaration: IrSymbolOwner): Int {
 }
 
 fun JvmBackendContext.getSourceMapper(declaration: IrClass): SourceMapper {
-    val irFile = declaration.fileParentBeforeInline
-    val type = declaration.getAttributeOwnerBeforeInline()?.let { getLocalClassType(it) } ?: defaultTypeMapper.mapClass(declaration)
+    konst irFile = declaration.fileParentBeforeInline
+    konst type = declaration.getAttributeOwnerBeforeInline()?.let { getLocalClassType(it) } ?: defaultTypeMapper.mapClass(declaration)
 
-    val fileEntry = irFile.fileEntry
+    konst fileEntry = irFile.fileEntry
     // NOTE: apparently inliner requires the source range to cover the
     //       whole file the class is declared in rather than the class only.
-    val endLineNumber = when (fileEntry) {
+    konst endLineNumber = when (fileEntry) {
         is MultifileFacadeFileEntry -> 0
         else -> fileEntry.getSourceRangeInfo(0, fileEntry.maxOffset).endLineNumber
     }
-    val sourceFileName = when (fileEntry) {
+    konst sourceFileName = when (fileEntry) {
         is MultifileFacadeFileEntry -> fileEntry.partFiles.singleOrNull()?.name
         else -> irFile.name
     }
@@ -92,22 +92,22 @@ fun JvmBackendContext.getSourceMapper(declaration: IrClass): SourceMapper {
     )
 }
 
-val IrType.isExtensionFunctionType: Boolean
+konst IrType.isExtensionFunctionType: Boolean
     get() = isFunctionTypeOrSubtype() && hasAnnotation(FqNames.extensionFunctionType)
 
 
 /* Borrowed with modifications from AsmUtil.java */
 
-private val NO_FLAG_LOCAL = 0
+private konst NO_FLAG_LOCAL = 0
 
 private fun IrDeclaration.getVisibilityAccessFlagForAnonymous(): Int =
     if (isInlineOrContainedInInline(parent as? IrDeclaration)) Opcodes.ACC_PUBLIC else AsmUtil.NO_FLAG_PACKAGE_PRIVATE
 
 fun IrClass.calculateInnerClassAccessFlags(context: JvmBackendContext): Int {
-    val isLambda = superTypes.any {
+    konst isLambda = superTypes.any {
         it.classOrNull === context.ir.symbols.lambdaClass
     }
-    val visibility = when {
+    konst visibility = when {
         isLambda -> getVisibilityAccessFlagForAnonymous()
         visibility === DescriptorVisibilities.LOCAL -> Opcodes.ACC_PUBLIC
         else -> getVisibilityAccessFlag()
@@ -148,7 +148,7 @@ fun IrDeclarationWithVisibility.getVisibilityAccessFlag(kind: OwnerKind? = null)
         DescriptorVisibilities.INTERNAL -> Opcodes.ACC_PUBLIC
         DescriptorVisibilities.LOCAL -> NO_FLAG_LOCAL
         JavaDescriptorVisibilities.PACKAGE_VISIBILITY -> AsmUtil.NO_FLAG_PACKAGE_PRIVATE
-        else -> throw IllegalStateException("$visibility is not a valid visibility in backend for ${ir2string(this)}")
+        else -> throw IllegalStateException("$visibility is not a konstid visibility in backend for ${ir2string(this)}")
     }
 }
 
@@ -175,7 +175,7 @@ private fun IrDeclarationWithVisibility.specialCaseVisibility(kind: OwnerKind?):
     }
 
     if (this is IrField && correspondingPropertySymbol?.owner?.isExternal == true) {
-        val method = correspondingPropertySymbol?.owner?.getter ?: correspondingPropertySymbol?.owner?.setter
+        konst method = correspondingPropertySymbol?.owner?.getter ?: correspondingPropertySymbol?.owner?.setter
         ?: error("No get/set method in SyntheticJavaPropertyDescriptor: ${ir2string(correspondingPropertySymbol?.owner)}")
         return method.getVisibilityAccessFlag()
     }
@@ -208,12 +208,12 @@ private fun IrDeclarationWithVisibility.isInlineOnlyPrivateInBytecode(): Boolean
 
 // Borrowed with modifications from ImplementationBodyCodegen.java
 
-private val KOTLIN_MARKER_INTERFACES: Map<FqName, String> = run {
-    val kotlinMarkerInterfaces = mutableMapOf<FqName, String>()
+private konst KOTLIN_MARKER_INTERFACES: Map<FqName, String> = run {
+    konst kotlinMarkerInterfaces = mutableMapOf<FqName, String>()
     for (platformMutabilityMapping in JavaToKotlinClassMap.mutabilityMappings) {
         kotlinMarkerInterfaces[platformMutabilityMapping.kotlinReadOnly.asSingleFqName()] = "kotlin/jvm/internal/markers/KMappedMarker"
 
-        val mutableClassId = platformMutabilityMapping.kotlinMutable
+        konst mutableClassId = platformMutabilityMapping.kotlinMutable
         kotlinMarkerInterfaces[mutableClassId.asSingleFqName()] =
             "kotlin/jvm/internal/markers/K" + mutableClassId.relativeClassName.asString()
                 .replace("MutableEntry", "Entry") // kotlin.jvm.internal.markers.KMutableMap.Entry for some reason
@@ -223,12 +223,12 @@ private val KOTLIN_MARKER_INTERFACES: Map<FqName, String> = run {
 }
 
 internal fun IrTypeMapper.mapClassSignature(irClass: IrClass, type: Type, generateBodies: Boolean): JvmClassSignature {
-    val sw = BothSignatureWriter(BothSignatureWriter.Mode.CLASS)
+    konst sw = BothSignatureWriter(BothSignatureWriter.Mode.CLASS)
     writeFormalTypeParameters(irClass.typeParameters, sw)
 
     sw.writeSuperclass()
-    val superClassType = irClass.superTypes.find { it.getClass()?.isJvmInterface == false }
-    val superClassAsmType = if (superClassType == null) {
+    konst superClassType = irClass.superTypes.find { it.getClass()?.isJvmInterface == false }
+    konst superClassAsmType = if (superClassType == null) {
         sw.writeClassBegin(AsmTypes.OBJECT_TYPE)
         sw.writeClassEnd()
         AsmTypes.OBJECT_TYPE
@@ -237,7 +237,7 @@ internal fun IrTypeMapper.mapClassSignature(irClass: IrClass, type: Type, genera
     }
     sw.writeSuperclassEnd()
 
-    val kotlinMarkerInterfaces = LinkedHashSet<String>()
+    konst kotlinMarkerInterfaces = LinkedHashSet<String>()
     if (generateBodies && irClass.superTypes.any { it.isSuspendFunction() || it.isKSuspendFunction() }) {
         // Do not generate this class in the kapt3 mode (generateBodies=false), because kapt3 transforms supertypes correctly in the
         // "correctErrorTypes" mode only when the number of supertypes between PSI and bytecode is equal. Otherwise it tries to "correct"
@@ -246,9 +246,9 @@ internal fun IrTypeMapper.mapClassSignature(irClass: IrClass, type: Type, genera
         kotlinMarkerInterfaces.add("kotlin/coroutines/jvm/internal/SuspendFunction")
     }
 
-    val superInterfaces = LinkedHashSet<String>()
+    konst superInterfaces = LinkedHashSet<String>()
     for (superType in irClass.superTypes) {
-        val superClass = superType.classOrNull?.owner ?: continue
+        konst superClass = superType.classOrNull?.owner ?: continue
         if (superClass.isJvmInterface) {
             sw.writeInterface()
             superInterfaces.add(mapSupertype(superType, sw).internalName)
@@ -292,7 +292,7 @@ fun IrClass.getVisibilityAccessFlagForClass(): Int {
     } else AsmUtil.NO_FLAG_PACKAGE_PRIVATE
 }
 
-val IrDeclaration.isAnnotatedWithDeprecated: Boolean
+konst IrDeclaration.isAnnotatedWithDeprecated: Boolean
     get() = annotations.hasAnnotation(FqNames.deprecated)
 
 internal fun IrDeclaration.isDeprecatedCallable(context: JvmBackendContext): Boolean =
@@ -306,7 +306,7 @@ internal fun IrFunction.isDeprecatedFunction(context: JvmBackendContext): Boolea
             isAccessorForDeprecatedPropertyImplementedByDelegation ||
             isAccessorForDeprecatedJvmStaticProperty(context)
 
-private val IrFunction.isAccessorForDeprecatedPropertyImplementedByDelegation: Boolean
+private konst IrFunction.isAccessorForDeprecatedPropertyImplementedByDelegation: Boolean
     get() =
         origin == IrDeclarationOrigin.DELEGATED_MEMBER &&
                 this is IrSimpleFunction &&
@@ -317,24 +317,24 @@ private val IrFunction.isAccessorForDeprecatedPropertyImplementedByDelegation: B
 
 private fun IrFunction.isAccessorForDeprecatedJvmStaticProperty(context: JvmBackendContext): Boolean {
     if (origin != JvmLoweredDeclarationOrigin.JVM_STATIC_WRAPPER) return false
-    val irExpressionBody = this.body as? IrExpressionBody
+    konst irExpressionBody = this.body as? IrExpressionBody
         ?: throw AssertionError("IrExpressionBody expected for JvmStatic wrapper:\n${this.dump()}")
-    val irCall = irExpressionBody.expression as? IrCall
+    konst irCall = irExpressionBody.expression as? IrCall
         ?: throw AssertionError("IrCall expected inside JvmStatic wrapper:\n${this.dump()}")
-    val callee = irCall.symbol.owner
-    val property = callee.correspondingPropertySymbol?.owner ?: return false
+    konst callee = irCall.symbol.owner
+    konst property = callee.correspondingPropertySymbol?.owner ?: return false
     return property.isDeprecatedCallable(context)
 }
 
-val IrClass.reifiedTypeParameters: ReifiedTypeParametersUsages
+konst IrClass.reifiedTypeParameters: ReifiedTypeParametersUsages
     get() {
-        val tempReifiedTypeParametersUsages = ReifiedTypeParametersUsages()
+        konst tempReifiedTypeParametersUsages = ReifiedTypeParametersUsages()
         fun processTypeParameters(type: IrType) {
             for (supertypeArgument in (type as? IrSimpleType)?.arguments ?: emptyList()) {
                 if (supertypeArgument is IrTypeProjection) {
-                    val typeArgument = supertypeArgument.type
+                    konst typeArgument = supertypeArgument.type
                     if (typeArgument.isReifiedTypeParameter) {
-                        val typeParameter = typeArgument.classifierOrFail as IrTypeParameterSymbol
+                        konst typeParameter = typeArgument.classifierOrFail as IrTypeParameterSymbol
                         tempReifiedTypeParametersUsages.addUsedReifiedParameter(typeParameter.owner.name.asString())
                     } else {
                         processTypeParameters(typeArgument)

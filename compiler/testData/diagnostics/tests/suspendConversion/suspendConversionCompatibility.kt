@@ -21,7 +21,7 @@ object Test2 {
         fun bar(): String = ""
 
         fun test() {
-            val result = foo(<!COMPATIBILITY_WARNING!>::bar<!>)
+            konst result = foo(<!COMPATIBILITY_WARNING!>::bar<!>)
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>result<!>
         }
     }
@@ -36,7 +36,7 @@ object Test3 {
         fun bar(x: Int = 42): String = ""
 
         fun test() {
-            val result = foo(::bar)
+            konst result = foo(::bar)
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>result<!>
         }
     }

@@ -11,7 +11,7 @@ import templates.SequenceClass.*
 object Filtering : TemplateGroupBase() {
 
     init {
-        val terminalOperationPattern = Regex("^\\w+To")
+        konst terminalOperationPattern = Regex("^\\w+To")
         defaultBuilder {
             if (terminalOperationPattern in signature)
                 sequenceClassification(terminal)
@@ -42,11 +42,11 @@ object Filtering : TemplateGroupBase() {
 
     private fun takeAll(f: Family): String = if (f == Strings) "this" else subsequence(f, "0")
 
-    val f_drop = fn("drop(n: Int)") {
+    konst f_drop = fn("drop(n: Int)") {
         includeDefault()
         include(CharSequences, Strings, ArraysOfUnsigned)
     } builder {
-        val n = "\$n"
+        konst n = "\$n"
         doc { 
             """
             Returns a list containing all elements except first [n] elements.
@@ -59,9 +59,9 @@ object Filtering : TemplateGroupBase() {
             """
             require(n >= 0) { "Requested element count $n is less than zero." }
             if (n == 0) return toList()
-            val list: ArrayList<T>
+            konst list: ArrayList<T>
             if (this is Collection<*>) {
-                val resultSize = size - n
+                konst resultSize = size - n
                 if (resultSize <= 0)
                     return emptyList()
                 if (resultSize == 1)
@@ -129,11 +129,11 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_take = fn("take(n: Int)") {
+    konst f_take = fn("take(n: Int)") {
         includeDefault()
         include(CharSequences, Strings, ArraysOfUnsigned)
     } builder {
-        val n = "\$n"
+        konst n = "\$n"
         doc {
             """
             Returns a list containing first [n] elements.
@@ -151,7 +151,7 @@ object Filtering : TemplateGroupBase() {
                 if (n == 1) return listOf(first())
             }
             var count = 0
-            val list = ArrayList<T>(n)
+            konst list = ArrayList<T>(n)
             for (item in this) {
                 list.add(item)
                 if (++count == n)
@@ -199,7 +199,7 @@ object Filtering : TemplateGroupBase() {
             if (n >= size) return toList()
             if (n == 1) return listOf(this[0])
             var count = 0
-            val list = ArrayList<T>(n)
+            konst list = ArrayList<T>(n)
             for (item in this) {
                 list.add(item)
                 if (++count == n)
@@ -210,10 +210,10 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_dropLast = fn("dropLast(n: Int)") {
+    konst f_dropLast = fn("dropLast(n: Int)") {
         include(Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned, CharSequences, Strings)
     } builder {
-        val n = "\$n"
+        konst n = "\$n"
 
         doc { 
             """
@@ -241,10 +241,10 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_takeLast = fn("takeLast(n: Int)") {
+    konst f_takeLast = fn("takeLast(n: Int)") {
         include(Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned, CharSequences, Strings)
     } builder {
-        val n = "\$n"
+        konst n = "\$n"
         doc { 
             """
             Returns a list containing last [n] elements.
@@ -265,7 +265,7 @@ object Filtering : TemplateGroupBase() {
         body(Strings, CharSequences) {
             """
             require(n >= 0) { "Requested character count $n is less than zero." }
-            val length = length
+            konst length = length
             return ${subsequence(f, "length - n.coerceAtMost(length)")}
             """
         }
@@ -274,11 +274,11 @@ object Filtering : TemplateGroupBase() {
             """
             require(n >= 0) { "Requested element count $n is less than zero." }
             if (n == 0) return emptyList()
-            val size = size
+            konst size = size
             if (n >= size) return toList()
             if (n == 1) return listOf(this[size - 1])
 
-            val list = ArrayList<T>(n)
+            konst list = ArrayList<T>(n)
             for (index in size - n until size)
                 list.add(this[index])
             return list
@@ -288,11 +288,11 @@ object Filtering : TemplateGroupBase() {
             """
             require(n >= 0) { "Requested element count $n is less than zero." }
             if (n == 0) return emptyList()
-            val size = size
+            konst size = size
             if (n >= size) return toList()
             if (n == 1) return listOf(last())
 
-            val list = ArrayList<T>(n)
+            konst list = ArrayList<T>(n)
             if (this is RandomAccess) {
                 for (index in size - n until size)
                     list.add(this[index])
@@ -305,7 +305,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_dropWhile = fn("dropWhile(predicate: (T) -> Boolean)") {
+    konst f_dropWhile = fn("dropWhile(predicate: (T) -> Boolean)") {
         includeDefault()
         include(CharSequences, Strings, ArraysOfUnsigned)
     } builder {
@@ -322,7 +322,7 @@ object Filtering : TemplateGroupBase() {
         body {
             """
             var yielding = false
-            val list = ArrayList<T>()
+            konst list = ArrayList<T>()
             for (item in this)
                 if (yielding)
                     list.add(item)
@@ -362,7 +362,7 @@ object Filtering : TemplateGroupBase() {
 
     }
 
-    val f_takeWhile = fn("takeWhile(predicate: (T) -> Boolean)") {
+    konst f_takeWhile = fn("takeWhile(predicate: (T) -> Boolean)") {
         includeDefault()
         include(CharSequences, Strings, ArraysOfUnsigned)
     } builder {
@@ -378,7 +378,7 @@ object Filtering : TemplateGroupBase() {
         returns("List<T>")
         body {
             """
-            val list = ArrayList<T>()
+            konst list = ArrayList<T>()
             for (item in this) {
                 if (!predicate(item))
                     break
@@ -415,7 +415,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_dropLastWhile = fn("dropLastWhile(predicate: (T) -> Boolean)") {
+    konst f_dropLastWhile = fn("dropLastWhile(predicate: (T) -> Boolean)") {
         include(Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned, CharSequences, Strings)
     } builder {
         inline()
@@ -442,7 +442,7 @@ object Filtering : TemplateGroupBase() {
         body(Lists) {
             """
             if (!isEmpty()) {
-                val iterator = listIterator(size)
+                konst iterator = listIterator(size)
                 while (iterator.hasPrevious()) {
                     if (!predicate(iterator.previous())) {
                         return take(iterator.nextIndex() + 1)
@@ -473,7 +473,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_takeLastWhile = fn("takeLastWhile(predicate: (T) -> Boolean)") {
+    konst f_takeLastWhile = fn("takeLastWhile(predicate: (T) -> Boolean)") {
         include(Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned, CharSequences, Strings)
     } builder {
         inline()
@@ -501,11 +501,11 @@ object Filtering : TemplateGroupBase() {
             """
             if (isEmpty())
                 return emptyList()
-            val iterator = listIterator(size)
+            konst iterator = listIterator(size)
             while (iterator.hasPrevious()) {
                 if (!predicate(iterator.previous())) {
                     iterator.next()
-                    val expectedSize = size - iterator.nextIndex()
+                    konst expectedSize = size - iterator.nextIndex()
                     if (expectedSize == 0) return emptyList()
                     return ArrayList<T>(expectedSize).apply {
                         while (iterator.hasNext())
@@ -540,7 +540,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filter = fn("filter(predicate: (T) -> Boolean)") {
+    konst f_filter = fn("filter(predicate: (T) -> Boolean)") {
         includeDefault()
         include(CharSequences, Strings, ArraysOfUnsigned)
     } builder {
@@ -570,7 +570,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterTo = fn("filterTo(destination: C, predicate: (T) -> Boolean)") {
+    konst f_filterTo = fn("filterTo(destination: C, predicate: (T) -> Boolean)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -592,7 +592,7 @@ object Filtering : TemplateGroupBase() {
         body(CharSequences) {
             """
             for (index in 0 until length) {
-                val element = get(index)
+                konst element = get(index)
                 if (predicate(element)) destination.append(element)
             }
             return destination
@@ -600,7 +600,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterIndexed = fn("filterIndexed(predicate: (index: Int, T) -> Boolean)") {
+    konst f_filterIndexed = fn("filterIndexed(predicate: (index: Int, T) -> Boolean)") {
         includeDefault()
         include(CharSequences, Strings, ArraysOfUnsigned)
     } builder {
@@ -611,7 +611,7 @@ object Filtering : TemplateGroupBase() {
             """
             Returns a ${f.mapResult} containing only ${f.element.pluralize()} matching the given [predicate].
             @param [predicate] function that takes the index of ${f.element.prefixWithArticle()} and the ${f.element} itself
-            and returns the result of predicate evaluation on the ${f.element}.
+            and returns the result of predicate ekonstuation on the ${f.element}.
             """
         }
         sample("samples.collections.Collections.Filtering.filterIndexed")
@@ -628,7 +628,7 @@ object Filtering : TemplateGroupBase() {
                 """
                 Returns a ${f.collection} containing only those characters from the original ${f.collection} that match the given [predicate].
                 @param [predicate] function that takes the index of ${f.element.prefixWithArticle()} and the ${f.element} itself
-                and returns the result of predicate evaluation on the ${f.element}.
+                and returns the result of predicate ekonstuation on the ${f.element}.
                 """
             }
             body { """return filterIndexedTo(StringBuilder(), predicate)${toResult(f)}""" }
@@ -640,13 +640,13 @@ object Filtering : TemplateGroupBase() {
             body(Sequences) {
                 """
                 // TODO: Rewrite with generalized MapFilterIndexingSequence
-                return TransformingSequence(FilteringSequence(IndexingSequence(this), true, { predicate(it.index, it.value) }), { it.value })
+                return TransformingSequence(FilteringSequence(IndexingSequence(this), true, { predicate(it.index, it.konstue) }), { it.konstue })
                 """
             }
         }
     }
 
-    val f_filterIndexedTo = fn("filterIndexedTo(destination: C, predicate: (index: Int, T) -> Boolean)") {
+    konst f_filterIndexedTo = fn("filterIndexedTo(destination: C, predicate: (index: Int, T) -> Boolean)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -657,7 +657,7 @@ object Filtering : TemplateGroupBase() {
             """
             Appends all ${f.element.pluralize()} matching the given [predicate] to the given [destination].
             @param [predicate] function that takes the index of ${f.element.prefixWithArticle()} and the ${f.element} itself
-            and returns the result of predicate evaluation on the ${f.element}.
+            and returns the result of predicate ekonstuation on the ${f.element}.
             """ }
         sample("samples.collections.Collections.Filtering.filterIndexedTo")
         typeParam("C : TCollection")
@@ -673,7 +673,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterNot = fn("filterNot(predicate: (T) -> Boolean)") {
+    konst f_filterNot = fn("filterNot(predicate: (T) -> Boolean)") {
         includeDefault()
         include(CharSequences, Strings, ArraysOfUnsigned)
     } builder {
@@ -704,7 +704,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterNotTo = fn("filterNotTo(destination: C, predicate: (T) -> Boolean)") {
+    konst f_filterNotTo = fn("filterNotTo(destination: C, predicate: (T) -> Boolean)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -734,7 +734,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterNotNull = fn("filterNotNull()") {
+    konst f_filterNotNull = fn("filterNotNull()") {
         include(Iterables, Sequences, ArraysOfObjects)
     } builder {
         doc { "Returns a list containing all elements that are not `null`." }
@@ -760,7 +760,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterNotNullTo = fn("filterNotNullTo(destination: C)") {
+    konst f_filterNotNullTo = fn("filterNotNullTo(destination: C)") {
         include(Iterables, Sequences, ArraysOfObjects)
     } builder {
         doc { "Appends all elements that are not `null` to the given [destination]." }
@@ -777,7 +777,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterIsInstanceTo = fn("filterIsInstanceTo(destination: C)") {
+    konst f_filterIsInstanceTo = fn("filterIsInstanceTo(destination: C)") {
         include(Iterables, Sequences, ArraysOfObjects)
     } builder {
         doc { "Appends all elements that are instances of specified type parameter R to the given [destination]." }
@@ -795,7 +795,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterIsInstance = fn("filterIsInstance()") {
+    konst f_filterIsInstance = fn("filterIsInstance()") {
         include(Iterables, Sequences, ArraysOfObjects)
     } builder {
         doc { "Returns a list containing all elements that are instances of specified type parameter R." }
@@ -822,7 +822,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterIsInstanceTo_class = fn("filterIsInstanceTo(destination: C, klass: Class<R>)") {
+    konst f_filterIsInstanceTo_class = fn("filterIsInstanceTo(destination: C, klass: Class<R>)") {
         platforms(Platform.JVM)
         include(Iterables, ArraysOfObjects, Sequences)
     } builder {
@@ -841,7 +841,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_filterIsInstance_class = fn("filterIsInstance(klass: Class<R>)") {
+    konst f_filterIsInstance_class = fn("filterIsInstance(klass: Class<R>)") {
         platforms(Platform.JVM)
         include(Iterables, ArraysOfObjects, Sequences)
     } builder {
@@ -870,16 +870,16 @@ object Filtering : TemplateGroupBase() {
 
 
 
-    val f_slice = fn("slice(indices: Iterable<Int>)") {
+    konst f_slice = fn("slice(indices: Iterable<Int>)") {
         include(CharSequences, Strings, Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         doc { "Returns a list containing elements at specified [indices]." }
         returns("List<T>")
         body {
             """
-            val size = indices.collectionSizeOrDefault(10)
+            konst size = indices.collectionSizeOrDefault(10)
             if (size == 0) return emptyList()
-            val list = ArrayList<T>(size)
+            konst list = ArrayList<T>(size)
             for (index in indices) {
                 list.add(get(index))
             }
@@ -893,9 +893,9 @@ object Filtering : TemplateGroupBase() {
         }
         body(CharSequences) {
             """
-            val size = indices.collectionSizeOrDefault(10)
+            konst size = indices.collectionSizeOrDefault(10)
             if (size == 0) return ""
-            val result = StringBuilder(size)
+            konst result = StringBuilder(size)
             for (i in indices) {
                 result.append(get(i))
             }
@@ -908,7 +908,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_slice_range = fn("slice(indices: IntRange)") {
+    konst f_slice_range = fn("slice(indices: IntRange)") {
         include(CharSequences, Strings, Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         doc { "Returns a list containing elements at indices in the specified [indices] range." }
@@ -938,14 +938,14 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_sliceArray = fn("sliceArray(indices: Collection<Int>)") {
+    konst f_sliceArray = fn("sliceArray(indices: Collection<Int>)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         doc { "Returns an array containing elements of this array at specified [indices]." }
         returns("SELF")
         body(InvariantArraysOfObjects) {
             """
-            val result = arrayOfNulls(this, indices.size)
+            konst result = arrayOfNulls(this, indices.size)
             var targetIndex = 0
             for (sourceIndex in indices) {
                 result[targetIndex++] = this[sourceIndex]
@@ -955,7 +955,7 @@ object Filtering : TemplateGroupBase() {
         }
         body(ArraysOfPrimitives) {
             """
-            val result = SELF(indices.size)
+            konst result = SELF(indices.size)
             var targetIndex = 0
             for (sourceIndex in indices) {
                 result[targetIndex++] = this[sourceIndex]
@@ -970,7 +970,7 @@ object Filtering : TemplateGroupBase() {
         }
     }
 
-    val f_sliceArrayRange = fn("sliceArray(indices: IntRange)") {
+    konst f_sliceArrayRange = fn("sliceArray(indices: IntRange)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         doc { "Returns an array containing elements at indices in the specified [indices] range." }

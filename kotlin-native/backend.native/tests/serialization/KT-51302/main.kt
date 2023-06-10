@@ -4,5 +4,5 @@
  */
 
 fun main() {
-    val c = C()
+    konst c = C()
 }

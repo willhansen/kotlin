@@ -6,7 +6,7 @@ interface IFoo {
   // CHECK:
   //   Mangled name: IFoo@A{}foo
   //   Public signature: /IFoo.foo|1214000299789500455[0]
-  val A.foo: B
+  konst A.foo: B
     // CHECK JVM_IR:
     //   Mangled name: IFoo#<get-foo>@A(){}B
     //   Public signature: /IFoo.foo.<get-foo>|8070848468738985847[0]

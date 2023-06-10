@@ -27,10 +27,10 @@ fun foo(arg: Any) {
     foo(2u)
     foo(true)
     foo("Hello")
-    val nonConstInt = 1
-    val nonConstUInt = 2u
-    val nonConstBool = true
-    val nonConstString = "Hello"
+    konst nonConstInt = 1
+    konst nonConstUInt = 2u
+    konst nonConstBool = true
+    konst nonConstString = "Hello"
     foo(nonConstInt)
     foo(nonConstUInt)
     foo(nonConstBool)

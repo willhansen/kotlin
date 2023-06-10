@@ -4,7 +4,7 @@
 package foo
 
 external interface NativeTrait {
-    val foo: String
+    konst foo: String
     fun bar(a: Int): Any
 
     @JsName("boo")
@@ -14,13 +14,13 @@ external interface NativeTrait {
 interface Trait : NativeTrait
 
 class Class : NativeTrait {
-    override val foo: String = "Class().foo"
+    override konst foo: String = "Class().foo"
     override fun bar(a: Int): Any = "Class().bar($a)"
     override fun baz(): String = "Class().boo()"
 }
 
 class AnotherClass : Trait {
-    override val foo: String = "AnotherClass().foo"
+    override konst foo: String = "AnotherClass().foo"
     override fun bar(a: Int): Any = "AnotherClass().bar($a)"
     override fun baz(): String = "AnotherClass().boo()"
 }
@@ -30,7 +30,7 @@ fun <T : NativeTrait> test(c: T, className: String) {
     assertEquals("$className().bar(3)", c.bar(3))
     assertEquals("$className().boo()", c.baz())
 
-    val t: NativeTrait = c
+    konst t: NativeTrait = c
     assertEquals("$className().foo", t.foo)
     assertEquals("$className().bar(3)", t.bar(3))
     assertEquals("$className().boo()", t.baz())

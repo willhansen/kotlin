@@ -12,7 +12,7 @@ CHANGES in test/ClassWithFunRemoved: MEMBERS
     [removed]
 PROTO DIFFERENCE in test/ClassWithValAndFunAddedAndRemoved: FUNCTION_LIST, PROPERTY_LIST
 CHANGES in test/ClassWithValAndFunAddedAndRemoved: MEMBERS
-    [funAdded, funRemoved, valAdded, valRemoved]
+    [funAdded, funRemoved, konstAdded, konstRemoved]
 PROTO DIFFERENCE in test/ClassWithValConvertedToVar: PROPERTY_LIST
 CHANGES in test/ClassWithValConvertedToVar: MEMBERS
-    [value]
+    [konstue]

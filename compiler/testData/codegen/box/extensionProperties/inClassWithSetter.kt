@@ -3,12 +3,12 @@ class Test {
 
     var Int.foo: String
         get() = storage
-        set(value) {
-            storage = value
+        set(konstue) {
+            storage = konstue
         }
 
     fun test(): String {
-        val i = 1
+        konst i = 1
         i.foo = "OK"
         return i.foo
     }

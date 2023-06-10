@@ -14,16 +14,16 @@ import org.jetbrains.kotlin.js.translate.expression.InlineMetadata
 // 1. A `suspend` function definition, which could be invoked at run time
 // 2. A `suspend inline` function definition, which doesn't work at run time, but is understood by the inliner.
 class InlineSuspendFunctionSplitter(
-    val scope: ImportIntoFragmentInliningScope
+    konst scope: ImportIntoFragmentInliningScope
 ) : JsVisitorWithContextImpl() {
 
     override fun visit(x: JsInvocation, ctx: JsContext<JsNode>): Boolean {
         // Is it `defineInlineFunction('tag', ...)`?
         InlineMetadata.decompose(x)?.let { metadata ->
-            val fn = metadata.function
+            konst fn = metadata.function
             if (fn.function.coroutineMetadata != null) {
                 // This function will be exported to JS
-                ctx.replaceMe(scope.importFunctionDefinition(InlineFunctionDefinition(fn, metadata.tag.value)))
+                ctx.replaceMe(scope.importFunctionDefinition(InlineFunctionDefinition(fn, metadata.tag.konstue)))
 
                 // Original function should be not be transformed into a state machine
                 fn.function.name = null

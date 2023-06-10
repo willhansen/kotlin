@@ -34,7 +34,7 @@ class MultiplatformAndroidSourceSetLayoutV2DiagnosticsTest {
     private fun Project.checkCreatedSourceSets() {
         /* Invoke checkers on all source sets */
         project.multiplatformExtension.sourceSets.forEach { kotlinSourceSet ->
-            val androidSourceSet = project.findAndroidSourceSet(kotlinSourceSet) ?: return@forEach
+            konst androidSourceSet = project.findAndroidSourceSet(kotlinSourceSet) ?: return@forEach
             multiplatformAndroidSourceSetLayoutV2.checker.checkCreatedSourceSet(
                 diagnosticsCollector = project.kotlinToolingDiagnosticsCollector,
                 target = project.multiplatformExtension.androidTarget(),
@@ -47,12 +47,12 @@ class MultiplatformAndroidSourceSetLayoutV2DiagnosticsTest {
 
     @Test
     fun `test - KT-53709 - androidTest_kotlin in use`() {
-        val project = buildMinimalAndroidMultiplatformProject()
+        konst project = buildMinimalAndroidMultiplatformProject()
 
         /* Ensure that the problematic androidTest/kotlin source dir is 'in use' */
-        val androidTestKotlinSourceDir = project.file("src/androidTest/kotlin")
+        konst androidTestKotlinSourceDir = project.file("src/androidTest/kotlin")
         androidTestKotlinSourceDir.mkdirs()
-        project.evaluate()
+        project.ekonstuate()
 
         /* Invoke checkers on all source sets */
         project.checkCreatedSourceSets()
@@ -61,13 +61,13 @@ class MultiplatformAndroidSourceSetLayoutV2DiagnosticsTest {
 
     @Test
     fun `test - android style source dir usage checker`() {
-        val project = buildMinimalAndroidMultiplatformProject()
-        val androidStyleMain = project.file("src/main/kotlin")
-        val androidStyleUnitTest = project.file("src/test/kotlin")
+        konst project = buildMinimalAndroidMultiplatformProject()
+        konst androidStyleMain = project.file("src/main/kotlin")
+        konst androidStyleUnitTest = project.file("src/test/kotlin")
 
         androidStyleMain.mkdirs()
         androidStyleUnitTest.mkdirs()
-        project.evaluate()
+        project.ekonstuate()
 
         project.checkCreatedSourceSets()
         project.checkDiagnostics("androidStyleSourceDirUsage")
@@ -75,16 +75,16 @@ class MultiplatformAndroidSourceSetLayoutV2DiagnosticsTest {
 
     @Test
     fun `test - nowarn flag - android style source dir usage checker`() {
-        val project = buildMinimalAndroidMultiplatformProject()
+        konst project = buildMinimalAndroidMultiplatformProject()
         project.propertiesExtension.set(PropertiesProvider.PropertyNames.KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_ANDROID_STYLE_NO_WARN, "true")
-        val androidStyleMain = project.file("src/main/kotlin")
-        val androidStyleUnitTest = project.file("src/test/kotlin")
-        val androidStyleInstrumentedTest = project.file("src/androidTest/kotlin")
+        konst androidStyleMain = project.file("src/main/kotlin")
+        konst androidStyleUnitTest = project.file("src/test/kotlin")
+        konst androidStyleInstrumentedTest = project.file("src/androidTest/kotlin")
 
         androidStyleMain.mkdirs()
         androidStyleUnitTest.mkdirs()
         androidStyleInstrumentedTest.mkdirs()
-        project.evaluate()
+        project.ekonstuate()
 
         project.checkCreatedSourceSets()
         project.checkDiagnostics("androidStyleSourceDirUsageNoWarn")
@@ -92,10 +92,10 @@ class MultiplatformAndroidSourceSetLayoutV2DiagnosticsTest {
 
     @Test
     fun `test - v1 style source dir usage checker`() {
-        val project = buildMinimalAndroidMultiplatformProject()
-        val v1StyleInstrumentedTest = project.file("src/androidAndroidTest/kotlin")
+        konst project = buildMinimalAndroidMultiplatformProject()
+        konst v1StyleInstrumentedTest = project.file("src/androidAndroidTest/kotlin")
         v1StyleInstrumentedTest.mkdirs()
-        project.evaluate()
+        project.ekonstuate()
         project.checkCreatedSourceSets()
         project.checkDiagnostics("v1LayoutStyleSourceDirUsage")
     }

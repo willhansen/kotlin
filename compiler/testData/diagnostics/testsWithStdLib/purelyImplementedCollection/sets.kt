@@ -11,12 +11,12 @@ fun fooHashSet() {
     x.add(<!TYPE_MISMATCH!>bar()<!>)
     x.add("")
 
-    val b1: MutableSet<String?> = <!TYPE_MISMATCH!>x<!>
-    val b2: MutableSet<String> = x
-    val b3: Set<String?> = x
+    konst b1: MutableSet<String?> = <!TYPE_MISMATCH!>x<!>
+    konst b2: MutableSet<String> = x
+    konst b3: Set<String?> = x
 
-    val b4: Collection<String?> = x
-    val b6: MutableCollection<String?> = <!TYPE_MISMATCH!>x<!>
+    konst b4: Collection<String?> = x
+    konst b6: MutableCollection<String?> = <!TYPE_MISMATCH!>x<!>
 }
 
 fun fooTreeSet() {
@@ -25,12 +25,12 @@ fun fooTreeSet() {
     x.add(<!TYPE_MISMATCH!>bar()<!>)
     x.add("")
 
-    val b1: MutableSet<String?> = <!TYPE_MISMATCH!>x<!>
-    val b2: MutableSet<String> = x
-    val b3: Set<String?> = x
+    konst b1: MutableSet<String?> = <!TYPE_MISMATCH!>x<!>
+    konst b2: MutableSet<String> = x
+    konst b3: Set<String?> = x
 
-    val b4: Collection<String?> = x
-    val b6: MutableCollection<String?> = <!TYPE_MISMATCH!>x<!>
+    konst b4: Collection<String?> = x
+    konst b6: MutableCollection<String?> = <!TYPE_MISMATCH!>x<!>
 }
 
 fun fooLinkedHashSet() {
@@ -39,10 +39,10 @@ fun fooLinkedHashSet() {
     x.add(<!TYPE_MISMATCH!>bar()<!>)
     x.add("")
 
-    val b1: MutableSet<String?> = <!TYPE_MISMATCH!>x<!>
-    val b2: MutableSet<String> = x
-    val b3: Set<String?> = x
+    konst b1: MutableSet<String?> = <!TYPE_MISMATCH!>x<!>
+    konst b2: MutableSet<String> = x
+    konst b3: Set<String?> = x
 
-    val b4: Collection<String?> = x
-    val b6: MutableCollection<String?> = <!TYPE_MISMATCH!>x<!>
+    konst b4: Collection<String?> = x
+    konst b6: MutableCollection<String?> = <!TYPE_MISMATCH!>x<!>
 }

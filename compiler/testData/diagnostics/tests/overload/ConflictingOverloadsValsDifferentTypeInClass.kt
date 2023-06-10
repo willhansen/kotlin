@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
 class Aaa() {
-    val <!REDECLARATION!>a<!> = 1
-    val <!REDECLARATION!>a<!> = ""
+    konst <!REDECLARATION!>a<!> = 1
+    konst <!REDECLARATION!>a<!> = ""
 }

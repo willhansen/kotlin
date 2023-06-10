@@ -1,28 +1,28 @@
-@java.lang.annotation.Repeatable(value=test.As::class)
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Repeatable(konstue=test.As::class)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class test/A {
     // source: 'nonRepeatedAnnotationWithItsContainer.kt'
-    public abstract method value(): java.lang.String
+    public abstract method konstue(): java.lang.String
 }
 
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class test/As {
     // source: 'nonRepeatedAnnotationWithItsContainer.kt'
-    public abstract method value(): test.A[]
+    public abstract method konstue(): test.A[]
 }
 
-@test.A(value="1")
-@test.As(value=[test.A(value="2"), test.A(value="3")])
+@test.A(konstue="1")
+@test.As(konstue=[test.A(konstue="2"), test.A(konstue="3")])
 @kotlin.Metadata
 public final class test/Z {
     // source: 'nonRepeatedAnnotationWithItsContainer.kt'
     public method <init>(): void
 }
 
-@test.As(value=[test.A(value="1"), test.A(value="2")])
-@test.A(value="3")
+@test.As(konstue=[test.A(konstue="1"), test.A(konstue="2")])
+@test.A(konstue="3")
 @kotlin.Metadata
 public final class test/ZZ {
     // source: 'nonRepeatedAnnotationWithItsContainer.kt'

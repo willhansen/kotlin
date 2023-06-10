@@ -69,25 +69,25 @@
 #define SINGLE_MANTISSA_MASK	0x007FFFFF
 #define SINGLE_NAN_BITS				(SINGLE_EXPONENT_MASK | 0x00400000)
 typedef union u64u32dbl_tag {
-	U_64    u64val;
-	U_32    u32val[2];
-    I_32    i32val[2];
-	double  dval;
+	U_64    u64konst;
+	U_32    u32konst[2];
+    I_32    i32konst[2];
+	double  dkonst;
 } U64U32DBL;
 /* Replace P_FLOAT_HI and P_FLOAT_LOW */
-/* These macros are used to access the high and low 32-bit parts of a double (64-bit) value. */
-#define LOW_U32_FROM_DBL_PTR(dblptr) (((U64U32DBL *)(dblptr))->u32val[DOUBLE_LO_OFFSET])
-#define HIGH_U32_FROM_DBL_PTR(dblptr) (((U64U32DBL *)(dblptr))->u32val[DOUBLE_HI_OFFSET])
-#define LOW_I32_FROM_DBL_PTR(dblptr) (((U64U32DBL *)(dblptr))->i32val[DOUBLE_LO_OFFSET])
-#define HIGH_I32_FROM_DBL_PTR(dblptr) (((U64U32DBL *)(dblptr))->i32val[DOUBLE_HI_OFFSET])
+/* These macros are used to access the high and low 32-bit parts of a double (64-bit) konstue. */
+#define LOW_U32_FROM_DBL_PTR(dblptr) (((U64U32DBL *)(dblptr))->u32konst[DOUBLE_LO_OFFSET])
+#define HIGH_U32_FROM_DBL_PTR(dblptr) (((U64U32DBL *)(dblptr))->u32konst[DOUBLE_HI_OFFSET])
+#define LOW_I32_FROM_DBL_PTR(dblptr) (((U64U32DBL *)(dblptr))->i32konst[DOUBLE_LO_OFFSET])
+#define HIGH_I32_FROM_DBL_PTR(dblptr) (((U64U32DBL *)(dblptr))->i32konst[DOUBLE_HI_OFFSET])
 #define LOW_U32_FROM_DBL(dbl) LOW_U32_FROM_DBL_PTR(&(dbl))
 #define HIGH_U32_FROM_DBL(dbl) HIGH_U32_FROM_DBL_PTR(&(dbl))
 #define LOW_I32_FROM_DBL(dbl) LOW_I32_FROM_DBL_PTR(&(dbl))
 #define HIGH_I32_FROM_DBL(dbl) HIGH_I32_FROM_DBL_PTR(&(dbl))
-#define LOW_U32_FROM_LONG64_PTR(long64ptr) (((U64U32DBL *)(long64ptr))->u32val[LONG_LO_OFFSET])
-#define HIGH_U32_FROM_LONG64_PTR(long64ptr) (((U64U32DBL *)(long64ptr))->u32val[LONG_HI_OFFSET])
-#define LOW_I32_FROM_LONG64_PTR(long64ptr) (((U64U32DBL *)(long64ptr))->i32val[LONG_LO_OFFSET])
-#define HIGH_I32_FROM_LONG64_PTR(long64ptr) (((U64U32DBL *)(long64ptr))->i32val[LONG_HI_OFFSET])
+#define LOW_U32_FROM_LONG64_PTR(long64ptr) (((U64U32DBL *)(long64ptr))->u32konst[LONG_LO_OFFSET])
+#define HIGH_U32_FROM_LONG64_PTR(long64ptr) (((U64U32DBL *)(long64ptr))->u32konst[LONG_HI_OFFSET])
+#define LOW_I32_FROM_LONG64_PTR(long64ptr) (((U64U32DBL *)(long64ptr))->i32konst[LONG_LO_OFFSET])
+#define HIGH_I32_FROM_LONG64_PTR(long64ptr) (((U64U32DBL *)(long64ptr))->i32konst[LONG_HI_OFFSET])
 #define LOW_U32_FROM_LONG64(long64) LOW_U32_FROM_LONG64_PTR(&(long64))
 #define HIGH_U32_FROM_LONG64(long64) HIGH_U32_FROM_LONG64_PTR(&(long64))
 #define LOW_I32_FROM_LONG64(long64) LOW_I32_FROM_LONG64_PTR(&(long64))
@@ -138,9 +138,9 @@ typedef union u64u32dbl_tag {
 #define SET_NINF_SNGL_PTR(fltptr) *U32P((fltptr)) = (SINGLE_EXPONENT_MASK | SINGLE_SIGN_MASK)
 
 #if defined(HY_WORD64)
- #define PTR_DOUBLE_VALUE(dstPtr, aDoublePtr) ((U64U32DBL *)(aDoublePtr))->u64val = ((U64U32DBL *)(dstPtr))->u64val
- #define PTR_DOUBLE_STORE(dstPtr, aDoublePtr) ((U64U32DBL *)(dstPtr))->u64val = ((U64U32DBL *)(aDoublePtr))->u64val
- #define STORE_LONG(dstPtr, hi, lo) ((U64U32DBL *)(dstPtr))->u64val = (((U_64)(hi)) << 32) | (lo)
+ #define PTR_DOUBLE_VALUE(dstPtr, aDoublePtr) ((U64U32DBL *)(aDoublePtr))->u64konst = ((U64U32DBL *)(dstPtr))->u64konst
+ #define PTR_DOUBLE_STORE(dstPtr, aDoublePtr) ((U64U32DBL *)(dstPtr))->u64konst = ((U64U32DBL *)(aDoublePtr))->u64konst
+ #define STORE_LONG(dstPtr, hi, lo) ((U64U32DBL *)(dstPtr))->u64konst = (((U_64)(hi)) << 32) | (lo)
 #else
  /* on some platforms (HP720) we cannot reference an unaligned float.  Build them by hand, one U_32 at a time. */
  #if defined(ATOMIC_FLOAT_ACCESS)

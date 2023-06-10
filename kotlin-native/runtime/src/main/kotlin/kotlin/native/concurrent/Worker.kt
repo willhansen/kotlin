@@ -35,7 +35,7 @@ import kotlinx.cinterop.*
 @Suppress("NON_PUBLIC_PRIMARY_CONSTRUCTOR_OF_INLINE_CLASS")
 @OptIn(FreezingIsDeprecated::class)
 @ObsoleteWorkersApi
-public value class Worker @PublishedApi internal constructor(val id: Int) {
+public konstue class Worker @PublishedApi internal constructor(konst id: Int) {
     companion object {
         /**
          * Start new scheduling primitive, such as thread, to accept new tasks via `execute` interface.
@@ -50,19 +50,19 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
                 = Worker(startInternal(errorReporting, name))
 
         /**
-         * Return the current worker. Worker context is accessible to any valid Kotlin context,
+         * Return the current worker. Worker context is accessible to any konstid Kotlin context,
          * but only actual active worker produced with [Worker.start] automatically processes execution requests.
          * For other situations [processQueue] must be called explicitly to process request queue.
          * @return current worker object, usable across multiple concurrent contexts.
          */
-        public val current: Worker get() = Worker(currentInternal())
+        public konst current: Worker get() = Worker(currentInternal())
 
         /**
          * Create worker object from a C pointer.
          *
          * This function is deprecated. See [Worker.asCPointer] for more details.
          *
-         * @param pointer value returned earlier by [Worker.asCPointer]
+         * @param pointer konstue returned earlier by [Worker.asCPointer]
          */
         @Deprecated("Use kotlinx.cinterop.StableRef instead", level = DeprecationLevel.WARNING)
         public fun fromCPointer(pointer: COpaquePointer?): Worker =
@@ -75,7 +75,7 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
          * return a [Worker] that's already terminated.
          */
         @ExperimentalStdlibApi
-        public val activeWorkers: List<Worker>
+        public konst activeWorkers: List<Worker>
             get() = getActiveWorkersInternal().map { Worker(it) }
     }
 
@@ -111,7 +111,7 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
      * the future, can use result of worker's computations.
      * Note, that some technically disjoint subgraphs may lead to `kotlin.IllegalStateException`
      * so `kotlin.native.runtime.GC.collect()` could be called in the end of `producer` and `job`
-     * if garbage cyclic structures or other uncollected objects refer to the value being transferred.
+     * if garbage cyclic structures or other uncollected objects refer to the konstue being transferred.
      *
      * @return the future with the computation result of [job].
      */
@@ -135,12 +135,12 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
      * Otherwise [IllegalStateException] will be thrown.
      *
      * @param afterMicroseconds defines after how many microseconds delay execution shall happen, 0 means immediately,
-     * @throws [IllegalArgumentException] on negative values of [afterMicroseconds].
+     * @throws [IllegalArgumentException] on negative konstues of [afterMicroseconds].
      * @throws [IllegalStateException] if [operation] parameter is not frozen and worker is not current.
      */
     @OptIn(ExperimentalNativeApi::class)
     public fun executeAfter(afterMicroseconds: Long = 0, operation: () -> Unit): Unit {
-        val current = currentInternal()
+        konst current = currentInternal()
         if (Platform.memoryModel != MemoryModel.EXPERIMENTAL && current != id && !operation.isFrozen) throw IllegalStateException("Job for another worker must be frozen")
         if (afterMicroseconds < 0) throw IllegalArgumentException("Timeout parameter must be non-negative")
         executeAfterInternal(id, operation, afterMicroseconds)
@@ -167,7 +167,7 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
      * @return if [process] is `true`: if request(s) was processed `true` and `false` otherwise.
      *   if [process] is `false`:` true` if request(s) has arrived and `false` if timeout happens.
      * @throws [IllegalStateException] if this request is executed on non-current [Worker].
-     * @throws [IllegalArgumentException] if timeout value is incorrect.
+     * @throws [IllegalArgumentException] if timeout konstue is incorrect.
      */
     public fun park(timeoutMicroseconds: Long, process: Boolean = false): Boolean {
         if (timeoutMicroseconds < -1) throw IllegalArgumentException()
@@ -177,11 +177,11 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
     /**
      * Name of the worker, as specified in [Worker.start] or "worker $id" by default,
      *
-     * @throws [IllegalStateException] if this request is executed on an invalid worker.
+     * @throws [IllegalStateException] if this request is executed on an inkonstid worker.
      */
-    public val name: String
+    public konst name: String
         get() {
-            val customName = getWorkerNameInternal(id)
+            konst customName = getWorkerNameInternal(id)
             return if (customName == null) "worker $id" else customName
         }
 
@@ -191,7 +191,7 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
     override public fun toString(): String = "Worker $name"
 
     /**
-     * Convert worker to a COpaquePointer value that could be passed via native void* pointer.
+     * Convert worker to a COpaquePointer konstue that could be passed via native void* pointer.
      * Can be used as an argument of [Worker.fromCPointer].
      *
      * This function is deprecated. Use `kotlinx.cinterop.StableRef.create(worker).asCPointer()` instead.
@@ -209,7 +209,7 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
      * Usually returns `pthread_t` casted to [ULong].
      */
     @ExperimentalStdlibApi
-    public val platformThreadId: ULong
+    public konst platformThreadId: ULong
         get() = getPlatfromThreadIdInternal(id)
 }
 
@@ -222,11 +222,11 @@ public value class Worker @PublishedApi internal constructor(val id: Int) {
  * @param name of the started worker.
  * @param errorReporting controls if uncaught errors in worker to be reported.
  * @param block to be executed.
- * @return value returned by the block.
+ * @return konstue returned by the block.
  */
 @ObsoleteWorkersApi
 public inline fun <R> withWorker(name: String? = null, errorReporting: Boolean = true, block: Worker.() -> R): R {
-    val worker = Worker.start(errorReporting, name)
+    konst worker = Worker.start(errorReporting, name)
     try {
         return worker.block()
     } finally {

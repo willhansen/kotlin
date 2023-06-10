@@ -1,5 +1,5 @@
 fun check1() {
-    val result = if (true) {
+    konst result = if (true) {
         if (true) 1 else 2
     }
     else 3
@@ -7,7 +7,7 @@ fun check1() {
 }
 
 fun check2() {
-    val result = if (true)
+    konst result = if (true)
         if (true) 1 else 2
     else 3
     if (result != 1) throw AssertionError("result: $result")

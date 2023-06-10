@@ -30,6 +30,6 @@ public class ProjectJsonFormatter(): JsonFormatter<Project> {
 
 
 fun box(): String {
-  val formatter = ProjectJsonFormatter()
+  konst formatter = ProjectJsonFormatter()
   return if (formatter.format(Project()) != null) "OK" else "fail"
 }

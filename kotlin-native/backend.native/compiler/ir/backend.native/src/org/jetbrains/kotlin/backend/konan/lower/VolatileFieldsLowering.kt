@@ -30,9 +30,9 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.*
 
 object IR_DECLARATION_ORIGIN_VOLATILE : IrDeclarationOriginImpl("VOLATILE")
 
-internal class VolatileFieldsLowering(val context: Context) : FileLoweringPass {
-    private val symbols = context.ir.symbols
-    private val irBuiltins = context.irBuiltIns
+internal class VolatileFieldsLowering(konst context: Context) : FileLoweringPass {
+    private konst symbols = context.ir.symbols
+    private konst irBuiltins = context.irBuiltIns
     private fun IrBuilderWithScope.irByteToBool(expression: IrExpression) = irCall(symbols.areEqualByValue[PrimitiveBinaryType.BYTE]!!).apply {
         putValueArgument(0, expression)
         putValueArgument(1, irByte(1))
@@ -41,7 +41,7 @@ internal class VolatileFieldsLowering(val context: Context) : FileLoweringPass {
         irBranch(expression, irByte(1)),
         irElseBranch(irByte(0))
     ))
-    private val convertedBooleanFields = mutableSetOf<IrFieldSymbol>()
+    private konst convertedBooleanFields = mutableSetOf<IrFieldSymbol>()
     private fun IrField.requiresBooleanConversion() = (type == irBuiltins.booleanType && hasAnnotation(KonanFqNames.volatile)) || symbol in convertedBooleanFields
 
     private fun buildIntrinsicFunction(irField: IrField, intrinsicType: IntrinsicType, builder: IrSimpleFunction.() -> Unit) = context.irFactory.buildFun {
@@ -51,8 +51,8 @@ internal class VolatileFieldsLowering(val context: Context) : FileLoweringPass {
         startOffset = irField.startOffset
         endOffset = irField.endOffset
     }.apply {
-        val property = irField.correspondingPropertySymbol?.owner
-        val scope = property?.parent
+        konst property = irField.correspondingPropertySymbol?.owner
+        konst scope = property?.parent
         require(scope != null)
         require(scope is IrClass || scope is IrFile)
         parent = scope
@@ -92,14 +92,14 @@ internal class VolatileFieldsLowering(val context: Context) : FileLoweringPass {
                 addValueParameter {
                     startOffset = irField.startOffset
                     endOffset = irField.endOffset
-                    name = Name.identifier("value")
+                    name = Name.identifier("konstue")
                     type = irField.type
                 }
             }
 
 
     private inline fun atomicFunction(irField: IrField, type: NativeMapping.AtomicFunctionType, builder: () -> IrSimpleFunction): IrSimpleFunction {
-        val key = NativeMapping.AtomicFunctionKey(irField, type)
+        konst key = NativeMapping.AtomicFunctionKey(irField, type)
         return context.mapping.volatileFieldToAtomicFunction.getOrPut(key) {
             builder().also {
                 context.mapping.functionToVolatileField[it] = irField
@@ -145,7 +145,7 @@ internal class VolatileFieldsLowering(val context: Context) : FileLoweringPass {
                         it !is IrProperty -> null
                         it.backingField?.hasAnnotation(KonanFqNames.volatile) != true -> null
                         else -> {
-                            val field = it.backingField!!
+                            konst field = it.backingField!!
                             if (field.type.binaryTypeIsReference() && context.memoryModel != MemoryModel.EXPERIMENTAL) {
                                 it.annotations = it.annotations.filterNot { it.symbol.owner.parentAsClass.hasEqualFqName(KonanFqNames.volatile) }
                                 null
@@ -190,13 +190,13 @@ internal class VolatileFieldsLowering(val context: Context) : FileLoweringPass {
             override fun visitSetField(expression: IrSetField): IrExpression {
                 super.visitSetField(expression)
                 return if (expression.symbol.owner.requiresBooleanConversion()) {
-                    expression.apply { value = builder.at(value).irBoolToByte(value) }
+                    expression.apply { konstue = builder.at(konstue).irBoolToByte(konstue) }
                 } else {
                     expression
                 }
             }
 
-            private val intrinsicMap = mapOf(
+            private konst intrinsicMap = mapOf(
                     IntrinsicType.COMPARE_AND_SET_FIELD to ::compareAndSetFunction,
                     IntrinsicType.COMPARE_AND_EXCHANGE_FIELD to ::compareAndExchangeFunction,
                     IntrinsicType.GET_AND_SET_FIELD to ::getAndSetFunction,
@@ -205,19 +205,19 @@ internal class VolatileFieldsLowering(val context: Context) : FileLoweringPass {
 
             override fun visitCall(expression: IrCall): IrExpression {
                 expression.transformChildrenVoid(this)
-                val intrinsicType = tryGetIntrinsicType(expression).takeIf { it in intrinsicMap } ?: return expression
+                konst intrinsicType = tryGetIntrinsicType(expression).takeIf { it in intrinsicMap } ?: return expression
                 builder.at(expression)
-                val reference = expression.extensionReceiver as? IrPropertyReference
+                konst reference = expression.extensionReceiver as? IrPropertyReference
                         ?: return unsupported("Only compile-time known IrProperties supported for $intrinsicType")
-                val property = reference.symbol.owner
-                val backingField = property.backingField
+                konst property = reference.symbol.owner
+                konst backingField = property.backingField
                 if (backingField?.type?.binaryTypeIsReference() == true && context.memoryModel != MemoryModel.EXPERIMENTAL) {
                     return unsupported("Only primitives are supported for $intrinsicType with legacy memory model")
                 }
                 if (backingField?.hasAnnotation(KonanFqNames.volatile) != true) {
                     return unsupported("Only volatile properties are supported for $intrinsicType")
                 }
-                val function = intrinsicMap[intrinsicType]!!(backingField)
+                konst function = intrinsicMap[intrinsicType]!!(backingField)
                 return builder.irCall(function).apply {
                     dispatchReceiver = reference.dispatchReceiver
                     putValueArgument(0, expression.getValueArgument(0))
@@ -226,7 +226,7 @@ internal class VolatileFieldsLowering(val context: Context) : FileLoweringPass {
                     }
                 }.let {
                     if (backingField.requiresBooleanConversion()) {
-                        for (arg in 0 until it.valueArgumentsCount) {
+                        for (arg in 0 until it.konstueArgumentsCount) {
                             it.putValueArgument(arg, builder.irBoolToByte(it.getValueArgument(arg)!!))
                         }
                         if (intrinsicType == IntrinsicType.COMPARE_AND_EXCHANGE_FIELD || intrinsicType == IntrinsicType.GET_AND_SET_FIELD) {

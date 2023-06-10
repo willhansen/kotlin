@@ -28,8 +28,8 @@ fun getBuildReporter(
     compilationResults: CompilationResults,
     compilationOptions: IncrementalCompilationOptions
 ): RemoteBuildReporter {
-    val root = compilationOptions.modulesInfo.projectRoot
-    val reporters = ArrayList<RemoteICReporter>()
+    konst root = compilationOptions.modulesInfo.projectRoot
+    konst reporters = ArrayList<RemoteICReporter>()
 
     if (ReportCategory.IC_MESSAGE.code in compilationOptions.reportCategories) {
         reporters.add(
@@ -42,10 +42,10 @@ fun getBuildReporter(
         )
     }
 
-    val requestedResults = compilationOptions
+    konst requestedResults = compilationOptions
         .requestedCompilationResults
         .mapNotNullTo(HashSet()) { resultCode ->
-            CompilationResultCategory.values().getOrNull(resultCode)
+            CompilationResultCategory.konstues().getOrNull(resultCode)
         }
     for (requestedResult in requestedResults) {
         when (requestedResult) {
@@ -62,8 +62,8 @@ fun getBuildReporter(
             }
         }
     }
-    val areBuildMetricsNeeded = CompilationResultCategory.BUILD_METRICS in requestedResults
-    val metricsReporter =
+    konst areBuildMetricsNeeded = CompilationResultCategory.BUILD_METRICS in requestedResults
+    konst metricsReporter =
         (if (areBuildMetricsNeeded) BuildMetricsReporterImpl() else DoNothingBuildMetricsReporter)
             .let { RemoteBuildMetricsReporterAdapter(it, areBuildMetricsNeeded, compilationResults) }
 

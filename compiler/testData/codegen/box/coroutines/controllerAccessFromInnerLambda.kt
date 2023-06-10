@@ -17,7 +17,7 @@ class Controller {
 }
 
 fun builder(c: suspend Controller.() -> Unit) {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation)
     if (!controller.result) throw RuntimeException("fail")
 }

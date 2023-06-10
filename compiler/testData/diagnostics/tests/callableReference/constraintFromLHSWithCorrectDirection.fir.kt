@@ -3,7 +3,7 @@
 import kotlin.reflect.KProperty1
 
 interface A
-inline val <T : A> T.bla get() = 1
+inline konst <T : A> T.bla get() = 1
 
 class B<T>
 fun <K, V> B<K>.foo(p: KProperty1<in K, V>): B<V> = TODO()

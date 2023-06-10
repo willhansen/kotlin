@@ -78,7 +78,7 @@
     "elvis-operator-expression",
     "multiplicative-expression",
     "range-expression",
-    "equality-expressions/value-equality-expressions",
+    "equality-expressions/konstue-equality-expressions",
     "jump-expressions/break-expression",
     "jump-expressions/return-expressions",
     "jump-expressions/continue-expression",

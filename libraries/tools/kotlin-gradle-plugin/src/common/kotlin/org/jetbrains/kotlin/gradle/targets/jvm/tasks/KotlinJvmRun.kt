@@ -48,7 +48,7 @@ interface KotlinJvmRunDsl {
     /**
      * ## See [JavaExec.mainClass]
      */
-    val mainClass: Property<String>
+    konst mainClass: Property<String>
 
     /**
      * ## See [JavaExec.args]
@@ -85,8 +85,8 @@ interface KotlinJvmRunDsl {
 internal suspend fun KotlinJvmTarget.registerMainRunTask(): KotlinJvmRunDslImpl? {
     /* Await all inputs from user */
     KotlinPluginLifecycle.Stage.FinaliseDsl.await()
-    val mainCompilation = compilations.findByName("main") ?: return null
-    val taskName = lowerCamelCaseName(targetName, "run")
+    konst mainCompilation = compilations.findByName("main") ?: return null
+    konst taskName = lowerCamelCaseName(targetName, "run")
 
     if (taskName in project.tasks.names) {
         /* Proper warning tbd */
@@ -98,11 +98,11 @@ internal suspend fun KotlinJvmTarget.registerMainRunTask(): KotlinJvmRunDslImpl?
 }
 
 private fun KotlinJvmTarget.registerKotlinJvmRun(taskName: String, compilation: KotlinJvmCompilation): KotlinJvmRunDslImpl {
-    val mainClass = project.objects.property<String>()
-    val taskProvider = project.tasks.register(taskName, KotlinJvmRun::class.java)
+    konst mainClass = project.objects.property<String>()
+    konst taskProvider = project.tasks.register(taskName, KotlinJvmRun::class.java)
 
     /* Convenience helper for telling older Gradle versions, that this provider is used at configuration time */
-    val configurationTimePropertiesAccessor = project.configurationTimePropertiesAccessor
+    konst configurationTimePropertiesAccessor = project.configurationTimePropertiesAccessor
     fun <T> Provider<T>.usedAtConfigurationTime() = usedAtConfigurationTime(configurationTimePropertiesAccessor)
 
     taskProvider.configure { task ->
@@ -114,7 +114,7 @@ private fun KotlinJvmTarget.registerKotlinJvmRun(taskName: String, compilation: 
          * See [KotlinJvmRun]: This task will respect the '<taskName>.mainClass' property over
          * the DSL configuration
          */
-        task.mainClass.value(
+        task.mainClass.konstue(
             project.providers.gradleProperty("$taskName.mainClass").usedAtConfigurationTime()
                 .orElse(project.providers.gradleProperty("mainClass").usedAtConfigurationTime())
                 .orElse(project.providers.systemProperty("$taskName.mainClass").usedAtConfigurationTime())
@@ -123,7 +123,7 @@ private fun KotlinJvmTarget.registerKotlinJvmRun(taskName: String, compilation: 
         )
 
         project.extensions.findByType(JavaToolchainService::class.java)?.let { toolchainService ->
-            val toolchain = project.extensions.getByType(JavaPluginExtension::class.java).toolchain
+            konst toolchain = project.extensions.getByType(JavaPluginExtension::class.java).toolchain
             task.javaLauncher.convention(toolchainService.launcherFor(toolchain))
         }
     }
@@ -137,8 +137,8 @@ private fun KotlinJvmTarget.registerKotlinJvmRun(taskName: String, compilation: 
  * Use [registerKotlinJvmRun] to create an instance
  */
 internal class KotlinJvmRunDslImpl @UnsafeApi constructor(
-    val task: TaskProvider<KotlinJvmRun>,
-    override val mainClass: Property<String>,
+    konst task: TaskProvider<KotlinJvmRun>,
+    override konst mainClass: Property<String>,
 ) : KotlinJvmRunDsl {
 
     override fun args(vararg args: Any) {

@@ -26,23 +26,23 @@ import org.jetbrains.kotlin.resolve.constants.StringValue
 /**
  * List of all implemented interfaces (including those which implemented by a super class)
  */
-internal val IrClass.implementedInterfaces: List<IrClass>
+internal konst IrClass.implementedInterfaces: List<IrClass>
     get() {
-        val superClassImplementedInterfaces = this.getSuperClassNotAny()?.implementedInterfaces ?: emptyList()
-        val superInterfaces = this.getSuperInterfaces()
-        val superInterfacesImplementedInterfaces = superInterfaces.flatMap { it.implementedInterfaces }
+        konst superClassImplementedInterfaces = this.getSuperClassNotAny()?.implementedInterfaces ?: emptyList()
+        konst superInterfaces = this.getSuperInterfaces()
+        konst superInterfacesImplementedInterfaces = superInterfaces.flatMap { it.implementedInterfaces }
         return (superClassImplementedInterfaces +
                 superInterfacesImplementedInterfaces +
                 superInterfaces).distinct()
     }
 
-internal val IrFunction.isTypedIntrinsic: Boolean
+internal konst IrFunction.isTypedIntrinsic: Boolean
     get() = annotations.hasAnnotation(KonanFqNames.typedIntrinsic)
 
-internal val IrConstructor.isConstantConstructorIntrinsic: Boolean
+internal konst IrConstructor.isConstantConstructorIntrinsic: Boolean
     get() = annotations.hasAnnotation(KonanFqNames.constantConstructorIntrinsic)
 
-internal val arrayTypes = setOf(
+internal konst arrayTypes = setOf(
         "kotlin.Array",
         "kotlin.ByteArray",
         "kotlin.CharArray",
@@ -56,7 +56,7 @@ internal val arrayTypes = setOf(
         "kotlin.native.internal.NativePtrArray"
 )
 
-internal val arraysWithFixedSizeItems = setOf(
+internal konst arraysWithFixedSizeItems = setOf(
         "kotlin.ByteArray",
         "kotlin.CharArray",
         "kotlin.ShortArray",
@@ -67,10 +67,10 @@ internal val arraysWithFixedSizeItems = setOf(
         "kotlin.BooleanArray"
 )
 
-internal val IrClass.isArray: Boolean
+internal konst IrClass.isArray: Boolean
     get() = this.fqNameForIrSerialization.asString() in arrayTypes
 
-internal val IrClass.isArrayWithFixedSizeItems: Boolean
+internal konst IrClass.isArrayWithFixedSizeItems: Boolean
     get() = this.fqNameForIrSerialization.asString() in arraysWithFixedSizeItems
 
 fun IrClass.isAbstract() = this.modality == Modality.SEALED || this.modality == Modality.ABSTRACT
@@ -82,7 +82,7 @@ private enum class TypeKind {
     REFERENCE
 }
 
-private data class TypeWithKind(val irType: IrType?, val kind: TypeKind) {
+private data class TypeWithKind(konst irType: IrType?, konst kind: TypeKind) {
     companion object {
         fun fromType(irType: IrType?) = when {
             irType == null -> TypeWithKind(null, TypeKind.ABSENT)
@@ -100,22 +100,22 @@ private fun IrFunction.typeWithKindAt(index: ParameterIndex) = when (index) {
     }
     ParameterIndex.DISPATCH_RECEIVER_INDEX -> TypeWithKind.fromType(dispatchReceiverParameter?.type)
     ParameterIndex.EXTENSION_RECEIVER_INDEX -> TypeWithKind.fromType(extensionReceiverParameter?.type)
-    else -> TypeWithKind.fromType(this.valueParameters[index.unmap()].type)
+    else -> TypeWithKind.fromType(this.konstueParameters[index.unmap()].type)
 }
 
 private fun IrFunction.needBridgeToAt(target: IrFunction, index: ParameterIndex)
         = bridgeDirectionToAt(target, index).kind != BridgeDirectionKind.NONE
 
 @JvmInline
-private value class ParameterIndex(val index: Int) {
+private konstue class ParameterIndex(konst index: Int) {
     companion object {
-        val RETURN_INDEX = ParameterIndex(0)
-        val DISPATCH_RECEIVER_INDEX = ParameterIndex(1)
-        val EXTENSION_RECEIVER_INDEX = ParameterIndex(2)
+        konst RETURN_INDEX = ParameterIndex(0)
+        konst DISPATCH_RECEIVER_INDEX = ParameterIndex(1)
+        konst EXTENSION_RECEIVER_INDEX = ParameterIndex(2)
 
         fun map(index: Int) = ParameterIndex(index + 3)
 
-        fun allParametersCount(irFunction: IrFunction) = irFunction.valueParameters.size + 3
+        fun allParametersCount(irFunction: IrFunction) = irFunction.konstueParameters.size + 3
 
         inline fun forEachIndex(irFunction: IrFunction, block: (ParameterIndex) -> Unit) =
                 (0 until allParametersCount(irFunction)).forEach { block(ParameterIndex(it)) }
@@ -137,15 +137,15 @@ internal enum class BridgeDirectionKind {
     UNBOX
 }
 
-internal data class BridgeDirection(val irClass: IrClass?, val kind: BridgeDirectionKind) {
+internal data class BridgeDirection(konst irClass: IrClass?, konst kind: BridgeDirectionKind) {
     companion object {
-        val NONE = BridgeDirection(null, BridgeDirectionKind.NONE)
+        konst NONE = BridgeDirection(null, BridgeDirectionKind.NONE)
     }
 }
 
 private fun IrFunction.bridgeDirectionToAt(overriddenFunction: IrFunction, index: ParameterIndex): BridgeDirection {
-    val kind = typeWithKindAt(index).kind
-    val (irClass, otherKind) = overriddenFunction.typeWithKindAt(index)
+    konst kind = typeWithKindAt(index).kind
+    konst (irClass, otherKind) = overriddenFunction.typeWithKindAt(index)
     return if (otherKind == kind)
         BridgeDirection.NONE
     else when (kind) {
@@ -157,7 +157,7 @@ private fun IrFunction.bridgeDirectionToAt(overriddenFunction: IrFunction, index
     }
 }
 
-internal class BridgeDirections(private val array: Array<BridgeDirection>) {
+internal class BridgeDirections(private konst array: Array<BridgeDirection>) {
     constructor(irFunction: IrSimpleFunction, overriddenFunction: IrSimpleFunction)
             : this(Array<BridgeDirection>(ParameterIndex.allParametersCount(irFunction)) {
         irFunction.bridgeDirectionToAt(overriddenFunction, ParameterIndex(it))
@@ -167,13 +167,13 @@ internal class BridgeDirections(private val array: Array<BridgeDirection>) {
 
     private fun getDirectionAt(index: ParameterIndex) = array[index.index]
 
-    val returnDirection get() = getDirectionAt(ParameterIndex.RETURN_INDEX)
-    val dispatchReceiverDirection get() = getDirectionAt(ParameterIndex.DISPATCH_RECEIVER_INDEX)
-    val extensionReceiverDirection get() = getDirectionAt(ParameterIndex.EXTENSION_RECEIVER_INDEX)
+    konst returnDirection get() = getDirectionAt(ParameterIndex.RETURN_INDEX)
+    konst dispatchReceiverDirection get() = getDirectionAt(ParameterIndex.DISPATCH_RECEIVER_INDEX)
+    konst extensionReceiverDirection get() = getDirectionAt(ParameterIndex.EXTENSION_RECEIVER_INDEX)
     fun parameterDirectionAt(index: Int) = getDirectionAt(ParameterIndex.map(index))
 
     override fun toString(): String {
-        val result = StringBuilder()
+        konst result = StringBuilder()
         array.forEach {
             result.append(when (it.kind) {
                 BridgeDirectionKind.BOX -> 'B'
@@ -203,9 +203,9 @@ internal class BridgeDirections(private val array: Array<BridgeDirection>) {
     }
 }
 
-val IrSimpleFunction.allOverriddenFunctions: Set<IrSimpleFunction>
+konst IrSimpleFunction.allOverriddenFunctions: Set<IrSimpleFunction>
     get() {
-        val result = mutableSetOf<IrSimpleFunction>()
+        konst result = mutableSetOf<IrSimpleFunction>()
 
         fun traverse(function: IrSimpleFunction) {
             if (function in result) return
@@ -219,9 +219,9 @@ val IrSimpleFunction.allOverriddenFunctions: Set<IrSimpleFunction>
     }
 
 internal fun IrSimpleFunction.bridgeDirectionsTo(overriddenFunction: IrSimpleFunction): BridgeDirections {
-    val ourDirections = BridgeDirections(this, overriddenFunction)
+    konst ourDirections = BridgeDirections(this, overriddenFunction)
 
-    val target = this.target
+    konst target = this.target
     if (!this.isReal && modality != Modality.ABSTRACT
             && target.overrides(overriddenFunction)
             && ourDirections == target.bridgeDirectionsTo(overriddenFunction)) {
@@ -233,10 +233,10 @@ internal fun IrSimpleFunction.bridgeDirectionsTo(overriddenFunction: IrSimpleFun
 }
 
 fun IrFunctionSymbol.isComparisonFunction(map: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>): Boolean =
-        this in map.values
+        this in map.konstues
 
 internal fun IrClass.isFrozen(context: Context): Boolean {
-    val isLegacyMM = context.memoryModel != MemoryModel.EXPERIMENTAL
+    konst isLegacyMM = context.memoryModel != MemoryModel.EXPERIMENTAL
     return when {
         !context.config.freezing.freezeImplicit -> false
         annotations.hasAnnotation(KonanFqNames.frozen) -> true
@@ -247,20 +247,20 @@ internal fun IrClass.isFrozen(context: Context): Boolean {
     }
 }
 
-fun IrConstructorCall.getAnnotationStringValue() = (getValueArgument(0) as? IrConst<*>)?.value as String?
+fun IrConstructorCall.getAnnotationStringValue() = (getValueArgument(0) as? IrConst<*>)?.konstue as String?
 
 fun IrConstructorCall.getAnnotationStringValue(name: String): String {
-    val parameter = symbol.owner.valueParameters.single { it.name.asString() == name }
-    return (getValueArgument(parameter.index) as IrConst<*>).value as String
+    konst parameter = symbol.owner.konstueParameters.single { it.name.asString() == name }
+    return (getValueArgument(parameter.index) as IrConst<*>).konstue as String
 }
 
 fun AnnotationDescriptor.getAnnotationStringValue(name: String): String {
-    return (argumentValue(name) as? StringValue)?.value ?: error("Expected value $name at annotation $this")
+    return (argumentValue(name) as? StringValue)?.konstue ?: error("Expected konstue $name at annotation $this")
 }
 
 inline fun <reified T> IrConstructorCall.getAnnotationValueOrNull(name: String): T? {
-    val parameter = symbol.owner.valueParameters.atMostOne { it.name.asString() == name }
-    return parameter?.let { getValueArgument(it.index)?.let { (it as IrConst<*>).value as T } }
+    konst parameter = symbol.owner.konstueParameters.atMostOne { it.name.asString() == name }
+    return parameter?.let { getValueArgument(it.index)?.let { (it as IrConst<*>).konstue as T } }
 }
 
 fun IrFunction.externalSymbolOrThrow(): String? {
@@ -277,7 +277,7 @@ fun IrFunction.externalSymbolOrThrow(): String? {
     throw Error("external function ${this.longName} must have @TypedIntrinsic, @SymbolName, @GCUnsafeCall or @ObjCMethod annotation")
 }
 
-private val IrFunction.longName: String
+private konst IrFunction.longName: String
     get() = "${(parent as? IrClass)?.name?.asString() ?: "<root>"}.${(this as? IrSimpleFunction)?.name ?: "<init>"}"
 
-val IrFunction.isBuiltInOperator get() = origin == IrBuiltIns.BUILTIN_OPERATOR
+konst IrFunction.isBuiltInOperator get() = origin == IrBuiltIns.BUILTIN_OPERATOR

@@ -8,7 +8,7 @@ class Jdk6List<F> : AbstractList<F>() {
         return "OK" as F
     }
 
-    override val size: Int
+    override konst size: Int
         get() = 2
 
 }
@@ -17,7 +17,7 @@ class Jdk6List<F> : AbstractList<F>() {
 // FILE: B.kt
 
 fun box(): String {
-    val result = Jdk6List<String>().stream().filter { it == "OK" }.count()
+    konst result = Jdk6List<String>().stream().filter { it == "OK" }.count()
     if (result != 2L) return "fai1: $result"
 
     return "OK"

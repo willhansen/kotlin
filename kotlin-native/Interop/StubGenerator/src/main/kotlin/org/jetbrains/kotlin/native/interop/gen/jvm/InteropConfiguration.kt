@@ -23,16 +23,16 @@ import org.jetbrains.kotlin.native.interop.indexer.CompilationWithPCH
  * Describes the native library and the options for adjusting the Kotlin API to be generated for this library.
  */
 class InteropConfiguration(
-        val library: CompilationWithPCH,
-        val pkgName: String,
-        val excludedFunctions: Set<String>,
-        val excludedMacros: Set<String>,
-        val strictEnums: Set<String>,
-        val nonStrictEnums: Set<String>,
-        val noStringConversion: Set<String>,
-        val exportForwardDeclarations: List<String>,
-        val disableDesignatedInitializerChecks: Boolean,
-        val target: KonanTarget
+        konst library: CompilationWithPCH,
+        konst pkgName: String,
+        konst excludedFunctions: Set<String>,
+        konst excludedMacros: Set<String>,
+        konst strictEnums: Set<String>,
+        konst nonStrictEnums: Set<String>,
+        konst noStringConversion: Set<String>,
+        konst exportForwardDeclarations: List<String>,
+        konst disableDesignatedInitializerChecks: Boolean,
+        konst target: KonanTarget
 )
 
 enum class KotlinPlatform {

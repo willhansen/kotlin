@@ -9,8 +9,8 @@ enum class E {
 }
 
 fun box(): String {
-    val f = E.A::foo
-    val ef = E::foo
+    konst f = E.A::foo
+    konst ef = E::foo
 
     if (f() != "A") return "Fail 1: ${f()}"
     if (f == E.B::foo) return "Fail 2"

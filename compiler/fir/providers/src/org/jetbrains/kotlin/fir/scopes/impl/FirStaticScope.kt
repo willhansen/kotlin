@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirVariableSymbol
 import org.jetbrains.kotlin.name.Name
 
-class FirStaticScope(private val delegateScope: FirContainingNamesAwareScope) : FirContainingNamesAwareScope() {
+class FirStaticScope(private konst delegateScope: FirContainingNamesAwareScope) : FirContainingNamesAwareScope() {
     override fun processClassifiersByNameWithSubstitution(name: Name, processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit) {
         delegateScope.processClassifiersByNameWithSubstitution(name, processor)
     }

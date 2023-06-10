@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo(val a: String) {
+konstue class Foo(konst a: String) {
     fun test(): String {
         return a + inlineFun()
     }
@@ -12,6 +12,6 @@ value class Foo(val a: String) {
 inline fun inlineFun(): String = "K"
 
 fun box(): String {
-    val f = Foo("O")
+    konst f = Foo("O")
     return f.test()
 }

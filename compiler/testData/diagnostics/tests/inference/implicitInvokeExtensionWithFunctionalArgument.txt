@@ -19,9 +19,9 @@ public final class SelectorFor</*0*/ S> {
 
 public final class State {
     public constructor State(/*0*/ p1: kotlin.Double, /*1*/ p2: () -> kotlin.Int, /*2*/ p3: kotlin.String?)
-    public final val p1: kotlin.Double
-    public final val p2: () -> kotlin.Int
-    public final val p3: kotlin.String?
+    public final konst p1: kotlin.Double
+    public final konst p2: () -> kotlin.Int
+    public final konst p3: kotlin.String?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -19,9 +19,9 @@ kotlin {
 
 tasks.register("foo") {
     doLast {
-        val dir = projectDir.resolve("webpack.config.d")
+        konst dir = projectDir.resolve("webpack.config.d")
         dir.mkdirs()
-        val file = dir.resolve("patch.js")
+        konst file = dir.resolve("patch.js")
         file.createNewFile()
         file.writeText("// hello from patch.js")
     }

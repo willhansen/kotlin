@@ -17,8 +17,8 @@ fun copyDoubleArray(vararg data: Double): DoubleArray = data
 fun copyStringArray(vararg data: String): Array<out String> = data
 
 fun box(): String {
-    val sarr = arrayOf("OK")
-    val sarr2 = copyArray(*sarr)
+    konst sarr = arrayOf("OK")
+    konst sarr2 = copyArray(*sarr)
     sarr[0] = "Array was not copied"
     assertEquals(sarr2[0], "OK", "Failed: Array<String>")
 
@@ -27,49 +27,49 @@ fun box(): String {
     rsarr[0] = "Array was not copied"
     assertEquals(rsarr2[0], "OK", "Failed: Array<String>, reified copy")
 
-    val boolArray = booleanArrayOf(true)
-    val boolArray2 = copyBooleanArray(*boolArray)
+    konst boolArray = booleanArrayOf(true)
+    konst boolArray2 = copyBooleanArray(*boolArray)
     boolArray[0] = false
     assertEquals(boolArray2[0], true, "Failed: BooleanArray")
 
-    val byteArray = byteArrayOf(1)
-    val byteArray2 = copyByteArray(*byteArray)
+    konst byteArray = byteArrayOf(1)
+    konst byteArray2 = copyByteArray(*byteArray)
     byteArray[0] = 42
     assertEquals(1, byteArray2[0], "Failed: ByteArray")
 
-    val charArray = charArrayOf('a')
-    val charArray2 = copyCharArray(*charArray)
+    konst charArray = charArrayOf('a')
+    konst charArray2 = copyCharArray(*charArray)
     charArray[0] = 'b'
     assertEquals(charArray2[0], 'a', "Failed: CharArray")
 
-    val shortArray = shortArrayOf(1)
-    val shortArray2 = copyShortArray(*shortArray)
+    konst shortArray = shortArrayOf(1)
+    konst shortArray2 = copyShortArray(*shortArray)
     shortArray[0] = 42
     assertEquals(1, shortArray2[0], "Failed: ShortArray")
 
-    val iarr = IntArray(1)
+    konst iarr = IntArray(1)
     iarr[0] = 1
-    val iarr2 = copyIntArray(*iarr)
+    konst iarr2 = copyIntArray(*iarr)
     iarr[0] = 42
     assertEquals(1, iarr2[0], "Failed: IntArray")
 
-    val longArray = longArrayOf(1L)
-    val longArray2 = copyLongArray(*longArray)
+    konst longArray = longArrayOf(1L)
+    konst longArray2 = copyLongArray(*longArray)
     longArray[0] = 42L
     assertEquals(1L, longArray2[0], "Failed: LongArray")
 
-    val floatArray = floatArrayOf(1.0f)
-    val floatArray2 = copyFloatArray(*floatArray)
+    konst floatArray = floatArrayOf(1.0f)
+    konst floatArray2 = copyFloatArray(*floatArray)
     floatArray[0] = 42.0f
     assertEquals(1.0f, floatArray2[0], "Failed: FloatArray")
 
-    val doubleArray = doubleArrayOf(1.0)
-    val doubleArray2 = copyDoubleArray(*doubleArray)
+    konst doubleArray = doubleArrayOf(1.0)
+    konst doubleArray2 = copyDoubleArray(*doubleArray)
     doubleArray[0] = 42.0
     assertEquals(1.0, doubleArray2[0], "Failed: DoubleArray")
 
-    val stringArray = arrayOf("abc")
-    val stringArray2 = copyStringArray(*stringArray)
+    konst stringArray = arrayOf("abc")
+    konst stringArray2 = copyStringArray(*stringArray)
     stringArray[0] = "def"
     assertEquals("abc", stringArray2[0], "Failed: Array<String>")
 

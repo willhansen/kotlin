@@ -17,28 +17,28 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 import org.jetbrains.org.objectweb.asm.tree.VarInsnNode
 
 
-// A temporary val is a local variables that is:
+// A temporary konst is a local variables that is:
 //  - initialized once (with some xSTORE instruction)
 //  - is not written by any other instruction (xSTORE or IINC)
 //  - not "observed" by any LVT entry
 class TemporaryVal(
-    val index: Int,
-    val storeInsn: VarInsnNode,
-    val loadInsns: List<VarInsnNode>
+    konst index: Int,
+    konst storeInsn: VarInsnNode,
+    konst loadInsns: List<VarInsnNode>
 )
 
 class TemporaryValsAnalyzer {
 
     fun analyze(internalClassName: String, methodNode: MethodNode): List<TemporaryVal> {
-        val insnList = methodNode.instructions
-        val insnArray = insnList.toArray()
+        konst insnList = methodNode.instructions
+        konst insnArray = insnList.toArray()
 
-        val potentiallyTemporaryStores = insnList.filterTo(LinkedHashSet()) { it.isStoreOperation() }
+        konst potentiallyTemporaryStores = insnList.filterTo(LinkedHashSet()) { it.isStoreOperation() }
 
         for (lv in methodNode.localVariables) {
             // Exclude stores within LVT entry liveness ranges.
             for (i in insnList.indexOf(lv.start) until insnList.indexOf(lv.end)) {
-                val insn = insnArray[i]
+                konst insn = insnArray[i]
                 if (insn.isStoreOperation() && (insn as VarInsnNode).`var` == lv.index) {
                     potentiallyTemporaryStores.remove(insn)
                 }
@@ -82,7 +82,7 @@ class TemporaryValsAnalyzer {
             }
         }
 
-        // Don't run analysis if we have no potential temporary val stores.
+        // Don't run analysis if we have no potential temporary konst stores.
         if (potentiallyTemporaryStores.isEmpty())
             return emptyList()
 
@@ -92,52 +92,52 @@ class TemporaryValsAnalyzer {
         //  N = number of method instructions
         //  M = number of local variables
         //  K = number of potential temporary variables so far
-        val memoryComplexity = methodNode.instructions.size().toLong() *
+        konst memoryComplexity = methodNode.instructions.size().toLong() *
                 methodNode.localVariables.size *
                 potentiallyTemporaryStores.size /
                 (1024 * 1024)
         if (memoryComplexity > OptimizationMethodVisitor.MEMORY_LIMIT_BY_METHOD_MB)
             return emptyList()
 
-        val storeInsnToStoreData = potentiallyTemporaryStores.associateWith { StoreData(it) }
+        konst storeInsnToStoreData = potentiallyTemporaryStores.associateWith { StoreData(it) }
 
-        val frames = FastStoreLoadAnalyzer(internalClassName, methodNode, StoreTrackingInterpreter(storeInsnToStoreData)).analyze()
+        konst frames = FastStoreLoadAnalyzer(internalClassName, methodNode, StoreTrackingInterpreter(storeInsnToStoreData)).analyze()
 
         // Exclude stores observed at LVT liveness range start using information from bytecode analysis.
         for (lv in methodNode.localVariables) {
-            val frameAtStart = frames[insnList.indexOf(lv.start)] ?: continue
-            when (val valueAtStart = frameAtStart[lv.index]) {
+            konst frameAtStart = frames[insnList.indexOf(lv.start)] ?: continue
+            when (konst konstueAtStart = frameAtStart[lv.index]) {
                 is StoredValue.Store ->
-                    valueAtStart.temporaryVal.isDirty = true
+                    konstueAtStart.temporaryVal.isDirty = true
                 is StoredValue.DirtyStore ->
-                    valueAtStart.temporaryVals.forEach { it.isDirty = true }
+                    konstueAtStart.temporaryVals.forEach { it.isDirty = true }
                 StoredValue.Unknown -> {}
             }
         }
 
-        return storeInsnToStoreData.values
+        return storeInsnToStoreData.konstues
             .filterNot { it.isDirty }
             .map {
-                val storeInsn = it.storeInsn as VarInsnNode
-                val loadInsns = it.loads.map { load -> load as VarInsnNode }
+                konst storeInsn = it.storeInsn as VarInsnNode
+                konst loadInsns = it.loads.map { load -> load as VarInsnNode }
                 TemporaryVal(storeInsn.`var`, storeInsn, loadInsns)
             }
             .sortedBy { insnList.indexOf(it.storeInsn) }
     }
 
-    private class StoreData(val storeInsn: AbstractInsnNode) {
+    private class StoreData(konst storeInsn: AbstractInsnNode) {
         var isDirty = false
 
-        val value = StoredValue.Store(this)
+        konst konstue = StoredValue.Store(this)
 
-        val loads = LinkedHashSet<AbstractInsnNode>()
+        konst loads = LinkedHashSet<AbstractInsnNode>()
     }
 
     private sealed class StoredValue : StoreLoadValue {
 
         object Unknown : StoredValue()
 
-        class Store(val temporaryVal: StoreData) : StoredValue() {
+        class Store(konst temporaryVal: StoreData) : StoredValue() {
             override fun equals(other: Any?): Boolean =
                 other is Store && other.temporaryVal === temporaryVal
 
@@ -145,7 +145,7 @@ class TemporaryValsAnalyzer {
                 temporaryVal.hashCode()
         }
 
-        class DirtyStore(val temporaryVals: Collection<StoreData>) : StoredValue() {
+        class DirtyStore(konst temporaryVals: Collection<StoreData>) : StoredValue() {
             override fun equals(other: Any?): Boolean =
                 other is DirtyStore && other.temporaryVals == temporaryVals
 
@@ -155,43 +155,43 @@ class TemporaryValsAnalyzer {
     }
 
     private class StoreTrackingInterpreter(
-        private val storeInsnToStoreData: Map<AbstractInsnNode, StoreData>
+        private konst storeInsnToStoreData: Map<AbstractInsnNode, StoreData>
     ) : StoreLoadInterpreter<StoredValue> {
 
         override fun uninitialized(): StoredValue =
             StoredValue.Unknown
 
-        override fun valueParameter(type: Type): StoredValue =
+        override fun konstueParameter(type: Type): StoredValue =
             StoredValue.Unknown
 
         override fun store(insn: VarInsnNode): StoredValue {
-            val temporaryValData = storeInsnToStoreData[insn]
+            konst temporaryValData = storeInsnToStoreData[insn]
             if (temporaryValData != null) {
-                return temporaryValData.value
+                return temporaryValData.konstue
             }
             return StoredValue.Unknown
         }
 
-        override fun load(insn: VarInsnNode, value: StoredValue) {
-            if (value is StoredValue.DirtyStore) {
-                // If we load a dirty value, invalidate all related temporary vals.
-                value.temporaryVals.forEach { it.isDirty = true }
-            } else if (value is StoredValue.Store) {
+        override fun load(insn: VarInsnNode, konstue: StoredValue) {
+            if (konstue is StoredValue.DirtyStore) {
+                // If we load a dirty konstue, inkonstidate all related temporary konsts.
+                konstue.temporaryVals.forEach { it.isDirty = true }
+            } else if (konstue is StoredValue.Store) {
                 // Keep track of a load instruction
-                value.temporaryVal.loads.add(insn)
+                konstue.temporaryVal.loads.add(insn)
             }
         }
 
-        override fun iinc(insn: IincInsnNode, value: StoredValue): StoredValue {
-            when (value) {
+        override fun iinc(insn: IincInsnNode, konstue: StoredValue): StoredValue {
+            when (konstue) {
                 is StoredValue.Store ->
-                    value.temporaryVal.isDirty = true
+                    konstue.temporaryVal.isDirty = true
                 is StoredValue.DirtyStore ->
-                    value.temporaryVals.forEach { it.isDirty = true }
+                    konstue.temporaryVals.forEach { it.isDirty = true }
                 else -> {
                 }
             }
-            return value
+            return konstue
         }
 
 
@@ -200,10 +200,10 @@ class TemporaryValsAnalyzer {
                 a === b ->
                     a
                 a is StoredValue.Store || a is StoredValue.DirtyStore || b is StoredValue.Store || b is StoredValue.DirtyStore -> {
-                    // 'StoreValue.Store' are unique for each 'StoreData', so if we are here, we are going to merge value stored
-                    // by a xSTORE instruction with some other value (maybe produced by another xSTORE instruction).
-                    // Loading such value invalidates all related temporary vals.
-                    val dirtySet = SmartSet.create(a.temporaryVals())
+                    // 'StoreValue.Store' are unique for each 'StoreData', so if we are here, we are going to merge konstue stored
+                    // by a xSTORE instruction with some other konstue (maybe produced by another xSTORE instruction).
+                    // Loading such konstue inkonstidates all related temporary konsts.
+                    konst dirtySet = SmartSet.create(a.temporaryVals())
                     dirtySet.addAll(b.temporaryVals())
                     StoredValue.DirtyStore(dirtySet)
                 }

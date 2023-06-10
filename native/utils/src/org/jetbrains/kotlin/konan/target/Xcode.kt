@@ -22,18 +22,18 @@ import org.jetbrains.kotlin.konan.exec.Command
 import org.jetbrains.kotlin.konan.file.File
 
 interface Xcode {
-    val toolchain: String
-    val macosxSdk: String
-    val iphoneosSdk: String
-    val iphonesimulatorSdk: String
-    val version: String
-    val appletvosSdk: String
-    val appletvsimulatorSdk: String
-    val watchosSdk: String
-    val watchsimulatorSdk: String
+    konst toolchain: String
+    konst macosxSdk: String
+    konst iphoneosSdk: String
+    konst iphonesimulatorSdk: String
+    konst version: String
+    konst appletvosSdk: String
+    konst appletvsimulatorSdk: String
+    konst watchosSdk: String
+    konst watchsimulatorSdk: String
     // Xcode.app/Contents/Developer/usr
-    val additionalTools: String
-    val simulatorRuntimes: String
+    konst additionalTools: String
+    konst simulatorRuntimes: String
 
     /**
      * TODO: `toLowerCase` is deprecated and should be replaced with `lowercase`, but
@@ -57,7 +57,7 @@ interface Xcode {
         // Don't cache the instance: the compiler might be executed in a Gradle daemon process,
         // so current Xcode might actually change between different invocations.
         @Deprecated("", ReplaceWith("this.findCurrent()"), DeprecationLevel.WARNING)
-        val current: Xcode
+        konst current: Xcode
             get() = findCurrent()
 
         fun findCurrent(): Xcode = CurrentXcode()
@@ -66,35 +66,35 @@ interface Xcode {
 
 internal class CurrentXcode : Xcode {
 
-    override val toolchain by lazy {
-        val ldPath = xcrun("-f", "ld") // = $toolchain/usr/bin/ld
+    override konst toolchain by lazy {
+        konst ldPath = xcrun("-f", "ld") // = $toolchain/usr/bin/ld
         File(ldPath).parentFile.parentFile.parentFile.absolutePath
     }
 
-    override val additionalTools: String by lazy {
-        val bitcodeBuildToolPath = xcrun("-f", "bitcode-build-tool")
+    override konst additionalTools: String by lazy {
+        konst bitcodeBuildToolPath = xcrun("-f", "bitcode-build-tool")
         File(bitcodeBuildToolPath).parentFile.parentFile.absolutePath
     }
 
-    override val simulatorRuntimes: String by lazy {
+    override konst simulatorRuntimes: String by lazy {
         Command("/usr/bin/xcrun", "simctl", "list", "runtimes", "-j").getOutputLines().joinToString(separator = "\n")
     }
-    override val macosxSdk by lazy { getSdkPath("macosx") }
-    override val iphoneosSdk by lazy { getSdkPath("iphoneos") }
-    override val iphonesimulatorSdk by lazy { getSdkPath("iphonesimulator") }
-    override val appletvosSdk by lazy { getSdkPath("appletvos") }
-    override val appletvsimulatorSdk by lazy { getSdkPath("appletvsimulator") }
-    override val watchosSdk: String by lazy { getSdkPath("watchos") }
-    override val watchsimulatorSdk: String by lazy { getSdkPath("watchsimulator") }
+    override konst macosxSdk by lazy { getSdkPath("macosx") }
+    override konst iphoneosSdk by lazy { getSdkPath("iphoneos") }
+    override konst iphonesimulatorSdk by lazy { getSdkPath("iphonesimulator") }
+    override konst appletvosSdk by lazy { getSdkPath("appletvos") }
+    override konst appletvsimulatorSdk by lazy { getSdkPath("appletvsimulator") }
+    override konst watchosSdk: String by lazy { getSdkPath("watchos") }
+    override konst watchsimulatorSdk: String by lazy { getSdkPath("watchsimulator") }
 
-    internal val xcodebuildVersion: String
+    internal konst xcodebuildVersion: String
         get() = xcrun("xcodebuild", "-version")
                 .removePrefix("Xcode ")
 
-    internal val bundleVersion: String
+    internal konst bundleVersion: String
         get() = bash("""/usr/libexec/PlistBuddy "$(xcode-select -print-path)/../Info.plist" -c "Print :CFBundleShortVersionString"""")
 
-    override val version by lazy {
+    override konst version by lazy {
         try {
             bundleVersion
         } catch (e: KonanExternalToolFailure) {
@@ -108,7 +108,7 @@ internal class CurrentXcode : Xcode {
         // TODO: we should make the message below even more clear and actionable.
         //  Maybe add a link to the documentation.
         //  See https://youtrack.jetbrains.com/issue/KT-50923.
-        val message = """
+        konst message = """
                 An error occurred during an xcrun execution. Make sure that Xcode and its command line tools are properly installed.
                 Failed command: /usr/bin/xcrun ${args.joinToString(" ")}
                 Try running this command in Terminal and fix the errors by making Xcode (and its command line tools) configuration correct.

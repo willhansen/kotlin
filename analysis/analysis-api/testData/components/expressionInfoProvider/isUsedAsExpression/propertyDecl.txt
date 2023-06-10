@@ -3,7 +3,7 @@ text: var property: Int = 58
         get() {
             return field * 2
         }
-        set(value) {
+        set(konstue) {
             field += 45
         }
 isUsedAsExpression: false

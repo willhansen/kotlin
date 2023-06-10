@@ -14,7 +14,7 @@ import org.jetbrains.report.*
 // Delete build information from ES index.
 internal fun deleteBuildInfo(agentInfo: String, buildInfoIndex: ElasticSearchIndex,
                              buildNumber: String? = null): Promise<String> {
-    val queryDescription = """
+    konst queryDescription = """
             {
                 "query": {
                     "bool": {
@@ -37,7 +37,7 @@ internal fun deleteBuildInfo(agentInfo: String, buildInfoIndex: ElasticSearchInd
 internal fun getBuildsDescription(type: String?, branch: String?, agentInfo: String, buildInfoIndex: ElasticSearchIndex,
                                   buildsCountToShow: Int, beforeDate: String?, afterDate: String?,
                                   onlyNumbers: Boolean = false): Promise<JsonArray> {
-    val queryDescription = """
+    konst queryDescription = """
             {   "size": $buildsCountToShow,
                 ${if (onlyNumbers) """"_source": ["buildNumber", "buildType"],""" else ""}
                 "sort": {"startTime": "desc" },
@@ -47,7 +47,7 @@ internal fun getBuildsDescription(type: String?, branch: String?, agentInfo: Str
                         "must": [
                             { "bool": {
                                 "should": [
-                                     { "regexp": { "buildNumber": { "value": "${if (it == "release")  
+                                     { "regexp": { "buildNumber": { "konstue": "${if (it == "release")  
                                         ".*eap.*|.*release.*|.*rc.*" else ".*dev.*"}" } } 
                                      },
                                      { "match": { "buildType": "${it.uppercase()}" } }
@@ -83,14 +83,14 @@ internal fun getBuildsDescription(type: String?, branch: String?, agentInfo: Str
         """.trimIndent()
 
     return buildInfoIndex.search(queryDescription, listOf("hits.hits._source")).then { responseString ->
-        val dbResponse = JsonTreeParser.parse(responseString).jsonObject
+        konst dbResponse = JsonTreeParser.parse(responseString).jsonObject
         dbResponse.getObjectOrNull("hits")?.getArrayOrNull("hits") ?: error("Wrong response:\n$responseString")
     }
 }
 
 // Check if current build already exists.
 suspend fun buildExists(buildInfo: BuildInfo, buildInfoIndex: ElasticSearchIndex): Boolean {
-    val queryDescription = """
+    konst queryDescription = """
             {   "size": 1,
                "_source": ["buildNumber"],
                 "query": {
@@ -105,11 +105,11 @@ suspend fun buildExists(buildInfo: BuildInfo, buildInfoIndex: ElasticSearchIndex
             }
         """.trimIndent()
 
-    return buildInfoIndex.search(queryDescription, listOf("hits.total.value")).then { responseString ->
-        val response = JsonTreeParser.parse(responseString).jsonObject
-        val value = response.getObjectOrNull("hits")?.getObjectOrNull("total")?.getPrimitiveOrNull("value")?.content
+    return buildInfoIndex.search(queryDescription, listOf("hits.total.konstue")).then { responseString ->
+        konst response = JsonTreeParser.parse(responseString).jsonObject
+        konst konstue = response.getObjectOrNull("hits")?.getObjectOrNull("total")?.getPrimitiveOrNull("konstue")?.content
                 ?: error("Error response from ElasticSearch:\n$responseString")
-        value.toInt() > 0
+        konstue.toInt() > 0
     }.await()
 }
 
@@ -119,7 +119,7 @@ fun getBuildsNumbers(type: String?, branch: String?, agentInfo: String, buildsCo
         getBuildsDescription(type, branch, agentInfo, buildInfoIndex, buildsCountToShow, beforeDate, afterDate, true)
                 .then { responseArray ->
             responseArray.map {
-                val build = (it as JsonObject).getObject("_source")
+                konst build = (it as JsonObject).getObject("_source")
                 build.getPrimitiveOrNull("buildType")?.content to build.getPrimitive("buildNumber").content
             }
         }
@@ -135,9 +135,9 @@ fun getBuildsInfo(type: String?, branch: String?, agentInfo: String, buildsCount
 // Get golden results from database.
 fun getGoldenResults(goldenResultsIndex: GoldenResultsIndex): Promise<Map<String, List<BenchmarkResult>>> {
     return goldenResultsIndex.search("", listOf("hits.hits._source")).then { responseString ->
-        val dbResponse = JsonTreeParser.parse(responseString).jsonObject
+        konst dbResponse = JsonTreeParser.parse(responseString).jsonObject
         dbResponse.getObjectOrNull("hits")?.getArrayOrNull("hits")?.map {
-            val reportDescription = (it as JsonObject).getObject("_source")
+            konst reportDescription = (it as JsonObject).getObject("_source")
             BenchmarksReport.create(reportDescription).benchmarks
         }?.reduce { acc, it -> acc + it } ?: error("Wrong format of response:\n $responseString")
     }
@@ -145,7 +145,7 @@ fun getGoldenResults(goldenResultsIndex: GoldenResultsIndex): Promise<Map<String
 
 // Get list of unstable benchmarks from database.
 fun getUnstableResults(goldenResultsIndex: GoldenResultsIndex): Promise<List<String>> {
-    val queryDescription = """
+    konst queryDescription = """
         {
           "_source": ["env"],
           "query": {
@@ -164,8 +164,8 @@ fun getUnstableResults(goldenResultsIndex: GoldenResultsIndex): Promise<List<Str
     """.trimIndent()
 
     return goldenResultsIndex.search(queryDescription, listOf("hits.hits.inner_hits")).then { responseString ->
-        val dbResponse = JsonTreeParser.parse(responseString).jsonObject
-        val results = dbResponse.getObjectOrNull("hits")?.getArrayOrNull("hits")
+        konst dbResponse = JsonTreeParser.parse(responseString).jsonObject
+        konst results = dbResponse.getObjectOrNull("hits")?.getArrayOrNull("hits")
                 ?: error("Wrong response:\n$responseString")
         results.getObjectOrNull(0)?.let {
             it
@@ -179,9 +179,9 @@ fun getUnstableResults(goldenResultsIndex: GoldenResultsIndex): Promise<List<Str
     }
 }
 
-// Get distinct values for needed field from database.
+// Get distinct konstues for needed field from database.
 fun distinctValues(field: String, index: ElasticSearchIndex): Promise<List<String>> {
-    val queryDescription = """
+    konst queryDescription = """
             {
               "aggs": {
                     "unique": {"terms": {"field": "$field", "size": 1000}}
@@ -189,7 +189,7 @@ fun distinctValues(field: String, index: ElasticSearchIndex): Promise<List<Strin
             }
         """.trimIndent()
     return index.search(queryDescription, listOf("aggregations.unique.buckets")).then { responseString ->
-        val dbResponse = JsonTreeParser.parse(responseString).jsonObject
+        konst dbResponse = JsonTreeParser.parse(responseString).jsonObject
         dbResponse.getObjectOrNull("aggregations")?.getObjectOrNull("unique")?.getArrayOrNull("buckets")
                 ?.map { (it as JsonObject).getPrimitiveOrNull("key")?.content }?.filterNotNull()
                 ?: error("Wrong response:\n$responseString")

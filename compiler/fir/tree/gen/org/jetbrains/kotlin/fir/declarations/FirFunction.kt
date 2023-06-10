@@ -26,23 +26,23 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 sealed class FirFunction : FirCallableDeclaration(), FirTargetElement, FirControlFlowGraphOwner, FirStatement {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val typeParameters: List<FirTypeParameterRef>
-    abstract override val status: FirDeclarationStatus
-    abstract override val returnTypeRef: FirTypeRef
-    abstract override val receiverParameter: FirReceiverParameter?
-    abstract override val deprecationsProvider: DeprecationsProvider
-    abstract override val containerSource: DeserializedContainerSource?
-    abstract override val dispatchReceiverType: ConeSimpleKotlinType?
-    abstract override val contextReceivers: List<FirContextReceiver>
-    abstract override val controlFlowGraphReference: FirControlFlowGraphReference?
-    abstract override val symbol: FirFunctionSymbol<out FirFunction>
-    abstract val valueParameters: List<FirValueParameter>
-    abstract val body: FirBlock?
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst typeParameters: List<FirTypeParameterRef>
+    abstract override konst status: FirDeclarationStatus
+    abstract override konst returnTypeRef: FirTypeRef
+    abstract override konst receiverParameter: FirReceiverParameter?
+    abstract override konst deprecationsProvider: DeprecationsProvider
+    abstract override konst containerSource: DeserializedContainerSource?
+    abstract override konst dispatchReceiverType: ConeSimpleKotlinType?
+    abstract override konst contextReceivers: List<FirContextReceiver>
+    abstract override konst controlFlowGraphReference: FirControlFlowGraphReference?
+    abstract override konst symbol: FirFunctionSymbol<out FirFunction>
+    abstract konst konstueParameters: List<FirValueParameter>
+    abstract konst body: FirBlock?
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitFunction(this, data)
 

@@ -15,11 +15,11 @@ import kotlin.reflect.full.superclasses
 
 object ReflectionTestUtils {
 
-    const val ideaTcsPackage = "org.jetbrains.kotlin.gradle.idea.tcs"
-    val ideaTcsReflections = Reflections(ideaTcsPackage, AllClassScanner, Scanners.SubTypes, Scanners.TypesAnnotated)
+    const konst ideaTcsPackage = "org.jetbrains.kotlin.gradle.idea.tcs"
+    konst ideaTcsReflections = Reflections(ideaTcsPackage, AllClassScanner, Scanners.SubTypes, Scanners.TypesAnnotated)
 
-    const val kotlinPackage = "org.jetbrains.kotlin"
-    val kotlinReflections = Reflections(kotlinPackage, AllClassScanner, Scanners.SubTypes, Scanners.TypesAnnotated)
+    const konst kotlinPackage = "org.jetbrains.kotlin"
+    konst kotlinReflections = Reflections(kotlinPackage, AllClassScanner, Scanners.SubTypes, Scanners.TypesAnnotated)
 
     fun KClass<*>.displayName() = java.name
         .removePrefix("org.jetbrains.kotlin")

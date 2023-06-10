@@ -23,9 +23,9 @@ fun setBooleanRes(x: Boolean, ignored: Unit) {
 
 fun box(): String {
     builder {
-        // 'true' value is spilled into variable and saved to field before suspension point
+        // 'true' konstue is spilled into variable and saved to field before suspension point
         // It's important that there is no type info about this variable in local var table,
-        // so we should infer that ICONST_1 is a boolean value from it's usage
+        // so we should infer that ICONST_1 is a boolean konstue from it's usage
         setBooleanRes(true, suspendHere())
     }
 

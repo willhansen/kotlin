@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.resolve.calls.model.isSyntheticEnumEntries
 
 object EnumEntriesUnsupportedChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val languageVersionSettings = context.languageVersionSettings
+        konst languageVersionSettings = context.languageVersionSettings
         if (languageVersionSettings.supportsFeature(LanguageFeature.EnumEntries)) return
-        val propertyDescriptor = resolvedCall.resultingDescriptor as? PropertyDescriptor ?: return
+        konst propertyDescriptor = resolvedCall.resultingDescriptor as? PropertyDescriptor ?: return
         if (propertyDescriptor.isSyntheticEnumEntries()) {
             context.trace.report(
                 Errors.UNSUPPORTED_FEATURE.on(

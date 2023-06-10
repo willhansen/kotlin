@@ -27,8 +27,8 @@ class FileSystemDependenciesResolver(vararg paths: File) : ExternalDependenciesR
     ): ResultWithDiagnostics<Boolean> {
         if (!acceptsRepository(repositoryCoordinates)) return false.asSuccess()
 
-        val repoDir = repositoryCoordinates.toFilePath()
-            ?: return makeResolveFailureResult("Invalid repository location: '${repositoryCoordinates}'", sourceCodeLocation)
+        konst repoDir = repositoryCoordinates.toFilePath()
+            ?: return makeResolveFailureResult("Inkonstid repository location: '${repositoryCoordinates}'", sourceCodeLocation)
 
         localRepos.add(repoDir)
 
@@ -40,13 +40,13 @@ class FileSystemDependenciesResolver(vararg paths: File) : ExternalDependenciesR
         options: ExternalDependenciesResolver.Options,
         sourceCodeLocation: SourceCode.LocationWithId?
     ): ResultWithDiagnostics<List<File>> {
-        if (!acceptsArtifact(artifactCoordinates)) throw IllegalArgumentException("Path is invalid")
+        if (!acceptsArtifact(artifactCoordinates)) throw IllegalArgumentException("Path is inkonstid")
 
-        val messages = mutableListOf<String>()
+        konst messages = mutableListOf<String>()
 
         for (repo in localRepos) {
             // TODO: add coordinates and wildcard matching
-            val file = if (repo == null) File(artifactCoordinates) else File(repo, artifactCoordinates)
+            konst file = if (repo == null) File(artifactCoordinates) else File(repo, artifactCoordinates)
             when {
                 !file.exists() -> messages.add("File '$file' not found")
                 !file.isFile && !file.isDirectory -> messages.add("Path '$file' is neither file nor directory")
@@ -61,11 +61,11 @@ class FileSystemDependenciesResolver(vararg paths: File) : ExternalDependenciesR
 
     override fun acceptsRepository(repositoryCoordinates: RepositoryCoordinates): Boolean = repositoryCoordinates.toFilePath() != null
 
-    private val localRepos = arrayListOf<File?>(null)
+    private konst localRepos = arrayListOf<File?>(null)
 
     init {
         for (path in paths) {
-            require(path.exists() && path.isDirectory) { "Invalid flat lib directory repository path '$path'" }
+            require(path.exists() && path.isDirectory) { "Inkonstid flat lib directory repository path '$path'" }
         }
         localRepos.addAll(paths)
     }

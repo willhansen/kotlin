@@ -1,14 +1,14 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-class Cell<out V>(val value: V)
+class Cell<out V>(konst konstue: V)
 
-class GenericDelegate<V>(val value: V)
+class GenericDelegate<V>(konst konstue: V)
 
 operator fun <T> T.provideDelegate(a: Any?, p: Any?) = GenericDelegate(this)
 
-operator fun <W> GenericDelegate<W>.getValue(a: Any?, p: Any?) = Cell(value)
+operator fun <W> GenericDelegate<W>.getValue(a: Any?, p: Any?) = Cell(konstue)
 
-val test1: Cell<String> by "OK"
-val test2: Cell<Any> by "OK"
-val test3 by "OK"
+konst test1: Cell<String> by "OK"
+konst test2: Cell<Any> by "OK"
+konst test3 by "OK"

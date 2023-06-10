@@ -34,7 +34,7 @@ fun <Q> select(a: Q, b: Q): Q = a
 
 // Note: no builder inference annotation
 fun <R> myBuildList(builder: MutableList<R>.() -> Unit): List<R> {
-    val list = mutableListOf<R>()
+    konst list = mutableListOf<R>()
     list.builder()
     return list
 }
@@ -57,7 +57,7 @@ fun test3() {
 }
 
 fun <D> buildPartList(left: MutableList<D>.() -> Unit, right: MutableList<D>.() -> Unit): List<D> {
-    val list = mutableListOf<D>()
+    konst list = mutableListOf<D>()
     list.left()
     list.right()
     return list

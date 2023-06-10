@@ -19,13 +19,13 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirTypeAliasSymbol
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility
 
 internal class KtFirMultiplatformInfoProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtMultiplatformInfoProvider(), KtFirAnalysisSessionComponent {
     override fun getExpectForActual(actual: KtDeclarationSymbol): KtDeclarationSymbol? {
         require(actual is KtFirSymbol<*>)
-        val firSymbol = actual.firSymbol
-        val status = when (firSymbol) {
+        konst firSymbol = actual.firSymbol
+        konst status = when (firSymbol) {
             is FirCallableSymbol -> firSymbol.rawStatus
             is FirClassSymbol -> firSymbol.rawStatus
             is FirTypeAliasSymbol -> firSymbol.rawStatus
@@ -33,7 +33,7 @@ internal class KtFirMultiplatformInfoProvider(
         }
         if (status?.isActual != true) return null
 
-        val expectsForActual = firSymbol.expectForActual?.get(ExpectActualCompatibility.Compatible) ?: return null
+        konst expectsForActual = firSymbol.expectForActual?.get(ExpectActualCompatibility.Compatible) ?: return null
         checkWithAttachmentBuilder(expectsForActual.size <= 1, message = { "expected as maximum one `expect` for the actual" }) {
             withFirSymbolEntry("actual", firSymbol)
             withEntry("expectsForActualSize", expectsForActual.size.toString())

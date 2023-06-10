@@ -1,8 +1,8 @@
 fun box(): String {
-    val s = "captured";
+    konst s = "captured";
 
-    class A(val param: String = "OK") {
-        val s2 = s + param
+    class A(konst param: String = "OK") {
+        konst s2 = s + param
     }
 
     if (A().s2 != "capturedOK") return "fail 1: ${A().s2}"

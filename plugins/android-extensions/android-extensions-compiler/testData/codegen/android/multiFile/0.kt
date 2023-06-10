@@ -9,26 +9,26 @@ import kotlinx.android.synthetic.main.layout1.*
 class R {
     class id {
         companion object {
-            const val item_detail_container = 0
-            const val textView1 = 1
-            const val password = 2
-            const val textView2 = 3
-            const val passwordConfirmation = 4
-            const val login = 5
-            const val passwordField = 6
-            const val passwordCaption = 7
-            const val loginButton = 8
+            const konst item_detail_container = 0
+            const konst textView1 = 1
+            const konst password = 2
+            const konst textView2 = 3
+            const konst passwordConfirmation = 4
+            const konst login = 5
+            const konst passwordField = 6
+            const konst passwordCaption = 7
+            const konst loginButton = 8
          }
     }
 }
 
 class MyActivity(): Activity() {
-    val textViewWidget = TextView(this)
-    val editTextWidget = EditText(this)
-    val buttonWidget = Button(this)
-    val textViewWidget2 = TextView(this)
-    val editTextWidget2 = EditText(this)
-    val buttonWidget2 = Button(this)
+    konst textViewWidget = TextView(this)
+    konst editTextWidget = EditText(this)
+    konst buttonWidget = Button(this)
+    konst textViewWidget2 = TextView(this)
+    konst editTextWidget2 = EditText(this)
+    konst buttonWidget2 = Button(this)
 
     override fun <T : View> findViewById(id: Int): T? {
         return when (id) {

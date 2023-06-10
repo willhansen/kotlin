@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.statements
 
 class IrInterpreterCommonChecker : IrInterpreterChecker {
-    private val visitedStack = mutableListOf<IrElement>()
+    private konst visitedStack = mutableListOf<IrElement>()
 
     private inline fun IrElement.asVisited(crossinline block: () -> Boolean): Boolean {
         visitedStack += this
-        val result = block()
+        konst result = block()
         visitedStack.removeAt(visitedStack.lastIndex)
         return result
     }
@@ -38,9 +38,9 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     private fun visitConstructor(expression: IrFunctionAccessExpression, data: IrInterpreterCheckerData): Boolean {
-        val constructor = expression.symbol.owner
+        konst constructor = expression.symbol.owner
 
-        if (!data.mode.canEvaluateFunction(constructor)) return false
+        if (!data.mode.canEkonstuateFunction(constructor)) return false
         if (!visitValueArguments(expression, data)) return false
         return visitBodyIfNeeded(constructor, data) &&
                 constructor.parentAsClass.declarations.filterIsInstance<IrAnonymousInitializer>().all { it.accept(this, data) }
@@ -56,19 +56,19 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     override fun visitCall(expression: IrCall, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateExpression(expression)) return false
+        if (!data.mode.canEkonstuateExpression(expression)) return false
 
-        val owner = expression.symbol.owner
-        if (!data.mode.canEvaluateFunction(owner)) return false
+        konst owner = expression.symbol.owner
+        if (!data.mode.canEkonstuateFunction(owner)) return false
 
         if (expression.dispatchReceiver.isAccessToNotNullableObject()) {
             return expression.isGetterToConstVal()
         }
 
-        val dispatchReceiverComputable = expression.dispatchReceiver?.accept(this, data) ?: true
-        val extensionReceiverComputable = expression.extensionReceiver?.accept(this, data) ?: true
+        konst dispatchReceiverComputable = expression.dispatchReceiver?.accept(this, data) ?: true
+        konst extensionReceiverComputable = expression.extensionReceiver?.accept(this, data) ?: true
         if (!visitValueArguments(expression, data)) return false
-        val bodyComputable = visitBodyIfNeeded(owner, data)
+        konst bodyComputable = visitBodyIfNeeded(owner, data)
         return dispatchReceiverComputable && extensionReceiverComputable && bodyComputable
     }
 
@@ -77,7 +77,7 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     private fun visitValueArguments(expression: IrFunctionAccessExpression, data: IrInterpreterCheckerData): Boolean {
-        return (0 until expression.valueArgumentsCount)
+        return (0 until expression.konstueArgumentsCount)
             .map { expression.getValueArgument(it) }
             .none { it?.accept(this, data) == false }
     }
@@ -86,17 +86,17 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
         return visitStatements(body.statements, data)
     }
 
-    // We need this separate method to explicitly indicate that IrExpressionBody can be interpreted in any evaluation mode
+    // We need this separate method to explicitly indicate that IrExpressionBody can be interpreted in any ekonstuation mode
     override fun visitExpressionBody(body: IrExpressionBody, data: IrInterpreterCheckerData): Boolean {
         return body.expression.accept(this, data)
     }
 
     override fun visitBlock(expression: IrBlock, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateBlock(expression)) return false
+        if (!data.mode.canEkonstuateBlock(expression)) return false
 
         // `IrReturnableBlock` will be created from IrCall after inline. We should do basically the same check as for IrCall.
         if (expression is IrReturnableBlock) {
-            val inlinedBlock = expression.statements.singleOrNull() as? IrInlinedFunctionBlock
+            konst inlinedBlock = expression.statements.singleOrNull() as? IrInlinedFunctionBlock
             if (inlinedBlock != null) return inlinedBlock.inlineCall.accept(this, data)
         }
 
@@ -104,7 +104,7 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     override fun visitComposite(expression: IrComposite, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateComposite(expression)) return false
+        if (!data.mode.canEkonstuateComposite(expression)) return false
 
         return visitStatements(expression.statements, data)
     }
@@ -115,8 +115,8 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
 
     override fun visitConst(expression: IrConst<*>, data: IrInterpreterCheckerData): Boolean {
         if (expression.type.getUnsignedType() != null) {
-            val constructor = expression.type.classOrNull?.owner?.constructors?.singleOrNull() ?: return false
-            return data.mode.canEvaluateFunction(constructor)
+            konst constructor = expression.type.classOrNull?.owner?.constructors?.singleOrNull() ?: return false
+            return data.mode.canEkonstuateFunction(constructor)
         }
         return true
     }
@@ -133,11 +133,11 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
         return expression.arguments.all { arg ->
             when (arg) {
                 is IrGetObjectValue -> {
-                    val toString = arg.symbol.owner.declarations
+                    konst toString = arg.symbol.owner.declarations
                         .filterIsInstance<IrSimpleFunction>()
-                        .single { it.name.asString() == "toString" && it.valueParameters.isEmpty() && it.extensionReceiverParameter == null }
+                        .single { it.name.asString() == "toString" && it.konstueParameters.isEmpty() && it.extensionReceiverParameter == null }
 
-                    data.mode.canEvaluateFunction(toString) && visitBodyIfNeeded(toString, data)
+                    data.mode.canEkonstuateFunction(toString) && visitBodyIfNeeded(toString, data)
                 }
 
                 else -> arg.accept(this, data)
@@ -146,14 +146,14 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     override fun visitGetObjectValue(expression: IrGetObjectValue, data: IrInterpreterCheckerData): Boolean {
-        // to get object value we need nothing, but it will contain only fields with compile time annotation
+        // to get object konstue we need nothing, but it will contain only fields with compile time annotation
         return true
     }
 
     override fun visitGetEnumValue(expression: IrGetEnumValue, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateEnumValue(expression)) return false
+        if (!data.mode.canEkonstuateEnumValue(expression)) return false
 
-        // we want to avoid recursion in cases like "enum class E(val srt: String) { OK(OK.name) }"
+        // we want to avoid recursion in cases like "enum class E(konst srt: String) { OK(OK.name) }"
         if (visitedStack.contains(expression)) return true
         return expression.asVisited {
             expression.symbol.owner.initializerExpression?.accept(this, data) == true
@@ -165,13 +165,13 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     override fun visitSetValue(expression: IrSetValue, data: IrInterpreterCheckerData): Boolean {
-        return expression.value.accept(this, data)
+        return expression.konstue.accept(this, data)
     }
 
     override fun visitGetField(expression: IrGetField, data: IrInterpreterCheckerData): Boolean {
-        val owner = expression.symbol.owner
-        val property = owner.correspondingPropertySymbol?.owner
-        val fqName = owner.fqName
+        konst owner = expression.symbol.owner
+        konst property = owner.correspondingPropertySymbol?.owner
+        konst fqName = owner.fqName
         fun isJavaStaticWithPrimitiveOrString(): Boolean {
             return owner.origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB && owner.isStatic && owner.isFinal &&
                     (owner.type.isPrimitiveType() || owner.type.isStringClassType())
@@ -184,14 +184,14 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
                 isJavaStaticWithPrimitiveOrString() -> owner.initializer?.accept(this, data) == true
                 expression.receiver == null -> property?.isConst == true && owner.initializer?.accept(this, data) == true
                 owner.origin == IrDeclarationOrigin.PROPERTY_BACKING_FIELD && property?.isConst == true -> {
-                    val receiverComputable = (expression.receiver?.accept(this, data) ?: true)
+                    konst receiverComputable = (expression.receiver?.accept(this, data) ?: true)
                             || expression.isAccessToNotNullableObject()
-                    val initializerComputable = owner.initializer?.accept(this, data) ?: false
+                    konst initializerComputable = owner.initializer?.accept(this, data) ?: false
                     receiverComputable && initializerComputable
                 }
                 else -> {
-                    val declarations = owner.parent.getInnerDeclarations()
-                    val getter = declarations.filterIsInstance<IrProperty>().singleOrNull { it == property }?.getter ?: return@asVisited false
+                    konst declarations = owner.parent.getInnerDeclarations()
+                    konst getter = declarations.filterIsInstance<IrProperty>().singleOrNull { it == property }?.getter ?: return@asVisited false
                     visitedStack.contains(getter)
                 }
             }
@@ -201,10 +201,10 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     override fun visitSetField(expression: IrSetField, data: IrInterpreterCheckerData): Boolean {
         if (expression.accessesTopLevelOrObjectField()) return false
         //todo check receiver?
-        val property = expression.symbol.owner.correspondingPropertySymbol?.owner
-        val declarations = expression.symbol.owner.parent.getInnerDeclarations()
-        val setter = declarations.filterIsInstance<IrProperty>().single { it == property }.setter ?: return false
-        return visitedStack.contains(setter) && expression.value.accept(this, data)
+        konst property = expression.symbol.owner.correspondingPropertySymbol?.owner
+        konst declarations = expression.symbol.owner.parent.getInnerDeclarations()
+        konst setter = declarations.filterIsInstance<IrProperty>().single { it == property }.setter ?: return false
+        return visitedStack.contains(setter) && expression.konstue.accept(this, data)
     }
 
     override fun visitConstructorCall(expression: IrConstructorCall, data: IrInterpreterCheckerData): Boolean {
@@ -221,34 +221,34 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     override fun visitInstanceInitializerCall(expression: IrInstanceInitializerCall, data: IrInterpreterCheckerData): Boolean {
-        val irClass = expression.classSymbol.owner
-        val classProperties = irClass.declarations.filterIsInstance<IrProperty>()
-        val anonymousInitializer = irClass.declarations.filterIsInstance<IrAnonymousInitializer>().filter { !it.isStatic }
+        konst irClass = expression.classSymbol.owner
+        konst classProperties = irClass.declarations.filterIsInstance<IrProperty>()
+        konst anonymousInitializer = irClass.declarations.filterIsInstance<IrAnonymousInitializer>().filter { !it.isStatic }
 
         return anonymousInitializer.all { init -> init.body.accept(this, data) } && classProperties.all {
-            val propertyInitializer = it.backingField?.initializer?.expression
+            konst propertyInitializer = it.backingField?.initializer?.expression
             if ((propertyInitializer as? IrGetValue)?.origin == IrStatementOrigin.INITIALIZE_PROPERTY_FROM_PARAMETER) return@all true
             return@all (propertyInitializer?.accept(this, data) != false)
         }
     }
 
     override fun visitFunctionReference(expression: IrFunctionReference, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateCallableReference(expression)) return false
+        if (!data.mode.canEkonstuateCallableReference(expression)) return false
 
-        val owner = expression.symbol.owner
-        val dispatchReceiverComputable = expression.dispatchReceiver?.accept(this, data) ?: true
-        val extensionReceiverComputable = expression.extensionReceiver?.accept(this, data) ?: true
+        konst owner = expression.symbol.owner
+        konst dispatchReceiverComputable = expression.dispatchReceiver?.accept(this, data) ?: true
+        konst extensionReceiverComputable = expression.extensionReceiver?.accept(this, data) ?: true
 
-        if (!data.mode.canEvaluateFunction(owner)) return false
+        if (!data.mode.canEkonstuateFunction(owner)) return false
 
-        val bodyComputable = visitBodyIfNeeded(owner, data)
+        konst bodyComputable = visitBodyIfNeeded(owner, data)
         return dispatchReceiverComputable && extensionReceiverComputable && bodyComputable
     }
 
     override fun visitFunctionExpression(expression: IrFunctionExpression, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateFunctionExpression(expression)) return false
+        if (!data.mode.canEkonstuateFunctionExpression(expression)) return false
 
-        val body = expression.function.body ?: return false
+        konst body = expression.function.body ?: return false
         return expression.function.asVisited { body.accept(this, data) }
     }
 
@@ -257,7 +257,7 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
             IrTypeOperator.INSTANCEOF, IrTypeOperator.NOT_INSTANCEOF,
             IrTypeOperator.IMPLICIT_COERCION_TO_UNIT, IrTypeOperator.IMPLICIT_NOTNULL, IrTypeOperator.SAM_CONVERSION,
             IrTypeOperator.CAST, IrTypeOperator.IMPLICIT_CAST, IrTypeOperator.SAFE_CAST -> {
-                val operand = expression.typeOperand.classifierOrNull?.owner
+                konst operand = expression.typeOperand.classifierOrNull?.owner
                 if (operand is IrTypeParameter && !visitedStack.contains(operand.parent)) return false
                 expression.argument.accept(this, data)
             }
@@ -266,7 +266,7 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     override fun visitWhen(expression: IrWhen, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateExpression(expression)) return false
+        if (!data.mode.canEkonstuateExpression(expression)) return false
 
         return expression.branches.all { it.accept(this, data) }
     }
@@ -288,7 +288,7 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
     }
 
     override fun visitTry(aTry: IrTry, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateExpression(aTry)) return false
+        if (!data.mode.canEkonstuateExpression(aTry)) return false
 
         if (!aTry.tryResult.accept(this, data)) return false
         if (aTry.finallyExpression != null && aTry.finallyExpression?.accept(this, data) == false) return false
@@ -301,26 +301,26 @@ class IrInterpreterCommonChecker : IrInterpreterChecker {
 
     override fun visitReturn(expression: IrReturn, data: IrInterpreterCheckerData): Boolean {
         if (!visitedStack.contains(expression.returnTargetSymbol.owner)) return false
-        return expression.value.accept(this, data)
+        return expression.konstue.accept(this, data)
     }
 
     override fun visitThrow(expression: IrThrow, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateExpression(expression)) return false
+        if (!data.mode.canEkonstuateExpression(expression)) return false
 
-        return expression.value.accept(this, data)
+        return expression.konstue.accept(this, data)
     }
 
     override fun visitPropertyReference(expression: IrPropertyReference, data: IrInterpreterCheckerData): Boolean {
-        if (!data.mode.canEvaluateCallableReference(expression)) return false
+        if (!data.mode.canEkonstuateCallableReference(expression)) return false
 
-        val dispatchReceiverComputable = expression.dispatchReceiver?.accept(this, data) ?: true
-        val extensionReceiverComputable = expression.extensionReceiver?.accept(this, data) ?: true
+        konst dispatchReceiverComputable = expression.dispatchReceiver?.accept(this, data) ?: true
+        konst extensionReceiverComputable = expression.extensionReceiver?.accept(this, data) ?: true
 
-        val getterIsComputable = expression.getter?.let { data.mode.canEvaluateFunction(it.owner) } ?: true
+        konst getterIsComputable = expression.getter?.let { data.mode.canEkonstuateFunction(it.owner) } ?: true
         return dispatchReceiverComputable && extensionReceiverComputable && getterIsComputable
     }
 
     override fun visitClassReference(expression: IrClassReference, data: IrInterpreterCheckerData): Boolean {
-        return data.mode.canEvaluateClassReference(expression)
+        return data.mode.canEkonstuateClassReference(expression)
     }
 }

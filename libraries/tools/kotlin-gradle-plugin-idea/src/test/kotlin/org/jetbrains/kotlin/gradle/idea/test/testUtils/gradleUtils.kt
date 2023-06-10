@@ -33,7 +33,7 @@ fun Project.buildIdeaKpmProjectBinary(): IdeaKpmProjectBinaryContainer {
 }
 
 fun createKpmProject(): Pair<ProjectInternal, KotlinPm20ProjectExtension> {
-    val project = ProjectBuilder.builder().build() as ProjectInternal
+    konst project = ProjectBuilder.builder().build() as ProjectInternal
     project.plugins.apply(KotlinPm20PluginWrapper::class.java)
     project.gradle.startParameter.dependencyVerificationMode = DependencyVerificationMode.OFF
     project.repositories.mavenLocal()

@@ -5,6 +5,6 @@
 
 package org.jetbrains.kotlin.codegen.coroutines
 
-const val SUSPEND_FUNCTION_COMPLETION_PARAMETER_NAME = "\$completion"
-const val SUSPEND_CALL_RESULT_NAME = "\$result"
-const val ILLEGAL_STATE_ERROR_MESSAGE = "call to 'resume' before 'invoke' with coroutine"
+const konst SUSPEND_FUNCTION_COMPLETION_PARAMETER_NAME = "\$completion"
+const konst SUSPEND_CALL_RESULT_NAME = "\$result"
+const konst ILLEGAL_STATE_ERROR_MESSAGE = "call to 'resume' before 'invoke' with coroutine"

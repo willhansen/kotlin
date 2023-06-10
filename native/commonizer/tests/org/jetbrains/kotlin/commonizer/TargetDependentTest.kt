@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 class TargetDependentTest {
     @Test
     fun toMap() {
-        val targetDependent = TargetDependent(listOf(LeafCommonizerTarget("a"), LeafCommonizerTarget("b"))) {
+        konst targetDependent = TargetDependent(listOf(LeafCommonizerTarget("a"), LeafCommonizerTarget("b"))) {
             (it as LeafCommonizerTarget).name
         }
 
@@ -23,8 +23,8 @@ class TargetDependentTest {
 
     @Test
     fun `create from map`() {
-        val map = mapOf(LeafCommonizerTarget("a") to "a", LeafCommonizerTarget("b") to "b")
-        val targetDependent = map.toTargetDependent()
+        konst map = mapOf(LeafCommonizerTarget("a") to "a", LeafCommonizerTarget("b") to "b")
+        konst targetDependent = map.toTargetDependent()
 
         assertEquals(
             listOf(LeafCommonizerTarget("a"), LeafCommonizerTarget("b")),

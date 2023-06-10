@@ -2,36 +2,36 @@
 // FILE: A.kt
 // VERSION: 1
 
-const val bar = 17
-const val muc = "first"
+const konst bar = 17
+const konst muc = "first"
 
 object X {
-    const val tis = "second"
-    const val roo = 19
+    const konst tis = "second"
+    const konst roo = 19
 }
 
 class Y {
     companion object {
-        const val zeb = 23
-        const val loo = "third"
+        const konst zeb = 23
+        const konst loo = "third"
     }
 }
 
 // FILE: B.kt
 // VERSION: 2
 
-const val bar = 31
-const val muc = "fourth"
+const konst bar = 31
+const konst muc = "fourth"
 
 object X {
-    const val tis = "fifth"
-    const val roo = 37
+    const konst tis = "fifth"
+    const konst roo = 37
 }
 
 class Y {
     companion object {
-        const val zeb = 41
-        const val loo = "sixth"
+        const konst zeb = 41
+        const konst loo = "sixth"
     }
 }
 

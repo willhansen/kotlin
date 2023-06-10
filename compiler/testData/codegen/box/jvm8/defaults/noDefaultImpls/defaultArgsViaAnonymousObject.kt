@@ -10,6 +10,6 @@ interface A {
 }
 
 fun box(): String {
-    val x = object : A {}
+    konst x = object : A {}
     return x.foo()
 }

@@ -7,7 +7,7 @@ FILE: foo.kt
 
             private final var result: R|kotlin/Boolean| = Boolean(false)
                 private get(): R|kotlin/Boolean|
-                private set(value: R|kotlin/Boolean|): R|kotlin/Unit|
+                private set(konstue: R|kotlin/Boolean|): R|kotlin/Unit|
 
             public final fun bar(): R|kotlin/Boolean| {
                 ^bar this@R|/<anonymous>|.R|/<anonymous>.result|.R|kotlin/Boolean.not|()
@@ -19,6 +19,6 @@ FILE: foo.kt
 
         }
 
-        lval some: R|kotlin/Boolean| = Boolean(true)
+        lkonst some: R|kotlin/Boolean| = Boolean(true)
         ^foo R|<local>/some|.R|kotlin/Boolean.not|()
     }

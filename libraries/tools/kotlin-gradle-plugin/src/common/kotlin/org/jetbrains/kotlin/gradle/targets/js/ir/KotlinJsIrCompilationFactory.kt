@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.KotlinComp
 import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.KotlinJsCompilerOptionsFactory
 
 class KotlinJsIrCompilationFactory internal constructor(
-    override val target: KotlinOnlyTarget<KotlinJsIrCompilation>
+    override konst target: KotlinOnlyTarget<KotlinJsIrCompilation>
 ) : KotlinCompilationFactory<KotlinJsIrCompilation> {
-    override val itemClass: Class<KotlinJsIrCompilation>
+    override konst itemClass: Class<KotlinJsIrCompilation>
         get() = KotlinJsIrCompilation::class.java
 
-    private val compilationImplFactory: KotlinCompilationImplFactory = KotlinCompilationImplFactory(
+    private konst compilationImplFactory: KotlinCompilationImplFactory = KotlinCompilationImplFactory(
         compilerOptionsFactory = KotlinJsCompilerOptionsFactory,
         compilationFriendPathsResolver = DefaultKotlinCompilationFriendPathsResolver(
             friendArtifactResolver = DefaultKotlinCompilationFriendPathsResolver.FriendArtifactResolver { _ ->

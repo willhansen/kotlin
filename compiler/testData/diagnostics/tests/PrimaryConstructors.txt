@@ -19,7 +19,7 @@ public final class MyIterable</*0*/ T> : kotlin.collections.Iterable<T> {
 
 public final class X {
     public constructor X()
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -27,7 +27,7 @@ public final class X {
 
 public open class Y {
     public constructor Y()
-    public final val x: kotlin.Int = 2
+    public final konst x: kotlin.Int = 2
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -35,7 +35,7 @@ public open class Y {
 
 public final class Y1 {
     public constructor Y1()
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -43,7 +43,7 @@ public final class Y1 {
 
 public final class Z : Y {
     public constructor Z()
-    public final override /*1*/ /*fake_override*/ val x: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

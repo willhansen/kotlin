@@ -16,7 +16,7 @@
  * ISSUES: KT-28265
  */
 fun case_1(x: ClassWithCustomEquals) {
-    val y = null
+    konst y = null
     if (x == <!DEBUG_INFO_CONSTANT!>y<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithCustomEquals & kotlin.Nothing")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithCustomEquals & kotlin.Nothing"), DEBUG_INFO_SMARTCAST!>x<!>.<!UNREACHABLE_CODE!><!MISSING_DEPENDENCY_CLASS!>inv<!>()<!>
@@ -49,7 +49,7 @@ fun case_3(x: ClassWithCustomEquals, y: Nothing?) {
  * ISSUES: KT-28265
  */
 fun case_4(x: ClassWithCustomEquals) {
-    val y = null
+    konst y = null
     if (<!DEBUG_INFO_CONSTANT!>y<!> == x) {
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithCustomEquals & kotlin.Nothing")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithCustomEquals & kotlin.Nothing"), DEBUG_INFO_SMARTCAST!>x<!>.<!UNREACHABLE_CODE!><!MISSING_DEPENDENCY_CLASS!>inv<!>()<!>
@@ -74,7 +74,7 @@ fun case_5(x: ClassWithCustomEquals, y: Nothing?) {
  * ISSUES: KT-28265
  */
 fun case_6(x: ClassWithCustomEquals) {
-    val y = null
+    konst y = null
     if (x == <!DEBUG_INFO_CONSTANT!>y<!> == true) {
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithCustomEquals & kotlin.Nothing")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithCustomEquals & kotlin.Nothing"), DEBUG_INFO_SMARTCAST!>x<!>.<!UNREACHABLE_CODE!><!MISSING_DEPENDENCY_CLASS!>inv<!>()<!>

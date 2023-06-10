@@ -29,13 +29,13 @@ import org.jetbrains.kotlin.lexer.KtTokens
 // See old FE's [DeclarationsChecker]
 object FirMemberPropertiesChecker : FirClassChecker() {
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val info = declaration.collectInitializationInfo(context, reporter)
+        konst info = declaration.collectInitializationInfo(context, reporter)
         var reachedDeadEnd =
             (declaration as? FirControlFlowGraphOwner)?.controlFlowGraphReference?.controlFlowGraph?.enterNode?.isDead == true
         for (innerDeclaration in declaration.declarations) {
             if (innerDeclaration is FirProperty) {
-                val symbol = innerDeclaration.symbol
-                val isDefinitelyAssignedInConstructor = info?.get(symbol)?.isDefinitelyVisited() == true
+                konst symbol = innerDeclaration.symbol
+                konst isDefinitelyAssignedInConstructor = info?.get(symbol)?.isDefinitelyVisited() == true
                 checkProperty(declaration, innerDeclaration, isDefinitelyAssignedInConstructor, context, reporter, !reachedDeadEnd)
             }
             // Can't just look at each property's graph's enterNode because they may have no graph if there is no initializer.
@@ -45,13 +45,13 @@ object FirMemberPropertiesChecker : FirClassChecker() {
     }
 
     private fun FirClass.collectInitializationInfo(context: CheckerContext, reporter: DiagnosticReporter): PropertyInitializationInfo? {
-        val graph = (this as? FirControlFlowGraphOwner)?.controlFlowGraphReference?.controlFlowGraph ?: return null
-        val memberPropertySymbols = declarations.mapNotNullTo(mutableSetOf()) {
+        konst graph = (this as? FirControlFlowGraphOwner)?.controlFlowGraphReference?.controlFlowGraph ?: return null
+        konst memberPropertySymbols = declarations.mapNotNullTo(mutableSetOf()) {
             (it.symbol as? FirPropertySymbol)?.takeIf { symbol -> symbol.requiresInitialization(isForClassInitialization = true) }
         }
         if (memberPropertySymbols.isEmpty()) return null
         // TODO: merge with `FirPropertyInitializationAnalyzer` for fewer passes.
-        val data = PropertyInitializationInfoData(memberPropertySymbols, symbol, graph)
+        konst data = PropertyInitializationInfoData(memberPropertySymbols, symbol, graph)
         data.checkPropertyAccesses(isForClassInitialization = true, context, reporter)
         return data.getValue(graph.exitNode)[NormalPath]
     }
@@ -64,11 +64,11 @@ object FirMemberPropertiesChecker : FirClassChecker() {
         reporter: DiagnosticReporter,
         reachable: Boolean
     ) {
-        val source = property.source ?: return
+        konst source = property.source ?: return
         if (source.kind is KtFakeSourceElementKind) return
         // If multiple (potentially conflicting) modality modifiers are specified, not all modifiers are recorded at `status`.
         // So, our source of truth should be the full modifier list retrieved from the source.
-        val modifierList = property.source.getModifierList()
+        konst modifierList = property.source.getModifierList()
 
         checkPropertyInitializer(
             containingDeclaration,
@@ -81,8 +81,8 @@ object FirMemberPropertiesChecker : FirClassChecker() {
         )
         checkExpectDeclarationVisibilityAndBody(property, source, reporter, context)
 
-        val hasAbstractModifier = KtTokens.ABSTRACT_KEYWORD in modifierList
-        val isAbstract = property.isAbstract || hasAbstractModifier
+        konst hasAbstractModifier = KtTokens.ABSTRACT_KEYWORD in modifierList
+        konst isAbstract = property.isAbstract || hasAbstractModifier
         if (containingDeclaration.isInterface &&
             Visibilities.isPrivate(property.visibility) &&
             !isAbstract &&
@@ -114,7 +114,7 @@ object FirMemberPropertiesChecker : FirClassChecker() {
             }
         }
 
-        val hasOpenModifier = KtTokens.OPEN_KEYWORD in modifierList
+        konst hasOpenModifier = KtTokens.OPEN_KEYWORD in modifierList
         if (hasOpenModifier &&
             containingDeclaration.isInterface &&
             !hasAbstractModifier &&

@@ -54,7 +54,7 @@ sink:
 =====================
 == foo ==
 fun foo(b: B) : Int {
-    val o = object : A by b {}
+    konst o = object : A by b {}
     return o.foo()
 }
 ---------------------
@@ -63,8 +63,8 @@ L0:
     v(b: B)
     magic[FAKE_INITIALIZER](b: B) -> <v0>
     w(b|<v0>)
-  2 mark({ val o = object : A by b {} return o.foo() })
-    v(val o = object : A by b {})
+  2 mark({ konst o = object : A by b {} return o.foo() })
+    v(konst o = object : A by b {})
     mark(object : A by b {})
     r(b) -> <v1>
     magic[VALUE_CONSUMER](A by b|<v1>) -> <v2>

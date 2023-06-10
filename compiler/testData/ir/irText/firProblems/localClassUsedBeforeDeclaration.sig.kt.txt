@@ -14,7 +14,7 @@ fun box(): String
     //   Mangled name: #box(){}kotlin.String.<no name provided>{}a
     // CHECK JS_IR NATIVE:
     //   Mangled name: #box(){}.<no name provided>{}a
-    val a: A
+    konst a: A
       field
       // CHECK JVM_IR:
       //   Mangled name: #box(){}kotlin.String.<no name provided>#<get-a>(){}#box.<no name provided>.A
@@ -31,7 +31,7 @@ fun box(): String
       //   Mangled name: #box(){}kotlin.String.<no name provided>.A{}ok
       // CHECK JS_IR NATIVE:
       //   Mangled name: #box(){}.<no name provided>.A{}ok
-      val ok: String
+      konst ok: String
         field
         // CHECK JVM_IR:
         //   Mangled name: #box(){}kotlin.String.<no name provided>.A#<get-ok>(){}kotlin.String

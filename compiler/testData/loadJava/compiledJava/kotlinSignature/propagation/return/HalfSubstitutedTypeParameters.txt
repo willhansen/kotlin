@@ -13,7 +13,7 @@ public interface HalfSubstitutedTypeParameters {
     }
 
     public interface TrickyList</*0*/ X : kotlin.Any!, /*1*/ E : kotlin.Any!> : kotlin.collections.MutableList<E!> {
-        public abstract override /*1*/ /*fake_override*/ val size: kotlin.Int
+        public abstract override /*1*/ /*fake_override*/ konst size: kotlin.Int
         public abstract override /*1*/ /*fake_override*/ fun add(/*0*/ element: E!): kotlin.Boolean
         public abstract override /*1*/ /*fake_override*/ fun add(/*0*/ index: kotlin.Int, /*1*/ element: E!): kotlin.Unit
         public abstract override /*1*/ /*fake_override*/ fun addAll(/*0*/ index: kotlin.Int, /*1*/ elements: kotlin.collections.Collection<E!>): kotlin.Boolean

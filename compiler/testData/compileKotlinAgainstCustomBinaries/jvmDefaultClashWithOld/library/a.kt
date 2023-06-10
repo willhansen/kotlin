@@ -7,7 +7,7 @@ interface Check {
 
     var test: String
         get() = "123"
-        set(value) { value.length}
+        set(konstue) { konstue.length}
 }
 
 open class CheckClass : Check

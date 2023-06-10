@@ -19,7 +19,7 @@ internal class DefaultModulesProvider private constructor(
 
     internal class NativeModuleInfo(
         name: String,
-        val dependencies: Set<String>,
+        konst dependencies: Set<String>,
         cInteropAttributes: ModulesProvider.CInteropModuleAttributes?
     ) : ModuleInfo(name, cInteropAttributes)
 
@@ -27,26 +27,26 @@ internal class DefaultModulesProvider private constructor(
         fun onDuplicateLibrary(name: String)
 
         companion object {
-            val error = DuplicateLibraryHandler { name -> error("Duplicated libraries: $name") }
+            konst error = DuplicateLibraryHandler { name -> error("Duplicated libraries: $name") }
             fun warning(logger: Logger) = DuplicateLibraryHandler { name -> logger.warning("Duplicated libraries: $name") }
         }
     }
 
-    private val libraryMap: Map<String, NativeLibrary>
-    private val moduleInfoMap: Map<String, NativeModuleInfo>
+    private konst libraryMap: Map<String, NativeLibrary>
+    private konst moduleInfoMap: Map<String, NativeModuleInfo>
 
     init {
-        val libraryMap = mutableMapOf<String, NativeLibrary>()
-        val moduleInfoMap = mutableMapOf<String, NativeModuleInfo>()
+        konst libraryMap = mutableMapOf<String, NativeLibrary>()
+        konst moduleInfoMap = mutableMapOf<String, NativeModuleInfo>()
 
         libraries.forEach { library ->
-            val manifestData = library.manifestData
+            konst manifestData = library.manifestData
 
-            val name = manifestData.uniqueName
-            val dependencies = manifestData.dependencies.toSet()
+            konst name = manifestData.uniqueName
+            konst dependencies = manifestData.dependencies.toSet()
 
-            val cInteropAttributes = if (manifestData.isInterop) {
-                val packageFqName = manifestData.packageFqName ?: error("Main package FQ name not specified for module $name")
+            konst cInteropAttributes = if (manifestData.isInterop) {
+                konst packageFqName = manifestData.packageFqName ?: error("Main package FQ name not specified for module $name")
                 ModulesProvider.CInteropModuleAttributes(packageFqName, manifestData.exportForwardDeclarations)
             } else null
 
@@ -58,15 +58,15 @@ internal class DefaultModulesProvider private constructor(
         this.moduleInfoMap = moduleInfoMap
     }
 
-    override val moduleInfos: Collection<ModuleInfo> get() = moduleInfoMap.values
+    override konst moduleInfos: Collection<ModuleInfo> get() = moduleInfoMap.konstues
 
     override fun loadModuleMetadata(name: String): SerializedMetadata {
-        val library = libraryMap[name]?.library ?: error("No such library: $name")
+        konst library = libraryMap[name]?.library ?: error("No such library: $name")
 
-        val moduleHeader = library.moduleHeaderData
-        val fragmentNames = parseModuleHeader(moduleHeader).packageFragmentNameList.toSet()
-        val fragments = fragmentNames.map { fragmentName ->
-            val partNames = library.packageMetadataParts(fragmentName)
+        konst moduleHeader = library.moduleHeaderData
+        konst fragmentNames = parseModuleHeader(moduleHeader).packageFragmentNameList.toSet()
+        konst fragments = fragmentNames.map { fragmentName ->
+            konst partNames = library.packageMetadataParts(fragmentName)
             partNames.map { partName -> library.packageMetadata(fragmentName, partName) }
         }
 

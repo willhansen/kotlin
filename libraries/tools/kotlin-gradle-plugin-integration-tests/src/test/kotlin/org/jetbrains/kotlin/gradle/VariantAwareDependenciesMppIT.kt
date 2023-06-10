@@ -13,12 +13,12 @@ import org.junit.Test
 import kotlin.test.assertTrue
 
 class VariantAwareDependenciesMppIT : BaseGradleIT() {
-    private val gradleVersion = GradleVersionRequired.FOR_MPP_SUPPORT
+    private konst gradleVersion = GradleVersionRequired.FOR_MPP_SUPPORT
 
     @Test
     fun testJvmKtAppResolvesMppLib() {
-        val outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val innerProject = Project("simpleProject")
+        konst outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst innerProject = Project("simpleProject")
 
         with(outerProject) {
             embedProject(innerProject)
@@ -31,8 +31,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
     @Test
     fun testJsKtAppResolvesMppLib() {
-        val outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val innerProject = Project("kotlin2JsInternalTest")
+        konst outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst innerProject = Project("kotlin2JsInternalTest")
 
         with(outerProject) {
             embedProject(innerProject)
@@ -53,8 +53,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
     @Test
     fun testMppLibResolvesJvmKtApp() {
-        val outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val innerProject = Project("simpleProject")
+        konst outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst innerProject = Project("simpleProject")
 
         with(outerProject) {
             embedProject(innerProject)
@@ -66,8 +66,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
     @Test
     fun testMppLibResolvesJsKtApp() {
-        val outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val innerProject = Project("kotlin2JsInternalTest")
+        konst outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst innerProject = Project("kotlin2JsInternalTest")
 
         with(outerProject) {
             embedProject(innerProject)
@@ -79,8 +79,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
     @Test
     fun testNonKotlinJvmAppResolvesMppLib() {
-        val outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val innerProject = Project("simpleProject").apply {
+        konst outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst innerProject = Project("simpleProject").apply {
             setupWorkingDir(false)
             gradleBuildScript().modify {
                 it.checkedReplace("id \"org.jetbrains.kotlin.jvm\"", "")
@@ -88,7 +88,7 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
             gradleBuildScript().appendText(
                 // In Gradle 5.3+, the variants of a Kotlin MPP can't be disambiguated in a pure Java project's deprecated
-                // configurations that don't have a proper 'org.gradle.usage' attribute value, see KT-30378
+                // configurations that don't have a proper 'org.gradle.usage' attribute konstue, see KT-30378
                 "\n" + """
                 configurations {
                     configure([compile, runtime, testCompile, testRuntime, getByName('default')]) {
@@ -109,8 +109,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
     @Test
     fun testJvmKtAppResolvesJvmKtApp() {
-        val outerProject = Project("simpleProject", gradleVersion)
-        val innerProject = Project("jvmTarget") // cannot use simpleApp again, should be another project
+        konst outerProject = Project("simpleProject", gradleVersion)
+        konst innerProject = Project("jvmTarget") // cannot use simpleApp again, should be another project
 
         with(outerProject) {
             embedProject(innerProject)
@@ -128,9 +128,9 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
     @Test
     fun testMppResolvesJvmAndJsKtLibs() {
-        val outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val innerJvmProject = Project("simpleProject")
-        val innerJsProject = Project("kotlin2JsInternalTest")
+        konst outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst innerJvmProject = Project("simpleProject")
+        konst innerJsProject = Project("kotlin2JsInternalTest")
 
         with(outerProject) {
             embedProject(innerJvmProject)
@@ -161,8 +161,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
     @Test
     fun testJvmKtAppDependsOnMppTestRuntime() {
-        val outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val innerProject = Project("simpleProject")
+        konst outerProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst innerProject = Project("simpleProject")
 
         with(outerProject) {
             embedProject(innerProject)
@@ -180,8 +180,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
     @Test
     fun testKtAppResolvesOldMpp() {
-        val outerProject = Project("multiplatformProject")
-        val innerJvmProject = Project("simpleProject")
+        konst outerProject = Project("multiplatformProject")
+        konst innerJvmProject = Project("simpleProject")
 
         with(outerProject) {
             embedProject(innerJvmProject)
@@ -210,7 +210,7 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
                     group 'com.example.oldmpp'
                     version '1.0'
                     apply plugin: 'maven-publish'
-                    afterEvaluate {
+                    afterEkonstuate {
                         publishing {
                             repositories { maven { url "file://${'$'}{rootDir.absolutePath.replace('\\', '/')}/repo" } }
                             publications { kotlin(MavenPublication) { from(components.java) } }
@@ -279,14 +279,14 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
     @Test
     fun testCompileAndRuntimeResolutionOfElementsConfigurations() =
         with(Project("sample-app", gradleVersion, "new-mpp-lib-and-app")) {
-            val libProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+            konst libProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
             embedProject(libProject)
             gradleBuildScript().modify {
                 it.replace("'com.example:sample-lib:1.0'", "project('${libProject.projectName}')")
             }
 
-            val testGradleVersion = chooseWrapperVersionOrFinishTest()
-            val isAtLeastGradle75 = GradleVersion.version(testGradleVersion) >= GradleVersion.version("7.5")
+            konst testGradleVersion = chooseWrapperVersionOrFinishTest()
+            konst isAtLeastGradle75 = GradleVersion.version(testGradleVersion) >= GradleVersion.version("7.5")
 
             listOf("jvm6" to "Classpath", "nodeJs" to "Classpath").forEach { (target, suffix) ->
                 build("dependencyInsight", "--configuration", "${target}Compile$suffix", "--dependency", "sample-lib") {
@@ -325,8 +325,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 
         build("resolveCustom") {
             assertSuccessful()
-            val printedLine = output.lines().single { "###[" in it }.substringAfter("###")
-            val items = printedLine.removeSurrounding("[", "]").split(", ")
+            konst printedLine = output.lines().single { "###[" in it }.substringAfter("###")
+            konst items = printedLine.removeSurrounding("[", "]").split(", ")
             assertTrue(items.toString()) { items.any { "atomicfu-jvm" in it } }
         }
     }
@@ -334,7 +334,7 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
     @Test
     fun testResolveCompatibilityMetadataVariantWithNative() = with(Project("native-libraries")) {
         setupWorkingDir()
-        val nestedProjectName = "nested"
+        konst nestedProjectName = "nested"
         embedProject(Project("native-libraries"), nestedProjectName)
 
         projectDir.resolve("gradle.properties").appendText(
@@ -344,8 +344,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
             """
         )
 
-        val resolveConfigurationTaskName = "resolveConfiguration"
-        val marker = "###=>"
+        konst resolveConfigurationTaskName = "resolveConfiguration"
+        konst marker = "###=>"
 
         gradleBuildScript().appendText(
             "\n" + """
@@ -359,7 +359,7 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
         )
         build(resolveConfigurationTaskName) {
             assertSuccessful()
-            val output = output.lines().single { marker in it }.substringAfter(marker).removeSurrounding("[", "]").split(",")
+            konst output = output.lines().single { marker in it }.substringAfter(marker).removeSurrounding("[", "]").split(",")
             assertTrue { output.any { "$nestedProjectName-1.0.jar" in it } }
         }
     }
@@ -369,8 +369,8 @@ class VariantAwareDependenciesMppIT : BaseGradleIT() {
 internal fun BaseGradleIT.Project.embedProject(other: BaseGradleIT.Project, renameTo: String? = null) {
     setupWorkingDir()
     other.setupWorkingDir(false)
-    val tempDir = createTempDir(if (isWindows) "" else "BaseGradleIT")
-    val embeddedModuleName = renameTo ?: other.projectName
+    konst tempDir = createTempDir(if (isWindows) "" else "BaseGradleIT")
+    konst embeddedModuleName = renameTo ?: other.projectName
     try {
         other.projectDir.copyRecursively(tempDir)
         tempDir.copyRecursively(projectDir.resolve(embeddedModuleName))
@@ -380,7 +380,7 @@ internal fun BaseGradleIT.Project.embedProject(other: BaseGradleIT.Project, rena
     testCase.apply {
         gradleSettingsScript().appendText("\ninclude(\"$embeddedModuleName\")")
 
-        val embeddedBuildScript = gradleBuildScript(embeddedModuleName)
+        konst embeddedBuildScript = gradleBuildScript(embeddedModuleName)
         if (embeddedBuildScript.extension == "kts") {
             embeddedBuildScript.modify { it.replace(".version(\"$PLUGIN_MARKER_VERSION_PLACEHOLDER\")", "") }
         }

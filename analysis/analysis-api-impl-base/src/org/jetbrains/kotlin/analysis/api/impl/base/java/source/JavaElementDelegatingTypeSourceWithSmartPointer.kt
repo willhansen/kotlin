@@ -5,20 +5,20 @@ import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementSourceFac
 import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementTypeSource
 
 internal abstract class JavaElementDelegatingTypeSourceWithSmartPointer<PSI : PsiElement, TYPE : PsiType> : JavaElementTypeSource<TYPE>() {
-    abstract val psiPointer: SmartPsiElementPointer<out PSI>
+    abstract konst psiPointer: SmartPsiElementPointer<out PSI>
     abstract fun getType(psi: PSI): TYPE
 
-    override val type: TYPE
+    override konst type: TYPE
         get() {
-            val psi = psiPointer.element
+            konst psi = psiPointer.element
                 ?: error("Cannot restore $psiPointer")
             return getType(psi)
         }
 }
 
 internal class JavaElementDelegatingVariableReturnTypeSourceWithSmartPointer<TYPE : PsiType>(
-    override val psiPointer: SmartPsiElementPointer<out PsiVariable>,
-    override val factory: JavaElementSourceFactory,
+    override konst psiPointer: SmartPsiElementPointer<out PsiVariable>,
+    override konst factory: JavaElementSourceFactory,
 ) : JavaElementDelegatingTypeSourceWithSmartPointer<PsiVariable, TYPE>() {
 
     override fun getType(psi: PsiVariable): TYPE {
@@ -28,8 +28,8 @@ internal class JavaElementDelegatingVariableReturnTypeSourceWithSmartPointer<TYP
 }
 
 internal class JavaElementDelegatingMethodReturnTypeSourceWithSmartPointer<TYPE : PsiType>(
-    override val psiPointer: SmartPsiElementPointer<out PsiMethod>,
-    override val factory: JavaElementSourceFactory,
+    override konst psiPointer: SmartPsiElementPointer<out PsiMethod>,
+    override konst factory: JavaElementSourceFactory,
 ) : JavaElementDelegatingTypeSourceWithSmartPointer<PsiMethod, TYPE>() {
 
     override fun getType(psi: PsiMethod): TYPE {
@@ -38,8 +38,8 @@ internal class JavaElementDelegatingMethodReturnTypeSourceWithSmartPointer<TYPE 
     }
 }
 internal class JavaElementDelegatingExpressionTypeSourceWithSmartPointer<TYPE : PsiType>(
-    override val psiPointer: SmartPsiElementPointer<out PsiExpression>,
-    override val factory: JavaElementSourceFactory,
+    override konst psiPointer: SmartPsiElementPointer<out PsiExpression>,
+    override konst factory: JavaElementSourceFactory,
 ) : JavaElementDelegatingTypeSourceWithSmartPointer<PsiExpression, TYPE>() {
 
     override fun getType(psi: PsiExpression): TYPE {
@@ -50,9 +50,9 @@ internal class JavaElementDelegatingExpressionTypeSourceWithSmartPointer<TYPE : 
 
 
 internal class JavaElementDelegatingTypeParameterBoundTypeSourceWithSmartPointer<TYPE : PsiType>(
-    override val psiPointer: SmartPsiElementPointer<out PsiTypeParameter>,
-    private val boundIndex: Int,
-    override val factory: JavaElementSourceFactory,
+    override konst psiPointer: SmartPsiElementPointer<out PsiTypeParameter>,
+    private konst boundIndex: Int,
+    override konst factory: JavaElementSourceFactory,
 ) : JavaElementDelegatingTypeSourceWithSmartPointer<PsiTypeParameter, TYPE>() {
 
     override fun getType(psi: PsiTypeParameter): TYPE {

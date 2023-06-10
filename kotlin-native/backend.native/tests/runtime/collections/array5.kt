@@ -10,7 +10,7 @@ import kotlin.test.*
 import kotlinx.cinterop.*
 
 @Test fun arrayGet() {
-    val arr = Array(10) { 0 }
+    konst arr = Array(10) { 0 }
     assertEquals(0, arr[0])
     assertEquals(0, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -28,7 +28,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun arraySet() {
-    val arr = Array(10) { 0 }
+    konst arr = Array(10) { 0 }
     arr[0] = 1
     arr[9] = 1
     assertFailsWith<IndexOutOfBoundsException> {
@@ -46,7 +46,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGet() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0, arr[0])
     assertEquals(0, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -64,7 +64,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySet() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr[0] = 1
     arr[9] = 1
     assertFailsWith<IndexOutOfBoundsException> {
@@ -82,7 +82,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun uByteArrayGet() {
-    val arr = UByteArray(10) { 0U }
+    konst arr = UByteArray(10) { 0U }
     assertEquals(0U, arr[0])
     assertEquals(0U, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -100,7 +100,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun uByteArraySet() {
-    val arr = UByteArray(10) { 0U }
+    konst arr = UByteArray(10) { 0U }
     arr[0] = 1U
     arr[9] = 1U
     assertFailsWith<IndexOutOfBoundsException> {
@@ -118,7 +118,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun shortArrayGet() {
-    val arr = ShortArray(10) { 0 }
+    konst arr = ShortArray(10) { 0 }
     assertEquals(0, arr[0])
     assertEquals(0, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -136,7 +136,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun shortArraySet() {
-    val arr = ShortArray(10) { 0 }
+    konst arr = ShortArray(10) { 0 }
     arr[0] = 1
     arr[9] = 1
     assertFailsWith<IndexOutOfBoundsException> {
@@ -154,7 +154,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun uShortArrayGet() {
-    val arr = UShortArray(10) { 0U }
+    konst arr = UShortArray(10) { 0U }
     assertEquals(0U, arr[0])
     assertEquals(0U, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -172,7 +172,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun uShortArraySet() {
-    val arr = UShortArray(10) { 0U }
+    konst arr = UShortArray(10) { 0U }
     arr[0] = 1U
     arr[9] = 1U
     assertFailsWith<IndexOutOfBoundsException> {
@@ -190,7 +190,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun intArrayGet() {
-    val arr = IntArray(10) { 0 }
+    konst arr = IntArray(10) { 0 }
     assertEquals(0, arr[0])
     assertEquals(0, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -208,7 +208,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun intArraySet() {
-    val arr = IntArray(10) { 0 }
+    konst arr = IntArray(10) { 0 }
     arr[0] = 1
     arr[9] = 1
     assertFailsWith<IndexOutOfBoundsException> {
@@ -226,7 +226,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun uIntArrayGet() {
-    val arr = UIntArray(10) { 0U }
+    konst arr = UIntArray(10) { 0U }
     assertEquals(0U, arr[0])
     assertEquals(0U, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -244,7 +244,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun uIntArraySet() {
-    val arr = UIntArray(10) { 0U }
+    konst arr = UIntArray(10) { 0U }
     arr[0] = 1U
     arr[9] = 1U
     assertFailsWith<IndexOutOfBoundsException> {
@@ -262,7 +262,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun longArrayGet() {
-    val arr = LongArray(10) { 0 }
+    konst arr = LongArray(10) { 0 }
     assertEquals(0, arr[0])
     assertEquals(0, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -280,7 +280,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun longArraySet() {
-    val arr = LongArray(10) { 0 }
+    konst arr = LongArray(10) { 0 }
     arr[0] = 1
     arr[9] = 1
     assertFailsWith<IndexOutOfBoundsException> {
@@ -298,7 +298,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun uLongArrayGet() {
-    val arr = ULongArray(10) { 0U }
+    konst arr = ULongArray(10) { 0U }
     assertEquals(0U, arr[0])
     assertEquals(0U, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -316,7 +316,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun uLongArraySet() {
-    val arr = ULongArray(10) { 0U }
+    konst arr = ULongArray(10) { 0U }
     arr[0] = 1U
     arr[9] = 1U
     assertFailsWith<IndexOutOfBoundsException> {
@@ -334,7 +334,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun floatArrayGet() {
-    val arr = FloatArray(10) { 0.0f }
+    konst arr = FloatArray(10) { 0.0f }
     assertEquals(0.0f, arr[0])
     assertEquals(0.0f, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -352,7 +352,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun floatArraySet() {
-    val arr = FloatArray(10) { 0.0f }
+    konst arr = FloatArray(10) { 0.0f }
     arr[0] = 1.0f
     arr[9] = 1.0f
     assertFailsWith<IndexOutOfBoundsException> {
@@ -370,7 +370,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun doubleArrayGet() {
-    val arr = DoubleArray(10) { 0.0 }
+    konst arr = DoubleArray(10) { 0.0 }
     assertEquals(0.0, arr[0])
     assertEquals(0.0, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -388,7 +388,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun doubleArraySet() {
-    val arr = DoubleArray(10) { 0.0 }
+    konst arr = DoubleArray(10) { 0.0 }
     arr[0] = 1.0
     arr[9] = 1.0
     assertFailsWith<IndexOutOfBoundsException> {
@@ -406,7 +406,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun booleanArrayGet() {
-    val arr = BooleanArray(10) { false }
+    konst arr = BooleanArray(10) { false }
     assertEquals(false, arr[0])
     assertEquals(false, arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -424,7 +424,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun booleanArraySet() {
-    val arr = BooleanArray(10) { false }
+    konst arr = BooleanArray(10) { false }
     arr[0] = true
     arr[9] = true
     assertFailsWith<IndexOutOfBoundsException> {
@@ -442,7 +442,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun charArrayGet() {
-    val arr = CharArray(10) { '0' }
+    konst arr = CharArray(10) { '0' }
     assertEquals('0', arr[0])
     assertEquals('0', arr[9])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -460,7 +460,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun charArraySet() {
-    val arr = CharArray(10) { '0' }
+    konst arr = CharArray(10) { '0' }
     arr[0] = '1'
     arr[9] = '1'
     assertFailsWith<IndexOutOfBoundsException> {
@@ -478,7 +478,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetUByte() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0U, arr.getUByteAt(0))
     assertEquals(0U, arr.getUByteAt(9))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -496,7 +496,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetUByte() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setUByteAt(0, 1U)
     arr.setUByteAt(9, 1U)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -514,7 +514,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetChar() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0.toChar(), arr.getCharAt(0))
     assertEquals(0.toChar(), arr.getCharAt(8))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -535,7 +535,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetChar() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setCharAt(0, '1')
     arr.setCharAt(8, '1')
     assertFailsWith<IndexOutOfBoundsException> {
@@ -556,7 +556,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetShort() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0, arr.getShortAt(0))
     assertEquals(0, arr.getShortAt(8))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -577,7 +577,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetShort() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setShortAt(0, 0)
     arr.setShortAt(8, 0)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -598,7 +598,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetUShort() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0U, arr.getUShortAt(0))
     assertEquals(0U, arr.getUShortAt(8))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -619,7 +619,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetUShort() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setUShortAt(0, 0U)
     arr.setUShortAt(8, 0U)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -640,7 +640,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetInt() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0, arr.getIntAt(0))
     assertEquals(0, arr.getIntAt(6))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -661,7 +661,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetInt() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setIntAt(0, 1)
     arr.setIntAt(6, 1)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -682,7 +682,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetUInt() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0U, arr.getUIntAt(0))
     assertEquals(0U, arr.getUIntAt(6))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -703,7 +703,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetUInt() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setUIntAt(0, 1U)
     arr.setUIntAt(6, 1U)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -724,7 +724,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetLong() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0, arr.getLongAt(0))
     assertEquals(0, arr.getLongAt(2))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -745,7 +745,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetLong() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setLongAt(0, 1)
     arr.setLongAt(2, 1)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -766,7 +766,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetULong() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0U, arr.getULongAt(0))
     assertEquals(0U, arr.getULongAt(2))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -787,7 +787,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetULong() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setULongAt(0, 1U)
     arr.setULongAt(2, 1U)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -808,7 +808,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetFloat() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0.0f, arr.getFloatAt(0))
     assertEquals(0.0f, arr.getFloatAt(6))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -829,7 +829,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetFloat() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setFloatAt(0, 1.0f)
     arr.setFloatAt(6, 1.0f)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -850,7 +850,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArrayGetDouble() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     assertEquals(0.0, arr.getDoubleAt(0))
     assertEquals(0.0, arr.getDoubleAt(2))
     assertFailsWith<IndexOutOfBoundsException> {
@@ -871,7 +871,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun byteArraySetDouble() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.setDoubleAt(0, 1.0)
     arr.setDoubleAt(2, 1.0)
     assertFailsWith<IndexOutOfBoundsException> {
@@ -892,8 +892,8 @@ import kotlinx.cinterop.*
 }
 
 @Test fun immutableBlobToByteArray() {
-    val blob = immutableBlobOf(0, 0)
-    val arr = blob.toByteArray(0, 1)
+    konst blob = immutableBlobOf(0, 0)
+    konst arr = blob.toByteArray(0, 1)
     assertEquals(1, arr.size)
     assertEquals(0, arr[0])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -914,8 +914,8 @@ import kotlinx.cinterop.*
 }
 
 @Test fun immutableBlobToUByteArray() {
-    val blob = immutableBlobOf(0, 0)
-    val arr = blob.toUByteArray(0, 1)
+    konst blob = immutableBlobOf(0, 0)
+    konst arr = blob.toUByteArray(0, 1)
     assertEquals(1, arr.size)
     assertEquals(0U, arr[0])
     assertFailsWith<IndexOutOfBoundsException> {
@@ -936,8 +936,8 @@ import kotlinx.cinterop.*
 }
 
 @Test fun immutableBlobAsCPointer() {
-    val blob = immutableBlobOf(0, 0)
-    assertEquals(0, blob.asCPointer(0).pointed.value)
+    konst blob = immutableBlobOf(0, 0)
+    assertEquals(0, blob.asCPointer(0).pointed.konstue)
     assertFailsWith<IndexOutOfBoundsException> {
         blob.asCPointer(10)
     }
@@ -953,8 +953,8 @@ import kotlinx.cinterop.*
 }
 
 @Test fun immutableBlobAsUCPointer() {
-    val blob = immutableBlobOf(0, 0)
-    assertEquals(0U, blob.asUCPointer(0).pointed.value)
+    konst blob = immutableBlobOf(0, 0)
+    assertEquals(0U, blob.asUCPointer(0).pointed.konstue)
     assertFailsWith<IndexOutOfBoundsException> {
         blob.asUCPointer(10)
     }

@@ -9,9 +9,9 @@ import kotlin.test.*
 
 @Test
 fun runTest() {
-  val list0 = _arrayOf("K", "o", "t", "l", "i", "n")
-  val list1 = _arrayOf("l", "a","n", "g", "u", "a", "g", "e")
-  val list = foo(list0, list1)
+  konst list0 = _arrayOf("K", "o", "t", "l", "i", "n")
+  konst list1 = _arrayOf("l", "a","n", "g", "u", "a", "g", "e")
+  konst list = foo(list0, list1)
   println(list.toString())
 }
 

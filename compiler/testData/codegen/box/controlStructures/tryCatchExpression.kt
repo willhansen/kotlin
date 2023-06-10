@@ -10,7 +10,7 @@ fun foo() {
         return
     }
 
-    val t = try {
+    konst t = try {
         log += "4"
         mightThrow2()
         log += "5"
@@ -19,7 +19,7 @@ fun foo() {
         return
     }
 
-    val x = try {
+    konst x = try {
         log += "7"
         mightThrow3()
         log += "8"

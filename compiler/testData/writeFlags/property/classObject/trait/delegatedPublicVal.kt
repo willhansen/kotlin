@@ -8,7 +8,7 @@ class TestDelegate() {
 
 interface Test {
   companion object {
-    public val prop: Int by TestDelegate()
+    public konst prop: Int by TestDelegate()
   }
 }
 

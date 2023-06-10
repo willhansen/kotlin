@@ -11,40 +11,40 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.platform.toTargetPlatform
 
 sealed class NativePlatform : SimplePlatform("Native") {
-    override val oldFashionedDescription: String
+    override konst oldFashionedDescription: String
         get() = toString() + " "
 }
 
 object NativePlatformUnspecifiedTarget : NativePlatform() {
-    override val targetName: String
+    override konst targetName: String
         get() = "general"
 }
 
-data class NativePlatformWithTarget(val target: KonanTarget) : NativePlatform() {
+data class NativePlatformWithTarget(konst target: KonanTarget) : NativePlatform() {
     override fun toString() = super.toString() // override the method generated for data class
 
-    override val targetName: String
+    override konst targetName: String
         get() = target.visibleName
 }
 
 @Suppress("DEPRECATION_ERROR")
 object NativePlatforms {
-    private val predefinedNativeTargetToSimpleNativePlatform: Map<KonanTarget, NativePlatformWithTarget> =
-        KonanTarget.predefinedTargets.values.associateWith { NativePlatformWithTarget(it) }
+    private konst predefinedNativeTargetToSimpleNativePlatform: Map<KonanTarget, NativePlatformWithTarget> =
+        KonanTarget.predefinedTargets.konstues.associateWith { NativePlatformWithTarget(it) }
 
-    private val predefinedNativeTargetToNativePlatform: Map<KonanTarget, TargetPlatform> =
+    private konst predefinedNativeTargetToNativePlatform: Map<KonanTarget, TargetPlatform> =
         predefinedNativeTargetToSimpleNativePlatform.mapValues { (_, simplePlatform) -> simplePlatform.toTargetPlatform() }
 
-    val unspecifiedNativePlatform: TargetPlatform
+    konst unspecifiedNativePlatform: TargetPlatform
         get() = CompatNativePlatform
 
-    val allNativePlatforms: List<TargetPlatform> = listOf(unspecifiedNativePlatform) + predefinedNativeTargetToNativePlatform.values
+    konst allNativePlatforms: List<TargetPlatform> = listOf(unspecifiedNativePlatform) + predefinedNativeTargetToNativePlatform.konstues
 
     fun nativePlatformBySingleTarget(target: KonanTarget): TargetPlatform =
         predefinedNativeTargetToNativePlatform[target] ?: unspecifiedNativePlatform
 
     fun nativePlatformByTargets(targets: Collection<KonanTarget>): TargetPlatform {
-        val simplePlatforms = targets.mapNotNullTo(HashSet()) { predefinedNativeTargetToSimpleNativePlatform[it] }
+        konst simplePlatforms = targets.mapNotNullTo(HashSet()) { predefinedNativeTargetToSimpleNativePlatform[it] }
         return when (simplePlatforms.size) {
             0 -> unspecifiedNativePlatform
             1 -> nativePlatformBySingleTarget(simplePlatforms.first().target)
@@ -62,12 +62,12 @@ object NativePlatforms {
     object CompatNativePlatform : TargetPlatform(setOf(NativePlatformUnspecifiedTarget)),
         // Needed for backward compatibility, because old code uses INSTANCEOF checks instead of calling extensions
         org.jetbrains.kotlin.resolve.konan.platform.KonanPlatform {
-        override val platformName: String
+        override konst platformName: String
             get() = "Native"
     }
 }
 
 fun TargetPlatform?.isNative(): Boolean = this?.isNotEmpty() == true && all { it is NativePlatform }
 
-private val legacyNativePlatformUnspecifiedTargetSerializedRepresentation = "${NativePlatformUnspecifiedTarget.platformName} []"
+private konst legacyNativePlatformUnspecifiedTargetSerializedRepresentation = "${NativePlatformUnspecifiedTarget.platformName} []"
 fun NativePlatformUnspecifiedTarget.legacySerializeToString(): String = legacyNativePlatformUnspecifiedTargetSerializedRepresentation

@@ -7,11 +7,11 @@ class Delegate {
 }
 
 class B {
-    private var value: Int by Delegate()
+    private var konstue: Int by Delegate()
 
     public fun test() {
         fun foo() {
-            value = 1
+            konstue = 1
         }
         foo()
     }

@@ -2,12 +2,12 @@
 // FIR status: KT-46419, ILT conversions to Byte and Short are not supported by design
 
 fun box(): String {
-    val a1: Byte = 1.unaryMinus()
-    val a2: Short = 1.unaryMinus()
-    val a3: Int = 1.unaryMinus()
-    val a4: Long = 1.unaryMinus()
-    val a5: Double = 1.0.unaryMinus()
-    val a6: Float = 1f.unaryMinus()
+    konst a1: Byte = 1.unaryMinus()
+    konst a2: Short = 1.unaryMinus()
+    konst a3: Int = 1.unaryMinus()
+    konst a4: Long = 1.unaryMinus()
+    konst a5: Double = 1.0.unaryMinus()
+    konst a6: Float = 1f.unaryMinus()
 
     if (a1 != (-1).toByte()) return "fail 1"
     if (a2 != (-1).toShort()) return "fail -1"

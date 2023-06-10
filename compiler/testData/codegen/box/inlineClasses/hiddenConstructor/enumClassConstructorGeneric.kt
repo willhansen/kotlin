@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val string: T)
+konstue class S<T: String>(konst string: T)
 
-enum class Test(val s: S<String>) {
+enum class Test(konst s: S<String>) {
     OK(S("OK"))
 }
 

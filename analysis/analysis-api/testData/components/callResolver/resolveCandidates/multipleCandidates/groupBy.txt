@@ -10,8 +10,8 @@ KtApplicableCallCandidateInfo:
       signature = KtFunctionLikeSignature:
         receiverType = kotlin.collections.Iterable<kotlin.collections.IndexedValue<kotlin.Int>>
         returnType = kotlin.collections.Map<kotlin.Int, kotlin.collections.List<kotlin.Int>>
-        symbol = kotlin/collections/groupBy(<extension receiver>: kotlin.collections.Iterable<T>, keySelector: kotlin.Function1<T, K>, valueTransform: kotlin.Function1<T, V>): kotlin.collections.Map<K, kotlin.collections.List<V>>
-        valueParameters = [
+        symbol = kotlin/collections/groupBy(<extension receiver>: kotlin.collections.Iterable<T>, keySelector: kotlin.Function1<T, K>, konstueTransform: kotlin.Function1<T, V>): kotlin.collections.Map<K, kotlin.collections.List<V>>
+        konstueParameters = [
           KtVariableLikeSignature:
             name = keySelector
             receiverType = null
@@ -19,10 +19,10 @@ KtApplicableCallCandidateInfo:
             symbol = keySelector: kotlin.Function1<T, K>
             callableIdIfNonLocal = null,
           KtVariableLikeSignature:
-            name = valueTransform
+            name = konstueTransform
             receiverType = null
             returnType = kotlin.Function1<kotlin.collections.IndexedValue<kotlin.Int>, kotlin.Int>
-            symbol = valueTransform: kotlin.Function1<T, V>
+            symbol = konstueTransform: kotlin.Function1<T, V>
             callableIdIfNonLocal = null
         ]
         callableIdIfNonLocal = kotlin/collections/groupBy
@@ -32,17 +32,17 @@ KtApplicableCallCandidateInfo:
       V -> (kotlin.Int)
     }
     argumentMapping = {
-      { (_, value) -> value } -> (KtVariableLikeSignature:
+      { (_, konstue) -> konstue } -> (KtVariableLikeSignature:
         name = keySelector
         receiverType = null
         returnType = kotlin.Function1<kotlin.collections.IndexedValue<kotlin.Int>, kotlin.Int>
         symbol = keySelector: kotlin.Function1<T, K>
         callableIdIfNonLocal = null),
       { (idx, _) -> idx } -> (KtVariableLikeSignature:
-        name = valueTransform
+        name = konstueTransform
         receiverType = null
         returnType = kotlin.Function1<kotlin.collections.IndexedValue<kotlin.Int>, kotlin.Int>
-        symbol = valueTransform: kotlin.Function1<T, V>
+        symbol = konstueTransform: kotlin.Function1<T, V>
         callableIdIfNonLocal = null)
     }
   isInBestCandidates = true
@@ -61,7 +61,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.collections.Iterable<kotlin.collections.IndexedValue<kotlin.Int>>
         returnType = kotlin.collections.Map<kotlin.Int, kotlin.collections.List<kotlin.collections.IndexedValue<kotlin.Int>>>
         symbol = kotlin/collections/groupBy(<extension receiver>: kotlin.collections.Iterable<T>, keySelector: kotlin.Function1<T, K>): kotlin.collections.Map<K, kotlin.collections.List<T>>
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = keySelector
             receiverType = null
@@ -75,7 +75,7 @@ KtInapplicableCallCandidateInfo:
       K -> (kotlin.Int)
     }
     argumentMapping = {
-      { (_, value) -> value } -> (KtVariableLikeSignature:
+      { (_, konstue) -> konstue } -> (KtVariableLikeSignature:
         name = keySelector
         receiverType = null
         returnType = kotlin.Function1<kotlin.collections.IndexedValue<kotlin.Int>, kotlin.Int>
@@ -85,7 +85,7 @@ KtInapplicableCallCandidateInfo:
   isInBestCandidates = false
 
 KtInapplicableCallCandidateInfo:
-  diagnostic = ERROR<INAPPLICABLE_CANDIDATE: Inapplicable candidate(s): fun <K> List<Pair<Int, Int>>.groupBy(keySelector: (Pair<Int, Int>) -> K, valueTransform: (Pair<Int, Int>) -> Int): Map<K, List<Int>>>
+  diagnostic = ERROR<INAPPLICABLE_CANDIDATE: Inapplicable candidate(s): fun <K> List<Pair<Int, Int>>.groupBy(keySelector: (Pair<Int, Int>) -> K, konstueTransform: (Pair<Int, Int>) -> Int): Map<K, List<Int>>>
   candidate = KtSimpleFunctionCall:
     isImplicitInvoke = false
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
@@ -97,8 +97,8 @@ KtInapplicableCallCandidateInfo:
       signature = KtFunctionLikeSignature:
         receiverType = kotlin.collections.List<kotlin.Pair<kotlin.Int, kotlin.Int>>
         returnType = kotlin.collections.Map<kotlin.collections.IndexedValue<kotlin.Int>, kotlin.collections.List<kotlin.Int>>
-        symbol = /groupBy(<extension receiver>: kotlin.collections.List<kotlin.Pair<kotlin.Int, kotlin.Int>>, keySelector: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, K>, valueTransform: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.Int>): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Int>>
-        valueParameters = [
+        symbol = /groupBy(<extension receiver>: kotlin.collections.List<kotlin.Pair<kotlin.Int, kotlin.Int>>, keySelector: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, K>, konstueTransform: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.Int>): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Int>>
+        konstueParameters = [
           KtVariableLikeSignature:
             name = keySelector
             receiverType = null
@@ -106,10 +106,10 @@ KtInapplicableCallCandidateInfo:
             symbol = keySelector: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, K>
             callableIdIfNonLocal = null,
           KtVariableLikeSignature:
-            name = valueTransform
+            name = konstueTransform
             receiverType = null
             returnType = kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.Int>
-            symbol = valueTransform: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.Int>
+            symbol = konstueTransform: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.Int>
             callableIdIfNonLocal = null
         ]
         callableIdIfNonLocal = /groupBy
@@ -117,17 +117,17 @@ KtInapplicableCallCandidateInfo:
       K -> (kotlin.collections.IndexedValue<kotlin.Int>)
     }
     argumentMapping = {
-      { (_, value) -> value } -> (KtVariableLikeSignature:
+      { (_, konstue) -> konstue } -> (KtVariableLikeSignature:
         name = keySelector
         receiverType = null
         returnType = kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.collections.IndexedValue<kotlin.Int>>
         symbol = keySelector: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, K>
         callableIdIfNonLocal = null),
       { (idx, _) -> idx } -> (KtVariableLikeSignature:
-        name = valueTransform
+        name = konstueTransform
         receiverType = null
         returnType = kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.Int>
-        symbol = valueTransform: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.Int>
+        symbol = konstueTransform: kotlin.Function1<kotlin.Pair<kotlin.Int, kotlin.Int>, kotlin.Int>
         callableIdIfNonLocal = null)
     }
   isInBestCandidates = false

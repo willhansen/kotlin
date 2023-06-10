@@ -1,5 +1,5 @@
 package lib
 
-class Box(val value: String)
+class Box(konst konstue: String)
 
 inline fun <T> get(block: () -> T): T = block()

@@ -13,15 +13,15 @@ operator fun getValue(t: Any?, p: KProperty<*>): Int = 1
 =====================
 == foo ==
 fun foo(): Int {
-    val prop: Int by Delegate()
+    konst prop: Int by Delegate()
     return prop
 }
 ---------------------
-                                              <v0>: Int   NEW: magic[UNRECOGNIZED_WRITE_RHS](val prop: Int by Delegate()) -> <v0>
-                                              <v2>: Int   NEW: magic[FAKE_INITIALIZER](val prop: Int by Delegate()) -> <v2>
-                                              <v3>: *     NEW: magic[VALUE_CONSUMER](val prop: Int by Delegate()|<v1>) -> <v3>
+                                              <v0>: Int   NEW: magic[UNRECOGNIZED_WRITE_RHS](konst prop: Int by Delegate()) -> <v0>
+                                              <v2>: Int   NEW: magic[FAKE_INITIALIZER](konst prop: Int by Delegate()) -> <v2>
+                                              <v3>: *     NEW: magic[VALUE_CONSUMER](konst prop: Int by Delegate()|<v1>) -> <v3>
 Delegate()                                    <v1>: *     NEW: call(Delegate(), <init>) -> <v1>
 prop                                          <v4>: Int   NEW: r(prop) -> <v4>
 return prop                                   !<v5>: *
-{ val prop: Int by Delegate() return prop }   !<v5>: *    COPY
+{ konst prop: Int by Delegate() return prop }   !<v5>: *    COPY
 =====================

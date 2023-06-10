@@ -6,14 +6,14 @@
 import kotlin.contracts.*
 
 fun foo(y: Boolean) {
-    val x: Int = 42
+    konst x: Int = 42
     <!CONTRACT_NOT_ALLOWED("Contract should be the first statement")!>contract<!> {
         returns() implies y
     }
 }
 
 inline fun case1(block: () -> Unit) {
-    val contracts = listOf(
+    konst contracts = listOf(
         <!CONTRACT_NOT_ALLOWED!>contract<!> {
             callsInPlace(block, InvocationKind.EXACTLY_ONCE)
         }, <!CONTRACT_NOT_ALLOWED!>contract<!> {
@@ -40,7 +40,7 @@ fun case_3(block: () -> Unit) {
 }
 
 inline fun case_4(number: Int?): Boolean {
-    val cond = number != null
+    konst cond = number != null
     <!CONTRACT_NOT_ALLOWED!>contract<!> {
         returns(false) implies (cond)
     } as ContractBuilder
@@ -58,7 +58,7 @@ inline fun case_5(cond: Boolean): Boolean {
 
 inline fun case_6(cond: Boolean): Boolean {
     run {
-        val x = 10
+        konst x = 10
         <!CONTRACT_NOT_ALLOWED, CONTRACT_NOT_ALLOWED!>contract<!> {
             returns(true) implies (cond)
         }

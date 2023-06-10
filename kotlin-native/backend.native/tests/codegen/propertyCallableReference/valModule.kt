@@ -3,13 +3,13 @@
  * that can be found in the LICENSE file.
  */
 
-package codegen.propertyCallableReference.valModule
+package codegen.propertyCallableReference.konstModule
 
 import kotlin.test.*
 
-val x = 42
+konst x = 42
 
 @Test fun runTest() {
-    val p = ::x
+    konst p = ::x
     println(p.get())
 }

@@ -5,22 +5,22 @@
 
 package org.jetbrains.kotlin.fir.tree.generator.model
 
-private const val DEFAULT_BUILDER_PACKAGE = "org.jetbrains.kotlin.fir.tree.builder"
+private const konst DEFAULT_BUILDER_PACKAGE = "org.jetbrains.kotlin.fir.tree.builder"
 
 sealed class Builder : FieldContainer, Importable {
-    val parents: MutableList<IntermediateBuilder> = mutableListOf()
-    val usedTypes: MutableList<Importable> = mutableListOf()
-    abstract override val allFields: List<FieldWithDefault>
-    abstract val uselessFields: List<FieldWithDefault>
+    konst parents: MutableList<IntermediateBuilder> = mutableListOf()
+    konst usedTypes: MutableList<Importable> = mutableListOf()
+    abstract override konst allFields: List<FieldWithDefault>
+    abstract konst uselessFields: List<FieldWithDefault>
 
-    abstract override val packageName: String
+    abstract override konst packageName: String
 
     override fun get(fieldName: String): FieldWithDefault {
         return allFields.firstOrNull { it.name == fieldName }
             ?: throw IllegalArgumentException("Builder $type doesn't contains field $fieldName")
     }
 
-    private val fieldsFromParentIndex: Map<String, Boolean> by lazy {
+    private konst fieldsFromParentIndex: Map<String, Boolean> by lazy {
         mutableMapOf<String, Boolean>().apply {
             for (field in allFields + uselessFields) {
                 this[field.name] = parents.any { field.name in it.allFields.map { it.name } }
@@ -31,38 +31,38 @@ sealed class Builder : FieldContainer, Importable {
     fun isFromParent(field: Field): Boolean = fieldsFromParentIndex.getValue(field.name)
 }
 
-class LeafBuilder(val implementation: Implementation) : Builder() {
-    override val type: String
+class LeafBuilder(konst implementation: Implementation) : Builder() {
+    override konst type: String
         get() = if (implementation.name != null) {
             "${implementation.name}Builder"
         } else {
             "${implementation.element.type}Builder"
         }
 
-    override val allFields: List<FieldWithDefault> by lazy { implementation.fieldsWithoutDefault }
+    override konst allFields: List<FieldWithDefault> by lazy { implementation.fieldsWithoutDefault }
 
-    override val uselessFields: List<FieldWithDefault> by lazy {
-        val fieldsFromParents = parents.flatMap { it.allFields }.distinct()
-        val fieldsFromImplementation = implementation.allFields
+    override konst uselessFields: List<FieldWithDefault> by lazy {
+        konst fieldsFromParents = parents.flatMap { it.allFields }.distinct()
+        konst fieldsFromImplementation = implementation.allFields
         (fieldsFromImplementation - allFields).filter { it in fieldsFromParents }
     }
 
-    override val packageName: String = implementation.packageName.replace(".impl", ".builder")
+    override konst packageName: String = implementation.packageName.replace(".impl", ".builder")
     var isOpen: Boolean = false
     var wantsCopy: Boolean = false
 }
 
-class IntermediateBuilder(override val type: String) : Builder() {
-    val fields: MutableList<FieldWithDefault> = mutableListOf()
+class IntermediateBuilder(override konst type: String) : Builder() {
+    konst fields: MutableList<FieldWithDefault> = mutableListOf()
     var materializedElement: Element? = null
 
-    override val allFields: List<FieldWithDefault> by lazy {
+    override konst allFields: List<FieldWithDefault> by lazy {
         mutableSetOf<FieldWithDefault>().apply {
             parents.forEach { this += it.allFields }
             this += fields
         }.toList()
     }
 
-    override val uselessFields: List<FieldWithDefault> = emptyList()
+    override konst uselessFields: List<FieldWithDefault> = emptyList()
     override var packageName: String = DEFAULT_BUILDER_PACKAGE
 }

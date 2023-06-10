@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T: Any>(val x: T) {
+konstue class Foo<T: Any>(konst x: T) {
     fun bar() {}
 }
 
@@ -15,7 +15,7 @@ fun <T: Any, K: Any> transform(f: Foo<T>): Foo<K> {
 }
 
 fun box(): String {
-    val f = Foo<Int>(42)
-    val t = transform<Int, Number>(f)
+    konst f = Foo<Int>(42)
+    konst t = transform<Int, Number>(f)
     return if (t.x !is Number) "Fail" else "OK"
 }

@@ -23,27 +23,27 @@ import kotlin.time.Duration.Companion.seconds
 /**
  * The tested and the host Kotlin/Native targets.
  */
-internal class KotlinNativeTargets(val testTarget: KonanTarget, val hostTarget: KonanTarget) {
+internal class KotlinNativeTargets(konst testTarget: KonanTarget, konst hostTarget: KonanTarget) {
     fun areDifferentTargets() = testTarget != hostTarget
 }
 
 /**
  * The Kotlin/Native home.
  */
-internal class KotlinNativeHome(val dir: File) {
-    val librariesDir: File = dir.resolve("klib")
-    val stdlibFile: File = librariesDir.resolve("common/stdlib")
-    val properties: Properties by lazy {
+internal class KotlinNativeHome(konst dir: File) {
+    konst librariesDir: File = dir.resolve("klib")
+    konst stdlibFile: File = librariesDir.resolve("common/stdlib")
+    konst properties: Properties by lazy {
         dir.resolve("konan/konan.properties").inputStream().use { Properties().apply { load(it) } }
     }
 }
 
 internal class LLDB(nativeHome: KotlinNativeHome) {
-    val prettyPrinters: File = nativeHome.dir.resolve("tools/konan_lldb.py")
+    konst prettyPrinters: File = nativeHome.dir.resolve("tools/konan_lldb.py")
 
-    val isAvailable: Boolean by lazy {
+    konst isAvailable: Boolean by lazy {
         try {
-            val exitCode = ProcessBuilder("lldb", "-version").start().waitFor()
+            konst exitCode = ProcessBuilder("lldb", "-version").start().waitFor()
             exitCode == 0
         } catch (e: IOException) {
             false
@@ -54,14 +54,14 @@ internal class LLDB(nativeHome: KotlinNativeHome) {
 /**
  * Lazy-initialized class loader with the Kotlin/Native embedded compiler.
  */
-internal class KotlinNativeClassLoader(private val lazyClassLoader: Lazy<ClassLoader>) {
-    val classLoader: ClassLoader get() = lazyClassLoader.value
+internal class KotlinNativeClassLoader(private konst lazyClassLoader: Lazy<ClassLoader>) {
+    konst classLoader: ClassLoader get() = lazyClassLoader.konstue
 }
 
 /**
  * New test modes may be added as necessary.
  */
-internal enum class TestMode(private val description: String) {
+internal enum class TestMode(private konst description: String) {
     ONE_STAGE_MULTI_MODULE(
         description = "Compile each test file as one or many modules (depending on MODULE directives declared in the file)." +
                 " Produce a KLIB per each module except the last one." +
@@ -80,11 +80,11 @@ internal enum class TestMode(private val description: String) {
  * The set of custom (external) klibs that should be passed to the Kotlin/Native compiler.
  */
 @JvmInline
-internal value class CustomKlibs(val klibs: Set<File>) {
+internal konstue class CustomKlibs(konst klibs: Set<File>) {
     init {
-        val invalidKlibs = klibs.filterNot { it.isDirectory || (it.isFile && it.extension == "klib") }
-        assertTrue(invalidKlibs.isEmpty()) {
-            "There are invalid KLIBs that should be passed for the Kotlin/Native compiler: ${klibs.joinToString { "[$it]" }}"
+        konst inkonstidKlibs = klibs.filterNot { it.isDirectory || (it.isFile && it.extension == "klib") }
+        assertTrue(inkonstidKlibs.isEmpty()) {
+            "There are inkonstid KLIBs that should be passed for the Kotlin/Native compiler: ${klibs.joinToString { "[$it]" }}"
         }
     }
 }
@@ -95,7 +95,7 @@ internal value class CustomKlibs(val klibs: Set<File>) {
  * - or // KIND: is not specified in the test data file and thus automatically considered as [TestKind.REGULAR]
  */
 @JvmInline
-internal value class ForcedStandaloneTestKind(val value: Boolean)
+internal konstue class ForcedStandaloneTestKind(konst konstue: Boolean)
 
 /**
  * Whether tests should be compiled only (true) or compiled and executed (false, the default).
@@ -103,12 +103,12 @@ internal value class ForcedStandaloneTestKind(val value: Boolean)
  * TODO: need to reconsider this setting when other [Runner]s than [LocalTestRunner] and [NoopTestRunner] are supported
  */
 @JvmInline
-internal value class ForcedNoopTestRunner(val value: Boolean)
+internal konstue class ForcedNoopTestRunner(konst konstue: Boolean)
 
 /**
  * Optimization mode to be applied.
  */
-internal enum class OptimizationMode(private val description: String, val compilerFlag: String?) {
+internal enum class OptimizationMode(private konst description: String, konst compilerFlag: String?) {
     DEBUG("Build with debug information", "-g"),
     OPT("Build with optimizations applied", "-opt"),
     NO("Don't use any specific optimizations", null);
@@ -119,7 +119,7 @@ internal enum class OptimizationMode(private val description: String, val compil
 /**
  * Thread state checked. Can be applied only with [OptimizationMode.DEBUG], [CacheMode.WithoutCache].
  */
-internal enum class ThreadStateChecker(val compilerFlag: String?) {
+internal enum class ThreadStateChecker(konst compilerFlag: String?) {
     DISABLED(null),
     ENABLED("-Xcheck-state-at-external-calls");
 
@@ -129,7 +129,7 @@ internal enum class ThreadStateChecker(val compilerFlag: String?) {
 /**
  * Type of sanitizer. Can be applied only with [CacheMode.WithoutCache]
  */
-internal enum class Sanitizer(val compilerFlag: String?) {
+internal enum class Sanitizer(konst compilerFlag: String?) {
     NONE(null),
     THREAD("-Xbinary=sanitizer=thread");
 
@@ -139,7 +139,7 @@ internal enum class Sanitizer(val compilerFlag: String?) {
 /**
  * Garbage collector type.
  */
-internal enum class GCType(val compilerFlag: String?) {
+internal enum class GCType(konst compilerFlag: String?) {
     UNSPECIFIED(null),
     NOOP("-Xbinary=gc=noop"),
     STWMS("-Xbinary=gc=stwms"),
@@ -152,7 +152,7 @@ internal enum class GCType(val compilerFlag: String?) {
     override fun toString() = compilerFlag?.let { "($it)" }.orEmpty()
 }
 
-internal enum class GCScheduler(val compilerFlag: String?) {
+internal enum class GCScheduler(konst compilerFlag: String?) {
     UNSPECIFIED(null),
     MANUAL("-Xbinary=gcSchedulerType=manual"),
     ADAPTIVE("-Xbinary=gcSchedulerType=adaptive"),
@@ -169,14 +169,14 @@ internal enum class GCScheduler(val compilerFlag: String?) {
 /**
  * Current project's directories.
  */
-internal class BaseDirs(val testBuildDir: File)
+internal class BaseDirs(konst testBuildDir: File)
 
 /**
  * Timeouts.
  */
-internal class Timeouts(val executionTimeout: Duration) {
+internal class Timeouts(konst executionTimeout: Duration) {
     companion object {
-        val DEFAULT_EXECUTION_TIMEOUT: Duration get() = 30.seconds
+        konst DEFAULT_EXECUTION_TIMEOUT: Duration get() = 30.seconds
     }
 }
 
@@ -184,26 +184,26 @@ internal class Timeouts(val executionTimeout: Duration) {
  * Used cache mode.
  */
 internal sealed class CacheMode {
-    abstract val staticCacheForDistributionLibrariesRootDir: File?
-    abstract val useStaticCacheForUserLibraries: Boolean
-    abstract val makePerFileCaches: Boolean
+    abstract konst staticCacheForDistributionLibrariesRootDir: File?
+    abstract konst useStaticCacheForUserLibraries: Boolean
+    abstract konst makePerFileCaches: Boolean
 
-    val useStaticCacheForDistributionLibraries: Boolean get() = staticCacheForDistributionLibrariesRootDir != null
+    konst useStaticCacheForDistributionLibraries: Boolean get() = staticCacheForDistributionLibrariesRootDir != null
 
     object WithoutCache : CacheMode() {
-        override val staticCacheForDistributionLibrariesRootDir: File? get() = null
-        override val useStaticCacheForUserLibraries: Boolean get() = false
-        override val makePerFileCaches: Boolean = false
+        override konst staticCacheForDistributionLibrariesRootDir: File? get() = null
+        override konst useStaticCacheForUserLibraries: Boolean get() = false
+        override konst makePerFileCaches: Boolean = false
     }
 
     class WithStaticCache(
         distribution: Distribution,
         kotlinNativeTargets: KotlinNativeTargets,
         optimizationMode: OptimizationMode,
-        override val useStaticCacheForUserLibraries: Boolean,
-        override val makePerFileCaches: Boolean
+        override konst useStaticCacheForUserLibraries: Boolean,
+        override konst makePerFileCaches: Boolean
     ) : CacheMode() {
-        override val staticCacheForDistributionLibrariesRootDir: File = File(distribution.klib)
+        override konst staticCacheForDistributionLibrariesRootDir: File = File(distribution.klib)
             .resolve("cache")
             .resolve(
                 computeDistroCacheDirName(
@@ -218,7 +218,7 @@ internal sealed class CacheMode {
             }
 
         companion object {
-            private const val CACHE_KIND = "STATIC"
+            private const konst CACHE_KIND = "STATIC"
         }
     }
 
@@ -226,7 +226,7 @@ internal sealed class CacheMode {
 
     companion object {
         fun defaultForTestTarget(distribution: Distribution, kotlinNativeTargets: KotlinNativeTargets): Alias {
-            val cacheableTargets = distribution.properties
+            konst cacheableTargets = distribution.properties
                 .resolvablePropertyList("cacheableTargets", kotlinNativeTargets.hostTarget.name)
                 .map { KonanTarget.predefinedTargets.getValue(it) }
                 .toSet()
@@ -250,7 +250,7 @@ internal sealed class CacheMode {
     }
 }
 
-internal enum class PipelineType(val mutedOption: MutedOption, val compilerFlags: List<String>) {
+internal enum class PipelineType(konst mutedOption: MutedOption, konst compilerFlags: List<String>) {
     K1(MutedOption.K1, emptyList()),
     K2(MutedOption.K2, listOf("-language-version", "2.0"));
 

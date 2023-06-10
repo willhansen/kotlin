@@ -1,4 +1,4 @@
-const val N = 42
+const konst N = 42
 
 fun test(): Int {
     var sum = 0

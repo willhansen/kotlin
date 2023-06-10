@@ -25,13 +25,13 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 abstract class AbstractDeserializedPackageFragmentProvider(
-    protected val storageManager: StorageManager,
-    protected val finder: KotlinMetadataFinder,
-    protected val moduleDescriptor: ModuleDescriptor
+    protected konst storageManager: StorageManager,
+    protected konst finder: KotlinMetadataFinder,
+    protected konst moduleDescriptor: ModuleDescriptor
 ) : PackageFragmentProviderOptimized {
     protected lateinit var components: DeserializationComponents
 
-    private val fragments = storageManager.createMemoizedFunctionWithNullableValues<FqName, PackageFragmentDescriptor> { fqName ->
+    private konst fragments = storageManager.createMemoizedFunctionWithNullableValues<FqName, PackageFragmentDescriptor> { fqName ->
         findPackage(fqName)?.apply {
             initialize(components)
         }
@@ -44,7 +44,7 @@ abstract class AbstractDeserializedPackageFragmentProvider(
     }
 
     override fun isEmpty(fqName: FqName): Boolean {
-        val descriptor = if (fragments.isComputed(fqName)) {
+        konst descriptor = if (fragments.isComputed(fqName)) {
             fragments.invoke(fqName)
         } else {
             findPackage(fqName)

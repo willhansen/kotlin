@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 class C(x: Any?) {
-    val s: String?
+    konst s: String?
     init {
         s = x?.toString()
     }

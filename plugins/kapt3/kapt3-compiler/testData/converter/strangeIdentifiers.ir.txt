@@ -1,4 +1,4 @@
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface Anno {
 
@@ -12,7 +12,7 @@ public abstract @interface Anno {
 
 @kotlin.Metadata()
 public enum StrangeEnum {
-    /*public static final*/ InvalidFieldName /* = new StrangeEnum() */;
+    /*public static final*/ InkonstidFieldName /* = new StrangeEnum() */;
     @org.jetbrains.annotations.NotNull()
     private final java.lang.String size = null;
 
@@ -49,7 +49,7 @@ public final class Test {
     public final void simpleFun() {
     }
 
-    @Anno(size = StrangeEnum.InvalidFieldName, name = "Woofwoof")
+    @Anno(size = StrangeEnum.InkonstidFieldName, name = "Woofwoof")
     public final void simpleFun2(@org.jetbrains.annotations.NotNull()
     java.lang.String a, @org.jetbrains.annotations.NotNull()
     java.lang.String b) {

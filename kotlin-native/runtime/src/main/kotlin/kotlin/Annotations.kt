@@ -28,19 +28,19 @@ import kotlin.reflect.KClass
  * @property replaceWith If present, specifies a code fragment which should be used as a replacement for
  *  the deprecated API usage.
  * @property level Specifies how the deprecated element usages are reported in code.
- *  See the [DeprecationLevel] enum for the possible values.
+ *  See the [DeprecationLevel] enum for the possible konstues.
  */
 @Target(CLASS, FUNCTION, PROPERTY, ANNOTATION_CLASS, CONSTRUCTOR, PROPERTY_SETTER, PROPERTY_GETTER, TYPEALIAS)
 @MustBeDocumented
 public annotation class Deprecated(
-    val message: String,
-    val replaceWith: ReplaceWith = ReplaceWith(""),
-    val level: DeprecationLevel = DeprecationLevel.WARNING
+    konst message: String,
+    konst replaceWith: ReplaceWith = ReplaceWith(""),
+    konst level: DeprecationLevel = DeprecationLevel.WARNING
 )
 
 /**
- * Marks the annotated declaration as deprecated. In contrast to [Deprecated], severity of the reported diagnostic is not a constant value,
- * but differs depending on the API version of the usage (the value of the `-api-version` argument when compiling the module where
+ * Marks the annotated declaration as deprecated. In contrast to [Deprecated], severity of the reported diagnostic is not a constant konstue,
+ * but differs depending on the API version of the usage (the konstue of the `-api-version` argument when compiling the module where
  * the usage is located). If the API version is greater or equal than [hiddenSince], the declaration will not be accessible from the code
  * (as if it was deprecated with level [DeprecationLevel.HIDDEN]), otherwise if the API version is greater or equal than [errorSince],
  * the usage will be marked as an error (as with [DeprecationLevel.ERROR]), otherwise if the API version is greater or equal
@@ -54,9 +54,9 @@ public annotation class Deprecated(
 @MustBeDocumented
 @SinceKotlin("1.4")
 public annotation class DeprecatedSinceKotlin(
-    val warningSince: String = "",
-    val errorSince: String = "",
-    val hiddenSince: String = ""
+    konst warningSince: String = "",
+    konst errorSince: String = "",
+    konst hiddenSince: String = ""
 )
 
 /**
@@ -75,7 +75,7 @@ public annotation class DeprecatedSinceKotlin(
 @Target()
 @Retention(BINARY)
 @MustBeDocumented
-public annotation class ReplaceWith(val expression: String, vararg val imports: String)
+public annotation class ReplaceWith(konst expression: String, vararg konst imports: String)
 
 /**
  * Possible levels of a deprecation. The level specifies how the deprecated element usages are reported in code.
@@ -104,7 +104,7 @@ public annotation class ExtensionFunctionType
 @Target(TYPE)
 @MustBeDocumented
 @SinceKotlin("1.1")
-public annotation class ParameterName(val name: String)
+public annotation class ParameterName(konst name: String)
 
 /**
  * Suppresses the given compilation warnings in the annotated element.
@@ -113,7 +113,7 @@ public annotation class ParameterName(val name: String)
 @Target(CLASS, ANNOTATION_CLASS, TYPE_PARAMETER, PROPERTY, FIELD, LOCAL_VARIABLE, VALUE_PARAMETER,
         CONSTRUCTOR, FUNCTION, PROPERTY_GETTER, PROPERTY_SETTER, TYPE, EXPRESSION, FILE, TYPEALIAS)
 @Retention(SOURCE)
-public annotation class Suppress(vararg val names: String)
+public annotation class Suppress(vararg konst names: String)
 
 /**
  * Suppresses errors about variance conflict
@@ -133,7 +133,7 @@ public annotation class UnsafeVariance
 @Target(CLASS, PROPERTY, FIELD, CONSTRUCTOR, FUNCTION, PROPERTY_GETTER, PROPERTY_SETTER, TYPEALIAS)
 @Retention(AnnotationRetention.BINARY)
 @MustBeDocumented
-public annotation class SinceKotlin(val version: String)
+public annotation class SinceKotlin(konst version: String)
 
 /**
  * When applied to annotation class X specifies that X defines a DSL language
@@ -194,4 +194,4 @@ public annotation class PublishedApi
 @SinceKotlin("1.4")
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CONSTRUCTOR)
 @Retention(AnnotationRetention.BINARY)
-public actual annotation class Throws(actual vararg val exceptionClasses: KClass<out Throwable>)
+public actual annotation class Throws(actual vararg konst exceptionClasses: KClass<out Throwable>)

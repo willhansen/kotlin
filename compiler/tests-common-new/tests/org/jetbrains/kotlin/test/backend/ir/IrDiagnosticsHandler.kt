@@ -14,21 +14,21 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.*
 
 class IrDiagnosticsHandler(testServices: TestServices) : AbstractIrHandler(testServices) {
-    private val globalMetadataInfoHandler: GlobalMetadataInfoHandler
+    private konst globalMetadataInfoHandler: GlobalMetadataInfoHandler
         get() = testServices.globalMetadataInfoHandler
 
-    private val diagnosticsService: DiagnosticsService
+    private konst diagnosticsService: DiagnosticsService
         get() = testServices.diagnosticsService
 
     override fun processModule(module: TestModule, info: IrBackendInput) {
-        val diagnosticsByFilePath = info.diagnosticReporter.diagnosticsByFilePath
+        konst diagnosticsByFilePath = info.diagnosticReporter.diagnosticsByFilePath
         for (currentModule in testServices.moduleStructure.modules) {
-            val lightTreeComparingModeEnabled = FirDiagnosticsDirectives.COMPARE_WITH_LIGHT_TREE in currentModule.directives
-            val lightTreeEnabled = currentModule.directives.singleOrZeroValue(FirDiagnosticsDirectives.FIR_PARSER) == FirParser.LightTree
+            konst lightTreeComparingModeEnabled = FirDiagnosticsDirectives.COMPARE_WITH_LIGHT_TREE in currentModule.directives
+            konst lightTreeEnabled = currentModule.directives.singleOrZeroValue(FirDiagnosticsDirectives.FIR_PARSER) == FirParser.LightTree
             for (file in currentModule.files) {
-                val diagnostics = diagnosticsByFilePath["/" + file.relativePath]
+                konst diagnostics = diagnosticsByFilePath["/" + file.relativePath]
                 if (diagnostics != null && diagnostics.isNotEmpty()) {
-                    val diagnosticsMetadataInfos =
+                    konst diagnosticsMetadataInfos =
                         diagnostics.diagnosticCodeMetaInfos(
                             module, file, diagnosticsService, globalMetadataInfoHandler,
                             lightTreeEnabled, lightTreeComparingModeEnabled

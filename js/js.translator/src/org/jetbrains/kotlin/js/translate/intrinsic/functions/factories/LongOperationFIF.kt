@@ -29,15 +29,15 @@ import org.jetbrains.kotlin.utils.identity as ID
 // TODO Move to FunctionCallCases
 object LongOperationFIF : FunctionIntrinsicFactory {
 
-    val LONG_EQUALS_ANY = pattern("Long.equals")
-    val LONG_BINARY_OPERATION_LONG = pattern("Long.compareTo|rangeTo|plus|minus|times|div|mod|rem|and|or|xor(Long)")
-    val LONG_BIT_SHIFTS = pattern("Long.shl|shr|ushr(Int)")
-    val LONG_BINARY_OPERATION_INTEGER = pattern("Long.compareTo|rangeTo|plus|minus|times|div|mod|rem(Int|Short|Byte)")
-    val LONG_BINARY_OPERATION_FLOATING_POINT = pattern("Long.compareTo|plus|minus|times|div|mod|rem(Double|Float)")
-    val INTEGER_BINARY_OPERATION_LONG = pattern("Int|Short|Byte.compareTo|rangeTo|plus|minus|times|div|mod|rem(Long)")
-    val FLOATING_POINT_BINARY_OPERATION_LONG = pattern("Double|Float.compareTo|plus|minus|times|div|mod|rem(Long)")
+    konst LONG_EQUALS_ANY = pattern("Long.equals")
+    konst LONG_BINARY_OPERATION_LONG = pattern("Long.compareTo|rangeTo|plus|minus|times|div|mod|rem|and|or|xor(Long)")
+    konst LONG_BIT_SHIFTS = pattern("Long.shl|shr|ushr(Int)")
+    konst LONG_BINARY_OPERATION_INTEGER = pattern("Long.compareTo|rangeTo|plus|minus|times|div|mod|rem(Int|Short|Byte)")
+    konst LONG_BINARY_OPERATION_FLOATING_POINT = pattern("Long.compareTo|plus|minus|times|div|mod|rem(Double|Float)")
+    konst INTEGER_BINARY_OPERATION_LONG = pattern("Int|Short|Byte.compareTo|rangeTo|plus|minus|times|div|mod|rem(Long)")
+    konst FLOATING_POINT_BINARY_OPERATION_LONG = pattern("Double|Float.compareTo|plus|minus|times|div|mod|rem(Long)")
 
-    private val longBinaryIntrinsics =
+    private konst longBinaryIntrinsics =
             (
                     listOf(
                             "equals" to Namer.EQUALS_METHOD_NAME,
@@ -57,7 +57,7 @@ object LongOperationFIF : FunctionIntrinsicFactory {
                             "xor" to "xor"
                     ).map { it.first to methodIntrinsic(it.second) }).toMap()
 
-    private val floatBinaryIntrinsics: Map<String, BaseBinaryIntrinsic> =
+    private konst floatBinaryIntrinsics: Map<String, BaseBinaryIntrinsic> =
             mapOf(
                     "compareTo" to BaseBinaryIntrinsic(::compareTo),
                     "plus" to BaseBinaryIntrinsic(::sum),
@@ -68,7 +68,7 @@ object LongOperationFIF : FunctionIntrinsicFactory {
                     "rem" to BaseBinaryIntrinsic(::mod)
             )
 
-    class BaseBinaryIntrinsic(val applyFun: (left: JsExpression, right: JsExpression) -> JsExpression) :
+    class BaseBinaryIntrinsic(konst applyFun: (left: JsExpression, right: JsExpression) -> JsExpression) :
             FunctionIntrinsicWithReceiverComputed() {
         override fun apply(receiver: JsExpression?, arguments: List<JsExpression>, context: TranslationContext): JsExpression {
             assert(receiver != null)
@@ -84,7 +84,7 @@ object LongOperationFIF : FunctionIntrinsicFactory {
         if (intrinsic != null) BaseBinaryIntrinsic() { left, right -> intrinsic.applyFun(toLeft(left), toRight(right)) }  else null
 
    override fun getIntrinsic(descriptor: FunctionDescriptor, context: TranslationContext): FunctionIntrinsic? {
-       val operationName = descriptor.name.asString()
+       konst operationName = descriptor.name.asString()
        return when {
            LONG_EQUALS_ANY.test(descriptor) || LONG_BINARY_OPERATION_LONG.test(descriptor) || LONG_BIT_SHIFTS.test(descriptor) ->
                longBinaryIntrinsics[operationName]

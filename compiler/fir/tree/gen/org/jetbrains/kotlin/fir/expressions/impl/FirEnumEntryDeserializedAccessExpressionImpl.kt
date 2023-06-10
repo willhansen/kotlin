@@ -27,10 +27,10 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
 
 internal class FirEnumEntryDeserializedAccessExpressionImpl(
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val enumClassId: ClassId,
-    override val enumEntryName: Name,
+    override konst enumClassId: ClassId,
+    override konst enumEntryName: Name,
 ) : FirEnumEntryDeserializedAccessExpression() {
-    override val source: KtSourceElement? get() = null
+    override konst source: KtSourceElement? get() = null
     override var typeRef: FirTypeRef = buildResolvedTypeRef { type = enumClassId.toLookupTag().constructClassType(emptyArray(), false) }
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

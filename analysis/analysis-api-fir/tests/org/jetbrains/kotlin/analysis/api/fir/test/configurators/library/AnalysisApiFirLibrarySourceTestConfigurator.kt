@@ -32,8 +32,8 @@ import org.jetbrains.kotlin.test.services.TestModuleStructure
 import org.jetbrains.kotlin.test.services.TestServices
 
 object AnalysisApiFirLibrarySourceTestConfigurator : AnalysisApiTestConfigurator() {
-    override val analyseInDependentSession: Boolean get() = false
-    override val frontendKind: FrontendKind get() = FrontendKind.Fir
+    override konst analyseInDependentSession: Boolean get() = false
+    override konst frontendKind: FrontendKind get() = FrontendKind.Fir
 
     override fun configureTest(
         builder: TestConfigurationBuilder,
@@ -55,7 +55,7 @@ object AnalysisApiFirLibrarySourceTestConfigurator : AnalysisApiTestConfigurator
         return TestModuleStructureFactory.createProjectStructureByTestStructure(moduleStructure, testServices, project)
     }
 
-    override val serviceRegistrars: List<AnalysisApiTestServiceRegistrar> =
+    override konst serviceRegistrars: List<AnalysisApiTestServiceRegistrar> =
         listOf(
             AnalysisApiBaseTestServiceRegistrar,
             AnalysisApiDecompiledCodeTestServiceRegistrar,
@@ -66,9 +66,9 @@ object AnalysisApiFirLibrarySourceTestConfigurator : AnalysisApiTestConfigurator
 
 private class KtLibrarySourceModuleFactory : KtModuleFactory {
     override fun createModule(testModule: TestModule, testServices: TestServices, project: Project): KtModuleWithFiles {
-        val (libraryJar, librarySourcesJar) = testServices.compiledLibraryProvider.compileToLibrary(testModule)
+        konst (libraryJar, librarySourcesJar) = testServices.compiledLibraryProvider.compileToLibrary(testModule)
 
-        val libraryKtModule = KtLibraryModuleImpl(
+        konst libraryKtModule = KtLibraryModuleImpl(
             testModule.name,
             testModule.targetPlatform,
             GlobalSearchScope.filesScope(project, LibraryUtils.getAllVirtualFilesFromJar(libraryJar)),
@@ -77,8 +77,8 @@ private class KtLibrarySourceModuleFactory : KtModuleFactory {
             librarySources = null,
         )
 
-        val decompiledPsiFilesFromSourceJar = LibraryUtils.getAllPsiFilesFromTheJar(librarySourcesJar, project)
-        val librarySourceKtModule = KtLibrarySourceModuleImpl(
+        konst decompiledPsiFilesFromSourceJar = LibraryUtils.getAllPsiFilesFromTheJar(librarySourcesJar, project)
+        konst librarySourceKtModule = KtLibrarySourceModuleImpl(
             testModule.name,
             testModule.targetPlatform,
             GlobalSearchScope.filesScope(project, decompiledPsiFilesFromSourceJar.map { it.virtualFile }),

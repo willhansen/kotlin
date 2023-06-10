@@ -1,7 +1,7 @@
 // FILE: test.kt
 
 fun box() {
-    val a: Int? = 3
+    konst a: Int? = 3
     when (a) {
         1 -> {
             1

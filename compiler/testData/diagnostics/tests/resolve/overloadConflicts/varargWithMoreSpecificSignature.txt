@@ -1,6 +1,6 @@
 package
 
-public val test1: Foo1
+public konst test1: Foo1
 public fun foo(/*0*/ x: kotlin.Any): Foo2
 public fun foo(/*0*/ vararg ss: kotlin.String /*kotlin.Array<out kotlin.String>*/): Foo1
 

@@ -8,7 +8,7 @@ public record MyRec(String name) {
 
 // FILE: main.kt
 fun box(): String {
-    val r = MyRec("fail")
+    konst r = MyRec("fail")
     if (r.name() != "fail") return "fail 1"
     if (r.getName() != "OK") return "fail 2"
 

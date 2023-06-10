@@ -1,4 +1,4 @@
-val i: Int
+konst i: Int
 fun foo(): String
 class A {
   abstract fun foo()

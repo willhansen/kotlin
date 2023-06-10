@@ -3,8 +3,8 @@
 
 package a
 
-class Box(val value: String) {
-    internal fun result(): String = value
+class Box(konst konstue: String) {
+    internal fun result(): String = konstue
 }
 
 // MODULE: main()(lib)

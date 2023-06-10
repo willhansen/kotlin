@@ -16,11 +16,11 @@ public class Logger {
 // FILE: test.kt
 
 fun test() {
-    val logger = Logger.getInstance("test")
+    konst logger = Logger.getInstance("test")
 }
 
 class MyTest {
-    private val klass = this::class.java
+    private konst klass = this::class.java
 
-    private val logger = Logger.getInstance(klass)
+    private konst logger = Logger.getInstance(klass)
 }

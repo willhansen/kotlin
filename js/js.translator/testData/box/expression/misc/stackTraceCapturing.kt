@@ -33,7 +33,7 @@ fun foo__3(): Throwable {
 }
 
 fun box(): String {
-    val functions = listOf(
+    konst functions = listOf(
         ::foo__0,
         ::foo__1,
         ::foo__2,
@@ -46,7 +46,7 @@ fun box(): String {
             f()
         } catch (e: Throwable) {
             count++
-            val stack = e.asDynamic().stack as String
+            konst stack = e.asDynamic().stack as String
 
             // Even though stack trace format is not stadard,
             // it should contain names of the functions.

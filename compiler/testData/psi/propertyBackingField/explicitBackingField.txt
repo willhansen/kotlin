@@ -4,7 +4,7 @@ KtFile: explicitBackingField.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('simpleNumber')
     PsiElement(COLON)(':')
@@ -23,7 +23,7 @@ KtFile: explicitBackingField.kt
         PsiElement(INTEGER_LITERAL)('4')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('numberWithPrivateField')
     PsiElement(COLON)(':')
@@ -45,7 +45,7 @@ KtFile: explicitBackingField.kt
         PsiElement(INTEGER_LITERAL)('4')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('numberWithLateinitField')
     PsiElement(COLON)(':')
@@ -68,7 +68,7 @@ KtFile: explicitBackingField.kt
             PsiElement(IDENTIFIER)('Int')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('numberWithInternalLateinitField')
     PsiElement(COLON)(':')
@@ -133,7 +133,7 @@ KtFile: explicitBackingField.kt
       PsiElement(LPAR)('(')
       VALUE_PARAMETER_LIST
         VALUE_PARAMETER
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
       PsiElement(RPAR)(')')
       PsiWhiteSpace(' ')
       BLOCK
@@ -148,7 +148,7 @@ KtFile: explicitBackingField.kt
           PsiWhiteSpace(' ')
           DOT_QUALIFIED_EXPRESSION
             REFERENCE_EXPRESSION
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
             PsiElement(DOT)('.')
             CALL_EXPRESSION
               REFERENCE_EXPRESSION
@@ -160,7 +160,7 @@ KtFile: explicitBackingField.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('numberWithExplicitType')
     PsiElement(COLON)(':')
@@ -185,7 +185,7 @@ KtFile: explicitBackingField.kt
         PsiElement(INTEGER_LITERAL)('10')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('numberWithBlockInitializer')
     PsiElement(COLON)(':')
@@ -215,7 +215,7 @@ KtFile: explicitBackingField.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('minimalNumber')
     PsiWhiteSpace('\n    ')

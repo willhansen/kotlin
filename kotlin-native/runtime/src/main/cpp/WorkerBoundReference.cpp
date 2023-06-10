@@ -42,9 +42,9 @@ RUNTIME_NOTHROW void WorkerBoundReferenceFreezeHook(KRef thiz) {
 
 extern "C" {
 
-KNativePtr Kotlin_WorkerBoundReference_create(KRef value) {
+KNativePtr Kotlin_WorkerBoundReference_create(KRef konstue) {
     auto* holder = new (std_support::kalloc) KRefSharedHolder();
-    holder->init(value);
+    holder->init(konstue);
     return holder;
 }
 

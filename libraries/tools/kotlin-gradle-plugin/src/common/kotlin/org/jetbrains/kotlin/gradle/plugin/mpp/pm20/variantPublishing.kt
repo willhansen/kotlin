@@ -32,17 +32,17 @@ import java.util.*
 import javax.inject.Inject
 
 interface GradleKpmPlatformPublicationToMavenRequest {
-    val componentName: String
-    val fromModule: GradleKpmModule
-    val publicationHolder: GradleKpmSingleMavenPublishedModuleHolder
-    val variantPublicationRequests: Iterable<KpmGradleConfigurationPublicationRequest>
+    konst componentName: String
+    konst fromModule: GradleKpmModule
+    konst publicationHolder: GradleKpmSingleMavenPublishedModuleHolder
+    konst variantPublicationRequests: Iterable<KpmGradleConfigurationPublicationRequest>
 }
 
 data class GradleKpmBasicPlatformPublicationToMavenRequest(
-    override val componentName: String,
-    override val fromModule: GradleKpmModule,
-    override val publicationHolder: GradleKpmSingleMavenPublishedModuleHolder,
-    override val variantPublicationRequests: Iterable<KpmGradleConfigurationPublicationRequest>
+    override konst componentName: String,
+    override konst fromModule: GradleKpmModule,
+    override konst publicationHolder: GradleKpmSingleMavenPublishedModuleHolder,
+    override konst variantPublicationRequests: Iterable<KpmGradleConfigurationPublicationRequest>
 ) : GradleKpmPlatformPublicationToMavenRequest {
     init {
         check(variantPublicationRequests.all { it.fromVariant.containingModule === fromModule }) {
@@ -54,18 +54,18 @@ data class GradleKpmBasicPlatformPublicationToMavenRequest(
 /** TODO: consider also using this class for exposing a KPM variant's configurations for project-to-project dependencies,
  *        so that a variant may expose an arbitrary set of configurations rather just { API, runtime } or { API } */
 interface KpmGradleConfigurationPublicationRequest {
-    val fromVariant: GradleKpmVariant
-    val publishConfiguration: Configuration
+    konst fromVariant: GradleKpmVariant
+    konst publishConfiguration: Configuration
 }
 
 data class KpmGradleBasicConfigurationPublicationRequest(
-    override val fromVariant: GradleKpmVariant,
-    override val publishConfiguration: Configuration
+    override konst fromVariant: GradleKpmVariant,
+    override konst publishConfiguration: Configuration
 ) : KpmGradleConfigurationPublicationRequest
 
 
 fun GradleKpmVariantPublishingConfigurator.configureNativeVariantPublication(variant: GradleKpmNativeVariantInternal) {
-    val publishConfigurations = listOfNotNull(
+    konst publishConfigurations = listOfNotNull(
         variant.apiElementsConfiguration,
         variant.hostSpecificMetadataElementsConfiguration // host-specific metadata may be absent
     )
@@ -73,7 +73,7 @@ fun GradleKpmVariantPublishingConfigurator.configureNativeVariantPublication(var
 }
 
 fun GradleKpmVariantPublishingConfigurator.configureSingleVariantPublication(variant: GradleKpmPublishedVariantWithRuntime) {
-    val publishConfigurations = listOf(variant.apiElementsConfiguration, variant.runtimeElementsConfiguration)
+    konst publishConfigurations = listOf(variant.apiElementsConfiguration, variant.runtimeElementsConfiguration)
     configureSingleVariantPublishing(variant, variant, publishConfigurations)
 }
 
@@ -95,8 +95,8 @@ fun GradleKpmVariantPublishingConfigurator.configureSingleVariantPublishing(
 }
 
 open class GradleKpmVariantPublishingConfigurator @Inject constructor(
-    private val project: Project,
-    private val softwareComponentFactory: SoftwareComponentFactory
+    private konst project: Project,
+    private konst softwareComponentFactory: SoftwareComponentFactory
 ) {
     companion object {
         fun get(project: Project): GradleKpmVariantPublishingConfigurator =
@@ -108,7 +108,7 @@ open class GradleKpmVariantPublishingConfigurator @Inject constructor(
     fun configurePublishing(
         request: GradleKpmPlatformPublicationToMavenRequest
     ) {
-        val componentName = request.componentName
+        konst componentName = request.componentName
 
         registerPlatformModulePublication(
             componentName,
@@ -117,13 +117,13 @@ open class GradleKpmVariantPublishingConfigurator @Inject constructor(
             request.fromModule::ifMadePublic
         )
 
-        val publishFromVariants = request.variantPublicationRequests.mapTo(mutableSetOf()) { it.fromVariant }
+        konst publishFromVariants = request.variantPublicationRequests.mapTo(mutableSetOf()) { it.fromVariant }
 
         // Collecting sources for multiple variants is not yet supported;
         // TODO make callers provide the source variants?
         // The MPP plugin doesn't publish the source artifacts as variants; keep that behavior for legacy-mapped variants for now
         if (publishFromVariants.size == 1) {
-            val singlePublishedVariant = publishFromVariants.single()
+            konst singlePublishedVariant = publishFromVariants.single()
             configureSourceElementsPublishing(componentName, singlePublishedVariant)
         }
 
@@ -142,8 +142,8 @@ open class GradleKpmVariantPublishingConfigurator @Inject constructor(
         }
 
     private fun configureSourceElementsPublishing(componentName: String, variant: GradleKpmVariant) {
-        val configurationName = variant.disambiguateName("sourceElements")
-        val docsVariants = DocumentationVariantConfigurator().createSourcesElementsConfiguration(configurationName, variant)
+        konst configurationName = variant.disambiguateName("sourceElements")
+        konst docsVariants = DocumentationVariantConfigurator().createSourcesElementsConfiguration(configurationName, variant)
         project.components.withType(AdhocComponentWithVariants::class.java).named(componentName).configure { component ->
             component.addVariantsFromConfiguration(docsVariants) { }
         }
@@ -160,14 +160,14 @@ open class GradleKpmVariantPublishingConfigurator @Inject constructor(
         variantRequests: Iterable<KpmGradleConfigurationPublicationRequest>,
         whenShouldRegisterPublication: (() -> Unit) -> Unit
     ) {
-        val platformComponent = softwareComponentFactory.adhoc(componentName)
+        konst platformComponent = softwareComponentFactory.adhoc(componentName)
         project.components.add(platformComponent)
 
         variantRequests.forEach { request ->
-            val originalConfiguration = request.publishConfiguration
-            val mavenScopeOrNull = inferMavenScope(request.fromVariant, originalConfiguration.name)
+            konst originalConfiguration = request.publishConfiguration
+            konst mavenScopeOrNull = inferMavenScope(request.fromVariant, originalConfiguration.name)
 
-            val publishedConfiguration = copyConfigurationForPublishing(
+            konst publishedConfiguration = copyConfigurationForPublishing(
                 request.fromVariant.project,
                 newName = publishedConfigurationName(originalConfiguration.name) + "-platform",
                 configuration = originalConfiguration,
@@ -205,8 +205,8 @@ open class GradleKpmVariantPublishingConfigurator @Inject constructor(
         kotlinModule: GradleKpmModule,
         variantRequests: Iterable<KpmGradleConfigurationPublicationRequest>
     ) {
-        val platformModuleDependencyProvider = project.provider {
-            val coordinates = publishedModuleHolder.publishedMavenModuleCoordinates
+        konst platformModuleDependencyProvider = project.provider {
+            konst coordinates = publishedModuleHolder.publishedMavenModuleCoordinates
             (project.dependencies.create("${coordinates.group}:${coordinates.name}:${coordinates.version}") as ModuleDependency).apply {
                 if (kotlinModule.moduleClassifier != null) {
                     capabilities { it.requireCapability(ComputedCapability.fromModule(kotlinModule)) }
@@ -214,13 +214,13 @@ open class GradleKpmVariantPublishingConfigurator @Inject constructor(
             }
         }
 
-        val rootSoftwareComponent =
+        konst rootSoftwareComponent =
             project.components
                 .withType(AdhocComponentWithVariants::class.java)
                 .getByName(rootPublicationComponentName(kotlinModule))
 
         variantRequests.forEach { variantRequest ->
-            val configuration = variantRequest.publishConfiguration
+            konst configuration = variantRequest.publishConfiguration
             project.configurations.create(publishedConfigurationName(configuration.name)).apply {
                 isCanBeConsumed = false
                 isCanBeResolved = false
@@ -235,11 +235,11 @@ open class GradleKpmVariantPublishingConfigurator @Inject constructor(
 }
 
 internal data class KpmGradleAdvancedConfigurationPublicationRequest(
-    override val fromVariant: GradleKpmVariant,
-    override val publishConfiguration: Configuration,
-    val overrideConfigurationAttributesForPublication: AttributeContainer?,
-    val overrideConfigurationArtifactsForPublication: Provider<out Iterable<PublishArtifact>>?,
-    val includeIntoProjectStructureMetadata: Boolean
+    override konst fromVariant: GradleKpmVariant,
+    override konst publishConfiguration: Configuration,
+    konst overrideConfigurationAttributesForPublication: AttributeContainer?,
+    konst overrideConfigurationArtifactsForPublication: Provider<out Iterable<PublishArtifact>>?,
+    konst includeIntoProjectStructureMetadata: Boolean
 ) : KpmGradleConfigurationPublicationRequest
 
 open class DocumentationVariantConfigurator {
@@ -270,8 +270,8 @@ open class DocumentationVariantConfigurator {
         configurationName: String,
         variant: GradleKpmVariant
     ): Configuration {
-        val sourcesArtifactTask = variant.project.tasks.withType<AbstractArchiveTask>().named(variant.sourceArchiveTaskName)
-        val artifactClassifier = dashSeparatedName(variant.containingModule.moduleClassifier, "sources")
+        konst sourcesArtifactTask = variant.project.tasks.withType<AbstractArchiveTask>().named(variant.sourceArchiveTaskName)
+        konst artifactClassifier = dashSeparatedName(variant.containingModule.moduleClassifier, "sources")
         return createSourcesElementsConfiguration(
             variant.project,
             configurationName,

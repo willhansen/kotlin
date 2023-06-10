@@ -21,10 +21,10 @@ class SourceToOutputFilesMapTest : TestWithWorkingDir() {
     @Before
     override fun setUp() {
         super.setUp()
-        val caches = File(workingDir, "caches").apply { mkdirs() }
-        val stofMapFile = File(caches, "stof.tab")
+        konst caches = File(workingDir, "caches").apply { mkdirs() }
+        konst stofMapFile = File(caches, "stof.tab")
         pathConverter = IncrementalFileToPathConverter((workingDir.canonicalFile))
-        val icContext = IncrementalCompilationContext(
+        konst icContext = IncrementalCompilationContext(
             pathConverter = pathConverter
         )
         stofMap = SourceToOutputFilesMap(stofMapFile, icContext)

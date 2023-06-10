@@ -9,7 +9,7 @@ sealed class A : CharSequence {
     // CHECK:
     //   Mangled name: A.B{}c
     //   Public signature: /A.B.c|-4416962153448040627[0]
-    val c: CharSequence
+    konst c: CharSequence
       // CHECK JVM_IR:
       //   Mangled name: A.B#<get-c>(){}kotlin.CharSequence
       //   Public signature: /A.B.c.<get-c>|7304122790316032774[0]
@@ -81,7 +81,7 @@ sealed class A : CharSequence {
     // CHECK:
     //   Mangled name: A.B{}length
     //   Public signature: /A.B.length|8693345930578737573[0]
-    override val length: Int
+    override konst length: Int
       // CHECK JVM_IR:
       //   Mangled name: A.B#<get-length>(){}kotlin.Int
       //   Public signature: /A.B.length.<get-length>|2176130084070422186[0]
@@ -116,7 +116,7 @@ sealed class A : CharSequence {
   // CHECK:
   //   Mangled name: A{}length
   //   Public signature: /A.length|8693345930578737573[0]
-  abstract /* fake */ override val length: Int
+  abstract /* fake */ override konst length: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-length>(){}kotlin.Int
     //   Public signature: /A.length.<get-length>|2176130084070422186[0]

@@ -32,7 +32,7 @@ FILE: smartcastOnImplicitReceiverOfCallableReference.kt
     public final fun R|kotlin/Any|.test_3(): R|kotlin/Unit| {
         when () {
             (this@R|/test_3| is R|A|) ->  {
-                lval f: R|kotlin/reflect/KFunction0<kotlin/Unit>| = ::R|/A.foo|
+                lkonst f: R|kotlin/reflect/KFunction0<kotlin/Unit>| = ::R|/A.foo|
             }
         }
 

@@ -2,7 +2,7 @@ package test
 
 class ClassWithPrivateFunAdded {
     private fun privateFun() {}
-    val s = "20"
+    konst s = "20"
 }
 
 class ClassWithPrivateFunRemoved {

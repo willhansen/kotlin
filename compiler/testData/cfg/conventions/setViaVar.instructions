@@ -34,12 +34,12 @@ sink:
 =====================
 == Foo ==
 class Foo {
-    val set: Bar = Bar()
+    konst set: Bar = Bar()
 }
 ---------------------
 L0:
   1 <START>
-    v(val set: Bar = Bar())
+    v(konst set: Bar = Bar())
     mark(Bar())
     call(Bar(), <init>) -> <v0>
     w(set|<v0>)

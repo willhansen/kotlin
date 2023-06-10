@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class LoopExpressionGenerator(statementGenerator: StatementGenerator) : StatementGeneratorExtension(statementGenerator) {
     fun generateWhileLoop(ktWhile: KtWhileExpression): IrExpression {
-        val irLoop = IrWhileLoopImpl(
+        konst irLoop = IrWhileLoopImpl(
             ktWhile.startOffsetSkippingComments, ktWhile.endOffset,
             context.irBuiltIns.unitType, IrStatementOrigin.WHILE_LOOP
         )
@@ -54,7 +54,7 @@ internal class LoopExpressionGenerator(statementGenerator: StatementGenerator) :
     }
 
     fun generateDoWhileLoop(ktDoWhile: KtDoWhileExpression): IrExpression {
-        val irLoop = IrDoWhileLoopImpl(
+        konst irLoop = IrDoWhileLoopImpl(
             ktDoWhile.startOffsetSkippingComments, ktDoWhile.endOffset,
             context.irBuiltIns.unitType, IrStatementOrigin.DO_WHILE_LOOP
         )
@@ -91,7 +91,7 @@ internal class LoopExpressionGenerator(statementGenerator: StatementGenerator) :
         )
 
     fun generateBreak(ktBreak: KtBreakExpression): IrExpression {
-        val parentLoop = findParentLoop(ktBreak)
+        konst parentLoop = findParentLoop(ktBreak)
             ?: return ErrorExpressionGenerator(statementGenerator).generateErrorExpression(
                 ktBreak, RuntimeException("Loop not found for break expression: ${ktBreak.text}")
             )
@@ -103,7 +103,7 @@ internal class LoopExpressionGenerator(statementGenerator: StatementGenerator) :
     }
 
     fun generateContinue(ktContinue: KtContinueExpression): IrExpression {
-        val parentLoop = findParentLoop(ktContinue)
+        konst parentLoop = findParentLoop(ktContinue)
             ?: return ErrorExpressionGenerator(statementGenerator).generateErrorExpression(
                 ktContinue, RuntimeException("Loop not found for continue expression: ${ktContinue.text}")
             )
@@ -132,7 +132,7 @@ internal class LoopExpressionGenerator(statementGenerator: StatementGenerator) :
             } else {
                 var parent = finger.parent
                 while (parent is KtLabeledExpression) {
-                    val label = parent.getLabelName()!!
+                    konst label = parent.getLabelName()!!
                     if (targetLabel == label) {
                         return getLoop(finger) ?: continue@BY_LOOP_EXPRESSIONS
                     }
@@ -148,50 +148,50 @@ internal class LoopExpressionGenerator(statementGenerator: StatementGenerator) :
     }
 
     fun generateForLoop(ktFor: KtForExpression): IrExpression {
-        val ktLoopParameter = ktFor.loopParameter
-        val ktLoopDestructuringDeclaration = ktFor.destructuringDeclaration
+        konst ktLoopParameter = ktFor.loopParameter
+        konst ktLoopDestructuringDeclaration = ktFor.destructuringDeclaration
         if (ktLoopParameter == null && ktLoopDestructuringDeclaration == null) {
             throw AssertionError("Either loopParameter or destructuringParameter should be present:\n${ktFor.text}")
         }
 
-        val ktLoopRange = ktFor.loopRange!!
-        val ktForBody = ktFor.body
-        val iteratorResolvedCall = getOrFail(BindingContext.LOOP_RANGE_ITERATOR_RESOLVED_CALL, ktLoopRange)
-        val hasNextResolvedCall = getOrFail(BindingContext.LOOP_RANGE_HAS_NEXT_RESOLVED_CALL, ktLoopRange)
-        val nextResolvedCall = getOrFail(BindingContext.LOOP_RANGE_NEXT_RESOLVED_CALL, ktLoopRange)
+        konst ktLoopRange = ktFor.loopRange!!
+        konst ktForBody = ktFor.body
+        konst iteratorResolvedCall = getOrFail(BindingContext.LOOP_RANGE_ITERATOR_RESOLVED_CALL, ktLoopRange)
+        konst hasNextResolvedCall = getOrFail(BindingContext.LOOP_RANGE_HAS_NEXT_RESOLVED_CALL, ktLoopRange)
+        konst nextResolvedCall = getOrFail(BindingContext.LOOP_RANGE_NEXT_RESOLVED_CALL, ktLoopRange)
 
-        val callGenerator = CallGenerator(statementGenerator)
+        konst callGenerator = CallGenerator(statementGenerator)
 
-        val startOffset = ktFor.startOffsetSkippingComments
-        val endOffset = ktFor.endOffset
+        konst startOffset = ktFor.startOffsetSkippingComments
+        konst endOffset = ktFor.endOffset
 
-        val irForBlock = IrBlockImpl(startOffset, endOffset, context.irBuiltIns.unitType, IrStatementOrigin.FOR_LOOP)
+        konst irForBlock = IrBlockImpl(startOffset, endOffset, context.irBuiltIns.unitType, IrStatementOrigin.FOR_LOOP)
 
-        val iteratorCall = statementGenerator.pregenerateCall(iteratorResolvedCall)
-        val irIteratorCall = callGenerator.generateCall(ktLoopRange, iteratorCall, IrStatementOrigin.FOR_LOOP_ITERATOR)
-        val irIterator = scope.createTemporaryVariable(irIteratorCall, "iterator", origin = IrDeclarationOrigin.FOR_LOOP_ITERATOR)
-        val iteratorValue = VariableLValue(context, irIterator)
+        konst iteratorCall = statementGenerator.pregenerateCall(iteratorResolvedCall)
+        konst irIteratorCall = callGenerator.generateCall(ktLoopRange, iteratorCall, IrStatementOrigin.FOR_LOOP_ITERATOR)
+        konst irIterator = scope.createTemporaryVariable(irIteratorCall, "iterator", origin = IrDeclarationOrigin.FOR_LOOP_ITERATOR)
+        konst iteratorValue = VariableLValue(context, irIterator)
         irForBlock.statements.add(irIterator)
 
-        val irInnerWhile = IrWhileLoopImpl(startOffset, endOffset, context.irBuiltIns.unitType, IrStatementOrigin.FOR_LOOP_INNER_WHILE)
+        konst irInnerWhile = IrWhileLoopImpl(startOffset, endOffset, context.irBuiltIns.unitType, IrStatementOrigin.FOR_LOOP_INNER_WHILE)
         irInnerWhile.label = getLoopLabel(ktFor)
         statementGenerator.bodyGenerator.putLoop(ktFor, irInnerWhile)
         irForBlock.statements.add(irInnerWhile)
 
-        val hasNextCall = statementGenerator.pregenerateCall(hasNextResolvedCall)
+        konst hasNextCall = statementGenerator.pregenerateCall(hasNextResolvedCall)
         hasNextCall.setExplicitReceiverValue(iteratorValue)
-        val irHasNextCall = callGenerator.generateCall(ktLoopRange, hasNextCall, IrStatementOrigin.FOR_LOOP_HAS_NEXT)
+        konst irHasNextCall = callGenerator.generateCall(ktLoopRange, hasNextCall, IrStatementOrigin.FOR_LOOP_HAS_NEXT)
         irInnerWhile.condition = irHasNextCall
 
-        val irInnerBody = IrBlockImpl(startOffset, endOffset, context.irBuiltIns.unitType, IrStatementOrigin.FOR_LOOP_INNER_WHILE)
+        konst irInnerBody = IrBlockImpl(startOffset, endOffset, context.irBuiltIns.unitType, IrStatementOrigin.FOR_LOOP_INNER_WHILE)
         irInnerWhile.body = irInnerBody
 
-        val nextCall = statementGenerator.pregenerateCall(nextResolvedCall)
+        konst nextCall = statementGenerator.pregenerateCall(nextResolvedCall)
         nextCall.setExplicitReceiverValue(iteratorValue)
-        val irNextCall = callGenerator.generateCall(ktLoopRange, nextCall, IrStatementOrigin.FOR_LOOP_NEXT)
-        val irLoopParameter =
+        konst irNextCall = callGenerator.generateCall(ktLoopRange, nextCall, IrStatementOrigin.FOR_LOOP_NEXT)
+        konst irLoopParameter =
             if (ktLoopParameter != null && ktLoopDestructuringDeclaration == null) {
-                val loopParameter = getOrFail(BindingContext.VALUE_PARAMETER, ktLoopParameter)
+                konst loopParameter = getOrFail(BindingContext.VALUE_PARAMETER, ktLoopParameter)
                 context.symbolTable.declareVariable(
                     ktLoopParameter.startOffsetSkippingComments, ktLoopParameter.endOffset, IrDeclarationOrigin.FOR_LOOP_VARIABLE,
                     loopParameter, loopParameter.type.toIrType(),
@@ -203,7 +203,7 @@ internal class LoopExpressionGenerator(statementGenerator: StatementGenerator) :
         irInnerBody.statements.add(irLoopParameter)
 
         if (ktLoopDestructuringDeclaration != null) {
-            val firstContainerValue = VariableLValue(context, irLoopParameter)
+            konst firstContainerValue = VariableLValue(context, irLoopParameter)
             statementGenerator.declareComponentVariablesInBlock(
                 ktLoopDestructuringDeclaration,
                 irInnerBody,

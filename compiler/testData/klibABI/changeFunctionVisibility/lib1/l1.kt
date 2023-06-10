@@ -35,9 +35,9 @@ open class Container {
 }
 
 private fun privateTopLevelFun() = "privateTopLevelFun.v1"
-fun publicTopLevelFunWithPrivateDefaultArgument(value: String = privateTopLevelFun()) = "publicTopLevelFunWithPrivateDefaultArgument.v1($value)"
+fun publicTopLevelFunWithPrivateDefaultArgument(konstue: String = privateTopLevelFun()) = "publicTopLevelFunWithPrivateDefaultArgument.v1($konstue)"
 
 object TopLevel {
     private fun privateNestedFun() = "privateNestedFun.v1"
-    fun publicNestedFunWithPrivateDefaultArgument(value: String = privateNestedFun()) = "publicNestedFunWithPrivateDefaultArgument.v1($value)"
+    fun publicNestedFunWithPrivateDefaultArgument(konstue: String = privateNestedFun()) = "publicNestedFunWithPrivateDefaultArgument.v1($konstue)"
 }

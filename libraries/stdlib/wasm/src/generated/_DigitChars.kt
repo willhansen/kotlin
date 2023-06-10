@@ -11,7 +11,7 @@ package kotlin.text
 //
 
 // 37 ranges totally
-private val rangeStart = intArrayOf(
+private konst rangeStart = intArrayOf(
     0x0030, 0x0660, 0x06f0, 0x07c0, 0x0966, 0x09e6, 0x0a66, 0x0ae6, 0x0b66, 0x0be6, 0x0c66, 0x0ce6, 0x0d66, 0x0de6, 0x0e50, 0x0ed0, 0x0f20, 0x1040, 0x1090, 0x17e0, 
     0x1810, 0x1946, 0x19d0, 0x1a80, 0x1a90, 0x1b50, 0x1bb0, 0x1c40, 0x1c50, 0xa620, 0xa8d0, 0xa900, 0xa9d0, 0xa9f0, 0xaa50, 0xabf0, 0xff10, 
 )
@@ -24,18 +24,18 @@ internal fun binarySearchRange(array: IntArray, needle: Int): Int {
     var bottom = 0
     var top = array.size - 1
     var middle = -1
-    var value = 0
+    var konstue = 0
     while (bottom <= top) {
         middle = (bottom + top) / 2
-        value = array[middle]
-        if (needle > value)
+        konstue = array[middle]
+        if (needle > konstue)
             bottom = middle + 1
-        else if (needle == value)
+        else if (needle == konstue)
             return middle
         else
             top = middle - 1
     }
-    return middle - (if (needle < value) 1 else 0)
+    return middle - (if (needle < konstue) 1 else 0)
 }
 
 /**
@@ -43,9 +43,9 @@ internal fun binarySearchRange(array: IntArray, needle: Int): Int {
  * or -1 if this character is not a digit.
  */
 internal fun Char.digitToIntImpl(): Int {
-    val ch = this.code
-    val index = binarySearchRange(rangeStart, ch)
-    val diff = ch - rangeStart[index]
+    konst ch = this.code
+    konst index = binarySearchRange(rangeStart, ch)
+    konst diff = ch - rangeStart[index]
     return if (diff < 10) diff else -1
 }
 

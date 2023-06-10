@@ -7,7 +7,7 @@ import testing.other.*
 import testing.TestFun
 
 // Resolve shouldn't be ambiguous
-val a = TestFun()
+konst a = TestFun()
 
 
 //FILE:testing.kt

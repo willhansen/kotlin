@@ -11,8 +11,8 @@ import java.io.File
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-class InstrumentJava(@Transient val javaInstrumentator: Configuration) : Action<Task> {
-    private val instrumentatorClasspath: String by lazy {
+class InstrumentJava(@Transient konst javaInstrumentator: Configuration) : Action<Task> {
+    private konst instrumentatorClasspath: String by lazy {
         javaInstrumentator.asPath
     }
 
@@ -28,8 +28,8 @@ class InstrumentJava(@Transient val javaInstrumentator: Configuration) : Action<
         // Javac.execute() - https://github.com/apache/ant/blob/9943641/src/main/org/apache/tools/ant/taskdefs/Javac.java#L1086
         // InstrumentIdeaExtensions - https://github.com/JetBrains/intellij-community/blob/9c40bdd/java/compiler/javac2/src/com/intellij/ant/InstrumentIdeaExtensions.java
         // Javac2.compile() - https://github.com/JetBrains/intellij-community/blob/9c40bdd/java/compiler/javac2/src/com/intellij/ant/Javac2.java#L237
-        val dummyInstrumentSrcDir = File(task.project.buildDir, "instrument_dummy_src")
-        val dummyInstrumentSrcRelativePath = dummyInstrumentSrcDir.relativeTo(task.project.projectDir).path.replace("\\", "/")
+        konst dummyInstrumentSrcDir = File(task.project.buildDir, "instrument_dummy_src")
+        konst dummyInstrumentSrcRelativePath = dummyInstrumentSrcDir.relativeTo(task.project.projectDir).path.replace("\\", "/")
 
         task.doLast {
             task.ant.withGroovyBuilder {

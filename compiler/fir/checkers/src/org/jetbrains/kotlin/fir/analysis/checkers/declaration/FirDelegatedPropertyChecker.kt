@@ -29,9 +29,9 @@ import org.jetbrains.kotlin.types.AbstractTypeChecker
 
 object FirDelegatedPropertyChecker : FirPropertyChecker() {
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val delegate = declaration.delegate ?: return
-        val delegateType = delegate.typeRef.coneType
-        val source = delegate.source;
+        konst delegate = declaration.delegate ?: return
+        konst delegateType = delegate.typeRef.coneType
+        konst source = delegate.source;
 
         // TODO: Also suppress delegate issue if type inference failed. For example, in
         //  compiler/testData/diagnostics/tests/delegatedProperty/inference/differentDelegatedExpressions.fir.kt, no delegate issues are
@@ -45,7 +45,7 @@ object FirDelegatedPropertyChecker : FirPropertyChecker() {
             return
         }
 
-        class DelegatedPropertyAccessorVisitor(private val isGet: Boolean) : FirVisitorVoid() {
+        class DelegatedPropertyAccessorVisitor(private konst isGet: Boolean) : FirVisitorVoid() {
             override fun visitElement(element: FirElement) = element.acceptChildren(this)
 
             override fun visitFunctionCall(functionCall: FirFunctionCall) {
@@ -57,7 +57,7 @@ object FirDelegatedPropertyChecker : FirPropertyChecker() {
             }
 
             private fun checkFunctionCall(functionCall: FirFunctionCall) {
-                val hasReferenceError = checkFunctionReferenceErrors(functionCall)
+                konst hasReferenceError = checkFunctionReferenceErrors(functionCall)
                 if (isGet && !hasReferenceError) checkReturnType(functionCall)
             }
 
@@ -65,12 +65,12 @@ object FirDelegatedPropertyChecker : FirPropertyChecker() {
              * @return true if any error was reported; false otherwise.
              */
             private fun checkFunctionReferenceErrors(functionCall: FirFunctionCall): Boolean {
-                val reference = functionCall.calleeReference
-                val diagnostic = if (reference.isError()) reference.diagnostic else return false
+                konst reference = functionCall.calleeReference
+                konst diagnostic = if (reference.isError()) reference.diagnostic else return false
                 if (reference.source?.kind != KtFakeSourceElementKind.DelegatedPropertyAccessor) return false
-                val expectedFunctionSignature =
+                konst expectedFunctionSignature =
                     (if (isGet) "getValue" else "setValue") + "(${functionCall.arguments.joinToString(", ") { it.typeRef.coneType.renderReadable() }})"
-                val delegateDescription = if (isGet) "delegate" else "delegate for var (read-write property)"
+                konst delegateDescription = if (isGet) "delegate" else "delegate for var (read-write property)"
 
                 fun reportInapplicableDiagnostics(candidates: Collection<FirBasedSymbol<*>>) {
                     reporter.reportOn(
@@ -127,8 +127,8 @@ object FirDelegatedPropertyChecker : FirPropertyChecker() {
             }
 
             private fun checkReturnType(functionCall: FirFunctionCall) {
-                val returnType = functionCall.typeRef.coneType
-                val propertyType = declaration.returnTypeRef.coneType
+                konst returnType = functionCall.typeRef.coneType
+                konst propertyType = declaration.returnTypeRef.coneType
                 if (!AbstractTypeChecker.isSubtypeOf(context.session.typeContext, returnType, propertyType)) {
                     reporter.reportOn(
                         source,

@@ -19,8 +19,8 @@ import kotlin.contracts.*
 inline fun ContractBuilder.callsInPlaceEffectBuilder(block: () -> Unit) =
     callsInPlace(block, InvocationKind.EXACTLY_ONCE)
 
-fun ContractBuilder.returnsEffectBuilder(value_1: Int?) =
-    returns(true) implies (value_1 != null)
+fun ContractBuilder.returnsEffectBuilder(konstue_1: Int?) =
+    returns(true) implies (konstue_1 != null)
 
 // FILE: main.kt
 
@@ -40,7 +40,7 @@ inline fun case_2(block: () -> Unit) {
 }
 
 // TESTCASE NUMBER: 3
-inline fun case_3(value_1: Int?, block: () -> Unit) {
-    contract({ <!ERROR_IN_CONTRACT_DESCRIPTION!>returnsEffectBuilder(value_1)<!>; <!ERROR_IN_CONTRACT_DESCRIPTION!>callsInPlaceEffectBuilder(block)<!> })
+inline fun case_3(konstue_1: Int?, block: () -> Unit) {
+    contract({ <!ERROR_IN_CONTRACT_DESCRIPTION!>returnsEffectBuilder(konstue_1)<!>; <!ERROR_IN_CONTRACT_DESCRIPTION!>callsInPlaceEffectBuilder(block)<!> })
     return block()
 }

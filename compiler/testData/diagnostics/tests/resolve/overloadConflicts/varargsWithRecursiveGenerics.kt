@@ -12,11 +12,11 @@ public class J {
 
 // FILE: test.kt
 enum class X { A }
-val a = X.A
+konst a = X.A
 
-val test0: Int = J.foo<X>()
-val test1: String = J.foo(a)
-val test2: String = J.foo(a, a)
-val test3: String = J.foo(a, a, a)
-val test4: Int = J.foo(a, a, a, a)
-val test5: Int = J.foo(a, a, a, a, a)
+konst test0: Int = J.foo<X>()
+konst test1: String = J.foo(a)
+konst test2: String = J.foo(a, a)
+konst test3: String = J.foo(a, a, a)
+konst test4: Int = J.foo(a, a, a, a)
+konst test5: Int = J.foo(a, a, a, a, a)

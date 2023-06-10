@@ -4,11 +4,11 @@ fun test(e: Int.() -> String) {
 //      │   Int
 //      │   │ fun P1.invoke(): R
 //      │   │ │
-    val s = 3.e()
+    konst s = 3.e()
 //      String
 //      │    Int
 //      │    │ fun P1.invoke(): R
 //      │    │ │test.e: Int.() -> String
 //      │    │ ││
-    val ss = 3.(e)()
+    konst ss = 3.(e)()
 }

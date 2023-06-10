@@ -30,13 +30,13 @@ object OverloadabilitySpecificityCallbacks : SpecificityComparisonCallbacks {
         false
 }
 
-class OverloadChecker(val specificityComparator: TypeSpecificityComparator) {
+class OverloadChecker(konst specificityComparator: TypeSpecificityComparator) {
     /**
      * Does not check names.
      */
     fun isOverloadable(a: DeclarationDescriptor, b: DeclarationDescriptor): Boolean {
-        val aCategory = getDeclarationCategory(a)
-        val bCategory = getDeclarationCategory(b)
+        konst aCategory = getDeclarationCategory(a)
+        konst bCategory = getDeclarationCategory(b)
 
         if (aCategory != bCategory) return true
         if (a !is CallableDescriptor || b !is CallableDescriptor) return false
@@ -47,7 +47,7 @@ class OverloadChecker(val specificityComparator: TypeSpecificityComparator) {
     private fun checkOverloadability(a: CallableDescriptor, b: CallableDescriptor): Boolean {
         if (a.hasLowPriorityInOverloadResolution() != b.hasLowPriorityInOverloadResolution()) return true
 
-        // NB this makes generic and non-generic declarations with equivalent signatures non-conflicting
+        // NB this makes generic and non-generic declarations with equikonstent signatures non-conflicting
         // E.g., 'fun <T> foo()' and 'fun foo()'.
         // They can be disambiguated by providing explicit type parameters.
         if (a.typeParameters.isEmpty() != b.typeParameters.isEmpty()) return true
@@ -57,12 +57,12 @@ class OverloadChecker(val specificityComparator: TypeSpecificityComparator) {
         ) return true
         if (a.varargParameterPosition() != b.varargParameterPosition()) return true
 
-        val aSignature = FlatSignature.createFromCallableDescriptor(a)
-        val bSignature = FlatSignature.createFromCallableDescriptor(b)
+        konst aSignature = FlatSignature.createFromCallableDescriptor(a)
+        konst bSignature = FlatSignature.createFromCallableDescriptor(b)
 
-        val aIsNotLessSpecificThanB = ConstraintSystemBuilderImpl.forSpecificity()
+        konst aIsNotLessSpecificThanB = ConstraintSystemBuilderImpl.forSpecificity()
             .isSignatureNotLessSpecific(aSignature, bSignature, OverloadabilitySpecificityCallbacks, specificityComparator)
-        val bIsNotLessSpecificThanA = ConstraintSystemBuilderImpl.forSpecificity()
+        konst bIsNotLessSpecificThanA = ConstraintSystemBuilderImpl.forSpecificity()
             .isSignatureNotLessSpecific(bSignature, aSignature, OverloadabilitySpecificityCallbacks, specificityComparator)
 
         return !(aIsNotLessSpecificThanB && bIsNotLessSpecificThanA)

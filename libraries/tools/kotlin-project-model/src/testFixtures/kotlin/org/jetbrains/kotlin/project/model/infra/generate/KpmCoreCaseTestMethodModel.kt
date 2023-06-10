@@ -11,20 +11,20 @@ import org.jetbrains.kotlin.test.util.KtTestUtil
 import java.io.File
 
 class KpmCoreCaseTestMethodModel(
-    override val name: String, // equals to name of corresponding KpmCoreCase
-    internal val pathToTestSourcesRootDir: File,
-    internal val pathToTestCase: File,
+    override konst name: String, // equals to name of corresponding KpmCoreCase
+    internal konst pathToTestSourcesRootDir: File,
+    internal konst pathToTestCase: File,
 ) : MethodModel {
     object Kind : MethodModel.Kind()
 
-    override val dataString: String
+    override konst dataString: String
         get() {
-            val path = FileUtil.getRelativePath(pathToTestSourcesRootDir, pathToTestCase)!!
+            konst path = FileUtil.getRelativePath(pathToTestSourcesRootDir, pathToTestCase)!!
             return KtTestUtil.getFilePath(File(path))
         }
-    override val tags: List<String>
+    override konst tags: List<String>
         get() = emptyList()
 
-    override val kind: MethodModel.Kind
+    override konst kind: MethodModel.Kind
         get() = Kind
 }

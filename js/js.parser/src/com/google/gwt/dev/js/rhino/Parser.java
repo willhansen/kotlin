@@ -753,7 +753,7 @@ public class Parser {
         pn.setCommentsBeforeNode(commentBeforeNode);
 
         if (ts.matchToken(TokenStream.ASSIGN)) {
-            // omitted: "invalid assignment left-hand side" check.
+            // omitted: "inkonstid assignment left-hand side" check.
             CodePosition position = ts.tokenPosition;
             pn = nf.createBinary(TokenStream.ASSIGN, ts.getOp(), pn, assignExpr(ts, inForInit), position);
         }

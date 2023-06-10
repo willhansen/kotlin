@@ -18,7 +18,7 @@ public inline fun <R> myrun(block: () -> R): R {
 import test.*
 
 fun test(b: Boolean): Int {
-    val x: Int
+    konst x: Int
 
     if (b) {
         x = 1

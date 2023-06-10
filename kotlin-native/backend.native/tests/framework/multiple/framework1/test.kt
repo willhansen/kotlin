@@ -7,4 +7,4 @@
 
 package multiple
 
-val name = "first"
+konst name = "first"

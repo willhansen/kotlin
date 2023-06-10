@@ -13,13 +13,13 @@ public class Test {
 // FILE: simple.kt
 
 
-public class Bar(public val s: String)
+public class Bar(public konst s: String)
 
 annotation class Foo {
 
     companion object {
         @JvmField
-        val z = Bar("OK")
+        konst z = Bar("OK")
     }
 }
 

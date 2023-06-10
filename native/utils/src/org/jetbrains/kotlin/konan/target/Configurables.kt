@@ -19,9 +19,9 @@ package org.jetbrains.kotlin.konan.target
 import org.jetbrains.kotlin.konan.properties.*
 
 interface RelocationModeFlags : TargetableExternalStorage {
-    val dynamicLibraryRelocationMode get() = targetString("dynamicLibraryRelocationMode").mode()
-    val staticLibraryRelocationMode get()  = targetString("staticLibraryRelocationMode").mode()
-    val executableRelocationMode get() = targetString("executableRelocationMode").mode()
+    konst dynamicLibraryRelocationMode get() = targetString("dynamicLibraryRelocationMode").mode()
+    konst staticLibraryRelocationMode get()  = targetString("staticLibraryRelocationMode").mode()
+    konst executableRelocationMode get() = targetString("executableRelocationMode").mode()
 
     @Suppress("DEPRECATION")
     private fun String?.mode(): Mode = when (this?.toLowerCase()) {
@@ -39,96 +39,96 @@ interface RelocationModeFlags : TargetableExternalStorage {
 }
 
 interface ClangFlags : TargetableExternalStorage, RelocationModeFlags {
-    val clangFlags get()        = targetList("clangFlags")
-    val clangNooptFlags get()   = targetList("clangNooptFlags")
-    val clangOptFlags get()     = targetList("clangOptFlags")
-    val clangDebugFlags get()   = targetList("clangDebugFlags")
+    konst clangFlags get()        = targetList("clangFlags")
+    konst clangNooptFlags get()   = targetList("clangNooptFlags")
+    konst clangOptFlags get()     = targetList("clangOptFlags")
+    konst clangDebugFlags get()   = targetList("clangDebugFlags")
 }
 
 interface LldFlags : TargetableExternalStorage {
-    val lldFlags get()      = targetList("lld")
+    konst lldFlags get()      = targetList("lld")
 }
 
 interface Configurables : TargetableExternalStorage, RelocationModeFlags {
 
-    val target: KonanTarget
-    val targetTriple: TargetTriple
+    konst target: KonanTarget
+    konst targetTriple: TargetTriple
         get() = targetString("targetTriple")
                 ?.let(TargetTriple.Companion::fromString)
                 ?: error("quadruple for $target is not set.")
 
-    val llvmHome get() = hostString("llvmHome")
-    val llvmVersion get() = hostString("llvmVersion")
-    val libffiDir get() = hostString("libffiDir")
+    konst llvmHome get() = hostString("llvmHome")
+    konst llvmVersion get() = hostString("llvmVersion")
+    konst libffiDir get() = hostString("libffiDir")
 
-    val cacheableTargets get() = hostList("cacheableTargets")
-    val additionalCacheFlags get() = targetList("additionalCacheFlags")
+    konst cacheableTargets get() = hostList("cacheableTargets")
+    konst additionalCacheFlags get() = targetList("additionalCacheFlags")
 
     // TODO: Delegate to a map?
-    val linkerOptimizationFlags get() = targetList("linkerOptimizationFlags")
-    val linkerKonanFlags get() = targetList("linkerKonanFlags")
-    val mimallocLinkerDependencies get() = targetList("mimallocLinkerDependencies")
-    val linkerNoDebugFlags get() = targetList("linkerNoDebugFlags")
-    val linkerDynamicFlags get() = targetList("linkerDynamicFlags")
-    val targetSysRoot get() = targetString("targetSysRoot")
+    konst linkerOptimizationFlags get() = targetList("linkerOptimizationFlags")
+    konst linkerKonanFlags get() = targetList("linkerKonanFlags")
+    konst mimallocLinkerDependencies get() = targetList("mimallocLinkerDependencies")
+    konst linkerNoDebugFlags get() = targetList("linkerNoDebugFlags")
+    konst linkerDynamicFlags get() = targetList("linkerDynamicFlags")
+    konst targetSysRoot get() = targetString("targetSysRoot")
 
     // Notice: these ones are host-target.
-    val targetToolchain get() = hostTargetString("targetToolchain")
+    konst targetToolchain get() = hostTargetString("targetToolchain")
 
-    val absoluteTargetSysRoot get() = absolute(targetSysRoot)
-    val absoluteTargetToolchain get() = absolute(targetToolchain)
-    val absoluteLlvmHome get() = absolute(llvmHome)
+    konst absoluteTargetSysRoot get() = absolute(targetSysRoot)
+    konst absoluteTargetToolchain get() = absolute(targetToolchain)
+    konst absoluteLlvmHome get() = absolute(llvmHome)
 
-    val targetCpu get() = targetString("targetCpu")
-    val targetCpuFeatures get() = targetString("targetCpuFeatures")
-    val llvmInlineThreshold get() = targetString("llvmInlineThreshold")
+    konst targetCpu get() = targetString("targetCpu")
+    konst targetCpuFeatures get() = targetString("targetCpuFeatures")
+    konst llvmInlineThreshold get() = targetString("llvmInlineThreshold")
 
-    val runtimeDefinitions get() = targetList("runtimeDefinitions")
+    konst runtimeDefinitions get() = targetList("runtimeDefinitions")
 }
 
 interface ConfigurablesWithEmulator : Configurables {
-    val emulatorDependency get() = hostTargetString("emulatorDependency")
+    konst emulatorDependency get() = hostTargetString("emulatorDependency")
     // TODO: We need to find a way to represent absolute path in properties.
     //  In case of QEMU, absolute path to dynamic linker should be specified.
-    val emulatorExecutable get() = hostTargetString("emulatorExecutable")
+    konst emulatorExecutable get() = hostTargetString("emulatorExecutable")
 
-    val absoluteEmulatorExecutable get() = absolute(emulatorExecutable)
+    konst absoluteEmulatorExecutable get() = absolute(emulatorExecutable)
 }
 
 interface AppleConfigurables : Configurables, ClangFlags {
-    val arch get() = targetTriple.architecture
-    val osVersionMin get() = targetString("osVersionMin")!!
-    val osVersionMinFlagLd get() = targetString("osVersionMinFlagLd")!!
-    val stripFlags get() = targetList("stripFlags")
-    val additionalToolsDir get() = hostString("additionalToolsDir")
-    val absoluteAdditionalToolsDir get() = absolute(additionalToolsDir)
+    konst arch get() = targetTriple.architecture
+    konst osVersionMin get() = targetString("osVersionMin")!!
+    konst osVersionMinFlagLd get() = targetString("osVersionMinFlagLd")!!
+    konst stripFlags get() = targetList("stripFlags")
+    konst additionalToolsDir get() = hostString("additionalToolsDir")
+    konst absoluteAdditionalToolsDir get() = absolute(additionalToolsDir)
 }
 
 interface MingwConfigurables : Configurables, ClangFlags {
-    val linker get() = hostTargetString("linker")!!
-    val absoluteLinker get() = absolute(linker)
+    konst linker get() = hostTargetString("linker")!!
+    konst absoluteLinker get() = absolute(linker)
 
-    val windowsKit: WindowsKit
-    val msvc: Msvc
+    konst windowsKit: WindowsKit
+    konst msvc: Msvc
 
-    val windowsKitParts get() = hostString("windowsKitParts")!!
-    val msvcParts get() = hostString("msvcParts")!!
+    konst windowsKitParts get() = hostString("windowsKitParts")!!
+    konst msvcParts get() = hostString("msvcParts")!!
 }
 
 interface GccConfigurables : Configurables, ClangFlags {
-    val gccToolchain get() = targetString("gccToolchain")
-    val absoluteGccToolchain get() = absolute(gccToolchain)
+    konst gccToolchain get() = targetString("gccToolchain")
+    konst absoluteGccToolchain get() = absolute(gccToolchain)
 
-    val libGcc get() = targetString("libGcc")!!
-    val dynamicLinker get() = targetString("dynamicLinker")!!
-    val abiSpecificLibraries get() = targetList("abiSpecificLibraries")
-    val crtFilesLocation get() = targetString("crtFilesLocation")!!
+    konst libGcc get() = targetString("libGcc")!!
+    konst dynamicLinker get() = targetString("dynamicLinker")!!
+    konst abiSpecificLibraries get() = targetList("abiSpecificLibraries")
+    konst crtFilesLocation get() = targetString("crtFilesLocation")!!
 
-    val linker get() = hostTargetString("linker")
-    val linkerHostSpecificFlags get() = hostTargetList("linkerHostSpecificFlags")
-    val absoluteLinker get() = absolute(linker)
+    konst linker get() = hostTargetString("linker")
+    konst linkerHostSpecificFlags get() = hostTargetList("linkerHostSpecificFlags")
+    konst absoluteLinker get() = absolute(linker)
 
-    val linkerGccFlags get() = targetList("linkerGccFlags")
+    konst linkerGccFlags get() = targetList("linkerGccFlags")
 }
 
 interface AndroidConfigurables : Configurables, ClangFlags
@@ -136,6 +136,6 @@ interface AndroidConfigurables : Configurables, ClangFlags
 interface WasmConfigurables : Configurables, ClangFlags, LldFlags
 
 interface ZephyrConfigurables : Configurables, ClangFlags {
-    val boardSpecificClangFlags get() = targetList("boardSpecificClangFlags")
-    val targetAbi get() = targetString("targetAbi")
+    konst boardSpecificClangFlags get() = targetList("boardSpecificClangFlags")
+    konst targetAbi get() = targetString("targetAbi")
 }

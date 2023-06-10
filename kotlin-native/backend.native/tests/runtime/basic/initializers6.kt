@@ -12,52 +12,52 @@ import kotlin.native.concurrent.*
 import kotlin.concurrent.*
 import kotlin.concurrent.AtomicInt
 
-val aWorkerId = AtomicInt(0)
-val bWorkersCount = 3
+konst aWorkerId = AtomicInt(0)
+konst bWorkersCount = 3
 
-val aWorkerUnlocker = AtomicInt(0)
-val bWorkerUnlocker = AtomicInt(0)
+konst aWorkerUnlocker = AtomicInt(0)
+konst bWorkerUnlocker = AtomicInt(0)
 
 object A {
     init {
         // Must be called by aWorker only.
-        assertEquals(aWorkerId.value, Worker.current.id)
+        assertEquals(aWorkerId.konstue, Worker.current.id)
         // Only allow b workers to run, when a worker has started initialization.
         bWorkerUnlocker.incrementAndGet()
         // Only proceed with initialization, when all b workers have started executing.
-        while (aWorkerUnlocker.value < bWorkersCount) {}
+        while (aWorkerUnlocker.konstue < bWorkersCount) {}
         // And now wait a bit, to increase probability of races.
         Worker.current.park(100 * 1000L)
     }
-    val a = produceA()
-    val b = produceB()
+    konst a = produceA()
+    konst b = produceB()
 }
 
 fun produceA(): String {
     // Must've been called by aWorker only.
-    assertEquals(aWorkerId.value, Worker.current.id)
+    assertEquals(aWorkerId.konstue, Worker.current.id)
     return "A"
 }
 
 fun produceB(): String {
     // Must've been called by aWorker only.
-    assertEquals(aWorkerId.value, Worker.current.id)
+    assertEquals(aWorkerId.konstue, Worker.current.id)
     // Also check that it's ok to get A.a while initializing A.b.
     return "B+${A.a}"
 }
 
 @Test fun runTest() {
-    val aWorker = Worker.start()
-    aWorkerId.value = aWorker.id
-    val bWorkers = Array(bWorkersCount, { _ -> Worker.start() })
+    konst aWorker = Worker.start()
+    aWorkerId.konstue = aWorker.id
+    konst bWorkers = Array(bWorkersCount, { _ -> Worker.start() })
 
-    val aFuture = aWorker.execute(TransferMode.SAFE, {}, {
+    konst aFuture = aWorker.execute(TransferMode.SAFE, {}, {
         A.b
     })
-    val bFutures = Array(bWorkers.size, {
+    konst bFutures = Array(bWorkers.size, {
         bWorkers[it].execute(TransferMode.SAFE, {}, {
             // Wait until A has started to initialize.
-            while (bWorkerUnlocker.value < 1) {}
+            while (bWorkerUnlocker.konstue < 1) {}
             // Now allow A initialization to continue.
             aWorkerUnlocker.incrementAndGet()
             // And this should not've tried to init A itself.

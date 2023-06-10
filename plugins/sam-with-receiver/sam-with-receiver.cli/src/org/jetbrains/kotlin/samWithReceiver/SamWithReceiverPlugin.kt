@@ -24,37 +24,37 @@ import org.jetbrains.kotlin.samWithReceiver.SamWithReceiverPluginNames.PRESET_OP
 import org.jetbrains.kotlin.samWithReceiver.k2.FirSamWithReceiverExtensionRegistrar
 
 object SamWithReceiverConfigurationKeys {
-    val ANNOTATION: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation qualified name")
+    konst ANNOTATION: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation qualified name")
 
-    val PRESET: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation preset")
+    konst PRESET: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation preset")
 }
 
 class SamWithReceiverCommandLineProcessor : CommandLineProcessor {
     companion object {
-        val ANNOTATION_OPTION = CliOption(
+        konst ANNOTATION_OPTION = CliOption(
             ANNOTATION_OPTION_NAME, "<fqname>", "Annotation qualified names",
             required = false, allowMultipleOccurrences = true
         )
 
-        val PRESET_OPTION = CliOption(
+        konst PRESET_OPTION = CliOption(
             PRESET_OPTION_NAME, "<name>", "Preset name (${SUPPORTED_PRESETS.keys.joinToString()})",
             required = false, allowMultipleOccurrences = true
         )
     }
 
-    override val pluginId = PLUGIN_ID
-    override val pluginOptions = listOf(ANNOTATION_OPTION)
+    override konst pluginId = PLUGIN_ID
+    override konst pluginOptions = listOf(ANNOTATION_OPTION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) = when (option) {
-        ANNOTATION_OPTION -> configuration.appendList(ANNOTATION, value)
-        PRESET_OPTION -> configuration.appendList(PRESET, value)
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) = when (option) {
+        ANNOTATION_OPTION -> configuration.appendList(ANNOTATION, konstue)
+        PRESET_OPTION -> configuration.appendList(PRESET, konstue)
         else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
     }
 }
 
 class SamWithReceiverComponentRegistrar : CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        val annotations = configuration.get(ANNOTATION)?.toMutableList() ?: mutableListOf()
+        konst annotations = configuration.get(ANNOTATION)?.toMutableList() ?: mutableListOf()
         configuration.get(PRESET)?.forEach { preset ->
             SUPPORTED_PRESETS[preset]?.let { annotations += it }
         }
@@ -64,11 +64,11 @@ class SamWithReceiverComponentRegistrar : CompilerPluginRegistrar() {
         FirExtensionRegistrarAdapter.registerExtension(FirSamWithReceiverExtensionRegistrar(annotations))
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 }
 
-class CliSamWithReceiverComponentContributor(val annotations: List<String>) : StorageComponentContainerContributor {
+class CliSamWithReceiverComponentContributor(konst annotations: List<String>) : StorageComponentContainerContributor {
     override fun registerModuleComponents(
         container: StorageComponentContainer,
         platform: TargetPlatform,

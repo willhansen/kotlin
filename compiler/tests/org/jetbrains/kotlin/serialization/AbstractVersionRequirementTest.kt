@@ -40,12 +40,12 @@ abstract class AbstractVersionRequirementTest : TestCaseWithTmpdir() {
             listOf(File("compiler/testData/versionRequirement/${getTestName(true)}.kt")),
             tmpdir, customLanguageVersion, analysisFlags, specificFeatures
         )
-        val module = loadModule(tmpdir)
+        konst module = loadModule(tmpdir)
 
         for (fqName in fqNamesWithRequirements) {
-            val descriptor = module.findUnambiguousDescriptorByFqName(fqName)
+            konst descriptor = module.findUnambiguousDescriptorByFqName(fqName)
 
-            val requirements = extractRequirement(descriptor)
+            konst requirements = extractRequirement(descriptor)
             if (requirements.isEmpty()) throw AssertionError("No VersionRequirement for $descriptor")
 
             if (shouldBeSingleRequirement && requirements.size > 1) {
@@ -75,9 +75,9 @@ abstract class AbstractVersionRequirementTest : TestCaseWithTmpdir() {
         }
 
         for (fqName in fqNamesWithoutRequirement) {
-            val descriptor = module.findUnambiguousDescriptorByFqName(fqName)
+            konst descriptor = module.findUnambiguousDescriptorByFqName(fqName)
 
-            val requirement = extractRequirement(descriptor)
+            konst requirement = extractRequirement(descriptor)
             assertTrue("Expecting absence of any requirements for $fqName, but `$requirement`", requirement.isEmpty())
         }
     }
@@ -94,13 +94,13 @@ abstract class AbstractVersionRequirementTest : TestCaseWithTmpdir() {
     }
 
     private fun ModuleDescriptor.findUnambiguousDescriptorByFqName(fqName: String): DeclarationDescriptor {
-        val names = fqName.split('.')
+        konst names = fqName.split('.')
         var descriptor: DeclarationDescriptor = getPackage(FqName(names.first()))
         for (name in names.drop(1)) {
-            val descriptors = when (name) {
+            konst descriptors = when (name) {
                 "<init>" -> (descriptor as ClassDescriptor).constructors
                 else -> {
-                    val scope = when (descriptor) {
+                    konst scope = when (descriptor) {
                         is PackageViewDescriptor -> descriptor.memberScope
                         is ClassDescriptor -> descriptor.unsubstitutedMemberScope
                         else -> error("Unsupported: $descriptor")

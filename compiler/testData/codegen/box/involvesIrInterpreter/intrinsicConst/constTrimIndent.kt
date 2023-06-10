@@ -1,11 +1,11 @@
-// !LANGUAGE: +IntrinsicConstEvaluation
+// !LANGUAGE: +IntrinsicConstEkonstuation
 // TARGET_BACKEND: JVM_IR
 // IGNORE_BACKEND_K1: JVM_IR
 // WITH_STDLIB
 fun <T> T.id() = this
 
-const val trimIndent = "123".<!EVALUATED("123")!>trimIndent()<!>
-const val complexTrimIndent =
+const konst trimIndent = "123".<!EVALUATED("123")!>trimIndent()<!>
+const konst complexTrimIndent =
     """
             ABC
             123

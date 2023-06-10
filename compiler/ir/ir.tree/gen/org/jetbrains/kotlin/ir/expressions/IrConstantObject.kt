@@ -22,18 +22,18 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 abstract class IrConstantObject : IrConstantValue() {
     abstract var constructor: IrConstructorSymbol
 
-    abstract val valueArguments: MutableList<IrConstantValue>
+    abstract konst konstueArguments: MutableList<IrConstantValue>
 
-    abstract val typeArguments: MutableList<IrType>
+    abstract konst typeArguments: MutableList<IrType>
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
         visitor.visitConstantObject(this, data)
 
     override fun <D> acceptChildren(visitor: IrElementVisitor<Unit, D>, data: D) {
-        valueArguments.forEach { it.accept(visitor, data) }
+        konstueArguments.forEach { it.accept(visitor, data) }
     }
 
     override fun <D> transformChildren(transformer: IrElementTransformer<D>, data: D) {
-        valueArguments.transformInPlace(transformer, data)
+        konstueArguments.transformInPlace(transformer, data)
     }
 }

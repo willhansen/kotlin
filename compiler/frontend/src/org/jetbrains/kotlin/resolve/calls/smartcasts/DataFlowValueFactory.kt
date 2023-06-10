@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 import org.jetbrains.kotlin.types.KotlinType
 
 /**
- * This class is intended to create data flow values for different kind of expressions.
- * Then data flow values serve as keys to obtain data flow information for these expressions.
+ * This class is intended to create data flow konstues for different kind of expressions.
+ * Then data flow konstues serve as keys to obtain data flow information for these expressions.
  */
 interface DataFlowValueFactory {
     fun createDataFlowValue(

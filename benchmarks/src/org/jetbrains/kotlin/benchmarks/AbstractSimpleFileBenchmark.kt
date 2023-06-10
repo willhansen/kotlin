@@ -43,7 +43,7 @@ import java.io.File
 import java.nio.charset.StandardCharsets
 
 private fun createFile(shortName: String, text: String, project: Project): KtFile {
-    val virtualFile = object : LightVirtualFile(shortName, KotlinLanguage.INSTANCE, text) {
+    konst virtualFile = object : LightVirtualFile(shortName, KotlinLanguage.INSTANCE, text) {
         override fun getPath(): String {
             //TODO: patch LightVirtualFile
             return "/" + name
@@ -51,22 +51,22 @@ private fun createFile(shortName: String, text: String, project: Project): KtFil
     }
 
     virtualFile.charset = StandardCharsets.UTF_8
-    val factory = PsiFileFactory.getInstance(project) as PsiFileFactoryImpl
+    konst factory = PsiFileFactory.getInstance(project) as PsiFileFactoryImpl
 
     return factory.trySetupPsiForFile(virtualFile, KotlinLanguage.INSTANCE, true, false) as KtFile
 }
 
-private val JDK_PATH = File("${System.getProperty("java.home")!!}/lib/rt.jar")
-private val RUNTIME_JAR = File(System.getProperty("kotlin.runtime.path") ?: "dist/kotlinc/lib/kotlin-runtime.jar")
+private konst JDK_PATH = File("${System.getProperty("java.home")!!}/lib/rt.jar")
+private konst RUNTIME_JAR = File(System.getProperty("kotlin.runtime.path") ?: "dist/kotlinc/lib/kotlin-runtime.jar")
 
-private val LANGUAGE_FEATURE_SETTINGS =
+private konst LANGUAGE_FEATURE_SETTINGS =
     LanguageVersionSettingsImpl(
         LanguageVersion.KOTLIN_1_3, ApiVersion.KOTLIN_1_3,
         specificFeatures = mapOf(LanguageFeature.NewInference to LanguageFeature.State.ENABLED)
     )
 
 private fun newConfiguration(useNewInference: Boolean): CompilerConfiguration {
-    val configuration = CompilerConfiguration()
+    konst configuration = CompilerConfiguration()
     configuration.put(CommonConfigurationKeys.MODULE_NAME, "benchmark")
     configuration.put(CLIConfigurationKeys.INTELLIJ_PLUGIN_ROOT, "../compiler/cli/cli-common/resources")
     configuration.addJvmClasspathRoot(JDK_PATH)
@@ -74,7 +74,7 @@ private fun newConfiguration(useNewInference: Boolean): CompilerConfiguration {
     configuration.configureJdkClasspathRoots()
     configuration.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
 
-    val newInferenceState = if (useNewInference) LanguageFeature.State.ENABLED else LanguageFeature.State.DISABLED
+    konst newInferenceState = if (useNewInference) LanguageFeature.State.ENABLED else LanguageFeature.State.DISABLED
     configuration.languageVersionSettings = LanguageVersionSettingsImpl(
         LanguageVersion.KOTLIN_1_3, ApiVersion.KOTLIN_1_3,
         specificFeatures = mapOf(
@@ -94,11 +94,11 @@ abstract class AbstractSimpleFileBenchmark {
     @Param("true", "false")
     protected var isIR: Boolean = false
 
-    protected open val useNewInference get() = isIR
+    protected open konst useNewInference get() = isIR
 
     @Setup(Level.Trial)
     fun setUp() {
-        if (isIR && !useNewInference) error("Invalid configuration")
+        if (isIR && !useNewInference) error("Inkonstid configuration")
         env = KotlinCoreEnvironment.createForTests(
             myDisposable,
             newConfiguration(useNewInference),
@@ -125,19 +125,19 @@ abstract class AbstractSimpleFileBenchmark {
     }
 
     private fun analyzeGreenFileFrontend(bh: Blackhole) {
-        val tracker = ExceptionTracker()
-        val storageManager: StorageManager =
+        konst tracker = ExceptionTracker()
+        konst storageManager: StorageManager =
             LockBasedStorageManager.createWithExceptionHandling("benchmarks", tracker)
 
-        val context = SimpleGlobalContext(storageManager, tracker)
-        val module =
+        konst context = SimpleGlobalContext(storageManager, tracker)
+        konst module =
             ModuleDescriptorImpl(
                 Name.special("<benchmark>"), storageManager,
                 JvmBuiltIns(storageManager, JvmBuiltIns.Kind.FROM_DEPENDENCIES)
             )
-        val moduleContext = context.withProject(env.project).withModule(module)
+        konst moduleContext = context.withProject(env.project).withModule(module)
 
-        val result = TopDownAnalyzerFacadeForJVM.analyzeFilesWithJavaIntegration(
+        konst result = TopDownAnalyzerFacadeForJVM.analyzeFilesWithJavaIntegration(
             moduleContext.project,
             listOf(file),
             NoScopeRecordCliBindingTrace(),
@@ -152,14 +152,14 @@ abstract class AbstractSimpleFileBenchmark {
 
     @OptIn(ObsoleteTestInfrastructure::class)
     private fun analyzeGreenFileIr(bh: Blackhole) {
-        val scope = GlobalSearchScope.filesScope(env.project, listOf(file.virtualFile))
+        konst scope = GlobalSearchScope.filesScope(env.project, listOf(file.virtualFile))
             .uniteWith(TopDownAnalyzerFacadeForJVM.AllJavaSourcesInProjectScope(env.project))
-        val session = FirTestSessionFactoryHelper.createSessionForTests(env.toAbstractProjectEnvironment(), scope.toAbstractProjectFileSearchScope())
-        val firProvider = session.firProvider as FirProviderImpl
-        val builder = RawFirBuilder(session, firProvider.kotlinScopeProvider)
+        konst session = FirTestSessionFactoryHelper.createSessionForTests(env.toAbstractProjectEnvironment(), scope.toAbstractProjectFileSearchScope())
+        konst firProvider = session.firProvider as FirProviderImpl
+        konst builder = RawFirBuilder(session, firProvider.kotlinScopeProvider)
 
-        val totalTransformer = FirTotalResolveProcessor(session)
-        val firFile = builder.buildFirFile(file).also(firProvider::recordFile)
+        konst totalTransformer = FirTotalResolveProcessor(session)
+        konst firFile = builder.buildFirFile(file).also(firProvider::recordFile)
 
         totalTransformer.process(listOf(firFile))
 

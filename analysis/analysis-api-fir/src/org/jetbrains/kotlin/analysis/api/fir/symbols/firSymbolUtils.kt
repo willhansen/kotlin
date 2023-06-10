@@ -32,8 +32,8 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.psi.KtDeclaration
 
 
-internal fun FirCallableSymbol<*>.invalidModalityError(): Nothing {
-    val rendered = FirRenderer.withResolvePhase().renderElementWithTypeAsString(fir)
+internal fun FirCallableSymbol<*>.inkonstidModalityError(): Nothing {
+    konst rendered = FirRenderer.withResolvePhase().renderElementWithTypeAsString(fir)
     error(
         """|Symbol modality should not be null, looks like the FIR symbol was not properly resolved
                    |
@@ -44,8 +44,8 @@ internal fun FirCallableSymbol<*>.invalidModalityError(): Nothing {
 }
 
 internal fun FirFunctionSymbol<*>.createKtValueParameters(builder: KtSymbolByFirBuilder): List<KtValueParameterSymbol> {
-    return fir.valueParameters.map { valueParameter ->
-        builder.variableLikeBuilder.buildValueParameterSymbol(valueParameter.symbol)
+    return fir.konstueParameters.map { konstueParameter ->
+        builder.variableLikeBuilder.buildValueParameterSymbol(konstueParameter.symbol)
     }
 }
 
@@ -105,16 +105,16 @@ internal fun FirVariableSymbol<*>.getKtConstantInitializer(resolveSession: LLFir
     lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
     var firInitializer = fir.initializer ?: return null
     if (firInitializer is FirPropertyAccessExpression) {
-        val calleeReference = firInitializer.calleeReference
+        konst calleeReference = firInitializer.calleeReference
         if (calleeReference is FirPropertyFromParameterResolvedNamedReference) {
-            val valueParameterSymbol = calleeReference.resolvedSymbol as? FirValueParameterSymbol
-            if (valueParameterSymbol != null) {
-                valueParameterSymbol.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
-                firInitializer = valueParameterSymbol.fir.defaultValue ?: firInitializer
+            konst konstueParameterSymbol = calleeReference.resolvedSymbol as? FirValueParameterSymbol
+            if (konstueParameterSymbol != null) {
+                konstueParameterSymbol.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
+                firInitializer = konstueParameterSymbol.fir.defaultValue ?: firInitializer
             }
         }
     }
-    val parentIsAnnotation = dispatchReceiverType
+    konst parentIsAnnotation = dispatchReceiverType
         ?.toRegularClassSymbol(resolveSession.useSiteFirSession)
         ?.classKind == ClassKind.ANNOTATION_CLASS
     return firInitializer.asKtInitializerValue(moduleData.session, parentIsAnnotation)

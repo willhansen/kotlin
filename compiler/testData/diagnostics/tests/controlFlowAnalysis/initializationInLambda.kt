@@ -15,26 +15,26 @@ fun foo() {
 }
 
 fun bar() {
-    val x: Int
+    konst x: Int
     exec {
         <!CAPTURED_VAL_INITIALIZATION!>x<!> = 13
     }
 }
 
 fun bar2() {
-    val x: Int
+    konst x: Int
     fun foo() {
         <!CAPTURED_VAL_INITIALIZATION!>x<!> = 3
     }
     foo()
 }
 
-class My(val cond: Boolean) {
+class My(konst cond: Boolean) {
 
-    val y: Int
+    konst y: Int
 
     init {
-        val x: Int
+        konst x: Int
         if (cond) {
             exec {
 
@@ -48,7 +48,7 @@ class My(val cond: Boolean) {
     }
 
     constructor(): this(false) {
-        val x: Int
+        konst x: Int
         x = 2
         exec {
             x.hashCode()
@@ -57,8 +57,8 @@ class My(val cond: Boolean) {
 }
 
 class Your {
-    val y = if (true) {
-        val xx: Int
+    konst y = if (true) {
+        konst xx: Int
         exec {
             <!CAPTURED_VAL_INITIALIZATION!>xx<!> = 42
         }
@@ -67,8 +67,8 @@ class Your {
     else 0
 }
 
-val z = if (true) {
-    val xx: Int
+konst z = if (true) {
+    konst xx: Int
     exec {
         <!CAPTURED_VAL_INITIALIZATION!>xx<!> = 24
     }

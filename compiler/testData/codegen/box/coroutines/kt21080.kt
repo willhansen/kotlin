@@ -9,9 +9,9 @@ suspend fun suspendThere(v: A): A = suspendCoroutine { x ->
     x.resume(v)
 }
 
-class A(var value: Int)
+class A(var konstue: Int)
 
-suspend operator fun A?.plus(a: A) = suspendThere(A((this?.value ?: 0) + a.value))
+suspend operator fun A?.plus(a: A) = suspendThere(A((this?.konstue ?: 0) + a.konstue))
 class B(var a: A)
 
 fun builder(c: suspend () -> Unit) {
@@ -21,6 +21,6 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var b: B? = B(A(11))
     builder { b?.a += A(31) }
-    if (b?.a?.value != 42) return "FAIL 0"
+    if (b?.a?.konstue != 42) return "FAIL 0"
     return "OK"
 }

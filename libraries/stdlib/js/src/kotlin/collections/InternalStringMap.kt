@@ -17,19 +17,19 @@ import kotlin.collections.MutableMap.MutableEntry
  * because we want to have it erased to Any? in order not to generate type-safe override bridges for
  * [get], [contains], [remove] etc, if they ever are generated.
  */
-internal class InternalStringMap<K, V>(override val equality: EqualityComparator) : InternalMap<K, V> {
+internal class InternalStringMap<K, V>(override konst equality: EqualityComparator) : InternalMap<K, V> {
 
     private var backingMap: dynamic = createJsMap()
     override var size: Int = 0
         private set
 
 //    /**
-//     * A mod count to track 'value' replacements in map to ensure that the 'value' that we have in the
+//     * A mod count to track 'konstue' replacements in map to ensure that the 'konstue' that we have in the
 //     * iterator entry is guaranteed to be still correct.
-//     * This is to optimize for the common scenario where the values are not modified during
+//     * This is to optimize for the common scenario where the konstues are not modified during
 //     * iterations where the entries are never stale.
 //     */
-//    private var valueMod: Int = 0
+//    private var konstueMod: Int = 0
 
     override operator fun contains(key: K): Boolean {
         if (key !is String) return false
@@ -38,36 +38,36 @@ internal class InternalStringMap<K, V>(override val equality: EqualityComparator
 
     override operator fun get(key: K): V? {
         if (key !is String) return null
-        val value = backingMap[key]
-        return if (value !== undefined) value.unsafeCast<V>() else null
+        konst konstue = backingMap[key]
+        return if (konstue !== undefined) konstue.unsafeCast<V>() else null
     }
 
 
-    override fun put(key: K, value: V): V? {
+    override fun put(key: K, konstue: V): V? {
         require(key is String)
-        val oldValue = backingMap[key]
-        backingMap[key] = value
+        konst oldValue = backingMap[key]
+        backingMap[key] = konstue
 
         if (oldValue === undefined) {
             size++
 //            structureChanged(host)
             return null
         } else {
-//            valueMod++
+//            konstueMod++
             return oldValue.unsafeCast<V>()
         }
     }
 
     override fun remove(key: K): V? {
         if (key !is String) return null
-        val value = backingMap[key]
-        if (value !== undefined) {
+        konst konstue = backingMap[key]
+        if (konstue !== undefined) {
             jsDeleteProperty(backingMap, key)
             size--
 //            structureChanged(host)
-            return value.unsafeCast<V>()
+            return konstue.unsafeCast<V>()
         } else {
-//            valueMod++
+//            konstueMod++
             return null
         }
     }
@@ -81,14 +81,14 @@ internal class InternalStringMap<K, V>(override val equality: EqualityComparator
 
     override fun iterator(): MutableIterator<MutableEntry<K, V>> {
         return object : MutableIterator<MutableEntry<K, V>> {
-            private val keys: Array<String> = js("Object").keys(backingMap)
-            private val iterator = keys.iterator()
+            private konst keys: Array<String> = js("Object").keys(backingMap)
+            private konst iterator = keys.iterator()
             private var lastKey: String? = null
 
             override fun hasNext(): Boolean = iterator.hasNext()
 
             override fun next(): MutableEntry<K, V> {
-                val key = iterator.next()
+                konst key = iterator.next()
                 lastKey = key
                 @Suppress("UNCHECKED_CAST")
                 return newMapEntry(key as K)
@@ -102,8 +102,8 @@ internal class InternalStringMap<K, V>(override val equality: EqualityComparator
     }
 
     private fun newMapEntry(key: K): MutableEntry<K, V> = object : MutableEntry<K, V> {
-        override val key: K get() = key
-        override val value: V get() = this@InternalStringMap[key].unsafeCast<V>()
+        override konst key: K get() = key
+        override konst konstue: V get() = this@InternalStringMap[key].unsafeCast<V>()
 
         override fun setValue(newValue: V): V = this@InternalStringMap.put(key, newValue).unsafeCast<V>()
 

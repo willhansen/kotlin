@@ -9,7 +9,7 @@ import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiModifierList
 
 internal class CollectionAdditionalAnnotationsProvider(
-    private val additionalAnnotationQualifiers: Collection<String>,
+    private konst additionalAnnotationQualifiers: Collection<String>,
 ) : AdditionalAnnotationsProvider {
     constructor(qualifiedName: String) : this(setOf(qualifiedName))
 

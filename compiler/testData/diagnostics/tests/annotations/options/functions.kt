@@ -30,7 +30,7 @@ fun foo(arg: Int) {
     fast @ExprAnn { arg }
     fast2(1, @ExprAnn { arg })
     // Function expression too
-    val f = @FunAnn fun(): Int { return 42 }
+    konst f = @FunAnn fun(): Int { return 42 }
     // But here, f and gav should be annotated instead
     bar(<!WRONG_ANNOTATION_TARGET!>@FunAnn<!> f)
     bar(@<!DEBUG_INFO_MISSING_UNRESOLVED!>FunAnn<!> ::gav)

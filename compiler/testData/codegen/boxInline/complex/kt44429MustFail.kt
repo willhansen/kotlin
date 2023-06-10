@@ -21,7 +21,7 @@ inline fun <reified T> assertThrows(block: () -> Unit) {
 }
 
 fun box(): String {
-    val f = { null } as () -> Int
+    konst f = { null } as () -> Int
 
     assertThrows<NullPointerException> { takeTFail(f()) }
     assertThrows<NullPointerException> { takeUSuperInt(f()) }

@@ -4,16 +4,16 @@ enum class E {
 
     companion object {
         fun foo(): E = ENTRY
-        fun bar(): Array<E> = values()
-        fun baz(): E = valueOf("ENTRY")
-        val valuez = values()
+        fun bar(): Array<E> = konstues()
+        fun baz(): E = konstueOf("ENTRY")
+        konst konstuez = konstues()
     }
 
     fun oof(): E = ENTRY
-    fun rab(): Array<E> = values()
-    fun zab(): E = valueOf("ENTRY")
+    fun rab(): Array<E> = konstues()
+    fun zab(): E = konstueOf("ENTRY")
 }
 
 fun foo() = E.ENTRY
-fun bar() = E.values()
-fun baz() = E.valueOf("ENTRY")
+fun bar() = E.konstues()
+fun baz() = E.konstueOf("ENTRY")

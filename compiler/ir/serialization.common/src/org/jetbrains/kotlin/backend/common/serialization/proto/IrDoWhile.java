@@ -30,7 +30,7 @@ public final class IrDoWhile extends
   private IrDoWhile(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -68,10 +68,10 @@ public final class IrDoWhile extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -89,7 +89,7 @@ public final class IrDoWhile extends
     public IrDoWhile parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrDoWhile(input, extensionRegistry);
     }
   };
@@ -169,23 +169,23 @@ public final class IrDoWhile extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile parseFrom(java.io.InputStream input)
@@ -311,7 +311,7 @@ public final class IrDoWhile extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -339,11 +339,11 @@ public final class IrDoWhile extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.Loop loop = 1;</code>
      */
-    public Builder setLoop(org.jetbrains.kotlin.backend.common.serialization.proto.Loop value) {
-      if (value == null) {
+    public Builder setLoop(org.jetbrains.kotlin.backend.common.serialization.proto.Loop konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      loop_ = value;
+      loop_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -361,13 +361,13 @@ public final class IrDoWhile extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.Loop loop = 1;</code>
      */
-    public Builder mergeLoop(org.jetbrains.kotlin.backend.common.serialization.proto.Loop value) {
+    public Builder mergeLoop(org.jetbrains.kotlin.backend.common.serialization.proto.Loop konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           loop_ != org.jetbrains.kotlin.backend.common.serialization.proto.Loop.getDefaultInstance()) {
         loop_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.Loop.newBuilder(loop_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.Loop.newBuilder(loop_).mergeFrom(konstue).buildPartial();
       } else {
-        loop_ = value;
+        loop_ = konstue;
       }
 
       bitField0_ |= 0x00000001;

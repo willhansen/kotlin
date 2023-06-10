@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.psi2ir.intermediate
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.types.IrType
 
-internal class TransientReceiverValue(override val type: IrType) : IntermediateValue {
+internal class TransientReceiverValue(override konst type: IrType) : IntermediateValue {
 
     override fun load(): IrExpression {
         throw AssertionError("Transient receiver should not be instantiated")

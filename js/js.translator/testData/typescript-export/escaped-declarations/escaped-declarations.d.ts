@@ -4,29 +4,29 @@ declare namespace JS_TESTS {
         
         
         
-        function invalid_args_name_sum(first_value: number, second_value: number): number;
+        function inkonstid_args_name_sum(first_konstue: number, second_konstue: number): number;
         
         class A1 {
-            constructor(first_value: number, second_value: number);
-            get "first value"(): number;
-            get "second.value"(): number;
-            set "second.value"(value: number);
+            constructor(first_konstue: number, second_konstue: number);
+            get "first konstue"(): number;
+            get "second.konstue"(): number;
+            set "second.konstue"(konstue: number);
         }
         class A2 {
             constructor();
-            get "invalid:name"(): number;
-            set "invalid:name"(value: number);
+            get "inkonstid:name"(): number;
+            set "inkonstid:name"(konstue: number);
         }
         class A3 {
             constructor();
-            "invalid@name sum"(x: number, y: number): number;
-            invalid_args_name_sum(first_value: number, second_value: number): number;
+            "inkonstid@name sum"(x: number, y: number): number;
+            inkonstid_args_name_sum(first_konstue: number, second_konstue: number): number;
         }
         class A4 {
             constructor();
             static get Companion(): {
-                get "@invalid+name@"(): number;
-                set "@invalid+name@"(value: number);
+                get "@inkonstid+name@"(): number;
+                set "@inkonstid+name@"(konstue: number);
                 "^)run.something.weird^("(): string;
             };
         }

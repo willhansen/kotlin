@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.commonizer.utils.compactMapIndexed
 import org.jetbrains.kotlin.types.Variance
 
 class CirTypeAliasExpansion(
-    val typeAlias: CirProvided.TypeAlias,
-    val arguments: List<CirTypeProjection>,
-    val isMarkedNullable: Boolean,
-    val typeResolver: CirTypeResolver
+    konst typeAlias: CirProvided.TypeAlias,
+    konst arguments: List<CirTypeProjection>,
+    konst isMarkedNullable: Boolean,
+    konst typeResolver: CirTypeResolver
 ) {
     companion object {
         fun create(
@@ -23,7 +23,7 @@ class CirTypeAliasExpansion(
             isMarkedNullable: Boolean,
             typeResolver: CirTypeResolver
         ): CirTypeAliasExpansion {
-            val typeAlias: CirProvided.TypeAlias = typeResolver.resolveClassifier(typeAliasId)
+            konst typeAlias: CirProvided.TypeAlias = typeResolver.resolveClassifier(typeAliasId)
             checkArgumentsCount(typeAlias, typeAliasId, arguments)
 
             return CirTypeAliasExpansion(
@@ -38,10 +38,10 @@ class CirTypeAliasExpansion(
 
 object CirTypeAliasExpander {
     fun expand(expansion: CirTypeAliasExpansion): CirClassOrTypeAliasType {
-        val underlyingType = expansion.typeAlias.underlyingType
-        val underlyingProjection = CirProvided.RegularTypeProjection(Variance.INVARIANT, underlyingType)
+        konst underlyingType = expansion.typeAlias.underlyingType
+        konst underlyingProjection = CirProvided.RegularTypeProjection(Variance.INVARIANT, underlyingType)
 
-        val expandedProjection = expandTypeProjection(expansion, underlyingProjection, Variance.INVARIANT)
+        konst expandedProjection = expandTypeProjection(expansion, underlyingProjection, Variance.INVARIANT)
         check(expandedProjection is CirRegularTypeProjection) {
             "Type alias expansion: result for $underlyingType is $expandedProjection, should not be a star projection"
         }
@@ -49,7 +49,7 @@ object CirTypeAliasExpander {
             "Type alias expansion: result for $underlyingType is $expandedProjection, should be invariant"
         }
 
-        val expandedType = expandedProjection.type as CirClassOrTypeAliasType
+        konst expandedType = expandedProjection.type as CirClassOrTypeAliasType
         return expandedType.makeNullableIfNecessary(expansion.isMarkedNullable)
     }
 
@@ -58,19 +58,19 @@ object CirTypeAliasExpander {
         projection: CirProvided.TypeProjection,
         typeParameterVariance: Variance
     ): CirTypeProjection {
-        val type = when (projection) {
+        konst type = when (projection) {
             is CirProvided.StarTypeProjection -> return CirStarTypeProjection
             is CirProvided.RegularTypeProjection -> projection.type
         }
 
-        val argument = when (type) {
+        konst argument = when (type) {
             is CirProvided.TypeParameterType -> expansion.arguments[type.index]
             is CirProvided.TypeAliasType -> {
-                val substitutedType = expandTypeAliasType(expansion, type)
+                konst substitutedType = expandTypeAliasType(expansion, type)
                 CirRegularTypeProjection(projection.variance, substitutedType)
             }
             is CirProvided.ClassType -> {
-                val substitutedType = expandClassType(expansion, type)
+                konst substitutedType = expandClassType(expansion, type)
                 CirRegularTypeProjection(projection.variance, substitutedType)
             }
         }
@@ -78,13 +78,13 @@ object CirTypeAliasExpander {
         return when (argument) {
             is CirStarTypeProjection -> CirStarTypeProjection
             is CirRegularTypeProjection -> {
-                val argumentType = argument.type as CirSimpleType
+                konst argumentType = argument.type as CirSimpleType
 
-                val resultingVariance = run {
-                    val argumentVariance = argument.projectionKind
-                    val underlyingVariance = projection.variance
+                konst resultingVariance = run {
+                    konst argumentVariance = argument.projectionKind
+                    konst underlyingVariance = projection.variance
 
-                    val substitutionVariance = when {
+                    konst substitutionVariance = when {
                         underlyingVariance == argumentVariance -> argumentVariance
                         underlyingVariance == Variance.INVARIANT -> argumentVariance
                         argumentVariance == Variance.INVARIANT -> underlyingVariance
@@ -99,7 +99,7 @@ object CirTypeAliasExpander {
                     }
                 }
 
-                val substitutedType = argumentType.makeNullableIfNecessary(type.isMarkedNullable)
+                konst substitutedType = argumentType.makeNullableIfNecessary(type.isMarkedNullable)
 
                 CirRegularTypeProjection(resultingVariance, substitutedType)
             }
@@ -110,16 +110,16 @@ object CirTypeAliasExpander {
         expansion: CirTypeAliasExpansion,
         type: CirProvided.TypeAliasType
     ): CirTypeAliasType {
-        val typeAlias: CirProvided.TypeAlias = expansion.typeResolver.resolveClassifier(type.classifierId)
+        konst typeAlias: CirProvided.TypeAlias = expansion.typeResolver.resolveClassifier(type.classifierId)
         checkArgumentsCount(typeAlias, type.classifierId, type.arguments)
 
-        val expandedArguments = type.arguments.compactMapIndexed { index, argument ->
-            val projection = expandTypeProjection(expansion, argument, typeAlias.typeParameters[index].variance)
+        konst expandedArguments = type.arguments.compactMapIndexed { index, argument ->
+            konst projection = expandTypeProjection(expansion, argument, typeAlias.typeParameters[index].variance)
             makeNullableTypeIfNecessary(projection, argument)
         }
 
-        val nestedExpansion = CirTypeAliasExpansion(typeAlias, expandedArguments, type.isMarkedNullable, expansion.typeResolver)
-        val nestedExpandedType = expand(nestedExpansion)
+        konst nestedExpansion = CirTypeAliasExpansion(typeAlias, expandedArguments, type.isMarkedNullable, expansion.typeResolver)
+        konst nestedExpandedType = expand(nestedExpansion)
 
         return CirTypeAliasType.createInterned(
             typeAliasId = type.classifierId,
@@ -133,11 +133,11 @@ object CirTypeAliasExpander {
         expansion: CirTypeAliasExpansion,
         type: CirProvided.ClassType
     ): CirClassType {
-        val clazz: CirProvided.Class = expansion.typeResolver.resolveClassifier(type.classifierId)
+        konst clazz: CirProvided.Class = expansion.typeResolver.resolveClassifier(type.classifierId)
         checkArgumentsCount(clazz, type.classifierId, type.arguments)
 
-        val expandedArguments = type.arguments.compactMapIndexed { index, argument ->
-            val projection = expandTypeProjection(expansion, argument, clazz.typeParameters[index].variance)
+        konst expandedArguments = type.arguments.compactMapIndexed { index, argument ->
+            konst projection = expandTypeProjection(expansion, argument, clazz.typeParameters[index].variance)
             makeNullableTypeIfNecessary(projection, argument)
         }
 
@@ -157,11 +157,11 @@ object CirTypeAliasExpander {
         return when (projection) {
             is CirStarTypeProjection -> CirStarTypeProjection
             is CirRegularTypeProjection -> {
-                val originalTypeIsNullable = (originalArgument as? CirProvided.RegularTypeProjection)?.type?.isMarkedNullable == true
+                konst originalTypeIsNullable = (originalArgument as? CirProvided.RegularTypeProjection)?.type?.isMarkedNullable == true
                 if (!originalTypeIsNullable)
                     return projection
 
-                val projectionType = projection.type as CirSimpleType
+                konst projectionType = projection.type as CirSimpleType
                 if (projectionType.isMarkedNullable)
                     return projection
 

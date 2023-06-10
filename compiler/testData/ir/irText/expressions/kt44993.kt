@@ -7,7 +7,7 @@
 fun f(r: KotlinBox<JavaBox>): String =
     r?.data?.element!!
 
-class KotlinBox<T>(@JvmField val data: T?)
+class KotlinBox<T>(@JvmField konst data: T?)
 
 // FILE: JavaBox.java
 public class JavaBox {

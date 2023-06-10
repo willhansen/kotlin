@@ -29,7 +29,7 @@ class A {
   // CHECK:
   //   Mangled name: A@kotlin.String?{}p
   //   Public signature: /A.p|-5332805019112550693[0]
-  val String?.p: String
+  konst String?.p: String
     // CHECK JVM_IR:
     //   Mangled name: A#<get-p>@kotlin.String?(){}kotlin.String
     //   Public signature: /A.p.<get-p>|2132774030714660058[0]
@@ -51,7 +51,7 @@ fun String?.topLevelF(): String
 // CHECK:
 //   Mangled name: @kotlin.String{}topLevelP
 //   Public signature: /topLevelP|4430474858321876067[0]
-val String.topLevelP: String
+konst String.topLevelP: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-topLevelP>@kotlin.String(){}kotlin.String
   //   Public signature: /topLevelP.<get-topLevelP>|6082050321613134215[0]

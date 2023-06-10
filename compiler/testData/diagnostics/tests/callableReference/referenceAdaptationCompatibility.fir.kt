@@ -8,7 +8,7 @@ object Test1 {
         fun bar(x: Int = 0): String = ""
 
         fun test() {
-            val result = foo(::bar)
+            konst result = foo(::bar)
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>result<!>
         }
     }
@@ -35,7 +35,7 @@ object Test3 {
         fun bar(vararg ints: Int): String = ""
 
         fun test() {
-            val result = foo(::bar)
+            konst result = foo(::bar)
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>result<!>
         }
     }
@@ -50,7 +50,7 @@ object Test4 {
         fun bar(vararg g: String): String = ""
 
         fun test() {
-            val result = foo(::bar)
+            konst result = foo(::bar)
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>result<!>
         }
     }

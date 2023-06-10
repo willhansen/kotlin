@@ -22,21 +22,21 @@ import org.jetbrains.kotlin.fir.scopes.unsubstitutedScope
 
 class AllPropertiesConstructorMetadataProvider(session: FirSession) : FirDeclarationsForMetadataProviderExtension(session) {
     companion object {
-        val ANNOTATION_FQN = "AllPropertiesConstructor".fqn()
-        val PREDICATE = DeclarationPredicate.create { annotated(ANNOTATION_FQN) }
+        konst ANNOTATION_FQN = "AllPropertiesConstructor".fqn()
+        konst PREDICATE = DeclarationPredicate.create { annotated(ANNOTATION_FQN) }
     }
 
     private object Key : GeneratedDeclarationKey()
 
     override fun provideDeclarationsForClass(klass: FirClass, scopeSession: ScopeSession): List<FirDeclaration> {
         if (!session.predicateBasedProvider.matches(PREDICATE, klass)) return emptyList()
-        val scope = klass.unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = false, memberRequiredPhase = null)
-        val properties = scope.getCallableNames()
+        konst scope = klass.unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = false, memberRequiredPhase = null)
+        konst properties = scope.getCallableNames()
             .flatMap { scope.getProperties(it) }
             .sortedBy { it.containingClassLookupTag() == klass.symbol.toLookupTag() }
-        val constructor = createConstructor(klass.symbol, Key) {
+        konst constructor = createConstructor(klass.symbol, Key) {
             for (property in properties) {
-                valueParameter(property.name, property.resolvedReturnType)
+                konstueParameter(property.name, property.resolvedReturnType)
             }
         }
         return listOf(constructor)

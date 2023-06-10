@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.gradle.utils.androidExtension
 import kotlin.test.fail
 
 fun Project.getKotlinSourceSetOrFail(androidSourceSet: AndroidSourceSet): KotlinSourceSet {
-    val kotlinSourceSets = kotlinExtension.sourceSets
+    konst kotlinSourceSets = kotlinExtension.sourceSets
         .filter { kotlinSourceSet -> kotlinSourceSet.androidSourceSetInfoOrNull?.androidSourceSetName == androidSourceSet.name }
 
     if (kotlinSourceSets.isEmpty()) {

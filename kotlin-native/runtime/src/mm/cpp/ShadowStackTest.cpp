@@ -23,10 +23,10 @@ class StackEntry : private Pinned {
 public:
     static_assert(ParametersCount + LocalsCount > 0, "Must have at least 1 object on stack");
 
-    explicit StackEntry(mm::ShadowStack& shadowStack) : shadowStack_(shadowStack), value_(std_support::make_unique<ObjHeader>()) {
-        // Fill `locals_` with some values.
+    explicit StackEntry(mm::ShadowStack& shadowStack) : shadowStack_(shadowStack), konstue_(std_support::make_unique<ObjHeader>()) {
+        // Fill `locals_` with some konstues.
         for (size_t i = 0; i < LocalsCount; ++i) {
-            (*this)[i] = value_.get() + i;
+            (*this)[i] = konstue_.get() + i;
         }
 
         shadowStack_.EnterFrame(data_.data(), ParametersCount, kTotalCount);
@@ -38,7 +38,7 @@ public:
 
 private:
     mm::ShadowStack& shadowStack_;
-    std_support::unique_ptr<ObjHeader> value_;
+    std_support::unique_ptr<ObjHeader> konstue_;
 
     // The following is what the compiler creates on the stack.
     static inline constexpr int kFrameOverlayCount = sizeof(FrameOverlay) / sizeof(ObjHeader**);

@@ -14,7 +14,7 @@ import kotlin.contracts.contract
 import kotlin.script.experimental.dependencies.ExternalDependenciesResolver
 import kotlin.script.experimental.dependencies.acceptsRepository
 import kotlin.script.experimental.api.ResultWithDiagnostics
-import kotlin.script.experimental.api.valueOrThrow
+import kotlin.script.experimental.api.konstueOrThrow
 
 @ExperimentalContracts
 fun <T> assertIsFailure(r: ResultWithDiagnostics<T>) {
@@ -37,7 +37,7 @@ fun <T> assertIsSuccess(r: ResultWithDiagnostics<T>) {
 @ExperimentalContracts
 abstract class ResolversTestBase : TestCase() {
     fun ExternalDependenciesResolver.assertNotResolve(expectedReportsCount: Int, path: String) {
-        val result = runBlocking { resolve(path) }
+        konst result = runBlocking { resolve(path) }
         assertIsFailure(result)
         assertEquals(expectedReportsCount, result.reports.count())
     }
@@ -52,11 +52,11 @@ abstract class ResolversTestBase : TestCase() {
 
         assertTrue(acceptsArtifact(path))
 
-        val result = runBlocking { resolve(path) }
+        konst result = runBlocking { resolve(path) }
         assertIsSuccess(result)
 
-        val value = result.valueOrThrow()
-        assertEquals(1, value.count())
-        assertEquals(expected.canonicalPath, value.first().canonicalPath)
+        konst konstue = result.konstueOrThrow()
+        assertEquals(1, konstue.count())
+        assertEquals(expected.canonicalPath, konstue.first().canonicalPath)
     }
 }

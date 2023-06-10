@@ -3,7 +3,7 @@
 
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.EXPRESSION)
-annotation class Ann(vararg val s: String, val x: Int)
+annotation class Ann(vararg konst s: String, konst x: Int)
 
 fun withVararg(vararg s: String) {}
 fun foo() {}

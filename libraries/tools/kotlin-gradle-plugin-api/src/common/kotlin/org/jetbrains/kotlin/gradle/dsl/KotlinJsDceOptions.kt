@@ -6,22 +6,22 @@
 package org.jetbrains.kotlin.gradle.dsl
 
 interface KotlinJsDceOptions : org.jetbrains.kotlin.gradle.dsl.KotlinCommonToolOptions {
-    override val options: org.jetbrains.kotlin.gradle.dsl.KotlinJsDceCompilerToolOptions
+    override konst options: org.jetbrains.kotlin.gradle.dsl.KotlinJsDceCompilerToolOptions
 
     /**
      * Development mode: don't strip out any code, just copy dependencies
-     * Default value: false
+     * Default konstue: false
      */
     var devMode: kotlin.Boolean
         get() = options.devMode.get()
-        set(value) = options.devMode.set(value)
+        set(konstue) = options.devMode.set(konstue)
 
     /**
      * Output directory
-     * Default value: null
+     * Default konstue: null
      */
     @Deprecated(message = "Use task 'destinationDirectory' to configure output directory", level = DeprecationLevel.WARNING)
     var outputDirectory: kotlin.String?
         get() = options.outputDirectory.orNull
-        set(value) = options.outputDirectory.set(value)
+        set(konstue) = options.outputDirectory.set(konstue)
 }

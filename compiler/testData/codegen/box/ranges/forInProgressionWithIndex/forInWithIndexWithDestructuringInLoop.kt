@@ -3,19 +3,19 @@
 import kotlin.test.assertEquals
 
 fun box(): String {
-    val indexList = mutableListOf<Int>()
-    val valueList = mutableListOf<Int>()
-    val valueAndIndexList = mutableListOf<Int>()
+    konst indexList = mutableListOf<Int>()
+    konst konstueList = mutableListOf<Int>()
+    konst konstueAndIndexList = mutableListOf<Int>()
     for ((i, v) in (4..7).withIndex()) {
-        val (v2, i2) = Pair(v, i)
+        konst (v2, i2) = Pair(v, i)
         indexList += i
-        valueList += v
-        valueAndIndexList += v2
-        valueAndIndexList += i2
+        konstueList += v
+        konstueAndIndexList += v2
+        konstueAndIndexList += i2
     }
     assertEquals(listOf(0, 1, 2, 3), indexList)
-    assertEquals(listOf(4, 5, 6, 7), valueList)
-    assertEquals(listOf(4, 0, 5, 1, 6, 2, 7, 3), valueAndIndexList)
+    assertEquals(listOf(4, 5, 6, 7), konstueList)
+    assertEquals(listOf(4, 0, 5, 1, 6, 2, 7, 3), konstueAndIndexList)
 
     return "OK"
 }

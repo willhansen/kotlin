@@ -23,23 +23,23 @@ class TrimMargin : IntrinsicMethod() {
     }
 
     private fun tryApply(resolvedCall: ResolvedCall<*>, codegen: ExpressionCodegen): Callable? {
-        val literalText = resolvedCall.getReceiverExpression()
+        konst literalText = resolvedCall.getReceiverExpression()
             ?.let { codegen.getCompileTimeConstant(it) as? StringValue }
-            ?.value ?: return null
+            ?.konstue ?: return null
 
-        val text = when (val argument = resolvedCall.valueArguments.values.single()) {
+        konst text = when (konst argument = resolvedCall.konstueArguments.konstues.single()) {
             is DefaultValueArgument -> literalText.trimMargin()
             is ExpressionValueArgument -> {
-                val marginPrefix = argument.valueArgument?.getArgumentExpression()
+                konst marginPrefix = argument.konstueArgument?.getArgumentExpression()
                     ?.let { codegen.getCompileTimeConstant(it) as? StringValue }
-                    ?.value ?: return null
+                    ?.konstue ?: return null
                 try {
                     literalText.trimMargin(marginPrefix)
                 } catch (e: IllegalArgumentException) {
                     return null
                 }
             }
-            else -> error("Unknown value argument type ${argument::class}: $argument")
+            else -> error("Unknown konstue argument type ${argument::class}: $argument")
         }
         return StringConstant(text)
     }
@@ -52,16 +52,16 @@ class TrimIndent : IntrinsicMethod() {
     }
 
     private fun tryApply(resolvedCall: ResolvedCall<*>, codegen: ExpressionCodegen): Callable? {
-        val literalText = resolvedCall.getReceiverExpression()
+        konst literalText = resolvedCall.getReceiverExpression()
             ?.let { codegen.getCompileTimeConstant(it) as? StringValue }
-            ?.value ?: return null
+            ?.konstue ?: return null
 
-        val text = literalText.trimIndent()
+        konst text = literalText.trimIndent()
         return StringConstant(text)
     }
 }
 
-private class StringConstant(private val text: String) : IntrinsicCallable(JAVA_STRING_TYPE, emptyList(), null, null), IntrinsicWithSpecialReceiver {
+private class StringConstant(private konst text: String) : IntrinsicCallable(JAVA_STRING_TYPE, emptyList(), null, null), IntrinsicWithSpecialReceiver {
     override fun invokeMethodWithArguments(resolvedCall: ResolvedCall<*>, receiver: StackValue, codegen: ExpressionCodegen) =
         StackValue.constant(text, JAVA_STRING_TYPE)
 }

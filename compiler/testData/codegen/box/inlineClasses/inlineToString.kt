@@ -5,15 +5,15 @@
 import kotlin.jvm.JvmInline
 
 open class Expando {
-    val expansion: Expansion = Expansion()
+    konst expansion: Expansion = Expansion()
 }
 
 @JvmInline
-value class Expansion(val map: MutableMap<String, Any?> = mutableMapOf()) {
+konstue class Expansion(konst map: MutableMap<String, Any?> = mutableMapOf()) {
     override inline fun toString(): String = "OK"
 }
 
-data class Foo(val i: Int): Expando() {
+data class Foo(konst i: Int): Expando() {
     override fun toString(): String {
         return "$expansion"
     }

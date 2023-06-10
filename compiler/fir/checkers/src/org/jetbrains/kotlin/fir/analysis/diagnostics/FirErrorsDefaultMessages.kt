@@ -644,7 +644,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
     // & - New diagnostic that has no analogues in the old FE
     // + - Better message required
     // # - The new diagnostic differs from the old FE's one
-    override val MAP = KtDiagnosticFactoryToRendererMap("FIR").also { map ->
+    override konst MAP = KtDiagnosticFactoryToRendererMap("FIR").also { map ->
         // Meta-errors
         map.put(UNSUPPORTED, "Unsupported [{0}]", TO_STRING)
         map.put(UNSUPPORTED_FEATURE, "{0}", LanguageFeatureMessageRenderer(LanguageFeatureMessageRenderer.Type.UNSUPPORTED))
@@ -687,10 +687,10 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(EXPRESSION_EXPECTED, "Only expressions are allowed here")
 
         map.put(DIVISION_BY_ZERO, "Division by zero")
-        map.put(INT_LITERAL_OUT_OF_RANGE, "The value is out of range")
+        map.put(INT_LITERAL_OUT_OF_RANGE, "The konstue is out of range")
         map.put(WRONG_LONG_SUFFIX, "Use 'L' instead of 'l'")
         map.put(EMPTY_CHARACTER_LITERAL, "Empty character literal")
-        map.put(FLOAT_LITERAL_OUT_OF_RANGE, "The value is out of range")
+        map.put(FLOAT_LITERAL_OUT_OF_RANGE, "The konstue is out of range")
         map.put(
             UNSIGNED_LITERAL_WITHOUT_DECLARATIONS_ON_CLASSPATH,
             "Type of the constant expression cannot be resolved. Please make sure you have the required dependencies for unsigned types in the classpath"
@@ -698,7 +698,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(INCORRECT_CHARACTER_LITERAL, "Incorrect character literal")
         map.put(TOO_MANY_CHARACTERS_IN_CHARACTER_LITERAL, "Too many characters in a character literal")
         map.put(ILLEGAL_ESCAPE, "Illegal escape")
-        map.put(NULL_FOR_NONNULL_TYPE, "Null can not be a value of a non-null type")
+        map.put(NULL_FOR_NONNULL_TYPE, "Null can not be a konstue of a non-null type")
 
         // Unresolved
         map.put(INVISIBLE_REFERENCE, "Symbol {0} is invisible", SYMBOL)
@@ -793,7 +793,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(PROJECTION_IN_IMMEDIATE_ARGUMENT_TO_SUPERTYPE, "Projections are not allowed for immediate arguments of a supertype")
         map.put(
             INCONSISTENT_TYPE_PARAMETER_VALUES,
-            "Type parameter {0} of ''{1}'' has inconsistent values: {2}",
+            "Type parameter {0} of ''{1}'' has inconsistent konstues: {2}",
             SYMBOL,
             SYMBOL,
             RENDER_COLLECTION_OF_TYPES
@@ -828,7 +828,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(SEALED_CLASS_CONSTRUCTOR_CALL, "Sealed types cannot be instantiated")
         map.put(DATA_CLASS_WITHOUT_PARAMETERS, "Data class must have at least one primary constructor parameter")
         map.put(DATA_CLASS_VARARG_PARAMETER, "Primary constructor vararg parameters are forbidden for data classes")
-        map.put(DATA_CLASS_NOT_PROPERTY_PARAMETER, "Data class primary constructor must only have property (val / var) parameters")
+        map.put(DATA_CLASS_NOT_PROPERTY_PARAMETER, "Data class primary constructor must only have property (konst / var) parameters")
 
         // Annotations
         map.put(ANNOTATION_USED_AS_ANNOTATION_ARGUMENT, "An annotation can't be used as an annotation argument")
@@ -842,19 +842,19 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(
             ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT,
-            "Default value of annotation parameter must be a compile-time constant"
+            "Default konstue of annotation parameter must be a compile-time constant"
         )
         map.put(LOCAL_ANNOTATION_CLASS_ERROR, "Annotation class cannot be local")
-        map.put(MISSING_VAL_ON_ANNOTATION_PARAMETER, "'val' keyword is missing on annotation parameter")
+        map.put(MISSING_VAL_ON_ANNOTATION_PARAMETER, "'konst' keyword is missing on annotation parameter")
         map.put(NULLABLE_TYPE_OF_ANNOTATION_MEMBER, "An annotation parameter cannot be nullable")
-        map.put(INVALID_TYPE_OF_ANNOTATION_MEMBER, "Invalid type of annotation member")
+        map.put(INVALID_TYPE_OF_ANNOTATION_MEMBER, "Inkonstid type of annotation member")
         map.put(VAR_ANNOTATION_PARAMETER, "An annotation parameter cannot be 'var'")
         map.put(ANNOTATION_CLASS_CONSTRUCTOR_CALL, "Annotation class cannot be instantiated")
         map.put(NOT_AN_ANNOTATION_CLASS, "Illegal annotation class: {0}", NULLABLE_STRING)
         map.put(SUPERTYPES_FOR_ANNOTATION_CLASS, "Annotation class cannot have supertypes")
         map.put(
             ILLEGAL_KOTLIN_VERSION_STRING_VALUE,
-            "Invalid value in version annotation (should be 'major.minor' or 'major.minor.patch')"
+            "Inkonstid konstue in version annotation (should be 'major.minor' or 'major.minor.patch')"
         )
         map.put(NEWER_VERSION_IN_SINCE_KOTLIN, "The version is greater than the specified API version {0}", NULLABLE_STRING)
         map.put(
@@ -1035,12 +1035,12 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(NONE_APPLICABLE, "None of the following functions are applicable: {0}", SYMBOLS)
         map.put(INAPPLICABLE_CANDIDATE, "Inapplicable candidate(s): {0}", SYMBOL)
         map.put(INAPPLICABLE_LATEINIT_MODIFIER, "''lateinit'' modifier {0}", TO_STRING)
-        map.put(VARARG_OUTSIDE_PARENTHESES, "Passing value as a vararg is only allowed inside a parenthesized argument list")
+        map.put(VARARG_OUTSIDE_PARENTHESES, "Passing konstue as a vararg is only allowed inside a parenthesized argument list")
         map.put(NAMED_ARGUMENTS_NOT_ALLOWED, "Named arguments are not allowed for {0}", TO_STRING)
         map.put(NON_VARARG_SPREAD, "The spread operator (*foo) may only be applied in a vararg position")
         map.put(TOO_MANY_ARGUMENTS, "Too many arguments for {0}", FQ_NAMES_IN_TYPES)
         map.put(ARGUMENT_PASSED_TWICE, "An argument is already passed for this parameter")
-        map.put(NO_VALUE_FOR_PARAMETER, "No value passed for parameter ''{0}''", DECLARATION_NAME)
+        map.put(NO_VALUE_FOR_PARAMETER, "No konstue passed for parameter ''{0}''", DECLARATION_NAME)
         map.put(NAMED_PARAMETER_NOT_FOUND, "Cannot find a parameter with this name: {0}", TO_STRING)
         map.put(NAME_FOR_AMBIGUOUS_PARAMETER, "Named argument is not allowed for a parameter with an ambiguous name")
 
@@ -1091,7 +1091,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(TYPE_MISMATCH, "Type mismatch: inferred type is {1} but {0} was expected", RENDER_TYPE, RENDER_TYPE, NOT_RENDERED)
         map.put(
             TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR,
-            "Type inference failed. The value of the type parameter {0} should be mentioned in input types (argument types, receiver type or expected type). Try to specify it explicitly.",
+            "Type inference failed. The konstue of the type parameter {0} should be mentioned in input types (argument types, receiver type or expected type). Try to specify it explicitly.",
             SYMBOL
         )
         map.put(THROWABLE_TYPE_MISMATCH, "Throwable type mismatch: actual type is {0}", RENDER_TYPE, NOT_RENDERED)
@@ -1118,7 +1118,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
 
         map.put(ITERATOR_MISSING, "For-loop range must have an 'iterator()' method")
-        map.put(ITERATOR_ON_NULLABLE, "Not nullable value required to call an 'iterator()' method on for-loop range")
+        map.put(ITERATOR_ON_NULLABLE, "Not nullable konstue required to call an 'iterator()' method on for-loop range")
         map.put(ITERATOR_AMBIGUITY, "Method ''iterator()'' is ambiguous for this expression: {0}", SYMBOLS)
 
         map.put(NEXT_MISSING, "Method ''next()'' cannot be called on ''iterator()''")
@@ -1167,7 +1167,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
 
         map.put(TYPE_ARGUMENTS_NOT_ALLOWED, "Type arguments are not allowed for type parameters") // *
-        val wrongNumberOfTypeArguments = "{0,choice,0#No type arguments|1#One type argument|1<{0,number,integer} type arguments} expected"
+        konst wrongNumberOfTypeArguments = "{0,choice,0#No type arguments|1#One type argument|1<{0,number,integer} type arguments} expected"
         map.put(
             WRONG_NUMBER_OF_TYPE_ARGUMENTS,
             "$wrongNumberOfTypeArguments for {1}",
@@ -1209,7 +1209,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
             VARIANCE_ON_TYPE_PARAMETER_NOT_ALLOWED,
             "Variance annotations are only allowed for type parameters of classes and interfaces"
         )
-        map.put(CATCH_PARAMETER_WITH_DEFAULT_VALUE, "Catch clause parameter may not have a default value")
+        map.put(CATCH_PARAMETER_WITH_DEFAULT_VALUE, "Catch clause parameter may not have a default konstue")
         map.put(REIFIED_TYPE_IN_CATCH_CLAUSE, "Reified type is forbidden for catch parameter")
         map.put(TYPE_PARAMETER_IN_CATCH_CLAUSE, "Type parameter is forbidden for catch parameter")
 
@@ -1237,7 +1237,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(
             FINAL_UPPER_BOUND,
-            "''{0}'' is a final type, and thus a value of the type parameter is predetermined",
+            "''{0}'' is a final type, and thus a konstue of the type parameter is predetermined",
             RENDER_TYPE
         )
         map.put(UPPER_BOUND_IS_EXTENSION_FUNCTION_TYPE, "Extension function type can not be used as an upper bound")
@@ -1341,26 +1341,26 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         // Value classes
         map.put(VALUE_CLASS_NOT_TOP_LEVEL, "Value class cannot be local or inner")
         map.put(VALUE_CLASS_NOT_FINAL, "Value class can only be final")
-        map.put(ABSENCE_OF_PRIMARY_CONSTRUCTOR_FOR_VALUE_CLASS, "Primary constructor is required for value class")
+        map.put(ABSENCE_OF_PRIMARY_CONSTRUCTOR_FOR_VALUE_CLASS, "Primary constructor is required for konstue class")
         map.put(INLINE_CLASS_CONSTRUCTOR_WRONG_PARAMETERS_SIZE, "Inline class must have exactly one primary constructor parameter")
         map.put(VALUE_CLASS_EMPTY_CONSTRUCTOR, "Value class must have at least one primary constructor parameter")
         map.put(
             VALUE_CLASS_CONSTRUCTOR_NOT_FINAL_READ_ONLY_PARAMETER,
-            "Value class primary constructor must only have final read-only (val) property parameters"
+            "Value class primary constructor must only have final read-only (konst) property parameters"
         )
         map.put(PROPERTY_WITH_BACKING_FIELD_INSIDE_VALUE_CLASS, "Value class cannot have properties with backing fields")
         map.put(DELEGATED_PROPERTY_INSIDE_VALUE_CLASS, "Value class cannot have delegated properties")
-        map.put(VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE, "Value class cannot have value parameter of type ''{0}''", TO_STRING)
+        map.put(VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE, "Value class cannot have konstue parameter of type ''{0}''", TO_STRING)
         map.put(VALUE_CLASS_CANNOT_IMPLEMENT_INTERFACE_BY_DELEGATION, "Value class cannot implement an interface by delegation")
         map.put(VALUE_CLASS_CANNOT_EXTEND_CLASSES, "Value class cannot extend classes")
         map.put(VALUE_CLASS_CANNOT_BE_RECURSIVE, "Value class cannot be recursive")
         map.put(
             MULTI_FIELD_VALUE_CLASS_PRIMARY_CONSTRUCTOR_DEFAULT_PARAMETER,
-            "Default parameters are not supported in the primary constructor of a multi-field value class"
+            "Default parameters are not supported in the primary constructor of a multi-field konstue class"
         )
         map.put(
             INVALID_DEFAULT_FUNCTIONAL_PARAMETER_FOR_INLINE,
-            "Invalid default value for inline parameter: ''{0}''. Only lambdas, anonymous functions, and callable references are supported",
+            "Inkonstid default konstue for inline parameter: ''{0}''. Only lambdas, anonymous functions, and callable references are supported",
             FIR,
             DECLARATION_NAME
         )
@@ -1369,12 +1369,12 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
             "Secondary constructors with bodies are reserved for future releases"
         )
         map.put(RESERVED_MEMBER_INSIDE_VALUE_CLASS, "Member with the name ''{0}'' is reserved for future releases", TO_STRING)
-        map.put(TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS, "Type arguments for typed value class equals must all be star projections")
+        map.put(TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS, "Type arguments for typed konstue class equals must all be star projections")
         map.put(INNER_CLASS_INSIDE_VALUE_CLASS, "Value class cannot have inner classes")
         map.put(VALUE_CLASS_CANNOT_BE_CLONEABLE, "Value class cannot be Cloneable")
         map.put(
             ANNOTATION_ON_ILLEGAL_MULTI_FIELD_VALUE_CLASS_TYPED_TARGET,
-            "Annotations on ''{0}'' of multi-field value class type are not supported",
+            "Annotations on ''{0}'' of multi-field konstue class type are not supported",
             STRING
         )
 
@@ -1474,13 +1474,13 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
 
         map.put(
             VAR_OVERRIDDEN_BY_VAL,
-            "Var-property {0} cannot be overridden by val-property {1}",
+            "Var-property {0} cannot be overridden by konst-property {1}",
             FQ_NAMES_IN_TYPES,
             FQ_NAMES_IN_TYPES
         )
         map.put(
             VAR_IMPLEMENTED_BY_INHERITED_VAL,
-            "{0} implements var-property {1} by inherited val-property {2}",
+            "{0} implements var-property {1} by inherited konst-property {2}",
             RENDER_CLASS_OR_OBJECT,
             DECLARATION_NAME,
             FQ_NAMES_IN_TYPES
@@ -1570,7 +1570,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(PACKAGE_OR_CLASSIFIER_REDECLARATION, "Redeclaration: {0}", SYMBOLS)
         map.put(METHOD_OF_ANY_IMPLEMENTED_IN_INTERFACE, "An interface may not implement a method of 'Any'")
 
-        // Invalid local declarations
+        // Inkonstid local declarations
         map.put(
             LOCAL_OBJECT_NOT_ALLOWED,
             "Named object ''{0}'' is a singleton and cannot be local. Try to use an anonymous object instead",
@@ -1598,7 +1598,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
 
         map.put(
             ANONYMOUS_FUNCTION_PARAMETER_WITH_DEFAULT_VALUE,
-            "An anonymous function is not allowed to specify default values for its parameters"
+            "An anonymous function is not allowed to specify default konstues for its parameters"
         )
         map.put(USELESS_VARARG_ON_PARAMETER, "Vararg on this parameter is useless")
         map.put(
@@ -1607,12 +1607,12 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES, "Fun interface can not have abstract properties")
         map.put(FUN_INTERFACE_ABSTRACT_METHOD_WITH_TYPE_PARAMETERS, "Fun interface can not have abstract method with type parameters")
-        map.put(FUN_INTERFACE_ABSTRACT_METHOD_WITH_DEFAULT_VALUE, "Fun interface abstract method can not have a default value")
+        map.put(FUN_INTERFACE_ABSTRACT_METHOD_WITH_DEFAULT_VALUE, "Fun interface abstract method can not have a default konstue")
         map.put(FUN_INTERFACE_WITH_SUSPEND_FUNCTION, "Fun interface abstract method can not be suspend")
 
         map.put(MULTIPLE_VARARG_PARAMETERS, "Multiple vararg-parameters are prohibited")
         map.put(FORBIDDEN_VARARG_PARAMETER_TYPE, "Forbidden vararg parameter type: {0}", RENDER_TYPE)
-        map.put(VALUE_PARAMETER_WITH_NO_TYPE_ANNOTATION, "A type annotation is required on a value parameter")
+        map.put(VALUE_PARAMETER_WITH_NO_TYPE_ANNOTATION, "A type annotation is required on a konstue parameter")
         map.put(CANNOT_INFER_PARAMETER_TYPE, "cannot infer a type for this parameter. Please specify it explicitly.")
         map.put(NO_TAIL_CALLS_FOUND, "A function is marked as tail-recursive but no tail calls are found.")
         map.put(TAILREC_ON_VIRTUAL_MEMBER_ERROR, "Tailrec is not allowed on open members")
@@ -1667,7 +1667,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(ABSTRACT_PROPERTY_WITH_SETTER, "Property with setter implementation cannot be abstract")
         map.put(PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY, "Private setters are not allowed for abstract properties")
         map.put(PRIVATE_SETTER_FOR_OPEN_PROPERTY, "Private setters are not allowed for open properties")
-        map.put(VAL_WITH_SETTER, "A 'val'-property cannot have a setter")
+        map.put(VAL_WITH_SETTER, "A 'konst'-property cannot have a setter")
         map.put(
             WRONG_SETTER_PARAMETER_TYPE,
             "Setter parameter type must be equal to the type of the property, i.e. ''{0}''",
@@ -1707,7 +1707,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(
             LATEINIT_FIELD_IN_VAL_PROPERTY,
-            "Only mutable properties can have a mutable backing field. Consider changing ''val'' to ''var''"
+            "Only mutable properties can have a mutable backing field. Consider changing ''konst'' to ''var''"
         )
         map.put(
             LATEINIT_NULLABLE_BACKING_FIELD,
@@ -1753,13 +1753,13 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
 
         map.put(LOCAL_EXTENSION_PROPERTY, "Local extension properties are not allowed")
 
-        map.put(CONST_VAL_NOT_TOP_LEVEL_OR_OBJECT, "Const 'val' is only allowed on top level, in named objects, or in companion objects")
-        map.put(CONST_VAL_WITH_GETTER, "Const 'val' should not have a getter")
-        map.put(CONST_VAL_WITH_DELEGATE, "Const 'val' should not have a delegate")
-        map.put(TYPE_CANT_BE_USED_FOR_CONST_VAL, "Const ''val'' has type ''{0}''. Only primitives and String are allowed", RENDER_TYPE)
-        map.put(CONST_VAL_WITHOUT_INITIALIZER, "Const 'val' should have an initializer")
-        map.put(CONST_VAL_WITH_NON_CONST_INITIALIZER, "Const 'val' initializer should be a constant value")
-        map.put(NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION, "Only 'const val' can be used in constant expressions")
+        map.put(CONST_VAL_NOT_TOP_LEVEL_OR_OBJECT, "Const 'konst' is only allowed on top level, in named objects, or in companion objects")
+        map.put(CONST_VAL_WITH_GETTER, "Const 'konst' should not have a getter")
+        map.put(CONST_VAL_WITH_DELEGATE, "Const 'konst' should not have a delegate")
+        map.put(TYPE_CANT_BE_USED_FOR_CONST_VAL, "Const ''konst'' has type ''{0}''. Only primitives and String are allowed", RENDER_TYPE)
+        map.put(CONST_VAL_WITHOUT_INITIALIZER, "Const 'konst' should have an initializer")
+        map.put(CONST_VAL_WITH_NON_CONST_INITIALIZER, "Const 'konst' initializer should be a constant konstue")
+        map.put(NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION, "Only 'const konst' can be used in constant expressions")
         map.put(CYCLE_IN_ANNOTATION_PARAMETER, "Type of this parameter is cyclic")
 
         // Multi-platform projects
@@ -1791,23 +1791,23 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(
             ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS,
-            "Actual function cannot have default argument values, they should be declared in the expected function"
+            "Actual function cannot have default argument konstues, they should be declared in the expected function"
         )
         map.put(
             DEFAULT_ARGUMENTS_IN_EXPECT_WITH_ACTUAL_TYPEALIAS,
-            "Default argument values inside expect declaration ''{0}'' are not allowed if it is actualized via typealias. " +
-                    "Possible fix is to remove default argument values in members:{1}",
+            "Default argument konstues inside expect declaration ''{0}'' are not allowed if it is actualized via typealias. " +
+                    "Possible fix is to remove default argument konstues in members:{1}",
             DECLARATION_NAME,
             SYMBOLS_ON_NEWLINE_WITH_INDENT,
         )
         map.put(
             ACTUAL_ANNOTATION_CONFLICTING_DEFAULT_ARGUMENT_VALUE,
-            "Parameter ''{0}'' has conflicting values in the expected and actual annotation",
+            "Parameter ''{0}'' has conflicting konstues in the expected and actual annotation",
             SYMBOL
         )
         map.put(
             EXPECTED_FUNCTION_SOURCE_WITH_DEFAULT_ARGUMENTS_NOT_FOUND,
-            "Expected function source is not found, therefore it's impossible to generate default argument values declared there. Please add the corresponding file to compilation sources"
+            "Expected function source is not found, therefore it's impossible to generate default argument konstues declared there. Please add the corresponding file to compilation sources"
         )
         map.put(
             NO_ACTUAL_FOR_EXPECT,
@@ -1848,7 +1848,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(
             COMPONENT_FUNCTION_ON_NULLABLE,
-            "Not nullable value required to call ''{0}()'' function of destructuring declaration initializer",
+            "Not nullable konstue required to call ''{0}()'' function of destructuring declaration initializer",
             TO_STRING
         )
         map.put(
@@ -1868,12 +1868,12 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(VAL_REASSIGNMENT_VIA_BACKING_FIELD, "Reassignment of read-only property via backing field", VARIABLE_NAME)
         map.put(
             CAPTURED_VAL_INITIALIZATION,
-            "Captured values initialization is forbidden due to possible reassignment",
+            "Captured konstues initialization is forbidden due to possible reassignment",
             VARIABLE_NAME
         )
         map.put(
             CAPTURED_MEMBER_VAL_INITIALIZATION,
-            "Captured member values initialization is forbidden due to possible reassignment",
+            "Captured member konstues initialization is forbidden due to possible reassignment",
             VARIABLE_NAME
         )
         map.put(
@@ -1964,7 +1964,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(DUPLICATE_LABEL_IN_WHEN, "Duplicate label in when")
         map.put(
             ILLEGAL_DECLARATION_IN_WHEN_SUBJECT,
-            "Illegal variable declaration in ''when'' subject: {0}. Should be a simple val with an initializer",
+            "Illegal variable declaration in ''when'' subject: {0}. Should be a simple konst with an initializer",
             STRING
         )
         map.put(
@@ -2188,7 +2188,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
 
         map.put(
             INEFFICIENT_EQUALS_OVERRIDING_IN_VALUE_CLASS,
-            "Overriding ''equals'' from ''Any'' in value class without operator ''equals(other: {0}): Boolean'' leads to boxing on every equality comparison",
+            "Overriding ''equals'' from ''Any'' in konstue class without operator ''equals(other: {0}): Boolean'' leads to boxing on every equality comparison",
             RENDER_TYPE
         )
 
@@ -2254,14 +2254,14 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(REDUNDANT_RETURN_UNIT_TYPE, "Redundant return 'unit' type")
         map.put(REDUNDANT_EXPLICIT_TYPE, "Redundant explicit type")
         map.put(REDUNDANT_SINGLE_EXPRESSION_STRING_TEMPLATE, "Redundant string template")
-        map.put(CAN_BE_VAL, "'var' can be 'val'")
+        map.put(CAN_BE_VAL, "'var' can be 'konst'")
         map.put(CAN_BE_REPLACED_WITH_OPERATOR_ASSIGNMENT, "Assignment can be replaced with operator assignment")
         map.put(REDUNDANT_CALL_OF_CONVERSION_METHOD, "Redundant call of conversion method")
         map.put(ARRAY_EQUALITY_OPERATOR_CAN_BE_REPLACED_WITH_EQUALS, "Replace '==' with 'Arrays.equals'")
         map.put(EMPTY_RANGE, "Range is empty")
         map.put(REDUNDANT_SETTER_PARAMETER_TYPE, "Redundant setter parameter type")
         map.put(UNUSED_VARIABLE, "Variable is unused")
-        map.put(ASSIGNED_VALUE_IS_NEVER_READ, "Assigned value is never read")
+        map.put(ASSIGNED_VALUE_IS_NEVER_READ, "Assigned konstue is never read")
         map.put(VARIABLE_INITIALIZER_IS_REDUNDANT, "Initializer is redundant")
         map.put(VARIABLE_NEVER_READ, "Variable is never read")
     }

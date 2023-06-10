@@ -25,13 +25,13 @@ abstract class AbstractCompilerLightClassTest : KotlinMultiFileTestWithJava<Kotl
     override fun isKotlinSourceRootNeeded(): Boolean = true
 
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
-        val environment = createEnvironment(wholeFile, files)
-        val expectedFile = KotlinTestUtils.replaceExtension(wholeFile, "descriptors.java").takeIf(File::exists)
+        konst environment = createEnvironment(wholeFile, files)
+        konst expectedFile = KotlinTestUtils.replaceExtension(wholeFile, "descriptors.java").takeIf(File::exists)
             ?: KotlinTestUtils.replaceExtension(wholeFile, "java")
 
-        val allowFrontendExceptions = InTextDirectivesUtils.isDirectiveDefined(wholeFile.readText(), "// ALLOW_FRONTEND_EXCEPTION")
+        konst allowFrontendExceptions = InTextDirectivesUtils.isDirectiveDefined(wholeFile.readText(), "// ALLOW_FRONTEND_EXCEPTION")
 
-        val actual = LightClassTestCommon.getActualLightClassText(
+        konst actual = LightClassTestCommon.getActualLightClassText(
             wholeFile,
             { fqname -> findLightClass(allowFrontendExceptions, environment, fqname) },
             { LightClassTestCommon.removeEmptyDefaultImpls(it).replace("\$test_module", "\$light_idea_test_case") },
@@ -58,9 +58,9 @@ abstract class AbstractCompilerLightClassTest : KotlinMultiFileTestWithJava<Kotl
                 KotlinTestUtils.resolveAllKotlinFiles(environment)
             }
 
-            val searchScope = GlobalSearchScope.allScope(environment.project)
-            val kotlinAsJavaSupport = KotlinAsJavaSupport.getInstance(environment.project)
-            val lightClassForScript = kotlinAsJavaSupport
+            konst searchScope = GlobalSearchScope.allScope(environment.project)
+            konst kotlinAsJavaSupport = KotlinAsJavaSupport.getInstance(environment.project)
+            konst lightClassForScript = kotlinAsJavaSupport
                 .getScriptClasses(FqName(fqname), searchScope)
                 .firstOrNull()
 

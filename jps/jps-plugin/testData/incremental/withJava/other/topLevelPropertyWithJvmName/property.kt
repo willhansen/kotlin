@@ -1,4 +1,4 @@
 package test
 
-val g: Int
+konst g: Int
     @JvmName("oldName") get() = 0

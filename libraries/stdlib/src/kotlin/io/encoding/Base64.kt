@@ -20,8 +20,8 @@ import kotlin.native.concurrent.SharedImmutable
 @SinceKotlin("1.8")
 @ExperimentalEncodingApi
 public open class Base64 private constructor(
-    internal val isUrlSafe: Boolean,
-    internal val isMimeScheme: Boolean
+    internal konst isUrlSafe: Boolean,
+    internal konst isMimeScheme: Boolean
 ) {
     init {
         require(!isUrlSafe || !isMimeScheme)
@@ -126,7 +126,7 @@ public open class Base64 private constructor(
         startIndex: Int = 0,
         endIndex: Int = source.size
     ): A {
-        val stringResult = platformEncodeToString(source, startIndex, endIndex)
+        konst stringResult = platformEncodeToString(source, startIndex, endIndex)
         destination.append(stringResult)
         return destination
     }
@@ -152,10 +152,10 @@ public open class Base64 private constructor(
     public fun decode(source: ByteArray, startIndex: Int = 0, endIndex: Int = source.size): ByteArray {
         checkSourceBounds(source.size, startIndex, endIndex)
 
-        val decodeSize = decodeSize(source, startIndex, endIndex)
-        val destination = ByteArray(decodeSize)
+        konst decodeSize = decodeSize(source, startIndex, endIndex)
+        konst destination = ByteArray(decodeSize)
 
-        val bytesWritten = decodeImpl(source, destination, 0, startIndex, endIndex)
+        konst bytesWritten = decodeImpl(source, destination, 0, startIndex, endIndex)
 
         check(bytesWritten == destination.size)
 
@@ -216,7 +216,7 @@ public open class Base64 private constructor(
      * @return a [ByteArray] with the resulting bytes.
      */
     public fun decode(source: CharSequence, startIndex: Int = 0, endIndex: Int = source.length): ByteArray {
-        val byteSource = platformCharsToBytes(source, startIndex, endIndex)
+        konst byteSource = platformCharsToBytes(source, startIndex, endIndex)
         return decode(byteSource)
     }
 
@@ -249,7 +249,7 @@ public open class Base64 private constructor(
         startIndex: Int = 0,
         endIndex: Int = source.length
     ): Int {
-        val byteSource = platformCharsToBytes(source, startIndex, endIndex)
+        konst byteSource = platformCharsToBytes(source, startIndex, endIndex)
         return decodeIntoByteArray(byteSource, destination, destinationOffset)
     }
 
@@ -258,8 +258,8 @@ public open class Base64 private constructor(
     internal fun encodeToByteArrayImpl(source: ByteArray, startIndex: Int, endIndex: Int): ByteArray {
         checkSourceBounds(source.size, startIndex, endIndex)
 
-        val encodeSize = encodeSize(endIndex - startIndex)
-        val destination = ByteArray(encodeSize)
+        konst encodeSize = encodeSize(endIndex - startIndex)
+        konst destination = ByteArray(encodeSize)
         encodeIntoByteArrayImpl(source, destination, 0, startIndex, endIndex)
         return destination
     }
@@ -274,18 +274,18 @@ public open class Base64 private constructor(
         checkSourceBounds(source.size, startIndex, endIndex)
         checkDestinationBounds(destination.size, destinationOffset, encodeSize(endIndex - startIndex))
 
-        val encodeMap = if (isUrlSafe) base64UrlEncodeMap else base64EncodeMap
+        konst encodeMap = if (isUrlSafe) base64UrlEncodeMap else base64EncodeMap
         var sourceIndex = startIndex
         var destinationIndex = destinationOffset
-        val groupsPerLine = if (isMimeScheme) mimeGroupsPerLine else Int.MAX_VALUE
+        konst groupsPerLine = if (isMimeScheme) mimeGroupsPerLine else Int.MAX_VALUE
 
         while (sourceIndex + 2 < endIndex) {
-            val groups = minOf((endIndex - sourceIndex) / bytesPerGroup, groupsPerLine)
+            konst groups = minOf((endIndex - sourceIndex) / bytesPerGroup, groupsPerLine)
             for (i in 0 until groups) {
-                val byte1 = source[sourceIndex++].toInt() and 0xFF
-                val byte2 = source[sourceIndex++].toInt() and 0xFF
-                val byte3 = source[sourceIndex++].toInt() and 0xFF
-                val bits = (byte1 shl 16) or (byte2 shl 8) or byte3
+                konst byte1 = source[sourceIndex++].toInt() and 0xFF
+                konst byte2 = source[sourceIndex++].toInt() and 0xFF
+                konst byte3 = source[sourceIndex++].toInt() and 0xFF
+                konst bits = (byte1 shl 16) or (byte2 shl 8) or byte3
                 destination[destinationIndex++] = encodeMap[bits ushr 18]
                 destination[destinationIndex++] = encodeMap[(bits ushr 12) and 0x3F]
                 destination[destinationIndex++] = encodeMap[(bits ushr 6) and 0x3F]
@@ -299,17 +299,17 @@ public open class Base64 private constructor(
 
         when (endIndex - sourceIndex) {
             1 -> {
-                val byte1 = source[sourceIndex++].toInt() and 0xFF
-                val bits = byte1 shl 4
+                konst byte1 = source[sourceIndex++].toInt() and 0xFF
+                konst bits = byte1 shl 4
                 destination[destinationIndex++] = encodeMap[bits ushr 6]
                 destination[destinationIndex++] = encodeMap[bits and 0x3F]
                 destination[destinationIndex++] = padSymbol
                 destination[destinationIndex++] = padSymbol
             }
             2 -> {
-                val byte1 = source[sourceIndex++].toInt() and 0xFF
-                val byte2 = source[sourceIndex++].toInt() and 0xFF
-                val bits = (byte1 shl 10) or (byte2 shl 2)
+                konst byte1 = source[sourceIndex++].toInt() and 0xFF
+                konst byte2 = source[sourceIndex++].toInt() and 0xFF
+                konst bits = (byte1 shl 10) or (byte2 shl 2)
                 destination[destinationIndex++] = encodeMap[bits ushr 12]
                 destination[destinationIndex++] = encodeMap[(bits ushr 6) and 0x3F]
                 destination[destinationIndex++] = encodeMap[bits and 0x3F]
@@ -324,9 +324,9 @@ public open class Base64 private constructor(
 
     private fun encodeSize(sourceSize: Int): Int {
         // includes padding chars
-        val groups = (sourceSize + bytesPerGroup - 1) / bytesPerGroup
-        val lineSeparators = if (isMimeScheme) (groups - 1) / mimeGroupsPerLine else 0
-        val size = groups * symbolsPerGroup + lineSeparators * 2
+        konst groups = (sourceSize + bytesPerGroup - 1) / bytesPerGroup
+        konst lineSeparators = if (isMimeScheme) (groups - 1) / mimeGroupsPerLine else 0
+        konst size = groups * symbolsPerGroup + lineSeparators * 2
         if (size < 0) { // Int overflow
             throw IllegalArgumentException("Input is too big")
         }
@@ -340,7 +340,7 @@ public open class Base64 private constructor(
         startIndex: Int,
         endIndex: Int
     ): Int {
-        val decodeMap = if (isUrlSafe) base64UrlDecodeMap else base64DecodeMap
+        konst decodeMap = if (isUrlSafe) base64UrlDecodeMap else base64DecodeMap
         var payload = 0
         var byteStart = -bitsPerByte
         var sourceIndex = startIndex
@@ -348,11 +348,11 @@ public open class Base64 private constructor(
 
         while (sourceIndex < endIndex) {
             if (byteStart == -bitsPerByte && sourceIndex + 3 < endIndex) {
-                val symbol1 = decodeMap[source[sourceIndex++].toInt() and 0xFF]
-                val symbol2 = decodeMap[source[sourceIndex++].toInt() and 0xFF]
-                val symbol3 = decodeMap[source[sourceIndex++].toInt() and 0xFF]
-                val symbol4 = decodeMap[source[sourceIndex++].toInt() and 0xFF]
-                val bits = (symbol1 shl 18) or (symbol2 shl 12) or (symbol3 shl 6) or symbol4
+                konst symbol1 = decodeMap[source[sourceIndex++].toInt() and 0xFF]
+                konst symbol2 = decodeMap[source[sourceIndex++].toInt() and 0xFF]
+                konst symbol3 = decodeMap[source[sourceIndex++].toInt() and 0xFF]
+                konst symbol4 = decodeMap[source[sourceIndex++].toInt() and 0xFF]
+                konst bits = (symbol1 shl 18) or (symbol2 shl 12) or (symbol3 shl 6) or symbol4
                 if (bits >= 0) { // all base64 symbols
                     destination[destinationIndex++] = (bits shr 16).toByte()
                     destination[destinationIndex++] = (bits shr 8).toByte()
@@ -362,8 +362,8 @@ public open class Base64 private constructor(
                 sourceIndex -= 4
             }
 
-            val symbol = source[sourceIndex].toInt() and 0xFF
-            val symbolBits = decodeMap[symbol]
+            konst symbol = source[sourceIndex].toInt() and 0xFF
+            konst symbolBits = decodeMap[symbol]
             if (symbolBits < 0) {
                 if (symbolBits == -2) {
                     sourceIndex = handlePaddingSymbol(source, sourceIndex, endIndex, byteStart)
@@ -372,7 +372,7 @@ public open class Base64 private constructor(
                     sourceIndex += 1
                     continue
                 } else {
-                    throw IllegalArgumentException("Invalid symbol '${symbol.toChar()}'(${symbol.toString(radix = 8)}) at index $sourceIndex")
+                    throw IllegalArgumentException("Inkonstid symbol '${symbol.toChar()}'(${symbol.toString(radix = 8)}) at index $sourceIndex")
                 }
             } else {
                 sourceIndex += 1
@@ -399,7 +399,7 @@ public open class Base64 private constructor(
 
         sourceIndex = skipIllegalSymbolsIfMime(source, sourceIndex, endIndex)
         if (sourceIndex < endIndex) {
-            val symbol = source[sourceIndex].toInt() and 0xFF
+            konst symbol = source[sourceIndex].toInt() and 0xFF
             throw IllegalArgumentException("Symbol '${symbol.toChar()}'(${symbol.toString(radix = 8)}) at index ${sourceIndex - 1} is prohibited after the pad character")
         }
 
@@ -416,8 +416,8 @@ public open class Base64 private constructor(
         }
         if (isMimeScheme) {
             for (index in startIndex until endIndex) {
-                val symbol = source[index].toInt() and 0xFF
-                val symbolBits = base64DecodeMap[symbol]
+                konst symbol = source[index].toInt() and 0xFF
+                konst symbolBits = base64DecodeMap[symbol]
                 if (symbolBits < 0) {
                     if (symbolBits == -2) {
                         symbols -= endIndex - index
@@ -438,10 +438,10 @@ public open class Base64 private constructor(
     internal fun charsToBytesImpl(source: CharSequence, startIndex: Int, endIndex: Int): ByteArray {
         checkSourceBounds(source.length, startIndex, endIndex)
 
-        val byteArray = ByteArray(endIndex - startIndex)
+        konst byteArray = ByteArray(endIndex - startIndex)
         var length = 0
         for (index in startIndex until endIndex) {
-            val symbol = source[index].code
+            konst symbol = source[index].code
             if (symbol <= 0xFF) {
                 byteArray[length++] = symbol.toByte()
             } else {
@@ -454,7 +454,7 @@ public open class Base64 private constructor(
     }
 
     internal fun bytesToStringImpl(source: ByteArray): String {
-        val stringBuilder = StringBuilder(source.size)
+        konst stringBuilder = StringBuilder(source.size)
         for (byte in source) {
             stringBuilder.append(byte.toInt().toChar())
         }
@@ -468,7 +468,7 @@ public open class Base64 private constructor(
             -bitsPerByte + bitsPerSymbol -> // x=, dangling single symbol
                 padIndex + 1
             -bitsPerByte + 2 * bitsPerSymbol - bitsPerByte -> { // xx=
-                val secondPadIndex = skipIllegalSymbolsIfMime(source, padIndex + 1, endIndex)
+                konst secondPadIndex = skipIllegalSymbolsIfMime(source, padIndex + 1, endIndex)
                 if (secondPadIndex == endIndex || source[secondPadIndex] != padSymbol) {
                     throw IllegalArgumentException("Missing one pad character at index $secondPadIndex")
                 }
@@ -487,7 +487,7 @@ public open class Base64 private constructor(
         }
         var sourceIndex = startIndex
         while (sourceIndex < endIndex) {
-            val symbol = source[sourceIndex].toInt() and 0xFF
+            konst symbol = source[sourceIndex].toInt() and 0xFF
             if (base64DecodeMap[symbol] != -1) {
                 return sourceIndex
             }
@@ -505,7 +505,7 @@ public open class Base64 private constructor(
             throw IndexOutOfBoundsException("destination offset: $destinationOffset, destination size: $destinationSize")
         }
 
-        val destinationEndIndex = destinationOffset + capacityNeeded
+        konst destinationEndIndex = destinationOffset + capacityNeeded
         if (destinationEndIndex < 0 || destinationEndIndex > destinationSize) {
             throw IndexOutOfBoundsException(
                 "The destination array does not have enough capacity, " +
@@ -528,17 +528,17 @@ public open class Base64 private constructor(
      */
     public companion object Default : Base64(isUrlSafe = false, isMimeScheme = false) {
 
-        private const val bitsPerByte: Int = 8
-        private const val bitsPerSymbol: Int = 6
+        private const konst bitsPerByte: Int = 8
+        private const konst bitsPerSymbol: Int = 6
 
-        internal const val bytesPerGroup: Int = 3
-        internal const val symbolsPerGroup: Int = 4
+        internal const konst bytesPerGroup: Int = 3
+        internal const konst symbolsPerGroup: Int = 4
 
-        internal const val padSymbol: Byte = 61 // '='
+        internal const konst padSymbol: Byte = 61 // '='
 
-        internal const val mimeLineLength: Int = 76
-        private const val mimeGroupsPerLine: Int = mimeLineLength / symbolsPerGroup
-        internal val mimeLineSeparatorSymbols: ByteArray = byteArrayOf('\r'.code.toByte(), '\n'.code.toByte())
+        internal const konst mimeLineLength: Int = 76
+        private const konst mimeGroupsPerLine: Int = mimeLineLength / symbolsPerGroup
+        internal konst mimeLineSeparatorSymbols: ByteArray = byteArrayOf('\r'.code.toByte(), '\n'.code.toByte())
 
         /**
          * The "base64url" encoding specified by [`RFC 4648 section 5`](https://www.rfc-editor.org/rfc/rfc4648#section-5),
@@ -550,7 +550,7 @@ public open class Base64 private constructor(
          *
          * The character `'='` is used for padding.
          */
-        public val UrlSafe: Base64 = Base64(isUrlSafe = true, isMimeScheme = false)
+        public konst UrlSafe: Base64 = Base64(isUrlSafe = true, isMimeScheme = false)
 
         /**
          * The encoding specified by [`RFC 2045 section 6.8`](https://www.rfc-editor.org/rfc/rfc2045#section-6.8),
@@ -562,14 +562,14 @@ public open class Base64 private constructor(
          *
          * The character `'='` is used for padding.
          */
-        public val Mime: Base64 = Base64(isUrlSafe = false, isMimeScheme = true)
+        public konst Mime: Base64 = Base64(isUrlSafe = false, isMimeScheme = true)
     }
 }
 
 
 // "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 @SharedImmutable
-private val base64EncodeMap = byteArrayOf(
+private konst base64EncodeMap = byteArrayOf(
     65,  66,  67,  68,  69,  70,  71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  /* 0 - 15 */
     81,  82,  83,  84,  85,  86,  87,  88,  89,  90,  97,  98,  99,  100, 101, 102, /* 16 - 31 */
     103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, /* 32 - 47 */
@@ -578,7 +578,7 @@ private val base64EncodeMap = byteArrayOf(
 
 @ExperimentalEncodingApi
 @SharedImmutable
-private val base64DecodeMap = IntArray(256).apply {
+private konst base64DecodeMap = IntArray(256).apply {
     this.fill(-1)
     this[Base64.padSymbol.toInt()] = -2
     base64EncodeMap.forEachIndexed { index, symbol ->
@@ -588,7 +588,7 @@ private val base64DecodeMap = IntArray(256).apply {
 
 // "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
 @SharedImmutable
-private val base64UrlEncodeMap = byteArrayOf(
+private konst base64UrlEncodeMap = byteArrayOf(
     65,  66,  67,  68,  69,  70,  71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  /* 0 - 15 */
     81,  82,  83,  84,  85,  86,  87,  88,  89,  90,  97,  98,  99,  100, 101, 102, /* 16 - 31 */
     103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, /* 32 - 47 */
@@ -597,7 +597,7 @@ private val base64UrlEncodeMap = byteArrayOf(
 
 @ExperimentalEncodingApi
 @SharedImmutable
-private val base64UrlDecodeMap = IntArray(256).apply {
+private konst base64UrlDecodeMap = IntArray(256).apply {
     this.fill(-1)
     this[Base64.padSymbol.toInt()] = -2
     base64UrlEncodeMap.forEachIndexed { index, symbol ->

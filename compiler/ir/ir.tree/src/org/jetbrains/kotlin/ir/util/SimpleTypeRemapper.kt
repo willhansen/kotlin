@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 class SimpleTypeRemapper(
-    private val symbolRemapper: SymbolRemapper
+    private konst symbolRemapper: SymbolRemapper
 ) : TypeRemapper {
 
     override fun enterScope(irTypeParametersContainer: IrTypeParametersContainer) {
@@ -26,8 +26,8 @@ class SimpleTypeRemapper(
         if (type !is IrSimpleType)
             type
         else {
-            val symbol = symbolRemapper.getReferencedClassifier(type.classifier)
-            val arguments = type.arguments.memoryOptimizedMap { remapTypeArgument(it) }
+            konst symbol = symbolRemapper.getReferencedClassifier(type.classifier)
+            konst arguments = type.arguments.memoryOptimizedMap { remapTypeArgument(it) }
             if (symbol == type.classifier && arguments == type.arguments)
                 type
             else {

@@ -1,7 +1,7 @@
 import okio.FileSystem
 import okio.Path.Companion.toPath
 
-expect val HostFileSystem: FileSystem
+expect konst HostFileSystem: FileSystem
 
 fun main() {
     HostFileSystem.delete("toto".toPath())

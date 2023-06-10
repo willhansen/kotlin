@@ -1,4 +1,4 @@
-private fun <T> upcast(value: T): T = value
+private fun <T> upcast(konstue: T): T = konstue
 
 fun box(): String {
     upcast<(Int)->ByteArray>(::ByteArray)(10)

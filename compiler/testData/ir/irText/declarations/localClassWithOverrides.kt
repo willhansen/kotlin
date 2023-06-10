@@ -7,13 +7,13 @@
 fun outer() {
     abstract class ALocal {
         abstract fun afun()
-        abstract val aval: Int
+        abstract konst akonst: Int
         abstract var avar: Int
     }
 
     class Local : ALocal() {
         override fun afun() {}
-        override val aval = 1
+        override konst akonst = 1
         override var avar = 2
     }
 }

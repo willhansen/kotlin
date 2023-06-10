@@ -1,5 +1,5 @@
-class A(val s: String) {
-    inner class B(val x: Int = 0)
+class A(konst s: String) {
+    inner class B(konst x: Int = 0)
 }
 
 // @A.class

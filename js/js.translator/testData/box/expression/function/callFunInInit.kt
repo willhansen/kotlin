@@ -3,7 +3,7 @@ package foo
 
 class A()
 
-private val doInit = {
+private konst doInit = {
     A()
 }()
 

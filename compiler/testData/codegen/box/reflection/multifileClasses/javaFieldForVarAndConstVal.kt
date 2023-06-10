@@ -12,7 +12,7 @@ import kotlin.reflect.jvm.*
 import kotlin.test.assertEquals
 
 fun testX() {
-    val field = ::x.javaField ?: throw AssertionError("No java field for ${::x.name}")
+    konst field = ::x.javaField ?: throw AssertionError("No java field for ${::x.name}")
 
     try {
         field.get(null)
@@ -28,7 +28,7 @@ fun testX() {
 }
 
 fun testY() {
-    val field = ::y.javaField ?: throw AssertionError("No java field for ${::y.name}")
+    konst field = ::y.javaField ?: throw AssertionError("No java field for ${::y.name}")
 
     assertEquals("I am const y", field.get(null))
 
@@ -39,7 +39,7 @@ fun testY() {
 }
 
 fun testZ() {
-    val field = refZ.javaField ?: throw AssertionError("No java field for ${refZ.name}")
+    konst field = refZ.javaField ?: throw AssertionError("No java field for ${refZ.name}")
 
 
     try {
@@ -51,7 +51,7 @@ fun testZ() {
     }
 
     field.setAccessible(true)
-    assertEquals("I am private const val Z", field.get(null))
+    assertEquals("I am private const konst Z", field.get(null))
 }
 
 fun box(): String {
@@ -68,7 +68,7 @@ fun box(): String {
 package test
 
 var x = "I am x"
-const val y = "I am const y"
-private const val z = "I am private const val Z"
+const konst y = "I am const y"
+private const konst z = "I am private const konst Z"
 
-val refZ = ::z
+konst refZ = ::z

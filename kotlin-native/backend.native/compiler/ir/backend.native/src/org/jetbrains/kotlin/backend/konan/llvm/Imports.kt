@@ -13,16 +13,16 @@ import org.jetbrains.kotlin.library.metadata.SyntheticModulesOrigin
 import org.jetbrains.kotlin.library.metadata.klibModuleOrigin
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 
-internal val DeclarationDescriptor.llvmSymbolOrigin: CompiledKlibModuleOrigin
+internal konst DeclarationDescriptor.llvmSymbolOrigin: CompiledKlibModuleOrigin
     get() {
         assert(!this.isExpectMember) { this }
 
-        val module = this.module
-        val moduleOrigin = module.klibModuleOrigin
+        konst module = this.module
+        konst moduleOrigin = module.klibModuleOrigin
         when (moduleOrigin) {
             is CompiledKlibModuleOrigin -> return moduleOrigin
             SyntheticModulesOrigin -> error("Declaration is synthetic and can't be an origin of LLVM symbol:\n${this}")
         }
     }
 
-internal val Context.standardLlvmSymbolsOrigin: CompiledKlibModuleOrigin get() = this.stdlibModule.llvmSymbolOrigin
+internal konst Context.standardLlvmSymbolsOrigin: CompiledKlibModuleOrigin get() = this.stdlibModule.llvmSymbolOrigin

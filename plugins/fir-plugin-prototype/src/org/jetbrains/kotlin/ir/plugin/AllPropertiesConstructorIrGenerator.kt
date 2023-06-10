@@ -25,11 +25,11 @@ import java.util.Comparator
 
 /*
  * For classes annotated with @AllPropertiesConstructor and with no-arg constructor generates
- *   constructor which takes value parameters corresponding to all properties
+ *   constructor which takes konstue parameters corresponding to all properties
  *
  * Parent class should be Any or class, annotated with @AllPropertiesConstructor
  */
-class AllPropertiesConstructorIrGenerator(val context: IrPluginContext) : IrElementVisitorVoid {
+class AllPropertiesConstructorIrGenerator(konst context: IrPluginContext) : IrElementVisitorVoid {
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
     }
@@ -41,18 +41,18 @@ class AllPropertiesConstructorIrGenerator(val context: IrPluginContext) : IrElem
         visitElement(declaration)
     }
 
-    private val generatedConstructors = mutableMapOf<IrClass, IrConstructor>()
+    private konst generatedConstructors = mutableMapOf<IrClass, IrConstructor>()
 
     private fun getOrGenerateConstructorIfNeeded(klass: IrClass): IrConstructor = generatedConstructors.getOrPut(klass) {
-        val superClass = klass.superTypes.mapNotNull(IrType::getClass).singleOrNull { it.kind == ClassKind.CLASS } ?: context.irBuiltIns.anyClass.owner
+        konst superClass = klass.superTypes.mapNotNull(IrType::getClass).singleOrNull { it.kind == ClassKind.CLASS } ?: context.irBuiltIns.anyClass.owner
 
-        val properties = klass.properties.toList().sortedWith(Comparator.comparing { if (it.origin == IrDeclarationOrigin.FAKE_OVERRIDE) 0 else 1 })
-        val overriddenProperties = properties.takeWhile { it.origin == IrDeclarationOrigin.FAKE_OVERRIDE }
-        val superConstructor = when {
-            superClass.defaultType.isAny() -> superClass.constructors.singleOrNull { it.valueParameters.isEmpty() }
+        konst properties = klass.properties.toList().sortedWith(Comparator.comparing { if (it.origin == IrDeclarationOrigin.FAKE_OVERRIDE) 0 else 1 })
+        konst overriddenProperties = properties.takeWhile { it.origin == IrDeclarationOrigin.FAKE_OVERRIDE }
+        konst superConstructor = when {
+            superClass.defaultType.isAny() -> superClass.constructors.singleOrNull { it.konstueParameters.isEmpty() }
             else -> {
                 require(superClass.hasAnnotation())
-                superClass.constructors.singleOrNull { it.valueParameters.isNotEmpty() }
+                superClass.constructors.singleOrNull { it.konstueParameters.isNotEmpty() }
             }
         } ?: error("All properies constructor not found")
 
@@ -62,7 +62,7 @@ class AllPropertiesConstructorIrGenerator(val context: IrPluginContext) : IrElem
             returnType = klass.defaultType
         }.also { ctor ->
             ctor.parent = klass
-            ctor.valueParameters = properties.mapIndexed { index, property ->
+            ctor.konstueParameters = properties.mapIndexed { index, property ->
                 buildValueParameter(ctor) {
                     this.index = index
                     type = property.getter!!.returnType
@@ -74,9 +74,9 @@ class AllPropertiesConstructorIrGenerator(val context: IrPluginContext) : IrElem
                 listOf(
                     IrDelegatingConstructorCallImpl(
                         ctor.startOffset, ctor.endOffset, context.irBuiltIns.unitType,
-                        superConstructor.symbol, 0, superConstructor.valueParameters.size
+                        superConstructor.symbol, 0, superConstructor.konstueParameters.size
                     ).apply {
-                        ctor.valueParameters.take(overriddenProperties.size).forEachIndexed { index, parameter ->
+                        ctor.konstueParameters.take(overriddenProperties.size).forEachIndexed { index, parameter ->
                             putValueArgument(
                                 index,
                                 IrGetValueImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, parameter.symbol)

@@ -22,24 +22,24 @@ enum class Kind {
 }
 
 class Holder {
-    var value: String = ""
+    var konstue: String = ""
 }
 
-val FINALLY_CHAIN = "in local finally, in declaration local finally, in external finally, in declaration external finally, in global finally"
+konst FINALLY_CHAIN = "in local finally, in declaration local finally, in external finally, in declaration external finally, in global finally"
 
-class Internal(val value: String)
+class Internal(konst konstue: String)
 
-class External(val value: String)
+class External(konst konstue: String)
 
-class Global(val value: String)
+class Global(konst konstue: String)
 
 fun test1(intKind: Kind, extKind: Kind, holder: Holder): Global {
-    holder.value = ""
+    holder.konstue = ""
     try {
         var externalResult = doCall (ext@ {
 
             try {
-                val internalResult = doCall (int@ {
+                konst internalResult = doCall (int@ {
                     try {
                         if (intKind == Kind.GLOBAL) {
                             return@test1 Global("internal -> global")
@@ -50,29 +50,29 @@ fun test1(intKind: Kind, extKind: Kind, holder: Holder): Global {
                         return@int Internal("internal -> local")
                     }
                     finally {
-                        holder.value += "in local finally"
+                        holder.konstue += "in local finally"
                     }
                 }, {
-                    holder.value += ", in declaration local finally"
+                    holder.konstue += ", in declaration local finally"
                 })
                 if (extKind == GLOBAL || extKind == EXTERNAL) {
                     return Global("external -> global")
                 }
 
-                External(internalResult.value + ": external -> local");
+                External(internalResult.konstue + ": external -> local");
 
             }
             finally {
-                holder.value += ", in external finally"
+                holder.konstue += ", in external finally"
             }
         }, {
-            holder.value += ", in declaration external finally"
+            holder.konstue += ", in declaration external finally"
         })
 
-        return Global(externalResult.value + ": exit")
+        return Global(externalResult.konstue + ": exit")
     }
     finally {
-        holder.value += ", in global finally"
+        holder.konstue += ", in global finally"
     }
 
 
@@ -81,34 +81,34 @@ fun test1(intKind: Kind, extKind: Kind, holder: Holder): Global {
 fun box(): String {
     var holder = Holder()
 
-    var test1 = test1(LOCAL, LOCAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "internal -> local: external -> local: exit") return "test1: ${test1},  finally = ${holder.value}"
+    var test1 = test1(LOCAL, LOCAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "internal -> local: external -> local: exit") return "test1: ${test1},  finally = ${holder.konstue}"
 
-    test1 = test1(EXTERNAL, LOCAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "internal -> external: exit") return "test2: ${test1},  finally = ${holder.value}"
+    test1 = test1(EXTERNAL, LOCAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "internal -> external: exit") return "test2: ${test1},  finally = ${holder.konstue}"
 
-    test1 = test1(GLOBAL, LOCAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "internal -> global") return "test3: ${test1},  finally = ${holder.value}"
-
-
-    test1 = test1(LOCAL, EXTERNAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "external -> global") return "test4: ${test1},  finally = ${holder.value}"
-
-    test1 = test1(EXTERNAL, EXTERNAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "internal -> external: exit") return "test5: ${test1},  finally = ${holder.value}"
-
-    test1 = test1(GLOBAL, EXTERNAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "internal -> global") return "test6: ${test1},  finally = ${holder.value}"
+    test1 = test1(GLOBAL, LOCAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "internal -> global") return "test3: ${test1},  finally = ${holder.konstue}"
 
 
-    test1 = test1(LOCAL, GLOBAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "external -> global") return "test7: ${test1},  finally = ${holder.value}"
+    test1 = test1(LOCAL, EXTERNAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "external -> global") return "test4: ${test1},  finally = ${holder.konstue}"
 
-    test1 = test1(EXTERNAL, GLOBAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "internal -> external: exit") return "test8: ${test1},  finally = ${holder.value}"
+    test1 = test1(EXTERNAL, EXTERNAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "internal -> external: exit") return "test5: ${test1},  finally = ${holder.konstue}"
 
-    test1 = test1(GLOBAL, GLOBAL, holder).value
-    if (holder.value != FINALLY_CHAIN || test1 != "internal -> global") return "test9: ${test1},  finally = ${holder.value}"
+    test1 = test1(GLOBAL, EXTERNAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "internal -> global") return "test6: ${test1},  finally = ${holder.konstue}"
+
+
+    test1 = test1(LOCAL, GLOBAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "external -> global") return "test7: ${test1},  finally = ${holder.konstue}"
+
+    test1 = test1(EXTERNAL, GLOBAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "internal -> external: exit") return "test8: ${test1},  finally = ${holder.konstue}"
+
+    test1 = test1(GLOBAL, GLOBAL, holder).konstue
+    if (holder.konstue != FINALLY_CHAIN || test1 != "internal -> global") return "test9: ${test1},  finally = ${holder.konstue}"
 
     return "OK"
 }

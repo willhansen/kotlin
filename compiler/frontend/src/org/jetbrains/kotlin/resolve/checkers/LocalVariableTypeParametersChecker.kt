@@ -16,11 +16,11 @@ class LocalVariableTypeParametersChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (declaration !is KtProperty || descriptor !is LocalVariableDescriptor) return
 
-        val typeParameters = declaration.typeParameters
-        val typeParametersList = declaration.typeParameterList
+        konst typeParameters = declaration.typeParameters
+        konst typeParametersList = declaration.typeParameterList
         if (typeParameters.isEmpty() || typeParametersList == null) return
 
-        val diagnostic =
+        konst diagnostic =
             if (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitTypeParametersForLocalVariables))
                 Errors.LOCAL_VARIABLE_WITH_TYPE_PARAMETERS
             else

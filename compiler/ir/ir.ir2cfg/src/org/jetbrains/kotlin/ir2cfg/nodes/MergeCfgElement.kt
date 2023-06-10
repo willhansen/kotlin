@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
-class MergeCfgElement(val from: IrElement, val name: String) : CfgIrElement {
-    override val startOffset = from.startOffset
-    override val endOffset = from.endOffset
+class MergeCfgElement(konst from: IrElement, konst name: String) : CfgIrElement {
+    override konst startOffset = from.startOffset
+    override konst endOffset = from.endOffset
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D) = visitor.visitElement(this, data)
 

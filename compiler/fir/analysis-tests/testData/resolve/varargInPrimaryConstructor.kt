@@ -1,4 +1,4 @@
-class Foo(vararg val strings: String)
+class Foo(vararg konst strings: String)
 
 fun test_1(foo: Foo) {
     for (s in foo.strings) {

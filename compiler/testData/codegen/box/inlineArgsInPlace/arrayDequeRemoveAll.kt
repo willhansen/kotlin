@@ -52,13 +52,13 @@ class ArrayDeque<E> : AbstractMutableList<E> {
         if (this.isEmpty() || elementData.isEmpty())
             return false
 
-        val tail = internalIndex(size)
+        konst tail = internalIndex(size)
         var newTail = head
         var modified = false
 
         if (head < tail) {
             for (index in head until tail) {
-                val element = elementData[index]
+                konst element = elementData[index]
 
                 if (predicate(element as E))
                     elementData[newTail++] = element
@@ -70,7 +70,7 @@ class ArrayDeque<E> : AbstractMutableList<E> {
 
         } else {
             for (index in head until elementData.size) {
-                val element = elementData[index]
+                konst element = elementData[index]
                 elementData[index] = null
 
                 if (predicate(element as E))
@@ -82,7 +82,7 @@ class ArrayDeque<E> : AbstractMutableList<E> {
             newTail = positiveMod(newTail)
 
             for (index in 0 until tail) {
-                val element = elementData[index]
+                konst element = elementData[index]
                 elementData[index] = null
 
                 if (predicate(element as E)) {
@@ -100,13 +100,13 @@ class ArrayDeque<E> : AbstractMutableList<E> {
     }
 
     internal companion object {
-        private val emptyElementData = emptyArray<Any?>()
+        private konst emptyElementData = emptyArray<Any?>()
     }
 }
 
 
 fun box(): String {
-    val ad = ArrayDeque(listOf("X", "Z", "O", "K"))
+    konst ad = ArrayDeque(listOf("X", "Z", "O", "K"))
     ad.removeAll(listOf("X", "Z"))
     return ad[0] + ad[1]
 }

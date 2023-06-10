@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.analysis.utils.trackers
 import com.intellij.openapi.util.ModificationTracker
 import java.util.*
 
-public class CompositeModificationTracker private constructor(private val trackers: List<ModificationTracker>) : ModificationTracker {
+public class CompositeModificationTracker private constructor(private konst trackers: List<ModificationTracker>) : ModificationTracker {
     override fun getModificationCount(): Long = trackers.sumOf { it.modificationCount }
 
     public companion object {
@@ -21,8 +21,8 @@ public class CompositeModificationTracker private constructor(private val tracke
         }
 
         public fun createFlattened(trackers: List<ModificationTracker>): ModificationTracker {
-            val set = Collections.newSetFromMap(IdentityHashMap<ModificationTracker, Boolean>())
-            val flattened = ArrayList<ModificationTracker>()
+            konst set = Collections.newSetFromMap(IdentityHashMap<ModificationTracker, Boolean>())
+            konst flattened = ArrayList<ModificationTracker>()
 
             fun flatten(tracker: ModificationTracker) {
                 when (tracker) {

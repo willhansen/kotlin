@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.test.services.compilerConfigurationProvider
 
 class ProjectStructureInitialisationPreAnalysisHandler(
     testServices: TestServices,
-    private val configurator: AnalysisApiTestConfigurator,
+    private konst configurator: AnalysisApiTestConfigurator,
 ) : PreAnalysisHandler(testServices) {
 
     override fun preprocessModuleStructure(moduleStructure: TestModuleStructure) {
@@ -24,8 +24,8 @@ class ProjectStructureInitialisationPreAnalysisHandler(
 
         testServices.environmentManager.initializeEnvironment()
 
-        val project = testServices.environmentManager.getProject() as MockProject
-        val application = testServices.environmentManager.getApplication() as MockApplication
+        konst project = testServices.environmentManager.getProject() as MockProject
+        konst application = testServices.environmentManager.getApplication() as MockApplication
 
         configurator.registerApplicationServices(application, testServices)
         createAndRegisterKtModules(moduleStructure, project)
@@ -36,13 +36,13 @@ class ProjectStructureInitialisationPreAnalysisHandler(
     }
 
     private fun createAndRegisterKtModules(moduleStructure: TestModuleStructure, project: MockProject) {
-        val ktModules = configurator.createModules(moduleStructure, testServices, project)
+        konst ktModules = configurator.createModules(moduleStructure, testServices, project)
         testServices.ktModuleProvider.registerProjectStructure(ktModules)
     }
 
     private fun checkAllModulesHaveTheSameProject(moduleStructure: TestModuleStructure) {
-        val modules = moduleStructure.modules
-        val project = testServices.compilerConfigurationProvider.getProject(moduleStructure.modules.first()) as MockProject
+        konst modules = moduleStructure.modules
+        konst project = testServices.compilerConfigurationProvider.getProject(moduleStructure.modules.first()) as MockProject
         check(modules.all { testServices.compilerConfigurationProvider.getProject(it) == project })
     }
 }

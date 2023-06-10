@@ -8,10 +8,10 @@ interface B {
 }
 
 context(A)
-val a = 1
+konst a = 1
 
 context(A, B)
 var b = 2
 
 context(A, B)
-val c get() = a() + b()
+konst c get() = a() + b()

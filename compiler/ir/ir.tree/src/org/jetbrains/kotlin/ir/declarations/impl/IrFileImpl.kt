@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.name.FqName
 
 class IrFileImpl(
     override var fileEntry: IrFileEntry,
-    override val symbol: IrFileSymbol,
+    override konst symbol: IrFileSymbol,
     override var packageFqName: FqName
 ) : IrFile() {
     constructor(
@@ -59,17 +59,17 @@ class IrFileImpl(
 
     override lateinit var module: IrModuleFragment
 
-    override val startOffset: Int
+    override konst startOffset: Int
         get() = 0
 
-    override val endOffset: Int
+    override konst endOffset: Int
         get() = fileEntry.maxOffset
 
     @ObsoleteDescriptorBasedAPI
-    override val packageFragmentDescriptor: PackageFragmentDescriptor
+    override konst packageFragmentDescriptor: PackageFragmentDescriptor
         get() = symbol.descriptor
 
-    override val declarations: MutableList<IrDeclaration> = ArrayList()
+    override konst declarations: MutableList<IrDeclaration> = ArrayList()
 
     override var annotations: List<IrConstructorCall> = emptyList()
 

@@ -9,7 +9,7 @@ class FeatureTest {
 
     @Test fun ctorDefault() {
         memScoped {
-            val x = alloc<CppTest>()
+            konst x = alloc<CppTest>()
             CppTest.__init__(x.ptr)
             assertEquals(42, x.iPub)
             assertEquals(42, x.foo())
@@ -19,14 +19,14 @@ class FeatureTest {
 
     @Test fun ctorWithParam() {
         memScoped {
-            val x = alloc<CppTest>()
+            konst x = alloc<CppTest>()
             CppTest.__init__(x.ptr, 10, 3.8)
             assertEquals(14, x.iPub)
         }
     }
 
     @Test fun copyCtor(y:  CppTest) {
-        val x = nativeHeap.alloc<CppTest>() {}
+        konst x = nativeHeap.alloc<CppTest>() {}
         CppTest.__init__(x.ptr, y.ptr)
 
         assertEquals(y.iPub, x.iPub)
@@ -34,8 +34,8 @@ class FeatureTest {
     }
 /*
     @Test fun reinitWithCtorAndDtor(y:  CppTest) {
-        val count =  CppTest.getCount()
-        val x = nativeHeap.alloc< CppTest>() {}
+        konst count =  CppTest.getCount()
+        konst x = nativeHeap.alloc< CppTest>() {}
          CppTest.__init__(x.ptr, y.ptr)
         assertEquals( CppTest.getCount(), count + 1)
         assertEquals(y.iPub, x.iPub)
@@ -59,17 +59,17 @@ class FeatureTest {
 
     @Test fun lvRefParameter() {
         memScoped {
-            val x = alloc<ns__NoName>()
+            konst x = alloc<ns__NoName>()
             var i = alloc<IntVar>()
-            i.value = 758
+            i.konstue = 758
             assertEquals(x.noNameMember(i.ptr), 759)
-            assertEquals(i.value, 759)
+            assertEquals(i.konstue, 759)
         }
 
     }
 
     @Test fun staticField() {
-        val save =  CppTest.getCount()
+        konst save =  CppTest.getCount()
         assertEquals( CppTest.getCount(),  CppTest.counter)
 
          CppTest.counter = 654
@@ -84,21 +84,21 @@ class FeatureTest {
 
 fun main() {
 
-    val testRun = FeatureTest()
+    konst testRun = FeatureTest()
     testRun.ctorDefault()
     testRun.ctorWithParam()
 
-    // By value for C++ requires further design of stubs mechanism.
+    // By konstue for C++ requires further design of stubs mechanism.
     // So not supported for now.
-	//val a0 = retByValue(null)
+	//konst a0 = retByValue(null)
 	//println("a0.useContents {iPub} = ${a0.useContents {iPub}}" )
 	//println("a0.useContents { foo() } = ${a0.useContents { foo() }}" )
 	
 //	retByValue(null)!!.getValue().foo()
-//	val a1 = interpretPointed<CppTest>(retByValue(null).rawValue)
+//	konst a1 = interpretPointed<CppTest>(retByValue(null).rawValue)
 //	println(a1.foo())
 /*
-    val a1 = interpretPointed< CppTest>(ns__create().rawValue)
+    konst a1 = interpretPointed< CppTest>(ns__create().rawValue)
     testRun.publicField(a1)
 
     testRun.staticField()
@@ -119,7 +119,7 @@ fun testStatic() {
 
 fun testCtor() {
     println("testCtor")
-    val cxx = nativeHeap.alloc< CppTest>() {
+    konst cxx = nativeHeap.alloc< CppTest>() {
         memcpy(ptr, ns__create(), typeOf< CppTest>().size.convert()) // use placement new here
     }
     cxx.foo(null)
@@ -128,8 +128,8 @@ fun testCtor() {
 
 fun test2() {
     println("test2")
-	val x = ns__bar(null)
-//    val theS = interpretPointed< CppTest>(ns__bar(null).rawValue)
+	konst x = ns__bar(null)
+//    konst theS = interpretPointed< CppTest>(ns__bar(null).rawValue)
 //    theS.foo(null)
 
 	println("x.useContents {iPub} = ${x.useContents {iPub}}" )

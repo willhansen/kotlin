@@ -3,7 +3,7 @@ fun box(): String {
 }
 
 class Foo() {
-    val bar : (str : String) -> String = { it }
+    konst bar : (str : String) -> String = { it }
 
     fun doBar(str : String): String {
         return bar(str);

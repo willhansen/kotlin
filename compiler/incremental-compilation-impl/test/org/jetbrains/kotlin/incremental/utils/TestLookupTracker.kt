@@ -12,17 +12,17 @@ import org.jetbrains.kotlin.incremental.components.LookupTracker
 import org.jetbrains.kotlin.incremental.components.Position
 import org.jetbrains.kotlin.incremental.components.ScopeKind
 
-class TestLookupTracker(val savedLookups: MutableSet<LookupSymbol> = mutableSetOf()) : LookupTracker {
-    val lookups = arrayListOf<LookupInfo>()
-    private val interner = Interner.createStringInterner()
+class TestLookupTracker(konst savedLookups: MutableSet<LookupSymbol> = mutableSetOf()) : LookupTracker {
+    konst lookups = arrayListOf<LookupInfo>()
+    private konst interner = Interner.createStringInterner()
 
-    override val requiresPosition: Boolean
+    override konst requiresPosition: Boolean
         get() = true
 
     override fun record(filePath: String, position: Position, scopeFqName: String, scopeKind: ScopeKind, name: String) {
-        val internedFilePath = interner.intern(filePath)
-        val internedScopeFqName = interner.intern(scopeFqName)
-        val internedName = interner.intern(name)
+        konst internedFilePath = interner.intern(filePath)
+        konst internedScopeFqName = interner.intern(scopeFqName)
+        konst internedName = interner.intern(name)
 
         lookups.add(LookupInfo(internedFilePath, position, internedScopeFqName, scopeKind, internedName))
     }

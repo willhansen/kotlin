@@ -1,1 +1,1 @@
-val prop: Int g<caret>et() = 42
+konst prop: Int g<caret>et() = 42

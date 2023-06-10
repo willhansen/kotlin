@@ -14,11 +14,11 @@ fun main() {
 }
 
 //KT-351 Distinguish statement and expression positions
-val w = <!EXPRESSION_EXPECTED!>while (true) {}<!>
+konst w = <!EXPRESSION_EXPECTED!>while (true) {}<!>
 
 fun foo() {
     var z = 2
-    val r = {  // type fun(): Any is inferred
+    konst r = {  // type fun(): Any is inferred
         if (true) {
             2
         }
@@ -26,13 +26,13 @@ fun foo() {
             z = 34
         }
     }
-    val f: ()-> Int = <!INITIALIZER_TYPE_MISMATCH!>r<!>
-    val g: ()-> Any = r
+    konst f: ()-> Int = <!INITIALIZER_TYPE_MISMATCH!>r<!>
+    konst g: ()-> Any = r
 }
 
 //KT-735 Statements without braces are prohibited on the right side of when entries.
 fun box() : Int {
-    val d = 2
+    konst d = 2
     var z = 0
     when(d) {
         5, 3 -> z++
@@ -47,21 +47,21 @@ fun test1() { while(true) {} }
 fun test2(): Unit { while(true) {} }
 
 fun testCoercionToUnit() {
-    val simple: ()-> Unit = {
+    konst simple: ()-> Unit = {
         41
     }
-    val withIf: ()-> Unit = {
+    konst withIf: ()-> Unit = {
         if (true) {
             3
         } else {
             45
         }
     }
-    val i = 34
-    val withWhen : () -> Unit = {
+    konst i = 34
+    konst withWhen : () -> Unit = {
         when(i) {
             1 -> {
-                val d = 34
+                konst d = 34
                 "1"
                 doSmth(d)
 
@@ -72,24 +72,24 @@ fun testCoercionToUnit() {
     }
 
     var x = 43
-    val checkType = {
+    konst checkType = {
         if (true) {
             x = 4
         } else {
             45
         }
     }
-    val f : () -> String = <!INITIALIZER_TYPE_MISMATCH!>checkType<!>
+    konst f : () -> String = <!INITIALIZER_TYPE_MISMATCH!>checkType<!>
 }
 
 fun doSmth(i: Int) {}
 
 fun testImplicitCoercion() {
-    val d = 21
+    konst d = 21
     var z = 0
     var i = when(d) {
         3 -> null
-        4 -> { val z = 23 }
+        4 -> { konst z = 23 }
         else -> z = 20
     }
 
@@ -101,8 +101,8 @@ fun testImplicitCoercion() {
     var iff = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) {
         z = 34
     }
-    val g = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) 4
-    val h = if (false) 4 else {}
+    konst g = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) 4
+    konst h = if (false) 4 else {}
 
     bar(<!ARGUMENT_TYPE_MISMATCH!>if (true) {
         4
@@ -115,18 +115,18 @@ fun fooWithAnyArg(arg: Any) {}
 fun fooWithAnyNullableArg(arg: Any?) {}
 
 fun testCoercionToAny() {
-    val d = 21
-    val x1: Any = if (1>2) 1 else 2.0
-    val x2: Any? = if (1>2) 1 else 2.0
-    val x3: Any? = if (1>2) 1 else (if (1>2) null else 2.0)
+    konst d = 21
+    konst x1: Any = if (1>2) 1 else 2.0
+    konst x2: Any? = if (1>2) 1 else 2.0
+    konst x3: Any? = if (1>2) 1 else (if (1>2) null else 2.0)
 
     fooWithAnyArg(if (1>2) 1 else 2.0)
     fooWithAnyNullableArg(if (1>2) 1 else 2.0)
     fooWithAnyNullableArg(if (1>2) 1 else (if (1>2) null else 2.0))
 
-    val y1: Any = when(d) { 1 -> 1.0 else -> 2.0 }
-    val y2: Any? = when(d) { 1 -> 1.0 else -> 2.0 }
-    val y3: Any? = when(d) { 1 -> 1.0; 2 -> null; else -> 2.0 }
+    konst y1: Any = when(d) { 1 -> 1.0 else -> 2.0 }
+    konst y2: Any? = when(d) { 1 -> 1.0 else -> 2.0 }
+    konst y3: Any? = when(d) { 1 -> 1.0; 2 -> null; else -> 2.0 }
 
     fooWithAnyArg(when(d) { 1 -> 1.0 else -> 2.0 })
     fooWithAnyNullableArg(when(d) { 1 -> 1.0 else -> 2.0 })
@@ -148,12 +148,12 @@ fun bar(a: Unit) {}
 
 fun testStatementInExpressionContext() {
     var z = 34
-    val a1: Unit = <!ASSIGNMENT_IN_EXPRESSION_CONTEXT!>z = 334<!>
-    val f = for (i in 1..10) {}
+    konst a1: Unit = <!ASSIGNMENT_IN_EXPRESSION_CONTEXT!>z = 334<!>
+    konst f = for (i in 1..10) {}
     if (true) return <!ASSIGNMENT_IN_EXPRESSION_CONTEXT!>z = 34<!>
     return <!EXPRESSION_EXPECTED!>while (true) {}<!>
 }
 
 fun testStatementInExpressionContext2() {
-    val a2: Unit = <!EXPRESSION_EXPECTED!>while(true) {}<!>
+    konst a2: Unit = <!EXPRESSION_EXPECTED!>while(true) {}<!>
 }

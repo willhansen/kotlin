@@ -25,16 +25,16 @@ import org.jetbrains.kotlin.types.Variance
 
 class IsArrayOf : IntrinsicMethod() {
     override fun toCallable(fd: FunctionDescriptor, isSuper: Boolean, resolvedCall: ResolvedCall<*>, codegen: ExpressionCodegen): Callable {
-        val typeArguments = resolvedCall.typeArguments
+        konst typeArguments = resolvedCall.typeArguments
         assert(typeArguments.size == 1) { "Expected only one type parameter for Any?.isArrayOf(), got: $typeArguments" }
 
-        val typeMapper = codegen.state.typeMapper
-        val method = typeMapper.mapToCallableMethod(fd, false)
+        konst typeMapper = codegen.state.typeMapper
+        konst method = typeMapper.mapToCallableMethod(fd, false)
 
-        val builtIns = fd.module.builtIns
-        val elementType = typeArguments.values.first()
-        val arrayKtType = builtIns.getArrayType(Variance.INVARIANT, elementType)
-        val arrayType = typeMapper.mapType(arrayKtType)
+        konst builtIns = fd.module.builtIns
+        konst elementType = typeArguments.konstues.first()
+        konst arrayKtType = builtIns.getArrayType(Variance.INVARIANT, elementType)
+        konst arrayType = typeMapper.mapType(arrayKtType)
 
         return createIntrinsicCallable(method) {
             it.instanceOf(arrayType)

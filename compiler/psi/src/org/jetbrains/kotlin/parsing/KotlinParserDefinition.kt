@@ -59,7 +59,7 @@ class KotlinParserDefinition : ParserDefinition {
     override fun getStringLiteralElements(): TokenSet = KtTokens.STRINGS
 
     override fun createElement(astNode: ASTNode): PsiElement {
-        val elementType = astNode.elementType
+        konst elementType = astNode.elementType
 
         return when (elementType) {
             is KtStubElementType<*, *> -> elementType.createPsiFromAst(astNode)
@@ -76,21 +76,21 @@ class KotlinParserDefinition : ParserDefinition {
 
     @Deprecated("Deprecated in Java")
     override fun spaceExistanceTypeBetweenTokens(left: ASTNode, right: ASTNode): ParserDefinition.SpaceRequirements {
-        val rightTokenType = right.elementType
+        konst rightTokenType = right.elementType
 
         // get/set from a new line
         if (rightTokenType == KtTokens.GET_KEYWORD || rightTokenType == KtTokens.SET_KEYWORD) {
             return MUST_LINE_BREAK
         }
 
-        val leftTokenType = left.elementType
+        konst leftTokenType = left.elementType
 
         if (leftTokenType is KtKeywordToken && rightTokenType is KtKeywordToken) return MUST
 
         // When entry from a new line
-        val rightWhenEntry = right.psi.getNonStrictParentOfType<KtWhenEntry>()
+        konst rightWhenEntry = right.psi.getNonStrictParentOfType<KtWhenEntry>()
         if (rightWhenEntry != null) {
-            val leftWhenEntry = left.psi.getNonStrictParentOfType<KtWhenEntry>()
+            konst leftWhenEntry = left.psi.getNonStrictParentOfType<KtWhenEntry>()
             if (leftWhenEntry != null && leftWhenEntry != rightWhenEntry && leftTokenType != KtTokens.SEMICOLON) {
                 return MUST_LINE_BREAK
             }
@@ -103,12 +103,12 @@ class KotlinParserDefinition : ParserDefinition {
     companion object {
 
         @JvmField
-        val STD_SCRIPT_SUFFIX = "kts"
+        konst STD_SCRIPT_SUFFIX = "kts"
 
         @JvmField
-        val STD_SCRIPT_EXT = "." + STD_SCRIPT_SUFFIX
+        konst STD_SCRIPT_EXT = "." + STD_SCRIPT_SUFFIX
 
-        val instance: KotlinParserDefinition
+        konst instance: KotlinParserDefinition
             get() = LanguageParserDefinitions.INSTANCE.forLanguage(KotlinLanguage.INSTANCE) as KotlinParserDefinition
     }
 }

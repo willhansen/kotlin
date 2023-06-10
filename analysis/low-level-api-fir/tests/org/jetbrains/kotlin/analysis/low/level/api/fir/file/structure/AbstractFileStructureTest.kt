@@ -26,18 +26,18 @@ import org.jetbrains.kotlin.test.services.TestServices
 
 abstract class AbstractFileStructureTest : AbstractLowLevelApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val fileStructure = ktFile.getFileStructure()
-        val allStructureElements = fileStructure.getAllStructureElements(ktFile)
-        val declarationToStructureElement = allStructureElements.associateBy { it.psi }
+        konst fileStructure = ktFile.getFileStructure()
+        konst allStructureElements = fileStructure.getAllStructureElements(ktFile)
+        konst declarationToStructureElement = allStructureElements.associateBy { it.psi }
 
-        val elementToComment = mutableMapOf<PsiElement, String>()
+        konst elementToComment = mutableMapOf<PsiElement, String>()
         ktFile.forEachDescendantOfType<KtDeclaration> { ktDeclaration ->
-            val structureElement = declarationToStructureElement[ktDeclaration] ?: return@forEachDescendantOfType
-            val comment = structureElement.createComment()
+            konst structureElement = declarationToStructureElement[ktDeclaration] ?: return@forEachDescendantOfType
+            konst comment = structureElement.createComment()
             when (ktDeclaration) {
                 is KtClassOrObject -> {
-                    val body = ktDeclaration.body
-                    val lBrace = body?.lBrace
+                    konst body = ktDeclaration.body
+                    konst lBrace = body?.lBrace
                     if (lBrace != null) {
                         elementToComment[lBrace] = comment
                     } else {
@@ -45,7 +45,7 @@ abstract class AbstractFileStructureTest : AbstractLowLevelApiSingleFileTest() {
                     }
                 }
                 is KtFunction -> {
-                    val lBrace = ktDeclaration.bodyBlockExpression?.lBrace
+                    konst lBrace = ktDeclaration.bodyBlockExpression?.lBrace
                     if (lBrace != null) {
                         elementToComment[lBrace] = comment
                     } else {
@@ -53,7 +53,7 @@ abstract class AbstractFileStructureTest : AbstractLowLevelApiSingleFileTest() {
                     }
                 }
                 is KtProperty -> {
-                    val initializerOrTypeReference = ktDeclaration.initializer ?: ktDeclaration.typeReference
+                    konst initializerOrTypeReference = ktDeclaration.initializer ?: ktDeclaration.typeReference
                     if (initializerOrTypeReference != null) {
                         elementToComment[initializerOrTypeReference] = comment
                     } else {
@@ -72,13 +72,13 @@ abstract class AbstractFileStructureTest : AbstractLowLevelApiSingleFileTest() {
 
         PsiTreeUtil.getChildrenOfTypeAsList(ktFile, KtModifierList::class.java).forEach {
             if (it.nextSibling is PsiErrorElement) {
-                val structureElement = declarationToStructureElement[ktFile] ?: return@forEach
-                val comment = structureElement.createComment()
+                konst structureElement = declarationToStructureElement[ktFile] ?: return@forEach
+                konst comment = structureElement.createComment()
                 elementToComment[it] = comment
             }
         }
 
-        val text = buildString {
+        konst text = buildString {
             ktFile.accept(object : PsiElementVisitor() {
                 override fun visitElement(element: PsiElement) {
                     if (element is LeafPsiElement) {
@@ -102,10 +102,10 @@ abstract class AbstractFileStructureTest : AbstractLowLevelApiSingleFileTest() {
     }
 
     private fun KtFile.getFileStructure(): FileStructure {
-        val module = ProjectStructureProvider.getModule(project, this, contextualModule = null)
-        val moduleFirResolveSession = module.getFirResolveSession(project)
+        konst module = ProjectStructureProvider.getModule(project, this, contextualModule = null)
+        konst moduleFirResolveSession = module.getFirResolveSession(project)
         check(moduleFirResolveSession.isSourceSession)
-        val session = moduleFirResolveSession.getSessionFor(module) as LLFirResolvableModuleSession
+        konst session = moduleFirResolveSession.getSessionFor(module) as LLFirResolvableModuleSession
         return session.moduleComponents.fileStructureCache.getFileStructure(this)
     }
 
@@ -117,9 +117,9 @@ abstract class AbstractFileStructureTest : AbstractLowLevelApiSingleFileTest() {
 }
 
 abstract class AbstractSourceFileStructureTest : AbstractFileStructureTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 }
 
 abstract class AbstractOutOfContentRootFileStructureTest : AbstractFileStructureTest() {
-    override val configurator = AnalysisApiFirOutOfContentRootTestConfigurator
+    override konst configurator = AnalysisApiFirOutOfContentRootTestConfigurator
 }

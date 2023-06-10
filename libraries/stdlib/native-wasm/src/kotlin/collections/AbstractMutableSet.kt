@@ -26,7 +26,7 @@ public actual abstract class AbstractMutableSet<E> protected actual constructor(
     }
 
     /**
-     * Returns the hash code value for this set.
+     * Returns the hash code konstue for this set.
      */
     override fun hashCode(): Int = AbstractSet.unorderedHashCode(this)
 }

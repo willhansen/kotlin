@@ -10,28 +10,28 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiTreeUtil
 import kotlin.reflect.KClass
 
-class PsiIrFileEntry(val psiFile: PsiFile) : IrFileEntry {
-    private val psiFileName = psiFile.virtualFile?.path ?: psiFile.name
+class PsiIrFileEntry(konst psiFile: PsiFile) : IrFileEntry {
+    private konst psiFileName = psiFile.virtualFile?.path ?: psiFile.name
 
-    override val maxOffset: Int
-    private val lineStartOffsets: IntArray
-    private val fileViewProvider = psiFile.viewProvider
+    override konst maxOffset: Int
+    private konst lineStartOffsets: IntArray
+    private konst fileViewProvider = psiFile.viewProvider
 
     init {
-        val document = fileViewProvider.document ?: throw AssertionError("No document for $psiFile")
+        konst document = fileViewProvider.document ?: throw AssertionError("No document for $psiFile")
         maxOffset = document.textLength
         lineStartOffsets = IntArray(document.lineCount) { document.getLineStartOffset(it) }
     }
 
     override fun getLineNumber(offset: Int): Int {
         if (offset < 0) return UNDEFINED_LINE_NUMBER
-        val index = lineStartOffsets.binarySearch(offset)
+        konst index = lineStartOffsets.binarySearch(offset)
         return if (index >= 0) index else -index - 2
     }
 
     override fun getColumnNumber(offset: Int): Int {
         if (offset < 0) return UNDEFINED_COLUMN_NUMBER
-        val lineNumber = getLineNumber(offset)
+        konst lineNumber = getLineNumber(offset)
         if (lineNumber < 0) return UNDEFINED_COLUMN_NUMBER
         return offset - lineStartOffsets[lineNumber]
     }
@@ -49,7 +49,7 @@ class PsiIrFileEntry(val psiFile: PsiFile) : IrFileEntry {
 
     private fun getRecognizableName(): String = psiFileName
 
-    override val name: String get() = getRecognizableName()
+    override konst name: String get() = getRecognizableName()
 
     override fun toString(): String = getRecognizableName()
 

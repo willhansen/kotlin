@@ -17,19 +17,19 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
 
     companion object {
         // Default size of one element in the array used to store bits.
-        private const val ELEMENT_SIZE = 64
-        private const val MAX_BIT_OFFSET = ELEMENT_SIZE - 1
-        private const val ALL_TRUE = -1L // 0xFFFF_FFFF_FFFF_FFFF
-        private const val ALL_FALSE = 0L // 0x0000_0000_0000_0000
+        private const konst ELEMENT_SIZE = 64
+        private const konst MAX_BIT_OFFSET = ELEMENT_SIZE - 1
+        private const konst ALL_TRUE = -1L // 0xFFFF_FFFF_FFFF_FFFF
+        private const konst ALL_FALSE = 0L // 0x0000_0000_0000_0000
     }
 
     private var bits: LongArray = LongArray(bitToElementSize(size))
 
-    private val lastIndex: Int
+    private konst lastIndex: Int
         get() = size - 1
 
     /** True if this BitSet contains no bits set to true. */
-    val isEmpty: Boolean
+    konst isEmpty: Boolean
         get() = bits.all { it == ALL_FALSE }
 
     /** Actual number of bits available in the set. All bits with indices >= size assumed to be 0 */
@@ -37,33 +37,33 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
         private set
 
     // Transforms a bit index into an element index in the `bits` array.
-    private val Int.elementIndex: Int
+    private konst Int.elementIndex: Int
         get() = this / ELEMENT_SIZE
 
     // Transforms a bit index in the set into a bit in the element of the `bits` array.
-    private val Int.bitOffset: Int
+    private konst Int.bitOffset: Int
         get() = this % ELEMENT_SIZE
 
     // Transforms a bit index in the set into pair of a `bits` element index and a bit index in the element.
-    private val Int.asBitCoordinates: Pair<Int, Int>
+    private konst Int.asBitCoordinates: Pair<Int, Int>
         get() = Pair(elementIndex, bitOffset)
 
     // Transforms a bit offset to the mask with only bit set corresponding to the offset.
-    private val Int.asMask: Long
+    private konst Int.asMask: Long
         get() = 0x1L shl this
 
     // Transforms a bit offset to the mask with only bits before the index (inclusive) set.
-    private val Int.asMaskBefore: Long
+    private konst Int.asMaskBefore: Long
         get() = getMaskBetween(0, this)
 
     // Transforms a bit offset to the mask with only bits after the index (inclusive) set.
-    private val Int.asMaskAfter: Long
+    private konst Int.asMaskAfter: Long
         get() = getMaskBetween(this, MAX_BIT_OFFSET)
 
     // Builds a masks with 1 between fromOffset and toOffset (both inclusive).
     private fun getMaskBetween(fromOffset: Int, toOffset: Int): Long {
         var res = 0L
-        val maskToAdd = fromOffset.asMask
+        konst maskToAdd = fromOffset.asMask
         for (i in fromOffset..toOffset) {
             res = (res shl 1) or maskToAdd
         }
@@ -79,17 +79,17 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
 
     // Sets all bits after the last available bit (size - 1) to 0.
     private fun clearUnusedTail() {
-        val (lastElementIndex, lastBitOffset) = lastIndex.asBitCoordinates
+        konst (lastElementIndex, lastBitOffset) = lastIndex.asBitCoordinates
         bits[bits.lastIndex] = bits[bits.lastIndex] and lastBitOffset.asMaskBefore
         for (i in lastElementIndex + 1 until bits.size) {
             bits[i] = ALL_FALSE
         }
     }
 
-    // Internal function. Sets bits specified by the element index and the given mask to value.
-    private fun setBitsWithMask(elementIndex: Int, mask: Long, value: Boolean) {
-        val element = bits[elementIndex]
-        if (value) {
+    // Internal function. Sets bits specified by the element index and the given mask to konstue.
+    private fun setBitsWithMask(elementIndex: Int, mask: Long, konstue: Boolean) {
+        konst element = bits[elementIndex]
+        if (konstue) {
             bits[elementIndex] = element or mask
         } else {
             bits[elementIndex] = element and mask.inv()
@@ -97,7 +97,7 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
     }
 
     /**
-     * Checks if index is valid and extends the `bits` array if the index exceeds its size.
+     * Checks if index is konstid and extends the `bits` array if the index exceeds its size.
      * @throws [IndexOutOfBoundsException] if [index] < 0.
      */
     private fun ensureCapacity(index: Int) {
@@ -115,18 +115,18 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
         }
     }
 
-    /** Set the bit specified to the specified value. */
-    fun set(index: Int, value: Boolean = true) {
+    /** Set the bit specified to the specified konstue. */
+    fun set(index: Int, konstue: Boolean = true) {
         ensureCapacity(index)
-        val (elementIndex, offset) = index.asBitCoordinates
-        setBitsWithMask(elementIndex, offset.asMask, value)
+        konst (elementIndex, offset) = index.asBitCoordinates
+        setBitsWithMask(elementIndex, offset.asMask, konstue)
     }
 
-    /** Sets the bits with indices between [from] (inclusive) and [to] (exclusive) to the specified value. */
-    fun set(from : Int, to: Int, value: Boolean = true) = set(from until to, value)
+    /** Sets the bits with indices between [from] (inclusive) and [to] (exclusive) to the specified konstue. */
+    fun set(from : Int, to: Int, konstue: Boolean = true) = set(from until to, konstue)
 
-    /** Sets the bits from the range specified to the specified value. */
-    fun set(range: IntRange, value: Boolean = true) {
+    /** Sets the bits from the range specified to the specified konstue. */
+    fun set(range: IntRange, konstue: Boolean = true) {
         if (range.start < 0 || range.endInclusive < 0) {
             throw IndexOutOfBoundsException()
         }
@@ -134,20 +134,20 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
             return
         }
         ensureCapacity(range.endInclusive)
-        val (fromIndex, fromOffset) = range.start.asBitCoordinates
-        val (toIndex, toOffset) = range.endInclusive.asBitCoordinates
+        konst (fromIndex, fromOffset) = range.start.asBitCoordinates
+        konst (toIndex, toOffset) = range.endInclusive.asBitCoordinates
         if (toIndex == fromIndex) {
-            val mask = getMaskBetween(fromOffset, toOffset)
-            setBitsWithMask(fromIndex, mask, value)
+            konst mask = getMaskBetween(fromOffset, toOffset)
+            setBitsWithMask(fromIndex, mask, konstue)
         } else {
             // Set bits in the first element.
-            setBitsWithMask(fromIndex, fromOffset.asMaskAfter, value)
+            setBitsWithMask(fromIndex, fromOffset.asMaskAfter, konstue)
             // Set all bits of all elements (excluding border ones) to 0 or 1 depending.
             for (index in fromIndex + 1 until toIndex) {
-                bits[index] = if (value) ALL_TRUE else ALL_FALSE
+                bits[index] = if (konstue) ALL_TRUE else ALL_FALSE
             }
             // Set bits in the last element
-            setBitsWithMask(toIndex, toOffset.asMaskBefore, value)
+            setBitsWithMask(toIndex, toOffset.asMaskBefore, konstue)
         }
     }
 
@@ -166,11 +166,11 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
         if (startIndex >= size) {
             return if (lookFor) -1 else startIndex
         }
-        val (startElementIndex, startOffset) = startIndex.asBitCoordinates
+        konst (startElementIndex, startOffset) = startIndex.asBitCoordinates
         // Look for the next set bit in the first element.
         var element = bits[startElementIndex]
         for (offset in startOffset..MAX_BIT_OFFSET) {
-            val bit = element and (0x1L shl offset) != 0L
+            konst bit = element and (0x1L shl offset) != 0L
             if (bit == lookFor) {  // Look for not 0 if we need a set bit and look for 0 otherwise.
                 return bitIndex(startElementIndex, offset)
             }
@@ -179,7 +179,7 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
         for (index in startElementIndex + 1..bits.lastIndex) {
             element = bits[index]
             for (offset in 0..MAX_BIT_OFFSET) {
-                val bit = element and (0x1L shl offset) != 0L
+                konst bit = element and (0x1L shl offset) != 0L
                 if (bit == lookFor) { // Look for not 0 if we need a set bit and look for 0 otherwise.
                     return bitIndex(index, offset)
                 }
@@ -189,21 +189,21 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
     }
 
     /**
-     * Returns an index of a next bit which value is `true` after [startIndex] (inclusive).
+     * Returns an index of a next bit which konstue is `true` after [startIndex] (inclusive).
      * Returns -1 if there is no such bits after [startIndex].
      * @throws IndexOutOfBoundException if [startIndex] < 0.
      */
     fun nextSetBit(startIndex: Int = 0): Int = nextBit(startIndex, true)
 
     /**
-     * Returns an index of a next bit which value is `false` after [startIndex] (inclusive).
+     * Returns an index of a next bit which konstue is `false` after [startIndex] (inclusive).
      * Returns [size] if there is no such bits between [startIndex] and [size] - 1 assuming that the set has an infinite
      * sequence of `false` bits after (size - 1)-th.
      * @throws IndexOutOfBoundException if [startIndex] < 0.
      */
     fun nextClearBit(startIndex: Int = 0): Int = nextBit(startIndex, false)
 
-    /** Returns a value of a bit with the [index] specified. */
+    /** Returns a konstue of a bit with the [index] specified. */
     operator fun get(index: Int): Boolean {
         if (index < 0) {
             throw IndexOutOfBoundsException()
@@ -211,7 +211,7 @@ internal class BitSet constructor(size: Int = ELEMENT_SIZE) {
         if (index >= size) {
             return false
         }
-        val (elementIndex, offset) = index.asBitCoordinates
+        konst (elementIndex, offset) = index.asBitCoordinates
         return bits[elementIndex] and offset.asMask != 0L
     }
 

@@ -19,7 +19,7 @@ public interface KtIntegerLiteralTypeRenderer {
         context(KtAnalysisSession, KtTypeRenderer)
         override fun renderType(type: KtIntegerLiteralType, printer: PrettyPrinter): Unit = printer {
             append("ILT(")
-            printer.append(type.value.toString())
+            printer.append(type.konstue.toString())
             append(')')
         }
     }

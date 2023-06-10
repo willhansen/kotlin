@@ -2,7 +2,7 @@ package test;
 
 public class AnnotatedMethod {
     public static @interface Anno {
-        int value();
+        int konstue();
     }
 
     @Anno(42)

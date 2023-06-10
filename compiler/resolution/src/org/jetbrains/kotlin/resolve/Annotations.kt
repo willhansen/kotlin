@@ -7,4 +7,4 @@ package org.jetbrains.kotlin.resolve
 
 import org.jetbrains.kotlin.name.FqName
 
-val SINCE_KOTLIN_FQ_NAME = FqName("kotlin.SinceKotlin")
+konst SINCE_KOTLIN_FQ_NAME = FqName("kotlin.SinceKotlin")

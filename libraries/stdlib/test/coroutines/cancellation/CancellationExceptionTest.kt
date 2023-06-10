@@ -14,8 +14,8 @@ class CancellationExceptionTest {
     @Test
     fun testAllConstructors() {
         // Mostly test NO_ACTUAL_WITHOUT_EXPECT though
-        val cause = ArithmeticException()
-        val message = "message"
+        konst cause = ArithmeticException()
+        konst message = "message"
         checkException(CancellationException(message, cause), cause, message)
         checkException(CancellationException(message, null), null, message)
         checkException(CancellationException(cause), cause, cause.defaultMessage())

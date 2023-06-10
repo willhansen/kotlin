@@ -2,7 +2,7 @@ fun test(a: Any?, flag: Boolean, x: Any?) {
     if (a == null) return
     <!DEBUG_INFO_SMARTCAST!>a<!>.hashCode()
 
-    val b: Any?
+    konst b: Any?
 
     if (flag) {
         b = a

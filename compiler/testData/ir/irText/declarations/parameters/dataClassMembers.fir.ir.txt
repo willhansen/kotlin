@@ -6,27 +6,27 @@ FILE fqName:<root> fileName:/dataClassMembers.kt
       VALUE_PARAMETER name:x index:0 type:T of <root>.Test
       VALUE_PARAMETER name:y index:1 type:kotlin.String
         EXPRESSION_BODY
-          CONST String type=kotlin.String value=""
+          CONST String type=kotlin.String konstue=""
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test modality:FINAL visibility:public [data] superTypes:[kotlin.Any]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:T of <root>.Test visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: T of <root>.Test declared in <root>.Test.<init>' type=T of <root>.Test origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.Test<T of <root>.Test>) returnType:T of <root>.Test
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Test<T of <root>.Test>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): T of <root>.Test declared in <root>.Test'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:T of <root>.Test visibility:private [final]' type=T of <root>.Test origin=null
               receiver: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.<get-x>' type=<root>.Test<T of <root>.Test> origin=null
-    PROPERTY name:y visibility:public modality:FINAL [val]
+    PROPERTY name:y visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:y type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'y: kotlin.String declared in <root>.Test.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-y> visibility:public modality:FINAL <> ($this:<root>.Test<T of <root>.Test>) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:y visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:y visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Test<T of <root>.Test>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-y> (): kotlin.String declared in <root>.Test'
@@ -72,14 +72,14 @@ FILE fqName:<root> fileName:/dataClassMembers.kt
               arg0: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.equals' type=<root>.Test<T of <root>.Test> origin=null
               arg1: GET_VAR 'other: kotlin.Any? declared in <root>.Test.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Test'
-              CONST Boolean type=kotlin.Boolean value=true
+              CONST Boolean type=kotlin.Boolean konstue=true
         WHEN type=kotlin.Unit origin=null
           BRANCH
             if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.Test<T of <root>.Test>
               GET_VAR 'other: kotlin.Any? declared in <root>.Test.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Test'
-              CONST Boolean type=kotlin.Boolean value=false
-        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.Test<T of <root>.Test> [val]
+              CONST Boolean type=kotlin.Boolean konstue=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.Test<T of <root>.Test> [konst]
           TYPE_OP type=<root>.Test<T of <root>.Test> origin=CAST typeOperand=<root>.Test<T of <root>.Test>
             GET_VAR 'other: kotlin.Any? declared in <root>.Test.equals' type=kotlin.Any? origin=null
         WHEN type=kotlin.Unit origin=null
@@ -89,9 +89,9 @@ FILE fqName:<root> fileName:/dataClassMembers.kt
                 arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:T of <root>.Test visibility:private [final]' type=T of <root>.Test origin=null
                   receiver: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.equals' type=<root>.Test<T of <root>.Test> origin=null
                 arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:T of <root>.Test visibility:private [final]' type=T of <root>.Test origin=null
-                  receiver: GET_VAR 'val tmp_0: <root>.Test<T of <root>.Test> declared in <root>.Test.equals' type=<root>.Test<T of <root>.Test> origin=null
+                  receiver: GET_VAR 'konst tmp_0: <root>.Test<T of <root>.Test> declared in <root>.Test.equals' type=<root>.Test<T of <root>.Test> origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Test'
-              CONST Boolean type=kotlin.Boolean value=false
+              CONST Boolean type=kotlin.Boolean konstue=false
         WHEN type=kotlin.Unit origin=null
           BRANCH
             if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
@@ -99,11 +99,11 @@ FILE fqName:<root> fileName:/dataClassMembers.kt
                 arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:y type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
                   receiver: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.equals' type=<root>.Test<T of <root>.Test> origin=null
                 arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:y type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
-                  receiver: GET_VAR 'val tmp_0: <root>.Test<T of <root>.Test> declared in <root>.Test.equals' type=<root>.Test<T of <root>.Test> origin=null
+                  receiver: GET_VAR 'konst tmp_0: <root>.Test<T of <root>.Test> declared in <root>.Test.equals' type=<root>.Test<T of <root>.Test> origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Test'
-              CONST Boolean type=kotlin.Boolean value=false
+              CONST Boolean type=kotlin.Boolean konstue=false
         RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Test'
-          CONST Boolean type=kotlin.Boolean value=true
+          CONST Boolean type=kotlin.Boolean konstue=true
     FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN <> ($this:<root>.Test<T of <root>.Test>) returnType:kotlin.Int
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
@@ -115,10 +115,10 @@ FILE fqName:<root> fileName:/dataClassMembers.kt
               if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
                 arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:T of <root>.Test visibility:private [final]' type=T of <root>.Test origin=null
                   receiver: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.hashCode' type=<root>.Test<T of <root>.Test> origin=null
-                arg1: CONST Null type=kotlin.Nothing? value=null
-              then: CONST Int type=kotlin.Int value=0
+                arg1: CONST Null type=kotlin.Nothing? konstue=null
+              then: CONST Int type=kotlin.Int konstue=0
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
+              if: CONST Boolean type=kotlin.Boolean konstue=true
               then: CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.Any' type=kotlin.Int origin=null
                 $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:T of <root>.Test visibility:private [final]' type=T of <root>.Test origin=null
                   receiver: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.hashCode' type=<root>.Test<T of <root>.Test> origin=null
@@ -126,7 +126,7 @@ FILE fqName:<root> fileName:/dataClassMembers.kt
           CALL 'public final fun plus (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=null
             $this: CALL 'public final fun times (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=null
               $this: GET_VAR 'var result: kotlin.Int declared in <root>.Test.hashCode' type=kotlin.Int origin=null
-              other: CONST Int type=kotlin.Int value=31
+              other: CONST Int type=kotlin.Int konstue=31
             other: CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=null
               $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:y type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
                 receiver: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.hashCode' type=<root>.Test<T of <root>.Test> origin=null
@@ -139,10 +139,10 @@ FILE fqName:<root> fileName:/dataClassMembers.kt
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.Test'
           STRING_CONCATENATION type=kotlin.String
-            CONST String type=kotlin.String value="Test(x="
+            CONST String type=kotlin.String konstue="Test(x="
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:T of <root>.Test visibility:private [final]' type=T of <root>.Test origin=null
               receiver: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.toString' type=<root>.Test<T of <root>.Test> origin=null
-            CONST String type=kotlin.String value=", y="
+            CONST String type=kotlin.String konstue=", y="
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:y type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: <root>.Test<T of <root>.Test> declared in <root>.Test.toString' type=<root>.Test<T of <root>.Test> origin=null
-            CONST String type=kotlin.String value=")"
+            CONST String type=kotlin.String konstue=")"

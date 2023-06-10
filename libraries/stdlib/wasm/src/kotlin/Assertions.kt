@@ -8,18 +8,18 @@ package kotlin
 // Note: codegen for these functions must be explicitly enabled with the -Xwasm-enable-asserts command line flag.
 
 /**
- * Throws an [AssertionError] if the [value] is false.
+ * Throws an [AssertionError] if the [konstue] is false.
  */
-internal fun assert(value: Boolean) {
-    assert(value) { "Assertion failed" }
+internal fun assert(konstue: Boolean) {
+    assert(konstue) { "Assertion failed" }
 }
 
 /**
- * Throws an [AssertionError] calculated by [lazyMessage] if the [value] is false.
+ * Throws an [AssertionError] calculated by [lazyMessage] if the [konstue] is false.
  */
-internal fun assert(value: Boolean, lazyMessage: () -> Any) {
-    if (!value) {
-        val message = lazyMessage()
+internal fun assert(konstue: Boolean, lazyMessage: () -> Any) {
+    if (!konstue) {
+        konst message = lazyMessage()
         throw AssertionError(message)
     }
 }

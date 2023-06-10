@@ -2,9 +2,9 @@ interface T {
     fun foo(): String
 }
 
-val o = object : T {
-    val a = "OK"
-    val f = {
+konst o = object : T {
+    konst a = "OK"
+    konst f = {
         a
     }.let { it() }
 

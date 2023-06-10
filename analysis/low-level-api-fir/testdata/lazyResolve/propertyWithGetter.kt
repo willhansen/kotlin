@@ -2,7 +2,7 @@ fun resolve<caret>Me() {
     receive(withGetter)
 }
 
-fun receive(value: Int){}
+fun receive(konstue: Int){}
 
-val withGetter: Int
+konst withGetter: Int
     get() = 42

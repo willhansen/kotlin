@@ -17,17 +17,17 @@ import org.jetbrains.kotlin.psi.KtClass
 
 internal class LLFirIdeRegisteredPluginAnnotations(
     session: FirSession,
-    private val annotationsResolver: KotlinAnnotationsResolver
+    private konst annotationsResolver: KotlinAnnotationsResolver
 ) : AbstractFirRegisteredPluginAnnotations(session) {
 
-    private val annotationsFromPlugins: MutableSet<AnnotationFqn> = mutableSetOf()
+    private konst annotationsFromPlugins: MutableSet<AnnotationFqn> = mutableSetOf()
 
-    override val annotations: Set<AnnotationFqn>
+    override konst annotations: Set<AnnotationFqn>
         get() = allAnnotationsCache.getValue()
 
-    private val allAnnotationsCache: FirLazyValue<Set<AnnotationFqn>> = session.firCachesFactory.createLazyValue {
+    private konst allAnnotationsCache: FirLazyValue<Set<AnnotationFqn>> = session.firCachesFactory.createLazyValue {
         // at this point, both metaAnnotations and annotationsFromPlugins should be collected
-        val result = metaAnnotations.flatMapTo(mutableSetOf()) { getAnnotationsWithMetaAnnotation(it) }
+        konst result = metaAnnotations.flatMapTo(mutableSetOf()) { getAnnotationsWithMetaAnnotation(it) }
 
         if (result.isEmpty()) {
             annotationsFromPlugins
@@ -38,7 +38,7 @@ internal class LLFirIdeRegisteredPluginAnnotations(
     }
 
     // MetaAnnotation -> Annotations
-    private val annotationsWithMetaAnnotationCache: FirCache<AnnotationFqn, Set<AnnotationFqn>, Nothing?> =
+    private konst annotationsWithMetaAnnotationCache: FirCache<AnnotationFqn, Set<AnnotationFqn>, Nothing?> =
         session.firCachesFactory.createCache { metaAnnotation -> collectAnnotationsWithMetaAnnotation(metaAnnotation) }
 
     override fun getAnnotationsWithMetaAnnotation(metaAnnotation: AnnotationFqn): Collection<AnnotationFqn> {
@@ -46,7 +46,7 @@ internal class LLFirIdeRegisteredPluginAnnotations(
     }
 
     private fun collectAnnotationsWithMetaAnnotation(metaAnnotation: AnnotationFqn): Set<FqName> {
-        val annotatedDeclarations = annotationsResolver.declarationsByAnnotation(ClassId.topLevel(metaAnnotation))
+        konst annotatedDeclarations = annotationsResolver.declarationsByAnnotation(ClassId.topLevel(metaAnnotation))
 
         return annotatedDeclarations
             .asSequence()

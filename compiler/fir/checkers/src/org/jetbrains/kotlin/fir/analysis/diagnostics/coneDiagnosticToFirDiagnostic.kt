@@ -68,12 +68,12 @@ private fun ConeDiagnostic.toKtDiagnostic(
     is ConeAmbiguityError -> when {
         applicability.isSuccess -> FirErrors.OVERLOAD_RESOLUTION_AMBIGUITY.createOn(source, this.candidates.map { it.symbol })
         applicability == CandidateApplicability.UNSAFE_CALL -> {
-            val (unsafeCall, candidate) = candidates.firstNotNullOf { it.diagnostics.firstIsInstanceOrNull<UnsafeCall>()?.to(it) }
+            konst (unsafeCall, candidate) = candidates.firstNotNullOf { it.diagnostics.firstIsInstanceOrNull<UnsafeCall>()?.to(it) }
             mapUnsafeCallError(candidate, unsafeCall, source, qualifiedAccessSource)
         }
 
         applicability == CandidateApplicability.UNSTABLE_SMARTCAST -> {
-            val unstableSmartcast = this.candidates.firstNotNullOf { it.diagnostics.firstIsInstanceOrNull<UnstableSmartCast>() }
+            konst unstableSmartcast = this.candidates.firstNotNullOf { it.diagnostics.firstIsInstanceOrNull<UnstableSmartCast>() }
             FirErrors.SMARTCAST_IMPOSSIBLE.createOn(
                 unstableSmartcast.argument.source,
                 unstableSmartcast.targetType,
@@ -161,10 +161,10 @@ private fun mapUnsafeCallError(
         return FirErrors.UNSAFE_IMPLICIT_INVOKE_CALL.createOn(source, rootCause.actualType)
     }
 
-    val candidateFunctionSymbol = candidate.symbol as? FirNamedFunctionSymbol
-    val candidateFunctionName = candidateFunctionSymbol?.name
-    val receiverExpression = candidate.callInfo.explicitReceiver
-    val singleArgument = candidate.callInfo.argumentList.arguments.singleOrNull()
+    konst candidateFunctionSymbol = candidate.symbol as? FirNamedFunctionSymbol
+    konst candidateFunctionName = candidateFunctionSymbol?.name
+    konst receiverExpression = candidate.callInfo.explicitReceiver
+    konst singleArgument = candidate.callInfo.argumentList.arguments.singleOrNull()
     if (receiverExpression != null && singleArgument != null &&
         (source.elementType == KtNodeTypes.OPERATION_REFERENCE || source.elementType == KtNodeTypes.BINARY_EXPRESSION) &&
         (candidateFunctionSymbol?.isOperator == true || candidateFunctionSymbol?.isInfix == true)
@@ -172,7 +172,7 @@ private fun mapUnsafeCallError(
         // For augmented assignment operations (e.g., `a += b`), the source is the entire binary expression (BINARY_EXPRESSION).
         // TODO: No need to check for source.elementType == BINARY_EXPRESSION if we use operator as callee reference source
         //  (see FirExpressionsResolveTransformer.transformAssignmentOperatorStatement)
-        val operationSource = if (source.elementType == KtNodeTypes.BINARY_EXPRESSION) {
+        konst operationSource = if (source.elementType == KtNodeTypes.BINARY_EXPRESSION) {
             source.getChild(KtNodeTypes.OPERATION_REFERENCE)
         } else {
             source
@@ -206,9 +206,9 @@ private fun mapInapplicableCandidateError(
     source: KtSourceElement,
     qualifiedAccessSource: KtSourceElement?,
 ): List<KtDiagnostic> {
-    val typeContext = session.typeContext
-    val genericDiagnostic = FirErrors.INAPPLICABLE_CANDIDATE.createOn(source, diagnostic.candidate.symbol)
-    val diagnostics = diagnostic.candidate.diagnostics.filter { it.applicability == diagnostic.applicability }.mapNotNull { rootCause ->
+    konst typeContext = session.typeContext
+    konst genericDiagnostic = FirErrors.INAPPLICABLE_CANDIDATE.createOn(source, diagnostic.candidate.symbol)
+    konst diagnostics = diagnostic.candidate.diagnostics.filter { it.applicability == diagnostic.applicability }.mapNotNull { rootCause ->
         when (rootCause) {
             is VarargArgumentOutsideParentheses -> FirErrors.VARARG_OUTSIDE_PARENTHESES.createOn(
                 rootCause.argument.source ?: qualifiedAccessSource
@@ -256,7 +256,7 @@ private fun mapInapplicableCandidateError(
             is TooManyArguments -> FirErrors.TOO_MANY_ARGUMENTS.createOn(rootCause.argument.source ?: source, rootCause.function.symbol)
             is NoValueForParameter -> FirErrors.NO_VALUE_FOR_PARAMETER.createOn(
                 qualifiedAccessSource ?: source,
-                rootCause.valueParameter.symbol
+                rootCause.konstueParameter.symbol
             )
 
             is NameNotFound -> FirErrors.NAMED_PARAMETER_NOT_FOUND.createOn(
@@ -319,7 +319,7 @@ private fun mapSystemHasContradictionError(
     source: KtSourceElement,
     qualifiedAccessSource: KtSourceElement?,
 ): List<KtDiagnostic> {
-    val errorsToIgnore = mutableSetOf<ConstraintSystemError>()
+    konst errorsToIgnore = mutableSetOf<ConstraintSystemError>()
     return buildList {
         for (error in diagnostic.candidate.errors) {
             addIfNotNull(
@@ -336,7 +336,7 @@ private fun mapSystemHasContradictionError(
         listOfNotNull(
             diagnostic.candidate.errors.firstNotNullOfOrNull {
                 if (it in errorsToIgnore) return@firstNotNullOfOrNull null
-                val message = when (it) {
+                konst message = when (it) {
                     is NewConstraintError -> "NewConstraintError at ${it.position}: ${it.lowerType} <!: ${it.upperType}"
                     // Error should be reported on the error type itself
                     is ConstrainingTypeIsError -> return@firstNotNullOfOrNull null
@@ -345,7 +345,7 @@ private fun mapSystemHasContradictionError(
                 }
 
                 if (it is NewConstraintError && it.position.from is FixVariableConstraintPosition<*>) {
-                    val morePreciseDiagnosticExists = diagnostic.candidate.errors.any { other ->
+                    konst morePreciseDiagnosticExists = diagnostic.candidate.errors.any { other ->
                         other is NewConstraintError && other.position.from !is FixVariableConstraintPosition<*>
                     }
                     if (morePreciseDiagnosticExists) return@firstNotNullOfOrNull null
@@ -366,8 +366,8 @@ private fun ConstraintSystemError.toDiagnostic(
 ): KtDiagnostic? {
     return when (this) {
         is NewConstraintError -> {
-            val position = position.from
-            val argument =
+            konst position = position.from
+            konst argument =
                 when (position) {
                     // TODO: Support other ReceiverConstraintPositionImpl, LHSArgumentConstraintPositionImpl
                     is ConeArgumentConstraintPosition -> position.argument
@@ -375,7 +375,7 @@ private fun ConstraintSystemError.toDiagnostic(
                     else -> null
                 }
 
-            val typeMismatchDueToNullability = typeContext.isTypeMismatchDueToNullability(lowerConeType, upperConeType)
+            konst typeMismatchDueToNullability = typeContext.isTypeMismatchDueToNullability(lowerConeType, upperConeType)
             argument?.let {
                 return FirErrors.ARGUMENT_TYPE_MISMATCH.createOn(
                     it.source ?: source,
@@ -387,7 +387,7 @@ private fun ConstraintSystemError.toDiagnostic(
 
             when (position) {
                 is ConeExpectedTypeConstraintPosition -> {
-                    val inferredType =
+                    konst inferredType =
                         if (!lowerConeType.isNullableNothing)
                             lowerConeType
                         else
@@ -412,14 +412,14 @@ private fun ConstraintSystemError.toDiagnostic(
         }
 
         is NotEnoughInformationForTypeParameter<*> -> {
-            val isDiagnosticRedundant = candidate.errors.any { otherError ->
+            konst isDiagnosticRedundant = candidate.errors.any { otherError ->
                 (otherError is ConstrainingTypeIsError && otherError.typeVariable == this.typeVariable)
                         || otherError is NewConstraintError
             }
 
             if (isDiagnosticRedundant) return null
 
-            val typeVariableName = when (val typeVariable = this.typeVariable) {
+            konst typeVariableName = when (konst typeVariable = this.typeVariable) {
                 is ConeTypeParameterBasedTypeVariable -> typeVariable.typeParameterSymbol.name.asString()
                 is ConeTypeVariableForLambdaReturnType -> "return type of lambda"
                 else -> error("Unsupported type variable: $typeVariable")
@@ -469,11 +469,11 @@ private fun reportInferredIntoEmptyIntersection(
     kind: EmptyIntersectionTypeKind,
     isError: Boolean
 ): KtDiagnostic? {
-    val typeVariableText =
+    konst typeVariableText =
         (typeVariable.typeConstructor.originalTypeParameter as? ConeTypeParameterLookupTag)?.name?.asString()
             ?: typeVariable.toString()
-    val causingTypesText = if (incompatibleTypes == causingTypes) "" else ": ${causingTypes.joinToString()}"
-    val factory =
+    konst causingTypesText = if (incompatibleTypes == causingTypes) "" else ": ${causingTypes.joinToString()}"
+    konst factory =
         when {
             !kind.isDefinitelyEmpty -> FirErrors.INFERRED_TYPE_VARIABLE_INTO_POSSIBLE_EMPTY_INTERSECTION
             isError -> FirErrors.INFERRED_TYPE_VARIABLE_INTO_EMPTY_INTERSECTION.errorFactory
@@ -483,8 +483,8 @@ private fun reportInferredIntoEmptyIntersection(
     return factory.createOn(source, typeVariableText, incompatibleTypes, kind.description, causingTypesText)
 }
 
-private val NewConstraintError.lowerConeType: ConeKotlinType get() = lowerType as ConeKotlinType
-private val NewConstraintError.upperConeType: ConeKotlinType get() = upperType as ConeKotlinType
+private konst NewConstraintError.lowerConeType: ConeKotlinType get() = lowerType as ConeKotlinType
+private konst NewConstraintError.upperConeType: ConeKotlinType get() = upperType as ConeKotlinType
 
 private fun ConeSimpleDiagnostic.getFactory(source: KtSourceElement): KtDiagnosticFactory0 {
     return when (kind) {

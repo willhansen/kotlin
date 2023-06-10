@@ -26,32 +26,32 @@ sealed class FirSinceKotlinAccessibility {
     object Accessible : FirSinceKotlinAccessibility()
 
     data class NotAccessibleButWasExperimental(
-        val version: ApiVersion,
-        val markerClasses: List<FirRegularClassSymbol>
+        konst version: ApiVersion,
+        konst markerClasses: List<FirRegularClassSymbol>
     ) : FirSinceKotlinAccessibility()
 
     data class NotAccessible(
-        val version: ApiVersion
+        konst version: ApiVersion
     ) : FirSinceKotlinAccessibility()
 }
 
 private data class FirSinceKotlinValue(
-    val apiVersion: ApiVersion,
-    val wasExperimentalMarkerClasses: List<FirRegularClassSymbol>
+    konst apiVersion: ApiVersion,
+    konst wasExperimentalMarkerClasses: List<FirRegularClassSymbol>
 )
 
 fun FirDeclaration.checkSinceKotlinVersionAccessibility(context: CheckerContext): FirSinceKotlinAccessibility {
-    val value = getOwnSinceKotlinVersion(context.session)
-    val version = value?.apiVersion
-    val languageVersionSettings = context.session.languageVersionSettings
+    konst konstue = getOwnSinceKotlinVersion(context.session)
+    konst version = konstue?.apiVersion
+    konst languageVersionSettings = context.session.languageVersionSettings
 
     // Allow access in the following cases:
     // 1) There's no @SinceKotlin annotation for this descriptor
-    // 2) There's a @SinceKotlin annotation but its value is some unrecognizable nonsense
-    // 3) The value as a version is not greater than our API version
+    // 2) There's a @SinceKotlin annotation but its konstue is some unrecognizable nonsense
+    // 3) The konstue as a version is not greater than our API version
     if (version == null || version <= languageVersionSettings.apiVersion) return FirSinceKotlinAccessibility.Accessible
 
-    val wasExperimentalFqNames = value.wasExperimentalMarkerClasses
+    konst wasExperimentalFqNames = konstue.wasExperimentalMarkerClasses
     if (wasExperimentalFqNames.isNotEmpty()) {
         return FirSinceKotlinAccessibility.NotAccessibleButWasExperimental(version, wasExperimentalFqNames)
     }
@@ -64,10 +64,10 @@ private fun FirDeclaration.getOwnSinceKotlinVersion(session: FirSession): FirSin
 
     // TODO: use-site targeted annotations
     fun FirDeclaration.consider() {
-        val sinceKotlinSingleArgument = getAnnotationByClassId(StandardClassIds.Annotations.SinceKotlin, session)?.findArgumentByName(
+        konst sinceKotlinSingleArgument = getAnnotationByClassId(StandardClassIds.Annotations.SinceKotlin, session)?.findArgumentByName(
             StandardClassIds.Annotations.ParameterNames.sinceKotlinVersion
         )
-        val apiVersion = ((sinceKotlinSingleArgument as? FirConstExpression<*>)?.value as? String)?.let(ApiVersion.Companion::parse)
+        konst apiVersion = ((sinceKotlinSingleArgument as? FirConstExpression<*>)?.konstue as? String)?.let(ApiVersion.Companion::parse)
         if (apiVersion != null) {
             // TODO: combine wasExperimentalMarkerClasses in case of several associated declarations with the same maximal API version
             if (result == null || apiVersion > result!!.apiVersion) {
@@ -84,9 +84,9 @@ private fun FirDeclaration.getOwnSinceKotlinVersion(session: FirSession): FirSin
 
     this.consider()
     if (this is FirConstructor) {
-        val classId = symbol.callableId.classId
+        konst classId = symbol.callableId.classId
         if (classId != null) {
-            val classSymbol = session.symbolProvider.getClassLikeSymbolByClassId(classId)
+            konst classSymbol = session.symbolProvider.getClassLikeSymbolByClassId(classId)
             classSymbol?.consider()
         }
     }
@@ -99,8 +99,8 @@ private fun FirDeclaration.getOwnSinceKotlinVersion(session: FirSession): FirSin
 }
 
 private fun FirDeclaration.loadWasExperimentalMarkerClasses(session: FirSession): List<FirRegularClassSymbol> {
-    val wasExperimental = getAnnotationByClassId(OptInNames.WAS_EXPERIMENTAL_CLASS_ID, session) ?: return emptyList()
-    val annotationClasses = wasExperimental.findArgumentByName(OptInNames.WAS_EXPERIMENTAL_ANNOTATION_CLASS) ?: return emptyList()
+    konst wasExperimental = getAnnotationByClassId(OptInNames.WAS_EXPERIMENTAL_CLASS_ID, session) ?: return emptyList()
+    konst annotationClasses = wasExperimental.findArgumentByName(OptInNames.WAS_EXPERIMENTAL_ANNOTATION_CLASS) ?: return emptyList()
     return annotationClasses.extractClassesFromArgument(session)
 }
 

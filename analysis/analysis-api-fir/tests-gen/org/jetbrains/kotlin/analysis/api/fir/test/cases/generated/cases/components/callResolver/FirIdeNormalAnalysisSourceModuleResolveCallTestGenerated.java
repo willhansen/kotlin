@@ -963,48 +963,48 @@ public class FirIdeNormalAnalysisSourceModuleResolveCallTestGenerated extends Ab
     }
 
     @Nested
-    @TestMetadata("analysis/analysis-api/testData/components/callResolver/resolveCall/invalidCode")
+    @TestMetadata("analysis/analysis-api/testData/components/callResolver/resolveCall/inkonstidCode")
     @TestDataPath("$PROJECT_ROOT")
-    public class InvalidCode {
+    public class InkonstidCode {
         @Test
-        public void testAllFilesPresentInInvalidCode() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/callResolver/resolveCall/invalidCode"), Pattern.compile("^(.+)\\.kt$"), null, true);
+        public void testAllFilesPresentInInkonstidCode() throws Exception {
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/components/callResolver/resolveCall/inkonstidCode"), Pattern.compile("^(.+)\\.kt$"), null, true);
         }
 
         @Test
         @TestMetadata("getterAssignment.kt")
         public void testGetterAssignment() throws Exception {
-            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/invalidCode/getterAssignment.kt");
+            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/inkonstidCode/getterAssignment.kt");
         }
 
         @Test
         @TestMetadata("incompleteCodeNoParenthesis.kt")
         public void testIncompleteCodeNoParenthesis() throws Exception {
-            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/invalidCode/incompleteCodeNoParenthesis.kt");
+            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/inkonstidCode/incompleteCodeNoParenthesis.kt");
         }
 
         @Test
         @TestMetadata("incompleteCodeNoParenthesisDotQualifier.kt")
         public void testIncompleteCodeNoParenthesisDotQualifier() throws Exception {
-            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/invalidCode/incompleteCodeNoParenthesisDotQualifier.kt");
+            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/inkonstidCode/incompleteCodeNoParenthesisDotQualifier.kt");
         }
 
         @Test
         @TestMetadata("incompleteCodeWithAmbiguity.kt")
         public void testIncompleteCodeWithAmbiguity() throws Exception {
-            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/invalidCode/incompleteCodeWithAmbiguity.kt");
+            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/inkonstidCode/incompleteCodeWithAmbiguity.kt");
         }
 
         @Test
         @TestMetadata("incorrectCodeJavaDeclaration.kt")
         public void testIncorrectCodeJavaDeclaration() throws Exception {
-            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/invalidCode/incorrectCodeJavaDeclaration.kt");
+            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/inkonstidCode/incorrectCodeJavaDeclaration.kt");
         }
 
         @Test
         @TestMetadata("typeParameterAsValue.kt")
         public void testTypeParameterAsValue() throws Exception {
-            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/invalidCode/typeParameterAsValue.kt");
+            runTest("analysis/analysis-api/testData/components/callResolver/resolveCall/inkonstidCode/typeParameterAsValue.kt");
         }
     }
 

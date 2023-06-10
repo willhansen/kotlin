@@ -8,8 +8,8 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendWithResult(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-        c.resume(value)
+    suspend fun <T> suspendWithResult(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 }
@@ -23,7 +23,7 @@ fun newIterator() = Iterator()
 class Iterator() {
     var hasNextX = true
     public suspend fun hasNext(): Boolean {
-        val tmp = hasNextX
+        konst tmp = hasNextX
         hasNextX = false
         return tmp
     }
@@ -44,7 +44,7 @@ public inline fun Controller.consume(action: Controller.() -> String?): String? 
 
 public suspend fun Controller.doTest(): String? {
     return consume {
-        val iterator = newIterator()
+        konst iterator = newIterator()
         if (!iterator.hasNext())
             return null
         return iterator.next()
@@ -53,7 +53,7 @@ public suspend fun Controller.doTest(): String? {
 
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation)
     return controller.result
 }
@@ -63,8 +63,8 @@ fun Controller.add(s: String?) {
 }
 
 fun box(): String {
-    val value = builder {
+    konst konstue = builder {
         add(doTest())
     }
-    return if (value != "?OK") return "Fail: $value" else "OK"
+    return if (konstue != "?OK") return "Fail: $konstue" else "OK"
 }

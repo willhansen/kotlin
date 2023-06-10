@@ -5,7 +5,7 @@ class Wrapper {
   // CHECK:
   //   Mangled name: Wrapper{}dummy
   //   Public signature: /Wrapper.dummy|-4015397354973262001[0]
-  private val dummy: <no name provided>
+  private konst dummy: <no name provided>
     field
       // CHECK JVM_IR:
       //   Mangled name (compatible mode: false): Wrapper{}dummy.<no name provided>
@@ -22,7 +22,7 @@ class Wrapper {
         // CHECK:
         //   Mangled name (compatible mode: false): Wrapper{}dummy.<no name provided>{}foo
         //   Mangled name (compatible mode: true):  Wrapper.dummy.<no name provided>{}foo
-        /* fake */ override val foo: String
+        /* fake */ override konst foo: String
           // CHECK JVM_IR:
           //   Mangled name (compatible mode: false): Wrapper{}dummy.<no name provided>#<get-foo>(){}kotlin.String
           //   Mangled name (compatible mode: true):  Wrapper.dummy.<no name provided>#<get-foo>(){}kotlin.String
@@ -45,7 +45,7 @@ class Wrapper {
   // CHECK:
   //   Mangled name: Wrapper{}bar
   //   Public signature: /Wrapper.bar|-7864284097863469857[0]
-  private val bar: <no name provided>
+  private konst bar: <no name provided>
     field
       // CHECK JVM_IR:
       //   Mangled name (compatible mode: false): Wrapper{}bar.<no name provided>
@@ -61,12 +61,12 @@ class Wrapper {
         // CHECK:
         //   Mangled name (compatible mode: false): Wrapper{}bar.<no name provided>.$$delegate_0
         //   Mangled name (compatible mode: true):  Wrapper.bar.<no name provided>.$$delegate_0
-        private /* final field */ val $$delegate_0: <no name provided>
+        private /* final field */ konst $$delegate_0: <no name provided>
 
         // CHECK:
         //   Mangled name (compatible mode: false): Wrapper{}bar.<no name provided>{}foo
         //   Mangled name (compatible mode: true):  Wrapper.bar.<no name provided>{}foo
-        override val foo: String
+        override konst foo: String
           // CHECK JVM_IR:
           //   Mangled name (compatible mode: false): Wrapper{}bar.<no name provided>#<get-foo>(){}kotlin.String
           //   Mangled name (compatible mode: true):  Wrapper.bar.<no name provided>#<get-foo>(){}kotlin.String
@@ -101,7 +101,7 @@ interface Bar {
   // CHECK:
   //   Mangled name: Bar{}foo
   //   Public signature: /Bar.foo|1688079488202778848[0]
-  val foo: String
+  konst foo: String
     // CHECK JVM_IR:
     //   Mangled name: Bar#<get-foo>(){}kotlin.String
     //   Public signature: /Bar.foo.<get-foo>|9191418659696353323[0]

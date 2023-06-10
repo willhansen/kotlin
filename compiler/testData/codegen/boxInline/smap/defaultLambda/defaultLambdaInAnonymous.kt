@@ -28,12 +28,12 @@ package test
 //A lot of blank lines [Don't delete]
 //A lot of blank lines [Don't delete]
 
-inline fun kValue(crossinline s: () -> String): String { val lambda = { s() + "K" }; return lambda() }
+inline fun kValue(crossinline s: () -> String): String { konst lambda = { s() + "K" }; return lambda() }
 
 inline fun lParams(initParams: () -> String = {
-    val lambda = { "" + kValue { "O" } }; lambda()
+    konst lambda = { "" + kValue { "O" } }; lambda()
 }): String {
-    val z = "body"
+    konst z = "body"
     return initParams()
 }
 

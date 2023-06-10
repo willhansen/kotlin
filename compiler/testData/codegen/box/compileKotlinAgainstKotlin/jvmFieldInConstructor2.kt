@@ -4,7 +4,7 @@
 // MODULE: lib
 // FILE: A.kt
 
-abstract class Foo<T : Number>(@JvmField val foo: T)
+abstract class Foo<T : Number>(@JvmField konst foo: T)
 
 class Bar(foo: Int) : Foo<Int>(foo) {
     fun test(): Int = foo + 1

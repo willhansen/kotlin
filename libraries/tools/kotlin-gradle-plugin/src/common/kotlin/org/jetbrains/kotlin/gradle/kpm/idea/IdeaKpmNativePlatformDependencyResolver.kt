@@ -25,13 +25,13 @@ import java.io.File
 
 internal class IdeaKpmNativePlatformDependencyResolver : IdeaKpmDependencyResolver {
     override fun resolve(fragment: GradleKpmFragment): Set<IdeaKpmDependency> {
-        val konanTargets = fragment.containingVariants
+        konst konanTargets = fragment.containingVariants
             .map { it as? GradleKpmNativeVariantInternal ?: return emptySet() }
             .map { it.konanTarget }
             .toSet()
 
         /* Fragments with multiple konan targets will receive commonized klibs */
-        val konanTarget = konanTargets.singleOrNull() ?: return emptySet()
+        konst konanTarget = konanTargets.singleOrNull() ?: return emptySet()
 
         return fragment.project.konanDistribution.platformLibsDir.resolve(konanTarget.name)
             .listLibraryFiles()
@@ -42,7 +42,7 @@ internal class IdeaKpmNativePlatformDependencyResolver : IdeaKpmDependencyResolv
 
 private fun Project.resolveKlib(file: File): IdeaKpmResolvedBinaryDependency? {
     try {
-        val kotlinLibrary = resolveSingleFileKlib(
+        konst kotlinLibrary = resolveSingleFileKlib(
             org.jetbrains.kotlin.konan.file.File(file.absolutePath),
             strategy = ToolingSingleFileKlibResolveStrategy
         )
@@ -62,7 +62,7 @@ private fun Project.resolveKlib(file: File): IdeaKpmResolvedBinaryDependency? {
     }
 }
 
-private val Project.konanDistribution: KonanDistribution
+private konst Project.konanDistribution: KonanDistribution
     get() = KonanDistribution(project.file(konanHome))
 
 private fun File.listLibraryFiles(): Set<File> = listFiles().orEmpty()

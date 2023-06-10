@@ -18,16 +18,16 @@ annotation class Anno
 
 class ExampleAnnotationProcessor : AbstractProcessor() {
     private companion object {
-        val KAPT_KOTLIN_GENERATED_OPTION = "kapt.kotlin.generated"
+        konst KAPT_KOTLIN_GENERATED_OPTION = "kapt.kotlin.generated"
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment): Boolean {
-        val elements = roundEnv.getElementsAnnotatedWith(Anno::class.java)
-        val kotlinGenerated = processingEnv.options[KAPT_KOTLIN_GENERATED_OPTION]
+        konst elements = roundEnv.getElementsAnnotatedWith(Anno::class.java)
+        konst kotlinGenerated = processingEnv.options[KAPT_KOTLIN_GENERATED_OPTION]
 
         for (element in elements) {
-            val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
-            val simpleName = element.simpleName.toString()
+            konst packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
+            konst simpleName = element.simpleName.toString()
 
             if (kotlinGenerated != null && element.kind == ElementKind.CLASS) {
                 File(kotlinGenerated, "$simpleName.kt").writer().buffered().use {

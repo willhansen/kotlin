@@ -10,9 +10,9 @@ import kotlin.test.assertEquals
 class C(var state: String)
 
 fun box(): String {
-    val prop = C::state
+    konst prop = C::state
 
-    val c = C("1")
+    konst c = C("1")
     assertEquals("1", prop.getter.invoke(c))
     assertEquals("1", prop.getter(c))
 

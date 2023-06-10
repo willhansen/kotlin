@@ -3,10 +3,10 @@ plugins {
     id("jps-compatible")
 }
 
-val compilerModules: Array<String> by rootProject.extra
-val otherCompilerModules = compilerModules.filter { it != path }
+konst compilerModules: Array<String> by rootProject.extra
+konst otherCompilerModules = compilerModules.filter { it != path }
 
-val antLauncherJar by configurations.creating
+konst antLauncherJar by configurations.creating
 
 dependencies {
     testImplementation(intellijCore()) // Should come before compiler, because of "progarded" stuff needed for tests
@@ -59,7 +59,7 @@ projectTest(
 
     workingDir = rootDir
     systemProperty("kotlin.test.script.classpath", testSourceSet.output.classesDirs.joinToString(File.pathSeparator))
-    val antLauncherJarPathProvider = project.provider {
+    konst antLauncherJarPathProvider = project.provider {
         antLauncherJar.asPath
     }
     doFirst {
@@ -68,6 +68,6 @@ projectTest(
     }
 }
 
-val generateTestData by generator("org.jetbrains.kotlin.generators.tests.GenerateCompilerTestDataKt")
+konst generateTestData by generator("org.jetbrains.kotlin.generators.tests.GenerateCompilerTestDataKt")
 
 testsJar()

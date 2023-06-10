@@ -3,23 +3,23 @@
 // FILE: A.kt
 
 interface KotlinMangler<D : Any> {
-    val String.hashMangle: Long
-    val D.fqnString: String
-    val D.fqnMangle: Long get() = fqnString.hashMangle
-    val manglerName: String
+    konst String.hashMangle: Long
+    konst D.fqnString: String
+    konst D.fqnMangle: Long get() = fqnString.hashMangle
+    konst manglerName: String
 
     interface IrMangler : KotlinMangler<String> {
-        override val manglerName: String
+        override konst manglerName: String
             get() = "Ir"
     }
 }
 
 abstract class AbstractKotlinMangler<D : Any> : KotlinMangler<D> {
-    override val String.hashMangle get() = 42L
+    override konst String.hashMangle get() = 42L
 }
 
 abstract class IrBasedKotlinManglerImpl : AbstractKotlinMangler<String>(), KotlinMangler.IrMangler {
-    override val String.fqnString: String
+    override konst String.fqnString: String
         get() = this
 }
 

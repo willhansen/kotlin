@@ -22,14 +22,14 @@ import java.io.File
 
 var K2JVMCompilerArguments.destinationAsFile: File
     get() = File(destination)
-    set(value) {
-        destination = value.absolutePath
+    set(konstue) {
+        destination = konstue.absolutePath
     }
 
 var K2JVMCompilerArguments.classpathAsList: List<File>
     get() = classpath.orEmpty().split(File.pathSeparator).map(::File)
-    set(value) {
-        classpath = value.joinToString(separator = File.pathSeparator, transform = { it.absolutePath })
+    set(konstue) {
+        classpath = konstue.joinToString(separator = File.pathSeparator, transform = { it.absolutePath })
     }
 
 @Suppress("unused") // used in Maven compile runner
@@ -40,18 +40,18 @@ fun makeJvmIncrementally(
     messageCollector: MessageCollector = MessageCollector.NONE,
     reporter: ICReporter = DoNothingICReporter
 ) {
-    val kotlinExtensions = DEFAULT_KOTLIN_SOURCE_FILES_EXTENSIONS
-    val allExtensions = kotlinExtensions + "java"
-    val rootsWalk = sourceRoots.asSequence().flatMap { it.walk() }
-    val files = rootsWalk.filter(File::isFile)
-    val sourceFiles = files.filter { it.extension.lowercase() in allExtensions }.toList()
-    val buildHistoryFile = File(cachesDir, "build-history.bin")
+    konst kotlinExtensions = DEFAULT_KOTLIN_SOURCE_FILES_EXTENSIONS
+    konst allExtensions = kotlinExtensions + "java"
+    konst rootsWalk = sourceRoots.asSequence().flatMap { it.walk() }
+    konst files = rootsWalk.filter(File::isFile)
+    konst sourceFiles = files.filter { it.extension.lowercase() in allExtensions }.toList()
+    konst buildHistoryFile = File(cachesDir, "build-history.bin")
     args.javaSourceRoots = sourceRoots.map { it.absolutePath }.toTypedArray()
-    val buildReporter = BuildReporter(icReporter = reporter, buildMetricsReporter = DoNothingBuildMetricsReporter)
+    konst buildReporter = BuildReporter(icReporter = reporter, buildMetricsReporter = DoNothingBuildMetricsReporter)
 
     withIncrementalCompilation(args) {
-        val useK2 = args.useK2 || LanguageVersion.fromVersionString(args.languageVersion)?.usesK2 == true
-        val compiler =
+        konst useK2 = args.useK2 || LanguageVersion.fromVersionString(args.languageVersion)?.usesK2 == true
+        konst compiler =
             if (useK2 && args.useFirIC && args.useFirLT /* TODO by @Ilya.Chernikov: move LT check into runner */)
                 IncrementalFirJvmCompilerRunner(
                     cachesDir,
@@ -81,7 +81,7 @@ fun makeJvmIncrementally(
 
 @Suppress("DEPRECATION")
 inline fun <R> withIncrementalCompilation(args: CommonCompilerArguments, enabled: Boolean = true, fn: () -> R): R {
-    val isEnabledBackup = IncrementalCompilation.isEnabledForJvm()
+    konst isEnabledBackup = IncrementalCompilation.isEnabledForJvm()
     IncrementalCompilation.setIsEnabledForJvm(enabled)
 
     try {

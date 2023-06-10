@@ -9,13 +9,13 @@ import com.intellij.openapi.util.text.StringUtil.containsLineBreak
 import com.intellij.openapi.util.text.StringUtil.escapeLineBreak
 import java.util.*
 
-internal data class NameAndSafeValue(val name: String, val safeValue: String)
+internal data class NameAndSafeValue(konst name: String, konst safeValue: String)
 
 internal object SafeEnvVars : Iterable<NameAndSafeValue> {
-    private val environment: List<NameAndSafeValue> by lazy {
+    private konst environment: List<NameAndSafeValue> by lazy {
         buildList {
-            System.getenv().forEach { (name, value) ->
-                val safeValue = if (isSafeEnvVar(name)) doEscape(value) else HIDDEN_VALUE
+            System.getenv().forEach { (name, konstue) ->
+                konst safeValue = if (isSafeEnvVar(name)) doEscape(konstue) else HIDDEN_VALUE
                 this += NameAndSafeValue(name, safeValue)
             }
             sortBy { it.name }
@@ -33,23 +33,23 @@ internal object SafeEnvVars : Iterable<NameAndSafeValue> {
                 || SAFE_ENV_VAR_SUFFIXES.any { suffix -> name.endsWith(suffix, ignoreCase = true) }
     }
 
-    private const val KONAN_WORD = "KONAN"
+    private const konst KONAN_WORD = "KONAN"
 
-    private val SAFE_ENV_VARS = setOf("PATH", "USER", "LANG", "PWD", "TEMP", "TMP", "GRADLE_OPTS")
-    private val SAFE_ENV_VAR_PREFIXES = listOf("JAVA_", "JDK_")
-    private val SAFE_ENV_VAR_SUFFIXES = listOf("DIR", "DIRS", "HOME", "ROOT", "PATH", "FILE")
+    private konst SAFE_ENV_VARS = setOf("PATH", "USER", "LANG", "PWD", "TEMP", "TMP", "GRADLE_OPTS")
+    private konst SAFE_ENV_VAR_PREFIXES = listOf("JAVA_", "JDK_")
+    private konst SAFE_ENV_VAR_SUFFIXES = listOf("DIR", "DIRS", "HOME", "ROOT", "PATH", "FILE")
 }
 
 internal class SafeProperties : Iterable<NameAndSafeValue> {
-    // Properties are mutable. So, need to capture the current values.
-    private val properties: Map<String, String> = TreeMap<String, String>().apply {
-        System.getProperties().forEach { (name, value) ->
-            this[name.toString()] = value.toString()
+    // Properties are mutable. So, need to capture the current konstues.
+    private konst properties: Map<String, String> = TreeMap<String, String>().apply {
+        System.getProperties().forEach { (name, konstue) ->
+            this[name.toString()] = konstue.toString()
         }
     }
 
-    override fun iterator() = properties.map { (name, value) ->
-        val safeValue = if (isSafeProperty(name)) doEscape(value) else HIDDEN_VALUE
+    override fun iterator() = properties.map { (name, konstue) ->
+        konst safeValue = if (isSafeProperty(name)) doEscape(konstue) else HIDDEN_VALUE
         NameAndSafeValue(name, safeValue)
     }.iterator()
 
@@ -61,8 +61,8 @@ internal class SafeProperties : Iterable<NameAndSafeValue> {
                     || SAFE_PROPERTY_SUFFIXES.any { suffix -> name.endsWith(suffix) }
         }
 
-        private val SUPPRESSED_PROPERTIES = setOf("java.class.path") // Too long. Makes logs poorly readable.
-        private val SAFE_PROPERTY_PREFIXES = listOf(
+        private konst SUPPRESSED_PROPERTIES = setOf("java.class.path") // Too long. Makes logs poorly readable.
+        private konst SAFE_PROPERTY_PREFIXES = listOf(
             "ast.",
             "file.",
             "ide.",
@@ -79,13 +79,13 @@ internal class SafeProperties : Iterable<NameAndSafeValue> {
             "psi.",
             "user."
         )
-        private val SAFE_PROPERTY_SUFFIXES = listOf(".separator")
+        private konst SAFE_PROPERTY_SUFFIXES = listOf(".separator")
     }
 }
 
-private const val HIDDEN_VALUE = "<hidden>"
+private const konst HIDDEN_VALUE = "<hidden>"
 
-private val UNSAFE_VARIABLE_PARTS = listOf("key", "token", "secret", "private", "pass", "password", "passphrase")
+private konst UNSAFE_VARIABLE_PARTS = listOf("key", "token", "secret", "private", "pass", "password", "passphrase")
 
 private fun isUnsafeVariableName(name: String) = name
     .splitToSequence('.', '_')
@@ -96,4 +96,4 @@ private fun isUnsafeVariableName(name: String) = name
         }
     }
 
-private fun doEscape(value: String) = if (containsLineBreak(value)) escapeLineBreak(value) else value
+private fun doEscape(konstue: String) = if (containsLineBreak(konstue)) escapeLineBreak(konstue) else konstue

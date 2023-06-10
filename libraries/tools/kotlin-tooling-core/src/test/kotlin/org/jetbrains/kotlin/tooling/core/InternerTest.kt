@@ -13,7 +13,7 @@ import kotlin.test.assertSame
 
 class InternerTest {
 
-    data class Sample(val value: Int)
+    data class Sample(konst konstue: Int)
 
     @Test
     fun `test - weak interner`() {
@@ -26,10 +26,10 @@ class InternerTest {
     }
 
     private fun doTest(interner: Interner) {
-        val sample0A = Sample(0)
-        val sample0B = Sample(0)
-        val sample1A = Sample(1)
-        val sample1B = Sample(1)
+        konst sample0A = Sample(0)
+        konst sample0B = Sample(0)
+        konst sample1A = Sample(1)
+        konst sample1B = Sample(1)
 
         assertSame(sample0A, interner.getOrPut(sample0A))
         assertSame(sample0A, interner.getOrPut(sample0B))

@@ -2,8 +2,8 @@
 // NO_OPTIMIZED_CALLABLE_REFERENCES
 
 class A {
-    val x = "OK"
-    val y by ::x
+    konst x = "OK"
+    konst y by ::x
 }
 
 fun box(): String = A().y

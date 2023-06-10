@@ -1,6 +1,6 @@
 class A {
     companion object {
-        val result = "OK"
+        konst result = "OK"
     }
 }
 

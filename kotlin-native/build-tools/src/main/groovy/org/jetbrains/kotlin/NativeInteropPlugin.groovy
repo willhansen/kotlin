@@ -54,29 +54,29 @@ class NamedNativeInteropConfig implements Named {
 
     Configuration configuration
 
-    void flavor(String value) {
-        flavor = value
+    void flavor(String konstue) {
+        flavor = konstue
     }
 
-    void defFile(String value) {
-        defFile = value
+    void defFile(String konstue) {
+        defFile = konstue
         genTask.inputs.file(project.file(defFile))
     }
 
-    void target(String value) {
-        target = value
+    void target(String konstue) {
+        target = konstue
     }
 
-    void pkg(String value) {
-        pkg = value
+    void pkg(String konstue) {
+        pkg = konstue
     }
 
-    void compilerOpts(List<String> values) {
-        compilerOpts.addAll(values)
+    void compilerOpts(List<String> konstues) {
+        compilerOpts.addAll(konstues)
     }
 
-    void compilerOpts(String... values) {
-        compilerOpts.addAll(values)
+    void compilerOpts(String... konstues) {
+        compilerOpts.addAll(konstues)
     }
 
     void headers(FileCollection files) {
@@ -84,20 +84,20 @@ class NamedNativeInteropConfig implements Named {
         headers = headers + files.toSet().collect { it.absolutePath }
     }
 
-    void headers(String... values) {
-        headers = headers + values.toList()
+    void headers(String... konstues) {
+        headers = headers + konstues.toList()
     }
 
-    void linker(String value) {
-        linker = value
+    void linker(String konstue) {
+        linker = konstue
     }
 
-    void linkerOpts(String... values) {
-        this.linkerOpts(values.toList())
+    void linkerOpts(String... konstues) {
+        this.linkerOpts(konstues.toList())
     }
 
-    void linkerOpts(List<String> values) {
-        linkerOpts.addAll(values)
+    void linkerOpts(List<String> konstues) {
+        linkerOpts.addAll(konstues)
     }
 
     void dependsOn(Object... deps) {
@@ -139,8 +139,8 @@ class NamedNativeInteropConfig implements Named {
         }
     }
 
-    void includeDirs(String... values) {
-        compilerOpts.addAll(values.collect {"-I$it"})
+    void includeDirs(String... konstues) {
+        compilerOpts.addAll(konstues.collect {"-I$it"})
     }
 
     File getNativeLibsDir() {
@@ -283,12 +283,12 @@ class NativeInteropExtension extends AbstractNamedDomainObjectContainer<NamedNat
         return config
     }
 
-    public void target(String value) {
-        this.target = value
+    public void target(String konstue) {
+        this.target = konstue
     }
 
-    public void flavor(String value) {
-        this.flavor = value
+    public void flavor(String konstue) {
+        this.flavor = konstue
     }
 }
 

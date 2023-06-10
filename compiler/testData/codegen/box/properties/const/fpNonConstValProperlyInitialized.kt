@@ -3,8 +3,8 @@
 
 import kotlin.test.assertEquals
 
-val minus0F = -0.0F
-val minus0D = -0.0
+konst minus0F = -0.0F
+konst minus0D = -0.0
 
 fun box(): String {
     assertEquals(-0.0F, minus0F)

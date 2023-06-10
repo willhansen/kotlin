@@ -23,17 +23,17 @@ import org.jetbrains.kotlin.tooling.core.MutableExtras
 import org.jetbrains.kotlin.tooling.core.mutableExtrasOf
 
 internal class ExternalKotlinTargetImpl internal constructor(
-    override val project: Project,
-    override val targetName: String,
-    override val platformType: KotlinPlatformType,
-    override val publishable: Boolean,
-    val apiElementsConfiguration: Configuration,
-    val runtimeElementsConfiguration: Configuration,
-    val sourcesElementsConfiguration: Configuration,
-    val apiElementsPublishedConfiguration: Configuration,
-    val runtimeElementsPublishedConfiguration: Configuration,
-    val kotlinTargetComponent: ExternalKotlinTargetComponent,
-    private val artifactsTaskLocator: ArtifactsTaskLocator,
+    override konst project: Project,
+    override konst targetName: String,
+    override konst platformType: KotlinPlatformType,
+    override konst publishable: Boolean,
+    konst apiElementsConfiguration: Configuration,
+    konst runtimeElementsConfiguration: Configuration,
+    konst sourcesElementsConfiguration: Configuration,
+    konst apiElementsPublishedConfiguration: Configuration,
+    konst runtimeElementsPublishedConfiguration: Configuration,
+    konst kotlinTargetComponent: ExternalKotlinTargetComponent,
+    private konst artifactsTaskLocator: ArtifactsTaskLocator,
 ) : InternalKotlinTarget {
 
 
@@ -41,19 +41,19 @@ internal class ExternalKotlinTargetImpl internal constructor(
         fun locate(target: ExternalKotlinTargetImpl): TaskProvider<out Task>
     }
 
-    val kotlin = project.multiplatformExtension
+    konst kotlin = project.multiplatformExtension
 
-    override val extras: MutableExtras = mutableExtrasOf()
+    override konst extras: MutableExtras = mutableExtrasOf()
 
-    override val preset: Nothing? = null
+    override konst preset: Nothing? = null
 
-    internal val logger: Logger = Logging.getLogger("${ExternalKotlinTargetImpl::class.qualifiedName}: $name")
+    internal konst logger: Logger = Logging.getLogger("${ExternalKotlinTargetImpl::class.qualifiedName}: $name")
 
-    override val useDisambiguationClassifierAsSourceSetNamePrefix: Boolean = true
+    override konst useDisambiguationClassifierAsSourceSetNamePrefix: Boolean = true
 
-    override val overrideDisambiguationClassifierOnIdeImport: String? = null
+    override konst overrideDisambiguationClassifierOnIdeImport: String? = null
 
-    val artifactsTask: TaskProvider<out Task> by lazy {
+    konst artifactsTask: TaskProvider<out Task> by lazy {
         artifactsTaskLocator.locate(this)
     }
 
@@ -63,32 +63,32 @@ internal class ExternalKotlinTargetImpl internal constructor(
         isSourcesPublishable = publish
     }
 
-    override val artifactsTaskName: String
+    override konst artifactsTaskName: String
         get() = artifactsTask.name
 
-    override val apiElementsConfigurationName: String
+    override konst apiElementsConfigurationName: String
         get() = apiElementsConfiguration.name
 
-    override val runtimeElementsConfigurationName: String
+    override konst runtimeElementsConfigurationName: String
         get() = runtimeElementsConfiguration.name
 
-    override val sourcesElementsConfigurationName: String
+    override konst sourcesElementsConfigurationName: String
         get() = sourcesElementsConfiguration.name
 
     @InternalKotlinGradlePluginApi
-    override val kotlinComponents: Set<KotlinTargetComponent> = setOf(kotlinTargetComponent)
+    override konst kotlinComponents: Set<KotlinTargetComponent> = setOf(kotlinTargetComponent)
 
-    override val components: Set<SoftwareComponent> by lazy {
+    override konst components: Set<SoftwareComponent> by lazy {
         logger.debug("Creating SoftwareComponent")
         setOf(ExternalKotlinTargetSoftwareComponent(this))
     }
 
-    override val compilations: NamedDomainObjectContainer<DecoratedExternalKotlinCompilation> by lazy {
+    override konst compilations: NamedDomainObjectContainer<DecoratedExternalKotlinCompilation> by lazy {
         project.container(DecoratedExternalKotlinCompilation::class.java)
     }
 
     @Suppress("unchecked_cast")
-    private val mavenPublicationActions = project.objects.domainObjectSet(Action::class.java)
+    private konst mavenPublicationActions = project.objects.domainObjectSet(Action::class.java)
             as DomainObjectSet<Action<MavenPublication>>
 
     override fun mavenPublication(action: Action<MavenPublication>) {
@@ -100,7 +100,7 @@ internal class ExternalKotlinTargetImpl internal constructor(
         mavenPublicationActions.all { action -> action.execute(publication) }
     }
 
-    private val attributeContainer = HierarchyAttributeContainer(parent = null)
+    private konst attributeContainer = HierarchyAttributeContainer(parent = null)
 
     override fun getAttributes(): AttributeContainer = attributeContainer
 

@@ -14,7 +14,7 @@ fun funCur() {}
 
 @Deprecated("")
 @DeprecatedSinceKotlin(warningSince = "1.4")
-val valCur = Unit
+konst konstCur = Unit
 
 @Deprecated("")
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -26,14 +26,14 @@ fun funNext() {}
 
 @Deprecated("")
 @DeprecatedSinceKotlin(warningSince = "1.5")
-val valNext = Unit
+konst konstNext = Unit
 
 fun usage() {
     <!DEPRECATION!>ClassCur<!>()
     <!DEPRECATION!>funCur<!>()
-    <!DEPRECATION!>valCur<!>
+    <!DEPRECATION!>konstCur<!>
 
     ClassNext()
     funNext()
-    valNext
+    konstNext
 }

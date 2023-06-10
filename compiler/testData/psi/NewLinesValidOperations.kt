@@ -1,5 +1,5 @@
 fun test() {
-    val str = ""
+    konst str = ""
 
     str
 

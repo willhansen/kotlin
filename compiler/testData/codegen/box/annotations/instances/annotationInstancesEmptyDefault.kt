@@ -15,26 +15,26 @@ enum class E { A, B }
 
 annotation class A()
 
-annotation class B(val a: A = A())
+annotation class B(konst a: A = A())
 
 annotation class C(
-    val i: Int = 42,
-    val b: B = B(),
-    val kClass: KClass<*> = B::class,
-    val kClassArray: Array<KClass<*>> = [E::class, A::class],
-    val e: E = E.B,
-    val aS: Array<String> = arrayOf("a", "b"),
-    val aI: IntArray = intArrayOf(1, 2)
+    konst i: Int = 42,
+    konst b: B = B(),
+    konst kClass: KClass<*> = B::class,
+    konst kClassArray: Array<KClass<*>> = [E::class, A::class],
+    konst e: E = E.B,
+    konst aS: Array<String> = arrayOf("a", "b"),
+    konst aI: IntArray = intArrayOf(1, 2)
 )
 
 annotation class Partial(
-    val i: Int = 42,
-    val s: String = "foo",
-    val e: E = E.A
+    konst i: Int = 42,
+    konst s: String = "foo",
+    konst e: E = E.A
 )
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     assertEquals(42, c.i)
     assertEquals(A(), c.b.a)
     assertEquals(B::class, c.kClass)
@@ -42,7 +42,7 @@ fun box(): String {
     assertEquals(E.B, c.e)
     assert(arrayOf("a", "b").contentEquals(c.aS))
     assert(intArrayOf(1, 2).contentEquals(c.aI))
-    val p = Partial(e = E.B, s = "bar")
+    konst p = Partial(e = E.B, s = "bar")
     assertEquals(42, p.i)
     assertEquals("bar", p.s)
     assertEquals(E.B, p.e)

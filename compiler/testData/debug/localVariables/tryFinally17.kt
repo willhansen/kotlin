@@ -6,7 +6,7 @@
 
 fun box(): String {
     try {
-        val x = "x"
+        konst x = "x"
         throw RuntimeException(x)
     } finally {
         return "OK"

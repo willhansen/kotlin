@@ -14,11 +14,11 @@ sink:
     <SINK>                                     PREV:[<ERROR>, <END>]
 =====================
 == A ==
-class A(val w: Char, u: Int = 2) : B(w.toInt() + u) {
-    val x: Int
+class A(konst w: Char, u: Int = 2) : B(w.toInt() + u) {
+    konst x: Int
     var y: Int
-    val z: Int
-    val v = -1
+    konst z: Int
+    konst v = -1
 
     constructor(): this('a') {
         y = 2
@@ -42,13 +42,13 @@ class A(val w: Char, u: Int = 2) : B(w.toInt() + u) {
 ---------------------
 L0:
   1 <START>
-    v(val w: Char)
-    magic[FAKE_INITIALIZER](val w: Char) -> <v0>
+    v(konst w: Char)
+    magic[FAKE_INITIALIZER](konst w: Char) -> <v0>
     w(w|<v0>)
     v(u: Int = 2)
     jmp?(L2)                                        NEXT:[magic[FAKE_INITIALIZER](u: Int = 2) -> <v2>, r(2) -> <v1>]
     r(2) -> <v1>
-L2 [after default value for parameter u]:
+L2 [after default konstue for parameter u]:
     magic[FAKE_INITIALIZER](u: Int = 2) -> <v2>     PREV:[jmp?(L2), r(2) -> <v1>]
     merge(u: Int = 2|<v1>, <v2>) -> <v3>
     w(u|<v3>)
@@ -61,10 +61,10 @@ L2 [after default value for parameter u]:
     call(w.toInt() + u, plus|<v5>, <v6>) -> <v7>
     mark(B(w.toInt() + u))
     call(B(w.toInt() + u), <init>|<v7>) -> <v8>
-    v(val x: Int)
+    v(konst x: Int)
     v(var y: Int)
-    v(val z: Int)
-    v(val v = -1)
+    v(konst z: Int)
+    v(konst v = -1)
     r(1) -> <v9>
     mark(-1)
     call(-1, unaryMinus|<v9>) -> <v10>
@@ -122,7 +122,7 @@ L0:
     v(b: Int = 3)
     jmp?(L2)                                       NEXT:[magic[FAKE_INITIALIZER](b: Int = 3) -> <v2>, r(3) -> <v1>]
     r(3) -> <v1>
-L2 [after default value for parameter b]:
+L2 [after default konstue for parameter b]:
     magic[FAKE_INITIALIZER](b: Int = 3) -> <v2>    PREV:[jmp?(L2), r(3) -> <v1>]
     merge(b: Int = 3|<v1>, <v2>) -> <v3>
     w(b|<v3>)

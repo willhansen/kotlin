@@ -22,10 +22,10 @@ class IndexedGetLoopHeader(
     context: CommonBackendContext
 ) : NumericForLoopHeader<IndexedGetHeaderInfo>(headerInfo, builder, context) {
 
-    private val preferJavaLikeCounterLoop = context.preferJavaLikeCounterLoop
-    private val javaLikeCounterLoopBuilder = JavaLikeCounterLoopBuilder(context)
+    private konst preferJavaLikeCounterLoop = context.preferJavaLikeCounterLoop
+    private konst javaLikeCounterLoopBuilder = JavaLikeCounterLoopBuilder(context)
 
-    override val loopInitStatements =
+    override konst loopInitStatements =
         listOfNotNull(headerInfo.objectVariable, inductionVariable, lastVariableIfCanCacheLast, stepVariable)
 
     override fun initializeIteration(
@@ -36,10 +36,10 @@ class IndexedGetLoopHeader(
     ): List<IrStatement> =
         with(builder) {
             // loopVariable = objectVariable[inductionVariable]
-            val indexedGetFun = with(headerInfo.expressionHandler) { headerInfo.objectVariable.type.getFunction }
+            konst indexedGetFun = with(headerInfo.expressionHandler) { headerInfo.objectVariable.type.getFunction }
             // Making sure that expression type has type of the variable when it exists.
             // Return type of get function can be a type parameter (for example Array<T>::get) which is not a subtype of loopVariable type.
-            val get = irCall(indexedGetFun.symbol, indexedGetFun.returnType).apply {
+            konst get = irCall(indexedGetFun.symbol, indexedGetFun.returnType).apply {
                 dispatchReceiver = irGet(headerInfo.objectVariable)
                 putValueArgument(0, irGet(inductionVariable))
             }.implicitCastIfNeededTo(loopVariable?.type ?: indexedGetFun.returnType)
@@ -52,7 +52,7 @@ class IndexedGetLoopHeader(
         }
 
     override fun buildLoop(builder: DeclarationIrBuilder, oldLoop: IrLoop, newBody: IrExpression?): LoopReplacement = with(builder) {
-        val newLoopCondition = buildLoopCondition(this@with)
+        konst newLoopCondition = buildLoopCondition(this@with)
         if (preferJavaLikeCounterLoop) {
             javaLikeCounterLoopBuilder.buildJavaLikeDoWhileCounterLoop(oldLoop, newLoopCondition, newBody, loopOrigin = null)
         } else {
@@ -61,11 +61,11 @@ class IndexedGetLoopHeader(
             //   var inductionVar = 0
             //   var last = objectVariable.size
             //   while (inductionVar < last) {
-            //       val loopVar = objectVariable.get(inductionVar)
+            //       konst loopVar = objectVariable.get(inductionVar)
             //       inductionVar++
             //       // Loop body
             //   }
-            val newLoop = IrWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, oldLoop.origin).apply {
+            konst newLoop = IrWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, oldLoop.origin).apply {
                 label = oldLoop.label
                 condition = newLoopCondition
                 body = newBody

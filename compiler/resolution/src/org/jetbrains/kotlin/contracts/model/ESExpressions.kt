@@ -30,7 +30,7 @@ interface ESOperator : ESExpression {
     /**
      * [Functor] that contains logic of concrete operator
      */
-    val functor: Functor
+    konst functor: Functor
 }
 
 interface ESValue : Computation, ESExpression

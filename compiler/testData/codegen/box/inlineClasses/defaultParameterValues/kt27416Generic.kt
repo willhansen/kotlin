@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: Int>(val i: T) {
+konstue class A<T: Int>(konst i: T) {
     fun foo(s: String = "OK") = s
 }
 

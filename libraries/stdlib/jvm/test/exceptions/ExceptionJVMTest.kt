@@ -28,37 +28,37 @@ class ExceptionJVMTest {
 
 
     fun assertPrintStackTrace(t: Throwable) {
-        val buffer = StringWriter()
-        val writer = PrintWriter(buffer)
+        konst buffer = StringWriter()
+        konst writer = PrintWriter(buffer)
         t.printStackTrace(writer)
         comparePrintedThrowableResult(t, buffer.buffer)
     }
 
     fun assertPrintStackTraceStream(t: Throwable) {
-        val byteBuffer = ByteArrayOutputStream()
+        konst byteBuffer = ByteArrayOutputStream()
 
         PrintStream(byteBuffer).use {
             t.printStackTrace(it)
         }
 
-        val stream = PrintStream(byteBuffer)
+        konst stream = PrintStream(byteBuffer)
         stream.use {
             t.printStackTrace(stream)
         }
 
-        val bytes = assertNotNull(byteBuffer.toByteArray())
-        val content = bytes.toString(Charset.defaultCharset())
+        konst bytes = assertNotNull(byteBuffer.toByteArray())
+        konst content = bytes.toString(Charset.defaultCharset())
         comparePrintedThrowableResult(t, content)
     }
 
     fun assertToStringWithTrace(t: Throwable) {
-        val content = t.stackTraceToString()
+        konst content = t.stackTraceToString()
         comparePrintedThrowableResult(t, content)
     }
 
     private fun comparePrintedThrowableResult(throwable: Throwable, printedThrowable: CharSequence) {
-        val stackTrace = throwable.stackTrace
-        val lines = printedThrowable.lines()
+        konst stackTrace = throwable.stackTrace
+        konst lines = printedThrowable.lines()
         assertEquals(throwable.toString(), lines[0])
         stackTrace.forEachIndexed { index, frame ->
             assertTrue(lines.any { frame.toString() in it }, "frame at index $index is not found in the printed message")
@@ -67,7 +67,7 @@ class ExceptionJVMTest {
 
     @Test
     fun changeStackTrace() {
-        val exception = RuntimeException("Fail")
+        konst exception = RuntimeException("Fail")
         var stackTrace = exception.stackTrace
         stackTrace = stackTrace.dropLast(1).toTypedArray()
         exception.stackTrace = stackTrace
@@ -76,22 +76,22 @@ class ExceptionJVMTest {
 
     @Test
     fun addSuppressedDoesNotThrow() {
-        val e1 = Throwable()
-        val e2 = Exception("Suppressed")
+        konst e1 = Throwable()
+        konst e2 = Exception("Suppressed")
 
         e1.addSuppressed(e2)
     }
 
     @Test
     fun addSuppressedSelfDoesNotThrow() {
-        val e1 = Throwable()
+        konst e1 = Throwable()
         e1.addSuppressed(e1) // should not throw, extension hides member
     }
 
     @Test
     fun addSuppressedWorksThroughExtension() {
-        val e1 = Throwable()
-        val e2 = Exception("Suppressed")
+        konst e1 = Throwable()
+        konst e2 = Exception("Suppressed")
 
         assertTrue(e1.suppressedExceptions.isEmpty())
         e1.addSuppressed(e2)
@@ -102,13 +102,13 @@ class ExceptionJVMTest {
 
     @Test
     fun circularCauseStackTrace() {
-        val e1 = Exception("cause")
-        val e2 = Error("induced", e1)
+        konst e1 = Exception("cause")
+        konst e2 = Error("induced", e1)
         e1.initCause(e2)
         assertSame(e1, e2.cause)
         assertSame(e2, e1.cause)
 
-        val trace = e2.stackTraceToString()
+        konst trace = e2.stackTraceToString()
         assertTrue("CIRCULAR REFERENCE" in trace, trace)
     }
 }

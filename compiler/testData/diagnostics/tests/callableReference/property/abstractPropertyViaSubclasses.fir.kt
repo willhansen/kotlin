@@ -3,34 +3,34 @@
 import kotlin.reflect.KProperty1
 
 interface Base {
-    val x: Any
+    konst x: Any
 }
 
 class A : Base {
-    override val x: String = ""
+    override konst x: String = ""
 }
 
 open class B : Base {
-    override val x: Number = 1.0
+    override konst x: Number = 1.0
 }
 
 class C : B() {
-    override val x: Int = 42
+    override konst x: Int = 42
 }
 
 fun test() {
-    val base = Base::x
+    konst base = Base::x
     checkSubtype<KProperty1<Base, Any>>(base)
     checkSubtype<Any>(base.get(A()))
     checkSubtype<Number>(<!ARGUMENT_TYPE_MISMATCH!>base.get(B())<!>)
     checkSubtype<Int>(<!ARGUMENT_TYPE_MISMATCH!>base.get(C())<!>)
 
-    val a = A::x
+    konst a = A::x
     checkSubtype<KProperty1<A, String>>(a)
     checkSubtype<String>(a.get(A()))
     checkSubtype<Number>(<!ARGUMENT_TYPE_MISMATCH!>a.get(<!ARGUMENT_TYPE_MISMATCH!>B()<!>)<!>)
 
-    val b = B::x
+    konst b = B::x
     checkSubtype<KProperty1<B, Number>>(b)
     checkSubtype<Int>(<!ARGUMENT_TYPE_MISMATCH!>b.get(C())<!>)
 }

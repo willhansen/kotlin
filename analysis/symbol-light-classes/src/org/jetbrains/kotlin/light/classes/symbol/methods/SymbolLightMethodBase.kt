@@ -36,7 +36,7 @@ import org.jetbrains.kotlin.light.classes.symbol.classes.SymbolLightClassBase
 internal abstract class SymbolLightMethodBase(
     lightMemberOrigin: LightMemberOrigin?,
     containingClass: SymbolLightClassBase,
-    protected val methodIndex: Int,
+    protected konst methodIndex: Int,
 ) : SymbolLightMemberBase<PsiMethod>(lightMemberOrigin, containingClass), KtLightMethod {
     override fun getBody(): PsiCodeBlock? = null
 
@@ -78,22 +78,22 @@ internal abstract class SymbolLightMethodBase(
         }
     }
 
-    override val isMangled: Boolean = false // TODO: checkIsMangled ?
+    override konst isMangled: Boolean = false // TODO: checkIsMangled ?
 
     abstract override fun getTypeParameters(): Array<PsiTypeParameter>
     abstract override fun hasTypeParameters(): Boolean
     abstract override fun getTypeParameterList(): PsiTypeParameterList?
 
     private class SymbolLightThrowsReferencesListBuilder(
-        private val parentMethod: PsiMethod
+        private konst parentMethod: PsiMethod
     ) : KotlinLightReferenceListBuilder(parentMethod.manager, parentMethod.language, PsiReferenceList.Role.THROWS_LIST) {
         override fun getParent(): PsiElement = parentMethod
 
         override fun getContainingFile(): PsiFile = parentMethod.containingFile
     }
 
-    private val _throwsList by lazyPub {
-        val builder = SymbolLightThrowsReferencesListBuilder(this)
+    private konst _throwsList by lazyPub {
+        konst builder = SymbolLightThrowsReferencesListBuilder(this)
         computeThrowsList(builder)
         builder
     }
@@ -117,7 +117,7 @@ internal abstract class SymbolLightMethodBase(
         if (containingClass is KtLightClassForFacade) return defaultName
         if (hasPublishedApiAnnotation(annotationUseSiteTarget.toFilter())) return defaultName
 
-        val sourceModule = ktModule as? KtSourceModule ?: return defaultName
+        konst sourceModule = ktModule as? KtSourceModule ?: return defaultName
         return mangleInternalName(defaultName, sourceModule)
     }
 

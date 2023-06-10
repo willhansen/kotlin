@@ -5,8 +5,8 @@ interface A {
 }
 
 interface B {
-    val foo: B
-    val bar: B
+    konst foo: B
+    konst bar: B
 }
 
 fun test_1(x: A?) {

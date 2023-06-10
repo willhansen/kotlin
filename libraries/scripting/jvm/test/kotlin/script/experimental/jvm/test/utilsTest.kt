@@ -33,17 +33,17 @@ class UtilsTest : TestCase() {
     @Test
     fun testSelectFilesInDir() {
 
-        val rootDir = File(".")
+        konst rootDir = File(".")
 
         fun assertProjectFilesBy(pattern: String, vararg paths: String, trace: Boolean = false) {
-            val res = ArrayList<Pair<String, String>>()
+            konst res = ArrayList<Pair<String, String>>()
 
             forAllMatchingFilesInDirectory(rootDir, pattern) { path, stream ->
                 res.add(path to stream.reader().readText())
             }
             if (trace && paths.toSet() != res.mapTo(HashSet()) { it.first }) {
-                val re = namePatternToRegex(pattern)
-                val files = rootDir.walkTopDown().map {
+                konst re = namePatternToRegex(pattern)
+                konst files = rootDir.walkTopDown().map {
                     it.relativeToOrSelf(rootDir).path
                 }
                 fail("Unable to match '${re.pattern}' with files:\n  ${files.joinToString("\n  ")}")
@@ -52,7 +52,7 @@ class UtilsTest : TestCase() {
             }
 
             res.forEach { (path, bytes) ->
-                val data = File(path).readText()
+                konst data = File(path).readText()
                 assertEquals("Mismatching data for $path", data, bytes)
             }
         }
@@ -76,11 +76,11 @@ class UtilsTest : TestCase() {
         assertProjectFilesBy("src/**/jvmClassLoaderUtil.kt", "src/kotlin/script/experimental/jvm/util/jvmClassLoaderUtil.kt")
         assertProjectFilesBy("test/**/?????Test.*", "test/kotlin/script/experimental/jvm/test/utilsTest.kt")
 
-        val allSrcKtFiles = HashSet<String>()
+        konst allSrcKtFiles = HashSet<String>()
         forAllMatchingFilesInDirectory(rootDir, "src/**/*.kt") { path, _ ->
             allSrcKtFiles.add(path)
         }
-        val allExpectedSrcKtFiles =
+        konst allExpectedSrcKtFiles =
             rootDir.walkTopDown().filter {
                 it.relativeToOrSelf(rootDir).path.startsWith("src") && it.extension == "kt"
             }.mapTo(HashSet()) {
@@ -93,7 +93,7 @@ class UtilsTest : TestCase() {
     fun testSelectFilesInJar() {
 
         fun JarFile.filesBy(pattern: String): Map<String, String> {
-            val res = HashMap<String, String>()
+            konst res = HashMap<String, String>()
             forAllMatchingFilesInJarFile(this, namePatternToRegex(pattern)) { path, stream ->
                 res[path] = stream.reader().readText().trim()
             }
@@ -101,7 +101,7 @@ class UtilsTest : TestCase() {
         }
 
         fun JarInputStream.filesBy(pattern: String): Map<String, String> {
-            val res = HashMap<String, String>()
+            konst res = HashMap<String, String>()
             forAllMatchingFilesInJarStream(this, namePatternToRegex(pattern)) { path, stream ->
                 res[path] = stream.reader().readText().trim()
             }
@@ -109,7 +109,7 @@ class UtilsTest : TestCase() {
         }
 
         fun assertFiles(actual: Map<String, String>, vararg expected: Pair<String, String>) {
-            val expectedAsMap = expected.toMap()
+            konst expectedAsMap = expected.toMap()
             assertEquals(expectedAsMap, actual)
         }
 
@@ -118,7 +118,7 @@ class UtilsTest : TestCase() {
             assertFiles( JarInputStream(jar.inputStream()).use { it.filesBy(pattern) }, *expected)
         }
 
-        val jar = File("testData/testJar.jar")
+        konst jar = File("testData/testJar.jar")
         assertTrue(jar.exists())
 
         assertMatchingFilesInJarTwoWay(jar, "META-INF/*.kotlin_module", "META-INF/abc.kotlin_module" to "module")

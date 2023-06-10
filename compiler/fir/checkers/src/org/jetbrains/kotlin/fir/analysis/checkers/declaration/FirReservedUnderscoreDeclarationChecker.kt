@@ -32,8 +32,8 @@ object FirReservedUnderscoreDeclarationChecker : FirBasicDeclarationChecker() {
                 reportIfUnderscore(declaration, context, reporter)
             }
 
-            val isSingleUnderscoreAllowed = declaration is FirAnonymousFunction || declaration is FirPropertyAccessor
-            for (parameter in declaration.valueParameters) {
+            konst isSingleUnderscoreAllowed = declaration is FirAnonymousFunction || declaration is FirPropertyAccessor
+            for (parameter in declaration.konstueParameters) {
                 reportIfUnderscore(
                     parameter,
                     context,
@@ -54,10 +54,10 @@ object FirReservedUnderscoreDeclarationChecker : FirBasicDeclarationChecker() {
         reporter: DiagnosticReporter,
         isSingleUnderscoreAllowed: Boolean = false
     ) {
-        val declarationSource = declaration.source
+        konst declarationSource = declaration.source
         if (declarationSource != null && declarationSource.kind !is KtFakeSourceElementKind) {
             with(SourceNavigator.forElement(declaration)) {
-                val rawName = declaration.getRawName()
+                konst rawName = declaration.getRawName()
                 if (rawName?.isUnderscore == true && !(isSingleUnderscoreAllowed && rawName == "_")) {
                     reporter.reportOn(
                         declarationSource,
@@ -68,14 +68,14 @@ object FirReservedUnderscoreDeclarationChecker : FirBasicDeclarationChecker() {
             }
         }
 
-        val returnOrReceiverTypeRef = when (declaration) {
+        konst returnOrReceiverTypeRef = when (declaration) {
             is FirValueParameter -> declaration.returnTypeRef
             is FirFunction -> declaration.receiverParameter?.typeRef
             else -> null
         }
 
         if (returnOrReceiverTypeRef is FirResolvedTypeRef) {
-            val delegatedTypeRef = returnOrReceiverTypeRef.delegatedTypeRef
+            konst delegatedTypeRef = returnOrReceiverTypeRef.delegatedTypeRef
             if (delegatedTypeRef is FirUserTypeRef) {
                 for (qualifierPart in delegatedTypeRef.qualifier) {
                     checkUnderscoreDiagnostics(qualifierPart.source, context, reporter, isExpression = true)

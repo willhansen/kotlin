@@ -9,9 +9,9 @@ import java.io.*
 import java.util.*
 
 fun box() : String {
-    val input = StringReader("/aaa/bbb/ccc/ddd")
+    konst input = StringReader("/aaa/bbb/ccc/ddd")
 
-    val luhny = Luhny()
+    konst luhny = Luhny()
     input.forEachChar {
         luhny.charIn(it)
     }
@@ -21,8 +21,8 @@ fun box() : String {
 }
 
 class Luhny() {
-    val buffer = LinkedList<Char>()
-    val digits = LinkedList<Int>()
+    konst buffer = LinkedList<Char>()
+    konst digits = LinkedList<Int>()
 
     var toBeMasked = 0
 
@@ -54,7 +54,7 @@ class Luhny() {
 
     fun check() {
         if (digits.size < 14) return
-        val sum = digits.sum { i, d ->
+        konst sum = digits.sum { i, d ->
             if (i % 2 != 0)
                 d * 2 / 10 +  d * 2 % 10
             else d
@@ -64,7 +64,7 @@ class Luhny() {
 
     fun printOneDigit() {
         while (!buffer.isEmpty()) {
-            val c = buffer.pop()
+            konst c = buffer.pop()
             out(c)
             if (c.isDigit()) {
                 digits.pop()
@@ -113,12 +113,12 @@ fun <T> List<T>.backwards() : Iterable<T> = object : Iterable<T> {
 //class Queue<T>(initialBufSize : Int) {
 //
 //    private var bufSize = initialBufSize
-//    private val buf = Array<T>(initialBufSize)
+//    private konst buf = Array<T>(initialBufSize)
 //    private var head = 0
 //    private var tail = 0
 //    private var size = 0
 //
-//    val empty : Boolean get() = size == 0
+//    konst empty : Boolean get() = size == 0
 //
 //    private fun prev(i : Int) = (bufSize + i - 1) % bufSize
 //    private fun next(i : Int) = (i + 1) % bufSize
@@ -132,7 +132,7 @@ fun <T> List<T>.backwards() : Iterable<T> = object : Iterable<T> {
 //    fun pop() : T {
 //        if (size == 0) throw IllegalStateException()
 //        size--
-//        val result = buf[head]
+//        konst result = buf[head]
 //        head = prev(head)
 //        return result
 //    }

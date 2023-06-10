@@ -13,7 +13,7 @@ object O0
 
 @JsExport
 object O {
-    val x = 10
+    konst x = 10
     fun foo() = 20
 }
 
@@ -23,16 +23,16 @@ fun takesO(o: O): Int =
 
 @JsExport
 object WithSimpleObjectInside {
-   val value: String = "WithSimpleObjectInside"
+   konst konstue: String = "WithSimpleObjectInside"
     object SimpleObject {
-        val value: String = "SimpleObject"
+        konst konstue: String = "SimpleObject"
     }
 }
 
 @JsExport
 object Parent {
     object Nested1 {
-        val value: String = "Nested1"
+        konst konstue: String = "Nested1"
         class Nested2 {
             companion object {
                 class Nested3

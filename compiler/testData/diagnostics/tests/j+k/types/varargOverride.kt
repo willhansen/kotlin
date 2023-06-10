@@ -5,7 +5,7 @@
 import org.jetbrains.annotations.NotNull;
 
 public interface A extends B {
-    void foo(@NotNull String... value);
+    void foo(@NotNull String... konstue);
 }
 
 // FILE: main.kt

@@ -5,11 +5,11 @@ package n
 import checkSubtype
 
 fun main() {
-    val a = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>array<!>(<!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>array<!>())
-    val a0 : Array<Array<Int>> = array(array())
-    val a1 = array(array<Int>())
+    konst a = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>array<!>(<!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>array<!>())
+    konst a0 : Array<Array<Int>> = array(array())
+    konst a1 = array(array<Int>())
     checkSubtype<Array<Array<Int>>>(a1)
-    val a2 = array<Array<Int>>(array())
+    konst a2 = array<Array<Int>>(array())
     checkSubtype<Array<Array<Int>>>(a2)
 }
 

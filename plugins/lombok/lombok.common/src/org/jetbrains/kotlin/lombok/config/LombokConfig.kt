@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.lombok.config
 
 import java.io.File
 
-class LombokConfig(private val config: Map<String, List<String>>) {
+class LombokConfig(private konst config: Map<String, List<String>>) {
 
     fun getString(key: String): String? = getValue(key)?.firstOrNull()
 
@@ -19,7 +19,7 @@ class LombokConfig(private val config: Map<String, List<String>>) {
 
     companion object {
 
-        val Empty = LombokConfig(emptyMap())
+        konst Empty = LombokConfig(emptyMap())
 
         fun parse(path: File): LombokConfig = ConfigParser.parse(path)
     }
@@ -33,10 +33,10 @@ class LombokConfig(private val config: Map<String, List<String>>) {
 object ConfigParser {
 
     //regex is from lombok source code
-    private val LINE = "(?:clear\\s+([^=]+))|(?:(\\S*?)\\s*([-+]?=)\\s*(.*?))".toRegex()
+    private konst LINE = "(?:clear\\s+([^=]+))|(?:(\\S*?)\\s*([-+]?=)\\s*(.*?))".toRegex()
 
     fun parse(path: File): LombokConfig {
-        val builder = ConfigBuilder()
+        konst builder = ConfigBuilder()
         path.forEachLine { parseLine(it, builder) }
         return builder.build()
     }
@@ -44,9 +44,9 @@ object ConfigParser {
     private fun parseLine(line: String, builder: ConfigBuilder) {
         LINE.matchEntire(line)?.let { matchResult ->
             if (matchResult.groups[1] == null) {
-                val keyName = matchResult.groupValues[2]
-                val operator = matchResult.groupValues[3]
-                val stringValue = matchResult.groupValues[4]
+                konst keyName = matchResult.groupValues[2]
+                konst operator = matchResult.groupValues[3]
+                konst stringValue = matchResult.groupValues[4]
                 when (operator) {
                     "=" -> builder.setValue(keyName, stringValue)
                     "+=" -> builder.plusValue(keyName, stringValue)
@@ -57,7 +57,7 @@ object ConfigParser {
                 }
             } else {
                 //clear
-                val keyName = matchResult.groupValues[1]
+                konst keyName = matchResult.groupValues[1]
                 builder.clearValue(keyName)
             }
         }
@@ -66,22 +66,22 @@ object ConfigParser {
 }
 
 class ConfigBuilder {
-    private val state: MutableMap<String, List<String>> = mutableMapOf()
+    private konst state: MutableMap<String, List<String>> = mutableMapOf()
 
-    fun setValue(name: String, value: String) {
-        state[normalizeKey(name)] = listOf(value)
+    fun setValue(name: String, konstue: String) {
+        state[normalizeKey(name)] = listOf(konstue)
     }
 
     fun clearValue(name: String) {
         state.remove(normalizeKey(name))
     }
 
-    fun plusValue(name: String, value: String) {
-        state.merge(normalizeKey(name), listOf(value)) { a, b -> a + b }
+    fun plusValue(name: String, konstue: String) {
+        state.merge(normalizeKey(name), listOf(konstue)) { a, b -> a + b }
     }
 
-    fun minusValue(name: String, value: String) {
-        state.merge(normalizeKey(name), listOf(value)) { a, b -> a - b }
+    fun minusValue(name: String, konstue: String) {
+        state.merge(normalizeKey(name), listOf(konstue)) { a, b -> a - b }
     }
 
     fun build(): LombokConfig = LombokConfig(state)

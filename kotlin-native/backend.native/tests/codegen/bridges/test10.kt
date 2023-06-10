@@ -29,9 +29,9 @@ fun zzz(a: A<Int>) {
 }
 
 @Test fun runTest() {
-    val b = B()
+    konst b = B()
     zzz(b)
-    val a = A<Int>()
+    konst a = A<Int>()
     zzz(a)
     println(b.z)
 }

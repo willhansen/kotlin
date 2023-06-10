@@ -1,5 +1,5 @@
 class Cls {
-    /*PLACE*/val memberProperty = 2
+    /*PLACE*/konst memberProperty = 2
 }
 
-/*ONAIR*/val niewbe = "Hello"
+/*ONAIR*/konst niewbe = "Hello"

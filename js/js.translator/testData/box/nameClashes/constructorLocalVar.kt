@@ -2,7 +2,7 @@
 var log = ""
 
 inline fun f(x: Int): Int {
-    val result = x * 2
+    konst result = x * 2
     log += "f($x)"
     return result
 }
@@ -10,17 +10,17 @@ inline fun f(x: Int): Int {
 fun bar() = 10
 
 class Test {
-    val value: Int
+    konst konstue: Int
 
     init {
-        val x = 3
-        val y = f(bar())
-        value = x + y
+        konst x = 3
+        konst y = f(bar())
+        konstue = x + y
     }
 }
 
 fun box(): String {
-    val test = Test()
-    if (test.value != 23) return "fail: ${test.value}"
+    konst test = Test()
+    if (test.konstue != 23) return "fail: ${test.konstue}"
     return "OK"
 }

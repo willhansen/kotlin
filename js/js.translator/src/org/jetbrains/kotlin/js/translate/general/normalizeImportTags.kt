@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.js.inline.util.extractImportTag
 fun JsProgramFragment.normalizeImportTags() {
 
     nameBindings.replaceAll { binding ->
-        val (tag, name) = binding
+        konst (tag, name) = binding
 
         imports[tag]?.let { import ->
             extractImportTag(JsVars.JsVar(name, imports[tag]))?.let { newtag ->
@@ -26,7 +26,7 @@ fun JsProgramFragment.normalizeImportTags() {
         } ?: binding
     }
 
-    val tagSet = nameBindings.asSequence().map { it.key }.toSet()
+    konst tagSet = nameBindings.asSequence().map { it.key }.toSet()
 
     imports.entries.retainAll { (tag, _) -> tag in tagSet }
 }

@@ -12,6 +12,6 @@ public enum A {
 // FILE: test.kt
 
 fun main() {
-    val c = A.ENTRY
+    konst c = A.ENTRY
     c.s()
 }

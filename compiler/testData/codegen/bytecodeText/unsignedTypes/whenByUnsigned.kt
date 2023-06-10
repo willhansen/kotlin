@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-const val M1: UInt = 2147483648u
+const konst M1: UInt = 2147483648u
 
 fun testUInt1(x: UInt) =
     when (x) {

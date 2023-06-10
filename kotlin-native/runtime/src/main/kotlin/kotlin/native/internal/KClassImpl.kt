@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 import kotlinx.cinterop.*
 
 @ExportForCompiler
-internal class KClassImpl<T : Any>(private val typeInfo: NativePtr) : KClass<T> {
+internal class KClassImpl<T : Any>(private konst typeInfo: NativePtr) : KClass<T> {
 
     @ExportForCompiler
     @ConstantConstructorIntrinsic("KCLASS_IMPL")
@@ -18,17 +18,17 @@ internal class KClassImpl<T : Any>(private val typeInfo: NativePtr) : KClass<T> 
     constructor() : this(TODO("This is intrinsic constructor and it shouldn't be used directly"))
 
     // TODO: consider replacing '$' by another delimeter that can't be used in class name specified with backticks (``)
-    override val simpleName: String?
+    override konst simpleName: String?
         get() = getRelativeName(typeInfo, true)?.substringAfterLast('.')?.substringAfterLast('$')
 
-    override val qualifiedName: String?
+    override konst qualifiedName: String?
         get() {
-            val packageName = getPackageName(typeInfo, true) ?: return null
-            val relativeName = getRelativeName(typeInfo, true) ?: return null
+            konst packageName = getPackageName(typeInfo, true) ?: return null
+            konst relativeName = getRelativeName(typeInfo, true) ?: return null
             return if (packageName.isEmpty()) relativeName else "$packageName.$relativeName"
         }
 
-    override fun isInstance(value: Any?): Boolean = value != null && isInstance(value, this.typeInfo)
+    override fun isInstance(konstue: Any?): Boolean = konstue != null && isInstance(konstue, this.typeInfo)
 
     override fun equals(other: Any?): Boolean =
             other is KClassImpl<*> && this.typeInfo == other.typeInfo
@@ -37,10 +37,10 @@ internal class KClassImpl<T : Any>(private val typeInfo: NativePtr) : KClass<T> 
 
     override fun toString(): String = "class ${fullName ?: "<anonymous>"}"
 
-    internal val fullName: String?
+    internal konst fullName: String?
         get() {
-            val relativeName = getRelativeName(typeInfo, false) ?: return null
-            val packageName: String? = getPackageName(typeInfo, false)
+            konst relativeName = getRelativeName(typeInfo, false) ?: return null
+            konst packageName: String? = getPackageName(typeInfo, false)
             return if (packageName?.isEmpty() ?: true) relativeName else "$packageName.$relativeName"
         }
 
@@ -48,7 +48,7 @@ internal class KClassImpl<T : Any>(private val typeInfo: NativePtr) : KClass<T> 
             findAssociatedObjectImpl(this.typeInfo, key.typeInfo)
 }
 
-internal val KClass<*>.fullName: String?
+internal konst KClass<*>.fullName: String?
     get() = (this as? KClassImpl<*>)?.fullName
 
 @PublishedApi
@@ -60,12 +60,12 @@ internal fun KClass<*>.findAssociatedObject(key: KClass<*>): Any? =
         }
 
 @PublishedApi
-internal class KClassUnsupportedImpl(private val message: String) : KClass<Any> {
-    override val simpleName: String? get() = error(message)
+internal class KClassUnsupportedImpl(private konst message: String) : KClass<Any> {
+    override konst simpleName: String? get() = error(message)
 
-    override val qualifiedName: String? get() = error(message)
+    override konst qualifiedName: String? get() = error(message)
 
-    override fun isInstance(value: Any?): Boolean = error(message)
+    override fun isInstance(konstue: Any?): Boolean = error(message)
 
     override fun equals(other: Any?): Boolean = error(message)
 

@@ -1,6 +1,6 @@
 class Foo {
 
     companion object {
-        val
+        konst
     }
 }

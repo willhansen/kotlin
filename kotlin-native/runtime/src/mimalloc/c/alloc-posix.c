@@ -65,11 +65,11 @@ mi_decl_restrict void* mi_memalign(size_t alignment, size_t size) mi_attr_noexce
   return p;
 }
 
-mi_decl_restrict void* mi_valloc(size_t size) mi_attr_noexcept {
+mi_decl_restrict void* mi_konstloc(size_t size) mi_attr_noexcept {
   return mi_memalign( _mi_os_page_size(), size );
 }
 
-mi_decl_restrict void* mi_pvalloc(size_t size) mi_attr_noexcept {
+mi_decl_restrict void* mi_pkonstloc(size_t size) mi_attr_noexcept {
   size_t psize = _mi_os_page_size();
   if (size >= SIZE_MAX - psize) return NULL; // overflow
   size_t asize = _mi_align_up(size, psize);

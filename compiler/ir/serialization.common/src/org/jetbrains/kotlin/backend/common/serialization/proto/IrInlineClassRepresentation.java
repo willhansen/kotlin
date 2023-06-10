@@ -30,7 +30,7 @@ public final class IrInlineClassRepresentation extends
   private IrInlineClassRepresentation(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -65,10 +65,10 @@ public final class IrInlineClassRepresentation extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -86,7 +86,7 @@ public final class IrInlineClassRepresentation extends
     public IrInlineClassRepresentation parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrInlineClassRepresentation(input, extensionRegistry);
     }
   };
@@ -189,23 +189,23 @@ public final class IrInlineClassRepresentation extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation parseFrom(java.io.InputStream input)
@@ -340,7 +340,7 @@ public final class IrInlineClassRepresentation extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -368,9 +368,9 @@ public final class IrInlineClassRepresentation extends
     /**
      * <code>required int32 underlying_property_name = 1;</code>
      */
-    public Builder setUnderlyingPropertyName(int value) {
+    public Builder setUnderlyingPropertyName(int konstue) {
       bitField0_ |= 0x00000001;
-      underlyingPropertyName_ = value;
+      underlyingPropertyName_ = konstue;
       
       return this;
     }
@@ -400,9 +400,9 @@ public final class IrInlineClassRepresentation extends
     /**
      * <code>required int32 underlying_property_type = 2;</code>
      */
-    public Builder setUnderlyingPropertyType(int value) {
+    public Builder setUnderlyingPropertyType(int konstue) {
       bitField0_ |= 0x00000002;
-      underlyingPropertyType_ = value;
+      underlyingPropertyType_ = konstue;
       
       return this;
     }

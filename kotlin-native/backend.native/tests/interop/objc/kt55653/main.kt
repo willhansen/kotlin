@@ -78,8 +78,8 @@ class MyNSOpenGLView(
 
 fun main() {
     memScoped {
-        val frame = alloc<NSRect>()
-        val pixelFormat = NSOpenGLPixelFormat()
-        val x = MyNSOpenGLView(frame.readValue(), pixelFormat)
+        konst frame = alloc<NSRect>()
+        konst pixelFormat = NSOpenGLPixelFormat()
+        konst x = MyNSOpenGLView(frame.readValue(), pixelFormat)
     }
 }

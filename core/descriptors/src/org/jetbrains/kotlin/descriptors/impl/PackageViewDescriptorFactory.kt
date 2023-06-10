@@ -24,6 +24,6 @@ interface PackageViewDescriptorFactory {
     }
 
     companion object {
-        val CAPABILITY = ModuleCapability<PackageViewDescriptorFactory>("PackageViewDescriptorFactory")
+        konst CAPABILITY = ModuleCapability<PackageViewDescriptorFactory>("PackageViewDescriptorFactory")
     }
 }

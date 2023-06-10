@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X(val s: String)
+konstue class X(konst s: String)
 fun foo(x: X, block: (X) -> String = { it.s }) = block(x)
 
 fun box(): String {

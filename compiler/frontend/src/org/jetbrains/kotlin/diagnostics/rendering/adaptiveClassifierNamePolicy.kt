@@ -27,11 +27,11 @@ import org.jetbrains.kotlin.types.getAbbreviation
 import org.jetbrains.kotlin.types.typeUtil.contains
 import java.util.*
 
-val RenderingContext.adaptiveClassifierPolicy: ClassifierNamePolicy
+konst RenderingContext.adaptiveClassifierPolicy: ClassifierNamePolicy
     get() = this[ADAPTIVE_CLASSIFIER_POLICY_KEY]
 
-private class AdaptiveClassifierNamePolicy(private val ambiguousNames: List<Name>) : ClassifierNamePolicy {
-    private val renderedParameters = mutableMapOf<Name, LinkedHashSet<TypeParameterDescriptor>>()
+private class AdaptiveClassifierNamePolicy(private konst ambiguousNames: List<Name>) : ClassifierNamePolicy {
+    private konst renderedParameters = mutableMapOf<Name, LinkedHashSet<TypeParameterDescriptor>>()
 
     override fun renderClassifier(classifier: ClassifierDescriptor, renderer: DescriptorRenderer): String {
         return when {
@@ -40,10 +40,10 @@ private class AdaptiveClassifierNamePolicy(private val ambiguousNames: List<Name
                     classifier is TypeAliasDescriptor ->
                 ClassifierNamePolicy.FULLY_QUALIFIED.renderClassifier(classifier, renderer)
             classifier is TypeParameterDescriptor -> {
-                val name = classifier.name
-                val typeParametersWithSameName = renderedParameters.getOrPut(name) { LinkedHashSet() }
-                val isFirstOccurence = typeParametersWithSameName.add(classifier)
-                val index = typeParametersWithSameName.indexOf(classifier)
+                konst name = classifier.name
+                konst typeParametersWithSameName = renderedParameters.getOrPut(name) { LinkedHashSet() }
+                konst isFirstOccurence = typeParametersWithSameName.add(classifier)
+                konst index = typeParametersWithSameName.indexOf(classifier)
                 renderer.renderAmbiguousTypeParameter(classifier, index + 1, isFirstOccurence)
             }
             else -> error("Unexpected classifier: ${classifier::class.java}")
@@ -65,10 +65,10 @@ private class AdaptiveClassifierNamePolicy(private val ambiguousNames: List<Name
     }
 }
 
-private val ADAPTIVE_CLASSIFIER_POLICY_KEY = object : RenderingContext.Key<ClassifierNamePolicy>("ADAPTIVE_CLASSIFIER_POLICY") {
+private konst ADAPTIVE_CLASSIFIER_POLICY_KEY = object : RenderingContext.Key<ClassifierNamePolicy>("ADAPTIVE_CLASSIFIER_POLICY") {
     override fun compute(objectsToRender: Collection<Any?>): ClassifierNamePolicy {
-        val ambiguousNames =
-            collectClassifiersFqNames(objectsToRender).groupBy { it.shortNameOrSpecial() }.filter { it.value.size > 1 }.map { it.key }
+        konst ambiguousNames =
+            collectClassifiersFqNames(objectsToRender).groupBy { it.shortNameOrSpecial() }.filter { it.konstue.size > 1 }.map { it.key }
         return AdaptiveClassifierNamePolicy(ambiguousNames)
     }
 }
@@ -104,7 +104,7 @@ private fun collectMentionedClassifiersFqNames(contextObjects: Iterable<Any?>, r
             listOf(
                 it.typeParameters,
                 it.returnType,
-                it.valueParameters,
+                it.konstueParameters,
                 it.dispatchReceiverParameter?.type,
                 it.extensionReceiverParameter?.type
             ), result

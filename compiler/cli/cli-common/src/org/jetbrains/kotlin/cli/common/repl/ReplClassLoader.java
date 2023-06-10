@@ -53,7 +53,7 @@ public class ReplClassLoader extends ClassLoader {
     }
 
     public void dumpClasses(@NotNull PrintWriter writer) {
-        for (byte[] classBytes : classes.values()) {
+        for (byte[] classBytes : classes.konstues()) {
             new ClassReader(classBytes).accept(new TraceClassVisitor(writer), 0);
         }
     }

@@ -30,12 +30,12 @@ internal abstract class BuildFlowService : BuildService<BuildFlowService.Paramet
     private var buildFailed: Boolean = false
 
     interface Parameters : BuildServiceParameters {
-        val configurationMetrics: Property<MetricContainer>
-        val fusStatisticsAvailable: Property<Boolean>
+        konst configurationMetrics: Property<MetricContainer>
+        konst fusStatisticsAvailable: Property<Boolean>
     }
 
     companion object {
-        private val serviceName = "${BuildFlowService::class.simpleName}_${BuildFlowService::class.java.classLoader.hashCode()}"
+        private konst serviceName = "${BuildFlowService::class.simpleName}_${BuildFlowService::class.java.classLoader.hashCode()}"
 
         private fun fusStatisticsAvailable(gradle: Gradle): Boolean {
             return when {
@@ -55,16 +55,16 @@ internal abstract class BuildFlowService : BuildService<BuildFlowService.Paramet
                 return it.service as Provider<BuildFlowService>
             }
 
-            val fusStatisticsAvailable = fusStatisticsAvailable(project.gradle)
+            konst fusStatisticsAvailable = fusStatisticsAvailable(project.gradle)
 
             //Workaround for known issues for Gradle 8+: https://github.com/gradle/gradle/issues/24887:
             // when this OperationCompletionListener is called services can be already closed for Gradle 8,
             // so there is a change that no VariantImplementationFactory will be found
-            val isProjectIsolationEnabled = project.isProjectIsolationEnabled
+            konst isProjectIsolationEnabled = project.isProjectIsolationEnabled
             return project.gradle.sharedServices.registerIfAbsent(serviceName, BuildFlowService::class.java) { spec ->
                 if (fusStatisticsAvailable) {
                     KotlinBuildStatsService.applyIfInitialised {
-                        it.recordProjectsEvaluated(project.gradle)
+                        it.recordProjectsEkonstuated(project.gradle)
                     }
                 }
 
@@ -110,23 +110,23 @@ internal abstract class BuildFlowService : BuildService<BuildFlowService.Paramet
 }
 
 internal class MetricContainer : Serializable {
-    private val numericalMetrics = HashMap<NumericalMetrics, Long>()
-    private val booleanMetrics = HashMap<BooleanMetrics, Boolean>()
-    private val stringMetrics = HashMap<StringMetrics, String>()
+    private konst numericalMetrics = HashMap<NumericalMetrics, Long>()
+    private konst booleanMetrics = HashMap<BooleanMetrics, Boolean>()
+    private konst stringMetrics = HashMap<StringMetrics, String>()
 
     fun report(sessionLogger: IStatisticsValuesConsumer) {
-        for ((key, value) in numericalMetrics) {
-            sessionLogger.report(key, value)
+        for ((key, konstue) in numericalMetrics) {
+            sessionLogger.report(key, konstue)
         }
-        for ((key, value) in booleanMetrics) {
-            sessionLogger.report(key, value)
+        for ((key, konstue) in booleanMetrics) {
+            sessionLogger.report(key, konstue)
         }
-        for ((key, value) in stringMetrics) {
-            sessionLogger.report(key, value)
+        for ((key, konstue) in stringMetrics) {
+            sessionLogger.report(key, konstue)
         }
     }
 
-    fun put(metric: StringMetrics, value: String) = stringMetrics.put(metric, value)
-    fun put(metric: BooleanMetrics, value: Boolean) = booleanMetrics.put(metric, value)
-    fun put(metric: NumericalMetrics, value: Long) = numericalMetrics.put(metric, value)
+    fun put(metric: StringMetrics, konstue: String) = stringMetrics.put(metric, konstue)
+    fun put(metric: BooleanMetrics, konstue: Boolean) = booleanMetrics.put(metric, konstue)
+    fun put(metric: NumericalMetrics, konstue: Long) = numericalMetrics.put(metric, konstue)
 }

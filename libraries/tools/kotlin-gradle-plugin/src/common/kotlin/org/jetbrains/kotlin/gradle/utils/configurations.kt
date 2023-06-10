@@ -7,13 +7,13 @@ package org.jetbrains.kotlin.gradle.utils
 
 import org.gradle.api.artifacts.Configuration
 
-const val COMPILE_ONLY = "compileOnly"
-const val COMPILE = "compile"
-const val IMPLEMENTATION = "implementation"
-const val API = "api"
-const val RUNTIME_ONLY = "runtimeOnly"
-const val RUNTIME = "runtime"
-internal const val INTRANSITIVE = "intransitive"
+const konst COMPILE_ONLY = "compileOnly"
+const konst COMPILE = "compile"
+const konst IMPLEMENTATION = "implementation"
+const konst API = "api"
+const konst RUNTIME_ONLY = "runtimeOnly"
+const konst RUNTIME = "runtime"
+internal const konst INTRANSITIVE = "intransitive"
 
 internal fun Configuration.markConsumable(): Configuration = apply {
     this.isCanBeConsumed = true

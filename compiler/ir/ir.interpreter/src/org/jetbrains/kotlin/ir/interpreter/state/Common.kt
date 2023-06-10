@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.ir.types.isNullableAny
 import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.resolveFakeOverride
 
-internal class Common private constructor(override val irClass: IrClass, override val fields: Fields) : Complex, StateWithClosure {
-    override val upValues: MutableMap<IrSymbol, Variable> = mutableMapOf()
+internal class Common private constructor(override konst irClass: IrClass, override konst fields: Fields) : Complex, StateWithClosure {
+    override konst upValues: MutableMap<IrSymbol, Variable> = mutableMapOf()
     override var superWrapperClass: Wrapper? = null
     override var outerClass: Field? = null
 
@@ -37,8 +37,8 @@ internal class Common private constructor(override val irClass: IrClass, overrid
     }
 
     fun getIrFunction(method: java.lang.reflect.Method): IrFunction? {
-        val methodName = getKotlinName(method.declaringClass.name, method.name)
-        return when (val declaration =
+        konst methodName = getKotlinName(method.declaringClass.name, method.name)
+        return when (konst declaration =
             irClass.declarations.singleOrNull { it is IrDeclarationWithName && it.name.asString() == methodName }
         ) {
             is IrProperty -> declaration.getter
@@ -50,20 +50,20 @@ internal class Common private constructor(override val irClass: IrClass, overrid
         return irClass.functions
             .single {
                 it.name.asString() == "equals" && it.dispatchReceiverParameter != null && it.extensionReceiverParameter == null
-                        && it.valueParameters.size == 1 && it.valueParameters[0].type.isNullableAny()
+                        && it.konstueParameters.size == 1 && it.konstueParameters[0].type.isNullableAny()
             }
             .let { it.resolveFakeOverride() as IrSimpleFunction }
     }
 
     fun getHashCodeFunction(): IrSimpleFunction {
         return irClass.functions
-            .single { it.name.asString() == "hashCode" && it.valueParameters.isEmpty() && it.extensionReceiverParameter == null }
+            .single { it.name.asString() == "hashCode" && it.konstueParameters.isEmpty() && it.extensionReceiverParameter == null }
             .let { it.resolveFakeOverride() as IrSimpleFunction }
     }
 
     fun getToStringFunction(): IrSimpleFunction {
         return irClass.functions
-            .single { it.name.asString() == "toString" && it.valueParameters.isEmpty() && it.extensionReceiverParameter == null }
+            .single { it.name.asString() == "toString" && it.konstueParameters.isEmpty() && it.extensionReceiverParameter == null }
             .let { it.resolveFakeOverride() as IrSimpleFunction }
     }
 
@@ -72,6 +72,6 @@ internal class Common private constructor(override val irClass: IrClass, overrid
     }
 
     override fun toString(): String {
-        return "Common(obj='${irClass.fqName}', values=$fields)"
+        return "Common(obj='${irClass.fqName}', konstues=$fields)"
     }
 }

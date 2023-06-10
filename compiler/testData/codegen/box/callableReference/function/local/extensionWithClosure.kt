@@ -5,7 +5,7 @@ fun box(): String {
 
     fun A.ext() { result = "OK" }
 
-    val f = A::ext
+    konst f = A::ext
     f(A())
     return result
 }

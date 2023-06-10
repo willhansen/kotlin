@@ -16,7 +16,7 @@ fun test(a: A, b: B) {
     }
 
     X()()
-    val x = X()
+    konst x = X()
     x()
     (x)()
 }

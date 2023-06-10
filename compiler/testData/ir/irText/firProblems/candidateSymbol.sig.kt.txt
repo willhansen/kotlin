@@ -32,7 +32,7 @@ class Candidate {
   // CHECK:
   //   Mangled name: Candidate{}symbol
   //   Public signature: /Candidate.symbol|-2022127689160258603[0]
-  val symbol: AbstractFirBasedSymbol<*>
+  konst symbol: AbstractFirBasedSymbol<*>
     // CHECK JVM_IR:
     //   Mangled name: Candidate#<get-symbol>(){}AbstractFirBasedSymbol<*>
     //   Public signature: /Candidate.symbol.<get-symbol>|-1417251974778824167[0]
@@ -56,7 +56,7 @@ interface FirCallableMemberDeclaration<F : FirCallableMemberDeclaration<F>> : Fi
   // CHECK:
   //   Mangled name: FirCallableMemberDeclaration{}symbol
   //   Public signature: /FirCallableMemberDeclaration.symbol|-2022127689160258603[0]
-  abstract override val symbol: AbstractFirBasedSymbol<F>
+  abstract override konst symbol: AbstractFirBasedSymbol<F>
     // CHECK JVM_IR:
     //   Mangled name: FirCallableMemberDeclaration#<get-symbol>(){}AbstractFirBasedSymbol<1:0>
     //   Public signature: /FirCallableMemberDeclaration.symbol.<get-symbol>|-2189475889945454446[0]
@@ -82,7 +82,7 @@ interface FirSymbolOwner<E> where E : FirDeclaration, E : FirSymbolOwner<E> {
   // CHECK:
   //   Mangled name: FirSymbolOwner{}symbol
   //   Public signature: /FirSymbolOwner.symbol|-2022127689160258603[0]
-  abstract val symbol: AbstractFirBasedSymbol<E>
+  abstract konst symbol: AbstractFirBasedSymbol<E>
     // CHECK JVM_IR:
     //   Mangled name: FirSymbolOwner#<get-symbol>(){}AbstractFirBasedSymbol<1:0>
     //   Public signature: /FirSymbolOwner.symbol.<get-symbol>|-2189475889945454446[0]

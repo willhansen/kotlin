@@ -16,11 +16,11 @@ public class J {
 
 fun test() {
     // @NotNull platform type
-    val platformNN = J.staticNN
+    konst platformNN = J.staticNN
     // @Nullable platform type
-    val platformN = J.staticN
+    konst platformN = J.staticN
     // platform type with no annotation
-    val platformJ = J.staticJ
+    konst platformJ = J.staticJ
 
     checkSubtype<J>(platformNN)
     checkSubtype<J>(<!ARGUMENT_TYPE_MISMATCH!>platformN<!>)

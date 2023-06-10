@@ -6,7 +6,7 @@ class A() {
     this
   }
 
-  val x = this@A.foo()
-  val y = this.foo()
-  val z = foo()
+  konst x = this@A.foo()
+  konst y = this.foo()
+  konst z = foo()
 }

@@ -1,4 +1,4 @@
-class A(val x: Int) {
+class A(konst x: Int) {
     inner class B {
         fun foo() {
             println(x)

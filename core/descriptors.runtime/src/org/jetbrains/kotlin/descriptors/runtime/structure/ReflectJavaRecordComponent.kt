@@ -10,28 +10,28 @@ import org.jetbrains.kotlin.load.java.structure.JavaType
 import java.lang.reflect.Member
 import java.lang.reflect.Method
 
-class ReflectJavaRecordComponent(val recordComponent: Any) : ReflectJavaMember(), JavaRecordComponent {
-    override val type: JavaType
+class ReflectJavaRecordComponent(konst recordComponent: Any) : ReflectJavaMember(), JavaRecordComponent {
+    override konst type: JavaType
         get() = Java16RecordComponentsLoader.loadGetType(recordComponent)?.let { ReflectJavaClassifierType(it) }
             ?: throw NoSuchMethodError("Can't find `getType` method")
-    override val isVararg: Boolean
+    override konst isVararg: Boolean
         get() = false
-    override val member: Member
+    override konst member: Member
         get() = Java16RecordComponentsLoader.loadGetAccessor(recordComponent)
             ?: throw NoSuchMethodError("Can't find `getAccessor` method")
 }
 
 private object Java16RecordComponentsLoader {
     class Cache(
-        val getType: Method?,
-        val getAccessor: Method?,
+        konst getType: Method?,
+        konst getAccessor: Method?,
     )
 
     private var _cache: Cache? = null
 
     private fun buildCache(recordComponent: Any): Cache {
         // Should be Class<RecordComponent>
-        val classOfComponent = recordComponent::class.java
+        konst classOfComponent = recordComponent::class.java
 
         return try {
             Cache(
@@ -54,14 +54,14 @@ private object Java16RecordComponentsLoader {
     }
 
     fun loadGetType(recordComponent: Any): Class<*>? {
-        val cache = initCache(recordComponent)
-        val getType = cache.getType ?: return null
+        konst cache = initCache(recordComponent)
+        konst getType = cache.getType ?: return null
         return getType.invoke(recordComponent) as Class<*>
     }
 
     fun loadGetAccessor(recordComponent: Any): Method? {
-        val cache = initCache(recordComponent)
-        val getType = cache.getAccessor ?: return null
+        konst cache = initCache(recordComponent)
+        konst getType = cache.getAccessor ?: return null
         return getType.invoke(recordComponent) as Method
     }
 }

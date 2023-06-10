@@ -1,4 +1,4 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class A {
     public var prop = "OK"
@@ -6,7 +6,7 @@ class A {
 
 
     fun test(): String {
-        return eval { prop }
+        return ekonst { prop }
     }
 }
 

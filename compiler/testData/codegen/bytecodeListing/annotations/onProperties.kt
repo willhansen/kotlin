@@ -14,12 +14,12 @@ class CustomDelegate {
     operator fun getValue(thisRef: Any?, prop: KProperty<*>): String = prop.name
 }
 
-public class A(@AnnParam @field:AnnField @property:AnnProp2 val x: Int, @param:AnnParam @get:AnnGetter @set:AnnSetter var y: Int) {
+public class A(@AnnParam @field:AnnField @property:AnnProp2 konst x: Int, @param:AnnParam @get:AnnGetter @set:AnnSetter var y: Int) {
 
     @AnnProp @field:AnnField @property:AnnProp2 @get:AnnGetter @set:AnnSetter @setparam:AnnParam
     var p: Int = 0
 
     @AnnProp @property:AnnProp2 @delegate:AnnDelegate @property:AnnDelegate
-    val s: String by CustomDelegate()
+    konst s: String by CustomDelegate()
 
 }

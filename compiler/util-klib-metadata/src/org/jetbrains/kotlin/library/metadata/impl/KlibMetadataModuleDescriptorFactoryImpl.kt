@@ -27,14 +27,14 @@ import org.jetbrains.kotlin.resolve.sam.SamConversionResolverImpl
 import org.jetbrains.kotlin.serialization.deserialization.*
 import org.jetbrains.kotlin.storage.StorageManager
 
-private val ModuleDescriptorImpl.isStdlibModule
+private konst ModuleDescriptorImpl.isStdlibModule
     get() = (this.klibModuleOrigin as? DeserializedKlibModuleOrigin)?.library?.unresolvedDependencies?.isEmpty() ?: false
 
 class KlibMetadataModuleDescriptorFactoryImpl(
-    override val descriptorFactory: KlibModuleDescriptorFactory,
-    override val packageFragmentsFactory: KlibMetadataDeserializedPackageFragmentsFactory,
-    override val flexibleTypeDeserializer: FlexibleTypeDeserializer,
-    override val platformDependentTypeTransformer: PlatformDependentTypeTransformer
+    override konst descriptorFactory: KlibModuleDescriptorFactory,
+    override konst packageFragmentsFactory: KlibMetadataDeserializedPackageFragmentsFactory,
+    override konst flexibleTypeDeserializer: FlexibleTypeDeserializer,
+    override konst platformDependentTypeTransformer: PlatformDependentTypeTransformer
 ) : KlibMetadataModuleDescriptorFactory {
 
     override fun createDescriptorOptionalBuiltIns(
@@ -46,24 +46,24 @@ class KlibMetadataModuleDescriptorFactoryImpl(
         lookupTracker: LookupTracker
     ): ModuleDescriptorImpl {
 
-        val libraryProto = parseModuleHeader(library.moduleHeaderData)
+        konst libraryProto = parseModuleHeader(library.moduleHeaderData)
 
-        val moduleName = Name.special(libraryProto.moduleName)
-        val moduleOrigin = DeserializedKlibModuleOrigin(library)
+        konst moduleName = Name.special(libraryProto.moduleName)
+        konst moduleOrigin = DeserializedKlibModuleOrigin(library)
 
-        val moduleDescriptor = if (builtIns != null )
+        konst moduleDescriptor = if (builtIns != null )
             descriptorFactory.createDescriptor(moduleName, storageManager, builtIns, moduleOrigin)
         else
             descriptorFactory.createDescriptorAndNewBuiltIns(moduleName, storageManager, moduleOrigin)
 
-        val deserializationConfiguration = CompilerDeserializationConfiguration(languageVersionSettings)
+        konst deserializationConfiguration = CompilerDeserializationConfiguration(languageVersionSettings)
 
-        val compositePackageFragmentAddend =
+        konst compositePackageFragmentAddend =
             if (moduleDescriptor.isStdlibModule) {
                 functionInterfacePackageFragmentProvider(storageManager, moduleDescriptor)
             } else null
 
-        val provider = createPackageFragmentProvider(
+        konst provider = createPackageFragmentProvider(
             library,
             packageAccessHandler,
             libraryProto.packageFragmentNameList,
@@ -86,11 +86,11 @@ class KlibMetadataModuleDescriptorFactoryImpl(
         configuration: DeserializationConfiguration,
         lookupTracker: LookupTracker
     ): PackageFragmentProvider {
-        val deserializedPackageFragments = packageFragmentsFactory.createCachedPackageFragments(
+        konst deserializedPackageFragments = packageFragmentsFactory.createCachedPackageFragments(
             byteArrays, moduleDescriptor, storageManager
         )
 
-        val provider = PackageFragmentProviderImpl(deserializedPackageFragments)
+        konst provider = PackageFragmentProviderImpl(deserializedPackageFragments)
         return initializePackageFragmentProvider(provider, deserializedPackageFragments, storageManager,
             moduleDescriptor, configuration, null, lookupTracker)
     }
@@ -106,12 +106,12 @@ class KlibMetadataModuleDescriptorFactoryImpl(
         lookupTracker: LookupTracker
     ): PackageFragmentProvider {
 
-        val deserializedPackageFragments = packageFragmentsFactory.createDeserializedPackageFragments(
+        konst deserializedPackageFragments = packageFragmentsFactory.createDeserializedPackageFragments(
             library, packageFragmentNames, moduleDescriptor, packageAccessHandler, storageManager, configuration
         )
 
         // TODO: this is native specific. Move to a child class.
-        val syntheticPackageFragments = packageFragmentsFactory.createSyntheticPackageFragments(
+        konst syntheticPackageFragments = packageFragmentsFactory.createSyntheticPackageFragments(
             library, deserializedPackageFragments, moduleDescriptor
         )
 
@@ -120,8 +120,8 @@ class KlibMetadataModuleDescriptorFactoryImpl(
         // none for `foo`. Various descriptor/scope code relies on presence of such package fragments, and currently we
         // don't know if it's possible to fix this.
         // TODO: think about fixing issues in descriptors/scopes
-        val packageFqNames = deserializedPackageFragments.mapTo(mutableSetOf()) { it.fqName }
-        val emptyPackageFragments = mutableListOf<PackageFragmentDescriptor>()
+        konst packageFqNames = deserializedPackageFragments.mapTo(mutableSetOf()) { it.fqName }
+        konst emptyPackageFragments = mutableListOf<PackageFragmentDescriptor>()
         for (packageFqName in packageFqNames.mapNotNull { it.parentOrNull() }) {
             var ancestorFqName = packageFqName
             while (!ancestorFqName.isRoot && packageFqNames.add(ancestorFqName)) {
@@ -130,7 +130,7 @@ class KlibMetadataModuleDescriptorFactoryImpl(
             }
         }
 
-        val provider = PackageFragmentProviderImpl(deserializedPackageFragments + syntheticPackageFragments + emptyPackageFragments)
+        konst provider = PackageFragmentProviderImpl(deserializedPackageFragments + syntheticPackageFragments + emptyPackageFragments)
         return initializePackageFragmentProvider(provider, deserializedPackageFragments, storageManager,
             moduleDescriptor, configuration, compositePackageFragmentAddend, lookupTracker)
     }
@@ -145,19 +145,19 @@ class KlibMetadataModuleDescriptorFactoryImpl(
         lookupTracker: LookupTracker
     ): PackageFragmentProvider {
 
-        val notFoundClasses = NotFoundClasses(storageManager, moduleDescriptor)
+        konst notFoundClasses = NotFoundClasses(storageManager, moduleDescriptor)
 
-        val annotationAndConstantLoader = AnnotationAndConstantLoaderImpl(
+        konst annotationAndConstantLoader = AnnotationAndConstantLoaderImpl(
             moduleDescriptor,
             notFoundClasses,
             KlibMetadataSerializerProtocol
         )
 
-        val enumEntriesDeserializationSupport = object : EnumEntriesDeserializationSupport {
+        konst enumEntriesDeserializationSupport = object : EnumEntriesDeserializationSupport {
             override fun canSynthesizeEnumEntries(): Boolean = moduleDescriptor.platform.isJvm()
         }
 
-        val components = DeserializationComponents(
+        konst components = DeserializationComponents(
             storageManager,
             moduleDescriptor,
             configuration,
@@ -204,7 +204,7 @@ class KlibMetadataModuleDescriptorFactoryImpl(
                 isExpect = true
             )
 
-        val packageFragmentProvider = PackageFragmentProviderImpl(
+        konst packageFragmentProvider = PackageFragmentProviderImpl(
             listOf(
                 createPackage(ForwardDeclarationsFqNames.cNamesStructs, "COpaque", ClassKind.CLASS),
                 createPackage(ForwardDeclarationsFqNames.objCNamesClasses, "ObjCObjectBase", ClassKind.CLASS),

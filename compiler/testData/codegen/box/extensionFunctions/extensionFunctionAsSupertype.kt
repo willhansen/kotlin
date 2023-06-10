@@ -8,8 +8,8 @@ class C: String.() -> String, I {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     if (c("OK") != "OK") return c("OK")
-    val ext: String.() -> String = c
+    konst ext: String.() -> String = c
     return "OK".ext()
 }

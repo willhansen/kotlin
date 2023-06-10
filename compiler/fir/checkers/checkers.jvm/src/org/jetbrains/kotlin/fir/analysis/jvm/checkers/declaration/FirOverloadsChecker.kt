@@ -27,12 +27,12 @@ import org.jetbrains.kotlin.name.JvmNames.JVM_OVERLOADS_CLASS_ID
 
 object FirOverloadsChecker : FirFunctionChecker() {
     override fun check(declaration: FirFunction, context: CheckerContext, reporter: DiagnosticReporter) {
-        val session = context.session
-        val annotation = declaration.getAnnotationByClassId(JVM_OVERLOADS_CLASS_ID, session) ?: return
-        //todo need to have expect declaration here to check if it has default values
+        konst session = context.session
+        konst annotation = declaration.getAnnotationByClassId(JVM_OVERLOADS_CLASS_ID, session) ?: return
+        //todo need to have expect declaration here to check if it has default konstues
         if (declaration.isActual) return
 
-        val containingDeclaration = declaration.getContainingClassSymbol(session)
+        konst containingDeclaration = declaration.getContainingClassSymbol(session)
         when {
             containingDeclaration?.classKind == ClassKind.INTERFACE ->
                 reporter.reportOn(annotation.source, FirJvmErrors.OVERLOADS_INTERFACE, context)
@@ -45,7 +45,7 @@ object FirOverloadsChecker : FirFunctionChecker() {
                 reporter.reportOn(annotation.source, FirJvmErrors.OVERLOADS_ANNOTATION_CLASS_CONSTRUCTOR, context)
             !declaration.visibility.isPublicAPI && declaration.visibility != Visibilities.Internal ->
                 reporter.reportOn(annotation.source, FirJvmErrors.OVERLOADS_PRIVATE, context)
-            declaration.valueParameters.none { it.defaultValue != null } ->
+            declaration.konstueParameters.none { it.defaultValue != null } ->
                 reporter.reportOn(annotation.source, FirJvmErrors.OVERLOADS_WITHOUT_DEFAULT_ARGUMENTS, context)
         }
     }

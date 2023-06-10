@@ -7,7 +7,7 @@ fun doSmth(<!UNUSED_PARAMETER!>i<!>: Int) {}
 // uninitialized variables
 
 fun t1(b : Boolean) {
-    val v : Int
+    konst v : Int
     if (<!UNINITIALIZED_VARIABLE!>v<!> == 0) {}
 
     var u: String
@@ -32,7 +32,7 @@ fun t1(b : Boolean) {
         t = "ss"
     doSmth(t) //repeat for t
 
-    val i = 3
+    konst i = 3
     doSmth(i)
     if (b) {
         return;
@@ -44,7 +44,7 @@ fun t1(b : Boolean) {
 }
 
 fun t2() {
-    val s = "ss"
+    konst s = "ss"
 
     for (i in 0..2) {
         doSmth(s)
@@ -58,10 +58,10 @@ fun t4(<!UNUSED_PARAMETER!>a<!>: A) {
 }
 
 // ------------------------------------------------
-// reassigned vals
+// reassigned konsts
 
 fun t1() {
-    val <!UNUSED_VARIABLE!>a<!> : Int = 1
+    konst <!UNUSED_VARIABLE!>a<!> : Int = 1
     <!UNUSED_VALUE!><!VAL_REASSIGNMENT!>a<!> =<!> 2
 
     var <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE!>b<!> : Int = 1
@@ -81,15 +81,15 @@ enum class ProtocolState {
 }
 
 fun t3() {
-   val x: ProtocolState = ProtocolState.WAITING
+   konst x: ProtocolState = ProtocolState.WAITING
    <!VAL_REASSIGNMENT!>x<!> = x.signal()
    x = x.signal() //repeat for x
 }
 
 fun t4() {
-    val x = 1
+    konst x = 1
     <!VAL_REASSIGNMENT!>x<!> += 2
-    val y = 3
+    konst y = 3
     <!VAL_REASSIGNMENT!>y<!> *= 4
     var z = 5
     z -= y
@@ -105,7 +105,7 @@ fun t5() {
 }
 
 fun t6() {
-    val i = 0
+    konst i = 0
     fun t5() {
         <!VAL_REASSIGNMENT!>i<!> += 3
     }
@@ -123,10 +123,10 @@ fun t7() {
 // backing fields
 
 var x = 10
-val y = 10
-val z = 10
+konst y = 10
+konst z = 10
 
-class AnonymousInitializers(var a: String, val b: String) {
+class AnonymousInitializers(var a: String, konst b: String) {
     init {
         a = "30"
         a = "s"
@@ -135,7 +135,7 @@ class AnonymousInitializers(var a: String, val b: String) {
         b = "tt" //repeat for b
     }
 
-    val i: Int
+    konst i: Int
     init {
         i = 121
     }
@@ -145,7 +145,7 @@ class AnonymousInitializers(var a: String, val b: String) {
         <!VAL_REASSIGNMENT!>z<!> = 10
     }
 
-    val j: Int
+    konst j: Int
     get() = 20
 
     init {
@@ -153,7 +153,7 @@ class AnonymousInitializers(var a: String, val b: String) {
         <!VAL_REASSIGNMENT!>j<!> = 34
     }
 
-    val k: String
+    konst k: String
     init {
         if (1 < 3) {
             k = "a"
@@ -163,7 +163,7 @@ class AnonymousInitializers(var a: String, val b: String) {
         }
     }
 
-    val l: String
+    konst l: String
     init {
         if (1 < 3) {
             l = "a"
@@ -173,7 +173,7 @@ class AnonymousInitializers(var a: String, val b: String) {
         }
     }
 
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val o: String<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst o: String<!>
     init {
         if (1 < 3) {
             o = "a"
@@ -186,7 +186,7 @@ class AnonymousInitializers(var a: String, val b: String) {
         m = 400
     }
 
-    val n: Int
+    konst n: Int
 
     init {
         while (<!UNINITIALIZED_VARIABLE!>n<!> == 0) {
@@ -208,17 +208,17 @@ fun reassignFunParams(<!UNUSED_PARAMETER!>a<!>: Int) {
 
 open class Open(<!UNUSED_PARAMETER!>a<!>: Int, <!UNUSED_PARAMETER!>w<!>: Int) {}
 
-class LocalValsVsProperties(val a: Int, w: Int) : Open(a, w) {
-    val x : Int
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val y : Int<!>
+class LocalValsVsProperties(konst a: Int, w: Int) : Open(a, w) {
+    konst x : Int
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst y : Int<!>
     init {
         x = 1
-        val <!UNUSED_VARIABLE!>b<!> = x
+        konst <!UNUSED_VARIABLE!>b<!> = x
     }
-    val b = a
+    konst b = a
 
     fun foo() {
-        val r : Int
+        konst r : Int
         doSmth(x)
         doSmth(y)
         doSmth(<!UNINITIALIZED_VARIABLE!>r<!>)
@@ -233,7 +233,7 @@ class LocalValsVsProperties(val a: Int, w: Int) : Open(a, w) {
 }
 
 class Outer() {
-    val a : Int
+    konst a : Int
     var b : Int
 
     init {
@@ -255,14 +255,14 @@ class Outer() {
 }
 
 class ForwardAccessToBackingField() { //kt-147
-    val a = <!DEBUG_INFO_MISSING_UNRESOLVED, TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM_ERROR!>a<!> // error
-    val b = <!UNINITIALIZED_VARIABLE!>c<!> // error
-    val c = 1
+    konst a = <!DEBUG_INFO_MISSING_UNRESOLVED, TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM_ERROR!>a<!> // error
+    konst b = <!UNINITIALIZED_VARIABLE!>c<!> // error
+    konst c = 1
 }
 
 class ClassObject() {
     companion object {
-        val x : Int
+        konst x : Int
 
         init {
             x = 1
@@ -270,17 +270,17 @@ class ClassObject() {
 
 
         fun foo() {
-            val a : Int
+            konst a : Int
             doSmth(<!UNINITIALIZED_VARIABLE!>a<!>)
         }
     }
 }
 
 fun foo() {
-    val <!UNUSED_VARIABLE!>a<!> = object {
-        val x : Int
-        <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val y : Int<!>
-        val z : Int
+    konst <!UNUSED_VARIABLE!>a<!> = object {
+        konst x : Int
+        <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst y : Int<!>
+        konst z : Int
         init {
             x = 1
             z = 3
@@ -293,11 +293,11 @@ fun foo() {
 }
 
 class TestObjectExpression() {
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val a : Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst a : Int<!>
     fun foo() {
-        val <!UNUSED_VARIABLE!>a<!> = object {
-            val x : Int
-            <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val y : Int<!>
+        konst <!UNUSED_VARIABLE!>a<!> = object {
+            konst x : Int
+            <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst y : Int<!>
             init {
                 if (true)
                     x = 12
@@ -319,15 +319,15 @@ class TestObjectExpression() {
 
 
 object TestObjectDeclaration {
-    val x : Int
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val y : Int<!>
+    konst x : Int
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst y : Int<!>
     init {
         x = 1
     }
 
     fun foo() {
         <!VAL_REASSIGNMENT!>y<!> = 10
-        val i: Int
+        konst i: Int
         if (1 < 3) {
             i = 10
         }
@@ -336,9 +336,9 @@ object TestObjectDeclaration {
 }
 
 fun func() {
-    val b = 1
-    val <!UNUSED_VARIABLE!>a<!> = object {
-        val x = b
+    konst b = 1
+    konst <!UNUSED_VARIABLE!>a<!> = object {
+        konst x = b
         init {
             <!VAL_REASSIGNMENT!>b<!> = 4
         }
@@ -348,7 +348,7 @@ fun func() {
 // ------------------------------------------------
 // dot qualifiers
 class M() {
-    val x = 11
+    konst x = 11
     var y = 12
 }
 

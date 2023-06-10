@@ -2,20 +2,20 @@
 package foo
 
 external interface Chrome {
-    val extension: Extension
+    konst extension: Extension
 }
 
 external interface Extension {
-    val lastError: LastError?
+    konst lastError: LastError?
 }
 
 external interface LastError {
-    val message: String
+    konst message: String
 }
 
-external val chrome: Chrome = definedExternally
+external konst chrome: Chrome = definedExternally
 
 fun box(): String {
-    val lastError = chrome.extension.lastError?.message
+    konst lastError = chrome.extension.lastError?.message
     return if (lastError == null) "OK" else "fail"
 }

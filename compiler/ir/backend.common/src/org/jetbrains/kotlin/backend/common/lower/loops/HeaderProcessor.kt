@@ -27,19 +27,19 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
  * that contains `newLoop`.
  */
 data class LoopReplacement(
-    val newLoop: IrLoop,
-    val replacementExpression: IrExpression
+    konst newLoop: IrLoop,
+    konst replacementExpression: IrExpression
 )
 
 interface ForLoopHeader {
     /** Statements used to initialize the entire loop (e.g., declare induction variable). */
-    val loopInitStatements: List<IrStatement>
+    konst loopInitStatements: List<IrStatement>
 
     /**
      * Whether or not [initializeIteration] consumes the loop variable components assigned to it.
      * If true, the component variables should be removed from the un-lowered loop.
      */
-    val consumesLoopVariableComponents: Boolean
+    konst consumesLoopVariableComponents: Boolean
 
     /** Statements used to initialize an iteration of the loop (e.g., assign loop variable). */
     fun initializeIteration(
@@ -53,14 +53,14 @@ interface ForLoopHeader {
     fun buildLoop(builder: DeclarationIrBuilder, oldLoop: IrLoop, newBody: IrExpression?): LoopReplacement
 }
 
-internal const val inductionVariableName = "inductionVariable"
+internal const konst inductionVariableName = "inductionVariable"
 
 fun IrStatement.isInductionVariable(context: CommonBackendContext) =
     this is IrVariable &&
             origin == context.inductionVariableOrigin &&
             name.asString() == inductionVariableName
 
-internal class InitializerCallReplacer(private val replacement: IrExpression) : IrElementTransformerVoid() {
+internal class InitializerCallReplacer(private konst replacement: IrExpression) : IrElementTransformerVoid() {
     var initializerCall: IrCall? = null
 
     override fun visitCall(expression: IrCall): IrExpression {
@@ -79,17 +79,17 @@ internal class InitializerCallReplacer(private val replacement: IrExpression) : 
  * and create a [ForLoopHeader] from it.
  */
 internal class HeaderProcessor(
-    private val context: CommonBackendContext,
-    private val headerInfoBuilder: HeaderInfoBuilder,
-    private val scopeOwnerSymbol: () -> IrSymbol
+    private konst context: CommonBackendContext,
+    private konst headerInfoBuilder: HeaderInfoBuilder,
+    private konst scopeOwnerSymbol: () -> IrSymbol
 ) {
 
-    private val symbols = context.ir.symbols
+    private konst symbols = context.ir.symbols
 
     /**
      * Extracts information for building the for-loop (as a [ForLoopHeader]) from the given
      * "header" statement that stores the iterator into the loop variable
-     * (e.g., `val it = someIterable.iterator()`).
+     * (e.g., `konst it = someIterable.iterator()`).
      *
      * Returns null if the for-loop cannot be lowered.
      */
@@ -102,9 +102,9 @@ internal class HeaderProcessor(
 
         // Get the iterable expression, e.g., `someIterable` in the following loop variable declaration:
         //
-        //   val it = someIterable.iterator()
-        val iteratorCall = variable.initializer as? IrCall
-        val iterable = iteratorCall?.run {
+        //   konst it = someIterable.iterator()
+        konst iteratorCall = variable.initializer as? IrCall
+        konst iterable = iteratorCall?.run {
             if (extensionReceiver != null) {
                 extensionReceiver
             } else {
@@ -113,10 +113,10 @@ internal class HeaderProcessor(
         }
 
         // Collect loop information from the iterable expression.
-        val headerInfo = iterable?.accept(headerInfoBuilder, iteratorCall)
+        konst headerInfo = iterable?.accept(headerInfoBuilder, iteratorCall)
             ?: return null  // If the iterable is not supported.
 
-        val builder = context.createIrBuilder(scopeOwnerSymbol(), variable.startOffset, variable.endOffset)
+        konst builder = context.createIrBuilder(scopeOwnerSymbol(), variable.startOffset, variable.endOffset)
         return when (headerInfo) {
             is IndexedGetHeaderInfo -> IndexedGetLoopHeader(headerInfo, builder, context)
             is ProgressionHeaderInfo -> ProgressionLoopHeader(headerInfo, builder, context)

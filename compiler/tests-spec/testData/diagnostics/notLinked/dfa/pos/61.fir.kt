@@ -150,7 +150,7 @@ class Case10 {
  * UNEXPECTED BEHAVIOUR
  * ISSUES: KT-17694
  */
-val case_12: Nothing? get() = null
+konst case_12: Nothing? get() = null
 class Case11 {
     init {
         var y: String? = "xyz"

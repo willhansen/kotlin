@@ -6,11 +6,11 @@
 
 package foo
 
-class InlineDouble(val res : Double) {
+class InlineDouble(konst res : Double) {
 
     inline fun foo(s : () -> Double) : Double {
-        val f = "fooStart"
-        val z = s()
+        konst f = "fooStart"
+        konst z = s()
         return z
     }
 
@@ -19,13 +19,13 @@ class InlineDouble(val res : Double) {
     }
 
     inline fun fooRes(s : (l: Double) -> Double) : Double {
-        val z = s(res)
+        konst z = s(res)
         return z
     }
 
     inline fun fooRes2(s : (l: Double, t: Double) -> Double) : Double {
-        val f = "fooRes2Start"
-        val z = s(1.0, 11.0)
+        konst f = "fooRes2Start"
+        konst z = s(1.0, 11.0)
         return z
     }
 }
@@ -33,51 +33,51 @@ class InlineDouble(val res : Double) {
 // CHECK_BREAKS_COUNT: function=test0Param count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test0Param name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test0Param(): Double {
-    val inlineX = InlineDouble(10.0)
+    konst inlineX = InlineDouble(10.0)
     return inlineX.foo({ -> 1.0})
 }
 
 // CHECK_BREAKS_COUNT: function=test1Param count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1Param name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1Param(): Double {
-    val inlineX = InlineDouble(10.0)
+    konst inlineX = InlineDouble(10.0)
     return inlineX.foo11({ z: Double -> z})
 }
 
 // CHECK_BREAKS_COUNT: function=test1ParamCaptured count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1ParamCaptured name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1ParamCaptured(): Double {
-    val s = 100.0
-    val inlineX = InlineDouble(10.0)
+    konst s = 100.0
+    konst inlineX = InlineDouble(10.0)
     return inlineX.foo11({ z: Double -> s})
 }
 
 // CHECK_BREAKS_COUNT: function=test1ParamMissed count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1ParamMissed name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1ParamMissed() : Double {
-    val inlineX = InlineDouble(10.0)
+    konst inlineX = InlineDouble(10.0)
     return inlineX.foo11({ z: Double -> 111.0})
 }
 
 // CHECK_BREAKS_COUNT: function=test1ParamFromCallContext count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1ParamFromCallContext name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1ParamFromCallContext() : Double {
-    val inlineX = InlineDouble(1000.0)
+    konst inlineX = InlineDouble(1000.0)
     return inlineX.fooRes({ z: Double -> z})
 }
 
 // CHECK_BREAKS_COUNT: function=test2Params count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test2Params name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test2Params() : Double {
-    val inlineX = InlineDouble(1000.0)
+    konst inlineX = InlineDouble(1000.0)
     return inlineX.fooRes2({ y: Double, z: Double -> 2.0 * y + 3.0 * z})
 }
 
 // CHECK_BREAKS_COUNT: function=test2ParamsWithCaptured count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test2ParamsWithCaptured name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test2ParamsWithCaptured() : Double {
-    val inlineX = InlineDouble(1000.0)
-    val s = 9.0
+    konst inlineX = InlineDouble(1000.0)
+    konst s = 9.0
     var t = 1.0
     return inlineX.fooRes2({ y: Double, z: Double -> 2.0 * s + t})
 }

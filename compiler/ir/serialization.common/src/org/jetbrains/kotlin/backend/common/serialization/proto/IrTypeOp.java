@@ -30,7 +30,7 @@ public final class IrTypeOp extends
   private IrTypeOp(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -55,13 +55,13 @@ public final class IrTypeOp extends
           }
           case 8: {
             int rawValue = input.readEnum();
-            org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOperator value = org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOperator.valueOf(rawValue);
-            if (value == null) {
+            org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOperator konstue = org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOperator.konstueOf(rawValue);
+            if (konstue == null) {
               unknownFieldsCodedOutput.writeRawVarint32(tag);
               unknownFieldsCodedOutput.writeRawVarint32(rawValue);
             } else {
               bitField0_ |= 0x00000001;
-              operator_ = value;
+              operator_ = konstue;
             }
             break;
           }
@@ -85,10 +85,10 @@ public final class IrTypeOp extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -106,7 +106,7 @@ public final class IrTypeOp extends
     public IrTypeOp parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrTypeOp(input, extensionRegistry);
     }
   };
@@ -240,23 +240,23 @@ public final class IrTypeOp extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp parseFrom(java.io.InputStream input)
@@ -408,7 +408,7 @@ public final class IrTypeOp extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -436,12 +436,12 @@ public final class IrTypeOp extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOperator operator = 1;</code>
      */
-    public Builder setOperator(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOperator value) {
-      if (value == null) {
+    public Builder setOperator(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOperator konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       bitField0_ |= 0x00000001;
-      operator_ = value;
+      operator_ = konstue;
       
       return this;
     }
@@ -471,9 +471,9 @@ public final class IrTypeOp extends
     /**
      * <code>required int32 operand = 2;</code>
      */
-    public Builder setOperand(int value) {
+    public Builder setOperand(int konstue) {
       bitField0_ |= 0x00000002;
-      operand_ = value;
+      operand_ = konstue;
       
       return this;
     }
@@ -503,11 +503,11 @@ public final class IrTypeOp extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression argument = 3;</code>
      */
-    public Builder setArgument(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setArgument(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      argument_ = value;
+      argument_ = konstue;
 
       bitField0_ |= 0x00000004;
       return this;
@@ -525,13 +525,13 @@ public final class IrTypeOp extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression argument = 3;</code>
      */
-    public Builder mergeArgument(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeArgument(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (((bitField0_ & 0x00000004) == 0x00000004) &&
           argument_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         argument_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(argument_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(argument_).mergeFrom(konstue).buildPartial();
       } else {
-        argument_ = value;
+        argument_ = konstue;
       }
 
       bitField0_ |= 0x00000004;

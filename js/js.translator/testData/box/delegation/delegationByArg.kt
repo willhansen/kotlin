@@ -6,7 +6,7 @@ interface Base {
     var prop: String
 }
 
-class BaseImpl(val s: String) : Base {
+class BaseImpl(konst s: String) : Base {
     override fun foo(x: String): String = "Base: ${s}:${x}"
     override var prop: String = "prop"
 }
@@ -19,8 +19,8 @@ fun box(): String {
     assertEquals("Base: test:!!", d.foo("!!"), "delegation by argument, function member")
     assertEquals("prop", d.prop, "delegation by argument, get property")
 
-    d.prop = "new value"
-    assertEquals("new value", d.prop, "delegation by argument, set property")
+    d.prop = "new konstue"
+    assertEquals("new konstue", d.prop, "delegation by argument, set property")
 
     return "OK"
 }

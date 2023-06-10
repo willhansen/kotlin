@@ -23,18 +23,18 @@ object BadInheritedJavaSignaturesChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is ClassDescriptor) return
 
-        val badSignatureOverriddenDescriptor =
+        konst badSignatureOverriddenDescriptor =
             descriptor.unsubstitutedMemberScope.getContributedDescriptors().firstNotNullOfOrNull(::findFirstBadJavaSignatureOverridden)
 
         if (badSignatureOverriddenDescriptor != null) {
-            val reportOn =
+            konst reportOn =
                 when (declaration) {
                     is KtClass -> declaration.nameIdentifier ?: declaration.getClassOrInterfaceKeyword()
                     is KtObjectDeclaration -> declaration.getObjectKeyword()
                     else -> null
                 } ?: declaration
 
-            val renderedDescriptor = DescriptorRenderer.COMPACT_WITH_SHORT_TYPES.render(badSignatureOverriddenDescriptor)
+            konst renderedDescriptor = DescriptorRenderer.COMPACT_WITH_SHORT_TYPES.render(badSignatureOverriddenDescriptor)
             context.trace.report(
                 Errors.UNSUPPORTED.on(
                     reportOn,

@@ -4,11 +4,11 @@ open class A {
 }
 
 @CompileTimeCalculation
-class B(val b: Int) : A() {
+class B(konst b: Int) : A() {
     override fun inc(j: Int): Int {
         return j + b
     }
 }
 
-const val a = <!EVALUATED: `11`!>A().inc(10)<!>
-const val b = <!EVALUATED: `21`!>B(10).inc(11)<!>
+const konst a = <!EVALUATED: `11`!>A().inc(10)<!>
+const konst b = <!EVALUATED: `21`!>B(10).inc(11)<!>

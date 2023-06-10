@@ -7,7 +7,7 @@ class AlternatingDelegate {
 }
 
 fun failsWithClassCastException() {
-    val sometimesNotInt: Any? by AlternatingDelegate()
+    konst sometimesNotInt: Any? by AlternatingDelegate()
 
     if (sometimesNotInt is Int) {
         <!DEBUG_INFO_SMARTCAST, DEPRECATED_SMARTCAST!>sometimesNotInt<!>.inc()

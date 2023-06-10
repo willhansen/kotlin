@@ -14,4 +14,4 @@ fun A.test_2() {
     object : B by b {}
 }
 
-class D(val x: String, val y: String = <!NO_THIS!>this<!>.<!UNRESOLVED_REFERENCE!>x<!>) {}
+class D(konst x: String, konst y: String = <!NO_THIS!>this<!>.<!UNRESOLVED_REFERENCE!>x<!>) {}

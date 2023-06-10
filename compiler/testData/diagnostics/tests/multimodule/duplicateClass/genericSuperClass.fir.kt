@@ -9,7 +9,7 @@ public interface C
 public interface D<T>
 public class B : A<Int>, C, D<Int>
 public class M1 {
-    public val b: B = B()
+    public konst b: B = B()
 }
 
 // MODULE: m2

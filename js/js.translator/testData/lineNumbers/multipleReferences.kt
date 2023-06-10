@@ -9,7 +9,7 @@ fun box(x: Int) {
 }
 
 object O {
-    val y = 23
+    konst y = 23
 }
 
 // LINES(JS):      1 9 2 2 3 3 4 4 6 6 7 7 8 8 11 11   12 12          * 11 11 11 11 11 11

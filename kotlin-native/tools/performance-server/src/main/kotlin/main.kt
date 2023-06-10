@@ -9,19 +9,19 @@ import org.jetbrains.elastic.*
 
 external fun require(module: String): dynamic
 
-external val process: dynamic
-external val __dirname: dynamic
+external konst process: dynamic
+external konst __dirname: dynamic
 
 fun main() {
     println("Server Starting!")
 
-    val express = require("express")
-    val app = express()
-    val path = require("path")
-    val bodyParser = require("body-parser")
-    val http = require("http")
+    konst express = require("express")
+    konst app = express()
+    konst path = require("path")
+    konst bodyParser = require("body-parser")
+    konst http = require("http")
     // Get port from environment and store in Express.
-    val port = normalizePort(process.env.PORT)
+    konst port = normalizePort(process.env.PORT)
     app.use(bodyParser.json())
     app.set("port", port)
 
@@ -35,15 +35,15 @@ fun main() {
         println("App listening on port " + port + "!")
     })
 
-    val elasticHost = process.env.ELASTIC_HOST as Any?
-    val elasticPort = (process.env.ELASTIC_PORT as Any?)?.takeIf { it != kotlin.js.undefined }
-    val elasticUsername = (process.env.ELASTIC_USER as Any?)?.takeIf { it != kotlin.js.undefined }
-    val elasticPassword = (process.env.ELASTIC_PASSWORD as Any?)?.takeIf { it != kotlin.js.undefined }
+    konst elasticHost = process.env.ELASTIC_HOST as Any?
+    konst elasticPort = (process.env.ELASTIC_PORT as Any?)?.takeIf { it != kotlin.js.undefined }
+    konst elasticUsername = (process.env.ELASTIC_USER as Any?)?.takeIf { it != kotlin.js.undefined }
+    konst elasticPassword = (process.env.ELASTIC_PASSWORD as Any?)?.takeIf { it != kotlin.js.undefined }
     if (elasticHost !is String) throw IllegalStateException("ELASTIC_HOST env variable is not defined")
     if (elasticPort !is String?) throw IllegalStateException("ELASTIC_PORT env variable is not defined")
     if (elasticUsername !is String) throw IllegalStateException("ELASTIC_USER env variable is not defined")
     if (elasticPassword !is String) throw IllegalStateException("ELASTIC_PASSWORD env variable is not defined")
-    val connector = ElasticSearchConnector(
+    konst connector = ElasticSearchConnector(
             UrlNetworkConnector(elasticHost, elasticPort?.toInt()),
             elasticUsername,
             elasticPassword

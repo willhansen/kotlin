@@ -37,14 +37,14 @@ import java.util.logging.*
 import kotlin.concurrent.schedule
 import kotlin.system.exitProcess
 
-val DAEMON_PERIODIC_CHECK_INTERVAL_MS = 1000L
-val DAEMON_PERIODIC_SELDOM_CHECK_INTERVAL_MS = 60000L
+konst DAEMON_PERIODIC_CHECK_INTERVAL_MS = 1000L
+konst DAEMON_PERIODIC_SELDOM_CHECK_INTERVAL_MS = 60000L
 
 class LogStream(name: String) : OutputStream() {
 
-    val log by lazy { Logger.getLogger(name) }
+    konst log by lazy { Logger.getLogger(name) }
 
-    val lineBuf = StringBuilder()
+    konst lineBuf = StringBuilder()
 
     override fun write(byte: Int) {
         if (byte == '\n'.code) flush()
@@ -59,10 +59,10 @@ class LogStream(name: String) : OutputStream() {
 
 abstract class KotlinCompileDaemonBase {
     init {
-        val logTime: String = SimpleDateFormat("yyyy-MM-dd.HH-mm-ss-SSS").format(Date())
-        val (logPath: String, fileIsGiven: Boolean) =
-            CompilerSystemProperties.COMPILE_DAEMON_LOG_PATH_PROPERTY.value?.trimQuotes()?.let { Pair(it, File(it).isFile) } ?: Pair("%t", false)
-        val cfg: String =
+        konst logTime: String = SimpleDateFormat("yyyy-MM-dd.HH-mm-ss-SSS").format(Date())
+        konst (logPath: String, fileIsGiven: Boolean) =
+            CompilerSystemProperties.COMPILE_DAEMON_LOG_PATH_PROPERTY.konstue?.trimQuotes()?.let { Pair(it, File(it).isFile) } ?: Pair("%t", false)
+        konst cfg: String =
             "handlers = java.util.logging.FileHandler\n" +
                     "java.util.logging.FileHandler.level     = ALL\n" +
                     "java.util.logging.FileHandler.formatter = java.util.logging.SimpleFormatter\n" +
@@ -76,7 +76,7 @@ abstract class KotlinCompileDaemonBase {
         LogManager.getLogManager().readConfiguration(cfg.byteInputStream())
     }
 
-    val log by lazy { Logger.getLogger("daemon") }
+    konst log by lazy { Logger.getLogger("daemon") }
 
     private fun loadVersionFromResource(): String? {
         (KotlinCompileDaemonBase::class.java.classLoader as? URLClassLoader)
@@ -107,7 +107,7 @@ abstract class KotlinCompileDaemonBase {
     protected fun mainImpl(args: Array<String>) {
         ensureServerHostnameIsSetUp()
 
-        val jvmArguments = ManagementFactory.getRuntimeMXBean().inputArguments
+        konst jvmArguments = ManagementFactory.getRuntimeMXBean().inputArguments
 
         log.info("Kotlin compiler daemon version " + (loadVersionFromResource() ?: "<unknown>"))
         log.info("daemon JVM args: " + jvmArguments.joinToString(" "))
@@ -116,19 +116,19 @@ abstract class KotlinCompileDaemonBase {
         setIdeaIoUseFallback()
         setupIdeaStandaloneExecution()
 
-        val compilerId = CompilerId()
-        val daemonOptions = DaemonOptions()
+        konst compilerId = CompilerId()
+        konst daemonOptions = DaemonOptions()
         runSynchronized {
             var serverRun: Any?
             try {
-                val daemonJVMOptions = configureDaemonJVMOptions(inheritMemoryLimits = true,
+                konst daemonJVMOptions = configureDaemonJVMOptions(inheritMemoryLimits = true,
                                                                  inheritOtherJvmOptions = true,
                                                                  inheritAdditionalProperties = true)
 
-                val filteredArgs = args.asIterable().filterExtractProps(compilerId, daemonOptions, prefix = COMPILE_DAEMON_CMDLINE_OPTIONS_PREFIX)
+                konst filteredArgs = args.asIterable().filterExtractProps(compilerId, daemonOptions, prefix = COMPILE_DAEMON_CMDLINE_OPTIONS_PREFIX)
 
                 if (filteredArgs.any()) {
-                    val helpLine = "usage: <daemon> <compilerId options> <daemon options>"
+                    konst helpLine = "usage: <daemon> <compilerId options> <daemon options>"
                     log.info(helpLine)
                     println(helpLine)
                     throw IllegalArgumentException("Unknown arguments: " + filteredArgs.joinToString(" "))
@@ -143,10 +143,10 @@ abstract class KotlinCompileDaemonBase {
                 //
                 //            setDaemonPermissions(daemonOptions.port)
 
-                val compilerSelector = object : CompilerSelector {
-                    private val jvm by lazy { K2JVMCompiler() }
-                    private val js by lazy { K2JSCompiler() }
-                    private val metadata by lazy { K2MetadataCompiler() }
+                konst compilerSelector = object : CompilerSelector {
+                    private konst jvm by lazy { K2JVMCompiler() }
+                    private konst js by lazy { K2JSCompiler() }
+                    private konst metadata by lazy { K2MetadataCompiler() }
                     override fun get(targetPlatform: CompileService.TargetPlatform): CLICompiler<*> = when (targetPlatform) {
                         CompileService.TargetPlatform.JVM -> jvm
                         CompileService.TargetPlatform.JS -> js
@@ -154,8 +154,8 @@ abstract class KotlinCompileDaemonBase {
                     }
                 }
                 // timer with a daemon thread, meaning it should not prevent JVM to exit normally
-                val timer = Timer(true)
-                val (compilerService, port) = getCompileServiceAndPort(compilerSelector, compilerId, daemonOptions, daemonJVMOptions, timer)
+                konst timer = Timer(true)
+                konst (compilerService, port) = getCompileServiceAndPort(compilerSelector, compilerId, daemonOptions, daemonJVMOptions, timer)
                 compilerService.startDaemonElections()
                 compilerService.configurePeriodicActivities()
                 serverRun = runCompileService(compilerService)
@@ -198,8 +198,8 @@ object KotlinCompileDaemon : KotlinCompileDaemonBase() {
         daemonJVMOptions: DaemonJVMOptions,
         timer: Timer
     ) = run {
-        val (registry, port) = findPortAndCreateRegistry(COMPILE_DAEMON_FIND_PORT_ATTEMPTS, COMPILE_DAEMON_PORTS_RANGE_START, COMPILE_DAEMON_PORTS_RANGE_END)
-        val compilerService = CompileServiceImpl(registry = registry,
+        konst (registry, port) = findPortAndCreateRegistry(COMPILE_DAEMON_FIND_PORT_ATTEMPTS, COMPILE_DAEMON_PORTS_RANGE_START, COMPILE_DAEMON_PORTS_RANGE_END)
+        konst compilerService = CompileServiceImpl(registry = registry,
                                                  compiler = compilerSelector,
                                                  compilerId = compilerId,
                                                  daemonOptions = daemonOptions,

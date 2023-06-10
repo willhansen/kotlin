@@ -9,11 +9,11 @@ external fun create(
 ) : Array<String>
 
 fun box(): String {
-    val zeroArgsFun = create()
+    konst zeroArgsFun = create()
     if (zeroArgsFun.size != 0) return "fail: $zeroArgsFun arguments instead 0"
 
-    val p2 = "p2"
-    val threeArgsFun = create(p2 = p2)
+    konst p2 = "p2"
+    konst threeArgsFun = create(p2 = p2)
     if (threeArgsFun.size != 3 || threeArgsFun[2] != p2) return "fail1: $threeArgsFun arguments instead 3"
 
     return "OK"

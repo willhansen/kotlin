@@ -5,11 +5,11 @@
 sharedVar = sharedVar + 1
 
 class CapturingClass1 {
-    val value = sharedVar
+    konst konstue = sharedVar
 }
 
 class CapturingClass2 {
-    fun f() = CapturingClass1().value
+    fun f() = CapturingClass1().konstue
 }
 
 println("${SharedObject.greeting} ${from.msg} main")

@@ -9,20 +9,20 @@ import org.jetbrains.kotlin.test.TargetBackend
 import org.jetbrains.kotlin.test.model.FrontendKind
 import org.jetbrains.kotlin.test.model.FrontendKinds
 import org.jetbrains.kotlin.test.services.JUnit5Assertions.assertEqualsToFile
-import org.jetbrains.kotlin.test.services.impl.valueOfOrNull
+import org.jetbrains.kotlin.test.services.impl.konstueOfOrNull
 import java.io.File
 
-data class SteppingTestLoggedData(val line: Int, val isSynthetic: Boolean, val expectation: String)
+data class SteppingTestLoggedData(konst line: Int, konst isSynthetic: Boolean, konst expectation: String)
 
 sealed interface LocalValue
 
-class LocalPrimitive(val value: String, val valueType: String) : LocalValue {
+class LocalPrimitive(konst konstue: String, konst konstueType: String) : LocalValue {
     override fun toString(): String {
-        return "$value:$valueType"
+        return "$konstue:$konstueType"
     }
 }
 
-class LocalReference(val id: String, val referenceType: String) : LocalValue {
+class LocalReference(konst id: String, konst referenceType: String) : LocalValue {
     override fun toString(): String {
         return referenceType
     }
@@ -35,9 +35,9 @@ object LocalNullValue : LocalValue {
 }
 
 class LocalVariableRecord(
-    val variable: String,
-    val variableType: String?,
-    val value: LocalValue
+    konst variable: String,
+    konst variableType: String?,
+    konst konstue: LocalValue
 ) {
     override fun toString(): String = buildString {
         append(variable)
@@ -46,12 +46,12 @@ class LocalVariableRecord(
             append(variableType)
         }
         append("=")
-        append(value)
+        append(konstue)
     }
 }
 
-private const val EXPECTATIONS_MARKER = "// EXPECTATIONS"
-private const val FORCE_STEP_INTO_MARKER = "// FORCE_STEP_INTO"
+private const konst EXPECTATIONS_MARKER = "// EXPECTATIONS"
+private const konst FORCE_STEP_INTO_MARKER = "// FORCE_STEP_INTO"
 
 fun checkSteppingTestResult(
     frontendKind: FrontendKind<*>,
@@ -59,19 +59,19 @@ fun checkSteppingTestResult(
     wholeFile: File,
     loggedItems: List<SteppingTestLoggedData>
 ) {
-    val actual = mutableListOf<String>()
-    val lines = wholeFile.readLines()
-    val forceStepInto = lines.any { it.startsWith(FORCE_STEP_INTO_MARKER) }
+    konst actual = mutableListOf<String>()
+    konst lines = wholeFile.readLines()
+    konst forceStepInto = lines.any { it.startsWith(FORCE_STEP_INTO_MARKER) }
 
-    val actualLineNumbers = compressSequencesWithoutLineNumber(loggedItems)
+    konst actualLineNumbers = compressSequencesWithoutLineNumber(loggedItems)
         .filter {
             // Ignore synthetic code with no line number information unless force step into behavior is requested.
             forceStepInto || !it.isSynthetic
         }
         .map { "// ${it.expectation}" }
-    val actualLineNumbersIterator = actualLineNumbers.iterator()
+    konst actualLineNumbersIterator = actualLineNumbers.iterator()
 
-    val lineIterator = lines.listIterator()
+    konst lineIterator = lines.listIterator()
     for (line in lineIterator) {
         if (line.startsWith(EXPECTATIONS_MARKER)) {
             // Rewind the iterator to the first '// EXPECTATIONS' line
@@ -91,9 +91,9 @@ fun checkSteppingTestResult(
         }
         if (line.startsWith(EXPECTATIONS_MARKER)) {
             actual.add(line)
-            val backendsAndFrontends = line.removePrefix(EXPECTATIONS_MARKER).splitToSequence(Regex("\\s+")).filter { it.isNotEmpty() }
+            konst backendsAndFrontends = line.removePrefix(EXPECTATIONS_MARKER).splitToSequence(Regex("\\s+")).filter { it.isNotEmpty() }
             currentBackends = backendsAndFrontends
-                .mapNotNullTo(mutableSetOf()) { valueOfOrNull<TargetBackend>(it) }
+                .mapNotNullTo(mutableSetOf()) { konstueOfOrNull<TargetBackend>(it) }
                 .takeIf { it.isNotEmpty() }
                 ?: setOf(TargetBackend.ANY)
             currentFrontends = backendsAndFrontends
@@ -130,9 +130,9 @@ fun checkSteppingTestResult(
 private fun compressSequencesWithoutLineNumber(loggedItems: List<SteppingTestLoggedData>): List<SteppingTestLoggedData> {
     if (loggedItems.isEmpty()) return listOf()
 
-    val logIterator = loggedItems.iterator()
+    konst logIterator = loggedItems.iterator()
     var currentItem = logIterator.next()
-    val result = mutableListOf(currentItem)
+    konst result = mutableListOf(currentItem)
 
     for (logItem in logIterator) {
         if (currentItem.line != -1 || currentItem.expectation != logItem.expectation) {

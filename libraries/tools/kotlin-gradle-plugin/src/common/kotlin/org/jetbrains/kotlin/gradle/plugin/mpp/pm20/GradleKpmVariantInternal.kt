@@ -18,26 +18,26 @@ abstract class GradleKpmVariantInternal(
     containingModule: GradleKpmModule,
     fragmentName: String,
     dependencyConfigurations: GradleKpmFragmentDependencyConfigurations,
-    final override val compileDependenciesConfiguration: Configuration,
-    final override val apiElementsConfiguration: Configuration
+    final override konst compileDependenciesConfiguration: Configuration,
+    final override konst apiElementsConfiguration: Configuration
 ) : GradleKpmFragmentInternal(
     containingModule, fragmentName, dependencyConfigurations
 ), GradleKpmVariant {
 
-    override val variantAttributes: Map<KotlinAttributeKey, String>
+    override konst variantAttributes: Map<KotlinAttributeKey, String>
         get() = mapOf(KotlinPlatformTypeAttribute to kotlinPlatformTypeAttributeFromPlatform(platformType)) // TODO user attributes
 
     override var compileDependencyFiles: FileCollection = project.files({ compileDependenciesConfiguration })
 
-    internal abstract val compilationData: GradleKpmVariantCompilationDataInternal<*>
+    internal abstract konst compilationData: GradleKpmVariantCompilationDataInternal<*>
 
     // TODO rewrite using our own artifacts API?
-    override val compilationOutputs: KotlinCompilationOutput = DefaultKotlinCompilationOutput(
+    override konst compilationOutputs: KotlinCompilationOutput = DefaultKotlinCompilationOutput(
         project, project.provider { project.buildDir.resolve("processedResources/${containingModule.name}/${fragmentName}") }
     )
 
     // TODO rewrite using our own artifacts API
-    override val sourceArchiveTaskName: String
+    override konst sourceArchiveTaskName: String
         get() = defaultSourceArtifactTaskName
 
     override fun toString(): String = "variant $fragmentName in $containingModule"
@@ -46,6 +46,6 @@ abstract class GradleKpmVariantInternal(
 private fun kotlinPlatformTypeAttributeFromPlatform(platformType: KotlinPlatformType) = platformType.name
 
 // TODO: rewrite with the artifacts API
-internal val GradleKpmVariant.defaultSourceArtifactTaskName: String
+internal konst GradleKpmVariant.defaultSourceArtifactTaskName: String
     get() = disambiguateName("sourcesJar")
 

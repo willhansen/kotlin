@@ -11,12 +11,12 @@ import kotlin.test.*
 // When decoding utf-8, JVM and JS implementations replace the sequence reflecting a surrogate code point differently.
 // JS replaces each byte of the sequence by the replacement char, whereas JVM replaces the whole sequence with a single replacement char.
 // See corresponding actual to find out the replacement.
-internal expect val surrogateCodePointDecoding: String
+internal expect konst surrogateCodePointDecoding: String
 
 // The byte sequence used to replace a surrogate char.
 // JVM default replacement sequence consist of single 0x3F byte.
 // JS and Native replacement byte sequence is [0xEF, 0xBF, 0xBD].
-internal expect val surrogateCharEncoding: ByteArray
+internal expect konst surrogateCharEncoding: ByteArray
 
 class StringEncodingTest {
     private fun bytes(vararg elements: Int) = ByteArray(elements.size) { elements[it].toByte() }
@@ -24,10 +24,10 @@ class StringEncodingTest {
     private fun testEncoding(isWellFormed: Boolean, expected: ByteArray, string: String) {
         assertArrayContentEquals(expected, string.encodeToByteArray())
         if (!isWellFormed) {
-            assertFailsWith<CharacterCodingException> { string.encodeToByteArray(throwOnInvalidSequence = true) }
+            assertFailsWith<CharacterCodingException> { string.encodeToByteArray(throwOnInkonstidSequence = true) }
         } else {
-            assertArrayContentEquals(expected, string.encodeToByteArray(throwOnInvalidSequence = true))
-            assertEquals(string, string.encodeToByteArray(throwOnInvalidSequence = true).decodeToString())
+            assertArrayContentEquals(expected, string.encodeToByteArray(throwOnInkonstidSequence = true))
+            assertEquals(string, string.encodeToByteArray(throwOnInkonstidSequence = true).decodeToString())
         }
     }
 
@@ -107,8 +107,8 @@ class StringEncodingTest {
             "\uE000\uF63C¿\uFFFF\uD800\uDC00\uDA49\uDDFC\uDBFF\uDFFF"
         )
 
-        val longChars = CharArray(200_000) { 'k' }
-        val longBytes = longChars.concatToString().encodeToByteArray()
+        konst longChars = CharArray(200_000) { 'k' }
+        konst longBytes = longChars.concatToString().encodeToByteArray()
         assertEquals(200_000, longBytes.size)
         assertTrue { longBytes.all { it == 0x6B.toByte() } }
     }
@@ -158,8 +158,8 @@ class StringEncodingTest {
             endIndex = 9
         )
 
-        val longChars = CharArray(200_000) { 'k' }
-        val longBytes = longChars.concatToString().encodeToByteArray(startIndex = 5000, endIndex = 195_000)
+        konst longChars = CharArray(200_000) { 'k' }
+        konst longBytes = longChars.concatToString().encodeToByteArray(startIndex = 5000, endIndex = 195_000)
         assertEquals(190_000, longBytes.size)
         assertTrue { longBytes.all { it == 0x6B.toByte() } }
     }
@@ -167,10 +167,10 @@ class StringEncodingTest {
     private fun testDecoding(isWellFormed: Boolean, expected: String, bytes: ByteArray) {
         assertEquals(expected, bytes.decodeToString())
         if (!isWellFormed) {
-            assertFailsWith<CharacterCodingException> { bytes.decodeToString(throwOnInvalidSequence = true) }
+            assertFailsWith<CharacterCodingException> { bytes.decodeToString(throwOnInkonstidSequence = true) }
         } else {
-            assertEquals(expected, bytes.decodeToString(throwOnInvalidSequence = true))
-            assertArrayContentEquals(bytes, bytes.decodeToString(throwOnInvalidSequence = true).encodeToByteArray())
+            assertEquals(expected, bytes.decodeToString(throwOnInkonstidSequence = true))
+            assertArrayContentEquals(bytes, bytes.decodeToString(throwOnInkonstidSequence = true).encodeToByteArray())
         }
     }
 
@@ -196,7 +196,7 @@ class StringEncodingTest {
         testDecoding(true, "\u0000", bytes(0x0)) // null char
         testDecoding(true, "zC", bytes(0x7A, 0x43)) // 1-byte chars
 
-        testDecoding(false, "��", bytes(0x85, 0xAF)) // invalid bytes starting with 1 bit
+        testDecoding(false, "��", bytes(0x85, 0xAF)) // inkonstid bytes starting with 1 bit
         testDecoding(true, "¿", bytes(0xC2, 0xBF)) // 2-byte char
         testDecoding(false, "�z", bytes(0xCF, 0x7A)) // 2-byte char, second byte starts with 0 bit
         testDecoding(false, "��", bytes(0xC1, 0xAA)) // 1-byte char written in two bytes
@@ -239,8 +239,8 @@ class StringEncodingTest {
         // Other Ill-Formed Sequences
         testDecoding(false, "�����A��B", bytes(0xF4, 0x91, 0x92, 0x93, /**/ 0xFF, /**/ 0x41, /**/ 0x80, 0xBF, /**/ 0x42))
 
-        val longBytes = ByteArray(200_000) { 0x6B.toByte() }
-        val longString = longBytes.decodeToString()
+        konst longBytes = ByteArray(200_000) { 0x6B.toByte() }
+        konst longString = longBytes.decodeToString()
         assertEquals(200_000, longString.length)
         assertTrue { longString.all { it == 'k' } }
     }
@@ -282,8 +282,8 @@ class StringEncodingTest {
         testDecoding(false, "��", bytes(0xF0, 0x9F, 0x9F, 0x9F), startIndex = 2, endIndex = 4)
         testDecoding(false, "��", bytes(0xF0, 0x9F, 0x9F, 0x9F), startIndex = 1, endIndex = 3)
 
-        val longBytes = ByteArray(200_000) { 0x6B.toByte() }
-        val longString = longBytes.decodeToString(startIndex = 5000, endIndex = 195_000)
+        konst longBytes = ByteArray(200_000) { 0x6B.toByte() }
+        konst longString = longBytes.decodeToString(startIndex = 5000, endIndex = 195_000)
         assertEquals(190_000, longString.length)
         assertTrue { longString.all { it == 'k' } }
     }
@@ -295,18 +295,18 @@ class StringEncodingTest {
             .map { it.toInt(16).toByte() }
             .toByteArray()
 
-        val smokeTestData = "\ud83c\udf00"
-        val smokeTestDataCharArray: CharArray = smokeTestData.toCharArray()
-        val smokeTestDataAsBytes = "f0 9f 8c 80".readHex()
+        konst smokeTestData = "\ud83c\udf00"
+        konst smokeTestDataCharArray: CharArray = smokeTestData.toCharArray()
+        konst smokeTestDataAsBytes = "f0 9f 8c 80".readHex()
 
-        val testData = "file content with unicode " +
+        konst testData = "file content with unicode " +
                 "\ud83c\udf00 :" +
                 " \u0437\u0434\u043e\u0440\u043e\u0432\u0430\u0442\u044c\u0441\u044f :" +
                 " \uc5ec\ubcf4\uc138\uc694 :" +
                 " \u4f60\u597d :" +
                 " \u00f1\u00e7"
-        val testDataCharArray: CharArray = testData.toCharArray()
-        val testDataAsBytes: ByteArray = ("66 69 6c 65 20 63 6f 6e 74 65 6e 74 20 77 69 74 " +
+        konst testDataCharArray: CharArray = testData.toCharArray()
+        konst testDataAsBytes: ByteArray = ("66 69 6c 65 20 63 6f 6e 74 65 6e 74 20 77 69 74 " +
                 " 68 20 75 6e 69 63 6f 64 65 20 f0 9f 8c 80 20 3a 20 d0 b7 d0 b4 d0 be d1 " +
                 "80 d0 be d0 b2 d0 b0 d1 82 d1 8c d1 81 d1 8f 20 3a 20 ec 97 ac eb b3 b4 ec " +
                 " 84 b8 ec 9a 94 20 3a 20 e4 bd a0 e5 a5 bd 20 3a 20 c3 b1 c3 a7").readHex()

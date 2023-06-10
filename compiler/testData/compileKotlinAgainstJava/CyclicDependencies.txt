@@ -15,5 +15,5 @@ public final class KotlinClass {
 
 public final class KotlinClass2 {
     public constructor KotlinClass2()
-    public final val str: kotlin.String
+    public final konst str: kotlin.String
 }

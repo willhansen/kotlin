@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 import org.jetbrains.kotlin.types.error.ErrorTypeKind
 import org.jetbrains.kotlin.types.error.ErrorUtils
 
-class FunctionPlaceholders(private val builtIns: KotlinBuiltIns) {
+class FunctionPlaceholders(private konst builtIns: KotlinBuiltIns) {
     fun createFunctionPlaceholderType(
             argumentTypes: List<KotlinType>,
             hasDeclaredArguments: Boolean
@@ -36,17 +36,17 @@ class FunctionPlaceholders(private val builtIns: KotlinBuiltIns) {
     }
 }
 
-val KotlinType?.isFunctionPlaceholder: Boolean
+konst KotlinType?.isFunctionPlaceholder: Boolean
     get() {
         return this != null && constructor is FunctionPlaceholderTypeConstructor
     }
 
 class FunctionPlaceholderTypeConstructor(
-        val argumentTypes: List<KotlinType>,
-        val hasDeclaredArguments: Boolean,
-        private val kotlinBuiltIns: KotlinBuiltIns
+        konst argumentTypes: List<KotlinType>,
+        konst hasDeclaredArguments: Boolean,
+        private konst kotlinBuiltIns: KotlinBuiltIns
 ) : TypeConstructor {
-    private val errorTypeConstructor: TypeConstructor =
+    private konst errorTypeConstructor: TypeConstructor =
         ErrorUtils.createErrorTypeConstructor(ErrorTypeKind.FUNCTION_PLACEHOLDER_TYPE, argumentTypes.toString())
 
     override fun getParameters(): List<TypeParameterDescriptor> {

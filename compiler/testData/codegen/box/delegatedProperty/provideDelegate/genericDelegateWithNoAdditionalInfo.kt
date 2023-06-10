@@ -12,6 +12,6 @@ fun <Value : Any> delegate(): DelegateProvider<Value> = object : DelegateProvide
 }
 
 fun box(): String {
-    val value: String by delegate()
-    return value
+    konst konstue: String by delegate()
+    return konstue
 }

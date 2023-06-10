@@ -48,7 +48,7 @@ class WasmNameSuggestion : NameSuggestion()
  * [NameSuggestion] supports caching.
  */
 open class NameSuggestion {
-    private val cache: MutableMap<DeclarationDescriptor, SuggestedName?> = Collections.synchronizedMap(WeakHashMap())
+    private konst cache: MutableMap<DeclarationDescriptor, SuggestedName?> = Collections.synchronizedMap(WeakHashMap())
 
     /**
      * Generates names for declarations. Name consists of the following parts:
@@ -122,7 +122,7 @@ open class NameSuggestion {
             // Local functions and variables are always private with their own names as suggested names
             is CallableDescriptor ->
                 if (DescriptorUtils.isDescriptorWithLocalVisibility(descriptor)) {
-                    val ownName = getNameForAnnotatedObject(descriptor, bindingContext) ?: getSuggestedName(descriptor)
+                    konst ownName = getNameForAnnotatedObject(descriptor, bindingContext) ?: getSuggestedName(descriptor)
                     var name = ownName
                     var scope = descriptor.containingDeclaration
 
@@ -169,17 +169,17 @@ open class NameSuggestion {
         // The exception are secondary constructors which get suggested name with '_init' suffix and are put in
         // the class's parent scope.
         //
-        val parts = mutableListOf<String>()
+        konst parts = mutableListOf<String>()
 
         // For some strange reason we get FAKE_OVERRIDE for final functions called via subtype's receiver
         var current: DeclarationDescriptor = descriptor
         if (current is CallableMemberDescriptor && current.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
-            val overridden = getOverridden(current) as CallableMemberDescriptor
+            konst overridden = getOverridden(current) as CallableMemberDescriptor
             if (!overridden.isOverridableOrOverrides) {
                 current = overridden
             }
         }
-        val fixedDescriptor = current
+        konst fixedDescriptor = current
 
         parts += if (fixedDescriptor is ConstructorDescriptor) {
             current = current.containingDeclaration!!
@@ -189,7 +189,7 @@ open class NameSuggestion {
             getSuggestedName(fixedDescriptor)
         }
         if (current.containingDeclaration is FunctionDescriptor && current !is TypeParameterDescriptor) {
-            val outerFunctionName = suggest(current.containingDeclaration as FunctionDescriptor, bindingContext)!!
+            konst outerFunctionName = suggest(current.containingDeclaration as FunctionDescriptor, bindingContext)!!
             parts += outerFunctionName.names.single()
             current = outerFunctionName.scope
         }
@@ -204,8 +204,8 @@ open class NameSuggestion {
         }
 
         parts.reverse()
-        val unmangledName = parts.joinToString("$")
-        val (id, stable) = mangleNameIfNecessary(unmangledName, fixedDescriptor, bindingContext)
+        konst unmangledName = parts.joinToString("$")
+        konst (id, stable) = mangleNameIfNecessary(unmangledName, fixedDescriptor, bindingContext)
         return SuggestedName(listOf(id), stable, fixedDescriptor, current)
     }
 
@@ -213,7 +213,7 @@ open class NameSuggestion {
     // For property accessors suggest name of a property with 'get_' and 'set_' prefixes
     // For anonymous declarations (i.e. lambdas and object expressions) suggest 'f'
     private fun getSuggestedName(descriptor: DeclarationDescriptor): String {
-        val name = descriptor.name
+        konst name = descriptor.name
         return if (name.isSpecial) {
             when (descriptor) {
                 is PropertyGetterDescriptor -> "get_" + getSuggestedName(descriptor.correspondingProperty)
@@ -232,7 +232,7 @@ open class NameSuggestion {
             // Traverse to the topmost overridden method.
             // It does not matter which path to choose during traversal, since front-end must ensure
             // that names required by different overridden method do no differ.
-            val overriddenDescriptor = if (descriptor is CallableDescriptor) {
+            konst overriddenDescriptor = if (descriptor is CallableDescriptor) {
                 generateSequence(descriptor) { it.overriddenDescriptors.firstOrNull()?.original }.last()
             }
             else {
@@ -240,7 +240,7 @@ open class NameSuggestion {
             }
 
             // If declaration is marked with either external, @native, @library or @JsName, return its stable name as is.
-            val nativeName = getNameForAnnotatedObject(overriddenDescriptor, bindingContext)
+            konst nativeName = getNameForAnnotatedObject(overriddenDescriptor, bindingContext)
             if (nativeName != null) return NameAndStability(nativeName, true)
 
             if (overriddenDescriptor is FunctionDescriptor) {
@@ -248,9 +248,9 @@ open class NameSuggestion {
                     "kotlin.CharSequence.get" -> return NameAndStability("charCodeAt", true)
                     "kotlin.Any.equals" -> return NameAndStability("equals", true)
                 }
-                val container = overriddenDescriptor.containingDeclaration
+                konst container = overriddenDescriptor.containingDeclaration
                 if (container is ClassDescriptor && ReflectionTypes.isNumberedKPropertyOrKMutablePropertyType(container.defaultType)) {
-                    val name = overriddenDescriptor.name.asString()
+                    konst name = overriddenDescriptor.name.asString()
                     when (name) {
                         "get",
                         "set" -> return NameAndStability(name, true)
@@ -287,9 +287,9 @@ open class NameSuggestion {
             fun mangledInternal() = NameAndStability(getInternalMangledName(baseName, encodeSignature(descriptor)), true)
             fun mangledPrivate() = NameAndStability(getPrivateMangledName(baseName, descriptor), false)
 
-            val effectiveVisibility = descriptor.ownEffectiveVisibility
+            konst effectiveVisibility = descriptor.ownEffectiveVisibility
 
-            val containingDeclaration = descriptor.containingDeclaration
+            konst containingDeclaration = descriptor.containingDeclaration
             return when (containingDeclaration) {
                 is PackageFragmentDescriptor -> when {
                     effectiveVisibility.isPublicAPI -> mangledAndStable()
@@ -299,7 +299,7 @@ open class NameSuggestion {
                     else -> regularAndUnstable()
                 }
                 is ClassDescriptor -> when {
-                    // valueOf() is created in the library with a mangled name for every enum class
+                    // konstueOf() is created in the library with a mangled name for every enum class
                     descriptor is FunctionDescriptor && descriptor.isEnumValueOfMethod() -> mangledAndStable()
 
                     // Make all public declarations stable
@@ -329,10 +329,10 @@ open class NameSuggestion {
             }
         }
 
-        data class NameAndStability(val name: String, val stable: Boolean)
+        data class NameAndStability(konst name: String, konst stable: Boolean)
 
         @JvmStatic fun getPrivateMangledName(baseName: String, descriptor: CallableDescriptor): String {
-            val ownerName = descriptor.containingDeclaration.fqNameUnsafe.asString()
+            konst ownerName = descriptor.containingDeclaration.fqNameUnsafe.asString()
 
             // Base name presents here since name part gets sanitized, so we have to produce different suffixes to distinguish
             // between, say `.` and `;`.
@@ -340,27 +340,27 @@ open class NameSuggestion {
         }
 
         fun getInternalMangledName(suggestedName: String, forCalculateId: String): String {
-            val suffix = "_${mangledId("internal:" + forCalculateId)}\$"
+            konst suffix = "_${mangledId("internal:" + forCalculateId)}\$"
             return suggestedName + suffix
         }
 
         @JvmStatic fun getStableMangledName(suggestedName: String, forCalculateId: String): String {
-            val suffix = if (forCalculateId.isEmpty()) "" else "_${mangledId(forCalculateId)}\$"
+            konst suffix = if (forCalculateId.isEmpty()) "" else "_${mangledId(forCalculateId)}\$"
             return suggestedName + suffix
         }
 
         private fun mangledId(forCalculateId: String): String {
-            val absHashCode = abs(forCalculateId.hashCode())
+            konst absHashCode = abs(forCalculateId.hashCode())
             return if (absHashCode != 0) absHashCode.toString(Character.MAX_RADIX) else ""
         }
 
-        private val DeclarationDescriptorWithVisibility.ownEffectiveVisibility: DescriptorVisibility
+        private konst DeclarationDescriptorWithVisibility.ownEffectiveVisibility: DescriptorVisibility
             get() = visibility.effectiveVisibility(this, checkPublishedApi = true).toDescriptorVisibility()
 
         @JvmStatic fun sanitizeName(name: String): String {
             if (name.isEmpty()) return "_"
 
-            val first = name.first().let { if (it.isES5IdentifierStart()) it else '_' }
+            konst first = name.first().let { if (it.isES5IdentifierStart()) it else '_' }
             return first.toString() + name.drop(1).map { if (it.isES5IdentifierPart()) it else '_' }.joinToString("")
         }
     }

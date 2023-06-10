@@ -1,13 +1,13 @@
 enum class X {
     B {
-        override val value = "OK"
+        override konst konstue = "OK"
 
-        override val test = ::value.get()
+        override konst test = ::konstue.get()
     };
 
-    abstract val value: String
+    abstract konst konstue: String
 
-    abstract val test: String
+    abstract konst test: String
 }
 
 fun box() = X.B.test

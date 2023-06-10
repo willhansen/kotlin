@@ -31,10 +31,10 @@ fun foo() {
     x[0] = bar()
     x[0] = ""
 
-    val b1: MutableList<String?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
-    val b2: MutableList<String> = x
-    val b3: List<String?> = x
+    konst b1: MutableList<String?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b2: MutableList<String> = x
+    konst b3: List<String?> = x
 
-    val b4: Collection<String?> = x
-    val b6: MutableCollection<String?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
+    konst b4: Collection<String?> = x
+    konst b6: MutableCollection<String?> = <!INITIALIZER_TYPE_MISMATCH!>x<!>
 }

@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.fir.withFileAnalysisExceptionWrapping
 class FirBodyResolveProcessor(session: FirSession, scopeSession: ScopeSession) : FirTransformerBasedResolveProcessor(
     session, scopeSession, FirResolvePhase.BODY_RESOLVE
 ) {
-    override val transformer = FirBodyResolveTransformerAdapter(session, scopeSession)
+    override konst transformer = FirBodyResolveTransformerAdapter(session, scopeSession)
 }
 
 @AdapterForResolveProcessor
 class FirBodyResolveTransformerAdapter(session: FirSession, scopeSession: ScopeSession) : FirTransformer<Any?>() {
-    private val transformer = FirBodyResolveTransformer(
+    private konst transformer = FirBodyResolveTransformer(
         session,
         phase = FirResolvePhase.BODY_RESOLVE,
         implicitTypeOnly = false,

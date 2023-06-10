@@ -5,7 +5,7 @@
 // IGNORE_BACKEND: JS_IR_ES6
 // IGNORE_BACKEND: NATIVE
 // IGNORE_BACKEND_K2: JVM_IR
-// FIR status: validation failed. TODO decide if we want to fix KT-42020 for FIR as well
+// FIR status: konstidation failed. TODO decide if we want to fix KT-42020 for FIR as well
 // MODULE: lib
 // FILE: lib.kt
 
@@ -21,7 +21,7 @@ class Derived : Base<String>()
 // FILE: main.kt
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     if (d.foo(p1 = "42") != "p1:42") return "FAIL1"
     if (d.foo(p2 = "24") != "p2:24") return "FAIL2"
 

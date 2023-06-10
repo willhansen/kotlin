@@ -1,15 +1,15 @@
 // !DIAGNOSTICS: -UNUSED_VARIABLE
 
-class Outer<T> (val v: T) {
-    val prop: Any?
+class Outer<T> (konst v: T) {
+    konst prop: Any?
 
     init {
-        class Inner(val v: T) {
+        class Inner(konst v: T) {
             override fun toString() = v.toString()
         }
 
-        val value: Inner = Inner(v)
-        prop = value
+        konst konstue: Inner = Inner(v)
+        prop = konstue
     }
 }
 

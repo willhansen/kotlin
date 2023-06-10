@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.js.backend.ast.JsLocation
 import org.jetbrains.kotlin.js.backend.ast.JsName
 import org.jetbrains.kotlin.js.backend.ast.JsScope
 
-val emptyScope: JsScope = object : JsScope("nil") {
+konst emptyScope: JsScope = object : JsScope("nil") {
     override fun doCreateName(ident: String): JsName {
         error("Trying to create name in empty scope")
     }
@@ -27,15 +27,15 @@ val emptyScope: JsScope = object : JsScope("nil") {
 }
 
 class JsGenerationContext(
-    val currentFile: IrFile,
-    val currentFunction: IrFunction?,
-    val staticContext: JsStaticContext,
-    val localNames: LocalNameGenerator? = null,
-    private val nameCache: MutableMap<IrElement, JsName> = hashMapOf(),
-    private val useBareParameterNames: Boolean = false,
+    konst currentFile: IrFile,
+    konst currentFunction: IrFunction?,
+    konst staticContext: JsStaticContext,
+    konst localNames: LocalNameGenerator? = null,
+    private konst nameCache: MutableMap<IrElement, JsName> = hashMapOf(),
+    private konst useBareParameterNames: Boolean = false,
 ) : IrNamer by staticContext {
-    private val startLocationCache = hashMapOf<Int, JsLocation>()
-    private val endLocationCache = hashMapOf<Int, JsLocation>()
+    private konst startLocationCache = hashMapOf<Int, JsLocation>()
+    private konst endLocationCache = hashMapOf<Int, JsLocation>()
 
     fun newFile(file: IrFile, func: IrFunction? = null, localNames: LocalNameGenerator? = null): JsGenerationContext {
         return JsGenerationContext(
@@ -64,7 +64,7 @@ class JsGenerationContext(
             if (useBareParameterNames) {
                 JsName(sanitizeName(declaration.name.asString()), true)
             } else {
-                val name = localNames!!.variableNames.names[declaration]
+                konst name = localNames!!.variableNames.names[declaration]
                     ?: error("Variable name is not found ${declaration.name}")
                 JsName(name, true)
             }
@@ -73,14 +73,14 @@ class JsGenerationContext(
 
     fun getNameForLoop(loop: IrLoop): JsName? {
         return nameCache.getOrPut(loop) {
-            val name = localNames!!.localLoopNames.names[loop] ?: return null
+            konst name = localNames!!.localLoopNames.names[loop] ?: return null
             JsName(name, true)
         }
     }
 
     fun getNameForReturnableBlock(block: IrReturnableBlock): JsName? {
         return nameCache.getOrPut(block) {
-            val name = localNames!!.localReturnableBlockNames.names[block] ?: return null
+            konst name = localNames!!.localReturnableBlockNames.names[block] ?: return null
             JsName(name, true)
         }
     }

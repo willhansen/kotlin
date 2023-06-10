@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.gradle.internal.testing
 
 data class ParsedStackTrace(
-    val message: String?,
-    val stackTrace: List<StackTraceElement>?
+    konst message: String?,
+    konst stackTrace: List<StackTraceElement>?
 )

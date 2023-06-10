@@ -29,19 +29,19 @@ import org.jetbrains.kotlin.utils.SmartList
 import org.jetbrains.kotlin.utils.addToStdlib.compactIfPossible
 
 sealed class NewAbstractResolvedCall<D : CallableDescriptor> : ResolvedCall<D> {
-    abstract val argumentMappingByOriginal: Map<ValueParameterDescriptor, ResolvedCallArgument>
-    abstract val kotlinCall: KotlinCall?
-    abstract val languageVersionSettings: LanguageVersionSettings
-    abstract val resolvedCallAtom: ResolvedCallAtom?
-    abstract val psiKotlinCall: PSIKotlinCall
-    abstract val typeApproximator: TypeApproximator
-    abstract val freshSubstitutor: FreshVariableNewTypeSubstitutor?
-    abstract val diagnostics: Collection<KotlinCallDiagnostic>
+    abstract konst argumentMappingByOriginal: Map<ValueParameterDescriptor, ResolvedCallArgument>
+    abstract konst kotlinCall: KotlinCall?
+    abstract konst languageVersionSettings: LanguageVersionSettings
+    abstract konst resolvedCallAtom: ResolvedCallAtom?
+    abstract konst psiKotlinCall: PSIKotlinCall
+    abstract konst typeApproximator: TypeApproximator
+    abstract konst freshSubstitutor: FreshVariableNewTypeSubstitutor?
+    abstract konst diagnostics: Collection<KotlinCallDiagnostic>
 
-    protected open val positionDependentApproximation = false
+    protected open konst positionDependentApproximation = false
 
     private var argumentToParameterMap: Map<ValueArgument, ArgumentMatchImpl>? = null
-    private var valueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>? = null
+    private var konstueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>? = null
     private var nonTrivialUpdatedResultInfo: DataFlowInfo? = null
     private var isCompleted: Boolean = false
 
@@ -52,26 +52,26 @@ sealed class NewAbstractResolvedCall<D : CallableDescriptor> : ResolvedCall<D> {
     abstract fun setResultingSubstitutor(substitutor: NewTypeSubstitutor?)
     abstract fun argumentToParameterMap(
         resultingDescriptor: CallableDescriptor,
-        valueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>,
+        konstueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>,
     ): Map<ValueArgument, ArgumentMatchImpl>
 
     override fun getCall(): Call = psiKotlinCall.psiCall
 
     override fun getValueArguments(): Map<ValueParameterDescriptor, ResolvedValueArgument> {
-        if (valueArguments == null) {
-            valueArguments = createValueArguments()
+        if (konstueArguments == null) {
+            konstueArguments = createValueArguments()
         }
-        return valueArguments!!
+        return konstueArguments!!
     }
 
     override fun getValueArgumentsByIndex(): List<ResolvedValueArgument>? {
-        val arguments = ArrayList<ResolvedValueArgument?>(candidateDescriptor.valueParameters.size)
-        for (i in 0 until candidateDescriptor.valueParameters.size) {
+        konst arguments = ArrayList<ResolvedValueArgument?>(candidateDescriptor.konstueParameters.size)
+        for (i in 0 until candidateDescriptor.konstueParameters.size) {
             arguments.add(null)
         }
 
-        for ((parameterDescriptor, value) in getValueArguments()) {
-            val oldValue = arguments.set(parameterDescriptor.index, value)
+        for ((parameterDescriptor, konstue) in getValueArguments()) {
+            konst oldValue = arguments.set(parameterDescriptor.index, konstue)
             if (oldValue != null) {
                 return null
             }
@@ -83,27 +83,27 @@ sealed class NewAbstractResolvedCall<D : CallableDescriptor> : ResolvedCall<D> {
         return arguments as List<ResolvedValueArgument>
     }
 
-    override fun getArgumentMapping(valueArgument: ValueArgument): ArgumentMapping {
+    override fun getArgumentMapping(konstueArgument: ValueArgument): ArgumentMapping {
         if (argumentToParameterMap == null) {
             updateArgumentsMapping(argumentToParameterMap(resultingDescriptor, getValueArguments()))
         }
-        return argumentToParameterMap!![valueArgument] ?: ArgumentUnmapped
+        return argumentToParameterMap!![konstueArgument] ?: ArgumentUnmapped
     }
 
     override fun getDataFlowInfoForArguments() = object : DataFlowInfoForArguments {
         override fun getResultInfo(): DataFlowInfo = nonTrivialUpdatedResultInfo ?: psiKotlinCall.resultDataFlowInfo
 
-        override fun getInfo(valueArgument: ValueArgument): DataFlowInfo {
-            val externalPsiCallArgument = kotlinCall?.externalArgument?.psiCallArgument
-            if (externalPsiCallArgument?.valueArgument == valueArgument) {
+        override fun getInfo(konstueArgument: ValueArgument): DataFlowInfo {
+            konst externalPsiCallArgument = kotlinCall?.externalArgument?.psiCallArgument
+            if (externalPsiCallArgument?.konstueArgument == konstueArgument) {
                 return externalPsiCallArgument.dataFlowInfoAfterThisArgument
             }
-            return psiKotlinCall.dataFlowInfoForArguments.getInfo(valueArgument)
+            return psiKotlinCall.dataFlowInfoForArguments.getInfo(konstueArgument)
         }
     }
 
     fun updateValueArguments(newValueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>?) {
-        valueArguments = newValueArguments
+        konstueArguments = newValueArguments
     }
 
     fun substituteReceivers(substitutor: NewTypeSubstitutor?) {
@@ -112,12 +112,12 @@ sealed class NewAbstractResolvedCall<D : CallableDescriptor> : ResolvedCall<D> {
             isCompleted = true
 
             dispatchReceiver?.type?.let {
-                val newType = substitutor.safeSubstitute(it.unwrap())
+                konst newType = substitutor.safeSubstitute(it.unwrap())
                 updateDispatchReceiverType(newType)
             }
 
             extensionReceiver?.type?.let {
-                val newType = substitutor.safeSubstitute(it.unwrap())
+                konst newType = substitutor.safeSubstitute(it.unwrap())
                 updateExtensionReceiverType(newType)
             }
         }
@@ -139,9 +139,9 @@ sealed class NewAbstractResolvedCall<D : CallableDescriptor> : ResolvedCall<D> {
     }
 
     protected fun substitutedResultingDescriptor(substitutor: NewTypeSubstitutor?) =
-        when (val candidateDescriptor = candidateDescriptor) {
+        when (konst candidateDescriptor = candidateDescriptor) {
             is ClassConstructorDescriptor, is SyntheticMemberDescriptor<*> -> {
-                val explicitTypeArguments = resolvedCallAtom?.atom?.typeArguments?.filterIsInstance<SimpleTypeArgument>() ?: emptyList()
+                konst explicitTypeArguments = resolvedCallAtom?.atom?.typeArguments?.filterIsInstance<SimpleTypeArgument>() ?: emptyList()
 
                 candidateDescriptor.substituteInferredVariablesAndApproximate(
                     getSubstitutorWithoutFlexibleTypes(substitutor, explicitTypeArguments),
@@ -164,10 +164,10 @@ sealed class NewAbstractResolvedCall<D : CallableDescriptor> : ResolvedCall<D> {
         substitutor: NewTypeSubstitutor?,
         shouldApproximate: Boolean = true
     ): CallableDescriptor {
-        val inferredTypeVariablesSubstitutor = substitutor ?: FreshVariableNewTypeSubstitutor.Empty
+        konst inferredTypeVariablesSubstitutor = substitutor ?: FreshVariableNewTypeSubstitutor.Empty
 
-        val freshVariablesSubstituted = freshSubstitutor?.let(::substitute) ?: this
-        val knownTypeParameterSubstituted = resolvedCallAtom?.knownParametersSubstitutor?.let(freshVariablesSubstituted::substitute)
+        konst freshVariablesSubstituted = freshSubstitutor?.let(::substitute) ?: this
+        konst knownTypeParameterSubstituted = resolvedCallAtom?.knownParametersSubstitutor?.let(freshVariablesSubstituted::substitute)
             ?: freshVariablesSubstituted
 
         return knownTypeParameterSubstituted.substituteAndApproximateTypes(
@@ -182,13 +182,13 @@ sealed class NewAbstractResolvedCall<D : CallableDescriptor> : ResolvedCall<D> {
         explicitTypeArguments: List<SimpleTypeArgument>,
     ): NewTypeSubstitutor? {
         if (currentSubstitutor !is NewTypeSubstitutorByConstructorMap || explicitTypeArguments.isEmpty()) return currentSubstitutor
-        if (!currentSubstitutor.map.any { (_, value) -> value.isFlexible() }) return currentSubstitutor
+        if (!currentSubstitutor.map.any { (_, konstue) -> konstue.isFlexible() }) return currentSubstitutor
 
-        val typeVariables = freshSubstitutor?.freshVariables ?: return null
-        val newSubstitutorMap = currentSubstitutor.map.toMutableMap()
+        konst typeVariables = freshSubstitutor?.freshVariables ?: return null
+        konst newSubstitutorMap = currentSubstitutor.map.toMutableMap()
 
         explicitTypeArguments.forEachIndexed { index, typeArgument ->
-            val typeVariableConstructor = typeVariables.getOrNull(index)?.freshTypeConstructor ?: return@forEachIndexed
+            konst typeVariableConstructor = typeVariables.getOrNull(index)?.freshTypeConstructor ?: return@forEachIndexed
 
             newSubstitutorMap[typeVariableConstructor] =
                 newSubstitutorMap[typeVariableConstructor]?.withNullabilityFromExplicitTypeArgument(typeArgument)
@@ -203,33 +203,33 @@ sealed class NewAbstractResolvedCall<D : CallableDescriptor> : ResolvedCall<D> {
 
     private fun createValueArguments(): Map<ValueParameterDescriptor, ResolvedValueArgument> =
         LinkedHashMap<ValueParameterDescriptor, ResolvedValueArgument>().also { result ->
-            val needToUseCorrectExecutionOrderForVarargArguments =
+            konst needToUseCorrectExecutionOrderForVarargArguments =
                 languageVersionSettings.supportsFeature(LanguageFeature.UseCorrectExecutionOrderForVarargArguments)
             var varargMappings: MutableList<Pair<ValueParameterDescriptor, VarargValueArgument>>? = null
             for ((originalParameter, resolvedCallArgument) in argumentMappingByOriginal) {
-                val resultingParameter = resultingDescriptor.valueParameters[originalParameter.index]
+                konst resultingParameter = resultingDescriptor.konstueParameters[originalParameter.index]
 
                 result[resultingParameter] = when (resolvedCallArgument) {
                     ResolvedCallArgument.DefaultArgument ->
                         DefaultValueArgument.DEFAULT
                     is ResolvedCallArgument.SimpleArgument -> {
-                        val valueArgument = resolvedCallArgument.callArgument.psiCallArgument.valueArgument
+                        konst konstueArgument = resolvedCallArgument.callArgument.psiCallArgument.konstueArgument
                         if (resultingParameter.isVararg) {
                             if (needToUseCorrectExecutionOrderForVarargArguments) {
-                                VarargValueArgument().apply { addArgument(valueArgument) }
+                                VarargValueArgument().apply { addArgument(konstueArgument) }
                             } else {
-                                val vararg = VarargValueArgument().apply { addArgument(valueArgument) }
+                                konst vararg = VarargValueArgument().apply { addArgument(konstueArgument) }
                                 if (varargMappings == null) varargMappings = SmartList()
                                 varargMappings.add(resultingParameter to vararg)
                                 continue
                             }
                         } else {
-                            ExpressionValueArgument(valueArgument)
+                            ExpressionValueArgument(konstueArgument)
                         }
                     }
                     is ResolvedCallArgument.VarargArgument ->
                         VarargValueArgument().apply {
-                            resolvedCallArgument.arguments.map { it.psiCallArgument.valueArgument }.forEach { addArgument(it) }
+                            resolvedCallArgument.arguments.map { it.psiCallArgument.konstueArgument }.forEach { addArgument(it) }
                         }
                 }
             }

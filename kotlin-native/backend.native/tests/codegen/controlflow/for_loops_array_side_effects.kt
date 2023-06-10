@@ -8,9 +8,9 @@ private fun <T> sideEffect(array: T): T {
 }
 
 @Test fun runTest() {
-    val intArray = intArrayOf(4, 0, 3, 5)
+    konst intArray = intArrayOf(4, 0, 3, 5)
 
-    val emptyArray = arrayOf<Any>()
+    konst emptyArray = arrayOf<Any>()
 
     for (element in sideEffect(intArray)) {
         print(element)

@@ -18,15 +18,15 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.Variance
 
 class IrTypeParameterImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrTypeParameterSymbol,
+    override konst symbol: IrTypeParameterSymbol,
     override var name: Name,
     override var index: Int,
     override var isReified: Boolean,
     override var variance: Variance,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrTypeParameter() {
     init {
         symbol.bind(this)
@@ -36,7 +36,7 @@ class IrTypeParameterImpl(
     override var annotations: List<IrConstructorCall> = emptyList()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: TypeParameterDescriptor
+    override konst descriptor: TypeParameterDescriptor
         get() = symbol.descriptor
 
     override var superTypes: List<IrType> = emptyList()

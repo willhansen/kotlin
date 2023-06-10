@@ -20,7 +20,7 @@ import java.util.*
  *
  * Header row: "ID, Extension Receiver, Parameter Names, Parameter Types, Declaration Type, common, <platform1>, <platform2> [<platformN>...]"
  *
- * Possible values for "Declaration Type":
+ * Possible konstues for "Declaration Type":
  * - MODULE
  * - CLASS
  * - INTERFACE
@@ -33,12 +33,12 @@ import java.util.*
  * - FUN
  * - VAL
  *
- * Possible values for "common" column:
+ * Possible konstues for "common" column:
  * - L = declaration lifted up to common fragment
  * - E = successfully commonized, expect declaration generated
  * - "-" = no common declaration
  *
- * Possible values for each target platform column:
+ * Possible konstues for each target platform column:
  * - A = successfully commonized, actual declaration generated
  * - O = not commonized, the declaration is as in the original library
  * - "-" = no such declaration in the original library (or declaration has been lifted up)
@@ -55,21 +55,21 @@ platform/SystemConfiguration/SCDynamicStoreRefVar||||TYPE_ALIAS|-|O|O
 platform/SystemConfiguration/SCVLANInterfaceRef||||TYPE_ALIAS|-|O|O
 
  */
-class RawStatsCollector(private val targets: List<CommonizerTarget>) : StatsCollector {
-    private inline val dimension get() = targets.size + 1
-    private inline val targetNames get() = targets.map { it.identityString }
+class RawStatsCollector(private konst targets: List<CommonizerTarget>) : StatsCollector {
+    private inline konst dimension get() = targets.size + 1
+    private inline konst targetNames get() = targets.map { it.identityString }
 
-    private inline val indexOfCommon get() = targets.size
-    private inline val platformDeclarationsCount get() = targets.size
+    private inline konst indexOfCommon get() = targets.size
+    private inline konst platformDeclarationsCount get() = targets.size
 
-    private val stats = FactoryMap.create<StatsKey, StatsValue> { StatsValue(dimension) }
+    private konst stats = FactoryMap.create<StatsKey, StatsValue> { StatsValue(dimension) }
 
     override fun logDeclaration(targetIndex: Int, lazyStatsKey: () -> StatsKey) {
         stats.getValue(lazyStatsKey())[targetIndex] = true
     }
 
     override fun writeTo(statsOutput: StatsOutput) {
-        val mergedStats = stats.filterTo(mutableMapOf()) { (statsKey, _) ->
+        konst mergedStats = stats.filterTo(mutableMapOf()) { (statsKey, _) ->
             when (statsKey.declarationType) {
                 DeclarationType.TOP_LEVEL_CLASS, DeclarationType.TOP_LEVEL_INTERFACE -> false
                 else -> true
@@ -80,8 +80,8 @@ class RawStatsCollector(private val targets: List<CommonizerTarget>) : StatsColl
             when (statsKey.declarationType) {
                 DeclarationType.TOP_LEVEL_CLASS, DeclarationType.TOP_LEVEL_INTERFACE -> {
                     if (statsValue[indexOfCommon]) {
-                        val alternativeKey = statsKey.copy(declarationType = DeclarationType.TYPE_ALIAS)
-                        val alternativeValue = mergedStats[alternativeKey]
+                        konst alternativeKey = statsKey.copy(declarationType = DeclarationType.TYPE_ALIAS)
+                        konst alternativeValue = mergedStats[alternativeKey]
                         if (alternativeValue != null && !alternativeValue[indexOfCommon]) {
                             alternativeValue[indexOfCommon] = true
                             return@forEach
@@ -98,10 +98,10 @@ class RawStatsCollector(private val targets: List<CommonizerTarget>) : StatsColl
             statsOutput.writeHeader(RawStatsHeader(targetNames))
 
             mergedStats.forEach { (statsKey, statsValue) ->
-                val commonIsMissing = !statsValue[indexOfCommon]
+                konst commonIsMissing = !statsValue[indexOfCommon]
 
                 var isLiftedUp = !commonIsMissing
-                val platform = ArrayList<PlatformDeclarationStatus>(platformDeclarationsCount)
+                konst platform = ArrayList<PlatformDeclarationStatus>(platformDeclarationsCount)
 
                 for (index in 0 until platformDeclarationsCount) {
                     platform += when {
@@ -114,7 +114,7 @@ class RawStatsCollector(private val targets: List<CommonizerTarget>) : StatsColl
                     }
                 }
 
-                val common = when {
+                konst common = when {
                     isLiftedUp -> CommonDeclarationStatus.LIFTED_UP
                     commonIsMissing -> CommonDeclarationStatus.MISSING
                     else -> CommonDeclarationStatus.EXPECT
@@ -125,18 +125,18 @@ class RawStatsCollector(private val targets: List<CommonizerTarget>) : StatsColl
         }
     }
 
-    class RawStatsHeader(private val targetNames: List<String>) : StatsHeader {
+    class RawStatsHeader(private konst targetNames: List<String>) : StatsHeader {
         override fun toList() =
             listOf("ID", "Extension Receiver", "Parameter Names", "Parameter Types", "Declaration Type", "common") + targetNames
     }
 
     class RawStatsRow(
-        val statsKey: StatsKey,
-        val common: CommonDeclarationStatus,
-        val platform: List<PlatformDeclarationStatus>
+        konst statsKey: StatsKey,
+        konst common: CommonDeclarationStatus,
+        konst platform: List<PlatformDeclarationStatus>
     ) : StatsRow {
         override fun toList(): List<String> {
-            val result = mutableListOf(
+            konst result = mutableListOf(
                 statsKey.id,
                 statsKey.extensionReceiver.orEmpty(),
                 statsKey.parameterNames.joinToString(),
@@ -151,13 +151,13 @@ class RawStatsCollector(private val targets: List<CommonizerTarget>) : StatsColl
         }
     }
 
-    enum class CommonDeclarationStatus(val alias: Char) {
+    enum class CommonDeclarationStatus(konst alias: Char) {
         LIFTED_UP('L'),
         EXPECT('E'),
         MISSING('-')
     }
 
-    enum class PlatformDeclarationStatus(val alias: Char) {
+    enum class PlatformDeclarationStatus(konst alias: Char) {
         ACTUAL('A'),
         ORIGINAL('O'),
         MISSING('-')

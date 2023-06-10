@@ -17,8 +17,8 @@ package org.jetbrains.kotlin.utils
  * implementation of Kahn's algorithm might order `A` before `B`.
  */
 fun <A> topologicalSort(nodes: Iterable<A>, dependencies: A.() -> Iterable<A>): List<A> {
-    val visiting = mutableSetOf<A>()
-    val visited = mutableSetOf<A>()
+    konst visiting = mutableSetOf<A>()
+    konst visited = mutableSetOf<A>()
 
     fun visit(node: A) {
         if (node in visited) return

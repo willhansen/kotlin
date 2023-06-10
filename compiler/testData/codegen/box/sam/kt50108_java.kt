@@ -4,7 +4,7 @@ fun interface IFoo {
     fun foo(s: String)
 }
 
-val foo = IFoo {}
+konst foo = IFoo {}
 
 fun box(): String {
     try {

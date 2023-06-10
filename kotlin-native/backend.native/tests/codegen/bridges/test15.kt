@@ -27,11 +27,11 @@ fun <T> foo(a: A<T>) {
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
 
     foo(b)
     if (b.size != 42) return "fail 1"
-    val d = D()
+    konst d = D()
     if (d.size != 117) return "fail 2"
     foo(d)
     if (d.size != 42) return "fail 3"

@@ -43,7 +43,7 @@ interface SourceNavigator {
 
     companion object {
 
-        private val lightTreeInstance = LightTreeSourceNavigator()
+        private konst lightTreeInstance = LightTreeSourceNavigator()
 
         fun forElement(e: FirElement): SourceNavigator = forSource(e.source)
 
@@ -69,7 +69,7 @@ open class LightTreeSourceNavigator : SourceNavigator {
     } ?: false
 
     override fun FirTypeRef.isInTypeConstraint(): Boolean {
-        val source = source ?: return false
+        konst source = source ?: return false
         return source.treeStructure.getAncestors(source.lighterASTNode)
             .find { it.tokenType == KtNodeTypes.TYPE_CONSTRAINT || it.tokenType == KtNodeTypes.TYPE_PARAMETER }
             ?.tokenType == KtNodeTypes.TYPE_CONSTRAINT
@@ -92,20 +92,20 @@ open class LightTreeSourceNavigator : SourceNavigator {
     }
 
     override fun FirTypeRef.isRedundantNullable(): Boolean {
-        val source = source ?: return false
-        val ref = Ref<Array<LighterASTNode?>>()
-        val firstChild = getNullableChild(source, source.lighterASTNode, ref) ?: return false
+        konst source = source ?: return false
+        konst ref = Ref<Array<LighterASTNode?>>()
+        konst firstChild = getNullableChild(source, source.lighterASTNode, ref) ?: return false
         return getNullableChild(source, firstChild, ref) != null
     }
 
     private fun getNullableChild(source: KtSourceElement, node: LighterASTNode, ref: Ref<Array<LighterASTNode?>>): LighterASTNode? {
         source.treeStructure.getChildren(node, ref)
-        val firstChild = ref.get().firstOrNull() ?: return null
+        konst firstChild = ref.get().firstOrNull() ?: return null
         return if (firstChild.tokenType != KtNodeTypes.NULLABLE_TYPE) null else firstChild
     }
 
     private fun KtSourceElement?.getParentOfParent(): LighterASTNode? {
-        val source = this ?: return null
+        konst source = this ?: return null
         var parent = source.treeStructure.getParent(source.lighterASTNode)
         parent?.let { parent = source.treeStructure.getParent(it) }
         return parent
@@ -119,14 +119,14 @@ object PsiSourceNavigator : LightTreeSourceNavigator() {
     private inline fun <reified P : PsiElement> FirElement.psi(): P? = source?.psi()
 
     private inline fun <reified P : PsiElement> KtSourceElement.psi(): P? {
-        val psi = (this as? KtPsiSourceElement)?.psi
+        konst psi = (this as? KtPsiSourceElement)?.psi
         return psi as? P
     }
 
     override fun FirTypeRef.isInConstructorCallee(): Boolean = psi<KtTypeReference>()?.parent is KtConstructorCalleeExpression
 
     override fun KtSourceElement.getRawIdentifier(): CharSequence? {
-        val psi = psi<PsiElement>()
+        konst psi = psi<PsiElement>()
         return if (psi is KtNameReferenceExpression) {
             psi.getReferencedNameElement().node.chars
         } else if (psi is KtTypeProjection) {
@@ -147,9 +147,9 @@ object PsiSourceNavigator : LightTreeSourceNavigator() {
     }
 
     override fun FirTypeRef.isRedundantNullable(): Boolean {
-        val source = source ?: return false
-        val typeReference = (source.psi as? KtTypeReference) ?: return false
-        val typeElement = typeReference.typeElement as? KtNullableType ?: return false
+        konst source = source ?: return false
+        konst typeReference = (source.psi as? KtTypeReference) ?: return false
+        konst typeElement = typeReference.typeElement as? KtNullableType ?: return false
         return typeElement.innerType is KtNullableType
     }
 }

@@ -19,12 +19,12 @@ package org.jetbrains.kotlin.diagnostics
 import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticRenderer
 
 class RenderedDiagnostic<D : Diagnostic>(
-    val diagnostic: D,
-    val renderer: DiagnosticRenderer<D>
+    konst diagnostic: D,
+    konst renderer: DiagnosticRenderer<D>
 ) {
-    val text = renderer.render(diagnostic)
+    konst text = renderer.render(diagnostic)
 
-    val factory: DiagnosticFactory<*> get() = diagnostic.factory
+    konst factory: DiagnosticFactory<*> get() = diagnostic.factory
 
     override fun toString() = text
 }

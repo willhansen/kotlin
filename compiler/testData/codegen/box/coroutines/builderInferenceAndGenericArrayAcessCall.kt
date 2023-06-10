@@ -8,13 +8,13 @@ class FooImpl<T> : Foo<T>
 
 @OptIn(ExperimentalTypeInference::class)
 fun <T> myflow(block: Foo<T>.() -> Unit): Foo<T> {
-    val impl = FooImpl<T>()
+    konst impl = FooImpl<T>()
     impl.block()
     return impl
 }
 
 
-class MapWithPlusOperator<K, V>(val m: MutableMap<K, V>)
+class MapWithPlusOperator<K, V>(konst m: MutableMap<K, V>)
 
 operator fun <K, V> MapWithPlusOperator<in K, in V>.plus(pair: Pair<K, V>): MapWithPlusOperator<K, V> {
     m[pair.first] = pair.second

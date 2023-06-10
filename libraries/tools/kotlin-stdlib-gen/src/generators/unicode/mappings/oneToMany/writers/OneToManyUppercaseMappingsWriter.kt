@@ -10,7 +10,7 @@ import generators.unicode.toHexCharLiteral
 import generators.unicode.writeMappings
 import java.io.FileWriter
 
-internal class OneToManyUppercaseMappingsWriter(private val strategy: RangesWritingStrategy) : OneToManyMappingsWriter {
+internal class OneToManyUppercaseMappingsWriter(private konst strategy: RangesWritingStrategy) : OneToManyMappingsWriter {
     override fun write(mappings: Map<Int, List<String>>, writer: FileWriter) {
         strategy.beforeWritingRanges(writer)
         writer.writeMappings(mappings, strategy)
@@ -27,10 +27,10 @@ internal class OneToManyUppercaseMappingsWriter(private val strategy: RangesWrit
                 return null
             }
 
-            val code = this.code
-            val index = binarySearchRange(keys, code)
+            konst code = this.code
+            konst index = binarySearchRange(keys, code)
             if (keys[index] == code) {
-                return values[index]
+                return konstues[index]
             }
             return null
         }

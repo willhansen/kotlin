@@ -5,10 +5,10 @@ import java.io.File
 import java.net.URL
 
 data class BinaryenEnv(
-    val cleanableStore: CleanableStore,
-    val zipPath: File,
-    val targetPath: File,
-    val executablePath: File,
-    val isWindows: Boolean,
-    val downloadUrl: URL
+    konst cleanableStore: CleanableStore,
+    konst zipPath: File,
+    konst targetPath: File,
+    konst executablePath: File,
+    konst isWindows: Boolean,
+    konst downloadUrl: URL
 )

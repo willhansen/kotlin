@@ -34,18 +34,18 @@ import kotlin.script.experimental.host.configurationDependencies
 import kotlin.script.experimental.jvm.JvmDependency
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 
-const val KOTLIN_REPL_JVM_TARGET_PROPERTY = "kotlin.repl.jvm.target"
+const konst KOTLIN_REPL_JVM_TARGET_PROPERTY = "kotlin.repl.jvm.target"
 
 open class GenericReplChecker(
     disposable: Disposable,
-    private val scriptDefinition: KotlinScriptDefinition,
-    private val compilerConfiguration: CompilerConfiguration,
+    private konst scriptDefinition: KotlinScriptDefinition,
+    private konst compilerConfiguration: CompilerConfiguration,
     messageCollector: MessageCollector
 ) : ReplCheckAction {
 
-    internal val environment = run {
+    internal konst environment = run {
         compilerConfiguration.apply {
-            val hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
+            konst hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
                 configurationDependencies(JvmDependency(jvmClasspathRoots))
             }
             add(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS, ScriptDefinition.FromLegacy(hostConfiguration, scriptDefinition))
@@ -62,15 +62,15 @@ open class GenericReplChecker(
         KotlinCoreEnvironment.createForProduction(disposable, compilerConfiguration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
     }
 
-    private val psiFileFactory: PsiFileFactoryImpl = PsiFileFactory.getInstance(environment.project) as PsiFileFactoryImpl
+    private konst psiFileFactory: PsiFileFactoryImpl = PsiFileFactory.getInstance(environment.project) as PsiFileFactoryImpl
 
     private fun createDiagnosticHolder() = ConsoleDiagnosticMessageHolder()
 
     override fun check(state: IReplStageState<*>, codeLine: ReplCodeLine): ReplCheckResult {
         state.lock.write {
-            val checkerState = state.asState(GenericReplCheckerState::class.java)
-            val scriptFileName = makeScriptBaseName(codeLine)
-            val virtualFile =
+            konst checkerState = state.asState(GenericReplCheckerState::class.java)
+            konst scriptFileName = makeScriptBaseName(codeLine)
+            konst virtualFile =
                 LightVirtualFile(
                     "$scriptFileName${KotlinParserDefinition.STD_SCRIPT_EXT}",
                     KotlinLanguage.INSTANCE,
@@ -78,12 +78,12 @@ open class GenericReplChecker(
                 ).apply {
                     charset = StandardCharsets.UTF_8
                 }
-            val psiFile: KtFile = psiFileFactory.trySetupPsiForFile(virtualFile, KotlinLanguage.INSTANCE, true, false) as KtFile?
+            konst psiFile: KtFile = psiFileFactory.trySetupPsiForFile(virtualFile, KotlinLanguage.INSTANCE, true, false) as KtFile?
                 ?: error("Script file not analyzed at line ${codeLine.no}: ${codeLine.code}")
 
-            val errorHolder = createDiagnosticHolder()
+            konst errorHolder = createDiagnosticHolder()
 
-            val syntaxErrorReport = AnalyzerWithCompilerReport.reportSyntaxErrors(psiFile, errorHolder)
+            konst syntaxErrorReport = AnalyzerWithCompilerReport.reportSyntaxErrors(psiFile, errorHolder)
 
             if (!syntaxErrorReport.isHasErrors) {
                 checkerState.lastLineState =

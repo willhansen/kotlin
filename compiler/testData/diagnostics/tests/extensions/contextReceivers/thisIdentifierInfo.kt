@@ -1,6 +1,6 @@
 // !LANGUAGE: +ContextReceivers
 
-class A(val a: String?)
+class A(konst a: String?)
 
 context(A) fun f() {
     if (this@A.a == null) return

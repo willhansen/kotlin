@@ -36,17 +36,17 @@ object TypeConversions {
         candidateParameter: ParameterDescriptor,
         candidateExpectedType: UnwrappedType,
     ): ConversionData {
-        val samConversionData = performConversionBeforeSubtyping(
+        konst samConversionData = performConversionBeforeSubtyping(
             candidate, argument, candidateParameter, candidateExpectedType, SamTypeConversions
         )
 
-        val suspendConversionData = performConversionBeforeSubtyping(
+        konst suspendConversionData = performConversionBeforeSubtyping(
             candidate, argument, candidateParameter,
             candidateExpectedType = samConversionData.convertedType ?: candidateExpectedType,
             SuspendTypeConversions
         )
 
-        val unitConversionData = performConversionBeforeSubtyping(
+        konst unitConversionData = performConversionBeforeSubtyping(
             candidate, argument, candidateParameter,
             candidateExpectedType = suspendConversionData.convertedType ?: samConversionData.convertedType ?: candidateExpectedType,
             UnitTypeConversions
@@ -67,17 +67,17 @@ object TypeConversions {
         candidateParameter: ParameterDescriptor,
         candidateExpectedType: UnwrappedType,
     ): UnwrappedType? {
-        val samConvertedType = performConversionAfterSubtyping(
+        konst samConvertedType = performConversionAfterSubtyping(
             candidate, argument, candidateParameter, candidateExpectedType, SamTypeConversions
         )
 
-        val suspendConvertedType = performConversionAfterSubtyping(
+        konst suspendConvertedType = performConversionAfterSubtyping(
             candidate, argument, candidateParameter,
             candidateExpectedType = samConvertedType ?: candidateExpectedType,
             SuspendTypeConversions
         )
 
-        val unitConvertedType = performConversionAfterSubtyping(
+        konst unitConvertedType = performConversionAfterSubtyping(
             candidate, argument, candidateParameter,
             candidateExpectedType = suspendConvertedType ?: samConvertedType ?: candidateExpectedType,
             UnitTypeConversions
@@ -110,8 +110,8 @@ object TypeConversions {
         candidateExpectedType: UnwrappedType,
         conversion: ParameterTypeConversion
     ): ConversionData {
-        val conversionDefinitelyNotNeeded = conversion.conversionDefinitelyNotNeeded(candidate, argument, candidateExpectedType)
-        val areSuspendOnlySamConversionsSupported =
+        konst conversionDefinitelyNotNeeded = conversion.conversionDefinitelyNotNeeded(candidate, argument, candidateExpectedType)
+        konst areSuspendOnlySamConversionsSupported =
             candidate.callComponents.languageVersionSettings.supportsFeature(LanguageFeature.SuspendOnlySamConversions)
         return if (
             !conversionDefinitelyNotNeeded &&
@@ -127,5 +127,5 @@ object TypeConversions {
         }
     }
 
-    class ConversionData(val convertedType: UnwrappedType?, val wasConversion: Boolean, val conversionDefinitelyNotNeeded: Boolean)
+    class ConversionData(konst convertedType: UnwrappedType?, konst wasConversion: Boolean, konst conversionDefinitelyNotNeeded: Boolean)
 }

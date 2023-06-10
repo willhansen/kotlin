@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
-const val MaxUI = UInt.MAX_VALUE
-const val MinUI = UInt.MIN_VALUE
+const konst MaxUI = UInt.MAX_VALUE
+const konst MinUI = UInt.MIN_VALUE
 
-val M1 = MaxUI.toULong()
-val M2 = M1 + 10UL
+konst M1 = MaxUI.toULong()
+konst M2 = M1 + 10UL
 
 fun box(): String {
     if (0u in 10u downTo 1u) throw AssertionError()

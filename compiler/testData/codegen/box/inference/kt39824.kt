@@ -4,20 +4,20 @@ fun <C : Any> diContext(context: C): DIContext<C> = DIContext(TypeToken(), conte
 fun <C : Any> diContext(getContext: () -> C): DIContext<C> = DIContext<C>(TypeToken()) { getContext() }
 
 interface DIContext<C : Any> {
-    val type: TypeToken<C>
-    val value: C
+    konst type: TypeToken<C>
+    konst konstue: C
 
     fun print() {
-        result += value.toString()
+        result += konstue.toString()
     }
 
-    data class Value<C : Any>(override val type: TypeToken<C>, override val value: C) : DIContext<C>
-    class Lazy<C : Any>(override val type: TypeToken<C>, public val getValue: () -> C) : DIContext<C> {
-        override val value: C by lazy(getValue)
+    data class Value<C : Any>(override konst type: TypeToken<C>, override konst konstue: C) : DIContext<C>
+    class Lazy<C : Any>(override konst type: TypeToken<C>, public konst getValue: () -> C) : DIContext<C> {
+        override konst konstue: C by lazy(getValue)
     }
 
     companion object {
-        operator fun <C : Any> invoke(type: TypeToken<C>, value: C): DIContext<C> = Value(type, value)
+        operator fun <C : Any> invoke(type: TypeToken<C>, konstue: C): DIContext<C> = Value(type, konstue)
         operator fun <C : Any> invoke(type: TypeToken<C>, getValue: () -> C): DIContext<C> = Lazy(type, getValue)
     }
 }

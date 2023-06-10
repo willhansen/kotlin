@@ -7,10 +7,10 @@ import org.jetbrains.kotlin.ideaExt.idea
 
 inline fun Project.sourceSets(crossinline body: SourceSetsBuilder.() -> Unit) = SourceSetsBuilder(this).body()
 
-class SourceSetsBuilder(val project: Project) {
+class SourceSetsBuilder(konst project: Project) {
 
     inline operator fun String.invoke(crossinline body: SourceSet.() -> Unit): SourceSet {
-        val sourceSetName = this
+        konst sourceSetName = this
         return project.sourceSets.maybeCreate(sourceSetName).apply {
             none()
             body()
@@ -23,7 +23,7 @@ fun SourceSet.none() {
     resources.setSrcDirs(emptyList<String>())
 }
 
-val SourceSet.projectDefault: Project.() -> Unit
+konst SourceSet.projectDefault: Project.() -> Unit
     get() = {
         when (this@projectDefault.name) {
             "main" -> {
@@ -37,18 +37,18 @@ val SourceSet.projectDefault: Project.() -> Unit
         }
     }
 
-val SourceSet.generatedDir: Project.() -> Unit
+konst SourceSet.generatedDir: Project.() -> Unit
     get() = {
         generatedDir(this, "gen")
     }
 
-val SourceSet.generatedTestDir: Project.() -> Unit
+konst SourceSet.generatedTestDir: Project.() -> Unit
     get() = {
         generatedDir(this, "tests-gen")
     }
 
 private fun SourceSet.generatedDir(project: Project, dirName: String) {
-    val generationRoot = project.projectDir.resolve(dirName)
+    konst generationRoot = project.projectDir.resolve(dirName)
     java.srcDir(generationRoot.name)
 
     if (project.kotlinBuildProperties.isInJpsBuildIdeaSync) {
@@ -59,17 +59,17 @@ private fun SourceSet.generatedDir(project: Project, dirName: String) {
     }
 }
 
-val Project.sourceSets: SourceSetContainer
+konst Project.sourceSets: SourceSetContainer
     get() = javaPluginExtension().sourceSets
 
-val Project.mainSourceSet: SourceSet
+konst Project.mainSourceSet: SourceSet
     get() = javaPluginExtension().mainSourceSet
 
-val Project.testSourceSet: SourceSet
+konst Project.testSourceSet: SourceSet
     get() = javaPluginExtension().testSourceSet
 
-val JavaPluginExtension.mainSourceSet: SourceSet
+konst JavaPluginExtension.mainSourceSet: SourceSet
     get() = sourceSets.getByName("main")
 
-val JavaPluginExtension.testSourceSet: SourceSet
+konst JavaPluginExtension.testSourceSet: SourceSet
     get() = sourceSets.getByName("test")

@@ -6,8 +6,8 @@ class X {
 
     operator fun get(name: String, type: Int = 100) = name + type
 
-    operator fun set(name: String, defaultParam: String = "_default_", value: String) {
-        result = name + defaultParam + value;
+    operator fun set(name: String, defaultParam: String = "_default_", konstue: String) {
+        result = name + defaultParam + konstue;
     }
 }
 
@@ -16,8 +16,8 @@ class Y {
 
     operator fun get(name: String, type: String = "_default2_", type2: String = "_default1_") = name + type + type2
 
-    operator fun set(name: String, defaultParam: String = "_default_in_setter_", value: String) {
-        result = name + defaultParam + value;
+    operator fun set(name: String, defaultParam: String = "_default_in_setter_", konstue: String) {
+        result = name + defaultParam + konstue;
     }
 }
 

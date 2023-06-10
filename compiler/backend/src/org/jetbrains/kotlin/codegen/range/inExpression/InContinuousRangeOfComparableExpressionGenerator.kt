@@ -27,11 +27,11 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class InContinuousRangeOfComparableExpressionGenerator(
     operatorReference: KtSimpleNameExpression,
-    private val boundedValue: BoundedValue,
-    private val frameMap: FrameMap
+    private konst boundedValue: BoundedValue,
+    private konst frameMap: FrameMap
 ) : InExpressionGenerator {
-    private val isNotIn = operatorReference.getReferencedNameElementType() == KtTokens.NOT_IN
-    private val comparisonGenerator = ObjectComparisonGenerator
+    private konst isNotIn = operatorReference.getReferencedNameElementType() == KtTokens.NOT_IN
+    private konst comparisonGenerator = ObjectComparisonGenerator
 
     override fun generate(argument: StackValue): BranchedValue =
         gen(argument).let { if (isNotIn) Invert(it) else it }
@@ -50,8 +50,8 @@ class InContinuousRangeOfComparableExpressionGenerator(
                 // if (arg is in range) goto jumpLabel
 
                 frameMap.useTmpVar(operandType) { arg1Var ->
-                    val exitLabel1 = Label()
-                    val exitLabel2 = Label()
+                    konst exitLabel1 = Label()
+                    konst exitLabel2 = Label()
 
                     boundedValue.putHighLow(v, operandType)
 
@@ -97,7 +97,7 @@ class InContinuousRangeOfComparableExpressionGenerator(
                 // if (arg is NOT in range) goto jumpLabel
 
                 frameMap.useTmpVar(operandType) { arg1Var ->
-                    val cmpHighLabel = Label()
+                    konst cmpHighLabel = Label()
 
                     boundedValue.putHighLow(v, operandType)
 

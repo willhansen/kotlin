@@ -4,12 +4,12 @@ class B {
     companion <!CONFLICTING_JVM_DECLARATIONS!>object <!REDECLARATION!>A<!><!> {
     }
 
-    <!CONFLICTING_JVM_DECLARATIONS!>val <!REDECLARATION!>A<!>: A<!> = B.A
+    <!CONFLICTING_JVM_DECLARATIONS!>konst <!REDECLARATION!>A<!>: A<!> = B.A
 }
 
 class C {
     companion <!CONFLICTING_JVM_DECLARATIONS!>object A<!> {
-        <!CONFLICTING_JVM_DECLARATIONS!>val A: A<!> = C.A
+        <!CONFLICTING_JVM_DECLARATIONS!>konst A: A<!> = C.A
     }
 }
 

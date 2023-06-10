@@ -9,13 +9,13 @@ interface B : A {
 fun baz(b: B) = b
 
 fun bar1(a: A) {
-    val b = a as B
+    konst b = a as B
     a.foo()
     b.foo()
 }
 
 fun bar2(a: A) {
-    val b = baz(a as B)
+    konst b = baz(a as B)
     a.foo()
     b.foo()
 }

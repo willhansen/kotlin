@@ -15,8 +15,8 @@ interface CirClassConstructor :
     CirMaybeCallableMemberOfClass,
     CirCallableMemberWithParameters {
 
-    val isPrimary: Boolean
-    override val containingClass: CirContainingClass // non-nullable
+    konst isPrimary: Boolean
+    override konst containingClass: CirContainingClass // non-nullable
 
     override fun withContainingClass(containingClass: CirContainingClass): CirClassConstructor
 
@@ -27,7 +27,7 @@ interface CirClassConstructor :
             typeParameters: List<CirTypeParameter>,
             visibility: Visibility,
             containingClass: CirContainingClass,
-            valueParameters: List<CirValueParameter>,
+            konstueParameters: List<CirValueParameter>,
             hasStableParameterNames: Boolean,
             isPrimary: Boolean
         ): CirClassConstructor = CirClassConstructorImpl(
@@ -35,7 +35,7 @@ interface CirClassConstructor :
             typeParameters = typeParameters,
             visibility = visibility,
             containingClass = containingClass,
-            valueParameters = valueParameters,
+            konstueParameters = konstueParameters,
             hasStableParameterNames = hasStableParameterNames,
             isPrimary = isPrimary
         )
@@ -43,13 +43,13 @@ interface CirClassConstructor :
 }
 
 data class CirClassConstructorImpl(
-    override val annotations: List<CirAnnotation>,
-    override val typeParameters: List<CirTypeParameter>,
-    override val visibility: Visibility,
-    override val containingClass: CirContainingClass,
-    override var valueParameters: List<CirValueParameter>,
+    override konst annotations: List<CirAnnotation>,
+    override konst typeParameters: List<CirTypeParameter>,
+    override konst visibility: Visibility,
+    override konst containingClass: CirContainingClass,
+    override var konstueParameters: List<CirValueParameter>,
     override var hasStableParameterNames: Boolean,
-    override val isPrimary: Boolean
+    override konst isPrimary: Boolean
 ) : CirClassConstructor {
     override fun withContainingClass(containingClass: CirContainingClass): CirClassConstructor {
         return copy(containingClass = containingClass)

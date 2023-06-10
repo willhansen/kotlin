@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinBasePluginWrapper
 // Contains common configuration that should be applied to all projects
 
 // Common Group and version
-val kotlinVersion: String by rootProject.extra
+konst kotlinVersion: String by rootProject.extra
 group = "org.jetbrains.kotlin"
 version = kotlinVersion
 
 // Forcing minimal gson dependency version
-val gsonVersion = rootProject.extra["versions.gson"] as String
+konst gsonVersion = rootProject.extra["versions.gson"] as String
 dependencies {
     constraints {
         configurations.all {
@@ -37,14 +37,14 @@ project.configureArtifacts()
 project.configureTests()
 
 // There are problems with common build dir:
-//  - some tests (in particular js and binary-compatibility-validator depend on the fixed (default) location
+//  - some tests (in particular js and binary-compatibility-konstidator depend on the fixed (default) location
 //  - idea seems unable to exclude common buildDir from indexing
 // therefore it is disabled by default
 // buildDir = File(commonBuildDir, project.name)
 
-afterEvaluate {
+afterEkonstuate {
     run configureCompilerClasspath@{
-        val bootstrapCompilerClasspath by rootProject.buildscript.configurations
+        konst bootstrapCompilerClasspath by rootProject.buildscript.configurations
         configurations.findByName("kotlinCompilerClasspath")?.let {
             dependencies.add(it.name, files(bootstrapCompilerClasspath))
         }
@@ -91,7 +91,7 @@ fun Project.configureJavaBasePlugin() {
         fun FileCollection.printClassPath(role: String) =
             println("${project.path} $role classpath:\n  ${joinToString("\n  ") { it.toProjectRootRelativePathOrSelf() }}")
 
-        val javaExtension = javaPluginExtension()
+        konst javaExtension = javaPluginExtension()
         tasks {
             register("printCompileClasspath") { doFirst { javaExtension.sourceSets["main"].compileClasspath.printClassPath("compile") } }
             register("printRuntimeClasspath") { doFirst { javaExtension.sourceSets["main"].runtimeClasspath.printClassPath("runtime") } }
@@ -103,16 +103,16 @@ fun Project.configureJavaBasePlugin() {
 
 fun Project.configureKotlinCompilationOptions() {
     plugins.withType<KotlinBasePluginWrapper> {
-        val commonCompilerArgs = listOfNotNull(
+        konst commonCompilerArgs = listOfNotNull(
             "-opt-in=kotlin.RequiresOptIn",
             "-progressive".takeIf { getBooleanProperty("test.progressive.mode") ?: false }
         )
 
-        val kotlinLanguageVersion: String by rootProject.extra
-        val useJvmFir by extra(project.kotlinBuildProperties.useFir)
-        val useFirLT by extra(project.kotlinBuildProperties.useFirWithLightTree)
-        val useFirIC by extra(project.kotlinBuildProperties.useFirTightIC)
-        val renderDiagnosticNames by extra(project.kotlinBuildProperties.renderDiagnosticNames)
+        konst kotlinLanguageVersion: String by rootProject.extra
+        konst useJvmFir by extra(project.kotlinBuildProperties.useFir)
+        konst useFirLT by extra(project.kotlinBuildProperties.useFirWithLightTree)
+        konst useFirIC by extra(project.kotlinBuildProperties.useFirTightIC)
+        konst renderDiagnosticNames by extra(project.kotlinBuildProperties.renderDiagnosticNames)
 
         @Suppress("DEPRECATION")
         tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
@@ -122,7 +122,7 @@ fun Project.configureKotlinCompilationOptions() {
                 freeCompilerArgs += commonCompilerArgs
             }
 
-            val relativePathBaseArg: String? =
+            konst relativePathBaseArg: String? =
                 "-Xklib-relative-path-base=$buildDir,$projectDir,$rootDir".takeIf {
                     !kotlinBuildProperties.getBoolean("kotlin.build.use.absolute.paths.in.klib")
                 }
@@ -136,13 +136,13 @@ fun Project.configureKotlinCompilationOptions() {
             }
         }
 
-        val jvmCompilerArgs = listOf(
+        konst jvmCompilerArgs = listOf(
             "-Xno-optimized-callable-references",
-            "-Xno-kotlin-nothing-value-exception",
+            "-Xno-kotlin-nothing-konstue-exception",
         )
 
-        val coreLibProjects: List<String> by rootProject.extra
-        val projectsWithDisabledFirBootstrap = coreLibProjects + listOf(
+        konst coreLibProjects: List<String> by rootProject.extra
+        konst projectsWithDisabledFirBootstrap = coreLibProjects + listOf(
             ":kotlin-gradle-plugin",
             ":kotlinx-metadata",
             ":kotlinx-metadata-jvm",
@@ -160,13 +160,13 @@ fun Project.configureKotlinCompilationOptions() {
         )
 
         // TODO: fix remaining warnings and remove this property.
-        val tasksWithWarnings = listOf(
+        konst tasksWithWarnings = listOf(
             ":kotlin-gradle-plugin:compileCommonKotlin",
             ":kotlin-native:build-tools:compileKotlin"
         )
 
-        val projectsWithEnabledContextReceivers: List<String> by rootProject.extra
-        val projectsWithOptInToUnsafeCastFunctionsFromAddToStdLib: List<String> by rootProject.extra
+        konst projectsWithEnabledContextReceivers: List<String> by rootProject.extra
+        konst projectsWithOptInToUnsafeCastFunctionsFromAddToStdLib: List<String> by rootProject.extra
 
         @Suppress("SuspiciousCollectionReassignment", "DEPRECATION")
         tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile>().configureEach {
@@ -237,8 +237,8 @@ fun Project.configureArtifacts() {
     tasks.withType<AbstractArchiveTask>().configureEach {
         isPreserveFileTimestamps = false
         isReproducibleFileOrder = true
-        val `rw-r--r--` = 0b110100100
-        val `rwxr-xr-x` = 0b111101101
+        konst `rw-r--r--` = 0b110100100
+        konst `rwxr-xr-x` = 0b111101101
         fileMode = `rw-r--r--`
         dirMode = `rwxr-xr-x`
         filesMatching("**/bin/*") { mode = `rwxr-xr-x` }
@@ -267,7 +267,7 @@ fun Project.configureArtifacts() {
 }
 
 fun Project.configureTests() {
-    val ignoreTestFailures: Boolean by rootProject.extra
+    konst ignoreTestFailures: Boolean by rootProject.extra
     tasks.configureEach {
         if (this is VerificationTask) {
             ignoreFailures = ignoreTestFailures

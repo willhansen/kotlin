@@ -9,9 +9,9 @@ fun Wise(f: () -> Int) = object: Wise {
 
 class My {
     // Still dangerous (???), nobogy can guarantee what Wise() will do with this lambda
-    val x = Wise { foo() }
+    konst x = Wise { foo() }
 
-    val y = 42
+    konst y = 42
 
     fun foo() = y
 

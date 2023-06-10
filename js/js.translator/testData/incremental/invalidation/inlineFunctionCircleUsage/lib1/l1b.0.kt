@@ -1,5 +1,5 @@
 inline fun funB(): Int {
-    val f = ::funA
+    konst f = ::funA
     if (false) {
         return f(false)
     }

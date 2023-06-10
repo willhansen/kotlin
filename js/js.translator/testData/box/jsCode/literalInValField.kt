@@ -1,10 +1,10 @@
-val p1 = "O"
-val p2 = "K"
-val pp = p1 + p2
+konst p1 = "O"
+konst p2 = "K"
+konst pp = p1 + p2
 
 fun bar(): String {
-    val v = pp
-    val b = js("\"$v\"")
+    konst v = pp
+    konst b = js("\"$v\"")
     return b
 }
 

@@ -1,7 +1,7 @@
 // FILE: Base.kt
 
 interface Base {
-    val x: Int
+    konst x: Int
 }
 
 // FILE: Inheritor.java

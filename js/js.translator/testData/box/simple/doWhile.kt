@@ -3,7 +3,7 @@ package foo
 
 fun box(): String {
 
-    val a = 50;
+    konst a = 50;
     var b = 0;
     var c = 0;
     do {

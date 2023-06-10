@@ -34,14 +34,14 @@ import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 open class ParcelizeDeclarationChecker : DeclarationChecker {
     private companion object {
-        private val IGNORED_ON_PARCEL_FQ_NAMES = listOf(
+        private konst IGNORED_ON_PARCEL_FQ_NAMES = listOf(
             FqName("kotlinx.parcelize.IgnoredOnParcel"),
             FqName("kotlinx.android.parcel.IgnoredOnParcel")
         )
     }
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val trace = context.trace
+        konst trace = context.trace
 
         when (descriptor) {
             is ClassDescriptor -> {
@@ -49,15 +49,15 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
                 checkParcelerClass(descriptor, declaration, trace)
             }
             is SimpleFunctionDescriptor -> {
-                val containingClass = descriptor.containingDeclaration as? ClassDescriptor
-                val ktFunction = declaration as? KtFunction
+                konst containingClass = descriptor.containingDeclaration as? ClassDescriptor
+                konst ktFunction = declaration as? KtFunction
                 if (containingClass != null && ktFunction != null) {
                     checkParcelableClassMethod(descriptor, containingClass, ktFunction, trace)
                 }
             }
             is PropertyDescriptor -> {
-                val containingClass = descriptor.containingDeclaration as? ClassDescriptor
-                val ktProperty = declaration as? KtProperty
+                konst containingClass = descriptor.containingDeclaration as? ClassDescriptor
+                konst ktProperty = declaration as? KtProperty
                 if (containingClass != null && ktProperty != null) {
                     checkParcelableClassProperty(descriptor, containingClass, ktProperty, trace, trace.bindingContext)
                 }
@@ -76,7 +76,7 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
         }
 
         if (method.isWriteToParcel() && declaration.hasModifier(KtTokens.OVERRIDE_KEYWORD)) {
-            val reportElement = declaration.modifierList?.getModifier(KtTokens.OVERRIDE_KEYWORD)
+            konst reportElement = declaration.modifierList?.getModifier(KtTokens.OVERRIDE_KEYWORD)
                 ?: declaration.nameIdentifier
                 ?: declaration
 
@@ -102,15 +102,15 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
             && !hasIgnoredOnParcel()
             && !containingClass.hasCustomParceler()
         ) {
-            val reportElement = declaration.nameIdentifier ?: declaration
+            konst reportElement = declaration.nameIdentifier ?: declaration
             diagnosticHolder.report(ErrorsParcelize.PROPERTY_WONT_BE_SERIALIZED.on(reportElement))
         }
 
         // @JvmName is not applicable to property so we can check just the descriptor name
         if (property.name.asString() == "CREATOR" && property.findJvmFieldAnnotation() != null && containingClass.isCompanionObject) {
-            val outerClass = containingClass.containingDeclaration as? ClassDescriptor
+            konst outerClass = containingClass.containingDeclaration as? ClassDescriptor
             if (outerClass != null && outerClass.isParcelize) {
-                val reportElement = declaration.nameIdentifier ?: declaration
+                konst reportElement = declaration.nameIdentifier ?: declaration
                 diagnosticHolder.report(ErrorsParcelize.CREATOR_DEFINITION_IS_NOT_ALLOWED.on(reportElement))
             }
         }
@@ -127,7 +127,7 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
 
         for (type in descriptor.defaultType.supertypes()) {
             if (type.constructor.declarationDescriptor?.fqNameSafe == OLD_PARCELER_FQN) {
-                val reportElement = declaration.nameIdentifier ?: declaration.getObjectKeyword() ?: declaration
+                konst reportElement = declaration.nameIdentifier ?: declaration.getObjectKeyword() ?: declaration
                 diagnosticHolder.report(ErrorsParcelize.DEPRECATED_PARCELER.on(reportElement))
                 break
             }
@@ -151,45 +151,45 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
         }
 
         if (declaration is KtClass && (declaration.isAnnotation() || declaration.isInterface() && !declaration.isSealed())) {
-            val reportElement = declaration.nameIdentifier ?: declaration
+            konst reportElement = declaration.nameIdentifier ?: declaration
             diagnosticHolder.report(ErrorsParcelize.PARCELABLE_SHOULD_BE_CLASS.on(reportElement))
             return
         }
 
         for (companion in declaration.companionObjects) {
             if (companion.name == "CREATOR") {
-                val reportElement = companion.nameIdentifier ?: companion
+                konst reportElement = companion.nameIdentifier ?: companion
                 diagnosticHolder.report(ErrorsParcelize.CREATOR_DEFINITION_IS_NOT_ALLOWED.on(reportElement))
             }
         }
 
-        val abstractModifier = declaration.modifierList?.let { it.getModifier(KtTokens.ABSTRACT_KEYWORD) }
+        konst abstractModifier = declaration.modifierList?.let { it.getModifier(KtTokens.ABSTRACT_KEYWORD) }
         if (abstractModifier != null) {
             diagnosticHolder.report(ErrorsParcelize.PARCELABLE_SHOULD_BE_INSTANTIABLE.on(abstractModifier))
         }
 
         if (declaration is KtClass && declaration.isInner()) {
-            val reportElement = declaration.modifierList?.getModifier(KtTokens.INNER_KEYWORD) ?: declaration.nameIdentifier ?: declaration
+            konst reportElement = declaration.modifierList?.getModifier(KtTokens.INNER_KEYWORD) ?: declaration.nameIdentifier ?: declaration
             diagnosticHolder.report(ErrorsParcelize.PARCELABLE_CANT_BE_INNER_CLASS.on(reportElement))
         }
 
         if (declaration.isLocal) {
-            val reportElement = declaration.nameIdentifier ?: declaration
+            konst reportElement = declaration.nameIdentifier ?: declaration
             diagnosticHolder.report(ErrorsParcelize.PARCELABLE_CANT_BE_LOCAL_CLASS.on(reportElement))
         }
 
-        val superTypes = TypeUtils.getAllSupertypes(descriptor.defaultType)
+        konst superTypes = TypeUtils.getAllSupertypes(descriptor.defaultType)
         if (superTypes.none { it.constructor.declarationDescriptor?.fqNameSafe == PARCELABLE_FQN }) {
-            val reportElement = declaration.nameIdentifier ?: declaration
+            konst reportElement = declaration.nameIdentifier ?: declaration
             diagnosticHolder.report(ErrorsParcelize.NO_PARCELABLE_SUPERTYPE.on(reportElement))
         }
 
         for (supertypeEntry in declaration.superTypeListEntries) {
             supertypeEntry as? KtDelegatedSuperTypeEntry ?: continue
-            val delegateExpression = supertypeEntry.delegateExpression ?: continue
-            val type = bindingContext[BindingContext.TYPE, supertypeEntry.typeReference] ?: continue
+            konst delegateExpression = supertypeEntry.delegateExpression ?: continue
+            konst type = bindingContext[BindingContext.TYPE, supertypeEntry.typeReference] ?: continue
             if (type.isParcelable()) {
-                val reportElement = supertypeEntry.byKeywordNode?.psi ?: delegateExpression
+                konst reportElement = supertypeEntry.byKeywordNode?.psi ?: delegateExpression
                 diagnosticHolder.report(ErrorsParcelize.PARCELABLE_DELEGATE_IS_NOT_ALLOWED.on(reportElement))
             }
         }
@@ -199,16 +199,16 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
             return
         }
 
-        val primaryConstructor = declaration.primaryConstructor
+        konst primaryConstructor = declaration.primaryConstructor
         if (primaryConstructor == null && declaration.secondaryConstructors.isNotEmpty()) {
-            val reportElement = declaration.nameIdentifier ?: declaration
+            konst reportElement = declaration.nameIdentifier ?: declaration
             diagnosticHolder.report(ErrorsParcelize.PARCELABLE_SHOULD_HAVE_PRIMARY_CONSTRUCTOR.on(reportElement))
-        } else if (primaryConstructor != null && primaryConstructor.valueParameters.isEmpty()) {
-            val reportElement = declaration.nameIdentifier ?: declaration
+        } else if (primaryConstructor != null && primaryConstructor.konstueParameters.isEmpty()) {
+            konst reportElement = declaration.nameIdentifier ?: declaration
             diagnosticHolder.report(ErrorsParcelize.PARCELABLE_PRIMARY_CONSTRUCTOR_IS_EMPTY.on(reportElement))
         }
 
-        val typeMapper = KotlinTypeMapper(
+        konst typeMapper = KotlinTypeMapper(
             bindingContext,
             ClassBuilderMode.FULL,
             descriptor.module.name.asString(),
@@ -216,7 +216,7 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
             useOldInlineClassesManglingScheme = false
         )
 
-        for (parameter in primaryConstructor?.valueParameters.orEmpty<KtParameter>()) {
+        for (parameter in primaryConstructor?.konstueParameters.orEmpty<KtParameter>()) {
             checkParcelableClassProperty(parameter, descriptor, diagnosticHolder, typeMapper)
         }
     }
@@ -228,26 +228,26 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
         typeMapper: KotlinTypeMapper
     ) {
         if (!parameter.hasValOrVar()) {
-            val reportElement = parameter.nameIdentifier ?: parameter
+            konst reportElement = parameter.nameIdentifier ?: parameter
             diagnosticHolder.report(ErrorsParcelize.PARCELABLE_CONSTRUCTOR_PARAMETER_SHOULD_BE_VAL_OR_VAR.on(reportElement))
         }
 
-        val descriptor = typeMapper.bindingContext[BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, parameter] ?: return
+        konst descriptor = typeMapper.bindingContext[BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, parameter] ?: return
 
         // Don't check parameters which won't be serialized
         if (descriptor.annotations.any { it.fqName in IGNORED_ON_PARCEL_FQ_NAMES }) {
             return
         }
 
-        val type = descriptor.type
+        konst type = descriptor.type
         if (!type.isError) {
-            val customParcelerTypes =
+            konst customParcelerTypes =
                 (getTypeParcelers(descriptor.annotations) + getTypeParcelers(containerClass.annotations)).map { (mappedType, _) ->
                     mappedType
                 }.toSet()
 
             if (!checkParcelableType(type, customParcelerTypes)) {
-                val reportElement = parameter.typeReference ?: parameter.nameIdentifier ?: parameter
+                konst reportElement = parameter.typeReference ?: parameter.nameIdentifier ?: parameter
                 diagnosticHolder.report(ErrorsParcelize.PARCELABLE_TYPE_NOT_SUPPORTED.on(reportElement))
             }
         }
@@ -260,15 +260,15 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
             return true
         }
 
-        val upperBound = type.getErasedUpperBound()
-        val descriptor = upperBound.constructor.declarationDescriptor as? ClassDescriptor
+        konst upperBound = type.getErasedUpperBound()
+        konst descriptor = upperBound.constructor.declarationDescriptor as? ClassDescriptor
             ?: return false
 
         if (descriptor.kind.isSingleton || descriptor.kind.isEnumClass) {
             return true
         }
 
-        val fqName = descriptor.fqNameSafe.asString()
+        konst fqName = descriptor.fqNameSafe.asString()
         if (fqName in BuiltinParcelableTypes.PARCELABLE_BASE_TYPE_FQNAMES) {
             return true
         }
@@ -293,7 +293,7 @@ open class ParcelizeDeclarationChecker : DeclarationChecker {
             ?: this
 
     private fun ClassDescriptor.hasCustomParceler(): Boolean {
-        val companionObjectSuperTypes = companionObjectDescriptor?.let { TypeUtils.getAllSupertypes(it.defaultType) } ?: return false
+        konst companionObjectSuperTypes = companionObjectDescriptor?.let { TypeUtils.getAllSupertypes(it.defaultType) } ?: return false
         return companionObjectSuperTypes.any { it.isParceler }
     }
 }

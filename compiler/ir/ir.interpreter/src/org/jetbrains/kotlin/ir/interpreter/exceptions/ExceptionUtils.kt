@@ -12,12 +12,12 @@ internal fun stop(lazyMessage: () -> Any): Nothing {
     throw InterpreterAssertionError(lazyMessage().toString())
 }
 
-internal fun verify(value: Boolean) {
-    verify(value) { "Assertion failed" }
+internal fun verify(konstue: Boolean) {
+    verify(konstue) { "Assertion failed" }
 }
 
-internal inline fun verify(value: Boolean, lazyMessage: () -> Any) {
-    if (!value) throw InterpreterAssertionError(lazyMessage().toString())
+internal inline fun verify(konstue: Boolean, lazyMessage: () -> Any) {
+    if (!konstue) throw InterpreterAssertionError(lazyMessage().toString())
 }
 
 internal inline fun withExceptionHandler(environment: IrInterpreterEnvironment, block: () -> Unit) {
@@ -31,8 +31,8 @@ internal inline fun withExceptionHandler(environment: IrInterpreterEnvironment, 
 }
 
 internal fun Throwable.handleUserException(environment: IrInterpreterEnvironment) {
-    val exceptionName = this::class.java.simpleName
-    val irExceptionClass = environment.irExceptions.firstOrNull { it.name.asString() == exceptionName }
+    konst exceptionName = this::class.java.simpleName
+    konst irExceptionClass = environment.irExceptions.firstOrNull { it.name.asString() == exceptionName }
         ?: environment.irBuiltIns.throwableClass.owner
     environment.callStack.pushState(ExceptionState(this, irExceptionClass, environment.callStack.getStackTrace(), environment))
     environment.callStack.dropFramesUntilTryCatch()

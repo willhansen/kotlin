@@ -26,16 +26,16 @@ import java.util.*
 import java.lang.Boolean as RefBoolean
 
 class AndroidAndJavaConsumeMppLibBuiltByGradle7IT : AndroidAndJavaConsumeMppLibIT() {
-    override val producerAgpVersion: AGPVersion = AGPVersion.v7_0_0
-    override val producerGradleVersion: GradleVersionRequired = GradleVersionRequired.AtLeast(
+    override konst producerAgpVersion: AGPVersion = AGPVersion.v7_0_0
+    override konst producerGradleVersion: GradleVersionRequired = GradleVersionRequired.AtLeast(
         TestVersions.Gradle.G_7_0
     )
 }
 
 @RunWith(Parameterized::class)
 abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
-    abstract val producerAgpVersion: AGPVersion
-    abstract val producerGradleVersion: GradleVersionRequired
+    abstract konst producerAgpVersion: AGPVersion
+    abstract konst producerGradleVersion: GradleVersionRequired
 
     @field:Rule
     @JvmField
@@ -44,7 +44,7 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
     companion object {
         @field:ClassRule
         @JvmField
-        val publishedLibraryCacheDir = TemporaryFolder()
+        konst publishedLibraryCacheDir = TemporaryFolder()
 
         lateinit var publishedLibraryCache: MutableMap<Any, File>
 
@@ -63,11 +63,11 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
         @JvmStatic
         @Parameterized.Parameters(name = "Consumer(AGP={3}, Gradle={4}), flavors={0}, debugOnly={1}, published={2}")
         fun testCases(): List<Array<Any>> {
-            val consumers = listOf(
+            konst consumers = listOf(
                 AGPVersion.v4_2_0 to GradleVersionRequired.Exact(TestVersions.Gradle.G_6_9),
                 AGPVersion.v7_0_0 to GradleVersionRequired.AtLeast(TestVersions.Gradle.G_7_0),
             )
-            val buildParams = listOf(
+            konst buildParams = listOf(
                 /* useFlavors, isAndroidPublishDebugOnly, isPublishedLibrary */
                 arrayOf(false, false, false),
                 arrayOf(false, true, false),
@@ -83,7 +83,7 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
             }
         }
 
-        const val oldKotlinVersion = "1.5.31"
+        const konst oldKotlinVersion = "1.5.31"
     }
 
     @Parameterized.Parameter(0)
@@ -101,9 +101,9 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
     @Parameterized.Parameter(4)
     lateinit var consumerGradleVersion: GradleVersionRequired
 
-    private val isAndroidPublishDebugOnly get() = isAndroidPublishDebugOnlyParameter.booleanValue()
-    private val useFlavors get() = useFlavorsParameter.booleanValue()
-    private val isPublishedLibrary get() = isPublishedLibraryParameter.booleanValue()
+    private konst isAndroidPublishDebugOnly get() = isAndroidPublishDebugOnlyParameter.booleanValue()
+    private konst useFlavors get() = useFlavorsParameter.booleanValue()
+    private konst isPublishedLibrary get() = isPublishedLibraryParameter.booleanValue()
 
     private lateinit var dependencyProject: Project
 
@@ -111,13 +111,13 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
     override fun setUp() {
         super.setUp()
 
-        val jdk11Home = File(System.getProperty("jdk11Home"))
+        konst jdk11Home = File(System.getProperty("jdk11Home"))
         Assume.assumeTrue("This test requires JDK11 for AGP7", jdk11Home.isDirectory)
 
-        val producerBuildOptions: BuildOptions
+        konst producerBuildOptions: BuildOptions
 
         dependencyProject = Project("new-mpp-android", producerGradleVersion, minLogLevel = LogLevel.INFO).apply {
-            val usedProducerGradleVersion = chooseWrapperVersionOrFinishTest()
+            konst usedProducerGradleVersion = chooseWrapperVersionOrFinishTest()
             producerBuildOptions = defaultBuildOptions().copy(
                 javaHome = jdk11Home,
                 androidHome = KtTestUtil.findAndroidSdk(),
@@ -163,14 +163,14 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
         }
 
         if (isPublishedLibrary) {
-            val cacheKey = listOf(
+            konst cacheKey = listOf(
                 useFlavors,
                 isAndroidPublishDebugOnly,
                 producerGradleVersion,
                 producerAgpVersion
             )
-            val cachedPublishedLibrary = publishedLibraryCache.computeIfAbsent(cacheKey) {
-                val newTempDir = publishedLibraryCacheDir.newFolder()
+            konst cachedPublishedLibrary = publishedLibraryCache.computeIfAbsent(cacheKey) {
+                konst newTempDir = publishedLibraryCacheDir.newFolder()
                 dependencyProject.build(":lib:publish", options = producerBuildOptions) {
                     assertSuccessful()
                 }
@@ -202,19 +202,19 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
             return
         }
 
-        val repositoryLinesIfNeeded = if (isPublishedLibrary) """
+        konst repositoryLinesIfNeeded = if (isPublishedLibrary) """
                 repositories {
                     maven { setUrl("${dependencyProject.projectDir.resolve("lib/build/repo").toURI()}") }                    
                 }
             """.trimIndent() else ""
 
-        val dependencyNotation =
+        konst dependencyNotation =
             if (isPublishedLibrary)
                 """"com.example:lib:1.0""""
             else "project(\":${dependencyProject.projectName}:lib\")"
 
-        val usedConsumerGradleVersion: String
-        val consumerProject = Project("AndroidProject", consumerGradleVersion, minLogLevel = LogLevel.INFO).apply {
+        konst usedConsumerGradleVersion: String
+        konst consumerProject = Project("AndroidProject", consumerGradleVersion, minLogLevel = LogLevel.INFO).apply {
             usedConsumerGradleVersion = chooseWrapperVersionOrFinishTest()
             projectDir.deleteRecursively()
             if (!isPublishedLibrary) {
@@ -254,9 +254,9 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
             }
         }
 
-        val variantNamePublishedSuffix = if (isPublishedLibrary) "-published" else ""
+        konst variantNamePublishedSuffix = if (isPublishedLibrary) "-published" else ""
 
-        val variantForReleaseAndStaging = if (isAndroidPublishDebugOnly && isPublishedLibrary)
+        konst variantForReleaseAndStaging = if (isAndroidPublishDebugOnly && isPublishedLibrary)
             "debugApiElements$variantNamePublishedSuffix"
         else "releaseApiElements$variantNamePublishedSuffix"
 
@@ -268,7 +268,7 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
             }
         }" else name
 
-        val configurationToExpectedVariant = listOf(
+        konst configurationToExpectedVariant = listOf(
             nameWithFlavorIfNeeded("debugCompileClasspath") to nameWithFlavorIfNeeded("debugApiElements$variantNamePublishedSuffix"),
             nameWithFlavorIfNeeded("releaseCompileClasspath") to nameWithFlavorIfNeeded(variantForReleaseAndStaging),
             nameWithFlavorIfNeeded("stagingCompileClasspath") to
@@ -279,12 +279,12 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
                     else "jvmLibApiElements"
         )
 
-        val dependencyInsightModuleName =
+        konst dependencyInsightModuleName =
             if (isPublishedLibrary)
                 "com.example:lib:1.0"
             else ":${dependencyProject.projectName}:lib"
 
-        val consumerBuildOptions = defaultBuildOptions().copy(
+        konst consumerBuildOptions = defaultBuildOptions().copy(
             javaHome = File(System.getProperty("jdk11Home")),
             androidHome = KtTestUtil.findAndroidSdk(),
             androidGradlePluginVersion = consumerAgpVersion,
@@ -298,18 +298,18 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
                     options.safeAndroidGradlePluginVersion < AGPVersion.v7_3_0
         }
 
-        val variantCheckRequests = mutableMapOf<ResolvedVariantRequest, String>()
+        konst variantCheckRequests = mutableMapOf<ResolvedVariantRequest, String>()
 
         configurationToExpectedVariant.forEach { (configuration, expected) ->
             /* TODO: the issue KT-30961 is only fixed for AGP 7+. Older versions still reproduce the issue;
              *  This test asserts the existing incorrect behavior for older Gradle versions
              *  in the absence of the Kotlin Gradle plugin, in order to detect unintentional changes
              */
-            val expectedVariant = if (consumerAgpVersion < AGPVersion.v7_0_0 && withKotlinVersion == null && !isPublishedLibrary) {
+            konst expectedVariant = if (consumerAgpVersion < AGPVersion.v7_0_0 && withKotlinVersion == null && !isPublishedLibrary) {
                 "jvmLibApiElements"
             } else expected
 
-            val resolvedVariantRequest = ResolvedVariantRequest("Lib", configuration, dependencyInsightModuleName)
+            konst resolvedVariantRequest = ResolvedVariantRequest("Lib", configuration, dependencyInsightModuleName)
             variantCheckRequests[resolvedVariantRequest] = expectedVariant
         }
 
@@ -329,7 +329,7 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
                 """.trimIndent()
             )
 
-            val resolvedVariantRequest = ResolvedVariantRequest("pure-java", "compileClasspath", dependencyInsightModuleName)
+            konst resolvedVariantRequest = ResolvedVariantRequest("pure-java", "compileClasspath", dependencyInsightModuleName)
             variantCheckRequests[resolvedVariantRequest] = "jvmLibApiElements$variantNamePublishedSuffix"
         }
 
@@ -342,24 +342,24 @@ abstract class AndroidAndJavaConsumeMppLibIT : BaseGradleIT() {
 }
 
 class ResolvedVariantChecker {
-    data class ResolvedVariantRequest(val subproject: String, val configuration: String, val dependencyFilter: String)
+    data class ResolvedVariantRequest(konst subproject: String, konst configuration: String, konst dependencyFilter: String)
 
-    data class ModuleVariantResult(val moduleName: String, val variantString: String)
+    data class ModuleVariantResult(konst moduleName: String, konst variantString: String)
 
     fun assertResolvedSingleVariantsBatch(
         project: BaseGradleIT.Project,
         assertions: Map<ResolvedVariantRequest, String>,
         buildOptions: BaseGradleIT.BuildOptions = project.testCase.defaultBuildOptions()
     ) {
-        val actualResults = getResolvedVariantsBatch(project, assertions.keys, buildOptions)
-        val mismatches = assertions.filterKeys {
+        konst actualResults = getResolvedVariantsBatch(project, assertions.keys, buildOptions)
+        konst mismatches = assertions.filterKeys {
             assertions.getValue(it) != actualResults.get(it)?.singleOrNull()?.variantString
         }
         if (mismatches.isNotEmpty()) {
             throw AssertionError(
                 "Expected and actual variants do not match: \n" + mismatches.keys.joinToString("\n") {
-                    val matches = actualResults.get(it)
-                    val actualString = when {
+                    konst matches = actualResults.get(it)
+                    konst actualString = when {
                         matches == null || matches.isEmpty() -> "got no resolution result or resolution error!"
                         matches.size == 1 -> "got " + matches.singleOrNull()?.variantString
                         else -> "got multiple dependencies matched: $matches"
@@ -378,51 +378,51 @@ class ResolvedVariantChecker {
         buildOptions: BaseGradleIT.BuildOptions = project.testCase.defaultBuildOptions()
     ): Map<ResolvedVariantRequest, List<ModuleVariantResult>> = with(project.testCase) {
         with(project) {
-            val requestsBySubproject = requests.groupBy { it.subproject }
-            val tasksBySubproject = requestsBySubproject.entries.associate { (subproject, subprojectRequests) ->
-                val buildScript = gradleBuildScript(subproject)
-                val taskCodeByRequest = subprojectRequests.associateWith { request ->
+            konst requestsBySubproject = requests.groupBy { it.subproject }
+            konst tasksBySubproject = requestsBySubproject.entries.associate { (subproject, subprojectRequests) ->
+                konst buildScript = gradleBuildScript(subproject)
+                konst taskCodeByRequest = subprojectRequests.associateWith { request ->
                     when (buildScript.extension) {
                         "gradle" -> generateResolvedVariantTaskCodeGroovy(request.configuration, request.dependencyFilter)
                         "kts" -> generateResolvedVariantTaskCodeKts(request.configuration, request.dependencyFilter)
                         else -> error("unexpected build script $buildScript in project $projectName")
                     }
                 }
-                buildScript.appendText(taskCodeByRequest.values.joinToString("\n\n", "\n\n") { it.taskCode })
+                buildScript.appendText(taskCodeByRequest.konstues.joinToString("\n\n", "\n\n") { it.taskCode })
                 subproject to taskCodeByRequest
             }
 
-            val requestsByTaskName =
-                tasksBySubproject.values.flatMap { it.entries }.associate { (request, task) -> task.taskName to request }
+            konst requestsByTaskName =
+                tasksBySubproject.konstues.flatMap { it.entries }.associate { (request, task) -> task.taskName to request }
 
-            val tasksToRun = tasksBySubproject.entries.flatMap { (subproject, tasks) -> tasks.map { ":$subproject:${it.value.taskName}" } }
+            konst tasksToRun = tasksBySubproject.entries.flatMap { (subproject, tasks) -> tasks.map { ":$subproject:${it.konstue.taskName}" } }
 
             lateinit var result: Map<ResolvedVariantRequest, List<ModuleVariantResult>>
             build(*tasksToRun.toTypedArray(), options = buildOptions) {
                 assertSuccessful()
 
-                val variantReportRegex = Regex("$separator(.*?)$separator(.*?)$separator(.*)")
-                val variantReports = variantReportRegex.findAll(output).map { match ->
-                    val (task, module, variant) = match.destructured
-                    val request = requestsByTaskName.getValue(task)
+                konst variantReportRegex = Regex("$separator(.*?)$separator(.*?)$separator(.*)")
+                konst variantReports = variantReportRegex.findAll(output).map { match ->
+                    konst (task, module, variant) = match.destructured
+                    konst request = requestsByTaskName.getValue(task)
                     request to ModuleVariantResult(module, variant)
                 }
-                result = variantReports.groupBy(keySelector = { it.first }, valueTransform = { it.second })
+                result = variantReports.groupBy(keySelector = { it.first }, konstueTransform = { it.second })
             }
             result
         }
     }
 
-    private data class TaskWithName(val taskCode: String, val taskName: String)
+    private data class TaskWithName(konst taskCode: String, konst taskName: String)
 
     private var taskId = 0
     private fun nextTaskId() = taskId++
 
-    private val separator = "#ResolvedVariantChecker#"
+    private konst separator = "#ResolvedVariantChecker#"
 
     private fun generateResolvedVariantTaskCodeGroovy(configuration: String, dependencyNotation: String): TaskWithName {
-        val taskName = "getResolvedVariants${nextTaskId()}"
-        val taskCode = """
+        konst taskName = "getResolvedVariants${nextTaskId()}"
+        konst taskCode = """
             tasks.register("$taskName") {
                 doLast {
                     configurations.getByName("$configuration")
@@ -447,8 +447,8 @@ class ResolvedVariantChecker {
     }
 
     private fun generateResolvedVariantTaskCodeKts(configuration: String, dependencyNotation: String): TaskWithName {
-        val taskName = "getResolvedVariants${nextTaskId()}"
-        val taskCode = """
+        konst taskName = "getResolvedVariants${nextTaskId()}"
+        konst taskCode = """
             tasks.register("$taskName") {
                 doLast {
                     configurations.getByName("$configuration")
@@ -456,7 +456,7 @@ class ResolvedVariantChecker {
                        .allDependencies
                        .filter { "$dependencyNotation" in it.requested.displayName }
                        .forEach { 
-                           val variantString = when (it) {
+                           konst variantString = when (it) {
                               is org.gradle.api.artifacts.result.ResolvedDependencyResult -> it.selected.variants.map { it.displayName }.joinToString(",")
                               is org.gradle.api.artifacts.result.UnresolvedDependencyResult -> "error:" + it.failure.message?.replace("\n", "\\n")
                               else -> ""

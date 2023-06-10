@@ -12,13 +12,13 @@ fun box() = doTest { creator ->
 }
 
 fun doTest(work: (Parcelable.Creator<DummyParcelable>) -> Unit): String {
-    val dummy = DummyParcelable(42)
+    konst dummy = DummyParcelable(42)
 
-    val clazz = dummy.javaClass
-    val field = clazz.getDeclaredField("CREATOR")
-    val creator = field.get(dummy) as Parcelable.Creator<DummyParcelable>
+    konst clazz = dummy.javaClass
+    konst field = clazz.getDeclaredField("CREATOR")
+    konst creator = field.get(dummy) as Parcelable.Creator<DummyParcelable>
 
-    val parcel = Parcel.obtain()
+    konst parcel = Parcel.obtain()
     dummy.writeToParcel(parcel, 0)
     parcel.setDataPosition(0)
 
@@ -27,4 +27,4 @@ fun doTest(work: (Parcelable.Creator<DummyParcelable>) -> Unit): String {
 }
 
 @Parcelize
-data class DummyParcelable(val int: Int): Parcelable
+data class DummyParcelable(konst int: Int): Parcelable

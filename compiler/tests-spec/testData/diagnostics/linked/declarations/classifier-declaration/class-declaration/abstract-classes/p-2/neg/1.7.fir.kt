@@ -31,10 +31,10 @@ class Case1 : BaseKotlin() {
 }
 
 fun case1() {
-    val v = Case1()
+    konst v = Case1()
     v.boo(true)
 
-    val o = object :  BaseKotlin() {
+    konst o = object :  BaseKotlin() {
         <!CANNOT_OVERRIDE_INVISIBLE_MEMBER!>override<!> fun foo(b: Boolean?) {}
     }
 }
@@ -49,10 +49,10 @@ class Case2: AbstractClassCase2() {
 }
 
 fun case2() {
-    val v = Case2()
+    konst v = Case2()
     v.boo(true)
 
-    val o = object : AbstractClassCase2() {
+    konst o = object : AbstractClassCase2() {
         <!CANNOT_OVERRIDE_INVISIBLE_MEMBER!>override<!> fun foo(b: Boolean?) {}
     }
 }
@@ -62,10 +62,10 @@ fun case2() {
 <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>class Case3<!> : BaseKotlin() {}
 
 fun case3() {
-    val v = Case3()
+    konst v = Case3()
     v.boo(true)
 
-    val o = <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>object<!> : BaseKotlin() {}
+    konst o = <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>object<!> : BaseKotlin() {}
 }
 
 /*
@@ -76,8 +76,8 @@ abstract class AbstractClassCase4 : BaseKotlin() {}
 <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>class Case4<!> : AbstractClassCase4() {}
 
 fun case4() {
-    val v = Case4()
+    konst v = Case4()
     v.boo(true)
-    val o = <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>object<!> : AbstractClassCase4() {}
+    konst o = <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>object<!> : AbstractClassCase4() {}
 
 }

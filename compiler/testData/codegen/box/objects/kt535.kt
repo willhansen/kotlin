@@ -6,13 +6,13 @@
 // IGNORE_BACKEND: JS, NATIVE
 
 class Identifier<T>(t : T?, myHasDollar : Boolean) {
-    private val myT : T?
+    private konst myT : T?
 
     public fun getName() : T? { return myT }
 
     companion object {
         open public fun <T> init(name : T?) : Identifier<T> {
-            val id = Identifier<T>(name, false)
+            konst id = Identifier<T>(name, false)
             return id
         }
     }

@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.cli.common.ExitCode
 import java.io.File
 
 data class TestCompilationResult(
-    val exitCode: ExitCode,
-    val compiledSources: Iterable<File>,
-    val compileErrors: Collection<String>,
-    val mappingsDump: String
+    konst exitCode: ExitCode,
+    konst compiledSources: Iterable<File>,
+    konst compileErrors: Collection<String>,
+    konst mappingsDump: String
 ) {
     constructor(
         icReporter: TestICReporter,

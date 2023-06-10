@@ -16,7 +16,7 @@ Math.trunc = function trunc(x) {
 import kotlin.math.truncate
 
 fun box(): String {
-    val result = truncate(1.188)
+    konst result = truncate(1.188)
 
     assertEquals(result, 1)
     assertEquals(js("Math.trunc.called"), true)

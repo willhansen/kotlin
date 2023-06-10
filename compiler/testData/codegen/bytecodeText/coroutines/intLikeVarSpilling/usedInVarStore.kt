@@ -18,42 +18,42 @@ fun builder(c: suspend Controller.() -> Unit) {
 
 fun box(): String {
     builder {
-        val x = true
+        konst x = true
         suspendHere()
-        val y: Boolean = x
+        konst y: Boolean = x
         if (!y) throw IllegalStateException("fail 1")
     }
 
     builder {
-        val x = '1'
+        konst x = '1'
         suspendHere()
 
-        val y: Char = x
+        konst y: Char = x
         if (y != '1') throw IllegalStateException("fail 2")
     }
 
     builder {
-        val x: Byte = 1
+        konst x: Byte = 1
         suspendHere()
 
-        val y: Byte = x
+        konst y: Byte = x
         if (y != 1.toByte()) throw IllegalStateException("fail 3")
     }
 
     builder {
-        val x: Short = 1
+        konst x: Short = 1
 
         suspendHere()
 
-        val y: Short = x
+        konst y: Short = x
         if (y != 1.toShort()) throw IllegalStateException("fail 4")
     }
 
     builder {
-        val x: Int = 1
+        konst x: Int = 1
         suspendHere()
 
-        val y: Int = x
+        konst y: Int = x
         if (y != 1) throw IllegalStateException("fail 5")
     }
 

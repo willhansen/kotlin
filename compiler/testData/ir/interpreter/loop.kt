@@ -1,5 +1,5 @@
 // this hack is used to ensure that iterator will be resolved first
-@CompileTimeCalculation internal class IntProgressionIterator(first: Int, last: Int, val step: Int) : IntIterator()
+@CompileTimeCalculation internal class IntProgressionIterator(first: Int, last: Int, konst step: Int) : IntIterator()
 @CompileTimeCalculation public class IntRange(start: Int, endInclusive: Int) : IntProgression(start, endInclusive, 1), ClosedRange<Int>
 
 @CompileTimeCalculation
@@ -49,8 +49,8 @@ fun earlyExit(end: Int, stop: Int): Int {
     return end
 }
 
-const val a = <!EVALUATED: `10`!>loop(0, 1, 10)<!>
-const val b1 = <!EVALUATED: `15`!>withInnerContinue()<!>
-const val b2 = <!EVALUATED: `10`!>withBreak(10)<!>
-const val c1 = <!EVALUATED: `5`!>earlyExit(10, 5)<!>
-const val c2 = <!EVALUATED: `10`!>earlyExit(10, 15)<!>
+const konst a = <!EVALUATED: `10`!>loop(0, 1, 10)<!>
+const konst b1 = <!EVALUATED: `15`!>withInnerContinue()<!>
+const konst b2 = <!EVALUATED: `10`!>withBreak(10)<!>
+const konst c1 = <!EVALUATED: `5`!>earlyExit(10, 5)<!>
+const konst c2 = <!EVALUATED: `10`!>earlyExit(10, 15)<!>

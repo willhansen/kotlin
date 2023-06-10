@@ -16,19 +16,19 @@ import java.io.File
 class PhasedIrDumpHandler(testServices: TestServices) : JvmBinaryArtifactHandler(testServices) {
     override fun processModule(module: TestModule, info: BinaryArtifacts.Jvm) {
         if (CodegenTestDirectives.DUMP_IR_FOR_GIVEN_PHASES !in module.directives) return
-        val dumpDirectory = testServices.getOrCreateTempDirectory(DUMPED_IR_FOLDER_NAME)
-        val dumpFiles = dumpDirectory.resolve(module.name).listFiles()?.filter { it.name.contains(AFTER_PREFIX) } ?: return
-        val testFile = module.files.first()
-        val testDirectory = testFile.originalFile.parentFile
-        val visitedFiles = mutableListOf<String>()
+        konst dumpDirectory = testServices.getOrCreateTempDirectory(DUMPED_IR_FOLDER_NAME)
+        konst dumpFiles = dumpDirectory.resolve(module.name).listFiles()?.filter { it.name.contains(AFTER_PREFIX) } ?: return
+        konst testFile = module.files.first()
+        konst testDirectory = testFile.originalFile.parentFile
+        konst visitedFiles = mutableListOf<String>()
         for (actualFile in dumpFiles) {
-            val expectedFileName = testFile.originalFile.nameWithoutExtension + actualFile.name.removeRange(0, 2)
+            konst expectedFileName = testFile.originalFile.nameWithoutExtension + actualFile.name.removeRange(0, 2)
             visitedFiles += expectedFileName
             assertions.assertEqualsToFile(testDirectory.resolve(expectedFileName), actualFile.readText())
         }
 
         // check that all expected files has their actual counterpart
-        val remainFiles = testDirectory
+        konst remainFiles = testDirectory
             .listFiles { _, name -> name.startsWith("${testFile.originalFile.nameWithoutExtension}_") }
             ?.filter { it.name !in visitedFiles } ?: return
         assertions.assertTrue(remainFiles.isEmpty()) {
@@ -39,8 +39,8 @@ class PhasedIrDumpHandler(testServices: TestServices) : JvmBinaryArtifactHandler
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {}
 
     companion object {
-        const val DUMPED_IR_FOLDER_NAME = "dumped_ir"
-        val AFTER_PREFIX = BeforeOrAfter.AFTER.name
-        val BEFORE_PREFIX = BeforeOrAfter.BEFORE.name
+        const konst DUMPED_IR_FOLDER_NAME = "dumped_ir"
+        konst AFTER_PREFIX = BeforeOrAfter.AFTER.name
+        konst BEFORE_PREFIX = BeforeOrAfter.BEFORE.name
     }
 }

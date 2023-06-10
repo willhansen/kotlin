@@ -11,6 +11,6 @@ fun String.id(): String = this
 import test.*
 
 fun box(): String {
-    val x = "OK"
+    konst x = "OK"
     return go(x::id)
 }

@@ -1,13 +1,13 @@
 // WITH_STDLIB
 
-val topLevelLazyVal by lazy { 1 }
+konst topLevelLazyVal by lazy { 1 }
 
 class C {
-    val memberLazyVal by lazy { 2 }
+    konst memberLazyVal by lazy { 2 }
 }
 
 fun box(): String {
-    val localLazyVal by lazy { 3 }
+    konst localLazyVal by lazy { 3 }
 
     if (topLevelLazyVal != 1) throw AssertionError()
     if (C().memberLazyVal != 2) throw AssertionError()

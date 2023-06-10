@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinExecution.ExecutionSource
  * An execution source that aggregates other [executionSources].
  */
 interface KotlinAggregateExecutionSource<AggregatedSourceType : ExecutionSource> : ExecutionSource {
-    val executionSources: Iterable<AggregatedSourceType>
+    konst executionSources: Iterable<AggregatedSourceType>
 }
 
 interface KotlinAggregatingExecution<

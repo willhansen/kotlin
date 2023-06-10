@@ -8,6 +8,6 @@ fun expectAB(f: context(A, B) () -> Unit) {
 }
 
 fun test() {
-    val l: context(B, A) () -> Unit = { }
+    konst l: context(B, A) () -> Unit = { }
     expectAB(<!ARGUMENT_TYPE_MISMATCH!>l<!>)
 }

@@ -38,8 +38,8 @@ fun getOutputForTask(taskPath: String, output: String): String = taskOutputRegex
     ?: error("Could not find output for task $taskPath")
 
 class CommandLineArguments(
-    val args: List<String>,
-    val buildResult: BuildResult,
+    konst args: List<String>,
+    konst buildResult: BuildResult,
 )
 
 /**
@@ -50,15 +50,15 @@ class CommandLineArguments(
  * @param tasksPaths The paths of the tasks for which the command line arguments should be checked against the provided assertions.
  * @param toolName The name of the build tool used.
  * @param assertions The assertions to be applied to each command line argument of each given task.
- *                   These assertions validate the expected properties of the command line arguments.
+ *                   These assertions konstidate the expected properties of the command line arguments.
  */
 fun BuildResult.extractNativeTasksCommandLineArgumentsFromOutput(
     vararg tasksPaths: String,
     toolName: NativeToolKind = NativeToolKind.KONANC,
     assertions: CommandLineArguments.() -> Unit,
 ) = tasksPaths.forEach { taskPath ->
-    val taskOutput = getOutputForTask(taskPath)
-    val commandLineArguments = extractNativeCompilerCommandLineArguments(taskOutput, toolName)
+    konst taskOutput = getOutputForTask(taskPath)
+    konst commandLineArguments = extractNativeCompilerCommandLineArguments(taskOutput, toolName)
     assertions(
         CommandLineArguments(commandLineArguments, this)
     )

@@ -5,7 +5,7 @@ import kotlin.test.*
 class ATest {
     @Test
     fun testF() {
-        val f = A().f()
+        konst f = A().f()
         assertEquals("hello", f)
     }
 }

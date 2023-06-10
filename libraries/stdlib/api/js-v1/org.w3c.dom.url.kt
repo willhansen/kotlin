@@ -9,7 +9,7 @@
 /*∆*/ 
 /*∆*/     public final var href: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val origin: kotlin.String { get; }
+/*∆*/     public open konst origin: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final var password: kotlin.String { get; set; }
 /*∆*/ 
@@ -21,7 +21,7 @@
 /*∆*/ 
 /*∆*/     public final var search: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val searchParams: org.w3c.dom.url.URLSearchParams { get; }
+/*∆*/     public open konst searchParams: org.w3c.dom.url.URLSearchParams { get; }
 /*∆*/ 
 /*∆*/     public final var username: kotlin.String { get; set; }
 /*∆*/ 
@@ -43,7 +43,7 @@
 /*∆*/ public open external class URLSearchParams {
 /*∆*/     public constructor URLSearchParams(init: dynamic = ...)
 /*∆*/ 
-/*∆*/     public final fun append(name: kotlin.String, value: kotlin.String): kotlin.Unit
+/*∆*/     public final fun append(name: kotlin.String, konstue: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public final fun delete(name: kotlin.String): kotlin.Unit
 /*∆*/ 
@@ -53,5 +53,5 @@
 /*∆*/ 
 /*∆*/     public final fun has(name: kotlin.String): kotlin.Boolean
 /*∆*/ 
-/*∆*/     public final fun set(name: kotlin.String, value: kotlin.String): kotlin.Unit
+/*∆*/     public final fun set(name: kotlin.String, konstue: kotlin.String): kotlin.Unit
 /*∆*/ }

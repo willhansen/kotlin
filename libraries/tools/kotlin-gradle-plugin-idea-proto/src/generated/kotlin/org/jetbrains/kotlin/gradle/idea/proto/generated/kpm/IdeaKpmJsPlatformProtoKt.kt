@@ -10,7 +10,7 @@ object IdeaKpmJsPlatformProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmJsPlatformProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmJsPlatformProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKpmJsPlatformProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKpmJsPlatformProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKpmJsPlatformProtoKt {
       @JvmName("getIsIr")
       get() = _builder.getIsIr()
       @JvmName("setIsIr")
-      set(value) {
-        _builder.setIsIr(value)
+      set(konstue) {
+        _builder.setIsIr(konstue)
       }
     /**
      * <code>optional bool isIr = 2;</code>
@@ -77,6 +77,6 @@ object IdeaKpmJsPlatformProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 

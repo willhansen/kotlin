@@ -1,9 +1,9 @@
 class A {
-    private val p: Int
+    private konst p: Int
         get() = 4
 
     companion object B {
-        val p: Int
+        konst p: Int
             get() = 6
     }
 

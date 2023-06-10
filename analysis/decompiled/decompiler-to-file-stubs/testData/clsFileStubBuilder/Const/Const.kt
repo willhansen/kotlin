@@ -1,5 +1,5 @@
 package test
 
 object Const {
-    const private val inObject = 1
+    const private konst inObject = 1
 }

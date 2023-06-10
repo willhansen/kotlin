@@ -4,7 +4,7 @@ FILE: access.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = Int(1)
+        public final konst x: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
 
         public final fun abc(): R|kotlin/Int| {
@@ -21,7 +21,7 @@ FILE: access.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/String| = String()
+        public final konst x: R|kotlin/String| = String()
             public get(): R|kotlin/String|
 
         public final fun R|Foo|.abc(): R|kotlin/Int| {
@@ -54,17 +54,17 @@ FILE: access.kt
         R|/bar|()
     }
     public final fun f(): R|kotlin/Unit| {
-        lval a: R|kotlin/Int| = Int(10)
-        lval b: R|kotlin/Int| = R|<local>/a|
-        lval d: R|kotlin/String| = String()
-        lval c: <ERROR TYPE REF: Unresolved name: c> = <Unresolved name: c>#
+        lkonst a: R|kotlin/Int| = Int(10)
+        lkonst b: R|kotlin/Int| = R|<local>/a|
+        lkonst d: R|kotlin/String| = String()
+        lkonst c: <ERROR TYPE REF: Unresolved name: c> = <Unresolved name: c>#
         <Unresolved name: abc>#()
         local final fun bcd(): R|kotlin/Unit| {
         }
 
         local final fun abc(): R|kotlin/Unit| {
-            lval a: R|kotlin/String| = R|<local>/d|
-            lval b: R|kotlin/String| = R|<local>/a|
+            lkonst a: R|kotlin/String| = R|<local>/d|
+            lkonst b: R|kotlin/String| = R|<local>/a|
             R|<local>/bcd|()
             local final fun dcb(): R|kotlin/Unit| {
             }

@@ -47,8 +47,8 @@ class FirTypeParameterBuilder : FirAnnotationContainerBuilder {
     lateinit var containingDeclarationSymbol: FirBasedSymbol<*>
     lateinit var variance: Variance
     var isReified: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
-    val bounds: MutableList<FirTypeRef> = mutableListOf()
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    konst bounds: MutableList<FirTypeRef> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 
     override fun build(): FirTypeParameter {
         return FirTypeParameterImpl(
@@ -82,7 +82,7 @@ inline fun buildTypeParameterCopy(original: FirTypeParameter, init: FirTypeParam
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirTypeParameterBuilder()
+    konst copyBuilder = FirTypeParameterBuilder()
     copyBuilder.source = original.source
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.moduleData = original.moduleData

@@ -4,19 +4,19 @@ FILE: simple.kt
     public final fun runComposable(block: R|@R|org/jetbrains/kotlin/fir/plugin/MyComposable|()  some/MyComposableFunction0<kotlin/Unit>|): R|kotlin/Unit| {
     }
     public final fun test_1(): R|kotlin/Unit| {
-        lval l0: R|() -> kotlin/Unit| = fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
+        lkonst l0: R|() -> kotlin/Unit| = fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
             ^ Unit
         }
 
-        lval l1: R|some/MyComposableFunction0<kotlin/Unit>| = fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
+        lkonst l1: R|some/MyComposableFunction0<kotlin/Unit>| = fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
             ^ Unit
         }
 
-        lval l2: R|@R|org/jetbrains/kotlin/fir/plugin/MyComposable|()  some/MyComposableFunction0<kotlin/Unit>| = fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
+        lkonst l2: R|@R|org/jetbrains/kotlin/fir/plugin/MyComposable|()  some/MyComposableFunction0<kotlin/Unit>| = fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
             ^ Unit
         }
 
-        lval l3: R|some/MyComposableFunction0<kotlin/Unit>| = @R|org/jetbrains/kotlin/fir/plugin/MyComposable|() fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
+        lkonst l3: R|some/MyComposableFunction0<kotlin/Unit>| = @R|org/jetbrains/kotlin/fir/plugin/MyComposable|() fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
             ^ Unit
         }
 

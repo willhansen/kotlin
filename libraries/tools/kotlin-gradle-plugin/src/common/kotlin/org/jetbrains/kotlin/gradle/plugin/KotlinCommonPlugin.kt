@@ -17,7 +17,7 @@ internal open class KotlinCommonPlugin(
 ) : AbstractKotlinPlugin(KotlinTasksProvider(), registry) {
 
     companion object {
-        private const val targetName = "common"
+        private const konst targetName = "common"
     }
 
     override fun buildSourceSetProcessor(
@@ -28,21 +28,21 @@ internal open class KotlinCommonPlugin(
 
     override fun apply(project: Project) {
         @Suppress("UNCHECKED_CAST")
-        val target = project.objects.newInstance(
+        konst target = project.objects.newInstance(
             KotlinWithJavaTarget::class.java,
             project,
             KotlinPlatformType.common,
             targetName,
             {
                 object : HasCompilerOptions<KotlinMultiplatformCommonCompilerOptions> {
-                    override val options: KotlinMultiplatformCommonCompilerOptions = project.objects
+                    override konst options: KotlinMultiplatformCommonCompilerOptions = project.objects
                         .newInstance(KotlinMultiplatformCommonCompilerOptionsDefault::class.java)
                         .configureExperimentalTryK2(project)
                 }
             },
             { compilerOptions: KotlinMultiplatformCommonCompilerOptions ->
                 object : KotlinMultiplatformCommonOptions {
-                    override val options: KotlinMultiplatformCommonCompilerOptions
+                    override konst options: KotlinMultiplatformCommonCompilerOptions
                         get() = compilerOptions
                 }
             }

@@ -8,7 +8,7 @@ fun getAndCheckInt(a: Int, b: Int) =
         getAndCheck({ a }, { b })
 
 // @TestKt.class:
-// 0 valueOf
+// 0 konstueOf
 // 0 Value
 // 0 areEqual
 
@@ -18,7 +18,7 @@ fun getAndCheckInlinedInt(a: InlinedInt, b: InlinedInt) =
         getAndCheck({ a }, { b })
 
 // @TestInlinedKt.class:
-// 0 valueOf
+// 0 konstueOf
 // 0 Value
 // 1 areEqual
 // 2 INVOKESTATIC InlinedInt\.box
@@ -28,4 +28,4 @@ fun getAndCheckInlinedInt(a: InlinedInt, b: InlinedInt) =
 inline fun <T> getAndCheck(getFirst: () -> T, getSecond: () -> T) =
         getFirst() == getSecond()
 
-inline class InlinedInt(val x: Int)
+inline class InlinedInt(konst x: Int)

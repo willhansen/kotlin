@@ -20,7 +20,7 @@ import org.jetbrains.benchmarksLauncher.Blackhole
 
 open class ClassStreamBenchmark {
     private var _data: Iterable<Value>? = null
-    val data: Iterable<Value>
+    konst data: Iterable<Value>
         get() = _data!!
 
     init {
@@ -34,7 +34,7 @@ open class ClassStreamBenchmark {
 
     //Benchmark
     fun copyManual(): List<Value> {
-        val list = ArrayList<Value>()
+        konst list = ArrayList<Value>()
         for (item in data.asSequence()) {
             list.add(item)
         }
@@ -56,7 +56,7 @@ open class ClassStreamBenchmark {
     fun filterAndMapManual() {
         for (it in data.asSequence()) {
             if (filterLoad(it)) {
-                val item = mapLoad(it)
+                konst item = mapLoad(it)
                 Blackhole.consume(item)
             }
         }

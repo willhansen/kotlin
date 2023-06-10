@@ -19,18 +19,18 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 
 class KotlinMetadataDeserializerForDecompiler(
     packageFqName: FqName,
-    private val proto: ProtoBuf.PackageFragment,
-    private val nameResolver: NameResolver,
-    private val metadataVersion: BinaryVersion,
+    private konst proto: ProtoBuf.PackageFragment,
+    private konst nameResolver: NameResolver,
+    private konst metadataVersion: BinaryVersion,
     serializerProtocol: SerializerExtensionProtocol,
     flexibleTypeDeserializer: FlexibleTypeDeserializer
 ) : DeserializerForDecompilerBase(packageFqName) {
-    override val builtIns: KotlinBuiltIns get() = DefaultBuiltIns.Instance
+    override konst builtIns: KotlinBuiltIns get() = DefaultBuiltIns.Instance
 
-    override val deserializationComponents: DeserializationComponents
+    override konst deserializationComponents: DeserializationComponents
 
     init {
-        val notFoundClasses = NotFoundClasses(storageManager, moduleDescriptor)
+        konst notFoundClasses = NotFoundClasses(storageManager, moduleDescriptor)
 
         deserializationComponents = DeserializationComponents(
             storageManager, moduleDescriptor, DeserializationConfiguration.Default,
@@ -50,8 +50,8 @@ class KotlinMetadataDeserializerForDecompiler(
             "Was called for $facadeFqName; only members of $directoryPackageFqName package are expected."
         }
 
-        val dummyPackageFragment = createDummyPackageFragment(facadeFqName)
-        val membersScope = DeserializedPackageMemberScope(
+        konst dummyPackageFragment = createDummyPackageFragment(facadeFqName)
+        konst membersScope = DeserializedPackageMemberScope(
             dummyPackageFragment, proto.`package`, nameResolver, metadataVersion, containerSource = null,
             components = deserializationComponents,
             debugName = "scope of dummyPackageFragment ${dummyPackageFragment.fqName} in module " +
@@ -62,6 +62,6 @@ class KotlinMetadataDeserializerForDecompiler(
     }
 
     companion object {
-        private val LOG = Logger.getInstance(KotlinMetadataDeserializerForDecompiler::class.java)
+        private konst LOG = Logger.getInstance(KotlinMetadataDeserializerForDecompiler::class.java)
     }
 }

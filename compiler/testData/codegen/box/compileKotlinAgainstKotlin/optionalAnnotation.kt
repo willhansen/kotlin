@@ -11,12 +11,12 @@
 package a
 
 @OptionalExpectation
-expect annotation class A(val x: Int)
+expect annotation class A(konst x: Int)
 
 @OptionalExpectation
-expect annotation class B(val s: String)
+expect annotation class B(konst s: String)
 
-actual annotation class A(actual val x: Int)
+actual annotation class A(actual konst x: Int)
 
 // MODULE: main(lib)
 // FILE: B.kt
@@ -34,7 +34,7 @@ class Test {
 }
 
 fun box(): String {
-    val annotations = Test::class.java.declaredMethods.single().annotations.toList()
+    konst annotations = Test::class.java.declaredMethods.single().annotations.toList()
     if (annotations.toString() != "[@a.A(x=42)]") return "Fail 1: $annotations"
 
     try {

@@ -184,7 +184,7 @@ digraph propertiesAndInitBlocks_kt {
                 67 [label="Const: Int(1)"];
                 68 [label="Const: Int(1)"];
                 69 [label="Function call: Int(1).R|kotlin/Int.plus|(...)" style="filled" fillcolor=yellow];
-                70 [label="Variable declaration: lval c: R|kotlin/Int|"];
+                70 [label="Variable declaration: lkonst c: R|kotlin/Int|"];
                 71 [label="Function call: R|java/lang/Exception.Exception|()" style="filled" fillcolor=yellow];
                 72 [label="Throw: throw R|java/lang/Exception.Exception|()"];
                 73 [label="Stub" style="filled" fillcolor=gray];

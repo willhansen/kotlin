@@ -2,8 +2,8 @@
 // !CHECK_TYPE
 
 fun case_0() {
-    val z: Any? = 10
-    val y = z.run {
+    konst z: Any? = 10
+    konst y = z.run {
         this as Int
         this // error in NI: required Int, found Any?; just inferred to Any? in OI
     }
@@ -12,7 +12,7 @@ fun case_0() {
 }
 
 fun case_1(z: Any?) {
-    val y = z.run {
+    konst y = z.run {
         when (this) {
             is String -> return@run this // type mismatch in the new inference (required String, found Any?)
             is Float -> ""
@@ -25,7 +25,7 @@ fun case_1(z: Any?) {
 }
 
 fun case_2(z: Any?) {
-    val y = z.run {
+    konst y = z.run {
         when (this) {
             is String -> this
             is Float -> ""
@@ -37,7 +37,7 @@ fun case_2(z: Any?) {
 }
 
 fun case_3(z: Any?) {
-    val y = z.let {
+    konst y = z.let {
         when (it) {
             is String -> return@let it
             is Float -> ""

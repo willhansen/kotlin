@@ -54,7 +54,7 @@ class ErrorFunctionDescriptor(containingDeclaration: ClassDescriptor) :
                 parameters: List<ValueParameterDescriptor>
             ): FunctionDescriptor.CopyBuilder<SimpleFunctionDescriptor?> = this
             override fun <V> putUserData(userDataKey: CallableDescriptor.UserDataKey<V>,
-                                         value: V
+                                         konstue: V
             ): FunctionDescriptor.CopyBuilder<SimpleFunctionDescriptor?> = this
             override fun setTypeParameters(
                 parameters: List<TypeParameterDescriptor>

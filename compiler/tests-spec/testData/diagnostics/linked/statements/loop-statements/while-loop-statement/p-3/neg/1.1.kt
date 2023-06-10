@@ -15,14 +15,14 @@
 // FILE: KotlinClass.kt
 // TESTCASE NUMBER: 1
 fun case1() {
-    val condition: Any = true
+    konst condition: Any = true
     while (<!TYPE_MISMATCH!>condition<!> && <!TYPE_MISMATCH!>"true"<!>) {
     }
 }
 
 // TESTCASE NUMBER: 2
 fun case2() {
-    val condition: Boolean? = true
+    konst condition: Boolean? = true
     while (<!TYPE_MISMATCH, TYPE_MISMATCH!>condition<!>) {
     }
 }

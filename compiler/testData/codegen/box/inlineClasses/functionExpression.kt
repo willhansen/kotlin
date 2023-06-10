@@ -5,7 +5,7 @@
 inline fun new(init: (Z) -> Unit): Z = Z(42)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val value: Int)
+konstue class Z(konst konstue: Int)
 
 fun box(): String =
-    if (new(fun(z: Z) {}).value == 42) "OK" else "Fail"
+    if (new(fun(z: Z) {}).konstue == 42) "OK" else "Fail"

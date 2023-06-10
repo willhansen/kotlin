@@ -28,14 +28,14 @@ class ResolvableMetadataConfigurationTest {
 
     @Test
     fun `test - resolves consistent in project`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDefaultStdlibDependency(false)
             enableDependencyVerification(false)
             applyMultiplatformPlugin()
             repositories.mavenCentralCacheRedirector()
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         /* Define simple targets */
         kotlin.jvm()
@@ -43,8 +43,8 @@ class ResolvableMetadataConfigurationTest {
         kotlin.linuxX64()
         kotlin.targetHierarchy.default()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val nativeMain = kotlin.sourceSets.getByName("nativeMain")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst nativeMain = kotlin.sourceSets.getByName("nativeMain")
 
         commonMain.dependencies {
             implementation("com.squareup.okio:okio:3.2.0")
@@ -56,7 +56,7 @@ class ResolvableMetadataConfigurationTest {
             implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         /* Check by resolving the 'resolvableMetadataConfigurations' directly */
         kotlin.sourceSets.forEach { sourceSet ->

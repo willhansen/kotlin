@@ -16,10 +16,10 @@ fun ClassKind.toKtClassKind(isCompanionObject: Boolean): KtClassKind = when (thi
     ClassKind.ANNOTATION_CLASS -> KtClassKind.ANNOTATION_CLASS
     ClassKind.CLASS -> KtClassKind.CLASS
     ClassKind.OBJECT -> if (isCompanionObject) KtClassKind.COMPANION_OBJECT else KtClassKind.OBJECT
-    ClassKind.ENUM_ENTRY -> invalidEnumEntryAsClassKind()
+    ClassKind.ENUM_ENTRY -> inkonstidEnumEntryAsClassKind()
 }
 
 @KtAnalysisApiInternals
-fun invalidEnumEntryAsClassKind(): Nothing {
+fun inkonstidEnumEntryAsClassKind(): Nothing {
     error("KtClassKind is not applicable for enum entry, as enum entry is a callable, not a classifier")
 }

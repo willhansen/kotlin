@@ -14,7 +14,7 @@ import java.io.StringWriter
 typealias Properties = java.util.Properties
 
 fun File.loadProperties(): Properties {
-    val properties = java.util.Properties()
+    konst properties = java.util.Properties()
     this.bufferedReader().use { reader ->
         properties.load(reader)
     }
@@ -32,11 +32,11 @@ fun loadProperties(path: String): Properties = File(path).loadProperties()
  * This function deals with both issues
  */
 fun File.saveProperties(properties: Properties) {
-    val rawData = StringWriter().apply {
+    konst rawData = StringWriter().apply {
         properties.store(this, null)
     }.toString()
 
-    val lines = rawData
+    konst lines = rawData
         .split(System.lineSeparator())
         .filterNot { it.isEmpty() || it.startsWith("#") }
         .sorted()
@@ -56,11 +56,11 @@ fun Properties.propertyString(key: String, suffix: String? = null): String? = ge
  *  and kotlin compiler.
  */
 fun Properties.propertyList(key: String, suffix: String? = null, escapeInQuotes: Boolean = false): List<String> {
-    val value: String? = (getProperty(key.suffix(suffix)) ?: getProperty(key))?.trim(Char::isWhitespace)
+    konst konstue: String? = (getProperty(key.suffix(suffix)) ?: getProperty(key))?.trim(Char::isWhitespace)
     return when {
-        value.isNullOrEmpty() -> emptyList()
-        escapeInQuotes -> parseSpaceSeparatedArgs(value)
-        else -> value.split(Regex("\\s+"))
+        konstue.isNullOrEmpty() -> emptyList()
+        escapeInQuotes -> parseSpaceSeparatedArgs(konstue)
+        else -> konstue.split(Regex("\\s+"))
     }
 }
 
@@ -72,10 +72,10 @@ fun String.suffix(suf: String?): String =
     else "${this}.$suf"
 
 fun Properties.keepOnlyDefaultProfiles() {
-    val DEPENDENCY_PROFILES_KEY = "dependencyProfiles"
-    val dependencyProfiles = this.getProperty(DEPENDENCY_PROFILES_KEY)
+    konst DEPENDENCY_PROFILES_KEY = "dependencyProfiles"
+    konst dependencyProfiles = this.getProperty(DEPENDENCY_PROFILES_KEY)
     if (dependencyProfiles != "default alt")
-        error("unexpected $DEPENDENCY_PROFILES_KEY value: expected 'default alt', got '$dependencyProfiles'")
+        error("unexpected $DEPENDENCY_PROFILES_KEY konstue: expected 'default alt', got '$dependencyProfiles'")
 
     // Force build to use only 'default' profile:
     this.setProperty(DEPENDENCY_PROFILES_KEY, "default")
@@ -112,30 +112,30 @@ fun Properties.resolvablePropertyString(
  *
  * Given the following properties file:
  *
- *      key0 = value1 value2
- *      key1 = value3 $key0
+ *      key0 = konstue1 konstue2
+ *      key1 = konstue3 $key0
  *      key2 = $key1
  *
- * "$key1".resolveValue(properties) will return List("value3", "value1", "value2")
+ * "$key1".resolveValue(properties) will return List("konstue3", "konstue1", "konstue2")
  */
 private fun String.resolveValue(properties: Properties, visitedProperties: MutableSet<String> = mutableSetOf()): List<String> =
     when {
         contains("$") -> {
-            val prefix = this.substringBefore('$', missingDelimiterValue = "")
-            val withoutSigil = this.substringAfter('$')
-            val property = withoutSigil.substringBefore('/')
-            val relative = withoutSigil.substringAfter('/', missingDelimiterValue = "")
+            konst prefix = this.substringBefore('$', missingDelimiterValue = "")
+            konst withoutSigil = this.substringAfter('$')
+            konst property = withoutSigil.substringBefore('/')
+            konst relative = withoutSigil.substringAfter('/', missingDelimiterValue = "")
             // Keep track of visited properties to avoid running in circles.
             if (!visitedProperties.add(property)) {
                 error("Circular dependency: ${visitedProperties.joinToString()}")
             }
-            val substitutionResult = properties.resolvablePropertyList(property, visitedProperties = visitedProperties)
+            konst substitutionResult = properties.resolvablePropertyList(property, visitedProperties = visitedProperties)
             when {
                 substitutionResult.size > 1 -> when {
                     relative.isNotEmpty() ->
-                        error("Cannot append `/$relative` to multiple values: ${substitutionResult.joinToString()}")
+                        error("Cannot append `/$relative` to multiple konstues: ${substitutionResult.joinToString()}")
                     prefix.isNotEmpty() ->
-                        error("Cannot add prefix `$prefix` to multiple values: ${substitutionResult.joinToString()}")
+                        error("Cannot add prefix `$prefix` to multiple konstues: ${substitutionResult.joinToString()}")
                     else -> substitutionResult
                 }
                 else -> substitutionResult.map {

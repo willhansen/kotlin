@@ -31,7 +31,7 @@ internal fun createKTypeParameter(
     upperBounds: Array<KType>,
     variance: String
 ): KTypeParameter {
-    val kVariance = when (variance) {
+    konst kVariance = when (variance) {
         "in" -> KVariance.IN
         "out" -> KVariance.OUT
         else -> KVariance.INVARIANT

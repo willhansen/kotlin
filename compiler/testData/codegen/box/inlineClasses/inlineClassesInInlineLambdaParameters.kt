@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val int: Int)
+konstue class Z(konst int: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L(val long: Long)
+konstue class L(konst long: Long)
 
 inline fun <T, R> s0(x: T, fn: (Int, T) -> R) = fn(0, x)
 

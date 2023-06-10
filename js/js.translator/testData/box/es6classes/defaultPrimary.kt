@@ -1,31 +1,31 @@
 // EXPECTED_REACHABLE_NODES: 1344
 
-open class A(var value: Int) {
+open class A(var konstue: Int) {
     init {
-        value *= 2
+        konstue *= 2
     }
 }
 
 class B : A {
     init {
-        value /= 6
+        konstue /= 6
     }
 
     constructor(x: Int) : super(x) {
-        value *= 18
+        konstue *= 18
     }
 
     constructor() : this(18) {
-        value *= 12
+        konstue *= 12
     }
 }
 
 fun box(): String {
-    val bs1 = B(15)
-    assertEquals(90, bs1.value)
+    konst bs1 = B(15)
+    assertEquals(90, bs1.konstue)
 
-    val bs2 = B()
-    assertEquals(72 * 18, bs2.value)
+    konst bs2 = B()
+    assertEquals(72 * 18, bs2.konstue)
 
     return "OK"
 }

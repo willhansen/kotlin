@@ -9,22 +9,22 @@ import org.gradle.api.artifacts.Configuration
 
 interface GradleKpmFragmentDependencyConfigurations : GradleKpmDependencyConfigurations {
     /** This configuration includes the dependencies from the refines-parents */
-    val transitiveApiConfiguration: Configuration
+    konst transitiveApiConfiguration: Configuration
 
     /** This configuration includes the dependencies from the refines-parents */
-    val transitiveImplementationConfiguration: Configuration
+    konst transitiveImplementationConfiguration: Configuration
 
     /** This configuration includes the dependencies from the refines-parents */
-    val transitiveRuntimeOnlyConfiguration: Configuration
+    konst transitiveRuntimeOnlyConfiguration: Configuration
 
     private class Impl(
-        override val apiConfiguration: Configuration,
-        override val implementationConfiguration: Configuration,
-        override val compileOnlyConfiguration: Configuration,
-        override val runtimeOnlyConfiguration: Configuration,
-        override val transitiveApiConfiguration: Configuration,
-        override val transitiveImplementationConfiguration: Configuration,
-        override val transitiveRuntimeOnlyConfiguration: Configuration
+        override konst apiConfiguration: Configuration,
+        override konst implementationConfiguration: Configuration,
+        override konst compileOnlyConfiguration: Configuration,
+        override konst runtimeOnlyConfiguration: Configuration,
+        override konst transitiveApiConfiguration: Configuration,
+        override konst transitiveImplementationConfiguration: Configuration,
+        override konst transitiveRuntimeOnlyConfiguration: Configuration
     ) : GradleKpmFragmentDependencyConfigurations
 
     companion object {

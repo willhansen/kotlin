@@ -3,7 +3,7 @@ package foo
 
 // CHECK_NOT_CALLED: test
 
-class A(val x: Any? = null) {
+class A(konst x: Any? = null) {
     inline fun <reified T> test() = x is T
 }
 

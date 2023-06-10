@@ -29,15 +29,15 @@ import kotlin.reflect.full.safeCast
 @Suppress("unused") // used externally (kotlin.script.utils)
 interface KotlinJsr223JvmInvocableScriptEngine : Invocable {
 
-    val state: IReplStageState<*> // The Invokable interface do not allow Context/Bindings substitution, so state is supplied via property
+    konst state: IReplStageState<*> // The Invokable interface do not allow Context/Bindings substitution, so state is supplied via property
 
-    private fun prioritizedHistory(receiverClass: KClass<*>?, receiverInstance: Any?): List<EvalClassWithInstanceAndLoader> {
-        val evalState = state.asState(GenericReplEvaluatorState::class.java)
-        return evalState.history.map { it.item }.filter { it.instance != null }.reversed().ensureNotEmpty("no script ").let { history ->
+    private fun prioritizedHistory(receiverClass: KClass<*>?, receiverInstance: Any?): List<EkonstClassWithInstanceAndLoader> {
+        konst ekonstState = state.asState(GenericReplEkonstuatorState::class.java)
+        return ekonstState.history.map { it.item }.filter { it.instance != null }.reversed().ensureNotEmpty("no script ").let { history ->
             if (receiverInstance != null) {
-                val receiverKlass = receiverClass ?: receiverInstance::class
-                val receiverInHistory = history.find { it.instance == receiverInstance } ?:
-                                        EvalClassWithInstanceAndLoader(receiverKlass, receiverInstance, receiverKlass.java.classLoader, history.first().invokeWrapper)
+                konst receiverKlass = receiverClass ?: receiverInstance::class
+                konst receiverInHistory = history.find { it.instance == receiverInstance } ?:
+                                        EkonstClassWithInstanceAndLoader(receiverKlass, receiverInstance, receiverKlass.java.classLoader, history.first().invokeWrapper)
                 listOf(receiverInHistory) + history.filterNot { it == receiverInHistory }
             }
             else {
@@ -57,17 +57,17 @@ interface KotlinJsr223JvmInvocableScriptEngine : Invocable {
         return invokeImpl(prioritizedHistory(thiz::class, thiz), name, args)
     }
 
-    private fun invokeImpl(prioritizedCallOrder: List<EvalClassWithInstanceAndLoader>, name: String, args: Array<out Any?>): Any? {
+    private fun invokeImpl(prioritizedCallOrder: List<EkonstClassWithInstanceAndLoader>, name: String, args: Array<out Any?>): Any? {
         // TODO: cache the method lookups?
 
-        val (fn, mapping, invokeWrapper) = prioritizedCallOrder.asSequence().map { (klass, instance, _, invokeWrapper) ->
-            val candidates = klass.functions.filter { it.name == name }
+        konst (fn, mapping, invokeWrapper) = prioritizedCallOrder.asSequence().map { (klass, instance, _, invokeWrapper) ->
+            konst candidates = klass.functions.filter { it.name == name }
             candidates.findMapping(listOf(instance) + args)?.let {
                 Triple(it.first, it.second, invokeWrapper)
             }
         }.filterNotNull().firstOrNull() ?: throw NoSuchMethodException("no suitable function '$name' found")
 
-        val res = try {
+        konst res = try {
             if (invokeWrapper != null) {
                 invokeWrapper.invoke {
                     fn.callBy(mapping)
@@ -96,14 +96,14 @@ interface KotlinJsr223JvmInvocableScriptEngine : Invocable {
 
     private fun <T : Any> proxyInterface(thiz: Any?, clasz: Class<T>?): T? {
         if (state.history.size == 0) throw IllegalStateException("no script")
-        val priority = prioritizedHistory(thiz?.javaClass?.kotlin, thiz)
+        konst priority = prioritizedHistory(thiz?.javaClass?.kotlin, thiz)
 
         if (clasz == null) throw IllegalArgumentException("class object cannot be null")
         if (!clasz.isInterface) throw IllegalArgumentException("expecting interface")
 
         // TODO: cache the method lookups?
 
-        val proxy = Proxy.newProxyInstance(Thread.currentThread().contextClassLoader, arrayOf(clasz)) { _, method, args ->
+        konst proxy = Proxy.newProxyInstance(Thread.currentThread().contextClassLoader, arrayOf(clasz)) { _, method, args ->
             invokeImpl(priority, method.name, args ?: emptyArray())
         }
         return clasz.kotlin.safeCast(proxy)
@@ -112,7 +112,7 @@ interface KotlinJsr223JvmInvocableScriptEngine : Invocable {
 
 private fun Iterable<KFunction<*>>.findMapping(args: List<Any?>): Pair<KFunction<*>, Map<KParameter, Any?>>? {
     for (fn in this) {
-        val mapping = tryCreateCallableMapping(fn, args)
+        konst mapping = tryCreateCallableMapping(fn, args)
         if (mapping != null) return fn to mapping
     }
     return null

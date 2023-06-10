@@ -5,7 +5,7 @@
 import org.jetbrains.annotations.NotNull;
 
 public interface JavaInterface<V> {
-    void interfaceMethod(@NotNull V value);
+    void interfaceMethod(@NotNull V konstue);
 }
 
 // FILE: main.kt

@@ -6,14 +6,14 @@
 import kotlin.reflect.KClass
 
 annotation class A
-annotation class B(val int: Int)
-annotation class C(val int: Int = 42)
+annotation class B(konst int: Int)
+annotation class C(konst int: Int = 42)
 
-annotation class G<T: Any>(val int: KClass<T>)
+annotation class G<T: Any>(konst int: KClass<T>)
 
 fun box() {
-    val a = A()
-    val b = B(4)
-    val c = C()
-    val foo = <!ANNOTATION_CLASS_CONSTRUCTOR_CALL!>G(Int::class)<!>
+    konst a = A()
+    konst b = B(4)
+    konst c = C()
+    konst foo = <!ANNOTATION_CLASS_CONSTRUCTOR_CALL!>G(Int::class)<!>
 }

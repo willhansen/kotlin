@@ -4,7 +4,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -41,7 +41,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -79,7 +79,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -108,7 +108,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
       PsiElement(GT)('>')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -142,7 +142,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
       PsiElement(INTEGER_LITERAL)('0')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       NULLABLE_TYPE
@@ -169,7 +169,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
     PsiElement(IDENTIFIER)('foo')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       NULLABLE_TYPE
@@ -198,7 +198,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
     PsiElement(IDENTIFIER)('foo')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -275,14 +275,14 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiErrorElement:Expecting property name or receiver type
       <empty list>
     PsiErrorElement:Property getter or setter expected
       <empty list>
   PsiWhiteSpace(' ')
   DESTRUCTURING_DECLARATION
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiErrorElement:Receiver type is not allowed on a destructuring declaration
       TYPE_REFERENCE
@@ -307,7 +307,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
                     PsiElement(IDENTIFIER)('T')
             PsiElement(GT)('>')
       PsiElement(DOT)('.')
-    PsiErrorElement:Destructuring declarations are only allowed for local variables/values
+    PsiErrorElement:Destructuring declarations are only allowed for local variables/konstues
       PsiElement(LPAR)('(')
       DESTRUCTURING_DECLARATION_ENTRY
         PsiElement(IDENTIFIER)('A')
@@ -323,7 +323,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
       PsiElement(RPAR)(')')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       MODIFIER_LIST
@@ -392,7 +392,7 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
       <empty list>
   PsiWhiteSpace('\n')
   DESTRUCTURING_DECLARATION
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiErrorElement:Receiver type is not allowed on a destructuring declaration
       TYPE_REFERENCE
@@ -437,14 +437,14 @@ KtFile: PropertiesWithFunctionReceiversRecovery.kt
               PsiElement(DOT)('.')
       PsiErrorElement:Expecting '.' before a property name
         PsiElement(IDENTIFIER)('foo')
-    PsiErrorElement:Destructuring declarations are only allowed for local variables/values
+    PsiErrorElement:Destructuring declarations are only allowed for local variables/konstues
       PsiElement(LPAR)('(')
       PsiErrorElement:Expecting a name
         <empty list>
       PsiElement(RPAR)(')')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('c')
     PsiErrorElement:Property getter or setter expected

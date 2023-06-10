@@ -3,7 +3,7 @@
 @Suppress("UNRESOLVED_REFERENCE")
 interface A {
     fun inject(b: B)
-    val x: String
+    konst x: String
 
     companion object : B()
 

@@ -19,9 +19,9 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 
 interface Diagnostic : UnboundDiagnostic, DiagnosticMarker {
-    override val psiElement: PsiElement
-    val psiFile: PsiFile
+    override konst psiElement: PsiElement
+    konst psiFile: PsiFile
 
-    override val factoryName: String
+    override konst factoryName: String
         get() = factory.name
 }

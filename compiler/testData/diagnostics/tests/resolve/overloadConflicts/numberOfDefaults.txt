@@ -1,6 +1,6 @@
 package
 
-public val test: Right
+public konst test: Right
 public fun overloadedFun(/*0*/ b: kotlin.Any = ..., /*1*/ c: kotlin.Any = ..., /*2*/ e: kotlin.String = ..., /*3*/ x: kotlin.String = ..., /*4*/ y: kotlin.String = ...): Wrong
 public fun overloadedFun(/*0*/ c: kotlin.Any = ..., /*1*/ b: kotlin.String = ..., /*2*/ f: kotlin.Any = ...): Right
 

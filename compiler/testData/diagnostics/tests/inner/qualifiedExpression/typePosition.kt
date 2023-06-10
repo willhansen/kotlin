@@ -4,9 +4,9 @@ abstract class Outer {
         class NestedNested
     }
     
-    abstract val prop1: Nested
-    abstract val prop2: Nested.NestedNested
+    abstract konst prop1: Nested
+    abstract konst prop2: Nested.NestedNested
 }
 
 fun foo(): Outer.Nested = null!!
-val bar: Outer.Nested.NestedNested = null!!
+konst bar: Outer.Nested.NestedNested = null!!

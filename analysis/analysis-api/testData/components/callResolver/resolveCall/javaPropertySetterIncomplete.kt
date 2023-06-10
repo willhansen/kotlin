@@ -1,6 +1,6 @@
 // FILE: call.kt
 fun call() {
-    val javaClass = JavaClass()
+    konst javaClass = JavaClass()
     // Intentionally incomplete to see if `foo` refers to `setFoo`.
     javaClass.<expr>foo</expr> =
 }

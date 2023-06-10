@@ -10,7 +10,7 @@ import test.*
 
 fun box(): String {
     // should not have any line numbers
-    val k = "".myLet {
+    konst k = "".myLet {
         it + "K"
     }
     return "O".myLet(fun (it: String): String {

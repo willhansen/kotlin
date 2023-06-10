@@ -25,7 +25,7 @@ fun Name.render(): String {
 }
 
 private fun Name.shouldBeEscaped(): Boolean {
-    val string = asString()
+    konst string = asString()
     return string in KeywordStringsGenerated.KEYWORDS || string.any { !Character.isLetterOrDigit(it) && it != '_' }
 }
 
@@ -56,9 +56,9 @@ fun replacePrefixesInTypeRepresentations(
     foldedPrefix: String
 ): String? {
     if (lowerRendered.startsWith(lowerPrefix) && upperRendered.startsWith(upperPrefix)) {
-        val lowerWithoutPrefix = lowerRendered.substring(lowerPrefix.length)
-        val upperWithoutPrefix = upperRendered.substring(upperPrefix.length)
-        val flexibleCollectionName = foldedPrefix + lowerWithoutPrefix
+        konst lowerWithoutPrefix = lowerRendered.substring(lowerPrefix.length)
+        konst upperWithoutPrefix = upperRendered.substring(upperPrefix.length)
+        konst flexibleCollectionName = foldedPrefix + lowerWithoutPrefix
 
         if (lowerWithoutPrefix == upperWithoutPrefix) return flexibleCollectionName
 

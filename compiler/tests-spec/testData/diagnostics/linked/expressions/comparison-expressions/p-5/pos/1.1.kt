@@ -17,15 +17,15 @@
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val a1 = A1(-1)
-    val a2 = A1(-3)
+    konst a1 = A1(-1)
+    konst a2 = A1(-3)
 
-    val x = a1 < a2
+    konst x = a1 < a2
 
     x checkType { check<Boolean>() }
 }
 
-class A1(val a: Int)  {
+class A1(konst a: Int)  {
     var isCompared = false
     operator fun compareTo(other: A1): Int = run {
         isCompared = true
@@ -34,7 +34,7 @@ class A1(val a: Int)  {
 }
 
 // TESTCASE NUMBER: 2
-class A2(val a: Int)  {
+class A2(konst a: Int)  {
     var isCompared = false
     operator fun compareTo(other: A2): Int = run {
         isCompared = true
@@ -43,25 +43,25 @@ class A2(val a: Int)  {
 }
 
 fun case2() {
-    val a1 = A2(-1)
-    val a2 = A2(-3)
+    konst a1 = A2(-1)
+    konst a2 = A2(-3)
 
-    val x = a1 > a2
+    konst x = a1 > a2
 
     x checkType { check<Boolean>() }
 }
 
 // TESTCASE NUMBER: 3
 fun case3() {
-    val a1 = A3(-1)
-    val a2 = A3(-3)
+    konst a1 = A3(-1)
+    konst a2 = A3(-3)
 
-    val x = a1 <= a2
+    konst x = a1 <= a2
 
     x checkType { check<Boolean>() }
 }
 
-class A3(val a: Int)  {
+class A3(konst a: Int)  {
     var isCompared = false
     operator fun compareTo(other: A3): Int = run {
         isCompared = true
@@ -71,15 +71,15 @@ class A3(val a: Int)  {
 
 // TESTCASE NUMBER: 4
 fun case4() {
-    val a1 = A4(-1)
-    val a2 = A4(-3)
+    konst a1 = A4(-1)
+    konst a2 = A4(-3)
 
-    val x = a1 >= a2
+    konst x = a1 >= a2
 
     x checkType { check<Boolean>() }
 }
 
-class A4(val a: Int)  {
+class A4(konst a: Int)  {
     var isCompared = false
     operator fun compareTo(other: A4): Int = run {
         isCompared = true

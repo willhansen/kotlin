@@ -31,7 +31,7 @@ object FakeTopDownAnalyzerFacadeForNative {
         compilerEnvironment: TargetEnvironment = CompilerEnvironment
     ): AnalysisResult {
 
-        val analyzerForNative = createFakeTopDownAnalyzerForNative(
+        konst analyzerForNative = createFakeTopDownAnalyzerForNative(
             moduleContext, trace,
             FileBasedDeclarationProviderFactory(moduleContext.storageManager, files),
             languageVersionSettings,
@@ -66,6 +66,6 @@ private fun createFakeTopDownAnalyzerForNative(
     useInstance(InlineConstTracker.DoNothing)
     compilerEnvironment.configure(this)
 }.apply {
-    val moduleDescriptor = get<ModuleDescriptorImpl>()
+    konst moduleDescriptor = get<ModuleDescriptorImpl>()
     moduleDescriptor.initialize(get<KotlinCodeAnalyzer>().packageFragmentProvider)
 }.get<LazyTopDownAnalyzer>()

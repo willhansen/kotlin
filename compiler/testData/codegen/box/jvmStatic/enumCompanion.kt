@@ -26,11 +26,11 @@ class Test {
 enum class A {
     ;
     companion object {
-        @JvmField val foo: String = "OK"
+        @JvmField konst foo: String = "OK"
 
-        const val constBar: String = "OK"
+        const konst constBar: String = "OK"
 
-        @JvmStatic val bar: String = "OK"
+        @JvmStatic konst bar: String = "OK"
 
         @JvmStatic fun baz() = foo
     }

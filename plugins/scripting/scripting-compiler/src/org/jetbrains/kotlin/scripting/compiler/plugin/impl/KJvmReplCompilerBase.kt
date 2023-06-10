@@ -52,8 +52,8 @@ import kotlin.script.experimental.util.add
 // NOTE: this implementation, as it is used in the REPL infrastructure, may be created for every snippet and provided with the state
 // so it should not keep any compilation state outside of the stste field
 open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
-    protected val hostConfiguration: ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration,
-    val state: JvmReplCompilerState<*> = JvmReplCompilerState({ createCompilationState(it, hostConfiguration) })
+    protected konst hostConfiguration: ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration,
+    konst state: JvmReplCompilerState<*> = JvmReplCompilerState({ createCompilationState(it, hostConfiguration) })
 ) : ReplCompiler<KJvmCompiledScript>, ScriptCompiler {
 
     override var lastCompiledSnippet: LinkedSnippetImpl<KJvmCompiledScript>? = null
@@ -66,30 +66,30 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
         snippets.map { snippet ->
             // TODO: get rid of messageCollector to avoid creation of additional entities
             withMessageCollector(snippet) { messageCollector ->
-                val initialConfiguration = configuration.refineBeforeParsing(snippet).valueOr {
+                konst initialConfiguration = configuration.refineBeforeParsing(snippet).konstueOr {
                     return it
                 }
 
                 @Suppress("UNCHECKED_CAST")
-                val compilationState = state.getCompilationState(initialConfiguration) as ReplCompilationState<AnalyzerT>
+                konst compilationState = state.getCompilationState(initialConfiguration) as ReplCompilationState<AnalyzerT>
 
                 updateResolutionFilterWithHistory(configuration)
 
-                val (context, errorHolder, snippetKtFile) = prepareForAnalyze(
+                konst (context, errorHolder, snippetKtFile) = prepareForAnalyze(
                     snippet,
                     messageCollector,
                     compilationState,
                     failOnSyntaxErrors = true
-                ).valueOr { return@withMessageCollector it }
+                ).konstueOr { return@withMessageCollector it }
 
-                val (sourceFiles, sourceDependencies) = collectRefinedSourcesAndUpdateEnvironment(
+                konst (sourceFiles, sourceDependencies) = collectRefinedSourcesAndUpdateEnvironment(
                     context,
                     snippetKtFile,
                     initialConfiguration,
                     messageCollector
                 )
 
-                val firstFailure = sourceDependencies.firstOrNull { it.sourceDependencies is ResultWithDiagnostics.Failure }
+                konst firstFailure = sourceDependencies.firstOrNull { it.sourceDependencies is ResultWithDiagnostics.Failure }
                     ?.let { it.sourceDependencies as ResultWithDiagnostics.Failure }
 
                 if (firstFailure != null)
@@ -101,10 +101,10 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
 
                 // TODO: support case then JvmDependencyFromClassLoader is registered in non-first line
                 // registerPackageFragmentProvidersIfNeeded already tries to avoid duplicated registering, but impact on
-                // executing it on every snippet needs to be evaluated first
+                // executing it on every snippet needs to be ekonstuated first
                 if (state.history.isEmpty()) {
-                    val updatedConfiguration = ScriptDependenciesProvider.getInstance(context.environment.project)
-                        ?.getScriptConfigurationResult(snippetKtFile, context.baseScriptCompilationConfiguration)?.valueOrNull()?.configuration
+                    konst updatedConfiguration = ScriptDependenciesProvider.getInstance(context.environment.project)
+                        ?.getScriptConfigurationResult(snippetKtFile, context.baseScriptCompilationConfiguration)?.konstueOrNull()?.configuration
                         ?: context.baseScriptCompilationConfiguration
                     registerPackageFragmentProvidersIfNeeded(
                         updatedConfiguration,
@@ -113,10 +113,10 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
                 }
 
                 // TODO: ensure that currentLineId passing is only used for single snippet compilation
-                val lineId = configuration[ScriptCompilationConfiguration.repl.currentLineId]
+                konst lineId = configuration[ScriptCompilationConfiguration.repl.currentLineId]
                     ?: LineId(state.getNextLineNo(), state.currentGeneration, snippet.hashCode())
 
-                val analysisResult =
+                konst analysisResult =
                     compilationState.analyzerEngine.analyzeReplLineWithImportedScripts(
                         snippetKtFile,
                         sourceFiles.drop(1),
@@ -125,7 +125,7 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
                     )
                 AnalyzerWithCompilerReport.reportDiagnostics(analysisResult.diagnostics, errorHolder, renderDiagnosticName = false)
 
-                val scriptDescriptor = when (analysisResult) {
+                konst scriptDescriptor = when (analysisResult) {
                     is ReplCodeAnalyzerBase.ReplLineAnalysisResult.WithErrors -> return failure(messageCollector)
                     is ReplCodeAnalyzerBase.ReplLineAnalysisResult.Successful -> {
                         (analysisResult.scriptDescriptor as? ScriptDescriptor)
@@ -134,11 +134,11 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
                     else -> throw AssertionError("Unexpected result ${analysisResult::class.java}")
                 }
 
-                val isIr = context.environment.configuration.getBoolean(JVMConfigurationKeys.IR)
+                konst isIr = context.environment.configuration.getBoolean(JVMConfigurationKeys.IR)
 
-                val codegenDiagnosticsCollector = SimpleDiagnosticsCollector()
+                konst codegenDiagnosticsCollector = SimpleDiagnosticsCollector()
 
-                val genStateBuilder = GenerationState.Builder(
+                konst genStateBuilder = GenerationState.Builder(
                     snippetKtFile.project,
                     ClassBuilderFactories.BINARIES,
                     compilationState.analyzerEngine.module,
@@ -146,27 +146,27 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
                     compilationState.environment.configuration
                 ).diagnosticReporter(codegenDiagnosticsCollector)
 
-                val generationState = if (isIr) {
+                konst generationState = if (isIr) {
                     generateWithBackendIr(compilationState, sourceFiles, genStateBuilder)
                 } else {
                     generateWithOldBackend(snippetKtFile, sourceFiles, genStateBuilder)
                 }
 
                 if (codegenDiagnosticsCollector.hasErrors) {
-                    val scriptDiagnostics = codegenDiagnosticsCollector.scriptDiagnostics(snippet)
+                    konst scriptDiagnostics = codegenDiagnosticsCollector.scriptDiagnostics(snippet)
                     return failure(messageCollector, *scriptDiagnostics.toTypedArray())
                 }
 
                 state.history.push(lineId, scriptDescriptor)
 
-                val dependenciesProvider = ScriptDependenciesProvider.getInstance(context.environment.project)
+                konst dependenciesProvider = ScriptDependenciesProvider.getInstance(context.environment.project)
                 makeCompiledScript(
                     generationState,
                     snippet,
                     sourceFiles.first(),
                     sourceDependencies
                 ) { ktFile ->
-                    dependenciesProvider?.getScriptConfigurationResult(ktFile, context.baseScriptCompilationConfiguration)?.valueOrNull()?.configuration
+                    dependenciesProvider?.getScriptConfigurationResult(ktFile, context.baseScriptCompilationConfiguration)?.konstueOrNull()?.configuration
                         ?: context.baseScriptCompilationConfiguration
                 }.onSuccess { compiledScript ->
 
@@ -187,7 +187,7 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
         sourceFiles: List<KtFile>,
         prebuiltState: GenerationState.Builder,
     ): GenerationState {
-        val generationState = prebuiltState.build().also { generationState ->
+        konst generationState = prebuiltState.build().also { generationState ->
             generationState.scriptSpecific.earlierScriptsForReplInterpreter = state.history.map { it.item }
             generationState.beforeCompile()
             generationState.oldBEInitTrace(sourceFiles)
@@ -203,15 +203,15 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
         sourceFiles: List<KtFile>,
         prebuiltState: GenerationState.Builder,
     ): GenerationState {
-        val generatorExtensions = object : JvmGeneratorExtensionsImpl(compilationState.environment.configuration) {
+        konst generatorExtensions = object : JvmGeneratorExtensionsImpl(compilationState.environment.configuration) {
             override fun getPreviousScripts() = state.history.map { compilationState.symbolTable.referenceScript(it.item) }
         }
-        val codegenFactory = JvmIrCodegenFactory(
+        konst codegenFactory = JvmIrCodegenFactory(
             compilationState.environment.configuration,
             compilationState.environment.configuration.get(CLIConfigurationKeys.PHASE_CONFIG),
             compilationState.mangler, compilationState.symbolTable, generatorExtensions
         )
-        val generationState = prebuiltState.build()
+        konst generationState = prebuiltState.build()
 
         codegenFactory.generateModule(
             generationState,
@@ -225,16 +225,16 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
         script: SourceCode,
         scriptCompilationConfiguration: ScriptCompilationConfiguration
     ): ResultWithDiagnostics<CompiledScript> {
-        return when (val res = compile(script, scriptCompilationConfiguration)) {
-            is ResultWithDiagnostics.Success -> res.value.get().asSuccess(res.reports)
+        return when (konst res = compile(script, scriptCompilationConfiguration)) {
+            is ResultWithDiagnostics.Success -> res.konstue.get().asSuccess(res.reports)
             is ResultWithDiagnostics.Failure -> res
         }
     }
 
     protected data class AnalyzePreparationResult(
-        val context: SharedScriptCompilationContext,
-        val errorHolder: MessageCollectorBasedReporter,
-        val snippetKtFile: KtFile
+        konst context: SharedScriptCompilationContext,
+        konst errorHolder: MessageCollectorBasedReporter,
+        konst snippetKtFile: KtFile
     )
 
     protected fun prepareForAnalyze(
@@ -247,7 +247,7 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
             snippet,
             parentMessageCollector
         ) { messageCollector ->
-            val context =
+            konst context =
                 (compilationState as? ReplCompilationState<*>)?.context
                     ?: return failure(
                         snippet, messageCollector, "Internal error: unknown parameter passed as compilationState: $compilationState"
@@ -255,20 +255,20 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
 
             setIdeaIoUseFallback()
 
-            val errorHolder = object : MessageCollectorBasedReporter {
-                override val messageCollector = messageCollector
+            konst errorHolder = object : MessageCollectorBasedReporter {
+                override konst messageCollector = messageCollector
             }
 
-            val snippetKtFile =
+            konst snippetKtFile =
                 getScriptKtFile(
                     snippet,
                     context.baseScriptCompilationConfiguration,
                     context.environment.project,
                     messageCollector
                 )
-                    .valueOr { return it }
+                    .konstueOr { return it }
 
-            val syntaxErrorReport = AnalyzerWithCompilerReport.reportSyntaxErrors(snippetKtFile, errorHolder)
+            konst syntaxErrorReport = AnalyzerWithCompilerReport.reportSyntaxErrors(snippetKtFile, errorHolder)
             if (syntaxErrorReport.isHasErrors && syntaxErrorReport.isAllErrorsAtEof) {
                 messageCollector.report(ScriptDiagnostic(ScriptDiagnostic.incompleteCode, "Incomplete code"))
             }
@@ -282,11 +282,11 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
         }
 
     protected fun updateResolutionFilterWithHistory(configuration: ScriptCompilationConfiguration) {
-        val updatedConfiguration = updateConfigurationWithPreviousScripts(configuration)
+        konst updatedConfiguration = updateConfigurationWithPreviousScripts(configuration)
 
-        val classesToSkip =
+        konst classesToSkip =
             updatedConfiguration[ScriptCompilationConfiguration.skipExtensionsResolutionForImplicits]!!
-        val classesToSkipAfterFirstTime =
+        konst classesToSkipAfterFirstTime =
             updatedConfiguration[ScriptCompilationConfiguration.skipExtensionsResolutionForImplicitsExceptInnermost]!!
 
         (state.compilation as ReplCompilationState<*>).implicitsResolutionFilter.update(classesToSkip, classesToSkipAfterFirstTime)
@@ -296,13 +296,13 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
     private fun updateConfigurationWithPreviousScripts(
         configuration: ScriptCompilationConfiguration
     ): ScriptCompilationConfiguration {
-        val allPreviousLines =
+        konst allPreviousLines =
             generateSequence(lastCompiledSnippet) { it.previous }
                 .map { KotlinType(it.get().scriptClassFQName) }
                 .toList()
 
-        val skipFirstTime = allPreviousLines.subList(0, minOf(1, allPreviousLines.size))
-        val skipAlways =
+        konst skipFirstTime = allPreviousLines.subList(0, minOf(1, allPreviousLines.size))
+        konst skipAlways =
             if (allPreviousLines.isEmpty()) emptyList()
             else allPreviousLines.subList(1, allPreviousLines.size)
 
@@ -327,14 +327,14 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
             hostConfiguration: ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration,
             initAnalyzer: (SharedScriptCompilationContext, ImplicitsExtensionsResolutionFilter) -> AnalyzerT
         ): ReplCompilationState<AnalyzerT> {
-            val context = withMessageCollectorAndDisposable(disposeOnSuccess = false) { messageCollector, disposable ->
+            konst context = withMessageCollectorAndDisposable(disposeOnSuccess = false) { messageCollector, disposable ->
                 createIsolatedCompilationContext(
                     scriptCompilationConfiguration,
                     hostConfiguration,
                     messageCollector,
                     disposable
                 ).asSuccess()
-            }.valueOr { throw IllegalStateException("Unable to initialize repl compiler:\n  ${it.reports.joinToString("\n  ")}") }
+            }.konstueOr { throw IllegalStateException("Unable to initialize repl compiler:\n  ${it.reports.joinToString("\n  ")}") }
 
             return ReplCompilationState(
                 context,
@@ -349,34 +349,34 @@ open class KJvmReplCompilerBase<AnalyzerT : ReplCodeAnalyzerBase>(
 }
 
 class ReplCompilationState<AnalyzerT : ReplCodeAnalyzerBase>(
-    val context: SharedScriptCompilationContext,
-    val analyzerInit: (context: SharedScriptCompilationContext, implicitsResolutionFilter: ImplicitsExtensionsResolutionFilter) -> AnalyzerT,
-    val implicitsResolutionFilter: ReplImplicitsExtensionsResolutionFilter
+    konst context: SharedScriptCompilationContext,
+    konst analyzerInit: (context: SharedScriptCompilationContext, implicitsResolutionFilter: ImplicitsExtensionsResolutionFilter) -> AnalyzerT,
+    konst implicitsResolutionFilter: ReplImplicitsExtensionsResolutionFilter
 ) : JvmReplCompilerState.Compilation {
-    override val disposable: Disposable? get() = context.disposable
-    override val baseScriptCompilationConfiguration: ScriptCompilationConfiguration get() = context.baseScriptCompilationConfiguration
-    override val environment: KotlinCoreEnvironment get() = context.environment
+    override konst disposable: Disposable? get() = context.disposable
+    override konst baseScriptCompilationConfiguration: ScriptCompilationConfiguration get() = context.baseScriptCompilationConfiguration
+    override konst environment: KotlinCoreEnvironment get() = context.environment
 
-    val analyzerEngine: AnalyzerT by lazy {
-        val analyzer = analyzerInit(context, implicitsResolutionFilter)
-        val psiFacade = KotlinJavaPsiFacade.getInstance(environment.project)
+    konst analyzerEngine: AnalyzerT by lazy {
+        konst analyzer = analyzerInit(context, implicitsResolutionFilter)
+        konst psiFacade = KotlinJavaPsiFacade.getInstance(environment.project)
         psiFacade.setNotFoundPackagesCachingStrategy(ReplNotFoundPackagesCachingStrategy)
         analyzer
     }
 
-    private val manglerAndSymbolTable by lazy {
-        val mangler = JvmDescriptorMangler(
+    private konst manglerAndSymbolTable by lazy {
+        konst mangler = JvmDescriptorMangler(
             MainFunctionDetector(analyzerEngine.trace.bindingContext, environment.configuration.languageVersionSettings)
         )
-        val symbolTable = SymbolTable(JvmIdSignatureDescriptor(mangler), IrFactoryImpl)
+        konst symbolTable = SymbolTable(JvmIdSignatureDescriptor(mangler), IrFactoryImpl)
         mangler to symbolTable
     }
 
-    val mangler: JvmDescriptorMangler get() = manglerAndSymbolTable.first
-    val symbolTable: SymbolTable get() = manglerAndSymbolTable.second
+    konst mangler: JvmDescriptorMangler get() = manglerAndSymbolTable.first
+    konst symbolTable: SymbolTable get() = manglerAndSymbolTable.second
 }
 
 /**
  * Internal property for transferring line id information when using new repl infrastructure with legacy one
  */
-val ReplScriptCompilationConfigurationKeys.currentLineId by PropertiesCollection.key<LineId>(isTransient = true)
+konst ReplScriptCompilationConfigurationKeys.currentLineId by PropertiesCollection.key<LineId>(isTransient = true)

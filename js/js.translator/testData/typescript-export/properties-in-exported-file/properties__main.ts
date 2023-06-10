@@ -1,8 +1,8 @@
-import _const_val = JS_TESTS.foo._const_val;
-import _val = JS_TESTS.foo._val;
+import _const_konst = JS_TESTS.foo._const_konst;
+import _konst = JS_TESTS.foo._konst;
 import _var = JS_TESTS.foo._var;
-import _valCustom = JS_TESTS.foo._valCustom;
-import _valCustomWithField = JS_TESTS.foo._valCustomWithField;
+import _konstCustom = JS_TESTS.foo._konstCustom;
+import _konstCustomWithField = JS_TESTS.foo._konstCustomWithField;
 
 function assert(condition: boolean) {
     if (!condition) {
@@ -11,15 +11,15 @@ function assert(condition: boolean) {
 }
 
 function box(): string {
-    assert(_const_val === 1);
-    assert(_val === 1);
+    assert(_const_konst === 1);
+    assert(_konst === 1);
     assert(_var === 1);
 
     JS_TESTS.foo._var = 1000;
     assert(JS_TESTS.foo._var === 1000);
 
-    assert(_valCustom === 1);
-    assert(_valCustomWithField === 2);
+    assert(_konstCustom === 1);
+    assert(_konstCustomWithField === 2);
 
     assert(JS_TESTS.foo._varCustom === 1);
     JS_TESTS.foo._varCustom = 20;

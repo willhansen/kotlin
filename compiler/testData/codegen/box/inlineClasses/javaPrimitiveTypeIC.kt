@@ -5,25 +5,25 @@
 import kotlin.test.*
 
 @JvmInline
-value class I(val x: Int)
+konstue class I(konst x: Int)
 
 @JvmInline
-value class JLI(val x: java.lang.Integer)
+konstue class JLI(konst x: java.lang.Integer)
 
 @JvmInline
-value class U(val x: Unit?)
+konstue class U(konst x: Unit?)
 
 @JvmInline
-value class N(val x: Nothing?)
+konstue class N(konst x: Nothing?)
 
-val icUnit = U(Unit)
-val icNull = N(null)
+konst icUnit = U(Unit)
+konst icNull = N(null)
 
-val anyIcUnit: Any = icUnit
-val anyIcNull: Any = icNull
+konst anyIcUnit: Any = icUnit
+konst anyIcNull: Any = icNull
 
-val z = I(42)
-val jli = JLI(java.lang.Integer(42))
+konst z = I(42)
+konst jli = JLI(java.lang.Integer(42))
 
 fun box(): String {
     assertEquals(null, icUnit::class.javaPrimitiveType)

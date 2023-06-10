@@ -30,28 +30,28 @@ import org.jetbrains.kotlin.types.model.TypeArgumentMarker
 
 class KotlinUserTypeStubImpl(
     parent: StubElement<out PsiElement>?,
-    val upperBound: KotlinTypeBean? = null
+    konst upperBound: KotlinTypeBean? = null
 ) : KotlinStubBaseImpl<KtUserType>(parent, KtStubElementTypes.USER_TYPE), KotlinUserTypeStub
 
 sealed interface KotlinTypeBean : KotlinTypeMarker {
-    val nullable: Boolean
+    konst nullable: Boolean
 }
 
-data class KotlinFlexibleTypeBean(val lowerBound: KotlinTypeBean, val upperBound: KotlinTypeBean) : KotlinTypeBean, FlexibleTypeMarker {
-    override val nullable: Boolean
+data class KotlinFlexibleTypeBean(konst lowerBound: KotlinTypeBean, konst upperBound: KotlinTypeBean) : KotlinTypeBean, FlexibleTypeMarker {
+    override konst nullable: Boolean
         get() = lowerBound.nullable
 }
 
 data class KotlinClassTypeBean(
-    val classId: ClassId,
-    val arguments: List<KotlinTypeArgumentBean>,
-    override val nullable: Boolean,
+    konst classId: ClassId,
+    konst arguments: List<KotlinTypeArgumentBean>,
+    override konst nullable: Boolean,
 ) : KotlinTypeBean, SimpleTypeMarker
 
-data class KotlinTypeArgumentBean(val projectionKind: KtProjectionKind, val type: KotlinTypeBean?) : TypeArgumentMarker
+data class KotlinTypeArgumentBean(konst projectionKind: KtProjectionKind, konst type: KotlinTypeBean?) : TypeArgumentMarker
 
 data class KotlinTypeParameterTypeBean(
-    val typeParameterName: String,
-    override val nullable: Boolean,
-    val definitelyNotNull: Boolean
+    konst typeParameterName: String,
+    override konst nullable: Boolean,
+    konst definitelyNotNull: Boolean
 ) : KotlinTypeBean, SimpleTypeMarker

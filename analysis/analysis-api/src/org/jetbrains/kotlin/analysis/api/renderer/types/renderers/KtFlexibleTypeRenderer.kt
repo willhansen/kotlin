@@ -32,8 +32,8 @@ public interface KtFlexibleTypeRenderer {
     public object AS_SHORT : KtFlexibleTypeRenderer {
         context(KtAnalysisSession, KtTypeRenderer)
         override fun renderType(type: KtFlexibleType, printer: PrettyPrinter): Unit = printer {
-            val lower = type.lowerBound
-            val upper = type.upperBound
+            konst lower = type.lowerBound
+            konst upper = type.upperBound
 
             when {
                 isNullabilityFlexibleType(lower, upper) -> {
@@ -61,7 +61,7 @@ public interface KtFlexibleTypeRenderer {
         }
 
         private fun isNullabilityFlexibleType(lower: KtType, upper: KtType): Boolean {
-            val isTheSameType = lower is KtNonErrorClassType && upper is KtNonErrorClassType && lower.classId == upper.classId ||
+            konst isTheSameType = lower is KtNonErrorClassType && upper is KtNonErrorClassType && lower.classId == upper.classId ||
                     lower is KtTypeParameterType && upper is KtTypeParameterType && lower.symbol == upper.symbol
             if (isTheSameType &&
                 lower.nullability == KtTypeNullability.NON_NULLABLE

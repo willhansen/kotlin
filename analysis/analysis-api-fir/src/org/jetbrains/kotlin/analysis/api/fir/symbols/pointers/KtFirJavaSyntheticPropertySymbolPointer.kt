@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.name.Name
 
 internal class KtFirJavaSyntheticPropertySymbolPointer(
     ownerPointer: KtSymbolPointer<KtSymbolWithMembers>,
-    private val propertyName: Name,
-    private val isSynthetic: Boolean,
+    private konst propertyName: Name,
+    private konst isSynthetic: Boolean,
 ) : KtFirMemberSymbolPointer<KtSyntheticJavaPropertySymbol>(ownerPointer) {
     override fun KtFirAnalysisSession.chooseCandidateAndCreateSymbol(
         candidates: FirScope,
         firSession: FirSession,
     ): KtSyntheticJavaPropertySymbol? {
-        val syntheticProperty = candidates.getProperties(propertyName)
+        konst syntheticProperty = candidates.getProperties(propertyName)
             .mapNotNull { it.fir as? FirSyntheticProperty }
             .singleOrNull()
             ?: return null
@@ -39,7 +39,7 @@ internal class KtFirJavaSyntheticPropertySymbolPointer(
 
     context(KtFirAnalysisSession)
     override fun getSearchScope(owner: FirClassSymbol<*>): FirScope? {
-        val baseScope = super.getSearchScope(owner) as? FirTypeScope ?: return null
+        konst baseScope = super.getSearchScope(owner) as? FirTypeScope ?: return null
         return if (isSynthetic) {
             FirSyntheticPropertiesScope.createIfSyntheticNamesProviderIsDefined(
                 session = useSiteSession,

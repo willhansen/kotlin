@@ -10,23 +10,23 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 import java.io.File
 
-abstract class FirIdenticalCheckerHelper(private val testServices: TestServices) {
+abstract class FirIdenticalCheckerHelper(private konst testServices: TestServices) {
     companion object {
-        private val isTeamCityBuild: Boolean = System.getenv("TEAMCITY_VERSION") != null
+        private konst isTeamCityBuild: Boolean = System.getenv("TEAMCITY_VERSION") != null
     }
 
     abstract fun getClassicFileToCompare(testDataFile: File): File?
     abstract fun getFirFileToCompare(testDataFile: File): File?
 
     fun firAndClassicContentsAreEquals(testDataFile: File, trimLines: Boolean = false): Boolean {
-        val classicFile = getClassicFileToCompare(testDataFile) ?: return true
-        val firFile = getFirFileToCompare(testDataFile) ?: return true
+        konst classicFile = getClassicFileToCompare(testDataFile) ?: return true
+        konst firFile = getFirFileToCompare(testDataFile) ?: return true
         return contentsAreEquals(classicFile, firFile, trimLines)
     }
 
     fun contentsAreEquals(classicFile: File, firFile: File, trimLines: Boolean = false): Boolean {
-        val classicFileContent = readContent(classicFile, trimLines)
-        val firFileContent = readContent(firFile, trimLines)
+        konst classicFileContent = readContent(classicFile, trimLines)
+        konst firFileContent = readContent(firFile, trimLines)
         return classicFileContent == firFileContent
     }
 
@@ -40,14 +40,14 @@ abstract class FirIdenticalCheckerHelper(private val testServices: TestServices)
 
     fun addDirectiveToClassicFileAndAssert(testDataFile: File) {
         if (!isTeamCityBuild) {
-            val classicFileContent = testDataFile.readText()
+            konst classicFileContent = testDataFile.readText()
             testDataFile.writer().use {
                 it.appendLine("// ${FirDiagnosticsDirectives.FIR_IDENTICAL.name}")
                 it.append(classicFileContent)
             }
         }
 
-        val message = if (isTeamCityBuild) {
+        konst message = if (isTeamCityBuild) {
             "Please remove .fir.txt dump and add // FIR_IDENTICAL to test source"
         } else {
             "Deleted .fir.txt dump, added // FIR_IDENTICAL to test source"

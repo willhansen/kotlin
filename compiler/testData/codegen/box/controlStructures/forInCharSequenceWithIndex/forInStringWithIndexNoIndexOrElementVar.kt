@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-val xs = "abcd"
+konst xs = "abcd"
 
 fun box(): String {
     var count = 0

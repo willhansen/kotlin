@@ -16,9 +16,9 @@ class Checker {
 class Dummy
 
 fun enableAssertions(): Checker {
-    val loader = Dummy::class.java.classLoader
+    konst loader = Dummy::class.java.classLoader
     loader.setPackageAssertionStatus("suspendFunctionAssertionsEnabled", true)
-    val c = loader.loadClass("suspendFunctionAssertionsEnabled.Checker")
+    konst c = loader.loadClass("suspendFunctionAssertionsEnabled.Checker")
     return c.newInstance() as Checker
 }
 

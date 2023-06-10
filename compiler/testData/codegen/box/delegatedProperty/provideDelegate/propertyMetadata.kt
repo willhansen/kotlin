@@ -16,9 +16,9 @@ operator fun String.provideDelegate(host: Any?, p: KProperty<*>): String =
 operator fun String.getValue(receiver: Any?, p: KProperty<*>): String =
         if (p.name == this) runLogged("get($this);") { this } else "fail 2"
 
-val O by runLogged("O;") { "O" }
-val K by runLogged("K;") { "K" }
-val OK = runLogged("OK;") { O + K }
+konst O by runLogged("O;") { "O" }
+konst K by runLogged("K;") { "K" }
+konst OK = runLogged("OK;") { O + K }
 
 fun box(): String {
     assertEquals("O;tdf(O);K;tdf(K);OK;get(O);get(K);", log)

@@ -36,7 +36,7 @@ object TrailingCommaDeclarationChecker : DeclarationChecker {
                 TrailingCommaChecker.check(declaration.typeParameterList?.trailingComma, context.trace, context.languageVersionSettings)
             }
             is KtCallableDeclaration -> { // also it's executed for anonymous function declarations
-                TrailingCommaChecker.check(declaration.valueParameterList?.trailingComma, context.trace, context.languageVersionSettings)
+                TrailingCommaChecker.check(declaration.konstueParameterList?.trailingComma, context.trace, context.languageVersionSettings)
                 TrailingCommaChecker.check(declaration.typeParameterList?.trailingComma, context.trace, context.languageVersionSettings)
                 if (declaration is KtProperty && declaration.setter != null) {
                     TrailingCommaChecker.check(
@@ -58,7 +58,7 @@ object TrailingCommaDeclarationChecker : DeclarationChecker {
 
 object TrailingCommaCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        when (val callElement = resolvedCall.call.callElement) {
+        when (konst callElement = resolvedCall.call.callElement) {
             is KtArrayAccessExpression -> TrailingCommaChecker.check(
                 callElement.trailingComma,
                 context.trace,
@@ -78,7 +78,7 @@ object TrailingCommaCallChecker : CallChecker {
             }
             else -> {
                 resolvedCall.call.run {
-                    TrailingCommaChecker.check(valueArgumentList?.trailingComma, context.trace, context.languageVersionSettings)
+                    TrailingCommaChecker.check(konstueArgumentList?.trailingComma, context.trace, context.languageVersionSettings)
                 }
             }
         }

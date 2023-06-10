@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1324
 package foo
 
-open class A(private val x: String) {
+open class A(private konst x: String) {
     fun foo(): String {
         class B : A("fail1: simple nested") {
             fun bar() = x
@@ -10,7 +10,7 @@ open class A(private val x: String) {
     }
 }
 
-open class A1(private val x: String) {
+open class A1(private konst x: String) {
     fun foo(): String {
         class B1 {
             fun bar(): String {
@@ -24,7 +24,7 @@ open class A1(private val x: String) {
     }
 }
 
-open class A2(private val x: String) {
+open class A2(private konst x: String) {
     fun foo(): String {
         class B2 : A2("fail3: deeply nested") {
             fun bar(): String {
@@ -39,13 +39,13 @@ open class A2(private val x: String) {
 }
 
 fun box(): String {
-    val result = A("OK").foo()
+    konst result = A("OK").foo()
     if (result != "OK") return result
 
-    val result1 = A1("OK").foo()
+    konst result1 = A1("OK").foo()
     if (result1 != "OK") return result1
 
-    val result2 = A2("OK").foo()
+    konst result2 = A2("OK").foo()
     if (result2 != "OK") return result2
 
     return "OK"

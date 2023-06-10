@@ -23,24 +23,24 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames
 
 
-val jvmSafeCallFoldingPhase = makeIrFilePhase(
+konst jvmSafeCallFoldingPhase = makeIrFilePhase(
     ::JvmSafeCallChainFoldingLowering,
     name = "JvmSafeCallChainFoldingLowering",
     description = "Fold safe call chains to more compact forms"
 )
 
 
-class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLoweringPass {
+class JvmSafeCallChainFoldingLowering(konst context: JvmBackendContext) : FileLoweringPass {
     // Overall idea here is to represent (possibly chained) safe calls as an if-expression in the form:
     //      when {
-    //          { val tmp = <safe_receiver>; tmp != null } -> <safe_call_result>
+    //          { konst tmp = <safe_receiver>; tmp != null } -> <safe_call_result>
     //          else -> null
     //      }
     // This allows chaining safe calls like 'a?.foo()?.bar()?.qux()':
     //      when {
-    //          { val tmp1 = a; tmp1 != null } &&
-    //          { val tmp2 = tmp1.foo(); tmp2 != null } &&
-    //          { val tmp3 = tmp2.bar(); tmp3 != null } ->
+    //          { konst tmp1 = a; tmp1 != null } &&
+    //          { konst tmp2 = tmp1.foo(); tmp2 != null } &&
+    //          { konst tmp3 = tmp2.bar(); tmp3 != null } ->
     //              tmp3.qux()
     //          else ->
     //              null
@@ -54,7 +54,7 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
     //
     // Similarly, elvises can be represented in the form:
     //      when {
-    //          { val tmp = <elvis_lhs>; tmp != null } ->
+    //          { konst tmp = <elvis_lhs>; tmp != null } ->
     //              tmp
     //          else ->
     //              <elvis_rhs>
@@ -73,18 +73,18 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
     // e.g., 'a?.foo() ?: b?.bar()?.qux() ?: c'
     // in a folded form:
     //      when {
-    //          { val tmp1 = a; tmp1 != null } &&
-    //          { val tmp2 = tmp1.foo; tmp1 != null } ->
+    //          { konst tmp1 = a; tmp1 != null } &&
+    //          { konst tmp2 = tmp1.foo; tmp1 != null } ->
     //              tmp2
-    //          { val tmp3 = b; tmp3 != null } &&
-    //          { val tmp4 = tmp2.bar(); tmp4 != null } &&
-    //          { val tmp5 = tmp4.qux(); tmp5 != null } ->
+    //          { konst tmp3 = b; tmp3 != null } &&
+    //          { konst tmp4 = tmp2.bar(); tmp4 != null } &&
+    //          { konst tmp5 = tmp4.qux(); tmp5 != null } ->
     //              tmp5
     //          else ->
     //              c
     //      }
     // which can be further simplified depending on the nullability of subexpressions in 'a?.foo() ?: b?.bar()?.qux() ?: c'.
-    // We should perform such simplification carefully, since a value of a non-null type can be uninitialized at runtime.
+    // We should perform such simplification carefully, since a konstue of a non-null type can be uninitialized at runtime.
     // In bytecode this produces a chain of temporary STORE-LOAD and IFNULL checks that can be optimized to a compact sequence
     // of stack operations and IFNULL checks.
 
@@ -92,7 +92,7 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
         irFile.transformChildrenVoid(Transformer())
     }
 
-    private val booleanNot = context.irBuiltIns.booleanNotSymbol
+    private konst booleanNot = context.irBuiltIns.booleanNotSymbol
 
     private fun IrExpression.irNot() =
         IrCallImpl.fromSymbolOwner(startOffset, endOffset, booleanNot).apply {
@@ -137,12 +137,12 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
         override fun visitBlock(expression: IrBlock): IrExpression {
             expression.transformChildrenVoid()
 
-            val safeCallInfo = expression.parseSafeCall(context.irBuiltIns)
+            konst safeCallInfo = expression.parseSafeCall(context.irBuiltIns)
             if (safeCallInfo != null) {
                 return foldSafeCall(safeCallInfo)
             }
 
-            val elvisInfo = expression.parseElvis(context.irBuiltIns)
+            konst elvisInfo = expression.parseElvis(context.irBuiltIns)
             if (elvisInfo != null) {
                 return foldElvis(elvisInfo)
             }
@@ -155,25 +155,25 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
         private fun foldSafeCall(safeCallInfo: SafeCallInfo): IrExpression {
             // We have a safe call in the form:
             //      {   // SAFE_CALL
-            //          val tmp = <safe_receiver>
+            //          konst tmp = <safe_receiver>
             //          when {
             //              tmp == null -> null
             //              else -> <safe_call_result>
             //          }
             //      }
-            val safeCallBlock = safeCallInfo.block
-            val startOffset = safeCallBlock.startOffset
-            val endOffset = safeCallBlock.endOffset
-            val safeCallType = safeCallBlock.type
-            val safeCallTmpVal = safeCallInfo.tmpVal
+            konst safeCallBlock = safeCallInfo.block
+            konst startOffset = safeCallBlock.startOffset
+            konst endOffset = safeCallBlock.endOffset
+            konst safeCallType = safeCallBlock.type
+            konst safeCallTmpVal = safeCallInfo.tmpVal
 
-            val tmpValInitializer = safeCallTmpVal.initializer
+            konst tmpValInitializer = safeCallTmpVal.initializer
             if (tmpValInitializer is IrBlock && tmpValInitializer.origin == JvmLoweredStatementOrigin.FOLDED_SAFE_CALL) {
                 // Chained safe call.
                 // If <safe_receiver> is a FOLDED_SAFE_CALL form, rewrite safe call to:
                 //      {   // FOLDED_SAFE_CALL
                 //          when {
-                //              <safe_receiver_condition> && { val tmp = <safe_receiver_result>; tmp != null } ->
+                //              <safe_receiver_condition> && { konst tmp = <safe_receiver_result>; tmp != null } ->
                 //                  <safe_call_result>
                 //              else ->
                 //                  null
@@ -187,13 +187,13 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                 //                  else -> null
                 //              }
                 //          }
-                val foldedBlock: IrBlock = tmpValInitializer
-                val foldedWhen = foldedBlock.statements[0] as IrWhen
-                val safeReceiverCondition = foldedWhen.branches[0].condition
-                val safeReceiverResult = foldedWhen.branches[0].result
+                konst foldedBlock: IrBlock = tmpValInitializer
+                konst foldedWhen = foldedBlock.statements[0] as IrWhen
+                konst safeReceiverCondition = foldedWhen.branches[0].condition
+                konst safeReceiverResult = foldedWhen.branches[0].result
                 safeCallTmpVal.initializer = safeReceiverResult
                 safeCallTmpVal.type = safeReceiverResult.type
-                val foldedConditionPart =
+                konst foldedConditionPart =
                     IrCompositeImpl(
                         startOffset, endOffset, context.irBuiltIns.booleanType, null,
                         listOf<IrStatement>(
@@ -211,14 +211,14 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                 // If <safe_receiver> itself is not a FOLDED_SAFE_CALL form, rewrite safe call to:
                 //      {   // FOLDED_SAFE_CALL
                 //          when {
-                //              { val tmp = <safe_receiver>; tmp != null } ->
+                //              { konst tmp = <safe_receiver>; tmp != null } ->
                 //                  <safe_call_result>
                 //              else ->
                 //                  null
                 //          }
                 //      }
 
-                val foldedCondition =
+                konst foldedCondition =
                     IrCompositeImpl(
                         startOffset, endOffset, context.irBuiltIns.booleanType, null,
                         listOf<IrStatement>(
@@ -226,9 +226,9 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                             irValNotNull(startOffset, endOffset, safeCallTmpVal)
                         )
                     )
-                val safeCallResult = safeCallInfo.ifNotNullBranch.result
-                val nullResult = safeCallInfo.ifNullBranch.result
-                val foldedWhen = IrWhenImpl(
+                konst safeCallResult = safeCallInfo.ifNotNullBranch.result
+                konst nullResult = safeCallInfo.ifNullBranch.result
+                konst foldedWhen = IrWhenImpl(
                     startOffset, endOffset, safeCallType, JvmLoweredStatementOrigin.FOLDED_SAFE_CALL,
                     listOf(
                         IrBranchImpl(startOffset, endOffset, foldedCondition, safeCallResult),
@@ -240,19 +240,19 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
         }
 
         private fun foldElvis(elvisInfo: ElvisInfo): IrExpression {
-            val elvisLhs = elvisInfo.elvisLhs
-            val elvisBlock = elvisInfo.block
-            val startOffset = elvisBlock.startOffset
-            val endOffset = elvisBlock.endOffset
-            val elvisType = elvisBlock.type
-            val elvisTmpVal = elvisInfo.tmpVal
+            konst elvisLhs = elvisInfo.elvisLhs
+            konst elvisBlock = elvisInfo.block
+            konst startOffset = elvisBlock.startOffset
+            konst endOffset = elvisBlock.endOffset
+            konst elvisType = elvisBlock.type
+            konst elvisTmpVal = elvisInfo.tmpVal
 
             when {
                 elvisLhs is IrBlock && elvisLhs.origin == JvmLoweredStatementOrigin.FOLDED_SAFE_CALL -> {
                     // Fold elvis with safe call.
                     // Given elvis expression:
                     //      {   // ELVIS
-                    //          val tmp = <elvis_lhs>
+                    //          konst tmp = <elvis_lhs>
                     //          when {
                     //              tmp == null -> <elvis_lhs>
                     //              else -> null
@@ -268,7 +268,7 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                     // rewrite it to
                     //      {   // FOLDED_ELVIS
                     //          when {
-                    //              <safe_call_condition> && { val tmp = <safe_call_result>; tmp != null } ->
+                    //              <safe_call_condition> && { konst tmp = <safe_call_result>; tmp != null } ->
                     //                  tmp
                     //              else ->
                     //                  <elvis_rhs>
@@ -277,7 +277,7 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                     // If <elvis_rhs> is a folded safe call with non-null result, we can inline the underlying 'when':
                     //      {   // FOLDED_ELVIS
                     //          when {
-                    //              <safe_call_condition> && { val tmp = <safe_call_result>; tmp != null } ->
+                    //              <safe_call_condition> && { konst tmp = <safe_call_result>; tmp != null } ->
                     //                  tmp
                     //              <rhs_safe_call_condition> ->
                     //                  <rhs_safe_call_result>
@@ -286,12 +286,12 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                     //          }
                     //      }
 
-                    val safeCallWhen = elvisLhs.statements[0] as IrWhen
-                    val safeCallCondition = safeCallWhen.branches[0].condition
-                    val safeCallResult = safeCallWhen.branches[0].result
+                    konst safeCallWhen = elvisLhs.statements[0] as IrWhen
+                    konst safeCallCondition = safeCallWhen.branches[0].condition
+                    konst safeCallResult = safeCallWhen.branches[0].result
                     elvisTmpVal.initializer = safeCallResult
                     elvisTmpVal.type = safeCallResult.type
-                    val foldedConditionPart =
+                    konst foldedConditionPart =
                         IrCompositeImpl(
                             startOffset, endOffset, context.irBuiltIns.booleanType, null,
                             listOf<IrStatement>(
@@ -299,7 +299,7 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                                 irValNotNull(startOffset, endOffset, elvisTmpVal)
                             )
                         )
-                    val branches = ArrayList<IrBranch>()
+                    konst branches = ArrayList<IrBranch>()
                     branches.add(
                         IrBranchImpl(
                             startOffset, endOffset,
@@ -307,9 +307,9 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                             IrGetValueImpl(startOffset, endOffset, elvisTmpVal.symbol)
                         )
                     )
-                    val elvisRhs = elvisInfo.elvisRhs
+                    konst elvisRhs = elvisInfo.elvisRhs
                     if (elvisRhs.isFoldedSafeCallWithNonNullResult()) {
-                        val rhsInnerWhen = (elvisRhs as IrBlock).statements[0] as IrWhen
+                        konst rhsInnerWhen = (elvisRhs as IrBlock).statements[0] as IrWhen
                         branches.addAll(rhsInnerWhen.branches)
                     } else {
                         branches.add(IrBranchImpl(startOffset, endOffset, irTrue(startOffset, endOffset), elvisInfo.elvisRhs))
@@ -319,7 +319,7 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                 }
                 elvisLhs is IrBlock && elvisLhs.origin == JvmLoweredStatementOrigin.FOLDED_ELVIS -> {
                     // Append branches to the inner elvis:
-                    //      val t = { // FOLDED_ELVIS
+                    //      konst t = { // FOLDED_ELVIS
                     //          when {
                     //              ... <innerElvisBranches> ...
                     //              else -> <innerElvisRhs>
@@ -333,17 +333,17 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                     //      { // FOLDED_ELVIS
                     //          when {
                     //              ... <innerElvisBranches> ...
-                    //              { val t = <innerElvisRhs>; t != null } -> t
+                    //              { konst t = <innerElvisRhs>; t != null } -> t
                     //              else -> <outerElvisRhs>
                     //          }
                     //      }
                     // TODO maybe we can do somewhat better if we analyze innerElvisRhs as well
-                    val innerElvisWhen = elvisLhs.statements[0] as IrWhen
-                    val innerElvisLastBranch = innerElvisWhen.branches.last()
-                    val innerElvisRhs = innerElvisLastBranch.result
+                    konst innerElvisWhen = elvisLhs.statements[0] as IrWhen
+                    konst innerElvisLastBranch = innerElvisWhen.branches.last()
+                    konst innerElvisRhs = innerElvisLastBranch.result
                     elvisTmpVal.initializer = innerElvisRhs
                     elvisTmpVal.type = innerElvisRhs.type
-                    val newCondition = IrCompositeImpl(
+                    konst newCondition = IrCompositeImpl(
                         startOffset, endOffset, context.irBuiltIns.booleanType, null,
                         listOf(
                             elvisTmpVal, irValNotNull(startOffset, endOffset, elvisTmpVal)
@@ -364,7 +364,7 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                 else -> {
                     // Plain elvis.
                     //      {   // ELVIS
-                    //          val tmp = <lhs>
+                    //          konst tmp = <lhs>
                     //          when {
                     //              tmp == null -> <rhs>
                     //              else -> tmp
@@ -373,15 +373,15 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                     // Fold it as:
                     //      {   // FOLDED_ELVIS
                     //          when {
-                    //              { val tmp = <lhs>; tmp != null } -> tmp
+                    //              { konst tmp = <lhs>; tmp != null } -> tmp
                     //              else -> rhs
                     //          }
                     //      }
-                    val newCondition = IrCompositeImpl(
+                    konst newCondition = IrCompositeImpl(
                         startOffset, endOffset, context.irBuiltIns.booleanType, null,
                         listOf(elvisTmpVal, irValNotNull(startOffset, endOffset, elvisTmpVal))
                     )
-                    val foldedWhen = IrWhenImpl(
+                    konst foldedWhen = IrWhenImpl(
                         startOffset, endOffset, elvisType, JvmLoweredStatementOrigin.FOLDED_ELVIS,
                         listOf(
                             IrBranchImpl(startOffset, endOffset, newCondition, IrGetValueImpl(startOffset, endOffset, elvisTmpVal.symbol)),
@@ -396,8 +396,8 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
         private fun IrExpression.isFoldedSafeCallWithNonNullResult(): Boolean {
             if (this !is IrBlock) return false
             if (this.origin != JvmLoweredStatementOrigin.FOLDED_SAFE_CALL) return false
-            val innerWhen = this.statements[0] as? IrWhen ?: return false
-            val safeCallResult = innerWhen.branches[0].result
+            konst innerWhen = this.statements[0] as? IrWhen ?: return false
+            konst safeCallResult = innerWhen.branches[0].result
             return !safeCallResult.type.isJvmNullable()
         }
 
@@ -405,16 +405,16 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
             expression.transformChildrenVoid()
 
             if (expression.symbol == context.irBuiltIns.eqeqSymbol) {
-                val startOffset = expression.startOffset
-                val endOffset = expression.endOffset
+                konst startOffset = expression.startOffset
+                konst endOffset = expression.endOffset
 
-                val left = expression.getValueArgument(0)
-                    ?: throw AssertionError("No value argument #0: ${expression.dump()}")
-                val right = expression.getValueArgument(1)
-                    ?: throw AssertionError("No value argument #1: ${expression.dump()}")
+                konst left = expression.getValueArgument(0)
+                    ?: throw AssertionError("No konstue argument #0: ${expression.dump()}")
+                konst right = expression.getValueArgument(1)
+                    ?: throw AssertionError("No konstue argument #1: ${expression.dump()}")
                 if (left is IrBlock && left.origin == JvmLoweredStatementOrigin.FOLDED_SAFE_CALL && right.type.isJvmPrimitive()) {
-                    val safeCallWhen = left.statements[0] as IrWhen
-                    val safeCallResult = safeCallWhen.branches[0].result
+                    konst safeCallWhen = left.statements[0] as IrWhen
+                    konst safeCallResult = safeCallWhen.branches[0].result
                     expression.putValueArgument(0, safeCallResult)
                     safeCallWhen.branches[0].result = expression
                     safeCallWhen.branches[1].result = irFalse(startOffset, endOffset)
@@ -422,8 +422,8 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
                     return safeCallWhen.wrapWithBlock(origin = null)
                 }
                 if (right is IrBlock && right.origin == JvmLoweredStatementOrigin.FOLDED_SAFE_CALL && left.type.isJvmPrimitive()) {
-                    val safeCallWhen = right.statements[0] as IrWhen
-                    val safeCallResult = safeCallWhen.branches[0].result
+                    konst safeCallWhen = right.statements[0] as IrWhen
+                    konst safeCallResult = safeCallWhen.branches[0].result
                     expression.putValueArgument(1, safeCallResult)
                     safeCallWhen.branches[0].result = expression
                     safeCallWhen.branches[1].result = irFalse(startOffset, endOffset)
@@ -439,15 +439,15 @@ class JvmSafeCallChainFoldingLowering(val context: JvmBackendContext) : FileLowe
 
 
 internal class SafeCallInfo(
-    val block: IrBlock,
-    val tmpVal: IrVariable,
-    val ifNullBranch: IrBranch,
-    val ifNotNullBranch: IrBranch
+    konst block: IrBlock,
+    konst tmpVal: IrVariable,
+    konst ifNullBranch: IrBranch,
+    konst ifNotNullBranch: IrBranch
 )
 
 internal fun IrBlock.parseSafeCall(irBuiltIns: IrBuiltIns): SafeCallInfo? {
     //  {
-    //      val tmp = <safe_receiver>
+    //      konst tmp = <safe_receiver>
     //      when {
     //          tmp == null -> null
     //          else -> <safe_call_result>
@@ -455,36 +455,36 @@ internal fun IrBlock.parseSafeCall(irBuiltIns: IrBuiltIns): SafeCallInfo? {
     //  }
 
     if (this.statements.size != 2) return null
-    val tmpVal = this.statements[0] as? IrVariable ?: return null
-    val whenExpr = this.statements[1] as? IrWhen ?: return null
+    konst tmpVal = this.statements[0] as? IrVariable ?: return null
+    konst whenExpr = this.statements[1] as? IrWhen ?: return null
     if (whenExpr.branches.size != 2) return null
 
-    val ifNullBranch = whenExpr.branches[0]
-    val ifNullBranchCondition = ifNullBranch.condition
+    konst ifNullBranch = whenExpr.branches[0]
+    konst ifNullBranchCondition = ifNullBranch.condition
     if (ifNullBranchCondition !is IrCall) return null
     if (ifNullBranchCondition.symbol != irBuiltIns.eqeqSymbol) return null
-    val arg0 = ifNullBranchCondition.getValueArgument(0)
+    konst arg0 = ifNullBranchCondition.getValueArgument(0)
     if (arg0 !is IrGetValue || arg0.symbol != tmpVal.symbol) return null
-    val arg1 = ifNullBranchCondition.getValueArgument(1)
-    if (arg1 !is IrConst<*> || arg1.value != null) return null
-    val ifNullBranchResult = ifNullBranch.result
-    if (ifNullBranchResult !is IrConst<*> || ifNullBranchResult.value != null) return null
+    konst arg1 = ifNullBranchCondition.getValueArgument(1)
+    if (arg1 !is IrConst<*> || arg1.konstue != null) return null
+    konst ifNullBranchResult = ifNullBranch.result
+    if (ifNullBranchResult !is IrConst<*> || ifNullBranchResult.konstue != null) return null
 
-    val ifNotNullBranch = whenExpr.branches[1]
+    konst ifNotNullBranch = whenExpr.branches[1]
     return SafeCallInfo(this, tmpVal, ifNullBranch, ifNotNullBranch)
 }
 
 
 internal class ElvisInfo(
-    val block: IrBlock,
-    val tmpVal: IrVariable,
-    val elvisLhs: IrExpression,
-    val elvisRhs: IrExpression
+    konst block: IrBlock,
+    konst tmpVal: IrVariable,
+    konst elvisLhs: IrExpression,
+    konst elvisRhs: IrExpression
 )
 
 internal fun IrBlock.parseElvis(irBuiltIns: IrBuiltIns): ElvisInfo? {
     //  {
-    //      val tmp = <elvis_lhs>
+    //      konst tmp = <elvis_lhs>
     //      when {
     //          tmp == null -> <elvis_rhs>
     //          else -> tmp
@@ -492,23 +492,23 @@ internal fun IrBlock.parseElvis(irBuiltIns: IrBuiltIns): ElvisInfo? {
     //  }
 
     if (this.statements.size != 2) return null
-    val tmpVal = this.statements[0] as? IrVariable ?: return null
-    val whenExpr = this.statements[1] as? IrWhen ?: return null
+    konst tmpVal = this.statements[0] as? IrVariable ?: return null
+    konst whenExpr = this.statements[1] as? IrWhen ?: return null
     if (whenExpr.branches.size != 2) return null
 
-    val elvisLhs = tmpVal.initializer ?: return null
-    val ifNullBranch = whenExpr.branches[0]
-    val ifNullBranchCondition = ifNullBranch.condition
+    konst elvisLhs = tmpVal.initializer ?: return null
+    konst ifNullBranch = whenExpr.branches[0]
+    konst ifNullBranchCondition = ifNullBranch.condition
     if (ifNullBranchCondition !is IrCall) return null
     if (ifNullBranchCondition.symbol != irBuiltIns.eqeqSymbol) return null
-    val arg0 = ifNullBranchCondition.getValueArgument(0)
+    konst arg0 = ifNullBranchCondition.getValueArgument(0)
     if (arg0 !is IrGetValue || arg0.symbol != tmpVal.symbol) return null
-    val arg1 = ifNullBranchCondition.getValueArgument(1)
-    if (arg1 !is IrConst<*> || arg1.value != null) return null
-    val elvisRhs = ifNullBranch.result
+    konst arg1 = ifNullBranchCondition.getValueArgument(1)
+    if (arg1 !is IrConst<*> || arg1.konstue != null) return null
+    konst elvisRhs = ifNullBranch.result
 
-    val ifNonNullBranch = whenExpr.branches[1]
-    val ifNonNullBranchResult = ifNonNullBranch.result
+    konst ifNonNullBranch = whenExpr.branches[1]
+    konst ifNonNullBranchResult = ifNonNullBranch.result
     if (ifNonNullBranchResult !is IrGetValue || ifNonNullBranchResult.symbol != tmpVal.symbol) return null
 
     return ElvisInfo(this, tmpVal, elvisLhs, elvisRhs)

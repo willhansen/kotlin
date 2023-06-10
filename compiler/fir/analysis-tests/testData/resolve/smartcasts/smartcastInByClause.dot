@@ -90,7 +90,7 @@ digraph smartcastInByClause_kt {
             31 [label="Stub" style="filled" fillcolor=gray];
             32 [label="Lhs of ?: is not null"];
             33 [label="Exit ?:"];
-            34 [label="Variable declaration: lval path: R|kotlin/String|"];
+            34 [label="Variable declaration: lkonst path: R|kotlin/String|"];
             35 [label="Access variable R|<local>/a|"];
             36 [label="Smart cast: R|<local>/a|"];
             37 [label="Access variable R|/A.index|"];
@@ -132,7 +132,7 @@ digraph smartcastInByClause_kt {
 
     private final field $$delegate_0: R|Base| = R|/Derived.Derived|(R|<local>/a|.R|/A.index|)
 
-    public final val x: R|kotlin/Int| = R|<local>/a|.R|/A.index|
+    public final konst x: R|kotlin/Int| = R|<local>/a|.R|/A.index|
         public get(): R|kotlin/Int|
 
     public final fun foo(): R|kotlin/Unit| {

@@ -9,7 +9,7 @@ digraph callsInPlace_kt {
         subgraph cluster_1 {
             color=blue
             1 [label="Enter block"];
-            2 [label="Variable declaration: lval x: R|kotlin/Int|"];
+            2 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
             3 [label="Postponed enter to lambda"];
             subgraph cluster_2 {
                 color=blue

@@ -2,7 +2,7 @@
 package foo
 
 fun funfun(): Boolean {
-    val result = true
+    konst result = true
 
     fun foo(): Boolean {
         fun bar() = result
@@ -13,7 +13,7 @@ fun funfun(): Boolean {
 }
 
 fun litlit(): Boolean {
-    val result = true
+    konst result = true
 
     return myRun {
         myRun { result }
@@ -21,7 +21,7 @@ fun litlit(): Boolean {
 }
 
 fun funlit(): Boolean {
-    val result = true
+    konst result = true
 
     fun foo(): Boolean {
         return myRun { result }
@@ -31,7 +31,7 @@ fun funlit(): Boolean {
 }
 
 fun litfun(): Boolean {
-    val result = true
+    konst result = true
 
     return myRun {
         fun bar() = result

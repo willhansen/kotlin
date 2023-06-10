@@ -9,14 +9,14 @@ import kotlinx.cinterop.CValue
 import org.jetbrains.kotlin.native.interop.indexer.*
 
 fun buildSkiaNativeIndexImpl(library: NativeLibrary, verbose: Boolean): IndexerResult {
-    val result = SkiaNativeIndexImpl(library, verbose)
+    konst result = SkiaNativeIndexImpl(library, verbose)
     return buildNativeIndexImpl(result)
 }
 
 class SkiaNativeIndexImpl(library: NativeLibrary, verbose: Boolean) : NativeIndexImpl(library, verbose) {
     override fun convertType(type: CValue<CXType>, typeAttributes: CValue<CXTypeAttributes>?): Type {
         if (type.kind == CXTypeKind.CXType_Record) {
-            val decl: StructDecl = getStructDeclAt(clang_getTypeDeclaration(type))
+            konst decl: StructDecl = getStructDeclAt(clang_getTypeDeclaration(type))
             if (decl.isSkiaSharedPointer) {
                 return ManagedType(decl)
             }
@@ -63,10 +63,10 @@ fun CValue<CXCursor>.containsOnlySkiaSharedPointerTemplates(): Boolean {
     return ret
 }
 
-val StructDecl.isSkiaSharedPointer: Boolean
+konst StructDecl.isSkiaSharedPointer: Boolean
     get() = spelling.isSkiaSharedPointer
 
-val StructDecl.stripSkiaSharedPointer: String
+konst StructDecl.stripSkiaSharedPointer: String
     get() {
         assert(this.isSkiaSharedPointer)
         return this.spelling.drop(6).dropLast(1).let { // TODO: this is a hack.
@@ -74,8 +74,8 @@ val StructDecl.stripSkiaSharedPointer: String
         }
     }
 
-private val String.isCppTemplate: Boolean // TODO: this is a hack.
+private konst String.isCppTemplate: Boolean // TODO: this is a hack.
     get() = this.contains("<") && this.endsWith(">")
 
-private val String.isSkiaSharedPointer: Boolean // TODO: this is a hack.
+private konst String.isSkiaSharedPointer: Boolean // TODO: this is a hack.
     get() = this.startsWith("sk_sp<") && this.endsWith(">")

@@ -62,7 +62,7 @@ object RedundantVisibilityModifierSyntaxChecker : FirDeclarationSyntaxChecker<Fi
         var setterImplicitVisibility: Visibility? = null
 
         property.setter?.let { setter ->
-            val visibility = setter.implicitVisibility(context)
+            konst visibility = setter.implicitVisibility(context)
             setterImplicitVisibility = visibility
             checkElementAndReport(setter, visibility, property, context, reporter)
         }
@@ -121,15 +121,15 @@ object RedundantVisibilityModifierSyntaxChecker : FirDeclarationSyntaxChecker<Fi
             return
         }
 
-        val explicitVisibility = element.source?.explicitVisibility
-        val isHidden = explicitVisibility.isEffectivelyHiddenBy(containingMemberDeclaration)
+        konst explicitVisibility = element.source?.explicitVisibility
+        konst isHidden = explicitVisibility.isEffectivelyHiddenBy(containingMemberDeclaration)
         if (isHidden) {
             reportElement(element, context, reporter)
             return
         }
 
         // In explicit API mode, `public` is explicitly required.
-        val explicitApiMode = context.languageVersionSettings.getFlag(AnalysisFlags.explicitApiMode)
+        konst explicitApiMode = context.languageVersionSettings.getFlag(AnalysisFlags.explicitApiMode)
         if (explicitApiMode != ExplicitApiMode.DISABLED && explicitVisibility == Visibilities.Public) {
             return
         }
@@ -159,32 +159,32 @@ object RedundantVisibilityModifierSyntaxChecker : FirDeclarationSyntaxChecker<Fi
         return setterImplicitVisibility != visibility
     }
 
-    private val FirProperty.hasSetterWithImplicitVisibility: Boolean
+    private konst FirProperty.hasSetterWithImplicitVisibility: Boolean
         get() {
-            val theSetter = setter ?: return false
+            konst theSetter = setter ?: return false
 
             if (source?.lighterASTNode == theSetter.source?.lighterASTNode) {
                 return true
             }
 
-            val theSource = theSetter.source ?: return true
+            konst theSource = theSetter.source ?: return true
             return theSource.explicitVisibility == null
         }
 
-    private val KtSourceElement.explicitVisibility: Visibility?
+    private konst KtSourceElement.explicitVisibility: Visibility?
         get() {
-            val visibilityModifier = treeStructure.visibilityModifier(lighterASTNode)
+            konst visibilityModifier = treeStructure.visibilityModifier(lighterASTNode)
             return (visibilityModifier?.tokenType as? KtModifierKeywordToken)?.toVisibilityOrNull()
         }
 
     private fun Visibility?.isEffectivelyHiddenBy(declaration: FirMemberDeclaration?): Boolean {
-        val containerVisibility = declaration?.effectiveVisibility?.toVisibility() ?: return false
+        konst containerVisibility = declaration?.effectiveVisibility?.toVisibility() ?: return false
 
         if (containerVisibility == Visibilities.Local && this == Visibilities.Internal) {
             return true
         }
 
-        val difference = this?.compareTo(containerVisibility) ?: return false
+        konst difference = this?.compareTo(containerVisibility) ?: return false
         return difference > 0
     }
 
@@ -198,7 +198,7 @@ object RedundantVisibilityModifierSyntaxChecker : FirDeclarationSyntaxChecker<Fi
             this is FirPropertyAccessor -> propertySymbol.visibility
 
             this is FirConstructor -> {
-                val classSymbol = this.getContainingClassSymbol(context.session)
+                konst classSymbol = this.getContainingClassSymbol(context.session)
                 if (
                     classSymbol is FirRegularClassSymbol
                     && (classSymbol.isEnumClass || classSymbol.isSealed)
@@ -227,7 +227,7 @@ object RedundantVisibilityModifierSyntaxChecker : FirDeclarationSyntaxChecker<Fi
         var current: Visibility = Visibilities.Private
 
         processSymbols {
-            val difference = Visibilities.compare(current, it.visibility)
+            konst difference = Visibilities.compare(current, it.visibility)
 
             if (difference != null && difference < 0) {
                 current = it.visibility
@@ -240,10 +240,10 @@ object RedundantVisibilityModifierSyntaxChecker : FirDeclarationSyntaxChecker<Fi
     }
 
     private fun findPropertyAccessorVisibility(accessor: FirPropertyAccessor, context: CheckerContext): Visibility {
-        val containingClass = context.findClosestClassOrObject()?.symbol ?: return Visibilities.Public
-        val propertySymbol = accessor.propertySymbol
+        konst containingClass = context.findClosestClassOrObject()?.symbol ?: return Visibilities.Public
+        konst propertySymbol = accessor.propertySymbol
 
-        val scope = containingClass.unsubstitutedScope(
+        konst scope = containingClass.unsubstitutedScope(
             context.sessionHolder.session,
             context.sessionHolder.scopeSession,
             withForcedTypeCalculator = false,
@@ -253,16 +253,16 @@ object RedundantVisibilityModifierSyntaxChecker : FirDeclarationSyntaxChecker<Fi
         return findBiggestVisibility { checkVisibility ->
             scope.processPropertiesByName(propertySymbol.name) {}
             scope.processOverriddenProperties(propertySymbol) { property ->
-                val setter = property.setterSymbol ?: return@processOverriddenProperties ProcessorAction.NEXT
+                konst setter = property.setterSymbol ?: return@processOverriddenProperties ProcessorAction.NEXT
                 checkVisibility(setter)
             }
         }
     }
 
     private fun findPropertyVisibility(property: FirProperty, context: CheckerContext): Visibility {
-        val containingClass = context.findClosestClassOrObject()?.symbol ?: return Visibilities.Public
+        konst containingClass = context.findClosestClassOrObject()?.symbol ?: return Visibilities.Public
 
-        val scope = containingClass.unsubstitutedScope(
+        konst scope = containingClass.unsubstitutedScope(
             context.sessionHolder.session,
             context.sessionHolder.scopeSession,
             withForcedTypeCalculator = false,
@@ -276,9 +276,9 @@ object RedundantVisibilityModifierSyntaxChecker : FirDeclarationSyntaxChecker<Fi
     }
 
     private fun findFunctionVisibility(function: FirSimpleFunction, context: CheckerContext): Visibility {
-        val currentClassSymbol = context.findClosestClassOrObject()?.symbol ?: return Visibilities.Unknown
+        konst currentClassSymbol = context.findClosestClassOrObject()?.symbol ?: return Visibilities.Unknown
 
-        val scope = currentClassSymbol.unsubstitutedScope(
+        konst scope = currentClassSymbol.unsubstitutedScope(
             context.sessionHolder.session,
             context.sessionHolder.scopeSession,
             withForcedTypeCalculator = false,

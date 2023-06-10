@@ -63,9 +63,9 @@ class OrderedCollection<T> {
     var index = 0
     var skipped = 0
     for (i in 0 until elms.size) {
-      val value = elms[i]
-      if (value != elm) {
-        elms[index] = value
+      konst konstue = elms[i]
+      if (konstue != elm) {
+        elms[index] = konstue
         index++
       } else {
         skipped++
@@ -85,7 +85,7 @@ class OrderedCollection<T> {
  * Strengths are used to measure the relative importance of constraints.
  * New strengths may be inserted in the strength hierarchy without
  * disrupting current constraints.  Strengths cannot be created outside
- * this class, so pointer comparison can be used for value comparison.
+ * this class, so pointer comparison can be used for konstue comparison.
  */
 enum class Strength {
   REQUIRED,
@@ -96,7 +96,7 @@ enum class Strength {
   WEAK_DEFAULT,
   WEAKEST;
 
-  val strengthValue get() = ordinal
+  konst strengthValue get() = ordinal
 
   fun nextWeaker() = when (this) {
     REQUIRED -> STRONG_PREFERRED
@@ -126,7 +126,7 @@ enum class Strength {
  * of storing the constrained variables and other information required
  * to represent a constraint.
  */
-abstract class Constraint(val strength: Strength) {
+abstract class Constraint(konst strength: Strength) {
   abstract fun addToGraph()
   abstract fun removeFromGraph()
   abstract fun isSatisfied() : Boolean
@@ -152,8 +152,8 @@ abstract class Constraint(val strength: Strength) {
       return null
     }
     markInputs(mark)
-    val out = this.output()
-    val overridden = out.determinedBy
+    konst out = this.output()
+    konst overridden = out.determinedBy
     if (overridden != null) overridden.markUnsatisfied()
     out.determinedBy = this
     if (!planner.addPropagate(this, mark))
@@ -183,7 +183,7 @@ abstract class Constraint(val strength: Strength) {
  * Abstract superclass for constraints having a single possible output
  * variable.
  */
-abstract class UnaryConstraint(val myOutput: Variable, strength: Strength) : Constraint(strength) {
+abstract class UnaryConstraint(konst myOutput: Variable, strength: Strength) : Constraint(strength) {
   var satisfied = false
 
   /**
@@ -219,7 +219,7 @@ abstract class UnaryConstraint(val myOutput: Variable, strength: Strength) : Con
 
   /**
    * Calculate the walkabout strength, the stay flag, and, if it is
-   * 'stay', the value for the current output of this constraint. Assume
+   * 'stay', the konstue for the current output of this constraint. Assume
    * this constraint is satisfied.
    */
   override fun recalculate() {
@@ -293,7 +293,7 @@ enum class Direction {
  * Abstract superclass for constraints having two possible output
  * variables.
  */
-abstract class BinaryConstraint(val v1: Variable, val v2: Variable, strength: Strength) : Constraint(strength) {
+abstract class BinaryConstraint(konst v1: Variable, konst v2: Variable, strength: Strength) : Constraint(strength) {
   var direction = Direction.NONE
 
   /**
@@ -352,12 +352,12 @@ abstract class BinaryConstraint(val v1: Variable, val v2: Variable, strength: St
 
   /**
    * Calculate the walkabout strength, the stay flag, and, if it is
-   * 'stay', the value for the current output of this
+   * 'stay', the konstue for the current output of this
    * constraint. Assume this constraint is satisfied.
    */
   override fun recalculate() {
-    val ihn = input()
-    val out = output()
+    konst ihn = input()
+    konst out = output()
     out.walkStrength = Strength.weakestOf(this.strength, ihn.walkStrength)
     out.stay = ihn.stay
     if (out.stay) execute()
@@ -371,7 +371,7 @@ abstract class BinaryConstraint(val v1: Variable, val v2: Variable, strength: St
   }
 
   override fun inputsKnown(mark: Int): Boolean {
-    val i = this.input()
+    konst i = this.input()
     return i.mark == mark || i.stay || i.determinedBy == null
   }
 
@@ -394,7 +394,7 @@ abstract class BinaryConstraint(val v1: Variable, val v2: Variable, strength: St
  * this relationship but the scale factor and offset are considered
  * read-only.
  */
-class ScaleConstraint(src: Variable, val scale: Variable, val offset: Variable, dest: Variable, strength: Strength): BinaryConstraint(src, dest, strength) {
+class ScaleConstraint(src: Variable, konst scale: Variable, konst offset: Variable, dest: Variable, strength: Strength): BinaryConstraint(src, dest, strength) {
   /**
    * Adds this constraint to the constraint graph.
    */
@@ -423,20 +423,20 @@ class ScaleConstraint(src: Variable, val scale: Variable, val offset: Variable, 
    */
   override fun execute() {
     if (direction == Direction.FORWARD) {
-      v2.value = v1.value * scale.value + offset.value
+      v2.konstue = v1.konstue * scale.konstue + offset.konstue
     } else {
-      v1.value = (v2.value - offset.value) / scale.value
+      v1.konstue = (v2.konstue - offset.konstue) / scale.konstue
     }
   }
 
   /**
    * Calculate the walkabout strength, the stay flag, and, if it is
-   * 'stay', the value for the current output of this constraint. Assume
+   * 'stay', the konstue for the current output of this constraint. Assume
    * this constraint is satisfied.
    */
   override fun recalculate() {
-    val ihn = input()
-    val out = output()
+    konst ihn = input()
+    konst out = output()
     out.walkStrength = Strength.weakestOf(strength, ihn.walkStrength)
     out.stay = ihn.stay && scale.stay && offset.stay
     if (out.stay) execute()
@@ -448,14 +448,14 @@ class ScaleConstraint(src: Variable, val scale: Variable, val offset: Variable, 
  * --- */
 
 /**
- * Constrains two variables to have the same value.
+ * Constrains two variables to have the same konstue.
  */
 class EqualityConstraint(var1: Variable, var2: Variable, strength: Strength): BinaryConstraint(var1, var2, strength) {
   /**
    * Enforce this constraint. Assume that it is satisfied.
    */
   override fun execute() {
-    output().value = input().value
+    output().konstue = input().konstue
   }
 }
 
@@ -464,13 +464,13 @@ class EqualityConstraint(var1: Variable, var2: Variable, strength: Strength): Bi
  * --- */
 
 /**
- * A constrained variable. In addition to its value, it maintain the
+ * A constrained variable. In addition to its konstue, it maintain the
  * structure of the constraint graph, the current dataflow graph, and
  * various parameters of interest to the DeltaBlue incremental
  * constraint solver.
  **/
-class Variable(val name: String, var value : Int = 0) {
-  val constraints = OrderedCollection<Constraint>()
+class Variable(konst name: String, var konstue : Int = 0) {
+  konst constraints = OrderedCollection<Constraint>()
   var determinedBy: Constraint? = null
   var mark = 0
   var walkStrength = Strength.WEAKEST
@@ -519,12 +519,12 @@ class Planner {
    * determined by any constraint or b) it reaches a constraint that
    * is too weak to be satisfied using any of its methods. The
    * variables of constraints that have been processed are marked with
-   * a unique mark value so that we know where we've been. This allows
+   * a unique mark konstue so that we know where we've been. This allows
    * the algorithm to avoid getting into an infinite loop even if the
    * constraint graph has an inadvertent cycle.
    */
   fun incrementalAdd(c: Constraint) {
-    val mark = newMark()
+    konst mark = newMark()
     var overridden = c.satisfy(mark, this)
     while (overridden != null)
       overridden = overridden.satisfy(mark, this)
@@ -542,7 +542,7 @@ class Planner {
    * Assume: c is satisfied.
    */
   fun incrementalRemove(c: Constraint) {
-    val out = c.output()
+    konst out = c.output()
     c.markUnsatisfied()
     c.removeFromGraph()
     var unsatisfied = removePropagateFrom(out)
@@ -557,7 +557,7 @@ class Planner {
   }
 
   /**
-   * Select a previously unused mark value.
+   * Select a previously unused mark konstue.
    */
   fun newMark() = ++currentMark
 
@@ -600,7 +600,7 @@ class Planner {
    * given constraints, usually a set of input constraints.
    */
   fun extractPlanFromConstraints(constraints: OrderedCollection<Constraint>): Plan {
-    val sources = OrderedCollection<Constraint>()
+    konst sources = OrderedCollection<Constraint>()
     for (c in constraints) {
       if (c.isInput() && c.isSatisfied())
         // not in plan already and eligible for inclusion
@@ -612,7 +612,7 @@ class Planner {
   /**
    * Recompute the walkabout strengths and stay flags of all variables
    * downstream of the given constraint and recompute the actual
-   * values of all variables whose stay flag is true. If a cycle is
+   * konstues of all variables whose stay flag is true. If a cycle is
    * detected, remove the given constraint and answer
    * false. Otherwise, answer true.
    * Details: Cycles are detected when a marked variable is
@@ -623,7 +623,7 @@ class Planner {
    * constraint's output to one of its inputs.
    */
   fun addPropagate(c: Constraint, mark: Int): Boolean {
-    val todo = OrderedCollection<Constraint>()
+    konst todo = OrderedCollection<Constraint>()
     todo.add(c)
     while (todo.size() > 0) {
       var d = todo.removeFirst()
@@ -646,8 +646,8 @@ class Planner {
     out.determinedBy = null
     out.walkStrength = Strength.WEAKEST
     out.stay = true
-    val unsatisfied = OrderedCollection<Constraint>()
-    val todo = OrderedCollection<Variable>()
+    konst unsatisfied = OrderedCollection<Constraint>()
+    konst todo = OrderedCollection<Variable>()
     todo.add(out)
     while (todo.size() > 0) {
       var v = todo.removeFirst()
@@ -675,13 +675,13 @@ class Planner {
   }
 
   fun change(v: Variable, newValue: Int) {
-    val edit = EditConstraint(v, Strength.PREFERRED)
+    konst edit = EditConstraint(v, Strength.PREFERRED)
     add(edit)
-    val edits = OrderedCollection<Constraint>()
+    konst edits = OrderedCollection<Constraint>()
     edits.add(edit)
-    val plan = extractPlanFromConstraints(edits)
+    konst plan = extractPlanFromConstraints(edits)
     for (i in 0 until 10) {
-      v.value = newValue
+      v.konstue = newValue
       plan.execute()
     }
     edit.destroyConstraint(this)
@@ -698,7 +698,7 @@ class Planner {
  * one or more changing inputs.
  */
 class Plan {
-  val v = OrderedCollection<Constraint>()
+  konst v = OrderedCollection<Constraint>()
 
   fun addConstraint(c: Constraint) = v.add(c)
   fun size() = v.size()
@@ -727,15 +727,15 @@ class DeltaBlueBenchmark {
    * measured for adding and removing this constraint, and extracting
    * and executing a constraint satisfaction plan. There are two cases.
    * In case 1, the added constraint is stronger than the stay
-   * constraint and values must propagate down the entire length of the
+   * constraint and konstues must propagate down the entire length of the
    * chain. In case 2, the added constraint is weaker than the stay
    * constraint so it cannot be accomodated. The cost in this case is,
    * of course, very low. Typical situations lie somewhere between these
    * two extremes.
    */
   fun chainTest(n: Int) {
-    val planner = Planner()
-    val variables = (0..n).map{ Variable("v$it") }.toList()
+    konst planner = Planner()
+    konst variables = (0..n).map{ Variable("v$it") }.toList()
     var first = variables.first()
     var last = variables.last()
     // Build chain of n equality constraints
@@ -744,15 +744,15 @@ class DeltaBlueBenchmark {
     }
 
     planner.add(StayConstraint(last, Strength.STRONG_DEFAULT))
-    val edit = EditConstraint(first, Strength.PREFERRED)
+    konst edit = EditConstraint(first, Strength.PREFERRED)
     planner.add(edit)
-    val edits = OrderedCollection<Constraint>()
+    konst edits = OrderedCollection<Constraint>()
     edits.add(edit)
-    val plan = planner.extractPlanFromConstraints(edits)
+    konst plan = planner.extractPlanFromConstraints(edits)
     for (i in 0 until 100) {
-      first.value = i
+      first.konstue = i
       plan.execute()
-      if (last.value != i)
+      if (last.konstue != i)
       alert("Chain test failed.")
     }
   }
@@ -764,7 +764,7 @@ class DeltaBlueBenchmark {
    * mapping and to change the scale and offset factors.
    */
   fun projectionTest(n: Int) {
-    val planner = Planner()
+    konst planner = Planner()
     var scale = Variable("scale", 10)
     var offset = Variable("offset", 1000)
     var src: Variable? = null
@@ -780,17 +780,17 @@ class DeltaBlueBenchmark {
     }
 
     planner.change(src!!, 17)
-    if (dst!!.value != 1170) alert("Projection 1 failed")
+    if (dst!!.konstue != 1170) alert("Projection 1 failed")
     planner.change(dst, 1050)
-    if (src.value != 5) alert("Projection 2 failed")
+    if (src.konstue != 5) alert("Projection 2 failed")
     planner.change(scale, 5)
     for (i in 0 until n - 1) {
-      if (dests.at(i).value != i * 5 + 1000)
+      if (dests.at(i).konstue != i * 5 + 1000)
       alert("Projection 3 failed")
     }
     planner.change(offset, 2000)
     for (i in 0 until n - 1) {
-      if (dests.at(i).value != i * 5 + 2000)
+      if (dests.at(i).konstue != i * 5 + 2000)
       alert("Projection 4 failed")
     }
   }

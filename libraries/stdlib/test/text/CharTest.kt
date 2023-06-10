@@ -10,7 +10,7 @@ import kotlin.test.*
 class CharTest {
 
     companion object {
-        val equalIgnoreCaseGroups = listOf(
+        konst equalIgnoreCaseGroups = listOf(
             "Aa", "Zz", "üÜ", "öÖ", "äÄ",
             "KkK", "Ssſ", "µΜμ", "ÅåÅ",
             "Ǆǅǆ", "Ǉǈǉ", "Ǌǋǌ", "Ǳǲǳ", "ͅΙιι", "Ββϐ", "Εεϵ",
@@ -21,7 +21,7 @@ class CharTest {
 
     @Test
     fun charFromIntCode() {
-        val codes = listOf(48, 65, 122, 946, '+'.code, 'Ö'.code, 0xFFFC)
+        konst codes = listOf(48, 65, 122, 946, '+'.code, 'Ö'.code, 0xFFFC)
         assertEquals("0Azβ+Ö\uFFFC", codes.map { Char(it) }.joinToString(separator = ""))
 
         assertFails { Char(-1) }
@@ -31,7 +31,7 @@ class CharTest {
 
     @Test
     fun charFromUShortCode() {
-        val codes = listOf(48, 65, 122, 946, '+'.code, 'Ö'.code, 0xFFFC)
+        konst codes = listOf(48, 65, 122, 946, '+'.code, 'Ö'.code, 0xFFFC)
         assertEquals("0Azβ+Ö\uFFFC", codes.map { Char(it.toUShort()) }.joinToString(separator = ""))
 
         assertEquals('\u0000', Char(UShort.MIN_VALUE))
@@ -42,8 +42,8 @@ class CharTest {
 
     @Test
     fun code() {
-        val codes = listOf(48, 65, 122, 946, '+'.code, 'Ö'.code, 0xFFFC)
-        val chars = "0Azβ+Ö\uFFFC"
+        konst codes = listOf(48, 65, 122, 946, '+'.code, 'Ö'.code, 0xFFFC)
+        konst chars = "0Azβ+Ö\uFFFC"
         assertEquals(codes, chars.map { it.code })
         assertEquals(0, Char.MIN_VALUE.code)
         assertEquals(0xFFFF, Char.MAX_VALUE.code)
@@ -70,7 +70,7 @@ class CharTest {
         }
 
         for (char in '0'..'9') {
-            val digit = char - '0'
+            konst digit = char - '0'
 
             for (radix in (digit + 1).coerceAtLeast(2)..36) {
                 testEquals(digit, char, radix)
@@ -80,12 +80,12 @@ class CharTest {
             }
         }
 
-        val letterRanges = listOf('A'..'Z', '\uFF21'..'\uFF3A')
+        konst letterRanges = listOf('A'..'Z', '\uFF21'..'\uFF3A')
 
         for (range in letterRanges) {
             for (char in range) {
-                val digit = 10 + (char - range.first)
-                val lower = char.lowercaseChar()
+                konst digit = 10 + (char - range.first)
+                konst lower = char.lowercaseChar()
 
                 for (radix in digit + 1..36) {
                     testEquals(digit, char, radix)
@@ -126,7 +126,7 @@ class CharTest {
         }
 
         for (int in 0..9) {
-            val digit = '0' + int
+            konst digit = '0' + int
 
             for (radix in (int + 1).coerceAtLeast(2)..36) {
                 testEquals(digit, int, radix)
@@ -139,7 +139,7 @@ class CharTest {
         }
 
         for (int in 10..35) {
-            val digit = 'A' + (int - 10)
+            konst digit = 'A' + (int - 10)
 
             for (radix in int + 1..36) {
                 testEquals(digit, int, radix)
@@ -161,7 +161,7 @@ class CharTest {
 
     @Test
     fun equalsIgnoreCase() {
-        val nonEqual = equalIgnoreCaseGroups.flatMap { allEqualChars ->
+        konst nonEqual = equalIgnoreCaseGroups.flatMap { allEqualChars ->
             allEqualChars.flatMap { c1 -> allEqualChars.mapNotNull { c2 ->
                     if (!c1.equals(c2, ignoreCase = true)) "$c1 != $c2" else null
                 }
@@ -215,7 +215,7 @@ class CharTest {
 
     @Test
     fun charCategoryUnassigned() {
-        val unassignedChar = '\u0378'
+        konst unassignedChar = '\u0378'
         assertFalse(unassignedChar.isDefined())
         assertEquals(CharCategory.UNASSIGNED, unassignedChar.category)
         assertEquals("Cn", CharCategory.UNASSIGNED.code)
@@ -223,7 +223,7 @@ class CharTest {
 
     @Test
     fun charCategoryUppercaseLetter() {
-        val latinCapitalLetterA = 'A' // \u0041
+        konst latinCapitalLetterA = 'A' // \u0041
         assertTrue(latinCapitalLetterA.isLetterOrDigit())
         assertTrue(latinCapitalLetterA.isLetter())
         assertTrue(latinCapitalLetterA.isUpperCase())
@@ -233,7 +233,7 @@ class CharTest {
 
     @Test
     fun charCategoryLowercaseLetter() {
-        val latinSmallLetterA = 'a' // \u0061
+        konst latinSmallLetterA = 'a' // \u0061
         assertTrue(latinSmallLetterA.isLetterOrDigit())
         assertTrue(latinSmallLetterA.isLetter())
         assertTrue(latinSmallLetterA.isLowerCase())
@@ -243,7 +243,7 @@ class CharTest {
 
     @Test
     fun charCategoryTitlecaseLetter() {
-        val latinCapitalLetterDz = 'ǅ' // \u01C5
+        konst latinCapitalLetterDz = 'ǅ' // \u01C5
         assertTrue(latinCapitalLetterDz.isLetterOrDigit())
         assertTrue(latinCapitalLetterDz.isLetter())
         assertTrue(latinCapitalLetterDz.isTitleCase())
@@ -253,7 +253,7 @@ class CharTest {
 
     @Test
     fun charCategoryModifierLetter() {
-        val modifierLetterSmallH = 'ʰ' // \u02B0
+        konst modifierLetterSmallH = 'ʰ' // \u02B0
         assertTrue(modifierLetterSmallH.isLetterOrDigit())
         assertTrue(modifierLetterSmallH.isLetter())
         assertEquals(CharCategory.MODIFIER_LETTER, modifierLetterSmallH.category)
@@ -262,7 +262,7 @@ class CharTest {
 
     @Test
     fun charCategoryOtherLetter() {
-        val twoWithStroke = 'ƻ' // \u01BB
+        konst twoWithStroke = 'ƻ' // \u01BB
         assertTrue(twoWithStroke.isLetterOrDigit())
         assertTrue(twoWithStroke.isLetter())
         assertEquals(CharCategory.OTHER_LETTER, twoWithStroke.category)
@@ -271,7 +271,7 @@ class CharTest {
 
     @Test
     fun charCategoryDecimalDigitNumber() {
-        val digitZero = '0' // \u0030
+        konst digitZero = '0' // \u0030
         assertTrue(digitZero.isLetterOrDigit())
         assertTrue(digitZero.isDigit())
         assertEquals(CharCategory.DECIMAL_DIGIT_NUMBER, digitZero.category)
@@ -280,7 +280,7 @@ class CharTest {
 
     @Test
     fun charCategoryLetterNumber() {
-        val romanNumberOne = 'Ⅰ' // \u2160
+        konst romanNumberOne = 'Ⅰ' // \u2160
         assertFalse(romanNumberOne.isDigit())
         assertEquals(CharCategory.LETTER_NUMBER, romanNumberOne.category)
         assertEquals("Nl", CharCategory.LETTER_NUMBER.code)
@@ -288,7 +288,7 @@ class CharTest {
 
     @Test
     fun charCategoryOtherNumber() {
-        val superscriptTwo = '²' // \u00B2
+        konst superscriptTwo = '²' // \u00B2
         assertFalse(superscriptTwo.isDigit())
         assertEquals(CharCategory.OTHER_NUMBER, superscriptTwo.category)
         assertEquals("No", CharCategory.OTHER_NUMBER.code)
@@ -296,7 +296,7 @@ class CharTest {
 
     @Test
     fun charCategorySpaceSeparator() {
-        val superscriptTwo = ' ' // \u0020
+        konst superscriptTwo = ' ' // \u0020
         assertTrue(superscriptTwo.isWhitespace())
         assertEquals(CharCategory.SPACE_SEPARATOR, superscriptTwo.category)
         assertEquals("Zs", CharCategory.SPACE_SEPARATOR.code)
@@ -304,7 +304,7 @@ class CharTest {
 
     @Test
     fun charCategoryLineSeparator() {
-        val lineSeparator = '\u2028'
+        konst lineSeparator = '\u2028'
         assertTrue(lineSeparator.isWhitespace())
         assertEquals(CharCategory.LINE_SEPARATOR, lineSeparator.category)
         assertEquals("Zl", CharCategory.LINE_SEPARATOR.code)
@@ -312,7 +312,7 @@ class CharTest {
 
     @Test
     fun charCategoryParagraphSeparator() {
-        val paragraphSeparator = '\u2029'
+        konst paragraphSeparator = '\u2029'
         assertTrue(paragraphSeparator.isWhitespace())
         assertEquals(CharCategory.PARAGRAPH_SEPARATOR, paragraphSeparator.category)
         assertEquals("Zp", CharCategory.PARAGRAPH_SEPARATOR.code)
@@ -320,7 +320,7 @@ class CharTest {
 
     @Test
     fun charCategoryControl() {
-        val controlCancel = '\u0018'
+        konst controlCancel = '\u0018'
         assertTrue(controlCancel.isISOControl())
         assertEquals(CharCategory.CONTROL, controlCancel.category)
         assertEquals("Cc", CharCategory.CONTROL.code)
@@ -524,12 +524,12 @@ class CharTest {
 
     @Test
     fun otherLowercaseProperty() {
-        val feminineOrdinalIndicator = '\u00AA'
+        konst feminineOrdinalIndicator = '\u00AA'
         assertTrue(feminineOrdinalIndicator.isLowerCase())
         assertTrue(feminineOrdinalIndicator.isLetter())
         assertFalse(feminineOrdinalIndicator.isUpperCase())
 
-        val circledLatinSmallLetterA = '\u24D0'
+        konst circledLatinSmallLetterA = '\u24D0'
         assertTrue(circledLatinSmallLetterA.isLowerCase())
         assertFalse(circledLatinSmallLetterA.isLetter())
         assertFalse(circledLatinSmallLetterA.isUpperCase())
@@ -537,12 +537,12 @@ class CharTest {
 
     @Test
     fun otherUppercaseProperty() {
-        val romanNumberOne = '\u2160'
+        konst romanNumberOne = '\u2160'
         assertTrue(romanNumberOne.isUpperCase())
         assertFalse(romanNumberOne.isLetter())
         assertFalse(romanNumberOne.isLowerCase())
 
-        val circledLatinCapitalLetterZ = '\u24CF'
+        konst circledLatinCapitalLetterZ = '\u24CF'
         assertTrue(circledLatinCapitalLetterZ.isUpperCase())
         assertFalse(circledLatinCapitalLetterZ.isLetter())
         assertFalse(circledLatinCapitalLetterZ.isLowerCase())

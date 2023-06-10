@@ -6,7 +6,7 @@ public class NestedEnumArgument {
     }
 
     public @interface Anno {
-        E value();
+        E konstue();
     }
 
     @Anno(E.FIRST)

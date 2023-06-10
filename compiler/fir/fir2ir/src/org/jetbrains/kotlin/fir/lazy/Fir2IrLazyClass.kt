@@ -34,11 +34,11 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 
 class Fir2IrLazyClass(
     components: Fir2IrComponents,
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val fir: FirRegularClass,
-    override val symbol: IrClassSymbol,
+    override konst fir: FirRegularClass,
+    override konst symbol: IrClassSymbol,
 ) : IrClass(), AbstractFir2IrLazyDeclaration<FirRegularClass>, Fir2IrTypeParametersContainer,
     IrMaybeDeserializedClass, DeserializableClass, Fir2IrComponents by components {
     init {
@@ -50,11 +50,11 @@ class Fir2IrLazyClass(
     override lateinit var typeParameters: List<IrTypeParameter>
     override lateinit var parent: IrDeclarationParent
 
-    override val source: SourceElement
+    override konst source: SourceElement
         get() = fir.sourceElement ?: SourceElement.NO_SOURCE
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ClassDescriptor
+    override konst descriptor: ClassDescriptor
         get() = symbol.descriptor
 
     override var name: Name
@@ -124,13 +124,13 @@ class Fir2IrLazyClass(
 
     override var thisReceiver: IrValueParameter? by lazyVar(lock) {
         symbolTable.enterScope(this)
-        val typeArguments = fir.typeParameters.map {
+        konst typeArguments = fir.typeParameters.map {
             IrSimpleTypeImpl(
                 classifierStorage.getCachedIrTypeParameter(it.symbol.fir)!!.symbol,
                 hasQuestionMark = false, arguments = emptyList(), annotations = emptyList()
             )
         }
-        val receiver = declareThisReceiverParameter(
+        konst receiver = declareThisReceiverParameter(
             thisType = IrSimpleTypeImpl(symbol, hasQuestionMark = false, arguments = typeArguments, annotations = emptyList()),
             thisOrigin = IrDeclarationOrigin.INSTANCE_RECEIVER
         )
@@ -138,23 +138,23 @@ class Fir2IrLazyClass(
         receiver
     }
 
-    override var valueClassRepresentation: ValueClassRepresentation<IrSimpleType>?
+    override var konstueClassRepresentation: ValueClassRepresentation<IrSimpleType>?
         get() = computeValueClassRepresentation(fir)
         set(_) = mutationNotSupported()
 
-    private val fakeOverridesByName = mutableMapOf<Name, Collection<IrDeclaration>>()
+    private konst fakeOverridesByName = mutableMapOf<Name, Collection<IrDeclaration>>()
 
     fun getFakeOverridesByName(name: Name): Collection<IrDeclaration> = fakeOverridesByName.getOrPut(name) {
         fakeOverrideGenerator.generateFakeOverridesForName(this@Fir2IrLazyClass, name, fir)
             .also(converter::bindFakeOverridesOrPostpone)
     }
 
-    override val declarations: MutableList<IrDeclaration> by lazyVar(lock) {
-        val isTopLevelPrivate = symbol.signature.isComposite()
-        val result = mutableListOf<IrDeclaration>()
+    override konst declarations: MutableList<IrDeclaration> by lazyVar(lock) {
+        konst isTopLevelPrivate = symbol.signature.isComposite()
+        konst result = mutableListOf<IrDeclaration>()
         // NB: it's necessary to take all callables from scope,
         // e.g. to avoid accessing un-enhanced Java declarations with FirJavaTypeRef etc. inside
-        val scope = fir.unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = true, memberRequiredPhase = null)
+        konst scope = fir.unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = true, memberRequiredPhase = null)
         scope.processDeclaredConstructors {
             if (shouldBuildStub(it.fir)) {
                 result += declarationStorage.getIrConstructorSymbol(it, forceTopLevelPrivate = isTopLevelPrivate).owner
@@ -163,9 +163,9 @@ class Fir2IrLazyClass(
 
         for (name in scope.getClassifierNames()) {
             scope.processClassifiersByName(name) {
-                val declaration = it.fir as? FirRegularClass ?: return@processClassifiersByName
+                konst declaration = it.fir as? FirRegularClass ?: return@processClassifiersByName
                 if (declaration.classId.outerClassId == fir.classId && shouldBuildStub(declaration)) {
-                    val nestedSymbol = classifierStorage.getIrClassSymbol(declaration.symbol, forceTopLevelPrivate = isTopLevelPrivate)
+                    konst nestedSymbol = classifierStorage.getIrClassSymbol(declaration.symbol, forceTopLevelPrivate = isTopLevelPrivate)
                     result += nestedSymbol.owner
                 }
             }
@@ -179,7 +179,7 @@ class Fir2IrLazyClass(
             }
         }
 
-        val ownerLookupTag = fir.symbol.toLookupTag()
+        konst ownerLookupTag = fir.symbol.toLookupTag()
 
         fun addDeclarationsFromScope(scope: FirContainingNamesAwareScope?) {
             if (scope == null) return
@@ -232,18 +232,18 @@ class Fir2IrLazyClass(
         get() = null
         set(_) = error("We should never need to store metadata of external declarations.")
 
-    override val moduleName: String?
+    override konst moduleName: String?
         get() = fir.moduleName
 
-    override val isNewPlaceForBodyGeneration: Boolean
+    override konst isNewPlaceForBodyGeneration: Boolean
         get() = fir.isNewPlaceForBodyGeneration == true
 
     private fun FirNamedFunctionSymbol.isAbstractMethodOfAny(): Boolean {
-        val fir = fir
+        konst fir = fir
         if (fir.modality != Modality.ABSTRACT) return false
         return when (fir.name) {
-            OperatorNameConventions.EQUALS -> fir.valueParameters.singleOrNull()?.returnTypeRef?.isNullableAny == true
-            OperatorNameConventions.HASH_CODE, OperatorNameConventions.TO_STRING -> fir.valueParameters.isEmpty()
+            OperatorNameConventions.EQUALS -> fir.konstueParameters.singleOrNull()?.returnTypeRef?.isNullableAny == true
+            OperatorNameConventions.HASH_CODE, OperatorNameConventions.TO_STRING -> fir.konstueParameters.isEmpty()
             else -> false
         }
     }

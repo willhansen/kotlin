@@ -12,12 +12,12 @@ import java.util.*
 
 internal class GradleBufferingMessageCollector : MessageCollector {
     private class MessageData(
-        val severity: CompilerMessageSeverity,
-        val message: String,
-        val location: CompilerMessageSourceLocation?
+        konst severity: CompilerMessageSeverity,
+        konst message: String,
+        konst location: CompilerMessageSourceLocation?
     )
 
-    private val messages = ArrayList<MessageData>()
+    private konst messages = ArrayList<MessageData>()
 
     override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?) {
         synchronized(messages) {

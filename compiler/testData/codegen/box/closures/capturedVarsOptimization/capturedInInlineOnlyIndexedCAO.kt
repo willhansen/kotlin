@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
-class Host(var value: String) {
-    operator fun get(i: Int, j: Int, k: Int) = value
+class Host(var konstue: String) {
+    operator fun get(i: Int, j: Int, k: Int) = konstue
 
     operator fun set(i: Int, j: Int, k: Int, newValue: String) {
-        value = newValue
+        konstue = newValue
     }
 }
 
@@ -14,5 +14,5 @@ fun box(): String {
         x[0, 0, 0] += "O"
         x[0, 0, 0] += "K"
     }
-    return x.value
+    return x.konstue
 }

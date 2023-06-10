@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.generators.gradle.targets.js
 
 data class Package(
-    val name: String,
-    val version: String,
-    val displayName: String
+    konst name: String,
+    konst version: String,
+    konst displayName: String
 ) {
     // Used in velocity template
     @Suppress("unused")
@@ -20,21 +20,21 @@ data class Package(
 }
 
 sealed class PackageInformation {
-    abstract val name: String
-    abstract val versions: Set<String>
-    abstract val displayName: String
+    abstract konst name: String
+    abstract konst versions: Set<String>
+    abstract konst displayName: String
 }
 
 data class RealPackageInformation(
-    override val name: String,
-    override val versions: Set<String>,
-    override val displayName: String = name
+    override konst name: String,
+    override konst versions: Set<String>,
+    override konst displayName: String = name
 ) : PackageInformation()
 
 data class HardcodedPackageInformation(
-    override val name: String,
-    val version: String,
-    override val displayName: String = name
+    override konst name: String,
+    konst version: String,
+    override konst displayName: String = name
 ) : PackageInformation() {
-    override val versions: Set<String> = setOf(version)
+    override konst versions: Set<String> = setOf(version)
 }

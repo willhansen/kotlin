@@ -18,26 +18,26 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 
 // Used from CodeFragmentCompiler for IDE Debugger Plug-In
 @Suppress("unused")
-class FacadeClassSourceShimForFragmentCompilation(private val containingFile: PsiSourceFile) :
+class FacadeClassSourceShimForFragmentCompilation(private konst containingFile: PsiSourceFile) :
     DeserializedContainerSource, FacadeClassSource {
 
-    private val fileClassInfo = getFileClassInfoNoResolve(containingFile.psiFile as KtFile)
+    private konst fileClassInfo = getFileClassInfoNoResolve(containingFile.psiFile as KtFile)
 
-    override val incompatibility: IncompatibleVersionErrorData<*>?
+    override konst incompatibility: IncompatibleVersionErrorData<*>?
         get() = null
-    override val isPreReleaseInvisible: Boolean
+    override konst isPreReleaseInvisible: Boolean
         get() = false
-    override val abiStability: DeserializedContainerAbiStability
+    override konst abiStability: DeserializedContainerAbiStability
         get() = DeserializedContainerAbiStability.STABLE
-    override val presentableString: String
+    override konst presentableString: String
         get() = "Fragment for $containingFile"
 
     override fun getContainingFile(): SourceFile {
         return containingFile
     }
 
-    override val className: JvmClassName
+    override konst className: JvmClassName
         get() = JvmClassName.byFqNameWithoutInnerClasses(fileClassInfo.fileClassFqName)
-    override val facadeClassName: JvmClassName?
+    override konst facadeClassName: JvmClassName?
         get() = JvmClassName.byFqNameWithoutInnerClasses(fileClassInfo.facadeClassFqName)
 }

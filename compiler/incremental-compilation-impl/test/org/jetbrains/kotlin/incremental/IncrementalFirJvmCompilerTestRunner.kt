@@ -14,13 +14,13 @@ import java.io.File
 
 class IncrementalFirJvmCompilerTestRunner(
     workingDir: File,
-    val testReporter: TestBuildReporter,
+    konst testReporter: TestBuildReporter,
     buildHistoryFile: File,
     outputDirs: Collection<File>?,
     modulesApiHistory: ModulesApiHistory,
     kotlinSourceFilesExtensions: List<String> = DEFAULT_KOTLIN_SOURCE_FILES_EXTENSIONS,
     classpathChanges: ClasspathChanges,
-    val testLookupTracker: TestLookupTracker
+    konst testLookupTracker: TestLookupTracker
 ) : IncrementalFirJvmCompilerRunner(
     workingDir,
     testReporter,
@@ -35,13 +35,13 @@ class IncrementalFirJvmCompilerTestRunner(
             icContext, args.destination?.let { File(it) }, cacheDirectory
         ) {
             override fun close() {
-                val platformCachesDump = this.platformCache.dump() +
+                konst platformCachesDump = this.platformCache.dump() +
                         "\n=============\n" +
                         this.inputsCache.dump().replace("rebuild-out", "out")
 
                 testLookupTracker.lookups.mapTo(testLookupTracker.savedLookups) { LookupSymbol(it.name, it.scopeFqName) }
                 this.lookupCache.forceGC()
-                val lookupsDump = this.lookupCache.dump(testLookupTracker.savedLookups)
+                konst lookupsDump = this.lookupCache.dump(testLookupTracker.savedLookups)
 
                 testReporter.reportCachesDump("$platformCachesDump\n=============\n$lookupsDump")
                 super.close()

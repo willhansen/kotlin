@@ -1,7 +1,7 @@
 @kotlin.Metadata
 public abstract class<Ljava/lang/Object;Ljava/util/Map<Ljava/lang/Byte;Ljava/lang/Short;>;Lkotlin/jvm/internal/markers/KMappedMarker;>  ByteShortMap {
     // source: 'byteShortMap.kt'
-    public bridge final <()Ljava/util/Collection<Ljava/lang/Short;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<Ljava/lang/Short;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/lang/Byte;>;> method keySet(): java.util.Set
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<Ljava/lang/Byte;Ljava/lang/Short;>;>;> method entrySet(): java.util.Set
     public <(Ljava/util/Map<+Ljava/lang/Byte;+Ljava/lang/Short;>;)V> method putAll(p0: java.util.Map): void

@@ -2,24 +2,24 @@
 // DUMP_DEFAULT_PARAMETER_VALUES
 
 class Foo(
-    val z: Boolean = true,
-    val b: Byte = 0.toByte(),
-    val c: Char = 'c',
-    val c2: Char = '\n',
-    val sh: Short = 10.toShort(),
-    val i: Int = 10,
-    val l: Long = -10L,
-    val f: Float = 1.0f,
-    val d: Double = -1.0,
-    val s: String = "foo",
-    val iarr: IntArray = intArrayOf(1, 2, 3),
-    val larr: LongArray = longArrayOf(-1L, 0L, 1L),
-    val darr: DoubleArray = doubleArrayOf(7.3),
-    val sarr: Array<String> = arrayOf("a", "bc"),
-    val cl: Class<*> = Foo::class.java,
-    val clarr: Array<Class<*>> = arrayOf(Foo::class.java),
-    val em: Em = Em.BAR,
-    val emarr: Array<Em> = arrayOf(Em.FOO, Em.BAR)
+    konst z: Boolean = true,
+    konst b: Byte = 0.toByte(),
+    konst c: Char = 'c',
+    konst c2: Char = '\n',
+    konst sh: Short = 10.toShort(),
+    konst i: Int = 10,
+    konst l: Long = -10L,
+    konst f: Float = 1.0f,
+    konst d: Double = -1.0,
+    konst s: String = "foo",
+    konst iarr: IntArray = intArrayOf(1, 2, 3),
+    konst larr: LongArray = longArrayOf(-1L, 0L, 1L),
+    konst darr: DoubleArray = doubleArrayOf(7.3),
+    konst sarr: Array<String> = arrayOf("a", "bc"),
+    konst cl: Class<*> = Foo::class.java,
+    konst clarr: Array<Class<*>> = arrayOf(Foo::class.java),
+    konst em: Em = Em.BAR,
+    konst emarr: Array<Em> = arrayOf(Em.FOO, Em.BAR)
 ) {
     fun foo(a: Int = 5) {}
 }

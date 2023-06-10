@@ -51,48 +51,48 @@
  *	representable.
  *
  * Constants :
- * The hexadecimal values are the intended ones for the following 
- * constants. The decimal values may be used, provided that the 
+ * The hexadecimal konstues are the intended ones for the following 
+ * constants. The decimal konstues may be used, provided that the 
  * compiler will convert from decimal to binary accurately enough 
- * to produce the hexadecimal values shown.
+ * to produce the hexadecimal konstues shown.
  */
 
 package kotlin.math.fdlibm
 
 import kotlin.wasm.internal.wasm_f64_sqrt as sqrt
 
-private val bp = doubleArrayOf(1.0, 1.5)
-private val dp_h = doubleArrayOf(0.0, 5.84962487220764160156e-01) /* 0x3FE2B803, 0x40000000 */
-private val dp_l = doubleArrayOf(0.0, 1.35003920212974897128e-08) /* 0x3E4CFDEB, 0x43CFD006 */
-private const val zero = 0.0
-private const val one = 1.0
-private const val two = 2.0
-private const val two53 = 9007199254740992.0    /* 0x43400000, 0x00000000 */
-private const val huge = 1.0e300
-private const val tiny = 1.0e-300
+private konst bp = doubleArrayOf(1.0, 1.5)
+private konst dp_h = doubleArrayOf(0.0, 5.84962487220764160156e-01) /* 0x3FE2B803, 0x40000000 */
+private konst dp_l = doubleArrayOf(0.0, 1.35003920212974897128e-08) /* 0x3E4CFDEB, 0x43CFD006 */
+private const konst zero = 0.0
+private const konst one = 1.0
+private const konst two = 2.0
+private const konst two53 = 9007199254740992.0    /* 0x43400000, 0x00000000 */
+private const konst huge = 1.0e300
+private const konst tiny = 1.0e-300
 
 /* poly coefs for (3/2)*(log(x)-2s-2/3*s**3 */
-private const val L1 = 5.99999999999994648725e-01 /* 0x3FE33333, 0x33333303 */
-private const val L2 = 4.28571428578550184252e-01 /* 0x3FDB6DB6, 0xDB6FABFF */
-private const val L3 = 3.33333329818377432918e-01 /* 0x3FD55555, 0x518F264D */
-private const val L4 = 2.72728123808534006489e-01 /* 0x3FD17460, 0xA91D4101 */
-private const val L5 = 2.30660745775561754067e-01 /* 0x3FCD864A, 0x93C9DB65 */
-private const val L6 = 2.06975017800338417784e-01 /* 0x3FCA7E28, 0x4A454EEF */
-private const val P1 = 1.66666666666666019037e-01 /* 0x3FC55555, 0x5555553E */
-private const val P2 = -2.77777777770155933842e-03 /* 0xBF66C16C, 0x16BEBD93 */
-private const val P3 = 6.61375632143793436117e-05 /* 0x3F11566A, 0xAF25DE2C */
-private const val P4 = -1.65339022054652515390e-06 /* 0xBEBBBD41, 0xC5D26BF1 */
-private const val P5 = 4.13813679705723846039e-08 /* 0x3E663769, 0x72BEA4D0 */
-private const val lg2 = 6.93147180559945286227e-01 /* 0x3FE62E42, 0xFEFA39EF */
-private const val lg2_h = 6.93147182464599609375e-01 /* 0x3FE62E43, 0x00000000 */
-private const val lg2_l = -1.90465429995776804525e-09 /* 0xBE205C61, 0x0CA86C39 */
-private const val ovt = 8.0085662595372944372e-0017 /* -(1024-log2(ovfl+.5ulp)) */
-private const val cp = 9.61796693925975554329e-01 /* 0x3FEEC709, 0xDC3A03FD =2/(3ln2) */
-private const val cp_h = 9.61796700954437255859e-01 /* 0x3FEEC709, 0xE0000000 =(float)cp */
-private const val cp_l = -7.02846165095275826516e-09 /* 0xBE3E2FE0, 0x145B01F5 =tail of cp_h*/
-private const val ivln2 = 1.44269504088896338700e+00 /* 0x3FF71547, 0x652B82FE =1/ln2 */
-private const val ivln2_h = 1.44269502162933349609e+00 /* 0x3FF71547, 0x60000000 =24b 1/ln2*/
-private const val ivln2_l = 1.92596299112661746887e-08 /* 0x3E54AE0B, 0xF85DDF44 =1/ln2 tail*/
+private const konst L1 = 5.99999999999994648725e-01 /* 0x3FE33333, 0x33333303 */
+private const konst L2 = 4.28571428578550184252e-01 /* 0x3FDB6DB6, 0xDB6FABFF */
+private const konst L3 = 3.33333329818377432918e-01 /* 0x3FD55555, 0x518F264D */
+private const konst L4 = 2.72728123808534006489e-01 /* 0x3FD17460, 0xA91D4101 */
+private const konst L5 = 2.30660745775561754067e-01 /* 0x3FCD864A, 0x93C9DB65 */
+private const konst L6 = 2.06975017800338417784e-01 /* 0x3FCA7E28, 0x4A454EEF */
+private const konst P1 = 1.66666666666666019037e-01 /* 0x3FC55555, 0x5555553E */
+private const konst P2 = -2.77777777770155933842e-03 /* 0xBF66C16C, 0x16BEBD93 */
+private const konst P3 = 6.61375632143793436117e-05 /* 0x3F11566A, 0xAF25DE2C */
+private const konst P4 = -1.65339022054652515390e-06 /* 0xBEBBBD41, 0xC5D26BF1 */
+private const konst P5 = 4.13813679705723846039e-08 /* 0x3E663769, 0x72BEA4D0 */
+private const konst lg2 = 6.93147180559945286227e-01 /* 0x3FE62E42, 0xFEFA39EF */
+private const konst lg2_h = 6.93147182464599609375e-01 /* 0x3FE62E43, 0x00000000 */
+private const konst lg2_l = -1.90465429995776804525e-09 /* 0xBE205C61, 0x0CA86C39 */
+private const konst ovt = 8.0085662595372944372e-0017 /* -(1024-log2(ovfl+.5ulp)) */
+private const konst cp = 9.61796693925975554329e-01 /* 0x3FEEC709, 0xDC3A03FD =2/(3ln2) */
+private const konst cp_h = 9.61796700954437255859e-01 /* 0x3FEEC709, 0xE0000000 =(float)cp */
+private const konst cp_l = -7.02846165095275826516e-09 /* 0xBE3E2FE0, 0x145B01F5 =tail of cp_h*/
+private const konst ivln2 = 1.44269504088896338700e+00 /* 0x3FF71547, 0x652B82FE =1/ln2 */
+private const konst ivln2_h = 1.44269502162933349609e+00 /* 0x3FF71547, 0x60000000 =24b 1/ln2*/
+private const konst ivln2_l = 1.92596299112661746887e-08 /* 0x3E54AE0B, 0xF85DDF44 =1/ln2 tail*/
 
 internal fun __ieee754_pow(x: Double, y: Double): Double {
     var z: Double
@@ -155,7 +155,7 @@ internal fun __ieee754_pow(x: Double, y: Double): Double {
         }
     }
 
-    /* special value of y */
+    /* special konstue of y */
     if (ly == 0U) {
         if (iy == 0x7ff00000) {    /* y is +-inf */
             if (((ix - 0x3ff00000) or lx.toInt()) == 0)
@@ -176,7 +176,7 @@ internal fun __ieee754_pow(x: Double, y: Double): Double {
     }
 
     ax = fabs(x)
-    /* special value of x */
+    /* special konstue of x */
     if (lx == 0U) {
         if (ix == 0x7ff00000 || ix == 0 || ix == 0x3ff00000) {
             z = ax            /*x is +-0,+-inf,+-1*/
@@ -230,7 +230,7 @@ internal fun __ieee754_pow(x: Double, y: Double): Double {
             ax *= two53; n -= 53; ix = __HI(ax); }
         n += ((ix) shr 20) - 0x3ff
         j = ix and 0x000fffff
-        /* determine interval */
+        /* determine interkonst */
         ix = j or 0x3ff00000        /* normalize ix */
         if (j <= 0x3988E) k = 0        /* |x|<sqrt(3/2) */
         else if (j < 0xBB67A) k = 1    /* |x|<sqrt(3)   */

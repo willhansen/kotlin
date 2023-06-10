@@ -30,7 +30,7 @@ fun <F : Any> foo(
 
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
 fun <W> flow(@BuilderInference block: FlowCollector<W>.()->Unit): Flow<W> {
-    val collector = FlowCollectorImpl<W>()
+    konst collector = FlowCollectorImpl<W>()
     collector.block()
     return object : Flow<W> {
         override fun collect(collector: FlowCollector<W>) {
@@ -46,11 +46,11 @@ interface Flow<out O> {
 
 fun interface FlowCollector<in I> {
 
-    fun emit(value: I)
+    fun emit(konstue: I)
 }
 
 class FlowCollectorImpl<C> : FlowCollector<C> {
-    override fun emit(value: C) {}
+    override fun emit(konstue: C) {}
 }
 
 fun Flow<*>.collect() {}

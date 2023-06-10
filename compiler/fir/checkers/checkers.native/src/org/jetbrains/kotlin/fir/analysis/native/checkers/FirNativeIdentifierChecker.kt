@@ -18,13 +18,13 @@ import org.jetbrains.kotlin.name.Name
 
 object FirNativeIdentifierChecker : FirBasicDeclarationChecker() {
     // Also includes characters used by IR mangler (see MangleConstant).
-    private val invalidChars = setOf(
+    private konst inkonstidChars = setOf(
         '.', ';', ',', '(', ')', '[', ']', '{', '}', '/', '<', '>',
         ':', '\\', '$', '&', '~', '*', '?', '#', '|', '§', '%', '@',
     )
 
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = declaration.source
+        konst source = declaration.source
         when (declaration) {
             is FirRegularClass -> checkNameAndReport(declaration.name, source, context, reporter)
             is FirSimpleFunction -> checkNameAndReport(declaration.name, source, context, reporter)
@@ -39,11 +39,11 @@ object FirNativeIdentifierChecker : FirBasicDeclarationChecker() {
 
     private fun checkNameAndReport(name: Name, source: KtSourceElement?, context: CheckerContext, reporter: DiagnosticReporter) {
         if (source != null && source.kind !is KtFakeSourceElementKind && !name.isSpecial) {
-            val text = name.asString()
-            val message = when {
+            konst text = name.asString()
+            konst message = when {
                 text.isEmpty() -> "should not be empty"
-                text.any { it in invalidChars } -> "contains illegal characters: " +
-                        invalidChars.intersect(text.toSet()).joinToString("", prefix = "\"", postfix = "\"")
+                text.any { it in inkonstidChars } -> "contains illegal characters: " +
+                        inkonstidChars.intersect(text.toSet()).joinToString("", prefix = "\"", postfix = "\"")
                 else -> null
             }
 

@@ -8,7 +8,7 @@ inline fun <T, R> T.let(block: (T) -> R): R {
 
 class A {
     fun foo() {
-        val a = with(1) {
+        konst a = with(1) {
             this.let { it }
         }.let { 2 }
     }

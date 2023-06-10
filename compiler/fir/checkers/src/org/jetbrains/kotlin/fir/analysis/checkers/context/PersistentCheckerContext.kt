@@ -22,20 +22,20 @@ import org.jetbrains.kotlin.fir.resolve.transformers.ReturnTypeCalculator
 import org.jetbrains.kotlin.name.Name
 
 class PersistentCheckerContext private constructor(
-    override val implicitReceiverStack: PersistentImplicitReceiverStack,
-    override val containingDeclarations: PersistentList<FirDeclaration>,
-    override val qualifiedAccessOrAssignmentsOrAnnotationCalls: PersistentList<FirStatement>,
-    override val getClassCalls: PersistentList<FirGetClassCall>,
-    override val annotationContainers: PersistentList<FirAnnotationContainer>,
-    override val containingElements: PersistentList<FirElement>,
-    override val isContractBody: Boolean,
+    override konst implicitReceiverStack: PersistentImplicitReceiverStack,
+    override konst containingDeclarations: PersistentList<FirDeclaration>,
+    override konst qualifiedAccessOrAssignmentsOrAnnotationCalls: PersistentList<FirStatement>,
+    override konst getClassCalls: PersistentList<FirGetClassCall>,
+    override konst annotationContainers: PersistentList<FirAnnotationContainer>,
+    override konst containingElements: PersistentList<FirElement>,
+    override konst isContractBody: Boolean,
     sessionHolder: SessionHolder,
     returnTypeCalculator: ReturnTypeCalculator,
-    override val suppressedDiagnostics: PersistentSet<String>,
+    override konst suppressedDiagnostics: PersistentSet<String>,
     allInfosSuppressed: Boolean,
     allWarningsSuppressed: Boolean,
     allErrorsSuppressed: Boolean,
-    override val containingFile: FirFile?,
+    override konst containingFile: FirFile?,
 ) : CheckerContextForProvider(sessionHolder, returnTypeCalculator, allInfosSuppressed, allWarningsSuppressed, allErrorsSuppressed) {
     constructor(sessionHolder: SessionHolder, returnTypeCalculator: ReturnTypeCalculator) : this(
         PersistentImplicitReceiverStack(),
@@ -54,8 +54,8 @@ class PersistentCheckerContext private constructor(
         containingFile = null,
     )
 
-    override fun addImplicitReceiver(name: Name?, value: ImplicitReceiverValue<*>): PersistentCheckerContext =
-        copy(implicitReceiverStack = implicitReceiverStack.add(name, value))
+    override fun addImplicitReceiver(name: Name?, konstue: ImplicitReceiverValue<*>): PersistentCheckerContext =
+        copy(implicitReceiverStack = implicitReceiverStack.add(name, konstue))
 
     override fun addDeclaration(declaration: FirDeclaration): PersistentCheckerContext =
         copy(containingDeclarations = containingDeclarations.add(declaration))

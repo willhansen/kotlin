@@ -5,9 +5,9 @@
 
 <!REDUNDANT_MODIFIER!>open<!>     abstract class Base {
 
-    abstract val a: Any
+    abstract konst a: Any
     abstract var b: Any
-    internal abstract val c: Any
+    internal abstract konst c: Any
     internal abstract var d: Any
 
 
@@ -16,14 +16,14 @@
 }
 
 fun case1() {
-    val impl = BaseImplCase2(1, "1", 1.0)
+    konst impl = BaseImplCase2(1, "1", 1.0)
 }
 
 class BaseImplCase2(
     override var a: Any, override
-    <!VAR_OVERRIDDEN_BY_VAL!>val<!>  b: Any, override var c: Any, override
+    <!VAR_OVERRIDDEN_BY_VAL!>konst<!>  b: Any, override var c: Any, override
 
- <!VAR_OVERRIDDEN_BY_VAL!>val<!>  d: Any = "5") : Base()
+ <!VAR_OVERRIDDEN_BY_VAL!>konst<!>  d: Any = "5") : Base()
 {
     override fun foo() {}
     override internal fun boo() {}
@@ -32,23 +32,23 @@ class BaseImplCase2(
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val impl = ImplBaseCase2()
+    konst impl = ImplBaseCase2()
 }
 
 class ImplBaseCase2() : Base() {
     override var a: Any
         get() = TODO()
-        set(value) {}
+        set(konstue) {}
     override
 
-     <!VAR_OVERRIDDEN_BY_VAL!>val<!>  b: Any
+     <!VAR_OVERRIDDEN_BY_VAL!>konst<!>  b: Any
         get() = TODO()
     override var c: Any
         get() = TODO()
-        set(value) {}
+        set(konstue) {}
     override
 
-     <!VAR_OVERRIDDEN_BY_VAL!>val<!>  d: Any
+     <!VAR_OVERRIDDEN_BY_VAL!>konst<!>  d: Any
         get() = TODO()
 
     override fun foo() {}
@@ -69,12 +69,12 @@ fun case3() {
 <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>class ImplBaseCase3<!>() : Base() {
     override var b: Any
         get() = TODO()
-        set(value) {}
-    override val c: Any
+        set(konstue) {}
+    override konst c: Any
         get() = TODO()
     override var d: Any
         get() = TODO()
-        set(value) {}
+        set(konstue) {}
 
     override fun foo() {
         TODO()
@@ -97,12 +97,12 @@ fun case4() {
 <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>class ImplBaseCase4<!>() : Base() {
     override var b: Any
         get() = TODO()
-        set(value) {}
-    override val c: Any
+        set(konstue) {}
+    override konst c: Any
         get() = TODO()
     override var d: Any
         get() = TODO()
-        set(value) {}
+        set(konstue) {}
 
     override fun foo() {}
 

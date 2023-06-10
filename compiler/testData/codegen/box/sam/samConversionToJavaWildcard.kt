@@ -4,7 +4,7 @@
 import java.util.concurrent.Callable;
 
 public class ConventionMapping {
-    MappedProperty map(String propertyName, Callable<?> value) {
+    MappedProperty map(String propertyName, Callable<?> konstue) {
         return new MappedProperty();
     }
 

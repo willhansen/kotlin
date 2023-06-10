@@ -39,13 +39,13 @@ internal fun FirBasedSymbol<*>.name(): String = when (this) {
 internal fun FirDeclaration.name(): String = symbol.name()
 
 internal inline fun <R> resolveWithClearCaches(context: KtElement, action: (LLFirResolveSession) -> R): R {
-    val project = context.project
-    val module = ProjectStructureProvider.getModule(project, context, contextualModule = null)
-    val resolveSession = LLFirResolveSessionService.getInstance(project).getFirResolveSessionNoCaching(module)
+    konst project = context.project
+    konst module = ProjectStructureProvider.getModule(project, context, contextualModule = null)
+    konst resolveSession = LLFirResolveSessionService.getInstance(project).getFirResolveSessionNoCaching(module)
     return action(resolveSession)
 }
 
-internal val LLFirResolveSession.isSourceSession: Boolean
+internal konst LLFirResolveSession.isSourceSession: Boolean
     get() {
         return when (this) {
             is LLFirSourceResolveSession, is LLFirNotUnderContentRootResolveSession -> true
@@ -56,7 +56,7 @@ internal val LLFirResolveSession.isSourceSession: Boolean
 internal fun TestConfigurationBuilder.useFirSessionConfigurator(configurator: (TestServices) -> LLFirSessionConfigurator) {
     class ConfiguratorPreAnalysisHandler(testServices: TestServices) : PreAnalysisHandler(testServices) {
         override fun preprocessModuleStructure(moduleStructure: TestModuleStructure) {
-            val project = testServices.environmentManager.getProject()
+            konst project = testServices.environmentManager.getProject()
             LLFirSessionConfigurator.registerExtension(project, configurator(testServices))
         }
     }
@@ -65,7 +65,7 @@ internal fun TestConfigurationBuilder.useFirSessionConfigurator(configurator: (T
 }
 
 inline fun <reified E : FirElement> FirElement.collectAllElementsOfType(): List<E> {
-    val result = mutableListOf<E>()
+    konst result = mutableListOf<E>()
     this.accept(object : FirVisitorVoid() {
         override fun visitElement(element: FirElement) {
             if (element is E) result += element

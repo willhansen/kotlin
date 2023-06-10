@@ -8,15 +8,15 @@
  * SPEC VERSION: 0.1-300
  * MAIN LINK: expressions, constant-literals, boolean-literals -> paragraph 1 -> sentence 2
  * NUMBER: 1
- * DESCRIPTION: checking of type for Boolean values: impossible to use as identifiers
+ * DESCRIPTION: checking of type for Boolean konstues: impossible to use as identifiers
  * HELPERS: checkType
  */
 
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val <!SYNTAX!>false<!> : Any = false
-    val <!SYNTAX!>true<!> : Any = true
+    konst <!SYNTAX!>false<!> : Any = false
+    konst <!SYNTAX!>true<!> : Any = true
 }
 
 // TESTCASE NUMBER: 2

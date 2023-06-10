@@ -4,7 +4,7 @@ package
 
 public final annotation class B : kotlin.Annotation {
     public constructor B(/*0*/ vararg args: kotlin.String /*kotlin.Array<out kotlin.String>*/)
-    public final val args: kotlin.Array<out kotlin.String>
+    public final konst args: kotlin.Array<out kotlin.String>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

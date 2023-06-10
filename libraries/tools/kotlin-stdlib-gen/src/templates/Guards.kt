@@ -9,9 +9,9 @@ import templates.Family.*
 import templates.SequenceClass.*
 
 object Guards : TemplateGroupBase() {
-    private val THIS = "\$this"
+    private konst THIS = "\$this"
 
-    val f_requireNoNulls = fn("requireNoNulls()") {
+    konst f_requireNoNulls = fn("requireNoNulls()") {
         include(Iterables, Sequences, InvariantArraysOfObjects, Lists)
     } builder {
         doc { "Returns an original collection containing all the non-`null` elements, throwing an [IllegalArgumentException] if there are any `null` elements." }

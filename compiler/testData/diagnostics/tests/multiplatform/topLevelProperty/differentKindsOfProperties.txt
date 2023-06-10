@@ -1,18 +1,18 @@
 package
 
-public expect val backingFieldVal: kotlin.String = "no"
+public expect konst backingFieldVal: kotlin.String = "no"
 public expect var backingFieldVar: kotlin.String
-public const expect val constVal: kotlin.Int
-public expect val customAccessorVal: kotlin.String
+public const expect konst constVal: kotlin.Int
+public expect konst customAccessorVal: kotlin.String
 public expect var customAccessorVar: kotlin.String
-public expect val delegated: kotlin.String
-public expect val justVal: kotlin.String
+public expect konst delegated: kotlin.String
+public expect konst justVal: kotlin.String
 public expect var justVar: kotlin.String
 public expect lateinit var lateinitVar: kotlin.String
-public expect val valWithGet: kotlin.String
+public expect konst konstWithGet: kotlin.String
 public expect var varWithGetSet: kotlin.String
 public expect var varWithPlatformGetSet: kotlin.String
-public expect val kotlin.String.extensionVal: kotlin.Unit
+public expect konst kotlin.String.extensionVal: kotlin.Unit
 public expect var </*0*/ T> T.genericExtensionVar: T
 public fun test(): kotlin.String
 

@@ -14,7 +14,7 @@ object FieldTest {
 
     var result = ""
 
-    private val test = object {
+    private konst test = object {
         fun bar() = object {
             fun qux() = object {
                 fun biq() = object {
@@ -25,11 +25,11 @@ object FieldTest {
         }.also { result += "a" }
     }.also { result += "!" }
 
-    private val ttt = test.bar()
+    private konst ttt = test.bar()
 
-    private val qqq = ttt.qux()
+    private konst qqq = ttt.qux()
 
-    val bbb = qqq.biq().also { it.caz() }
+    konst bbb = qqq.biq().also { it.caz() }
 }
 
 object FunTest {
@@ -55,7 +55,7 @@ object FunTest {
 object DelegateTest {
     var result = ""
 
-    val f by lazy {
+    konst f by lazy {
         object { }.also { result += "OK" }
     }
 

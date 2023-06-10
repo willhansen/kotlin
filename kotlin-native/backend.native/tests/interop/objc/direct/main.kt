@@ -13,9 +13,9 @@ typealias CCN = CallingConventionsNativeHeir
 // KT-54610
 fun main(args: Array<String>) {
     autoreleasepool {
-        val cc = CC()
-        val cch = CCH()
-        val ccn = CCN()
+        konst cc = CC()
+        konst cch = CCH()
+        konst ccn = CCN()
 
         assertEquals(42UL, CC.regular(42))
         assertEquals(42UL, cc.regular(42))

@@ -16,14 +16,14 @@ abstract class DataSerializer<T, K>: KSerializer<T> {
     abstract fun getK(): K
 }
 
-class MySerializer<T>(val elementSer: KSerializer<T>): DataSerializer<IList<T>, Int>() {
+class MySerializer<T>(konst elementSer: KSerializer<T>): DataSerializer<IList<T>, Int>() {
 
     override fun getK(): Int = 42
 
-    override val descriptor: SerialDescriptor
+    override konst descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor("MySer<${elementSer.descriptor.serialName}>", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: IList<T>) = TODO("serialize")
+    override fun serialize(encoder: Encoder, konstue: IList<T>) = TODO("serialize")
 
     override fun deserialize(decoder: Decoder): IList<T> = TODO("deserialize")
 }
@@ -38,11 +38,11 @@ import kotlinx.serialization.*
 
 @Serializable
 class Holder(
-    val i: Int,
-    val c: IList<Int>
+    konst i: Int,
+    konst c: IList<Int>
 )
 
 fun box(): String {
-    val d = Holder.serializer().descriptor.toString()
+    konst d = Holder.serializer().descriptor.toString()
     return if (d == "a.Holder(i: kotlin.Int, c: MySer<kotlin.Int>)") "OK" else d
 }

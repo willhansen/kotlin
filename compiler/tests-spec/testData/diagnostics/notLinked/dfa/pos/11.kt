@@ -14,7 +14,7 @@
 fun <A, B : Inv<A>, C: Out<A?>> case_1(a: C, b: B) = select(a.x, b.x)
 
 fun case_1() {
-    val x = case_1(Out(10), Inv(0.1))
+    konst x = case_1(Out(10), Inv(0.1))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("{Comparable<*> & Number} & {Comparable<*> & Number}?")!>x<!>
@@ -34,7 +34,7 @@ fun case_1() {
 fun <A, B : Inv<A>, C: Out<A?>> case_2(a: C, b: B) = select(a.x, b.x)
 
 fun case_2(y: Int) {
-    val x = case_2(Out(y), Inv(0.1))
+    konst x = case_2(Out(y), Inv(0.1))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("{Comparable<*> & Number} & {Comparable<*> & Number}?")!>x<!>
@@ -97,7 +97,7 @@ fun case_3(a: Int?, b: Float?, c: Double?, d: Boolean?) {
 fun case_4(a: Interface1?, b: Interface2?, c: Boolean) {
     a as Interface2?
     b as Interface1?
-    val x = when (c) {
+    konst x = when (c) {
         true -> a
         false -> b
     }
@@ -141,7 +141,7 @@ fun case_4(a: Interface1?, b: Interface2?, c: Boolean) {
 fun case_5(a: Interface1?, b: Interface2?, d: Boolean) {
     a as Interface2?
     b as Interface1
-    val x = when (d) {
+    konst x = when (d) {
         true -> a
         false -> b
     }
@@ -183,7 +183,7 @@ fun case_5(a: Interface1?, b: Interface2?, d: Boolean) {
 fun case_6(a: Interface1?, b: Interface2, d: Boolean) {
     a as Interface2?
     b as Interface1
-    val x = when (d) {
+    konst x = when (d) {
         true -> a
         false -> b
     }
@@ -233,7 +233,7 @@ fun case_6(a: Interface1?, b: Interface2, d: Boolean) {
 fun case_7(a: Interface1?, b: Interface2?, d: Boolean) {
     a as Interface2?
     b as Interface1?
-    val x = when (d) {
+    konst x = when (d) {
         true -> a
         false -> b
     }

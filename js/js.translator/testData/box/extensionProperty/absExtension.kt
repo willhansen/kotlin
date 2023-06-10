@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1281
 package foo
 
-val Double.abs: Double
+konst Double.abs: Double
     get() = if (this > 0) this else -this
 
 fun box(): String {

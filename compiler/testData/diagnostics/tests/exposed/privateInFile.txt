@@ -24,7 +24,7 @@ private interface PrivateInFile {
 
 private final class PrivateInFileClass {
     public constructor PrivateInFileClass()
-    public final val test4: PrivateInFileClass.NestedPrivate
+    public final konst test4: PrivateInFileClass.NestedPrivate
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun test1(): PrivateInFileClass.NestedPrivate
@@ -49,7 +49,7 @@ private final class PrivateInFileClass {
 
 public final class Public {
     public constructor Public()
-    public final val test4: Public.NestedPrivate
+    public final konst test4: Public.NestedPrivate
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun test1(): Public.NestedPrivate

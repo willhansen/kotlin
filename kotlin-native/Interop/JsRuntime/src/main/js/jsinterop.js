@@ -30,9 +30,9 @@ konan.libraries.push ({
         });
         konan_dependencies.env.arenas.delete(arenaIndex);
     },
-    Konan_js_pushIntToArena: function (arenaIndex, value) {
+    Konan_js_pushIntToArena: function (arenaIndex, konstue) {
         var arena = konan_dependencies.env.arenas.get(arenaIndex);
-        arena.push(value);
+        arena.push(konstue);
         return arena.length - 1;
     },
     Konan_js_addObjectToArena: function (arenaIndex, object) {
@@ -58,15 +58,15 @@ konan.libraries.push ({
     Konan_js_getInt: function(arenaIndex, objIndex, propertyNamePtr, propertyNameLength) {
         // TODO:  The toUTF16String() is to be resolved by launcher.js runtime.
         var property = toUTF16String(propertyNamePtr, propertyNameLength); 
-        var value =  kotlinObject(arenaIndex, objIndex)[property];
-        return value;
+        var konstue =  kotlinObject(arenaIndex, objIndex)[property];
+        return konstue;
     },
     Konan_js_getProperty: function(arenaIndex, objIndex, propertyNamePtr, propertyNameLength) {
         // TODO:  The toUTF16String() is to be resolved by launcher.js runtime.
         var property = toUTF16String(propertyNamePtr, propertyNameLength); 
         var arena = konan_dependencies.env.arenas.get(arenaIndex);
-        var value = arena[objIndex][property];
-        arena.push(value);
+        var konstue = arena[objIndex][property];
+        arena.push(konstue);
         return arena.length - 1;
     },
     Konan_js_setFunction: function (arena, obj, propertyName, propertyNameLength, func) {

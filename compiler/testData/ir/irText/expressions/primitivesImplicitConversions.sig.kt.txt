@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Long
+konst test1: Long
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Long
   //   Public signature: /test1.<get-test1>|-7756650713406824739[0]
@@ -13,7 +13,7 @@ val test1: Long
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: Short
+konst test2: Short
   // CHECK JVM_IR:
   //   Mangled name: #<get-test2>(){}kotlin.Short
   //   Public signature: /test2.<get-test2>|3647244765573083120[0]
@@ -25,7 +25,7 @@ val test2: Short
 // CHECK:
 //   Mangled name: {}test3
 //   Public signature: /test3|7677556066983021166[0]
-val test3: Byte
+konst test3: Byte
   // CHECK JVM_IR:
   //   Mangled name: #<get-test3>(){}kotlin.Byte
   //   Public signature: /test3.<get-test3>|3590115425428046549[0]
@@ -37,7 +37,7 @@ val test3: Byte
 // CHECK:
 //   Mangled name: {}test4
 //   Public signature: /test4|-9115637610245762085[0]
-val test4: Long
+konst test4: Long
   // CHECK JVM_IR:
   //   Mangled name: #<get-test4>(){}kotlin.Long
   //   Public signature: /test4.<get-test4>|8355198295430948956[0]
@@ -49,7 +49,7 @@ val test4: Long
 // CHECK:
 //   Mangled name: {}test5
 //   Public signature: /test5|4734809624271551895[0]
-val test5: Short
+konst test5: Short
   // CHECK JVM_IR:
   //   Mangled name: #<get-test5>(){}kotlin.Short
   //   Public signature: /test5.<get-test5>|-6403114982829239942[0]
@@ -61,7 +61,7 @@ val test5: Short
 // CHECK:
 //   Mangled name: {}test6
 //   Public signature: /test6|-2606527149405855403[0]
-val test6: Byte
+konst test6: Byte
   // CHECK JVM_IR:
   //   Mangled name: #<get-test6>(){}kotlin.Byte
   //   Public signature: /test6.<get-test6>|-8478196724021525234[0]
@@ -77,7 +77,7 @@ class TestImplicitArguments {
   // CHECK:
   //   Mangled name: TestImplicitArguments{}x
   //   Public signature: /TestImplicitArguments.x|-8060530855978347579[0]
-  val x: Long
+  konst x: Long
     // CHECK JVM_IR:
     //   Mangled name: TestImplicitArguments#<get-x>(){}kotlin.Long
     //   Public signature: /TestImplicitArguments.x.<get-x>|-5038004036748815641[0]

@@ -3,7 +3,7 @@
 enum class E { X }
 
 object O {
-    val E.d: Delegate get() = Delegate()
+    konst E.d: Delegate get() = Delegate()
 }
 
 class Delegate {
@@ -12,6 +12,6 @@ class Delegate {
 }
 
 fun box(): String = with(O) {
-    val result by E.X.d
+    konst result by E.X.d
     result
 }

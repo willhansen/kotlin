@@ -6,10 +6,10 @@ FILE: safeCalls.kt
 
     }
     public abstract interface B : R|kotlin/Any| {
-        public abstract val foo: R|B|
+        public abstract konst foo: R|B|
             public get(): R|B|
 
-        public abstract val bar: R|B|
+        public abstract konst bar: R|B|
             public get(): R|B|
 
     }

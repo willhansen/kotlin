@@ -10,11 +10,11 @@ actual class ArrayList<E> private constructor(
     private var offset: Int,
     private var length: Int,
     private var isReadOnly: Boolean,
-    private val backingList: ArrayList<E>?,
-    private val root: ArrayList<E>?
+    private konst backingList: ArrayList<E>?,
+    private konst root: ArrayList<E>?
 ) : MutableList<E>, RandomAccess, AbstractMutableList<E>() {
     private companion object {
-        private val Empty = ArrayList<Nothing>(0).also { it.isReadOnly = true }
+        private konst Empty = ArrayList<Nothing>(0).also { it.isReadOnly = true }
     }
 
     /**
@@ -54,7 +54,7 @@ actual class ArrayList<E> private constructor(
         return if (length > 0) this else Empty
     }
 
-    override actual val size: Int
+    override actual konst size: Int
         get() = length
 
     override actual fun isEmpty(): Boolean = length == 0
@@ -67,7 +67,7 @@ actual class ArrayList<E> private constructor(
     override actual operator fun set(index: Int, element: E): E {
         checkIsMutable()
         AbstractList.checkElementIndex(index, length)
-        val old = backingArray[offset + index]
+        konst old = backingArray[offset + index]
         backingArray[offset + index] = element
         return old
     }
@@ -112,7 +112,7 @@ actual class ArrayList<E> private constructor(
 
     override actual fun addAll(elements: Collection<E>): Boolean {
         checkIsMutable()
-        val n = elements.size
+        konst n = elements.size
         addAllInternal(offset + length, elements, n)
         return n > 0
     }
@@ -120,7 +120,7 @@ actual class ArrayList<E> private constructor(
     override actual fun addAll(index: Int, elements: Collection<E>): Boolean {
         checkIsMutable()
         AbstractList.checkPositionIndex(index, length)
-        val n = elements.size
+        konst n = elements.size
         addAllInternal(offset + index, elements, n)
         return n > 0
     }
@@ -138,7 +138,7 @@ actual class ArrayList<E> private constructor(
 
     override actual fun remove(element: E): Boolean {
         checkIsMutable()
-        val i = indexOf(element)
+        konst i = indexOf(element)
         if (i >= 0) removeAt(i)
         return i >= 0
     }
@@ -216,7 +216,7 @@ actual class ArrayList<E> private constructor(
     private fun ensureCapacityInternal(minCapacity: Int) {
         if (minCapacity < 0) throw OutOfMemoryError()    // overflow
         if (minCapacity > backingArray.size) {
-            val newSize = AbstractList.newCapacity(backingArray.size, minCapacity)
+            konst newSize = AbstractList.newCapacity(backingArray.size, minCapacity)
             backingArray = backingArray.copyOfUninitializedElements(newSize)
         }
     }
@@ -250,7 +250,7 @@ actual class ArrayList<E> private constructor(
         } else {
             insertAtInternal(i, n)
             var j = 0
-            val it = elements.iterator()
+            konst it = elements.iterator()
             while (j < n) {
                 backingArray[i + j] = it.next()
                 j++
@@ -260,11 +260,11 @@ actual class ArrayList<E> private constructor(
 
     private fun removeAtInternal(i: Int): E {
         if (backingList != null) {
-            val old = backingList.removeAtInternal(i)
+            konst old = backingList.removeAtInternal(i)
             length--
             return old
         } else {
-            val old = backingArray[i]
+            konst old = backingArray[i]
             backingArray.copyInto(backingArray, startIndex = i + 1, endIndex = offset + length, destinationOffset = i)
             backingArray.resetAt(offset + length - 1)
             length--
@@ -285,7 +285,7 @@ actual class ArrayList<E> private constructor(
     /** Retains elements if [retain] == true and removes them it [retain] == false. */
     private fun retainOrRemoveAllInternal(rangeOffset: Int, rangeLength: Int, elements: Collection<E>, retain: Boolean): Int {
         if (backingList != null) {
-            val removed = backingList.retainOrRemoveAllInternal(rangeOffset, rangeLength, elements, retain)
+            konst removed = backingList.retainOrRemoveAllInternal(rangeOffset, rangeLength, elements, retain)
             length -= removed
             return removed
         } else {
@@ -298,7 +298,7 @@ actual class ArrayList<E> private constructor(
                     i++
                 }
             }
-            val removed = rangeLength - j
+            konst removed = rangeLength - j
             backingArray.copyInto(backingArray, startIndex = rangeOffset + rangeLength, endIndex = length, destinationOffset = rangeOffset + j)
             backingArray.resetRange(fromIndex = length - removed, toIndex = length)
             length -= removed
@@ -307,7 +307,7 @@ actual class ArrayList<E> private constructor(
     }
 
     private class Itr<E> : MutableListIterator<E> {
-        private val list: ArrayList<E>
+        private konst list: ArrayList<E>
         private var index: Int
         private var lastIndex: Int
 
@@ -358,7 +358,7 @@ private fun <T> Array<T>.subarrayContentHashCode(offset: Int, length: Int): Int 
     var result = 1
     var i = 0
     while (i < length) {
-        val nextElement = this[offset + i]
+        konst nextElement = this[offset + i]
         result = result * 31 + nextElement.hashCode()
         i++
     }

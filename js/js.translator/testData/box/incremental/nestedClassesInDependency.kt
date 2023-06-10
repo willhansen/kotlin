@@ -3,7 +3,7 @@
 // FILE: lib.kt
 
 class A {
-    class B(val msg: String)
+    class B(konst msg: String)
 
     fun foo(b: B) = b.msg
 }

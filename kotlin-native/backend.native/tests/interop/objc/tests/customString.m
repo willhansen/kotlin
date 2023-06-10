@@ -6,10 +6,10 @@ BOOL customStringDeallocated = NO;
     NSString* delegate;
 }
 
-- (instancetype)initWithValue:(int)value {
+- (instancetype)initWithValue:(int)konstue {
     if (self = [super init]) {
-        self->delegate = @(value).description;
-        self.value = value;
+        self->delegate = @(konstue).description;
+        self.konstue = konstue;
     }
     return self;
 }

@@ -17,14 +17,14 @@ import org.jetbrains.kotlin.fir.types.ConeDynamicType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 
 internal class KtFirDynamicType(
-    override val coneType: ConeDynamicType,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeDynamicType,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtDynamicType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst token: KtLifetimeToken get() = builder.token
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
 
     override fun asStringForDebugging(): String = withValidityAssertion { coneType.renderForDebugging() }
     override fun equals(other: Any?) = typeEquals(other)

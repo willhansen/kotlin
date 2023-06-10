@@ -26,26 +26,26 @@ interface JavaModule {
      * For automatic modules, this is the name in the Automatic-Module-Name attribute in the manifest,
      * or an automatically inferred name in case of absence of such attribute.
      */
-    val name: String
+    konst name: String
 
     /**
      * A non-empty list of directories or roots of .jar files on the module path. Can also contain the path to the `module-info.java` file
      * if that path was passed as an explicit argument to the compiler.
      * In case of an explicit module, module-info.class or module-info.java file must exist in at least one of these roots (the first wins).
      */
-    val moduleRoots: List<Root>
+    konst moduleRoots: List<Root>
 
     /**
      * A module-info.class or module-info.java file where this module was loaded from.
      */
-    val moduleInfoFile: VirtualFile?
+    konst moduleInfoFile: VirtualFile?
 
     /**
      * `true` if this module is an explicit module loaded from module-info.java, `false` otherwise. This usually corresponds to the module
      * currently being compiled.
      * Note that in case of partial/incremental compilation, the source module may contain both binary roots and non-binary roots.
      */
-    val isSourceModule: Boolean
+    konst isSourceModule: Boolean
 
     /**
      * `true` if this module exports the package with the given FQ name to all dependent modules.
@@ -66,12 +66,12 @@ interface JavaModule {
      */
     fun exportsTo(packageFqName: FqName, moduleName: String): Boolean
 
-    data class Root(val file: VirtualFile, val isBinary: Boolean, val isBinarySignature: Boolean = false)
+    data class Root(konst file: VirtualFile, konst isBinary: Boolean, konst isBinarySignature: Boolean = false)
 
-    class Automatic(override val name: String, override val moduleRoots: List<Root>) : JavaModule {
-        override val moduleInfoFile: VirtualFile? get() = null
+    class Automatic(override konst name: String, override konst moduleRoots: List<Root>) : JavaModule {
+        override konst moduleInfoFile: VirtualFile? get() = null
 
-        override val isSourceModule: Boolean get() = false
+        override konst isSourceModule: Boolean get() = false
 
         override fun exports(packageFqName: FqName): Boolean = true
 
@@ -81,15 +81,15 @@ interface JavaModule {
     }
 
     class Explicit(
-        val moduleInfo: JavaModuleInfo,
-        override val moduleRoots: List<Root>,
-        override val moduleInfoFile: VirtualFile,
-        val isJdkModuleFromCtSym: Boolean = false
+        konst moduleInfo: JavaModuleInfo,
+        override konst moduleRoots: List<Root>,
+        override konst moduleInfoFile: VirtualFile,
+        konst isJdkModuleFromCtSym: Boolean = false
     ) : JavaModule {
-        override val name: String
+        override konst name: String
             get() = moduleInfo.moduleName
 
-        override val isSourceModule: Boolean
+        override konst isSourceModule: Boolean
             get() = moduleInfoFile.extension == JavaFileType.DEFAULT_EXTENSION || moduleInfoFile.fileType == JavaFileType.INSTANCE
 
         override fun exports(packageFqName: FqName): Boolean {
@@ -108,4 +108,4 @@ interface JavaModule {
     }
 }
 
-const val KOTLIN_STDLIB_MODULE_NAME = "kotlin.stdlib"
+const konst KOTLIN_STDLIB_MODULE_NAME = "kotlin.stdlib"

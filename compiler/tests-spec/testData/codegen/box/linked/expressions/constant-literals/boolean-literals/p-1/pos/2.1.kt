@@ -11,24 +11,24 @@
  */
 
 open class `true` {
-    val x1 = true
+    konst x1 = true
 }
 
 internal open class A: `true`() {
-    val x2 = false
+    konst x2 = false
 }
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
-annotation class `false`(val x2: Boolean)
+annotation class `false`(konst x2: Boolean)
 
 @`false`(false) internal class B: @`false`(false) A() {}
 
 @`false`(true) interface C
 
 fun box(): String? {
-    val o1 = `true`()
-    val o2 = A()
-    val o3 = B()
+    konst o1 = `true`()
+    konst o2 = A()
+    konst o3 = B()
 
     if (o1.x1 != true) return null
     if (o2.x1 != true || o2.x2 != false || o3.x2 != false || o3.x1 != true) return null

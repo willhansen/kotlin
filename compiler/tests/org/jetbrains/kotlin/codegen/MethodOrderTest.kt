@@ -37,9 +37,9 @@ class MethodOrderTest : CodegenTestCase() {
                     fun f5()
                 }
 
-                val delegate: Trait = throw Error()
+                konst delegate: Trait = throw Error()
 
-                val obj = object : Trait by delegate {
+                konst obj = object : Trait by delegate {
                     override fun f3() { }
                 }
             """,
@@ -87,7 +87,7 @@ class MethodOrderTest : CodegenTestCase() {
     fun testMemberAccessor() {
         doTest(
             """
-                class Outer(private val a: Int, private var b: String) {
+                class Outer(private konst a: Int, private var b: String) {
                     private fun c() {
                     }
 
@@ -122,7 +122,7 @@ class MethodOrderTest : CodegenTestCase() {
                     fun getEntries(): Int = 3
                     fun entrySet() = getEntries()
                     fun getValues(): Int = 2
-                    fun values() = getValues()
+                    fun konstues() = getValues()
 
                     fun removeEldestEntry(eldest: Any?): Boolean
                 }
@@ -142,7 +142,7 @@ class MethodOrderTest : CodegenTestCase() {
                 "getEntries()I",
                 "entrySet()I",
                 "getValues()I",
-                "values()I"
+                "konstues()I"
             )
         )
     }
@@ -178,10 +178,10 @@ class MethodOrderTest : CodegenTestCase() {
         createEnvironmentWithMockJdkAndIdeaAnnotations(ConfigurationKind.JDK_ONLY)
         myFiles = CodegenTestFiles.create("file.kt", sourceText, myEnvironment!!.project)
 
-        val classFileForObject = generateClassesInFile().asList().first { it.relativePath.endsWith("$classSuffix.class") }
-        val classReader = ClassReader(classFileForObject.asByteArray())
+        konst classFileForObject = generateClassesInFile().asList().first { it.relativePath.endsWith("$classSuffix.class") }
+        konst classReader = ClassReader(classFileForObject.asByteArray())
 
-        val methodNames = ArrayList<String>()
+        konst methodNames = ArrayList<String>()
 
         classReader.accept(object : ClassVisitor(Opcodes.API_VERSION) {
             override fun visitMethod(

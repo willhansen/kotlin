@@ -8,7 +8,7 @@ public class PyTokenTypes {
 }
 
 // FILE: main.kt
-private val comparisonStrings = hashMapOf(
+private konst comparisonStrings = hashMapOf(
     PyTokenTypes.LT to "<",
 )
 

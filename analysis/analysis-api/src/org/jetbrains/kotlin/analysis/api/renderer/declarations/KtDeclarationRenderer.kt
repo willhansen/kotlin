@@ -26,64 +26,64 @@ import org.jetbrains.kotlin.analysis.api.symbols.*
 import org.jetbrains.kotlin.analysis.utils.printer.PrettyPrinter
 
 public class KtDeclarationRenderer private constructor(
-    public val nameRenderer: KtDeclarationNameRenderer,
-    public val keywordRenderer: KtKeywordRenderer,
-    public val contextReceiversRenderer: KtContextReceiversRenderer,
-    public val codeStyle: KtRendererCodeStyle,
-    public val typeRenderer: KtTypeRenderer,
-    public val annotationRenderer: KtAnnotationRenderer,
-    public val modifiersRenderer: KtDeclarationModifiersRenderer,
-    public val declarationTypeApproximator: KtRendererTypeApproximator,
-    public val classifierBodyRenderer: KtClassifierBodyRenderer,
+    public konst nameRenderer: KtDeclarationNameRenderer,
+    public konst keywordRenderer: KtKeywordRenderer,
+    public konst contextReceiversRenderer: KtContextReceiversRenderer,
+    public konst codeStyle: KtRendererCodeStyle,
+    public konst typeRenderer: KtTypeRenderer,
+    public konst annotationRenderer: KtAnnotationRenderer,
+    public konst modifiersRenderer: KtDeclarationModifiersRenderer,
+    public konst declarationTypeApproximator: KtRendererTypeApproximator,
+    public konst classifierBodyRenderer: KtClassifierBodyRenderer,
 
 
-    public val superTypeRenderer: KtSuperTypeRenderer,
-    public val superTypeListRenderer: KtSuperTypeListRenderer,
-    public val superTypesFilter: KtSuperTypesFilter,
-    public val superTypesArgumentRenderer: KtSuperTypesCallArgumentsRenderer,
+    public konst superTypeRenderer: KtSuperTypeRenderer,
+    public konst superTypeListRenderer: KtSuperTypeListRenderer,
+    public konst superTypesFilter: KtSuperTypesFilter,
+    public konst superTypesArgumentRenderer: KtSuperTypesCallArgumentsRenderer,
 
-    public val bodyMemberScopeProvider: KtRendererBodyMemberScopeProvider,
-    public val bodyMemberScopeSorter: KtRendererBodyMemberScopeSorter,
+    public konst bodyMemberScopeProvider: KtRendererBodyMemberScopeProvider,
+    public konst bodyMemberScopeSorter: KtRendererBodyMemberScopeSorter,
 
-    public val functionLikeBodyRenderer: KtFunctionLikeBodyRenderer,
-    public val variableInitializerRenderer: KtVariableInitializerRenderer,
-    public val parameterDefaultValueRenderer: KtParameterDefaultValueRenderer,
-    public val accessorBodyRenderer: KtPropertyAccessorBodyRenderer,
+    public konst functionLikeBodyRenderer: KtFunctionLikeBodyRenderer,
+    public konst variableInitializerRenderer: KtVariableInitializerRenderer,
+    public konst parameterDefaultValueRenderer: KtParameterDefaultValueRenderer,
+    public konst accessorBodyRenderer: KtPropertyAccessorBodyRenderer,
 
-    public val returnTypeRenderer: KtCallableReturnTypeRenderer,
-    public val callableReceiverRenderer: KtCallableReceiverRenderer,
+    public konst returnTypeRenderer: KtCallableReturnTypeRenderer,
+    public konst callableReceiverRenderer: KtCallableReceiverRenderer,
 
-    public val valueParametersRenderer: KtCallableParameterRenderer,
-    public val typeParametersRenderer: KtTypeParametersRenderer,
-    public val typeParametersFilter: KtTypeParameterRendererFilter,
+    public konst konstueParametersRenderer: KtCallableParameterRenderer,
+    public konst typeParametersRenderer: KtTypeParametersRenderer,
+    public konst typeParametersFilter: KtTypeParameterRendererFilter,
 
-    public val callableSignatureRenderer: KtCallableSignatureRenderer,
+    public konst callableSignatureRenderer: KtCallableSignatureRenderer,
 
-    public val anonymousFunctionRenderer: KtAnonymousFunctionSymbolRenderer,
-    public val backingFieldRenderer: KtBackingFieldSymbolRenderer,
-    public val constructorRenderer: KtConstructorSymbolRenderer,
-    public val enumEntryRenderer: KtEnumEntrySymbolRenderer,
-    public val functionSymbolRenderer: KtFunctionSymbolRenderer,
-    public val javaFieldRenderer: KtJavaFieldSymbolRenderer,
-    public val localVariableRenderer: KtLocalVariableSymbolRenderer,
-    public val getterRenderer: KtPropertyGetterSymbolRenderer,
-    public val setterRenderer: KtPropertySetterSymbolRenderer,
-    public val propertyRenderer: KtKotlinPropertySymbolRenderer,
-    public val kotlinPropertyRenderer: KtKotlinPropertySymbolRenderer,
-    public val syntheticJavaPropertyRenderer: KtSyntheticJavaPropertySymbolRenderer,
-    public val valueParameterRenderer: KtValueParameterSymbolRenderer,
-    public val samConstructorRenderer: KtSamConstructorSymbolRenderer,
-    public val propertyAccessorsRenderer: KtPropertyAccessorsRenderer,
+    public konst anonymousFunctionRenderer: KtAnonymousFunctionSymbolRenderer,
+    public konst backingFieldRenderer: KtBackingFieldSymbolRenderer,
+    public konst constructorRenderer: KtConstructorSymbolRenderer,
+    public konst enumEntryRenderer: KtEnumEntrySymbolRenderer,
+    public konst functionSymbolRenderer: KtFunctionSymbolRenderer,
+    public konst javaFieldRenderer: KtJavaFieldSymbolRenderer,
+    public konst localVariableRenderer: KtLocalVariableSymbolRenderer,
+    public konst getterRenderer: KtPropertyGetterSymbolRenderer,
+    public konst setterRenderer: KtPropertySetterSymbolRenderer,
+    public konst propertyRenderer: KtKotlinPropertySymbolRenderer,
+    public konst kotlinPropertyRenderer: KtKotlinPropertySymbolRenderer,
+    public konst syntheticJavaPropertyRenderer: KtSyntheticJavaPropertySymbolRenderer,
+    public konst konstueParameterRenderer: KtValueParameterSymbolRenderer,
+    public konst samConstructorRenderer: KtSamConstructorSymbolRenderer,
+    public konst propertyAccessorsRenderer: KtPropertyAccessorsRenderer,
 
-    public val classInitializerRender: KtClassInitializerRenderer,
-    public val classOrObjectRenderer: KtNamedClassOrObjectSymbolRenderer,
-    public val typeAliasRenderer: KtTypeAliasSymbolRenderer,
-    public val anonymousObjectRenderer: KtAnonymousObjectSymbolRenderer,
-    public val singleTypeParameterRenderer: KtSingleTypeParameterSymbolRenderer,
-    public val returnTypeFilter: KtCallableReturnTypeFilter,
+    public konst classInitializerRender: KtClassInitializerRenderer,
+    public konst classOrObjectRenderer: KtNamedClassOrObjectSymbolRenderer,
+    public konst typeAliasRenderer: KtTypeAliasSymbolRenderer,
+    public konst anonymousObjectRenderer: KtAnonymousObjectSymbolRenderer,
+    public konst singleTypeParameterRenderer: KtSingleTypeParameterSymbolRenderer,
+    public konst returnTypeFilter: KtCallableReturnTypeFilter,
 
-    public val scriptRenderer: KtScriptSymbolRenderer,
-    public val scriptInitializerRenderer: KtScriptInitializerRenderer
+    public konst scriptRenderer: KtScriptSymbolRenderer,
+    public konst scriptInitializerRenderer: KtScriptInitializerRenderer
 ) {
 
     context(KtAnalysisSession)
@@ -100,7 +100,7 @@ public class KtDeclarationRenderer private constructor(
             is KtSamConstructorSymbol -> samConstructorRenderer.renderSymbol(symbol, printer)
             is KtBackingFieldSymbol -> backingFieldRenderer.renderSymbol(symbol, printer)
             is KtEnumEntrySymbol -> enumEntryRenderer.renderSymbol(symbol, printer)
-            is KtValueParameterSymbol -> valueParameterRenderer.renderSymbol(symbol, printer)
+            is KtValueParameterSymbol -> konstueParameterRenderer.renderSymbol(symbol, printer)
             is KtJavaFieldSymbol -> javaFieldRenderer.renderSymbol(symbol, printer)
             is KtLocalVariableSymbol -> localVariableRenderer.renderSymbol(symbol, printer)
             is KtKotlinPropertySymbol -> kotlinPropertyRenderer.renderSymbol(symbol, printer)
@@ -112,7 +112,7 @@ public class KtDeclarationRenderer private constructor(
     }
 
     public fun with(action: Builder.() -> Unit): KtDeclarationRenderer {
-        val renderer = this
+        konst renderer = this
         return KtDeclarationRenderer {
             this.nameRenderer = renderer.nameRenderer
             this.keywordRender = renderer.keywordRenderer
@@ -140,7 +140,7 @@ public class KtDeclarationRenderer private constructor(
             this.returnTypeRenderer = renderer.returnTypeRenderer
             this.callableReceiverRenderer = renderer.callableReceiverRenderer
 
-            this.valueParametersRenderer = renderer.valueParametersRenderer
+            this.konstueParametersRenderer = renderer.konstueParametersRenderer
             this.typeParametersRenderer = renderer.typeParametersRenderer
             this.typeParametersFilter = renderer.typeParametersFilter
 
@@ -158,7 +158,7 @@ public class KtDeclarationRenderer private constructor(
             this.propertyRenderer = renderer.propertyRenderer
             this.kotlinPropertyRenderer = renderer.kotlinPropertyRenderer
             this.syntheticJavaPropertyRenderer = renderer.syntheticJavaPropertyRenderer
-            this.valueParameterRenderer = renderer.valueParameterRenderer
+            this.konstueParameterRenderer = renderer.konstueParameterRenderer
             this.samConstructorRenderer = renderer.samConstructorRenderer
             this.propertyAccessorsRenderer = renderer.propertyAccessorsRenderer
 
@@ -209,7 +209,7 @@ public class KtDeclarationRenderer private constructor(
         public lateinit var returnTypeRenderer: KtCallableReturnTypeRenderer
         public lateinit var callableReceiverRenderer: KtCallableReceiverRenderer
 
-        public lateinit var valueParametersRenderer: KtCallableParameterRenderer
+        public lateinit var konstueParametersRenderer: KtCallableParameterRenderer
         public lateinit var typeParametersRenderer: KtTypeParametersRenderer
         public lateinit var typeParametersFilter: KtTypeParameterRendererFilter
         public lateinit var callableSignatureRenderer: KtCallableSignatureRenderer
@@ -226,7 +226,7 @@ public class KtDeclarationRenderer private constructor(
         public lateinit var propertyRenderer: KtKotlinPropertySymbolRenderer
         public lateinit var kotlinPropertyRenderer: KtKotlinPropertySymbolRenderer
         public lateinit var syntheticJavaPropertyRenderer: KtSyntheticJavaPropertySymbolRenderer
-        public lateinit var valueParameterRenderer: KtValueParameterSymbolRenderer
+        public lateinit var konstueParameterRenderer: KtValueParameterSymbolRenderer
         public lateinit var samConstructorRenderer: KtSamConstructorSymbolRenderer
         public lateinit var propertyAccessorsRenderer: KtPropertyAccessorsRenderer
 
@@ -266,7 +266,7 @@ public class KtDeclarationRenderer private constructor(
             returnTypeRenderer,
             callableReceiverRenderer,
 
-            valueParametersRenderer,
+            konstueParametersRenderer,
             typeParametersRenderer,
             typeParametersFilter,
             callableSignatureRenderer,
@@ -283,7 +283,7 @@ public class KtDeclarationRenderer private constructor(
             propertyRenderer,
             kotlinPropertyRenderer,
             syntheticJavaPropertyRenderer,
-            valueParameterRenderer,
+            konstueParameterRenderer,
             samConstructorRenderer,
             propertyAccessorsRenderer,
 

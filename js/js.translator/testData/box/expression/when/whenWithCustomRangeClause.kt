@@ -27,8 +27,8 @@ fun testFun2(index: Int): String {
     }
 }
 
-class Wrapper(val value: Int) : Comparable<Wrapper> {
+class Wrapper(konst konstue: Int) : Comparable<Wrapper> {
     operator fun rangeTo(upper: Wrapper) = WrapperRange(this, upper)
-    override operator fun compareTo(other: Wrapper) = value.compareTo(other.value)
+    override operator fun compareTo(other: Wrapper) = konstue.compareTo(other.konstue)
 }
-class WrapperRange(override val start: Wrapper, override val endInclusive: Wrapper) : ClosedRange<Wrapper>
+class WrapperRange(override konst start: Wrapper, override konst endInclusive: Wrapper) : ClosedRange<Wrapper>

@@ -4,7 +4,7 @@ KtFile: TypeModifiers.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p1')
     PsiElement(COLON)(':')
@@ -18,7 +18,7 @@ KtFile: TypeModifiers.kt
           PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p2')
     PsiElement(COLON)(':')
@@ -45,7 +45,7 @@ KtFile: TypeModifiers.kt
               PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p3')
     PsiElement(COLON)(':')
@@ -75,7 +75,7 @@ KtFile: TypeModifiers.kt
               PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p4')
     PsiElement(COLON)(':')
@@ -103,7 +103,7 @@ KtFile: TypeModifiers.kt
               PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p4a')
     PsiElement(COLON)(':')
@@ -137,7 +137,7 @@ KtFile: TypeModifiers.kt
               PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p5')
     PsiElement(COLON)(':')
@@ -167,7 +167,7 @@ KtFile: TypeModifiers.kt
               PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p5a')
     PsiElement(COLON)(':')
@@ -203,7 +203,7 @@ KtFile: TypeModifiers.kt
               PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p6')
     PsiElement(COLON)(':')
@@ -228,7 +228,7 @@ KtFile: TypeModifiers.kt
           PsiElement(GT)('>')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p7')
     PsiElement(COLON)(':')
@@ -261,7 +261,7 @@ KtFile: TypeModifiers.kt
           PsiElement(GT)('>')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p8')
     PsiElement(COLON)(':')
@@ -302,7 +302,7 @@ KtFile: TypeModifiers.kt
           PsiElement(GT)('>')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p9')
     PsiElement(COLON)(':')
@@ -349,7 +349,7 @@ KtFile: TypeModifiers.kt
           PsiElement(GT)('>')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p10')
     PsiElement(COLON)(':')
@@ -371,7 +371,7 @@ KtFile: TypeModifiers.kt
           PsiElement(GT)('>')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p11')
     PsiElement(COLON)(':')
@@ -393,7 +393,7 @@ KtFile: TypeModifiers.kt
           PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p12')
     PsiElement(COLON)(':')
@@ -415,7 +415,7 @@ KtFile: TypeModifiers.kt
           PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p13')
     PsiElement(COLON)(':')
@@ -445,7 +445,7 @@ KtFile: TypeModifiers.kt
           PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p14')
     PsiElement(COLON)(':')
@@ -481,7 +481,7 @@ KtFile: TypeModifiers.kt
           PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('p15')
     PsiElement(COLON)(':')

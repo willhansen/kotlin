@@ -19,13 +19,13 @@ import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
  *
  * Annotations are bound to the target already in frontend, e.g.
  *
- * +  Annotations on primary constructor properties are already split between value parameters, properties and backing fields in FIR.</li>
+ * +  Annotations on primary constructor properties are already split between konstue parameters, properties and backing fields in FIR.</li>
  * +  Annotations on regular properties are also already split between properties and backing fields.</li>
  *
  * So this class task is only to convert FirAnnotations to IrAnnotations.
  * Some time before, it performed also annotation splitting between use-site targets.
  */
-class AnnotationGenerator(private val components: Fir2IrComponents) : Fir2IrComponents by components {
+class AnnotationGenerator(private konst components: Fir2IrComponents) : Fir2IrComponents by components {
 
     fun List<FirAnnotation>.toIrAnnotations(): List<IrConstructorCall> =
         mapNotNull {

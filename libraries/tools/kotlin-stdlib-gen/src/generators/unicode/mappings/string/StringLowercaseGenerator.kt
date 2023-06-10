@@ -16,17 +16,17 @@ import java.io.File
 import java.io.FileWriter
 
 internal class StringLowercaseGenerator(
-    private val outputFile: File,
+    private konst outputFile: File,
     unicodeDataLines: List<UnicodeDataLine>,
-    private val target: KotlinTarget,
+    private konst target: KotlinTarget,
 ) : StringCasingGenerator(unicodeDataLines) {
 
-    private val casedRanges = mutableListOf<IntRange>()
-    private val caseIgnorableRanges = mutableListOf<IntRange>()
+    private konst casedRanges = mutableListOf<IntRange>()
+    private konst caseIgnorableRanges = mutableListOf<IntRange>()
 
     init {
-        val casedRangesBuilder = CasedRangesBuilder()
-        val caseIgnorableRangesBuilder = CaseIgnorableRangesBuilder()
+        konst casedRangesBuilder = CasedRangesBuilder()
+        konst caseIgnorableRangesBuilder = CaseIgnorableRangesBuilder()
         unicodeDataLines.forEach { line ->
             if (line.char.length > 4) {
                 casedRangesBuilder.append(line.char, line.name, line.categoryCode)
@@ -61,7 +61,7 @@ internal class StringLowercaseGenerator(
         casedRanges.sortBy { it.first }
         caseIgnorableRanges.sortBy { it.first }
 
-        val strategy = RangesWritingStrategy.of(target)
+        konst strategy = RangesWritingStrategy.of(target)
 
         FileWriter(outputFile).use { writer ->
             writer.writeHeader(outputFile, "kotlin.text")
@@ -90,15 +90,15 @@ internal class StringLowercaseGenerator(
         internal fun Int.isCased(): Boolean {
             if (this <= Char.MAX_VALUE.code) {
                 when (toChar().getCategoryValue()) {
-                    CharCategory.UPPERCASE_LETTER.value,
-                    CharCategory.LOWERCASE_LETTER.value,
-                    CharCategory.TITLECASE_LETTER.value -> return true
+                    CharCategory.UPPERCASE_LETTER.konstue,
+                    CharCategory.LOWERCASE_LETTER.konstue,
+                    CharCategory.TITLECASE_LETTER.konstue -> return true
                 }
             }
             if (isOtherUppercase() || isOtherLowercase()) {
                 return true
             }
-            val index = binarySearchRange(casedStart, this)
+            konst index = binarySearchRange(casedStart, this)
             return index >= 0 && this <= casedEnd[index]
         }
     """.trimIndent()
@@ -109,23 +109,23 @@ internal class StringLowercaseGenerator(
         internal fun Int.isCaseIgnorable(): Boolean {
             if (this <= Char.MAX_VALUE.code) {
                 when (toChar().getCategoryValue()) {
-                    CharCategory.NON_SPACING_MARK.value,
-                    CharCategory.ENCLOSING_MARK.value,
-                    CharCategory.FORMAT.value,
-                    CharCategory.MODIFIER_LETTER.value,
-                    CharCategory.MODIFIER_SYMBOL.value -> return true
+                    CharCategory.NON_SPACING_MARK.konstue,
+                    CharCategory.ENCLOSING_MARK.konstue,
+                    CharCategory.FORMAT.konstue,
+                    CharCategory.MODIFIER_LETTER.konstue,
+                    CharCategory.MODIFIER_SYMBOL.konstue -> return true
                 }
             }
-            val index = binarySearchRange(caseIgnorableStart, this)
+            konst index = binarySearchRange(caseIgnorableStart, this)
             return index >= 0 && this <= caseIgnorableEnd[index]
         }
     """.trimIndent()
 
     private fun codePointBefore(): String = """
         private fun String.codePointBefore(index: Int): Int {
-            val low = this[index]
+            konst low = this[index]
             if (low.isLowSurrogate() && index - 1 >= 0) {
-                val high = this[index - 1]
+                konst high = this[index - 1]
                 if (high.isHighSurrogate()) {
                     return Char.toCodePoint(high, low)
                 }
@@ -173,7 +173,7 @@ internal class StringLowercaseGenerator(
         internal fun String.lowercaseImpl(): String {
             var unchangedIndex = 0
             while (unchangedIndex < this.length) {
-                val codePoint = codePointAt(unchangedIndex)
+                konst codePoint = codePointAt(unchangedIndex)
                 if (codePoint.lowercaseCodePoint() != codePoint) { // '\u0130' and '\u03A3' have lowercase corresponding mapping in UnicodeData.txt, no need to check them separately
                     break
                 }
@@ -183,7 +183,7 @@ internal class StringLowercaseGenerator(
                 return this
             }
 
-            val sb = StringBuilder(this.length)
+            konst sb = StringBuilder(this.length)
             sb.appendRange(this, 0, unchangedIndex)
 
             var index = unchangedIndex
@@ -199,8 +199,8 @@ internal class StringLowercaseGenerator(
                     index++
                     continue
                 }
-                val codePoint = codePointAt(index)
-                val lowercaseCodePoint = codePoint.lowercaseCodePoint()
+                konst codePoint = codePointAt(index)
+                konst lowercaseCodePoint = codePoint.lowercaseCodePoint()
                 sb.appendCodePoint(lowercaseCodePoint)
                 index += codePoint.charCount()
             }
@@ -211,7 +211,7 @@ internal class StringLowercaseGenerator(
 }
 
 private class CasedRangesBuilder : RangesBuilder() {
-    private val id = "Cased"
+    private konst id = "Cased"
 
     override fun categoryId(categoryCode: String): String = when (categoryCode) {
         CharCategory.UPPERCASE_LETTER.code,
@@ -226,7 +226,7 @@ private class CasedRangesBuilder : RangesBuilder() {
 }
 
 private class CaseIgnorableRangesBuilder : RangesBuilder() {
-    private val id = "CaseIgnorable"
+    private konst id = "CaseIgnorable"
 
     override fun categoryId(categoryCode: String): String = when (categoryCode) {
         CharCategory.NON_SPACING_MARK.code,

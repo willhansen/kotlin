@@ -4,7 +4,7 @@ import helpers.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-data class A(val o: String) {
+data class A(konst o: String) {
     operator fun component2(): String = "K"
 }
 fun builder(c: suspend (A) -> Unit) {

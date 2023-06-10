@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirAnonymousFunctionExpression : FirExpression() {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract val anonymousFunction: FirAnonymousFunction
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract konst anonymousFunction: FirAnonymousFunction
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitAnonymousFunctionExpression(this, data)
 

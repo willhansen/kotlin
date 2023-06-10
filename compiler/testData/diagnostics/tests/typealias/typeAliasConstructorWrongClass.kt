@@ -2,23 +2,23 @@
 
 abstract class AbstractClass
 typealias Test1 = AbstractClass
-val test1 = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>Test1()<!>
-val test1a = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>AbstractClass()<!>
+konst test1 = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>Test1()<!>
+konst test1a = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>AbstractClass()<!>
 
 annotation class AnnotationClass
 typealias Test2 = AnnotationClass
-val test2 = Test2()
-val test2a = AnnotationClass()
+konst test2 = Test2()
+konst test2a = AnnotationClass()
 
 enum class EnumClass { VALUE1, VALUE2 }
 typealias Test3 = EnumClass
-val test3 = <!ENUM_CLASS_CONSTRUCTOR_CALL!><!INVISIBLE_MEMBER!>Test3<!>()<!>
-val test3a = <!ENUM_CLASS_CONSTRUCTOR_CALL!><!INVISIBLE_MEMBER!>EnumClass<!>()<!>
+konst test3 = <!ENUM_CLASS_CONSTRUCTOR_CALL!><!INVISIBLE_MEMBER!>Test3<!>()<!>
+konst test3a = <!ENUM_CLASS_CONSTRUCTOR_CALL!><!INVISIBLE_MEMBER!>EnumClass<!>()<!>
 
 sealed class SealedClass
 typealias Test4 = SealedClass
-val test4 = <!SEALED_CLASS_CONSTRUCTOR_CALL!><!INVISIBLE_MEMBER!>Test4<!>()<!>
-val test4a = <!SEALED_CLASS_CONSTRUCTOR_CALL!><!INVISIBLE_MEMBER!>SealedClass<!>()<!>
+konst test4 = <!SEALED_CLASS_CONSTRUCTOR_CALL!><!INVISIBLE_MEMBER!>Test4<!>()<!>
+konst test4a = <!SEALED_CLASS_CONSTRUCTOR_CALL!><!INVISIBLE_MEMBER!>SealedClass<!>()<!>
 
 class Outer {
     inner class Inner
@@ -26,9 +26,9 @@ class Outer {
 }
 typealias Test5 = Outer.Inner
 
-val test5 = <!RESOLUTION_TO_CLASSIFIER!>Test5<!>()
-val test5a = Outer.<!RESOLUTION_TO_CLASSIFIER!>Inner<!>()
-val test5b = Outer.<!RESOLUTION_TO_CLASSIFIER!>TestInner<!>()
-val test5c = Outer().<!UNRESOLVED_REFERENCE!>TestInner<!>()
-val test5d = Outer().Inner()
-val test5e = Outer().Test5()
+konst test5 = <!RESOLUTION_TO_CLASSIFIER!>Test5<!>()
+konst test5a = Outer.<!RESOLUTION_TO_CLASSIFIER!>Inner<!>()
+konst test5b = Outer.<!RESOLUTION_TO_CLASSIFIER!>TestInner<!>()
+konst test5c = Outer().<!UNRESOLVED_REFERENCE!>TestInner<!>()
+konst test5d = Outer().Inner()
+konst test5e = Outer().Test5()

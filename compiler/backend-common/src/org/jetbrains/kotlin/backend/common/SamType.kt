@@ -10,15 +10,15 @@ import org.jetbrains.kotlin.descriptors.SimpleFunctionDescriptor
 import org.jetbrains.kotlin.resolve.sam.getAbstractMembers
 import org.jetbrains.kotlin.types.KotlinType
 
-class SamType constructor(val type: KotlinType) {
+class SamType constructor(konst type: KotlinType) {
 
-    val classDescriptor: ClassDescriptor
+    konst classDescriptor: ClassDescriptor
         get() = type.constructor.declarationDescriptor as? ClassDescriptor ?: error("Sam/Fun interface not a class descriptor: $type")
 
-    val kotlinFunctionType: KotlinType
+    konst kotlinFunctionType: KotlinType
         get() = classDescriptor.defaultFunctionTypeForSamInterface!!
 
-    val originalAbstractMethod: SimpleFunctionDescriptor
+    konst originalAbstractMethod: SimpleFunctionDescriptor
         get() = getAbstractMembers(classDescriptor)[0] as SimpleFunctionDescriptor
 
     override fun equals(other: Any?): Boolean {

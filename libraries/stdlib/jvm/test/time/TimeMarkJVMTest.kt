@@ -18,11 +18,11 @@ class TimeMarkJVMTest {
 
     @Test
     fun defaultTimeMarkAdjustmentInfinite() {
-        val baseMark = TimeSource.Monotonic.markNow()
-        val longDuration = Long.MAX_VALUE.nanoseconds
+        konst baseMark = TimeSource.Monotonic.markNow()
+        konst longDuration = Long.MAX_VALUE.nanoseconds
 
-        val pastMark = baseMark - longDuration
-        val infiniteFutureMark1 = pastMark + longDuration * 3
+        konst pastMark = baseMark - longDuration
+        konst infiniteFutureMark1 = pastMark + longDuration * 3
 
         assertEquals(-Duration.INFINITE, infiniteFutureMark1.elapsedNow())
     }

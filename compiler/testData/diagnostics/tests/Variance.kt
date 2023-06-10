@@ -7,20 +7,20 @@ abstract class Producer<out T> {}
 abstract class Usual<T> {}
 
 fun foo(c: Consumer<Int>, p: Producer<Int>, u: Usual<Int>) {
-    val c1: Consumer<Any> = <!TYPE_MISMATCH!>c<!>
-    val c2: Consumer<Int> = c1
+    konst c1: Consumer<Any> = <!TYPE_MISMATCH!>c<!>
+    konst c2: Consumer<Int> = c1
 
-    val p1: Producer<Any> = p
-    val p2: Producer<Int> = <!TYPE_MISMATCH!>p1<!>
+    konst p1: Producer<Any> = p
+    konst p2: Producer<Int> = <!TYPE_MISMATCH!>p1<!>
 
-    val u1: Usual<Any> = <!TYPE_MISMATCH!>u<!>
-    val u2: Usual<Int> = <!TYPE_MISMATCH!>u1<!>
+    konst u1: Usual<Any> = <!TYPE_MISMATCH!>u<!>
+    konst u2: Usual<Int> = <!TYPE_MISMATCH!>u1<!>
 }
 
 //Arrays copy example
-class Array<T>(val length : Int, val t : T) {
+class Array<T>(konst length : Int, konst t : T) {
     fun get(index : Int) : T { return t }
-    fun set(index : Int, value : T) { /* ... */ }
+    fun set(index : Int, konstue : T) { /* ... */ }
 }
 
 fun copy1(from : Array<Any>, to : Array<Any>) {}

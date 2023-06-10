@@ -11,7 +11,7 @@ compiler/testData/multiplatform/optionalExpectationIncorrectUse/common.kt:12:1: 
 @OptionalExpectation
 ^
 compiler/testData/multiplatform/optionalExpectationIncorrectUse/common.kt:17:43: error: declaration annotated with '@OptionalExpectation' can only be used inside an annotation entry
-annotation class InOtherAnnotation(val a: A)
+annotation class InOtherAnnotation(konst a: A)
                                           ^
 compiler/testData/multiplatform/optionalExpectationIncorrectUse/common.kt:19:20: error: declaration annotated with '@OptionalExpectation' can only be used inside an annotation entry
 @InOtherAnnotation(A())
@@ -33,7 +33,7 @@ compiler/testData/multiplatform/optionalExpectationIncorrectUse/common.kt:12:1: 
 @OptionalExpectation
 ^
 compiler/testData/multiplatform/optionalExpectationIncorrectUse/common.kt:17:43: error: declaration annotated with '@OptionalExpectation' can only be used inside an annotation entry
-annotation class InOtherAnnotation(val a: A)
+annotation class InOtherAnnotation(konst a: A)
                                           ^
 compiler/testData/multiplatform/optionalExpectationIncorrectUse/common.kt:19:20: error: declaration annotated with '@OptionalExpectation' can only be used inside an annotation entry
 @InOtherAnnotation(A())
@@ -45,10 +45,10 @@ compiler/testData/multiplatform/optionalExpectationIncorrectUse/jvm.kt:1:24: err
 fun useInReturnType(): A? = null
                        ^
 compiler/testData/multiplatform/optionalExpectationIncorrectUse/jvm.kt:3:43: error: declaration annotated with '@OptionalExpectation' can only be used inside an annotation entry
-annotation class AnotherAnnotation(val a: A)
+annotation class AnotherAnnotation(konst a: A)
                                           ^
 compiler/testData/multiplatform/optionalExpectationIncorrectUse/jvm.kt:3:43: error: declaration annotated with '@OptionalExpectation' can only be used in common module sources
-annotation class AnotherAnnotation(val a: A)
+annotation class AnotherAnnotation(konst a: A)
                                           ^
 compiler/testData/multiplatform/optionalExpectationIncorrectUse/jvm.kt:5:20: error: declaration annotated with '@OptionalExpectation' can only be used inside an annotation entry
 @AnotherAnnotation(A())

@@ -13,7 +13,7 @@ class C {
 
   }
 
-  val x: IntArray
+  konst x: IntArray
     field = x
     get
 
@@ -22,26 +22,26 @@ class C {
 fun testVariable() {
   var x: IntArray = foo()
   { // BLOCK
-    val tmp0_array: IntArray = x
-    val tmp1_index0: Int = 0
-    tmp0_array.set(index = tmp1_index0, value = tmp0_array.get(index = tmp1_index0).plus(other = 1))
+    konst tmp0_array: IntArray = x
+    konst tmp1_index0: Int = 0
+    tmp0_array.set(index = tmp1_index0, konstue = tmp0_array.get(index = tmp1_index0).plus(other = 1))
   }
 }
 
 fun testCall() {
   { // BLOCK
-    val tmp0_array: IntArray = foo()
-    val tmp1_index0: Int = bar()
-    tmp0_array.set(index = tmp1_index0, value = tmp0_array.get(index = tmp1_index0).times(other = 2))
+    konst tmp0_array: IntArray = foo()
+    konst tmp1_index0: Int = bar()
+    tmp0_array.set(index = tmp1_index0, konstue = tmp0_array.get(index = tmp1_index0).times(other = 2))
   }
 }
 
 fun testMember(c: C) {
   { // BLOCK
-    val tmp0_array: IntArray = c.<get-x>()
-    val tmp1_index0: Int = 0
-    val tmp2: Int = tmp0_array.get(index = tmp1_index0)
-    tmp0_array.set(index = tmp1_index0, value = tmp2.inc())
+    konst tmp0_array: IntArray = c.<get-x>()
+    konst tmp1_index0: Int = 0
+    konst tmp2: Int = tmp0_array.get(index = tmp1_index0)
+    tmp0_array.set(index = tmp1_index0, konstue = tmp2.inc())
     tmp2
   } /*~> Unit */
 }

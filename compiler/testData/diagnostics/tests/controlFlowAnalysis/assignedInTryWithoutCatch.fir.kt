@@ -1,5 +1,5 @@
 fun assignedInTry() {
-    val a: Int
+    konst a: Int
     try {
         a = 42
     } finally {
@@ -8,7 +8,7 @@ fun assignedInTry() {
 }
 
 fun sideEffectBeforeAssignmentInTry(s: Any) {
-    val a: Int
+    konst a: Int
     try {
         s as String // Potential cast exception
         a = 42
@@ -18,7 +18,7 @@ fun sideEffectBeforeAssignmentInTry(s: Any) {
 }
 
 fun assignedInTryAndFinally() {
-    val a: Int
+    konst a: Int
     try {
         a = 42
     } finally {
@@ -28,7 +28,7 @@ fun assignedInTryAndFinally() {
 }
 
 fun sideEffectBeforeAssignmentInTryButNotFinally(s: Any) {
-    val a: Int
+    konst a: Int
     try {
         s as String // Potential cast exception
         a = 42

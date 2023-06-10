@@ -1,6 +1,6 @@
 package
 
-public val t: kotlin.String
+public konst t: kotlin.String
 public fun testFun(): kotlin.String
 
 package test {

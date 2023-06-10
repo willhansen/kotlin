@@ -23,10 +23,10 @@ public sealed interface KtContractBooleanExpression : KtLifetimeOwner
  * Represents boolean parameter reference passed to `booleanExpression` argument of [kotlin.contracts.SimpleEffect.implies].
  */
 public class KtContractBooleanValueParameterExpression(
-    private val _parameterSymbol: KtParameterSymbol
+    private konst _parameterSymbol: KtParameterSymbol
 ) : KtContractBooleanExpression {
-    override val token: KtLifetimeToken get() = _parameterSymbol.token
-    public val parameterSymbol: KtParameterSymbol get() = withValidityAssertion { _parameterSymbol }
+    override konst token: KtLifetimeToken get() = _parameterSymbol.token
+    public konst parameterSymbol: KtParameterSymbol get() = withValidityAssertion { _parameterSymbol }
     override fun hashCode(): Int = _parameterSymbol.hashCode()
     override fun equals(other: Any?): Boolean =
         other is KtContractBooleanValueParameterExpression && other._parameterSymbol == _parameterSymbol
@@ -37,10 +37,10 @@ public class KtContractBooleanValueParameterExpression(
  * [kotlin.contracts.SimpleEffect.implies].
  */
 public class KtContractBooleanConstantExpression(
-    private val _booleanConstant: Boolean,
-    override val token: KtLifetimeToken
+    private konst _booleanConstant: Boolean,
+    override konst token: KtLifetimeToken
 ) : KtContractBooleanExpression {
-    public val booleanConstant: Boolean get() = withValidityAssertion { _booleanConstant }
+    public konst booleanConstant: Boolean get() = withValidityAssertion { _booleanConstant }
 
     override fun equals(other: Any?): Boolean = other is KtContractBooleanConstantExpression && other._booleanConstant == _booleanConstant
     override fun hashCode(): Int = _booleanConstant.hashCode()

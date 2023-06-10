@@ -13,7 +13,7 @@ public class CommonizerTargetIdentityStringTest {
 
     @Test
     public fun leafTargets() {
-        KonanTarget.predefinedTargets.values.forEach { konanTarget ->
+        KonanTarget.predefinedTargets.konstues.forEach { konanTarget ->
             assertEquals(konanTarget.name, CommonizerTarget(konanTarget).identityString)
             assertEquals(CommonizerTarget(konanTarget), parseCommonizerTarget(CommonizerTarget(konanTarget).identityString))
         }
@@ -21,8 +21,8 @@ public class CommonizerTargetIdentityStringTest {
 
     @Test
     public fun `simple shared targets are invariant under konanTarget order`() {
-        val macosFirst = CommonizerTarget(MACOS_X64, LINUX_X64)
-        val linuxFirst = CommonizerTarget(LINUX_X64, MACOS_X64)
+        konst macosFirst = CommonizerTarget(MACOS_X64, LINUX_X64)
+        konst linuxFirst = CommonizerTarget(LINUX_X64, MACOS_X64)
 
         assertEquals(macosFirst, linuxFirst)
         assertEquals(macosFirst.identityString, linuxFirst.identityString)
@@ -34,7 +34,7 @@ public class CommonizerTargetIdentityStringTest {
 
     @Test
     public fun `parsing CommonizerTarget with 1 5 20 notation`() {
-        val target = parseCommonizerTarget("(x, (x, y, (a, b), (b, c)))")
+        konst target = parseCommonizerTarget("(x, (x, y, (a, b), (b, c)))")
         assertEquals(SharedCommonizerTarget(setOf("x", "y", "a", "b", "c").map(::LeafCommonizerTarget).toSet()), target)
     }
 

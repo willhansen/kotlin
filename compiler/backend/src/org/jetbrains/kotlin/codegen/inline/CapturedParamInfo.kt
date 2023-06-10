@@ -19,17 +19,17 @@ package org.jetbrains.kotlin.codegen.inline
 import org.jetbrains.kotlin.codegen.StackValue
 
 class CapturedParamInfo : ParameterInfo {
-    val desc: CapturedParamDesc
-    val newFieldName: String
-    val isSkipInConstructor: Boolean
+    konst desc: CapturedParamDesc
+    konst newFieldName: String
+    konst isSkipInConstructor: Boolean
 
     //Now used only for bound function reference receiver
     var isSynthetic: Boolean = false
 
-    val originalFieldName: String
+    konst originalFieldName: String
         get() = desc.fieldName
 
-    val containingLambdaName: String
+    konst containingLambdaName: String
         get() = desc.containingLambdaName
 
     constructor(
@@ -66,7 +66,7 @@ class CapturedParamInfo : ParameterInfo {
     }
 
     fun cloneWithNewDeclarationIndex(newDeclarationIndex: Int): CapturedParamInfo {
-        val result = CapturedParamInfo(
+        konst result = CapturedParamInfo(
             desc, newFieldName, isSkipped, index, remapValue, isSkipInConstructor, newDeclarationIndex
         )
         result.functionalArgument = functionalArgument

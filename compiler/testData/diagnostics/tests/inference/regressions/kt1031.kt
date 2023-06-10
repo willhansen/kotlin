@@ -14,9 +14,9 @@ public fun<TItem, TResult> select(yielder: ()->Iterable<TItem>, selector : (TIte
 <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 
 fun a() {
-    val x = 0..200
-    val z = x where { i: Int -> i % 2 == 0 }
-    val yielder = select(x where { it%2==0 }, { it.toString() })
+    konst x = 0..200
+    konst z = x where { i: Int -> i % 2 == 0 }
+    konst yielder = select(x where { it%2==0 }, { it.toString() })
 
     checkSubtype<() -> Iterable<Int>>(z)
     checkSubtype<() -> Iterable<String>>(yielder)

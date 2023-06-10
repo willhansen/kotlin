@@ -4,12 +4,12 @@
 import kotlin.reflect.KClass
 
 fun test(s: String) {
-    val f: () -> Int = s::hashCode
-    val g: () -> String = s::toString
-    val h: (Any?) -> Boolean = s::equals
+    konst f: () -> Int = s::hashCode
+    konst g: () -> String = s::toString
+    konst h: (Any?) -> Boolean = s::equals
 
-    val k: KClass<out String> = s::class
-    val l: KClass<*> = s::class
-    val m: KClass<String> = String::class
-    val n: KClass<Unit> = Unit::class
+    konst k: KClass<out String> = s::class
+    konst l: KClass<*> = s::class
+    konst m: KClass<String> = String::class
+    konst n: KClass<Unit> = Unit::class
 }

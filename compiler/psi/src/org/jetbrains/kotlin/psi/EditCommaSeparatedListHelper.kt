@@ -64,13 +64,13 @@ object EditCommaSeparatedListHelper {
         anchor: TItem?,
         prefix: KtToken = KtTokens.LPAR
     ): TItem {
-        val anchorAfter: TItem?
+        konst anchorAfter: TItem?
         anchorAfter = if (allItems.isEmpty()) {
             assert(anchor == null)
             null
         } else {
             if (anchor != null) {
-                val index = allItems.indexOf(anchor)
+                konst index = allItems.indexOf(anchor)
                 assert(index >= 0)
                 if (index > 0) allItems[index - 1] else null
             } else {

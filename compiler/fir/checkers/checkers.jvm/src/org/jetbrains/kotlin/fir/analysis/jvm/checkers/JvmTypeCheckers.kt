@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.fir.analysis.checkers.type.*
 import org.jetbrains.kotlin.fir.analysis.jvm.checkers.type.FirFunctionalTypeParameterNameChecker
 
 object JvmTypeCheckers : TypeCheckers() {
-    override val typeRefCheckers: Set<FirTypeRefChecker> = setOf(
+    override konst typeRefCheckers: Set<FirTypeRefChecker> = setOf(
         FirDynamicUnsupportedChecker,
         FirFunctionalTypeParameterNameChecker,
     )

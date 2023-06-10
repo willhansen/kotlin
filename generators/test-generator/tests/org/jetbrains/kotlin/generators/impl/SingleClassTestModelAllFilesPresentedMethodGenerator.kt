@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.test.util.KtTestUtil
 import org.jetbrains.kotlin.utils.Printer
 
 object SingleClassTestModelAllFilesPresentedMethodGenerator : MethodGenerator<SingleClassTestModel.TestAllFilesPresentMethodModel>() {
-    override val kind: MethodModel.Kind
+    override konst kind: MethodModel.Kind
         get() = SingleClassTestModel.AllFilesPresentedMethodKind
 
     override fun generateSignature(method: SingleClassTestModel.TestAllFilesPresentMethodModel, p: Printer) {
@@ -24,8 +24,8 @@ object SingleClassTestModelAllFilesPresentedMethodGenerator : MethodGenerator<Si
     override fun generateBody(method: SingleClassTestModel.TestAllFilesPresentMethodModel, p: Printer) {
         with(method) {
             with(classModel) {
-                val assertTestsPresentStr: String
-                val excludedArgument = if (excludePattern != null) {
+                konst assertTestsPresentStr: String
+                konst excludedArgument = if (excludePattern != null) {
                     String.format(
                         "Pattern.compile(\"%s\")", StringUtil.escapeStringCharacters(
                             excludePattern.pattern()

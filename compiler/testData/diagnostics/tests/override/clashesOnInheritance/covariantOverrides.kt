@@ -20,10 +20,10 @@ interface IDerived : ILeft, IRight {
 }
 
 // Error: ILeft::copy and IRight::copy have unrelated return types
-<!ABSTRACT_MEMBER_NOT_IMPLEMENTED, RETURN_TYPE_MISMATCH_ON_INHERITANCE!>class CDerivedInvalid1<!> : ILeft, IRight
+<!ABSTRACT_MEMBER_NOT_IMPLEMENTED, RETURN_TYPE_MISMATCH_ON_INHERITANCE!>class CDerivedInkonstid1<!> : ILeft, IRight
 
 // Error: CLeft::copy and IRight::copy have unrelated return types
-<!RETURN_TYPE_MISMATCH_ON_INHERITANCE!>class CDerivedInvalid2<!> : CLeft(), IRight
+<!RETURN_TYPE_MISMATCH_ON_INHERITANCE!>class CDerivedInkonstid2<!> : CLeft(), IRight
 
 // OK: CDerived1::copy overrides both ILeft::copy and IRight::copy
 class CDerived1 : ILeft, IRight {

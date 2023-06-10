@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.types.model.FlexibleTypeMarker
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 
-class JvmIrTypeSystemContext(override val irBuiltIns: IrBuiltIns) : IrTypeSystemContext {
+class JvmIrTypeSystemContext(override konst irBuiltIns: IrBuiltIns) : IrTypeSystemContext {
     override fun KotlinTypeMarker.asFlexibleType(): FlexibleTypeMarker? =
         (this as IrType).asJvmFlexibleType(irBuiltIns)
 

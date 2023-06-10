@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val array = intArrayOf(1, 2, 3)
+    konst array = intArrayOf(1, 2, 3)
     var optimized = 0
     for (i in 0..array.size - 1) optimized += array[i]
 }

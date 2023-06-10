@@ -25,11 +25,11 @@ abstract class AbstractBuildClassTypeTest : AbstractAnalysisApiSingleFileTest() 
     }
 
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val typeString = module.directives[Directives.CLASS_TYPE].singleOrNull()
+        konst typeString = module.directives[Directives.CLASS_TYPE].singleOrNull()
             ?: error("${Directives.CLASS_TYPE} directive is not defined")
 
-        val actual = analyseForTest(ktFile) {
-            val ktType = TypeParser.parseTypeFromString(typeString, ktFile, ktFile)
+        konst actual = analyseForTest(ktFile) {
+            konst ktType = TypeParser.parseTypeFromString(typeString, ktFile, ktFile)
             buildString {
                 appendLine("originalTypeString: $typeString")
                 appendLine("ktType: ${ktType.render(renderer = KtTypeRendererForDebug.WITH_QUALIFIED_NAMES, position = Variance.INVARIANT)}")
@@ -40,6 +40,6 @@ abstract class AbstractBuildClassTypeTest : AbstractAnalysisApiSingleFileTest() 
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val CLASS_TYPE by stringDirective("Class type to create")
+        konst CLASS_TYPE by stringDirective("Class type to create")
     }
 }

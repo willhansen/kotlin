@@ -1,5 +1,5 @@
 inline fun <reified T : Any> uninitializedEntry(): T {
-    val klass = T::class.java
+    konst klass = T::class.java
     if (klass.isInterface) {
         throw RuntimeException()
     }
@@ -12,897 +12,897 @@ class ItemType
 
 object ItemTypes {
     @JvmField
-    val IRON_SHOVEL: ItemType = uninitializedEntry()
+    konst IRON_SHOVEL: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_PICKAXE: ItemType = uninitializedEntry()
+    konst IRON_PICKAXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_AXE: ItemType = uninitializedEntry()
+    konst IRON_AXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val FLINT_AND_STEEL: ItemType = uninitializedEntry()
+    konst FLINT_AND_STEEL: ItemType = uninitializedEntry()
 
     @JvmField
-    val APPLE: ItemType = uninitializedEntry()
+    konst APPLE: ItemType = uninitializedEntry()
 
     @JvmField
-    val ARROW: ItemType = uninitializedEntry()
+    konst ARROW: ItemType = uninitializedEntry()
 
     @JvmField
-    val COAL: ItemType = uninitializedEntry()
+    konst COAL: ItemType = uninitializedEntry()
 
     @JvmField
-    val DIAMOND: ItemType = uninitializedEntry()
+    konst DIAMOND: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_INGOT: ItemType = uninitializedEntry()
+    konst IRON_INGOT: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLD_INGOT: ItemType = uninitializedEntry()
+    konst GOLD_INGOT: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_SWORD: ItemType = uninitializedEntry()
+    konst IRON_SWORD: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_SWORD: ItemType = uninitializedEntry()
+    konst WOODEN_SWORD: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_SHOVEL: ItemType = uninitializedEntry()
+    konst WOODEN_SHOVEL: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_PICKAXE: ItemType = uninitializedEntry()
+    konst WOODEN_PICKAXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_AXE: ItemType = uninitializedEntry()
+    konst WOODEN_AXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_SWORD: ItemType = uninitializedEntry()
+    konst STONE_SWORD: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_SHOVEL: ItemType = uninitializedEntry()
+    konst STONE_SHOVEL: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_PICKAXE: ItemType = uninitializedEntry()
+    konst STONE_PICKAXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_AXE: ItemType = uninitializedEntry()
+    konst STONE_AXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val DIAMOND_SWORD: ItemType = uninitializedEntry()
+    konst DIAMOND_SWORD: ItemType = uninitializedEntry()
 
     @JvmField
-    val DIAMOND_SHOVEL: ItemType = uninitializedEntry()
+    konst DIAMOND_SHOVEL: ItemType = uninitializedEntry()
 
     @JvmField
-    val DIAMOND_PICKAXE: ItemType = uninitializedEntry()
+    konst DIAMOND_PICKAXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val DIAMOND_AXE: ItemType = uninitializedEntry()
+    konst DIAMOND_AXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val STICK: ItemType = uninitializedEntry()
+    konst STICK: ItemType = uninitializedEntry()
 
     @JvmField
-    val BOWL: ItemType = uninitializedEntry()
+    konst BOWL: ItemType = uninitializedEntry()
 
     @JvmField
-    val MUSHROOM_STEW: ItemType = uninitializedEntry()
+    konst MUSHROOM_STEW: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_SWORD: ItemType = uninitializedEntry()
+    konst GOLDEN_SWORD: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_SHOVEL: ItemType = uninitializedEntry()
+    konst GOLDEN_SHOVEL: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_PICKAXE: ItemType = uninitializedEntry()
+    konst GOLDEN_PICKAXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_AXE: ItemType = uninitializedEntry()
+    konst GOLDEN_AXE: ItemType = uninitializedEntry()
 
     @JvmField
-    val STRING: ItemType = uninitializedEntry()
+    konst STRING: ItemType = uninitializedEntry()
 
     @JvmField
-    val GUNPOWDER: ItemType = uninitializedEntry()
+    konst GUNPOWDER: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_HOE: ItemType = uninitializedEntry()
+    konst WOODEN_HOE: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_HOE: ItemType = uninitializedEntry()
+    konst STONE_HOE: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_HOE: ItemType = uninitializedEntry()
+    konst IRON_HOE: ItemType = uninitializedEntry()
 
     @JvmField
-    val SEEDS: ItemType = uninitializedEntry()
+    konst SEEDS: ItemType = uninitializedEntry()
 
     @JvmField
-    val WHEAT: ItemType = uninitializedEntry()
+    konst WHEAT: ItemType = uninitializedEntry()
 
     @JvmField
-    val BREAD: ItemType = uninitializedEntry()
+    konst BREAD: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEATHER_CAP: ItemType = uninitializedEntry()
+    konst LEATHER_CAP: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEATHER_TUNIC: ItemType = uninitializedEntry()
+    konst LEATHER_TUNIC: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEATHER_PANTS: ItemType = uninitializedEntry()
+    konst LEATHER_PANTS: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEATHER_BOOTS: ItemType = uninitializedEntry()
+    konst LEATHER_BOOTS: ItemType = uninitializedEntry()
 
     @JvmField
-    val CHAIN_HELMET: ItemType = uninitializedEntry()
+    konst CHAIN_HELMET: ItemType = uninitializedEntry()
 
     @JvmField
-    val CHAIN_CHESTPLATE: ItemType = uninitializedEntry()
+    konst CHAIN_CHESTPLATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val CHAIN_LEGGINGS: ItemType = uninitializedEntry()
+    konst CHAIN_LEGGINGS: ItemType = uninitializedEntry()
 
     @JvmField
-    val CHAIN_BOOTS: ItemType = uninitializedEntry()
+    konst CHAIN_BOOTS: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_HELMET: ItemType = uninitializedEntry()
+    konst IRON_HELMET: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_CHESTPLATE: ItemType = uninitializedEntry()
+    konst IRON_CHESTPLATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_LEGGINGS: ItemType = uninitializedEntry()
+    konst IRON_LEGGINGS: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_BOOTS: ItemType = uninitializedEntry()
+    konst IRON_BOOTS: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_HELMET: ItemType = uninitializedEntry()
+    konst GOLDEN_HELMET: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_CHESTPLATE: ItemType = uninitializedEntry()
+    konst GOLDEN_CHESTPLATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_LEGGINGS: ItemType = uninitializedEntry()
+    konst GOLDEN_LEGGINGS: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_BOOTS: ItemType = uninitializedEntry()
+    konst GOLDEN_BOOTS: ItemType = uninitializedEntry()
 
     @JvmField
-    val FLINT: ItemType = uninitializedEntry()
+    konst FLINT: ItemType = uninitializedEntry()
 
     @JvmField
-    val RAW_PORKCHOP: ItemType = uninitializedEntry()
+    konst RAW_PORKCHOP: ItemType = uninitializedEntry()
 
     @JvmField
-    val COOKED_PORKCHOP: ItemType = uninitializedEntry()
+    konst COOKED_PORKCHOP: ItemType = uninitializedEntry()
 
     @JvmField
-    val PAINTING: ItemType = uninitializedEntry()
+    konst PAINTING: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_APPLE: ItemType = uninitializedEntry()
+    konst GOLDEN_APPLE: ItemType = uninitializedEntry()
 
     @JvmField
-    val SIGN: ItemType = uninitializedEntry()
+    konst SIGN: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_DOOR: ItemType = uninitializedEntry()
+    konst WOODEN_DOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val BUCKET: ItemType = uninitializedEntry()
+    konst BUCKET: ItemType = uninitializedEntry()
 
     @JvmField
-    val MINECART: ItemType = uninitializedEntry()
+    konst MINECART: ItemType = uninitializedEntry()
 
     @JvmField
-    val SADDLE: ItemType = uninitializedEntry()
+    konst SADDLE: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_DOOR: ItemType = uninitializedEntry()
+    konst IRON_DOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val REDSTONE: ItemType = uninitializedEntry()
+    konst REDSTONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val SNOWBALL: ItemType = uninitializedEntry()
+    konst SNOWBALL: ItemType = uninitializedEntry()
 
     @JvmField
-    val BOAT: ItemType = uninitializedEntry()
+    konst BOAT: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEATHER: ItemType = uninitializedEntry()
+    konst LEATHER: ItemType = uninitializedEntry()
 
     @JvmField
-    val BRICK: ItemType = uninitializedEntry()
+    konst BRICK: ItemType = uninitializedEntry()
 
     @JvmField
-    val CLAY: ItemType = uninitializedEntry()
+    konst CLAY: ItemType = uninitializedEntry()
 
     @JvmField
-    val SUGAR_CANE: ItemType = uninitializedEntry()
+    konst SUGAR_CANE: ItemType = uninitializedEntry()
 
     @JvmField
-    val PAPER: ItemType = uninitializedEntry()
+    konst PAPER: ItemType = uninitializedEntry()
 
     @JvmField
-    val BOOK: ItemType = uninitializedEntry()
+    konst BOOK: ItemType = uninitializedEntry()
 
     @JvmField
-    val SLIMEBALL: ItemType = uninitializedEntry()
+    konst SLIMEBALL: ItemType = uninitializedEntry()
 
     @JvmField
-    val MINECART_WITH_CHEST: ItemType = uninitializedEntry()
+    konst MINECART_WITH_CHEST: ItemType = uninitializedEntry()
 
     @JvmField
-    val EGG: ItemType = uninitializedEntry()
+    konst EGG: ItemType = uninitializedEntry()
 
     @JvmField
-    val COMPASS: ItemType = uninitializedEntry()
+    konst COMPASS: ItemType = uninitializedEntry()
 
     @JvmField
-    val FISHING_ROD: ItemType = uninitializedEntry()
+    konst FISHING_ROD: ItemType = uninitializedEntry()
 
     @JvmField
-    val CLOCK: ItemType = uninitializedEntry()
+    konst CLOCK: ItemType = uninitializedEntry()
 
     @JvmField
-    val GLOWSTONE_DUST: ItemType = uninitializedEntry()
+    konst GLOWSTONE_DUST: ItemType = uninitializedEntry()
 
     @JvmField
-    val RAW_FISH: ItemType = uninitializedEntry()
+    konst RAW_FISH: ItemType = uninitializedEntry()
 
     @JvmField
-    val COOKED_FISH: ItemType = uninitializedEntry()
+    konst COOKED_FISH: ItemType = uninitializedEntry()
 
     @JvmField
-    val DYE: ItemType = uninitializedEntry()
+    konst DYE: ItemType = uninitializedEntry()
 
     @JvmField
-    val BONE: ItemType = uninitializedEntry()
+    konst BONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val SUGAR: ItemType = uninitializedEntry()
+    konst SUGAR: ItemType = uninitializedEntry()
 
     @JvmField
-    val CAKE: ItemType = uninitializedEntry()
+    konst CAKE: ItemType = uninitializedEntry()
 
     @JvmField
-    val BED: ItemType = uninitializedEntry()
+    konst BED: ItemType = uninitializedEntry()
 
     @JvmField
-    val REDSTONE_REPEATER: ItemType = uninitializedEntry()
+    konst REDSTONE_REPEATER: ItemType = uninitializedEntry()
 
     @JvmField
-    val COOKIE: ItemType = uninitializedEntry()
+    konst COOKIE: ItemType = uninitializedEntry()
 
     @JvmField
-    val FILLED_MAP: ItemType = uninitializedEntry()
+    konst FILLED_MAP: ItemType = uninitializedEntry()
 
     @JvmField
-    val SHEARS: ItemType = uninitializedEntry()
+    konst SHEARS: ItemType = uninitializedEntry()
 
     @JvmField
-    val MELON: ItemType = uninitializedEntry()
+    konst MELON: ItemType = uninitializedEntry()
 
     @JvmField
-    val PUMPKIN_SEEDS: ItemType = uninitializedEntry()
+    konst PUMPKIN_SEEDS: ItemType = uninitializedEntry()
 
     @JvmField
-    val MELON_SEEDS: ItemType = uninitializedEntry()
+    konst MELON_SEEDS: ItemType = uninitializedEntry()
 
     @JvmField
-    val RAW_BEEF: ItemType = uninitializedEntry()
+    konst RAW_BEEF: ItemType = uninitializedEntry()
 
     @JvmField
-    val STEAK: ItemType = uninitializedEntry()
+    konst STEAK: ItemType = uninitializedEntry()
 
     @JvmField
-    val RAW_CHICKEN: ItemType = uninitializedEntry()
+    konst RAW_CHICKEN: ItemType = uninitializedEntry()
 
     @JvmField
-    val COOKED_CHICKEN: ItemType = uninitializedEntry()
+    konst COOKED_CHICKEN: ItemType = uninitializedEntry()
 
     @JvmField
-    val ROTTEN_FLESH: ItemType = uninitializedEntry()
+    konst ROTTEN_FLESH: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLAZE_ROD: ItemType = uninitializedEntry()
+    konst BLAZE_ROD: ItemType = uninitializedEntry()
 
     @JvmField
-    val GHAST_TEAR: ItemType = uninitializedEntry()
+    konst GHAST_TEAR: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLD_NUGGET: ItemType = uninitializedEntry()
+    konst GOLD_NUGGET: ItemType = uninitializedEntry()
 
     @JvmField
-    val NETHER_WART: ItemType = uninitializedEntry()
+    konst NETHER_WART: ItemType = uninitializedEntry()
 
     @JvmField
-    val POTION: ItemType = uninitializedEntry()
+    konst POTION: ItemType = uninitializedEntry()
 
     @JvmField
-    val GLASS_BOTTLE: ItemType = uninitializedEntry()
+    konst GLASS_BOTTLE: ItemType = uninitializedEntry()
 
     @JvmField
-    val SPIDER_EYE: ItemType = uninitializedEntry()
+    konst SPIDER_EYE: ItemType = uninitializedEntry()
 
     @JvmField
-    val FERMENTED_SPIDER_EYE: ItemType = uninitializedEntry()
+    konst FERMENTED_SPIDER_EYE: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLAZE_POWDER: ItemType = uninitializedEntry()
+    konst BLAZE_POWDER: ItemType = uninitializedEntry()
 
     @JvmField
-    val MAGMA_CREAM: ItemType = uninitializedEntry()
+    konst MAGMA_CREAM: ItemType = uninitializedEntry()
 
     @JvmField
-    val BREWING_STAND: ItemType = uninitializedEntry()
+    konst BREWING_STAND: ItemType = uninitializedEntry()
 
     @JvmField
-    val CAULDRON: ItemType = uninitializedEntry()
+    konst CAULDRON: ItemType = uninitializedEntry()
 
     @JvmField
-    val GLISTERING_MELON: ItemType = uninitializedEntry()
+    konst GLISTERING_MELON: ItemType = uninitializedEntry()
 
     @JvmField
-    val SPAWN_EGG: ItemType = uninitializedEntry()
+    konst SPAWN_EGG: ItemType = uninitializedEntry()
 
     @JvmField
-    val BOTTLE_O_ENCHANTING: ItemType = uninitializedEntry()
+    konst BOTTLE_O_ENCHANTING: ItemType = uninitializedEntry()
 
     @JvmField
-    val FIRE_CHARGE: ItemType = uninitializedEntry()
+    konst FIRE_CHARGE: ItemType = uninitializedEntry()
 
     @JvmField
-    val EMERALD: ItemType = uninitializedEntry()
+    konst EMERALD: ItemType = uninitializedEntry()
 
     @JvmField
-    val ITEM_FRAME: ItemType = uninitializedEntry()
+    konst ITEM_FRAME: ItemType = uninitializedEntry()
 
     @JvmField
-    val FLOWER_POT: ItemType = uninitializedEntry()
+    konst FLOWER_POT: ItemType = uninitializedEntry()
 
     @JvmField
-    val CARROT: ItemType = uninitializedEntry()
+    konst CARROT: ItemType = uninitializedEntry()
 
     @JvmField
-    val POTATO: ItemType = uninitializedEntry()
+    konst POTATO: ItemType = uninitializedEntry()
 
     @JvmField
-    val BAKED_POTATO: ItemType = uninitializedEntry()
+    konst BAKED_POTATO: ItemType = uninitializedEntry()
 
     @JvmField
-    val POISONOUS_POTATO: ItemType = uninitializedEntry()
+    konst POISONOUS_POTATO: ItemType = uninitializedEntry()
 
     @JvmField
-    val EMPTY_MAP: ItemType = uninitializedEntry()
+    konst EMPTY_MAP: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_CARROT: ItemType = uninitializedEntry()
+    konst GOLDEN_CARROT: ItemType = uninitializedEntry()
 
     @JvmField
-    val MOB_HEAD: ItemType = uninitializedEntry()
+    konst MOB_HEAD: ItemType = uninitializedEntry()
 
     @JvmField
-    val CARROT_ON_A_STICK: ItemType = uninitializedEntry()
+    konst CARROT_ON_A_STICK: ItemType = uninitializedEntry()
 
     @JvmField
-    val PUMPKIN_PIE: ItemType = uninitializedEntry()
+    konst PUMPKIN_PIE: ItemType = uninitializedEntry()
 
     @JvmField
-    val ENCHANTED_BOOK: ItemType = uninitializedEntry()
+    konst ENCHANTED_BOOK: ItemType = uninitializedEntry()
 
     @JvmField
-    val REDSTONE_COMPARATOR: ItemType = uninitializedEntry()
+    konst REDSTONE_COMPARATOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val NETHER_BRICK: ItemType = uninitializedEntry()
+    konst NETHER_BRICK: ItemType = uninitializedEntry()
 
     @JvmField
-    val NETHER_QUARTZ: ItemType = uninitializedEntry()
+    konst NETHER_QUARTZ: ItemType = uninitializedEntry()
 
     @JvmField
-    val MINECART_WITH_TNT: ItemType = uninitializedEntry()
+    konst MINECART_WITH_TNT: ItemType = uninitializedEntry()
 
     @JvmField
-    val MINECART_WITH_HOPPER: ItemType = uninitializedEntry()
+    konst MINECART_WITH_HOPPER: ItemType = uninitializedEntry()
 
     @JvmField
-    val HOPPER: ItemType = uninitializedEntry()
+    konst HOPPER: ItemType = uninitializedEntry()
 
     @JvmField
-    val RAW_RABBIT: ItemType = uninitializedEntry()
+    konst RAW_RABBIT: ItemType = uninitializedEntry()
 
     @JvmField
-    val COOKED_RABBIT: ItemType = uninitializedEntry()
+    konst COOKED_RABBIT: ItemType = uninitializedEntry()
 
     @JvmField
-    val RABBIT_STEW: ItemType = uninitializedEntry()
+    konst RABBIT_STEW: ItemType = uninitializedEntry()
 
     @JvmField
-    val RABBIT_FOOT: ItemType = uninitializedEntry()
+    konst RABBIT_FOOT: ItemType = uninitializedEntry()
 
     @JvmField
-    val RABBIT_HIDE: ItemType = uninitializedEntry()
+    konst RABBIT_HIDE: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEATHER_HORSE_ARMOR: ItemType = uninitializedEntry()
+    konst LEATHER_HORSE_ARMOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_HORSE_ARMOR: ItemType = uninitializedEntry()
+    konst IRON_HORSE_ARMOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLDEN_HORSE_ARMOR: ItemType = uninitializedEntry()
+    konst GOLDEN_HORSE_ARMOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val DIAMOND_HORSE_ARMOR: ItemType = uninitializedEntry()
+    konst DIAMOND_HORSE_ARMOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEAD: ItemType = uninitializedEntry()
+    konst LEAD: ItemType = uninitializedEntry()
 
     @JvmField
-    val NAME_TAG: ItemType = uninitializedEntry()
+    konst NAME_TAG: ItemType = uninitializedEntry()
 
     @JvmField
-    val RAW_MUTTON: ItemType = uninitializedEntry()
+    konst RAW_MUTTON: ItemType = uninitializedEntry()
 
     @JvmField
-    val SPRUCE_DOOR: ItemType = uninitializedEntry()
+    konst SPRUCE_DOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val BIRCH_DOOR: ItemType = uninitializedEntry()
+    konst BIRCH_DOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val JUNGLE_DOOR: ItemType = uninitializedEntry()
+    konst JUNGLE_DOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val ACACIA_DOOR: ItemType = uninitializedEntry()
+    konst ACACIA_DOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val DARK_OAK_DOOR: ItemType = uninitializedEntry()
+    konst DARK_OAK_DOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val SPLASH_POTION: ItemType = uninitializedEntry()
+    konst SPLASH_POTION: ItemType = uninitializedEntry()
 
     @JvmField
-    val BEETROOT: ItemType = uninitializedEntry()
+    konst BEETROOT: ItemType = uninitializedEntry()
 
     @JvmField
-    val BEETROOT_SEEDS: ItemType = uninitializedEntry()
+    konst BEETROOT_SEEDS: ItemType = uninitializedEntry()
 
     @JvmField
-    val BEETROOT_SOUP: ItemType = uninitializedEntry()
+    konst BEETROOT_SOUP: ItemType = uninitializedEntry()
 
     @JvmField
-    val RAW_SALMON: ItemType = uninitializedEntry()
+    konst RAW_SALMON: ItemType = uninitializedEntry()
 
     @JvmField
-    val CLOWNFISH: ItemType = uninitializedEntry()
+    konst CLOWNFISH: ItemType = uninitializedEntry()
 
     @JvmField
-    val PUFFERFISH: ItemType = uninitializedEntry()
+    konst PUFFERFISH: ItemType = uninitializedEntry()
 
     @JvmField
-    val COOKED_SALMON: ItemType = uninitializedEntry()
+    konst COOKED_SALMON: ItemType = uninitializedEntry()
 
     @JvmField
-    val ENCHANTED_GOLDEN_APPLE: ItemType = uninitializedEntry()
+    konst ENCHANTED_GOLDEN_APPLE: ItemType = uninitializedEntry()
 
     /////////////////// BLOCKS ///////////////////
 
     @JvmField
-    val STONE: ItemType = uninitializedEntry()
+    konst STONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val GRASS_BLOCK: ItemType = uninitializedEntry()
+    konst GRASS_BLOCK: ItemType = uninitializedEntry()
 
     @JvmField
-    val DIRT: ItemType = uninitializedEntry()
+    konst DIRT: ItemType = uninitializedEntry()
 
     @JvmField
-    val COBBLESTONE: ItemType = uninitializedEntry()
+    konst COBBLESTONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOOD_PLANKS: ItemType = uninitializedEntry()
+    konst WOOD_PLANKS: ItemType = uninitializedEntry()
 
     @JvmField
-    val SAPLING: ItemType = uninitializedEntry()
+    konst SAPLING: ItemType = uninitializedEntry()
 
     @JvmField
-    val BEDROCK: ItemType = uninitializedEntry()
+    konst BEDROCK: ItemType = uninitializedEntry()
 
     @JvmField
-    val WATER_BUCKET: ItemType = uninitializedEntry()
+    konst WATER_BUCKET: ItemType = uninitializedEntry()
 
     @JvmField
-    val LAVA_BUCKET: ItemType = uninitializedEntry()
+    konst LAVA_BUCKET: ItemType = uninitializedEntry()
 
     @JvmField
-    val SAND: ItemType = uninitializedEntry()
+    konst SAND: ItemType = uninitializedEntry()
 
     @JvmField
-    val GRAVEL: ItemType = uninitializedEntry()
+    konst GRAVEL: ItemType = uninitializedEntry()
 
     @JvmField
-    val GOLD_ORE: ItemType = uninitializedEntry()
+    konst GOLD_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_ORE: ItemType = uninitializedEntry()
+    konst IRON_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val COAL_ORE: ItemType = uninitializedEntry()
+    konst COAL_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOOD: ItemType = uninitializedEntry()
+    konst WOOD: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEAVES: ItemType = uninitializedEntry()
+    konst LEAVES: ItemType = uninitializedEntry()
 
     @JvmField
-    val SPONGE: ItemType = uninitializedEntry()
+    konst SPONGE: ItemType = uninitializedEntry()
 
     @JvmField
-    val GLASS: ItemType = uninitializedEntry()
+    konst GLASS: ItemType = uninitializedEntry()
 
     @JvmField
-    val LAPIS_LAZULI_ORE: ItemType = uninitializedEntry()
+    konst LAPIS_LAZULI_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val LAPIS_LAZULI_BLOCK: ItemType = uninitializedEntry()
+    konst LAPIS_LAZULI_BLOCK: ItemType = uninitializedEntry()
 
     @JvmField
-    val DISPENSER: ItemType = uninitializedEntry()
+    konst DISPENSER: ItemType = uninitializedEntry()
 
     @JvmField
-    val SANDSTONE: ItemType = uninitializedEntry()
+    konst SANDSTONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val NOTE_BLOCK: ItemType = uninitializedEntry()
+    konst NOTE_BLOCK: ItemType = uninitializedEntry()
 
     @JvmField
-    val DETECTOR_RAIL: ItemType = uninitializedEntry()
+    konst DETECTOR_RAIL: ItemType = uninitializedEntry()
 
     @JvmField
-    val STICKY_PISTON: ItemType = uninitializedEntry()
+    konst STICKY_PISTON: ItemType = uninitializedEntry()
 
     @JvmField
-    val COBWEB: ItemType = uninitializedEntry()
+    konst COBWEB: ItemType = uninitializedEntry()
 
     @JvmField
-    val TALL_GRASS: ItemType = uninitializedEntry()
+    konst TALL_GRASS: ItemType = uninitializedEntry()
 
     @JvmField
-    val DEAD_BUSH: ItemType = uninitializedEntry()
+    konst DEAD_BUSH: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOOL: ItemType = uninitializedEntry()
+    konst WOOL: ItemType = uninitializedEntry()
 
     @JvmField
-    val YELLOW_FLOWER: ItemType = uninitializedEntry()
+    konst YELLOW_FLOWER: ItemType = uninitializedEntry()
 
     @JvmField
-    val RED_FLOWER: ItemType = uninitializedEntry()
+    konst RED_FLOWER: ItemType = uninitializedEntry()
 
     @JvmField
-    val BROWN_MUSHROOM: ItemType = uninitializedEntry()
+    konst BROWN_MUSHROOM: ItemType = uninitializedEntry()
 
     @JvmField
-    val RED_MUSHROOM: ItemType = uninitializedEntry()
+    konst RED_MUSHROOM: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLOCK_OF_GOLD: ItemType = uninitializedEntry()
+    konst BLOCK_OF_GOLD: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLOCK_OF_IRON: ItemType = uninitializedEntry()
+    konst BLOCK_OF_IRON: ItemType = uninitializedEntry()
 
     @JvmField
-    val DOUBLE_STONE_SLAB: ItemType = uninitializedEntry()
+    konst DOUBLE_STONE_SLAB: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_SLAB: ItemType = uninitializedEntry()
+    konst STONE_SLAB: ItemType = uninitializedEntry()
 
     @JvmField
-    val BRICKS: ItemType = uninitializedEntry()
+    konst BRICKS: ItemType = uninitializedEntry()
 
     @JvmField
-    val TNT: ItemType = uninitializedEntry()
+    konst TNT: ItemType = uninitializedEntry()
 
     @JvmField
-    val BOOKSHELF: ItemType = uninitializedEntry()
+    konst BOOKSHELF: ItemType = uninitializedEntry()
 
     @JvmField
-    val MOSS_STONE: ItemType = uninitializedEntry()
+    konst MOSS_STONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val OBSIDIAN: ItemType = uninitializedEntry()
+    konst OBSIDIAN: ItemType = uninitializedEntry()
 
     @JvmField
-    val TORCH: ItemType = uninitializedEntry()
+    konst TORCH: ItemType = uninitializedEntry()
 
     @JvmField
-    val FIRE: ItemType = uninitializedEntry()
+    konst FIRE: ItemType = uninitializedEntry()
 
     @JvmField
-    val MOB_SPAWNER: ItemType = uninitializedEntry()
+    konst MOB_SPAWNER: ItemType = uninitializedEntry()
 
     @JvmField
-    val OAK_WOOD_STAIRS: ItemType = uninitializedEntry()
+    konst OAK_WOOD_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val CHEST: ItemType = uninitializedEntry()
+    konst CHEST: ItemType = uninitializedEntry()
 
     @JvmField
-    val DIAMOND_ORE: ItemType = uninitializedEntry()
+    konst DIAMOND_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLOCK_OF_DIAMOND: ItemType = uninitializedEntry()
+    konst BLOCK_OF_DIAMOND: ItemType = uninitializedEntry()
 
     @JvmField
-    val CRAFTING_TABLE: ItemType = uninitializedEntry()
+    konst CRAFTING_TABLE: ItemType = uninitializedEntry()
 
     @JvmField
-    val FARMLAND: ItemType = uninitializedEntry()
+    konst FARMLAND: ItemType = uninitializedEntry()
 
     @JvmField
-    val FURNACE: ItemType = uninitializedEntry()
+    konst FURNACE: ItemType = uninitializedEntry()
 
     @JvmField
-    val LADDER: ItemType = uninitializedEntry()
+    konst LADDER: ItemType = uninitializedEntry()
 
     @JvmField
-    val RAIL: ItemType = uninitializedEntry()
+    konst RAIL: ItemType = uninitializedEntry()
 
     @JvmField
-    val COBBLESTONE_STAIRS: ItemType = uninitializedEntry()
+    konst COBBLESTONE_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val LEVER: ItemType = uninitializedEntry()
+    konst LEVER: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_PRESSURE_PLATE: ItemType = uninitializedEntry()
+    konst STONE_PRESSURE_PLATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_PRESSURE_PLATE: ItemType = uninitializedEntry()
+    konst WOODEN_PRESSURE_PLATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val REDSTONE_ORE: ItemType = uninitializedEntry()
+    konst REDSTONE_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val GLOWING_REDSTONE_ORE: ItemType = uninitializedEntry()
+    konst GLOWING_REDSTONE_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val REDSTONE_TORCH: ItemType = uninitializedEntry()
+    konst REDSTONE_TORCH: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_BUTTON: ItemType = uninitializedEntry()
+    konst STONE_BUTTON: ItemType = uninitializedEntry()
 
     @JvmField
-    val SNOW_LAYER: ItemType = uninitializedEntry()
+    konst SNOW_LAYER: ItemType = uninitializedEntry()
 
     @JvmField
-    val ICE: ItemType = uninitializedEntry()
+    konst ICE: ItemType = uninitializedEntry()
 
     @JvmField
-    val SNOW: ItemType = uninitializedEntry()
+    konst SNOW: ItemType = uninitializedEntry()
 
     @JvmField
-    val CACTUS: ItemType = uninitializedEntry()
+    konst CACTUS: ItemType = uninitializedEntry()
 
     @JvmField
-    val FENCE: ItemType = uninitializedEntry()
+    konst FENCE: ItemType = uninitializedEntry()
 
     @JvmField
-    val PUMPKIN: ItemType = uninitializedEntry()
+    konst PUMPKIN: ItemType = uninitializedEntry()
 
     @JvmField
-    val NETHERRACK: ItemType = uninitializedEntry()
+    konst NETHERRACK: ItemType = uninitializedEntry()
 
     @JvmField
-    val SOUL_SAND: ItemType = uninitializedEntry()
+    konst SOUL_SAND: ItemType = uninitializedEntry()
 
     @JvmField
-    val GLOWSTONE: ItemType = uninitializedEntry()
+    konst GLOWSTONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val JACK_O_LANTERN: ItemType = uninitializedEntry()
+    konst JACK_O_LANTERN: ItemType = uninitializedEntry()
 
     @JvmField
-    val TRAPDOOR: ItemType = uninitializedEntry()
+    konst TRAPDOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val MONSTER_EGG: ItemType = uninitializedEntry()
+    konst MONSTER_EGG: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_BRICK: ItemType = uninitializedEntry()
+    konst STONE_BRICK: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_BARS: ItemType = uninitializedEntry()
+    konst IRON_BARS: ItemType = uninitializedEntry()
 
     @JvmField
-    val GLASS_PANE: ItemType = uninitializedEntry()
+    konst GLASS_PANE: ItemType = uninitializedEntry()
 
     @JvmField
-    val VINE: ItemType = uninitializedEntry()
+    konst VINE: ItemType = uninitializedEntry()
 
     @JvmField
-    val FENCE_GATE: ItemType = uninitializedEntry()
+    konst FENCE_GATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val BRICK_STAIRS: ItemType = uninitializedEntry()
+    konst BRICK_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val STONE_BRICK_STAIRS: ItemType = uninitializedEntry()
+    konst STONE_BRICK_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val MYCELIUM: ItemType = uninitializedEntry()
+    konst MYCELIUM: ItemType = uninitializedEntry()
 
     @JvmField
-    val LILY_PAD: ItemType = uninitializedEntry()
+    konst LILY_PAD: ItemType = uninitializedEntry()
 
     @JvmField
-    val NETHER_BRICK_FENCE: ItemType = uninitializedEntry()
+    konst NETHER_BRICK_FENCE: ItemType = uninitializedEntry()
 
     @JvmField
-    val NETHER_BRICK_STAIRS: ItemType = uninitializedEntry()
+    konst NETHER_BRICK_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val ENCHANTMENT_TABLE: ItemType = uninitializedEntry()
+    konst ENCHANTMENT_TABLE: ItemType = uninitializedEntry()
 
     @JvmField
-    val END_PORTAL_FRAME: ItemType = uninitializedEntry()
+    konst END_PORTAL_FRAME: ItemType = uninitializedEntry()
 
     @JvmField
-    val END_STONE: ItemType = uninitializedEntry()
+    konst END_STONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val REDSTONE_LAMP: ItemType = uninitializedEntry()
+    konst REDSTONE_LAMP: ItemType = uninitializedEntry()
 
     @JvmField
-    val DROPPER: ItemType = uninitializedEntry()
+    konst DROPPER: ItemType = uninitializedEntry()
 
     @JvmField
-    val ACTIVATOR_RAIL: ItemType = uninitializedEntry()
+    konst ACTIVATOR_RAIL: ItemType = uninitializedEntry()
 
     @JvmField
-    val COCOA: ItemType = uninitializedEntry()
+    konst COCOA: ItemType = uninitializedEntry()
 
     @JvmField
-    val SANDSTONE_STAIRS: ItemType = uninitializedEntry()
+    konst SANDSTONE_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val EMERALD_ORE: ItemType = uninitializedEntry()
+    konst EMERALD_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val TRIPWIRE_HOOK: ItemType = uninitializedEntry()
+    konst TRIPWIRE_HOOK: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLOCK_OF_EMERALD: ItemType = uninitializedEntry()
+    konst BLOCK_OF_EMERALD: ItemType = uninitializedEntry()
 
     @JvmField
-    val SPRUCE_WOOD_STAIRS: ItemType = uninitializedEntry()
+    konst SPRUCE_WOOD_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val BIRCH_WOOD_STAIRS: ItemType = uninitializedEntry()
+    konst BIRCH_WOOD_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val JUNGLE_WOOD_STAIRS: ItemType = uninitializedEntry()
+    konst JUNGLE_WOOD_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val COBBLESTONR_WALL: ItemType = uninitializedEntry()
+    konst COBBLESTONR_WALL: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_BUTTON: ItemType = uninitializedEntry()
+    konst WOODEN_BUTTON: ItemType = uninitializedEntry()
 
     @JvmField
-    val ANVIL: ItemType = uninitializedEntry()
+    konst ANVIL: ItemType = uninitializedEntry()
 
     @JvmField
-    val TRAPPED_CHEST: ItemType = uninitializedEntry()
+    konst TRAPPED_CHEST: ItemType = uninitializedEntry()
 
     @JvmField
-    val WEIGHTED_PRESSURE_PLATE_LIGHT: ItemType = uninitializedEntry()
+    konst WEIGHTED_PRESSURE_PLATE_LIGHT: ItemType = uninitializedEntry()
 
     @JvmField
-    val WEIGHTED_PRESSURE_PLATE_HEAVY: ItemType = uninitializedEntry()
+    konst WEIGHTED_PRESSURE_PLATE_HEAVY: ItemType = uninitializedEntry()
 
     @JvmField
-    val DAYLIGHT_SENSOR: ItemType = uninitializedEntry()
+    konst DAYLIGHT_SENSOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLOCK_OF_REDSTONE: ItemType = uninitializedEntry()
+    konst BLOCK_OF_REDSTONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val NETHER_QUARTZ_ORE: ItemType = uninitializedEntry()
+    konst NETHER_QUARTZ_ORE: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLOCK_OF_QUARTZ: ItemType = uninitializedEntry()
+    konst BLOCK_OF_QUARTZ: ItemType = uninitializedEntry()
 
     @JvmField
-    val QUARTZ_STAIRS: ItemType = uninitializedEntry()
+    konst QUARTZ_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val WOODEN_SLAB: ItemType = uninitializedEntry()
+    konst WOODEN_SLAB: ItemType = uninitializedEntry()
 
     @JvmField
-    val STAINED_CLAY: ItemType = uninitializedEntry()
+    konst STAINED_CLAY: ItemType = uninitializedEntry()
 
     @JvmField
-    val ACACIA_LEAVES: ItemType = uninitializedEntry()
+    konst ACACIA_LEAVES: ItemType = uninitializedEntry()
 
     @JvmField
-    val ACACIA_WOOD: ItemType = uninitializedEntry()
+    konst ACACIA_WOOD: ItemType = uninitializedEntry()
 
     @JvmField
-    val ACACIA_WOOD_STAIRS: ItemType = uninitializedEntry()
+    konst ACACIA_WOOD_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val DARK_OAK_WOOD_STAIRS: ItemType = uninitializedEntry()
+    konst DARK_OAK_WOOD_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val SLIME_BLOCK: ItemType = uninitializedEntry()
+    konst SLIME_BLOCK: ItemType = uninitializedEntry()
 
     @JvmField
-    val IRON_TRAPDOOR: ItemType = uninitializedEntry()
+    konst IRON_TRAPDOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val HEY_BALE: ItemType = uninitializedEntry()
+    konst HEY_BALE: ItemType = uninitializedEntry()
 
     @JvmField
-    val CARPET: ItemType = uninitializedEntry()
+    konst CARPET: ItemType = uninitializedEntry()
 
     @JvmField
-    val HARDENED_CLAY: ItemType = uninitializedEntry()
+    konst HARDENED_CLAY: ItemType = uninitializedEntry()
 
     @JvmField
-    val BLOCK_OF_COAL: ItemType = uninitializedEntry()
+    konst BLOCK_OF_COAL: ItemType = uninitializedEntry()
 
     @JvmField
-    val PACKED_ICE: ItemType = uninitializedEntry()
+    konst PACKED_ICE: ItemType = uninitializedEntry()
 
     @JvmField
-    val SUNFLOWER: ItemType = uninitializedEntry()
+    konst SUNFLOWER: ItemType = uninitializedEntry()
 
     @JvmField
-    val INVERTED_DAYLIGHT_SENSOR: ItemType = uninitializedEntry()
+    konst INVERTED_DAYLIGHT_SENSOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val RED_SANDSTONE: ItemType = uninitializedEntry()
+    konst RED_SANDSTONE: ItemType = uninitializedEntry()
 
     @JvmField
-    val RED_SANDSTONE_STAIRS: ItemType = uninitializedEntry()
+    konst RED_SANDSTONE_STAIRS: ItemType = uninitializedEntry()
 
     @JvmField
-    val RED_SANDSTONE_SLAB: ItemType = uninitializedEntry()
+    konst RED_SANDSTONE_SLAB: ItemType = uninitializedEntry()
 
     @JvmField
-    val SPRUCE_FENCE_GATE: ItemType = uninitializedEntry()
+    konst SPRUCE_FENCE_GATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val BIRCH_FENCE_GATE: ItemType = uninitializedEntry()
+    konst BIRCH_FENCE_GATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val JUNGLE_FENCE_GATE: ItemType = uninitializedEntry()
+    konst JUNGLE_FENCE_GATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val DARK_OAK_FENCE_GATE: ItemType = uninitializedEntry()
+    konst DARK_OAK_FENCE_GATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val ACACIA_FENCE_GATE: ItemType = uninitializedEntry()
+    konst ACACIA_FENCE_GATE: ItemType = uninitializedEntry()
 
     @JvmField
-    val JUNGLE_GOOR: ItemType = uninitializedEntry()
+    konst JUNGLE_GOOR: ItemType = uninitializedEntry()
 
     @JvmField
-    val GRASS_PATH: ItemType = uninitializedEntry()
+    konst GRASS_PATH: ItemType = uninitializedEntry()
 
     @JvmField
-    val PODZOL: ItemType = uninitializedEntry()
+    konst PODZOL: ItemType = uninitializedEntry()
 }
 
 // 0 GETSTATIC

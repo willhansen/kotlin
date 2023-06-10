@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.resolve.ArrayFqNames
 abstract class KtCollectionLiteralReference(expression: KtCollectionLiteralExpression) :
     KtSimpleReference<KtCollectionLiteralExpression>(expression), MultiRangeReference {
     companion object {
-        private val COLLECTION_LITERAL_CALL_NAMES = ArrayFqNames.PRIMITIVE_TYPE_TO_ARRAY.values + ArrayFqNames.ARRAY_OF_FUNCTION
+        private konst COLLECTION_LITERAL_CALL_NAMES = ArrayFqNames.PRIMITIVE_TYPE_TO_ARRAY.konstues + ArrayFqNames.ARRAY_OF_FUNCTION
     }
 
     override fun getRangeInElement(): TextRange = element.normalizeRange()
@@ -24,7 +24,7 @@ abstract class KtCollectionLiteralReference(expression: KtCollectionLiteralExpre
         return listOfNotNull(element.leftBracket?.normalizeRange(), element.rightBracket?.normalizeRange())
     }
 
-    override val resolvesByNames: Collection<Name>
+    override konst resolvesByNames: Collection<Name>
         get() = COLLECTION_LITERAL_CALL_NAMES
 
     private fun PsiElement.normalizeRange(): TextRange = this.textRange.shiftRight(-expression.textOffset)

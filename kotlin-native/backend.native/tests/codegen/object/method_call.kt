@@ -7,7 +7,7 @@ package codegen.`object`.method_call
 
 import kotlin.test.*
 
-class A(val a:Int) {
+class A(konst a:Int) {
   fun foo(i:Int) = a + i
 }
 

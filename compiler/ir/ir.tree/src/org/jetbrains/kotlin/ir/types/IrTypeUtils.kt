@@ -34,7 +34,7 @@ fun IrType.isSubtypeOf(superType: IrType, typeSystem: IrTypeSystemContext): Bool
 
 fun IrType.isNullable(): Boolean =
     when (this) {
-        is IrSimpleType -> when (val classifier = classifier) {
+        is IrSimpleType -> when (konst classifier = classifier) {
             is IrClassSymbol -> nullability == SimpleTypeNullability.MARKED_NULLABLE
             is IrTypeParameterSymbol -> when (nullability) {
                 SimpleTypeNullability.MARKED_NULLABLE -> true
@@ -50,12 +50,12 @@ fun IrType.isNullable(): Boolean =
         else -> false
     }
 
-val IrType.isBoxedArray: Boolean
+konst IrType.isBoxedArray: Boolean
     get() = classOrNull?.owner?.fqNameWhenAvailable == StandardNames.FqNames.array.toSafe()
 
 fun IrType.getArrayElementType(irBuiltIns: IrBuiltIns): IrType =
     if (isBoxedArray) {
-        when (val argument = (this as IrSimpleType).arguments.singleOrNull()) {
+        when (konst argument = (this as IrSimpleType).arguments.singleOrNull()) {
             is IrTypeProjection ->
                 argument.type
             is IrStarProjection ->
@@ -64,7 +64,7 @@ fun IrType.getArrayElementType(irBuiltIns: IrBuiltIns): IrType =
                 error("Unexpected array argument type: null")
         }
     } else {
-        val classifier = this.classOrNull!!
+        konst classifier = this.classOrNull!!
         irBuiltIns.primitiveArrayElementTypes[classifier]
             ?: irBuiltIns.unsignedArraysElementTypes[classifier]
             ?: throw AssertionError("Primitive array expected: $classifier")

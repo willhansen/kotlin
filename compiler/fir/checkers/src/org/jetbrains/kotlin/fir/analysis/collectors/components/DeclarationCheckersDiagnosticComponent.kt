@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.declarations.*
 class DeclarationCheckersDiagnosticComponent(
     session: FirSession,
     reporter: DiagnosticReporter,
-    private val checkers: DeclarationCheckers = session.checkersComponent.declarationCheckers,
+    private konst checkers: DeclarationCheckers = session.checkersComponent.declarationCheckers,
 ) : AbstractDiagnosticCollectorComponent(session, reporter) {
     override fun visitElement(element: FirElement, data: CheckerContext) {
         if (element is FirDeclaration) {
@@ -71,8 +71,8 @@ class DeclarationCheckersDiagnosticComponent(
         checkers.allBackingFieldCheckers.check(backingField, data)
     }
 
-    override fun visitValueParameter(valueParameter: FirValueParameter, data: CheckerContext) {
-        checkers.allValueParameterCheckers.check(valueParameter, data)
+    override fun visitValueParameter(konstueParameter: FirValueParameter, data: CheckerContext) {
+        checkers.allValueParameterCheckers.check(konstueParameter, data)
     }
 
     override fun visitTypeParameter(typeParameter: FirTypeParameter, data: CheckerContext) {

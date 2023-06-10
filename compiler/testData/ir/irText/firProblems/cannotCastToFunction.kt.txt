@@ -16,7 +16,7 @@ fun IrElement.dump(normalizeNames: Boolean = false, stableOrder: Boolean = false
 }
 
 fun dump(data: IrElement, dumpStrategy: String): String {
-  val dump: @ExtensionFunctionType Function1<IrElement, String> = when {
+  konst dump: @ExtensionFunctionType Function1<IrElement, String> = when {
     EQEQ(arg0 = dumpStrategy, arg1 = "KotlinLike") -> { // BLOCK
       local fun dumpKotlinLike(p0: IrElement): String {
         return p0.dumpKotlinLike()

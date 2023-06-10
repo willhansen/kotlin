@@ -24,12 +24,12 @@ class LazyScopeAdapter @JvmOverloads constructor(
     getScope: () -> MemberScope
 ) : AbstractScopeAdapter() {
 
-    private val lazyScope = storageManager.createLazyValue{
+    private konst lazyScope = storageManager.createLazyValue{
         getScope().let {
             if (it is AbstractScopeAdapter) it.getActualScope() else it
         }
     }
 
-    override val workerScope: MemberScope
+    override konst workerScope: MemberScope
         get() = lazyScope()
 }

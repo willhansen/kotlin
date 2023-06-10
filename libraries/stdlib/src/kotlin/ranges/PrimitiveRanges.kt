@@ -8,26 +8,26 @@
 package kotlin.ranges
 
 /**
- * A range of values of type `Char`.
+ * A range of konstues of type `Char`.
  */
 public class CharRange(start: Char, endInclusive: Char) : CharProgression(start, endInclusive, 1), ClosedRange<Char>, OpenEndRange<Char> {
-    override val start: Char get() = first
-    override val endInclusive: Char get() = last
+    override konst start: Char get() = first
+    override konst endInclusive: Char get() = last
     
-    @Deprecated("Can throw an exception when it's impossible to represent the value with Char type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @Deprecated("Can throw an exception when it's impossible to represent the konstue with Char type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @SinceKotlin("1.9")
     @WasExperimental(ExperimentalStdlibApi::class)
-    override val endExclusive: Char get() {
+    override konst endExclusive: Char get() {
         if (last == Char.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1
     }
 
-    override fun contains(value: Char): Boolean = first <= value && value <= last
+    override fun contains(konstue: Char): Boolean = first <= konstue && konstue <= last
 
     /** 
      * Checks whether the range is empty.
      *
-     * The range is empty if its start value is greater than the end value.
+     * The range is empty if its start konstue is greater than the end konstue.
      */
     override fun isEmpty(): Boolean = first > last
 
@@ -41,32 +41,32 @@ public class CharRange(start: Char, endInclusive: Char) : CharProgression(start,
     override fun toString(): String = "$first..$last"
 
     companion object {
-        /** An empty range of values of type Char. */
-        public val EMPTY: CharRange = CharRange(1.toChar(), 0.toChar())
+        /** An empty range of konstues of type Char. */
+        public konst EMPTY: CharRange = CharRange(1.toChar(), 0.toChar())
     }
 }
 
 /**
- * A range of values of type `Int`.
+ * A range of konstues of type `Int`.
  */
 public class IntRange(start: Int, endInclusive: Int) : IntProgression(start, endInclusive, 1), ClosedRange<Int>, OpenEndRange<Int> {
-    override val start: Int get() = first
-    override val endInclusive: Int get() = last
+    override konst start: Int get() = first
+    override konst endInclusive: Int get() = last
     
-    @Deprecated("Can throw an exception when it's impossible to represent the value with Int type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @Deprecated("Can throw an exception when it's impossible to represent the konstue with Int type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @SinceKotlin("1.9")
     @WasExperimental(ExperimentalStdlibApi::class)
-    override val endExclusive: Int get() {
+    override konst endExclusive: Int get() {
         if (last == Int.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1
     }
 
-    override fun contains(value: Int): Boolean = first <= value && value <= last
+    override fun contains(konstue: Int): Boolean = first <= konstue && konstue <= last
 
     /** 
      * Checks whether the range is empty.
      *
-     * The range is empty if its start value is greater than the end value.
+     * The range is empty if its start konstue is greater than the end konstue.
      */
     override fun isEmpty(): Boolean = first > last
 
@@ -80,32 +80,32 @@ public class IntRange(start: Int, endInclusive: Int) : IntProgression(start, end
     override fun toString(): String = "$first..$last"
 
     companion object {
-        /** An empty range of values of type Int. */
-        public val EMPTY: IntRange = IntRange(1, 0)
+        /** An empty range of konstues of type Int. */
+        public konst EMPTY: IntRange = IntRange(1, 0)
     }
 }
 
 /**
- * A range of values of type `Long`.
+ * A range of konstues of type `Long`.
  */
 public class LongRange(start: Long, endInclusive: Long) : LongProgression(start, endInclusive, 1), ClosedRange<Long>, OpenEndRange<Long> {
-    override val start: Long get() = first
-    override val endInclusive: Long get() = last
+    override konst start: Long get() = first
+    override konst endInclusive: Long get() = last
     
-    @Deprecated("Can throw an exception when it's impossible to represent the value with Long type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @Deprecated("Can throw an exception when it's impossible to represent the konstue with Long type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @SinceKotlin("1.9")
     @WasExperimental(ExperimentalStdlibApi::class)
-    override val endExclusive: Long get() {
+    override konst endExclusive: Long get() {
         if (last == Long.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1
     }
 
-    override fun contains(value: Long): Boolean = first <= value && value <= last
+    override fun contains(konstue: Long): Boolean = first <= konstue && konstue <= last
 
     /** 
      * Checks whether the range is empty.
      *
-     * The range is empty if its start value is greater than the end value.
+     * The range is empty if its start konstue is greater than the end konstue.
      */
     override fun isEmpty(): Boolean = first > last
 
@@ -119,8 +119,8 @@ public class LongRange(start: Long, endInclusive: Long) : LongProgression(start,
     override fun toString(): String = "$first..$last"
 
     companion object {
-        /** An empty range of values of type Long. */
-        public val EMPTY: LongRange = LongRange(1, 0)
+        /** An empty range of konstues of type Long. */
+        public konst EMPTY: LongRange = LongRange(1, 0)
     }
 }
 

@@ -21,7 +21,7 @@ import kotlin.io.path.createTempDirectory
 import kotlin.reflect.KFunction1
 
 class RelocatableJpsCachesTest : BaseKotlinJpsBuildTestCase() {
-    private val enableICFixture = EnableICFixture()
+    private konst enableICFixture = EnableICFixture()
     private lateinit var workingDir: File
 
     @OptIn(ExperimentalPathApi::class)
@@ -44,10 +44,10 @@ class RelocatableJpsCachesTest : BaseKotlinJpsBuildTestCase() {
     }
 
     private fun buildTwiceAndCompare(testMethod: KFunction1<RelocatableCacheTestCase, Unit>) {
-        val test1WorkingDir = workingDir.resolve("test1")
-        val test1KotlinCachesDir = workingDir.resolve("test1KotlinCaches")
-        val test2WorkingDir = workingDir.resolve("test2")
-        val test2KotlinCachesDir = workingDir.resolve("test2KotlinCaches")
+        konst test1WorkingDir = workingDir.resolve("test1")
+        konst test1KotlinCachesDir = workingDir.resolve("test1KotlinCaches")
+        konst test2WorkingDir = workingDir.resolve("test2")
+        konst test2KotlinCachesDir = workingDir.resolve("test2KotlinCaches")
 
         runTestAndCopyKotlinCaches(test1WorkingDir, test1KotlinCachesDir, testMethod)
         runTestAndCopyKotlinCaches(test2WorkingDir, test2KotlinCachesDir, testMethod)
@@ -60,7 +60,7 @@ class RelocatableJpsCachesTest : BaseKotlinJpsBuildTestCase() {
         dirToCopyKotlinCaches: File,
         testMethod: KFunction1<RelocatableCacheTestCase, Unit>
     ) {
-        val testCase = object : RelocatableCacheTestCase(projectWorkingDir, dirToCopyKotlinCaches) {
+        konst testCase = object : RelocatableCacheTestCase(projectWorkingDir, dirToCopyKotlinCaches) {
             override fun getName() = testMethod.name
         }
 
@@ -76,10 +76,10 @@ class RelocatableJpsCachesTest : BaseKotlinJpsBuildTestCase() {
 
 // the class should not be executed directly (hence it's abstract)
 abstract class RelocatableCacheTestCase(
-    private val projectWorkingDir: File,
-    private val dirToCopyKotlinCaches: File
+    private konst projectWorkingDir: File,
+    private konst dirToCopyKotlinCaches: File
 ) : KotlinJpsBuildTestBase() {
-    val exposedPrivateApi = ExposedPrivateApi()
+    konst exposedPrivateApi = ExposedPrivateApi()
 
     fun testRelocatableCaches() {
         initProject(LibraryDependency.JVM_FULL_RUNTIME)
@@ -102,24 +102,24 @@ abstract class RelocatableCacheTestCase(
         }
 
     private fun copyKotlinCaches(descriptor: ProjectDescriptor) {
-        val kotlinDataPaths = HashSet<File>()
-        val dataPaths = descriptor.dataManager.dataPaths
+        konst kotlinDataPaths = HashSet<File>()
+        konst dataPaths = descriptor.dataManager.dataPaths
         kotlinDataPaths.add(dataPaths.getTargetDataRoot(KotlinDataContainerTarget))
 
         for (target in descriptor.buildTargetIndex.allTargets) {
             if (!target.isKotlinTarget(descriptor)) continue
 
-            val targetDataRoot = descriptor.dataManager.dataPaths.getTargetDataRoot(target)
-            val kotlinDataRoot = targetDataRoot.resolve(KOTLIN_CACHE_DIRECTORY_NAME)
+            konst targetDataRoot = descriptor.dataManager.dataPaths.getTargetDataRoot(target)
+            konst kotlinDataRoot = targetDataRoot.resolve(KOTLIN_CACHE_DIRECTORY_NAME)
             assert(kotlinDataRoot.isDirectory) { "Kotlin data root '$kotlinDataRoot' is not a directory" }
             kotlinDataPaths.add(kotlinDataRoot)
         }
 
         dirToCopyKotlinCaches.deleteRecursively()
-        val originalStorageRoot = descriptor.dataManager.dataPaths.dataStorageRoot
+        konst originalStorageRoot = descriptor.dataManager.dataPaths.dataStorageRoot
         for (kotlinCacheRoot in kotlinDataPaths) {
-            val relativePath = kotlinCacheRoot.relativeTo(originalStorageRoot).path
-            val targetDir = dirToCopyKotlinCaches.resolve(relativePath)
+            konst relativePath = kotlinCacheRoot.relativeTo(originalStorageRoot).path
+            konst targetDir = dirToCopyKotlinCaches.resolve(relativePath)
             targetDir.parentFile.mkdirs()
             kotlinCacheRoot.copyRecursively(targetDir)
         }
@@ -130,7 +130,7 @@ abstract class RelocatableCacheTestCase(
 
         if (this !is ModuleBuildTarget) return false
 
-        val rootDescriptors = computeRootDescriptors(
+        konst rootDescriptors = computeRootDescriptors(
             descriptor.model,
             descriptor.moduleExcludeIndex,
             descriptor.ignoredFileIndex,

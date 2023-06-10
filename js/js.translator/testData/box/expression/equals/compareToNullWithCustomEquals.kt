@@ -6,7 +6,7 @@ class A {
 }
 
 fun box(): String {
-    val a: A? = null
+    konst a: A? = null
 
     testTrue { a == null }
     testFalse { a != null }

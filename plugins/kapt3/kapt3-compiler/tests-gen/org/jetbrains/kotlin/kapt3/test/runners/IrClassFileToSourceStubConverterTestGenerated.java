@@ -308,9 +308,9 @@ public class IrClassFileToSourceStubConverterTestGenerated extends AbstractIrCla
     }
 
     @Test
-    @TestMetadata("invalidFieldName.kt")
-    public void testInvalidFieldName() throws Exception {
-        runTest("plugins/kapt3/kapt3-compiler/testData/converter/invalidFieldName.kt");
+    @TestMetadata("inkonstidFieldName.kt")
+    public void testInkonstidFieldName() throws Exception {
+        runTest("plugins/kapt3/kapt3-compiler/testData/converter/inkonstidFieldName.kt");
     }
 
     @Test

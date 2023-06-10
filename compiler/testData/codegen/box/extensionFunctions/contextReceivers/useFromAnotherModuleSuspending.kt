@@ -20,11 +20,11 @@ import kotlin.coroutines.intrinsics.*
 
 fun box(): String {
     var result: String = "fail"
-    val block: suspend () -> String = {
+    konst block: suspend () -> String = {
         with("OK") { a.f() }
     }
-    block.startCoroutine(handleResultContinuation { value ->
-        result = value
+    block.startCoroutine(handleResultContinuation { konstue ->
+        result = konstue
     })
     return result
 }

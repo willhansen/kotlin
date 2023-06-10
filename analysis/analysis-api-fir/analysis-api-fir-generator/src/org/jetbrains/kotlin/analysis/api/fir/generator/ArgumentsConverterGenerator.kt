@@ -15,15 +15,15 @@ import java.io.File
 import kotlin.reflect.KClass
 import kotlin.reflect.full.createType
 
-private const val CONVERT_ARGUMENT = "convertArgument"
+private const konst CONVERT_ARGUMENT = "convertArgument"
 
 object ArgumentsConverterGenerator {
     fun render(file: File, packageName: String) {
-        val convertArgumentFunctionCallConversion = HLFunctionCallConversion(
+        konst convertArgumentFunctionCallConversion = HLFunctionCallConversion(
             "$CONVERT_ARGUMENT({0}, firSymbolBuilder)",
             callType = Any::class.createType(nullable = true)
         )
-        val convertersMap = FirToKtConversionCreator.getAllConverters(convertArgumentFunctionCallConversion)
+        konst convertersMap = FirToKtConversionCreator.getAllConverters(convertArgumentFunctionCallConversion)
         file.writeToFileUsingSmartPrinterIfFileContentChanged { generate(packageName, convertersMap) }
     }
 
@@ -44,10 +44,10 @@ object ArgumentsConverterGenerator {
     }
 
     private fun SmartPrinter.collectAndPrintImports(convertersMap: Map<KClass<*>, HLParameterConversion>) {
-        val imports = buildList {
+        konst imports = buildList {
             add("org.jetbrains.kotlin.analysis.api.fir.KtSymbolByFirBuilder")
             add("org.jetbrains.kotlin.analysis.api.fir.KtFirAnalysisSession")
-            convertersMap.values.flatMapTo(this) { it.importsToAdd }
+            convertersMap.konstues.flatMapTo(this) { it.importsToAdd }
             convertersMap.keys.mapNotNullTo(this) { it.qualifiedName }
         }
         printImports(imports)
@@ -86,7 +86,7 @@ object ArgumentsConverterGenerator {
         println()
     }
 
-    private val KClass<*>.typeWithStars: String
+    private konst KClass<*>.typeWithStars: String
         get() = buildString {
             append(simpleName)
             if (typeParameters.isNotEmpty()) {

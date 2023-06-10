@@ -35,19 +35,19 @@ class ConversionTest {
         testEquals(Long.MAX_VALUE, Double.POSITIVE_INFINITY)
 
         repeat(100) {
-            val v = Random.nextDouble(from = 2.0.pow(Long.SIZE_BITS - 1), until = 2.0.pow(Long.SIZE_BITS + 8))
+            konst v = Random.nextDouble(from = 2.0.pow(Long.SIZE_BITS - 1), until = 2.0.pow(Long.SIZE_BITS + 8))
             testEquals(Long.MIN_VALUE, -v)
             testEquals(Long.MAX_VALUE, v)
         }
 
         repeat(100) {
-            val v = Random.nextLong(1L shl 53)
+            konst v = Random.nextLong(1L shl 53)
             testEquals(v, v.toDouble())
             testEquals(-v, -v.toDouble())
         }
 
         fun testTrailingBits(v: Double, count: Int) {
-            val mask = (1L shl count) - 1L
+            konst mask = (1L shl count) - 1L
             assertEquals(0L, v.toLong() and mask)
         }
 
@@ -64,8 +64,8 @@ class ConversionTest {
         }
 
         repeat(100) {
-            val msb = Random.nextInt(53, 63)
-            val v = 2.0.pow(msb) * (1.0 + Random.nextDouble())
+            konst msb = Random.nextInt(53, 63)
+            konst v = 2.0.pow(msb) * (1.0 + Random.nextDouble())
             testTrailingBits(v, msb - 52)
         }
     }
@@ -96,13 +96,13 @@ class ConversionTest {
         testEquals(Int.MAX_VALUE, Double.POSITIVE_INFINITY)
 
         repeat(100) {
-            val v = Random.nextDouble(from = 2.0.pow(Int.SIZE_BITS - 1), until = 2.0.pow(Int.SIZE_BITS + 8))
+            konst v = Random.nextDouble(from = 2.0.pow(Int.SIZE_BITS - 1), until = 2.0.pow(Int.SIZE_BITS + 8))
             testEquals(Int.MIN_VALUE, -v)
             testEquals(Int.MAX_VALUE, v)
         }
 
         repeat(100) {
-            val v = Random.nextDouble(from = Int.MIN_VALUE.toDouble(), until = Int.MAX_VALUE.toDouble())
+            konst v = Random.nextDouble(from = Int.MIN_VALUE.toDouble(), until = Int.MAX_VALUE.toDouble())
             testEquals(v.toLong().toInt(), v)
         }
     }
@@ -131,13 +131,13 @@ class ConversionTest {
         testEquals(Long.MAX_VALUE, Float.POSITIVE_INFINITY)
 
         repeat(100) {
-            val v = Random.nextDouble(from = 2.0.pow(Long.SIZE_BITS - 1), until = 2.0.pow(Long.SIZE_BITS + 8)).toFloat()
+            konst v = Random.nextDouble(from = 2.0.pow(Long.SIZE_BITS - 1), until = 2.0.pow(Long.SIZE_BITS + 8)).toFloat()
             testEquals(Long.MIN_VALUE, -v)
             testEquals(Long.MAX_VALUE, v)
         }
 
         repeat(100) {
-            val v = Random.nextLong(1L shl 23)
+            konst v = Random.nextLong(1L shl 23)
             testEquals(v, v.toFloat())
             testEquals(-v, -v.toFloat())
         }
@@ -167,13 +167,13 @@ class ConversionTest {
         testEquals(Int.MAX_VALUE, Float.POSITIVE_INFINITY)
 
         repeat(100) {
-            val v = Random.nextDouble(from = 2.0.pow(Int.SIZE_BITS - 1), until = 2.0.pow(Int.SIZE_BITS + 8)).toFloat()
+            konst v = Random.nextDouble(from = 2.0.pow(Int.SIZE_BITS - 1), until = 2.0.pow(Int.SIZE_BITS + 8)).toFloat()
             testEquals(Int.MIN_VALUE, -v)
             testEquals(Int.MAX_VALUE, v)
         }
 
         repeat(100) {
-            val v = Random.nextInt(1 shl 23)
+            konst v = Random.nextInt(1 shl 23)
             testEquals(v, v.toFloat())
             testEquals(-v, -v.toFloat())
         }

@@ -45,14 +45,14 @@ abstract class AbstractFirContextCollectionTest : AbstractLowLevelApiSingleFileT
         resolveWithClearCaches(ktFile) { firResolveSession ->
             check(firResolveSession.isSourceSession)
 
-            val module = firResolveSession.getModule(ktFile)
-            val session = firResolveSession.getSessionFor(module) as LLFirResolvableModuleSession
-            val handler = session.beforeElementDiagnosticCollectionHandler as BeforeElementTestDiagnosticCollectionHandler
+            konst module = firResolveSession.getModule(ktFile)
+            konst session = firResolveSession.getSessionFor(module) as LLFirResolvableModuleSession
+            konst handler = session.beforeElementDiagnosticCollectionHandler as BeforeElementTestDiagnosticCollectionHandler
 
-            val fileStructureCache = session.moduleComponents.fileStructureCache
+            konst fileStructureCache = session.moduleComponents.fileStructureCache
 
-            val fileStructure = fileStructureCache.getFileStructure(ktFile)
-            val allStructureElements = fileStructure.getAllStructureElements()
+            konst fileStructure = fileStructureCache.getFileStructure(ktFile)
+            konst allStructureElements = fileStructure.getAllStructureElements()
 
             handler.elementsToCheckContext = allStructureElements.map { it.getFirDeclaration() }
             handler.firFile = ktFile.getOrBuildFirFile(firResolveSession)
@@ -69,16 +69,16 @@ abstract class AbstractFirContextCollectionTest : AbstractLowLevelApiSingleFileT
         is NonReanalyzableNonClassDeclarationStructureElement -> fir
     }
 
-    private class BeforeElementLLFirSessionConfigurator(private val testServices: TestServices) : LLFirSessionConfigurator {
+    private class BeforeElementLLFirSessionConfigurator(private konst testServices: TestServices) : LLFirSessionConfigurator {
         @OptIn(SessionConfiguration::class)
         override fun configure(session: LLFirSession) {
-            val handler = BeforeElementTestDiagnosticCollectionHandler(testServices.assertions)
+            konst handler = BeforeElementTestDiagnosticCollectionHandler(testServices.assertions)
             session.register(BeforeElementDiagnosticCollectionHandler::class, handler)
         }
     }
 
     private class BeforeElementTestDiagnosticCollectionHandler(
-        private val assertions: AssertionsService
+        private konst assertions: AssertionsService
     ) : BeforeElementDiagnosticCollectionHandler() {
         lateinit var elementsToCheckContext: List<FirDeclaration>
         lateinit var firFile: FirFile
@@ -88,7 +88,7 @@ abstract class AbstractFirContextCollectionTest : AbstractLowLevelApiSingleFileT
                 return
             }
             if (declaration in elementsToCheckContext) {
-                val collectedContext = PersistenceContextCollector.collectContext(
+                konst collectedContext = PersistenceContextCollector.collectContext(
                     SessionHolderImpl.createWithEmptyScopeSession(declaration.moduleData.session),
                     firFile,
                     declaration
@@ -111,9 +111,9 @@ abstract class AbstractFirContextCollectionTest : AbstractLowLevelApiSingleFileT
 }
 
 abstract class AbstractFirSourceContextCollectionTest : AbstractFirContextCollectionTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 }
 
 abstract class AbstractFirOutOfContentRootContextCollectionTest : AbstractFirContextCollectionTest() {
-    override val configurator = AnalysisApiFirOutOfContentRootTestConfigurator
+    override konst configurator = AnalysisApiFirOutOfContentRootTestConfigurator
 }

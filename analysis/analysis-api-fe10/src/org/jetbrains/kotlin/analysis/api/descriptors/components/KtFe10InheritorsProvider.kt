@@ -20,16 +20,16 @@ import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.ClassKind
 
 internal class KtFe10InheritorsProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtInheritorsProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun getInheritorsOfSealedClass(classSymbol: KtNamedClassOrObjectSymbol): List<KtNamedClassOrObjectSymbol> {
-        val classDescriptor = getSymbolDescriptor(classSymbol) as? ClassDescriptor ?: return emptyList()
+        konst classDescriptor = getSymbolDescriptor(classSymbol) as? ClassDescriptor ?: return emptyList()
 
-        val inheritorsProvider = analysisContext.resolveSession.sealedClassInheritorsProvider
-        val allowInDifferentFiles = analysisContext.resolveSession.languageVersionSettings
+        konst inheritorsProvider = analysisContext.resolveSession.sealedClassInheritorsProvider
+        konst allowInDifferentFiles = analysisContext.resolveSession.languageVersionSettings
             .supportsFeature(LanguageFeature.AllowSealedInheritorsInDifferentFilesOfSamePackage)
 
         return inheritorsProvider.computeSealedSubclasses(classDescriptor, allowInDifferentFiles)
@@ -37,12 +37,12 @@ internal class KtFe10InheritorsProvider(
     }
 
     override fun getEnumEntries(classSymbol: KtNamedClassOrObjectSymbol): List<KtEnumEntrySymbol> {
-        val enumDescriptor = getSymbolDescriptor(classSymbol) as? ClassDescriptor ?: return emptyList()
+        konst enumDescriptor = getSymbolDescriptor(classSymbol) as? ClassDescriptor ?: return emptyList()
         if (enumDescriptor.kind != ClassKind.ENUM_CLASS) {
             return emptyList()
         }
 
-        val result = mutableListOf<KtEnumEntrySymbol>()
+        konst result = mutableListOf<KtEnumEntrySymbol>()
 
         for (entryDescriptor in enumDescriptor.unsubstitutedMemberScope.getContributedDescriptors()) {
             if (entryDescriptor is ClassDescriptor && entryDescriptor.kind == ClassKind.ENUM_ENTRY) {

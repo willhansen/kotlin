@@ -21,15 +21,15 @@ import org.jetbrains.kotlin.utils.addToStdlib.lastIsInstanceOrNull
 
 object FirCommonConstructorDelegationIssuesChecker : FirRegularClassChecker() {
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val containingClass = context.containingDeclarations.lastIsInstanceOrNull<FirRegularClass>()
+        konst containingClass = context.containingDeclarations.lastIsInstanceOrNull<FirRegularClass>()
         if (declaration.isEffectivelyExternal(containingClass, context)) return
-        val cyclicConstructors = mutableSetOf<FirConstructor>()
+        konst cyclicConstructors = mutableSetOf<FirConstructor>()
         var hasPrimaryConstructor = false
-        val isEffectivelyExpect = declaration.isEffectivelyExpect(context.containingDeclarations.lastOrNull() as? FirRegularClass, context)
+        konst isEffectivelyExpect = declaration.isEffectivelyExpect(context.containingDeclarations.lastOrNull() as? FirRegularClass, context)
 
         // secondary; non-cyclic;
         // candidates for further analysis
-        val otherConstructors = mutableSetOf<FirConstructor>()
+        konst otherConstructors = mutableSetOf<FirConstructor>()
 
         for (it in declaration.declarations) {
             if (it is FirConstructor) {
@@ -74,7 +74,7 @@ object FirCommonConstructorDelegationIssuesChecker : FirRegularClassChecker() {
     }
 
     private fun FirConstructor.findCycle(knownCyclicConstructors: Set<FirConstructor> = emptySet()): Set<FirConstructor>? {
-        val visitedConstructors = mutableSetOf(this)
+        konst visitedConstructors = mutableSetOf(this)
 
         var it = this
         var delegated = this.getDelegated()

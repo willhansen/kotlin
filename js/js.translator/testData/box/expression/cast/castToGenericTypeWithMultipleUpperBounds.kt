@@ -37,11 +37,11 @@ fun <T> test(a: Any): String where T : A, T : X, T : Y {
 }
 
 fun box(): String {
-    val b = B()
-    val c = C()
-    val d = D()
-    val e = E()
-    val f = F()
+    konst b = B()
+    konst c = C()
+    konst d = D()
+    konst e = E()
+    konst f = F()
 
     assertEquals("B", test<B>(b))
     assertEquals("B", test<C>(b))

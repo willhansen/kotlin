@@ -26,16 +26,16 @@ public interface MemberAccessCommonOrBuilder extends
   org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression getExtensionReceiver();
 
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
    */
   java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> 
       getValueArgumentList();
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression getValueArgument(int index);
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
    */
   int getValueArgumentCount();
 

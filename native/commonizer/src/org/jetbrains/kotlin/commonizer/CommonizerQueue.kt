@@ -27,11 +27,11 @@ internal fun CommonizerQueue(parameters: CommonizerParameters): CommonizerQueue 
 }
 
 internal class CommonizerQueue(
-    private val storageManager: StorageManager,
-    private val outputTargets: Set<OutputCommonizerTarget>,
-    private val deserializers: TargetDependent<Deserializer>,
-    private val commonizer: Commonizer,
-    private val serializer: Serializer,
+    private konst storageManager: StorageManager,
+    private konst outputTargets: Set<OutputCommonizerTarget>,
+    private konst deserializers: TargetDependent<Deserializer>,
+    private konst commonizer: Commonizer,
+    private konst serializer: Serializer,
 ) {
 
     fun interface Deserializer {
@@ -51,7 +51,7 @@ internal class CommonizerQueue(
      * All leaf targets are expected to be provided.
      * Previously commonized targets can also be provided
      */
-    private val deserializedTargets: MutableMap<InputCommonizerTarget, NullableLazyValue<CirTreeRoot>> =
+    private konst deserializedTargets: MutableMap<InputCommonizerTarget, NullableLazyValue<CirTreeRoot>> =
         deserializers.toMap().mapValuesTo(mutableMapOf()) { (_, deserializer) ->
             storageManager.createNullableLazyValue { deserializer() }
         }
@@ -60,21 +60,21 @@ internal class CommonizerQueue(
      * Targets that created using commonization.
      * The roots are lazy and will be removed as no further pending target requires it's input
      */
-    private val commonizedTargets: MutableMap<OutputCommonizerTarget, NullableLazyValue<CirTreeRoot>> = mutableMapOf()
+    private konst commonizedTargets: MutableMap<OutputCommonizerTarget, NullableLazyValue<CirTreeRoot>> = mutableMapOf()
 
     /**
      * Represents dependency relationships between input and output targets.
      * Dependencies will be removed if the target was commonized.
      */
-    private val targetDependencies: MutableMap<OutputCommonizerTarget, Set<InputCommonizerTarget>> = mutableMapOf()
+    private konst targetDependencies: MutableMap<OutputCommonizerTarget, Set<InputCommonizerTarget>> = mutableMapOf()
 
-    val retainedDeserializedTargets: Set<InputCommonizerTarget> get() = deserializedTargets.keys
+    konst retainedDeserializedTargets: Set<InputCommonizerTarget> get() = deserializedTargets.keys
 
-    val retainedCommonizedTargets: Set<OutputCommonizerTarget> get() = commonizedTargets.keys
+    konst retainedCommonizedTargets: Set<OutputCommonizerTarget> get() = commonizedTargets.keys
 
-    val retainedTargetDependencies: Map<OutputCommonizerTarget, Set<InputCommonizerTarget>> get() = targetDependencies.toMap()
+    konst retainedTargetDependencies: Map<OutputCommonizerTarget, Set<InputCommonizerTarget>> get() = targetDependencies.toMap()
 
-    val pendingOutputTargets: Set<CommonizerTarget> get() = targetDependencies.keys
+    konst pendingOutputTargets: Set<CommonizerTarget> get() = targetDependencies.keys
 
     /**
      * Runs all tasks/targets in this queue
@@ -99,9 +99,9 @@ internal class CommonizerQueue(
     }
 
     private fun commonize(target: SharedCommonizerTarget): CirTreeRoot? {
-        val inputTargets = targetDependencies.getValue(target)
+        konst inputTargets = targetDependencies.getValue(target)
 
-        val inputDeclarations = EagerTargetDependent(inputTargets) { inputTarget ->
+        konst inputDeclarations = EagerTargetDependent(inputTargets) { inputTarget ->
             (deserializedTargets[inputTarget] ?: commonizedTargets[inputTarget]
             ?: throw IllegalStateException("Missing inputTarget $inputTarget")).invoke()
         }
@@ -119,7 +119,7 @@ internal class CommonizerQueue(
 
     private fun removeTargetDependencies(target: OutputCommonizerTarget) {
         targetDependencies.remove(target) ?: return
-        val referencedDependencyTargets = targetDependencies.values.flatten().toSet()
+        konst referencedDependencyTargets = targetDependencies.konstues.flatten().toSet()
 
         // Release all commonized targets that are not pending anymore (are already invoked)
         //  and that are not listed as input target dependency for any further commonization

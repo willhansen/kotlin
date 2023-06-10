@@ -7,7 +7,7 @@ class A
 fun A.foo(result: String) = result
 
 fun box(): String {
-    val x = A::foo
+    konst x = A::foo
     var r = x(A(), "OK")
     if (r != "OK") return r
 

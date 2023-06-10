@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.resolve.calls.util.CallUtilKt;
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall;
 import org.jetbrains.kotlin.resolve.calls.util.FakeCallableDescriptorForTypeAliasObject;
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 import org.jetbrains.kotlin.types.KotlinType;
 import org.jetbrains.kotlin.types.TypeUtils;
 
@@ -168,7 +168,7 @@ public final class BindingUtils {
 
     @Nullable
     public static Object getCompileTimeValue(@NotNull BindingContext context, @NotNull KtExpression expression) {
-        CompileTimeConstant<?> compileTimeValue = ConstantExpressionEvaluator.getConstant(expression, context);
+        CompileTimeConstant<?> compileTimeValue = ConstantExpressionEkonstuator.getConstant(expression, context);
         if (compileTimeValue != null) {
             return getCompileTimeValue(context, expression, compileTimeValue);
         }
@@ -185,7 +185,7 @@ public final class BindingUtils {
     public static KtExpression getDefaultArgument(@NotNull ValueParameterDescriptor parameterDescriptor) {
         KtParameter psiParameter = getParameterForDescriptor(parameterDescriptor);
         KtExpression defaultValue = psiParameter.getDefaultValue();
-        assert defaultValue != null : message(parameterDescriptor, "No default value found in PSI");
+        assert defaultValue != null : message(parameterDescriptor, "No default konstue found in PSI");
         return defaultValue;
     }
 

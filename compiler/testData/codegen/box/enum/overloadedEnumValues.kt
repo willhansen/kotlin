@@ -1,8 +1,8 @@
 enum class E {
     A;
 
-    fun values(b: Boolean) {}
-    fun E.values(): Array<E> = arrayOf(A)
+    fun konstues(b: Boolean) {}
+    fun E.konstues(): Array<E> = arrayOf(A)
 }
 
 fun f(e: E) = when (e) {

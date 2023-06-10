@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticFactoryToRendererMap
 import org.jetbrains.kotlin.diagnostics.rendering.Renderers
 import org.jetbrains.kotlin.diagnostics.rendering.Renderers.RENDER_TYPE
 
-private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
+private konst DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
     with(DiagnosticFactoryToRendererMap("JS")) {
 
         put(ErrorsJs.NATIVE_ANNOTATIONS_ALLOWED_ONLY_ON_MEMBER_OR_EXTENSION_FUN,
             "Annotation ''{0}'' is allowed only on member functions of declaration annotated as ''kotlin.js.native'' or on toplevel extension functions", RENDER_TYPE)
         put(ErrorsJs.NATIVE_INDEXER_KEY_SHOULD_BE_STRING_OR_NUMBER, "Native {0}''s first parameter type should be ''kotlin.String'' or subtype of ''kotlin.Number''", STRING)
-        put(ErrorsJs.NATIVE_INDEXER_CAN_NOT_HAVE_DEFAULT_ARGUMENTS, "Native {0}''s parameter can not have default value", STRING)
+        put(ErrorsJs.NATIVE_INDEXER_CAN_NOT_HAVE_DEFAULT_ARGUMENTS, "Native {0}''s parameter can not have default konstue", STRING)
         put(ErrorsJs.NATIVE_GETTER_RETURN_TYPE_SHOULD_BE_NULLABLE, "Native getter's return type should be nullable")
         put(ErrorsJs.NATIVE_SETTER_WRONG_RETURN_TYPE, "Native setter's return type should be 'Unit' or a supertype of the second parameter's type")
         put(ErrorsJs.NATIVE_INDEXER_WRONG_PARAMETER_COUNT, "Expected {0} parameters for native {1}", Renderers.TO_STRING, STRING)
@@ -29,8 +29,8 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
         put(ErrorsJs.NESTED_EXTERNAL_DECLARATION, "Non top-level `external` declaration")
         put(ErrorsJs.WRONG_EXTERNAL_DECLARATION, "Declaration of such kind ({0}) can''t be external", STRING)
         put(ErrorsJs.EXTENSION_FUNCTION_IN_EXTERNAL_DECLARATION, "Function types with receiver are prohibited in external declarations")
-        put(ErrorsJs.INLINE_CLASS_IN_EXTERNAL_DECLARATION, "Using value classes as parameter type or return type of external declarations is not supported")
-        put(ErrorsJs.INLINE_CLASS_IN_EXTERNAL_DECLARATION_WARNING, "Using value classes as parameter type or return type of external declarations is experimental")
+        put(ErrorsJs.INLINE_CLASS_IN_EXTERNAL_DECLARATION, "Using konstue classes as parameter type or return type of external declarations is not supported")
+        put(ErrorsJs.INLINE_CLASS_IN_EXTERNAL_DECLARATION_WARNING, "Using konstue classes as parameter type or return type of external declarations is experimental")
         put(ErrorsJs.ENUM_CLASS_IN_EXTERNAL_DECLARATION_WARNING, "Using enum classes with an `external` qualifier becomes deprecated and will be an error in future releases")
 
         put(ErrorsJs.JS_NAME_CLASH, "JavaScript name ({0}) generated for this declaration clashes with another declaration: {1}",
@@ -49,7 +49,7 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
         put(ErrorsJs.NAME_CONTAINS_ILLEGAL_CHARS, "Name contains illegal chars that can't appear in JavaScript identifier")
 
         put(ErrorsJs.JS_MODULE_PROHIBITED_ON_VAR, "@JsModule and @JsNonModule annotations prohibited for 'var' declarations. " +
-                                                  "Use 'val' instead.")
+                                                  "Use 'konst' instead.")
         put(ErrorsJs.JS_MODULE_PROHIBITED_ON_NON_NATIVE, "@JsModule and @JsNonModule annotations prohibited for non-external declarations.")
         put(ErrorsJs.NESTED_JS_MODULE_PROHIBITED, "@JsModule and @JsNonModule can't appear on here since the file is already " +
                                                   "marked by either @JsModule or @JsNonModule")
@@ -70,9 +70,9 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
         put(ErrorsJs.EXTERNAL_INTERFACE_AS_CLASS_LITERAL, "Can't refer to external interface from class literal")
         put(ErrorsJs.EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE, "External type extends non-external type")
 
-        put(ErrorsJs.WRONG_OPERATION_WITH_DYNAMIC, "Wrong operation with dynamic value: {0}", STRING)
+        put(ErrorsJs.WRONG_OPERATION_WITH_DYNAMIC, "Wrong operation with dynamic konstue: {0}", STRING)
         put(ErrorsJs.SPREAD_OPERATOR_IN_DYNAMIC_CALL, "Can't apply spread operator in dynamic call")
-        put(ErrorsJs.DELEGATION_BY_DYNAMIC, "Can't delegate to dynamic value")
+        put(ErrorsJs.DELEGATION_BY_DYNAMIC, "Can't delegate to dynamic konstue")
         put(ErrorsJs.PROPERTY_DELEGATION_BY_DYNAMIC, "Can't apply property delegation by dynamic handler")
 
         put(ErrorsJs.RUNTIME_ANNOTATION_ON_EXTERNAL_DECLARATION, "Runtime annotation can't be put on external declaration")
@@ -91,7 +91,7 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
             "Wrong body of external declaration. Must be either ' = definedExternally' or { definedExternally }")
         put(ErrorsJs.WRONG_INITIALIZER_OF_EXTERNAL_DECLARATION, "Wrong initializer of external declaration. Must be ' = definedExternally'")
         put(ErrorsJs.WRONG_DEFAULT_VALUE_FOR_EXTERNAL_FUN_PARAMETER,
-            "Wrong default value for parameter of external function. Must be ' = definedExternally'")
+            "Wrong default konstue for parameter of external function. Must be ' = definedExternally'")
         put(ErrorsJs.EXTERNAL_DELEGATED_CONSTRUCTOR_CALL, "Delegated constructor call in external class is not allowed")
         put(ErrorsJs.EXTERNAL_DELEGATION, "Can't use delegate on external declaration")
         put(ErrorsJs.EXTERNAL_ANONYMOUS_INITIALIZER, "Anonymous initializer is not allowed in external classes")

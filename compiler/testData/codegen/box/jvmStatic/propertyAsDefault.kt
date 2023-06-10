@@ -3,9 +3,9 @@
 // WITH_STDLIB
 
 object X {
-    @JvmStatic val x = "OK"
+    @JvmStatic konst x = "OK"
 
-    fun fn(value : String = x): String = value
+    fun fn(konstue : String = x): String = konstue
 }
 
 fun box(): String {

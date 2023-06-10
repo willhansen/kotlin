@@ -1,8 +1,8 @@
 import abitestutils.abiTest
 
 fun box() = abiTest {
-    val oci: OpenClassImpl = OpenClassImpl()
-    val oc: OpenClass = oci
+    konst oci: OpenClassImpl = OpenClassImpl()
+    konst oc: OpenClass = oci
 
     expectSuccess("OpenClassV2.openNonInlineToInlineProperty") { openNonInlineToInlinePropertyInOpenClass(oc) }
     expectSuccess("OpenClassV2.openNonInlineToInlinePropertyWithDelegation") { openNonInlineToInlinePropertyWithDelegationInOpenClass(oc) }

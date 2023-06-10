@@ -33,7 +33,7 @@ abstract class FirDefaultPropertyAccessor(
     moduleData: FirModuleData,
     origin: FirDeclarationOrigin,
     propertyTypeRef: FirTypeRef,
-    valueParameters: MutableList<FirValueParameter>,
+    konstueParameters: MutableList<FirValueParameter>,
     propertySymbol: FirPropertySymbol,
     isGetter: Boolean,
     visibility: Visibility,
@@ -56,7 +56,7 @@ abstract class FirDefaultPropertyAccessor(
     containerSource = null,
     dispatchReceiverType = null,
     contextReceivers = MutableOrEmptyList.empty(),
-    valueParameters,
+    konstueParameters,
     body = null,
     contractDescription = FirEmptyContractDescription,
     symbol,
@@ -65,7 +65,7 @@ abstract class FirDefaultPropertyAccessor(
     annotations = MutableOrEmptyList.empty(),
     typeParameters = mutableListOf(),
 ) {
-    override val dispatchReceiverType: ConeSimpleKotlinType?
+    override konst dispatchReceiverType: ConeSimpleKotlinType?
         get() = propertySymbol.dispatchReceiverType
 
     final override var body: FirBlock?
@@ -111,7 +111,7 @@ class FirDefaultPropertyGetter(
     moduleData,
     origin,
     propertyTypeRef,
-    valueParameters = mutableListOf(),
+    konstueParameters = mutableListOf(),
     propertySymbol,
     isGetter = true,
     visibility = visibility,
@@ -138,7 +138,7 @@ class FirDefaultPropertySetter(
     moduleData,
     origin,
     FirImplicitUnitTypeRef(source),
-    valueParameters = mutableListOf(
+    konstueParameters = mutableListOf(
         buildDefaultSetterValueParameter builder@{
             this@builder.resolvePhase = resolvePhase
             this@builder.source = source?.fakeElement(KtFakeSourceElementKind.DefaultAccessor)

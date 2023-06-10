@@ -1,6 +1,6 @@
 open class B
 class A
-val prop = object : B() {
+konst prop = object : B() {
     private fun foo(x: A): A {
         return <caret>x
     }

@@ -62,7 +62,7 @@ object StandaloneProjectFactory {
         applicationDisposable: Disposable,
         compilerConfiguration: CompilerConfiguration = CompilerConfiguration(),
     ): KotlinCoreProjectEnvironment {
-        val applicationEnvironment =
+        konst applicationEnvironment =
             KotlinCoreEnvironment.getOrCreateApplicationEnvironmentForTests(applicationDisposable, compilerConfiguration)
         registerApplicationExtensionPoints(applicationEnvironment, applicationDisposable)
 
@@ -109,7 +109,7 @@ object StandaloneProjectFactory {
         applicationEnvironment: KotlinCoreApplicationEnvironment,
         applicationDisposable: Disposable,
     ) {
-        val applicationArea = applicationEnvironment.application.extensionArea
+        konst applicationArea = applicationEnvironment.application.extensionArea
 
         if (applicationArea.hasExtensionPoint(ClassTypePointerFactory.EP_NAME)) return
         KotlinCoreEnvironment.underApplicationLock {
@@ -146,7 +146,7 @@ object StandaloneProjectFactory {
         languageVersionSettings: LanguageVersionSettings = latestLanguageVersionSettings,
         jdkHome: Path? = null,
     ) {
-        val project = environment.project
+        konst project = environment.project
 
         KotlinCoreEnvironment.registerProjectExtensionPoints(project.extensionArea)
         with(project) {
@@ -169,32 +169,32 @@ object StandaloneProjectFactory {
         languageVersionSettings: LanguageVersionSettings,
         jdkHome: Path?,
     ) {
-        val project = environment.project
-        val javaFileManager = project.getService(JavaFileManager::class.java) as KotlinCliJavaFileManagerImpl
-        val javaModuleFinder = CliJavaModuleFinder(jdkHome?.toFile(), null, javaFileManager, project, null)
-        val javaModuleGraph = JavaModuleGraph(javaModuleFinder)
+        konst project = environment.project
+        konst javaFileManager = project.getService(JavaFileManager::class.java) as KotlinCliJavaFileManagerImpl
+        konst javaModuleFinder = CliJavaModuleFinder(jdkHome?.toFile(), null, javaFileManager, project, null)
+        konst javaModuleGraph = JavaModuleGraph(javaModuleFinder)
 
-        val allSourceFileRoots = sourceFiles.map { JavaRoot(it.virtualFile, JavaRoot.RootType.SOURCE) }
-        val jdkRoots = getDefaultJdkModuleRoots(javaModuleFinder, javaModuleGraph)
+        konst allSourceFileRoots = sourceFiles.map { JavaRoot(it.virtualFile, JavaRoot.RootType.SOURCE) }
+        konst jdkRoots = getDefaultJdkModuleRoots(javaModuleFinder, javaModuleGraph)
 
         project.registerService(
             JavaModuleResolver::class.java,
             CliJavaModuleResolver(javaModuleGraph, emptyList(), javaModuleFinder.systemModules.toList(), project)
         )
 
-        val libraryRoots = getAllBinaryRoots(modules, environment)
+        konst libraryRoots = getAllBinaryRoots(modules, environment)
 
-        val rootsWithSingleJavaFileRoots = buildList {
+        konst rootsWithSingleJavaFileRoots = buildList {
             addAll(libraryRoots)
             addAll(allSourceFileRoots)
             addAll(jdkRoots)
         }
 
-        val (roots, singleJavaFileRoots) =
+        konst (roots, singleJavaFileRoots) =
             rootsWithSingleJavaFileRoots.partition { (file) -> file.isDirectory || file.extension != JavaFileType.DEFAULT_EXTENSION }
 
-        val corePackageIndex = project.getService(PackageIndex::class.java) as CorePackageIndex
-        val rootsIndex = JvmDependenciesDynamicCompoundIndex().apply {
+        konst corePackageIndex = project.getService(PackageIndex::class.java) as CorePackageIndex
+        konst rootsIndex = JvmDependenciesDynamicCompoundIndex().apply {
             addIndex(JvmDependenciesIndexImpl(roots))
             indexedRoots.forEach { javaRoot ->
                 if (javaRoot.file.isDirectory) {
@@ -226,7 +226,7 @@ object StandaloneProjectFactory {
             true
         )
 
-        val finderFactory = CliVirtualFileFinderFactory(rootsIndex, false)
+        konst finderFactory = CliVirtualFileFinderFactory(rootsIndex, false)
 
         project.registerService(MetadataFinderFactory::class.java, finderFactory)
         project.registerService(VirtualFileFinderFactory::class.java, finderFactory)
@@ -241,8 +241,8 @@ object StandaloneProjectFactory {
         // In contrast to `ClasspathRootsResolver.addModularRoots`, we do not need to handle automatic Java modules because JDK modules
         // aren't automatic.
         return javaModuleGraph.getAllDependencies(javaModuleFinder.computeDefaultRootModules()).flatMap { moduleName ->
-            val module = javaModuleFinder.findModule(moduleName) ?: return@flatMap emptyList<JavaRoot>()
-            val result = module.getJavaModuleRoots()
+            konst module = javaModuleFinder.findModule(moduleName) ?: return@flatMap emptyList<JavaRoot>()
+            konst result = module.getJavaModuleRoots()
             result
         }
     }
@@ -253,9 +253,9 @@ object StandaloneProjectFactory {
      */
     fun findJvmRootsForJavaFiles(files: List<PsiJavaFile>): List<PsiDirectory> {
         if (files.isEmpty()) return emptyList()
-        val result = mutableSetOf<PsiDirectory>()
+        konst result = mutableSetOf<PsiDirectory>()
         for (file in files) {
-            val packageParts = file.packageName.takeIf { it.isNotEmpty() }?.split('.') ?: emptyList()
+            konst packageParts = file.packageName.takeIf { it.isNotEmpty() }?.split('.') ?: emptyList()
             var javaDir: PsiDirectory? = file.parent
             for (part in packageParts.reversed()) {
                 if (javaDir?.name == part) {
@@ -285,7 +285,7 @@ object StandaloneProjectFactory {
         environment: KotlinCoreProjectEnvironment,
     ): List<VirtualFile> {
         return roots.mapNotNull { path ->
-            val pathString = path.toAbsolutePath().toString()
+            konst pathString = path.toAbsolutePath().toString()
             when {
                 pathString.endsWith(JAR_PROTOCOL) -> {
                     environment.environment.jarFileSystem.findFileByPath(pathString + JAR_SEPARATOR)
@@ -303,10 +303,10 @@ object StandaloneProjectFactory {
     }
 
     private fun withAllTransitiveDependencies(ktModules: List<KtModule>): List<KtModule> {
-        val visited = hashSetOf<KtModule>()
-        val stack = ktModules.toMutableList()
+        konst visited = hashSetOf<KtModule>()
+        konst stack = ktModules.toMutableList()
         while (stack.isNotEmpty()) {
-            val module = stack.popLast()
+            konst module = stack.popLast()
             if (module in visited) continue
             visited += module
             for (dependency in module.allDependencies()) {
@@ -346,7 +346,7 @@ object StandaloneProjectFactory {
             // To work with that JRT handler, a hacky workaround here is to add "modules" before the module name so that it can
             // find the actual file path.
             // See [LLFirJavaFacadeForBinaries#getBinaryPath] for a similar hack.
-            val (libHomePath, pathInImage) = CoreJrtFileSystem.splitPath(pathString)
+            konst (libHomePath, pathInImage) = CoreJrtFileSystem.splitPath(pathString)
             libHomePath + JAR_SEPARATOR + "modules/$pathInImage"
         } else
             pathString
@@ -365,6 +365,6 @@ object StandaloneProjectFactory {
         }
     }
 
-    private val latestLanguageVersionSettings: LanguageVersionSettings =
+    private konst latestLanguageVersionSettings: LanguageVersionSettings =
         LanguageVersionSettingsImpl(LanguageVersion.LATEST_STABLE, ApiVersion.LATEST)
 }

@@ -3,9 +3,9 @@
 // ISSUE: KT-46465
 // WITH_STDLIB
 
-open class MyNumber(val value: Int) : Number() {
+open class MyNumber(konst konstue: Int) : Number() {
     override fun toChar(): Char = '+'
-    override fun toInt(): Int = value
+    override fun toInt(): Int = konstue
 
     override fun toByte(): Byte = toInt().toByte()
     override fun toDouble(): Double = toInt().toDouble()
@@ -14,9 +14,9 @@ open class MyNumber(val value: Int) : Number() {
     override fun toShort(): Short = toInt().toShort()
 }
 
-class MyNumberImpl(value: Int) : MyNumber(value)
+class MyNumberImpl(konstue: Int) : MyNumber(konstue)
 
 fun box(): String {
-    val x = MyNumberImpl('*'.code).toChar()
+    konst x = MyNumberImpl('*'.code).toChar()
     return if (x == '+') "OK" else "Fail: $x"
 }

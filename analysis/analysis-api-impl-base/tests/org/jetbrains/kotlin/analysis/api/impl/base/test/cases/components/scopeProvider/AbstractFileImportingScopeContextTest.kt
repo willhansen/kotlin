@@ -19,14 +19,14 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractFileImportingScopeContextTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val ktFile = ktFiles.first()
-        val renderDefaultImportingScope = Directives.RENDER_DEFAULT_IMPORTING_SCOPE in module.directives
+        konst ktFile = ktFiles.first()
+        konst renderDefaultImportingScope = Directives.RENDER_DEFAULT_IMPORTING_SCOPE in module.directives
 
         analyseForTest(ktFile) {
-            val ktScopeContext = ktFile.getImportingScopeContext()
+            konst ktScopeContext = ktFile.getImportingScopeContext()
 
-            val scopeContextStringRepresentation = render(ktScopeContext, renderDefaultImportingScope)
-            val scopeContextStringRepresentationPretty = render(ktScopeContext, renderDefaultImportingScope, printPretty = true)
+            konst scopeContextStringRepresentation = render(ktScopeContext, renderDefaultImportingScope)
+            konst scopeContextStringRepresentationPretty = render(ktScopeContext, renderDefaultImportingScope, printPretty = true)
 
             testServices.assertions.assertEqualsToTestDataFileSibling(scopeContextStringRepresentation)
             testServices.assertions.assertEqualsToTestDataFileSibling(scopeContextStringRepresentationPretty, extension = ".pretty.txt")
@@ -50,6 +50,6 @@ abstract class AbstractFileImportingScopeContextTest : AbstractAnalysisApiBasedS
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val RENDER_DEFAULT_IMPORTING_SCOPE by directive("render default importing scope in test output")
+        konst RENDER_DEFAULT_IMPORTING_SCOPE by directive("render default importing scope in test output")
     }
 }

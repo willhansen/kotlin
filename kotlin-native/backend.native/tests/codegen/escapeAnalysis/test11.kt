@@ -5,9 +5,9 @@
 
 package codegen.escapeAnalysis.test11
 
-class F(val x: Int)
+class F(konst x: Int)
 
-class A(val s: String) {
+class A(konst s: String) {
     var f = F(0)
 }
 

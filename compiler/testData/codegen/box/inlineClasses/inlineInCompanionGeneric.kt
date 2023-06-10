@@ -5,7 +5,7 @@
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class R<T: String>(val value: T) {
+konstue class R<T: String>(konst konstue: T) {
     companion object {
         inline fun ok() = R("OK")
     }
@@ -13,6 +13,6 @@ value class R<T: String>(val value: T) {
 
 // FILE: test.kt
 
-fun box(): String = R.ok().value
+fun box(): String = R.ok().konstue
 
 

@@ -1,8 +1,8 @@
 // !LANGUAGE: +ContextReceivers
 
-class A<T>(val a: T)
-class B(val b: Any)
-class C(val c: Any)
+class A<T>(konst a: T)
+class B(konst b: Any)
+class C(konst c: Any)
 
 context(A<String>) fun A<Int>.f() {
     this<!AMBIGUOUS_LABEL!>@A<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>a<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>length<!>

@@ -28,7 +28,7 @@ import kotlin.test.assertEquals
     className = "SomeClass"
 )
 private class MyContinuation : BaseContinuationImpl(null) {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
     var label = 0
@@ -39,7 +39,7 @@ private class MyContinuation : BaseContinuationImpl(null) {
 class DebugMetadataTest {
     @Test
     fun testRuntimeDebugMetadata() {
-        val myContinuation = MyContinuation()
+        konst myContinuation = MyContinuation()
 
         myContinuation.label = 1
         assertEquals(

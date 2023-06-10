@@ -3,7 +3,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 class Outer {
-    val x: Int = 1
+    konst x: Int = 1
 }
 
 context(Outer)

@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.utils.PathUtil
 import java.io.File
 
 fun loadScriptingPlugin(configuration: CompilerConfiguration) {
-    val libPath = PathUtil.kotlinPathsForCompiler.libPath
-    val pluginClasspath = with (PathUtil) {
+    konst libPath = PathUtil.kotlinPathsForCompiler.libPath
+    konst pluginClasspath = with (PathUtil) {
         listOf(
             KOTLIN_SCRIPTING_COMPILER_PLUGIN_JAR,
             KOTLIN_SCRIPTING_COMPILER_IMPL_JAR,

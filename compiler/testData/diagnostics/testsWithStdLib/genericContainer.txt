@@ -1,6 +1,6 @@
 package
 
-public val container: GenericContainer<out GenericContainer<*>!>
+public konst container: GenericContainer<out GenericContainer<*>!>
 
 public open class GenericContainer</*0*/ SELF : GenericContainer<SELF!>!> {
     public constructor GenericContainer</*0*/ SELF : GenericContainer<SELF!>!>(/*0*/ dockerImageName: kotlin.String!)

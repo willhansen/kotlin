@@ -18,16 +18,16 @@ import org.jetbrains.org.objectweb.asm.util.TraceFieldVisitor
 import org.jetbrains.org.objectweb.asm.util.TraceMethodVisitor
 import java.io.File
 
-private val LINE_SEPARATOR = System.getProperty("line.separator")
+private konst LINE_SEPARATOR = System.getProperty("line.separator")
 
 @ObsoleteTestInfrastructure
 abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
     private companion object {
-        const val CURIOUS_ABOUT_DIRECTIVE = "// CURIOUS_ABOUT "
-        const val LOCAL_VARIABLE_TABLE_DIRECTIVE = "// LOCAL_VARIABLE_TABLE"
-        const val RENDER_ANNOTATIONS_DIRECTIVE = "// RENDER_ANNOTATIONS"
+        const konst CURIOUS_ABOUT_DIRECTIVE = "// CURIOUS_ABOUT "
+        const konst LOCAL_VARIABLE_TABLE_DIRECTIVE = "// LOCAL_VARIABLE_TABLE"
+        const konst RENDER_ANNOTATIONS_DIRECTIVE = "// RENDER_ANNOTATIONS"
 
-        val IGNORED_CLASS_VISIBLE_ANNOTATIONS = setOf(
+        konst IGNORED_CLASS_VISIBLE_ANNOTATIONS = setOf(
             "Lkotlin/Metadata;",
             "Lkotlin/annotation/Target;",
             "Lkotlin/annotation/Retention;",
@@ -37,23 +37,23 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
     }
 
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
-        val txtFile = File(wholeFile.parentFile, getExpectedTextFileName(wholeFile))
+        konst txtFile = File(wholeFile.parentFile, getExpectedTextFileName(wholeFile))
         compile(files)
 
-        val classes = classFileFactory
+        konst classes = classFileFactory
                 .getClassFiles()
                 .sortedBy { it.relativePath }
                 .map { file -> ClassNode().also { ClassReader(file.asByteArray()).accept(it, ClassReader.EXPAND_FRAMES) } }
 
-        val testFileLines = wholeFile.readLines()
+        konst testFileLines = wholeFile.readLines()
 
-        val printBytecodeForTheseMethods = testFileLines
+        konst printBytecodeForTheseMethods = testFileLines
                 .filter { it.startsWith(CURIOUS_ABOUT_DIRECTIVE) }
                 .map { it.substring(CURIOUS_ABOUT_DIRECTIVE.length) }
                 .flatMap { it.split(',').map { it.trim() } }
 
-        val showLocalVariables = testFileLines.any { it.trim() == LOCAL_VARIABLE_TABLE_DIRECTIVE }
-        val renderAnnotations = testFileLines.any { it.trim() == RENDER_ANNOTATIONS_DIRECTIVE }
+        konst showLocalVariables = testFileLines.any { it.trim() == LOCAL_VARIABLE_TABLE_DIRECTIVE }
+        konst renderAnnotations = testFileLines.any { it.trim() == RENDER_ANNOTATIONS_DIRECTIVE }
 
         KotlinTestUtils.assertEqualsToFile(txtFile, classes.joinToString(LINE_SEPARATOR.repeat(2)) {
             renderClassNode(it, printBytecodeForTheseMethods, showLocalVariables, renderAnnotations)
@@ -68,10 +68,10 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
         showLocalVariables: Boolean,
         renderAnnotations: Boolean
     ): String {
-        val fields = (clazz.fields ?: emptyList()).sortedBy { it.name }
-        val methods = (clazz.methods ?: emptyList()).sortedBy { it.name }
+        konst fields = (clazz.fields ?: emptyList()).sortedBy { it.name }
+        konst methods = (clazz.methods ?: emptyList()).sortedBy { it.name }
 
-        val superTypes = (listOf(clazz.superName) + clazz.interfaces).filterNotNull()
+        konst superTypes = (listOf(clazz.superName) + clazz.interfaces).filterNotNull()
 
         return buildString {
             if (renderAnnotations) {
@@ -91,8 +91,8 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
             appendLine(" {")
 
             if (renderAnnotations) {
-                val textifier = Textifier()
-                val visitor = TraceMethodVisitor(textifier)
+                konst textifier = Textifier()
+                konst visitor = TraceMethodVisitor(textifier)
 
                 clazz.visibleAnnotations?.forEach {
                     if (it.desc !in IGNORED_CLASS_VISIBLE_ANNOTATIONS) {
@@ -123,7 +123,7 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
             }
 
             methods.joinTo(this, LINE_SEPARATOR.repeat(2)) {
-                val showBytecode = showBytecodeForTheseMethods.contains(it.name)
+                konst showBytecode = showBytecodeForTheseMethods.contains(it.name)
                 renderMethod(it, showBytecode, showLocalVariables, renderAnnotations).withMargin()
             }
 
@@ -143,8 +143,8 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
         append(field.name)
 
         if (renderAnnotations) {
-            val textifier = Textifier()
-            val visitor = TraceFieldVisitor(textifier)
+            konst textifier = Textifier()
+            konst visitor = TraceFieldVisitor(textifier)
 
             field.visibleAnnotations?.forEach {
                 it.accept(visitor.visitAnnotation(it.desc, true))
@@ -179,18 +179,18 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
 
         renderVisibilityModifiers(method.access)
         renderModalityModifiers(method.access)
-        val (returnType, parameterTypes) = with(Type.getMethodType(method.desc)) { returnType to argumentTypes }
+        konst (returnType, parameterTypes) = with(Type.getMethodType(method.desc)) { returnType to argumentTypes }
         append(returnType.className).append(' ')
         append(method.name)
 
         parameterTypes.mapIndexed { index, type ->
-            val name = getParameterName(index, method)
+            konst name = getParameterName(index, method)
             "${type.className} $name"
         }.joinTo(this, prefix = "(", postfix = ")")
 
         if (renderAnnotations) {
-            val textifier = Textifier()
-            val visitor = TraceMethodVisitor(textifier)
+            konst textifier = Textifier()
+            konst visitor = TraceMethodVisitor(textifier)
 
             method.visibleAnnotations?.forEach {
                 it.accept(visitor.visitAnnotation(it.desc, true))
@@ -233,14 +233,14 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
             }
         }
 
-        val actualShowBytecode = showBytecode && (method.access and ACC_ABSTRACT) == 0
-        val actualShowLocalVariables = showLocalVariables && method.localVariables?.takeIf { it.isNotEmpty() } != null
+        konst actualShowBytecode = showBytecode && (method.access and ACC_ABSTRACT) == 0
+        konst actualShowLocalVariables = showLocalVariables && method.localVariables?.takeIf { it.isNotEmpty() } != null
 
         if (actualShowBytecode || actualShowLocalVariables) {
             appendLine(" {")
 
             if (actualShowLocalVariables) {
-                val localVariableTable = buildLocalVariableTable(method)
+                konst localVariableTable = buildLocalVariableTable(method)
                 if (localVariableTable.isNotEmpty()) {
                     append(localVariableTable.withMargin())
                 }
@@ -260,21 +260,21 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
     }
 
     private fun getParameterName(index: Int, method: MethodNode): String {
-        val localVariableIndexOffset = when {
+        konst localVariableIndexOffset = when {
             (method.access and ACC_STATIC) != 0 -> 0
             method.isJvmOverloadsGenerated() -> 0
             else -> 1
         }
 
-        val actualIndex = index + localVariableIndexOffset
-        val localVariables = method.localVariables
+        konst actualIndex = index + localVariableIndexOffset
+        konst localVariables = method.localVariables
         return localVariables?.firstOrNull {
             it.index == actualIndex
         }?.name ?: "p$index"
     }
 
     private fun buildLocalVariableTable(method: MethodNode): String {
-        val localVariables = method.localVariables?.takeIf { it.isNotEmpty() } ?: return ""
+        konst localVariables = method.localVariables?.takeIf { it.isNotEmpty() } ?: return ""
         return buildString {
             append("Local variables:")
             for (variable in localVariables) {
@@ -284,7 +284,7 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
     }
 
     private fun renderBytecodeInstructions(instructions: InsnList) = buildString {
-        val labelMappings = LabelMappings()
+        konst labelMappings = LabelMappings()
 
         var currentInsn = instructions.first
         while (currentInsn != null) {
@@ -306,7 +306,7 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
 
         if (node is FrameNode) return
 
-        append("  ").append(Printer.OPCODES[node.opcode] ?: error("Invalid opcode ${node.opcode}"))
+        append("  ").append(Printer.OPCODES[node.opcode] ?: error("Inkonstid opcode ${node.opcode}"))
 
         when (node) {
             is FieldInsnNode -> append(" (${node.owner}, ${node.name}, ${node.desc})")
@@ -324,7 +324,7 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
         appendLine()
 
         if (node is TableSwitchInsnNode || node is LookupSwitchInsnNode) {
-            val (cases, default) = if (node is LookupSwitchInsnNode) {
+            konst (cases, default) = if (node is LookupSwitchInsnNode) {
                 node.keys.zip(node.labels) to node.dflt
             } else {
                 (node as TableSwitchInsnNode).min.rangeTo(node.max).zip(node.labels) to node.dflt
@@ -358,7 +358,7 @@ abstract class AbstractAsmLikeInstructionListingTest : CodegenTestCase() {
         private var currentIndex = 0
 
         operator fun get(label: Label): Int {
-            val hashCode = System.identityHashCode(label)
+            konst hashCode = System.identityHashCode(label)
             return mappings.getOrPut(hashCode) { currentIndex++ }
         }
     }

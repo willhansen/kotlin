@@ -9,7 +9,7 @@ class SomeClass {
 
 fun foo() {}
 
-val bar = 1
+konst bar = 1
 
 // FILE: ExplicitImported.kt
 
@@ -19,7 +19,7 @@ class AnotherClass
 
 fun baz() {}
 
-val gau = 2
+konst gau = 2
 
 // FILE: Test.kt
 
@@ -41,6 +41,6 @@ fun useAnotherClass(): AnotherClass = AnotherClass()
 fun test() {
     foo()
     baz()
-    val x = bar
-    val y = gau
+    konst x = bar
+    konst y = gau
 }

@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class UnderscoredTypeAliasTypeSubstitutonTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test inlined underscored typealias - single platform`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -38,7 +38,7 @@ class UnderscoredTypeAliasTypeSubstitutonTest : AbstractInlineSourcesCommonizati
     }
 
     fun `test inlined underscored typealias - both platforms`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -68,7 +68,7 @@ class UnderscoredTypeAliasTypeSubstitutonTest : AbstractInlineSourcesCommonizati
     }
 
     fun `test inlined underscored typealias - both platforms - not used in signature`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -98,7 +98,7 @@ class UnderscoredTypeAliasTypeSubstitutonTest : AbstractInlineSourcesCommonizati
 
 
     fun `test inlined underscored typealias - both platforms - underscore used in both signatures`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """

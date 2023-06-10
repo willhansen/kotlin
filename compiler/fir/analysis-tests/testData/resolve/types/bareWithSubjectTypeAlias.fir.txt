@@ -9,7 +9,7 @@ FILE: bareWithSubjectTypeAlias.kt
                 super<R|A<T1>|>()
             }
 
-            public final val x: R|T1| = R|<local>/x|
+            public final konst x: R|T1| = R|<local>/x|
                 public get(): R|T1|
 
         }
@@ -19,7 +19,7 @@ FILE: bareWithSubjectTypeAlias.kt
                 super<R|A<T2>|>()
             }
 
-            public final val y: R|T2| = R|<local>/y|
+            public final konst y: R|T2| = R|<local>/y|
                 public get(): R|T2|
 
         }
@@ -30,7 +30,7 @@ FILE: bareWithSubjectTypeAlias.kt
         ^bar R|kotlin/TODO|()
     }
     public final fun foo(): R|kotlin/Unit| {
-        when (lval a: R|TA| = R|/bar|()) {
+        when (lkonst a: R|TA| = R|/bar|()) {
             ($subj$ is R|A.B<kotlin/CharSequence>|) ->  {
                 R|<local>/a|.R|SubstitutionOverride</A.B.x: R|kotlin/CharSequence|>|.R|kotlin/CharSequence.length|
             }

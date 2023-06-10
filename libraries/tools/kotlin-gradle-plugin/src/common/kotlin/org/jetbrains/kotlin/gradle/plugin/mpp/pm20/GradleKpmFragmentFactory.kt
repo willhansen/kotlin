@@ -27,8 +27,8 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.GradleKpmFragmentFactory.Frag
  *   - Setting up publication
  */
 class GradleKpmFragmentFactory<T : GradleKpmFragment>(
-    private val fragmentInstantiator: FragmentInstantiator<T>,
-    private val fragmentConfigurator: FragmentConfigurator<T>
+    private konst fragmentInstantiator: FragmentInstantiator<T>,
+    private konst fragmentConfigurator: FragmentConfigurator<T>
 ) : NamedDomainObjectFactory<T> {
 
     /**

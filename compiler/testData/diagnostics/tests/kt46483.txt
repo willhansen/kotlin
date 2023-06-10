@@ -17,7 +17,7 @@ public interface Generic</*0*/ Z> {
 
 @kotlin.annotation.Repeatable @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.TYPE_PARAMETER}) public final annotation class TypeParameterAnn : kotlin.Annotation {
     public constructor TypeParameterAnn(/*0*/ name: kotlin.String)
-    public final val name: kotlin.String
+    public final konst name: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

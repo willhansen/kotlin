@@ -7,25 +7,25 @@ package runtime.memory.escape2
 
 import kotlin.test.*
 
-class A(val s: String)
+class A(konst s: String)
 
 class B {
     var a: A? = null
 }
 
-class C(val b: B)
+class C(konst b: B)
 
 fun foo(c: C) {
     c.b.a = A("zzz")
 }
 
 fun bar(b: B) {
-    val c = C(b)
+    konst c = C(b)
     foo(c)
 }
 
 @ThreadLocal
-val global = B()
+konst global = B()
 
 @Test fun runTest() {
     bar(global)

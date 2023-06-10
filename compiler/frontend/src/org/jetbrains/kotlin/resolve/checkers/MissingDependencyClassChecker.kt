@@ -33,12 +33,12 @@ import org.jetbrains.kotlin.utils.newLinkedHashSetWithExpectedSize
 
 object MissingDependencyClassChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val resultingDescriptor = resolvedCall.resultingDescriptor
+        konst resultingDescriptor = resolvedCall.resultingDescriptor
         for (diagnostic in collectDiagnostics(reportOn, resultingDescriptor)) {
             context.trace.report(diagnostic)
         }
 
-        val containerSource = (resultingDescriptor as? DeserializedMemberDescriptor)?.containerSource
+        konst containerSource = (resultingDescriptor as? DeserializedMemberDescriptor)?.containerSource
         incompatibilityDiagnosticFor(containerSource, reportOn)?.let(context.trace::report)
     }
 
@@ -52,7 +52,7 @@ object MissingDependencyClassChecker : CallChecker {
 
     private fun incompatibilityDiagnosticFor(source: SourceElement?, reportOn: PsiElement): Diagnostic? {
         if (source is DeserializedContainerSource) {
-            val incompatibility = source.incompatibility
+            konst incompatibility = source.incompatibility
             if (incompatibility != null) {
                 return INCOMPATIBLE_CLASS.on(reportOn, source.presentableString, incompatibility)
             }
@@ -71,10 +71,10 @@ object MissingDependencyClassChecker : CallChecker {
     }
 
     private fun collectDiagnostics(reportOn: PsiElement, descriptor: CallableDescriptor): Set<Diagnostic> {
-        val result: MutableSet<Diagnostic> = newLinkedHashSetWithExpectedSize(1)
+        konst result: MutableSet<Diagnostic> = newLinkedHashSetWithExpectedSize(1)
 
         fun consider(classDescriptor: ClassDescriptor) {
-            val diagnostic = diagnosticFor(classDescriptor, reportOn)
+            konst diagnostic = diagnosticFor(classDescriptor, reportOn)
             if (diagnostic != null) {
                 result.add(diagnostic)
                 return
@@ -89,8 +89,8 @@ object MissingDependencyClassChecker : CallChecker {
         }
 
         descriptor.returnType?.let(::consider)
-        descriptor.extensionReceiverParameter?.value?.type?.let(::consider)
-        descriptor.valueParameters.forEach { consider(it.type) }
+        descriptor.extensionReceiverParameter?.konstue?.type?.let(::consider)
+        descriptor.konstueParameters.forEach { consider(it.type) }
 
         return result
     }
@@ -99,7 +99,7 @@ object MissingDependencyClassChecker : CallChecker {
         override fun check(targetDescriptor: ClassifierDescriptor, element: PsiElement, context: ClassifierUsageCheckerContext) {
             diagnosticFor(targetDescriptor, element)?.let(context.trace::report)
 
-            val containerSource = (targetDescriptor as? DeserializedMemberDescriptor)?.containerSource
+            konst containerSource = (targetDescriptor as? DeserializedMemberDescriptor)?.containerSource
             incompatibilityDiagnosticFor(containerSource, element)?.let(context.trace::report)
         }
     }

@@ -9,10 +9,10 @@ FILE: recursiveCallOnWhenWithSealedClass.kt
                 super<R|Maybe<T>|>()
             }
 
-            public final val reasonForLog: R|kotlin/String| = R|<local>/reasonForLog|
+            public final konst reasonForLog: R|kotlin/String| = R|<local>/reasonForLog|
                 public get(): R|kotlin/String|
 
-            public final val reasonForUI: R|kotlin/String| = R|<local>/reasonForUI|
+            public final konst reasonForUI: R|kotlin/String| = R|<local>/reasonForUI|
                 public get(): R|kotlin/String|
 
         }
@@ -22,7 +22,7 @@ FILE: recursiveCallOnWhenWithSealedClass.kt
                 super<R|Maybe<T>|>()
             }
 
-            public final val meat: R|T| = R|<local>/meat|
+            public final konst meat: R|T| = R|<local>/meat|
                 public get(): R|T|
 
         }

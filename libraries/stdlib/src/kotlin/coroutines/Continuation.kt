@@ -10,18 +10,18 @@ import kotlin.coroutines.intrinsics.*
 import kotlin.internal.InlineOnly
 
 /**
- * Interface representing a continuation after a suspension point that returns a value of type `T`.
+ * Interface representing a continuation after a suspension point that returns a konstue of type `T`.
  */
 @SinceKotlin("1.3")
 public interface Continuation<in T> {
     /**
      * The context of the coroutine that corresponds to this continuation.
      */
-    public val context: CoroutineContext
+    public konst context: CoroutineContext
 
     /**
      * Resumes the execution of the corresponding coroutine passing a successful or failed [result] as the
-     * return value of the last suspension point.
+     * return konstue of the last suspension point.
      */
     public fun resumeWith(result: Result<T>)
 }
@@ -37,12 +37,12 @@ public interface Continuation<in T> {
 public annotation class RestrictsSuspension
 
 /**
- * Resumes the execution of the corresponding coroutine passing [value] as the return value of the last suspension point.
+ * Resumes the execution of the corresponding coroutine passing [konstue] as the return konstue of the last suspension point.
  */
 @SinceKotlin("1.3")
 @InlineOnly
-public inline fun <T> Continuation<T>.resume(value: T): Unit =
-    resumeWith(Result.success(value))
+public inline fun <T> Continuation<T>.resume(konstue: T): Unit =
+    resumeWith(Result.success(konstue))
 
 /**
  * Resumes the execution of the corresponding coroutine so that the [exception] is re-thrown right after the
@@ -64,7 +64,7 @@ public inline fun <T> Continuation(
     crossinline resumeWith: (Result<T>) -> Unit
 ): Continuation<T> =
     object : Continuation<T> {
-        override val context: CoroutineContext
+        override konst context: CoroutineContext
             get() = context
 
         override fun resumeWith(result: Result<T>) =
@@ -142,7 +142,7 @@ public fun <R, T> (suspend R.() -> T).startCoroutine(
 public suspend inline fun <T> suspendCoroutine(crossinline block: (Continuation<T>) -> Unit): T {
     contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
     return suspendCoroutineUninterceptedOrReturn { c: Continuation<T> ->
-        val safe = SafeContinuation(c.intercepted())
+        konst safe = SafeContinuation(c.intercepted())
         block(safe)
         safe.getOrThrow()
     }
@@ -154,7 +154,7 @@ public suspend inline fun <T> suspendCoroutine(crossinline block: (Continuation<
 @SinceKotlin("1.3")
 @Suppress("WRONG_MODIFIER_TARGET")
 @InlineOnly
-public suspend inline val coroutineContext: CoroutineContext
+public suspend inline konst coroutineContext: CoroutineContext
     get() {
         throw NotImplementedError("Implemented as intrinsic")
     }

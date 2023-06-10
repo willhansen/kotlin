@@ -1,7 +1,7 @@
 fun box() : String {
-    val i: Int? = 7
-    val j: Int? = null
-    val k = 7
+    konst i: Int? = 7
+    konst j: Int? = null
+    konst k = 7
 
     //verify errors
     if (i == 7) {}

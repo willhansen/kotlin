@@ -1,6 +1,6 @@
 class A {
     var something: Int
-        set(value) {}
+        set(konstue) {}
         get() = 10
 }
 

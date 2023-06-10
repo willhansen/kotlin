@@ -15,7 +15,7 @@ class WorkaroundTests : IndexerTests() {
         if (System.getProperty("os.name") != "Mac OS X") {
             return
         }
-        val code = """
+        konst code = """
             #if !defined(NS_FORMAT_ARGUMENT)
                 #if defined(__clang__)
                 #define NS_FORMAT_ARGUMENT(A) __attribute__ ((format_arg(A)))
@@ -26,15 +26,15 @@ class WorkaroundTests : IndexerTests() {
             
             NS_FORMAT_ARGUMENT(1) int f(const char* c);
         """.trimIndent()
-        val language = Language.OBJECTIVE_C
-        val compilation = CompilationImpl(
+        konst language = Language.OBJECTIVE_C
+        konst compilation = CompilationImpl(
                 includes = emptyList(),
                 additionalPreambleLines = code.split("\n"),
                 compilerArgs = defaultCompilerArgs(language),
                 language = language
         )
         withIndex(excludeDeclarationsFromPCH = false) { index ->
-            val translationUnit = compilation.parse(
+            konst translationUnit = compilation.parse(
                     index,
                     options = CXTranslationUnit_DetailedPreprocessingRecord,
             )

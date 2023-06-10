@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
 
 internal fun createStubBodyResolveComponents(firSession: FirSession): FirAbstractBodyResolveTransformer.BodyResolveTransformerComponents {
-    val scopeSession = ScopeSession()
+    konst scopeSession = ScopeSession()
 
     // This transformer is not intended for actual transformations and created here only to simplify access to resolve components
-    val stubBodyResolveTransformer = FirBodyResolveTransformer(
+    konst stubBodyResolveTransformer = FirBodyResolveTransformer(
         session = firSession,
         phase = FirResolvePhase.BODY_RESOLVE,
         implicitTypeOnly = false,
@@ -47,12 +47,12 @@ internal open class StubBodyResolveTransformerComponents(
     transformer,
     context,
 ) {
-    override val dataFlowAnalyzer: FirDataFlowAnalyzer
+    override konst dataFlowAnalyzer: FirDataFlowAnalyzer
         get() = object : FirDataFlowAnalyzer(this@StubBodyResolveTransformerComponents, context.dataFlowAnalyzerContext) {
-            override val logicSystem: LogicSystem
+            override konst logicSystem: LogicSystem
                 get() = error("Should not be called")
 
-            override val receiverStack: Iterable<ImplicitReceiverValue<*>>
+            override konst receiverStack: Iterable<ImplicitReceiverValue<*>>
                 get() = error("Should not be called")
 
             override fun receiverUpdated(symbol: FirBasedSymbol<*>, info: TypeStatement?) =

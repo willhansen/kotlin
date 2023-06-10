@@ -1,6 +1,6 @@
 FILE: test.kt
     public abstract interface Proxy : R|kotlin/Any| {
-        public abstract val x: R|kotlin/String|
+        public abstract konst x: R|kotlin/String|
             public get(): R|kotlin/String|
 
     }
@@ -9,7 +9,7 @@ FILE: test.kt
             super<R|Base|>()
         }
 
-        public final val x: R|kotlin/String|
+        public final konst x: R|kotlin/String|
             public get(): R|kotlin/String| {
                 ^ String( )
             }

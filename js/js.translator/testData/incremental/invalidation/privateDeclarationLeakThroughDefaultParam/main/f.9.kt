@@ -1,5 +1,5 @@
 private object Obj {
-    val x = "9"
+    konst x = "9"
 
     override fun toString() = x
 }

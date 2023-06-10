@@ -14,7 +14,7 @@ kotlin {
         commonTestApi(kotlin("test-common"))
     }
 
-    val jsCommon = js("jsCommon") {
+    konst jsCommon = js("jsCommon") {
         dependencies {
             commonMainImplementation(kotlin("stdlib-js"))
             commonTestApi(kotlin("test-js"))

@@ -21,13 +21,13 @@ import org.jetbrains.kotlin.psi.KtCodeFragment
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 
-val SUPPRESS_DIAGNOSTICS_IN_DEBUG_MODE: Key<Boolean> = Key.create<Boolean>("SUPPRESS_DIAGNOSTICS_IN_DEBUG_MODE")
+konst SUPPRESS_DIAGNOSTICS_IN_DEBUG_MODE: Key<Boolean> = Key.create<Boolean>("SUPPRESS_DIAGNOSTICS_IN_DEBUG_MODE")
 
 fun KtElement.suppressDiagnosticsInDebugMode(): Boolean {
     return if (this is KtFile) {
         this.suppressDiagnosticsInDebugMode
     } else {
-        val file = this.containingFile
+        konst file = this.containingFile
         file is KtFile && file.suppressDiagnosticsInDebugMode
     }
 }
@@ -41,4 +41,4 @@ var KtFile.suppressDiagnosticsInDebugMode: Boolean
         putUserData(SUPPRESS_DIAGNOSTICS_IN_DEBUG_MODE, skip)
     }
 
-val DEBUG_TYPE_REFERENCE_STRING: String = "DebugTypeKotlinRulezzzz"
+konst DEBUG_TYPE_REFERENCE_STRING: String = "DebugTypeKotlinRulezzzz"

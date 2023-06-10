@@ -27,13 +27,13 @@ import org.jetbrains.kotlin.util.slicedMap.WritableSlice
  * (like storing them in the local map, later re-committing into parent's, etc.)
  */
 abstract class AbstractFilteringTrace(
-    private val parentTrace: BindingTrace,
+    private konst parentTrace: BindingTrace,
     name: String
 ) : DelegatingBindingTrace(parentTrace.bindingContext, name, true, BindingTraceFilter.ACCEPT_ALL, false) {
     abstract protected fun <K, V> shouldBeHiddenFromParent(slice: WritableSlice<K, V>, key: K): Boolean
 
-    override fun <K, V> record(slice: WritableSlice<K, V>, key: K, value: V) {
-        if (shouldBeHiddenFromParent(slice, key)) super.record(slice, key, value) else parentTrace.record(slice, key, value)
+    override fun <K, V> record(slice: WritableSlice<K, V>, key: K, konstue: V) {
+        if (shouldBeHiddenFromParent(slice, key)) super.record(slice, key, konstue) else parentTrace.record(slice, key, konstue)
     }
 
     override fun report(diagnostic: Diagnostic) {

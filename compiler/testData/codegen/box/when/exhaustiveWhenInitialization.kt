@@ -1,8 +1,8 @@
 enum class A { V }
 
 fun box(): String {
-  val a: A = A.V
-  val b: Boolean
+  konst a: A = A.V
+  konst b: Boolean
   when (a) {
     A.V -> b = true
   }

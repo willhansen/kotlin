@@ -22,11 +22,11 @@ sealed class P {
         class M : P()
     }
 
-    val p: P = object : <!SEALED_SUPERTYPE_IN_LOCAL_CLASS!>P<!>() {
+    konst p: P = object : <!SEALED_SUPERTYPE_IN_LOCAL_CLASS!>P<!>() {
 
     }
 
-    val r = object : <!SEALED_SUPERTYPE_IN_LOCAL_CLASS!>P<!>() {
+    konst r = object : <!SEALED_SUPERTYPE_IN_LOCAL_CLASS!>P<!>() {
 
     }
 }
@@ -39,7 +39,7 @@ object <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>B<!> {
 
 fun test() {
     class L : <!SEALED_SUPERTYPE_IN_LOCAL_CLASS!>P<!>()
-    val a = object : <!SEALED_SUPERTYPE_IN_LOCAL_CLASS!>P<!>() {
+    konst a = object : <!SEALED_SUPERTYPE_IN_LOCAL_CLASS!>P<!>() {
 
     }
 }

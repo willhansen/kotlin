@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.fir.declarations.getSealedClassInheritors
 
 internal class KtFirInheritorsProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtInheritorsProvider(), KtFirAnalysisSessionComponent {
     override fun getInheritorsOfSealedClass(
         classSymbol: KtNamedClassOrObjectSymbol
@@ -25,7 +25,7 @@ internal class KtFirInheritorsProvider(
         require(classSymbol.modality == Modality.SEALED)
         require(classSymbol is KtFirNamedClassOrObjectSymbol)
 
-        val inheritorClassIds = classSymbol.firSymbol.fir.getSealedClassInheritors(analysisSession.useSiteSession)
+        konst inheritorClassIds = classSymbol.firSymbol.fir.getSealedClassInheritors(analysisSession.useSiteSession)
 
         return with(analysisSession) {
             inheritorClassIds.mapNotNull { getClassOrObjectSymbolByClassId(it) as? KtNamedClassOrObjectSymbol }

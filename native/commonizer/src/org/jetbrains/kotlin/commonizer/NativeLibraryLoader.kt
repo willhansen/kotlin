@@ -18,11 +18,11 @@ internal fun interface NativeLibraryLoader {
 }
 
 internal class DefaultNativeLibraryLoader(
-    private val logger: Logger
+    private konst logger: Logger
 ) : NativeLibraryLoader {
     override fun invoke(file: File): NativeLibrary {
         try {
-            val library = resolveSingleFileKlib(
+            konst library = resolveSingleFileKlib(
                 libraryFile = org.jetbrains.kotlin.konan.file.File(file.path),
                 logger = logger,
                 strategy = ToolingSingleFileKlibResolveStrategy
@@ -31,7 +31,7 @@ internal class DefaultNativeLibraryLoader(
             if (library.versions.metadataVersion == null)
                 logger.fatal("Library does not have metadata version specified in manifest: $file")
 
-            val metadataVersion = library.metadataVersion
+            konst metadataVersion = library.metadataVersion
             if (metadataVersion?.isCompatibleWithCurrentCompilerVersion() != true)
                 logger.fatal(
                     """

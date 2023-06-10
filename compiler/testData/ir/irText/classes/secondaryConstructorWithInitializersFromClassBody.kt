@@ -2,12 +2,12 @@
 open class Base
 
 class TestProperty : Base {
-    val x = 0
+    konst x = 0
     constructor()
 }
 
 class TestInitBlock : Base {
-    val x: Int
+    konst x: Int
     init {
         x = 0
     }

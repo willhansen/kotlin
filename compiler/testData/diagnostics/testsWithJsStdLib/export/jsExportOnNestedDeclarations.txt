@@ -5,7 +5,7 @@ package foo {
 
     public final class C1 {
         public constructor C1()
-        @kotlin.js.JsExport public final val p: kotlin.Int = 10
+        @kotlin.js.JsExport public final konst p: kotlin.Int = 10
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         @kotlin.js.JsExport public final fun f1(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

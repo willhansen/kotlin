@@ -14,7 +14,7 @@ fun innerComputation(): Int = 42
 fun outerComputation(): Int = 52
 
 fun innerTryCatchInitializes() {
-    val x: Int
+    konst x: Int
 
     try {
         myRun {

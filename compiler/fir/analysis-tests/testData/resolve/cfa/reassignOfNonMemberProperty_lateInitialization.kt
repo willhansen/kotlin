@@ -1,12 +1,12 @@
 // ISSUE: KT-55493
 // WITH_STDLIB
 
-val Some.z: String
+konst Some.z: String
     get() = "ok"
 
 class Some {
-    val x: String
-    val y: String
+    konst x: String
+    konst y: String
 
     init {
         x = "ok"
@@ -20,7 +20,7 @@ class Some {
         }
     }
 
-    val a: String = run {
+    konst a: String = run {
         // these are all on this@run, which is not guaranteed to be this@Some
         <!VAL_REASSIGNMENT!>x<!> = "error"
         <!VAL_REASSIGNMENT!>y<!> = "error"
@@ -28,7 +28,7 @@ class Some {
         "hello"
     }
 
-    val b: String = 123.run {
+    konst b: String = 123.run {
         // now this@run is an Int, so these are on this@Some
         <!VAL_REASSIGNMENT!>x<!> = "error"
         y = "ok"

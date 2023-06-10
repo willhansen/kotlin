@@ -23,25 +23,25 @@ import kotlinx.cinterop.*
 internal fun referenceFunction1(block: (Any?) -> Unit) {}
 
 // Constants
-const val dbl: Double = 3.14
-const val flt: Float = 2.73F
-const val integer: Int = 42
-const val longInt: Long = 1984
+const konst dbl: Double = 3.14
+const konst flt: Float = 2.73F
+const konst integer: Int = 42
+const konst longInt: Long = 1984
 
 // Vars
 var intVar: Int = 451
 var str = "Kotlin String"
 var strAsAny: Any = "Kotlin String as Any"
 
-// MIN/MAX values as Numbers
+// MIN/MAX konstues as Numbers
 var minDoubleVal: kotlin.Number = Double.MIN_VALUE
 var maxDoubleVal: kotlin.Number = Double.MAX_VALUE
 
 // Infinities and NaN
-val nanDoubleVal: Double = Double.NaN
-val nanFloatVal: Float = Float.NaN
-val infDoubleVal: Double = Double.POSITIVE_INFINITY
-val infFloatVal: Float = Float.NEGATIVE_INFINITY
+konst nanDoubleVal: Double = Double.NaN
+konst nanFloatVal: Float = Float.NaN
+konst infDoubleVal: Double = Double.POSITIVE_INFINITY
+konst infFloatVal: Float = Float.NEGATIVE_INFINITY
 
 private fun <T> T.toNullable(): T? = this
 
@@ -75,19 +75,19 @@ fun ensureEqualFloats(actual: Float?, expected: Float) = ensureEquals(actual, ex
 fun ensureEqualDoubles(actual: Double?, expected: Double) = ensureEquals(actual, expected)
 
 // Boolean
-val boolVal: Boolean = true
-val boolAnyVal: Any = false
+konst boolVal: Boolean = true
+konst boolAnyVal: Any = false
 
 // Lists
-val numbersList: List<Number> = listOf(1.toByte(), 2.toShort(), 13)
-val anyList: List<Any> = listOf("Str", 42, 3.14, true)
+konst numbersList: List<Number> = listOf(1.toByte(), 2.toShort(), 13)
+konst anyList: List<Any> = listOf("Str", 42, 3.14, true)
 
 // lateinit
 lateinit var lateinitIntVar: Any
 
 // lazy
-val lazyVal: String by lazy {
-    println("Lazy value initialization")
+konst lazyVal: String by lazy {
+    println("Lazy konstue initialization")
     "Lazily initialized string"
 }
 
@@ -102,17 +102,17 @@ class DelegateClass: ReadWriteProperty<Nothing?, Array<String>> {
         return arrayOf("Delegated", "global", "array") + holder
     }
 
-    override fun setValue(thisRef: Nothing?, property: KProperty<*>, value: Array<String>) {
-        holder = value
+    override fun setValue(thisRef: Nothing?, property: KProperty<*>, konstue: Array<String>) {
+        holder = konstue
     }
 }
 
 // Getter with delegation
-val delegatedList: List<String>
+konst delegatedList: List<String>
     get() = delegatedGlobalArray.toList()
 
 // Null
-val nullVal: Any? = null
+konst nullVal: Any? = null
 var nullVar: String? = ""
 
 // Any
@@ -147,7 +147,7 @@ fun Char.boxChar(): Char? = this
 fun Char?.isA(): Boolean = (this == 'A')
 
 // Lambdas
-val sumLambda = { x: Int, y: Int -> x + y }
+konst sumLambda = { x: Int, y: Int -> x + y }
 
 
 // Inheritance
@@ -180,14 +180,14 @@ open class MultiExtClass : OpenClassI(), PI {
     override fun iFun(): String = super<PI>.iFun()
 }
 
-open class ConstrClass(open val i: Int, val s: String, val a: Any = "AnyS") : OpenClassI()
+open class ConstrClass(open konst i: Int, konst s: String, konst a: Any = "AnyS") : OpenClassI()
 
-class ExtConstrClass(override val i: Int) : ConstrClass(i, "String") {
+class ExtConstrClass(override konst i: Int) : ConstrClass(i, "String") {
     override fun iFun(): String  = "ExtConstrClass::iFun::$i-$s-$a"
 }
 
 // Enum
-enum class Enumeration(val enumValue: Int) {
+enum class Enumeration(konst enumValue: Int) {
     ANSWER(42), YEAR(1984), TEMPERATURE(451)
 }
 
@@ -199,12 +199,12 @@ fun receiveEnum(e: Int) {
     println("ENUM got: ${get(e).enumValue}")
 }
 
-fun get(value: Int): Enumeration {
-    return Enumeration.values()[value]
+fun get(konstue: Int): Enumeration {
+    return Enumeration.konstues()[konstue]
 }
 
-// Data class values and generated properties: component# and toString()
-data class TripleVals<T>(val first: T, val second: T, val third: T)
+// Data class konstues and generated properties: component# and toString()
+data class TripleVals<T>(konst first: T, konst second: T, konst third: T)
 
 data class TripleVars<T>(var first: T, var second: T, var third: T) {
     override fun toString(): String {
@@ -214,7 +214,7 @@ data class TripleVars<T>(var first: T, var second: T, var third: T) {
 
 open class WithCompanionAndObject {
     companion object {
-        val str = "String"
+        konst str = "String"
         var named: I? = Named
     }
 
@@ -230,25 +230,25 @@ fun getNamedObjectInterface(): OpenClassI = WithCompanionAndObject.Named
 typealias EE = Enumeration
 fun EE.getAnswer() : EE  = Enumeration.ANSWER
 
-inline class IC1(val value: Int)
-inline class IC2(val value: String)
-inline class IC3(val value: TripleVals<Any?>?)
+inline class IC1(konst konstue: Int)
+inline class IC2(konst konstue: String)
+inline class IC3(konst konstue: TripleVals<Any?>?)
 
 fun box(ic1: IC1): Any = ic1
 fun box(ic2: IC2): Any = ic2
 fun box(ic3: IC3): Any = ic3
 
 fun concatenateInlineClassValues(ic1: IC1, ic1N: IC1?, ic2: IC2, ic2N: IC2?, ic3: IC3, ic3N: IC3?): String =
-        "${ic1.value} ${ic1N?.value} ${ic2.value} ${ic2N?.value} ${ic3.value} ${ic3N?.value}"
+        "${ic1.konstue} ${ic1N?.konstue} ${ic2.konstue} ${ic2N?.konstue} ${ic3.konstue} ${ic3N?.konstue}"
 
-fun IC1.getValue1() = this.value
-fun IC1?.getValueOrNull1() = this?.value
+fun IC1.getValue1() = this.konstue
+fun IC1?.getValueOrNull1() = this?.konstue
 
-fun IC2.getValue2() = value
-fun IC2?.getValueOrNull2() = this?.value
+fun IC2.getValue2() = konstue
+fun IC2?.getValueOrNull2() = this?.konstue
 
-fun IC3.getValue3() = value
-fun IC3?.getValueOrNull3() = this?.value
+fun IC3.getValue3() = konstue
+fun IC3?.getValueOrNull3() = this?.konstue
 
 fun isFrozen(obj: Any): Boolean = obj.isFrozen
 fun isFreezingEnabled() = Platform.isFreezingEnabled
@@ -363,8 +363,8 @@ fun testSwiftThrowing(test: ThrowsWithBridgeBase, flag: Boolean) {
         if (flag) {
             test.plusOne(0)
         } else {
-            val test1 = test as ThrowsWithBridge
-            val ignore: Int = test1.plusOne(1)
+            konst test1 = test as ThrowsWithBridge
+            konst ignore: Int = test1.plusOne(1)
         }
     }
 }
@@ -372,20 +372,20 @@ fun testSwiftThrowing(test: ThrowsWithBridgeBase, flag: Boolean) {
 @Throws(Throwable::class)
 fun testSwiftNotThrowing(test: ThrowsWithBridgeBase) {
     assertEquals(3, test.plusOne(2))
-    val test1 = test as ThrowsWithBridge
+    konst test1 = test as ThrowsWithBridge
     assertEquals<Int>(4, test1.plusOne(3))
 }
 
 fun Any.same() = this
 
 // https://github.com/JetBrains/kotlin-native/issues/2571
-val PROPERTY_NAME_MUST_NOT_BE_ALTERED_BY_SWIFT = 111
+konst PROPERTY_NAME_MUST_NOT_BE_ALTERED_BY_SWIFT = 111
 
 // https://github.com/JetBrains/kotlin-native/issues/2667
 class Deeply {
     class Nested {
         class Type {
-            val thirtyTwo = 32
+            konst thirtyTwo = 32
         }
 
         interface IType
@@ -395,7 +395,7 @@ class Deeply {
 class WithGenericDeeply() {
     class Nested {
         class Type<T> {
-            val thirtyThree = 33
+            konst thirtyThree = 33
         }
     }
 }
@@ -403,44 +403,44 @@ class WithGenericDeeply() {
 // https://github.com/JetBrains/kotlin-native/issues/3167
 class TypeOuter {
     class Type {
-        val thirtyFour = 34
+        konst thirtyFour = 34
     }
 }
 
-data class CKeywords(val float: Float, val `enum`: Int, var goto: Boolean)
+data class CKeywords(konst float: Float, konst `enum`: Int, var goto: Boolean)
 
 interface Base1 {
-    fun same(value: Int?): Int?
+    fun same(konstue: Int?): Int?
 }
 
 interface ExtendedBase1 : Base1 {
-    override fun same(value: Int?): Int?
+    override fun same(konstue: Int?): Int?
 }
 
 interface Base2 {
-    fun same(value: Int?): Int?
+    fun same(konstue: Int?): Int?
 }
 
 internal interface Base3 {
-    fun same(value: Int?): Int
+    fun same(konstue: Int?): Int
 }
 
 open class Base23 : Base2, Base3 {
-    override fun same(value: Int?): Int = error("should not reach here")
+    override fun same(konstue: Int?): Int = error("should not reach here")
 }
 
-fun call(base1: Base1, value: Int?) = base1.same(value)
-fun call(extendedBase1: ExtendedBase1, value: Int?) = extendedBase1.same(value)
-fun call(base2: Base2, value: Int?) = base2.same(value)
-fun call(base3: Any, value: Int?) = (base3 as Base3).same(value)
-fun call(base23: Base23, value: Int?) = base23.same(value)
+fun call(base1: Base1, konstue: Int?) = base1.same(konstue)
+fun call(extendedBase1: ExtendedBase1, konstue: Int?) = extendedBase1.same(konstue)
+fun call(base2: Base2, konstue: Int?) = base2.same(konstue)
+fun call(base3: Any, konstue: Int?) = (base3 as Base3).same(konstue)
+fun call(base23: Base23, konstue: Int?) = base23.same(konstue)
 
 interface Transform<T, R> {
-    fun map(value: T): R
+    fun map(konstue: T): R
 }
 
 interface TransformWithDefault<T> : Transform<T, T> {
-    override fun map(value: T): T = value
+    override fun map(konstue: T): T = konstue
 }
 
 class TransformInheritingDefault<T> : TransformWithDefault<T>
@@ -464,14 +464,14 @@ private class TransformDecimalStringToInt : Transform<String, Int> {
 fun createTransformDecimalStringToInt(): Transform<String, Int> = TransformDecimalStringToInt()
 
 open class TransformIntToLong : Transform<Int, Long> {
-    override fun map(value: Int): Long = value.toLong()
+    override fun map(konstue: Int): Long = konstue.toLong()
 }
 
 class GH2931 {
     class Data
 
     class Holder {
-        val data = Data()
+        konst data = Data()
 
         init {
             freeze()
@@ -492,15 +492,15 @@ class GH2830 {
 
 class GH2959 {
     interface I {
-        val id: Int
+        konst id: Int
     }
-    private class PrivateImpl(override val id: Int) : I
+    private class PrivateImpl(override konst id: Int) : I
 
     fun getI(id: Int): List<I> = listOf(PrivateImpl(id))
 }
 
 fun runUnitBlock(block: () -> Unit): Boolean {
-    val blockAny: () -> Any? = block
+    konst blockAny: () -> Any? = block
     return blockAny() === Unit
 }
 
@@ -560,26 +560,26 @@ abstract class ForwardC1 {
 interface TestSR10177Workaround
 
 interface TestClashes1 {
-    val clashingProperty: Int
+    konst clashingProperty: Int
 }
 
 interface TestClashes2 {
-    val clashingProperty: Any
-    val clashingProperty_: Any
+    konst clashingProperty: Any
+    konst clashingProperty_: Any
 }
 
 class TestClashesImpl : TestClashes1, TestClashes2 {
-    override val clashingProperty: Int
+    override konst clashingProperty: Int
         get() = 1
 
-    override val clashingProperty_: Int
+    override konst clashingProperty_: Int
         get() = 2
 }
 
-class TestInvalidIdentifiers {
+class TestInkonstidIdentifiers {
     fun `aSdSd`(`S1`: Int, `2`: Int, `3`: Int): Int = `S1` + `2` + `3`
 
-    enum class E(val value: Int) {
+    enum class E(konst konstue: Int) {
         `4S`(4),
         `5S`(5),
         `_`(6),
@@ -587,11 +587,11 @@ class TestInvalidIdentifiers {
     }
 
     companion object `CompanionS` {
-        val `42` = 42
+        konst `42` = 42
     }
 
-    val `__` = '_'
-    val `_` = '_'
+    konst `__` = '_'
+    konst `_` = '_'
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -629,10 +629,10 @@ open class TestDeprecation() {
 
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN) constructor(hidden: Byte) : this()
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN) fun hidden() {}
-    @Deprecated("hidden", level = DeprecationLevel.HIDDEN) val hiddenVal: Any? = null
+    @Deprecated("hidden", level = DeprecationLevel.HIDDEN) konst hiddenVal: Any? = null
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN) var hiddenVar: Any? = null
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN) open fun openHidden() {}
-    @Deprecated("hidden", level = DeprecationLevel.HIDDEN) open val openHiddenVal: Any? = null
+    @Deprecated("hidden", level = DeprecationLevel.HIDDEN) open konst openHiddenVal: Any? = null
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN) open var openHiddenVar: Any? = null
 
     @Deprecated("error", level = DeprecationLevel.ERROR) open class OpenError : TestDeprecation()
@@ -646,10 +646,10 @@ open class TestDeprecation() {
 
     @Deprecated("error", level = DeprecationLevel.ERROR) constructor(error: Short) : this()
     @Deprecated("error", level = DeprecationLevel.ERROR) fun error() {}
-    @Deprecated("error", level = DeprecationLevel.ERROR) val errorVal: Any? = null
+    @Deprecated("error", level = DeprecationLevel.ERROR) konst errorVal: Any? = null
     @Deprecated("error", level = DeprecationLevel.ERROR) var errorVar: Any? = null
     @Deprecated("error", level = DeprecationLevel.ERROR) open fun openError() {}
-    @Deprecated("error", level = DeprecationLevel.ERROR) open val openErrorVal: Any? = null
+    @Deprecated("error", level = DeprecationLevel.ERROR) open konst openErrorVal: Any? = null
     @Deprecated("error", level = DeprecationLevel.ERROR) open var openErrorVar: Any? = null
 
     @Deprecated("warning", level = DeprecationLevel.WARNING) open class OpenWarning : TestDeprecation()
@@ -663,105 +663,105 @@ open class TestDeprecation() {
 
     @Deprecated("warning", level = DeprecationLevel.WARNING) constructor(warning: Int) : this()
     @Deprecated("warning", level = DeprecationLevel.WARNING) fun warning() {}
-    @Deprecated("warning", level = DeprecationLevel.WARNING) val warningVal: Any? = null
+    @Deprecated("warning", level = DeprecationLevel.WARNING) konst warningVal: Any? = null
     @Deprecated("warning", level = DeprecationLevel.WARNING) var warningVar: Any? = null
     @Deprecated("warning", level = DeprecationLevel.WARNING) open fun openWarning() {}
-    @Deprecated("warning", level = DeprecationLevel.WARNING) open val openWarningVal: Any? = null
+    @Deprecated("warning", level = DeprecationLevel.WARNING) open konst openWarningVal: Any? = null
     @Deprecated("warning", level = DeprecationLevel.WARNING) open var openWarningVar: Any? = null
 
     constructor(normal: Long) : this()
     fun normal() {}
-    val normalVal: Any? = null
+    konst normalVal: Any? = null
     var normalVar: Any? = null
     open fun openNormal(): Int = 1
-    open val openNormalVal: Any? = null
+    open konst openNormalVal: Any? = null
     open var openNormalVar: Any? = null
 
     class HiddenOverride() : TestDeprecation() {
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) constructor(hidden: Byte) : this()
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override fun openHidden() {}
-        @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override val openHiddenVal: Any? = null
+        @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override konst openHiddenVal: Any? = null
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override var openHiddenVar: Any? = null
 
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) constructor(error: Short) : this()
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override fun openError() {}
-        @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override val openErrorVal: Any? = null
+        @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override konst openErrorVal: Any? = null
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override var openErrorVar: Any? = null
 
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) constructor(warning: Int) : this()
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override fun openWarning() {}
-        @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override val openWarningVal: Any? = null
+        @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override konst openWarningVal: Any? = null
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override var openWarningVar: Any? = null
 
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) constructor(normal: Long) : this()
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override fun openNormal(): Int = 2
-        @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override val openNormalVal: Any? = null
+        @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override konst openNormalVal: Any? = null
         @Deprecated("hidden", level = DeprecationLevel.HIDDEN) override var openNormalVar: Any? = null
     }
 
     class ErrorOverride() : TestDeprecation() {
         @Deprecated("error", level = DeprecationLevel.ERROR) constructor(hidden: Byte) : this()
         @Deprecated("error", level = DeprecationLevel.ERROR) override fun openHidden() {}
-        @Deprecated("error", level = DeprecationLevel.ERROR) override val openHiddenVal: Any? = null
+        @Deprecated("error", level = DeprecationLevel.ERROR) override konst openHiddenVal: Any? = null
         @Deprecated("error", level = DeprecationLevel.ERROR) override var openHiddenVar: Any? = null
 
         @Deprecated("error", level = DeprecationLevel.ERROR) constructor(error: Short) : this()
         @Deprecated("error", level = DeprecationLevel.ERROR) override fun openError() {}
-        @Deprecated("error", level = DeprecationLevel.ERROR) override val openErrorVal: Any? = null
+        @Deprecated("error", level = DeprecationLevel.ERROR) override konst openErrorVal: Any? = null
         @Deprecated("error", level = DeprecationLevel.ERROR) override var openErrorVar: Any? = null
 
         @Deprecated("error", level = DeprecationLevel.ERROR) constructor(warning: Int) : this()
         @Deprecated("error", level = DeprecationLevel.ERROR) override fun openWarning() {}
-        @Deprecated("error", level = DeprecationLevel.ERROR) override val openWarningVal: Any? = null
+        @Deprecated("error", level = DeprecationLevel.ERROR) override konst openWarningVal: Any? = null
         @Deprecated("error", level = DeprecationLevel.ERROR) override var openWarningVar: Any? = null
 
         @Deprecated("error", level = DeprecationLevel.ERROR) constructor(normal: Long) : this()
         @Deprecated("error", level = DeprecationLevel.ERROR) override fun openNormal(): Int = 3
-        @Deprecated("error", level = DeprecationLevel.ERROR) override val openNormalVal: Any? = null
+        @Deprecated("error", level = DeprecationLevel.ERROR) override konst openNormalVal: Any? = null
         @Deprecated("error", level = DeprecationLevel.ERROR) override var openNormalVar: Any? = null
     }
 
     class WarningOverride() : TestDeprecation() {
         @Deprecated("warning", level = DeprecationLevel.WARNING) constructor(hidden: Byte) : this()
         @Deprecated("warning", level = DeprecationLevel.WARNING) override fun openHidden() {}
-        @Deprecated("warning", level = DeprecationLevel.WARNING) override val openHiddenVal: Any? = null
+        @Deprecated("warning", level = DeprecationLevel.WARNING) override konst openHiddenVal: Any? = null
         @Deprecated("warning", level = DeprecationLevel.WARNING) override var openHiddenVar: Any? = null
 
         @Deprecated("warning", level = DeprecationLevel.WARNING) constructor(error: Short) : this()
         @Deprecated("warning", level = DeprecationLevel.WARNING) override fun openError() {}
-        @Deprecated("warning", level = DeprecationLevel.WARNING) override val openErrorVal: Any? = null
+        @Deprecated("warning", level = DeprecationLevel.WARNING) override konst openErrorVal: Any? = null
         @Deprecated("warning", level = DeprecationLevel.WARNING) override var openErrorVar: Any? = null
 
         @Deprecated("warning", level = DeprecationLevel.WARNING) constructor(warning: Int) : this()
         @Deprecated("warning", level = DeprecationLevel.WARNING) override fun openWarning() {}
-        @Deprecated("warning", level = DeprecationLevel.WARNING) override val openWarningVal: Any? = null
+        @Deprecated("warning", level = DeprecationLevel.WARNING) override konst openWarningVal: Any? = null
         @Deprecated("warning", level = DeprecationLevel.WARNING) override var openWarningVar: Any? = null
 
         @Deprecated("warning", level = DeprecationLevel.WARNING) constructor(normal: Long) : this()
         @Deprecated("warning", level = DeprecationLevel.WARNING) override fun openNormal(): Int = 4
-        @Deprecated("warning", level = DeprecationLevel.WARNING) override val openNormalVal: Any? = null
+        @Deprecated("warning", level = DeprecationLevel.WARNING) override konst openNormalVal: Any? = null
         @Deprecated("warning", level = DeprecationLevel.WARNING) override var openNormalVar: Any? = null
     }
 
     class NormalOverride() : TestDeprecation() {
         constructor(hidden: Byte) : this()
         override fun openHidden() {}
-        override val openHiddenVal: Any? = null
+        override konst openHiddenVal: Any? = null
         override var openHiddenVar: Any? = null
 
         constructor(error: Short) : this()
         override fun openError() {}
-        override val openErrorVal: Any? = null
+        override konst openErrorVal: Any? = null
         override var openErrorVar: Any? = null
 
         constructor(warning: Int) : this()
         override fun openWarning() {}
-        override val openWarningVal: Any? = null
+        override konst openWarningVal: Any? = null
         override var openWarningVar: Any? = null
 
         constructor(normal: Long) : this()
         override fun openNormal(): Int = 5
-        override val openNormalVal: Any? = null
+        override konst openNormalVal: Any? = null
         override var openNormalVar: Any? = null
     }
 
@@ -795,22 +795,22 @@ open class TestDeprecation() {
 }
 
 @Deprecated("hidden", level = DeprecationLevel.HIDDEN) fun hidden() {}
-@Deprecated("hidden", level = DeprecationLevel.HIDDEN) val hiddenVal: Any? = null
+@Deprecated("hidden", level = DeprecationLevel.HIDDEN) konst hiddenVal: Any? = null
 @Deprecated("hidden", level = DeprecationLevel.HIDDEN) var hiddenVar: Any? = null
 
 @Deprecated("error", level = DeprecationLevel.ERROR) fun error() {}
-@Deprecated("error", level = DeprecationLevel.ERROR) val errorVal: Any? = null
+@Deprecated("error", level = DeprecationLevel.ERROR) konst errorVal: Any? = null
 @Deprecated("error", level = DeprecationLevel.ERROR) var errorVar: Any? = null
 
 @Deprecated("warning", level = DeprecationLevel.WARNING) fun warning() {}
-@Deprecated("warning", level = DeprecationLevel.WARNING) val warningVal: Any? = null
+@Deprecated("warning", level = DeprecationLevel.WARNING) konst warningVal: Any? = null
 @Deprecated("warning", level = DeprecationLevel.WARNING) var warningVar: Any? = null
 
 fun gc() {
     kotlin.native.runtime.GC.collect()
 }
 
-class TestWeakRefs(private val frozen: Boolean) {
+class TestWeakRefs(private konst frozen: Boolean) {
     private var obj: Any? = Any().also {
         if (frozen) it.freeze()
     }
@@ -822,8 +822,8 @@ class TestWeakRefs(private val frozen: Boolean) {
     }
 
     fun createCycle(): List<Any> {
-        val node1 = Node(null)
-        val node2 = Node(node1)
+        konst node1 = Node(null)
+        konst node2 = Node(node1)
         node1.next = node2
 
         if (frozen) node1.freeze()
@@ -869,7 +869,7 @@ class SharedRefs {
     private fun <T : Any> create(block: () -> T) = block()
             .also { mustBeRemoved += WeakReference(it) }
 
-    private val mustBeRemoved = mutableListOf<WeakReference<*>>()
+    private konst mustBeRemoved = mutableListOf<WeakReference<*>>()
 }
 
 interface TestRememberNewObject {
@@ -878,16 +878,16 @@ interface TestRememberNewObject {
 }
 
 fun testRememberNewObject(test: TestRememberNewObject) {
-    val obj = autoreleasepool { test.getObject() }
+    konst obj = autoreleasepool { test.getObject() }
     test.waitForCleanup()
     assertNotEquals("", obj.toString()) // Likely crashes if object is removed.
 }
 
 class KT49497Model {
-    private class SelfRef(val self: KT49497Model)
+    private class SelfRef(konst self: KT49497Model)
 
-    // Wrapping `this` to make the strongly connected component non-trival, just in case:
-    private val selfRef = SelfRef(this)
+    // Wrapping `this` to make the strongly connected component non-trikonst, just in case:
+    private konst selfRef = SelfRef(this)
 
     init {
         freeze()
@@ -1020,5 +1020,5 @@ fun callFoo_FakeOverrideInInterface(obj: Bar_FakeOverrideInInterface) {
     obj.foo(null)
 }
 
-val isExperimentalMM: Boolean
+konst isExperimentalMM: Boolean
     get() = kotlin.native.Platform.memoryModel == kotlin.native.MemoryModel.EXPERIMENTAL

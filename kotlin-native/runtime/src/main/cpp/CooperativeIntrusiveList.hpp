@@ -19,7 +19,7 @@ template<typename T, typename Traits = DefaultIntrusiveForwardListTraits<T>>
 class CooperativeIntrusiveList : Pinned {
     using ListImpl = intrusive_forward_list<T, Traits>;
 public:
-    using value_type = typename ListImpl::value_type;
+    using konstue_type = typename ListImpl::konstue_type;
     using size_type = typename ListImpl::size_type;
     using reference = typename ListImpl::reference;
     using pointer = typename ListImpl::pointer;
@@ -35,17 +35,17 @@ public:
     }
 
     /**
-     * Tries to add `value` to the local list.
+     * Tries to add `konstue` to the local list.
      * See `intrusive_forward_list.try_push_front`.
      */
-    bool tryPushLocal(reference value) {
-        auto pushed = local_.try_push_front(value);
+    bool tryPushLocal(reference konstue) {
+        auto pushed = local_.try_push_front(konstue);
         if (pushed) ++localSize_;
         return pushed;
     }
 
     /**
-     * Tries to pop a value from the local list.
+     * Tries to pop a konstue from the local list.
      * See `intrusive_forward_list.try_pop_front`.
      */
     pointer tryPopLocal() {

@@ -25,7 +25,7 @@ inline fun<reified T> foo(): G {
 }
 
 fun box(): String {
-    val y = foo<String>().bar();
+    konst y = foo<String>().bar();
     assertEquals("OK", y.toString())
     assertEquals("test.A<java.lang.String>", y.javaClass.getGenericSuperclass()?.toString())
     return "OK"

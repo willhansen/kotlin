@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.Printer
 
 class SubpackagesImportingScope(
-    override val parent: ImportingScope?,
+    override konst parent: ImportingScope?,
     moduleDescriptor: ModuleDescriptor,
     fqName: FqName
 ) : SubpackagesScope(moduleDescriptor, fqName), ImportingScope by ImportingScope.Empty {

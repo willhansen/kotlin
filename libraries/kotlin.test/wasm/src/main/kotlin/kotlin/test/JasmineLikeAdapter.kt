@@ -46,7 +46,7 @@ internal class JasmineLikeAdapter : FrameworkAdapter {
     private fun callTest(testFn: () -> Any?): JsAny? =
         try {
             (testFn() as? Promise<*>)?.catch { exception ->
-                val jsException = exception
+                konst jsException = exception
                     .toThrowableOrNull()
                     ?.toJsError()
                     ?: exception

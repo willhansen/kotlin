@@ -1,7 +1,7 @@
-val foo = object() {}
+konst foo = object() {}
 
-val foo = object() : Bar {
+konst foo = object() : Bar {
 
 }
 
-val foo = object()
+konst foo = object()

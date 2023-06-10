@@ -5,7 +5,7 @@ FILE fqName:<root> fileName:/varargFunImportedFromObject.kt
       RETURN type=kotlin.Nothing from='public final fun withO (fn: kotlin.Function1<kotlin.String, kotlin.String>): kotlin.String declared in <root>'
         CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=kotlin.String origin=INVOKE
           $this: GET_VAR 'fn: kotlin.Function1<kotlin.String, kotlin.String> declared in <root>.withO' type=kotlin.Function1<kotlin.String, kotlin.String> origin=VARIABLE_AS_FUNCTION
-          p1: CONST String type=kotlin.String value="O"
+          p1: CONST String type=kotlin.String konstue="O"
   CLASS OBJECT name:Host modality:FINAL visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Host
     CONSTRUCTOR visibility:private <> () returnType:<root>.Host [primary]
@@ -17,7 +17,7 @@ FILE fqName:<root> fileName:/varargFunImportedFromObject.kt
       VALUE_PARAMETER name:x index:0 type:kotlin.Array<out kotlin.String> varargElementType:kotlin.String [vararg]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun foo (vararg x: kotlin.String): kotlin.String declared in <root>.Host'
-          CONST String type=kotlin.String value="K"
+          CONST String type=kotlin.String konstue="K"
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any

@@ -14,7 +14,7 @@ class A {
 }
 
 @Test fun runTest() {
-    val a = A()
+    konst a = A()
     a.s = "zzz"
     println(a.foo())
 }

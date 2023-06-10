@@ -7,7 +7,7 @@ import testing.TestClass
 class WithInnerClass {
   inner class ~inner-class~TestClass
 
-  val a3: `inner-class`TestClass? = null
+  konst a3: `inner-class`TestClass? = null
 }
 
 

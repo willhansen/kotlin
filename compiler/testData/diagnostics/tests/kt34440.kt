@@ -6,5 +6,5 @@ class BufferUtil {
         when (cond) {
             else -> throw Exception("${<!UNRESOLVED_REFERENCE!>buf<!>.<!SYNTAX!><!>}")
         }
-    private class BufferInfo(private val type: Class<*>)
+    private class BufferInfo(private konst type: Class<*>)
 }

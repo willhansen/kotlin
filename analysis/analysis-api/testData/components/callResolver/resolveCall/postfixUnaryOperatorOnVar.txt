@@ -13,7 +13,7 @@ KtSuccessCallInfo:
           receiverType = null
           returnType = kotlin.Int
           symbol = kotlin/Int.inc(<dispatch receiver>: kotlin.Int): kotlin.Int
-          valueParameters = []
+          konstueParameters = []
           callableIdIfNonLocal = kotlin/Int.inc
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
       dispatchReceiver = null

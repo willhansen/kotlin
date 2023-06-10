@@ -26,7 +26,7 @@ object KtFirReferenceResolver : ResolveCache.PolyVariantResolver<KtReference> {
         check(ref is KtFirReference) { "reference should be FirKtReference, but was ${ref::class}" }
         check(ref is AbstractKtReference<*>) { "reference should be AbstractKtReference, but was ${ref::class}" }
         return allowAnalysisOnEdt {
-            val resolveToPsiElements = try {
+            konst resolveToPsiElements = try {
                 analyze(ref.expression) { ref.getResolvedToPsi(this) }
             } catch (e: Exception) {
                 if (shouldIjPlatformExceptionBeRethrown(e)) throw e

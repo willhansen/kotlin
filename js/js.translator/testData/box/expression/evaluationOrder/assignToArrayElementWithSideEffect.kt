@@ -12,13 +12,13 @@ fun bar(s: String, index: Int): Int {
     return index
 }
 
-val baz: Int
+konst baz: Int
     get() {
         global += ":baz:"; return 1
     }
 
 fun box(): String {
-    val a = arrayOf(0,1,2,3)
+    konst a = arrayOf(0,1,2,3)
 
 
     global = ""

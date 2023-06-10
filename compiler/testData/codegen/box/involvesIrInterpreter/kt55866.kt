@@ -4,7 +4,7 @@
 @file:JvmName(<!EVALUATED("Tagged")!>TAG<!>)
 package root
 
-private const val TAG = <!EVALUATED("Tagged")!>"Tagged"<!>
+private const konst TAG = <!EVALUATED("Tagged")!>"Tagged"<!>
 
 class ConstParamFiller
 

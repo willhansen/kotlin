@@ -5,7 +5,7 @@ class Foo {
 }
 
 fun box() {
-    val x = Foo()
+    konst x = Foo()
     x.Bar()
 }
 

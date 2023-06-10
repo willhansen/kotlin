@@ -9,7 +9,7 @@ fun foo(b: B) {}
 
 fun bar(a: A) {}
 
-val l0: (A) -> Unit
+konst l0: (A) -> Unit
     get() =
         if (1 < 2) {
             ::foo
@@ -17,7 +17,7 @@ val l0: (A) -> Unit
             ::bar
         }
 
-val l1: (A) -> Unit
+konst l1: (A) -> Unit
     get() = when {
         true -> ::foo
         false -> { ::foo }

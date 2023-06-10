@@ -22,21 +22,21 @@ import java.io.File
 class JsSourceMapPathRewriter(testServices: TestServices) : AbstractJsArtifactsCollector(testServices) {
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
-        val supportedTranslationModes = arrayOf(
+        konst supportedTranslationModes = arrayOf(
             TranslationMode.FULL_DEV,
             TranslationMode.FULL_PROD_MINIMIZED_NAMES,
             TranslationMode.PER_MODULE_DEV,
             TranslationMode.PER_MODULE_PROD_MINIMIZED_NAMES,
         )
-        val testModules = testServices.moduleStructure.modules
-        val allTestFiles = testModules.flatMap { it.files }
+        konst testModules = testServices.moduleStructure.modules
+        konst allTestFiles = testModules.flatMap { it.files }
         for (module in testModules) {
             for (mode in supportedTranslationModes) {
-                val sourceMapFile =
+                konst sourceMapFile =
                     File(JsEnvironmentConfigurator.getJsModuleArtifactPath(testServices, module.name, mode) + ".js.map")
                 if (!sourceMapFile.exists()) continue
 
-                val dependencies = JsEnvironmentConfigurator.getAllRecursiveDependenciesFor(module, testServices)
+                konst dependencies = JsEnvironmentConfigurator.getAllRecursiveDependenciesFor(module, testServices)
                 SourceMap.replaceSources(sourceMapFile) { path ->
                     tryToMapTestFile(allTestFiles, path)
                         ?: tryToMapLibrarySourceFile(dependencies, path)
@@ -47,7 +47,7 @@ class JsSourceMapPathRewriter(testServices: TestServices) : AbstractJsArtifactsC
     }
 
     private fun tryToMapTestFile(allTestFiles: Iterable<TestFile>, sourceMapPath: String): String? {
-        val testFile = allTestFiles.find { it.name == sourceMapPath }
+        konst testFile = allTestFiles.find { it.name == sourceMapPath }
             ?: allTestFiles.find { "/${it.name}" == sourceMapPath }
             ?: return null
         return testFile.originalFile.absolutePath
@@ -59,13 +59,13 @@ class JsSourceMapPathRewriter(testServices: TestServices) : AbstractJsArtifactsC
      */
     private fun tryToMapLibrarySourceFile(dependencies: Iterable<ModuleDescriptor>, sourceMapPath: String): String? {
         for (dependency in dependencies) {
-            val libraryFile = try {
+            konst libraryFile = try {
                 File(testServices.jsLibraryProvider.getPathByDescriptor(dependency))
             } catch (e: NoSuchElementException) {
                 continue
             }
 
-            val sourceRoot: File = libraryFile // libraries/stdlib/{js-ir-minimal-for-test|js-ir}/build/classes/kotlin/js/main
+            konst sourceRoot: File = libraryFile // libraries/stdlib/{js-ir-minimal-for-test|js-ir}/build/classes/kotlin/js/main
                 .parentFile                    // libraries/stdlib/{js-ir-minimal-for-test|js-ir}/build/classes/kotlin/js/
                 ?.parentFile                   // libraries/stdlib/{js-ir-minimal-for-test|js-ir}/build/classes/kotlin/
                 ?.parentFile                   // libraries/stdlib/{js-ir-minimal-for-test|js-ir}/build/classes/
@@ -73,10 +73,10 @@ class JsSourceMapPathRewriter(testServices: TestServices) : AbstractJsArtifactsC
                 ?.parentFile                   // libraries/stdlib/{js-ir-minimal-for-test|js-ir}/
                 ?: continue
 
-            val searchPaths = listOf(sourceRoot, sourceRoot.resolve("build"))
+            konst searchPaths = listOf(sourceRoot, sourceRoot.resolve("build"))
 
             for (searchPath in searchPaths) {
-                val resolved = searchPath.resolve(sourceMapPath)
+                konst resolved = searchPath.resolve(sourceMapPath)
                 if (resolved.exists()) {
                     return resolved.absolutePath
                 }

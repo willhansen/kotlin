@@ -22,11 +22,11 @@ projectTest(parallel = true) {
     systemProperty("kotlin.test.script.classpath", testSourceSet.output.classesDirs.joinToString(File.pathSeparator))
 }
 
-val generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateJava8TestsKt")
-val generateKotlinUseSiteFromJavaOnesForJspecifyTests by generator("org.jetbrains.kotlin.generators.tests.GenerateKotlinUseSitesFromJavaOnesForJspecifyTestsKt")
+konst generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateJava8TestsKt")
+konst generateKotlinUseSiteFromJavaOnesForJspecifyTests by generator("org.jetbrains.kotlin.generators.tests.GenerateKotlinUseSitesFromJavaOnesForJspecifyTestsKt")
 
 task<Exec>("downloadJspecifyTests") {
-    val tmpDirPath = createTempDir().absolutePath
+    konst tmpDirPath = createTempDir().absolutePath
     doFirst {
         executable("git")
         args("clone", "https://github.com/jspecify/jspecify/", tmpDirPath)
@@ -39,7 +39,7 @@ task<Exec>("downloadJspecifyTests") {
     }
 }
 
-val test: Test by tasks
+konst test: Test by tasks
 
 test.apply {
     exclude("**/*JspecifyAnnotationsTestGenerated*")

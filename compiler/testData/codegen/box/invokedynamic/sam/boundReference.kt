@@ -15,14 +15,14 @@ fun runIt(kr: KRunnable) {
     kr.run()
 }
 
-class C(var value: String) {
+class C(var konstue: String) {
     fun fn() {
-        value = "OK"
+        konstue = "OK"
     }
 }
 
 fun box(): String {
-    val c = C("xxx")
+    konst c = C("xxx")
     runIt(c::fn)
-    return c.value
+    return c.konstue
 }

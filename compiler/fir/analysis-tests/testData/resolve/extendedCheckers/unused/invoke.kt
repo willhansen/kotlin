@@ -1,5 +1,5 @@
 fun foo(): Int {
-    val x = fun() = 4
-    val y = fun() = 2
+    konst x = fun() = 4
+    konst y = fun() = 2
     return 10 * x() + y()
 }

@@ -1,6 +1,6 @@
 package
 
-public val x: Outer<kotlin.String?>.Inner<kotlin.String, kotlin.Int>
+public konst x: Outer<kotlin.String?>.Inner<kotlin.String, kotlin.Int>
 
 public final class Outer</*0*/ E : kotlin.Any> {
     public constructor Outer</*0*/ E : kotlin.Any>()

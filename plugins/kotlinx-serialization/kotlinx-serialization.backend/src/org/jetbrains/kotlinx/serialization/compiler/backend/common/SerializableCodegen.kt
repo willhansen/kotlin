@@ -15,10 +15,10 @@ import org.jetbrains.kotlin.types.typeUtil.isUnit
 import org.jetbrains.kotlinx.serialization.compiler.resolve.*
 
 abstract class SerializableCodegen(
-    protected val serializableDescriptor: ClassDescriptor,
+    protected konst serializableDescriptor: ClassDescriptor,
     bindingContext: BindingContext
 ) : AbstractSerialGenerator(bindingContext, serializableDescriptor) {
-    protected val properties = bindingContext.serializablePropertiesFor(serializableDescriptor)
+    protected konst properties = bindingContext.serializablePropertiesFor(serializableDescriptor)
 
     fun generate() {
         generateSyntheticInternalConstructor()
@@ -29,17 +29,17 @@ abstract class SerializableCodegen(
         !isInlineClass() && (isAbstractOrSealedSerializableClass() || functionPresenceChecker() != null)
 
     private fun generateSyntheticInternalConstructor() {
-        val serializerDescriptor = serializableDescriptor.classSerializer ?: return
+        konst serializerDescriptor = serializableDescriptor.classSerializer ?: return
         if (serializableDescriptor.shouldHaveSpecificSyntheticMethods { SerializationDescriptorUtils.getSyntheticLoadMember(serializerDescriptor) }) {
-            val constrDesc = serializableDescriptor.secondaryConstructors.find(ClassConstructorDescriptor::isSerializationCtor) ?: return
+            konst constrDesc = serializableDescriptor.secondaryConstructors.find(ClassConstructorDescriptor::isSerializationCtor) ?: return
             generateInternalConstructor(constrDesc)
         }
     }
 
     private fun generateSyntheticMethods() {
-        val serializerDescriptor = serializableDescriptor.classSerializer ?: return
+        konst serializerDescriptor = serializableDescriptor.classSerializer ?: return
         if (serializableDescriptor.shouldHaveSpecificSyntheticMethods { SerializationDescriptorUtils.getSyntheticSaveMember(serializerDescriptor) }) {
-            val func =
+            konst func =
                 serializableDescriptor.unsubstitutedMemberScope.getContributedFunctions(
                     Name.identifier(SerialEntityNames.WRITE_SELF_NAME.toString()),
                     NoLookupLocation.FROM_BACKEND

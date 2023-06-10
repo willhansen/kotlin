@@ -13,9 +13,9 @@ inline fun baz(crossinline block: Function0<Unit>) {
 
 inline fun <T : Any?> Iterable<T>.myForEach(action: Function1<T, Unit>) {
   { // BLOCK
-    val tmp0_iterator: Iterator<T> = <this>.iterator()
+    konst tmp0_iterator: Iterator<T> = <this>.iterator()
     while (tmp0_iterator.hasNext()) { // BLOCK
-      val element: T = tmp0_iterator.next()
+      konst element: T = tmp0_iterator.next()
       action.invoke(p1 = element)
     }
   }
@@ -81,7 +81,7 @@ fun test2() {
 
 fun test3() {
   L1@ while (true) { // BLOCK
-    val lambda: Function0<Unit> = local fun <anonymous>() {
+    konst lambda: Function0<Unit> = local fun <anonymous>() {
       error("") /* ErrorExpression */
       local fun <no name provided>() {
         error("") /* ErrorExpression */

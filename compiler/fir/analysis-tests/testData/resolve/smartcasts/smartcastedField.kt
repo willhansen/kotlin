@@ -17,8 +17,8 @@ public class Reference extends Property<Object> {
 }
 
 // FILE: main.kt
-private val anyProperty = Property<Any>()
-private val boundedProperty = Property<String>()
+private konst anyProperty = Property<Any>()
+private konst boundedProperty = Property<String>()
 
 fun test_1(x: Property<Any>) {
     if (x is Reference) {

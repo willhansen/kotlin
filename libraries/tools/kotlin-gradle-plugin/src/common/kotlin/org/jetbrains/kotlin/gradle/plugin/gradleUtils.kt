@@ -31,7 +31,7 @@ internal inline fun <reified T : Any> Any.getExtension(name: String): T? =
 internal inline fun <reified T : Any> Any.findExtension(name: String): T? =
     (this as ExtensionAware).extensions.findByName(name)?.let { it as T? }
 
-inline val Any.extraProperties: ExtraPropertiesExtension
+inline konst Any.extraProperties: ExtraPropertiesExtension
     get() = (this as ExtensionAware).extensions.extraProperties
 
 @JvmName("getOrNullTyped")

@@ -2,9 +2,9 @@
 package test
 
 open class BaseClass() {
-    open val shape = { "square" }()
+    open konst shape = { "square" }()
 }
 
 open class Subclass() : BaseClass() {
-    override open val shape = { "circle" }()
+    override open konst shape = { "circle" }()
 }

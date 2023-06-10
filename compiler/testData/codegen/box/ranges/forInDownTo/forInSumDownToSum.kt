@@ -9,7 +9,7 @@ fun test(): Int {
 }
 
 fun box(): String {
-    val t1 = test()
+    konst t1 = test()
     if (t1 != 1) return "Failed: t1=$t1"
 
     return "OK"

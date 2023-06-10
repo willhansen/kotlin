@@ -25,7 +25,7 @@ import kotlin.test.fail
 
 
 abstract class MultiplatformExtensionTest {
-    protected val project: ProjectInternal = ProjectBuilder.builder().build() as ProjectInternal
+    protected konst project: ProjectInternal = ProjectBuilder.builder().build() as ProjectInternal
     protected lateinit var kotlin: KotlinMultiplatformExtension
 
     @BeforeTest
@@ -62,7 +62,7 @@ abstract class MultiplatformExtensionTest {
     }
 
     internal suspend fun expectSharedNativeCompilation(sourceSet: KotlinSourceSet): KotlinSharedNativeCompilation {
-        val compilation = project.findMetadataCompilation(sourceSet) ?: fail("Missing metadata compilation for $sourceSet")
+        konst compilation = project.findMetadataCompilation(sourceSet) ?: fail("Missing metadata compilation for $sourceSet")
         return assertIsInstance<KotlinSharedNativeCompilation>(compilation)
     }
 

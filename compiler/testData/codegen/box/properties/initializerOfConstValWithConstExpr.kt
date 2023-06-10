@@ -1,6 +1,6 @@
 // MODULE: lib
 // FILE: lib.kt
-const val four = 2 + 2
+const konst four = 2 + 2
 
 // MODULE: main(lib)
 // FILE: main.kt

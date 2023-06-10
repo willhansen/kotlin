@@ -27,8 +27,8 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class RangeTo : IntrinsicMethod() {
     private fun rangeTypeToPrimitiveType(rangeType: Type): Type {
-        val fqName = rangeType.internalName
-        val name = fqName.substringAfter("kotlin/ranges/").substringBefore("Range")
+        konst fqName = rangeType.internalName
+        konst name = fqName.substringAfter("kotlin/ranges/").substringBefore("Range")
         return when (name) {
             "Double" -> DOUBLE_TYPE
             "Float" -> FLOAT_TYPE
@@ -42,10 +42,10 @@ class RangeTo : IntrinsicMethod() {
     }
 
     override fun toCallable(method: CallableMethod): Callable {
-        val argType = rangeTypeToPrimitiveType(method.returnType)
+        konst argType = rangeTypeToPrimitiveType(method.returnType)
         return object : IntrinsicCallable(
                 method.returnType,
-                method.valueParameterTypes.map { argType },
+                method.konstueParameterTypes.map { argType },
                 nullOr(method.dispatchReceiverType, argType),
                 nullOr(method.extensionReceiverType, argType)
         ) {

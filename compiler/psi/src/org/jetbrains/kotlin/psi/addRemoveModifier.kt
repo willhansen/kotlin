@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.siblings
 
 private fun KtModifierListOwner.addModifierList(newModifierList: KtModifierList): KtModifierList {
-    val anchor = firstChild!!
+    konst anchor = firstChild!!
         .siblings(forward = true)
         .dropWhile { it is PsiComment || it is PsiWhiteSpace || it is KtContextReceiverList }
         .first()
@@ -26,7 +26,7 @@ private fun createModifierList(text: String, owner: KtModifierListOwner): KtModi
 }
 
 fun KtModifierListOwner.setModifierList(newModifierList: KtModifierList) {
-    val currentModifierList = modifierList
+    konst currentModifierList = modifierList
     if (currentModifierList != null) {
         currentModifierList.replace(newModifierList)
     } else {
@@ -35,16 +35,16 @@ fun KtModifierListOwner.setModifierList(newModifierList: KtModifierList) {
 }
 
 fun addModifier(owner: KtModifierListOwner, modifier: KtModifierKeywordToken) {
-    val modifierList = owner.modifierList
+    konst modifierList = owner.modifierList
     if (modifierList == null) {
-        createModifierList(modifier.value, owner)
+        createModifierList(modifier.konstue, owner)
     } else {
         addModifier(modifierList, modifier)
     }
 }
 
 fun addAnnotationEntry(owner: KtModifierListOwner, annotationEntry: KtAnnotationEntry): KtAnnotationEntry {
-    val modifierList = owner.modifierList
+    konst modifierList = owner.modifierList
     return if (modifierList == null) {
         createModifierList(annotationEntry.text, owner).annotationEntries.first()
     } else {
@@ -55,8 +55,8 @@ fun addAnnotationEntry(owner: KtModifierListOwner, annotationEntry: KtAnnotation
 internal fun addModifier(modifierList: KtModifierList, modifier: KtModifierKeywordToken) {
     if (modifierList.hasModifier(modifier)) return
 
-    val newModifier = KtPsiFactory(modifierList.project).createModifier(modifier)
-    val modifierToReplace = MODIFIERS_TO_REPLACE[modifier]
+    konst newModifier = KtPsiFactory(modifierList.project).createModifier(modifier)
+    konst modifierToReplace = MODIFIERS_TO_REPLACE[modifier]
         ?.mapNotNull { modifierList.getModifier(it) }
         ?.firstOrNull()
 
@@ -73,18 +73,18 @@ internal fun addModifier(modifierList: KtModifierList, modifier: KtModifierKeywo
         modifierToReplace.replace(newModifier)
     } else {
         modifierToReplace?.delete()
-        val newModifierOrder = MODIFIERS_ORDER.indexOf(modifier)
+        konst newModifierOrder = MODIFIERS_ORDER.indexOf(modifier)
 
         fun placeAfter(child: PsiElement): Boolean {
             if (child is PsiWhiteSpace) return false
             if (child is KtAnnotation || child is KtAnnotationEntry) return true // place modifiers after annotations
-            val elementType = child.node!!.elementType
-            val order = MODIFIERS_ORDER.indexOf(elementType)
+            konst elementType = child.node!!.elementType
+            konst order = MODIFIERS_ORDER.indexOf(elementType)
             return newModifierOrder > order
         }
 
-        val lastChild = modifierList.lastChild
-        val anchor = lastChild?.siblings(forward = false)?.firstOrNull(::placeAfter).let {
+        konst lastChild = modifierList.lastChild
+        konst anchor = lastChild?.siblings(forward = false)?.firstOrNull(::placeAfter).let {
             when {
                 it?.nextSibling is PsiWhiteSpace && (it is KtAnnotation || it is KtAnnotationEntry || it is PsiComment) -> it.nextSibling
                 it == null && modifierList.firstChild is PsiWhiteSpace -> modifierList.firstChild
@@ -94,7 +94,7 @@ internal fun addModifier(modifierList: KtModifierList, modifier: KtModifierKeywo
         modifierList.addAfter(newModifier, anchor)
 
         if (anchor == lastChild) { // add line break if needed, otherwise visibility keyword may appear on previous line
-            val whiteSpace = modifierList.nextSibling as? PsiWhiteSpace
+            konst whiteSpace = modifierList.nextSibling as? PsiWhiteSpace
             if (whiteSpace != null && whiteSpace.text.contains('\n')) {
                 modifierList.addAfter(whiteSpace, anchor)
                 whiteSpace.delete()
@@ -111,7 +111,7 @@ fun removeModifier(owner: KtModifierListOwner, modifier: KtModifierKeywordToken)
             return
         }
 
-        val lastChild = it.lastChild
+        konst lastChild = it.lastChild
         if (lastChild is PsiComment) {
             it.addAfter(KtPsiFactory(owner.project).createNewLine(), lastChild)
         }
@@ -120,12 +120,12 @@ fun removeModifier(owner: KtModifierListOwner, modifier: KtModifierKeywordToken)
 
 fun sortModifiers(modifiers: List<KtModifierKeywordToken>): List<KtModifierKeywordToken> {
     return modifiers.sortedBy {
-        val index = MODIFIERS_ORDER.indexOf(it)
+        konst index = MODIFIERS_ORDER.indexOf(it)
         if (index == -1) Int.MAX_VALUE else index
     }
 }
 
-private val MODIFIERS_TO_REPLACE = mapOf(
+private konst MODIFIERS_TO_REPLACE = mapOf(
     OVERRIDE_KEYWORD to listOf(OPEN_KEYWORD),
     ABSTRACT_KEYWORD to listOf(OPEN_KEYWORD, FINAL_KEYWORD),
     OPEN_KEYWORD to listOf(FINAL_KEYWORD, ABSTRACT_KEYWORD),
@@ -140,7 +140,7 @@ private val MODIFIERS_TO_REPLACE = mapOf(
     ACTUAL_KEYWORD to listOf(HEADER_KEYWORD, EXPECT_KEYWORD, IMPL_KEYWORD)
 )
 
-val MODIFIERS_ORDER = listOf(
+konst MODIFIERS_ORDER = listOf(
     PUBLIC_KEYWORD, PROTECTED_KEYWORD, PRIVATE_KEYWORD, INTERNAL_KEYWORD,
     HEADER_KEYWORD, IMPL_KEYWORD, EXPECT_KEYWORD, ACTUAL_KEYWORD,
     FINAL_KEYWORD, OPEN_KEYWORD, ABSTRACT_KEYWORD, SEALED_KEYWORD,

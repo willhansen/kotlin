@@ -37,13 +37,13 @@ class CoroutinesReferenceValuesTest {
 
     @Test
     fun testBadClass() {
-        val bad = suspend() {
+        konst bad = suspend() {
             checkBadClassTwice()
             getBadClassViaSuspend()
         }
         var result: BadClass? = null
         bad.startCoroutine(object : Continuation<BadClass> {
-            override val context: CoroutineContext = EmptyCoroutineContext
+            override konst context: CoroutineContext = EmptyCoroutineContext
 
             @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun resumeWith(result_: Result<BadClass>) {

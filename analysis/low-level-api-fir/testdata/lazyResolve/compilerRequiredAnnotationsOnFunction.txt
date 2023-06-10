@@ -6,7 +6,7 @@ FILE: [ResolvedTo(RAW_FIR)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -20,7 +20,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -34,7 +34,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -48,7 +48,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -62,7 +62,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -90,7 +90,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -104,7 +104,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -118,7 +118,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -132,7 +132,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -147,7 +147,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -162,7 +162,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -177,7 +177,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -192,7 +192,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnFunction.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }

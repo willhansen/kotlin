@@ -22,24 +22,24 @@ import org.jetbrains.kotlin.load.java.structure.JavaPackage
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-class ReflectJavaPackage(override val fqName: FqName) : ReflectJavaElement(), JavaPackage {
+class ReflectJavaPackage(override konst fqName: FqName) : ReflectJavaElement(), JavaPackage {
     override fun getClasses(nameFilter: (Name) -> Boolean): Collection<JavaClass> {
         // A package at runtime can't know what classes it has and has not
         return listOf()
     }
 
-    override val subPackages: Collection<JavaPackage>
+    override konst subPackages: Collection<JavaPackage>
         get() {
             // A package at runtime can't know what sub packages it has and has not
             return listOf()
         }
 
     // TODO: support it if possible
-    override val annotations get() = emptyList<JavaAnnotation>()
+    override konst annotations get() = emptyList<JavaAnnotation>()
 
     override fun findAnnotation(fqName: FqName): JavaAnnotation? = null
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = false
 
     override fun equals(other: Any?) = other is ReflectJavaPackage && fqName == other.fqName

@@ -3,6 +3,6 @@ package foo
 import com.example.exported
 
 fun main() {
-    val exp = exported()
+    konst exp = exported()
     println("foo.main: exp = $exp")
 }

@@ -9,7 +9,7 @@ fun ping(a: String = "A", b: Int = 1): String {
 }
 
 @JsExport
-open class Ping(private val defaultSeed: Int = 3) {
+open class Ping(private konst defaultSeed: Int = 3) {
     private fun calculate(n: Int) = n * n
     fun ping(s: Int = defaultSeed, c: (Int) -> Int = ::calculate): Int {
         return c(s)
@@ -28,7 +28,7 @@ fun bing(a: String = "A", b: Int = 1): String {
 @JsExport
 class Foo {
     @JsName("foo")
-    fun value(value: Long = 5L) = if (value == 5L) "C" else "fail"
+    fun konstue(konstue: Long = 5L) = if (konstue == 5L) "C" else "fail"
 }
 
 @JsExport
@@ -37,33 +37,33 @@ fun transform(i: Int = 10, t: (Int) -> Int = {it * it}): Int {
 }
 
 external interface JsResult {
-    val ping00: String
-    val ping01: String
-    val ping10: String
-    val ping11: String
+    konst ping00: String
+    konst ping01: String
+    konst ping10: String
+    konst ping11: String
 
-    val pong00: String
-    val pong01: String
-    val pong10: String
-    val pong11: String
+    konst pong00: String
+    konst pong01: String
+    konst pong10: String
+    konst pong11: String
 
-    val transform00: Int
-    val transform11: Int
+    konst transform00: Int
+    konst transform11: Int
 
-    val Ping_ping00a: Int
-    val Ping_ping00b: Int
-    val Ping_ping11: Int
+    konst Ping_ping00a: Int
+    konst Ping_ping00b: Int
+    konst Ping_ping11: Int
 
-    val Pong_ping00: Int
+    konst Pong_ping00: Int
 
-    val Foo: String
+    konst Foo: String
 }
 
 @JsModule("./exportedDefaultStub.mjs")
 external fun jsBox(): JsResult
 
 fun box(): String {
-    val res = jsBox()
+    konst res = jsBox()
     if (res.ping00 != "A::1") {
         return "fail0: ${res.ping00}"
     }

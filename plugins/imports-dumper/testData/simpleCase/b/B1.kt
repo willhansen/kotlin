@@ -4,7 +4,7 @@ import a.*
 
 class B1 {
     companion object {
-        val a1: A1 = A1()
-        val a2: A2 = A2()
+        konst a1: A1 = A1()
+        konst a2: A2 = A2()
     }
 }

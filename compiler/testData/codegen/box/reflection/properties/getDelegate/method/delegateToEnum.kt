@@ -10,7 +10,7 @@ enum class E {
 
 operator fun E.getValue(x: Any?, y: Any?): String = name
 
-val s: String by E.OK
+konst s: String by E.OK
 
 fun box(): String {
     assertEquals(E.OK, ::s.apply { isAccessible = true }.getDelegate())

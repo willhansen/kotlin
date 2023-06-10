@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.ir.types.classifierOrFail
 import org.jetbrains.kotlin.ir.util.irCall
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
-internal class DataClassOperatorsLowering(val context: Context) : FileLoweringPass, IrElementTransformer<IrFunction?> {
-    private val irBuiltins = context.irBuiltIns
+internal class DataClassOperatorsLowering(konst context: Context) : FileLoweringPass, IrElementTransformer<IrFunction?> {
+    private konst irBuiltins = context.irBuiltIns
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildren(this, null)
@@ -35,24 +35,24 @@ internal class DataClassOperatorsLowering(val context: Context) : FileLoweringPa
             && expression.symbol != irBuiltins.dataClassArrayMemberHashCodeSymbol)
             return expression
 
-        val argument = expression.getValueArgument(0)!!
-        val argumentClassifier = argument.type.classifierOrFail
+        konst argument = expression.getValueArgument(0)!!
+        konst argumentClassifier = argument.type.classifierOrFail
 
-        val isToString = expression.symbol == irBuiltins.dataClassArrayMemberToStringSymbol
-        val newCalleeSymbol = if (isToString)
+        konst isToString = expression.symbol == irBuiltins.dataClassArrayMemberToStringSymbol
+        konst newCalleeSymbol = if (isToString)
             context.ir.symbols.arrayContentToString[argumentClassifier]!!
         else
             context.ir.symbols.arrayContentHashCode[argumentClassifier]!!
 
-        val newCallee = newCalleeSymbol.owner
+        konst newCallee = newCalleeSymbol.owner
 
-        val startOffset = expression.startOffset
-        val endOffset = expression.endOffset
-        val irBuilder = context.createIrBuilder(data!!.symbol, startOffset, endOffset)
+        konst startOffset = expression.startOffset
+        konst endOffset = expression.endOffset
+        konst irBuilder = context.createIrBuilder(data!!.symbol, startOffset, endOffset)
 
         return irBuilder.run {
             // TODO: use more precise type arguments.
-            val typeArguments = (0 until newCallee.typeParameters.size).map { irBuiltins.anyNType }
+            konst typeArguments = (0 until newCallee.typeParameters.size).map { irBuiltins.anyNType }
 
             irCall(newCallee, typeArguments).apply {
                 extensionReceiver = argument

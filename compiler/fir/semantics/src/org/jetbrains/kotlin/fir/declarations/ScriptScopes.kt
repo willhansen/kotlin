@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.coneType
 
 class TowerElementsForScript(
-    val implicitReceivers: List<ImplicitReceiverValueForScript>,
-    val staticScope: FirScope?,
+    konst implicitReceivers: List<ImplicitReceiverValueForScript>,
+    konst staticScope: FirScope?,
 )
 
 fun SessionHolder.collectTowerDataElementsForScript(owner: FirScript): TowerElementsForScript {
-    val contextReceivers = owner.contextReceivers.mapIndexed { index, receiver ->
+    konst contextReceivers = owner.contextReceivers.mapIndexed { index, receiver ->
         ImplicitReceiverValueForScript(
             owner.symbol, receiver.typeRef.coneType, receiver.labelName, session, scopeSession,
             contextReceiverNumber = index,

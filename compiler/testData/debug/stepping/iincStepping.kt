@@ -19,12 +19,12 @@ fun box() {
 
 // The current backend has strange stepping behavior for assignments.
 // It generates the line number for the assignment first, and then
-// the evaluation of the right hand side with line numbers.
+// the ekonstuation of the right hand side with line numbers.
 // That leads to the line number with the assignment typically
 // not being hit at all as it has no instructions. Also, stepping
-// through the evaluation of the right hand side and then hitting
+// through the ekonstuation of the right hand side and then hitting
 // the line number for the actual assignment makes more sense as
-// that is the actual evaluation order.
+// that is the actual ekonstuation order.
 
 // EXPECTATIONS JVM JVM_IR
 // test.kt:4 box

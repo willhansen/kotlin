@@ -1,4 +1,4 @@
-class Range<T>(val min: T, val max: T)
+class Range<T>(konst min: T, konst max: T)
 
 class Sprite
 
@@ -8,19 +8,19 @@ class A {
                                     minMargin: Int,
                                     range: Range<Int>)
             : Pair<Range<Int>, Int> {
-        val count = sprites.count()
+        konst count = sprites.count()
         var spriteBounds = layoutSize / count.toFloat()
         require(spriteBounds * count <= layoutSize) {
-            val result = spriteBounds * count <= layoutSize
+            konst result = spriteBounds * count <= layoutSize
             "Algorithm incorrect: $spriteBounds * " +
                     "$count == $result <= $layoutSize"
         }
-        val adjustedMargin = minMargin + (minMargin / count.toFloat())
+        konst adjustedMargin = minMargin + (minMargin / count.toFloat())
         spriteBounds -= adjustedMargin
         var size = spriteBounds
         require((size * count) + minMargin * (count + 1)
                         <= layoutSize) {
-            val result = size * count + minMargin * (count + 1)
+            konst result = size * count + minMargin * (count + 1)
             "Algorithm incorrect: $size * $count + " +
                     "$minMargin * ($count + 1) == $result <= $layoutSize"
         }
@@ -28,15 +28,15 @@ class A {
         require(size > 0) {
             "Maximum palantir size ${size.toInt()} > 0."
         }
-        val minSize =
+        konst minSize =
             if (range.min > size) {
                 size
             } else {
                 range.min.toFloat()
             }
-        val margin = (layoutSize - (size * count)) / (count + 1)
-        val adjustedRange = Range(minSize.toInt(), size.toInt())
-        val requiredSize =
+        konst margin = (layoutSize - (size * count)) / (count + 1)
+        konst adjustedRange = Range(minSize.toInt(), size.toInt())
+        konst requiredSize =
             calcRequiredLayoutSize(count, adjustedRange.max, margin.toInt())
         require(requiredSize <= layoutSize) {
             "requiredSize <= layoutSize -> " +

@@ -3,6 +3,6 @@ fun box(): String {
         fun foo() = "OK"
     }
 
-    val ref = Local::foo
+    konst ref = Local::foo
     return ref(Local())
 }

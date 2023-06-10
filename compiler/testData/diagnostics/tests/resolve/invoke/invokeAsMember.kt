@@ -10,7 +10,7 @@ fun test(foo: Foo) {
 
 //variable as member
 interface A {
-    val foo: Foo
+    konst foo: Foo
 }
 
 fun test(a: A) {
@@ -23,7 +23,7 @@ fun test(a: A) {
 
 //variable as extension
 interface B {}
-val B.foo: Foo
+konst B.foo: Foo
     get() = Foo()
 
 
@@ -39,7 +39,7 @@ fun test(b: B) {
 interface C
 
 interface D {
-    val C.foo: Foo
+    konst C.foo: Foo
 
     fun test(c: C) {
         c.foo()

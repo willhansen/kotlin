@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 interface IA {
     fun method(): String
-    val propVal: String
+    konst propVal: String
     var propVar: String
 }
 
@@ -10,7 +10,7 @@ interface IB2 : IA
 
 interface IGA<T> {
     fun method(): T
-    val propVal: T
+    konst propVal: T
     var propVar: T
 }
 

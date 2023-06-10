@@ -32,9 +32,9 @@ abstract class ExpectSymbolTransformer : IrElementTransformerVoid() {
     protected abstract fun getActualClass(descriptor: ClassDescriptor): IrClassSymbol?
 
     protected data class ActualPropertyResult(
-        val propertySymbol: IrPropertySymbol,
-        val getterSymbol: IrSimpleFunctionSymbol?,
-        val setterSymbol: IrSimpleFunctionSymbol?,
+        konst propertySymbol: IrPropertySymbol,
+        konst getterSymbol: IrSimpleFunctionSymbol?,
+        konst setterSymbol: IrSimpleFunctionSymbol?,
     )
 
     protected abstract fun getActualProperty(descriptor: PropertyDescriptor): ActualPropertyResult?
@@ -55,13 +55,13 @@ abstract class ExpectSymbolTransformer : IrElementTransformerVoid() {
     }
 
     override fun visitConstructorCall(expression: IrConstructorCall): IrExpression {
-        val nExpression = super.visitConstructorCall(expression) as IrConstructorCall
+        konst nExpression = super.visitConstructorCall(expression) as IrConstructorCall
         if (!isTargetDeclaration(nExpression.symbol.owner)) return nExpression
 
-        val newCallee = getActualConstructor(nExpression.symbol.descriptor) ?: return nExpression
+        konst newCallee = getActualConstructor(nExpression.symbol.descriptor) ?: return nExpression
         with(nExpression) {
             return IrConstructorCallImpl(
-                startOffset, endOffset, type, newCallee, typeArgumentsCount, constructorTypeArgumentsCount, valueArgumentsCount, origin
+                startOffset, endOffset, type, newCallee, typeArgumentsCount, constructorTypeArgumentsCount, konstueArgumentsCount, origin
             ).also {
                 it.attributeOwnerId = attributeOwnerId
                 it.copyTypeAndValueArgumentsFrom(nExpression)
@@ -70,13 +70,13 @@ abstract class ExpectSymbolTransformer : IrElementTransformerVoid() {
     }
 
     override fun visitDelegatingConstructorCall(expression: IrDelegatingConstructorCall): IrExpression {
-        val nExpression = super.visitDelegatingConstructorCall(expression) as IrDelegatingConstructorCall
+        konst nExpression = super.visitDelegatingConstructorCall(expression) as IrDelegatingConstructorCall
         if (!isTargetDeclaration(nExpression.symbol.owner)) return nExpression
 
-        val newCallee = getActualConstructor(nExpression.symbol.descriptor) ?: return nExpression
+        konst newCallee = getActualConstructor(nExpression.symbol.descriptor) ?: return nExpression
         with(nExpression) {
             return IrDelegatingConstructorCallImpl(
-                startOffset, endOffset, type, newCallee, typeArgumentsCount, valueArgumentsCount
+                startOffset, endOffset, type, newCallee, typeArgumentsCount, konstueArgumentsCount
             ).also {
                 it.attributeOwnerId = attributeOwnerId
                 it.copyTypeAndValueArgumentsFrom(nExpression)
@@ -85,13 +85,13 @@ abstract class ExpectSymbolTransformer : IrElementTransformerVoid() {
     }
 
     override fun visitEnumConstructorCall(expression: IrEnumConstructorCall): IrExpression {
-        val nExpression = super.visitEnumConstructorCall(expression) as IrEnumConstructorCall
+        konst nExpression = super.visitEnumConstructorCall(expression) as IrEnumConstructorCall
         if (!isTargetDeclaration(nExpression.symbol.owner)) return nExpression
 
-        val newCallee = getActualConstructor(nExpression.symbol.descriptor) ?: return nExpression
+        konst newCallee = getActualConstructor(nExpression.symbol.descriptor) ?: return nExpression
         with(nExpression) {
             return IrEnumConstructorCallImpl(
-                startOffset, endOffset, type, newCallee, typeArgumentsCount, valueArgumentsCount
+                startOffset, endOffset, type, newCallee, typeArgumentsCount, konstueArgumentsCount
             ).also {
                 it.attributeOwnerId = attributeOwnerId
                 it.copyTypeAndValueArgumentsFrom(nExpression)
@@ -100,20 +100,20 @@ abstract class ExpectSymbolTransformer : IrElementTransformerVoid() {
     }
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val nExpression = super.visitCall(expression) as IrCall
+        konst nExpression = super.visitCall(expression) as IrCall
         if (!isTargetDeclaration(nExpression.symbol.owner)) return nExpression
 
-        val newCallee = getActualFunction(nExpression.symbol.descriptor) ?: return nExpression
+        konst newCallee = getActualFunction(nExpression.symbol.descriptor) ?: return nExpression
         return irCall(nExpression, newCallee).also {
             it.attributeOwnerId = nExpression.attributeOwnerId
         }
     }
 
     override fun visitPropertyReference(expression: IrPropertyReference): IrExpression {
-        val nExpression = super.visitPropertyReference(expression) as IrPropertyReference
+        konst nExpression = super.visitPropertyReference(expression) as IrPropertyReference
         if (!isTargetDeclaration(nExpression.symbol.owner)) return nExpression
 
-        val (newSymbol, newGetter, newSetter) = getActualProperty(nExpression.symbol.descriptor) ?: return nExpression
+        konst (newSymbol, newGetter, newSetter) = getActualProperty(nExpression.symbol.descriptor) ?: return nExpression
         with(nExpression) {
             return IrPropertyReferenceImpl(
                 startOffset, endOffset, type,
@@ -130,13 +130,13 @@ abstract class ExpectSymbolTransformer : IrElementTransformerVoid() {
     }
 
     override fun visitFunctionReference(expression: IrFunctionReference): IrExpression {
-        val nExpression = super.visitFunctionReference(expression) as IrFunctionReference
+        konst nExpression = super.visitFunctionReference(expression) as IrFunctionReference
         if (!isTargetDeclaration(nExpression.symbol.owner)) return nExpression
 
-        val newCallee = getActualFunction(nExpression.symbol.descriptor) ?: return nExpression
+        konst newCallee = getActualFunction(nExpression.symbol.descriptor) ?: return nExpression
         with(nExpression) {
             return IrFunctionReferenceImpl(
-                startOffset, endOffset, type, newCallee, typeArgumentsCount, valueArgumentsCount, reflectionTarget, origin
+                startOffset, endOffset, type, newCallee, typeArgumentsCount, konstueArgumentsCount, reflectionTarget, origin
             ).also {
                 it.attributeOwnerId = attributeOwnerId
                 it.copyTypeArgumentsFrom(nExpression)
@@ -147,11 +147,11 @@ abstract class ExpectSymbolTransformer : IrElementTransformerVoid() {
     }
 
     override fun visitClassReference(expression: IrClassReference): IrExpression {
-        val nExpression = super.visitClassReference(expression) as IrClassReference
-        val oldSymbol = nExpression.symbol as? IrClassSymbol ?: return nExpression
+        konst nExpression = super.visitClassReference(expression) as IrClassReference
+        konst oldSymbol = nExpression.symbol as? IrClassSymbol ?: return nExpression
         if (!isTargetDeclaration(oldSymbol.owner)) return nExpression
 
-        val newSymbol = getActualClass(oldSymbol.descriptor) ?: return nExpression
+        konst newSymbol = getActualClass(oldSymbol.descriptor) ?: return nExpression
         with(nExpression) {
             return IrClassReferenceImpl(startOffset, endOffset, type, newSymbol, classType)
         }

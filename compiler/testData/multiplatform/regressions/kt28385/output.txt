@@ -15,7 +15,7 @@ compiler/testData/multiplatform/regressions/kt28385/jvm.kt:5:8: error: expecting
 sdax = {
        ^
 compiler/testData/multiplatform/regressions/kt28385/jvm.kt:3:1: error: property must be initialized
-val dasda
+konst dasda
 ^
 compiler/testData/multiplatform/regressions/kt28385/jvm.kt:5:8: error: function declaration must have a name
 sdax = {

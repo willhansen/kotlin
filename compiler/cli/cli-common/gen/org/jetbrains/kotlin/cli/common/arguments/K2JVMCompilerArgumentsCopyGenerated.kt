@@ -82,9 +82,9 @@ fun copyK2JVMCompilerArguments(from: K2JVMCompilerArguments, to: K2JVMCompilerAr
     to.useOldClassFilesReading = from.useOldClassFilesReading
     to.useOldInlineClassesManglingScheme = from.useOldInlineClassesManglingScheme
     to.useTypeTable = from.useTypeTable
-    to.validateBytecode = from.validateBytecode
-    to.validateIr = from.validateIr
-    to.valueClasses = from.valueClasses
+    to.konstidateBytecode = from.konstidateBytecode
+    to.konstidateIr = from.konstidateIr
+    to.konstueClasses = from.konstueClasses
 
     return to
 }

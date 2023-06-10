@@ -1,5 +1,5 @@
 class A
 
-val a: Int by `foo`foo()
+konst a: Int by `foo`foo()
 
 ~foo~fun foo() = A()

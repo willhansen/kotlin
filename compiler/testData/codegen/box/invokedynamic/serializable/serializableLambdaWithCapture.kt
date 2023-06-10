@@ -11,13 +11,13 @@
 import java.io.*
 
 fun box(): String {
-    val k = "K"
+    konst k = "K"
     return roundtrip(Sam { s -> s + k })
         .get("O")
 }
 
 fun <T> roundtrip(x: T): T {
-    val out1 = ByteArrayOutputStream()
+    konst out1 = ByteArrayOutputStream()
     ObjectOutputStream(out1).writeObject(x)
     return ObjectInputStream(ByteArrayInputStream(out1.toByteArray())).readObject() as T
 }

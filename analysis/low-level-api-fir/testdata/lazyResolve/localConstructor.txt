@@ -131,13 +131,13 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
                         super<R|kotlin/Any|>()
                     }
 
-                    public? final? [ResolvedTo(RAW_FIR)] val e: E = magic#()
+                    public? final? [ResolvedTo(RAW_FIR)] konst e: E = magic#()
                         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): E
 
-                    public? final? [ResolvedTo(RAW_FIR)] val f: F = magic#()
+                    public? final? [ResolvedTo(RAW_FIR)] konst f: F = magic#()
                         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): F
 
-                    public? final? [ResolvedTo(RAW_FIR)] val g: G = magic#()
+                    public? final? [ResolvedTo(RAW_FIR)] konst g: G = magic#()
                         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): G
 
                 }
@@ -167,13 +167,13 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
                         super<R|kotlin/Any|>()
                     }
 
-                    public final [ResolvedTo(RAW_FIR)] val e: R|E| = R|/magic|<R|E|>()
+                    public final [ResolvedTo(RAW_FIR)] konst e: R|E| = R|/magic|<R|E|>()
                         public [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): R|E|
 
-                    public final [ResolvedTo(RAW_FIR)] val f: R|F| = R|/magic|<R|F|>()
+                    public final [ResolvedTo(RAW_FIR)] konst f: R|F| = R|/magic|<R|F|>()
                         public [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): R|F|
 
-                    public final [ResolvedTo(RAW_FIR)] val g: R|G| = R|/magic|<R|G|>()
+                    public final [ResolvedTo(RAW_FIR)] konst g: R|G| = R|/magic|<R|G|>()
                         public [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): R|G|
 
                 }
@@ -203,13 +203,13 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
                         super<R|kotlin/Any|>()
                     }
 
-                    public final [ResolvedTo(RAW_FIR)] val e: R|E| = R|/magic|<R|E|>()
+                    public final [ResolvedTo(RAW_FIR)] konst e: R|E| = R|/magic|<R|E|>()
                         public [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): R|E|
 
-                    public final [ResolvedTo(RAW_FIR)] val f: R|F| = R|/magic|<R|F|>()
+                    public final [ResolvedTo(RAW_FIR)] konst f: R|F| = R|/magic|<R|F|>()
                         public [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): R|F|
 
-                    public final [ResolvedTo(RAW_FIR)] val g: R|G| = R|/magic|<R|G|>()
+                    public final [ResolvedTo(RAW_FIR)] konst g: R|G| = R|/magic|<R|G|>()
                         public [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] get(): R|G|
 
                 }
@@ -239,13 +239,13 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
                         super<R|kotlin/Any|>()
                     }
 
-                    public final [ResolvedTo(BODY_RESOLVE)] val e: R|E| = R|/magic|<R|E|>()
+                    public final [ResolvedTo(BODY_RESOLVE)] konst e: R|E| = R|/magic|<R|E|>()
                         public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] get(): R|E|
 
-                    public final [ResolvedTo(BODY_RESOLVE)] val f: R|F| = R|/magic|<R|F|>()
+                    public final [ResolvedTo(BODY_RESOLVE)] konst f: R|F| = R|/magic|<R|F|>()
                         public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] get(): R|F|
 
-                    public final [ResolvedTo(BODY_RESOLVE)] val g: R|G| = R|/magic|<R|G|>()
+                    public final [ResolvedTo(BODY_RESOLVE)] konst g: R|G| = R|/magic|<R|G|>()
                         public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] get(): R|G|
 
                 }
@@ -275,13 +275,13 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
                         super<R|kotlin/Any|>()
                     }
 
-                    public final [ResolvedTo(BODY_RESOLVE)] val e: R|E| = R|/magic|<R|E|>()
+                    public final [ResolvedTo(BODY_RESOLVE)] konst e: R|E| = R|/magic|<R|E|>()
                         public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] get(): R|E|
 
-                    public final [ResolvedTo(BODY_RESOLVE)] val f: R|F| = R|/magic|<R|F|>()
+                    public final [ResolvedTo(BODY_RESOLVE)] konst f: R|F| = R|/magic|<R|F|>()
                         public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] get(): R|F|
 
-                    public final [ResolvedTo(BODY_RESOLVE)] val g: R|G| = R|/magic|<R|G|>()
+                    public final [ResolvedTo(BODY_RESOLVE)] konst g: R|G| = R|/magic|<R|G|>()
                         public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] get(): R|G|
 
                 }

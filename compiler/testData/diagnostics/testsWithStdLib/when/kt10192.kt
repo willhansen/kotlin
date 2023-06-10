@@ -11,7 +11,7 @@ fun test1() {
 }
 
 fun test2() {
-    val mlist = arrayListOf("")
+    konst mlist = arrayListOf("")
     if (true) {
         <!NO_ELSE_IN_WHEN!>when<!> (true) {
             true -> println()

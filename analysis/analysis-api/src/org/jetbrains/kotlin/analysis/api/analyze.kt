@@ -53,7 +53,7 @@ public inline fun <R> analyze(
     nonDefaultLifetimeTokenFactory: KtLifetimeTokenFactory? = null,
     crossinline action: KtAnalysisSession.() -> R
 ): R {
-    val sessionProvider = KtAnalysisSessionProvider.getInstance(useSiteKtModule.project)
+    konst sessionProvider = KtAnalysisSessionProvider.getInstance(useSiteKtModule.project)
     return sessionProvider.analyze(useSiteKtModule, nonDefaultLifetimeTokenFactory, action)
 }
 
@@ -101,7 +101,7 @@ public inline fun <R> analyzeInModalWindow(
     crossinline action: KtAnalysisSession.() -> R
 ): R {
     ApplicationManager.getApplication().assertIsDispatchThread()
-    val task = object : Task.WithResult<R, Exception>(contextElement.project, windowTitle, /*canBeCancelled*/ true) {
+    konst task = object : Task.WithResult<R, Exception>(contextElement.project, windowTitle, /*canBeCancelled*/ true) {
         override fun compute(indicator: ProgressIndicator): R =
             analyzeWithReadAction(contextElement, nonDefaultLifetimeTokenFactory) { action() }
     }

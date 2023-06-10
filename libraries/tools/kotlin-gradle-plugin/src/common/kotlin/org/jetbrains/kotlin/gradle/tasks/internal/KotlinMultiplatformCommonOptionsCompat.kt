@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 
 @Suppress("DEPRECATION")
 class KotlinMultiplatformCommonOptionsCompat(
-    private val task: () -> KotlinCompileCommon,
-    override val options: KotlinMultiplatformCommonCompilerOptions
+    private konst task: () -> KotlinCompileCommon,
+    override konst options: KotlinMultiplatformCommonCompilerOptions
 ) : KotlinMultiplatformCommonOptions {
 
     override var freeCompilerArgs: List<String>
         get() {
-            val executionTimeFreeCompilerArgs = task().executionTimeFreeCompilerArgs
+            konst executionTimeFreeCompilerArgs = task().executionTimeFreeCompilerArgs
             return if (isTaskExecuting && executionTimeFreeCompilerArgs != null) {
                 executionTimeFreeCompilerArgs
             } else {
@@ -24,13 +24,13 @@ class KotlinMultiplatformCommonOptionsCompat(
             }
         }
 
-        set(value) = if (isTaskExecuting) {
-            task().nagUserFreeArgsModifiedOnExecution(value)
-            task().executionTimeFreeCompilerArgs = value
+        set(konstue) = if (isTaskExecuting) {
+            task().nagUserFreeArgsModifiedOnExecution(konstue)
+            task().executionTimeFreeCompilerArgs = konstue
         } else {
-            options.freeCompilerArgs.set(value)
+            options.freeCompilerArgs.set(konstue)
         }
 
-    private val isTaskExecuting: Boolean
+    private konst isTaskExecuting: Boolean
         get() = task().state.executing
 }

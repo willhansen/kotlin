@@ -24,14 +24,14 @@ import java.io.File.pathSeparator
 import java.io.File.separator
 
 class Kotlin2JvmTask : KotlinCompilerBaseTask() {
-    override val compilerFqName = "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
+    override konst compilerFqName = "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
 
     var includeRuntime: Boolean = false
     var moduleName: String? = null
 
     var noReflect: Boolean = false
 
-    private val cmdl = CommandlineJava()
+    private konst cmdl = CommandlineJava()
     var fork: Boolean = false
 
     private var compileClasspath: Path? = null
@@ -89,13 +89,13 @@ class Kotlin2JvmTask : KotlinCompilerBaseTask() {
     }
 
     private fun exec() {
-        val javaHome = System.getProperty("java.home")
-        val javaBin = javaHome + separator + "bin" + separator + "java"
-        val redirector = Redirector(this)
+        konst javaHome = System.getProperty("java.home")
+        konst javaBin = javaHome + separator + "bin" + separator + "java"
+        konst redirector = Redirector(this)
 
         fillArguments()
 
-        val command = ArrayList<String>()
+        konst command = ArrayList<String>()
         command.add(javaBin)
         command.addAll(cmdl.vmCommand.arguments) // jvm args
         command.add("-Dorg.jetbrains.kotlin.cliMessageRenderer=FullPath") // same MessageRenderer as non-forking mode
@@ -107,12 +107,12 @@ class Kotlin2JvmTask : KotlinCompilerBaseTask() {
         // streamHandler: used to handle the input and output streams of the subprocess.
         // watchdog: a watchdog for the subprocess or <code>null</code> to disable a timeout for the subprocess.
         // TODO: support timeout for the subprocess
-        val exe = Execute(redirector.createHandler(), null)
+        konst exe = Execute(redirector.createHandler(), null)
         exe.setAntRun(getProject())
         exe.commandline = command.toTypedArray()
         log("Executing command: ${command.joinToString(" ")}", LogLevel.DEBUG.level)
         log("Compiling ${src!!.list().toList()} => [${output!!.canonicalPath}]")
-        val exitCode = exe.execute()
+        konst exitCode = exe.execute()
         redirector.complete()
         if (failOnError && exitCode != 0) {
             throw BuildException("Compile failed; see the compiler error output for details.")

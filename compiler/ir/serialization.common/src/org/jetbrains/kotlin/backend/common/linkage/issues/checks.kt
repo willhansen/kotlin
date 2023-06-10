@@ -18,14 +18,14 @@ fun KotlinIrLinker.checkNoUnboundSymbols(symbolTable: SymbolTable, whenDetected:
 
 // N.B. Always checks for absence of unbound symbols. The condition whether this check should be applied is controlled outside.
 fun IrMessageLogger.checkNoUnboundSymbols(symbolTable: SymbolTable, whenDetected: String) {
-    val unboundSymbols = symbolTable.allUnbound
+    konst unboundSymbols = symbolTable.allUnbound
     if (unboundSymbols.isNotEmpty())
         UnexpectedUnboundIrSymbols(unboundSymbols, whenDetected).raiseIssue(this)
 }
 
 // N.B. Always checks for absence of unbound symbols. The condition whether this check should be applied is controlled outside.
 fun CompilerConfiguration.checkNoUnboundSymbols(symbolTable: SymbolTable, whenDetected: String) {
-    val unboundSymbols = symbolTable.allUnbound
+    konst unboundSymbols = symbolTable.allUnbound
     if (unboundSymbols.isNotEmpty())
         UnexpectedUnboundIrSymbols(unboundSymbols, whenDetected).raiseIssue(irMessageLogger)
 }

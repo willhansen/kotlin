@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
-class A(vararg val t : Int) {
+class A(vararg konst t : Int) {
     init {
-        val t1 : IntArray = t
+        konst t1 : IntArray = t
     }
 }

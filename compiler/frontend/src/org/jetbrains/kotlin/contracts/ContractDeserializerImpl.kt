@@ -33,8 +33,8 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 class ContractDeserializerImpl(
-    private val configuration: DeserializationConfiguration,
-    private val storageManager: StorageManager
+    private konst configuration: DeserializationConfiguration,
+    private konst storageManager: StorageManager
 ) : ContractDeserializer {
     override fun deserializeContractFromFunction(
         proto: ProtoBuf.Function,
@@ -46,39 +46,39 @@ class ContractDeserializerImpl(
 
         if (!configuration.readDeserializedContracts) return null
 
-        val worker = ContractDeserializationWorker(typeTable, typeDeserializer, ownerFunction, storageManager)
-        val contract = worker.deserializeContract(proto.contract) ?: return null
+        konst worker = ContractDeserializationWorker(typeTable, typeDeserializer, ownerFunction, storageManager)
+        konst contract = worker.deserializeContract(proto.contract) ?: return null
         return ContractProviderKey to ContractProviderImpl(contract)
     }
 
     private class ContractDeserializationWorker(
-        private val typeTable: TypeTable,
-        private val typeDeserializer: TypeDeserializer,
-        private val ownerFunction: FunctionDescriptor,
-        private val storageManager: StorageManager
+        private konst typeTable: TypeTable,
+        private konst typeDeserializer: TypeDeserializer,
+        private konst ownerFunction: FunctionDescriptor,
+        private konst storageManager: StorageManager
     ) {
 
         fun deserializeContract(proto: ProtoBuf.Contract): ContractDescription? {
-            val effects = proto.effectList.map { deserializePossiblyConditionalEffect(it) ?: return null }
+            konst effects = proto.effectList.map { deserializePossiblyConditionalEffect(it) ?: return null }
             return ContractDescription(effects, ownerFunction, storageManager)
         }
 
         private fun deserializePossiblyConditionalEffect(proto: ProtoBuf.Effect): EffectDeclaration? {
             if (proto.hasConclusionOfConditionalEffect()) {
                 // conditional effect
-                val conclusion = deserializeExpression(proto.conclusionOfConditionalEffect) ?: return null
-                val effect = deserializeSimpleEffect(proto) ?: return null
+                konst conclusion = deserializeExpression(proto.conclusionOfConditionalEffect) ?: return null
+                konst effect = deserializeSimpleEffect(proto) ?: return null
                 return ConditionalEffectDeclaration(effect, conclusion)
             }
             return deserializeSimpleEffect(proto)
         }
 
         private fun deserializeSimpleEffect(proto: ProtoBuf.Effect): EffectDeclaration? {
-            val type = if (proto.hasEffectType()) proto.effectType else return null
+            konst type = if (proto.hasEffectType()) proto.effectType else return null
             return when (type!!) {
                 ProtoBuf.Effect.EffectType.RETURNS_CONSTANT -> {
-                    val argument = proto.effectConstructorArgumentList.getOrNull(0)
-                    val returnValue =
+                    konst argument = proto.effectConstructorArgumentList.getOrNull(0)
+                    konst returnValue =
                         if (argument == null) ConstantReference.WILDCARD else deserializeExpression(argument) as? ConstantReference
                             ?: return null
                     ReturnsEffectDeclaration(returnValue)
@@ -89,9 +89,9 @@ class ContractDeserializerImpl(
                 }
 
                 ProtoBuf.Effect.EffectType.CALLS -> {
-                    val argument = proto.effectConstructorArgumentList.getOrNull(0) ?: return null
-                    val callable = extractVariable(argument) ?: return null
-                    val invocationKind = if (proto.hasKind())
+                    konst argument = proto.effectConstructorArgumentList.getOrNull(0) ?: return null
+                    konst callable = extractVariable(argument) ?: return null
+                    konst invocationKind = if (proto.hasKind())
                         proto.kind.toDescriptorInvocationKind() ?: return null
                     else
                         EventOccurrencesRange.UNKNOWN
@@ -101,11 +101,11 @@ class ContractDeserializerImpl(
         }
 
         private fun deserializeExpression(proto: ProtoBuf.Expression): BooleanExpression? {
-            val primitiveType = getPrimitiveType(proto)
-            val primitiveExpression = extractPrimitiveExpression(proto, primitiveType)
+            konst primitiveType = getPrimitiveType(proto)
+            konst primitiveExpression = extractPrimitiveExpression(proto, primitiveType)
 
-            val complexType = getComplexType(proto)
-            val childs: MutableList<BooleanExpression> = mutableListOf()
+            konst complexType = getComplexType(proto)
+            konst childs: MutableList<BooleanExpression> = mutableListOf()
             childs.addIfNotNull(primitiveExpression)
 
             return when (complexType) {
@@ -124,7 +124,7 @@ class ContractDeserializerImpl(
         }
 
         private fun extractPrimitiveExpression(proto: ProtoBuf.Expression, primitiveType: PrimitiveExpressionType?): BooleanExpression? {
-            val isInverted = Flags.IS_NEGATED.get(proto.flags)
+            konst isInverted = Flags.IS_NEGATED.get(proto.flags)
 
             return when (primitiveType) {
                 PrimitiveExpressionType.VALUE_PARAMETER_REFERENCE, PrimitiveExpressionType.RECEIVER_REFERENCE -> {
@@ -135,13 +135,13 @@ class ContractDeserializerImpl(
                     (deserializeConstant(proto.constantValue) as? BooleanConstantReference)?.invertIfNecessary(isInverted)
 
                 PrimitiveExpressionType.INSTANCE_CHECK -> {
-                    val variable = extractVariable(proto) ?: return null
-                    val type = extractType(proto) ?: return null
+                    konst variable = extractVariable(proto) ?: return null
+                    konst type = extractType(proto) ?: return null
                     IsInstancePredicate(variable, type, isInverted)
                 }
 
                 PrimitiveExpressionType.NULLABILITY_CHECK -> {
-                    val variable = extractVariable(proto) ?: return null
+                    konst variable = extractVariable(proto) ?: return null
                     IsNullPredicate(variable, isInverted)
                 }
 
@@ -154,10 +154,10 @@ class ContractDeserializerImpl(
         private fun extractVariable(proto: ProtoBuf.Expression): VariableReference? {
             if (!proto.hasValueParameterReference()) return null
 
-            val parameterDescriptor = if (proto.valueParameterReference == 0)
+            konst parameterDescriptor = if (proto.konstueParameterReference == 0)
                 ownerFunction.extensionReceiverParameter ?: return null
             else
-                ownerFunction.valueParameters.getOrNull(proto.valueParameterReference - 1) ?: return null
+                ownerFunction.konstueParameters.getOrNull(proto.konstueParameterReference - 1) ?: return null
 
             return if (!KotlinBuiltIns.isBoolean(parameterDescriptor.type))
                 VariableReference(parameterDescriptor)
@@ -175,15 +175,15 @@ class ContractDeserializerImpl(
             return typeDeserializer.type(proto.isInstanceType(typeTable) ?: return null)
         }
 
-        private fun deserializeConstant(value: ProtoBuf.Expression.ConstantValue): ConstantReference? = when (value) {
+        private fun deserializeConstant(konstue: ProtoBuf.Expression.ConstantValue): ConstantReference? = when (konstue) {
             ProtoBuf.Expression.ConstantValue.TRUE -> BooleanConstantReference.TRUE
             ProtoBuf.Expression.ConstantValue.FALSE -> BooleanConstantReference.FALSE
             ProtoBuf.Expression.ConstantValue.NULL -> ConstantReference.NULL
         }
 
         private fun getComplexType(proto: ProtoBuf.Expression): ComplexExpressionType? {
-            val isOrSequence = proto.orArgumentCount != 0
-            val isAndSequence = proto.andArgumentCount != 0
+            konst isOrSequence = proto.orArgumentCount != 0
+            konst isAndSequence = proto.andArgumentCount != 0
             return when {
                 isOrSequence && isAndSequence -> null
                 isOrSequence -> ComplexExpressionType.OR_SEQUENCE
@@ -193,8 +193,8 @@ class ContractDeserializerImpl(
         }
 
         private fun getPrimitiveType(proto: ProtoBuf.Expression): PrimitiveExpressionType? {
-            // Expected to be one element, but can be empty (unknown expression) or contain several elements (invalid data)
-            val expressionTypes: MutableList<PrimitiveExpressionType> = mutableListOf()
+            // Expected to be one element, but can be empty (unknown expression) or contain several elements (inkonstid data)
+            konst expressionTypes: MutableList<PrimitiveExpressionType> = mutableListOf()
 
             // Check for predicates
             when {
@@ -205,18 +205,18 @@ class ContractDeserializerImpl(
                     expressionTypes.add(PrimitiveExpressionType.NULLABILITY_CHECK)
             }
 
-            // If message contains correct predicate, then predicate's type overrides type of value,
+            // If message contains correct predicate, then predicate's type overrides type of konstue,
             // even is message has one
             if (expressionTypes.isNotEmpty()) {
                 return expressionTypes.singleOrNull()
             }
 
-            // Otherwise, check if it is a value
+            // Otherwise, check if it is a konstue
             when {
-                proto.hasValueParameterReference() && proto.valueParameterReference > 0 ->
+                proto.hasValueParameterReference() && proto.konstueParameterReference > 0 ->
                     expressionTypes.add(PrimitiveExpressionType.VALUE_PARAMETER_REFERENCE)
 
-                proto.hasValueParameterReference() && proto.valueParameterReference == 0 ->
+                proto.hasValueParameterReference() && proto.konstueParameterReference == 0 ->
                     expressionTypes.add(PrimitiveExpressionType.RECEIVER_REFERENCE)
 
                 proto.hasConstantValue() -> expressionTypes.add(PrimitiveExpressionType.CONSTANT)

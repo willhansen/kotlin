@@ -6,6 +6,6 @@ class C {
 }
 
 fun test(c: C) {
-    val (a, b) = c
-    val d = 1
+    konst (a, b) = c
+    konst d = 1
 }

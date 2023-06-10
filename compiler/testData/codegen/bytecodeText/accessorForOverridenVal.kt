@@ -1,16 +1,16 @@
 package b
 
 abstract class B {
-    open val propWithFinal: Int
+    open konst propWithFinal: Int
         get() = 1
 
-    open val propWithNonFinal: Int
+    open konst propWithNonFinal: Int
         get() = 2
 }
 
 abstract class Base: B() {
-    override final val propWithFinal: Int = 3
-    override val propWithNonFinal: Int = 4
+    override final konst propWithFinal: Int = 3
+    override konst propWithNonFinal: Int = 4
 
     fun fooFinal() = this.propWithFinal
     fun fooNonFinal() = this.propWithNonFinal

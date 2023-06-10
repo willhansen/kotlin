@@ -37,7 +37,7 @@ KtFile: BinaryHeap.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('data')
         PsiWhiteSpace(' ')
@@ -60,7 +60,7 @@ KtFile: BinaryHeap.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('compare')
         PsiWhiteSpace(' ')
@@ -89,7 +89,7 @@ KtFile: BinaryHeap.kt
       PsiWhiteSpace('\n')
       PsiComment(EOL_COMMENT)('//')
       PsiWhiteSpace('\n')
-      PsiComment(EOL_COMMENT)('//    for (val i in data.size / 2 .. 0) {')
+      PsiComment(EOL_COMMENT)('//    for (konst i in data.size / 2 .. 0) {')
       PsiWhiteSpace('\n')
       PsiComment(EOL_COMMENT)('//      siftDown(i)')
       PsiWhiteSpace('\n')
@@ -350,7 +350,7 @@ KtFile: BinaryHeap.kt
                             PsiElement(IDENTIFIER)('left')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                       PsiWhiteSpace(' ')
                       OPERATION_REFERENCE
                         PsiElement(LT)('<')
@@ -360,7 +360,7 @@ KtFile: BinaryHeap.kt
                           PsiElement(IDENTIFIER)('min')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                   PsiElement(RPAR)(')')
                   PsiWhiteSpace(' ')
                   THEN
@@ -413,7 +413,7 @@ KtFile: BinaryHeap.kt
                               PsiElement(IDENTIFIER)('right')
                           PsiElement(DOT)('.')
                           REFERENCE_EXPRESSION
-                            PsiElement(IDENTIFIER)('value')
+                            PsiElement(IDENTIFIER)('konstue')
                         PsiWhiteSpace(' ')
                         OPERATION_REFERENCE
                           PsiElement(LT)('<')
@@ -423,7 +423,7 @@ KtFile: BinaryHeap.kt
                             PsiElement(IDENTIFIER)('min')
                           PsiElement(DOT)('.')
                           REFERENCE_EXPRESSION
-                            PsiElement(IDENTIFIER)('value')
+                            PsiElement(IDENTIFIER)('konstue')
                   PsiElement(RPAR)(')')
                   PsiWhiteSpace(' ')
                   THEN
@@ -584,7 +584,7 @@ KtFile: BinaryHeap.kt
                           PsiElement(IDENTIFIER)('current')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                       PsiWhiteSpace(' ')
                       OPERATION_REFERENCE
                         PsiElement(LT)('<')
@@ -598,7 +598,7 @@ KtFile: BinaryHeap.kt
                             PsiElement(IDENTIFIER)('parent')
                         PsiElement(DOT)('.')
                         REFERENCE_EXPRESSION
-                          PsiElement(IDENTIFIER)('value')
+                          PsiElement(IDENTIFIER)('konstue')
                   PsiElement(RPAR)(')')
                   PsiWhiteSpace(' ')
                   THEN
@@ -649,7 +649,7 @@ KtFile: BinaryHeap.kt
           PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
           USER_TYPE
@@ -694,7 +694,7 @@ KtFile: BinaryHeap.kt
               PsiElement(INTEGER_LITERAL)('2')
       PsiWhiteSpace('\n\n\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
           USER_TYPE
@@ -736,7 +736,7 @@ KtFile: BinaryHeap.kt
               PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n\n\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
           USER_TYPE
@@ -778,14 +778,14 @@ KtFile: BinaryHeap.kt
               PsiElement(INTEGER_LITERAL)('2')
       PsiWhiteSpace('\n\n\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
           USER_TYPE
             REFERENCE_EXPRESSION
               PsiElement(IDENTIFIER)('Int')
         PsiElement(DOT)('.')
-        PsiElement(IDENTIFIER)('value')
+        PsiElement(IDENTIFIER)('konstue')
         PsiWhiteSpace(' ')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
@@ -848,7 +848,7 @@ KtFile: BinaryHeap.kt
             PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
           USER_TYPE
@@ -1007,7 +1007,7 @@ KtFile: BinaryHeap.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('t')
         PsiWhiteSpace(' ')
@@ -1067,7 +1067,7 @@ KtFile: BinaryHeap.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE

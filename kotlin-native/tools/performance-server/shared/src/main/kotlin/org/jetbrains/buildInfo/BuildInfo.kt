@@ -9,18 +9,18 @@ import org.jetbrains.report.*
 import org.jetbrains.report.json.*
 
 @JsExport
-data class Build(val buildNumber: String, val startTime: String, val finishTime: String, val branch: String,
-                 val commits: String, val failuresNumber: Int) {
+data class Build(konst buildNumber: String, konst startTime: String, konst finishTime: String, konst branch: String,
+                 konst commits: String, konst failuresNumber: Int) {
 
     companion object : EntityFromJsonFactory<Build> {
         override fun create(data: JsonElement): Build {
             if (data is JsonObject) {
-                val buildNumber = elementToString(data.getRequiredField("buildNumber"), "buildNumber").replace("\"", "")
-                val startTime = elementToString(data.getRequiredField("startTime"), "startTime").replace("\"", "")
-                val finishTime = elementToString(data.getRequiredField("finishTime"), "finishTime").replace("\"", "")
-                val branch = elementToString(data.getRequiredField("branch"), "branch").replace("\"", "")
-                val commits = elementToString(data.getRequiredField("commits"), "commits")
-                val failuresNumber = elementToInt(data.getRequiredField("failuresNumber"), "failuresNumber")
+                konst buildNumber = elementToString(data.getRequiredField("buildNumber"), "buildNumber").replace("\"", "")
+                konst startTime = elementToString(data.getRequiredField("startTime"), "startTime").replace("\"", "")
+                konst finishTime = elementToString(data.getRequiredField("finishTime"), "finishTime").replace("\"", "")
+                konst branch = elementToString(data.getRequiredField("branch"), "branch").replace("\"", "")
+                konst commits = elementToString(data.getRequiredField("commits"), "commits")
+                konst failuresNumber = elementToInt(data.getRequiredField("failuresNumber"), "failuresNumber")
                 return Build(buildNumber, startTime, finishTime, branch, commits, failuresNumber)
             } else {
                 error("Top level entity is expected to be an object. Please, check origin files.")
@@ -29,10 +29,10 @@ data class Build(val buildNumber: String, val startTime: String, val finishTime:
     }
 
     private fun formatTime(time: String, targetZone: Int = 3): String {
-        val matchResult = "^\\d{8}T(\\d{2})(\\d{2})\\d{2}((\\+|-)\\d{2})".toRegex().find(time)?.groupValues
+        konst matchResult = "^\\d{8}T(\\d{2})(\\d{2})\\d{2}((\\+|-)\\d{2})".toRegex().find(time)?.groupValues
         matchResult?.let {
-            val timeZone = matchResult[3].toInt()
-            val timeDifference = targetZone - timeZone
+            konst timeZone = matchResult[3].toInt()
+            konst timeDifference = targetZone - timeZone
             var hours = (matchResult[1].toInt() + timeDifference)
             if (hours > 23) {
                 hours -= 24
@@ -41,15 +41,15 @@ data class Build(val buildNumber: String, val startTime: String, val finishTime:
         } ?: error { "Wrong format of time $startTime" }
     }
 
-    val date: String by lazy {
-        val matchResult = "^(\\d{4})(\\d{2})(\\d{2})".toRegex().find(startTime)?.groupValues
+    konst date: String by lazy {
+        konst matchResult = "^(\\d{4})(\\d{2})(\\d{2})".toRegex().find(startTime)?.groupValues
         matchResult?.let { "${matchResult[3]}/${matchResult[2]}/${matchResult[1]}" }
                 ?: error { "Wrong format of time $startTime" }
     }
-    val formattedStartTime: String by lazy {
+    konst formattedStartTime: String by lazy {
         formatTime(startTime)
     }
-    val formattedFinishTime: String by lazy {
+    konst formattedFinishTime: String by lazy {
         formatTime(finishTime)
     }
 }

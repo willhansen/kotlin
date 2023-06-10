@@ -2,7 +2,7 @@
 // WITH_STDLIB
 
 object Entities {
-    val map: Map<String, Int> = hashMapOf(
+    konst map: Map<String, Int> = hashMapOf(
         "&Aacute;" to 193,
         "&Aacute" to 193,
         "&aacute;" to 225,

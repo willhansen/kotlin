@@ -14,7 +14,7 @@ fun test_1(a: Any) {
 }
 
 open class TypeToken<T>
-val test_2 = object : TypeToken<<!WRONG_ANNOTATION_TARGET!>@Ann<!> String>() {}
+konst test_2 = object : TypeToken<<!WRONG_ANNOTATION_TARGET!>@Ann<!> String>() {}
 
 fun test_3(a: Any) {
     a as <!WRONG_ANNOTATION_TARGET!>@Ann<!> Int

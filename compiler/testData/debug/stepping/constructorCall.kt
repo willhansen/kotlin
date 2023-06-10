@@ -1,6 +1,6 @@
 // FILE: test.kt
 
-class A(val x: Int)
+class A(konst x: Int)
 
 fun box() {
     A(1)

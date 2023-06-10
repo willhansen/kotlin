@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirFunctionTypeParameterImpl(
-    override val source: KtSourceElement?,
-    override val name: Name?,
+    override konst source: KtSourceElement?,
+    override konst name: Name?,
     override var returnTypeRef: FirTypeRef,
 ) : FirFunctionTypeParameter() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

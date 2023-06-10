@@ -12,16 +12,16 @@ import org.jetbrains.kotlin.diagnostics.KtPsiDiagnostic
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 
-internal class DiagnosticsCollector(private val fileStructureCache: FileStructureCache) {
+internal class DiagnosticsCollector(private konst fileStructureCache: FileStructureCache) {
     fun getDiagnosticsFor(element: KtElement, filter: DiagnosticCheckerFilter): List<KtPsiDiagnostic> {
-        val fileStructure = fileStructureCache.getFileStructure(element.containingKtFile)
-        val structureElement = fileStructure.getStructureElementFor(element)
-        val diagnostics = structureElement.diagnostics
+        konst fileStructure = fileStructureCache.getFileStructure(element.containingKtFile)
+        konst structureElement = fileStructure.getStructureElementFor(element)
+        konst diagnostics = structureElement.diagnostics
         return diagnostics.diagnosticsFor(filter, element)
     }
 
     fun collectDiagnosticsForFile(ktFile: KtFile, filter: DiagnosticCheckerFilter): Collection<KtPsiDiagnostic> {
-        val fileStructure = fileStructureCache.getFileStructure(ktFile)
+        konst fileStructure = fileStructureCache.getFileStructure(ktFile)
         return fileStructure.getAllDiagnosticsForFile(filter)
     }
 }

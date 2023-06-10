@@ -44,18 +44,18 @@ import org.jetbrains.kotlin.resolve.scopes.optimization.OptimizingOptions
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 class JvmPlatformParameters(
-    val packagePartProviderFactory: (ModuleContent<*>) -> PackagePartProvider,
-    val moduleByJavaClass: (JavaClass) -> ModuleInfo?,
+    konst packagePartProviderFactory: (ModuleContent<*>) -> PackagePartProvider,
+    konst moduleByJavaClass: (JavaClass) -> ModuleInfo?,
     // params: referenced module info of target class, context module info of current resolver
-    val resolverForReferencedModule: ((ModuleInfo, ModuleInfo) -> ResolverForModule?)? = null,
-    val useBuiltinsProviderForModule: (ModuleInfo) -> Boolean
+    konst resolverForReferencedModule: ((ModuleInfo, ModuleInfo) -> ResolverForModule?)? = null,
+    konst useBuiltinsProviderForModule: (ModuleInfo) -> Boolean
 ) : PlatformAnalysisParameters
 
 
 class JvmResolverForModuleFactory(
-    private val platformParameters: JvmPlatformParameters,
-    private val targetEnvironment: TargetEnvironment,
-    private val platform: TargetPlatform
+    private konst platformParameters: JvmPlatformParameters,
+    private konst targetEnvironment: TargetEnvironment,
+    private konst platform: TargetPlatform
 ) : ResolverForModuleFactory() {
     override fun <M : ModuleInfo> createResolverForModule(
         moduleDescriptor: ModuleDescriptorImpl,
@@ -67,17 +67,17 @@ class JvmResolverForModuleFactory(
         resolveOptimizingOptions: OptimizingOptions?,
         absentDescriptorHandlerClass: Class<out AbsentDescriptorHandler>?
     ): ResolverForModule {
-        val (moduleInfo, syntheticFiles, moduleContentScope) = moduleContent
-        val project = moduleContext.project
-        val declarationProviderFactory = DeclarationProviderFactoryService.createDeclarationProviderFactory(
+        konst (moduleInfo, syntheticFiles, moduleContentScope) = moduleContent
+        konst project = moduleContext.project
+        konst declarationProviderFactory = DeclarationProviderFactoryService.createDeclarationProviderFactory(
             project, moduleContext.storageManager, syntheticFiles,
             moduleContentScope,
             moduleInfo
         )
 
-        val moduleClassResolver = ModuleClassResolverImpl { javaClass ->
-            val referencedClassModule = platformParameters.moduleByJavaClass(javaClass)
-            // A type in a java library can reference a class declared in a source root (is valid but rare case).
+        konst moduleClassResolver = ModuleClassResolverImpl { javaClass ->
+            konst referencedClassModule = platformParameters.moduleByJavaClass(javaClass)
+            // A type in a java library can reference a class declared in a source root (is konstid but rare case).
             // Resolving such a class with Kotlin resolver for libraries is guaranteed to fail, as libraries can't
             // have dependencies on the source roots. The chain of resolvers (sources -> libraries -> sdk) exists to prevent
             // potentially slow repetitive analysis of the same libraries after modifications in sources. The only way to mitigate
@@ -85,7 +85,7 @@ class JvmResolverForModuleFactory(
             // See also KT-24309
 
             @Suppress("UNCHECKED_CAST")
-            val resolverForReferencedModule = referencedClassModule?.let { referencedModuleInfo ->
+            konst resolverForReferencedModule = referencedClassModule?.let { referencedModuleInfo ->
                 if (platformParameters.resolverForReferencedModule != null) {
                     platformParameters.resolverForReferencedModule.invoke(referencedModuleInfo, moduleInfo)
                 } else {
@@ -93,7 +93,7 @@ class JvmResolverForModuleFactory(
                 }
             }
 
-            val resolverForModule = resolverForReferencedModule?.takeIf {
+            konst resolverForModule = resolverForReferencedModule?.takeIf {
                 referencedClassModule.platform.isJvm()
             } ?: run {
                 // in case referenced class lies outside of our resolver, resolve the class as if it is inside our module
@@ -103,11 +103,11 @@ class JvmResolverForModuleFactory(
             resolverForModule.componentProvider.get<JavaDescriptorResolver>()
         }
 
-        val trace = CodeAnalyzerInitializer.getInstance(project).createTrace()
+        konst trace = CodeAnalyzerInitializer.getInstance(project).createTrace()
 
-        val lookupTracker = LookupTracker.DO_NOTHING
-        val packagePartProvider = platformParameters.packagePartProviderFactory(moduleContent)
-        val container = createContainerForLazyResolveWithJava(
+        konst lookupTracker = LookupTracker.DO_NOTHING
+        konst packagePartProvider = platformParameters.packagePartProviderFactory(moduleContent)
+        konst container = createContainerForLazyResolveWithJava(
             moduleDescriptor.platform!!,
             moduleContext,
             trace,
@@ -127,7 +127,7 @@ class JvmResolverForModuleFactory(
             absentDescriptorHandlerClass = absentDescriptorHandlerClass
         )
 
-        val providersForModule = arrayListOf(
+        konst providersForModule = arrayListOf(
             container.get<ResolveSession>().packageFragmentProvider,
             container.get<JavaDescriptorResolver>().packageFragmentProvider,
         )

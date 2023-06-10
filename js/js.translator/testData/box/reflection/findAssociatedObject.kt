@@ -6,17 +6,17 @@ import kotlin.reflect.*
 @OptIn(ExperimentalAssociatedObjects::class)
 @AssociatedObjectKey
 @Retention(AnnotationRetention.BINARY)
-annotation class Associated1(val kClass: KClass<*>)
+annotation class Associated1(konst kClass: KClass<*>)
 
 @OptIn(ExperimentalAssociatedObjects::class)
 @AssociatedObjectKey
 @Retention(AnnotationRetention.BINARY)
-annotation class Associated2(val kClass: KClass<*>)
+annotation class Associated2(konst kClass: KClass<*>)
 
 @OptIn(ExperimentalAssociatedObjects::class)
 @AssociatedObjectKey
 @Retention(AnnotationRetention.BINARY)
-annotation class Associated3(val kClass: KClass<*>)
+annotation class Associated3(konst kClass: KClass<*>)
 
 @Associated1(Bar::class)
 @Associated2(Baz::class)
@@ -76,17 +76,17 @@ fun box(): String {
 
     if (Bar::class.findAssociatedObject<Associated1>() != null) return "fail 4"
 
-    val i1 = I1ImplHolder::class.findAssociatedObject<Associated1>() as I1
+    konst i1 = I1ImplHolder::class.findAssociatedObject<Associated1>() as I1
     if (i1.foo() != 42) return "fail 5"
 
-    val c = C(null)
+    konst c = C(null)
     i1.bar(c)
     if (c.list!![0] != "zzz") return "fail 6"
 
-    val i2 = I2ImplHolder()::class.findAssociatedObject<Associated1>() as I2
+    konst i2 = I2ImplHolder()::class.findAssociatedObject<Associated1>() as I2
     if (i2.foo() != 17) return "fail 7"
 
-    val a = A::class.findAssociatedObject<Associated2>() as I2
+    konst a = A::class.findAssociatedObject<Associated2>() as I2
     if (a.foo() != 20) return "fail 8"
 
     if (Foo::class.getAssociatedObjectByAssociated2() != Baz) return "fail 9"

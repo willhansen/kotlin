@@ -168,7 +168,7 @@ KtFile: ArrayList.kt
                 MODIFIER_LIST
                   PsiElement(private)('private')
                 PsiWhiteSpace(' ')
-                PsiElement(val)('val')
+                PsiElement(konst)('konst')
                 PsiWhiteSpace(' ')
                 PsiElement(IDENTIFIER)('index')
                 PsiWhiteSpace(' ')
@@ -292,7 +292,7 @@ KtFile: ArrayList.kt
                 MODIFIER_LIST
                   PsiElement(override)('override')
                 PsiWhiteSpace(' ')
-                PsiElement(val)('val')
+                PsiElement(konst)('konst')
                 PsiWhiteSpace(' ')
                 PsiElement(IDENTIFIER)('hasNext')
                 PsiWhiteSpace('\n      ')
@@ -335,7 +335,7 @@ KtFile: ArrayList.kt
                       PsiElement(RPAR)(')')
                   PsiWhiteSpace('\n      ')
                   PROPERTY
-                    PsiElement(val)('val')
+                    PsiElement(konst)('konst')
                     PsiWhiteSpace(' ')
                     PsiElement(IDENTIFIER)('result')
                     PsiWhiteSpace(' ')
@@ -487,7 +487,7 @@ KtFile: ArrayList.kt
         MODIFIER_LIST
           PsiElement(override)('override')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('isEmpty')
         PsiWhiteSpace('\n    ')
@@ -512,7 +512,7 @@ KtFile: ArrayList.kt
         MODIFIER_LIST
           PsiElement(override)('override')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('size')
         PsiWhiteSpace('\n    ')
@@ -547,7 +547,7 @@ KtFile: ArrayList.kt
           PsiElement(COMMA)(',')
           PsiWhiteSpace(' ')
           VALUE_PARAMETER
-            PsiElement(IDENTIFIER)('value')
+            PsiElement(IDENTIFIER)('konstue')
             PsiWhiteSpace(' ')
             PsiElement(COLON)(':')
             PsiWhiteSpace(' ')
@@ -600,7 +600,7 @@ KtFile: ArrayList.kt
               PsiElement(EQ)('=')
             PsiWhiteSpace(' ')
             REFERENCE_EXPRESSION
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
           PsiWhiteSpace('\n    ')
           REFERENCE_EXPRESSION
             PsiElement(IDENTIFIER)('result')
@@ -628,7 +628,7 @@ KtFile: ArrayList.kt
           PsiElement(COMMA)(',')
           PsiWhiteSpace(' ')
           VALUE_PARAMETER
-            PsiElement(IDENTIFIER)('value')
+            PsiElement(IDENTIFIER)('konstue')
             PsiWhiteSpace(' ')
             PsiElement(COLON)(':')
             PsiWhiteSpace(' ')
@@ -695,7 +695,7 @@ KtFile: ArrayList.kt
                     PsiElement(EQ)('=')
                   PsiWhiteSpace(' ')
                   REFERENCE_EXPRESSION
-                    PsiElement(IDENTIFIER)('value')
+                    PsiElement(IDENTIFIER)('konstue')
                 PsiWhiteSpace('\n    ')
                 PsiElement(RBRACE)('}')
             PsiWhiteSpace(' ')
@@ -792,7 +792,7 @@ KtFile: ArrayList.kt
                         PsiElement(EQ)('=')
                       PsiWhiteSpace(' ')
                       REFERENCE_EXPRESSION
-                        PsiElement(IDENTIFIER)('value')
+                        PsiElement(IDENTIFIER)('konstue')
                     PsiWhiteSpace('\n      ')
                     POSTFIX_EXPRESSION
                       REFERENCE_EXPRESSION

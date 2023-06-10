@@ -15,34 +15,34 @@ import java.io.File
 
 object SectionsJsonMapGenerator {
 
-    val sectionsMapsByTestArea: MutableMap<TestArea, JsonObject> = mutableMapOf()
+    konst sectionsMapsByTestArea: MutableMap<TestArea, JsonObject> = mutableMapOf()
 
     fun writeSectionsMapJsons() {
-        val gson = GsonBuilder().setPrettyPrinting().create()
+        konst gson = GsonBuilder().setPrettyPrinting().create()
         sectionsMapsByTestArea.forEach { (testArea, json) ->
-            val sectionsMapFolder = "$SPEC_TESTDATA_PATH/${testArea.testDataPath}/$LINKED_TESTS_PATH"
+            konst sectionsMapFolder = "$SPEC_TESTDATA_PATH/${testArea.testDataPath}/$LINKED_TESTS_PATH"
             File(sectionsMapFolder).mkdirs()
-            val sectionsMapFile = File("$sectionsMapFolder/$SECTIONS_TESTS_MAP_FILENAME")
+            konst sectionsMapFile = File("$sectionsMapFolder/$SECTIONS_TESTS_MAP_FILENAME")
             sectionsMapFile.createNewFile()
             sectionsMapFile.writeText(gson.toJson(json))
         }
     }
 
     fun buildSectionsMap(testsMapPath: String) {
-        val sectionInfo = SectionInfo.parsePath(testsMapPath)
-        val testArea = sectionInfo.testArea
-        val testAreaSectionsMap = sectionsMapsByTestArea[testArea] ?: JsonObject()
+        konst sectionInfo = SectionInfo.parsePath(testsMapPath)
+        konst testArea = sectionInfo.testArea
+        konst testAreaSectionsMap = sectionsMapsByTestArea[testArea] ?: JsonObject()
         addPathToTestAreaSectionsMap(testAreaSectionsMap, sectionInfo)
         sectionsMapsByTestArea[testArea] = testAreaSectionsMap
     }
 
     private fun addPathToTestAreaSectionsMap(testAreaSectionsMap: JsonObject, sectionInfo: SectionInfo) {
         if (!testAreaSectionsMap.has(sectionInfo.mainSection)) {
-            val subsectionsPathArray = JsonArray()
+            konst subsectionsPathArray = JsonArray()
             subsectionsPathArray.add(sectionInfo.subsectionsPath)
             testAreaSectionsMap.add(sectionInfo.mainSection, subsectionsPathArray)
         } else {
-            val subsectionsPathArray = testAreaSectionsMap.get(sectionInfo.mainSection) as? JsonArray
+            konst subsectionsPathArray = testAreaSectionsMap.get(sectionInfo.mainSection) as? JsonArray
                 ?: throw Exception("json element doesn't exist")
             subsectionsPathArray.add(sectionInfo.subsectionsPath)
             testAreaSectionsMap.add(sectionInfo.mainSection, subsectionsPathArray)
@@ -50,21 +50,21 @@ object SectionsJsonMapGenerator {
     }
 
     private class SectionInfo(
-        val testArea: TestArea,
-        val mainSection: String,
-        val subsectionsPath: String
+        konst testArea: TestArea,
+        konst mainSection: String,
+        konst subsectionsPath: String
     ) {
         companion object {
             private fun identifyTestArea(path: String): TestArea {
-                TestArea.values().forEach {
+                TestArea.konstues().forEach {
                     if (path.startsWith(it.testDataPath)) return it
                 }
                 throw IllegalArgumentException("testsMap path doesn't contain test area path")
             }
 
             fun parsePath(path: String): SectionInfo {
-                val testArea = identifyTestArea(path)
-                val fullSectionsPathList = path.subSequence(testArea.testDataPath.length + 1, path.length).toString().split("/")
+                konst testArea = identifyTestArea(path)
+                konst fullSectionsPathList = path.subSequence(testArea.testDataPath.length + 1, path.length).toString().split("/")
                 if (fullSectionsPathList.first() != LINKED_TESTS_PATH)
                     throw IllegalArgumentException("testsMap path doesn't contain linked directory")
                 return SectionInfo(

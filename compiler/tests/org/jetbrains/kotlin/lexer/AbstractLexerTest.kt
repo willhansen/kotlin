@@ -12,10 +12,10 @@ import junit.framework.TestCase
 import org.jetbrains.kotlin.test.testFramework.KtUsefulTestCase
 import java.io.File
 
-abstract class AbstractLexerTest(private val lexer: Lexer) : TestCase() {
+abstract class AbstractLexerTest(private konst lexer: Lexer) : TestCase() {
     protected fun doTest(fileName: String) {
-        val text = File(fileName).readText()
-        val lexerResult = printTokens(StringUtil.convertLineSeparators(text), 0, lexer)
+        konst text = File(fileName).readText()
+        konst lexerResult = printTokens(StringUtil.convertLineSeparators(text), 0, lexer)
 
         KtUsefulTestCase.assertSameLinesWithFile(fileName.replaceAfterLast(".", "txt"), lexerResult)
     }
@@ -25,7 +25,7 @@ abstract class AbstractLexerTest(private val lexer: Lexer) : TestCase() {
 
         return buildString {
             while (true) {
-                val tokenType = lexer.tokenType ?: break
+                konst tokenType = lexer.tokenType ?: break
                 append("$tokenType ('${getTokenText(lexer)}')\n")
                 lexer.advance()
             }
@@ -33,12 +33,12 @@ abstract class AbstractLexerTest(private val lexer: Lexer) : TestCase() {
     }
 
     private fun getTokenText(lexer: Lexer): String {
-        val tokenType = lexer.tokenType
+        konst tokenType = lexer.tokenType
 
         if (tokenType is TokenWrapper)
-            return tokenType.value
+            return tokenType.konstue
 
-        val result = lexer.bufferSequence.subSequence(lexer.tokenStart, lexer.tokenEnd).toString()
+        konst result = lexer.bufferSequence.subSequence(lexer.tokenStart, lexer.tokenEnd).toString()
 
         return StringUtil.replace(result, "\n", "\\n")
     }

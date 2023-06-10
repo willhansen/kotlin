@@ -3,9 +3,9 @@
 // FILE: 1.kt
 package test
 
-public class Data(val value: Int)
+public class Data(konst konstue: Int)
 
-public class Input(val d: Data)  {
+public class Input(konst d: Data)  {
     public fun data() : Int = 100
 }
 
@@ -18,11 +18,11 @@ public inline fun <R> use(block: ()-> R) : R {
 import test.*
 
 fun test1(d: Data): Int {
-    val input = Input(d)
+    konst input = Input(d)
     var result = 10
     with(input) {
         fun localFun() {
-            result = input.d.value
+            result = input.d.konstue
         }
         localFun()
     }
@@ -31,7 +31,7 @@ fun test1(d: Data): Int {
 
 
 fun box(): String {
-    val result = test1(Data(11))
+    konst result = test1(Data(11))
     if (result != 11) return "test1: ${result}"
 
     return "OK"

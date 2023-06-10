@@ -42,10 +42,10 @@ object NativeObjCRefinementOverridesChecker : DeclarationChecker {
         if (descriptor.overriddenDescriptors.isEmpty()) return
         var isHiddenFromObjC = objCAnnotations.isNotEmpty()
         var isRefinedInSwift = swiftAnnotations.isNotEmpty()
-        val supersNotHiddenFromObjC = mutableListOf<CallableMemberDescriptor>()
-        val supersNotRefinedInSwift = mutableListOf<CallableMemberDescriptor>()
+        konst supersNotHiddenFromObjC = mutableListOf<CallableMemberDescriptor>()
+        konst supersNotRefinedInSwift = mutableListOf<CallableMemberDescriptor>()
         for (overriddenDescriptor in descriptor.overriddenDescriptors) {
-            val (superIsHiddenFromObjC, superIsRefinedInSwift) = overriddenDescriptor.inheritsRefinedAnnotations()
+            konst (superIsHiddenFromObjC, superIsRefinedInSwift) = overriddenDescriptor.inheritsRefinedAnnotations()
             if (superIsHiddenFromObjC) isHiddenFromObjC = true else supersNotHiddenFromObjC.add(overriddenDescriptor)
             if (superIsRefinedInSwift) isRefinedInSwift = true else supersNotRefinedInSwift.add(overriddenDescriptor)
         }
@@ -58,11 +58,11 @@ object NativeObjCRefinementOverridesChecker : DeclarationChecker {
     }
 
     private fun CallableMemberDescriptor.inheritsRefinedAnnotations(): Pair<Boolean, Boolean> {
-        val (hasObjC, hasSwift) = hasRefinedAnnotations()
+        konst (hasObjC, hasSwift) = hasRefinedAnnotations()
         if (hasObjC && hasSwift) return true to true
         if (overriddenDescriptors.isEmpty()) return hasObjC to hasSwift
         // Note: `checkOverrides` requires all overridden descriptors to be either refined or not refined.
-        val (inheritsObjC, inheritsSwift) = overriddenDescriptors.first().inheritsRefinedAnnotations()
+        konst (inheritsObjC, inheritsSwift) = overriddenDescriptors.first().inheritsRefinedAnnotations()
         return (hasObjC || inheritsObjC) to (hasSwift || inheritsSwift)
     }
 
@@ -70,7 +70,7 @@ object NativeObjCRefinementOverridesChecker : DeclarationChecker {
         var hasObjC = false
         var hasSwift = false
         for (annotation in annotations) {
-            val annotations = annotation.annotationClass?.annotations ?: continue
+            konst annotations = annotation.annotationClass?.annotations ?: continue
             for (metaAnnotation in annotations) {
                 when (metaAnnotation.fqName) {
                     hidesFromObjCFqName -> {
@@ -95,12 +95,12 @@ object NativeObjCRefinementOverridesChecker : DeclarationChecker {
         annotations: List<AnnotationDescriptor>,
         notRefinedSupers: List<CallableMemberDescriptor>
     ) {
-        val containingDeclarations = notRefinedSupers.map { it.containingDeclaration }
+        konst containingDeclarations = notRefinedSupers.map { it.containingDeclaration }
         if (annotations.isEmpty()) {
             report(ErrorsNative.INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE.on(declaration, descriptor, containingDeclarations))
         } else {
             annotations.forEach {
-                val reportLocation = DescriptorToSourceUtils.getSourceFromAnnotation(it) ?: declaration
+                konst reportLocation = DescriptorToSourceUtils.getSourceFromAnnotation(it) ?: declaration
                 report(ErrorsNative.INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE.on(reportLocation, descriptor, containingDeclarations))
             }
         }

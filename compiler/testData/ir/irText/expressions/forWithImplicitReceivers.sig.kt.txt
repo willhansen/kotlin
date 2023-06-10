@@ -3,25 +3,25 @@
 //   Public signature: /IntCell|null[0]
 class IntCell {
   // CHECK:
-  //   Mangled name: IntCell{}value
-  //   Public signature: /IntCell.value|1987073854177347439[0]
-  var value: Int
+  //   Mangled name: IntCell{}konstue
+  //   Public signature: /IntCell.konstue|1987073854177347439[0]
+  var konstue: Int
     // CHECK JVM_IR:
-    //   Mangled name: IntCell#<get-value>(){}kotlin.Int
-    //   Public signature: /IntCell.value.<get-value>|-5900028706170996[0]
+    //   Mangled name: IntCell#<get-konstue>(){}kotlin.Int
+    //   Public signature: /IntCell.konstue.<get-konstue>|-5900028706170996[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: IntCell#<get-value>(){}
-    //   Public signature: /IntCell.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: IntCell#<get-konstue>(){}
+    //   Public signature: /IntCell.konstue.<get-konstue>|3260093555963109437[0]
     get
     // CHECK:
-    //   Mangled name: IntCell#<set-value>(kotlin.Int){}
-    //   Public signature: /IntCell.value.<set-value>|-195057410739577239[0]
+    //   Mangled name: IntCell#<set-konstue>(kotlin.Int){}
+    //   Public signature: /IntCell.konstue.<set-konstue>|-195057410739577239[0]
     set
 
   // CHECK:
   //   Mangled name: IntCell#<init>(kotlin.Int){}
   //   Public signature: /IntCell.<init>|-5182794243525578284[0]
-  constructor(value: Int) /* primary */
+  constructor(konstue: Int) /* primary */
 
 }
 

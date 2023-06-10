@@ -1,19 +1,19 @@
 // WITH_STDLIB
 
-const val MaxUI = UInt.MAX_VALUE
-const val MinUI = UInt.MIN_VALUE
+const konst MaxUI = UInt.MAX_VALUE
+const konst MinUI = UInt.MIN_VALUE
 
-const val MaxUL = ULong.MAX_VALUE
-const val MinUL = ULong.MIN_VALUE
+const konst MaxUL = ULong.MAX_VALUE
+const konst MinUL = ULong.MIN_VALUE
 
-val M1 = MaxUI.toULong()
-val M2 = M1 + 10UL
+konst M1 = MaxUI.toULong()
+konst M2 = M1 + 10UL
 
-val u_1_10 = 1u .. 10u
-val ul_1_10 = 1UL..10UL
-val minUI_maxUI = MinUI..MaxUI
-val minUL_maxUL = MinUL..MaxUL
-val m1_m2 = M1..M2
+konst u_1_10 = 1u .. 10u
+konst ul_1_10 = 1UL..10UL
+konst minUI_maxUI = MinUI..MaxUI
+konst minUL_maxUL = MinUL..MaxUL
+konst m1_m2 = M1..M2
 
 fun box(): String {
     if (0u in u_1_10) throw AssertionError()

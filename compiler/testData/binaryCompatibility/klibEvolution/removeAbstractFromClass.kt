@@ -4,7 +4,7 @@
 
 abstract class X {
     fun foo(): String = "in abstract class"
-    val bar: String = "in abstract class"
+    konst bar: String = "in abstract class"
 }
 
 // FILE: B.kt
@@ -12,7 +12,7 @@ abstract class X {
 
 open class X {
     fun foo(): String = "in non-abstract class"
-    val bar: String = "in non-abstract class"
+    konst bar: String = "in non-abstract class"
 }
 
 // MODULE: mainLib(lib)

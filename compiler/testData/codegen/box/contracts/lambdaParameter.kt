@@ -21,7 +21,7 @@ fun o(): String {
 }
 
 fun k(): String {
-    val res: String
+    konst res: String
     "K".let { b ->
         runOnce {
             res = b

@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.js.translate.expression.InlineMetadata
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
 fun collectReferencedNames(scope: JsNode): Set<JsName> {
-    val references = mutableSetOf<JsName>()
+    konst references = mutableSetOf<JsName>()
 
     object : RecursiveJsVisitor() {
         override fun visitBreak(x: JsBreak) { }
@@ -34,7 +34,7 @@ fun collectReferencedNames(scope: JsNode): Set<JsName> {
         override fun visitContinue(x: JsContinue) { }
 
         override fun visit(x: JsVars.JsVar) {
-            val initializer = x.initExpression
+            konst initializer = x.initExpression
             if (initializer != null) {
                 accept(initializer)
             }
@@ -42,7 +42,7 @@ fun collectReferencedNames(scope: JsNode): Set<JsName> {
 
         override fun visitNameRef(nameRef: JsNameRef) {
             super.visitNameRef(nameRef)
-            val name = nameRef.name
+            konst name = nameRef.name
             if (name != null) {
                 references += name
             }
@@ -53,7 +53,7 @@ fun collectReferencedNames(scope: JsNode): Set<JsName> {
 }
 
 fun collectUsedNames(scope: JsNode): Set<JsName> {
-    val references = mutableSetOf<JsName>()
+    konst references = mutableSetOf<JsName>()
 
     object : RecursiveJsVisitor() {
         override fun visitBreak(x: JsBreak) { }
@@ -61,7 +61,7 @@ fun collectUsedNames(scope: JsNode): Set<JsName> {
         override fun visitContinue(x: JsContinue) { }
 
         override fun visit(x: JsVars.JsVar) {
-            val initializer = x.initExpression
+            konst initializer = x.initExpression
             if (initializer != null) {
                 accept(initializer)
             }
@@ -69,7 +69,7 @@ fun collectUsedNames(scope: JsNode): Set<JsName> {
 
         override fun visitNameRef(nameRef: JsNameRef) {
             super.visitNameRef(nameRef)
-            val name = nameRef.name
+            konst name = nameRef.name
             if (name != null && nameRef.qualifier == null) {
                 references.add(name)
             }
@@ -86,11 +86,11 @@ fun collectUsedNames(scope: JsNode): Set<JsName> {
 fun collectDefinedNames(scope: JsNode) = collectDefinedNames(scope, false)
 
 fun collectDefinedNames(scope: JsNode, skipLabelsAndCatches: Boolean): Set<JsName> {
-    val names = mutableSetOf<JsName>()
+    konst names = mutableSetOf<JsName>()
 
     object : RecursiveJsVisitor() {
         override fun visit(x: JsVars.JsVar) {
-            val initializer = x.initExpression
+            konst initializer = x.initExpression
             if (initializer != null) {
                 accept(initializer)
             }
@@ -98,9 +98,9 @@ fun collectDefinedNames(scope: JsNode, skipLabelsAndCatches: Boolean): Set<JsNam
         }
 
         override fun visitExpressionStatement(x: JsExpressionStatement) {
-            val expression = x.expression
+            konst expression = x.expression
             if (expression is JsFunction) {
-                val name = expression.name
+                konst name = expression.name
                 if (name != null) {
                     names += name
                 }
@@ -132,7 +132,7 @@ fun collectDefinedNames(scope: JsNode, skipLabelsAndCatches: Boolean): Set<JsNam
 
 fun collectDefinedNamesInAllScopes(scope: JsNode): Set<JsName> {
     // Order is important for the local declaration deduplication
-    val names = mutableSetOf<JsName>()
+    konst names = mutableSetOf<JsName>()
 
     object : RecursiveJsVisitor() {
         override fun visit(x: JsVars.JsVar) {
@@ -166,12 +166,12 @@ fun JsFunction.collectFreeVariables() = collectUsedNames(body) - collectDefinedN
 
 fun JsFunction.collectLocalVariables(skipLabelsAndCatches: Boolean = false) = collectDefinedNames(body, skipLabelsAndCatches) + parameters.map { it.name }
 
-fun collectNamedFunctions(scope: JsNode) = collectNamedFunctionsAndMetadata(scope).mapValues { it.value.first.function }
+fun collectNamedFunctions(scope: JsNode) = collectNamedFunctionsAndMetadata(scope).mapValues { it.konstue.first.function }
 
-fun collectNamedFunctionsOrMetadata(scope: JsNode) = collectNamedFunctionsAndMetadata(scope).mapValues { it.value.second }
+fun collectNamedFunctionsOrMetadata(scope: JsNode) = collectNamedFunctionsAndMetadata(scope).mapValues { it.konstue.second }
 
 fun collectNamedFunctions(fragments: List<JsProgramFragment>): Map<JsName, JsFunction> {
-    val result = mutableMapOf<JsName, JsFunction>()
+    konst result = mutableMapOf<JsName, JsFunction>()
     for (fragment in fragments) {
         result += collectNamedFunctions(fragment.declarationBlock)
         result += collectNamedFunctions(fragment.initializerBlock)
@@ -180,24 +180,24 @@ fun collectNamedFunctions(fragments: List<JsProgramFragment>): Map<JsName, JsFun
 }
 
 fun collectNamedFunctionsAndWrappers(fragments: List<JsProgramFragment>): Map<JsName, FunctionWithWrapper> {
-    val result = mutableMapOf<JsName, FunctionWithWrapper>()
+    konst result = mutableMapOf<JsName, FunctionWithWrapper>()
     for (fragment in fragments) {
-        result += collectNamedFunctionsAndMetadata(fragment.declarationBlock).mapValues { it.value.first }
-        result += collectNamedFunctionsAndMetadata(fragment.initializerBlock).mapValues { it.value.first }
+        result += collectNamedFunctionsAndMetadata(fragment.declarationBlock).mapValues { it.konstue.first }
+        result += collectNamedFunctionsAndMetadata(fragment.initializerBlock).mapValues { it.konstue.first }
     }
     return result
 }
 
 fun collectNamedFunctionsAndMetadata(scope: JsNode): Map<JsName, Pair<FunctionWithWrapper, JsExpression>> {
-    val namedFunctions = mutableMapOf<JsName, Pair<FunctionWithWrapper, JsExpression>>()
+    konst namedFunctions = mutableMapOf<JsName, Pair<FunctionWithWrapper, JsExpression>>()
 
     scope.accept(object : RecursiveJsVisitor() {
         override fun visitBinaryExpression(x: JsBinaryOperation) {
-            val assignment = JsAstUtils.decomposeAssignment(x)
+            konst assignment = JsAstUtils.decomposeAssignment(x)
             if (assignment != null) {
-                val (left, right) = assignment
+                konst (left, right) = assignment
                 if (left is JsNameRef) {
-                    val name = left.name
+                    konst name = left.name
                     if (name != null) {
                         extractFunction(right)?.let { (function, wrapper) ->
                             namedFunctions[name] = Pair(FunctionWithWrapper(function, wrapper), right)
@@ -209,8 +209,8 @@ fun collectNamedFunctionsAndMetadata(scope: JsNode): Map<JsName, Pair<FunctionWi
         }
 
         override fun visit(x: JsVars.JsVar) {
-            val initializer = x.initExpression
-            val name = x.name
+            konst initializer = x.initExpression
+            konst name = x.name
             if (initializer != null && name != null) {
                 extractFunction(initializer)?.let { function ->
                     namedFunctions[name] = Pair(function, initializer)
@@ -220,7 +220,7 @@ fun collectNamedFunctionsAndMetadata(scope: JsNode): Map<JsName, Pair<FunctionWi
         }
 
         override fun visitFunction(x: JsFunction) {
-            val name = x.name
+            konst name = x.name
             if (name != null) {
                 namedFunctions[name] = Pair(FunctionWithWrapper(x, null), x)
             }
@@ -231,15 +231,15 @@ fun collectNamedFunctionsAndMetadata(scope: JsNode): Map<JsName, Pair<FunctionWi
     return namedFunctions
 }
 
-data class FunctionWithWrapper(val function: JsFunction, val wrapperBody: JsBlock?)
+data class FunctionWithWrapper(konst function: JsFunction, konst wrapperBody: JsBlock?)
 
 fun collectAccessors(scope: JsNode): Map<String, FunctionWithWrapper> {
-    val accessors = hashMapOf<String, FunctionWithWrapper>()
+    konst accessors = hashMapOf<String, FunctionWithWrapper>()
 
     scope.accept(object : RecursiveJsVisitor() {
         override fun visitInvocation(invocation: JsInvocation) {
             InlineMetadata.decompose(invocation)?.let {
-                accessors[it.tag.value] = it.function
+                accessors[it.tag.konstue] = it.function
             }
             super.visitInvocation(invocation)
         }
@@ -249,7 +249,7 @@ fun collectAccessors(scope: JsNode): Map<String, FunctionWithWrapper> {
 }
 
 fun collectAccessors(fragments: Iterable<JsProgramFragment>): Map<String, FunctionWithWrapper> {
-    val result = mutableMapOf<String, FunctionWithWrapper>()
+    konst result = mutableMapOf<String, FunctionWithWrapper>()
     for (fragment in fragments) {
         result += collectAccessors(fragment.declarationBlock)
     }
@@ -257,7 +257,7 @@ fun collectAccessors(fragments: Iterable<JsProgramFragment>): Map<String, Functi
 }
 
 fun collectLocalFunctions(scope: JsNode): Map<CallableDescriptor, FunctionWithWrapper> {
-    val localFunctions = hashMapOf<CallableDescriptor, FunctionWithWrapper>()
+    konst localFunctions = hashMapOf<CallableDescriptor, FunctionWithWrapper>()
 
     scope.accept(object : RecursiveJsVisitor() {
         override fun visitInvocation(invocation: JsInvocation) {
@@ -274,7 +274,7 @@ fun collectLocalFunctions(scope: JsNode): Map<CallableDescriptor, FunctionWithWr
 }
 
 fun collectLocalFunctions(fragments: List<JsProgramFragment>): Map<CallableDescriptor, FunctionWithWrapper> {
-    val result = mutableMapOf<CallableDescriptor, FunctionWithWrapper>()
+    konst result = mutableMapOf<CallableDescriptor, FunctionWithWrapper>()
     for (fragment in fragments) {
         result += collectLocalFunctions(fragment.declarationBlock)
     }
@@ -294,7 +294,7 @@ fun <T : JsNode> collectInstances(klass: Class<T>, scope: JsNode): List<T> {
 }
 
 fun JsNode.collectBreakContinueTargets(): Map<JsContinue, JsStatement> {
-    val targets = mutableMapOf<JsContinue, JsStatement>()
+    konst targets = mutableMapOf<JsContinue, JsStatement>()
 
     accept(object : RecursiveJsVisitor() {
         var defaultBreakTarget: JsStatement? = null
@@ -303,7 +303,7 @@ fun JsNode.collectBreakContinueTargets(): Map<JsContinue, JsStatement> {
         var continueTargets = mutableMapOf<JsName, JsStatement?>()
 
         override fun visitLabel(x: JsLabel) {
-            val inner = x.statement
+            konst inner = x.statement
             when (inner) {
                 is JsDoWhile -> handleLoop(inner, inner.body, x.name)
 
@@ -342,7 +342,7 @@ fun JsNode.collectBreakContinueTargets(): Map<JsContinue, JsStatement> {
         }
 
         override fun visitBreak(x: JsBreak) {
-            val targetLabel = x.label?.name
+            konst targetLabel = x.label?.name
             targets[x] = if (targetLabel == null) {
                 defaultBreakTarget!!
             }
@@ -352,7 +352,7 @@ fun JsNode.collectBreakContinueTargets(): Map<JsContinue, JsStatement> {
         }
 
         override fun visitContinue(x: JsContinue) {
-            val targetLabel = x.label?.name
+            konst targetLabel = x.label?.name
             targets[x] = if (targetLabel == null) {
                 defaultContinueTarget!!
             }
@@ -367,9 +367,9 @@ fun JsNode.collectBreakContinueTargets(): Map<JsContinue, JsStatement> {
                 continueTargetStatement: JsStatement? = null,
                 action: () -> Unit
         ) {
-            val oldDefaultBreakTarget = defaultBreakTarget
-            val oldDefaultContinueTarget = defaultContinueTarget
-            val (oldBreakTarget, oldContinueTarget) = if (label != null) {
+            konst oldDefaultBreakTarget = defaultBreakTarget
+            konst oldDefaultContinueTarget = defaultContinueTarget
+            konst (oldBreakTarget, oldContinueTarget) = if (label != null) {
                 Pair(breakTargets[label], continueTargets[label])
             }
             else {
@@ -401,7 +401,7 @@ fun JsNode.collectBreakContinueTargets(): Map<JsContinue, JsStatement> {
 
 fun getImportTag(jsVars: JsVars): String? {
     if (jsVars.vars.size == 1) {
-        val jsVar = jsVars.vars[0]
+        konst jsVar = jsVars.vars[0]
         if (jsVar.name.imported) {
             return extractImportTag(jsVar)
         }
@@ -411,11 +411,11 @@ fun getImportTag(jsVars: JsVars): String? {
 }
 
 fun extractImportTag(jsVar: JsVars.JsVar): String? {
-    val initExpression = jsVar.initExpression ?: return null
+    konst initExpression = jsVar.initExpression ?: return null
 
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
 
-    // Handle Long const val import
+    // Handle Long const konst import
     if (initExpression is JsInvocation || initExpression is JsNew) {
         sb.append(jsVar.name.toString()).append(":")
     }
@@ -426,7 +426,7 @@ fun extractImportTag(jsVar: JsVars.JsVar): String? {
 private fun extractImportTagImpl(expression: JsExpression, sb: StringBuilder): Boolean {
     when (expression) {
         is JsNameRef -> {
-            val nameRef = expression
+            konst nameRef = expression
             if (nameRef.qualifier != null) {
                 if (!extractImportTagImpl(nameRef.qualifier!!, sb)) return false
                 sb.append('.')
@@ -435,21 +435,21 @@ private fun extractImportTagImpl(expression: JsExpression, sb: StringBuilder): B
             return true
         }
         is JsArrayAccess -> {
-            val arrayAccess = expression
+            konst arrayAccess = expression
             if (!extractImportTagImpl(arrayAccess.arrayExpression, sb)) return false
             sb.append(".")
-            val stringLiteral = arrayAccess.indexExpression as? JsStringLiteral ?: return false
-            sb.append(JsToStringGenerationVisitor.javaScriptString(stringLiteral.value))
+            konst stringLiteral = arrayAccess.indexExpression as? JsStringLiteral ?: return false
+            sb.append(JsToStringGenerationVisitor.javaScriptString(stringLiteral.konstue))
             return true
         }
         is JsInvocation -> {
-            val invocation = expression
+            konst invocation = expression
             if (!extractImportTagImpl(invocation.qualifier, sb)) return false
             if (!appendArguments(invocation.arguments, sb)) return false
             return true
         }
         is JsNew -> {
-            val newExpr = expression
+            konst newExpr = expression
             if (!extractImportTagImpl(newExpr.constructorExpression, sb)) return false
             if (!appendArguments(newExpr.arguments, sb)) return false
             return true
@@ -464,7 +464,7 @@ private fun appendArguments(arguments: List<JsExpression>, sb: StringBuilder): B
             return false
         }
         sb.append(if (index == 0) "(" else ",")
-        sb.append(arg.value)
+        sb.append(arg.konstue)
     }
     sb.append(")")
     return true

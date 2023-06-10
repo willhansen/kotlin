@@ -2,7 +2,7 @@ package
 
 public final annotation class Foo : kotlin.Annotation {
     public constructor Foo(/*0*/ s: kotlin.Int)
-    public final val property: kotlin.Unit
+    public final konst property: kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun function(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -10,7 +10,7 @@ public final annotation class Foo : kotlin.Annotation {
 
     public final annotation class Anno : kotlin.Annotation {
         public constructor Anno(/*0*/ e: Foo.E)
-        public final val e: Foo.E
+        public final konst e: Foo.E
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -18,8 +18,8 @@ public final annotation class Foo : kotlin.Annotation {
 
     public companion object Companion {
         private constructor Companion()
-        public final val x: kotlin.Int = 1
-        public const final val y: kotlin.String = ""
+        public final konst x: kotlin.Int = 1
+        public const final konst y: kotlin.String = ""
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -31,8 +31,8 @@ public final annotation class Foo : kotlin.Annotation {
         enum entry B
 
         private constructor E()
-        @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-        public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+        @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
         protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
         public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: Foo.E): kotlin.Int
         public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -42,9 +42,9 @@ public final annotation class Foo : kotlin.Annotation {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<Foo.E>
-        public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): Foo.E
-        public final /*synthesized*/ fun values(): kotlin.Array<Foo.E>
+        public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<Foo.E>
+        public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): Foo.E
+        public final /*synthesized*/ fun konstues(): kotlin.Array<Foo.E>
     }
 
     public interface I {

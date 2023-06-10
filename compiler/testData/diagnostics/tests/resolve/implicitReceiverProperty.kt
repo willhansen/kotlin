@@ -2,9 +2,9 @@
 // FILE: a.kt
 package a
 
-class A(val b: String) {
+class A(konst b: String) {
     companion object {
-        val c: String = ""
+        konst c: String = ""
     }
 
     fun mtd() = c.length
@@ -27,8 +27,8 @@ fun A.extFun1() = b.length
 
 // fun A.extFun2() = c.length // TODO fix KT-9953
 
-val x1 = A("").with { b.length }
+konst x1 = A("").with { b.length }
 
-// val x2 = A("").with { c.length } // TODO fix KT-9953
+// konst x2 = A("").with { c.length } // TODO fix KT-9953
 
-val x3 = A.with { c.length }
+konst x3 = A.with { c.length }

@@ -9,7 +9,7 @@ class MySet : HashSet<Int>() {
 }
 
 fun box(): String {
-    val a = MySet()
+    konst a = MySet()
     a.add(1)
     a.add(2)
     a.add(3)

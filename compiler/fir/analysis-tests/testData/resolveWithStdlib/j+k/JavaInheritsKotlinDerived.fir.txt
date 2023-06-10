@@ -4,7 +4,7 @@ FILE: Base.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val some: R|kotlin/String|
+        public open konst some: R|kotlin/String|
             public get(): R|kotlin/String| {
                 ^ String(Base)
             }
@@ -15,7 +15,7 @@ FILE: Base.kt
             super<R|Base|>()
         }
 
-        public open override val some: R|kotlin/String|
+        public open override konst some: R|kotlin/String|
             public get(): R|kotlin/String| {
                 ^ String(Derived)
             }
@@ -23,6 +23,6 @@ FILE: Base.kt
     }
 FILE: Test.kt
     public final fun test(): R|kotlin/Unit| {
-        lval jc: R|JavaClass| = R|/JavaClass.JavaClass|()
-        lval result: R|kotlin/String| = R|<local>/jc|.R|/Derived.some|
+        lkonst jc: R|JavaClass| = R|/JavaClass.JavaClass|()
+        lkonst result: R|kotlin/String| = R|<local>/jc|.R|/Derived.some|
     }

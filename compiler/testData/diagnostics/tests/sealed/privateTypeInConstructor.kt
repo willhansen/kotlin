@@ -4,21 +4,21 @@
 private class Bar
 
 sealed class SealedFoo(
-    val <!EXPOSED_PROPERTY_TYPE_IN_CONSTRUCTOR_ERROR!>x<!>: Bar,
-    private val y: Bar,
+    konst <!EXPOSED_PROPERTY_TYPE_IN_CONSTRUCTOR_ERROR!>x<!>: Bar,
+    private konst y: Bar,
     z: Bar
 )
 
 abstract class AbstractFoo(
-    <!EXPOSED_PARAMETER_TYPE!>val x: Bar<!>,
-    <!EXPOSED_PARAMETER_TYPE!>private val y: Bar<!>,
+    <!EXPOSED_PARAMETER_TYPE!>konst x: Bar<!>,
+    <!EXPOSED_PARAMETER_TYPE!>private konst y: Bar<!>,
     <!EXPOSED_PARAMETER_TYPE!>z: Bar<!>
 )
 
 internal sealed class A {
-    protected abstract val b: B?
-    protected data class B(val s: String)
-    internal data class C private constructor(override val b: B?) : A() {
+    protected abstract konst b: B?
+    protected data class B(konst s: String)
+    internal data class C private constructor(override konst b: B?) : A() {
         constructor() : this(null)
     }
 }

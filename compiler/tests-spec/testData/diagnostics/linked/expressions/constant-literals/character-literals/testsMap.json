@@ -5,7 +5,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 4,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/neg/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main",
@@ -16,7 +16,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 4,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/neg/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",
@@ -29,7 +29,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 1,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main",
@@ -40,7 +40,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 1,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",
@@ -55,7 +55,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 4,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/neg/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",
@@ -66,7 +66,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 4,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/neg/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",
@@ -79,7 +79,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 1,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",
@@ -90,7 +90,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 1,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",
@@ -105,7 +105,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 4,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/neg/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",
@@ -127,7 +127,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 1,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",
@@ -160,7 +160,7 @@
         {
           "specVersion": "0.1-435",
           "casesNumber": 1,
-          "description": "A character literal defines a constant holding a unicode character value",
+          "description": "A character literal defines a constant holding a unicode character konstue",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/character-literals/p-1/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary",

@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap
  * NB: if you are changing the name of the outer file (CacheByClass.kt), please also change the corresponding
  * proguard rules
  */
-private val useClassValue = runCatching {
+private konst useClassValue = runCatching {
     Class.forName("java.lang.ClassValue")
 }.map { true }.getOrDefault(false)
 
@@ -27,23 +27,23 @@ internal abstract class CacheByClass<V> {
 }
 
 /**
- * Creates a **softly referenced** cache of values associated with [Class].
+ * Creates a **softly referenced** cache of konstues associated with [Class].
  * Values are computed using provided [compute] function.
  *
- * `null` values are not supported, though there aren't any technical limitations.
+ * `null` konstues are not supported, though there aren't any technical limitations.
  */
 internal fun <V : Any> createCache(compute: (Class<*>) -> V): CacheByClass<V> {
     return if (useClassValue) ClassValueCache(compute) else ConcurrentHashMapCache(compute)
 }
 
 /*
- * We can only cache SoftReference instances in our own classvalue to avoid classloader-based leak.
+ * We can only cache SoftReference instances in our own classkonstue to avoid classloader-based leak.
  *
  * In short, the following uncollectable cycle is possible otherwise:
  * ClassValue -> KPackageImpl.getClass() -> UrlClassloader -> all loaded classes by this CL ->
  *  -> kotlin.reflect.jvm.internal.ClassValueCache -> ClassValue
  */
-private class ComputableClassValue<V>(@JvmField val compute: (Class<*>) -> V) : ClassValue<SoftReference<V>>() {
+private class ComputableClassValue<V>(@JvmField konst compute: (Class<*>) -> V) : ClassValue<SoftReference<V>>() {
     override fun computeValue(type: Class<*>): SoftReference<V> {
         return SoftReference(compute(type))
     }
@@ -57,13 +57,13 @@ private class ClassValueCache<V>(compute: (Class<*>) -> V) : CacheByClass<V>() {
     private var classValue = ComputableClassValue(compute)
 
     override fun get(key: Class<*>): V {
-        val classValue = classValue
+        konst classValue = classValue
         classValue[key].get()?.let { return it }
-        // Clean stale value if it was collected at some point
+        // Clean stale konstue if it was collected at some point
         classValue.remove(key)
         /*
-         * Optimistic assumption: the value was invalidated at some point of time,
-         * but now we do not have a memory pressure and can recompute the value
+         * Optimistic assumption: the konstue was inkonstidated at some point of time,
+         * but now we do not have a memory pressure and can recompute the konstue
          */
         classValue[key].get()?.let { return it }
         // Assumption failed, do not retry to avoid any non-trivial GC-dependent loops and deliberately create a separate copy
@@ -73,7 +73,7 @@ private class ClassValueCache<V>(compute: (Class<*>) -> V) : CacheByClass<V>() {
     override fun clear() {
         /*
          * ClassValue does not have a proper `clear()` method but is properly weak-referenced,
-         * thus abandoning ClassValue instance will eventually clear all associated values.
+         * thus abandoning ClassValue instance will eventually clear all associated konstues.
          */
         classValue = classValue.createNewCopy()
     }
@@ -84,8 +84,8 @@ private class ClassValueCache<V>(compute: (Class<*>) -> V) : CacheByClass<V>() {
  * are no classloader leaks issue, thus we can safely use strong references and do not bother
  * with WeakReference wrapping.
  */
-private class ConcurrentHashMapCache<V>(private val compute: (Class<*>) -> V) : CacheByClass<V>() {
-    private val cache = ConcurrentHashMap<Class<*>, V>()
+private class ConcurrentHashMapCache<V>(private konst compute: (Class<*>) -> V) : CacheByClass<V>() {
+    private konst cache = ConcurrentHashMap<Class<*>, V>()
 
     override fun get(key: Class<*>): V = cache.getOrPut(key) { compute(key) }
 

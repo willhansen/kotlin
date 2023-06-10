@@ -2,7 +2,7 @@ fun interface FunWithReceiver {
     fun String.foo(): String
 }
 
-val prop = FunWithReceiver { this }
+konst prop = FunWithReceiver { this }
 
 fun bar(s: String, f: FunWithReceiver): String {
     return with(f) {
@@ -11,7 +11,7 @@ fun bar(s: String, f: FunWithReceiver): String {
 }
 
 fun box(): String {
-    val r1 = with(prop) {
+    konst r1 = with(prop) {
         "OK".foo()
     }
 

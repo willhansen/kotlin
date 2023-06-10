@@ -4,17 +4,17 @@ plugins {
     kotlin("multiplatform")
 }
 
-val kotlinNativeDataPath = System.getenv("KONAN_DATA_DIR")?.let { File(it) }
+konst kotlinNativeDataPath = System.getenv("KONAN_DATA_DIR")?.let { File(it) }
     ?: File(System.getProperty("user.home")).resolve(".konan")
 
-val tensorflowHome = kotlinNativeDataPath.resolve("third-party/tensorflow")
+konst tensorflowHome = kotlinNativeDataPath.resolve("third-party/tensorflow")
 
 kotlin {
     // Determine host preset.
-    val hostOs = System.getProperty("os.name")
+    konst hostOs = System.getProperty("os.name")
 
     // Create target for the host platform.
-    val hostTarget = when {
+    konst hostTarget = when {
         hostOs == "Mac OS X" -> macosX64("tensorflow")
         hostOs == "Linux" -> linuxX64("tensorflow")
         // Windows is not supported
@@ -33,17 +33,17 @@ kotlin {
             }
         }
         compilations["main"].cinterops {
-            val tensorflow by creating {
+            konst tensorflow by creating {
                 includeDirs(tensorflowHome.resolve("include"))
             }
         }
     }
 }
 
-val downloadTensorflow by tasks.creating(Exec::class) {
+konst downloadTensorflow by tasks.creating(Exec::class) {
     workingDir = projectDir
     commandLine("./downloadTensorflow.sh")
 }
 
-val tensorflow: KotlinNativeTarget by kotlin.targets
+konst tensorflow: KotlinNativeTarget by kotlin.targets
 tasks[tensorflow.compilations["main"].cinterops["tensorflow"].interopProcessingTaskName].dependsOn(downloadTensorflow)

@@ -1,21 +1,21 @@
 // WITH_STDLIB
 // TARGET_BACKEND: JVM
 
-private const val MOD = 998244353
+private const konst MOD = 998244353
 
 private fun mul(a: Int, b: Int) = (a.toLong() * b % MOD).toInt()
 
 fun box(): String {
-    val n = 400
-    val d = Array(n) { IntArray(n) { Int.MAX_VALUE / 2 } }
+    konst n = 400
+    konst d = Array(n) { IntArray(n) { Int.MAX_VALUE / 2 } }
     for (i in 0 until n) {
         d[i][i] = 0
     }
-    val m = n - 1
-    val g = Graph(n, 2 * m)
+    konst m = n - 1
+    konst g = Graph(n, 2 * m)
     repeat(m) {
-        val a = it
-        val b = it + 1
+        konst a = it
+        konst b = it + 1
         d[a][b] = 1
         d[b][a] = 1
         g.add(a, b)
@@ -24,25 +24,25 @@ fun box(): String {
     for (k in 0 until n) {
         for (i in 0 until n) {
             for (j in 0 until n) {
-                val s = d[i][k] + d[k][j]
+                konst s = d[i][k] + d[k][j]
                 if (s < d[i][j]) d[i][j] = s
             }
         }
     }
     for (x in 0 until n) {
-        val row = IntArray(n) { y ->
+        konst row = IntArray(n) { y ->
             var prod = 1
-            val dx = d[x]
-            val xy = dx[y]
+            konst dx = d[x]
+            konst xy = dx[y]
             for (k in 0 until n) if (k != x) {
-                val dy = d[y]
-                val xk = dx[k]
-                val yk = dy[k]
+                konst dy = d[y]
+                konst xk = dx[k]
+                konst yk = dy[k]
                 var cnt = 0
                 var cntMid = 0
                 g.from(k) { t ->
-                    val xt = dx[t]
-                    val yt = dy[t]
+                    konst xt = dx[t]
+                    konst yt = dy[t]
                     if (xt == xk - 1) when (yt) {
                         yk - 1 -> {
                             cnt++
@@ -99,7 +99,7 @@ class Graph(vCap: Int = 16, eCap: Int = vCap * 2) {
         if (vCap <= vCnt) return
         vCnt = vCap
         if (vCap > vHead.size) {
-            val newSize = maxOf(2 * vHead.size, vCap)
+            konst newSize = maxOf(2 * vHead.size, vCap)
             vHead = vHead.copyOf(newSize)
         }
     }
@@ -108,7 +108,7 @@ class Graph(vCap: Int = 16, eCap: Int = vCap * 2) {
         if (eCap <= eCnt) return
         eCnt = eCap
         if (eCap > eVert.size) {
-            val newSize = maxOf(2 * eVert.size, eCap)
+            konst newSize = maxOf(2 * eVert.size, eCap)
             eVert = eVert.copyOf(newSize)
             eNext = eNext.copyOf(newSize)
         }

@@ -7,7 +7,7 @@ external enum class <!WRONG_EXTERNAL_DECLARATION!>C2<!>
 
 external annotation class <!WRONG_EXTERNAL_DECLARATION!>C3<!>
 
-external data class <!WRONG_EXTERNAL_DECLARATION!>C4(val x: String)<!>
+external data class <!WRONG_EXTERNAL_DECLARATION!>C4(konst x: String)<!>
 
 external class C5 {
 
@@ -16,9 +16,9 @@ external class C5 {
     inner class <!WRONG_EXTERNAL_DECLARATION!>C7<!>
 }
 
-external <!INLINE_CLASS_DEPRECATED!>inline<!> class <!WRONG_EXTERNAL_DECLARATION!>C8(<!EXTERNAL_CLASS_CONSTRUCTOR_PROPERTY_PARAMETER!>val x: Int<!>)<!>
+external <!INLINE_CLASS_DEPRECATED!>inline<!> class <!WRONG_EXTERNAL_DECLARATION!>C8(<!EXTERNAL_CLASS_CONSTRUCTOR_PROPERTY_PARAMETER!>konst x: Int<!>)<!>
 
-external value class <!WRONG_EXTERNAL_DECLARATION!>C9(<!EXTERNAL_CLASS_CONSTRUCTOR_PROPERTY_PARAMETER!>val x: Int<!>)<!>
+external konstue class <!WRONG_EXTERNAL_DECLARATION!>C9(<!EXTERNAL_CLASS_CONSTRUCTOR_PROPERTY_PARAMETER!>konst x: Int<!>)<!>
 
 
 // Interfaces
@@ -47,5 +47,5 @@ external fun foo1(): Int
 
 <!WRONG_EXTERNAL_DECLARATION!>external lateinit var v1: String<!>
 
-<!WRONG_EXTERNAL_DECLARATION!>external val Int.v2: String<!>
+<!WRONG_EXTERNAL_DECLARATION!>external konst Int.v2: String<!>
     get() = definedExternally

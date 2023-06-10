@@ -23,7 +23,7 @@ class KotlinAndroidSourceSetLayoutExtensionTest {
 
     @Test
     fun `single platform plugin`() {
-        val project = ProjectBuilder.builder().build()
+        konst project = ProjectBuilder.builder().build()
         project.plugins.apply(KotlinAndroidPluginWrapper::class.java)
         assertEquals(singleTargetAndroidSourceSetLayout, project.kotlinAndroidSourceSetLayout)
 
@@ -36,7 +36,7 @@ class KotlinAndroidSourceSetLayoutExtensionTest {
 
     @Test
     fun `test multiplatform plugin`() {
-        val project = buildProjectWithMPP { }
+        konst project = buildProjectWithMPP { }
 
         assertEquals(
             multiplatformAndroidSourceSetLayoutV2, project.kotlinAndroidSourceSetLayout,

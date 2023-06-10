@@ -7,7 +7,7 @@ fun bar() {
             this._x = x
         }
 
-        val x: Int
+        konst x: Int
             get() = _x
     }
 }

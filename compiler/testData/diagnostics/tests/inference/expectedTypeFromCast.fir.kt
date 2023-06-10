@@ -2,19 +2,19 @@
 
 fun <T> foo(): T = TODO()
 
-fun <V> id(value: V) = value
+fun <V> id(konstue: V) = konstue
 
-val asString = foo() as String
+konst asString = foo() as String
 
-val viaId = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>id<!>(foo()) as String
+konst viaId = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>id<!>(foo()) as String
 
-val insideId = id(foo() as String)
+konst insideId = id(foo() as String)
 
-val asList = foo() as List<String>
+konst asList = foo() as List<String>
 
-val asStarList = foo() as List<*>
+konst asStarList = foo() as List<*>
 
-val safeAs = foo() as? String
+konst safeAs = foo() as? String
 
-val fromIs = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>foo<!>() is String
-val fromNoIs = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>foo<!>() !is String
+konst fromIs = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>foo<!>() is String
+konst fromNoIs = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>foo<!>() !is String

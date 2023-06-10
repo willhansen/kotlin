@@ -7,7 +7,7 @@
 
 package test
 
-public val <T> Array<out T>.foo: String
+public konst <T> Array<out T>.foo: String
     get() = this[0].toString() + this[1].toString()
 
 // FILE: B.kt

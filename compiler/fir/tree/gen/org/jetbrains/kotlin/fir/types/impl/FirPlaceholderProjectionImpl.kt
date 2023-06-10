@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirPlaceholderProjectionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
 ) : FirPlaceholderProjection() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

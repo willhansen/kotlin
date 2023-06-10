@@ -15,43 +15,43 @@ import org.jetbrains.kotlin.types.typeUtil.isNullableAny
 import org.jetbrains.kotlin.types.typeUtil.replaceArgumentsWithNothing
 
 class SamTypeApproximator(builtIns: KotlinBuiltIns, languageVersionSettings: LanguageVersionSettings) {
-    private val typeApproximator = TypeApproximator(builtIns, languageVersionSettings)
+    private konst typeApproximator = TypeApproximator(builtIns, languageVersionSettings)
 
     fun getSamTypeForValueParameter(
-        valueParameter: ValueParameterDescriptor,
+        konstueParameter: ValueParameterDescriptor,
         carefulApproximationOfContravariantProjection: Boolean,
     ): KotlinType? {
-        val singleArgumentType: KotlinType
-        val originalSingleArgumentType: KotlinType?
-        val varargElementType = valueParameter.varargElementType
+        konst singleArgumentType: KotlinType
+        konst originalSingleArgumentType: KotlinType?
+        konst varargElementType = konstueParameter.varargElementType
         if (varargElementType != null) {
             singleArgumentType = varargElementType
-            originalSingleArgumentType = valueParameter.original.varargElementType
+            originalSingleArgumentType = konstueParameter.original.varargElementType
             assert(originalSingleArgumentType != null) {
-                "Value parameter and original value parameter have inconsistent varargs: " +
-                        valueParameter + "; " + valueParameter.original
+                "Value parameter and original konstue parameter have inconsistent varargs: " +
+                        konstueParameter + "; " + konstueParameter.original
             }
         } else {
-            singleArgumentType = valueParameter.type
-            originalSingleArgumentType = valueParameter.original.type
+            singleArgumentType = konstueParameter.type
+            originalSingleArgumentType = konstueParameter.original.type
         }
         if (singleArgumentType.isError || originalSingleArgumentType!!.isError) {
             return null
         }
 
-        // This can be true in case when the value parameter is in the method of a generic type with out-projection.
+        // This can be true in case when the konstue parameter is in the method of a generic type with out-projection.
         // We approximate Inv<Captured#1> to Nothing, while Inv itself can be a SAM interface safe to call here
         // (see testData genericSamProjectedOut.kt for details)
         // In such a case we can't have a proper supertype since wildcards are not allowed there,
         // so we use Nothing arguments instead that leads to a raw type used for a SAM wrapper.
         // See org.jetbrains.kotlin.codegen.state.KotlinTypeMapper#writeGenericType to understand how
         // raw types and Nothing arguments relate.
-        val originalTypeToUse =
+        konst originalTypeToUse =
             if (KotlinBuiltIns.isNothing(singleArgumentType))
                 originalSingleArgumentType.replaceArgumentsWithNothing()
             else
                 singleArgumentType
-        val approximatedOriginalTypeToUse =
+        konst approximatedOriginalTypeToUse =
             typeApproximator.approximateToSubType(
                 originalTypeToUse,
                 TypeApproximatorConfiguration.UpperBoundAwareIntersectionTypeApproximator
@@ -64,15 +64,15 @@ class SamTypeApproximator(builtIns: KotlinBuiltIns, languageVersionSettings: Lan
     // When changing this, please consider also changing the mirroring K2 function at
     // org.jetbrains.kotlin.fir.backend.generators.AdapterGenerator.removeExternalProjections
     private fun KotlinType.removeExternalProjections(carefulApproximationOfContravariantProjection: Boolean): KotlinType? {
-        val newArguments = arguments.mapIndexed { i, argument ->
+        konst newArguments = arguments.mapIndexed { i, argument ->
             if (carefulApproximationOfContravariantProjection && argument.projectionKind == Variance.IN_VARIANCE) {
                 // Just erasing `in` from the type projection would lead to an incorrect type for the SAM adapter,
                 // and error at runtime on JVM if invokedynamic + LambdaMetafactory is used, see KT-51868.
                 // So we do it "carefully". If we have a class `A<T>` and a method that takes e.g. `A<in String>`, we check
                 // if `T` has a non-trivial upper bound. If it has one, we don't attempt to perform a SAM conversion at all.
                 // Otherwise we erase the type to `Any?`, so `A<in String>` becomes `A<Any?>`, which is the computed SAM type.
-                val parameter = constructor.parameters.getOrNull(i) ?: return null
-                val upperBound = parameter.upperBounds.singleOrNull()?.upperIfFlexible() ?: return null
+                konst parameter = constructor.parameters.getOrNull(i) ?: return null
+                konst upperBound = parameter.upperBounds.singleOrNull()?.upperIfFlexible() ?: return null
                 if (!upperBound.isNullableAny()) return null
 
                 upperBound.asTypeProjection()
@@ -84,7 +84,7 @@ class SamTypeApproximator(builtIns: KotlinBuiltIns, languageVersionSettings: Lan
 
 open class SamTypeFactory {
     open fun isSamType(type: KotlinType): Boolean {
-        val descriptor = type.constructor.declarationDescriptor
+        konst descriptor = type.constructor.declarationDescriptor
         return descriptor is ClassDescriptor && descriptor.isFun
     }
 

@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.analysis.low.level.api.fir.api
 
-enum class DiagnosticCheckerFilter(val runCommonCheckers: Boolean, val runExtendedCheckers: Boolean) {
+enum class DiagnosticCheckerFilter(konst runCommonCheckers: Boolean, konst runExtendedCheckers: Boolean) {
     ONLY_COMMON_CHECKERS(runCommonCheckers = true, runExtendedCheckers = false),
     ONLY_EXTENDED_CHECKERS(runCommonCheckers = false, runExtendedCheckers = true),
     EXTENDED_AND_COMMON_CHECKERS(runCommonCheckers = true, runExtendedCheckers = true),

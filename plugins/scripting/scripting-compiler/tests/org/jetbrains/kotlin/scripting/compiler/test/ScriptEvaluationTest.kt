@@ -12,7 +12,7 @@ import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.toScriptSource
-import kotlin.script.experimental.jvm.BasicJvmScriptEvaluator
+import kotlin.script.experimental.jvm.BasicJvmScriptEkonstuator
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 import kotlin.script.experimental.jvm.util.renderError
 
@@ -22,10 +22,10 @@ import kotlin.script.experimental.jvm.util.renderError
  */
 
 
-class ScriptEvaluationTest : TestCase() {
+class ScriptEkonstuationTest : TestCase() {
 
     fun testExceptionWithCause() {
-        checkEvaluateAsError(
+        checkEkonstuateAsError(
             """
                 try {
                     throw Exception("Error!")
@@ -44,25 +44,25 @@ class ScriptEvaluationTest : TestCase() {
 
     // KT-19423
     fun testClassCapturingScriptInstance() {
-        val res = checkEvaluate(
+        konst res = checkEkonstuate(
             """
-                val used = "abc"
+                konst used = "abc"
                 class User {
-                    val property = used
+                    konst property = used
                 }
 
                 User().property
             """.trimIndent().toScriptSource()
         )
-        assertEquals("abc", (res.returnValue as ResultValue.Value).value)
+        assertEquals("abc", (res.returnValue as ResultValue.Value).konstue)
     }
 
     fun testObjectCapturingScriptInstance() {
-        val res = checkCompile(
+        konst res = checkCompile(
             """
-                val used = "abc"
+                konst used = "abc"
                 object User {
-                    val property = used
+                    konst property = used
                 }
 
                 User.property
@@ -74,11 +74,11 @@ class ScriptEvaluationTest : TestCase() {
         }
     }
 
-    private fun checkEvaluateAsError(script: SourceCode, expectedOutput: String): EvaluationResult {
-        val res = checkEvaluate(script)
+    private fun checkEkonstuateAsError(script: SourceCode, expectedOutput: String): EkonstuationResult {
+        konst res = checkEkonstuate(script)
         assert(res.returnValue is ResultValue.Error)
         ByteArrayOutputStream().use { os ->
-            val ps = PrintStream(os)
+            konst ps = PrintStream(os)
             (res.returnValue as ResultValue.Error).renderError(ps)
             ps.flush()
             assertEqualsTrimmed(expectedOutput, os.toString())
@@ -87,17 +87,17 @@ class ScriptEvaluationTest : TestCase() {
     }
 
     private fun checkCompile(script: SourceCode): ResultWithDiagnostics<CompiledScript> {
-        val compilationConfiguration = ScriptCompilationConfiguration()
-        val compiler = ScriptJvmCompilerIsolated(defaultJvmScriptingHostConfiguration)
+        konst compilationConfiguration = ScriptCompilationConfiguration()
+        konst compiler = ScriptJvmCompilerIsolated(defaultJvmScriptingHostConfiguration)
         return compiler.compile(script, compilationConfiguration)
     }
 
-    private fun checkEvaluate(script: SourceCode): EvaluationResult {
-        val compiled = checkCompile(script).valueOrThrow()
-        val evaluationConfiguration = ScriptEvaluationConfiguration()
-        val evaluator = BasicJvmScriptEvaluator()
-        val res = runBlocking {
-            evaluator.invoke(compiled, evaluationConfiguration).valueOrThrow()
+    private fun checkEkonstuate(script: SourceCode): EkonstuationResult {
+        konst compiled = checkCompile(script).konstueOrThrow()
+        konst ekonstuationConfiguration = ScriptEkonstuationConfiguration()
+        konst ekonstuator = BasicJvmScriptEkonstuator()
+        konst res = runBlocking {
+            ekonstuator.invoke(compiled, ekonstuationConfiguration).konstueOrThrow()
         }
         return res
     }

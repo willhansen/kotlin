@@ -456,7 +456,7 @@ digraph returns_kt {
             160 [label="Enter block"];
             161 [label="Access variable R|<local>/a|"];
             162 [label="Type operator: (R|<local>/a| as? R|kotlin/String|)"];
-            163 [label="Variable declaration: lval s: R|kotlin/String?|"];
+            163 [label="Variable declaration: lkonst s: R|kotlin/String?|"];
             164 [label="Access variable R|<local>/s|"];
             165 [label="Enter safe call"];
             166 [label="Access variable R|/ext|"];
@@ -467,7 +467,7 @@ digraph returns_kt {
             171 [label="Stub" style="filled" fillcolor=gray];
             172 [label="Lhs of ?: is not null"];
             173 [label="Exit ?:"];
-            174 [label="Variable declaration: lval length: R|kotlin/Int|"];
+            174 [label="Variable declaration: lkonst length: R|kotlin/Int|"];
             175 [label="Postponed enter to lambda"];
             subgraph cluster_42 {
                 color=blue

@@ -33,8 +33,8 @@ import org.jetbrains.kotlin.types.AbstractTypeChecker
 object FirReturnsImpliesAnalyzer : FirControlFlowChecker() {
 
     override fun analyze(graph: ControlFlowGraph, reporter: DiagnosticReporter, context: CheckerContext) {
-        val logicSystem = object : LogicSystem(context.session.typeContext) {
-            override val variableStorage: VariableStorageImpl
+        konst logicSystem = object : LogicSystem(context.session.typeContext) {
+            override konst variableStorage: VariableStorageImpl
                 get() = throw IllegalStateException("shouldn't be called")
         }
         analyze(graph, reporter, context, logicSystem)
@@ -46,15 +46,15 @@ object FirReturnsImpliesAnalyzer : FirControlFlowChecker() {
             analyze(subGraph, reporter, context)
         }
 
-        val function = graph.declaration as? FirFunction ?: return
+        konst function = graph.declaration as? FirFunction ?: return
         if (function !is FirContractDescriptionOwner || function.contractDescription.source == null) return
-        val effects = function.contractDescription.effects ?: return
-        val dataFlowInfo = function.controlFlowGraphReference?.dataFlowInfo ?: return
+        konst effects = function.contractDescription.effects ?: return
+        konst dataFlowInfo = function.controlFlowGraphReference?.dataFlowInfo ?: return
         for (firEffect in effects) {
             // TODO: why is *everything* an "effect"? Something's not right with this terminology.
-            val coneEffect = firEffect.effect as? ConeConditionalEffectDeclaration ?: continue
-            val returnValue = coneEffect.effect as? ConeReturnsEffectDeclaration ?: continue
-            val wrongCondition = graph.exitNode.previousCfgNodes.any {
+            konst coneEffect = firEffect.effect as? ConeConditionalEffectDeclaration ?: continue
+            konst returnValue = coneEffect.effect as? ConeReturnsEffectDeclaration ?: continue
+            konst wrongCondition = graph.exitNode.previousCfgNodes.any {
                 isWrongConditionOnNode(it, coneEffect, returnValue, function, logicSystem, dataFlowInfo, context)
             }
             if (wrongCondition) {
@@ -73,13 +73,13 @@ object FirReturnsImpliesAnalyzer : FirControlFlowChecker() {
         dataFlowInfo: DataFlowInfo,
         context: CheckerContext
     ): Boolean {
-        val builtinTypes = context.session.builtinTypes
-        val typeContext = context.session.typeContext
+        konst builtinTypes = context.session.builtinTypes
+        konst typeContext = context.session.typeContext
 
-        val isReturn = node is JumpNode && node.fir is FirReturnExpression
-        val resultExpression = if (isReturn) (node.fir as FirReturnExpression).result else node.fir
+        konst isReturn = node is JumpNode && node.fir is FirReturnExpression
+        konst resultExpression = if (isReturn) (node.fir as FirReturnExpression).result else node.fir
 
-        val expressionType = (resultExpression as? FirExpression)?.typeRef?.coneType
+        konst expressionType = (resultExpression as? FirExpression)?.typeRef?.coneType
         if (expressionType == builtinTypes.nothingType.type) return false
 
         if (isReturn && resultExpression is FirWhenExpression) {
@@ -89,17 +89,17 @@ object FirReturnsImpliesAnalyzer : FirControlFlowChecker() {
         }
 
         var flow = node.flow
-        val operation = effect.value.toOperation()
+        konst operation = effect.konstue.toOperation()
         if (operation != null) {
             if (resultExpression is FirConstExpression<*>) {
-                if (!operation.isTrueFor(resultExpression.value)) return false
+                if (!operation.isTrueFor(resultExpression.konstue)) return false
             } else {
                 if (expressionType != null && !operation.canBeTrueFor(context.session, expressionType)) return false
                 // TODO: avoid modifying the storage
-                val variableStorage = dataFlowInfo.variableStorage as VariableStorageImpl
-                val resultVar = variableStorage.getOrCreateIfReal(flow, resultExpression)
+                konst variableStorage = dataFlowInfo.variableStorage as VariableStorageImpl
+                konst resultVar = variableStorage.getOrCreateIfReal(flow, resultExpression)
                 if (resultVar != null) {
-                    val impliedByReturnValue = logicSystem.approveOperationStatement(flow, OperationStatement(resultVar, operation))
+                    konst impliedByReturnValue = logicSystem.approveOperationStatement(flow, OperationStatement(resultVar, operation))
                     if (impliedByReturnValue.isNotEmpty()) {
                         flow = flow.fork().also { logicSystem.addTypeStatements(it, impliedByReturnValue) }.freeze()
                     }
@@ -107,13 +107,13 @@ object FirReturnsImpliesAnalyzer : FirControlFlowChecker() {
             }
         }
 
-        // TODO: if this is not a top-level function, `FirDataFlowAnalyzer` has erased its value parameters
+        // TODO: if this is not a top-level function, `FirDataFlowAnalyzer` has erased its konstue parameters
         //  from `dataFlowInfo.variableStorage` for some reason, so its `getLocalVariable` doesn't work.
-        val knownVariables = flow.knownVariables.associateBy { it.identifier }
+        konst knownVariables = flow.knownVariables.associateBy { it.identifier }
         // TODO: these should be the same on all return paths, so maybe don't recompute them every time?
-        val argumentVariables = Array(function.valueParameters.size + 1) { i ->
-            val parameterSymbol = if (i > 0) {
-                function.valueParameters[i - 1].symbol
+        konst argumentVariables = Array(function.konstueParameters.size + 1) { i ->
+            konst parameterSymbol = if (i > 0) {
+                function.konstueParameters[i - 1].symbol
             } else {
                 if (function.symbol is FirPropertyAccessorSymbol) {
                     context.containingProperty?.symbol
@@ -121,20 +121,20 @@ object FirReturnsImpliesAnalyzer : FirControlFlowChecker() {
                     null
                 } ?: function.symbol
             }
-            val identifier = Identifier(parameterSymbol, null, null)
+            konst identifier = Identifier(parameterSymbol, null, null)
             // Might be unknown if there are no statements made about that parameter, but it's still possible that trivial
-            // contracts are valid. E.g. `returns() implies (x is String)` when `x`'s *original type* is already `String`.
+            // contracts are konstid. E.g. `returns() implies (x is String)` when `x`'s *original type* is already `String`.
             knownVariables[identifier] ?: RealVariable(identifier, i == 0, null, i, PropertyStability.STABLE_VALUE)
         }
 
-        val conditionStatements = logicSystem.approveContractStatement(
+        konst conditionStatements = logicSystem.approveContractStatement(
             effectDeclaration.condition, argumentVariables, substitutor = null
         ) { logicSystem.approveOperationStatement(flow, it) } ?: return true
 
-        return !conditionStatements.values.all { requirement ->
-            val originalType = requirement.variable.identifier.symbol.correspondingParameterType ?: return@all true
-            val requiredType = requirement.smartCastedType(typeContext, originalType)
-            val actualType = flow.getTypeStatement(requirement.variable).smartCastedType(typeContext, originalType)
+        return !conditionStatements.konstues.all { requirement ->
+            konst originalType = requirement.variable.identifier.symbol.correspondingParameterType ?: return@all true
+            konst requiredType = requirement.smartCastedType(typeContext, originalType)
+            konst actualType = flow.getTypeStatement(requirement.variable).smartCastedType(typeContext, originalType)
             actualType.isSubtypeOf(typeContext, requiredType)
         }
     }
@@ -146,11 +146,11 @@ object FirReturnsImpliesAnalyzer : FirControlFlowChecker() {
         Operation.NotEqNull -> !type.isNullableNothing
     }
 
-    private fun Operation.isTrueFor(value: Any?) = when (this) {
-        Operation.EqTrue -> value == true
-        Operation.EqFalse -> value == false
-        Operation.EqNull -> value == null
-        Operation.NotEqNull -> value != null
+    private fun Operation.isTrueFor(konstue: Any?) = when (this) {
+        Operation.EqTrue -> konstue == true
+        Operation.EqFalse -> konstue == false
+        Operation.EqNull -> konstue == null
+        Operation.NotEqNull -> konstue != null
     }
 
     private fun CFGNode<*>.collectBranchExits(nodes: MutableList<CFGNode<*>> = mutableListOf()): List<CFGNode<*>> {
@@ -160,10 +160,10 @@ object FirReturnsImpliesAnalyzer : FirControlFlowChecker() {
         return nodes
     }
 
-    private val CheckerContext.containingProperty: FirProperty?
+    private konst CheckerContext.containingProperty: FirProperty?
         get() = (containingDeclarations.lastOrNull { it is FirProperty } as? FirProperty)
 
-    private val FirBasedSymbol<*>.correspondingParameterType: ConeKotlinType?
+    private konst FirBasedSymbol<*>.correspondingParameterType: ConeKotlinType?
         get() = when (this) {
             is FirValueParameterSymbol -> resolvedReturnType
             is FirCallableSymbol<*> -> resolvedReceiverTypeRef?.coneType

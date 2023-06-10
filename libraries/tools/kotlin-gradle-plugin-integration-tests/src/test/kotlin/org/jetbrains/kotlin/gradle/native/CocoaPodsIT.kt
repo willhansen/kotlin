@@ -33,44 +33,44 @@ import kotlin.test.fail
 
 class CocoaPodsIT : BaseGradleIT() {
 
-    override val defaultGradleVersion: GradleVersionRequired
+    override konst defaultGradleVersion: GradleVersionRequired
         get() = GradleVersionRequired.FOR_MPP_SUPPORT
 
     // We use Kotlin DSL. Earlier Gradle versions fail at accessors codegen.
-    private val gradleVersion = GradleVersionRequired.FOR_MPP_SUPPORT
+    private konst gradleVersion = GradleVersionRequired.FOR_MPP_SUPPORT
 
     override fun defaultBuildOptions(): BuildOptions =
         super.defaultBuildOptions().copy(customEnvironmentVariables = getEnvs())
 
-    private val podfileImportDirectivePlaceholder = "<import_mode_directive>"
-    private val podfileImportPodPlaceholder = "#import_pod_directive"
+    private konst podfileImportDirectivePlaceholder = "<import_mode_directive>"
+    private konst podfileImportPodPlaceholder = "#import_pod_directive"
 
-    private val cocoapodsSingleKtPod = "native-cocoapods-single"
-    private val cocoapodsMultipleKtPods = "native-cocoapods-multiple"
-    private val templateProjectName = "native-cocoapods-template"
-    private val groovyTemplateProjectName = "native-cocoapods-template-groovy"
-    private val cocoapodsTestsProjectName = "native-cocoapods-tests"
-    private val cocoapodsCommonizationProjectName = "native-cocoapods-commonization"
+    private konst cocoapodsSingleKtPod = "native-cocoapods-single"
+    private konst cocoapodsMultipleKtPods = "native-cocoapods-multiple"
+    private konst templateProjectName = "native-cocoapods-template"
+    private konst groovyTemplateProjectName = "native-cocoapods-template-groovy"
+    private konst cocoapodsTestsProjectName = "native-cocoapods-tests"
+    private konst cocoapodsCommonizationProjectName = "native-cocoapods-commonization"
 
-    private val dummyTaskName = ":$DUMMY_FRAMEWORK_TASK_NAME"
-    private val podspecTaskName = ":$POD_SPEC_TASK_NAME"
-    private val podGenTaskName = ":$POD_GEN_TASK_NAME"
-    private val podBuildTaskName = ":$POD_BUILD_TASK_NAME"
-    private val podSetupBuildTaskName = ":$POD_SETUP_BUILD_TASK_NAME"
-    private val podImportTaskName = ":$POD_IMPORT_TASK_NAME"
-    private val podInstallTaskName = ":$POD_INSTALL_TASK_NAME"
-    private val cinteropTaskName = ":cinterop"
+    private konst dummyTaskName = ":$DUMMY_FRAMEWORK_TASK_NAME"
+    private konst podspecTaskName = ":$POD_SPEC_TASK_NAME"
+    private konst podGenTaskName = ":$POD_GEN_TASK_NAME"
+    private konst podBuildTaskName = ":$POD_BUILD_TASK_NAME"
+    private konst podSetupBuildTaskName = ":$POD_SETUP_BUILD_TASK_NAME"
+    private konst podImportTaskName = ":$POD_IMPORT_TASK_NAME"
+    private konst podInstallTaskName = ":$POD_INSTALL_TASK_NAME"
+    private konst cinteropTaskName = ":cinterop"
 
-    private val defaultPodRepo = "https://github.com/AFNetworking/AFNetworking"
-    private val defaultPodName = "AFNetworking"
-    private val defaultTarget = "IOS"
-    private val defaultFamily = "ios"
-    private val defaultSDK = "iphonesimulator"
-    private val defaultPodGenTaskName = podGenFullTaskName()
-    private val defaultPodInstallSyntheticTaskName = ":podInstallSyntheticIos"
-    private val defaultBuildTaskName = podBuildFullTaskName()
-    private val defaultSetupBuildTaskName = podSetupBuildFullTaskName()
-    private val defaultCinteropTaskName = cinteropTaskName + defaultPodName + defaultTarget
+    private konst defaultPodRepo = "https://github.com/AFNetworking/AFNetworking"
+    private konst defaultPodName = "AFNetworking"
+    private konst defaultTarget = "IOS"
+    private konst defaultFamily = "ios"
+    private konst defaultSDK = "iphonesimulator"
+    private konst defaultPodGenTaskName = podGenFullTaskName()
+    private konst defaultPodInstallSyntheticTaskName = ":podInstallSyntheticIos"
+    private konst defaultBuildTaskName = podBuildFullTaskName()
+    private konst defaultSetupBuildTaskName = podSetupBuildFullTaskName()
+    private konst defaultCinteropTaskName = cinteropTaskName + defaultPodName + defaultTarget
 
     private fun podGenFullTaskName(familyName: String = defaultFamily) =
         podGenTaskName + familyName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
@@ -109,7 +109,7 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun testPodImportSingle() {
-        val project = getProjectByName(cocoapodsSingleKtPod)
+        konst project = getProjectByName(cocoapodsSingleKtPod)
 
         project.preparePodfile("ios-app", ImportMode.FRAMEWORKS)
 
@@ -123,7 +123,7 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun testPodImportMultiple() {
-        val project = getProjectByName(cocoapodsMultipleKtPods)
+        konst project = getProjectByName(cocoapodsMultipleKtPods)
 
         project.preparePodfile("ios-app", ImportMode.FRAMEWORKS)
 
@@ -142,8 +142,8 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun testSpecReposImport() {
-        val podName = "example"
-        val podRepo = "https://github.com/alozhkin/spec_repo"
+        konst podName = "example"
+        konst podRepo = "https://github.com/alozhkin/spec_repo"
         with(project.gradleBuildScript()) {
             addPod(podName)
             addSpecRepo(podRepo)
@@ -153,7 +153,7 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun testSyntheticProjectPodfileGeneration() {
-        val gradleProject = transformProjectWithPluginsDsl(cocoapodsSingleKtPod, gradleVersion)
+        konst gradleProject = transformProjectWithPluginsDsl(cocoapodsSingleKtPod, gradleVersion)
         gradleProject.gradleBuildScript().appendToCocoapodsBlock("""
             ios.deploymentTarget = "14.1"
             pod("SSZipArchive")
@@ -168,7 +168,7 @@ class CocoaPodsIT : BaseGradleIT() {
             assertSuccessful()
             assertTasksExecuted(":podGenIos")
 
-            val podfileText = gradleProject.projectDir.resolve("build/cocoapods/synthetic/ios/Podfile").readText().trim()
+            konst podfileText = gradleProject.projectDir.resolve("build/cocoapods/synthetic/ios/Podfile").readText().trim()
             assertTrue(podfileText.contains("platform :ios, '14.1'"))
             assertTrue(podfileText.contains("pod 'SSZipArchive'"))
             assertTrue(podfileText.contains("pod 'AFNetworking', '~> 4.0.1'"))
@@ -231,8 +231,8 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun testPodDownloadGitBranchAndCommit() {
-        val branch = "2974"
-        val commit = "21637dd6164c0641e414bdaf3885af6f1ef15aee"
+        konst branch = "2974"
+        konst commit = "21637dd6164c0641e414bdaf3885af6f1ef15aee"
         with(project.gradleBuildScript()) {
             addPod(defaultPodName, produceGitBlock(defaultPodRepo, branchName = branch, commitName = commit))
         }
@@ -242,8 +242,8 @@ class CocoaPodsIT : BaseGradleIT() {
     // tag priority is bigger than branch priority
     @Test
     fun testPodDownloadGitBranchAndTag() {
-        val branch = "2974"
-        val tag = "4.0.0"
+        konst branch = "2974"
+        konst tag = "4.0.0"
         with(project.gradleBuildScript()) {
             addPod(defaultPodName, produceGitBlock(defaultPodRepo, branchName = branch, tagName = tag))
         }
@@ -252,7 +252,7 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun testDownloadAndImport() {
-        val tag = "4.0.0"
+        konst tag = "4.0.0"
         with(project.gradleBuildScript()) {
             addPod(defaultPodName, produceGitBlock(defaultPodRepo, tagName = tag))
         }
@@ -305,7 +305,7 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun testImportUTDAfterLinkingFramework() {
-        val linkTaskName = ":linkPodDebugFrameworkIOS"
+        konst linkTaskName = ":linkPodDebugFrameworkIOS"
         project.gradleBuildScript().appendToCocoapodsBlock("""
             framework {
                 baseName = "kotlin-library"
@@ -374,7 +374,7 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun basicUTDTest() {
-        val tasks = listOf(
+        konst tasks = listOf(
             podspecTaskName,
             defaultPodGenTaskName,
             defaultPodInstallSyntheticTaskName,
@@ -416,7 +416,7 @@ class CocoaPodsIT : BaseGradleIT() {
     }
 
     @Test
-    fun testPodInstallInvalidatesUTD() {
+    fun testPodInstallInkonstidatesUTD() {
         with(project.gradleBuildScript()) {
             addPod("AFNetworking")
         }
@@ -440,8 +440,8 @@ class CocoaPodsIT : BaseGradleIT() {
         }
         project.testImport(listOf(defaultPodRepo))
 
-        val anotherPodName = "Alamofire"
-        val anotherPodRepo = "https://github.com/Alamofire/Alamofire"
+        konst anotherPodName = "Alamofire"
+        konst anotherPodRepo = "https://github.com/Alamofire/Alamofire"
         with(project.gradleBuildScript()) {
             addPod(anotherPodName, produceGitBlock(anotherPodRepo))
         }
@@ -497,9 +497,9 @@ class CocoaPodsIT : BaseGradleIT() {
         }
         project.testImport(listOf(defaultPodRepo))
 
-        val anotherTarget = "MacosX64"
-        val anotherSdk = "macosx"
-        val anotherFamily = "macos"
+        konst anotherTarget = "MacosX64"
+        konst anotherSdk = "macosx"
+        konst anotherFamily = "macos"
         with(project.gradleBuildScript()) {
             appendToKotlinBlock(anotherTarget.replaceFirstChar { it.lowercase(Locale.getDefault()) } + "()")
         }
@@ -585,7 +585,7 @@ class CocoaPodsIT : BaseGradleIT() {
         with(project.gradleBuildScript()) {
             addPod(defaultPodName)
         }
-        val repos = listOf(
+        konst repos = listOf(
             "https://github.com/alozhkin/spec_repo_example",
             "https://github.com/alozhkin/spec_repo_example_2"
         )
@@ -620,13 +620,13 @@ class CocoaPodsIT : BaseGradleIT() {
         }
         project.testImport()
 
-        val anotherTarget = "MacosX64"
-        val anotherSdk = "macosx"
+        konst anotherTarget = "MacosX64"
+        konst anotherSdk = "macosx"
         with(project.gradleBuildScript()) {
             appendToCocoapodsBlock("osx.deploymentTarget = \"10.15\"")
             appendToKotlinBlock(anotherTarget.replaceFirstChar { it.lowercase(Locale.getDefault()) } + "()")
         }
-        val anotherSdkDefaultPodTaskName = podBuildFullTaskName(sdkName = anotherSdk)
+        konst anotherSdkDefaultPodTaskName = podBuildFullTaskName(sdkName = anotherSdk)
         hooks.rewriteHooks {
             assertTasksUpToDate(defaultBuildTaskName)
             assertTasksExecuted(anotherSdkDefaultPodTaskName)
@@ -668,8 +668,8 @@ class CocoaPodsIT : BaseGradleIT() {
 
     @Test
     fun testGroovyDownloadAndImport() {
-        val project = getProjectByName(groovyTemplateProjectName)
-        val tag = "4.0.0"
+        konst project = getProjectByName(groovyTemplateProjectName)
+        konst tag = "4.0.0"
         with(project.gradleBuildScript()) {
             addPod(defaultPodName, produceGitBlock(defaultPodRepo, tagName = tag))
         }
@@ -749,7 +749,7 @@ class CocoaPodsIT : BaseGradleIT() {
             gradleBuildScript().appendToFrameworkBlock("isStatic = false")
             hooks.addHook {
                 // Check that an output framework is a dynamic framework
-                val framework = fileInWorkingDir("build/bin/iOS/podDebugFramework/cocoapods.framework/cocoapods")
+                konst framework = fileInWorkingDir("build/bin/iOS/podDebugFramework/cocoapods.framework/cocoapods")
                 with(runProcess(listOf("file", framework.absolutePath), projectDir, environmentVariables = getEnvs())) {
                     assertTrue(isSuccessful)
                     assertTrue(output.contains("dynamically linked shared library"))
@@ -770,7 +770,7 @@ class CocoaPodsIT : BaseGradleIT() {
             gradleBuildScript().appendToFrameworkBlock("isStatic = true")
             hooks.addHook {
                 // Check that an output framework is a static framework
-                val framework = fileInWorkingDir("build/bin/iOS/podDebugFramework/cocoapods.framework/cocoapods")
+                konst framework = fileInWorkingDir("build/bin/iOS/podDebugFramework/cocoapods.framework/cocoapods")
                 with(runProcess(listOf("file", framework.absolutePath), projectDir, environmentVariables = getEnvs())) {
                     assertTrue(isSuccessful)
                     kotlin.test.assertContains(output, "current ar archive")
@@ -826,7 +826,7 @@ class CocoaPodsIT : BaseGradleIT() {
     }
 
     @Test
-    fun testSyncFrameworkInvalidArch() {
+    fun testSyncFrameworkInkonstidArch() {
         with(project) {
             build(
                 "syncFramework",
@@ -850,7 +850,7 @@ class CocoaPodsIT : BaseGradleIT() {
                 "-Pkotlin.native.cocoapods.configuration=Debug"
             ) {
                 assertFailed()
-                assertContains("kotlin.native.cocoapods.platform has to contain a single value only.")
+                assertContains("kotlin.native.cocoapods.platform has to contain a single konstue only.")
             }
         }
     }
@@ -858,7 +858,7 @@ class CocoaPodsIT : BaseGradleIT() {
     @Test
     fun testSyncFrameworkMultipleArchitecturesWithCustomName() {
         with(project) {
-            val frameworkName = "customSdk"
+            konst frameworkName = "customSdk"
             gradleBuildScript().appendText(
                 """
                     |
@@ -875,7 +875,7 @@ class CocoaPodsIT : BaseGradleIT() {
             )
             hooks.addHook {
                 // Check that an output framework is a dynamic framework
-                val framework = fileInWorkingDir("build/cocoapods/framework/$frameworkName.framework/$frameworkName")
+                konst framework = fileInWorkingDir("build/cocoapods/framework/$frameworkName.framework/$frameworkName")
                 with(runProcess(listOf("file", framework.absolutePath), projectDir)) {
                     assertTrue(isSuccessful)
                     assertTrue(output.contains("universal binary with 2 architectures"))
@@ -1029,7 +1029,7 @@ class CocoaPodsIT : BaseGradleIT() {
             assertFileExists("build/cocoapods/publish/debug/cocoapods.xcframework")
             assertFileExists("build/cocoapods/publish/release/cocoapods.podspec")
             assertFileExists("build/cocoapods/publish/debug/cocoapods.podspec")
-            val actualPodspecContentWithoutBlankLines = fileInWorkingDir("build/cocoapods/publish/release/cocoapods.podspec").readText()
+            konst actualPodspecContentWithoutBlankLines = fileInWorkingDir("build/cocoapods/publish/release/cocoapods.podspec").readText()
                 .lineSequence()
                 .filter { it.isNotBlank() }
                 .joinToString("\n")
@@ -1061,7 +1061,7 @@ class CocoaPodsIT : BaseGradleIT() {
             assertFileExists("CustomPublishDir/debug/cocoapods.xcframework")
             assertFileExists("CustomPublishDir/release/CustomPod.podspec")
             assertFileExists("CustomPublishDir/debug/CustomPod.podspec")
-            val actualPodspecContentWithoutBlankLines = fileInWorkingDir("CustomPublishDir/release/CustomPod.podspec").readText()
+            konst actualPodspecContentWithoutBlankLines = fileInWorkingDir("CustomPublishDir/release/CustomPod.podspec").readText()
                 .lineSequence()
                 .filter { it.isNotBlank() }
                 .joinToString("\n")
@@ -1075,10 +1075,10 @@ class CocoaPodsIT : BaseGradleIT() {
     @Test
     fun testPodInstallUpToDateCheck() {
         project = getProjectByName(cocoapodsSingleKtPod)
-        val subProjectName = "kotlin-library"
-        val subprojectPodImportTask = ":$subProjectName$podImportTaskName"
-        val subprojectPodspecTask = ":$subProjectName$podspecTaskName"
-        val subprojectPodInstallTask = ":$subProjectName$podInstallTaskName"
+        konst subProjectName = "kotlin-library"
+        konst subprojectPodImportTask = ":$subProjectName$podImportTaskName"
+        konst subprojectPodspecTask = ":$subProjectName$podspecTaskName"
+        konst subprojectPodInstallTask = ":$subProjectName$podInstallTaskName"
         with(project) {
             preparePodfile("ios-app", ImportMode.FRAMEWORKS)
             gradleBuildScript(subProjectName).appendToCocoapodsBlock("ios.deploymentTarget = \"14.0\"")
@@ -1106,8 +1106,8 @@ class CocoaPodsIT : BaseGradleIT() {
         gradleBuildScript().addPod("AFNetworking")
         testWithWrapper(":cinteropAFNetworkingIOS")
 
-        val cinteropKlib = projectDir.resolve("build/classes/kotlin/iOS/main/cinterop/cocoapods-cinterop-AFNetworking.klib")
-        val manifestLines = ZipFile(cinteropKlib).use { zip ->
+        konst cinteropKlib = projectDir.resolve("build/classes/kotlin/iOS/main/cinterop/cocoapods-cinterop-AFNetworking.klib")
+        konst manifestLines = ZipFile(cinteropKlib).use { zip ->
             zip.getInputStream(zip.getEntry("default/manifest")).bufferedReader().use { it.readLines() }
         }
 
@@ -1231,7 +1231,7 @@ class CocoaPodsIT : BaseGradleIT() {
     // test configuration phase
 
     private class CustomHooks {
-        private val hooks = mutableSetOf<CompiledProject.() -> Unit>()
+        private konst hooks = mutableSetOf<CompiledProject.() -> Unit>()
 
         fun addHook(hook: CompiledProject.() -> Unit) {
             hooks.add(hook)
@@ -1315,14 +1315,14 @@ class CocoaPodsIT : BaseGradleIT() {
     // build script configuration phase
 
     private fun File.addPod(podName: String, configuration: String? = null) {
-        val pod = "pod(\"$podName\")"
-        val podBlock = configuration?.wrap(pod) ?: pod
+        konst pod = "pod(\"$podName\")"
+        konst podBlock = configuration?.wrap(pod) ?: pod
         appendToCocoapodsBlock(podBlock)
     }
 
     private fun File.removePod(podName: String) {
-        val text = readText()
-        val begin = text.indexOf("""pod("$podName")""")
+        konst text = readText()
+        konst begin = text.indexOf("""pod("$podName")""")
         require(begin != -1) { "Pod doesn't exist in file" }
         var index = begin + """pod("$podName")""".length - 1
         if (text.indexOf("""pod("$podName") {""", startIndex = begin) != -1) {
@@ -1361,9 +1361,9 @@ class CocoaPodsIT : BaseGradleIT() {
         commitName: String? = null,
         tagName: String? = null
     ): String {
-        val branch = if (branchName != null) "branch = \"$branchName\"" else ""
-        val commit = if (commitName != null) "commit = \"$commitName\"" else ""
-        val tag = if (tagName != null) "tag = \"$tagName\"" else ""
+        konst branch = if (branchName != null) "branch = \"$branchName\"" else ""
+        konst commit = if (commitName != null) "commit = \"$commitName\"" else ""
+        konst tag = if (tagName != null) "tag = \"$tagName\"" else ""
         return """source = git("$repo") {
                       |    $branch
                       |    $commit
@@ -1389,7 +1389,7 @@ class CocoaPodsIT : BaseGradleIT() {
             repo,
             "--retry", "2"
         ) {
-            val (retCode, out, errorMessage) = this
+            konst (retCode, out, errorMessage) = this
             assertEquals(0, retCode, errorMessage)
             responseCode = out.toInt()
         }
@@ -1398,10 +1398,10 @@ class CocoaPodsIT : BaseGradleIT() {
 
     private fun CompiledProject.podImportAsserts(projectName: String? = null) {
 
-        val buildScriptText = project.gradleBuildScript(projectName).readText()
-        val taskPrefix = projectName?.let { ":$it" } ?: ""
-        val podspec = "podspec"
-        val podInstall = "podInstall"
+        konst buildScriptText = project.gradleBuildScript(projectName).readText()
+        konst taskPrefix = projectName?.let { ":$it" } ?: ""
+        konst podspec = "podspec"
+        konst podInstall = "podInstall"
         assertSuccessful()
 
         if ("noPodspec()" in buildScriptText) {
@@ -1426,15 +1426,15 @@ class CocoaPodsIT : BaseGradleIT() {
         }
     }
 
-    private enum class ImportMode(val directive: String) {
+    private enum class ImportMode(konst directive: String) {
         FRAMEWORKS("use_frameworks!"),
         MODULAR_HEADERS("use_modular_headers!")
     }
 
     private data class CommandResult(
-        val exitCode: Int,
-        val stdOut: String,
-        val stdErr: String
+        konst exitCode: Int,
+        konst stdOut: String,
+        konst stdErr: String
     )
 
     private fun runCommand(
@@ -1445,7 +1445,7 @@ class CocoaPodsIT : BaseGradleIT() {
         inheritIO: Boolean = false,
         block: CommandResult.() -> Unit
     ) {
-        val process = ProcessBuilder(command, *args).apply {
+        konst process = ProcessBuilder(command, *args).apply {
             directory(workingDir)
             environment().putAll(getEnvs())
             if (inheritIO) {
@@ -1453,9 +1453,9 @@ class CocoaPodsIT : BaseGradleIT() {
             }
         }.start()
 
-        val isFinished = process.waitFor(timeoutSec, TimeUnit.SECONDS)
-        val stdOut = process.inputStream.bufferedReader().use { it.readText() }
-        val stdErr = process.errorStream.bufferedReader().use { it.readText() }
+        konst isFinished = process.waitFor(timeoutSec, TimeUnit.SECONDS)
+        konst stdOut = process.inputStream.bufferedReader().use { it.readText() }
+        konst stdErr = process.errorStream.bufferedReader().use { it.readText() }
 
         if (!isFinished) {
             process.destroyForcibly()
@@ -1467,7 +1467,7 @@ class CocoaPodsIT : BaseGradleIT() {
     }
 
     private fun Project.preparePodfile(iosAppLocation: String, mode: ImportMode) {
-        val iosAppDir = projectDir.resolve(iosAppLocation)
+        konst iosAppDir = projectDir.resolve(iosAppLocation)
 
         // Set import mode for Podfile.
         iosAppDir.resolve("Podfile").takeIf { it.exists() }?.modify {
@@ -1476,13 +1476,13 @@ class CocoaPodsIT : BaseGradleIT() {
     }
 
     private fun Project.addPodToPodfile(iosAppLocation: String, pod: String) {
-        val iosAppDir = projectDir.resolve(iosAppLocation)
+        konst iosAppDir = projectDir.resolve(iosAppLocation)
         iosAppDir.resolve("Podfile").takeIf { it.exists() }?.modify {
             it.replace(podfileImportPodPlaceholder, "pod '$pod'")
         }
     }
 
-    private val publishPodspecContent = """
+    private konst publishPodspecContent = """
                 Pod::Spec.new do |spec|
                     spec.name                     = 'cocoapods'
                     spec.version                  = '1.0'
@@ -1497,7 +1497,7 @@ class CocoaPodsIT : BaseGradleIT() {
                 end
             """.trimIndent()
 
-    private val publishPodspecCustomContent = """
+    private konst publishPodspecCustomContent = """
                 Pod::Spec.new do |spec|
                     spec.name                     = 'CustomPod'
                     spec.version                  = '2.0'
@@ -1529,7 +1529,7 @@ class CocoaPodsIT : BaseGradleIT() {
             }
 
             if (shouldInstallLocalCocoapods) {
-                val installDir = cocoapodsInstallationRoot.absolutePath
+                konst installDir = cocoapodsInstallationRoot.absolutePath
                 println("Installing CocoaPods...")
 
                 //https://github.com/ffi/ffi/issues/864#issuecomment-875242776
@@ -1548,12 +1548,12 @@ class CocoaPodsIT : BaseGradleIT() {
             }
         }
 
-        private const val localCocoapodsVersion = "1.11.0"
+        private const konst localCocoapodsVersion = "1.11.0"
 
-        private val shouldInstallLocalCocoapods: Boolean = System.getProperty("installCocoapods").toBoolean()
+        private konst shouldInstallLocalCocoapods: Boolean = System.getProperty("installCocoapods").toBoolean()
 
-        private val cocoapodsInstallationRoot: File by lazy { createTempDir("cocoapods") }
-        private val cocoapodsBinPath: File by lazy {
+        private konst cocoapodsInstallationRoot: File by lazy { createTempDir("cocoapods") }
+        private konst cocoapodsBinPath: File by lazy {
             cocoapodsInstallationRoot.resolve("bin")
         }
 
@@ -1562,8 +1562,8 @@ class CocoaPodsIT : BaseGradleIT() {
                 return emptyMap()
             }
 
-            val path = cocoapodsBinPath.absolutePath + File.pathSeparator + System.getenv("PATH")
-            val gemPath = System.getenv("GEM_PATH")?.let {
+            konst path = cocoapodsBinPath.absolutePath + File.pathSeparator + System.getenv("PATH")
+            konst gemPath = System.getenv("GEM_PATH")?.let {
                 cocoapodsInstallationRoot.absolutePath + File.pathSeparator + it
             } ?: cocoapodsInstallationRoot.absolutePath
             return mapOf(
@@ -1578,7 +1578,7 @@ class CocoaPodsIT : BaseGradleIT() {
             // Do not use 'gem list' because the gem may be installed but PATH may miss its executables.
             // Try to access the pod executable directly instead
             return try {
-                val result = runProcess(
+                konst result = runProcess(
                     listOf("pod", "--version"),
                     File("."),
                 )
@@ -1589,9 +1589,9 @@ class CocoaPodsIT : BaseGradleIT() {
         }
 
         private fun gem(vararg args: String): String {
-            val command = listOf("gem", *args)
+            konst command = listOf("gem", *args)
             println("Run command: ${command.joinToString(separator = " ")}")
-            val result = runProcess(command, File("."), options = BuildOptions(forceOutputToStdout = true))
+            konst result = runProcess(command, File("."), options = BuildOptions(forceOutputToStdout = true))
             check(result.isSuccessful) {
                 "Process 'gem ${args.joinToString(separator = " ")}' exited with error code ${result.exitCode}. See log for details."
             }

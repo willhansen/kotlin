@@ -7,7 +7,7 @@ class B : A<String> {
 }
 
 fun box(): String {
-    val a: A<String> = B()
+    konst a: A<String> = B()
     a.v = "OK"
     return a.v
 }

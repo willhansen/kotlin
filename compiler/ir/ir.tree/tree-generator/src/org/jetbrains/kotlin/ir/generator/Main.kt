@@ -12,18 +12,18 @@ import org.jetbrains.kotlin.ir.generator.model.config2model
 import org.jetbrains.kotlin.ir.generator.print.*
 import java.io.File
 
-const val BASE_PACKAGE = "org.jetbrains.kotlin.ir"
-const val VISITOR_PACKAGE = "$BASE_PACKAGE.visitors"
+const konst BASE_PACKAGE = "org.jetbrains.kotlin.ir"
+const konst VISITOR_PACKAGE = "$BASE_PACKAGE.visitors"
 
 fun main(args: Array<String>) {
-    val generationPath = args.firstOrNull()?.let { File(it) }
+    konst generationPath = args.firstOrNull()?.let { File(it) }
         ?: File("compiler/ir/ir.tree/gen").canonicalFile
 
-    val config = IrTree.build()
-    val model = config2model(config)
+    konst config = IrTree.build()
+    konst model = config2model(config)
 
-    val previouslyGeneratedFiles = collectPreviouslyGeneratedFiles(generationPath)
-    val generatedFiles = sequence {
+    konst previouslyGeneratedFiles = collectPreviouslyGeneratedFiles(generationPath)
+    konst generatedFiles = sequence {
         yieldAll(printElements(generationPath, model))
         yield(printVisitor(generationPath, model))
         yield(printVisitorVoid(generationPath, model))

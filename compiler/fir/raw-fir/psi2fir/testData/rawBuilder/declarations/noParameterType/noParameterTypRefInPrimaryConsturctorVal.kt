@@ -1,1 +1,1 @@
-class X(val x) {}
+class X(konst x) {}

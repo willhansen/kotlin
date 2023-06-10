@@ -6,16 +6,16 @@ import java.io.File
 import java.nio.file.Files
 
 internal fun verifyModule(llvmModule: LLVMModuleRef, current: String = "") = memScoped {
-    val errorRef = allocPointerTo<ByteVar>()
-    errorRef.value = null
+    konst errorRef = allocPointerTo<ByteVar>()
+    errorRef.konstue = null
 
-    val verificationResult = LLVMVerifyModule(
+    konst verificationResult = LLVMVerifyModule(
             llvmModule,
             LLVMVerifierFailureAction.LLVMReturnStatusAction,
             errorRef.ptr
     )
 
-    val verificationError = convertAndDisposeLlvmMessage(errorRef.value)
+    konst verificationError = convertAndDisposeLlvmMessage(errorRef.konstue)
 
     if (verificationResult != 0) {
         throwModuleVerificationError(llvmModule, current, verificationError)
@@ -27,7 +27,7 @@ private fun throwModuleVerificationError(
         current: String,
         verificationError: String?
 ): Nothing {
-    val exceptionMessage = buildString {
+    konst exceptionMessage = buildString {
         try {
             appendModuleVerificationFailureDetails(llvmModule, current, verificationError)
         } catch (e: Throwable) {
@@ -43,14 +43,14 @@ private fun StringBuilder.appendModuleVerificationFailureDetails(
         current: String,
         verificationError: String?
 ) {
-    appendLine("Invalid LLVM module")
+    appendLine("Inkonstid LLVM module")
 
     if (current.isNotEmpty())
         appendLine("Error in $current")
 
     appendVerificationError(verificationError)
 
-    val moduleDumpFile = Files.createTempFile("kotlin_native_llvm_module_dump", ".ll").toFile()
+    konst moduleDumpFile = Files.createTempFile("kotlin_native_llvm_module_dump", ".ll").toFile()
 
     dumpModuleAndAppendDetails(llvmModule, moduleDumpFile)
 
@@ -60,10 +60,10 @@ private fun StringBuilder.appendModuleVerificationFailureDetails(
 private fun StringBuilder.appendVerificationError(error: String?) {
     if (error == null) return
 
-    val lines = error.lines()
+    konst lines = error.lines()
     appendLine("Verification errors:")
 
-    val maxLines = 12
+    konst maxLines = 12
 
     lines.take(maxLines).forEach {
         appendLine("    $it")
@@ -75,14 +75,14 @@ private fun StringBuilder.appendVerificationError(error: String?) {
 }
 
 private fun StringBuilder.dumpModuleAndAppendDetails(llvmModule: LLVMModuleRef, moduleDumpFile: File) = memScoped {
-    val errorRef = allocPointerTo<ByteVar>()
-    errorRef.value = null
-    val printedWithErrors = LLVMPrintModuleToFile(llvmModule, moduleDumpFile.absolutePath, errorRef.ptr)
+    konst errorRef = allocPointerTo<ByteVar>()
+    errorRef.konstue = null
+    konst printedWithErrors = LLVMPrintModuleToFile(llvmModule, moduleDumpFile.absolutePath, errorRef.ptr)
 
     appendLine()
     appendLine("LLVM module dump: ${moduleDumpFile.absolutePath}")
 
-    val modulePrintError = convertAndDisposeLlvmMessage(errorRef.value)
+    konst modulePrintError = convertAndDisposeLlvmMessage(errorRef.konstue)
     if (printedWithErrors != 0) {
         appendLine("  (printed with errors: $modulePrintError)")
     }

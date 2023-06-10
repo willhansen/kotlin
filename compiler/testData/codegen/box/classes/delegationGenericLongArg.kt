@@ -5,7 +5,7 @@ interface A<T, U> {
 class Derived(a: A<Long, Int>) : A<Long, Int> by a
 
 fun box(): String {
-    val o = object : A<Long, Int> {
+    konst o = object : A<Long, Int> {
         override fun foo(t: Long, u: Int) = if (t == u.toLong()) "OK" else "Fail $t $u"
     }
     return Derived(o).foo(42, 42)

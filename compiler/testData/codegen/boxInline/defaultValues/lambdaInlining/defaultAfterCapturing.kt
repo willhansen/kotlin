@@ -10,6 +10,6 @@ inline fun foo(unused: Long, x: () -> String, y: () -> String, z: () -> String =
 import test.*
 
 fun box(): String {
-    val O = "O"
+    konst O = "O"
     return foo(1L, { O }, { "K" })
 }

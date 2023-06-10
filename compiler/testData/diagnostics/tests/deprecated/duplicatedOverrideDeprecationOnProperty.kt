@@ -3,10 +3,10 @@
 
 interface A {
     @Deprecated("")
-    val a: String
+    konst a: String
 
     @Deprecated("")
-    val b: String
+    konst b: String
 
     @Deprecated("")
     var c: String
@@ -22,9 +22,9 @@ interface A {
 }
 
 object B : A {
-    override val <!OVERRIDE_DEPRECATION!>a<!>: String = ""
+    override konst <!OVERRIDE_DEPRECATION!>a<!>: String = ""
 
-    override val <!OVERRIDE_DEPRECATION!>b<!>: String
+    override konst <!OVERRIDE_DEPRECATION!>b<!>: String
         get() = ""
 
     override var <!OVERRIDE_DEPRECATION!>c<!>: String = ""
@@ -33,13 +33,13 @@ object B : A {
         get() = field
 
     override var <!OVERRIDE_DEPRECATION!>e<!>: String = ""
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
     override var <!OVERRIDE_DEPRECATION!>h<!>: String = ""
         get() = field
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 }

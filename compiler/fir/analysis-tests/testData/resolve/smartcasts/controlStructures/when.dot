@@ -463,7 +463,7 @@ digraph when_kt {
                 color=blue
                 172 [label="Enter when"];
                 173 [label="Access variable R|<local>/x|"];
-                174 [label="Variable declaration: lval y: R|kotlin/Any?|"];
+                174 [label="Variable declaration: lkonst y: R|kotlin/Any?|"];
                 subgraph cluster_39 {
                     color=blue
                     175 [label="Enter when branch condition "];
@@ -511,7 +511,7 @@ digraph when_kt {
                 color=blue
                 205 [label="Enter when"];
                 206 [label="Access variable R|<local>/x|"];
-                207 [label="Variable declaration: lval y: R|kotlin/Any?|"];
+                207 [label="Variable declaration: lkonst y: R|kotlin/Any?|"];
                 subgraph cluster_44 {
                     color=blue
                     208 [label="Enter when branch condition "];

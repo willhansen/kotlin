@@ -45,12 +45,12 @@ internal inline fun KotlinLogger.kotlinDebug(message: () -> String) {
 }
 
 internal inline fun <T> KotlinLogger.logTime(action: String, fn: () -> T): T {
-    val startNs = System.nanoTime()
-    val result = fn()
-    val endNs = System.nanoTime()
+    konst startNs = System.nanoTime()
+    konst result = fn()
+    konst endNs = System.nanoTime()
 
-    val timeNs = endNs - startNs
-    val timeMs = timeNs.toDouble() / 1_000_000
+    konst timeNs = endNs - startNs
+    konst timeMs = timeNs.toDouble() / 1_000_000
 
     debug(String.format("%s took %.2f ms", action, timeMs))
 

@@ -31,16 +31,16 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirAnonymousInitializerImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
     override var body: FirBlock?,
-    override val symbol: FirAnonymousInitializerSymbol,
-    override val dispatchReceiverType: ConeClassLikeType?,
+    override konst symbol: FirAnonymousInitializerSymbol,
+    override konst dispatchReceiverType: ConeClassLikeType?,
 ) : FirAnonymousInitializer() {
-    override val annotations: List<FirAnnotation> get() = emptyList()
+    override konst annotations: List<FirAnnotation> get() = emptyList()
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
 
     init {

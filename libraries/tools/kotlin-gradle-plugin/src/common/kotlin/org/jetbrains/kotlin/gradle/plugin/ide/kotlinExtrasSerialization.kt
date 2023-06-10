@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.gradle.idea.tcs.extras.*
 import org.jetbrains.kotlin.gradle.kpm.idea.kotlinDebugKey
 
 @InternalKotlinGradlePluginApi
-val kotlinExtrasSerialization = IdeaKotlinExtrasSerializationExtension {
+konst kotlinExtrasSerialization = IdeaKotlinExtrasSerializationExtension {
     register(kotlinDebugKey, javaIoSerializable())
     register(KlibExtra.key, javaIoSerializable())
     register(isIdeaProjectLevelKey, IdeaKotlinBooleanExtrasSerializer)

@@ -4,7 +4,7 @@ class Foo1() : java.util.ArrayList<Int>()
 
 open class Bar() {
     fun v() : Int  = 1
-    val v : Int = 1
+    konst v : Int = 1
 }
 
 class Barr() : Bar() {}

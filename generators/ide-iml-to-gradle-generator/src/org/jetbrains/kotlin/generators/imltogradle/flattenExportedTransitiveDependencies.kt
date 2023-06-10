@@ -13,10 +13,10 @@ import org.jetbrains.jps.model.module.JpsModule
 import org.jetbrains.jps.model.module.JpsModuleDependency
 import java.util.*
 
-data class JpsDependencyDescriptor(val moduleOrLibrary: Either<JpsModule, JpsLibrary>, val scope: JpsJavaDependencyScope) {
+data class JpsDependencyDescriptor(konst moduleOrLibrary: Either<JpsModule, JpsLibrary>, konst scope: JpsJavaDependencyScope) {
     companion object {
         fun from(dep: JpsDependencyElement): JpsDependencyDescriptor? {
-            val moduleOrLibrary = when (dep) {
+            konst moduleOrLibrary = when (dep) {
                 is JpsModuleDependency -> dep.module
                     .orElse { error("Cannot resolve module reference = ${dep.moduleReference}") }
                     .let { Either.First(it) }
@@ -31,22 +31,22 @@ data class JpsDependencyDescriptor(val moduleOrLibrary: Either<JpsModule, JpsLib
 }
 
 fun JpsModule.flattenExportedTransitiveDependencies(): Sequence<JpsDependencyDescriptor> {
-    val visitedModuleNames = HashSet<String>()
-    val toVisit = PriorityQueue<JpsDependencyDescriptor>(
+    konst visitedModuleNames = HashSet<String>()
+    konst toVisit = PriorityQueue<JpsDependencyDescriptor>(
         compareBy<JpsDependencyDescriptor, JpsJavaDependencyScope>(JpsDependencyScopeCompileClasspathComparator.reversed()) { it.scope }
-            .thenComparing(compareBy { it.moduleOrLibrary.value.name })
+            .thenComparing(compareBy { it.moduleOrLibrary.konstue.name })
     )
 
     // Dijkstra's modified algorithm: intersectCompileClasspath is like sum
     suspend fun SequenceScope<JpsDependencyDescriptor>.visit(current: JpsDependencyDescriptor) {
-        when (val moduleOrLibrary = current.moduleOrLibrary) {
+        when (konst moduleOrLibrary = current.moduleOrLibrary) {
             is Either.First -> {
-                val jpsModule = moduleOrLibrary.value
+                konst jpsModule = moduleOrLibrary.konstue
                 if (!visitedModuleNames.add(jpsModule.name)) {
                     return
                 }
                 yield(current)
-                val elements = jpsModule.dependencies
+                konst elements = jpsModule.dependencies
                     .filter { it.isExported }
                     .map { JpsDependencyDescriptor.from(it)!! }
                     .map { it.copy(scope = it.scope intersectCompileClasspath current.scope) }
@@ -72,7 +72,7 @@ private object JpsDependencyScopeCompileClasspathComparator : Comparator<JpsJava
     // Let's assume that module A depends on module B (A->B notation)
     // A[src] notation means "source root" of module A. A[test] notation means "test root" of module A.
     // Keeping this in mind let's consider different types of dependencies:
-    val ascending = listOf(
+    konst ascending = listOf(
         JpsJavaDependencyScope.RUNTIME,  // Doesn't establish any compile time dependencies
         JpsJavaDependencyScope.TEST,     // Compile time dependencies are: A[test]->B[src], A[test]->B[test] (so TEST > RUNTIME)
         JpsJavaDependencyScope.PROVIDED, // Compile time dependencies are like in TEST + A[src]->B[src] (so PROVIDED > TEST)
@@ -81,8 +81,8 @@ private object JpsDependencyScopeCompileClasspathComparator : Comparator<JpsJava
     )
 
     override fun compare(first: JpsJavaDependencyScope?, second: JpsJavaDependencyScope?): Int {
-        val firstIndex = ascending.indexOf(first).takeIf { it != -1 } ?: error("Unknown $first")
-        val secondIndex = ascending.indexOf(second).takeIf { it != -1 } ?: error("Unknown $second")
+        konst firstIndex = ascending.indexOf(first).takeIf { it != -1 } ?: error("Unknown $first")
+        konst secondIndex = ascending.indexOf(second).takeIf { it != -1 } ?: error("Unknown $second")
         return firstIndex.compareTo(secondIndex)
     }
 }

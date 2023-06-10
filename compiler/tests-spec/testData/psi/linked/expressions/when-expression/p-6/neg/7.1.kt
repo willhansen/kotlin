@@ -4,23 +4,23 @@
  * SPEC VERSION: 0.1-435
  * MAIN LINK: expressions, when-expression -> paragraph 6 -> sentence 7
  * NUMBER: 1
- * DESCRIPTION: 'When' with invalid else condition.
+ * DESCRIPTION: 'When' with inkonstid else condition.
  */
 
 fun case_1() {
-    when (value) {
+    when (konstue) {
         else ->
     }
-    when (value) {
+    when (konstue) {
         else ->
         else ->
     }
-    when (value) {
+    when (konstue) {
         1 -> println("1")
         2 -> println("2")
         else ->
     }
-    when (value) {
+    when (konstue) {
         1 -> println("!")
         else ->
     }

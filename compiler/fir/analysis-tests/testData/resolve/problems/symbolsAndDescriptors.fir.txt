@@ -8,19 +8,19 @@ FILE: symbolsAndDescriptors.kt
     public abstract interface IrClassSymbol : R|IrClassifierSymbol|, R|IrBindableSymbol<kotlin/String>| {
     }
     public abstract interface IrClassifierSymbol : R|IrSymbol|, R|TypeConstructorMarker| {
-        public abstract override val descriptor: R|kotlin/CharSequence|
+        public abstract override konst descriptor: R|kotlin/CharSequence|
             public get(): R|kotlin/CharSequence|
 
     }
     public abstract interface IrSymbol : R|kotlin/Any| {
-        public abstract val descriptor: R|kotlin/Any|
+        public abstract konst descriptor: R|kotlin/Any|
             public get(): R|kotlin/Any|
 
     }
     public abstract interface TypeConstructorMarker : R|kotlin/Any| {
     }
     public abstract interface IrBindableSymbol<out D : R|kotlin/Any|> : R|IrSymbol| {
-        public abstract override val descriptor: R|D|
+        public abstract override konst descriptor: R|D|
             public get(): R|D|
 
     }
@@ -35,10 +35,10 @@ FILE: symbolsAndDescriptors.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val _descriptor: R|D?| = R|<local>/_descriptor|
+        private final konst _descriptor: R|D?| = R|<local>/_descriptor|
             private get(): R|D?|
 
-        public open override val descriptor: R|D|
+        public open override konst descriptor: R|D|
             public get(): R|D| {
                 ^ this@R|/IrSymbolBase|.R|/IrSymbolBase._descriptor|!!
             }

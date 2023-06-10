@@ -5,4 +5,4 @@ class A {
     }
 }
 
-val a = A.toString()
+konst a = A.toString()

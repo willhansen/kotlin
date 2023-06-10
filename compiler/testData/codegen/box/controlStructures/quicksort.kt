@@ -1,5 +1,5 @@
 fun IntArray.swap(i:Int, j:Int) {
-    val temp = this[i]
+    konst temp = this[i]
     this[i] = this[j]
     this[j] = temp
 }
@@ -7,7 +7,7 @@ fun IntArray.swap(i:Int, j:Int) {
 fun IntArray.quicksort() = quicksort(0, size-1)
 
 fun IntArray.quicksort(L: Int, R:Int) {
-    val m = this[(L + R) / 2]
+    konst m = this[(L + R) / 2]
     var i = L
     var j = R
     while (i <= j) {
@@ -28,7 +28,7 @@ fun IntArray.quicksort(L: Int, R:Int) {
 }
 
 fun box() : String {
-    val a = IntArray(10)
+    konst a = IntArray(10)
     for(i in 0..4) {
         a[2*i]   =  2*i
         a[2*i+1] = -2*i-1

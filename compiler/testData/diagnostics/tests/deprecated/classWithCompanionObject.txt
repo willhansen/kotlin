@@ -1,6 +1,6 @@
 package
 
-public val x1: A.B
+public konst x1: A.B
 
 public final class A {
     public constructor A()

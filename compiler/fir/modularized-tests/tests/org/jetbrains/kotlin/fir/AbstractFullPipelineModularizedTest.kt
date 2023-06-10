@@ -26,34 +26,34 @@ import java.io.PrintStream
 import java.nio.file.Files
 import java.nio.file.Path
 
-private val JVM_TARGET: String = System.getProperty("fir.bench.jvm.target", "1.8")
+private konst JVM_TARGET: String = System.getProperty("fir.bench.jvm.target", "1.8")
 
 abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
 
-    private val asyncProfilerControl = AsyncProfilerControl()
+    private konst asyncProfilerControl = AsyncProfilerControl()
 
-    data class ModuleStatus(val data: ModuleData, val targetInfo: String) {
+    data class ModuleStatus(konst data: ModuleData, konst targetInfo: String) {
         var compilationError: String? = null
         var jvmInternalError: String? = null
         var exceptionMessage: String = "NO MESSAGE"
     }
 
-    private val totalModules = mutableListOf<ModuleStatus>()
-    private val okModules = mutableListOf<ModuleStatus>()
-    private val errorModules = mutableListOf<ModuleStatus>()
-    private val crashedModules = mutableListOf<ModuleStatus>()
+    private konst totalModules = mutableListOf<ModuleStatus>()
+    private konst okModules = mutableListOf<ModuleStatus>()
+    private konst errorModules = mutableListOf<ModuleStatus>()
+    private konst crashedModules = mutableListOf<ModuleStatus>()
 
     protected data class CumulativeTime(
-        val gcInfo: Map<String, GCInfo>,
-        val components: Map<String, Long>,
-        val files: Int,
-        val lines: Int
+        konst gcInfo: Map<String, GCInfo>,
+        konst components: Map<String, Long>,
+        konst files: Int,
+        konst lines: Int
     ) {
         constructor() : this(emptyMap(), emptyMap(), 0, 0)
 
         operator fun plus(other: CumulativeTime): CumulativeTime {
             return CumulativeTime(
-                (gcInfo.values + other.gcInfo.values).groupingBy { it.name }.reduce { key, accumulator, element ->
+                (gcInfo.konstues + other.gcInfo.konstues).groupingBy { it.name }.reduce { key, accumulator, element ->
                     GCInfo(key, accumulator.gcTime + element.gcTime, accumulator.collections + element.collections)
                 },
                 (components.toList() + other.components.toList()).groupingBy { (name, _) -> name }.fold(0L) { a, b -> a + b.second },
@@ -62,7 +62,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
             )
         }
 
-        fun totalTime() = components.values.sum()
+        fun totalTime() = components.konstues.sum()
     }
 
     protected lateinit var totalPassResult: CumulativeTime
@@ -86,7 +86,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
     }
 
     protected fun formatReportTable(stream: PrintStream) {
-        val total = totalPassResult
+        konst total = totalPassResult
         var totalGcTimeMs = 0L
         var totalGcCount = 0L
         printTable(stream) {
@@ -99,7 +99,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
                     cell(count.toString())
                 }
             }
-            for (measurement in total.gcInfo.values) {
+            for (measurement in total.gcInfo.konstues) {
                 totalGcTimeMs += measurement.gcTime
                 totalGcCount += measurement.collections
                 gcRow(measurement.name, measurement.gcTime, measurement.collections)
@@ -122,7 +122,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
                 }
             }
             for (component in total.components) {
-                phase(component.key, component.value, total.files, total.lines)
+                phase(component.key, component.konstue, total.files, total.lines)
             }
 
             separator()
@@ -132,7 +132,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
     }
 
     private fun configureBaseArguments(args: K2JVMCompilerArguments, moduleData: ModuleData, tmp: Path) {
-        val originalArguments = moduleData.arguments as? K2JVMCompilerArguments
+        konst originalArguments = moduleData.arguments as? K2JVMCompilerArguments
         if (originalArguments != null) {
             args.apiVersion = originalArguments.apiVersion
             args.noJdk = originalArguments.noJdk
@@ -164,7 +164,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
     }
 
     private fun configureArgsUsingBuildFile(args: K2JVMCompilerArguments, moduleData: ModuleData, tmp: Path) {
-        val builder = KotlinModuleXmlBuilder()
+        konst builder = KotlinModuleXmlBuilder()
         builder.addModule(
             moduleData.name,
             tmp.toAbsolutePath().toFile().toString(),
@@ -179,7 +179,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
             friendDirs = moduleData.friendDirs,
             isIncrementalCompilation = true
         )
-        val modulesFile = tmp.toFile().resolve("modules.xml")
+        konst modulesFile = tmp.toFile().resolve("modules.xml")
         modulesFile.writeText(builder.asText().toString())
         args.buildFile = modulesFile.absolutePath
     }
@@ -187,7 +187,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
     abstract fun configureArguments(args: K2JVMCompilerArguments, moduleData: ModuleData)
 
     protected open fun handleResult(result: ExitCode, moduleData: ModuleData, collector: TestMessageCollector, targetInfo: String): ProcessorAction {
-        val status = ModuleStatus(moduleData, targetInfo)
+        konst status = ModuleStatus(moduleData, targetInfo)
         totalModules += status
 
         return when (result) {
@@ -220,7 +220,7 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
 
 
     private fun String.shorten(): String {
-        val split = split("\n")
+        konst split = split("\n")
         return split.mapIndexedNotNull { index, s ->
             if (index < 4 || index >= split.size - 6) s else null
         }.joinToString("\n")
@@ -258,8 +258,8 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
                     println("${errorModule.data.qualifiedName}: ${errorModule.targetInfo}")
                     println("        1st error: ${errorModule.jvmInternalError?.shorten()}")
                 }
-                val crashedModuleGroups = crashedModules.groupBy { it.exceptionMessage.take(60) }
-                for (modules in crashedModuleGroups.values) {
+                konst crashedModuleGroups = crashedModules.groupBy { it.exceptionMessage.take(60) }
+                for (modules in crashedModuleGroups.konstues) {
                     println()
                     println(modules.first().exceptionMessage)
                     println("--------------------------------------------------------")
@@ -274,23 +274,23 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
     }
 
     override fun processModule(moduleData: ModuleData): ProcessorAction {
-        val compiler = K2JVMCompiler()
-        val args = compiler.createArguments()
-        val tmp = Files.createTempDirectory("compile-output")
+        konst compiler = K2JVMCompiler()
+        konst args = compiler.createArguments()
+        konst tmp = Files.createTempDirectory("compile-output")
         configureBaseArguments(args, moduleData, tmp)
         configureArguments(args, moduleData)
 
-        val manager = CompilerPerformanceManager()
-        val services = Services.Builder().register(CommonCompilerPerformanceManager::class.java, manager).build()
-        val collector = TestMessageCollector()
-        val result = try {
-            CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.value = "true"
+        konst manager = CompilerPerformanceManager()
+        konst services = Services.Builder().register(CommonCompilerPerformanceManager::class.java, manager).build()
+        konst collector = TestMessageCollector()
+        konst result = try {
+            CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.konstue = "true"
             compiler.exec(collector, services, args)
         } catch (e: Exception) {
             e.printStackTrace()
             ExitCode.INTERNAL_ERROR
         }
-        val resultTime = manager.reportCumulativeTime()
+        konst resultTime = manager.reportCumulativeTime()
         PerformanceCounter.resetAllCounters()
 
         tmp.toFile().deleteRecursively()
@@ -320,21 +320,21 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
     private inner class CompilerPerformanceManager : CommonCompilerPerformanceManager("Modularized test performance manager") {
 
         fun reportCumulativeTime(): CumulativeTime {
-            val gcInfo = measurements.filterIsInstance<GarbageCollectionMeasurement>()
+            konst gcInfo = measurements.filterIsInstance<GarbageCollectionMeasurement>()
                 .associate { it.garbageCollectionKind to GCInfo(it.garbageCollectionKind, it.milliseconds, it.count) }
 
-            val analysisMeasurement = measurements.filterIsInstance<CodeAnalysisMeasurement>().firstOrNull()
-            val initMeasurement = measurements.filterIsInstance<CompilerInitializationMeasurement>().firstOrNull()
-            val irMeasurements = measurements.filterIsInstance<IRMeasurement>()
+            konst analysisMeasurement = measurements.filterIsInstance<CodeAnalysisMeasurement>().firstOrNull()
+            konst initMeasurement = measurements.filterIsInstance<CompilerInitializationMeasurement>().firstOrNull()
+            konst irMeasurements = measurements.filterIsInstance<IRMeasurement>()
 
-            val components = buildMap {
+            konst components = buildMap {
                 put("Init", initMeasurement?.milliseconds ?: 0)
                 put("Analysis", analysisMeasurement?.milliseconds ?: 0)
 
                 irMeasurements.firstOrNull { it.kind == IRMeasurement.Kind.TRANSLATION }?.milliseconds?.let { put("Translation", it) }
                 irMeasurements.firstOrNull { it.kind == IRMeasurement.Kind.LOWERING }?.milliseconds?.let { put("Lowering", it) }
 
-                val generationTime =
+                konst generationTime =
                     irMeasurements.firstOrNull { it.kind == IRMeasurement.Kind.GENERATION }?.milliseconds ?:
                     measurements.filterIsInstance<CodeGenerationMeasurement>().firstOrNull()?.milliseconds
 
@@ -354,9 +354,9 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
 
     protected class TestMessageCollector : MessageCollector {
 
-        data class Message(val severity: CompilerMessageSeverity, val message: String, val location: CompilerMessageSourceLocation?)
+        data class Message(konst severity: CompilerMessageSeverity, konst message: String, konst location: CompilerMessageSourceLocation?)
 
-        val messages = arrayListOf<Message>()
+        konst messages = arrayListOf<Message>()
 
         override fun clear() {
             messages.clear()
@@ -379,8 +379,8 @@ abstract class AbstractFullPipelineModularizedTest : AbstractModularizedTest() {
 
 
 fun substituteCompilerPluginPathForKnownPlugins(path: String): File? {
-    val file = File(path)
-    val paths = PathUtil.kotlinPathsForDistDirectoryForTests
+    konst file = File(path)
+    konst paths = PathUtil.kotlinPathsForDistDirectoryForTests
     return when {
         file.name.startsWith("kotlinx-serialization") || file.name.startsWith("kotlin-serialization") ->
             paths.jar(KotlinPaths.Jar.SerializationPlugin)

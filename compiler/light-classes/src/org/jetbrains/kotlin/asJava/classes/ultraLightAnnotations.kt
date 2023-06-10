@@ -30,7 +30,7 @@ class KtUltraLightNullabilityAnnotation(
 
 fun AnnotationDescriptor.toLightAnnotation(parent: PsiElement) = KtUltraLightSimpleAnnotation(
     fqName?.asString(),
-    allValueArguments.map { it.key.asString() to it.value },
+    allValueArguments.map { it.key.asString() to it.konstue },
     parent,
 )
 
@@ -38,22 +38,22 @@ fun DeclarationDescriptor.obtainLightAnnotations(parent: PsiElement): List<KtLig
     annotations.map { it.toLightAnnotation(parent) }
 
 class KtUltraLightSimpleAnnotation(
-    private val annotationFqName: String?,
-    private val argumentsList: List<Pair<String, ConstantValue<*>>>,
+    private konst annotationFqName: String?,
+    private konst argumentsList: List<Pair<String, ConstantValue<*>>>,
     parent: PsiElement,
-    private val nameReferenceElementProvider: (() -> PsiJavaCodeReferenceElement?)? = null,
+    private konst nameReferenceElementProvider: (() -> PsiJavaCodeReferenceElement?)? = null,
 ) : KtLightAbstractAnnotation(parent) {
-    private val _nameReferenceElement: PsiJavaCodeReferenceElement? by lazyPub {
+    private konst _nameReferenceElement: PsiJavaCodeReferenceElement? by lazyPub {
         nameReferenceElementProvider?.invoke() ?: annotationFqName?.let { ClsJavaCodeReferenceElementImpl(parent, it) }
     }
 
     override fun getNameReferenceElement(): PsiJavaCodeReferenceElement? = _nameReferenceElement
 
-    private val parameterList = ParameterListImpl()
+    private konst parameterList = ParameterListImpl()
 
     override fun getParameterList(): PsiAnnotationParameterList = parameterList
 
-    override val kotlinOrigin: KtCallElement? get() = null
+    override konst kotlinOrigin: KtCallElement? get() = null
 
     override fun <T : PsiAnnotationMemberValue?> setDeclaredAttributeValue(p0: String?, p1: T?) = cannotModify()
 
@@ -66,7 +66,7 @@ class KtUltraLightSimpleAnnotation(
     override fun getQualifiedName() = annotationFqName
 
     private inner class ParameterListImpl : KtLightElementBase(this@KtUltraLightSimpleAnnotation), PsiAnnotationParameterList {
-        private val _attributes: Array<PsiNameValuePair> by lazyPub {
+        private konst _attributes: Array<PsiNameValuePair> by lazyPub {
             argumentsList.map {
                 PsiNameValuePairForAnnotationArgument(it.first, it.second, this)
             }.toTypedArray()
@@ -74,20 +74,20 @@ class KtUltraLightSimpleAnnotation(
 
         override fun getAttributes(): Array<PsiNameValuePair> = _attributes
 
-        override val kotlinOrigin: KtElement? get() = null
+        override konst kotlinOrigin: KtElement? get() = null
     }
 
-    override fun getText() = "@$qualifiedName(" + parameterList.attributes.joinToString { it.name + "=" + it.value?.text } + ")"
+    override fun getText() = "@$qualifiedName(" + parameterList.attributes.joinToString { it.name + "=" + it.konstue?.text } + ")"
 }
 
 private class PsiNameValuePairForAnnotationArgument(
-    private val _name: String = "",
-    private val constantValue: ConstantValue<*>,
+    private konst _name: String = "",
+    private konst constantValue: ConstantValue<*>,
     parent: PsiElement,
 ) : KtLightElementBase(parent), PsiNameValuePair {
-    override val kotlinOrigin: KtElement? get() = null
+    override konst kotlinOrigin: KtElement? get() = null
 
-    private val _value by lazyPub {
+    private konst _konstue by lazyPub {
         constantValue.toAnnotationMemberValue(this)
     }
 
@@ -95,17 +95,17 @@ private class PsiNameValuePairForAnnotationArgument(
 
     override fun getNameIdentifier() = LightIdentifier(parent.manager, _name)
 
-    override fun getValue(): PsiAnnotationMemberValue? = _value
+    override fun getValue(): PsiAnnotationMemberValue? = _konstue
 
-    override fun getLiteralValue(): String? = (value as? PsiLiteralExpression)?.value?.toString()
+    override fun getLiteralValue(): String? = (konstue as? PsiLiteralExpression)?.konstue?.toString()
 
     override fun getName() = _name
 }
 
 private fun ConstantValue<*>.toAnnotationMemberValue(parent: PsiElement): PsiAnnotationMemberValue? = when (this) {
-    is AnnotationValue -> value.toLightAnnotation(parent)
+    is AnnotationValue -> konstue.toLightAnnotation(parent)
     is ArrayValue -> KtUltraLightPsiArrayInitializerMemberValue(lightParent = parent) { arrayLiteralParent ->
-        this.value.mapNotNull { element -> element.toAnnotationMemberValue(arrayLiteralParent) }
+        this.konstue.mapNotNull { element -> element.toAnnotationMemberValue(arrayLiteralParent) }
     }
 
     is ErrorValue -> null
@@ -113,11 +113,11 @@ private fun ConstantValue<*>.toAnnotationMemberValue(parent: PsiElement): PsiAnn
 }
 
 private class KtUltraLightPsiArrayInitializerMemberValue(
-    val lightParent: PsiElement,
-    private val arguments: (KtUltraLightPsiArrayInitializerMemberValue) -> List<PsiAnnotationMemberValue>
+    konst lightParent: PsiElement,
+    private konst arguments: (KtUltraLightPsiArrayInitializerMemberValue) -> List<PsiAnnotationMemberValue>
 ) : KtLightElementBase(lightParent), PsiArrayInitializerMemberValue {
 
-    override val kotlinOrigin: KtElement? get() = null
+    override konst kotlinOrigin: KtElement? get() = null
 
     override fun getInitializers(): Array<PsiAnnotationMemberValue> = arguments(this).toTypedArray()
 

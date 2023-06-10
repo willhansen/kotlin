@@ -1,6 +1,6 @@
 fun test1() {
-  val x: Int
-    val x$delegate: Lazy<Int> = lazy<Int>(initializer = local fun <anonymous>(): Int {
+  konst x: Int
+    konst x$delegate: Lazy<Int> = lazy<Int>(initializer = local fun <anonymous>(): Int {
       return 42
     }
 )
@@ -13,19 +13,19 @@ fun test1() {
 
 fun test2() {
   var x: Int
-    val x$delegate: HashMap<String, Int> = hashMapOf<String, Int>()
+    konst x$delegate: HashMap<String, Int> = hashMapOf<String, Int>()
     local get(): Int {
       return x$delegate.getValue<Int, Int>(thisRef = null, property = ::x)
     }
-    local set(value: Int) {
-      return x$delegate.setValue<Int>(thisRef = null, property = ::x, value = value)
+    local set(konstue: Int) {
+      return x$delegate.setValue<Int>(thisRef = null, property = ::x, konstue = konstue)
     }
 
-  <set-x>(value = 0)
+  <set-x>(konstue = 0)
   { // BLOCK
-    val tmp0: Int = <get-x>()
-    <set-x>(value = tmp0.inc())
+    konst tmp0: Int = <get-x>()
+    <set-x>(konstue = tmp0.inc())
     tmp0
   } /*~> Unit */
-  <set-x>(value = <get-x>().plus(other = 1))
+  <set-x>(konstue = <get-x>().plus(other = 1))
 }

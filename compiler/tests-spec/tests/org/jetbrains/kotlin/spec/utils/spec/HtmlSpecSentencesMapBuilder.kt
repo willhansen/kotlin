@@ -11,20 +11,20 @@ import java.util.*
 typealias SentencesByLocation = MutableMap<String, MutableList<String>>
 
 object HtmlSpecSentencesMapBuilder {
-    enum class SectionTag(val level: Int) { h1(1), h2(2), h3(3), h4(4), h5(5) }
+    enum class SectionTag(konst level: Int) { h1(1), h2(2), h3(3), h4(4), h5(5) }
 
-    private const val PARAGRAPH_SELECTORS = ".paragraph, ul, ol"
-    private const val SECTION_SELECTORS = "h2, h3, h4, h5"
+    private const konst PARAGRAPH_SELECTORS = ".paragraph, ul, ol"
+    private const konst SECTION_SELECTORS = "h2, h3, h4, h5"
 
     fun build(spec: Element): SentencesByLocation {
         var paragraphCounter = 0
-        val currentSectionsPath = Stack<Pair<SectionTag, String>>()
-        val sentencesByLocation: SentencesByLocation = mutableMapOf()
+        konst currentSectionsPath = Stack<Pair<SectionTag, String>>()
+        konst sentencesByLocation: SentencesByLocation = mutableMapOf()
 
         spec.select("$SECTION_SELECTORS, $PARAGRAPH_SELECTORS, .sentence").forEach { element ->
             when {
                 element.`is`(SECTION_SELECTORS) -> {
-                    val sectionTag = SectionTag.valueOf(element.tagName().lowercase())
+                    konst sectionTag = SectionTag.konstueOf(element.tagName().lowercase())
                     while (!currentSectionsPath.empty() && currentSectionsPath.peek().first.level >= sectionTag.level) {
                         currentSectionsPath.pop()
                     }
@@ -35,7 +35,7 @@ object HtmlSpecSentencesMapBuilder {
                 element.`is`(PARAGRAPH_SELECTORS) -> paragraphCounter++
                 else -> {
                     if (!element.parents().`is`(PARAGRAPH_SELECTORS)) return@forEach
-                    val sentenceLocation =
+                    konst sentenceLocation =
                         currentSectionsPath.map { it.second }.toMutableSet().apply { add(paragraphCounter.toString()) }.joinToString()
                     sentencesByLocation.putIfAbsent(sentenceLocation, mutableListOf())
                     sentencesByLocation[sentenceLocation]!!.add(element.text())

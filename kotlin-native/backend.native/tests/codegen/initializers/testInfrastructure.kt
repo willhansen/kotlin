@@ -12,7 +12,7 @@ var t2 = false
 // FILE: lib2.kt
 import kotlin.test.*
 
-private val x = foo()
+private konst x = foo()
 
 private fun foo(): Int {
     z1 = true
@@ -29,7 +29,7 @@ fun test1() {
 // FILE: main.kt
 import kotlin.test.*
 
-private val x = foo()
+private konst x = foo()
 
 private fun foo(): Int {
     z2 = true

@@ -15,19 +15,19 @@ abstract class User {
     fun withSome(some: <!OPT_IN_USAGE_ERROR!>Some<!>? = null) {}
 
     fun use() {
-        val something = <!OPT_IN_USAGE_FUTURE_ERROR!>createSome<!>()
-        val somethingOther: <!OPT_IN_USAGE_ERROR!>Some<!> = <!OPT_IN_USAGE_FUTURE_ERROR!>createSome<!>()
+        konst something = <!OPT_IN_USAGE_FUTURE_ERROR!>createSome<!>()
+        konst somethingOther: <!OPT_IN_USAGE_ERROR!>Some<!> = <!OPT_IN_USAGE_FUTURE_ERROR!>createSome<!>()
         null.<!OPT_IN_USAGE_FUTURE_ERROR!>onSome<!>()
         <!OPT_IN_USAGE_FUTURE_ERROR!>withSome<!>()
     }
 }
 
-data class DataClass(@property:Marker val x: Int)
+data class DataClass(@property:Marker konst x: Int)
 
 fun useDataClass(d: DataClass) {
     // Should have error in both
     d.<!OPT_IN_USAGE_ERROR!>x<!>
-    val (<!OPT_IN_USAGE_ERROR!>x<!>) = d
+    konst (<!OPT_IN_USAGE_ERROR!>x<!>) = d
 }
 
 typealias My = <!OPT_IN_USAGE_ERROR!>Some<!>
@@ -68,9 +68,9 @@ typealias MyList = ArrayList<I>
 typealias YourList = ArrayList<String>
 
 fun main() {
-    val x = <!OPT_IN_USAGE_FUTURE_ERROR!>listOf<!>(A(), B())
-    val y = <!OPT_IN_USAGE_FUTURE_ERROR!>MyList<!>()
-    val z = <!OPT_IN_USAGE_FUTURE_ERROR!>YourList<!>()
+    konst x = <!OPT_IN_USAGE_FUTURE_ERROR!>listOf<!>(A(), B())
+    konst y = <!OPT_IN_USAGE_FUTURE_ERROR!>MyList<!>()
+    konst z = <!OPT_IN_USAGE_FUTURE_ERROR!>YourList<!>()
     <!OPT_IN_USAGE_FUTURE_ERROR!>YourList<!>().add("")
 }
 
@@ -84,7 +84,7 @@ object O {
     operator fun provideDelegate(x: Any?, y: Any?): C = C()
 }
 
-val x: String by <!OPT_IN_USAGE_ERROR, OPT_IN_USAGE_FUTURE_ERROR!>O<!>
+konst x: String by <!OPT_IN_USAGE_ERROR, OPT_IN_USAGE_FUTURE_ERROR!>O<!>
 
 @Marker
 class OperatorContainer : Comparable<OperatorContainer> {
@@ -117,8 +117,8 @@ operator fun String.minus(s: String) = OperatorContainer()
 operator fun String.invoke() = OperatorContainer()
 
 fun operatorContainerUsage(s: String, a: AnotherContainer) {
-    val res1 = s <!OPT_IN_USAGE_FUTURE_ERROR!>-<!> s
-    val res2 = <!OPT_IN_USAGE_FUTURE_ERROR!>s<!>()
-    val res3 = <!OPT_IN_USAGE_FUTURE_ERROR!>res1<!> <!OPT_IN_USAGE_FUTURE_ERROR!>><!> <!OPT_IN_USAGE_FUTURE_ERROR!>res2<!>
+    konst res1 = s <!OPT_IN_USAGE_FUTURE_ERROR!>-<!> s
+    konst res2 = <!OPT_IN_USAGE_FUTURE_ERROR!>s<!>()
+    konst res3 = <!OPT_IN_USAGE_FUTURE_ERROR!>res1<!> <!OPT_IN_USAGE_FUTURE_ERROR!>><!> <!OPT_IN_USAGE_FUTURE_ERROR!>res2<!>
     for (c in <!OPT_IN_USAGE_FUTURE_ERROR!>a<!>) {}
 }

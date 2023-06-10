@@ -11,20 +11,20 @@ expect interface My {
     fun foo()
 
 
-    open val a: Int
-    open val b: String
-    open val c: String <!EXPECTED_DECLARATION_WITH_BODY!>get()<!> = ""
-    <!REDUNDANT_MODIFIER!>open<!> abstract val e: Int
+    open konst a: Int
+    open konst b: String
+    open konst c: String <!EXPECTED_DECLARATION_WITH_BODY!>get()<!> = ""
+    <!REDUNDANT_MODIFIER!>open<!> abstract konst e: Int
 
-    val f: Int
+    konst f: Int
 }
 
 <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>class MyImpl1<!>: My
 
 class MyImpl2: My {
     override fun foo() {}
-    override val f = 0
-    override val e = 1
+    override konst f = 0
+    override konst e = 1
 }
 
 expect interface Outer {

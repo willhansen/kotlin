@@ -12,11 +12,11 @@ import java.io.File
  * Files used by the [MetadataDependencyTransformationTask] and [CInteropMetadataDependencyTransformationTask] to
  * store the resulting 'metadata path' in this index file.
  */
-internal class KotlinMetadataLibrariesIndexFile(private val file: File) {
+internal class KotlinMetadataLibrariesIndexFile(private konst file: File) {
     fun read(): List<File> = file.readLines().map { File(it) }
 
     fun write(files: Iterable<File>) {
-        val content = files.joinToString(System.lineSeparator()) { it.path }
+        konst content = files.joinToString(System.lineSeparator()) { it.path }
         file.writeText(content)
     }
 }

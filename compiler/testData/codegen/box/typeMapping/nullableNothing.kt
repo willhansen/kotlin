@@ -8,6 +8,6 @@ fun sideEffect(): Any {
 
 fun box(): String {
     // This used to be problematic because of an attempt to load kotlin/Nothing class
-    val x = sideEffect() is Nothing?
+    konst x = sideEffect() is Nothing?
     return result
 }

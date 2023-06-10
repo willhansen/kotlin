@@ -13,7 +13,7 @@ class A : IC1, IC2 {
 
 fun test(x: Any): String {
     if (x is IC1 && x is IC2) {
-        val (x1, x2) = x
+        konst (x1, x2) = x
         return "$x1$x2"
     }
     return "FAIL"

@@ -22,17 +22,17 @@ import org.jetbrains.kotlin.test.services.assertions
  */
 abstract class AbstractReferenceShortenerTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val element = testServices.expressionMarkerProvider.getSelectedElement(ktFiles.first())
+        konst element = testServices.expressionMarkerProvider.getSelectedElement(ktFiles.first())
 
-        val shortenings = executeOnPooledThreadInReadAction {
+        konst shortenings = executeOnPooledThreadInReadAction {
             analyseForTest(element) {
-                ShortenOption.values().map { option ->
+                ShortenOption.konstues().map { option ->
                     Pair(option.name, collectPossibleReferenceShorteningsInElement(element, { option }, { option }))
                 }
             }
         }
 
-        val actual = buildString {
+        konst actual = buildString {
             appendLine("Before shortening: ${element.text}")
             shortenings.forEach { (name, shortening) ->
                 appendLine("with ${name}:")

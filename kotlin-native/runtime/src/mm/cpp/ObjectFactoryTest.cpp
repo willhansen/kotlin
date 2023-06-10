@@ -72,25 +72,25 @@ std_support::vector<T> Collect(Consumer<ObjectFactoryStorage<DataAlignment>>& co
 }
 
 struct MoveOnlyImpl : private MoveOnly {
-    MoveOnlyImpl(int value1, int value2) : value1(value1), value2(value2) {}
+    MoveOnlyImpl(int konstue1, int konstue2) : konstue1(konstue1), konstue2(konstue2) {}
 
-    int value1;
-    int value2;
+    int konstue1;
+    int konstue2;
 };
 
 struct PinnedImpl : private Pinned {
-    PinnedImpl(int value1, int value2, int value3) : value1(value1), value2(value2), value3(value3) {}
+    PinnedImpl(int konstue1, int konstue2, int konstue3) : konstue1(konstue1), konstue2(konstue2), konstue3(konstue3) {}
 
-    int value1;
-    int value2;
-    int value3;
+    int konstue1;
+    int konstue2;
+    int konstue3;
 };
 
 struct MaxAlignedData {
-    explicit MaxAlignedData(int value) : value(value) {}
+    explicit MaxAlignedData(int konstue) : konstue(konstue) {}
 
     std::max_align_t padding;
-    int value;
+    int konstue;
 };
 
 } // namespace
@@ -158,16 +158,16 @@ TEST(ObjectFactoryStorageTest, PublishDifferentTypes) {
     EXPECT_THAT(it->Data<size_t>(), 2);
     ++it;
     auto& moveOnly = it->Data<MoveOnlyImpl>();
-    EXPECT_THAT(moveOnly.value1, 3);
-    EXPECT_THAT(moveOnly.value2, 4);
+    EXPECT_THAT(moveOnly.konstue1, 3);
+    EXPECT_THAT(moveOnly.konstue2, 4);
     ++it;
     auto& pinned = it->Data<PinnedImpl>();
-    EXPECT_THAT(pinned.value1, 5);
-    EXPECT_THAT(pinned.value2, 6);
-    EXPECT_THAT(pinned.value3, 7);
+    EXPECT_THAT(pinned.konstue1, 5);
+    EXPECT_THAT(pinned.konstue2, 6);
+    EXPECT_THAT(pinned.konstue3, 7);
     ++it;
     auto& maxAlign = it->Data<MaxAlignedData>();
-    EXPECT_THAT(maxAlign.value, 8);
+    EXPECT_THAT(maxAlign.konstue, 8);
     ++it;
     EXPECT_THAT(it, actual.end());
     EXPECT_THAT(storage.GetSizeUnsafe(), 5);

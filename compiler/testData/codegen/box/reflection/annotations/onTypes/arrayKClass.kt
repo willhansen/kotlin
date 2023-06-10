@@ -4,11 +4,11 @@
 import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.TYPE)
-annotation class MyAnn(val cls: KClass<*>)
+annotation class MyAnn(konst cls: KClass<*>)
 
-val s: @MyAnn(Array<String>::class) String = ""
+konst s: @MyAnn(Array<String>::class) String = ""
 
 fun box(): String {
-    val ann = ::s.returnType.annotations[0] as MyAnn
+    konst ann = ::s.returnType.annotations[0] as MyAnn
     return if (ann.cls == Array<String>::class) "OK" else "Fail: ${ann.cls}"
 }

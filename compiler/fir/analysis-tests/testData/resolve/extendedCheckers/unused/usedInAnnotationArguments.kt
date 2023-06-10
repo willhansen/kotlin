@@ -1,7 +1,7 @@
-annotation class Ann(val value: Int)
+annotation class Ann(konst konstue: Int)
 
 fun foo(): Int {
-    val x = 3
-    @Ann(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>x<!>) val y = 5
+    konst x = 3
+    @Ann(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>x<!>) konst y = 5
     return y
 }

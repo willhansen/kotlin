@@ -1,5 +1,5 @@
 class X {
-    val foo = object {
+    konst foo = object {
         <!NESTED_CLASS_NOT_ALLOWED!>class Foo<!>
     }
 

@@ -1,1 +1,1 @@
-class Test(val a = 12, val b : Int = 13)
+class Test(konst a = 12, konst b : Int = 13)

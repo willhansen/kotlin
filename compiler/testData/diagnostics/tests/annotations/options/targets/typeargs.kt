@@ -1,9 +1,9 @@
 // FIR_IDENTICAL
 annotation class base
 
-val x: List<<!WRONG_ANNOTATION_TARGET!>@base<!> String>? = null
+konst x: List<<!WRONG_ANNOTATION_TARGET!>@base<!> String>? = null
 
-val y: List<@[<!WRONG_ANNOTATION_TARGET!>base<!>] String>? = null
+konst y: List<@[<!WRONG_ANNOTATION_TARGET!>base<!>] String>? = null
 
 @Target(AnnotationTarget.TYPE)
 annotation class typeAnn

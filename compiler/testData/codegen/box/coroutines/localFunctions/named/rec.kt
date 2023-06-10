@@ -13,9 +13,9 @@ fun builder(c: suspend () -> Unit) {
 }
 
 suspend fun foo(until: Int): String {
-    val o = "O"
-    val k = "K"
-    val dot = "."
+    konst o = "O"
+    konst k = "K"
+    konst dot = "."
     suspend fun bar(x: Int): String =
         if (x == until) dot else if (x < until) o + bar(x * 2) else k + bar(x - 1)
     return bar(1)
@@ -23,35 +23,35 @@ suspend fun foo(until: Int): String {
 
 var proceed: (() -> Unit)? = null
 
-suspend fun suspendHere(value: String): String = suspendCoroutineUninterceptedOrReturn { x ->
+suspend fun suspendHere(konstue: String): String = suspendCoroutineUninterceptedOrReturn { x ->
     proceed = {
-        x.resume(value)
+        x.resume(konstue)
     }
     COROUTINE_SUSPENDED
 }
 
 suspend fun foo2(until: Int): String {
-    val o = "O"
-    val k = "K"
-    val dot = "."
+    konst o = "O"
+    konst k = "K"
+    konst dot = "."
     suspend fun bar(x: Int): String =
         if (x == until) dot else if (x < until) suspendHere(o + bar(x * 2)) else suspendHere(k + bar(x - 1))
     return bar(1)
 }
 
 suspend fun fooCallableReference(until: Int): String {
-    val o = "O"
-    val k = "K"
-    val dot = "."
+    konst o = "O"
+    konst k = "K"
+    konst dot = "."
     suspend fun bar(x: Int): String =
         if (x == until) dot else if (x < until) o + (::bar).let { it(x * 2) } else k + (::bar).let { it(x - 1) }
     return bar(1)
 }
 
 suspend fun fooCallableReferenceIndirectRecursion(until: Int): String {
-    val o = "O"
-    val k = "K"
-    val dot = "."
+    konst o = "O"
+    konst k = "K"
+    konst dot = "."
     suspend fun bar(x: Int): String {
         suspend fun innerO() = o + (::bar).let { it(x * 2) }
         suspend fun innerK() = k + (::bar).let { it(x - 1) }

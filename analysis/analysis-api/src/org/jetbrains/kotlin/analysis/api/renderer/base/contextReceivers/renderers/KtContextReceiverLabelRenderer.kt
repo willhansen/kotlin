@@ -18,7 +18,7 @@ public interface KtContextReceiverLabelRenderer {
     public object WITH_LABEL : KtContextReceiverLabelRenderer {
         context(KtAnalysisSession, KtContextReceiversRenderer)
         override fun renderLabel(contextReceiver: KtContextReceiver, printer: PrettyPrinter): Unit = printer {
-            val label = contextReceiver.label ?: return@printer
+            konst label = contextReceiver.label ?: return@printer
             append(label.render())
             append('@')
         }

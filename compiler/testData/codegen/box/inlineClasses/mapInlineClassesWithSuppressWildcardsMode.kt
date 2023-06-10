@@ -1,7 +1,7 @@
 // WITH_STDLIB
 // TARGET_BACKEND: JVM
 
-class Foo<T>(val x: Int)
+class Foo<T>(konst x: Int)
 
 @JvmSuppressWildcards
 class Bar {
@@ -21,15 +21,15 @@ class Bar {
 }
 
 fun box(): String {
-    val b = Bar()
+    konst b = Bar()
     if(b.invokeFun().x != 43) return "Fail 1"
 
     if (b.nullableFoo(Foo<Long>(1)).x != 1) return "Fail 2"
 
-    val f: Foo<Long>? = Foo<Long>(2)
+    konst f: Foo<Long>? = Foo<Long>(2)
     if (b.nullableFoo(f).x != 2) return "Fail 3"
 
-    val ls = listOf(Foo<String>(3))
+    konst ls = listOf(Foo<String>(3))
     if (b.listOfFoo(ls).x != 3) return "Fail 4"
 
     return "OK"

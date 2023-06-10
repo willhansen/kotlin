@@ -15,7 +15,7 @@ class G<T> where T: X, T: Z {
 }
 
 fun box(): String {
-    val g = sel(G<A>(), G<B>()) // g: G<out { X & Z }>
+    konst g = sel(G<A>(), G<B>()) // g: G<out { X & Z }>
     g.check {} // (*) target SAM type: IFoo<{ X & Z }> (TODO: report a compile time error for this case)
     return "OK"
 }

@@ -27,34 +27,34 @@ import org.jetbrains.kotlin.fir.resolve.transformers.ReturnTypeCalculator
  */
 abstract class CheckerContext : DiagnosticContext {
     // Services
-    abstract val sessionHolder: SessionHolder
-    abstract val returnTypeCalculator: ReturnTypeCalculator
+    abstract konst sessionHolder: SessionHolder
+    abstract konst returnTypeCalculator: ReturnTypeCalculator
 
     // Context
-    abstract val implicitReceiverStack: ImplicitReceiverStack
-    abstract val containingDeclarations: List<FirDeclaration>
-    abstract val qualifiedAccessOrAssignmentsOrAnnotationCalls: List<FirStatement>
-    abstract val getClassCalls: List<FirGetClassCall>
-    abstract val annotationContainers: List<FirAnnotationContainer>
-    abstract val containingElements: List<FirElement>
-    abstract val isContractBody: Boolean
+    abstract konst implicitReceiverStack: ImplicitReceiverStack
+    abstract konst containingDeclarations: List<FirDeclaration>
+    abstract konst qualifiedAccessOrAssignmentsOrAnnotationCalls: List<FirStatement>
+    abstract konst getClassCalls: List<FirGetClassCall>
+    abstract konst annotationContainers: List<FirAnnotationContainer>
+    abstract konst containingElements: List<FirElement>
+    abstract konst isContractBody: Boolean
 
     // Suppress
-    abstract val suppressedDiagnostics: Set<String>
-    abstract val allInfosSuppressed: Boolean
-    abstract val allWarningsSuppressed: Boolean
-    abstract val allErrorsSuppressed: Boolean
+    abstract konst suppressedDiagnostics: Set<String>
+    abstract konst allInfosSuppressed: Boolean
+    abstract konst allWarningsSuppressed: Boolean
+    abstract konst allErrorsSuppressed: Boolean
 
-    val session: FirSession
+    konst session: FirSession
         get() = sessionHolder.session
 
-    val scopeSession: ScopeSession
+    konst scopeSession: ScopeSession
         get() = sessionHolder.scopeSession
 
     override fun isDiagnosticSuppressed(diagnostic: KtDiagnostic): Boolean {
-        val factory = diagnostic.factory
-        val name = factory.name
-        val suppressedByAll = when (factory.severity) {
+        konst factory = diagnostic.factory
+        konst name = factory.name
+        konst suppressedByAll = when (factory.severity) {
             Severity.INFO -> allInfosSuppressed
             Severity.WARNING -> allWarningsSuppressed
             Severity.ERROR -> allErrorsSuppressed
@@ -63,12 +63,12 @@ abstract class CheckerContext : DiagnosticContext {
         return suppressedByAll || name in suppressedDiagnostics
     }
 
-    override val languageVersionSettings: LanguageVersionSettings
+    override konst languageVersionSettings: LanguageVersionSettings
         get() = session.languageVersionSettings
 
-    abstract val containingFile: FirFile?
+    abstract konst containingFile: FirFile?
 
-    override val containingFilePath: String?
+    override konst containingFilePath: String?
         get() = containingFile?.sourceFile?.path
 }
 

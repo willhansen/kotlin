@@ -26,13 +26,13 @@ inline fun sumEvenInRange(a: Int, b: Int): Int {
 // CHECK_BREAKS_COUNT: function=box count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=box name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun box(): String {
-    val sum6 = sumEvenInRange(1, 5)
+    konst sum6 = sumEvenInRange(1, 5)
     assertEquals(6, sum6)
 
-    val sum12 = sumEvenInRange(0, 7)
+    konst sum12 = sumEvenInRange(0, 7)
     assertEquals(12, sum12)
 
-    val sum20 = sumEvenInRange(0, 9)
+    konst sum20 = sumEvenInRange(0, 9)
     assertEquals(20, sum20)
 
     return "OK"

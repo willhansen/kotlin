@@ -25,20 +25,20 @@ fun assertExists(file: File) {
     if (!file.exists()) error("Output dir does not exist: ${file.absolutePath}")
 }
 
-val BUILT_INS_NATIVE_DIR_JVM = File("core/builtins/native/")
-val BUILT_INS_NATIVE_DIR_JS = File("libraries/stdlib/js-ir/builtins/")
-val BUILT_INS_NATIVE_DIR_WASM = File("libraries/stdlib/wasm/builtins/")
-val BUILT_INS_NATIVE_DIR_NATIVE = File("kotlin-native/runtime/src/main/kotlin/")
-val BUILT_INS_SRC_DIR = File("core/builtins/src/")
-val RUNTIME_JVM_DIR = File("libraries/stdlib/jvm/runtime/")
-val UNSIGNED_TYPES_DIR = File("libraries/stdlib/unsigned/src")
-val STDLIB_DIR = File("libraries/stdlib/src")
+konst BUILT_INS_NATIVE_DIR_JVM = File("core/builtins/native/")
+konst BUILT_INS_NATIVE_DIR_JS = File("libraries/stdlib/js-ir/builtins/")
+konst BUILT_INS_NATIVE_DIR_WASM = File("libraries/stdlib/wasm/builtins/")
+konst BUILT_INS_NATIVE_DIR_NATIVE = File("kotlin-native/runtime/src/main/kotlin/")
+konst BUILT_INS_SRC_DIR = File("core/builtins/src/")
+konst RUNTIME_JVM_DIR = File("libraries/stdlib/jvm/runtime/")
+konst UNSIGNED_TYPES_DIR = File("libraries/stdlib/unsigned/src")
+konst STDLIB_DIR = File("libraries/stdlib/src")
 
 interface BuiltInsGenerator {
     fun generate()
 }
 
-abstract class BuiltInsSourceGenerator(val out: PrintWriter) : BuiltInsGenerator {
+abstract class BuiltInsSourceGenerator(konst out: PrintWriter) : BuiltInsGenerator {
     protected abstract fun generateBody(): Unit
 
     protected open fun getPackage(): String = "kotlin"

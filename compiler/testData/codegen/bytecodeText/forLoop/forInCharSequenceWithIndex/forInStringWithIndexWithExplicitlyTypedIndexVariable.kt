@@ -7,19 +7,19 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-val xs = "abcd"
+konst xs = "abcd"
 
 fun useAny(x: Any) {}
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
 
     for ((index: Any, x) in xs.withIndex()) {
         useAny(index)
         s.append("$index:$x;")
     }
 
-    val ss = s.toString()
+    konst ss = s.toString()
     return if (ss == "0:a;1:b;2:c;3:d;") "OK" else "fail: '$ss'"
 }
 

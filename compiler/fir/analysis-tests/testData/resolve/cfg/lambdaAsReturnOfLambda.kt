@@ -1,6 +1,6 @@
 // !DUMP_CFG
 
-val x4: (String) -> Unit = run {
+konst x4: (String) -> Unit = run {
     return@run (lambda@{ foo: String ->
         bar(foo)
     })

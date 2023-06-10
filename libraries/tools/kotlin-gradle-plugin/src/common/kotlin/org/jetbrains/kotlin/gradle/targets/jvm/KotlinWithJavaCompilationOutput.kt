@@ -14,25 +14,25 @@ import java.io.File
 import java.util.concurrent.Callable
 
 class KotlinWithJavaCompilationOutput internal constructor(
-    private val javaSourceSet: SourceSet
+    private konst javaSourceSet: SourceSet
 ) : KotlinCompilationOutput, Callable<FileCollection> {
 
-    private val javaSourceSetOutput
+    private konst javaSourceSetOutput
         get() = javaSourceSet.output
 
-    override val resourcesDir: File
+    override konst resourcesDir: File
         get() = javaSourceSetOutput.resourcesDir!!
 
     override var resourcesDirProvider: Any
         get() = javaSourceSetOutput.resourcesDir!!
-        set(value) {
-            javaSourceSetOutput.setResourcesDir(value)
+        set(konstue) {
+            javaSourceSetOutput.setResourcesDir(konstue)
         }
 
-    override val classesDirs: ConfigurableFileCollection
+    override konst classesDirs: ConfigurableFileCollection
         get() = javaSourceSetOutput.classesDirs as ConfigurableFileCollection
 
-    override val allOutputs: FileCollection
+    override konst allOutputs: FileCollection
         get() = javaSourceSetOutput
 
     override fun call(): FileCollection = allOutputs

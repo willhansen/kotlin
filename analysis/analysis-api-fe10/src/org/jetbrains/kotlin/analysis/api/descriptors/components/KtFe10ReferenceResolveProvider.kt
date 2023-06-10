@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.idea.references.KtReference
 import org.jetbrains.kotlin.references.fe10.base.KtFe10Reference
 
 internal class KtFe10ReferenceResolveProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtReferenceResolveProvider(), Fe10KtAnalysisSessionComponent {
     override fun resolveToSymbols(reference: KtReference): Collection<KtSymbol> {
         require(reference is KtFe10Reference)
-        val bindingContext = analysisContext.analyze(reference.element, Fe10AnalysisFacade.AnalysisMode.PARTIAL)
+        konst bindingContext = analysisContext.analyze(reference.element, Fe10AnalysisFacade.AnalysisMode.PARTIAL)
         return reference.getTargetDescriptors(bindingContext).mapNotNull { descriptor ->
             descriptor.toKtSymbol(analysisContext)
         }

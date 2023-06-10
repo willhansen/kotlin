@@ -1,11 +1,11 @@
 // WITH_STDLIB
 
-class Holder(val list: List<String>?)
+class Holder(konst list: List<String>?)
 
 fun box(): String {
-    val holder1 = Holder(emptyList()) // No problem
-    val holder2 = Holder(if(true) emptyList<String>() else null) // No problem
-    val holder3 = Holder(if(true) emptyList() else mutableListOf()) // No problem
-    val holder4 = Holder(if(true) emptyList() else null) // Compile error
+    konst holder1 = Holder(emptyList()) // No problem
+    konst holder2 = Holder(if(true) emptyList<String>() else null) // No problem
+    konst holder3 = Holder(if(true) emptyList() else mutableListOf()) // No problem
+    konst holder4 = Holder(if(true) emptyList() else null) // Compile error
     return "OK"
 }

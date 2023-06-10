@@ -4,7 +4,7 @@
 fun foo(): Char = '1'
 
 @JsExport
-val p1: Char = '2'
+konst p1: Char = '2'
 
 @JsExport
 var p2: Char = '3'
@@ -12,12 +12,12 @@ var p2: Char = '3'
 @JsExport
 var p3: Char = '4'
     get() = field + 1
-    set(value) {
-        field = value + 1
+    set(konstue) {
+        field = konstue + 1
     }
 
 fun box(): String {
-    var root = eval("_")
+    var root = ekonst("_")
 
     var r = typeOf(root.foo())
     if (r !== "number") return "fail1: $r"

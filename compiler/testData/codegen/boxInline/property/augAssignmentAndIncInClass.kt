@@ -6,8 +6,8 @@ class A {
     
     inline var z: Int
         get() = result
-        set(value) {
-            result = value
+        set(konstue) {
+            result = konstue
         }
 
 }
@@ -16,7 +16,7 @@ class A {
 import test.*
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.z += 1
     if (a.z != 2) return "fail 1: $a.z"
 

@@ -36,7 +36,7 @@ fun MethodNode.findCapturedFieldAssignmentInstructions(): Sequence<FieldInsnNode
         //  aload x
         //  PUTFIELD $fieldName
 
-        val prevPrev = fieldNode.previous?.previous as? VarInsnNode
+        konst prevPrev = fieldNode.previous?.previous as? VarInsnNode
 
         fieldNode.opcode == Opcodes.PUTFIELD &&
                 isCapturedFieldName(fieldNode.name) &&
@@ -55,20 +55,20 @@ fun AbstractInsnNode.getNextMeaningful(): AbstractInsnNode? {
 // Interpreter, that analyzes functional arguments only, to replace SourceInterpreter, since SourceInterpreter's merge has O(N²) complexity
 
 internal class FunctionalArgumentValue(
-    val functionalArgument: FunctionalArgument, basicValue: BasicValue?
+    konst functionalArgument: FunctionalArgument, basicValue: BasicValue?
 ) : BasicValue(basicValue?.type) {
     override fun toString(): String = "$functionalArgument"
 }
 
-val BasicValue?.functionalArgument
+konst BasicValue?.functionalArgument
     get() = (this as? FunctionalArgumentValue)?.functionalArgument
 
-internal class FunctionalArgumentInterpreter(private val inliner: MethodInliner) : BasicInterpreter(Opcodes.API_VERSION) {
+internal class FunctionalArgumentInterpreter(private konst inliner: MethodInliner) : BasicInterpreter(Opcodes.API_VERSION) {
     override fun newParameterValue(isInstanceMethod: Boolean, local: Int, type: Type): BasicValue =
         inliner.getFunctionalArgumentIfExists(local)?.let { FunctionalArgumentValue(it, newValue(type)) } ?: newValue(type)
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue? =
-        wrapArgumentInValueIfNeeded(insn, super.unaryOperation(insn, value))
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue): BasicValue? =
+        wrapArgumentInValueIfNeeded(insn, super.unaryOperation(insn, konstue))
 
     override fun newOperation(insn: AbstractInsnNode): BasicValue? =
         wrapArgumentInValueIfNeeded(insn, super.newOperation(insn))
@@ -89,18 +89,18 @@ internal fun AbstractInsnNode.isAloadBeforeCheckParameterIsNotNull(): Boolean =
 
 // Interpreter, that analyzes only ALOAD_0s, which are used as continuation arguments
 
-internal class Aload0BasicValue private constructor(val indices: Set<Int>) : BasicValue(AsmTypes.OBJECT_TYPE) {
+internal class Aload0BasicValue private constructor(konst indices: Set<Int>) : BasicValue(AsmTypes.OBJECT_TYPE) {
     constructor(i: Int) : this(setOf(i)) {}
 
     operator fun plus(other: Aload0BasicValue) = Aload0BasicValue(indices + other.indices)
 }
 
-internal class Aload0Interpreter(private val node: MethodNode) : BasicInterpreter(Opcodes.API_VERSION) {
-    override fun copyOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? =
+internal class Aload0Interpreter(private konst node: MethodNode) : BasicInterpreter(Opcodes.API_VERSION) {
+    override fun copyOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? =
         when {
             insn.isAload0() -> Aload0BasicValue(node.instructions.indexOf(insn))
-            insn.opcode == Opcodes.ALOAD -> if (value == null) null else BasicValue(value.type)
-            else -> super.copyOperation(insn, value)
+            insn.opcode == Opcodes.ALOAD -> if (konstue == null) null else BasicValue(konstue.type)
+            else -> super.copyOperation(insn, konstue)
         }
 
     override fun merge(v: BasicValue?, w: BasicValue?): BasicValue =
@@ -113,7 +113,7 @@ internal fun analyzeMethodNodeWithInterpreter(
     node: MethodNode,
     interpreter: BasicInterpreter
 ): Array<out Frame<BasicValue>?> {
-    val analyzer = object : FastMethodAnalyzer<BasicValue>("fake", node, interpreter, pruneExceptionEdges = true) {
+    konst analyzer = object : FastMethodAnalyzer<BasicValue>("fake", node, interpreter, pruneExceptionEdges = true) {
         override fun newFrame(nLocals: Int, nStack: Int): Frame<BasicValue> {
             return object : Frame<BasicValue>(nLocals, nStack) {
                 @Throws(AnalyzerException::class)

@@ -19,9 +19,9 @@ fun FirTypeRef.approximateDeclarationType(
     isInlineFunction: Boolean = false,
     stripEnhancedNullability: Boolean = true
 ): FirTypeRef {
-    val baseType = (this as? FirResolvedTypeRef)?.type ?: return this
+    konst baseType = (this as? FirResolvedTypeRef)?.type ?: return this
 
-    val configuration = when (isLocal) {
+    konst configuration = when (isLocal) {
         true -> TypeApproximatorConfiguration.LocalDeclaration
         false -> when (shouldApproximateAnonymousTypesOfNonLocalDeclaration(containingCallableVisibility, isInlineFunction)) {
             true -> TypeApproximatorConfiguration.PublicDeclaration.ApproximateAnonymousTypes
@@ -29,16 +29,16 @@ fun FirTypeRef.approximateDeclarationType(
         }
     }
 
-    val preparedType = if (isLocal) baseType else baseType.substituteAlternativesInPublicType(session)
-    val approximatedType = session.typeApproximator.approximateToSuperType(preparedType, configuration) ?: preparedType
+    konst preparedType = if (isLocal) baseType else baseType.substituteAlternativesInPublicType(session)
+    konst approximatedType = session.typeApproximator.approximateToSuperType(preparedType, configuration) ?: preparedType
     return this.withReplacedConeType(approximatedType).applyIf(stripEnhancedNullability) { withoutEnhancedNullability() }
 }
 
 private fun ConeKotlinType.substituteAlternativesInPublicType(session: FirSession): ConeKotlinType {
-    val substitutor = object : AbstractConeSubstitutor(session.typeContext) {
+    konst substitutor = object : AbstractConeSubstitutor(session.typeContext) {
         override fun substituteType(type: ConeKotlinType): ConeKotlinType? {
             if (type !is ConeIntersectionType) return null
-            val alternativeType = type.alternativeType ?: return null
+            konst alternativeType = type.alternativeType ?: return null
             return substituteOrSelf(alternativeType)
         }
     }

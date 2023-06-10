@@ -16,17 +16,17 @@ package org.jetbrains.kotlin.tooling.core
  * @return Note: The order of the set is guaranteed to be bfs
  */
 inline fun <reified T> T.closure(edges: (T) -> Iterable<T>): Set<T> {
-    val initialEdges = edges(this)
+    konst initialEdges = edges(this)
 
-    val dequeue = if (initialEdges is Collection) {
+    konst dequeue = if (initialEdges is Collection) {
         if (initialEdges.isEmpty()) return emptySet()
         createDequeue(initialEdges)
     } else createDequeueFromIterable(initialEdges)
 
-    val results = createResultSet<T>(dequeue.size)
+    konst results = createResultSet<T>(dequeue.size)
 
     while (dequeue.isNotEmpty()) {
-        val element = dequeue.removeAt(0)
+        konst element = dequeue.removeAt(0)
         if (element != this && results.add(element)) {
             dequeue.addAll(edges(element))
         }
@@ -39,18 +39,18 @@ inline fun <reified T> T.closure(edges: (T) -> Iterable<T>): Set<T> {
  * @see closure
  */
 inline fun <reified T> T.withClosure(edges: (T) -> Iterable<T>): Set<T> {
-    val initialEdges = edges(this)
+    konst initialEdges = edges(this)
 
-    val dequeue = if (initialEdges is Collection) {
+    konst dequeue = if (initialEdges is Collection) {
         if (initialEdges.isEmpty()) return setOf(this)
         createDequeue(initialEdges)
     } else createDequeueFromIterable(initialEdges)
 
-    val results = createResultSet<T>(dequeue.size)
+    konst results = createResultSet<T>(dequeue.size)
     results.add(this)
 
     while (dequeue.isNotEmpty()) {
-        val element = dequeue.removeAt(0)
+        konst element = dequeue.removeAt(0)
         if (results.add(element)) {
             dequeue.addAll(edges(element))
         }
@@ -64,16 +64,16 @@ inline fun <reified T> T.withClosure(edges: (T) -> Iterable<T>): Set<T> {
  */
 inline fun <reified T> Iterable<T>.closure(edges: (T) -> Iterable<T>): Set<T> {
     if (this is Collection && this.isEmpty()) return emptySet()
-    val thisSet = this.toSet()
+    konst thisSet = this.toSet()
 
-    val dequeue = createDequeue<T>()
+    konst dequeue = createDequeue<T>()
     thisSet.forEach { seed -> dequeue.addAll(edges(seed)) }
     if (dequeue.isEmpty()) return emptySet()
 
-    val results = createResultSet<T>()
+    konst results = createResultSet<T>()
 
     while (dequeue.isNotEmpty()) {
-        val element = dequeue.removeAt(0)
+        konst element = dequeue.removeAt(0)
         if (element !in thisSet && results.add(element)) {
             dequeue.addAll(edges(element))
         }
@@ -87,15 +87,15 @@ inline fun <reified T> Iterable<T>.closure(edges: (T) -> Iterable<T>): Set<T> {
  * @receiver: Will be included in the return set
  */
 inline fun <reified T> Iterable<T>.withClosure(edges: (T) -> Iterable<T>): Set<T> {
-    val dequeue = if (this is Collection) {
+    konst dequeue = if (this is Collection) {
         if (this.isEmpty()) return emptySet()
         createDequeue(this)
     } else createDequeueFromIterable(this)
 
-    val results = createResultSet<T>()
+    konst results = createResultSet<T>()
 
     while (dequeue.isNotEmpty()) {
-        val element = dequeue.removeAt(0)
+        konst element = dequeue.removeAt(0)
         if (results.add(element)) {
             dequeue.addAll(edges(element))
         }
@@ -109,8 +109,8 @@ inline fun <reified T> Iterable<T>.withClosure(edges: (T) -> Iterable<T>): Set<T
  * @receiver is not included in the return set
  */
 inline fun <reified T : Any> T.linearClosure(next: (T) -> T?): Set<T> {
-    val initial = next(this) ?: return emptySet()
-    val results = createResultSet<T>()
+    konst initial = next(this) ?: return emptySet()
+    konst results = createResultSet<T>()
     var enqueued: T? = initial
     while (enqueued != null) {
         if (enqueued != this && results.add(enqueued)) {
@@ -126,8 +126,8 @@ inline fun <reified T : Any> T.linearClosure(next: (T) -> T?): Set<T> {
  * @receiver is included in the return set
  */
 inline fun <reified T : Any> T.withLinearClosure(next: (T) -> T?): Set<T> {
-    val initial = next(this) ?: return setOf(this)
-    val results = createResultSet<T>()
+    konst initial = next(this) ?: return setOf(this)
+    konst results = createResultSet<T>()
     results.add(this)
 
     var enqueued: T? = initial
@@ -168,32 +168,32 @@ internal fun <T> createResultSet(initialSize: Int = 16): MutableSet<T> {
 //region Deprecations
 
 @Suppress("unused")
-@Deprecated("Scheduled for removal in 2.0", level = DeprecationLevel.ERROR)
+@Deprecated("Scheduled for remokonst in 2.0", level = DeprecationLevel.ERROR)
 @PublishedApi
 internal fun <T> createResultSet(withValue: T, initialSize: Int = 16): MutableSet<T> {
     return LinkedHashSet<T>(initialSize).also { it.add(withValue) }
 }
 
 @Suppress("unused")
-@Deprecated("Scheduled for removal in 2.0", level = DeprecationLevel.ERROR)
+@Deprecated("Scheduled for remokonst in 2.0", level = DeprecationLevel.ERROR)
 @PublishedApi
 internal fun <T> createResultSet(withValues: Iterable<T>, initialSize: Int = 16): MutableSet<T> {
     return LinkedHashSet<T>(initialSize).also { it.addAll(withValues) }
 }
 
 @Suppress("unused")
-@Deprecated("Scheduled for removal in 2.0", level = DeprecationLevel.ERROR)
+@Deprecated("Scheduled for remokonst in 2.0", level = DeprecationLevel.ERROR)
 @PublishedApi
 internal inline fun <T> closureTo(
     destination: MutableSet<T>,
     exclude: Set<T>,
     dequeue: MutableList<T>,
     seed: T,
-    enqueueNextElements: MutableList<T>.(value: T) -> Unit
+    enqueueNextElements: MutableList<T>.(konstue: T) -> Unit
 ): Set<T> {
     dequeue.enqueueNextElements(seed)
     while (dequeue.isNotEmpty()) {
-        val element = dequeue.removeAt(0)
+        konst element = dequeue.removeAt(0)
         if (element != seed && element !in exclude && destination.add(element)) {
             dequeue.enqueueNextElements(element)
         }

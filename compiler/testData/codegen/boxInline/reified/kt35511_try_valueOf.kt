@@ -4,12 +4,12 @@
 
 package test
 
-enum class Base(val value: String) {
+enum class Base(konst konstue: String) {
     OK("OK"),
     B("FAIL");
 }
 
-enum class Base2(val value: String) {
+enum class Base2(konst konstue: String) {
     A("OK2"),
     B("FAIL2");
 }
@@ -23,7 +23,7 @@ fun foo(base: Enum<*>) {
 fun cond() = true
 
 inline fun <reified T : Enum<T>, reified Y : Enum<Y>> process(name: String) {
-    val z = try {
+    konst z = try {
         enumValueOf<T>(name)
     } catch (e: Exception) {
         enumValueOf<Y>(name)

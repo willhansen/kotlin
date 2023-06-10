@@ -1,16 +1,16 @@
-// !LANGUAGE: +IntrinsicConstEvaluation
+// !LANGUAGE: +IntrinsicConstEkonstuation
 // TARGET_BACKEND: JVM_IR
 // IGNORE_BACKEND_K1: JVM_IR
 // WITH_STDLIB
 fun <T> T.id() = this
 
-const val trimMargin = "123".<!EVALUATED("123")!>trimMargin()<!>
+const konst trimMargin = "123".<!EVALUATED("123")!>trimMargin()<!>
 
-const val trimMarginDefault = """ABC
+const konst trimMarginDefault = """ABC
                 |123
                 |456""".<!EVALUATED("ABC\n123\n456")!>trimMargin()<!>
 
-const val withoutMargin = """
+const konst withoutMargin = """
     #XYZ
     #foo
     #bar

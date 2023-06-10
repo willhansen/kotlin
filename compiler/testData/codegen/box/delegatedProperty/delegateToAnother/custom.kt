@@ -6,7 +6,7 @@ var y: String by ::x
 
 var storage = "Fail"
 operator fun Any.getValue(thiz: Any?, property: Any?): String = storage
-operator fun Any.setValue(thiz: Any?, property: Any?, value: String) { storage = value }
+operator fun Any.setValue(thiz: Any?, property: Any?, konstue: String) { storage = konstue }
 
 fun box(): String {
     y = "OK"

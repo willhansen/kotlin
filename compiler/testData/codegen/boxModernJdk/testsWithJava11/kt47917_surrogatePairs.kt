@@ -20,12 +20,12 @@ fun box() : String {
     if (test("", "", "").length != 65536) return "fail 1: ${test("", "", "").length}"
     if (test("", "", "") != test2("", "")) return "fail 2: ${test("", "", "")} != ${test2("", "")}"
     if (test("", "", "") != test3()) return "fail 3: ${test("", "", "")} != ${test3()}"
-    val result = test3()
+    konst result = test3()
     for (i in 0 until 65530) {
         if (result[i] != '0') return "fail: $i"
     }
 
-    val tail = result.substring(65530, 65536)
+    konst tail = result.substring(65530, 65536)
     if (tail != "\uD83C\uDF09\uD83C\uDF10\uD83C\uDF10") return "fail tail comparison: $tail"
 
     return "OK"

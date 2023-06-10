@@ -1,6 +1,6 @@
 package
 
-public val x: () -> kotlin.String
+public konst x: () -> kotlin.String
 public fun handle(/*0*/ run: Run): kotlin.Unit
 public fun test(): kotlin.Unit
 

@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.library.KotlinLibrary
 import org.jetbrains.kotlin.library.containsErrorCode
 
 class JsIrLinker(
-    private val currentModule: ModuleDescriptor?, messageLogger: IrMessageLogger, builtIns: IrBuiltIns, symbolTable: SymbolTable,
-    override val partialLinkageSupport: PartialLinkageSupportForLinker,
-    override val translationPluginContext: TranslationPluginContext?,
-    private val icData: ICData? = null,
+    private konst currentModule: ModuleDescriptor?, messageLogger: IrMessageLogger, builtIns: IrBuiltIns, symbolTable: SymbolTable,
+    override konst partialLinkageSupport: PartialLinkageSupportForLinker,
+    override konst translationPluginContext: TranslationPluginContext?,
+    private konst icData: ICData? = null,
     friendModules: Map<String, Collection<String>> = emptyMap(),
-    private val stubGenerator: DeclarationStubGenerator? = null
+    private konst stubGenerator: DeclarationStubGenerator? = null
 ) : KotlinIrLinker(
     currentModule = currentModule,
     messageLogger = messageLogger,
@@ -39,7 +39,7 @@ class JsIrLinker(
         symbol
     }) {
 
-    override val fakeOverrideBuilder = FakeOverrideBuilder(
+    override konst fakeOverrideBuilder = FakeOverrideBuilder(
         linker = this,
         symbolTable = symbolTable,
         mangler = JsManglerIr,
@@ -51,7 +51,7 @@ class JsIrLinker(
     override fun isBuiltInModule(moduleDescriptor: ModuleDescriptor): Boolean =
         moduleDescriptor === moduleDescriptor.builtIns.builtInsModule
 
-    private val IrLibrary.libContainsErrorCode: Boolean
+    private konst IrLibrary.libContainsErrorCode: Boolean
         get() = this is KotlinLibrary && this.containsErrorCode
 
     override fun createModuleDeserializer(
@@ -60,8 +60,8 @@ class JsIrLinker(
         strategyResolver: (String) -> DeserializationStrategy
     ): IrModuleDeserializer {
         require(klib != null) { "Expecting kotlin library" }
-        val libraryAbiVersion = klib.versions.abiVersion ?: KotlinAbiVersion.CURRENT
-        return when (val lazyIrGenerator = stubGenerator) {
+        konst libraryAbiVersion = klib.versions.abiVersion ?: KotlinAbiVersion.CURRENT
+        return when (konst lazyIrGenerator = stubGenerator) {
             null -> JsModuleDeserializer(moduleDescriptor, klib, strategyResolver, libraryAbiVersion, klib.libContainsErrorCode)
             else -> JsLazyIrModuleDeserializer(moduleDescriptor, libraryAbiVersion, builtIns, lazyIrGenerator)
         }
@@ -71,7 +71,7 @@ class JsIrLinker(
         BasicIrModuleDeserializer(this, moduleDescriptor, klib, strategyResolver, libraryAbiVersion, allowErrorCode, false)
 
     override fun createCurrentModuleDeserializer(moduleFragment: IrModuleFragment, dependencies: Collection<IrModuleDeserializer>): IrModuleDeserializer {
-        val currentModuleDeserializer = super.createCurrentModuleDeserializer(moduleFragment, dependencies)
+        konst currentModuleDeserializer = super.createCurrentModuleDeserializer(moduleFragment, dependencies)
 
         icData?.let {
             return CurrentModuleWithICDeserializer(currentModuleDeserializer, symbolTable, builtIns, it.icData) { lib ->
@@ -81,8 +81,8 @@ class JsIrLinker(
         return currentModuleDeserializer
     }
 
-    val modules
-        get() = deserializersForModules.values
+    konst modules
+        get() = deserializersForModules.konstues
             .map { it.moduleFragment }
             .filter { it.descriptor !== currentModule }
 
@@ -92,9 +92,9 @@ class JsIrLinker(
     }
 
     class JsFePluginContext(
-        override val moduleDescriptor: ModuleDescriptor,
-        override val symbolTable: ReferenceSymbolTable,
-        override val typeTranslator: TypeTranslator,
-        override val irBuiltIns: IrBuiltIns,
+        override konst moduleDescriptor: ModuleDescriptor,
+        override konst symbolTable: ReferenceSymbolTable,
+        override konst typeTranslator: TypeTranslator,
+        override konst irBuiltIns: IrBuiltIns,
     ) : TranslationPluginContext
 }

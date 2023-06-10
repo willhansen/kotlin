@@ -25,8 +25,8 @@ public interface I {
 
 public final data class Pair</*0*/ X, /*1*/ Y> {
     public constructor Pair</*0*/ X, /*1*/ Y>(/*0*/ fst: X, /*1*/ snd: Y)
-    public final val fst: X
-    public final val snd: Y
+    public final konst fst: X
+    public final konst snd: Y
     public final operator /*synthesized*/ fun component1(): X
     public final operator /*synthesized*/ fun component2(): Y
     public final /*synthesized*/ fun copy(/*0*/ fst: X = ..., /*1*/ snd: Y = ...): Pair<X, Y>

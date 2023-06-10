@@ -12,22 +12,22 @@ import org.jetbrains.kotlin.library.metadata.parsePackageFragment
 
 class KlibIcData(incrementalData: IncrementalDataProvider) : MetadataLibrary {
 
-    private val parts: Map<String, Map<String, ByteArray>> by lazy {
-        val result = mutableMapOf<String, MutableMap<String, ByteArray>>()
+    private konst parts: Map<String, Map<String, ByteArray>> by lazy {
+        konst result = mutableMapOf<String, MutableMap<String, ByteArray>>()
 
         incrementalData.compiledPackageParts.entries.forEach { (f, tv) ->
-            val proto = parsePackageFragment(tv.metadata)
-            val fqName = proto.getExtension(KlibMetadataProtoBuf.fqName)
+            konst proto = parsePackageFragment(tv.metadata)
+            konst fqName = proto.getExtension(KlibMetadataProtoBuf.fqName)
             result.getOrPut(fqName, ::mutableMapOf).put(f.name, tv.metadata)
         }
 
         result
     }
 
-    val packageFragmentNameList: Collection<String>
+    konst packageFragmentNameList: Collection<String>
         get() = parts.keys
 
-    override val moduleHeaderData: ByteArray
+    override konst moduleHeaderData: ByteArray
         get() = error("moduleHeaderData is not implemented")
 
     override fun packageMetadataParts(fqName: String): Set<String> {

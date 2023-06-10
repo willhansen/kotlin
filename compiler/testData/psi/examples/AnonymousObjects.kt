@@ -16,7 +16,7 @@ enum class GodMessages {
 }
 
 // Type of this variable is GOD_AnonymousClass
-val GOD = object {
+konst GOD = object {
   fun sendMessage(message : GodMEssage) = throw RuntimeException(message.name)
 };
 

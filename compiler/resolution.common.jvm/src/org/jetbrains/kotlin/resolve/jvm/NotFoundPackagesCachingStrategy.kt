@@ -21,7 +21,7 @@ interface NotFoundPackagesCachingStrategy {
             // all those temporary names and those don't even look like a package name should be stored in a short term cache
             // while names those are potentially proper package name could be stored for a long time
             // (till PROJECT_ROOTS or specific VFS changes)
-            val packageLikeQName = qualifiedName.indexOf('.') > 0
+            konst packageLikeQName = qualifiedName.indexOf('.') > 0
 
             return if (isLibrarySearchScope && packageLikeQName) CacheType.LIB_SCOPE
             else CacheType.SCOPE

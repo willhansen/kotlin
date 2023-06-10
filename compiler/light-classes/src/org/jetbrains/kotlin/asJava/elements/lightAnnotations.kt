@@ -41,13 +41,13 @@ import org.jetbrains.kotlin.types.typeUtil.isUnit
 import org.jetbrains.kotlin.types.typeUtil.nullability
 
 class KtLightAnnotationForSourceEntry(
-    private val name: String?,
-    private val lazyQualifiedName: () -> String?,
-    override val kotlinOrigin: KtCallElement,
+    private konst name: String?,
+    private konst lazyQualifiedName: () -> String?,
+    override konst kotlinOrigin: KtCallElement,
     parent: PsiElement
 ) : KtLightAbstractAnnotation(parent) {
 
-    private val _qualifiedName: String? by lazyPub { lazyQualifiedName() }
+    private konst _qualifiedName: String? by lazyPub { lazyQualifiedName() }
 
     override fun getOwner() = parent as? PsiAnnotationOwner
 
@@ -60,21 +60,21 @@ class KtLightAnnotationForSourceEntry(
     override fun findDeclaredAttributeValue(name: String?): PsiAnnotationMemberValue? = getAttributeValue(name, false)
 
     private fun getCallEntry(name: String): MutableMap.MutableEntry<ValueParameterDescriptor, ResolvedValueArgument>? {
-        val resolvedCall = kotlinOrigin.getResolvedCall() ?: return null
-        return resolvedCall.valueArguments.entries.find { (param, _) -> param.name.asString() == name }
+        konst resolvedCall = kotlinOrigin.getResolvedCall() ?: return null
+        return resolvedCall.konstueArguments.entries.find { (param, _) -> param.name.asString() == name }
     }
 
     private fun getAttributeValue(name: String?, useDefault: Boolean): PsiAnnotationMemberValue? {
 
         ktLightAnnotationParameterList.attributes
-            .find { it.name == (name ?: "value") }
-            ?.let { return it.value }
+            .find { it.name == (name ?: "konstue") }
+            ?.let { return it.konstue }
 
         if (useDefault) {
-            val callEntry = getCallEntry(name ?: "value") ?: return null
+            konst callEntry = getCallEntry(name ?: "konstue") ?: return null
 
             if (callEntry.key.declaresOrInheritsDefaultValue()) {
-                when (val psiElement = callEntry.key.source.getPsi()) {
+                when (konst psiElement = callEntry.key.source.getPsi()) {
                     is KtParameter ->
                         return psiElement.defaultValue?.let { defaultValue ->
                             convertToLightAnnotationMemberValue(ktLightAnnotationParameterList, defaultValue)
@@ -98,13 +98,13 @@ class KtLightAnnotationForSourceEntry(
         if (qualifiedName == CommonClassNames.JAVA_LANG_ANNOTATION_REPEATABLE) JAVA_LANG_ANNOTATION_REPEATABLE_SHORT_NAME else null,
     )
 
-    private val ktLightAnnotationParameterList by lazyPub { KtLightAnnotationParameterList() }
+    private konst ktLightAnnotationParameterList by lazyPub { KtLightAnnotationParameterList() }
 
     override fun getParameterList(): PsiAnnotationParameterList = ktLightAnnotationParameterList
 
     inner class KtLightAnnotationParameterList : KtLightElementBase(this),
         PsiAnnotationParameterList {
-        override val kotlinOrigin: KtElement? get() = null
+        override konst kotlinOrigin: KtElement? get() = null
 
         private fun checkIfToArrayConversionExpected(callEntry: Map.Entry<ValueParameterDescriptor, ResolvedValueArgument>): Boolean {
 
@@ -113,34 +113,34 @@ class KtLightAnnotationForSourceEntry(
             }
 
             //Anno()
-            val valueArgument = callEntry.value.arguments.firstOrNull() ?: return false
+            konst konstueArgument = callEntry.konstue.arguments.firstOrNull() ?: return false
 
             //Anno(1,2,3)
-            if (valueArgument is VarargValueArgument) {
+            if (konstueArgument is VarargValueArgument) {
                 return true
             }
 
             //Anno(*[1,2,3])
-            if (valueArgument is KtValueArgument && valueArgument.isSpread) {
+            if (konstueArgument is KtValueArgument && konstueArgument.isSpread) {
                 return false
             }
 
             //Anno(a = [1,2,3])
-            return !valueArgument.isNamed()
+            return !konstueArgument.isNamed()
         }
 
         private fun getWrappedToArrayNameValuePair(
             resolvedArgumentEntry: Map.Entry<ValueParameterDescriptor, ResolvedValueArgument>
         ): KtLightPsiNameValuePair {
 
-            val argumentExpressions =
-                resolvedArgumentEntry.value.arguments.mapNotNull { varargArgument -> varargArgument.getArgumentExpression() }
+            konst argumentExpressions =
+                resolvedArgumentEntry.konstue.arguments.mapNotNull { varargArgument -> varargArgument.getArgumentExpression() }
 
-            val parent = PsiTreeUtil.findCommonParent(argumentExpressions) as? KtElement
-                ?: this@KtLightAnnotationForSourceEntry.kotlinOrigin.valueArgumentList
+            konst parent = PsiTreeUtil.findCommonParent(argumentExpressions) as? KtElement
+                ?: this@KtLightAnnotationForSourceEntry.kotlinOrigin.konstueArgumentList
                 ?: this@KtLightAnnotationForSourceEntry.kotlinOrigin
 
-            val argumentName = resolvedArgumentEntry.key.name.asString()
+            konst argumentName = resolvedArgumentEntry.key.name.asString()
 
             return KtLightPsiNameValuePair(
                 parent,
@@ -159,26 +159,26 @@ class KtLightAnnotationForSourceEntry(
             resolvedArgumentEntry: Map.Entry<ValueParameterDescriptor, ResolvedValueArgument>
         ): KtLightPsiNameValuePair? {
 
-            val firstArgument = resolvedArgumentEntry.value.arguments.firstOrNull() ?: return null
-            val argumentExpression = firstArgument.getArgumentExpression() ?: return null
+            konst firstArgument = resolvedArgumentEntry.konstue.arguments.firstOrNull() ?: return null
+            konst argumentExpression = firstArgument.getArgumentExpression() ?: return null
 
-            val argumentName = resolvedArgumentEntry.key.name.asString()
+            konst argumentName = resolvedArgumentEntry.key.name.asString()
 
             return KtLightPsiNameValuePair(
                 firstArgument.asElement(),
                 argumentName,
                 this
-            ) { valuePair -> convertToLightAnnotationMemberValue(valuePair, argumentExpression) }
+            ) { konstuePair -> convertToLightAnnotationMemberValue(konstuePair, argumentExpression) }
         }
 
-        private val _attributes: Array<PsiNameValuePair> by lazyPub {
+        private konst _attributes: Array<PsiNameValuePair> by lazyPub {
 
-            if (this@KtLightAnnotationForSourceEntry.kotlinOrigin.valueArguments.isEmpty()) {
+            if (this@KtLightAnnotationForSourceEntry.kotlinOrigin.konstueArguments.isEmpty()) {
                 return@lazyPub emptyArray()
             }
 
-            val resolvedArguments =
-                this@KtLightAnnotationForSourceEntry.kotlinOrigin.getResolvedCall()?.valueArguments
+            konst resolvedArguments =
+                this@KtLightAnnotationForSourceEntry.kotlinOrigin.getResolvedCall()?.konstueArguments
 
             resolvedArguments ?: return@lazyPub emptyArray()
 
@@ -207,15 +207,15 @@ class KtLightAnnotationForSourceEntry(
 
     override fun hashCode() = kotlinOrigin.hashCode()
 
-    override fun <T : PsiAnnotationMemberValue?> setDeclaredAttributeValue(attributeName: String?, value: T?) = cannotModify()
+    override fun <T : PsiAnnotationMemberValue?> setDeclaredAttributeValue(attributeName: String?, konstue: T?) = cannotModify()
 }
 
 class KtLightEmptyAnnotationParameterList(parent: PsiElement) : KtLightElementBase(parent), PsiAnnotationParameterList {
-    override val kotlinOrigin: KtElement? get() = null
+    override konst kotlinOrigin: KtElement? get() = null
     override fun getAttributes(): Array<PsiNameValuePair> = emptyArray()
 }
 
-open class KtLightNullabilityAnnotation<D : KtLightElement<*, PsiModifierListOwner>>(val member: D, parent: PsiElement) :
+open class KtLightNullabilityAnnotation<D : KtLightElement<*, PsiModifierListOwner>>(konst member: D, parent: PsiElement) :
     KtLightAbstractAnnotation(parent) {
     override fun fqNameMatches(fqName: String): Boolean {
         if (!isNullabilityAnnotation(fqName)) return false
@@ -223,13 +223,13 @@ open class KtLightNullabilityAnnotation<D : KtLightElement<*, PsiModifierListOwn
         return super.fqNameMatches(fqName)
     }
 
-    override val kotlinOrigin: Nothing? get() = null
-    override fun <T : PsiAnnotationMemberValue?> setDeclaredAttributeValue(attributeName: String?, value: T?) = cannotModify()
+    override konst kotlinOrigin: Nothing? get() = null
+    override fun <T : PsiAnnotationMemberValue?> setDeclaredAttributeValue(attributeName: String?, konstue: T?) = cannotModify()
 
     override fun findAttributeValue(attributeName: String?): PsiAnnotationMemberValue? = null
 
-    private val _qualifiedName: String? by lazyPub {
-        val annotatedElement = member.takeIf(::isFromSources)?.kotlinOrigin
+    private konst _qualifiedName: String? by lazyPub {
+        konst annotatedElement = member.takeIf(::isFromSources)?.kotlinOrigin
             ?: // it is out of our hands
             return@lazyPub null
 
@@ -256,13 +256,13 @@ open class KtLightNullabilityAnnotation<D : KtLightElement<*, PsiModifierListOwn
             return@lazyPub Nullable::class.java.name
         }
 
-        val kotlinType = getTargetType(annotatedElement) ?: return@lazyPub null
+        konst kotlinType = getTargetType(annotatedElement) ?: return@lazyPub null
 
         if (KotlinBuiltIns.isPrimitiveType(kotlinType) && (annotatedElement as? KtParameter)?.isVarArg != true) {
             // no need to annotate them explicitly except the case when overriding reference-type makes it non-primitive for Jvm
             if (!(annotatedElement is KtCallableDeclaration && annotatedElement.hasModifier(KtTokens.OVERRIDE_KEYWORD))) return@lazyPub null
 
-            val overriddenDescriptors =
+            konst overriddenDescriptors =
                 (annotatedElement.analyze()[BindingContext.DECLARATION_TO_DESCRIPTOR, annotatedElement] as? CallableMemberDescriptor)?.overriddenDescriptors
             if (overriddenDescriptors?.all { it.returnType == kotlinType } == true) return@lazyPub null
         }
@@ -315,18 +315,18 @@ open class KtLightNullabilityAnnotation<D : KtLightElement<*, PsiModifierListOwn
 
 internal fun isNullabilityAnnotation(qualifiedName: String?) = qualifiedName in backendNullabilityAnnotations
 
-private val backendNullabilityAnnotations = arrayOf(Nullable::class.java.name, NotNull::class.java.name)
+private konst backendNullabilityAnnotations = arrayOf(Nullable::class.java.name, NotNull::class.java.name)
 
 private fun KtElement.analyze(): BindingContext = LightClassGenerationSupport.getInstance(this.project).analyze(this)
 
 private fun KtElement.getResolvedCall(): ResolvedCall<out CallableDescriptor>? {
     if (!isValid) return null
-    val context = analyze()
+    konst context = analyze()
     return this.getResolvedCall(context)
 }
 
 fun convertToLightAnnotationMemberValue(lightParent: PsiElement, argument: KtExpression): PsiAnnotationMemberValue {
-    @Suppress("NAME_SHADOWING") val argument = unwrapCall(argument)
+    @Suppress("NAME_SHADOWING") konst argument = unwrapCall(argument)
     when (argument) {
         is KtClassLiteralExpression -> {
             return KtLightPsiClassObjectAccessExpression(argument, lightParent)
@@ -337,8 +337,8 @@ fun convertToLightAnnotationMemberValue(lightParent: PsiElement, argument: KtExp
         }
 
         is KtCallExpression -> {
-            val arguments = argument.valueArguments
-            val annotationName = argument.calleeExpression?.let { getAnnotationName(it) }
+            konst arguments = argument.konstueArguments
+            konst annotationName = argument.calleeExpression?.let { getAnnotationName(it) }
             if (annotationName != null) {
                 return KtLightAnnotationForSourceEntry(
                     name = annotationName,
@@ -347,7 +347,7 @@ fun convertToLightAnnotationMemberValue(lightParent: PsiElement, argument: KtExp
                     parent = lightParent
                 )
             }
-            val resolvedCall = argument.getResolvedCall()
+            konst resolvedCall = argument.getResolvedCall()
             if (resolvedCall != null && CompileTimeConstantUtils.isArrayFunctionCall(resolvedCall))
                 return KtLightPsiArrayInitializerMemberValue(
                     argument,
@@ -360,7 +360,7 @@ fun convertToLightAnnotationMemberValue(lightParent: PsiElement, argument: KtExp
         }
 
         is KtCollectionLiteralExpression -> {
-            val arguments = argument.getInnerExpressions()
+            konst arguments = argument.getInnerExpressions()
             if (arguments.isNotEmpty())
                 return KtLightPsiArrayInitializerMemberValue(
                     argument,
@@ -372,7 +372,7 @@ fun convertToLightAnnotationMemberValue(lightParent: PsiElement, argument: KtExp
     return KtLightPsiLiteral(argument, lightParent)
 }
 
-private val KtExpression.nameReference: KtNameReferenceExpression?
+private konst KtExpression.nameReference: KtNameReferenceExpression?
     get() = when (this) {
         is KtConstructorCalleeExpression -> constructorReferenceExpression as? KtNameReferenceExpression
         else -> this as? KtNameReferenceExpression
@@ -384,14 +384,14 @@ private fun unwrapCall(callee: KtExpression): KtExpression = when (callee) {
 }
 
 private fun getAnnotationName(callee: KtExpression): String? {
-    @Suppress("NAME_SHADOWING") val callee = unwrapCall(callee)
-    val resultingDescriptor = callee.getResolvedCall()?.resultingDescriptor
+    @Suppress("NAME_SHADOWING") konst callee = unwrapCall(callee)
+    konst resultingDescriptor = callee.getResolvedCall()?.resultingDescriptor
     if (resultingDescriptor is ClassConstructorDescriptor) {
-        val ktClass = resultingDescriptor.constructedClass.source.getPsi() as? KtClass
+        konst ktClass = resultingDescriptor.constructedClass.source.getPsi() as? KtClass
         if (ktClass?.isAnnotation() == true) return ktClass.fqName?.toString()
     }
     if (resultingDescriptor is JavaClassConstructorDescriptor) {
-        val psiClass = resultingDescriptor.constructedClass.source.getPsi() as? PsiClass
+        konst psiClass = resultingDescriptor.constructedClass.source.getPsi() as? PsiClass
         if (psiClass?.isAnnotationType == true) return psiClass.qualifiedName
     }
     return null

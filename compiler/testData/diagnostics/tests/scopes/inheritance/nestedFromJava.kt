@@ -24,7 +24,7 @@ public class C extends B implements A {
 // FILE: 1.kt
 
 class X: A {
-    val a_s: <!UNRESOLVED_REFERENCE!>A_S<!> = null!!
+    konst a_s: <!UNRESOLVED_REFERENCE!>A_S<!> = null!!
 
     init {
         <!UNRESOLVED_REFERENCE!>A_S<!>()
@@ -33,7 +33,7 @@ class X: A {
     }
 
     object xD {
-        val a_: <!UNRESOLVED_REFERENCE!>A_S<!> = null!!
+        konst a_: <!UNRESOLVED_REFERENCE!>A_S<!> = null!!
 
         init {
             <!UNRESOLVED_REFERENCE!>A_S<!>()
@@ -42,8 +42,8 @@ class X: A {
 }
 
 class Y: B() {
-    val b_: B_ = null!!
-    val b_s: B_S = null!!
+    konst b_: B_ = null!!
+    konst b_s: B_S = null!!
 
     init {
         B_()
@@ -56,8 +56,8 @@ class Y: B() {
     }
 
     object X {
-        val b_: B_ = null!!
-        val b_s: B_S = null!!
+        konst b_: B_ = null!!
+        konst b_s: B_S = null!!
 
         init {
             <!RESOLUTION_TO_CLASSIFIER!>B_<!>()
@@ -67,9 +67,9 @@ class Y: B() {
 }
 
 class Z: C() {
-    val a_s: <!UNRESOLVED_REFERENCE!>A_S<!> = null!!
-    val b_: B_ = null!!
-    val b_s: B_S = null!!
+    konst a_s: <!UNRESOLVED_REFERENCE!>A_S<!> = null!!
+    konst b_: B_ = null!!
+    konst b_s: B_S = null!!
 
     init {
         <!UNRESOLVED_REFERENCE!>A_S<!>()
@@ -78,9 +78,9 @@ class Z: C() {
     }
 
     object X {
-        val a_s: <!UNRESOLVED_REFERENCE!>A_S<!> = null!!
-        val b_: B_ = null!!
-        val b_s: B_S = null!!
+        konst a_s: <!UNRESOLVED_REFERENCE!>A_S<!> = null!!
+        konst b_: B_ = null!!
+        konst b_s: B_S = null!!
 
         init {
             <!UNRESOLVED_REFERENCE!>A_S<!>()

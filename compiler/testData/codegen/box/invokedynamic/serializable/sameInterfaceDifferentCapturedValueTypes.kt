@@ -11,20 +11,20 @@
 import java.io.*
 
 fun box(): String {
-    val vks = "K"
-    val vkc = 'K'
+    konst vks = "K"
+    konst vkc = 'K'
 
-    val t1 = roundtrip(Sam { s -> s + vks }).get("O")
+    konst t1 = roundtrip(Sam { s -> s + vks }).get("O")
     if (t1 != "OK") return "Failed: t1='$t1'"
 
-    val t2 = roundtrip(Sam { s -> s + vkc }).get("O")
+    konst t2 = roundtrip(Sam { s -> s + vkc }).get("O")
     if (t2 != "OK") return "Failed: t2='$t2'"
 
     return "OK"
 }
 
 fun <T> roundtrip(x: T): T {
-    val out1 = ByteArrayOutputStream()
+    konst out1 = ByteArrayOutputStream()
     ObjectOutputStream(out1).writeObject(x)
     return ObjectInputStream(ByteArrayInputStream(out1.toByteArray())).readObject() as T
 }

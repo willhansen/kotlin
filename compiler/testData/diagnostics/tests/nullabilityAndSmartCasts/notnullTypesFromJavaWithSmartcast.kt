@@ -11,10 +11,10 @@ public class JClass {
 
 // FILE: test.kt
 fun <T : Any> test() {
-    var value: T? = null
-    if (value == null) {
-        value = JClass.getNotNullT()
+    var konstue: T? = null
+    if (konstue == null) {
+        konstue = JClass.getNotNullT()
     }
 
-    <!DEBUG_INFO_SMARTCAST!>value<!>.hashCode() // unsafe call error
+    <!DEBUG_INFO_SMARTCAST!>konstue<!>.hashCode() // unsafe call error
 }

@@ -1,13 +1,13 @@
 interface Foo1 {
     fun foo()
     fun bar()
-    val str: String
+    konst str: String
 }
 
 interface Foo2 : Foo1 {
     fun foo(i: Int)
     fun bar(s: String)
-    val isBoo: Boolean
+    konst isBoo: Boolean
 }
 
 abstract class Usag<caret>e : Foo2 {

@@ -11,6 +11,6 @@ public class ReferenceCycleThroughAnnotation {
     }
 
     public @interface C {
-        public Class<?> value();
+        public Class<?> konstue();
     }
 }

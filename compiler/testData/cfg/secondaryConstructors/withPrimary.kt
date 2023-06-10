@@ -1,8 +1,8 @@
-class A(val w: Char) {
-    val x: Int
+class A(konst w: Char) {
+    konst x: Int
     var y: Int
-    val z: Int
-    val v = -1
+    konst z: Int
+    konst v = -1
 
     constructor(): this('a') {
         y = 2

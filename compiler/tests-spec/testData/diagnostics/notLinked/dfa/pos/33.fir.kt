@@ -17,7 +17,7 @@ fun case_1() {
 
 // TESTCASE NUMBER: 2
 fun case_2() {
-    val x: Any?
+    konst x: Any?
 
     if (true) {
         x = 42
@@ -45,7 +45,7 @@ fun case_3() {
 
 // TESTCASE NUMBER: 4
 fun case_4() {
-    val x: Any?
+    konst x: Any?
 
     if (true) {
         return
@@ -59,7 +59,7 @@ fun case_4() {
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    val x: Any?
+    konst x: Any?
 
     if (true) {
         throw Exception()
@@ -76,7 +76,7 @@ fun case_5() {
  * ISSUES: KT-35668
  */
 fun case_6() {
-    val x: Any?
+    konst x: Any?
 
     if (true) {
         x = 42.0

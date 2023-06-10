@@ -4,7 +4,7 @@ FILE: argParamTypeMismatch.kt
     public final fun foo2(first: R|kotlin/String|, second: R|kotlin/Int|): R|kotlin/Unit| {
     }
     public final fun test(): R|kotlin/Unit| {
-        lval int: R|kotlin/Int| = Int(1)
+        lkonst int: R|kotlin/Int| = Int(1)
         R|/foo<Inapplicable(INAPPLICABLE): /foo>#|(R|<local>/int|)
         R|/foo<Inapplicable(INAPPLICABLE): /foo>#|(Int(2))
         R|/foo<Inapplicable(INAPPLICABLE): /foo>#|(R|kotlin/run|<R|kotlin/Int|>(<L> = run@fun <anonymous>(): R|kotlin/Int| <inline=Inline, kind=EXACTLY_ONCE>  {

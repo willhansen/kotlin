@@ -3,7 +3,7 @@
 package test
 
 class A() {
-    private val x = "OK"
+    private konst x = "OK"
     internal inline fun foo(p: (String) -> Unit) {
         p(x)
     }

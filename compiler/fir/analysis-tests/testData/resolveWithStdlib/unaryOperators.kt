@@ -6,13 +6,13 @@ class U {
 
 
 fun foo(u: U) {
-    val b = false
-    val i = 10
-    val x = -i
-    val y = !b
-    val z = -1.0
-    val w = +i
+    konst b = false
+    konst i = 10
+    konst x = -i
+    konst y = !b
+    konst z = -1.0
+    konst w = +i
 
-    val g = "" !in u
-    val f = "" !is Boolean
+    konst g = "" !in u
+    konst f = "" !is Boolean
 }

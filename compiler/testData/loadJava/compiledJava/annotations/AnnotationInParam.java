@@ -3,22 +3,22 @@ package test;
 public interface AnnotationInParam {
 
     public @interface MyAnnotationWithParam {
-        MyAnnotation value();
+        MyAnnotation konstue();
     }
 
     public @interface MyAnnotation {
-        String value();
+        String konstue();
     }
 
     @MyAnnotationWithParam(@MyAnnotation("test"))
     public class A {}
 
     public @interface MyAnnotation2 {
-        String[] value();
+        String[] konstue();
     }
 
     public @interface MyAnnotationWithParam2 {
-        MyAnnotation2 value();
+        MyAnnotation2 konstue();
     }
 
     @MyAnnotationWithParam2(@MyAnnotation2({"test", "test2"}))
@@ -30,7 +30,7 @@ public interface AnnotationInParam {
     }
 
     public @interface MyAnnotationWithParam3 {
-        MyAnnotation3 value();
+        MyAnnotation3 konstue();
     }
 
     @MyAnnotationWithParam3(@MyAnnotation3(first = "f", second = "s"))

@@ -2,7 +2,7 @@
 // !LANGUAGE: +InlineClasses, -JvmInlineValueClasses
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-inline class Foo(val x: Int) {
+inline class Foo(konst x: Int) {
     <!INAPPLICABLE_JVM_NAME!>@JvmName("other")<!>
     fun simple() {}
 }

@@ -1,7 +1,7 @@
 open class DeeperBase {
     open fun deeperBaseFun(): String = "DeeperBase.deeperBaseFun()"
 
-    open val deeperBaseProp: String
+    open konst deeperBaseProp: String
         get() = "DeeperBase.deeperBaseProp"
 }
 
@@ -11,7 +11,7 @@ open class DeepBase : DeeperBase() {
 interface DeeperInterface {
     fun deeperInterfaceFun(): String = "DeeperInterface.deeperInterfaceFun()"
 
-    val deeperInterfaceProp: String
+    konst deeperInterfaceProp: String
         get() = "DeeperInterface.deeperInterfaceProp"
 }
 
@@ -22,12 +22,12 @@ interface DeepInterface : DeeperInterface {
 class DeepDerived : DeepBase(), DeepInterface {
     override fun deeperBaseFun(): String = "DeepDerived.deeperBaseFun()"
 
-    override val deeperBaseProp: String
+    override konst deeperBaseProp: String
         get() = "DeepDerived.deeperBaseProp"
 
     override fun deeperInterfaceFun(): String = "DeepDerived.deeperInterfaceFun()"
 
-    override val deeperInterfaceProp: String
+    override konst deeperInterfaceProp: String
         get() = "DeepDerived.deeperInterfaceProp"
 
     override fun deepInterfaceFun(): String = "DeepDerived.deepInterfaceFun()"
@@ -42,21 +42,21 @@ class DeepDerived : DeepBase(), DeepInterface {
 }
 
 fun box(): String {
-    val dd = DeepDerived()
+    konst dd = DeepDerived()
 
-    val test1 = dd.callsSuperDeeperBaseFun()
+    konst test1 = dd.callsSuperDeeperBaseFun()
     if (test1 != "DeeperBase.deeperBaseFun()") return "Failed: dd.callsSuperDeeperBaseFun()==$test1"
 
-    val test2 = dd.getsSuperDeeperBaseProp()
+    konst test2 = dd.getsSuperDeeperBaseProp()
     if (test2 != "DeeperBase.deeperBaseProp") return "Failed: dd.getsSuperDeeperBaseProp()==$test2"
 
-    val test3 = dd.callsSuperDeepInterfaceFun()
+    konst test3 = dd.callsSuperDeepInterfaceFun()
     if (test3 != "DeepInterface.deepInterfaceFun()") return "Failed: dd.callsSuperDeepInterfaceFun()==$test3"
 
-    val test4 = dd.callsSuperDeeperInterfaceFun()
+    konst test4 = dd.callsSuperDeeperInterfaceFun()
     if (test4 != "DeeperInterface.deeperInterfaceFun()") return "Failed: dd.callsSuperDeeperInterfaceFun()==$test4"
 
-    val test5 = dd.getsSuperDeeperInterfaceProp()
+    konst test5 = dd.getsSuperDeeperInterfaceProp()
     if (test5 != "DeeperInterface.deeperInterfaceProp") return "Failed: dd.getsSuperDeeperInterfaceProp()==$test5"
 
     return "OK"

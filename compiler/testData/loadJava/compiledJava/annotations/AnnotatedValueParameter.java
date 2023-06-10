@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AnnotatedValueParameter {
     public static @interface Anno {
-        String value();
+        String konstue();
     }
 
     public void f(@Anno("non-empty") List<String> parameter) { }

@@ -1,19 +1,19 @@
-class Vertex<V>(val data : V)
+class Vertex<V>(konst data : V)
 
-class Edge<V, E>(val from : V, val data : E, val to : V)
+class Edge<V, E>(konst from : V, konst data : E, konst to : V)
 
 class Graph<V, E> {
 
-  private val mutableEdges = ArrayList<Edge<V, E>>() // type is ArrayList, but I want IMutableList
+  private konst mutableEdges = ArrayList<Edge<V, E>>() // type is ArrayList, but I want IMutableList
 /* options:
-    private val edges : IMutableList<Edge<V, E>> = ArrayList<Edge<V, E>>()
-    private val edges : IMutableList<Edge<V, E>> = ArrayList() // not an erasure, but a request to infer parameters
+    private konst edges : IMutableList<Edge<V, E>> = ArrayList<Edge<V, E>>()
+    private konst edges : IMutableList<Edge<V, E>> = ArrayList() // not an erasure, but a request to infer parameters
 */
 
-  private val mutableVertices = HashSet<Vertex<V>>()
+  private konst mutableVertices = HashSet<Vertex<V>>()
 
-  val edges : IList<Edge<V, E>> = mutableEdges;
-  val vertices : ISet<Edge<V, E>> = mutableVertices;
+  konst edges : IList<Edge<V, E>> = mutableEdges;
+  konst vertices : ISet<Edge<V, E>> = mutableVertices;
 
   fun addEdge(from : V, data : E, to : V) {
     mutableEdges.add(Edge(from, data, to)) // constructor parameters are inferred
@@ -25,7 +25,7 @@ class Graph<V, E> {
   fun neighbours(v : Vertex<V>) = edges.filter{it.from == v}.map{it.to} // type is IIterable<Vertex<V>>
 
   fun dfs(handler :  (V) -> Unit) {
-    val visited = HashSet<Vertex<V>>()
+    konst visited = HashSet<Vertex<V>>()
     vertices.foreach{dfs(it, visited, handler)}
 
     fun dfs(current : Vertex<V>, visited : ISet<Vertex<V>>, handler :  (V) -> Unit) {
@@ -42,7 +42,7 @@ class Graph<V, E> {
         continue
       pending.push(it)
       while (!pending.isEmpty) {
-        val current = pending.pop()
+        konst current = pending.pop()
         handler(current);
         neighbours(current).foreach { n ->
           if (visited.add(n)) {

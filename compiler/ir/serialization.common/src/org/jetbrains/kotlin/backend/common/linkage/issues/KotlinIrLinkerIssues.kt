@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.utils.ResolvedDependencyVersion
 import kotlin.Comparator
 
 abstract class KotlinIrLinkerIssue {
-    protected abstract val errorMessage: String
+    protected abstract konst errorMessage: String
 
     fun raiseIssue(messageLogger: IrMessageLogger): Nothing {
         messageLogger.report(IrMessageLogger.Severity.ERROR, errorMessage, null)
@@ -29,10 +29,10 @@ abstract class KotlinIrLinkerIssue {
 }
 
 class UnexpectedUnboundIrSymbols(unboundSymbols: Set<IrSymbol>, whenDetected: String) : KotlinIrLinkerIssue() {
-    override val errorMessage = buildString {
+    override konst errorMessage = buildString {
         // cause:
         append("There ").append(
-            when (val count = unboundSymbols.size) {
+            when (konst count = unboundSymbols.size) {
                 1 -> "is still an unbound symbol"
                 else -> "are still $count unbound symbols"
             }
@@ -62,12 +62,12 @@ class UnexpectedUnboundIrSymbols(unboundSymbols: Set<IrSymbol>, whenDetected: St
 }
 
 class SignatureIdNotFoundInModuleWithDependencies(
-    private val idSignature: IdSignature,
-    private val problemModuleDeserializer: IrModuleDeserializer,
-    private val allModuleDeserializers: Collection<IrModuleDeserializer>,
-    private val userVisibleIrModulesSupport: UserVisibleIrModulesSupport
+    private konst idSignature: IdSignature,
+    private konst problemModuleDeserializer: IrModuleDeserializer,
+    private konst allModuleDeserializers: Collection<IrModuleDeserializer>,
+    private konst userVisibleIrModulesSupport: UserVisibleIrModulesSupport
 ) : KotlinIrLinkerIssue() {
-    override val errorMessage = try {
+    override konst errorMessage = try {
         computeErrorMessage()
     } catch (e: Throwable) {
         // Don't suppress the real cause if computation of error message failed.
@@ -84,10 +84,10 @@ class SignatureIdNotFoundInModuleWithDependencies(
     }
 
     private fun computeErrorMessage() = buildString {
-        val allModules = userVisibleIrModulesSupport.getUserVisibleModules(allModuleDeserializers)
+        konst allModules = userVisibleIrModulesSupport.getUserVisibleModules(allModuleDeserializers)
 
-        val problemModuleId = userVisibleIrModulesSupport.getProblemModuleId(problemModuleDeserializer, allModules)
-        val problemModuleIdWithVersion = allModules.getValue(problemModuleId).moduleIdWithVersion
+        konst problemModuleId = userVisibleIrModulesSupport.getProblemModuleId(problemModuleDeserializer, allModules)
+        konst problemModuleIdWithVersion = allModules.getValue(problemModuleId).moduleIdWithVersion
 
         // cause:
         append("Module \"$problemModuleId\" has a reference to symbol ${idSignature.render()}.")
@@ -124,18 +124,18 @@ class SignatureIdNotFoundInModuleWithDependencies(
 }
 
 class NoDeserializerForModule(moduleName: Name, idSignature: IdSignature?) : KotlinIrLinkerIssue() {
-    override val errorMessage = buildString {
+    override konst errorMessage = buildString {
         append("Could not load module ${moduleName.asString()}")
         if (idSignature != null) append(" in an attempt to find deserializer for symbol ${idSignature.render()}.")
     }
 }
 
 class SymbolTypeMismatch(
-    private val cause: IrSymbolTypeMismatchException,
-    private val allModuleDeserializers: Collection<IrModuleDeserializer>,
-    private val userVisibleIrModulesSupport: UserVisibleIrModulesSupport
+    private konst cause: IrSymbolTypeMismatchException,
+    private konst allModuleDeserializers: Collection<IrModuleDeserializer>,
+    private konst userVisibleIrModulesSupport: UserVisibleIrModulesSupport
 ) : KotlinIrLinkerIssue() {
-    override val errorMessage = try {
+    override konst errorMessage = try {
         computeErrorMessage()
     } catch (e: Throwable) {
         // Don't suppress the real cause if computation of error message failed.
@@ -143,11 +143,11 @@ class SymbolTypeMismatch(
     }
 
     private fun computeErrorMessage() = buildString {
-        val allModules = userVisibleIrModulesSupport.getUserVisibleModules(allModuleDeserializers)
+        konst allModules = userVisibleIrModulesSupport.getUserVisibleModules(allModuleDeserializers)
 
-        val idSignature = cause.actual.signature
+        konst idSignature = cause.actual.signature
         // There might be multiple declaring modules. Which is also an error, and should re reported separately.
-        val declaringModuleIds: Set<ResolvedDependencyId> = if (idSignature != null) {
+        konst declaringModuleIds: Set<ResolvedDependencyId> = if (idSignature != null) {
             allModuleDeserializers.mapNotNullTo(mutableSetOf()) { deserializer ->
                 if (idSignature in deserializer) userVisibleIrModulesSupport.getProblemModuleId(deserializer, allModules) else null
             }
@@ -197,7 +197,7 @@ private fun UserVisibleIrModulesSupport.getProblemModuleId(
 
 /**
  * Do the best effort to find a module that matches the given [moduleId]:
- * - If there is a node in the map with such [ResolvedDependencyId] as [moduleId], then return the value from this node.
+ * - If there is a node in the map with such [ResolvedDependencyId] as [moduleId], then return the konstue from this node.
  * - If not, then try to find a [ResolvedDependency] which contains all unique names from the given [moduleId]. This makes sense
  *   for such cases when the map contains a node for "org.jetbrains.kotlinx:kotlinx-coroutines-core (org.jetbrains.kotlinx:kotlinx-coroutines-core-macosx64)"
  *   but we are looking just for "org.jetbrains.kotlinx:kotlinx-coroutines-core".
@@ -212,7 +212,7 @@ private fun Map<ResolvedDependencyId, ResolvedDependency>.findMatchingModule(mod
     // Typical case is when we are looking for "org.jetbrains.kotlinx:kotlinx-coroutines-core", but there is no such module.
     // But there is "org.jetbrains.kotlinx:kotlinx-coroutines-core (org.jetbrains.kotlinx:kotlinx-coroutines-core-macosx64)"
     // that should be used instead.
-    return values.first { moduleId in it.id }
+    return konstues.first { moduleId in it.id }
 }
 
 private fun StringBuilder.appendProjectDependencies(
@@ -228,26 +228,26 @@ private fun StringBuilder.appendProjectDependencies(
         return
     }
 
-    val incomingDependencyIdToDependencies: MutableMap<ResolvedDependencyId, MutableCollection<ResolvedDependency>> = hashMapOf()
-    allModules.values.forEach { module ->
+    konst incomingDependencyIdToDependencies: MutableMap<ResolvedDependencyId, MutableCollection<ResolvedDependency>> = hashMapOf()
+    allModules.konstues.forEach { module ->
         module.requestedVersionsByIncomingDependencies.keys.forEach { incomingDependencyId ->
             incomingDependencyIdToDependencies.getOrPut(incomingDependencyId) { mutableListOf() } += module
         }
     }
 
-    val renderedModules: MutableSet<ResolvedDependencyId> = hashSetOf()
+    konst renderedModules: MutableSet<ResolvedDependencyId> = hashSetOf()
     var everDependenciesOmitted = false
 
     fun renderModules(modules: Collection<ResolvedDependency>, parentData: Data?) {
-        val filteredModules: Collection<ResolvedDependency> = if (parentData == null)
+        konst filteredModules: Collection<ResolvedDependency> = if (parentData == null)
             modules.filter { it.visibleAsFirstLevelDependency }
         else
             modules
 
-        val sortedModules: List<ResolvedDependency> = filteredModules.sortedWith { a, b -> moduleIdComparator.compare(a.id, b.id) }
+        konst sortedModules: List<ResolvedDependency> = filteredModules.sortedWith { a, b -> moduleIdComparator.compare(a.id, b.id) }
 
         sortedModules.forEachIndexed { index, module ->
-            val data = Data(
+            konst data = Data(
                 parent = parentData,
                 incomingDependencyId = module.id, // For children.
                 isLast = index + 1 == sortedModules.size
@@ -256,8 +256,8 @@ private fun StringBuilder.appendProjectDependencies(
             append('\n').append(data.regularLinePrefix)
             append(module.id)
 
-            val incomingDependencyId: ResolvedDependencyId = parentData?.incomingDependencyId ?: sourceCodeModuleId
-            val requestedVersion: ResolvedDependencyVersion = module.requestedVersionsByIncomingDependencies.getValue(incomingDependencyId)
+            konst incomingDependencyId: ResolvedDependencyId = parentData?.incomingDependencyId ?: sourceCodeModuleId
+            konst requestedVersion: ResolvedDependencyVersion = module.requestedVersionsByIncomingDependencies.getValue(incomingDependencyId)
             if (!requestedVersion.isEmpty() || !module.selectedVersion.isEmpty()) {
                 append(": ")
                 append(requestedVersion.version.ifEmpty { UNKNOWN_VERSION })
@@ -267,10 +267,10 @@ private fun StringBuilder.appendProjectDependencies(
                 }
             }
 
-            val renderedFirstTime = renderedModules.add(module.id)
-            val dependencies: Collection<ResolvedDependency>? = incomingDependencyIdToDependencies[module.id]
+            konst renderedFirstTime = renderedModules.add(module.id)
+            konst dependencies: Collection<ResolvedDependency>? = incomingDependencyIdToDependencies[module.id]
 
-            val needToRenderDependencies = when {
+            konst needToRenderDependencies = when {
                 renderedFirstTime -> {
                     // Rendered for the first time => also render dependencies, if any.
                     true
@@ -300,7 +300,7 @@ private fun StringBuilder.appendProjectDependencies(
     }
 
     // Find first-level dependencies. I.e. the modules that the source code module directly depends on.
-    val firstLevelDependencies: Collection<ResolvedDependency> = incomingDependencyIdToDependencies.getValue(sourceCodeModuleId)
+    konst firstLevelDependencies: Collection<ResolvedDependency> = incomingDependencyIdToDependencies.getValue(sourceCodeModuleId)
 
     renderModules(firstLevelDependencies, parentData = null)
 
@@ -309,10 +309,10 @@ private fun StringBuilder.appendProjectDependencies(
     }
 }
 
-private const val UNKNOWN_VERSION = "unknown"
+private const konst UNKNOWN_VERSION = "unknown"
 
-private class Data(val parent: Data?, val incomingDependencyId: ResolvedDependencyId, val isLast: Boolean) {
-    val regularLinePrefix: String
+private class Data(konst parent: Data?, konst incomingDependencyId: ResolvedDependencyId, konst isLast: Boolean) {
+    konst regularLinePrefix: String
         get() {
             return generateSequence(this) { it.parent }.map {
                 if (it === this) {
@@ -323,7 +323,7 @@ private class Data(val parent: Data?, val incomingDependencyId: ResolvedDependen
             }.toList().asReversed().joinToString(separator = "")
         }
 
-    val errorLinePrefix: String
+    konst errorLinePrefix: String
         get() {
             return generateSequence(this) { it.parent }.map {
                 if (it.isLast) "     " else "|    "
@@ -340,15 +340,15 @@ private fun findPotentiallyConflictingOutgoingDependencies(
     allModules: Map<ResolvedDependencyId, ResolvedDependency>
 ): Map<ResolvedDependencyId, PotentialConflictDescription> {
     data class OutgoingDependency(
-        val id: ResolvedDependencyId,
-        val requestedVersion: ResolvedDependencyVersion,
-        val selectedVersion: ResolvedDependencyVersion
+        konst id: ResolvedDependencyId,
+        konst requestedVersion: ResolvedDependencyVersion,
+        konst selectedVersion: ResolvedDependencyVersion
     )
 
     // Reverse dependency index.
-    val outgoingDependenciesIndex: MutableMap<ResolvedDependencyId, MutableList<OutgoingDependency>> = hashMapOf()
+    konst outgoingDependenciesIndex: MutableMap<ResolvedDependencyId, MutableList<OutgoingDependency>> = hashMapOf()
 
-    allModules.values.forEach { module ->
+    allModules.konstues.forEach { module ->
         module.requestedVersionsByIncomingDependencies.forEach { (incomingDependencyId, requestedVersion) ->
             outgoingDependenciesIndex.getOrPut(incomingDependencyId) { mutableListOf() } += OutgoingDependency(
                 id = module.id,
@@ -358,13 +358,13 @@ private fun findPotentiallyConflictingOutgoingDependencies(
         }
     }
 
-    val dependencyStatesMap: MutableMap<ResolvedDependencyId, MutableSet<DependencyState>> = mutableMapOf()
+    konst dependencyStatesMap: MutableMap<ResolvedDependencyId, MutableSet<DependencyState>> = mutableMapOf()
 
     fun recurse(moduleId: ResolvedDependencyId, underConflictingDependency: Boolean) {
-        val outgoingDependencies: List<OutgoingDependency> = outgoingDependenciesIndex[moduleId].orEmpty()
+        konst outgoingDependencies: List<OutgoingDependency> = outgoingDependenciesIndex[moduleId].orEmpty()
 
         outgoingDependencies.forEach { outgoingDependency ->
-            val dependencyState: DependencyState = when {
+            konst dependencyState: DependencyState = when {
                 underConflictingDependency -> {
                     // Can't guarantee that any library that is a dependency of a potentially conflicting dependency
                     // is not a potentially conflicting dependency itself.
@@ -400,8 +400,8 @@ private fun findPotentiallyConflictingOutgoingDependencies(
                 else -> DependencyState.SUCCESS
             }
 
-            val dependencyStates: MutableSet<DependencyState> = dependencyStatesMap.getOrPut(outgoingDependency.id) { mutableSetOf() }
-            val notBeenHereYet = dependencyStates.add(dependencyState)
+            konst dependencyStates: MutableSet<DependencyState> = dependencyStatesMap.getOrPut(outgoingDependency.id) { mutableSetOf() }
+            konst notBeenHereYet = dependencyStates.add(dependencyState)
 
             if (notBeenHereYet) {
                 // Don't visit the same dependency twice.
@@ -418,7 +418,7 @@ private fun findPotentiallyConflictingOutgoingDependencies(
                 "a library with unknown version"
             }
             REQUESTED_SELECTED_VERSIONS_MISMATCH -> {
-                val requested = potentialConflictReason.conflictingModuleId.withVersion(potentialConflictReason.requestedVersion)
+                konst requested = potentialConflictReason.conflictingModuleId.withVersion(potentialConflictReason.requestedVersion)
                 "was initially compiled with \"$requested\""
             }
             BEHIND_CONFLICTING_DEPENDENCY -> {
@@ -438,15 +438,15 @@ private fun findPotentiallyConflictingIncomingDependencies(
     sourceCodeModuleId: ResolvedDependencyId
 ): Map<ResolvedDependencyId, PotentialConflictDescription> {
 
-    val dependencyStatesMap: MutableMap<ResolvedDependencyId, MutableSet<DependencyState>> = mutableMapOf()
+    konst dependencyStatesMap: MutableMap<ResolvedDependencyId, MutableSet<DependencyState>> = mutableMapOf()
 
     fun recurse(moduleId: ResolvedDependencyId, aboveConflictingDependency: Boolean) {
-        val module = allModules.findMatchingModule(moduleId)
+        konst module = allModules.findMatchingModule(moduleId)
 
         module.requestedVersionsByIncomingDependencies.forEach { (incomingDependencyId, requestedVersion) ->
             if (incomingDependencyId == sourceCodeModuleId) return@forEach
 
-            val dependencyState: DependencyState = when {
+            konst dependencyState: DependencyState = when {
                 aboveConflictingDependency -> {
                     // Can't guarantee that any library that is an incoming dependency of a potentially conflicting dependency
                     // is not a potentially conflicting dependency itself.
@@ -482,8 +482,8 @@ private fun findPotentiallyConflictingIncomingDependencies(
                 else -> DependencyState.SUCCESS
             }
 
-            val dependencyStates: MutableSet<DependencyState> = dependencyStatesMap.getOrPut(incomingDependencyId) { mutableSetOf() }
-            val notBeenHereYet = dependencyStates.add(dependencyState)
+            konst dependencyStates: MutableSet<DependencyState> = dependencyStatesMap.getOrPut(incomingDependencyId) { mutableSetOf() }
+            konst notBeenHereYet = dependencyStates.add(dependencyState)
 
             if (notBeenHereYet) {
                 // Don't visit the same dependency twice.
@@ -500,8 +500,8 @@ private fun findPotentiallyConflictingIncomingDependencies(
                 "depends on the library with unknown version: \"${potentialConflictReason.conflictingModuleId}\""
             }
             REQUESTED_SELECTED_VERSIONS_MISMATCH -> {
-                val requested = potentialConflictReason.conflictingModuleId.withVersion(potentialConflictReason.requestedVersion)
-                val selected = potentialConflictReason.conflictingModuleId.withVersion(potentialConflictReason.selectedVersion)
+                konst requested = potentialConflictReason.conflictingModuleId.withVersion(potentialConflictReason.requestedVersion)
+                konst selected = potentialConflictReason.conflictingModuleId.withVersion(potentialConflictReason.selectedVersion)
                 "was compiled against \"$requested\" but \"$selected\" is used in the project"
             }
             BEHIND_CONFLICTING_DEPENDENCY -> {
@@ -514,10 +514,10 @@ private fun findPotentiallyConflictingIncomingDependencies(
 private typealias PotentialConflictDescription = String
 
 private class PotentialConflictReason(
-    val kind: PotentialConflictKind,
-    val conflictingModuleId: ResolvedDependencyId,
-    val requestedVersion: ResolvedDependencyVersion = ResolvedDependencyVersion.EMPTY,
-    val selectedVersion: ResolvedDependencyVersion = ResolvedDependencyVersion.EMPTY
+    konst kind: PotentialConflictKind,
+    konst conflictingModuleId: ResolvedDependencyId,
+    konst requestedVersion: ResolvedDependencyVersion = ResolvedDependencyVersion.EMPTY,
+    konst selectedVersion: ResolvedDependencyVersion = ResolvedDependencyVersion.EMPTY
 ) {
     override fun equals(other: Any?) =
         other is PotentialConflictReason && other.kind == kind && other.conflictingModuleId == conflictingModuleId
@@ -525,10 +525,10 @@ private class PotentialConflictReason(
     override fun hashCode() = kind.hashCode() + 31 * conflictingModuleId.hashCode()
 
     companion object {
-        val Collection<PotentialConflictReason>.mostSignificantConflictReasons: Collection<PotentialConflictReason>
+        konst Collection<PotentialConflictReason>.mostSignificantConflictReasons: Collection<PotentialConflictReason>
             get() {
-                val mapping: Map<PotentialConflictKind, List<PotentialConflictReason>> = groupBy { it.kind }
-                val mostSignificantConflictKind: PotentialConflictKind = mapping.keys.mostSignificantConflictKind ?: return emptyList()
+                konst mapping: Map<PotentialConflictKind, List<PotentialConflictReason>> = groupBy { it.kind }
+                konst mostSignificantConflictKind: PotentialConflictKind = mapping.keys.mostSignificantConflictKind ?: return emptyList()
                 return mapping.getValue(mostSignificantConflictKind)
             }
     }
@@ -542,23 +542,23 @@ private enum class PotentialConflictKind {
     BEHIND_CONFLICTING_DEPENDENCY;
 
     companion object {
-        val Collection<PotentialConflictKind>.mostSignificantConflictKind: PotentialConflictKind?
+        konst Collection<PotentialConflictKind>.mostSignificantConflictKind: PotentialConflictKind?
             get() = minOrNull()
     }
 }
 
-private data class DependencyState(val conflictReason: PotentialConflictReason? /* Null assumes success. */) {
-    val isConflicting: Boolean get() = conflictReason != null
+private data class DependencyState(konst conflictReason: PotentialConflictReason? /* Null assumes success. */) {
+    konst isConflicting: Boolean get() = conflictReason != null
 
     companion object {
-        val SUCCESS = DependencyState(conflictReason = null)
+        konst SUCCESS = DependencyState(conflictReason = null)
     }
 }
 
 private fun Map<ResolvedDependencyId, MutableSet<DependencyState>>.describeDependencyStates(
     getDescription: (PotentialConflictReason) -> PotentialConflictDescription
 ): Map<ResolvedDependencyId, PotentialConflictDescription> = mapNotNull { (dependencyId, dependencyStates) ->
-    val mostSignificantConflictReasons = dependencyStates.mapNotNull { it.conflictReason }.mostSignificantConflictReasons
+    konst mostSignificantConflictReasons = dependencyStates.mapNotNull { it.conflictReason }.mostSignificantConflictReasons
 
     when {
         mostSignificantConflictReasons.isEmpty() -> {
@@ -568,7 +568,7 @@ private fun Map<ResolvedDependencyId, MutableSet<DependencyState>>.describeDepen
         mostSignificantConflictReasons.first().kind == BEHIND_CONFLICTING_DEPENDENCY -> {
             // Ignore dependency of conflicting dependency if this library has no conflicts when referred from
             // non-conflicting dependencies.
-            val hasNoConflictsBehindNonConflictingDependencies = dependencyStates.any { !it.isConflicting }
+            konst hasNoConflictsBehindNonConflictingDependencies = dependencyStates.any { !it.isConflicting }
             if (hasNoConflictsBehindNonConflictingDependencies) return@mapNotNull null
         }
         else -> Unit
@@ -587,10 +587,10 @@ private fun StringBuilder.appendPotentiallyConflictingDependencies(
 
     append("\n\n$header")
 
-    val paddingSize = (potentiallyConflictingDependencies.size + 1).toString().length
+    konst paddingSize = (potentiallyConflictingDependencies.size + 1).toString().length
     potentiallyConflictingDependencies.toSortedMap(moduleIdComparator).entries.forEachIndexed { index, (moduleId, potentialConflictReason) ->
-        val padding = (index + 1).toString().padStart(paddingSize, ' ')
-        val moduleIdWithVersion = allModules.getValue(moduleId).moduleIdWithVersion
+        konst padding = (index + 1).toString().padStart(paddingSize, ' ')
+        konst moduleIdWithVersion = allModules.getValue(moduleId).moduleIdWithVersion
         append("\n$padding. \"$moduleIdWithVersion\" ($potentialConflictReason)")
     }
 }

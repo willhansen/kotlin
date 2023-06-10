@@ -1,6 +1,6 @@
 fun box(): String {
     var result = 0
-    val intRange = 1..3
+    konst intRange = 1..3
     for (i: Int? in intRange) {
         result = sum(result, i)
     }

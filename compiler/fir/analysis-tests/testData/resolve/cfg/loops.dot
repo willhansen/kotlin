@@ -26,7 +26,7 @@ digraph loops_kt {
                         7 [label="Enter block"];
                         8 [label="Access variable R|<local>/x|"];
                         9 [label="Type operator: (R|<local>/x| is R|kotlin/String|)"];
-                        10 [label="Variable declaration: lval y: R|kotlin/Boolean|"];
+                        10 [label="Variable declaration: lkonst y: R|kotlin/Boolean|"];
                         11 [label="Exit block"];
                     }
                     12 [label="Exit loop block"];
@@ -74,7 +74,7 @@ digraph loops_kt {
                         22 [label="Enter block"];
                         23 [label="Access variable R|<local>/x|"];
                         24 [label="Type operator: (R|<local>/x| is R|kotlin/String|)"];
-                        25 [label="Variable declaration: lval y: R|kotlin/Boolean|"];
+                        25 [label="Variable declaration: lkonst y: R|kotlin/Boolean|"];
                         26 [label="Exit block"];
                     }
                     27 [label="Exit loop block"];
@@ -125,7 +125,7 @@ digraph loops_kt {
                 40 [label="Const: Int(5)"];
                 41 [label="Function call: Int(0).R|kotlin/Int.rangeTo|(...)" style="filled" fillcolor=yellow];
                 42 [label="Function call: Int(0).R|kotlin/Int.rangeTo|(...).R|kotlin/ranges/IntProgression.iterator|()" style="filled" fillcolor=yellow];
-                43 [label="Variable declaration: lval <iterator>: R|kotlin/collections/IntIterator|"];
+                43 [label="Variable declaration: lkonst <iterator>: R|kotlin/collections/IntIterator|"];
                 subgraph cluster_15 {
                     color=blue
                     44 [label="Enter while loop"];
@@ -144,13 +144,13 @@ digraph loops_kt {
                             50 [label="Enter block"];
                             51 [label="Access variable R|<local>/<iterator>|"];
                             52 [label="Function call: R|<local>/<iterator>|.R|kotlin/collections/IntIterator.next|()" style="filled" fillcolor=yellow];
-                            53 [label="Variable declaration: lval i: R|kotlin/Int|"];
+                            53 [label="Variable declaration: lkonst i: R|kotlin/Int|"];
                             subgraph cluster_19 {
                                 color=blue
                                 54 [label="Enter block"];
                                 55 [label="Access variable R|<local>/x|"];
                                 56 [label="Type operator: (R|<local>/x| is R|kotlin/String|)"];
-                                57 [label="Variable declaration: lval y: R|kotlin/Boolean|"];
+                                57 [label="Variable declaration: lkonst y: R|kotlin/Boolean|"];
                                 58 [label="Exit block"];
                             }
                             59 [label="Exit block"];

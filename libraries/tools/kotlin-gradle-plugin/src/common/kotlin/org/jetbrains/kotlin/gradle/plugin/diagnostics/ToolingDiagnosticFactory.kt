@@ -8,11 +8,11 @@ package org.jetbrains.kotlin.gradle.plugin.diagnostics
 import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 
 @InternalKotlinGradlePluginApi // used in integration tests
-abstract class ToolingDiagnosticFactory(private val predefinedSeverity: ToolingDiagnostic.Severity?, customId: String?) {
+abstract class ToolingDiagnosticFactory(private konst predefinedSeverity: ToolingDiagnostic.Severity?, customId: String?) {
     constructor(customId: String) : this(null, customId)
     constructor(predefinedSeverity: ToolingDiagnostic.Severity?) : this(predefinedSeverity, null)
 
-    open val id: String = customId ?: this::class.simpleName!!
+    open konst id: String = customId ?: this::class.simpleName!!
 
     protected fun build(message: String, severity: ToolingDiagnostic.Severity? = null): ToolingDiagnostic {
         if (severity == null && predefinedSeverity == null) {

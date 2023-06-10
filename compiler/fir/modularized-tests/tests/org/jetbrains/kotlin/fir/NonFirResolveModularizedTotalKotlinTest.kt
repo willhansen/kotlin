@@ -24,7 +24,7 @@ import java.io.FileOutputStream
 import java.io.PrintStream
 import kotlin.system.measureNanoTime
 
-private val USE_NI = System.getProperty("fir.bench.oldfe.ni", "true") == "true"
+private konst USE_NI = System.getProperty("fir.bench.oldfe.ni", "true") == "true"
 
 class NonFirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
     private var totalTime = 0L
@@ -32,11 +32,11 @@ class NonFirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest(
     private var lines = 0
     private var measure = FirResolveBench.Measure()
 
-    private val times = mutableListOf<Long>()
+    private konst times = mutableListOf<Long>()
 
     private fun runAnalysis(environment: KotlinCoreEnvironment) {
-        val vmBefore = vmStateSnapshot()
-        val time = measureNanoTime {
+        konst vmBefore = vmStateSnapshot()
+        konst time = measureNanoTime {
             try {
                 KotlinToJVMBytecodeCompiler.analyze(environment)
             } catch (e: Throwable) {
@@ -48,9 +48,9 @@ class NonFirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest(
                 throw e
             }
         }
-        val vmAfter = vmStateSnapshot()
+        konst vmAfter = vmStateSnapshot()
 
-        val psiFiles = environment.getSourceFiles()
+        konst psiFiles = environment.getSourceFiles()
         files += psiFiles.size
         lines += psiFiles.sumOf { StringUtil.countNewLines(it.text) }
         totalTime += time
@@ -73,7 +73,7 @@ class NonFirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest(
 
     private fun configureAndSetupEnvironment(moduleData: ModuleData, disposable: Disposable): KotlinCoreEnvironment {
 
-        val configuration = createDefaultConfiguration(moduleData)
+        konst configuration = createDefaultConfiguration(moduleData)
 
         configureLanguageVersionSettings(
             configuration, moduleData,
@@ -113,9 +113,9 @@ class NonFirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest(
             }
 
         })
-        val environment = KotlinCoreEnvironment.createForTests(disposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst environment = KotlinCoreEnvironment.createForTests(disposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
-        val visibilityManager = ModuleVisibilityManager.SERVICE.getInstance(environment.project)
+        konst visibilityManager = ModuleVisibilityManager.SERVICE.getInstance(environment.project)
         for (friendDir in configuration.getList(JVMConfigurationKeys.FRIEND_PATHS)) {
             visibilityManager.addFriendPath(friendDir)
         }
@@ -124,8 +124,8 @@ class NonFirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest(
     }
 
     override fun processModule(moduleData: ModuleData): ProcessorAction {
-        val disposable = Disposer.newDisposable()
-        val environment = configureAndSetupEnvironment(moduleData, disposable)
+        konst disposable = Disposer.newDisposable()
+        konst environment = configureAndSetupEnvironment(moduleData, disposable)
 
         runAnalysis(environment)
 
@@ -155,8 +155,8 @@ class NonFirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest(
             totalTime = 0L
         }
 
-        val bestTime = times.minOrNull()!!
-        val bestPass = times.indexOf(bestTime)
+        konst bestTime = times.minOrNull()!!
+        konst bestPass = times.indexOf(bestTime)
         dumpTime("Best pass: $bestPass", bestTime)
     }
 }

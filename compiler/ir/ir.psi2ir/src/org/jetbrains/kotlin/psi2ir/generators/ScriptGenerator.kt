@@ -44,17 +44,17 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : DeclarationGeneratorExtension(declarationGenerator) {
     @OptIn(ExperimentalStdlibApi::class)
     fun generateScriptDeclaration(ktScript: KtScript): IrDeclaration? {
-        val descriptor = getOrFail(BindingContext.DECLARATION_TO_DESCRIPTOR, ktScript) as ScriptDescriptor
+        konst descriptor = getOrFail(BindingContext.DECLARATION_TO_DESCRIPTOR, ktScript) as ScriptDescriptor
 
         return context.symbolTable.declareScript(ktScript.startOffsetSkippingComments, ktScript.endOffset, descriptor).buildWithScope { irScript ->
 
             irScript.metadata = DescriptorMetadataSource.Script(descriptor)
 
-            val importedScripts = descriptor.implicitReceivers.filterIsInstanceTo(HashSet<ScriptDescriptor>())
+            konst importedScripts = descriptor.implicitReceivers.filterIsInstanceTo(HashSet<ScriptDescriptor>())
 
             fun makeParameter(descriptor: ParameterDescriptor, origin: IrDeclarationOrigin, index: Int = -1): IrValueParameter {
-                val type = descriptor.type.toIrType()
-                val varargElementType = descriptor.varargElementType?.toIrType()
+                konst type = descriptor.type.toIrType()
+                konst varargElementType = descriptor.varargElementType?.toIrType()
                 return context.symbolTable.declareValueParameter(
                     UNDEFINED_OFFSET, UNDEFINED_OFFSET,
                     origin,
@@ -76,7 +76,7 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
 
             irScript.baseClass = descriptor.typeConstructor.supertypes.single().toIrType()
 
-            // This is part of a hack for implicit receivers that converted to value parameters below
+            // This is part of a hack for implicit receivers that converted to konstue parameters below
             // The proper schema would be to get properly indexed parameters from frontend (descriptor.implicitReceiversParameters),
             // but it seems would require a proper remapping for the script body
             // TODO: implement implicit receiver parameters handling properly
@@ -90,13 +90,13 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
                 context.symbolTable.introduceValueParameter(it.owner.thisReceiver!!)
             }
 
-            fun createValueParameter(valueParameterDescriptor: ValueParameterDescriptor): IrValueParameter {
+            fun createValueParameter(konstueParameterDescriptor: ValueParameterDescriptor): IrValueParameter {
                 return context.irFactory.createValueParameter(
                     UNDEFINED_OFFSET, UNDEFINED_OFFSET,
                     IrDeclarationOrigin.SCRIPT_CALL_PARAMETER, IrValueParameterSymbolImpl(),
-                    valueParameterDescriptor.name, parametersIndex++,
-                    valueParameterDescriptor.type.toIrType(), valueParameterDescriptor.varargElementType?.toIrType(),
-                    valueParameterDescriptor.isCrossinline, valueParameterDescriptor.isNoinline,
+                    konstueParameterDescriptor.name, parametersIndex++,
+                    konstueParameterDescriptor.type.toIrType(), konstueParameterDescriptor.varargElementType?.toIrType(),
+                    konstueParameterDescriptor.isCrossinline, konstueParameterDescriptor.isNoinline,
                     false, false
                 ).also { it.parent = irScript }
             }
@@ -105,7 +105,7 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
                 irScript.earlierScriptsParameter = descriptor.earlierScriptsConstructorParameter?.let(::createValueParameter)
             }
 
-            val explicitCallParams = descriptor.explicitConstructorParameters.map(::createValueParameter)
+            konst explicitCallParams = descriptor.explicitConstructorParameters.map(::createValueParameter)
 
             irScript.explicitCallParameters = descriptor.explicitConstructorParameters.map {
                 IrVariableImpl(
@@ -124,8 +124,8 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
             descriptor.scriptProvidedProperties.zip(descriptor.scriptProvidedPropertiesParameters) { providedProperty, parameter ->
                 // TODO: initializer
                 // TODO: do not keep direct links
-                val type = providedProperty.type.toIrType()
-                val valueParameter = context.symbolTable.declareValueParameter(
+                konst type = providedProperty.type.toIrType()
+                konst konstueParameter = context.symbolTable.declareValueParameter(
                     UNDEFINED_OFFSET, UNDEFINED_OFFSET,
                     IrDeclarationOrigin.SCRIPT_PROVIDED_PROPERTY, parameter, type
                 ) { symbol ->
@@ -136,16 +136,16 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
                     ).also { it.parent = irScript }
                 }
                 parametersIndex++
-                val irProperty =
+                konst irProperty =
                     PropertyGenerator(declarationGenerator).generateSyntheticProperty(
                         ktScript,
                         providedProperty,
-                        valueParameter,
+                        konstueParameter,
                         generateSyntheticAccessors = true
                     )
                 irProperty.origin = IrDeclarationOrigin.SCRIPT_PROVIDED_PROPERTY
                 irScript.statements += irProperty
-                valueParameter to irProperty.symbol
+                konstueParameter to irProperty.symbol
             }.unzip().let { (params, props) ->
                 irScript.providedProperties = props
                 irScript.providedPropertiesParameters = params
@@ -164,7 +164,7 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
                     containerSource = containerSource
                 )
             }.also { irConstructor ->
-                irConstructor.valueParameters = buildList {
+                irConstructor.konstueParameters = buildList {
                     addIfNotNull(irScript.earlierScriptsParameter)
                     addAll(explicitCallParams)
                     addAll(irScript.implicitReceiversParameters)
@@ -177,7 +177,7 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
             for (d in ktScript.declarations) {
                 when (d) {
                     is KtScriptInitializer -> {
-                        val irExpressionBody = BodyGenerator(
+                        konst irExpressionBody = BodyGenerator(
                             irScript.symbol,
                             context,
                             null
@@ -206,50 +206,50 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
                     is KtDestructuringDeclaration -> {
                         // copied with modifications from StatementGenerator.visitDestructuringDeclaration
                         // TODO: consider code deduplication
-                        val bodyGenerator = BodyGenerator(irScript.symbol, context, null)
-                        val statementGenerator = bodyGenerator.createStatementGenerator()
-                        val irBlock = IrCompositeImpl(
+                        konst bodyGenerator = BodyGenerator(irScript.symbol, context, null)
+                        konst statementGenerator = bodyGenerator.createStatementGenerator()
+                        konst irBlock = IrCompositeImpl(
                             d.startOffsetSkippingComments, d.endOffset,
                             context.irBuiltIns.unitType, IrStatementOrigin.DESTRUCTURING_DECLARATION
                         )
-                        val ktInitializer = d.initializer!!
-                        val initializerExpr = ktInitializer.deparenthesize().accept(statementGenerator, null) as IrExpression
-                        val containerValue =
+                        konst ktInitializer = d.initializer!!
+                        konst initializerExpr = ktInitializer.deparenthesize().accept(statementGenerator, null) as IrExpression
+                        konst containerValue =
                             statementGenerator.scope.createTemporaryVariableInBlock(context, initializerExpr, irBlock, "container")
 
-                        val callGenerator = CallGenerator(statementGenerator)
+                        konst callGenerator = CallGenerator(statementGenerator)
 
                         for ((index, ktEntry) in d.entries.withIndex()) {
-                            val componentResolvedCall = getOrFail(BindingContext.COMPONENT_RESOLVED_CALL, ktEntry)
+                            konst componentResolvedCall = getOrFail(BindingContext.COMPONENT_RESOLVED_CALL, ktEntry)
 
-                            val componentSubstitutedCall = statementGenerator.pregenerateCall(componentResolvedCall)
+                            konst componentSubstitutedCall = statementGenerator.pregenerateCall(componentResolvedCall)
                             componentSubstitutedCall.setExplicitReceiverValue(containerValue)
 
-                            val componentVariable = getOrFail(BindingContext.VARIABLE, ktEntry)
+                            konst componentVariable = getOrFail(BindingContext.VARIABLE, ktEntry)
 
-                            // componentN for '_' SHOULD NOT be evaluated
+                            // componentN for '_' SHOULD NOT be ekonstuated
                             if (componentVariable.name.isSpecial || ktEntry.isSingleUnderscore) continue
 
-                            val irComponentCall = callGenerator.generateCall(
+                            konst irComponentCall = callGenerator.generateCall(
                                 ktEntry.startOffsetSkippingComments, ktEntry.endOffset, componentSubstitutedCall,
                                 IrStatementOrigin.COMPONENT_N.withIndex(index + 1)
                             )
 
-                            val irComponentProperty =
+                            konst irComponentProperty =
                                 PropertyGenerator(declarationGenerator).generateDestructuringDeclarationEntryAsPropertyDeclaration(
                                     ktEntry
                                 )
-                            val irComponentBackingField = irComponentProperty.backingField!!
+                            konst irComponentBackingField = irComponentProperty.backingField!!
 
                             irScript.statements += irComponentProperty
 
-                            val irComponentInitializer = IrSetFieldImpl(
+                            konst irComponentInitializer = IrSetFieldImpl(
                                 ktEntry.startOffsetSkippingComments, ktEntry.endOffset,
                                 irComponentBackingField.symbol,
                                 context.irBuiltIns.unitType,
                                 origin = null, superQualifierSymbol = null
                             ).apply {
-                                value = irComponentCall
+                                konstue = irComponentCall
                                 receiver = IrGetValueImpl(
                                     ktEntry.startOffsetSkippingComments, ktEntry.endOffset, irScript.thisReceiver!!.symbol
                                 )

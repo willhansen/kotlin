@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-data class A<T>(val i: T)
+data class A<T>(konst i: T)
 
 fun <T> foo(block: (A<T>) -> Unit) {}
 
@@ -9,8 +9,8 @@ fun <T, R> bar() {
     }
 }
 
-data class C<T>(val x: Int, val y: T)
+data class C<T>(konst x: Int, konst y: T)
 
 fun <T, S> foo(c: C<T>) {
-    val (x: Int, y: S) = <!COMPONENT_FUNCTION_RETURN_TYPE_MISMATCH!>c<!>
+    konst (x: Int, y: S) = <!COMPONENT_FUNCTION_RETURN_TYPE_MISMATCH!>c<!>
 }

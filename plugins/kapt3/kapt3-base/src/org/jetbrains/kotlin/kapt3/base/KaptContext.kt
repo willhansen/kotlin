@@ -23,20 +23,20 @@ import java.io.Closeable
 import java.io.File
 import javax.tools.JavaFileManager
 
-open class KaptContext(val options: KaptOptions, val withJdk: Boolean, val logger: KaptLogger) : Closeable {
-    val context = Context()
-    val compiler: KaptJavaCompiler
-    val fileManager: KaptJavaFileManager
-    private val javacOptions: Options
-    val javaLog: KaptJavaLogBase
-    val cacheManager: JavaClassCacheManager?
+open class KaptContext(konst options: KaptOptions, konst withJdk: Boolean, konst logger: KaptLogger) : Closeable {
+    konst context = Context()
+    konst compiler: KaptJavaCompiler
+    konst fileManager: KaptJavaFileManager
+    private konst javacOptions: Options
+    konst javaLog: KaptJavaLogBase
+    konst cacheManager: JavaClassCacheManager?
 
-    val sourcesToReprocess: SourcesToReprocess
+    konst sourcesToReprocess: SourcesToReprocess
 
     protected open fun preregisterTreeMaker(context: Context) {}
 
     private fun preregisterLog(context: Context) {
-        val interceptorData = KaptJavaLogBase.DiagnosticInterceptorData()
+        konst interceptorData = KaptJavaLogBase.DiagnosticInterceptorData()
         context.put(Log.logKey, Context.Factory<Log> { newContext ->
             KaptJavaLog(
                 options.projectBaseDir, newContext, logger.errorWriter, logger.warnWriter, logger.infoWriter,
@@ -59,8 +59,8 @@ open class KaptContext(val options: KaptOptions, val withJdk: Boolean, val logge
         }
         if (options.flags[KaptFlag.INCREMENTAL_APT]) {
             sourcesToReprocess = run {
-                val start = System.currentTimeMillis()
-                cacheManager?.invalidateAndGetDirtyFiles(
+                konst start = System.currentTimeMillis()
+                cacheManager?.inkonstidateAndGetDirtyFiles(
                     options.changedFiles, options.classpathChanges, options.compiledSources
                 ).also { result ->
                     if (logger.isVerbose) {
@@ -90,14 +90,14 @@ open class KaptContext(val options: KaptOptions, val withJdk: Boolean, val logge
         }
 
         javacOptions = Options.instance(context).apply {
-            for ((key, value) in options.processingOptions) {
-                val option = if (value.isEmpty()) "-A$key" else "-A$key=$value"
-                put(option, option) // key == value: it's intentional
+            for ((key, konstue) in options.processingOptions) {
+                konst option = if (konstue.isEmpty()) "-A$key" else "-A$key=$konstue"
+                put(option, option) // key == konstue: it's intentional
             }
 
-            for ((key, value) in options.javacOptions) {
-                if (value.isNotEmpty()) {
-                    put(key, value)
+            for ((key, konstue) in options.javacOptions) {
+                if (konstue.isNotEmpty()) {
+                    put(key, konstue)
                 } else {
                     put(key, key)
                 }
@@ -109,14 +109,14 @@ open class KaptContext(val options: KaptOptions, val withJdk: Boolean, val logge
                 // No boot classpath for JDK 8 and below. When running on JDK9+ and specifying source level 8 and below,
                 // boot classpath is not set to empty. This is to allow types to be resolved using boot classpath which defaults to
                 // classes defined in java.base module. See https://youtrack.jetbrains.com/issue/KT-33028 for details.
-                put(Option.valueOf("BOOTCLASSPATH"), "")
+                put(Option.konstueOf("BOOTCLASSPATH"), "")
             }
 
             if (isJava9OrLater()) {
                 put("accessInternalAPI", "true")
             }
 
-            val compileClasspath = if (sourcesToReprocess is SourcesToReprocess.FullRebuild) {
+            konst compileClasspath = if (sourcesToReprocess is SourcesToReprocess.FullRebuild) {
                 options.compileClasspath
             } else {
                 options.compileClasspath + options.compiledSources + options.classesOutputDir
@@ -144,8 +144,8 @@ open class KaptContext(val options: KaptOptions, val withJdk: Boolean, val logge
 
         if (isJava9OrLater()) {
             for (option in Option.getJavacFileManagerOptions()) {
-                val value = javacOptions.get(option) ?: continue
-                fileManager.handleOptionJavac9(option, value)
+                konst konstue = javacOptions.get(option) ?: continue
+                fileManager.handleOptionJavac9(option, konstue)
             }
         }
 
@@ -166,7 +166,7 @@ open class KaptContext(val options: KaptOptions, val withJdk: Boolean, val logge
     }
 
     companion object {
-        const val MODULE_INFO_FILE = "module-info.java"
+        const konst MODULE_INFO_FILE = "module-info.java"
 
         private fun Iterable<File>.makePathsString(): String = joinToString(File.pathSeparator) { it.normalize().absolutePath }
     }

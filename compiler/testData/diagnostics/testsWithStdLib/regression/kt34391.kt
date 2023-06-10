@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 
 fun main() {
-    val list = listOf(A())
+    konst list = listOf(A())
     list.forEach(A::<!OPT_IN_USAGE_ERROR!>foo<!>)
     list.forEach {
         it.<!OPT_IN_USAGE_ERROR!>foo<!>()

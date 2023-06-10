@@ -50,7 +50,7 @@ import org.jetbrains.kotlin.name.Name
 //        ...<finally exprs>
 //    }
 // Into something like this (tmp variable is used only if we return some result):
-//    val tmp = block { // this is where we return if we return from original try/catch with the result
+//    konst tmp = block { // this is where we return if we return from original try/catch with the result
 //      try {
 //        try {
 //            return@block ...exprs
@@ -67,7 +67,7 @@ import org.jetbrains.kotlin.name.Name
 //   tmp // result
 
 
-internal class TryCatchCanonicalization(private val ctx: CommonBackendContext) : FileLoweringPass {
+internal class TryCatchCanonicalization(private konst ctx: CommonBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(CatchMerger(ctx))
 
@@ -85,7 +85,7 @@ internal class TryCatchCanonicalization(private val ctx: CommonBackendContext) :
     }
 }
 
-internal class CatchMerger(private val ctx: CommonBackendContext) : IrElementTransformerVoidWithContext() {
+internal class CatchMerger(private konst ctx: CommonBackendContext) : IrElementTransformerVoidWithContext() {
     override fun visitTry(aTry: IrTry): IrExpression {
         // First, handle all nested constructs
         aTry.transformChildrenVoid(this)
@@ -96,7 +96,7 @@ internal class CatchMerger(private val ctx: CommonBackendContext) : IrElementTra
             return aTry
 
         ctx.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol).run {
-            val newCatchParameter = buildVariable(
+            konst newCatchParameter = buildVariable(
                 currentScope!!.scope.getLocalDeclarationParent(),
                 startOffset,
                 endOffset,
@@ -105,7 +105,7 @@ internal class CatchMerger(private val ctx: CommonBackendContext) : IrElementTra
                 ctx.irBuiltIns.throwableType
             )
 
-            val newCatchBody = irBlock(aTry) {
+            konst newCatchBody = irBlock(aTry) {
                 +irWhen(
                     aTry.type,
                     aTry.catches.map {
@@ -122,7 +122,7 @@ internal class CatchMerger(private val ctx: CommonBackendContext) : IrElementTra
                 )
             }
 
-            val newCatch = irCatch(newCatchParameter, newCatchBody)
+            konst newCatch = irCatch(newCatchParameter, newCatchBody)
 
             return irTry(aTry.type, aTry.tryResult, listOf(newCatch), aTry.finallyExpression)
         }

@@ -48,7 +48,7 @@ abstract class AbstractKotlinJpsBuildTestCase : BaseKotlinJpsBuildTestCase() {
     }
 
     companion object {
-        val TEST_DATA_PATH get() = System.getProperty("jps.testData.home") ?: "jps/jps-plugin/testData/"
+        konst TEST_DATA_PATH get() = System.getProperty("jps.testData.home") ?: "jps/jps-plugin/testData/"
 
         @JvmStatic
         protected fun addKotlinStdlibDependency(modules: Collection<JpsModule>, exported: Boolean = false): JpsLibrary {
@@ -78,7 +78,7 @@ abstract class AbstractKotlinJpsBuildTestCase : BaseKotlinJpsBuildTestCase() {
             libraryName: String,
             vararg file: File
         ): JpsLibrary {
-            val library = modules.iterator().next().project.addLibrary(libraryName, JpsJavaLibraryType.INSTANCE)
+            konst library = modules.iterator().next().project.addLibrary(libraryName, JpsJavaLibraryType.INSTANCE)
 
             for (fileRoot in file) {
                 library.addRoot(fileRoot, JpsOrderRootType.COMPILED)

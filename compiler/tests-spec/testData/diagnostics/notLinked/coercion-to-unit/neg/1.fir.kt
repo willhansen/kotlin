@@ -9,12 +9,12 @@
 
 // TESTCASE NUMBER: 1
 
-val y0 = when (2) {
+konst y0 = when (2) {
     else -> <!INVALID_IF_AS_EXPRESSION!>if<!> (true) {""}
 }
 
-val w:Any = TODO()
+konst w:Any = TODO()
 
-val y1 = when (2) {
+konst y1 = when (2) {
     else -> <!INVALID_IF_AS_EXPRESSION!>if<!> (true) {""} // false ok with coercion to Unit
 }

@@ -17,7 +17,7 @@ object B {
 }
 
 interface IFoo {
-  val A.foo: B
+  konst A.foo: B
     get(): B {
       return B
     }

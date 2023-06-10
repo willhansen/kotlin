@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.javac.JavacWrapper
 import org.jetbrains.kotlin.load.java.structure.JavaElement
 
 abstract class TreeBasedElement<out T : JCTree>(
-        val tree: T,
-        val compilationUnit: CompilationUnitTree,
-        val javac: JavacWrapper
+        konst tree: T,
+        konst compilationUnit: CompilationUnitTree,
+        konst javac: JavacWrapper
 ) : JavaElement {
 
     override fun equals(other: Any?) = (other as? TreeBasedElement<*>)?.tree == tree

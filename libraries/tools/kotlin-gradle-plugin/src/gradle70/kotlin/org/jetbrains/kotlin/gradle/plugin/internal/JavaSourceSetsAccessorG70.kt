@@ -11,12 +11,12 @@ import org.gradle.api.plugins.JavaPluginConvention
 import org.gradle.api.tasks.SourceSetContainer
 
 internal class JavaSourceSetsAccessorG70(
-    private val convention: Convention
+    private konst convention: Convention
 ) : JavaSourceSetsAccessor {
-    override val sourceSets: SourceSetContainer
+    override konst sourceSets: SourceSetContainer
         get() = convention.getPlugin(JavaPluginConvention::class.java).sourceSets
 
-    override val sourceSetsIfAvailable: SourceSetContainer?
+    override konst sourceSetsIfAvailable: SourceSetContainer?
         get() = convention.findPlugin(JavaPluginConvention::class.java)?.sourceSets
 
     internal class JavaSourceSetAccessorVariantFactoryG70 : JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory {

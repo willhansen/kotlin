@@ -13,7 +13,7 @@ class StringProperty(var v: String) {
     }
 }
 
-data class Task(val input: StringProperty)
+data class Task(konst input: StringProperty)
 
 var result = "Fail"
 operator fun StringProperty.plusAssign(v: String) {
@@ -50,7 +50,7 @@ operator fun StringProperty.compareTo(v: StringProperty): Int {
 }
 
 fun box(): String {
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
 
     // Double check that assign is correctly setup
     task.input = "OK"

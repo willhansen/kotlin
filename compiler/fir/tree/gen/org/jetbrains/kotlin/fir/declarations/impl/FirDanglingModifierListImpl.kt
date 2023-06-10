@@ -29,14 +29,14 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirDanglingModifierListImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
-    override val diagnostic: ConeDiagnostic,
-    override val symbol: FirDanglingModifierSymbol,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
+    override konst diagnostic: ConeDiagnostic,
+    override konst symbol: FirDanglingModifierSymbol,
 ) : FirDanglingModifierList() {
     init {
         symbol.bind(this)

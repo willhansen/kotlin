@@ -9,12 +9,12 @@ public interface Kt3302 {
     }
 
     public interface LinkedHashMap<K, V>  {
-        public fun put(key: K, value: V): V?
+        public fun put(key: K, konstue: V): V?
 
         public fun dummy() // to avoid loading as SAM interface
     }
 
     public interface BasicBSONObject : LinkedHashMap<String, Any>, BSONObject {
-        override fun put(key: String, value: Any): Any?
+        override fun put(key: String, konstue: Any): Any?
     }
 }

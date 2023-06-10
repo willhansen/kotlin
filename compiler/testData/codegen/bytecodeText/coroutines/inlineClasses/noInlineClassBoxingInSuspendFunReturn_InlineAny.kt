@@ -1,5 +1,5 @@
-inline class IC0(val x: Any) // IC0.unbox-impl in generated 'equals'
-inline class IC1(val x: IC0) // IC1.unbox-impl in generated 'equals'
+inline class IC0(konst x: Any) // IC0.unbox-impl in generated 'equals'
+inline class IC1(konst x: IC0) // IC1.unbox-impl in generated 'equals'
 
 suspend fun suspendIC(): IC1 = IC1(IC0(""))
 suspend fun suspendAny(): Any = IC1(IC0("")) // IC1.box-impl

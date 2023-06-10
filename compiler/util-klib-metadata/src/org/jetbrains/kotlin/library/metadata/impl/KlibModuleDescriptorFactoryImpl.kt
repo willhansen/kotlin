@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.platform.konan.NativePlatforms
 import org.jetbrains.kotlin.resolve.ImplicitIntegerCoercion
 import org.jetbrains.kotlin.storage.StorageManager
 
-internal class KlibModuleDescriptorFactoryImpl(val createBuiltIns: (StorageManager) -> KotlinBuiltIns) : KlibModuleDescriptorFactory {
+internal class KlibModuleDescriptorFactoryImpl(konst createBuiltIns: (StorageManager) -> KotlinBuiltIns) : KlibModuleDescriptorFactory {
 
     override fun createDescriptor(
         name: Name,
@@ -43,9 +43,9 @@ internal class KlibModuleDescriptorFactoryImpl(val createBuiltIns: (StorageManag
         customCapabilities: Map<ModuleCapability<*>, Any?>
     ): ModuleDescriptorImpl {
 
-        val builtIns = createBuiltIns(storageManager)
+        konst builtIns = createBuiltIns(storageManager)
 
-        val moduleDescriptor = createDescriptor(name, storageManager, builtIns, origin, customCapabilities)
+        konst moduleDescriptor = createDescriptor(name, storageManager, builtIns, origin, customCapabilities)
         builtIns.builtInsModule = moduleDescriptor
 
         return moduleDescriptor

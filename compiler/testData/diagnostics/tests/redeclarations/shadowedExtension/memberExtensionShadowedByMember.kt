@@ -1,9 +1,9 @@
 interface IFooBar {
     fun foo()
-    val bar: Int
+    konst bar: Int
 }
 
 class Host {
     fun IFooBar.<!EXTENSION_SHADOWED_BY_MEMBER!>foo<!>() {}
-    val IFooBar.<!EXTENSION_SHADOWED_BY_MEMBER!>bar<!>: Int get() = 42
+    konst IFooBar.<!EXTENSION_SHADOWED_BY_MEMBER!>bar<!>: Int get() = 42
 }

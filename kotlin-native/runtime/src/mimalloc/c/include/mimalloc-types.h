@@ -39,7 +39,7 @@ terms of the MIT license. A copy of the license can be found in the file
 // Define MI_SECURE to enable security mitigations
 // #define MI_SECURE 1  // guard page around metadata
 // #define MI_SECURE 2  // guard page around each mimalloc page
-// #define MI_SECURE 3  // encode free lists (detect corrupted free list (buffer overflow), and invalid pointer free)
+// #define MI_SECURE 3  // encode free lists (detect corrupted free list (buffer overflow), and inkonstid pointer free)
 // #define MI_SECURE 4  // checks for double free. (may be more expensive)
 
 #if !defined(MI_SECURE)
@@ -47,7 +47,7 @@ terms of the MIT license. A copy of the license can be found in the file
 #endif
 
 // Define MI_DEBUG for debug mode
-// #define MI_DEBUG 1  // basic assertion checks and statistics, check double free, corrupted free list, and invalid pointer free.
+// #define MI_DEBUG 1  // basic assertion checks and statistics, check double free, corrupted free list, and inkonstid pointer free.
 // #define MI_DEBUG 2  // + internal assertion checks
 // #define MI_DEBUG 3  // + extensive internal invariant checking (cmake -DMI_DEBUG_FULL=ON)
 #if !defined(MI_DEBUG)
@@ -72,7 +72,7 @@ terms of the MIT license. A copy of the license can be found in the file
 #endif
 
 // ------------------------------------------------------
-// Platform specific values
+// Platform specific konstues
 // ------------------------------------------------------
 
 // ------------------------------------------------------
@@ -141,7 +141,7 @@ terms of the MIT license. A copy of the license can be found in the file
 #error "define more bins"
 #endif
 
-// Used as a special value to encode block sizes in 32 bits.
+// Used as a special konstue to encode block sizes in 32 bits.
 #define MI_HUGE_BLOCK_SIZE   ((uint32_t)MI_HUGE_OBJ_SIZE_MAX)
 
 // The free lists use encoded next fields
@@ -326,7 +326,7 @@ typedef struct mi_random_cxt_s {
 // In debug mode there is a padding stucture at the end of the blocks to check for buffer overflows
 #if (MI_PADDING)
 typedef struct mi_padding_s {
-  uint32_t canary; // encoded block value to check validity of the padding (in case of overflow)
+  uint32_t canary; // encoded block konstue to check konstidity of the padding (in case of overflow)
   uint32_t delta;  // padding bytes before the block. (mi_usable_size(p) - delta == exact allocated bytes)
 } mi_padding_t;
 #define MI_PADDING_SIZE   (sizeof(mi_padding_t))

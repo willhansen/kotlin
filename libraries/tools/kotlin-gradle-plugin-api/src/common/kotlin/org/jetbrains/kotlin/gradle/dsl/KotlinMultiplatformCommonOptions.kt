@@ -6,5 +6,5 @@
 package org.jetbrains.kotlin.gradle.dsl
 
 interface KotlinMultiplatformCommonOptions : org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptions {
-    override val options: org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformCommonCompilerOptions
+    override konst options: org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformCommonCompilerOptions
 }

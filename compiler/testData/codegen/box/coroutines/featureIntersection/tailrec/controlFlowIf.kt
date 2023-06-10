@@ -3,7 +3,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-class CompilerKillingIterator<T, out R>(private val underlying: Iterator<T>, private val transform: suspend (e: T) -> Iterator<R>) {
+class CompilerKillingIterator<T, out R>(private konst underlying: Iterator<T>, private konst transform: suspend (e: T) -> Iterator<R>) {
     private var currentIt: Iterator<R> = object : Iterator<R> {
         override fun hasNext() = false
 
@@ -31,7 +31,7 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var res = ""
     builder {
-        val iter = CompilerKillingIterator("ok".asIterable().iterator()) { ("" + it.toUpperCase()).asIterable().iterator() }
+        konst iter = CompilerKillingIterator("ok".asIterable().iterator()) { ("" + it.toUpperCase()).asIterable().iterator() }
         while (iter.hasNext()) {
             res += iter.next()
         }

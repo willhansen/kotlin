@@ -5,7 +5,7 @@ interface I {
         private var bar = "Companion Field from I"
 
         fun test(): String {
-            bar = "New value"
+            bar = "New konstue"
             return bar
         }
     }

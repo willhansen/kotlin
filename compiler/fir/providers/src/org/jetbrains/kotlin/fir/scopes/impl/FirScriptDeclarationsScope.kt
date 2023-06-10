@@ -16,15 +16,15 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
 class FirScriptDeclarationsScope(
-    val useSiteSession: FirSession,
-    val script: FirScript,
+    konst useSiteSession: FirSession,
+    konst script: FirScript,
 ) : FirContainingNamesAwareScope() {
 
-    private val callablesIndex: Map<Name, List<FirCallableSymbol<*>>> = run {
-        val result = mutableMapOf<Name, MutableList<FirCallableSymbol<*>>>()
+    private konst callablesIndex: Map<Name, List<FirCallableSymbol<*>>> = run {
+        konst result = mutableMapOf<Name, MutableList<FirCallableSymbol<*>>>()
         loop@ for (statement in script.statements) {
             if (statement is FirCallableDeclaration) {
-                val name = when (statement) {
+                konst name = when (statement) {
                     is FirVariable -> if (statement.isSynthetic) continue@loop else statement.name
                     is FirSimpleFunction -> statement.name
                     // TODO: destructuring decl
@@ -36,8 +36,8 @@ class FirScriptDeclarationsScope(
         result
     }
 
-    private val classIndex: Map<Name, FirRegularClassSymbol> = run {
-        val result = mutableMapOf<Name, FirRegularClassSymbol>()
+    private konst classIndex: Map<Name, FirRegularClassSymbol> = run {
+        konst result = mutableMapOf<Name, FirRegularClassSymbol>()
         for (declaration in script.statements) {
             if (declaration is FirRegularClass) {
                 result[declaration.name] = declaration.symbol
@@ -59,7 +59,7 @@ class FirScriptDeclarationsScope(
         name: Name,
         processor: (D) -> Unit
     ) {
-        val symbols = callablesIndex[name] ?: emptyList()
+        konst symbols = callablesIndex[name] ?: emptyList()
         for (symbol in symbols) {
             if (symbol is D) {
                 processor(symbol)
@@ -75,8 +75,8 @@ class FirScriptDeclarationsScope(
         name: Name,
         processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit
     ) {
-        val matchedClass = classIndex[name] ?: return
-        val substitution = matchedClass.typeParameterSymbols.associateWith { it.toConeType() }
+        konst matchedClass = classIndex[name] ?: return
+        konst substitution = matchedClass.typeParameterSymbols.associateWith { it.toConeType() }
         processor(matchedClass, ConeSubstitutorByMap(substitution, useSiteSession))
     }
 

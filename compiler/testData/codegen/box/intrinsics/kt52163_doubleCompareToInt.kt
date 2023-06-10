@@ -1,11 +1,11 @@
 fun test1(): Int {
-    val d: Double?
+    konst d: Double?
     d = 8.3
     return d.compareTo(8)
 }
 
 fun test2(): Int {
-    val d: Double
+    konst d: Double
     d = 8.3
     return d.compareTo(8)
 }

@@ -3,5 +3,5 @@ enum class Direction {
 }
 
 fun usage() {
-    Direction.<!DEBUG_INFO_CALLABLE_OWNER("Direction.values in Direction")!>values()<!>
+    Direction.<!DEBUG_INFO_CALLABLE_OWNER("Direction.konstues in Direction")!>konstues()<!>
 }

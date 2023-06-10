@@ -9,10 +9,10 @@ import org.jetbrains.kotlin.backend.common.LoggingContext
 import kotlin.system.measureTimeMillis
 
 class PhaserState<Data>(
-    val alreadyDone: MutableSet<AnyNamedPhase> = mutableSetOf(),
+    konst alreadyDone: MutableSet<AnyNamedPhase> = mutableSetOf(),
     var depth: Int = 0,
     var phaseCount: Int = 0,
-    val stickyPostconditions: MutableSet<Checker<Data>> = mutableSetOf()
+    konst stickyPostconditions: MutableSet<Checker<Data>> = mutableSetOf()
 ) {
     fun copyOf() = PhaserState(alreadyDone.toMutableSet(), depth, phaseCount, stickyPostconditions)
 }
@@ -22,7 +22,7 @@ fun <Input, Output> PhaserState<Input>.changePhaserStateType() = PhaserState<Out
 
 inline fun <R, D> PhaserState<D>.downlevel(nlevels: Int, block: () -> R): R {
     depth += nlevels
-    val result = block()
+    konst result = block()
     depth -= nlevels
     return result
 }
@@ -33,7 +33,7 @@ interface CompilerPhase<in Context : LoggingContext, Input, Output> {
     fun getNamedSubphases(startDepth: Int = 0): List<Pair<Int, AbstractNamedCompilerPhase<Context, *, *>>> = emptyList()
 
     // In phase trees, `stickyPostconditions` is inherited along the right edge to be used in `then`.
-    val stickyPostconditions: Set<Checker<Output>> get() = emptySet()
+    konst stickyPostconditions: Set<Checker<Output>> get() = emptySet()
 }
 
 fun <Context : LoggingContext, Input, Output> CompilerPhase<Context, Input, Output>.invokeToplevel(
@@ -52,10 +52,10 @@ typealias AnyNamedPhase = AbstractNamedCompilerPhase<*, *, *>
 enum class BeforeOrAfter { BEFORE, AFTER }
 
 data class ActionState(
-    val config: PhaseConfigurationService,
-    val phase: AnyNamedPhase,
-    val phaseCount: Int,
-    val beforeOrAfter: BeforeOrAfter
+    konst config: PhaseConfigurationService,
+    konst phase: AnyNamedPhase,
+    konst phaseCount: Int,
+    konst beforeOrAfter: BeforeOrAfter
 )
 
 typealias Action<Data, Context> = (ActionState, Data, Context) -> Unit
@@ -68,12 +68,12 @@ infix operator fun <Data, Context> Action<Data, Context>.plus(other: Action<Data
 
 // TODO: A better name would be just `NamedCompilerPhase`, but it is already used (see below).
 abstract class AbstractNamedCompilerPhase<in Context : LoggingContext, Input, Output>(
-    val name: String,
-    val description: String,
-    val prerequisite: Set<AbstractNamedCompilerPhase<*, *, *>> = emptySet(),
-    val preconditions: Set<Checker<Input>> = emptySet(),
-    val postconditions: Set<Checker<Output>> = emptySet(),
-    protected val nlevels: Int = 0
+    konst name: String,
+    konst description: String,
+    konst prerequisite: Set<AbstractNamedCompilerPhase<*, *, *>> = emptySet(),
+    konst preconditions: Set<Checker<Input>> = emptySet(),
+    konst postconditions: Set<Checker<Output>> = emptySet(),
+    protected konst nlevels: Int = 0
 ) : CompilerPhase<Context, Input, Output> {
     override fun invoke(phaseConfig: PhaseConfigurationService, phaserState: PhaserState<Input>, context: Context, input: Input): Output {
         if (!phaseConfig.isEnabled(this)) {
@@ -87,7 +87,7 @@ abstract class AbstractNamedCompilerPhase<in Context : LoggingContext, Input, Ou
         context.inVerbosePhase = phaseConfig.isVerbose(this)
 
         runBefore(phaseConfig, phaserState, context, input)
-        val output = if (phaseConfig.needProfiling) {
+        konst output = if (phaseConfig.needProfiling) {
             runAndProfile(phaseConfig, phaserState, context, input)
         } else {
             phaserState.downlevel(nlevels) {
@@ -114,7 +114,7 @@ abstract class AbstractNamedCompilerPhase<in Context : LoggingContext, Input, Ou
 
     private fun runAndProfile(phaseConfig: PhaseConfigurationService, phaserState: PhaserState<Input>, context: Context, source: Input): Output {
         var result: Output? = null
-        val msec = measureTimeMillis {
+        konst msec = measureTimeMillis {
             result = phaserState.downlevel(nlevels) {
                 phaseBody(phaseConfig, phaserState, context, source)
             }
@@ -134,11 +134,11 @@ class NamedCompilerPhase<in Context : LoggingContext, Data>(
     name: String,
     description: String,
     prerequisite: Set<AbstractNamedCompilerPhase<*, *, *>> = emptySet(),
-    private val lower: CompilerPhase<Context, Data, Data>,
+    private konst lower: CompilerPhase<Context, Data, Data>,
     preconditions: Set<Checker<Data>> = emptySet(),
     postconditions: Set<Checker<Data>> = emptySet(),
-    override val stickyPostconditions: Set<Checker<Data>> = emptySet(),
-    private val actions: Set<Action<Data, Context>> = emptySet(),
+    override konst stickyPostconditions: Set<Checker<Data>> = emptySet(),
+    private konst actions: Set<Action<Data, Context>> = emptySet(),
     nlevels: Int = 0
 ) : AbstractNamedCompilerPhase<Context, Data, Data>(
     name, description, prerequisite, preconditions, postconditions, nlevels
@@ -153,7 +153,7 @@ class NamedCompilerPhase<in Context : LoggingContext, Data>(
         phaserState
 
     override fun runBefore(phaseConfig: PhaseConfigurationService, phaserState: PhaserState<Data>, context: Context, input: Data) {
-        val state = ActionState(phaseConfig, this, phaserState.phaseCount, BeforeOrAfter.BEFORE)
+        konst state = ActionState(phaseConfig, this, phaserState.phaseCount, BeforeOrAfter.BEFORE)
         for (action in actions) action(state, input, context)
 
         if (phaseConfig.checkConditions) {
@@ -162,7 +162,7 @@ class NamedCompilerPhase<in Context : LoggingContext, Data>(
     }
 
     override fun runAfter(phaseConfig: PhaseConfigurationService, phaserState: PhaserState<Data>, context: Context, input: Data, output: Data) {
-        val state = ActionState(phaseConfig, this, phaserState.phaseCount, BeforeOrAfter.AFTER)
+        konst state = ActionState(phaseConfig, this, phaserState.phaseCount, BeforeOrAfter.AFTER)
         for (action in actions) action(state, output, context)
 
         if (phaseConfig.checkConditions) {
@@ -192,8 +192,8 @@ abstract class SimpleNamedCompilerPhase<in Context : LoggingContext, Input, Outp
     prerequisite: Set<AbstractNamedCompilerPhase<*, *, *>> = emptySet(),
     preconditions: Set<Checker<Input>> = emptySet(),
     postconditions: Set<Checker<Output>> = emptySet(),
-    private val preactions: Set<Action<Input, Context>> = emptySet(),
-    private val postactions: Set<Action<Pair<Input, Output>, Context>> = emptySet(),
+    private konst preactions: Set<Action<Input, Context>> = emptySet(),
+    private konst postactions: Set<Action<Pair<Input, Output>, Context>> = emptySet(),
     nlevels: Int = 0,
 ) : AbstractNamedCompilerPhase<Context, Input, Output>(
     name,
@@ -212,7 +212,7 @@ abstract class SimpleNamedCompilerPhase<in Context : LoggingContext, Input, Outp
         phaserState.changePhaserStateType()
 
     override fun runBefore(phaseConfig: PhaseConfigurationService, phaserState: PhaserState<Input>, context: Context, input: Input) {
-        val state = ActionState(phaseConfig, this, phaserState.phaseCount, BeforeOrAfter.BEFORE)
+        konst state = ActionState(phaseConfig, this, phaserState.phaseCount, BeforeOrAfter.BEFORE)
         for (action in preactions) action(state, input, context)
 
         if (phaseConfig.checkConditions) {
@@ -221,7 +221,7 @@ abstract class SimpleNamedCompilerPhase<in Context : LoggingContext, Input, Outp
     }
 
     override fun runAfter(phaseConfig: PhaseConfigurationService, phaserState: PhaserState<Output>, context: Context, input: Input, output: Output) {
-        val state = ActionState(phaseConfig, this, phaserState.phaseCount, BeforeOrAfter.AFTER)
+        konst state = ActionState(phaseConfig, this, phaserState.phaseCount, BeforeOrAfter.AFTER)
         for (action in postactions) action(state, input to output, context)
 
         if (phaseConfig.checkConditions) {

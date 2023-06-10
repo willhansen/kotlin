@@ -23,7 +23,7 @@ public class AnnotatedDerived extends Annotated {
 
 class User : AnnotatedDerived() {
     fun test() {
-        val x = foo("123")
-        val y = foo(null)
+        konst x = foo("123")
+        konst y = foo(null)
     }
 }

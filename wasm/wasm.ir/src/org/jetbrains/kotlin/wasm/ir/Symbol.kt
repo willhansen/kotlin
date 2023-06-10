@@ -8,20 +8,20 @@ package org.jetbrains.kotlin.wasm.ir
 // Late binding box
 
 interface WasmSymbolReadOnly<out T : Any> {
-    val owner: T
+    konst owner: T
 }
 
 class WasmSymbol<out T : Any>(owner: T? = null) : WasmSymbolReadOnly<T> {
     private var _owner: Any? = owner
 
     @Suppress("UNCHECKED_CAST")
-    override val owner: T
+    override konst owner: T
         get() = _owner as? T
             ?: error("Unbound wasm symbol $this")
 
     @Suppress("UNCHECKED_CAST")
-    fun bind(value: Any) {
-        _owner = value as T
+    fun bind(konstue: Any) {
+        _owner = konstue as T
     }
 
     override fun equals(other: Any?): Boolean =
@@ -34,8 +34,8 @@ class WasmSymbol<out T : Any>(owner: T? = null) : WasmSymbolReadOnly<T> {
         _owner?.toString() ?: "UNBOUND-WASM-SYMBOL"
 }
 
-class WasmSymbolIntWrapper(val symbol: WasmSymbol<WasmNamedModuleField>) : WasmSymbolReadOnly<Int> {
-    override val owner: Int
+class WasmSymbolIntWrapper(konst symbol: WasmSymbol<WasmNamedModuleField>) : WasmSymbolReadOnly<Int> {
+    override konst owner: Int
         get() = symbol.owner.id!!
 
     override fun toString() = owner.toString()

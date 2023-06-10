@@ -5,6 +5,6 @@ import objcTests.*
 // No matter what is in the test: I only need to get it compilable with cinterop
 
 @Test fun testKT37067() {
-    val impl = KT37067_Impl()
+    konst impl = KT37067_Impl()
     assertEquals(null, impl.newValue)
 }

@@ -10,7 +10,7 @@ import kotlin.test.*
 @Test fun runTest() {
     var str = "original"
 
-    val lambda = {
+    konst lambda = {
         println(str)
     }
 

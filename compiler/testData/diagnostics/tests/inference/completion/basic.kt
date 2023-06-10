@@ -3,10 +3,10 @@
 interface Bound
 class Cls : Bound
 
-class Inv<T>(val prop: T)
+class Inv<T>(konst prop: T)
 class In<in I>(param: I)
 class InB<in I : Bound>(param: I)
-class Out<out O>(val prop: O)
+class Out<out O>(konst prop: O)
 
 fun <K> id(arg: K): K = arg
 fun <W> makeInv(arg: W): Inv<W> = TODO()

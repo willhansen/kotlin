@@ -14,7 +14,7 @@ object O {
     }
 }
 
-val s: String by O
+konst s: String by O
 
 fun box(): String = if (initialized) "OK" else "FAILURE"
 

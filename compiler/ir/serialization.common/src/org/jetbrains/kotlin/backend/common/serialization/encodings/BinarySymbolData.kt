@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.backend.common.serialization.encodings
 
 @JvmInline
-value class BinarySymbolData(val code: Long) {
+konstue class BinarySymbolData(konst code: Long) {
     enum class SymbolKind {
         FUNCTION_SYMBOL,
         CONSTRUCTOR_SYMBOL,
@@ -28,13 +28,13 @@ value class BinarySymbolData(val code: Long) {
 
     private fun symbolKindId(): Int = (code and 0xFF).toInt()
 
-    val signatureId: Int get() = (code ushr 8).toInt()
-    val kind: SymbolKind
-        get() = SymbolKind.values()[symbolKindId()]
+    konst signatureId: Int get() = (code ushr 8).toInt()
+    konst kind: SymbolKind
+        get() = SymbolKind.konstues()[symbolKindId()]
 
     companion object {
         fun encode(kind: SymbolKind, signatureId: Int): Long {
-            val kindId = kind.ordinal
+            konst kindId = kind.ordinal
             return (signatureId.toLong() shl 8) or kindId.toLong()
         }
 

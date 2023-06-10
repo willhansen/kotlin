@@ -17,14 +17,14 @@ import java.nio.file.Paths
 abstract class AbstractLightTree2FirConverterTestCase : AbstractRawFirBuilderTestCase() {
 
     fun doTest(filePath: String) {
-        val firFile = LightTree2Fir(
+        konst firFile = LightTree2Fir(
             session = FirSessionFactoryHelper.createEmptySession(),
             scopeProvider = StubFirScopeProvider,
             diagnosticsReporter = null
         ).buildFirFile(Paths.get(filePath))
-        val firDump = FirRenderer.withDeclarationAttributes().renderElementAsString(firFile)
+        konst firDump = FirRenderer.withDeclarationAttributes().renderElementAsString(firFile)
 
-        val expectedFile = File(filePath.replace(".kt", ".txt"))
+        konst expectedFile = File(filePath.replace(".kt", ".txt"))
         KotlinTestUtils.assertEqualsToFile(expectedFile, firDump)
     }
 }

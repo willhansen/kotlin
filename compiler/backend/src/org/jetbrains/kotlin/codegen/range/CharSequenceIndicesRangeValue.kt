@@ -31,7 +31,7 @@ import org.jetbrains.org.objectweb.asm.Type
 class CharSequenceIndicesRangeValue(rangeCall: ResolvedCall<out CallableDescriptor>) :
     PrimitiveNumberRangeIntrinsicRangeValue(rangeCall), ReversableRangeValue {
 
-    private val expectedReceiverType: KotlinType = ExpressionCodegen.getExpectedReceiverType(rangeCall)
+    private konst expectedReceiverType: KotlinType = ExpressionCodegen.getExpectedReceiverType(rangeCall)
 
     override fun getBoundedValue(codegen: ExpressionCodegen) =
         BoundedValue(

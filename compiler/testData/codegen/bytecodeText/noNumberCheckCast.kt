@@ -1,6 +1,6 @@
 fun test() {
-    val z : Int? = 1
-    val r = z!! + 1
+    konst z : Int? = 1
+    konst r = z!! + 1
     stubPreventBoxingOptimization(z)
 }
 

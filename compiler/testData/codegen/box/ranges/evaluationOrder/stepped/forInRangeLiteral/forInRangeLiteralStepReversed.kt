@@ -1,10 +1,10 @@
 // WITH_STDLIB
 import kotlin.test.*
 
-val log = StringBuilder()
+konst log = StringBuilder()
 
-fun logged(message: String, value: Int) =
-    value.also { log.append(message) }
+fun logged(message: String, konstue: Int) =
+    konstue.also { log.append(message) }
 
 fun box(): String {
     var sum = 0

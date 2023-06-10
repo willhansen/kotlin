@@ -29,7 +29,7 @@ fun initIdeaConfiguration() {
 }
 
 private fun computeHomeDirectory(): String {
-    val userDir = System.getProperty("user.dir")
+    konst userDir = System.getProperty("user.dir")
     return File(userDir ?: ".").canonicalPath
 }
 

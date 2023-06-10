@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class A(val s: String)
+inline class A(konst s: String)
 
 class B(x: Long, a: A = A("OK"))
 

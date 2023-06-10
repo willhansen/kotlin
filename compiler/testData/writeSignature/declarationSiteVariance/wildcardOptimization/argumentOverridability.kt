@@ -5,7 +5,7 @@ class In<in Z>
 class Final
 open class Open
 
-// For value parameters we decided to skip wildcards if it doesn't make obtained signature weaker
+// For konstue parameters we decided to skip wildcards if it doesn't make obtained signature weaker
 // in a sense of set of acceptable arguments.
 // More precisely:
 //    a. We write wildcard for 'Out<T>' iff T ``can have subtypes ignoring nullability''

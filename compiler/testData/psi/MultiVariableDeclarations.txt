@@ -15,7 +15,7 @@ KtFile: MultiVariableDeclarations.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -28,7 +28,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -47,7 +47,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -64,7 +64,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -93,7 +93,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -116,7 +116,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -263,7 +263,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PsiErrorElement:Expecting a name
@@ -276,7 +276,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PsiErrorElement:Expecting a name
@@ -292,7 +292,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -307,7 +307,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -331,7 +331,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -357,7 +357,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -373,7 +373,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -391,7 +391,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -405,7 +405,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiErrorElement:Receiver type is not allowed on a destructuring declaration
           TYPE_REFERENCE
@@ -424,7 +424,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -444,7 +444,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiErrorElement:Receiver type is not allowed on a destructuring declaration
           TYPE_REFERENCE
@@ -472,9 +472,9 @@ KtFile: MultiVariableDeclarations.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   DESTRUCTURING_DECLARATION
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiErrorElement:Destructuring declarations are only allowed for local variables/values
+    PsiErrorElement:Destructuring declarations are only allowed for local variables/konstues
       PsiElement(LPAR)('(')
       DESTRUCTURING_DECLARATION_ENTRY
         PsiElement(IDENTIFIER)('a')
@@ -490,7 +490,7 @@ KtFile: MultiVariableDeclarations.kt
       PsiElement(INTEGER_LITERAL)('1')
   PsiWhiteSpace('\n')
   DESTRUCTURING_DECLARATION
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiErrorElement:Receiver type is not allowed on a destructuring declaration
       TYPE_REFERENCE
@@ -498,7 +498,7 @@ KtFile: MultiVariableDeclarations.kt
           REFERENCE_EXPRESSION
             PsiElement(IDENTIFIER)('Int')
       PsiElement(DOT)('.')
-    PsiErrorElement:Destructuring declarations are only allowed for local variables/values
+    PsiErrorElement:Destructuring declarations are only allowed for local variables/konstues
       PsiElement(LPAR)('(')
       DESTRUCTURING_DECLARATION_ENTRY
         PsiElement(IDENTIFIER)('a')
@@ -514,9 +514,9 @@ KtFile: MultiVariableDeclarations.kt
       PsiElement(INTEGER_LITERAL)('1')
   PsiWhiteSpace('\n')
   DESTRUCTURING_DECLARATION
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiErrorElement:Destructuring declarations are only allowed for local variables/values
+    PsiErrorElement:Destructuring declarations are only allowed for local variables/konstues
       PsiElement(LPAR)('(')
       DESTRUCTURING_DECLARATION_ENTRY
         PsiElement(IDENTIFIER)('a')
@@ -546,9 +546,9 @@ KtFile: MultiVariableDeclarations.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
-        PsiErrorElement:Destructuring declarations are only allowed for local variables/values
+        PsiErrorElement:Destructuring declarations are only allowed for local variables/konstues
           PsiElement(LPAR)('(')
           DESTRUCTURING_DECLARATION_ENTRY
             PsiElement(IDENTIFIER)('a')
@@ -564,7 +564,7 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiErrorElement:Receiver type is not allowed on a destructuring declaration
           TYPE_REFERENCE
@@ -572,7 +572,7 @@ KtFile: MultiVariableDeclarations.kt
               REFERENCE_EXPRESSION
                 PsiElement(IDENTIFIER)('Int')
           PsiElement(DOT)('.')
-        PsiErrorElement:Destructuring declarations are only allowed for local variables/values
+        PsiErrorElement:Destructuring declarations are only allowed for local variables/konstues
           PsiElement(LPAR)('(')
           DESTRUCTURING_DECLARATION_ENTRY
             PsiElement(IDENTIFIER)('a')
@@ -588,9 +588,9 @@ KtFile: MultiVariableDeclarations.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
-        PsiErrorElement:Destructuring declarations are only allowed for local variables/values
+        PsiErrorElement:Destructuring declarations are only allowed for local variables/konstues
           PsiElement(LPAR)('(')
           DESTRUCTURING_DECLARATION_ENTRY
             PsiElement(IDENTIFIER)('a')

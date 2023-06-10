@@ -2,7 +2,7 @@ package
 
 public sealed data class My {
     protected constructor My(/*0*/ x: kotlin.Int)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public final operator /*synthesized*/ fun component1(): kotlin.Int
     public final /*synthesized*/ fun copy(/*0*/ x: kotlin.Int = ...): My
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -11,7 +11,7 @@ public sealed data class My {
 
     public final class His : My {
         public constructor His(/*0*/ y: kotlin.Int)
-        public final override /*1*/ /*fake_override*/ val x: kotlin.Int
+        public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
         public final override /*1*/ /*fake_override*/ fun component1(): kotlin.Int
         public final override /*1*/ /*fake_override*/ fun copy(/*0*/ x: kotlin.Int = ...): My
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -21,7 +21,7 @@ public sealed data class My {
 
     public object Your : My {
         private constructor Your()
-        public final override /*1*/ /*fake_override*/ val x: kotlin.Int
+        public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
         public final override /*1*/ /*fake_override*/ fun component1(): kotlin.Int
         public final override /*1*/ /*fake_override*/ fun copy(/*0*/ x: kotlin.Int = ...): My
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

@@ -1,6 +1,6 @@
 package
 
-public val test7: Right
+public konst test7: Right
 public fun IA.foo(/*0*/ vararg x: kotlin.Int /*kotlin.IntArray*/): Wrong
 public fun IB.foo(/*0*/ vararg x: kotlin.Int /*kotlin.IntArray*/): Right
 

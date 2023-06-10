@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.utils.JsMetadataVersion
 class JsIncrementalEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
         if (module.hasFilesToRecompile()) {
-            val incrementalData = testServices.jsClassicIncrementalDataProvider.getIncrementalDataIfAny(module)
-            val header = incrementalData?.header
+            konst incrementalData = testServices.jsClassicIncrementalDataProvider.getIncrementalDataIfAny(module)
+            konst header = incrementalData?.header
             if (header != null) {
                 configuration.put(
                     JSConfigurationKeys.INCREMENTAL_DATA_PROVIDER,

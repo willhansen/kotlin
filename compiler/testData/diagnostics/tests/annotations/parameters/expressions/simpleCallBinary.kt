@@ -2,11 +2,11 @@
 package test
 
 annotation class Ann(
-        val p1: Int,
-        val p2: Int,
-        val p3: Int,
-        val p4: Int,
-        val p5: Int
+        konst p1: Int,
+        konst p2: Int,
+        konst p3: Int,
+        konst p4: Int,
+        konst p5: Int
 )
 
 @Ann(1.plus(1), 1.minus(1), 1.times(1), 1.div(1), 1.rem(1)) class MyClass

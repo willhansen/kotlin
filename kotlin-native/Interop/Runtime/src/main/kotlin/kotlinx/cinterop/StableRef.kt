@@ -15,8 +15,8 @@ package kotlinx.cinterop
 @Suppress("NON_PUBLIC_PRIMARY_CONSTRUCTOR_OF_INLINE_CLASS")
 @kotlin.jvm.JvmInline
 @ExperimentalForeignApi
-public value class StableRef<out T : Any> @PublishedApi internal constructor(
-        private val stablePtr: COpaquePointer
+public konstue class StableRef<out T : Any> @PublishedApi internal constructor(
+        private konst stablePtr: COpaquePointer
 ) {
 
     companion object {

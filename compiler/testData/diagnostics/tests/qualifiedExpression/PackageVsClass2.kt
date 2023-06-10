@@ -18,7 +18,7 @@ package test
 
 class a
 
-val x = a.<!UNRESOLVED_REFERENCE!>b<!>()
+konst x = a.<!UNRESOLVED_REFERENCE!>b<!>()
 
 // MODULE: m3(m1)
 // FILE: c.kt

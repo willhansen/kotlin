@@ -30,7 +30,7 @@ public final class IrAnonymousInit extends
   private IrAnonymousInit(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -73,10 +73,10 @@ public final class IrAnonymousInit extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -94,7 +94,7 @@ public final class IrAnonymousInit extends
     public IrAnonymousInit parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrAnonymousInit(input, extensionRegistry);
     }
   };
@@ -201,23 +201,23 @@ public final class IrAnonymousInit extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit parseFrom(java.io.InputStream input)
@@ -356,7 +356,7 @@ public final class IrAnonymousInit extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -384,11 +384,11 @@ public final class IrAnonymousInit extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
-      if (value == null) {
+    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      base_ = value;
+      base_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -406,13 +406,13 @@ public final class IrAnonymousInit extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
+    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           base_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.getDefaultInstance()) {
         base_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(konstue).buildPartial();
       } else {
-        base_ = value;
+        base_ = konstue;
       }
 
       bitField0_ |= 0x00000001;
@@ -444,9 +444,9 @@ public final class IrAnonymousInit extends
     /**
      * <code>required int32 body = 2;</code>
      */
-    public Builder setBody(int value) {
+    public Builder setBody(int konstue) {
       bitField0_ |= 0x00000002;
-      body_ = value;
+      body_ = konstue;
       
       return this;
     }

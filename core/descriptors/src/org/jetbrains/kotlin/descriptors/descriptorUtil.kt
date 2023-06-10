@@ -50,15 +50,15 @@ fun ModuleDescriptor.getContinuationOfTypeOrAny(kotlinType: KotlinType) =
 fun DeclarationDescriptor.isTopLevelInPackage(name: String, packageName: String): Boolean {
     if (name != this.name.asString()) return false
 
-    val containingDeclaration = containingDeclaration as? PackageFragmentDescriptor ?: return false
-    val packageFqName = containingDeclaration.fqName.asString()
+    konst containingDeclaration = containingDeclaration as? PackageFragmentDescriptor ?: return false
+    konst packageFqName = containingDeclaration.fqName.asString()
     return packageName == packageFqName
 }
 
 fun DeclarationDescriptor.isTopLevelInPackage() = containingDeclaration is PackageFragmentDescriptor
 
 fun DeclarationDescriptor.getTopLevelContainingClassifier(): ClassifierDescriptor? {
-    val containingDeclaration = containingDeclaration
+    konst containingDeclaration = containingDeclaration
 
     if (containingDeclaration == null || this is PackageFragmentDescriptor) return null
 
@@ -92,17 +92,17 @@ fun DeclarationDescriptor.containingPackage(): FqName? {
 object DeserializedDeclarationsFromSupertypeConflictDataKey : CallableDescriptor.UserDataKey<CallableMemberDescriptor>
 
 fun FunctionDescriptor.isTypedEqualsInValueClass(): Boolean {
-    val valueClassStarProjection =
+    konst konstueClassStarProjection =
         (containingDeclaration as? ClassDescriptor)?.takeIf { it.isValueClass() }?.defaultType?.replaceArgumentsWithStarProjections()
             ?: return false
-    val returnType = returnType ?: return false
+    konst returnType = returnType ?: return false
     return name == OperatorNameConventions.EQUALS
             && (returnType.isBoolean() || returnType.isNothing())
-            && valueParameters.size == 1 && valueParameters[0].type.replaceArgumentsWithStarProjections() == valueClassStarProjection
+            && konstueParameters.size == 1 && konstueParameters[0].type.replaceArgumentsWithStarProjections() == konstueClassStarProjection
             && contextReceiverParameters.isEmpty() && extensionReceiverParameter == null
 }
 
 
 fun FunctionDescriptor.overridesEqualsFromAny(): Boolean = name == OperatorNameConventions.EQUALS
-        && valueParameters.size == 1 && valueParameters[0].type.isNullableAny()
+        && konstueParameters.size == 1 && konstueParameters[0].type.isNullableAny()
         && contextReceiverParameters.isEmpty() && extensionReceiverParameter == null

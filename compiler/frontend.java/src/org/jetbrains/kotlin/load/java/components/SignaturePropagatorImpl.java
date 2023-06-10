@@ -44,11 +44,11 @@ public class SignaturePropagatorImpl implements SignaturePropagator {
             @NotNull ClassDescriptor owner,
             @NotNull KotlinType returnType,
             @Nullable KotlinType receiverType,
-            @NotNull List<ValueParameterDescriptor> valueParameters,
+            @NotNull List<ValueParameterDescriptor> konstueParameters,
             @NotNull List<TypeParameterDescriptor> typeParameters
     ) {
         SignaturesPropagationData data =
-                new SignaturesPropagationData(owner, returnType, receiverType, valueParameters, typeParameters, method);
+                new SignaturesPropagationData(owner, returnType, receiverType, konstueParameters, typeParameters, method);
         return new PropagatedSignature(
                 returnType, data.getModifiedReceiverType(), data.getModifiedValueParameters(),
                 typeParameters, data.getSignatureErrors(), data.getModifiedHasStableParameterNames()

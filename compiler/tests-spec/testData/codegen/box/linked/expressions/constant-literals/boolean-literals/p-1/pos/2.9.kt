@@ -13,35 +13,35 @@ package org.jetbrains.`true`
 
 annotation class `false`
 
-annotation class `true` <T> (val a: String)
+annotation class `true` <T> (konst a: String)
 
 class A {
     @field:`false`
-    val x1: Int = 0
+    konst x1: Int = 0
 
     @setparam:`false`
     var x2: Int = 1
 
-    val @receiver:org.jetbrains.`true`.`true`<List<Int>>("false") String.x3: Int
+    konst @receiver:org.jetbrains.`true`.`true`<List<Int>>("false") String.x3: Int
         get() {
             return 2
         }
 
     @org.jetbrains.`true`.`true`<Int>("1")
-    val x4: Int = 3
+    konst x4: Int = 3
 
     @`false`
-    val x5: Int = 4
+    konst x5: Int = 4
 
-    val x6: Int = "...".x3
+    konst x6: Int = "...".x3
 }
 
-@`false` val x6 = 5
+@`false` konst x6 = 5
 
 @org.jetbrains.`true`.`true`<`false`>(".") fun f1() = false
 
 fun box(): String? {
-    val a = A()
+    konst a = A()
 
     if (a.x1 != 0 || a.x2 != 1 || a.x6 != 2 || a.x4 != 3 || a.x5 != 4 || x6 != 5) return null
     if (f1()) return null

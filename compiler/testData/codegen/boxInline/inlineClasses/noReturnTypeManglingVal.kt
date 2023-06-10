@@ -4,9 +4,9 @@
 
 package test
 
-inline class S(val string: String)
+inline class S(konst string: String)
 
-inline val foo get() = S("OK")
+inline konst foo get() = S("OK")
 
 
 // FILE: 2.kt

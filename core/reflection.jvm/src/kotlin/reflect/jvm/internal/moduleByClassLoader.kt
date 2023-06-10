@@ -23,13 +23,13 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
 
 // TODO: collect nulls periodically
-private val moduleByClassLoader: ConcurrentMap<WeakClassLoaderBox, WeakReference<RuntimeModuleData>> = ConcurrentHashMap()
+private konst moduleByClassLoader: ConcurrentMap<WeakClassLoaderBox, WeakReference<RuntimeModuleData>> = ConcurrentHashMap()
 
 private class WeakClassLoaderBox(classLoader: ClassLoader) {
-    val ref: WeakReference<ClassLoader> = WeakReference(classLoader)
+    konst ref: WeakReference<ClassLoader> = WeakReference(classLoader)
 
     // Identity hash code is saved because otherwise once the weak reference is GC'd we cannot compute it anymore
-    val identityHashCode: Int = System.identityHashCode(classLoader)
+    konst identityHashCode: Int = System.identityHashCode(classLoader)
 
     // Temporary strong reference to the class loader to ensure it won't get GC'd while we're inserting this box into the map
     var temporaryStrongRef: ClassLoader? = classLoader
@@ -45,22 +45,22 @@ private class WeakClassLoaderBox(classLoader: ClassLoader) {
 }
 
 internal fun Class<*>.getOrCreateModule(): RuntimeModuleData {
-    val classLoader = this.safeClassLoader
+    konst classLoader = this.safeClassLoader
 
-    val key = WeakClassLoaderBox(classLoader)
+    konst key = WeakClassLoaderBox(classLoader)
 
-    val cached = moduleByClassLoader[key]
+    konst cached = moduleByClassLoader[key]
     if (cached != null) {
         cached.get()?.let { return it }
         moduleByClassLoader.remove(key, cached)
     }
 
-    val module = RuntimeModuleData.create(classLoader)
+    konst module = RuntimeModuleData.create(classLoader)
     try {
         while (true) {
-            val ref = moduleByClassLoader.putIfAbsent(key, WeakReference(module)) ?: return module
+            konst ref = moduleByClassLoader.putIfAbsent(key, WeakReference(module)) ?: return module
 
-            val result = ref.get()
+            konst result = ref.get()
             if (result != null) return result
             moduleByClassLoader.remove(key, ref)
         }

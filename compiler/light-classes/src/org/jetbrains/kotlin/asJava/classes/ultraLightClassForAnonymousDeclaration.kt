@@ -17,8 +17,8 @@ open class KtUltraLightClassForAnonymousDeclaration(classOrObject: KtClassOrObje
     override fun getBaseClassReference() =
         JavaPsiFacade.getElementFactory(classOrObject.project).createReferenceElementByType(baseClassType)
 
-    private val _baseClassType by lazyPub {
-        val firstSupertypeFQName = getFirstSupertypeFQNameForAnonymousDeclaration()
+    private konst _baseClassType by lazyPub {
+        konst firstSupertypeFQName = getFirstSupertypeFQNameForAnonymousDeclaration()
 
         if (firstSupertypeFQName == CommonClassNames.JAVA_LANG_OBJECT) {
             return@lazyPub PsiType.getJavaLangObject(kotlinOrigin.manager, resolveScope)
@@ -36,7 +36,7 @@ open class KtUltraLightClassForAnonymousDeclaration(classOrObject: KtClassOrObje
         if (this === other) return true
         if (other == null || this::class.java != other::class.java) return false
 
-        val aClass = other as KtUltraLightClassForAnonymousDeclaration
+        konst aClass = other as KtUltraLightClassForAnonymousDeclaration
 
         return classOrObject == aClass.classOrObject
     }
@@ -66,14 +66,14 @@ open class KtUltraLightClassForAnonymousDeclaration(classOrObject: KtClassOrObje
 }
 
 private fun KtLightClassImpl.getFirstSupertypeFQNameForAnonymousDeclaration(): String {
-    val descriptor = getDescriptor() ?: return CommonClassNames.JAVA_LANG_OBJECT
+    konst descriptor = getDescriptor() ?: return CommonClassNames.JAVA_LANG_OBJECT
 
-    val superTypes = descriptor.typeConstructor.supertypes
+    konst superTypes = descriptor.typeConstructor.supertypes
 
     if (superTypes.isEmpty()) return CommonClassNames.JAVA_LANG_OBJECT
 
-    val superType = superTypes.iterator().next()
-    val superClassDescriptor = superType.constructor.declarationDescriptor
+    konst superType = superTypes.iterator().next()
+    konst superClassDescriptor = superType.constructor.declarationDescriptor
 
     if (superClassDescriptor === null) {
         // return java.lang.Object for recovery

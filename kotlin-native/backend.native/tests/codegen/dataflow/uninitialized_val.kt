@@ -3,12 +3,12 @@
  * that can be found in the LICENSE file.
  */
 
-package codegen.dataflow.uninitialized_val
+package codegen.dataflow.uninitialized_konst
 
 import kotlin.test.*
 
 fun foo(b: Boolean): Int {
-    val x: Int
+    konst x: Int
     if (b) {
         x = 1
     } else {
@@ -19,7 +19,7 @@ fun foo(b: Boolean): Int {
 }
 
 @Test fun runTest() {
-    val uninitializedUnused: Int
+    konst uninitializedUnused: Int
 
     println(foo(true))
     println(foo(false))

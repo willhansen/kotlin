@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-data class A(val x: Int) {
+data class A(konst x: Int) {
     fun toArray(): IntArray =
             intArrayOf(x)
 

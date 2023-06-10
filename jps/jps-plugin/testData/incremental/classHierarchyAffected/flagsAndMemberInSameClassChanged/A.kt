@@ -1,3 +1,3 @@
 open class A {
-    val x: Any = "A.x"
+    konst x: Any = "A.x"
 }

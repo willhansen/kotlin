@@ -37,13 +37,13 @@ abstract class AbstractLLFirPreresolvedReversedDiagnosticCompilerTestDataTest : 
 
 internal class ReversedDiagnosticsConfigurator(testServices: TestServices) : MetaTestConfigurator(testServices) {
     override fun transformTestDataPath(testDataFileName: String): String {
-        val reversedTestDataFileName = testDataFileName.replaceFirst(".", ".reversed.")
+        konst reversedTestDataFileName = testDataFileName.replaceFirst(".", ".reversed.")
         return if (File(reversedTestDataFileName).exists()) reversedTestDataFileName else testDataFileName
     }
 }
 
 internal class FirReversedSuppressor(testServices: TestServices) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer> get() = listOf(Companion)
+    override konst directiveContainers: List<DirectivesContainer> get() = listOf(Companion)
 
     override fun suppressIfNeeded(failedAssertions: List<WrappedException>): List<WrappedException> {
         if (!isDisabled()) {
@@ -64,7 +64,7 @@ internal class FirReversedSuppressor(testServices: TestServices) : AfterAnalysis
     private fun isDisabled(): Boolean = IGNORE_REVERSED_RESOLVE in testServices.moduleStructure.allDirectives
 
     companion object : SimpleDirectivesContainer() {
-        val IGNORE_REVERSED_RESOLVE by directive("Temporary disables reversed resolve checks until the issue is fixed")
+        konst IGNORE_REVERSED_RESOLVE by directive("Temporary disables reversed resolve checks until the issue is fixed")
     }
 }
 
@@ -72,13 +72,13 @@ class ReversedFirIdenticalChecker(testServices: TestServices) : AbstractFirIdent
     override fun checkTestDataFile(testDataFile: File) {
         if (".reversed." !in testDataFile.path) return
 
-        val originalFile = helper.getClassicFileToCompare(testDataFile).path.replace(".reversed", "").let(::File)
-        val baseFile = originalFile.llFirTestDataFile.takeIf(File::exists)
+        konst originalFile = helper.getClassicFileToCompare(testDataFile).path.replace(".reversed", "").let(::File)
+        konst baseFile = originalFile.llFirTestDataFile.takeIf(File::exists)
             ?: originalFile.firTestDataFile.takeIf(File::exists)
             ?: originalFile
 
-        val baseContent = helper.readContent(baseFile, trimLines = false)
-        val reversedFirContent = helper.readContent(testDataFile, trimLines = false)
+        konst baseContent = helper.readContent(baseFile, trimLines = false)
+        konst reversedFirContent = helper.readContent(testDataFile, trimLines = false)
         if (baseContent == reversedFirContent) {
             testServices.assertions.fail {
                 "`${testDataFile.name}` and `${baseFile.name}` are identical. Remove `$testDataFile`."

@@ -6,11 +6,11 @@ class Foo {
 }
 
 // FILE: delegates.kt
-inline class DelegateFactory(val default: Int) {
+inline class DelegateFactory(konst default: Int) {
     operator fun provideDelegate(thisRef: Any?, prop: Any?) = Delegate(default)
 }
 
-inline class Delegate(val default: Int) {
+inline class Delegate(konst default: Int) {
 
     operator fun getValue(thisRef: Any?, prop: Any?) =
         (thisRef as? Foo)?.a ?: default

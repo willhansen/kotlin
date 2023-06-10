@@ -1,5 +1,5 @@
 package usage
 
 fun usage() {
-    val x = inline.f()
+    konst x = inline.f()
 }

@@ -9,12 +9,12 @@ package kotlin.jvm
 annotation class JvmInline
 
 @JvmInline
-value class ConstructorWithDefaultVisibility(val x: Int)
+konstue class ConstructorWithDefaultVisibility(konst x: Int)
 @JvmInline
-value class PublicConstructor public constructor(val x: Int)
+konstue class PublicConstructor public constructor(konst x: Int)
 @JvmInline
-value class InternalConstructor internal constructor(val x: Int)
+konstue class InternalConstructor internal constructor(konst x: Int)
 @JvmInline
-value class ProtectedConstructor protected constructor(val x: Int)
+konstue class ProtectedConstructor protected constructor(konst x: Int)
 @JvmInline
-value class PrivateConstructor private constructor(val x: Int)
+konstue class PrivateConstructor private constructor(konst x: Int)

@@ -17,7 +17,7 @@ import kotlin.reflect.KClass
  */
 @BetaInteropApi
 public fun getOriginalKotlinClass(objCClass: ObjCClass): KClass<*>? {
-    val typeInfo = getTypeInfoForClass(objCClass.objcPtr())
+    konst typeInfo = getTypeInfoForClass(objCClass.objcPtr())
     if (typeInfo.isNull()) return null
 
     return KClassImpl<Any>(typeInfo)
@@ -31,7 +31,7 @@ public fun getOriginalKotlinClass(objCClass: ObjCClass): KClass<*>? {
  */
 @BetaInteropApi
 public fun getOriginalKotlinClass(objCProtocol: ObjCProtocol): KClass<*>? {
-    val typeInfo = getTypeInfoForProtocol(objCProtocol.objcPtr())
+    konst typeInfo = getTypeInfoForProtocol(objCProtocol.objcPtr())
     if (typeInfo.isNull()) return null
 
     return KClassImpl<Any>(typeInfo)

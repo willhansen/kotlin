@@ -8,7 +8,7 @@ import java.lang.invoke.*
 fun cond() = true
 
 fun test(mh: MethodHandle?, mt: MethodType?) {
-    val z = if (cond()) mh else mt
+    konst z = if (cond()) mh else mt
 }
 
 fun box(): String {

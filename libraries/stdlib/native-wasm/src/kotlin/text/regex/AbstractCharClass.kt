@@ -34,8 +34,8 @@ import kotlin.native.ObsoleteNativeApi
 /**
  * Unicode category (i.e. Ll, Lu).
  */
-internal open class UnicodeCategory(protected val category: Int) : AbstractCharClass() {
-    override fun contains(ch: Int): Boolean = alt xor (ch.toChar().category.value == category)
+internal open class UnicodeCategory(protected konst category: Int) : AbstractCharClass() {
+    override fun contains(ch: Int): Boolean = alt xor (ch.toChar().category.konstue == category)
 }
 
 /**
@@ -43,7 +43,7 @@ internal open class UnicodeCategory(protected val category: Int) : AbstractCharC
  */
 internal class UnicodeCategoryScope(category: Int) : UnicodeCategory(category) {
     override fun contains(ch: Int): Boolean {
-        return alt xor (((category shr ch.toChar().category.value) and 1) != 0)
+        return alt xor (((category shr ch.toChar().category.konstue) and 1) != 0)
     }
 }
 
@@ -63,7 +63,7 @@ internal abstract class AbstractCharClass : SpecialToken() {
     /**
      * For each unpaired surrogate char indicates whether it is contained in this char class.
      */
-    internal val lowHighSurrogates = BitSet(SURROGATE_CARDINALITY) // Bit set for surrogates?
+    internal konst lowHighSurrogates = BitSet(SURROGATE_CARDINALITY) // Bit set for surrogates?
 
     /**
      * Indicates if this class may contain supplementary Unicode codepoints.
@@ -80,7 +80,7 @@ internal abstract class AbstractCharClass : SpecialToken() {
      * Returns BitSet representing this character class or `null`
      * if this character class does not have character representation;
      */
-    open internal val bits: BitSet?
+    open internal konst bits: BitSet?
         get() = null
 
     fun hasLowHighSurrogates(): Boolean {
@@ -90,13 +90,13 @@ internal abstract class AbstractCharClass : SpecialToken() {
             lowHighSurrogates.nextSetBit(0) != -1
     }
 
-    override val type: Type = Type.CHARCLASS
+    override konst type: Type = Type.CHARCLASS
 
-    open val instance: AbstractCharClass
+    open konst instance: AbstractCharClass
         get() = this
 
 
-    private val surrogates_ = AtomicReference<AbstractCharClass?>(null)
+    private konst surrogates_ = AtomicReference<AbstractCharClass?>(null)
     /**
      * Returns a char class that contains only unpaired surrogate chars from this char class.
      *
@@ -112,13 +112,13 @@ internal abstract class AbstractCharClass : SpecialToken() {
      * The two nodes are then combined in [CompositeRangeSet] node to fully represent this char class.
      */
     fun classWithSurrogates(): AbstractCharClass {
-        surrogates_.value?.let {
+        surrogates_.konstue?.let {
             return it
         }
-        val surrogates = lowHighSurrogates
-        val result = object : AbstractCharClass() {
+        konst surrogates = lowHighSurrogates
+        konst result = object : AbstractCharClass() {
             override fun contains(ch: Int): Boolean {
-                val index = ch - Char.MIN_SURROGATE.toInt()
+                konst index = ch - Char.MIN_SURROGATE.toInt()
 
                 return if (index >= 0 && index < AbstractCharClass.SURROGATE_CARDINALITY) {
                     this.altSurrogates xor surrogates[index]
@@ -131,7 +131,7 @@ internal abstract class AbstractCharClass : SpecialToken() {
         result.altSurrogates = this.altSurrogates
         result.mayContainSupplCodepoints = this.mayContainSupplCodepoints
         surrogates_.compareAndSet(null, result.freeze())
-        return surrogates_.value!!
+        return surrogates_.konstue!!
     }
 
 
@@ -143,11 +143,11 @@ internal abstract class AbstractCharClass : SpecialToken() {
     // We cannot cache this class as we've done with surrogates above because
     // here is a circular reference between it and AbstractCharClass.
     fun classWithoutSurrogates(): AbstractCharClass {
-        val result = object : AbstractCharClass() {
+        konst result = object : AbstractCharClass() {
             override fun contains(ch: Int): Boolean {
-                val index = ch - Char.MIN_SURROGATE.toInt()
+                konst index = ch - Char.MIN_SURROGATE.toInt()
 
-                val containslHS = if (index >= 0 && index < AbstractCharClass.SURROGATE_CARDINALITY)
+                konst containslHS = if (index >= 0 && index < AbstractCharClass.SURROGATE_CARDINALITY)
                     this.altSurrogates xor this@AbstractCharClass.lowHighSurrogates.get(index)
                 else
                     false
@@ -168,8 +168,8 @@ internal abstract class AbstractCharClass : SpecialToken() {
      * Although this method will not alternate all the already set characters,
      * just overall meaning of the class.
      */
-    fun setNegative(value: Boolean): AbstractCharClass {
-        if (alt xor value) {
+    fun setNegative(konstue: Boolean): AbstractCharClass {
+        if (alt xor konstue) {
             alt = !alt
             altSurrogates = !altSurrogates
 
@@ -383,12 +383,12 @@ internal abstract class AbstractCharClass : SpecialToken() {
                     if (end >= Char.MIN_SUPPLEMENTARY_CODE_POINT) {
                         mayContainSupplCodepoints = true
                     }
-                    val minSurrogate = Char.MIN_SURROGATE.toInt()
-                    val maxSurrogate = Char.MAX_SURROGATE.toInt()
+                    konst minSurrogate = Char.MIN_SURROGATE.toInt()
+                    konst maxSurrogate = Char.MAX_SURROGATE.toInt()
                     // There is an intersection with surrogate characters.
                     if (end >= minSurrogate && start <= maxSurrogate && start <= end) {
-                        val surrogatesStart = maxOf(start, minSurrogate) - minSurrogate
-                        val surrogatesEnd = minOf(end, maxSurrogate) - minSurrogate
+                        konst surrogatesStart = maxOf(start, minSurrogate) - minSurrogate
+                        konst surrogatesEnd = minOf(end, maxSurrogate) - minSurrogate
                         lowHighSurrogates.set(surrogatesStart..surrogatesEnd)
                     }
                 }
@@ -402,14 +402,14 @@ internal abstract class AbstractCharClass : SpecialToken() {
     }
 
     internal class CachedCategoryScope(
-            val category: Int,
-            val mayContainSupplCodepoints: Boolean,
-            val containsAllSurrogates: Boolean = false) : CachedCharClass() {
+            konst category: Int,
+            konst mayContainSupplCodepoints: Boolean,
+            konst containsAllSurrogates: Boolean = false) : CachedCharClass() {
         init {
             initValues()
         }
         override fun computeValue(): AbstractCharClass {
-            val result = UnicodeCategoryScope(category)
+            konst result = UnicodeCategoryScope(category)
             if (containsAllSurrogates) {
                 result.lowHighSurrogates.set(0, SURROGATE_CARDINALITY)
             }
@@ -420,14 +420,14 @@ internal abstract class AbstractCharClass : SpecialToken() {
     }
 
     internal class CachedCategory(
-            val category: Int,
-            val mayContainSupplCodepoints: Boolean,
-            val containsAllSurrogates: Boolean = false) : CachedCharClass() {
+            konst category: Int,
+            konst mayContainSupplCodepoints: Boolean,
+            konst containsAllSurrogates: Boolean = false) : CachedCharClass() {
         init {
             initValues()
         }
         override fun computeValue(): AbstractCharClass {
-            val result = UnicodeCategory(category)
+            konst result = UnicodeCategory(category)
             if (containsAllSurrogates) {
                 result.lowHighSurrogates.set(0, SURROGATE_CARDINALITY)
             }
@@ -438,13 +438,13 @@ internal abstract class AbstractCharClass : SpecialToken() {
 
     companion object {
         //Char.MAX_SURROGATE - Char.MIN_SURROGATE + 1
-        const val SURROGATE_CARDINALITY = 2048
+        const konst SURROGATE_CARDINALITY = 2048
 
         /**
          * Character classes.
          * See http://www.unicode.org/reports/tr18/, http://www.unicode.org/Public/4.1.0/ucd/Blocks.txt
          */
-        enum class CharClasses(val regexName : String, val factory: () -> CachedCharClass) {
+        enum class CharClasses(konst regexName : String, konst factory: () -> CachedCharClass) {
             LOWER("Lower", ::CachedLower),
             UPPER("Upper", ::CachedUpper),
             ASCII("ASCII", ::CachedASCII),
@@ -590,55 +590,55 @@ internal abstract class AbstractCharClass : SpecialToken() {
             HALFWIDTHANDFULLWIDTHFORMS("HalfwidthandFullwidthForms", { CachedRange(0xFF00, 0xFFEF) }),
             ALL("all", { CachedRange(0x00, 0x10FFFF) }),
             SPECIALS("Specials", ::CachedSpecialsBlock),
-            CN("Cn", { CachedCategory(CharCategory.UNASSIGNED.value, true) }),
+            CN("Cn", { CachedCategory(CharCategory.UNASSIGNED.konstue, true) }),
             ISL("IsL", { CachedCategoryScope(0x3E, true) }),
-            LU("Lu", { CachedCategory(CharCategory.UPPERCASE_LETTER.value, true) }),
-            LL("Ll", { CachedCategory(CharCategory.LOWERCASE_LETTER.value, true) }),
-            LT("Lt", { CachedCategory(CharCategory.TITLECASE_LETTER.value, false) }),
-            LM("Lm", { CachedCategory(CharCategory.MODIFIER_LETTER.value, false) }),
-            LO("Lo", { CachedCategory(CharCategory.OTHER_LETTER.value, true) }),
+            LU("Lu", { CachedCategory(CharCategory.UPPERCASE_LETTER.konstue, true) }),
+            LL("Ll", { CachedCategory(CharCategory.LOWERCASE_LETTER.konstue, true) }),
+            LT("Lt", { CachedCategory(CharCategory.TITLECASE_LETTER.konstue, false) }),
+            LM("Lm", { CachedCategory(CharCategory.MODIFIER_LETTER.konstue, false) }),
+            LO("Lo", { CachedCategory(CharCategory.OTHER_LETTER.konstue, true) }),
             ISM("IsM", { CachedCategoryScope(0x1C0, true) }),
-            MN("Mn", { CachedCategory(CharCategory.NON_SPACING_MARK.value, true) }),
-            ME("Me", { CachedCategory(CharCategory.ENCLOSING_MARK.value, false) }),
-            MC("Mc", { CachedCategory(CharCategory.COMBINING_SPACING_MARK.value, true) }),
+            MN("Mn", { CachedCategory(CharCategory.NON_SPACING_MARK.konstue, true) }),
+            ME("Me", { CachedCategory(CharCategory.ENCLOSING_MARK.konstue, false) }),
+            MC("Mc", { CachedCategory(CharCategory.COMBINING_SPACING_MARK.konstue, true) }),
             N("N", { CachedCategoryScope(0xE00, true) }),
-            ND("Nd", { CachedCategory(CharCategory.DECIMAL_DIGIT_NUMBER.value, true) }),
-            NL("Nl", { CachedCategory(CharCategory.LETTER_NUMBER.value, true) }),
-            NO("No", { CachedCategory(CharCategory.OTHER_NUMBER.value, true) }),
+            ND("Nd", { CachedCategory(CharCategory.DECIMAL_DIGIT_NUMBER.konstue, true) }),
+            NL("Nl", { CachedCategory(CharCategory.LETTER_NUMBER.konstue, true) }),
+            NO("No", { CachedCategory(CharCategory.OTHER_NUMBER.konstue, true) }),
             ISZ("IsZ", { CachedCategoryScope(0x7000, false) }),
-            ZS("Zs", { CachedCategory(CharCategory.SPACE_SEPARATOR.value, false) }),
-            ZL("Zl", { CachedCategory(CharCategory.LINE_SEPARATOR.value, false) }),
-            ZP("Zp", { CachedCategory(CharCategory.PARAGRAPH_SEPARATOR.value, false) }),
+            ZS("Zs", { CachedCategory(CharCategory.SPACE_SEPARATOR.konstue, false) }),
+            ZL("Zl", { CachedCategory(CharCategory.LINE_SEPARATOR.konstue, false) }),
+            ZP("Zp", { CachedCategory(CharCategory.PARAGRAPH_SEPARATOR.konstue, false) }),
             ISC("IsC", { CachedCategoryScope(0xF0000, true, true) }),
-            CC("Cc", { CachedCategory(CharCategory.CONTROL.value, false) }),
-            CF("Cf", { CachedCategory(CharCategory.FORMAT.value, true) }),
-            CO("Co", { CachedCategory(CharCategory.PRIVATE_USE.value, true) }),
-            CS("Cs", { CachedCategory(CharCategory.SURROGATE.value, false, true) }),
-            ISP("IsP", { CachedCategoryScope((1 shl CharCategory.DASH_PUNCTUATION.value)
-                    or (1 shl CharCategory.START_PUNCTUATION.value)
-                    or (1 shl CharCategory.END_PUNCTUATION.value)
-                    or (1 shl CharCategory.CONNECTOR_PUNCTUATION.value)
-                    or (1 shl CharCategory.OTHER_PUNCTUATION.value)
-                    or (1 shl CharCategory.INITIAL_QUOTE_PUNCTUATION.value)
-                    or (1 shl CharCategory.FINAL_QUOTE_PUNCTUATION.value), true) }),
-            PD("Pd", { CachedCategory(CharCategory.DASH_PUNCTUATION.value, false) }),
-            PS("Ps", { CachedCategory(CharCategory.START_PUNCTUATION.value, false) }),
-            PE("Pe", { CachedCategory(CharCategory.END_PUNCTUATION.value, false) }),
-            PC("Pc", { CachedCategory(CharCategory.CONNECTOR_PUNCTUATION.value, false) }),
-            PO("Po", { CachedCategory(CharCategory.OTHER_PUNCTUATION.value, true) }),
+            CC("Cc", { CachedCategory(CharCategory.CONTROL.konstue, false) }),
+            CF("Cf", { CachedCategory(CharCategory.FORMAT.konstue, true) }),
+            CO("Co", { CachedCategory(CharCategory.PRIVATE_USE.konstue, true) }),
+            CS("Cs", { CachedCategory(CharCategory.SURROGATE.konstue, false, true) }),
+            ISP("IsP", { CachedCategoryScope((1 shl CharCategory.DASH_PUNCTUATION.konstue)
+                    or (1 shl CharCategory.START_PUNCTUATION.konstue)
+                    or (1 shl CharCategory.END_PUNCTUATION.konstue)
+                    or (1 shl CharCategory.CONNECTOR_PUNCTUATION.konstue)
+                    or (1 shl CharCategory.OTHER_PUNCTUATION.konstue)
+                    or (1 shl CharCategory.INITIAL_QUOTE_PUNCTUATION.konstue)
+                    or (1 shl CharCategory.FINAL_QUOTE_PUNCTUATION.konstue), true) }),
+            PD("Pd", { CachedCategory(CharCategory.DASH_PUNCTUATION.konstue, false) }),
+            PS("Ps", { CachedCategory(CharCategory.START_PUNCTUATION.konstue, false) }),
+            PE("Pe", { CachedCategory(CharCategory.END_PUNCTUATION.konstue, false) }),
+            PC("Pc", { CachedCategory(CharCategory.CONNECTOR_PUNCTUATION.konstue, false) }),
+            PO("Po", { CachedCategory(CharCategory.OTHER_PUNCTUATION.konstue, true) }),
             ISS("IsS", { CachedCategoryScope(0x7E000000, true) }),
-            SM("Sm", { CachedCategory(CharCategory.MATH_SYMBOL.value, true) }),
-            SC("Sc", { CachedCategory(CharCategory.CURRENCY_SYMBOL.value, false) }),
-            SK("Sk", { CachedCategory(CharCategory.MODIFIER_SYMBOL.value, false) }),
-            SO("So", { CachedCategory(CharCategory.OTHER_SYMBOL.value, true) }),
-            PI("Pi", { CachedCategory(CharCategory.INITIAL_QUOTE_PUNCTUATION.value, false) }),
-            PF("Pf", { CachedCategory(CharCategory.FINAL_QUOTE_PUNCTUATION.value, false)  })
+            SM("Sm", { CachedCategory(CharCategory.MATH_SYMBOL.konstue, true) }),
+            SC("Sc", { CachedCategory(CharCategory.CURRENCY_SYMBOL.konstue, false) }),
+            SK("Sk", { CachedCategory(CharCategory.MODIFIER_SYMBOL.konstue, false) }),
+            SO("So", { CachedCategory(CharCategory.OTHER_SYMBOL.konstue, true) }),
+            PI("Pi", { CachedCategory(CharCategory.INITIAL_QUOTE_PUNCTUATION.konstue, false) }),
+            PF("Pf", { CachedCategory(CharCategory.FINAL_QUOTE_PUNCTUATION.konstue, false)  })
         }
 
-        private val classCache = Array<AtomicReference<CachedCharClass?>>(CharClasses.values().size, {
+        private konst classCache = Array<AtomicReference<CachedCharClass?>>(CharClasses.konstues().size, {
             AtomicReference<CachedCharClass?>(null)
         })
-        private val classCacheMap = CharClasses.values().associate { it -> it.regexName to it }
+        private konst classCacheMap = CharClasses.konstues().associate { it -> it.regexName to it }
 
         fun intersects(ch1: Int, ch2: Int): Boolean = ch1 == ch2
         fun intersects(cc: AbstractCharClass, ch: Int): Boolean = cc.contains(ch)
@@ -651,10 +651,10 @@ internal abstract class AbstractCharClass : SpecialToken() {
         }
 
         fun getPredefinedClass(name: String, negative: Boolean): AbstractCharClass {
-            val charClass = classCacheMap[name] ?: throw PatternSyntaxException("No such character class")
-            val cachedClass = classCache[charClass.ordinal].value ?: run {
+            konst charClass = classCacheMap[name] ?: throw PatternSyntaxException("No such character class")
+            konst cachedClass = classCache[charClass.ordinal].konstue ?: run {
                 classCache[charClass.ordinal].compareAndExchange(null, charClass.factory().freeze())
-                classCache[charClass.ordinal].value!!
+                classCache[charClass.ordinal].konstue!!
             }
             return cachedClass.getValue(negative)
         }

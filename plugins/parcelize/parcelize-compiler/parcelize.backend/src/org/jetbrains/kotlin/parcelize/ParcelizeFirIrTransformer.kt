@@ -37,15 +37,15 @@ class ParcelizeFirIrTransformer(
         if (!declaration.isParcelize || declaration.modality == Modality.SEALED)
             return
 
-        val parcelableProperties = declaration.parcelableProperties
+        konst parcelableProperties = declaration.parcelableProperties
 
         // If the companion extends Parceler, it can override parts of the generated implementation.
-        val parcelerObject = declaration.companionObject()?.takeIf {
+        konst parcelerObject = declaration.companionObject()?.takeIf {
             it.isSubclassOfFqName(PARCELER_FQN.asString())
         }
 
         for (function in declaration.functions) {
-            val origin = function.origin
+            konst origin = function.origin
             if (origin !is GeneratedByPlugin || origin.pluginKey != ParcelizePluginKey) continue
             when (function.name.identifier) {
                 ParcelizeSyntheticComponent.ComponentKind.DESCRIBE_CONTENTS.methodName -> {
@@ -53,8 +53,8 @@ class ParcelizeFirIrTransformer(
                 }
                 ParcelizeSyntheticComponent.ComponentKind.WRITE_TO_PARCEL.methodName -> {
                     function.apply {
-                        val receiverParameter = dispatchReceiverParameter!!
-                        val (parcelParameter, flagsParameter) = function.valueParameters
+                        konst receiverParameter = dispatchReceiverParameter!!
+                        konst (parcelParameter, flagsParameter) = function.konstueParameters
 
                         // We need to defer the construction of the writer, since it may refer to the [writeToParcel] methods in other
                         // @Parcelize classes in the current module, which might not be constructed yet at this point.

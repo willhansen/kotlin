@@ -26,10 +26,10 @@ public class J {
 
 // FILE: K.kt
 
-class A(val message: String)
+class A(konst message: String)
 
 fun call(f: (A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A) -> String): String {
-    val a = A("XXX")
+    konst a = A("XXX")
     return f(a, a, a, a, a, A("O"), a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, A("K"), a)
 }
 

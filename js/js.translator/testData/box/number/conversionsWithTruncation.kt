@@ -22,7 +22,7 @@ fun box(): String {
     assertEquals('\u0419', (-654311.0).toChar())
     assertEquals('\u0419', (-654311.0f).toChar())
 
-    val longX: Long = 9223372034707292481L
+    konst longX: Long = 9223372034707292481L
     assertEquals("9223372034707292481", longX.toString())
 
     assertEquals(-2147483327, longX.toInt())
@@ -30,7 +30,7 @@ fun box(): String {
     assertEquals(65, longX.toByte())
     assertEquals('\u0141', longX.toChar())
 
-    val intX: Int = longX.toInt()
+    konst intX: Int = longX.toInt()
     assertEquals(321, intX.toShort())
     assertEquals(65, intX.toByte())
 

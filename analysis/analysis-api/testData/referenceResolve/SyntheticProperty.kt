@@ -15,5 +15,5 @@ fun JavaClass.foo(javaClass: JavaClass) {
 // FILE: JavaClass.java
 public class JavaClass {
     public int getSomething() { return 1; }
-    public void setSomething(int value) {}
+    public void setSomething(int konstue) {}
 }

@@ -61,11 +61,11 @@ public final class ParametersList implements Cloneable {
     }
 
     @NotNull
-    public Map<String, String> getProperties(@NonNls String valueIfMissing) {
+    public Map<String, String> getProperties(@NonNls String konstueIfMissing) {
         Map<String, String> result = new LinkedHashMap<>();
         JBIterable<Matcher> matchers = JBIterable.from(myParameters).map(PROPERTY_PATTERN::matcher).filter(Matcher::matches);
         for (Matcher matcher : matchers) {
-            result.put(matcher.group(1), StringUtil.notNullize(matcher.group(2), valueIfMissing));
+            result.put(matcher.group(1), StringUtil.notNullize(matcher.group(2), konstueIfMissing));
         }
         return result;
     }
@@ -179,14 +179,14 @@ public final class ParametersList implements Cloneable {
     }
 
     /**
-     * Keeps the {@code <propertyName>} property if defined; or defines it with {@code System.getProperty()} as a value if present.
+     * Keeps the {@code <propertyName>} property if defined; or defines it with {@code System.getProperty()} as a konstue if present.
      */
     public void defineSystemProperty(@NotNull @NonNls String propertyName) {
         defineProperty(propertyName, System.getProperty(propertyName));
     }
 
     /**
-     * Keeps the {@code <propertyName>} property if defined; otherwise appends the new one ignoring null values.
+     * Keeps the {@code <propertyName>} property if defined; otherwise appends the new one ignoring null konstues.
      */
     public void defineProperty(@NotNull @NonNls String propertyName, @Nullable @NonNls String propertyValue) {
         if (propertyValue == null) return;
@@ -194,12 +194,12 @@ public final class ParametersList implements Cloneable {
         @NlsSafe String prefix = "-D" + propertyName + "=";
         int index = indexOfParameter(o -> o.equals(exact) || o.startsWith(prefix));
         if (index > -1) return;
-        String value = propertyValue.isEmpty() ? exact : prefix + expandMacros(propertyValue);
-        myParameters.add(value);
+        String konstue = propertyValue.isEmpty() ? exact : prefix + expandMacros(propertyValue);
+        myParameters.add(konstue);
     }
 
     /**
-     * Adds {@code -D<propertyName>} to the list; replaces the value of the last property if defined.
+     * Adds {@code -D<propertyName>} to the list; replaces the konstue of the last property if defined.
      */
     public void addProperty(@NotNull @NonNls String propertyName) {
         @NlsSafe String exact = "-D" + propertyName;
@@ -208,20 +208,20 @@ public final class ParametersList implements Cloneable {
     }
 
     /**
-     * Adds {@code -D<propertyName>=<propertyValue>} to the list ignoring null values;
-     * replaces the value of the last property if defined.
+     * Adds {@code -D<propertyName>=<propertyValue>} to the list ignoring null konstues;
+     * replaces the konstue of the last property if defined.
      */
     public void addProperty(@NotNull @NonNls String propertyName, @Nullable @NonNls String propertyValue) {
         if (propertyValue == null) return;
         @NlsSafe String exact = "-D" + propertyName;
         @NlsSafe String prefix = "-D" + propertyName + "=";
-        String value = propertyValue.isEmpty() ? exact : prefix + expandMacros(propertyValue);
-        replaceOrAddAt(value, myParameters.size(), o -> o.equals(exact) || o.startsWith(prefix));
+        String konstue = propertyValue.isEmpty() ? exact : prefix + expandMacros(propertyValue);
+        replaceOrAddAt(konstue, myParameters.size(), o -> o.equals(exact) || o.startsWith(prefix));
     }
 
     /**
-     * Adds {@code -D<propertyName>=<propertyValue>} to the list ignoring null, empty and spaces-only values;
-     * replaces the value of the last property if defined.
+     * Adds {@code -D<propertyName>=<propertyValue>} to the list ignoring null, empty and spaces-only konstues;
+     * replaces the konstue of the last property if defined.
      */
     public void addNotEmptyProperty(@NotNull @NonNls String propertyName, @Nullable @NonNls String propertyValue) {
         if (StringUtil.isEmptyOrSpaces(propertyValue)) return;
@@ -264,8 +264,8 @@ public final class ParametersList implements Cloneable {
         return ContainerUtil.lastIndexOf(myParameters, condition);
     }
 
-    public void set(int ind, @NotNull @NonNls String value) {
-        myParameters.set(ind, value);
+    public void set(int ind, @NotNull @NonNls String konstue) {
+        myParameters.set(ind, konstue);
     }
 
     public String get(int ind) {
@@ -277,9 +277,9 @@ public final class ParametersList implements Cloneable {
         return myParameters.size() > 0 ? myParameters.get(myParameters.size() - 1) : null;
     }
 
-    public void add(@NotNull @NonNls String name, @NotNull @NonNls String value) {
+    public void add(@NotNull @NonNls String name, @NotNull @NonNls String konstue) {
         myParameters.add(name); // do not expand macros in parameter name
-        add(value);
+        add(konstue);
     }
 
     public void addAll(@NonNls String ... parameters) {
@@ -339,11 +339,11 @@ public final class ParametersList implements Cloneable {
         Matcher matcher = MACRO_PATTERN.matcher(text);
         StringBuilder sb = null;
         while (matcher.find(start)) {
-            String value = macroMap.get(matcher.group(1));
-            if (value != null) {
+            String konstue = macroMap.get(matcher.group(1));
+            if (konstue != null) {
                 if (sb == null) sb = new StringBuilder(2 * text.length()).append(text, 0, matcher.start());
                 else sb.append(text, start, matcher.start());
-                sb.append(value);
+                sb.append(konstue);
                 start = matcher.end();
             }
             else {

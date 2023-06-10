@@ -21,38 +21,38 @@ class DependenciesVerificationMetadataTest {
     @JacksonXmlRootElement(localName = "verification-metadata")
     private data class VerificationMetadata(
         @field:JacksonXmlElementWrapper(localName = "components")
-        val components: List<Component> = listOf()
+        konst components: List<Component> = listOf()
     )
 
     private data class Component(
         @field:JacksonXmlProperty(isAttribute = true)
-        val group: String,
+        konst group: String,
         @field:JacksonXmlProperty(isAttribute = true)
-        val name: String,
+        konst name: String,
         @field:JacksonXmlProperty(isAttribute = true)
-        val version: String,
+        konst version: String,
         @field:JacksonXmlElementWrapper(useWrapping = false)
-        val artifact: List<Artifact>,
+        konst artifact: List<Artifact>,
     )
 
     private data class Artifact(
         @field:JacksonXmlProperty(isAttribute = true)
-        val name: String,
-        val md5: Hash?,
-        val sha256: Hash?
+        konst name: String,
+        konst md5: Hash?,
+        konst sha256: Hash?
     )
 
-    private data class Hash(@field:JacksonXmlProperty(isAttribute = true) val value: String)
+    private data class Hash(@field:JacksonXmlProperty(isAttribute = true) konst konstue: String)
 
     @Test
     fun dependenciesHasValidHashes() {
-        val mapper = XmlMapper()
+        konst mapper = XmlMapper()
             .apply {
                 configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 registerKotlinModule()
             }
-        val verificationMetadata = mapper.readValue<VerificationMetadata>(File("gradle/verification-metadata.xml"))
-        val fails = mutableListOf<String>()
+        konst verificationMetadata = mapper.readValue<VerificationMetadata>(File("gradle/verification-metadata.xml"))
+        konst fails = mutableListOf<String>()
 
         verificationMetadata.components.forEach { component ->
             component.artifact.forEach { artifact ->

@@ -4,11 +4,11 @@
 // WITH_STDLIB
 
 interface KCallable {
-    val returnType: String
+    konst returnType: String
 }
 
 interface KCallableImpl : KCallable {
-    override val returnType: String
+    override konst returnType: String
         get() = "OK"
 }
 

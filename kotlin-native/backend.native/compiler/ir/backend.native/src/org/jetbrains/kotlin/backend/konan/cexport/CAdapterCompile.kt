@@ -13,7 +13,7 @@ import java.io.File
  * Fourth phase of C export: compile runtime bindings to bitcode.
  */
 fun produceCAdapterBitcode(clang: ClangArgs, cppFile: File, bitcodeFile: File) {
-    val clangCommand = clang.clangCXX(
+    konst clangCommand = clang.clangCXX(
             "-std=c++17",
             cppFile.absoluteFile.normalize().path,
             "-emit-llvm", "-c",

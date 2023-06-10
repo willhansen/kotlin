@@ -18,8 +18,8 @@ class KtFe10ArrayAccessReference(expression: KtArrayAccessExpression) : KtArrayA
     }
 
     override fun getTargetDescriptors(context: BindingContext): Collection<DeclarationDescriptor> {
-        val getFunctionDescriptor = context[BindingContext.INDEXED_LVALUE_GET, expression]?.candidateDescriptor
-        val setFunctionDescriptor = context[BindingContext.INDEXED_LVALUE_SET, expression]?.candidateDescriptor
+        konst getFunctionDescriptor = context[BindingContext.INDEXED_LVALUE_GET, expression]?.candidateDescriptor
+        konst setFunctionDescriptor = context[BindingContext.INDEXED_LVALUE_SET, expression]?.candidateDescriptor
         return listOfNotNull(getFunctionDescriptor, setFunctionDescriptor)
     }
 }

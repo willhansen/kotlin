@@ -4,11 +4,11 @@ class A {
 }
 
 fun foo(a: A, c: Int) {
-    val (<!NAME_SHADOWING!>a<!>, b) = a
-    val arr = Array(2) { A() }
+    konst (<!NAME_SHADOWING!>a<!>, b) = a
+    konst arr = Array(2) { A() }
     for ((<!NAME_SHADOWING!>c<!>, d) in arr)  {
 
     }
 
-    val e = a.toString() + b + c
+    konst e = a.toString() + b + c
 }

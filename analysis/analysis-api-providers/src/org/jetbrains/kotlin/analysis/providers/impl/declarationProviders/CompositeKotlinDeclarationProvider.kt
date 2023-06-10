@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi.*
 
 public class CompositeKotlinDeclarationProvider private constructor(
-    public val providers: List<KotlinDeclarationProvider>
+    public konst providers: List<KotlinDeclarationProvider>
 ) : KotlinDeclarationProvider() {
     override fun getClassLikeDeclarationByClassId(classId: ClassId): KtClassLikeDeclaration? {
         return providers.firstNotNullOfOrNull { it.getClassLikeDeclarationByClassId(classId) }

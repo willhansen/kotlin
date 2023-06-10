@@ -27,7 +27,7 @@ class C : A {
     return <this>.#x.f(x = x)
   }
 
-  val x: A
+  konst x: A
     field = x
     get
 

@@ -1,6 +1,6 @@
 open class Foo() {
     companion object {
-        const val CONST = 0
+        const konst CONST = 0
     }
 
     inline fun bar() = 1

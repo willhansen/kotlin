@@ -8,9 +8,9 @@ fun test() {
     X ??:: x
     X ?? :: x
 
-    val x: X?.() -> Unit
-    val x: X??.() -> Unit
-    val x: X?? .() -> Unit
-    val x: X ? .() -> Unit
-    val x: X ?.() -> Unit
+    konst x: X?.() -> Unit
+    konst x: X??.() -> Unit
+    konst x: X?? .() -> Unit
+    konst x: X ? .() -> Unit
+    konst x: X ?.() -> Unit
 }

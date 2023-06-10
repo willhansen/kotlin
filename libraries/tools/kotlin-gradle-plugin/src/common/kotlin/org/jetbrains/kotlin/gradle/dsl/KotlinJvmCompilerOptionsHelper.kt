@@ -17,7 +17,7 @@ internal object KotlinJvmCompilerOptionsHelper {
         args.moduleName = from.moduleName.orNull
         args.noJdk = from.noJdk.get()
 
-        // Arguments with always default values when used from build tools
+        // Arguments with always default konstues when used from build tools
         args.noStdlib = true
         args.noReflect = true
         args.allowNoSourceFiles = true

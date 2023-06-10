@@ -16,7 +16,7 @@ public interface KtRendererOtherModifiersProvider {
     public fun getOtherModifiers(symbol: KtDeclarationSymbol): List<KtModifierKeywordToken>
 
     public infix fun and(other: KtRendererOtherModifiersProvider): KtRendererOtherModifiersProvider {
-        val self = this
+        konst self = this
         return object : KtRendererOtherModifiersProvider {
             context(KtAnalysisSession)
             override fun getOtherModifiers(symbol: KtDeclarationSymbol): List<KtModifierKeywordToken> {
@@ -29,7 +29,7 @@ public interface KtRendererOtherModifiersProvider {
     public fun onlyIf(
         condition: context(KtAnalysisSession) (symbol: KtDeclarationSymbol) -> Boolean
     ): KtRendererOtherModifiersProvider {
-        val self = this
+        konst self = this
         return object : KtRendererOtherModifiersProvider {
             context(KtAnalysisSession)
             override fun getOtherModifiers(symbol: KtDeclarationSymbol): List<KtModifierKeywordToken> =

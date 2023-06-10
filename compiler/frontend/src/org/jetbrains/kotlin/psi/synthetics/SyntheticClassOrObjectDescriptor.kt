@@ -44,27 +44,27 @@ class SyntheticClassOrObjectDescriptor(
         name: Name,
         source: SourceElement,
         outerScope: LexicalScope,
-        private val modality: Modality,
-        private val visibility: DescriptorVisibility,
-        override val annotations: Annotations,
+        private konst modality: Modality,
+        private konst visibility: DescriptorVisibility,
+        override konst annotations: Annotations,
         constructorVisibility: DescriptorVisibility,
-        private val kind: ClassKind,
-        private val isCompanionObject: Boolean
+        private konst kind: ClassKind,
+        private konst isCompanionObject: Boolean
 ) : ClassDescriptorBase(c.storageManager, containingDeclaration, name, source, false), ClassDescriptorWithResolutionScopes {
-    val syntheticDeclaration: KtPureClassOrObject = SyntheticDeclaration(parentClassOrObject, name.asString())
+    konst syntheticDeclaration: KtPureClassOrObject = SyntheticDeclaration(parentClassOrObject, name.asString())
 
-    private val thisDescriptor: SyntheticClassOrObjectDescriptor get() = this // code readability
+    private konst thisDescriptor: SyntheticClassOrObjectDescriptor get() = this // code readability
 
     private lateinit var typeParameters: List<TypeParameterDescriptor>
     public var secondaryConstructors: List<ClassConstructorDescriptor> = emptyList()
 
-    private val typeConstructor = SyntheticTypeConstructor(c.storageManager)
-    private val resolutionScopesSupport = ClassResolutionScopesSupport(thisDescriptor, c.storageManager, c.languageVersionSettings, { outerScope })
-    private val syntheticSupertypes =
+    private konst typeConstructor = SyntheticTypeConstructor(c.storageManager)
+    private konst resolutionScopesSupport = ClassResolutionScopesSupport(thisDescriptor, c.storageManager, c.languageVersionSettings, { outerScope })
+    private konst syntheticSupertypes =
         mutableListOf<KotlinType>().apply { c.syntheticResolveExtension.addSyntheticSupertypes(thisDescriptor, this) }
-    private val unsubstitutedMemberScope =
+    private konst unsubstitutedMemberScope =
         LazyClassMemberScope(c, SyntheticClassMemberDeclarationProvider(syntheticDeclaration), this, c.trace)
-    private val _unsubstitutedPrimaryConstructor =
+    private konst _unsubstitutedPrimaryConstructor =
         c.storageManager.createLazyValue { createUnsubstitutedPrimaryConstructor(constructorVisibility) }
 
     @JvmOverloads
@@ -120,7 +120,7 @@ class SyntheticClassOrObjectDescriptor(
     override fun toString(): String = "synthetic class " + name.toString() + " in " + containingDeclaration
 
     private fun createUnsubstitutedPrimaryConstructor(constructorVisibility: DescriptorVisibility): ClassConstructorDescriptor {
-        val constructor = DescriptorFactory.createPrimaryConstructorForObject(thisDescriptor, source)
+        konst constructor = DescriptorFactory.createPrimaryConstructorForObject(thisDescriptor, source)
         constructor.visibility = constructorVisibility
         constructor.returnType = getDefaultType()
         return constructor
@@ -131,13 +131,13 @@ class SyntheticClassOrObjectDescriptor(
         override fun isDenotable(): Boolean = true
         override fun getDeclarationDescriptor(): ClassDescriptor = thisDescriptor
         override fun computeSupertypes(): Collection<KotlinType> = syntheticSupertypes
-        override val supertypeLoopChecker: SupertypeLoopChecker = SupertypeLoopChecker.EMPTY
+        override konst supertypeLoopChecker: SupertypeLoopChecker = SupertypeLoopChecker.EMPTY
     }
 
     private class SyntheticClassMemberDeclarationProvider(
-        override val correspondingClassOrObject: KtPureClassOrObject
+        override konst correspondingClassOrObject: KtPureClassOrObject
     ) : ClassMemberDeclarationProvider {
-        override val ownerInfo: KtClassLikeInfo? = null
+        override konst ownerInfo: KtClassLikeInfo? = null
         override fun getDeclarations(kindFilter: DescriptorKindFilter, nameFilter: (Name) -> Boolean): List<KtDeclaration> = emptyList()
         override fun getFunctionDeclarations(name: Name): Collection<KtNamedFunction> = emptyList()
         override fun getPropertyDeclarations(name: Name): Collection<KtProperty> = emptyList()
@@ -149,8 +149,8 @@ class SyntheticClassOrObjectDescriptor(
     }
 
     internal inner class SyntheticDeclaration(
-        private val _parent: KtPureElement,
-        private val _name: String
+        private konst _parent: KtPureElement,
+        private konst _name: String
     ) : KtPureClassOrObject {
         fun descriptor() = thisDescriptor
 

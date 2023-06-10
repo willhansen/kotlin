@@ -1,13 +1,13 @@
 interface A {
     companion object {
         @Deprecated("no")
-        const val s = "yes"
+        const konst s = "yes"
     }
 }
 
 class B {
     companion object {
         @Deprecated("no")
-        const val s = "yes"
+        const konst s = "yes"
     }
 }

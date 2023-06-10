@@ -27,12 +27,12 @@ class InfrastructureGlobsExpansionTest {
 
     @Test
     fun noGlobs() {
-        val fileName = "file.kt"
-        val dirNames = listOf(null, "foo", "foo/bar", "foo/bar/baz")
+        konst fileName = "file.kt"
+        konst dirNames = listOf(null, "foo", "foo/bar", "foo/bar/baz")
 
         dirNames.forEach { dirName ->
-            val fullPattern = testDir.resolveNullable(dirName).resolve(fileName)
-            val expansionResult = expandGlob(fullPattern)
+            konst fullPattern = testDir.resolveNullable(dirName).resolve(fileName)
+            konst expansionResult = expandGlob(fullPattern)
 
             assertEquals(1, expansionResult.size)
             assertEquals(fullPattern, expansionResult.first())
@@ -41,17 +41,17 @@ class InfrastructureGlobsExpansionTest {
 
     @Test
     fun filePattern() {
-        val fileNames = listOf("one.kt", "two.kt", "three.kt", "four.java", "five.py")
-        val dirNames = listOf(null, "foo", "foo/bar", "foo/bar/baz")
-        val pattern = "*.kt"
+        konst fileNames = listOf("one.kt", "two.kt", "three.kt", "four.java", "five.py")
+        konst dirNames = listOf(null, "foo", "foo/bar", "foo/bar/baz")
+        konst pattern = "*.kt"
 
         dirNames.forEach { dirName ->
-            val dir = createDirWithFiles(dirName, fileNames)
+            konst dir = createDirWithFiles(dirName, fileNames)
 
-            val fullPattern = dir.resolve(pattern)
-            val expansionResult = expandGlob(fullPattern)
+            konst fullPattern = dir.resolve(pattern)
+            konst expansionResult = expandGlob(fullPattern)
 
-            val kotlinOnyFiles = findAllKotlinFiles(dirName)
+            konst kotlinOnyFiles = findAllKotlinFiles(dirName)
 
             assertEquals(kotlinOnyFiles.size, expansionResult.size)
             assertEquals(kotlinOnyFiles, expansionResult.toSet())
@@ -60,38 +60,38 @@ class InfrastructureGlobsExpansionTest {
 
     @Test
     fun dirPattern() {
-        val fileNames = listOf("one.kt", "two.kt", "three.kt", "four.java", "five.py")
-        val dirNames = listOf(null, "foo", "bar", "baz")
-        val pattern = "ba*/*.kt" // covers "bar" & "baz" dirs
+        konst fileNames = listOf("one.kt", "two.kt", "three.kt", "four.java", "five.py")
+        konst dirNames = listOf(null, "foo", "bar", "baz")
+        konst pattern = "ba*/*.kt" // covers "bar" & "baz" dirs
 
         dirNames.forEach { dirName -> createDirWithFiles(dirName, fileNames) }
 
-        val fullPattern = testDir.resolve(pattern)
-        val expansionResult = expandGlob(fullPattern)
+        konst fullPattern = testDir.resolve(pattern)
+        konst expansionResult = expandGlob(fullPattern)
 
-        val kotlinOnyFiles = findAllKotlinFiles("bar", "baz")
+        konst kotlinOnyFiles = findAllKotlinFiles("bar", "baz")
         assertEquals(kotlinOnyFiles.size, expansionResult.size)
         assertEquals(kotlinOnyFiles, expansionResult.toSet())
     }
 
     @Test
     fun doubleStarPattern() {
-        val fileNames = listOf("one.kt", "two.kt", "three.kt", "four.java", "five.py")
-        val dirNames = listOf(null, "foo", "foo/bar", "foo/bar/baz")
-        val pattern = "foo/**.kt" // covers "foo" and all subdirectories
+        konst fileNames = listOf("one.kt", "two.kt", "three.kt", "four.java", "five.py")
+        konst dirNames = listOf(null, "foo", "foo/bar", "foo/bar/baz")
+        konst pattern = "foo/**.kt" // covers "foo" and all subdirectories
 
         dirNames.forEach { dirName -> createDirWithFiles(dirName, fileNames) }
 
-        val fullPattern = testDir.resolve(pattern)
-        val expansionResult = expandGlob(fullPattern)
+        konst fullPattern = testDir.resolve(pattern)
+        konst expansionResult = expandGlob(fullPattern)
 
-        val kotlinOnyFiles = findAllKotlinFiles("foo", "foo/bar", "foo/bar/baz")
+        konst kotlinOnyFiles = findAllKotlinFiles("foo", "foo/bar", "foo/bar/baz")
         assertEquals(kotlinOnyFiles.size, expansionResult.size)
         assertEquals(kotlinOnyFiles, expansionResult.toSet())
     }
 
     private fun createDirWithFiles(dirName: String?, fileNames: Collection<String>): File {
-        val dir = testDir.resolveNullable(dirName)
+        konst dir = testDir.resolveNullable(dirName)
         dir.mkdirs()
 
         fileNames.forEach { fileName ->
@@ -103,10 +103,10 @@ class InfrastructureGlobsExpansionTest {
 
     private fun findAllKotlinFiles(vararg dirNames: String?): Set<File> = buildSet {
         dirNames.forEach { dirName ->
-            val dir = testDir.resolveNullable(dirName)
+            konst dir = testDir.resolveNullable(dirName)
             assertTrue(dir.isDirectory) { "Directory does not exist or is not a directory: $dir ($dirName)." }
 
-            val files = dir.listFiles()?.takeIf { it.isNotEmpty() }
+            konst files = dir.listFiles()?.takeIf { it.isNotEmpty() }
                 ?: fail { "Unexpectedly empty directory: $dir ($dirName)." }
 
             files.mapNotNullTo(this) { if (it.isFile && it.extension == "kt") it else null }

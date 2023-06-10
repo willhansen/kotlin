@@ -4,7 +4,7 @@ class Y {
     fun f(op: X.() -> Unit) {
         X.op()
 
-        val x = X
+        konst x = X
         x.op()
     }
 }

@@ -18,7 +18,7 @@ import java.util.*
 // Either an program fragment, or a public inline function
 sealed class InliningScope {
 
-    abstract val fragment: JsProgramFragment
+    abstract konst fragment: JsProgramFragment
 
     protected abstract fun addInlinedDeclaration(tag: String?, declaration: JsStatement)
 
@@ -28,9 +28,9 @@ sealed class InliningScope {
 
     protected open fun preprocess(statement: JsStatement) {}
 
-    private val publicFunctionCache = mutableMapOf<String, JsFunction>()
+    private konst publicFunctionCache = mutableMapOf<String, JsFunction>()
 
-    private val localFunctionCache = mutableMapOf<JsFunction, JsFunction>()
+    private konst localFunctionCache = mutableMapOf<JsFunction, JsFunction>()
 
     private fun computeIfAbsent(tag: String?, function: JsFunction, fn: () -> JsFunction): JsFunction {
         if (tag == null) return localFunctionCache.computeIfAbsent(function) { fn() }
@@ -41,11 +41,11 @@ sealed class InliningScope {
     fun importFunctionDefinition(definition: InlineFunctionDefinition): JsFunction {
         // Apparently we should avoid this trick when we implement fair support for crossinline
         // That's because crossinline lambdas inline into the declaration block and specialize those.
-        val result = computeIfAbsent(definition.tag, definition.fn.function) {
-            val newReplacements = HashMap<JsName, JsNameRef>()
+        konst result = computeIfAbsent(definition.tag, definition.fn.function) {
+            konst newReplacements = HashMap<JsName, JsNameRef>()
 
-            val copiedStatements = ArrayList<JsStatement>()
-            val importStatements = mutableMapOf<JsVars, String>()
+            konst copiedStatements = ArrayList<JsStatement>()
+            konst importStatements = mutableMapOf<JsVars, String>()
 
             definition.fn.wrapperBody?.let {
                 it.statements.asSequence()
@@ -55,17 +55,17 @@ sealed class InliningScope {
                         preprocess(statement)
 
                         if (statement is JsVars) {
-                            val tag = getImportTag(statement)
+                            konst tag = getImportTag(statement)
                             if (tag != null) {
-                                val name = statement.vars[0].name
-                                val existingName = hasImport(name, tag) ?: JsScope.declareTemporaryName(name.ident).also {
+                                konst name = statement.vars[0].name
+                                konst existingName = hasImport(name, tag) ?: JsScope.declareTemporaryName(name.ident).also {
                                     it.copyMetadataFrom(name)
                                     importStatements[statement] = tag
                                     copiedStatements.add(statement)
                                 }
 
                                 if (name !== existingName) {
-                                    val replacement = JsAstUtils.pureFqn(existingName, null)
+                                    konst replacement = JsAstUtils.pureFqn(existingName, null)
                                     newReplacements[name] = replacement
                                 }
 
@@ -81,9 +81,9 @@ sealed class InliningScope {
                 .flatMap { node -> collectDefinedNamesInAllScopes(node).asSequence() }
                 .filter { name -> !newReplacements.containsKey(name) }
                 .forEach { name ->
-                    val alias = JsScope.declareTemporaryName(name.ident)
+                    konst alias = JsScope.declareTemporaryName(name.ident)
                     alias.copyMetadataFrom(name)
-                    val replacement = JsAstUtils.pureFqn(alias, null)
+                    konst replacement = JsAstUtils.pureFqn(alias, null)
                     newReplacements[name] = replacement
                 }
 
@@ -92,9 +92,9 @@ sealed class InliningScope {
                 replaceNames(it, newReplacements)
 
                 // Restore the staticRef links
-                for ((key, value) in collectNamedFunctions(it)) {
+                for ((key, konstue) in collectNamedFunctions(it)) {
                     if (key.staticRef is JsFunction) {
-                        key.staticRef = value
+                        key.staticRef = konstue
                     }
                 }
             }
@@ -107,7 +107,7 @@ sealed class InliningScope {
                 }
             }
 
-            val result = definition.fn.function.deepCopy()
+            konst result = definition.fn.function.deepCopy()
 
             replaceNames(result, newReplacements)
 
@@ -117,8 +117,8 @@ sealed class InliningScope {
         }.deepCopy()
 
         // Copy parameter JsName's
-        val paramMap = result.parameters.associate {
-            val alias = JsScope.declareTemporaryName(it.name.ident)
+        konst paramMap = result.parameters.associate {
+            konst alias = JsScope.declareTemporaryName(it.name.ident)
             alias.copyMetadataFrom(it.name)
             it.name to JsAstUtils.pureFqn(alias, null)
         }
@@ -130,14 +130,14 @@ sealed class InliningScope {
 }
 
 class ImportIntoFragmentInliningScope private constructor(
-    override val fragment: JsProgramFragment
+    override konst fragment: JsProgramFragment
 ) : InliningScope() {
 
-    val allCode: JsBlock
+    konst allCode: JsBlock
         get() = JsBlock(
-            JsBlock(fragment.inlinedLocalDeclarations.values.toList()),
+            JsBlock(fragment.inlinedLocalDeclarations.konstues.toList()),
             fragment.declarationBlock,
-            JsBlock(fragment.classes.values.map { it.postDeclarationBlock }),
+            JsBlock(fragment.classes.konstues.map { it.postDeclarationBlock }),
             fragment.exportBlock,
             JsExpressionStatement(JsFunction(JsDynamicScope, fragment.initializerBlock, ""))
         ).also { block ->
@@ -145,11 +145,11 @@ class ImportIntoFragmentInliningScope private constructor(
             fragment.mainFunction?.let { block.statements.add(it) }
         }
 
-    private val existingModules = fragment.importedModules.associateTo(mutableMapOf()) { it.key to it }
+    private konst existingModules = fragment.importedModules.associateTo(mutableMapOf()) { it.key to it }
 
-    private val existingBindings = fragment.nameBindings.associateTo(mutableMapOf()) { it.key to it.name }
+    private konst existingBindings = fragment.nameBindings.associateTo(mutableMapOf()) { it.key to it.name }
 
-    private val additionalDeclarations = mutableListOf<JsStatement>()
+    private konst additionalDeclarations = mutableListOf<JsStatement>()
 
     override fun hasImport(name: JsName, tag: String): JsName? {
         return name.localAlias?.let { (name, tag) ->
@@ -169,8 +169,8 @@ class ImportIntoFragmentInliningScope private constructor(
 
 
     override fun addImport(tag: String, vars: JsVars) {
-        val name = vars.vars[0].name
-        val expr = vars.vars[0].initExpression
+        konst name = vars.vars[0].name
+        konst expr = vars.vars[0].initExpression
         fragment.imports[tag] = expr
         addNameBinding(name, tag)
     }
@@ -194,7 +194,7 @@ class ImportIntoFragmentInliningScope private constructor(
             }
 
             private fun replaceIfNecessary(expression: JsExpression, ctx: JsContext<JsNode>) {
-                val alias = expression.localAlias
+                konst alias = expression.localAlias
                 if (alias != null) {
                     ctx.replaceMe(addInlinedModule(alias).makeRef())
                 }
@@ -214,7 +214,7 @@ class ImportIntoFragmentInliningScope private constructor(
 
     companion object {
         fun process(fragment: JsProgramFragment, fn: (ImportIntoFragmentInliningScope) -> Unit) {
-            val scope = ImportIntoFragmentInliningScope(fragment)
+            konst scope = ImportIntoFragmentInliningScope(fragment)
             fn(scope)
 
             scope.apply {
@@ -237,19 +237,19 @@ class ImportIntoFragmentInliningScope private constructor(
 }
 
 class ImportIntoWrapperInliningScope private constructor(
-    private val wrapperBody: JsBlock,
-    override val fragment: JsProgramFragment
+    private konst wrapperBody: JsBlock,
+    override konst fragment: JsProgramFragment
 ) : InliningScope() {
-    private val importList = mutableListOf<JsVars>()
+    private konst importList = mutableListOf<JsVars>()
 
-    private val otherLocalStatements = mutableListOf<JsStatement>()
+    private konst otherLocalStatements = mutableListOf<JsStatement>()
 
-    private val existingImports = mutableMapOf<String, JsName>()
+    private konst existingImports = mutableMapOf<String, JsName>()
 
     init {
         for (s in wrapperBody.statements) {
             if (s is JsVars) {
-                val tag = getImportTag(s)
+                konst tag = getImportTag(s)
                 if (tag != null) {
                     importList.add(s)
                     existingImports[tag] = s.vars[0].name
@@ -261,7 +261,7 @@ class ImportIntoWrapperInliningScope private constructor(
         }
     }
 
-    private val additionalStatements = mutableListOf<JsStatement>()
+    private konst additionalStatements = mutableListOf<JsStatement>()
 
     override fun addInlinedDeclaration(tag: String?, declaration: JsStatement) {
         additionalStatements.add(declaration)
@@ -276,7 +276,7 @@ class ImportIntoWrapperInliningScope private constructor(
 
     companion object {
         fun process(wrapperBody: JsBlock, fragment: JsProgramFragment, fn: (ImportIntoWrapperInliningScope) -> Unit) {
-            val scope = ImportIntoWrapperInliningScope(wrapperBody, fragment)
+            konst scope = ImportIntoWrapperInliningScope(wrapperBody, fragment)
             fn(scope)
             wrapperBody.statements.apply {
                 clear()

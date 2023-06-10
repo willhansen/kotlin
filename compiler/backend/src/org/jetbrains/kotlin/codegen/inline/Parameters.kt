@@ -19,34 +19,34 @@ package org.jetbrains.kotlin.codegen.inline
 import org.jetbrains.org.objectweb.asm.Type
 import java.util.*
 
-class Parameters(val parameters: List<ParameterInfo>) : Iterable<ParameterInfo> {
+class Parameters(konst parameters: List<ParameterInfo>) : Iterable<ParameterInfo> {
 
-    private val actualDeclShifts: Array<ParameterInfo?>
-    private val paramToDeclByteCodeIndex: HashMap<ParameterInfo, Int> = hashMapOf()
+    private konst actualDeclShifts: Array<ParameterInfo?>
+    private konst paramToDeclByteCodeIndex: HashMap<ParameterInfo, Int> = hashMapOf()
 
-    val argsSizeOnStack = parameters.sumOf { it.type.size }
+    konst argsSizeOnStack = parameters.sumOf { it.type.size }
 
-    val realParametersSizeOnStack: Int
+    konst realParametersSizeOnStack: Int
         get() = argsSizeOnStack - capturedParametersSizeOnStack
 
-    val capturedParametersSizeOnStack by lazy {
+    konst capturedParametersSizeOnStack by lazy {
         captured.sumOf { it.type.size }
     }
 
-    val captured by lazy {
+    konst captured by lazy {
         parameters.filterIsInstance<CapturedParamInfo>()
     }
 
     init {
-        val declIndexesToActual = arrayOfNulls<Int>(argsSizeOnStack)
+        konst declIndexesToActual = arrayOfNulls<Int>(argsSizeOnStack)
         withIndex().forEach { it ->
-            declIndexesToActual[it.value.declarationIndex] = it.index
+            declIndexesToActual[it.konstue.declarationIndex] = it.index
         }
 
         actualDeclShifts = arrayOfNulls<ParameterInfo>(argsSizeOnStack)
         var realSize = 0
         for (i in declIndexesToActual.indices) {
-            val byDeclarationIndex = get(declIndexesToActual[i] ?: continue)
+            konst byDeclarationIndex = get(declIndexesToActual[i] ?: continue)
             actualDeclShifts[realSize] = byDeclarationIndex
             paramToDeclByteCodeIndex.put(byDeclarationIndex, realSize)
             realSize += byDeclarationIndex.type.size
@@ -69,6 +69,6 @@ class Parameters(val parameters: List<ParameterInfo>) : Iterable<ParameterInfo> 
         return parameters.iterator()
     }
 
-    val capturedTypes: List<Type>
+    konst capturedTypes: List<Type>
         get() = captured.map(CapturedParamInfo::type)
 }

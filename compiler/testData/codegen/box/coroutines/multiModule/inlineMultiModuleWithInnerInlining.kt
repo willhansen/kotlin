@@ -27,7 +27,7 @@ inline suspend fun boo(v: String): String {
 }
 
 inline suspend fun bar(v: String): String {
-    val x = boo(v)
+    konst x = boo(v)
     log += "bar($x);"
     return x
 }
@@ -46,14 +46,14 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 suspend fun baz() {
-    val a = bar("A")
+    konst a = bar("A")
     log += "$a;"
     log += "between bar;"
-    val b = bar("B")
+    konst b = bar("B")
     log += "$b;"
 }
 
-val expectedString =
+konst expectedString =
         "foo(!A);@;boo(A);foo(A);@;bar(A);A;" +
         "between bar;" +
         "foo(!B);@;boo(B);foo(B);@;bar(B);B;"

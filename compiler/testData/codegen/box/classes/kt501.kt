@@ -7,7 +7,7 @@ class Reluctant() {
 
 fun test1() : String {
   try {
-      val b = Reluctant()
+      konst b = Reluctant()
       return "Surprise!"
   }
   catch (ex : Exception) {

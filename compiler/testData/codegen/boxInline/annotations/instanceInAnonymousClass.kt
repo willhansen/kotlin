@@ -10,7 +10,7 @@
 
 package a
 
-annotation class A(val i: String)
+annotation class A(konst i: String)
 
 interface I {
     fun g(): A

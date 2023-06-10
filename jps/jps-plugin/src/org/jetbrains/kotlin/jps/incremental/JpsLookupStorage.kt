@@ -29,10 +29,10 @@ import java.io.IOException
 private object LookupStorageLock
 
 class JpsLookupStorageManager(
-    private val buildDataManager: BuildDataManager,
+    private konst buildDataManager: BuildDataManager,
     icContext: IncrementalCompilationContext,
 ) {
-    private val storageProvider = JpsLookupStorageProvider(icContext)
+    private konst storageProvider = JpsLookupStorageProvider(icContext)
 
     fun cleanLookupStorage(log: Logger) {
         synchronized(LookupStorageLock) {
@@ -49,7 +49,7 @@ class JpsLookupStorageManager(
     fun <T> withLookupStorage(fn: (LookupStorage) -> T): T {
         synchronized(LookupStorageLock) {
             try {
-                val lookupStorage = buildDataManager.getStorage(KotlinDataContainerTarget, storageProvider)
+                konst lookupStorage = buildDataManager.getStorage(KotlinDataContainerTarget, storageProvider)
                 return fn(lookupStorage)
             } catch (e: IOException) {
                 throw BuildDataCorruptedException(e)
@@ -58,7 +58,7 @@ class JpsLookupStorageManager(
     }
 
     private class JpsLookupStorageProvider(
-        private val icContext: IncrementalCompilationContext
+        private konst icContext: IncrementalCompilationContext
     ) : StorageProvider<JpsLookupStorage>() {
         override fun createStorage(targetDataDir: File): JpsLookupStorage =
             JpsLookupStorage(targetDataDir, icContext)

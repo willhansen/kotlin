@@ -12,12 +12,12 @@ public inline fun <T> T.myapply(block: T.() -> Unit): T {
 // FILE: 2.kt
 import test.*
 
-class Test(val value: () -> String) {
+class Test(konst konstue: () -> String) {
     fun test(): String {
         try {
             myapply {
                 try {
-                    return value()
+                    return konstue()
                 } catch (e: Exception) {
                 } catch (e: Throwable) {
                 }

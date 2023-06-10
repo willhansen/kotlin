@@ -4,7 +4,7 @@
 package foo
 
 internal external open class A(a: Int) {
-    val a: Int
+    konst a: Int
 
     fun g(): Int = definedExternally
     fun m(): Int = definedExternally
@@ -15,7 +15,7 @@ internal external open class A(a: Int) {
     open fun baz(i: Int): String = definedExternally
 }
 
-internal class B(val b: Int) : A(b / 2) {
+internal class B(konst b: Int) : A(b / 2) {
     override fun foo(i: Int): String = "B.foo($i: Int)"
 
     fun boo(i: String): String = "B.boo($i: String)"
@@ -26,7 +26,7 @@ internal class B(val b: Int) : A(b / 2) {
 }
 
 fun box(): String {
-    val b = B(10)
+    konst b = B(10)
 
     if (b !is A) return "b !is A"
     if (b.g() != 10) return "b.g() != 10, it: ${b.g()}"
@@ -41,7 +41,7 @@ fun box(): String {
     if (b.baz(34) != "B.baz(34: Int)") return "b.baz(34) != \"B.baz(34: Int)\", it: ${b.baz(34)}"
     if (b.bar(2.213) != "B.bar(2.213: Double)") return "b.bar(2.213) != \"B.bar(2.213: Double)\", it: ${b.bar(2.213)}"
 
-    val a: A = b
+    konst a: A = b
 
     if (a.foo(4) != "B.foo(4: Int)") return "a.foo(4) != \"B.foo(4: Int)\", it: ${a.foo(4)}"
     if (a.boo(434) != "A.boo(434)") return "a.boo(434) != \"A.boo(434)\", it: ${a.boo(434)}"

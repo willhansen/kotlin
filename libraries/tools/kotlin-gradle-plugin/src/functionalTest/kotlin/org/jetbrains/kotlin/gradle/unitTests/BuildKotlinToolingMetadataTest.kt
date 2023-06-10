@@ -43,9 +43,9 @@ import kotlin.test.assertTrue
 
 class BuildKotlinToolingMetadataTest {
 
-    private val project = ProjectBuilder.builder().build().also { addBuildEventsListenerRegistryMock(it) } as ProjectInternal
-    private val multiplatformExtension get() = project.extensions.getByType(KotlinMultiplatformExtension::class.java)
-    private val jsExtension get() = project.extensions.getByType(KotlinJsProjectExtension::class.java)
+    private konst project = ProjectBuilder.builder().build().also { addBuildEventsListenerRegistryMock(it) } as ProjectInternal
+    private konst multiplatformExtension get() = project.extensions.getByType(KotlinMultiplatformExtension::class.java)
+    private konst jsExtension get() = project.extensions.getByType(KotlinJsProjectExtension::class.java)
 
     init {
         project.extensions.getByType(ExtraPropertiesExtension::class.java).set("kotlin.mpp.enableKotlinToolingMetadataArtifact", "true")
@@ -55,7 +55,7 @@ class BuildKotlinToolingMetadataTest {
     fun `multiplatform empty setup`() {
         project.plugins.apply("kotlin-multiplatform")
 
-        val metadata = getKotlinToolingMetadata()
+        konst metadata = getKotlinToolingMetadata()
 
         assertEquals("Gradle", metadata.buildSystem)
         assertEquals(project.gradle.gradleVersion, metadata.buildSystemVersion)
@@ -77,8 +77,8 @@ class BuildKotlinToolingMetadataTest {
 
         disableLegacyWarning(project)
 
-        val android = project.extensions.getByType(BaseExtension::class.java)
-        val kotlin = multiplatformExtension
+        konst android = project.extensions.getByType(BaseExtension::class.java)
+        konst kotlin = multiplatformExtension
 
         android.compileSdkVersion(28)
         kotlin.androidTarget()
@@ -89,12 +89,12 @@ class BuildKotlinToolingMetadataTest {
         }
         kotlin.linuxX64()
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val metadata = getKotlinToolingMetadata()
+        konst metadata = getKotlinToolingMetadata()
         assertEquals(KotlinMultiplatformPluginWrapper::class.java.canonicalName, metadata.buildPlugin)
 
-        val expectedTargets = mapOf(
+        konst expectedTargets = mapOf(
             common to KotlinMetadataTarget::class,
             androidJvm to KotlinAndroidTarget::class,
             jvm to KotlinJvmTarget::class,
@@ -122,15 +122,15 @@ class BuildKotlinToolingMetadataTest {
     fun `multiplatform Android target with different source and target compatibility`() {
         project.plugins.apply("kotlin-multiplatform")
         project.plugins.apply("com.android.application")
-        val android = project.extensions.getByType(BaseExtension::class.java)
-        val kotlin = multiplatformExtension
+        konst android = project.extensions.getByType(BaseExtension::class.java)
+        konst kotlin = multiplatformExtension
         android.compileSdkVersion(28)
         kotlin.androidTarget()
         android.compileOptions.setSourceCompatibility(JavaVersion.VERSION_1_6)
         android.compileOptions.setTargetCompatibility(JavaVersion.VERSION_1_8)
-        project.evaluate()
+        project.ekonstuate()
 
-        val androidTargetMetadata = getKotlinToolingMetadata()
+        konst androidTargetMetadata = getKotlinToolingMetadata()
             .projectTargets.single { it.platformType == androidJvm.name }
 
         assertEquals("1.6", androidTargetMetadata.extras.android?.sourceCompatibility)
@@ -140,8 +140,8 @@ class BuildKotlinToolingMetadataTest {
     @Test
     fun `multiplatform JVM with different targets`() {
         project.plugins.apply("kotlin-multiplatform")
-        val kotlin = multiplatformExtension
-        val jvm = kotlin.jvm()
+        konst kotlin = multiplatformExtension
+        konst jvm = kotlin.jvm()
         jvm.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME).compilerOptions.options.jvmTarget.set(JvmTarget.JVM_12)
         jvm.compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME).compilerOptions.options.jvmTarget.set(JvmTarget.JVM_10)
 
@@ -155,11 +155,11 @@ class BuildKotlinToolingMetadataTest {
     @Test
     fun `multiplatform with native target`() {
         project.plugins.apply("kotlin-multiplatform")
-        val kotlin = multiplatformExtension
+        konst kotlin = multiplatformExtension
         kotlin.linuxX64()
 
-        val metadata = getKotlinToolingMetadata()
-        val linuxTarget = metadata.projectTargets.single { it.platformType == native.name }
+        konst metadata = getKotlinToolingMetadata()
+        konst linuxTarget = metadata.projectTargets.single { it.platformType == native.name }
         assertEquals(KonanTarget.LINUX_X64.name, linuxTarget.extras.native?.konanTarget)
         assertEquals(project.konanVersion.toString(), linuxTarget.extras.native?.konanVersion)
         assertEquals(KotlinAbiVersion.CURRENT.toString(), linuxTarget.extras.native?.konanAbiVersion)
@@ -169,13 +169,13 @@ class BuildKotlinToolingMetadataTest {
     fun js() {
         project.plugins.apply("org.jetbrains.kotlin.js")
         disableLegacyWarning(project)
-        val kotlin = jsExtension
+        konst kotlin = jsExtension
         kotlin.js { nodejs() }
 
-        val metadata = getKotlinToolingMetadata()
+        konst metadata = getKotlinToolingMetadata()
         assertEquals(org.jetbrains.kotlin.gradle.plugin.KotlinJsPluginWrapper::class.java.canonicalName, metadata.buildPlugin)
 
-        val jsTarget = metadata.projectTargets.single { it.platformType == js.name }
+        konst jsTarget = metadata.projectTargets.single { it.platformType == js.name }
         assertEquals(true, jsTarget.extras.js?.isNodejsConfigured)
         assertEquals(false, jsTarget.extras.js?.isBrowserConfigured)
     }
@@ -183,21 +183,21 @@ class BuildKotlinToolingMetadataTest {
     @Test
     fun jvm() {
         project.plugins.apply("org.jetbrains.kotlin.jvm")
-        val metadata = getKotlinToolingMetadata()
+        konst metadata = getKotlinToolingMetadata()
         assertEquals(org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper::class.java.canonicalName, metadata.buildPlugin)
     }
 
     @Test
     fun `multiple native targets`() {
         project.plugins.apply("kotlin-multiplatform")
-        val kotlin = multiplatformExtension
+        konst kotlin = multiplatformExtension
         kotlin.linuxX64()
         kotlin.linuxArm64()
 
-        val metadata = getKotlinToolingMetadata()
-        val nativeTargets = metadata.projectTargets.filter { it.platformType == native.name }.sortedBy { it.extras.native?.konanTarget }
+        konst metadata = getKotlinToolingMetadata()
+        konst nativeTargets = metadata.projectTargets.filter { it.platformType == native.name }.sortedBy { it.extras.native?.konanTarget }
         assertEquals(2, nativeTargets.size, "Expected only two native targets")
-        val (linuxArm64, linuxX64) = nativeTargets
+        konst (linuxArm64, linuxX64) = nativeTargets
 
         assertEquals(
             "linux_arm64",
@@ -213,7 +213,7 @@ class BuildKotlinToolingMetadataTest {
     }
 
     private fun getKotlinToolingMetadata(): KotlinToolingMetadata {
-        val task = project.buildKotlinToolingMetadataTask?.get() ?: error("No ${BuildKotlinToolingMetadataTask.defaultTaskName} task")
+        konst task = project.buildKotlinToolingMetadataTask?.get() ?: error("No ${BuildKotlinToolingMetadataTask.defaultTaskName} task")
         return task.kotlinToolingMetadata
     }
 }

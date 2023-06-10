@@ -8,9 +8,9 @@ package org.jetbrains.kotlin.gradle.report
 import org.gradle.api.logging.Logger
 import org.jetbrains.kotlin.compilerRunner.KotlinLogger
 
-class GradleLoggerAdapter(private val log: Logger) : KotlinLogger {
+class GradleLoggerAdapter(private konst log: Logger) : KotlinLogger {
 
-    override val isDebugEnabled: Boolean
+    override konst isDebugEnabled: Boolean
         get() = log.isDebugEnabled
     override fun info(msg: String) {
         log.info(msg)

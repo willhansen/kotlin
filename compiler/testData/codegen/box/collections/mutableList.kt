@@ -75,7 +75,7 @@ open class KList<E> : MutableList<E> {
         throw UnsupportedOperationException()
     }
 
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun isEmpty(): Boolean {

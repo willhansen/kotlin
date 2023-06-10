@@ -198,7 +198,7 @@ public interface BindingContext {
                 SlicedMap map,
                 PropertyDescriptor propertyDescriptor,
                 Boolean backingFieldRequired,
-                boolean valueNotFound
+                boolean konstueNotFound
         ) {
             if (propertyDescriptor.getKind() != CallableMemberDescriptor.Kind.DECLARATION) {
                 return false;
@@ -231,8 +231,8 @@ public interface BindingContext {
 
     WritableSlice<KtLambdaExpression, Boolean> BLOCK = new SetSlice<KtLambdaExpression>(DO_NOTHING) {
         @Override
-        public Boolean computeValue(SlicedMap map, KtLambdaExpression expression, Boolean isBlock, boolean valueNotFound) {
-            isBlock = valueNotFound ? false : isBlock;
+        public Boolean computeValue(SlicedMap map, KtLambdaExpression expression, Boolean isBlock, boolean konstueNotFound) {
+            isBlock = konstueNotFound ? false : isBlock;
             return isBlock && !expression.getFunctionLiteral().hasParameterSpecification();
         }
     };

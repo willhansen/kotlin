@@ -5,11 +5,11 @@ class Check {
     class BBD {
         class Bwd {
             fun dad() {
-                val Bwd = 42
+                konst Bwd = 42
 
-                val BBD = 3
+                konst BBD = 3
 
-                val a = <expr>foo.www.ddd.Check.BBD.Bwd::class.java.annotatedInterfaces.size</expr>
+                konst a = <expr>foo.www.ddd.Check.BBD.Bwd::class.java.annotatedInterfaces.size</expr>
             }
         }
     }

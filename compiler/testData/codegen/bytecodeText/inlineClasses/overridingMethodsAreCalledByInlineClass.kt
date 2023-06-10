@@ -5,7 +5,7 @@ interface IFoo {
     fun foo()
 }
 
-inline class Z(val x: Int) : IFoo {
+inline class Z(konst x: Int) : IFoo {
     override fun foo() {}
 }
 

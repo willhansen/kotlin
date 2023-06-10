@@ -98,11 +98,11 @@ fun case_6(args: Array<String>) {
 
 // TESTCASE NUMBER: 7
 fun case_7() {
-    <!UNREACHABLE_CODE!>val value_1 =<!> funWithExactlyOnceCallsInPlace {
+    <!UNREACHABLE_CODE!>konst konstue_1 =<!> funWithExactlyOnceCallsInPlace {
         throw Exception()
         <!UNREACHABLE_CODE!>println(1)<!>
     }
-    <!UNREACHABLE_CODE!>println(value_1)<!>
+    <!UNREACHABLE_CODE!>println(konstue_1)<!>
 }
 
 

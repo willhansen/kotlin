@@ -1728,36 +1728,36 @@ public class PreFirIdeSpecTestGenerated extends AbstractLLFirPreresolvedReversed
                 }
 
                 @Nested
-                @TestMetadata("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/value-equality-expressions")
+                @TestMetadata("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/konstue-equality-expressions")
                 @TestDataPath("$PROJECT_ROOT")
                 public class Value_equality_expressions {
                     @Test
                     public void testAllFilesPresentInValue_equality_expressions() throws Exception {
-                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/value-equality-expressions"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
+                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/konstue-equality-expressions"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
                     }
 
                     @Nested
-                    @TestMetadata("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/value-equality-expressions/p-3")
+                    @TestMetadata("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/konstue-equality-expressions/p-3")
                     @TestDataPath("$PROJECT_ROOT")
                     public class P_3 {
                         @Test
                         public void testAllFilesPresentInP_3() throws Exception {
-                            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/value-equality-expressions/p-3"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
+                            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/konstue-equality-expressions/p-3"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
                         }
 
                         @Nested
-                        @TestMetadata("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/value-equality-expressions/p-3/pos")
+                        @TestMetadata("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/konstue-equality-expressions/p-3/pos")
                         @TestDataPath("$PROJECT_ROOT")
                         public class Pos {
                             @Test
                             @TestMetadata("1.1.kt")
                             public void test1_1() throws Exception {
-                                runTest("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/value-equality-expressions/p-3/pos/1.1.kt");
+                                runTest("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/konstue-equality-expressions/p-3/pos/1.1.kt");
                             }
 
                             @Test
                             public void testAllFilesPresentInPos() throws Exception {
-                                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/value-equality-expressions/p-3/pos"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
+                                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/linked/expressions/equality-expressions/konstue-equality-expressions/p-3/pos"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
                             }
                         }
                     }

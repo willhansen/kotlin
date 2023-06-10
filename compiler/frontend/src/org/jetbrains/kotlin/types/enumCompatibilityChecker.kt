@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.types.typeUtil.*
 
 fun checkEnumsForCompatibility(context: ResolutionContext<*>, reportOn: KtElement, typeA: KotlinType, typeB: KotlinType) {
     if (isIncompatibleEnums(typeA, typeB)) {
-        val diagnostic = if (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitComparisonOfIncompatibleEnums)) {
+        konst diagnostic = if (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitComparisonOfIncompatibleEnums)) {
             Errors.INCOMPATIBLE_ENUM_COMPARISON_ERROR
         } else {
             Errors.INCOMPATIBLE_ENUM_COMPARISON
@@ -34,16 +34,16 @@ private fun isIncompatibleEnums(typeA: KotlinType, typeB: KotlinType): Boolean {
     // For now, this check is needed as isSubClass contains bug wrt Nothing
     if (typeA.isNothingOrNullableNothing() || typeB.isNothingOrNullableNothing()) return false
 
-    val representativeTypeA = typeA.representativeTypeForTypeParameter()
-    val representativeTypeB = typeB.representativeTypeForTypeParameter()
+    konst representativeTypeA = typeA.representativeTypeForTypeParameter()
+    konst representativeTypeB = typeB.representativeTypeForTypeParameter()
 
-    val classA = representativeTypeA.constructor.declarationDescriptor as? ClassDescriptor ?: return false
-    val classB = representativeTypeB.constructor.declarationDescriptor as? ClassDescriptor ?: return false
+    konst classA = representativeTypeA.constructor.declarationDescriptor as? ClassDescriptor ?: return false
+    konst classB = representativeTypeB.constructor.declarationDescriptor as? ClassDescriptor ?: return false
 
     return !DescriptorUtils.isSubclass(classA, classB) && !DescriptorUtils.isSubclass(classB, classA)
 }
 
 private fun KotlinType.representativeTypeForTypeParameter(): KotlinType {
-    val descriptor = constructor.declarationDescriptor
+    konst descriptor = constructor.declarationDescriptor
     return if (descriptor is TypeParameterDescriptor) descriptor.representativeUpperBound else this
 }

@@ -240,7 +240,7 @@ typedef int (*curl_xferinfo_callback)(void *clientp,
 #ifndef CURL_MAX_WRITE_SIZE
   /* Tests have proven that 20K is a very bad buffer size for uploads on
      Windows, while 16K for some odd reason performed a lot better.
-     We do the ifndef check to allow this value to easier be changed at build
+     We do the ifndef check to allow this konstue to easier be changed at build
      time for those who feel adventurous. The practical minimum is about
      400 bytes since libcurl uses a buffer of this size as a scratch area
      (unrelated to network send operations). */
@@ -348,7 +348,7 @@ typedef long (*curl_chunk_end_callback)(void *ptr);
 #define CURL_FNMATCHFUNC_FAIL     2 /* an error occurred */
 
 /* callback type for wildcard downloading pattern matching. If the
-   string matches the pattern, return CURL_FNMATCHFUNC_MATCH value, etc. */
+   string matches the pattern, return CURL_FNMATCHFUNC_MATCH konstue, etc. */
 typedef int (*curl_fnmatch_callback)(void *ptr,
                                      const char *pattern,
                                      const char *string);
@@ -472,7 +472,7 @@ typedef int (*curl_debug_callback)
         void *userptr);    /* whatever the user please */
 
 /* All possible error codes from all sorts of curl functions. Future versions
-   may return other values, stay prepared.
+   may return other konstues, stay prepared.
 
    Always add new return codes last. Never *EVER* remove any. The return
    codes must remain the same!
@@ -555,7 +555,7 @@ typedef enum {
   CURLE_PEER_FAILED_VERIFICATION, /* 60 - peer's certificate or fingerprint
                                      wasn't verified fine */
   CURLE_BAD_CONTENT_ENCODING,    /* 61 - Unrecognized/bad encoding */
-  CURLE_LDAP_INVALID_URL,        /* 62 - Invalid LDAP URL */
+  CURLE_LDAP_INVALID_URL,        /* 62 - Inkonstid LDAP URL */
   CURLE_FILESIZE_EXCEEDED,       /* 63 - Maximum file size exceeded */
   CURLE_USE_SSL_FAILED,          /* 64 - Requested FTP SSL level failed */
   CURLE_SEND_FAIL_REWIND,        /* 65 - Sending the data requires a rewind
@@ -601,7 +601,7 @@ typedef enum {
                                     session will be queued */
   CURLE_SSL_PINNEDPUBKEYNOTMATCH, /* 90 - specified pinned public key did not
                                      match */
-  CURLE_SSL_INVALIDCERTSTATUS,   /* 91 - invalid certificate status */
+  CURLE_SSL_INVALIDCERTSTATUS,   /* 91 - inkonstid certificate status */
   CURLE_HTTP2_STREAM,            /* 92 - stream error in HTTP/2 framing layer
                                     */
   CURLE_RECURSIVE_API_CALL,      /* 93 - an api function was called from
@@ -824,7 +824,7 @@ struct curl_khkey {
   enum curl_khtype keytype;
 };
 
-/* this is the set of return values expected from the curl_sshkeycallback
+/* this is the set of return konstues expected from the curl_sshkeycallback
    callback */
 enum curl_khstat {
   CURLKHSTAT_FINE_ADD_TO_FILE,
@@ -889,10 +889,10 @@ typedef enum {
 
 /* The default connection attempt delay in milliseconds for happy eyeballs.
    CURLOPT_HAPPY_EYEBALLS_TIMEOUT_MS.3 and happy-eyeballs-timeout-ms.d document
-   this value, keep them in sync. */
+   this konstue, keep them in sync. */
 #define CURL_HET_DEFAULT 200L
 
-/* The default connection upkeep interval in milliseconds. */
+/* The default connection upkeep interkonst in milliseconds. */
 #define CURL_UPKEEP_INTERVAL_DEFAULT 60000L
 
 #ifndef CURL_NO_OLDIES /* define this to test if your app builds with all
@@ -1044,11 +1044,11 @@ typedef CURLSTScode (*curl_hstswrite_callback)(CURL *easy,
 /* 'void *' argument passed untouched to callback */
 #define CURLOPTTYPE_CBPOINT     CURLOPTTYPE_OBJECTPOINT
 
-/* 'long' argument with a set of values/bitmask */
+/* 'long' argument with a set of konstues/bitmask */
 #define CURLOPTTYPE_VALUES      CURLOPTTYPE_LONG
 
 /*
- * All CURLOPT_* values.
+ * All CURLOPT_* konstues.
  */
 
 typedef enum {
@@ -1274,7 +1274,7 @@ typedef enum {
   /* Set if we should verify the peer in ssl handshake, set 1 to verify. */
   CURLOPT(CURLOPT_SSL_VERIFYPEER, CURLOPTTYPE_LONG, 64),
 
-  /* The CApath or CAfile used to validate the peer certificate
+  /* The CApath or CAfile used to konstidate the peer certificate
      this option is used only if SSL_VERIFYPEER is true */
   CURLOPT(CURLOPT_CAINFO, CURLOPTTYPE_STRINGPOINT, 65),
 
@@ -1367,7 +1367,7 @@ typedef enum {
    */
   CURLOPT(CURLOPT_SSLENGINE_DEFAULT, CURLOPTTYPE_LONG, 90),
 
-  /* Non-zero value means to use the global dns cache */
+  /* Non-zero konstue means to use the global dns cache */
   /* DEPRECATED, do not use! */
   CURLOPT(CURLOPT_DNS_USE_GLOBAL_CACHE, CURLOPTTYPE_LONG, 91),
 
@@ -1386,7 +1386,7 @@ typedef enum {
   /* mark this as start of a cookie session */
   CURLOPT(CURLOPT_COOKIESESSION, CURLOPTTYPE_LONG, 96),
 
-  /* The CApath directory used to validate the peer certificate
+  /* The CApath directory used to konstidate the peer certificate
      this option is used only if SSL_VERIFYPEER is true */
   CURLOPT(CURLOPT_CAPATH, CURLOPTTYPE_STRINGPOINT, 97),
 
@@ -1401,7 +1401,7 @@ typedef enum {
   /* Provide a CURLShare for mutexing non-ts data */
   CURLOPT(CURLOPT_SHARE, CURLOPTTYPE_OBJECTPOINT, 100),
 
-  /* indicates type of proxy. accepted values are CURLPROXY_HTTP (default),
+  /* indicates type of proxy. accepted konstues are CURLPROXY_HTTP (default),
      CURLPROXY_HTTPS, CURLPROXY_SOCKS4, CURLPROXY_SOCKS4A and
      CURLPROXY_SOCKS5. */
   CURLOPT(CURLOPT_PROXYTYPE, CURLOPTTYPE_VALUES, 101),
@@ -1427,7 +1427,7 @@ typedef enum {
      attempted before the good old traditional PORT command. */
   CURLOPT(CURLOPT_FTP_USE_EPRT, CURLOPTTYPE_LONG, 106),
 
-  /* Set this to a bitmask value to enable the particular authentications
+  /* Set this to a bitmask konstue to enable the particular authentications
      methods you like. Use this in combination with CURLOPT_USERPWD.
      Note that setting multiple bits may cause extra network round-trips. */
   CURLOPT(CURLOPT_HTTPAUTH, CURLOPTTYPE_VALUES, 107),
@@ -1447,7 +1447,7 @@ typedef enum {
   */
   CURLOPT(CURLOPT_FTP_CREATE_MISSING_DIRS, CURLOPTTYPE_LONG, 110),
 
-  /* Set this to a bitmask value to enable the particular authentications
+  /* Set this to a bitmask konstue to enable the particular authentications
      methods you like. Use this in combination with CURLOPT_PROXYUSERPWD.
      Note that setting multiple bits may cause extra network round-trips. */
   CURLOPT(CURLOPT_PROXYAUTH, CURLOPTTYPE_VALUES, 111),
@@ -1666,7 +1666,7 @@ typedef enum {
      example, local.com will match local.com and www.local.com, but NOT
      notlocal.com or www.notlocal.com. For compatibility with other
      implementations of this, .local.com will be considered to be the same as
-     local.com. A single * is the only valid wildcard, and effectively
+     local.com. A single * is the only konstid wildcard, and effectively
      disables the use of proxy. */
   CURLOPT(CURLOPT_NOPROXY, CURLOPTTYPE_STRINGPOINT, 177),
 
@@ -1850,7 +1850,7 @@ typedef enum {
   /* Pass in a bitmask of "header options" */
   CURLOPT(CURLOPT_HEADEROPT, CURLOPTTYPE_VALUES, 229),
 
-  /* The public key in DER form used to validate the peer public key
+  /* The public key in DER form used to konstidate the peer public key
      this option is used only if SSL_VERIFYPEER is true */
   CURLOPT(CURLOPT_PINNEDPUBLICKEY, CURLOPTTYPE_STRINGPOINT, 230),
 
@@ -1901,11 +1901,11 @@ typedef enum {
    * HTTP status code >= 300 */
   CURLOPT(CURLOPT_KEEP_SENDING_ON_ERROR, CURLOPTTYPE_LONG, 245),
 
-  /* The CApath or CAfile used to validate the proxy certificate
+  /* The CApath or CAfile used to konstidate the proxy certificate
      this option is used only if PROXY_SSL_VERIFYPEER is true */
   CURLOPT(CURLOPT_PROXY_CAINFO, CURLOPTTYPE_STRINGPOINT, 246),
 
-  /* The CApath directory used to validate the proxy certificate
+  /* The CApath directory used to konstidate the proxy certificate
      this option is used only if PROXY_SSL_VERIFYPEER is true */
   CURLOPT(CURLOPT_PROXY_CAPATH, CURLOPTTYPE_STRINGPOINT, 247),
 
@@ -1961,7 +1961,7 @@ typedef enum {
   /* Name of pre proxy to use. */
   CURLOPT(CURLOPT_PRE_PROXY, CURLOPTTYPE_STRINGPOINT, 262),
 
-  /* The public key in DER form used to validate the proxy public key
+  /* The public key in DER form used to konstidate the proxy public key
      this option is used only if PROXY_SSL_VERIFYPEER is true */
   CURLOPT(CURLOPT_PROXY_PINNEDPUBLICKEY, CURLOPTTYPE_STRINGPOINT, 263),
 
@@ -2225,10 +2225,10 @@ typedef enum {
   CURL_TIMECOND_LAST
 } curl_TimeCond;
 
-/* Special size_t value signaling a null-terminated string. */
+/* Special size_t konstue signaling a null-terminated string. */
 #define CURL_ZERO_TERMINATED ((size_t) -1)
 
-/* curl_strequal() and curl_strnequal() are subject for removal in a future
+/* curl_strequal() and curl_strnequal() are subject for remokonst in a future
    release */
 CURL_EXTERN int curl_strequal(const char *s1, const char *s2);
 CURL_EXTERN int curl_strnequal(const char *s1, const char *s2, size_t n);
@@ -2390,7 +2390,7 @@ typedef enum {
 /* structure to be used as parameter for CURLFORM_ARRAY */
 struct curl_forms {
   CURLformoption option;
-  const char     *value;
+  const char     *konstue;
 };
 
 /* use this for multipart formpost building */
@@ -2662,7 +2662,7 @@ struct curl_certinfo {
   int num_of_certs;             /* number of certificates with information */
   struct curl_slist **certinfo; /* for each index in this array, there's a
                                    linked list with textual information in the
-                                   format "name: value" */
+                                   format "name: konstue" */
 };
 
 /* Information about the SSL library used and the respective internal SSL
@@ -2969,8 +2969,8 @@ CURL_EXTERN curl_version_info_data *curl_version_info(CURLversion);
  *
  * DESCRIPTION
  *
- * The curl_easy_strerror function may be used to turn a CURLcode value
- * into the equivalent human readable error string.  This is useful
+ * The curl_easy_strerror function may be used to turn a CURLcode konstue
+ * into the equikonstent human readable error string.  This is useful
  * for printing meaningful error messages.
  */
 CURL_EXTERN const char *curl_easy_strerror(CURLcode);
@@ -2980,8 +2980,8 @@ CURL_EXTERN const char *curl_easy_strerror(CURLcode);
  *
  * DESCRIPTION
  *
- * The curl_share_strerror function may be used to turn a CURLSHcode value
- * into the equivalent human readable error string.  This is useful
+ * The curl_share_strerror function may be used to turn a CURLSHcode konstue
+ * into the equikonstent human readable error string.  This is useful
  * for printing meaningful error messages.
  */
 CURL_EXTERN const char *curl_share_strerror(CURLSHcode);

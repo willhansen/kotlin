@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 class Issue {
-    val strings by bidir_collection(String::class) {
+    konst strings by bidir_collection(String::class) {
         takeIssue(it) // Issue? instead of Issue
     }
 }
@@ -19,5 +19,5 @@ class Delegate<R, T> {
         return null!!
     }
 
-    operator fun setValue(thisRef: R, property: KProperty<*>, value: T) {}
+    operator fun setValue(thisRef: R, property: KProperty<*>, konstue: T) {}
 }

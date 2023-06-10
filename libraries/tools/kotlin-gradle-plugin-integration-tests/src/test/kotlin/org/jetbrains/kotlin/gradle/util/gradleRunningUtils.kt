@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.gradle.SYSTEM_LINE_SEPARATOR
 import java.io.File
 
 class ProcessRunResult(
-    private val cmd: List<String>,
-    private val workingDir: File,
-    val exitCode: Int,
-    val output: String,
-    val stdErr: String,
+    private konst cmd: List<String>,
+    private konst workingDir: File,
+    konst exitCode: Int,
+    konst output: String,
+    konst stdErr: String,
 ) {
-    val isSuccessful: Boolean
+    konst isSuccessful: Boolean
         get() = exitCode == 0
 
     override fun toString(): String = """
@@ -33,23 +33,23 @@ fun runProcess(
     environmentVariables: Map<String, String> = mapOf(),
     options: BaseGradleIT.BuildOptions? = null
 ): ProcessRunResult {
-    val builder = ProcessBuilder(cmd)
+    konst builder = ProcessBuilder(cmd)
     builder.environment().putAll(environmentVariables)
     builder.directory(workingDir)
     // redirectErrorStream merges stdout and stderr, so it can be get from process.inputStream
     builder.redirectErrorStream(true)
 
-    val process = builder.start()
+    konst process = builder.start()
     // important to read inputStream, otherwise the process may hang on some systems
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
     process.inputStream!!.bufferedReader().forEachLine {
         if (options?.forceOutputToStdout ?: false) {
             println(it)
         }
         sb.append(it).append(SYSTEM_LINE_SEPARATOR)
     }
-    val stdErr = process.errorStream.bufferedReader().use { it.readText() }
-    val exitCode = process.waitFor()
+    konst stdErr = process.errorStream.bufferedReader().use { it.readText() }
+    konst exitCode = process.waitFor()
 
     return ProcessRunResult(cmd, workingDir, exitCode, sb.toString(), stdErr)
 }
@@ -61,7 +61,7 @@ fun createGradleCommand(wrapperDir: File, tailParameters: List<String>): List<St
         listOf("/bin/bash", "${wrapperDir.absolutePath}/gradlew") + tailParameters
 }
 
-val isWindows: Boolean = System.getProperty("os.name")!!.contains("Windows")
+konst isWindows: Boolean = System.getProperty("os.name")!!.contains("Windows")
 
 /**
  * Asserts the result of running a process by calling a set of assertions on the result object.

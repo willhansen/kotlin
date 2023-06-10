@@ -17,7 +17,7 @@ fun resetApplicationToNull(old: Application?) {
 
 fun resetApplicationToNull() {
     try {
-        val ourApplicationField: Field = ApplicationManager::class.java.getDeclaredField("ourApplication")
+        konst ourApplicationField: Field = ApplicationManager::class.java.getDeclaredField("ourApplication")
         ourApplicationField.setAccessible(true)
         ourApplicationField.set(null, null)
     } catch (e: Exception) {

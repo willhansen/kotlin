@@ -24,19 +24,19 @@ open class A {
 enum class Super_2 {
     V1, V2;
 
-    companion object values : A() {}
+    companion object konstues : A() {}
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase1.Super_2.values; typeCall: function")!>values()<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase1.Super_2.konstues; typeCall: function")!>konstues()<!>
     }
 
     enum class NestedWithCompanion {
         V1;
 
-        companion object values : A() {}
+        companion object konstues : A() {}
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase1.Super_2.NestedWithCompanion.values; typeCall: function")!>values()<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase1.Super_2.NestedWithCompanion.konstues; typeCall: function")!>konstues()<!>
         }
     }
 
@@ -44,7 +44,7 @@ enum class Super_2 {
         V1;
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase1.Super_2.Nested.values; typeCall: function")!>values()<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase1.Super_2.Nested.konstues; typeCall: function")!>konstues()<!>
         }
     }
 }
@@ -54,25 +54,25 @@ enum class Super_2 {
 package testsCase2
 
 open class A {
-    operator fun invoke(value: String) = print("invoke $value")
+    operator fun invoke(konstue: String) = print("invoke $konstue")
 }
 
 enum class Super_2 {
     V1, V2;
 
-    companion object valueOf : A() {}
+    companion object konstueOf : A() {}
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase2.Super_2.valueOf; typeCall: function")!>valueOf("")<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase2.Super_2.konstueOf; typeCall: function")!>konstueOf("")<!>
     }
 
     enum class NestedWithCompanion {
         V1;
 
-        companion object valueOf : A() {}
+        companion object konstueOf : A() {}
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase2.Super_2.NestedWithCompanion.valueOf; typeCall: function")!>valueOf("")<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase2.Super_2.NestedWithCompanion.konstueOf; typeCall: function")!>konstueOf("")<!>
         }
     }
 
@@ -80,7 +80,7 @@ enum class Super_2 {
         V1;
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase2.Super_2.Nested.valueOf; typeCall: function")!>valueOf("")<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase2.Super_2.Nested.konstueOf; typeCall: function")!>konstueOf("")<!>
         }
     }
 }
@@ -97,19 +97,19 @@ open class A {
 enum class Super_2 {
     V1, V2;
 
-    object values : A() {}
+    object konstues : A() {}
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase3.Super_2.values; typeCall: function")!>values()<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase3.Super_2.konstues; typeCall: function")!>konstues()<!>
     }
 
     enum class NestedWithCompanion {
         V1;
 
-        object values : A() {}
+        object konstues : A() {}
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase3.Super_2.NestedWithCompanion.values; typeCall: function")!>values()<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase3.Super_2.NestedWithCompanion.konstues; typeCall: function")!>konstues()<!>
         }
     }
 
@@ -117,7 +117,7 @@ enum class Super_2 {
         V1;
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase3.Super_2.Nested.values; typeCall: function")!>values()<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase3.Super_2.Nested.konstues; typeCall: function")!>konstues()<!>
         }
     }
 }
@@ -127,28 +127,28 @@ enum class Super_2 {
 package testsCase4
 
 open class A {
-    operator fun invoke(value: String) = print("invoke $value")
+    operator fun invoke(konstue: String) = print("invoke $konstue")
 }
 open class B {
-    operator fun invoke(value: String) = print("invoke $value")
+    operator fun invoke(konstue: String) = print("invoke $konstue")
 }
 
 enum class Super_2 {
     V1, V2;
 
-    object valueOf : A() {}
+    object konstueOf : A() {}
 
     private fun case() {
-        <!DEBUG_INFO_CALL("fqName: testsCase4.Super_2.valueOf; typeCall: function")!>valueOf("")<!>
+        <!DEBUG_INFO_CALL("fqName: testsCase4.Super_2.konstueOf; typeCall: function")!>konstueOf("")<!>
     }
 
     enum class NestedWithCompanion {
         V1;
 
-        object valueOf : B() {}
+        object konstueOf : B() {}
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase4.Super_2.NestedWithCompanion.valueOf; typeCall: function")!>valueOf("")<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase4.Super_2.NestedWithCompanion.konstueOf; typeCall: function")!>konstueOf("")<!>
         }
     }
 
@@ -156,7 +156,7 @@ enum class Super_2 {
         V1;
 
         private fun case() {
-            <!DEBUG_INFO_CALL("fqName: testsCase4.Super_2.Nested.valueOf; typeCall: function")!>valueOf("")<!>
+            <!DEBUG_INFO_CALL("fqName: testsCase4.Super_2.Nested.konstueOf; typeCall: function")!>konstueOf("")<!>
         }
     }
 }

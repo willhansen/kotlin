@@ -360,7 +360,7 @@ public class KtPsiUtil {
 
 
     private static int getPriority(@NotNull KtExpression expression) {
-        int maxPriority = KotlinExpressionParsing.Precedence.values().length + 1;
+        int maxPriority = KotlinExpressionParsing.Precedence.konstues().length + 1;
 
         // same as postfix operations
         if (expression instanceof KtPostfixExpression ||
@@ -386,7 +386,7 @@ public class KtPsiUtil {
         }
 
         IElementType operation = getOperation(expression);
-        for (KotlinExpressionParsing.Precedence precedence : KotlinExpressionParsing.Precedence.values()) {
+        for (KotlinExpressionParsing.Precedence precedence : KotlinExpressionParsing.Precedence.konstues()) {
             if (precedence != KotlinExpressionParsing.Precedence.PREFIX && precedence != KotlinExpressionParsing.Precedence.POSTFIX &&
                 precedence.getOperations().contains(operation)) {
                 return maxPriority - precedence.ordinal() - 1;
@@ -809,7 +809,7 @@ public class KtPsiUtil {
 
             PsiElement parent = declaration.getParent();
 
-            // val/var parameter of primary constructor should be considered as local according to containing class
+            // konst/var parameter of primary constructor should be considered as local according to containing class
             if (((KtParameter) declaration).hasValOrVar() && parent != null && parent.getParent() instanceof KtPrimaryConstructor) {
                 return getEnclosingElementForLocalDeclaration(((KtPrimaryConstructor) parent.getParent()).getContainingClassOrObject(), skipParameters);
             }
@@ -851,7 +851,7 @@ public class KtPsiUtil {
                 return (KtElement) current;
             }
             if (current instanceof KtValueArgument) {
-                // for members, value argument is never enough, see KT-10546
+                // for members, konstue argument is never enough, see KT-10546
                 if (!isNonLocalCallable) {
                     return (KtElement) current;
                 }

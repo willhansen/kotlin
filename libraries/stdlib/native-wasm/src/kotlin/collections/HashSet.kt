@@ -6,10 +6,10 @@
 package kotlin.collections
 
 actual class HashSet<E> internal constructor(
-        private val backing: HashMap<E, *>
+        private konst backing: HashMap<E, *>
 ) : MutableSet<E>, kotlin.native.internal.KonanSet<E>, AbstractMutableSet<E>() {
     private companion object {
-        private val Empty = HashSet(HashMap.EmptyHolder.value<Nothing, Nothing>())
+        private konst Empty = HashSet(HashMap.EmptyHolder.konstue<Nothing, Nothing>())
     }
 
     /**
@@ -60,7 +60,7 @@ actual class HashSet<E> internal constructor(
         return if (size > 0) this else Empty
     }
 
-    override actual val size: Int get() = backing.size
+    override actual konst size: Int get() = backing.size
     override actual fun isEmpty(): Boolean = backing.isEmpty()
     override actual fun contains(element: E): Boolean = backing.containsKey(element)
     override fun getElement(element: E): E? = backing.getKey(element)

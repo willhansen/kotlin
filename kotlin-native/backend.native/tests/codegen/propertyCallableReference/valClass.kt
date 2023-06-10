@@ -3,16 +3,16 @@
  * that can be found in the LICENSE file.
  */
 
-package codegen.propertyCallableReference.valClass
+package codegen.propertyCallableReference.konstClass
 
 import kotlin.test.*
 
-class A(val x: Int)
+class A(konst x: Int)
 
 @Test fun runTest() {
-    val p1 = A::x
+    konst p1 = A::x
     println(p1.get(A(42)))
-    val a = A(117)
-    val p2 = a::x
+    konst a = A(117)
+    konst p2 = a::x
     println(p2.get())
 }

@@ -4,9 +4,9 @@ package test
 
 @java.lang.annotation.Repeatable(Anno.Container::class)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS)
-annotation class Anno(val code: Int) {
+annotation class Anno(konst code: Int) {
     @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS)
-    annotation class Container(val value: Array<Anno>)
+    annotation class Container(konst konstue: Array<Anno>)
 }
 
 @Anno(1)

@@ -23,7 +23,7 @@ class FastJarFSTest : TestCase() {
 
     private var fs: FastJarFileSystem? = null
     private var coreAppEnv: JavaCoreApplicationEnvironment? = null
-    private val rootDisposable = Disposer.newDisposable()
+    private konst rootDisposable = Disposer.newDisposable()
 
     override fun setUp() {
         super.setUp()
@@ -40,13 +40,13 @@ class FastJarFSTest : TestCase() {
     }
 
     fun testZip64FormatIsSupported() {
-        val fs = fs ?: return
-        val tmpDir = KotlinTestUtils.tmpDirForTest(this)
-        val jarFile = File(tmpDir, "tmp.jar")
-        val out = ZipOutputStream(FileOutputStream(jarFile))
+        konst fs = fs ?: return
+        konst tmpDir = KotlinTestUtils.tmpDirForTest(this)
+        konst jarFile = File(tmpDir, "tmp.jar")
+        konst out = ZipOutputStream(FileOutputStream(jarFile))
 
         // Should be more than 65535
-        val entriesNumber = 70000
+        konst entriesNumber = 70000
         for (i in 0..entriesNumber) {
             out.putNextEntry(ZipEntry("$i.txt"))
             out.writer().apply {
@@ -57,28 +57,28 @@ class FastJarFSTest : TestCase() {
 
         out.close()
 
-        val indicesToCheck = listOf(
+        konst indicesToCheck = listOf(
             0, entriesNumber / 2, entriesNumber / 3, entriesNumber - 1
         )
 
         for (i in indicesToCheck) {
-            val file = fs.findFileByPath(jarFile.absolutePath + "!/$i.txt") ?: error("Not found $i.txt")
+            konst file = fs.findFileByPath(jarFile.absolutePath + "!/$i.txt") ?: error("Not found $i.txt")
             Assert.assertEquals(String(file.contentsToByteArray()), i.toString())
         }
     }
 
-    fun testInvalidJar() {
-        val fs = fs ?: return
-        val tmpDir = KotlinTestUtils.tmpDirForTest(this)
-        val badJarFile = File(tmpDir, "file.pom")
+    fun testInkonstidJar() {
+        konst fs = fs ?: return
+        konst tmpDir = KotlinTestUtils.tmpDirForTest(this)
+        konst badJarFile = File(tmpDir, "file.pom")
         badJarFile.writeText(A_POM_FILE)
 
-        val errFromFastJarFs = captureErr {
+        konst errFromFastJarFs = captureErr {
             fs.findFileByPath(badJarFile.absolutePath + "!/a.class")
         }
         Assert.assertTrue(errFromFastJarFs.contains("WARN: Error while reading zip file:"))
 
-        val errFromCoreJarFs = captureErr {
+        konst errFromCoreJarFs = captureErr {
             coreAppEnv!!.jarFileSystem.findFileByPath(badJarFile.absolutePath + "!/a.class")
         }
         // Asserting that core jar FS still behaves the same way as the "emulation" implemented in FastJarFS
@@ -87,8 +87,8 @@ class FastJarFSTest : TestCase() {
 }
 
 private fun captureErr(body: () -> Unit): String {
-    val outStream = ByteArrayOutputStream()
-    val prevErr = System.err
+    konst outStream = ByteArrayOutputStream()
+    konst prevErr = System.err
     System.setErr(PrintStream(outStream))
     try {
         body()
@@ -100,7 +100,7 @@ private fun captureErr(body: () -> Unit): String {
     return outStream.toString()
 }
 
-private const val A_POM_FILE =
+private const konst A_POM_FILE =
     """<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>

@@ -1,4 +1,4 @@
-val <T : CharSequence> T.gk: Function0<T>
+konst <T : CharSequence> T.gk: Function0<T>
   get(): Function0<T> {
     return local fun <anonymous>(): T {
       return <this>
@@ -10,7 +10,7 @@ fun testGeneric1(x: String): String {
   return x.<get-gk><String>().invoke()
 }
 
-val <T : Any?> T.kt26531Val: Function0<T>
+konst <T : Any?> T.kt26531Val: Function0<T>
   get(): Function0<T> {
     return local fun <no name provided>(): T {
       return <this>

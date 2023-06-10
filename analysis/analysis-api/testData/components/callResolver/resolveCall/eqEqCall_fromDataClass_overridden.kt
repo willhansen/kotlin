@@ -1,4 +1,4 @@
-data class D(val id: String) {
+data class D(konst id: String) {
     override fun equals(other: Any?): Boolean {
         return (other as? D)?.id == id
     }

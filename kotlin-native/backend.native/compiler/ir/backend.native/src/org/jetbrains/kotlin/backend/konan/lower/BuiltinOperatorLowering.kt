@@ -30,10 +30,10 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 /**
  * This lowering pass lowers some calls to [IrBuiltinOperatorDescriptor]s.
  */
-internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass, IrBuildingTransformer(context) {
+internal class BuiltinOperatorLowering(konst context: Context) : FileLoweringPass, IrBuildingTransformer(context) {
 
-    private val irBuiltins = context.irBuiltIns
-    private val symbols = context.ir.symbols
+    private konst irBuiltins = context.irBuiltIns
+    private konst symbols = context.ir.symbols
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(this)
@@ -54,7 +54,7 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
                     context.ir.symbols.throwNoWhenBranchMatchedException.owner.returnType,
                     context.ir.symbols.throwNoWhenBranchMatchedException,
                     context.ir.symbols.throwNoWhenBranchMatchedException.owner.typeParameters.size,
-                    context.ir.symbols.throwNoWhenBranchMatchedException.owner.valueParameters.size)
+                    context.ir.symbols.throwNoWhenBranchMatchedException.owner.konstueParameters.size)
 
             irBuiltins.linkageErrorSymbol -> with(symbols.throwIrLinkageError) { irCall(expression, this, newReturnType = owner.returnType) }
 
@@ -71,14 +71,14 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
     }
 
     private fun ieee754EqualsSymbols(): List<IrSimpleFunctionSymbol> =
-            irBuiltins.ieee754equalsFunByOperandType.values.toList()
+            irBuiltins.ieee754equalsFunByOperandType.konstues.toList()
 
     private fun lowerEqeqeq(expression: IrCall): IrExpression {
-        val lhs = expression.getValueArgument(0)!!
-        val rhs = expression.getValueArgument(1)!!
+        konst lhs = expression.getValueArgument(0)!!
+        konst rhs = expression.getValueArgument(1)!!
 
         return if (lhs.type.isInlinedNative() && rhs.type.isInlinedNative()) {
-            // Achieve the same behavior as with JVM BE: if both sides of `===` are values, then compare by value:
+            // Achieve the same behavior as with JVM BE: if both sides of `===` are konstues, then compare by konstue:
             lowerEqeq(expression)
             // Note: such comparisons are deprecated.
         } else {
@@ -94,14 +94,14 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
                 extensionReceiver = expression
             }
 
-    private val anyEquals = irBuiltins.anyClass.owner.simpleFunctions().single { it.name.asString() == "equals" }
+    private konst anyEquals = irBuiltins.anyClass.owner.simpleFunctions().single { it.name.asString() == "equals" }
 
     private fun lowerEqeq(expression: IrCall): IrExpression {
         // TODO: optimize boxing?
 
         builder.at(expression).run {
-            val lhs = expression.getValueArgument(0)!!
-            val rhs = expression.getValueArgument(1)!!
+            konst lhs = expression.getValueArgument(0)!!
+            konst rhs = expression.getValueArgument(1)!!
 
             if (rhs.isNullConst()) {
                 return irEqeqNull(lhs)
@@ -129,8 +129,8 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
             return true
         }
 
-        val equals = irClass.simpleFunctions()
-                .single { it.name.asString() == "equals" && it.valueParameters.size == 1 && it.overrides(anyEquals) }
+        konst equals = irClass.simpleFunctions()
+                .single { it.name.asString() == "equals" && it.konstueParameters.size == 1 && it.overrides(anyEquals) }
 
         return equals.origin == IrDeclarationOrigin.GENERATED_SINGLE_FIELD_VALUE_CLASS_MEMBER
     }
@@ -140,21 +140,21 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
             rhs: IrExpression,
             lhs: IrExpression
     ): IrExpression {
-        val lhsBinaryType = lhs.type.computeBinaryType()
+        konst lhsBinaryType = lhs.type.computeBinaryType()
         return when (lhsBinaryType) {
             is BinaryType.Primitive -> {
-                val areEqualByValue = symbols.areEqualByValue[lhsBinaryType.type]!!.owner
+                konst areEqualByValue = symbols.areEqualByValue[lhsBinaryType.type]!!.owner
                 irCall(areEqualByValue).apply {
-                    putValueArgument(0, reinterpret(lhs, areEqualByValue.valueParameters[0].type))
-                    putValueArgument(1, reinterpret(rhs, areEqualByValue.valueParameters[1].type))
+                    putValueArgument(0, reinterpret(lhs, areEqualByValue.konstueParameters[0].type))
+                    putValueArgument(1, reinterpret(rhs, areEqualByValue.konstueParameters[1].type))
                 }
             }
 
             is BinaryType.Reference -> {
                 // TODO: don't use binaryType.nullable.
-                val lhsRawType = irBuiltins.anyClass.owner.defaultOrNullableType(lhsBinaryType.nullable)
-                val rhsBinaryType = rhs.type.computeBinaryType() as BinaryType.Reference<*>
-                val rhsRawType = irBuiltins.anyClass.owner.defaultOrNullableType(rhsBinaryType.nullable)
+                konst lhsRawType = irBuiltins.anyClass.owner.defaultOrNullableType(lhsBinaryType.nullable)
+                konst rhsBinaryType = rhs.type.computeBinaryType() as BinaryType.Reference<*>
+                konst rhsRawType = irBuiltins.anyClass.owner.defaultOrNullableType(rhsBinaryType.nullable)
 
                 genFloatingOrReferenceEquals(
                         symbol,
@@ -166,8 +166,8 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
     }
 
     private fun IrBuilderWithScope.irEqeqNull(expression: IrExpression): IrExpression {
-        val type = expression.type.makeNullable()
-        return when (val primitiveBinaryTypeOrNull = type.computePrimitiveBinaryTypeOrNull()) {
+        konst type = expression.type.makeNullable()
+        return when (konst primitiveBinaryTypeOrNull = type.computePrimitiveBinaryTypeOrNull()) {
             null -> irEqeqeq(reinterpret(expression, type, irBuiltins.anyNType), irNull())
             PrimitiveBinaryType.POINTER -> irCall(symbols.areEqualByValue[PrimitiveBinaryType.POINTER]!!.owner).apply {
                 putValueArgument(0, reinterpret(expression, type, symbols.nativePtrType))
@@ -178,7 +178,7 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
     }
 
     private fun lowerCheckNotNull(expression: IrCall) = builder.at(expression).irBlock(resultType = expression.type) {
-        val temp = irTemporary(expression.getValueArgument(0)!!)
+        konst temp = irTemporary(expression.getValueArgument(0)!!)
         +irIfThen(context.irBuiltIns.unitType, irEqeqNull(irGet(temp)), irCall(symbols.throwNullPointerException))
         +irGet(temp)
     }
@@ -203,15 +203,15 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
                         putValueArgument(0, rhs)
                     }
 
-        val lhsIsNotNullable = !lhs.type.isNullable()
-        val rhsIsNotNullable = !rhs.type.isNullable()
+        konst lhsIsNotNullable = !lhs.type.isNullable()
+        konst rhsIsNotNullable = !rhs.type.isNullable()
 
         return if (symbol in ieee754EqualsSymbols()) {
             if (lhsIsNotNullable && rhsIsNotNullable)
                 callEquals(lhs, rhs)
             else irBlock {
-                val lhsTemp = irTemporary(lhs)
-                val rhsTemp = irTemporary(rhs)
+                konst lhsTemp = irTemporary(lhs)
+                konst rhsTemp = irTemporary(rhs)
                 if (lhsIsNotNullable xor rhsIsNotNullable) { // Exactly one nullable.
                     +irLogicalAnd(
                             irIsNotNull(irGet(if (lhsIsNotNullable) rhsTemp else lhsTemp)),
@@ -232,11 +232,11 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
                 callEquals(lhs, rhs)
             else {
                 irBlock {
-                    val lhsTemp = irTemporary(lhs)
+                    konst lhsTemp = irTemporary(lhs)
                     if (rhsIsNotNullable)
                         +irLogicalAnd(irIsNotNull(irGet(lhsTemp)), callEquals(irGet(lhsTemp), rhs))
                     else {
-                        val rhsTemp = irTemporary(rhs)
+                        konst rhsTemp = irTemporary(rhs)
                         +irIfThenElse(irBuiltins.booleanType, irIsNull(irGet(lhsTemp)),
                                 irIsNull(irGet(rhsTemp)),
                                 callEquals(irGet(lhsTemp), irGet(rhsTemp))
@@ -249,8 +249,8 @@ internal class BuiltinOperatorLowering(val context: Context) : FileLoweringPass,
 
     private fun selectIntrinsic(from: List<IrSimpleFunctionSymbol>, lhsType: IrType, rhsType: IrType, allowNullable: Boolean) =
             from.atMostOne {
-                val leftParamType = it.owner.valueParameters[0].type
-                val rightParamType = it.owner.valueParameters[1].type
+                konst leftParamType = it.owner.konstueParameters[0].type
+                konst rightParamType = it.owner.konstueParameters[1].type
                 (lhsType.isSubtypeOf(leftParamType, context.typeSystem) || (allowNullable && lhsType.isSubtypeOf(leftParamType.makeNullable(), context.typeSystem)))
                         && (rhsType.isSubtypeOf(rightParamType, context.typeSystem) || (allowNullable && rhsType.isSubtypeOf(rightParamType.makeNullable(), context.typeSystem)))
             }

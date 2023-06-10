@@ -29,13 +29,13 @@ fun <I : ControlFlowInfo<I, *, *>> PathAwareControlFlowInfo<I>.join(
 abstract class PathAwareControlFlowGraphVisitor<I : ControlFlowInfo<I, *, *>> :
     ControlFlowGraphVisitor<PathAwareControlFlowInfo<I>, PathAwareControlFlowInfo<I>>() {
 
-    abstract val emptyInfo: PathAwareControlFlowInfo<I>
+    abstract konst emptyInfo: PathAwareControlFlowInfo<I>
 
     open fun visitSubGraph(node: CFGNodeWithSubgraphs<*>, graph: ControlFlowGraph): Boolean =
         true // false to skip
 
     open fun visitEdge(from: CFGNode<*>, to: CFGNode<*>, metadata: Edge, data: PathAwareControlFlowInfo<I>): PathAwareControlFlowInfo<I> {
-        val label = metadata.label
+        konst label = metadata.label
         return when {
             // Finally exit is splitting labeled flow. So if we have data for different labels, then
             // data for each only goes along an edge with the same label, and the leftover data
@@ -44,14 +44,14 @@ abstract class PathAwareControlFlowGraphVisitor<I : ControlFlowInfo<I, *, *>> :
                 if (label == UncaughtExceptionPath) {
                     data.mutate {
                         for (other in from.followingNodes) {
-                            val otherLabel = from.edgeTo(other).label
+                            konst otherLabel = from.edgeTo(other).label
                             if (otherLabel != UncaughtExceptionPath) {
                                 it.remove(otherLabel)
                             }
                         }
                     }.ifEmpty { emptyInfo } // there should always be UncaughtExceptionPath data, but just in case
                 } else {
-                    val info = data[label] ?: return emptyInfo
+                    konst info = data[label] ?: return emptyInfo
                     persistentMapOf(NormalPath to info)
                 }
             }
@@ -60,7 +60,7 @@ abstract class PathAwareControlFlowGraphVisitor<I : ControlFlowInfo<I, *, *>> :
             // Labeled edge from a jump statement to a `finally` block forks flow. Usually we'd only have
             // NormalPath data here, but technically it's possible (though questionable) to jump from a `finally`
             // (discarding the exception or aborting a previous jump in the process) so merge all data just in case.
-            else -> persistentMapOf(label to data.values.reduce { a, b -> a.merge(b) })
+            else -> persistentMapOf(label to data.konstues.reduce { a, b -> a.merge(b) })
         }
     }
 

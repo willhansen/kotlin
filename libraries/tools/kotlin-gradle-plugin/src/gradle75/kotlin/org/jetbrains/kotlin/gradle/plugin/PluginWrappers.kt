@@ -15,13 +15,13 @@ import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import org.jetbrains.kotlin.gradle.plugin.internal.*
 import javax.inject.Inject
 
-private const val PLUGIN_VARIANT_NAME = "gradle75"
+private const konst PLUGIN_VARIANT_NAME = "gradle75"
 
 open class KotlinPluginWrapper @Inject constructor(
     registry: ToolingModelBuilderRegistry
 ) : AbstractKotlinPluginWrapper(registry) {
 
-    override val pluginVariant: String = PLUGIN_VARIANT_NAME
+    override konst pluginVariant: String = PLUGIN_VARIANT_NAME
 
     override fun apply(project: Project) {
         project.registerVariantImplementations()
@@ -33,7 +33,7 @@ open class KotlinCommonPluginWrapper @Inject constructor(
     registry: ToolingModelBuilderRegistry
 ) : AbstractKotlinCommonPluginWrapper(registry) {
 
-    override val pluginVariant: String = PLUGIN_VARIANT_NAME
+    override konst pluginVariant: String = PLUGIN_VARIANT_NAME
 
     override fun apply(project: Project) {
         project.registerVariantImplementations()
@@ -45,7 +45,7 @@ open class KotlinAndroidPluginWrapper @Inject constructor(
     registry: ToolingModelBuilderRegistry
 ) : AbstractKotlinAndroidPluginWrapper(registry) {
 
-    override val pluginVariant: String = PLUGIN_VARIANT_NAME
+    override konst pluginVariant: String = PLUGIN_VARIANT_NAME
 
     override fun apply(project: Project) {
         project.registerVariantImplementations()
@@ -58,7 +58,7 @@ open class Kotlin2JsPluginWrapper @Inject constructor(
     registry: ToolingModelBuilderRegistry
 ) : AbstractKotlin2JsPluginWrapper(registry) {
 
-    override val pluginVariant: String = PLUGIN_VARIANT_NAME
+    override konst pluginVariant: String = PLUGIN_VARIANT_NAME
 
     override fun apply(project: Project) {
         project.registerVariantImplementations()
@@ -68,7 +68,7 @@ open class Kotlin2JsPluginWrapper @Inject constructor(
 
 open class KotlinMultiplatformPluginWrapper : AbstractKotlinMultiplatformPluginWrapper() {
 
-    override val pluginVariant: String = PLUGIN_VARIANT_NAME
+    override konst pluginVariant: String = PLUGIN_VARIANT_NAME
 
     override fun apply(project: Project) {
         project.registerVariantImplementations()
@@ -78,7 +78,7 @@ open class KotlinMultiplatformPluginWrapper : AbstractKotlinMultiplatformPluginW
 
 open class KotlinJsPluginWrapper : AbstractKotlinJsPluginWrapper() {
 
-    override val pluginVariant: String = PLUGIN_VARIANT_NAME
+    override konst pluginVariant: String = PLUGIN_VARIANT_NAME
 
     override fun apply(project: Project) {
         project.registerVariantImplementations()
@@ -90,7 +90,7 @@ open class KotlinPm20PluginWrapper @Inject constructor(
     objectFactory: ObjectFactory
 ) : AbstractKotlinPm20PluginWrapper(objectFactory) {
 
-    override val pluginVariant: String = PLUGIN_VARIANT_NAME
+    override konst pluginVariant: String = PLUGIN_VARIANT_NAME
 
     override fun apply(project: Project) {
         project.registerVariantImplementations()
@@ -123,9 +123,9 @@ open class KotlinPlatformAndroidPlugin : KotlinPlatformImplementationPluginBase(
         (project.extensions.getByName("android") as BaseExtension).sourceSets
 
     override fun addCommonSourceSetToPlatformSourceSet(commonSourceSet: Named, platformProject: Project) {
-        val androidExtension = platformProject.extensions.getByName("android") as BaseExtension
-        val androidSourceSet = androidExtension.sourceSets.findByName(commonSourceSet.name) ?: return
-        val kotlinSourceSet = androidSourceSet.getExtension<SourceDirectorySet>(KOTLIN_DSL_NAME)
+        konst androidExtension = platformProject.extensions.getByName("android") as BaseExtension
+        konst androidSourceSet = androidExtension.sourceSets.findByName(commonSourceSet.name) ?: return
+        konst kotlinSourceSet = androidSourceSet.getExtension<SourceDirectorySet>(KOTLIN_DSL_NAME)
             ?: return
         kotlinSourceSet.source(getKotlinSourceDirectorySetSafe(commonSourceSet)!!)
     }
@@ -146,7 +146,7 @@ open class KotlinApiPlugin : KotlinBaseApiPlugin() {
 }
 
 private fun Project.registerVariantImplementations() {
-    val factories = VariantImplementationFactoriesConfigurator.get(gradle)
+    konst factories = VariantImplementationFactoriesConfigurator.get(gradle)
     factories[MppTestReportHelper.MppTestReportHelperVariantFactory::class] =
         MppTestReportHelperG75.MppTestReportHelperVariantFactoryG75()
     factories[ProjectIsolationStartParameterAccessor.Factory::class] =

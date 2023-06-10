@@ -2,6 +2,6 @@
 enum class E {
     A;
 
-    fun values(): Array<E> = null!!
-    fun valueOf(s: String): E = null!!
+    fun konstues(): Array<E> = null!!
+    fun konstueOf(s: String): E = null!!
 }

@@ -10,13 +10,13 @@ sealed interface AnyClassifier
 sealed interface AnyClass : CirHasVisibility
 
 sealed interface AnyTypeAlias {
-    val underlyingType: AnyType
+    konst underlyingType: AnyType
 }
 
 sealed interface AnyType {
-    val isMarkedNullable: Boolean
+    konst isMarkedNullable: Boolean
 }
 
 sealed interface AnyClassOrTypeAliasType {
-    val classifierId: CirEntityId
+    konst classifierId: CirEntityId
 }

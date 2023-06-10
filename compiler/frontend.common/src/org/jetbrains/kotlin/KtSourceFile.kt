@@ -13,45 +13,45 @@ import java.io.File
 import java.io.InputStream
 
 interface KtSourceFile {
-    val name: String
-    val path: String?
+    konst name: String
+    konst path: String?
 
     fun getContentsAsStream(): InputStream
 }
 
-class KtPsiSourceFile(val psiFile: PsiFile) : KtSourceFile {
-    override val name: String
+class KtPsiSourceFile(konst psiFile: PsiFile) : KtSourceFile {
+    override konst name: String
         get() = psiFile.name
 
-    override val path: String?
+    override konst path: String?
         get() = psiFile.virtualFile?.path
 
     override fun getContentsAsStream(): InputStream = psiFile.virtualFile.inputStream
 }
 
-class KtVirtualFileSourceFile(val virtualFile: VirtualFile) : KtSourceFile {
-    override val name: String
+class KtVirtualFileSourceFile(konst virtualFile: VirtualFile) : KtSourceFile {
+    override konst name: String
         get() = virtualFile.name
 
-    override val path: String
+    override konst path: String
         get() = virtualFile.path
 
     override fun getContentsAsStream(): InputStream = virtualFile.inputStream
 }
 
-class KtIoFileSourceFile(val file: File) : KtSourceFile {
-    override val name: String
+class KtIoFileSourceFile(konst file: File) : KtSourceFile {
+    override konst name: String
         get() = file.name
-    override val path: String
+    override konst path: String
         get() = FileUtilRt.toSystemIndependentName(file.path)
 
     override fun getContentsAsStream(): InputStream = file.inputStream()
 }
 
 class KtInMemoryTextSourceFile(
-    override val name: String,
-    override val path: String?,
-    val text: CharSequence
+    override konst name: String,
+    override konst path: String?,
+    konst text: CharSequence
 ) : KtSourceFile {
     override fun getContentsAsStream(): InputStream = ByteArrayInputStream(text.toString().toByteArray())
 }

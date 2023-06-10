@@ -1,18 +1,18 @@
 FILE: disabledFeature.kt
-    public final inline fun <reified T> requreIsInstance(value: R|kotlin/Any|): R|kotlin/Unit|
+    public final inline fun <reified T> requreIsInstance(konstue: R|kotlin/Any|): R|kotlin/Unit|
         [R|Contract description]
          <
-            Returns(WILDCARD) -> value is T
+            Returns(WILDCARD) -> konstue is T
         >
      {
         when () {
-            (R|<local>/value| !is R|T|) ->  {
+            (R|<local>/konstue| !is R|T|) ->  {
                 throw R|java/lang/IllegalArgumentException.IllegalArgumentException|()
             }
         }
 
     }
-    public final val R|kotlin/Any?|.myLength: R|kotlin/Int?|
+    public final konst R|kotlin/Any?|.myLength: R|kotlin/Int?|
         public get(): R|kotlin/Int?|
             [R|Contract description]
              <

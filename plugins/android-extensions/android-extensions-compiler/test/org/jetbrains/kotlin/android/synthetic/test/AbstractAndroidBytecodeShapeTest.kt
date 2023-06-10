@@ -34,17 +34,17 @@ abstract class AbstractAndroidBytecodeShapeTest : AbstractBytecodeTextTest() {
     }
 
     private fun createEnvironmentForConfiguration(configuration: CompilerConfiguration, path: String) {
-        val layoutPaths = getResPaths(path)
+        konst layoutPaths = getResPaths(path)
         myEnvironment = createTestEnvironment(configuration, layoutPaths)
         addAndroidExtensionsRuntimeLibrary(myEnvironment)
     }
 
     override fun doTest(filePath: String) {
-        val fileName = filePath + getTestName(true) + ".kt"
+        konst fileName = filePath + getTestName(true) + ".kt"
         createAndroidAPIEnvironment(filePath)
         loadFileByFullPath(fileName)
-        val expected = readExpectedOccurrences(fileName)
-        val actual = generateToText()
+        konst expected = readExpectedOccurrences(fileName)
+        konst actual = generateToText()
         checkGeneratedTextAgainstExpectedOccurrences(actual, expected, TargetBackend.ANY, true, JUnit4Assertions)
     }
 }

@@ -10,6 +10,6 @@ class Another {}
 package foo
 
 fun test() {
-    val some = Some()
-    val another = Another()
+    konst some = Some()
+    konst another = Another()
 }

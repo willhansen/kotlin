@@ -10,7 +10,7 @@ public fun foo(): kotlin.Unit
 
 public final data class User {
     public constructor User(/*0*/ surname: kotlin.String)
-    public final val surname: kotlin.String
+    public final konst surname: kotlin.String
     public final operator /*synthesized*/ fun component1(): kotlin.String
     public final /*synthesized*/ fun copy(/*0*/ surname: kotlin.String = ...): User
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

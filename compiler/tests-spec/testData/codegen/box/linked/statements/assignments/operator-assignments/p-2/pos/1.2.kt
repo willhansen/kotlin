@@ -16,9 +16,9 @@
 class B(var a: Int) {
     var plus = false
 
-    operator fun plus(value: Int): B {
+    operator fun plus(konstue: Int): B {
         plus = true
-        a= a + value
+        a= a + konstue
         return this
     }
 

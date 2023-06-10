@@ -1,14 +1,14 @@
 package
 
-public val test1: C
-public val test2: TC /* = C */
-public val test3: C
-public val test4: TC /* = C */
-public val test5: [Error type: Not found recorded type for TC("", "")]
-public val test6: [Error type: Not found recorded type for TI()]
-public val test6a: [Error type: Not found recorded type for Interface()]
-public val test7: [Error type: Not found recorded type for TO()]
-public val test7a: [Error type: Not found recorded type for AnObject()]
+public konst test1: C
+public konst test2: TC /* = C */
+public konst test3: C
+public konst test4: TC /* = C */
+public konst test5: [Error type: Not found recorded type for TC("", "")]
+public konst test6: [Error type: Not found recorded type for TI()]
+public konst test6a: [Error type: Not found recorded type for Interface()]
+public konst test7: [Error type: Not found recorded type for TO()]
+public konst test7a: [Error type: Not found recorded type for AnObject()]
 
 public object AnObject {
     private constructor AnObject()
@@ -20,7 +20,7 @@ public object AnObject {
 public final class C {
     public constructor C()
     public constructor C(/*0*/ x: kotlin.String)
-    public final val x: kotlin.String
+    public final konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -17,7 +17,7 @@ internal fun printMap(p: Printer, name: String, mapping: Map<String, Int>) {
     }
 
     p.withIndent("$name:") {
-        val sortedEnumMap = mapping.toSortedMap()
+        konst sortedEnumMap = mapping.toSortedMap()
         for ((k, v) in sortedEnumMap) {
             p.println("$k($v)")
         }
@@ -25,9 +25,9 @@ internal fun printMap(p: Printer, name: String, mapping: Map<String, Int>) {
 }
 
 internal class TextTable(vararg columnNames: String) {
-    private val rows = ArrayList<List<String>>()
-    private val columnsCount = columnNames.size
-    private val maxLengths = IntArray(columnsCount) { columnNames[it].length }
+    private konst rows = ArrayList<List<String>>()
+    private konst columnsCount = columnNames.size
+    private konst maxLengths = IntArray(columnsCount) { columnNames[it].length }
 
     init {
         rows.add(columnNames.toList())
@@ -44,7 +44,7 @@ internal class TextTable(vararg columnNames: String) {
 
     fun printTo(p: Printer) {
         for (row in rows) {
-            val rowStr = row.withIndex().joinToString("|") { (i, col) -> col.padEnd(maxLengths[i], ' ') }
+            konst rowStr = row.withIndex().joinToString("|") { (i, col) -> col.padEnd(maxLengths[i], ' ') }
             p.println(rowStr)
         }
     }

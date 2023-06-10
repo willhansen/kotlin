@@ -5,9 +5,9 @@ public fun foo(): kotlin.Int
 
 public final data class D {
     public constructor D(/*0*/ x: kotlin.Int, /*1*/ y: kotlin.Int, /*2*/ z: kotlin.Int)
-    public final val x: kotlin.Int
-    public final val y: kotlin.Int
-    public final val z: kotlin.Int
+    public final konst x: kotlin.Int
+    public final konst y: kotlin.Int
+    public final konst z: kotlin.Int
     public final operator /*synthesized*/ fun component1(): kotlin.Int
     public final operator /*synthesized*/ fun component2(): kotlin.Int
     public final operator /*synthesized*/ fun component3(): kotlin.Int

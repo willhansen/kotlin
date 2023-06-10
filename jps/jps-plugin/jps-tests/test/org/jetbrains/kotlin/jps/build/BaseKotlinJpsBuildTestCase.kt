@@ -56,14 +56,14 @@ abstract class BaseKotlinJpsBuildTestCase : JpsBuildTestCase() {
     }
 
     override fun addJdk(name: String, path: String?): JpsSdk<JpsDummyElement> {
-        val homePath = System.getProperty("java.home")
-        val versionString = System.getProperty("java.version")
-        val jdk = myModel.global.addSdk(name, homePath, versionString, JpsJavaSdkType.INSTANCE)
+        konst homePath = System.getProperty("java.home")
+        konst versionString = System.getProperty("java.version")
+        konst jdk = myModel.global.addSdk(name, homePath, versionString, JpsJavaSdkType.INSTANCE)
         jdk.addRoot(StandardFileSystems.JRT_PROTOCOL_PREFIX + homePath + URLUtil.JAR_SEPARATOR + "java.base", JpsOrderRootType.COMPILED)
         return jdk.properties
     }
 
-    private val libraries = mutableMapOf<String, JpsLibrary>()
+    private konst libraries = mutableMapOf<String, JpsLibrary>()
 
     protected fun requireLibrary(library: KotlinJpsLibrary) = libraries.getOrPut(library.id) {
         library.create(myProject)

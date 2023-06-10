@@ -1,10 +1,10 @@
->>> val x = 1
+>>> konst x = 1
 >>> x = 2
-error: val cannot be reassigned
+error: konst cannot be reassigned
 x = 2
 ^
 >>> x++
-error: val cannot be reassigned
+error: konst cannot be reassigned
 x++
 ^
 >>> x

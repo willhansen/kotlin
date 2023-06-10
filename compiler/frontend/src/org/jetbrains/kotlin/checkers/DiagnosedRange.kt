@@ -8,9 +8,9 @@ package org.jetbrains.kotlin.checkers
 import org.jetbrains.kotlin.checkers.diagnostics.TextDiagnostic
 import org.jetbrains.kotlin.utils.SmartList
 
-class DiagnosedRange constructor(val start: Int) {
+class DiagnosedRange constructor(konst start: Int) {
     var end: Int = 0
-    private val diagnostics = SmartList<TextDiagnostic>()
+    private konst diagnostics = SmartList<TextDiagnostic>()
 
     fun getDiagnostics(): List<TextDiagnostic> {
         return diagnostics

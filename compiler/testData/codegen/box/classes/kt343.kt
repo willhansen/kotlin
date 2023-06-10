@@ -4,8 +4,8 @@ fun launch(f : () -> Unit) {
 }
 
 fun box(): String {
-    val list = ArrayList<Int>()
-    val foo : () -> Unit = {
+    konst list = ArrayList<Int>()
+    konst foo : () -> Unit = {
         list.add(2)  //first exception
     }
     foo()
@@ -14,8 +14,8 @@ fun box(): String {
         list.add(3)
     })
 
-    val bar = {
-        val x = 1   //second exception
+    konst bar = {
+        konst x = 1   //second exception
     }
     bar()
 

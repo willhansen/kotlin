@@ -61,8 +61,8 @@ fun IrExpression?.isPure(
             is IrConst<*> -> true
             is IrGetValue -> {
                 if (anyVariable) return true
-                val valueDeclaration = symbol.owner
-                if (valueDeclaration is IrVariable) !valueDeclaration.isVar
+                konst konstueDeclaration = symbol.owner
+                if (konstueDeclaration is IrVariable) !konstueDeclaration.isVar
                 else true
             }
             is IrTypeOperatorCall ->
@@ -72,9 +72,9 @@ fun IrExpression?.isPure(
                                 operator == IrTypeOperator.NOT_INSTANCEOF
                         ) && argument.isPure(anyVariable, checkFields, context)
             is IrCall -> if (context?.isSideEffectFree(this) == true) {
-                for (i in 0 until valueArgumentsCount) {
-                    val valueArgument = getValueArgument(i)
-                    if (!valueArgument.isPure(anyVariable, checkFields, context)) return false
+                for (i in 0 until konstueArgumentsCount) {
+                    konst konstueArgument = getValueArgument(i)
+                    if (!konstueArgument.isPure(anyVariable, checkFields, context)) return false
                 }
                 true
             } else false
@@ -106,8 +106,8 @@ fun CommonBackendContext.createArrayOfExpression(
     arrayElements: List<IrExpression>
 ): IrExpression {
 
-    val arrayType = ir.symbols.array.typeWith(arrayElementType)
-    val arg0 = IrVarargImpl(startOffset, endOffset, arrayType, arrayElementType, arrayElements)
+    konst arrayType = ir.symbols.array.typeWith(arrayElementType)
+    konst arg0 = IrVarargImpl(startOffset, endOffset, arrayType, arrayElementType, arrayElements)
 
     return IrCallImpl(
         startOffset,
@@ -132,12 +132,12 @@ fun IrFunction.getAdapteeFromAdaptedForReferenceFunction() : IrFunction? {
     // applied to a either a call or ReturnableBlock produced from that call inlining.
     // That call's target is the original function which we need to get.
     fun unknownStructure(): Nothing = throw UnsupportedOperationException("Unknown structure of ADAPTER_FOR_CALLABLE_REFERENCE: ${dump()}")
-    val call = when (val statement = body?.statements?.singleOrNull() ?: unknownStructure()) {
+    konst call = when (konst statement = body?.statements?.singleOrNull() ?: unknownStructure()) {
         is IrTypeOperatorCall -> {
             if (statement.operator != IrTypeOperator.IMPLICIT_COERCION_TO_UNIT) unknownStructure()
             statement.argument
         }
-        is IrReturn -> statement.value
+        is IrReturn -> statement.konstue
         else -> statement
     }
     if (call is IrReturnableBlock) return call.inlineFunction ?: unknownStructure()
@@ -145,4 +145,4 @@ fun IrFunction.getAdapteeFromAdaptedForReferenceFunction() : IrFunction? {
     return call.symbol.owner
 }
 
-fun IrBranch.isUnconditional(): Boolean = (condition as? IrConst<*>)?.value == true
+fun IrBranch.isUnconditional(): Boolean = (condition as? IrConst<*>)?.konstue == true

@@ -2,10 +2,10 @@
 fun f() {
     class LocalClass() {
         fun f() {
-            val x = ""
+            konst x = ""
 
             fun loc() {
-                val x3 = ""
+                konst x3 = ""
             }
         }
     }
@@ -14,10 +14,10 @@ fun f() {
 =====================
 == f ==
 fun f() {
-            val x = ""
+            konst x = ""
 
             fun loc() {
-                val x3 = ""
+                konst x3 = ""
             }
         }
 ---------------------
@@ -25,7 +25,7 @@ fun f() {
 =====================
 == loc ==
 fun loc() {
-                val x3 = ""
+                konst x3 = ""
             }
 ---------------------
 ""   <v0>: String   NEW: r("") -> <v0>

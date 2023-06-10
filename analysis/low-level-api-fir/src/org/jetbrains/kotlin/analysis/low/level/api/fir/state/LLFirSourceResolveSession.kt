@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.analysis.low.level.api.fir.state
 
 import org.jetbrains.kotlin.analysis.low.level.api.fir.api.DiagnosticCheckerFilter
-import org.jetbrains.kotlin.analysis.low.level.api.fir.file.builder.retryOnInvalidSession
+import org.jetbrains.kotlin.analysis.low.level.api.fir.file.builder.retryOnInkonstidSession
 import org.jetbrains.kotlin.analysis.low.level.api.fir.sessions.LLFirSession
 import org.jetbrains.kotlin.analysis.project.structure.KtBuiltinsModule
 import org.jetbrains.kotlin.analysis.project.structure.KtLibraryModule
@@ -22,15 +22,15 @@ internal class LLFirSourceResolveSession(
     useSiteSessionFactory: (KtModule) -> LLFirSession
 ) : LLFirResolvableResolveSession(useSiteKtModule, useSiteSessionFactory) {
     override fun getDiagnostics(element: KtElement, filter: DiagnosticCheckerFilter): List<KtPsiDiagnostic> {
-        retryOnInvalidSession {
-            val moduleComponents = getModuleComponentsForElement(element)
+        retryOnInkonstidSession {
+            konst moduleComponents = getModuleComponentsForElement(element)
             return moduleComponents.diagnosticsCollector.getDiagnosticsFor(element, filter)
         }
     }
 
     override fun collectDiagnosticsForFile(ktFile: KtFile, filter: DiagnosticCheckerFilter): Collection<KtPsiDiagnostic> {
-        retryOnInvalidSession {
-            val moduleComponents = getModuleComponentsForElement(ktFile)
+        retryOnInkonstidSession {
+            konst moduleComponents = getModuleComponentsForElement(ktFile)
             return moduleComponents.diagnosticsCollector.collectDiagnosticsForFile(ktFile, filter)
         }
     }

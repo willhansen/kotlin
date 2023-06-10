@@ -5,8 +5,8 @@
 fun foo() {}
 
 fun box(): String {
-    val r1 = Runnable(::foo)
-    val r2 = Runnable(::foo)
+    konst r1 = Runnable(::foo)
+    konst r2 = Runnable(::foo)
 
     if (r1 != r2)
         return "r1 != r2"

@@ -3,14 +3,14 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.spec.utils.validators
+package org.jetbrains.kotlin.spec.utils.konstidators
 
 import org.jetbrains.kotlin.spec.utils.models.AbstractSpecTest
 import java.io.File
 
 class BlackBoxTestTypeValidator(
     testDataFile: File,
-    private val testInfo: AbstractSpecTest
+    private konst testInfo: AbstractSpecTest
 ) : AbstractTestValidator(testInfo, testDataFile) {
     override fun computeTestTypes() = mapOf(1 to testInfo.testType)
 }

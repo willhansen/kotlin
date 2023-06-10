@@ -10,8 +10,8 @@ inline fun <reified T, reified R> test(x: Any, y: Any): Boolean =
         x is T && apply(y) { this is R }
 
 fun box(): String {
-    val a = A()
-    val b = B()
+    konst a = A()
+    konst b = B()
 
     assertEquals(true, test<A, B>(a, b), "test<A, B>(a, b)")
     assertEquals(false, test<A, B>(a, a), "test<A, B>(a, a)")

@@ -12,7 +12,7 @@ class A {
         println ("A::init")
     }
 
-    val a = 1
+    konst a = 1
 
     companion object :B(1) {
         init {
@@ -42,7 +42,7 @@ class A {
     A.AObj.foo()
 }
 
-open class B(val a:Int, val b:Int) {
+open class B(konst a:Int, konst b:Int) {
     constructor(a:Int):this (a, 0) {
         println("B::constructor(" + a.toString()+ ")")
     }

@@ -6,7 +6,7 @@
 import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 @JvmInline
-value class V(val value: String, val value1: String)
+konstue class V(konst konstue: String, konst konstue1: String)
 
 fun box(): String {
     assertFalse(V::class.isSealed)

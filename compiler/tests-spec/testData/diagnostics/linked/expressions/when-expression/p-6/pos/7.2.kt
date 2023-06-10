@@ -7,21 +7,21 @@
  * SPEC VERSION: 0.1-435
  * MAIN LINK: expressions, when-expression -> paragraph 6 -> sentence 7
  * NUMBER: 2
- * DESCRIPTION: 'When' without bound value and with else branch in the last position.
+ * DESCRIPTION: 'When' without bound konstue and with else branch in the last position.
  */
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Int): String {
+fun case_1(konstue_1: Int): String {
     when {
-        value_1 == 1 -> return ""
-        value_1 == 2 -> return ""
+        konstue_1 == 1 -> return ""
+        konstue_1 == 2 -> return ""
         else -> return ""
     }
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Int): String = when {
-    value_1 == 1 -> ""
-    value_1 == 2 -> ""
+fun case_2(konstue_1: Int): String = when {
+    konstue_1 == 1 -> ""
+    konstue_1 == 2 -> ""
     else -> ""
 }

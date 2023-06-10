@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.js.translate.utils.BindingUtils
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolve.BindingContext
 
-class LocalFunctionCollector(val bindingContext: BindingContext) : KtVisitorVoid() {
-    val functions = mutableSetOf<FunctionDescriptor>()
+class LocalFunctionCollector(konst bindingContext: BindingContext) : KtVisitorVoid() {
+    konst functions = mutableSetOf<FunctionDescriptor>()
 
     override fun visitExpression(expression: KtExpression) {
         if (expression is KtDeclarationWithBody) {

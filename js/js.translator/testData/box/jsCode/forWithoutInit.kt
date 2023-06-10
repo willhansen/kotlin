@@ -14,7 +14,7 @@ fun foo(n: Int): String = js("""
 // FILE: b.kt
 // RECOMPILE
 fun box(): String {
-    val r = foo(3)
+    konst r = foo(3)
     if (r != "0;1;2;") return "fail: $r"
     return "OK"
 }

@@ -21,14 +21,14 @@ import org.jetbrains.org.objectweb.asm.Type
 
 class KClassJavaObjectTypeProperty : IntrinsicPropertyGetter() {
     override fun generate(resolvedCall: ResolvedCall<*>?, codegen: ExpressionCodegen, returnType: Type, receiver: StackValue): StackValue? {
-        val receiverValue = resolvedCall!!.extensionReceiver as? ExpressionReceiver ?: return null
-        val classLiteralExpression = receiverValue.expression as? KtClassLiteralExpression ?: return null
-        val receiverExpression = classLiteralExpression.receiverExpression ?: return null
-        val lhs = codegen.bindingContext.get(DOUBLE_COLON_LHS, receiverExpression) ?: return null
+        konst receiverValue = resolvedCall!!.extensionReceiver as? ExpressionReceiver ?: return null
+        konst classLiteralExpression = receiverValue.expression as? KtClassLiteralExpression ?: return null
+        konst receiverExpression = classLiteralExpression.receiverExpression ?: return null
+        konst lhs = codegen.bindingContext.get(DOUBLE_COLON_LHS, receiverExpression) ?: return null
         return StackValue.operation(returnType) { iv ->
             if (lhs is DoubleColonLHS.Expression && !lhs.isObjectQualifier) {
-                val receiverStackValue = codegen.gen(receiverExpression)
-                val extensionReceiverType = receiverStackValue.type
+                konst receiverStackValue = codegen.gen(receiverExpression)
+                konst extensionReceiverType = receiverStackValue.type
                 receiverStackValue.put(extensionReceiverType, iv)
                 when {
                     extensionReceiverType == Type.VOID_TYPE -> {

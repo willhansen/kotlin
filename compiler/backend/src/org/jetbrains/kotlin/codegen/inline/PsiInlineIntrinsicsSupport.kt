@@ -26,8 +26,8 @@ import org.jetbrains.org.objectweb.asm.Type.VOID_TYPE
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class PsiInlineIntrinsicsSupport(
-    override val state: GenerationState,
-    private val reportErrorsOn: KtElement,
+    override konst state: GenerationState,
+    private konst reportErrorsOn: KtElement,
 ) : ReifiedTypeInliner.IntrinsicsSupport<KotlinType> {
     override fun putClassInstance(v: InstructionAdapter, type: KotlinType) {
         DescriptorAsmUtil.putJavaLangClassInstance(v, state.typeMapper.mapType(type), type, state.typeMapper)
@@ -36,7 +36,7 @@ class PsiInlineIntrinsicsSupport(
     override fun generateTypeParameterContainer(v: InstructionAdapter, typeParameter: TypeParameterMarker) {
         require(typeParameter is TypeParameterDescriptor)
 
-        when (val container = typeParameter.containingDeclaration) {
+        when (konst container = typeParameter.containingDeclaration) {
             is ClassDescriptor -> putClassInstance(v, container.defaultType).also { AsmUtil.wrapJavaClassIntoKClass(v) }
             is FunctionDescriptor -> generateFunctionReference(v, container)
             is PropertyDescriptor -> MemberCodegen.generatePropertyReference(v, container, state)
@@ -66,7 +66,7 @@ class PsiInlineIntrinsicsSupport(
     }
 
     override fun isMutableCollectionType(type: KotlinType): Boolean {
-        val classifier = type.constructor.declarationDescriptor
+        konst classifier = type.constructor.declarationDescriptor
         return classifier is ClassDescriptor && JavaToKotlinClassMap.isMutable(classifier.fqNameUnsafe)
     }
 

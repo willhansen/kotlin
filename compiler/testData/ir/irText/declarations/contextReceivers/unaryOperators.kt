@@ -1,6 +1,6 @@
 // !LANGUAGE: +ContextReceivers
 
-data class Result(val i: Int)
+data class Result(konst i: Int)
 
 var operationScore = 0
 

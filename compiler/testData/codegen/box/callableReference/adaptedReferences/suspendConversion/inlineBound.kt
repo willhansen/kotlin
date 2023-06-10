@@ -20,7 +20,7 @@ class C {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     runSuspend {
         invokeSuspend(c::foo)
     }

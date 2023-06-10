@@ -4,26 +4,26 @@
 import kotlin.test.assertEquals
 
 class C {
-    val testClassVal = 100
+    konst testClassVal = 100
 
     @JvmField
-    val testJvmFieldVal = 105
+    konst testJvmFieldVal = 105
 
     companion object {
-        val testCompanionObjectVal = 110
+        konst testCompanionObjectVal = 110
 
         @JvmStatic
-        val testJvmStaticCompanionObjectVal = 120
+        konst testJvmStaticCompanionObjectVal = 120
 
         @JvmField
-        val testJvmFieldCompanionObjectVal = 130
+        konst testJvmFieldCompanionObjectVal = 130
     }
 }
 
 
 interface IFoo {
     companion object {
-        val testInterfaceCompanionObjectVal = 200
+        konst testInterfaceCompanionObjectVal = 200
     }
 }
 
@@ -31,23 +31,23 @@ interface IFoo {
 interface IBar {
     companion object {
         @JvmField
-        val testJvmFieldInInterfaceCompanionObject = 210
+        konst testJvmFieldInInterfaceCompanionObject = 210
     }
 }
 
 
 object Obj {
-    val testObjectVal = 300
+    konst testObjectVal = 300
 
     @JvmStatic
-    val testJvmStaticObjectVal = 310
+    konst testJvmStaticObjectVal = 310
 
     @JvmField
-    val testJvmFieldObjectVal = 320
+    konst testJvmFieldObjectVal = 320
 }
 
 
-val testTopLevelVal = 400
+konst testTopLevelVal = 400
 
 fun box(): String {
     assertEquals(100, C().testClassVal)

@@ -46,7 +46,7 @@ private fun processLogMessageInternal(
     info: (text: String) -> Unit,
     debug: (text: String) -> Unit
 ) {
-    val nonColoredMessage = message.clearAnsiColor()
+    konst nonColoredMessage = message.clearAnsiColor()
     when (type) {
         LogType.WARN -> {
             warn(nonColoredMessage)
@@ -59,7 +59,7 @@ private fun processLogMessageInternal(
     }
 }
 
-enum class LogType(val value: String) {
+enum class LogType(konst konstue: String) {
     ERROR("error"),
     WARN("warn"),
     INFO("info"),
@@ -71,9 +71,9 @@ enum class LogType(val value: String) {
     }
 
     companion object {
-        fun byValueOrNull(value: String?): LogType? {
-            if (value == null) return null
-            return values().singleOrNull { it.value == value }
+        fun byValueOrNull(konstue: String?): LogType? {
+            if (konstue == null) return null
+            return konstues().singleOrNull { it.konstue == konstue }
         }
     }
 }

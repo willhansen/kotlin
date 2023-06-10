@@ -1,6 +1,6 @@
 class Outer {
     private companion object {
-        val result = "OK"
+        konst result = "OK"
 
         fun bar() = result
     }

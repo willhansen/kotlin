@@ -30,8 +30,8 @@ import org.jetbrains.kotlin.test.services.sourceProviders.AdditionalDiagnosticsS
 import org.jetbrains.kotlin.test.services.sourceProviders.CoroutineHelpersSourceFilesProvider
 
 abstract class AbstractDiagnosticsNativeTestBase<R : ResultingArtifact.FrontendOutput<R>> : AbstractKotlinCompilerTest() {
-    abstract val targetFrontend: FrontendKind<R>
-    abstract val frontend: Constructor<FrontendFacade<R>>
+    abstract konst targetFrontend: FrontendKind<R>
+    abstract konst frontend: Constructor<FrontendFacade<R>>
     abstract fun handlersSetup(builder: TestConfigurationBuilder)
 
     override fun TestConfigurationBuilder.configuration() {
@@ -77,10 +77,10 @@ abstract class AbstractDiagnosticsNativeTestBase<R : ResultingArtifact.FrontendO
 }
 
 abstract class AbstractDiagnosticsNativeTest : AbstractDiagnosticsNativeTestBase<ClassicFrontendOutputArtifact>() {
-    override val targetFrontend: FrontendKind<ClassicFrontendOutputArtifact>
+    override konst targetFrontend: FrontendKind<ClassicFrontendOutputArtifact>
         get() = FrontendKinds.ClassicFrontend
 
-    override val frontend: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontend: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
 
     override fun handlersSetup(builder: TestConfigurationBuilder) {
@@ -93,11 +93,11 @@ abstract class AbstractDiagnosticsNativeTest : AbstractDiagnosticsNativeTestBase
     }
 }
 
-abstract class AbstractFirNativeDiagnosticsTestBase(val parser: FirParser) : AbstractDiagnosticsNativeTestBase<FirOutputArtifact>() {
-    override val targetFrontend: FrontendKind<FirOutputArtifact>
+abstract class AbstractFirNativeDiagnosticsTestBase(konst parser: FirParser) : AbstractDiagnosticsNativeTestBase<FirOutputArtifact>() {
+    override konst targetFrontend: FrontendKind<FirOutputArtifact>
         get() = FrontendKinds.FIR
 
-    override val frontend: Constructor<FrontendFacade<FirOutputArtifact>>
+    override konst frontend: Constructor<FrontendFacade<FirOutputArtifact>>
         get() = ::FirFrontendFacade
 
     override fun handlersSetup(builder: TestConfigurationBuilder) {

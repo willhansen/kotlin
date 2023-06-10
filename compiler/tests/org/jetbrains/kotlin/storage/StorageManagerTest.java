@@ -77,43 +77,43 @@ public class StorageManagerTest extends TestCase {
 
 
     public void testIsComputed() throws Exception {
-        NotNullLazyValue<String> value = m.createLazyValue(new CounterValue());
-        assertFalse(value.isComputed());
-        value.invoke();
-        assertTrue(value.isComputed());
+        NotNullLazyValue<String> konstue = m.createLazyValue(new CounterValue());
+        assertFalse(konstue.isComputed());
+        konstue.invoke();
+        assertTrue(konstue.isComputed());
     }
 
     public void testIsNullableComputed() throws Exception {
-        NullableLazyValue<String> value = m.createNullableLazyValue(new CounterValueNull());
-        assertFalse(value.isComputed());
-        value.invoke();
-        assertTrue(value.isComputed());
+        NullableLazyValue<String> konstue = m.createNullableLazyValue(new CounterValueNull());
+        assertFalse(konstue.isComputed());
+        konstue.invoke();
+        assertTrue(konstue.isComputed());
     }
 
     public void testIsComputedAfterException() throws Exception {
-        NotNullLazyValue<String> value = m.createLazyValue(new ExceptionCounterValue());
-        assertFalse(value.isComputed());
+        NotNullLazyValue<String> konstue = m.createLazyValue(new ExceptionCounterValue());
+        assertFalse(konstue.isComputed());
 
         try {
-            value.invoke();
+            konstue.invoke();
         }
         catch (Exception ignored) {
         }
 
-        assertTrue(value.isComputed());
+        assertTrue(konstue.isComputed());
     }
 
     public void testIsNullableComputedAfterException() throws Exception {
-        NullableLazyValue<String> value = m.createNullableLazyValue(new ExceptionCounterValue());
-        assertFalse(value.isComputed());
+        NullableLazyValue<String> konstue = m.createNullableLazyValue(new ExceptionCounterValue());
+        assertFalse(konstue.isComputed());
 
         try {
-            value.invoke();
+            konstue.invoke();
         }
         catch (Exception ignored) {
         }
 
-        assertTrue(value.isComputed());
+        assertTrue(konstue.isComputed());
     }
 
     public void testFunctionComputesOnce() throws Exception {
@@ -172,32 +172,32 @@ public class StorageManagerTest extends TestCase {
 
     public void testNotNullLazyComputedOnce() throws Exception {
         CounterValue counter = new CounterValue();
-        NotNullLazyValue<String> value = m.createLazyValue(counter);
-        doTestComputesOnce(value, "ok1", counter);
+        NotNullLazyValue<String> konstue = m.createLazyValue(counter);
+        doTestComputesOnce(konstue, "ok1", counter);
     }
 
     public void testNullableLazyComputedOnce() throws Exception {
         CounterValue counter = new CounterValue();
-        NullableLazyValue<String> value = m.createNullableLazyValue(counter);
-        doTestComputesOnce(value, "ok1", counter);
+        NullableLazyValue<String> konstue = m.createNullableLazyValue(counter);
+        doTestComputesOnce(konstue, "ok1", counter);
     }
 
     public void testNullIsNotConfusedForNotComputed() throws Exception {
         CounterValueNull counter = new CounterValueNull();
-        NullableLazyValue<String> value = m.createNullableLazyValue(counter);
-        doTestComputesOnce(value, null, counter);
+        NullableLazyValue<String> konstue = m.createNullableLazyValue(counter);
+        doTestComputesOnce(konstue, null, counter);
     }
 
     public void testNotNullLazyPreservesException() throws Exception {
         ExceptionCounterValue counter = new ExceptionCounterValue();
-        NotNullLazyValue<String> value = m.createLazyValue(counter);
-        doTestExceptionPreserved(value, UnsupportedOperationException.class, counter);
+        NotNullLazyValue<String> konstue = m.createLazyValue(counter);
+        doTestExceptionPreserved(konstue, UnsupportedOperationException.class, counter);
     }
 
     public void testNullableLazyPreservesException() throws Exception {
         ExceptionCounterValue counter = new ExceptionCounterValue();
-        NullableLazyValue<String> value = m.createNullableLazyValue(counter);
-        doTestExceptionPreserved(value, UnsupportedOperationException.class, counter);
+        NullableLazyValue<String> konstue = m.createNullableLazyValue(counter);
+        doTestExceptionPreserved(konstue, UnsupportedOperationException.class, counter);
     }
 
     public void testRecursionIntolerance() throws Exception {
@@ -373,7 +373,7 @@ public class StorageManagerTest extends TestCase {
                         return "second";
                     },
                     s -> {
-                        fail("Recursion-tolerating value should not be post computed");
+                        fail("Recursion-tolerating konstue should not be post computed");
                         return Unit.INSTANCE;
                     }
             );

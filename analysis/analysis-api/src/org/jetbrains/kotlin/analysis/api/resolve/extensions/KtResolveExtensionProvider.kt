@@ -28,7 +28,7 @@ public abstract class KtResolveExtensionProvider {
     public abstract fun provideExtensionsFor(module: KtModule): List<KtResolveExtension>
 
     public companion object {
-        public val EP_NAME: ExtensionPointName<KtResolveExtensionProvider> =
+        public konst EP_NAME: ExtensionPointName<KtResolveExtensionProvider> =
             ExtensionPointName<KtResolveExtensionProvider>("org.jetbrains.kotlin.ktResolveExtensionProvider")
 
         public fun provideExtensionsFor(module: KtModule): List<KtResolveExtension> {

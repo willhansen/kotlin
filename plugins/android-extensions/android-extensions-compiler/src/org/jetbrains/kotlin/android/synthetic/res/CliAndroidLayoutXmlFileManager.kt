@@ -28,15 +28,15 @@ class CliAndroidLayoutXmlFileManager(
         applicationPackage: String,
         variants: List<AndroidVariant>
 ) : AndroidLayoutXmlFileManager(project) {
-    override val androidModule = AndroidModule(applicationPackage, variants)
+    override konst androidModule = AndroidModule(applicationPackage, variants)
 
-    private val saxParser: SAXParser = initSAX()
+    private konst saxParser: SAXParser = initSAX()
 
     override fun doExtractResources(layoutGroup: AndroidLayoutGroupData, module: ModuleDescriptor): AndroidLayoutGroup {
-        val layouts = layoutGroup.layouts.map { layout ->
-            val resources = arrayListOf<AndroidResource>()
+        konst layouts = layoutGroup.layouts.map { layout ->
+            konst resources = arrayListOf<AndroidResource>()
 
-            val inputStream = ByteArrayInputStream(layout.virtualFile.contentsToByteArray())
+            konst inputStream = ByteArrayInputStream(layout.virtualFile.contentsToByteArray())
             saxParser.parse(inputStream, AndroidXmlHandler { id, tag ->
                 resources += parseAndroidResource(id, tag, null)
             })
@@ -48,7 +48,7 @@ class CliAndroidLayoutXmlFileManager(
     }
 
     private fun initSAX(): SAXParser {
-        val saxFactory = SAXParserFactory.newInstance()
+        konst saxFactory = SAXParserFactory.newInstance()
         saxFactory.isNamespaceAware = true
         return saxFactory.newSAXParser()
     }

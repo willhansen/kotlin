@@ -21,7 +21,7 @@ KtPropertySetterSymbol:
     isImplicitLambdaParameter: false
     isNoinline: false
     isVararg: false
-    name: value
+    name: konstue
     origin: SOURCE
     receiverParameter: null
     returnType: KtUsualClassType:
@@ -46,7 +46,7 @@ KtPropertySetterSymbol:
     type: kotlin/Unit
   symbolKind: ACCESSOR
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -58,7 +58,7 @@ KtPropertySetterSymbol:
       isImplicitLambdaParameter: false
       isNoinline: false
       isVararg: false
-      name: value
+      name: konstue
       origin: SOURCE
       receiverParameter: null
       returnType: KtUsualClassType:

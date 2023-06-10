@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.fir.types.FirTypeRef
  * **Note**: the signature doesn't contain a name. This check should be done externally.
  */
 internal class FirCallableSignature private constructor(
-    private val receiverType: String?,
-    private val contextReceiverTypes: List<String>,
-    private val parameters: List<String>?,
-    private val typeParametersCount: Int,
-    private val returnType: String,
+    private konst receiverType: String?,
+    private konst contextReceiverTypes: List<String>,
+    private konst parameters: List<String>?,
+    private konst typeParametersCount: Int,
+    private konst returnType: String,
 ) {
     fun hasTheSameSignature(declaration: FirCallableSymbol<*>): Boolean = hasTheSameSignature(declaration.fir)
 
@@ -33,19 +33,19 @@ internal class FirCallableSignature private constructor(
         if ((receiverType == null) != (declaration.receiverParameter == null)) return false
         if (contextReceiverTypes.size != declaration.contextReceivers.size) return false
         if (typeParametersCount != declaration.typeParameters.size) return false
-        if (parameters?.size != (declaration as? FirFunction)?.valueParameters?.size) return false
+        if (parameters?.size != (declaration as? FirFunction)?.konstueParameters?.size) return false
 
         declaration.lazyResolveToPhase(FirResolvePhase.TYPES)
         if (receiverType != declaration.receiverParameter?.typeRef?.renderType()) return false
 
-        val receivers = declaration.contextReceivers
+        konst receivers = declaration.contextReceivers
         for ((index, parameter) in contextReceiverTypes.withIndex()) {
             if (receivers[index].typeRef.renderType() != parameter) return false
         }
 
         if (declaration is FirFunction) {
             requireNotNull(parameters)
-            for ((index, parameter) in declaration.valueParameters.withIndex()) {
+            for ((index, parameter) in declaration.konstueParameters.withIndex()) {
                 if (parameters[index] != parameter.returnTypeRef.renderType()) return false
             }
         }
@@ -84,7 +84,7 @@ internal class FirCallableSignature private constructor(
                 receiverType = callableDeclaration.receiverParameter?.typeRef?.renderType(),
                 contextReceiverTypes = callableDeclaration.contextReceivers.map { it.typeRef.renderType() },
                 parameters = if (callableDeclaration is FirFunction) {
-                    callableDeclaration.valueParameters.map { it.returnTypeRef.renderType() }
+                    callableDeclaration.konstueParameters.map { it.returnTypeRef.renderType() }
                 } else {
                     null
                 },
@@ -109,7 +109,7 @@ private fun FirTypeRef.renderType(builder: StringBuilder = StringBuilder()): Str
     propertyAccessorRenderer = null,
     resolvePhaseRenderer = null,
     typeRenderer = ConeTypeRenderer().apply { attributeRenderer = EmptyConeTypeAttributeRenderer },
-    valueParameterRenderer = null,
+    konstueParameterRenderer = null,
     errorExpressionRenderer = null,
 ).renderElementAsString(this)
 

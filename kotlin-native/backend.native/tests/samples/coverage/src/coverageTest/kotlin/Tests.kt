@@ -9,7 +9,7 @@ class CoverageTests {
 
     @Test
     fun testA() {
-        val a = A()
+        konst a = A()
         a.f()
     }
 }

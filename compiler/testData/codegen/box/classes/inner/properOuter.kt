@@ -1,5 +1,5 @@
-open class A(val s: String) {
-    open inner class B(val s: String) {
+open class A(konst s: String) {
+    open inner class B(konst s: String) {
         fun testB() = s + this@A.s
     }
 
@@ -10,6 +10,6 @@ open class A(val s: String) {
 }
 
 fun box(): String {
-    val res = A("A").C().testC()
+    konst res = A("A").C().testC()
     return if (res == "B_C") "OK" else res;
 }

@@ -11,7 +11,7 @@ fun <T> flow(block: suspend FlowCollector<T>.() -> Unit) = Flow<T>()
 fun <E> produce(block: suspend SendChannel<E>.() -> Unit) {}
 
 interface SendChannel<in E> {
-    val onSend: SelectClause2<E, SendChannel<E>>
+    konst onSend: SelectClause2<E, SendChannel<E>>
 }
 
 interface SelectClause2<in P, out Q>
@@ -25,7 +25,7 @@ interface SelectBuilder<in R> {
 inline fun <R> select(crossinline builder: SelectBuilder<R>.() -> Unit) = Unit as R
 
 fun test() {
-    val x: Flow<String> = flow {
+    konst x: Flow<String> = flow {
         produce {
             select<Unit> {
                 onSend("") {

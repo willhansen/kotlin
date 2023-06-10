@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.psi.psiUtil.getQualifiedExpressionForSelector
 import org.jetbrains.kotlin.psi.psiUtil.getQualifiedExpressionForSelectorOrThis
 
 internal class KtFirSmartcastProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtSmartCastProvider(), KtFirAnalysisSessionComponent {
 
-    private val KtExpression.isExplicitSmartCastInfoTarget: Boolean
+    private konst KtExpression.isExplicitSmartCastInfoTarget: Boolean
         get() {
             // we want to handle only most top-level parenthesised expressions
             if (parent is KtParenthesizedExpression) return false
@@ -45,9 +45,9 @@ internal class KtFirSmartcastProvider(
     private fun getMatchingFirExpressionWithSmartCast(expression: KtExpression): FirSmartCastExpression? {
         if (!expression.isExplicitSmartCastInfoTarget) return null
 
-        val possibleFunctionCall = expression.getPossiblyQualifiedCallExpressionForCallee() ?: expression
+        konst possibleFunctionCall = expression.getPossiblyQualifiedCallExpressionForCallee() ?: expression
 
-        return when (val firExpression = possibleFunctionCall.getOrBuildFir(analysisSession.firResolveSession)) {
+        return when (konst firExpression = possibleFunctionCall.getOrBuildFir(analysisSession.firResolveSession)) {
             is FirSmartCastExpression -> firExpression
             is FirSafeCallExpression -> firExpression.selector as? FirSmartCastExpression
             is FirImplicitInvokeCall -> firExpression.explicitReceiver as? FirSmartCastExpression
@@ -56,27 +56,27 @@ internal class KtFirSmartcastProvider(
     }
 
     override fun getSmartCastedInfo(expression: KtExpression): KtSmartCastInfo? {
-        val firSmartCastExpression = getMatchingFirExpressionWithSmartCast(expression) ?: return null
+        konst firSmartCastExpression = getMatchingFirExpressionWithSmartCast(expression) ?: return null
         return getSmartCastedInfo(firSmartCastExpression)
     }
 
     private fun getSmartCastedInfo(expression: FirSmartCastExpression): KtSmartCastInfo? {
-        val type = expression.smartcastType.coneTypeSafe<ConeKotlinType>()?.asKtType() ?: return null
+        konst type = expression.smartcastType.coneTypeSafe<ConeKotlinType>()?.asKtType() ?: return null
         return KtSmartCastInfo(type, expression.isStable, token)
     }
 
-    private val KtExpression.isImplicitSmartCastInfoTarget: Boolean
+    private konst KtExpression.isImplicitSmartCastInfoTarget: Boolean
         get() = this is KtNameReferenceExpression || this is KtOperationReferenceExpression
 
     private fun getMatchingFirQualifiedAccessExpression(expression: KtExpression): FirQualifiedAccessExpression? {
         if (!expression.isImplicitSmartCastInfoTarget) return null
 
-        val wholeExpression = expression.getOperationExpressionForOperationReference()
+        konst wholeExpression = expression.getOperationExpressionForOperationReference()
             ?: expression.getPossiblyQualifiedCallExpressionForCallee()
             ?: expression.getQualifiedExpressionForSelector()
             ?: expression
 
-        return when (val firExpression = wholeExpression.getOrBuildFir(analysisSession.firResolveSession)) {
+        return when (konst firExpression = wholeExpression.getOrBuildFir(analysisSession.firResolveSession)) {
             is FirQualifiedAccessExpression -> firExpression
             is FirSafeCallExpression -> firExpression.selector as? FirQualifiedAccessExpression
             is FirSmartCastExpression -> firExpression.originalExpression as? FirQualifiedAccessExpression
@@ -85,7 +85,7 @@ internal class KtFirSmartcastProvider(
     }
 
     override fun getImplicitReceiverSmartCast(expression: KtExpression): Collection<KtImplicitReceiverSmartCast> {
-        val firQualifiedExpression = getMatchingFirQualifiedAccessExpression(expression) ?: return emptyList()
+        konst firQualifiedExpression = getMatchingFirQualifiedAccessExpression(expression) ?: return emptyList()
 
         return listOfNotNull(
             smartCastedImplicitReceiver(firQualifiedExpression, KtImplicitReceiverSmartCastKind.DISPATCH),
@@ -97,7 +97,7 @@ internal class KtFirSmartcastProvider(
         firExpression: FirQualifiedAccessExpression,
         kind: KtImplicitReceiverSmartCastKind,
     ): KtImplicitReceiverSmartCast? {
-        val receiver = when (kind) {
+        konst receiver = when (kind) {
             KtImplicitReceiverSmartCastKind.DISPATCH -> firExpression.dispatchReceiver
             KtImplicitReceiverSmartCastKind.EXTENSION -> firExpression.extensionReceiver
         }
@@ -105,13 +105,13 @@ internal class KtFirSmartcastProvider(
         if (receiver == firExpression.explicitReceiver) return null
         if (!receiver.isStableSmartcast()) return null
 
-        val type = receiver.typeRef.coneTypeSafe<ConeKotlinType>()?.asKtType() ?: return null
+        konst type = receiver.typeRef.coneTypeSafe<ConeKotlinType>()?.asKtType() ?: return null
         return KtImplicitReceiverSmartCast(type, kind, token)
     }
 }
 
 private fun KtExpression.getPossiblyQualifiedCallExpressionForCallee(): KtExpression? {
-    val expressionParent = this.parent
+    konst expressionParent = this.parent
 
     return if (expressionParent is KtCallExpression && expressionParent.calleeExpression == this) {
         expressionParent.getQualifiedExpressionForSelectorOrThis()

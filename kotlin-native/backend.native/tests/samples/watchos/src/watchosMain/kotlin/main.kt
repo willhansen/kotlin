@@ -16,8 +16,8 @@ external fun WKExtensionMain(argc: Int, argv: CPointer<CPointerVar<ByteVar>>)
 
 fun main(args: Array<String>) {
     memScoped {
-        val argc = args.size + 1
-        val argv = (arrayOf("konan") + args).map { it.cstr.ptr }.toCValues()
+        konst argc = args.size + 1
+        konst argv = (arrayOf("konan") + args).map { it.cstr.ptr }.toCValues()
 
         autoreleasepool {
             WKExtensionMain(argc, argv.ptr)

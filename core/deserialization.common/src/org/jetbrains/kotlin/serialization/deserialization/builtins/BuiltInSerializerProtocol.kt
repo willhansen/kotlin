@@ -29,8 +29,8 @@ object BuiltInSerializerProtocol : SerializerExtensionProtocol(
     BuiltInsProtoBuf.typeAnnotation,
     BuiltInsProtoBuf.typeParameterAnnotation
 ) {
-    const val BUILTINS_FILE_EXTENSION = "kotlin_builtins"
-    const val DOT_DEFAULT_EXTENSION = ".$BUILTINS_FILE_EXTENSION"
+    const konst BUILTINS_FILE_EXTENSION = "kotlin_builtins"
+    const konst DOT_DEFAULT_EXTENSION = ".$BUILTINS_FILE_EXTENSION"
 
     fun getBuiltInsFilePath(fqName: FqName): String =
         fqName.asString().replace('.', '/') + "/" + getBuiltInsFileName(

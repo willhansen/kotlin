@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
-class Value<T>(val value: T) {
-    inline fun <R> runBlock(block: (T) -> R) = block(value)
+class Value<T>(konst konstue: T) {
+    inline fun <R> runBlock(block: (T) -> R) = block(konstue)
 }
 
 fun <T> Value<Array<T>>.test() =

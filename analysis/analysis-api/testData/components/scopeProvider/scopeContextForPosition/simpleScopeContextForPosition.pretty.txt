@@ -35,7 +35,7 @@ scopes:
   LocalScope, index = 5
     classifiers: 0
     callables: 1
-      val localVarA: kotlin.Int
+      konst localVarA: kotlin.Int
 
   LocalScope, index = 6
     classifiers: 0
@@ -45,7 +45,7 @@ scopes:
   LocalScope, index = 7
     classifiers: 0
     callables: 2
-      val localVarB: kotlin.Int
+      konst localVarB: kotlin.Int
       fun localFunB()
 
   LocalScope, index = 8

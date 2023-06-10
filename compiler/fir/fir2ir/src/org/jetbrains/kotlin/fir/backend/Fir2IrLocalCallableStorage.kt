@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.ir.declarations.*
 
 class Fir2IrLocalCallableStorage {
 
-    private val cacheStack = mutableListOf<Fir2IrScopeCache>()
+    private konst cacheStack = mutableListOf<Fir2IrScopeCache>()
 
     fun enterCallable() {
         cacheStack += Fir2IrScopeCache()
@@ -23,7 +23,7 @@ class Fir2IrLocalCallableStorage {
 
     fun getParameter(parameter: FirValueParameter): IrValueParameter? {
         for (cache in cacheStack.asReversed()) {
-            val local = cache.getParameter(parameter)
+            konst local = cache.getParameter(parameter)
             if (local != null) return local
         }
         return null

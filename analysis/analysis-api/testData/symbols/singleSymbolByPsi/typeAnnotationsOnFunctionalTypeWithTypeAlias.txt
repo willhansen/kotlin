@@ -35,7 +35,7 @@ KtFunctionSymbol:
     type: @R|Anno1|()  @R|Anno2|()  @R|Anno3|()  kotlin/Function0<kotlin/Unit>
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

@@ -5,7 +5,7 @@
 import kotlin.reflect.KProperty
 
 external interface IBase {
-    val foo: String
+    konst foo: String
 }
 
 external abstract class Base : IBase
@@ -18,9 +18,9 @@ open class A : Base() {
 }
 
 open class B : Base() {
-    override val foo: String = "OK"
+    override konst foo: String = "OK"
 
-    open val result: String get() = foo
+    open konst result: String get() = foo
 }
 
 class C : B() {
@@ -31,7 +31,7 @@ class C : B() {
 }
 
 open class D : B() {
-    override val foo: String = "OK"
+    override konst foo: String = "OK"
 }
 
 open class E : D() {
@@ -49,42 +49,42 @@ open class F: B() {
             return "Error: F setter was not called."
         }
 
-        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
-            result = "O$value"
+        operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
+            result = "O$konstue"
         }
 
         lateinit var result: String
     }
 
-    override val result: String get() = CustomDelegator.result
+    override konst result: String get() = CustomDelegator.result
 }
 
-class G(val b: B): IBase by b {
-    val result: String get() = b.result
+class G(konst b: B): IBase by b {
+    konst result: String get() = b.result
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.result != "OK") return a.foo
 
-    val b = B()
+    konst b = B()
     if (b.result != "OK") return b.foo
 
-    val c = C()
+    konst c = C()
     if (c.result != "OK") return c.foo
 
-    val d = D()
+    konst d = D()
     if (d.result != "OK") return d.foo
 
-    val e = E()
+    konst e = E()
     if (e.result != "OK") return e.foo
 
     try {
-        val f = F()
+        konst f = F()
         return "Failed: it should not work for now, because of delegating objects initialization order"
     } catch (e: Throwable) {}
 
-    val g = G(e)
+    konst g = G(e)
     if (g.result != "OK") return g.foo
 
     return "OK"

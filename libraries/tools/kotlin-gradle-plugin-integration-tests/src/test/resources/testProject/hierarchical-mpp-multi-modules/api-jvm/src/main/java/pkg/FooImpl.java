@@ -1,5 +1,5 @@
 package pkg;
 
 public @interface FooImpl {
-    String value() default "abc";  // should be OK
+    String konstue() default "abc";  // should be OK
 }

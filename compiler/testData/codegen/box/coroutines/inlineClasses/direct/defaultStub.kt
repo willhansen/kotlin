@@ -7,7 +7,7 @@ fun builder(c: suspend () -> Unit) {
     })
 }
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 suspend fun foo(x: String = "OK") = IC(x)
 

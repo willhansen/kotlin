@@ -1,8 +1,8 @@
 package
 
-public val a: () -> A?
-public val b: () -> A?
-public val flag: kotlin.Boolean = true
+public konst a: () -> A?
+public konst b: () -> A?
+public konst flag: kotlin.Boolean = true
 
 public final class A {
     public constructor A()

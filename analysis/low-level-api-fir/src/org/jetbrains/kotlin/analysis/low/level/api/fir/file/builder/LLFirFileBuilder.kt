@@ -18,12 +18,12 @@ import org.jetbrains.kotlin.psi.KtFile
  * Responsible for building [FirFile] by [KtFile]
  */
 @ThreadSafe
-internal class LLFirFileBuilder(val moduleComponents: LLFirModuleResolveComponents) {
-    private val projectStructureProvider by lazy { ProjectStructureProvider.getInstance(moduleComponents.session.project) }
+internal class LLFirFileBuilder(konst moduleComponents: LLFirModuleResolveComponents) {
+    private konst projectStructureProvider by lazy { ProjectStructureProvider.getInstance(moduleComponents.session.project) }
 
     fun buildRawFirFileWithCaching(ktFile: KtFile): FirFile = moduleComponents.cache.fileCached(ktFile) {
-        val contextualModule = moduleComponents.module
-        val actualFileModule = projectStructureProvider.getModule(ktFile, contextualModule)
+        konst contextualModule = moduleComponents.module
+        konst actualFileModule = projectStructureProvider.getModule(ktFile, contextualModule)
 
         checkWithAttachmentBuilder(actualFileModule == contextualModule, { "Modules are inconsistent" }) {
             withEntry("file", ktFile.name)
@@ -34,7 +34,7 @@ internal class LLFirFileBuilder(val moduleComponents: LLFirModuleResolveComponen
                 it.toString()
             }
         }
-        val bodyBuildingMode = when {
+        konst bodyBuildingMode = when {
             ktFile.isScript() -> {
                 // As 'FirScript' content is never transformed, lazy bodies are not replaced with calculated ones even on BODY_RESOLVE.
                 // Such behavior breaks file structure mapping computation.

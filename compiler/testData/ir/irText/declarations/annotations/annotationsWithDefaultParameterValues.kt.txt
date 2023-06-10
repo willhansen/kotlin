@@ -5,11 +5,11 @@ open annotation class A : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 
-  val y: Int
+  konst y: Int
     field = y
     get
 

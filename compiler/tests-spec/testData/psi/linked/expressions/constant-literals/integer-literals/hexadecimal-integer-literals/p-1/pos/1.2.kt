@@ -7,5 +7,5 @@
  * DESCRIPTION: Hexadecimal integer literals with prefix only (without digit symbols).
  */
 
-val value = 0x
-val value = 0X
+konst konstue = 0x
+konst konstue = 0X

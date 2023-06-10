@@ -1,3 +1,3 @@
 interface Foo {
-    val value: TypeAlias
+    konst konstue: TypeAlias
 }

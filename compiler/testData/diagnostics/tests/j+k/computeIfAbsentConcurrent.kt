@@ -18,6 +18,6 @@ public class ConcHashMap<K, V> implements ConcMap<K, V> {
 // FILE: main.kt
 
 public fun concurrentMap() {
-    val map = ConcHashMap<String, String>()
+    konst map = ConcHashMap<String, String>()
     map.computeIfAbsent("") { "" } // here
 }

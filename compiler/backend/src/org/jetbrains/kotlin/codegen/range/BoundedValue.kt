@@ -25,14 +25,14 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
  * Low level abstraction for bounded range that is used to generate contains checks and for loops.
  */
 class BoundedValue(
-    val lowBound: StackValue,
-    val isLowInclusive: Boolean = true,
-    val highBound: StackValue,
-    val isHighInclusive: Boolean = true
+    konst lowBound: StackValue,
+    konst isLowInclusive: Boolean = true,
+    konst highBound: StackValue,
+    konst isHighInclusive: Boolean = true
 ) {
 
-    // It is necessary to maintain the proper evaluation order as of Kotlin 1.0 and 1.1
-    // to evaluate range bounds left to right and put them on stack as 'high; low'.
+    // It is necessary to maintain the proper ekonstuation order as of Kotlin 1.0 and 1.1
+    // to ekonstuate range bounds left to right and put them on stack as 'high; low'.
     fun putHighLow(v: InstructionAdapter, type: Type) {
         if (!lowBound.canHaveSideEffects() || !highBound.canHaveSideEffects()) {
             highBound.put(type, v)

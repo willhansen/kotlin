@@ -27,13 +27,13 @@ open class AbstractIrLocalVariableTest : AbstractLocalVariableTestBase<ClassicFr
     FrontendKinds.ClassicFrontend,
     TargetBackend.JVM_IR
 ) {
-    override val frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
 
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
         get() = ::ClassicFrontend2IrConverter
 
-    override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
         get() = ::JvmIrBackendFacade
 
     override fun configure(builder: TestConfigurationBuilder) {
@@ -47,13 +47,13 @@ open class AbstractLocalVariableTest : AbstractLocalVariableTestBase<ClassicFron
     TargetBackend.JVM
 ) {
 
-    override val frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
 
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, ClassicBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, ClassicBackendInput>>
         get() = ::ClassicFrontend2ClassicBackendConverter
 
-    override val backendFacade: Constructor<BackendFacade<ClassicBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<ClassicBackendInput, BinaryArtifacts.Jvm>>
         get() = ::ClassicJvmBackendFacade
 
     override fun configure(builder: TestConfigurationBuilder) {
@@ -62,17 +62,17 @@ open class AbstractLocalVariableTest : AbstractLocalVariableTestBase<ClassicFron
     }
 }
 
-open class AbstractFirLocalVariableTestBase(val parser: FirParser) : AbstractLocalVariableTestBase<FirOutputArtifact, IrBackendInput>(
+open class AbstractFirLocalVariableTestBase(konst parser: FirParser) : AbstractLocalVariableTestBase<FirOutputArtifact, IrBackendInput>(
     FrontendKinds.FIR,
     TargetBackend.JVM_IR
 ) {
-    override val frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
         get() = ::FirFrontendFacade
 
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
         get() = ::Fir2IrResultsConverter
 
-    override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
         get() = ::JvmIrBackendFacade
 
     override fun configure(builder: TestConfigurationBuilder) {

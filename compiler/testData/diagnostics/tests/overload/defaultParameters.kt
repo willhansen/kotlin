@@ -26,28 +26,28 @@ fun wrong(a: Int = 1) {}
 fun wrong(a: String = "", b: Int = 1) {}
 
 fun test() {
-    val a = simple()
+    konst a = simple()
     a checkType { _<Int>() }
 
-    val b = simple(1)
+    konst b = simple(1)
     b checkType { _<String>() }
 
-    val c = twoDefault()
+    konst c = twoDefault()
     c checkType { _<Int>() }
 
-    val d = twoDefault(1)
+    konst d = twoDefault(1)
     d checkType { _<Int>() }
 
-    val e = twoDefault(1, "")
+    konst e = twoDefault(1, "")
     e checkType { _<String>() }
 
-    val f = withGeneric(3)
+    konst f = withGeneric(3)
     f checkType { _<Int>() }
 
-    val g = discriminateGeneric(1)
+    konst g = discriminateGeneric(1)
     g checkType { _<String>() }
 
-    val h = withDefaultGeneric("")
+    konst h = withDefaultGeneric("")
     h checkType { _<Int>() }
 
     withDefaults(1)

@@ -45,20 +45,20 @@ class InfrastructureDumpedTestListingTest : AbstractNativeSimpleTest() {
 
     @Suppress("SameParameterValue")
     private fun doTest(@TestDataFile testDataPath: String, fromSources: Boolean) {
-        val rootDir = File(testDataPath)
+        konst rootDir = File(testDataPath)
 
-        val fooLibrary = compileToLibrary(rootDir.resolve("foo"))
+        konst fooLibrary = compileToLibrary(rootDir.resolve("foo"))
 
-        val barTestCase: TestCase = generateTestCaseWithSingleModule(rootDir.resolve("bar"))
+        konst barTestCase: TestCase = generateTestCaseWithSingleModule(rootDir.resolve("bar"))
 
-        val (executableTestCase: TestCase, executableCompilationResult: TestCompilationResult<out Executable>) =
+        konst (executableTestCase: TestCase, executableCompilationResult: TestCompilationResult<out Executable>) =
             if (fromSources) {
                 barTestCase to compileToExecutable(barTestCase, fooLibrary.asLibraryDependency())
             } else {
-                val barCompilationResult: Success<out KLIB> = compileToLibrary(barTestCase, fooLibrary.asLibraryDependency())
-                val barLibrary: KLIB = barCompilationResult.resultingArtifact
+                konst barCompilationResult: Success<out KLIB> = compileToLibrary(barTestCase, fooLibrary.asLibraryDependency())
+                konst barLibrary: KLIB = barCompilationResult.resultingArtifact
 
-                val executableTestCase = generateTestCaseWithSingleModule(moduleDir = null) // No sources.
+                konst executableTestCase = generateTestCaseWithSingleModule(moduleDir = null) // No sources.
                 executableTestCase to compileToExecutable(
                     executableTestCase,
                     fooLibrary.asLibraryDependency(),
@@ -66,20 +66,20 @@ class InfrastructureDumpedTestListingTest : AbstractNativeSimpleTest() {
                 )
             }
 
-        val executableCompilationSuccess = executableCompilationResult.assertSuccess()
-        val executable: Executable = executableCompilationSuccess.resultingArtifact
+        konst executableCompilationSuccess = executableCompilationResult.assertSuccess()
+        konst executable: Executable = executableCompilationSuccess.resultingArtifact
 
         // check that the test listing dumped during the compilation matches our expectations:
-        val testDumpFile = executable.testDumpFile
+        konst testDumpFile = executable.testDumpFile
         assertDumpFilesEqual(expected = rootDir.resolve("expected-test-listing.dump"), actual = testDumpFile)
 
         // parse test listing that was dumped to a file during compilation:
-        val dumpedTestListing = DumpedTestListing.parse(testDumpFile.readText()).toSet()
+        konst dumpedTestListing = DumpedTestListing.parse(testDumpFile.readText()).toSet()
         assertTrue(dumpedTestListing.isNotEmpty())
 
         // parse test listing obtained from executable file with the help of --ktest_list_tests flag:
-        val testExecutable = TestExecutable.fromCompilationResult(executableTestCase, executableCompilationSuccess)
-        val extractedTestListing = TestRunners.extractTestNames(testExecutable, testRunSettings).toSet()
+        konst testExecutable = TestExecutable.fromCompilationResult(executableTestCase, executableCompilationSuccess)
+        konst extractedTestListing = TestRunners.extractTestNames(testExecutable, testRunSettings).toSet()
 
         assertEquals(extractedTestListing, dumpedTestListing)
 
@@ -87,8 +87,8 @@ class InfrastructureDumpedTestListingTest : AbstractNativeSimpleTest() {
     }
 
     private fun assertDumpFilesEqual(expected: File, actual: File) {
-        val expectedDumpFileContents = convertLineSeparators(expected.readText().trimEnd())
-        val actualDumpFileContents = convertLineSeparators(actual.readText().trimEnd())
+        konst expectedDumpFileContents = convertLineSeparators(expected.readText().trimEnd())
+        konst actualDumpFileContents = convertLineSeparators(actual.readText().trimEnd())
 
         assertEquals(expectedDumpFileContents, actualDumpFileContents) {
             """
@@ -100,8 +100,8 @@ class InfrastructureDumpedTestListingTest : AbstractNativeSimpleTest() {
     }
 
     companion object {
-        const val TEST_SUITE_PATH = "native/native.tests/testData/infrastructure"
-        const val TEST_CASE_NAME = "testListing"
-        const val TEST_CASE_PATH = "$TEST_SUITE_PATH/$TEST_CASE_NAME"
+        const konst TEST_SUITE_PATH = "native/native.tests/testData/infrastructure"
+        const konst TEST_CASE_NAME = "testListing"
+        const konst TEST_CASE_PATH = "$TEST_SUITE_PATH/$TEST_CASE_NAME"
     }
 }

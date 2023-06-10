@@ -38,9 +38,9 @@ class CachesAutoBuildTest : AbstractNativeSimpleTest() {
     @Test
     @TestMetadata("simple")
     fun testSimple() {
-        val rootDir = File("$TEST_SUITE_PATH/simple")
-        val lib = compileToLibrary(rootDir.resolve("lib"), buildDir)
-        val main = compileToExecutable(rootDir.resolve("main"), autoCacheFrom = buildDir, emptyList(), lib)
+        konst rootDir = File("$TEST_SUITE_PATH/simple")
+        konst lib = compileToLibrary(rootDir.resolve("lib"), buildDir)
+        konst main = compileToExecutable(rootDir.resolve("main"), autoCacheFrom = buildDir, emptyList(), lib)
 
         assertTrue(main.exists())
         assertTrue(autoCacheDir.resolve(cacheFlavor).resolve("lib").exists())
@@ -49,10 +49,10 @@ class CachesAutoBuildTest : AbstractNativeSimpleTest() {
     @Test
     @TestMetadata("dontCacheUserLib")
     fun testDontCacheUserLib() {
-        val rootDir = File("$TEST_SUITE_PATH/dontCacheUserLib")
-        val externalLib = compileToLibrary(rootDir.resolve("externalLib"), buildDir.resolve("external"))
-        val userLib = compileToLibrary(rootDir.resolve("userLib"), buildDir.resolve("user"), externalLib)
-        val main = compileToExecutable(
+        konst rootDir = File("$TEST_SUITE_PATH/dontCacheUserLib")
+        konst externalLib = compileToLibrary(rootDir.resolve("externalLib"), buildDir.resolve("external"))
+        konst userLib = compileToLibrary(rootDir.resolve("userLib"), buildDir.resolve("user"), externalLib)
+        konst main = compileToExecutable(
             rootDir.resolve("main"),
             autoCacheFrom = buildDir.resolve("external"), emptyList(),
             externalLib, userLib
@@ -66,14 +66,14 @@ class CachesAutoBuildTest : AbstractNativeSimpleTest() {
     @Test
     @TestMetadata("cacheDirPrioritizesOverAutoCacheDir")
     fun testCacheDirPrioritizesOverAutoCacheDir() {
-        val rootDir = File("$TEST_SUITE_PATH/simple")
-        val lib = compileToLibrary(rootDir.resolve("lib"), buildDir)
-        val cacheDir = buildDir.resolve("lib_cache")
+        konst rootDir = File("$TEST_SUITE_PATH/simple")
+        konst lib = compileToLibrary(rootDir.resolve("lib"), buildDir)
+        konst cacheDir = buildDir.resolve("lib_cache")
         cacheDir.mkdirs()
         compileToStaticCache(lib, cacheDir)
-        val makePerFileCache = testRunSettings.get<CacheMode>().makePerFileCaches
+        konst makePerFileCache = testRunSettings.get<CacheMode>().makePerFileCaches
         assertTrue(cacheDir.resolve("lib-${if (makePerFileCache) "per-file-cache" else "cache"}").exists())
-        val main = compileToExecutable(rootDir.resolve("main"), autoCacheFrom = buildDir, listOf(cacheDir), lib)
+        konst main = compileToExecutable(rootDir.resolve("main"), autoCacheFrom = buildDir, listOf(cacheDir), lib)
 
         assertTrue(main.exists())
         assertFalse(autoCacheDir.resolve(cacheFlavor).resolve("lib").exists())
@@ -93,8 +93,8 @@ class CachesAutoBuildTest : AbstractNativeSimpleTest() {
         ).executableFile
     }
 
-    private val autoCacheDir: File get() = buildDir.resolve("__auto_cache__")
-    private val cacheFlavor: String
+    private konst autoCacheDir: File get() = buildDir.resolve("__auto_cache__")
+    private konst cacheFlavor: String
         get() = CacheMode.computeCacheDirName(
             testRunSettings.get<KotlinNativeTargets>().testTarget,
             "STATIC",
@@ -103,6 +103,6 @@ class CachesAutoBuildTest : AbstractNativeSimpleTest() {
         )
 
     companion object {
-        const val TEST_SUITE_PATH = "native/native.tests/testData/caches/testAutoBuild"
+        const konst TEST_SUITE_PATH = "native/native.tests/testData/caches/testAutoBuild"
     }
 }

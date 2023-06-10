@@ -20,7 +20,7 @@ fun interface KFun<T> {
     fun invoke(x: T)
 }
 
-class K<T>(private val x: T) {
+class K<T>(private konst x: T) {
     fun with(kf: KFun<T>) {
         kf.invoke(x)
     }

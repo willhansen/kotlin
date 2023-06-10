@@ -17,7 +17,7 @@ fun withLocalReturn(): String {
 
 // TODO can replace IrCall on IrConst inside body
 fun foo() {
-    val a = x(10) l@ { //this call can be replaced on 20
+    konst a = x(10) l@ { //this call can be replaced on 20
         x(9) {
             return@l 10
         }
@@ -27,13 +27,13 @@ fun foo() {
 // TODO can replace IrCall on IrConst inside body
 fun bar(p: Int) {
     x(10) {
-        val i = p
+        konst i = p
         x(11) { //this call can be replaced on 21
-            val j = 0
+            konst j = 0
             x(j) { 10 }
         }
     }
 }
 
-const val a = <!EVALUATED: `Non local`!>withNonLocalReturn()<!>
-const val b = <!EVALUATED: `Local`!>withLocalReturn()<!>
+const konst a = <!EVALUATED: `Non local`!>withNonLocalReturn()<!>
+const konst b = <!EVALUATED: `Local`!>withLocalReturn()<!>

@@ -1,5 +1,5 @@
 fun test() {
 
-    val x = <expr>four@4</expr>
+    konst x = <expr>four@4</expr>
 
 }

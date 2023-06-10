@@ -12,8 +12,8 @@ public class Jaba {
 import base.Jaba
 
 fun box(): String {
-    val x = object : Jaba() {
-        private val a: String = "OK"
+    konst x = object : Jaba() {
+        private konst a: String = "OK"
         inner class S {
             fun foo() = ::a.get()
         }

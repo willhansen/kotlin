@@ -18,13 +18,13 @@
     annotation class AnnoSetter2 constructor() : Annotation
     class B<@AnnoClassTypeParameter T> constructor()
     @AnnoClass class Foo @AnnoConstructor constructor(@AnnoConstructorParameter i: Int) {
-        @delegate:AnnoDelegatedField val immutableProp: Int
+        @delegate:AnnoDelegatedField konst immutableProp: Int
         var mutableProp: Int
             @AnnoSetter2 set
         @AnnoProperty @field:AnnoBackingField var prop: Int
             @AnnoGetter get
             @AnnoSetter set
     }
-    @AnnoPropertyExtensionReceiver val Foo.extProp: Int
+    @AnnoPropertyExtensionReceiver konst Foo.extProp: Int
     @AnnoFunction fun @receiver:AnnoFunctionExtensionReceiver Foo.extfun(@AnnoFunctionParam x: Int)
     fun <@AnnoFunctionTypeParameter T> f(x: B<@AnnoClassUsageTypeParameter Int>)

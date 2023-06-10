@@ -5,8 +5,8 @@
 private fun f() {
 }
 
-private val a = Unit
-private val b by lazy { Unit }
+private konst a = Unit
+private konst b by lazy { Unit }
 
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 @kotlin.internal.InlineOnly

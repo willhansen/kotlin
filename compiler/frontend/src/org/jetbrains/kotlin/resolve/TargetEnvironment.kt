@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.idea.MainFunctionDetector
 import org.jetbrains.kotlin.resolve.lazy.BasicAbsentDescriptorHandler
 import org.jetbrains.kotlin.resolve.lazy.CompilerLocalDescriptorResolver
 
-abstract class TargetEnvironment(private val name: String) {
+abstract class TargetEnvironment(private konst name: String) {
     abstract fun configure(container: StorageComponentContainer)
 
     override fun toString() = name

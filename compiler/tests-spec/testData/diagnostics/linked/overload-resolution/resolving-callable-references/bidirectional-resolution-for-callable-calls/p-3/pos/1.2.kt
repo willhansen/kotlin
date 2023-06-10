@@ -21,7 +21,7 @@ class Case1 {
     fun boo(y: () -> Int, x: () -> Number): Unit = TODO()
     fun boo(vararg x: () -> Int): String = TODO()
 
-    val x = 1.0
+    konst x = 1.0
     fun x() = 1
 
     fun case() {
@@ -36,7 +36,7 @@ class Case2 {
     fun boo(y: () -> Int, x: () -> Number): Unit = TODO()
     fun boo(vararg x: () -> Int): String = TODO()
 
-    val x = 1
+    konst x = 1
     fun x() = 1.0
 
     fun case() {

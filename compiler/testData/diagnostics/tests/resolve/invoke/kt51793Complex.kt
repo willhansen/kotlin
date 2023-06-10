@@ -11,8 +11,8 @@ interface A2 {
     operator fun Key1.invoke(): Int = 1
 }
 
-val A1.k: Key1 get() = object : Key1 {}
-val A2.k: Key2 get() = object : Key2 {}
+konst A1.k: Key1 get() = object : Key1 {}
+konst A2.k: Key2 get() = object : Key2 {}
 
 fun with1(a: A1.() -> Unit) {
     a(object : A1 {})

@@ -24,24 +24,24 @@ import kotlin.test.assertTrue
 
 class NonStableParameterNamesSerializationTest : TestCaseWithTmpdir() {
     fun testNonStableParameterNames() {
-        val originalKlibName = File(SOURCE_FILE).nameWithoutExtension
-        val originalKlibFile = File(tmpdir, "$originalKlibName.klib")
+        konst originalKlibName = File(SOURCE_FILE).nameWithoutExtension
+        konst originalKlibFile = File(tmpdir, "$originalKlibName.klib")
         KlibTestUtil.compileCommonSourcesToKlib(listOf(File(SOURCE_FILE)), originalKlibName, originalKlibFile)
 
-        val originalModule = KlibTestUtil.deserializeKlibToCommonModule(originalKlibFile)
-        val originalCallables = collectCallablesForPatch(originalModule)
+        konst originalModule = KlibTestUtil.deserializeKlibToCommonModule(originalKlibFile)
+        konst originalCallables = collectCallablesForPatch(originalModule)
 
         assertTrue { originalCallables.isNotEmpty() }
         assertTrue { originalCallables.all { it.hasStableParameterNames() } }
 
         originalCallables.forEach { it.setHasStableParameterNames(false) }
 
-        val patchedKlibName = "${originalKlibFile.nameWithoutExtension}-patched"
-        val patchedKlibFile = originalKlibFile.resolveSibling("$patchedKlibName.klib")
+        konst patchedKlibName = "${originalKlibFile.nameWithoutExtension}-patched"
+        konst patchedKlibFile = originalKlibFile.resolveSibling("$patchedKlibName.klib")
         KlibTestUtil.serializeCommonModuleToKlib(originalModule, patchedKlibName, patchedKlibFile)
 
-        val patchedModule = KlibTestUtil.deserializeKlibToCommonModule(patchedKlibFile)
-        val patchedCallables = collectCallablesForPatch(patchedModule)
+        konst patchedModule = KlibTestUtil.deserializeKlibToCommonModule(patchedKlibFile)
+        konst patchedCallables = collectCallablesForPatch(patchedModule)
 
         assertEquals(expected = originalCallables.size, actual = patchedCallables.size)
         assertEquals(expected = originalCallables.map { it.signature }.toSet(), actual = patchedCallables.map { it.signature }.toSet())
@@ -49,13 +49,13 @@ class NonStableParameterNamesSerializationTest : TestCaseWithTmpdir() {
     }
 
     companion object {
-        private const val SOURCE_FILE = "compiler/testData/serialization/nonStableParameterNames/test.kt"
+        private const konst SOURCE_FILE = "compiler/testData/serialization/nonStableParameterNames/test.kt"
 
         fun collectCallablesForPatch(module: ModuleDescriptorImpl): List<FunctionDescriptorImpl> {
             fun DeclarationDescriptor.castToFunctionImpl(): FunctionDescriptorImpl =
                 assertedCast { "Not an instance of ${FunctionDescriptorImpl::class.java}: ${this::class.java}, $this" }
 
-            val result = mutableListOf<FunctionDescriptorImpl>()
+            konst result = mutableListOf<FunctionDescriptorImpl>()
 
             fun recurse(memberScope: MemberScope) {
                 memberScope
@@ -74,7 +74,7 @@ class NonStableParameterNamesSerializationTest : TestCaseWithTmpdir() {
                     }
             }
 
-            val packageFragmentProvider = module.packageFragmentProviderForModuleContentWithoutDependencies
+            konst packageFragmentProvider = module.packageFragmentProviderForModuleContentWithoutDependencies
 
             fun recurse(packageFqName: FqName) {
                 packageFragmentProvider
@@ -94,11 +94,11 @@ class NonStableParameterNamesSerializationTest : TestCaseWithTmpdir() {
             return result
         }
 
-        private val FunctionDescriptorImpl.signature: String
+        private konst FunctionDescriptorImpl.signature: String
             get() = buildString {
                 append(fqNameSafe)
                 append('(')
-                valueParameters.joinTo(this, ",") { it.type.constructor.declarationDescriptor?.fqNameSafe?.asString().orEmpty() }
+                konstueParameters.joinTo(this, ",") { it.type.constructor.declarationDescriptor?.fqNameSafe?.asString().orEmpty() }
                 append(')')
             }
     }

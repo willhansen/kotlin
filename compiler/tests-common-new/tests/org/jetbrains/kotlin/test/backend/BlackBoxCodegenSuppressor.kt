@@ -18,18 +18,18 @@ import org.jetbrains.kotlin.test.services.*
 
 class BlackBoxCodegenSuppressor(
     testServices: TestServices,
-    val customIgnoreDirective: ValueDirective<TargetBackend>? = null
+    konst customIgnoreDirective: ValueDirective<TargetBackend>? = null
 ) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
-    override val additionalServices: List<ServiceRegistrationData>
+    override konst additionalServices: List<ServiceRegistrationData>
         get() = listOf(service(::SuppressionChecker.bind(customIgnoreDirective)))
 
     override fun suppressIfNeeded(failedAssertions: List<WrappedException>): List<WrappedException> {
-        val suppressionChecker = testServices.codegenSuppressionChecker
-        val moduleStructure = testServices.moduleStructure
-        val ignoreDirectives = suppressionChecker.extractIgnoreDirectives(moduleStructure.modules.first()) ?: return failedAssertions
+        konst suppressionChecker = testServices.codegenSuppressionChecker
+        konst moduleStructure = testServices.moduleStructure
+        konst ignoreDirectives = suppressionChecker.extractIgnoreDirectives(moduleStructure.modules.first()) ?: return failedAssertions
         return suppressionChecker.processAllDirectives(ignoreDirectives) { ignoreDirective, suppressionResult ->
             listOfNotNull(
                 suppressionChecker.processMutedTest(
@@ -41,29 +41,29 @@ class BlackBoxCodegenSuppressor(
         } ?: failedAssertions
     }
 
-    class SuppressionChecker(val testServices: TestServices, val customIgnoreDirective: ValueDirective<TargetBackend>?) : TestService {
+    class SuppressionChecker(konst testServices: TestServices, konst customIgnoreDirective: ValueDirective<TargetBackend>?) : TestService {
         fun extractIgnoreDirectives(module: TestModule): List<ValueDirective<TargetBackend>>? {
-            val targetBackend = testServices.defaultsProvider.defaultTargetBackend ?: module.targetBackend ?: return null
+            konst targetBackend = testServices.defaultsProvider.defaultTargetBackend ?: module.targetBackend ?: return null
             return extractIgnoredDirectivesForTargetBackend(module, targetBackend, customIgnoreDirective)
         }
 
         fun failuresInModuleAreIgnored(module: TestModule): Boolean {
-            val ignoreDirective = extractIgnoreDirectives(module) ?: return false
+            konst ignoreDirective = extractIgnoreDirectives(module) ?: return false
             return failuresInModuleAreIgnored(module, ignoreDirective).testMuted
         }
 
         private fun failuresInModuleAreIgnored(module: TestModule, ignoreDirectives: List<ValueDirective<TargetBackend>>): SuppressionResult {
             for (ignoreDirective in ignoreDirectives) {
-                val result = failuresInModuleAreIgnored(module, ignoreDirective)
+                konst result = failuresInModuleAreIgnored(module, ignoreDirective)
                 if (result.testMuted) return result
             }
             return SuppressionResult.NO_MUTE
         }
 
         fun failuresInModuleAreIgnored(module: TestModule, ignoreDirective: ValueDirective<TargetBackend>): SuppressionResult {
-            val ignoredBackends = module.directives[ignoreDirective]
+            konst ignoredBackends = module.directives[ignoreDirective]
 
-            val targetBackend = testServices.defaultsProvider.defaultTargetBackend ?: module.targetBackend
+            konst targetBackend = testServices.defaultsProvider.defaultTargetBackend ?: module.targetBackend
             return when {
                 ignoredBackends.isEmpty() -> SuppressionResult.NO_MUTE
                 targetBackend in ignoredBackends -> SuppressionResult(true, targetBackend)
@@ -83,9 +83,9 @@ class BlackBoxCodegenSuppressor(
             ignoreDirectives: List<ValueDirective<TargetBackend>>,
             processDirective: (ValueDirective<TargetBackend>, SuppressionResult) -> R,
         ): R? {
-            val modules = testServices.moduleStructure.modules
+            konst modules = testServices.moduleStructure.modules
             for (ignoreDirective in ignoreDirectives) {
-                val suppressionResult = modules
+                konst suppressionResult = modules
                     .map { failuresInModuleAreIgnored(it, ignoreDirective) }
                     .firstOrNull { it.testMuted }
                     ?: continue
@@ -106,9 +106,9 @@ class BlackBoxCodegenSuppressor(
         ): AssertionError? {
             if (failed) return null
 
-            val firstModule = testServices.moduleStructure.modules.first()
-            val targetBackend = testServices.defaultsProvider.defaultTargetBackend ?: firstModule.targetBackend
-            val message = buildString {
+            konst firstModule = testServices.moduleStructure.modules.first()
+            konst targetBackend = testServices.defaultsProvider.defaultTargetBackend ?: firstModule.targetBackend
+            konst message = buildString {
                 append("Looks like this test can be unmuted. Remove ")
                 targetBackend?.name?.let {
                     append(it)
@@ -143,7 +143,7 @@ class BlackBoxCodegenSuppressor(
             ignoreDirectives: List<ValueDirective<TargetBackend>>,
             block: () -> Unit,
         ) {
-            val expectedError: ExpectedError? = try {
+            konst expectedError: ExpectedError? = try {
                 block()
                 null
             } catch (e: Throwable) {
@@ -162,12 +162,12 @@ class BlackBoxCodegenSuppressor(
             expectedError?.let { throw it }
         }
 
-        data class SuppressionResult(val testMuted: Boolean, val matchedBackend: TargetBackend?) {
+        data class SuppressionResult(konst testMuted: Boolean, konst matchedBackend: TargetBackend?) {
             companion object {
-                val NO_MUTE = SuppressionResult(false, null)
+                konst NO_MUTE = SuppressionResult(false, null)
             }
         }
     }
 }
 
-val TestServices.codegenSuppressionChecker: BlackBoxCodegenSuppressor.SuppressionChecker by TestServices.testServiceAccessor()
+konst TestServices.codegenSuppressionChecker: BlackBoxCodegenSuppressor.SuppressionChecker by TestServices.testServiceAccessor()

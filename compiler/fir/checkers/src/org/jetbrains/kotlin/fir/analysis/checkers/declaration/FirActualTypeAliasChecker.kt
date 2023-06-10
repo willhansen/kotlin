@@ -20,8 +20,8 @@ object FirActualTypeAliasChecker : FirTypeAliasChecker() {
     override fun check(declaration: FirTypeAlias, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!declaration.isActual) return
 
-        val expandedTypeRef = declaration.expandedTypeRef
-        val expandedTypeSymbol = expandedTypeRef.toClassLikeSymbol(context.session) ?: return
+        konst expandedTypeRef = declaration.expandedTypeRef
+        konst expandedTypeSymbol = expandedTypeRef.toClassLikeSymbol(context.session) ?: return
 
         if (expandedTypeSymbol is FirTypeAliasSymbol) {
             reporter.reportOn(declaration.source, FirErrors.ACTUAL_TYPE_ALIAS_NOT_TO_CLASS, context)
@@ -46,7 +46,7 @@ object FirActualTypeAliasChecker : FirTypeAliasChecker() {
             reportActualTypeAliasWithComplexSubstitution = true
         } else {
             for (i in 0 until declaration.typeParameters.size) {
-                val typeArgument = expandedTypeRef.coneType.typeArguments[i]
+                konst typeArgument = expandedTypeRef.coneType.typeArguments[i]
                 if (typeArgument is ConeTypeParameterType) {
                     if (declaration.typeParameters[i].symbol != typeArgument.lookupTag.typeParameterSymbol) {
                         reportActualTypeAliasWithComplexSubstitution = true

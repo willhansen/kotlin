@@ -14,19 +14,19 @@ fun foo() {}
 
 @JsExport
 @Deprecated("message 2")
-val bar: String = "Test"
+konst bar: String = "Test"
 
 @JsExport
 @Deprecated("message 3")
 class TestClass
 
 @JsExport
-class AnotherClass @Deprecated("message 4") constructor(val value: String) {
+class AnotherClass @Deprecated("message 4") constructor(konst konstue: String) {
     @JsName("fromNothing")
     @Deprecated("message 5") constructor(): this("Test")
 
     @JsName("fromInt")
-    constructor(value: Int): this(value.toString())
+    constructor(konstue: Int): this(konstue.toString())
 
     @Deprecated("message 6")
     fun foo() {}
@@ -34,7 +34,7 @@ class AnotherClass @Deprecated("message 4") constructor(val value: String) {
     fun baz() {}
 
     @Deprecated("message 7")
-    val bar: String = "Test"
+    konst bar: String = "Test"
 }
 
 @JsExport
@@ -43,7 +43,7 @@ interface TestInterface {
     fun foo()
     fun bar()
     @Deprecated("message 9")
-    val baz: String
+    konst baz: String
 }
 
 @JsExport
@@ -52,5 +52,5 @@ object TestObject {
     fun foo() {}
     fun bar() {}
     @Deprecated("message 11")
-    val baz: String = "Test"
+    konst baz: String = "Test"
 }

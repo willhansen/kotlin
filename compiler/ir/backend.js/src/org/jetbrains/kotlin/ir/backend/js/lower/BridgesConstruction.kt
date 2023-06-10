@@ -44,14 +44,14 @@ import org.jetbrains.kotlin.utils.memoryOptimizedPlus
  *            fun foo(t: Any?) = foo(t as Int)  // Constructed bridge
  *          }
  */
-abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) : DeclarationTransformer {
+abstract class BridgesConstruction<T : JsCommonBackendContext>(konst context: T) : DeclarationTransformer {
 
-    private val specialBridgeMethods = SpecialBridgeMethods(context)
+    private konst specialBridgeMethods = SpecialBridgeMethods(context)
 
     abstract fun getFunctionSignature(function: IrSimpleFunction): Any
 
     /**
-     * Usually just returns [irFunction]'s value parameters, but special transformations may be required if,
+     * Usually just returns [irFunction]'s konstue parameters, but special transformations may be required if,
      * for example, we're dealing with an external function, and that function contains a vararg,
      * which we must extract and convert to an array.
      */
@@ -59,10 +59,10 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
         blockBodyBuilder: IrBlockBodyBuilder,
         irFunction: IrSimpleFunction,
         bridge: IrSimpleFunction
-    ): List<IrValueDeclaration> = irFunction.valueParameters
+    ): List<IrValueDeclaration> = irFunction.konstueParameters
 
     // Should dispatch receiver type be casted inside a bridge.
-    open val shouldCastDispatchReceiver: Boolean = false
+    open konst shouldCastDispatchReceiver: Boolean = false
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration !is IrSimpleFunction || declaration.isStaticMethodOfClass || declaration.parent !is IrClass) return null
@@ -71,19 +71,19 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
     }
 
     private fun generateBridges(function: IrSimpleFunction): List<IrDeclaration>? {
-        val (specialOverride: IrSimpleFunction?, specialOverrideInfo) =
+        konst (specialOverride: IrSimpleFunction?, specialOverrideInfo) =
             specialBridgeMethods.findSpecialWithOverride(function) ?: Pair(null, null)
 
-        val specialOverrideSignature = specialOverride?.let { FunctionAndSignature(it) }
+        konst specialOverrideSignature = specialOverride?.let { FunctionAndSignature(it) }
 
-        val bridgesToGenerate = generateBridges(
+        konst bridgesToGenerate = generateBridges(
             function = IrBasedFunctionHandle(function),
             signature = { FunctionAndSignature(it.function) }
         )
 
         if (bridgesToGenerate.isEmpty()) return null
 
-        val result = mutableListOf<IrDeclaration>()
+        konst result = mutableListOf<IrDeclaration>()
 
         for ((from, to) in bridgesToGenerate) {
             if (!from.function.parentAsClass.isInterface &&
@@ -104,7 +104,7 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
                 continue
             }
 
-            val bridge: IrDeclaration = when {
+            konst bridge: IrDeclaration = when {
                 specialOverrideSignature == from ->
                     createBridge(function, from.function, to.function, specialOverrideInfo)
 
@@ -127,10 +127,10 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
         specialMethodInfo: SpecialMethodWithDefaultInfo?
     ): IrFunction {
 
-        val origin = getBridgeOrigin(bridge)
+        konst origin = getBridgeOrigin(bridge)
 
         // TODO: Support offsets for debug info
-        val irFunction = context.irFactory.buildFun {
+        konst irFunction = context.irFactory.buildFun {
             updateFrom(bridge)
             this.startOffset = UNDEFINED_OFFSET
             this.endOffset = UNDEFINED_OFFSET
@@ -142,7 +142,7 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
         }.apply {
             parent = function.parent
             copyTypeParametersFrom(bridge)
-            val substitutionMap = makeTypeParameterSubstitutionMap(bridge, this)
+            konst substitutionMap = makeTypeParameterSubstitutionMap(bridge, this)
             copyReceiverParametersFrom(bridge, substitutionMap)
             copyValueParametersFrom(bridge, substitutionMap)
             annotations = annotations memoryOptimizedPlus bridge.annotations
@@ -153,19 +153,19 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
 
         irFunction.body = context.irFactory.createBlockBody(UNDEFINED_OFFSET, UNDEFINED_OFFSET) {
             statements += context.createIrBuilder(irFunction.symbol).irBlockBody(irFunction) {
-                val valueParameters = extractValueParameters(this, irFunction, bridge)
+                konst konstueParameters = extractValueParameters(this, irFunction, bridge)
                 if (specialMethodInfo != null) {
-                    valueParameters.take(specialMethodInfo.argumentsToCheck).forEachIndexed { index, valueDeclaration ->
+                    konstueParameters.take(specialMethodInfo.argumentsToCheck).forEachIndexed { index, konstueDeclaration ->
                         +irIfThen(
                             context.irBuiltIns.unitType,
-                            irNot(irIs(irGet(valueDeclaration), delegateTo.valueParameters[index].type)),
+                            irNot(irIs(irGet(konstueDeclaration), delegateTo.konstueParameters[index].type)),
                             irReturn(specialMethodInfo.defaultValueGenerator(irFunction))
                         )
                     }
                 }
 
-                val call = irCall(delegateTo.symbol)
-                val dispatchReceiver = irGet(irFunction.dispatchReceiverParameter!!)
+                konst call = irCall(delegateTo.symbol)
+                konst dispatchReceiver = irGet(irFunction.dispatchReceiverParameter!!)
 
                 call.dispatchReceiver = if (shouldCastDispatchReceiver)
                     irCastIfNeeded(dispatchReceiver, delegateTo.dispatchReceiverParameter!!.type)
@@ -176,10 +176,10 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
                     call.extensionReceiver = irCastIfNeeded(irGet(it), delegateTo.extensionReceiverParameter!!.type)
                 }
 
-                val toTake = valueParameters.size - if (call.isSuspend xor irFunction.isSuspend) 1 else 0
+                konst toTake = konstueParameters.size - if (call.isSuspend xor irFunction.isSuspend) 1 else 0
 
-                valueParameters.subList(0, toTake).forEachIndexed { i, valueParameter ->
-                    call.putValueArgument(i, irCastIfNeeded(irGet(valueParameter), delegateTo.valueParameters[i].type))
+                konstueParameters.subList(0, toTake).forEachIndexed { i, konstueParameter ->
+                    call.putValueArgument(i, irCastIfNeeded(irGet(konstueParameter), delegateTo.konstueParameters[i].type))
                 }
 
                 +irReturn(call)
@@ -190,19 +190,19 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
     }
 
     /**
-     * Copies the value parameters from [bridge] to [this]. If [bridge] is external and contains a vararg parameter,
+     * Copies the konstue parameters from [bridge] to [this]. If [bridge] is external and contains a vararg parameter,
      * only copies the parameters before the vararg.
      * The rest parameters are expected to be obtained later using the `arguments` object in JS.
      */
     private fun IrSimpleFunction.copyValueParametersFrom(bridge: IrSimpleFunction, substitutionMap: Map<IrTypeParameterSymbol, IrType>) {
-        var valueParametersToCopy = bridge.valueParameters
+        var konstueParametersToCopy = bridge.konstueParameters
         if (bridge.isEffectivelyExternal()) {
-            val varargIndex = bridge.varargParameterIndex()
+            konst varargIndex = bridge.varargParameterIndex()
             if (varargIndex != -1) {
-                valueParametersToCopy = bridge.valueParameters.take(varargIndex)
+                konstueParametersToCopy = bridge.konstueParameters.take(varargIndex)
             }
         }
-        valueParameters = valueParameters memoryOptimizedPlus valueParametersToCopy.map { p -> p.copyTo(this, type = p.type.substitute(substitutionMap)) }
+        konstueParameters = konstueParameters memoryOptimizedPlus konstueParametersToCopy.map { p -> p.copyTo(this, type = p.type.substitute(substitutionMap)) }
     }
 
     abstract fun getBridgeOrigin(bridge: IrSimpleFunction): IrDeclarationOrigin
@@ -213,12 +213,12 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
 
     // Wrapper around function that compares and hashCodes it based on signature
     // Designed to be used as a Signature type parameter in backend.common.bridges
-    inner class FunctionAndSignature(val function: IrSimpleFunction) {
+    inner class FunctionAndSignature(konst function: IrSimpleFunction) {
 
         // TODO: Use type-upper-bound-based signature instead of Strings
         // Currently strings are used for compatibility with a hack-based name generator
 
-        private val signature = getFunctionSignature(function)
+        private konst signature = getFunctionSignature(function)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -232,13 +232,13 @@ abstract class BridgesConstruction<T : JsCommonBackendContext>(val context: T) :
 }
 
 // Handle for common.bridges
-data class IrBasedFunctionHandle(val function: IrSimpleFunction) : FunctionHandle {
-    override val isDeclaration = function.run { isReal || findInterfaceImplementation() != null }
+data class IrBasedFunctionHandle(konst function: IrSimpleFunction) : FunctionHandle {
+    override konst isDeclaration = function.run { isReal || findInterfaceImplementation() != null }
 
-    override val isAbstract: Boolean =
+    override konst isAbstract: Boolean =
         function.modality == Modality.ABSTRACT
 
-    override val mayBeUsedAsSuperImplementation =
+    override konst mayBeUsedAsSuperImplementation =
         !function.parentAsClass.isInterface
 
     override fun getOverridden() =

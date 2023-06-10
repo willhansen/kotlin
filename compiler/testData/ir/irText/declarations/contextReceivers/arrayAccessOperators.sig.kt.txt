@@ -83,5 +83,5 @@ operator fun MyContainer.get($context_receiver_0: Int, index: Int): String?
 // CHECK:
 //   Mangled name: #set!kotlin.Int@MyContainer(kotlin.Int;kotlin.String){}
 //   Public signature: /set|1694887052182048775[0]
-operator fun MyContainer.set($context_receiver_0: Int, index: Int, value: String): Unit
+operator fun MyContainer.set($context_receiver_0: Int, index: Int, konstue: String): Unit
 

@@ -41,8 +41,8 @@ public class SlicedMapImpl implements MutableSlicedMap {
     }
 
     @Override
-    public <K, V> void put(WritableSlice<K, V> slice, K key, V value) {
-        if (!slice.check(key, value)) {
+    public <K, V> void put(WritableSlice<K, V> slice, K key, V konstue) {
+        if (!slice.check(key, konstue)) {
             return;
         }
 
@@ -62,7 +62,7 @@ public class SlicedMapImpl implements MutableSlicedMap {
             V oldValue = holder.get(sliceKey);
             if (oldValue != null) {
                 //noinspection unchecked
-                if (!rewritePolicy.processRewrite(slice, key, oldValue, value)) {
+                if (!rewritePolicy.processRewrite(slice, key, oldValue, konstue)) {
                     return;
                 }
             }
@@ -76,8 +76,8 @@ public class SlicedMapImpl implements MutableSlicedMap {
             collectiveSliceKeys.put(slice, key);
         }
 
-        map.put(key, holder.plus(sliceKey, value));
-        slice.afterPut(this, key, value);
+        map.put(key, holder.plus(sliceKey, konstue));
+        slice.afterPut(this, key, konstue);
     }
 
     @Override
@@ -90,9 +90,9 @@ public class SlicedMapImpl implements MutableSlicedMap {
     public <K, V> V get(ReadOnlySlice<K, V> slice, K key) {
         KeyFMap holder = map != null ? map.get(key) : null;
 
-        V value = holder == null ? null : holder.get(slice.getKey());
+        V konstue = holder == null ? null : holder.get(slice.getKey());
 
-        return slice.computeValue(this, key, value, value == null);
+        return slice.computeValue(this, key, konstue, konstue == null);
     }
 
     @Override
@@ -111,9 +111,9 @@ public class SlicedMapImpl implements MutableSlicedMap {
             if (holder == null) return;
 
             for (Key<?> sliceKey : holder.getKeys()) {
-                Object value = holder.get(sliceKey);
+                Object konstue = holder.get(sliceKey);
 
-                f.invoke(((AbstractWritableSlice) sliceKey).getSlice(), key, value);
+                f.invoke(((AbstractWritableSlice) sliceKey).getSlice(), key, konstue);
             }
         });
     }
@@ -127,10 +127,10 @@ public class SlicedMapImpl implements MutableSlicedMap {
         ImmutableMap.Builder<K, V> builder = ImmutableMap.builder();
 
         map.forEach((key, holder) -> {
-            V value = holder.get(slice.getKey());
+            V konstue = holder.get(slice.getKey());
 
-            if (value != null) {
-                builder.put((K) key, value);
+            if (konstue != null) {
+                builder.put((K) key, konstue);
             }
         });
 

@@ -72,7 +72,7 @@ public class PropertyGenTest extends CodegenTestCase {
     }
 
     public void testPrivatePropertyInPackage() throws Exception {
-        loadText("private val x = 239");
+        loadText("private konst x = 239");
         Class<?> nsClass = generateFacadeClass();
         Field[] fields = nsClass.getDeclaredFields();
         assertEquals(1, fields.length);
@@ -91,29 +91,29 @@ public class PropertyGenTest extends CodegenTestCase {
     }
 
     public void testFieldGetter() throws Exception {
-        loadText("val now: Long get() = 42L; fun foo() = now");
+        loadText("konst now: Long get() = 42L; fun foo() = now");
         Method method = generateFunction("foo");
-        assertEquals(Long.valueOf(42), method.invoke(null));
+        assertEquals(Long.konstueOf(42), method.invoke(null));
     }
 
     public void testFieldSetter() throws Exception {
         loadFile();
         Method method = generateFunction("append");
         method.invoke(null, "IntelliJ ");
-        String value = (String) method.invoke(null, "IDEA");
-        if (!value.equals("IntelliJ IDEA")) {
+        String konstue = (String) method.invoke(null, "IDEA");
+        if (!konstue.equals("IntelliJ IDEA")) {
             System.out.println(generateToText());
-            throw new AssertionError(value);
+            throw new AssertionError(konstue);
         }
-        assertEquals("IntelliJ IDEA", value);
+        assertEquals("IntelliJ IDEA", konstue);
     }
 
     public void testFieldSetterPlusEq() throws Exception {
         loadFile();
         Method method = generateFunction("append");
         method.invoke(null, "IntelliJ ");
-        String value = (String) method.invoke(null, "IDEA");
-        assertEquals("IntelliJ IDEA", value);
+        String konstue = (String) method.invoke(null, "IDEA");
+        assertEquals("IntelliJ IDEA", konstue);
     }
 
     public void testAccessorsWithoutBody() throws Exception {
@@ -132,23 +132,23 @@ public class PropertyGenTest extends CodegenTestCase {
 
     public void testPropertyReceiverOnStack() throws Exception {
         loadFile();
-        Class<?> aClass = generateClass("Evaluator");
+        Class<?> aClass = generateClass("Ekonstuator");
         Constructor constructor = aClass.getConstructor(StringBuilder.class);
         StringBuilder sb = new StringBuilder("xyzzy");
         Object instance = constructor.newInstance(sb);
-        Method method = aClass.getMethod("evaluateArg");
+        Method method = aClass.getMethod("ekonstuateArg");
         Integer result = (Integer) method.invoke(instance);
         assertEquals(5, result.intValue());
     }
 
     public void testAbstractVal() throws Exception {
-        loadText("abstract class Foo { public abstract val x: String }");
+        loadText("abstract class Foo { public abstract konst x: String }");
         Class<?> aClass = generateClass("Foo");
         assertNotNull(aClass.getMethod("getX"));
     }
 
     public void testKt160() throws Exception {
-        loadText("internal val s = java.lang.Double.toString(1.0)");
+        loadText("internal konst s = java.lang.Double.toString(1.0)");
         Method method = generateFunction("getS");
         method.setAccessible(true);
         assertEquals(method.invoke(null), "1.0");

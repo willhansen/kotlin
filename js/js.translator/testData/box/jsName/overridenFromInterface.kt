@@ -13,7 +13,7 @@ fun test(): dynamic {
 }
 
 fun box(): String {
-    val result = test()
+    konst result = test()
     assertEquals("B.f(23)", result);
     return "OK"
 }

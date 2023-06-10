@@ -24,7 +24,7 @@ class Container {
 
     inner class D : Base()
 
-    val anon = object : <!SEALED_SUPERTYPE!>Base<!>() {} // Should be an error
+    konst anon = object : <!SEALED_SUPERTYPE!>Base<!>() {} // Should be an error
 
     fun someFun() {
         class LocalClass : <!SEALED_SUPERTYPE!>Base<!>() {} // Should be an error

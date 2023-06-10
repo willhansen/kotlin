@@ -24,7 +24,7 @@ object FrontendKinds {
     }
 }
 
-val FrontendKind<*>.isFir: Boolean
+konst FrontendKind<*>.isFir: Boolean
     get() = this == FrontendKinds.FIR
 
 object BackendKinds {

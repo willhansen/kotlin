@@ -1,7 +1,7 @@
 package topLevelManglingA
 
 fun foo() = "a1"
-val bar = "a2"
+konst bar = "a2"
 
-fun sameNumber(value: Int) = value
-fun sameNumber(value: Long) = value
+fun sameNumber(konstue: Int) = konstue
+fun sameNumber(konstue: Long) = konstue

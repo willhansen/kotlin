@@ -8,32 +8,32 @@ public class J {
 
 // FILE: k.kt
 
-val testImplicitExclExcl1: String = J.s
-val testImplicitExclExcl2: String? = J.s
+konst testImplicitExclExcl1: String = J.s
+konst testImplicitExclExcl2: String? = J.s
 
-val testImplicitExclExcl3: String = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>J.m[""]<!>
-val testImplicitExclExcl4: String? = J.m[""]
+konst testImplicitExclExcl3: String = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>J.m[""]<!>
+konst testImplicitExclExcl4: String? = J.m[""]
 
-val testExclExcl1: String = J.s!!
-val testExclExcl2: String? = J.s!!
+konst testExclExcl1: String = J.s!!
+konst testExclExcl2: String? = J.s!!
 
-val testExclExcl3: String = J.m[""]!!
-val testExclExcl4: String? = J.m[""]!!
+konst testExclExcl3: String = J.m[""]!!
+konst testExclExcl4: String? = J.m[""]!!
 
-val testSafeCall1: String = <!INITIALIZER_TYPE_MISMATCH!>J.s?.let { it }<!>
-val testSafeCall2: String? = J.s?.let { it }
+konst testSafeCall1: String = <!INITIALIZER_TYPE_MISMATCH!>J.s?.let { it }<!>
+konst testSafeCall2: String? = J.s?.let { it }
 
-val testSafeCall3: String = <!INITIALIZER_TYPE_MISMATCH!>J.m[""]?.let { it }<!>
-val testSafeCall4: String? = J.m[""]?.let { it.toString() }
+konst testSafeCall3: String = <!INITIALIZER_TYPE_MISMATCH!>J.m[""]?.let { it }<!>
+konst testSafeCall4: String? = J.m[""]?.let { it.toString() }
 
-val testIf1: String = if (true) J.s else J.s
-val testIf2: String? = if (true) J.s else J.s
+konst testIf1: String = if (true) J.s else J.s
+konst testIf2: String? = if (true) J.s else J.s
 
-val testIf3: String = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>if (true) <!TYPE_MISMATCH!>J.m[""]<!> else <!TYPE_MISMATCH!>J.m[""]<!><!>
-val testIf4: String? = if (true) J.m[""] else J.m[""]
+konst testIf3: String = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>if (true) <!TYPE_MISMATCH!>J.m[""]<!> else <!TYPE_MISMATCH!>J.m[""]<!><!>
+konst testIf4: String? = if (true) J.m[""] else J.m[""]
 
-val testWhen1: String = when { else -> J.s }
-val testWhen2: String? = when { else -> J.s }
+konst testWhen1: String = when { else -> J.s }
+konst testWhen2: String? = when { else -> J.s }
 
-val testWhen3: String = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>when { else -> <!TYPE_MISMATCH!>J.m[""]<!> }<!>
-val testWhen4: String? = when { else -> J.m[""] }
+konst testWhen3: String = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>when { else -> <!TYPE_MISMATCH!>J.m[""]<!> }<!>
+konst testWhen4: String? = when { else -> J.m[""] }

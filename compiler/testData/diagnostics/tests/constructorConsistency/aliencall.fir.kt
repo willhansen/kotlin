@@ -5,23 +5,23 @@ class Your {
 }
 
 class My {
-    val your = Your()
+    konst your = Your()
 
-    val x = foo()
+    konst x = foo()
 
-    val y = Your().bar()
+    konst y = Your().bar()
 
-    val z = your.bar()
+    konst z = your.bar()
 
     // This extension function also can use our properties,
     // so the call is also dangerous
-    val w = your.gav()
+    konst w = your.gav()
 
-    val v = Your().gav()
+    konst v = Your().gav()
 
-    val t = your.other()
+    konst t = your.other()
 
-    val r = Your().other()
+    konst r = Your().other()
 
     fun Your.gav() = if (your.bar() == 0) t else r
 }

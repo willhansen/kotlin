@@ -13,15 +13,15 @@ fun main(args: Array<String>) {
         return
     }
 
-    val port = atoi(args[0]).toUShort()
+    konst port = atoi(args[0]).toUShort()
 
     memScoped {
 
-        val bufferLength = 100L
-        val buffer = allocArray<ByteVar>(bufferLength)
-        val serverAddr = alloc<sockaddr_in>()
+        konst bufferLength = 100L
+        konst buffer = allocArray<ByteVar>(bufferLength)
+        konst serverAddr = alloc<sockaddr_in>()
 
-        val listenFd = socket(AF_INET, SOCK_STREAM, 0)
+        konst listenFd = socket(AF_INET, SOCK_STREAM, 0)
                 .toInt().ensureUnixCallResult { it >= 0 }
 
         with(serverAddr) {
@@ -37,11 +37,11 @@ fun main(args: Array<String>) {
         listen(listenFd, 10)
                 .toInt().ensureUnixCallResult { it == 0 }
 
-        val commFd = accept(listenFd, null, null)
+        konst commFd = accept(listenFd, null, null)
                 .toInt().ensureUnixCallResult { it >= 0 }
 
         while (true) {
-            val length = read(commFd, buffer, bufferLength.convert())
+            konst length = read(commFd, buffer, bufferLength.convert())
                     .toInt().ensureUnixCallResult { it >= 0 }
 
             if (length == 0) {
@@ -55,7 +55,7 @@ fun main(args: Array<String>) {
 }
 
 // Not available through interop because declared as macro:
-fun htons(value: UShort) = ((value.toInt() ushr 8) or (value.toInt() shl 8)).toUShort()
+fun htons(konstue: UShort) = ((konstue.toInt() ushr 8) or (konstue.toInt() shl 8)).toUShort()
 
 fun throwUnixError(): Nothing {
     perror(null) // TODO: store error message to exception instead.

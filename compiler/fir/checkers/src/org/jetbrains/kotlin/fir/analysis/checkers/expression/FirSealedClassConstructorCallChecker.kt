@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.fir.types.coneType
 
 object FirSealedClassConstructorCallChecker : FirQualifiedAccessExpressionChecker() {
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
-        val constructorSymbol = expression.calleeReference.toResolvedConstructorSymbol(discardErrorReference = true) ?: return
+        konst constructorSymbol = expression.calleeReference.toResolvedConstructorSymbol(discardErrorReference = true) ?: return
 
-        val typeSymbol = (constructorSymbol.resolvedReturnTypeRef.coneType.fullyExpandedType(context.session) as? ConeClassLikeType)
+        konst typeSymbol = (constructorSymbol.resolvedReturnTypeRef.coneType.fullyExpandedType(context.session) as? ConeClassLikeType)
             ?.lookupTag?.toSymbol(context.session) as? FirRegularClassSymbol
             ?: return
 

@@ -10,36 +10,36 @@ class Foo {
 
 class Bar {
     init {
-        val a = 5
+        konst a = 5
     }
 
     init {
-        val b = 2
+        konst b = 2
     }
 }
 
 class Boo {
     init {
-        val a = 5
+        konst a = 5
     }
 
-    val x = x()
+    konst x = x()
 
     init {
-        val b = 2
+        konst b = 2
     }
 }
 
 class Zoo {
-    init { val a = 5 }
+    init { konst a = 5 }
 
-    init { val b = 6 }
+    init { konst b = 6 }
 
     init {
-        val c = 7
+        konst c = 7
     }
 
-    init { val d = 8 }
+    init { konst d = 8 }
 }
 
 fun x() = ""

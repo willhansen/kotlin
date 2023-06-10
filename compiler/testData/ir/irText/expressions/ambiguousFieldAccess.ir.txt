@@ -1,11 +1,11 @@
 FILE fqName:test fileName:/test.kt
-  FUN name:eval visibility:public modality:FINAL <T> (f:kotlin.Function0<T of test.eval>) returnType:T of test.eval
+  FUN name:ekonst visibility:public modality:FINAL <T> (f:kotlin.Function0<T of test.ekonst>) returnType:T of test.ekonst
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
-    VALUE_PARAMETER name:f index:0 type:kotlin.Function0<T of test.eval>
+    VALUE_PARAMETER name:f index:0 type:kotlin.Function0<T of test.ekonst>
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun eval <T> (f: kotlin.Function0<T of test.eval>): T of test.eval declared in test'
-        CALL 'public abstract fun invoke (): R of kotlin.Function0 declared in kotlin.Function0' type=T of test.eval origin=INVOKE
-          $this: GET_VAR 'f: kotlin.Function0<T of test.eval> declared in test.eval' type=kotlin.Function0<T of test.eval> origin=VARIABLE_AS_FUNCTION
+      RETURN type=kotlin.Nothing from='public final fun ekonst <T> (f: kotlin.Function0<T of test.ekonst>): T of test.ekonst declared in test'
+        CALL 'public abstract fun invoke (): R of kotlin.Function0 declared in kotlin.Function0' type=T of test.ekonst origin=INVOKE
+          $this: GET_VAR 'f: kotlin.Function0<T of test.ekonst> declared in test.ekonst' type=kotlin.Function0<T of test.ekonst> origin=VARIABLE_AS_FUNCTION
   CLASS CLASS name:C modality:FINAL visibility:public superTypes:[<root>.A.B]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:test.C
     CONSTRUCTOR visibility:public <> () returnType:test.C [primary]
@@ -16,7 +16,7 @@ FILE fqName:test fileName:/test.kt
       $this: VALUE_PARAMETER name:<this> type:test.C
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun f (): @[FlexibleNullability] kotlin.String? declared in test.C'
-          CALL 'public final fun eval <T> (f: kotlin.Function0<T of test.eval>): T of test.eval declared in test' type=@[FlexibleNullability] kotlin.String? origin=null
+          CALL 'public final fun ekonst <T> (f: kotlin.Function0<T of test.ekonst>): T of test.ekonst declared in test' type=@[FlexibleNullability] kotlin.String? origin=null
             <T>: @[FlexibleNullability] kotlin.String?
             f: FUN_EXPR type=kotlin.Function0<@[FlexibleNullability] kotlin.String?> origin=LAMBDA
               FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:@[FlexibleNullability] kotlin.String?
@@ -28,7 +28,7 @@ FILE fqName:test fileName:/test.kt
       $this: VALUE_PARAMETER name:<this> type:test.C
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun g (): @[FlexibleNullability] kotlin.String? declared in test.C'
-          CALL 'public final fun eval <T> (f: kotlin.Function0<T of test.eval>): T of test.eval declared in test' type=@[FlexibleNullability] kotlin.String? origin=null
+          CALL 'public final fun ekonst <T> (f: kotlin.Function0<T of test.ekonst>): T of test.ekonst declared in test' type=@[FlexibleNullability] kotlin.String? origin=null
             <T>: @[FlexibleNullability] kotlin.String?
             f: FUN_EXPR type=kotlin.Function0<@[FlexibleNullability] kotlin.String?> origin=LAMBDA
               FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:@[FlexibleNullability] kotlin.String?

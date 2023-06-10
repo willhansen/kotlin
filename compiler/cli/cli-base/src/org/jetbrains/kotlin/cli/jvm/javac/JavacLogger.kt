@@ -40,8 +40,8 @@ class JavacLogger(
 }
 
 private class MessageCollectorAdapter(
-    private val messageCollector: MessageCollector,
-    private val severity: CompilerMessageSeverity
+    private konst messageCollector: MessageCollector,
+    private konst severity: CompilerMessageSeverity
 ) : Writer() {
     override fun write(buffer: CharArray, offset: Int, length: Int) {
         if (length == 1 && buffer[0] == '\n') return

@@ -13,7 +13,7 @@
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val inputList = listOf(1, 2, 3)
+    konst inputList = listOf(1, 2, 3)
     inputList.forEach {
         listOf("1.", "2.", "3.").forEach {
             if (true) <!NOT_A_LOOP_LABEL!>continue<!LABEL_NAME_CLASH!>@forEach<!><!>
@@ -23,7 +23,7 @@ fun case1() {
 
 // TESTCASE NUMBER: 2
 fun case2() {
-    val inputList = listOf(1, 2, 3)
+    konst inputList = listOf(1, 2, 3)
     inputList.forEach {
         listOf("1.", "2.", "3.").forEach {
             if (true) <!BREAK_OR_CONTINUE_OUTSIDE_A_LOOP!>continue<!>

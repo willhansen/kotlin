@@ -36,10 +36,10 @@ public enum IrSimpleTypeNullability
   public static final int DEFINITELY_NOT_NULL_VALUE = 2;
 
 
-  public final int getNumber() { return value; }
+  public final int getNumber() { return konstue; }
 
-  public static IrSimpleTypeNullability valueOf(int value) {
-    switch (value) {
+  public static IrSimpleTypeNullability konstueOf(int konstue) {
+    switch (konstue) {
       case 0: return MARKED_NULLABLE;
       case 1: return NOT_SPECIFIED;
       case 2: return DEFINITELY_NOT_NULL;
@@ -55,14 +55,14 @@ public enum IrSimpleTypeNullability
       internalValueMap =
         new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<IrSimpleTypeNullability>() {
           public IrSimpleTypeNullability findValueByNumber(int number) {
-            return IrSimpleTypeNullability.valueOf(number);
+            return IrSimpleTypeNullability.konstueOf(number);
           }
         };
 
-  private final int value;
+  private final int konstue;
 
-  private IrSimpleTypeNullability(int index, int value) {
-    this.value = value;
+  private IrSimpleTypeNullability(int index, int konstue) {
+    this.konstue = konstue;
   }
 
   // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeNullability)

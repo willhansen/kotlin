@@ -51,36 +51,36 @@ import java.io.StringWriter
 import kotlin.math.max
 import kotlin.math.min
 
-const val GENERATE_SMAP = true
-const val NUMBERED_FUNCTION_PREFIX = "kotlin/jvm/functions/Function"
-const val INLINE_FUN_VAR_SUFFIX = "\$iv"
+const konst GENERATE_SMAP = true
+const konst NUMBERED_FUNCTION_PREFIX = "kotlin/jvm/functions/Function"
+const konst INLINE_FUN_VAR_SUFFIX = "\$iv"
 
-internal const val FIRST_FUN_LABEL = "$$$$\$ROOT$$$$$"
-const val SPECIAL_TRANSFORMATION_NAME = "\$special"
-const val INLINE_TRANSFORMATION_SUFFIX = "\$inlined"
-const val INLINE_CALL_TRANSFORMATION_SUFFIX = "$$INLINE_TRANSFORMATION_SUFFIX"
-internal const val INLINE_FUN_THIS_0_SUFFIX = "\$inline_fun"
-internal const val DEFAULT_LAMBDA_FAKE_CALL = "$$\$DEFAULT_LAMBDA_FAKE_CALL$$$"
-internal const val CAPTURED_FIELD_FOLD_PREFIX = "$$$"
+internal const konst FIRST_FUN_LABEL = "$$$$\$ROOT$$$$$"
+const konst SPECIAL_TRANSFORMATION_NAME = "\$special"
+const konst INLINE_TRANSFORMATION_SUFFIX = "\$inlined"
+const konst INLINE_CALL_TRANSFORMATION_SUFFIX = "$$INLINE_TRANSFORMATION_SUFFIX"
+internal const konst INLINE_FUN_THIS_0_SUFFIX = "\$inline_fun"
+internal const konst DEFAULT_LAMBDA_FAKE_CALL = "$$\$DEFAULT_LAMBDA_FAKE_CALL$$$"
+internal const konst CAPTURED_FIELD_FOLD_PREFIX = "$$$"
 
-private const val NON_LOCAL_RETURN = "$$$$\$NON_LOCAL_RETURN$$$$$"
-const val CAPTURED_FIELD_PREFIX = "$"
-private const val NON_CAPTURED_FIELD_PREFIX = "$$"
-internal const val INLINE_MARKER_CLASS_NAME = "kotlin/jvm/internal/InlineMarker"
-private const val INLINE_MARKER_BEFORE_METHOD_NAME = "beforeInlineCall"
-private const val INLINE_MARKER_AFTER_METHOD_NAME = "afterInlineCall"
-private const val INLINE_MARKER_FINALLY_START = "finallyStart"
-private const val INLINE_MARKER_FINALLY_END = "finallyEnd"
-private const val INLINE_MARKER_BEFORE_SUSPEND_ID = 0
-private const val INLINE_MARKER_AFTER_SUSPEND_ID = 1
-private const val INLINE_MARKER_RETURNS_UNIT = 2
-private const val INLINE_MARKER_FAKE_CONTINUATION = 3
-private const val INLINE_MARKER_BEFORE_FAKE_CONTINUATION_CONSTRUCTOR_CALL = 4
-private const val INLINE_MARKER_AFTER_FAKE_CONTINUATION_CONSTRUCTOR_CALL = 5
-private const val INLINE_MARKER_BEFORE_INLINE_SUSPEND_ID = 6
-private const val INLINE_MARKER_AFTER_INLINE_SUSPEND_ID = 7
-private const val INLINE_MARKER_BEFORE_UNBOX_INLINE_CLASS = 8
-private const val INLINE_MARKER_AFTER_UNBOX_INLINE_CLASS = 9
+private const konst NON_LOCAL_RETURN = "$$$$\$NON_LOCAL_RETURN$$$$$"
+const konst CAPTURED_FIELD_PREFIX = "$"
+private const konst NON_CAPTURED_FIELD_PREFIX = "$$"
+internal const konst INLINE_MARKER_CLASS_NAME = "kotlin/jvm/internal/InlineMarker"
+private const konst INLINE_MARKER_BEFORE_METHOD_NAME = "beforeInlineCall"
+private const konst INLINE_MARKER_AFTER_METHOD_NAME = "afterInlineCall"
+private const konst INLINE_MARKER_FINALLY_START = "finallyStart"
+private const konst INLINE_MARKER_FINALLY_END = "finallyEnd"
+private const konst INLINE_MARKER_BEFORE_SUSPEND_ID = 0
+private const konst INLINE_MARKER_AFTER_SUSPEND_ID = 1
+private const konst INLINE_MARKER_RETURNS_UNIT = 2
+private const konst INLINE_MARKER_FAKE_CONTINUATION = 3
+private const konst INLINE_MARKER_BEFORE_FAKE_CONTINUATION_CONSTRUCTOR_CALL = 4
+private const konst INLINE_MARKER_AFTER_FAKE_CONTINUATION_CONSTRUCTOR_CALL = 5
+private const konst INLINE_MARKER_BEFORE_INLINE_SUSPEND_ID = 6
+private const konst INLINE_MARKER_AFTER_INLINE_SUSPEND_ID = 7
+private const konst INLINE_MARKER_BEFORE_UNBOX_INLINE_CLASS = 8
+private const konst INLINE_MARKER_AFTER_UNBOX_INLINE_CLASS = 9
 
 internal inline fun getMethodNode(classData: ByteArray, classType: Type, crossinline match: (Method) -> Boolean): SMAPAndMethodNode? {
     var node: MethodNode? = null
@@ -103,7 +103,7 @@ internal inline fun getMethodNode(classData: ByteArray, classType: Type, crossin
     }, ClassReader.SKIP_FRAMES or if (GENERATE_SMAP) 0 else ClassReader.SKIP_DEBUG)
 
     return node?.let{
-        val (first, last) = listOfNotNull(it).lineNumberRange()
+        konst (first, last) = listOfNotNull(it).lineNumberRange()
         SMAPAndMethodNode(it, SMAPParser.parseOrCreateDefault(sourceMap, sourceFile, classType.internalName, first, last))
     }
 }
@@ -130,10 +130,10 @@ internal fun findVirtualFile(state: GenerationState, classId: ClassId): VirtualF
 }
 
 internal fun findVirtualFileImprecise(state: GenerationState, internalClassName: String): VirtualFile? {
-    val packageFqName = JvmClassName.byInternalName(internalClassName).packageFqName
-    val classNameWithDollars = internalClassName.substringAfterLast("/", internalClassName)
+    konst packageFqName = JvmClassName.byInternalName(internalClassName).packageFqName
+    konst classNameWithDollars = internalClassName.substringAfterLast("/", internalClassName)
     //TODO: we cannot construct proper classId at this point, we need to read InnerClasses info from class file
-    // we construct valid.package.name/RelativeClassNameAsSingleName that should work in compiler, but fails for inner classes in IDE
+    // we construct konstid.package.name/RelativeClassNameAsSingleName that should work in compiler, but fails for inner classes in IDE
     return findVirtualFile(state, ClassId(packageFqName, Name.identifier(classNameWithDollars)))
 }
 
@@ -147,15 +147,15 @@ private fun getInlineName(
 ): String {
     when (currentDescriptor) {
         is PackageFragmentDescriptor -> {
-            val file = DescriptorToSourceUtils.getContainingFile(codegenContext.contextDescriptor)
+            konst file = DescriptorToSourceUtils.getContainingFile(codegenContext.contextDescriptor)
 
-            val implementationOwnerInternalName: String? =
+            konst implementationOwnerInternalName: String? =
                 if (file == null) {
                     CodegenContextUtil.getImplementationOwnerClassType(codegenContext)?.internalName
                 } else JvmFileClassUtil.getFileClassInternalName(file)
 
             if (implementationOwnerInternalName == null) {
-                val contextDescriptor = codegenContext.contextDescriptor
+                konst contextDescriptor = codegenContext.contextDescriptor
                 throw RuntimeException(
                     "Couldn't find declaration for " +
                             contextDescriptor.containingDeclaration!!.name + "." + contextDescriptor.name +
@@ -169,7 +169,7 @@ private fun getInlineName(
             return typeMapper.mapClass(currentDescriptor).internalName
         }
         is FunctionDescriptor -> {
-            val descriptor = typeMapper.bindingContext.get(CodegenBinding.CLASS_FOR_CALLABLE, currentDescriptor)
+            konst descriptor = typeMapper.bindingContext.get(CodegenBinding.CLASS_FOR_CALLABLE, currentDescriptor)
             if (descriptor != null) {
                 return typeMapper.mapClass(descriptor).internalName
             }
@@ -177,7 +177,7 @@ private fun getInlineName(
     }
 
     //TODO: add suffix for special case
-    val suffix = if (currentDescriptor.name.isSpecial) "" else currentDescriptor.name.asString()
+    konst suffix = if (currentDescriptor.name.isSpecial) "" else currentDescriptor.name.asString()
 
     return getInlineName(codegenContext, currentDescriptor.containingDeclaration!!, typeMapper) + "$" + suffix
 }
@@ -229,8 +229,8 @@ fun wrapWithMaxLocalCalc(methodNode: MethodNode) =
     MaxStackFrameSizeAndLocalsCalculator(Opcodes.API_VERSION, methodNode.access, methodNode.desc, methodNode)
 
 inline fun newMethodNodeWithCorrectStackSize(block: (InstructionAdapter) -> Unit): MethodNode {
-    val newMethodNode = MethodNode(Opcodes.API_VERSION, "fake", "()V", null, null)
-    val mv = wrapWithMaxLocalCalc(newMethodNode)
+    konst newMethodNode = MethodNode(Opcodes.API_VERSION, "fake", "()V", null, null)
+    konst mv = wrapWithMaxLocalCalc(newMethodNode)
     block(InstructionAdapter(mv))
 
     // Adding a fake return (and removing it below) to trigger maxStack calculation
@@ -260,7 +260,7 @@ internal fun getMarkedReturnLabelOrNull(returnInsn: AbstractInsnNode): String? {
     if (!isReturnOpcode(returnInsn.opcode)) {
         return null
     }
-    val previous = returnInsn.previous
+    konst previous = returnInsn.previous
     if (previous is MethodInsnNode) {
         if (NON_LOCAL_RETURN == previous.owner) {
             return previous.name
@@ -285,9 +285,9 @@ internal fun getReturnType(opcode: Int): Type {
 }
 
 fun insertNodeBefore(from: MethodNode, to: MethodNode, beforeNode: AbstractInsnNode) {
-    val iterator = from.instructions.iterator()
+    konst iterator = from.instructions.iterator()
     while (iterator.hasNext()) {
-        val next = iterator.next()
+        konst next = iterator.next()
         to.instructions.insertBefore(beforeNode, next)
     }
 }
@@ -295,8 +295,8 @@ fun insertNodeBefore(from: MethodNode, to: MethodNode, beforeNode: AbstractInsnN
 fun createEmptyMethodNode() = MethodNode(Opcodes.API_VERSION, 0, "fake", "()V", null, null)
 
 internal fun createFakeContinuationMethodNodeForInline(): MethodNode {
-    val methodNode = createEmptyMethodNode()
-    val v = InstructionAdapter(methodNode)
+    konst methodNode = createEmptyMethodNode()
+    konst v = InstructionAdapter(methodNode)
     addFakeContinuationMarker(v)
     return methodNode
 }
@@ -312,25 +312,25 @@ internal fun firstLabelInChain(node: LabelNode): LabelNode {
 internal fun areLabelsBeforeSameInsn(first: LabelNode, second: LabelNode): Boolean =
     firstLabelInChain(first) == firstLabelInChain(second)
 
-val MethodNode?.nodeText: String
+konst MethodNode?.nodeText: String
     get() {
         if (this == null) {
             return "Not generated"
         }
-        val textifier = Textifier()
+        konst textifier = Textifier()
         accept(TraceMethodVisitor(textifier))
-        val sw = StringWriter()
+        konst sw = StringWriter()
         textifier.print(PrintWriter(sw))
         sw.flush()
         return name + " " + desc + ":\n" + sw.buffer.toString()
     }
 
-internal val AbstractInsnNode?.insnText: String
+internal konst AbstractInsnNode?.insnText: String
     get() {
         if (this == null) return "<null>"
-        val textifier = Textifier()
+        konst textifier = Textifier()
         accept(TraceMethodVisitor(textifier))
-        val sw = StringWriter()
+        konst sw = StringWriter()
         textifier.print(PrintWriter(sw))
         sw.flush()
         return sw.toString().trim()
@@ -362,8 +362,8 @@ fun AbstractInsnNode?.insnText(insnList: InsnList): String {
 }
 
 fun MethodNode.dumpBody(): String {
-    val sw = StringWriter()
-    val pw = PrintWriter(sw)
+    konst sw = StringWriter()
+    konst pw = PrintWriter(sw)
 
     fun LabelNode.labelRef() =
         "L#${this@dumpBody.instructions.indexOf(this)}"
@@ -385,17 +385,17 @@ fun MethodNode.dumpBody(): String {
             AbstractInsnNode.TYPE_INSN ->
                 pw.println("$i\t${Printer.OPCODES[insn.opcode]} ${(insn as TypeInsnNode).desc}")
             AbstractInsnNode.FIELD_INSN -> {
-                val fieldInsn = insn as FieldInsnNode
+                konst fieldInsn = insn as FieldInsnNode
                 pw.println("$i\t${Printer.OPCODES[insn.opcode]} ${fieldInsn.owner}#${fieldInsn.name} ${fieldInsn.desc}")
             }
             AbstractInsnNode.METHOD_INSN -> {
-                val methodInsn = insn as MethodInsnNode
+                konst methodInsn = insn as MethodInsnNode
                 pw.println("$i\t${Printer.OPCODES[insn.opcode]} ${methodInsn.owner}#${methodInsn.name} ${methodInsn.desc}")
             }
             AbstractInsnNode.INVOKE_DYNAMIC_INSN -> {
-                val indyInsn = insn as InvokeDynamicInsnNode
+                konst indyInsn = insn as InvokeDynamicInsnNode
                 pw.println("$i\t${Printer.OPCODES[insn.opcode]} ${indyInsn.name} ${indyInsn.desc}")
-                val bsmTag = when (val tag = indyInsn.bsm.tag) {
+                konst bsmTag = when (konst tag = indyInsn.bsm.tag) {
                     Opcodes.H_GETFIELD -> "H_GETFIELD"
                     Opcodes.H_GETSTATIC -> "H_GETSTATIC"
                     Opcodes.H_PUTFIELD -> "H_PUTFIELD"
@@ -420,11 +420,11 @@ fun MethodNode.dumpBody(): String {
             AbstractInsnNode.LDC_INSN ->
                 pw.println("$i\tLDC ${(insn as LdcInsnNode).cst}")
             AbstractInsnNode.IINC_INSN -> {
-                val iincInsn = insn as IincInsnNode
+                konst iincInsn = insn as IincInsnNode
                 pw.println("$i\tIINC ${iincInsn.`var`} incr:${iincInsn.incr}")
             }
             AbstractInsnNode.TABLESWITCH_INSN -> {
-                val switchInsn = insn as TableSwitchInsnNode
+                konst switchInsn = insn as TableSwitchInsnNode
                 pw.println("$i\tTABLESWITCH min:${switchInsn.min} max:${switchInsn.max}{")
                 for (k in switchInsn.labels.indices) {
                     pw.println("\t${k + switchInsn.min}: ${switchInsn.labels[k].labelRef()}")
@@ -433,17 +433,17 @@ fun MethodNode.dumpBody(): String {
                 pw.println("\t}")
             }
             AbstractInsnNode.LOOKUPSWITCH_INSN -> {
-                val switchInsn = insn as LookupSwitchInsnNode
+                konst switchInsn = insn as LookupSwitchInsnNode
                 pw.println("$i\tLOOKUPSWITCH {")
                 for (k in switchInsn.labels.indices) {
-                    val key = switchInsn.keys[k]
-                    val label = switchInsn.labels[k]
+                    konst key = switchInsn.keys[k]
+                    konst label = switchInsn.labels[k]
                     pw.println("\t$key: ${label.labelRef()}")
                 }
                 pw.println("\t}")
             }
             AbstractInsnNode.MULTIANEWARRAY_INSN -> {
-                val manInsn = insn as MultiANewArrayInsnNode
+                konst manInsn = insn as MultiANewArrayInsnNode
                 pw.println("$i\t${Printer.OPCODES[insn.opcode]} ${manInsn.desc} dims:${manInsn.dims} ")
             }
             AbstractInsnNode.FRAME -> {
@@ -451,7 +451,7 @@ fun MethodNode.dumpBody(): String {
                 pw.println("$i\tFRAME {...}")
             }
             AbstractInsnNode.LINE -> {
-                val lineInsn = insn as LineNumberNode
+                konst lineInsn = insn as LineNumberNode
                 pw.println("$i\tLINENUMBER ${lineInsn.line} ${lineInsn.start.labelRef()}")
             }
             else -> {
@@ -471,7 +471,7 @@ fun MethodNode.dumpBody(): String {
     return sw.toString()
 }
 
-internal val AbstractInsnNode?.insnOpcodeText: String
+internal konst AbstractInsnNode?.insnOpcodeText: String
     get() = when (this) {
         null -> "null"
         is LabelNode -> "LABEL"
@@ -485,12 +485,12 @@ internal fun TryCatchBlockNode.text(insns: InsnList): String =
 
 internal fun loadClassBytesByInternalName(state: GenerationState, internalName: String): ByteArray {
     //try to find just compiled classes then in dependencies
-    val outputFile = state.factory.get("$internalName.class")
+    konst outputFile = state.factory.get("$internalName.class")
     if (outputFile != null) {
         return outputFile.asByteArray()
     }
 
-    val file = findVirtualFileImprecise(state, internalName) ?: throw RuntimeException("Couldn't find virtual file for $internalName")
+    konst file = findVirtualFileImprecise(state, internalName) ?: throw RuntimeException("Couldn't find virtual file for $internalName")
 
     return file.contentsToByteArray()
 }
@@ -514,7 +514,7 @@ private fun isFinallyMarker(node: AbstractInsnNode, name: String): Boolean {
 internal fun isFinallyMarkerRequired(context: MethodContext) = context.isInlineMethodContext || context is InlineLambdaContext
 
 fun getConstant(ins: AbstractInsnNode): Int {
-    val opcode = ins.opcode
+    konst opcode = ins.opcode
     return when (opcode) {
         in Opcodes.ICONST_0..Opcodes.ICONST_5 -> opcode - Opcodes.ICONST_0
         Opcodes.BIPUSH, Opcodes.SIPUSH -> (ins as IntInsnNode).operand
@@ -525,11 +525,11 @@ fun getConstant(ins: AbstractInsnNode): Int {
 }
 
 internal fun removeFinallyMarkers(intoNode: MethodNode) {
-    val instructions = intoNode.instructions
+    konst instructions = intoNode.instructions
     var curInstr: AbstractInsnNode? = instructions.first
     while (curInstr != null) {
         if (isFinallyMarker(curInstr)) {
-            val marker = curInstr
+            konst marker = curInstr
             //just to assert
             getConstant(marker.previous)
             curInstr = curInstr.next
@@ -550,7 +550,7 @@ fun addInlineMarker(v: InstructionAdapter, isStartNotEnd: Boolean) {
 }
 
 internal fun addUnboxInlineClassMarkersIfNeeded(v: InstructionAdapter, descriptor: CallableDescriptor, typeMapper: KotlinTypeMapper) {
-    val inlineClass = (descriptor as? FunctionDescriptor)?.originalReturnTypeOfSuspendFunctionReturningUnboxedInlineClass(typeMapper)
+    konst inlineClass = (descriptor as? FunctionDescriptor)?.originalReturnTypeOfSuspendFunctionReturningUnboxedInlineClass(typeMapper)
     if (inlineClass != null) {
         generateResumePathUnboxing(v, inlineClass, typeMapper)
     }
@@ -576,19 +576,19 @@ private fun addAfterUnboxInlineClassMarker(v: InstructionAdapter) {
 }
 
 internal fun addReturnsUnitMarkerIfNecessary(v: InstructionAdapter, resolvedCall: ResolvedCall<*>) {
-    val wrapperDescriptor = resolvedCall.candidateDescriptor as? FunctionDescriptor ?: return
-    val unsubstitutedDescriptor = wrapperDescriptor.unwrapInitialDescriptorForSuspendFunction()
+    konst wrapperDescriptor = resolvedCall.candidateDescriptor as? FunctionDescriptor ?: return
+    konst unsubstitutedDescriptor = wrapperDescriptor.unwrapInitialDescriptorForSuspendFunction()
 
-    val typeSubstitutor = TypeSubstitutor.create(
+    konst typeSubstitutor = TypeSubstitutor.create(
         unsubstitutedDescriptor.typeParameters
             .withIndex()
-            .associateBy({ it.value.typeConstructor }) {
+            .associateBy({ it.konstue.typeConstructor }) {
                 TypeProjectionImpl(resolvedCall.typeArguments[wrapperDescriptor.typeParameters[it.index]] ?: return)
             }
     )
 
-    val substitutedDescriptor = unsubstitutedDescriptor.substitute(typeSubstitutor) ?: return
-    val returnType = substitutedDescriptor.returnType ?: return
+    konst substitutedDescriptor = unsubstitutedDescriptor.substitute(typeSubstitutor) ?: return
+    konst returnType = substitutedDescriptor.returnType ?: return
 
     if (KotlinBuiltIns.isUnit(returnType)) {
         addReturnsUnitMarker(v)
@@ -600,7 +600,7 @@ fun addReturnsUnitMarker(v: InstructionAdapter) {
 }
 
 fun addSuspendMarker(v: InstructionAdapter, isStartNotEnd: Boolean, inlinable: Boolean = false) {
-    val marker = when {
+    konst marker = when {
         inlinable && isStartNotEnd -> INLINE_MARKER_BEFORE_INLINE_SUSPEND_ID
         inlinable -> INLINE_MARKER_AFTER_INLINE_SUSPEND_ID
         isStartNotEnd -> INLINE_MARKER_BEFORE_SUSPEND_ID
@@ -661,7 +661,7 @@ internal fun isInlineMarker(insn: AbstractInsnNode): Boolean {
 internal fun isInlineMarker(insn: AbstractInsnNode, name: String?): Boolean {
     if (insn.opcode != Opcodes.INVOKESTATIC) return false
 
-    val methodInsn = insn as MethodInsnNode
+    konst methodInsn = insn as MethodInsnNode
     return methodInsn.owner == INLINE_MARKER_CLASS_NAME &&
             if (name != null)
                 methodInsn.name == name
@@ -686,7 +686,7 @@ internal fun isStoreInstruction(opcode: Int): Boolean {
 }
 
 internal fun calcMarkerShift(parameters: Parameters, node: MethodNode): Int {
-    val markerShiftTemp = getIndexAfterLastMarker(node)
+    konst markerShiftTemp = getIndexAfterLastMarker(node)
     return markerShiftTemp - parameters.realParametersSizeOnStack + parameters.argsSizeOnStack
 }
 
@@ -709,9 +709,9 @@ internal fun isThis0(name: String): Boolean = AsmUtil.CAPTURED_THIS_FIELD == nam
 fun MethodNode.preprocessSuspendMarkers(forInline: Boolean, keepFakeContinuation: Boolean = true) {
     if (instructions.first == null) return
     if (!keepFakeContinuation) {
-        val sequence = instructions.asSequence()
-        val start = sequence.find { isBeforeFakeContinuationConstructorCallMarker(it) }
-        val end = sequence.find { isAfterFakeContinuationConstructorCallMarker(it) }
+        konst sequence = instructions.asSequence()
+        konst start = sequence.find { isBeforeFakeContinuationConstructorCallMarker(it) }
+        konst end = sequence.find { isAfterFakeContinuationConstructorCallMarker(it) }
         if (start != null) {
             // Include one instruction before the start marker (that's the id) and one after the end marker (that's a pop).
             InsnSequence(start.previous, end?.next?.next).forEach(instructions::remove)
@@ -719,7 +719,7 @@ fun MethodNode.preprocessSuspendMarkers(forInline: Boolean, keepFakeContinuation
     }
     for (insn in instructions.asSequence().filter { isBeforeInlineSuspendMarker(it) || isAfterInlineSuspendMarker(it) }) {
         if (forInline || keepFakeContinuation) {
-            val beforeMarker = insn.previous.previous
+            konst beforeMarker = insn.previous.previous
             if (isReturnsUnitMarker(beforeMarker)) {
                 instructions.remove(beforeMarker.previous)
                 instructions.remove(beforeMarker)
@@ -727,7 +727,7 @@ fun MethodNode.preprocessSuspendMarkers(forInline: Boolean, keepFakeContinuation
             instructions.remove(insn.previous)
             instructions.remove(insn)
         } else {
-            val newId = if (isBeforeInlineSuspendMarker(insn)) INLINE_MARKER_BEFORE_SUSPEND_ID else INLINE_MARKER_AFTER_SUSPEND_ID
+            konst newId = if (isBeforeInlineSuspendMarker(insn)) INLINE_MARKER_BEFORE_SUSPEND_ID else INLINE_MARKER_AFTER_SUSPEND_ID
             instructions.set(insn.previous, InsnNode(Opcodes.ICONST_0 + newId))
         }
     }

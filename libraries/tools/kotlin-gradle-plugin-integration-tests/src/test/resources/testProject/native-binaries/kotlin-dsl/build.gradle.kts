@@ -26,9 +26,9 @@ kotlin {
         }
     }
 
-    val macos = macosX64("macos64")
-    val linux = linuxX64("linux64")
-    val windows = mingwX64("mingw64")
+    konst macos = macosX64("macos64")
+    konst linux = linuxX64("linux64")
+    konst windows = mingwX64("mingw64")
 
     configure(listOf(macos, linux, windows)) {
         compilations.all { kotlinOptions.verbose = true }

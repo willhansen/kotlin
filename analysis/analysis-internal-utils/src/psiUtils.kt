@@ -10,11 +10,11 @@ import com.intellij.psi.PsiClassOwner
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 
-public val PsiClass.classIdIfNonLocal: ClassId?
+public konst PsiClass.classIdIfNonLocal: ClassId?
     get() {
-        val packageName = (containingFile as? PsiClassOwner)?.packageName ?: return null
-        val qualifiedName = qualifiedName ?: return null
-        val relatedClassName = qualifiedName.removePrefix("$packageName.")
+        konst packageName = (containingFile as? PsiClassOwner)?.packageName ?: return null
+        konst qualifiedName = qualifiedName ?: return null
+        konst relatedClassName = qualifiedName.removePrefix("$packageName.")
         if (relatedClassName.isEmpty()) return null
 
         return ClassId(FqName(packageName), FqName(relatedClassName), false)

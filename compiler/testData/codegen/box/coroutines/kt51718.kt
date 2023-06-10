@@ -12,7 +12,7 @@ class Service {
     suspend fun getCanalConfig() {
         var start: Start? = null
         var configuration: String? = null
-        val starts: Array<Start>? = null
+        konst starts: Array<Start>? = null
         if (starts != null && starts.isNotEmpty()) {
             start = starts[0]
             configuration = call2()
@@ -21,10 +21,10 @@ class Service {
         call(start!!)
     }
 
-    val canalConfig = suspend {
+    konst canalConfig = suspend {
         var start: Start? = null
         var configuration: String? = null
-        val starts: Array<Start>? = null
+        konst starts: Array<Start>? = null
         if (starts != null && starts.isNotEmpty()) {
             start = starts[0]
             configuration = call2()

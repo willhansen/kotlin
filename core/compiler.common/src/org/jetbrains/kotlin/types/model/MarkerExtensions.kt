@@ -20,7 +20,7 @@ fun KotlinTypeMarker.dependsOnTypeConstructor(c: TypeSystemInferenceExtensionCon
 
 fun KotlinTypeMarker.dependsOnTypeParameters(c: TypeSystemInferenceExtensionContext, typeParameters: Collection<TypeParameterMarker>): Boolean =
     with(c) {
-        val typeConstructors = typeParameters.mapTo(mutableSetOf()) { it.getTypeConstructor() }
+        konst typeConstructors = typeParameters.mapTo(mutableSetOf()) { it.getTypeConstructor() }
         dependsOnTypeConstructor(c, typeConstructors)
     }
 

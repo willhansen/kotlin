@@ -30,26 +30,26 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.kotlin.resolve.source.getPsi
 
 internal class KtFe10DescSyntheticFieldSymbol(
-    val descriptor: SyntheticFieldDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    konst descriptor: SyntheticFieldDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtBackingFieldSymbol(), KtFe10Symbol, KtFe10AnnotatedSymbol {
-    override val owningProperty: KtKotlinPropertySymbol
+    override konst owningProperty: KtKotlinPropertySymbol
         get() = withValidityAssertion {
-            val kotlinProperty = descriptor.propertyDescriptor as PropertyDescriptorImpl
+            konst kotlinProperty = descriptor.propertyDescriptor as PropertyDescriptorImpl
             KtFe10DescKotlinPropertySymbol(kotlinProperty, analysisContext)
         }
 
-    override val annotationsObject: Annotations
+    override konst annotationsObject: Annotations
         get() = withValidityAssertion { descriptor.annotations }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.propertyDescriptor.type.toKtType(analysisContext) }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtBackingFieldSymbol> = withValidityAssertion {
-        val accessorPsi = descriptor.containingDeclaration.toSourceElement.getPsi()
+        konst accessorPsi = descriptor.containingDeclaration.toSourceElement.getPsi()
         if (accessorPsi is KtPropertyAccessor) {
-            val accessorPointer = KtPsiBasedSymbolPointer.createForSymbolFromPsi<KtPropertyAccessorSymbol>(accessorPsi)
+            konst accessorPointer = KtPsiBasedSymbolPointer.createForSymbolFromPsi<KtPropertyAccessorSymbol>(accessorPsi)
             if (accessorPointer != null) {
                 return KtFe10DescSyntheticFieldSymbolPointer(accessorPointer)
             }

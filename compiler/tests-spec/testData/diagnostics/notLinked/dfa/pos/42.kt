@@ -18,8 +18,8 @@
 fun case_1() {
     var x: Boolean? = true
     x!!
-    val y = {
-        val <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE, NAME_SHADOWING!>x<!>: Int?
+    konst y = {
+        konst <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE, NAME_SHADOWING!>x<!>: Int?
         x = 10
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Boolean?")!>x<!>
@@ -34,7 +34,7 @@ fun case_1() {
 fun case_2() {
     var x: Boolean? = true
     x!!
-    val y = {
+    konst y = {
         var <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE, NAME_SHADOWING!>x<!>: Int? = 10
         x = 10
     }
@@ -46,7 +46,7 @@ fun case_2() {
 fun case_3() {
     var x: Boolean? = true
     x!!
-    val y = {
+    konst y = {
         var <!NAME_SHADOWING!>x<!>: Int? = 10
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Boolean & kotlin.Boolean?")!>x<!>

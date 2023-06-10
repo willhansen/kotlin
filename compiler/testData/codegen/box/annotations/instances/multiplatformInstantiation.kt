@@ -10,13 +10,13 @@
 // MODULE: lib
 // FILE: common.kt
 
-expect annotation class A(val value: String)
+expect annotation class A(konst konstue: String)
 
 fun createCommon(): A = A("OK")
 
 // FILE: platform.kt
 
-actual annotation class A(actual val value: String)
+actual annotation class A(actual konst konstue: String)
 
 fun createPlatform(): A = A("OK")
 
@@ -26,8 +26,8 @@ fun createPlatform(): A = A("OK")
 fun createApp(): A = A("OK")
 
 fun box(): String {
-    if (createApp().value != "OK") return "FAIL app"
-    if (createCommon().value != "OK") return "FAIL common"
-    if (createPlatform().value != "OK") return "FAIL platform"
+    if (createApp().konstue != "OK") return "FAIL app"
+    if (createCommon().konstue != "OK") return "FAIL common"
+    if (createPlatform().konstue != "OK") return "FAIL platform"
     return "OK"
 }

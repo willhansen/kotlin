@@ -12,7 +12,7 @@ FILE: objectAccessInLambdaWithDynamicReceiver.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val foo: R|kotlin/String| = String(string)
+            public final konst foo: R|kotlin/String| = String(string)
                 public get(): R|kotlin/String|
 
         }

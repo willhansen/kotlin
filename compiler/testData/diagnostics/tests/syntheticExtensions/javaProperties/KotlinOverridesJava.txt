@@ -19,8 +19,8 @@ public interface JavaInterface {
     public abstract fun getSomething4(): kotlin.String!
     public abstract fun getSomething5(): kotlin.Any!
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public abstract fun setSomething4(/*0*/ value: kotlin.String!): kotlin.Unit
-    public abstract fun setSomething5(/*0*/ value: kotlin.Any!): kotlin.Unit
+    public abstract fun setSomething4(/*0*/ konstue: kotlin.String!): kotlin.Unit
+    public abstract fun setSomething5(/*0*/ konstue: kotlin.Any!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
@@ -33,8 +33,8 @@ public abstract class KotlinClass : JavaClass, KotlinInterface, JavaInterface {
     public abstract override /*2*/ /*fake_override*/ fun getSomething4(): kotlin.String
     public open override /*1*/ fun getSomething5(): kotlin.String
     public open override /*3*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public open override /*1*/ fun setSomething4(/*0*/ value: kotlin.String): kotlin.Unit
-    public abstract override /*1*/ /*fake_override*/ fun setSomething5(/*0*/ value: kotlin.Any!): kotlin.Unit
+    public open override /*1*/ fun setSomething4(/*0*/ konstue: kotlin.String): kotlin.Unit
+    public abstract override /*1*/ /*fake_override*/ fun setSomething5(/*0*/ konstue: kotlin.Any!): kotlin.Unit
     public open override /*3*/ /*fake_override*/ fun toString(): kotlin.String
 }
 

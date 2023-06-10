@@ -1,17 +1,17 @@
 class Value<T : Any?, IT : IR<T>> {
-  constructor(value1: T, value2: IT) /* primary */ {
+  constructor(konstue1: T, konstue2: IT) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  var value1: T
-    field = value1
+  var konstue1: T
+    field = konstue1
     get
     set
 
-  val value2: IT
-    field = value2
+  konst konstue2: IT
+    field = konstue2
     get
 
 }
@@ -38,7 +38,7 @@ class CR<R : Any?> : IR<R> {
 
   }
 
-  val r: R
+  konst r: R
     field = r
     get
 
@@ -55,17 +55,17 @@ class P<P1 : Any?, P2 : Any?> {
 
   }
 
-  val p1: P1
+  konst p1: P1
     field = p1
     get
 
-  val p2: P2
+  konst p2: P2
     field = p2
     get
 
 }
 
-val <T : Any?> Value<T, CR<T>>.additionalText: P<T, T> /* by */
+konst <T : Any?> Value<T, CR<T>>.additionalText: P<T, T> /* by */
   field = { // BLOCK
     local class <no name provided> : IDelegate1<Value<T, CR<T>>, P<T, T>> {
       constructor() /* primary */ {
@@ -82,7 +82,7 @@ val <T : Any?> Value<T, CR<T>>.additionalText: P<T, T> /* by */
         return t.foo()
       }
 
-      private val Value<T, CR<T>>.deepO: T /* by */
+      private konst Value<T, CR<T>>.deepO: T /* by */
         field = { // BLOCK
           local class <no name provided> : IDelegate1<Value<T, CR<T>>, T> {
             constructor() /* primary */ {
@@ -92,7 +92,7 @@ val <T : Any?> Value<T, CR<T>>.additionalText: P<T, T> /* by */
             }
 
             override operator fun getValue(t: Value<T, CR<T>>, p: KProperty<*>): T {
-              return t.<get-value1>()
+              return t.<get-konstue1>()
             }
 
             fun <F21T : Any?> qux21(t: F21T): F21T {
@@ -111,7 +111,7 @@ val <T : Any?> Value<T, CR<T>>.additionalText: P<T, T> /* by */
           return <this>.#deepO$delegate.getValue(t = <this>, p = <no name provided>::deepO)
         }
 
-      private val Value<T, CR<T>>.deepK: T /* by */
+      private konst Value<T, CR<T>>.deepK: T /* by */
         field = { // BLOCK
           local class <no name provided> : IDelegate1<Value<T, CR<T>>, T> {
             constructor() /* primary */ {
@@ -121,7 +121,7 @@ val <T : Any?> Value<T, CR<T>>.additionalText: P<T, T> /* by */
             }
 
             override operator fun getValue(t: Value<T, CR<T>>, p: KProperty<*>): T {
-              return t.<get-value2>().foo()
+              return t.<get-konstue2>().foo()
             }
 
           }

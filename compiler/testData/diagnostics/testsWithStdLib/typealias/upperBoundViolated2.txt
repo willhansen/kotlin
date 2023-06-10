@@ -1,6 +1,6 @@
 package
 
-public val a: Alias<kotlin.Any> /* = Base<kotlin.collections.List<kotlin.Any>> */
+public konst a: Alias<kotlin.Any> /* = Base<kotlin.collections.List<kotlin.Any>> */
 
 public final class Base</*0*/ T : kotlin.collections.List<kotlin.CharSequence>> {
     public constructor Base</*0*/ T : kotlin.collections.List<kotlin.CharSequence>>()

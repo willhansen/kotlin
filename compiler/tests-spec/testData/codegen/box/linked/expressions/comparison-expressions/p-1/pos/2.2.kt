@@ -16,15 +16,15 @@
 
 //A > B is exactly the same as integerLess(0, A.compareTo(B))
 fun box(): String {
-    val a1 = A(-1)
-    val a2 = A(-3)
+    konst a1 = A(-1)
+    konst a2 = A(-3)
     if (a1 > a2)
         if (a1.isCompared && !a2.isCompared)
             return "OK"
     return "NOK"
 }
 
-class A(val a: Int)  {
+class A(konst a: Int)  {
     var isCompared = false
     operator fun compareTo(other: A): Int = run {
         isCompared = true

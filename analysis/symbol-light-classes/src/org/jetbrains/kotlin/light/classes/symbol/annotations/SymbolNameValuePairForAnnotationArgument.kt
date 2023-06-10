@@ -15,27 +15,27 @@ import org.jetbrains.kotlin.light.classes.symbol.toAnnotationMemberValue
 import org.jetbrains.kotlin.psi.KtElement
 
 internal class SymbolNameValuePairForAnnotationArgument(
-    private val constantValue: KtNamedAnnotationValue,
+    private konst constantValue: KtNamedAnnotationValue,
     parent: PsiAnnotationParameterList,
 ) : KtLightElementBase(parent), PsiNameValuePair {
 
-    override val kotlinOrigin: KtElement? get() = constantValue.expression.sourcePsi
+    override konst kotlinOrigin: KtElement? get() = constantValue.expression.sourcePsi
 
-    private val _value by lazyPub {
+    private konst _konstue by lazyPub {
         constantValue.expression.toAnnotationMemberValue(this)
     }
 
     override fun setValue(newValue: PsiAnnotationMemberValue) = cannotModify()
 
-    private val _nameIdentifier: PsiIdentifier by lazyPub {
+    private konst _nameIdentifier: PsiIdentifier by lazyPub {
         LightIdentifier(manager, constantValue.name.asString())
     }
 
     override fun getNameIdentifier(): PsiIdentifier = _nameIdentifier
 
-    override fun getValue(): PsiAnnotationMemberValue? = _value
+    override fun getValue(): PsiAnnotationMemberValue? = _konstue
 
-    override fun getLiteralValue(): String? = (value as? PsiLiteralExpression)?.value?.toString()
+    override fun getLiteralValue(): String? = (konstue as? PsiLiteralExpression)?.konstue?.toString()
 
     override fun getName(): String = constantValue.name.asString()
 

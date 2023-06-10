@@ -21,15 +21,15 @@ abstract class ConfigurationPhaseAware<C : Any> {
     }
 
     protected fun requireNotConfigured() {
-        check(configured == null) { "Configuration already finalized for previous property values" }
+        check(configured == null) { "Configuration already finalized for previous property konstues" }
     }
 
-    inner class Property<T>(var value: T) {
-        operator fun getValue(receiver: Any, property: KProperty<*>): T = value
+    inner class Property<T>(var konstue: T) {
+        operator fun getValue(receiver: Any, property: KProperty<*>): T = konstue
 
-        operator fun setValue(receiver: Any, property: KProperty<*>, value: T) {
+        operator fun setValue(receiver: Any, property: KProperty<*>, konstue: T) {
             requireNotConfigured()
-            this.value = value
+            this.konstue = konstue
         }
     }
 

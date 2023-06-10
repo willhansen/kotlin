@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.types.KotlinType
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class IrLazyValueParameter(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrValueParameterSymbol,
-    override val descriptor: ValueParameterDescriptor,
+    override konst symbol: IrValueParameterSymbol,
+    override konst descriptor: ValueParameterDescriptor,
     override var name: Name,
     override var index: Int,
     kotlinType: KotlinType,
@@ -33,9 +33,9 @@ class IrLazyValueParameter(
     override var isCrossinline: Boolean,
     override var isNoinline: Boolean,
     override var isHidden: Boolean,
-    override val isAssignable: Boolean,
-    override val stubGenerator: DeclarationStubGenerator,
-    override val typeTranslator: TypeTranslator,
+    override konst isAssignable: Boolean,
+    override konst stubGenerator: DeclarationStubGenerator,
+    override konst typeTranslator: TypeTranslator,
 ) : IrValueParameter(), IrLazyDeclarationBase {
     override lateinit var parent: IrDeclarationParent
 

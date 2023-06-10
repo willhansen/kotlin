@@ -21,8 +21,8 @@ interface KtUltraLightElementWithNullabilityAnnotationDescriptorBased<T : KtDecl
     KtUltraLightElementWithNullabilityAnnotation<T, D> {
 
     fun computeQualifiedNameForNullabilityAnnotation(kotlinType: KotlinType?): String? {
-        val notErrorKotlinType = kotlinType?.takeUnless(KotlinType::isError) ?: return null
-        val psiType = psiTypeForNullabilityAnnotation ?: return null
+        konst notErrorKotlinType = kotlinType?.takeUnless(KotlinType::isError) ?: return null
+        konst psiType = psiTypeForNullabilityAnnotation ?: return null
         if (psiType is PsiPrimitiveType) return null
 
         if (notErrorKotlinType.isTypeParameter()) {

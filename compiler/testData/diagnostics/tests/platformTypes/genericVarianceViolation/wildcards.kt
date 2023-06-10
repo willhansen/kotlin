@@ -27,8 +27,8 @@ fun main(
     a.foo(l)
 
     // Iterables
-    val mit: MutableIterable<String> = ml
-    val it: Iterable<String> = ml
+    konst mit: MutableIterable<String> = ml
+    konst it: Iterable<String> = ml
     a.foo(mit)
     a.foo(it)
 

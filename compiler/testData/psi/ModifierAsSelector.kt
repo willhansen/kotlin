@@ -1,5 +1,5 @@
 // JET-1
 
-val z = System.out
+konst z = System.out
 
 fun foo() { throw Exception(); }

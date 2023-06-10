@@ -11,30 +11,30 @@ FILE: localVariable.kt
                 }
 
                 public final fun bar(): R|kotlin/Unit| {
-                    lval x: R|kotlin/String| = this@R|/Outer|.R|/Outer.y|
+                    lkonst x: R|kotlin/String| = this@R|/Outer|.R|/Outer.y|
                 }
 
             }
 
         }
 
-        public final val y: R|kotlin/String| = String()
+        public final konst y: R|kotlin/String| = String()
             public get(): R|kotlin/String|
 
     }
     public final fun f(): R|kotlin/Unit| {
-        lval a: R|kotlin/Int| = Int(1)
+        lkonst a: R|kotlin/Int| = Int(1)
         local final fun g(): R|kotlin/Int| {
             ^g R|<local>/a|
         }
 
     }
     public final fun foo(v: R|kotlin/Int|): R|kotlin/Unit| {
-        lval d: R|kotlin/Int|by Q|Delegate|
-        lval a: R|kotlin/Int|
-        lval b: R|kotlin/Int| = Int(1)
-        lval c: R|kotlin/Int| = Int(2)
-        @R|Anno|() lval e: R|kotlin/Int|
+        lkonst d: R|kotlin/Int|by Q|Delegate|
+        lkonst a: R|kotlin/Int|
+        lkonst b: R|kotlin/Int| = Int(1)
+        lkonst c: R|kotlin/Int| = Int(2)
+        @R|Anno|() lkonst e: R|kotlin/Int|
         R|/foo|(R|<local>/c|)
     }
     public final object Delegate : R|kotlin/Any| {
@@ -46,7 +46,7 @@ FILE: localVariable.kt
             ^getValue Int(1)
         }
 
-        public final operator fun setValue(instance: R|kotlin/Any?|, property: R|kotlin/reflect/KProperty<*>|, value: R|kotlin/String|): R|kotlin/Unit| {
+        public final operator fun setValue(instance: R|kotlin/Any?|, property: R|kotlin/reflect/KProperty<*>|, konstue: R|kotlin/String|): R|kotlin/Unit| {
         }
 
     }

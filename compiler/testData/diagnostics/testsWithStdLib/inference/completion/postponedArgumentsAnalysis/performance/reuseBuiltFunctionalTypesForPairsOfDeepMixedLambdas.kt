@@ -15,7 +15,7 @@ class Inv<K>(x: K)
 fun <A: (Int, Int, Int, Int) -> Unit> take(x: A, y: A) = null as (Int, String, String, String) -> Unit
 
 class A {
-    val x: Foo<Inv<(Int, String, String, String) -> Unit>, Inv<(Int, String, String, String) -> Unit>> =
+    konst x: Foo<Inv<(Int, String, String, String) -> Unit>, Inv<(Int, String, String, String) -> Unit>> =
         fooOf(
             to(Inv(take({ a, b, c, d -> }, { a, b, c, d -> })), Inv { a, b, c, d -> }),
             to(Inv(take({ a, b, c, d -> }, { a, b, c, d -> })), Inv { a, b, c, d -> }),

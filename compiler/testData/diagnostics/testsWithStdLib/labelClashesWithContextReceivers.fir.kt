@@ -10,6 +10,6 @@ class Some {
     }
 
     context(Some)
-    val self: Some
+    konst self: Some
         get() = this@Some
 }

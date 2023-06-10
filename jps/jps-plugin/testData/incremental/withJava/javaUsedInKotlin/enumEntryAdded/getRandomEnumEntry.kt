@@ -1,6 +1,6 @@
 import java.util.Random
 
 fun getRandomEnumEntry() =
-        with (Enum.values()) {
+        with (Enum.konstues()) {
             get(Random().nextInt(size))
         }

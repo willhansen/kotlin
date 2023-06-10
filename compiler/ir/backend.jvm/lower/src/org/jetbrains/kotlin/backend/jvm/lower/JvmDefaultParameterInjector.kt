@@ -52,28 +52,28 @@ class JvmDefaultParameterInjector(context: JvmBackendContext) : DefaultParameter
     override fun IrBlockBuilder.argumentsForCall(
         expression: IrFunctionAccessExpression, stubFunction: IrFunction
     ): Map<IrValueParameter, IrExpression?> {
-        val startOffset = expression.startOffset
-        val endOffset = expression.endOffset
-        val declaration = expression.symbol.owner
+        konst startOffset = expression.startOffset
+        konst endOffset = expression.endOffset
+        konst declaration = expression.symbol.owner
 
-        val realArgumentsNumber = declaration.valueParameters.filterNot { it.isMovedReceiver() }.size
-        val maskValues = IntArray((realArgumentsNumber + 31) / 32)
+        konst realArgumentsNumber = declaration.konstueParameters.filterNot { it.isMovedReceiver() }.size
+        konst maskValues = IntArray((realArgumentsNumber + 31) / 32)
 
-        val oldArguments: Map<IrValueParameter, IrExpression?> = buildMap {
+        konst oldArguments: Map<IrValueParameter, IrExpression?> = buildMap {
             declaration.dispatchReceiverParameter?.let { put(it, expression.dispatchReceiver) }
             declaration.extensionReceiverParameter?.let { put(it, expression.extensionReceiver) }
-            putAll(declaration.valueParameters.mapIndexed { index, parameter -> parameter to expression.getValueArgument(index) })
+            putAll(declaration.konstueParameters.mapIndexed { index, parameter -> parameter to expression.getValueArgument(index) })
         }
 
-        val indexes = declaration.valueParameters.filterNot { it.isMovedReceiver() }.withIndex().associate { it.value to it.index }
-        val mainArguments = this@JvmDefaultParameterInjector.context.multiFieldValueClassReplacements
+        konst indexes = declaration.konstueParameters.filterNot { it.isMovedReceiver() }.withIndex().associate { it.konstue to it.index }
+        konst mainArguments = this@JvmDefaultParameterInjector.context.multiFieldValueClassReplacements
             .mapFunctionMfvcStructures(this, stubFunction, declaration) { sourceParameter: IrValueParameter, targetParameterType: IrType ->
-                val valueArgument = oldArguments[sourceParameter]
-                if (valueArgument == null) {
-                    val index = indexes[sourceParameter]!!
+                konst konstueArgument = oldArguments[sourceParameter]
+                if (konstueArgument == null) {
+                    konst index = indexes[sourceParameter]!!
                     maskValues[index / 32] = maskValues[index / 32] or (1 shl (index % 32))
                 }
-                valueArgument ?: IrCompositeImpl(
+                konstueArgument ?: IrCompositeImpl(
                     expression.startOffset,
                     expression.endOffset,
                     targetParameterType,
@@ -90,12 +90,12 @@ class JvmDefaultParameterInjector(context: JvmBackendContext) : DefaultParameter
 
         return buildMap {
             putAll(mainArguments)
-            val restParameters = stubFunction.valueParameters.filterNot { it in mainArguments }
+            konst restParameters = stubFunction.konstueParameters.filterNot { it in mainArguments }
             for ((maskParameter, maskValue) in restParameters zip maskValues.asList()) {
                 put(maskParameter, IrConstImpl.int(startOffset, endOffset, maskParameter.type, maskValue))
             }
             if (restParameters.size > maskValues.size) {
-                val lastParameter = restParameters.last()
+                konst lastParameter = restParameters.last()
                 put(lastParameter, IrConstImpl.constNull(startOffset, endOffset, lastParameter.type))
             }
         }

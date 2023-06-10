@@ -19,12 +19,12 @@ import org.jetbrains.kotlin.psi.stubs.impl.KotlinFunctionStubImpl
 import org.jetbrains.kotlin.psi.stubs.impl.KotlinTypeBean
 
 internal class StubBasedFirContractDeserializer(
-    private val simpleFunction: FirSimpleFunction,
-    private val typeDeserializer: StubBasedFirTypeDeserializer,
+    private konst simpleFunction: FirSimpleFunction,
+    private konst typeDeserializer: StubBasedFirTypeDeserializer,
 ) {
     fun loadContract(function: KtNamedFunction): FirContractDescription? {
-        val functionStub = function.stub as? KotlinFunctionStubImpl ?: loadStubByElement(function) ?: return null
-        val effects = functionStub.contract?.map {
+        konst functionStub = function.stub as? KotlinFunctionStubImpl ?: loadStubByElement(function) ?: return null
+        konst effects = functionStub.contract?.map {
             it.accept(ContractDescriptionConvertingVisitor(), null)
         }
 
@@ -45,7 +45,7 @@ internal class StubBasedFirContractDeserializer(
             data: Nothing?
         ): ConeContractDescriptionElement {
             return ConeCallsEffectDeclaration(
-                callsEffect.valueParameterReference.accept(
+                callsEffect.konstueParameterReference.accept(
                     this,
                     data
                 ) as KtValueParameterReference<ConeKotlinType, ConeDiagnostic>, callsEffect.kind
@@ -57,7 +57,7 @@ internal class StubBasedFirContractDeserializer(
             data: Nothing?
         ): ConeContractDescriptionElement {
             return ConeReturnsEffectDeclaration(
-                returnsEffect.value.accept(
+                returnsEffect.konstue.accept(
                     this,
                     data
                 ) as KtConstantReference<ConeKotlinType, ConeDiagnostic>
@@ -114,10 +114,10 @@ internal class StubBasedFirContractDeserializer(
         }
 
         override fun visitValueParameterReference(
-            valueParameterReference: KtValueParameterReference<KotlinTypeBean, Nothing?>,
+            konstueParameterReference: KtValueParameterReference<KotlinTypeBean, Nothing?>,
             data: Nothing?
         ): ConeContractDescriptionElement {
-            val parameterIndex = valueParameterReference.parameterIndex
+            konst parameterIndex = konstueParameterReference.parameterIndex
             return ConeValueParameterReference(parameterIndex, getParameterName(parameterIndex))
         }
 
@@ -132,7 +132,7 @@ internal class StubBasedFirContractDeserializer(
         }
 
         private fun getParameterName(parameterIndex: Int): String {
-            return if (parameterIndex < 0) "this" else simpleFunction.valueParameters[parameterIndex].name.asString()
+            return if (parameterIndex < 0) "this" else simpleFunction.konstueParameters[parameterIndex].name.asString()
         }
 
         override fun visitConstantDescriptor(

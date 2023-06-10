@@ -25,10 +25,10 @@ import org.jetbrains.kotlin.util.slicedMap.BasicWritableSlice
 import org.jetbrains.kotlin.util.slicedMap.Slices
 import org.jetbrains.kotlin.util.slicedMap.WritableSlice
 
-class TraceBasedErrorReporter(private val trace: BindingTrace) : ErrorReporter {
+class TraceBasedErrorReporter(private konst trace: BindingTrace) : ErrorReporter {
     companion object {
         @JvmField
-        val INCOMPLETE_HIERARCHY: WritableSlice<ClassDescriptor, List<String>> = Slices.createCollectiveSlice()
+        konst INCOMPLETE_HIERARCHY: WritableSlice<ClassDescriptor, List<String>> = Slices.createCollectiveSlice()
 
         init {
             BasicWritableSlice.initSliceDebugNames(TraceBasedErrorReporter::class.java)

@@ -39,7 +39,7 @@ import libPackage.*
 
 
 fun case1() {
-    val regex = Regex("")
+    konst regex = Regex("")
     <!DEBUG_INFO_CALL("fqName: sentence3.contains; typeCall: infix operator extension function")!>"" contains  regex<!>
 }
 
@@ -54,6 +54,6 @@ infix operator fun CharSequence.contains(regex: Regex): Boolean {
 }
 
 fun case2() {
-    val regex = Regex("")
+    konst regex = Regex("")
     <!DEBUG_INFO_CALL("fqName: testPack.contains; typeCall: infix operator extension function")!>"" contains  regex<!>
 }

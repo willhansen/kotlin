@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 
 object ContractDescriptionBlockChecker: DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val contractDescription = when (declaration) {
+        konst contractDescription = when (declaration) {
             is KtNamedFunction -> declaration.contractDescription
             is KtPropertyAccessor -> declaration.contractDescription
             else -> null

@@ -1,11 +1,11 @@
 import kotlin.reflect.KProperty
 
 class TypeInference {
-    val explicitTypes by providerFun<TypeInference, String>()
-    val withoutTypes: String by providerFun()
+    konst explicitTypes by providerFun<TypeInference, String>()
+    konst withoutTypes: String by providerFun()
 }
 
-class Inv<T>(val x: T)
+class Inv<T>(konst x: T)
 
 fun <T, R> T.providerFun() = object : DelegateProvider<T, R>() {
     override fun provideDelegate(thisRef: T, property: KProperty<*>): Inv<R> {
@@ -23,7 +23,7 @@ abstract class DelegateProvider<T, R> {
 }
 
 fun box(): String {
-    val t = TypeInference()
+    konst t = TypeInference()
     if (t.explicitTypes != t.withoutTypes) return "fail 1"
     return t.withoutTypes
 }

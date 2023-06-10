@@ -38,12 +38,12 @@ import org.jetbrains.kotlin.utils.keysToMap
 import java.util.*
 
 class DeclarationResolver(
-    private val annotationResolver: AnnotationResolver,
-    private val trace: BindingTrace
+    private konst annotationResolver: AnnotationResolver,
+    private konst trace: BindingTrace
 ) {
 
     fun resolveAnnotationsOnFiles(c: TopDownAnalysisContext, scopeProvider: FileScopeProvider) {
-        val filesToScope = c.files.keysToMap { scopeProvider.getFileResolutionScope(it) }
+        konst filesToScope = c.files.keysToMap { scopeProvider.getFileResolutionScope(it) }
         for ((file, fileScope) in filesToScope) {
             annotationResolver.resolveAnnotationsWithArguments(fileScope, file.annotationEntries, trace)
             annotationResolver.resolveAnnotationsWithArguments(fileScope, file.danglingAnnotations, trace)
@@ -51,8 +51,8 @@ class DeclarationResolver(
     }
 
     fun checkRedeclarations(c: TopDownAnalysisContext) {
-        for (classDescriptor in c.declaredClasses.values) {
-            val descriptorMap = HashMultimap.create<Name, DeclarationDescriptor>()
+        for (classDescriptor in c.declaredClasses.konstues) {
+            konst descriptorMap = HashMultimap.create<Name, DeclarationDescriptor>()
             for (desc in classDescriptor.unsubstitutedMemberScope.getContributedDescriptors()) {
                 if (desc is ClassifierDescriptor || desc is PropertyDescriptor) {
                     descriptorMap.put(desc.name, desc)
@@ -65,7 +65,7 @@ class DeclarationResolver(
 
     private fun reportRedeclarationsWithClassifiers(descriptorMap: Multimap<Name, DeclarationDescriptor>) {
         for (name in descriptorMap.keySet()) {
-            val descriptors = descriptorMap[name]
+            konst descriptors = descriptorMap[name]
             if (descriptors.size > 1 && descriptors.any { it is ClassifierDescriptor }) {
                 for (descriptor in descriptors) {
                     reportOnDeclaration(trace, descriptor) { REDECLARATION.on(it, descriptors) }
@@ -81,15 +81,15 @@ class DeclarationResolver(
         for ((fqName, declarationsOrPackageDirectives) in topLevelFqNames.asMap()) {
             if (fqName.isRoot) continue
 
-            // TODO: report error on expected class and actual val, or vice versa
-            val (expected, actual) =
+            // TODO: report error on expected class and actual konst, or vice versa
+            konst (expected, actual) =
                     getTopLevelDescriptorsByFqName(topLevelDescriptorProvider, fqName, NoLookupLocation.WHEN_CHECK_DECLARATION_CONFLICTS)
                         .partition { it is MemberDescriptor && it.isExpect }
 
             for (descriptors in listOf(expected, actual)) {
                 if (descriptors.size > 1) {
                     for (directive in declarationsOrPackageDirectives) {
-                        val reportAt = (directive as? KtPackageDirective)?.nameIdentifier ?: directive
+                        konst reportAt = (directive as? KtPackageDirective)?.nameIdentifier ?: directive
                         trace.report(Errors.PACKAGE_OR_CLASSIFIER_REDECLARATION.on(reportAt, fqName.shortName().asString()))
                     }
                 }
@@ -102,7 +102,7 @@ class DeclarationResolver(
         fqName: FqName,
         location: LookupLocation
     ): Set<DeclarationDescriptor> {
-        val descriptors = HashSet<DeclarationDescriptor>()
+        konst descriptors = HashSet<DeclarationDescriptor>()
 
         descriptors.addIfNotNull(topLevelDescriptorProvider.getPackageFragment(fqName))
         descriptors.addAll(topLevelDescriptorProvider.getTopLevelClassifierDescriptors(fqName, location))

@@ -1,10 +1,10 @@
 // FILE: 1.kt
 
-class InlineString(val res : String) {
+class InlineString(konst res : String) {
 
     inline fun foo(s : () -> String) : String {
-        val f = "fooStart"
-        val z = s()
+        konst f = "fooStart"
+        konst z = s()
         return z
     }
 
@@ -13,13 +13,13 @@ class InlineString(val res : String) {
     }
 
     inline fun fooRes(s : (l: String) -> String) : String {
-        val z =  s(res)
+        konst z =  s(res)
         return z
     }
 
     inline fun fooRes2(s : (l: String, t: String) -> String) : String {
-        val f = "fooRes2Start"
-        val z = s("1", "11")
+        konst f = "fooRes2Start"
+        konst z = s("1", "11")
         return z
     }
 }
@@ -27,39 +27,39 @@ class InlineString(val res : String) {
 // FILE: 2.kt
 
 fun test0Param(): String {
-    val inlineX = InlineString("10")
+    konst inlineX = InlineString("10")
     return inlineX.foo({ -> "1"})
 }
 
 fun test1Param(): String {
-    val inlineX = InlineString("10")
+    konst inlineX = InlineString("10")
     return inlineX.foo11({ z: String -> z})
 }
 
 fun test1ParamCaptured(): String {
-    val s = "100"
-    val inlineX = InlineString("10")
+    konst s = "100"
+    konst inlineX = InlineString("10")
     return inlineX.foo11({ z: String -> s})
 }
 
 fun test1ParamMissed() : String {
-    val inlineX = InlineString("10")
+    konst inlineX = InlineString("10")
     return inlineX.foo11({ z: String -> "111"})
 }
 
 fun test1ParamFromCallContext() : String {
-    val inlineX = InlineString("1000")
+    konst inlineX = InlineString("1000")
     return inlineX.fooRes({ z: String -> z})
 }
 
 fun test2Params() : String {
-    val inlineX = InlineString("1000")
+    konst inlineX = InlineString("1000")
     return inlineX.fooRes2({ y: String, z: String -> y + "0" + z})
 }
 
 fun test2ParamsWithCaptured() : String {
-    val inlineX = InlineString("1000")
-    val s = "9"
+    konst inlineX = InlineString("1000")
+    konst s = "9"
     var t = "1"
     return inlineX.fooRes2({ y: String, z: String -> s + t})
 }

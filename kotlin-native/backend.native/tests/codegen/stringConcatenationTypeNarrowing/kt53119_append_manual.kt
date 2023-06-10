@@ -15,7 +15,7 @@ import kotlin.test.*
 // CHECK: ret %struct.ObjHeader*
 
 fun appendMaybeAny(maybeAny: Any?): String {
-    val sb = kotlin.text.StringBuilder()
+    konst sb = kotlin.text.StringBuilder()
     sb.append(maybeAny)
     return sb.toString()
 }
@@ -30,7 +30,7 @@ fun appendMaybeAny(maybeAny: Any?): String {
 // CHECK: ret %struct.ObjHeader*
 
 fun appendAny(any: Any): String {
-    val sb = kotlin.text.StringBuilder()
+    konst sb = kotlin.text.StringBuilder()
     sb.append(any)
     return sb.toString()
 }
@@ -44,7 +44,7 @@ fun appendAny(any: Any): String {
 // CHECK: ret %struct.ObjHeader*
 
 fun appendMaybeString(maybeStr: String?): String {
-    val sb = kotlin.text.StringBuilder()
+    konst sb = kotlin.text.StringBuilder()
     sb.append(maybeStr)
     return sb.toString()
 }
@@ -58,12 +58,12 @@ fun appendMaybeString(maybeStr: String?): String {
 // CHECK: ret %struct.ObjHeader*
 
 fun appendString(str: String): String {
-    val sb = kotlin.text.StringBuilder()
+    konst sb = kotlin.text.StringBuilder()
     sb.append(str)
     return sb.toString()
 }
 
-data class Foo(val bar: Int)
+data class Foo(konst bar: Int)
 
 // CHECK-LABEL: define %struct.ObjHeader* @"kfun:codegen.stringConcatenationTypeNarrowing.kt53119_append_manual#appendFoo(codegen.stringConcatenationTypeNarrowing.kt53119_append_manual.Foo)
 // CHECK: %struct.ObjHeader* @"kfun:codegen.stringConcatenationTypeNarrowing.kt53119_append_manual.Foo#toString(){}kotlin.String"
@@ -75,14 +75,14 @@ data class Foo(val bar: Int)
 // CHECK: ret %struct.ObjHeader*
 
 fun appendFoo(foo: Foo): String {
-    val sb = kotlin.text.StringBuilder()
+    konst sb = kotlin.text.StringBuilder()
     sb.append(foo)
     return sb.toString()
 }
 
 @Test
 fun runTest() {
-    val foo = Foo(42)
+    konst foo = Foo(42)
     println(appendMaybeAny(foo))
     println(appendMaybeAny(null))
     println(appendAny(foo))

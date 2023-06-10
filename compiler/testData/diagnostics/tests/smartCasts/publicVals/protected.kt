@@ -1,8 +1,8 @@
 public open class X {
-    protected val x : String? = null
+    protected konst x : String? = null
     public fun fn(): Int {
         if (x != null)
-            // Smartcast is possible for protected value property in the same class
+            // Smartcast is possible for protected konstue property in the same class
             return <!DEBUG_INFO_SMARTCAST!>x<!>.length
         else
             return 0

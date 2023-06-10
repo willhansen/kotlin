@@ -23,7 +23,7 @@ fun interface IFooMix1 : IFooT<IntArray>, IFooIntArray {
 
 fun box(): String {
     var t0 = "Failed 0"
-    val f0 = IFooMix0 {
+    konst f0 = IFooMix0 {
         t0 = "O" + it[0].toChar()
         it
     }
@@ -32,7 +32,7 @@ fun box(): String {
         return "Failed: t0=$t0"
 
     var t1 = "Failed 1"
-    val f1 = IFooMix1 {
+    konst f1 = IFooMix1 {
         t1 = it[0].toChar() + "K"
         it
     }

@@ -12,14 +12,14 @@ import kotlin.reflect.KClassifier
 import kotlin.reflect.KType
 import kotlin.reflect.KTypeProjection
 
-internal class KTypeProxy(override val state: KTypeState, override val callInterceptor: CallInterceptor) : ReflectionProxy, KType {
-    override val classifier: KClassifier?
+internal class KTypeProxy(override konst state: KTypeState, override konst callInterceptor: CallInterceptor) : ReflectionProxy, KType {
+    override konst classifier: KClassifier?
         get() = state.getClassifier(callInterceptor)
-    override val arguments: List<KTypeProjection>
+    override konst arguments: List<KTypeProjection>
         get() = state.getArguments(callInterceptor)
-    override val isMarkedNullable: Boolean
+    override konst isMarkedNullable: Boolean
         get() = state.irType.isMarkedNullable()
-    override val annotations: List<Annotation>
+    override konst annotations: List<Annotation>
         get() = TODO("Not yet implemented")
 
     override fun equals(other: Any?): Boolean {

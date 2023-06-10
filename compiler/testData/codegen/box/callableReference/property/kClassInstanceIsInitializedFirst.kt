@@ -2,10 +2,10 @@ import kotlin.reflect.KProperty1
 
 class A {
     companion object {
-        val ref: KProperty1<A, String> = A::foo
+        konst ref: KProperty1<A, String> = A::foo
     }
 
-    val foo: String = "OK"
+    konst foo: String = "OK"
 }
 
 fun box(): String {

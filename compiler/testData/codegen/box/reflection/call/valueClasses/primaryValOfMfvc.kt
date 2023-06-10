@@ -5,54 +5,54 @@
 import kotlin.test.assertEquals
 
 @JvmInline
-value class Z(val x1: UInt, val x2: Int) {
+konstue class Z(konst x1: UInt, konst x2: Int) {
     var x3
         get() = x1
-        set(value) = Unit
+        set(konstue) = Unit
 }
 @JvmInline
-value class Z2(val x1: Z, val x2: Z) {
+konstue class Z2(konst x1: Z, konst x2: Z) {
     var x3
         get() = x1
-        set(value) = Unit
-}
-
-@JvmInline
-value class L(val x1: ULong, val x2: Long) {
-    var x3
-        get() = x1
-        set(value) = Unit
-}
-@JvmInline
-value class L2(val x1: L, val x2: L) {
-    var x3
-        get() = x1
-        set(value) = Unit
+        set(konstue) = Unit
 }
 
 @JvmInline
-value class A1(val x1: Any?, val x2: Any?) {
+konstue class L(konst x1: ULong, konst x2: Long) {
     var x3
         get() = x1
-        set(value) = Unit
+        set(konstue) = Unit
 }
 @JvmInline
-value class A1_2(val x1: A1, val x2: A1) {
+konstue class L2(konst x1: L, konst x2: L) {
     var x3
         get() = x1
-        set(value) = Unit
+        set(konstue) = Unit
+}
+
+@JvmInline
+konstue class A1(konst x1: Any?, konst x2: Any?) {
+    var x3
+        get() = x1
+        set(konstue) = Unit
 }
 @JvmInline
-value class A2(val x1: Any, val x2: Any) {
+konstue class A1_2(konst x1: A1, konst x2: A1) {
     var x3
         get() = x1
-        set(value) = Unit
+        set(konstue) = Unit
 }
 @JvmInline
-value class A2_2(val x1: A2, val x2: A2) {
+konstue class A2(konst x1: Any, konst x2: Any) {
     var x3
         get() = x1
-        set(value) = Unit
+        set(konstue) = Unit
+}
+@JvmInline
+konstue class A2_2(konst x1: A2, konst x2: A2) {
+    var x3
+        get() = x1
+        set(konstue) = Unit
 }
 
 fun box(): String {

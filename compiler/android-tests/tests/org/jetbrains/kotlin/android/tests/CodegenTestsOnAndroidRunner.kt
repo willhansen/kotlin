@@ -30,19 +30,19 @@ import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException
 import kotlin.test.assertTrue
 
-class CodegenTestsOnAndroidRunner private constructor(private val pathManager: PathManager) {
+class CodegenTestsOnAndroidRunner private constructor(private konst pathManager: PathManager) {
 
-    private val isTeamcity = System.getProperty("kotlin.test.android.teamcity") != null || System.getenv("TEAMCITY_VERSION") != null
+    private konst isTeamcity = System.getProperty("kotlin.test.android.teamcity") != null || System.getenv("TEAMCITY_VERSION") != null
 
     private fun runTestsInEmulator(): TestSuite {
-        val rootSuite = TestSuite("Root")
+        konst rootSuite = TestSuite("Root")
 
-        val emulatorType = if (isTeamcity) Emulator.ARM else Emulator.X86
+        konst emulatorType = if (isTeamcity) Emulator.ARM else Emulator.X86
         println("Using $emulatorType emulator!")
-        val emulator = Emulator(pathManager, emulatorType)
+        konst emulator = Emulator(pathManager, emulatorType)
         emulator.createEmulator()
 
-        val gradleRunner = GradleRunner(pathManager)
+        konst gradleRunner = GradleRunner(pathManager)
         //old dex
         cleanAndBuildProject(gradleRunner)
 
@@ -72,15 +72,15 @@ class CodegenTestsOnAndroidRunner private constructor(private val pathManager: P
     }
 
     private fun processReport(rootSuite: TestSuite, resultOutput: String) {
-        val reportFolder = File(flavorFolder())
+        konst reportFolder = File(flavorFolder())
         try {
-            val folders = reportFolder.listFiles()
+            konst folders = reportFolder.listFiles()
             assertTrue(folders != null && folders.isNotEmpty(), "No folders in ${reportFolder.path}")
 
             folders.forEach {
                 assertTrue("${it.path} is not directory") { it.isDirectory }
-                val isIr = it.name.contains("_ir")
-                val testCases = parseSingleReportInFolder(it)
+                konst isIr = it.name.contains("_ir")
+                konst testCases = parseSingleReportInFolder(it)
                 testCases.forEach { aCase ->
                     if (isIr) aCase.name += "_ir"
                     rootSuite.addTest(aCase)
@@ -96,9 +96,9 @@ class CodegenTestsOnAndroidRunner private constructor(private val pathManager: P
     private fun flavorFolder() = pathManager.tmpFolder + "/build/test/results/connected/flavors"
 
     private fun runTestsOnEmulator(gradleRunner: GradleRunner, suite: TestSuite): TestSuite {
-        val platformPrefixProperty = System.setProperty(PlatformUtils.PLATFORM_PREFIX_KEY, "Idea")
+        konst platformPrefixProperty = System.setProperty(PlatformUtils.PLATFORM_PREFIX_KEY, "Idea")
         try {
-            val resultOutput = gradleRunner.connectedDebugAndroidTest()
+            konst resultOutput = gradleRunner.connectedDebugAndroidTest()
             processReport(suite, resultOutput)
             return suite
         } finally {
@@ -125,22 +125,22 @@ class CodegenTestsOnAndroidRunner private constructor(private val pathManager: P
 
         @Throws(IOException::class, SAXException::class, ParserConfigurationException::class)
         private fun parseSingleReportInFolder(folder: File): List<TestCase> {
-            val files = folder.listFiles()!!
+            konst files = folder.listFiles()!!
             assert(files.size == 1) {
                 "Expecting one file but ${files.size}: ${files.joinToString { it.name }} in ${folder.path}"
             }
-            val reportFile = files[0]
+            konst reportFile = files[0]
 
-            val dbFactory = DocumentBuilderFactory.newInstance()
-            val dBuilder = dbFactory.newDocumentBuilder()
-            val doc = dBuilder.parse(reportFile)
-            val root = doc.documentElement
-            val testCases = root.getElementsByTagName("testcase")
+            konst dbFactory = DocumentBuilderFactory.newInstance()
+            konst dBuilder = dbFactory.newDocumentBuilder()
+            konst doc = dBuilder.parse(reportFile)
+            konst root = doc.documentElement
+            konst testCases = root.getElementsByTagName("testcase")
 
             return (0 until testCases.length).map { i ->
-                val item = testCases.item(i) as Element
-                val failure = item.getElementsByTagName("failure").takeIf { it.length != 0 }?.item(0)
-                val name = item.getAttribute("name")
+                konst item = testCases.item(i) as Element
+                konst failure = item.getElementsByTagName("failure").takeIf { it.length != 0 }?.item(0)
+                konst name = item.getAttribute("name")
 
                 object : TestCase(name) {
                     @Throws(Throwable::class)

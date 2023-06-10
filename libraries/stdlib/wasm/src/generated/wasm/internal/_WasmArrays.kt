@@ -17,7 +17,7 @@ internal class WasmAnyArray(size: Int) {
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_SET)
-    fun set(index: Int, value: Any?): Unit =
+    fun set(index: Int, konstue: Any?): Unit =
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_LEN)
@@ -46,7 +46,7 @@ internal class WasmByteArray(size: Int) {
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_SET)
-    fun set(index: Int, value: Byte): Unit =
+    fun set(index: Int, konstue: Byte): Unit =
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_LEN)
@@ -75,7 +75,7 @@ internal class WasmCharArray(size: Int) {
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_SET)
-    fun set(index: Int, value: Char): Unit =
+    fun set(index: Int, konstue: Char): Unit =
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_LEN)
@@ -104,7 +104,7 @@ internal class WasmShortArray(size: Int) {
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_SET)
-    fun set(index: Int, value: Short): Unit =
+    fun set(index: Int, konstue: Short): Unit =
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_LEN)
@@ -133,7 +133,7 @@ internal class WasmIntArray(size: Int) {
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_SET)
-    fun set(index: Int, value: Int): Unit =
+    fun set(index: Int, konstue: Int): Unit =
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_LEN)
@@ -162,7 +162,7 @@ internal class WasmLongArray(size: Int) {
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_SET)
-    fun set(index: Int, value: Long): Unit =
+    fun set(index: Int, konstue: Long): Unit =
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_LEN)
@@ -191,7 +191,7 @@ internal class WasmFloatArray(size: Int) {
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_SET)
-    fun set(index: Int, value: Float): Unit =
+    fun set(index: Int, konstue: Float): Unit =
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_LEN)
@@ -220,7 +220,7 @@ internal class WasmDoubleArray(size: Int) {
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_SET)
-    fun set(index: Int, value: Double): Unit =
+    fun set(index: Int, konstue: Double): Unit =
         implementedAsIntrinsic
 
     @WasmOp(WasmOp.ARRAY_LEN)

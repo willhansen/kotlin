@@ -17,13 +17,13 @@ interface Bb<T : Bb<T>> : Ab<T>, Ba {
 }
 
 interface Ca {
-  abstract val b: Ba
+  abstract konst b: Ba
     abstract get
 
 }
 
 interface Cb {
-  abstract val b: Bb<*>
+  abstract konst b: Bb<*>
     abstract get
 
 }

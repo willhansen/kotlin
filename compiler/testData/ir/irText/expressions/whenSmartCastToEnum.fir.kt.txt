@@ -11,21 +11,21 @@ enum class En : Enum<En> {
 
   C = En()
 
-  fun values(): Array<En> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<En> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): En /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): En /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<En>
+  konst entries: EnumEntries<En>
     get(): EnumEntries<En> /* Synthetic body for ENUM_ENTRIES */
 
 }
 
 fun test() {
   var r: String = ""
-  val x: Any? = En.A
+  konst x: Any? = En.A
   when {
     x is En -> { // BLOCK
-      val tmp0_subject: En = x /*as En */
+      konst tmp0_subject: En = x /*as En */
       when {
         EQEQ(arg0 = tmp0_subject, arg1 = En.A) -> { // BLOCK
           r = "when1"
@@ -38,10 +38,10 @@ fun test() {
       }
     }
   }
-  val y: Any = En.A
+  konst y: Any = En.A
   when {
     y is En -> { // BLOCK
-      val tmp1_subject: En = y /*as En */
+      konst tmp1_subject: En = y /*as En */
       when {
         EQEQ(arg0 = tmp1_subject, arg1 = En.A) -> { // BLOCK
           r = "when2"

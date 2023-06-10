@@ -32,17 +32,17 @@ import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
  * Returns the [KClass] instance representing the runtime class to which this type is erased to on JVM.
  */
 @SinceKotlin("1.1")
-val KType.jvmErasure: KClass<*>
+konst KType.jvmErasure: KClass<*>
     get() = classifier?.jvmErasure ?: throw KotlinReflectionInternalError("Cannot calculate JVM erasure for type: $this")
 
-internal val KClassifier.jvmErasure: KClass<*>
+internal konst KClassifier.jvmErasure: KClass<*>
     get() = when (this) {
         is KClass<*> -> this
         is KTypeParameter -> {
             // See getRepresentativeUpperBound in typeSignatureMapping.kt
-            val bounds = upperBounds
-            val representativeBound = bounds.firstOrNull {
-                val classDescriptor = (it as KTypeImpl).type.constructor.declarationDescriptor as? ClassDescriptor
+            konst bounds = upperBounds
+            konst representativeBound = bounds.firstOrNull {
+                konst classDescriptor = (it as KTypeImpl).type.constructor.declarationDescriptor as? ClassDescriptor
                 classDescriptor != null && classDescriptor.kind != INTERFACE && classDescriptor.kind != ANNOTATION_CLASS
             } ?: bounds.firstOrNull()
             representativeBound?.jvmErasure ?: Any::class

@@ -14,7 +14,7 @@ FILE: KtFirCompositeScope.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val subScopes: R|kotlin/collections/List<KtScope>| = R|<local>/subScopes|
+        public final konst subScopes: R|kotlin/collections/List<KtScope>| = R|<local>/subScopes|
             public get(): R|kotlin/collections/List<KtScope>|
 
         public final fun getAllNames(): R|kotlin/collections/Set<kotlin/String>| {

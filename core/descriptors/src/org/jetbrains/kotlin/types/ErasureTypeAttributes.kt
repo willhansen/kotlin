@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.descriptors.TypeParameterDescriptor
 
 open class ErasureTypeAttributes(
     // we use it to prevent happening a recursion while compute type parameter's upper bounds
-    open val howThisTypeIsUsed: TypeUsage,
-    open val visitedTypeParameters: Set<TypeParameterDescriptor>? = null,
-    open val defaultType: SimpleType? = null
+    open konst howThisTypeIsUsed: TypeUsage,
+    open konst visitedTypeParameters: Set<TypeParameterDescriptor>? = null,
+    open konst defaultType: SimpleType? = null
 ) {
     open fun withDefaultType(type: SimpleType?) = ErasureTypeAttributes(howThisTypeIsUsed, visitedTypeParameters, defaultType = type)
 

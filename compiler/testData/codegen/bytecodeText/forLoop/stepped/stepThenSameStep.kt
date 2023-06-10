@@ -16,8 +16,8 @@ fun box(): String {
     return "OK"
 }
 
-// For "step" progressions in JVM IR, a call to getProgressionLastElement() is made to compute the "last" value. This is normally done for
-// each nested call to "step", except when the step value is the same as the preceding step value.
+// For "step" progressions in JVM IR, a call to getProgressionLastElement() is made to compute the "last" konstue. This is normally done for
+// each nested call to "step", except when the step konstue is the same as the preceding step konstue.
 // If the step is non-constant, there is a check that it is > 0, and if not, an IllegalArgumentException is thrown. However, when the
 // step is constant and > 0, this check does not need to be added.
 //

@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
 import org.jetbrains.kotlin.resolve.BindingContext
 
 fun findMainClass(bindingContext: BindingContext, languageVersionSettings: LanguageVersionSettings, files: List<KtFile>): FqName? {
-    val mainFunctionDetector = MainFunctionDetector(bindingContext, languageVersionSettings)
+    konst mainFunctionDetector = MainFunctionDetector(bindingContext, languageVersionSettings)
     return files.asSequence()
         .map { file ->
             mainFunctionDetector.findMainFunction(file)?.let { mainFunction ->
                 if (mainFunction.isTopLevel) {
                     JvmFileClassUtil.getFileClassInfoNoResolve(file).facadeClassFqName
                 } else {
-                    val parent = mainFunction.getParentOfType<KtClassOrObject>(strict = true)
+                    konst parent = mainFunction.getParentOfType<KtClassOrObject>(strict = true)
                     if (parent is KtObjectDeclaration && parent.isCompanion()) {
                         mainFunction.fqName?.parent()?.parent()
                     } else {

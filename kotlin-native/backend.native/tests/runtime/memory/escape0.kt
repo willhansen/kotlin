@@ -34,7 +34,7 @@ fun zoo4(arg: Int) : Any {
     var b = Any()
     var c = Any()
     a = b
-    val x = 3
+    konst x = 3
     a = when {
         x < arg -> b
         else -> c
@@ -56,7 +56,7 @@ fun zoo7(arg1: Any, arg2: Any, selector: Int) : Any {
 }
 
 @Test fun runTest() {
-    //val z = zoo7(Any(), Any(), 1)
-    val x = zoo5(Any())
+    //konst z = zoo7(Any(), Any(), 1)
+    konst x = zoo5(Any())
     //println(bar(foo1(foo2("")), foo2(foo1(""))))
 }

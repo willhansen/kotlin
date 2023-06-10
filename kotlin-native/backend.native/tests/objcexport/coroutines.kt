@@ -48,8 +48,8 @@ suspend fun unitSuspendFun(doSuspend: Boolean, doThrow: Boolean) {
 class ContinuationHolder<T> {
     internal var continuation: Continuation<T>? = null
 
-    fun resume(value: T) {
-        continuation!!.resume(value)
+    fun resume(konstue: T) {
+        continuation!!.resume(konstue)
         continuation = null
     }
 
@@ -95,8 +95,8 @@ class ResultHolder<T> {
     }
 }
 
-private class ResultHolderCompletion<T>(val resultHolder: ResultHolder<T>) : Continuation<T> {
-    override val context: CoroutineContext
+private class ResultHolderCompletion<T>(konst resultHolder: ResultHolder<T>) : Continuation<T> {
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
     override fun resumeWith(result: Result<T>) {
@@ -115,29 +115,29 @@ suspend fun callSuspendFun2(suspendFun: SuspendFun, doYield: Boolean, doThrow: B
 }
 
 interface SuspendBridge<T> {
-    suspend fun int(value: T): Int
-    suspend fun intAsAny(value: T): Any?
+    suspend fun int(konstue: T): Int
+    suspend fun intAsAny(konstue: T): Any?
 
-    suspend fun unit(value: T): Unit
-    suspend fun unitAsAny(value: T): Any?
-    suspend fun nullableUnit(value: T): Unit?
+    suspend fun unit(konstue: T): Unit
+    suspend fun unitAsAny(konstue: T): Any?
+    suspend fun nullableUnit(konstue: T): Unit?
 
-    @Throws(Throwable::class) suspend fun nothing(value: T): Nothing
-    @Throws(Throwable::class) suspend fun nothingAsInt(value: T): Int
-    @Throws(Throwable::class) suspend fun nothingAsAny(value: T): Any?
-    @Throws(Throwable::class) suspend fun nothingAsUnit(value: T): Unit
+    @Throws(Throwable::class) suspend fun nothing(konstue: T): Nothing
+    @Throws(Throwable::class) suspend fun nothingAsInt(konstue: T): Int
+    @Throws(Throwable::class) suspend fun nothingAsAny(konstue: T): Any?
+    @Throws(Throwable::class) suspend fun nothingAsUnit(konstue: T): Unit
 }
 
 abstract class AbstractSuspendBridge : SuspendBridge<Int> {
-    override suspend fun intAsAny(value: Int): Int = TODO()
+    override suspend fun intAsAny(konstue: Int): Int = TODO()
 
-    override suspend fun unit(value: Int): Unit = TODO()
-    override suspend fun unitAsAny(value: Int): Unit = TODO()
-    override suspend fun nullableUnit(value: Int): Unit? = TODO()
+    override suspend fun unit(konstue: Int): Unit = TODO()
+    override suspend fun unitAsAny(konstue: Int): Unit = TODO()
+    override suspend fun nullableUnit(konstue: Int): Unit? = TODO()
 
-    override suspend fun nothingAsInt(value: Int): Nothing = TODO()
-    override suspend fun nothingAsAny(value: Int): Nothing = TODO()
-    override suspend fun nothingAsUnit(value: Int): Nothing = TODO()
+    override suspend fun nothingAsInt(konstue: Int): Nothing = TODO()
+    override suspend fun nothingAsAny(konstue: Int): Nothing = TODO()
+    override suspend fun nothingAsUnit(konstue: Int): Nothing = TODO()
 }
 
 private suspend fun callSuspendBridgeImpl(bridge: SuspendBridge<Int>) {
@@ -173,7 +173,7 @@ fun callSuspendBridge(bridge: AbstractSuspendBridge, resultHolder: ResultHolder<
 }
 
 suspend fun throwCancellationException(): Unit {
-    val exception = CancellationException("coroutine is cancelled")
+    konst exception = CancellationException("coroutine is cancelled")
 
     // Note: frontend checker hardcodes fq names of CancellationException super classes (see NativeThrowsChecker).
     // This is our best effort to keep that list in sync with actual stdlib code:

@@ -19,13 +19,13 @@ object B {
 // FILE: 2.kt
 import test.*
 
-fun <T> eval(f: () -> T) = f()
+fun <T> ekonst(f: () -> T) = f()
 
 fun box(): String {
     var z = "fail"
 
     B.test2 {
-        eval { // regenerated object in inline lambda
+        ekonst { // regenerated object in inline lambda
             A.test {
                 z = "OK"
             }

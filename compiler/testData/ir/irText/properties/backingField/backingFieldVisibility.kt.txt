@@ -5,30 +5,30 @@ class A {
 
   }
 
-  val a: Int
+  konst a: Int
     field = 1
     get
 
-  val b: Int
+  konst b: Int
     field = <this>.<get-a>().plus(other = 2)
     get
 
-  val c: Int
+  konst c: Int
     field = 1
     get
 
-  val d: Int
+  konst d: Int
     field = <this>.<get-c>().plus(other = 2)
     get
 
   fun rest() {
-    val aI: Int = A().<get-a>().plus(other = 10)
-    val bI: Int = A().<get-b>().plus(other = 20)
+    konst aI: Int = A().<get-a>().plus(other = 10)
+    konst bI: Int = A().<get-b>().plus(other = 20)
   }
 
 }
 
 fun test() {
-  val bA: Int = A().<get-b>().plus(other = 20)
+  konst bA: Int = A().<get-b>().plus(other = 20)
 }
 

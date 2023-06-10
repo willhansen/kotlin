@@ -15,11 +15,11 @@ interface IrTypeParametersContainer : IrDeclaration, IrDeclarationParent {
 
 interface IrDeclaration
 interface IrTypeParameter : IrDeclaration {
-    val superTypes: MutableList<IrType>
+    konst superTypes: MutableList<IrType>
 }
 interface IrDeclarationParent
 
-class DeepCopyIrTreeWithSymbols(private val typeRemapper: TypeRemapper) {
+class DeepCopyIrTreeWithSymbols(private konst typeRemapper: TypeRemapper) {
     private fun copyTypeParameter(declaration: IrTypeParameter): IrTypeParameter = declaration
 
     fun IrTypeParametersContainer.copyTypeParametersFrom(other: IrTypeParametersContainer) {
@@ -39,7 +39,7 @@ class DeepCopyIrTreeWithSymbols(private val typeRemapper: TypeRemapper) {
 
 inline fun <T> TypeRemapper.withinScope(irTypeParametersContainer: IrTypeParametersContainer, fn: () -> T): T {
     enterScope(irTypeParametersContainer)
-    val result = fn()
+    konst result = fn()
     leaveScope()
     return result
 }

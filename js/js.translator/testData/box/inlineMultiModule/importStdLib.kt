@@ -3,7 +3,7 @@
 // FILE: lib.kt
 
 inline fun foo(i1: Int, i2: Double): Int {
-    val o = object : Comparable<Int> {
+    konst o = object : Comparable<Int> {
         override fun compareTo(other: Int) = i1-other
     }
 

@@ -21,23 +21,23 @@ internal class CurrentXcodeTest {
 
     @Test
     fun `Should be able to access Xcode bundle version`() {
-        val version = CurrentXcode().bundleVersion
+        konst version = CurrentXcode().bundleVersion
         assertNotEquals("", version)
     }
 
     @Test
     fun `Should be able to access xcodebuild version`() {
-        val version = CurrentXcode().xcodebuildVersion
+        konst version = CurrentXcode().xcodebuildVersion
         assertNotEquals("", version)
     }
 
     @Test
     fun `Xcode bundle version version should match xcodebuild version`() {
-        val xcode = CurrentXcode()
+        konst xcode = CurrentXcode()
 
-        val xcodebuildVersion = xcode.xcodebuildVersion
-        val bundleVersion = xcode.bundleVersion
-        val version = xcode.version
+        konst xcodebuildVersion = xcode.xcodebuildVersion
+        konst bundleVersion = xcode.bundleVersion
+        konst version = xcode.version
 
         assertEquals(xcodebuildVersion, bundleVersion)
         assertEquals(xcodebuildVersion, version)

@@ -6,7 +6,7 @@ FILE: typeArgumentsNotAllowed.kt
             super<R|kotlin/Any|>()
         }
 
-        public abstract val x: <ERROR TYPE REF: Type arguments not allowed>
+        public abstract konst x: <ERROR TYPE REF: Type arguments not allowed>
             public get(): <ERROR TYPE REF: Type arguments not allowed>
 
         public abstract fun foo(): <ERROR TYPE REF: Type arguments not allowed>
@@ -24,9 +24,9 @@ FILE: typeArgumentsNotAllowed.kt
         }
 
     }
-    public final val a: <ERROR TYPE REF: Unresolved name: MyClass> = Q|rest|.<Unresolved name: MyClass>#<R|kotlin/String|>
+    public final konst a: <ERROR TYPE REF: Unresolved name: MyClass> = Q|rest|.<Unresolved name: MyClass>#<R|kotlin/String|>
         public get(): <ERROR TYPE REF: Unresolved name: MyClass>
-    public final val b: <ERROR TYPE REF: Unresolved name: MyClass> = Q|rest/Best|.<Unresolved name: MyClass>#<R|kotlin/String|>
+    public final konst b: <ERROR TYPE REF: Unresolved name: MyClass> = Q|rest/Best|.<Unresolved name: MyClass>#<R|kotlin/String|>
         public get(): <ERROR TYPE REF: Unresolved name: MyClass>
     public final class B<E> : R|kotlin/Any| {
         public constructor<E>(): R|rest/B<E>| {
@@ -43,9 +43,9 @@ FILE: typeArgumentsNotAllowed.kt
     public final fun <G> gest(): R|kotlin/Unit| {
     }
     public final fun <T> fest(): R|kotlin/Unit| {
-        lval b: R|kotlin/collections/List<ERROR CLASS: Type arguments not allowed>|
+        lkonst b: R|kotlin/collections/List<ERROR CLASS: Type arguments not allowed>|
         R|rest/gest<Inapplicable(INAPPLICABLE): rest/gest>#|<<ERROR TYPE REF: Type arguments not allowed>>()
         R|rest/gest|<R|T|>()
-        lval c: R|kotlin/collections/List<kotlin/collections/List<kotlin/collections/List<ERROR CLASS: Type arguments not allowed>>>|
+        lkonst c: R|kotlin/collections/List<kotlin/collections/List<kotlin/collections/List<ERROR CLASS: Type arguments not allowed>>>|
         R|rest/gest|<R|kotlin/collections/List<kotlin/collections/List<ERROR CLASS: Type arguments not allowed>>|>()
     }

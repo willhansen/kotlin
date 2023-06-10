@@ -5,14 +5,14 @@ import kotlinx.serialization.*
 
 fun local(): String {
     @Serializable
-    data class Carrier(val i: Int)
+    data class Carrier(konst i: Int)
 
     return Carrier.serializer().descriptor.toString()
 }
 
 fun box(): String {
-    val expected = "local.Carrier(i: kotlin.Int)"
-    val actual = local()
+    konst expected = "local.Carrier(i: kotlin.Int)"
+    konst actual = local()
     if (expected != actual) {
         return "Fail: $actual"
     }

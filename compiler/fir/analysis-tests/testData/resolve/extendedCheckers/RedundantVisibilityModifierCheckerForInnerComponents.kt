@@ -2,14 +2,14 @@ abstract class Foo {
     abstract var id: Int
         protected set
 
-    protected open val a = "test"
+    protected open konst a = "test"
 }
 
 class Bar : Foo() {
     override var id: Int = 1
         public set
 
-    public override val a = "rest"
+    public override konst a = "rest"
 }
 
 abstract class A1 {

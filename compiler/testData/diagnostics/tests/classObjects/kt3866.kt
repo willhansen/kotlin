@@ -13,7 +13,7 @@ open class Y {
 }
 
 fun bar() {
-    val x = X
+    konst x = X
     x.foo()
     X.foo()
     (X as C).foo()

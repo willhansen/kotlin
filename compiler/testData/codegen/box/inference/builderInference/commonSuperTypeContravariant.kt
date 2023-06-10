@@ -33,7 +33,7 @@ fun <E> select3(x: E?, y: In<E?>): E = x!!
 fun <E> select4(x: E?, y: In<E>): E = x!!
 
 fun box(): String {
-    val ret = build {
+    konst ret = build {
         emit("1")
         select1(get(), getIn())
         select1(get(), Test.foo(getIn()))
@@ -47,7 +47,7 @@ fun box(): String {
         select4(id(Test.foo(get())), getIn())
         ""
     }
-    val ret2 = build {
+    konst ret2 = build {
         emit(if (true) "" else null)
         select2(get(), getIn())
         select2(get(), Test.foo(getIn()))

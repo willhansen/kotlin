@@ -1,7 +1,7 @@
 // MAIN_ARGS: [Pavel]
 
 class Greeter(name: String) {
-    val name = name
+    konst name = name
     fun greet() {
         println("Hello, ${name}!");
     }

@@ -1,8 +1,8 @@
 package
 
-public external val x: dynamic
+public external konst x: dynamic
 public var y: kotlin.Any?
-public val z: kotlin.Any?
+public konst z: kotlin.Any?
 public fun foo(): kotlin.Unit
 
 public final class A {
@@ -15,7 +15,7 @@ public final class A {
 
 public final class B {
     public constructor B()
-    public final val x: dynamic
+    public final konst x: dynamic
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -23,7 +23,7 @@ public final class B {
 
 public final class C {
     public constructor C()
-    public final val a: dynamic
+    public final konst a: dynamic
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

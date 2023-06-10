@@ -5,8 +5,8 @@ import org.gradle.api.provider.Provider
 import java.io.File
 
 internal data class Platform(
-    val name: String,
-    val arch: String,
+    konst name: String,
+    konst arch: String,
 ) {
     fun isWindows(): Boolean {
         return name == "win"

@@ -9,17 +9,17 @@ import com.intellij.psi.PsiFile
 import org.jetbrains.kotlin.diagnostics.Diagnostic
 import org.jetbrains.kotlin.diagnostics.DiagnosticWithParameters1
 
-class ActualDiagnostic constructor(val diagnostic: Diagnostic, override val platform: String?, withNewInference: Boolean) :
+class ActualDiagnostic constructor(konst diagnostic: Diagnostic, override konst platform: String?, withNewInference: Boolean) :
     AbstractTestDiagnostic {
     override var inferenceCompatibility = if (withNewInference)
         TextDiagnostic.InferenceCompatibility.NEW
     else
         TextDiagnostic.InferenceCompatibility.OLD
 
-    override val name: String
+    override konst name: String
         get() = diagnostic.factory.name
 
-    val file: PsiFile
+    konst file: PsiFile
         get() = diagnostic.psiFile
 
     override fun compareTo(other: AbstractTestDiagnostic): Int {
@@ -55,7 +55,7 @@ class ActualDiagnostic constructor(val diagnostic: Diagnostic, override val plat
     }
 
     override fun toString(): String {
-        val inferenceAbbreviation = inferenceCompatibility.abbreviation
+        konst inferenceAbbreviation = inferenceCompatibility.abbreviation
         return (if (inferenceAbbreviation != null) inferenceAbbreviation + ";" else "") +
                 (if (platform != null) "$platform:" else "") +
                 diagnostic.toString()

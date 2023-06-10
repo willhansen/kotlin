@@ -22,8 +22,8 @@ public class MyNode : Node<ClassAB>() {
 fun box(): String {
 
     var node = MyNode()
-    val traitA: TraitA = ClassAB()
-    val traitB: TraitB = ClassAB()
+    konst traitA: TraitA = ClassAB()
+    konst traitB: TraitB = ClassAB()
     assertEquals("MyNode.bar(ClassAB)", node.bar(ClassAB()))
     assertEquals("MyNode.bar(TraitA)", node.bar(traitA))
     assertEquals("MyNode.bar(TraitB)", node.bar(traitB))

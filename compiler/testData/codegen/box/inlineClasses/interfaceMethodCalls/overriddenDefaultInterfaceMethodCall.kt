@@ -11,13 +11,13 @@ interface IFoo : IBase {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int) : IFoo
+konstue class Z(konst x: Int) : IFoo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L(val x: Long) : IFoo
+konstue class L(konst x: Long) : IFoo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val x: String) : IFoo
+konstue class S(konst x: String) : IFoo
 
 fun box(): String {
     if (Z(42).foo() != "OK") throw AssertionError()

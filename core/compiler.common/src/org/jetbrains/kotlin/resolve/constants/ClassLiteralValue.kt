@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.resolve.constants
 
 import org.jetbrains.kotlin.name.ClassId
 
-data class ClassLiteralValue(val classId: ClassId, val arrayNestedness: Int) {
+data class ClassLiteralValue(konst classId: ClassId, konst arrayNestedness: Int) {
     override fun toString(): String = buildString {
         repeat(arrayNestedness) { append("kotlin/Array<") }
         append(classId)

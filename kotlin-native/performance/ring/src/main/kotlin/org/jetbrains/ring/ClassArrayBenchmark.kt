@@ -18,11 +18,11 @@ package org.jetbrains.ring
 
 open class ClassArrayBenchmark {
     private var _data: Array<Value>? = null
-    val data: Array<Value>
+    konst data: Array<Value>
         get() = _data!!
 
     init {
-        val list = ArrayList<Value>(BENCHMARK_SIZE)
+        konst list = ArrayList<Value>(BENCHMARK_SIZE)
         for (n in classValues(BENCHMARK_SIZE))
             list.add(n)
         _data = list.toTypedArray()
@@ -35,7 +35,7 @@ open class ClassArrayBenchmark {
 
     //Benchmark
     fun copyManual(): List<Value> {
-        val list = ArrayList<Value>(data.size)
+        konst list = ArrayList<Value>(data.size)
         for (item in data) {
             list.add(item)
         }
@@ -54,11 +54,11 @@ open class ClassArrayBenchmark {
 
     //Benchmark
     fun filterAndMapManual(): ArrayList<String> {
-        val list = ArrayList<String>()
+        konst list = ArrayList<String>()
         for (it in data) {
             if (filterLoad(it)) {
-                val value = mapLoad(it)
-                list.add(value)
+                konst konstue = mapLoad(it)
+                list.add(konstue)
             }
         }
         return list
@@ -71,7 +71,7 @@ open class ClassArrayBenchmark {
 
     //Benchmark
     fun filterManual(): List<Value> {
-        val list = ArrayList<Value>()
+        konst list = ArrayList<Value>()
         for (it in data) {
             if (filterLoad(it))
                 list.add(it)

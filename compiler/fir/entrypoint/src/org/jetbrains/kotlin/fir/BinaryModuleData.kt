@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 
 class BinaryModuleData(
-    val regular: FirModuleData,
-    val dependsOn: FirModuleData,
-    val friends: FirModuleData
+    konst regular: FirModuleData,
+    konst dependsOn: FirModuleData,
+    konst friends: FirModuleData
 ) {
     companion object {
         fun createDependencyModuleData(

@@ -7,7 +7,7 @@ package codegen.inlineClass.customEquals
 
 import kotlin.test.*
 
-private inline class Z(val data: Int) {
+private inline class Z(konst data: Int) {
     override fun equals(other: Any?) = other is Z && data % 256 == other.data % 256
 }
 

@@ -29,7 +29,7 @@ public final class C</*0*/ TC : kotlin.Number> {
 
 public final inline class NStr {
     public constructor NStr(/*0*/ str: kotlin.String?)
-    public final val str: kotlin.String?
+    public final konst str: kotlin.String?
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
@@ -37,7 +37,7 @@ public final inline class NStr {
 
 public final inline class Name {
     public constructor Name(/*0*/ name: kotlin.String)
-    public final val name: kotlin.String
+    public final konst name: kotlin.String
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
@@ -45,7 +45,7 @@ public final inline class Name {
 
 public final inline class Str {
     public constructor Str(/*0*/ str: kotlin.String)
-    public final val str: kotlin.String
+    public final konst str: kotlin.String
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
@@ -53,7 +53,7 @@ public final inline class Str {
 
 public final inline class X {
     public constructor X(/*0*/ x: kotlin.Int)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
@@ -61,7 +61,7 @@ public final inline class X {
 
 public final inline class Z {
     public constructor Z(/*0*/ x: kotlin.Int)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String

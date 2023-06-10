@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.ir.symbols.IrReturnableBlockSymbol
  *
  * ```
  * composite {
- *   val result
+ *   konst result
  *   returnable_block {
  *     ...
  *     result = e
@@ -46,27 +46,27 @@ import org.jetbrains.kotlin.ir.symbols.IrReturnableBlockSymbol
  * }: T
  * ```
  */
-class JsReturnableBlockLowering(val context: CommonBackendContext) : BodyLoweringPass {
+class JsReturnableBlockLowering(konst context: CommonBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         container.transform(JsReturnableBlockTransformer(context), null)
     }
 }
 
-class JsReturnableBlockTransformer(val context: CommonBackendContext) : IrElementTransformerVoidWithContext() {
+class JsReturnableBlockTransformer(konst context: CommonBackendContext) : IrElementTransformerVoidWithContext() {
     private var labelCnt = 0
     private var map = hashMapOf<IrReturnableBlockSymbol, IrVariable>()
 
-    private val unitType = context.irBuiltIns.unitType
-    private val unitValue get() = IrGetObjectValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, unitType, context.irBuiltIns.unitClass)
+    private konst unitType = context.irBuiltIns.unitType
+    private konst unitValue get() = IrGetObjectValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, unitType, context.irBuiltIns.unitClass)
 
     override fun visitBlock(expression: IrBlock): IrExpression {
         if (expression !is IrReturnableBlock) return super.visitBlock(expression)
 
         expression.transformChildrenVoid()
 
-        val variable = map.remove(expression.symbol) ?: return expression
+        konst variable = map.remove(expression.symbol) ?: return expression
 
-        val builder = context.createIrBuilder(expression.symbol)
+        konst builder = context.createIrBuilder(expression.symbol)
 
         expression.type = unitType
         return builder.irComposite(expression, expression.origin, variable.type) {
@@ -79,16 +79,16 @@ class JsReturnableBlockTransformer(val context: CommonBackendContext) : IrElemen
     override fun visitReturn(expression: IrReturn): IrExpression {
         expression.transformChildrenVoid()
 
-        val targetSymbol = expression.returnTargetSymbol
+        konst targetSymbol = expression.returnTargetSymbol
         if (targetSymbol !is IrReturnableBlockSymbol) return expression
 
-        val variable = map.getOrPut(targetSymbol) {
+        konst variable = map.getOrPut(targetSymbol) {
             currentScope!!.scope.createTmpVariable(targetSymbol.owner.type, "tmp\$ret\$${labelCnt++}", true)
         }
 
-        val builder = context.createIrBuilder(targetSymbol)
+        konst builder = context.createIrBuilder(targetSymbol)
         return builder.at(UNDEFINED_OFFSET, UNDEFINED_OFFSET).irComposite {
-            +at(expression).irSet(variable.symbol, expression.value)
+            +at(expression).irSet(variable.symbol, expression.konstue)
             +at(UNDEFINED_OFFSET, UNDEFINED_OFFSET).irReturn(unitValue)
         }
     }

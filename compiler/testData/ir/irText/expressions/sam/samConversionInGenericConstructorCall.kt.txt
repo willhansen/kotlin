@@ -9,7 +9,7 @@ class Outer<T1 : Any?> {
 
   }
 
-  val j11: J<T1, T1>
+  konst j11: J<T1, T1>
     field = j11
     get
 
@@ -20,7 +20,7 @@ class Outer<T1 : Any?> {
 
     }
 
-    val j12: J<T1, T2>
+    konst j12: J<T1, T2>
       field = j12
       get
 

@@ -18,11 +18,11 @@ fun box(): String {
     assertEquals("fun test.B<U>.foo(U): kotlin.Unit", B<Float>::foo.toString())
     assertEquals("fun test.C.foo(kotlin.String): kotlin.Unit", C::foo.toString())
 
-    val afoo = A::class.members.single { it.name == "foo" }
+    konst afoo = A::class.members.single { it.name == "foo" }
     assertEquals("fun test.A<T>.foo(T): kotlin.Unit", afoo.toString())
-    val bfoo = B::class.members.single { it.name == "foo" }
+    konst bfoo = B::class.members.single { it.name == "foo" }
     assertEquals("fun test.B<U>.foo(U): kotlin.Unit", bfoo.toString())
-    val cfoo = C::class.members.single { it.name == "foo" }
+    konst cfoo = C::class.members.single { it.name == "foo" }
     assertEquals("fun test.C.foo(kotlin.String): kotlin.Unit", cfoo.toString())
 
     return "OK"

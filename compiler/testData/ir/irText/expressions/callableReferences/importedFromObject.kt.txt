@@ -7,7 +7,7 @@ object Foo {
 
   }
 
-  val a: String
+  konst a: String
     field = ""
     get
 
@@ -17,18 +17,18 @@ object Foo {
 
 }
 
-val test1: KProperty0<String>
+konst test1: KProperty0<String>
   field = Foo::a
   get
 
-val test1a: KProperty0<String>
+konst test1a: KProperty0<String>
   field = Foo::a
   get
 
-val test2: KFunction0<String>
+konst test2: KFunction0<String>
   field = Foo::foo
   get
 
-val test2a: KFunction0<String>
+konst test2a: KFunction0<String>
   field = Foo::foo
   get

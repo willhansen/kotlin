@@ -8,8 +8,8 @@
 
 // FILE: arrayConstructor.kt
 fun box(): String {
-    val sam = Sam(::IntArray)
-    val arr = sam.get(2)
+    konst sam = Sam(::IntArray)
+    konst arr = sam.get(2)
     if (arr.size != 2 || arr[0] != 0 || arr[1] != 0)
         return "Failed"
     return "OK"

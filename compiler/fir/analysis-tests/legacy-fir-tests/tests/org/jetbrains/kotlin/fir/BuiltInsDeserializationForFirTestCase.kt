@@ -21,13 +21,13 @@ class BuiltInsDeserializationForFirTestCase : AbstractFirLoadBinariesTest() {
 
     @OptIn(ObsoleteTestInfrastructure::class)
     fun testBuiltInPackagesContent() {
-        val moduleDescriptor = BuiltinsTestUtils.compileBuiltinsModule(environment)
-        val session = FirTestSessionFactoryHelper.createSessionForTests(
+        konst moduleDescriptor = BuiltinsTestUtils.compileBuiltinsModule(environment)
+        konst session = FirTestSessionFactoryHelper.createSessionForTests(
             environment.toAbstractProjectEnvironment(),
             GlobalSearchScope.allScope(project).toAbstractProjectFileSearchScope()
         )
         for (packageFqName in BuiltinsTestUtils.BUILTIN_PACKAGE_NAMES) {
-            val path = "compiler/fir/analysis-tests/testData/builtIns/" + packageFqName.asString().replace('.', '-') + ".txt"
+            konst path = "compiler/fir/analysis-tests/testData/builtIns/" + packageFqName.asString().replace('.', '-') + ".txt"
             checkPackageContent(session, packageFqName, moduleDescriptor, path)
         }
     }

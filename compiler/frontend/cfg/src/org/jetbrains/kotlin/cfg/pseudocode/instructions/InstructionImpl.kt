@@ -21,19 +21,19 @@ import java.util.LinkedHashSet
 import org.jetbrains.kotlin.cfg.pseudocode.Pseudocode
 import org.jetbrains.kotlin.cfg.pseudocode.PseudoValue
 
-abstract class InstructionImpl(override val blockScope: BlockScope) : Instruction {
+abstract class InstructionImpl(override konst blockScope: BlockScope) : Instruction {
     private var _owner: Pseudocode? = null
 
     override var owner: Pseudocode
         get() = _owner!!
-        set(value) {
-            assert(_owner == null || _owner == value)
-            _owner = value
+        set(konstue) {
+            assert(_owner == null || _owner == konstue)
+            _owner = konstue
         }
 
     private var allCopies: MutableSet<InstructionImpl>? = null
 
-    override val copies: Collection<Instruction>
+    override konst copies: Collection<Instruction>
         get() = allCopies?.filter { it != this } ?: Collections.emptyList()
 
     fun copy(): Instruction = updateCopyInfo(createCopy())
@@ -51,14 +51,14 @@ abstract class InstructionImpl(override val blockScope: BlockScope) : Instructio
 
     var markedAsDead: Boolean = false
 
-    override val dead: Boolean get() = allCopies?.all { it.markedAsDead } ?: markedAsDead
+    override konst dead: Boolean get() = allCopies?.all { it.markedAsDead } ?: markedAsDead
 
-    override val previousInstructions: MutableCollection<Instruction> = LinkedHashSet()
+    override konst previousInstructions: MutableCollection<Instruction> = LinkedHashSet()
 
     protected fun outgoingEdgeTo(target: Instruction?): Instruction? {
         (target as InstructionImpl?)?.previousInstructions?.add(this)
         return target
     }
 
-    override val inputValues: List<PseudoValue> = Collections.emptyList()
+    override konst inputValues: List<PseudoValue> = Collections.emptyList()
 }

@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ExpressionReceiver
 import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-val KotlinCall.psiKotlinCall: PSIKotlinCall
+konst KotlinCall.psiKotlinCall: PSIKotlinCall
     get() {
         assert(this is PSIKotlinCall) {
             "Incorrect ASTCAll: $this. Java class: ${javaClass.canonicalName}"
@@ -44,76 +44,76 @@ fun <D : CallableDescriptor> KotlinCall.getResolvedPsiKotlinCall(trace: BindingT
     psiKotlinCall.psiCall.getResolvedCall(trace.bindingContext) as? NewResolvedCallImpl<D>
 
 abstract class PSIKotlinCall : KotlinCall {
-    abstract val psiCall: Call
-    abstract val startingDataFlowInfo: DataFlowInfo
-    abstract val resultDataFlowInfo: DataFlowInfo
-    abstract val dataFlowInfoForArguments: DataFlowInfoForArguments
-    abstract val tracingStrategy: TracingStrategy
+    abstract konst psiCall: Call
+    abstract konst startingDataFlowInfo: DataFlowInfo
+    abstract konst resultDataFlowInfo: DataFlowInfo
+    abstract konst dataFlowInfoForArguments: DataFlowInfoForArguments
+    abstract konst tracingStrategy: TracingStrategy
 
     override fun toString() = "$psiCall"
 }
 
 class PSIKotlinCallImpl(
-    override val callKind: KotlinCallKind,
-    override val psiCall: Call,
-    override val tracingStrategy: TracingStrategy,
-    override val explicitReceiver: ReceiverKotlinCallArgument?,
-    override val dispatchReceiverForInvokeExtension: ReceiverKotlinCallArgument?,
-    override val name: Name,
-    override val typeArguments: List<TypeArgument>,
-    override val argumentsInParenthesis: List<KotlinCallArgument>,
-    override val externalArgument: KotlinCallArgument?,
-    override val startingDataFlowInfo: DataFlowInfo,
-    override val resultDataFlowInfo: DataFlowInfo,
-    override val dataFlowInfoForArguments: DataFlowInfoForArguments,
-    override val isForImplicitInvoke: Boolean
+    override konst callKind: KotlinCallKind,
+    override konst psiCall: Call,
+    override konst tracingStrategy: TracingStrategy,
+    override konst explicitReceiver: ReceiverKotlinCallArgument?,
+    override konst dispatchReceiverForInvokeExtension: ReceiverKotlinCallArgument?,
+    override konst name: Name,
+    override konst typeArguments: List<TypeArgument>,
+    override konst argumentsInParenthesis: List<KotlinCallArgument>,
+    override konst externalArgument: KotlinCallArgument?,
+    override konst startingDataFlowInfo: DataFlowInfo,
+    override konst resultDataFlowInfo: DataFlowInfo,
+    override konst dataFlowInfoForArguments: DataFlowInfoForArguments,
+    override konst isForImplicitInvoke: Boolean
 ) : PSIKotlinCall()
 
 class PSIKotlinCallForVariable(
-    val baseCall: PSIKotlinCallImpl,
-    override val explicitReceiver: ReceiverKotlinCallArgument?,
-    override val name: Name
+    konst baseCall: PSIKotlinCallImpl,
+    override konst explicitReceiver: ReceiverKotlinCallArgument?,
+    override konst name: Name
 ) : PSIKotlinCall() {
-    override val callKind: KotlinCallKind get() = KotlinCallKind.VARIABLE
-    override val typeArguments: List<TypeArgument> get() = emptyList()
-    override val argumentsInParenthesis: List<KotlinCallArgument> get() = emptyList()
-    override val externalArgument: KotlinCallArgument? get() = null
+    override konst callKind: KotlinCallKind get() = KotlinCallKind.VARIABLE
+    override konst typeArguments: List<TypeArgument> get() = emptyList()
+    override konst argumentsInParenthesis: List<KotlinCallArgument> get() = emptyList()
+    override konst externalArgument: KotlinCallArgument? get() = null
 
-    override val startingDataFlowInfo: DataFlowInfo get() = baseCall.startingDataFlowInfo
-    override val resultDataFlowInfo: DataFlowInfo get() = baseCall.startingDataFlowInfo
-    override val dataFlowInfoForArguments: DataFlowInfoForArguments get() = baseCall.dataFlowInfoForArguments
+    override konst startingDataFlowInfo: DataFlowInfo get() = baseCall.startingDataFlowInfo
+    override konst resultDataFlowInfo: DataFlowInfo get() = baseCall.startingDataFlowInfo
+    override konst dataFlowInfoForArguments: DataFlowInfoForArguments get() = baseCall.dataFlowInfoForArguments
 
-    override val tracingStrategy: TracingStrategy get() = baseCall.tracingStrategy
-    override val psiCall: Call = CallTransformer.stripCallArguments(baseCall.psiCall).let {
+    override konst tracingStrategy: TracingStrategy get() = baseCall.tracingStrategy
+    override konst psiCall: Call = CallTransformer.stripCallArguments(baseCall.psiCall).let {
         if (explicitReceiver == null) CallTransformer.stripReceiver(it) else it
     }
 
-    override val isForImplicitInvoke: Boolean get() = false
+    override konst isForImplicitInvoke: Boolean get() = false
 }
 
 class PSIKotlinCallForInvoke(
-    val baseCall: PSIKotlinCallImpl,
-    val variableCall: ResolutionCandidate,
-    override val explicitReceiver: ReceiverKotlinCallArgument,
-    override val dispatchReceiverForInvokeExtension: SimpleKotlinCallArgument?
+    konst baseCall: PSIKotlinCallImpl,
+    konst variableCall: ResolutionCandidate,
+    override konst explicitReceiver: ReceiverKotlinCallArgument,
+    override konst dispatchReceiverForInvokeExtension: SimpleKotlinCallArgument?
 ) : PSIKotlinCall() {
-    override val callKind: KotlinCallKind get() = KotlinCallKind.FUNCTION
-    override val name: Name get() = OperatorNameConventions.INVOKE
-    override val typeArguments: List<TypeArgument> get() = baseCall.typeArguments
-    override val argumentsInParenthesis: List<KotlinCallArgument> get() = baseCall.argumentsInParenthesis
-    override val externalArgument: KotlinCallArgument? get() = baseCall.externalArgument
+    override konst callKind: KotlinCallKind get() = KotlinCallKind.FUNCTION
+    override konst name: Name get() = OperatorNameConventions.INVOKE
+    override konst typeArguments: List<TypeArgument> get() = baseCall.typeArguments
+    override konst argumentsInParenthesis: List<KotlinCallArgument> get() = baseCall.argumentsInParenthesis
+    override konst externalArgument: KotlinCallArgument? get() = baseCall.externalArgument
 
-    override val startingDataFlowInfo: DataFlowInfo get() = baseCall.startingDataFlowInfo
-    override val resultDataFlowInfo: DataFlowInfo get() = baseCall.resultDataFlowInfo
-    override val dataFlowInfoForArguments: DataFlowInfoForArguments get() = baseCall.dataFlowInfoForArguments
-    override val psiCall: Call
-    override val tracingStrategy: TracingStrategy
-    override val isForImplicitInvoke: Boolean = true
+    override konst startingDataFlowInfo: DataFlowInfo get() = baseCall.startingDataFlowInfo
+    override konst resultDataFlowInfo: DataFlowInfo get() = baseCall.resultDataFlowInfo
+    override konst dataFlowInfoForArguments: DataFlowInfoForArguments get() = baseCall.dataFlowInfoForArguments
+    override konst psiCall: Call
+    override konst tracingStrategy: TracingStrategy
+    override konst isForImplicitInvoke: Boolean = true
 
     init {
-        val variableReceiver = dispatchReceiverForInvokeExtension ?: explicitReceiver
-        val explicitExtensionReceiver = if (dispatchReceiverForInvokeExtension == null) null else explicitReceiver
-        val calleeExpression = baseCall.psiCall.calleeExpression!!
+        konst variableReceiver = dispatchReceiverForInvokeExtension ?: explicitReceiver
+        konst explicitExtensionReceiver = if (dispatchReceiverForInvokeExtension == null) null else explicitReceiver
+        konst calleeExpression = baseCall.psiCall.calleeExpression!!
 
         psiCall = CallTransformer.CallForImplicitInvoke(
             explicitExtensionReceiver?.receiverValue,
@@ -124,7 +124,7 @@ class PSIKotlinCallForInvoke(
     }
 }
 
-val ReceiverKotlinCallArgument.receiverValue: ReceiverValue?
+konst ReceiverKotlinCallArgument.receiverValue: ReceiverValue?
     get() = when (this) {
         is SimpleKotlinCallArgument -> this.receiver.receiverValue
         is QualifierReceiverKotlinCallArgument -> this.receiver.classValueReceiver

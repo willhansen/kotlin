@@ -7,7 +7,7 @@ package kotlin.text
 /**
  * Represents the character general category in the Unicode specification.
  */
-public actual enum class CharCategory(internal val value: Int, public actual val code: String) {
+public actual enum class CharCategory(internal konst konstue: Int, public actual konst code: String) {
     /**
      * General category "Cn" in the Unicode specification.
      */
@@ -161,13 +161,13 @@ public actual enum class CharCategory(internal val value: Int, public actual val
     /**
      * Returns `true` if [char] character belongs to this category.
      */
-    public actual operator fun contains(char: Char): Boolean = char.getCategoryValue() == this.value
+    public actual operator fun contains(char: Char): Boolean = char.getCategoryValue() == this.konstue
 
     public companion object {
-        internal fun valueOf(category: Int): CharCategory =
+        internal fun konstueOf(category: Int): CharCategory =
                 when (category) {
-                    in 0..16 -> values()[category]
-                    in 18..30 -> values()[category - 1]
+                    in 0..16 -> konstues()[category]
+                    in 18..30 -> konstues()[category - 1]
                     else -> throw IllegalArgumentException("Category #$category is not defined.")
                 }
     }

@@ -12,7 +12,7 @@ class Problem<F>(){
     fun getInputStub(): F = null <!UNCHECKED_CAST!>as F<!>
 
     fun createStateMachine(): StateMachine<F> = stateMachine {
-        val letter = getInputStub()
+        konst letter = getInputStub()
         if (letter is Any)
             println("yes")
     }

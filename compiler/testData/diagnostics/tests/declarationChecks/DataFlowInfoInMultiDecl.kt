@@ -5,10 +5,10 @@ class A {
 
 fun a(aa : A?, b : Any) {
     if (aa != null) {
-        val (a1, b1) = <!DEBUG_INFO_SMARTCAST!>aa<!>;
+        konst (a1, b1) = <!DEBUG_INFO_SMARTCAST!>aa<!>;
     }
 
     if (b is A) {
-        val (a1, b1) = <!DEBUG_INFO_SMARTCAST!>b<!>;
+        konst (a1, b1) = <!DEBUG_INFO_SMARTCAST!>b<!>;
     }
 }

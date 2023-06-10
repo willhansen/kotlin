@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.utils.addToStdlib.trimToSize
 private typealias Context = TypeSystemInferenceExtensionContext
 
 class MutableVariableWithConstraints private constructor(
-    private val context: Context,
-    override val typeVariable: TypeVariableMarker,
+    private konst context: Context,
+    override konst typeVariable: TypeVariableMarker,
     constraints: List<Constraint>? // assume simplified and deduplicated
 ) : VariableWithConstraints {
 
@@ -24,7 +24,7 @@ class MutableVariableWithConstraints private constructor(
 
     constructor(context: Context, other: VariableWithConstraints) : this(context, other.typeVariable, other.constraints)
 
-    override val constraints: List<Constraint>
+    override konst constraints: List<Constraint>
         get() {
             if (simplifiedConstraints == null) {
                 simplifiedConstraints = mutableConstraints.simplifyConstraints()
@@ -44,25 +44,25 @@ class MutableVariableWithConstraints private constructor(
         }
     }
 
-    private val mutableConstraints = if (constraints == null) SmartList() else SmartList(constraints)
+    private konst mutableConstraints = if (constraints == null) SmartList() else SmartList(constraints)
 
     private var simplifiedConstraints: SmartList<Constraint>? = mutableConstraints
 
-    val rawConstraintsCount get() = mutableConstraints.size
+    konst rawConstraintsCount get() = mutableConstraints.size
 
     // return new actual constraint, if this constraint is new, otherwise return already existed not redundant constraint
     // the second element of pair is a flag whether a constraint was added in fact
     fun addConstraint(constraint: Constraint): Pair<Constraint, Boolean> {
-        val isLowerAndFlexibleTypeWithDefNotNullLowerBound = constraint.isLowerAndFlexibleTypeWithDefNotNullLowerBound()
+        konst isLowerAndFlexibleTypeWithDefNotNullLowerBound = constraint.isLowerAndFlexibleTypeWithDefNotNullLowerBound()
 
         for (previousConstraint in constraints) {
             if (previousConstraint.typeHashCode == constraint.typeHashCode
                 && previousConstraint.type == constraint.type
                 && previousConstraint.isNullabilityConstraint == constraint.isNullabilityConstraint
             ) {
-                val noNewCustomAttributes = with(context) {
-                    val previousType = previousConstraint.type
-                    val type = constraint.type
+                konst noNewCustomAttributes = with(context) {
+                    konst previousType = previousConstraint.type
+                    konst type = constraint.type
                     (!previousType.hasCustomAttributes() && !type.hasCustomAttributes()) ||
                             (previousType.getCustomAttributes() == type.getCustomAttributes())
                 }
@@ -75,13 +75,13 @@ class MutableVariableWithConstraints private constructor(
                     }
                 }
 
-                val isMatchingForSimplification = when (previousConstraint.kind) {
+                konst isMatchingForSimplification = when (previousConstraint.kind) {
                     ConstraintKind.LOWER -> constraint.kind.isUpper()
                     ConstraintKind.UPPER -> constraint.kind.isLower()
                     ConstraintKind.EQUALITY -> true
                 }
                 if (isMatchingForSimplification && noNewCustomAttributes) {
-                    val actualConstraint = if (constraint.kind != ConstraintKind.EQUALITY) {
+                    konst actualConstraint = if (constraint.kind != ConstraintKind.EQUALITY) {
                         Constraint(
                             ConstraintKind.EQUALITY,
                             constraint.type,
@@ -144,7 +144,7 @@ class MutableVariableWithConstraints private constructor(
          * We discriminate upper expected type constraints during finding a result type to fix variable (see ResultTypeResolver.kt):
          * namely, we don't intersect the expected type with other upper constraints' types to prevent cases like this:
          *  fun <T : String> materialize(): T = null as T
-         *  val bar: Int = materialize() // T is inferred into String & Int without discriminating upper expected type constraints
+         *  konst bar: Int = materialize() // T is inferred into String & Int without discriminating upper expected type constraints
          * So here we shouldn't lose upper non-expected type constraints.
          */
         if (old.position.from is ExpectedTypeConstraintPosition<*> && new.position.from !is ExpectedTypeConstraintPosition<*> && old.kind.isUpper() && new.kind.isUpper())
@@ -161,7 +161,7 @@ class MutableVariableWithConstraints private constructor(
         simplifyLowerConstraints().simplifyEqualityConstraints()
 
     private fun SmartList<Constraint>.simplifyLowerConstraints(): SmartList<Constraint> {
-        val usefulConstraints = SmartList<Constraint>()
+        konst usefulConstraints = SmartList<Constraint>()
         for (constraint in this) {
             if (!constraint.isLowerAndFlexibleTypeWithDefNotNullLowerBound()) {
                 usefulConstraints.add(constraint)
@@ -172,7 +172,7 @@ class MutableVariableWithConstraints private constructor(
             // If there is constraint T..T? <: K, then the original one (T!!.T?) is useless
             // This is so because CST(T..T?, T!!..T?) == CST(T..T?)
 
-            val thereIsStrongerConstraint = this.any { it.isStrongerThanLowerAndFlexibleTypeWithDefNotNullLowerBound(constraint) }
+            konst thereIsStrongerConstraint = this.any { it.isStrongerThanLowerAndFlexibleTypeWithDefNotNullLowerBound(constraint) }
 
             if (!thereIsStrongerConstraint) {
                 usefulConstraints.add(constraint)
@@ -195,18 +195,18 @@ class MutableVariableWithConstraints private constructor(
         if (typeHashCode != other.typeHashCode || kind == ConstraintKind.UPPER) return false
         with(context) {
             if (!type.isFlexible() || !other.type.isFlexible()) return false
-            val otherLowerBound = other.type.lowerBoundIfFlexible()
+            konst otherLowerBound = other.type.lowerBoundIfFlexible()
             if (!otherLowerBound.isDefinitelyNotNullType()) return false
             require(otherLowerBound is DefinitelyNotNullTypeMarker)
-            val thisLowerBound = type.lowerBoundIfFlexible()
-            val thisUpperBound = type.upperBoundIfFlexible()
-            val otherUpperBound = other.type.upperBoundIfFlexible()
+            konst thisLowerBound = type.lowerBoundIfFlexible()
+            konst thisUpperBound = type.upperBoundIfFlexible()
+            konst otherUpperBound = other.type.upperBoundIfFlexible()
             return thisLowerBound == otherLowerBound.original() && thisUpperBound == otherUpperBound
         }
     }
 
     private fun SmartList<Constraint>.simplifyEqualityConstraints(): SmartList<Constraint> {
-        val equalityConstraints = filter { it.kind == ConstraintKind.EQUALITY }.groupBy { it.typeHashCode }
+        konst equalityConstraints = filter { it.kind == ConstraintKind.EQUALITY }.groupBy { it.typeHashCode }
         return when {
             equalityConstraints.isEmpty() -> this
             else -> filterTo(SmartList()) { isUsefulConstraint(it, equalityConstraints) }
@@ -225,20 +225,20 @@ class MutableVariableWithConstraints private constructor(
 
 
 internal class MutableConstraintStorage : ConstraintStorage {
-    override val allTypeVariables: MutableMap<TypeConstructorMarker, TypeVariableMarker> = LinkedHashMap()
-    override val notFixedTypeVariables: MutableMap<TypeConstructorMarker, MutableVariableWithConstraints> = LinkedHashMap()
-    override val missedConstraints: MutableList<Pair<IncorporationConstraintPosition, MutableList<Pair<TypeVariableMarker, Constraint>>>> =
+    override konst allTypeVariables: MutableMap<TypeConstructorMarker, TypeVariableMarker> = LinkedHashMap()
+    override konst notFixedTypeVariables: MutableMap<TypeConstructorMarker, MutableVariableWithConstraints> = LinkedHashMap()
+    override konst missedConstraints: MutableList<Pair<IncorporationConstraintPosition, MutableList<Pair<TypeVariableMarker, Constraint>>>> =
         SmartList()
-    override val initialConstraints: MutableList<InitialConstraint> = SmartList()
+    override konst initialConstraints: MutableList<InitialConstraint> = SmartList()
     override var maxTypeDepthFromInitialConstraints: Int = 1
-    override val errors: MutableList<ConstraintSystemError> = SmartList()
-    override val hasContradiction: Boolean get() = errors.any { !it.applicability.isSuccess }
-    override val fixedTypeVariables: MutableMap<TypeConstructorMarker, KotlinTypeMarker> = LinkedHashMap()
-    override val postponedTypeVariables: MutableList<TypeVariableMarker> = SmartList()
-    override val builtFunctionalTypesForPostponedArgumentsByTopLevelTypeVariables: MutableMap<Pair<TypeConstructorMarker, List<Pair<TypeConstructorMarker, Int>>>, KotlinTypeMarker> =
+    override konst errors: MutableList<ConstraintSystemError> = SmartList()
+    override konst hasContradiction: Boolean get() = errors.any { !it.applicability.isSuccess }
+    override konst fixedTypeVariables: MutableMap<TypeConstructorMarker, KotlinTypeMarker> = LinkedHashMap()
+    override konst postponedTypeVariables: MutableList<TypeVariableMarker> = SmartList()
+    override konst builtFunctionalTypesForPostponedArgumentsByTopLevelTypeVariables: MutableMap<Pair<TypeConstructorMarker, List<Pair<TypeConstructorMarker, Int>>>, KotlinTypeMarker> =
         LinkedHashMap()
-    override val builtFunctionalTypesForPostponedArgumentsByExpectedTypeVariables: MutableMap<TypeConstructorMarker, KotlinTypeMarker> =
+    override konst builtFunctionalTypesForPostponedArgumentsByExpectedTypeVariables: MutableMap<TypeConstructorMarker, KotlinTypeMarker> =
         LinkedHashMap()
 
-    override val constraintsFromAllForkPoints: MutableList<Pair<IncorporationConstraintPosition, ForkPointData>> = SmartList()
+    override konst constraintsFromAllForkPoints: MutableList<Pair<IncorporationConstraintPosition, ForkPointData>> = SmartList()
 }

@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.commonizer.cli
 import org.jetbrains.kotlin.commonizer.CommonizerSettings
 
 internal sealed class CommonizerSettingOptionType<T : Any>(
-    val commonizerSettingKey: CommonizerSettings.Key<T>,
+    konst commonizerSettingKey: CommonizerSettings.Key<T>,
     description: String,
 ) : OptionType<T>(
     commonizerSettingKey.alias,

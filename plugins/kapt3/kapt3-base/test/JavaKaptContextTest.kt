@@ -25,20 +25,20 @@ import javax.lang.model.element.TypeElement
 
 class JavaKaptContextTest {
     companion object {
-        private val TEST_DATA_DIR = File("plugins/kapt3/kapt3-base/testData/runner")
-        val logger = WriterBackedKaptLogger(isVerbose = true)
+        private konst TEST_DATA_DIR = File("plugins/kapt3/kapt3-base/testData/runner")
+        konst logger = WriterBackedKaptLogger(isVerbose = true)
 
         fun simpleProcessor() = IncrementalProcessor(
             object : AbstractProcessor() {
                 override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
                     for (annotation in annotations) {
-                        val annotationName = annotation.simpleName.toString()
-                        val annotatedElements = roundEnv.getElementsAnnotatedWith(annotation)
+                        konst annotationName = annotation.simpleName.toString()
+                        konst annotatedElements = roundEnv.getElementsAnnotatedWith(annotation)
 
                         for (annotatedElement in annotatedElements) {
-                            val generatedClassName = annotatedElement.simpleName.toString().replaceFirstChar(Char::uppercaseChar) +
+                            konst generatedClassName = annotatedElement.simpleName.toString().replaceFirstChar(Char::uppercaseChar) +
                                     annotationName.replaceFirstChar(Char::uppercaseChar)
-                            val file = processingEnv.filer.createSourceFile("generated.$generatedClassName")
+                            konst file = processingEnv.filer.createSourceFile("generated.$generatedClassName")
                             file.openWriter().use {
                                 it.write(
                                     """
@@ -59,7 +59,7 @@ class JavaKaptContextTest {
     }
 
     private fun doAnnotationProcessing(javaSourceFile: File, processor: IncrementalProcessor, outputDir: File) {
-        val options = KaptOptions.Builder().apply {
+        konst options = KaptOptions.Builder().apply {
             projectBaseDir = javaSourceFile.parentFile
 
             sourcesOutputDir = outputDir
@@ -76,10 +76,10 @@ class JavaKaptContextTest {
 
     @Test
     fun testSimple() {
-        val sourceOutputDir = Files.createTempDirectory("kaptRunner").toFile()
+        konst sourceOutputDir = Files.createTempDirectory("kaptRunner").toFile()
         try {
             doAnnotationProcessing(File(TEST_DATA_DIR, "Simple.java"), simpleProcessor(), sourceOutputDir)
-            val myMethodFile = File(sourceOutputDir, "generated/MyMethodMyAnnotation.java")
+            konst myMethodFile = File(sourceOutputDir, "generated/MyMethodMyAnnotation.java")
             assertTrue(myMethodFile.exists())
         } finally {
             sourceOutputDir.deleteRecursively()
@@ -88,10 +88,10 @@ class JavaKaptContextTest {
 
     @Test
     fun testException() {
-        val exceptionMessage = "Here we are!"
+        konst exceptionMessage = "Here we are!"
         var triggered = false
 
-        val processor = object : AbstractProcessor() {
+        konst processor = object : AbstractProcessor() {
             override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
                 throw RuntimeException(exceptionMessage)
             }

@@ -2,7 +2,7 @@
 // TARGET_BACKEND: JVM_IR
 
 class A {
-    val ok = "OK"
+    konst ok = "OK"
 
     context(A)
     fun A.f() = ok

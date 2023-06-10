@@ -3,7 +3,7 @@ idePluginDependency {
 
     publish()
 
-    val jar: Jar by tasks
+    konst jar: Jar by tasks
 
     jar.apply {
         listOf(

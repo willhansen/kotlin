@@ -7,7 +7,7 @@ package codegen.delegatedProperty.lazy
 
 import kotlin.test.*
 
-val lazyValue: String by lazy {
+konst lazyValue: String by lazy {
     println("computed!")
     "Hello"
 }

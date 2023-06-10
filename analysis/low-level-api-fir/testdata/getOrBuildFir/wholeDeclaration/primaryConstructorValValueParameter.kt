@@ -1,1 +1,1 @@
-class X(<expr>val x: Int</expr>)
+class X(<expr>konst x: Int</expr>)

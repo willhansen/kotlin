@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val value: Int)
+konstue class Z(konst konstue: Int)
 
 fun eq(a: Z?, b: Z) = a == b
 

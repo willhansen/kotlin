@@ -4,8 +4,8 @@ FILE fqName:<root> fileName:/tryCatch.kt
       TRY type=kotlin.Unit
         try: BLOCK type=kotlin.Unit origin=null
           CALL 'public final fun println (): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
-        CATCH parameter=val e: kotlin.Throwable declared in <root>.test1
-          VAR CATCH_PARAMETER name:e type:kotlin.Throwable [val]
+        CATCH parameter=konst e: kotlin.Throwable declared in <root>.test1
+          VAR CATCH_PARAMETER name:e type:kotlin.Throwable [konst]
           BLOCK type=kotlin.Unit origin=null
             CALL 'public final fun println (): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
         finally: BLOCK type=kotlin.Unit origin=null
@@ -16,12 +16,12 @@ FILE fqName:<root> fileName:/tryCatch.kt
         TRY type=kotlin.Int
           try: BLOCK type=kotlin.Int origin=null
             CALL 'public final fun println (): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
-            CONST Int type=kotlin.Int value=42
-          CATCH parameter=val e: kotlin.Throwable declared in <root>.test2
-            VAR CATCH_PARAMETER name:e type:kotlin.Throwable [val]
+            CONST Int type=kotlin.Int konstue=42
+          CATCH parameter=konst e: kotlin.Throwable declared in <root>.test2
+            VAR CATCH_PARAMETER name:e type:kotlin.Throwable [konst]
             BLOCK type=kotlin.Int origin=null
               CALL 'public final fun println (): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
-              CONST Int type=kotlin.Int value=24
+              CONST Int type=kotlin.Int konstue=24
           finally: BLOCK type=kotlin.Int origin=null
             CALL 'public final fun println (): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
-            CONST Int type=kotlin.Int value=555
+            CONST Int type=kotlin.Int konstue=555

@@ -10,7 +10,7 @@ sealed interface LazyGridLayoutInfo {
 // FILE: file2.kt
 
 class LazyGridState {
-    val layoutInfo: LazyGridLayoutInfo
+    konst layoutInfo: LazyGridLayoutInfo
         get() = EmptyLazyGridLayoutInfo
 }
 

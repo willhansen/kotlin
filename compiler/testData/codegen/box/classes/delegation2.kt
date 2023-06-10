@@ -17,7 +17,7 @@ class T2 : Trait2{
 class C(a:Trait1, b:Trait2) : Trait1 by a, Trait2 by b
 
 fun box() : String {
-    val c = C(T1(),T2())
+    konst c = C(T1(),T2())
     if(c.foo() != "aaa") return "fail"
     if(c.bar() != "bbb") return "fail"
     return "OK"

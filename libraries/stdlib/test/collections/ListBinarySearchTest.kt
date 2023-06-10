@@ -9,15 +9,15 @@ import kotlin.test.*
 
 class ListBinarySearchTest {
 
-    val values = listOf(1, 3, 7, 10, 12, 15, 22, 45)
+    konst konstues = listOf(1, 3, 7, 10, 12, 15, 22, 45)
 
     fun notFound(index: Int) = -(index + 1)
 
-    private val comparator = compareBy<IncomparableDataItem<Int>?> { it?.value }
+    private konst comparator = compareBy<IncomparableDataItem<Int>?> { it?.konstue }
 
     @Test
     fun binarySearchByElement() {
-        val list = values
+        konst list = konstues
         list.forEachIndexed { index, item ->
             assertEquals(index, list.binarySearch(item))
             assertEquals(notFound(index), list.binarySearch(item.pred()))
@@ -32,7 +32,7 @@ class ListBinarySearchTest {
 
     @Test
     fun binarySearchByElementNullable() {
-        val list = listOf(null) + values
+        konst list = listOf(null) + konstues
         list.forEachIndexed { index, item ->
             assertEquals(index, list.binarySearch(item))
 
@@ -45,7 +45,7 @@ class ListBinarySearchTest {
 
     @Test
     fun binarySearchWithComparator() {
-        val list = values.map { IncomparableDataItem(it) }
+        konst list = konstues.map { IncomparableDataItem(it) }
 
         list.forEachIndexed { index, item ->
             assertEquals(index, list.binarySearch(item, comparator))
@@ -61,16 +61,16 @@ class ListBinarySearchTest {
 
     @Test
     fun binarySearchByKey() {
-        val list = values.map { IncomparableDataItem(it) }
+        konst list = konstues.map { IncomparableDataItem(it) }
 
         list.forEachIndexed { index, item ->
-            assertEquals(index, list.binarySearchBy(item.value) { it.value })
-            assertEquals(notFound(index), list.binarySearchBy(item.value.pred()) { it.value })
-            assertEquals(notFound(index + 1), list.binarySearchBy(item.value.succ()) { it.value })
+            assertEquals(index, list.binarySearchBy(item.konstue) { it.konstue })
+            assertEquals(notFound(index), list.binarySearchBy(item.konstue.pred()) { it.konstue })
+            assertEquals(notFound(index + 1), list.binarySearchBy(item.konstue.succ()) { it.konstue })
 
             if (index > 0) {
-                index.let { from -> assertEquals(notFound(from), list.binarySearchBy(list.first().value, fromIndex = from) { it.value }) }
-                (list.size - index).let { to -> assertEquals(notFound(to), list.binarySearchBy(list.last().value, toIndex = to) { it.value }) }
+                index.let { from -> assertEquals(notFound(from), list.binarySearchBy(list.first().konstue, fromIndex = from) { it.konstue }) }
+                (list.size - index).let { to -> assertEquals(notFound(to), list.binarySearchBy(list.last().konstue, toIndex = to) { it.konstue }) }
             }
         }
     }
@@ -78,19 +78,19 @@ class ListBinarySearchTest {
 
     @Test
     fun binarySearchByKeyWithComparator() {
-        val list = values.map { IncomparableDataItem(IncomparableDataItem(it)) }
+        konst list = konstues.map { IncomparableDataItem(IncomparableDataItem(it)) }
 
         list.forEachIndexed { index, item ->
-            assertEquals(index, list.binarySearch { comparator.compare(it.value, item.value) })
-            assertEquals(notFound(index), list.binarySearch { comparator.compare(it.value, item.value.pred()) })
-            assertEquals(notFound(index + 1), list.binarySearch { comparator.compare(it.value, item.value.succ()) })
+            assertEquals(index, list.binarySearch { comparator.compare(it.konstue, item.konstue) })
+            assertEquals(notFound(index), list.binarySearch { comparator.compare(it.konstue, item.konstue.pred()) })
+            assertEquals(notFound(index + 1), list.binarySearch { comparator.compare(it.konstue, item.konstue.succ()) })
 
             if (index > 0) {
                 index.let { from ->
-                    assertEquals(notFound(from), list.binarySearch(fromIndex = from) { comparator.compare(it.value, list.first().value) })
+                    assertEquals(notFound(from), list.binarySearch(fromIndex = from) { comparator.compare(it.konstue, list.first().konstue) })
                 }
                 (list.size - index).let { to ->
-                    assertEquals(notFound(to), list.binarySearch(toIndex = to) { comparator.compare(it.value, list.last().value) })
+                    assertEquals(notFound(to), list.binarySearch(toIndex = to) { comparator.compare(it.konstue, list.last().konstue) })
                 }
             }
         }
@@ -98,7 +98,7 @@ class ListBinarySearchTest {
 
     @Test
     fun binarySearchByMultipleKeys() {
-        val list = values.flatMap { v1 -> values.map { v2 -> Pair(v1, v2) } }
+        konst list = konstues.flatMap { v1 -> konstues.map { v2 -> Pair(v1, v2) } }
 
         list.forEachIndexed { index, item ->
             assertEquals(index, list.binarySearch { compareValuesBy(it, item, { it.first }, { it.second }) })
@@ -107,9 +107,9 @@ class ListBinarySearchTest {
 }
 
 
-private data class IncomparableDataItem<T>(public val value: T)
-private fun IncomparableDataItem<Int>.pred(): IncomparableDataItem<Int> = IncomparableDataItem(value - 1)
-private fun IncomparableDataItem<Int>.succ(): IncomparableDataItem<Int> = IncomparableDataItem(value + 1)
+private data class IncomparableDataItem<T>(public konst konstue: T)
+private fun IncomparableDataItem<Int>.pred(): IncomparableDataItem<Int> = IncomparableDataItem(konstue - 1)
+private fun IncomparableDataItem<Int>.succ(): IncomparableDataItem<Int> = IncomparableDataItem(konstue + 1)
 private fun Int.pred() = dec()
 private fun Int.succ() = inc()
 

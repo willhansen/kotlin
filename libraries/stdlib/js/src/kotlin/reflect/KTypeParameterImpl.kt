@@ -8,10 +8,10 @@ package kotlin.reflect.js.internal
 import kotlin.reflect.*
 
 internal data class KTypeParameterImpl(
-    override val name: String,
-    override val upperBounds: List<KType>,
-    override val variance: KVariance,
-    override val isReified: Boolean
+    override konst name: String,
+    override konst upperBounds: List<KType>,
+    override konst variance: KVariance,
+    override konst isReified: Boolean
 ) : KTypeParameter {
     override fun toString(): String = name
 }

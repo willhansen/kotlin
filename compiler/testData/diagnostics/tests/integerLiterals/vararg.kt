@@ -1,8 +1,8 @@
 // FIR_DUMP
 
-fun <A : Comparable<A>> arrayData(vararg values: A): A = null!!
+fun <A : Comparable<A>> arrayData(vararg konstues: A): A = null!!
 
-fun <A> arrayDataNoBound(vararg values: A): A = null!!
+fun <A> arrayDataNoBound(vararg konstues: A): A = null!!
 
 fun test(b: Byte) {
     select(<!TYPE_MISMATCH!>arrayData(1)<!>, b)

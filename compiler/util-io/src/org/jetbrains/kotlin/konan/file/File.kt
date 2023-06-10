@@ -15,44 +15,44 @@ import java.nio.channels.FileChannel
 import java.nio.file.*
 import java.nio.file.attribute.BasicFileAttributes
 
-data class File constructor(internal val javaPath: Path) {
+data class File constructor(internal konst javaPath: Path) {
     constructor(parent: Path, child: String): this(parent.resolve(child))
     constructor(parent: File, child: String): this(parent.javaPath.resolve(child))
     constructor(parent: File, child: File): this(parent.javaPath.resolve(child.javaPath))
     constructor(path: String): this(Paths.get(path))
     constructor(parent: String, child: String): this(Paths.get(parent, child))
 
-    val path: String
+    konst path: String
         get() = javaPath.toString()
-    val absolutePath: String
+    konst absolutePath: String
         get() = javaPath.toAbsolutePath().toString()
-    val absoluteFile: File
+    konst absoluteFile: File
         get() = File(absolutePath)
-    val canonicalPath: String
+    konst canonicalPath: String
         get() = javaPath.toFile().canonicalPath
-    val canonicalFile: File
+    konst canonicalFile: File
         get() = File(canonicalPath)
 
-    val name: String
+    konst name: String
         get() = javaPath.fileName.toString().removeSuffixIfPresent(separator) // https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8153248
-    val extension: String
+    konst extension: String
         get() = name.substringAfterLast('.', "")
-    val parent: String
+    konst parent: String
         get() = javaPath.parent.toString()
-    val parentFile: File
+    konst parentFile: File
         get() = File(javaPath.parent)
 
-    val exists
+    konst exists
         get() = Files.exists(javaPath)
-    val isDirectory
+    konst isDirectory
         get() = Files.isDirectory(javaPath)
-    val isFile
+    konst isFile
         get() = Files.isRegularFile(javaPath)
-    val isAbsolute
+    konst isAbsolute
         get() = javaPath.isAbsolute
-    val listFiles: List<File>
+    konst listFiles: List<File>
         get() = Files.newDirectoryStream(javaPath).use { stream -> stream.map(::File) }
-    val listFilesOrEmpty: List<File>
+    konst listFilesOrEmpty: List<File>
         get() = if (exists) listFiles else emptyList()
 
     fun child(name: String) = File(this, name)
@@ -104,11 +104,11 @@ data class File constructor(internal val javaPath: Path) {
 
     fun map(mode: FileChannel.MapMode = FileChannel.MapMode.READ_ONLY,
             start: Long = 0, size: Long = -1): MappedByteBuffer {
-        val file = RandomAccessFile(path,
+        konst file = RandomAccessFile(path,
                                     if (mode == FileChannel.MapMode.READ_ONLY) "r" else "rw")
-        val fileSize = if (mode == FileChannel.MapMode.READ_ONLY)
+        konst fileSize = if (mode == FileChannel.MapMode.READ_ONLY)
             file.length() else size.also { assert(size != -1L) }
-        val channel = file.channel
+        konst channel = file.channel
         return channel.map(mode, start, fileSize).also { channel.close() }
     }
 
@@ -144,7 +144,7 @@ data class File constructor(internal val javaPath: Path) {
     }
 
     fun createAsSymlink(target: String) {
-        val targetPath = Paths.get(target)
+        konst targetPath = Paths.get(target)
         if (Files.isSymbolicLink(this.javaPath) && Files.readSymbolicLink(javaPath) == targetPath) {
             return
         }
@@ -159,23 +159,23 @@ data class File constructor(internal val javaPath: Path) {
     fun printWriter() = javaPath.toFile().printWriter()
 
     companion object {
-        val userDir
+        konst userDir
             get() = File(System.getProperty("user.dir"))
 
-        val userHome
+        konst userHome
             get() = File(System.getProperty("user.home"))
 
-        val javaHome
+        konst javaHome
             get() = File(System.getProperty("java.home"))
-        val pathSeparator = java.io.File.pathSeparator
-        val separator = java.io.File.separator
-        val separatorChar = java.io.File.separatorChar
+        konst pathSeparator = java.io.File.pathSeparator
+        konst separator = java.io.File.separator
+        konst separatorChar = java.io.File.separatorChar
     }
 
     fun readStrings() = mutableListOf<String>().also { list -> forEachLine{list.add(it)}}
 
     override fun equals(other: Any?): Boolean {
-        val otherFile = other as? File ?: return false
+        konst otherFile = other as? File ?: return false
         return otherFile.javaPath.toAbsolutePath() == javaPath.toAbsolutePath()
     }
 

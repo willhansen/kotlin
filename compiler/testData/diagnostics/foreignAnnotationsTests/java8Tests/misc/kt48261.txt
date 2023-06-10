@@ -4,7 +4,7 @@ public fun go(/*0*/ myList: MyList<kotlin.String>): kotlin.Boolean
 
 public abstract class MyCollection</*0*/ E : kotlin.Any!> : java.util.AbstractCollection<E!> {
     public constructor MyCollection</*0*/ E : kotlin.Any!>()
-    public abstract override /*1*/ /*fake_override*/ val size: kotlin.Int
+    public abstract override /*1*/ /*fake_override*/ konst size: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ element: E!): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun addAll(/*0*/ elements: kotlin.collections.Collection<E!>): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun clear(): kotlin.Unit
@@ -27,14 +27,14 @@ public abstract class MyCollection</*0*/ E : kotlin.Any!> : java.util.AbstractCo
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    invisible_fake const final override /*1*/ /*fake_override*/ val MAX_ARRAY_SIZE: kotlin.Int = 2147483639
+    invisible_fake const final override /*1*/ /*fake_override*/ konst MAX_ARRAY_SIZE: kotlin.Int = 2147483639
     invisible_fake open override /*1*/ /*fake_override*/ fun </*0*/ T : kotlin.Any!> finishToArray(/*0*/ p0: kotlin.Array<(out) T!>!, /*1*/ p1: kotlin.collections.(Mutable)Iterator<*>!): kotlin.Array<(out) T!>!
     invisible_fake open override /*1*/ /*fake_override*/ fun hugeCapacity(/*0*/ p0: kotlin.Int): kotlin.Int
 }
 
 public abstract class MyList</*0*/ E : kotlin.Any!> : MyCollection<E!>, kotlin.collections.MutableList<@org.jetbrains.annotations.NotNull E & Any> {
     public constructor MyList</*0*/ E : kotlin.Any!>()
-    public abstract override /*2*/ /*fake_override*/ val size: kotlin.Int
+    public abstract override /*2*/ /*fake_override*/ konst size: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun add(/*0*/ element: E & Any): kotlin.Boolean
     public abstract override /*1*/ /*fake_override*/ fun add(/*0*/ index: kotlin.Int, /*1*/ element: @org.jetbrains.annotations.NotNull E & Any): kotlin.Unit
     public abstract override /*1*/ /*fake_override*/ fun addAll(/*0*/ index: kotlin.Int, /*1*/ elements: kotlin.collections.Collection<@org.jetbrains.annotations.NotNull E & Any>): kotlin.Boolean
@@ -69,7 +69,7 @@ public abstract class MyList</*0*/ E : kotlin.Any!> : MyCollection<E!>, kotlin.c
     public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    invisible_fake const final override /*1*/ /*fake_override*/ val MAX_ARRAY_SIZE: kotlin.Int = 2147483639
+    invisible_fake const final override /*1*/ /*fake_override*/ konst MAX_ARRAY_SIZE: kotlin.Int = 2147483639
     invisible_fake open override /*1*/ /*fake_override*/ fun </*0*/ T : kotlin.Any!> finishToArray(/*0*/ p0: kotlin.Array<(out) T!>!, /*1*/ p1: kotlin.collections.(Mutable)Iterator<*>!): kotlin.Array<(out) T!>!
     invisible_fake open override /*1*/ /*fake_override*/ fun hugeCapacity(/*0*/ p0: kotlin.Int): kotlin.Int
 }

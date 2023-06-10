@@ -27,11 +27,11 @@ package kotlin.text.regex
  * Note: In Kotlin we use only the "anchoring bounds" mode when "$" matches the end of a match region.
  * See: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html#useAnchoringBounds-boolean-
  */
-internal class EOLSet(val consCounter: Int, val lt: AbstractLineTerminator, val multiline: Boolean = false) : SimpleSet() {
+internal class EOLSet(konst consCounter: Int, konst lt: AbstractLineTerminator, konst multiline: Boolean = false) : SimpleSet() {
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val rightBound = testString.length
-        val remainingChars = rightBound - startIndex
+        konst rightBound = testString.length
+        konst remainingChars = rightBound - startIndex
 
         when {
             startIndex >= rightBound ||
@@ -46,11 +46,11 @@ internal class EOLSet(val consCounter: Int, val lt: AbstractLineTerminator, val 
     }
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean {
-        val result = matchResult.getConsumed(consCounter) != 0
+        konst result = matchResult.getConsumed(consCounter) != 0
         matchResult.setConsumed(consCounter, -1)
         return result
     }
 
-    override val name: String
+    override konst name: String
             get()= "<EOL>"
 }

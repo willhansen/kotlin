@@ -35,8 +35,8 @@ import org.jetbrains.kotlin.psi.stubs.KotlinClassOrObjectStub
 import org.jetbrains.kotlin.utils.addToStdlib.ifTrue
 
 abstract class SymbolLightClassForClassLike<SType : KtClassOrObjectSymbol> protected constructor(
-    internal val classOrObjectDeclaration: KtClassOrObject?,
-    internal val classOrObjectSymbolPointer: KtSymbolPointer<SType>,
+    internal konst classOrObjectDeclaration: KtClassOrObject?,
+    internal konst classOrObjectSymbolPointer: KtSymbolPointer<SType>,
     ktModule: KtModule,
     manager: PsiManager,
 ) : SymbolLightClassBase(ktModule, manager),
@@ -56,16 +56,16 @@ abstract class SymbolLightClassForClassLike<SType : KtClassOrObjectSymbol> prote
         manager = manager,
     )
 
-    override val kotlinOrigin: KtClassOrObject? get() = classOrObjectDeclaration
+    override konst kotlinOrigin: KtClassOrObject? get() = classOrObjectDeclaration
 
     internal inline fun <T> withClassOrObjectSymbol(crossinline action: KtAnalysisSession.(SType) -> T): T =
         classOrObjectSymbolPointer.withSymbol(ktModule, action)
 
-    override val isTopLevel: Boolean by lazyPub {
+    override konst isTopLevel: Boolean by lazyPub {
         classOrObjectDeclaration?.isTopLevel() ?: withClassOrObjectSymbol { it.symbolKind == KtSymbolKind.TOP_LEVEL }
     }
 
-    private val _isDeprecated: Boolean by lazyPub {
+    private konst _isDeprecated: Boolean by lazyPub {
         withClassOrObjectSymbol { it.hasDeprecatedAnnotation() }
     }
 
@@ -82,7 +82,7 @@ abstract class SymbolLightClassForClassLike<SType : KtClassOrObjectSymbol> prote
 
     abstract override fun getImplementsList(): PsiReferenceList?
 
-    private val _typeParameterList: PsiTypeParameterList? by lazyPub {
+    private konst _typeParameterList: PsiTypeParameterList? by lazyPub {
         hasTypeParameters().ifTrue {
             SymbolLightTypeParameterList(
                 owner = this,
@@ -111,11 +111,11 @@ abstract class SymbolLightClassForClassLike<SType : KtClassOrObjectSymbol> prote
     override fun isWritable() = false
     override fun getNavigationElement(): PsiElement = classOrObjectDeclaration ?: this
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean =
-        isEquivalentToByName(another) ||
-                isOriginEquivalentTo(another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean =
+        isEquikonstentToByName(another) ||
+                isOriginEquikonstentTo(another)
 
-    protected fun isEquivalentToByName(another: PsiElement?): Boolean = basicIsEquivalentTo(this, another) ||
+    protected fun isEquikonstentToByName(another: PsiElement?): Boolean = basicIsEquikonstentTo(this, another) ||
             another is PsiClass && qualifiedName != null && another.qualifiedName == qualifiedName
 
     override fun equals(other: Any?): Boolean {
@@ -149,7 +149,7 @@ abstract class SymbolLightClassForClassLike<SType : KtClassOrObjectSymbol> prote
     override fun getElementType(): IStubElementType<out StubElement<*>, *>? = classOrObjectDeclaration?.elementType
     override fun getStub(): KotlinClassOrObjectStub<out KtClassOrObject>? = classOrObjectDeclaration?.stub
 
-    override val originKind: LightClassOriginKind get() = LightClassOriginKind.SOURCE
+    override konst originKind: LightClassOriginKind get() = LightClassOriginKind.SOURCE
 
     override fun getQualifiedName(): String? = classOrObjectDeclaration?.fqName?.asString()
 
@@ -159,8 +159,8 @@ abstract class SymbolLightClassForClassLike<SType : KtClassOrObjectSymbol> prote
     override fun getSuperTypes(): Array<PsiClassType> = PsiClassImplUtil.getSuperTypes(this)
 
     override fun getContainingClass(): PsiClass? {
-        val containingBody = classOrObjectDeclaration?.parent
-        return when (val parent = containingBody?.parent) {
+        konst containingBody = classOrObjectDeclaration?.parent
+        return when (konst parent = containingBody?.parent) {
             is KtClassOrObject -> parent.toLightClass()
             is KtScript -> parent.toLightClass()
             else -> null

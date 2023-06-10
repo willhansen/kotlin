@@ -28,18 +28,18 @@ import java.util.concurrent.ConcurrentHashMap
  * Keeps track of replacement functions and inline class box/unbox functions.
  */
 class MemoizedInlineClassReplacements(
-    private val mangleReturnTypes: Boolean,
+    private konst mangleReturnTypes: Boolean,
     irFactory: IrFactory,
     context: JvmBackendContext
 ) : MemoizedValueClassAbstractReplacements(irFactory, context, LockBasedStorageManager("inline-class-replacements")) {
 
-    val originalFunctionForStaticReplacement: MutableMap<IrFunction, IrFunction> = ConcurrentHashMap()
-    val originalFunctionForMethodReplacement: MutableMap<IrFunction, IrFunction> = ConcurrentHashMap()
+    konst originalFunctionForStaticReplacement: MutableMap<IrFunction, IrFunction> = ConcurrentHashMap()
+    konst originalFunctionForMethodReplacement: MutableMap<IrFunction, IrFunction> = ConcurrentHashMap()
 
     /**
      * Get a replacement for a function or a constructor.
      */
-    override val getReplacementFunctionImpl: (IrFunction) -> IrSimpleFunction? =
+    override konst getReplacementFunctionImpl: (IrFunction) -> IrSimpleFunction? =
         storageManager.createMemoizedFunctionWithNullableValues {
             when {
                 // Don't mangle anonymous or synthetic functions, except for generated SAM wrapper methods
@@ -87,10 +87,10 @@ class MemoizedInlineClassReplacements(
 
     /**
      * Get the box function for an inline class. Concretely, this is a synthetic
-     * static function named "box-impl" which takes an unboxed value and returns
-     * a boxed value.
+     * static function named "box-impl" which takes an unboxed konstue and returns
+     * a boxed konstue.
      */
-    val getBoxFunction: (IrClass) -> IrSimpleFunction =
+    konst getBoxFunction: (IrClass) -> IrSimpleFunction =
         storageManager.createMemoizedFunction { irClass ->
             require(irClass.isSingleFieldValueClass)
             irFactory.buildFun {
@@ -111,7 +111,7 @@ class MemoizedInlineClassReplacements(
      * Get the unbox function for an inline class. Concretely, this is a synthetic
      * member function named "unbox-impl" which returns an unboxed result.
      */
-    val getUnboxFunction: (IrClass) -> IrSimpleFunction =
+    konst getUnboxFunction: (IrClass) -> IrSimpleFunction =
         storageManager.createMemoizedFunction { irClass ->
             require(irClass.isSingleFieldValueClass)
             irFactory.buildFun {
@@ -124,19 +124,19 @@ class MemoizedInlineClassReplacements(
             }
         }
 
-    private val specializedEqualsCache = storageManager.createCacheWithNotNullValues<IrClass, IrSimpleFunction>()
+    private konst specializedEqualsCache = storageManager.createCacheWithNotNullValues<IrClass, IrSimpleFunction>()
     fun getSpecializedEqualsMethod(irClass: IrClass, irBuiltIns: IrBuiltIns): IrSimpleFunction {
         require(irClass.isSingleFieldValueClass)
         return specializedEqualsCache.computeIfAbsent(irClass) {
             irFactory.buildFun {
                 name = InlineClassDescriptorResolver.SPECIALIZED_EQUALS_NAME
-                // TODO: Revisit this once we allow user defined equals methods in inline/multi-field value classes.
+                // TODO: Revisit this once we allow user defined equals methods in inline/multi-field konstue classes.
                 origin = JvmLoweredDeclarationOrigin.INLINE_CLASS_GENERATED_IMPL_METHOD
                 returnType = irBuiltIns.booleanType
             }.apply {
                 parent = irClass
                 // We ignore type arguments here, since there is no good way to go from type arguments to types in the IR anyway.
-                val typeArgument =
+                konst typeArgument =
                     IrSimpleTypeImpl(irClass.symbol, false, List(irClass.typeParameters.size) { IrStarProjectionImpl }, listOf())
                 addValueParameter {
                     name = InlineClassDescriptorResolver.SPECIALIZED_EQUALS_FIRST_PARAMETER_NAME
@@ -159,10 +159,10 @@ class MemoizedInlineClassReplacements(
                 this, index = -1, name = Name.identifier(function.extensionReceiverName(context.state))
             )
             contextReceiverParametersCount = function.contextReceiverParametersCount
-            valueParameters = function.valueParameters.mapIndexed { index, parameter ->
+            konstueParameters = function.konstueParameters.mapIndexed { index, parameter ->
                 parameter.copyTo(this, index = index, defaultValue = null).also {
                     // Assuming that constructors and non-override functions are always replaced with the unboxed
-                    // equivalent, deep-copying the value here is unnecessary. See `JvmInlineClassLowering`.
+                    // equikonstent, deep-copying the konstue here is unnecessary. See `JvmInlineClassLowering`.
                     it.defaultValue = parameter.defaultValue?.patchDeclarationParents(this)
                 }
             }
@@ -173,7 +173,7 @@ class MemoizedInlineClassReplacements(
         buildReplacement(function, JvmLoweredDeclarationOrigin.STATIC_INLINE_CLASS_REPLACEMENT, noFakeOverride = true) {
             originalFunctionForStaticReplacement[this] = function
 
-            val newValueParameters = mutableListOf<IrValueParameter>()
+            konst newValueParameters = mutableListOf<IrValueParameter>()
             if (function.dispatchReceiverParameter != null) {
                 // FAKE_OVERRIDEs have broken dispatch receivers
                 newValueParameters += function.parentAsClass.thisReceiver!!.copyTo(
@@ -182,7 +182,7 @@ class MemoizedInlineClassReplacements(
                 )
             }
             if (function.contextReceiverParametersCount != 0) {
-                function.valueParameters.take(function.contextReceiverParametersCount).forEachIndexed { i, contextReceiver ->
+                function.konstueParameters.take(function.contextReceiverParametersCount).forEachIndexed { i, contextReceiver ->
                     newValueParameters += contextReceiver.copyTo(
                         this, index = newValueParameters.size, name = Name.identifier("contextReceiver$i"),
                         origin = IrDeclarationOrigin.MOVED_CONTEXT_RECEIVER
@@ -195,13 +195,13 @@ class MemoizedInlineClassReplacements(
                     origin = IrDeclarationOrigin.MOVED_EXTENSION_RECEIVER
                 )
             }
-            for (parameter in function.valueParameters.drop(function.contextReceiverParametersCount)) {
+            for (parameter in function.konstueParameters.drop(function.contextReceiverParametersCount)) {
                 newValueParameters += parameter.copyTo(this, index = newValueParameters.size, defaultValue = null).also {
                     // See comment next to a similar line above.
                     it.defaultValue = parameter.defaultValue?.patchDeclarationParents(this)
                 }
             }
-            valueParameters = newValueParameters
+            konstueParameters = newValueParameters
             context.remapMultiFieldValueClassStructure(function, this, parametersMappingOrNull = null)
         }
 
@@ -211,12 +211,12 @@ class MemoizedInlineClassReplacements(
         noFakeOverride: Boolean = false,
         body: IrFunction.() -> Unit
     ): IrSimpleFunction {
-        val useOldManglingScheme = context.state.useOldManglingSchemeForFunctionsWithInlineClassesInSignatures
-        val replacement = buildReplacementInner(function, replacementOrigin, noFakeOverride, useOldManglingScheme, body)
+        konst useOldManglingScheme = context.state.useOldManglingSchemeForFunctionsWithInlineClassesInSignatures
+        konst replacement = buildReplacementInner(function, replacementOrigin, noFakeOverride, useOldManglingScheme, body)
         // When using the new mangling scheme we might run into dependencies using the old scheme
         // for which we will fall back to the old mangling scheme as well.
         if (!useOldManglingScheme && replacement.name.asString().contains('-') && function.parentClassId != null) {
-            val resolved = (function as? IrSimpleFunction)?.resolveFakeOverride(true)
+            konst resolved = (function as? IrSimpleFunction)?.resolveFakeOverride(true)
             if (resolved?.parentClassId?.let { classFileContainsMethod(it, replacement, context) } == false) {
                 return buildReplacementInner(function, replacementOrigin, noFakeOverride, true, body)
             }

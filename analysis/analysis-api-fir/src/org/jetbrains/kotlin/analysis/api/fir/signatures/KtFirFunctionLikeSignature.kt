@@ -39,19 +39,19 @@ internal sealed class KtFirFunctionLikeSignature<out S : KtFunctionLikeSymbol> :
 }
 
 internal class KtFirFunctionLikeDummySignature<out S : KtFunctionLikeSymbol>(
-    override val token: KtLifetimeToken,
-    override val firSymbol: FirFunctionSymbol<*>,
-    override val firSymbolBuilder: KtSymbolByFirBuilder,
+    override konst token: KtLifetimeToken,
+    override konst firSymbol: FirFunctionSymbol<*>,
+    override konst firSymbolBuilder: KtSymbolByFirBuilder,
 ) : KtFirFunctionLikeSignature<S>() {
     @Suppress("UNCHECKED_CAST")
-    override val symbol: S
+    override konst symbol: S
         get() = withValidityAssertion { firSymbol.buildSymbol(firSymbolBuilder) as S }
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { symbol.returnType }
-    override val receiverType: KtType?
+    override konst receiverType: KtType?
         get() = withValidityAssertion { symbol.receiverType }
-    override val valueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>> by cached {
-        firSymbol.valueParameterSymbols.map { KtFirVariableLikeDummySignature(token, it, firSymbolBuilder) }
+    override konst konstueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>> by cached {
+        firSymbol.konstueParameterSymbols.map { KtFirVariableLikeDummySignature(token, it, firSymbolBuilder) }
     }
 
     override fun substitute(substitutor: KtSubstitutor): KtFirFunctionLikeSignature<S> = withValidityAssertion {
@@ -63,26 +63,26 @@ internal class KtFirFunctionLikeDummySignature<out S : KtFunctionLikeSymbol>(
 }
 
 internal class KtFirFunctionLikeSubstitutorBasedSignature<out S : KtFunctionLikeSymbol>(
-    override val token: KtLifetimeToken,
-    override val firSymbol: FirFunctionSymbol<*>,
-    override val firSymbolBuilder: KtSymbolByFirBuilder,
-    override val coneSubstitutor: ConeSubstitutor = ConeSubstitutor.Empty,
+    override konst token: KtLifetimeToken,
+    override konst firSymbol: FirFunctionSymbol<*>,
+    override konst firSymbolBuilder: KtSymbolByFirBuilder,
+    override konst coneSubstitutor: ConeSubstitutor = ConeSubstitutor.Empty,
 ) : KtFirFunctionLikeSignature<S>(), SubstitutorBasedSignature {
     @Suppress("UNCHECKED_CAST")
-    override val symbol: S
+    override konst symbol: S
         get() = withValidityAssertion { firSymbol.buildSymbol(firSymbolBuilder) as S }
-    override val returnType: KtType by cached {
+    override konst returnType: KtType by cached {
         firSymbolBuilder.typeBuilder.buildKtType(coneSubstitutor.substituteOrSelf(firSymbol.resolvedReturnType))
     }
-    override val receiverType: KtType? by cached {
-        val receiverTypeRef = when (val fir = firSymbol.fir) {
+    override konst receiverType: KtType? by cached {
+        konst receiverTypeRef = when (konst fir = firSymbol.fir) {
             is FirPropertyAccessor -> fir.propertySymbol.resolvedReceiverTypeRef
             else -> firSymbol.resolvedReceiverTypeRef
         }
         receiverTypeRef?.let { firSymbolBuilder.typeBuilder.buildKtType(coneSubstitutor.substituteOrSelf(it.type)) }
     }
-    override val valueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>> by cached {
-        firSymbol.fir.valueParameters.map { firValueParameter ->
+    override konst konstueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>> by cached {
+        firSymbol.fir.konstueParameters.map { firValueParameter ->
             KtFirVariableLikeSubstitutorBasedSignature(token, firValueParameter.symbol, firSymbolBuilder, coneSubstitutor)
         }
     }
@@ -90,7 +90,7 @@ internal class KtFirFunctionLikeSubstitutorBasedSignature<out S : KtFunctionLike
     override fun substitute(substitutor: KtSubstitutor): KtFirFunctionLikeSignature<S> = withValidityAssertion {
         if (substitutor is KtSubstitutor.Empty) return@withValidityAssertion this
         require(substitutor is AbstractKtFirSubstitutor<*>)
-        val chainedSubstitutor = ChainedSubstitutor(coneSubstitutor, substitutor.substitutor)
+        konst chainedSubstitutor = ChainedSubstitutor(coneSubstitutor, substitutor.substitutor)
 
         KtFirFunctionLikeSubstitutorBasedSignature(token, firSymbol, firSymbolBuilder, chainedSubstitutor)
     }

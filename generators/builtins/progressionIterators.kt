@@ -22,36 +22,36 @@ import org.jetbrains.kotlin.generators.builtins.ProgressionKind.*
 import java.io.PrintWriter
 
 fun integerProgressionIterator(kind: ProgressionKind): String {
-    val t = kind.capitalized
+    konst t = kind.capitalized
 
-    val incrementType = progressionIncrementType(kind)
+    konst incrementType = progressionIncrementType(kind)
 
-    val (toInt, toType) = when (kind) {
+    konst (toInt, toType) = when (kind) {
         CHAR -> ".code" to ".toChar()"
         else -> "" to ""
     }
 
     return """/**
- * An iterator over a progression of values of type `$t`.
- * @property step the number by which the value is incremented on each step.
+ * An iterator over a progression of konstues of type `$t`.
+ * @property step the number by which the konstue is incremented on each step.
  */
-internal class ${t}ProgressionIterator(first: $t, last: $t, val step: $incrementType) : ${t}Iterator() {
-    private val finalElement: $incrementType = last$toInt
+internal class ${t}ProgressionIterator(first: $t, last: $t, konst step: $incrementType) : ${t}Iterator() {
+    private konst finalElement: $incrementType = last$toInt
     private var hasNext: Boolean = if (step > 0) first <= last else first >= last
     private var next: $incrementType = if (hasNext) first$toInt else finalElement
 
     override fun hasNext(): Boolean = hasNext
 
     override fun next$t(): $t {
-        val value = next
-        if (value == finalElement) {
+        konst konstue = next
+        if (konstue == finalElement) {
             if (!hasNext) throw kotlin.NoSuchElementException()
             hasNext = false
         }
         else {
             next += step
         }
-        return value$toType
+        return konstue$toType
     }
 }"""
 }
@@ -60,7 +60,7 @@ internal class ${t}ProgressionIterator(first: $t, last: $t, val step: $increment
 class GenerateProgressionIterators(out: PrintWriter) : BuiltInsSourceGenerator(out) {
     override fun getPackage() = "kotlin.ranges"
     override fun generateBody() {
-        for (kind in ProgressionKind.values()) {
+        for (kind in ProgressionKind.konstues()) {
             out.println(integerProgressionIterator(kind))
             out.println()
         }

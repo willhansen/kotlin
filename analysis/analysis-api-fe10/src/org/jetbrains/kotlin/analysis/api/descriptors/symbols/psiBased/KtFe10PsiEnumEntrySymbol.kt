@@ -31,26 +31,26 @@ import org.jetbrains.kotlin.psi.psiUtil.containingClass
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiEnumEntrySymbol(
-    override val psi: KtEnumEntry,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtEnumEntry,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtEnumEntrySymbol(), KtFe10PsiSymbol<KtEnumEntry, ClassDescriptor> {
-    override val descriptor: ClassDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+    override konst descriptor: ClassDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
         bindingContext[BindingContext.CLASS, psi]
     }
 
-    override val containingEnumClassIdIfNonLocal: ClassId?
+    override konst containingEnumClassIdIfNonLocal: ClassId?
         get() = withValidityAssertion {
-            val containingClass = psi.containingClass()?.takeIf { it.isEnum() } ?: return null
+            konst containingClass = psi.containingClass()?.takeIf { it.isEnum() } ?: return null
             return containingClass.getClassId()
         }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { psi.callableIdIfNonLocal }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion {
-            val containingDescriptor = descriptor?.containingDeclaration
+            konst containingDescriptor = descriptor?.containingDeclaration
             if (containingDescriptor is ClassDescriptor && containingDescriptor.kind == ClassKind.ENUM_CLASS) {
                 return containingDescriptor.defaultType.toKtType(analysisContext)
             } else {
@@ -58,7 +58,7 @@ internal class KtFe10PsiEnumEntrySymbol(
             }
         }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { psi.nameAsSafeName }
 
     context(KtAnalysisSession)

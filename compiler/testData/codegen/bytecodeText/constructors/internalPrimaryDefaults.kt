@@ -1,4 +1,4 @@
-class A internal constructor(val x: Int = 0)
+class A internal constructor(konst x: Int = 0)
 
 // 1 public <init>\(\)V
 // 1 public <init>\(I\)V

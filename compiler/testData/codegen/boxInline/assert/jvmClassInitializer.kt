@@ -17,7 +17,7 @@ import test.*
 class B {
     companion object {
         @JvmField
-        val triggered: Boolean = try {
+        konst triggered: Boolean = try {
             A().doAssert()
             false
         } catch (e: AssertionError) {
@@ -29,7 +29,7 @@ class B {
 class Dummy
 
 fun box(): String {
-    val loader = Dummy::class.java.classLoader
+    konst loader = Dummy::class.java.classLoader
     loader.setDefaultAssertionStatus(false)
     return if (loader.loadClass("B").getField("triggered").get(null) == true)
         "FAIL: assertion triggered"

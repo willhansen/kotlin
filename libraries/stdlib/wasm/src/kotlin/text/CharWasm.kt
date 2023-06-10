@@ -27,7 +27,7 @@ public actual fun Char.isHighSurrogate(): Boolean = this in Char.MIN_HIGH_SURROG
  */
 public actual fun Char.isLowSurrogate(): Boolean = this in Char.MIN_LOW_SURROGATE..Char.MAX_LOW_SURROGATE
 
-/** Converts a surrogate pair to a unicode code point. Doesn't validate that the characters are a valid surrogate pair. */
+/** Converts a surrogate pair to a unicode code point. Doesn't konstidate that the characters are a konstid surrogate pair. */
 internal fun Char.Companion.toCodePoint(high: Char, low: Char): Int =
     (((high - MIN_HIGH_SURROGATE) shl 10) or (low - MIN_LOW_SURROGATE)) + 0x10000
 
@@ -47,8 +47,8 @@ internal fun Char.Companion.toChars(codePoint: Int): CharArray =
     when {
         codePoint in 0 until MIN_SUPPLEMENTARY_CODE_POINT -> charArrayOf(codePoint.toChar())
         codePoint in MIN_SUPPLEMENTARY_CODE_POINT..MAX_CODE_POINT -> {
-            val low = ((codePoint - 0x10000) and 0x3FF) + MIN_LOW_SURROGATE.toInt()
-            val high = (((codePoint - 0x10000) ushr 10) and 0x3FF) + MIN_HIGH_SURROGATE.toInt()
+            konst low = ((codePoint - 0x10000) and 0x3FF) + MIN_LOW_SURROGATE.toInt()
+            konst high = (((codePoint - 0x10000) ushr 10) and 0x3FF) + MIN_HIGH_SURROGATE.toInt()
             charArrayOf(high.toChar(), low.toChar())
         }
         else -> throw IllegalArgumentException()

@@ -15,13 +15,13 @@ import kotlin.test.*
  */
 private inline fun <reified T> testReproducibility(seed: Long, generator: Random.() -> T) {
     // Reset seed. This will make Random to start a new sequence
-    val r1 = Random(seed)
-    val first = Array<T>(50, { i -> r1.generator() }).toList()
+    konst r1 = Random(seed)
+    konst first = Array<T>(50, { i -> r1.generator() }).toList()
 
     // Reset seed and try again
-    val r2 = Random(seed)
-    val second = Array<T>(50, { i -> r2.generator() }).toList()
-    assertTrue(first == second, "FAIL: got different sequences of generated values " +
+    konst r2 = Random(seed)
+    konst second = Array<T>(50, { i -> r2.generator() }).toList()
+    assertTrue(first == second, "FAIL: got different sequences of generated konstues " +
             "first: $first, second: $second")
 }
 
@@ -29,12 +29,12 @@ private inline fun <reified T> testReproducibility(seed: Long, generator: Random
  * Tests that setting seed makes random generate different sequence.
  */
 private inline fun <reified T> testDifference(generator: Random.() -> T) {
-    val r1 = Random(12345678L)
-    val first = Array<T>(100, { i -> r1.generator() }).toList()
+    konst r1 = Random(12345678L)
+    konst first = Array<T>(100, { i -> r1.generator() }).toList()
 
-    val r2 = Random(87654321L)
-    val second = Array<T>(100, { i -> r2.generator() }).toList()
-    assertTrue(first != second, "FAIL: got the same sequence of generated values " +
+    konst r2 = Random(87654321L)
+    konst second = Array<T>(100, { i -> r2.generator() }).toList()
+    assertTrue(first != second, "FAIL: got the same sequence of generated konstues " +
             "first: $first, second: $second")
 }
 

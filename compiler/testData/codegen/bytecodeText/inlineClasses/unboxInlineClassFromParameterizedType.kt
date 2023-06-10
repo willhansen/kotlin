@@ -2,7 +2,7 @@
 
 // FILE: utils.kt
 
-inline class Result<T>(val a: Any?) {
+inline class Result<T>(konst a: Any?) {
     fun typed(): T = a as T
 }
 
@@ -11,13 +11,13 @@ inline class Result<T>(val a: Any?) {
 fun <K> materialize(): K = TODO()
 
 fun test(asInt: Result<Int>, asString: Result<String>, asResult: Result<Result<Int>>) {
-    val a1 = materialize<Result<Int>>() // unbox
-    val a2 = materialize<Result<Result<Int>>>() // unbox
+    konst a1 = materialize<Result<Int>>() // unbox
+    konst a2 = materialize<Result<Result<Int>>>() // unbox
 
-    val b1 = asInt.typed() // intValue
-    val b2 = asString.typed()
+    konst b1 = asInt.typed() // intValue
+    konst b2 = asString.typed()
 
-    val c1 = asResult.typed() // unbox
+    konst c1 = asResult.typed() // unbox
 
     materialize<Result<Int>>()
     asInt.typed()
@@ -30,5 +30,5 @@ fun test(asInt: Result<Int>, asString: Result<String>, asResult: Result<Result<I
 // 0 INVOKESTATIC Result\.box
 // 3 INVOKEVIRTUAL Result.unbox
 
-// 0 valueOf
+// 0 konstueOf
 // 1 intValue

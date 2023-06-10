@@ -1,4 +1,4 @@
 // FIR_IDENTICAL
-val f: () -> Unit = {}
+konst f: () -> Unit = {}
 
 typealias F = () -> Unit

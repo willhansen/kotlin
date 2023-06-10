@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val chars: CharSequence = "123"
+    konst chars: CharSequence = "123"
     var optimized = ""
     for (i in 0..chars.length - 1) optimized += chars[i]
 }

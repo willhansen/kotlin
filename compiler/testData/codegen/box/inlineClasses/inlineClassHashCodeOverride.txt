@@ -2,7 +2,7 @@
 @kotlin.Metadata
 public final class A {
     // source: 'inlineClassHashCodeOverride.kt'
-    private final @org.jetbrains.annotations.NotNull field value: MyClass
+    private final @org.jetbrains.annotations.NotNull field konstue: MyClass
     private synthetic method <init>(p0: MyClass): void
     public synthetic final static method box-impl(p0: MyClass): A
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.NotNull p0: MyClass): MyClass

@@ -5,7 +5,7 @@ fun box(): String {
 
     fun localMethod() : String
     {
-        return lazy { methodVar }::value.get()
+        return lazy { methodVar }::konstue.get()
     }
 
     return localMethod()

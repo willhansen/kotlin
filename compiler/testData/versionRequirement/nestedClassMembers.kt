@@ -11,7 +11,7 @@ class Outer {
             fun f() {}
 
             @RequireKotlin("1.3")
-            val x = ""
+            konst x = ""
 
             suspend fun s() {}
         }

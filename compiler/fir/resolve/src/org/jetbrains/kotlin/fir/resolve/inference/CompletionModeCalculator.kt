@@ -42,21 +42,21 @@ fun Candidate.computeCompletionMode(
 private typealias CsCompleterContext = ConstraintSystemCompletionContext
 
 private class CalculatorForNestedCall(
-    private val candidate: Candidate,
-    private val returnType: ConeKotlinType?,
-    private val context: CsCompleterContext,
-    private val oracle: TrivialConstraintTypeInferenceOracle
+    private konst candidate: Candidate,
+    private konst returnType: ConeKotlinType?,
+    private konst context: CsCompleterContext,
+    private konst oracle: TrivialConstraintTypeInferenceOracle
 ) {
     private enum class FixationDirection {
         TO_SUBTYPE, EQUALITY
     }
 
-    private val fixationDirectionsForVariables: MutableMap<VariableWithConstraints, FixationDirection> =
+    private konst fixationDirectionsForVariables: MutableMap<VariableWithConstraints, FixationDirection> =
         newLinkedHashMapWithExpectedSize(context.notFixedTypeVariables.size)
-    private val variablesWithQueuedConstraints = mutableSetOf<TypeVariableMarker>()
-    private val typesToProcess: Queue<KotlinTypeMarker> = ArrayDeque()
+    private konst variablesWithQueuedConstraints = mutableSetOf<TypeVariableMarker>()
+    private konst typesToProcess: Queue<KotlinTypeMarker> = ArrayDeque()
 
-    private val postponedAtoms: List<PostponedResolvedAtom> by lazy {
+    private konst postponedAtoms: List<PostponedResolvedAtom> by lazy {
         candidate.postponedAtoms.filterNot { it.analyzed }
     }
 
@@ -74,12 +74,12 @@ private class CalculatorForNestedCall(
 
     private fun CsCompleterContext.computeDirections() {
         while (typesToProcess.isNotEmpty()) {
-            val type = typesToProcess.poll() ?: break
+            konst type = typesToProcess.poll() ?: break
 
             if (!type.contains { it.typeConstructor() in notFixedTypeVariables })
                 continue
 
-            val fixationDirectionsFromType = mutableSetOf<FixationDirectionForVariable>()
+            konst fixationDirectionsFromType = mutableSetOf<FixationDirectionForVariable>()
             collectRequiredDirectionsForVariables(type, TypeVariance.OUT, fixationDirectionsFromType)
 
             for (directionForVariable in fixationDirectionsFromType) {
@@ -90,7 +90,7 @@ private class CalculatorForNestedCall(
     }
 
     private fun enqueueTypesFromConstraints(variableWithConstraints: VariableWithConstraints) {
-        val variable = variableWithConstraints.typeVariable
+        konst variable = variableWithConstraints.typeVariable
         if (variable !in variablesWithQueuedConstraints) {
             for (constraint in variableWithConstraints.constraints) {
                 typesToProcess.add(constraint.type)
@@ -109,7 +109,7 @@ private class CalculatorForNestedCall(
     }
 
     private fun updateDirection(directionForVariable: FixationDirectionForVariable) {
-        val (variable, newDirection) = directionForVariable
+        konst (variable, newDirection) = directionForVariable
         fixationDirectionsForVariables[variable]?.let { oldDirection ->
             if (oldDirection != FixationDirection.EQUALITY && oldDirection != newDirection)
                 fixationDirectionsForVariables[variable] = FixationDirection.EQUALITY
@@ -118,18 +118,18 @@ private class CalculatorForNestedCall(
         }
     }
 
-    private data class FixationDirectionForVariable(val variable: VariableWithConstraints, val direction: FixationDirection)
+    private data class FixationDirectionForVariable(konst variable: VariableWithConstraints, konst direction: FixationDirection)
 
     private fun CsCompleterContext.collectRequiredDirectionsForVariables(
         type: KotlinTypeMarker, outerVariance: TypeVariance,
         fixationDirectionsCollector: MutableSet<FixationDirectionForVariable>
     ) {
-        val unwrappedType = type.lowerBoundIfFlexible()
-        val typeArgumentsCount = unwrappedType.argumentsCount()
+        konst unwrappedType = type.lowerBoundIfFlexible()
+        konst typeArgumentsCount = unwrappedType.argumentsCount()
         if (typeArgumentsCount > 0 && !unwrappedType.isError()) {
             for (position in 0 until typeArgumentsCount) {
-                val argument = unwrappedType.getArgument(position)
-                val parameter = unwrappedType.typeConstructor().getParameter(position)
+                konst argument = unwrappedType.getArgument(position)
+                konst parameter = unwrappedType.typeConstructor().getParameter(position)
 
                 if (argument.isStarProjection())
                     continue
@@ -150,7 +150,7 @@ private class CalculatorForNestedCall(
         argument: TypeArgumentMarker,
         parameter: TypeParameterMarker
     ): TypeVariance {
-        val effectiveArgumentVariance = AbstractTypeChecker.effectiveVariance(parameter.getVariance(), argument.getVariance())
+        konst effectiveArgumentVariance = AbstractTypeChecker.effectiveVariance(parameter.getVariance(), argument.getVariance())
             ?: TypeVariance.INV // conflicting variance
         return when (outerVariance) {
             TypeVariance.INV -> TypeVariance.INV
@@ -169,13 +169,13 @@ private class CalculatorForNestedCall(
         type: KotlinTypeMarker, compositeVariance: TypeVariance,
         newRequirementsCollector: MutableSet<FixationDirectionForVariable>
     ) {
-        val variableWithConstraints = notFixedTypeVariables[type.typeConstructor()] ?: return
-        val direction = when (compositeVariance) {
+        konst variableWithConstraints = notFixedTypeVariables[type.typeConstructor()] ?: return
+        konst direction = when (compositeVariance) {
             TypeVariance.IN -> FixationDirection.EQUALITY // Assuming that variables in contravariant positions are fixed to subtype
             TypeVariance.OUT -> FixationDirection.TO_SUBTYPE
             TypeVariance.INV -> FixationDirection.EQUALITY
         }
-        val requirement = FixationDirectionForVariable(variableWithConstraints, direction)
+        konst requirement = FixationDirectionForVariable(variableWithConstraints, direction)
         newRequirementsCollector.add(requirement)
     }
 
@@ -183,8 +183,8 @@ private class CalculatorForNestedCall(
         variableWithConstraints: VariableWithConstraints,
         direction: FixationDirection
     ): Boolean {
-        val constraints = variableWithConstraints.constraints
-        val variable = variableWithConstraints.typeVariable
+        konst constraints = variableWithConstraints.constraints
+        konst variable = variableWithConstraints.typeVariable
 
         // ILT constraint tracking is necessary to prevent incorrect full completion from Nothing constraint
         // Consider ILT <: T; Nothing <: T for T requiring lower constraint
@@ -223,7 +223,7 @@ private class CalculatorForNestedCall(
         constraint: Constraint,
         variable: TypeVariableMarker
     ): Boolean {
-        val defaultType = variable.defaultType()
+        konst defaultType = variable.defaultType()
         return constraint.kind.isLower() && postponedAtoms.any { atom ->
             atom.expectedType?.contains { type -> defaultType == type } ?: false
         }

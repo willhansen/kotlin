@@ -23,7 +23,7 @@ fun <T, R> takeInterdependentLambdas(x: (T) -> R, y: (R) -> T) {}
 
 fun <T> takeDependentLambdas(x: (T) -> Int, y: (Int) -> T) {}
 
-class Inv<T>(val x: T)
+class Inv<T>(konst x: T)
 
 fun <T: (Number) -> Unit> selectNumber(arg1: T, arg2: T, arg3: T) = arg1
 
@@ -43,7 +43,7 @@ class A2: Function3<Int, String, Float, Float> {
 
 class A3: KFunction1<Number, String> {
     override fun invoke(p1: Number): String = TODO()
-    override val name: String = TODO()
+    override konst name: String = TODO()
 
     fun foo1(x: Int) {}
     fun foo1(x: Any?) {}
@@ -93,7 +93,7 @@ fun main() {
     select({ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!> }, fun(x: Int) = 1)
 
     // Inferring lambda parameter types by other lambda explicit parameters (lower constraints) and expected type (upper constraints)
-    val x5: (Int) -> Unit = select({ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!> }, { x: Number -> Unit })
+    konst x5: (Int) -> Unit = select({ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!> }, { x: Number -> Unit })
 
     // Inferring lambda parameter types by other lambda explicit parameters (lower constraints) and specified type arguments (equality constraints)
     select(id { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!> }, id(id<(Int) -> Unit> { x: Number -> Unit }))
@@ -107,11 +107,11 @@ fun main() {
     )
 
     // Inferring lambda parameter types by a few expected types (a few upper constraints)
-    val x7: (Int) -> Unit = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.Number, kotlin.Unit>")!>selectNumber(id {}, id {}, id {})<!>
-    val x8: (Int) -> Unit = selectNumber(id { x -> <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>x<!> }, id { x -> }, id { x -> })
-    val x9: (Int) -> Unit = selectNumber(id { }, id { x -> }, id { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>it<!> })
-    val x10: (Int) -> Unit = selectFloat(id { }, id { x -> }, id { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number & kotlin.Comparable<*>")!>it<!> })
-    val x11: (B) -> Unit = selectC(id {  }, id { x -> <!DEBUG_INFO_EXPRESSION_TYPE("A")!>x<!> }, id { <!DEBUG_INFO_EXPRESSION_TYPE("A")!>it<!> })
+    konst x7: (Int) -> Unit = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.Number, kotlin.Unit>")!>selectNumber(id {}, id {}, id {})<!>
+    konst x8: (Int) -> Unit = selectNumber(id { x -> <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>x<!> }, id { x -> }, id { x -> })
+    konst x9: (Int) -> Unit = selectNumber(id { }, id { x -> }, id { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>it<!> })
+    konst x10: (Int) -> Unit = selectFloat(id { }, id { x -> }, id { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number & kotlin.Comparable<*>")!>it<!> })
+    konst x11: (B) -> Unit = selectC(id {  }, id { x -> <!DEBUG_INFO_EXPRESSION_TYPE("A")!>x<!> }, id { <!DEBUG_INFO_EXPRESSION_TYPE("A")!>it<!> })
 
     // Inferring lambda parameter types by expected types (upper constraints) and other lambda explicit parameters (lower constraints)
     /*
@@ -119,10 +119,10 @@ fun main() {
      * K <: (A) -> Unit -> TypeVariable(_RP1) >: A
      * K >: (C) -> TypeVariable(_R) -> TypeVariable(_RP1) <: C
      */
-    val x12 = selectC(id { <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }, <!NO_VALUE_FOR_PARAMETER!>id { x: B -> })<!>
-    val x13 = selectA(id { <!DEBUG_INFO_EXPRESSION_TYPE("A")!>it<!> }, <!NO_VALUE_FOR_PARAMETER!>id { x: C -> })<!>
-    val x14 = selectC(id { <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }, id { x: A -> }, { x -> x })
-    val x15 = selectC(id { <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }, { x: A -> }, id { x -> x })
+    konst x12 = selectC(id { <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }, <!NO_VALUE_FOR_PARAMETER!>id { x: B -> })<!>
+    konst x13 = selectA(id { <!DEBUG_INFO_EXPRESSION_TYPE("A")!>it<!> }, <!NO_VALUE_FOR_PARAMETER!>id { x: C -> })<!>
+    konst x14 = selectC(id { <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }, id { x: A -> }, { x -> x })
+    konst x15 = selectC(id { <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }, { x: A -> }, id { x -> x })
     /*
      * Two upper constraints and one lower
      * K <: (C) -> Unit -> TypeVariable(_RP1) >: C
@@ -130,7 +130,7 @@ fun main() {
      * K >: (A) -> TypeVariable(_R) -> TypeVariable(_RP1) <: A
      * K == intersect(CST(C,  B), A) == A
      */
-    val x16: (C) -> Unit = selectB(id { <!DEBUG_INFO_EXPRESSION_TYPE("A")!>it<!> }, { x -> }, id { x: A -> x })
+    konst x16: (C) -> Unit = selectB(id { <!DEBUG_INFO_EXPRESSION_TYPE("A")!>it<!> }, { x -> }, id { x: A -> x })
 
     // Inferring lambda parameter types by expected types (upper constraints) and specified type arguments (equality constraints) of other lambdas
     /*
@@ -138,13 +138,13 @@ fun main() {
      * K <: (C) -> Unit -> TypeVariable(_RP1) >: C
      * K == (B) -> Unit -> TypeVariable(_RP1) == B
      */
-    val x17: (C) -> Unit = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>selectB(id <!ARGUMENT_TYPE_MISMATCH!>{ <!DEBUG_INFO_EXPRESSION_TYPE("B")!>it<!> }<!>, id <!ARGUMENT_TYPE_MISMATCH!>{ it }<!>, id<(B) -> Unit> { x -> x })<!>
-    val x18: (C) -> Unit = <!TYPE_MISMATCH!>select(id <!ARGUMENT_TYPE_MISMATCH!>{ <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }<!>, <!ARGUMENT_TYPE_MISMATCH!>{ <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }<!>, id<(B) -> Unit> { x -> x })<!>
+    konst x17: (C) -> Unit = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>selectB(id <!ARGUMENT_TYPE_MISMATCH!>{ <!DEBUG_INFO_EXPRESSION_TYPE("B")!>it<!> }<!>, id <!ARGUMENT_TYPE_MISMATCH!>{ it }<!>, id<(B) -> Unit> { x -> x })<!>
+    konst x18: (C) -> Unit = <!TYPE_MISMATCH!>select(id <!ARGUMENT_TYPE_MISMATCH!>{ <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }<!>, <!ARGUMENT_TYPE_MISMATCH!>{ <!DEBUG_INFO_EXPRESSION_TYPE("C")!>it<!> }<!>, id<(B) -> Unit> { x -> x })<!>
 
     // Resolution of extension/non-extension functions combination
-    val x19: String.() -> Unit = select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>this<!> }<!>, <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>)
-    val x20: String.() -> Unit = select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>{ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>this<!> }<!>, (fun(x: String) {}))
-    val x21: String.() -> Unit = select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>, <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>)
+    konst x19: String.() -> Unit = select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>this<!> }<!>, <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>)
+    konst x20: String.() -> Unit = select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>{ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>this<!> }<!>, (fun(x: String) {}))
+    konst x21: String.() -> Unit = select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>, <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>)
     select(id<String.() -> Unit>(fun(x: String) {}), <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>)
     select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function2<kotlin.String, kotlin.String, kotlin.Unit>")!>id(fun String.(x: String) {})<!>, <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function2<kotlin.String, kotlin.String, kotlin.Unit>")!>id(fun(x: String, y: String) {})<!>)
     select(id(fun String.(x: String) {}), id(fun(x: String, y: String) { }), { x: String -> <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>this<!> })
@@ -153,9 +153,9 @@ fun main() {
     // Convert to extension lambda is impossible because the lambda parameter types aren't specified explicitly
     select(id(fun String.(x: String) {}), id(fun(x: String, y: String) { }), <!ARGUMENT_TYPE_MISMATCH!>{ x, <!CANNOT_INFER_PARAMETER_TYPE!>y<!> -> x }<!>)
     select(id(id(fun(x: String, y: String) { }), <!TOO_MANY_ARGUMENTS!>fun String.(x: String) {}<!>), { x, y -> x })
-    val x26: Int.(String) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x: String) = 10<!> // it must be error, see KT-38439
+    konst x26: Int.(String) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x: String) = 10<!> // it must be error, see KT-38439
     // Receiver must be specified in anonymous function declaration
-    val x27: Int.(String) -> Int = id(<!ARGUMENT_TYPE_MISMATCH, ARGUMENT_TYPE_MISMATCH!>fun (x: String) = 10<!>)
+    konst x27: Int.(String) -> Int = id(<!ARGUMENT_TYPE_MISMATCH, ARGUMENT_TYPE_MISMATCH!>fun (x: String) = 10<!>)
     select(id<Int.(String) -> Unit> {}, { x: Int, y: String -> x })
 
     // Inferring lambda parameter types by partially specified parameter types of other lambdas
@@ -203,7 +203,7 @@ fun main() {
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function2<kotlin.Int, kotlin.Int, kotlin.Number & kotlin.Comparable<*>>")!>select(id(A5<Int, Int>()), id { x: Number, y: Int -> <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>x<!>;<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>y<!> })<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function2<kotlin.Int, kotlin.Int, kotlin.Number & kotlin.Comparable<*>>")!>select(id(A5<Int, Int>()), id { x, y -> <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>x<!>;<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>y<!> })<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function2<kotlin.Number, kotlin.Int, kotlin.Number & kotlin.Comparable<*>>")!>select(id(<!DEBUG_INFO_EXPRESSION_TYPE("A5<kotlin.Number, kotlin.Int>")!>A5()<!>), id { x: Number, y: Int -> <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>x<!>;<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>y<!> })<!>
-    val x55: Function2<Number, Int, Float> = select(id(A5()), id { x, y -> <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>x<!>;<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>y<!>; 1f })
+    konst x55: Function2<Number, Int, Float> = select(id(A5()), id { x, y -> <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>x<!>;<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>y<!>; 1f })
 
     // Diffrerent lambda's parameters with proper CST
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<*, kotlin.Unit>")!>select({ x: Int -> }, { x: String -> })<!>
@@ -218,16 +218,16 @@ fun main() {
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function<kotlin.Any>")!>select({ x: Int -> TODO() }, id { x: Int, y: Number -> Any() })<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<*, kotlin.String?>")!>select(id { x: Int -> null }, id { x: String -> "" })<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function<kotlin.Int>")!>select(id { x: Int -> 10 }, id { x: Int, y: Number -> TODO() })<!>
-    val x68: String.(String) -> String = select(id { x: String, y: String -> "10" }, id { x: String, y: String -> "TODO()" })
+    konst x68: String.(String) -> String = select(id { x: String, y: String -> "10" }, id { x: String, y: String -> "TODO()" })
 
     // Anonymous functions
-    val x69: (C) -> Unit = selectB({ it }, { }, id(fun (x) { <!DEBUG_INFO_EXPRESSION_TYPE("A")!>x<!> }))
+    konst x69: (C) -> Unit = selectB({ it }, { }, id(fun (x) { <!DEBUG_INFO_EXPRESSION_TYPE("A")!>x<!> }))
     select(id1(fun(it) { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!>.inv() }), id1 { x: Number -> TODO() }, id1(id2(::takeInt)))
     select(id(fun (it) { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!> }), id(id<(Int) -> Unit> { x: Number -> Unit }))
     select(id(fun (it) { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!>.inv() }), id<(Int) -> Unit> { })
-    val x70: (Int) -> Unit = selectNumber(id(fun (it) { }), id {}, id {})
-    val x71: String.() -> Unit = select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun String.() { })<!>, <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>)
-    val x72: String.() -> Unit = select(fun String.() { }, fun(x: String) {}) // must be error
+    konst x70: (Int) -> Unit = selectNumber(id(fun (it) { }), id {}, id {})
+    konst x71: String.() -> Unit = select(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun String.() { })<!>, <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.String, kotlin.Unit>")!>id(fun(x: String) {})<!>)
+    konst x72: String.() -> Unit = select(fun String.() { }, fun(x: String) {}) // must be error
     select(id(fun String.(x: String) {}), id(fun(x: String, y: String) { }), fun (x, y) { <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>x<!>;<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>y<!> })
     select(id<Int.(String) -> Unit>(fun (x, y) {}), { x: Int, y: String -> x }) // receiver of anonymous function must be specified explicitly
     select(id<Int.(String) -> Unit>(fun Int.(y) {}), { x: Int, y: String -> x })

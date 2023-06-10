@@ -4,16 +4,16 @@ class Outer {
         if (outerState > 0) return outerState
         
         class Local {
-            val localState = outerState
+            konst localState = outerState
             
             inner class LocalInner {
-                val o = outerState
-                val l = localState
+                konst o = outerState
+                konst l = localState
             }
         }
         
         return Local().localState
     }
     
-    val outerState = 42
+    konst outerState = 42
 }

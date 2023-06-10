@@ -33,7 +33,7 @@ internal class KaptGenerateStubsConfig : BaseKotlinCompileConfig<KaptGenerateStu
 
         configureTask { kaptGenerateStubsTask ->
             // Syncing compiler options from related KotlinJvmCompile task
-            val jvmCompilerOptions = compilation.compilerOptions.options as KotlinJvmCompilerOptions
+            konst jvmCompilerOptions = compilation.compilerOptions.options as KotlinJvmCompilerOptions
             KotlinJvmCompilerOptionsHelper.syncOptionsAsConvention(
                 from = jvmCompilerOptions,
                 into = kaptGenerateStubsTask.compilerOptions
@@ -62,9 +62,9 @@ internal class KaptGenerateStubsConfig : BaseKotlinCompileConfig<KaptGenerateStu
         kaptExtension.includeCompileClasspath ?: project.isIncludeCompileClasspath()
 
     private fun buildOptions(kaptExtension: KaptExtension, task: KaptGenerateStubsTask): Provider<CompilerPluginOptions> {
-        val javacOptions = project.provider { kaptExtension.getJavacOptions() }
+        konst javacOptions = project.provider { kaptExtension.getJavacOptions() }
         return project.provider {
-            val compilerPluginOptions = CompilerPluginOptions()
+            konst compilerPluginOptions = CompilerPluginOptions()
             buildKaptSubpluginOptions(
                 kaptExtension,
                 project,
@@ -89,7 +89,7 @@ internal class KaptGenerateStubsConfig : BaseKotlinCompileConfig<KaptGenerateStu
             kotlinCompileTask: TaskProvider<out KotlinJvmCompile>
         ) {
             project.whenKaptEnabled {
-                val kaptGenerateStubsTaskName = getKaptTaskName(kotlinCompileTask.name, KAPT_GENERATE_STUBS_PREFIX)
+                konst kaptGenerateStubsTaskName = getKaptTaskName(kotlinCompileTask.name, KAPT_GENERATE_STUBS_PREFIX)
                 project.tasks.withType<KaptGenerateStubsTask>().configureEach { task ->
                     if (task.name == kaptGenerateStubsTaskName) {
                         task.javaOutputDir.set(javaCompileTask.flatMap { it.destinationDirectory })
@@ -105,7 +105,7 @@ internal class KaptGenerateStubsConfig : BaseKotlinCompileConfig<KaptGenerateStu
             vararg paths: Any
         ) {
             project.whenKaptEnabled {
-                val kaptGenerateStubsTaskName = getKaptTaskName(kotlinCompileTask.name, KAPT_GENERATE_STUBS_PREFIX)
+                konst kaptGenerateStubsTaskName = getKaptTaskName(kotlinCompileTask.name, KAPT_GENERATE_STUBS_PREFIX)
                 project.tasks.withType<KaptGenerateStubsTask>().configureEach { task ->
                     if (task.name == kaptGenerateStubsTaskName) {
                         task.libraries.from(paths)
@@ -120,7 +120,7 @@ internal class KaptGenerateStubsConfig : BaseKotlinCompileConfig<KaptGenerateStu
             config: Property<Boolean>.() -> Unit
         ) {
             project.whenKaptEnabled {
-                val kaptGenerateStubsTaskName = getKaptTaskName(kotlinCompileTask.name, KAPT_GENERATE_STUBS_PREFIX)
+                konst kaptGenerateStubsTaskName = getKaptTaskName(kotlinCompileTask.name, KAPT_GENERATE_STUBS_PREFIX)
                 project.tasks.withType<KaptGenerateStubsTask>().configureEach { task ->
                     if (task.name == kaptGenerateStubsTaskName) {
                         config(task.useModuleDetection)

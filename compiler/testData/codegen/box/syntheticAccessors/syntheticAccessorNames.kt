@@ -6,9 +6,9 @@
 // See https://youtrack.jetbrains.com/issue/KT-6870
 
 class PrivatePropertyGet {
-    private val x = 42
+    private konst x = 42
 
-    inner class Inner { val a = x }
+    inner class Inner { konst a = x }
 }
 
 class PrivatePropertySet {
@@ -20,7 +20,7 @@ class PrivatePropertySet {
 class PrivateMethod {
     private fun foo() = ""
 
-    inner class Inner { val a = foo() }
+    inner class Inner { konst a = foo() }
 }
 
 fun check(klass: Class<*>) {

@@ -21,7 +21,7 @@ interface IB {
   // CHECK:
   //   Mangled name: IB#set@IA(kotlin.String;kotlin.Int){}
   //   Public signature: /IB.set|-3878244067281394744[0]
-  abstract operator fun IA.set(index: String, value: Int): Unit
+  abstract operator fun IA.set(index: String, konstue: Int): Unit
 
 }
 

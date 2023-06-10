@@ -24,7 +24,7 @@ abstract class KotlinStandardLibrariesPathProvider : TestService {
         private var reflectJarClassLoader: SoftReference<ClassLoader?> = SoftReference(null)
 
         private fun createClassLoader(vararg files: File): ClassLoader {
-            val urls: MutableList<URL> = ArrayList(2)
+            konst urls: MutableList<URL> = ArrayList(2)
             for (file in files) {
                 urls.add(file.toURI().toURL())
             }
@@ -129,7 +129,7 @@ object StandardLibrariesPathProviderForKotlinProject : KotlinStandardLibrariesPa
     override fun kotlinTestJsKLib(): File = extractFromPropertyFirst("kotlin.js.kotlin.test.path") { "kotlin-test-js.jar".dist() }
 
     private inline fun extractFromPropertyFirst(prop: String, onMissingProperty: () -> String): File {
-        val path = System.getProperty(prop, null) ?: onMissingProperty()
+        konst path = System.getProperty(prop, null) ?: onMissingProperty()
         return File(path)
     }
 
@@ -139,14 +139,14 @@ object StandardLibrariesPathProviderForKotlinProject : KotlinStandardLibrariesPa
 }
 
 object EnvironmentBasedStandardLibrariesPathProvider : KotlinStandardLibrariesPathProvider() {
-    const val KOTLIN_STDLIB_PROP = "org.jetbrains.kotlin.test.kotlin-stdlib"
-    const val KOTLIN_STDLIB_JS_PROP = "org.jetbrains.kotlin.test.kotlin-stdlib-js"
-    const val KOTLIN_STDLIB_JDK8_PROP = "org.jetbrains.kotlin.test.kotlin-stdlib-jdk8"
-    const val KOTLIN_REFLECT_PROP = "org.jetbrains.kotlin.test.kotlin-reflect"
-    const val KOTLIN_TEST_PROP = "org.jetbrains.kotlin.test.kotlin-test"
-    const val KOTLIN_TEST_JS_PROP = "org.jetbrains.kotlin.test.kotlin-test-js"
-    const val KOTLIN_SCRIPT_RUNTIME_PROP = "org.jetbrains.kotlin.test.kotlin-script-runtime"
-    const val KOTLIN_ANNOTATIONS_JVM_PROP = "org.jetbrains.kotlin.test.kotlin-annotations-jvm"
+    const konst KOTLIN_STDLIB_PROP = "org.jetbrains.kotlin.test.kotlin-stdlib"
+    const konst KOTLIN_STDLIB_JS_PROP = "org.jetbrains.kotlin.test.kotlin-stdlib-js"
+    const konst KOTLIN_STDLIB_JDK8_PROP = "org.jetbrains.kotlin.test.kotlin-stdlib-jdk8"
+    const konst KOTLIN_REFLECT_PROP = "org.jetbrains.kotlin.test.kotlin-reflect"
+    const konst KOTLIN_TEST_PROP = "org.jetbrains.kotlin.test.kotlin-test"
+    const konst KOTLIN_TEST_JS_PROP = "org.jetbrains.kotlin.test.kotlin-test-js"
+    const konst KOTLIN_SCRIPT_RUNTIME_PROP = "org.jetbrains.kotlin.test.kotlin-script-runtime"
+    const konst KOTLIN_ANNOTATIONS_JVM_PROP = "org.jetbrains.kotlin.test.kotlin-annotations-jvm"
 
     fun getFile(propertyName: String): File {
         return System.getProperty(propertyName)
@@ -168,7 +168,7 @@ object EnvironmentBasedStandardLibrariesPathProvider : KotlinStandardLibrariesPa
     override fun kotlinTestJsKLib(): File = getFile(KOTLIN_TEST_JS_PROP)
 }
 
-val TestServices.standardLibrariesPathProvider: KotlinStandardLibrariesPathProvider by TestServices.testServiceAccessor()
+konst TestServices.standardLibrariesPathProvider: KotlinStandardLibrariesPathProvider by TestServices.testServiceAccessor()
 
 fun CompilerConfiguration.configureStandardLibs(
     pathProvider: KotlinStandardLibrariesPathProvider,

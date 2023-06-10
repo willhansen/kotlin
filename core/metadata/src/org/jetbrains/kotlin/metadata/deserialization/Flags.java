@@ -20,12 +20,12 @@ public class Flags {
     // Common for declarations
 
     public static final BooleanFlagField HAS_ANNOTATIONS = FlagField.booleanFirst();
-    public static final FlagField<ProtoBuf.Visibility> VISIBILITY = FlagField.after(HAS_ANNOTATIONS, ProtoBuf.Visibility.values());
-    public static final FlagField<ProtoBuf.Modality> MODALITY = FlagField.after(VISIBILITY, ProtoBuf.Modality.values());
+    public static final FlagField<ProtoBuf.Visibility> VISIBILITY = FlagField.after(HAS_ANNOTATIONS, ProtoBuf.Visibility.konstues());
+    public static final FlagField<ProtoBuf.Modality> MODALITY = FlagField.after(VISIBILITY, ProtoBuf.Modality.konstues());
 
     // Class
 
-    public static final FlagField<ProtoBuf.Class.Kind> CLASS_KIND = FlagField.after(MODALITY, ProtoBuf.Class.Kind.values());
+    public static final FlagField<ProtoBuf.Class.Kind> CLASS_KIND = FlagField.after(MODALITY, ProtoBuf.Class.Kind.konstues());
     public static final BooleanFlagField IS_INNER = FlagField.booleanAfter(CLASS_KIND);
     public static final BooleanFlagField IS_DATA = FlagField.booleanAfter(IS_INNER);
     public static final BooleanFlagField IS_EXTERNAL_CLASS = FlagField.booleanAfter(IS_DATA);
@@ -41,7 +41,7 @@ public class Flags {
 
     // Callables
 
-    public static final FlagField<ProtoBuf.MemberKind> MEMBER_KIND = FlagField.after(MODALITY, ProtoBuf.MemberKind.values());
+    public static final FlagField<ProtoBuf.MemberKind> MEMBER_KIND = FlagField.after(MODALITY, ProtoBuf.MemberKind.konstues());
 
     // Functions
 
@@ -235,13 +235,13 @@ public class Flags {
     // Infrastructure
 
     public static abstract class FlagField<E> {
-        public static <E extends Internal.EnumLite> FlagField<E> after(FlagField<?> previousField, E[] values) {
+        public static <E extends Internal.EnumLite> FlagField<E> after(FlagField<?> previousField, E[] konstues) {
             int offset = previousField.offset + previousField.bitWidth;
-            return new EnumLiteFlagField<E>(offset, values);
+            return new EnumLiteFlagField<E>(offset, konstues);
         }
 
-        public static <E extends Internal.EnumLite> FlagField<E> first(E[] values) {
-            return new EnumLiteFlagField<E>(0, values);
+        public static <E extends Internal.EnumLite> FlagField<E> first(E[] konstues) {
+            return new EnumLiteFlagField<E>(0, konstues);
         }
 
         public static BooleanFlagField booleanFirst() {
@@ -263,7 +263,7 @@ public class Flags {
 
         public abstract E get(int flags);
 
-        public abstract int toFlags(E value);
+        public abstract int toFlags(E konstue);
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -279,19 +279,19 @@ public class Flags {
         }
 
         @Override
-        public int toFlags(Boolean value) {
-            return value ? 1 << offset : 0;
+        public int toFlags(Boolean konstue) {
+            return konstue ? 1 << offset : 0;
         }
 
         public int invert(int flags) { return (flags ^ (1 << offset)); }
     }
 
     private static class EnumLiteFlagField<E extends Internal.EnumLite> extends FlagField<E> {
-        private final E[] values;
+        private final E[] konstues;
 
-        public EnumLiteFlagField(int offset, E[] values) {
-            super(offset, bitWidth(values));
-            this.values = values;
+        public EnumLiteFlagField(int offset, E[] konstues) {
+            super(offset, bitWidth(konstues));
+            this.konstues = konstues;
         }
 
         private static <E> int bitWidth(@NotNull E[] enumEntries) {
@@ -308,9 +308,9 @@ public class Flags {
         public E get(int flags) {
             int maskUnshifted = (1 << bitWidth) - 1;
             int mask = maskUnshifted << offset;
-            int value = (flags & mask) >> offset;
-            for (E e : values) {
-                if (e.getNumber() == value) {
+            int konstue = (flags & mask) >> offset;
+            for (E e : konstues) {
+                if (e.getNumber() == konstue) {
                     return e;
                 }
             }
@@ -318,8 +318,8 @@ public class Flags {
         }
 
         @Override
-        public int toFlags(E value) {
-            return value.getNumber() << offset;
+        public int toFlags(E konstue) {
+            return konstue.getNumber() << offset;
         }
     }
 }

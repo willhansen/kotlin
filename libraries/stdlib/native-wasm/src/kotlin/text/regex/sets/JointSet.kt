@@ -45,10 +45,10 @@ open internal class JointSet(children: List<AbstractSet>, fSet: FSet) : Abstract
         if (children.isEmpty()) {
             return -1
         }
-        val oldStart = matchResult.getStart(groupIndex)
+        konst oldStart = matchResult.getStart(groupIndex)
         matchResult.setStart(groupIndex, startIndex)
         children.forEach {
-            val shift = it.matches(startIndex, testString, matchResult)
+            konst shift = it.matches(startIndex, testString, matchResult)
             if (shift >= 0) {
                 return shift
             }
@@ -63,7 +63,7 @@ open internal class JointSet(children: List<AbstractSet>, fSet: FSet) : Abstract
             fSet.next = next
         }
 
-    override val name: String
+    override konst name: String
             get() = "JointSet"
     override fun first(set: AbstractSet): Boolean = children.any { it.first(set) }
 
@@ -72,9 +72,9 @@ open internal class JointSet(children: List<AbstractSet>, fSet: FSet) : Abstract
     }
 
     override fun processSecondPassInternal(): AbstractSet {
-        val fSet = this.fSet
+        konst fSet = this.fSet
         if (!fSet.secondPassVisited) {
-            val newFSet = fSet.processSecondPass()
+            konst newFSet = fSet.processSecondPass()
             @OptIn(ExperimentalNativeApi::class)
             assert(newFSet == fSet)
         }

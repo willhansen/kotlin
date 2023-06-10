@@ -1,5 +1,5 @@
 expression: WHEN
-text: when (val a = 42) {
+text: when (konst a = 42) {
             else -> {
                 use("")
                 foo()

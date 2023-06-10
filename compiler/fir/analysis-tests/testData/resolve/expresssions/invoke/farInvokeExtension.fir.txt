@@ -9,7 +9,7 @@ FILE: farInvokeExtension.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = Int(0)
+        public final konst x: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
 
         public final fun foo(): R|kotlin/Unit| {

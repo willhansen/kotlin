@@ -2,7 +2,7 @@
 package foo
 
 fun box(): String {
-    val c: Double = 3.6
+    konst c: Double = 3.6
     if (c.toDouble() != 3.6) {
         return "fail1"
     }
@@ -13,7 +13,7 @@ fun box(): String {
         return "fail4"
     }
 
-    val cn: Double = -3.6
+    konst cn: Double = -3.6
     if (cn.toDouble() != -3.6) {
         return "fail6"
     }
@@ -24,7 +24,7 @@ fun box(): String {
         return "fail9"
     }
 
-    val f: Float = 3.6.toFloat()
+    konst f: Float = 3.6.toFloat()
     if (f.toDouble() != 3.6) {
         return "fail11"
     }
@@ -35,7 +35,7 @@ fun box(): String {
         return "fail14"
     }
 
-    val fn: Float = -3.6.toFloat()
+    konst fn: Float = -3.6.toFloat()
     if (fn.toDouble() != -3.6) {
         return "fail16"
     }

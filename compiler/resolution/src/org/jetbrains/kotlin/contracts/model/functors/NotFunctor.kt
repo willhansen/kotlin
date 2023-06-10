@@ -24,11 +24,11 @@ import org.jetbrains.kotlin.contracts.model.structure.isTrue
 
 class NotFunctor : AbstractUnaryFunctor() {
     override fun invokeWithReturningEffects(list: List<ConditionalEffect>): List<ConditionalEffect> = list.mapNotNull {
-        val outcome = it.simpleEffect
+        konst outcome = it.simpleEffect
 
-        // Outcome guaranteed to be Returns by AbstractSequentialUnaryFunctor, but value
+        // Outcome guaranteed to be Returns by AbstractSequentialUnaryFunctor, but konstue
         // can be non-boolean in case of type-errors in the whole expression, like "foo(bar) && 1"
-        val returnValue = (outcome as ESReturns).value
+        konst returnValue = (outcome as ESReturns).konstue
 
         when {
             returnValue.isTrue -> ConditionalEffect(it.condition, ESReturns(ESConstants.falseValue))

@@ -10,7 +10,7 @@ object IdeaKpmPlatformProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmPlatformProtoKt {
       @JvmName("getJvm")
       get() = _builder.getJvm()
       @JvmName("setJvm")
-      set(value) {
-        _builder.setJvm(value)
+      set(konstue) {
+        _builder.setJvm(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJvmPlatformProto jvm = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKpmPlatformProtoKt {
       @JvmName("getNative")
       get() = _builder.getNative()
       @JvmName("setNative")
-      set(value) {
-        _builder.setNative(value)
+      set(konstue) {
+        _builder.setNative(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmNativePlatformProto native = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKpmPlatformProtoKt {
       @JvmName("getJs")
       get() = _builder.getJs()
       @JvmName("setJs")
-      set(value) {
-        _builder.setJs(value)
+      set(konstue) {
+        _builder.setJs(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProto js = 3;</code>
@@ -101,8 +101,8 @@ object IdeaKpmPlatformProtoKt {
       @JvmName("getWasm")
       get() = _builder.getWasm()
       @JvmName("setWasm")
-      set(value) {
-        _builder.setWasm(value)
+      set(konstue) {
+        _builder.setWasm(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmWasmPlatformProto wasm = 4;</code>
@@ -125,8 +125,8 @@ object IdeaKpmPlatformProtoKt {
       @JvmName("getUnknown")
       get() = _builder.getUnknown()
       @JvmName("setUnknown")
-      set(value) {
-        _builder.setUnknown(value)
+      set(konstue) {
+        _builder.setUnknown(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProto unknown = 5;</code>
@@ -141,7 +141,7 @@ object IdeaKpmPlatformProtoKt {
     fun hasUnknown(): kotlin.Boolean {
       return _builder.hasUnknown()
     }
-    val platformCase: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto.PlatformCase
+    konst platformCase: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto.PlatformCase
       @JvmName("getPlatformCase")
       get() = _builder.getPlatformCase()
 
@@ -154,18 +154,18 @@ object IdeaKpmPlatformProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.jvmOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJvmPlatformProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.jvmOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJvmPlatformProto?
   get() = if (hasJvm()) getJvm() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.nativeOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmNativePlatformProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.nativeOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmNativePlatformProto?
   get() = if (hasNative()) getNative() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.jsOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.jsOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmJsPlatformProto?
   get() = if (hasJs()) getJs() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.wasmOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmWasmPlatformProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.wasmOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmWasmPlatformProto?
   get() = if (hasWasm()) getWasm() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.unknownOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProtoOrBuilder.unknownOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProto?
   get() = if (hasUnknown()) getUnknown() else null
 

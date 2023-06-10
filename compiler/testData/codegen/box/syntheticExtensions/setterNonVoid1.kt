@@ -19,7 +19,7 @@ class JavaClass {
 // FILE: 1.kt
 
 fun box(): String {
-    val javaClass = JavaClass()
+    konst javaClass = JavaClass()
     if (javaClass.x == "") {
         javaClass.x = "OK"
     }

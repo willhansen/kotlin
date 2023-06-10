@@ -11,7 +11,7 @@ interface A<E> {
 }
 
 fun test(a: A<out CharSequence>, y: Out<CharSequence>) {
-    val i = a.foo()
+    konst i = a.foo()
     // TODO: These diagnostic are wrong, type of 'i' --- 'In<Nothing>' is not projected itself,
     // but it's approximation result caused by 'a' projection
     i.invoke1(<!TYPE_MISMATCH!>""<!>)

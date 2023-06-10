@@ -5,7 +5,7 @@ public final class B2 : java.util.ArrayList<kotlin.String>, I2 {
     invisible_fake final override /*1*/ /*fake_override*/ var elementData: kotlin.Array<(out) kotlin.Any!>!
     protected/*protected and package*/ final override /*1*/ /*fake_override*/ var modCount: kotlin.Int
     invisible_fake final override /*1*/ /*fake_override*/ var size: kotlin.Int
-    public open override /*2*/ /*fake_override*/ val size: kotlin.Int
+    public open override /*2*/ /*fake_override*/ konst size: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ index: kotlin.Int, /*1*/ element: kotlin.String): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ element: kotlin.String): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun addAll(/*0*/ index: kotlin.Int, /*1*/ elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
@@ -49,7 +49,7 @@ public final class B2 : java.util.ArrayList<kotlin.String>, I2 {
 }
 
 public interface I2 {
-    public abstract val size: kotlin.Int
+    public abstract konst size: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

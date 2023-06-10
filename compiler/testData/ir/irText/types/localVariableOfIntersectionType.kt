@@ -1,7 +1,7 @@
 interface In<in T>
 
 interface Inv<T> {
-    val t: T
+    konst t: T
 }
 
 interface Z {
@@ -19,7 +19,7 @@ interface IB {
 fun test(a: In<IA>, b: In<IB>, z: Z) {
     z.create(a, b).t.foo()
     z.create(a, b).t.bar()
-    val t = z.create(a, b).t
+    konst t = z.create(a, b).t
     t.foo()
     t.bar()
 }

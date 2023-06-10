@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.types.expressions.ExpressionTypingContext
 fun resolveQualifierAsReceiverInExpression(
     qualifier: Qualifier, selector: DeclarationDescriptor?, context: ExpressionTypingContext
 ): DeclarationDescriptor {
-    val referenceTarget = resolveQualifierReferenceTarget(qualifier, selector, context)
+    konst referenceTarget = resolveQualifierReferenceTarget(qualifier, selector, context)
 
     if (referenceTarget is TypeParameterDescriptor) {
         context.trace.report(Errors.TYPE_PARAMETER_ON_LHS_OF_DOT.on(qualifier.referenceExpression, referenceTarget))
@@ -40,7 +40,7 @@ fun resolveQualifierAsReceiverInExpression(
 fun resolveQualifierAsStandaloneExpression(
     qualifier: Qualifier, context: ExpressionTypingContext
 ): DeclarationDescriptor {
-    val referenceTarget = resolveQualifierReferenceTarget(qualifier, null, context)
+    konst referenceTarget = resolveQualifierReferenceTarget(qualifier, null, context)
 
     when (referenceTarget) {
         is TypeAliasDescriptor -> {
@@ -75,7 +75,7 @@ private fun resolveQualifierReferenceTarget(
         return qualifier.descriptor
     }
 
-    val selectorContainer = when (selector) {
+    konst selectorContainer = when (selector) {
         is ConstructorDescriptor ->
             selector.containingDeclaration.containingDeclaration
         else ->
@@ -91,16 +91,16 @@ private fun resolveQualifierReferenceTarget(
 
     // TODO make decisions about short reference to companion object somewhere else
     if (qualifier is ClassifierQualifier) {
-        val classifier = qualifier.descriptor
-        val selectorIsCallable = selector is CallableDescriptor &&
+        konst classifier = qualifier.descriptor
+        konst selectorIsCallable = selector is CallableDescriptor &&
                 (selector.dispatchReceiverParameter != null || selector.extensionReceiverParameter != null)
         // TODO simplify this code.
         // Given a class qualifier in expression position,
         // it should provide a proper REFERENCE_TARGET (with type),
         // and, in case of implicit companion object reference, SHORT_REFERENCE_TO_COMPANION_OBJECT.
-        val receiverClassifierDescriptor = classifier.getCallableReceiverDescriptorRetainingTypeAliasReference()
+        konst receiverClassifierDescriptor = classifier.getCallableReceiverDescriptorRetainingTypeAliasReference()
         if (selectorIsCallable && receiverClassifierDescriptor != null) {
-            val classValueTypeDescriptor = classifier.classValueTypeDescriptor!!
+            konst classValueTypeDescriptor = classifier.classValueTypeDescriptor!!
             context.trace.record(BindingContext.REFERENCE_TARGET, qualifier.referenceExpression, receiverClassifierDescriptor)
             context.trace.recordType(qualifier.expression, classValueTypeDescriptor.defaultType)
             if (classifier.hasCompanionObject) {

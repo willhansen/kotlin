@@ -1,3 +1,3 @@
-val x = 12
+konst x = 12
 
 // expected: x: 12

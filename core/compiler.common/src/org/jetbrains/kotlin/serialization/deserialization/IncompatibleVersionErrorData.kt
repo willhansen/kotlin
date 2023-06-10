@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.serialization.deserialization
 import org.jetbrains.kotlin.name.ClassId
 
 data class IncompatibleVersionErrorData<out T>(
-    val actualVersion: T,
-    val compilerVersion: T,
-    val languageVersion: T,
-    val expectedVersion: T,
-    val filePath: String,
-    val classId: ClassId
+    konst actualVersion: T,
+    konst compilerVersion: T,
+    konst languageVersion: T,
+    konst expectedVersion: T,
+    konst filePath: String,
+    konst classId: ClassId
 )

@@ -1,20 +1,20 @@
 
 enum class X {
     B {
-        val k = "K"
+        konst k = "K"
 
         inner class Inner {
             fun foo() = "O" + k
         }
 
-        val inner = Inner()
+        konst inner = Inner()
 
-        val bmr = inner::foo
+        konst bmr = inner::foo
 
-        override val value = bmr.invoke()
+        override konst konstue = bmr.invoke()
     };
 
-    abstract val value: String
+    abstract konst konstue: String
 }
 
-fun box() = X.B.value
+fun box() = X.B.konstue

@@ -22,5 +22,5 @@ public final class Ns {
 // FILE: exp/main.kt
 package exp
 
-val Ns.Foo<*>.name
+konst Ns.Foo<*>.name
     get() = this.bar.name

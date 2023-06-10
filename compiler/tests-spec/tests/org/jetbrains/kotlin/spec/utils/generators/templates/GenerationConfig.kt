@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.spec.utils.SpecTestLinkedType
 import org.jetbrains.kotlin.spec.utils.TestArea
 import org.jetbrains.kotlin.spec.utils.TestType
 
-enum class SubstitutionTag(val passType: SubstitutionPassType = SubstitutionPassType.FIRST) {
+enum class SubstitutionTag(konst passType: SubstitutionPassType = SubstitutionPassType.FIRST) {
     DIRECTIVES,
 
     // Test meta info tags
@@ -31,7 +31,7 @@ enum class SubstitutionTag(val passType: SubstitutionPassType = SubstitutionPass
 typealias TemplatesIterator = Iterator<Map.Entry<String, String>>
 
 abstract class GenerationSpecTestDataConfig {
-    private val repeatableElements = mutableMapOf<Int, String>()
+    private konst repeatableElements = mutableMapOf<Int, String>()
 
     lateinit var testType: TestType
     lateinit var testDescription: String
@@ -39,18 +39,18 @@ abstract class GenerationSpecTestDataConfig {
     lateinit var secondFeature: Feature
     lateinit var testArea: TestArea
 
-    protected val baseSubstitutions = mapOf<SubstitutionTag, (SubstitutionRule) -> String>(
+    protected konst baseSubstitutions = mapOf<SubstitutionTag, (SubstitutionRule) -> String>(
         SubstitutionTag.TEST_TYPE to { testType.toString() },
         SubstitutionTag.TEST_NUMBER to { rule -> rule.testNumber.toString() },
         SubstitutionTag.TEST_DESCRIPTION to { rule -> testDescription.format(rule.filename) },
         SubstitutionTag.ELEMENT to { rule ->
-            val isRepeatableVar = rule.varNumber != null
+            konst isRepeatableVar = rule.varNumber != null
 
             when {
                 isRepeatableVar && repeatableElements.contains(rule.varNumber) ->
                     repeatableElements[rule.varNumber]!!
                 else -> {
-                    val element = secondFeature.config.getNextWithRepeat()
+                    konst element = secondFeature.config.getNextWithRepeat()
                     if (isRepeatableVar)
                         repeatableElements[rule.varNumber!!] = element
                     element
@@ -58,12 +58,12 @@ abstract class GenerationSpecTestDataConfig {
             }
         },
         SubstitutionTag.ELEMENT_VALIDATION to { rule ->
-            val validationFunction = secondFeature.config.validationTransformer
-            val element = repeatableElements[rule.varNumber]!!
+            konst konstidationFunction = secondFeature.config.konstidationTransformer
+            konst element = repeatableElements[rule.varNumber]!!
 
-            when (validationFunction) {
+            when (konstidationFunction) {
                 null -> element
-                else -> templateValidationTransformers[validationFunction]!!(element)
+                else -> templateValidationTransformers[konstidationFunction]!!(element)
             }
         }
     )
@@ -87,12 +87,12 @@ abstract class GenerationSpecTestDataConfig {
 
         return firstFeature.config.run {
             resetTemplatesIterator()
-            buildTemplatesIterator(currentTemplatesIterator.value)
+            buildTemplatesIterator(currentTemplatesIterator.konstue)
         }
     }
 
-    abstract val layoutFilename: String
-    abstract val substitutions: MutableMap<SubstitutionTag, (SubstitutionRule) -> String>
+    abstract konst layoutFilename: String
+    abstract konst substitutions: MutableMap<SubstitutionTag, (SubstitutionRule) -> String>
     abstract fun getTestsPartPath(): String
 }
 
@@ -102,8 +102,8 @@ class GenerationLinkedSpecTestDataConfig : GenerationSpecTestDataConfig() {
     lateinit var sentence: String
     lateinit var sections: List<String>
 
-    override val layoutFilename = "linkedTestsLayout.kt"
-    override val substitutions = mutableMapOf<SubstitutionTag, (SubstitutionRule) -> String>(
+    override konst layoutFilename = "linkedTestsLayout.kt"
+    override konst substitutions = mutableMapOf<SubstitutionTag, (SubstitutionRule) -> String>(
         SubstitutionTag.SECTIONS to { sections.joinToString(", ") },
         SubstitutionTag.PARAGRAPH_NUMBER to { paragraphNumber.toString() },
         SubstitutionTag.SENTENCE_NUMBER to { sentenceNumber.toString() },
@@ -118,8 +118,8 @@ class GenerationLinkedSpecTestDataConfig : GenerationSpecTestDataConfig() {
 class GenerationNotLinkedSpecTestDataConfig : GenerationSpecTestDataConfig() {
     lateinit var categories: List<String>
 
-    override val layoutFilename = "notLinkedTestsLayout.kt"
-    override val substitutions = mutableMapOf<SubstitutionTag, (SubstitutionRule) -> String>(
+    override konst layoutFilename = "notLinkedTestsLayout.kt"
+    override konst substitutions = mutableMapOf<SubstitutionTag, (SubstitutionRule) -> String>(
         SubstitutionTag.CATEGORIES to { categories.joinToString(", ") },
         SubstitutionTag.CLASS_OF_FILE to { rule -> "_${rule.testNumber}Kt" }
     ).apply { putAll(baseSubstitutions) }

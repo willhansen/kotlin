@@ -3,7 +3,7 @@
 fun <R> synchronized(lock: Any, block: () -> R): R = block()
 
 class My {
-    val test: String
+    konst test: String
         get() = synchronized(this) {
             var x: String? = ""
             if (x == null) {

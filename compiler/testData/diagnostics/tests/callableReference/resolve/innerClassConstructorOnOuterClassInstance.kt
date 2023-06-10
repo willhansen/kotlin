@@ -9,6 +9,6 @@ abstract class B : A()
 
 fun foo(a: A) {
     if (a is B) {
-        val v = a::InnerInA
+        konst v = a::InnerInA
     }
 }

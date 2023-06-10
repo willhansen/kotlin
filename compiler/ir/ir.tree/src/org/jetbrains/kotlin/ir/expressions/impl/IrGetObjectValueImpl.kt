@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrGetObjectValueImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrClassSymbol
+    override konst symbol: IrClassSymbol
 ) : IrGetObjectValue()

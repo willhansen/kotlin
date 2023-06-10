@@ -9,8 +9,8 @@ package
 
 public final class AG1 : A, G {
     public constructor AG1(/*0*/ a: A, /*1*/ g: G)
-    public final val a: A
-    public final val g: G
+    public final konst a: A
+    public final konst g: G
     @An public open override /*2*/ /*delegation*/ fun a(/*0*/ @An arg: @An kotlin.Int): kotlin.Unit
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -55,7 +55,7 @@ public interface C : A, B {
 
 @An public abstract class D {
     public constructor D()
-    @An public abstract val d: @An kotlin.Int
+    @An public abstract konst d: @An kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -63,7 +63,7 @@ public interface C : A, B {
 
 public final class E : D, A {
     public constructor E()
-    @An public abstract override /*1*/ /*fake_override*/ val d: @An kotlin.Int
+    @An public abstract override /*1*/ /*fake_override*/ konst d: @An kotlin.Int
     @An public abstract override /*1*/ /*fake_override*/ fun a(/*0*/ @An arg: @An kotlin.Int): kotlin.Unit
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int

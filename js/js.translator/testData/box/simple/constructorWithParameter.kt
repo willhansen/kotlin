@@ -2,7 +2,7 @@
 package foo
 
 class Test(a: Int) {
-    val b = a
+    konst b = a
 }
 
 fun box(): String {

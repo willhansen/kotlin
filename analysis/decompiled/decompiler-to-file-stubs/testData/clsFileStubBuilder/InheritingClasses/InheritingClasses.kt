@@ -1,26 +1,26 @@
 package a
 
 class InheritingClasses {
-    abstract class A(override val c: Int = 1) : C {
+    abstract class A(override konst c: Int = 1) : C {
         open fun of() = 3
         abstract fun af(): Int
-        open val op = 4
-        abstract val ap: Int
+        open konst op = 4
+        abstract konst ap: Int
     }
 
     open class B : A(2) {
         override fun of() = 4
         override fun af() = 5
-        override val op = 5
-        override val ap = 5
+        override konst op = 5
+        override konst ap = 5
     }
 
     interface C {
-        val c: Int
+        konst c: Int
     }
 
     interface D<T> : C {
-        override val c: Int
+        override konst c: Int
     }
 
     interface E

@@ -6,21 +6,21 @@
 package org.jetbrains.kotlin.js.backend.ast
 
 class JsExport(
-    val subject: Subject,
-    val fromModule: String? = null,
+    konst subject: Subject,
+    konst fromModule: String? = null,
 ) : SourceInfoAwareJsNode(), JsStatement {
 
     constructor(element: Element) : this(Subject.Elements(listOf(element)))
     constructor(name: JsNameRef, alias: JsName? = null) : this(Element(name, alias))
 
     sealed class Subject {
-        class Elements(val elements: List<Element>) : Subject()
+        class Elements(konst elements: List<Element>) : Subject()
         object All : Subject()
     }
 
     class Element(
-        val name: JsNameRef,
-        val alias: JsName?
+        konst name: JsNameRef,
+        konst alias: JsName?
     )
 
     override fun accept(visitor: JsVisitor) {

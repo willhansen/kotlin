@@ -29,7 +29,7 @@ typealias LibraryOrder = org.jetbrains.kotlin.library.metadata.resolver.LibraryO
     "This property has been moved from package org.jetbrains.kotlin.library.resolver to package org.jetbrains.kotlin.library.metadata.resolver",
     ReplaceWith("org.jetbrains.kotlin.library.metadata.resolver.TopologicalLibraryOrder")
 )
-inline val TopologicalLibraryOrder: org.jetbrains.kotlin.library.metadata.resolver.LibraryOrder
+inline konst TopologicalLibraryOrder: org.jetbrains.kotlin.library.metadata.resolver.LibraryOrder
     get() = org.jetbrains.kotlin.library.metadata.resolver.TopologicalLibraryOrder
 
 @Deprecated(

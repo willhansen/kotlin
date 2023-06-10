@@ -4,9 +4,9 @@
 // some comment
 class A(
         /**
-         * Doc comment for val-parameter
+         * Doc comment for konst-parameter
          */
-        /*var*/val p: Int
+        /*var*/konst p: Int
 ) {
     /**
      * Doc comment for function
@@ -29,7 +29,7 @@ class A(
       /** Doc comment for getter */
       get() = 1
       /** Doc comment for setter */
-      set(value) {}
+      set(konstue) {}
 }
 
 /**

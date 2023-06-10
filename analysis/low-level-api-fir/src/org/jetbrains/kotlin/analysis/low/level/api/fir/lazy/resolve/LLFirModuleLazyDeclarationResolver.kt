@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.api.FirDesignationWithFil
 import org.jetbrains.kotlin.analysis.low.level.api.fir.api.targets.LLFirClassWithAllMembersResolveTarget
 import org.jetbrains.kotlin.analysis.low.level.api.fir.api.targets.LLFirResolveTarget
 import org.jetbrains.kotlin.analysis.low.level.api.fir.api.targets.LLFirSingleResolveTarget
-import org.jetbrains.kotlin.analysis.low.level.api.fir.file.builder.InvalidSessionException
+import org.jetbrains.kotlin.analysis.low.level.api.fir.file.builder.InkonstidSessionException
 import org.jetbrains.kotlin.analysis.low.level.api.fir.project.structure.llFirModuleData
 import org.jetbrains.kotlin.analysis.low.level.api.fir.sessions.llFirSession
 import org.jetbrains.kotlin.analysis.low.level.api.fir.transformers.LLFirLazyResolverRunner
@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.fir.resolve.transformers.FirImportResolveTransformer
 import org.jetbrains.kotlin.fir.resolve.transformers.body.resolve.FirTowerDataContextCollector
 import org.jetbrains.kotlin.fir.visitors.transformSingle
 
-internal class LLFirModuleLazyDeclarationResolver(val moduleComponents: LLFirModuleResolveComponents) {
+internal class LLFirModuleLazyDeclarationResolver(konst moduleComponents: LLFirModuleResolveComponents) {
     /**
      * Lazily resolves the [target] to a given [toPhase].
      *
@@ -41,7 +41,7 @@ internal class LLFirModuleLazyDeclarationResolver(val moduleComponents: LLFirMod
         scopeSession: ScopeSession,
         toPhase: FirResolvePhase,
     ) {
-        val fromPhase = target.resolvePhase
+        konst fromPhase = target.resolvePhase
         if (fromPhase >= toPhase) return
         try {
             resolveContainingFileToImports(target)
@@ -72,7 +72,7 @@ internal class LLFirModuleLazyDeclarationResolver(val moduleComponents: LLFirMod
         scopeSession: ScopeSession,
         toPhase: FirResolvePhase,
     ) {
-        val fromPhase = target.resolvePhase
+        konst fromPhase = target.resolvePhase
         try {
             resolveContainingFileToImports(target)
             if (toPhase == FirResolvePhase.IMPORTS) return
@@ -122,13 +122,13 @@ internal class LLFirModuleLazyDeclarationResolver(val moduleComponents: LLFirMod
     ) {
         resolveFileToImportsWithLock(designation.firFile)
 
-        val target = when (designation.target) {
+        konst target = when (designation.target) {
             is FirRegularClass -> LLFirClassWithAllMembersResolveTarget(designation.firFile, designation.path, designation.target)
             else -> LLFirSingleResolveTarget(designation.firFile, designation.path, designation.target)
         }
 
         fun runTransformation() {
-            val scopeSession = ScopeSession()
+            konst scopeSession = ScopeSession()
             lazyResolveTargets(listOf(target), scopeSession, FirResolvePhase.BODY_RESOLVE, towerDataContextCollector)
         }
 
@@ -145,7 +145,7 @@ internal class LLFirModuleLazyDeclarationResolver(val moduleComponents: LLFirMod
 
     private fun resolveContainingFileToImports(target: FirElementWithResolveState) {
         if (target.resolvePhase >= FirResolvePhase.IMPORTS) return
-        val firFile = target.getContainingFile() ?: return
+        konst firFile = target.getContainingFile() ?: return
         resolveFileToImportsWithLock(firFile)
     }
 
@@ -200,14 +200,14 @@ private fun handleExceptionFromResolve(
     fromPhase: FirResolvePhase,
     toPhase: FirResolvePhase?
 ): Nothing {
-    if (exception is InvalidSessionException) {
+    if (exception is InkonstidSessionException) {
         throw exception
     }
 
-    firDeclarationToResolve.llFirSession.invalidate()
+    firDeclarationToResolve.llFirSession.inkonstidate()
     rethrowExceptionWithDetails(
         buildString {
-            val moduleData = firDeclarationToResolve.llFirModuleData
+            konst moduleData = firDeclarationToResolve.llFirModuleData
             appendLine("Error while resolving ${firDeclarationToResolve::class.java.name} ")
             appendLine("from $fromPhase to $toPhase")
             appendLine("current declaration phase ${firDeclarationToResolve.resolvePhase}")
@@ -231,13 +231,13 @@ private fun handleExceptionFromResolve(
     designation: LLFirResolveTarget,
     toPhase: FirResolvePhase?
 ): Nothing {
-    if (exception is InvalidSessionException) {
+    if (exception is InkonstidSessionException) {
         throw exception
     }
 
-    val llFirSession = designation.firFile.llFirSession
-    llFirSession.invalidate()
-    val moduleData = llFirSession.llFirModuleData
+    konst llFirSession = designation.firFile.llFirSession
+    llFirSession.inkonstidate()
+    konst moduleData = llFirSession.llFirModuleData
     rethrowExceptionWithDetails(
         buildString {
             appendLine("Error while resolving ${designation::class.java.name} ")

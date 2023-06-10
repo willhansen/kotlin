@@ -10,10 +10,10 @@ import kotlinx.serialization.encoding.*
 class Nope {}
 
 class NopeNullableSerializer: KSerializer<Nope?> {
-    override val descriptor: SerialDescriptor get() = TODO()
+    override konst descriptor: SerialDescriptor get() = TODO()
     override fun deserialize(decoder: Decoder): Nope? = TODO()
-    override fun serialize(encoder: Encoder, value: Nope?) = TODO()
+    override fun serialize(encoder: Encoder, konstue: Nope?) = TODO()
 }
 
 @Serializable
-class Foo(val foo: <!SERIALIZER_NULLABILITY_INCOMPATIBLE("NopeNullableSerializer; Nope")!>Nope<!>)
+class Foo(konst foo: <!SERIALIZER_NULLABILITY_INCOMPATIBLE("NopeNullableSerializer; Nope")!>Nope<!>)

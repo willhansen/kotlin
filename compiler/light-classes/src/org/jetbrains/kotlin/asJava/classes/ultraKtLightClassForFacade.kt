@@ -19,13 +19,13 @@ import org.jetbrains.kotlin.psi.psiUtil.isPrivate
 class KtUltraLightClassForFacade(
     facadeClassFqName: FqName,
     files: Collection<KtFile>,
-    private val filesWithSupports: Collection<Pair<KtFile, KtUltraLightSupport>>,
+    private konst filesWithSupports: Collection<Pair<KtFile, KtUltraLightSupport>>,
 ) : KtLightClassForFacadeBase(facadeClassFqName, files) {
-    private val _modifierListForSimpleFacade: PsiModifierList by lazyPub {
+    private konst _modifierListForSimpleFacade: PsiModifierList by lazyPub {
         KtUltraLightSimpleModifierList(owner = this, modifiers = setOf(PsiModifier.PUBLIC, PsiModifier.FINAL))
     }
 
-    private val _givenAnnotations: List<KtLightAbstractAnnotation>? by lazyPub {
+    private konst _givenAnnotations: List<KtLightAbstractAnnotation>? by lazyPub {
         files.flatMap { file ->
             file.annotationEntries.map { entry ->
                 KtLightAnnotationForSourceEntry(
@@ -38,14 +38,14 @@ class KtUltraLightClassForFacade(
         }
     }
 
-    override val givenAnnotations: List<KtLightAbstractAnnotation>?
+    override konst givenAnnotations: List<KtLightAbstractAnnotation>?
         get() = if (multiFileClass) emptyList() else _givenAnnotations
 
     override fun createModifierListForSimpleFacade(): PsiModifierList = _modifierListForSimpleFacade
 
     override fun getScope(): PsiElement? = parent
 
-    private val filesWithSupportsWithCreators by lazyPub {
+    private konst filesWithSupportsWithCreators by lazyPub {
         filesWithSupports.map { (file, support) ->
             Triple(
                 file,
@@ -68,7 +68,7 @@ class KtUltraLightClassForFacade(
         result: MutableList<KtLightMethod>
     ) {
         for (declaration in file.declarations.filterNot { it.isHiddenByDeprecation(support) }) {
-            val methods = when (declaration) {
+            konst methods = when (declaration) {
                 is KtNamedFunction -> creator.createMethods(
                     ktFunction = declaration,
                     forceStatic = true
@@ -93,8 +93,8 @@ class KtUltraLightClassForFacade(
 
     override fun createOwnFields(): List<KtLightField> = hashSetOf<String>().let { nameCache ->
         filesWithSupportsWithCreators.flatMap { (file, _, creator) ->
-            val allProperties = file.declarations.filterIsInstance<KtProperty>()
-            val properties = if (multiFileClass) allProperties.filter { it.hasModifier(KtTokens.CONST_KEYWORD) } else allProperties
+            konst allProperties = file.declarations.filterIsInstance<KtProperty>()
+            konst properties = if (multiFileClass) allProperties.filter { it.hasModifier(KtTokens.CONST_KEYWORD) } else allProperties
             properties.mapNotNull {
                 creator.createPropertyField(it, nameCache, forceStatic = true)
             }

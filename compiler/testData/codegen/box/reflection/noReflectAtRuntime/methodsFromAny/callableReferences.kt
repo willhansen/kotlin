@@ -6,11 +6,11 @@ import kotlin.test.*
 
 class M {
     fun foo() {}
-    val bar = 1
+    konst bar = 1
 }
 
 fun topLevelFun() {}
-val topLevelProp = ""
+konst topLevelProp = ""
 
 fun <T> checkEquals(x: KCallable<T>, y: KCallable<T>) {
     assertEquals(x, y)

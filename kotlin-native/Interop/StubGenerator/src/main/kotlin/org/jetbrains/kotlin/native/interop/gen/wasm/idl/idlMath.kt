@@ -20,7 +20,7 @@ package org.jetbrains.kotlin.native.interop.gen.wasm.idl
 // so in any case this one will be a part of the project.
 // Although, may be in the form of our own WebIDL source.
 
-val idlMath = listOf(
+konst idlMath = listOf(
     Interface("Math",
         Attribute("E",      idlDouble,  readOnly = true, isStatic = true),
         Attribute("LN2",    idlDouble,  readOnly = true, isStatic = true),

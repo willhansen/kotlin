@@ -5,15 +5,15 @@
 // FILE: SingletonCollection.kt
 package test
 
-open class SingletonCollection<T>(val value: T) : AbstractCollection<T>() {
-    override val size = 1
-    override fun iterator(): Iterator<T> = listOf(value).iterator()
+open class SingletonCollection<T>(konst konstue: T) : AbstractCollection<T>() {
+    override konst size = 1
+    override fun iterator(): Iterator<T> = listOf(konstue).iterator()
 
     protected override fun toArray(): Array<Any?> =
-            arrayOf<Any?>(value)
+            arrayOf<Any?>(konstue)
 
     protected override fun <E> toArray(a: Array<E>): Array<E> {
-        a[0] = value as E
+        a[0] = konstue as E
         return a
     }
 }
@@ -22,8 +22,8 @@ open class SingletonCollection<T>(val value: T) : AbstractCollection<T>() {
 import test.*;
 
 public class JavaSingletonCollection<T> extends SingletonCollection<T> {
-    public JavaSingletonCollection(T value) {
-        super(value);
+    public JavaSingletonCollection(T konstue) {
+        super(konstue);
     }
 }
 
@@ -31,8 +31,8 @@ public class JavaSingletonCollection<T> extends SingletonCollection<T> {
 import test.*;
 
 public class JavaSingletonCollection2<T> extends SingletonCollection<T> {
-    public JavaSingletonCollection2(T value) {
-        super(value);
+    public JavaSingletonCollection2(T konstue) {
+        super(konstue);
     }
 
     public Object[] toArray() {
@@ -49,19 +49,19 @@ public class JavaSingletonCollection2<T> extends SingletonCollection<T> {
 import test.*
 
 fun box(): String {
-    val jsc = JavaSingletonCollection(42) as java.util.Collection<Int>
-    val test3 = jsc.toArray()
+    konst jsc = JavaSingletonCollection(42) as java.util.Collection<Int>
+    konst test3 = jsc.toArray()
     if (test3[0] != 42) return "Failed #3"
 
-    val test4 = arrayOf<Any?>(0)
+    konst test4 = arrayOf<Any?>(0)
     jsc.toArray(test4)
     if (test4[0] != 42) return "Failed #4"
 
-    val jsc2 = JavaSingletonCollection2(42) as java.util.Collection<Int>
-    val test5 = jsc2.toArray()
+    konst jsc2 = JavaSingletonCollection2(42) as java.util.Collection<Int>
+    konst test5 = jsc2.toArray()
     if (test5[0] != 42) return "Failed #5"
 
-    val test6 = arrayOf<Any?>(0)
+    konst test6 = arrayOf<Any?>(0)
     jsc2.toArray(test6)
     if (test6[0] != 42) return "Failed #6"
 

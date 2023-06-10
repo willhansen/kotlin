@@ -2,8 +2,8 @@
 
 class Inv<T>
 
-inline class UInt(val value: Int)
-inline class ULong(val value: Long)
+inline class UInt(konst konstue: Int)
+inline class ULong(konst konstue: Long)
 
 object Test {
     fun uIntToULong(f: (UInt) -> ULong) {}

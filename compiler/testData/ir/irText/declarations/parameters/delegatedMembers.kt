@@ -3,7 +3,7 @@
 
 interface IBase<T> {
     fun foo(x: Int)
-    val bar: Int
+    konst bar: Int
     fun <X> qux(t: T, x: X)
 }
 

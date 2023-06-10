@@ -17,17 +17,17 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 class KtUltraLightTypeParameter(
     name: String,
-    private val myOwner: PsiTypeParameterListOwner,
-    private val myParent: PsiElement,
+    private konst myOwner: PsiTypeParameterListOwner,
+    private konst myParent: PsiElement,
     index: Int,
     referenceListBuilder: (PsiElement) -> KotlinLightReferenceListBuilder
 ) :
     LightTypeParameterBuilder(name, myOwner, index),
     PsiElementWithOrigin<KtTypeParameter> {
 
-    private val superList: LightReferenceListBuilder by lazyPub { referenceListBuilder(this) }
+    private konst superList: LightReferenceListBuilder by lazyPub { referenceListBuilder(this) }
 
-    override val origin: KtTypeParameter get() = (myOwner.unwrapped as KtTypeParameterListOwner).typeParameters[index]
+    override konst origin: KtTypeParameter get() = (myOwner.unwrapped as KtTypeParameterListOwner).typeParameters[index]
 
     override fun getExtendsList(): LightReferenceListBuilder = superList
 

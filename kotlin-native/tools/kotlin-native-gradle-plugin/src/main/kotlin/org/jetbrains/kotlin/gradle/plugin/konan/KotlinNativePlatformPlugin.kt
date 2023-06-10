@@ -10,15 +10,15 @@ import javax.inject.Inject
 
 open class KotlinNativePlatformPlugin: KotlinPlatformImplementationPluginBase("native") {
 
-    private val Project.konanMultiplatformTasks: Collection<KonanCompileTask>
+    private konst Project.konanMultiplatformTasks: Collection<KonanCompileTask>
         get() = tasks.withType(KonanCompileTask::class.java).filter { it.enableMultiplatform }
 
-    open class RequestedCommonSourceSet @Inject constructor(private val name: String): Named {
+    open class RequestedCommonSourceSet @Inject constructor(private konst name: String): Named {
         override fun getName() = name
     }
 
     override fun addCommonSourceSetToPlatformSourceSet(commonSourceSet: Named, platformProject: Project) {
-        val commonSourceSetName = commonSourceSet.name
+        konst commonSourceSetName = commonSourceSet.name
 
         platformProject.konanMultiplatformTasks
             .filter { it.commonSourceSets.contains(commonSourceSetName) }

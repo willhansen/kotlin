@@ -18,15 +18,15 @@ package org.jetbrains.structsProducedByMacrosBenchmarks
 import kotlinx.cinterop.*
 import kotlin.math.abs
 
-const val benachmarkSize = 1000
+const konst benachmarkSize = 1000
 
 actual fun macrosBenchmark() {
     memScoped {
-        val ints = new_list_int()
+        konst ints = new_list_int()
         for (i in 1..benachmarkSize) {
             list_push_front_int(ints, i)
         }
-        val floats = new_list_float()
+        konst floats = new_list_float()
         // Copy integer list to float one.
         ints?.pointed?.apply {
             var current = _first
@@ -41,7 +41,7 @@ actual fun macrosBenchmark() {
         var previous: CPointer<list_elem_float>? = null
         var current = floats?.pointed?._first
         while (current != null) {
-            val next = current?.pointed?._next
+            konst next = current?.pointed?._next
             current?.pointed?._next = previous
             previous = current
             current = next

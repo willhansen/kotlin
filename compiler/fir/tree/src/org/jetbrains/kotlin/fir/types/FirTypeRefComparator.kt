@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.fir.render
 import org.jetbrains.kotlin.fir.types.impl.FirImplicitBuiltinTypeRef
 
 object FirTypeRefComparator : Comparator<FirTypeRef> {
-    private val FirTypeRef.priority : Int
+    private konst FirTypeRef.priority : Int
         get() = when (this) {
             is FirUserTypeRef -> 3
             is FirImplicitBuiltinTypeRef -> 2
@@ -18,7 +18,7 @@ object FirTypeRefComparator : Comparator<FirTypeRef> {
         }
 
     override fun compare(a: FirTypeRef, b: FirTypeRef): Int {
-        val priorityDiff = a.priority - b.priority
+        konst priorityDiff = a.priority - b.priority
         if (priorityDiff != 0) {
             return priorityDiff
         }
@@ -28,23 +28,23 @@ object FirTypeRefComparator : Comparator<FirTypeRef> {
                 require(b is FirUserTypeRef) {
                     "priority is inconsistent: ${a.render()} v.s. ${b.render()}"
                 }
-                val qualifierSizeDiff = a.qualifier.size - b.qualifier.size
+                konst qualifierSizeDiff = a.qualifier.size - b.qualifier.size
                 if (qualifierSizeDiff != 0) {
                     return qualifierSizeDiff
                 }
                 for ((aQualifier, bQualifier) in a.qualifier.zip(b.qualifier)) {
-                    val qualifierNameDiff = aQualifier.name.compareTo(bQualifier.name)
+                    konst qualifierNameDiff = aQualifier.name.compareTo(bQualifier.name)
                     if (qualifierNameDiff != 0) {
                         return qualifierNameDiff
                     }
-                    val typeArgumentSizeDiff =
+                    konst typeArgumentSizeDiff =
                         aQualifier.typeArgumentList.typeArguments.size - bQualifier.typeArgumentList.typeArguments.size
                     if (typeArgumentSizeDiff != 0) {
                         return typeArgumentSizeDiff
                     }
-                    val typeArguments = aQualifier.typeArgumentList.typeArguments.zip(bQualifier.typeArgumentList.typeArguments)
+                    konst typeArguments = aQualifier.typeArgumentList.typeArguments.zip(bQualifier.typeArgumentList.typeArguments)
                     for ((aTypeArgument, bTypeArgument) in typeArguments) {
-                        val typeArgumentDiff = FirTypeProjectionComparator.compare(aTypeArgument, bTypeArgument)
+                        konst typeArgumentDiff = FirTypeProjectionComparator.compare(aTypeArgument, bTypeArgument)
                         if (typeArgumentDiff != 0) {
                             return typeArgumentDiff
                         }

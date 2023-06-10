@@ -12,23 +12,23 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.types.SmartcastStability
 
 data class Identifier(
-    val symbol: FirBasedSymbol<*>,
-    val dispatchReceiver: DataFlowVariable?,
-    val extensionReceiver: DataFlowVariable?
+    konst symbol: FirBasedSymbol<*>,
+    konst dispatchReceiver: DataFlowVariable?,
+    konst extensionReceiver: DataFlowVariable?
 ) {
     override fun toString(): String {
-        val callableId = (symbol as? FirCallableSymbol<*>)?.callableId
+        konst callableId = (symbol as? FirCallableSymbol<*>)?.callableId
         return "[$callableId, dispatchReceiver = $dispatchReceiver, extensionReceiver = $extensionReceiver]"
     }
 }
 
-sealed class DataFlowVariable(private val variableIndexForDebug: Int) {
+sealed class DataFlowVariable(private konst variableIndexForDebug: Int) {
     final override fun toString(): String {
         return "d$variableIndexForDebug"
     }
 }
 
-enum class PropertyStability(val impliedSmartcastStability: SmartcastStability?) {
+enum class PropertyStability(konst impliedSmartcastStability: SmartcastStability?) {
     // Immutable and no custom getter or local.
     // Smartcast is definitely safe regardless of usage.
     STABLE_VALUE(SmartcastStability.STABLE_VALUE),
@@ -40,7 +40,7 @@ enum class PropertyStability(val impliedSmartcastStability: SmartcastStability?)
     // Smartcast is always unsafe regardless of usage.
     PROPERTY_WITH_GETTER(SmartcastStability.PROPERTY_WITH_GETTER),
 
-    // Protected / public member value from another module.
+    // Protected / public member konstue from another module.
     // Smartcast is always unsafe regardless of usage.
     ALIEN_PUBLIC_PROPERTY(SmartcastStability.ALIEN_PUBLIC_PROPERTY),
 
@@ -65,21 +65,21 @@ enum class PropertyStability(val impliedSmartcastStability: SmartcastStability?)
 }
 
 class RealVariable(
-    val identifier: Identifier,
-    val isThisReference: Boolean,
-    val explicitReceiverVariable: DataFlowVariable?,
+    konst identifier: Identifier,
+    konst isThisReference: Boolean,
+    konst explicitReceiverVariable: DataFlowVariable?,
     variableIndexForDebug: Int,
     stability: PropertyStability,
 ) : DataFlowVariable(variableIndexForDebug) {
-    val dependentVariables = mutableSetOf<RealVariable>()
+    konst dependentVariables = mutableSetOf<RealVariable>()
 
-    val stability: PropertyStability = stability.combineWithReceiverStability((explicitReceiverVariable as? RealVariable)?.stability)
+    konst stability: PropertyStability = stability.combineWithReceiverStability((explicitReceiverVariable as? RealVariable)?.stability)
 
     override fun equals(other: Any?): Boolean {
         return this === other
     }
 
-    private val _hashCode by lazy {
+    private konst _hashCode by lazy {
         31 * identifier.hashCode() + (explicitReceiverVariable?.hashCode() ?: 0)
     }
 
@@ -94,7 +94,7 @@ class RealVariable(
     }
 }
 
-class SyntheticVariable(val fir: FirElement, variableIndexForDebug: Int) : DataFlowVariable(variableIndexForDebug) {
+class SyntheticVariable(konst fir: FirElement, variableIndexForDebug: Int) : DataFlowVariable(variableIndexForDebug) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

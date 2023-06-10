@@ -3,7 +3,7 @@ package foo
 
 fun box(): String {
 
-    val a = "String";
+    konst a = "String";
     return "OK";
 }
 

@@ -18,7 +18,7 @@ expect var defaultSetteCustomVisibility4: Int
 expect var defaultSetteCustomVisibility5: Int
     private set
 
-expect val propertyWithoutSetter: Int
+expect konst propertyWithoutSetter: Int
 expect var propertyMaybeSetter: Int
     private set
 expect var propertyWithSetter: Int

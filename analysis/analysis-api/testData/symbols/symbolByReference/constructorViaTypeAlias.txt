@@ -20,7 +20,7 @@ KtConstructorSymbol:
   typeParameters: [
     KtTypeParameterSymbol(E)
   ]
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

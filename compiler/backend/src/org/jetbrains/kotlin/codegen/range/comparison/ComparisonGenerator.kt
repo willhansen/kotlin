@@ -27,7 +27,7 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 interface ComparisonGenerator {
-    val comparedType: Type
+    konst comparedType: Type
 
     fun jumpIfGreaterOrEqual(v: InstructionAdapter, label: Label)
     fun jumpIfLessOrEqual(v: InstructionAdapter, label: Label)
@@ -60,34 +60,34 @@ fun getComparisonGeneratorForKotlinType(kotlinType: KotlinType): ComparisonGener
     }
 
 class RangeContainsTypeInfo(
-    val rangeElementType: KotlinType,
-    val valueParameterType: KotlinType
+    konst rangeElementType: KotlinType,
+    konst konstueParameterType: KotlinType
 )
 
 fun getRangeContainsTypeInfo(call: ResolvedCall<out CallableDescriptor>): RangeContainsTypeInfo? {
-    val descriptor = call.resultingDescriptor
-    val receiverType = descriptor.extensionReceiverParameter?.type ?: descriptor.dispatchReceiverParameter?.type ?: return null
-    val elementType = getRangeOrProgressionElementType(receiverType) ?: return null
-    val valueParameterType = descriptor.valueParameters.singleOrNull()?.type ?: return null
-    return RangeContainsTypeInfo(elementType, valueParameterType)
+    konst descriptor = call.resultingDescriptor
+    konst receiverType = descriptor.extensionReceiverParameter?.type ?: descriptor.dispatchReceiverParameter?.type ?: return null
+    konst elementType = getRangeOrProgressionElementType(receiverType) ?: return null
+    konst konstueParameterType = descriptor.konstueParameters.singleOrNull()?.type ?: return null
+    return RangeContainsTypeInfo(elementType, konstueParameterType)
 }
 
 fun getComparisonGeneratorForRangeContainsCall(
     codegen: ExpressionCodegen,
     rangeContainsTypeInfo: RangeContainsTypeInfo
 ): ComparisonGenerator? {
-    val elementType = rangeContainsTypeInfo.rangeElementType
-    val valueParameterType = rangeContainsTypeInfo.valueParameterType
+    konst elementType = rangeContainsTypeInfo.rangeElementType
+    konst konstueParameterType = rangeContainsTypeInfo.konstueParameterType
 
-    val asmElementType = codegen.asmType(elementType)
-    val asmValueParameterType = codegen.asmType(valueParameterType)
+    konst asmElementType = codegen.asmType(elementType)
+    konst asmValueParameterType = codegen.asmType(konstueParameterType)
 
     return when {
         asmElementType == asmValueParameterType ->
             getComparisonGeneratorForKotlinType(elementType)
 
         KotlinBuiltIns.isUInt(elementType) ->
-            if (KotlinBuiltIns.isULong(valueParameterType))
+            if (KotlinBuiltIns.isULong(konstueParameterType))
                 null
             else
                 UIntComparisonGenerator

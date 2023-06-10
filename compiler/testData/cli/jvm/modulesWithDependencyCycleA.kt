@@ -4,7 +4,7 @@ import b.*
 
 class A
 
-class X(val y: Y? = null)
+class X(konst y: Y? = null)
 class Z : Y()
 
 fun topLevelA1() {

@@ -13,16 +13,16 @@ public class Test {
 // FILE: simple.kt
 
 
-public class Bar(public val s: String)
+public class Bar(public konst s: String)
 
 interface Foo {
 
     companion object {
         @JvmField
-        val o = Bar("O")
+        konst o = Bar("O")
 
         @JvmField
-        val k = Bar("K")
+        konst k = Bar("K")
     }
 }
 

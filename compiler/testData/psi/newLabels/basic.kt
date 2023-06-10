@@ -15,7 +15,7 @@ fun foo() {
         return@loop2 5
     }
 
-    label1@ val x = 1
+    label1@ konst x = 1
 
     1 + label3@ 3 + 4
 

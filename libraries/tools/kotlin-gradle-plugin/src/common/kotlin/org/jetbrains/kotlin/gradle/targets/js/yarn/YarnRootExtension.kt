@@ -16,13 +16,13 @@ import org.jetbrains.kotlin.gradle.tasks.internal.CleanableStore
 import java.io.File
 
 open class YarnRootExtension(
-    val project: Project
+    konst project: Project
 ) : ConfigurationPhaseAware<YarnEnv>() {
     init {
         check(project == project.rootProject)
     }
 
-    private val gradleHome = project.gradle.gradleUserHomeDir.also {
+    private konst gradleHome = project.gradle.gradleUserHomeDir.also {
         project.logger.kotlinInfo("Storing cached files in $it")
     }
 
@@ -45,17 +45,17 @@ open class YarnRootExtension(
 
     var yarnLockAutoReplace: Boolean by Property(false)
 
-    val yarnSetupTaskProvider: TaskProvider<YarnSetupTask>
+    konst yarnSetupTaskProvider: TaskProvider<YarnSetupTask>
         get() = project.tasks
             .withType(YarnSetupTask::class.java)
             .named(YarnSetupTask.NAME)
 
-    val rootPackageJsonTaskProvider: TaskProvider<RootPackageJsonTask>
+    konst rootPackageJsonTaskProvider: TaskProvider<RootPackageJsonTask>
         get() = project.tasks
             .withType(RootPackageJsonTask::class.java)
             .named(RootPackageJsonTask.NAME)
 
-    internal val platform: org.gradle.api.provider.Property<Platform> = project.objects.property(Platform::class.java)
+    internal konst platform: org.gradle.api.provider.Property<Platform> = project.objects.property(Platform::class.java)
 
     var resolutions: MutableList<YarnResolution> by Property(mutableListOf())
 
@@ -73,14 +73,14 @@ open class YarnRootExtension(
     }
 
     override fun finalizeConfiguration(): YarnEnv {
-        val cleanableStore = CleanableStore[installationDir.path]
+        konst cleanableStore = CleanableStore[installationDir.path]
 
-        val isWindows = platform.get().isWindows()
+        konst isWindows = platform.get().isWindows()
 
-        val home = cleanableStore["yarn-v$version"].use()
+        konst home = cleanableStore["yarn-v$version"].use()
 
         fun getExecutable(command: String, customCommand: String, windowsExtension: String): String {
-            val finalCommand = if (isWindows && customCommand == command) "$command.$windowsExtension" else customCommand
+            konst finalCommand = if (isWindows && customCommand == command) "$command.$windowsExtension" else customCommand
             return if (download)
                 home
                     .resolve("bin/yarn.js").absolutePath
@@ -103,15 +103,15 @@ open class YarnRootExtension(
     }
 
     companion object {
-        const val YARN: String = "kotlinYarn"
+        const konst YARN: String = "kotlinYarn"
 
         operator fun get(project: Project): YarnRootExtension {
-            val rootProject = project.rootProject
+            konst rootProject = project.rootProject
             rootProject.plugins.apply(YarnPlugin::class.java)
             return rootProject.extensions.getByName(YARN) as YarnRootExtension
         }
     }
 }
 
-val Project.yarn: YarnRootExtension
+konst Project.yarn: YarnRootExtension
     get() = YarnRootExtension[this]

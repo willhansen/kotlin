@@ -4,7 +4,7 @@ inline fun runReturning(f: () -> Nothing): Nothing = f()
 // FILE: 2.kt
 fun box(): String {
     var r = ""
-    val x = Array<String>(1) ext@{
+    konst x = Array<String>(1) ext@{
         try {
             Array<String>(1) {
                 try {

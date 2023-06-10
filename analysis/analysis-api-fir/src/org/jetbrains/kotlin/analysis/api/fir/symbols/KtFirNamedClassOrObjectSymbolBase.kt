@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.analysis.api.fir.symbols
 
-import com.intellij.codeInsight.PsiEquivalenceUtil
+import com.intellij.codeInsight.PsiEquikonstenceUtil
 import com.intellij.psi.PsiClass
 import org.jetbrains.kotlin.analysis.api.KtAnalysisSession
 import org.jetbrains.kotlin.analysis.api.fir.symbols.pointers.KtFirClassLikeSymbolPointer
@@ -29,16 +29,16 @@ internal sealed class KtFirNamedClassOrObjectSymbolBase : KtNamedClassOrObjectSy
      * Whether [firSymbol] is computed lazily. Equality will fall back to PSI-equality if one of the symbols is lazy and both classes have
      * an associated [PsiClass].
      */
-    open val hasLazyFirSymbol: Boolean get() = false
+    open konst hasLazyFirSymbol: Boolean get() = false
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || other !is KtFirNamedClassOrObjectSymbolBase) return false
 
         if (hasLazyFirSymbol || other.hasLazyFirSymbol) {
-            val psiClass = psi as? PsiClass ?: return symbolEquals(other)
-            val otherPsiClass = other.psi as? PsiClass ?: return symbolEquals(other)
-            return PsiEquivalenceUtil.areElementsEquivalent(psiClass, otherPsiClass)
+            konst psiClass = psi as? PsiClass ?: return symbolEquals(other)
+            konst otherPsiClass = other.psi as? PsiClass ?: return symbolEquals(other)
+            return PsiEquikonstenceUtil.areElementsEquikonstent(psiClass, otherPsiClass)
         }
         return symbolEquals(other)
     }
@@ -52,7 +52,7 @@ internal sealed class KtFirNamedClassOrObjectSymbolBase : KtNamedClassOrObjectSy
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Shared Operations
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    override val superTypes: List<KtType> by cached {
+    override konst superTypes: List<KtType> by cached {
         firSymbol.superTypesList(builder)
     }
 
@@ -60,7 +60,7 @@ internal sealed class KtFirNamedClassOrObjectSymbolBase : KtNamedClassOrObjectSy
     override fun createPointer(): KtSymbolPointer<KtNamedClassOrObjectSymbol> = withValidityAssertion {
         KtPsiBasedSymbolPointer.createForSymbolFromSource<KtNamedClassOrObjectSymbol>(this)?.let { return it }
 
-        return when (val symbolKind = symbolKind) {
+        return when (konst symbolKind = symbolKind) {
             KtSymbolKind.LOCAL ->
                 throw CanNotCreateSymbolPointerForLocalLibraryDeclarationException(classIdIfNonLocal?.asString() ?: name.asString())
 

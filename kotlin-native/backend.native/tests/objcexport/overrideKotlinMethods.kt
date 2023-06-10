@@ -29,14 +29,14 @@ interface OverrideKotlinMethods6 : OverrideKotlinMethods5
 // Using `Any` because Kotlin forbids internal type in public function signature.
 @Throws(Throwable::class)
 fun test0(obj: Any) {
-    val obj0 = obj as OverrideKotlinMethods0<*>
+    konst obj0 = obj as OverrideKotlinMethods0<*>
     assertEquals(1, obj0.one())
 }
 
 // Using `Any` because Kotlin forbids internal type in public function signature.
 @Throws(Throwable::class)
 fun test1(obj: Any) {
-    val obj1 = obj as OverrideKotlinMethods1<*>
+    konst obj1 = obj as OverrideKotlinMethods1<*>
     assertEquals(1, obj1.one())
 }
 

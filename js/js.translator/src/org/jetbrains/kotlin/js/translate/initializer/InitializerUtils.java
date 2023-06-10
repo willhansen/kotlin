@@ -34,9 +34,9 @@ public final class InitializerUtils {
     public static JsStatement generateInitializerForProperty(
             @NotNull TranslationContext context,
             @NotNull PropertyDescriptor descriptor,
-            @NotNull JsExpression value
+            @NotNull JsExpression konstue
     ) {
-        JsExpression assignment = assignmentToBackingField(context, descriptor, value);
+        JsExpression assignment = assignmentToBackingField(context, descriptor, konstue);
         assignment.setSource(PsiSourceElementKt.getPsi(descriptor.getSource()));
         return assignment.makeStmt();
     }
@@ -45,8 +45,8 @@ public final class InitializerUtils {
     public static JsStatement generateInitializerForDelegate(
             @NotNull TranslationContext context,
             @NotNull PropertyDescriptor descriptor,
-            @NotNull JsExpression value
+            @NotNull JsExpression konstue
     ) {
-        return JsAstUtils.defineSimpleProperty(context.getNameForBackingField(descriptor), value, descriptor.getSource());
+        return JsAstUtils.defineSimpleProperty(context.getNameForBackingField(descriptor), konstue, descriptor.getSource());
     }
 }

@@ -57,7 +57,7 @@ static inline uint8_t* mi_page_area(const mi_page_t* page) {
 }
 */
 
-static bool mi_page_list_is_valid(mi_page_t* page, mi_block_t* p) {
+static bool mi_page_list_is_konstid(mi_page_t* page, mi_block_t* p) {
   size_t psize;
   uint8_t* page_area = _mi_page_start(_mi_page_segment(page), page, &psize);
   mi_block_t* start = (mi_block_t*)page_area;
@@ -69,7 +69,7 @@ static bool mi_page_list_is_valid(mi_page_t* page, mi_block_t* p) {
   return true;
 }
 
-static bool mi_page_is_valid_init(mi_page_t* page) {
+static bool mi_page_is_konstid_init(mi_page_t* page) {
   mi_assert_internal(page->xblock_size > 0);
   mi_assert_internal(page->used <= page->capacity);
   mi_assert_internal(page->capacity <= page->reserved);
@@ -80,8 +80,8 @@ static bool mi_page_is_valid_init(mi_page_t* page) {
   mi_assert_internal(start == _mi_segment_page_start(segment,page,bsize,NULL,NULL));
   //mi_assert_internal(start + page->capacity*page->block_size == page->top);
 
-  mi_assert_internal(mi_page_list_is_valid(page,page->free));
-  mi_assert_internal(mi_page_list_is_valid(page,page->local_free));
+  mi_assert_internal(mi_page_list_is_konstid(page,page->free));
+  mi_assert_internal(mi_page_list_is_konstid(page,page->local_free));
 
   #if MI_DEBUG>3 // generally too expensive to check this
   if (page->flags.is_zero) {
@@ -92,7 +92,7 @@ static bool mi_page_is_valid_init(mi_page_t* page) {
   #endif
 
   mi_block_t* tfree = mi_page_thread_free(page);
-  mi_assert_internal(mi_page_list_is_valid(page, tfree));
+  mi_assert_internal(mi_page_list_is_konstid(page, tfree));
   //size_t tfree_count = mi_page_list_count(page, tfree);
   //mi_assert_internal(tfree_count <= page->thread_freed + 1);
 
@@ -102,8 +102,8 @@ static bool mi_page_is_valid_init(mi_page_t* page) {
   return true;
 }
 
-bool _mi_page_is_valid(mi_page_t* page) {
-  mi_assert_internal(mi_page_is_valid_init(page));
+bool _mi_page_is_konstid(mi_page_t* page) {
+  mi_assert_internal(mi_page_is_konstid_init(page));
   #if MI_SECURE
   mi_assert_internal(page->keys[0] != 0);
   #endif
@@ -228,7 +228,7 @@ void _mi_page_free_collect(mi_page_t* page, bool force) {
 
 // called from segments when reclaiming abandoned pages
 void _mi_page_reclaim(mi_heap_t* heap, mi_page_t* page) {
-  mi_assert_expensive(mi_page_is_valid_init(page));
+  mi_assert_expensive(mi_page_is_konstid_init(page));
   mi_assert_internal(mi_page_heap(page) == heap);
   mi_assert_internal(mi_page_thread_free_flag(page) != MI_NEVER_DELAYED_FREE);
   mi_assert_internal(_mi_page_segment(page)->page_kind != MI_PAGE_HUGE);
@@ -236,7 +236,7 @@ void _mi_page_reclaim(mi_heap_t* heap, mi_page_t* page) {
   // TODO: push on full queue immediately if it is full?
   mi_page_queue_t* pq = mi_page_queue(heap, mi_page_block_size(page));
   mi_page_queue_push(heap, pq, page);
-  mi_assert_expensive(_mi_page_is_valid(page));
+  mi_assert_expensive(_mi_page_is_konstid(page));
 }
 
 // allocate a fresh page from a segment
@@ -253,7 +253,7 @@ static mi_page_t* mi_page_fresh_alloc(mi_heap_t* heap, mi_page_queue_t* pq, size
   mi_page_init(heap, page, block_size, heap->tld);
   _mi_stat_increase(&heap->tld->stats.pages, 1);
   if (pq!=NULL) mi_page_queue_push(heap, pq, page); // huge pages use pq==NULL
-  mi_assert_expensive(_mi_page_is_valid(page));
+  mi_assert_expensive(_mi_page_is_konstid(page));
   return page;
 }
 
@@ -299,7 +299,7 @@ void _mi_heap_delayed_free(mi_heap_t* heap) {
 // Move a page from the full list back to a regular list
 void _mi_page_unfull(mi_page_t* page) {
   mi_assert_internal(page != NULL);
-  mi_assert_expensive(_mi_page_is_valid(page));
+  mi_assert_expensive(_mi_page_is_konstid(page));
   mi_assert_internal(mi_page_is_in_full(page));
   if (!mi_page_is_in_full(page)) return;
 
@@ -328,7 +328,7 @@ static void mi_page_to_full(mi_page_t* page, mi_page_queue_t* pq) {
 // Currently only called through `mi_heap_collect_ex` which ensures this.
 void _mi_page_abandon(mi_page_t* page, mi_page_queue_t* pq) {
   mi_assert_internal(page != NULL);
-  mi_assert_expensive(_mi_page_is_valid(page));
+  mi_assert_expensive(_mi_page_is_konstid(page));
   mi_assert_internal(pq == mi_page_queue_of(page));
   mi_assert_internal(mi_page_heap(page) != NULL);
 
@@ -358,7 +358,7 @@ void _mi_page_abandon(mi_page_t* page, mi_page_queue_t* pq) {
 // Free a page with no more free blocks
 void _mi_page_free(mi_page_t* page, mi_page_queue_t* pq, bool force) {
   mi_assert_internal(page != NULL);
-  mi_assert_expensive(_mi_page_is_valid(page));
+  mi_assert_expensive(_mi_page_is_konstid(page));
   mi_assert_internal(pq == mi_page_queue_of(page));
   mi_assert_internal(mi_page_all_free(page));
   mi_assert_internal(mi_page_thread_free_flag(page)!=MI_DELAYED_FREEING);
@@ -387,7 +387,7 @@ void _mi_page_free(mi_page_t* page, mi_page_queue_t* pq, bool force) {
 // allocating again so careful when changing this.
 void _mi_page_retire(mi_page_t* page) {
   mi_assert_internal(page != NULL);
-  mi_assert_expensive(_mi_page_is_valid(page));
+  mi_assert_expensive(_mi_page_is_konstid(page));
   mi_assert_internal(mi_page_all_free(page));
 
   mi_page_set_has_aligned(page, false);
@@ -557,7 +557,7 @@ static mi_decl_noinline void mi_page_free_list_extend( mi_page_t* const page, co
 // allocations but this did not speed up any benchmark (due to an
 // extra test in malloc? or cache effects?)
 static void mi_page_extend_free(mi_heap_t* heap, mi_page_t* page, mi_tld_t* tld) {
-  mi_assert_expensive(mi_page_is_valid_init(page));
+  mi_assert_expensive(mi_page_is_konstid_init(page));
   #if (MI_SECURE<=2)
   mi_assert(page->free == NULL);
   mi_assert(page->local_free == NULL);
@@ -600,7 +600,7 @@ static void mi_page_extend_free(mi_heap_t* heap, mi_page_t* page, mi_tld_t* tld)
   if (!page->is_zero_init) {
     page->is_zero = false;
   }
-  mi_assert_expensive(mi_page_is_valid_init(page));
+  mi_assert_expensive(mi_page_is_konstid_init(page));
 }
 
 // Initialize a fresh page
@@ -634,7 +634,7 @@ static void mi_page_init(mi_heap_t* heap, mi_page_t* page, size_t block_size, mi
   mi_assert_internal(page->keys[0] != 0);
   mi_assert_internal(page->keys[1] != 0);
   #endif
-  mi_assert_expensive(mi_page_is_valid_init(page));
+  mi_assert_expensive(mi_page_is_konstid_init(page));
 
   // initialize an initial free list
   mi_page_extend_free(heap,page,tld);

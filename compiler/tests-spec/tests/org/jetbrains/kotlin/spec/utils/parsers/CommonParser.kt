@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.spec.utils.parsers.CommonPatterns.testInfoElementPat
 import org.jetbrains.kotlin.spec.utils.parsers.CommonPatterns.testPathBaseRegexTemplate
 import org.jetbrains.kotlin.spec.utils.parsers.LinkedSpecTestPatterns.testInfoPattern
 import org.jetbrains.kotlin.spec.utils.parsers.TestCasePatterns.testCaseInfoPattern
-import org.jetbrains.kotlin.spec.utils.validators.SpecTestValidationException
-import org.jetbrains.kotlin.spec.utils.validators.SpecTestValidationFailedReason
+import org.jetbrains.kotlin.spec.utils.konstidators.SpecTestValidationException
+import org.jetbrains.kotlin.spec.utils.konstidators.SpecTestValidationFailedReason
 import java.io.File
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -54,7 +54,7 @@ object CommonParser {
         )
 
     class RelevantLinks(linksMatcher: Matcher?) {
-        val linksSet: MutableSet<SpecPlace> = mutableSetOf()
+        konst linksSet: MutableSet<SpecPlace> = mutableSetOf()
 
         init {
             if (linksMatcher != null) {
@@ -69,16 +69,16 @@ object CommonParser {
 
     fun parseLinkedSpecTest(testFilePath: String, testFiles: TestFiles, isImplementationTest: Boolean = false): LinkedSpecTest {
 
-        val parsedTestFile = tryParseTestInfo(testFilePath, testFiles, SpecTestLinkedType.LINKED, isImplementationTest)
+        konst parsedTestFile = tryParseTestInfo(testFilePath, testFiles, SpecTestLinkedType.LINKED, isImplementationTest)
 
-        val testInfoElements = parsedTestFile.testInfoElements
+        konst testInfoElements = parsedTestFile.testInfoElements
 
-        val primaryLinks =
+        konst primaryLinks =
             RelevantLinks(testInfoElements[LinkedSpecTestFileInfoElementType.PRIMARY_LINKS]?.additionalMatcher).linksSet
-        val secondaryLinks =
+        konst secondaryLinks =
             RelevantLinks(testInfoElements[LinkedSpecTestFileInfoElementType.SECONDARY_LINKS]?.additionalMatcher).linksSet
 
-        val placeMatcher = testInfoElements[LinkedSpecTestFileInfoElementType.MAIN_LINK]?.additionalMatcher
+        konst placeMatcher = testInfoElements[LinkedSpecTestFileInfoElementType.MAIN_LINK]?.additionalMatcher
 
         return LinkedSpecTest(
             testInfoElements[LinkedSpecTestFileInfoElementType.SPEC_VERSION]!!.content,
@@ -99,9 +99,9 @@ object CommonParser {
     }
 
     private fun parseNotLinkedSpecTest(testFilePath: String, testFiles: TestFiles): NotLinkedSpecTest {
-        val parsedTestFile = tryParseTestInfo(testFilePath, testFiles, SpecTestLinkedType.NOT_LINKED)
-        val testInfoElements = parsedTestFile.testInfoElements
-        val sectionsMatcher = testInfoElements[NotLinkedSpecTestFileInfoElementType.SECTIONS]!!.additionalMatcher!!
+        konst parsedTestFile = tryParseTestInfo(testFilePath, testFiles, SpecTestLinkedType.NOT_LINKED)
+        konst testInfoElements = parsedTestFile.testInfoElements
+        konst sectionsMatcher = testInfoElements[NotLinkedSpecTestFileInfoElementType.SECTIONS]!!.additionalMatcher!!
 
         return NotLinkedSpecTest(
             parsedTestFile.testArea,
@@ -121,14 +121,14 @@ object CommonParser {
 
     fun parseTestInfoElements(rules: Array<SpecTestInfoElementType>, rawElements: String):
             SpecTestInfoElements<SpecTestInfoElementType> {
-        val testInfoElementsMap = mutableMapOf<SpecTestInfoElementType, SpecTestInfoElementContent>()
-        val testInfoElementMatcher = testInfoElementPattern.matcher(rawElements)
+        konst testInfoElementsMap = mutableMapOf<SpecTestInfoElementType, SpecTestInfoElementContent>()
+        konst testInfoElementMatcher = testInfoElementPattern.matcher(rawElements)
 
         while (testInfoElementMatcher.find()) {
-            val testInfoOriginalElementName = testInfoElementMatcher.group("name")
-            val testInfoElementValue = parseTestInfoElementValue(testInfoOriginalElementName, testInfoElementMatcher, rawElements)
-            val testInfoElementName = parseSpecTestInfoElementType(rules, testInfoOriginalElementName)
-            val testInfoElementValueMatcher = testInfoElementName.valuePattern?.matcher(testInfoElementValue)
+            konst testInfoOriginalElementName = testInfoElementMatcher.group("name")
+            konst testInfoElementValue = parseTestInfoElementValue(testInfoOriginalElementName, testInfoElementMatcher, rawElements)
+            konst testInfoElementName = parseSpecTestInfoElementType(rules, testInfoOriginalElementName)
+            konst testInfoElementValueMatcher = testInfoElementName.konstuePattern?.matcher(testInfoElementValue)
             checkTestInfoElementIsCorrect(testInfoElementValueMatcher, testInfoElementName, testInfoElementValue)
             testInfoElementsMap[testInfoElementName] =
                 SpecTestInfoElementContent(testInfoElementValue ?: "", testInfoElementValueMatcher)
@@ -147,7 +147,7 @@ object CommonParser {
         LinkedSpecTestPatterns.SECONDARY_LINKS ->
             groupRelevantLinks(LinkedSpecTestPatterns.secondaryLinks, rawElements, testInfoOriginalElementName)
         else ->
-            testInfoElementMatcher.group("value")
+            testInfoElementMatcher.group("konstue")
     }
 
 
@@ -191,7 +191,7 @@ object CommonParser {
 
 
     private fun groupRelevantLinks(linksPattern: Pattern, rawElements: String, linkType: String): String {
-        val placesMatcher = linksPattern.matcher(rawElements)
+        konst placesMatcher = linksPattern.matcher(rawElements)
         if (placesMatcher.find()) {
             return placesMatcher.group("places")
         } else throw Exception("$linkType link is incorrect")

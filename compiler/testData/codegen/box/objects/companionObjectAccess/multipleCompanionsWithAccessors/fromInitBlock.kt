@@ -14,7 +14,7 @@ class Outer : A() {
         fun getK() = "K"
     }
 
-    val test: String
+    konst test: String
 
     init {
         test = getO() + getK()

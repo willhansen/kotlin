@@ -28,7 +28,7 @@ object JsDefinedExternallyCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (resolvedCall.resultingDescriptor.fqNameUnsafe !in DEFINED_EXTERNALLY_PROPERTY_NAMES) return
 
-        val ownerDescriptor = context.scope.ownerDescriptor
+        konst ownerDescriptor = context.scope.ownerDescriptor
         if (!AnnotationsUtils.isNativeObject(ownerDescriptor) && !AnnotationsUtils.isPredefinedObject(ownerDescriptor)) {
             context.trace.report(ErrorsJs.CALL_TO_DEFINED_EXTERNALLY_FROM_NON_EXTERNAL_DECLARATION.on(reportOn))
         }

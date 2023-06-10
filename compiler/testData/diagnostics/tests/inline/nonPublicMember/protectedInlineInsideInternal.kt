@@ -2,10 +2,10 @@
 // ISSUE: KT-58757
 
 internal abstract class Foo {
-    abstract val context: CharSequence
+    abstract konst context: CharSequence
 }
 
-internal abstract class Bar(protected val foo: Foo) {
-    protected inline val inlineContext: String
+internal abstract class Bar(protected konst foo: Foo) {
+    protected inline konst inlineContext: String
         get() = foo.context as String
 }

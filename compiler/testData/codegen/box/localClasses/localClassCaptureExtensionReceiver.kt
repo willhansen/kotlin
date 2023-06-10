@@ -1,5 +1,5 @@
 class Outer {
-    val foo = "Foo"
+    konst foo = "Foo"
 
     fun String.id(): String {
         class Local(unused: Long) {
@@ -7,7 +7,7 @@ class Outer {
             fun outer() = this@Outer
         }
 
-        val l = Local(42L)
+        konst l = Local(42L)
         return l.result() + l.outer().foo
     }
 
@@ -15,7 +15,7 @@ class Outer {
 }
 
 fun box(): String {
-    val r = Outer().result()
+    konst r = Outer().result()
 
     if (r != "OKFoo") return "Fail: $r"
 

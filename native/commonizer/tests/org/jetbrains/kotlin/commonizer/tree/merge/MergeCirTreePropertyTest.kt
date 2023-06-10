@@ -14,11 +14,11 @@ import kotlin.test.assertNotNull
 class MergeCirTreePropertyTest : AbstractMergeCirTreeTest() {
 
     fun `test simple property`() {
-        val aTree = createCirTreeFromSourceCode("""val a: Int = 42""")
-        val bTree = createCirTreeFromSourceCode("""val a: Int = 42""")
-        val merged = mergeCirTree("a" to aTree, "b" to bTree)
+        konst aTree = createCirTreeFromSourceCode("""konst a: Int = 42""")
+        konst bTree = createCirTreeFromSourceCode("""konst a: Int = 42""")
+        konst merged = mergeCirTree("a" to aTree, "b" to bTree)
 
-        val property = merged.assertSingleModule().assertSinglePackage().assertSingleProperty()
+        konst property = merged.assertSingleModule().assertSinglePackage().assertSingleProperty()
         property.targetDeclarations.forEachIndexed { index, cirProperty ->
             assertNotNull(cirProperty, "Expected not-null property at index $index")
             kotlin.test.assertEquals("a", cirProperty.name.toStrippedString(), "Expected correct property name at index $index")
@@ -27,29 +27,29 @@ class MergeCirTreePropertyTest : AbstractMergeCirTreeTest() {
     }
 
     fun `test multiple properties`() {
-        val aTree = createCirTreeFromSourceCode(
+        konst aTree = createCirTreeFromSourceCode(
             """
-                val a: Int = 42
-                val b: Int = 42
-                val c: String = "hello"
+                konst a: Int = 42
+                konst b: Int = 42
+                konst c: String = "hello"
             """.trimIndent()
         )
 
-        val bTree = createCirTreeFromSourceCode(
+        konst bTree = createCirTreeFromSourceCode(
             """
-                val a: Int = 42
-                val b: Int = 42
-                val c: String = "hello"
+                konst a: Int = 42
+                konst b: Int = 42
+                konst c: String = "hello"
             """.trimIndent()
         )
 
-        val merged = mergeCirTree("a" to aTree, "b" to bTree)
-        val pkg = merged.assertSingleModule().assertSinglePackage()
+        konst merged = mergeCirTree("a" to aTree, "b" to bTree)
+        konst pkg = merged.assertSingleModule().assertSinglePackage()
         kotlin.test.assertEquals(3, pkg.properties.size, "Expected exactly three properties")
 
-        val a = pkg.properties[PropertyApproximationKey(create("a"), null)] ?: kotlin.test.fail("Missing a property")
-        val b = pkg.properties[PropertyApproximationKey(create("b"), null)] ?: kotlin.test.fail("Missing a property")
-        val c = pkg.properties[PropertyApproximationKey(create("c"), null)] ?: kotlin.test.fail("Missing a property")
+        konst a = pkg.properties[PropertyApproximationKey(create("a"), null)] ?: kotlin.test.fail("Missing a property")
+        konst b = pkg.properties[PropertyApproximationKey(create("b"), null)] ?: kotlin.test.fail("Missing a property")
+        konst c = pkg.properties[PropertyApproximationKey(create("c"), null)] ?: kotlin.test.fail("Missing a property")
 
         a.assertNoMissingTargetDeclaration()
         b.assertNoMissingTargetDeclaration()
@@ -57,13 +57,13 @@ class MergeCirTreePropertyTest : AbstractMergeCirTreeTest() {
     }
 
     fun `test missing target declarations`() {
-        val aTree = createCirTreeFromSourceCode("val a: Int = 42")
-        val bTree = createCirTreeFromSourceCode("val b: Int = 42")
-        val merged = mergeCirTree("a" to aTree, "b" to bTree)
-        val pkg = merged.assertSingleModule().assertSinglePackage()
+        konst aTree = createCirTreeFromSourceCode("konst a: Int = 42")
+        konst bTree = createCirTreeFromSourceCode("konst b: Int = 42")
+        konst merged = mergeCirTree("a" to aTree, "b" to bTree)
+        konst pkg = merged.assertSingleModule().assertSinglePackage()
 
-        val a = pkg.properties[PropertyApproximationKey(create("a"), null)] ?: kotlin.test.fail("Missing a property")
-        val b = pkg.properties[PropertyApproximationKey(create("b"), null)] ?: kotlin.test.fail("Missing a property")
+        konst a = pkg.properties[PropertyApproximationKey(create("a"), null)] ?: kotlin.test.fail("Missing a property")
+        konst b = pkg.properties[PropertyApproximationKey(create("b"), null)] ?: kotlin.test.fail("Missing a property")
 
         kotlin.test.assertNotNull(a.targetDeclarations[0], "Expected *non* missing target declaration at index 0")
         kotlin.test.assertNull(a.targetDeclarations[1], "Expected missing target declaration for a at index 1")

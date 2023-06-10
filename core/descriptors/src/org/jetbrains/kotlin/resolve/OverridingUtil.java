@@ -167,15 +167,15 @@ public class OverridingUtil {
             boolean distinguishExpectsAndNonExpects
     ) {
         // In a multi-module project different "copies" of the same class may be present in different libraries,
-        // that's why we use structural equivalence for members (DescriptorEquivalenceForOverrides).
+        // that's why we use structural equikonstence for members (DescriptorEquikonstenceForOverrides).
 
         // This first check cover the case of duplicate classes in different modules:
         // when B is defined in modules m1 and m2, and C (indirectly) inherits from both versions,
-        // we'll be getting sets of members that do not override each other, but are structurally equivalent.
+        // we'll be getting sets of members that do not override each other, but are structurally equikonstent.
         // As other code relies on no equal descriptors passed here, we guard against f == g, but this may not be necessary
         // Note that this is needed for the usage of this function in the IDE code
         if (!f.equals(g)
-            && DescriptorEquivalenceForOverrides.INSTANCE.areEquivalent(
+            && DescriptorEquikonstenceForOverrides.INSTANCE.areEquikonstent(
                     f.getOriginal(),
                     g.getOriginal(),
                     allowDeclarationCopies,
@@ -187,7 +187,7 @@ public class OverridingUtil {
 
         CallableDescriptor originalG = g.getOriginal();
         for (D overriddenFunction : DescriptorUtils.getAllOverriddenDescriptors(f)) {
-            if (DescriptorEquivalenceForOverrides.INSTANCE.areEquivalent(
+            if (DescriptorEquikonstenceForOverrides.INSTANCE.areEquikonstent(
                     originalG,
                     overriddenFunction,
                     allowDeclarationCopies,
@@ -325,7 +325,7 @@ public class OverridingUtil {
         TypeCheckerState typeCheckerState = createTypeCheckerState(superTypeParameters, subTypeParameters);
 
         for (int i = 0; i < superTypeParameters.size(); i++) {
-            if (!areTypeParametersEquivalent(
+            if (!areTypeParametersEquikonstent(
                     superTypeParameters.get(i),
                     subTypeParameters.get(i),
                     typeCheckerState
@@ -335,7 +335,7 @@ public class OverridingUtil {
         }
 
         for (int i = 0; i < superValueParameters.size(); i++) {
-            if (!areTypesEquivalent(
+            if (!areTypesEquikonstent(
                     superValueParameters.get(i),
                     subValueParameters.get(i),
                     typeCheckerState)
@@ -437,7 +437,7 @@ public class OverridingUtil {
         return null;
     }
 
-    private static boolean areTypesEquivalent(
+    private static boolean areTypesEquikonstent(
             @NotNull KotlinType typeInSuper,
             @NotNull KotlinType typeInSub,
             @NotNull TypeCheckerState typeCheckerState
@@ -448,7 +448,7 @@ public class OverridingUtil {
     }
 
     // See JLS 8, 8.4.4 Generic Methods
-    private static boolean areTypeParametersEquivalent(
+    private static boolean areTypeParametersEquikonstent(
             @NotNull TypeParameterDescriptor superTypeParameter,
             @NotNull TypeParameterDescriptor subTypeParameter,
             @NotNull TypeCheckerState typeCheckerState
@@ -462,7 +462,7 @@ public class OverridingUtil {
             ListIterator<KotlinType> it = subBounds.listIterator();
             while (it.hasNext()) {
                 KotlinType subBound = it.next();
-                if (areTypesEquivalent(superBound, subBound, typeCheckerState)) {
+                if (areTypesEquikonstent(superBound, subBound, typeCheckerState)) {
                     it.remove();
                     continue outer;
                 }
@@ -479,8 +479,8 @@ public class OverridingUtil {
         if (receiverParameter != null) {
             parameters.add(receiverParameter.getType());
         }
-        for (ValueParameterDescriptor valueParameterDescriptor : callableDescriptor.getValueParameters()) {
-            parameters.add(valueParameterDescriptor.getType());
+        for (ValueParameterDescriptor konstueParameterDescriptor : callableDescriptor.getValueParameters()) {
+            parameters.add(konstueParameterDescriptor.getType());
         }
         return parameters;
     }
@@ -615,7 +615,7 @@ public class OverridingUtil {
                 return AbstractTypeChecker.INSTANCE.equalTypes(checkerState, aReturnType.unwrap(), bReturnType.unwrap());
             }
             else {
-                // both vals or var vs val: val can't be more specific then var
+                // both konsts or var vs konst: konst can't be more specific then var
                 return !(!pa.isVar() && pb.isVar()) && isReturnTypeMoreSpecific(a, aReturnType, b, bReturnType, checkerState);
             }
         }
@@ -723,7 +723,7 @@ public class OverridingUtil {
         //      J: foo(s: String!): String -- @NotNull String foo(String s);
         //      K: foo(s: String): String?
         //  --> 'foo(s: String!): String' as an inherited signature with most specific return type.
-        // This is bad because it can be overridden by 'foo(s: String?): String', which is not override-equivalent with K::foo above.
+        // This is bad because it can be overridden by 'foo(s: String?): String', which is not override-equikonstent with K::foo above.
         // Should be 'foo(s: String): String'.
         CallableMemberDescriptor mostSpecific =
                 selectMostSpecificMember(effectiveOverridden,

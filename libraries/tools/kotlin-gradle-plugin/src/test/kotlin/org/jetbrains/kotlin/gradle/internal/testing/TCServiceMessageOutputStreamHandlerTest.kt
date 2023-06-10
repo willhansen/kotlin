@@ -17,13 +17,13 @@ import java.util.concurrent.ArrayBlockingQueue
 import kotlin.test.assertEquals
 
 class TCServiceMessageOutputStreamHandlerTest {
-    private val client = Mock()
-    private val logEvents = ArrayBlockingQueue<SubstituteLoggingEvent>(10)
-    private val log = EventRecodingLogger(SubstituteLogger("", logEvents, false), logEvents)
-    private val handler = TCServiceMessageOutputStreamHandler(client, {}, log, messageLimitBytes = 35)
+    private konst client = Mock()
+    private konst logEvents = ArrayBlockingQueue<SubstituteLoggingEvent>(10)
+    private konst log = EventRecodingLogger(SubstituteLogger("", logEvents, false), logEvents)
+    private konst handler = TCServiceMessageOutputStreamHandler(client, {}, log, messageLimitBytes = 35)
 
-    private val clientCalls get() = client.log.toString()
-    private val logString get() = logEvents.map { it.message }.toString()
+    private konst clientCalls get() = client.log.toString()
+    private konst logString get() = logEvents.map { it.message }.toString()
 
     @Test
     fun testLines() {
@@ -168,7 +168,7 @@ class TCServiceMessageOutputStreamHandlerTest {
     }
 
     class Mock : ServiceMessageParserCallback {
-        val log = StringBuffer()
+        konst log = StringBuffer()
 
         override fun parseException(p0: ParseException, p1: String) {
             log.append("EXCEPTION: `$p0`, `$p1`\n")

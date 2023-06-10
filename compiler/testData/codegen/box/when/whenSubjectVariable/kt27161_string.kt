@@ -1,7 +1,7 @@
 fun peek() = "A"
 
 fun box(): String {
-    val x = when (val s = peek()) {
+    konst x = when (konst s = peek()) {
         "A" -> "OK"
         "B" -> "B"
         else -> "other $s"

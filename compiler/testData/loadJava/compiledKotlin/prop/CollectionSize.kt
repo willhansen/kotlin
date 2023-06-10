@@ -1,4 +1,4 @@
 package test
 
-val Collection<*>.anotherSize : Int
+konst Collection<*>.anotherSize : Int
     get() = size

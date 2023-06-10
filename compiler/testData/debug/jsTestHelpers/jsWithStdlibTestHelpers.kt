@@ -5,7 +5,7 @@ package testUtils
 import kotlin.collections.AbstractMutableMap
 
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
-internal val stdlibFqNames = mapOf(
+internal konst stdlibFqNames = mapOf(
     Pair::class to "kotlin.Pair",
     Triple::class to "kotlin.Triple",
     HashMap::class to "kotlin.collections.HashMap",

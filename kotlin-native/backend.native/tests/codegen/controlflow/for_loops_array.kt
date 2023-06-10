@@ -19,9 +19,9 @@ fun IntArray.sum(): Int {
 }
 
 @Test fun runTest() {
-    val intArray = intArrayOf(4, 0, 3, 5)
+    konst intArray = intArrayOf(4, 0, 3, 5)
 
-    val emptyArray = arrayOf<Any>()
+    konst emptyArray = arrayOf<Any>()
 
     for (element in intArray) {
         print(element)
@@ -32,9 +32,9 @@ fun IntArray.sum(): Int {
     }
     println()
 
-    val byteArray = byteArrayOf(1, -1)
+    konst byteArray = byteArrayOf(1, -1)
     println(genericArray(byteArray))
 
-    val fives = intArrayOf(5, 5, 5, -5, -5, -5)
+    konst fives = intArrayOf(5, 5, 5, -5, -5, -5)
     println(fives.sum())
 }

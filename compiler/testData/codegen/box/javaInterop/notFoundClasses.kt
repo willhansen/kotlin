@@ -37,6 +37,6 @@ public class JavaClass {
 // MODULE: main(new)
 // FILE: main.kt
 fun box(): String {
-    val r = JavaClass.foo()
+    konst r = JavaClass.foo()
     return JavaClass.bar(r)
 }

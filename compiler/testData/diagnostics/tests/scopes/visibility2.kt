@@ -25,14 +25,14 @@ import a.makeA
 import a.<!INVISIBLE_REFERENCE("PO; private; file")!>PO<!>
 
 fun test() {
-    val y = makeA()
+    konst y = makeA()
     y.<!INVISIBLE_MEMBER("A; private; file")!>bar<!>()
     <!INVISIBLE_MEMBER("foo; private; file")!>foo<!>()
 
-    val u : <!INVISIBLE_REFERENCE("A; private; file")!>A<!> = <!INVISIBLE_MEMBER("A; private; file")!>A<!>()
-    val a : java.util.Arrays.<!INVISIBLE_REFERENCE("ArrayList; private; 'Arrays'")!>ArrayList<!><Int>;
+    konst u : <!INVISIBLE_REFERENCE("A; private; file")!>A<!> = <!INVISIBLE_MEMBER("A; private; file")!>A<!>()
+    konst a : java.util.Arrays.<!INVISIBLE_REFERENCE("ArrayList; private; 'Arrays'")!>ArrayList<!><Int>;
 
-    val po = <!INVISIBLE_MEMBER("PO; private; file")!>PO<!>
+    konst po = <!INVISIBLE_MEMBER("PO; private; file")!>PO<!>
 }
 
 class B : <!EXPOSED_SUPER_CLASS!><!INVISIBLE_MEMBER("A; private; file"), INVISIBLE_REFERENCE("A; private; file")!>A<!>()<!> {}
@@ -40,7 +40,7 @@ class B : <!EXPOSED_SUPER_CLASS!><!INVISIBLE_MEMBER("A; private; file"), INVISIB
 class Q {
     class W {
         fun foo() {
-            val y = makeA() //assure that 'makeA' is visible
+            konst y = makeA() //assure that 'makeA' is visible
         }
     }
 }

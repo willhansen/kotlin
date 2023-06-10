@@ -13,7 +13,7 @@ inline fun ok(): I {
 @JsName("convolutedOk")
 @JsExport
 inline fun convolutedOk(): I {
-    val fail = object : I {
+    konst fail = object : I {
         override fun ok() = "fail"
     }.ok()
 
@@ -23,7 +23,7 @@ inline fun convolutedOk(): I {
 // CHECK_BREAKS_COUNT: function=box count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=box name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun box(): String {
-    val ok = js("_").convolutedOk()
+    konst ok = js("_").convolutedOk()
     if (ok !is I) return "fail"
 
     return ok.ok()

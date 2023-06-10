@@ -18,7 +18,7 @@ inline fun Int.testInlineWithExtensionAndArg(i: Int) = this@Int + i + c()
 context(Context)
 inline fun Int.testInlineWithExtensionAndMultipleArgs(i1: Int, i2: Int) = this@Int + i1 + i2 + c()
 
-class A(val a: Any?)
+class A(konst a: Any?)
 
 context(Context, A)
 inline fun Int.testInlineWithExtensionAndMultipleContextsAndArgs(i1: Int = 1, i2: Int = 2) =

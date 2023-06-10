@@ -9,7 +9,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = A
         symbol = <constructor>(): A
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = null
     typeArgumentsMapping = {}
     argumentMapping = {}
@@ -26,7 +26,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = A
         symbol = <constructor>(p: kotlin.String): A
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = p
             receiverType = null
@@ -49,7 +49,7 @@ KtApplicableCallCandidateInfo:
         receiverType = null
         returnType = A
         symbol = <constructor>(x: kotlin.Int): A
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = x
             receiverType = null

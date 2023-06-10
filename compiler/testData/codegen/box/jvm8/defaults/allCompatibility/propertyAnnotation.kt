@@ -3,12 +3,12 @@
 // JVM_TARGET: 1.8
 // WITH_REFLECT
 
-annotation class Property(val value: String)
-annotation class Accessor(val value: String)
+annotation class Property(konst konstue: String)
+annotation class Accessor(konst konstue: String)
 
 interface Z {
     @Property("OK")
-    val z: String
+    konst z: String
         @Accessor("OK")
         get() = "OK"
 }
@@ -17,7 +17,7 @@ interface Z {
 class Test : Z
 
 fun box() : String {
-    val value = Z::z.annotations.filterIsInstance<Property>().single().value
-    if (value != "OK") return value
-    return (Z::z.getter.annotations.single() as Accessor).value
+    konst konstue = Z::z.annotations.filterIsInstance<Property>().single().konstue
+    if (konstue != "OK") return konstue
+    return (Z::z.getter.annotations.single() as Accessor).konstue
 }

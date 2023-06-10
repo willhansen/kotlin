@@ -1,10 +1,10 @@
 @JvmInline
-value class Some(val value: String)
+konstue class Some(konst konstue: String)
 
 var topLevelProp: Some = Some("1")
 var Some.topLevelPropInExtension: Int
     get() = 1
-    set(value) {}
+    set(konstue) {}
 
 fun topLevelFunInReturn(): Some = Some("1")
 fun topLevelFunInParameter(s: Some) {}
@@ -14,7 +14,7 @@ class SomeClass {
     var memberProp: Some = Some("1")
     var Some.memberPropInExtension: Int
         get() = 1
-        set(value) {}
+        set(konstue) {}
 
     fun memberFunInReturn(): Some = Some("1")
     fun memberFunInParameter(s: Some) {}
@@ -25,7 +25,7 @@ interface SomeInterface {
     var memberProp: Some
     var Some.memberPropInExtension: Int
         get() = 1
-        set(value) {}
+        set(konstue) {}
 
     fun memberFunInReturn(): Some
     fun memberFunInParameter(s: Some)

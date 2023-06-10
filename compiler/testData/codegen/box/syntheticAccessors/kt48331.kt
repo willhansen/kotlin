@@ -14,7 +14,7 @@ abstract class C : Base() {
         override fun foo() = "OK"
     }
 
-    class B(val x: C) : C() {
+    class B(konst x: C) : C() {
         // Needs an accessor (`foo` is in another package and `x` is not assignable to `B`)
         override fun foo() = x.foo()
 

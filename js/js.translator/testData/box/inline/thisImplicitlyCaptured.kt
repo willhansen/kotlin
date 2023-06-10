@@ -7,7 +7,7 @@ class Runner {
 
 class Counter() {
     var count = 0
-    val runner = Runner()
+    konst runner = Runner()
 
     public fun count(n: Int) {
         for (i in 1..n) {
@@ -23,7 +23,7 @@ class Counter() {
 }
 
 fun add(a: Int, b: Int): Int {
-    val counter = Counter()
+    konst counter = Counter()
     counter.count(a)
     counter.count(b)
     return counter.getCount()

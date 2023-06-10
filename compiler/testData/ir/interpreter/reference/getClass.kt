@@ -7,7 +7,7 @@ fun test(a: Any) = when (a::class) {
     else -> "Else"
 }
 
-const val a = <!EVALUATED: `String`!>test("")<!>
-const val b = <!EVALUATED: `Int`!>test(1)<!>
-const val c = <!EVALUATED: `Boolean`!>test(true)<!>
-const val d = <!EVALUATED: `Else`!>test(2.0)<!>
+const konst a = <!EVALUATED: `String`!>test("")<!>
+const konst b = <!EVALUATED: `Int`!>test(1)<!>
+const konst c = <!EVALUATED: `Boolean`!>test(true)<!>
+const konst d = <!EVALUATED: `Else`!>test(2.0)<!>

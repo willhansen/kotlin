@@ -16,7 +16,7 @@ object O {
 
 fun getResult(): String {
     log += "before;"
-    val result = O.result()
+    konst result = O.result()
     log += "after;"
     return result
 }
@@ -28,10 +28,10 @@ package main
 import lib.*
 
 fun box(): String {
-    val result = getResult()
+    konst result = getResult()
     if (result != "OK") return "fail: unexpected result: $result"
 
-    if (log != "before;O.init;after;") return "fail: wrong evaluation order: $log"
+    if (log != "before;O.init;after;") return "fail: wrong ekonstuation order: $log"
 
     return "OK"
 }

@@ -22,18 +22,18 @@ fun DescriptorBasedDeprecationInfo.deprecatedByOverriddenMessage(): String? = (t
 
 fun DescriptorBasedDeprecationInfo.deprecatedByAnnotationReplaceWithExpression(): String? = (this as? DeprecatedByAnnotation)?.replaceWithValue
 
-// The function extracts value of warningSince/errorSince/hiddenSince from DeprecatedSinceKotlin annotation
+// The function extracts konstue of warningSince/errorSince/hiddenSince from DeprecatedSinceKotlin annotation
 fun AnnotationDescriptor.getSinceVersion(name: String): ApiVersion? =
-    (argumentValue(name) as? StringValue)?.value?.takeUnless(String::isEmpty)?.let(ApiVersion.Companion::parse)
+    (argumentValue(name) as? StringValue)?.konstue?.takeUnless(String::isEmpty)?.let(ApiVersion.Companion::parse)
 
 fun computeLevelForDeprecatedSinceKotlin(annotation: AnnotationDescriptor, apiVersion: ApiVersion): DeprecationLevelValue? {
-    val hiddenSince = annotation.getSinceVersion("hiddenSince")
+    konst hiddenSince = annotation.getSinceVersion("hiddenSince")
     if (hiddenSince != null && apiVersion >= hiddenSince) return HIDDEN
 
-    val errorSince = annotation.getSinceVersion("errorSince")
+    konst errorSince = annotation.getSinceVersion("errorSince")
     if (errorSince != null && apiVersion >= errorSince) return ERROR
 
-    val warningSince = annotation.getSinceVersion("warningSince")
+    konst warningSince = annotation.getSinceVersion("warningSince")
     if (warningSince != null && apiVersion >= warningSince) return WARNING
 
     return null
@@ -42,14 +42,14 @@ fun computeLevelForDeprecatedSinceKotlin(annotation: AnnotationDescriptor, apiVe
 internal fun createDeprecationDiagnostic(
     element: PsiElement, deprecation: DescriptorBasedDeprecationInfo, languageVersionSettings: LanguageVersionSettings
 ): Diagnostic {
-    val targetOriginal = deprecation.target.original
+    konst targetOriginal = deprecation.target.original
     return when (deprecation) {
         is DeprecatedByVersionRequirement -> {
-            val factory = when (deprecation.deprecationLevel) {
+            konst factory = when (deprecation.deprecationLevel) {
                 WARNING -> Errors.VERSION_REQUIREMENT_DEPRECATION
                 ERROR, HIDDEN -> Errors.VERSION_REQUIREMENT_DEPRECATION_ERROR
             }
-            val currentVersionString = when (deprecation.versionRequirement.kind) {
+            konst currentVersionString = when (deprecation.versionRequirement.kind) {
                 ProtoBuf.VersionRequirement.VersionKind.COMPILER_VERSION -> KotlinCompilerVersion.VERSION
                 ProtoBuf.VersionRequirement.VersionKind.LANGUAGE_VERSION -> languageVersionSettings.languageVersion.versionString
                 ProtoBuf.VersionRequirement.VersionKind.API_VERSION -> languageVersionSettings.apiVersion.versionString
@@ -61,7 +61,7 @@ internal fun createDeprecationDiagnostic(
         }
 
         is DeprecatedTypealiasByAnnotation -> {
-            val factory = when (deprecation.deprecationLevel) {
+            konst factory = when (deprecation.deprecationLevel) {
                 WARNING -> Errors.TYPEALIAS_EXPANSION_DEPRECATION
                 ERROR, HIDDEN -> Errors.TYPEALIAS_EXPANSION_DEPRECATION_ERROR
             }
@@ -69,7 +69,7 @@ internal fun createDeprecationDiagnostic(
         }
 
         else -> {
-            val factory = when (deprecation.deprecationLevel) {
+            konst factory = when (deprecation.deprecationLevel) {
                 WARNING -> Errors.DEPRECATION
                 ERROR, HIDDEN -> Errors.DEPRECATION_ERROR
             }

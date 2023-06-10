@@ -9,30 +9,30 @@ import kotlin.test.*
 
 @Test fun runTest() {
     // Create instances of all array types.
-    val byteArray = ByteArray(5)
+    konst byteArray = ByteArray(5)
     println(byteArray.size.toString())
 
-    val charArray = CharArray(6)
+    konst charArray = CharArray(6)
     println(charArray.size.toString())
 
-    val shortArray = ShortArray(7)
+    konst shortArray = ShortArray(7)
     println(shortArray.size.toString())
 
-    val intArray = IntArray(8)
+    konst intArray = IntArray(8)
     println(intArray.size.toString())
 
-    val longArray = LongArray(9)
+    konst longArray = LongArray(9)
     println(longArray.size.toString())
 
-    val floatArray = FloatArray(10)
+    konst floatArray = FloatArray(10)
     println(floatArray.size.toString())
 
-    val doubleArray = FloatArray(11)
+    konst doubleArray = FloatArray(11)
     println(doubleArray.size.toString())
 
-    val booleanArray = BooleanArray(12)
+    konst booleanArray = BooleanArray(12)
     println(booleanArray.size.toString())
 
-    val stringArray = Array<String>(13, { i -> ""})
+    konst stringArray = Array<String>(13, { i -> ""})
     println(stringArray.size.toString())
 }

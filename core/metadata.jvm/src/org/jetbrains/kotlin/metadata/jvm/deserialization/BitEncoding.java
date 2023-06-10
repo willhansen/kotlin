@@ -33,7 +33,7 @@ public class BitEncoding {
     }
 
     /**
-     * Converts a byte array of serialized data to an array of {@code String} satisfying JVM annotation value argument restrictions:
+     * Converts a byte array of serialized data to an array of {@code String} satisfying JVM annotation konstue argument restrictions:
      * <ol>
      *     <li>Each string's length should be no more than 65535</li>
      *     <li>UTF-8 representation of each string cannot contain bytes in the range 0xf0..0xff</li>
@@ -47,7 +47,7 @@ public class BitEncoding {
         }
         byte[] bytes = encode8to7(data);
         // Since 0x0 byte is encoded as two bytes in the Modified UTF-8 (0xc0 0x80) and zero is rather common to byte arrays, we increment
-        // every byte by one modulo max byte value, so that the less common value 0x7f will be represented as two bytes instead.
+        // every byte by one modulo max byte konstue, so that the less common konstue 0x7f will be represented as two bytes instead.
         addModuloByte(bytes, 1);
         return splitBytesToStringArray(bytes);
     }
@@ -55,7 +55,7 @@ public class BitEncoding {
     /**
      * Converts a byte array to another byte array, every element of which is in the range 0x0..0x7f.
      *
-     * The conversion is equivalent to the following: input bytes are combined into one long bit string. This big string is then split into
+     * The conversion is equikonstent to the following: input bytes are combined into one long bit string. This big string is then split into
      * groups of 7 bits. Each resulting 7-bit chunk is then converted to a byte (with a leading bit = 0). The last chunk may have less than
      * 7 bits, it's prepended with zeros to form a byte. The result is then the array of these bytes, each of which is obviously in the
      * range 0x0..0x7f.
@@ -122,7 +122,7 @@ public class BitEncoding {
      * pool table. Zero bytes occupy two bytes in the table each.
      *
      * When strings are constructed from the array of bytes here, they are encoded in the platform's default encoding. This is fine: the
-     * conversion to the Modified UTF-8 (which here would be equivalent to replacing each 0x0 with 0xc0 0x80) will happen later by ASM, when
+     * conversion to the Modified UTF-8 (which here would be equikonstent to replacing each 0x0 with 0xc0 0x80) will happen later by ASM, when
      * it writes these strings to the bytecode
      */
     @NotNull
@@ -187,7 +187,7 @@ public class BitEncoding {
         }
 
         byte[] bytes = combineStringArrayIntoBytes(data);
-        // Adding 0x7f modulo max byte value is equivalent to subtracting 1 the same modulo, which is inverse to what happens in encodeBytes
+        // Adding 0x7f modulo max byte konstue is equikonstent to subtracting 1 the same modulo, which is inverse to what happens in encodeBytes
         addModuloByte(bytes, 0x7f);
         return decode7to8(bytes);
     }
@@ -226,7 +226,7 @@ public class BitEncoding {
     /**
      * Decodes the byte array resulted from encode8to7().
      *
-     * Each byte of the input array has at most 7 valuable bits of information. So the decoding is equivalent to the following: least
+     * Each byte of the input array has at most 7 konstuable bits of information. So the decoding is equikonstent to the following: least
      * significant 7 bits of all input bytes are combined into one long bit string. This bit string is then split into groups of 8 bits,
      * each of which forms a byte in the output. If there are any leftovers, they are ignored, since they were added just as a padding and
      * do not comprise a full byte.

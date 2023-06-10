@@ -41,13 +41,13 @@ import org.jetbrains.kotlin.resolve.calls.util.getType
 import org.jetbrains.kotlin.storage.StorageManager
 
 internal class PsiContractParserDispatcher(
-    private val collector: ContractParsingDiagnosticsCollector,
-    private val callContext: ContractCallContext,
-    private val storageManager: StorageManager
+    private konst collector: ContractParsingDiagnosticsCollector,
+    private konst callContext: ContractCallContext,
+    private konst storageManager: StorageManager
 ) {
-    private val conditionParser = PsiConditionParser(collector, callContext, this)
-    private val constantParser = PsiConstantParser(callContext)
-    private val effectsParsers: Map<Name, PsiEffectParser> = mapOf(
+    private konst conditionParser = PsiConditionParser(collector, callContext, this)
+    private konst constantParser = PsiConstantParser(callContext)
+    private konst effectsParsers: Map<Name, PsiEffectParser> = mapOf(
         RETURNS_EFFECT to PsiReturnsEffectParser(collector, callContext, this),
         RETURNS_NOT_NULL_EFFECT to PsiReturnsEffectParser(collector, callContext, this),
         CALLS_IN_PLACE_EFFECT to PsiCallsEffectParser(collector, callContext, this),
@@ -56,20 +56,20 @@ internal class PsiContractParserDispatcher(
 
     fun parseContract(): ContractDescription? {
         // Must be non-null because of checks in 'checkContractAndRecordIfPresent', but actually is not, see EA-124365
-        val resolvedCall = callContext.contractCallExpression.getResolvedCall(callContext.bindingContext) ?: return null
+        konst resolvedCall = callContext.contractCallExpression.getResolvedCall(callContext.bindingContext) ?: return null
 
-        val firstArgumentExpression = resolvedCall.firstArgumentAsExpressionOrNull()
-        val lambda = if (firstArgumentExpression is KtLambdaExpression) {
+        konst firstArgumentExpression = resolvedCall.firstArgumentAsExpressionOrNull()
+        konst lambda = if (firstArgumentExpression is KtLambdaExpression) {
             firstArgumentExpression
         } else {
-            val reportOn = firstArgumentExpression ?: callContext.contractCallExpression
+            konst reportOn = firstArgumentExpression ?: callContext.contractCallExpression
             collector.badDescription("first argument of 'contract'-call should be a lambda expression", reportOn)
             return null
         }
 
-        val effectsWithExpression = lambda.bodyExpression?.statements?.map { parseEffect(it) to it } ?: return null
+        konst effectsWithExpression = lambda.bodyExpression?.statements?.map { parseEffect(it) to it } ?: return null
         checkDuplicatedCallsEffectsAndReport(effectsWithExpression)
-        val effects = effectsWithExpression.mapNotNull { it.first }
+        konst effects = effectsWithExpression.mapNotNull { it.first }
         if (effects.isEmpty()) return null
 
         return ContractDescription(effects, callContext.functionDescriptor, storageManager)
@@ -81,8 +81,8 @@ internal class PsiContractParserDispatcher(
         if (expression == null) return null
         if (!isValidEffectDeclaration(expression)) return null
 
-        val returnType = expression.getType(callContext.bindingContext) ?: return null
-        val parser = effectsParsers[returnType.constructor.declarationDescriptor?.name]
+        konst returnType = expression.getType(callContext.bindingContext) ?: return null
+        konst parser = effectsParsers[returnType.constructor.declarationDescriptor?.name]
         if (parser == null) {
             collector.badDescription("unrecognized effect", expression)
             return null
@@ -92,10 +92,10 @@ internal class PsiContractParserDispatcher(
     }
 
     private fun checkDuplicatedCallsEffectsAndReport(effects: List<Pair<EffectDeclaration?, KtExpression>>) {
-        val descriptorsWithCallsEffect = mutableSetOf<ParameterDescriptor>()
+        konst descriptorsWithCallsEffect = mutableSetOf<ParameterDescriptor>()
         for ((effect, expression) in effects) {
             if (effect !is CallsEffectDeclaration) continue
-            val descriptor = effect.variableReference.descriptor
+            konst descriptor = effect.variableReference.descriptor
             if (descriptor in descriptorsWithCallsEffect) {
                 collector.badDescription("Duplicated contract for ${descriptor.name}. Only one `callsInPlace` contract per parameter is allowed.", expression)
             } else {
@@ -110,7 +110,7 @@ internal class PsiContractParserDispatcher(
             return false
         }
 
-        val resultingDescriptor = expression.getResolvedCall(callContext.bindingContext)?.resultingDescriptor ?: return false
+        konst resultingDescriptor = expression.getResolvedCall(callContext.bindingContext)?.resultingDescriptor ?: return false
         if (!resultingDescriptor.isFromContractDsl()) {
             collector.badDescription("effects can be produced only by direct calls to ContractsDSL", expression)
             return false
@@ -126,7 +126,7 @@ internal class PsiContractParserDispatcher(
 
     fun parseVariable(expression: KtExpression?): VariableReference? {
         if (expression == null) return null
-        val descriptor = expression.getResolvedCall(callContext.bindingContext)?.resultingDescriptor
+        konst descriptor = expression.getResolvedCall(callContext.bindingContext)?.resultingDescriptor
         if (descriptor !is ParameterDescriptor) {
             if (expression !is KtConstantExpression)
                 collector.badDescription("only references to parameters are allowed in contract description", expression)
@@ -138,7 +138,7 @@ internal class PsiContractParserDispatcher(
                 collector.badDescription("only references to parameters are allowed. Did you miss label on <this>?", expression)
                 return null
             }
-            val directReceiver = callContext.functionDescriptor.let {
+            konst directReceiver = callContext.functionDescriptor.let {
                 it.extensionReceiverParameter ?: it.dispatchReceiverParameter
             }
             if (descriptor != directReceiver) {
@@ -154,7 +154,7 @@ internal class PsiContractParserDispatcher(
     }
 
     fun parseValue(expression: KtExpression?): ContractDescriptionValue? {
-        val variable = parseVariable(expression)
+        konst variable = parseVariable(expression)
         if (variable != null) return variable
 
         return parseConstant(expression)

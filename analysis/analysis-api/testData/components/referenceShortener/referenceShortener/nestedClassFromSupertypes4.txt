@@ -1,4 +1,4 @@
-Before shortening: val prop: MyInterface.Nested get() = MyInterface.Nested()
+Before shortening: konst prop: MyInterface.Nested get() = MyInterface.Nested()
 with DO_NOT_SHORTEN:
 with SHORTEN_IF_ALREADY_IMPORTED:
 [type] MyInterface.Nested

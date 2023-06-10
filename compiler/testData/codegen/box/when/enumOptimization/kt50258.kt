@@ -8,10 +8,10 @@ fun getValue() = MyEnum.First
 var result = "Failed"
 
 fun getLambda(): (Int) -> Unit =
-    when (val value = getValue()) {
+    when (konst konstue = getValue()) {
         MyEnum.Second -> { _ -> }
         MyEnum.First -> { _ ->
-            if (value == MyEnum.First) {
+            if (konstue == MyEnum.First) {
                 result = "OK"
             }
         }

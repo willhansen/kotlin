@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
 fun foo(s: S): String {
     class Local {

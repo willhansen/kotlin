@@ -1,7 +1,7 @@
-open class Base(val callback: () -> String)
+open class Base(konst callback: () -> String)
 
 class Outer {
-    val ok = "OK"
+    konst ok = "OK"
 
     inner class Inner : Base(
             fun(): String {

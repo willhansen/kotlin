@@ -5,18 +5,18 @@ FILE fqName:<root> fileName:/typeParameterWithMultipleNullableBounds.kt
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun f <T> (x: T of <root>.f): kotlin.Int? declared in <root>'
         BLOCK type=kotlin.Int? origin=SAFE_CALL
-          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:T of <root>.f [val]
+          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:T of <root>.f [konst]
             GET_VAR 'x: T of <root>.f declared in <root>.f' type=T of <root>.f origin=null
           WHEN type=kotlin.Int? origin=null
             BRANCH
               if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                arg0: GET_VAR 'val tmp_0: T of <root>.f declared in <root>.f' type=T of <root>.f origin=null
-                arg1: CONST Null type=kotlin.Nothing? value=null
-              then: CONST Null type=kotlin.Nothing? value=null
+                arg0: GET_VAR 'konst tmp_0: T of <root>.f declared in <root>.f' type=T of <root>.f origin=null
+                arg1: CONST Null type=kotlin.Nothing? konstue=null
+              then: CONST Null type=kotlin.Nothing? konstue=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
+              if: CONST Boolean type=kotlin.Boolean konstue=true
               then: CALL 'public abstract fun compareTo (other: T of kotlin.Comparable): kotlin.Int declared in kotlin.Comparable' type=kotlin.Int origin=null
-                $this: GET_VAR 'val tmp_0: T of <root>.f declared in <root>.f' type=T of <root>.f origin=null
+                $this: GET_VAR 'konst tmp_0: T of <root>.f declared in <root>.f' type=T of <root>.f origin=null
                 other: GET_VAR 'x: T of <root>.f declared in <root>.f' type=T of <root>.f origin=null
   FUN name:test visibility:public modality:FINAL <> () returnType:kotlin.Unit
     BLOCK_BODY

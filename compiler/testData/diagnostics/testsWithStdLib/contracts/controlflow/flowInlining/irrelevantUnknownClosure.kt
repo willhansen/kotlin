@@ -15,7 +15,7 @@ inline fun myRun(block: () -> Unit): Unit {
 inline fun unknownRun(block: () -> Unit) { block() }
 
 fun foo() {
-    val x: Int
+    konst x: Int
     myRun {
         unknownRun { println("shouldn't change anything") }
         x = 42

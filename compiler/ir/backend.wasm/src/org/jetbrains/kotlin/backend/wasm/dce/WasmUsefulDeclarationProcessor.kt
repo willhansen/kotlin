@@ -17,16 +17,16 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal class WasmUsefulDeclarationProcessor(
-    override val context: WasmBackendContext,
+    override konst context: WasmBackendContext,
     printReachabilityInfo: Boolean,
     dumpReachabilityInfoToFile: String?
 ) : UsefulDeclarationProcessor(printReachabilityInfo, removeUnusedAssociatedObjects = false, dumpReachabilityInfoToFile) {
 
     // The mapping from function for wrapping a kotlin closure/lambda with JS closure to function used to call a kotlin closure from JS side.
-    private val kotlinClosureToJsClosureConvertFunToKotlinClosureCallFun =
+    private konst kotlinClosureToJsClosureConvertFunToKotlinClosureCallFun =
         context.kotlinClosureToJsConverters.entries.associate { (k, v) -> v to context.closureCallExports[k] }
 
-    override val bodyVisitor: BodyVisitorBase = object : BodyVisitorBase() {
+    override konst bodyVisitor: BodyVisitorBase = object : BodyVisitorBase() {
         override fun visitConst(expression: IrConst<*>, data: IrDeclaration) = when (expression.kind) {
             is IrConstKind.Null -> expression.type.enqueueType(data, "expression type")
             is IrConstKind.String -> context.wasmSymbols.stringGetLiteral.owner
@@ -54,7 +54,7 @@ internal class WasmUsefulDeclarationProcessor(
         }
 
         override fun visitGetField(expression: IrGetField, data: IrDeclaration) {
-            val field = expression.symbol.owner
+            konst field = expression.symbol.owner
 
             if (field.isObjectInstanceField()) {
                 field.type.classOrFail.owner.primaryConstructor?.enqueue(field, "object lazy initialization")
@@ -65,9 +65,9 @@ internal class WasmUsefulDeclarationProcessor(
 
         private fun tryToProcessIntrinsicCall(from: IrDeclaration, call: IrCall): Boolean = when (call.symbol) {
             context.wasmSymbols.unboxIntrinsic -> {
-                val fromType = call.getTypeArgument(0)
+                konst fromType = call.getTypeArgument(0)
                 if (fromType != null && !fromType.isNothing() && !fromType.isNullableNothing()) {
-                    val backingField = call.getTypeArgument(1)
+                    konst backingField = call.getTypeArgument(1)
                         ?.let { context.inlineClassesUtils.getInlinedClass(it) }
                         ?.let { getInlineClassBackingField(it) }
                     backingField?.enqueue(from, "backing inline class field for unboxIntrinsic")
@@ -90,15 +90,15 @@ internal class WasmUsefulDeclarationProcessor(
         override fun visitCall(expression: IrCall, data: IrDeclaration) {
             super.visitCall(expression, data)
 
-            val function: IrFunction = expression.symbol.owner.realOverrideTarget
+            konst function: IrFunction = expression.symbol.owner.realOverrideTarget
 
             if (tryToProcessIntrinsicCall(data, expression)) return
             if (function.hasWasmNoOpCastAnnotation()) return
             if (function.getWasmOpAnnotation() != null) return
 
-            val isSuperCall = expression.superQualifierSymbol != null
+            konst isSuperCall = expression.superQualifierSymbol != null
             if (function is IrSimpleFunction && function.isOverridable && !isSuperCall) {
-                val klass = function.parentAsClass
+                konst klass = function.parentAsClass
                 if (klass.isInterface) {
                     klass.enqueue(data, "receiver class")
                 }
@@ -121,7 +121,7 @@ internal class WasmUsefulDeclarationProcessor(
         else -> when {
             isBuiltInWasmRefType(this) -> null
             erasedUpperBound?.isExternal == true -> null
-            else -> when (val ic = context.inlineClassesUtils.getInlinedClass(this)) {
+            else -> when (konst ic = context.inlineClassesUtils.getInlinedClass(this)) {
                 null -> this
                 else -> context.inlineClassesUtils.getInlineClassUnderlyingType(ic).getInlinedValueTypeIfAny()
             }
@@ -171,7 +171,7 @@ internal class WasmUsefulDeclarationProcessor(
     private fun processIrFunction(irFunction: IrFunction) {
         if (irFunction.isFakeOverride) return
 
-        val isIntrinsic = irFunction.hasWasmNoOpCastAnnotation() || irFunction.getWasmOpAnnotation() != null
+        konst isIntrinsic = irFunction.hasWasmNoOpCastAnnotation() || irFunction.getWasmOpAnnotation() != null
         if (isIntrinsic) return
 
         irFunction.getEffectiveValueParameters().forEach { it.enqueueValueParameterType(irFunction) }
@@ -192,7 +192,7 @@ internal class WasmUsefulDeclarationProcessor(
 
     override fun processConstructor(irConstructor: IrConstructor) {
         super.processConstructor(irConstructor)
-        val constructedClass = irConstructor.constructedClass
+        konst constructedClass = irConstructor.constructedClass
         if (!context.inlineClassesUtils.isClassInlineLike(constructedClass)) {
             processIrFunction(irConstructor)
         }

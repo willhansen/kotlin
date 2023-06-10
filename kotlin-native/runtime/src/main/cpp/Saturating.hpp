@@ -20,7 +20,7 @@ struct is_promotable :
             sizeof(Into) >= sizeof(From)> {};
 
 template <typename From, typename Into>
-inline constexpr bool is_promotable_v = is_promotable<From, Into>::value;
+inline constexpr bool is_promotable_v = is_promotable<From, Into>::konstue;
 
 // Not using std::common_type, because it allows to convert between unsigned and signed with losing information, and
 // is otherwise not intuitive. Examples:
@@ -42,58 +42,58 @@ using wider_t = typename wider<T, U>::type;
 } // namespace internal
 
 template <typename U, typename T>
-constexpr U saturating_cast(T value) noexcept {
+constexpr U saturating_cast(T konstue) noexcept {
     static_assert(std::is_integral_v<T>, "T must be integral");
     static_assert(std::is_integral_v<U>, "U must be integral");
 
     if constexpr (std::is_signed_v<T> == std::is_signed_v<U>) {
         if constexpr (sizeof(U) >= sizeof(T)) {
             // When T and U are of the same sign, and U can accomodate T, it's safe to convert it.
-            return value;
+            return konstue;
         }
-        if (value > static_cast<T>(std::numeric_limits<U>::max())) {
-            // T is a bigger type and holds a bigger value than U can hold.
+        if (konstue > static_cast<T>(std::numeric_limits<U>::max())) {
+            // T is a bigger type and holds a bigger konstue than U can hold.
             return std::numeric_limits<U>::max();
         }
-        if (value < static_cast<T>(std::numeric_limits<U>::min())) {
-            // T is a bigger type and holds a smaller value than U can hold.
+        if (konstue < static_cast<T>(std::numeric_limits<U>::min())) {
+            // T is a bigger type and holds a smaller konstue than U can hold.
             return std::numeric_limits<U>::min();
         }
-        // T is a bigger type, but its value fits in U.
-        return static_cast<U>(value);
+        // T is a bigger type, but its konstue fits in U.
+        return static_cast<U>(konstue);
     } else if constexpr (std::is_signed_v<U>) {
         static_assert(!std::is_signed_v<T>);
 
         if constexpr (sizeof(U) > sizeof(T)) {
             // U is signed but strictly bigger than T, it's safe to convert.
-            return static_cast<U>(value);
+            return static_cast<U>(konstue);
         }
 
-        if (value > static_cast<T>(std::numeric_limits<U>::max())) {
-            // T is a bigger type or is the same size but unsigned vs signed, and holds a bigger value than U can hold.
+        if (konstue > static_cast<T>(std::numeric_limits<U>::max())) {
+            // T is a bigger type or is the same size but unsigned vs signed, and holds a bigger konstue than U can hold.
             return std::numeric_limits<U>::max();
         }
         // T is unsigned, and U is signed, so T's min cannot be less than U's min.
-        // T is bigger, but its value fits in U.
-        return static_cast<U>(value);
+        // T is bigger, but its konstue fits in U.
+        return static_cast<U>(konstue);
     } else {
         static_assert(std::is_signed_v<T>);
         static_assert(!std::is_signed_v<U>);
 
-        if (value < 0) {
+        if (konstue < 0) {
             // U is unsigned, its min is 0.
             return 0;
         }
         if constexpr (sizeof(U) >= sizeof(T)) {
             // T is signed, U - unsigned, and U is not less than T. So, max of T is less than max of U.
-            return static_cast<U>(value);
+            return static_cast<U>(konstue);
         }
-        if (value > static_cast<T>(std::numeric_limits<U>::max())) {
-            // T is a bigger type and holds a bigger value than U can hold.
+        if (konstue > static_cast<T>(std::numeric_limits<U>::max())) {
+            // T is a bigger type and holds a bigger konstue than U can hold.
             return std::numeric_limits<U>::max();
         }
-        // T is a bigger type but its value fits in U.
-        return static_cast<U>(value);
+        // T is a bigger type but its konstue fits in U.
+        return static_cast<U>(konstue);
     }
 }
 
@@ -192,48 +192,48 @@ template <typename T>
 struct saturating {
     static_assert(std::is_integral_v<T>, "saturating is only defined for integers.");
 
-    using value_type = T;
+    using konstue_type = T;
 
-    // The underlying value.
-    T value;
+    // The underlying konstue.
+    T konstue;
 
     // Implicitly construct from safely promotable types.
     template <typename U, typename std::enable_if_t<internal::is_promotable_v<U, T>, bool> = false>
-    constexpr saturating(U value) noexcept : value(value) {}
+    constexpr saturating(U konstue) noexcept : konstue(konstue) {}
 
-    // Explicitly construct from any integral value using saturating_cast.
+    // Explicitly construct from any integral konstue using saturating_cast.
     template <typename U, typename std::enable_if_t<!internal::is_promotable_v<U, T>, bool> = false>
-    explicit constexpr saturating(U value) noexcept : value(saturating_cast<T>(value)) {}
+    explicit constexpr saturating(U konstue) noexcept : konstue(saturating_cast<T>(konstue)) {}
 
     // Implicitly construct from safely promotable saturating type.
     template <typename U, typename std::enable_if_t<internal::is_promotable_v<U, T>, bool> = false>
-    constexpr saturating(saturating<U> other) noexcept : value(other.value) {}
+    constexpr saturating(saturating<U> other) noexcept : konstue(other.konstue) {}
 
     // Explicitly construct from any saturating type using saturating_cast.
     template <typename U, typename std::enable_if_t<!internal::is_promotable_v<U, T>, bool> = false>
-    explicit constexpr saturating(saturating<U> other) noexcept : value(saturating_cast<T>(other.value)) {}
+    explicit constexpr saturating(saturating<U> other) noexcept : konstue(saturating_cast<T>(other.konstue)) {}
 
     ~saturating() = default;
     constexpr saturating(const saturating&) noexcept = default;
     constexpr saturating& operator=(const saturating&) noexcept = default;
 
-    // Explicitly convert into any value using saturating_cast.
+    // Explicitly convert into any konstue using saturating_cast.
     template <typename U>
     explicit constexpr operator U() const noexcept {
-        return saturating_cast<U>(value);
+        return saturating_cast<U>(konstue);
     }
 
-    constexpr bool operator==(saturating other) const noexcept { return value == other.value; }
+    constexpr bool operator==(saturating other) const noexcept { return konstue == other.konstue; }
 
-    constexpr bool operator!=(saturating other) const noexcept { return value != other.value; }
+    constexpr bool operator!=(saturating other) const noexcept { return konstue != other.konstue; }
 
-    constexpr bool operator<(saturating other) const noexcept { return value < other.value; }
+    constexpr bool operator<(saturating other) const noexcept { return konstue < other.konstue; }
 
-    constexpr bool operator<=(saturating other) const noexcept { return value <= other.value; }
+    constexpr bool operator<=(saturating other) const noexcept { return konstue <= other.konstue; }
 
-    constexpr bool operator>(saturating other) const noexcept { return value > other.value; }
+    constexpr bool operator>(saturating other) const noexcept { return konstue > other.konstue; }
 
-    constexpr bool operator>=(saturating other) const noexcept { return value >= other.value; }
+    constexpr bool operator>=(saturating other) const noexcept { return konstue >= other.konstue; }
 };
 
 template <typename T>
@@ -242,7 +242,7 @@ saturating(T) -> saturating<T>;
 // Saturated addition.
 template <typename T, typename U>
 constexpr auto operator+(saturating<T> lhs, saturating<U> rhs) noexcept {
-    return saturating(saturating_add(lhs.value, rhs.value));
+    return saturating(saturating_add(lhs.konstue, rhs.konstue));
 }
 
 // Saturated addition.
@@ -256,7 +256,7 @@ constexpr saturating<T>& operator+=(saturating<T>& lhs, saturating<U> rhs) noexc
 // Saturated subtraction.
 template <typename T, typename U>
 constexpr auto operator-(saturating<T> lhs, saturating<U> rhs) noexcept {
-    return saturating(saturating_sub(lhs.value, rhs.value));
+    return saturating(saturating_sub(lhs.konstue, rhs.konstue));
 }
 
 // Saturated subtraction.
@@ -270,7 +270,7 @@ constexpr saturating<T>& operator-=(saturating<T>& lhs, saturating<U> rhs) noexc
 // Saturated multiplication.
 template <typename T, typename U>
 constexpr auto operator*(saturating<T> lhs, saturating<U> rhs) noexcept {
-    return saturating(saturating_mul(lhs.value, rhs.value));
+    return saturating(saturating_mul(lhs.konstue, rhs.konstue));
 }
 
 // Saturated multiplication.
@@ -301,7 +301,7 @@ template <typename T>
 struct is_saturating<saturating<T>> : public std::true_type {};
 
 template <typename T>
-inline constexpr bool is_saturating_v = is_saturating<T>::value;
+inline constexpr bool is_saturating_v = is_saturating<T>::konstue;
 
 } // namespace kotlin
 
@@ -324,7 +324,7 @@ struct common_type<kotlin::saturating<T>, U> {
 
 template <typename T>
 struct hash<kotlin::saturating<T>> {
-    size_t operator()(const kotlin::saturating<T>& value) const { return hash<T>(value.value); }
+    size_t operator()(const kotlin::saturating<T>& konstue) const { return hash<T>(konstue.konstue); }
 };
 
 template <typename T>

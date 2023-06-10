@@ -50,7 +50,7 @@ expect class LinkedHashSet<E> : MutableSet<E> {
 
     // From Set
 
-    override val size: Int
+    override konst size: Int
     override fun isEmpty(): Boolean
     override fun contains(element: @UnsafeVariance E): Boolean
     override fun containsAll(elements: Collection<@UnsafeVariance E>): Boolean

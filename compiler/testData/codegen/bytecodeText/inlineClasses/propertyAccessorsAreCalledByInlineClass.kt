@@ -2,15 +2,15 @@
 
 // FILE: Z.kt
 @Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")
-inline class Z(val x: Int) {
-    val aVal: Int
+inline class Z(konst x: Int) {
+    konst aVal: Int
         get() = x
 
     var aVar: Int
         get() = x
         set(v) {}
 
-    val String.extVal: Int
+    konst String.extVal: Int
         get() = x
 
     var String.extVar: Int

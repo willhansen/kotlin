@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box() : String {
-    val a = arrayOfNulls<String>(3)
+    konst a = arrayOfNulls<String>(3)
     a[0] = "a"
     a[1] = "b"
     a[2] = "c"

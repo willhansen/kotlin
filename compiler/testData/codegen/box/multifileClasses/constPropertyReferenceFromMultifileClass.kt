@@ -5,9 +5,9 @@
 import a.OK
 
 fun box(): String {
-    val okRef = ::OK
+    konst okRef = ::OK
 
-    val annotations = okRef.annotations
+    konst annotations = okRef.annotations
     if (annotations.size != 1) {
         return "Failed, annotations: $annotations"
     }
@@ -23,4 +23,4 @@ package a
 annotation class A
 
 @A
-const val OK: String = "OK"
+const konst OK: String = "OK"

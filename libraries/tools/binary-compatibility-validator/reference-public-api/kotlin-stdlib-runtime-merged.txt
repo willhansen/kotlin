@@ -36,8 +36,8 @@ public final class kotlin/DeprecationLevel : java/lang/Enum {
 	public static final field HIDDEN Lkotlin/DeprecationLevel;
 	public static final field WARNING Lkotlin/DeprecationLevel;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/DeprecationLevel;
-	public static fun values ()[Lkotlin/DeprecationLevel;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/DeprecationLevel;
+	public static fun konstues ()[Lkotlin/DeprecationLevel;
 }
 
 public abstract interface annotation class kotlin/DslMarker : java/lang/annotation/Annotation {
@@ -118,8 +118,8 @@ public final class kotlin/LazyThreadSafetyMode : java/lang/Enum {
 	public static final field PUBLICATION Lkotlin/LazyThreadSafetyMode;
 	public static final field SYNCHRONIZED Lkotlin/LazyThreadSafetyMode;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/LazyThreadSafetyMode;
-	public static fun values ()[Lkotlin/LazyThreadSafetyMode;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/LazyThreadSafetyMode;
+	public static fun konstues ()[Lkotlin/LazyThreadSafetyMode;
 }
 
 public abstract interface annotation class kotlin/Metadata : java/lang/annotation/Annotation {
@@ -197,8 +197,8 @@ public final class kotlin/RequiresOptIn$Level : java/lang/Enum {
 	public static final field ERROR Lkotlin/RequiresOptIn$Level;
 	public static final field WARNING Lkotlin/RequiresOptIn$Level;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/RequiresOptIn$Level;
-	public static fun values ()[Lkotlin/RequiresOptIn$Level;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/RequiresOptIn$Level;
+	public static fun konstues ()[Lkotlin/RequiresOptIn$Level;
 }
 
 public final class kotlin/Result : java/io/Serializable {
@@ -538,8 +538,8 @@ public final class kotlin/annotation/AnnotationRetention : java/lang/Enum {
 	public static final field RUNTIME Lkotlin/annotation/AnnotationRetention;
 	public static final field SOURCE Lkotlin/annotation/AnnotationRetention;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/annotation/AnnotationRetention;
-	public static fun values ()[Lkotlin/annotation/AnnotationRetention;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/annotation/AnnotationRetention;
+	public static fun konstues ()[Lkotlin/annotation/AnnotationRetention;
 }
 
 public final class kotlin/annotation/AnnotationTarget : java/lang/Enum {
@@ -559,8 +559,8 @@ public final class kotlin/annotation/AnnotationTarget : java/lang/Enum {
 	public static final field TYPE_PARAMETER Lkotlin/annotation/AnnotationTarget;
 	public static final field VALUE_PARAMETER Lkotlin/annotation/AnnotationTarget;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/annotation/AnnotationTarget;
-	public static fun values ()[Lkotlin/annotation/AnnotationTarget;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/annotation/AnnotationTarget;
+	public static fun konstues ()[Lkotlin/annotation/AnnotationTarget;
 }
 
 public abstract interface annotation class kotlin/annotation/MustBeDocumented : java/lang/annotation/Annotation {
@@ -570,7 +570,7 @@ public abstract interface annotation class kotlin/annotation/Repeatable : java/l
 }
 
 public abstract interface annotation class kotlin/annotation/Retention : java/lang/annotation/Annotation {
-	public abstract fun value ()Lkotlin/annotation/AnnotationRetention;
+	public abstract fun konstue ()Lkotlin/annotation/AnnotationRetention;
 }
 
 public abstract interface annotation class kotlin/annotation/Target : java/lang/annotation/Annotation {
@@ -644,7 +644,7 @@ public abstract class kotlin/collections/AbstractMap : java/util/Map, kotlin/jvm
 	public fun remove (Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun size ()I
 	public fun toString ()Ljava/lang/String;
-	public final fun values ()Ljava/util/Collection;
+	public final fun konstues ()Ljava/util/Collection;
 }
 
 public abstract class kotlin/collections/AbstractMutableCollection : java/util/AbstractCollection, java/util/Collection, kotlin/jvm/internal/markers/KMutableCollection {
@@ -674,7 +674,7 @@ public abstract class kotlin/collections/AbstractMutableMap : java/util/Abstract
 	public final fun keySet ()Ljava/util/Set;
 	public abstract fun put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun size ()I
-	public final fun values ()Ljava/util/Collection;
+	public final fun konstues ()Ljava/util/Collection;
 }
 
 public abstract class kotlin/collections/AbstractMutableSet : java/util/AbstractSet, java/util/Set, kotlin/jvm/internal/markers/KMutableSet {
@@ -2957,8 +2957,8 @@ public final class kotlin/contracts/InvocationKind : java/lang/Enum {
 	public static final field EXACTLY_ONCE Lkotlin/contracts/InvocationKind;
 	public static final field UNKNOWN Lkotlin/contracts/InvocationKind;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/contracts/InvocationKind;
-	public static fun values ()[Lkotlin/contracts/InvocationKind;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/contracts/InvocationKind;
+	public static fun konstues ()[Lkotlin/contracts/InvocationKind;
 }
 
 public abstract interface class kotlin/contracts/Returns : kotlin/contracts/SimpleEffect {
@@ -3076,8 +3076,8 @@ public final class kotlin/coroutines/intrinsics/CoroutineSingletons : java/lang/
 	public static final field RESUMED Lkotlin/coroutines/intrinsics/CoroutineSingletons;
 	public static final field UNDECIDED Lkotlin/coroutines/intrinsics/CoroutineSingletons;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/coroutines/intrinsics/CoroutineSingletons;
-	public static fun values ()[Lkotlin/coroutines/intrinsics/CoroutineSingletons;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/coroutines/intrinsics/CoroutineSingletons;
+	public static fun konstues ()[Lkotlin/coroutines/intrinsics/CoroutineSingletons;
 }
 
 public final class kotlin/coroutines/intrinsics/IntrinsicsKt {
@@ -3190,8 +3190,8 @@ public final class kotlin/io/FileWalkDirection : java/lang/Enum {
 	public static final field BOTTOM_UP Lkotlin/io/FileWalkDirection;
 	public static final field TOP_DOWN Lkotlin/io/FileWalkDirection;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/io/FileWalkDirection;
-	public static fun values ()[Lkotlin/io/FileWalkDirection;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/io/FileWalkDirection;
+	public static fun konstues ()[Lkotlin/io/FileWalkDirection;
 }
 
 public final class kotlin/io/FilesKt {
@@ -3253,8 +3253,8 @@ public final class kotlin/io/OnErrorAction : java/lang/Enum {
 	public static final field SKIP Lkotlin/io/OnErrorAction;
 	public static final field TERMINATE Lkotlin/io/OnErrorAction;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/io/OnErrorAction;
-	public static fun values ()[Lkotlin/io/OnErrorAction;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/io/OnErrorAction;
+	public static fun konstues ()[Lkotlin/io/OnErrorAction;
 }
 
 public final class kotlin/io/TextStreamsKt {
@@ -3311,8 +3311,8 @@ public final class kotlin/io/path/CopyActionResult : java/lang/Enum {
 	public static final field SKIP_SUBTREE Lkotlin/io/path/CopyActionResult;
 	public static final field TERMINATE Lkotlin/io/path/CopyActionResult;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/io/path/CopyActionResult;
-	public static fun values ()[Lkotlin/io/path/CopyActionResult;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/io/path/CopyActionResult;
+	public static fun konstues ()[Lkotlin/io/path/CopyActionResult;
 }
 
 public abstract interface annotation class kotlin/io/path/ExperimentalPathApi : java/lang/annotation/Annotation {
@@ -3329,8 +3329,8 @@ public final class kotlin/io/path/OnErrorResult : java/lang/Enum {
 	public static final field SKIP_SUBTREE Lkotlin/io/path/OnErrorResult;
 	public static final field TERMINATE Lkotlin/io/path/OnErrorResult;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/io/path/OnErrorResult;
-	public static fun values ()[Lkotlin/io/path/OnErrorResult;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/io/path/OnErrorResult;
+	public static fun konstues ()[Lkotlin/io/path/OnErrorResult;
 }
 
 public final class kotlin/io/path/PathWalkOption : java/lang/Enum {
@@ -3338,8 +3338,8 @@ public final class kotlin/io/path/PathWalkOption : java/lang/Enum {
 	public static final field FOLLOW_LINKS Lkotlin/io/path/PathWalkOption;
 	public static final field INCLUDE_DIRECTORIES Lkotlin/io/path/PathWalkOption;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/io/path/PathWalkOption;
-	public static fun values ()[Lkotlin/io/path/PathWalkOption;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/io/path/PathWalkOption;
+	public static fun konstues ()[Lkotlin/io/path/PathWalkOption;
 }
 
 public final class kotlin/io/path/PathsKt {
@@ -3446,7 +3446,7 @@ public class kotlin/jvm/KotlinReflectionNotSupportedError : java/lang/Error {
 }
 
 public abstract interface annotation class kotlin/jvm/PurelyImplements : java/lang/annotation/Annotation {
-	public abstract fun value ()Ljava/lang/String;
+	public abstract fun konstue ()Ljava/lang/String;
 }
 
 public abstract interface annotation class kotlin/jvm/Strictfp : java/lang/annotation/Annotation {
@@ -4248,7 +4248,7 @@ public final class kotlin/jvm/internal/ShortSpreadBuilder : kotlin/jvm/internal/
 }
 
 public abstract interface annotation class kotlin/jvm/internal/SourceDebugExtension : java/lang/annotation/Annotation {
-	public abstract fun value ()[Ljava/lang/String;
+	public abstract fun konstue ()[Ljava/lang/String;
 }
 
 public class kotlin/jvm/internal/SpreadBuilder {
@@ -5009,8 +5009,8 @@ public final class kotlin/reflect/KParameter$Kind : java/lang/Enum {
 	public static final field INSTANCE Lkotlin/reflect/KParameter$Kind;
 	public static final field VALUE Lkotlin/reflect/KParameter$Kind;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/reflect/KParameter$Kind;
-	public static fun values ()[Lkotlin/reflect/KParameter$Kind;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/reflect/KParameter$Kind;
+	public static fun konstues ()[Lkotlin/reflect/KParameter$Kind;
 }
 
 public abstract interface class kotlin/reflect/KProperty : kotlin/reflect/KCallable {
@@ -5095,8 +5095,8 @@ public final class kotlin/reflect/KVariance : java/lang/Enum {
 	public static final field INVARIANT Lkotlin/reflect/KVariance;
 	public static final field OUT Lkotlin/reflect/KVariance;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/reflect/KVariance;
-	public static fun values ()[Lkotlin/reflect/KVariance;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/reflect/KVariance;
+	public static fun konstues ()[Lkotlin/reflect/KVariance;
 }
 
 public final class kotlin/reflect/KVisibility : java/lang/Enum {
@@ -5105,8 +5105,8 @@ public final class kotlin/reflect/KVisibility : java/lang/Enum {
 	public static final field PROTECTED Lkotlin/reflect/KVisibility;
 	public static final field PUBLIC Lkotlin/reflect/KVisibility;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/reflect/KVisibility;
-	public static fun values ()[Lkotlin/reflect/KVisibility;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/reflect/KVisibility;
+	public static fun konstues ()[Lkotlin/reflect/KVisibility;
 }
 
 public final class kotlin/reflect/TypesJVMKt {
@@ -5371,12 +5371,12 @@ public final class kotlin/text/CharCategory : java/lang/Enum {
 	public final fun getCode ()Ljava/lang/String;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getValue ()I
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/text/CharCategory;
-	public static fun values ()[Lkotlin/text/CharCategory;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/text/CharCategory;
+	public static fun konstues ()[Lkotlin/text/CharCategory;
 }
 
 public final class kotlin/text/CharCategory$Companion {
-	public final fun valueOf (I)Lkotlin/text/CharCategory;
+	public final fun konstueOf (I)Lkotlin/text/CharCategory;
 }
 
 public final class kotlin/text/CharDirectionality : java/lang/Enum {
@@ -5403,12 +5403,12 @@ public final class kotlin/text/CharDirectionality : java/lang/Enum {
 	public static final field WHITESPACE Lkotlin/text/CharDirectionality;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getValue ()I
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/text/CharDirectionality;
-	public static fun values ()[Lkotlin/text/CharDirectionality;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/text/CharDirectionality;
+	public static fun konstues ()[Lkotlin/text/CharDirectionality;
 }
 
 public final class kotlin/text/CharDirectionality$Companion {
-	public final fun valueOf (I)Lkotlin/text/CharDirectionality;
+	public final fun konstueOf (I)Lkotlin/text/CharDirectionality;
 }
 
 public final class kotlin/text/CharsKt {
@@ -5616,8 +5616,8 @@ public final class kotlin/text/RegexOption : java/lang/Enum, kotlin/text/FlagEnu
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun getMask ()I
 	public fun getValue ()I
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/text/RegexOption;
-	public static fun values ()[Lkotlin/text/RegexOption;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/text/RegexOption;
+	public static fun konstues ()[Lkotlin/text/RegexOption;
 }
 
 public final class kotlin/text/StringsKt {
@@ -6195,8 +6195,8 @@ public final class kotlin/time/DurationUnit : java/lang/Enum {
 	public static final field NANOSECONDS Lkotlin/time/DurationUnit;
 	public static final field SECONDS Lkotlin/time/DurationUnit;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlin/time/DurationUnit;
-	public static fun values ()[Lkotlin/time/DurationUnit;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlin/time/DurationUnit;
+	public static fun konstues ()[Lkotlin/time/DurationUnit;
 }
 
 public final class kotlin/time/DurationUnitKt {

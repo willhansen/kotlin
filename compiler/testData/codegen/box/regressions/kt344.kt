@@ -8,9 +8,9 @@
 // WITH_STDLIB
 
 fun s0() : Boolean {
-    val y = "222"
-    val foo = {
-        val bar = { y }
+    konst y = "222"
+    konst foo = {
+        konst bar = { y }
         bar ()
     }
     return foo() == "222"
@@ -18,8 +18,8 @@ fun s0() : Boolean {
 
 fun s1() : Boolean {
     var x = "222"
-    val foo = {
-        val bar = {
+    konst foo = {
+        konst bar = {
             x = "aaa"
         }
         bar ()
@@ -31,8 +31,8 @@ fun s1() : Boolean {
 fun t1() : Boolean {
     var x = "111"
 
-    val y = x + "22"
-    val foo = {
+    konst y = x + "22"
+    konst foo = {
         x = x + "45" + y
         x = x.substring(3)
         x += "aaa"
@@ -47,8 +47,8 @@ fun t1() : Boolean {
 
 fun t2() : Boolean {
     var x = 111
-    val y = x + 22
-    val foo = {
+    konst y = x + 22
+    konst foo = {
         x = x + 5 + y
         x += 5
         x++
@@ -62,7 +62,7 @@ fun t2() : Boolean {
 
 fun t3() : Boolean {
     var x = true
-    val foo = {
+    konst foo = {
         x = false
         Unit
     }
@@ -72,8 +72,8 @@ fun t3() : Boolean {
 
 fun t4() : Boolean {
     var x = 100.toFloat()
-    val y = x + 22
-    val foo = {
+    konst y = x + 22
+    konst foo = {
         x = x + 200.toFloat() + y
         x += 18
         Unit
@@ -85,8 +85,8 @@ fun t4() : Boolean {
 
 fun t5() : Boolean {
     var x = 100.toDouble()
-    val y = x + 22
-    val foo = {
+    konst y = x + 22
+    konst foo = {
         x = x + 200.toDouble() + y
         x -= 22
         Unit
@@ -98,8 +98,8 @@ fun t5() : Boolean {
 
 fun t6() : Boolean {
     var x = 20.toByte()
-    val y = x + 22
-    val foo = {
+    konst y = x + 22
+    konst foo = {
         x = (x + 20.toByte() + y).toByte()
         x = (x + 2).toByte()
         x--
@@ -112,7 +112,7 @@ fun t6() : Boolean {
 
 fun t7() : Boolean {
     var x : Char = 'a'
-    val foo = {
+    konst foo = {
         x = 'b'
         Unit
     }
@@ -123,8 +123,8 @@ fun t7() : Boolean {
 
 fun t8() : Boolean {
     var x = 20.toShort()
-    val foo = {
-        val bar = {
+    konst foo = {
+        konst bar = {
             x = 30.toShort()
             Unit
         }
@@ -145,8 +145,8 @@ fun t9(x0: Int) : Boolean {
 
 fun t10() : Boolean {
     var y = 1
-    val foo = {
-        val bar = {
+    konst foo = {
+        konst bar = {
             y = y + 1
         }
         bar()
@@ -157,9 +157,9 @@ fun t10() : Boolean {
 
 fun t11(x0: Int) : Int {
     var x = x0
-    val foo = {
+    konst foo = {
         x = x + 1
-        val bar = {
+        konst bar = {
             x = x + 1
             x += 3
         }
@@ -173,7 +173,7 @@ fun t11(x0: Int) : Int {
 
 fun t12(x: Int) : Int {
     var y = x
-    val runnable = object : Runnable {
+    konst runnable = object : Runnable {
         override fun run () {
             y = y + 1
         }

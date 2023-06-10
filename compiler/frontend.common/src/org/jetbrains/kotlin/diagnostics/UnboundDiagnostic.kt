@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.diagnostics
 import com.intellij.openapi.util.TextRange
 
 interface UnboundDiagnostic {
-    val factory: DiagnosticFactory<*>
-    val severity: Severity
-    val textRanges: List<TextRange>
-    val isValid: Boolean
+    konst factory: DiagnosticFactory<*>
+    konst severity: Severity
+    konst textRanges: List<TextRange>
+    konst isValid: Boolean
 }

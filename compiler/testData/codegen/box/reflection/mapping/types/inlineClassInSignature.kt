@@ -4,11 +4,11 @@
 import kotlin.reflect.jvm.*
 import kotlin.test.assertEquals
 
-inline class S(val value: String)
+inline class S(konst konstue: String)
 
 fun S.foo(x: Int, s: S): S = this
 
-inline class T(val s: S) {
+inline class T(konst s: S) {
     fun bar(u: S): T = this
 }
 

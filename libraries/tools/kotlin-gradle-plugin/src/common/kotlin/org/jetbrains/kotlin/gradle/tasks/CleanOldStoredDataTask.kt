@@ -21,19 +21,19 @@ open class CleanOldStoredDataTask : DefaultTask() {
      * Time to live in days
      */
     @Input
-    val timeToLiveInDays: Long = 30
+    konst timeToLiveInDays: Long = 30
 
     @Suppress("unused")
     @TaskAction
     fun exec() {
-        val expirationDate = Instant.now().minus(Duration.ofDays(timeToLiveInDays))
+        konst expirationDate = Instant.now().minus(Duration.ofDays(timeToLiveInDays))
 
         CleanableStore.stores.forEach { (_, store) -> store.cleanDir(expirationDate) }
 
     }
 
     companion object {
-        const val NAME: String = "clean store"
+        const konst NAME: String = "clean store"
     }
 
 }

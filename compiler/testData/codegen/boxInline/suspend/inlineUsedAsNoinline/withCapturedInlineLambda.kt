@@ -11,7 +11,7 @@ interface Flow<T> {
 }
 
 interface FlowCollector<T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 inline fun <T> flow(crossinline body: suspend FlowCollector<T>.() -> Unit): Flow<T> =
@@ -21,14 +21,14 @@ inline fun <T> flow(crossinline body: suspend FlowCollector<T>.() -> Unit): Flow
 
 suspend inline fun <T> Flow<T>.collect(crossinline body: suspend (T) -> Unit) =
     collect(object : FlowCollector<T> {
-        override suspend fun emit(value: T) = body(value)
+        override suspend fun emit(konstue: T) = body(konstue)
     })
 
-inline fun <T, R> Flow<T>.transform(crossinline transformer: suspend FlowCollector<R>.(value: T) -> Unit): Flow<R> =
-    flow<R> { collect { value -> transformer(value) } }
+inline fun <T, R> Flow<T>.transform(crossinline transformer: suspend FlowCollector<R>.(konstue: T) -> Unit): Flow<R> =
+    flow<R> { collect { konstue -> transformer(konstue) } }
 
-inline fun <T, R> Flow<T>.map(crossinline transformer: suspend (value: T) -> R): Flow<R> =
-    transform { value -> emit(transformer(value)) }
+inline fun <T, R> Flow<T>.map(crossinline transformer: suspend (konstue: T) -> R): Flow<R> =
+    transform { konstue -> emit(transformer(konstue)) }
 
 // FILE: box.kt
 import flow.*
@@ -47,8 +47,8 @@ var result = ""
 
 fun box(): String {
     suspend {
-        val source = flow<String> { emit("O") }
-        val reference: (suspend (String) -> String) -> Flow<String> = source::map
+        konst source = flow<String> { emit("O") }
+        konst reference: (suspend (String) -> String) -> Flow<String> = source::map
         ((reference as KFunction<*>).javaMethod!!.invoke(null, source, ::addK) as Flow<String>).collect { result = it }
     }.startCoroutine(EmptyContinuation)
     return result

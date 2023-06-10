@@ -11,12 +11,12 @@ import org.jetbrains.kotlin.descriptors.SourceElement
 import org.jetbrains.kotlin.descriptors.SourceFile
 
 interface PsiSourceElement : SourceElement {
-    val psi: PsiElement?
+    konst psi: PsiElement?
 
     override fun getContainingFile(): SourceFile = psi?.containingFile?.let(::PsiSourceFile) ?: SourceFile.NO_SOURCE_FILE
 }
 
-class PsiSourceFile(val psiFile: PsiFile) : SourceFile {
+class PsiSourceFile(konst psiFile: PsiFile) : SourceFile {
     override fun equals(other: Any?): Boolean = other is PsiSourceFile && psiFile == other.psiFile
 
     override fun hashCode(): Int = psiFile.hashCode()

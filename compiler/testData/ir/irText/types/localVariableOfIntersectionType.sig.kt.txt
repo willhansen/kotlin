@@ -37,7 +37,7 @@ interface Inv<T : Any?> {
   // CHECK:
   //   Mangled name: Inv{}t
   //   Public signature: /Inv.t|-8767999791664836944[0]
-  abstract val t: T
+  abstract konst t: T
     // CHECK JVM_IR:
     //   Mangled name: Inv#<get-t>(){}1:0
     //   Public signature: /Inv.t.<get-t>|5296523675281381766[0]

@@ -10,32 +10,32 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-class Covariant<out T : CharSequence>(val block: () -> T) : Parcelable
+class Covariant<out T : CharSequence>(konst block: () -> T) : Parcelable
 
 @Parcelize
-class Contravariant<in T : CharSequence>(val block: (T) -> Boolean) : Parcelable
+class Contravariant<in T : CharSequence>(konst block: (T) -> Boolean) : Parcelable
 
 @Parcelize
-class Invariant<T : CharSequence>(val s: CharSequence) : Parcelable
+class Invariant<T : CharSequence>(konst s: CharSequence) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val covariant1 = Covariant<String> { "OK" }
-    val contravariant1 = Contravariant<String> { it == "OK" }
-    val invariant1 = Invariant<String>("OK")
+    konst covariant1 = Covariant<String> { "OK" }
+    konst contravariant1 = Contravariant<String> { it == "OK" }
+    konst invariant1 = Invariant<String>("OK")
     covariant1.writeToParcel(parcel, 0)
     contravariant1.writeToParcel(parcel, 0)
     invariant1.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val covariant2 = parcelableCreator<Covariant<String>>().createFromParcel(parcel)
+    konst covariant2 = parcelableCreator<Covariant<String>>().createFromParcel(parcel)
     assert(covariant2.block() == "OK")
 
-    val contravariant2 = parcelableCreator<Contravariant<String>>().createFromParcel(parcel)
+    konst contravariant2 = parcelableCreator<Contravariant<String>>().createFromParcel(parcel)
     assert(contravariant2.block("OK"))
 
-    val invariant2 = parcelableCreator<Invariant<String>>().createFromParcel(parcel)
+    konst invariant2 = parcelableCreator<Invariant<String>>().createFromParcel(parcel)
     assert(invariant2.s.toString() == "OK")
 }

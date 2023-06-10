@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.samWithReceiver
 
 object SamWithReceiverPluginNames {
-    const val PLUGIN_ID = "org.jetbrains.kotlin.samWithReceiver"
-    const val ANNOTATION_OPTION_NAME = "annotation"
-    const val PRESET_OPTION_NAME = "preset"
+    const konst PLUGIN_ID = "org.jetbrains.kotlin.samWithReceiver"
+    const konst ANNOTATION_OPTION_NAME = "annotation"
+    const konst PRESET_OPTION_NAME = "preset"
 
-    val SUPPORTED_PRESETS = emptyMap<String, List<String>>()
+    konst SUPPORTED_PRESETS = emptyMap<String, List<String>>()
 }

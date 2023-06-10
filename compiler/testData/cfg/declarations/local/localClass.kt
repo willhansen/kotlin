@@ -1,10 +1,10 @@
 fun f() {
     class LocalClass() {
         fun f() {
-            val x = ""
+            konst x = ""
 
             fun loc() {
-                val x3 = ""
+                konst x3 = ""
             }
         }
     }

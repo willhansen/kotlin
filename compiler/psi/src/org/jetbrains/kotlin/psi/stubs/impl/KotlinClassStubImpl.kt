@@ -29,18 +29,18 @@ import java.util.*
 class KotlinClassStubImpl(
     type: KtClassElementType,
     parent: StubElement<out PsiElement>?,
-    private val qualifiedName: StringRef?,
-    private val classId: ClassId?,
-    private val name: StringRef?,
-    private val superNames: Array<StringRef>,
-    private val isInterface: Boolean,
-    private val isEnumEntry: Boolean,
-    private val isLocal: Boolean,
-    private val isTopLevel: Boolean,
+    private konst qualifiedName: StringRef?,
+    private konst classId: ClassId?,
+    private konst name: StringRef?,
+    private konst superNames: Array<StringRef>,
+    private konst isInterface: Boolean,
+    private konst isEnumEntry: Boolean,
+    private konst isLocal: Boolean,
+    private konst isTopLevel: Boolean,
 ) : KotlinStubBaseImpl<KtClass>(parent, type), KotlinClassStub {
 
     override fun getFqName(): FqName? {
-        val stringRef = StringRef.toString(qualifiedName) ?: return null
+        konst stringRef = StringRef.toString(qualifiedName) ?: return null
         return FqName(stringRef)
     }
 
@@ -50,7 +50,7 @@ class KotlinClassStubImpl(
     override fun getName() = StringRef.toString(name)
 
     override fun getSuperNames(): List<String> {
-        val result = ArrayList<String>()
+        konst result = ArrayList<String>()
         for (ref in superNames) {
             result.add(ref.toString())
         }

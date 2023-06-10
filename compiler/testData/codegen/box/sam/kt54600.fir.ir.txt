@@ -3,7 +3,7 @@ FILE fqName:<root> fileName:/box.kt
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
         CALL 'public final fun foo (filter: kotlin.Function1<kotlin.String, kotlin.Boolean>?): kotlin.String declared in <root>' type=kotlin.String origin=null
-          filter: CONST Null type=kotlin.Nothing? value=null
+          filter: CONST Null type=kotlin.Nothing? konstue=null
   FUN name:foo visibility:public modality:FINAL <> (filter:kotlin.Function1<kotlin.String, kotlin.Boolean>?) returnType:kotlin.String
     VALUE_PARAMETER name:filter index:0 type:kotlin.Function1<kotlin.String, kotlin.Boolean>?
     BLOCK_BODY
@@ -13,4 +13,4 @@ FILE fqName:<root> fileName:/box.kt
             TYPE_OP type=@[FlexibleNullability] kotlin.Function1<@[FlexibleNullability] kotlin.Any?, kotlin.Boolean>? origin=IMPLICIT_CAST typeOperand=@[FlexibleNullability] kotlin.Function1<@[FlexibleNullability] kotlin.Any?, kotlin.Boolean>?
               GET_VAR 'filter: kotlin.Function1<kotlin.String, kotlin.Boolean>? declared in <root>.foo' type=kotlin.Function1<kotlin.String, kotlin.Boolean>? origin=null
       RETURN type=kotlin.Nothing from='public final fun foo (filter: kotlin.Function1<kotlin.String, kotlin.Boolean>?): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK"
+        CONST String type=kotlin.String konstue="OK"

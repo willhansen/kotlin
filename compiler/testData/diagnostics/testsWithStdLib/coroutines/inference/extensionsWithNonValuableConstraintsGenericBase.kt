@@ -23,30 +23,30 @@ fun <S> generateSpecific(g: suspend SpecificController<S>.() -> Unit): S = TODO(
 fun Base<*>.starBase() {}
 fun Base<String>.stringBase() {}
 
-val test1 = generate {
+konst test1 = generate {
     starBase()
     yield("foo")
 }
 
-val test2 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>generate<!> {
+konst test2 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>generate<!> {
     starBase()
 }
 
-val test3 = generate {
+konst test3 = generate {
     yield("bar")
     stringBase()
 }
 
-val test4 = generateSpecific {
+konst test4 = generateSpecific {
     yield(42)
     starBase()
 }
 
-val test5 = generateSpecific {
+konst test5 = generateSpecific {
     yield(42)
     stringBase()
 }
 
-val test6 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>generateSpecific<!> {
+konst test6 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>generateSpecific<!> {
     stringBase()
 }

@@ -1,13 +1,13 @@
 package
 
-public val test1: [ERROR : Type for BOutIn(listOf(), null & Any)]
-public val test2: BInIn<kotlin.Nothing> /* = Bound<in kotlin.collections.List<kotlin.Nothing>, in kotlin.Nothing> */
+public konst test1: [ERROR : Type for BOutIn(listOf(), null & Any)]
+public konst test2: BInIn<kotlin.Nothing> /* = Bound<in kotlin.collections.List<kotlin.Nothing>, in kotlin.Nothing> */
 public fun </*0*/ T> listOf(): kotlin.collections.List<T>
 
 public final class Bound</*0*/ X, /*1*/ Y : X> {
     public constructor Bound</*0*/ X, /*1*/ Y : X>(/*0*/ x: X, /*1*/ y: Y)
-    public final val x: X
-    public final val y: Y
+    public final konst x: X
+    public final konst y: Y
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

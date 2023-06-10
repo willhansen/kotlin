@@ -22,7 +22,7 @@ abstract class GradleKpmAndroidNativeX64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.ANDROID_X64,
             GradleKpmAndroidNativeX64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -61,7 +61,7 @@ abstract class GradleKpmAndroidNativeX86Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.ANDROID_X86,
             GradleKpmAndroidNativeX86Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -100,7 +100,7 @@ abstract class GradleKpmAndroidNativeArm32Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.ANDROID_ARM32,
             GradleKpmAndroidNativeArm32Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -139,7 +139,7 @@ abstract class GradleKpmAndroidNativeArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.ANDROID_ARM64,
             GradleKpmAndroidNativeArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -178,7 +178,7 @@ abstract class GradleKpmIosArm32Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.IOS_ARM32,
             GradleKpmIosArm32Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -217,7 +217,7 @@ abstract class GradleKpmIosArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.IOS_ARM64,
             GradleKpmIosArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -256,7 +256,7 @@ abstract class GradleKpmIosX64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.IOS_X64,
             GradleKpmIosX64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -295,7 +295,7 @@ abstract class GradleKpmIosSimulatorArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.IOS_SIMULATOR_ARM64,
             GradleKpmIosSimulatorArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -334,7 +334,7 @@ abstract class GradleKpmWatchosArm32Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.WATCHOS_ARM32,
             GradleKpmWatchosArm32Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -373,7 +373,7 @@ abstract class GradleKpmWatchosArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.WATCHOS_ARM64,
             GradleKpmWatchosArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -412,7 +412,7 @@ abstract class GradleKpmWatchosX86Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.WATCHOS_X86,
             GradleKpmWatchosX86Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -451,7 +451,7 @@ abstract class GradleKpmWatchosX64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.WATCHOS_X64,
             GradleKpmWatchosX64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -490,7 +490,7 @@ abstract class GradleKpmWatchosSimulatorArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.WATCHOS_SIMULATOR_ARM64,
             GradleKpmWatchosSimulatorArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -529,7 +529,7 @@ abstract class GradleKpmWatchosDeviceArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.WATCHOS_DEVICE_ARM64,
             GradleKpmWatchosDeviceArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -568,7 +568,7 @@ abstract class GradleKpmTvosArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.TVOS_ARM64,
             GradleKpmTvosArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -607,7 +607,7 @@ abstract class GradleKpmTvosX64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.TVOS_X64,
             GradleKpmTvosX64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -646,7 +646,7 @@ abstract class GradleKpmTvosSimulatorArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.TVOS_SIMULATOR_ARM64,
             GradleKpmTvosSimulatorArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -685,7 +685,7 @@ abstract class GradleKpmLinuxX64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.LINUX_X64,
             GradleKpmLinuxX64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -724,7 +724,7 @@ abstract class GradleKpmMingwX86Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.MINGW_X86,
             GradleKpmMingwX86Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -763,7 +763,7 @@ abstract class GradleKpmMingwX64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.MINGW_X64,
             GradleKpmMingwX64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -802,7 +802,7 @@ abstract class GradleKpmMacosX64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.MACOS_X64,
             GradleKpmMacosX64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -841,7 +841,7 @@ abstract class GradleKpmMacosArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.MACOS_ARM64,
             GradleKpmMacosArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -880,7 +880,7 @@ abstract class GradleKpmLinuxArm64Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.LINUX_ARM64,
             GradleKpmLinuxArm64Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -919,7 +919,7 @@ abstract class GradleKpmLinuxArm32HfpVariant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.LINUX_ARM32_HFP,
             GradleKpmLinuxArm32HfpVariant::class.java
         ) { containingModule: GradleKpmModule,
@@ -958,7 +958,7 @@ abstract class GradleKpmLinuxMips32Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.LINUX_MIPS32,
             GradleKpmLinuxMips32Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -997,7 +997,7 @@ abstract class GradleKpmLinuxMipsel32Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.LINUX_MIPSEL32,
             GradleKpmLinuxMipsel32Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -1036,7 +1036,7 @@ abstract class GradleKpmWasm32Variant @Inject constructor(
     hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
 ) {
     companion object {
-        val constructor = GradleKpmNativeVariantConstructor(
+        konst constructor = GradleKpmNativeVariantConstructor(
             KonanTarget.WASM32,
             GradleKpmWasm32Variant::class.java
         ) { containingModule: GradleKpmModule,
@@ -1058,7 +1058,7 @@ abstract class GradleKpmWasm32Variant @Inject constructor(
     }
 }
 
-internal val allKpmNativeVariantConstructors = listOf(
+internal konst allKpmNativeVariantConstructors = listOf(
     GradleKpmAndroidNativeX64Variant.constructor,
     GradleKpmAndroidNativeX86Variant.constructor,
     GradleKpmAndroidNativeArm32Variant.constructor,

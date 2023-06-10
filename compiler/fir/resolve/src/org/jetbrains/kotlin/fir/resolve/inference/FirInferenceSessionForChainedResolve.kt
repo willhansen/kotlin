@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.resolve.calls.inference.model.NewConstraintSystemImp
 import org.jetbrains.kotlin.types.model.*
 
 abstract class FirInferenceSessionForChainedResolve(
-    protected val resolutionContext: ResolutionContext
+    protected konst resolutionContext: ResolutionContext
 ) : FirInferenceSession() {
     override fun fixSyntheticTypeVariableWithNotEnoughInformation(
         typeVariable: TypeVariableMarker,
@@ -29,10 +29,10 @@ abstract class FirInferenceSessionForChainedResolve(
     ) {
     }
 
-    protected val partiallyResolvedCalls: MutableList<Pair<FirResolvable, Candidate>> = mutableListOf()
-    private val completedCalls: MutableSet<FirResolvable> = mutableSetOf()
+    protected konst partiallyResolvedCalls: MutableList<Pair<FirResolvable, Candidate>> = mutableListOf()
+    private konst completedCalls: MutableSet<FirResolvable> = mutableSetOf()
 
-    protected val components: BodyResolveComponents
+    protected konst components: BodyResolveComponents
         get() = resolutionContext.bodyResolveComponents
 
     override fun <T> addCompletedCall(call: T, candidate: Candidate) where T : FirResolvable, T : FirStatement {
@@ -45,7 +45,7 @@ abstract class FirInferenceSessionForChainedResolve(
 
     override fun registerStubTypes(map: Map<TypeVariableMarker, StubTypeMarker>) {}
 
-    protected val FirResolvable.candidate: Candidate
+    protected konst FirResolvable.candidate: Candidate
         get() = candidate()!!
 
     override fun clear() {
@@ -60,14 +60,14 @@ abstract class FirInferenceSessionForChainedResolve(
         nonFixedToVariablesSubstitutor: ConeSubstitutor,
         fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>,
     ): Boolean {
-        val substitutedConstraintWith =
+        konst substitutedConstraintWith =
             initialConstraint.substitute(callSubstitutor).substitute(nonFixedToVariablesSubstitutor, fixedTypeVariables)
-        val lower = substitutedConstraintWith.a // TODO: SUB
-        val upper = substitutedConstraintWith.b // TODO: SUB
+        konst lower = substitutedConstraintWith.a // TODO: SUB
+        konst upper = substitutedConstraintWith.b // TODO: SUB
 
         if (commonSystem.isProperType(lower) && (lower == upper || commonSystem.isProperType(upper))) return false
 
-        val position = substitutedConstraintWith.position
+        konst position = substitutedConstraintWith.position
         when (initialConstraint.constraintKind) {
             ConstraintKind.LOWER -> error("LOWER constraint shouldn't be used, please use UPPER")
 
@@ -83,8 +83,8 @@ abstract class FirInferenceSessionForChainedResolve(
     }
 
     protected fun InitialConstraint.substitute(substitutor: TypeSubstitutorMarker): InitialConstraint {
-        val lowerSubstituted = substitutor.safeSubstitute(resolutionContext.typeContext, this.a)
-        val upperSubstituted = substitutor.safeSubstitute(resolutionContext.typeContext, this.b)
+        konst lowerSubstituted = substitutor.safeSubstitute(resolutionContext.typeContext, this.a)
+        konst upperSubstituted = substitutor.safeSubstitute(resolutionContext.typeContext, this.b)
 
         if (lowerSubstituted == a && upperSubstituted == b) return this
 
@@ -100,14 +100,14 @@ abstract class FirInferenceSessionForChainedResolve(
         substitutor: TypeSubstitutorMarker,
         fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
     ): InitialConstraint {
-        val substituted = substitute(substitutor)
-        val a = a
+        konst substituted = substitute(substitutor)
+        konst a = a
         // In situation when some type variable _T is fixed to Stub(_T)?,
         // we are not allowed just to substitute Stub(_T) with T because nullabilities are different here!
         // To compensate this, we have to substitute Stub(_T) <: SomeType constraint with T <: SomeType? adding nullability to upper type
         if (a is ConeStubTypeForChainInference && substituted.a !is ConeStubTypeForChainInference) {
-            val constructor = a.constructor
-            val fixedTypeVariableType = fixedTypeVariables[constructor.variable.typeConstructor]
+            konst constructor = a.constructor
+            konst fixedTypeVariableType = fixedTypeVariables[constructor.variable.typeConstructor]
             if (fixedTypeVariableType is ConeStubTypeForChainInference &&
                 fixedTypeVariableType.constructor === constructor &&
                 fixedTypeVariableType.isMarkedNullable

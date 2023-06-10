@@ -19,7 +19,7 @@ FILE: propertyAccessors.kt
 
             ^ !=(this@R|/isNotNull|, Null(null))
         }
-        public set(value: R|kotlin/Boolean|): R|kotlin/Unit|
+        public set(konstue: R|kotlin/Boolean|): R|kotlin/Unit|
             [R|Contract description]
              <
                 Returns(WILDCARD) -> this != null

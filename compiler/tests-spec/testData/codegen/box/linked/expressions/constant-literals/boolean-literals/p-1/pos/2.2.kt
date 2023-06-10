@@ -9,7 +9,7 @@
  */
 
 fun `true`() {
-    val l = `false`@ {
+    konst l = `false`@ {
         return@`false`
     }
     l()

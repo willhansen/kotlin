@@ -28,9 +28,9 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 class StrictfpApplicabilityChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val annotation = descriptor.findStrictfpAnnotation() ?: return
+        konst annotation = descriptor.findStrictfpAnnotation() ?: return
         if (declaration is KtClassOrObject && descriptor is ClassDescriptor) {
-            val annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(annotation) ?: return
+            konst annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(annotation) ?: return
             context.trace.report(ErrorsJvm.STRICTFP_ON_CLASS.on(annotationEntry))
         }
     }

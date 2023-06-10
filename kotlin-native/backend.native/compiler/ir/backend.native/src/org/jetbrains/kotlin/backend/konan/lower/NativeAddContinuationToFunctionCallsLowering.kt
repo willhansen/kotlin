@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.util.overrides
 
 internal class NativeAddContinuationToFunctionCallsLowering(
-        override val context: Context
+        override konst context: Context
 ) : AbstractAddContinuationToFunctionCallsLowering() {
     /*
      * In complex cases suspend functions are converted to state-machine class with invokeSuspend method.

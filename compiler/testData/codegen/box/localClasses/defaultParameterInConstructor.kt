@@ -1,11 +1,11 @@
 // IGNORE_BACKEND: JVM
 // KT-44631
 
-class Something(val now: String)
+class Something(konst now: String)
 
 fun box(): String {
-    val a: Something.() -> String = {
-        class MyEvent(val result: String = now)
+    konst a: Something.() -> String = {
+        class MyEvent(konst result: String = now)
 
         MyEvent().result
     }

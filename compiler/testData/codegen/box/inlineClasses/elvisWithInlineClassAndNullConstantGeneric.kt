@@ -3,12 +3,12 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt<T: Int>(private val data: T) {
+konstue class UInt<T: Int>(private konst data: T) {
     fun result(): String = if (data == 1) "OK" else "fail"
 }
 
 fun f(): UInt<Int> {
-    val unull = UInt(1) ?: null
+    konst unull = UInt(1) ?: null
     return nonNull(unull)
 }
 

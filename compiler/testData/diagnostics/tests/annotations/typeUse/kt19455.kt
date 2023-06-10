@@ -11,4 +11,4 @@ open class TypeToken<T>
 
 object Test : TypeToken<@TypeAnn String>() // (1)
 
-val test = object : TypeToken<@TypeAnn String>() {} // (2)
+konst test = object : TypeToken<@TypeAnn String>() {} // (2)

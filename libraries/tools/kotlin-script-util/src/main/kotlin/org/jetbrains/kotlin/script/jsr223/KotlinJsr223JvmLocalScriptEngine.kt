@@ -41,32 +41,32 @@ import kotlin.reflect.KClass
 @Deprecated("Use kotlin-scripting-jsr223 instead")
 class KotlinJsr223JvmLocalScriptEngine(
         factory: ScriptEngineFactory,
-        val templateClasspath: List<File>,
+        konst templateClasspath: List<File>,
         templateClassName: String,
-        val getScriptArgs: (ScriptContext, Array<out KClass<out Any>>?) -> ScriptArgsWithTypes?,
-        val scriptArgsTypes: Array<out KClass<out Any>>?
+        konst getScriptArgs: (ScriptContext, Array<out KClass<out Any>>?) -> ScriptArgsWithTypes?,
+        konst scriptArgsTypes: Array<out KClass<out Any>>?
 ) : KotlinJsr223JvmScriptEngineBase(factory), KotlinJsr223JvmInvocableScriptEngine {
 
-    override val replCompiler: ReplCompiler by lazy {
+    override konst replCompiler: ReplCompiler by lazy {
        GenericReplCompiler(
                makeScriptDefinition(templateClasspath, templateClassName),
                makeCompilerConfiguration(),
                PrintingMessageCollector(System.out, MessageRenderer.WITHOUT_PATHS, false))
     }
-    // TODO: bindings passing works only once on the first eval, subsequent setContext/setBindings call have no effect. Consider making it dynamic, but take history into account
-    private val localEvaluator by lazy { GenericReplCompilingEvaluator(replCompiler, templateClasspath, Thread.currentThread().contextClassLoader, getScriptArgs(getContext(), scriptArgsTypes)) }
+    // TODO: bindings passing works only once on the first ekonst, subsequent setContext/setBindings call have no effect. Consider making it dynamic, but take history into account
+    private konst localEkonstuator by lazy { GenericReplCompilingEkonstuator(replCompiler, templateClasspath, Thread.currentThread().contextClassLoader, getScriptArgs(getContext(), scriptArgsTypes)) }
 
-    override val replEvaluator: ReplFullEvaluator get() = localEvaluator
+    override konst replEkonstuator: ReplFullEkonstuator get() = localEkonstuator
 
-    override val state: IReplStageState<*> get() = getCurrentState(getContext())
+    override konst state: IReplStageState<*> get() = getCurrentState(getContext())
 
-    override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> = replEvaluator.createState(lock)
+    override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> = replEkonstuator.createState(lock)
 
     override fun overrideScriptArgs(context: ScriptContext): ScriptArgsWithTypes? = getScriptArgs(context, scriptArgsTypes)
 
     private fun makeScriptDefinition(templateClasspath: List<File>, templateClassName: String): KotlinScriptDefinition {
-        val classloader = URLClassLoader(templateClasspath.map { it.toURI().toURL() }.toTypedArray(), this.javaClass.classLoader)
-        val cls = classloader.loadClass(templateClassName)
+        konst classloader = URLClassLoader(templateClasspath.map { it.toURI().toURL() }.toTypedArray(), this.javaClass.classLoader)
+        konst cls = classloader.loadClass(templateClassName)
         return KotlinScriptDefinitionFromAnnotatedTemplate(cls.kotlin, emptyMap())
     }
 

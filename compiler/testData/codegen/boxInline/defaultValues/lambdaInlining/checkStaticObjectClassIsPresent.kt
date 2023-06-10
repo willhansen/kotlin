@@ -12,14 +12,14 @@ inline fun test(s: () -> Call = {
     } as Call
 }) = s()
 
-val same = test()
+konst same = test()
 
 // FILE: 2.kt
 
 import test.*
 
 fun box(): String {
-    val inlined = test()
+    konst inlined = test()
     if (same.run() != "OK") return "fail 1: ${same.run()}"
     return inlined.run()
 }

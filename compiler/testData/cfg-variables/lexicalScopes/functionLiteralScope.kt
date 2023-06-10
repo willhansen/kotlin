@@ -1,8 +1,8 @@
 fun foo() {
     "before"
-    val b = 1
-    val f = { x: Int ->
-        val a = x + b
+    konst b = 1
+    konst f = { x: Int ->
+        konst a = x + b
     }
     "after"
 }

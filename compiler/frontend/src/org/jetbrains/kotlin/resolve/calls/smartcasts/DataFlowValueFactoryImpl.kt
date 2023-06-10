@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.types.expressions.ExpressionTypingUtils
 import org.jetbrains.kotlin.types.isError
 
 // Please, avoid using this implementation explicitly. If you need DataFlowValueFactory, use injection.
-class DataFlowValueFactoryImpl constructor(private val languageVersionSettings: LanguageVersionSettings) : DataFlowValueFactory {
+class DataFlowValueFactoryImpl constructor(private konst languageVersionSettings: LanguageVersionSettings) : DataFlowValueFactory {
     // Receivers
     override fun createDataFlowValue(
         receiverValue: ReceiverValue,
@@ -44,7 +44,7 @@ class DataFlowValueFactoryImpl constructor(private val languageVersionSettings: 
             bindingContext,
             containingDeclarationOrModule
         )
-        else -> throw UnsupportedOperationException("Unsupported receiver value: " + receiverValue::class.java.name)
+        else -> throw UnsupportedOperationException("Unsupported receiver konstue: " + receiverValue::class.java.name)
     }
 
     override fun createDataFlowValueForStableReceiver(receiver: ReceiverValue) =
@@ -58,7 +58,7 @@ class DataFlowValueFactoryImpl constructor(private val languageVersionSettings: 
         bindingContext: BindingContext,
         usageContainingModule: ModuleDescriptor?
     ): DataFlowValue {
-        val identifierInfo = IdentifierInfo.Variable(
+        konst identifierInfo = IdentifierInfo.Variable(
             variableDescriptor,
             variableDescriptor.variableKind(usageContainingModule, bindingContext, property, languageVersionSettings),
             bindingContext[BindingContext.BOUND_INITIALIZER_VALUE, variableDescriptor]
@@ -101,7 +101,7 @@ class DataFlowValueFactoryImpl constructor(private val languageVersionSettings: 
                 DataFlowValue(IdentifierInfo.Expression(expression, stableComplex = true), type)
 
             else -> {
-                val result = getIdForStableIdentifier(expression, bindingContext, containingDeclarationOrModule, languageVersionSettings)
+                konst result = getIdForStableIdentifier(expression, bindingContext, containingDeclarationOrModule, languageVersionSettings)
                 DataFlowValue(if (result === IdentifierInfo.NO) IdentifierInfo.Expression(expression) else result, type)
             }
         }
@@ -113,7 +113,7 @@ class DataFlowValueFactoryImpl constructor(private val languageVersionSettings: 
         is KtBinaryExpression -> expression.operationToken === KtTokens.ELVIS
 
         is KtParenthesizedExpression -> {
-            val deparenthesized = KtPsiUtil.deparenthesize(expression)
+            konst deparenthesized = KtPsiUtil.deparenthesize(expression)
             deparenthesized != null && isComplexExpression(deparenthesized)
         }
 

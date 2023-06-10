@@ -4,13 +4,13 @@ interface I {
     var Int.zoo: Unit
     fun foo()
     fun Int.smth(): Short
-    val foo: Int
+    konst foo: Int
     var bar: Long
-    val Int.doo: String
+    konst Int.doo: String
 }
 
 class A(
-    private val p: I
+    private konst p: I
 ) : I by p
 
 // class: A

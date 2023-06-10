@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.konan.target.LinkerOutputKind
  *   signature ( https://developer.android.com/ndk/reference/group/native-activity#anativeactivity_createfunc ).
  */
 enum class AndroidProgramType(
-        val konanMainOverride: String?,
-        val linkerOutputKindOverride: LinkerOutputKind?,
-        val consolePrintsToLogcat: Boolean
+        konst konanMainOverride: String?,
+        konst linkerOutputKindOverride: LinkerOutputKind?,
+        konst consolePrintsToLogcat: Boolean
 ) {
 
     /** Regular executable. The runtime entry point name is not Konan_main for historical reasons. */
@@ -26,6 +26,6 @@ enum class AndroidProgramType(
     NativeActivity(null, LinkerOutputKind.DYNAMIC_LIBRARY, true);
 
     companion object {
-        val Default = Standalone
+        konst Default = Standalone
     }
 }

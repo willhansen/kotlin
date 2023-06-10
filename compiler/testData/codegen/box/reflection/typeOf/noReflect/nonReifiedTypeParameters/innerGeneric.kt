@@ -17,9 +17,9 @@ class C<X> {
 }
 
 fun box(): String {
-    val z = C<Any>().D<Any>().createZ<Any>()
+    konst z = C<Any>().D<Any>().createZ<Any>()
     assertEquals("Y (Kotlin reflection is not available)", z.upperBounds.joinToString())
-    val y = z.upperBounds.single().classifier as KTypeParameter
+    konst y = z.upperBounds.single().classifier as KTypeParameter
     assertEquals("X (Kotlin reflection is not available)", y.upperBounds.joinToString())
     return "OK"
 }

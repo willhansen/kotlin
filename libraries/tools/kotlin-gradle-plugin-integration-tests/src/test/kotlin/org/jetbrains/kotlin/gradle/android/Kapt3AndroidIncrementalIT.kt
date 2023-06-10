@@ -32,7 +32,7 @@ open class Kapt3AndroidIncrementalIT : Kapt3BaseIT() {
             buildOptions = defaultBuildOptions.copy(androidVersion = agpVersion),
             buildJdk = jdkVersion.location
         ) {
-            val javaFile = subProject("app").javaSourcesDir().resolve("com/example/dagger/kotlin/Utils.java")
+            konst javaFile = subProject("app").javaSourcesDir().resolve("com/example/dagger/kotlin/Utils.java")
             javaFile.writeText(
                 //language=Java
                 """
@@ -91,7 +91,7 @@ open class Kapt3AndroidIncrementalIT : Kapt3BaseIT() {
         ) {
             build("assembleDebug")
 
-            val androidModuleKt = subProject("app").javaSourcesDir().resolve("com/example/dagger/kotlin/AndroidModule.kt")
+            konst androidModuleKt = subProject("app").javaSourcesDir().resolve("com/example/dagger/kotlin/AndroidModule.kt")
             androidModuleKt.modify {
                 it.replace(
                     "fun provideApplicationContext(): Context {",
@@ -109,7 +109,7 @@ open class Kapt3AndroidIncrementalIT : Kapt3BaseIT() {
 
                 // Output is combined with previous build, but we are only interested in the compilation
                 // from second build to avoid false positive test failure
-                val filteredOutput = output
+                konst filteredOutput = output
                     .lineSequence()
                     .filter { it.contains("[KOTLIN] compile iteration:") }
                     .drop(1)
@@ -132,7 +132,7 @@ open class Kapt3AndroidIncrementalIT : Kapt3BaseIT() {
             buildOptions = defaultBuildOptions.copy(androidVersion = agpVersion),
             buildJdk = jdkVersion.location
         ) {
-            val appProject = subProject("app")
+            konst appProject = subProject("app")
             appProject.buildGradle.modify {
                 //language=Gradle
                 """
@@ -147,7 +147,7 @@ open class Kapt3AndroidIncrementalIT : Kapt3BaseIT() {
                 //language=kt
                 """
                 {
-                  private val x = 1
+                  private konst x = 1
                 }
                 """.trimIndent()
             )
@@ -181,7 +181,7 @@ open class Kapt3AndroidIncrementalIT : Kapt3BaseIT() {
                 }
 
                 build("assembleDebug", buildOptions = buildOptions.copy(logLevel = LogLevel.DEBUG)) {
-                    val affectedFile = subProject("app").kotlinSourcesDir().resolve("org.example.inter.project.ic")
+                    konst affectedFile = subProject("app").kotlinSourcesDir().resolve("org.example.inter.project.ic")
                         .resolve(useUtilFileName).relativeTo(projectPath)
                     assertCompiledKotlinSources(
                         listOf(affectedFile),
@@ -196,9 +196,9 @@ open class Kapt3AndroidIncrementalIT : Kapt3BaseIT() {
                 }
             }
 
-            val libAndroidProject = subProject("lib-android")
+            konst libAndroidProject = subProject("lib-android")
             modifyAndCheck(libAndroidProject.kotlinSourcesDir().resolve("libAndroidUtil.kt"), "useLibAndroidUtil.kt")
-            val libJvmProject = subProject("lib-jvm")
+            konst libJvmProject = subProject("lib-jvm")
             modifyAndCheck(libJvmProject.kotlinSourcesDir().resolve("libJvmUtil.kt"), "useLibJvmUtil.kt")
         }
     }
@@ -206,5 +206,5 @@ open class Kapt3AndroidIncrementalIT : Kapt3BaseIT() {
 
 @DisplayName("android with kapt3 incremental build tests with precise compilation outputs backup")
 class Kapt3AndroidIncrementalWithPreciseBackupIT : Kapt3AndroidIncrementalIT() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }

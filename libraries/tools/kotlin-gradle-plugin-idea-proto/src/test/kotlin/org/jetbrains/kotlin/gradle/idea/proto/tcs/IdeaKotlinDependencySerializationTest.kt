@@ -15,7 +15,7 @@ import kotlin.test.assertNull
 import kotlin.test.fail
 
 class IdeaKotlinDependencySerializationTest : AbstractSerializationTest<IdeaKotlinDependency>() {
-    override fun serialize(value: IdeaKotlinDependency): ByteArray = value.toByteArray(this)
+    override fun serialize(konstue: IdeaKotlinDependency): ByteArray = konstue.toByteArray(this)
 
     override fun deserialize(data: ByteArray): IdeaKotlinDependency =
         IdeaKotlinDependency(data) ?: fail("Failed to deserialize ${IdeaKotlinDependency::class.java.name}")
@@ -44,7 +44,7 @@ class IdeaKotlinDependencySerializationTest : AbstractSerializationTest<IdeaKotl
     fun `bad data - returns null`() {
         assertNull(IdeaKotlinDependency(byteArrayOf()))
         if (logger.reports.size != 1) fail("Expected exactly one report in logger. Found ${logger.reports}")
-        val report = logger.reports.first()
+        konst report = logger.reports.first()
         assertEquals(IdeaKotlinSerializationLogger.Severity.ERROR, report.severity)
         assertEquals("Dependency not set", report.message)
     }

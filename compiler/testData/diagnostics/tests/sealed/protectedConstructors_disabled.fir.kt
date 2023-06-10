@@ -1,21 +1,21 @@
 // LANGUAGE: -AllowSealedInheritorsInDifferentFilesOfSamePackage
 // DIAGNOSTICS: -UNUSED_PARAMETER
 
-sealed class Case1(val x: Int) {
+sealed class Case1(konst x: Int) {
     protected constructor(s: String) : this(s.length)
 
     class Inheritor1 : Case1(10)
     class Inheritor2 : Case1("Hello")
 }
 
-sealed class Case2 protected constructor(val x: Int) {
+sealed class Case2 protected constructor(konst x: Int) {
     protected constructor(s: String) : this(s.length)
 
     class Inheritor1 : Case2(10)
     class Inheritor2 : Case2("Hello")
 }
 
-sealed class Case3 private constructor(val x: Int) {
+sealed class Case3 private constructor(konst x: Int) {
     protected constructor(s: String) : this(s.length)
 
     class Inheritor1 : Case3(10) // should OK

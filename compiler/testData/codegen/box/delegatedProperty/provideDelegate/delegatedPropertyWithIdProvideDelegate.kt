@@ -1,14 +1,14 @@
 // WITH_STDLIB
 
-val test1: Map<String, String> by lazy(LazyThreadSafetyMode.NONE) {
+konst test1: Map<String, String> by lazy(LazyThreadSafetyMode.NONE) {
     mapOf("string" to "string").mapValues { it.toString() }
 }
 
-val test2: String by myDelegate("OK")
+konst test2: String by myDelegate("OK")
 
 fun <T> myDelegate(initializer: T): Delegate<T> = Delegate(initializer)
 
-class Delegate<T>(val initializer: T) {
+class Delegate<T>(konst initializer: T) {
     operator fun getValue(thisRef: Any?, property: kotlin.reflect.KProperty<*>): T {
         return initializer
     }

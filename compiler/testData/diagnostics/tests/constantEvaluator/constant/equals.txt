@@ -1,5 +1,5 @@
 package
 
 package test {
-    public val prop4: kotlin.Boolean = true
+    public konst prop4: kotlin.Boolean = true
 }

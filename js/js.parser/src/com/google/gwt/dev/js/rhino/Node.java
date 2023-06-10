@@ -77,7 +77,7 @@ public class Node implements Cloneable {
         }
 
         /** sets the string content.
-          * @param str the new value.  Non null.
+          * @param str the new konstue.  Non null.
           */
         @Override
         public void setString(String str) {
@@ -313,7 +313,7 @@ public class Node implements Cloneable {
         SPECIALCALL_PROP  = 30,
         DEBUGSOURCE_PROP  = 31;
 
-    public static final int    // this value of the ISNUMBER_PROP specifies
+    public static final int    // this konstue of the ISNUMBER_PROP specifies
         BOTH = 0,               // which of the children are Number types
         LEFT = 1,
         RIGHT = 2;

@@ -10,7 +10,7 @@ public class BaseJava {
 
 // FILE: Derived.kt
 class Derived : BaseJava() {
-    private val a = "OK"
+    private konst a = "OK"
 
     fun x() = a
 }

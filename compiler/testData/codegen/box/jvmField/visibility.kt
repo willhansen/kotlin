@@ -9,8 +9,8 @@ import kotlin.reflect.KProperty
 import kotlin.test.assertNotEquals
 import java.lang.reflect.Modifier
 
-@JvmField public val publicField = "OK";
-@JvmField internal val internalField = "OK";
+@JvmField public konst publicField = "OK";
+@JvmField internal konst internalField = "OK";
 
 fun testVisibilities() {
     checkVisibility(::publicField.javaField!!, Modifier.PUBLIC)
@@ -18,9 +18,9 @@ fun testVisibilities() {
 }
 
 class A {
-    @JvmField public val publicField = "OK";
-    @JvmField internal val internalField = "OK";
-    @JvmField protected val protectedfield = "OK";
+    @JvmField public konst publicField = "OK";
+    @JvmField internal konst internalField = "OK";
+    @JvmField protected konst protectedfield = "OK";
 
     fun testVisibilities() {
         checkVisibility(A::publicField.javaField!!, Modifier.PUBLIC)
@@ -32,9 +32,9 @@ class A {
 
 class AWithCompanion {
     companion object {
-        @JvmField public val publicField = "OK";
-        @JvmField internal val internalField = "OK";
-        @JvmField protected val protectedfield = "OK";
+        @JvmField public konst publicField = "OK";
+        @JvmField internal konst internalField = "OK";
+        @JvmField protected konst protectedfield = "OK";
 
         operator fun get(name: String) = AWithCompanion.Companion::class.members.single { it.name == name } as KProperty<*>
 
@@ -47,8 +47,8 @@ class AWithCompanion {
 }
 
 object Object {
-    @JvmField public val publicField = "OK";
-    @JvmField internal val internalField = "OK";
+    @JvmField public konst publicField = "OK";
+    @JvmField internal konst internalField = "OK";
 
     operator fun get(name: String) = Object::class.members.single { it.name == name } as KProperty<*>
 

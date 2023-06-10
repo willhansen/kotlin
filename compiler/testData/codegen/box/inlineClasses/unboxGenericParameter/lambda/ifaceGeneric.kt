@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 fun <T> underlying(a: IC<FooHolder>): T = bar(a) {
-    it.value.value as T
+    it.konstue.konstue as T
 }
 
 fun <T> extension(a: IC<FooHolder>): T = bar(a) {
@@ -18,21 +18,21 @@ fun <T> normal(a: IC<FooHolder>): T = bar(a) {
     normalValue(it)
 }
 
-fun <T> IC<FooHolder>.extensionValue(): T = value.value as T
+fun <T> IC<FooHolder>.extensionValue(): T = konstue.konstue as T
 
-fun <T> normalValue(ic: IC<FooHolder>): T = ic.value.value as T
+fun <T> normalValue(ic: IC<FooHolder>): T = ic.konstue.konstue as T
 
-fun <T, R> bar(value: T, f: (T) -> R): R {
-    return f(value)
+fun <T, R> bar(konstue: T, f: (T) -> R): R {
+    return f(konstue)
 }
 
 interface Foo
 
-class FooHolder(val value: Any): Foo
+class FooHolder(konst konstue: Any): Foo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: Foo>(val value: T): Foo {
-    fun <T> dispatchValue(): T = (value as FooHolder).value as T
+konstue class IC<T: Foo>(konst konstue: T): Foo {
+    fun <T> dispatchValue(): T = (konstue as FooHolder).konstue as T
 }
 
 fun box(): String {

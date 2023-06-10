@@ -9,7 +9,7 @@ class C {
 }
 
 fun box(): String {
-    val c = C()
-    val m = c.javaClass.getMethod("foo", String::class.java)
+    konst c = C()
+    konst m = c.javaClass.getMethod("foo", String::class.java)
     return m.invoke(c, "O") as String
 }

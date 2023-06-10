@@ -8,7 +8,7 @@ public class A {
     public fun m1() {}
 }
 public class M1 {
-    public val a: A = A()
+    public konst a: A = A()
 }
 
 // MODULE: m2
@@ -21,7 +21,7 @@ public class A {
 }
 
 public class M2 {
-    public val a: A = A()
+    public konst a: A = A()
 }
 
 // MODULE: m3(m1, m2)

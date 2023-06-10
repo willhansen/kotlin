@@ -1,19 +1,19 @@
-fun valuesNotNull(map: MutableMap<Int, String>) {
-    map.<caret>computeIfAbsent(1) { k -> "new value" }
+fun konstuesNotNull(map: MutableMap<Int, String>) {
+    map.<caret>computeIfAbsent(1) { k -> "new konstue" }
 }
 
-fun valuesNullable(map: MutableMap<Int, String?>) {
+fun konstuesNullable(map: MutableMap<Int, String?>) {
     map.<caret>computeIfAbsent(1) { k -> null }
 }
 
-fun <T> valuesT(map: MutableMap<Int, T>, newValue: T) {
+fun <T> konstuesT(map: MutableMap<Int, T>, newValue: T) {
     map.<caret>computeIfAbsent(1) { k -> newValue }
 }
 
-fun <T : Any> valuesTNotNull(map: MutableMap<Int, T>, newValue: T) {
+fun <T : Any> konstuesTNotNull(map: MutableMap<Int, T>, newValue: T) {
     map.<caret>computeIfAbsent(1) { k -> newValue }
 }
 
-fun <T : Any> valuesTNullable(map: MutableMap<Int, T?>, newValue: T?) {
+fun <T : Any> konstuesTNullable(map: MutableMap<Int, T?>, newValue: T?) {
     map.<caret>computeIfAbsent(1) { k -> newValue }
 }

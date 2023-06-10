@@ -1,79 +1,79 @@
 package test
 
-// val prop1: null
-<!DEBUG_INFO_CONSTANT_VALUE("null")!>val prop1 = <!DIVISION_BY_ZERO!>1 / 0<!><!>
+// konst prop1: null
+<!DEBUG_INFO_CONSTANT_VALUE("null")!>konst prop1 = <!DIVISION_BY_ZERO!>1 / 0<!><!>
 
-// val prop2: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop2 = <!DIVISION_BY_ZERO!>1 / 0.0<!><!>
+// konst prop2: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop2 = <!DIVISION_BY_ZERO!>1 / 0.0<!><!>
 
-// val prop3: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop3 = <!DIVISION_BY_ZERO!>1.0 / 0<!><!>
+// konst prop3: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop3 = <!DIVISION_BY_ZERO!>1.0 / 0<!><!>
 
-// val prop4: 10.0.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("10.0.toDouble()")!>val prop4 = 1 / 0.1<!>
+// konst prop4: 10.0.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("10.0.toDouble()")!>konst prop4 = 1 / 0.1<!>
 
-// val prop5: null
-<!DEBUG_INFO_CONSTANT_VALUE("null")!>val prop5 = <!DIVISION_BY_ZERO!>1 / 0.toLong()<!><!>
+// konst prop5: null
+<!DEBUG_INFO_CONSTANT_VALUE("null")!>konst prop5 = <!DIVISION_BY_ZERO!>1 / 0.toLong()<!><!>
 
-// val prop6: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop6 = <!DIVISION_BY_ZERO!>1.0 / 0.toInt()<!><!>
+// konst prop6: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop6 = <!DIVISION_BY_ZERO!>1.0 / 0.toInt()<!><!>
 
-// val prop7: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop7 = <!DIVISION_BY_ZERO!>1.0 / 0.toLong()<!><!>
+// konst prop7: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop7 = <!DIVISION_BY_ZERO!>1.0 / 0.toLong()<!><!>
 
-// val prop8: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop8 = <!DIVISION_BY_ZERO!>1.0 / 0.toByte()<!><!>
+// konst prop8: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop8 = <!DIVISION_BY_ZERO!>1.0 / 0.toByte()<!><!>
 
-// val prop9: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop9 = <!DIVISION_BY_ZERO!>1.0 / 0.toShort()<!><!>
+// konst prop9: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop9 = <!DIVISION_BY_ZERO!>1.0 / 0.toShort()<!><!>
 
-// val prop10: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop10 = <!DIVISION_BY_ZERO!>1.0 / 0.toFloat()<!><!>
+// konst prop10: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop10 = <!DIVISION_BY_ZERO!>1.0 / 0.toFloat()<!><!>
 
-// val prop11: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop11 = <!DIVISION_BY_ZERO!>1.0 / 0.toDouble()<!><!>
+// konst prop11: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop11 = <!DIVISION_BY_ZERO!>1.0 / 0.toDouble()<!><!>
 
-// val prop12: -Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("-Infinity.toDouble()")!>val prop12 = <!DIVISION_BY_ZERO!>-1.0 / 0<!><!>
+// konst prop12: -Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("-Infinity.toDouble()")!>konst prop12 = <!DIVISION_BY_ZERO!>-1.0 / 0<!><!>
 
-// val prop13: Infinity.toFloat()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toFloat()")!>val prop13 = <!DIVISION_BY_ZERO!>1f / 0<!><!>
+// konst prop13: Infinity.toFloat()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toFloat()")!>konst prop13 = <!DIVISION_BY_ZERO!>1f / 0<!><!>
 
-// val prop14: -Infinity.toFloat()
-<!DEBUG_INFO_CONSTANT_VALUE("-Infinity.toFloat()")!>val prop14 = <!DIVISION_BY_ZERO!>-1f / 0<!><!>
+// konst prop14: -Infinity.toFloat()
+<!DEBUG_INFO_CONSTANT_VALUE("-Infinity.toFloat()")!>konst prop14 = <!DIVISION_BY_ZERO!>-1f / 0<!><!>
 
-// val prop15: NaN.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>val prop15 = <!DIVISION_BY_ZERO!>0.0 / 0<!><!>
+// konst prop15: NaN.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>konst prop15 = <!DIVISION_BY_ZERO!>0.0 / 0<!><!>
 
-// val prop16: NaN.toFloat()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toFloat()")!>val prop16 = <!DIVISION_BY_ZERO!>0f / 0<!><!>
+// konst prop16: NaN.toFloat()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toFloat()")!>konst prop16 = <!DIVISION_BY_ZERO!>0f / 0<!><!>
 
-// val prop17: NaN.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>val prop17 = <!DIVISION_BY_ZERO!>-0.0 / 0<!><!>
+// konst prop17: NaN.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>konst prop17 = <!DIVISION_BY_ZERO!>-0.0 / 0<!><!>
 
-// val prop18: NaN.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>val prop18 = <!DIVISION_BY_ZERO!>1.0 / 0<!> - <!DIVISION_BY_ZERO!>1.0 / 0<!><!>
+// konst prop18: NaN.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>konst prop18 = <!DIVISION_BY_ZERO!>1.0 / 0<!> - <!DIVISION_BY_ZERO!>1.0 / 0<!><!>
 
-// val prop19: NaN.toFloat()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toFloat()")!>val prop19 = <!DIVISION_BY_ZERO!>1f / 0<!> - <!DIVISION_BY_ZERO!>1f / 0<!><!>
+// konst prop19: NaN.toFloat()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toFloat()")!>konst prop19 = <!DIVISION_BY_ZERO!>1f / 0<!> - <!DIVISION_BY_ZERO!>1f / 0<!><!>
 
-// val prop20: NaN.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>val prop20 = <!DIVISION_BY_ZERO!>1.0 % 0<!><!>
+// konst prop20: NaN.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>konst prop20 = <!DIVISION_BY_ZERO!>1.0 % 0<!><!>
 
-// val prop21: NaN.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>val prop21 = <!DIVISION_BY_ZERO!>0.0 % 0<!><!>
+// konst prop21: NaN.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>konst prop21 = <!DIVISION_BY_ZERO!>0.0 % 0<!><!>
 
-// val prop22: NaN.toFloat()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toFloat()")!>val prop22 = <!DIVISION_BY_ZERO!>1f % 0<!><!>
+// konst prop22: NaN.toFloat()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toFloat()")!>konst prop22 = <!DIVISION_BY_ZERO!>1f % 0<!><!>
 
-// val prop23: NaN.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>val prop23 = <!DIVISION_BY_ZERO!>-1.0 % 0<!><!>
+// konst prop23: NaN.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>konst prop23 = <!DIVISION_BY_ZERO!>-1.0 % 0<!><!>
 
-// val prop24: NaN.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>val prop24 = <!DIVISION_BY_ZERO!>-0.0 % 0<!><!>
+// konst prop24: NaN.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>konst prop24 = <!DIVISION_BY_ZERO!>-0.0 % 0<!><!>
 
-// val prop26: NaN.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>val prop26 = <!DIVISION_BY_ZERO!>1.0.rem(0)<!><!>
+// konst prop26: NaN.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("NaN.toDouble()")!>konst prop26 = <!DIVISION_BY_ZERO!>1.0.rem(0)<!><!>
 
-// val prop27: Infinity.toDouble()
-<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>val prop27 = <!DIVISION_BY_ZERO!>1.0.div(0)<!><!>
+// konst prop27: Infinity.toDouble()
+<!DEBUG_INFO_CONSTANT_VALUE("Infinity.toDouble()")!>konst prop27 = <!DIVISION_BY_ZERO!>1.0.div(0)<!><!>

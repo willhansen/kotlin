@@ -16,7 +16,7 @@ import kotlin.contracts.contract
 
 @KtModuleBuilderDsl
 public class KtModuleProviderBuilder {
-    private val mainModules: MutableList<KtModule> = mutableListOf()
+    private konst mainModules: MutableList<KtModule> = mutableListOf()
 
     public fun addModule(module: KtModule) {
         mainModules.add(module)

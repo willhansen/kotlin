@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.cfg.pseudocode.PseudocodeUtil
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.Instruction
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.InstructionVisitor
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.KtElementInstruction
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.*
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.*
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.jumps.*
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.special.LocalFunctionDeclarationInstruction
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.special.MarkInstruction
@@ -60,14 +60,14 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.util.record
 
 class ControlFlowInformationProviderImpl private constructor(
-    private val subroutine: KtElement,
-    private val trace: BindingTrace,
-    private val pseudocode: Pseudocode,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val diagnosticSuppressor: PlatformDiagnosticSuppressor,
-    private val enumWhenTracker: EnumWhenTracker?
+    private konst subroutine: KtElement,
+    private konst trace: BindingTrace,
+    private konst pseudocode: Pseudocode,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst diagnosticSuppressor: PlatformDiagnosticSuppressor,
+    private konst enumWhenTracker: EnumWhenTracker?
 ) : ControlFlowInformationProvider {
-    private val pseudocodeVariablesData by lazy {
+    private konst pseudocodeVariablesData by lazy {
         PseudocodeVariablesData(pseudocode, trace.bindingContext)
     }
 
@@ -122,7 +122,7 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     override fun checkFunction(expectedReturnType: KotlinType?) {
-        val unreachableCode = collectUnreachableCode()
+        konst unreachableCode = collectUnreachableCode()
         reportUnreachableCode(unreachableCode)
 
         if (subroutine is KtFunctionLiteral) return
@@ -150,16 +150,16 @@ class ControlFlowInformationProviderImpl private constructor(
      * presence of Unit-coercion). Example:
      *
      *   fun foo() {
-     *       val x = 42
+     *       konst x = 42
      *       x.inc() // This call will be in a [returnedExpressions], even though this expression
      *               // isn't actually returned
      *   }
      */
     private fun collectReturnExpressions(): ReturnedExpressionsInfo {
-        val instructions = pseudocode.instructions.toHashSet()
-        val exitInstruction = pseudocode.exitInstruction
+        konst instructions = pseudocode.instructions.toHashSet()
+        konst exitInstruction = pseudocode.exitInstruction
 
-        val returnedExpressions = arrayListOf<KtElement>()
+        konst returnedExpressions = arrayListOf<KtElement>()
         var hasReturnsInInlinedLambda = false
 
         for (previousInstruction in exitInstruction.previousInstructions) {
@@ -227,13 +227,13 @@ class ControlFlowInformationProviderImpl private constructor(
 
     private fun checkLocalFunctions() {
         for (localDeclarationInstruction in pseudocode.localDeclarations) {
-            val element = localDeclarationInstruction.element
+            konst element = localDeclarationInstruction.element
             if (element is KtDeclarationWithBody) {
 
-                val functionDescriptor = trace.bindingContext.get(DECLARATION_TO_DESCRIPTOR, element) as? CallableDescriptor
-                val expectedType = functionDescriptor?.returnType
+                konst functionDescriptor = trace.bindingContext.get(DECLARATION_TO_DESCRIPTOR, element) as? CallableDescriptor
+                konst expectedType = functionDescriptor?.returnType
 
-                val providerForLocalDeclaration = ControlFlowInformationProviderImpl(
+                konst providerForLocalDeclaration = ControlFlowInformationProviderImpl(
                     element, trace, localDeclarationInstruction.body, languageVersionSettings, diagnosticSuppressor, enumWhenTracker
                 )
 
@@ -243,14 +243,14 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun checkDefiniteReturn(expectedReturnType: KotlinType, unreachableCode: UnreachableCode) {
-        val function = subroutine as? KtDeclarationWithBody
+        konst function = subroutine as? KtDeclarationWithBody
             ?: throw AssertionError("checkDefiniteReturn is called for ${subroutine.text} which is not KtDeclarationWithBody")
 
         if (!function.hasBody()) return
 
-        val (returnedExpressions, hasReturnsInInlinedLambdas) = collectReturnExpressions()
+        konst (returnedExpressions, hasReturnsInInlinedLambdas) = collectReturnExpressions()
 
-        val blockBody = function.hasBlockBody()
+        konst blockBody = function.hasBlockBody()
 
         var noReturnError = false
         for (returnedExpression in returnedExpressions) {
@@ -283,7 +283,7 @@ class ControlFlowInformationProviderImpl private constructor(
         }
     }
 
-    private data class ReturnedExpressionsInfo(val returnedExpressions: Collection<KtElement>, val hasReturnsInInlinedLambda: Boolean)
+    private data class ReturnedExpressionsInfo(konst returnedExpressions: Collection<KtElement>, konst hasReturnsInInlinedLambda: Boolean)
 
     private fun reportUnreachableCode(unreachableCode: UnreachableCode) {
         for (element in unreachableCode.elements) {
@@ -292,8 +292,8 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun collectUnreachableCode(): UnreachableCode {
-        val reachableElements = hashSetOf<KtElement>()
-        val unreachableElements = hashSetOf<KtElement>()
+        konst reachableElements = hashSetOf<KtElement>()
+        konst unreachableElements = hashSetOf<KtElement>()
         for (instruction in pseudocode.instructionsIncludingDeadCode) {
             if (instruction !is KtElementInstruction
                 || instruction is LoadUnitValueInstruction
@@ -302,10 +302,10 @@ class ControlFlowInformationProviderImpl private constructor(
             )
                 continue
 
-            val element = instruction.element
+            konst element = instruction.element
 
             if (instruction is JumpInstruction) {
-                val isJumpElement = element is KtBreakExpression
+                konst isJumpElement = element is KtBreakExpression
                         || element is KtContinueExpression
                         || element is KtReturnExpression
                         || element is KtThrowExpression
@@ -325,24 +325,24 @@ class ControlFlowInformationProviderImpl private constructor(
     //  Uninitialized variables analysis
 
     private fun markUninitializedVariables() {
-        val varWithUninitializedErrorGenerated = hashSetOf<VariableDescriptor>()
-        val varWithValReassignErrorGenerated = hashSetOf<VariableDescriptor>()
-        val processClassOrObject = subroutine is KtClassOrObject || subroutine is KtSecondaryConstructor
+        konst varWithUninitializedErrorGenerated = hashSetOf<VariableDescriptor>()
+        konst varWithValReassignErrorGenerated = hashSetOf<VariableDescriptor>()
+        konst processClassOrObject = subroutine is KtClassOrObject || subroutine is KtSecondaryConstructor
 
-        val initializers = pseudocodeVariablesData.variableInitializers
-        val declaredVariables = pseudocodeVariablesData.getDeclaredVariables(pseudocode, true)
-        val blockScopeVariableInfo = pseudocodeVariablesData.blockScopeVariableInfo
+        konst initializers = pseudocodeVariablesData.variableInitializers
+        konst declaredVariables = pseudocodeVariablesData.getDeclaredVariables(pseudocode, true)
+        konst blockScopeVariableInfo = pseudocodeVariablesData.blockScopeVariableInfo
 
-        val reportedDiagnosticMap = hashMapOf<Instruction, DiagnosticFactory<*>>()
+        konst reportedDiagnosticMap = hashMapOf<Instruction, DiagnosticFactory<*>>()
 
         pseudocode.traverse(TraversalOrder.FORWARD, initializers) { instruction: Instruction,
                                                                     enterData: VariableInitReadOnlyControlFlowInfo,
                                                                     exitData: VariableInitReadOnlyControlFlowInfo ->
 
-            val ctxt = VariableInitContext(instruction, reportedDiagnosticMap, enterData, exitData, blockScopeVariableInfo)
+            konst ctxt = VariableInitContext(instruction, reportedDiagnosticMap, enterData, exitData, blockScopeVariableInfo)
             if (ctxt.variableDescriptor == null) return@traverse
             if (instruction is ReadValueInstruction) {
-                val element = instruction.element
+                konst element = instruction.element
                 if (PseudocodeUtil.isThisOrNoDispatchReceiver(instruction, trace.bindingContext)
                     && declaredVariables.contains(ctxt.variableDescriptor)
                 ) {
@@ -351,7 +351,7 @@ class ControlFlowInformationProviderImpl private constructor(
                 return@traverse
             }
             if (instruction !is WriteValueInstruction) return@traverse
-            val element = instruction.lValue as? KtExpression ?: return@traverse
+            konst element = instruction.lValue as? KtExpression ?: return@traverse
             var error = checkValReassignment(
                 ctxt, element, instruction,
                 varWithValReassignErrorGenerated
@@ -366,8 +366,8 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun recordInitializedVariables() {
-        val pseudocode = pseudocodeVariablesData.pseudocode
-        val initializers = pseudocodeVariablesData.variableInitializers
+        konst pseudocode = pseudocodeVariablesData.pseudocode
+        konst initializers = pseudocodeVariablesData.variableInitializers
         recordInitializedVariables(pseudocode, initializers)
         for (instruction in pseudocode.localDeclarations) {
             recordInitializedVariables(instruction.body, initializers)
@@ -376,7 +376,7 @@ class ControlFlowInformationProviderImpl private constructor(
 
     private fun PropertyDescriptor.isDefinitelyInitialized(): Boolean {
         if (trace.get(BACKING_FIELD_REQUIRED, this) == true) return false
-        val property = DescriptorToSourceUtils.descriptorToDeclaration(this)
+        konst property = DescriptorToSourceUtils.descriptorToDeclaration(this)
         if (property is KtProperty && property.hasDelegate()) return false
         return true
     }
@@ -389,7 +389,7 @@ class ControlFlowInformationProviderImpl private constructor(
         if (element !is KtSimpleNameExpression) return
 
         var isDefinitelyInitialized = ctxt.exitInitState?.definitelyInitialized() ?: false
-        val variableDescriptor = ctxt.variableDescriptor
+        konst variableDescriptor = ctxt.variableDescriptor
         if (!isDefinitelyInitialized && variableDescriptor is PropertyDescriptor) {
             isDefinitelyInitialized = variableDescriptor.isDefinitelyInitialized()
         }
@@ -404,12 +404,12 @@ class ControlFlowInformationProviderImpl private constructor(
                 is ValueParameterDescriptor ->
                     report(Errors.UNINITIALIZED_PARAMETER.on(element, variableDescriptor), ctxt)
                 is FakeCallableDescriptorForObject -> {
-                    val classDescriptor = variableDescriptor.classDescriptor
+                    konst classDescriptor = variableDescriptor.classDescriptor
                     when (classDescriptor.kind) {
                         ClassKind.ENUM_ENTRY ->
                             report(Errors.UNINITIALIZED_ENUM_ENTRY.on(element, classDescriptor), ctxt)
                         ClassKind.OBJECT -> if (classDescriptor.isCompanionObject) {
-                            val container = classDescriptor.containingDeclaration
+                            konst container = classDescriptor.containingDeclaration
                             /*
                              * ProhibitAccessToEnumCompanionMembersInEnumConstructorCall feature enabled then UNINITIALIZED_ENUM_COMPANION
                              *   will be reported from EnumCompanionInEnumConstructorCallChecker
@@ -440,14 +440,14 @@ class ControlFlowInformationProviderImpl private constructor(
         variableDescriptor: VariableDescriptor,
         writeValueInstruction: WriteValueInstruction
     ): Boolean {
-        val containingDeclarationDescriptor = variableDescriptor.containingDeclaration
+        konst containingDeclarationDescriptor = variableDescriptor.containingDeclaration
         // Do not consider top-level properties
         if (containingDeclarationDescriptor is PackageFragmentDescriptor) return false
         var parentDeclaration = writeValueInstruction.element.getElementParentDeclaration()
 
         loop@ while (true) {
-            val context = trace.bindingContext
-            val parentDescriptor = parentDeclaration.getDeclarationDescriptorIncludingConstructors(context)
+            konst context = trace.bindingContext
+            konst parentDescriptor = parentDeclaration.getDeclarationDescriptorIncludingConstructors(context)
             if (parentDescriptor == containingDeclarationDescriptor) {
                 return false
             }
@@ -458,7 +458,7 @@ class ControlFlowInformationProviderImpl private constructor(
                 }
                 is KtDeclarationWithBody -> {
                     // If it is captured write in lambda that is called in-place, then skip it (treat as parent)
-                    val maybeEnclosingLambdaExpr = parentDeclaration.parent
+                    konst maybeEnclosingLambdaExpr = parentDeclaration.parent
                     if (maybeEnclosingLambdaExpr is KtLambdaExpression && trace[LAMBDA_INVOCATIONS, maybeEnclosingLambdaExpr] != null) {
                         parentDeclaration = parentDeclaration.getElementParentDeclaration()
                         continue@loop
@@ -482,16 +482,16 @@ class ControlFlowInformationProviderImpl private constructor(
         writeValueInstruction: WriteValueInstruction,
         varWithValReassignErrorGenerated: MutableCollection<VariableDescriptor>
     ): Boolean {
-        val variableDescriptor = ctxt.variableDescriptor
-        val mayBeInitializedNotHere = ctxt.enterInitState?.mayBeInitialized() ?: false
-        val hasBackingField = (variableDescriptor as? PropertyDescriptor)?.let {
+        konst variableDescriptor = ctxt.variableDescriptor
+        konst mayBeInitializedNotHere = ctxt.enterInitState?.mayBeInitialized() ?: false
+        konst hasBackingField = (variableDescriptor as? PropertyDescriptor)?.let {
             trace.get(BACKING_FIELD_REQUIRED, it) ?: false
         } ?: true
         if (variableDescriptor is PropertyDescriptor && variableDescriptor.isVar) {
-            val descriptor = getEnclosingDescriptor(trace.bindingContext, expression)
-            val setterDescriptor = variableDescriptor.setter
+            konst descriptor = getEnclosingDescriptor(trace.bindingContext, expression)
+            konst setterDescriptor = variableDescriptor.setter
 
-            val receiverValue = expression.getResolvedCall(trace.bindingContext)?.getDispatchReceiverWithSmartCast()
+            konst receiverValue = expression.getResolvedCall(trace.bindingContext)?.getDispatchReceiverWithSmartCast()
 
             if (DescriptorVisibilityUtils.isVisible(receiverValue, variableDescriptor, descriptor, languageVersionSettings)
                 && setterDescriptor != null
@@ -510,27 +510,27 @@ class ControlFlowInformationProviderImpl private constructor(
                 }
             }
         }
-        val isThisOrNoDispatchReceiver = PseudocodeUtil.isThisOrNoDispatchReceiver(writeValueInstruction, trace.bindingContext)
-        val captured = variableDescriptor?.let { isCapturedWrite(it, writeValueInstruction) } ?: false
+        konst isThisOrNoDispatchReceiver = PseudocodeUtil.isThisOrNoDispatchReceiver(writeValueInstruction, trace.bindingContext)
+        konst captured = variableDescriptor?.let { isCapturedWrite(it, writeValueInstruction) } ?: false
         if ((mayBeInitializedNotHere || !hasBackingField || !isThisOrNoDispatchReceiver || captured) &&
             variableDescriptor != null && !variableDescriptor.isVar
         ) {
             var hasReassignMethodReturningUnit = false
-            val operationReference =
-                when (val parent = expression.parent) {
+            konst operationReference =
+                when (konst parent = expression.parent) {
                     is KtBinaryExpression -> parent.operationReference
                     is KtUnaryExpression -> parent.operationReference
                     else -> null
                 }
             if (operationReference != null) {
-                val descriptor = trace.get(REFERENCE_TARGET, operationReference)
+                konst descriptor = trace.get(REFERENCE_TARGET, operationReference)
                 if (descriptor is FunctionDescriptor) {
                     if (descriptor.returnType?.let { KotlinBuiltIns.isUnit(it) } == true) {
                         hasReassignMethodReturningUnit = true
                     }
                 }
                 if (descriptor == null) {
-                    val descriptors = trace.get(AMBIGUOUS_REFERENCE_TARGET, operationReference) ?: emptyList<DeclarationDescriptor>()
+                    konst descriptors = trace.get(AMBIGUOUS_REFERENCE_TARGET, operationReference) ?: emptyList<DeclarationDescriptor>()
                     for (referenceDescriptor in descriptors) {
                         if ((referenceDescriptor as? FunctionDescriptor)?.returnType?.let { KotlinBuiltIns.isUnit(it) } == true) {
                             hasReassignMethodReturningUnit = true
@@ -574,12 +574,12 @@ class ControlFlowInformationProviderImpl private constructor(
         if (setterDescriptor.kind.isReal) return
         if (setterDescriptor.visibility.isPublicAPI) return
 
-        val containingClass = setterDescriptor.containingDeclaration as? ClassDescriptor ?: return
-        val firstRealOverridden = setterDescriptor.firstOverridden { it.kind.isReal } ?: return
+        konst containingClass = setterDescriptor.containingDeclaration as? ClassDescriptor ?: return
+        konst firstRealOverridden = setterDescriptor.firstOverridden { it.kind.isReal } ?: return
 
-        val visibleOverrides = OverridingUtil.filterVisibleFakeOverrides(containingClass, listOf(firstRealOverridden))
+        konst visibleOverrides = OverridingUtil.filterVisibleFakeOverrides(containingClass, listOf(firstRealOverridden))
         if (visibleOverrides.isEmpty()) {
-            val diagnostic =
+            konst diagnostic =
                 when (languageVersionSettings.supportsFeature(LanguageFeature.ProhibitAccessToInvisibleSetterFromDerivedClass)) {
                     true -> INVISIBLE_SETTER
                     else -> INVISIBLE_SETTER_FROM_DERIVED
@@ -615,7 +615,7 @@ class ControlFlowInformationProviderImpl private constructor(
                 enterInitState?.mayBeInitialized() != true
 
     private fun checkInitializationForCustomSetter(ctxt: VariableInitContext, expression: KtExpression): Boolean {
-        val variableDescriptor = ctxt.variableDescriptor
+        konst variableDescriptor = ctxt.variableDescriptor
         if (variableDescriptor !is PropertyDescriptor
             || ctxt.enterInitState?.mayBeInitialized() == true
             || ctxt.exitInitState?.mayBeInitialized() != true
@@ -624,14 +624,14 @@ class ControlFlowInformationProviderImpl private constructor(
             return false
         }
 
-        val property = DescriptorToSourceUtils.descriptorToDeclaration(variableDescriptor) as? KtProperty
+        konst property = DescriptorToSourceUtils.descriptorToDeclaration(variableDescriptor) as? KtProperty
             ?: throw AssertionError("$variableDescriptor is not related to KtProperty")
-        val setter = property.setter
+        konst setter = property.setter
         if (variableDescriptor.getEffectiveModality(languageVersionSettings) == Modality.FINAL && (setter == null || !setter.hasBody())) {
             return false
         }
 
-        val variable = if (expression is KtDotQualifiedExpression &&
+        konst variable = if (expression is KtDotQualifiedExpression &&
             expression.receiverExpression is KtThisExpression
         ) {
             expression.selectorExpression
@@ -649,8 +649,8 @@ class ControlFlowInformationProviderImpl private constructor(
         pseudocode: Pseudocode,
         initializersMap: Map<Instruction, Edges<VariableInitReadOnlyControlFlowInfo>>
     ) {
-        val initializers = initializersMap[pseudocode.exitInstruction] ?: return
-        val declaredVariables = pseudocodeVariablesData.getDeclaredVariables(pseudocode, false)
+        konst initializers = initializersMap[pseudocode.exitInstruction] ?: return
+        konst declaredVariables = pseudocodeVariablesData.getDeclaredVariables(pseudocode, false)
         for (variable in declaredVariables) {
             // - If we have a primary constructor and several secondary constructors then the `if` below is called only once for the primary
             //   constructor/init block
@@ -665,20 +665,20 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     ////////////////////////////////////////////////////////////////////////////////
-    //  "Unused variable" & "unused value" analyses
+    //  "Unused variable" & "unused konstue" analyses
 
     private fun markUnusedVariables() {
-        val variableStatusData = pseudocodeVariablesData.variableUseStatusData
-        val reportedDiagnosticMap = hashMapOf<Instruction, DiagnosticFactory<*>>()
-        val unusedValueExpressions = hashMapOf<KtExpression, Pair<VariableDescriptor, VariableUseContext>>()
-        val usedValueExpressions = hashSetOf<KtExpression>()
+        konst variableStatusData = pseudocodeVariablesData.variableUseStatusData
+        konst reportedDiagnosticMap = hashMapOf<Instruction, DiagnosticFactory<*>>()
+        konst unusedValueExpressions = hashMapOf<KtExpression, Pair<VariableDescriptor, VariableUseContext>>()
+        konst usedValueExpressions = hashSetOf<KtExpression>()
         pseudocode.traverse(TraversalOrder.BACKWARD, variableStatusData) { instruction: Instruction,
                                                                            enterData: VariableUsageReadOnlyControlInfo,
                                                                            _: VariableUsageReadOnlyControlInfo ->
 
-            val ctxt = VariableUseContext(instruction, reportedDiagnosticMap)
-            val declaredVariables = pseudocodeVariablesData.getDeclaredVariables(instruction.owner, false)
-            val variableDescriptor = PseudocodeUtil.extractVariableDescriptorIfAny(
+            konst ctxt = VariableUseContext(instruction, reportedDiagnosticMap)
+            konst declaredVariables = pseudocodeVariablesData.getDeclaredVariables(instruction.owner, false)
+            konst variableDescriptor = PseudocodeUtil.extractVariableDescriptorIfAny(
                 instruction, trace.bindingContext
             )
             if (variableDescriptor == null
@@ -687,11 +687,11 @@ class ControlFlowInformationProviderImpl private constructor(
             ) {
                 return@traverse
             }
-            val variableUseState = enterData.getOrNull(variableDescriptor)
+            konst variableUseState = enterData.getOrNull(variableDescriptor)
             when (instruction) {
                 is WriteValueInstruction -> {
                     if (trace.get(CAPTURED_IN_CLOSURE, variableDescriptor) != null) return@traverse
-                    val expressionInQuestion = instruction.element as? KtExpression ?: return@traverse
+                    konst expressionInQuestion = instruction.element as? KtExpression ?: return@traverse
                     if (variableUseState != READ) {
                         unusedValueExpressions[expressionInQuestion] = variableDescriptor to ctxt
                     } else {
@@ -699,14 +699,14 @@ class ControlFlowInformationProviderImpl private constructor(
                     }
                 }
                 is VariableDeclarationInstruction -> {
-                    val element = instruction.variableDeclarationElement as? KtNamedDeclaration ?: return@traverse
+                    konst element = instruction.variableDeclarationElement as? KtNamedDeclaration ?: return@traverse
                     processUnusedDeclaration(element, variableDescriptor, ctxt, variableUseState)
                 }
             }
         }
         unusedValueExpressions.keys.removeAll(usedValueExpressions)
         for ((expressionInQuestion, variableInContext) in unusedValueExpressions) {
-            val (variableDescriptor, ctxt) = variableInContext
+            konst (variableDescriptor, ctxt) = variableInContext
             when (expressionInQuestion) {
                 is KtBinaryExpression -> if (expressionInQuestion.operationToken === KtTokens.EQ) {
                     expressionInQuestion.right?.let {
@@ -716,7 +716,7 @@ class ControlFlowInformationProviderImpl private constructor(
                     }
                 }
                 is KtPostfixExpression -> {
-                    val operationToken = expressionInQuestion.operationReference.getReferencedNameElementType()
+                    konst operationToken = expressionInQuestion.operationReference.getReferencedNameElementType()
                     if (operationToken === KtTokens.PLUSPLUS || operationToken === KtTokens.MINUSMINUS) {
                         report(Errors.UNUSED_CHANGED_VALUE.on(expressionInQuestion, expressionInQuestion), ctxt)
                     }
@@ -725,10 +725,10 @@ class ControlFlowInformationProviderImpl private constructor(
         }
     }
 
-    private val VariableDescriptor.isLocalVariableWithDelegate: Boolean
+    private konst VariableDescriptor.isLocalVariableWithDelegate: Boolean
         get() = this is LocalVariableDescriptor && this.isDelegated
 
-    private val VariableDescriptor.isLocalVariableWithProvideDelegate: Boolean
+    private konst VariableDescriptor.isLocalVariableWithProvideDelegate: Boolean
         get() {
             if (!isLocalVariableWithDelegate) return false
             if (this !is VariableDescriptorWithAccessors) return false
@@ -776,28 +776,28 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun processUnusedParameter(ctxt: VariableUseContext, element: KtParameter, variableDescriptor: VariableDescriptor) {
-        val functionDescriptor = variableDescriptor.containingDeclaration as FunctionDescriptor
+        konst functionDescriptor = variableDescriptor.containingDeclaration as FunctionDescriptor
 
         if (functionDescriptor.isExpect || functionDescriptor.isActual ||
             functionDescriptor.isEffectivelyExternal() ||
             !diagnosticSuppressor.shouldReportUnusedParameter(variableDescriptor, trace.bindingContext)
         ) return
 
-        when (val owner = element.parent.parent) {
+        when (konst owner = element.parent.parent) {
             is KtPrimaryConstructor -> if (!element.hasValOrVar()) {
-                val containingClass = (functionDescriptor as ConstructorDescriptor).containingDeclaration
+                konst containingClass = (functionDescriptor as ConstructorDescriptor).containingDeclaration
                 if (!DescriptorUtils.isAnnotationClass(containingClass)) {
                     report(UNUSED_PARAMETER.on(element, variableDescriptor), ctxt)
                 }
             }
             is KtFunction -> {
-                val anonymous = owner is KtFunctionLiteral || owner is KtNamedFunction && owner.name == null
+                konst anonymous = owner is KtFunctionLiteral || owner is KtNamedFunction && owner.name == null
                 if (anonymous && !languageVersionSettings.supportsFeature(LanguageFeature.SingleUnderscoreForParameterName)) {
                     return
                 }
-                val mainFunctionDetector = MainFunctionDetector(trace.bindingContext, languageVersionSettings)
-                val isMain = owner is KtNamedFunction && mainFunctionDetector.isMain(owner)
-                val functionName = functionDescriptor.name
+                konst mainFunctionDetector = MainFunctionDetector(trace.bindingContext, languageVersionSettings)
+                konst isMain = owner is KtNamedFunction && mainFunctionDetector.isMain(owner)
+                konst functionName = functionDescriptor.name
                 if (isMain) {
                     when {
                         !languageVersionSettings.supportsFeature(LanguageFeature.ExtendedMainConvention) -> {
@@ -839,14 +839,14 @@ class ControlFlowInformationProviderImpl private constructor(
     //  "Unused expressions" in block
 
     private fun markUnusedExpressions() {
-        val reportedDiagnosticMap = hashMapOf<Instruction, DiagnosticFactory<*>>()
+        konst reportedDiagnosticMap = hashMapOf<Instruction, DiagnosticFactory<*>>()
         pseudocode.traverse(TraversalOrder.FORWARD) { instruction ->
             if (instruction !is KtElementInstruction) return@traverse
 
-            val element = instruction.element as? KtExpression ?: return@traverse
+            konst element = instruction.element as? KtExpression ?: return@traverse
 
             if (element.isUsedAsStatement(trace.bindingContext) && instruction.sideEffectFree) {
-                val context = VariableContext(instruction, reportedDiagnosticMap)
+                konst context = VariableContext(instruction, reportedDiagnosticMap)
                 report(
                     when (element) {
                         is KtLambdaExpression -> Errors.UNUSED_LAMBDA_EXPRESSION.on(element)
@@ -862,12 +862,12 @@ class ControlFlowInformationProviderImpl private constructor(
 
     private fun markStatements() {
         pseudocode.traverseIncludingDeadCode { instruction ->
-            val value = (instruction as? InstructionWithValue)?.outputValue
-            val pseudocode = instruction.owner
-            val usages = pseudocode.getUsages(value)
-            val isUsedAsExpression = usages.isNotEmpty()
-            val isUsedAsResultOfLambda = isUsedAsResultOfLambda(usages)
-            for (element in pseudocode.getValueElements(value)) {
+            konst konstue = (instruction as? InstructionWithValue)?.outputValue
+            konst pseudocode = instruction.owner
+            konst usages = pseudocode.getUsages(konstue)
+            konst isUsedAsExpression = usages.isNotEmpty()
+            konst isUsedAsResultOfLambda = isUsedAsResultOfLambda(usages)
+            for (element in pseudocode.getValueElements(konstue)) {
                 element.recordUsedAsExpression(trace, isUsedAsExpression)
                 trace.record(USED_AS_RESULT_OF_LAMBDA, element, isUsedAsResultOfLambda)
                 if (isUsedAsExpression) {
@@ -900,9 +900,9 @@ class ControlFlowInformationProviderImpl private constructor(
     private fun checkForSuspendLambdaAndMarkParameters(pseudocode: Pseudocode) {
         for (instruction in pseudocode.instructionsIncludingDeadCode) {
             if (instruction is LocalFunctionDeclarationInstruction) {
-                val psi = instruction.body.correspondingElement
+                konst psi = instruction.body.correspondingElement
                 if (psi is KtFunctionLiteral) {
-                    val descriptor = trace.bindingContext[DECLARATION_TO_DESCRIPTOR, psi]
+                    konst descriptor = trace.bindingContext[DECLARATION_TO_DESCRIPTOR, psi]
                     if (descriptor is AnonymousFunctionDescriptor && descriptor.isSuspend) {
                         markReadOfSuspendLambdaParameters(instruction.body)
                         continue
@@ -914,7 +914,7 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun markReadOfSuspendLambdaParameters(pseudocode: Pseudocode) {
-        val instructions = pseudocode.instructionsIncludingDeadCode
+        konst instructions = pseudocode.instructionsIncludingDeadCode
         for (instruction in instructions) {
             if (instruction is LocalFunctionDeclarationInstruction) {
                 markReadOfSuspendLambdaParameters(instruction.body)
@@ -927,15 +927,15 @@ class ControlFlowInformationProviderImpl private constructor(
 
     private fun markReadOfSuspendLambdaParameter(instruction: Instruction) {
         if (instruction !is ReadValueInstruction) return
-        val target = instruction.target as? AccessTarget.Call ?: return
-        val descriptor = target.resolvedCall.resultingDescriptor
+        konst target = instruction.target as? AccessTarget.Call ?: return
+        konst descriptor = target.resolvedCall.resultingDescriptor
         if (descriptor is ParameterDescriptor) {
-            val containing = descriptor.containingDeclaration
+            konst containing = descriptor.containingDeclaration
             if (containing is AnonymousFunctionDescriptor && containing.isSuspend) {
                 trace.record(SUSPEND_LAMBDA_PARAMETER_USED, containing to descriptor.indexOrMinusOne())
             }
         } else if (descriptor is LocalVariableDescriptor) {
-            val containing = descriptor.containingDeclaration
+            konst containing = descriptor.containingDeclaration
             if (containing is AnonymousFunctionDescriptor && containing.isSuspend) {
                 findDestructuredVariable(descriptor, containing)?.let {
                     trace.record(SUSPEND_LAMBDA_PARAMETER_USED, containing to it.index)
@@ -955,9 +955,9 @@ class ControlFlowInformationProviderImpl private constructor(
             }
         }
 
-        when (val element = instruction.element) {
+        when (konst element = instruction.element) {
             is KtDestructuringDeclarationEntry, is KtCallExpression -> {
-                val visited = mutableSetOf<Instruction>()
+                konst visited = mutableSetOf<Instruction>()
                 fun dfs(insn: Instruction) {
                     if (!visited.add(insn)) return
                     if (insn is CallInstruction && insn.element == element) {
@@ -973,7 +973,7 @@ class ControlFlowInformationProviderImpl private constructor(
                 instruction.next?.let { dfs(it) }
             }
             is KtNameReferenceExpression, is KtBinaryExpression, is KtUnaryExpression -> {
-                val call = element.getResolvedCall(trace.bindingContext)
+                konst call = element.getResolvedCall(trace.bindingContext)
                 if (call is VariableAsFunctionResolvedCall) {
                     (call.variableCall.dispatchReceiver as? ExtensionReceiver)?.declarationDescriptor?.apply { markIfNeeded() }
                     (call.variableCall.extensionReceiver as? ExtensionReceiver)?.declarationDescriptor?.apply { markIfNeeded() }
@@ -982,7 +982,7 @@ class ControlFlowInformationProviderImpl private constructor(
                 (call?.extensionReceiver as? ExtensionReceiver)?.declarationDescriptor?.apply { markIfNeeded() }
             }
             is KtCallableReferenceExpression -> {
-                val resolvedCall = element.callableReference.getResolvedCall(trace.bindingContext)
+                konst resolvedCall = element.callableReference.getResolvedCall(trace.bindingContext)
                 (resolvedCall?.dispatchReceiver as? ExtensionReceiver)?.declarationDescriptor?.apply { markIfNeeded() }
             }
         }
@@ -1006,7 +1006,7 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun markAnnotationArguments(entry: KtAnnotationEntry) {
-        for (argument in entry.valueArguments) {
+        for (argument in entry.konstueArguments) {
             argument.getArgumentExpression()?.forEachDescendantOfType<KtExpression> {
                 it.recordUsedAsExpression(trace, true)
             }
@@ -1014,13 +1014,13 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun checkIfExpressions() = pseudocode.traverse(TraversalOrder.FORWARD) { instruction ->
-        val value = (instruction as? InstructionWithValue)?.outputValue
-        for (element in instruction.owner.getValueElements(value)) {
+        konst konstue = (instruction as? InstructionWithValue)?.outputValue
+        for (element in instruction.owner.getValueElements(konstue)) {
             if (element !is KtIfExpression) continue
 
-            val thenExpression = element.then
-            val elseExpression = element.`else`
-            val isEhxaustive = thenExpression != null && elseExpression != null
+            konst thenExpression = element.then
+            konst elseExpression = element.`else`
+            konst isEhxaustive = thenExpression != null && elseExpression != null
 
             if (element.isUsedAsExpression(trace.bindingContext)) {
                 if (!isEhxaustive) {
@@ -1030,7 +1030,7 @@ class ControlFlowInformationProviderImpl private constructor(
                 }
             } else if (!languageVersionSettings.supportsFeature(LanguageFeature.ProhibitNonExhaustiveIfInRhsOfElvis)) {
                 if (!isEhxaustive) {
-                    val parent = element.deparenthesizedParent
+                    konst parent = element.deparenthesizedParent
                     if (parent is KtBinaryExpression) {
                         if (parent.operationToken === KtTokens.ELVIS) {
                             trace.report(INVALID_IF_AS_EXPRESSION_WARNING.on(element.getIfKeyword()))
@@ -1042,16 +1042,16 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun checkImplicitCastOnConditionalExpression(expression: KtExpression) {
-        val branchExpressions = collectResultingExpressionsOfConditionalExpression(expression)
+        konst branchExpressions = collectResultingExpressionsOfConditionalExpression(expression)
 
-        val expectedExpressionType = trace.get(EXPECTED_EXPRESSION_TYPE, expression)
+        konst expectedExpressionType = trace.get(EXPECTED_EXPRESSION_TYPE, expression)
         if (expectedExpressionType != null && expectedExpressionType !== DONT_CARE) return
 
-        val expressionType = trace.getType(expression) ?: return
+        konst expressionType = trace.getType(expression) ?: return
         if (KotlinBuiltIns.isAnyOrNullableAny(expressionType)) {
-            val isUsedAsResultOfLambda = expression.isUsedAsResultOfLambda(trace.bindingContext)
+            konst isUsedAsResultOfLambda = expression.isUsedAsResultOfLambda(trace.bindingContext)
             for (branchExpression in branchExpressions) {
-                val branchType = trace.getType(branchExpression) ?: return
+                konst branchType = trace.getType(branchExpression) ?: return
                 if (KotlinBuiltIns.isAnyOrNullableAny(branchType) ||
                     isUsedAsResultOfLambda && KotlinBuiltIns.isUnitOrNullableUnit(branchType)
                 ) {
@@ -1059,7 +1059,7 @@ class ControlFlowInformationProviderImpl private constructor(
                 }
             }
             for (branchExpression in branchExpressions) {
-                val branchType = trace.getType(branchExpression) ?: continue
+                konst branchType = trace.getType(branchExpression) ?: continue
                 if (KotlinBuiltIns.isNothing(branchType)) continue
                 trace.report(IMPLICIT_CAST_TO_ANY.on(getResultingExpression(branchExpression), branchType, expressionType))
             }
@@ -1067,14 +1067,14 @@ class ControlFlowInformationProviderImpl private constructor(
     }
 
     private fun checkWhenExpressions() {
-        val initializers = pseudocodeVariablesData.variableInitializers
+        konst initializers = pseudocodeVariablesData.variableInitializers
         pseudocode.traverse(TraversalOrder.FORWARD) { instruction ->
             if (instruction is MagicInstruction) {
                 if (instruction.kind === MagicKind.EXHAUSTIVE_WHEN_ELSE) {
-                    val next = instruction.next
+                    konst next = instruction.next
                     if (next is MergeInstruction) {
-                        val mergeInfo = initializers[next]?.incoming
-                        val magicInfo = initializers[instruction]?.outgoing
+                        konst mergeInfo = initializers[next]?.incoming
+                        konst magicInfo = initializers[instruction]?.outgoing
                         if (mergeInfo != null && magicInfo != null) {
                             if (next.element is KtWhenExpression && magicInfo.checkDefiniteInitializationInWhen(mergeInfo)) {
                                 trace.record(IMPLICIT_EXHAUSTIVE_WHEN, next.element)
@@ -1083,20 +1083,20 @@ class ControlFlowInformationProviderImpl private constructor(
                     }
                 }
             }
-            val value = (instruction as? InstructionWithValue)?.outputValue
-            for (element in instruction.owner.getValueElements(value)) {
+            konst konstue = (instruction as? InstructionWithValue)?.outputValue
+            for (element in instruction.owner.getValueElements(konstue)) {
                 if (element !is KtWhenExpression) continue
 
-                val usedAsExpression = element.isUsedAsExpression(trace.bindingContext)
+                konst usedAsExpression = element.isUsedAsExpression(trace.bindingContext)
                 if (usedAsExpression) {
                     checkImplicitCastOnConditionalExpression(element)
                 }
 
-                val context = trace.bindingContext
-                val missingCases = WhenChecker.getMissingCases(element, context)
+                konst context = trace.bindingContext
+                konst missingCases = WhenChecker.getMissingCases(element, context)
 
-                val elseEntry = element.entries.find { it.isElse }
-                val subjectExpression = element.subjectExpression
+                konst elseEntry = element.entries.find { it.isElse }
+                konst subjectExpression = element.subjectExpression
                 if (usedAsExpression && missingCases.isNotEmpty()) {
                     if (elseEntry != null) continue
                     trace.report(NO_ELSE_IN_WHEN.on(element, missingCases))
@@ -1105,12 +1105,12 @@ class ControlFlowInformationProviderImpl private constructor(
                         trace.report(EXPECT_TYPE_IN_WHEN_WITHOUT_ELSE.on(element, it.typeOfDeclaration))
                     }
                 } else if (subjectExpression != null) {
-                    val subjectType = WhenChecker.whenSubjectType(element, trace.bindingContext)
+                    konst subjectType = WhenChecker.whenSubjectType(element, trace.bindingContext)
                     if (elseEntry != null) {
                         if (missingCases.isEmpty() && subjectType != null && !subjectType.isFlexible()) {
-                            val subjectClass = subjectType.constructor.declarationDescriptor as? ClassDescriptor
-                            val pseudocodeElement = instruction.owner.correspondingElement
-                            val pseudocodeDescriptor = trace[DECLARATION_TO_DESCRIPTOR, pseudocodeElement]
+                            konst subjectClass = subjectType.constructor.declarationDescriptor as? ClassDescriptor
+                            konst pseudocodeElement = instruction.owner.correspondingElement
+                            konst pseudocodeDescriptor = trace[DECLARATION_TO_DESCRIPTOR, pseudocodeElement]
                             if (subjectClass == null ||
                                 KotlinBuiltIns.isBooleanOrNullableBoolean(subjectType) ||
                                 subjectClass.module == pseudocodeDescriptor?.module
@@ -1139,7 +1139,7 @@ class ControlFlowInformationProviderImpl private constructor(
                     elseEntry == null &&
                     !languageVersionSettings.supportsFeature(LanguageFeature.ProhibitNonExhaustiveIfInRhsOfElvis)
                 ) {
-                    val parent = element.deparenthesizedParent
+                    konst parent = element.deparenthesizedParent
                     if (parent is KtBinaryExpression) {
                         if (parent.operationToken === KtTokens.ELVIS) {
                             trace.report(NO_ELSE_IN_WHEN_WARNING.on(element, missingCases))
@@ -1155,16 +1155,16 @@ class ControlFlowInformationProviderImpl private constructor(
         element: KtWhenExpression,
         context: BindingContext
     ) {
-        val enumClassDescriptor = WhenChecker.getClassDescriptorOfTypeIfEnum(subjectType)
+        konst enumClassDescriptor = WhenChecker.getClassDescriptorOfTypeIfEnum(subjectType)
         if (enumClassDescriptor != null) {
-            val enumMissingCases = WhenChecker.getEnumMissingCases(element, context, enumClassDescriptor)
+            konst enumMissingCases = WhenChecker.getEnumMissingCases(element, context, enumClassDescriptor)
             if (enumMissingCases.isNotEmpty()) {
                 trace.report(NON_EXHAUSTIVE_WHEN.on(element, enumMissingCases))
             }
         }
-        val sealedClassDescriptor = WhenChecker.getClassDescriptorOfTypeIfSealed(subjectType)
+        konst sealedClassDescriptor = WhenChecker.getClassDescriptorOfTypeIfSealed(subjectType)
         if (sealedClassDescriptor != null) {
-            val sealedMissingCases = WhenChecker.getSealedMissingCases(element, context, sealedClassDescriptor)
+            konst sealedMissingCases = WhenChecker.getSealedMissingCases(element, context, sealedClassDescriptor)
             if (sealedMissingCases.isNotEmpty()) {
                 trace.report(NON_EXHAUSTIVE_WHEN_ON_SEALED_CLASS.on(element, sealedMissingCases))
             }
@@ -1177,7 +1177,7 @@ class ControlFlowInformationProviderImpl private constructor(
         missingCases: List<WhenMissingCase>
     ) {
         if (missingCases.isEmpty()) return
-        val kind = when {
+        konst kind = when {
             WhenChecker.getClassDescriptorOfTypeIfSealed(subjectType) != null -> AlgebraicTypeKind.Sealed
             WhenChecker.getClassDescriptorOfTypeIfEnum(subjectType) != null -> AlgebraicTypeKind.Enum
             subjectType?.isBooleanOrNullableBoolean() == true -> AlgebraicTypeKind.Boolean
@@ -1193,7 +1193,7 @@ class ControlFlowInformationProviderImpl private constructor(
         }
     }
 
-    private enum class AlgebraicTypeKind(val displayName: String) {
+    private enum class AlgebraicTypeKind(konst displayName: String) {
         Sealed("sealed class/interface"),
         Enum("enum"),
         Boolean("Boolean")
@@ -1210,7 +1210,7 @@ class ControlFlowInformationProviderImpl private constructor(
     // Tail calls
 
     private fun markAndCheckTailCalls() {
-        val subroutineDescriptor = trace.get(DECLARATION_TO_DESCRIPTOR, subroutine) as? FunctionDescriptor ?: return
+        konst subroutineDescriptor = trace.get(DECLARATION_TO_DESCRIPTOR, subroutine) as? FunctionDescriptor ?: return
 
         markAndCheckRecursiveTailCalls(subroutineDescriptor)
     }
@@ -1220,20 +1220,20 @@ class ControlFlowInformationProviderImpl private constructor(
         if (subroutine is KtNamedFunction && !subroutine.hasBody()) return
 
         // finally blocks are copied which leads to multiple diagnostics reported on one instruction
-        class KindAndCall(var kind: TailRecursionKind, val call: ResolvedCall<*>)
+        class KindAndCall(var kind: TailRecursionKind, konst call: ResolvedCall<*>)
 
-        val calls = HashMap<KtElement, KindAndCall>()
+        konst calls = HashMap<KtElement, KindAndCall>()
         traverseCalls traverse@{ instruction, resolvedCall ->
             // is this a recursive call?
-            val functionDescriptor = resolvedCall.resultingDescriptor
+            konst functionDescriptor = resolvedCall.resultingDescriptor
             if (functionDescriptor.original != subroutineDescriptor) return@traverse
             // Overridden functions using default arguments at tail call are not included: KT-4285
-            if (resolvedCall.call.valueArguments.size != functionDescriptor.valueParameters.size
+            if (resolvedCall.call.konstueArguments.size != functionDescriptor.konstueParameters.size
                 && !functionDescriptor.overriddenDescriptors.isEmpty()
             )
                 return@traverse
 
-            val element = instruction.element
+            konst element = instruction.element
             //noinspection unchecked
 
             if (isInsideTry(element)) {
@@ -1249,11 +1249,11 @@ class ControlFlowInformationProviderImpl private constructor(
             //           other.foo(this) // not a tail call
             //       }
             //   }
-            val sameDispatchReceiver = resolvedCall.hasThisOrNoDispatchReceiver(trace.bindingContext)
+            konst sameDispatchReceiver = resolvedCall.hasThisOrNoDispatchReceiver(trace.bindingContext)
 
-            val kind = if (sameDispatchReceiver && instruction.isTailCall()) TAIL_CALL else NON_TAIL
+            konst kind = if (sameDispatchReceiver && instruction.isTailCall()) TAIL_CALL else NON_TAIL
 
-            val kindAndCall = calls[element]
+            konst kindAndCall = calls[element]
             calls[element] = KindAndCall(combineKinds(kind, kindAndCall?.kind), resolvedCall)
         }
 
@@ -1281,7 +1281,7 @@ class ControlFlowInformationProviderImpl private constructor(
         ) is KtTryExpression
 
     private fun CallInstruction.isTailCall(subroutine: KtElement = this@ControlFlowInformationProviderImpl.subroutine): Boolean {
-        val tailInstructionDetector = TailInstructionDetector(subroutine)
+        konst tailInstructionDetector = TailInstructionDetector(subroutine)
         return traverseFollowingInstructions(
             this,
             hashSetOf(),
@@ -1312,18 +1312,18 @@ class ControlFlowInformationProviderImpl private constructor(
         diagnostic: Diagnostic,
         ctxt: VariableContext
     ) {
-        val instruction = ctxt.instruction
+        konst instruction = ctxt.instruction
         if (instruction.copies.isEmpty()) {
             trace.report(diagnostic)
             return
         }
-        val previouslyReported = ctxt.reportedDiagnosticMap
+        konst previouslyReported = ctxt.reportedDiagnosticMap
         previouslyReported[instruction] = diagnostic.factory
 
         var alreadyReported = false
         var sameErrorForAllCopies = true
         for (copy in instruction.copies) {
-            val previouslyReportedErrorFactory = previouslyReported[copy]
+            konst previouslyReportedErrorFactory = previouslyReported[copy]
             if (previouslyReportedErrorFactory != null) {
                 alreadyReported = true
             }
@@ -1347,10 +1347,10 @@ class ControlFlowInformationProviderImpl private constructor(
 
 
     private open inner class VariableContext(
-        internal val instruction: Instruction,
-        internal val reportedDiagnosticMap: MutableMap<Instruction, DiagnosticFactory<*>>
+        internal konst instruction: Instruction,
+        internal konst reportedDiagnosticMap: MutableMap<Instruction, DiagnosticFactory<*>>
     ) {
-        internal val variableDescriptor = PseudocodeUtil.extractVariableDescriptorFromReference(instruction, trace.bindingContext)
+        internal konst variableDescriptor = PseudocodeUtil.extractVariableDescriptorFromReference(instruction, trace.bindingContext)
     }
 
     private inner class VariableInitContext(
@@ -1360,15 +1360,15 @@ class ControlFlowInformationProviderImpl private constructor(
         out: VariableInitReadOnlyControlFlowInfo,
         blockScopeVariableInfo: BlockScopeVariableInfo
     ) : VariableContext(instruction, map) {
-        internal val enterInitState = initialize(variableDescriptor, blockScopeVariableInfo, `in`)
-        internal val exitInitState = initialize(variableDescriptor, blockScopeVariableInfo, out)
+        internal konst enterInitState = initialize(variableDescriptor, blockScopeVariableInfo, `in`)
+        internal konst exitInitState = initialize(variableDescriptor, blockScopeVariableInfo, out)
 
         private fun initialize(
             variableDescriptor: VariableDescriptor?,
             blockScopeVariableInfo: BlockScopeVariableInfo,
             map: VariableInitReadOnlyControlFlowInfo
         ): VariableControlFlowState? {
-            val state = map.getOrNull(variableDescriptor ?: return null)
+            konst state = map.getOrNull(variableDescriptor ?: return null)
             if (state != null) return state
             return PseudocodeVariablesData.getDefaultValueForInitializers(variableDescriptor, instruction, blockScopeVariableInfo)
         }
@@ -1394,8 +1394,8 @@ class ControlFlowInformationProviderImpl private constructor(
         private fun isUsedAsResultOfLambda(usages: List<Instruction>): Boolean {
             for (usage in usages) {
                 if (usage is ReturnValueInstruction) {
-                    val returnElement = usage.element
-                    val parentElement = returnElement.parent
+                    konst returnElement = usage.element
+                    konst parentElement = returnElement.parent
                     if (returnElement !is KtReturnExpression &&
                         (parentElement !is KtDeclaration || parentElement is KtFunctionLiteral)
                     ) {
@@ -1407,7 +1407,7 @@ class ControlFlowInformationProviderImpl private constructor(
         }
 
         private fun collectResultingExpressionsOfConditionalExpression(expression: KtExpression): List<KtExpression> {
-            val leafBranches = ArrayList<KtExpression>()
+            konst leafBranches = ArrayList<KtExpression>()
             collectResultingExpressionsOfConditionalExpressionRec(expression, leafBranches)
             return leafBranches
         }
@@ -1425,7 +1425,7 @@ class ControlFlowInformationProviderImpl private constructor(
                     collectResultingExpressionsOfConditionalExpressionRec(whenEntry.expression, resultingExpressions)
                 }
                 is Any -> {
-                    val resultingExpression = getResultingExpression(expression)
+                    konst resultingExpression = getResultingExpression(expression)
                     if (resultingExpression is KtIfExpression || resultingExpression is KtWhenExpression) {
                         collectResultingExpressionsOfConditionalExpressionRec(resultingExpression, resultingExpressions)
                     } else {
@@ -1467,7 +1467,7 @@ class ControlFlowInformationProviderImpl private constructor(
                     || diagnosticFactory === UNUSED_CHANGED_VALUE
     }
 
-    private val PsiElement.deparenthesizedParent: PsiElement
+    private konst PsiElement.deparenthesizedParent: PsiElement
         get() {
             var result = parent
             while (result is KtParenthesizedExpression || result is KtLabeledExpression || result is KtAnnotatedExpression) {

@@ -21,7 +21,7 @@ expect var p: String
 
 // MODULE: actual()()(common)
 // FILE: actual.kt
-actual data class C actual constructor(val arg: Any?) {}
+actual data class C actual constructor(konst arg: Any?) {}
 
 actual typealias T = C
 
@@ -29,15 +29,15 @@ actual fun f(arg: Int) = arg
 actual var p: String = "p"
 
 fun box(): String {
-    val c = C(42).toString()
+    konst c = C(42).toString()
     if (c != "C(arg=42)")
         return "c is wrongly $c"
 
-    val cIsT = C(42) is T
+    konst cIsT = C(42) is T
     if (!cIsT)
         return "C(42) is wrongly not T"
 
-    val f = f(1)
+    konst f = f(1)
     if (f != 1)
         return "f is wrongly $f"
 

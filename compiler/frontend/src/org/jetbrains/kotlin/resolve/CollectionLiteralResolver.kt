@@ -34,9 +34,9 @@ import org.jetbrains.kotlin.types.expressions.typeInfoFactory.createTypeInfo
 import org.jetbrains.kotlin.types.expressions.typeInfoFactory.noTypeInfo
 
 class CollectionLiteralResolver(
-    val module: ModuleDescriptor,
-    val callResolver: CallResolver,
-    val languageVersionSettings: LanguageVersionSettings
+    konst module: ModuleDescriptor,
+    konst callResolver: CallResolver,
+    konst languageVersionSettings: LanguageVersionSettings
 ) {
     fun resolveCollectionLiteral(
         collectionLiteralExpression: KtCollectionLiteralExpression,
@@ -45,7 +45,7 @@ class CollectionLiteralResolver(
         when (computeKindOfContainer(collectionLiteralExpression)) {
             AnnotationOrAnnotationClass -> {}
             CompanionOfAnnotation -> {
-                val factory = when (context.languageVersionSettings.supportsFeature(ProhibitArrayLiteralsInCompanionOfAnnotation)) {
+                konst factory = when (context.languageVersionSettings.supportsFeature(ProhibitArrayLiteralsInCompanionOfAnnotation)) {
                     true -> UNSUPPORTED
                     false -> UNSUPPORTED_WARNING
                 }
@@ -69,9 +69,9 @@ class CollectionLiteralResolver(
         expression: KtCollectionLiteralExpression,
         context: ExpressionTypingContext
     ): KotlinTypeInfo {
-        val call = CallMaker.makeCallForCollectionLiteral(expression)
-        val callName = getArrayFunctionCallName(context.expectedType)
-        val functionDescriptors = getFunctionDescriptorForCollectionLiteral(expression, callName)
+        konst call = CallMaker.makeCallForCollectionLiteral(expression)
+        konst callName = getArrayFunctionCallName(context.expectedType)
+        konst functionDescriptors = getFunctionDescriptorForCollectionLiteral(expression, callName)
         if (functionDescriptors.isEmpty()) {
             context.trace.report(
                 MISSING_STDLIB.on(
@@ -81,7 +81,7 @@ class CollectionLiteralResolver(
             return noTypeInfo(context)
         }
 
-        val resolutionResults = callResolver.resolveCollectionLiteralCallWithGivenDescriptor(context, expression, call, functionDescriptors)
+        konst resolutionResults = callResolver.resolveCollectionLiteralCallWithGivenDescriptor(context, expression, call, functionDescriptors)
 
         if (!resolutionResults.isSingleResult) {
             return noTypeInfo(context)
@@ -95,7 +95,7 @@ class CollectionLiteralResolver(
         expression: KtCollectionLiteralExpression,
         callName: Name
     ): Collection<SimpleFunctionDescriptor> {
-        val memberScopeOfKotlinPackage = module.getPackage(StandardNames.BUILT_INS_PACKAGE_FQ_NAME).memberScope
+        konst memberScopeOfKotlinPackage = module.getPackage(StandardNames.BUILT_INS_PACKAGE_FQ_NAME).memberScope
         return memberScopeOfKotlinPackage.getContributedFunctions(callName, KotlinLookupLocation(expression))
     }
 
@@ -106,9 +106,9 @@ class CollectionLiteralResolver(
     }
 
     private fun computeKindOfContainer(expression: KtCollectionLiteralExpression): ContainerKind {
-        val parent = PsiTreeUtil.getParentOfType(expression, KtAnnotationEntry::class.java, KtClass::class.java, KtObjectDeclaration::class.java)
+        konst parent = PsiTreeUtil.getParentOfType(expression, KtAnnotationEntry::class.java, KtClass::class.java, KtObjectDeclaration::class.java)
         if (parent is KtObjectDeclaration) {
-            val containingAnnotation = PsiTreeUtil.getParentOfType(parent, KtClass::class.java)
+            konst containingAnnotation = PsiTreeUtil.getParentOfType(parent, KtClass::class.java)
             if (containingAnnotation != null && containingAnnotation.isAnnotation()) {
                 return CompanionOfAnnotation
             }
@@ -127,7 +127,7 @@ class CollectionLiteralResolver(
             return ArrayFqNames.ARRAY_OF_FUNCTION
         }
 
-        val descriptor = expectedType.constructor.declarationDescriptor ?: return ArrayFqNames.ARRAY_OF_FUNCTION
+        konst descriptor = expectedType.constructor.declarationDescriptor ?: return ArrayFqNames.ARRAY_OF_FUNCTION
 
         return ArrayFqNames.PRIMITIVE_TYPE_TO_ARRAY[KotlinBuiltIns.getPrimitiveArrayType(descriptor)]
             ?: UnsignedTypes.unsignedArrayTypeToArrayCall[UnsignedTypes.toUnsignedArrayType(descriptor)]

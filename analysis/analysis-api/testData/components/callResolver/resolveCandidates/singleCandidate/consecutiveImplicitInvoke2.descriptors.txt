@@ -12,7 +12,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.Double
         returnType = kotlin.Unit
         symbol = /invoke(<extension receiver>: kotlin.Double): kotlin.Unit
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = /invoke
     typeArgumentsMapping = {}
     argumentMapping = {}
@@ -32,7 +32,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.Int
         returnType = kotlin.Long
         symbol = /invoke(<extension receiver>: kotlin.Int): kotlin.Long
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = /invoke
     typeArgumentsMapping = {}
     argumentMapping = {}
@@ -51,7 +51,7 @@ KtApplicableCallCandidateInfo:
         receiverType = kotlin.Long
         returnType = kotlin.Double
         symbol = /invoke(<extension receiver>: kotlin.Long): kotlin.Double
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = /invoke
     typeArgumentsMapping = {}
     argumentMapping = {}

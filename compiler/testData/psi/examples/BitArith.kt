@@ -22,7 +22,7 @@ fun countOnes(x : INumber) = if (x == 0) 0 else mostSignificantBit(x) + countOne
 fun Int.matchMask(mask : Int) = this and mask == mask
 
 open class INumber : IComparable<This> {
-  val bits : Int
+  konst bits : Int
 
   @Operator
   fun plus(other : This) : This

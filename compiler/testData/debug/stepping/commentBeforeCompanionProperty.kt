@@ -3,7 +3,7 @@
 class AWithCompanion {
     companion object {
         //Comment before
-        val compPropVal = 1
+        konst compPropVal = 1
     }
 }
 

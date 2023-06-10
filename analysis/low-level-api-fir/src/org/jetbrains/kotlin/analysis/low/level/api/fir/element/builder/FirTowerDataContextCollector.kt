@@ -20,29 +20,29 @@ interface FirTowerContextProvider {
 }
 
 internal class FileTowerProvider(
-    private val file: KtFile,
-    private val context: FirTowerDataContext
+    private konst file: KtFile,
+    private konst context: FirTowerDataContext
 ) : FirTowerContextProvider {
     override fun getClosestAvailableParentContext(ktElement: KtElement): FirTowerDataContext? =
         if (file == ktElement.containingKtFile) context else null
 }
 
 internal class FirTowerDataContextAllElementsCollector : FirTowerDataContextCollector, FirTowerContextProvider {
-    private val elementsToContext: MutableMap<KtElement, FirTowerDataContext> = hashMapOf()
+    private konst elementsToContext: MutableMap<KtElement, FirTowerDataContext> = hashMapOf()
 
     override fun addFileContext(file: FirFile, context: FirTowerDataContext) {
-        val ktFile = file.psi as? KtFile ?: return
+        konst ktFile = file.psi as? KtFile ?: return
         elementsToContext[ktFile] = context
     }
 
     override fun addStatementContext(statement: FirStatement, context: FirTowerDataContext) {
-        val closestStatementInBlock = statement.psi?.closestBlockLevelOrInitializerExpression() ?: return
+        konst closestStatementInBlock = statement.psi?.closestBlockLevelOrInitializerExpression() ?: return
         // FIR body transform may alter the context if there are implicit receivers with smartcast
         elementsToContext[closestStatementInBlock] = context.createSnapshot()
     }
 
     override fun addDeclarationContext(declaration: FirDeclaration, context: FirTowerDataContext) {
-        val psi = declaration.psi as? KtElement ?: return
+        konst psi = declaration.psi as? KtElement ?: return
         elementsToContext[psi] = context
     }
 
@@ -53,7 +53,7 @@ internal class FirTowerDataContextAllElementsCollector : FirTowerDataContextColl
                 elementsToContext[current]?.let { return it }
             }
             if (current is KtDeclaration) {
-                val originalDeclaration = current.originalDeclaration
+                konst originalDeclaration = current.originalDeclaration
                 originalDeclaration?.let { elementsToContext[it] }?.let { return it }
             }
             if (current is KtFile) {

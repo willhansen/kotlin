@@ -20,12 +20,12 @@ fun compareAndMergeFirFileAndOldFrontendFile(
     compareWithTrimming: Boolean = false
 ) {
     if (oldFrontendTestDataFile.exists() && frontendIRTestDataFile.exists()) {
-        val originalLines = oldFrontendTestDataFile.readLines()
-        val firLines = frontendIRTestDataFile.readLines()
-        val sameDumps = if (compareWithTrimming) {
+        konst originalLines = oldFrontendTestDataFile.readLines()
+        konst firLines = frontendIRTestDataFile.readLines()
+        konst sameDumps = if (compareWithTrimming) {
             firLines.withIndex().all { (index, line) ->
-                val trimmed = line.trim()
-                val originalTrimmed = originalLines.getOrNull(index)?.trim()
+                konst trimmed = line.trim()
+                konst originalTrimmed = originalLines.getOrNull(index)?.trim()
                 trimmed.isEmpty() && originalTrimmed?.isEmpty() != false || trimmed == originalTrimmed
             } && originalLines.withIndex().all { (index, line) ->
                 index < firLines.size || line.trim().isEmpty()
@@ -35,8 +35,8 @@ fun compareAndMergeFirFileAndOldFrontendFile(
         }
         if (sameDumps) {
             frontendIRTestDataFile.delete()
-            val oldFrontendTestDataFilePath = oldFrontendTestDataFile.absolutePath
-            val fileWithFirIdentical = if (!oldFrontendTestDataFilePath.endsWith(".txt")) {
+            konst oldFrontendTestDataFilePath = oldFrontendTestDataFile.absolutePath
+            konst fileWithFirIdentical = if (!oldFrontendTestDataFilePath.endsWith(".txt")) {
                 oldFrontendTestDataFile
             } else {
                 File(oldFrontendTestDataFilePath.replace(".txt", ".kt"))

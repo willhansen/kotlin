@@ -5,7 +5,7 @@
 
 package org.jetbrains.ring
 
-private const val RUNS = 2_000_000
+private const konst RUNS = 2_000_000
 
 class CastsBenchmark {
     interface I0
@@ -60,16 +60,16 @@ class CastsBenchmark {
     }
 
     fun classCast(): Int {
-        val c0: Any = C0()
-        val c1: Any = C1()
-        val c2: Any = C2()
-        val c3: Any = C3()
-        val c4: Any = C4()
-        val c5: Any = C5()
-        val c6: Any = C6()
-        val c7: Any = C7()
-        val c8: Any = C8()
-        val c9: Any = C9()
+        konst c0: Any = C0()
+        konst c1: Any = C1()
+        konst c2: Any = C2()
+        konst c3: Any = C3()
+        konst c4: Any = C4()
+        konst c5: Any = C5()
+        konst c6: Any = C6()
+        konst c7: Any = C7()
+        konst c8: Any = C8()
+        konst c9: Any = C9()
 
         var x = 0
         for (i in 0 until RUNS) {
@@ -88,16 +88,16 @@ class CastsBenchmark {
     }
 
     fun interfaceCast(): Int {
-        val c0: Any = C0()
-        val c1: Any = C1()
-        val c2: Any = C2()
-        val c3: Any = C3()
-        val c4: Any = C4()
-        val c5: Any = C5()
-        val c6: Any = C6()
-        val c7: Any = C7()
-        val c8: Any = C8()
-        val c9: Any = C9()
+        konst c0: Any = C0()
+        konst c1: Any = C1()
+        konst c2: Any = C2()
+        konst c3: Any = C3()
+        konst c4: Any = C4()
+        konst c5: Any = C5()
+        konst c6: Any = C6()
+        konst c7: Any = C7()
+        konst c8: Any = C8()
+        konst c9: Any = C9()
 
         var x = 0
         for (i in 0 until RUNS) {

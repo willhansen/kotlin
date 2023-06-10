@@ -39,7 +39,7 @@ fun runSlowly(f: () -> String): String {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.foo = "Kotlin"
     if (a.foo != "Kotlin") return "fail"
 

@@ -7,8 +7,8 @@ interface SubCheck : Check {
 
     override var test: String
         get() = "OK"
-        set(value) {
-            value.length
+        set(konstue) {
+            konstue.length
         }
 }
 

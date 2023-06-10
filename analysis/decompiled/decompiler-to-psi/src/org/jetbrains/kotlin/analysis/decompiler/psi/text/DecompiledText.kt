@@ -5,4 +5,4 @@
 
 package org.jetbrains.kotlin.analysis.decompiler.psi.text
 
-data class DecompiledText(val text: String)
+data class DecompiledText(konst text: String)

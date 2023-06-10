@@ -1,5 +1,5 @@
 fun test() {
-    val f = <expr>fun(): Int {
+    konst f = <expr>fun(): Int {
         return 54
     }</expr>
 

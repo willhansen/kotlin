@@ -14,7 +14,7 @@ operator fun Any.plusAssign(lambda: Function0<Unit>): Unit
 // CHECK:
 //   Mangled name: #set@kotlin.Any(kotlin.Function0<kotlin.Unit>;kotlin.Int){}
 //   Public signature: /set|-1483796712330329080[0]
-operator fun Any.set(index: Function0<Unit>, value: Int): Unit
+operator fun Any.set(index: Function0<Unit>, konstue: Int): Unit
 
 // CHECK:
 //   Mangled name: #test1(kotlin.Any){}

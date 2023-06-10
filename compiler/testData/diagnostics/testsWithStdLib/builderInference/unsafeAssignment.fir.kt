@@ -6,8 +6,8 @@ class Foo<T : Any> {
 fun <T : Any> myBuilder(block: Foo<T>.() -> Unit) : Foo<T> = Foo<T>().apply(block)
 
 fun main(arg: Any) {
-    val x = 57
-    val value = myBuilder {
+    konst x = 57
+    konst konstue = myBuilder {
         doSmthng("one ")
         run { a; this }.a = 10
         a += 1
@@ -20,5 +20,5 @@ fun main(arg: Any) {
             a = arg
         }
     }
-    <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value.a?.<!UNRESOLVED_REFERENCE!>count<!> { <!UNRESOLVED_REFERENCE!>it<!> in 'l' .. 'q' })
+    <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue.a?.<!UNRESOLVED_REFERENCE!>count<!> { <!UNRESOLVED_REFERENCE!>it<!> in 'l' .. 'q' })
 }

@@ -8,7 +8,7 @@ import java.lang.Class
 
 @Target(TYPEALIAS)
 @Retention(RUNTIME)
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
 @Ann(2)
 typealias TA = Any

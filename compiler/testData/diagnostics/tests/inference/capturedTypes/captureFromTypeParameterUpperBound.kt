@@ -1,10 +1,10 @@
 interface Inv<T>
 
 fun <Y: X, X : Inv<out String>> foo(x: X, y: Y) {
-    val rX = bar(x)
+    konst rX = bar(x)
     rX.length
 
-    val rY = bar(y)
+    konst rY = bar(y)
     rY.length
 }
 

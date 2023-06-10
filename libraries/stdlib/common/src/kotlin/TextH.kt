@@ -10,8 +10,8 @@ expect class Regex {
     constructor(pattern: String, option: RegexOption)
     constructor(pattern: String, options: Set<RegexOption>)
 
-    val pattern: String
-    val options: Set<RegexOption>
+    konst pattern: String
+    konst options: Set<RegexOption>
 
     fun matchEntire(input: CharSequence): MatchResult?
     infix fun matches(input: CharSequence): Boolean
@@ -69,7 +69,7 @@ expect class Regex {
     /**
      * Splits the [input] CharSequence to a list of strings around matches of this regular expression.
      *
-     * @param limit Non-negative value specifying the maximum number of substrings the string can be split to.
+     * @param limit Non-negative konstue specifying the maximum number of substrings the string can be split to.
      * Zero by default means no limit is set.
      */
     fun split(input: CharSequence, limit: Int = 0): List<String>
@@ -77,7 +77,7 @@ expect class Regex {
     /**
      * Splits the [input] CharSequence to a sequence of strings around matches of this regular expression.
      *
-     * @param limit Non-negative value specifying the maximum number of substrings the string can be split to.
+     * @param limit Non-negative konstue specifying the maximum number of substrings the string can be split to.
      * Zero by default means no limit is set.
      * @sample samples.text.Regexps.splitToSequence
      */
@@ -93,7 +93,7 @@ expect class Regex {
 }
 
 expect class MatchGroup {
-    val value: String
+    konst konstue: String
 }
 
 expect enum class RegexOption {
@@ -183,18 +183,18 @@ public expect fun ByteArray.decodeToString(): String
  *
  * @param startIndex the beginning (inclusive) of the subrange to decode, 0 by default.
  * @param endIndex the end (exclusive) of the subrange to decode, size of this array by default.
- * @param throwOnInvalidSequence specifies whether to throw an exception on malformed byte sequence or replace it by the replacement char `\uFFFD`.
+ * @param throwOnInkonstidSequence specifies whether to throw an exception on malformed byte sequence or replace it by the replacement char `\uFFFD`.
  *
  * @throws IndexOutOfBoundsException if [startIndex] is less than zero or [endIndex] is greater than the size of this array.
  * @throws IllegalArgumentException if [startIndex] is greater than [endIndex].
- * @throws CharacterCodingException if the byte array contains malformed UTF-8 byte sequence and [throwOnInvalidSequence] is true.
+ * @throws CharacterCodingException if the byte array contains malformed UTF-8 byte sequence and [throwOnInkonstidSequence] is true.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public expect fun ByteArray.decodeToString(
     startIndex: Int = 0,
     endIndex: Int = this.size,
-    throwOnInvalidSequence: Boolean = false
+    throwOnInkonstidSequence: Boolean = false
 ): String
 
 /**
@@ -211,18 +211,18 @@ public expect fun String.encodeToByteArray(): ByteArray
  *
  * @param startIndex the beginning (inclusive) of the substring to encode, 0 by default.
  * @param endIndex the end (exclusive) of the substring to encode, length of this string by default.
- * @param throwOnInvalidSequence specifies whether to throw an exception on malformed char sequence or replace.
+ * @param throwOnInkonstidSequence specifies whether to throw an exception on malformed char sequence or replace.
  *
  * @throws IndexOutOfBoundsException if [startIndex] is less than zero or [endIndex] is greater than the length of this string.
  * @throws IllegalArgumentException if [startIndex] is greater than [endIndex].
- * @throws CharacterCodingException if this string contains malformed char sequence and [throwOnInvalidSequence] is true.
+ * @throws CharacterCodingException if this string contains malformed char sequence and [throwOnInkonstidSequence] is true.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public expect fun String.encodeToByteArray(
     startIndex: Int = 0,
     endIndex: Int = this.length,
-    throwOnInvalidSequence: Boolean = false
+    throwOnInkonstidSequence: Boolean = false
 ): ByteArray
 
 
@@ -335,7 +335,7 @@ public expect fun String.regionMatches(
  * and will result in an unsatisfactory ordering for certain locales.
  */
 @SinceKotlin("1.2")
-public expect val String.Companion.CASE_INSENSITIVE_ORDER: Comparator<String>
+public expect konst String.Companion.CASE_INSENSITIVE_ORDER: Comparator<String>
 
 /**
  * Returns `true` if this string is not `null` and its content is equal to the word "true", ignoring case, and `false` otherwise.
@@ -347,109 +347,109 @@ public expect fun String?.toBoolean(): Boolean
 
 /**
  * Parses the string as a signed [Byte] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 expect fun String.toByte(): Byte
 
 /**
  * Parses the string as a signed [Byte] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 expect fun String.toByte(radix: Int): Byte
 
 
 /**
  * Parses the string as a [Short] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 expect fun String.toShort(): Short
 
 /**
  * Parses the string as a [Short] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 expect fun String.toShort(radix: Int): Short
 
 /**
  * Parses the string as an [Int] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 expect fun String.toInt(): Int
 
 /**
  * Parses the string as an [Int] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 expect fun String.toInt(radix: Int): Int
 
 /**
  * Parses the string as a [Long] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 expect fun String.toLong(): Long
 
 /**
  * Parses the string as a [Long] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 expect fun String.toLong(radix: Int): Long
 
 /**
  * Parses the string as a [Double] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 expect fun String.toDouble(): Double
 
 /**
  * Parses the string as a [Float] number and returns the result.
- * @throws NumberFormatException if the string is not a valid representation of a number.
+ * @throws NumberFormatException if the string is not a konstid representation of a number.
  */
 expect fun String.toFloat(): Float
 
 /**
  * Parses the string as a [Double] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  */
 expect fun String.toDoubleOrNull(): Double?
 
 /**
  * Parses the string as a [Float] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  */
 expect fun String.toFloatOrNull(): Float?
 
 /**
- * Returns a string representation of this [Byte] value in the specified [radix].
+ * Returns a string representation of this [Byte] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.2")
 expect fun Byte.toString(radix: Int): String
 
 /**
- * Returns a string representation of this [Short] value in the specified [radix].
+ * Returns a string representation of this [Short] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.2")
 expect fun Short.toString(radix: Int): String
 
 /**
- * Returns a string representation of this [Int] value in the specified [radix].
+ * Returns a string representation of this [Int] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.2")
 expect fun Int.toString(radix: Int): String
 
 /**
- * Returns a string representation of this [Long] value in the specified [radix].
+ * Returns a string representation of this [Long] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.2")
 expect fun Long.toString(radix: Int): String

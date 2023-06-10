@@ -1,10 +1,10 @@
 // LANGUAGE: +InlineClasses
 import kotlin.reflect.KProperty
 
-inline class I(val x: Int)
+inline class I(konst x: Int)
 
 interface A {
-    val i: I
+    konst i: I
 }
 
 class Delegate {
@@ -14,7 +14,7 @@ class Delegate {
 }
 
 class B : A {
-    override val i by Delegate()
+    override konst i by Delegate()
 }
 
 // 1 public final getValue-MJRKSbM\(Ljava/lang/Object;Lkotlin/reflect/KProperty;\)I

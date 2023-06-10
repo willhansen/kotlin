@@ -22,9 +22,9 @@ import java.util.function.Predicate
 
 interface TypePredicate : Predicate<KotlinType>
 
-private val KOTLIN = TypePredicateImpl("kotlin")
-val COMPARABLE: TypePredicate = KOTLIN.inner("Comparable")
-val CHAR_SEQUENCE: TypePredicate = KOTLIN.inner("CharSequence")
+private konst KOTLIN = TypePredicateImpl("kotlin")
+konst COMPARABLE: TypePredicate = KOTLIN.inner("Comparable")
+konst CHAR_SEQUENCE: TypePredicate = KOTLIN.inner("CharSequence")
 
 // TODO: replace all NamePredicate usages to TypePredicate
 /**
@@ -34,7 +34,7 @@ val CHAR_SEQUENCE: TypePredicate = KOTLIN.inner("CharSequence")
  * @see org.jetbrains.kotlin.js.patterns.NamePredicate
  */
 private class TypePredicateImpl
-    private constructor (private val nameParts: List<String>)
+    private constructor (private konst nameParts: List<String>)
 : TypePredicate {
     constructor(name: String) : this(listOf(name))
 

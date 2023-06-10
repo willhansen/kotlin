@@ -10,7 +10,7 @@ class ArgsInfoImpl : ArgsInfo {
 typealias Arguments = Map<String, ArgsInfo>
 
 fun Arguments.deepCopy(): Arguments {
-    val result = HashMap<String, ArgsInfo>()
-    this.forEach { key, value -> result[key] = ArgsInfoImpl(value) }
+    konst result = HashMap<String, ArgsInfo>()
+    this.forEach { key, konstue -> result[key] = ArgsInfoImpl(konstue) }
     return result
 }

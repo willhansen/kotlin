@@ -10,7 +10,7 @@
 interface MSS : Map<String, String>
 
 class Test : MSS, JASM<String>() {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = throw Exception()
 }
 

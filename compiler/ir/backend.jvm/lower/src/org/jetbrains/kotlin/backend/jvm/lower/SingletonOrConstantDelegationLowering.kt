@@ -23,20 +23,20 @@ import org.jetbrains.kotlin.ir.util.remapReceiver
 import org.jetbrains.kotlin.ir.util.transformDeclarationsFlat
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
-internal val singletonOrConstantDelegationPhase = makeIrFilePhase(
+internal konst singletonOrConstantDelegationPhase = makeIrFilePhase(
     ::SingletonOrConstantDelegationLowering,
     name = "SingletonOrConstantDelegation",
-    description = "Optimize `val x by ConstOrSingleton`: there is no need to store the value in a field"
+    description = "Optimize `konst x by ConstOrSingleton`: there is no need to store the konstue in a field"
 )
 
-private class SingletonOrConstantDelegationLowering(val context: JvmBackendContext) : FileLoweringPass {
+private class SingletonOrConstantDelegationLowering(konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         if (!context.state.generateOptimizedCallableReferenceSuperClasses) return
         irFile.transform(SingletonOrConstantDelegationTransformer(context), null)
     }
 }
 
-private class SingletonOrConstantDelegationTransformer(val context: JvmBackendContext) : IrElementTransformerVoid() {
+private class SingletonOrConstantDelegationTransformer(konst context: JvmBackendContext) : IrElementTransformerVoid() {
     override fun visitClass(declaration: IrClass): IrClass {
         declaration.transformChildren(this, null)
         declaration.transformDeclarationsFlat {
@@ -46,10 +46,10 @@ private class SingletonOrConstantDelegationTransformer(val context: JvmBackendCo
     }
 
     private fun IrProperty.transform(): List<IrDeclaration>? {
-        val delegate = getSingletonOrConstantForOptimizableDelegatedProperty() ?: return null
-        val originalThis = parentAsClass.thisReceiver
+        konst delegate = getSingletonOrConstantForOptimizableDelegatedProperty() ?: return null
+        konst originalThis = parentAsClass.thisReceiver
 
-        class DelegateFieldAccessTransformer(val newReceiver: IrExpression) : IrElementTransformerVoid() {
+        class DelegateFieldAccessTransformer(konst newReceiver: IrExpression) : IrElementTransformerVoid() {
             override fun visitGetField(expression: IrGetField): IrExpression =
                 if (expression.symbol == backingField?.symbol) newReceiver else super.visitGetField(expression)
         }
@@ -59,7 +59,7 @@ private class SingletonOrConstantDelegationTransformer(val context: JvmBackendCo
 
         backingField = null
 
-        val initializerBlock = if (delegate !is IrConst<*> && delegate !is IrGetValue)
+        konst initializerBlock = if (delegate !is IrConst<*> && delegate !is IrGetValue)
             context.irFactory.createAnonymousInitializer(
                 delegate.startOffset,
                 delegate.endOffset,
@@ -71,7 +71,7 @@ private class SingletonOrConstantDelegationTransformer(val context: JvmBackendCo
             }
         else null
 
-        val delegateMethod = context.createSyntheticMethodForPropertyDelegate(this).apply {
+        konst delegateMethod = context.createSyntheticMethodForPropertyDelegate(this).apply {
             body = context.createJvmIrBuilder(symbol).run { irExprBody(delegate.remapReceiver(originalThis, dispatchReceiverParameter)) }
         }
 

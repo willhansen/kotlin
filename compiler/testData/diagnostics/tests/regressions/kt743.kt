@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 //KT-743 Wrong type inference
-class List<T>(val head: T, val tail: List<T>? = null)
+class List<T>(konst head: T, konst tail: List<T>? = null)
 
 fun <T : Any> T?.sure() : T = this!!
 

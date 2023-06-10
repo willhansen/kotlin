@@ -23,29 +23,29 @@ import org.jetbrains.kotlin.javac.JavacWrapper
 import org.jetbrains.kotlin.load.java.structure.JavaClass
 import kotlin.experimental.inv
 
-class ConstantEvaluator(private val containingClass: JavaClass,
-                        private val javac: JavacWrapper,
-                        private val compilationUnit: CompilationUnitTree) {
+class ConstantEkonstuator(private konst containingClass: JavaClass,
+                        private konst javac: JavacWrapper,
+                        private konst compilationUnit: CompilationUnitTree) {
     fun getValue(expr: JCTree.JCExpression): Any? {
         return when (expr) {
             is JCTree.JCLiteral -> {
                 if (expr.typetag == TypeTag.BOOLEAN) {
-                    expr.value != 0
+                    expr.konstue != 0
                 }
-                else expr.value
+                else expr.konstue
             }
             is JCTree.JCIdent,
             is JCTree.JCFieldAccess -> javac.resolveField(expr, compilationUnit, containingClass)?.initializerValue
-            is JCTree.JCBinary -> evaluateBinaryExpression(expr)
+            is JCTree.JCBinary -> ekonstuateBinaryExpression(expr)
             is JCTree.JCParens -> getValue(expr.expr)
-            is JCTree.JCUnary -> evaluateUnaryExpression(expr)
+            is JCTree.JCUnary -> ekonstuateUnaryExpression(expr)
             else -> null
         }
     }
 
-    private fun evaluateUnaryExpression(value: JCTree.JCUnary): Any? {
-        val argValue = getValue(value.arg)
-        return when (value.tag) {
+    private fun ekonstuateUnaryExpression(konstue: JCTree.JCUnary): Any? {
+        konst argValue = getValue(konstue.arg)
+        return when (konstue.tag) {
             JCTree.Tag.COMPL -> {
                 when (argValue) {
                     is Int -> argValue.inv()
@@ -60,14 +60,14 @@ class ConstantEvaluator(private val containingClass: JavaClass,
         }
     }
 
-    private fun evaluateBinaryExpression(value: JCTree.JCBinary): Any? {
-        val lhsValue = getValue(value.lhs) ?: return null
-        val rhsValue = getValue(value.rhs) ?: return null
+    private fun ekonstuateBinaryExpression(konstue: JCTree.JCBinary): Any? {
+        konst lhsValue = getValue(konstue.lhs) ?: return null
+        konst rhsValue = getValue(konstue.rhs) ?: return null
 
-        return evaluateValue(lhsValue, rhsValue, value.tag)
+        return ekonstuateValue(lhsValue, rhsValue, konstue.tag)
     }
 
-    private fun evaluateValue(lhsValue: Any?, rhsValue: Any?, opcode: JCTree.Tag): Any? {
+    private fun ekonstuateValue(lhsValue: Any?, rhsValue: Any?, opcode: JCTree.Tag): Any? {
         if (lhsValue is String && opcode == JCTree.Tag.PLUS) return lhsValue + rhsValue
         else if (lhsValue is Boolean && rhsValue is Boolean) {
             return when (opcode) {
@@ -82,8 +82,8 @@ class ConstantEvaluator(private val containingClass: JavaClass,
             }
         }
         else if (lhsValue is Number && rhsValue is Number) {
-            val isInteger = !(lhsValue is Float || lhsValue is Double || rhsValue is Float || rhsValue is Double)
-            val isWide = if (isInteger) {
+            konst isInteger = !(lhsValue is Float || lhsValue is Double || rhsValue is Float || rhsValue is Double)
+            konst isWide = if (isInteger) {
                 lhsValue is Long || rhsValue is Long
             }
             else {

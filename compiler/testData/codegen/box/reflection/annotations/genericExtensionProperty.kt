@@ -2,15 +2,15 @@
 // WITH_REFLECT
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Simple(val value: String)
+annotation class Simple(konst konstue: String)
 
 interface A<T>
 
 @Simple("OK")
-public val <T> A<T>.p: String
+public konst <T> A<T>.p: String
     get() = TODO()
 
 fun box(): String {
-    val o = object : A<Int> {}
-    return (o::p.annotations.single() as Simple).value
+    konst o = object : A<Int> {}
+    return (o::p.annotations.single() as Simple).konstue
 }

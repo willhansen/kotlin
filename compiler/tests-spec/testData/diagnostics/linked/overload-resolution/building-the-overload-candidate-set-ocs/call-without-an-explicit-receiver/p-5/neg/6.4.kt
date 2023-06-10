@@ -110,7 +110,7 @@ object Regex {
 // FILE: Lib1_3.kt
 package libCase3.b
 
-class Regex(val s: String)
+class Regex(konst s: String)
 
 
 // FILE: TestCase4.kt
@@ -136,7 +136,7 @@ fun Regex(pattern: String) {}
 // FILE: Lib14.kt
 package libCase4.b
 
-class Regex(val s: String)
+class Regex(konst s: String)
 
 
 // FILE: TestCase5.kt

@@ -22,10 +22,10 @@ fun dummyF() = "dummy"
 // FILE: main.kt
 
 fun box(): String {
-    val foo = fooF()
+    konst foo = fooF()
     if (foo != "foo") return "fail1: $foo"
 
-    val bar = barF()
+    konst bar = barF()
     if (bar != "bar") return "fail2: $bar"
 
     return "OK"

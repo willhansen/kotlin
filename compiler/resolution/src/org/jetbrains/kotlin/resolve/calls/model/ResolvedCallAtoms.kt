@@ -39,15 +39,15 @@ abstract class ResolutionPart {
     open fun ResolutionCandidate.workCount(): Int = 1
 
     // helper functions
-    protected inline val ResolutionCandidate.candidateDescriptor get() = resolvedCall.candidateDescriptor
-    protected inline val ResolutionCandidate.kotlinCall get() = resolvedCall.atom
+    protected inline konst ResolutionCandidate.candidateDescriptor get() = resolvedCall.candidateDescriptor
+    protected inline konst ResolutionCandidate.kotlinCall get() = resolvedCall.atom
 }
 
 interface KotlinDiagnosticsHolder {
     fun addDiagnostic(diagnostic: KotlinCallDiagnostic)
 
     class SimpleHolder : KotlinDiagnosticsHolder {
-        private val diagnostics = arrayListOf<KotlinCallDiagnostic>()
+        private konst diagnostics = arrayListOf<KotlinCallDiagnostic>()
 
         override fun addDiagnostic(diagnostic: KotlinCallDiagnostic) {
             diagnostics.add(diagnostic)
@@ -78,14 +78,14 @@ class ResolvedCallableReferenceCallAtom(
 ), ResolvedCallableReferenceAtom
 
 open class MutableResolvedCallAtom(
-    override val atom: KotlinCall,
+    override konst atom: KotlinCall,
     originalCandidateDescriptor: CallableDescriptor, // original candidate descriptor
-    override val explicitReceiverKind: ExplicitReceiverKind,
-    override val dispatchReceiverArgument: SimpleKotlinCallArgument?,
+    override konst explicitReceiverKind: ExplicitReceiverKind,
+    override konst dispatchReceiverArgument: SimpleKotlinCallArgument?,
     override var extensionReceiverArgument: SimpleKotlinCallArgument?,
-    override val extensionReceiverArgumentCandidates: List<SimpleKotlinCallArgument>?,
-    open val reflectionCandidateType: UnwrappedType? = null,
-    open val candidate: CallableReferenceResolutionCandidate? = null
+    override konst extensionReceiverArgumentCandidates: List<SimpleKotlinCallArgument>?,
+    open konst reflectionCandidateType: UnwrappedType? = null,
+    open konst candidate: CallableReferenceResolutionCandidate? = null
 ) : ResolvedCallAtom() {
     override var contextReceiversArguments: List<SimpleKotlinCallArgument> = listOf()
     override lateinit var typeArgumentMappingByOriginal: TypeArgumentsToParametersMapper.TypeArgumentsMapping
@@ -99,25 +99,25 @@ open class MutableResolvedCallAtom(
     private var signedUnsignedConstantConversions: HashMap<KotlinCallArgument, IntegerValueTypeConstant>? = null
     private var _candidateDescriptor = originalCandidateDescriptor
 
-    override val candidateDescriptor: CallableDescriptor
+    override konst candidateDescriptor: CallableDescriptor
         get() = _candidateDescriptor
 
-    val hasSamConversion: Boolean
+    konst hasSamConversion: Boolean
         get() = samAdapterMap != null
 
-    val hasSuspendConversion: Boolean
+    konst hasSuspendConversion: Boolean
         get() = suspendAdapterMap != null
 
-    override val argumentsWithConversion: Map<KotlinCallArgument, SamConversionDescription>
+    override konst argumentsWithConversion: Map<KotlinCallArgument, SamConversionDescription>
         get() = samAdapterMap ?: emptyMap()
 
-    override val argumentsWithSuspendConversion: Map<KotlinCallArgument, UnwrappedType>
+    override konst argumentsWithSuspendConversion: Map<KotlinCallArgument, UnwrappedType>
         get() = suspendAdapterMap ?: emptyMap()
 
-    override val argumentsWithUnitConversion: Map<KotlinCallArgument, UnwrappedType>
+    override konst argumentsWithUnitConversion: Map<KotlinCallArgument, UnwrappedType>
         get() = unitAdapterMap ?: emptyMap()
 
-    override val argumentsWithConstantConversion: Map<KotlinCallArgument, IntegerValueTypeConstant>
+    override konst argumentsWithConstantConversion: Map<KotlinCallArgument, IntegerValueTypeConstant>
         get() = signedUnsignedConstantConversions ?: emptyMap()
 
     fun registerArgumentWithSamConversion(argument: KotlinCallArgument, samConversionDescription: SamConversionDescription) {

@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.util.collectionUtils.listOfNonEmptyScopes
 import org.jetbrains.kotlin.utils.Printer
 
-class TypeIntersectionScope private constructor(private val debugName: String, override val workerScope: MemberScope) : AbstractScopeAdapter() {
+class TypeIntersectionScope private constructor(private konst debugName: String, override konst workerScope: MemberScope) : AbstractScopeAdapter() {
     override fun getContributedFunctions(name: Name, location: LookupLocation) =
             super.getContributedFunctions(name, location).selectMostSpecificInEachOverridableGroup { this }
 
@@ -33,7 +33,7 @@ class TypeIntersectionScope private constructor(private val debugName: String, o
             super.getContributedVariables(name, location).selectMostSpecificInEachOverridableGroup { this }
 
     override fun getContributedDescriptors(kindFilter: DescriptorKindFilter, nameFilter: (Name) -> Boolean): Collection<DeclarationDescriptor> {
-        val (callables, other) = super.getContributedDescriptors(kindFilter, nameFilter).partition { it is CallableDescriptor }
+        konst (callables, other) = super.getContributedDescriptors(kindFilter, nameFilter).partition { it is CallableDescriptor }
 
         @Suppress("UNCHECKED_CAST")
         return (callables as Collection<CallableDescriptor>).selectMostSpecificInEachOverridableGroup { this } + other
@@ -47,8 +47,8 @@ class TypeIntersectionScope private constructor(private val debugName: String, o
     companion object {
         @JvmStatic
         fun create(message: String, types: Collection<KotlinType>): MemberScope {
-            val nonEmptyScopes = listOfNonEmptyScopes(types.map { it.memberScope })
-            val chainedOrSingle = ChainedMemberScope.createOrSingle(message, nonEmptyScopes)
+            konst nonEmptyScopes = listOfNonEmptyScopes(types.map { it.memberScope })
+            konst chainedOrSingle = ChainedMemberScope.createOrSingle(message, nonEmptyScopes)
 
             if (nonEmptyScopes.size <= 1) return chainedOrSingle
 

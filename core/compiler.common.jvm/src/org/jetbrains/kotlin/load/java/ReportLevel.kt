@@ -5,16 +5,16 @@
 
 package org.jetbrains.kotlin.load.java
 
-enum class ReportLevel(val description: String) {
+enum class ReportLevel(konst description: String) {
     IGNORE("ignore"),
     WARN("warn"),
     STRICT("strict"),
     ;
 
     companion object {
-        fun findByDescription(description: String?): ReportLevel? = values().firstOrNull { it.description == description }
+        fun findByDescription(description: String?): ReportLevel? = konstues().firstOrNull { it.description == description }
     }
 
-    val isWarning: Boolean get() = this == WARN
-    val isIgnore: Boolean get() = this == IGNORE
+    konst isWarning: Boolean get() = this == WARN
+    konst isIgnore: Boolean get() = this == IGNORE
 }

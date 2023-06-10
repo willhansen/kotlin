@@ -12,24 +12,24 @@ import org.jetbrains.kotlin.gradle.utils.failures
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.*
 
-internal val CoroutineContext.kotlinPluginLifecycle: KotlinPluginLifecycle
+internal konst CoroutineContext.kotlinPluginLifecycle: KotlinPluginLifecycle
     get() = this[KotlinPluginLifecycleCoroutineContextElement]?.lifecycle
         ?: error("Missing $KotlinPluginLifecycleCoroutineContextElement in currentCoroutineContext")
 
 
-internal class KotlinPluginLifecycleImpl(override val project: Project) : KotlinPluginLifecycle {
-    val configurationResult = CompletableFuture<ProjectConfigurationResult>()
+internal class KotlinPluginLifecycleImpl(override konst project: Project) : KotlinPluginLifecycle {
+    konst configurationResult = CompletableFuture<ProjectConfigurationResult>()
 
-    private val enqueuedActions: Map<KotlinPluginLifecycle.Stage, ArrayDeque<KotlinPluginLifecycle.() -> Unit>> =
-        KotlinPluginLifecycle.Stage.values().associateWith { ArrayDeque() }
+    private konst enqueuedActions: Map<KotlinPluginLifecycle.Stage, ArrayDeque<KotlinPluginLifecycle.() -> Unit>> =
+        KotlinPluginLifecycle.Stage.konstues().associateWith { ArrayDeque() }
 
-    private val loopRunning = AtomicBoolean(false)
-    private val isStarted = AtomicBoolean(false)
-    private val isFinishedSuccessfully = AtomicBoolean(false)
-    private val isFinishedWithFailures = AtomicBoolean(false)
+    private konst loopRunning = AtomicBoolean(false)
+    private konst isStarted = AtomicBoolean(false)
+    private konst isFinishedSuccessfully = AtomicBoolean(false)
+    private konst isFinishedWithFailures = AtomicBoolean(false)
 
 
-    override var stage: KotlinPluginLifecycle.Stage = KotlinPluginLifecycle.Stage.values.first()
+    override var stage: KotlinPluginLifecycle.Stage = KotlinPluginLifecycle.Stage.konstues.first()
 
     fun start() {
         check(!isStarted.getAndSet(true)) {
@@ -42,12 +42,12 @@ internal class KotlinPluginLifecycleImpl(override val project: Project) : Kotlin
 
         loopIfNecessary()
 
-        project.whenEvaluated {
-            /* Check for failures happening during buildscript evaluation */
+        project.whenEkonstuated {
+            /* Check for failures happening during buildscript ekonstuation */
             project.failures.let { failures ->
                 if (failures.isNotEmpty()) {
                     finishWithFailures(failures)
-                    return@whenEvaluated
+                    return@whenEkonstuated
                 }
             }
 
@@ -64,7 +64,7 @@ internal class KotlinPluginLifecycleImpl(override val project: Project) : Kotlin
             }
         }
 
-        val failures = project.failures
+        konst failures = project.failures
         if (failures.isNotEmpty()) {
             finishWithFailures(failures)
             return
@@ -82,7 +82,7 @@ internal class KotlinPluginLifecycleImpl(override val project: Project) : Kotlin
             return
         }
 
-        project.afterEvaluate {
+        project.afterEkonstuate {
             executeCurrentStageAndScheduleNext()
         }
     }
@@ -90,10 +90,10 @@ internal class KotlinPluginLifecycleImpl(override val project: Project) : Kotlin
     private fun loopIfNecessary() {
         if (loopRunning.getAndSet(true)) return
         try {
-            val queue = enqueuedActions.getValue(stage)
+            konst queue = enqueuedActions.getValue(stage)
             do {
                 project.state.rethrowFailure()
-                val action = queue.removeFirstOrNull()
+                konst action = queue.removeFirstOrNull()
                 action?.invoke(this)
             } while (action != null)
         } finally {
@@ -140,16 +140,16 @@ internal class KotlinPluginLifecycleImpl(override val project: Project) : Kotlin
 
         enqueuedActions.getValue(stage).addLast(action)
 
-        if (stage == KotlinPluginLifecycle.Stage.EvaluateBuildscript && isStarted.get()) {
+        if (stage == KotlinPluginLifecycle.Stage.EkonstuateBuildscript && isStarted.get()) {
             loopIfNecessary()
         }
     }
 
     override fun launch(block: suspend KotlinPluginLifecycle.() -> Unit) {
-        val lifecycle = this
+        konst lifecycle = this
 
-        val coroutine = block.createCoroutine(this, object : Continuation<Unit> {
-            override val context: CoroutineContext = EmptyCoroutineContext +
+        konst coroutine = block.createCoroutine(this, object : Continuation<Unit> {
+            override konst context: CoroutineContext = EmptyCoroutineContext +
                     KotlinPluginLifecycleCoroutineContextElement(lifecycle)
 
             override fun resumeWith(result: Result<Unit>) = result.getOrThrow()
@@ -171,10 +171,10 @@ internal class KotlinPluginLifecycleImpl(override val project: Project) : Kotlin
 }
 
 private class KotlinPluginLifecycleCoroutineContextElement(
-    val lifecycle: KotlinPluginLifecycle,
+    konst lifecycle: KotlinPluginLifecycle,
 ) : CoroutineContext.Element {
     companion object Key : CoroutineContext.Key<KotlinPluginLifecycleCoroutineContextElement>
 
-    override val key: CoroutineContext.Key<KotlinPluginLifecycleCoroutineContextElement> = Key
+    override konst key: CoroutineContext.Key<KotlinPluginLifecycleCoroutineContextElement> = Key
 }
 

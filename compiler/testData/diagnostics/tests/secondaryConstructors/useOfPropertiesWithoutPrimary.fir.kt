@@ -1,15 +1,15 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 class A {
-    val x: Int
-    val useUnitialized = <!UNINITIALIZED_VARIABLE!>x<!> + // reported on each secondary constructor
+    konst x: Int
+    konst useUnitialized = <!UNINITIALIZED_VARIABLE!>x<!> + // reported on each secondary constructor
                          <!UNINITIALIZED_VARIABLE!>y<!> +
                          <!UNINITIALIZED_VARIABLE!>v<!>
     var y: Int
-    val v = -1
+    konst v = -1
 
-    val useInitialized = useUnitialized + v
+    konst useInitialized = useUnitialized + v
 
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val uninitialized: Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst uninitialized: Int<!>
 
     constructor(x: String): this() {
         x + y + v + uninitialized

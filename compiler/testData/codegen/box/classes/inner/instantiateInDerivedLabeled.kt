@@ -1,6 +1,6 @@
-open class A(val value: String) {
-    inner class B(val s: String) {
-        val result = value + "_" + s
+open class A(konst konstue: String) {
+    inner class B(konst s: String) {
+        konst result = konstue + "_" + s
     }
 }
 
@@ -18,7 +18,7 @@ class C : A("fromC") {
 }
 
 fun box(): String {
-    val receiver = C().X()
+    konst receiver = C().X()
     var result = receiver.classReceiver().result
     if (result != "fromX_OK") return "fail 1: $result"
 

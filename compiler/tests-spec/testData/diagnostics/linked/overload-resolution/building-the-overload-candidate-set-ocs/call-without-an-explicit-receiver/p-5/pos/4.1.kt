@@ -62,7 +62,7 @@ public fun <T> emptyArray(): Array<T> = TODO()
 package libPackageCase2Explicit
 import testsCase2.*
 
-val emptyArray: A
+konst emptyArray: A
     get() = A()
 
 public fun <T> emptyArray(): Array<T> = TODO()
@@ -95,7 +95,7 @@ public fun <T> emptyArray(): Array<T> = TODO()
 package libPackageCase3Explicit
 import testsCase3.*
 
-val emptyArray: A
+konst emptyArray: A
     get() = A()
 
 private fun <T> emptyArray(): Array<T> = TODO()

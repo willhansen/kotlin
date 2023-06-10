@@ -24,11 +24,11 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirBinaryLogicExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var leftOperand: FirExpression,
     override var rightOperand: FirExpression,
-    override val kind: LogicOperationKind,
+    override konst kind: LogicOperationKind,
 ) : FirBinaryLogicExpression() {
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
 

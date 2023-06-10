@@ -61,7 +61,7 @@ public class LoadBuiltinsTest extends KotlinTestWithEnvironment {
             if (fromLazyResolve instanceof LazyPackageDescriptor) {
                 PackageFragmentDescriptor deserialized =
                         CollectionsKt.single(PackageFragmentProviderKt.packageFragments(packageFragmentProvider, packageFqName));
-                RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptors(
+                RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptors(
                         fromLazyResolve, deserialized, AbstractBuiltInsWithJDKMembersTest.createComparatorConfiguration(),
                         new File("compiler/testData/builtin-classes/default/" + packageFqName.asString().replace('.', '-') + ".txt")
                 );

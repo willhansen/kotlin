@@ -5,12 +5,12 @@ enum class E {
     A, B, C, D;
 }
 
-val abc = setOf(E.A, E.B, E.C)
+konst abc = setOf(E.A, E.B, E.C)
 
 fun bar(): E = E.A
 
 fun foo(e: E): String {
-    val c = when (e) {
+    konst c = when (e) {
         E.B -> "B"
         in abc -> "OK"
         else -> "else"

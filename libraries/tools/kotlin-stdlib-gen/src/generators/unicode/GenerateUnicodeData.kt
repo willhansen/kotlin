@@ -21,12 +21,12 @@ import kotlin.system.exitProcess
 
 
 // Go to https://www.unicode.org/versions/latest/ to find out the latest public version of the Unicode Character Database files.
-private const val unicodeVersion = "13.0.0"
-private const val unicodeDataUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/UnicodeData.txt"
-private const val specialCasingUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/SpecialCasing.txt"
-private const val propListUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/PropList.txt"
-private const val wordBreakPropertyUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/auxiliary/WordBreakProperty.txt"
-private const val derivedCorePropertiesUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/DerivedCoreProperties.txt"
+private const konst unicodeVersion = "13.0.0"
+private const konst unicodeDataUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/UnicodeData.txt"
+private const konst specialCasingUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/SpecialCasing.txt"
+private const konst propListUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/PropList.txt"
+private const konst wordBreakPropertyUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/auxiliary/WordBreakProperty.txt"
+private const konst derivedCorePropertiesUrl = "https://www.unicode.org/Public/$unicodeVersion/ucd/DerivedCoreProperties.txt"
 
 /**
  * This program generates sources related to UnicodeData.txt and SpecialCasing.txt.
@@ -39,36 +39,36 @@ fun main(args: Array<String>) {
         return URL(url).openStream().reader().readLines()
     }
 
-    val unicodeDataLines = readLines(unicodeDataUrl).map { line -> UnicodeDataLine(line.split(";")) }
-    val bmpUnicodeDataLines = unicodeDataLines.filter { line -> line.char.length <= 4 } // Basic Multilingual Plane (BMP)
+    konst unicodeDataLines = readLines(unicodeDataUrl).map { line -> UnicodeDataLine(line.split(";")) }
+    konst bmpUnicodeDataLines = unicodeDataLines.filter { line -> line.char.length <= 4 } // Basic Multilingual Plane (BMP)
 
     fun String.isEmptyOrComment(): Boolean = isEmpty() || startsWith("#")
 
-    val specialCasingLines = readLines(specialCasingUrl).filterNot(String::isEmptyOrComment).map { line ->
+    konst specialCasingLines = readLines(specialCasingUrl).filterNot(String::isEmptyOrComment).map { line ->
         SpecialCasingLine(line.split("; "))
     }
 
-    val propListLines = readLines(propListUrl).filterNot(String::isEmptyOrComment).map { line ->
+    konst propListLines = readLines(propListUrl).filterNot(String::isEmptyOrComment).map { line ->
         PropertyLine(line.split("; ").map { it.trim() })
     }
 
-    val wordBreakPropertyLines = readLines(wordBreakPropertyUrl).filterNot(String::isEmptyOrComment).map { line ->
+    konst wordBreakPropertyLines = readLines(wordBreakPropertyUrl).filterNot(String::isEmptyOrComment).map { line ->
         PropertyLine(line.split("; ").map { it.trim() })
     }
 
-    val derivedCorePropertiesLines = readLines(derivedCorePropertiesUrl).filterNot(String::isEmptyOrComment).map { line ->
+    konst derivedCorePropertiesLines = readLines(derivedCorePropertiesUrl).filterNot(String::isEmptyOrComment).map { line ->
         PropertyLine(line.split("; ").map { it.trim() })
     }
 
-    val categoryRangesGenerators = mutableListOf<RangesGenerator>()
-    val otherLowercaseGenerators = mutableListOf<OtherLowercaseRangesGenerator>()
-    val otherUppercaseGenerators = mutableListOf<OtherUppercaseRangesGenerator>()
+    konst categoryRangesGenerators = mutableListOf<RangesGenerator>()
+    konst otherLowercaseGenerators = mutableListOf<OtherLowercaseRangesGenerator>()
+    konst otherUppercaseGenerators = mutableListOf<OtherUppercaseRangesGenerator>()
 
     fun addRangesGenerators(generatedDir: File, target: KotlinTarget) {
-        val category = RangesGenerator.forCharCategory(generatedDir.resolve("_CharCategories.kt"), target)
-        val digit = RangesGenerator.forDigit(generatedDir.resolve("_DigitChars.kt"), target)
-        val letter = RangesGenerator.forLetter(generatedDir.resolve("_LetterChars.kt"), target)
-        val whitespace = RangesGenerator.forWhitespace(generatedDir.resolve("_WhitespaceChars.kt"))
+        konst category = RangesGenerator.forCharCategory(generatedDir.resolve("_CharCategories.kt"), target)
+        konst digit = RangesGenerator.forDigit(generatedDir.resolve("_DigitChars.kt"), target)
+        konst letter = RangesGenerator.forLetter(generatedDir.resolve("_LetterChars.kt"), target)
+        konst whitespace = RangesGenerator.forWhitespace(generatedDir.resolve("_WhitespaceChars.kt"))
         categoryRangesGenerators.add(category)
         categoryRangesGenerators.add(digit)
         categoryRangesGenerators.add(letter)
@@ -78,54 +78,54 @@ fun main(args: Array<String>) {
         otherUppercaseGenerators.add(OtherUppercaseRangesGenerator(generatedDir.resolve("_OtherUppercaseChars.kt"), target))
     }
 
-    val oneToOneMappingsGenerators = mutableListOf<MappingsGenerator>()
+    konst oneToOneMappingsGenerators = mutableListOf<MappingsGenerator>()
 
     fun addOneToOneMappingsGenerators(generatedDir: File, target: KotlinTarget) {
-        val uppercase = MappingsGenerator.forUppercase(generatedDir.resolve("_UppercaseMappings.kt"), target)
-        val lowercase = MappingsGenerator.forLowercase(generatedDir.resolve("_LowercaseMappings.kt"), target)
-        val titlecase = MappingsGenerator.forTitlecase(generatedDir.resolve("_TitlecaseMappings.kt"))
+        konst uppercase = MappingsGenerator.forUppercase(generatedDir.resolve("_UppercaseMappings.kt"), target)
+        konst lowercase = MappingsGenerator.forLowercase(generatedDir.resolve("_LowercaseMappings.kt"), target)
+        konst titlecase = MappingsGenerator.forTitlecase(generatedDir.resolve("_TitlecaseMappings.kt"))
         oneToOneMappingsGenerators.add(uppercase)
         oneToOneMappingsGenerators.add(lowercase)
         oneToOneMappingsGenerators.add(titlecase)
     }
 
-    val oneToManyMappingsGenerators = mutableListOf<OneToManyMappingsGenerator>()
+    konst oneToManyMappingsGenerators = mutableListOf<OneToManyMappingsGenerator>()
 
     fun addOneToManyMappingsGenerators(generatedDir: File, target: KotlinTarget) {
-        val uppercase = OneToManyMappingsGenerator.forUppercase(generatedDir.resolve("_OneToManyUppercaseMappings.kt"), target, bmpUnicodeDataLines)
-        val lowercase = OneToManyMappingsGenerator.forLowercase(generatedDir.resolve("_OneToManyLowercaseMappings.kt"), target, bmpUnicodeDataLines)
+        konst uppercase = OneToManyMappingsGenerator.forUppercase(generatedDir.resolve("_OneToManyUppercaseMappings.kt"), target, bmpUnicodeDataLines)
+        konst lowercase = OneToManyMappingsGenerator.forLowercase(generatedDir.resolve("_OneToManyLowercaseMappings.kt"), target, bmpUnicodeDataLines)
         oneToManyMappingsGenerators.add(uppercase)
         oneToManyMappingsGenerators.add(lowercase)
     }
 
-    val stringUppercaseGenerators = mutableListOf<StringUppercaseGenerator>()
-    val stringLowercaseGenerators = mutableListOf<StringLowercaseGenerator>()
+    konst stringUppercaseGenerators = mutableListOf<StringUppercaseGenerator>()
+    konst stringLowercaseGenerators = mutableListOf<StringLowercaseGenerator>()
 
-    val categoryTestGenerator: CharCategoryTestGenerator
+    konst categoryTestGenerator: CharCategoryTestGenerator
 
-    val stringCasingTestGenerator: StringCasingTestGenerator
+    konst stringCasingTestGenerator: StringCasingTestGenerator
 
     when (args.size) {
         1 -> {
-            val baseDir = File(args.first())
+            konst baseDir = File(args.first())
 
-            val categoryTestFile = baseDir.resolve("libraries/stdlib/js/test/text/unicodeData/_CharCategoryTest.kt")
+            konst categoryTestFile = baseDir.resolve("libraries/stdlib/js/test/text/unicodeData/_CharCategoryTest.kt")
             categoryTestGenerator = CharCategoryTestGenerator(categoryTestFile)
 
-            val commonGeneratedDir = baseDir.resolve("libraries/stdlib/common/src/generated")
+            konst commonGeneratedDir = baseDir.resolve("libraries/stdlib/common/src/generated")
             oneToManyMappingsGenerators.add(
                 OneToManyMappingsGenerator.forTitlecase(commonGeneratedDir.resolve("_OneToManyTitlecaseMappings.kt"), bmpUnicodeDataLines)
             )
 
-            val jsGeneratedDir = baseDir.resolve("libraries/stdlib/js/src/generated/")
+            konst jsGeneratedDir = baseDir.resolve("libraries/stdlib/js/src/generated/")
             addRangesGenerators(jsGeneratedDir, KotlinTarget.JS)
             oneToOneMappingsGenerators.add(MappingsGenerator.forTitlecase(jsGeneratedDir.resolve("_TitlecaseMappings.kt")))
 
-            val jsIrGeneratedDir = baseDir.resolve("libraries/stdlib/js-ir/src/generated/")
+            konst jsIrGeneratedDir = baseDir.resolve("libraries/stdlib/js-ir/src/generated/")
             addRangesGenerators(jsIrGeneratedDir, KotlinTarget.JS_IR)
             oneToOneMappingsGenerators.add(MappingsGenerator.forTitlecase(jsIrGeneratedDir.resolve("_TitlecaseMappings.kt")))
 
-            val nativeGeneratedDir = baseDir.resolve("kotlin-native/runtime/src/main/kotlin/generated/")
+            konst nativeGeneratedDir = baseDir.resolve("kotlin-native/runtime/src/main/kotlin/generated/")
             addRangesGenerators(nativeGeneratedDir, KotlinTarget.Native)
             addOneToOneMappingsGenerators(nativeGeneratedDir, KotlinTarget.Native)
             addOneToManyMappingsGenerators(nativeGeneratedDir, KotlinTarget.Native)
@@ -136,7 +136,7 @@ fun main(args: Array<String>) {
                 StringLowercaseGenerator(nativeGeneratedDir.resolve("_StringLowercase.kt"), unicodeDataLines, KotlinTarget.Native)
             )
 
-            val wasmGeneratedDir = baseDir.resolve("libraries/stdlib/wasm/src/generated/")
+            konst wasmGeneratedDir = baseDir.resolve("libraries/stdlib/wasm/src/generated/")
             addRangesGenerators(wasmGeneratedDir, KotlinTarget.WASM)
             addOneToOneMappingsGenerators(wasmGeneratedDir, KotlinTarget.WASM)
             addOneToManyMappingsGenerators(wasmGeneratedDir, KotlinTarget.WASM)
@@ -147,13 +147,13 @@ fun main(args: Array<String>) {
                 StringLowercaseGenerator(wasmGeneratedDir.resolve("_StringLowercase.kt"), unicodeDataLines, KotlinTarget.WASM)
             )
 
-            val nativeTestDir = baseDir.resolve("kotlin-native/backend.native/tests/stdlib_external/text")
+            konst nativeTestDir = baseDir.resolve("kotlin-native/backend.native/tests/stdlib_external/text")
             stringCasingTestGenerator = StringCasingTestGenerator(nativeTestDir)
 
             // For debugging. To see the file content
             fun downloadFile(fromUrl: String) {
-                val fileName = File(fromUrl).name
-                val dest = baseDir.resolve("libraries/tools/kotlin-stdlib-gen/src/generators/unicode/$fileName")
+                konst fileName = File(fromUrl).name
+                konst dest = baseDir.resolve("libraries/tools/kotlin-stdlib-gen/src/generators/unicode/$fileName")
                 dest.writeText(readLines(fromUrl).joinToString(separator = "\n"))
             }
             downloadFile(unicodeDataUrl)

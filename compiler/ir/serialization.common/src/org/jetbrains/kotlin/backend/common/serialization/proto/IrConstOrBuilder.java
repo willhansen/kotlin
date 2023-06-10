@@ -74,7 +74,7 @@ public interface IrConstOrBuilder extends
    * <code>optional fixed32 float_bits = 8;</code>
    *
    * <pre>
-   * float/double is stored via fixed 32/64 bit value to avoid raw bit conversion
+   * float/double is stored via fixed 32/64 bit konstue to avoid raw bit conversion
    * </pre>
    */
   boolean hasFloatBits();
@@ -82,7 +82,7 @@ public interface IrConstOrBuilder extends
    * <code>optional fixed32 float_bits = 8;</code>
    *
    * <pre>
-   * float/double is stored via fixed 32/64 bit value to avoid raw bit conversion
+   * float/double is stored via fixed 32/64 bit konstue to avoid raw bit conversion
    * </pre>
    */
   int getFloatBits();

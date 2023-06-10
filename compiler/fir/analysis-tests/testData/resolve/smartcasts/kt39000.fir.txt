@@ -7,7 +7,7 @@ FILE: kt39000.kt
         }
 
     }
-    public final val X: R|B| = R|/B.B|()
+    public final konst X: R|B| = R|/B.B|()
         public get(): R|B|
     public final fun foo(b: R|B|): R|kotlin/Unit| {
     }

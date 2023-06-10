@@ -15,13 +15,13 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 fun DeclarationDescriptor.isTopLevelInJvmMultifileClass(): Boolean {
     if (containingDeclaration !is PackageFragmentDescriptor) return false
 
-    val declaration = DescriptorToSourceUtils.descriptorToDeclaration(this)
+    konst declaration = DescriptorToSourceUtils.descriptorToDeclaration(this)
     if (declaration is KtDeclaration) {
         return declaration.isInsideJvmMultifileClassFile()
     }
 
     if (this is DeserializedMemberDescriptor) {
-        val containerSource = containerSource
+        konst containerSource = containerSource
         if (containerSource is JvmPackagePartSource && containerSource.facadeClassName != null) {
             return true
         }

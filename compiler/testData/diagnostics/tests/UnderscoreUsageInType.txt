@@ -1,7 +1,7 @@
 package
 
-public val testConstructor: _<kotlin.Any>
-public val testConstructor2: _<kotlin.Any>
+public konst testConstructor: _<kotlin.Any>
+public konst testConstructor2: _<kotlin.Any>
 public fun _<kotlin.Any>.testTypeConstructor(): kotlin.Unit
 public fun _<kotlin.Any>.testTypeConstructor2(): kotlin.Unit
 

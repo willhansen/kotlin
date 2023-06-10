@@ -4,6 +4,6 @@ interface T {
 }
 
 class C : T {
-    <!ACCIDENTAL_OVERRIDE!>val x: Int<!>
+    <!ACCIDENTAL_OVERRIDE!>konst x: Int<!>
         get() = 1
 }

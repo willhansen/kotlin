@@ -7,9 +7,9 @@ package org.jetbrains.kotlin.backend.konan
 
 import org.jetbrains.kotlin.builtins.konan.KonanBuiltIns
 
-internal class DescriptorsLookup(val builtIns: KonanBuiltIns) {
+internal class DescriptorsLookup(konst builtIns: KonanBuiltIns) {
 
-    val interopBuiltIns by lazy {
+    konst interopBuiltIns by lazy {
         InteropBuiltIns(this.builtIns)
     }
 }

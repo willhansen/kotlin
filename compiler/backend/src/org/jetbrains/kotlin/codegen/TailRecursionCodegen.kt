@@ -32,25 +32,25 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 import org.jetbrains.kotlin.resolve.BindingContext.TAIL_RECURSION_CALL
 
 class TailRecursionCodegen(
-    private val context: MethodContext,
-    private val codegen: ExpressionCodegen,
-    private val v: InstructionAdapter,
-    private val state: GenerationState
+    private konst context: MethodContext,
+    private konst codegen: ExpressionCodegen,
+    private konst v: InstructionAdapter,
+    private konst state: GenerationState
 ) {
 
     fun isTailRecursion(resolvedCall: ResolvedCall<*>): Boolean {
-        val status = state.bindingContext.get(TAIL_RECURSION_CALL, resolvedCall.call)
+        konst status = state.bindingContext.get(TAIL_RECURSION_CALL, resolvedCall.call)
         return status != null && status.isDoGenerateTailRecursion
     }
 
     fun generateTailRecursion(resolvedCall: ResolvedCall<*>) {
-        val fd = resolvedCall.resultingDescriptor.unwrapInitialDescriptorForSuspendFunction().let {
+        konst fd = resolvedCall.resultingDescriptor.unwrapInitialDescriptorForSuspendFunction().let {
             it as? FunctionDescriptor
                 ?: error("Resolved call doesn't refer to the function descriptor: $it")
         }
-        val callable = codegen.resolveToCallable(fd, false, resolvedCall) as CallableMethod
+        konst callable = codegen.resolveToCallable(fd, false, resolvedCall) as CallableMethod
 
-        val arguments = resolvedCall.valueArgumentsByIndex ?: throw IllegalStateException("Failed to arrange value arguments by index: $fd")
+        konst arguments = resolvedCall.konstueArgumentsByIndex ?: throw IllegalStateException("Failed to arrange konstue arguments by index: $fd")
 
         if (fd.isSuspend) {
             AsmUtil.pop(v, callable.getValueParameters().last().asmType)
@@ -58,8 +58,8 @@ class TailRecursionCodegen(
 
         assignParameterValues(fd, callable, arguments)
         if (callable.extensionReceiverType != null) {
-            if (resolvedCall.extensionReceiver != fd.extensionReceiverParameter!!.value) {
-                val expression = context.getReceiverExpression(codegen.typeMapper)
+            if (resolvedCall.extensionReceiver != fd.extensionReceiverParameter!!.konstue) {
+                konst expression = context.getReceiverExpression(codegen.typeMapper)
                 expression.store(StackValue.onStack(callable.extensionReceiverType), v, true)
             } else {
                 AsmUtil.pop(v, callable.extensionReceiverType)
@@ -76,22 +76,22 @@ class TailRecursionCodegen(
     private fun assignParameterValues(
         fd: CallableDescriptor,
         callableMethod: CallableMethod,
-        valueArguments: List<ResolvedValueArgument>
+        konstueArguments: List<ResolvedValueArgument>
     ) {
-        val properDefaultInitialization =
+        konst properDefaultInitialization =
             state.languageVersionSettings.supportsFeature(LanguageFeature.ProperComputationOrderOfTailrecDefaultParameters)
 
-        val types = callableMethod.valueParameterTypes
-        loop@ for (parameterDescriptor in fd.valueParameters.asReversed()) {
-            val arg = valueArguments[parameterDescriptor.index]
-            val type = types[parameterDescriptor.index]
+        konst types = callableMethod.konstueParameterTypes
+        loop@ for (parameterDescriptor in fd.konstueParameters.asReversed()) {
+            konst arg = konstueArguments[parameterDescriptor.index]
+            konst type = types[parameterDescriptor.index]
 
             when (arg) {
                 is ExpressionValueArgument -> {
-                    val argumentExpression = arg.valueArgument?.getArgumentExpression()
+                    konst argumentExpression = arg.konstueArgument?.getArgumentExpression()
 
                     if (argumentExpression is KtSimpleNameExpression) {
-                        val resolvedCall = argumentExpression.getResolvedCall(state.bindingContext)
+                        konst resolvedCall = argumentExpression.getResolvedCall(state.bindingContext)
                         if (resolvedCall?.resultingDescriptor == parameterDescriptor.original) {
                             // do nothing: we shouldn't store argument to itself again
                             AsmUtil.pop(v, type)
@@ -119,9 +119,9 @@ class TailRecursionCodegen(
         }
 
         if (properDefaultInitialization) {
-            for (parameterDescriptor in fd.valueParameters) {
-                val arg = valueArguments[parameterDescriptor.index]
-                val type = types[parameterDescriptor.index]
+            for (parameterDescriptor in fd.konstueParameters) {
+                konst arg = konstueArguments[parameterDescriptor.index]
+                konst type = types[parameterDescriptor.index]
 
                 if (arg is DefaultValueArgument) {
                     DefaultParameterValueLoader.DEFAULT.genValue(parameterDescriptor, codegen).put(type, v)
@@ -132,7 +132,7 @@ class TailRecursionCodegen(
     }
 
     private fun store(parameterDescriptor: ValueParameterDescriptor, type: Type) {
-        val index = getParameterVariableIndex(parameterDescriptor)
+        konst index = getParameterVariableIndex(parameterDescriptor)
         v.store(index, type)
     }
 

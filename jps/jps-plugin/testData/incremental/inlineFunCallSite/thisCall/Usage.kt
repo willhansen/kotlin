@@ -1,5 +1,5 @@
 package usage
 
-class Usage(val x: Int) {
+class Usage(konst x: Int) {
     constructor() : this(inline.f())
 }

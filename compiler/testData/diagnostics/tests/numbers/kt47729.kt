@@ -1,14 +1,14 @@
 // FIR_IDENTICAL
 // ISSUE: Kt-47447, KT-47729
 
-fun takeLong(value : Long) {}
-fun takeInt(value : Int) {}
-fun takeAny(value : Any) {}
-fun takeLongX(value : Long?) {}
-fun takeIntX(value : Int?) {}
-fun takeAnyX(value : Any?) {}
-fun <A> takeGeneric(value : A) {}
-fun <A> takeGenericX(value : A?) {}
+fun takeLong(konstue : Long) {}
+fun takeInt(konstue : Int) {}
+fun takeAny(konstue : Any) {}
+fun takeLongX(konstue : Long?) {}
+fun takeIntX(konstue : Int?) {}
+fun takeAnyX(konstue : Any?) {}
+fun <A> takeGeneric(konstue : A) {}
+fun <A> takeGenericX(konstue : A?) {}
 
 fun test_1() {
     takeLong(1 + 1) // ok

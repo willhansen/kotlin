@@ -20,8 +20,8 @@ class MyProperty1<R, T> {
         throw Exception()
     }
 
-    operator fun setValue(thisRef: R, desc: KProperty<*>, value: T) {
-        println("set $thisRef ${desc.name} $value")
+    operator fun setValue(thisRef: R, desc: KProperty<*>, konstue: T) {
+        println("set $thisRef ${desc.name} $konstue")
     }
 }
 
@@ -44,8 +44,8 @@ class MyProperty2<T> {
         throw Exception()
     }
 
-    operator fun setValue(thisRef: Any?, desc: KProperty<*>, value: T) {
-        println("set $thisRef ${desc.name} $value")
+    operator fun setValue(thisRef: Any?, desc: KProperty<*>, konstue: T) {
+        println("set $thisRef ${desc.name} $konstue")
     }
 }
 
@@ -68,8 +68,8 @@ class MyProperty3<T> {
         return ""
     }
 
-    operator fun setValue(thisRef: Any?, desc: KProperty<*>, value: T) {
-        println("set $thisRef ${desc.name} $value")
+    operator fun setValue(thisRef: Any?, desc: KProperty<*>, konstue: T) {
+        println("set $thisRef ${desc.name} $konstue")
     }
 }
 

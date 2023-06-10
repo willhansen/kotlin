@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.ir.declarations.lazy
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 
 interface IrMaybeDeserializedClass : IrDeclaration {
-    val moduleName: String?
+    konst moduleName: String?
 
-    val isNewPlaceForBodyGeneration: Boolean
+    konst isNewPlaceForBodyGeneration: Boolean
 }

@@ -14,13 +14,13 @@ import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-val MeanVariance.description: String
+konst MeanVariance.description: String
     get() {
-        val format = { number: Double -> number.format(2) }
+        konst format = { number: Double -> number.format(2) }
         return "${format(mean)} ± ${format(variance)}"
     }
 
-val MeanVarianceBenchmark.description: String
+konst MeanVarianceBenchmark.description: String
     get() = "${score.format()} ± ${variance.format()}"
 
 // Calculate difference in percentage compare to another.
@@ -32,26 +32,26 @@ fun MeanVarianceBenchmark.calcPercentageDiff(other: MeanVarianceBenchmark): Mean
             (other.score - other.variance != 0.0 || other.score == 0.0),
             { "Mean and variance should be positive and not equal!" })
 
-    // Analyze intervals. Calculate difference between border points.
-    val (bigValue, smallValue) = if (score > other.score) Pair(this, other) else Pair(other, this)
-    val bigValueIntervalStart = bigValue.score - bigValue.variance
-    val bigValueIntervalEnd = bigValue.score + bigValue.variance
-    val smallValueIntervalStart = smallValue.score - smallValue.variance
-    val smallValueIntervalEnd = smallValue.score + smallValue.variance
-    if (smallValueIntervalEnd > bigValueIntervalStart) {
-        // Interval intersect.
+    // Analyze interkonsts. Calculate difference between border points.
+    konst (bigValue, smallValue) = if (score > other.score) Pair(this, other) else Pair(other, this)
+    konst bigValueInterkonstStart = bigValue.score - bigValue.variance
+    konst bigValueInterkonstEnd = bigValue.score + bigValue.variance
+    konst smallValueInterkonstStart = smallValue.score - smallValue.variance
+    konst smallValueInterkonstEnd = smallValue.score + smallValue.variance
+    if (smallValueInterkonstEnd > bigValueInterkonstStart) {
+        // Interkonst intersect.
         return MeanVariance(0.0, 0.0)
     }
-    val mean = ((smallValueIntervalEnd - bigValueIntervalStart) / bigValueIntervalStart) *
+    konst mean = ((smallValueInterkonstEnd - bigValueInterkonstStart) / bigValueInterkonstStart) *
             (if (score > other.score) -1 else 1)
 
-    val maxValueChange = ((bigValueIntervalEnd - smallValueIntervalEnd) / bigValueIntervalEnd)
-    val minValueChange = ((bigValueIntervalStart - smallValueIntervalStart) / bigValueIntervalStart)
-    val variance = abs(abs(mean) - max(minValueChange, maxValueChange))
+    konst maxValueChange = ((bigValueInterkonstEnd - smallValueInterkonstEnd) / bigValueInterkonstEnd)
+    konst minValueChange = ((bigValueInterkonstStart - smallValueInterkonstStart) / bigValueInterkonstStart)
+    konst variance = abs(abs(mean) - max(minValueChange, maxValueChange))
     return MeanVariance(mean * 100, variance * 100)
 }
 
-// Calculate ratio value compare to another.
+// Calculate ratio konstue compare to another.
 fun MeanVarianceBenchmark.calcRatio(other: MeanVarianceBenchmark): MeanVariance {
     if (other.score == 0.0 && other.variance == 0.0)
         return MeanVariance(1.0, 0.0)
@@ -59,15 +59,15 @@ fun MeanVarianceBenchmark.calcRatio(other: MeanVarianceBenchmark): MeanVariance 
             other.variance >= 0 &&
             (other.score - other.variance != 0.0 || other.score == 0.0),
             { "Mean and variance should be positive and not equal!" })
-    val mean = if (other.score != 0.0) (score / other.score) else 0.0
-    val minRatio = (score - variance) / (other.score + other.variance)
-    val maxRatio = (score + variance) / (other.score - other.variance)
-    val ratioConfInt = min(abs(minRatio - mean), abs(maxRatio - mean))
+    konst mean = if (other.score != 0.0) (score / other.score) else 0.0
+    konst minRatio = (score - variance) / (other.score + other.variance)
+    konst maxRatio = (score + variance) / (other.score - other.variance)
+    konst ratioConfInt = min(abs(minRatio - mean), abs(maxRatio - mean))
     return MeanVariance(mean, ratioConfInt)
 }
 
-fun geometricMean(values: Collection<Double>, totalNumber: Int = values.size) =
-        with(values.asSequence().filter { it != 0.0 }) {
+fun geometricMean(konstues: Collection<Double>, totalNumber: Int = konstues.size) =
+        with(konstues.asSequence().filter { it != 0.0 }) {
             if (count() == 0 || totalNumber == 0) {
                 0.0
             } else {
@@ -76,28 +76,28 @@ fun geometricMean(values: Collection<Double>, totalNumber: Int = values.size) =
         }
 
 fun computeMeanVariance(samples: List<Double>): MeanVariance {
-    val removedBroadSamples = 0.2
-    val zStar = 1.67    // Critical point for 90% confidence of normal distribution.
-    // Skip several minimal and maximum values.
-    val filteredSamples = if (samples.size >= 1/removedBroadSamples) {
+    konst removedBroadSamples = 0.2
+    konst zStar = 1.67    // Critical point for 90% confidence of normal distribution.
+    // Skip several minimal and maximum konstues.
+    konst filteredSamples = if (samples.size >= 1/removedBroadSamples) {
          samples.sorted().subList((samples.size * removedBroadSamples).toInt(),
                 samples.size - (samples.size * removedBroadSamples).toInt())
     } else {
         samples
     }
 
-    val mean = filteredSamples.sum() / filteredSamples.size
-    val variance = samples.indices.sumOf {
+    konst mean = filteredSamples.sum() / filteredSamples.size
+    konst variance = samples.indices.sumOf {
         (samples[it] - mean) * (samples[it] - mean)
     } / samples.size
-    val confidenceInterval = sqrt(variance / samples.size) * zStar
-    return MeanVariance(mean, confidenceInterval)
+    konst confidenceInterkonst = sqrt(variance / samples.size) * zStar
+    return MeanVariance(mean, confidenceInterkonst)
 }
 
 // Calculate average results for benchmarks (each benchmark can be run several times).
 fun collectMeanResults(benchmarks: Map<String, List<BenchmarkResult>>): BenchmarksTable {
     return benchmarks.map { (name, resultsSet) ->
-        val repeatedSequence = IntArray(resultsSet.size)
+        konst repeatedSequence = IntArray(resultsSet.size)
         var metric = BenchmarkResult.Metric.EXECUTION_TIME
         var currentStatus = BenchmarkResult.Status.PASSED
         var currentWarmup = -1
@@ -107,7 +107,7 @@ fun collectMeanResults(benchmarks: Map<String, List<BenchmarkResult>>): Benchmar
             assert(resultsSet.size == 1) { "Several MeanVarianceBenchmark instances." }
             name to resultsSet[0] as MeanVarianceBenchmark
         } else {
-            // Collect common benchmark values and check them.
+            // Collect common benchmark konstues and check them.
             resultsSet.forEachIndexed { index, result ->
                 // If there was at least one failure, summary is marked as failure.
                 if (result.status == BenchmarkResult.Status.FAILED) {
@@ -116,7 +116,7 @@ fun collectMeanResults(benchmarks: Map<String, List<BenchmarkResult>>): Benchmar
                 repeatedSequence[index] = result.repeat
                 if (currentWarmup != -1)
                     if (result.warmup != currentWarmup)
-                        println("Check data consistency. Warmup value for benchmark '${result.name}' differs.")
+                        println("Check data consistency. Warmup konstue for benchmark '${result.name}' differs.")
                 currentWarmup = result.warmup
                 metric = result.metric
             }
@@ -131,9 +131,9 @@ fun collectMeanResults(benchmarks: Map<String, List<BenchmarkResult>>): Benchmar
             }
 
             // Create mean and variance benchmarks result.
-            val scoreMeanVariance = computeMeanVariance(resultsSet.map { it.score })
-            val runtimeInUsMeanVariance = computeMeanVariance(resultsSet.map { it.runtimeInUs })
-            val meanBenchmark = MeanVarianceBenchmark(name, currentStatus, scoreMeanVariance.mean, metric,
+            konst scoreMeanVariance = computeMeanVariance(resultsSet.map { it.score })
+            konst runtimeInUsMeanVariance = computeMeanVariance(resultsSet.map { it.runtimeInUs })
+            konst meanBenchmark = MeanVarianceBenchmark(name, currentStatus, scoreMeanVariance.mean, metric,
                     runtimeInUsMeanVariance.mean, repeatedSequence[resultsSet.size - 1],
                     currentWarmup, scoreMeanVariance.variance)
             name to meanBenchmark

@@ -4,18 +4,18 @@
 package foo
 
 interface A {
-    val b: B
+    konst b: B
 }
 
 interface B {
     fun c(a: Any?)
 }
 
-val a: A
+konst a: A
     get() {
         log("a.get")
         return object : A {
-            override val b: B
+            override konst b: B
                 get() {
                     log("b.get")
                     return object : B {
@@ -27,7 +27,7 @@ val a: A
         }
     }
 
-val g: Any?
+konst g: Any?
     get() {
         log("g.get")
         return "c"

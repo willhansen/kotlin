@@ -13,5 +13,5 @@ class B extends A {
 // FILE: main.kt
 
 fun main() {
-    val b = B.VALUE // <- should be B
+    konst b = B.VALUE // <- should be B
 }

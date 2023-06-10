@@ -8,7 +8,7 @@
 class B {
     companion object
 
-    val c: Int = 1
+    konst c: Int = 1
 }
 
 class C {
@@ -53,4 +53,4 @@ class J {
     <!WRONG_MODIFIER_TARGET!>companion<!> get
     <!WRONG_MODIFIER_TARGET!>companion<!> set
 
-class Z(<!WRONG_MODIFIER_TARGET!>companion<!> val c: Int)
+class Z(<!WRONG_MODIFIER_TARGET!>companion<!> konst c: Int)

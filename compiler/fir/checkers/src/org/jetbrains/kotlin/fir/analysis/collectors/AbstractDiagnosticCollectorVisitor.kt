@@ -69,7 +69,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
     }
 
     private fun visitClassAndChildren(klass: FirClass, type: ConeClassLikeType) {
-        val receiverParameter = buildReceiverParameter {
+        konst receiverParameter = buildReceiverParameter {
             typeRef = buildResolvedTypeRef {
                 this.type = type
             }
@@ -112,7 +112,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
 
     override fun visitAnonymousFunction(anonymousFunction: FirAnonymousFunction, data: Nothing?) {
         withAnnotationContainer(anonymousFunction) {
-            val labelName = anonymousFunction.label?.name?.let { Name.identifier(it) }
+            konst labelName = anonymousFunction.label?.name?.let { Name.identifier(it) }
             visitWithDeclarationAndReceiver(
                 anonymousFunction,
                 labelName,
@@ -134,7 +134,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
     }
 
     override fun visitPropertyAccessor(propertyAccessor: FirPropertyAccessor, data: Nothing?) {
-        val property = context.containingDeclarations.last() as FirProperty
+        konst property = context.containingDeclarations.last() as FirProperty
         withAnnotationContainer(propertyAccessor) {
             visitWithDeclarationAndReceiver(propertyAccessor, property.name, property.receiverParameter)
         }
@@ -146,9 +146,9 @@ abstract class AbstractDiagnosticCollectorVisitor(
         }
     }
 
-    override fun visitValueParameter(valueParameter: FirValueParameter, data: Nothing?) {
-        withAnnotationContainer(valueParameter) {
-            visitWithDeclaration(valueParameter)
+    override fun visitValueParameter(konstueParameter: FirValueParameter, data: Nothing?) {
+        withAnnotationContainer(konstueParameter) {
+            visitWithDeclaration(konstueParameter)
         }
     }
 
@@ -197,7 +197,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
         // Assuming no errors, the children of FirResolvedTypeRef (currently this can be FirAnnotationCalls) will also be present
         // as children in delegatedTypeRef. We should make sure those children are only visited once, otherwise diagnostics will be
         // collected twice: once through resolvedTypeRef's children and another through resolvedTypeRef.delegatedTypeRef's children.
-        val resolvedTypeRefType = resolvedTypeRef.type
+        konst resolvedTypeRefType = resolvedTypeRef.type
         if (resolvedTypeRefType is ConeErrorType) {
             visitTypeRef(resolvedTypeRef, data)
         }
@@ -287,7 +287,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
 
     @OptIn(PrivateForInline::class)
     inline fun <R> withQualifiedAccessOrAnnotationCall(qualifiedAccessOrAnnotationCall: FirStatement, block: () -> R): R {
-        val existingContext = context
+        konst existingContext = context
         context = context.addQualifiedAccessOrAnnotationCall(qualifiedAccessOrAnnotationCall)
         try {
             return whileAnalysing(context.session, qualifiedAccessOrAnnotationCall) {
@@ -302,7 +302,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
 
     @OptIn(PrivateForInline::class)
     inline fun <R> withGetClassCall(getClassCall: FirGetClassCall, block: () -> R): R {
-        val existingContext = context
+        konst existingContext = context
         context = context.addGetClassCall(getClassCall)
         try {
             return whileAnalysing(context.session, getClassCall) {
@@ -317,7 +317,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
 
     @OptIn(PrivateForInline::class)
     inline fun <R> withDeclaration(declaration: FirDeclaration, block: () -> R): R {
-        val existingContext = context
+        konst existingContext = context
         context = context.addDeclaration(declaration)
         try {
             return whileAnalysing(context.session, declaration) {
@@ -331,7 +331,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
 
     @OptIn(PrivateForInline::class)
     inline fun <R> withFile(file: FirFile, block: () -> R): R {
-        val existingContext = context
+        konst existingContext = context
         context = context.enterFile(file)
         try {
             return block()
@@ -342,7 +342,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
     }
     @OptIn(PrivateForInline::class)
     inline fun <T> withElement(element: FirElement, block: () -> T): T {
-        val existingContext = context
+        konst existingContext = context
         context = context.addElement(element)
         return try {
             whileAnalysing(context.session, element) {
@@ -361,10 +361,10 @@ abstract class AbstractDiagnosticCollectorVisitor(
         type: ConeKotlinType?,
         block: () -> R
     ): R {
-        val (implicitReceiverValue, implicitCompanionValues) = context.sessionHolder.collectImplicitReceivers(type, owner)
-        val existingContext = context
-        implicitCompanionValues.forEach { value ->
-            context = context.addImplicitReceiver(null, value)
+        konst (implicitReceiverValue, implicitCompanionValues) = context.sessionHolder.collectImplicitReceivers(type, owner)
+        konst existingContext = context
+        implicitCompanionValues.forEach { konstue ->
+            context = context.addImplicitReceiver(null, konstue)
         }
         implicitReceiverValue?.let {
             context = context.addImplicitReceiver(labelName, it)
@@ -380,9 +380,9 @@ abstract class AbstractDiagnosticCollectorVisitor(
     @OptIn(PrivateForInline::class)
     inline fun <R> withAnnotationContainer(annotationContainer: FirAnnotationContainer, block: () -> R): R {
         return withElement(annotationContainer) {
-            val existingContext = context
+            konst existingContext = context
             addSuppressedDiagnosticsToContext(annotationContainer)
-            val notEmptyAnnotations = annotationContainer.annotations.isNotEmpty()
+            konst notEmptyAnnotations = annotationContainer.annotations.isNotEmpty()
             if (notEmptyAnnotations) {
                 context = context.addAnnotationContainer(annotationContainer)
             }
@@ -421,7 +421,7 @@ abstract class AbstractDiagnosticCollectorVisitor(
 
     @OptIn(PrivateForInline::class)
     fun addSuppressedDiagnosticsToContext(annotationContainer: FirAnnotationContainer) {
-        val arguments = AbstractDiagnosticCollector.getDiagnosticsSuppressedForContainer(annotationContainer) ?: return
+        konst arguments = AbstractDiagnosticCollector.getDiagnosticsSuppressedForContainer(annotationContainer) ?: return
         context = context.addSuppressedDiagnostics(
             arguments,
             allInfosSuppressed = AbstractDiagnosticCollector.SUPPRESS_ALL_INFOS in arguments,

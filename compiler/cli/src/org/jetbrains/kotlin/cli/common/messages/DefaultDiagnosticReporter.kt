@@ -23,10 +23,10 @@ import org.jetbrains.kotlin.diagnostics.DiagnosticUtils
 /**
  * This class behaviour is the same as [MessageCollector.report] in [AnalyzerWithCompilerReport.reportDiagnostic].
  */
-class DefaultDiagnosticReporter(override val messageCollector: MessageCollector) : MessageCollectorBasedReporter
+class DefaultDiagnosticReporter(override konst messageCollector: MessageCollector) : MessageCollectorBasedReporter
 
 interface MessageCollectorBasedReporter : DiagnosticMessageReporter {
-    val messageCollector: MessageCollector
+    konst messageCollector: MessageCollector
 
     override fun report(diagnostic: Diagnostic, file: PsiFile, render: String) = messageCollector.report(
         AnalyzerWithCompilerReport.convertSeverity(diagnostic.severity),

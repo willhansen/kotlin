@@ -1,8 +1,8 @@
 // !LANGUAGE: +JvmStaticInInterface
 // !DIAGNOSTICS: -UNUSED_VARIABLE
 open class B {
-    public open val base1 : Int = 1
-    public open val base2 : Int = 1
+    public open konst base1 : Int = 1
+    public open konst base2 : Int = 1
 }
 
 class A {
@@ -12,11 +12,11 @@ class A {
                 p1 = 1
             }
 
-        @JvmStatic val z = 1;
+        @JvmStatic konst z = 1;
 
-        @JvmStatic override val base1: Int = 0
+        @JvmStatic override konst base1: Int = 0
 
-        override val base2: Int = 0
+        override konst base2: Int = 0
             @JvmStatic get
     }
 
@@ -26,13 +26,13 @@ class A {
                 p = 1
             }
 
-        @JvmStatic val z = 1;
+        @JvmStatic konst z = 1;
 
-        <!OVERRIDE_CANNOT_BE_STATIC!>@JvmStatic override val base1: Int = 0<!>
+        <!OVERRIDE_CANNOT_BE_STATIC!>@JvmStatic override konst base1: Int = 0<!>
 
         @JvmStatic <!NON_FINAL_MEMBER_IN_OBJECT!>open<!> fun f() {}
 
-        override val base2: Int = 0
+        override konst base2: Int = 0
             <!OVERRIDE_CANNOT_BE_STATIC!>@JvmStatic get<!>
     }
 
@@ -41,5 +41,5 @@ class A {
             p = 1
         }
 
-    <!JVM_STATIC_NOT_IN_OBJECT_OR_COMPANION!>@JvmStatic val z2<!> = 1;
+    <!JVM_STATIC_NOT_IN_OBJECT_OR_COMPANION!>@JvmStatic konst z2<!> = 1;
 }

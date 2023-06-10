@@ -3,7 +3,7 @@
 // FILE: 1.kt
 package test
 
-inline val <reified T: Any> T.value: String
+inline konst <reified T: Any> T.konstue: String
     get() = T::class.simpleName!!
 
 // FILE: 2.kt
@@ -12,5 +12,5 @@ import test.*
 class OK
 
 fun box(): String {
-    return OK().value ?: "fail"
+    return OK().konstue ?: "fail"
 }

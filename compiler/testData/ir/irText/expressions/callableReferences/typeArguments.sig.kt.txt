@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Function1<Int, Unit>
+konst test1: Function1<Int, Unit>
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Function1<kotlin.Int,kotlin.Unit>
   //   Public signature: /test1.<get-test1>|-2250341495239737904[0]
@@ -13,7 +13,7 @@ val test1: Function1<Int, Unit>
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: Function1<List<String>, Unit>
+konst test2: Function1<List<String>, Unit>
   // CHECK JVM_IR:
   //   Mangled name: #<get-test2>(){}kotlin.Function1<kotlin.collections.List<kotlin.String>,kotlin.Unit>
   //   Public signature: /test2.<get-test2>|1660110416035319894[0]
@@ -25,7 +25,7 @@ val test2: Function1<List<String>, Unit>
 // CHECK:
 //   Mangled name: {}test3
 //   Public signature: /test3|7677556066983021166[0]
-val test3: Function1<Int, Unit>
+konst test3: Function1<Int, Unit>
   // CHECK JVM_IR:
   //   Mangled name: #<get-test3>(){}kotlin.Function1<kotlin.Int,kotlin.Unit>
   //   Public signature: /test3.<get-test3>|6318789892361697174[0]

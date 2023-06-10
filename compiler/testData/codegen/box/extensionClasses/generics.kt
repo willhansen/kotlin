@@ -3,7 +3,7 @@
 // FIR status: context receivers aren't yet supported
 
 context(T) class B<T : CharSequence> {
-    val result = if (length == 2) "OK" else "fail"
+    konst result = if (length == 2) "OK" else "fail"
 }
 
 fun box() = with("OK") {

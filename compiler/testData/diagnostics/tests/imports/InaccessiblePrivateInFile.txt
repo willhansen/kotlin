@@ -31,7 +31,7 @@ package impl {
 
     private final data class ApplicabilityResult {
         public constructor ApplicabilityResult(/*0*/ applicable: kotlin.Boolean)
-        public final val applicable: kotlin.Boolean
+        public final konst applicable: kotlin.Boolean
         public final operator /*synthesized*/ fun component1(): kotlin.Boolean
         public final /*synthesized*/ fun copy(/*0*/ applicable: kotlin.Boolean = ...): impl.ApplicabilityResult
         public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

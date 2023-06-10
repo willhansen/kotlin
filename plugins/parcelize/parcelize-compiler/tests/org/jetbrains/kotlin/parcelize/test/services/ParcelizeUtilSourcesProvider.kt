@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.services.TestServices
 import java.io.File
 
 class ParcelizeUtilSourcesProvider(testServices: TestServices, baseDir: String = ".") : AdditionalSourceProvider(testServices) {
-    private val libraryPath = "$baseDir/plugins/parcelize/parcelize-compiler/testData/boxLib.kt"
+    private konst libraryPath = "$baseDir/plugins/parcelize/parcelize-compiler/testData/boxLib.kt"
 
     @OptIn(ExperimentalStdlibApi::class)
     override fun produceAdditionalFiles(globalDirectives: RegisteredDirectives, module: TestModule): List<TestFile> {

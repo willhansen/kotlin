@@ -1,6 +1,6 @@
 
 class A {
-    val p : Int = try{
+    konst p : Int = try{
         1
     } catch(e: Exception) {
         throw RuntimeException()

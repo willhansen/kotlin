@@ -8,19 +8,19 @@ public interface PropertyDescriptor extends DescriptorWithAccessor {
 // FILE: test.kt
 
 interface DescriptorWithAccessor {
-    val setter: String
-    val isDelegated: Boolean
+    konst setter: String
+    konst isDelegated: Boolean
 }
 
 class WrappedPropertyDescriptor : PropertyDescriptor {
-    override val setter: String get() = "K"
-    override val isDelegated: Boolean get() = false
+    override konst setter: String get() = "K"
+    override konst isDelegated: Boolean get() = false
 }
 
 fun test() {
-    val descriptor = WrappedPropertyDescriptor()
-    val res1 = descriptor.setter
-    val res2 = descriptor.<!UNRESOLVED_REFERENCE!>getSetter<!>() // Should be error
-    val res3 = descriptor.isDelegated
-    val res4 = descriptor.<!FUNCTION_EXPECTED!>isDelegated<!>() // Should be error
+    konst descriptor = WrappedPropertyDescriptor()
+    konst res1 = descriptor.setter
+    konst res2 = descriptor.<!UNRESOLVED_REFERENCE!>getSetter<!>() // Should be error
+    konst res3 = descriptor.isDelegated
+    konst res4 = descriptor.<!FUNCTION_EXPECTED!>isDelegated<!>() // Should be error
 }

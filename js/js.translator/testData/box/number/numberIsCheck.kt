@@ -28,7 +28,7 @@ fun testAny(anyX: Any) {
 }
 
 fun box(): String {
-    val intX = 100
+    konst intX = 100
 
     assertEquals(true, intX is Number, "intX is Number")
     assertEquals(true, intX is Int, "intX is Int")

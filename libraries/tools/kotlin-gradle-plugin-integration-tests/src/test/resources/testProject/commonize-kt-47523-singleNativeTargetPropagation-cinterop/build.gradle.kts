@@ -12,16 +12,16 @@ repositories {
 }
 
 kotlin {
-    val nativePlatform = when {
+    konst nativePlatform = when {
         isMac -> macosX64("nativePlatform")
         isLinux -> linuxX64("nativePlatform")
         isWindows -> mingwX64("nativePlatform")
         else -> throw IllegalStateException("Unsupported host")
     }
 
-    val commonMain by sourceSets.getting
-    val nativePlatformMain by sourceSets.getting
-    val nativeMain by sourceSets.creating
+    konst commonMain by sourceSets.getting
+    konst nativePlatformMain by sourceSets.getting
+    konst nativeMain by sourceSets.creating
 
     nativeMain.dependsOn(commonMain)
     nativePlatformMain.dependsOn(nativeMain)
@@ -34,8 +34,8 @@ kotlin {
 
 fun createListDependenciesTask(sourceSetName: String) {
     tasks.create("list${sourceSetName.capitalize()}Dependencies") {
-        val sourceSet = kotlin.sourceSets[sourceSetName] as DefaultKotlinSourceSet
-        val metadataConfiguration = project.configurations[sourceSet.intransitiveMetadataConfigurationName]
+        konst sourceSet = kotlin.sourceSets[sourceSetName] as DefaultKotlinSourceSet
+        konst metadataConfiguration = project.configurations[sourceSet.intransitiveMetadataConfigurationName]
         dependsOn(metadataConfiguration)
         dependsOn("cinteropDummyNativePlatform")
         doFirst {

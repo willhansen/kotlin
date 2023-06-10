@@ -20,4 +20,4 @@ public external interface Console {
 /**
  * Exposes the [console API](https://developer.mozilla.org/en/DOM/console) to Kotlin.
  */
-public external val console: Console
+public external konst console: Console

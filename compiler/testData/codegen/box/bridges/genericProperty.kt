@@ -9,7 +9,7 @@ interface C {
 class B : C, A<Int>()
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     if (b.size != 56) return "fail 1: ${b.size}"
 
     b.size = 55

@@ -20,10 +20,10 @@ fun foo1(foo: IFoo<Int>) = foo.foo(1)
 fun bar1(bar: IBar<Int>) = bar.bar(1)
 
 fun box(): String {
-    val t = foo1 { it + 41 }
+    konst t = foo1 { it + 41 }
     if (t != 42) return "Failed: t=$t"
 
-    val tt = bar1 { it + 41 }
+    konst tt = bar1 { it + 41 }
     if (tt != 42) return "Failed: tt=$tt"
 
     return "OK"

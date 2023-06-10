@@ -14,5 +14,5 @@ public interface KAnnotatedElement {
     /**
      * Annotations which are present on this element.
      */
-    public val annotations: List<Annotation>
+    public konst annotations: List<Annotation>
 }

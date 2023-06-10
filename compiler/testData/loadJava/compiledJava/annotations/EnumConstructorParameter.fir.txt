@@ -1,20 +1,20 @@
 public final enum class EnumConstructorParameter : R|kotlin/Enum<test/EnumConstructorParameter!>| {
     public final static enum entry INSTANCE: R|@EnhancedNullability test/EnumConstructorParameter|
-    private constructor(@R|test/EnumConstructorParameter.Anno|(value = String(string)) s: R|kotlin/String!|): R|test/EnumConstructorParameter|
+    private constructor(@R|test/EnumConstructorParameter.Anno|(konstue = String(string)) s: R|kotlin/String!|): R|test/EnumConstructorParameter|
 
     private constructor(x: R|kotlin/Int|): R|test/EnumConstructorParameter|
 
-    public final static fun values(): R|kotlin/Array<test/EnumConstructorParameter>| {
+    public final static fun konstues(): R|kotlin/Array<test/EnumConstructorParameter>| {
     }
 
-    public final static fun valueOf(value: R|kotlin/String|): R|test/EnumConstructorParameter| {
+    public final static fun konstueOf(konstue: R|kotlin/String|): R|test/EnumConstructorParameter| {
     }
 
-    public final static val entries: R|kotlin/enums/EnumEntries<test/EnumConstructorParameter>|
+    public final static konst entries: R|kotlin/enums/EnumEntries<test/EnumConstructorParameter>|
         public get(): R|kotlin/enums/EnumEntries<test/EnumConstructorParameter>|
 
     public final annotation class Anno : R|kotlin/Annotation| {
-        public constructor(value: R|kotlin/String|): R|test/EnumConstructorParameter.Anno|
+        public constructor(konstue: R|kotlin/String|): R|test/EnumConstructorParameter.Anno|
 
     }
 }

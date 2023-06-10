@@ -1,7 +1,7 @@
 package
 
-public val f: kotlin.reflect.KFunction1<A, kotlin.Unit>
-public val g: kotlin.reflect.KFunction1<A, kotlin.Unit>
+public konst f: kotlin.reflect.KFunction1<A, kotlin.Unit>
+public konst g: kotlin.reflect.KFunction1<A, kotlin.Unit>
 public fun A?.foo(): kotlin.Unit
 
 public final class A {

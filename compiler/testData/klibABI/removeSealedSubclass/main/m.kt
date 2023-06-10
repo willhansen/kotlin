@@ -1,8 +1,8 @@
 import abitestutils.abiTest
 
 fun box() = abiTest {
-    expectFailure(linkage("Type operator expression can not be evaluated: Expression uses unlinked class symbol '/SC1.Removed'")) { compute(SC1.O2) }
-    expectFailure(linkage("Type operator expression can not be evaluated: Expression uses unlinked class symbol '/SC1.Removed'")) { compute(SC1.C2()) }
+    expectFailure(linkage("Type operator expression can not be ekonstuated: Expression uses unlinked class symbol '/SC1.Removed'")) { compute(SC1.O2) }
+    expectFailure(linkage("Type operator expression can not be ekonstuated: Expression uses unlinked class symbol '/SC1.Removed'")) { compute(SC1.C2()) }
     expectFailure(linkage("Constructor 'Removed.<init>' can not be called: No constructor found for symbol '/SC1.Removed.<init>'")) { compute(SC1.Removed()) }
     expectSuccess { compute(SC1.O1) }
     expectSuccess { compute(SC1.C1()) }
@@ -13,9 +13,9 @@ fun box() = abiTest {
     expectSuccess { compute(SC2.O1) }
     expectSuccess { compute(SC2.C1()) }
 
-    expectFailure(linkage("Type operator expression can not be evaluated: Expression uses unlinked class symbol '/SI1.Removed'")) { compute(object : SI1.I2 {}) }
-    expectFailure(linkage("Type operator expression can not be evaluated: Expression uses unlinked class symbol '/SI1.Removed'")) { compute(SI1.O2) }
-    expectFailure(linkage("Type operator expression can not be evaluated: Expression uses unlinked class symbol '/SI1.Removed'")) { compute(SI1.C2()) }
+    expectFailure(linkage("Type operator expression can not be ekonstuated: Expression uses unlinked class symbol '/SI1.Removed'")) { compute(object : SI1.I2 {}) }
+    expectFailure(linkage("Type operator expression can not be ekonstuated: Expression uses unlinked class symbol '/SI1.Removed'")) { compute(SI1.O2) }
+    expectFailure(linkage("Type operator expression can not be ekonstuated: Expression uses unlinked class symbol '/SI1.Removed'")) { compute(SI1.C2()) }
     expectFailure(linkage("Constructor 'Removed.<init>' can not be called: No constructor found for symbol '/SI1.Removed.<init>'")) { compute(SI1.Removed()) }
     expectSuccess { compute(object : SI1.I1 {}) }
     expectSuccess { compute(SI1.O1) }
@@ -29,9 +29,9 @@ fun box() = abiTest {
     expectSuccess { compute(SI2.O1) }
     expectSuccess { compute(SI2.C1()) }
 
-    expectFailure(linkage("Type operator expression can not be evaluated: Expression uses unlinked class symbol '/SI3.Removed'")) { compute(object : SI3.I2 {}) }
-    expectFailure(linkage("Type operator expression can not be evaluated: Expression uses unlinked class symbol '/SI3.Removed'")) { compute(SI3.O2) }
-    expectFailure(linkage("Type operator expression can not be evaluated: Expression uses unlinked class symbol '/SI3.Removed'")) { compute(SI3.C2()) }
+    expectFailure(linkage("Type operator expression can not be ekonstuated: Expression uses unlinked class symbol '/SI3.Removed'")) { compute(object : SI3.I2 {}) }
+    expectFailure(linkage("Type operator expression can not be ekonstuated: Expression uses unlinked class symbol '/SI3.Removed'")) { compute(SI3.O2) }
+    expectFailure(linkage("Type operator expression can not be ekonstuated: Expression uses unlinked class symbol '/SI3.Removed'")) { compute(SI3.C2()) }
     expectFailure(linkage("Constructor '<init>' can not be called: Anonymous object uses unlinked class symbol '/SI3.Removed'")) { compute(object : SI3.Removed {}) }
     expectSuccess { compute(object : SI3.I1 {}) }
     expectSuccess { compute(SI3.O1) }

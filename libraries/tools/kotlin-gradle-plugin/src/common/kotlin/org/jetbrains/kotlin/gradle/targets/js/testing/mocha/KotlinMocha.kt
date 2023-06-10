@@ -21,18 +21,18 @@ import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinTestRunnerCliArgs
 
-class KotlinMocha(@Transient override val compilation: KotlinJsCompilation, private val basePath: String) :
+class KotlinMocha(@Transient override konst compilation: KotlinJsCompilation, private konst basePath: String) :
     KotlinJsTestFramework {
     @Transient
-    private val project: Project = compilation.target.project
-    private val npmProject = compilation.npmProject
-    private val versions = project.rootProject.kotlinNodeJsExtension.versions
-    private val isTeamCity = project.providers.gradleProperty(TCServiceMessagesTestExecutor.TC_PROJECT_PROPERTY)
+    private konst project: Project = compilation.target.project
+    private konst npmProject = compilation.npmProject
+    private konst versions = project.rootProject.kotlinNodeJsExtension.versions
+    private konst isTeamCity = project.providers.gradleProperty(TCServiceMessagesTestExecutor.TC_PROJECT_PROPERTY)
 
-    override val settingsState: String
+    override konst settingsState: String
         get() = "mocha"
 
-    override val requiredNpmDependencies: Set<RequiredKotlinJsDependency>
+    override konst requiredNpmDependencies: Set<RequiredKotlinJsDependency>
         get() = setOf(
             versions.mocha,
             versions.sourceMapSupport,
@@ -43,7 +43,7 @@ class KotlinMocha(@Transient override val compilation: KotlinJsCompilation, priv
     // https://mochajs.org/#-timeout-ms-t-ms
     var timeout: String = DEFAULT_TIMEOUT
 
-    private val platformType = compilation.platformType
+    private konst platformType = compilation.platformType
 
     override fun createTestExecutionSpec(
         task: KotlinJsTest,
@@ -51,7 +51,7 @@ class KotlinMocha(@Transient override val compilation: KotlinJsCompilation, priv
         nodeJsArgs: MutableList<String>,
         debug: Boolean
     ): TCServiceMessagesTestExecutionSpec {
-        val clientSettings = TCServiceMessagesClientSettings(
+        konst clientSettings = TCServiceMessagesClientSettings(
             task.name,
             testNameSuffix = task.targetName,
             prependSuiteName = true,
@@ -60,16 +60,16 @@ class KotlinMocha(@Transient override val compilation: KotlinJsCompilation, priv
             escapeTCMessagesInLog = isTeamCity.isPresent
         )
 
-        val cliArgs = KotlinTestRunnerCliArgs(
+        konst cliArgs = KotlinTestRunnerCliArgs(
             include = task.includePatterns,
             exclude = task.excludePatterns
         )
 
-        val mocha = npmProject.require("mocha/bin/mocha")
+        konst mocha = npmProject.require("mocha/bin/mocha")
 
-        val file = task.inputFileProperty.get().asFile.toString()
+        konst file = task.inputFileProperty.get().asFile.toString()
 
-        val args = nodeJsArgs + mutableListOf(
+        konst args = nodeJsArgs + mutableListOf(
             "--require",
             npmProject.require("source-map-support/register.js")
         ).apply {
@@ -91,7 +91,7 @@ class KotlinMocha(@Transient override val compilation: KotlinJsCompilation, priv
             }
         }
 
-        val dryRunArgs = if (platformType == KotlinPlatformType.wasm)
+        konst dryRunArgs = if (platformType == KotlinPlatformType.wasm)
             null
         else {
             nodeJsArgs + mutableListOf(
@@ -114,14 +114,14 @@ class KotlinMocha(@Transient override val compilation: KotlinJsCompilation, priv
         )
     }
 
-    private fun cliArg(cli: String, value: String?): List<String> {
-        return value?.let { listOf(cli, it) } ?: emptyList()
+    private fun cliArg(cli: String, konstue: String?): List<String> {
+        return konstue?.let { listOf(cli, it) } ?: emptyList()
     }
 
     companion object {
-        private const val DEFAULT_TIMEOUT = "2s"
+        private const konst DEFAULT_TIMEOUT = "2s"
     }
 }
 
-private const val TIMEOUT_ARG = "--timeout"
-private const val NO_TIMEOUT_ARG = "--no-timeout"
+private const konst TIMEOUT_ARG = "--timeout"
+private const konst NO_TIMEOUT_ARG = "--no-timeout"

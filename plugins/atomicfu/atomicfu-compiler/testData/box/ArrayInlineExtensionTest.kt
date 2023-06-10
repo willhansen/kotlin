@@ -2,42 +2,42 @@ import kotlinx.atomicfu.*
 import kotlin.test.*
 
 class ArrayInlineExtensionTest {
-    val intArr = AtomicIntArray(10)
-    val a = atomic(100)
-    val longArr = AtomicLongArray(10)
-    val refArr = atomicArrayOfNulls<Any?>(5)
+    konst intArr = AtomicIntArray(10)
+    konst a = atomic(100)
+    konst longArr = AtomicLongArray(10)
+    konst refArr = atomicArrayOfNulls<Any?>(5)
 
-    class A(val s: String)
+    class A(konst s: String)
 
     private inline fun casLoop(to: Int): Int {
         intArr[0].loop { cur ->
-            if (intArr[0].compareAndSet(cur, to)) return intArr[0].value
+            if (intArr[0].compareAndSet(cur, to)) return intArr[0].konstue
             return 777
         }
     }
 
     private inline fun casLoopExpression(to: Long): Long = longArr[3].loop { cur ->
-        if (longArr[3].compareAndSet(cur, to)) return longArr[3].value
+        if (longArr[3].compareAndSet(cur, to)) return longArr[3].konstue
         return 777
     }
 
     private inline fun AtomicInt.extensionLoop(to: Int): Int {
         loop { cur ->
-            if (compareAndSet(cur, to)) return value
+            if (compareAndSet(cur, to)) return konstue
             return 777
         }
     }
 
     private inline fun AtomicInt.extensionLoopExpression(to: Int): Int = loop { cur ->
         lazySet(cur + 10)
-        return if (compareAndSet(cur, to)) value else incrementAndGet()
+        return if (compareAndSet(cur, to)) konstue else incrementAndGet()
     }
 
     private inline fun AtomicInt.extensionLoopMixedReceivers(first: Int, second: Int, index: Int): Int {
         loop { cur ->
             compareAndSet(cur, first)
             intArr[index].compareAndSet(first, second)
-            return value
+            return konstue
         }
     }
 
@@ -45,19 +45,19 @@ class ArrayInlineExtensionTest {
         loop { cur ->
             compareAndSet(cur, to)
             a.extensionLoop(5)
-            return value
+            return konstue
         }
     }
 
     private inline fun AtomicInt.foo(to: Int): Int {
         loop { cur ->
             if (compareAndSet(cur, to)) return 777
-            else return value
+            else return konstue
         }
     }
 
     private inline fun AtomicInt.bar(delta: Int): Int {
-        return foo(value + delta)
+        return foo(konstue + delta)
     }
 
     fun testIntExtensionLoops() {
@@ -73,7 +73,7 @@ class ArrayInlineExtensionTest {
 }
 
 fun box(): String {
-    val testClass = ArrayInlineExtensionTest()
+    konst testClass = ArrayInlineExtensionTest()
     testClass.testIntExtensionLoops()
     return "OK"
 }

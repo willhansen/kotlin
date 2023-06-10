@@ -7,9 +7,9 @@ import kotlinx.serialization.json.*
 
 // From #1264
 @Serializable
-sealed class TypedSealedClass<T>(val a: T) {
+sealed class TypedSealedClass<T>(konst a: T) {
     @Serializable
-    class Child(val y: Int) : TypedSealedClass<String>("10") {
+    class Child(konst y: Int) : TypedSealedClass<String>("10") {
         override fun toString(): String = "Child($a, $y)"
     }
 }
@@ -17,30 +17,30 @@ sealed class TypedSealedClass<T>(val a: T) {
 // From #KT-43910
 @Serializable
 open class ValidatableValue<T : Any, V: Any>(
-    var value: T? = null,
+    var konstue: T? = null,
     var error: V? = null,
 )
 
 @Serializable
 class Email<T: Any> : ValidatableValue<String, T>() { // Note this is a different T
     override fun toString(): String {
-        return "Email($value, $error)"
+        return "Email($konstue, $error)"
     }
 }
 
 fun box(): String {
-    val encodedChild = """{"a":"11","y":42}"""
-    val decodedChild = Json.decodeFromString<TypedSealedClass.Child>(encodedChild)
+    konst encodedChild = """{"a":"11","y":42}"""
+    konst decodedChild = Json.decodeFromString<TypedSealedClass.Child>(encodedChild)
     if (decodedChild.toString() != "Child(11, 42)") return "DecodedChild: $decodedChild"
     Json.encodeToString(decodedChild)?.let { if (it != encodedChild) return "EncodedChild: $it" }
 
-    val email = Email<Int>().apply {
-        value = "foo"
+    konst email = Email<Int>().apply {
+        konstue = "foo"
         error = 1
     }
-    val encodedEmail = Json.encodeToString(email)
-    if (encodedEmail != """{"value":"foo","error":1}""") return "EncodedEmail: $encodedEmail"
-    val decodedEmail = Json.decodeFromString<Email<Int>>(encodedEmail)
+    konst encodedEmail = Json.encodeToString(email)
+    if (encodedEmail != """{"konstue":"foo","error":1}""") return "EncodedEmail: $encodedEmail"
+    konst decodedEmail = Json.decodeFromString<Email<Int>>(encodedEmail)
     if (decodedEmail.toString() != "Email(foo, 1)") return "DecodedEmail: $decodedEmail"
     return "OK"
 }

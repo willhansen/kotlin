@@ -1,5 +1,5 @@
 fun test() {
-        <expr>when (val a = 42) {
+        <expr>when (konst a = 42) {
             else -> {
                 use("")
                 foo()

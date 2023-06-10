@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.test.KotlinTestUtils
 
 class GenerateInterpreterMapTest : TestCase() {
     fun testGeneratedDataIsUpToDate() {
-        val text = generateMap()
+        konst text = generateMap()
         KotlinTestUtils.assertEqualsToFile(DESTINATION, text)
     }
 }

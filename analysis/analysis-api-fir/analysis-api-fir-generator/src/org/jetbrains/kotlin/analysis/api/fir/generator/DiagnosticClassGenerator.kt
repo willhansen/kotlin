@@ -14,7 +14,7 @@ import java.nio.file.Path
 
 object DiagnosticClassGenerator {
     fun generate(rootPath: Path, diagnosticList: DiagnosticList, packageName: String) {
-        val path = getGenerationPath(rootPath.toFile(), packageName)
+        konst path = getGenerationPath(rootPath.toFile(), packageName)
         KtDiagnosticClassRenderer.render(path.resolve("KtFirDiagnostics.kt"), diagnosticList, packageName, emptySet())
         KtDiagnosticClassImplementationRenderer.render(path.resolve("KtFirDiagnosticsImpl.kt"), diagnosticList, packageName, emptySet())
         FirDiagnosticToKtDiagnosticConverterRenderer.render(path.resolve("KtFirDataClassConverters.kt"), diagnosticList, packageName, emptySet())

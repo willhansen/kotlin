@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.android.parcel
 import org.jetbrains.kotlin.test.TargetBackend
 
 abstract class AbstractParcelIrBoxTest : AbstractParcelBoxTest() {
-    override val backend = TargetBackend.JVM_IR
+    override konst backend = TargetBackend.JVM_IR
 }

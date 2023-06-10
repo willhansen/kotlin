@@ -21,22 +21,22 @@ import org.jetbrains.kotlin.types.checker.ClassicTypeCheckerStateInternals
 object UpperBoundViolatedInTypealiasConstructorChecker : CallChecker {
     @OptIn(ClassicTypeCheckerStateInternals::class)
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val resultingDescriptor = resolvedCall.resultingDescriptor as? TypeAliasConstructorDescriptor ?: return
-        val callExpression = reportOn.getStrictParentOfType<KtCallExpression>() ?: return
-        val underlyingConstructedType = resultingDescriptor.underlyingConstructorDescriptor.returnType
-        val underlyingTypeArguments = underlyingConstructedType.arguments
-        val underlyingTypeParameters = resultingDescriptor.underlyingConstructorDescriptor.returnType.constructor.parameters
-        val state = ClassicTypeCheckerState(isErrorTypeEqualsToAnything = false)
-        val substitutor = NewTypeSubstitutorByConstructorMap(
+        konst resultingDescriptor = resolvedCall.resultingDescriptor as? TypeAliasConstructorDescriptor ?: return
+        konst callExpression = reportOn.getStrictParentOfType<KtCallExpression>() ?: return
+        konst underlyingConstructedType = resultingDescriptor.underlyingConstructorDescriptor.returnType
+        konst underlyingTypeArguments = underlyingConstructedType.arguments
+        konst underlyingTypeParameters = resultingDescriptor.underlyingConstructorDescriptor.returnType.constructor.parameters
+        konst state = ClassicTypeCheckerState(isErrorTypeEqualsToAnything = false)
+        konst substitutor = NewTypeSubstitutorByConstructorMap(
             underlyingTypeParameters.withIndex().associate {
-                Pair(it.value.typeConstructor, underlyingTypeArguments[it.index].type.unwrap())
+                Pair(it.konstue.typeConstructor, underlyingTypeArguments[it.index].type.unwrap())
             }
         )
         // Note: necessary only for diagnostic duplication check
-        val aliasTypeParameters = resolvedCall.candidateDescriptor.typeParameters
-        val originalTypes = resultingDescriptor.typeAliasDescriptor.underlyingType.arguments.map { it.type }
+        konst aliasTypeParameters = resolvedCall.candidateDescriptor.typeParameters
+        konst originalTypes = resultingDescriptor.typeAliasDescriptor.underlyingType.arguments.map { it.type }
         for ((index, argumentAndParameter) in underlyingTypeArguments.zip(underlyingTypeParameters).withIndex()) {
-            val (argument, parameter) = argumentAndParameter
+            konst (argument, parameter) = argumentAndParameter
             // To remove duplication of UPPER_BOUND_VIOLATED
             // See createToFreshVariableSubstitutorAndAddInitialConstraints in ResolutionParts.kt, citing:
             // ... if (kotlinType == typeParameter.defaultType) i else null ...
@@ -44,7 +44,7 @@ object UpperBoundViolatedInTypealiasConstructorChecker : CallChecker {
 
             for (upperBound in parameter.upperBounds) {
                 if (!AbstractTypeChecker.isSubtypeOf(state, argument.type, substitutor.safeSubstitute(upperBound.unwrap()))) {
-                    val typeReference = callExpression.typeArguments.getOrNull(index)?.typeReference ?: continue
+                    konst typeReference = callExpression.typeArguments.getOrNull(index)?.typeReference ?: continue
                     context.trace.report(Errors.UPPER_BOUND_VIOLATED_WARNING.on(typeReference, upperBound, argument.type))
                 }
             }

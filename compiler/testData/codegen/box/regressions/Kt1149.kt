@@ -7,7 +7,7 @@ public interface SomeTrait {
 }
 
 fun box(): String {
-    val list = ArrayList<SomeTrait>()
+    konst list = ArrayList<SomeTrait>()
     var res = ArrayList<String>()
     list.add(object : SomeTrait {
         override fun foo() {

@@ -7,7 +7,7 @@ fun Any?.equals1(other : Any?) : Boolean = true
 
 fun main() {
 
-    val command : Foo? = null
+    konst command : Foo? = null
 
     // Commented for KT-621
     // when (command) {

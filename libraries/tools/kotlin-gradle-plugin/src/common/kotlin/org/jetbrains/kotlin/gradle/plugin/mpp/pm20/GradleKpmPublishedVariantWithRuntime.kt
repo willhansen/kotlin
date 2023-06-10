@@ -27,7 +27,7 @@ abstract class GradleKpmPublishedVariantWithRuntime(
 ), GradleKpmSingleMavenPublishedModuleHolder by GradleKpmDefaultSingleMavenPublishedModuleHolder(
     containingModule, defaultModuleSuffix(containingModule, fragmentName)
 ) {
-    override val gradleVariantNames: Set<String>
+    override konst gradleVariantNames: Set<String>
         get() = listOf(apiElementsConfiguration.name, runtimeElementsConfiguration.name).flatMapTo(mutableSetOf()) {
             listOf(it, publishedConfigurationName(it))
         }

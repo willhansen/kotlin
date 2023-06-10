@@ -15,7 +15,7 @@ fun foo() {
         <!NATIVE_ANNOTATIONS_ALLOWED_ONLY_ON_MEMBER_OR_EXTENSION_FUN!>@nativeInvoke
         fun Int.invoke(a: String, b: Int)<!> = "OK"
 
-        val anonymous = object {
+        konst anonymous = object {
             <!NATIVE_ANNOTATIONS_ALLOWED_ONLY_ON_MEMBER_OR_EXTENSION_FUN!>@nativeInvoke
             fun foo()<!> {}
 

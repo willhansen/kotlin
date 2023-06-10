@@ -1,24 +1,24 @@
-val p1: Int = 1 - 1
-val p2: Long = 1 - 1
-val p3: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE!>1 - 1<!>
-val p4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE!>1 - 1<!>
+konst p1: Int = 1 - 1
+konst p2: Long = 1 - 1
+konst p3: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE!>1 - 1<!>
+konst p4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE!>1 - 1<!>
 
-val l1: Long = 1 - 1.toLong()
-val l2: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toLong()<!>
-val l3: Int = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toLong()<!>
-val l4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toLong()<!>
+konst l1: Long = 1 - 1.toLong()
+konst l2: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toLong()<!>
+konst l3: Int = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toLong()<!>
+konst l4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toLong()<!>
 
-val b1: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toByte()<!>
-val b2: Int = 1 - 1.toByte()
-val b3: Long = <!TYPE_MISMATCH!>1 - 1.toByte()<!>
-val b4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toByte()<!>
+konst b1: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toByte()<!>
+konst b2: Int = 1 - 1.toByte()
+konst b3: Long = <!TYPE_MISMATCH!>1 - 1.toByte()<!>
+konst b4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toByte()<!>
 
-val i1: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toInt()<!>
-val i2: Int = 1 - 1.toInt()
-val i3: Long = <!TYPE_MISMATCH!>1 - 1.toInt()<!>
-val i4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toInt()<!>
+konst i1: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toInt()<!>
+konst i2: Int = 1 - 1.toInt()
+konst i3: Long = <!TYPE_MISMATCH!>1 - 1.toInt()<!>
+konst i4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toInt()<!>
 
-val s1: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toShort()<!>
-val s2: Int = 1 - 1.toShort()
-val s3: Long = <!TYPE_MISMATCH!>1 - 1.toShort()<!>
-val s4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toShort()<!>
+konst s1: Byte = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toShort()<!>
+konst s2: Int = 1 - 1.toShort()
+konst s3: Long = <!TYPE_MISMATCH!>1 - 1.toShort()<!>
+konst s4: Short = <!INTEGER_OPERATOR_RESOLVE_WILL_CHANGE, TYPE_MISMATCH!>1 - 1.toShort()<!>

@@ -8,6 +8,6 @@ fun f1(x: String?): String {
 }
 
 fun f2(y: String?): String {
-    val f: KClass<*> = (y ?: return "")::class
+    konst f: KClass<*> = (y ?: return "")::class
     return y
 }

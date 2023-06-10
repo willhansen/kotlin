@@ -1,16 +1,16 @@
-val foo = object : AntBuilder() {
+konst foo = object : AntBuilder() {
 
-  @lazy val groovy = library {
+  @lazy konst groovy = library {
     classpath("$libs/groovy-...")
   }
 
-  @lazy val gant = library {
+  @lazy konst gant = library {
     File("$gantHome/lib").files.each {
       classpath(it)
     }
   }
 
-  @lazy val JPS = module {
+  @lazy konst JPS = module {
     targetLevel = "1.5"
     classpath(antLayout, gant, groovy)
     src("$projectHome/antLayout/src")
@@ -32,7 +32,7 @@ class AntBuilder {
   }
 
   fun library(initializer :   Library.() -> Library) {
-    val lib = Library()
+    konst lib = Library()
     lib.initializer()
     return lib
   }

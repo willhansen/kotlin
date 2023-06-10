@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 
 internal class FirAnonymousFunctionExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var anonymousFunction: FirAnonymousFunction
 ) : FirAnonymousFunctionExpression() {
-    override val typeRef: FirTypeRef
+    override konst typeRef: FirTypeRef
         get() = anonymousFunction.typeRef
 
-    override val annotations: List<FirAnnotation>
+    override konst annotations: List<FirAnnotation>
         get() = anonymousFunction.annotations
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

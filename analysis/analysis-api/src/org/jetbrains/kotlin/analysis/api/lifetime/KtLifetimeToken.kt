@@ -10,16 +10,16 @@ import kotlin.reflect.KClass
 
 public abstract class KtLifetimeToken {
     public abstract fun isValid(): Boolean
-    public abstract fun getInvalidationReason(): String
+    public abstract fun getInkonstidationReason(): String
 
     public abstract fun isAccessible(): Boolean
     public abstract fun getInaccessibilityReason(): String
 
-    public abstract val factory: KtLifetimeTokenFactory
+    public abstract konst factory: KtLifetimeTokenFactory
 }
 
 public abstract class KtLifetimeTokenFactory {
-    public abstract val identifier: KClass<out KtLifetimeToken>
+    public abstract konst identifier: KClass<out KtLifetimeToken>
     public abstract fun create(project: Project): KtLifetimeToken
 
     public open fun beforeEnteringAnalysisContext(token: KtLifetimeToken) {}
@@ -30,7 +30,7 @@ public abstract class KtLifetimeTokenFactory {
 @Suppress("NOTHING_TO_INLINE")
 public inline fun KtLifetimeToken.assertIsValidAndAccessible() {
     if (!isValid()) {
-        throw KtInvalidLifetimeOwnerAccessException("Access to invalid $this: ${getInvalidationReason()}")
+        throw KtInkonstidLifetimeOwnerAccessException("Access to inkonstid $this: ${getInkonstidationReason()}")
     }
     if (!isAccessible()) {
         throw KtInaccessibleLifetimeOwnerAccessException("$this is inaccessible: ${getInaccessibilityReason()}")
@@ -39,6 +39,6 @@ public inline fun KtLifetimeToken.assertIsValidAndAccessible() {
 
 public abstract class KtIllegalLifetimeOwnerAccessException : IllegalStateException()
 
-public class KtInvalidLifetimeOwnerAccessException(override val message: String) : KtIllegalLifetimeOwnerAccessException()
-public class KtInaccessibleLifetimeOwnerAccessException(override val message: String) : KtIllegalLifetimeOwnerAccessException()
+public class KtInkonstidLifetimeOwnerAccessException(override konst message: String) : KtIllegalLifetimeOwnerAccessException()
+public class KtInaccessibleLifetimeOwnerAccessException(override konst message: String) : KtIllegalLifetimeOwnerAccessException()
 

@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.ir.util.*
  * Replace branches that are comparisons with compile-time known enum entries
  * with comparisons of ordinals.
  */
-open class EnumWhenLowering(protected open val context: CommonBackendContext) : IrElementTransformerVoidWithContext(), FileLoweringPass {
+open class EnumWhenLowering(protected open konst context: CommonBackendContext) : IrElementTransformerVoidWithContext(), FileLoweringPass {
 
     protected open fun mapConstEnumEntry(entry: IrEnumEntry): Int =
         entry.parentAsClass.declarations.filterIsInstance<IrEnumEntry>().indexOf(entry).also {
@@ -51,20 +51,20 @@ open class EnumWhenLowering(protected open val context: CommonBackendContext) : 
         if (expression.statements.size != 2) {
             return expression
         }
-        val subject = expression.statements[0] as? IrVariable
+        konst subject = expression.statements[0] as? IrVariable
             ?: return expression
-        val subjectClass = subject.type.getClass()
+        konst subjectClass = subject.type.getClass()
         if (subjectClass == null || subjectClass.kind != ClassKind.ENUM_CLASS || subjectClass.isEffectivelyExternal()) {
             return expression
         }
-        val irWhen = expression.statements[1] as? IrWhen
+        konst irWhen = expression.statements[1] as? IrWhen
             ?: return expression
 
         // Will be initialized only when we found a branch that compares
         // subject with compile-time known enum entry.
-        val subjectOrdinalProvider = lazy {
+        konst subjectOrdinalProvider = lazy {
             context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol, subject.startOffset, subject.endOffset).run {
-                val integer = if (subject.type.isNullable())
+                konst integer = if (subject.type.isNullable())
                     irIfNull(context.irBuiltIns.intType, irGet(subject), irInt(-1), mapRuntimeEnumEntry(this, irGet(subject)))
                 else
                     mapRuntimeEnumEntry(this, irGet(subject))
@@ -81,13 +81,13 @@ open class EnumWhenLowering(protected open val context: CommonBackendContext) : 
 
     private fun possibleToGenerateJumpTable(irWhen: IrWhen, subject: IrVariable): Boolean {
         for (irBranch in irWhen.branches) {
-            val condition = irBranch.condition as? IrCall ?: continue
+            konst condition = irBranch.condition as? IrCall ?: continue
             if (condition.symbol != context.irBuiltIns.eqeqSymbol)
                 return false
 
-            val lhs = condition.getValueArgument(0)!!
-            val rhs = condition.getValueArgument(1)!!
-            val other = getOther(lhs, rhs, subject)
+            konst lhs = condition.getValueArgument(0)!!
+            konst rhs = condition.getValueArgument(1)!!
+            konst other = getOther(lhs, rhs, subject)
             if (other is IrCall) {
                 return false
             }
@@ -150,10 +150,10 @@ open class EnumWhenLowering(protected open val context: CommonBackendContext) : 
         if (expression.symbol != context.irBuiltIns.eqeqSymbol) {
             return expression
         }
-        val lhs = expression.getValueArgument(0)!!
-        val rhs = expression.getValueArgument(1)!!
-        val other = getOther(lhs, rhs, subject) ?: return expression
-        val entryOrdinal = when {
+        konst lhs = expression.getValueArgument(0)!!
+        konst rhs = expression.getValueArgument(1)!!
+        konst other = getOther(lhs, rhs, subject) ?: return expression
+        konst entryOrdinal = when {
             other is IrGetEnumValue && subject.type.classifierOrNull?.owner == other.symbol.owner.parent ->
                 mapConstEnumEntry(other.symbol.owner)
             other.isNullConst() ->
@@ -161,12 +161,12 @@ open class EnumWhenLowering(protected open val context: CommonBackendContext) : 
             else ->
                 return expression
         }
-        val subjectOrdinal = subjectOrdinalProvider.value
+        konst subjectOrdinal = subjectOrdinalProvider.konstue
         return IrCallImpl(
             expression.startOffset, expression.endOffset,
             expression.type, expression.symbol,
             typeArgumentsCount = 0,
-            valueArgumentsCount = 2
+            konstueArgumentsCount = 2
         ).apply {
             putValueArgument(0, IrGetValueImpl(lhs.startOffset, lhs.endOffset, subjectOrdinal.type, subjectOrdinal.symbol))
             putValueArgument(1, IrConstImpl.int(rhs.startOffset, rhs.endOffset, context.irBuiltIns.intType, entryOrdinal))

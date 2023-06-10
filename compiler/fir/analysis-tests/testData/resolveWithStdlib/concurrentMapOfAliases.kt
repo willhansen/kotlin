@@ -2,7 +2,7 @@
 private typealias MyAlias = CharSequence
 
 class A {
-    private val foo = java.util.concurrent.ConcurrentHashMap<String, MyAlias>()
+    private konst foo = java.util.concurrent.ConcurrentHashMap<String, MyAlias>()
 
     private fun bar() {
         foo["dd"]?.baz()

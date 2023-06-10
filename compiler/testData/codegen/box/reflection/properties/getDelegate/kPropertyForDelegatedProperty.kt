@@ -15,17 +15,17 @@ class Delegate {
         return this
     }
     operator fun getValue(instance: Any?, property: KProperty<*>): String = storage
-    operator fun setValue(instance: Any?, property: KProperty<*>, value: String) { storage = value }
+    operator fun setValue(instance: Any?, property: KProperty<*>, konstue: String) { storage = konstue }
 }
 
 var result: String by Delegate()
 
 fun box(): String {
     result
-    val prop = ref as KProperty0<*>
+    konst prop = ref as KProperty0<*>
 
     result = "Fail"
-    val d = prop.apply { isAccessible = true }.getDelegate() as Delegate
+    konst d = prop.apply { isAccessible = true }.getDelegate() as Delegate
     result = "OK"
     assertEquals(d, prop.apply { isAccessible = true }.getDelegate())
     return result

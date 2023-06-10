@@ -23,41 +23,41 @@ import java.io.File
 
 class SMAPDumpHandler(testServices: TestServices) : JvmBinaryArtifactHandler(testServices) {
     companion object {
-        const val SMAP_EXT = "smap"
-        const val SMAP_SEP_EXT = "smap-separate-compilation"
-        const val SMAP_NON_SEP_EXT = "smap-nonseparate-compilation"
+        const konst SMAP_EXT = "smap"
+        const konst SMAP_SEP_EXT = "smap-separate-compilation"
+        const konst SMAP_NON_SEP_EXT = "smap-nonseparate-compilation"
     }
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
-    private val dumper = MultiModuleInfoDumper(moduleHeaderTemplate = null)
+    private konst dumper = MultiModuleInfoDumper(moduleHeaderTemplate = null)
 
     override fun processModule(module: TestModule, info: BinaryArtifacts.Jvm) {
         if (!GENERATE_SMAP) return
         if (DUMP_SMAP !in module.directives) return
 
-        val originalFileNames = module.files.map { it.name }
+        konst originalFileNames = module.files.map { it.name }
 
-        val compiledSmaps = CommonSMAPTestUtil.extractSMAPFromClasses(info.classFileFactory.getClassFiles()).mapNotNull {
-            val name = File(it.sourceFile).name
-            val index = originalFileNames.indexOf(name)
-            val testFile = module.files[index]
+        konst compiledSmaps = CommonSMAPTestUtil.extractSMAPFromClasses(info.classFileFactory.getClassFiles()).mapNotNull {
+            konst name = File(it.sourceFile).name
+            konst index = originalFileNames.indexOf(name)
+            konst testFile = module.files[index]
             if (NO_SMAP_DUMP in testFile.directives) return@mapNotNull null
             index to it
         }.sortedBy { it.first }.map { it.second }
 
         CommonSMAPTestUtil.checkNoConflictMappings(compiledSmaps, assertions)
 
-        val compiledData = compiledSmaps.groupBy {
+        konst compiledData = compiledSmaps.groupBy {
             it.sourceFile
         }.map {
-            val smap = it.value.sortedByDescending(CommonSMAPTestUtil.SMAPAndFile::outputFile).mapNotNull(CommonSMAPTestUtil.SMAPAndFile::smap).joinToString("\n")
+            konst smap = it.konstue.sortedByDescending(CommonSMAPTestUtil.SMAPAndFile::outputFile).mapNotNull(CommonSMAPTestUtil.SMAPAndFile::smap).joinToString("\n")
             CommonSMAPTestUtil.SMAPAndFile(if (smap.isNotEmpty()) smap else null, it.key, "NOT_SORTED")
         }.associateBy { it.sourceFile }
 
         dumper.builderForModule(module).apply {
-            for (source in compiledData.values) {
+            for (source in compiledData.konstues) {
                 appendLine("// FILE: ${File(source.sourceFile).name}")
                 appendLine(source.smap ?: "")
             }
@@ -67,26 +67,26 @@ class SMAPDumpHandler(testServices: TestServices) : JvmBinaryArtifactHandler(tes
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
 
-        val separateDumpEnabled = separateDumpsEnabled()
-        val isSeparateCompilation = isSeparateCompilation()
+        konst separateDumpEnabled = separateDumpsEnabled()
+        konst isSeparateCompilation = isSeparateCompilation()
 
-        val extension = when {
+        konst extension = when {
             !separateDumpEnabled -> SMAP_EXT
             isSeparateCompilation -> SMAP_SEP_EXT
             else -> SMAP_NON_SEP_EXT
         }
 
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val expectedFile = testDataFile.withExtension(extension)
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst expectedFile = testDataFile.withExtension(extension)
         assertions.assertEqualsToFile(expectedFile, dumper.generateResultingDump())
 
         if (separateDumpEnabled && isSeparateCompilation) {
-            val otherExtension = if (isSeparateCompilation) SMAP_NON_SEP_EXT else SMAP_SEP_EXT
-            val otherFile = expectedFile.withExtension(otherExtension)
+            konst otherExtension = if (isSeparateCompilation) SMAP_NON_SEP_EXT else SMAP_SEP_EXT
+            konst otherFile = expectedFile.withExtension(otherExtension)
             if (!otherFile.exists()) return
-            val expectedText = expectedFile.readText()
+            konst expectedText = expectedFile.readText()
             if (expectedText == otherFile.readText()) {
-                val smapFile = expectedFile.withExtension(SMAP_EXT)
+                konst smapFile = expectedFile.withExtension(SMAP_EXT)
                 smapFile.writeText(expectedText)
                 expectedFile.delete()
                 otherFile.delete()

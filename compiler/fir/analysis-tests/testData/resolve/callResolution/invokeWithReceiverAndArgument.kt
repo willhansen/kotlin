@@ -10,7 +10,7 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder> {
 
 class BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>() {
     fun test(func: (LeafBuilderConfigurationContext) -> Unit) {
-        val context = LeafBuilderConfigurationContext()
+        konst context = LeafBuilderConfigurationContext()
         func(context)
     }
 }

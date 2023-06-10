@@ -17,7 +17,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Integers with underscore symbols in the valid places.",
+          "description": "Integers with underscore symbols in the konstid places.",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/integer-literals/decimal-integer-literals/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"

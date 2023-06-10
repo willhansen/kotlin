@@ -29,22 +29,22 @@ import org.jetbrains.kotlin.types.isError
 import java.io.File
 
 abstract class AbstractBuiltInsWithJDKMembersTest : KotlinTestWithEnvironment() {
-    private val configuration = createComparatorConfiguration()
+    private konst configuration = createComparatorConfiguration()
 
     override fun createEnvironment(): KotlinCoreEnvironment =
         createEnvironmentWithJdk(ConfigurationKind.JDK_ONLY, testJdkKind)
 
-    protected open val testJdkKind: TestJdkKind
+    protected open konst testJdkKind: TestJdkKind
         get() = TestJdkKind.FULL_JDK
 
     protected fun doTest(builtinVersionName: String) {
-        val module = JvmResolveUtil.analyze(environment).moduleDescriptor as ModuleDescriptorImpl
+        konst module = JvmResolveUtil.analyze(environment).moduleDescriptor as ModuleDescriptorImpl
 
         for (packageFqName in listOf(BUILT_INS_PACKAGE_FQ_NAME, COLLECTIONS_PACKAGE_FQ_NAME, RANGES_PACKAGE_FQ_NAME)) {
-            val loaded = module.packageFragmentProvider.packageFragments(packageFqName)
+            konst loaded = module.packageFragmentProvider.packageFragments(packageFqName)
                 .filterIsInstance<BuiltInsPackageFragment>()
                 .single { !it.isFallback }
-            RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptorWithFile(
+            RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptorWithFile(
                 loaded, configuration,
                 File("compiler/testData/builtin-classes/$builtinVersionName/" + packageFqName.asString().replace('.', '-') + ".txt")
             )

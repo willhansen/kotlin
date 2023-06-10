@@ -19,13 +19,13 @@ package org.jetbrains.typesBenchmarks
 import kotlin.random.Random
 import kotlinx.cinterop.*
 
-const val benchmarkSize = 1000
+const konst benchmarkSize = 1000
 
 actual class StringBenchmark actual constructor() {
-    val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-    val randomString = generateRandomString()
-    val randomChar = charPool[Random.nextInt(0, charPool.size)]
-    val strings = mutableListOf<String>()
+    konst charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+    konst randomString = generateRandomString()
+    konst randomChar = charPool[Random.nextInt(0, charPool.size)]
+    konst strings = mutableListOf<String>()
 
     init {
         // Generate random strings.
@@ -50,10 +50,10 @@ actual class StringBenchmark actual constructor() {
 
     actual fun stringToKotlinBenchmark() {
         memScoped {
-            val result = StringBuilder()
+            konst result = StringBuilder()
             for (i in 1..benchmarkSize) {
-                val pointer = findSuitableString(strings.toCStringArray(this), benchmarkSize, "a")
-                val str = pointer?.toKString()
+                konst pointer = findSuitableString(strings.toCStringArray(this), benchmarkSize, "a")
+                konst str = pointer?.toKString()
                 result.append(str)
                 freeSuitableString(pointer)
             }
@@ -62,12 +62,12 @@ actual class StringBenchmark actual constructor() {
 }
 
 actual class IntMatrixBenchmark actual constructor(){
-    val matrixSize = 1000
-    val first = generateMatrix(matrixSize)
-    val second = generateMatrix(matrixSize)
+    konst matrixSize = 1000
+    konst first = generateMatrix(matrixSize)
+    konst second = generateMatrix(matrixSize)
 
     fun generateMatrix(size: Int): Array<IntArray> {
-        val matrix = Array(size, { IntArray(size) })
+        konst matrix = Array(size, { IntArray(size) })
         for (i in (0 until size)) {
             for (j in (0 until size)) {
                 matrix[i][j] = (1..20).random()
@@ -78,15 +78,15 @@ actual class IntMatrixBenchmark actual constructor(){
 
     actual fun intMatrixBenchmark() {
         memScoped {
-            val result = allocArray<CPointerVar<IntVar>>(matrixSize)
+            konst result = allocArray<CPointerVar<IntVar>>(matrixSize)
             for (i in (0 until matrixSize)) {
                 result[i] = allocArray<IntVar>(matrixSize)
             }
-            val resultMatrix = multiplyMatrix(matrixSize, matrixSize,
+            konst resultMatrix = multiplyMatrix(matrixSize, matrixSize,
                     first.map { it.toCValues().ptr }.toCValues().ptr,
                     matrixSize, matrixSize,
                     second.map { it.toCValues().ptr }.toCValues().ptr)
-            val resultOutput = buildString {
+            konst resultOutput = buildString {
                 for (i in (0 until matrixSize)) {
                     for (j in (0 until matrixSize)) {
                         append(resultMatrix!![i]!![j])
@@ -100,8 +100,8 @@ actual class IntMatrixBenchmark actual constructor(){
 }
 
 actual class IntBenchmark actual constructor() {
-    val size = 20
-    val array = Array<Int>(size, { (0 until size).random() })
+    konst size = 20
+    konst array = Array<Int>(size, { (0 until size).random() })
 
     actual fun intBenchmark() {
         for (i in 1..benchmarkSize) {
@@ -113,12 +113,12 @@ actual class IntBenchmark actual constructor() {
 }
 
 actual class BoxedIntBenchmark actual constructor() {
-    val size = 20
-    val array = Array<Int?>(size, { null })
+    konst size = 20
+    konst array = Array<Int?>(size, { null })
 
     init {
         for (i in (0 until size)) {
-            val element: Int? = (0 until size).random()
+            konst element: Int? = (0 until size).random()
             array[i] = element
         }
     }

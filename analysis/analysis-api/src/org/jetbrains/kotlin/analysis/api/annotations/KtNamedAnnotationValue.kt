@@ -10,4 +10,4 @@ import org.jetbrains.kotlin.name.Name
 /**
  * Name-Value pair which is used as annotation argument.
  */
-public data class KtNamedAnnotationValue(val name: Name, val expression: KtAnnotationValue)
+public data class KtNamedAnnotationValue(konst name: Name, konst expression: KtAnnotationValue)

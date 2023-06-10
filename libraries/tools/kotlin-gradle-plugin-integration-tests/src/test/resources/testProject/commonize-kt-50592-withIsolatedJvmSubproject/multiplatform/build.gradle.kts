@@ -6,10 +6,10 @@ kotlin {
     linuxArm64()
     linuxX64()
 
-    val commonMain by sourceSets.getting
-    val linuxMain by sourceSets.creating
-    val linuxArm64Main by sourceSets.getting
-    val linuxX64Main by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst linuxMain by sourceSets.creating
+    konst linuxArm64Main by sourceSets.getting
+    konst linuxX64Main by sourceSets.getting
 
     linuxMain.dependsOn(commonMain)
     linuxArm64Main.dependsOn(linuxMain)

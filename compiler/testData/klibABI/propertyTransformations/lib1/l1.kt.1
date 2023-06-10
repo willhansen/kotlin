@@ -6,29 +6,29 @@ open class OpenClass {
 
     inline var openNonInlineToInlineProperty: String
         get() = "OpenClassV2.openNonInlineToInlineProperty"
-        set(value) { lastRecordedState = "OpenClassV2.openNonInlineToInlineProperty=$value" }
+        set(konstue) { lastRecordedState = "OpenClassV2.openNonInlineToInlineProperty=$konstue" }
 
     inline var openNonInlineToInlinePropertyWithDelegation: String
         get() = "OpenClassV2.openNonInlineToInlinePropertyWithDelegation"
-        set(value) { lastRecordedState = "OpenClassV2.openNonInlineToInlinePropertyWithDelegation=$value" }
+        set(konstue) { lastRecordedState = "OpenClassV2.openNonInlineToInlinePropertyWithDelegation=$konstue" }
 
     inline var newInlineProperty1: String
         get() = "OpenClassV2.newInlineProperty1"
-        set(value) { lastRecordedState = "OpenClassV2.newInlineProperty1=$value" }
+        set(konstue) { lastRecordedState = "OpenClassV2.newInlineProperty1=$konstue" }
 
     inline var newInlineProperty2: String
         get() = "OpenClassV2.newInlineProperty2"
-        set(value) { lastRecordedState = "OpenClassV2.newInlineProperty2=$value" }
+        set(konstue) { lastRecordedState = "OpenClassV2.newInlineProperty2=$konstue" }
 
     var newNonInlineProperty: String
         get() = "OpenClassV2.newNonInlineProperty"
-        set(value) { lastRecordedState = "OpenClassV2.newNonInlineProperty=$value" }
+        set(konstue) { lastRecordedState = "OpenClassV2.newNonInlineProperty=$konstue" }
 
     fun newInlineProperty1Reader(): String = newInlineProperty1
     fun newInlineProperty2Reader(): String = newInlineProperty2
     fun newNonInlinePropertyReader(): String = newNonInlineProperty
 
-    fun newInlineProperty1Writer(value: String) { newInlineProperty1 = value }
-    fun newInlineProperty2Writer(value: String) { newInlineProperty2 = value }
-    fun newNonInlinePropertyWriter(value: String) { newNonInlineProperty = value }
+    fun newInlineProperty1Writer(konstue: String) { newInlineProperty1 = konstue }
+    fun newInlineProperty2Writer(konstue: String) { newInlineProperty2 = konstue }
+    fun newNonInlinePropertyWriter(konstue: String) { newNonInlineProperty = konstue }
 }

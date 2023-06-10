@@ -67,7 +67,7 @@ sink:
 =====================
 == tryCatchInlined ==
 fun tryCatchInlined() {
-    val x: Int
+    konst x: Int
 
     myRun {
         try {
@@ -86,8 +86,8 @@ fun tryCatchInlined() {
 ---------------------
 L0:
   1 <START>                                                                                                                                INIT: in: {} out: {}              USE: in: {} out: {}
-  2 mark({ val x: Int myRun { try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // I? x.inc() } } // I? x.inc() })
-    v(val x: Int)                                                                                                                          INIT: in: {} out: {x=D}
+  2 mark({ konst x: Int myRun { try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // I? x.inc() } } // I? x.inc() })
+    v(konst x: Int)                                                                                                                          INIT: in: {} out: {x=D}
     mark({ try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // I? x.inc() } })                                       INIT: in: {x=D} out: {x=D}
     r({ try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // I? x.inc() } }) -> <v0>
     mark(myRun { try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // I? x.inc() } })
@@ -155,7 +155,7 @@ sink:
 =====================
 == possibleReassignmentInTryCatch ==
 fun possibleReassignmentInTryCatch() {
-    val x: Int
+    konst x: Int
 
     myRun {
         x = 42
@@ -177,8 +177,8 @@ fun possibleReassignmentInTryCatch() {
 ---------------------
 L0:
   1 <START>                                                                                                                                                                                                 INIT: in: {} out: {}            USE: in: {} out: {}
-  2 mark({ val x: Int myRun { x = 42 try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // Possible reassignment x = 42 x.inc() } // Initialized x.inc() } // Initialized x.inc() })
-    v(val x: Int)                                                                                                                                                                                           INIT: in: {} out: {x=D}
+  2 mark({ konst x: Int myRun { x = 42 try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // Possible reassignment x = 42 x.inc() } // Initialized x.inc() } // Initialized x.inc() })
+    v(konst x: Int)                                                                                                                                                                                           INIT: in: {} out: {x=D}
     mark({ x = 42 try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // Possible reassignment x = 42 x.inc() } // Initialized x.inc() })                                                INIT: in: {x=D} out: {x=D}
     r({ x = 42 try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // Possible reassignment x = 42 x.inc() } // Initialized x.inc() }) -> <v0>
     mark(myRun { x = 42 try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // Possible reassignment x = 42 x.inc() } // Initialized x.inc() })

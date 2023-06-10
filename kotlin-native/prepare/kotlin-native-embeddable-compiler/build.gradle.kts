@@ -5,8 +5,8 @@ plugins {
     kotlin("jvm")
 }
 
-val testCompilationClasspath by configurations.creating
-val testCompilerClasspath by configurations.creating {
+konst testCompilationClasspath by configurations.creating
+konst testCompilerClasspath by configurations.creating {
     isCanBeConsumed = false
     extendsFrom(configurations["runtimeElements"])
     attributes {
@@ -19,15 +19,15 @@ repositories {
     mavenCentral()
 }
 
-val kotlinNativeEmbedded by configurations.creating
-val testPlugin by configurations.creating
-val testPluginRuntime by configurations.creating
+konst kotlinNativeEmbedded by configurations.creating
+konst testPlugin by configurations.creating
+konst testPluginRuntime by configurations.creating
 
 fun DependencyHandlerScope.testPluginRuntime(any: Any) {
-    val notation = any as? String ?: return add(testPluginRuntime.name, any) {}
-    val (group, artifact, version) = notation.split(":")
-    val platformName = HostManager.host.name
-    val gradlePlatformName = platformName.replace("_", "")
+    konst notation = any as? String ?: return add(testPluginRuntime.name, any) {}
+    konst (group, artifact, version) = notation.split(":")
+    konst platformName = HostManager.host.name
+    konst gradlePlatformName = platformName.replace("_", "")
     return add(testPluginRuntime.name, "$group:$artifact-$gradlePlatformName:$version") {
         isTransitive = false
         attributes {
@@ -55,7 +55,7 @@ dependencies {
     testImplementation(project(":kotlin-test:kotlin-test-junit"))
 }
 
-val compiler = embeddableCompiler("kotlin-native-compiler-embeddable") {
+konst compiler = embeddableCompiler("kotlin-native-compiler-embeddable") {
     from(kotlinNativeEmbedded)
     /**
      * this jar distributed through kotlin-native distribution, but not with maven.
@@ -64,7 +64,7 @@ val compiler = embeddableCompiler("kotlin-native-compiler-embeddable") {
     mergeServiceFiles()
 }
 
-val runtimeJar = runtimeJar(compiler) {
+konst runtimeJar = runtimeJar(compiler) {
     exclude("com/sun/jna/**")
     mergeServiceFiles()
 }
@@ -78,9 +78,9 @@ projectTest {
      * It's expected that test should be executed on CI, but currently this project under `kotlin.native.enabled`
      */
     dependsOn(runtimeJar)
-    val runtimeJarPathProvider = project.provider {
-        val jar = runtimeJar.get().outputs.files.asPath
-        val trove = configurations.detachedConfiguration(
+    konst runtimeJarPathProvider = project.provider {
+        konst jar = runtimeJar.get().outputs.files.asPath
+        konst trove = configurations.detachedConfiguration(
                 dependencies.module(commonDependency("org.jetbrains.intellij.deps:trove4j"))
         )
         (trove.files + jar).joinToString(File.pathSeparatorChar.toString())

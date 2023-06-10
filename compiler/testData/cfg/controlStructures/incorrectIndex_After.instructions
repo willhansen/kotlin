@@ -1,9 +1,9 @@
 == s ==
-val s = mutableListOf<String>()
+konst s = mutableListOf<String>()
 ---------------------
 L0:
   1 <START>
-    v(val s = mutableListOf<String>())
+    v(konst s = mutableListOf<String>())
     mark(mutableListOf<String>())
     magic[UNRESOLVED_CALL](mutableListOf<String>()|!<v0>) -> <v1>
     w(s|<v1>)

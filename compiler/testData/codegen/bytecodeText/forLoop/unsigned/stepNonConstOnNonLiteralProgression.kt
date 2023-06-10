@@ -13,15 +13,15 @@
 fun one() = 1
 
 fun box(): String {
-    val uintProgression = 1u..7u step 3  // `step` ensures type is UIntProgression, NOT UIntRange
+    konst uintProgression = 1u..7u step 3  // `step` ensures type is UIntProgression, NOT UIntRange
     for (i in uintProgression step one()) {
     }
 
     return "OK"
 }
 
-// For "step" progressions in JVM IR, a call to getProgressionLastElement() is made to compute the "last" value.
-// If "step" is called on a non-literal progression, there is a check to see if that progression's step value is < 0.
+// For "step" progressions in JVM IR, a call to getProgressionLastElement() is made to compute the "last" konstue.
+// If "step" is called on a non-literal progression, there is a check to see if that progression's step konstue is < 0.
 // If the step is non-constant, there is a check that it is > 0, and if not, an IllegalArgumentException is thrown.
 
 // 0 iterator

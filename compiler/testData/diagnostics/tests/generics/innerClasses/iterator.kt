@@ -6,7 +6,7 @@ import java.util.*
 class A<T> : AbstractCollection<T>() {
     override fun iterator(): MyIt = MyIt()
 
-    override val size: Int
+    override konst size: Int
         get() = 1
 
     inner class MyIt : MutableIterator<T> {
@@ -30,7 +30,7 @@ fun foo() {
     var myIt = A<String>().iterator()
     myIt = <!TYPE_MISMATCH!>A<Int>().iterator()<!>
 
-    val csIt: Iterator<CharSequence> = A<String>().iterator()
+    konst csIt: Iterator<CharSequence> = A<String>().iterator()
 
     commonSupertype(A<String>().iterator(), A<Int>().iterator()).checkType { <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>_<!><A<out Any>.MyIt>() }
 }

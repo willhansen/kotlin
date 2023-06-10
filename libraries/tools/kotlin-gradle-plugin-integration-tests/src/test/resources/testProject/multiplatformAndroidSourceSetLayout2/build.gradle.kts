@@ -37,12 +37,12 @@ kotlin {
     android()
     jvm()
 
-    val commonMain by sourceSets.getting
-    val commonTest by sourceSets.getting
-    val androidMain by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst commonTest by sourceSets.getting
+    konst androidMain by sourceSets.getting
 
-    val androidUnitTest by sourceSets.getting
-    val androidInstrumentedTest by sourceSets.getting
+    konst androidUnitTest by sourceSets.getting
+    konst androidInstrumentedTest by sourceSets.getting
 
     commonTest.dependencies {
         implementation(kotlin("test-junit"))

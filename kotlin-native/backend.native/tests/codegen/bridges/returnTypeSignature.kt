@@ -30,5 +30,5 @@ abstract class AbstractClass(): ExtendsInterface<C> {
 }
 
 @Test fun runTest() {
-    val array = object : AbstractClass() { }.parse(B())
+    konst array = object : AbstractClass() { }.parse(B())
 }

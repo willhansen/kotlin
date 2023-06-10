@@ -4,7 +4,7 @@
 
 package test
 
-class Person(val name: String) {
+class Person(konst name: String) {
 
     fun sayName() = doSayName { name }
 

@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val z: Int)
+konstue class Z(konst z: Int)
 
-class Test(val z: Z = Z(42)) {
+class Test(konst z: Z = Z(42)) {
     fun test() = z.z
 }
 

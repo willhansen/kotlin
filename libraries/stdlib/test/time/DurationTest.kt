@@ -22,38 +22,38 @@ import kotlin.time.Duration.Companion.nanoseconds
 import kotlin.time.Duration.Companion.seconds
 
 @SharedImmutable
-private val units = DurationUnit.values()
+private konst units = DurationUnit.konstues()
 
 class DurationTest {
 
     @Test
     fun constructionFromNumber() {
         // nanosecond precision
-        val testValues = listOf(0L, 1L, MAX_NANOS) + List(100) { Random.nextLong(0, MAX_NANOS) }
-        for (value in testValues) {
-            assertEquals(value, value.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds)
-            assertEquals(-value, -value.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds)
+        konst testValues = listOf(0L, 1L, MAX_NANOS) + List(100) { Random.nextLong(0, MAX_NANOS) }
+        for (konstue in testValues) {
+            assertEquals(konstue, konstue.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds)
+            assertEquals(-konstue, -konstue.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds)
         }
         // expressible as long nanoseconds but stored as milliseconds
         for (delta in testValues) {
-            val value = (MAX_NANOS + 1) + delta
-            val expected = value - (value % NANOS_IN_MILLIS)
-            assertEquals(expected, value.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds)
-            assertEquals(-expected, -value.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds)
+            konst konstue = (MAX_NANOS + 1) + delta
+            konst expected = konstue - (konstue % NANOS_IN_MILLIS)
+            assertEquals(expected, konstue.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds)
+            assertEquals(-expected, -konstue.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds)
         }
-        // any int value of small units can always be represented in nanoseconds
+        // any int konstue of small units can always be represented in nanoseconds
         for (unit in units.filter { it <= DurationUnit.SECONDS }) {
-            val scale = convertDurationUnitOverflow(1L, unit, DurationUnit.NANOSECONDS)
+            konst scale = convertDurationUnitOverflow(1L, unit, DurationUnit.NANOSECONDS)
             repeat(100) {
-                val value = Random.nextInt()
-                assertEquals(value * scale, value.toDuration(unit).inWholeNanoseconds)
+                konst konstue = Random.nextInt()
+                assertEquals(konstue * scale, konstue.toDuration(unit).inWholeNanoseconds)
             }
         }
 
         for (unit in units) {
-            val borderValue = convertDurationUnit(MAX_NANOS, DurationUnit.NANOSECONDS, unit)
-            val d1 = borderValue.toDuration(unit)
-            val d2 = (borderValue + 1).toDuration(unit)
+            konst borderValue = convertDurationUnit(MAX_NANOS, DurationUnit.NANOSECONDS, unit)
+            konst d1 = borderValue.toDuration(unit)
+            konst d2 = (borderValue + 1).toDuration(unit)
             assertNotEquals(d1, d1 + 1.nanoseconds)
             assertEquals(d2, d2 + 1.nanoseconds)
         }
@@ -65,10 +65,10 @@ class DurationTest {
         assertEquals(-Duration.INFINITE, (-MAX_MILLIS).toDuration(DurationUnit.MILLISECONDS))
 
         run {
-            val maxNsDouble = MAX_NANOS.toDouble()
-            val lessThanMaxDouble = maxNsDouble.nextDown()
-            val maxNs = maxNsDouble.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds
-            val lessThanMaxNs = lessThanMaxDouble.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds
+            konst maxNsDouble = MAX_NANOS.toDouble()
+            konst lessThanMaxDouble = maxNsDouble.nextDown()
+            konst maxNs = maxNsDouble.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds
+            konst lessThanMaxNs = lessThanMaxDouble.toDuration(DurationUnit.NANOSECONDS).inWholeNanoseconds
             assertTrue(maxNs > lessThanMaxNs, "$maxNs should be > $lessThanMaxNs")
         }
 
@@ -77,7 +77,7 @@ class DurationTest {
 
     @Test
     fun equality() {
-        val data = listOf<Pair<Double, DurationUnit>>(
+        konst data = listOf<Pair<Double, DurationUnit>>(
             Pair(2.0, DurationUnit.DAYS),
             Pair(2.0, DurationUnit.HOURS),
             Pair(0.25, DurationUnit.MINUTES),
@@ -88,24 +88,24 @@ class DurationTest {
             Pair(1.0, DurationUnit.NANOSECONDS)
         )
 
-        for ((value, unit) in data) {
+        for ((konstue, unit) in data) {
             repeat(10) {
-                val d1 = value.toDuration(unit)
-                val unit2 = units.random()
+                konst d1 = konstue.toDuration(unit)
+                konst unit2 = units.random()
                 @OptIn(ExperimentalTime::class)
-                val value2 = Duration.convert(value, unit, unit2)
-                val d2 = value2.toDuration(unit2)
-                assertEquals(d1, d2, "$value $unit in $unit2")
+                konst konstue2 = Duration.convert(konstue, unit, unit2)
+                konst d2 = konstue2.toDuration(unit2)
+                assertEquals(d1, d2, "$konstue $unit in $unit2")
                 assertEquals(d1.hashCode(), d2.hashCode())
 
-                val d3 = (value2 * 2).toDuration(unit2)
-                assertNotEquals(d1, d3, "$value $unit in $unit2")
+                konst d3 = (konstue2 * 2).toDuration(unit2)
+                assertNotEquals(d1, d3, "$konstue $unit in $unit2")
             }
         }
 
         run { // invariant Duration.nanoseconds(d.inWholeNanoseconds) == d when whole nanoseconds fits into Long range
-            val d1 = (MAX_NANOS + 1).nanoseconds
-            val d2 = d1.inWholeNanoseconds.nanoseconds
+            konst d1 = (MAX_NANOS + 1).nanoseconds
+            konst d2 = d1.inWholeNanoseconds.nanoseconds
             assertEquals(d1.inWholeNanoseconds, d2.inWholeNanoseconds)
             assertEquals(d1, d2)
         }
@@ -123,10 +123,10 @@ class DurationTest {
             )
         }
 
-        val d4 = Long.MAX_VALUE.nanoseconds
-        val d3 = (MAX_NANOS + 1).nanoseconds
-        val d2 = MAX_NANOS.nanoseconds
-        val d1 = (MAX_NANOS - 1).nanoseconds
+        konst d4 = Long.MAX_VALUE.nanoseconds
+        konst d3 = (MAX_NANOS + 1).nanoseconds
+        konst d2 = MAX_NANOS.nanoseconds
+        konst d1 = (MAX_NANOS - 1).nanoseconds
 
         assertGreater(d4, d2, "same sign, different ranges")
         assertGreater(d3, d2, "same sign, different ranges 2")
@@ -140,9 +140,9 @@ class DurationTest {
 
     @Test
     fun constructionFactoryFunctions() {
-        val n1 = Random.nextInt(Int.MAX_VALUE)
-        val n2 = Random.nextLong(Long.MAX_VALUE)
-        val n3 = Random.nextDouble()
+        konst n1 = Random.nextInt(Int.MAX_VALUE)
+        konst n2 = Random.nextLong(Long.MAX_VALUE)
+        konst n3 = Random.nextDouble()
 
         assertEquals(n1.toDuration(DurationUnit.DAYS), n1.days)
         assertEquals(n2.toDuration(DurationUnit.DAYS), n2.days)
@@ -194,15 +194,15 @@ class DurationTest {
         assertEquals(11, 11.5.milliseconds.inWholeMilliseconds)
         assertEquals(-11, (-11.5).milliseconds.inWholeMilliseconds)
         assertEquals(252_000_000, 252.milliseconds.inWholeNanoseconds)
-        assertEquals(Long.MAX_VALUE, (365.days * 293).inWholeNanoseconds) // clamping overflowed value
+        assertEquals(Long.MAX_VALUE, (365.days * 293).inWholeNanoseconds) // clamping overflowed konstue
 
         repeat(100) {
-            val value = Random.nextLong(1000)
-            val unit = units.random()
-            val unit2 = units.random()
+            konst konstue = Random.nextLong(1000)
+            konst unit = units.random()
+            konst unit2 = units.random()
 
             @OptIn(ExperimentalTime::class)
-            assertAlmostEquals(Duration.convert(value.toDouble(), unit, unit2), value.toDuration(unit).toDouble(unit2))
+            assertAlmostEquals(Duration.convert(konstue.toDouble(), unit, unit2), konstue.toDuration(unit).toDouble(unit2))
         }
 
         for (unit in units) {
@@ -218,16 +218,16 @@ class DurationTest {
     @Test
     fun componentsOfProperSum() {
         repeat(100) {
-            val isNsRange = Random.nextBoolean()
-            val d = if (isNsRange)
+            konst isNsRange = Random.nextBoolean()
+            konst d = if (isNsRange)
                 Random.nextLong(365L * 146)
             else
                 Random.nextLong(365L * 150, 365L * 146_000_000)
-            val h = Random.nextInt(24)
-            val m = Random.nextInt(60)
-            val s = Random.nextInt(60)
-            val ns = Random.nextInt(1e9.toInt())
-            val expectedNs = if (isNsRange) ns else ns - (ns % NANOS_IN_MILLIS)
+            konst h = Random.nextInt(24)
+            konst m = Random.nextInt(60)
+            konst s = Random.nextInt(60)
+            konst ns = Random.nextInt(1e9.toInt())
+            konst expectedNs = if (isNsRange) ns else ns - (ns % NANOS_IN_MILLIS)
             (d.days + h.hours + m.minutes + s.seconds + ns.nanoseconds).run {
                 toComponents { seconds, nanoseconds ->
                     assertEquals(d * 86400 + h * 3600 + m * 60 + s, seconds)
@@ -271,7 +271,7 @@ class DurationTest {
     @Test
     fun componentsOfInfinity() {
         for (d in listOf(Duration.INFINITE, -Duration.INFINITE)) {
-            val expected = if (d.isPositive()) Long.MAX_VALUE else Long.MIN_VALUE
+            konst expected = if (d.isPositive()) Long.MAX_VALUE else Long.MIN_VALUE
             d.toComponents { seconds, nanoseconds ->
                 assertEquals(expected, seconds)
                 assertEquals(0, nanoseconds)
@@ -312,18 +312,18 @@ class DurationTest {
     @Test
     fun negation() {
         repeat(100) {
-            val value = Random.nextLong()
-            val unit = units.random()
+            konst konstue = Random.nextLong()
+            konst unit = units.random()
 
-            assertEquals((-value).toDuration(unit), -value.toDuration(unit))
+            assertEquals((-konstue).toDuration(unit), -konstue.toDuration(unit))
         }
     }
 
     @Test
     fun signAndAbsoluteValue() {
-        val negative = -1.seconds
-        val positive = 1.seconds
-        val zero = Duration.ZERO
+        konst negative = -1.seconds
+        konst positive = 1.seconds
+        konst zero = Duration.ZERO
 
         assertTrue(negative.isNegative())
         assertFalse(zero.isNegative())
@@ -340,26 +340,26 @@ class DurationTest {
 
     @Test
     fun negativeZero() {
-        fun equivalentToZero(value: Duration) {
-            assertEquals(Duration.ZERO, value)
-            assertEquals(Duration.ZERO, value.absoluteValue)
-            assertEquals(value, value.absoluteValue)
-            assertEquals(value, value.absoluteValue)
-            assertFalse(value.isNegative())
-            assertFalse(value.isPositive())
-            assertEquals(Duration.ZERO.toString(), value.toString())
-            assertEquals(Duration.ZERO.toIsoString(), value.toIsoString())
-            assertEquals(Duration.ZERO.toDouble(DurationUnit.SECONDS), value.toDouble(DurationUnit.SECONDS))
-            assertEquals(0, Duration.ZERO.compareTo(value))
-            assertEquals(0, Duration.ZERO.toDouble(DurationUnit.NANOSECONDS).compareTo(value.toDouble(DurationUnit.NANOSECONDS)))
+        fun equikonstentToZero(konstue: Duration) {
+            assertEquals(Duration.ZERO, konstue)
+            assertEquals(Duration.ZERO, konstue.absoluteValue)
+            assertEquals(konstue, konstue.absoluteValue)
+            assertEquals(konstue, konstue.absoluteValue)
+            assertFalse(konstue.isNegative())
+            assertFalse(konstue.isPositive())
+            assertEquals(Duration.ZERO.toString(), konstue.toString())
+            assertEquals(Duration.ZERO.toIsoString(), konstue.toIsoString())
+            assertEquals(Duration.ZERO.toDouble(DurationUnit.SECONDS), konstue.toDouble(DurationUnit.SECONDS))
+            assertEquals(0, Duration.ZERO.compareTo(konstue))
+            assertEquals(0, Duration.ZERO.toDouble(DurationUnit.NANOSECONDS).compareTo(konstue.toDouble(DurationUnit.NANOSECONDS)))
         }
-        equivalentToZero((-0.0).seconds)
-        equivalentToZero((-0.0).toDuration(DurationUnit.DAYS))
-        equivalentToZero(-Duration.ZERO)
-        equivalentToZero((-1).seconds / Double.POSITIVE_INFINITY)
-        equivalentToZero(0.seconds / -1)
-        equivalentToZero((-1).seconds * 0.0)
-        equivalentToZero(0.seconds * -1)
+        equikonstentToZero((-0.0).seconds)
+        equikonstentToZero((-0.0).toDuration(DurationUnit.DAYS))
+        equikonstentToZero(-Duration.ZERO)
+        equikonstentToZero((-1).seconds / Double.POSITIVE_INFINITY)
+        equikonstentToZero(0.seconds / -1)
+        equikonstentToZero((-1).seconds * 0.0)
+        equikonstentToZero(0.seconds * -1)
     }
 
 
@@ -369,9 +369,9 @@ class DurationTest {
         assertEquals(0.5.days, 6.hours + 360.minutes)
         assertEquals(0.5.seconds, 200.milliseconds + 300_000.microseconds)
 
-        for (value in listOf(Duration.ZERO, 1.nanoseconds, (500 * 365).days)) {
+        for (konstue in listOf(Duration.ZERO, 1.nanoseconds, (500 * 365).days)) {
             for (inf in listOf(Duration.INFINITE, -Duration.INFINITE)) {
-                for (result in listOf(inf + inf, inf + value, inf + (-value), value + inf, (-value) + inf)) {
+                for (result in listOf(inf + inf, inf + konstue, inf + (-konstue), konstue + inf, (-konstue) + inf)) {
                     assertEquals(inf, result)
                 }
             }
@@ -389,30 +389,30 @@ class DurationTest {
         assertEquals((-1).milliseconds, (Long.MAX_VALUE - 1_000).microseconds - Long.MAX_VALUE.microseconds)
 
         run {
-            val offset = 2L * NANOS_IN_MILLIS
-            val value = MAX_NANOS + offset
-            val base = value.nanoseconds
-            val baseNs = base.inWholeMilliseconds * NANOS_IN_MILLIS
+            konst offset = 2L * NANOS_IN_MILLIS
+            konst konstue = MAX_NANOS + offset
+            konst base = konstue.nanoseconds
+            konst baseNs = base.inWholeMilliseconds * NANOS_IN_MILLIS
             assertEquals(baseNs, base.inWholeNanoseconds)  // base stored as millis
 
-            val smallDeltas = listOf(1L, 2L, 1000L, NANOS_IN_MILLIS - 1L) + List(10) { Random.nextLong(NANOS_IN_MILLIS.toLong()) }
+            konst smallDeltas = listOf(1L, 2L, 1000L, NANOS_IN_MILLIS - 1L) + List(10) { Random.nextLong(NANOS_IN_MILLIS.toLong()) }
             for (smallDeltaNs in smallDeltas) {
                 assertEquals(base, base - smallDeltaNs.nanoseconds, "delta: $smallDeltaNs")
             }
 
-            val deltas = listOf(offset + 1L, offset + 1500L) +
+            konst deltas = listOf(offset + 1L, offset + 1500L) +
                     List(10) { Random.nextLong(offset + 1500, offset + 10000) } +
                     List(100) { Random.nextLong(offset + 1500, MAX_NANOS) }
             for (deltaNs in deltas) {
-                val delta = deltaNs.nanoseconds
+                konst delta = deltaNs.nanoseconds
                 assertEquals(deltaNs, delta.inWholeNanoseconds)
                 assertEquals(baseNs - deltaNs, (base - delta).inWholeNanoseconds, "base: $baseNs, delta: $deltaNs")
             }
         }
 
-        for (value in listOf(Duration.ZERO, 1.nanoseconds, (500 * 365).days)) {
+        for (konstue in listOf(Duration.ZERO, 1.nanoseconds, (500 * 365).days)) {
             for (inf in listOf(Duration.INFINITE, -Duration.INFINITE)) {
-                for (result in listOf(inf - (-inf), inf - value, inf - (-value), value - (-inf), (-value) - (-inf))) {
+                for (result in listOf(inf - (-inf), inf - konstue, inf - (-konstue), konstue - (-inf), (-konstue) - (-inf))) {
                     assertEquals(inf, result)
                 }
             }
@@ -435,15 +435,15 @@ class DurationTest {
         assertEquals(Duration.ZERO, 1.seconds * 0.0)
 
         run { // promoting nanos range to millis range after multiplication
-            val value = MAX_NANOS
-            assertEquals(value, (value.nanoseconds * 1_000_000).inWholeMilliseconds)
-            assertEquals(value / 1000, (value.nanoseconds * 1_000).inWholeMilliseconds)
+            konst konstue = MAX_NANOS
+            assertEquals(konstue, (konstue.nanoseconds * 1_000_000).inWholeMilliseconds)
+            assertEquals(konstue / 1000, (konstue.nanoseconds * 1_000).inWholeMilliseconds)
             assertEquals(Duration.INFINITE, (Long.MAX_VALUE / 1000 + 1).nanoseconds * 1_000_000_000)
         }
 
         run {
-            val value = MAX_NANOS / Int.MAX_VALUE
-            assertTrue((value.nanoseconds * Int.MIN_VALUE).inWholeNanoseconds < -MAX_NANOS)
+            konst konstue = MAX_NANOS / Int.MAX_VALUE
+            assertTrue((konstue.nanoseconds * Int.MIN_VALUE).inWholeNanoseconds < -MAX_NANOS)
         }
 
         assertEquals(Duration.INFINITE, Int.MAX_VALUE.days * Int.MAX_VALUE)
@@ -467,8 +467,8 @@ class DurationTest {
         assertEquals(365.days, (365 * 299.5).days / 299.5)
 
         run {
-            val value = MAX_NANOS
-            assertEquals(value, (value.milliseconds / 1_000_000).inWholeNanoseconds)
+            konst konstue = MAX_NANOS
+            assertEquals(konstue, (konstue.milliseconds / 1_000_000).inWholeNanoseconds)
         }
 
         assertEquals(Duration.INFINITE, 1.seconds / 0)
@@ -498,26 +498,26 @@ class DurationTest {
 
     @Test
     fun truncation() {
-        fun expect(expected: Duration, value: Duration, unit: DurationUnit) {
-            assertEquals(expected, value.truncateTo(unit))
-            assertEquals(-expected, (-value).truncateTo(unit))
+        fun expect(expected: Duration, konstue: Duration, unit: DurationUnit) {
+            assertEquals(expected, konstue.truncateTo(unit))
+            assertEquals(-expected, (-konstue).truncateTo(unit))
         }
         for (unit in units) {
             expect(Duration.ZERO, Duration.ZERO, unit)
             expect(Duration.INFINITE, Duration.INFINITE, unit)
             expect(Duration.ZERO, 1.toDuration(unit) - 1.nanoseconds, unit)
             repeat(100) {
-                val whole = Random.nextInt(100_000).toDuration(unit)
+                konst whole = Random.nextInt(100_000).toDuration(unit)
                 expect(whole, whole, unit)
                 if (unit > DurationUnit.NANOSECONDS) {
-                    val part = Random.nextLong(1, 1.toDuration(unit).inWholeNanoseconds).nanoseconds
+                    konst part = Random.nextLong(1, 1.toDuration(unit).inWholeNanoseconds).nanoseconds
                     expect(Duration.ZERO, part, unit)
                     expect(whole, whole + part, unit)
                 }
             }
         }
         repeat(10) {
-            val d = Random.nextLong().nanoseconds
+            konst d = Random.nextLong().nanoseconds
             expect(d, d, DurationUnit.NANOSECONDS)
         }
         expect(12.microseconds, 12998.nanoseconds, DurationUnit.MICROSECONDS)
@@ -529,7 +529,7 @@ class DurationTest {
 
         // big durations
         run {
-            val d = (Long.MAX_VALUE / 4).milliseconds
+            konst d = (Long.MAX_VALUE / 4).milliseconds
             for (unit in units) {
                 if (unit <= DurationUnit.MILLISECONDS) {
                     expect(d, d, unit)
@@ -590,7 +590,7 @@ class DurationTest {
 
     @Test
     fun parseIsoStringFailing() {
-        for (invalidValue in listOf(
+        for (inkonstidValue in listOf(
             "", " ", "P", "PT", "P1DT", "P1", "PT1", "0", "+P", "+", "-", "h", "H", "something",
             "1m", "1d", "2d 11s", "Infinity", "-Infinity",
             "P+12+34D", "P12-34D", "PT1234567890-1234567890S",
@@ -601,9 +601,9 @@ class DurationTest {
             "P9999999999999DT-9999999999999H",
             "PT1.5H", "PT0.5D", "PT.5S", "PT0.25.25S",
         )) {
-            assertNull(Duration.parseIsoStringOrNull(invalidValue), invalidValue)
-            assertFailsWith<IllegalArgumentException>(invalidValue) { Duration.parseIsoString(invalidValue) }.let { e ->
-                assertContains(e.message!!, "'$invalidValue'")
+            assertNull(Duration.parseIsoStringOrNull(inkonstidValue), inkonstidValue)
+            assertFailsWith<IllegalArgumentException>(inkonstidValue) { Duration.parseIsoString(inkonstidValue) }.let { e ->
+                assertContains(e.message!!, "'$inkonstidValue'")
             }
         }
 
@@ -618,10 +618,10 @@ class DurationTest {
             assertFails { d.toString(unit, -1) }
             assertEquals(representations.toList(), representations.indices.map { d.toString(unit, it) })
             for ((decimals, string) in representations.withIndex()) {
-                val d1 = Duration.parse(string)
+                konst d1 = Duration.parse(string)
                 assertEquals(d1, Duration.parseOrNull(string))
                 if (!(d1 == d || (d1 - d).absoluteValue <= (0.5 * 10.0.pow(-decimals)).toDuration(unit))) {
-                    fail("Parsed value $d1 (from $string) is too far from the real value $d")
+                    fail("Parsed konstue $d1 (from $string) is too far from the real konstue $d")
                 }
             }
         }
@@ -671,7 +671,7 @@ class DurationTest {
         }
 
         fun test(duration: Duration, vararg expected: String) {
-            val actual = duration.toString()
+            konst actual = duration.toString()
             assertEquals(expected.first(), actual)
 
             if (duration.isPositive()) {
@@ -750,11 +750,11 @@ class DurationTest {
         test(365.days * 10000, "3650000d")
         test(300.days * 100000, "30000000d")
         test(365.days * 100000, "36500000d")
-        test((MAX_MILLIS - 1).milliseconds, "53375995583d 15h 36m 27.902s") // max finite value
+        test((MAX_MILLIS - 1).milliseconds, "53375995583d 15h 36m 27.902s") // max finite konstue
 
         // all infinite
-//        val universeAge = Duration.days(365.25) * 13.799e9
-//        val planckTime = Duration.seconds(5.4e-44)
+//        konst universeAge = Duration.days(365.25) * 13.799e9
+//        konst planckTime = Duration.seconds(5.4e-44)
 
 //        test(universeAge, "5.04e+12d")
 //        test(planckTime, "5.40e-44s")
@@ -765,9 +765,9 @@ class DurationTest {
 
     @Test
     fun parseDefaultFailing() {
-        for (invalidValue in listOf(
+        for (inkonstidValue in listOf(
             "", " ", "P", "PT", "P1DT", "P1", "PT1", "0", "+P", "+", "-", "h", "H", "something",
-            "1234567890123456789012ns", "Inf", "-Infinity value",
+            "1234567890123456789012ns", "Inf", "-Infinity konstue",
             "1s ", " 1s",
             "1d 1m 1h", "1s 2s",
             "-12m 15s", "-12m -15s", "-()", "-(12m 30s",
@@ -781,9 +781,9 @@ class DurationTest {
             "P9999999999999DT-9999999999999H",
             "PT1.5H", "PT0.5D", "PT.5S", "PT0.25.25S",
         )) {
-            assertNull(Duration.parseOrNull(invalidValue), invalidValue)
-            assertFailsWith<IllegalArgumentException>(invalidValue) { Duration.parse(invalidValue) }.let { e ->
-                assertContains(e.message!!, "'$invalidValue'")
+            assertNull(Duration.parseOrNull(inkonstidValue), inkonstidValue)
+            assertFailsWith<IllegalArgumentException>(inkonstidValue) { Duration.parse(inkonstidValue) }.let { e ->
+                assertContains(e.message!!, "'$inkonstidValue'")
             }
         }
     }

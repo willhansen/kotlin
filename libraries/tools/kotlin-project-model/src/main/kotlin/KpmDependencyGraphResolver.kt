@@ -9,17 +9,17 @@ interface KpmDependencyGraphResolver {
     fun resolveDependencyGraph(requestingModule: KpmModule): KpmDependencyGraphResolution
 }
 
-sealed class KpmDependencyGraphResolution(open val requestingModule: KpmModule) {
+sealed class KpmDependencyGraphResolution(open konst requestingModule: KpmModule) {
     class Unknown(requestingModule: KpmModule) : KpmDependencyGraphResolution(requestingModule)
     open class KpmDependencyGraph(
-        requestingModule: KpmModule, open val root: KpmDependencyGraphNode
+        requestingModule: KpmModule, open konst root: KpmDependencyGraphNode
     ) : KpmDependencyGraphResolution(requestingModule)
 }
 
 // TODO: should this be a single graph for all dependency scopes as well, not just for all fragments?
 open class KpmDependencyGraphNode(
-    open val module: KpmModule,
-    open val dependenciesByFragment: Map<KpmFragment, Iterable<KpmDependencyGraphNode>>
+    open konst module: KpmModule,
+    open konst dependenciesByFragment: Map<KpmFragment, Iterable<KpmDependencyGraphNode>>
 ) {
     override fun toString(): String = "node ${module}"
 }

@@ -7,18 +7,18 @@
  * DESCRIPTION: Real literals suffixed by f/F (float suffix) with a not allowed exponent mark at the beginning.
  */
 
-val value = E0f
-val value = e000F
+konst konstue = E0f
+konst konstue = e000F
 
-val value = E+0f
-val value = e00f
+konst konstue = E+0f
+konst konstue = e00f
 
-val value = e+1F
-val value = e22F
-val value = E-333F
-val value = e4444f
-val value = e-55555f
-val value = e666666F
-val value = E7777777f
-val value = e-88888888F
-val value = E+999999999F
+konst konstue = e+1F
+konst konstue = e22F
+konst konstue = E-333F
+konst konstue = e4444f
+konst konstue = e-55555f
+konst konstue = e666666F
+konst konstue = E7777777f
+konst konstue = e-88888888F
+konst konstue = E+999999999F

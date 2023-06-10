@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
 }
 
-val commonMainSources by task<Sync> {
+konst commonMainSources by task<Sync> {
     from(
         "$rootDir/libraries/kotlin.test/common/src/main",
         "$rootDir/libraries/kotlin.test/annotations-common/src/main"
@@ -12,12 +12,12 @@ val commonMainSources by task<Sync> {
     into("$buildDir/commonMainSources")
 }
 
-val commonTestSources by task<Sync> {
+konst commonTestSources by task<Sync> {
     from("$rootDir/libraries/kotlin.test/common/src/test/kotlin")
     into("$buildDir/commonTestSources")
 }
 
-val jsMainSources by task<Sync> {
+konst jsMainSources by task<Sync> {
     from("$rootDir/libraries/kotlin.test/js/src")
     into("$buildDir/jsMainSources")
 }
@@ -28,16 +28,16 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 api(project(":kotlin-stdlib-js-ir"))
             }
             kotlin.srcDir(commonMainSources.get().destinationDir)
         }
-        val commonTest by getting {
+        konst commonTest by getting {
             kotlin.srcDir(commonTestSources.get().destinationDir)
         }
-        val jsMain by getting {
+        konst jsMain by getting {
             dependencies {
                 api(project(":kotlin-stdlib-js-ir"))
             }

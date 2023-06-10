@@ -3,7 +3,7 @@
 // See KT-20752
 
 class Unstable {
-    val first: String? get() = null
+    konst first: String? get() = null
 }
 
 class StringList {
@@ -18,7 +18,7 @@ fun foo(list: StringList, arg: Unstable) {
         // Should be still resolved to extension, without smart cast or smart cast impossible
         list.remove(arg.first)
     }
-    val s = arg.first <!USELESS_CAST!>as? String<!>
+    konst s = arg.first <!USELESS_CAST!>as? String<!>
     if (s != null) {
         // Should be still resolved to extension, without smart cast or smart cast impossible
         list.remove(arg.first)

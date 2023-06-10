@@ -5,7 +5,7 @@ data class Test1<T : Any?> {
   // CHECK:
   //   Mangled name: Test1{}x
   //   Public signature: /Test1.x|-8060530855978347579[0]
-  val x: T
+  konst x: T
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-x>(){}1:0
     //   Public signature: /Test1.x.<get-x>|-8893883356128097563[0]
@@ -67,7 +67,7 @@ data class Test2<T : Number> {
   // CHECK:
   //   Mangled name: Test2{}x
   //   Public signature: /Test2.x|-8060530855978347579[0]
-  val x: T
+  konst x: T
     // CHECK JVM_IR:
     //   Mangled name: Test2#<get-x>(){}1:0
     //   Public signature: /Test2.x.<get-x>|-8893883356128097563[0]
@@ -129,7 +129,7 @@ data class Test3<T : Any?> {
   // CHECK:
   //   Mangled name: Test3{}x
   //   Public signature: /Test3.x|-8060530855978347579[0]
-  val x: List<T>
+  konst x: List<T>
     // CHECK JVM_IR:
     //   Mangled name: Test3#<get-x>(){}kotlin.collections.List<1:0>
     //   Public signature: /Test3.x.<get-x>|-8777382765774009671[0]
@@ -191,7 +191,7 @@ data class Test4 {
   // CHECK:
   //   Mangled name: Test4{}x
   //   Public signature: /Test4.x|-8060530855978347579[0]
-  val x: List<String>
+  konst x: List<String>
     // CHECK JVM_IR:
     //   Mangled name: Test4#<get-x>(){}kotlin.collections.List<kotlin.String>
     //   Public signature: /Test4.x.<get-x>|-612381453611729517[0]

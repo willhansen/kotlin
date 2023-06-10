@@ -13,11 +13,11 @@ public class D {
 
 import test.D
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class A : D() {
     fun a(): String {
-        return eval { field!! }
+        return ekonst { field!! }
     }
 }
 

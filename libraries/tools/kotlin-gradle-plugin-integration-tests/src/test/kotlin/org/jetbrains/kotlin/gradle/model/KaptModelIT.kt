@@ -24,8 +24,8 @@ class KaptModelIT : KGPBaseTest() {
                     assertBasics("simple")
 
                     assertEquals(2, kaptSourceSets.size)
-                    val mainSourceSet = kaptSourceSets.first { it.name == "main" }
-                    val testSourceSet = kaptSourceSets.first { it.name == "test" }
+                    konst mainSourceSet = kaptSourceSets.first { it.name == "main" }
+                    konst testSourceSet = kaptSourceSets.first { it.name == "test" }
 
                     assertEquals(KaptSourceSet.KaptSourceSetType.PRODUCTION, mainSourceSet.type)
                     assertEquals(

@@ -8,7 +8,7 @@ fun outer() {
 
     abstract fun afun()
 
-    abstract val aval: Int
+    abstract konst akonst: Int
       abstract get
 
     abstract var avar: Int
@@ -27,7 +27,7 @@ fun outer() {
     override fun afun() {
     }
 
-    override val aval: Int
+    override konst akonst: Int
       field = 1
       override get
 

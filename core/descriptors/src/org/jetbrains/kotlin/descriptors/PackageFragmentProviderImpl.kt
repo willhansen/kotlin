@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 class PackageFragmentProviderImpl(
-    private val packageFragments: Collection<PackageFragmentDescriptor>
+    private konst packageFragments: Collection<PackageFragmentDescriptor>
 ) : PackageFragmentProviderOptimized {
     override fun collectPackageFragments(fqName: FqName, packageFragments: MutableCollection<PackageFragmentDescriptor>) {
         this.packageFragments.filterTo(packageFragments) { it.fqName == fqName }

@@ -2,8 +2,8 @@
 inline fun f(g: () -> String) = g()
 
 // FILE: 2.kt
-class A(val x: String) {
-    inner class B(val y: String) {
+class A(konst x: String) {
+    inner class B(konst y: String) {
         fun h() = f { x + y }
     }
 }

@@ -27,16 +27,16 @@ import kotlin.test.assertNull
 class Kotlin2JsCompileArgumentsTest {
     @Test
     fun `test - simple project - old CompilerArgumentsAware and new CompilerArgumentsProducer - return same arguments`() {
-        val project = buildProjectWithMPP()
+        konst project = buildProjectWithMPP()
         project.repositories.mavenLocal()
 
-        val kotlin = project.multiplatformExtension
-        val jsTarget = kotlin.js(IR)
-        val jsMainCompilation = jsTarget.compilations.main
-        project.evaluate()
+        konst kotlin = project.multiplatformExtension
+        konst jsTarget = kotlin.js(IR)
+        konst jsMainCompilation = jsTarget.compilations.main
+        project.ekonstuate()
 
-        val jsMainCompileTask = jsMainCompilation.compileTaskProvider.get()
-        val argumentsFromCompilerArgumentsProducer = jsMainCompileTask.createCompilerArguments(
+        konst jsMainCompileTask = jsMainCompilation.compileTaskProvider.get()
+        konst argumentsFromCompilerArgumentsProducer = jsMainCompileTask.createCompilerArguments(
             CreateCompilerArgumentsContext(
                 includeArgumentTypes = setOf(Primitive, PluginClasspath),
                 isLenient = true
@@ -52,13 +52,13 @@ class Kotlin2JsCompileArgumentsTest {
 
     @Test
     fun `test - simple project - failing dependency - lenient`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
-        val jsTarget = kotlin.js()
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
+        konst jsTarget = kotlin.js()
         kotlin.sourceSets.getByName("commonMain").dependencies { implementation("not-a:dependency:1.0.0") }
-        project.evaluate()
+        project.ekonstuate()
 
-        val jsMainCompileTask = jsTarget.compilations.main.compileTaskProvider.get()
+        konst jsMainCompileTask = jsTarget.compilations.main.compileTaskProvider.get()
         assertNull(jsMainCompileTask.createCompilerArguments(lenient).libraries)
 
         assertFails { jsMainCompileTask.createCompilerArguments(default) }
@@ -66,20 +66,20 @@ class Kotlin2JsCompileArgumentsTest {
 
     @Test
     fun `test - setting languagesVersion and apiVersion in languageSettings`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.linuxX64()
-        val jsTarget = kotlin.js(IR) { nodejs() }
+        konst jsTarget = kotlin.js(IR) { nodejs() }
 
         kotlin.sourceSets.configureEach { sourceSet ->
             sourceSet.languageSettings.apiVersion = "1.7"
             sourceSet.languageSettings.languageVersion = "1.8"
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val arguments = jsTarget.compilations.main.compileTaskProvider.get()
+        konst arguments = jsTarget.compilations.main.compileTaskProvider.get()
             .createCompilerArguments(lenient)
 
         assertEquals("1.7", arguments.apiVersion)

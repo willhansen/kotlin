@@ -7,13 +7,13 @@ class A<Q : Any?> {
 
   }
 
-  val q: Q
+  konst q: Q
     field = q
     get
 
 }
 
 fun bar() {
-  val b: A<Int> = A<Int>(q = 2)
-  val b2: A<A<Int>> = A<Int>(q = b)
+  konst b: A<Int> = A<Int>(q = 2)
+  konst b2: A<A<Int>> = A<Int>(q = b)
 }

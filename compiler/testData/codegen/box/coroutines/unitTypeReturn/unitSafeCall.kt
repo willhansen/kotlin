@@ -17,7 +17,7 @@ suspend fun suspendHere(x: String): Unit {
     }
 }
 
-class A(val x: String) {
+class A(konst x: String) {
     suspend fun foo() = suspendHere("A.foo($x)")
 }
 
@@ -29,12 +29,12 @@ fun builder(c: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val a1: A? = A("*")
-    val a2: A? = null
+    konst a1: A? = A("*")
+    konst a2: A? = null
     builder {
-        val r1 = a1?.foo().simpleName + ";"
+        konst r1 = a1?.foo().simpleName + ";"
         log += r1
-        val r2 = a2?.foo().simpleName + ";"
+        konst r2 = a2?.foo().simpleName + ";"
         log += r2
         A("@").foo()
     }
@@ -49,5 +49,5 @@ fun box(): String {
     return "OK"
 }
 
-val Any?.simpleName: String
+konst Any?.simpleName: String
     get() = if (this == null) "null" else "Unit"

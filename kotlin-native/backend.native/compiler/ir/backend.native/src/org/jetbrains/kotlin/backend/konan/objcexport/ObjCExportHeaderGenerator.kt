@@ -51,14 +51,14 @@ interface ObjCExportProblemCollector {
 }
 
 internal class ObjCExportTranslatorImpl(
-        private val generator: ObjCExportHeaderGenerator?,
-        val mapper: ObjCExportMapper,
-        val namer: ObjCExportNamer,
-        val problemCollector: ObjCExportProblemCollector,
-        val objcGenerics: Boolean
+        private konst generator: ObjCExportHeaderGenerator?,
+        konst mapper: ObjCExportMapper,
+        konst namer: ObjCExportNamer,
+        konst problemCollector: ObjCExportProblemCollector,
+        konst objcGenerics: Boolean
 ) : ObjCExportTranslator {
 
-    private val kotlinAnyName = namer.kotlinAnyName
+    private konst kotlinAnyName = namer.kotlinAnyName
 
     override fun generateBaseDeclarations(): List<ObjCTopLevel<*>> = buildTopLevel {
         add {
@@ -80,7 +80,7 @@ internal class ObjCExportTranslatorImpl(
 
         // TODO: only if appears
         add {
-            val generics = listOf("ObjectType")
+            konst generics = listOf("ObjectType")
             objCInterface(
                     namer.mutableSetName,
                     generics = generics,
@@ -91,7 +91,7 @@ internal class ObjCExportTranslatorImpl(
 
         // TODO: only if appears
         add {
-            val generics = listOf("KeyType", "ObjectType")
+            konst generics = listOf("KeyType", "ObjectType")
             objCInterface(
                     namer.mutableMapName,
                     generics = generics,
@@ -100,7 +100,7 @@ internal class ObjCExportTranslatorImpl(
             )
         }
 
-        val nsErrorCategoryName = "NSError${namer.topLevelNamePrefix}KotlinException"
+        konst nsErrorCategoryName = "NSError${namer.topLevelNamePrefix}KotlinException"
         add {
             ObjCInterfaceImpl("NSError", categoryName = nsErrorCategoryName, members = buildMembers {
                 add { ObjCProperty("kotlinException", null, ObjCNullableReferenceType(ObjCIdType), listOf("readonly")) }
@@ -111,11 +111,11 @@ internal class ObjCExportTranslatorImpl(
     }
 
     private fun StubBuilder<ObjCTopLevel<*>>.genKotlinNumbers() {
-        val members = buildMembers {
-            NSNumberKind.values().forEach {
+        konst members = buildMembers {
+            NSNumberKind.konstues().forEach {
                 add { nsNumberFactory(it, listOf("unavailable")) }
             }
-            NSNumberKind.values().forEach {
+            NSNumberKind.konstues().forEach {
                 add { nsNumberInit(it, listOf("unavailable")) }
             }
         }
@@ -127,7 +127,7 @@ internal class ObjCExportTranslatorImpl(
             )
         }
 
-        NSNumberKind.values().forEach {
+        NSNumberKind.konstues().forEach {
             if (it.mappedKotlinClassId != null) add {
                 genKotlinNumber(it.mappedKotlinClassId, it)
             }
@@ -135,9 +135,9 @@ internal class ObjCExportTranslatorImpl(
     }
 
     private fun genKotlinNumber(kotlinClassId: ClassId, kind: NSNumberKind): ObjCInterface {
-        val name = namer.numberBoxName(kotlinClassId)
+        konst name = namer.numberBoxName(kotlinClassId)
 
-        val members = buildMembers {
+        konst members = buildMembers {
             add { nsNumberFactory(kind) }
             add { nsNumberInit(kind) }
         }
@@ -154,7 +154,7 @@ internal class ObjCExportTranslatorImpl(
                 false,
                 ObjCInstanceType,
                 listOf(kind.factorySelector),
-                listOf(ObjCParameter("value", null, kind.objCType)),
+                listOf(ObjCParameter("konstue", null, kind.objCType)),
                 attributes
         )
     }
@@ -165,7 +165,7 @@ internal class ObjCExportTranslatorImpl(
                 true,
                 ObjCInstanceType,
                 listOf(kind.initSelector),
-                listOf(ObjCParameter("value", null, kind.objCType)),
+                listOf(ObjCParameter("konstue", null, kind.objCType)),
                 attributes
         )
     }
@@ -189,7 +189,7 @@ internal class ObjCExportTranslatorImpl(
     )
 
     private fun attributesForUnexposed(descriptor: ClassDescriptor): List<String> {
-        val message = when {
+        konst message = when {
             descriptor.isKotlinObjCClass() -> "Kotlin subclass of Objective-C class "
             else -> ""
         } + "can't be imported"
@@ -202,8 +202,8 @@ internal class ObjCExportTranslatorImpl(
         generator?.requireClassOrInterface(descriptor)
 
         return translateClassOrInterfaceName(descriptor).also { className ->
-            val generics = mapTypeConstructorParameters(descriptor)
-            val forwardDeclaration = ObjCClassForwardDeclaration(className.objCName, generics)
+            konst generics = mapTypeConstructorParameters(descriptor)
+            konst forwardDeclaration = ObjCClassForwardDeclaration(className.objCName, generics)
             generator?.referenceClass(forwardDeclaration)
         }
     }
@@ -233,15 +233,15 @@ internal class ObjCExportTranslatorImpl(
             return translateUnexposedInterfaceAsUnavailableStub(descriptor)
         }
 
-        val name = translateClassOrInterfaceName(descriptor)
-        val members: List<Stub<*>> = buildMembers { translateInterfaceMembers(descriptor) }
-        val superProtocols: List<String> = descriptor.superProtocols
-        val comment = objCCommentOrNull(mustBeDocumentedAttributeList(descriptor.annotations))
+        konst name = translateClassOrInterfaceName(descriptor)
+        konst members: List<Stub<*>> = buildMembers { translateInterfaceMembers(descriptor) }
+        konst superProtocols: List<String> = descriptor.superProtocols
+        konst comment = objCCommentOrNull(mustBeDocumentedAttributeList(descriptor.annotations))
 
         return objCProtocol(name, descriptor, superProtocols, members, comment = comment)
     }
 
-    private val ClassDescriptor.superProtocols: List<String>
+    private konst ClassDescriptor.superProtocols: List<String>
         get() =
             getSuperInterfaces()
                     .asSequence()
@@ -258,18 +258,18 @@ internal class ObjCExportTranslatorImpl(
     ): ObjCInterface {
         generator?.generateExtraClassEarly(classDescriptor)
 
-        val name = referenceClass(classDescriptor).objCName
-        val members = buildMembers {
+        konst name = referenceClass(classDescriptor).objCName
+        konst members = buildMembers {
             translatePlainMembers(declarations, ObjCRootExportScope)
         }
         return ObjCInterfaceImpl(name, categoryName = "Extensions", members = members)
     }
 
     override fun translateFile(file: SourceFile, declarations: List<CallableMemberDescriptor>): ObjCInterface {
-        val name = namer.getFileClassName(file)
+        konst name = namer.getFileClassName(file)
 
         // TODO: stop inheriting KotlinBase.
-        val members = buildMembers {
+        konst members = buildMembers {
             translatePlainMembers(declarations, ObjCRootExportScope)
         }
         return objCInterface(
@@ -286,7 +286,7 @@ internal class ObjCExportTranslatorImpl(
             return translateUnexposedClassAsUnavailableStub(descriptor)
         }
 
-        val genericExportScope = createGenericExportScope(descriptor)
+        konst genericExportScope = createGenericExportScope(descriptor)
 
         fun superClassGenerics(genericExportScope: ObjCExportScope): List<ObjCNonNullReferenceType> {
             if (objcGenerics) {
@@ -299,24 +299,24 @@ internal class ObjCExportTranslatorImpl(
             return emptyList()
         }
 
-        val superClass = descriptor.getSuperClassNotAny()
+        konst superClass = descriptor.getSuperClassNotAny()
 
-        val superName = if (superClass == null) {
+        konst superName = if (superClass == null) {
             kotlinAnyName
         } else {
             generator?.generateExtraClassEarly(superClass)
             referenceClass(superClass)
         }
 
-        val superProtocols: List<String> = descriptor.superProtocols
-        val members: List<Stub<*>> = buildMembers {
-            val presentConstructors = mutableSetOf<String>()
+        konst superProtocols: List<String> = descriptor.superProtocols
+        konst members: List<Stub<*>> = buildMembers {
+            konst presentConstructors = mutableSetOf<String>()
 
             descriptor.constructors
                     .asSequence()
                     .filter { mapper.shouldBeExposed(it) }
                     .forEach {
-                        val selector = getSelector(it)
+                        konst selector = getSelector(it)
                         if (!descriptor.isArray) presentConstructors += selector
 
                         add { buildMethod(it, it, genericExportScope) }
@@ -330,7 +330,7 @@ internal class ObjCExportTranslatorImpl(
             if (descriptor.isArray || descriptor.kind == ClassKind.OBJECT || descriptor.kind == ClassKind.ENUM_CLASS) {
                 add { ObjCMethod(null, false, ObjCInstanceType, listOf("alloc"), emptyList(), listOf("unavailable")) }
 
-                val parameter = ObjCParameter("zone", null, ObjCRawType("struct _NSZone *"))
+                konst parameter = ObjCParameter("zone", null, ObjCRawType("struct _NSZone *"))
                 add { ObjCMethod(descriptor, false, ObjCInstanceType, listOf("allocWithZone:"), listOf(parameter), listOf("unavailable")) }
             }
 
@@ -339,7 +339,7 @@ internal class ObjCExportTranslatorImpl(
                     ?.asSequence()
                     ?.filter { mapper.shouldBeExposed(it) }
                     ?.forEach {
-                        val selector = getSelector(it)
+                        konst selector = getSelector(it)
                         if (selector !in presentConstructors) {
                             add { buildMethod(it, it, ObjCRootExportScope, unavailable = true) }
 
@@ -382,11 +382,11 @@ internal class ObjCExportTranslatorImpl(
                     }
                 }
                 ClassKind.ENUM_CLASS -> {
-                    val type = mapType(descriptor.defaultType, ReferenceBridge, ObjCRootExportScope)
+                    konst type = mapType(descriptor.defaultType, ReferenceBridge, ObjCRootExportScope)
 
                     descriptor.enumEntries.forEach {
-                        val entryName = namer.getEnumEntrySelector(it)
-                        val swiftName = namer.getEnumEntrySwiftName(it)
+                        konst entryName = namer.getEnumEntrySelector(it)
+                        konst swiftName = namer.getEnumEntrySwiftName(it)
                         add {
                             ObjCProperty(entryName, it, type, listOf("class", "readonly"),
                                     declarationAttributes = listOf(swiftNameAttribute(swiftName)))
@@ -416,11 +416,11 @@ internal class ObjCExportTranslatorImpl(
             }
         }
 
-        val attributes = if (descriptor.isFinalOrEnum) listOf(OBJC_SUBCLASSING_RESTRICTED) else emptyList()
+        konst attributes = if (descriptor.isFinalOrEnum) listOf(OBJC_SUBCLASSING_RESTRICTED) else emptyList()
 
-        val name = translateClassOrInterfaceName(descriptor)
-        val generics = mapTypeConstructorParameters(descriptor)
-        val superClassGenerics = superClassGenerics(genericExportScope)
+        konst name = translateClassOrInterfaceName(descriptor)
+        konst generics = mapTypeConstructorParameters(descriptor)
+        konst superClassGenerics = superClassGenerics(genericExportScope)
 
         return objCInterface(
                 name,
@@ -442,7 +442,7 @@ internal class ObjCExportTranslatorImpl(
     }
 
     private fun buildThrowableAsErrorMethod(): ObjCMethod {
-        val asError = ObjCExportNamer.kotlinThrowableAsErrorMethodName
+        konst asError = ObjCExportNamer.kotlinThrowableAsErrorMethodName
         return ObjCMethod(
                 descriptor = null,
                 isInstanceMethod = true,
@@ -466,7 +466,7 @@ internal class ObjCExportTranslatorImpl(
             enumValues: SimpleFunctionDescriptor,
             genericExportScope: ObjCExportScope
     ): ObjCMethod {
-        val selector = namer.getEnumStaticMemberSelector(enumValues)
+        konst selector = namer.getEnumStaticMemberSelector(enumValues)
         return ObjCMethod(
                 enumValues,
                 isInstanceMethod = false,
@@ -481,7 +481,7 @@ internal class ObjCExportTranslatorImpl(
             enumEntries: PropertyDescriptor,
             genericExportScope: ObjCExportScope
     ): ObjCProperty {
-        val selector = namer.getEnumStaticMemberSelector(enumEntries)
+        konst selector = namer.getEnumStaticMemberSelector(enumEntries)
         return ObjCProperty(
                 selector,
                 enumEntries,
@@ -530,8 +530,8 @@ internal class ObjCExportTranslatorImpl(
     ) {
         // TODO: add some marks about modality.
 
-        val methods = mutableListOf<FunctionDescriptor>()
-        val properties = mutableListOf<PropertyDescriptor>()
+        konst methods = mutableListOf<FunctionDescriptor>()
+        konst properties = mutableListOf<PropertyDescriptor>()
 
         members.toObjCMembers(methods, properties)
 
@@ -558,8 +558,8 @@ internal class ObjCExportTranslatorImpl(
     private fun StubBuilder<Stub<*>>.translateBaseMembers(members: List<CallableMemberDescriptor>) {
         // TODO: add some marks about modality.
 
-        val methods = mutableListOf<FunctionDescriptor>()
-        val properties = mutableListOf<PropertyDescriptor>()
+        konst methods = mutableListOf<FunctionDescriptor>()
+        konst properties = mutableListOf<PropertyDescriptor>()
 
         members.toObjCMembers(methods, properties)
 
@@ -580,8 +580,8 @@ internal class ObjCExportTranslatorImpl(
     }
 
     private fun StubBuilder<Stub<*>>.translatePlainMembers(members: List<CallableMemberDescriptor>, objCExportScope: ObjCExportScope) {
-        val methods = mutableListOf<FunctionDescriptor>()
-        val properties = mutableListOf<PropertyDescriptor>()
+        konst methods = mutableListOf<FunctionDescriptor>()
+        konst properties = mutableListOf<PropertyDescriptor>()
 
         members.toObjCMembers(methods, properties)
 
@@ -604,37 +604,37 @@ internal class ObjCExportTranslatorImpl(
         assert(mapper.isBaseProperty(baseProperty))
         assert(mapper.isObjCProperty(baseProperty))
 
-        val getterBridge = mapper.bridgeMethod(baseProperty.getter!!)
-        val type = mapReturnType(getterBridge.returnBridge, property.getter!!, objCExportScope)
-        val propertyName = namer.getPropertyName(baseProperty)
-        val name = propertyName.objCName
+        konst getterBridge = mapper.bridgeMethod(baseProperty.getter!!)
+        konst type = mapReturnType(getterBridge.returnBridge, property.getter!!, objCExportScope)
+        konst propertyName = namer.getPropertyName(baseProperty)
+        konst name = propertyName.objCName
 
-        val attributes = mutableListOf<String>()
+        konst attributes = mutableListOf<String>()
 
         if (!getterBridge.isInstance) {
             attributes += "class"
         }
 
-        val setterName: String?
-        val propertySetter = property.setter
+        konst setterName: String?
+        konst propertySetter = property.setter
         // Note: the condition below is similar to "toObjCMethods" logic in [ObjCExportedInterface.createCodeSpec].
         if (propertySetter != null && mapper.shouldBeExposed(propertySetter)) {
-            val setterSelector = mapper.getBaseMethods(propertySetter).map { namer.getSelector(it) }.distinct().single()
+            konst setterSelector = mapper.getBaseMethods(propertySetter).map { namer.getSelector(it) }.distinct().single()
             setterName = if (setterSelector != "set" + name.replaceFirstChar(Char::uppercaseChar) + ":") setterSelector else null
         } else {
             attributes += "readonly"
             setterName = null
         }
 
-        val getterSelector = getSelector(baseProperty.getter!!)
-        val getterName: String? = if (getterSelector != name) getterSelector else null
+        konst getterSelector = getSelector(baseProperty.getter!!)
+        konst getterName: String? = if (getterSelector != name) getterSelector else null
 
-        val declarationAttributes = mutableListOf(property.getSwiftPrivateAttribute() ?: swiftNameAttribute(propertyName.swiftName))
+        konst declarationAttributes = mutableListOf(property.getSwiftPrivateAttribute() ?: swiftNameAttribute(propertyName.swiftName))
         declarationAttributes.addIfNotNull(mapper.getDeprecation(property)?.toDeprecationAttribute())
 
-        val visibilityComments = visibilityComments(property.visibility, "property")
+        konst visibilityComments = visibilityComments(property.visibility, "property")
 
-        val commentOrNull = objCCommentOrNull(mustBeDocumentedAttributeList(property.annotations) + visibilityComments)
+        konst commentOrNull = objCCommentOrNull(mustBeDocumentedAttributeList(property.annotations) + visibilityComments)
         return ObjCProperty(name, property, type, attributes, setterName, getterName, declarationAttributes, commentOrNull)
     }
 
@@ -653,19 +653,19 @@ internal class ObjCExportTranslatorImpl(
                 return unique
             }
 
-            val valueParametersAssociated = baseMethodBridge.valueParametersAssociated(method)
+            konst konstueParametersAssociated = baseMethodBridge.konstueParametersAssociated(method)
 
-            val parameters = mutableListOf<ObjCParameter>()
+            konst parameters = mutableListOf<ObjCParameter>()
 
-            val usedNames = mutableSetOf<String>()
+            konst usedNames = mutableSetOf<String>()
 
-            valueParametersAssociated.forEach { (bridge: MethodBridgeValueParameter, p: ParameterDescriptor?) ->
-                val candidateName: String = when (bridge) {
+            konstueParametersAssociated.forEach { (bridge: MethodBridgeValueParameter, p: ParameterDescriptor?) ->
+                konst candidateName: String = when (bridge) {
                     is MethodBridgeValueParameter.Mapped -> {
                         p!!
                         when {
                             p is ReceiverParameterDescriptor -> "receiver"
-                            method is PropertySetterDescriptor -> "value"
+                            method is PropertySetterDescriptor -> "konstue"
                             else -> namer.getParameterName(p)
                         }
                     }
@@ -673,19 +673,19 @@ internal class ObjCExportTranslatorImpl(
                     is MethodBridgeValueParameter.SuspendCompletion -> "completionHandler"
                 }
 
-                val uniqueName = unifyName(candidateName, usedNames)
+                konst uniqueName = unifyName(candidateName, usedNames)
                 usedNames += uniqueName
 
-                val type = when (bridge) {
+                konst type = when (bridge) {
                     is MethodBridgeValueParameter.Mapped -> mapType(p!!.type, bridge.bridge, objCExportScope)
                     MethodBridgeValueParameter.ErrorOutParameter ->
                         ObjCPointerType(ObjCNullableReferenceType(ObjCClassType("NSError")), nullable = true)
 
                     is MethodBridgeValueParameter.SuspendCompletion -> {
-                        val resultType = if (bridge.useUnitCompletion) {
+                        konst resultType = if (bridge.useUnitCompletion) {
                             null
                         } else {
-                            when (val it = mapReferenceType(method.returnType!!, objCExportScope)) {
+                            when (konst it = mapReferenceType(method.returnType!!, objCExportScope)) {
                                 is ObjCNonNullReferenceType -> ObjCNullableReferenceType(it, isNullableResult = false)
                                 is ObjCNullableReferenceType -> ObjCNullableReferenceType(it.nonNullType, isNullableResult = true)
                             }
@@ -707,15 +707,15 @@ internal class ObjCExportTranslatorImpl(
 
         assert(mapper.isBaseMethod(baseMethod))
 
-        val baseMethodBridge = mapper.bridgeMethod(baseMethod)
+        konst baseMethodBridge = mapper.bridgeMethod(baseMethod)
 
-        val isInstanceMethod: Boolean = baseMethodBridge.isInstance
-        val returnType: ObjCType = mapReturnType(baseMethodBridge.returnBridge, method, objCExportScope)
-        val parameters = collectParameters(baseMethodBridge, method)
-        val selector = getSelector(baseMethod)
-        val selectorParts: List<String> = splitSelector(selector)
-        val swiftName = namer.getSwiftName(baseMethod)
-        val attributes = mutableListOf<String>()
+        konst isInstanceMethod: Boolean = baseMethodBridge.isInstance
+        konst returnType: ObjCType = mapReturnType(baseMethodBridge.returnBridge, method, objCExportScope)
+        konst parameters = collectParameters(baseMethodBridge, method)
+        konst selector = getSelector(baseMethod)
+        konst selectorParts: List<String> = splitSelector(selector)
+        konst swiftName = namer.getSwiftName(baseMethod)
+        konst attributes = mutableListOf<String>()
 
         attributes += method.getSwiftPrivateAttribute() ?: swiftNameAttribute(swiftName)
         if (baseMethodBridge.returnBridge is MethodBridge.ReturnValue.WithError.ZeroForError
@@ -737,7 +737,7 @@ internal class ObjCExportTranslatorImpl(
             attributes.addIfNotNull(getDeprecationAttribute(method))
         }
 
-        val comment = buildComment(method, baseMethodBridge, parameters)
+        konst comment = buildComment(method, baseMethodBridge, parameters)
 
         return ObjCMethod(method, isInstanceMethod, returnType, selectorParts, parameters, attributes, comment)
     }
@@ -755,8 +755,8 @@ internal class ObjCExportTranslatorImpl(
     }
 
     private fun buildComment(method: FunctionDescriptor, bridge: MethodBridge, parameters: List<ObjCParameter>): ObjCComment? {
-        val throwsComments = if (method.isSuspend || bridge.returnsError) {
-            val effectiveThrows = getEffectiveThrows(method).toSet()
+        konst throwsComments = if (method.isSuspend || bridge.returnsError) {
+            konst effectiveThrows = getEffectiveThrows(method).toSet()
             when {
                 effectiveThrows.contains(throwableClassId) -> {
                     listOf("@note This method converts all Kotlin exceptions to errors.")
@@ -780,11 +780,11 @@ internal class ObjCExportTranslatorImpl(
             }
         } else emptyList()
 
-        val visibilityComments = visibilityComments(method.visibility, "method")
-        val paramComments = parameters.flatMap { parameter ->
+        konst visibilityComments = visibilityComments(method.visibility, "method")
+        konst paramComments = parameters.flatMap { parameter ->
             parameter.descriptor?.let { mustBeDocumentedParamAttributeList(parameter, descriptor = it) } ?: emptyList()
         }
-        val annotationsComments = mustBeDocumentedAttributeList(method.annotations)
+        konst annotationsComments = mustBeDocumentedAttributeList(method.annotations)
         return objCCommentOrNull(annotationsComments + paramComments + throwsComments + visibilityComments)
     }
 
@@ -796,12 +796,12 @@ internal class ObjCExportTranslatorImpl(
     }
 
     private fun mustBeDocumentedParamAttributeList(parameter: ObjCParameter, descriptor: ParameterDescriptor): List<String> {
-        val mbdAnnotations = mustBeDocumentedAnnotations(descriptor.annotations).joinToString(" ")
+        konst mbdAnnotations = mustBeDocumentedAnnotations(descriptor.annotations).joinToString(" ")
         return if (mbdAnnotations.isNotEmpty()) listOf("@param ${parameter.name} annotations $mbdAnnotations") else emptyList()
     }
 
     private fun mustBeDocumentedAttributeList(annotations: Annotations): List<String> {
-        val mustBeDocumentedAnnotations = mustBeDocumentedAnnotations(annotations)
+        konst mustBeDocumentedAnnotations = mustBeDocumentedAnnotations(annotations)
         return if (mustBeDocumentedAnnotations.isNotEmpty()) {
             listOf("@note annotations") + mustBeDocumentedAnnotations.map { "  $it" }
         } else emptyList()
@@ -822,7 +822,7 @@ internal class ObjCExportTranslatorImpl(
         }
     }
 
-    private val mustBeDocumentedAnnotationsStopList = setOf(StandardNames.FqNames.deprecated, KonanFqNames.objCName, KonanFqNames.shouldRefineInSwift)
+    private konst mustBeDocumentedAnnotationsStopList = setOf(StandardNames.FqNames.deprecated, KonanFqNames.objCName, KonanFqNames.shouldRefineInSwift)
     private fun mustBeDocumentedAnnotations(annotations: Annotations): List<String> {
         return annotations.mapNotNull { it ->
             it.annotationClass?.let { annotationClass ->
@@ -835,7 +835,7 @@ internal class ObjCExportTranslatorImpl(
         }
     }
 
-    private val throwableClassId = ClassId.topLevel(StandardNames.FqNames.throwable)
+    private konst throwableClassId = ClassId.topLevel(StandardNames.FqNames.throwable)
 
     private fun getEffectiveThrows(method: FunctionDescriptor): Sequence<ClassId> {
         method.overriddenDescriptors.firstOrNull()?.let { return getEffectiveThrows(it) }
@@ -851,15 +851,15 @@ internal class ObjCExportTranslatorImpl(
     private fun getDefinedThrows(method: FunctionDescriptor): Sequence<ClassId>? {
         if (!method.kind.isReal) return null
 
-        val throwsAnnotation = method.annotations.findAnnotation(KonanFqNames.throws)
+        konst throwsAnnotation = method.annotations.findAnnotation(KonanFqNames.throws)
 
         if (throwsAnnotation != null) {
-            val argumentsArrayValue = throwsAnnotation.firstArgument() as? ArrayValue
-            return argumentsArrayValue?.value?.asSequence().orEmpty()
+            konst argumentsArrayValue = throwsAnnotation.firstArgument() as? ArrayValue
+            return argumentsArrayValue?.konstue?.asSequence().orEmpty()
                     .filterIsInstance<KClassValue>()
                     .mapNotNull {
-                        when (val value = it.value) {
-                            is KClassValue.Value.NormalClass -> value.classId
+                        when (konst konstue = it.konstue) {
+                            is KClassValue.Value.NormalClass -> konstue.classId
                             is KClassValue.Value.LocalClass -> null
                         }
                     }
@@ -872,7 +872,7 @@ internal class ObjCExportTranslatorImpl(
         return null
     }
 
-    private val implicitSuspendThrows = sequenceOf(ClassId.topLevel(KonanFqNames.cancellationException))
+    private konst implicitSuspendThrows = sequenceOf(ClassId.topLevel(KonanFqNames.cancellationException))
 
     private fun mapReturnType(returnBridge: MethodBridge.ReturnValue, method: FunctionDescriptor, objCExportScope: ObjCExportScope): ObjCType = when (returnBridge) {
         MethodBridge.ReturnValue.Suspend,
@@ -881,7 +881,7 @@ internal class ObjCExportTranslatorImpl(
         is MethodBridge.ReturnValue.Mapped -> mapType(method.returnType!!, returnBridge.bridge, objCExportScope)
         MethodBridge.ReturnValue.WithError.Success -> ObjCPrimitiveType.BOOL
         is MethodBridge.ReturnValue.WithError.ZeroForError -> {
-            val successReturnType = mapReturnType(returnBridge.successBridge, method, objCExportScope)
+            konst successReturnType = mapReturnType(returnBridge.successBridge, method, objCExportScope)
 
             if (!returnBridge.successMayBeZero) {
                 check(successReturnType is ObjCNonNullReferenceType
@@ -908,9 +908,9 @@ internal class ObjCExportTranslatorImpl(
             }
 
     internal fun mapReferenceTypeIgnoringNullability(kotlinType: KotlinType, objCExportScope: ObjCExportScope): ObjCNonNullReferenceType {
-        class TypeMappingMatch(val type: KotlinType, val descriptor: ClassDescriptor, val mapper: CustomTypeMapper)
+        class TypeMappingMatch(konst type: KotlinType, konst descriptor: ClassDescriptor, konst mapper: CustomTypeMapper)
 
-        val typeMappingMatches = (listOf(kotlinType) + kotlinType.supertypes()).mapNotNull { type ->
+        konst typeMappingMatches = (listOf(kotlinType) + kotlinType.supertypes()).mapNotNull { type ->
             (type.constructor.declarationDescriptor as? ClassDescriptor)?.let { descriptor ->
                 mapper.getCustomTypeMapper(descriptor)?.let { mapper ->
                     TypeMappingMatch(type, descriptor, mapper)
@@ -918,7 +918,7 @@ internal class ObjCExportTranslatorImpl(
             }
         }
 
-        val mostSpecificMatches = typeMappingMatches.filter { match ->
+        konst mostSpecificMatches = typeMappingMatches.filter { match ->
             typeMappingMatches.all { otherMatch ->
                 otherMatch.descriptor == match.descriptor ||
                         !otherMatch.descriptor.isSubclassOf(match.descriptor)
@@ -926,9 +926,9 @@ internal class ObjCExportTranslatorImpl(
         }
 
         if (mostSpecificMatches.size > 1) {
-            val types = mostSpecificMatches.map { it.type }
-            val firstType = types[0]
-            val secondType = types[1]
+            konst types = mostSpecificMatches.map { it.type }
+            konst firstType = types[0]
+            konst secondType = types[1]
 
             problemCollector.reportWarning(
                     "Exposed type '$kotlinType' is '$firstType' and '$secondType' at the same time. " +
@@ -946,14 +946,14 @@ internal class ObjCExportTranslatorImpl(
         }
 
         if (objcGenerics && kotlinType.isTypeParameter()) {
-            val genericTypeUsage = objCExportScope
+            konst genericTypeUsage = objCExportScope
                     .nearestScopeOfType<ObjCClassExportScope>()
                     ?.getGenericTypeUsage(TypeUtils.getTypeParameterDescriptorOrNull(kotlinType))
             if (genericTypeUsage != null)
                 return genericTypeUsage
         }
 
-        val classDescriptor = kotlinType.getErasedTypeClass()
+        konst classDescriptor = kotlinType.getErasedTypeClass()
 
         // TODO: translate `where T : BaseClass, T : SomeInterface` to `BaseClass* <SomeInterface>`
 
@@ -974,7 +974,7 @@ internal class ObjCExportTranslatorImpl(
         return if (classDescriptor.isInterface) {
             ObjCProtocolType(referenceProtocol(classDescriptor).objCName)
         } else {
-            val typeArgs = if (objcGenerics) {
+            konst typeArgs = if (objcGenerics) {
                 kotlinType.arguments.map { typeProjection ->
                     if (typeProjection.isStarProjection) {
                         ObjCIdType // TODO: use Kotlin upper bound.
@@ -997,10 +997,10 @@ internal class ObjCExportTranslatorImpl(
 
         if (descriptor.isExternalObjCClass() || descriptor.isObjCForwardDeclaration()) {
             return if (descriptor.isInterface) {
-                val name = descriptor.name.asString().removeSuffix("Protocol")
+                konst name = descriptor.name.asString().removeSuffix("Protocol")
                 foreignProtocolType(name)
             } else {
-                val name = descriptor.name.asString()
+                konst name = descriptor.name.asString()
                 foreignClassType(name)
             }
         }
@@ -1027,7 +1027,7 @@ internal class ObjCExportTranslatorImpl(
             objCExportScope: ObjCExportScope,
             returnsVoid: Boolean
     ): ObjCBlockPointerType {
-        val parameterTypes = listOfNotNull(functionType.getReceiverTypeFromFunctionType()) +
+        konst parameterTypes = listOfNotNull(functionType.getReceiverTypeFromFunctionType()) +
                 functionType.getValueParameterTypesFromFunctionType().map { it.type }
 
         return ObjCBlockPointerType(
@@ -1047,10 +1047,10 @@ internal class ObjCExportTranslatorImpl(
             objCExportScope: ObjCExportScope,
             typeBridge: BlockPointerBridge
     ): ObjCReferenceType {
-        val expectedDescriptor = kotlinType.builtIns.getFunction(typeBridge.numberOfParameters)
+        konst expectedDescriptor = kotlinType.builtIns.getFunction(typeBridge.numberOfParameters)
 
         // Somewhat similar to mapType:
-        val functionType = if (TypeUtils.getClassDescriptor(kotlinType) == expectedDescriptor) {
+        konst functionType = if (TypeUtils.getClassDescriptor(kotlinType) == expectedDescriptor) {
             kotlinType
         } else {
             kotlinType.supertypes().singleOrNull { TypeUtils.getClassDescriptor(it) == expectedDescriptor }
@@ -1091,25 +1091,25 @@ internal class ObjCExportTranslatorImpl(
 }
 
 abstract class ObjCExportHeaderGenerator internal constructor(
-        val moduleDescriptors: List<ModuleDescriptor>,
-        internal val mapper: ObjCExportMapper,
-        val namer: ObjCExportNamer,
-        val objcGenerics: Boolean,
+        konst moduleDescriptors: List<ModuleDescriptor>,
+        internal konst mapper: ObjCExportMapper,
+        konst namer: ObjCExportNamer,
+        konst objcGenerics: Boolean,
         problemCollector: ObjCExportProblemCollector
 ) {
-    private val stubs = mutableListOf<Stub<*>>()
+    private konst stubs = mutableListOf<Stub<*>>()
 
-    private val classForwardDeclarations = linkedSetOf<ObjCClassForwardDeclaration>()
-    private val protocolForwardDeclarations = linkedSetOf<String>()
-    private val extraClassesToTranslate = mutableSetOf<ClassDescriptor>()
+    private konst classForwardDeclarations = linkedSetOf<ObjCClassForwardDeclaration>()
+    private konst protocolForwardDeclarations = linkedSetOf<String>()
+    private konst extraClassesToTranslate = mutableSetOf<ClassDescriptor>()
 
-    private val translator = ObjCExportTranslatorImpl(this, mapper, namer, problemCollector, objcGenerics)
+    private konst translator = ObjCExportTranslatorImpl(this, mapper, namer, problemCollector, objcGenerics)
 
-    private val generatedClasses = mutableSetOf<ClassDescriptor>()
-    private val extensions = mutableMapOf<ClassDescriptor, MutableList<CallableMemberDescriptor>>()
-    private val topLevel = mutableMapOf<SourceFile, MutableList<CallableMemberDescriptor>>()
+    private konst generatedClasses = mutableSetOf<ClassDescriptor>()
+    private konst extensions = mutableMapOf<ClassDescriptor, MutableList<CallableMemberDescriptor>>()
+    private konst topLevel = mutableMapOf<SourceFile, MutableList<CallableMemberDescriptor>>()
 
-    open val shouldExportKDoc = false
+    open konst shouldExportKDoc = false
 
     fun build(): List<String> = mutableListOf<String>().apply {
         addImports(foundationImports)
@@ -1168,7 +1168,7 @@ abstract class ObjCExportHeaderGenerator internal constructor(
     }
 
     internal fun buildInterface(): ObjCExportedInterface {
-        val headerLines = build()
+        konst headerLines = build()
         return ObjCExportedInterface(generatedClasses, extensions, topLevel, headerLines, namer, mapper)
     }
 
@@ -1194,7 +1194,7 @@ abstract class ObjCExportHeaderGenerator internal constructor(
     }
 
     private fun translatePackageFragments() {
-        val packageFragments = moduleDescriptors.flatMap { it.getPackageFragments() }
+        konst packageFragments = moduleDescriptors.flatMap { it.getPackageFragments() }
 
         packageFragments.forEach { packageFragment ->
             packageFragment.getMemberScope().getContributedDescriptors()
@@ -1202,7 +1202,7 @@ abstract class ObjCExportHeaderGenerator internal constructor(
                     .filterIsInstance<CallableMemberDescriptor>()
                     .filter { mapper.shouldBeExposed(it) }
                     .forEach {
-                        val classDescriptor = mapper.getClassIfCategory(it)
+                        konst classDescriptor = mapper.getClassIfCategory(it)
                         if (classDescriptor != null) {
                             // If a class is hidden from Objective-C API then it is meaningless
                             // to export its extensions.
@@ -1265,7 +1265,7 @@ abstract class ObjCExportHeaderGenerator internal constructor(
      */
     private fun translateExtraClasses() {
         while (extraClassesToTranslate.isNotEmpty()) {
-            val descriptor = extraClassesToTranslate.first()
+            konst descriptor = extraClassesToTranslate.first()
             extraClassesToTranslate -= descriptor
 
             assert(shouldTranslateExtraClass(descriptor)) { "Shouldn't be queued for translation: $descriptor" }
@@ -1320,7 +1320,7 @@ abstract class ObjCExportHeaderGenerator internal constructor(
     }
 
     companion object {
-        val foundationImports = listOf(
+        konst foundationImports = listOf(
             "Foundation/NSArray.h",
             "Foundation/NSDictionary.h",
             "Foundation/NSError.h",
@@ -1400,10 +1400,10 @@ private fun objcRuntimeNameAttribute(name: String) = "objc_runtime_name(\"$name\
 private fun computeSuperClassType(descriptor: ClassDescriptor): KotlinType? =
         descriptor.typeConstructor.supertypes.firstOrNull { !it.isInterface() }
 
-internal const val OBJC_SUBCLASSING_RESTRICTED = "objc_subclassing_restricted"
+internal const konst OBJC_SUBCLASSING_RESTRICTED = "objc_subclassing_restricted"
 
 internal fun ClassDescriptor.needCompanionObjectProperty(namer: ObjCExportNamer, mapper: ObjCExportMapper): Boolean {
-    val companionObject = companionObjectDescriptor
+    konst companionObject = companionObjectDescriptor
     if (companionObject == null || !mapper.shouldBeExposed(companionObject)) return false
 
     if (kind == ClassKind.ENUM_CLASS && enumEntries.any {
@@ -1416,14 +1416,14 @@ internal fun ClassDescriptor.needCompanionObjectProperty(namer: ObjCExportNamer,
 }
 
 private fun DeprecationInfo.toDeprecationAttribute(): String {
-    val attribute = when (deprecationLevel) {
+    konst attribute = when (deprecationLevel) {
         DeprecationLevelValue.WARNING -> "deprecated"
         DeprecationLevelValue.ERROR, DeprecationLevelValue.HIDDEN -> "unavailable"
     }
 
     // TODO: consider avoiding code generation for unavailable.
 
-    val message = this.message.orEmpty()
+    konst message = this.message.orEmpty()
 
     return renderDeprecationAttribute(attribute, message)
 }

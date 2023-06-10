@@ -5,9 +5,9 @@ class A {
 
 
 fun box() : String {
-    val (a, b) = A()
+    konst (a, b) = A()
 
-    val local = object {
+    konst local = object {
         public fun run() : Int {
             return a
         }

@@ -8,11 +8,11 @@ var x = ""
 fun baz(s: String) { x += s }
 
 class A {
-    val value = "Some value"
+    konst konstue = "Some konstue"
 
     init {
         foo {
-            baz(value)
+            baz(konstue)
         }
     }
 }
@@ -25,7 +25,7 @@ fun foo(block: () -> Unit) {
 }
 
 fun box(): String {
-    val a = A()
-    if (x != a.value) return "FAIL: $x"
+    konst a = A()
+    if (x != a.konstue) return "FAIL: $x"
     return "OK"
 }

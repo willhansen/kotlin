@@ -22,15 +22,15 @@ import org.jetbrains.kotlin.js.backend.ast.JsNode
 import org.jetbrains.kotlin.js.dce.Context.Node
 
 interface AnalysisResult {
-    val nodeMap: Map<JsNode, Node>
+    konst nodeMap: Map<JsNode, Node>
 
-    val astNodesToEliminate: Set<JsNode>
+    konst astNodesToEliminate: Set<JsNode>
 
-    val astNodesToSkip: Set<JsNode>
+    konst astNodesToSkip: Set<JsNode>
 
-    val functionsToEnter: Set<JsFunction>
+    konst functionsToEnter: Set<JsFunction>
 
-    val invocationsToSkip: Set<JsInvocation>
+    konst invocationsToSkip: Set<JsInvocation>
 
-    val functionsToSkip: Set<Context.Node>
+    konst functionsToSkip: Set<Context.Node>
 }

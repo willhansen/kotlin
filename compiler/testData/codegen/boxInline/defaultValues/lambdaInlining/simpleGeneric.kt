@@ -2,9 +2,9 @@
 // FILE: 1.kt
 package test
 
-open class A(val value: String)
+open class A(konst konstue: String)
 
-class B(value: String): A(value)
+class B(konstue: String): A(konstue)
 
 inline fun <T : A> inlineFun(capturedParam: T, lambda: () -> T = { capturedParam }): T {
     return lambda()
@@ -16,5 +16,5 @@ inline fun <T : A> inlineFun(capturedParam: T, lambda: () -> T = { capturedParam
 import test.*
 
 fun box(): String {
-    return inlineFun(B("O")).value + inlineFun(A("K")).value
+    return inlineFun(B("O")).konstue + inlineFun(A("K")).konstue
 }

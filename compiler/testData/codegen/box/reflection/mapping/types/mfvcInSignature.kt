@@ -7,17 +7,17 @@ import kotlin.test.assertEquals
 import java.lang.reflect.Type
 
 @JvmInline
-value class S(val value1: UInt, val value2: String)
+konstue class S(konst konstue1: UInt, konst konstue2: String)
 
 fun S.foo(x: Int, s: S): S = this
 
 fun compoundType(vararg types: Type) = listOf(*types).toString()
 
 @JvmInline
-value class T(val s: S) {
+konstue class T(konst s: S) {
     fun bar(u: S): T = this
 }
-data class U(val s: S) {
+data class U(konst s: S) {
     fun bar(u: S): U = this
 }
 

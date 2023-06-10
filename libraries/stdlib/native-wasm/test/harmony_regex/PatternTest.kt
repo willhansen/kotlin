@@ -22,8 +22,8 @@ import kotlin.test.*
 
 class PatternTest {
 
-    fun assertTrue(msg: String, value: Boolean) = assertTrue(value, msg)
-    fun assertFalse(msg: String, value: Boolean) = assertFalse(value, msg)
+    fun assertTrue(msg: String, konstue: Boolean) = assertTrue(konstue, msg)
+    fun assertFalse(msg: String, konstue: Boolean) = assertFalse(konstue, msg)
 
     private fun String.asEscapeSeq() = buildString {
         this@asEscapeSeq.forEach {
@@ -33,7 +33,7 @@ class PatternTest {
                 it == '\r' -> append("\\r")
                 it == '\t' -> append("\\t")
                 else -> {
-                    val hexCode = it.code.toString(16)
+                    konst hexCode = it.code.toString(16)
                     append("\\u$hexCode")
                 }
             }
@@ -59,7 +59,7 @@ class PatternTest {
     internal var testPatterns = arrayOf("(a|b)*abb", "(1*2*3*4*)*567", "(a|b|c|d)*aab", "(1|2|3|4|5|6|7|8|9|0)(1|2|3|4|5|6|7|8|9|0)*", "(abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ)*", "(a|b)*(a|b)*A(a|b)*lice.*", "(a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z)(a|b|c|d|e|f|g|h|" + "i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z)*(1|2|3|4|5|6|7|8|9|0)*|while|for|struct|if|do", "x(?c)y", "x(?cc)y", "x(?:c)y")
 
     @Test fun testCommentsInPattern() {
-        val p = Regex("ab# this is a comment\ncd", RegexOption.COMMENTS)
+        konst p = Regex("ab# this is a comment\ncd", RegexOption.COMMENTS)
         assertTrue(p.matches("abcd"))
     }
 
@@ -226,12 +226,12 @@ class PatternTest {
     }
 
     fun Set<RegexOption>.containsOnly(vararg options: RegexOption): Boolean {
-        val toCheck = options.toSet()
+        konst toCheck = options.toSet()
         return size == toCheck.size && containsAll(toCheck)
     }
 
     @Test fun testFlagsMethod() {
-        val a = kotlin.text.Regex("sdf")
+        konst a = kotlin.text.Regex("sdf")
         var baseString: String
         var regex: Regex
 
@@ -313,7 +313,7 @@ class PatternTest {
 
 
     @Test fun testQuantCompileNeg() {
-        val patterns = arrayOf("5{,2}", "{5asd", "{hgdhg", "{5,hjkh", "{,5hdsh", "{5,3shdfkjh}")
+        konst patterns = arrayOf("5{,2}", "{5asd", "{hgdhg", "{5,hjkh", "{,5hdsh", "{5,3shdfkjh}")
         for (element in patterns) {
             try {
                 Regex(element)
@@ -326,24 +326,24 @@ class PatternTest {
     }
 
     @Test fun testQuantCompilePos() {
-        val patterns = arrayOf("abc{2,}", "abc{5}")
+        konst patterns = arrayOf("abc{2,}", "abc{5}")
         for (element in patterns) {
             Regex(element)
         }
     }
 
     @Test fun testQuantComposition() {
-        val pattern = "(a{1,3})aab"
-        val regex = Regex(pattern)
-        val result = regex.matchEntire("aaab")
+        konst pattern = "(a{1,3})aab"
+        konst regex = Regex(pattern)
+        konst result = regex.matchEntire("aaab")
         assertNotNull(result)
         assertEquals(result!!.groups[1]!!.range.start, 0)
         assertEquals(result.groupValues[1], "a")
     }
 
     @Test fun testTimeZoneIssue() {
-        val regex = Regex("GMT(\\+|\\-)(\\d+)(:(\\d+))?")
-        val result = regex.matchEntire("GMT-9:45")
+        konst regex = Regex("GMT(\\+|\\-)(\\d+)(:(\\d+))?")
+        konst result = regex.matchEntire("GMT-9:45")
         assertNotNull(result)
         assertEquals("-", result!!.groupValues[1])
         assertEquals("9", result.groupValues[2])
@@ -352,11 +352,11 @@ class PatternTest {
     }
 
     @Test fun testCompileRanges() {
-        val correctTestPatterns = arrayOf("[^]*abb]*", "[^a-d[^m-p]]*abb", "[a-d\\d]*abb", "[abc]*abb",
+        konst correctTestPatterns = arrayOf("[^]*abb]*", "[^a-d[^m-p]]*abb", "[a-d\\d]*abb", "[abc]*abb",
                 "[a-e&&[de]]*abb", "[^abc]*abb", "[a-e&&[^de]]*abb", "[a-z&&[^m-p]]*abb", "[a-d[m-p]]*abb",
                 "[a-zA-Z]*abb", "[+*?]*abb", "[^+*?]*abb")
 
-        val inputSecuence = arrayOf("kkkk", "admpabb", "abcabcd124654abb", "abcabccbacababb",
+        konst inputSecuence = arrayOf("kkkk", "admpabb", "abcabcd124654abb", "abcabccbacababb",
                 "dededededededeedabb", "gfdhfghgdfghabb", "accabacbcbaabb", "acbvfgtyabb", "adbcacdbmopabcoabb",
                 "jhfkjhaSDFGHJkdfhHNJMjkhfabb", "+*??+*abb", "sdfghjkabb")
 
@@ -365,7 +365,7 @@ class PatternTest {
                     Regex(correctTestPatterns[i]).matches(inputSecuence[i]))
         }
 
-        val wrongInputSecuence = arrayOf("]", "admpkk", "abcabcd124k654abb", "abwcabccbacababb",
+        konst wrongInputSecuence = arrayOf("]", "admpkk", "abcabcd124k654abb", "abwcabccbacababb",
                 "abababdeababdeabb", "abcabcacbacbabb", "acdcbecbaabb", "acbotyabb", "adbcaecdbmopabcoabb",
                 "jhfkjhaSDFGHJk;dfhHNJMjkhfabb", "+*?a?+*abb", "sdf+ghjkabb")
 
@@ -376,7 +376,7 @@ class PatternTest {
     }
 
     @Test fun testRangesSpecialCases() {
-        val neg_patterns = arrayOf("[a-&&[b-c]]", "[a-\\w]", "[b-a]", "[]")
+        konst neg_patterns = arrayOf("[a-&&[b-c]]", "[a-\\w]", "[b-a]", "[]")
 
         for (element in neg_patterns) {
             try {
@@ -387,12 +387,12 @@ class PatternTest {
 
         }
 
-        val pos_patterns = arrayOf("[-]+", "----", "[a-]+", "a-a-a-a-aa--", "[\\w-a]+", "123-2312--aaa-213", "[a-]]+", "-]]]]]]]]]]]]]]]")
+        konst pos_patterns = arrayOf("[-]+", "----", "[a-]+", "a-a-a-a-aa--", "[\\w-a]+", "123-2312--aaa-213", "[a-]]+", "-]]]]]]]]]]]]]]]")
 
         var i = 0
         while (i < pos_patterns.size) {
-            val pat = pos_patterns[i++]
-            val inp = pos_patterns[i]
+            konst pat = pos_patterns[i++]
+            konst inp = pos_patterns[i]
             assertTrue("pattern: $pat input: $inp", Regex(pat).matches(inp))
             i++
         }
@@ -403,7 +403,7 @@ class PatternTest {
     }
 
     @Test fun testEscapes() {
-        val regex = Regex("\\Q{]()*?")
+        konst regex = Regex("\\Q{]()*?")
         assertTrue(regex.matches("{]()*?"))
     }
 
@@ -440,7 +440,7 @@ class PatternTest {
     }
 
     @Test fun testBug197() {
-        val vals = arrayOf<Any>(":", 2, arrayOf("boo", "and:foo"),
+        konst konsts = arrayOf<Any>(":", 2, arrayOf("boo", "and:foo"),
                 ":", 5, arrayOf("boo", "and", "foo"),
                 ":", 0, arrayOf("boo", "and", "foo"),
                 ":", 3, arrayOf("boo", "and", "foo"),
@@ -451,9 +451,9 @@ class PatternTest {
         )
 
         var i = 0
-        while (i < vals.size / 3) {
-            val res = Regex(vals[i++].toString()).split("boo:and:foo", (vals[i++] as Int))
-            val expectedRes = vals[i++] as Array<String>
+        while (i < konsts.size / 3) {
+            konst res = Regex(konsts[i++].toString()).split("boo:and:foo", (konsts[i++] as Int))
+            konst expectedRes = konsts[i++] as Array<String>
 
             assertEquals(expectedRes.size, res.size)
 
@@ -464,13 +464,13 @@ class PatternTest {
     }
 
     @Test fun testURIPatterns() {
-        val URI_REGEXP_STR = "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?";
-        val SCHEME_REGEXP_STR = "^[a-zA-Z]{1}[\\w+-.]+$";
-        val REL_URI_REGEXP_STR = "^(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?";
-        val IPV6_REGEXP_STR = "^[0-9a-fA-F\\:\\.]+(\\%\\w+)?$";
-        val IPV6_REGEXP_STR2 = "^\\[[0-9a-fA-F\\:\\.]+(\\%\\w+)?\\]$";
-        val IPV4_REGEXP_STR = "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$";
-        val HOSTNAME_REGEXP_STR = "\\w+[\\w\\-\\.]*";
+        konst URI_REGEXP_STR = "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?";
+        konst SCHEME_REGEXP_STR = "^[a-zA-Z]{1}[\\w+-.]+$";
+        konst REL_URI_REGEXP_STR = "^(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?";
+        konst IPV6_REGEXP_STR = "^[0-9a-fA-F\\:\\.]+(\\%\\w+)?$";
+        konst IPV6_REGEXP_STR2 = "^\\[[0-9a-fA-F\\:\\.]+(\\%\\w+)?\\]$";
+        konst IPV4_REGEXP_STR = "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$";
+        konst HOSTNAME_REGEXP_STR = "\\w+[\\w\\-\\.]*";
 
         Regex(URI_REGEXP_STR)
         Regex(REL_URI_REGEXP_STR)
@@ -482,61 +482,61 @@ class PatternTest {
     }
 
     @Test fun testFindBoundaryCases1() {
-        val regex = Regex(".*\n")
-        val result = regex.find("a\n")
+        konst regex = Regex(".*\n")
+        konst result = regex.find("a\n")
 
         assertNotNull(result)
-        assertEquals("a\n", result!!.value)
+        assertEquals("a\n", result!!.konstue)
     }
 
     @Test fun testFindBoundaryCases2() {
-        val regex = Regex(".*A")
-        val result = regex.find("aAa")
+        konst regex = Regex(".*A")
+        konst result = regex.find("aAa")
 
         assertNotNull(result)
-        assertEquals("aA", result!!.value)
+        assertEquals("aA", result!!.konstue)
 
     }
 
     @Test fun testFindBoundaryCases3() {
-        val regex = Regex(".*A")
-        val result = regex.find("a\naA\n")
+        konst regex = Regex(".*A")
+        konst result = regex.find("a\naA\n")
 
         assertNotNull(result)
-        assertEquals("aA", result!!.value)
+        assertEquals("aA", result!!.konstue)
 
     }
 
     @Test fun testFindBoundaryCases4() {
-        val regex = Regex("A.*")
-        val result = regex.find("A\n")
+        konst regex = Regex("A.*")
+        konst result = regex.find("A\n")
 
         assertNotNull(result)
-        assertEquals("A", result!!.value)
+        assertEquals("A", result!!.konstue)
 
     }
 
     @Test fun testFindBoundaryCases5() {
-        val regex = Regex(".*A.*")
+        konst regex = Regex(".*A.*")
         var result = regex.find("\nA\naaa\nA\naaAaa\naaaA\n")
-        val expected = arrayOf("A", "A", "aaAaa", "aaaA")
+        konst expected = arrayOf("A", "A", "aaAaa", "aaaA")
 
         var k = 0
         while (result != null) {
-            assertEquals(expected[k], result.value)
+            assertEquals(expected[k], result.konstue)
             result = result.next()
             k++
         }
     }
 
     @Test fun testFindBoundaryCases6() {
-        val regex = Regex(".*")
+        konst regex = Regex(".*")
         var result = regex.find("\na\n")
-        val expected = arrayOf("", "a", "", "")
+        konst expected = arrayOf("", "a", "", "")
 
         var k = 0
         while (result != null) {
-            assertEquals(expected[k], result.value)
+            assertEquals(expected[k], result.konstue)
             k++
             result = result.next()
         }
@@ -561,7 +561,7 @@ class PatternTest {
     }
 
     @Test fun testNewLine() {
-        val regex = Regex("(^$)*\n", RegexOption.MULTILINE)
+        konst regex = Regex("(^$)*\n", RegexOption.MULTILINE)
         var result = regex.find("\r\n\n")
         var counter = 0
         while (result != null) {
@@ -572,14 +572,14 @@ class PatternTest {
     }
 
     @Test fun testFindGreedy() {
-        val regex = Regex(".*aaa", RegexOption.DOT_MATCHES_ALL)
-        val result = regex.matchEntire("aaaa\naaa\naaaaaa")
+        konst regex = Regex(".*aaa", RegexOption.DOT_MATCHES_ALL)
+        konst result = regex.matchEntire("aaaa\naaa\naaaaaa")
         assertNotNull(result)
         assertEquals(14, result!!.range.endInclusive)
     }
 
     @Test fun testSOLQuant() {
-        val regex = Regex("$*", RegexOption.MULTILINE)
+        konst regex = Regex("$*", RegexOption.MULTILINE)
         var result = regex.find("\n\n")
         var counter = 0
         while (result != null) {
@@ -614,7 +614,7 @@ class PatternTest {
 
         // 1 2 3 4 5 6 7 8 9 10 11
         regex = Regex("(?:-|(-?\\d+\\d\\d\\d))?(?:-|-(\\d\\d))?(?:-|-(\\d\\d))?(T)?(?:(\\d\\d):(\\d\\d):(\\d\\d)(\\.\\d+)?)?(?:(?:((?:\\+|\\-)\\d\\d):(\\d\\d))|(Z))?")
-        val result = regex.matchEntire("-1234-21-31T41:51:61.789+71:81")
+        konst result = regex.matchEntire("-1234-21-31T41:51:61.789+71:81")
         assertNotNull(result)
         assertEquals("-1234", result!!.groupValues[1])
         assertEquals("21", result.groupValues[2])
@@ -666,7 +666,7 @@ class PatternTest {
     }
 
     @Test fun testCompilePatternWithTerminatorMark() {
-        val regex = Regex("a\u0000\u0000cd")
+        konst regex = Regex("a\u0000\u0000cd")
         assertTrue(regex.matches("a\u0000\u0000cd"))
     }
 
@@ -736,8 +736,8 @@ class PatternTest {
     }
 
     @Test fun testSplitEmptyCharSequence() {
-        val s1 = ""
-        val arr = s1.split(":".toRegex())
+        konst s1 = ""
+        konst arr = s1.split(":".toRegex())
         assertEquals(arr.size, 1)
     }
 
@@ -811,9 +811,9 @@ class PatternTest {
     }
 
     @Test fun testRestoreFlagsAfterGroup() {
-        val baseString = "abc((?x)d)   a"
-        val testString = "abcd   a"
-        val regex = Regex(baseString)
+        konst baseString = "abc((?x)d)   a"
+        konst testString = "abcd   a"
+        konst regex = Regex(baseString)
         assertTrue(regex.matches(testString))
     }
 
@@ -1246,9 +1246,9 @@ class PatternTest {
     }
 
     @Test fun testQuantifiersWithSurrogatesSupplementary() {
-        val patString = "\uD9A0\uDE81*abc"
+        konst patString = "\uD9A0\uDE81*abc"
         var testString = "\uD9A0\uDE81\uD9A0\uDE81abc"
-        val regex = Regex(patString)
+        konst regex = Regex(patString)
         assertTrue(regex.matches(testString))
 
         testString = "abc"
@@ -1256,9 +1256,9 @@ class PatternTest {
     }
 
     @Test fun testAlternationsWithSurrogatesSupplementary() {
-        val patString = "\uDE81|\uD9A0\uDE81|\uD9A0"
+        konst patString = "\uDE81|\uD9A0\uDE81|\uD9A0"
         var testString = "\uD9A0"
-        val regex = Regex(patString)
+        konst regex = Regex(patString)
         assertTrue(regex.matches(testString))
 
         testString = "\uDE81"
@@ -1286,8 +1286,8 @@ class PatternTest {
     }
 
     @Test fun testFailedFindDotQuantifier() {
-        val regex = Regex("For.+ \\(1\\)")
-        val result = regex.find("This is good (1), For You")
+        konst regex = Regex("For.+ \\(1\\)")
+        konst result = regex.find("This is good (1), For You")
 
         assertNull(result)
     }
@@ -1297,10 +1297,10 @@ class PatternTest {
         // \v - A vertical whitespace character: [\n\x0B\f\r\x85\u2028\u2029]
         // \V - A non-vertical whitespace character: [^\v]
 
-        val positiveRegex = Regex("\\v")
-        val negativeRegex = Regex("\\V")
-        val verticalWhitespaces = listOf("\n", "\u000B", "\u000C" /* aka \f */, "\r", "\u0085", "\u2028", "\u2029")
-        val nonVerticalWhitespaces = listOf("1", "K", " ", "${Char.MIN_HIGH_SURROGATE}${Char.MIN_LOW_SURROGATE}")
+        konst positiveRegex = Regex("\\v")
+        konst negativeRegex = Regex("\\V")
+        konst verticalWhitespaces = listOf("\n", "\u000B", "\u000C" /* aka \f */, "\r", "\u0085", "\u2028", "\u2029")
+        konst nonVerticalWhitespaces = listOf("1", "K", " ", "${Char.MIN_HIGH_SURROGATE}${Char.MIN_LOW_SURROGATE}")
 
         // Smoke tests
         verticalWhitespaces.forEach {
@@ -1322,7 +1322,7 @@ class PatternTest {
         }
 
         // Test that \v and \V can be a part of a more complex regex.
-        val neighbors = listOf(
+        konst neighbors = listOf(
             // regex expression to its match.
             "x" to "x",
             " " to " ",
@@ -1414,11 +1414,11 @@ class PatternTest {
         // \h - A horizontal whitespace character: [ \t\xA0\u1680\u180e\u2000-\u200a\u202f\u205f\u3000]
         // \H - A non-horizontal whitespace character: [^\h]
 
-        val positiveRegex = Regex("\\h")
-        val negativeRegex = Regex("\\H")
-        val verticalWhitespaces = listOf(" ", "\t", "\u00A0", "\u1680", "\u180e", "\u202f", "\u205f", "\u3000") +
+        konst positiveRegex = Regex("\\h")
+        konst negativeRegex = Regex("\\H")
+        konst verticalWhitespaces = listOf(" ", "\t", "\u00A0", "\u1680", "\u180e", "\u202f", "\u205f", "\u3000") +
                 ('\u2000'..'\u200a').map(Char::toString)
-        val nonVerticalWhitespaces = listOf("1", "K", "\n", "${Char.MIN_HIGH_SURROGATE}${Char.MIN_LOW_SURROGATE}")
+        konst nonVerticalWhitespaces = listOf("1", "K", "\n", "${Char.MIN_HIGH_SURROGATE}${Char.MIN_LOW_SURROGATE}")
 
         // Smoke tests
         verticalWhitespaces.forEach {
@@ -1440,7 +1440,7 @@ class PatternTest {
         }
 
         // Test that \h and \H can be a part of a more complex regex.
-        val neighbors = listOf(
+        konst neighbors = listOf(
             // regex expression to its match.
             "x" to "x",
             " " to " ",
@@ -1529,11 +1529,11 @@ class PatternTest {
 
     @Test fun testUnicodeLinebreakChar() {
         // From Java 8+ `Pattern` doc:
-        // \R - Any Unicode linebreak sequence, is equivalent to \u000D\u000A|[\u000A\u000B\u000C\u000D\u0085\u2028\u2029]
+        // \R - Any Unicode linebreak sequence, is equikonstent to \u000D\u000A|[\u000A\u000B\u000C\u000D\u0085\u2028\u2029]
 
-        val regex = Regex("\\R")
-        val linebreaks = listOf("\u000D\u000A", "\u000A", "\u000B", "\u000C", "\u000D", "\u0085", "\u2028", "\u2029")
-        val nonLinebreaks = listOf("1", "K", " ", "${Char.MIN_HIGH_SURROGATE}${Char.MIN_LOW_SURROGATE}")
+        konst regex = Regex("\\R")
+        konst linebreaks = listOf("\u000D\u000A", "\u000A", "\u000B", "\u000C", "\u000D", "\u0085", "\u2028", "\u2029")
+        konst nonLinebreaks = listOf("1", "K", " ", "${Char.MIN_HIGH_SURROGATE}${Char.MIN_LOW_SURROGATE}")
 
         // Smoke tests
         linebreaks.forEach {
@@ -1553,7 +1553,7 @@ class PatternTest {
         assertMatch(Regex("\\R\\R\\R\\R"), "\r\r\n\n")
 
         // Test that \R can be a part of a more complex regex.
-        val neighbors = listOf(
+        konst neighbors = listOf(
             // regex expression to its match.
             "x" to "x",
             " " to " ",

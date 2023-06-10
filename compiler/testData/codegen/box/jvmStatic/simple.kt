@@ -4,9 +4,9 @@
 
 object A {
 
-    val b: String = "OK"
+    konst b: String = "OK"
 
-    @JvmStatic val c: String = "OK"
+    @JvmStatic konst c: String = "OK"
 
     @JvmStatic fun test1() : String {
         return b

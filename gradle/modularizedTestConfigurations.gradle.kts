@@ -8,9 +8,9 @@ import org.jetbrains.gradle.ext.TopLevelArtifact
 import org.jetbrains.kotlin.ideaExt.*
 
 
-val distDir: String by extra
-val ideaSandboxDir: File by extra
-val ideaSdkPath: String
+konst distDir: String by extra
+konst ideaSandboxDir: File by extra
+konst ideaSdkPath: String
     get() = rootProject.ideaHomePathForTests().absolutePath
 
 fun MutableList<String>.addModularizedTestArgs(prefix: String, path: String, additionalParameters: Map<String, String>, benchFilter: String?) {
@@ -18,8 +18,8 @@ fun MutableList<String>.addModularizedTestArgs(prefix: String, path: String, add
     add("-${prefix}fir.bench.jps.dir=$path/test-project-model-dump")
     add("-${prefix}fir.bench.passes=1")
     add("-${prefix}fir.bench.dump=true")
-    for ((name, value) in additionalParameters) {
-        add("-$prefix$name=$value")
+    for ((name, konstue) in additionalParameters) {
+        add("-$prefix$name=$konstue")
     }
     if (benchFilter != null) {
         add("-${prefix}fir.bench.filter=$benchFilter")
@@ -27,7 +27,7 @@ fun MutableList<String>.addModularizedTestArgs(prefix: String, path: String, add
 }
 
 fun generateVmParametersForJpsConfiguration(path: String, additionalParameters: Map<String, String>, benchFilter: String?): String {
-    val vmParameters = mutableListOf(
+    konst vmParameters = mutableListOf(
         "-ea",
         "-XX:+HeapDumpOnOutOfMemoryError",
         "-Xmx3600m",
@@ -48,7 +48,7 @@ fun generateVmParametersForJpsConfiguration(path: String, additionalParameters: 
 }
 
 fun generateArgsForGradleConfiguration(path: String, additionalParameters: Map<String, String>, benchFilter: String?): String {
-    val args = mutableListOf<String>()
+    konst args = mutableListOf<String>()
     args.addModularizedTestArgs(prefix = "P", path = path, additionalParameters = additionalParameters, benchFilter = benchFilter)
     return args.joinToString(" ")
 }
@@ -60,20 +60,20 @@ fun generateXmlContentForJpsConfiguration(name: String, testClassName: String, v
             <module name="kotlin.compiler.fir.modularized-tests.test" />
             <extension name="coverage">
               <pattern>
-                <option name="PATTERN" value="org.jetbrains.kotlin.fir.*" />
-                <option name="ENABLED" value="true" />
+                <option name="PATTERN" konstue="org.jetbrains.kotlin.fir.*" />
+                <option name="ENABLED" konstue="true" />
               </pattern>
             </extension>
-            <option name="PACKAGE_NAME" value="org.jetbrains.kotlin.fir" />
-            <option name="MAIN_CLASS_NAME" value="org.jetbrains.kotlin.fir.$testClassName" />
-            <option name="METHOD_NAME" value="" />
-            <option name="TEST_OBJECT" value="class" />
-            <option name="VM_PARAMETERS" value="$vmParameters" />
-            <option name="PARAMETERS" value="" />
-            <option name="WORKING_DIRECTORY" value="${'$'}PROJECT_DIR${'$'}" />
+            <option name="PACKAGE_NAME" konstue="org.jetbrains.kotlin.fir" />
+            <option name="MAIN_CLASS_NAME" konstue="org.jetbrains.kotlin.fir.$testClassName" />
+            <option name="METHOD_NAME" konstue="" />
+            <option name="TEST_OBJECT" konstue="class" />
+            <option name="VM_PARAMETERS" konstue="$vmParameters" />
+            <option name="PARAMETERS" konstue="" />
+            <option name="WORKING_DIRECTORY" konstue="${'$'}PROJECT_DIR${'$'}" />
             <envs>
-              <env name="NO_FS_ROOTS_ACCESS_CHECK" value="true" />
-              <env name="PROJECT_CLASSES_DIRS" value="out/test/org.jetbrains.kotlin.compiler.test" />
+              <env name="NO_FS_ROOTS_ACCESS_CHECK" konstue="true" />
+              <env name="PROJECT_CLASSES_DIRS" konstue="out/test/org.jetbrains.kotlin.compiler.test" />
             </envs>
             <method v="2">
               <option name="Make" enabled="true" />
@@ -89,18 +89,18 @@ fun generateXmlContentForGradleConfiguration(name: String, testClassName: String
           <configuration default="false" name="$name" type="GradleRunConfiguration" factoryName="Gradle" folderName="Modularized tests">
             <ExternalSystemSettings>
               <option name="executionName" />
-              <option name="externalProjectPath" value="${'$'}PROJECT_DIR${'$'}" />
-              <option name="externalSystemIdString" value="GRADLE" />
-              <option name="scriptParameters" value="--tests &quot;org.jetbrains.kotlin.fir.${testClassName}&quot; ${vmParameters}" />
+              <option name="externalProjectPath" konstue="${'$'}PROJECT_DIR${'$'}" />
+              <option name="externalSystemIdString" konstue="GRADLE" />
+              <option name="scriptParameters" konstue="--tests &quot;org.jetbrains.kotlin.fir.${testClassName}&quot; ${vmParameters}" />
               <option name="taskDescriptions">
                 <list />
               </option>
               <option name="taskNames">
                 <list>
-                  <option value=":compiler:fir:modularized-tests:test" />
+                  <option konstue=":compiler:fir:modularized-tests:test" />
                 </list>
               </option>
-              <option name="vmOptions" value="" />
+              <option name="vmOptions" konstue="" />
             </ExternalSystemSettings>
             <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
             <method v="2" />
@@ -110,13 +110,13 @@ fun generateXmlContentForGradleConfiguration(name: String, testClassName: String
 }
 
 fun String.convertNameToRunConfigurationFile(prefix: String = ""): File {
-    val fileName = prefix + replace("""[ -.\[\]]""".toRegex(), "_") + ".xml"
+    konst fileName = prefix + replace("""[ -.\[\]]""".toRegex(), "_") + ".xml"
     return rootDir.resolve(".idea/runConfigurations/${fileName}")
 }
 
 fun generateJpsConfiguration(name: String, testClassName: String, path: String, additionalParameters: Map<String, String>, benchFilter: String?) {
-    val vmParameters = generateVmParametersForJpsConfiguration(path, additionalParameters, benchFilter)
-    val content = generateXmlContentForJpsConfiguration(
+    konst vmParameters = generateVmParametersForJpsConfiguration(path, additionalParameters, benchFilter)
+    konst content = generateXmlContentForJpsConfiguration(
         name = name,
         testClassName = testClassName,
         vmParameters = vmParameters
@@ -125,8 +125,8 @@ fun generateJpsConfiguration(name: String, testClassName: String, path: String, 
 }
 
 fun generateGradleConfiguration(name: String, testClassName: String, path: String, additionalParameters: Map<String, String>, benchFilter: String?) {
-    val vmParameters = generateArgsForGradleConfiguration(path, additionalParameters, benchFilter)
-    val content = generateXmlContentForGradleConfiguration(
+    konst vmParameters = generateArgsForGradleConfiguration(path, additionalParameters, benchFilter)
+    konst content = generateXmlContentForGradleConfiguration(
         name = name,
         testClassName = testClassName,
         vmParameters = vmParameters
@@ -134,7 +134,7 @@ fun generateGradleConfiguration(name: String, testClassName: String, path: Strin
     name.convertNameToRunConfigurationFile().writeText(content)
 }
 
-data class Configuration(val path: String, val name: String, val additionalParameters: Map<String, String> = emptyMap()) {
+data class Configuration(konst path: String, konst name: String, konst additionalParameters: Map<String, String> = emptyMap()) {
     companion object {
         operator fun invoke(path: String?, name: String, additionalParameters: Map<String, String> = emptyMap()): Configuration? {
             return path?.let { Configuration(it, name, additionalParameters) }
@@ -142,23 +142,23 @@ data class Configuration(val path: String, val name: String, val additionalParam
     }
 }
 
-val testDataPathList = listOfNotNull(
+konst testDataPathList = listOfNotNull(
     Configuration(kotlinBuildProperties.pathToKotlinModularizedTestData, "Kotlin"),
     Configuration(kotlinBuildProperties.pathToIntellijModularizedTestData, "IntelliJ"),
     Configuration(kotlinBuildProperties.pathToYoutrackModularizedTestData, "YouTrack"),
     Configuration(kotlinBuildProperties.pathToSpaceModularizedTestData, "Space")
 )
 
-val generateMT = kotlinBuildProperties.generateModularizedConfigurations
-val generateFP = kotlinBuildProperties.generateFullPipelineConfigurations
+konst generateMT = kotlinBuildProperties.generateModularizedConfigurations
+konst generateFP = kotlinBuildProperties.generateFullPipelineConfigurations
 
 for ((path, projectName, additionalParameters) in testDataPathList) {
-    rootProject.afterEvaluate {
-        val configurations = mutableListOf<Pair<String, String?>>(
+    rootProject.afterEkonstuate {
+        konst configurations = mutableListOf<Pair<String, String?>>(
             "Full $projectName" to null
         )
 
-        val jpsBuildEnabled = kotlinBuildProperties.isInJpsBuildIdeaSync
+        konst jpsBuildEnabled = kotlinBuildProperties.isInJpsBuildIdeaSync
 
         for ((name, benchFilter) in configurations) {
             if (generateMT) {

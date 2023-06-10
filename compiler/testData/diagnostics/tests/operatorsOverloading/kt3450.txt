@@ -1,6 +1,6 @@
 package
 
-public val x: B
+public konst x: B
 public fun test(): kotlin.Unit
 public operator fun A.div(/*0*/ s: kotlin.String): A
 public infix fun </*0*/ A, /*1*/ B> A.to(/*0*/ that: B): Pair<A, B>
@@ -26,8 +26,8 @@ public final class B {
 
 public final data class Pair</*0*/ out A, /*1*/ out B> {
     public constructor Pair</*0*/ out A, /*1*/ out B>(/*0*/ first: A, /*1*/ second: B)
-    public final val first: A
-    public final val second: B
+    public final konst first: A
+    public final konst second: B
     public final operator /*synthesized*/ fun component1(): A
     public final operator /*synthesized*/ fun component2(): B
     public final /*synthesized*/ fun copy(/*0*/ first: A = ..., /*1*/ second: B = ...): Pair<A, B>

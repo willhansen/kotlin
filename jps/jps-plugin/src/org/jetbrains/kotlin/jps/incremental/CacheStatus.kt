@@ -10,7 +10,7 @@ package org.jetbrains.kotlin.jps.incremental
  */
 enum class CacheStatus {
     /**
-     * Cache is valid and ready to use.
+     * Cache is konstid and ready to use.
      */
     VALID,
 

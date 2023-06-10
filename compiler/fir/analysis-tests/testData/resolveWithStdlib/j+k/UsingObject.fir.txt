@@ -9,6 +9,6 @@ FILE: UsingObject.kt
         ^foo Null(null)
     }
     public final fun main(): R|kotlin/Unit| {
-        lval w: R|kotlin/Any| = R|/foo|() ?: Q|java/lang|.R|java/lang/Object.Object|()
+        lkonst w: R|kotlin/Any| = R|/foo|() ?: Q|java/lang|.R|java/lang/Object.Object|()
         R|<local>/w|.R|kotlin/Any.hashCode|()
     }

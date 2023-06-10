@@ -15,17 +15,17 @@ import kotlin.reflect.KClass
 
 abstract class FirSamConversionTransformerExtension(session: FirSession) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("SamConversionTransformerExtension")
+        konst NAME = FirExtensionPointName("SamConversionTransformerExtension")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension> = FirSamConversionTransformerExtension::class
+    final override konst extensionType: KClass<out FirExtension> = FirSamConversionTransformerExtension::class
 
     abstract fun getCustomFunctionTypeForSamConversion(function: FirSimpleFunction): ConeLookupTagBasedType?
 
     fun interface Factory : FirExtension.Factory<FirSamConversionTransformerExtension>
 }
 
-val FirExtensionService.samConversionTransformers: List<FirSamConversionTransformerExtension> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.samConversionTransformers: List<FirSamConversionTransformerExtension> by FirExtensionService.registeredExtensions()

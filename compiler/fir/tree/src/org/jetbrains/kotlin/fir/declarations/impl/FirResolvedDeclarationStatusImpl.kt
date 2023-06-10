@@ -14,16 +14,16 @@ import org.jetbrains.kotlin.fir.declarations.FirResolvedDeclarationStatus
 class FirResolvedDeclarationStatusImpl(
     visibility: Visibility,
     modality: Modality,
-    override val effectiveVisibility: EffectiveVisibility
+    override konst effectiveVisibility: EffectiveVisibility
 ) : FirDeclarationStatusImpl(visibility, modality), FirResolvedDeclarationStatus {
 
     companion object {
-        val DEFAULT_STATUS_FOR_STATUSLESS_DECLARATIONS = FirResolvedDeclarationStatusImpl(
+        konst DEFAULT_STATUS_FOR_STATUSLESS_DECLARATIONS = FirResolvedDeclarationStatusImpl(
             Visibilities.Public,
             Modality.FINAL,
             EffectiveVisibility.Public
         )
-        val DEFAULT_STATUS_FOR_SUSPEND_FUNCTION_EXPRESSION = FirResolvedDeclarationStatusImpl(
+        konst DEFAULT_STATUS_FOR_SUSPEND_FUNCTION_EXPRESSION = FirResolvedDeclarationStatusImpl(
             Visibilities.Local,
             Modality.FINAL,
             EffectiveVisibility.Public
@@ -39,9 +39,9 @@ class FirResolvedDeclarationStatusImpl(
         this.flags = flags
     }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = super.visibility
 
-    override val modality: Modality
+    override konst modality: Modality
         get() = super.modality!!
 }

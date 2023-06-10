@@ -12,7 +12,7 @@ import java.util.Arrays
  * Generic pair parceler
  * Create concrete object to use (see below)
  */
-open class PairParceler<F: Any, S: Any>(private val firstParceler: Parceler<F>, private val secondParceler: Parceler<S>): Parceler<Pair<F, S>> {
+open class PairParceler<F: Any, S: Any>(private konst firstParceler: Parceler<F>, private konst secondParceler: Parceler<S>): Parceler<Pair<F, S>> {
     /**
      * Reads the [T] instance state from the [parcel], constructs the new [T] instance and returns it.
      */
@@ -49,16 +49,16 @@ object IntToIntParceler: PairParceler<Int, Int>(IntParceler, IntParceler)
 
 @Parcelize
 @TypeParceler<Pair<Int, Int>, IntToIntParceler>
-class A(val pair: Pair<Int, Int>): Parcelable
+class A(konst pair: Pair<Int, Int>): Parcelable
 
 fun box() = parcelTest { parcel ->
-    val a1 = A(1 to 2)
+    konst a1 = A(1 to 2)
     a1.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val a2 = readFromParcel<A>(parcel)
+    konst a2 = readFromParcel<A>(parcel)
     assert(a1.pair == a2.pair)
 }

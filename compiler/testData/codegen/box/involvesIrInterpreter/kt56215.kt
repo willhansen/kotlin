@@ -13,7 +13,7 @@ fun ObjectWithExtension.extensionFun(): String =
         "Not null"
 
 fun box(): String {
-    val nullObjectWithExtension: ObjectWithExtension? = null
+    konst nullObjectWithExtension: ObjectWithExtension? = null
     if ("${nullObjectWithExtension.nullableExtensionFun()}" != "Null") return "Fail 1"
     if ("${ObjectWithExtension.nullableExtensionFun()}" != "Not null") return "Fail 2"
 

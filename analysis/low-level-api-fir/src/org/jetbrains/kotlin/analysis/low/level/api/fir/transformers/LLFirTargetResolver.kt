@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.fir.declarations.FirRegularClass
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 
 internal abstract class LLFirTargetResolver(
-    protected val resolveTarget: LLFirResolveTarget,
-    protected val lockProvider: LLFirLockProvider,
-    protected val resolverPhase: FirResolvePhase,
-    private val isJumpingPhase: Boolean = false,
+    protected konst resolveTarget: LLFirResolveTarget,
+    protected konst lockProvider: LLFirLockProvider,
+    protected konst resolverPhase: FirResolvePhase,
+    private konst isJumpingPhase: Boolean = false,
 ) {
-    private val _nestedClassesStack = mutableListOf<FirRegularClass>()
+    private konst _nestedClassesStack = mutableListOf<FirRegularClass>()
 
-    val nestedClassesStack: List<FirRegularClass> get() = _nestedClassesStack.toList()
+    konst nestedClassesStack: List<FirRegularClass> get() = _nestedClassesStack.toList()
 
     protected abstract fun withFile(firFile: FirFile, action: () -> Unit)
 
@@ -49,7 +49,7 @@ internal abstract class LLFirTargetResolver(
 
     private fun goToTargets(iterator: Iterator<FirRegularClass>) {
         if (iterator.hasNext()) {
-            val firClass = iterator.next()
+            konst firClass = iterator.next()
             withRegularClass(firClass) {
                 goToTargets(iterator)
             }
@@ -128,7 +128,7 @@ internal abstract class LLFirTargetResolver(
     }
 
     private fun checkThatResolvedAtLeastToPreviousPhase(target: FirElementWithResolveState) {
-        when (val previousPhase = resolverPhase.previous) {
+        when (konst previousPhase = resolverPhase.previous) {
             FirResolvePhase.IMPORTS -> {}
             else -> {
                 target.checkPhase(previousPhase)

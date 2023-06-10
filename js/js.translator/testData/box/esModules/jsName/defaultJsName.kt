@@ -6,7 +6,7 @@
 package lib
 
 @JsName("default")
-external val foo: Int
+external konst foo: Int
 
 // FILE: lib2.kt
 @file:JsModule("./bar.mjs")

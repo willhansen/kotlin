@@ -54,7 +54,7 @@ tasks {
 
     // Copy-pasted from Indexer build.gradle.kts.
     withType<Test>().configureEach {
-        val projectsWithNativeLibs = listOf(
+        konst projectsWithNativeLibs = listOf(
                 project(":kotlin-native:Interop:Indexer"),
                 project(":kotlin-native:Interop:Runtime")
         )
@@ -62,8 +62,8 @@ tasks {
         systemProperty("java.library.path", projectsWithNativeLibs.joinToString(File.pathSeparator) {
             File(it.buildDir, "nativelibs").absolutePath
         })
-        val llvmDir = project.findProperty("llvmDir")
-        val libclangPath = "$llvmDir/" + if (org.jetbrains.kotlin.konan.target.HostManager.hostIsMingw) {
+        konst llvmDir = project.findProperty("llvmDir")
+        konst libclangPath = "$llvmDir/" + if (org.jetbrains.kotlin.konan.target.HostManager.hostIsMingw) {
             "bin/libclang.dll"
         } else {
             "lib/${System.mapLibraryName("clang")}"

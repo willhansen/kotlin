@@ -29,15 +29,15 @@ FILE: companionUsesNested.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val b: R|Base.BaseNested| = R|/Base.BaseNested.BaseNested|()
+            public final konst b: R|Base.BaseNested| = R|/Base.BaseNested.BaseNested|()
                 public get(): R|Base.BaseNested|
 
-            public final val d: R|Derived.DerivedNested| = R|/Derived.DerivedNested.DerivedNested|()
+            public final konst d: R|Derived.DerivedNested| = R|/Derived.DerivedNested.DerivedNested|()
                 public get(): R|Derived.DerivedNested|
 
             public final fun foo(): R|kotlin/Unit| {
-                lval bb: R|Base.BaseNested| = R|/Base.BaseNested.BaseNested|()
-                lval dd: R|Derived.DerivedNested| = R|/Derived.DerivedNested.DerivedNested|()
+                lkonst bb: R|Base.BaseNested| = R|/Base.BaseNested.BaseNested|()
+                lkonst dd: R|Derived.DerivedNested| = R|/Derived.DerivedNested.DerivedNested|()
             }
 
         }

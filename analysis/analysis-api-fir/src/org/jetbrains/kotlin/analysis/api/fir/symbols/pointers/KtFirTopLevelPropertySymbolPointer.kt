@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.fir.declarations.FirProperty
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.name.CallableId
 
-internal class KtFirTopLevelPropertySymbolPointer(callableId: CallableId, private val signature: FirCallableSignature) :
+internal class KtFirTopLevelPropertySymbolPointer(callableId: CallableId, private konst signature: FirCallableSignature) :
     KtTopLevelCallableSymbolPointer<KtKotlinPropertySymbol>(callableId) {
     override fun KtFirAnalysisSession.chooseCandidateAndCreateSymbol(
         candidates: Collection<FirCallableSymbol<*>>,
         firSession: FirSession,
     ): KtKotlinPropertySymbol? {
-        val firProperty = candidates.findDeclarationWithSignatureBySymbols<FirProperty>(signature) ?: return null
+        konst firProperty = candidates.findDeclarationWithSignatureBySymbols<FirProperty>(signature) ?: return null
         return firSymbolBuilder.variableLikeBuilder.buildPropertySymbol(firProperty.symbol) as? KtKotlinPropertySymbol
     }
 

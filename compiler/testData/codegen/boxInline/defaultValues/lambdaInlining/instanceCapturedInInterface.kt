@@ -7,11 +7,11 @@ package test
 inline fun inlineFunStub(){}
 
 interface A {
-    val value: String
+    konst konstue: String
 
     fun test() = inlineFun()
 
-    private inline fun inlineFun(lambda: () -> String = { value }): String {
+    private inline fun inlineFun(lambda: () -> String = { konstue }): String {
         return lambda()
     }
 }
@@ -21,7 +21,7 @@ interface A {
 import test.*
 
 class B : A {
-    override val value: String = "OK"
+    override konst konstue: String = "OK"
 }
 
 fun box(): String {

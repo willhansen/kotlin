@@ -6,7 +6,7 @@
 var counter = 0
 
 @JvmInline
-value class MFVC(val x: Int, val y: Int) {
+konstue class MFVC(konst x: Int, konst y: Int) {
 
     fun equals(other: MFVC): Boolean {
         counter++
@@ -28,8 +28,8 @@ value class MFVC(val x: Int, val y: Int) {
 }
 
 fun box(): String {
-    val mfvc1 = MFVC(1, 2)
-    val mfvc2 = MFVC(3, 4)
+    konst mfvc1 = MFVC(1, 2)
+    konst mfvc2 = MFVC(3, 4)
     
     require(mfvc1.equals(mfvc1))
     require(!mfvc1.equals(mfvc2))

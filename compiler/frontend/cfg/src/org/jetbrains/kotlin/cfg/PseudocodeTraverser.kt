@@ -30,7 +30,7 @@ fun Pseudocode.traverse(
     traversalOrder: TraversalOrder,
     analyzeInstruction: (Instruction) -> Unit
 ) {
-    val instructions = getInstructions(traversalOrder)
+    konst instructions = getInstructions(traversalOrder)
     for (instruction in instructions) {
         if (instruction is LocalFunctionDeclarationInstruction) {
             instruction.body.traverse(traversalOrder, analyzeInstruction)
@@ -44,12 +44,12 @@ fun <D> Pseudocode.traverse(
     edgesMap: Map<Instruction, Edges<D>>,
     analyzeInstruction: (Instruction, D, D) -> Unit
 ) {
-    val instructions = getInstructions(traversalOrder)
+    konst instructions = getInstructions(traversalOrder)
     for (instruction in instructions) {
         if (instruction is LocalFunctionDeclarationInstruction) {
             instruction.body.traverse(traversalOrder, edgesMap, analyzeInstruction)
         }
-        val edges = edgesMap[instruction] ?: continue
+        konst edges = edgesMap[instruction] ?: continue
         analyzeInstruction(instruction, edges.incoming, edges.outgoing)
     }
 }
@@ -69,17 +69,17 @@ fun <I : ControlFlowInfo<*, *, *>> Pseudocode.collectData(
     updateEdge: (Instruction, Instruction, I) -> I,
     initialInfo: I
 ): Map<Instruction, Edges<I>> {
-    val edgesMap = LinkedHashMap<Instruction, Edges<I>>()
-    val startInstruction = getStartInstruction(traversalOrder)
+    konst edgesMap = LinkedHashMap<Instruction, Edges<I>>()
+    konst startInstruction = getStartInstruction(traversalOrder)
     edgesMap[startInstruction] = Edges(initialInfo, initialInfo)
 
-    val changed = mutableMapOf<Instruction, Boolean>()
+    konst changed = mutableMapOf<Instruction, Boolean>()
     do {
         collectDataFromSubgraph(
             traversalOrder, edgesMap,
             mergeEdges, updateEdge, Collections.emptyList<Instruction>(), changed, false
         )
-    } while (changed.any { it.value })
+    } while (changed.any { it.konstue })
 
     return edgesMap
 }
@@ -93,30 +93,30 @@ private fun <I : ControlFlowInfo<*, *, *>> Pseudocode.collectDataFromSubgraph(
     changed: MutableMap<Instruction, Boolean>,
     isLocal: Boolean
 ) {
-    val instructions = getInstructions(traversalOrder)
-    val startInstruction = getStartInstruction(traversalOrder)
+    konst instructions = getInstructions(traversalOrder)
+    konst startInstruction = getStartInstruction(traversalOrder)
 
     for (instruction in instructions) {
-        val isStart = instruction.isStartInstruction(traversalOrder)
+        konst isStart = instruction.isStartInstruction(traversalOrder)
         if (!isLocal && isStart)
             continue
 
-        val previousInstructions =
+        konst previousInstructions =
             getPreviousIncludingSubGraphInstructions(instruction, traversalOrder, startInstruction, previousSubGraphInstructions)
 
         if (instruction is LocalFunctionDeclarationInstruction) {
-            val subroutinePseudocode = instruction.body
+            konst subroutinePseudocode = instruction.body
             subroutinePseudocode.collectDataFromSubgraph(
                 traversalOrder, edgesMap, mergeEdges, updateEdge, previousInstructions, changed, true
             )
             // Special case for inlined functions: take flow from EXIT instructions (it contains flow which exits declaration normally)
-            val lastInstruction = if (instruction is InlinedLocalFunctionDeclarationInstruction && traversalOrder == FORWARD)
+            konst lastInstruction = if (instruction is InlinedLocalFunctionDeclarationInstruction && traversalOrder == FORWARD)
                 subroutinePseudocode.exitInstruction
             else
                 subroutinePseudocode.getLastInstruction(traversalOrder)
-            val previousValue = edgesMap[instruction]
-            val newValue = edgesMap[lastInstruction]
-            val updatedValue = newValue?.let {
+            konst previousValue = edgesMap[instruction]
+            konst newValue = edgesMap[lastInstruction]
+            konst updatedValue = newValue?.let {
                 Edges(updateEdge(lastInstruction, instruction, it.incoming), updateEdge(lastInstruction, instruction, it.outgoing))
             }
             updateEdgeDataForInstruction(instruction, previousValue, updatedValue, edgesMap, changed)
@@ -124,20 +124,20 @@ private fun <I : ControlFlowInfo<*, *, *>> Pseudocode.collectDataFromSubgraph(
         }
 
 
-        val previousDataValue = edgesMap[instruction]
+        konst previousDataValue = edgesMap[instruction]
         if (previousDataValue != null && previousInstructions.all { changed[it] == false }) {
             changed[instruction] = false
             continue
         }
 
-        val incomingEdgesData = HashSet<I>()
+        konst incomingEdgesData = HashSet<I>()
 
         for (previousInstruction in previousInstructions) {
-            val previousData = edgesMap[previousInstruction] ?: continue
+            konst previousData = edgesMap[previousInstruction] ?: continue
             incomingEdgesData.add(updateEdge(previousInstruction, instruction, previousData.outgoing))
         }
 
-        val mergedData = mergeEdges(instruction, incomingEdgesData)
+        konst mergedData = mergeEdges(instruction, incomingEdgesData)
         updateEdgeDataForInstruction(instruction, previousDataValue, mergedData, edgesMap, changed)
     }
 }
@@ -148,11 +148,11 @@ private fun getPreviousIncludingSubGraphInstructions(
     startInstruction: Instruction,
     previousSubGraphInstructions: Collection<Instruction>
 ): Collection<Instruction> {
-    val previous = instruction.getPreviousInstructions(traversalOrder)
+    konst previous = instruction.getPreviousInstructions(traversalOrder)
     if (instruction != startInstruction || previousSubGraphInstructions.isEmpty()) {
         return previous
     }
-    val result = ArrayList(previous)
+    konst result = ArrayList(previous)
     result.addAll(previousSubGraphInstructions)
     return result
 }
@@ -172,7 +172,7 @@ private fun <I : ControlFlowInfo<*, *, *>> updateEdgeDataForInstruction(
     }
 }
 
-data class Edges<out T>(val incoming: T, val outgoing: T)
+data class Edges<out T>(konst incoming: T, konst outgoing: T)
 
 enum class TraverseInstructionResult {
     CONTINUE,
@@ -188,11 +188,11 @@ fun traverseFollowingInstructions(
     // true to continue traversal
     handler: ((Instruction) -> TraverseInstructionResult)?
 ): Boolean {
-    val stack = ArrayDeque<Instruction>()
+    konst stack = ArrayDeque<Instruction>()
     stack.push(rootInstruction)
 
     while (!stack.isEmpty()) {
-        val instruction = stack.pop()
+        konst instruction = stack.pop()
         if (!visited.add(instruction)) continue
         when (handler?.let { it(instruction) } ?: TraverseInstructionResult.CONTINUE) {
             TraverseInstructionResult.CONTINUE -> instruction.getNextInstructions(order).forEach { stack.push(it) }

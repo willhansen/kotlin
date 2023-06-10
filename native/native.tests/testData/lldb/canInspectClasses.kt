@@ -1,12 +1,12 @@
 // KIND: STANDALONE_LLDB
 // LLDB_TRACE: canInspectClasses.txt
 fun main(args: Array<String>) {
-    val point = Point(1, 2)
-    val person = Person()
+    konst point = Point(1, 2)
+    konst person = Person()
     return
 }
 
-data class Point(val x: Int, val y: Int)
+data class Point(konst x: Int, konst y: Int)
 class Person {
     override fun toString() = "John Doe"
 }

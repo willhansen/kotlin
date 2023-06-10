@@ -27,7 +27,7 @@ inline fun <reified T> foo3(x: Any, y: Any): Boolean {
 import test.*
 
 fun box(): String {
-    val x = foo1<Int>().javaClass.getGenericSuperclass()?.toString()
+    konst x = foo1<Int>().javaClass.getGenericSuperclass()?.toString()
     if (x != "test.A<java.lang.Integer>") return "fail 1: " + x
 
     if (!foo2<String>("abc")) return "fail 2"

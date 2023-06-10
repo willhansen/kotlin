@@ -1,6 +1,6 @@
 interface Introspector {
     fun test() {
-        class SchemaRetriever(val transaction: String) {
+        class SchemaRetriever(konst transaction: String) {
             inline fun inSchema(crossinline modifier: (String) -> Unit) =
                     { modifier(transaction) }()
 

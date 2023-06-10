@@ -29,17 +29,17 @@ import java.nio.file.FileSystems
 
 // There's JrtFileSystem in idea-full which we can't use in the compiler because it depends on NewVirtualFileSystem, absent in intellij-core
 class CoreJrtFileSystem : DeprecatedVirtualFileSystem() {
-    private val roots =
+    private konst roots =
         ConcurrentFactoryMap.createMap<String, CoreJrtVirtualFile?> { jdkHomePath ->
-            val fileSystem = globalJrtFsCache[jdkHomePath] ?: return@createMap null
+            konst fileSystem = globalJrtFsCache[jdkHomePath] ?: return@createMap null
             CoreJrtVirtualFile(this, jdkHomePath, fileSystem.getPath(""), parent = null)
         }
 
     override fun getProtocol(): String = StandardFileSystems.JRT_PROTOCOL
 
     override fun findFileByPath(path: String): VirtualFile? {
-        val (jdkHomePath, pathInImage) = splitPath(path)
-        val root = roots[jdkHomePath] ?: return null
+        konst (jdkHomePath, pathInImage) = splitPath(path)
+        konst root = roots[jdkHomePath] ?: return null
 
         if (pathInImage.isEmpty()) return root
 
@@ -62,19 +62,19 @@ class CoreJrtFileSystem : DeprecatedVirtualFileSystem() {
             loadJrtFsJar(jdkHome) != null
 
         fun splitPath(path: String): Pair<String, String> {
-            val separator = path.indexOf(URLUtil.JAR_SEPARATOR)
+            konst separator = path.indexOf(URLUtil.JAR_SEPARATOR)
             if (separator < 0) {
                 throw IllegalArgumentException("Path in CoreJrtFileSystem must contain a separator: $path")
             }
-            val localPath = path.substring(0, separator)
-            val pathInJar = path.substring(separator + URLUtil.JAR_SEPARATOR.length)
+            konst localPath = path.substring(0, separator)
+            konst pathInJar = path.substring(separator + URLUtil.JAR_SEPARATOR.length)
             return Pair(localPath, pathInJar)
         }
 
-        private val globalJrtFsCache = ConcurrentFactoryMap.createMap<String, FileSystem?> { jdkHomePath ->
-            val jdkHome = File(jdkHomePath)
-            val jrtFsJar = loadJrtFsJar(jdkHome) ?: return@createMap null
-            val rootUri = URI.create(StandardFileSystems.JRT_PROTOCOL + ":/")
+        private konst globalJrtFsCache = ConcurrentFactoryMap.createMap<String, FileSystem?> { jdkHomePath ->
+            konst jdkHome = File(jdkHomePath)
+            konst jrtFsJar = loadJrtFsJar(jdkHome) ?: return@createMap null
+            konst rootUri = URI.create(StandardFileSystems.JRT_PROTOCOL + ":/")
             /*
               The ClassLoader, that was used to load JRT FS Provider actually lives as long as current thread due to ThreadLocal leak in jrt-fs,
               See https://bugs.openjdk.java.net/browse/JDK-8260621
@@ -85,7 +85,7 @@ class CoreJrtFileSystem : DeprecatedVirtualFileSystem() {
                 // but to load proper jrt-fs (one that is pointed by jdkHome) we should provide "java.home" path
                 FileSystems.newFileSystem(rootUri, mapOf("java.home" to jdkHome.absolutePath))
             } else {
-                val classLoader = URLClassLoader(arrayOf(jrtFsJar.toURI().toURL()), null)
+                konst classLoader = URLClassLoader(arrayOf(jrtFsJar.toURI().toURL()), null)
                 // If the runtime JDK is set to <9, there are no JrtFileSystemProvider,
                 // we should create classloader with jrt-fs.jar, and DO NOT NEED to pass "java.home" path,
                 // as otherwise it will incur additional classloader creation

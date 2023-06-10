@@ -13,16 +13,16 @@ fun inA(k: KRunnable): String = k.invoke()
 fun inB(k: KRunnable): String = k.invoke()
 
 fun box(): String {
-    val first = inA(KRunnable { "O" }) + inB(KRunnable { "K" })
+    konst first = inA(KRunnable { "O" }) + inB(KRunnable { "K" })
     if (first != "OK") return "fail1: $first"
 
-    val second = inA { "O" } + inB { "K" }
+    konst second = inA { "O" } + inB { "K" }
     if (second != "OK") return "fail2: $second"
 
-    val f1: () -> String = { "O" }
-    val f2: () -> String = { "K" }
+    konst f1: () -> String = { "O" }
+    konst f2: () -> String = { "K" }
 
-    val third = inA(f1) + inB(f2)
+    konst third = inA(f1) + inB(f2)
     if (third != "OK") return "fail3: $third"
 
     return "OK"

@@ -13,7 +13,7 @@ import a.b.*
 import C3
 
 @JsExport
-data class C1(val value: String)
+data class C1(konst konstue: String)
 
 @JsExport
 fun f(x1: C1, x2: C2, x3: C3): String {
@@ -28,7 +28,7 @@ import foo.bar.baz.*
 import C3
 
 @JsExport
-data class C2(val value: String)
+data class C2(konst konstue: String)
 @JsExport
 fun f(x1: C1, x2: C2, x3: C3): String {
     return "a.b.f($x1, $x2, $x3)"
@@ -40,7 +40,7 @@ import a.b.*
 import foo.bar.baz.*
 
 @JsExport
-data class C3(val value: String)
+data class C3(konst konstue: String)
 
 @JsExport
 fun f(x1: C1, x2: C2, x3: C3): String {

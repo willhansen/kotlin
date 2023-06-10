@@ -1,19 +1,19 @@
-public external val console: kotlin.js.Console { get; }
+public external konst console: kotlin.js.Console { get; }
 
-public external val definedExternally: kotlin.Nothing { get; }
+public external konst definedExternally: kotlin.Nothing { get; }
 
 @kotlin.Deprecated(level = DeprecationLevel.ERROR, message = "Use `definedExternally` instead", replaceWith = kotlin.ReplaceWith(expression = "definedExternally", imports = {}))
-public external val noImpl: kotlin.Nothing { get; }
+public external konst noImpl: kotlin.Nothing { get; }
 
-public external val undefined: kotlin.Nothing? { get; }
+public external konst undefined: kotlin.Nothing? { get; }
 
-public val <T : kotlin.Any> kotlin.reflect.KClass<T>.js: kotlin.js.JsClass<T> { get; }
+public konst <T : kotlin.Any> kotlin.reflect.KClass<T>.js: kotlin.js.JsClass<T> { get; }
 
-public val <T : kotlin.Any> kotlin.js.JsClass<T>.kotlin: kotlin.reflect.KClass<T> { get; }
+public konst <T : kotlin.Any> kotlin.js.JsClass<T>.kotlin: kotlin.reflect.KClass<T> { get; }
 
 public inline fun dateLocaleOptions(init: kotlin.js.Date.LocaleOptions.() -> kotlin.Unit): kotlin.js.Date.LocaleOptions
 
-public external fun eval(expr: kotlin.String): dynamic
+public external fun ekonst(expr: kotlin.String): dynamic
 
 public external fun js(code: kotlin.String): dynamic
 
@@ -193,7 +193,7 @@ public final external class Date {
 }
 
 @kotlin.ExperimentalStdlibApi
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.PROPERTY})
 @kotlin.SinceKotlin(version = "1.6")
 @kotlin.Deprecated(message = "This annotation is a temporal migration assistance and may be removed in the future releases, please consider filing an issue about the case where it is needed")
@@ -203,7 +203,7 @@ public final annotation class EagerInitialization : kotlin.Annotation {
 
 @kotlin.RequiresOptIn(level = Level.WARNING)
 @kotlin.annotation.MustBeDocumented
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.SinceKotlin(version = "1.4")
 public final annotation class ExperimentalJsExport : kotlin.Annotation {
     public constructor ExperimentalJsExport()
@@ -212,15 +212,15 @@ public final annotation class ExperimentalJsExport : kotlin.Annotation {
 public external object JSON {
     public final fun <T> parse(text: kotlin.String): T
 
-    public final fun <T> parse(text: kotlin.String, reviver: (key: kotlin.String, value: kotlin.Any?) -> kotlin.Any?): T
+    public final fun <T> parse(text: kotlin.String, reviver: (key: kotlin.String, konstue: kotlin.Any?) -> kotlin.Any?): T
 
     public final fun stringify(o: kotlin.Any?): kotlin.String
 
-    public final fun stringify(o: kotlin.Any?, replacer: ((key: kotlin.String, value: kotlin.Any?) -> kotlin.Any?)? = ..., space: kotlin.Int): kotlin.String
+    public final fun stringify(o: kotlin.Any?, replacer: ((key: kotlin.String, konstue: kotlin.Any?) -> kotlin.Any?)? = ..., space: kotlin.Int): kotlin.String
 
-    public final fun stringify(o: kotlin.Any?, replacer: ((key: kotlin.String, value: kotlin.Any?) -> kotlin.Any?)? = ..., space: kotlin.String): kotlin.String
+    public final fun stringify(o: kotlin.Any?, replacer: ((key: kotlin.String, konstue: kotlin.Any?) -> kotlin.Any?)? = ..., space: kotlin.String): kotlin.String
 
-    public final fun stringify(o: kotlin.Any?, replacer: (key: kotlin.String, value: kotlin.Any?) -> kotlin.Any?): kotlin.String
+    public final fun stringify(o: kotlin.Any?, replacer: (key: kotlin.String, konstue: kotlin.Any?) -> kotlin.Any?): kotlin.String
 
     public final fun stringify(o: kotlin.Any?, replacer: kotlin.Array<kotlin.String>): kotlin.String
 
@@ -230,18 +230,18 @@ public external object JSON {
 }
 
 public external interface JsClass<T : kotlin.Any> {
-    public abstract val name: kotlin.String { get; }
+    public abstract konst name: kotlin.String { get; }
 }
 
 @kotlin.js.ExperimentalJsExport
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE})
 @kotlin.SinceKotlin(version = "1.3")
 public final annotation class JsExport : kotlin.Annotation {
     public constructor JsExport()
 
     @kotlin.js.ExperimentalJsExport
-    @kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+    @kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
     @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.CONSTRUCTOR})
     @kotlin.SinceKotlin(version = "1.8")
     public final annotation class Ignore : kotlin.Annotation {
@@ -250,7 +250,7 @@ public final annotation class JsExport : kotlin.Annotation {
 }
 
 @kotlin.ExperimentalStdlibApi
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.VALUE_PARAMETER})
 @kotlin.SinceKotlin(version = "1.9")
 public final annotation class JsExternalArgument : kotlin.Annotation {
@@ -258,47 +258,47 @@ public final annotation class JsExternalArgument : kotlin.Annotation {
 }
 
 @kotlin.ExperimentalStdlibApi
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS})
 @kotlin.SinceKotlin(version = "1.9")
 public final annotation class JsExternalInheritorsOnly : kotlin.Annotation {
     public constructor JsExternalInheritorsOnly()
 }
 
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE})
 public final annotation class JsModule : kotlin.Annotation {
     public constructor JsModule(import: kotlin.String)
 
-    public final val import: kotlin.String { get; }
+    public final konst import: kotlin.String { get; }
 }
 
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.CONSTRUCTOR, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER})
 public final annotation class JsName : kotlin.Annotation {
     public constructor JsName(name: kotlin.String)
 
-    public final val name: kotlin.String { get; }
+    public final konst name: kotlin.String { get; }
 }
 
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE})
 public final annotation class JsNonModule : kotlin.Annotation {
     public constructor JsNonModule()
 }
 
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.FILE})
 public final annotation class JsQualifier : kotlin.Annotation {
-    public constructor JsQualifier(value: kotlin.String)
+    public constructor JsQualifier(konstue: kotlin.String)
 
-    public final val value: kotlin.String { get; }
+    public final konst konstue: kotlin.String { get; }
 }
 
 public external interface Json {
     public abstract operator fun get(propertyName: kotlin.String): kotlin.Any?
 
-    public abstract operator fun set(propertyName: kotlin.String, value: kotlin.Any?): kotlin.Unit
+    public abstract operator fun set(propertyName: kotlin.String, konstue: kotlin.Any?): kotlin.Unit
 }
 
 public open external class Promise<out T> {
@@ -330,13 +330,13 @@ public open external class Promise<out T> {
 public final external class RegExp {
     public constructor RegExp(pattern: kotlin.String, flags: kotlin.String? = ...)
 
-    public final val global: kotlin.Boolean { get; }
+    public final konst global: kotlin.Boolean { get; }
 
-    public final val ignoreCase: kotlin.Boolean { get; }
+    public final konst ignoreCase: kotlin.Boolean { get; }
 
     public final var lastIndex: kotlin.Int { get; set; }
 
-    public final val multiline: kotlin.Boolean { get; }
+    public final konst multiline: kotlin.Boolean { get; }
 
     public final fun exec(str: kotlin.String): kotlin.js.RegExpMatch?
 
@@ -346,11 +346,11 @@ public final external class RegExp {
 }
 
 public external interface RegExpMatch {
-    public abstract val index: kotlin.Int { get; }
+    public abstract konst index: kotlin.Int { get; }
 
-    public abstract val input: kotlin.String { get; }
+    public abstract konst input: kotlin.String { get; }
 
-    public abstract val length: kotlin.Int { get; }
+    public abstract konst length: kotlin.Int { get; }
 }
 
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.FUNCTION})

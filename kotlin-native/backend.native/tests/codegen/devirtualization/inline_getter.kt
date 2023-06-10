@@ -1,13 +1,13 @@
-interface Base { val id: Int }
+interface Base { konst id: Int }
 
-inline class Child(override val id: Int = 1) : Base
+inline class Child(override konst id: Int = 1) : Base
 
-interface Base2 { val prop: Base }
-class Child2(override val prop: Child) : Base2
+interface Base2 { konst prop: Base }
+class Child2(override konst prop: Child) : Base2
 
 fun main() {
-    val x : Base = Child(5)
+    konst x : Base = Child(5)
     println(x.id)
-    val y : Base2 = Child2(Child(5))
+    konst y : Base2 = Child2(Child(5))
     println(y.prop)
 }

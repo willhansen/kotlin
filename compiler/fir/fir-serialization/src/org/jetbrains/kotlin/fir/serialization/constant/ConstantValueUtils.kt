@@ -27,7 +27,7 @@ internal fun Map<Name, FirExpression>.convertToConstantValues(
     constValueProvider: ConstValueProvider?
 ): Map<Name, ConstantValue<*>> {
     return this.map { (name, firExpression) ->
-        val constantValue = constValueProvider?.findConstantValueFor(firExpression)
+        konst constantValue = constValueProvider?.findConstantValueFor(firExpression)
             ?: firExpression.toConstantValue(session, constValueProvider)
             ?: runIf(session.languageVersionSettings.getFlag(AnalysisFlags.metadataCompilation)) {
                 ErrorValue.ErrorValueWithMessage("Constant conversion can be ignored in metadata compilation mode")
@@ -46,7 +46,7 @@ internal fun LinkedHashMap<FirExpression, FirValueParameter>.convertToConstantVa
 }
 
 inline fun <reified T : ConeKotlinType> AnnotationValue.coneTypeSafe(): T? {
-    return this.value.type as? T
+    return this.konstue.type as? T
 }
 
 inline fun <reified T : ConeKotlinType> KClassValue.Value.LocalClass.coneType(): T {
@@ -54,11 +54,11 @@ inline fun <reified T : ConeKotlinType> KClassValue.Value.LocalClass.coneType():
 }
 
 internal fun KClassValue.getArgumentType(session: FirSession): ConeKotlinType? {
-    when (val castedValue = value) {
+    when (konst castedValue = konstue) {
         is KClassValue.Value.LocalClass -> return castedValue.type as ConeKotlinType
         is KClassValue.Value.NormalClass -> {
-            val (classId, arrayDimensions) = castedValue.value
-            val klass = session.symbolProvider.getClassLikeSymbolByClassId(classId)?.fir as? FirRegularClass ?: return null
+            konst (classId, arrayDimensions) = castedValue.konstue
+            konst klass = session.symbolProvider.getClassLikeSymbolByClassId(classId)?.fir as? FirRegularClass ?: return null
             var type: ConeClassLikeType = klass.defaultType().replaceArgumentsWithStarProjections()
             repeat(arrayDimensions) {
                 type = type.createArrayType()
@@ -78,6 +78,6 @@ internal fun create(argumentType: ConeKotlinType): ConstantValue<*>? {
         type = type.arrayElementType() ?: break
         arrayDimensions++
     }
-    val classId = type.classId ?: return null
+    konst classId = type.classId ?: return null
     return KClassValue(classId, arrayDimensions)
 }

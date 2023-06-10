@@ -17,27 +17,27 @@ package kotlin.text
 public actual fun StringBuilder.clear(): StringBuilder = apply { setLength(0) }
 
 /**
- * Sets the character at the specified [index] to the specified [value].
+ * Sets the character at the specified [index] to the specified [konstue].
  *
  * @throws IndexOutOfBoundsException if [index] is out of bounds of this string builder.
  */
 @kotlin.internal.InlineOnly
-public actual inline operator fun StringBuilder.set(index: Int, value: Char): Unit = this.setCharAt(index, value)
+public actual inline operator fun StringBuilder.set(index: Int, konstue: Char): Unit = this.setCharAt(index, konstue)
 
 /**
- * Replaces characters in the specified range of this string builder with characters in the specified string [value] and returns this instance.
+ * Replaces characters in the specified range of this string builder with characters in the specified string [konstue] and returns this instance.
  *
  * @param startIndex the beginning (inclusive) of the range to replace.
  * @param endIndex the end (exclusive) of the range to replace.
- * @param value the string to replace with.
+ * @param konstue the string to replace with.
  *
  * @throws IndexOutOfBoundsException or [IllegalArgumentException] if [startIndex] is less than zero, greater than the length of this string builder, or `startIndex > endIndex`.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
-public actual inline fun StringBuilder.setRange(startIndex: Int, endIndex: Int, value: String): StringBuilder =
-    this.replace(startIndex, endIndex, value)
+public actual inline fun StringBuilder.setRange(startIndex: Int, endIndex: Int, konstue: String): StringBuilder =
+    this.replace(startIndex, endIndex, konstue)
 
 /**
  * Removes the character at the specified [index] from this string builder and returns this instance.
@@ -86,121 +86,121 @@ public actual inline fun StringBuilder.toCharArray(destination: CharArray, desti
     this.getChars(startIndex, endIndex, destination, destinationOffset)
 
 /**
- * Appends characters in a subarray of the specified character array [value] to this string builder and returns this instance.
+ * Appends characters in a subarray of the specified character array [konstue] to this string builder and returns this instance.
  *
  * Characters are appended in order, starting at specified [startIndex].
  *
- * @param value the array from which characters are appended.
+ * @param konstue the array from which characters are appended.
  * @param startIndex the beginning (inclusive) of the subarray to append.
  * @param endIndex the end (exclusive) of the subarray to append.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] array indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] array indices or when `startIndex > endIndex`.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
-public actual inline fun StringBuilder.appendRange(value: CharArray, startIndex: Int, endIndex: Int): StringBuilder =
-    this.append(value, startIndex, endIndex - startIndex)
+public actual inline fun StringBuilder.appendRange(konstue: CharArray, startIndex: Int, endIndex: Int): StringBuilder =
+    this.append(konstue, startIndex, endIndex - startIndex)
 
 /**
- * Appends a subsequence of the specified character sequence [value] to this string builder and returns this instance.
+ * Appends a subsequence of the specified character sequence [konstue] to this string builder and returns this instance.
  *
- * @param value the character sequence from which a subsequence is appended.
+ * @param konstue the character sequence from which a subsequence is appended.
  * @param startIndex the beginning (inclusive) of the subsequence to append.
  * @param endIndex the end (exclusive) of the subsequence to append.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
-public actual inline fun StringBuilder.appendRange(value: CharSequence, startIndex: Int, endIndex: Int): StringBuilder =
-    this.append(value, startIndex, endIndex)
+public actual inline fun StringBuilder.appendRange(konstue: CharSequence, startIndex: Int, endIndex: Int): StringBuilder =
+    this.append(konstue, startIndex, endIndex)
 
 /**
- * Inserts characters in a subarray of the specified character array [value] into this string builder at the specified [index] and returns this instance.
+ * Inserts characters in a subarray of the specified character array [konstue] into this string builder at the specified [index] and returns this instance.
  *
- * The inserted characters go in same order as in the [value] array, starting at [index].
+ * The inserted characters go in same order as in the [konstue] array, starting at [index].
  *
  * @param index the position in this string builder to insert at.
- * @param value the array from which characters are inserted.
+ * @param konstue the array from which characters are inserted.
  * @param startIndex the beginning (inclusive) of the subarray to insert.
  * @param endIndex the end (exclusive) of the subarray to insert.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] array indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] array indices or when `startIndex > endIndex`.
  * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
-public actual inline fun StringBuilder.insertRange(index: Int, value: CharArray, startIndex: Int, endIndex: Int): StringBuilder =
-    this.insert(index, value, startIndex, endIndex - startIndex)
+public actual inline fun StringBuilder.insertRange(index: Int, konstue: CharArray, startIndex: Int, endIndex: Int): StringBuilder =
+    this.insert(index, konstue, startIndex, endIndex - startIndex)
 
 /**
- * Inserts characters in a subsequence of the specified character sequence [value] into this string builder at the specified [index] and returns this instance.
+ * Inserts characters in a subsequence of the specified character sequence [konstue] into this string builder at the specified [index] and returns this instance.
  *
- * The inserted characters go in the same order as in the [value] character sequence, starting at [index].
+ * The inserted characters go in the same order as in the [konstue] character sequence, starting at [index].
  *
  * @param index the position in this string builder to insert at.
- * @param value the character sequence from which a subsequence is inserted.
+ * @param konstue the character sequence from which a subsequence is inserted.
  * @param startIndex the beginning (inclusive) of the subsequence to insert.
  * @param endIndex the end (exclusive) of the subsequence to insert.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
  * @throws IndexOutOfBoundsException if [index] is less than zero or greater than the length of this string builder.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
-public actual inline fun StringBuilder.insertRange(index: Int, value: CharSequence, startIndex: Int, endIndex: Int): StringBuilder =
-    this.insert(index, value, startIndex, endIndex)
+public actual inline fun StringBuilder.insertRange(index: Int, konstue: CharSequence, startIndex: Int, endIndex: Int): StringBuilder =
+    this.insert(index, konstue, startIndex, endIndex)
 
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: StringBuffer?): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: StringBuffer?): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: StringBuilder?): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: StringBuilder?): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Int): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Int): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Short): StringBuilder = append(value.toInt()).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Short): StringBuilder = append(konstue.toInt()).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Byte): StringBuilder = append(value.toInt()).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Byte): StringBuilder = append(konstue.toInt()).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Long): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Long): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Float): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Float): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Double): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Double): StringBuilder = append(konstue).appendLine()
 
 
 private object SystemProperties {
     /** Line separator for current system. */
     @JvmField
-    val LINE_SEPARATOR = System.getProperty("line.separator")!!
+    konst LINE_SEPARATOR = System.getProperty("line.separator")!!
 }
 
 /** Appends a line separator to this Appendable. */
@@ -211,25 +211,25 @@ private object SystemProperties {
 )
 public fun Appendable.appendln(): Appendable = append(SystemProperties.LINE_SEPARATOR)
 
-/** Appends value to the given Appendable and line separator after it. */
+/** Appends konstue to the given Appendable and line separator after it. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun Appendable.appendln(value: CharSequence?): Appendable = append(value).appendln()
+public inline fun Appendable.appendln(konstue: CharSequence?): Appendable = append(konstue).appendln()
 
-/** Appends value to the given Appendable and line separator after it. */
+/** Appends konstue to the given Appendable and line separator after it. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun Appendable.appendln(value: Char): Appendable = append(value).appendln()
+public inline fun Appendable.appendln(konstue: Char): Appendable = append(konstue).appendln()
 
 /** Appends a line separator to this StringBuilder. */
 @Deprecated(
@@ -239,142 +239,142 @@ public inline fun Appendable.appendln(value: Char): Appendable = append(value).a
 )
 public fun StringBuilder.appendln(): StringBuilder = append(SystemProperties.LINE_SEPARATOR)
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: StringBuffer?): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: StringBuffer?): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: CharSequence?): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: CharSequence?): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: String?): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: String?): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Any?): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: Any?): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: StringBuilder?): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: StringBuilder?): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: CharArray): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: CharArray): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Char): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: Char): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Boolean): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: Boolean): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Int): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: Int): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Short): StringBuilder = append(value.toInt()).appendln()
+public inline fun StringBuilder.appendln(konstue: Short): StringBuilder = append(konstue.toInt()).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Byte): StringBuilder = append(value.toInt()).appendln()
+public inline fun StringBuilder.appendln(konstue: Byte): StringBuilder = append(konstue.toInt()).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Long): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: Long): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Float): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: Float): StringBuilder = append(konstue).appendln()
 
-/** Appends [value] to this [StringBuilder], followed by a line separator. */
+/** Appends [konstue] to this [StringBuilder], followed by a line separator. */
 @Suppress("DEPRECATION")
 @Deprecated(
     "Use appendLine instead. Note that the new method always appends the line feed character '\\n' regardless of the system line separator.",
-    ReplaceWith("appendLine(value)"),
+    ReplaceWith("appendLine(konstue)"),
     level = DeprecationLevel.WARNING
 )
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendln(value: Double): StringBuilder = append(value).appendln()
+public inline fun StringBuilder.appendln(konstue: Double): StringBuilder = append(konstue).appendln()

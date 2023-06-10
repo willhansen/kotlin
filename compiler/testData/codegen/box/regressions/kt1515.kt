@@ -18,7 +18,7 @@ fun box(): String {
 }
 
 fun localUse(): Boolean {
-    val c = Runnable::class.java
+    konst c = Runnable::class.java
     return (c.getName()!! == "java.lang.Runnable")
 }
 
@@ -27,6 +27,6 @@ fun localUse(): Boolean {
 package otherpackage
 
 fun fromOtherPackage(): Boolean {
-    val c = Runnable::class.java
+    konst c = Runnable::class.java
     return (c.getName()!! == "java.lang.Runnable")
 }

@@ -20,50 +20,50 @@ import org.jetbrains.kotlin.psi.KtElement
 @Suppress("UNUSED_VARIABLE", "LocalVariableName", "ClassName", "unused")
 @OptIn(PrivateForInline::class)
 object NATIVE_DIAGNOSTICS_LIST : DiagnosticList("FirNativeErrors") {
-    val ALL by object : DiagnosticGroup("All") {
-        val THROWS_LIST_EMPTY by error<KtElement>()
-        val INCOMPATIBLE_THROWS_OVERRIDE by error<KtElement> {
+    konst ALL by object : DiagnosticGroup("All") {
+        konst THROWS_LIST_EMPTY by error<KtElement>()
+        konst INCOMPATIBLE_THROWS_OVERRIDE by error<KtElement> {
             parameter<FirRegularClassSymbol>("containingClass")
         }
-        val INCOMPATIBLE_THROWS_INHERITED by error<KtDeclaration> {
+        konst INCOMPATIBLE_THROWS_INHERITED by error<KtDeclaration> {
             parameter<Collection<FirRegularClassSymbol>>("containingClasses")
         }
-        val MISSING_EXCEPTION_IN_THROWS_ON_SUSPEND by error<KtElement> {
+        konst MISSING_EXCEPTION_IN_THROWS_ON_SUSPEND by error<KtElement> {
             parameter<FqName>("exceptionName")
         }
-        val INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY by error<KtElement>()
-        val INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL by error<KtElement>()
-        val INAPPLICABLE_THREAD_LOCAL by error<KtElement>()
-        val INAPPLICABLE_THREAD_LOCAL_TOP_LEVEL by error<KtElement>()
-        val INVALID_CHARACTERS_NATIVE by deprecationError<PsiElement>(
-            LanguageFeature.ProhibitInvalidCharsInNativeIdentifiers,
+        konst INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY by error<KtElement>()
+        konst INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL by error<KtElement>()
+        konst INAPPLICABLE_THREAD_LOCAL by error<KtElement>()
+        konst INAPPLICABLE_THREAD_LOCAL_TOP_LEVEL by error<KtElement>()
+        konst INVALID_CHARACTERS_NATIVE by deprecationError<PsiElement>(
+            LanguageFeature.ProhibitInkonstidCharsInNativeIdentifiers,
             PositioningStrategy.NAME_IDENTIFIER
         ) {
             parameter<String>("message")
         }
-        val REDUNDANT_SWIFT_REFINEMENT by error<KtElement>()
-        val INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE by error<KtElement> {
+        konst REDUNDANT_SWIFT_REFINEMENT by error<KtElement>()
+        konst INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE by error<KtElement> {
             parameter<FirBasedSymbol<*>>("declaration")
             parameter<Collection<FirRegularClassSymbol>>("containingClasses")
         }
-        val INAPPLICABLE_OBJC_NAME by error<KtElement>()
-        val INVALID_OBJC_NAME by error<KtElement>()
-        val INVALID_OBJC_NAME_CHARS by error<KtElement> {
+        konst INAPPLICABLE_OBJC_NAME by error<KtElement>()
+        konst INVALID_OBJC_NAME by error<KtElement>()
+        konst INVALID_OBJC_NAME_CHARS by error<KtElement> {
             parameter<String>("characters")
         }
-        val INVALID_OBJC_NAME_FIRST_CHAR by error<KtElement> {
+        konst INVALID_OBJC_NAME_FIRST_CHAR by error<KtElement> {
             parameter<String>("characters")
         }
-        val EMPTY_OBJC_NAME by error<KtElement>()
-        val INCOMPATIBLE_OBJC_NAME_OVERRIDE by error<KtElement> {
+        konst EMPTY_OBJC_NAME by error<KtElement>()
+        konst INCOMPATIBLE_OBJC_NAME_OVERRIDE by error<KtElement> {
             parameter<FirBasedSymbol<*>>("declaration")
             parameter<Collection<FirRegularClassSymbol>>("containingClasses")
         }
-        val INAPPLICABLE_EXACT_OBJC_NAME by error<KtElement>()
-        val MISSING_EXACT_OBJC_NAME by error<KtElement>()
-        val NON_LITERAL_OBJC_NAME_ARG by error<KtElement>()
-        val INVALID_OBJC_HIDES_TARGETS by error<KtElement>()
-        val INVALID_REFINES_IN_SWIFT_TARGETS by error<KtElement>()
-        val SUBTYPE_OF_HIDDEN_FROM_OBJC by error<KtElement>()
+        konst INAPPLICABLE_EXACT_OBJC_NAME by error<KtElement>()
+        konst MISSING_EXACT_OBJC_NAME by error<KtElement>()
+        konst NON_LITERAL_OBJC_NAME_ARG by error<KtElement>()
+        konst INVALID_OBJC_HIDES_TARGETS by error<KtElement>()
+        konst INVALID_REFINES_IN_SWIFT_TARGETS by error<KtElement>()
+        konst SUBTYPE_OF_HIDDEN_FROM_OBJC by error<KtElement>()
     }
 }

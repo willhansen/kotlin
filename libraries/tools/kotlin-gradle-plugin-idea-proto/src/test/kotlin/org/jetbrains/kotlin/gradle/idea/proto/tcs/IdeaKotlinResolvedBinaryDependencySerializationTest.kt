@@ -17,8 +17,8 @@ import java.io.File
 import kotlin.test.Test
 
 class IdeaKotlinResolvedBinaryDependencySerializationTest : AbstractSerializationTest<IdeaKotlinResolvedBinaryDependency>() {
-    override fun serialize(value: IdeaKotlinResolvedBinaryDependency): ByteArray =
-        IdeaKotlinResolvedBinaryDependencyProto(value).toByteArray()
+    override fun serialize(konstue: IdeaKotlinResolvedBinaryDependency): ByteArray =
+        IdeaKotlinResolvedBinaryDependencyProto(konstue).toByteArray()
 
     override fun deserialize(data: ByteArray) =
         IdeaKotlinResolvedBinaryDependency(IdeaKotlinResolvedBinaryDependencyProto.parseFrom(data))

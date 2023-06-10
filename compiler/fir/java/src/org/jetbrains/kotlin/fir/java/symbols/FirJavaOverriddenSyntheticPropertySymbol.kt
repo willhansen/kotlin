@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.name.CallableId
  * ## Example 1
  * ```
  * abstract class SomeKotlinClass {
- *     abstract val foo: Int
+ *     abstract konst foo: Int
  * }
  *
  * public class SomeJavaClass extends SomeKotlinClass {

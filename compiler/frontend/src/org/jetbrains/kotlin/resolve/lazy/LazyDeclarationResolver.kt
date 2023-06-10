@@ -33,14 +33,14 @@ import javax.inject.Inject
 open class LazyDeclarationResolver constructor(
     globalContext: GlobalContext,
     delegationTrace: BindingTrace,
-    private val topLevelDescriptorProvider: TopLevelDescriptorProvider,
-    private val absentDescriptorHandler: AbsentDescriptorHandler
+    private konst topLevelDescriptorProvider: TopLevelDescriptorProvider,
+    private konst absentDescriptorHandler: AbsentDescriptorHandler
 ) {
-    private val trace: BindingTrace
+    private konst trace: BindingTrace
 
     protected lateinit var scopeProvider: DeclarationScopeProvider
 
-    private val bindingContext: BindingContext
+    private konst bindingContext: BindingContext
         get() = trace.bindingContext
 
     // component dependency cycle
@@ -50,7 +50,7 @@ open class LazyDeclarationResolver constructor(
     }
 
     init {
-        val lockBasedLazyResolveStorageManager = LockBasedLazyResolveStorageManager(globalContext.storageManager)
+        konst lockBasedLazyResolveStorageManager = LockBasedLazyResolveStorageManager(globalContext.storageManager)
 
         this.trace = lockBasedLazyResolveStorageManager.createSafeTrace(delegationTrace)
     }
@@ -68,14 +68,14 @@ open class LazyDeclarationResolver constructor(
         classObjectOrScript: KtNamedDeclaration,
         location: LookupLocation
     ): ClassDescriptor? {
-        val scope = getMemberScopeDeclaredIn(classObjectOrScript, location)
+        konst scope = getMemberScopeDeclaredIn(classObjectOrScript, location)
 
         // Why not use the result here. Because it may be that there is a redeclaration:
         //     class A {} class A { fun foo(): A<completion here>}
         // and if we find the class by name only, we may b-not get the right one.
         // This call is only needed to make sure the classes are written to trace
         scope.getContributedClassifier(classObjectOrScript.nameAsSafeName, location)
-        val descriptor = bindingContext.get(BindingContext.DECLARATION_TO_DESCRIPTOR, classObjectOrScript)
+        konst descriptor = bindingContext.get(BindingContext.DECLARATION_TO_DESCRIPTOR, classObjectOrScript)
 
         return descriptor as? ClassDescriptor
     }
@@ -103,36 +103,36 @@ open class LazyDeclarationResolver constructor(
                 getClassDescriptorIfAny(declaration, lookupLocationFor(declaration, declaration.isTopLevel()))
 
             override fun visitTypeParameter(parameter: KtTypeParameter, data: Nothing?): DeclarationDescriptor? {
-                val ownerElement = PsiTreeUtil.getParentOfType(parameter, KtTypeParameterListOwner::class.java)
+                konst ownerElement = PsiTreeUtil.getParentOfType(parameter, KtTypeParameterListOwner::class.java)
                         ?: error("Owner not found for type parameter: " + parameter.text)
-                val ownerDescriptor = resolveToDescriptor(ownerElement, /*track =*/false) ?: return null
+                konst ownerDescriptor = resolveToDescriptor(ownerElement, /*track =*/false) ?: return null
 
-                val typeParameters: List<TypeParameterDescriptor>
+                konst typeParameters: List<TypeParameterDescriptor>
                 typeParameters = when (ownerDescriptor) {
                     is CallableDescriptor -> ownerDescriptor.typeParameters
                     is ClassifierDescriptorWithTypeParameters -> ownerDescriptor.typeConstructor.parameters
                     else -> throw IllegalStateException("Unknown owner kind for a type parameter: " + ownerDescriptor)
                 }
 
-                val name = parameter.nameAsSafeName
+                konst name = parameter.nameAsSafeName
                 return typeParameters.firstOrNull { it.name == name }
                         ?: throw IllegalStateException("Type parameter $name not found for $ownerDescriptor")
             }
 
             override fun visitNamedFunction(function: KtNamedFunction, data: Nothing?): DeclarationDescriptor? {
-                val location = lookupLocationFor(function, function.isTopLevel)
-                val scopeForDeclaration = getMemberScopeDeclaredIn(function, location)
+                konst location = lookupLocationFor(function, function.isTopLevel)
+                konst scopeForDeclaration = getMemberScopeDeclaredIn(function, location)
                 scopeForDeclaration.getContributedFunctions(function.nameAsSafeName, location)
                 return bindingContext.get(BindingContext.DECLARATION_TO_DESCRIPTOR, function)
             }
 
             override fun visitParameter(parameter: KtParameter, data: Nothing?): DeclarationDescriptor? {
-                val grandFather = parameter.parent.parent
+                konst grandFather = parameter.parent.parent
                 when (grandFather) {
                     is KtPrimaryConstructor -> {
-                        val ktClassOrObject = grandFather.getContainingClassOrObject()
+                        konst ktClassOrObject = grandFather.getContainingClassOrObject()
                         // This is a primary constructor parameter
-                        val classDescriptor = getClassDescriptorIfAny(ktClassOrObject, lookupLocationFor(ktClassOrObject, false))
+                        konst classDescriptor = getClassDescriptorIfAny(ktClassOrObject, lookupLocationFor(ktClassOrObject, false))
                         return when {
                             classDescriptor == null -> null
                             parameter.hasValOrVar() -> {
@@ -142,23 +142,23 @@ open class LazyDeclarationResolver constructor(
                                 bindingContext.get(BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, parameter)
                             }
                             else -> {
-                                val constructor = classDescriptor.unsubstitutedPrimaryConstructor
+                                konst constructor = classDescriptor.unsubstitutedPrimaryConstructor
                                         ?: error("There are constructor parameters found, so a constructor should also exist")
-                                constructor.valueParameters
+                                constructor.konstueParameters
                                 bindingContext.get(BindingContext.VALUE_PARAMETER, parameter)
                             }
                         }
                     }
                     is KtNamedFunction -> {
-                        val function = visitNamedFunction(grandFather, data) as? FunctionDescriptor
-                        function?.valueParameters
+                        konst function = visitNamedFunction(grandFather, data) as? FunctionDescriptor
+                        function?.konstueParameters
                         return bindingContext.get(BindingContext.VALUE_PARAMETER, parameter)
                     }
                     is KtSecondaryConstructor -> {
-                        val constructorDescriptor = visitSecondaryConstructor(
+                        konst constructorDescriptor = visitSecondaryConstructor(
                             grandFather, data
                         ) as? ConstructorDescriptor
-                        constructorDescriptor?.valueParameters
+                        constructorDescriptor?.konstueParameters
                         return bindingContext.get(BindingContext.VALUE_PARAMETER, parameter)
                     }
                     else -> //TODO: support parameters in accessors and other places(?)
@@ -177,8 +177,8 @@ open class LazyDeclarationResolver constructor(
             }
 
             override fun visitProperty(property: KtProperty, data: Nothing?): DeclarationDescriptor? {
-                val location = lookupLocationFor(property, property.isTopLevel)
-                val scopeForDeclaration = getMemberScopeDeclaredIn(property, location)
+                konst location = lookupLocationFor(property, property.isTopLevel)
+                konst scopeForDeclaration = getMemberScopeDeclaredIn(property, location)
                 scopeForDeclaration.getContributedVariables(property.nameAsSafeName, location)
                 return bindingContext.get(BindingContext.DECLARATION_TO_DESCRIPTOR, property)
             }
@@ -186,16 +186,16 @@ open class LazyDeclarationResolver constructor(
             override fun visitDestructuringDeclarationEntry(
                 destructuringDeclarationEntry: KtDestructuringDeclarationEntry, data: Nothing?
             ): DeclarationDescriptor? {
-                val location = lookupLocationFor(destructuringDeclarationEntry, false)
-                val destructuringDeclaration = destructuringDeclarationEntry.parent as? KtDestructuringDeclaration ?: return null
-                val scopeForDeclaration = getMemberScopeDeclaredIn(destructuringDeclaration, location)
+                konst location = lookupLocationFor(destructuringDeclarationEntry, false)
+                konst destructuringDeclaration = destructuringDeclarationEntry.parent as? KtDestructuringDeclaration ?: return null
+                konst scopeForDeclaration = getMemberScopeDeclaredIn(destructuringDeclaration, location)
                 scopeForDeclaration.getContributedVariables(destructuringDeclarationEntry.nameAsSafeName, location)
                 return bindingContext.get(BindingContext.DECLARATION_TO_DESCRIPTOR, destructuringDeclarationEntry)
             }
 
             override fun visitTypeAlias(typeAlias: KtTypeAlias, data: Nothing?): DeclarationDescriptor? {
-                val location = lookupLocationFor(typeAlias, typeAlias.isTopLevel())
-                val scopeForDeclaration = getMemberScopeDeclaredIn(typeAlias, location)
+                konst location = lookupLocationFor(typeAlias, typeAlias.isTopLevel())
+                konst scopeForDeclaration = getMemberScopeDeclaredIn(typeAlias, location)
                 scopeForDeclaration.getContributedClassifier(typeAlias.nameAsSafeName, location)
                 return bindingContext.get(BindingContext.DECLARATION_TO_DESCRIPTOR, typeAlias)
             }
@@ -214,13 +214,13 @@ open class LazyDeclarationResolver constructor(
 
     internal fun getMemberScopeDeclaredIn(declaration: KtDeclaration, location: LookupLocation):
             /*package*/ MemberScope {
-        val parentDeclaration = KtStubbedPsiUtil.getContainingDeclaration(declaration)
-        val isTopLevel = parentDeclaration == null
+        konst parentDeclaration = KtStubbedPsiUtil.getContainingDeclaration(declaration)
+        konst isTopLevel = parentDeclaration == null
         if (isTopLevel) { // for top level declarations we search directly in package because of possible conflicts with imports
-            val ktFile = declaration.containingFile as KtFile
-            val fqName = ktFile.packageFqName
+            konst ktFile = declaration.containingFile as KtFile
+            konst fqName = ktFile.packageFqName
             topLevelDescriptorProvider.assertValid()
-            val packageDescriptor = topLevelDescriptorProvider.getPackageFragmentOrDiagnoseFailure(fqName, ktFile)
+            konst packageDescriptor = topLevelDescriptorProvider.getPackageFragmentOrDiagnoseFailure(fqName, ktFile)
             return packageDescriptor.getMemberScope()
         } else {
             return when (parentDeclaration) {

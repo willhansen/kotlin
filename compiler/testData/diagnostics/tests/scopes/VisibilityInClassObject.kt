@@ -2,32 +2,32 @@ fun devNull(obj: Any?) {}
 
 open class A {
     companion object {
-        val internal_val = 1
-        public val public_val: Int = 2
-        private val private_val = 3
-        protected val protected_val: Int = 5
+        konst internal_konst = 1
+        public konst public_konst: Int = 2
+        private konst private_konst = 3
+        protected konst protected_konst: Int = 5
     }
 
     fun fromClass() {
-        devNull(internal_val)
-        devNull(public_val)
-        devNull(private_val)
-        devNull(protected_val)
+        devNull(internal_konst)
+        devNull(public_konst)
+        devNull(private_konst)
+        devNull(protected_konst)
     }
 }
 
 fun fromOutside() {
-    devNull(A.internal_val)
-    devNull(A.public_val)
-    devNull(A.<!INVISIBLE_MEMBER!>private_val<!>)
-    devNull(A.<!INVISIBLE_MEMBER!>protected_val<!>)
+    devNull(A.internal_konst)
+    devNull(A.public_konst)
+    devNull(A.<!INVISIBLE_MEMBER!>private_konst<!>)
+    devNull(A.<!INVISIBLE_MEMBER!>protected_konst<!>)
 }
 
 class B: A() {
     fun fromSubclass() {
-        devNull(A.internal_val)
-        devNull(A.public_val)
-        devNull(A.<!INVISIBLE_MEMBER!>private_val<!>)
-        devNull(A.<!SUBCLASS_CANT_CALL_COMPANION_PROTECTED_NON_STATIC!>protected_val<!>)
+        devNull(A.internal_konst)
+        devNull(A.public_konst)
+        devNull(A.<!INVISIBLE_MEMBER!>private_konst<!>)
+        devNull(A.<!SUBCLASS_CANT_CALL_COMPANION_PROTECTED_NON_STATIC!>protected_konst<!>)
     }
 }

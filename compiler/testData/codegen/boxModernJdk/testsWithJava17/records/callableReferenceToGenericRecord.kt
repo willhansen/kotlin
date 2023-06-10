@@ -2,15 +2,15 @@
 
 // FILE: R.java
 
-public record R<T>(T value) {}
+public record R<T>(T konstue) {}
 
 // FILE: test.kt
 
 fun box(): String {
-    val r = R("OK")
-    if (r.value != "OK") return "FAIL"
-    if (run(r::value) != "OK") return "FAIL"
-    if (r.let(R<String>::value) != "OK") return "FAIL"
+    konst r = R("OK")
+    if (r.konstue != "OK") return "FAIL"
+    if (run(r::konstue) != "OK") return "FAIL"
+    if (r.let(R<String>::konstue) != "OK") return "FAIL"
 
     return "OK"
 }

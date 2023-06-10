@@ -14,7 +14,7 @@ apply plugin: 'kotlin-multiplatform'
 def toolsPath = '../../tools'
 def frameworkName = 'benchmarksAnalyzer'
 
-def buildType = NativeBuildType.valueOf(findProperty('nativeBuildType') ?: 'DEBUG')
+def buildType = NativeBuildType.konstueOf(findProperty('nativeBuildType') ?: 'DEBUG')
 
 def archSuffix = PlatformInfo.hostName.substring(PlatformInfo.hostName.lastIndexOf('_') + 1).capitalize()
 

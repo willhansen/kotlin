@@ -29,14 +29,14 @@ sink:
 =====================
 == bar ==
 fun bar() {
-    val b: Int
+    konst b: Int
     b = 3
 }
 ---------------------
 L0:
   1 <START>                       INIT: in: {} out: {}           USE: in: {} out: {}
-  2 mark({ val b: Int b = 3 })
-    v(val b: Int)                 INIT: in: {} out: {b=D}
+  2 mark({ konst b: Int b = 3 })
+    v(konst b: Int)                 INIT: in: {} out: {b=D}
     r(3) -> <v0>                  INIT: in: {b=D} out: {b=D}     USE: in: {b=ONLY_WRITTEN_NEVER_READ} out: {b=ONLY_WRITTEN_NEVER_READ}
     w(b|<v0>)                     INIT: in: {b=D} out: {b=ID}    USE: in: {} out: {b=ONLY_WRITTEN_NEVER_READ}
 L1:

@@ -1,5 +1,5 @@
 open external class E(x: Int, y: Int) {
-    val t: Int = definedExternally
+    konst t: Int = definedExternally
 }
 
 open class A(i: Int, j: Int) : E(i, j)
@@ -9,7 +9,7 @@ class B : A {
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
 
     assertEquals(7, b.t)
 

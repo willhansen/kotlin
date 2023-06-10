@@ -1,12 +1,12 @@
 package
 
 package foo {
-    public val c1: kotlin.String
-    public val c2: kotlin.String
-    public val c3: kotlin.String
-    public val d1: kotlin.String
-    public val d2: kotlin.String
-    public val d3: kotlin.String
+    public konst c1: kotlin.String
+    public konst c2: kotlin.String
+    public konst c3: kotlin.String
+    public konst d1: kotlin.String
+    public konst d2: kotlin.String
+    public konst d3: kotlin.String
     public fun </*0*/ A, /*1*/ B> getMyProperty1(): foo.MyProperty1<A, B>
     public fun </*0*/ A> getMyProperty2(): foo.MyProperty2<A>
     public fun </*0*/ A> getMyProperty3(): foo.MyProperty3<A>
@@ -14,8 +14,8 @@ package foo {
 
     public final class A1 {
         public constructor A1()
-        public final val a1: kotlin.String
-        public final val b1: kotlin.String
+        public final konst a1: kotlin.String
+        public final konst b1: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -23,8 +23,8 @@ package foo {
 
     public final class A2 {
         public constructor A2()
-        public final val a2: kotlin.String
-        public final val b2: kotlin.String
+        public final konst a2: kotlin.String
+        public final konst b2: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -32,8 +32,8 @@ package foo {
 
     public final class A3 {
         public constructor A3()
-        public final val a3: kotlin.String
-        public final val b3: kotlin.String
+        public final konst a3: kotlin.String
+        public final konst b3: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

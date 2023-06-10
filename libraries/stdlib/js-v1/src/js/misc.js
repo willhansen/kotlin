@@ -35,12 +35,12 @@ Kotlin.doubleCompareTo = function (a, b) {
     return a !== a ? (b !== b ? 0 : 1) : -1
 };
 
-Kotlin.charInc = function (value) {
-    return Kotlin.toChar(value+1);
+Kotlin.charInc = function (konstue) {
+    return Kotlin.toChar(konstue+1);
 };
 
-Kotlin.charDec = function (value) {
-    return Kotlin.toChar(value-1);
+Kotlin.charDec = function (konstue) {
+    return Kotlin.toChar(konstue-1);
 };
 
 Kotlin.imul = Math.imul || imul;
@@ -65,38 +65,38 @@ function imul(a, b) {
         highIndex = 0;
     }
 
-    Kotlin.doubleToBits = function(value) {
-        return Kotlin.doubleToRawBits(isNaN(value) ? NaN : value);
+    Kotlin.doubleToBits = function(konstue) {
+        return Kotlin.doubleToRawBits(isNaN(konstue) ? NaN : konstue);
     };
 
-    Kotlin.doubleToRawBits = function(value) {
-        bufFloat64[0] = value;
+    Kotlin.doubleToRawBits = function(konstue) {
+        bufFloat64[0] = konstue;
         return Kotlin.Long.fromBits(bufInt32[lowIndex], bufInt32[highIndex]);
     };
 
-    Kotlin.doubleFromBits = function(value) {
-        bufInt32[lowIndex] = value.low_;
-        bufInt32[highIndex] = value.high_;
+    Kotlin.doubleFromBits = function(konstue) {
+        bufInt32[lowIndex] = konstue.low_;
+        bufInt32[highIndex] = konstue.high_;
         return bufFloat64[0];
     };
 
-    Kotlin.floatToBits = function(value) {
-        return Kotlin.floatToRawBits(isNaN(value) ? NaN : value);
+    Kotlin.floatToBits = function(konstue) {
+        return Kotlin.floatToRawBits(isNaN(konstue) ? NaN : konstue);
     };
 
-    Kotlin.floatToRawBits = function(value) {
-        bufFloat32[0] = value;
+    Kotlin.floatToRawBits = function(konstue) {
+        bufFloat32[0] = konstue;
         return bufInt32[0];
     };
 
-    Kotlin.floatFromBits = function(value) {
-        bufInt32[0] = value;
+    Kotlin.floatFromBits = function(konstue) {
+        bufInt32[0] = konstue;
         return bufFloat32[0];
     };
 
-    // returns zero value for number with positive sign bit and non-zero value for number with negative sign bit.
-    Kotlin.doubleSignBit = function(value) {
-        bufFloat64[0] = value;
+    // returns zero konstue for number with positive sign bit and non-zero konstue for number with negative sign bit.
+    Kotlin.doubleSignBit = function(konstue) {
+        bufFloat64[0] = konstue;
         return bufInt32[highIndex] & 0x80000000;
     };
 

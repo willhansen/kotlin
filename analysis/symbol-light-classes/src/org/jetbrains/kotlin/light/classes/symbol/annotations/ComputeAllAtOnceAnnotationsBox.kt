@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.light.classes.symbol.toArrayIfNotEmptyOrDefault
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater
 
 internal class ComputeAllAtOnceAnnotationsBox(
-    private val annotationsComputer: (PsiModifierList) -> Collection<PsiAnnotation>,
+    private konst annotationsComputer: (PsiModifierList) -> Collection<PsiAnnotation>,
 ) : AnnotationsBox {
     @Volatile
     private var cachedAnnotations: Collection<PsiAnnotation>? = null
@@ -19,7 +19,7 @@ internal class ComputeAllAtOnceAnnotationsBox(
     private fun getOrComputeAnnotations(owner: PsiModifierList): Collection<PsiAnnotation> {
         cachedAnnotations?.let { return it }
 
-        val nonCachedAnnotations = annotationsComputer(owner)
+        konst nonCachedAnnotations = annotationsComputer(owner)
         fieldUpdater.compareAndSet(this, null, nonCachedAnnotations)
 
         return getOrComputeAnnotations(owner)
@@ -35,7 +35,7 @@ internal class ComputeAllAtOnceAnnotationsBox(
     ): PsiAnnotation? = getOrComputeAnnotations(owner).find { it.qualifiedName == qualifiedName }
 
     companion object {
-        private val fieldUpdater = AtomicReferenceFieldUpdater.newUpdater(
+        private konst fieldUpdater = AtomicReferenceFieldUpdater.newUpdater(
             /* tclass = */ ComputeAllAtOnceAnnotationsBox::class.java,
             /* vclass = */ Collection::class.java,
             /* fieldName = */ "cachedAnnotations",

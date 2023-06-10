@@ -21,27 +21,27 @@ class ClassListBenchmark {
     }
     
     func filterAndCountWithLambda() -> Int {
-        return data.filter { $0.value % 2 == 0 }.count
+        return data.filter { $0.konstue % 2 == 0 }.count
     }
     
     func filterWithLambda() -> [Value] {
-        return data.filter { $0.value % 2 == 0 }
+        return data.filter { $0.konstue % 2 == 0 }
     }
 
     func mapWithLambda() -> [String] {
-        return data.map { String($0.value) }
+        return data.map { String($0.konstue) }
     }
 
     func countWithLambda() -> Int {
-        return data.count { $0.value % 2 == 0 }
+        return data.count { $0.konstue % 2 == 0 }
     }
 
     func filterAndMapWithLambda() -> [String] {
-        return data.filter { $0.value % 2 == 0 }.map { String($0.value) }
+        return data.filter { $0.konstue % 2 == 0 }.map { String($0.konstue) }
     }
 
     func filterAndMapWithLambdaAsSequence() -> [String] {
-        return data.lazy.filter { $0.value % 2 == 0 }.map { String($0.value) }
+        return data.lazy.filter { $0.konstue % 2 == 0 }.map { String($0.konstue) }
     }
     
     func reduce() -> Int {

@@ -13,7 +13,7 @@ public class C {
     }
 
     // Note that Data is resolved successfully here because we don't step on error-scope
-    val data: Data = Data()
+    konst data: Data = Data()
 
     companion object : DerivedAbstract() {
         override fun m() {}

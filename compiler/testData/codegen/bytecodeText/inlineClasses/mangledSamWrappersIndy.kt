@@ -2,7 +2,7 @@
 // !LANGUAGE: +InlineClasses
 // LAMBDAS: INDY
 
-inline class A(val value: String?)
+inline class A(konst konstue: String?)
 
 fun interface B {
     fun f(x: A): A
@@ -13,8 +13,8 @@ inline fun g(unit: Unit = Unit, b: B): A {
 }
 
 fun box(): String {
-    val b = { _ : A -> A("OK") }
-    return g(b = b).value!!
+    konst b = { _ : A -> A("OK") }
+    return g(b = b).konstue!!
 }
 
 // 0 public final invoke-ZsE1S_E-ZsE1S_E\(Ljava/lang/String;\)Ljava/lang/String;

@@ -669,18 +669,18 @@ public class DiagnosticsTestWithJvmIrBackendGenerated extends AbstractDiagnostic
         }
 
         @Nested
-        @TestMetadata("compiler/testData/diagnostics/testsWithJvmBackend/duplicateJvmSignature/valueClasses")
+        @TestMetadata("compiler/testData/diagnostics/testsWithJvmBackend/duplicateJvmSignature/konstueClasses")
         @TestDataPath("$PROJECT_ROOT")
         public class ValueClasses {
             @Test
             public void testAllFilesPresentInValueClasses() throws Exception {
-                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/testsWithJvmBackend/duplicateJvmSignature/valueClasses"), Pattern.compile("^(.+)\\.kts?$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), TargetBackend.JVM_IR, true);
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/testsWithJvmBackend/duplicateJvmSignature/konstueClasses"), Pattern.compile("^(.+)\\.kts?$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), TargetBackend.JVM_IR, true);
             }
 
             @Test
             @TestMetadata("declarationClash.kt")
             public void testDeclarationClash() throws Exception {
-                runTest("compiler/testData/diagnostics/testsWithJvmBackend/duplicateJvmSignature/valueClasses/declarationClash.kt");
+                runTest("compiler/testData/diagnostics/testsWithJvmBackend/duplicateJvmSignature/konstueClasses/declarationClash.kt");
             }
         }
     }
@@ -794,18 +794,18 @@ public class DiagnosticsTestWithJvmIrBackendGenerated extends AbstractDiagnostic
     }
 
     @Nested
-    @TestMetadata("compiler/testData/diagnostics/testsWithJvmBackend/valueClasses")
+    @TestMetadata("compiler/testData/diagnostics/testsWithJvmBackend/konstueClasses")
     @TestDataPath("$PROJECT_ROOT")
     public class ValueClasses {
         @Test
         public void testAllFilesPresentInValueClasses() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/testsWithJvmBackend/valueClasses"), Pattern.compile("^(.+)\\.kts?$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), TargetBackend.JVM_IR, true);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/testsWithJvmBackend/konstueClasses"), Pattern.compile("^(.+)\\.kts?$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), TargetBackend.JVM_IR, true);
         }
 
         @Test
         @TestMetadata("cloneable.kt")
         public void testCloneable() throws Exception {
-            runTest("compiler/testData/diagnostics/testsWithJvmBackend/valueClasses/cloneable.kt");
+            runTest("compiler/testData/diagnostics/testsWithJvmBackend/konstueClasses/cloneable.kt");
         }
     }
 }

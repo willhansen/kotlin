@@ -2,13 +2,13 @@
 // FILE: a.kt
 package a
 
-val x = 1
-val y = 1
+konst x = 1
+konst y = 1
 
 // FILE: b.kt
 package b
 
-val x = ""
+konst x = ""
 
 // FILE: c.kt
 package c
@@ -18,6 +18,6 @@ import a.*
 import b.*
 import a.y as AY
 
-val v1: Int = AX
-val v2: String = x
-val v3 = <!UNRESOLVED_REFERENCE!>y<!>
+konst v1: Int = AX
+konst v2: String = x
+konst v3 = <!UNRESOLVED_REFERENCE!>y<!>

@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.globalMetadataInfoHandler
 
 fun matchIrFileWithTestFile(irModuleFragment: IrModuleFragment, module: TestModule): List<Pair<IrFile, TestFile>> {
-    val irFileWithTestFile = irModuleFragment.files.map { irFile ->
+    konst irFileWithTestFile = irModuleFragment.files.map { irFile ->
         irFile to module.files.firstOrNull { testFile -> testFile.relativePath == irFile.fileEntry.name.drop(1) }
     }
 
@@ -32,38 +32,38 @@ fun matchIrFileWithTestFile(irModuleFragment: IrModuleFragment, module: TestModu
 }
 
 open class IrInterpreterBackendHandler(testServices: TestServices) : AbstractIrHandler(testServices) {
-    private val globalMetadataInfoHandler = testServices.globalMetadataInfoHandler
+    private konst globalMetadataInfoHandler = testServices.globalMetadataInfoHandler
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {}
 
     override fun processModule(module: TestModule, info: IrBackendInput) {
         info.processAllIrModuleFragments(module) { moduleFragment, _ ->
-            val evaluator = Evaluator(IrInterpreter(moduleFragment.irBuiltins), globalMetadataInfoHandler)
+            konst ekonstuator = Ekonstuator(IrInterpreter(moduleFragment.irBuiltins), globalMetadataInfoHandler)
             for ((irFile, testFile) in matchIrFileWithTestFile(moduleFragment, module)) {
-                evaluator.evaluate(irFile, testFile)
+                ekonstuator.ekonstuate(irFile, testFile)
             }
         }
     }
 }
 
-private class Evaluator(private val interpreter: IrInterpreter, private val globalMetadataInfoHandler: GlobalMetadataInfoHandler) {
-    fun evaluate(irFile: IrFile, testFile: TestFile) {
+private class Ekonstuator(private konst interpreter: IrInterpreter, private konst globalMetadataInfoHandler: GlobalMetadataInfoHandler) {
+    fun ekonstuate(irFile: IrFile, testFile: TestFile) {
         object : IrElementTransformerVoid() {
             private fun IrExpression.report(original: IrExpression, startOffsetForDiagnostic: Int? = null): IrExpression {
                 if (this == original) return this
-                val isError = this is IrErrorExpression
-                val message = when (this) {
-                    is IrConst<*> -> this.value.toString()
+                konst isError = this is IrErrorExpression
+                konst message = when (this) {
+                    is IrConst<*> -> this.konstue.toString()
                     is IrErrorExpression -> this.description
                     else -> TODO("unsupported type ${this::class.java}")
                 }
-                val startOffset = when {
+                konst startOffset = when {
                     startOffsetForDiagnostic != null -> startOffsetForDiagnostic
                     // this additional check is needed to unify rendering from old and new frontends
                     original is IrCall && original.symbol.owner.fqNameWhenAvailable?.asString() == "kotlin.internal.ir.CHECK_NOT_NULL" -> endOffset - 2
                     else -> original.startOffset
                 }
-                val metaInfo = IrInterpreterCodeMetaInfo(startOffset, this.endOffset, message, isError)
+                konst metaInfo = IrInterpreterCodeMetaInfo(startOffset, this.endOffset, message, isError)
                 globalMetadataInfoHandler.addMetadataInfosForFile(testFile, listOf(metaInfo))
                 return if (this !is IrErrorExpression) this else original
             }
@@ -71,12 +71,12 @@ private class Evaluator(private val interpreter: IrInterpreter, private val glob
             override fun visitCall(expression: IrCall): IrExpression {
                 // try to calculate default args of inline function at call site
                 // used in `sourceLocation` test
-                expression.symbol.owner.valueParameters.forEachIndexed { index, parameter ->
+                expression.symbol.owner.konstueParameters.forEachIndexed { index, parameter ->
                     if (expression.getValueArgument(index) != null || !expression.symbol.owner.isInline) return@forEachIndexed
-                    val default = parameter.defaultValue?.expression as? IrCall ?: return@forEachIndexed
-                    val callWithNewOffsets = IrCallImpl(
+                    konst default = parameter.defaultValue?.expression as? IrCall ?: return@forEachIndexed
+                    konst callWithNewOffsets = IrCallImpl(
                         expression.startOffset, expression.endOffset, default.type, default.symbol,
-                        default.typeArgumentsCount, default.valueArgumentsCount, default.origin, default.superQualifierSymbol
+                        default.typeArgumentsCount, default.konstueArgumentsCount, default.origin, default.superQualifierSymbol
                     )
                     callWithNewOffsets.copyTypeAndValueArgumentsFrom(default)
                     interpreter.interpret(callWithNewOffsets, irFile)
@@ -88,13 +88,13 @@ private class Evaluator(private val interpreter: IrInterpreter, private val glob
             }
 
             override fun visitField(declaration: IrField): IrStatement {
-                val initializer = declaration.initializer
-                val expression = initializer?.expression ?: return declaration
+                konst initializer = declaration.initializer
+                konst expression = initializer?.expression ?: return declaration
                 if (expression is IrConst<*>) return declaration
 
-                val isConst = declaration.correspondingPropertySymbol?.owner?.isConst == true
+                konst isConst = declaration.correspondingPropertySymbol?.owner?.isConst == true
                 if (isConst) {
-                    val startOffsetForDiagnostic = declaration.startOffset + "const val  = ".length + declaration.name.asString().length
+                    konst startOffsetForDiagnostic = declaration.startOffset + "const konst  = ".length + declaration.name.asString().length
                     initializer.expression = interpreter.interpret(expression, irFile).report(expression, startOffsetForDiagnostic)
                 }
                 return declaration

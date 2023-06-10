@@ -132,7 +132,7 @@ public external class Date() {
 }
 
 public inline fun dateLocaleOptions(init: Date.LocaleOptions.() -> Unit): Date.LocaleOptions {
-    val result = js("new Object()").unsafeCast<Date.LocaleOptions>()
+    konst result = js("new Object()").unsafeCast<Date.LocaleOptions>()
     init(result)
     return result
 }

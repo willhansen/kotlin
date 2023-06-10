@@ -12,7 +12,7 @@ import kotlin.test.Test
 
 class VariantTest : AbstractSerializationTest<IdeaKpmVariant>() {
 
-    override fun serialize(value: IdeaKpmVariant) = value.toByteArray(this)
+    override fun serialize(konstue: IdeaKpmVariant) = konstue.toByteArray(this)
     override fun deserialize(data: ByteArray) = IdeaKpmVariant(data)
 
     @Test

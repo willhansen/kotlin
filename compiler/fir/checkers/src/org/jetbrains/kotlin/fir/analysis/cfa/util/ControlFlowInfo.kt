@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.fir.analysis.cfa.util
 import kotlinx.collections.immutable.PersistentMap
 
 abstract class ControlFlowInfo<S : ControlFlowInfo<S, K, V>, K : Any, V : Any> protected constructor(
-    protected val map: PersistentMap<K, V>,
+    protected konst map: PersistentMap<K, V>,
 ) : PersistentMap<K, V> by map {
 
-    protected abstract val constructor: (PersistentMap<K, V>) -> S
+    protected abstract konst constructor: (PersistentMap<K, V>) -> S
 
     override fun equals(other: Any?): Boolean {
         return map == (other as? ControlFlowInfo<*, *, *>)?.map
@@ -25,8 +25,8 @@ abstract class ControlFlowInfo<S : ControlFlowInfo<S, K, V>, K : Any, V : Any> p
         return map.toString()
     }
 
-    override fun put(key: K, value: V): S {
-        return constructor(map.put(key, value))
+    override fun put(key: K, konstue: V): S {
+        return constructor(map.put(key, konstue))
     }
 
     override fun remove(key: K): S {

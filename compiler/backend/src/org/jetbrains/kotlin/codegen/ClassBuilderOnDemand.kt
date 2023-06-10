@@ -19,9 +19,9 @@ package org.jetbrains.kotlin.codegen
 import org.jetbrains.kotlin.storage.LockBasedStorageManager
 
 class ClassBuilderOnDemand(createClassBuilder: () -> ClassBuilder) : DelegatingClassBuilder() {
-    private val classBuilder = LockBasedStorageManager.NO_LOCKS.createLazyValue(createClassBuilder)
+    private konst classBuilder = LockBasedStorageManager.NO_LOCKS.createLazyValue(createClassBuilder)
 
-    val isComputed: Boolean
+    konst isComputed: Boolean
         get() = classBuilder.isComputed()
 
     override fun getDelegate() = classBuilder()

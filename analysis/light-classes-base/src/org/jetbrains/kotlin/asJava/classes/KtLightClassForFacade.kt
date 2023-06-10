@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtFile
 
 interface KtLightClassForFacade : KtLightClass {
-    val facadeClassFqName: FqName
-    val files: Collection<KtFile>
-    val multiFileClass: Boolean
+    konst facadeClassFqName: FqName
+    konst files: Collection<KtFile>
+    konst multiFileClass: Boolean
 
     override fun getName(): String = facadeClassFqName.shortName().asString()
 }

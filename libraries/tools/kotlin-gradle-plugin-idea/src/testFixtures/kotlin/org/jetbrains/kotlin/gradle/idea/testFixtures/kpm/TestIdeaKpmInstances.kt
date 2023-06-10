@@ -14,12 +14,12 @@ import java.io.File
 
 object TestIdeaKpmInstances {
 
-    val extrasWithIntAndStrings = extrasOf(
+    konst extrasWithIntAndStrings = extrasOf(
         extrasKeyOf<Int>() withValue 1,
         extrasKeyOf<String>() withValue "Cash"
     )
 
-    val simpleModuleCoordinates = IdeaKpmModuleCoordinatesImpl(
+    konst simpleModuleCoordinates = IdeaKpmModuleCoordinatesImpl(
         buildId = "myBuildId",
         projectPath = "myProjectPath",
         projectName = "myProjectName",
@@ -27,16 +27,16 @@ object TestIdeaKpmInstances {
         moduleClassifier = "myModuleClassifier"
     )
 
-    val simpleFragmentCoordinates = IdeaKpmFragmentCoordinatesImpl(
+    konst simpleFragmentCoordinates = IdeaKpmFragmentCoordinatesImpl(
         module = simpleModuleCoordinates,
         fragmentName = "myFragmentName"
     )
 
-    val simpleJvmPlatform = IdeaKpmJvmPlatformImpl(
+    konst simpleJvmPlatform = IdeaKpmJvmPlatformImpl(
         jvmTarget = "myJvmTarget"
     )
 
-    val simpleLanguageSettings = IdeaKpmLanguageSettingsImpl(
+    konst simpleLanguageSettings = IdeaKpmLanguageSettingsImpl(
         languageVersion = "myLanguageVersion",
         apiVersion = "myApiVersion",
         isProgressiveMode = true,
@@ -47,7 +47,7 @@ object TestIdeaKpmInstances {
         freeCompilerArgs = listOf("myFreeCompilerArguments")
     )
 
-    val simpleBinaryCoordinates = IdeaKpmBinaryCoordinatesImpl(
+    konst simpleBinaryCoordinates = IdeaKpmBinaryCoordinatesImpl(
         group = "myGroup",
         module = "myModule",
         version = "myVersion",
@@ -55,28 +55,28 @@ object TestIdeaKpmInstances {
         kotlinFragmentName = "myKotlinFragmentName"
     )
 
-    val simpleUnresolvedBinaryDependency = IdeaKpmUnresolvedBinaryDependencyImpl(
+    konst simpleUnresolvedBinaryDependency = IdeaKpmUnresolvedBinaryDependencyImpl(
         cause = "myCause",
         coordinates = simpleBinaryCoordinates
     )
 
-    val simpleResolvedBinaryDependency = IdeaKpmResolvedBinaryDependencyImpl(
+    konst simpleResolvedBinaryDependency = IdeaKpmResolvedBinaryDependencyImpl(
         coordinates = simpleBinaryCoordinates,
         binaryType = "myBinaryType",
         binaryFile = File("myBinaryFile.jar").absoluteFile
     )
 
-    val simpleFragmentDependency = IdeaKpmFragmentDependencyImpl(
+    konst simpleFragmentDependency = IdeaKpmFragmentDependencyImpl(
         type = IdeaKpmFragmentDependency.Type.Friend,
         coordinates = simpleFragmentCoordinates
     )
 
-    val simpleSourceDirectory = IdeaKpmContentRootImpl(
+    konst simpleSourceDirectory = IdeaKpmContentRootImpl(
         file = File("myFile").absoluteFile,
         type = "myType"
     )
 
-    val simpleFragment = IdeaKpmFragmentImpl(
+    konst simpleFragment = IdeaKpmFragmentImpl(
         coordinates = simpleFragmentCoordinates,
         platforms = setOf(simpleJvmPlatform),
         languageSettings = simpleLanguageSettings,
@@ -85,32 +85,32 @@ object TestIdeaKpmInstances {
         extras = emptyExtras()
     )
 
-    val fragmentWithExtras = simpleFragment.copy(
+    konst fragmentWithExtras = simpleFragment.copy(
         extras = extrasWithIntAndStrings
     )
 
-    val simpleCompilationOutput = IdeaKpmCompilationOutputImpl(
+    konst simpleCompilationOutput = IdeaKpmCompilationOutputImpl(
         classesDirs = setOf(File("myClassesDir").absoluteFile),
         resourcesDir = File("myResourcesDir").absoluteFile
     )
 
-    val simpleVariant = IdeaKpmVariantImpl(
+    konst simpleVariant = IdeaKpmVariantImpl(
         fragment = simpleFragment,
         platform = simpleJvmPlatform,
         variantAttributes = mapOf("key1" to "attribute1", "key2" to "attribute2"),
         compilationOutputs = simpleCompilationOutput
     )
 
-    val variantWithExtras = simpleVariant.copy(
+    konst variantWithExtras = simpleVariant.copy(
         fragment = fragmentWithExtras
     )
 
-    val simpleModule = IdeaKpmModuleImpl(
+    konst simpleModule = IdeaKpmModuleImpl(
         coordinates = simpleModuleCoordinates,
         fragments = listOf(simpleFragment, simpleVariant)
     )
 
-    val simpleProject = IdeaKpmProjectImpl(
+    konst simpleProject = IdeaKpmProjectImpl(
         gradlePluginVersion = "1.7.20",
         coreLibrariesVersion = "1.6.20",
         explicitApiModeCliOption = null,

@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.gradle.targets.js.KotlinJsTarget
 import org.jetbrains.kotlin.gradle.targets.js.KotlinJsTargetConfigurator
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrTargetPreset
 import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
-import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEvaluated
+import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEkonstuated
 import org.jetbrains.kotlin.statistics.metrics.StringMetrics
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.decapitalizeAsciiOnly
 
@@ -27,10 +27,10 @@ open class KotlinJsTargetPreset(
     var irPreset: KotlinJsIrTargetPreset? = null
         internal set
 
-    open val isMpp: Boolean
+    open konst isMpp: Boolean
         get() = true
 
-    override val platformType: KotlinPlatformType
+    override konst platformType: KotlinPlatformType
         get() = KotlinPlatformType.js
 
     override fun useDisambiguationClassifierAsSourceSetNamePrefix() = irPreset == null
@@ -56,7 +56,7 @@ open class KotlinJsTargetPreset(
             }
             this.isMpp = this@KotlinJsTargetPreset.isMpp
 
-            project.runProjectConfigurationHealthCheckWhenEvaluated {
+            project.runProjectConfigurationHealthCheckWhenEkonstuated {
                 if (!isBrowserConfigured && !isNodejsConfigured) {
                     project.logger.warn(
                         """
@@ -72,7 +72,7 @@ open class KotlinJsTargetPreset(
                         """.trimIndent()
                     )
                 }
-                val buildStatsService = KotlinBuildStatsService.getInstance()
+                konst buildStatsService = KotlinBuildStatsService.getInstance()
                 when {
                     isBrowserConfigured && isNodejsConfigured -> buildStatsService?.report(StringMetrics.JS_TARGET_MODE, "both")
                     isBrowserConfigured -> buildStatsService?.report(StringMetrics.JS_TARGET_MODE, "browser")
@@ -98,7 +98,7 @@ open class KotlinJsTargetPreset(
     }
 
     companion object {
-        const val PRESET_NAME = "js"
+        const konst PRESET_NAME = "js"
     }
 }
 
@@ -107,7 +107,7 @@ class KotlinJsSingleTargetPreset(
 ) : KotlinJsTargetPreset(
     project
 ) {
-    override val isMpp: Boolean
+    override konst isMpp: Boolean
         get() = false
 
     override fun overrideDisambiguationClassifierOnIdeImport(name: String): String? =

@@ -22,14 +22,14 @@ internal open class GradleKpmMetadataDependencyTransformationTask
 @Inject constructor(
     @get:Internal
     @field:Transient
-    val fragment: GradleKpmFragment,
-    private val objectFactory: ObjectFactory,
+    konst fragment: GradleKpmFragment,
+    private konst objectFactory: ObjectFactory,
     //FIXME annotations
-    private val transformation: GradleKpmFragmentGranularMetadataResolver
+    private konst transformation: GradleKpmFragmentGranularMetadataResolver
 ) : DefaultTask() {
 
     @get:OutputDirectory
-    val outputsDir: File by project.provider {
+    konst outputsDir: File by project.provider {
         project.buildDir.resolve("kotlinFragmentDependencyMetadata").resolve(fragment.disambiguateName(""))
     }
 
@@ -38,14 +38,14 @@ internal open class GradleKpmMetadataDependencyTransformationTask
     @get:NormalizeLineEndings
     @get:InputFiles
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    internal val allSourceSetsMetadataConfiguration: FileCollection by lazy {
+    internal konst allSourceSetsMetadataConfiguration: FileCollection by lazy {
         project.files(resolvableMetadataConfiguration(fragment.containingModule))
     }
 
     @Suppress("unused") // Gradle input
     @get:Input
-    internal val inputFragmentsAndVariants: Map<String, Iterable<String>> by project.provider {
-        val participatingFragments = fragment.withRefinesClosure
+    internal konst inputFragmentsAndVariants: Map<String, Iterable<String>> by project.provider {
+        konst participatingFragments = fragment.withRefinesClosure
         participatingFragments.associateWith { it.containingVariants }
             .entries.associate { (fragment, variants) ->
                 fragment.name to variants.map { it.fragmentName }.sorted()
@@ -54,9 +54,9 @@ internal open class GradleKpmMetadataDependencyTransformationTask
 
     @Suppress("unused") // Gradle input
     @get:Input
-    internal val inputVariantDependencies: Map<String, Set<List<String?>>> by project.provider {
-        val participatingFragments = fragment.withRefinesClosure
-        val participatingCompilations = participatingFragments.flatMap { it.containingVariants }
+    internal konst inputVariantDependencies: Map<String, Set<List<String?>>> by project.provider {
+        konst participatingFragments = fragment.withRefinesClosure
+        konst participatingCompilations = participatingFragments.flatMap { it.containingVariants }
         participatingCompilations.associate { variant ->
             variant.fragmentName to variant.compileDependenciesConfiguration
                 .allDependencies.map { listOf(it.group, it.name, it.version) }.toSet()
@@ -65,12 +65,12 @@ internal open class GradleKpmMetadataDependencyTransformationTask
 
     @get:Internal
     @delegate:Transient // exclude from Gradle instant execution state
-    internal val metadataDependencyResolutions: Iterable<MetadataDependencyResolution> by project.provider {
+    internal konst metadataDependencyResolutions: Iterable<MetadataDependencyResolution> by project.provider {
         transformation.resolutions
     }
 
     @get:Internal
-    internal val filesByResolution: Map<out MetadataDependencyResolution, FileCollection>
+    internal konst filesByResolution: Map<out MetadataDependencyResolution, FileCollection>
         get() = metadataDependencyResolutions
             .filterIsInstance<MetadataDependencyResolution.ChooseVisibleSourceSets>()
             .associateWith { chooseVisibleSourceSets ->
@@ -96,7 +96,7 @@ internal open class GradleKpmMetadataDependencyTransformationTask
 internal class FragmentResolvedMetadataProvider(
     taskProvider: TaskProvider<out GradleKpmMetadataDependencyTransformationTask>
 ) : ResolvedMetadataFilesProvider {
-    override val buildDependencies: Iterable<TaskProvider<*>> = listOf(taskProvider)
-    override val metadataResolutions: Iterable<MetadataDependencyResolution> by taskProvider.map { it.metadataDependencyResolutions }
-    override val metadataFilesByResolution: Map<out MetadataDependencyResolution, FileCollection> by taskProvider.map { it.filesByResolution }
+    override konst buildDependencies: Iterable<TaskProvider<*>> = listOf(taskProvider)
+    override konst metadataResolutions: Iterable<MetadataDependencyResolution> by taskProvider.map { it.metadataDependencyResolutions }
+    override konst metadataFilesByResolution: Map<out MetadataDependencyResolution, FileCollection> by taskProvider.map { it.filesByResolution }
 }

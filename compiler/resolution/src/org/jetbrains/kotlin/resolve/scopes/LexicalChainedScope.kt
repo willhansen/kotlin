@@ -30,18 +30,18 @@ import org.jetbrains.kotlin.utils.Printer
 
 class LexicalChainedScope private constructor(
     parent: LexicalScope,
-    override val ownerDescriptor: DeclarationDescriptor,
-    override val isOwnerDescriptorAccessibleByLabel: Boolean,
-    override val implicitReceiver: ReceiverParameterDescriptor?,
-    override val contextReceiversGroup: List<ReceiverParameterDescriptor>,
-    override val kind: LexicalScopeKind,
+    override konst ownerDescriptor: DeclarationDescriptor,
+    override konst isOwnerDescriptorAccessibleByLabel: Boolean,
+    override konst implicitReceiver: ReceiverParameterDescriptor?,
+    override konst contextReceiversGroup: List<ReceiverParameterDescriptor>,
+    override konst kind: LexicalScopeKind,
     // NB. Here can be very special subtypes of MemberScope (e.g., DeprecatedMemberScope).
     // Please, do not leak them outside of LexicalChainedScope, because other parts of compiler are not ready to work with them
-    private val memberScopes: Array<MemberScope>,
-    @Deprecated("This value is temporary hack for resolve -- don't use it!")
-    val isStaticScope: Boolean = false
+    private konst memberScopes: Array<MemberScope>,
+    @Deprecated("This konstue is temporary hack for resolve -- don't use it!")
+    konst isStaticScope: Boolean = false
 ) : LexicalScope {
-    override val parent = parent.takeSnapshot()
+    override konst parent = parent.takeSnapshot()
 
     override fun getContributedDescriptors(kindFilter: DescriptorKindFilter, nameFilter: (Name) -> Boolean) =
         getFromAllScopes(memberScopes) { it.getContributedDescriptors() }
@@ -50,7 +50,7 @@ class LexicalChainedScope private constructor(
         getFirstClassifierDiscriminateHeaders(memberScopes) { it.getContributedClassifier(name, location) }
 
     override fun getContributedClassifierIncludeDeprecated(name: Name, location: LookupLocation): DescriptorWithDeprecation<ClassifierDescriptor>? {
-        val (firstClassifier, isFirstDeprecated) = memberScopes.firstNotNullOfOrNull {
+        konst (firstClassifier, isFirstDeprecated) = memberScopes.firstNotNullOfOrNull {
             it.getContributedClassifierIncludeDeprecated(name, location)
         } ?: return null
 
@@ -58,7 +58,7 @@ class LexicalChainedScope private constructor(
 
         // Slow-path: try to find the same classifier, but without deprecation
         for (scope in memberScopes) {
-            val (descriptor, isDeprecated) = scope.getContributedClassifierIncludeDeprecated(name, location) ?: continue
+            konst (descriptor, isDeprecated) = scope.getContributedClassifierIncludeDeprecated(name, location) ?: continue
             if (descriptor == firstClassifier && !isDeprecated) return DescriptorWithDeprecation.createNonDeprecated(descriptor)
         }
 
@@ -81,9 +81,9 @@ class LexicalChainedScope private constructor(
             "; for descriptor: ",
             ownerDescriptor.name,
             " with implicitReceiver: ",
-            implicitReceiver?.value ?: "NONE",
+            implicitReceiver?.konstue ?: "NONE",
             " with contextReceiversGroup: ",
-            if (contextReceiversGroup.isEmpty()) "NONE" else contextReceiversGroup.joinToString { it.value.toString() },
+            if (contextReceiversGroup.isEmpty()) "NONE" else contextReceiversGroup.joinToString { it.konstue.toString() },
             " {"
         )
         p.pushIndent()

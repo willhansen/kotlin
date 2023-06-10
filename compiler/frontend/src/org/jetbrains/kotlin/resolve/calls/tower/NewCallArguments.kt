@@ -32,23 +32,23 @@ import org.jetbrains.kotlin.types.UnwrappedType
 import org.jetbrains.kotlin.types.expressions.KotlinTypeInfo
 
 class SimpleTypeArgumentImpl(
-    val typeProjection: KtTypeProjection,
-    override val type: UnwrappedType
+    konst typeProjection: KtTypeProjection,
+    override konst type: UnwrappedType
 ) : SimpleTypeArgument
 
 // all arguments should be inherited from this class.
-// But receivers is not, because for them there is no corresponding valueArgument
+// But receivers is not, because for them there is no corresponding konstueArgument
 abstract class PSIKotlinCallArgument : KotlinCallArgument {
-    abstract val valueArgument: ValueArgument
-    abstract val dataFlowInfoBeforeThisArgument: DataFlowInfo
-    abstract val dataFlowInfoAfterThisArgument: DataFlowInfo
+    abstract konst konstueArgument: ValueArgument
+    abstract konst dataFlowInfoBeforeThisArgument: DataFlowInfo
+    abstract konst dataFlowInfoAfterThisArgument: DataFlowInfo
 
-    override fun toString() = valueArgument.getArgumentExpression()?.text?.replace('\n', ' ') ?: valueArgument.toString()
+    override fun toString() = konstueArgument.getArgumentExpression()?.text?.replace('\n', ' ') ?: konstueArgument.toString()
 }
 
 abstract class SimplePSIKotlinCallArgument : PSIKotlinCallArgument(), SimpleKotlinCallArgument
 
-val KotlinCallArgument.psiCallArgument: PSIKotlinCallArgument
+konst KotlinCallArgument.psiCallArgument: PSIKotlinCallArgument
     get() {
         assert(this is PSIKotlinCallArgument) {
             "Incorrect KotlinCallArgument: $this. Java class: ${javaClass.canonicalName}"
@@ -56,136 +56,136 @@ val KotlinCallArgument.psiCallArgument: PSIKotlinCallArgument
         return this as PSIKotlinCallArgument
     }
 
-val KotlinCallArgument.psiExpression: KtExpression?
+konst KotlinCallArgument.psiExpression: KtExpression?
     get() {
         return when (this) {
             is ReceiverExpressionKotlinCallArgument -> (receiver.receiverValue as? ExpressionReceiver)?.expression
             is QualifierReceiverKotlinCallArgument -> (receiver as? Qualifier)?.expression
             is EmptyLabeledReturn -> returnExpression
-            else -> psiCallArgument.valueArgument.getArgumentExpression()
+            else -> psiCallArgument.konstueArgument.getArgumentExpression()
         }
     }
 
 class ParseErrorKotlinCallArgument(
-    override val valueArgument: ValueArgument,
-    override val dataFlowInfoAfterThisArgument: DataFlowInfo,
+    override konst konstueArgument: ValueArgument,
+    override konst dataFlowInfoAfterThisArgument: DataFlowInfo,
 ) : ExpressionKotlinCallArgument, SimplePSIKotlinCallArgument() {
-    override val receiver = ReceiverValueWithSmartCastInfo(
-        TransientReceiver(ErrorUtils.createErrorType(ErrorTypeKind.PARSE_ERROR_ARGUMENT, valueArgument.toString())),
+    override konst receiver = ReceiverValueWithSmartCastInfo(
+        TransientReceiver(ErrorUtils.createErrorType(ErrorTypeKind.PARSE_ERROR_ARGUMENT, konstueArgument.toString())),
         typesFromSmartCasts = emptySet(),
         isStable = true
     )
 
-    override val isSafeCall: Boolean get() = false
+    override konst isSafeCall: Boolean get() = false
 
-    override val isSpread: Boolean get() = valueArgument.getSpreadElement() != null
-    override val argumentName: Name? get() = valueArgument.getArgumentName()?.asName
+    override konst isSpread: Boolean get() = konstueArgument.getSpreadElement() != null
+    override konst argumentName: Name? get() = konstueArgument.getArgumentName()?.asName
 
-    override val dataFlowInfoBeforeThisArgument: DataFlowInfo
+    override konst dataFlowInfoBeforeThisArgument: DataFlowInfo
         get() = dataFlowInfoAfterThisArgument
 }
 
 abstract class PSIFunctionKotlinCallArgument(
-    val outerCallContext: BasicCallResolutionContext,
-    override val valueArgument: ValueArgument,
-    override val dataFlowInfoBeforeThisArgument: DataFlowInfo,
-    override val argumentName: Name?
+    konst outerCallContext: BasicCallResolutionContext,
+    override konst konstueArgument: ValueArgument,
+    override konst dataFlowInfoBeforeThisArgument: DataFlowInfo,
+    override konst argumentName: Name?
 ) : LambdaKotlinCallArgument, PSIKotlinCallArgument() {
-    override val dataFlowInfoAfterThisArgument: DataFlowInfo // todo drop this and use only lambdaInitialDataFlowInfo
+    override konst dataFlowInfoAfterThisArgument: DataFlowInfo // todo drop this and use only lambdaInitialDataFlowInfo
         get() = dataFlowInfoBeforeThisArgument
 
-    abstract val ktFunction: KtFunction
-    abstract val expression: KtExpression
+    abstract konst ktFunction: KtFunction
+    abstract konst expression: KtExpression
     lateinit var lambdaInitialDataFlowInfo: DataFlowInfo
 }
 
 class LambdaKotlinCallArgumentImpl(
     outerCallContext: BasicCallResolutionContext,
-    valueArgument: ValueArgument,
+    konstueArgument: ValueArgument,
     dataFlowInfoBeforeThisArgument: DataFlowInfo,
     argumentName: Name?,
-    val ktLambdaExpression: KtLambdaExpression,
-    val containingBlockForLambda: KtExpression,
-    override val parametersTypes: Array<UnwrappedType?>?
-) : PSIFunctionKotlinCallArgument(outerCallContext, valueArgument, dataFlowInfoBeforeThisArgument, argumentName) {
-    override val ktFunction get() = ktLambdaExpression.functionLiteral
-    override val expression get() = containingBlockForLambda
+    konst ktLambdaExpression: KtLambdaExpression,
+    konst containingBlockForLambda: KtExpression,
+    override konst parametersTypes: Array<UnwrappedType?>?
+) : PSIFunctionKotlinCallArgument(outerCallContext, konstueArgument, dataFlowInfoBeforeThisArgument, argumentName) {
+    override konst ktFunction get() = ktLambdaExpression.functionLiteral
+    override konst expression get() = containingBlockForLambda
 
     override var hasBuilderInferenceAnnotation = false
-        set(value) {
+        set(konstue) {
             assert(!field)
-            field = value
+            field = konstue
         }
 
     override var builderInferenceSession: InferenceSession? = null
-        set(value) {
+        set(konstue) {
             assert(field == null)
-            field = value
+            field = konstue
         }
 }
 
 class FunctionExpressionImpl(
     outerCallContext: BasicCallResolutionContext,
-    valueArgument: ValueArgument,
+    konstueArgument: ValueArgument,
     dataFlowInfoBeforeThisArgument: DataFlowInfo,
     argumentName: Name?,
-    val containingBlockForFunction: KtExpression,
-    override val ktFunction: KtNamedFunction,
-    override val receiverType: UnwrappedType?,
-    override val contextReceiversTypes: Array<UnwrappedType?>,
-    override val parametersTypes: Array<UnwrappedType?>,
-    override val returnType: UnwrappedType?
-) : FunctionExpression, PSIFunctionKotlinCallArgument(outerCallContext, valueArgument, dataFlowInfoBeforeThisArgument, argumentName) {
-    override val expression get() = containingBlockForFunction
+    konst containingBlockForFunction: KtExpression,
+    override konst ktFunction: KtNamedFunction,
+    override konst receiverType: UnwrappedType?,
+    override konst contextReceiversTypes: Array<UnwrappedType?>,
+    override konst parametersTypes: Array<UnwrappedType?>,
+    override konst returnType: UnwrappedType?
+) : FunctionExpression, PSIFunctionKotlinCallArgument(outerCallContext, konstueArgument, dataFlowInfoBeforeThisArgument, argumentName) {
+    override konst expression get() = containingBlockForFunction
 }
 
 class CallableReferenceKotlinCallArgumentImpl(
-    val scopeTowerForResolution: ImplicitScopeTower,
-    override val valueArgument: ValueArgument,
-    override val dataFlowInfoBeforeThisArgument: DataFlowInfo,
-    override val dataFlowInfoAfterThisArgument: DataFlowInfo,
-    val ktCallableReferenceExpression: KtCallableReferenceExpression,
-    override val argumentName: Name?,
-    override val lhsResult: LHSResult,
-    override val rhsName: Name,
-    override val call: KotlinCall
+    konst scopeTowerForResolution: ImplicitScopeTower,
+    override konst konstueArgument: ValueArgument,
+    override konst dataFlowInfoBeforeThisArgument: DataFlowInfo,
+    override konst dataFlowInfoAfterThisArgument: DataFlowInfo,
+    konst ktCallableReferenceExpression: KtCallableReferenceExpression,
+    override konst argumentName: Name?,
+    override konst lhsResult: LHSResult,
+    override konst rhsName: Name,
+    override konst call: KotlinCall
 ) : CallableReferenceKotlinCallArgument, PSIKotlinCallArgument()
 
 class CollectionLiteralKotlinCallArgumentImpl(
-    override val valueArgument: ValueArgument,
-    override val argumentName: Name?,
-    override val dataFlowInfoBeforeThisArgument: DataFlowInfo,
-    override val dataFlowInfoAfterThisArgument: DataFlowInfo,
-    val collectionLiteralExpression: KtCollectionLiteralExpression,
-    val outerCallContext: BasicCallResolutionContext
+    override konst konstueArgument: ValueArgument,
+    override konst argumentName: Name?,
+    override konst dataFlowInfoBeforeThisArgument: DataFlowInfo,
+    override konst dataFlowInfoAfterThisArgument: DataFlowInfo,
+    konst collectionLiteralExpression: KtCollectionLiteralExpression,
+    konst outerCallContext: BasicCallResolutionContext
 ) : CollectionLiteralKotlinCallArgument, PSIKotlinCallArgument() {
-    override val isSpread: Boolean get() = valueArgument.getSpreadElement() != null
+    override konst isSpread: Boolean get() = konstueArgument.getSpreadElement() != null
 }
 
 class SubKotlinCallArgumentImpl(
-    override val valueArgument: ValueArgument,
-    override val dataFlowInfoBeforeThisArgument: DataFlowInfo,
-    override val dataFlowInfoAfterThisArgument: DataFlowInfo,
-    override val receiver: ReceiverValueWithSmartCastInfo,
-    override val callResult: PartialCallResolutionResult
+    override konst konstueArgument: ValueArgument,
+    override konst dataFlowInfoBeforeThisArgument: DataFlowInfo,
+    override konst dataFlowInfoAfterThisArgument: DataFlowInfo,
+    override konst receiver: ReceiverValueWithSmartCastInfo,
+    override konst callResult: PartialCallResolutionResult
 ) : SimplePSIKotlinCallArgument(), SubKotlinCallArgument {
-    override val isSpread: Boolean get() = valueArgument.getSpreadElement() != null
-    override val argumentName: Name? get() = valueArgument.getArgumentName()?.asName
-    override val isSafeCall: Boolean get() = false
+    override konst isSpread: Boolean get() = konstueArgument.getSpreadElement() != null
+    override konst argumentName: Name? get() = konstueArgument.getArgumentName()?.asName
+    override konst isSafeCall: Boolean get() = false
 }
 
 class ExpressionKotlinCallArgumentImpl(
-    override val valueArgument: ValueArgument,
-    override val dataFlowInfoBeforeThisArgument: DataFlowInfo,
-    override val dataFlowInfoAfterThisArgument: DataFlowInfo,
-    override val receiver: ReceiverValueWithSmartCastInfo
+    override konst konstueArgument: ValueArgument,
+    override konst dataFlowInfoBeforeThisArgument: DataFlowInfo,
+    override konst dataFlowInfoAfterThisArgument: DataFlowInfo,
+    override konst receiver: ReceiverValueWithSmartCastInfo
 ) : SimplePSIKotlinCallArgument(), ExpressionKotlinCallArgument {
-    override val isSpread: Boolean get() = valueArgument.getSpreadElement() != null
-    override val argumentName: Name? get() = valueArgument.getArgumentName()?.asName
-    override val isSafeCall: Boolean get() = false
+    override konst isSpread: Boolean get() = konstueArgument.getSpreadElement() != null
+    override konst argumentName: Name? get() = konstueArgument.getArgumentName()?.asName
+    override konst isSafeCall: Boolean get() = false
 }
 
-class FakeValueArgumentForLeftCallableReference(val ktExpression: KtCallableReferenceExpression) : ValueArgument {
+class FakeValueArgumentForLeftCallableReference(konst ktExpression: KtCallableReferenceExpression) : ValueArgument {
     override fun getArgumentExpression() = ktExpression.receiverExpression
 
     override fun getArgumentName(): ValueArgumentName? = null
@@ -196,8 +196,8 @@ class FakeValueArgumentForLeftCallableReference(val ktExpression: KtCallableRefe
 }
 
 class FakePositionalValueArgumentForCallableReferenceImpl(
-    private val callElement: KtElement,
-    override val index: Int
+    private konst callElement: KtElement,
+    override konst index: Int
 ) : FakePositionalValueArgumentForCallableReference {
     override fun getArgumentExpression(): KtExpression? = null
     override fun getArgumentName(): ValueArgumentName? = null
@@ -208,8 +208,8 @@ class FakePositionalValueArgumentForCallableReferenceImpl(
 }
 
 class FakeImplicitSpreadValueArgumentForCallableReferenceImpl(
-    private val callElement: KtElement,
-    override val expression: ValueArgument
+    private konst callElement: KtElement,
+    override konst expression: ValueArgument
 ) : FakeImplicitSpreadValueArgumentForCallableReference {
     override fun getArgumentExpression(): KtExpression? = null
     override fun getArgumentName(): ValueArgumentName? = null
@@ -220,13 +220,13 @@ class FakeImplicitSpreadValueArgumentForCallableReferenceImpl(
 }
 
 class EmptyLabeledReturn(
-    val returnExpression: KtReturnExpression,
+    konst returnExpression: KtReturnExpression,
     builtIns: KotlinBuiltIns
 ) : ExpressionKotlinCallArgument {
-    override val isSpread: Boolean get() = false
-    override val argumentName: Name? get() = null
-    override val receiver = ReceiverValueWithSmartCastInfo(TransientReceiver(builtIns.unitType), emptySet(), true)
-    override val isSafeCall: Boolean get() = false
+    override konst isSpread: Boolean get() = false
+    override konst argumentName: Name? get() = null
+    override konst receiver = ReceiverValueWithSmartCastInfo(TransientReceiver(builtIns.unitType), emptySet(), true)
+    override konst isSafeCall: Boolean get() = false
 }
 
 internal fun KotlinCallArgument.setResultDataFlowInfoIfRelevant(resultDataFlowInfo: DataFlowInfo) {
@@ -239,32 +239,32 @@ fun processFunctionalExpression(
     outerCallContext: BasicCallResolutionContext,
     argumentExpression: KtExpression,
     startDataFlowInfo: DataFlowInfo,
-    valueArgument: ValueArgument,
+    konstueArgument: ValueArgument,
     argumentName: Name?,
     builtIns: KotlinBuiltIns,
     typeResolver: TypeResolver
 ): PSIKotlinCallArgument? {
-    val expression = ArgumentTypeResolver.getFunctionLiteralArgumentIfAny(argumentExpression, outerCallContext) ?: return null
-    val postponedExpression = if (expression is KtFunctionLiteral) expression.getParentOfType<KtLambdaExpression>(true) else expression
+    konst expression = ArgumentTypeResolver.getFunctionLiteralArgumentIfAny(argumentExpression, outerCallContext) ?: return null
+    konst postponedExpression = if (expression is KtFunctionLiteral) expression.getParentOfType<KtLambdaExpression>(true) else expression
 
-    val lambdaArgument: PSIKotlinCallArgument = when (postponedExpression) {
+    konst lambdaArgument: PSIKotlinCallArgument = when (postponedExpression) {
         is KtLambdaExpression ->
             LambdaKotlinCallArgumentImpl(
-                outerCallContext, valueArgument, startDataFlowInfo, argumentName, postponedExpression, argumentExpression,
+                outerCallContext, konstueArgument, startDataFlowInfo, argumentName, postponedExpression, argumentExpression,
                 resolveParametersTypes(outerCallContext, postponedExpression.functionLiteral, typeResolver)
             )
 
         is KtNamedFunction -> {
             // if function is a not anonymous function, resolve it as simple expression
             if (!postponedExpression.isFunctionalExpression()) return null
-            val receiverType = resolveType(outerCallContext, postponedExpression.receiverTypeReference, typeResolver)
-            val contextReceiversTypes = resolveContextReceiversTypes(outerCallContext, postponedExpression, typeResolver)
-            val parametersTypes = resolveParametersTypes(outerCallContext, postponedExpression, typeResolver) ?: emptyArray()
-            val returnType = resolveType(outerCallContext, postponedExpression.typeReference, typeResolver)
+            konst receiverType = resolveType(outerCallContext, postponedExpression.receiverTypeReference, typeResolver)
+            konst contextReceiversTypes = resolveContextReceiversTypes(outerCallContext, postponedExpression, typeResolver)
+            konst parametersTypes = resolveParametersTypes(outerCallContext, postponedExpression, typeResolver) ?: emptyArray()
+            konst returnType = resolveType(outerCallContext, postponedExpression.typeReference, typeResolver)
                 ?: if (postponedExpression.hasBlockBody()) builtIns.unitType else null
 
             FunctionExpressionImpl(
-                outerCallContext, valueArgument, startDataFlowInfo, argumentName,
+                outerCallContext, konstueArgument, startDataFlowInfo, argumentName,
                 argumentExpression, postponedExpression, receiverType, contextReceiversTypes, parametersTypes, returnType
             )
         }
@@ -272,13 +272,13 @@ fun processFunctionalExpression(
         else -> return null
     }
 
-    checkNoSpread(outerCallContext, valueArgument)
+    checkNoSpread(outerCallContext, konstueArgument)
 
     return lambdaArgument
 }
 
-fun checkNoSpread(context: BasicCallResolutionContext, valueArgument: ValueArgument) {
-    valueArgument.getSpreadElement()?.let {
+fun checkNoSpread(context: BasicCallResolutionContext, konstueArgument: ValueArgument) {
+    konstueArgument.getSpreadElement()?.let {
         context.trace.report(Errors.SPREAD_OF_LAMBDA_OR_CALLABLE_REFERENCE.on(it))
     }
 }
@@ -288,7 +288,7 @@ private fun resolveParametersTypes(
     ktFunction: KtFunction,
     typeResolver: TypeResolver
 ): Array<UnwrappedType?>? {
-    val parameterList = ktFunction.valueParameterList ?: return null
+    konst parameterList = ktFunction.konstueParameterList ?: return null
 
     return Array(parameterList.parameters.size) {
         parameterList.parameters[it]?.typeReference?.let { resolveType(context, it, typeResolver) }
@@ -300,7 +300,7 @@ private fun resolveContextReceiversTypes(
     ktFunction: KtFunction,
     typeResolver: TypeResolver
 ): Array<UnwrappedType?> {
-    val contextReceivers = ktFunction.contextReceivers
+    konst contextReceivers = ktFunction.contextReceivers
 
     return Array(contextReceivers.size) {
         contextReceivers[it]?.typeReference()?.let { typeRef -> resolveType(context, typeRef, typeResolver) }
@@ -313,7 +313,7 @@ internal fun resolveType(
     typeReference: KtTypeReference,
     typeResolver: TypeResolver
 ): UnwrappedType {
-    val type = typeResolver.resolveType(context.scope, typeReference, context.trace, checkBounds = true)
+    konst type = typeResolver.resolveType(context.scope, typeReference, context.trace, checkBounds = true)
     ForceResolveUtil.forceResolveAllContents(type)
     return type.unwrap()
 }
@@ -328,14 +328,14 @@ internal fun resolveType(
 }
 
 
-// context here is context for value argument analysis
+// context here is context for konstue argument analysis
 internal fun createSimplePSICallArgument(
     contextForArgument: BasicCallResolutionContext,
-    valueArgument: ValueArgument,
+    konstueArgument: ValueArgument,
     typeInfoForArgument: KotlinTypeInfo
 ) = createSimplePSICallArgument(
     contextForArgument.trace.bindingContext, contextForArgument.statementFilter,
-    contextForArgument.scope.ownerDescriptor, valueArgument,
+    contextForArgument.scope.ownerDescriptor, konstueArgument,
     contextForArgument.dataFlowInfo, typeInfoForArgument,
     contextForArgument.languageVersionSettings,
     contextForArgument.dataFlowValueFactory,
@@ -346,31 +346,31 @@ internal fun createSimplePSICallArgument(
     bindingContext: BindingContext,
     statementFilter: StatementFilter,
     ownerDescriptor: DeclarationDescriptor,
-    valueArgument: ValueArgument,
+    konstueArgument: ValueArgument,
     dataFlowInfoBeforeThisArgument: DataFlowInfo,
     typeInfoForArgument: KotlinTypeInfo,
     languageVersionSettings: LanguageVersionSettings,
     dataFlowValueFactory: DataFlowValueFactory,
     call: Call
 ): SimplePSIKotlinCallArgument? {
-    val ktExpression = KtPsiUtil.getLastElementDeparenthesized(valueArgument.getArgumentExpression(), statementFilter) ?: return null
-    val ktExpressionToExtractResolvedCall =
+    konst ktExpression = KtPsiUtil.getLastElementDeparenthesized(konstueArgument.getArgumentExpression(), statementFilter) ?: return null
+    konst ktExpressionToExtractResolvedCall =
         if (ktExpression is KtCallableReferenceExpression) ktExpression.callableReference else ktExpression
 
-    val partiallyResolvedCall = ktExpressionToExtractResolvedCall.getCall(bindingContext)?.let {
+    konst partiallyResolvedCall = ktExpressionToExtractResolvedCall.getCall(bindingContext)?.let {
         bindingContext.get(BindingContext.ONLY_RESOLVED_CALL, it)?.result
     }
     // todo hack for if expression: sometimes we not write properly type information for branches
-    val baseType = typeInfoForArgument.type?.unwrap() ?: partiallyResolvedCall?.resultCallAtom?.freshReturnType ?: return null
+    konst baseType = typeInfoForArgument.type?.unwrap() ?: partiallyResolvedCall?.resultCallAtom?.freshReturnType ?: return null
 
-    val expressionReceiver = ExpressionReceiver.create(ktExpression, baseType, bindingContext)
-    val argumentWithSmartCastInfo =
+    konst expressionReceiver = ExpressionReceiver.create(ktExpression, baseType, bindingContext)
+    konst argumentWithSmartCastInfo =
         if (ktExpression is KtCallExpression || partiallyResolvedCall != null) {
             // For a sub-call (partially or fully resolved), there can't be any smartcast
             // so we use a fast-path here to avoid calling transformToReceiverWithSmartCastInfo function
             ReceiverValueWithSmartCastInfo(expressionReceiver, emptySet(), isStable = true)
         } else {
-            val useDataFlowInfoBeforeArgument = call.callType == Call.CallType.CONTAINS
+            konst useDataFlowInfoBeforeArgument = call.callType == Call.CallType.CONTAINS
             transformToReceiverWithSmartCastInfo(
                 ownerDescriptor, bindingContext,
                 if (useDataFlowInfoBeforeArgument) dataFlowInfoBeforeThisArgument else typeInfoForArgument.dataFlowInfo,
@@ -380,11 +380,11 @@ internal fun createSimplePSICallArgument(
             )
         }
 
-    val capturedArgument = argumentWithSmartCastInfo.prepareReceiverRegardingCaptureTypes()
+    konst capturedArgument = argumentWithSmartCastInfo.prepareReceiverRegardingCaptureTypes()
 
     return if (partiallyResolvedCall != null) {
         SubKotlinCallArgumentImpl(
-            valueArgument,
+            konstueArgument,
             dataFlowInfoBeforeThisArgument,
             typeInfoForArgument.dataFlowInfo,
             capturedArgument,
@@ -392,7 +392,7 @@ internal fun createSimplePSICallArgument(
         )
     } else {
         ExpressionKotlinCallArgumentImpl(
-            valueArgument,
+            konstueArgument,
             dataFlowInfoBeforeThisArgument,
             typeInfoForArgument.dataFlowInfo,
             capturedArgument

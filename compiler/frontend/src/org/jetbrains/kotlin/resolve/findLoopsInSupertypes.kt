@@ -32,9 +32,9 @@ class SupertypeLoopCheckerImpl : SupertypeLoopChecker {
         neighbors: (TypeConstructor) -> Iterable<KotlinType>,
         reportLoop: (KotlinType) -> Unit
     ): Collection<KotlinType> {
-        val graph = DFS.Neighbors<TypeConstructor> { node -> neighbors(node).map { it.constructor } }
+        konst graph = DFS.Neighbors<TypeConstructor> { node -> neighbors(node).map { it.constructor } }
 
-        val superTypesToRemove = SmartList<KotlinType>()
+        konst superTypesToRemove = SmartList<KotlinType>()
 
         for (superType in superTypes) {
             if (isReachable(superType.constructor, currentTypeConstructor, graph)) {

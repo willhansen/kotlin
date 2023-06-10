@@ -49,7 +49,7 @@ open class A0<E> : MutableList<E> {
         throw UnsupportedOperationException()
     }
 
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun contains(element: E): Boolean {
@@ -89,8 +89,8 @@ class A2 : A0<String>()
 
 // Basically this test checks that no redundant special bridges were generated (i.e. no VerifyError happens)
 fun box(): String {
-    val a1 = A1()
-    val a2 = A2()
+    konst a1 = A1()
+    konst a2 = A2()
 
     return a1.removeAt(123) + a2.removeAt(456)
 }

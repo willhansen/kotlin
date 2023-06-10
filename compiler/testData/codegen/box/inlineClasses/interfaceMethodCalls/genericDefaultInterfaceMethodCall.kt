@@ -8,7 +8,7 @@ interface IFoo<T : IFoo<T>> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int) : IFoo<Z> {
+konstue class Z(konst x: Int) : IFoo<Z> {
     override fun bar(): String = "OK"
 }
 

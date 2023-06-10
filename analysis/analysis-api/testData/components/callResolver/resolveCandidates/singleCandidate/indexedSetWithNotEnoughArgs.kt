@@ -1,5 +1,5 @@
 class C {
-    operator fun set(a: Int, b: String, value: Boolean) {}
+    operator fun set(a: Int, b: String, konstue: Boolean) {}
 }
 
 fun call(c: C) {

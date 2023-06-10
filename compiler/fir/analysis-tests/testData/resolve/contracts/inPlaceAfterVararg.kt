@@ -13,7 +13,7 @@ fun example(vararg strings: String, block: () -> Unit) {
 }
 
 fun test() {
-    val x: String
+    konst x: String
     example("") {
         x = ""
     }

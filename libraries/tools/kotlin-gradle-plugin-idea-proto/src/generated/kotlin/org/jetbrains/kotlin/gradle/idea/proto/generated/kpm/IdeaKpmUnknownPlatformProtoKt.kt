@@ -10,7 +10,7 @@ object IdeaKpmUnknownPlatformProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmUnknownPlatformProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmUnknownPlatformProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKpmUnknownPlatformProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKpmUnknownPlatformProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
   }
 }
@@ -53,6 +53,6 @@ object IdeaKpmUnknownPlatformProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnknownPlatformProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 

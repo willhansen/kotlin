@@ -5,16 +5,16 @@ interface FirFunction<F : FirFunction<F>> : FirTargetElement
 interface FirPropertyAccessor : FirFunction<FirPropertyAccessor>
 
 interface FirProperty {
-    val getter: FirPropertyAccessor
+    konst getter: FirPropertyAccessor
 }
 
 interface FirTarget<E : FirTargetElement> {
-    val labeledElement: E
+    konst labeledElement: E
 }
 
 fun foo(target: FirTarget<FirFunction<*>>, property: FirProperty) {
-    val functionTarget = target.labeledElement
-    val x = (functionTarget as? FirFunction)?.let {
+    konst functionTarget = target.labeledElement
+    konst x = (functionTarget as? FirFunction)?.let {
         if (property.getter === functionTarget) {
             return@let 1
         }

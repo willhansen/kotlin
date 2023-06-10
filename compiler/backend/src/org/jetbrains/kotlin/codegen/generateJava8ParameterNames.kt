@@ -34,14 +34,14 @@ fun generateParameterNames(
         return
     }
 
-    val iterator = functionDescriptor.valueParameters.iterator()
-    val kotlinParameterTypes = jvmSignature.valueParameters
+    konst iterator = functionDescriptor.konstueParameters.iterator()
+    konst kotlinParameterTypes = jvmSignature.konstueParameters
     var isEnumName = true
 
     for ((index, parameterSignature) in kotlinParameterTypes.withIndex()) {
-        val kind = parameterSignature.kind
+        konst kind = parameterSignature.kind
 
-        val name = when (kind) {
+        konst name = when (kind) {
             JvmMethodParameterKind.ENUM_NAME_OR_ORDINAL -> {
                 isEnumName = !isEnumName
                 if (!isEnumName) "\$enum\$name" else "\$enum\$ordinal"
@@ -66,7 +66,7 @@ fun generateParameterNames(
         // implicitly in source code, unless the emitted construct is a class initialization method (JVMS §2.9).
         //A construct emitted by a Java compiler must be marked as mandated if it corresponds to a formal parameter
         // declared implicitly in source code (§8.8.1, §8.8.9, §8.9.3, §15.9.5.1).
-        val access = when (kind) {
+        konst access = when (kind) {
             JvmMethodParameterKind.ENUM_NAME_OR_ORDINAL -> Opcodes.ACC_SYNTHETIC
             JvmMethodParameterKind.RECEIVER, JvmMethodParameterKind.CONTEXT_RECEIVER -> Opcodes.ACC_MANDATED
             JvmMethodParameterKind.OUTER -> Opcodes.ACC_MANDATED

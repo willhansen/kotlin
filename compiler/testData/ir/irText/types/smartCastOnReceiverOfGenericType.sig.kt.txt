@@ -3,25 +3,25 @@
 //   Public signature: /Cell|null[0]
 class Cell<T : Any?> {
   // CHECK:
-  //   Mangled name: Cell{}value
-  //   Public signature: /Cell.value|1987073854177347439[0]
-  var value: T
+  //   Mangled name: Cell{}konstue
+  //   Public signature: /Cell.konstue|1987073854177347439[0]
+  var konstue: T
     // CHECK JVM_IR:
-    //   Mangled name: Cell#<get-value>(){}1:0
-    //   Public signature: /Cell.value.<get-value>|3167862337988859752[0]
+    //   Mangled name: Cell#<get-konstue>(){}1:0
+    //   Public signature: /Cell.konstue.<get-konstue>|3167862337988859752[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: Cell#<get-value>(){}
-    //   Public signature: /Cell.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: Cell#<get-konstue>(){}
+    //   Public signature: /Cell.konstue.<get-konstue>|3260093555963109437[0]
     get
     // CHECK:
-    //   Mangled name: Cell#<set-value>(1:0){}
-    //   Public signature: /Cell.value.<set-value>|-5529925203468114125[0]
+    //   Mangled name: Cell#<set-konstue>(1:0){}
+    //   Public signature: /Cell.konstue.<set-konstue>|-5529925203468114125[0]
     set
 
   // CHECK:
   //   Mangled name: Cell#<init>(1:0){}
   //   Public signature: /Cell.<init>|-8731461708390519279[0]
-  constructor(value: T) /* primary */
+  constructor(konstue: T) /* primary */
 
 }
 

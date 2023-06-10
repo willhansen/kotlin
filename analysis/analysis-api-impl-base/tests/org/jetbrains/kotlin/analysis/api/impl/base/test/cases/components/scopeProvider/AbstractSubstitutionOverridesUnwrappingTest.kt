@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.test.services.TestServices
 abstract class AbstractSubstitutionOverridesUnwrappingTest : AbstractSymbolTest() {
 
     override fun KtAnalysisSession.collectSymbols(ktFile: KtFile, testServices: TestServices): SymbolsData {
-        val declarationUnderCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtClassLikeDeclaration>(ktFile)
-        val classSymbolUnderCaret = declarationUnderCaret.getSymbol() as KtClassLikeSymbol
+        konst declarationUnderCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtClassLikeDeclaration>(ktFile)
+        konst classSymbolUnderCaret = declarationUnderCaret.getSymbol() as KtClassLikeSymbol
 
         require(classSymbolUnderCaret is KtSymbolWithMembers)
 

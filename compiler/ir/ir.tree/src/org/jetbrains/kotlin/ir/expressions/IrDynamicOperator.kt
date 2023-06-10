@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.ir.expressions
 
-enum class IrDynamicOperator(val image: String, val isAssignmentOperator: Boolean = false) {
+enum class IrDynamicOperator(konst image: String, konst isAssignmentOperator: Boolean = false) {
     UNARY_PLUS("+"),
     UNARY_MINUS("-"),
     EXCL("!"),

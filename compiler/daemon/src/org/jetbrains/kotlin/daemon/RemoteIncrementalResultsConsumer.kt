@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.incremental.js.JsInlineFunctionHash
 import java.io.File
 
 class RemoteIncrementalResultsConsumer(
-    @Suppress("DEPRECATION") val facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
+    @Suppress("DEPRECATION") konst facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
     eventManager: EventManager,
-    val rpcProfiler: Profiler
+    konst rpcProfiler: Profiler
 ) : IncrementalResultsConsumer {
     override fun processIrFile(
         sourceFile: File,
@@ -47,9 +47,9 @@ class RemoteIncrementalResultsConsumer(
         }
     }
 
-    private class JsInlineFunction(val sourceFilePath: String, val fqName: String, val inlineFunction: FunctionWithSourceInfo)
+    private class JsInlineFunction(konst sourceFilePath: String, konst fqName: String, konst inlineFunction: FunctionWithSourceInfo)
 
-    private val deferInlineFuncs = mutableListOf<JsInlineFunction>()
+    private konst deferInlineFuncs = mutableListOf<JsInlineFunction>()
 
     override fun processInlineFunction(sourceFile: File, fqName: String, inlineFunction: Any, line: Int, column: Int) {
         deferInlineFuncs.add(JsInlineFunction(sourceFile.path, fqName, FunctionWithSourceInfo(inlineFunction, line, column)))

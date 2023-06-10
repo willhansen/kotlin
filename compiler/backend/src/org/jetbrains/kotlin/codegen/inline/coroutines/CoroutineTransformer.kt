@@ -21,19 +21,19 @@ import org.jetbrains.org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.jetbrains.org.objectweb.asm.tree.analysis.BasicValue
 import org.jetbrains.org.objectweb.asm.tree.analysis.Frame
 
-const val FOR_INLINE_SUFFIX = "\$\$forInline"
+const konst FOR_INLINE_SUFFIX = "\$\$forInline"
 
 class CoroutineTransformer(
-    private val inliningContext: InliningContext,
-    private val classBuilder: ClassBuilder,
-    private val methods: List<MethodNode>,
-    private val superClassName: String
+    private konst inliningContext: InliningContext,
+    private konst classBuilder: ClassBuilder,
+    private konst methods: List<MethodNode>,
+    private konst superClassName: String
 ) {
-    private val state = inliningContext.state
+    private konst state = inliningContext.state
 
     // If we inline into inline function, we should generate both method with state-machine for Java interop and method without
     // state-machine for further transformation/inlining.
-    private val generateForInline = inliningContext.callSiteInfo.isInlineOrInsideInline
+    private konst generateForInline = inliningContext.callSiteInfo.isInlineOrInsideInline
 
     fun shouldSkip(node: MethodNode): Boolean = methods.any { it.name == node.name + FOR_INLINE_SUFFIX && it.desc == node.desc }
 
@@ -74,15 +74,15 @@ class CoroutineTransformer(
     private fun isSuspendFunctionWithFakeConstructorCall(node: MethodNode): Boolean = findFakeContinuationConstructorClassName(node) != null
 
     private fun newStateMachineForLambda(node: MethodNode): DeferredMethodVisitor {
-        val name = node.name.removeSuffix(FOR_INLINE_SUFFIX)
+        konst name = node.name.removeSuffix(FOR_INLINE_SUFFIX)
         return DeferredMethodVisitor(
             MethodNode(
                 node.access, name, node.desc, node.signature,
                 ArrayUtil.toStringArray(node.exceptions)
             )
         ) {
-            val sourceCompilerForInline = inliningContext.root.sourceCompilerForInline
-            val stateMachineBuilder = CoroutineTransformerMethodVisitor(
+            konst sourceCompilerForInline = inliningContext.root.sourceCompilerForInline
+            konst stateMachineBuilder = CoroutineTransformerMethodVisitor(
                 createNewMethodFrom(node, name), node.access, name, node.desc, null, null,
                 containingClassInternalName = classBuilder.thisName,
                 obtainClassBuilderForCoroutineState = { classBuilder },
@@ -102,8 +102,8 @@ class CoroutineTransformer(
     }
 
     private fun newStateMachineForNamedFunction(node: MethodNode): DeferredMethodVisitor {
-        val name = node.name.removeSuffix(FOR_INLINE_SUFFIX)
-        val continuationClassName = findFakeContinuationConstructorClassName(node)
+        konst name = node.name.removeSuffix(FOR_INLINE_SUFFIX)
+        konst continuationClassName = findFakeContinuationConstructorClassName(node)
         assert(inliningContext is RegeneratedClassContext)
         return DeferredMethodVisitor(
             MethodNode(
@@ -112,9 +112,9 @@ class CoroutineTransformer(
             )
         ) {
             // If the node already has state-machine, it is safer to generate state-machine.
-            val disableTailCallOptimization = methods.find { it.name == name && it.desc == node.desc }?.let { isStateMachine(it) } ?: false
-            val sourceCompilerForInline = inliningContext.root.sourceCompilerForInline
-            val stateMachineBuilder = CoroutineTransformerMethodVisitor(
+            konst disableTailCallOptimization = methods.find { it.name == name && it.desc == node.desc }?.let { isStateMachine(it) } ?: false
+            konst sourceCompilerForInline = inliningContext.root.sourceCompilerForInline
+            konst stateMachineBuilder = CoroutineTransformerMethodVisitor(
                 createNewMethodFrom(node, name), node.access, name, node.desc, null, null,
                 containingClassInternalName = classBuilder.thisName,
                 obtainClassBuilderForCoroutineState = { (inliningContext as RegeneratedClassContext).continuationBuilders[continuationClassName]!! },
@@ -149,7 +149,7 @@ class CoroutineTransformer(
     }
 
     fun registerClassBuilder(continuationClassName: String) {
-        val context = inliningContext.parent?.parent as? RegeneratedClassContext ?: error("incorrect context")
+        konst context = inliningContext.parent?.parent as? RegeneratedClassContext ?: error("incorrect context")
         context.continuationBuilders[continuationClassName] = classBuilder
     }
 
@@ -165,15 +165,15 @@ class CoroutineTransformer(
 
     companion object {
         fun findFakeContinuationConstructorClassName(node: MethodNode): String? {
-            val marker = node.instructions.asSequence().firstOrNull(::isBeforeFakeContinuationConstructorCallMarker) ?: return null
-            val new = marker.next
+            konst marker = node.instructions.asSequence().firstOrNull(::isBeforeFakeContinuationConstructorCallMarker) ?: return null
+            konst new = marker.next
             assert(new?.opcode == Opcodes.NEW)
             return (new as TypeInsnNode).desc
         }
     }
 }
 
-private const val NOINLINE_CALL_MARKER = "\$\$\$\$\$NOINLINE_CALL_MARKER\$\$\$\$\$"
+private const konst NOINLINE_CALL_MARKER = "\$\$\$\$\$NOINLINE_CALL_MARKER\$\$\$\$\$"
 
 fun markNoinlineLambdaIfSuspend(mv: MethodVisitor, info: FunctionalArgument?) {
     when (info) {
@@ -187,14 +187,14 @@ fun markNoinlineLambdaIfSuspend(mv: MethodVisitor, info: FunctionalArgument?) {
 private fun Frame<BasicValue>.getSource(offset: Int): AbstractInsnNode? = (getStack(stackSize - offset - 1) as? PossibleLambdaLoad)?.insn
 
 fun surroundInvokesWithSuspendMarkersIfNeeded(node: MethodNode) {
-    val markers = node.instructions.asSequence().filter {
+    konst markers = node.instructions.asSequence().filter {
         it.opcode == Opcodes.INVOKESTATIC && (it as MethodInsnNode).owner == NOINLINE_CALL_MARKER
     }.toList()
     if (markers.isEmpty()) return
 
-    val sourceFrames = MethodTransformer.analyze("fake", node, CapturedLambdaInterpreter())
-    val loads = markers.map { marker ->
-        val arity = (marker.next as MethodInsnNode).owner.removePrefix(NUMBERED_FUNCTION_PREFIX).toInt()
+    konst sourceFrames = MethodTransformer.analyze("fake", node, CapturedLambdaInterpreter())
+    konst loads = markers.map { marker ->
+        konst arity = (marker.next as MethodInsnNode).owner.removePrefix(NUMBERED_FUNCTION_PREFIX).toInt()
         var receiver = sourceFrames[node.instructions.indexOf(marker) + 1]?.getSource(arity)
         // Navigate the ALOAD+GETFIELD+... chain to the first instruction. We need to insert a stack
         // spilling marker before it starts.
@@ -204,8 +204,8 @@ fun surroundInvokesWithSuspendMarkersIfNeeded(node: MethodNode) {
         receiver
     }
     for ((marker, load) in markers.zip(loads)) {
-        val conditional = (marker as MethodInsnNode).name == "conditional"
-        val invoke = marker.next as MethodInsnNode
+        konst conditional = (marker as MethodInsnNode).name == "conditional"
+        konst invoke = marker.next as MethodInsnNode
         node.instructions.remove(marker)
         if (load == null) {
             continue // dead code, doesn't matter
@@ -224,7 +224,7 @@ fun surroundInvokesWithSuspendMarkersIfNeeded(node: MethodNode) {
 }
 
 // Interpreter, that keeps track of captured functional arguments
-private class PossibleLambdaLoad(val insn: AbstractInsnNode) : BasicValue(AsmTypes.OBJECT_TYPE)
+private class PossibleLambdaLoad(konst insn: AbstractInsnNode) : BasicValue(AsmTypes.OBJECT_TYPE)
 
 private class CapturedLambdaInterpreter : BasicInterpreter(Opcodes.API_VERSION) {
     override fun newOperation(insn: AbstractInsnNode): BasicValue? {
@@ -245,14 +245,14 @@ private class CapturedLambdaInterpreter : BasicInterpreter(Opcodes.API_VERSION) 
         return null
     }
 
-    override fun copyOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? =
-        if (insn.opcode == Opcodes.ALOAD) PossibleLambdaLoad(insn) else super.copyOperation(insn, value)
+    override fun copyOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? =
+        if (insn.opcode == Opcodes.ALOAD) PossibleLambdaLoad(insn) else super.copyOperation(insn, konstue)
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? {
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? {
         if (insn.opcode == Opcodes.GETFIELD) {
             insn.fieldLoad()?.let { return it }
         }
-        return super.unaryOperation(insn, value)
+        return super.unaryOperation(insn, konstue)
     }
 
     override fun merge(v: BasicValue?, w: BasicValue?): BasicValue? =

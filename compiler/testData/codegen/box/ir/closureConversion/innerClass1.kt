@@ -1,7 +1,7 @@
 class Outer {
-    val x = "O"
+    konst x = "O"
     inner class Inner {
-        val y = x + "K"
+        konst y = x + "K"
     }
 }
 

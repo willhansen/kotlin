@@ -34,7 +34,7 @@ internal object LLFirStatusLazyResolver : LLFirLazyResolver(FirResolvePhase.STAT
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirStatusTargetResolver(
+        konst resolver = LLFirStatusTargetResolver(
             target = target,
             lockProvider = lockProvider,
             session = session,
@@ -62,7 +62,7 @@ internal object LLFirStatusLazyResolver : LLFirLazyResolver(FirResolvePhase.STAT
     }
 }
 
-private sealed class StatusResolveMode(val resolveSupertypes: Boolean) {
+private sealed class StatusResolveMode(konst resolveSupertypes: Boolean) {
     abstract fun shouldBeResolved(callableDeclaration: FirCallableDeclaration): Boolean
 
     object OnlyTarget : StatusResolveMode(resolveSupertypes = false) {
@@ -73,13 +73,13 @@ private sealed class StatusResolveMode(val resolveSupertypes: Boolean) {
         override fun shouldBeResolved(callableDeclaration: FirCallableDeclaration): Boolean = true
     }
 
-    class FunctionWithSpecificName(val name: Name) : StatusResolveMode(resolveSupertypes = true) {
+    class FunctionWithSpecificName(konst name: Name) : StatusResolveMode(resolveSupertypes = true) {
         override fun shouldBeResolved(callableDeclaration: FirCallableDeclaration): Boolean {
             return callableDeclaration is FirSimpleFunction && callableDeclaration.name == name
         }
     }
 
-    class PropertyWithSpecificName(val name: Name) : StatusResolveMode(resolveSupertypes = true) {
+    class PropertyWithSpecificName(konst name: Name) : StatusResolveMode(resolveSupertypes = true) {
         override fun shouldBeResolved(callableDeclaration: FirCallableDeclaration): Boolean {
             return callableDeclaration is FirProperty && callableDeclaration.name == name
         }
@@ -100,10 +100,10 @@ private class LLFirStatusTargetResolver(
     lockProvider: LLFirLockProvider,
     session: FirSession,
     scopeSession: ScopeSession,
-    private val statusComputationSession: StatusComputationSession = StatusComputationSession(),
-    private val resolveMode: StatusResolveMode,
+    private konst statusComputationSession: StatusComputationSession = StatusComputationSession(),
+    private konst resolveMode: StatusResolveMode,
 ) : LLFirTargetResolver(target, lockProvider, FirResolvePhase.STATUS, isJumpingPhase = false) {
-    private val transformer = Transformer(session, scopeSession)
+    private konst transformer = Transformer(session, scopeSession)
 
     override fun withFile(firFile: FirFile, action: () -> Unit) {
         action()
@@ -176,7 +176,7 @@ private class LLFirStatusTargetResolver(
         crossinline transform: (T, List<T>) -> Unit,
     ) {
         if (target.resolvePhase >= resolverPhase) return
-        val overriddenDeclarations = getOverridden(target)
+        konst overriddenDeclarations = getOverridden(target)
         performCustomResolveUnderLock(target) {
             transform(target, overriddenDeclarations)
         }
@@ -236,14 +236,14 @@ private class LLFirStatusTargetResolver(
         override fun resolveClassForSuperType(regularClass: FirRegularClass): Boolean {
             if (regularClass.resolvePhase >= resolverPhase) {
                 // We can avoid resolve in the case of all declarations in super class are already resolved
-                val declarations = regularClass.declarations
+                konst declarations = regularClass.declarations
                 if (declarations.isNotEmpty() && declarations.all { it.resolvePhase >= resolverPhase }) {
                     return true
                 }
             }
 
-            val target = regularClass.tryCollectDesignationWithFile()?.asResolveTarget() ?: return false
-            val resolver = LLFirStatusTargetResolver(
+            konst target = regularClass.tryCollectDesignationWithFile()?.asResolveTarget() ?: return false
+            konst resolver = LLFirStatusTargetResolver(
                 target,
                 lockProvider,
                 session,

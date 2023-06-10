@@ -7,7 +7,7 @@ import kotlinx.android.parcel.*
 import android.os.Parcelable
 
 @Parcelize
-class Foo(val bar: Bar): Parcelable
+class Foo(konst bar: Bar): Parcelable
 
 @Parcelize
-class Bar(val foo: Foo?) : Parcelable
+class Bar(konst foo: Foo?) : Parcelable

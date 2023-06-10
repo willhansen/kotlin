@@ -8,7 +8,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = Sub
         symbol = <constructor>(p1: kotlin.Int): Sub
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = p1
             receiverType = null

@@ -13,7 +13,7 @@ import kotlin.test.*
 class PathReadWriteTest : AbstractPathTest() {
     @Test
     fun appendText() {
-        val file = createTempFile().cleanup()
+        konst file = createTempFile().cleanup()
         file.writeText("Hello\n")
         file.appendText("World\n" as CharSequence)
         file.writeText(StringBuilder("Again"), Charsets.US_ASCII, StandardOpenOption.APPEND)
@@ -24,15 +24,15 @@ class PathReadWriteTest : AbstractPathTest() {
 
     @Test
     fun file() {
-        val file = createTempFile().cleanup()
-        val writer = file.outputStream().writer().buffered()
+        konst file = createTempFile().cleanup()
+        konst writer = file.outputStream().writer().buffered()
 
         writer.write("Hello")
         writer.newLine()
         writer.write("World")
         writer.close()
 
-        val list = ArrayList<String>()
+        konst list = ArrayList<String>()
         file.forEachLine(charset = Charsets.UTF_8) {
             list.add(it)
         }
@@ -44,7 +44,7 @@ class PathReadWriteTest : AbstractPathTest() {
             assertEquals(listOf("Hello", "World"), it.toList())
         }
 
-        val text = file.inputStream().reader().readText()
+        konst text = file.inputStream().reader().readText()
         assertTrue("Hello" in text)
         assertTrue("World" in text)
 
@@ -70,8 +70,8 @@ class PathReadWriteTest : AbstractPathTest() {
 
     @Test
     fun bufferedReader() {
-        val file = createTempFile().cleanup()
-        val lines = listOf("line1", "line2")
+        konst file = createTempFile().cleanup()
+        konst lines = listOf("line1", "line2")
         file.writeLines(lines)
 
         assertEquals(lines, file.bufferedReader().use { it.readLines() })
@@ -80,7 +80,7 @@ class PathReadWriteTest : AbstractPathTest() {
 
     @Test
     fun bufferedWriter() {
-        val file = createTempFile().cleanup()
+        konst file = createTempFile().cleanup()
 
         file.bufferedWriter().use { it.write("line1\n") }
         file.bufferedWriter(Charsets.UTF_8, 1024, StandardOpenOption.APPEND).use { it.write("line2\n") }
@@ -90,12 +90,12 @@ class PathReadWriteTest : AbstractPathTest() {
 
     @Test
     fun writeBytes() {
-        val file = createTempFile().cleanup()
+        konst file = createTempFile().cleanup()
         file.writeBytes("Hello".encodeToByteArray())
         file.appendBytes(" world!".encodeToByteArray())
         assertEquals(file.readText(), "Hello world!")
 
-        val bytes = Random.nextBytes(100)
+        konst bytes = Random.nextBytes(100)
         file.writeBytes(bytes)
         file.appendBytes(bytes)
         assertTrue((bytes + bytes) contentEquals file.readBytes())
@@ -103,15 +103,15 @@ class PathReadWriteTest : AbstractPathTest() {
 
     @Test
     fun writeLines() {
-        val file = createTempFile().cleanup()
-        val lines = listOf("first line", "second line")
+        konst file = createTempFile().cleanup()
+        konst lines = listOf("first line", "second line")
         file.writeLines(lines)
         assertEquals(lines, file.readLines())
 
         file.writeLines(lines.asSequence())
         assertEquals(lines, file.readLines())
 
-        val moreLines = listOf("third line", "the bottom line")
+        konst moreLines = listOf("third line", "the bottom line")
         file.appendLines(moreLines)
         assertEquals(lines + moreLines, file.readLines())
 

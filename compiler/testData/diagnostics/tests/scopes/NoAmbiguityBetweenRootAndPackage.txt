@@ -3,6 +3,6 @@ package
 public fun testFun(): kotlin.Int
 
 package test {
-    public val t: kotlin.Int
+    public konst t: kotlin.Int
     public fun testFun(): kotlin.Int
 }

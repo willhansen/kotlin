@@ -27,7 +27,7 @@ open class KotlinJvmTargetConfigurator :
         super<KotlinTargetWithTestsConfigurator>.configurePlatformSpecificModel(target)
 
         // Create the configuration under the name 'compileClasspath', as Android lint tasks want it, KT-27170
-        target.project.whenEvaluated {
+        target.project.whenEkonstuated {
             if (configurations.findByName("compileClasspath") == null) {
                 configurations.create("compileClasspath").apply {
                     isCanBeResolved = false
@@ -52,26 +52,26 @@ open class KotlinJvmTargetConfigurator :
         }
     }
 
-    override val testRunClass: Class<KotlinJvmTestRun>
+    override konst testRunClass: Class<KotlinJvmTestRun>
         get() = KotlinJvmTestRun::class.java
 
     override fun createTestRun(
         name: String,
         target: KotlinJvmTarget
     ): KotlinJvmTestRun = KotlinJvmTestRun(name, target).apply {
-        val testTaskOrProvider = target.project.registerTask<KotlinJvmTest>(testTaskName) { testTask ->
+        konst testTaskOrProvider = target.project.registerTask<KotlinJvmTest>(testTaskName) { testTask ->
             testTask.targetName = target.disambiguationClassifier
         }
         target.project.locateTask<Task>(JavaBasePlugin.CHECK_TASK_NAME)?.dependsOn(testTaskOrProvider)
 
         executionTask = testTaskOrProvider
 
-        val testCompilation = target.compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
+        konst testCompilation = target.compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
 
         setExecutionSourceFrom(testCompilation)
 
-        target.project.whenEvaluated {
-            // use afterEvaluate to override the JavaPlugin defaults for Test tasks
+        target.project.whenEkonstuated {
+            // use afterEkonstuate to override the JavaPlugin defaults for Test tasks
             testTaskOrProvider.configure { testTask ->
                 testTask.description = "Runs the tests of the $name test run."
                 testTask.group = JavaBasePlugin.VERIFICATION_GROUP
@@ -82,7 +82,7 @@ open class KotlinJvmTargetConfigurator :
     }
 
     override fun buildCompilationProcessor(compilation: KotlinJvmCompilation): KotlinSourceSetProcessor<*> {
-        val tasksProvider = KotlinTasksProvider()
+        konst tasksProvider = KotlinTasksProvider()
         return Kotlin2JvmSourceSetProcessor(tasksProvider, KotlinCompilationInfo(compilation))
     }
 }

@@ -26,12 +26,12 @@ import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 internal class VariableLValue(
-    private val context: IrGeneratorContext,
-    val startOffset: Int,
-    val endOffset: Int,
-    val symbol: IrValueSymbol,
-    override val type: IrType,
-    val origin: IrStatementOrigin? = null
+    private konst context: IrGeneratorContext,
+    konst startOffset: Int,
+    konst endOffset: Int,
+    konst symbol: IrValueSymbol,
+    override konst type: IrType,
+    konst origin: IrStatementOrigin? = null
 ) :
     LValue,
     AssignmentReceiver {

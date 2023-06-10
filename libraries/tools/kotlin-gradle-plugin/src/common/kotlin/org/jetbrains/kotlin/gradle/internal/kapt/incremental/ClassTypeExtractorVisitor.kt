@@ -7,12 +7,12 @@ package org.jetbrains.kotlin.gradle.internal.kapt.incremental
 
 import org.jetbrains.org.objectweb.asm.*
 
-private val toIgnore = setOf("java/lang/Object", "kotlin/Metadata", "org/jetbrains/annotations/NotNull")
+private konst toIgnore = setOf("java/lang/Object", "kotlin/Metadata", "org/jetbrains/annotations/NotNull")
 
-class ClassTypeExtractorVisitor(visitor: ClassVisitor) : ClassVisitor(lazyAsmApiVersion.value, visitor) {
+class ClassTypeExtractorVisitor(visitor: ClassVisitor) : ClassVisitor(lazyAsmApiVersion.konstue, visitor) {
 
-    private val abiTypes = mutableSetOf<String>()
-    private val privateTypes = mutableSetOf<String>()
+    private konst abiTypes = mutableSetOf<String>()
+    private konst privateTypes = mutableSetOf<String>()
 
     private lateinit var classInternalName: String
 
@@ -37,14 +37,14 @@ class ClassTypeExtractorVisitor(visitor: ClassVisitor) : ClassVisitor(lazyAsmApi
         signature: String?,
         exceptions: Array<out String>?
     ): MethodVisitor? {
-        val typeCollector = if (access and Opcodes.ACC_PRIVATE != 0) {
+        konst typeCollector = if (access and Opcodes.ACC_PRIVATE != 0) {
             privateTypes
         } else {
             abiTypes
         }
 
         desc?.also {
-            val type = Type.getType(desc)
+            konst type = Type.getType(desc)
 
             maybeAdd(typeCollector, type.returnType)
             type.argumentTypes.forEach {
@@ -55,19 +55,19 @@ class ClassTypeExtractorVisitor(visitor: ClassVisitor) : ClassVisitor(lazyAsmApi
         return MethodTypeExtractorVisitor(typeCollector, super.visitMethod(access, name, desc, signature, exceptions))
     }
 
-    override fun visitField(access: Int, name: String?, desc: String?, signature: String?, value: Any?): FieldVisitor? {
-        val typeCollector = if (access and Opcodes.ACC_PRIVATE != 0) {
+    override fun visitField(access: Int, name: String?, desc: String?, signature: String?, konstue: Any?): FieldVisitor? {
+        konst typeCollector = if (access and Opcodes.ACC_PRIVATE != 0) {
             privateTypes
         } else {
             abiTypes
         }
 
         desc?.also {
-            val type = Type.getType(desc)
+            konst type = Type.getType(desc)
             maybeAdd(typeCollector, type)
         }
 
-        return FieldTypeExtractorVisitor(typeCollector, super.visitField(access, name, desc, signature, value))
+        return FieldTypeExtractorVisitor(typeCollector, super.visitField(access, name, desc, signature, konstue))
     }
 
     override fun visitAnnotation(desc: String?, visible: Boolean): AnnotationVisitor? {
@@ -86,14 +86,14 @@ class ClassTypeExtractorVisitor(visitor: ClassVisitor) : ClassVisitor(lazyAsmApi
     }
 }
 
-private class AnnotationTypeExtractorVisitor(private val typeCollector: MutableSet<String>, visitor: AnnotationVisitor?) :
+private class AnnotationTypeExtractorVisitor(private konst typeCollector: MutableSet<String>, visitor: AnnotationVisitor?) :
     AnnotationVisitor(Opcodes.ASM5, visitor) {
 
-    override fun visit(name: String?, value: Any?) {
-        if (value is Type) {
-            typeCollector.add(value.className)
+    override fun visit(name: String?, konstue: Any?) {
+        if (konstue is Type) {
+            typeCollector.add(konstue.className)
         }
-        super.visit(name, value)
+        super.visit(name, konstue)
     }
 
     override fun visitAnnotation(name: String?, desc: String?): AnnotationVisitor? {
@@ -107,15 +107,15 @@ private class AnnotationTypeExtractorVisitor(private val typeCollector: MutableS
         return AnnotationTypeExtractorVisitor(typeCollector, super.visitArray(name))
     }
 
-    override fun visitEnum(name: String?, desc: String?, value: String?) {
+    override fun visitEnum(name: String?, desc: String?, konstue: String?) {
         desc?.let {
             maybeAdd(typeCollector, Type.getType(it))
         }
-        super.visitEnum(name, desc, value)
+        super.visitEnum(name, desc, konstue)
     }
 }
 
-private class FieldTypeExtractorVisitor(private val typeCollector: MutableSet<String>, visitor: FieldVisitor?) :
+private class FieldTypeExtractorVisitor(private konst typeCollector: MutableSet<String>, visitor: FieldVisitor?) :
     FieldVisitor(Opcodes.ASM5, visitor) {
     override fun visitAnnotation(desc: String?, visible: Boolean): AnnotationVisitor? {
         desc?.let {
@@ -132,7 +132,7 @@ private class FieldTypeExtractorVisitor(private val typeCollector: MutableSet<St
     }
 }
 
-private class MethodTypeExtractorVisitor(private val typeCollector: MutableSet<String>, visitor: MethodVisitor?) :
+private class MethodTypeExtractorVisitor(private konst typeCollector: MutableSet<String>, visitor: MethodVisitor?) :
     MethodVisitor(Opcodes.ASM5, visitor) {
 
     override fun visitAnnotationDefault(): AnnotationVisitor {

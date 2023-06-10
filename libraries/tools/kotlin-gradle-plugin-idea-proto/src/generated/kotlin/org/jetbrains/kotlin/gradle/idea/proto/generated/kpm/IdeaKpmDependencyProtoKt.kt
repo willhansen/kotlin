@@ -10,7 +10,7 @@ object IdeaKpmDependencyProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmDependencyProtoKt {
       @JvmName("getUnresolvedBinaryDependency")
       get() = _builder.getUnresolvedBinaryDependency()
       @JvmName("setUnresolvedBinaryDependency")
-      set(value) {
-        _builder.setUnresolvedBinaryDependency(value)
+      set(konstue) {
+        _builder.setUnresolvedBinaryDependency(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnresolvedBinaryDependencyProto unresolved_binary_dependency = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKpmDependencyProtoKt {
       @JvmName("getResolvedBinaryDependency")
       get() = _builder.getResolvedBinaryDependency()
       @JvmName("setResolvedBinaryDependency")
-      set(value) {
-        _builder.setResolvedBinaryDependency(value)
+      set(konstue) {
+        _builder.setResolvedBinaryDependency(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProto resolved_binary_dependency = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKpmDependencyProtoKt {
       @JvmName("getFragmentDependency")
       get() = _builder.getFragmentDependency()
       @JvmName("setFragmentDependency")
-      set(value) {
-        _builder.setFragmentDependency(value)
+      set(konstue) {
+        _builder.setFragmentDependency(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentDependencyProto fragment_dependency = 3;</code>
@@ -93,7 +93,7 @@ object IdeaKpmDependencyProtoKt {
     fun hasFragmentDependency(): kotlin.Boolean {
       return _builder.hasFragmentDependency()
     }
-    val dependencyCase: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto.DependencyCase
+    konst dependencyCase: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto.DependencyCase
       @JvmName("getDependencyCase")
       get() = _builder.getDependencyCase()
 
@@ -106,12 +106,12 @@ object IdeaKpmDependencyProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProtoOrBuilder.unresolvedBinaryDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnresolvedBinaryDependencyProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProtoOrBuilder.unresolvedBinaryDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmUnresolvedBinaryDependencyProto?
   get() = if (hasUnresolvedBinaryDependency()) getUnresolvedBinaryDependency() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProtoOrBuilder.resolvedBinaryDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProtoOrBuilder.resolvedBinaryDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProto?
   get() = if (hasResolvedBinaryDependency()) getResolvedBinaryDependency() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProtoOrBuilder.fragmentDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentDependencyProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProtoOrBuilder.fragmentDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentDependencyProto?
   get() = if (hasFragmentDependency()) getFragmentDependency() else null
 

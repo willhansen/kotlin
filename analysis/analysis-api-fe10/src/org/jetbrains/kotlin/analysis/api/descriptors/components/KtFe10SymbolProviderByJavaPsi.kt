@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtSymbolProviderByJavaPsi
 
 @OptIn(KtAnalysisApiInternals::class)
 internal class KtFe10SymbolProviderByJavaPsi(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtSymbolProviderByJavaPsi(), Fe10KtAnalysisSessionComponent {
     override fun getNamedClassSymbol(psiClass: PsiClass): KtNamedClassOrObjectSymbol? {
         return null /*TODO*/

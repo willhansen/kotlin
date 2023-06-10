@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.test.model.TestFile
 
 open class LowLevelFirAnalyzerFacade(
-    val firResolveSession: LLFirResolveSession,
-    val allFirFiles: Map<TestFile, FirFile>,
-    private val diagnosticCheckerFilter: DiagnosticCheckerFilter,
+    konst firResolveSession: LLFirResolveSession,
+    konst allFirFiles: Map<TestFile, FirFile>,
+    private konst diagnosticCheckerFilter: DiagnosticCheckerFilter,
 ) : AbstractFirAnalyzerFacade() {
-    override val scopeSession: ScopeSession
+    override konst scopeSession: ScopeSession
         get() = ScopeSession()
 
     private var resolved: Boolean = false
@@ -36,15 +36,15 @@ open class LowLevelFirAnalyzerFacade(
             resolved = true
         }
 
-        return allFirFiles.values.associateWith { firFile ->
-            val ktFile = firFile.psi as KtFile
-            val diagnostics = ktFile.collectDiagnosticsForFile(firResolveSession, diagnosticCheckerFilter)
+        return allFirFiles.konstues.associateWith { firFile ->
+            konst ktFile = firFile.psi as KtFile
+            konst diagnostics = ktFile.collectDiagnosticsForFile(firResolveSession, diagnosticCheckerFilter)
             @Suppress("UNCHECKED_CAST")
             diagnostics.toList() as List<KtDiagnostic>
         }
     }
 
-    override fun runResolution(): List<FirFile> = allFirFiles.values.toList()
+    override fun runResolution(): List<FirFile> = allFirFiles.konstues.toList()
 
     override fun convertToIr(
         fir2IrExtensions: Fir2IrExtensions,

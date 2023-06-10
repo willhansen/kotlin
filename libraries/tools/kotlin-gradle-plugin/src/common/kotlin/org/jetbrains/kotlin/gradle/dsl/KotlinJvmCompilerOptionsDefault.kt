@@ -9,15 +9,15 @@ internal abstract class KotlinJvmCompilerOptionsDefault @javax.inject.Inject con
     objectFactory: org.gradle.api.model.ObjectFactory
 ) : org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptionsDefault(objectFactory), org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions {
 
-    override val javaParameters: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst javaParameters: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 
-    override val jvmTarget: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JvmTarget> =
+    override konst jvmTarget: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JvmTarget> =
         objectFactory.property(org.jetbrains.kotlin.gradle.dsl.JvmTarget::class.java).convention(org.jetbrains.kotlin.gradle.dsl.JvmTarget.DEFAULT)
 
-    override val moduleName: org.gradle.api.provider.Property<kotlin.String> =
+    override konst moduleName: org.gradle.api.provider.Property<kotlin.String> =
         objectFactory.property(kotlin.String::class.java)
 
-    override val noJdk: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst noJdk: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 }

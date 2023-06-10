@@ -6,7 +6,7 @@
 interface ObservableMap<K, V> : Map<K, V>
 
 abstract class ObservableMutableMap<K, V> : ObservableMap<K, V> {
-    fun put(key: K, value: V): V? = value
+    fun put(key: K, konstue: V): V? = konstue
 
     fun remove(key: K): V? = null
 

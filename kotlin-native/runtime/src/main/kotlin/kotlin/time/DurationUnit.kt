@@ -8,7 +8,7 @@ package kotlin.time
 
 @SinceKotlin("1.6")
 @WasExperimental(ExperimentalTime::class)
-public actual enum class DurationUnit(internal val scale: Double) {
+public actual enum class DurationUnit(internal konst scale: Double) {
     /**
      * Time unit representing one nanosecond, which is 1/1000 of a microsecond.
      */
@@ -40,39 +40,39 @@ public actual enum class DurationUnit(internal val scale: Double) {
 }
 
 @SinceKotlin("1.3")
-internal actual fun convertDurationUnit(value: Double, sourceUnit: DurationUnit, targetUnit: DurationUnit): Double {
-    val sourceCompareTarget = sourceUnit.scale.compareTo(targetUnit.scale)
+internal actual fun convertDurationUnit(konstue: Double, sourceUnit: DurationUnit, targetUnit: DurationUnit): Double {
+    konst sourceCompareTarget = sourceUnit.scale.compareTo(targetUnit.scale)
     return when {
-        sourceCompareTarget > 0 -> value * (sourceUnit.scale / targetUnit.scale)
-        sourceCompareTarget < 0 -> value / (targetUnit.scale / sourceUnit.scale)
-        else -> value
+        sourceCompareTarget > 0 -> konstue * (sourceUnit.scale / targetUnit.scale)
+        sourceCompareTarget < 0 -> konstue / (targetUnit.scale / sourceUnit.scale)
+        else -> konstue
     }
 }
 
 @SinceKotlin("1.5")
-internal actual fun convertDurationUnitOverflow(value: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long {
-    val sourceCompareTarget = sourceUnit.scale.compareTo(targetUnit.scale)
+internal actual fun convertDurationUnitOverflow(konstue: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long {
+    konst sourceCompareTarget = sourceUnit.scale.compareTo(targetUnit.scale)
     return when {
-        sourceCompareTarget > 0 -> value * (sourceUnit.scale / targetUnit.scale).toLong()
-        sourceCompareTarget < 0 -> value / (targetUnit.scale / sourceUnit.scale).toLong()
-        else -> value
+        sourceCompareTarget > 0 -> konstue * (sourceUnit.scale / targetUnit.scale).toLong()
+        sourceCompareTarget < 0 -> konstue / (targetUnit.scale / sourceUnit.scale).toLong()
+        else -> konstue
     }
 }
 
 @SinceKotlin("1.5")
-internal actual fun convertDurationUnit(value: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long {
-    val sourceCompareTarget = sourceUnit.scale.compareTo(targetUnit.scale)
+internal actual fun convertDurationUnit(konstue: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long {
+    konst sourceCompareTarget = sourceUnit.scale.compareTo(targetUnit.scale)
     return when {
         sourceCompareTarget > 0 -> {
-            val scale = (sourceUnit.scale / targetUnit.scale).toLong()
-            val result = value * scale
+            konst scale = (sourceUnit.scale / targetUnit.scale).toLong()
+            konst result = konstue * scale
             when {
-                result / scale == value -> result
-                value > 0 -> Long.MAX_VALUE
+                result / scale == konstue -> result
+                konstue > 0 -> Long.MAX_VALUE
                 else -> Long.MIN_VALUE
             }
         }
-        sourceCompareTarget < 0 -> value / (targetUnit.scale / sourceUnit.scale).toLong()
-        else -> value
+        sourceCompareTarget < 0 -> konstue / (targetUnit.scale / sourceUnit.scale).toLong()
+        else -> konstue
     }
 }

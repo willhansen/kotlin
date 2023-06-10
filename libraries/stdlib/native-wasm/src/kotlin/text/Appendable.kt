@@ -6,32 +6,32 @@
 package kotlin.text
 
 /**
- * An object to which char sequences and values can be appended.
+ * An object to which char sequences and konstues can be appended.
  */
 public actual interface Appendable {
     /**
-     * Appends the specified character [value] to this Appendable and returns this instance.
+     * Appends the specified character [konstue] to this Appendable and returns this instance.
      *
-     * @param value the character to append.
+     * @param konstue the character to append.
      */
-    actual fun append(value: Char): Appendable
+    actual fun append(konstue: Char): Appendable
 
     /**
-     * Appends the specified character sequence [value] to this Appendable and returns this instance.
+     * Appends the specified character sequence [konstue] to this Appendable and returns this instance.
      *
-     * @param value the character sequence to append. If [value] is `null`, then the four characters `"null"` are appended to this Appendable.
+     * @param konstue the character sequence to append. If [konstue] is `null`, then the four characters `"null"` are appended to this Appendable.
      */
-    actual fun append(value: CharSequence?): Appendable
+    actual fun append(konstue: CharSequence?): Appendable
 
     /**
-     * Appends a subsequence of the specified character sequence [value] to this Appendable and returns this instance.
+     * Appends a subsequence of the specified character sequence [konstue] to this Appendable and returns this instance.
      *
-     * @param value the character sequence from which a subsequence is appended. If [value] is `null`,
-     *  then characters are appended as if [value] contained the four characters `"null"`.
+     * @param konstue the character sequence from which a subsequence is appended. If [konstue] is `null`,
+     *  then characters are appended as if [konstue] contained the four characters `"null"`.
      * @param startIndex the beginning (inclusive) of the subsequence to append.
      * @param endIndex the end (exclusive) of the subsequence to append.
      *
-     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
      */
-    actual fun append(value: CharSequence?, startIndex: Int, endIndex: Int): Appendable
+    actual fun append(konstue: CharSequence?, startIndex: Int, endIndex: Int): Appendable
 }

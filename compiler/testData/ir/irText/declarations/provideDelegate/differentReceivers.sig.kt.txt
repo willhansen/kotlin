@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}testO
 //   Public signature: /testO|-1722316900881071484[0]
-val testO: String /* by */
+konst testO: String /* by */
   // CHECK JVM_IR:
   //   Mangled name: #<get-testO>(){}kotlin.String
   //   Public signature: /testO.<get-testO>|6508188275214307126[0]
@@ -13,7 +13,7 @@ val testO: String /* by */
 // CHECK:
 //   Mangled name: {}testK
 //   Public signature: /testK|461235508368952777[0]
-val testK: String /* by */
+konst testK: String /* by */
   // CHECK JVM_IR:
   //   Mangled name: #<get-testK>(){}kotlin.String
   //   Public signature: /testK.<get-testK>|-2909374821716432695[0]
@@ -25,7 +25,7 @@ val testK: String /* by */
 // CHECK:
 //   Mangled name: {}testOK
 //   Public signature: /testOK|2366514158430938845[0]
-val testOK: String
+konst testOK: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-testOK>(){}kotlin.String
   //   Public signature: /testOK.<get-testOK>|-4878971389425188413[0]
@@ -39,21 +39,21 @@ val testOK: String
 //   Public signature: /MyClass|null[0]
 class MyClass {
   // CHECK:
-  //   Mangled name: MyClass{}value
-  //   Public signature: /MyClass.value|1987073854177347439[0]
-  val value: String
+  //   Mangled name: MyClass{}konstue
+  //   Public signature: /MyClass.konstue|1987073854177347439[0]
+  konst konstue: String
     // CHECK JVM_IR:
-    //   Mangled name: MyClass#<get-value>(){}kotlin.String
-    //   Public signature: /MyClass.value.<get-value>|-7202092821145242726[0]
+    //   Mangled name: MyClass#<get-konstue>(){}kotlin.String
+    //   Public signature: /MyClass.konstue.<get-konstue>|-7202092821145242726[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: MyClass#<get-value>(){}
-    //   Public signature: /MyClass.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: MyClass#<get-konstue>(){}
+    //   Public signature: /MyClass.konstue.<get-konstue>|3260093555963109437[0]
     get
 
   // CHECK:
   //   Mangled name: MyClass#<init>(kotlin.String){}
   //   Public signature: /MyClass.<init>|1280618353163213788[0]
-  constructor(value: String) /* primary */
+  constructor(konstue: String) /* primary */
 
 }
 

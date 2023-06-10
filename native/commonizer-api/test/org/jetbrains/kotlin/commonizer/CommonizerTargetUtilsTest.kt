@@ -12,7 +12,7 @@ public class CommonizerTargetUtilsTest {
 
     @Test
     public fun allLeaves() {
-        val target = parseCommonizerTarget("((a, b), (c, d), (e, (f, g)))")
+        konst target = parseCommonizerTarget("((a, b), (c, d), (e, (f, g)))")
         assertEquals(
             setOf(
                 LeafCommonizerTarget("a"),

@@ -1,9 +1,9 @@
 FILE fqName:<root> fileName:/kt35550.kt
   CLASS INTERFACE name:I modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.I
-    PROPERTY name:id visibility:public modality:OPEN [val]
+    PROPERTY name:id visibility:public modality:OPEN [konst]
       FUN name:<get-id> visibility:public modality:OPEN <T> ($this:<root>.I, $receiver:T of <root>.I.<get-id>) returnType:T of <root>.I.<get-id>
-        correspondingProperty: PROPERTY name:id visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY name:id visibility:public modality:OPEN [konst]
         TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
         $this: VALUE_PARAMETER name:<this> type:<root>.I
         $receiver: VALUE_PARAMETER name:<this> type:T of <root>.I.<get-id>
@@ -30,11 +30,11 @@ FILE fqName:<root> fileName:/kt35550.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:A modality:FINAL visibility:public superTypes:[<root>.I]'
-    PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [val]
+    PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [konst]
       overridden:
         public open id: T of <root>.I.<get-id>
       FUN DELEGATED_MEMBER name:<get-id> visibility:public modality:OPEN <T> ($this:<root>.A, $receiver:T of <root>.A.<get-id>) returnType:T of <root>.A.<get-id>
-        correspondingProperty: PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [konst]
         overridden:
           public open fun <get-id> <T> (): T of <root>.I.<get-id> declared in <root>.I
         TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false

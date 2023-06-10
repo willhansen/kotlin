@@ -15,7 +15,7 @@ object ResultOperation : Operation<Result<Int>> {
 // MODULE: main(lib)
 // FILE: main.kt
 fun box(): String {
-    val x = ResultOperation.performOperation()
+    konst x = ResultOperation.performOperation()
     if ("$x" != "Success(1)") return "$x"
     return "OK"
 }

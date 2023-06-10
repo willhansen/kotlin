@@ -3,8 +3,8 @@
 package kt1293
 
 fun main() {
-    val intArray = arrayOfNulls<Int>(10)
-    val i : Int = <!TYPE_MISMATCH!>intArray[0]<!>
+    konst intArray = arrayOfNulls<Int>(10)
+    konst i : Int = <!TYPE_MISMATCH!>intArray[0]<!>
     requiresInt(<!TYPE_MISMATCH!>intArray[0]<!>)
 }
 

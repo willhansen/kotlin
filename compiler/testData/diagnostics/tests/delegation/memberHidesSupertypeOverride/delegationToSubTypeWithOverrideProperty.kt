@@ -9,7 +9,7 @@ public interface Base {
 public interface Base2 : Base {
     override var test: String
             get() = "OK2"
-            set(value) {}
+            set(konstue) {}
 }
 
 class Delegate : Base2 {

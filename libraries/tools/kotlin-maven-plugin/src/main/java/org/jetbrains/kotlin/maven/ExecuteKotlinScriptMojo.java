@@ -76,7 +76,7 @@ import static org.jetbrains.kotlin.cli.jvm.JvmArgumentsKt.configureJdkHomeFromSy
  * <br/>
  * <pre><code>
  *     import org.jetbrains.kotlin.maven.ExecuteKotlinScriptMojo
- *     val mojo = ExecuteKotlinScriptMojo.INSTANCE
+ *     konst mojo = ExecuteKotlinScriptMojo.INSTANCE
  *     mojo.getLog().info("kotlin build script accessing build info of ${mojo.project.artifactId} project")
  * </code></pre>
  */

@@ -10,7 +10,7 @@ infix fun Int.good(x: Int) {}
 
 <!WRONG_MODIFIER_TARGET!>infix<!> typealias B = A
 
-<!WRONG_MODIFIER_TARGET!>infix<!> val x = 1
+<!WRONG_MODIFIER_TARGET!>infix<!> konst x = 1
 
 class C {
     infix fun good(x: Int) {}

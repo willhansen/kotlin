@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.analysis.low.level.api.fir.fir.caches
 import org.jetbrains.kotlin.fir.caches.FirLazyValue
 
 internal class FirThreadSafeValue<V>(createValue: () -> V) : FirLazyValue<V>() {
-    private val lazyValue by lazy(LazyThreadSafetyMode.SYNCHRONIZED, createValue)
+    private konst lazyValue by lazy(LazyThreadSafetyMode.SYNCHRONIZED, createValue)
     override fun getValue(): V = lazyValue
 }

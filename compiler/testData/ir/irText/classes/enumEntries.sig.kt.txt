@@ -17,14 +17,14 @@ enum class MyEnum : Enum<MyEnum> {
   Ok
 
   // CHECK JVM_IR:
-  //   Mangled name: MyEnum#valueOf#static(kotlin.String){}MyEnum
-  //   Public signature: /MyEnum.valueOf|4316550590519800984[0]
-  fun valueOf(value: String): MyEnum
+  //   Mangled name: MyEnum#konstueOf#static(kotlin.String){}MyEnum
+  //   Public signature: /MyEnum.konstueOf|4316550590519800984[0]
+  fun konstueOf(konstue: String): MyEnum
 
   // CHECK JVM_IR:
-  //   Mangled name: MyEnum#values#static(){}kotlin.Array<MyEnum>
-  //   Public signature: /MyEnum.values|3097625172661156808[0]
-  fun values(): Array<MyEnum>
+  //   Mangled name: MyEnum#konstues#static(){}kotlin.Array<MyEnum>
+  //   Public signature: /MyEnum.konstues|3097625172661156808[0]
+  fun konstues(): Array<MyEnum>
 
   // CHECK JVM_IR:
   //   Mangled name: MyEnum#clone(){}kotlin.Any
@@ -54,7 +54,7 @@ enum class MyEnum : Enum<MyEnum> {
   // CHECK:
   //   Mangled name: MyEnum#static{}entries
   //   Public signature: /MyEnum.entries|-5134227801081826149[0]
-  val entries: EnumEntries<MyEnum>
+  konst entries: EnumEntries<MyEnum>
     // CHECK JVM_IR:
     //   Mangled name: MyEnum#<get-entries>#static(){}kotlin.enums.EnumEntries<MyEnum>
     //   Public signature: /MyEnum.entries.<get-entries>|-3922959509726908718[0]
@@ -63,7 +63,7 @@ enum class MyEnum : Enum<MyEnum> {
   // CHECK:
   //   Mangled name: MyEnum{}name
   //   Public signature: /MyEnum.name|4231860309499509769[0]
-  /* fake */ override val name: String
+  /* fake */ override konst name: String
     // CHECK JVM_IR:
     //   Mangled name: MyEnum#<get-name>(){}kotlin.String
     //   Public signature: /MyEnum.name.<get-name>|-8006111524522882650[0]
@@ -72,7 +72,7 @@ enum class MyEnum : Enum<MyEnum> {
   // CHECK:
   //   Mangled name: MyEnum{}ordinal
   //   Public signature: /MyEnum.ordinal|1912745122988592376[0]
-  /* fake */ override val ordinal: Int
+  /* fake */ override konst ordinal: Int
     // CHECK JVM_IR:
     //   Mangled name: MyEnum#<get-ordinal>(){}kotlin.Int
     //   Public signature: /MyEnum.ordinal.<get-ordinal>|-6902664390061762634[0]

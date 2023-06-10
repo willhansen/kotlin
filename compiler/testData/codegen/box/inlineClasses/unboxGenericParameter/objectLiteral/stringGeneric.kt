@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 fun <T: String> underlying(a: IC<T>): T = bar(a, object : IFace<IC<T>, T> {
-    override fun call(ic: IC<T>): T = ic.value
+    override fun call(ic: IC<T>): T = ic.konstue
 })
 
 fun <T: String> extension(a: IC<T>): T = bar(a, object : IFace<IC<T>, T> {
@@ -22,17 +22,17 @@ interface IFace<T, R> {
     fun call(ic: T): R
 }
 
-fun <T, R> bar(value: T, f: IFace<T, R>): R {
-    return f.call(value)
+fun <T, R> bar(konstue: T, f: IFace<T, R>): R {
+    return f.call(konstue)
 }
 
-fun <T: String> IC<T>.extensionValue(): T = value
+fun <T: String> IC<T>.extensionValue(): T = konstue
 
-fun <T: String> normalValue(ic: IC<T>): T = ic.value
+fun <T: String> normalValue(ic: IC<T>): T = ic.konstue
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: String>(val value: T) {
-    fun dispatchValue(): T = value
+konstue class IC<T: String>(konst konstue: T) {
+    fun dispatchValue(): T = konstue
 }
 
 fun box(): String {

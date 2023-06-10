@@ -9,25 +9,25 @@ import android.os.Parcelable
 import java.io.Serializable
 
 interface IJHelp {
-    val j1: String
+    konst j1: String
 }
 
 class JHelp(override var j1: String): IJHelp, Serializable {
-    val j2 = 9
+    konst j2 = 9
 }
 
 @Parcelize
-class J(val j: @RawValue JHelp) : Parcelable
+class J(konst j: @RawValue JHelp) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = J(JHelp("A"))
+    konst test = J(JHelp("A"))
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = parcelableCreator<J>().createFromParcel(parcel)
+    konst test2 = parcelableCreator<J>().createFromParcel(parcel)
 
     assert(test.j.j1 == test2.j.j1)
 }

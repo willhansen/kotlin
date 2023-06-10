@@ -7,14 +7,14 @@ class P {
 
     var y : Int = 0
 
-    val other = P();
+    konst other = P();
 
     init {
         x = 23
         other.x = 4
     }
 
-    val testInGetter : Int
+    konst testInGetter : Int
        get() {
            x = 33
            return 3
@@ -22,7 +22,7 @@ class P {
 }
 
 fun foo() {
-    val p = P()
+    konst p = P()
     p.<!INVISIBLE_SETTER!>x<!> = 34 //should be an error here
     p.y = 23
 
@@ -32,12 +32,12 @@ fun foo() {
 }
 
 class R {
-    val p = P();
+    konst p = P();
     init {
         p.<!INVISIBLE_SETTER!>x<!> = 42
     }
 
-    val testInGetterInOtherClass : Int
+    konst testInGetterInOtherClass : Int
         get() {
             p.<!INVISIBLE_SETTER!>x<!> = 33
             return 3
@@ -45,7 +45,7 @@ class R {
 }
 
 fun test() {
-    val o = object {
+    konst o = object {
         fun run() {
             <!UNRESOLVED_REFERENCE!>p<!>.x = 43
         }

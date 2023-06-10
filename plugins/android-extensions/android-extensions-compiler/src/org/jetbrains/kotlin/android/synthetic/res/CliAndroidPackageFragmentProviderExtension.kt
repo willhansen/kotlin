@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.android.synthetic.res
 import com.intellij.openapi.project.Project
 import org.jetbrains.kotlin.analyzer.ModuleInfo
 
-class CliAndroidPackageFragmentProviderExtension(private val isExperimental: Boolean) : AndroidPackageFragmentProviderExtension() {
+class CliAndroidPackageFragmentProviderExtension(private konst isExperimental: Boolean) : AndroidPackageFragmentProviderExtension() {
     override fun isExperimental(moduleInfo: ModuleInfo?): Boolean = isExperimental
 
     override fun getLayoutXmlFileManager(project: Project, moduleInfo: ModuleInfo?): AndroidLayoutXmlFileManager? {

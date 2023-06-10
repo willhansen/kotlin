@@ -26,7 +26,7 @@ public abstract class AbstractSet<out E> protected constructor() : AbstractColle
     }
 
     /**
-     * Returns the hash code value for this set.
+     * Returns the hash code konstue for this set.
      */
     override fun hashCode(): Int = unorderedHashCode(this)
 

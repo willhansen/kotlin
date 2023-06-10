@@ -41,7 +41,7 @@ abstract class PrimitiveNumberRangeIntrinsicRangeValue(
     rangeCall: ResolvedCall<out CallableDescriptor>
 ) : CallIntrinsicRangeValue(rangeCall) {
 
-    protected val elementKotlinType =
+    protected konst elementKotlinType =
         rangeCall.resultingDescriptor.returnType?.let { getRangeOrProgressionElementType(it) }
             ?: throw AssertionError("Unexpected range ")
 
@@ -58,15 +58,15 @@ abstract class PrimitiveNumberRangeIntrinsicRangeValue(
         operatorReference: KtSimpleNameExpression,
         resolvedCall: ResolvedCall<out CallableDescriptor>
     ): InExpressionGenerator {
-        val rangeContainsTypeInfo = getRangeContainsTypeInfo(resolvedCall)
+        konst rangeContainsTypeInfo = getRangeContainsTypeInfo(resolvedCall)
             ?: return CallBasedInExpressionGenerator(codegen, operatorReference)
-        val comparisonGenerator = getComparisonGeneratorForRangeContainsCall(codegen, rangeContainsTypeInfo)
+        konst comparisonGenerator = getComparisonGeneratorForRangeContainsCall(codegen, rangeContainsTypeInfo)
             ?: return CallBasedInExpressionGenerator(codegen, operatorReference)
 
         return when (comparisonGenerator.comparedType) {
             Type.DOUBLE_TYPE, Type.FLOAT_TYPE -> {
-                val rangeLiteral = getBoundedValue(codegen) as? BoundedValue
-                    ?: throw AssertionError("Floating point intrinsic range value should be a range literal")
+                konst rangeLiteral = getBoundedValue(codegen) as? BoundedValue
+                    ?: throw AssertionError("Floating point intrinsic range konstue should be a range literal")
                 InFloatingPointRangeLiteralExpressionGenerator(operatorReference, rangeLiteral, comparisonGenerator, codegen.frameMap)
             }
             else ->
@@ -79,8 +79,8 @@ abstract class PrimitiveNumberRangeIntrinsicRangeValue(
     protected abstract fun getBoundedValue(codegen: ExpressionCodegen): BoundedValue
 
     protected fun StackValue.coerceToRangeElementTypeIfRequired(): StackValue {
-        val rangeKotlinType = rangeCall.resultingDescriptor.returnType!!
-        val rangeElementKotlinType = getRangeOrProgressionElementType(rangeKotlinType)!!
+        konst rangeKotlinType = rangeCall.resultingDescriptor.returnType!!
+        konst rangeElementKotlinType = getRangeOrProgressionElementType(rangeKotlinType)!!
         return when {
             KotlinBuiltIns.isUInt(rangeElementKotlinType) ->
                 coerceUnsignedToUInt(this, rangeElementKotlinType)
@@ -99,11 +99,11 @@ abstract class PrimitiveNumberRangeIntrinsicRangeValue(
         step: Int,
         isStartInclusive: Boolean = true
     ): ForLoopGenerator? {
-        val endConstValue = codegen.getCompileTimeConstant(endExpression) as? IntegerValueConstant<*> ?: return null
+        konst endConstValue = codegen.getCompileTimeConstant(endExpression) as? IntegerValueConstant<*> ?: return null
 
         return when (endConstValue) {
             is ByteValue -> {
-                val endIntValue = endConstValue.value.toInt()
+                konst endIntValue = endConstValue.konstue.toInt()
                 if (isProhibitedIntConstEndValue(step, endIntValue))
                     null
                 else
@@ -111,7 +111,7 @@ abstract class PrimitiveNumberRangeIntrinsicRangeValue(
             }
 
             is ShortValue -> {
-                val endIntValue = endConstValue.value.toInt()
+                konst endIntValue = endConstValue.konstue.toInt()
                 if (isProhibitedIntConstEndValue(step, endIntValue))
                     null
                 else
@@ -119,7 +119,7 @@ abstract class PrimitiveNumberRangeIntrinsicRangeValue(
             }
 
             is IntValue -> {
-                val endIntValue = endConstValue.value
+                konst endIntValue = endConstValue.konstue
                 if (isProhibitedIntConstEndValue(step, endIntValue))
                     null
                 else
@@ -127,7 +127,7 @@ abstract class PrimitiveNumberRangeIntrinsicRangeValue(
             }
 
             is CharValue -> {
-                val endCharValue = endConstValue.value
+                konst endCharValue = endConstValue.konstue
                 if (isProhibitedCharConstEndValue(step, endCharValue))
                     null
                 else
@@ -135,7 +135,7 @@ abstract class PrimitiveNumberRangeIntrinsicRangeValue(
             }
 
             is LongValue -> {
-                val endLongValue = endConstValue.value
+                konst endLongValue = endConstValue.konstue
                 if (isProhibitedLongConstEndValue(step, endLongValue))
                     null
                 else

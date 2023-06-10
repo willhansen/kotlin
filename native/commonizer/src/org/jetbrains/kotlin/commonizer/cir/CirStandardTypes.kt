@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.commonizer.cir
 import org.jetbrains.kotlin.commonizer.utils.ANY_CLASS_ID
 
 object CirStandardTypes {
-    val ANY: CirClassType = CirClassType.createInterned(
+    konst ANY: CirClassType = CirClassType.createInterned(
         classId = ANY_CLASS_ID,
         outerType = null,
         arguments = emptyList(),

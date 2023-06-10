@@ -20,15 +20,15 @@ import org.jetbrains.kotlin.js.backend.ast.*
 import java.util.*
 
 class ScopeContext(scope: JsScope) {
-    private val rootScope = generateSequence(scope) { it.parent }.first { it is JsRootScope }
-    private val scopes = Stack<JsScope>()
+    private konst rootScope = generateSequence(scope) { it.parent }.first { it is JsRootScope }
+    private konst scopes = Stack<JsScope>()
 
     init {
         scopes.push(scope)
     }
 
     fun enterFunction(): JsFunction {
-        val fn = JsFunction(currentScope, "<js function>")
+        konst fn = JsFunction(currentScope, "<js function>")
         enterScope(fn.scope)
         return fn
     }
@@ -39,7 +39,7 @@ class ScopeContext(scope: JsScope) {
     }
 
     fun enterCatch(ident: String): JsCatch {
-        val jsCatch = JsCatch(currentScope, ident)
+        konst jsCatch = JsCatch(currentScope, ident)
         enterScope(jsCatch.scope)
         return jsCatch
     }
@@ -71,7 +71,7 @@ class ScopeContext(scope: JsScope) {
 
     private fun exitScope() = scopes.pop()
 
-    private val currentScope: JsScope
+    private konst currentScope: JsScope
         get() = scopes.peek()
 }
 

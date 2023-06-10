@@ -16,7 +16,7 @@ public class GetterTest {
 // FILE: test.kt
 
 fun box(): String {
-    val obj = GetterTest()
+    konst obj = GetterTest()
 
     obj.primitiveBoolean
     obj.getPrimitiveBoolean()

@@ -3,7 +3,7 @@
 
 fun box() {
     baz(foo())
-    val a = foo()
+    konst a = foo()
     baz(a)
 }
 // FILE: test1.kt

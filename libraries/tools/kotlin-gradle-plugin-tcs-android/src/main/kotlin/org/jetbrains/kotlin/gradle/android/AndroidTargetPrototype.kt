@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.external.ExternalKotlinTargetDescr
 
 @OptIn(ExternalVariantApi::class)
 fun KotlinMultiplatformExtension.androidTargetPrototype(): PrototypeAndroidTarget {
-    val project = this.project
-    val androidExtension = project.extensions.getByType<LibraryExtension>()
+    konst project = this.project
+    konst androidExtension = project.extensions.getByType<LibraryExtension>()
 
     /*
     Set a variant filter and only allow 'debug'.
@@ -45,7 +45,7 @@ fun KotlinMultiplatformExtension.androidTargetPrototype(): PrototypeAndroidTarge
     This uses the 'KotlinPlatformType.jvm' instead of androidJvm, since from the perspective of
     Kotlin, this is just another 'jvm' like target (using the jvm compiler)
      */
-    val androidTarget = createExternalKotlinTarget<PrototypeAndroidTarget> {
+    konst androidTarget = createExternalKotlinTarget<PrototypeAndroidTarget> {
         targetName = "android"
         platformType = KotlinPlatformType.jvm
         targetFactory = TargetFactory { delegate -> PrototypeAndroidTarget(delegate, PrototypeAndroidDsl(31)) }
@@ -113,9 +113,9 @@ fun KotlinMultiplatformExtension.androidTargetPrototype(): PrototypeAndroidTarge
         Create Compilations: main, unitTest and instrumentedTest
         (as proposed in the new Multiplatform/Android SourceSetLayout v2)
          */
-        val mainCompilation = androidTarget.createAndroidCompilation("main")
-        val unitTestCompilation = androidTarget.createAndroidCompilation("unitTest")
-        val instrumentedTestCompilation = androidTarget.createAndroidCompilation("instrumentedTest")
+        konst mainCompilation = androidTarget.createAndroidCompilation("main")
+        konst unitTestCompilation = androidTarget.createAndroidCompilation("unitTest")
+        konst instrumentedTestCompilation = androidTarget.createAndroidCompilation("instrumentedTest")
 
         /*
         Associate unitTest/instrumentedTest compilations with main

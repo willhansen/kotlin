@@ -44,7 +44,7 @@ abstract class KtContractDescriptionVisitor<out R, in D, Type, Diagnostic> {
     open fun visitIsNullPredicate(isNullPredicate: KtIsNullPredicate<Type, Diagnostic>, data: D): R = visitBooleanExpression(isNullPredicate, data)
 
     // Values
-    open fun visitValue(value: KtContractDescriptionValue<Type, Diagnostic>, data: D): R = visitContractDescriptionElement(value, data)
+    open fun visitValue(konstue: KtContractDescriptionValue<Type, Diagnostic>, data: D): R = visitContractDescriptionElement(konstue, data)
 
     open fun visitConstantDescriptor(constantReference: KtConstantReference<Type, Diagnostic>, data: D): R = visitValue(constantReference, data)
 
@@ -54,14 +54,14 @@ abstract class KtContractDescriptionVisitor<out R, in D, Type, Diagnostic> {
     open fun visitErroneousConstantReference(erroneousConstantReference: KtErroneousConstantReference<Type, Diagnostic>, data: D): R =
         visitConstantDescriptor(erroneousConstantReference, data)
 
-    open fun visitValueParameterReference(valueParameterReference: KtValueParameterReference<Type, Diagnostic>, data: D): R =
-        visitValue(valueParameterReference, data)
+    open fun visitValueParameterReference(konstueParameterReference: KtValueParameterReference<Type, Diagnostic>, data: D): R =
+        visitValue(konstueParameterReference, data)
 
     open fun visitBooleanValueParameterReference(booleanValueParameterReference: KtBooleanValueParameterReference<Type, Diagnostic>, data: D): R =
         visitValueParameterReference(booleanValueParameterReference, data)
 
-    open fun visitErroneousValueParameterReference(valueParameterReference: KtErroneousValueParameterReference<Type, Diagnostic>, data: D): R =
-        visitValueParameterReference(valueParameterReference, data)
+    open fun visitErroneousValueParameterReference(konstueParameterReference: KtErroneousValueParameterReference<Type, Diagnostic>, data: D): R =
+        visitValueParameterReference(konstueParameterReference, data)
 
     // Error
     open fun visitErroneousElement(element: KtErroneousContractElement<Type, Diagnostic>, data: D): R =

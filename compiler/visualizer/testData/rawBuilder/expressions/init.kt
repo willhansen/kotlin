@@ -1,10 +1,10 @@
 class WithInit(x: Int) {
 //      Int
 //      │
-    val x: Int
+    konst x: Int
 
     init {
-//           val (WithInit).x: Int
+//           konst (WithInit).x: Int
 //           │   WithInit.<init>.x: Int
 //           │   │
         this.x = x

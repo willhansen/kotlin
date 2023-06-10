@@ -27,7 +27,7 @@ abstract class AbstractIncrementalMultiModuleJsKlibCompilerRunnerTest :
             irOnly = true
         }
 
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = super.buildLogFinder.copy(isKlibEnabled = true)
 
     override fun makeForSingleModule(
@@ -54,27 +54,27 @@ abstract class AbstractIncrementalMultiModuleJsKlibCompilerRunnerTest :
         )
     }
 
-    override val modulesApiHistory: ModulesApiHistoryJs by lazy {
+    override konst modulesApiHistory: ModulesApiHistoryJs by lazy {
         ModulesApiHistoryJs(incrementalModuleInfo)
     }
 
-    override val scopeExpansionMode: CompileScopeExpansionMode get() = CompileScopeExpansionMode.NEVER
+    override konst scopeExpansionMode: CompileScopeExpansionMode get() = CompileScopeExpansionMode.NEVER
 
     override fun String.asOutputFileName(): String = klib
     override fun String.asArtifactFileName(): String = klib
 
     override fun transformToDependency(moduleName: String, rawArtifact: File): File {
-        val dependencyFile = File(repository, moduleName.klib)
+        konst dependencyFile = File(repository, moduleName.klib)
         rawArtifact.copyTo(dependencyFile)
         return dependencyFile
     }
 
     override fun K2JSCompilerArguments.updateForSingleModule(moduleDependencies: List<String>, outFile: File) {
-        val additionalDeps = moduleDependencies.joinToString(File.pathSeparator) {
+        konst additionalDeps = moduleDependencies.joinToString(File.pathSeparator) {
             File(repository, it.klib).absolutePath
         }
 
-        val sb = StringBuilder(STDLIB_DEPENDENCY)
+        konst sb = StringBuilder(STDLIB_DEPENDENCY)
         if (additionalDeps.isNotBlank()) {
             sb.append(File.pathSeparator)
             sb.append(additionalDeps)
@@ -86,8 +86,8 @@ abstract class AbstractIncrementalMultiModuleJsKlibCompilerRunnerTest :
     }
 
     companion object {
-        private val String.klib: String get() = "$this.$KLIB_FILE_EXTENSION"
+        private konst String.klib: String get() = "$this.$KLIB_FILE_EXTENSION"
 
-        private const val STDLIB_DEPENDENCY = "build/js-ir-runtime/full-runtime.klib"
+        private const konst STDLIB_DEPENDENCY = "build/js-ir-runtime/full-runtime.klib"
     }
 }

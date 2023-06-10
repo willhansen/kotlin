@@ -37,19 +37,19 @@ abstract class MppCInteropDependencyTransformationIT : BaseGradleIT() {
         )
     }
 
-    protected val projectDependencyOptions
+    protected konst projectDependencyOptions
         get() = defaultBuildOptions().copy(
             freeCommandLineArgs = defaultBuildOptions().freeCommandLineArgs + "-PdependencyMode=project"
         )
 
-    protected val repositoryDependencyOptions
+    protected konst repositoryDependencyOptions
         get() = defaultBuildOptions().copy(
             freeCommandLineArgs = defaultBuildOptions().freeCommandLineArgs + "-PdependencyMode=repository"
         )
 
     class ComplexProject : MppCInteropDependencyTransformationIT() {
 
-        private val project by lazy { Project("cinterop-MetadataDependencyTransformation") }
+        private konst project by lazy { Project("cinterop-MetadataDependencyTransformation") }
 
         @Test
         fun `test - compile project - dependencyMode=project`() {
@@ -232,8 +232,8 @@ abstract class MppCInteropDependencyTransformationIT : BaseGradleIT() {
                 assertTasksUpToDate(":p3:transformNativeMainCInteropDependenciesMetadata")
             }
 
-            val p3BuildGradleKts = project.projectDir.resolve("p3/build.gradle.kts")
-            val p3BuildGradleKtsContent = p3BuildGradleKts.readText()
+            konst p3BuildGradleKts = project.projectDir.resolve("p3/build.gradle.kts")
+            konst p3BuildGradleKtsContent = p3BuildGradleKts.readText()
 
             // Remove dependency on p2 | Task should re-run
             p3BuildGradleKts.writeText(p3BuildGradleKtsContent.replace("""implementation(project(":p2"))""", ""))
@@ -291,7 +291,7 @@ abstract class MppCInteropDependencyTransformationIT : BaseGradleIT() {
     }
 
     class KT50952 : MppCInteropDependencyTransformationIT() {
-        private val project by lazy { Project("cinterop-MetadataDependencyTransformation-kt-50952") }
+        private konst project by lazy { Project("cinterop-MetadataDependencyTransformation-kt-50952") }
 
         @Test
         fun `test UP-TO-DATE - when changing consumer targets - dependencyMode=repository`() {
@@ -315,7 +315,7 @@ abstract class MppCInteropDependencyTransformationIT : BaseGradleIT() {
                 assertTasksUpToDate(":p2:transformCommonMainCInteropDependenciesMetadata")
             }
 
-            val optionsWithAdditionalTargetEnabled = options.withFreeCommandLineArgument("-Pp2.enableAdditionalTarget")
+            konst optionsWithAdditionalTargetEnabled = options.withFreeCommandLineArgument("-Pp2.enableAdditionalTarget")
 
             project.build(":p2:transformCommonMainCInteropDependenciesMetadata", options = optionsWithAdditionalTargetEnabled) {
                 assertSuccessful()

@@ -7,9 +7,9 @@
 // 3 java/lang/invoke/LambdaMetafactory
 
 fun box(): String {
-    val lam1 = {
-        val lamO = { "O" }
-        val lamK = { "K" }
+    konst lam1 = {
+        konst lamO = { "O" }
+        konst lamK = { "K" }
         lamO() + lamK()
     }
     return lam1()

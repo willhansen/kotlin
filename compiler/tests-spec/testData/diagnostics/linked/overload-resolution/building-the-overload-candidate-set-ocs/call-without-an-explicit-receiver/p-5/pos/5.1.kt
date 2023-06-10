@@ -52,7 +52,7 @@ public fun <T> emptyArray(): Array<T> = TODO()
 package testsCase2
 import testsCase2.*
 
-public val emptyArray: A
+public konst emptyArray: A
     get() = A()
 
 class A {
@@ -80,7 +80,7 @@ public fun <T> emptyArray(): Array<T> = TODO()
 package testsCase3
 import testsCase3.*
 
-public val emptyArray: A
+public konst emptyArray: A
     get() = A()
 
 class A {

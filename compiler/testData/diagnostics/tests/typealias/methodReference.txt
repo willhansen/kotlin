@@ -1,6 +1,6 @@
 package
 
-public val cf: kotlin.reflect.KFunction1<CA /* = C */, kotlin.Unit>
+public konst cf: kotlin.reflect.KFunction1<CA /* = C */, kotlin.Unit>
 
 public final class C {
     public constructor C()

@@ -46,13 +46,13 @@ fun getJavaPrimitiveType7():Class<*>? {
 }
 
 fun getJavaPrimitiveType8():Class<*>? {
-    val i:Int? = 1
+    konst i:Int? = 1
     // GETSTATIC java/lang/Integer.TYPE
     return i!!::class.javaPrimitiveType
 }
 
 fun getJavaPrimitiveType9():Class<*>? {
-    val i:Int = 1
+    konst i:Int = 1
     // GETSTATIC java/lang/Integer.TYPE
     return i::class.javaPrimitiveType
 }

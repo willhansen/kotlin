@@ -8,14 +8,14 @@ import kotlin.experimental.ExperimentalTypeInference
 @OptIn(ExperimentalTypeInference::class)
 fun <R> scopedFlow(block: suspend CoroutineScope.(FlowCollector<R>) -> Unit): Flow<R> =
     flow {
-        val collector = this
+        konst collector = this
         flowScope { block(collector) }
     }
 
 public fun <T> Flow<T>.onCompletion(
     action: suspend FlowCollector<T>.(cause: Throwable?) -> Unit
 ): Flow<T> = unsafeFlow {
-    val safeCollector = SafeCollector(this)
+    konst safeCollector = SafeCollector(this)
     safeCollector.invokeSafely(action)
 }
 
@@ -32,22 +32,22 @@ public fun <T> Flow<T>.onCompletion(action: suspend (cause: Throwable?) -> Unit)
     onCompletion { action(it) }
 
 private fun CoroutineScope.asFairChannel(flow: Flow<*>): ReceiveChannel<Any> = produce {
-    val channel = channel as ChannelCoroutine<Any>
-    flow.collect { value ->
-        return@collect channel.sendFair(value ?: Any())
+    konst channel = channel as ChannelCoroutine<Any>
+    flow.collect { konstue ->
+        return@collect channel.sendFair(konstue ?: Any())
     }
 }
 
 private fun CoroutineScope.asChannel(flow: Flow<*>): ReceiveChannel<Any> = produce {
-    flow.collect { value ->
-        return@collect channel.send(value ?: Any())
+    flow.collect { konstue ->
+        return@collect channel.send(konstue ?: Any())
     }
 }
 
 class SafeCollector<T> constructor(
-    internal val collector: FlowCollector<T>
+    internal konst collector: FlowCollector<T>
 ) : FlowCollector<T> {
-    override suspend fun emit(value: T) {}
+    override suspend fun emit(konstue: T) {}
 }
 
 @OptIn(ExperimentalTypeInference::class)
@@ -56,7 +56,7 @@ fun <T> flow(block: suspend FlowCollector<T>.() -> Unit): Flow<T> = TODO()
 @OptIn(ExperimentalTypeInference::class)
 suspend fun <R> flowScope(block: suspend CoroutineScope.() -> R): R = TODO()
 
-suspend inline fun <T> Flow<T>.collect(crossinline action: suspend (value: T) -> Unit) {}
+suspend inline fun <T> Flow<T>.collect(crossinline action: suspend (konstue: T) -> Unit) {}
 
 open class ChannelCoroutine<E> {
     suspend fun sendFair(element: E) {}
@@ -68,7 +68,7 @@ interface Flow<out T> {
 }
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 interface ReceiveChannel<out E>
@@ -79,7 +79,7 @@ fun <E> CoroutineScope.produce(
 ): ReceiveChannel<E> = TODO()
 
 interface ProducerScope<in E> : CoroutineScope, SendChannel<E> {
-    val channel: SendChannel<E>
+    konst channel: SendChannel<E>
 }
 
 interface SendChannel<in E> {

@@ -7,9 +7,9 @@ package org.jetbrains.kotlin.commonizer.mergedtree
 
 import org.jetbrains.kotlin.commonizer.cir.CirEntityId
 
-class AssociatedClassifierIds(val ids: Set<CirEntityId>) {
+class AssociatedClassifierIds(konst ids: Set<CirEntityId>) {
 
-    private val _hashCode = ids.hashCode()
+    private konst _hashCode = ids.hashCode()
 
     override fun hashCode(): Int = _hashCode
 

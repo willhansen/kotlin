@@ -5,7 +5,7 @@ class JetToken
 == JetKeywordCompletionContributor ==
 public open class JetKeywordCompletionContributor() {
     init {
-        val inTopLevel = 1.0
+        konst inTopLevel = 1.0
 
         BunchKeywordRegister()
                 .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel)
@@ -180,114 +180,114 @@ add(OBJECT_KEYWORD, unresolvedCode)                                             
 BunchKeywordRegister() .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FINAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(OPEN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERNAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PRIVATE_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PROTECTED_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PUBLIC_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(CLASS_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(ENUM_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FUN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(GET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(SET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERFACE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAR_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(TYPE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(IMPORT_KEYWORD, inTopLevel) .add(PACKAGE_KEYWORD, inTopLevel) .add(OVERRIDE_KEYWORD, inTopLevel) .add(IN_KEYWORD, inTopLevel, inTopLevel) .add(OUT_KEYWORD, inTopLevel) .add(OBJECT_KEYWORD, unresolvedCode)                                           <v105>: JetKeywordCompletionContributor.BunchKeywordRegister   COPY
 registerAll()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <v106>: *                                                      NEW: call(registerAll(), registerAll|<v105>) -> <v106>
 BunchKeywordRegister() .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FINAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(OPEN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERNAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PRIVATE_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PROTECTED_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PUBLIC_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(CLASS_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(ENUM_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FUN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(GET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(SET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERFACE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAR_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(TYPE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(IMPORT_KEYWORD, inTopLevel) .add(PACKAGE_KEYWORD, inTopLevel) .add(OVERRIDE_KEYWORD, inTopLevel) .add(IN_KEYWORD, inTopLevel, inTopLevel) .add(OUT_KEYWORD, inTopLevel) .add(OBJECT_KEYWORD, unresolvedCode) .registerAll()                            <v106>: *                                                      COPY
-{ val inTopLevel = 1.0 BunchKeywordRegister() .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FINAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(OPEN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERNAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PRIVATE_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PROTECTED_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PUBLIC_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(CLASS_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(ENUM_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FUN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(GET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(SET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERFACE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAR_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(TYPE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(IMPORT_KEYWORD, inTopLevel) .add(PACKAGE_KEYWORD, inTopLevel) .add(OVERRIDE_KEYWORD, inTopLevel) .add(IN_KEYWORD, inTopLevel, inTopLevel) .add(OUT_KEYWORD, inTopLevel) .add(OBJECT_KEYWORD, unresolvedCode) .registerAll() }   <v106>: *                                                      COPY
+{ konst inTopLevel = 1.0 BunchKeywordRegister() .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FINAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(OPEN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERNAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PRIVATE_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PROTECTED_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PUBLIC_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(CLASS_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(ENUM_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FUN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(GET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(SET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERFACE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAR_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(TYPE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(IMPORT_KEYWORD, inTopLevel) .add(PACKAGE_KEYWORD, inTopLevel) .add(OVERRIDE_KEYWORD, inTopLevel) .add(IN_KEYWORD, inTopLevel, inTopLevel) .add(OUT_KEYWORD, inTopLevel) .add(OBJECT_KEYWORD, unresolvedCode) .registerAll() }   <v106>: *                                                      COPY
 =====================
 == ABSTRACT_KEYWORD ==
-val ABSTRACT_KEYWORD = JetToken()
+konst ABSTRACT_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == FINAL_KEYWORD ==
-val FINAL_KEYWORD OPEN_KEYWORD = JetToken()
+konst FINAL_KEYWORD OPEN_KEYWORD = JetToken()
 ---------------------
 =====================
 == OPEN_KEYWORD ==
-val OPEN_KEYWORD = JetToken()
+konst OPEN_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == INTERNAL_KEYWORD ==
-val INTERNAL_KEYWORD = JetToken()
+konst INTERNAL_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == PRIVATE_KEYWORD ==
-val PRIVATE_KEYWORD = JetToken()
+konst PRIVATE_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == PROTECTED_KEYWORD ==
-val PROTECTED_KEYWORD = JetToken()
+konst PROTECTED_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == PUBLIC_KEYWORD ==
-val PUBLIC_KEYWORD = JetToken()
+konst PUBLIC_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == CLASS_KEYWORD ==
-val CLASS_KEYWORD = JetToken()
+konst CLASS_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == ENUM_KEYWORD ==
-val ENUM_KEYWORD = JetToken()
+konst ENUM_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == FUN_KEYWORD ==
-val FUN_KEYWORD = JetToken()
+konst FUN_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == GET_KEYWORD ==
-val GET_KEYWORD = JetToken()
+konst GET_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == SET_KEYWORD ==
-val SET_KEYWORD = JetToken()
+konst SET_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == INTERFACE_KEYWORD ==
-val INTERFACE_KEYWORD = JetToken()
+konst INTERFACE_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == VAL_KEYWORD ==
-val VAL_KEYWORD = JetToken()
+konst VAL_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == VAR_KEYWORD ==
-val VAR_KEYWORD = JetToken()
+konst VAR_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == TYPE_KEYWORD ==
-val TYPE_KEYWORD = JetToken()
+konst TYPE_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == IMPORT_KEYWORD ==
-val IMPORT_KEYWORD = JetToken()
+konst IMPORT_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == PACKAGE_KEYWORD ==
-val PACKAGE_KEYWORD = JetToken()
+konst PACKAGE_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == OVERRIDE_KEYWORD ==
-val OVERRIDE_KEYWORD = JetToken()
+konst OVERRIDE_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == IN_KEYWORD ==
-val IN_KEYWORD = JetToken()
+konst IN_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == OUT_KEYWORD ==
-val OUT_KEYWORD = JetToken()
+konst OUT_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================
 == OBJECT_KEYWORD ==
-val OBJECT_KEYWORD = JetToken()
+konst OBJECT_KEYWORD = JetToken()
 ---------------------
 JetToken()   <v0>: JetToken   NEW: call(JetToken(), <init>) -> <v0>
 =====================

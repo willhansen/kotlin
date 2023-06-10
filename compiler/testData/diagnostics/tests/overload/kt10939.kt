@@ -12,8 +12,8 @@ interface Base {
 interface Derived : Base
 
 fun testDerived(base: Base, derived: Derived) {
-    val test1: X1 = base.foo("")
-    val test2: X1 = derived.foo("")
+    konst test1: X1 = base.foo("")
+    konst test2: X1 = derived.foo("")
 }
 
 interface GenericBase<T> {
@@ -25,5 +25,5 @@ interface SpecializedDerived : GenericBase<String> {
 }
 
 fun testSpecializedDerived(derived: SpecializedDerived) {
-    val test1: X1 = derived.foo("", "")
+    konst test1: X1 = derived.foo("", "")
 }

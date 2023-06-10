@@ -3,7 +3,7 @@ compiler/testData/cli/jvm/conflictingJvmDeclarations.kt:2:5: error: platform dec
     fun `<get-x>`(): Int defined in Foo
     fun getX(): Int defined in Foo
     fun getY(): Int defined in Foo
-    val x: Int
+    konst x: Int
     ^
 compiler/testData/cli/jvm/conflictingJvmDeclarations.kt:8:5: error: platform declaration clash: The following declarations have the same JVM signature (getX()I):
     fun `<get-x>`(): Int defined in Foo

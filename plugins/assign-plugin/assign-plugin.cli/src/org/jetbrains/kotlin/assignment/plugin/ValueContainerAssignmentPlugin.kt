@@ -23,22 +23,22 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.resolve.extensions.AssignResolutionAltererExtension
 
 object AssignmentConfigurationKeys {
-    val ANNOTATION: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation qualified name")
+    konst ANNOTATION: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation qualified name")
 }
 
 class AssignmentCommandLineProcessor : CommandLineProcessor {
     companion object {
-        val ANNOTATION_OPTION = CliOption(
+        konst ANNOTATION_OPTION = CliOption(
             ANNOTATION_OPTION_NAME, "<fqname>", "Annotation qualified names",
             required = false, allowMultipleOccurrences = true
         )
     }
 
-    override val pluginId = PLUGIN_ID
-    override val pluginOptions = listOf(ANNOTATION_OPTION)
+    override konst pluginId = PLUGIN_ID
+    override konst pluginOptions = listOf(ANNOTATION_OPTION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) = when (option) {
-        ANNOTATION_OPTION -> configuration.appendList(ANNOTATION, value)
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) = when (option) {
+        ANNOTATION_OPTION -> configuration.appendList(ANNOTATION, konstue)
         else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
     }
 }
@@ -46,7 +46,7 @@ class AssignmentCommandLineProcessor : CommandLineProcessor {
 class AssignmentComponentRegistrar : CompilerPluginRegistrar() {
     @OptIn(InternalNonStableExtensionPoints::class)
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        val annotations = configuration.getList(ANNOTATION)
+        konst annotations = configuration.getList(ANNOTATION)
         if (annotations.isNotEmpty()) {
             AssignResolutionAltererExtension.Companion.registerExtension(CliAssignPluginResolutionAltererExtension(annotations))
             StorageComponentContainerContributor.registerExtension(AssignmentComponentContainerContributor(annotations))
@@ -54,11 +54,11 @@ class AssignmentComponentRegistrar : CompilerPluginRegistrar() {
         }
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 }
 
-class AssignmentComponentContainerContributor(private val annotations: List<String>) : StorageComponentContainerContributor {
+class AssignmentComponentContainerContributor(private konst annotations: List<String>) : StorageComponentContainerContributor {
     override fun registerModuleComponents(
         container: StorageComponentContainer,
         platform: TargetPlatform,

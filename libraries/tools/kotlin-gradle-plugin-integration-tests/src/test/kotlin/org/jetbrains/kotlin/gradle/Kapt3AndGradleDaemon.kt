@@ -16,7 +16,7 @@ import org.junit.jupiter.api.DisplayName
 @DaemonsGradlePluginTests
 class Kapt3AndGradleDaemon : KGPDaemonsBaseTest() {
 
-    override val defaultBuildOptions: BuildOptions = super.defaultBuildOptions
+    override konst defaultBuildOptions: BuildOptions = super.defaultBuildOptions
         .copy(
             kaptOptions = BuildOptions.KaptOptions(
                 verbose = true,
@@ -29,7 +29,7 @@ class Kapt3AndGradleDaemon : KGPDaemonsBaseTest() {
     fun testJavacIsLoadedOnce(gradleVersion: GradleVersion) {
         project("javacIsLoadedOnce".withPrefix, gradleVersion) {
             build("assemble") {
-                val loadsCount = "Loaded com.sun.tools.javac.util.Context from"
+                konst loadsCount = "Loaded com.sun.tools.javac.util.Context from"
                     .toRegex(RegexOption.LITERAL)
                     .findAll(output)
                     .count()
@@ -57,7 +57,7 @@ class Kapt3AndGradleDaemon : KGPDaemonsBaseTest() {
                 )
             )
         ) {
-            val loadPattern = ("Loaded example.ExampleAnnotationProcessor from").toRegex(RegexOption.LITERAL)
+            konst loadPattern = ("Loaded example.ExampleAnnotationProcessor from").toRegex(RegexOption.LITERAL)
             fun BuildResult.classLoadingCount() = loadPattern.findAll(output).count()
 
             build("build") {
@@ -92,5 +92,5 @@ class Kapt3AndGradleDaemon : KGPDaemonsBaseTest() {
         }
     }
 
-    private val String.withPrefix get() = "kapt2/$this"
+    private konst String.withPrefix get() = "kapt2/$this"
 }

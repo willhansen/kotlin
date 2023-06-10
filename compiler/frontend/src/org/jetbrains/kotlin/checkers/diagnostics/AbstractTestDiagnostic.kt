@@ -6,11 +6,11 @@
 package org.jetbrains.kotlin.checkers.diagnostics
 
 interface AbstractTestDiagnostic : Comparable<AbstractTestDiagnostic> {
-    val name: String
+    konst name: String
 
-    val platform: String?
+    konst platform: String?
 
-    val inferenceCompatibility: TextDiagnostic.InferenceCompatibility
+    konst inferenceCompatibility: TextDiagnostic.InferenceCompatibility
 
     fun enhanceInferenceCompatibility(inferenceCompatibility: TextDiagnostic.InferenceCompatibility)
 

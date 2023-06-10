@@ -1,4 +1,4 @@
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface Anno {
 }
@@ -7,8 +7,8 @@ public abstract @interface Anno {
 
 
 @kotlin.annotation.Target(allowedTargets = {kotlin.annotation.AnnotationTarget.PROPERTY, kotlin.annotation.AnnotationTarget.CLASS})
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
-@java.lang.annotation.Target(value = {java.lang.annotation.ElementType.TYPE})
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Target(konstue = {java.lang.annotation.ElementType.TYPE})
 @kotlin.Metadata()
 public abstract @interface Anno2 {
 }

@@ -6,7 +6,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-class User(val firstName: String, val lastName: String, val age: Int) : Parcelable {
+class User(konst firstName: String, konst lastName: String, konst age: Int) : Parcelable {
     private companion object : Parceler<User> {
         override fun User.write(parcel: Parcel, flags: Int) {
             parcel.writeString(firstName)

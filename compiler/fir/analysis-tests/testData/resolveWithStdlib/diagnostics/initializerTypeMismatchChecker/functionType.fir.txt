@@ -7,23 +7,23 @@ FILE: TestCase1.kt
         }
 
         public final fun case(v: R|testsCase1/V|): R|kotlin/Unit| {
-            lval va: R|() -> kotlin/String| = Q|testsCase1/V|::R|testsCase1/a|
-            lval vb: R|() -> kotlin/String| = Q|testsCase1/V|::R|testsCase1/V.Companion.b|
-            lval va1: R|() -> kotlin/String| = R|<local>/v|::R|testsCase1/a|
-            lval vb1: R|() -> kotlin/String| = Q|testsCase1/V|::R|testsCase1/V.Companion.b|
+            lkonst va: R|() -> kotlin/String| = Q|testsCase1/V|::R|testsCase1/a|
+            lkonst vb: R|() -> kotlin/String| = Q|testsCase1/V|::R|testsCase1/V.Companion.b|
+            lkonst va1: R|() -> kotlin/String| = R|<local>/v|::R|testsCase1/a|
+            lkonst vb1: R|() -> kotlin/String| = Q|testsCase1/V|::R|testsCase1/V.Companion.b|
         }
 
-        public final val R|testsCase1/V.Companion|.b: R|kotlin/String|
+        public final konst R|testsCase1/V.Companion|.b: R|kotlin/String|
             public get(): R|kotlin/String| {
                 ^ String(1)
             }
 
     }
-    public final val R|testsCase1/V|.a: R|kotlin/String|
+    public final konst R|testsCase1/V|.a: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ String(1)
         }
-    public final val R|testsCase1/V.Companion|.a: R|kotlin/String|
+    public final konst R|testsCase1/V.Companion|.a: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ String(1)
         }
@@ -37,7 +37,7 @@ FILE: TestCase1.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final const val b: R|kotlin/String| = String(1)
+            public final const konst b: R|kotlin/String| = String(1)
                 public get(): R|kotlin/String|
 
         }

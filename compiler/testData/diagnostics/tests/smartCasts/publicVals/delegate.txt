@@ -10,8 +10,8 @@ public final class Delegate {
 
 public final class Example {
     public constructor Example()
-    private final val p: kotlin.String?
-    public final val r: kotlin.String? = "xyz"
+    private final konst p: kotlin.String?
+    public final konst r: kotlin.String? = "xyz"
     public final fun bar(): kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(): kotlin.String

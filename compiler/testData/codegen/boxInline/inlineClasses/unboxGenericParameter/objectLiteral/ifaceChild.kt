@@ -5,15 +5,15 @@
 
 interface Foo
 
-class FooHolder(val value: Any): Foo
+class FooHolder(konst konstue: Any): Foo
 
-inline class IC(val value: FooHolder): Foo {
-    inline fun <T> dispatchInline(): T = (value as FooHolder).value as T
+inline class IC(konst konstue: FooHolder): Foo {
+    inline fun <T> dispatchInline(): T = (konstue as FooHolder).konstue as T
 }
 
-inline fun <T> IC.extensionInline(): T = (value as FooHolder).value as T
+inline fun <T> IC.extensionInline(): T = (konstue as FooHolder).konstue as T
 
-inline fun <T> normalInline(a: IC): T = (a.value as FooHolder).value as T
+inline fun <T> normalInline(a: IC): T = (a.konstue as FooHolder).konstue as T
 
 // FILE: box.kt
 
@@ -33,8 +33,8 @@ interface IFace<T, R> {
     fun call(ic: T): R
 }
 
-fun <T, R> bar(value: T, f: IFace<T, R>): R {
-    return f.call(value)
+fun <T, R> bar(konstue: T, f: IFace<T, R>): R {
+    return f.call(konstue)
 }
 
 fun box(): String {

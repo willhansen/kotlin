@@ -30,7 +30,7 @@ public final class IrTypeAlias extends
   private IrTypeAlias(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -81,10 +81,10 @@ public final class IrTypeAlias extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
@@ -105,7 +105,7 @@ public final class IrTypeAlias extends
     public IrTypeAlias parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrTypeAlias(input, extensionRegistry);
     }
   };
@@ -261,23 +261,23 @@ public final class IrTypeAlias extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias parseFrom(java.io.InputStream input)
@@ -439,7 +439,7 @@ public final class IrTypeAlias extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -467,11 +467,11 @@ public final class IrTypeAlias extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
-      if (value == null) {
+    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      base_ = value;
+      base_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -489,13 +489,13 @@ public final class IrTypeAlias extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
+    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           base_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.getDefaultInstance()) {
         base_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(konstue).buildPartial();
       } else {
-        base_ = value;
+        base_ = konstue;
       }
 
       bitField0_ |= 0x00000001;
@@ -527,9 +527,9 @@ public final class IrTypeAlias extends
     /**
      * <code>required int64 name_type = 2;</code>
      */
-    public Builder setNameType(long value) {
+    public Builder setNameType(long konstue) {
       bitField0_ |= 0x00000002;
-      nameType_ = value;
+      nameType_ = konstue;
       
       return this;
     }
@@ -574,12 +574,12 @@ public final class IrTypeAlias extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 3;</code>
      */
     public Builder setTypeParameter(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.set(index, value);
+      typeParameter_.set(index, konstue);
 
       return this;
     }
@@ -596,12 +596,12 @@ public final class IrTypeAlias extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 3;</code>
      */
-    public Builder addTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+    public Builder addTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.add(value);
+      typeParameter_.add(konstue);
 
       return this;
     }
@@ -609,12 +609,12 @@ public final class IrTypeAlias extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 3;</code>
      */
     public Builder addTypeParameter(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.add(index, value);
+      typeParameter_.add(index, konstue);
 
       return this;
     }
@@ -642,10 +642,10 @@ public final class IrTypeAlias extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 3;</code>
      */
     public Builder addAllTypeParameter(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter> konstues) {
       ensureTypeParameterIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, typeParameter_);
+          konstues, typeParameter_);
 
       return this;
     }

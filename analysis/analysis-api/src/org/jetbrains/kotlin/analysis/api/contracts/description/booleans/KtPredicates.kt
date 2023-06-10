@@ -15,14 +15,14 @@ import org.jetbrains.kotlin.analysis.api.types.KtType
  * See: [KtContractBooleanExpression].
  */
 public class KtContractIsInstancePredicateExpression(
-    private val _argument: KtContractParameterValue,
-    private val _type: KtType,
-    private val _isNegated: Boolean
+    private konst _argument: KtContractParameterValue,
+    private konst _type: KtType,
+    private konst _isNegated: Boolean
 ) : KtContractBooleanExpression {
-    override val token: KtLifetimeToken get() = _type.token
-    public val argument: KtContractParameterValue get() = withValidityAssertion { _argument }
-    public val type: KtType get() = withValidityAssertion { _type }
-    public val isNegated: Boolean get() = withValidityAssertion { _isNegated }
+    override konst token: KtLifetimeToken get() = _type.token
+    public konst argument: KtContractParameterValue get() = withValidityAssertion { _argument }
+    public konst type: KtType get() = withValidityAssertion { _type }
+    public konst isNegated: Boolean get() = withValidityAssertion { _isNegated }
     public fun negated(): KtContractIsInstancePredicateExpression = KtContractIsInstancePredicateExpression(argument, type, !isNegated)
 
     override fun hashCode(): Int = Objects.hashCode(_argument, _type, _isNegated)
@@ -35,12 +35,12 @@ public class KtContractIsInstancePredicateExpression(
  * See: [KtContractBooleanExpression].
  */
 public class KtContractIsNullPredicateExpression(
-    private val _argument: KtContractParameterValue,
-    private val _isNegated: Boolean
+    private konst _argument: KtContractParameterValue,
+    private konst _isNegated: Boolean
 ) : KtContractBooleanExpression {
-    override val token: KtLifetimeToken get() = _argument.token
-    public val argument: KtContractParameterValue get() = withValidityAssertion { _argument }
-    public val isNegated: Boolean get() = withValidityAssertion { _isNegated }
+    override konst token: KtLifetimeToken get() = _argument.token
+    public konst argument: KtContractParameterValue get() = withValidityAssertion { _argument }
+    public konst isNegated: Boolean get() = withValidityAssertion { _isNegated }
     public fun negated(): KtContractIsNullPredicateExpression = KtContractIsNullPredicateExpression(argument, !isNegated)
 
     override fun hashCode(): Int = Objects.hashCode(_argument, _isNegated)

@@ -13,10 +13,10 @@
 package foo
 
 
-val prop = 10
+konst prop = 10
 
 
-class C(val x: Int) {
+class C(konst x: Int) {
     fun doubleX() = x * 2
 }
 

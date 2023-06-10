@@ -8,11 +8,11 @@ public class Foo {}
 
 // FILE: Anno.kt
 
-annotation class Anno(val value: Int) {
+annotation class Anno(konst konstue: Int) {
     companion object {
-        const val CONST = 42
+        const konst CONST = 42
     }
 }
 
 fun box(): String =
-        if ((Foo::class.java.annotations.single() as Anno).value == 42) "OK" else "Fail"
+        if ((Foo::class.java.annotations.single() as Anno).konstue == 42) "OK" else "Fail"

@@ -8,13 +8,13 @@ class SimpleClass {
 expect class ExpClass {
     <!WRONG_MODIFIER_CONTAINING_DECLARATION("protected; final expect class")!>protected<!> fun foo()
 
-    <!WRONG_MODIFIER_CONTAINING_DECLARATION("protected; final expect class")!>protected<!> val bar: Int
+    <!WRONG_MODIFIER_CONTAINING_DECLARATION("protected; final expect class")!>protected<!> konst bar: Int
 }
 
 actual class ActClass {
     actual protected fun foo() = Unit
 
-    actual protected val bar: Int = 42
+    actual protected konst bar: Int = 42
 }
 
 expect open class ExpOpenClass {
@@ -32,5 +32,5 @@ expect enum class ExpEnumClass {
 
     <!WRONG_MODIFIER_CONTAINING_DECLARATION("protected; final expect class")!>protected<!> fun foo()
 
-    <!WRONG_MODIFIER_CONTAINING_DECLARATION("protected; final expect class")!>protected<!> val bar: Int
+    <!WRONG_MODIFIER_CONTAINING_DECLARATION("protected; final expect class")!>protected<!> konst bar: Int
 }

@@ -8,11 +8,11 @@ fun builder(c: suspend () -> Unit) {
     })
 }
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 fun box(): String {
     var res = "FAIL"
-    val lambda: suspend (IC, IC) -> String = { a, b ->
+    konst lambda: suspend (IC, IC) -> String = { a, b ->
         a.s + b.s
     }
     builder {

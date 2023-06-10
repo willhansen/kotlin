@@ -1,10 +1,10 @@
 fun box(): String {
     open class K {
-        val o = "O"
+        konst o = "O"
     }
 
     class Bar : K() {
-        val k = "K"
+        konst k = "K"
     }
 
     return K().o + Bar().k

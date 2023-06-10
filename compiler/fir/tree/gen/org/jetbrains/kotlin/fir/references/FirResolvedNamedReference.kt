@@ -17,9 +17,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirResolvedNamedReference : FirNamedReference() {
-    abstract override val source: KtSourceElement?
-    abstract override val name: Name
-    abstract val resolvedSymbol: FirBasedSymbol<*>
+    abstract override konst source: KtSourceElement?
+    abstract override konst name: Name
+    abstract konst resolvedSymbol: FirBasedSymbol<*>
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitResolvedNamedReference(this, data)
 

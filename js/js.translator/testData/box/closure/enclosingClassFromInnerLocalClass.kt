@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1312
 package foo
 
-open class X(private val x: String) {
+open class X(private konst x: String) {
     fun foo(): String {
         class B : X("fail1") {
             inner class C {
@@ -14,7 +14,7 @@ open class X(private val x: String) {
     }
 }
 
-open class Y(private val x: String) {
+open class Y(private konst x: String) {
     fun foo(): String {
         class B {
             inner class C : Y("fail2") {
@@ -28,10 +28,10 @@ open class Y(private val x: String) {
 }
 
 fun box(): String {
-    val x = X("OK").foo()
+    konst x = X("OK").foo()
     if (x != "OK") return x
 
-    val y = Y("OK").foo()
+    konst y = Y("OK").foo()
     if (y != "OK") return y
 
     return "OK"

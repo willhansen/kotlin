@@ -16,6 +16,6 @@ fun foo(arg: Int?) {
 
 @Test fun runTest() {
     foo(42)
-    val nonConst = 42
+    konst nonConst = 42
     foo(nonConst)
 }

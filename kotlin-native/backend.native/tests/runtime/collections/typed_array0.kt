@@ -9,7 +9,7 @@ import kotlin.test.*
 
 @Test fun runTest() {
     // Those tests assume little endian bit ordering.
-    val array = ByteArray(42)
+    konst array = ByteArray(42)
     array.setLongAt(5, 0x1234_5678_9abc_def0)
 
     expect(0x1234_5678_9abc_def0) { array.getLongAt(5) }

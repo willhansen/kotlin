@@ -5,10 +5,10 @@ package test
 
 class A
 
-data class D(val s: String)
+data class D(konst s: String)
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     assert(A::equals.call(a, a))
     assert(!A::equals.call(a, 0))
     assert(A::hashCode.call(a) == A::hashCode.call(a))

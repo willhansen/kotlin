@@ -19,28 +19,28 @@ import org.jetbrains.org.objectweb.asm.Type
 
 object EnumValueOf : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo) = with(codegen) {
-        val type = expression.getTypeArgument(0)!!
-        val result = expression.getValueArgument(0)!!.accept(this, data)
+        konst type = expression.getTypeArgument(0)!!
+        konst result = expression.getValueArgument(0)!!.accept(this, data)
             .materializedAt(AsmTypes.JAVA_STRING_TYPE, codegen.context.irBuiltIns.stringType)
         if (type.isReifiedTypeParameter) {
             // Note that the inliner expects exactly the following sequence of instructions.
             // <REIFIED-OPERATIONS-MARKER>
             // ACONST_NULL
             // ALOAD n
-            // INVOKESTATIC java/lang/Enum.valueOf...
-            val temporary = frameMap.enterTemp(result.type)
+            // INVOKESTATIC java/lang/Enum.konstueOf...
+            konst temporary = frameMap.enterTemp(result.type)
             mv.store(temporary, result.type)
             putReifiedOperationMarkerIfTypeIsReifiedParameter(type, ReifiedTypeInliner.OperationKind.ENUM_REIFIED)
             mv.aconst(null)
             mv.load(temporary, result.type)
-            val descriptor = Type.getMethodDescriptor(AsmTypes.ENUM_TYPE, AsmTypes.JAVA_CLASS_TYPE, AsmTypes.JAVA_STRING_TYPE)
-            mv.invokestatic("java/lang/Enum", "valueOf", descriptor, false)
+            konst descriptor = Type.getMethodDescriptor(AsmTypes.ENUM_TYPE, AsmTypes.JAVA_CLASS_TYPE, AsmTypes.JAVA_STRING_TYPE)
+            mv.invokestatic("java/lang/Enum", "konstueOf", descriptor, false)
             frameMap.leaveTemp(result.type)
             MaterialValue(codegen, AsmTypes.ENUM_TYPE, expression.type)
         } else {
-            val returnType = typeMapper.mapType(type)
-            val descriptor = Type.getMethodDescriptor(returnType, AsmTypes.JAVA_STRING_TYPE)
-            mv.invokestatic(returnType.internalName, "valueOf", descriptor, false)
+            konst returnType = typeMapper.mapType(type)
+            konst descriptor = Type.getMethodDescriptor(returnType, AsmTypes.JAVA_STRING_TYPE)
+            mv.invokestatic(returnType.internalName, "konstueOf", descriptor, false)
             MaterialValue(codegen, returnType, expression.type)
         }
     }
@@ -48,7 +48,7 @@ object EnumValueOf : IntrinsicMethod() {
 
 object EnumValues : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo) = with(codegen) {
-        val type = expression.getTypeArgument(0)!!
+        konst type = expression.getTypeArgument(0)!!
         if (type.isReifiedTypeParameter) {
             // Note that the inliner expects exactly the following sequence of instructions.
             // <REIFIED-OPERATIONS-MARKER>
@@ -59,13 +59,13 @@ object EnumValues : IntrinsicMethod() {
             mv.newarray(AsmTypes.ENUM_TYPE)
             MaterialValue(codegen, ENUM_ARRAY_TYPE, expression.type)
         } else {
-            val enumType = typeMapper.mapType(type)
-            val enumArrayType = AsmUtil.getArrayType(enumType)
-            val descriptor = Type.getMethodDescriptor(enumArrayType)
-            mv.invokestatic(enumType.internalName, "values", descriptor, false)
+            konst enumType = typeMapper.mapType(type)
+            konst enumArrayType = AsmUtil.getArrayType(enumType)
+            konst descriptor = Type.getMethodDescriptor(enumArrayType)
+            mv.invokestatic(enumType.internalName, "konstues", descriptor, false)
             MaterialValue(codegen, enumArrayType, expression.type)
         }
     }
 
-    private val ENUM_ARRAY_TYPE = AsmUtil.getArrayType(AsmTypes.ENUM_TYPE)
+    private konst ENUM_ARRAY_TYPE = AsmUtil.getArrayType(AsmTypes.ENUM_TYPE)
 }

@@ -14,11 +14,11 @@ enum class TestEnum {
 }
 
 fun test() {
-    val x1 = Annotation
-    val x2 = Collection
-    val x3 = Set
-    val x4 = List
-    val x5 = Map
-    val x6 = Function
-    val x7 = Enum
+    konst x1 = Annotation
+    konst x2 = Collection
+    konst x3 = Set
+    konst x4 = List
+    konst x5 = Map
+    konst x6 = Function
+    konst x7 = Enum
 }

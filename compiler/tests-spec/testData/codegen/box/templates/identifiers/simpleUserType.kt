@@ -14,10 +14,10 @@ inline fun <reified <!ELEMENT(4)!>, reified <!ELEMENT(5)!>> f1() =
         else -> false
     }
 
-inline fun <reified T : D<<!ELEMENT(2)!>>> T.f2(value: T) = value is <!ELEMENT(2)!>
+inline fun <reified T : D<<!ELEMENT(2)!>>> T.f2(konstue: T) = konstue is <!ELEMENT(2)!>
 
 class A<K: List<out <!ELEMENT(3)!><out String>>> {
-    val x = true
+    konst x = true
 }
 
 class B<K, T: A<List<out <!ELEMENT(3)!><String>>>> {
@@ -40,7 +40,7 @@ fun f8(x1: <!ELEMENT(3)!><out Any>) = false
 
 fun f9(x1: <!ELEMENT(3)!><out List<<!ELEMENT(3)!><*>>>) = true
 
-val x1: List<<!ELEMENT(2)!>?> = listOf(<!ELEMENT(2)!>(), null, <!ELEMENT(2)!>())
+konst x1: List<<!ELEMENT(2)!>?> = listOf(<!ELEMENT(2)!>(), null, <!ELEMENT(2)!>())
 
 lateinit var x2: List<<!ELEMENT(3)!><out Number>?>
 

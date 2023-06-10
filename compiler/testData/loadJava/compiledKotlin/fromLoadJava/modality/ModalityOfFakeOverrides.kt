@@ -12,5 +12,5 @@ public open class ModalityOfFakeOverrides : AbstractList<String>() {
         return ""
     }
 
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
 }

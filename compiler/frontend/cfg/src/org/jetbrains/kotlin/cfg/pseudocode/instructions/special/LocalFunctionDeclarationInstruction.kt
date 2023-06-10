@@ -27,18 +27,18 @@ import org.jetbrains.kotlin.cfg.pseudocode.instructions.InstructionImpl
 
 open class LocalFunctionDeclarationInstruction(
     element: KtElement,
-    val body: Pseudocode,
+    konst body: Pseudocode,
     blockScope: BlockScope
 ) : InstructionWithNext(element, blockScope) {
     var sink: SubroutineSinkInstruction? = null
-        set(value) {
-            field = outgoingEdgeTo(value) as SubroutineSinkInstruction?
+        set(konstue) {
+            field = outgoingEdgeTo(konstue) as SubroutineSinkInstruction?
         }
 
-    override val nextInstructions: Collection<Instruction>
+    override konst nextInstructions: Collection<Instruction>
         get() {
             sink?.let {
-                val instructions = arrayListOf<Instruction>(it)
+                konst instructions = arrayListOf<Instruction>(it)
                 instructions.addAll(super.nextInstructions)
                 return instructions
             }

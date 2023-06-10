@@ -17,8 +17,8 @@ internal object IdeCommonizedCinteropDependencyResolver : IdeDependencyResolver,
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
         if (sourceSet !is DefaultKotlinSourceSet) return emptySet()
 
-        val project = sourceSet.project
-        val cinteropFiles = project.cinteropCommonizerDependencies(sourceSet)
+        konst project = sourceSet.project
+        konst cinteropFiles = project.cinteropCommonizerDependencies(sourceSet)
         return project.resolveCInteropDependencies(cinteropFiles)
     }
 

@@ -17,15 +17,15 @@ import javax.inject.Inject
 abstract class DefaultIncrementalSyncTask : DefaultTask(), IncrementalSyncTask {
 
     @get:Inject
-    abstract val fs: FileSystemOperations
+    abstract konst fs: FileSystemOperations
 
     @get:Inject
-    abstract val objectFactory: ObjectFactory
+    abstract konst objectFactory: ObjectFactory
 
     @TaskAction
     fun doCopy(inputChanges: InputChanges) {
-        val destinationDir = destinationDirectory.get()
-        val commonAction: CopySpec.() -> Unit = {
+        konst destinationDir = destinationDirectory.get()
+        konst commonAction: CopySpec.() -> Unit = {
             into(destinationDir)
             // Rewrite relative paths in sourcemaps in the target directory
             eachFile {
@@ -41,36 +41,36 @@ abstract class DefaultIncrementalSyncTask : DefaultTask(), IncrementalSyncTask {
             }
         }
 
-        val work = if (!inputChanges.isIncremental) {
+        konst work = if (!inputChanges.isIncremental) {
             fs.copy {
                 it.from(from)
                 it.commonAction()
             }.didWork
         } else {
-            val changedFiles = inputChanges.getFileChanges(from)
+            konst changedFiles = inputChanges.getFileChanges(from)
 
-            val modified = changedFiles
+            konst modified = changedFiles
                 .filter {
                     it.changeType == ChangeType.ADDED || it.changeType == ChangeType.MODIFIED
                 }
                 .map { it.file }
                 .toSet()
 
-            val forCopy = from.asFileTree
+            konst forCopy = from.asFileTree
                 .matching { patternFilterable ->
                     patternFilterable.exclude {
                         it.file.isFile && it.file !in modified
                     }
                 }
 
-            val nonRemovingFiles = mutableSetOf<File>()
+            konst nonRemovingFiles = mutableSetOf<File>()
 
             from.asFileTree
                 .visit {
                     nonRemovingFiles.add(it.relativePath.getFile(destinationDir))
                 }
 
-            val removingFiles = objectFactory.fileTree()
+            konst removingFiles = objectFactory.fileTree()
                 .from(destinationDir)
                 .also { fileTree ->
                     fileTree.exclude {
@@ -78,11 +78,11 @@ abstract class DefaultIncrementalSyncTask : DefaultTask(), IncrementalSyncTask {
                     }
                 }
 
-            val deleteWork = fs.delete {
+            konst deleteWork = fs.delete {
                 it.delete(removingFiles)
             }
 
-            val copyWork = fs.copy {
+            konst copyWork = fs.copy {
                 it.from(forCopy)
                 it.commonAction()
             }

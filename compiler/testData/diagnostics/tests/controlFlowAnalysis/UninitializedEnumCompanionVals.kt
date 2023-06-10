@@ -1,17 +1,17 @@
 // SKIP_TXT
 
-enum class A(val z: Any) {
+enum class A(konst z: Any) {
     Y(<!UNINITIALIZED_ENUM_COMPANION, UNINITIALIZED_VARIABLE!>x<!>);
 
     companion object {
-        val x = A.Y.ordinal
+        konst x = A.Y.ordinal
     }
 }
 
-enum class B(val z: Any) {
+enum class B(konst z: Any) {
     Y(<!UNINITIALIZED_ENUM_COMPANION!>B<!>.x);
 
     companion object {
-        val x = B.Y.ordinal
+        konst x = B.Y.ordinal
     }
 }

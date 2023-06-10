@@ -22,8 +22,8 @@ class CondVar {
     }
 
     inline fun <R> runAndWait(block: () -> R) {
-        val prev = steps
-        val result = block()
+        konst prev = steps
+        konst result = block()
         // During block() execution someone somewhere does notify().
         // In this loop we wait to read the result of that notify(), which acts as a synchronization point.
         while (steps <= prev) {}
@@ -34,24 +34,24 @@ class Incrementor : NSObject() {
     @ObjCOutlet
     var counter: NSNumber = NSNumber.numberWithInt(0)
 
-    val condVar = CondVar()
+    konst condVar = CondVar()
 
     @ObjCAction
-    fun increment() { // Only Unit is allowed for return value
+    fun increment() { // Only Unit is allowed for return konstue
         println("I'm here to make sure this function generates a frame. Here's an object: ${Any()}")
         counter = NSNumber.numberWithInt(counter.intValue + 1)
         condVar.notify()
     }
 
     @ObjCAction
-    fun incrementBy(amount: NSNumber) { // Only Unit is allowed for return value
+    fun incrementBy(amount: NSNumber) { // Only Unit is allowed for return konstue
         println("I'm here to make sure this function generates a frame. Here's an object: ${Any()}")
         counter = NSNumber.numberWithInt(counter.intValue + amount.intValue)
         condVar.notify()
     }
 
     @ObjCAction
-    fun incrementOtherBy(other: Incrementor, amount: NSNumber) { // Only Unit is allowed for return value
+    fun incrementOtherBy(other: Incrementor, amount: NSNumber) { // Only Unit is allowed for return konstue
         println("I'm here to make sure this function generates a frame. Here's an object: ${Any()}")
         other.incrementBy(amount)
         condVar.notify()
@@ -59,11 +59,11 @@ class Incrementor : NSObject() {
 }
 
 class IncrementorViaObjC {
-    val impl = Incrementor()
+    konst impl = Incrementor()
 
     var counter: NSNumber
         get() = impl.counter // ObjCOutlet only works for setters - not getters.
-        set(value) = setProperty(impl, "counter", value)
+        set(konstue) = setProperty(impl, "counter", konstue)
 
     fun increment() = performSelector0(impl, "increment")
 
@@ -73,11 +73,11 @@ class IncrementorViaObjC {
 }
 
 class IncrementorViaObjCInNewThread {
-    val impl = Incrementor()
+    konst impl = Incrementor()
 
     var counter: NSNumber
         get() = impl.counter // ObjCOutlet only works for setters - not getters.
-        set(value) = setProperty(impl, "counter", value)
+        set(konstue) = setProperty(impl, "counter", konstue)
 
     fun increment() = impl.condVar.runAndWait { performSelectorInNewThread0(impl, "increment") }
 
@@ -89,7 +89,7 @@ class IncrementorViaObjCInNewThread {
 // Sanity checking that using functions and properties as regular kotlin properties works.
 @Test
 fun testIncrementorKt() {
-    val incrementor = Incrementor()
+    konst incrementor = Incrementor()
     assertEquals(0, incrementor.counter.intValue)
 
     incrementor.increment()
@@ -104,7 +104,7 @@ fun testIncrementorKt() {
     incrementor.incrementBy(NSNumber.numberWithInt(2))
     assertEquals(9, incrementor.counter.intValue)
 
-    val otherIncrementor = Incrementor()
+    konst otherIncrementor = Incrementor()
     incrementor.incrementOtherBy(otherIncrementor, NSNumber.numberWithInt(5))
     assertEquals(9, incrementor.counter.intValue)
     assertEquals(5, otherIncrementor.counter.intValue)
@@ -113,7 +113,7 @@ fun testIncrementorKt() {
 // Doing everything testIncrementorKt does, but via ObjC dynamic dispatch
 @Test
 fun testIncrementorObjC() {
-    val incrementor = IncrementorViaObjC()
+    konst incrementor = IncrementorViaObjC()
     assertEquals(0, incrementor.counter.intValue)
 
     incrementor.increment()
@@ -128,7 +128,7 @@ fun testIncrementorObjC() {
     incrementor.incrementBy(NSNumber.numberWithInt(2))
     assertEquals(9, incrementor.counter.intValue)
 
-    val otherIncrementor = Incrementor()
+    konst otherIncrementor = Incrementor()
     incrementor.incrementOtherBy(otherIncrementor, NSNumber.numberWithInt(5))
     assertEquals(9, incrementor.counter.intValue)
     assertEquals(5, otherIncrementor.counter.intValue)
@@ -140,7 +140,7 @@ fun testIncrementorObjCInNewThread() {
     if (!isExperimentalMM()) // Cross-thread stuff doesn't work with the legacy MM
         return
 
-    val incrementor = IncrementorViaObjCInNewThread()
+    konst incrementor = IncrementorViaObjCInNewThread()
     assertEquals(0, incrementor.counter.intValue)
 
     incrementor.increment()
@@ -155,7 +155,7 @@ fun testIncrementorObjCInNewThread() {
     incrementor.incrementBy(NSNumber.numberWithInt(2))
     assertEquals(9, incrementor.counter.intValue)
 
-    val otherIncrementor = Incrementor()
+    konst otherIncrementor = Incrementor()
     incrementor.incrementOtherBy(otherIncrementor, NSNumber.numberWithInt(5))
     assertEquals(9, incrementor.counter.intValue)
     assertEquals(5, otherIncrementor.counter.intValue)
@@ -164,8 +164,8 @@ fun testIncrementorObjCInNewThread() {
 // Mixing Kt and ObjC accesses
 @Test
 fun testIncrementorMix() {
-    val objc = IncrementorViaObjC()
-    val kt = objc.impl
+    konst objc = IncrementorViaObjC()
+    konst kt = objc.impl
     assertEquals(0, kt.counter.intValue)
 
     kt.increment()
@@ -193,8 +193,8 @@ fun testIncrementorMixInNewThread() {
     if (!isExperimentalMM()) // Cross-thread stuff doesn't work with the legacy MM
         return
 
-    val objc = IncrementorViaObjCInNewThread()
-    val kt = objc.impl
+    konst objc = IncrementorViaObjCInNewThread()
+    konst kt = objc.impl
     assertEquals(0, kt.counter.intValue)
 
     kt.increment()

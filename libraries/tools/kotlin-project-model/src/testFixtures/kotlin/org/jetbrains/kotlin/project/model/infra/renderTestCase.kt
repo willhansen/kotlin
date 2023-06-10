@@ -13,15 +13,15 @@ import org.jetbrains.kotlin.utils.Printer
 
 @Suppress("unused") // useful for debugging
 fun KpmTestCase.renderDeclarationDsl(): String {
-    val p = Printer(StringBuilder())
+    konst p = Printer(StringBuilder())
     p.render(this)
     return p.toString()
 }
 
 private fun Printer.render(case: KpmTestCase) {
-    println("val ${case.name} = describeCase(\"${case.name}\") {")
+    println("konst ${case.name} = describeCase(\"${case.name}\") {")
     pushIndent()
-    val projectsSorted = case.projects.sortedBy { it.name }
+    konst projectsSorted = case.projects.sortedBy { it.name }
     for (project in projectsSorted) {
         render(project)
         if (project !== projectsSorted.last()) println()
@@ -34,7 +34,7 @@ private fun Printer.render(case: KpmTestCase) {
 private fun Printer.render(project: TestKpmModuleContainer) {
     println("project(\"${project.name}\") {")
     pushIndent()
-    val modulesSorted = project.modules.sortedBy { it.name }
+    konst modulesSorted = project.modules.sortedBy { it.name }
     for (module in modulesSorted) {
         render(module)
         if (module !== modulesSorted.last()) println()
@@ -46,7 +46,7 @@ private fun Printer.render(project: TestKpmModuleContainer) {
 private fun Printer.render(module: TestKpmModule) {
     println("module(\"${module.name}\") {")
     pushIndent()
-    val fragmentsSorted = module.fragments.sortedBy { it.name }
+    konst fragmentsSorted = module.fragments.sortedBy { it.name }
 
     // printedFragmentDeclaration is needed for pretty-printing separating new line between fragments
     // declarations and their dependencies only in case both are present (i.e. no trailing newlines)
@@ -93,17 +93,17 @@ private fun Printer.renderFragmentDependencies(fragment: TestKpmFragment, prepen
         println("${fragment.name} refines ${refinedFragment.name}")
     }
 
-    val moduleDependenciesSorted = fragment.declaredModuleDependencies.sortedBy { it.moduleIdentifier.toString() }
+    konst moduleDependenciesSorted = fragment.declaredModuleDependencies.sortedBy { it.moduleIdentifier.toString() }
     for (dependencyModule in moduleDependenciesSorted) {
-        when (val id = dependencyModule.moduleIdentifier) {
+        when (konst id = dependencyModule.moduleIdentifier) {
             is KpmLocalModuleIdentifier -> {
-                val projectId = id.projectId
+                konst projectId = id.projectId
                 println("${fragment.name} depends ${"project(\"$projectId\")"}")
             }
 
             is KpmMavenModuleIdentifier -> {
-                val group = id.group
-                val name = id.name
+                konst group = id.group
+                konst name = id.name
                 println("${fragment.name} depends ${"maven(\"$group\", \"$name\")"}")
             }
         }

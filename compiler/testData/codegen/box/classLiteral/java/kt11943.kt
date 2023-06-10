@@ -7,10 +7,10 @@
 
 import kotlin.reflect.KClass
 
-val <T : KClass<*>> T.myjava1: Class<*>
+konst <T : KClass<*>> T.myjava1: Class<*>
     get() = java
 
-val <E : Any, T : KClass<E>> T.myjava2: Class<E>
+konst <E : Any, T : KClass<E>> T.myjava2: Class<E>
     get() = java
 
 class O

@@ -89,7 +89,7 @@ public class ModuleXmlParser {
             factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
             factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-            factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            factory.setFeature("http://apache.org/xml/features/nonkonstidating/load-external-dtd", false);
             SAXParser saxParser = factory.newSAXParser();
             saxParser.parse(xml, new DelegatedSaxHandler() {
                 @NotNull
@@ -104,7 +104,7 @@ public class ModuleXmlParser {
             MessageCollectorUtil.reportException(messageCollector, e);
         }
         catch (SAXException e) {
-            messageCollector.report(ERROR, "Build file does not have a valid XML: " + e, null);
+            messageCollector.report(ERROR, "Build file does not have a konstid XML: " + e, null);
         }
         return ModuleChunk.EMPTY;
     }

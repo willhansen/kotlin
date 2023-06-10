@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.analysis.api.renderer.base.annotations.renderers.KtA
 import org.jetbrains.kotlin.analysis.api.renderer.base.annotations.renderers.KtAnnotationUseSiteTargetRenderer
 
 public object KtAnnotationRendererForSource {
-    public val WITH_QUALIFIED_NAMES: KtAnnotationRenderer = KtAnnotationRenderer {
+    public konst WITH_QUALIFIED_NAMES: KtAnnotationRenderer = KtAnnotationRenderer {
         annotationListRenderer = KtAnnotationListRenderer.FOR_SOURCE
         annotationFilter = KtRendererAnnotationsFilter.NO_NULLABILITY and KtRendererAnnotationsFilter.NO_PARAMETER_NAME
         annotationsQualifiedNameRenderer = KtAnnotationQualifierRenderer.WITH_QUALIFIED_NAMES
@@ -19,7 +19,7 @@ public object KtAnnotationRendererForSource {
         annotationArgumentsRenderer = KtAnnotationArgumentsRenderer.IF_ANY
     }
 
-    public val WITH_SHORT_NAMES: KtAnnotationRenderer = WITH_QUALIFIED_NAMES.with {
+    public konst WITH_SHORT_NAMES: KtAnnotationRenderer = WITH_QUALIFIED_NAMES.with {
         annotationsQualifiedNameRenderer = KtAnnotationQualifierRenderer.WITH_SHORT_NAMES
     }
 }

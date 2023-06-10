@@ -23,7 +23,7 @@ fun box(): String {
     builder {
         var q = "O"
         result = suspendHere {
-            val r = q
+            konst r = q
             q = "K"
             r
         }

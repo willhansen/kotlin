@@ -1,2 +1,2 @@
 // TARGET_BACKEND: JVM
-val Class<*>.test get() = this.declaredFields
+konst Class<*>.test get() = this.declaredFields

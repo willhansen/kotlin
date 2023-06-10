@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 
 internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement, FirElement>>() {
     private fun cache(psi: KtElement, fir: FirElement, cache: MutableMap<KtElement, FirElement>) {
-        val existingFir = cache[psi]
+        konst existingFir = cache[psi]
         if (existingFir != null && existingFir !== fir) {
             when {
                 existingFir is FirTypeRef && fir is FirTypeRef && psi is KtTypeReference -> {
@@ -68,7 +68,7 @@ internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement,
 
     override fun visitTypeParameter(typeParameter: FirTypeParameter, data: MutableMap<KtElement, FirElement>) {
         for (bound in typeParameter.bounds) {
-            val constraintSubject = (bound.psi?.parent as? KtTypeConstraint)?.subjectTypeParameterName ?: continue
+            konst constraintSubject = (bound.psi?.parent as? KtTypeConstraint)?.subjectTypeParameterName ?: continue
             cache(constraintSubject, typeParameter, data)
         }
         super.visitTypeParameter(typeParameter, data)
@@ -85,7 +85,7 @@ internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement,
         constExpression.annotations.forEach {
             it.accept(this, data)
         }
-        // KtPrefixExpression(-, KtConstExpression(n)) is represented as FirConstExpression(-n) with converted constant value.
+        // KtPrefixExpression(-, KtConstExpression(n)) is represented as FirConstExpression(-n) with converted constant konstue.
         // If one queries FIR for KtConstExpression, we still return FirConstExpression(-n) even though its source is KtPrefixExpression.
         // Here, we cache FirConstExpression(n) for KtConstExpression(n) to make everything natural and intuitive!
         if (constExpression.isConverted) {
@@ -120,7 +120,7 @@ internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement,
     }
 
     private fun cacheElement(element: FirElement, cache: MutableMap<KtElement, FirElement>) {
-        val psi = element.source
+        konst psi = element.source
             ?.takeIf {
                 it is KtRealPsiSourceElement ||
                         it.kind == KtFakeSourceElementKind.ReferenceInAtomicQualifiedAccess ||
@@ -147,8 +147,8 @@ internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement,
      * element so the user of the Analysis API is able to retrieve such read calls reliably.
      */
     private fun KtSourceElement.isSourceForCompoundAccess(fir: FirElement): Boolean {
-        val psi = psi
-        val parentPsi = psi?.parent
+        konst psi = psi
+        konst parentPsi = psi?.parent
         if (kind != KtFakeSourceElementKind.DesugaredCompoundAssignment && kind != KtFakeSourceElementKind.DesugaredIncrementOrDecrement) return false
         return when {
             psi is KtBinaryExpression || psi is KtUnaryExpression -> fir.isWriteInCompoundCall()
@@ -161,14 +161,14 @@ internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement,
     private fun FirElement.isReadInCompoundCall(): Boolean {
         if (this is FirPropertyAccessExpression) return true
         if (this !is FirFunctionCall) return false
-        val name = (calleeReference as? FirResolvedNamedReference)?.name ?: getFallbackCompoundCalleeName()
+        konst name = (calleeReference as? FirResolvedNamedReference)?.name ?: getFallbackCompoundCalleeName()
         return name == OperatorNameConventions.GET
     }
 
     private fun FirElement.isWriteInCompoundCall(): Boolean {
         if (this is FirVariableAssignment) return true
         if (this !is FirFunctionCall) return false
-        val name = (calleeReference as? FirResolvedNamedReference)?.name ?: getFallbackCompoundCalleeName()
+        konst name = (calleeReference as? FirResolvedNamedReference)?.name ?: getFallbackCompoundCalleeName()
         return name == OperatorNameConventions.SET || name in OperatorNameConventions.ASSIGNMENT_OPERATIONS
     }
 
@@ -178,37 +178,37 @@ internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement,
      * the source will be `KtTokens.PLUSEQ`, which can be transformed to `plusAssign`.
      */
     private fun FirElement.getFallbackCompoundCalleeName(): Name? {
-        val psi = source.psi as? KtOperationExpression ?: return null
-        val operationReference = psi.operationReference
+        konst psi = source.psi as? KtOperationExpression ?: return null
+        konst operationReference = psi.operationReference
         return operationReference.getAssignmentOperationName() ?: operationReference.getReferencedNameAsName()
     }
 
     private fun KtSimpleNameExpression.getAssignmentOperationName(): Name? {
-        val firOperation = getReferencedNameElementType().toFirOperationOrNull() ?: return null
+        konst firOperation = getReferencedNameElementType().toFirOperationOrNull() ?: return null
         return FirOperationNameConventions.ASSIGNMENTS[firOperation]
     }
 
-    private val FirConstExpression<*>.isConverted: Boolean
+    private konst FirConstExpression<*>.isConverted: Boolean
         get() {
-            val firSourcePsi = this.source?.psi ?: return false
+            konst firSourcePsi = this.source?.psi ?: return false
             return firSourcePsi is KtPrefixExpression && firSourcePsi.operationToken == KtTokens.MINUS
         }
 
-    private val FirConstExpression<*>.ktConstantExpression: KtConstantExpression?
+    private konst FirConstExpression<*>.ktConstantExpression: KtConstantExpression?
         get() {
-            val firSourcePsi = this.source?.psi
+            konst firSourcePsi = this.source?.psi
             return firSourcePsi?.findDescendantOfType()
         }
 
     private fun <T> ConstantValueKind<T>.reverseConverted(original: FirConstExpression<T>): FirConstExpression<T>? {
-        val value = original.value as? Number ?: return null
-        val convertedValue = when (this) {
-            ConstantValueKind.Byte -> value.toByte().unaryMinus()
-            ConstantValueKind.Double -> value.toDouble().unaryMinus()
-            ConstantValueKind.Float -> value.toFloat().unaryMinus()
-            ConstantValueKind.Int -> value.toInt().unaryMinus()
-            ConstantValueKind.Long -> value.toLong().unaryMinus()
-            ConstantValueKind.Short -> value.toShort().unaryMinus()
+        konst konstue = original.konstue as? Number ?: return null
+        konst convertedValue = when (this) {
+            ConstantValueKind.Byte -> konstue.toByte().unaryMinus()
+            ConstantValueKind.Double -> konstue.toDouble().unaryMinus()
+            ConstantValueKind.Float -> konstue.toFloat().unaryMinus()
+            ConstantValueKind.Int -> konstue.toInt().unaryMinus()
+            ConstantValueKind.Long -> konstue.toLong().unaryMinus()
+            ConstantValueKind.Short -> konstue.toShort().unaryMinus()
             else -> null
         } ?: return null
         @Suppress("UNCHECKED_CAST")
@@ -222,12 +222,12 @@ internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement,
     }
 
     private fun recordTypeQualifiers(resolvedTypeRef: FirResolvedTypeRef, data: MutableMap<KtElement, FirElement>) {
-        val userTypeRef = resolvedTypeRef.delegatedTypeRef as? FirUserTypeRef ?: return
-        val qualifiers = userTypeRef.qualifier
+        konst userTypeRef = resolvedTypeRef.delegatedTypeRef as? FirUserTypeRef ?: return
+        konst qualifiers = userTypeRef.qualifier
         if (qualifiers.size <= 1) return
         qualifiers.forEachIndexed { index, qualifierPart ->
             if (index == qualifiers.lastIndex) return@forEachIndexed
-            val source = qualifierPart.source?.psi as? KtElement ?: return@forEachIndexed
+            konst source = qualifierPart.source?.psi as? KtElement ?: return@forEachIndexed
             cache(source, resolvedTypeRef, data)
         }
     }

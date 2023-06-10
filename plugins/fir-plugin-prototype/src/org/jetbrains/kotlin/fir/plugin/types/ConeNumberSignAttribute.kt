@@ -9,10 +9,10 @@ import org.jetbrains.kotlin.fir.types.ConeAttribute
 import org.jetbrains.kotlin.fir.types.ConeAttributes
 import kotlin.reflect.KClass
 
-class ConeNumberSignAttribute private constructor(val sign: Sign) : ConeAttribute<ConeNumberSignAttribute>() {
+class ConeNumberSignAttribute private constructor(konst sign: Sign) : ConeAttribute<ConeNumberSignAttribute>() {
     companion object {
-        private val Positive = ConeNumberSignAttribute(Sign.Positive)
-        private val Negative = ConeNumberSignAttribute(Sign.Negative)
+        private konst Positive = ConeNumberSignAttribute(Sign.Positive)
+        private konst Negative = ConeNumberSignAttribute(Sign.Negative)
 
         fun fromSign(sign: Sign?): ConeNumberSignAttribute? {
             return when (sign) {
@@ -66,8 +66,8 @@ class ConeNumberSignAttribute private constructor(val sign: Sign) : ConeAttribut
         return "@${sign.name}"
     }
 
-    override val key: KClass<out ConeNumberSignAttribute>
+    override konst key: KClass<out ConeNumberSignAttribute>
         get() = ConeNumberSignAttribute::class
 }
 
-val ConeAttributes.numberSign: ConeNumberSignAttribute? by ConeAttributes.attributeAccessor<ConeNumberSignAttribute>()
+konst ConeAttributes.numberSign: ConeNumberSignAttribute? by ConeAttributes.attributeAccessor<ConeNumberSignAttribute>()

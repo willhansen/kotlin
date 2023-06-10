@@ -1,9 +1,9 @@
 // FIR_IDENTICAL
 // !LANGUAGE: +ContextReceivers
 
-class A<T>(val a: T)
-class B(val b: Any)
-class C(val c: Any)
+class A<T>(konst a: T)
+class B(konst b: Any)
+class C(konst c: Any)
 
 context(labelAInt@A<Int>, A<String>, labelB@B) fun f() {
     this@labelAInt.a.toFloat()
@@ -11,7 +11,7 @@ context(labelAInt@A<Int>, A<String>, labelB@B) fun f() {
     this@labelB.b
 }
 
-context(labelAInt@A<Int>, A<String>, labelB@B) val C.p: Int
+context(labelAInt@A<Int>, A<String>, labelB@B) konst C.p: Int
     get() {
         this@labelAInt.a.toFloat()
         this@A.a.length

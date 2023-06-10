@@ -371,9 +371,9 @@ public class ClosureCodegen extends MemberCodegen<KtElement> {
         for (int i = 0; i < calleeParameters.size(); i++) {
             ParameterDescriptor calleeParameter = calleeParameters.get(i);
             KotlinType parameterType = calleeParameter.getType();
-            StackValue value;
+            StackValue konstue;
             if (isVarargInvoke) {
-                value = StackValue.arrayElement(
+                konstue = StackValue.arrayElement(
                         OBJECT_TYPE, null,
                         StackValue.local(1, bridgeParameterTypes[0], bridgeParameterKotlinTypes.get(0)),
                         StackValue.constant(i)
@@ -381,7 +381,7 @@ public class ClosureCodegen extends MemberCodegen<KtElement> {
             }
             else {
                 Type type = bridgeParameterTypes[i];
-                value = StackValue.local(slot, type, bridgeParameterKotlinTypes.get(i));
+                konstue = StackValue.local(slot, type, bridgeParameterKotlinTypes.get(i));
                 slot += type.getSize();
             }
             if (InlineClassesCodegenUtilKt.isInlineClassWithUnderlyingTypeAnyOrAnyN(parameterType) && functionReferenceCall == null) {
@@ -390,7 +390,7 @@ public class ClosureCodegen extends MemberCodegen<KtElement> {
                 assert representation != null : "Not an inline class type: " + parameterType;
                 parameterType = representation.getUnderlyingType();
             }
-            value.put(typeMapper.mapType(calleeParameter), parameterType, iv);
+            konstue.put(typeMapper.mapType(calleeParameter), parameterType, iv);
         }
 
         iv.invokevirtual(asmType.getInternalName(), delegate.getName(), delegate.getDescriptor(), false);
@@ -577,7 +577,7 @@ public class ClosureCodegen extends MemberCodegen<KtElement> {
             args.add(FieldInfo.createForHiddenField(ownerType, typeMapper.mapType(captureReceiverType), captureReceiverType, fieldName));
         }
 
-        for (EnclosedValueDescriptor enclosedValueDescriptor : closure.getCaptureVariables().values()) {
+        for (EnclosedValueDescriptor enclosedValueDescriptor : closure.getCaptureVariables().konstues()) {
             DeclarationDescriptor descriptor = enclosedValueDescriptor.getDescriptor();
             if ((descriptor instanceof VariableDescriptor && !(descriptor instanceof PropertyDescriptor)) ||
                 ExpressionTypingUtils.isLocalFunction(descriptor)) {

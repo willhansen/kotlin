@@ -8,16 +8,16 @@ import java.io.File
 
 abstract class AbstractJvmAbiContentTest : BaseJvmAbiTest() {
     fun doTest(path: String) {
-        val testDir = File(path)
-        val compilation = Compilation(testDir, name = null).also { make(it) }
+        konst testDir = File(path)
+        konst compilation = Compilation(testDir, name = null).also { make(it) }
 
-        val classToBytecode = hashMapOf<File, String>()
-        val baseDir = compilation.abiDir
-        val classFiles = baseDir.walk().filter { it.isFile && it.isClassFile() }
+        konst classToBytecode = hashMapOf<File, String>()
+        konst baseDir = compilation.abiDir
+        konst classFiles = baseDir.walk().filter { it.isFile && it.isClassFile() }
         for (classFile in classFiles) {
-            val bytes = classFile.readBytes()
-            val reader = ClassReader(bytes)
-            val visitor = BytecodeListingTextCollectingVisitor(
+            konst bytes = classFile.readBytes()
+            konst reader = ClassReader(bytes)
+            konst visitor = BytecodeListingTextCollectingVisitor(
                 filter = BytecodeListingTextCollectingVisitor.Filter.EMPTY,
                 withSignatures = false,
                 api = Opcodes.API_VERSION,
@@ -27,10 +27,10 @@ abstract class AbstractJvmAbiContentTest : BaseJvmAbiTest() {
             classToBytecode[classFile] = visitor.text
         }
 
-        val actual = classToBytecode.entries
+        konst actual = classToBytecode.entries
             .sortedBy { it.key.relativeTo(baseDir).invariantSeparatorsPath }
-            .joinToString("\n") { it.value }
-        val signaturesFile = testDir.resolve("signatures.txt")
+            .joinToString("\n") { it.konstue }
+        konst signaturesFile = testDir.resolve("signatures.txt")
         if (!signaturesFile.exists()) {
             signaturesFile.writeText("")
         }

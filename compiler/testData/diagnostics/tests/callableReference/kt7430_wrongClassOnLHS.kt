@@ -3,7 +3,7 @@
 
 class Unrelated()
 
-class Test(val name: String = "") {
+class Test(konst name: String = "") {
     init {
         Unrelated::<!UNRESOLVED_REFERENCE!>name<!>
         Unrelated::<!UNRESOLVED_REFERENCE!>foo<!>

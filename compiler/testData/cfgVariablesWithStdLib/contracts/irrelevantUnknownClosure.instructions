@@ -72,7 +72,7 @@ sink:
 =====================
 == foo ==
 fun foo() {
-    val x: Int
+    konst x: Int
     myRun {
         unknownRun { println("shouldn't change anything") }
         x = 42
@@ -82,8 +82,8 @@ fun foo() {
 ---------------------
 L0:
   1 <START>                                                                                                 INIT: in: {} out: {}            USE: in: {} out: {}
-  2 mark({ val x: Int myRun { unknownRun { println("shouldn't change anything") } x = 42 } println(x) })
-    v(val x: Int)                                                                                           INIT: in: {} out: {x=D}
+  2 mark({ konst x: Int myRun { unknownRun { println("shouldn't change anything") } x = 42 } println(x) })
+    v(konst x: Int)                                                                                           INIT: in: {} out: {x=D}
     mark({ unknownRun { println("shouldn't change anything") } x = 42 })                                    INIT: in: {x=D} out: {x=D}
     r({ unknownRun { println("shouldn't change anything") } x = 42 }) -> <v0>
     mark(myRun { unknownRun { println("shouldn't change anything") } x = 42 })

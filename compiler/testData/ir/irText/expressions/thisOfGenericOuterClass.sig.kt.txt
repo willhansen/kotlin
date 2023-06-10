@@ -5,7 +5,7 @@ class Outer<T : Any?> {
   // CHECK:
   //   Mangled name: Outer{}x
   //   Public signature: /Outer.x|-8060530855978347579[0]
-  val x: T
+  konst x: T
     // CHECK JVM_IR:
     //   Mangled name: Outer#<get-x>(){}1:0
     //   Public signature: /Outer.x.<get-x>|-8893883356128097563[0]
@@ -21,7 +21,7 @@ class Outer<T : Any?> {
     // CHECK:
     //   Mangled name: Outer.Inner{}y
     //   Public signature: /Outer.Inner.y|3625903257357557171[0]
-    val y: Int
+    konst y: Int
       // CHECK JVM_IR:
       //   Mangled name: Outer.Inner#<get-y>(){}kotlin.Int
       //   Public signature: /Outer.Inner.y.<get-y>|-6745575372101973707[0]

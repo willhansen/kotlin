@@ -13,15 +13,15 @@ public class JavaClass {
 // FILE: main.kt
 
 interface KI<T> {
-    val x: String get() = ""
-    val y: T
+    konst x: String get() = ""
+    konst y: T
 }
 
 @JvmRecord
-data class MyRec<R>(override val x: String, override val y: R) : KI<R>
+data class MyRec<R>(override konst x: String, override konst y: R) : KI<R>
 
 fun box(): String {
-    val res = JavaClass.box()
+    konst res = JavaClass.box()
     if (res != "OKOK") return "fail 1: $res"
     return "OK"
 }

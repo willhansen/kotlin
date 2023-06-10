@@ -15,27 +15,27 @@ import kotlin.test.assertTrue
 
 @DisplayName("Gradle daemon memory leak")
 class GradleDaemonMemoryIT : KGPDaemonsBaseTest() {
-    override val defaultBuildOptions: BuildOptions
+    override konst defaultBuildOptions: BuildOptions
         get() = super.defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
 
     // For corresponding documentation, see https://docs.gradle.org/current/userguide/gradle_daemon.html
-    // Setting user.variant to different value implies a new daemon process will be created.
+    // Setting user.variant to different konstue implies a new daemon process will be created.
     // In order to stop daemon process, special exit task is used ( System.exit(0) ).
     @DisplayName("No small memory leak in plugin")
     @GradleTest
     fun testGradleDaemonMemory(gradleVersion: GradleVersion) {
         project("gradleDaemonMemory", gradleVersion) {
-            val userVariantArg = "-Duser.variant=ForTest"
-            val memoryMaxGrowthLimitKB = 5000
-            val buildCount = 10
-            val reportMemoryUsage = "-Dkotlin.gradle.test.report.memory.usage=true"
-            val reportRegex = "\\[KOTLIN]\\[PERF] Used memory after build: (\\d+) kb \\(difference since build start: ([+-]?\\d+) kb\\)"
+            konst userVariantArg = "-Duser.variant=ForTest"
+            konst memoryMaxGrowthLimitKB = 5000
+            konst buildCount = 10
+            konst reportMemoryUsage = "-Dkotlin.gradle.test.report.memory.usage=true"
+            konst reportRegex = "\\[KOTLIN]\\[PERF] Used memory after build: (\\d+) kb \\(difference since build start: ([+-]?\\d+) kb\\)"
                 .toRegex()
 
-            val usedMemory: List<Int> = (1..buildCount).map {
+            konst usedMemory: List<Int> = (1..buildCount).map {
                 var reportedMemory = 0
                 build(userVariantArg, reportMemoryUsage, "clean", "assemble") {
-                    val matches = output
+                    konst matches = output
                         .lineSequence()
                         .filter { it.contains("[KOTLIN][PERF]") }
                         .joinToString(separator = "\n")
@@ -51,10 +51,10 @@ class GradleDaemonMemoryIT : KGPDaemonsBaseTest() {
             }
 
             // ensure that the maximum of the used memory established after several first builds doesn't raise significantly in the subsequent builds
-            val establishedMaximum = usedMemory.take(buildCount / 2).maxOrNull()!!
-            val totalMaximum = usedMemory.maxOrNull()!!
+            konst establishedMaximum = usedMemory.take(buildCount / 2).maxOrNull()!!
+            konst totalMaximum = usedMemory.maxOrNull()!!
 
-            val maxGrowth = totalMaximum - establishedMaximum
+            konst maxGrowth = totalMaximum - establishedMaximum
             assertTrue(
                 maxGrowth <= memoryMaxGrowthLimitKB,
                 "Maximum used memory over series of builds growth $maxGrowth " +

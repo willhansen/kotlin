@@ -2,7 +2,7 @@ FILE fqName:<root> fileName:/deprecated.kt
   FUN name:create visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun create (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK"
+        CONST String type=kotlin.String konstue="OK"
   FUN name:create visibility:public modality:FINAL <> (s:kotlin.String) returnType:kotlin.String
     annotations:
       Deprecated(message = 'Use create() instead()', replaceWith = ReplaceWith(expression = 'create()', imports = []), level = <null>)

@@ -17,11 +17,11 @@ fun fn2(f1: (String) -> String, f2: (String) -> String  ) = f2(f1(""))
 
 fun fn3(i: Int, f: (Int, Int, Int) -> Int): Int = f(i, i, i)
 
-val x1 = fn1(1, ::foo, ::foo)
-val x2 = fn1(1, ::foo, ::bar)
+konst x1 = fn1(1, ::foo, ::foo)
+konst x2 = fn1(1, ::foo, ::bar)
 
-val x3 = fn2(::bar, ::foo)
-val x4 = <!OVERLOAD_RESOLUTION_AMBIGUITY!>fn2<!>(::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>, ::bar)
-val x5 = <!OVERLOAD_RESOLUTION_AMBIGUITY!>fn2<!>(::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>, ::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>)
+konst x3 = fn2(::bar, ::foo)
+konst x4 = <!OVERLOAD_RESOLUTION_AMBIGUITY!>fn2<!>(::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>, ::bar)
+konst x5 = <!OVERLOAD_RESOLUTION_AMBIGUITY!>fn2<!>(::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>, ::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>)
 
-val x6 = fn3(1, ::qux)
+konst x6 = fn3(1, ::qux)

@@ -4,9 +4,9 @@
 // IGNORE_BACKEND: JS_IR_ES6
 
 sealed class ArrayMap<T : Any> : Iterable<T> {
-    abstract val size: Int
+    abstract konst size: Int
 
-    abstract operator fun set(index: Int, value: T)
+    abstract operator fun set(index: Int, konstue: T)
     abstract operator fun get(index: Int): T?
 
     abstract fun copy(): ArrayMap<T>
@@ -16,10 +16,10 @@ fun ArrayMap<*>.isEmpty(): Boolean = size == 0
 fun ArrayMap<*>.isNotEmpty(): Boolean = size != 0
 
 internal object EmptyArrayMap : ArrayMap<Nothing>() {
-    override val size: Int
+    override konst size: Int
         get() = 0
 
-    override fun set(index: Int, value: Nothing) {
+    override fun set(index: Int, konstue: Nothing) {
         throw IllegalStateException()
     }
 
@@ -38,19 +38,19 @@ internal object EmptyArrayMap : ArrayMap<Nothing>() {
     }
 }
 
-internal class OneElementArrayMap<T : Any>(val value: T, val index: Int) : ArrayMap<T>() {
-    override val size: Int
+internal class OneElementArrayMap<T : Any>(konst konstue: T, konst index: Int) : ArrayMap<T>() {
+    override konst size: Int
         get() = 1
 
-    override fun set(index: Int, value: T) {
+    override fun set(index: Int, konstue: T) {
         throw IllegalStateException()
     }
 
     override fun get(index: Int): T? {
-        return if (index == this.index) value else null
+        return if (index == this.index) konstue else null
     }
 
-    override fun copy(): ArrayMap<T> = OneElementArrayMap(value, index)
+    override fun copy(): ArrayMap<T> = OneElementArrayMap(konstue, index)
 
     override fun iterator(): Iterator<T> {
         return object : Iterator<T> {
@@ -63,7 +63,7 @@ internal class OneElementArrayMap<T : Any>(val value: T, val index: Int) : Array
             override fun next(): T {
                 if (notVisited) {
                     notVisited = false
-                    return value
+                    return konstue
                 } else {
                     throw NoSuchElementException()
                 }
@@ -76,8 +76,8 @@ internal class ArrayMapImpl<T : Any> private constructor(
     private var data: Array<Any?>
 ) : ArrayMap<T>() {
     companion object {
-        private const val DEFAULT_SIZE = 20
-        private const val INCREASE_K = 2
+        private const konst DEFAULT_SIZE = 20
+        private const konst INCREASE_K = 2
     }
 
     constructor() : this(arrayOfNulls<Any>(DEFAULT_SIZE))
@@ -92,12 +92,12 @@ internal class ArrayMapImpl<T : Any> private constructor(
         }
     }
 
-    override operator fun set(index: Int, value: T) {
+    override operator fun set(index: Int, konstue: T) {
         ensureCapacity(index)
         if (data[index] == null) {
             size++
         }
-        data[index] = value
+        data[index] = konstue
     }
 
     override operator fun get(index: Int): T? {
@@ -134,8 +134,8 @@ internal class ArrayMapImpl<T : Any> private constructor(
 
     fun entries(): List<Entry<T>> {
         @Suppress("UNCHECKED_CAST")
-        return data.mapIndexedNotNull { index, value -> if (value != null) Entry(index, value as T) else null }
+        return data.mapIndexedNotNull { index, konstue -> if (konstue != null) Entry(index, konstue as T) else null }
     }
 
-    data class Entry<T>(override val key: Int, override val value: T) : Map.Entry<Int, T>
+    data class Entry<T>(override konst key: Int, override konst konstue: T) : Map.Entry<Int, T>
 }

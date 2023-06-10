@@ -9,12 +9,12 @@ package org.jetbrains.kotlin.diagnostics.rendering
 sealed class RenderingContext {
     abstract operator fun <T> get(key: Key<T>): T
 
-    abstract class Key<out T>(val name: String) {
+    abstract class Key<out T>(konst name: String) {
         abstract fun compute(objectsToRender: Collection<Any?>): T
     }
 
-    class Impl(private val objectsToRender: Collection<Any?>) : RenderingContext() {
-        private val data = linkedMapOf<Key<*>, Any?>()
+    class Impl(private konst objectsToRender: Collection<Any?>) : RenderingContext() {
+        private konst data = linkedMapOf<Key<*>, Any?>()
 
         @Suppress("UNCHECKED_CAST")
         override fun <T> get(key: Key<T>): T {

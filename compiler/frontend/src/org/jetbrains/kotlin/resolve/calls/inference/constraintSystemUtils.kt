@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.types.TypeProjectionImpl
 import java.util.*
 
 fun ConstraintSystem.getNestedTypeVariables(type: KotlinType): List<TypeVariable> {
-    val nestedTypeParameters = type.getNestedTypeParameters().toSet()
+    konst nestedTypeParameters = type.getNestedTypeParameters().toSet()
     return typeVariables.filter { it.originalTypeParameter in nestedTypeParameters }
 }
 
@@ -40,13 +40,13 @@ fun ConstraintSystem.descriptorToVariable(call: CallHandle, descriptor: TypePara
 }
 
 internal fun KotlinType.getNestedArguments(): List<TypeProjection> {
-    val result = ArrayList<TypeProjection>()
+    konst result = ArrayList<TypeProjection>()
 
-    val stack = ArrayDeque<TypeProjection>()
+    konst stack = ArrayDeque<TypeProjection>()
     stack.push(TypeProjectionImpl(this))
 
     while (!stack.isEmpty()) {
-        val typeProjection = stack.pop()
+        konst typeProjection = stack.pop()
         if (typeProjection.isStarProjection) continue
 
         result.add(typeProjection)

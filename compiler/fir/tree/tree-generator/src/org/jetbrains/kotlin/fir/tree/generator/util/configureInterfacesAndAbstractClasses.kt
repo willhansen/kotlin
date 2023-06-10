@@ -13,11 +13,11 @@ import org.jetbrains.kotlin.fir.tree.generator.model.KindOwner
 import org.jetbrains.kotlin.generators.util.Node
 import org.jetbrains.kotlin.generators.util.solveGraphForClassVsInterface
 
-private class NodeImpl(val element: KindOwner) : Node {
-    override val parents: List<Node>
+private class NodeImpl(konst element: KindOwner) : Node {
+    override konst parents: List<Node>
         get() = element.allParents.map(::NodeImpl)
 
-    override val origin: NodeImpl
+    override konst origin: NodeImpl
         get() = if (element.origin == element) this else NodeImpl(element.origin)
 
     override fun equals(other: Any?): Boolean =
@@ -28,8 +28,8 @@ private class NodeImpl(val element: KindOwner) : Node {
 }
 
 fun configureInterfacesAndAbstractClasses(builder: AbstractFirTreeBuilder) {
-    val elements = collectElements(builder)
-    val solution = solveGraphForClassVsInterface(
+    konst elements = collectElements(builder)
+    konst solution = solveGraphForClassVsInterface(
         elements,
         elements.filter { it.element.kind?.isInterface == true },
         elements.filter { it.element.kind?.isInterface == false },
@@ -43,13 +43,13 @@ private fun collectElements(builder: AbstractFirTreeBuilder): List<NodeImpl> {
 }
 
 private fun updateKinds(nodes: List<NodeImpl>, solution: List<Boolean>) {
-    val allParents = nodes.flatMapTo(mutableSetOf()) { element -> element.parents.map { it.origin } }
+    konst allParents = nodes.flatMapTo(mutableSetOf()) { element -> element.parents.map { it.origin } }
 
     for (index in solution.indices) {
-        val isClass = solution[index]
-        val node = nodes[index].origin
-        val element = node.element
-        val existingKind = element.kind
+        konst isClass = solution[index]
+        konst node = nodes[index].origin
+        konst element = node.element
+        konst existingKind = element.kind
         if (isClass) {
             if (existingKind == Implementation.Kind.Interface)
                 throw IllegalStateException(element.toString())
@@ -74,7 +74,7 @@ private fun updateKinds(nodes: List<NodeImpl>, solution: List<Boolean>) {
 
 private fun updateSealedKinds(nodes: Collection<NodeImpl>) {
     for (node in nodes) {
-        val element = node.element
+        konst element = node.element
         if (element is Element) {
             if (element.isSealed) {
                 element.kind = when (element.kind) {
@@ -87,4 +87,4 @@ private fun updateSealedKinds(nodes: Collection<NodeImpl>) {
     }
 }
 
-private val KindOwner.origin: KindOwner get() = if (this is ImplementationWithArg) implementation else this
+private konst KindOwner.origin: KindOwner get() = if (this is ImplementationWithArg) implementation else this

@@ -23,14 +23,14 @@ class MyContinuation implements Continuation<I> {
     public CoroutineContext getContext() {
         return EmptyCoroutineContext.INSTANCE;
     }
-    public void resumeWith(Object value) {}
+    public void resumeWith(Object konstue) {}
 }
 
 // MODULE: main(useLib)
 // FILE: main.kt
 
 fun box(): String {
-    val res = UseLib.useFoo()
+    konst res = UseLib.useFoo()
     if (res == "LibKt\$foo\$2 LibKt null") {
         return "OK"
     } else {

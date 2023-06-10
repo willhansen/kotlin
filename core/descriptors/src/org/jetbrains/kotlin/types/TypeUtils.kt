@@ -46,7 +46,7 @@ fun KotlinType.nullability(): TypeNullability {
     }
 }
 
-val KotlinType.builtIns: KotlinBuiltIns
+konst KotlinType.builtIns: KotlinBuiltIns
     get() = constructor.builtIns
 
 fun KotlinType.makeNullable() = TypeUtils.makeNullable(this)
@@ -97,15 +97,15 @@ fun KotlinType.isEnum(): Boolean = (constructor.declarationDescriptor as? ClassD
 fun KotlinType?.isArrayOfNothing(): Boolean {
     if (this == null || !KotlinBuiltIns.isArray(this)) return false
 
-    val typeArg = arguments.firstOrNull()?.type
+    konst typeArg = arguments.firstOrNull()?.type
     return typeArg != null && KotlinBuiltIns.isNothingOrNullableNothing(typeArg)
 }
 
 fun KotlinType.isGenericArrayOfTypeParameter(): Boolean {
     if (!KotlinBuiltIns.isArray(this)) return false
-    val argument0 = arguments[0]
+    konst argument0 = arguments[0]
     if (argument0.isStarProjection) return false
-    val argument0type = argument0.type
+    konst argument0type = argument0.type
     return argument0type.isTypeParameter() ||
             argument0type.isGenericArrayOfTypeParameter()
 }
@@ -148,12 +148,12 @@ fun createProjection(type: KotlinType, projectionKind: Variance, typeParameterDe
 fun <T> Collection<T>.closure(preserveOrder: Boolean = false, f: (T) -> Collection<T>): Collection<T> {
     if (size == 0) return this
 
-    val result = if (preserveOrder) LinkedHashSet(this) else HashSet(this)
+    konst result = if (preserveOrder) LinkedHashSet(this) else HashSet(this)
     var elementsToCheck = result
     var oldSize = 0
     while (result.size > oldSize) {
         oldSize = result.size
-        val toAdd = if (preserveOrder) linkedSetOf() else hashSetOf<T>()
+        konst toAdd = if (preserveOrder) linkedSetOf() else hashSetOf<T>()
         elementsToCheck.forEach { toAdd.addAll(f(it)) }
         result.addAll(toAdd)
         elementsToCheck = toAdd
@@ -166,7 +166,7 @@ fun boundClosure(types: Collection<KotlinType>): Collection<KotlinType> =
     types.closure { type -> TypeUtils.getTypeParameterDescriptorOrNull(type)?.upperBounds ?: emptySet() }
 
 fun constituentTypes(types: Collection<KotlinType>): Collection<KotlinType> {
-    val result = hashSetOf<KotlinType>()
+    konst result = hashSetOf<KotlinType>()
     constituentTypes(result, types)
     return result
 }
@@ -186,7 +186,7 @@ private fun constituentTypes(result: MutableSet<KotlinType>, types: Collection<K
 }
 
 fun KotlinType.getImmediateSuperclassNotAny(): KotlinType? {
-    val superclasses = constructor.supertypes.filter {
+    konst superclasses = constructor.supertypes.filter {
         DescriptorUtils.isClassOrEnumClass(it.constructor.declarationDescriptor) && !KotlinBuiltIns.isAnyOrNullableAny(it)
     }
     return superclasses.singleOrNull()?.let {
@@ -208,7 +208,7 @@ private fun KotlinType.extractTypeParametersFromUpperBounds(
     to: MutableSet<TypeParameterDescriptor>,
     visitedTypeParameters: Set<TypeParameterDescriptor>?
 ) {
-    val declarationDescriptor = constructor.declarationDescriptor
+    konst declarationDescriptor = constructor.declarationDescriptor
 
     if (declarationDescriptor is TypeParameterDescriptor) {
         if (constructor != baseType.constructor) {
@@ -219,10 +219,10 @@ private fun KotlinType.extractTypeParametersFromUpperBounds(
             }
         }
     } else {
-        val typeParameters = (constructor.declarationDescriptor as? ClassifierDescriptorWithTypeParameters)?.declaredTypeParameters
+        konst typeParameters = (constructor.declarationDescriptor as? ClassifierDescriptorWithTypeParameters)?.declaredTypeParameters
         for ((i, argument) in arguments.withIndex()) {
-            val typeParameter = typeParameters?.getOrNull(i) // TODO: support inner classes' type parameters
-            val isTypeParameterVisited = typeParameter != null && visitedTypeParameters != null && typeParameter in visitedTypeParameters
+            konst typeParameter = typeParameters?.getOrNull(i) // TODO: support inner classes' type parameters
+            konst isTypeParameterVisited = typeParameter != null && visitedTypeParameters != null && typeParameter in visitedTypeParameters
             if (isTypeParameterVisited || argument.isStarProjection) continue
             if (argument.type.constructor.declarationDescriptor in to || argument.type.constructor == baseType.constructor) continue
             argument.type.extractTypeParametersFromUpperBounds(baseType, to, visitedTypeParameters)
@@ -247,10 +247,10 @@ private fun KotlinType.containsSelfTypeParameter(
 ): Boolean {
     if (this.constructor == baseConstructor) return true
 
-    val typeParameters = (constructor.declarationDescriptor as? ClassifierDescriptorWithTypeParameters)?.declaredTypeParameters
+    konst typeParameters = (constructor.declarationDescriptor as? ClassifierDescriptorWithTypeParameters)?.declaredTypeParameters
     return arguments.withIndex().any { (i, argument) ->
-        val typeParameter = typeParameters?.getOrNull(i)
-        val isTypeParameterVisited =
+        konst typeParameter = typeParameters?.getOrNull(i)
+        konst isTypeParameterVisited =
             typeParameter != null && visitedTypeParameters != null && typeParameter in visitedTypeParameters
         if (isTypeParameterVisited || argument.isStarProjection) return@any false
         argument.type.containsSelfTypeParameter(baseConstructor, visitedTypeParameters)
@@ -258,7 +258,7 @@ private fun KotlinType.containsSelfTypeParameter(
 }
 
 inline fun KotlinType.replaceArgumentsByParametersWith(replacement: (TypeParameterDescriptor) -> TypeProjection): KotlinType {
-    val unwrapped = unwrap()
+    konst unwrapped = unwrap()
     return when (unwrapped) {
         is FlexibleType -> KotlinTypeFactory.flexibleType(
             unwrapped.lowerBound.replaceArgumentsByParametersWith(replacement),
@@ -271,7 +271,7 @@ inline fun KotlinType.replaceArgumentsByParametersWith(replacement: (TypeParamet
 inline fun SimpleType.replaceArgumentsByParametersWith(replacement: (TypeParameterDescriptor) -> TypeProjection): SimpleType {
     if (constructor.parameters.isEmpty() || constructor.declarationDescriptor == null) return this
 
-    val newArguments = constructor.parameters.map(replacement)
+    konst newArguments = constructor.parameters.map(replacement)
 
     return replace(newArguments)
 }
@@ -303,23 +303,23 @@ fun KotlinType.requiresTypeAliasExpansion(): Boolean =
 
 fun KotlinType.containsTypeProjectionsInTopLevelArguments(): Boolean {
     if (isError) return false
-    val possiblyInnerType = buildPossiblyInnerType() ?: return false
+    konst possiblyInnerType = buildPossiblyInnerType() ?: return false
     return possiblyInnerType.arguments.any { it.isStarProjection || it.projectionKind != Variance.INVARIANT }
 }
 
-val TypeParameterDescriptor.representativeUpperBound: KotlinType
+konst TypeParameterDescriptor.representativeUpperBound: KotlinType
     get() {
         assert(upperBounds.isNotEmpty()) { "Upper bounds should not be empty: $this" }
 
         return upperBounds.firstOrNull {
-            val classDescriptor = it.constructor.declarationDescriptor as? ClassDescriptor ?: return@firstOrNull false
+            konst classDescriptor = it.constructor.declarationDescriptor as? ClassDescriptor ?: return@firstOrNull false
             classDescriptor.kind != ClassKind.INTERFACE && classDescriptor.kind != ClassKind.ANNOTATION_CLASS
         } ?: upperBounds.first()
     }
 
 fun KotlinType.expandIntersectionTypeIfNecessary(): Collection<KotlinType> {
     if (constructor !is IntersectionTypeConstructor) return listOf(this)
-    val types = constructor.supertypes
+    konst types = constructor.supertypes
     return if (isMarkedNullable) {
         types.map { it.makeNullable() }
     } else {
@@ -340,15 +340,15 @@ fun SimpleType.unCapture(): UnwrappedType {
     if (this is NewCapturedType)
         return unCaptureTopLevelType()
 
-    val newArguments = arguments.map(::unCaptureProjection)
+    konst newArguments = arguments.map(::unCaptureProjection)
     return replace(newArguments).unwrap()
 }
 
 fun unCaptureProjection(projection: TypeProjection): TypeProjection {
-    val unCapturedProjection = (projection.type.constructor as? NewCapturedTypeConstructor)?.projection ?: projection
+    konst unCapturedProjection = (projection.type.constructor as? NewCapturedTypeConstructor)?.projection ?: projection
     if (unCapturedProjection.isStarProjection || unCapturedProjection.type is ErrorType) return unCapturedProjection
 
-    val newArguments = unCapturedProjection.type.arguments.map(::unCaptureProjection)
+    konst newArguments = unCapturedProjection.type.arguments.map(::unCaptureProjection)
     return TypeProjectionImpl(
         unCapturedProjection.projectionKind,
         unCapturedProjection.type.replace(newArguments)
@@ -356,17 +356,17 @@ fun unCaptureProjection(projection: TypeProjection): TypeProjection {
 }
 
 fun AbbreviatedType.unCapture(): SimpleType {
-    val newType = expandedType.unCapture()
+    konst newType = expandedType.unCapture()
     return AbbreviatedType(newType as? SimpleType ?: expandedType, abbreviation)
 }
 
 fun FlexibleType.unCapture(): FlexibleType {
-    val unCapturedLowerBound = when (val unCaptured = lowerBound.unCapture()) {
+    konst unCapturedLowerBound = when (konst unCaptured = lowerBound.unCapture()) {
         is SimpleType -> unCaptured
         is FlexibleType -> unCaptured.lowerBound
     }
 
-    val unCapturedUpperBound = when (val unCaptured = upperBound.unCapture()) {
+    konst unCapturedUpperBound = when (konst unCaptured = upperBound.unCapture()) {
         is SimpleType -> unCaptured
         is FlexibleType -> unCaptured.upperBound
     }
@@ -377,7 +377,7 @@ fun FlexibleType.unCapture(): FlexibleType {
 private fun NewCapturedType.unCaptureTopLevelType(): UnwrappedType {
     if (lowerType != null) return lowerType
 
-    val supertypes = constructor.supertypes
+    konst supertypes = constructor.supertypes
     if (supertypes.isNotEmpty()) return intersectTypes(supertypes)
 
     return constructor.projection.type.unwrap()

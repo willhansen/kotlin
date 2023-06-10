@@ -8,12 +8,12 @@ import org.jetbrains.kotlin.konan.blackboxtest.support.ClassLevelProperty
 
 @Target(AnnotationTarget.CLASS)
 internal annotation class DisabledTests(
-    val sourceLocations: Array<String>
+    konst sourceLocations: Array<String>
 )
 
 @Target(AnnotationTarget.CLASS)
 internal annotation class DisabledTestsIfProperty(
-    val sourceLocations: Array<String>,
-    val property: ClassLevelProperty,
-    val propertyValue: String
+    konst sourceLocations: Array<String>,
+    konst property: ClassLevelProperty,
+    konst propertyValue: String
 )

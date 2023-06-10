@@ -15,18 +15,18 @@ plugins {
     base
 }
 
-val intellijReleaseType: String by rootProject.extra
-val intellijVersion = rootProject.extra["versions.intellijSdk"] as String
-val intellijVersionForIde = rootProject.intellijSdkVersionForIde()
-val asmVersion = rootProject.findProperty("versions.jar.asm-all") as String?
-val androidStudioRelease = rootProject.findProperty("versions.androidStudioRelease") as String?
-val androidStudioBuild = rootProject.findProperty("versions.androidStudioBuild") as String?
-val intellijSeparateSdks: Boolean by rootProject.extra
+konst intellijReleaseType: String by rootProject.extra
+konst intellijVersion = rootProject.extra["versions.intellijSdk"] as String
+konst intellijVersionForIde = rootProject.intellijSdkVersionForIde()
+konst asmVersion = rootProject.findProperty("versions.jar.asm-all") as String?
+konst androidStudioRelease = rootProject.findProperty("versions.androidStudioRelease") as String?
+konst androidStudioBuild = rootProject.findProperty("versions.androidStudioBuild") as String?
+konst intellijSeparateSdks: Boolean by rootProject.extra
 
 fun checkIntellijVersion(intellijVersion: String) {
-    val intellijVersionDelimiterIndex = intellijVersion.indexOfAny(charArrayOf('.', '-'))
+    konst intellijVersionDelimiterIndex = intellijVersion.indexOfAny(charArrayOf('.', '-'))
     if (intellijVersionDelimiterIndex == -1) {
-        error("Invalid IDEA version $intellijVersion")
+        error("Inkonstid IDEA version $intellijVersion")
     }
 }
 checkIntellijVersion(intellijVersion)
@@ -38,7 +38,7 @@ logger.info("androidStudioRelease: $androidStudioRelease")
 logger.info("androidStudioBuild: $androidStudioBuild")
 logger.info("intellijSeparateSdks: $intellijSeparateSdks")
 
-val androidStudioOs by lazy {
+konst androidStudioOs by lazy {
     when {
         OperatingSystem.current().isWindows -> "windows"
         OperatingSystem.current().isMacOsX -> "mac"
@@ -70,34 +70,34 @@ repositories {
     maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies")
 }
 
-val intellij by configurations.creating
-val intellijForIde by configurations.creating
-val androidStudio by configurations.creating
-val sources by configurations.creating
-val sourcesForIde by configurations.creating
-val jpsStandalone by configurations.creating
-val jpsStandaloneForIde by configurations.creating
-val intellijCore by configurations.creating
-val intellijCoreForIde by configurations.creating
+konst intellij by configurations.creating
+konst intellijForIde by configurations.creating
+konst androidStudio by configurations.creating
+konst sources by configurations.creating
+konst sourcesForIde by configurations.creating
+konst jpsStandalone by configurations.creating
+konst jpsStandaloneForIde by configurations.creating
+konst intellijCore by configurations.creating
+konst intellijCoreForIde by configurations.creating
 
 /**
  * Special repository for annotations.jar required for idea runtime only.
  *
  * See IntellijDependenciesKt.intellijRuntimeAnnotations for more details.
  */
-val intellijRuntimeAnnotations = "intellij-runtime-annotations"
+konst intellijRuntimeAnnotations = "intellij-runtime-annotations"
 
-val dependenciesDir = (findProperty("kotlin.build.dependencies.dir") as String?)?.let(::File)
+konst dependenciesDir = (findProperty("kotlin.build.dependencies.dir") as String?)?.let(::File)
     ?: rootProject.gradle.gradleUserHomeDir.resolve("kotlin-build-dependencies")
 
-val customDepsRepoDir = dependenciesDir.resolve("repo")
+konst customDepsRepoDir = dependenciesDir.resolve("repo")
 
-val customDepsOrg: String by rootProject.extra
-val repoDir = File(customDepsRepoDir, customDepsOrg)
+konst customDepsOrg: String by rootProject.extra
+konst repoDir = File(customDepsRepoDir, customDepsOrg)
 
 dependencies {
     if (androidStudioRelease != null) {
-        val extension = if (androidStudioOs == "linux")
+        konst extension = if (androidStudioOs == "linux")
             "tar.gz"
         else
             "zip"
@@ -127,19 +127,19 @@ fun prepareDeps(
     jpsStandalone: Configuration,
     intellijVersion: String
 ) {
-    val makeIntellijCore = buildIvyRepositoryTask(intellijCore, customDepsOrg, customDepsRepoDir)
+    konst makeIntellijCore = buildIvyRepositoryTask(intellijCore, customDepsOrg, customDepsRepoDir)
 
-    val makeIntellijAnnotations = tasks.register("makeIntellijAnnotations${intellij.name.capitalize()}", Copy::class) {
+    konst makeIntellijAnnotations = tasks.register("makeIntellijAnnotations${intellij.name.capitalize()}", Copy::class) {
         dependsOn(makeIntellijCore)
 
-        val intellijCoreRepo = CleanableStore[repoDir.resolve("intellij-core").absolutePath][intellijVersion].use()
+        konst intellijCoreRepo = CleanableStore[repoDir.resolve("intellij-core").absolutePath][intellijVersion].use()
         from(intellijCoreRepo.resolve("artifacts/annotations.jar"))
 
-        val annotationsStore = CleanableStore[repoDir.resolve(intellijRuntimeAnnotations).absolutePath]
-        val targetDir = annotationsStore[intellijVersion].use()
+        konst annotationsStore = CleanableStore[repoDir.resolve(intellijRuntimeAnnotations).absolutePath]
+        konst targetDir = annotationsStore[intellijVersion].use()
         into(targetDir)
 
-        val ivyFile = File(targetDir, "$intellijRuntimeAnnotations.ivy.xml")
+        konst ivyFile = File(targetDir, "$intellijRuntimeAnnotations.ivy.xml")
         outputs.files(ivyFile)
 
         doFirst {
@@ -160,7 +160,7 @@ fun prepareDeps(
         }
     }
 
-    val mergeSources = tasks.create("mergeSources${intellij.name.capitalize()}", Jar::class.java) {
+    konst mergeSources = tasks.create("mergeSources${intellij.name.capitalize()}", Jar::class.java) {
         dependsOn(sources)
         isPreserveFileTimestamps = false
         isReproducibleFileOrder = true
@@ -174,9 +174,9 @@ fun prepareDeps(
         archiveVersion.set(intellijVersion)
     }
 
-    val sourcesFile = mergeSources.outputs.files.singleFile
+    konst sourcesFile = mergeSources.outputs.files.singleFile
 
-    val makeIde = if (androidStudioBuild != null) {
+    konst makeIde = if (androidStudioBuild != null) {
         buildIvyRepositoryTask(
             androidStudio,
             customDepsOrg,
@@ -187,7 +187,7 @@ fun prepareDeps(
                 ::skipToplevelDirectory
         )
     } else {
-        val task = buildIvyRepositoryTask(intellij, customDepsOrg, customDepsRepoDir, null, sourcesFile)
+        konst task = buildIvyRepositoryTask(intellij, customDepsOrg, customDepsRepoDir, null, sourcesFile)
 
         task.configure {
             dependsOn(mergeSources)
@@ -196,7 +196,7 @@ fun prepareDeps(
         task
     }
 
-    val buildJpsStandalone = buildIvyRepositoryTask(jpsStandalone, customDepsOrg, customDepsRepoDir, null, sourcesFile)
+    konst buildJpsStandalone = buildIvyRepositoryTask(jpsStandalone, customDepsOrg, customDepsRepoDir, null, sourcesFile)
 
     tasks.named("build") {
         dependsOn(
@@ -212,7 +212,7 @@ when(kotlinBuildProperties.getOrNull("attachedIntellijVersion")) {
     null -> {}
     "master" -> {} // for intellij/kt-master, intellij maven artifacts are used instead of manual unpacked dependencies
     else -> {
-        val intellijVersionForIde = intellijVersionForIde
+        konst intellijVersionForIde = intellijVersionForIde
             ?: error("intellijVersionForIde should not be null as attachedIntellijVersion is present")
         prepareDeps(intellijForIde, intellijCoreForIde, sourcesForIde, jpsStandaloneForIde, intellijVersionForIde)
     }
@@ -241,27 +241,27 @@ fun buildIvyRepositoryTask(
         inputs.files(configuration)
 
         outputs.upToDateWhen {
-            val repoMarker = configuration.resolvedConfiguration.resolvedArtifacts.single().moduleDirectory().resolve(".marker")
+            konst repoMarker = configuration.resolvedConfiguration.resolvedArtifacts.single().moduleDirectory().resolve(".marker")
             repoMarker.exists()
         }
 
         doFirst {
-            val artifact = configuration.resolvedConfiguration.resolvedArtifacts.single()
-            val moduleDirectory = artifact.moduleDirectory()
+            konst artifact = configuration.resolvedConfiguration.resolvedArtifacts.single()
+            konst moduleDirectory = artifact.moduleDirectory()
 
             artifact.storeDirectory().cleanStore()
 
-            val repoMarker = File(moduleDirectory, ".marker")
+            konst repoMarker = File(moduleDirectory, ".marker")
             if (repoMarker.exists()) {
                 logger.info("Path ${repoMarker.absolutePath} already exists, skipping unpacking.")
                 return@doFirst
             }
 
             with(artifact) {
-                val artifactsDirectory = File(moduleDirectory, "artifacts")
+                konst artifactsDirectory = File(moduleDirectory, "artifacts")
                 logger.info("Unpacking ${file.name} into ${artifactsDirectory.absolutePath}")
                 copy {
-                    val fileTree = when (extension) {
+                    konst fileTree = when (extension) {
                         "tar.gz" -> tarTree(file)
                         "zip" -> zipTree(file)
                         else -> error("Unsupported artifact extension: $extension")
@@ -295,7 +295,7 @@ fun buildIvyRepositoryTask(
                     *listOfNotNull(sources).toTypedArray()
                 )
 
-                val pluginsDirectory = File(artifactsDirectory, "plugins")
+                konst pluginsDirectory = File(artifactsDirectory, "plugins")
                 if (pluginsDirectory.exists()) {
                     file(File(artifactsDirectory, "plugins"))
                         .listFiles { file: File -> file.isDirectory }
@@ -338,7 +338,7 @@ fun writeIvyXml(
                 && !jar.name.startsWith("kotlin-")
                 && (allowAnnotations || jar.name != "annotations.jar") // see comments for [intellijAnnotations] above
 
-    val ivyFile = targetDir.resolve("$fileName.ivy.xml")
+    konst ivyFile = targetDir.resolve("$fileName.ivy.xml")
     ivyFile.parentFile.mkdirs()
     with(XMLWriter(ivyFile.writer())) {
         document("UTF-8", "1.0") {
@@ -368,7 +368,7 @@ fun writeIvyXml(
                         ?.filter(::shouldIncludeIntellijJar)
                         ?.sortedBy { it.name.toLowerCase() }
                         ?.forEach { jarFile ->
-                            val relativeName = jarFile.toRelativeString(baseDir).removeSuffix(".jar")
+                            konst relativeName = jarFile.toRelativeString(baseDir).removeSuffix(".jar")
                             emptyElement("artifact") {
                                 attributes(
                                     "name" to relativeName,
@@ -381,7 +381,7 @@ fun writeIvyXml(
 
                     sourcesJar.forEach { jarFile ->
                         emptyElement("artifact") {
-                            val sourcesArtifactName = jarFile.name.substringBefore("-$version")
+                            konst sourcesArtifactName = jarFile.name.substringBefore("-$version")
                             attributes(
                                 "name" to sourcesArtifactName,
                                 "type" to "jar",
@@ -404,16 +404,16 @@ fun skipToplevelDirectory(path: String) = path.substringAfter('/')
 fun skipContentsDirectory(path: String) = path.substringAfter("Contents/")
 
 fun Project.intellijSdkVersionForIde(): String? {
-    val majorVersion = kotlinBuildProperties.getOrNull("attachedIntellijVersion") as? String ?: return null
+    konst majorVersion = kotlinBuildProperties.getOrNull("attachedIntellijVersion") as? String ?: return null
     return rootProject.findProperty("versions.intellijSdk.forIde.$majorVersion") as? String
 }
 
-class XMLWriter(private val outputStreamWriter: OutputStreamWriter) : Closeable {
+class XMLWriter(private konst outputStreamWriter: OutputStreamWriter) : Closeable {
 
-    private val xmlStreamWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(outputStreamWriter)
+    private konst xmlStreamWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(outputStreamWriter)
 
     private var depth = 0
-    private val indent = "  "
+    private konst indent = "  "
 
     fun document(encoding: String, version: String, init: XMLWriter.() -> Unit) = apply {
         xmlStreamWriter.writeStartDocument(encoding, version)
@@ -441,7 +441,7 @@ class XMLWriter(private val outputStreamWriter: OutputStreamWriter) : Closeable 
         init()
     }
 
-    fun attribute(name: String, value: String): Unit = xmlStreamWriter.writeAttribute(name, value)
+    fun attribute(name: String, konstue: String): Unit = xmlStreamWriter.writeAttribute(name, konstue)
 
     fun attributes(vararg attributes: Pair<String, String>) {
         attributes.forEach { attribute(it.first, it.second) }

@@ -1,2 +1,2 @@
 @kotlin.OptIn(markerClass = [kotlin.contracts.ExperimentalContracts::class])
-fun logicalNotContract(value: kotlin.Boolean)
+fun logicalNotContract(konstue: kotlin.Boolean)

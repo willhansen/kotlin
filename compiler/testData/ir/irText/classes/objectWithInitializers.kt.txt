@@ -14,11 +14,11 @@ object Test : Base {
 
   }
 
-  val x: Int
+  konst x: Int
     field = 1
     get
 
-  val y: Int
+  konst y: Int
     get
 
   init {

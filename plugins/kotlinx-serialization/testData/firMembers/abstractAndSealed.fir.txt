@@ -17,7 +17,7 @@ FILE: abstractAndSealed.kt
 
         private final var x: R|kotlin/String| = String(X)
             private get(): R|kotlin/String|
-            private set(value: R|kotlin/String|): R|kotlin/Unit|
+            private set(konstue: R|kotlin/String|): R|kotlin/Unit|
 
         public final fun exposeX(): R|kotlin/String| {
             ^exposeX this@R|/X|.R|/X.x|
@@ -40,7 +40,7 @@ FILE: abstractAndSealed.kt
 
         private final var y: R|kotlin/String| = String(Y)
             private get(): R|kotlin/String|
-            private set(value: R|kotlin/String|): R|kotlin/Unit|
+            private set(konstue: R|kotlin/String|): R|kotlin/Unit|
 
         public final fun exposeY(): R|kotlin/String| {
             ^exposeY this@R|/Y|.R|/Y.y|
@@ -71,11 +71,11 @@ FILE: abstractAndSealed.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<Bottom>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Bottom|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Bottom|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Bottom|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -94,19 +94,19 @@ FILE: abstractAndSealed.kt
             }
         }
 
-        lval serial: R|kotlinx/serialization/KSerializer<Bottom>| = Q|Bottom|.R|/Bottom.Companion.serializer|()
-        lval j: R|kotlinx/serialization/json/Json| = R|kotlinx/serialization/json/Json|(<L> = Json@fun R|kotlinx/serialization/json/JsonBuilder|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        lkonst serial: R|kotlinx/serialization/KSerializer<Bottom>| = Q|Bottom|.R|/Bottom.Companion.serializer|()
+        lkonst j: R|kotlinx/serialization/json/Json| = R|kotlinx/serialization/json/Json|(<L> = Json@fun R|kotlinx/serialization/json/JsonBuilder|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|kotlinx/serialization/json/JsonBuilder.encodeDefaults| = Boolean(true)
         }
         )
-        lval s: R|kotlin/String| = R|<local>/j|.R|kotlinx/serialization/json/Json.encodeToString|<R|Bottom|>(R|<local>/serial|, R|/Bottom.Bottom|())
+        lkonst s: R|kotlin/String| = R|<local>/j|.R|kotlinx/serialization/json/Json.encodeToString|<R|Bottom|>(R|<local>/serial|, R|/Bottom.Bottom|())
         when () {
             !=(R|<local>/s|, String({"x":"X","y":"Y"})) ->  {
                 ^testData <strcat>(String(Incorrect encoding: ), R|<local>/s|)
             }
         }
 
-        lval decoded: R|Bottom| = R|<local>/j|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Bottom|>(R|<local>/serial|, String({"x":"1","y":"2"}))
+        lkonst decoded: R|Bottom| = R|<local>/j|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Bottom|>(R|<local>/serial|, String({"x":"1","y":"2"}))
         when () {
             !=(R|<local>/decoded|.R|/X.exposeX|(), String(1)) ->  {
                 ^testData String(Incorrect X)
@@ -140,7 +140,7 @@ FILE: abstractAndSealed.kt
             }
         }
 
-        lval serial: R|kotlinx/serialization/KSerializer<Bottom>| = Q|Bottom|.R|/Bottom.Companion.serializer|()
+        lkonst serial: R|kotlinx/serialization/KSerializer<Bottom>| = Q|Bottom|.R|/Bottom.Companion.serializer|()
         when () {
             !=(R|<local>/serial|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.kind|, Q|kotlinx/serialization/descriptors/StructureKind.CLASS|) ->  {
                 ^testKinds String(Not class: Bottom)

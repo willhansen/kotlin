@@ -1,15 +1,15 @@
 interface MyRwProperty<in T, V> {
   operator fun getValue(thisRef: T, property: Any): V
 
-  operator fun setValue(thisRef: T, property: Any, value: V)
+  operator fun setValue(thisRef: T, property: Any, konstue: V)
 }
 
-val x: Int
+konst x: Int
   get()
 
-val delegate: MyRwProperty<Any?, Int>
+konst delegate: MyRwProperty<Any?, Int>
 
-val value: Int
+konst konstue: Int
   get()
 
 var variable: Int

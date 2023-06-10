@@ -5,10 +5,10 @@ class TestClass {
 }
 
 fun box(): String {
-    val test1 = TestClass { "K" }
+    konst test1 = TestClass { "K" }
     if (test1 != "K") return "fail1, 'test1' == $test1"
 
-    val ok = "OK"
+    konst ok = "OK"
 
-    val x = TestClass { return ok }
+    konst x = TestClass { return ok }
 }

@@ -9,7 +9,7 @@ class WithClassObject {
     class ~class-object~TestClass
   }
 
-  val a2: `class-object`TestClass? = null
+  konst a2: `class-object`TestClass? = null
 }
 
 

@@ -56,7 +56,7 @@ interface KotlinTargetHierarchy {
      * There are some exceptions, where the name of the compilations cannot be chosen by the user directly (Android)
      * In this case, the name of the SourceSet can be configured outside the target hierarchy DSL.
      */
-    class SourceSetTree(val name: String) {
+    class SourceSetTree(konst name: String) {
         override fun toString(): String = name
 
         override fun equals(other: Any?): Boolean {
@@ -72,31 +72,31 @@ interface KotlinTargetHierarchy {
             /**
              * The 'main' SourceSetTree. Typically, with 'commonMain' as the root SourceSet
              */
-            val main = SourceSetTree("main")
+            konst main = SourceSetTree("main")
 
             /**
              * The 'test' SourceSetTree. Typically, with 'commonTest' as the root SourceSet
              */
-            val test = SourceSetTree("test")
+            konst test = SourceSetTree("test")
 
             /**
              * Special pre-defined SourceSetTree: Can be used to introduce a new tree with 'commonUnitTest' as the root SourceSet
              * e.g. relevant for organising Android unitTest compilations/SourceSets
              */
-            val unitTest = SourceSetTree("unitTest")
+            konst unitTest = SourceSetTree("unitTest")
 
 
             /**
              * Special pre-defined SourceSetTree: Can be used to introduce a new tree with 'commonInstrumentedTest' as the root SourceSet
              * e.g. relevant for organising Android instrumented compilations/SourceSets
              */
-            val instrumentedTest = SourceSetTree("instrumentedTest")
+            konst instrumentedTest = SourceSetTree("instrumentedTest")
 
 
             /**
              * Special pre-defined SourceSetTree: Can be used to introduce a new tree with 'commonIntegrationTest' as root SourceSEt
              */
-            val integrationTest = SourceSetTree("integrationTest")
+            konst integrationTest = SourceSetTree("integrationTest")
         }
     }
 }

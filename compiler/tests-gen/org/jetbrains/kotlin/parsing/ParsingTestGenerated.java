@@ -776,14 +776,14 @@ public class ParsingTestGenerated extends AbstractParsingTest {
             runTest("compiler/testData/psi/UnsignedLiteral.kt");
         }
 
-        @TestMetadata("validKotlinFunInterface.kt")
+        @TestMetadata("konstidKotlinFunInterface.kt")
         public void testValidKotlinFunInterface() throws Exception {
-            runTest("compiler/testData/psi/validKotlinFunInterface.kt");
+            runTest("compiler/testData/psi/konstidKotlinFunInterface.kt");
         }
 
-        @TestMetadata("valueClass.kt")
+        @TestMetadata("konstueClass.kt")
         public void testValueClass() throws Exception {
-            runTest("compiler/testData/psi/valueClass.kt");
+            runTest("compiler/testData/psi/konstueClass.kt");
         }
 
         @TestMetadata("When.kt")
@@ -965,14 +965,14 @@ public class ParsingTestGenerated extends AbstractParsingTest {
                     runTest("compiler/testData/psi/annotation/at/recoveryWhitespaceBeforeColon_ERR.kt");
                 }
 
-                @TestMetadata("validDeclarations.kt")
+                @TestMetadata("konstidDeclarations.kt")
                 public void testValidDeclarations() throws Exception {
-                    runTest("compiler/testData/psi/annotation/at/validDeclarations.kt");
+                    runTest("compiler/testData/psi/annotation/at/konstidDeclarations.kt");
                 }
 
-                @TestMetadata("validExpressions.kt")
+                @TestMetadata("konstidExpressions.kt")
                 public void testValidExpressions() throws Exception {
-                    runTest("compiler/testData/psi/annotation/at/validExpressions.kt");
+                    runTest("compiler/testData/psi/annotation/at/konstidExpressions.kt");
                 }
             }
 
@@ -2055,9 +2055,9 @@ public class ParsingTestGenerated extends AbstractParsingTest {
                 runTest("compiler/testData/psi/primaryConstructor/recoveryNestedClassAmbiguity.kt");
             }
 
-            @TestMetadata("valid.kt")
+            @TestMetadata("konstid.kt")
             public void testValid() throws Exception {
-                runTest("compiler/testData/psi/primaryConstructor/valid.kt");
+                runTest("compiler/testData/psi/primaryConstructor/konstid.kt");
             }
         }
 
@@ -2369,14 +2369,14 @@ public class ParsingTestGenerated extends AbstractParsingTest {
                 runTest("compiler/testData/psi/recovery/InterfaceInExpressionPosition.kt");
             }
 
-            @TestMetadata("InvalidCharAfterPropertyName.kt")
-            public void testInvalidCharAfterPropertyName() throws Exception {
-                runTest("compiler/testData/psi/recovery/InvalidCharAfterPropertyName.kt");
+            @TestMetadata("InkonstidCharAfterPropertyName.kt")
+            public void testInkonstidCharAfterPropertyName() throws Exception {
+                runTest("compiler/testData/psi/recovery/InkonstidCharAfterPropertyName.kt");
             }
 
-            @TestMetadata("InvalidCharInSingleLineLambda.kt")
-            public void testInvalidCharInSingleLineLambda() throws Exception {
-                runTest("compiler/testData/psi/recovery/InvalidCharInSingleLineLambda.kt");
+            @TestMetadata("InkonstidCharInSingleLineLambda.kt")
+            public void testInkonstidCharInSingleLineLambda() throws Exception {
+                runTest("compiler/testData/psi/recovery/InkonstidCharInSingleLineLambda.kt");
             }
 
             @TestMetadata("kt2172.kt")
@@ -2474,14 +2474,14 @@ public class ParsingTestGenerated extends AbstractParsingTest {
                 runTest("compiler/testData/psi/recovery/ValueParameterNoTypeRecovery.kt");
             }
 
-            @TestMetadata("valueParameterRecovery.kt")
+            @TestMetadata("konstueParameterRecovery.kt")
             public void testValueParameterRecovery() throws Exception {
-                runTest("compiler/testData/psi/recovery/valueParameterRecovery.kt");
+                runTest("compiler/testData/psi/recovery/konstueParameterRecovery.kt");
             }
 
-            @TestMetadata("valueParameterRecoveryWithTypes.kt")
+            @TestMetadata("konstueParameterRecoveryWithTypes.kt")
             public void testValueParameterRecoveryWithTypes() throws Exception {
-                runTest("compiler/testData/psi/recovery/valueParameterRecoveryWithTypes.kt");
+                runTest("compiler/testData/psi/recovery/konstueParameterRecoveryWithTypes.kt");
             }
 
             @TestMetadata("WhenWithoutBraces.kt")

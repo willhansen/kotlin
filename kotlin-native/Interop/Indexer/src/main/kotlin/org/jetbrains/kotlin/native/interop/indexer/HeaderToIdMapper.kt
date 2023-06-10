@@ -19,13 +19,13 @@ package org.jetbrains.kotlin.native.interop.indexer
 import java.io.File
 
 class HeaderToIdMapper(sysRoot: String) {
-    private val headerPathToId = mutableMapOf<String, HeaderId>()
-    private val sysRoot = File(sysRoot).canonicalFile.toPath()
+    private konst headerPathToId = mutableMapOf<String, HeaderId>()
+    private konst sysRoot = File(sysRoot).canonicalFile.toPath()
 
     internal fun getHeaderId(filePath: String) = headerPathToId.getOrPut(filePath) {
-        val path = File(filePath).canonicalFile.toPath()
-        val headerIdValue = if (path.startsWith(sysRoot)) {
-            val relative = sysRoot.relativize(path)
+        konst path = File(filePath).canonicalFile.toPath()
+        konst headerIdValue = if (path.startsWith(sysRoot)) {
+            konst relative = sysRoot.relativize(path)
             relative.toString()
         } else {
             headerContentsHash(filePath)

@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractDeclarationReturnTypeTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val actual = buildString {
+        konst actual = buildString {
             ktFile.accept(object : KtTreeVisitor<Int>() {
                 override fun visitDeclaration(declaration: KtDeclaration, indent: Int): Void? {
                     if (declaration is KtTypeParameter) return null
@@ -24,7 +24,7 @@ abstract class AbstractDeclarationReturnTypeTest : AbstractAnalysisApiSingleFile
                         appendLine(declaration.getNameWithPositionString())
                     } else {
                         analyseForTest(declaration) {
-                            val returnType = declaration.getReturnKtType()
+                            konst returnType = declaration.getReturnKtType()
                             append(declaration.getNameWithPositionString())
                             append(" : ")
                             appendLine(returnType.render(position = Variance.INVARIANT))

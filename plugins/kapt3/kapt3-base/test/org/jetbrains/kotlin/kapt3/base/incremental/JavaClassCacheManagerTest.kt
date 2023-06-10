@@ -56,7 +56,7 @@ class JavaClassCacheManagerTest {
         }
         prepareForIncremental()
 
-        val dirtyFiles = cache.invalidateAndGetDirtyFiles(
+        konst dirtyFiles = cache.inkonstidateAndGetDirtyFiles(
             listOf(File("Mentioned.java").absoluteFile),
             emptyList(), compiledSources
         ) as SourcesToReprocess.Incremental
@@ -90,8 +90,8 @@ class JavaClassCacheManagerTest {
         }
         prepareForIncremental()
 
-        val dirtyFiles =
-            cache.invalidateAndGetDirtyFiles(
+        konst dirtyFiles =
+            cache.inkonstidateAndGetDirtyFiles(
                 listOf(File("Mentioned.java").absoluteFile),
                 emptyList(),
                 compiledSources
@@ -127,8 +127,8 @@ class JavaClassCacheManagerTest {
         }
         prepareForIncremental()
 
-        val dirtyFiles =
-            cache.invalidateAndGetDirtyFiles(
+        konst dirtyFiles =
+            cache.inkonstidateAndGetDirtyFiles(
                 listOf(File("TwoTypes.java").absoluteFile),
                 emptyList(),
                 compiledSources
@@ -152,8 +152,8 @@ class JavaClassCacheManagerTest {
         }
         prepareForIncremental()
 
-        val dirtyFiles =
-            cache.invalidateAndGetDirtyFiles(listOf(), listOf("test/Mentioned"), compiledSources) as SourcesToReprocess.Incremental
+        konst dirtyFiles =
+            cache.inkonstidateAndGetDirtyFiles(listOf(), listOf("test/Mentioned"), compiledSources) as SourcesToReprocess.Incremental
         assertEquals(listOf(File("Src.java").absoluteFile), dirtyFiles.toReprocess)
     }
 
@@ -178,8 +178,8 @@ class JavaClassCacheManagerTest {
         }
         prepareForIncremental()
 
-        val dirtyFiles =
-            cache.invalidateAndGetDirtyFiles(
+        konst dirtyFiles =
+            cache.inkonstidateAndGetDirtyFiles(
                 listOf(File("Constants.java").absoluteFile), emptyList(), compiledSources
             ) as SourcesToReprocess.Incremental
         assertEquals(
@@ -194,4 +194,4 @@ class JavaClassCacheManagerTest {
     }
 }
 
-private const val TEST_PACKAGE_NAME = "test"
+private const konst TEST_PACKAGE_NAME = "test"

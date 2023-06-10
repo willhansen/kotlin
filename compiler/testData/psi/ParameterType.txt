@@ -149,7 +149,7 @@ KtFile: ParameterType.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -169,7 +169,7 @@ KtFile: ParameterType.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -194,7 +194,7 @@ KtFile: ParameterType.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -220,7 +220,7 @@ KtFile: ParameterType.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiElement(COLON)(':')
@@ -244,7 +244,7 @@ KtFile: ParameterType.kt
               PsiElement(IDENTIFIER)('Unit')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiElement(COLON)(':')

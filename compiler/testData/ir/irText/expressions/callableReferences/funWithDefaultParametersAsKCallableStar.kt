@@ -8,7 +8,7 @@ fun regularAndDefaults(x1: String, x2: String = "") = 1
 
 fun varargs(vararg xs: String) = 1
 
-class C(val x: String = "")
+class C(konst x: String = "")
 
 fun useKCallableStar(fn: KCallable<*>) {}
 

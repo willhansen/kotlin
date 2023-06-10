@@ -12,11 +12,11 @@ import java.lang.annotation.Target;
 
 public class Single<T> {
 
-    public T value;
+    public T konstue;
 
-    public Single(T value)
+    public Single(T konstue)
     {
-        this.value = value;
+        this.konstue = konstue;
     }
 
     @Retention(RetentionPolicy.RUNTIME)
@@ -38,6 +38,6 @@ public inline fun <T> myfold(initial: T, operation: (T) -> T): T {
 }
 
 fun box(): String {
-    return (myfold(Single.just("O")) { Single.just(it.value + "K") }).value
+    return (myfold(Single.just("O")) { Single.just(it.konstue + "K") }).konstue
 }
 

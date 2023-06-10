@@ -26,18 +26,18 @@ import java.lang.reflect.Method
 import java.lang.reflect.Type
 
 abstract class ReflectJavaMember : ReflectJavaElement(), ReflectJavaAnnotationOwner, ReflectJavaModifierListOwner, JavaMember {
-    abstract val member: Member
+    abstract konst member: Member
 
-    final override val isFromSource: Boolean get() = false
+    final override konst isFromSource: Boolean get() = false
 
-    override val element: AnnotatedElement get() = member as AnnotatedElement
+    override konst element: AnnotatedElement get() = member as AnnotatedElement
 
-    override val modifiers: Int get() = member.modifiers
+    override konst modifiers: Int get() = member.modifiers
 
-    override val name: Name
+    override konst name: Name
         get() = member.name?.let { Name.identifier(it) } ?: SpecialNames.NO_NAME_PROVIDED
 
-    override val containingClass: ReflectJavaClass
+    override konst containingClass: ReflectJavaClass
         get() = ReflectJavaClass(member.declaringClass)
 
     protected fun getValueParameters(
@@ -45,18 +45,18 @@ abstract class ReflectJavaMember : ReflectJavaElement(), ReflectJavaAnnotationOw
         parameterAnnotations: Array<Array<Annotation>>,
         isVararg: Boolean
     ): List<JavaValueParameter> {
-        val result = ArrayList<JavaValueParameter>(parameterTypes.size)
-        val names = Java8ParameterNamesLoader.loadParameterNames(member)
+        konst result = ArrayList<JavaValueParameter>(parameterTypes.size)
+        konst names = Java8ParameterNamesLoader.loadParameterNames(member)
 
         // Skip synthetic parameters such as outer class instance
-        val shift = names?.size?.minus(parameterTypes.size) ?: 0
+        konst shift = names?.size?.minus(parameterTypes.size) ?: 0
 
         for (i in parameterTypes.indices) {
-            val type = ReflectJavaType.create(parameterTypes[i])
-            val name = names?.run {
+            konst type = ReflectJavaType.create(parameterTypes[i])
+            konst name = names?.run {
                 getOrNull(i + shift) ?: error("No parameter with index $i+$shift (name=$name type=$type) in ${this@ReflectJavaMember}")
             }
-            val isParamVararg = isVararg && i == parameterTypes.lastIndex
+            konst isParamVararg = isVararg && i == parameterTypes.lastIndex
             result.add(ReflectJavaValueParameter(type, parameterAnnotations[i], name, isParamVararg))
         }
         return result
@@ -70,32 +70,32 @@ abstract class ReflectJavaMember : ReflectJavaElement(), ReflectJavaAnnotationOw
 }
 
 private object Java8ParameterNamesLoader {
-    class Cache(val getParameters: Method?, val getName: Method?)
+    class Cache(konst getParameters: Method?, konst getName: Method?)
 
     var cache: Cache? = null
 
     fun buildCache(member: Member): Cache {
         // This should be either j.l.reflect.Method or j.l.reflect.Constructor
-        val methodOrConstructorClass = member::class.java
+        konst methodOrConstructorClass = member::class.java
 
-        val getParameters = try {
+        konst getParameters = try {
             methodOrConstructorClass.getMethod("getParameters")
         } catch (e: NoSuchMethodException) {
             return Cache(null, null)
         }
 
-        val parameterClass = methodOrConstructorClass.safeClassLoader.loadClass("java.lang.reflect.Parameter")
+        konst parameterClass = methodOrConstructorClass.safeClassLoader.loadClass("java.lang.reflect.Parameter")
 
         return Cache(getParameters, parameterClass.getMethod("getName"))
     }
 
     fun loadParameterNames(member: Member): List<String>? {
-        val cache = cache ?: synchronized(this) {
+        konst cache = cache ?: synchronized(this) {
             cache ?: buildCache(member).also { cache = it }
         }
 
-        val getParameters = cache.getParameters ?: return null
-        val getName = cache.getName ?: return null
+        konst getParameters = cache.getParameters ?: return null
+        konst getName = cache.getName ?: return null
 
         return (getParameters(member) as Array<*>).map { param ->
             getName(param) as String

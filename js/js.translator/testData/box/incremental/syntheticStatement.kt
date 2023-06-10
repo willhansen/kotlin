@@ -19,7 +19,7 @@ inline fun foo(f: () -> String, g: () -> Unit): String {
 // RECOMPILE
 
 fun box(): String {
-    val result = foo({ "*" }, { })
+    konst result = foo({ "*" }, { })
     if (result != "[*]") return "fail: $result"
 
     return "OK"

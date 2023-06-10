@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 
 class KotlinAnnotationUseSiteTargetStubImpl(
     parent: StubElement<out PsiElement>?,
-    private val target: StringRef
+    private konst target: StringRef
 ) : KotlinStubBaseImpl<KtAnnotationUseSiteTarget>(parent, KtStubElementTypes.ANNOTATION_TARGET), KotlinAnnotationUseSiteTargetStub {
 
     override fun getUseSiteTarget() = target.string

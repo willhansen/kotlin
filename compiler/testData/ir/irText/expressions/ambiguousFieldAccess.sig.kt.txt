@@ -22,7 +22,7 @@ class C : B {
 }
 
 // CHECK JVM_IR:
-//   Mangled name: test#eval(kotlin.Function0<0:0>){0§<kotlin.Any?>}0:0
-//   Public signature: test/eval|-3571752498880916343[0]
-fun <T : Any?> eval(f: Function0<T>): T
+//   Mangled name: test#ekonst(kotlin.Function0<0:0>){0§<kotlin.Any?>}0:0
+//   Public signature: test/ekonst|-3571752498880916343[0]
+fun <T : Any?> ekonst(f: Function0<T>): T
 

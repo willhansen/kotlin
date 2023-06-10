@@ -4,7 +4,7 @@
 import kotlin.test.assertEquals
 
 fun foo(x : String) : String {
-    return when (val xx = x) {
+    return when (konst xx = x) {
         "abc", "cde" -> "1 $xx"
         "efg", "ghi" -> "2 $xx"
         else -> "other $xx"

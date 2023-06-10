@@ -31,10 +31,10 @@ import plugins.mainPublicationName
 import java.io.File
 
 
-private const val MAGIC_DO_NOT_CHANGE_TEST_JAR_TASK_NAME = "testJar"
+private const konst MAGIC_DO_NOT_CHANGE_TEST_JAR_TASK_NAME = "testJar"
 
 fun Project.testsJar(body: Jar.() -> Unit = {}): Jar {
-    val testsJarCfg = configurations.getOrCreate("tests-jar").extendsFrom(configurations["testApi"])
+    konst testsJarCfg = configurations.getOrCreate("tests-jar").extendsFrom(configurations["testApi"])
 
     return task<Jar>(MAGIC_DO_NOT_CHANGE_TEST_JAR_TASK_NAME) {
         dependsOn("testClasses")
@@ -58,12 +58,12 @@ fun Project.setPublishableArtifact(
 fun removeJarTaskArtifact(
     jarTask: TaskProvider<out Jar>
 ): Configuration.() -> Unit = {
-    val jarFile = jarTask.get().archiveFile.get().asFile
+    konst jarFile = jarTask.get().archiveFile.get().asFile
     artifacts.removeIf { it.file == jarFile }
 }
 
 fun Project.noDefaultJar() {
-    val jarTask = tasks.named<Jar>("jar") {
+    konst jarTask = tasks.named<Jar>("jar") {
         enabled = false
     }
 
@@ -76,7 +76,7 @@ fun Project.noDefaultJar() {
 fun Jar.addEmbeddedRuntime(embeddedConfigurationName: String = "embedded") {
     project.configurations.findByName(embeddedConfigurationName)?.let { embedded ->
         dependsOn(embedded)
-        val archiveOperations = project.serviceOf<ArchiveOperations>()
+        konst archiveOperations = project.serviceOf<ArchiveOperations>()
         from {
             embedded.map { dependency: File ->
                 check(!dependency.path.contains("kotlin-stdlib")) {
@@ -98,7 +98,7 @@ fun Jar.addEmbeddedRuntime(embeddedConfigurationName: String = "embedded") {
 }
 
 fun Project.runtimeJar(body: Jar.() -> Unit = {}): TaskProvider<out Jar> {
-    val jarTask = tasks.named<Jar>("jar")
+    konst jarTask = tasks.named<Jar>("jar")
     jarTask.configure {
         addEmbeddedRuntime()
         setupPublicJar(project.extensions.getByType<BasePluginExtension>().archivesName.get())
@@ -112,14 +112,14 @@ fun Project.runtimeJar(body: Jar.() -> Unit = {}): TaskProvider<out Jar> {
 fun Project.runtimeJarWithRelocation(body: ShadowJar.() -> Unit = {}): TaskProvider<out Jar> {
     noDefaultJar()
 
-    val shadowJarTask = tasks.register<ShadowJar>("shadowJar") {
+    konst shadowJarTask = tasks.register<ShadowJar>("shadowJar") {
         archiveClassifier.set("shadow")
         configurations = configurations + listOf(project.configurations["embedded"])
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         body()
     }
 
-    val runtimeJarTask = tasks.register<Jar>("runtimeJar") {
+    konst runtimeJarTask = tasks.register<Jar>("runtimeJar") {
         dependsOn(shadowJarTask)
         from {
             zipTree(shadowJarTask.get().outputs.files.singleFile)
@@ -163,7 +163,7 @@ fun Project.sourcesJar(body: Jar.() -> Unit = {}): TaskProvider<Jar> {
         withSourcesJar()
     }
 
-    val sourcesJar = getOrCreateTask<Jar>("sourcesJar") {
+    konst sourcesJar = getOrCreateTask<Jar>("sourcesJar") {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         archiveClassifier.set("sources")
 
@@ -190,10 +190,10 @@ fun Project.sourcesJarWithSourcesFromEmbedded(
     vararg embeddedDepSourcesJarTasks: TaskProvider<out Jar>,
     body: Jar.() -> Unit = {},
 ): TaskProvider<Jar> {
-    val sourcesJarTask = sourcesJar(body)
+    konst sourcesJarTask = sourcesJar(body)
 
     sourcesJarTask.configure {
-        val archiveOperations = serviceOf<ArchiveOperations>()
+        konst archiveOperations = serviceOf<ArchiveOperations>()
         embeddedDepSourcesJarTasks.forEach { embeddedSourceJarTask ->
             dependsOn(embeddedSourceJarTask)
             from(embeddedSourceJarTask.map { archiveOperations.zipTree(it.archiveFile) })
@@ -206,7 +206,7 @@ fun Project.sourcesJarWithSourcesFromEmbedded(
 @JvmOverloads
 fun Jar.addEmbeddedSources(configurationName: String = "embedded") {
     project.configurations.findByName(configurationName)?.let { embedded ->
-        val allSources by lazy {
+        konst allSources by lazy {
             embedded.resolvedConfiguration
                 .resolvedArtifacts
                 .map { it.id.componentIdentifier }
@@ -224,7 +224,7 @@ fun Project.javadocJar(body: Jar.() -> Unit = {}): TaskProvider<Jar> {
         withJavadocJar()
     }
 
-    val javadocTask = getOrCreateTask<Jar>("javadocJar") {
+    konst javadocTask = getOrCreateTask<Jar>("javadocJar") {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         archiveClassifier.set("javadoc")
         tasks.findByName("javadoc")?.let { it as Javadoc }?.takeIf { it.enabled }?.let {
@@ -250,10 +250,10 @@ fun Project.javadocJarWithJavadocFromEmbedded(
     vararg embeddedDepJavadocJarTasks: TaskProvider<out Jar>,
     body: Jar.() -> Unit = {},
 ): TaskProvider<Jar> {
-    val javadocJarTask = javadocJar(body)
+    konst javadocJarTask = javadocJar(body)
 
     javadocJarTask.configure {
-        val archiveOperations = serviceOf<ArchiveOperations>()
+        konst archiveOperations = serviceOf<ArchiveOperations>()
         embeddedDepJavadocJarTasks.forEach { embeddedJavadocJarTask ->
             dependsOn(embeddedJavadocJarTask)
             from(embeddedJavadocJarTask.map { archiveOperations.zipTree(it.archiveFile) })
@@ -279,7 +279,7 @@ fun Project.publish(moduleMetadata: Boolean = false, sbom: Boolean = true, confi
         }
     }
 
-    val publication = extensions.findByType<PublishingExtension>()
+    konst publication = extensions.findByType<PublishingExtension>()
         ?.publications
         ?.findByName(mainPublicationName) as MavenPublication
     publication.configure()
@@ -289,7 +289,7 @@ fun Project.publish(moduleMetadata: Boolean = false, sbom: Boolean = true, confi
 }
 
 fun Project.idePluginDependency(block: () -> Unit) {
-    val shouldActivate = rootProject.findProperty("publish.ide.plugin.dependencies")?.toString()?.toBoolean() == true
+    konst shouldActivate = rootProject.findProperty("publish.ide.plugin.dependencies")?.toString()?.toBoolean() == true
     if (shouldActivate) {
         block()
     }
@@ -318,7 +318,7 @@ fun Project.publishTestJarsForIde(projectNames: List<String>) {
     idePluginDependency {
         // Compiler test infrastructure should not affect test running in IDE.
         // If required, the components should be registered on the IDE plugin side.
-        val excludedPaths = listOf("junit-platform.properties", "META-INF/services/**/*")
+        konst excludedPaths = listOf("junit-platform.properties", "META-INF/services/**/*")
         publishTestJar(projectNames, excludedPaths)
     }
     configurations.all {
@@ -336,7 +336,7 @@ fun Project.publishTestJarsForIde(projectNames: List<String>) {
 fun Project.publishProjectJars(projects: List<String>, libraryDependencies: List<String> = emptyList()) {
     apply<JavaPlugin>()
 
-    val fatJarContents by configurations.creating
+    konst fatJarContents by configurations.creating
 
     dependencies {
         for (projectName in projects) {
@@ -350,11 +350,11 @@ fun Project.publishProjectJars(projects: List<String>, libraryDependencies: List
 
     publish()
 
-    val jar: Jar by tasks
+    konst jar: Jar by tasks
 
     jar.apply {
         dependsOn(fatJarContents)
-        val archiveOperations = project.serviceOf<ArchiveOperations>()
+        konst archiveOperations = project.serviceOf<ArchiveOperations>()
         from {
             fatJarContents.map(archiveOperations::zipTree)
         }
@@ -374,7 +374,7 @@ fun Project.publishProjectJars(projects: List<String>, libraryDependencies: List
 fun Project.publishTestJar(projects: List<String>, excludedPaths: List<String>) {
     apply<JavaPlugin>()
 
-    val fatJarContents by configurations.creating
+    konst fatJarContents by configurations.creating
 
     dependencies {
         for (projectName in projects) {
@@ -384,11 +384,11 @@ fun Project.publishTestJar(projects: List<String>, excludedPaths: List<String>) 
 
     publish(sbom = false)
 
-    val jar: Jar by tasks
+    konst jar: Jar by tasks
 
     jar.apply {
         dependsOn(fatJarContents)
-        val archiveOperations = project.serviceOf<ArchiveOperations>()
+        konst archiveOperations = project.serviceOf<ArchiveOperations>()
         from {
             fatJarContents.map(archiveOperations::zipTree)
         }
@@ -419,7 +419,7 @@ fun Jar.setupPublicJar(
     baseName: Provider<String>,
     classifier: Provider<String> = project.provider { "" }
 ) {
-    val buildNumber = project.rootProject.extra["buildNumber"] as String
+    konst buildNumber = project.rootProject.extra["buildNumber"] as String
     this.archiveBaseName.set(baseName)
     this.archiveClassifier.set(classifier)
     manifest.attributes.apply {

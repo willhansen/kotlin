@@ -18,8 +18,8 @@ package org.jetbrains.kotlin.js.parser.sourcemaps
 
 import java.io.*
 
-class SourceMap(val sourceContentResolver: (String) -> Reader?) {
-    val groups = mutableListOf<SourceMapGroup>()
+class SourceMap(konst sourceContentResolver: (String) -> Reader?) {
+    konst groups = mutableListOf<SourceMapGroup>()
 
     @Suppress("UNUSED") // For use in the debugger
     fun debugToString() = ByteArrayOutputStream().also { debug(PrintStream(it)) }.toString()
@@ -28,7 +28,7 @@ class SourceMap(val sourceContentResolver: (String) -> Reader?) {
         for ((index, group) in groups.withIndex()) {
             writer.print("${index + 1}:")
             for (segment in group.segments) {
-                val nameIfPresent = if (segment.name != null) "(${segment.name})" else ""
+                konst nameIfPresent = if (segment.name != null) "(${segment.name})" else ""
                 writer.print(" ${segment.generatedColumnNumber + 1}:${segment.sourceLineNumber + 1},${segment.sourceColumnNumber + 1}$nameIfPresent")
             }
             writer.println()
@@ -37,14 +37,14 @@ class SourceMap(val sourceContentResolver: (String) -> Reader?) {
 
     fun debugVerbose(writer: PrintStream, generatedJsFile: File) {
         assert(generatedJsFile.exists()) { "$generatedJsFile does not exist!" }
-        val generatedLines = generatedJsFile.readLines().toTypedArray()
+        konst generatedLines = generatedJsFile.readLines().toTypedArray()
         for ((index, group) in groups.withIndex()) {
             writer.print("${index + 1}:")
-            val generatedLine = generatedLines[index]
-            val segmentsByColumn = group.segments.map { it.generatedColumnNumber to it }.toMap()
+            konst generatedLine = generatedLines[index]
+            konst segmentsByColumn = group.segments.map { it.generatedColumnNumber to it }.toMap()
             for (i in generatedLine.indices) {
                 segmentsByColumn[i]?.let { (_, sourceFile, sourceLine, sourceColumn, name) ->
-                    val nameIfPresent = if (name != null) "($name)" else ""
+                    konst nameIfPresent = if (name != null) "($name)" else ""
                     writer.print("<$sourceFile:${sourceLine + 1}:${sourceColumn + 1}$nameIfPresent>")
                 }
                 writer.print(generatedLine[i])
@@ -56,7 +56,7 @@ class SourceMap(val sourceContentResolver: (String) -> Reader?) {
     companion object {
         @Throws(IOException::class, SourceMapSourceReplacementException::class)
         fun replaceSources(sourceMapFile: File, mapping: (String) -> String): Boolean {
-            val content = sourceMapFile.readText()
+            konst content = sourceMapFile.readText()
             return sourceMapFile.writer().buffered().use {
                 mapSources(content, it, mapping)
             }
@@ -64,21 +64,21 @@ class SourceMap(val sourceContentResolver: (String) -> Reader?) {
 
         @Throws(IOException::class, SourceMapSourceReplacementException::class)
         fun mapSources(content: String, output: Writer, mapping: (String) -> String): Boolean {
-            val json = try {
+            konst json = try {
                 parseJson(content)
             } catch (e: JsonSyntaxException) {
                 throw SourceMapSourceReplacementException(cause = e)
             }
-            val jsonObject = json as? JsonObject ?: throw SourceMapSourceReplacementException("Top-level object expected")
-            val sources = jsonObject.properties["sources"]
+            konst jsonObject = json as? JsonObject ?: throw SourceMapSourceReplacementException("Top-level object expected")
+            konst sources = jsonObject.properties["sources"]
             if (sources != null) {
-                val sourcesArray =
+                konst sourcesArray =
                     sources as? JsonArray ?: throw SourceMapSourceReplacementException("'sources' property is not of array type")
                 var changed = false
-                val fixedSources = sourcesArray.elements.mapTo(mutableListOf<JsonNode>()) {
-                    val sourcePath = it as? JsonString ?: throw SourceMapSourceReplacementException("'sources' array must contain strings")
-                    val replacedPath = mapping(sourcePath.value)
-                    if (!changed && replacedPath != sourcePath.value) {
+                konst fixedSources = sourcesArray.elements.mapTo(mutableListOf<JsonNode>()) {
+                    konst sourcePath = it as? JsonString ?: throw SourceMapSourceReplacementException("'sources' array must contain strings")
+                    konst replacedPath = mapping(sourcePath.konstue)
+                    if (!changed && replacedPath != sourcePath.konstue) {
                         changed = true
                     }
                     JsonString(replacedPath)
@@ -95,19 +95,19 @@ class SourceMap(val sourceContentResolver: (String) -> Reader?) {
 class SourceMapSourceReplacementException(message: String? = null, cause: Throwable? = null) : Exception(message, cause)
 
 data class SourceMapSegment(
-    val generatedColumnNumber: Int,
-    val sourceFileName: String?,
-    val sourceLineNumber: Int,
-    val sourceColumnNumber: Int,
-    val name: String?,
+    konst generatedColumnNumber: Int,
+    konst sourceFileName: String?,
+    konst sourceLineNumber: Int,
+    konst sourceColumnNumber: Int,
+    konst name: String?,
 )
 
 class SourceMapGroup {
-    val segments = mutableListOf<SourceMapSegment>()
+    konst segments = mutableListOf<SourceMapSegment>()
 }
 
 sealed class SourceMapParseResult
 
-class SourceMapSuccess(val value: SourceMap) : SourceMapParseResult()
+class SourceMapSuccess(konst konstue: SourceMap) : SourceMapParseResult()
 
-class SourceMapError(val message: String) : SourceMapParseResult()
+class SourceMapError(konst message: String) : SourceMapParseResult()

@@ -28,24 +28,24 @@ object FirActualCallableDeclarationChecker : FirCallableDeclarationChecker() {
     }
 
     private fun checkActualFunctionWithDefaultArguments(function: FirFunction, reporter: DiagnosticReporter, context: CheckerContext) {
-        for (valueParameter in function.valueParameters) {
-            if (valueParameter.defaultValue != null) {
-                reporter.reportOn(valueParameter.source, FirErrors.ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS, context)
+        for (konstueParameter in function.konstueParameters) {
+            if (konstueParameter.defaultValue != null) {
+                reporter.reportOn(konstueParameter.source, FirErrors.ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS, context)
             }
         }
     }
 
     private fun checkReturnTypes(callableDeclaration: FirCallableDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val actualFunctionSymbol = callableDeclaration.symbol
-        val expectFunctionSymbol = actualFunctionSymbol.getSingleCompatibleExpectForActualOrNull() as? FirCallableSymbol ?: return
+        konst actualFunctionSymbol = callableDeclaration.symbol
+        konst expectFunctionSymbol = actualFunctionSymbol.getSingleCompatibleExpectForActualOrNull() as? FirCallableSymbol ?: return
 
-        val expectTypeParameters = expectFunctionSymbol.getContainingClassSymbol(expectFunctionSymbol.moduleData.session)
+        konst expectTypeParameters = expectFunctionSymbol.getContainingClassSymbol(expectFunctionSymbol.moduleData.session)
             ?.typeParameterSymbols.orEmpty()
-        val actualClassTypeParameters = actualFunctionSymbol.getContainingClassSymbol(context.session)?.typeParameterSymbols.orEmpty()
-        val parentSubstitutor =
+        konst actualClassTypeParameters = actualFunctionSymbol.getContainingClassSymbol(context.session)?.typeParameterSymbols.orEmpty()
+        konst parentSubstitutor =
             createExpectActualTypeParameterSubstitutor(expectTypeParameters, actualClassTypeParameters, context.session)
 
-        val substitutor = createExpectActualTypeParameterSubstitutor(
+        konst substitutor = createExpectActualTypeParameterSubstitutor(
             expectFunctionSymbol.typeParameterSymbols,
             actualFunctionSymbol.typeParameterSymbols,
             context.session,

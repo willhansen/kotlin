@@ -12,11 +12,11 @@ kotlin {
     linuxX64("linux")
     mingwX64("windows")
 
-    val commonMain by sourceSets.getting
-    val macosMain by sourceSets.getting
-    val linuxMain by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst macosMain by sourceSets.getting
+    konst linuxMain by sourceSets.getting
 
-    val unixMain by sourceSets.creating
+    konst unixMain by sourceSets.creating
 
     unixMain.dependsOn(commonMain)
     linuxMain.dependsOn(unixMain)

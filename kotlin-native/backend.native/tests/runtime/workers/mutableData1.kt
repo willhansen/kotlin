@@ -8,8 +8,8 @@ import kotlin.test.*
 @Test
 fun kt39145_1() = withWorker {
     execute(TransferMode.SAFE, { "test" }) {
-        val data = MutableData(1_000)
-        val bytes = byteArrayOf(0, 10, 20, 30)
+        konst data = MutableData(1_000)
+        konst bytes = byteArrayOf(0, 10, 20, 30)
         data.append(bytes, 0, 4)
         assertEquals(4, data.size)
 
@@ -19,9 +19,9 @@ fun kt39145_1() = withWorker {
 
 @Test
 fun kt39145_2() = withWorker {
-    val externalData = MutableData(1_000)
+    konst externalData = MutableData(1_000)
     execute(TransferMode.SAFE, { externalData }) {
-        val bytes = byteArrayOf(0, 10, 20, 30)
+        konst bytes = byteArrayOf(0, 10, 20, 30)
         it.append(bytes, 0, 4)
         assertEquals(4, it.size)
 
@@ -31,8 +31,8 @@ fun kt39145_2() = withWorker {
 
 @Test
 fun kt39145_3() {
-    val mainThreadData = MutableData(1_000)
-    val bytes = byteArrayOf(0, 10, 20, 30)
+    konst mainThreadData = MutableData(1_000)
+    konst bytes = byteArrayOf(0, 10, 20, 30)
     mainThreadData.append(bytes, 0, 4)
     assertEquals(4, mainThreadData.size)
 

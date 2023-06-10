@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 // See KT-14453
-val <T : Any> KClass1<T>.primaryConstructor: KFunction1<T>? get() = null!!
+konst <T : Any> KClass1<T>.primaryConstructor: KFunction1<T>? get() = null!!
 
 interface KClass1<F : Any>
 interface KFunction1<out R>

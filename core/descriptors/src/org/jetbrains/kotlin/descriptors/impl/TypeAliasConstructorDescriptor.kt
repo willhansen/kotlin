@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.storage.getValue
 import org.jetbrains.kotlin.types.*
 
 interface TypeAliasConstructorDescriptor : ConstructorDescriptor, DescriptorDerivedFromTypeAlias {
-    val underlyingConstructorDescriptor: ClassConstructorDescriptor
+    konst underlyingConstructorDescriptor: ClassConstructorDescriptor
 
     override fun getContainingDeclaration(): TypeAliasDescriptor
 
@@ -38,7 +38,7 @@ interface TypeAliasConstructorDescriptor : ConstructorDescriptor, DescriptorDeri
 
     override fun substitute(substitutor: TypeSubstitutor): TypeAliasConstructorDescriptor?
 
-    val withDispatchReceiver: TypeAliasConstructorDescriptor?
+    konst withDispatchReceiver: TypeAliasConstructorDescriptor?
 
     override fun copy(
             newOwner: DeclarationDescriptor,
@@ -50,8 +50,8 @@ interface TypeAliasConstructorDescriptor : ConstructorDescriptor, DescriptorDeri
 }
 
 class TypeAliasConstructorDescriptorImpl private constructor(
-    val storageManager: StorageManager,
-    override val typeAliasDescriptor: TypeAliasDescriptor,
+    konst storageManager: StorageManager,
+    override konst typeAliasDescriptor: TypeAliasDescriptor,
     underlyingConstructorDescriptor: ClassConstructorDescriptor,
     original: TypeAliasConstructorDescriptor?,
     annotations: Annotations,
@@ -68,7 +68,7 @@ class TypeAliasConstructorDescriptorImpl private constructor(
     // (i.e. after members, and with extension receiver)
     // But when resolving super-calls (with known set of candidates) constructors of inner classes are expected to have
     // a dispatch receiver
-    override val withDispatchReceiver: TypeAliasConstructorDescriptor? by storageManager.createNullableLazyValue {
+    override konst withDispatchReceiver: TypeAliasConstructorDescriptor? by storageManager.createNullableLazyValue {
         TypeAliasConstructorDescriptorImpl(
             storageManager,
             typeAliasDescriptor,
@@ -78,7 +78,7 @@ class TypeAliasConstructorDescriptorImpl private constructor(
             underlyingConstructorDescriptor.kind,
             typeAliasDescriptor.source
         ).also { typeAliasConstructor ->
-            val substitutorForUnderlyingClass =
+            konst substitutorForUnderlyingClass =
                 typeAliasDescriptor.getTypeSubstitutorForUnderlyingClass() ?: return@createNullableLazyValue null
 
             typeAliasConstructor.initialize(
@@ -86,7 +86,7 @@ class TypeAliasConstructorDescriptorImpl private constructor(
                 underlyingConstructorDescriptor.dispatchReceiverParameter?.substitute(substitutorForUnderlyingClass),
                 underlyingConstructorDescriptor.contextReceiverParameters.map { it.substitute(substitutorForUnderlyingClass) },
                 typeAliasDescriptor.declaredTypeParameters,
-                valueParameters,
+                konstueParameters,
                 returnType,
                 Modality.FINAL,
                 typeAliasDescriptor.visibility
@@ -113,18 +113,18 @@ class TypeAliasConstructorDescriptorImpl private constructor(
         super.getOriginal() as TypeAliasConstructorDescriptor
 
     override fun substitute(substitutor: TypeSubstitutor): TypeAliasConstructorDescriptor? {
-        //    class C<T>(val x: T)
+        //    class C<T>(konst x: T)
         //    typealias A<Q> = C<List<Q>>
         //
-        //    val test = A(listOf(42))
+        //    konst test = A(listOf(42))
         //
         // Here return type for substituted type alias constructor is 'C<List<Int>>',
         // which yields us a substitution [T -> List<Int>] that should be applied to
         // the unsubstituted underlying constructor with signature '<T> (T) -> C<T>'
         // producing substituted underlying constructor with signature '(List<Int>) -> C<List<Int>>'.
-        val substitutedTypeAliasConstructor = super.substitute(substitutor) as TypeAliasConstructorDescriptorImpl
-        val underlyingConstructorSubstitutor = TypeSubstitutor.create(substitutedTypeAliasConstructor.returnType)
-        val substitutedUnderlyingConstructor = underlyingConstructorDescriptor.original.substitute(underlyingConstructorSubstitutor)
+        konst substitutedTypeAliasConstructor = super.substitute(substitutor) as TypeAliasConstructorDescriptorImpl
+        konst underlyingConstructorSubstitutor = TypeSubstitutor.create(substitutedTypeAliasConstructor.returnType)
+        konst substitutedUnderlyingConstructor = underlyingConstructorDescriptor.original.substitute(underlyingConstructorSubstitutor)
                 ?: return null
         substitutedTypeAliasConstructor.underlyingConstructorDescriptor = substitutedUnderlyingConstructor
         return substitutedTypeAliasConstructor
@@ -178,10 +178,10 @@ class TypeAliasConstructorDescriptorImpl private constructor(
             typeAliasDescriptor: TypeAliasDescriptor,
             constructor: ClassConstructorDescriptor
         ): TypeAliasConstructorDescriptor? {
-            val substitutorForUnderlyingClass = typeAliasDescriptor.getTypeSubstitutorForUnderlyingClass() ?: return null
-            val substitutedConstructor = constructor.substitute(substitutorForUnderlyingClass) ?: return null
+            konst substitutorForUnderlyingClass = typeAliasDescriptor.getTypeSubstitutorForUnderlyingClass() ?: return null
+            konst substitutedConstructor = constructor.substitute(substitutorForUnderlyingClass) ?: return null
 
-            val typeAliasConstructor =
+            konst typeAliasConstructor =
                 TypeAliasConstructorDescriptorImpl(
                     storageManager, typeAliasDescriptor,
                     substitutedConstructor,
@@ -189,14 +189,14 @@ class TypeAliasConstructorDescriptorImpl private constructor(
                     constructor.kind, typeAliasDescriptor.source
                 )
 
-            val valueParameters =
+            konst konstueParameters =
                 FunctionDescriptorImpl.getSubstitutedValueParameters(
-                    typeAliasConstructor, constructor.valueParameters, substitutorForUnderlyingClass
+                    typeAliasConstructor, constructor.konstueParameters, substitutorForUnderlyingClass
                 ) ?: return null
 
-            val returnType = substitutedConstructor.returnType.unwrap().lowerIfFlexible().withAbbreviation(typeAliasDescriptor.defaultType)
+            konst returnType = substitutedConstructor.returnType.unwrap().lowerIfFlexible().withAbbreviation(typeAliasDescriptor.defaultType)
 
-            val receiverParameter = constructor.dispatchReceiverParameter?.let {
+            konst receiverParameter = constructor.dispatchReceiverParameter?.let {
                 DescriptorFactory.createExtensionReceiverParameterForCallable(
                     typeAliasConstructor,
                     substitutorForUnderlyingClass.safeSubstitute(it.type, Variance.INVARIANT),
@@ -204,13 +204,13 @@ class TypeAliasConstructorDescriptorImpl private constructor(
                 )
             }
 
-            val classDescriptor = typeAliasDescriptor.classDescriptor
-            val contextReceiverParameters = classDescriptor?.let {
+            konst classDescriptor = typeAliasDescriptor.classDescriptor
+            konst contextReceiverParameters = classDescriptor?.let {
                 constructor.contextReceiverParameters.mapIndexed { index, contextReceiver ->
                     DescriptorFactory.createContextReceiverParameterForClass(
                         classDescriptor,
                         substitutorForUnderlyingClass.safeSubstitute(contextReceiver.type, Variance.INVARIANT),
-                        (contextReceiver.value as ImplicitContextReceiver).customLabelName,
+                        (contextReceiver.konstue as ImplicitContextReceiver).customLabelName,
                         Annotations.EMPTY,
                         index
                     )
@@ -222,7 +222,7 @@ class TypeAliasConstructorDescriptorImpl private constructor(
                 null,
                 contextReceiverParameters,
                 typeAliasDescriptor.declaredTypeParameters,
-                valueParameters,
+                konstueParameters,
                 returnType,
                 Modality.FINAL,
                 typeAliasDescriptor.visibility

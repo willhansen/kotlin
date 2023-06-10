@@ -9,13 +9,13 @@ import kotlin.test.*
 
 class TestCollection(): AbstractMutableCollection<Int>() {
     companion object {
-        const val SIZE = 7
+        const konst SIZE = 7
     }
 
-    private val array = IntArray(SIZE)
+    private konst array = IntArray(SIZE)
     private var len = 0
 
-    override val size: Int
+    override konst size: Int
         get() = len
 
     override fun add(element: Int): Boolean {
@@ -50,15 +50,15 @@ fun assertEquals(a: TestCollection, b: List<Int>) {
     if (a.size != b.size) {
         throw AssertionError()
     }
-    val aIt = a.iterator()
-    val bIt = b.iterator()
+    konst aIt = a.iterator()
+    konst bIt = b.iterator()
     while (aIt.hasNext()) {
         if (aIt.next() != bIt.next()) throw AssertionError("TestCollection contains wrong elements. Expected: $b, actual: $a.")
     }
 }
 
 @Test fun runTest() {
-    val c = TestCollection()
+    konst c = TestCollection()
     if (!c.addAll(listOf(1, 2, 3, 2, 4, 5, 4))) throw AssertionError("addAll is false when it must be true.")
     if (c.addAll(listOf(1, 2)) != false) throw AssertionError("addAll is true when it must be false.")
     c.removeAll(listOf(1, 2))

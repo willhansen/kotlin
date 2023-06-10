@@ -6,7 +6,7 @@ import java.util.Arrays
 import kotlin.reflect.KFunction0
 
 inline fun <reified T> test(kFunction: KFunction0<Unit>, test: T.() -> Unit) {
-    val annotation = kFunction.annotations.single() as T
+    konst annotation = kFunction.annotations.single() as T
     annotation.test()
 }
 
@@ -14,12 +14,12 @@ fun check(b: Boolean, message: String) {
     if (!b) throw RuntimeException(message)
 }
 
-annotation class Foo(val a: IntArray = [], val b: Array<String> = [])
+annotation class Foo(konst a: IntArray = [], konst b: Array<String> = [])
 
-const val ONE_INT = 1
-const val ONE_FLOAT = 1f
-const val HELLO = "hello"
-const val C_CHAR = 'c'
+const konst ONE_INT = 1
+const konst ONE_FLOAT = 1f
+const konst HELLO = "hello"
+const konst C_CHAR = 'c'
 
 @Foo(
         a = [ONE_INT, ONE_INT + ONE_FLOAT.toInt(), ONE_INT + 10, (ONE_INT % 1.0).toInt()],

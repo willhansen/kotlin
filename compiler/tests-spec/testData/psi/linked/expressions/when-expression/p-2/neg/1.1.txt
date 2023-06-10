@@ -23,7 +23,7 @@ KtFile: 1.1.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(EQEQ)('==')

@@ -16,11 +16,11 @@ enum class En : Enum<En> {
 
   X = En()
 
-  fun values(): Array<En> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<En> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): En /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): En /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<En>
+  konst entries: EnumEntries<En>
     get(): EnumEntries<En> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -33,10 +33,10 @@ operator fun En.invoke(i: Int): Int {
   return i
 }
 
-val test1: Int
+konst test1: Int
   field = A.invoke(i = 42)
   get
 
-val test2: Int
+konst test2: Int
   field = En.X.invoke(i = 42)
   get

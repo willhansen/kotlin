@@ -7,7 +7,7 @@ enum class MyEnumClass {
     },
     SecondEntry {
         override fun foo() {}
-        override val i: Int get() = super.i
+        override konst i: Int get() = super.i
     },
     ThirdEntry {
         override fun foo() {}
@@ -16,5 +16,5 @@ enum class MyEnumClass {
 
     abstract fun foo()
     open fun foo(i: Int) {}
-    open val i: Int = 1
+    open konst i: Int = 1
 }

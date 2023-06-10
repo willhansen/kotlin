@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.light.classes.symbol.modifierLists.SymbolLightMember
 import org.jetbrains.kotlin.light.classes.symbol.parameters.SymbolLightParameterList
 
 internal class SymbolLightRepeatableAnnotationContainerMethod(
-    private val annotationClassQualifier: String?,
+    private konst annotationClassQualifier: String?,
     containingClass: SymbolLightClassBase,
 ) : SymbolLightMethodBase(
     lightMemberOrigin = null,
@@ -30,7 +30,7 @@ internal class SymbolLightRepeatableAnnotationContainerMethod(
     override fun getTypeParameterList(): PsiTypeParameterList? = null
     override fun isOverride(): Boolean = false
 
-    private val _modifierList by lazyPub {
+    private konst _modifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this,
             modifiersBox = InitializedModifiersBox(PsiModifier.PUBLIC, PsiModifier.ABSTRACT),
@@ -39,7 +39,7 @@ internal class SymbolLightRepeatableAnnotationContainerMethod(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _parameterList by lazyPub {
+    private konst _parameterList by lazyPub {
         SymbolLightParameterList(this)
     }
 
@@ -47,8 +47,8 @@ internal class SymbolLightRepeatableAnnotationContainerMethod(
 
     override fun isConstructor(): Boolean = false
 
-    private val _returnType by lazyPub {
-        val qualifier = annotationClassQualifier ?: return@lazyPub null
+    private konst _returnType by lazyPub {
+        konst qualifier = annotationClassQualifier ?: return@lazyPub null
         JavaPsiFacade.getElementFactory(project).createTypeByFQClassName(qualifier, resolveScope).createArrayType()
     }
 

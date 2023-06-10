@@ -3,10 +3,10 @@ FILE: intersectDynamicAndString.kt
         ^bar R|kotlin/TODO|()
     }
     public final fun foo(): R|kotlin/Unit| {
-        lval x: R|dynamic| = R|/bar|()
+        lkonst x: R|dynamic| = R|/bar|()
         when () {
             (R|<local>/x| is R|kotlin/String|) ->  {
-                lval y: R|dynamic| = R|<local>/x|
+                lkonst y: R|dynamic| = R|<local>/x|
             }
         }
 

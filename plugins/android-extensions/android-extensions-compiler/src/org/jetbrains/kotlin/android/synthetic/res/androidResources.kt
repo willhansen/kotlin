@@ -30,9 +30,9 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.isValidJavaFqName
 
-class AndroidVariant(val name: String, val resDirectories: List<String>) {
-    val packageName: String = name
-    val isMainVariant: Boolean
+class AndroidVariant(konst name: String, konst resDirectories: List<String>) {
+    konst packageName: String = name
+    konst isMainVariant: Boolean
         get() = name == "main"
 
     companion object {
@@ -40,12 +40,12 @@ class AndroidVariant(val name: String, val resDirectories: List<String>) {
     }
 }
 
-class AndroidModule(val applicationPackage: String, val variants: List<AndroidVariant>) {
+class AndroidModule(konst applicationPackage: String, konst variants: List<AndroidVariant>) {
     override fun equals(other: Any?) = other is AndroidModule && applicationPackage == other.applicationPackage
     override fun hashCode() = applicationPackage.hashCode()
 }
 
-class ResourceIdentifier(val name: String, val packageName: String?) {
+class ResourceIdentifier(konst name: String, konst packageName: String?) {
     // Without packageName
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -62,21 +62,21 @@ class ResourceIdentifier(val name: String, val packageName: String?) {
     }
 }
 
-class AndroidLayoutGroup(val name: String, val layouts: List<AndroidLayout>)
+class AndroidLayoutGroup(konst name: String, konst layouts: List<AndroidLayout>)
 
-class AndroidLayout(val resources: List<AndroidResource>)
+class AndroidLayout(konst resources: List<AndroidResource>)
 
 sealed class AndroidResource(
-    val id: ResourceIdentifier,
-    val sourceElement: SmartPsiElementPointer<PsiElement>?,
-    val partiallyDefined: Boolean
+    konst id: ResourceIdentifier,
+    konst sourceElement: SmartPsiElementPointer<PsiElement>?,
+    konst partiallyDefined: Boolean
 ) {
     open fun sameClass(other: AndroidResource): Boolean = false
     open fun partiallyDefined(): AndroidResource = this
 
     class Widget(
             id: ResourceIdentifier,
-            val xmlType: String,
+            konst xmlType: String,
             sourceElement: SmartPsiElementPointer<PsiElement>?,
             partiallyDefined: Boolean = false
     ) : AndroidResource(id, sourceElement, partiallyDefined) {
@@ -98,11 +98,11 @@ fun <T> cachedValue(project: Project, result: () -> CachedValueProvider.Result<T
     return CachedValuesManager.getManager(project).createCachedValue(result, false)
 }
 
-class ResolvedWidget(val widget: AndroidResource.Widget, val viewClassDescriptor: ClassDescriptor?) {
-    val isErrorType: Boolean
+class ResolvedWidget(konst widget: AndroidResource.Widget, konst viewClassDescriptor: ClassDescriptor?) {
+    konst isErrorType: Boolean
         get() = viewClassDescriptor == null
 
-    val errorType: String?
+    konst errorType: String?
         get() = if (isErrorType) widget.xmlType else null
 }
 
@@ -121,7 +121,7 @@ fun AndroidResource.Widget.resolve(module: ModuleDescriptor): ResolvedWidget? {
     }
 
     for (packageName in AndroidConst.FQNAME_RESOLVE_PACKAGES) {
-        val classDescriptor = resolve("$packageName.$xmlType")
+        konst classDescriptor = resolve("$packageName.$xmlType")
         if (classDescriptor != null) {
             return ResolvedWidget(this, classDescriptor)
         }

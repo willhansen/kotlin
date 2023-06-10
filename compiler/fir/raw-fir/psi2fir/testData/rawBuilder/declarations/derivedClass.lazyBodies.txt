@@ -4,7 +4,7 @@ FILE: derivedClass.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val x: T = R|<local>/x|
+        public? final? konst x: T = R|<local>/x|
             public? get(): T
 
     }

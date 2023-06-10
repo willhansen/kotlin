@@ -22,7 +22,7 @@ KtSyntheticJavaPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []

@@ -12,13 +12,13 @@ open class B : A() {
     }
 
     init {
-        val a: Int = foo()
+        konst a: Int = foo()
     }
 }
 
 class C: B() {
     init {
-        val a: Int = foo()
+        konst a: Int = foo()
     }
 }
 
@@ -32,6 +32,6 @@ public class X extends B {
 // FILE: 2.kt
 class Y: X() {
     init {
-        val a: Double = foo()
+        konst a: Double = foo()
     }
 }

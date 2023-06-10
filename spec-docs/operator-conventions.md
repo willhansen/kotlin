@@ -26,7 +26,7 @@ This table says that when the compiler processes, for example, an expression `+a
 | `a++` | `a.inc()` + see below |
 | `a--` | `a.dec()` + see below |
 
-These operations are supposed to change their receiver and (optionally) return a value.
+These operations are supposed to change their receiver and (optionally) return a konstue.
 
 > **`inc()/dec()` shouldn't mutate the receiver object**.<br>
 > By "changing the receiver" we mean _the receiver-variable_, not the receiver object.
@@ -40,7 +40,7 @@ The compiler performs the following steps for resolution of an operator in the *
 
 The effect of computing the expression is:
 
-* Store the initial value of `a` to a temporary storage `a0`,
+* Store the initial konstue of `a` to a temporary storage `a0`,
 * Assign the result of `a.inc()` to `a`,
 * Return `a0` as a result of the expression.
 
@@ -49,7 +49,7 @@ For `a--` the steps are completely analogous.
 For the *prefix* forms `++a` and `--a` resolution works the same way, and the effect is:
 
 * Assign the result of `a.inc()` to `a`,
-* Return the new value of `a` as a result of the expression.
+* Return the new konstue of `a` as a result of the expression.
 
 ## Binary operations
 
@@ -145,6 +145,6 @@ For the assignment operations, e.g. `a += b`, the compiler performs the followin
 **Discussion of the ambiguity rule**:
 We raise an error when both `plus()` and `plusAssign()` are available only if the lhs is assignable. Otherwise, the availability of `plus()`
 is irrelevant, because we know that `a = a + b` can not compile. An important concern here is what happens when the lhs *becomes assignable*
-after the fact (e.g. the user changes *val* to *var* or provides a `set()` function for indexing convention): in this case, the previously
+after the fact (e.g. the user changes *konst* to *var* or provides a `set()` function for indexing convention): in this case, the previously
 correct call site may become incorrect, but not the other way around, which is safe, because former calls to `plusAssign()` can not be silently
 turned into calls to `plus()`.

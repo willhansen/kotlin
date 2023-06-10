@@ -1,16 +1,16 @@
 fun foo() {
   { // BLOCK
   }
-  val x: Int = 0
+  konst x: Int = 0
   { // BLOCK
-    val tmp0_subject: Int = x
+    konst tmp0_subject: Int = x
     when {
       else -> { // BLOCK
       }
     }
   }
-  val z: Unit = { // BLOCK
-    val tmp1_subject: Int = x
+  konst z: Unit = { // BLOCK
+    konst tmp1_subject: Int = x
     when {
       else -> { // BLOCK
       }

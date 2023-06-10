@@ -21,21 +21,21 @@ class Delegate {
 }
 
 class A {
-    val z by Delegate()
+    konst z by Delegate()
 }
 
 fun f() = 5
 
 @Test fun testPermanent() {
-    val x = typeOf<Map<String, Int>>()
+    konst x = typeOf<Map<String, Int>>()
     assertTrue(x.isPermanent())
-    val a = A()
+    konst a = A()
     assertTrue(a.z.isPermanent())
     assertEquals("z", a.z)
-    val t = ::f
+    konst t = ::f
     assertTrue(t.isPermanent())
     assertEquals(5, t())
-    val z = { 6 }
+    konst z = { 6 }
     assertTrue(z.isPermanent())
     assertEquals(6, z())
 }
@@ -108,7 +108,7 @@ fun f() = 5
 }
 
 @Test fun testKType() {
-    val ktype = typeOf<Map<in String?, out List<*>>?>()
+    konst ktype = typeOf<Map<in String?, out List<*>>?>()
     assertTrue(ktype.isPermanent())
     assertEquals("Map", (ktype.classifier as? KClass<*>)?.simpleName)
     assertSame(Map::class, ktype.classifier)
@@ -118,7 +118,7 @@ fun f() = 5
     assertSame(KVariance.IN, ktype.arguments[0].variance)
     assertSame(KVariance.OUT, ktype.arguments[1].variance)
 
-    val arg0type = ktype.arguments[0].type!!
+    konst arg0type = ktype.arguments[0].type!!
     assertTrue(arg0type.isPermanent())
     assertEquals("String", (arg0type.classifier as? KClass<*>)?.simpleName)
     assertSame(String::class, arg0type.classifier)
@@ -126,7 +126,7 @@ fun f() = 5
     assertTrue(arg0type.arguments.isPermanent())
     assertTrue(arg0type.arguments.isEmpty())
 
-    val arg1type = ktype.arguments[1].type!!
+    konst arg1type = ktype.arguments[1].type!!
     assertTrue(arg1type.isPermanent())
     assertEquals("List", (arg1type.classifier as? KClass<*>)?.simpleName)
     assertSame(List::class, arg1type.classifier)
@@ -143,9 +143,9 @@ interface S
 
     inline fun <reified T, U, V> kTypeOf() where V : List<Int>, V : S, U : T = typeOf<R<T, in U, out V, *>>()
 
-    class XX(val x:List<Int>) : List<Int> by x, S
+    class XX(konst x:List<Int>) : List<Int> by x, S
 
-    val type = kTypeOf<List<Int>, ArrayList<Int>, XX>()
+    konst type = kTypeOf<List<Int>, ArrayList<Int>, XX>()
     assertEquals("codegen.initializers.static.R<kotlin.collections.List<kotlin.Int>, in U, out V, *>", type.toString())
     assertEquals("[T]", (type.arguments[1].type!!.classifier as KTypeParameter).upperBounds.toString())
     assertEquals("[kotlin.collections.List<kotlin.Int>, codegen.initializers.static.S]",
@@ -166,7 +166,7 @@ inline fun invokeAndReturnKClass(block: ()->Boolean) : KClass<*> {
 
 @Test fun testConstantObjectInFinally() {
     for (i in 0..2) {
-        val clazz = invokeAndReturnKClass {
+        konst clazz = invokeAndReturnKClass {
             when (i) {
                 0 -> true
                 1 -> false
@@ -179,33 +179,33 @@ inline fun invokeAndReturnKClass(block: ()->Boolean) : KClass<*> {
 }
 
 @Test fun testSmallIntIdentity() {
-    val xBool = true
-    val xBoolStatic : Any = false
-    val xBoolDyanmic : Any = !xBool
+    konst xBool = true
+    konst xBoolStatic : Any = false
+    konst xBoolDyanmic : Any = !xBool
     assertSame(xBoolStatic, xBoolDyanmic)
 
-    val xByte = 1.toByte()
-    val xByteStatic : Any = 2.toByte()
-    val xByteDyanmic : Any = (xByte + xByte).toByte()
+    konst xByte = 1.toByte()
+    konst xByteStatic : Any = 2.toByte()
+    konst xByteDyanmic : Any = (xByte + xByte).toByte()
     assertSame(xByteStatic, xByteDyanmic)
 
-    val xShort = 1.toShort()
-    val xShortStatic : Any = 2.toShort()
-    val xShortDyanmic : Any = (xShort + xShort).toShort()
+    konst xShort = 1.toShort()
+    konst xShortStatic : Any = 2.toShort()
+    konst xShortDyanmic : Any = (xShort + xShort).toShort()
     assertSame(xShortStatic, xShortDyanmic)
 
-    val xInt = 1.toInt()
-    val xIntStatic : Any = 2.toInt()
-    val xIntDyanmic : Any = xInt + xInt
+    konst xInt = 1.toInt()
+    konst xIntStatic : Any = 2.toInt()
+    konst xIntDyanmic : Any = xInt + xInt
     assertSame(xIntStatic, xIntDyanmic)
 
-    val xChar = 1.toChar()
-    val xCharStatic : Any = 2.toChar()
-    val xCharDyanmic : Any = (xChar.code + xChar.code).toChar()
+    konst xChar = 1.toChar()
+    konst xCharStatic : Any = 2.toChar()
+    konst xCharDyanmic : Any = (xChar.code + xChar.code).toChar()
     assertSame(xCharStatic, xCharDyanmic)
 
-    val xLong = 1.toLong()
-    val xLongStatic = 2.toLong()
-    val xLongDyanmic = xLong + xLong
+    konst xLong = 1.toLong()
+    konst xLongStatic = 2.toLong()
+    konst xLongDyanmic = xLong + xLong
     assertSame(xLongStatic, xLongDyanmic)
 }

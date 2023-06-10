@@ -7,47 +7,47 @@ package org.jetbrains.kotlin.kapt3.base
 
 import com.sun.tools.javac.util.List as JavacList
 
-inline fun <T, R> mapJList(values: Iterable<T>?, f: (T) -> R?): JavacList<R> {
-    if (values == null) return JavacList.nil()
+inline fun <T, R> mapJList(konstues: Iterable<T>?, f: (T) -> R?): JavacList<R> {
+    if (konstues == null) return JavacList.nil()
 
     var result = JavacList.nil<R>()
-    for (item in values) {
+    for (item in konstues) {
         f(item)?.let { result = result.append(it) }
     }
     return result
 }
 
-inline fun <T, R> mapJListIndexed(values: Iterable<T>?, f: (Int, T) -> R?): JavacList<R> {
-    if (values == null) return JavacList.nil()
+inline fun <T, R> mapJListIndexed(konstues: Iterable<T>?, f: (Int, T) -> R?): JavacList<R> {
+    if (konstues == null) return JavacList.nil()
 
     var result = JavacList.nil<R>()
-    values.forEachIndexed { index, item ->
+    konstues.forEachIndexed { index, item ->
         f(index, item)?.let { result = result.append(it) }
     }
     return result
 }
 
-inline fun <T> mapPairedValuesJList(valuePairs: List<Any>?, f: (String, Any) -> T?): JavacList<T> {
-    if (valuePairs == null || valuePairs.isEmpty()) return JavacList.nil()
+inline fun <T> mapPairedValuesJList(konstuePairs: List<Any>?, f: (String, Any) -> T?): JavacList<T> {
+    if (konstuePairs == null || konstuePairs.isEmpty()) return JavacList.nil()
 
-    val size = valuePairs.size
+    konst size = konstuePairs.size
     var result = JavacList.nil<T>()
     assert(size % 2 == 0)
     var index = 0
     while (index < size) {
-        val key = valuePairs[index] as String
-        val value = valuePairs[index + 1]
-        f(key, value)?.let { result = result.prepend(it) }
+        konst key = konstuePairs[index] as String
+        konst konstue = konstuePairs[index + 1]
+        f(key, konstue)?.let { result = result.prepend(it) }
         index += 2
     }
     return result.reverse()
 }
 
-fun pairedListToMap(valuePairs: List<Any>?): Map<String, Any?> {
-    val map = mutableMapOf<String, Any?>()
+fun pairedListToMap(konstuePairs: List<Any>?): Map<String, Any?> {
+    konst map = mutableMapOf<String, Any?>()
 
-    mapPairedValuesJList(valuePairs) { key, value ->
-        map.put(key, value)
+    mapPairedValuesJList(konstuePairs) { key, konstue ->
+        map.put(key, konstue)
     }
 
     return map

@@ -46,17 +46,17 @@ import org.jetbrains.kotlin.resolve.inline.InlineUtil
 
 class LiteralFunctionTranslator(context: TranslationContext) : AbstractTranslator(context) {
     fun translate(declaration: KtDeclarationWithBody): JsExpression {
-        val finalElement = declaration.finalElement
-        val invokingContext = context()
-        val descriptor = getFunctionDescriptor(invokingContext.bindingContext(), declaration)
+        konst finalElement = declaration.finalElement
+        konst invokingContext = context()
+        konst descriptor = getFunctionDescriptor(invokingContext.bindingContext(), declaration)
 
-        val lambda = invokingContext.getFunctionObject(descriptor)
+        konst lambda = invokingContext.getFunctionObject(descriptor)
 
-        val functionContext = invokingContext
+        konst functionContext = invokingContext
                 .newFunctionBodyWithUsageTracker(lambda, descriptor)
                 .translateAndAliasParameters(descriptor, lambda.parameters)
 
-        descriptor.valueParameters.forEach {
+        descriptor.konstueParameters.forEach {
             if (it is ValueParameterDescriptorImpl.WithDestructuringDeclaration) {
                 lambda.body.statements.add(it.translate(functionContext))
             }
@@ -68,11 +68,11 @@ class LiteralFunctionTranslator(context: TranslationContext) : AbstractTranslato
         lambda.source = declaration
         lambda.body.source = finalElement as? LeafPsiElement
 
-        val tracker = functionContext.usageTracker()!!
+        konst tracker = functionContext.usageTracker()!!
 
-        val name = invokingContext.getInnerNameForDescriptor(descriptor)
+        konst name = invokingContext.getInnerNameForDescriptor(descriptor)
         if (tracker.hasCapturedExceptContaining()) {
-            val lambdaCreator = simpleReturnFunction(invokingContext.scope(), lambda.source(declaration))
+            konst lambdaCreator = simpleReturnFunction(invokingContext.scope(), lambda.source(declaration))
             lambdaCreator.isLocal = true
             if (descriptor in tracker.capturedDescriptors && !descriptor.isCoroutineLambda) {
                 lambda.name = tracker.getNameForCapturedDescriptor(descriptor)
@@ -84,9 +84,9 @@ class LiteralFunctionTranslator(context: TranslationContext) : AbstractTranslato
         }
 
         if (descriptor in tracker.capturedDescriptors) {
-            val capturedName = tracker.getNameForCapturedDescriptor(descriptor)!!
-            val globalName = invokingContext.getInnerNameForDescriptor(descriptor)
-            val replacingVisitor = NameReplacingVisitor(mapOf(capturedName to JsAstUtils.pureFqn(globalName, null)))
+            konst capturedName = tracker.getNameForCapturedDescriptor(descriptor)!!
+            konst globalName = invokingContext.getInnerNameForDescriptor(descriptor)
+            konst replacingVisitor = NameReplacingVisitor(mapOf(capturedName to JsAstUtils.pureFqn(globalName, null)))
             replacingVisitor.accept(lambda)
         }
 
@@ -106,11 +106,11 @@ class LiteralFunctionTranslator(context: TranslationContext) : AbstractTranslato
     }
 
     fun ValueParameterDescriptorImpl.WithDestructuringDeclaration.translate(context: TranslationContext): JsVars {
-        val destructuringDeclaration =
+        konst destructuringDeclaration =
                 (DescriptorToSourceUtils.descriptorToDeclaration(this) as? KtParameter)?.destructuringDeclaration
                 ?: error("Destructuring declaration for descriptor $this not found")
 
-        val parameterRef = ReferenceTranslator.translateAsValueReference(this, context)
+        konst parameterRef = ReferenceTranslator.translateAsValueReference(this, context)
         return DestructuringDeclarationTranslator.translate(destructuringDeclaration, parameterRef, context)
     }
 }
@@ -131,18 +131,18 @@ fun JsFunction.withCapturedParameters(
         source: KtDeclaration
 ): JsExpression {
     invokingContext.addFunctionDeclaration(functionName, this, source)
-    val ref = JsAstUtils.pureFqn(functionName, null)
-    val invocation = JsInvocation(ref).apply { sideEffects = SideEffectKind.PURE }
+    konst ref = JsAstUtils.pureFqn(functionName, null)
+    konst invocation = JsInvocation(ref).apply { sideEffects = SideEffectKind.PURE }
 
-    val invocationArguments = invocation.arguments
-    val functionParameters = this.parameters
+    konst invocationArguments = invocation.arguments
+    konst functionParameters = this.parameters
 
-    val tracker = context.usageTracker()!!
+    konst tracker = context.usageTracker()!!
 
     for ((capturedDescriptor, name) in tracker.capturedDescriptorToJsName) {
         if (capturedDescriptor == tracker.containingDescriptor && !capturedDescriptor.isCoroutineLambda) continue
 
-        val capturedRef = invokingContext.getArgumentForClosureConstructor(capturedDescriptor)
+        konst capturedRef = invokingContext.getArgumentForClosureConstructor(capturedDescriptor)
         var additionalArgs = listOf(capturedRef)
         var additionalParams = listOf(JsParameter(name))
 
@@ -153,11 +153,11 @@ fun JsFunction.withCapturedParameters(
         }
 
         if (capturedDescriptor is CallableDescriptor && isLocalInlineDeclaration(capturedDescriptor)) {
-            val aliasRef = capturedRef as? JsNameRef
-            val localFunAlias = aliasRef?.getStaticRef() as? JsExpression
+            konst aliasRef = capturedRef as? JsNameRef
+            konst localFunAlias = aliasRef?.getStaticRef() as? JsExpression
 
             if (localFunAlias != null) {
-                val (args, params) = moveCapturedLocalInside(this, name, localFunAlias)
+                konst (args, params) = moveCapturedLocalInside(this, name, localFunAlias)
                 additionalArgs = args
                 additionalParams = params
             }
@@ -170,7 +170,7 @@ fun JsFunction.withCapturedParameters(
     return invocation
 }
 
-private data class CapturedArgsParams(val arguments: List<JsExpression> = listOf(), val parameters: List<JsParameter> = listOf())
+private data class CapturedArgsParams(konst arguments: List<JsExpression> = listOf(), konst parameters: List<JsParameter> = listOf())
 
 /**
  * Moves captured local inline function inside capturing function.
@@ -206,23 +206,23 @@ private fun moveCapturedLocalInside(capturingFunction: JsFunction, capturedName:
  * For example:
  *
  * ```
- *  val x = 0
+ *  konst x = 0
  *  inline fun id() = x
- *  val lambda = {println(id())}
+ *  konst lambda = {println(id())}
  * ```
  *
  * `lambda` should capture x in this case
  */
 private fun moveCapturedLocalInside(capturingFunction: JsFunction, capturedName: JsName, localFunAlias: JsInvocation): CapturedArgsParams {
-    val capturedArgs = localFunAlias.arguments
+    konst capturedArgs = localFunAlias.arguments
 
-    val freshNames = getTemporaryNamesInScope(capturedArgs)
+    konst freshNames = getTemporaryNamesInScope(capturedArgs)
 
-    val aliasCallArguments = freshNames.map(JsName::makeRef)
-    val alias = JsInvocation(localFunAlias.qualifier, aliasCallArguments)
+    konst aliasCallArguments = freshNames.map(JsName::makeRef)
+    konst alias = JsInvocation(localFunAlias.qualifier, aliasCallArguments)
     declareAliasInsideFunction(capturingFunction, capturedName, alias)
 
-    val capturedParameters = freshNames.map(::JsParameter)
+    konst capturedParameters = freshNames.map(::JsParameter)
     return CapturedArgsParams(capturedArgs, capturedParameters)
 }
 
@@ -232,23 +232,23 @@ private fun declareAliasInsideFunction(function: JsFunction, name: JsName, alias
 }
 
 private fun getTemporaryNamesInScope(suggested: List<JsExpression>): List<JsName> {
-    val freshNames = arrayListOf<JsName>()
+    konst freshNames = arrayListOf<JsName>()
 
     for (suggestion in suggested) {
         if (suggestion !is JsNameRef) {
             throw AssertionError("Expected suggestion to be JsNameRef")
         }
 
-        val ident = suggestion.ident
-        val name = JsScope.declareTemporaryName(ident)
+        konst ident = suggestion.ident
+        konst name = JsScope.declareTemporaryName(ident)
         freshNames.add(name)
     }
 
     return freshNames
 }
 
-private fun JsFunction.addDeclaration(name: JsName, value: JsExpression?) {
-    val declaration = JsAstUtils.newVar(name, value)
+private fun JsFunction.addDeclaration(name: JsName, konstue: JsExpression?) {
+    konst declaration = JsAstUtils.newVar(name, konstue)
     this.body.statements.add(0, declaration)
 }
 

@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: Any>(val x: T? = null)
+konstue class A<T: Any>(konst x: T? = null)
 
 var i = 0
 

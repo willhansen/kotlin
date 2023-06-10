@@ -31,8 +31,8 @@ import org.jetbrains.kotlin.types.isError
 // Checker for all seven EXPOSED_* errors
 // All functions return true if everything is OK, or false in case of any errors
 class ExposedVisibilityChecker(
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val trace: BindingTrace? = null
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst trace: BindingTrace? = null
 ) {
 
     private fun <E : PsiElement> reportExposure(
@@ -41,8 +41,8 @@ class ExposedVisibilityChecker(
         elementVisibility: EffectiveVisibility,
         restrictingDescriptor: DescriptorWithRelation
     ) {
-        val trace = trace ?: return
-        val restrictingVisibility = restrictingDescriptor.effectiveVisibility()
+        konst trace = trace ?: return
+        konst restrictingVisibility = restrictingDescriptor.effectiveVisibility()
 
         if (!languageVersionSettings.supportsFeature(LanguageFeature.PrivateInFileEffectiveVisibility) &&
             elementVisibility == EffectiveVisibility.PrivateInFile
@@ -59,8 +59,8 @@ class ExposedVisibilityChecker(
         elementVisibility: EffectiveVisibility,
         restrictingDescriptor: DescriptorWithRelation
     ) {
-        val trace = trace ?: return
-        val restrictingVisibility = restrictingDescriptor.effectiveVisibility()
+        konst trace = trace ?: return
+        konst restrictingVisibility = restrictingDescriptor.effectiveVisibility()
         trace.report(diagnostic.on(languageVersionSettings, element, elementVisibility, restrictingDescriptor, restrictingVisibility))
     }
 
@@ -69,8 +69,8 @@ class ExposedVisibilityChecker(
         var result = checkSupertypes(klass, classDescriptor)
         result = result and checkParameterBounds(klass, classDescriptor)
 
-        val constructor = klass.primaryConstructor ?: return result
-        val constructorDescriptor = classDescriptor.unsubstitutedPrimaryConstructor ?: return result
+        konst constructor = klass.primaryConstructor ?: return result
+        konst constructorDescriptor = classDescriptor.unsubstitutedPrimaryConstructor ?: return result
         return result and checkFunction(constructor, constructorDescriptor)
     }
 
@@ -93,11 +93,11 @@ class ExposedVisibilityChecker(
     }
 
     fun checkTypeAlias(typeAlias: KtTypeAlias, typeAliasDescriptor: TypeAliasDescriptor) {
-        val expandedType = typeAliasDescriptor.expandedType
+        konst expandedType = typeAliasDescriptor.expandedType
         if (expandedType.isError) return
 
-        val typeAliasVisibility = typeAliasDescriptor.effectiveVisibility()
-        val restricting = expandedType.leastPermissiveDescriptor(typeAliasVisibility)
+        konst typeAliasVisibility = typeAliasDescriptor.effectiveVisibility()
+        konst restricting = expandedType.leastPermissiveDescriptor(typeAliasVisibility)
         if (restricting != null) {
             reportExposure(EXPOSED_TYPEALIAS_EXPANDED_TYPE, typeAlias.nameIdentifier ?: typeAlias, typeAliasVisibility, restricting)
         }
@@ -115,27 +115,27 @@ class ExposedVisibilityChecker(
         }
         var result = true
         if (function !is KtConstructor<*>) {
-            val restricting = functionDescriptor.returnType?.leastPermissiveDescriptor(functionVisibility)
+            konst restricting = functionDescriptor.returnType?.leastPermissiveDescriptor(functionVisibility)
             if (restricting != null) {
                 reportExposure(EXPOSED_FUNCTION_RETURN_TYPE, function.nameIdentifier ?: function, functionVisibility, restricting)
                 result = false
             }
         }
-        functionDescriptor.valueParameters.forEachIndexed { i, parameterDescriptor ->
-            if (i < function.valueParameters.size) {
-                val valueParameter = function.valueParameters[i]
-                val restricting = parameterDescriptor.type.leastPermissiveDescriptor(functionVisibility)
+        functionDescriptor.konstueParameters.forEachIndexed { i, parameterDescriptor ->
+            if (i < function.konstueParameters.size) {
+                konst konstueParameter = function.konstueParameters[i]
+                konst restricting = parameterDescriptor.type.leastPermissiveDescriptor(functionVisibility)
                 if (restricting != null) {
-                    reportExposure(EXPOSED_PARAMETER_TYPE, valueParameter, functionVisibility, restricting)
+                    reportExposure(EXPOSED_PARAMETER_TYPE, konstueParameter, functionVisibility, restricting)
                     result = false
-                } else if (functionDescriptor is ClassConstructorDescriptor && valueParameter.hasValOrVar()) {
-                    val propertyDescriptor = trace?.get(BindingContext.VALUE_PARAMETER_AS_PROPERTY, parameterDescriptor)
-                    val propertyOrClassVisibility = (propertyDescriptor ?: functionDescriptor.constructedClass).effectiveVisibility()
-                    val restrictingByProperty = parameterDescriptor.type.leastPermissiveDescriptor(propertyOrClassVisibility)
+                } else if (functionDescriptor is ClassConstructorDescriptor && konstueParameter.hasValOrVar()) {
+                    konst propertyDescriptor = trace?.get(BindingContext.VALUE_PARAMETER_AS_PROPERTY, parameterDescriptor)
+                    konst propertyOrClassVisibility = (propertyDescriptor ?: functionDescriptor.constructedClass).effectiveVisibility()
+                    konst restrictingByProperty = parameterDescriptor.type.leastPermissiveDescriptor(propertyOrClassVisibility)
                     if (restrictingByProperty != null) {
                         reportExposureForDeprecation(
                             EXPOSED_PROPERTY_TYPE_IN_CONSTRUCTOR,
-                            valueParameter.nameIdentifier ?: valueParameter,
+                            konstueParameter.nameIdentifier ?: konstueParameter,
                             propertyOrClassVisibility,
                             restrictingByProperty
                         )
@@ -153,8 +153,8 @@ class ExposedVisibilityChecker(
         // for checking situation with modified basic visibility
         visibility: DescriptorVisibility = propertyDescriptor.visibility
     ): Boolean {
-        val propertyVisibility = propertyDescriptor.effectiveVisibility(visibility)
-        val restricting = propertyDescriptor.type.leastPermissiveDescriptor(propertyVisibility)
+        konst propertyVisibility = propertyDescriptor.effectiveVisibility(visibility)
+        konst restricting = propertyDescriptor.type.leastPermissiveDescriptor(propertyVisibility)
         var result = true
         if (restricting != null) {
             reportExposure(EXPOSED_PROPERTY_TYPE, property.nameIdentifier ?: property, propertyVisibility, restricting)
@@ -169,9 +169,9 @@ class ExposedVisibilityChecker(
         visibility: DescriptorVisibility,
     ): Boolean {
         if (typeReference == null) return true
-        val receiverParameterDescriptor = memberDescriptor.extensionReceiverParameter ?: return true
-        val memberVisibility = memberDescriptor.effectiveVisibility(visibility)
-        val restricting = receiverParameterDescriptor.type.leastPermissiveDescriptor(memberVisibility)
+        konst receiverParameterDescriptor = memberDescriptor.extensionReceiverParameter ?: return true
+        konst memberVisibility = memberDescriptor.effectiveVisibility(visibility)
+        konst restricting = receiverParameterDescriptor.type.leastPermissiveDescriptor(memberVisibility)
         if (restricting != null) {
             reportExposure(EXPOSED_RECEIVER_TYPE, typeReference, memberVisibility, restricting)
             return false
@@ -180,18 +180,18 @@ class ExposedVisibilityChecker(
     }
 
     private fun checkSupertypes(klass: KtClassOrObject, classDescriptor: ClassDescriptor): Boolean {
-        val classVisibility = classDescriptor.effectiveVisibility()
-        val isInterface = classDescriptor.kind == ClassKind.INTERFACE
-        val delegationList = klass.superTypeListEntries
+        konst classVisibility = classDescriptor.effectiveVisibility()
+        konst isInterface = classDescriptor.kind == ClassKind.INTERFACE
+        konst delegationList = klass.superTypeListEntries
         var result = true
         classDescriptor.typeConstructor.supertypes.forEachIndexed { i, superType ->
             if (i >= delegationList.size) return result
-            val superDescriptor = TypeUtils.getClassDescriptor(superType) ?: return@forEachIndexed
-            val superIsInterface = superDescriptor.kind == ClassKind.INTERFACE
+            konst superDescriptor = TypeUtils.getClassDescriptor(superType) ?: return@forEachIndexed
+            konst superIsInterface = superDescriptor.kind == ClassKind.INTERFACE
             if (superIsInterface != isInterface) {
                 return@forEachIndexed
             }
-            val restricting = superType.leastPermissiveDescriptor(classVisibility)
+            konst restricting = superType.leastPermissiveDescriptor(classVisibility)
             if (restricting != null) {
                 reportExposure(
                     if (isInterface) EXPOSED_SUPER_INTERFACE else EXPOSED_SUPER_CLASS, delegationList[i], classVisibility, restricting
@@ -203,13 +203,13 @@ class ExposedVisibilityChecker(
     }
 
     private fun checkParameterBounds(klass: KtClassOrObject, classDescriptor: ClassDescriptor): Boolean {
-        val classVisibility = classDescriptor.effectiveVisibility()
-        val typeParameterList = klass.typeParameters
+        konst classVisibility = classDescriptor.effectiveVisibility()
+        konst typeParameterList = klass.typeParameters
         var result = true
         classDescriptor.declaredTypeParameters.forEachIndexed { i, typeParameterDescriptor ->
             if (i >= typeParameterList.size) return result
             for (upperBound in typeParameterDescriptor.upperBounds) {
-                val restricting = upperBound.leastPermissiveDescriptor(classVisibility)
+                konst restricting = upperBound.leastPermissiveDescriptor(classVisibility)
                 if (restricting != null) {
                     reportExposure(EXPOSED_TYPE_PARAMETER_BOUND, typeParameterList[i], classVisibility, restricting)
                     result = false

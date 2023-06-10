@@ -10,14 +10,14 @@ package org.jetbrains.kotlin.jps.incremental
  * [status] are calculated based on this diff (see [CacheStatus]).
  * Based on that [status] system may perform required actions (i.e. rebuild something, clearing caches, etc...).
  *
- * [CacheAttributesDiff] can be used to cache current attribute values and as facade for version operations.
+ * [CacheAttributesDiff] can be used to cache current attribute konstues and as facade for version operations.
  */
 data class CacheAttributesDiff<Attrs: Any>(
-    val manager: CacheAttributesManager<Attrs>,
-    val actual: Attrs?,
-    val expected: Attrs?
+    konst manager: CacheAttributesManager<Attrs>,
+    konst actual: Attrs?,
+    konst expected: Attrs?
 ) {
-    val status: CacheStatus
+    konst status: CacheStatus
         get() =
             if (expected != null) {
                 if (actual != null && manager.isCompatible(actual, expected)) CacheStatus.VALID

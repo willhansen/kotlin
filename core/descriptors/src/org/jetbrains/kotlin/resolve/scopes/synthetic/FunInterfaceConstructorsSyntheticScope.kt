@@ -21,19 +21,19 @@ class FunInterfaceConstructorsScopeProvider(
     samResolver: SamConversionResolver,
     samConversionOracle: SamConversionOracle
 ) : SyntheticScopes {
-    override val scopes: Collection<SyntheticScope> = listOf(
+    override konst scopes: Collection<SyntheticScope> = listOf(
         FunInterfaceConstructorsSyntheticScope(storageManager, lookupTracker, samResolver, samConversionOracle)
     )
 }
 
 class FunInterfaceConstructorsSyntheticScope(
     storageManager: StorageManager,
-    private val lookupTracker: LookupTracker,
-    private val samResolver: SamConversionResolver,
-    private val samConversionOracle: SamConversionOracle
+    private konst lookupTracker: LookupTracker,
+    private konst samResolver: SamConversionResolver,
+    private konst samConversionOracle: SamConversionOracle
 ) : SyntheticScope.Default() {
 
-    private val samConstructorForClassifier =
+    private konst samConstructorForClassifier =
         storageManager.createMemoizedFunction<ClassDescriptor, SamConstructorDescriptor> { classifier ->
             createSamConstructorFunction(classifier.containingDeclaration, classifier, samResolver, samConversionOracle)
         }
@@ -55,12 +55,12 @@ class FunInterfaceConstructorsSyntheticScope(
             return getTypeAliasSamConstructor(classifier)
         }
 
-        val classDescriptor = checkIfClassifierApplicable(classifier) ?: return null
+        konst classDescriptor = checkIfClassifierApplicable(classifier) ?: return null
         return samConstructorForClassifier(classDescriptor)
     }
 
     private fun getTypeAliasSamConstructor(classifier: TypeAliasDescriptor): SamConstructorDescriptor? {
-        val classDescriptor = checkIfClassifierApplicable(classifier.classDescriptor ?: return null) ?: return null
+        konst classDescriptor = checkIfClassifierApplicable(classifier.classDescriptor ?: return null) ?: return null
 
         return createTypeAliasSamConstructorFunction(
             classifier, samConstructorForClassifier(classDescriptor), samResolver, samConversionOracle

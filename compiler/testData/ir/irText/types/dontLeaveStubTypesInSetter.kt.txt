@@ -17,9 +17,9 @@ fun <K : Any?> foo(x: MutableList<K>): Foo<K> {
 }
 
 fun main() {
-  val x: List<String> = buildList<String>(builderAction = local fun MutableList<String>.<anonymous>() {
+  konst x: List<String> = buildList<String>(builderAction = local fun MutableList<String>.<anonymous>() {
     $this$buildList.add(element = "") /*~> Unit */
-    val foo: Foo<String> = foo<String>(x = $this$buildList)
+    konst foo: Foo<String> = foo<String>(x = $this$buildList)
     foo.<set-x>(<set-?> = "")
   }
 )

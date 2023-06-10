@@ -1,3 +1,3 @@
 expect class AtomicRef<T> {
-    val value: T
+    konst konstue: T
 }

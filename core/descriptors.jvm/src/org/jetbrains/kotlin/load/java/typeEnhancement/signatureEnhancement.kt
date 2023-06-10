@@ -50,7 +50,7 @@ import org.jetbrains.kotlin.types.model.TypeParameterMarker
 import org.jetbrains.kotlin.types.model.TypeSystemInferenceExtensionContext
 import org.jetbrains.kotlin.types.typeUtil.contains
 
-class SignatureEnhancement(private val typeEnhancement: JavaTypeEnhancement) {
+class SignatureEnhancement(private konst typeEnhancement: JavaTypeEnhancement) {
     fun <D : CallableMemberDescriptor> enhanceSignatures(c: LazyJavaResolverContext, platformSignatures: Collection<D>): Collection<D> {
         return platformSignatures.map {
             it.enhanceSignature(c)
@@ -58,12 +58,12 @@ class SignatureEnhancement(private val typeEnhancement: JavaTypeEnhancement) {
     }
 
     private fun <D : CallableMemberDescriptor> D.getDefaultAnnotations(c: LazyJavaResolverContext): Annotations {
-        val topLevelClassifier = getTopLevelContainingClassifier() ?: return annotations
-        val moduleAnnotations = (topLevelClassifier as? LazyJavaClassDescriptor)?.moduleAnnotations
+        konst topLevelClassifier = getTopLevelContainingClassifier() ?: return annotations
+        konst moduleAnnotations = (topLevelClassifier as? LazyJavaClassDescriptor)?.moduleAnnotations
 
         if (moduleAnnotations.isNullOrEmpty()) return annotations
 
-        val moduleAnnotationDescriptors = moduleAnnotations.map { LazyJavaAnnotationDescriptor(c, it, isFreshlySupportedAnnotation = true) }
+        konst moduleAnnotationDescriptors = moduleAnnotations.map { LazyJavaAnnotationDescriptor(c, it, isFreshlySupportedAnnotation = true) }
 
         return Annotations.create(annotations + moduleAnnotationDescriptors)
     }
@@ -78,16 +78,16 @@ class SignatureEnhancement(private val typeEnhancement: JavaTypeEnhancement) {
         // Fake overrides with one overridden has been enhanced before
         if (kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE && original.overriddenDescriptors.size == 1) return this
 
-        val memberContext = c.copyWithNewDefaultTypeQualifiers(getDefaultAnnotations(c))
+        konst memberContext = c.copyWithNewDefaultTypeQualifiers(getDefaultAnnotations(c))
 
         // When loading method as an override for a property, all annotations are stick to its getter
-        val annotationOwnerForMember =
+        konst annotationOwnerForMember =
             if (this is JavaPropertyDescriptor && getter?.isDefault == false)
                 getter!!
             else
                 this
 
-        val receiverTypeEnhancement =
+        konst receiverTypeEnhancement =
             if (extensionReceiverParameter != null)
                 enhanceValueParameter(
                     parameterDescriptor = (annotationOwnerForMember as? FunctionDescriptor)
@@ -98,30 +98,30 @@ class SignatureEnhancement(private val typeEnhancement: JavaTypeEnhancement) {
                 ) { it.extensionReceiverParameter!!.type }
             else null
 
-        val predefinedEnhancementInfo =
+        konst predefinedEnhancementInfo =
             (this as? JavaMethodDescriptor)
                 ?.run { SignatureBuildingComponents.signature(this.containingDeclaration as ClassDescriptor, this.computeJvmDescriptor()) }
                 ?.let { signature -> PREDEFINED_FUNCTION_ENHANCEMENT_INFO_BY_SIGNATURE[signature] }
 
 
         predefinedEnhancementInfo?.let {
-            assert(it.parametersInfo.size == valueParameters.size) {
-                "Predefined enhancement info for $this has ${it.parametersInfo.size}, but ${valueParameters.size} expected"
+            assert(it.parametersInfo.size == konstueParameters.size) {
+                "Predefined enhancement info for $this has ${it.parametersInfo.size}, but ${konstueParameters.size} expected"
             }
         }
 
-        val ignoreDeclarationNullabilityAnnotations =
+        konst ignoreDeclarationNullabilityAnnotations =
             (isJspecifyEnabledInStrictMode(c.components.javaTypeEnhancementState)
                     || memberContext.components.settings.ignoreNullabilityForErasedValueParameters)
                     && hasErasedValueParameters(this)
-        val valueParameterEnhancements = annotationOwnerForMember.valueParameters.map { p ->
-            val predefined = predefinedEnhancementInfo?.parametersInfo?.getOrNull(p.index)
+        konst konstueParameterEnhancements = annotationOwnerForMember.konstueParameters.map { p ->
+            konst predefined = predefinedEnhancementInfo?.parametersInfo?.getOrNull(p.index)
             enhanceValueParameter(p, memberContext, predefined, ignoreDeclarationNullabilityAnnotations) {
-                it.valueParameters[p.index].type
+                it.konstueParameters[p.index].type
             }
         }
 
-        val returnTypeEnhancement =
+        konst returnTypeEnhancement =
             enhance(
                 typeContainer = annotationOwnerForMember, isCovariant = true,
                 containerContext = memberContext,
@@ -133,21 +133,21 @@ class SignatureEnhancement(private val typeEnhancement: JavaTypeEnhancement) {
                 predefinedEnhancementInfo?.returnTypeInfo
             ) { it.returnType!! }
 
-        val containsFunctionN = returnType!!.containsFunctionN() ||
+        konst containsFunctionN = returnType!!.containsFunctionN() ||
                 extensionReceiverParameter?.type?.containsFunctionN() ?: false ||
-                valueParameters.any { it.type.containsFunctionN() }
-        val additionalUserData = if (containsFunctionN)
+                konstueParameters.any { it.type.containsFunctionN() }
+        konst additionalUserData = if (containsFunctionN)
             DEPRECATED_FUNCTION_KEY to DeprecationCausedByFunctionNInfo(this)
         else
             null
 
-        if (receiverTypeEnhancement != null || returnTypeEnhancement != null || valueParameterEnhancements.any { it != null } ||
+        if (receiverTypeEnhancement != null || returnTypeEnhancement != null || konstueParameterEnhancements.any { it != null } ||
             additionalUserData != null
         ) {
             @Suppress("UNCHECKED_CAST")
             return this.enhance(
                 receiverTypeEnhancement ?: extensionReceiverParameter?.type,
-                valueParameterEnhancements.mapIndexed { index, enhanced -> enhanced ?: valueParameters[index].type },
+                konstueParameterEnhancements.mapIndexed { index, enhanced -> enhanced ?: konstueParameters[index].type },
                 returnTypeEnhancement ?: returnType!!,
                 additionalUserData
             ) as D
@@ -182,7 +182,7 @@ class SignatureEnhancement(private val typeEnhancement: JavaTypeEnhancement) {
 
     private fun KotlinType.containsFunctionN(): Boolean =
         TypeUtils.contains(this) {
-            val classifier = it.constructor.declarationDescriptor ?: return@contains false
+            konst classifier = it.constructor.declarationDescriptor ?: return@contains false
             classifier.name == JavaToKotlinClassMap.FUNCTION_N_FQ_NAME.shortName() &&
                     classifier.fqNameOrNull() == JavaToKotlinClassMap.FUNCTION_N_FQ_NAME
         }
@@ -225,28 +225,28 @@ class SignatureEnhancement(private val typeEnhancement: JavaTypeEnhancement) {
 }
 
 private class SignatureParts(
-    private val typeContainer: Annotated?,
-    override val isCovariant: Boolean,
-    private val containerContext: LazyJavaResolverContext,
-    override val containerApplicabilityType: AnnotationQualifierApplicabilityType,
-    override val skipRawTypeArguments: Boolean = false
+    private konst typeContainer: Annotated?,
+    override konst isCovariant: Boolean,
+    private konst containerContext: LazyJavaResolverContext,
+    override konst containerApplicabilityType: AnnotationQualifierApplicabilityType,
+    override konst skipRawTypeArguments: Boolean = false
 ) : AbstractSignatureParts<AnnotationDescriptor>() {
-    override val annotationTypeQualifierResolver: AnnotationTypeQualifierResolver
+    override konst annotationTypeQualifierResolver: AnnotationTypeQualifierResolver
         get() = containerContext.components.annotationTypeQualifierResolver
 
-    override val enableImprovementsInStrictMode: Boolean
+    override konst enableImprovementsInStrictMode: Boolean
         get() = containerContext.components.settings.typeEnhancementImprovementsInStrictMode
 
-    override val containerAnnotations: Iterable<AnnotationDescriptor>
+    override konst containerAnnotations: Iterable<AnnotationDescriptor>
         get() = typeContainer?.annotations ?: emptyList()
 
-    override val containerDefaultTypeQualifiers: JavaTypeQualifiersByElementType?
+    override konst containerDefaultTypeQualifiers: JavaTypeQualifiersByElementType?
         get() = containerContext.defaultTypeQualifiers
 
-    override val containerIsVarargParameter: Boolean
+    override konst containerIsVarargParameter: Boolean
         get() = typeContainer is ValueParameterDescriptor && typeContainer.varargElementType != null
 
-    override val typeSystem: TypeSystemInferenceExtensionContext
+    override konst typeSystem: TypeSystemInferenceExtensionContext
         get() = SimpleClassicTypeSystemContext
 
     override fun AnnotationDescriptor.forceWarning(unenhancedType: KotlinTypeMarker?): Boolean =
@@ -259,16 +259,16 @@ private class SignatureParts(
                         annotationTypeQualifierResolver.isTypeUseAnnotation(this) &&
                         !containerContext.components.settings.enhancePrimitiveArrays)
 
-    override val KotlinTypeMarker.annotations: Iterable<AnnotationDescriptor>
+    override konst KotlinTypeMarker.annotations: Iterable<AnnotationDescriptor>
         get() = (this as KotlinType).annotations
 
-    override val KotlinTypeMarker.enhancedForWarnings: KotlinType?
+    override konst KotlinTypeMarker.enhancedForWarnings: KotlinType?
         get() = (this as KotlinType).getEnhancement()
 
-    override val KotlinTypeMarker.fqNameUnsafe: FqNameUnsafe?
+    override konst KotlinTypeMarker.fqNameUnsafe: FqNameUnsafe?
         get() = TypeUtils.getClassDescriptor(this as KotlinType)?.let { DescriptorUtils.getFqName(it) }
 
-    override val KotlinTypeMarker.isNotNullTypeParameterCompat: Boolean
+    override konst KotlinTypeMarker.isNotNullTypeParameterCompat: Boolean
         get() = (this as KotlinType).unwrap() is NotNullTypeParameterImpl
 
     override fun KotlinTypeMarker.isEqual(other: KotlinTypeMarker): Boolean =
@@ -276,6 +276,6 @@ private class SignatureParts(
 
     override fun KotlinTypeMarker.isArrayOrPrimitiveArray(): Boolean = KotlinBuiltIns.isArrayOrPrimitiveArray(this as KotlinType)
 
-    override val TypeParameterMarker.isFromJava: Boolean
+    override konst TypeParameterMarker.isFromJava: Boolean
         get() = this is LazyJavaTypeParameterDescriptor
 }

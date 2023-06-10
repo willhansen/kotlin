@@ -10,14 +10,14 @@ import java.util.Arrays
 
 @Parcelize
 data class Test(
-        val a: Array<String>,
-        val b: Array<String?>,
-        val c: IntArray,
-        val d: CharArray?,
-        val e: Array<IntArray>,
-        val f: Array<List<String>>,
-        val g: List<Array<String>>,
-        val h: Array<String>?
+        konst a: Array<String>,
+        konst b: Array<String?>,
+        konst c: IntArray,
+        konst d: CharArray?,
+        konst e: Array<IntArray>,
+        konst f: Array<List<String>>,
+        konst g: List<Array<String>>,
+        konst h: Array<String>?
 ) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -54,7 +54,7 @@ data class Test(
 }
 
 fun box() = parcelTest { parcel ->
-    val first = Test(
+    konst first = Test(
             a = arrayOf("A", "B", "C"),
             b = arrayOf("A", null, "B"),
             c = intArrayOf(1, 2, 3),
@@ -67,11 +67,11 @@ fun box() = parcelTest { parcel ->
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val first2 = parcelableCreator<Test>().createFromParcel(parcel)
+    konst first2 = parcelableCreator<Test>().createFromParcel(parcel)
 
     assert(first == first2)
 }

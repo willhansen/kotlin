@@ -10,7 +10,7 @@ external class A {
 
 external fun bar(): Int
 
-external val prop: Int
+external konst prop: Int
 
 // FILE: b.kt
 @file:JsModule("b")

@@ -8,9 +8,9 @@ import test.pkg.Context
 import test.pkg.R
 
 data class Test(
-    val context: Context,
-    val testInt: Int,
-    val testString: String = context.<expr>getString</expr>(if (testInt == 0) R.string.test_string_1 else R.string.test_string_2))
+    konst context: Context,
+    konst testInt: Int,
+    konst testString: String = context.<expr>getString</expr>(if (testInt == 0) R.string.test_string_1 else R.string.test_string_2))
 )
 
 // FILE: Context.java

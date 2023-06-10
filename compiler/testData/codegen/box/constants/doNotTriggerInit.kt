@@ -6,8 +6,8 @@ object O {
     init {
         initialized += 1
     }
-    const val x = 1
-    val y = 2
+    const konst x = 1
+    konst y = 2
 }
 
 fun box() : String {

@@ -6,12 +6,12 @@
 package library
 
 interface I {
-    val data: String
+    konst data: String
 }
 
-class A(override val data: String): I
+class A(override konst data: String): I
 
-enum class E(val data: String) {
+enum class E(konst data: String) {
     A("Enum entry A"),
     B("Enum entry B"),
     C("Enum entry C")

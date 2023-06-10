@@ -7,9 +7,9 @@ FILE fqName:<root> fileName:/delegatedGenericImplementation.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.IBase<A of <root>.IBase>
       VALUE_PARAMETER name:a index:0 type:A of <root>.IBase
       VALUE_PARAMETER name:b index:1 type:B of <root>.IBase.foo
-    PROPERTY name:id visibility:public modality:ABSTRACT [val]
+    PROPERTY name:id visibility:public modality:ABSTRACT [konst]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-id> visibility:public modality:ABSTRACT <C> ($this:<root>.IBase<A of <root>.IBase>, $receiver:C of <root>.IBase.<get-id>) returnType:kotlin.collections.Map<A of <root>.IBase, C of <root>.IBase.<get-id>>?
-        correspondingProperty: PROPERTY name:id visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:id visibility:public modality:ABSTRACT [konst]
         TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
         $this: VALUE_PARAMETER name:<this> type:<root>.IBase<A of <root>.IBase>
         $receiver: VALUE_PARAMETER name:<this> type:C of <root>.IBase.<get-id>
@@ -49,11 +49,11 @@ FILE fqName:<root> fileName:/delegatedGenericImplementation.kt
     FIELD DELEGATE name:$$delegate_0 type:<root>.IBase<E of <root>.Test1> visibility:private [final]
       EXPRESSION_BODY
         GET_VAR 'i: <root>.IBase<E of <root>.Test1> declared in <root>.Test1.<init>' type=<root>.IBase<E of <root>.Test1> origin=null
-    PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [val]
+    PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [konst]
       overridden:
         public abstract id: kotlin.collections.Map<A of <root>.IBase, C of <root>.IBase.<get-id>>?
       FUN DELEGATED_MEMBER name:<get-id> visibility:public modality:OPEN <C> ($this:<root>.Test1<E of <root>.Test1>, $receiver:C of <root>.Test1.<get-id>) returnType:kotlin.collections.Map<E of <root>.Test1, C of <root>.Test1.<get-id>>?
-        correspondingProperty: PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-id> <C> (): kotlin.collections.Map<A of <root>.IBase, C of <root>.IBase.<get-id>>? declared in <root>.IBase
         TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -150,15 +150,15 @@ FILE fqName:<root> fileName:/delegatedGenericImplementation.kt
         BLOCK_BODY
           SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:j type:<root>.IBase<kotlin.String> visibility:private' type=kotlin.Unit origin=null
             receiver: GET_VAR '<this>: <root>.Test2 declared in <root>.Test2.<set-j>' type=<root>.Test2 origin=null
-            value: GET_VAR '<set-?>: <root>.IBase<kotlin.String> declared in <root>.Test2.<set-j>' type=<root>.IBase<kotlin.String> origin=null
+            konstue: GET_VAR '<set-?>: <root>.IBase<kotlin.String> declared in <root>.Test2.<set-j>' type=<root>.IBase<kotlin.String> origin=null
     FIELD DELEGATE name:$$delegate_0 type:<root>.IBase<kotlin.String> visibility:private [final]
       EXPRESSION_BODY
         GET_VAR 'j: <root>.IBase<kotlin.String> declared in <root>.Test2.<init>' type=<root>.IBase<kotlin.String> origin=null
-    PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [val]
+    PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [konst]
       overridden:
         public abstract id: kotlin.collections.Map<A of <root>.IBase, C of <root>.IBase.<get-id>>?
       FUN DELEGATED_MEMBER name:<get-id> visibility:public modality:OPEN <C> ($this:<root>.Test2, $receiver:C of <root>.Test2.<get-id>) returnType:kotlin.collections.Map<kotlin.String, C of <root>.Test2.<get-id>>?
-        correspondingProperty: PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY DELEGATED_MEMBER name:id visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-id> <C> (): kotlin.collections.Map<A of <root>.IBase, C of <root>.IBase.<get-id>>? declared in <root>.IBase
         TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false

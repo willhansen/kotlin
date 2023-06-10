@@ -10,7 +10,7 @@ fun foo(x: Int): Int {
             3
     }
 
-    val t = when (x) {
+    konst t = when (x) {
         21 ->
             1
         42 ->

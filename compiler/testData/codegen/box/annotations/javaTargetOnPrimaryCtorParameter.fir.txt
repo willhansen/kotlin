@@ -6,16 +6,16 @@ FILE: test.kt
 
         field:@R|FieldOnly|() public final var param: R|kotlin/Int| = R|<local>/param|
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
     }
     public final fun box(): R|kotlin/String| {
-        lval clazz: R|kotlin/reflect/KClass<Foo>| = <getClass>(Q|Foo|)
-        lval parameterAnnotations: R|kotlin/collections/Set<kotlin/String>| = R|<local>/clazz|.R|SubstitutionOverride<kotlin/reflect/KClass.constructors: R|kotlin/collections/Collection<kotlin/reflect/KFunction<Foo>>|>|.R|kotlin/collections/single|<R|kotlin/reflect/KFunction<Foo>|>().R|SubstitutionOverride<kotlin/reflect/KFunction.parameters: R|kotlin/collections/List<kotlin/reflect/KParameter>|>|.R|kotlin/collections/single|<R|kotlin/reflect/KParameter|>().R|kotlin/reflect/KAnnotatedElement.annotations|.R|kotlin/collections/map|<R|kotlin/Annotation|, R|kotlin/String|>(<L> = map@fun <anonymous>(it: R|kotlin/Annotation|): R|kotlin/String| <inline=Inline, kind=UNKNOWN>  {
+        lkonst clazz: R|kotlin/reflect/KClass<Foo>| = <getClass>(Q|Foo|)
+        lkonst parameterAnnotations: R|kotlin/collections/Set<kotlin/String>| = R|<local>/clazz|.R|SubstitutionOverride<kotlin/reflect/KClass.constructors: R|kotlin/collections/Collection<kotlin/reflect/KFunction<Foo>>|>|.R|kotlin/collections/single|<R|kotlin/reflect/KFunction<Foo>|>().R|SubstitutionOverride<kotlin/reflect/KFunction.parameters: R|kotlin/collections/List<kotlin/reflect/KParameter>|>|.R|kotlin/collections/single|<R|kotlin/reflect/KParameter|>().R|kotlin/reflect/KAnnotatedElement.annotations|.R|kotlin/collections/map|<R|kotlin/Annotation|, R|kotlin/String|>(<L> = map@fun <anonymous>(it: R|kotlin/Annotation|): R|kotlin/String| <inline=Inline, kind=UNKNOWN>  {
             ^ R|<local>/it|.R|kotlin/jvm/annotationClass|<R|kotlin/Annotation|>.R|SubstitutionOverride<kotlin/reflect/KClass.simpleName: R|kotlin/String?|>| ?: String()
         }
         ).R|kotlin/collections/toSet|<R|kotlin/String|>()
-        lval fieldAnnotations: R|kotlin/collections/Set<kotlin/String>| = <getClass>(Q|Foo|).R|kotlin/jvm/java|<R|Foo|>.R|SubstitutionOverride<java/lang/Class.getDeclaredField: R|java/lang/reflect/Field!|>|(String(param)).R|java/lang/reflect/AccessibleObject.annotations|.R|kotlin/collections/map|<R|kotlin/Annotation!|, R|kotlin/String|>(<L> = map@fun <anonymous>(it: R|kotlin/Annotation!|): R|kotlin/String| <inline=Inline, kind=UNKNOWN>  {
+        lkonst fieldAnnotations: R|kotlin/collections/Set<kotlin/String>| = <getClass>(Q|Foo|).R|kotlin/jvm/java|<R|Foo|>.R|SubstitutionOverride<java/lang/Class.getDeclaredField: R|java/lang/reflect/Field!|>|(String(param)).R|java/lang/reflect/AccessibleObject.annotations|.R|kotlin/collections/map|<R|kotlin/Annotation!|, R|kotlin/String|>(<L> = map@fun <anonymous>(it: R|kotlin/Annotation!|): R|kotlin/String| <inline=Inline, kind=UNKNOWN>  {
             ^ R|<local>/it|.R|kotlin/jvm/annotationClass|<R|kotlin/Annotation!|>.R|SubstitutionOverride<kotlin/reflect/KClass.simpleName: R|kotlin/String?|>| ?: String()
         }
         ).R|kotlin/collections/toSet|<R|kotlin/String|>()

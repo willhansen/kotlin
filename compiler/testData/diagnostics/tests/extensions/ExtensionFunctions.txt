@@ -9,7 +9,7 @@ package null_safety {
 
     public final class Command {
         public constructor Command()
-        public final val foo: kotlin.Int = 0
+        public final konst foo: kotlin.Int = 0
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -17,9 +17,9 @@ package null_safety {
 }
 
 package outer {
-    public val kotlin.Int.abs: kotlin.Int
-    public val </*0*/ T> T.foo: T
-    public val kotlin.Int?.optval: kotlin.Unit
+    public konst kotlin.Int.abs: kotlin.Int
+    public konst </*0*/ T> T.foo: T
+    public konst kotlin.Int?.optkonst: kotlin.Unit
     public fun test(): kotlin.Unit
     public fun </*0*/ T : kotlin.Any, /*1*/ E> T.foo(/*0*/ x: E, /*1*/ y: outer.A): T
     public fun kotlin.Int.foo(): kotlin.Int

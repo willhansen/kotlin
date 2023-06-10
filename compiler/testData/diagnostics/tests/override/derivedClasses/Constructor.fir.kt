@@ -1,4 +1,4 @@
-open class Foo<T>(val item: T)
+open class Foo<T>(konst item: T)
 
 class Bar(str: String) : Foo<String>(str)
 

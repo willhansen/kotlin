@@ -48,7 +48,7 @@ package foo {
 
     public final class KotlinClass2 : bar.JavaClass {
         public constructor KotlinClass2()
-        public final val field: kotlin.String = "abc"
+        public final konst field: kotlin.String = "abc"
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var field: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         protected open override /*1*/ fun foo(): kotlin.Unit

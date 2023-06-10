@@ -27,7 +27,7 @@ class MutableMapSet : IntrinsicMethod() {
                 v.pop()
             }
         ) {
-            override val parameterTypes: Array<Type>
-                get() = method.valueParameterTypes.toTypedArray()
+            override konst parameterTypes: Array<Type>
+                get() = method.konstueParameterTypes.toTypedArray()
         }
 }

@@ -2,7 +2,7 @@
 // FILE: removeNullFromList.kt
 
 class MyList : List<String> {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun contains(element: String): Boolean = false
     override fun containsAll(elements: Collection<String>): Boolean = false
     override fun get(index: Int): String = TODO()

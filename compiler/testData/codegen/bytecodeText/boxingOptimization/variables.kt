@@ -17,5 +17,5 @@ fun bar() {
     foo(true) { x -> x }
 }
 
-// 0 valueOf
+// 0 konstueOf
 // 0 Value\s\(\)

@@ -31,28 +31,28 @@ abstract class BaseJvmAbiTest : TestCase() {
         super.tearDown()
     }
 
-    private val abiPluginJar = File("dist/kotlinc/lib/jvm-abi-gen.jar")
-    private fun abiOption(option: String, value: String): String =
-        "plugin:${JvmAbiCommandLineProcessor.COMPILER_PLUGIN_ID}:$option=$value"
+    private konst abiPluginJar = File("dist/kotlinc/lib/jvm-abi-gen.jar")
+    private fun abiOption(option: String, konstue: String): String =
+        "plugin:${JvmAbiCommandLineProcessor.COMPILER_PLUGIN_ID}:$option=$konstue"
 
     inner class Compilation(
-        private val projectDir: File,
-        val name: String?,
-        val dependencies: Collection<Compilation> = emptyList()
+        private konst projectDir: File,
+        konst name: String?,
+        konst dependencies: Collection<Compilation> = emptyList()
     ) {
-        val srcDir: File
+        konst srcDir: File
             get() = if (name == null) projectDir else projectDir.resolve(name)
 
-        val destinationDir: File
+        konst destinationDir: File
             get() = if (name == null) workingDir.resolve("out") else workingDir.resolve("$name/out")
 
-        val abiDir: File
+        konst abiDir: File
             get() = if (name == null) workingDir.resolve("abi") else workingDir.resolve("$name/abi")
 
-        val javaDestinationDir: File
+        konst javaDestinationDir: File
             get() = if (name == null) workingDir.resolve("javaOut") else workingDir.resolve("$name/javaOut")
 
-        val directives: File
+        konst directives: File
             get() = projectDir.resolve("directives.txt")
 
         override fun toString(): String =
@@ -63,16 +63,16 @@ abstract class BaseJvmAbiTest : TestCase() {
         check(abiPluginJar.exists()) { "Plugin jar '$abiPluginJar' does not exist" }
         check(compilation.srcDir.exists()) { "Source dir '${compilation.srcDir}' does not exist" }
 
-        val abiDependencies = compilation.dependencies.map { dep ->
+        konst abiDependencies = compilation.dependencies.map { dep ->
             check(dep.abiDir.exists()) { "Dependency '${dep.name}' of '${compilation.name}' was not built" }
             dep.abiDir
         }
 
-        val directives = if (compilation.directives.exists()) compilation.directives.readText() else ""
+        konst directives = if (compilation.directives.exists()) compilation.directives.readText() else ""
 
-        val messageCollector = LocationReportingTestMessageCollector()
-        val compiler = K2JVMCompiler()
-        val args = compiler.createArguments().apply {
+        konst messageCollector = LocationReportingTestMessageCollector()
+        konst compiler = K2JVMCompiler()
+        konst args = compiler.createArguments().apply {
             freeArgs = listOf(compilation.srcDir.canonicalPath)
             classpath = (abiDependencies + kotlinJvmStdlib).joinToString(File.pathSeparator) { it.canonicalPath }
             pluginClasspaths = arrayOf(abiPluginJar.canonicalPath)
@@ -95,18 +95,18 @@ abstract class BaseJvmAbiTest : TestCase() {
                 }
             }
         }
-        val exitCode = compiler.exec(messageCollector, Services.EMPTY, args)
+        konst exitCode = compiler.exec(messageCollector, Services.EMPTY, args)
         if (exitCode != ExitCode.OK || messageCollector.errors.isNotEmpty()) {
-            val errorLines = listOf("Could not compile $compilation", "Exit code: $exitCode", "Errors:") + messageCollector.errors
+            konst errorLines = listOf("Could not compile $compilation", "Exit code: $exitCode", "Errors:") + messageCollector.errors
             error(errorLines.joinToString("\n"))
         }
 
         // Compile Java files into both the destination and ABI directories in order make the
         // results available to run and to downstream compilations.
-        val javaFiles = CodegenTestUtil.findJavaSourcesInDirectory(compilation.srcDir).map(::File)
+        konst javaFiles = CodegenTestUtil.findJavaSourcesInDirectory(compilation.srcDir).map(::File)
         if (javaFiles.isNotEmpty()) {
             compilation.javaDestinationDir.mkdirs()
-            val javacOptions = listOf(
+            konst javacOptions = listOf(
                 "-classpath",
                 (abiDependencies + compilation.destinationDir).joinToString(File.pathSeparator) { it.canonicalPath }
                         + File.pathSeparator + ForTestCompileRuntime.runtimeJarForTests(),
@@ -119,10 +119,10 @@ abstract class BaseJvmAbiTest : TestCase() {
         }
     }
 
-    protected open val useLegacyAbiGen: Boolean
+    protected open konst useLegacyAbiGen: Boolean
         get() = false
 
-    protected val kotlinJvmStdlib = File("dist/kotlinc/lib/kotlin-stdlib.jar").also {
+    protected konst kotlinJvmStdlib = File("dist/kotlinc/lib/kotlin-stdlib.jar").also {
         check(it.exists()) { "Stdlib file '$it' does not exist" }
     }
 }

@@ -2,10 +2,10 @@ package test
 
 public open class AnnotatedValueParameter {
     public constructor AnnotatedValueParameter()
-    public open fun f(/*0*/ @test.AnnotatedValueParameter.Anno(value = "non-empty") p0: kotlin.collections.(Mutable)List<kotlin.String!>!): kotlin.Unit
+    public open fun f(/*0*/ @test.AnnotatedValueParameter.Anno(konstue = "non-empty") p0: kotlin.collections.(Mutable)List<kotlin.String!>!): kotlin.Unit
 
     public final annotation class Anno : kotlin.Annotation {
-        public constructor Anno(/*0*/ value: kotlin.String)
-        public final val value: kotlin.String
+        public constructor Anno(/*0*/ konstue: kotlin.String)
+        public final konst konstue: kotlin.String
     }
 }

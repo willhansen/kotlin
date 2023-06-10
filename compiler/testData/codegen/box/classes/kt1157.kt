@@ -1,5 +1,5 @@
 public object SomeClass {
-    private val work = object : Runnable {
+    private konst work = object : Runnable {
         override fun run() {
             foo()
         }

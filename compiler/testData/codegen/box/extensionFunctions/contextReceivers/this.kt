@@ -1,8 +1,8 @@
 // !LANGUAGE: +ContextReceivers
 // TARGET_BACKEND: JVM_IR
 
-class A<T>(val a: T)
-class B(val b: Any?)
+class A<T>(konst a: T)
+class B(konst b: Any?)
 
 context(A<String>, B) fun f() {
     this@A.a.length

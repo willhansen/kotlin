@@ -54,11 +54,11 @@ class SymbolTableWithBuiltInsDeduplication(
      */
     @ObsoleteDescriptorBasedAPI
     override fun referenceClass(descriptor: ClassDescriptor): IrClassSymbol {
-        val irBuiltIns = this.irBuiltIns ?: return super.referenceClass(descriptor)
+        konst irBuiltIns = this.irBuiltIns ?: return super.referenceClass(descriptor)
 
         // We need to find out whether `descriptor` is possibly a built-in symbol before it's actually retrieved to break recursion as
         // `irBuiltIns.findClass` uses `referenceClass` recursively.
-        val builtInDescriptor = irBuiltIns.findBuiltInClassDescriptor(descriptor)
+        konst builtInDescriptor = irBuiltIns.findBuiltInClassDescriptor(descriptor)
         if (builtInDescriptor != null) {
             // We need to delegate to the supertype implementation here to break recursion. `findBuiltInClassDescriptor` will return
             // `descriptor` even if `descriptor` was found via `findBuiltInClassDescriptor`.
@@ -69,7 +69,7 @@ class SymbolTableWithBuiltInsDeduplication(
     }
 
     private fun IrBuiltInsOverDescriptors.findBuiltInClassDescriptor(descriptor: ClassDescriptor): ClassDescriptor? {
-        val packageFqName = descriptor.containingPackage() ?: return null
+        konst packageFqName = descriptor.containingPackage() ?: return null
         return findClassDescriptor(descriptor.name, packageFqName)
     }
 }

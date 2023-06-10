@@ -18,8 +18,8 @@ interface SuspendRunnable {
 }
 
 suspend inline fun test(crossinline c: suspend (String) -> String): String {
-    val sr = object : SuspendRunnable {
-        val ok by Delegate()
+    konst sr = object : SuspendRunnable {
+        konst ok by Delegate()
         override suspend fun run(): String {
             return c(ok)
         }

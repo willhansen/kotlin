@@ -1,7 +1,7 @@
-class DropDownComponent<T : Any>(val initialValues: List<T>)
+class DropDownComponent<T : Any>(konst initialValues: List<T>)
 
 fun test(strings: List<String>) {
-    val dropDown = DropDownComponent(
+    konst dropDown = DropDownComponent(
         initialValues = buildList {
             addAll(strings)
         }

@@ -40,7 +40,7 @@ public fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }):
 package testsCase2
 import testsCase2.*
 
-public val listOf: A
+public konst listOf: A
     get() = A()
 
 class A {
@@ -68,7 +68,7 @@ public fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }):
 package testsCase3
 import testsCase3.*
 
-public val listOf: A
+public konst listOf: A
     get() = A()
 
 class A {

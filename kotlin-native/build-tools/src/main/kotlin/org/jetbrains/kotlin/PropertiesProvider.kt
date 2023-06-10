@@ -3,8 +3,8 @@ package org.jetbrains.kotlin
 import org.gradle.api.Project
 import java.util.*
 
-class PropertiesProvider(val project: Project) {
-    private val localProperties by lazy {
+class PropertiesProvider(konst project: Project) {
+    private konst localProperties by lazy {
         Properties().apply {
             project.file("local.properties").takeIf { it.isFile }?.inputStream()?.use {
                 load(it)
@@ -21,10 +21,10 @@ class PropertiesProvider(val project: Project) {
     fun hasProperty(name: String): Boolean =
             project.hasProperty(name) || localProperties.containsKey(name)
 
-    val xcodeMajorVersion: String?
+    konst xcodeMajorVersion: String?
         get() = findProperty("xcodeMajorVersion") as String?
 
-    val checkXcodeVersion: Boolean
+    konst checkXcodeVersion: Boolean
         get() = findProperty("checkXcodeVersion")?.let {
             it == "true"
         } ?: true

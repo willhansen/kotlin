@@ -2,7 +2,7 @@
 public final class<<A::Ljava/lang/Comparable<-TA;>;B:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/SortedMap<TA;TB;>;>  SortedMapImpl {
     // source: 'implementsSortedMap.kt'
     public @org.jetbrains.annotations.NotNull <()Ljava/util/Collection<TB;>;> method getValues(): java.util.Collection
-    public bridge final <()Ljava/util/Collection<TB;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<TB;>;> method konstues(): java.util.Collection
     public @org.jetbrains.annotations.NotNull <()Ljava/util/Comparator<-TA;>;> method comparator(): java.util.Comparator
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<TA;TB;>;>;> method entrySet(): java.util.Set
     public @org.jetbrains.annotations.NotNull <()Ljava/util/Set<Ljava/util/Map$Entry<TA;TB;>;>;> method getEntries(): java.util.Set

@@ -22,28 +22,28 @@ import org.jetbrains.kotlin.fir.types.renderForDebugging
 import org.jetbrains.kotlin.name.ClassId
 
 internal class KtFirUsualClassType(
-    override val coneType: ConeClassLikeTypeImpl,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeClassLikeTypeImpl,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtUsualClassType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
-    override val classId: ClassId get() = withValidityAssertion { coneType.lookupTag.classId }
-    override val classSymbol: KtClassLikeSymbol
+    override konst token: KtLifetimeToken get() = builder.token
+    override konst classId: ClassId get() = withValidityAssertion { coneType.lookupTag.classId }
+    override konst classSymbol: KtClassLikeSymbol
         get() = withValidityAssertion {
             builder.classifierBuilder.buildClassLikeSymbolByLookupTag(coneType.lookupTag)
                 ?: errorWithFirSpecificEntries("Class was not found", coneType = coneType)
         }
 
-    override val qualifiers by cached {
+    override konst qualifiers by cached {
         UsualClassTypeQualifierBuilder.buildQualifiers(coneType, builder)
     }
 
-    override val ownTypeArguments: List<KtTypeProjection> get() = withValidityAssertion { qualifiers.last().typeArguments }
+    override konst ownTypeArguments: List<KtTypeProjection> get() = withValidityAssertion { qualifiers.last().typeArguments }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
 
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
     override fun asStringForDebugging(): String = withValidityAssertion { coneType.renderForDebugging() }
     override fun equals(other: Any?) = typeEquals(other)
     override fun hashCode() = typeHashcode()

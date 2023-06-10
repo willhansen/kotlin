@@ -1,4 +1,4 @@
-val foo: List<in Int, out Int> = null!!
+konst foo: List<in Int, out Int> = null!!
 /*
 psi: List<in Int, out Int>
 type: [Error type: Type for error type constructor (List)]<in Int, out Int>

@@ -1,6 +1,6 @@
 // ISSUE: KT-41991
 
-fun runLambdas(vararg values: String.() -> Unit) {}
+fun runLambdas(vararg konstues: String.() -> Unit) {}
 
 fun test() {
     runLambdas({

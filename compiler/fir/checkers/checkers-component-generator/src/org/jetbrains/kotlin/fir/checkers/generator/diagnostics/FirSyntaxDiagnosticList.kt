@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.fir.checkers.generator.diagnostics.model.DiagnosticL
 @Suppress("UNUSED_VARIABLE", "LocalVariableName", "ClassName", "unused")
 @OptIn(PrivateForInline::class)
 object SYNTAX_DIAGNOSTIC_LIST : DiagnosticList("FirSyntaxErrors") {
-    val Syntax by object : DiagnosticGroup("Syntax") {
-        val SYNTAX by error<PsiElement> {
+    konst Syntax by object : DiagnosticGroup("Syntax") {
+        konst SYNTAX by error<PsiElement> {
             parameter<String>("message")
         }
     }

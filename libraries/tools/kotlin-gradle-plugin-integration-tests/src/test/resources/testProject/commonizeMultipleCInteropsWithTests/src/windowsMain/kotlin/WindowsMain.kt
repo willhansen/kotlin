@@ -4,6 +4,6 @@ import nativeHelper.nativeHelper
 import windowsHelper.windowsHelper
 
 object WindowsMain {
-    val native = nativeHelper()
-    val windows = windowsHelper()
+    konst native = nativeHelper()
+    konst windows = windowsHelper()
 }

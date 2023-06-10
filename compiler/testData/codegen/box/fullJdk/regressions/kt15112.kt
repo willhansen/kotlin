@@ -6,11 +6,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.read
 import kotlin.concurrent.write
 
-private val evalStateLock = ReentrantReadWriteLock()
-private val classLoaderLock = ReentrantReadWriteLock()
-val compiledClasses = arrayListOf("")
+private konst ekonstStateLock = ReentrantReadWriteLock()
+private konst classLoaderLock = ReentrantReadWriteLock()
+konst compiledClasses = arrayListOf("")
 
-fun box(): String = evalStateLock.write {
+fun box(): String = ekonstStateLock.write {
     classLoaderLock.read {
         classLoaderLock.write {
             "write"

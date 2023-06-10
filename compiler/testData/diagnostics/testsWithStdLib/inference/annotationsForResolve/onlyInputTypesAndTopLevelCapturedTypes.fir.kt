@@ -31,30 +31,30 @@ fun test(
 }
 
 // From KT-32157
-fun test2(value: Any?) {
-    val result = (value as? Map<*, *>)?.get("result")
+fun test2(konstue: Any?) {
+    konst result = (konstue as? Map<*, *>)?.get("result")
 }
 
 // From KT-32116
 fun test3(h: HashMap<*, *>) {
-    val a = h["str"]
-    val b = h[1]
-    val c = h["other"] as? Double
+    konst a = h["str"]
+    konst b = h[1]
+    konst c = h["other"] as? Double
 }
 
 // From KT-32218
 fun test4() {
-    val map: Map<out Any, Any> = mapOf(
+    konst map: Map<out Any, Any> = mapOf(
         true to true,
         1L to 1L
     )
-    val test = map[1L]
+    konst test = map[1L]
 }
 
 // From KT-32235
 
 class A<T> {
-    val children = mutableListOf<B<T>>()
+    konst children = mutableListOf<B<T>>()
 }
 
 class B<T>
@@ -62,11 +62,11 @@ class B<T>
 class Test5 {
     var a: A<*>? = null
     var b: B<*>? = null
-        set(value) {
-            if (value != null) {
-                val a = a
-                require(a != null && value in a.children)
+        set(konstue) {
+            if (konstue != null) {
+                konst a = a
+                require(a != null && konstue in a.children)
             }
-            field = value
+            field = konstue
         }
 }

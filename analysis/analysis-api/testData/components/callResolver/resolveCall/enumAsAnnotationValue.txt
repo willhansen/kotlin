@@ -7,7 +7,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = Annotation
         symbol = <constructor>(color: Color): Annotation
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = color
             receiverType = null

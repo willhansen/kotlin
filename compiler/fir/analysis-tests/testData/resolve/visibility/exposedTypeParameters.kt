@@ -8,28 +8,28 @@ public open class C {
 
 public open class E
 
-// invalid, A is private
+// inkonstid, A is private
 public class Test1<T: <!EXPOSED_TYPE_PARAMETER_BOUND!>A<!>>
 
-// valid, both type parameters is public
+// konstid, both type parameters is public
 public class Test2<T: C, P: E>
 
-// invalid, D is protected
+// inkonstid, D is protected
 public class Test3<T: E, P: <!EXPOSED_TYPE_PARAMETER_BOUND, INVISIBLE_REFERENCE!>C.D<!>>
 
-// valid, B is internal
+// konstid, B is internal
 internal class Test4<T: B>
 
-// valid, B is internal
+// konstid, B is internal
 private class Test5<T: B>
 
 public class Container : <!SUPERTYPE_NOT_INITIALIZED!>C<!> {
-    // valid, D is protected in C
+    // konstid, D is protected in C
     protected class Test6<T: C.D>
 
-    // invalid, B is internal
+    // inkonstid, B is internal
     protected class Test7<T: <!EXPOSED_TYPE_PARAMETER_BOUND!>B<!>>
 }
 
-// invalid, A is private, B is internal, D is protected
+// inkonstid, A is private, B is internal, D is protected
 public interface Test8<T: <!EXPOSED_TYPE_PARAMETER_BOUND!>A<!>, P: <!EXPOSED_TYPE_PARAMETER_BOUND!>B<!>, F: C, N: <!EXPOSED_TYPE_PARAMETER_BOUND, INVISIBLE_REFERENCE!>C.D<!>, M: E>

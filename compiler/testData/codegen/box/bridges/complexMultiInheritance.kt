@@ -13,11 +13,11 @@ interface D {
 class E : C(), D
 
 fun box(): String {
-    val e = E()
+    konst e = E()
     if (e.foo() != 222) return "Fail 1"
-    val d: D = e
-    val c: C = e
-    val a: A = e
+    konst d: D = e
+    konst c: C = e
+    konst a: A = e
     if (d.foo() != 222) return "Fail 2"
     if (c.foo() != 222) return "Fail 3"
     if (a.foo() != 222) return "Fail 4"

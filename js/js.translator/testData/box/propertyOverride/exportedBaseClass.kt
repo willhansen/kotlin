@@ -8,107 +8,107 @@
 // FILE: lib.kt
 @JsExport
 abstract class ExportedBase {
-    abstract val foo: String
+    abstract konst foo: String
     abstract var bar: String
-    abstract val baz: String
+    abstract konst baz: String
 
-    val fooFinal: String
+    konst fooFinal: String
         get() = foo
 }
 
 @JsExport
 open class ExportedDerived1 : ExportedBase() {
-    override val foo: String
+    override konst foo: String
         get() = "ExportedDerived1.foo"
 
     private var _bar = "ExportedDerived1.bar"
 
     override var bar: String
         get() = _bar
-        set(value) { _bar = value }
+        set(konstue) { _bar = konstue }
 
     private var _baz = "ExportedDerived1.baz"
 
     override var baz: String
         get() = _baz
-        set(value) { _baz = value }
+        set(konstue) { _baz = konstue }
 }
 
 @JsExport
 class ExportedDerived2 : ExportedDerived1() {
-    override val foo: String
+    override konst foo: String
         get() = "ExportedDerived2.foo"
 
     private var _bar = "ExportedDerived2.bar"
 
     override var bar: String
         get() = _bar
-        set(value) { _bar = value }
+        set(konstue) { _bar = konstue }
 
     private var _baz = "ExportedDerived2.baz"
 
     override var baz: String
         get() = _baz
-        set(value) { _baz = value }
+        set(konstue) { _baz = konstue }
 }
 
 abstract class NonExportedBase {
-    abstract val foo: String
+    abstract konst foo: String
     abstract var bar: String
-    abstract val baz: String
+    abstract konst baz: String
 }
 
 @JsExport
 class ExportedDerived3 : NonExportedBase() {
-    override val foo: String
+    override konst foo: String
         get() = "ExportedDerived3.foo"
 
     private var _bar = "ExportedDerived3.bar"
 
     override var bar: String
         get() = _bar
-        set(value) { _bar = value }
+        set(konstue) { _bar = konstue }
 
     private var _baz = "ExportedDerived3.baz"
 
     override var baz: String
         get() = _baz
-        set(value) { _baz = value }
+        set(konstue) { _baz = konstue }
 }
 
 // Non-exported
 open class Derived1 : ExportedBase() {
-    override val foo: String
+    override konst foo: String
         get() = "1"
 
     private var _bar = "1"
 
     override var bar: String
         get() = _bar
-        set(value) { _bar = value }
+        set(konstue) { _bar = konstue }
 
     private var _baz = "11"
 
     override var baz: String
         get() = _baz
-        set(value) { _baz = value }
+        set(konstue) { _baz = konstue }
 }
 
 class Derived2 : Derived1() {
-    override val foo: String
+    override konst foo: String
         get() = "2"
 
     private var _bar = "2"
 
     override var bar: String
         get() = _bar
-        set(value) { _bar = value }
+        set(konstue) { _bar = konstue }
 
     private var _baz = "22"
 
     override var baz: String
         get() = _baz
-        set(value) { _baz = value }
+        set(konstue) { _baz = konstue }
 }
 
 @JsExport
@@ -123,7 +123,7 @@ fun isLegacyBackend() = testUtils.isLegacyBackend()
 // FILE: test.js
 function assertEquals(expected, actual, msg) {
     if (expected !== actual) {
-        throw "Unexpected value: expected = '" + expected + "', actual = '" + actual + "' — " + msg;
+        throw "Unexpected konstue: expected = '" + expected + "', actual = '" + actual + "' — " + msg;
     }
 }
 
@@ -158,10 +158,10 @@ function box() {
     var derived1 = d.getDerived1();
     assertEquals('1', derived1.foo, "derived1.foo");
     assertEquals('1', derived1.fooFinal, "derived1.fooFinal");
-    assertEquals('1', derived1.bar, "derived1.bar initial value");
+    assertEquals('1', derived1.bar, "derived1.bar initial konstue");
     derived1.bar = '11';
     assertEquals('11', derived1.bar, "derived1.bar after write");
-    assertEquals('11', derived1.baz, "derived1.baz initial value");
+    assertEquals('11', derived1.baz, "derived1.baz initial konstue");
     if (!d.isLegacyBackend()) {
         assertEquals(
             false,
@@ -183,10 +183,10 @@ function box() {
     var derived2 = d.getDerived2();
     assertEquals('2', derived2.foo, "derived2.foo");
     assertEquals('2', derived2.fooFinal, "derived2.fooFinal");
-    assertEquals('2', derived2.bar, "derived2.bar initial value");
+    assertEquals('2', derived2.bar, "derived2.bar initial konstue");
     derived2.bar = '22';
     assertEquals('22', derived2.bar, "derived2.bar after write");
-    assertEquals('22', derived2.baz, "derived2.baz initial value");
+    assertEquals('22', derived2.baz, "derived2.baz initial konstue");
     if (!d.isLegacyBackend()) {
         assertEquals(
             false,
@@ -207,10 +207,10 @@ function box() {
 
     var exportedDerived1 = new d.ExportedDerived1();
     assertEquals('ExportedDerived1.foo', exportedDerived1.foo, "exportedDerived1.foo");
-    assertEquals('ExportedDerived1.bar', exportedDerived1.bar, "exportedDerived1.bar initial value");
+    assertEquals('ExportedDerived1.bar', exportedDerived1.bar, "exportedDerived1.bar initial konstue");
     exportedDerived1.bar = 'ExportedDerived1.bar (updated)';
     assertEquals('ExportedDerived1.bar (updated)', exportedDerived1.bar, "exportedDerived1.bar after write");
-    assertEquals('ExportedDerived1.baz', exportedDerived1.baz, "exportedDerived1.baz initial value");
+    assertEquals('ExportedDerived1.baz', exportedDerived1.baz, "exportedDerived1.baz initial konstue");
     exportedDerived1.baz = 'ExportedDerived1.baz (updated)';
     assertEquals('ExportedDerived1.baz (updated)', exportedDerived1.baz, "exportedDerived1.baz after write");
     if (!d.isLegacyBackend()) {
@@ -225,7 +225,7 @@ function box() {
             'Property bar of ExportedDerived1 should be inherited from ExportedBase.prototype'
         );
 
-        // true because it is val -> var override, to we need to redefine property with setter
+        // true because it is konst -> var override, to we need to redefine property with setter
         assertEquals(
             true,
             d.ExportedDerived1.prototype.hasOwnProperty('baz'),

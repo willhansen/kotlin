@@ -7,9 +7,9 @@ package org.jetbrains.kotlin.ir.backend.js.utils
 
 class MinimizedNameGenerator {
     private var index = 0
-    private val functionSignatureToName = hashMapOf<String, String>()
-    private val reservedNames = hashSetOf<String>()
-    private val keptNames = hashSetOf<String>()
+    private konst functionSignatureToName = hashMapOf<String, String>()
+    private konst reservedNames = hashSetOf<String>()
+    private konst keptNames = hashSetOf<String>()
 
     fun generateNextName(): String {
         var candidate = index++.toJsIdentifier()

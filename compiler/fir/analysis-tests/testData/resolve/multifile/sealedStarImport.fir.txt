@@ -18,7 +18,7 @@ FILE: test.kt
                 super<R|test/Test|>()
             }
 
-            public final val x: R|kotlin/Int| = R|<local>/x|
+            public final konst x: R|kotlin/Int| = R|<local>/x|
                 public get(): R|kotlin/Int|
 
         }

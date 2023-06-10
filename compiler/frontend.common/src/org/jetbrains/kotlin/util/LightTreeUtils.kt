@@ -10,7 +10,7 @@ import com.intellij.openapi.util.Ref
 import com.intellij.util.diff.FlyweightCapableTreeStructure
 
 fun LighterASTNode.getChildren(tree: FlyweightCapableTreeStructure<LighterASTNode>): List<LighterASTNode> {
-    val children = Ref<Array<LighterASTNode?>>()
-    val count = tree.getChildren(this, children)
+    konst children = Ref<Array<LighterASTNode?>>()
+    konst count = tree.getChildren(this, children)
     return if (count > 0) children.get().filterNotNull() else emptyList()
 }

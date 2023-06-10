@@ -7,7 +7,7 @@
 //
 //open class SecondClass
 
-class ConfigurationTarget(@ConfigField val target: String)
+class ConfigurationTarget(@ConfigField konst target: String)
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ConfigField()
@@ -18,4 +18,4 @@ annotation class ConfigField()
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ConfigField()
 
-class ConfigurationTarget(@ConfigField val target: String)
+class ConfigurationTarget(@ConfigField konst target: String)

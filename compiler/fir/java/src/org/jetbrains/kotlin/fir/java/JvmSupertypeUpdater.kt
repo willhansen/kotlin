@@ -30,8 +30,8 @@ import org.jetbrains.kotlin.fir.types.impl.FirImplicitBuiltinTypeRef
 import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.name.StandardClassIds
 
-class JvmSupertypeUpdater(private val session: FirSession) : PlatformSupertypeUpdater() {
-    private val jvmRecordUpdater = DelegatedConstructorCallTransformer(session)
+class JvmSupertypeUpdater(private konst session: FirSession) : PlatformSupertypeUpdater() {
+    private konst jvmRecordUpdater = DelegatedConstructorCallTransformer(session)
 
     override fun updateSupertypesIfNeeded(firClass: FirClass, scopeSession: ScopeSession) {
         if (firClass !is FirRegularClass || !firClass.isData ||
@@ -39,7 +39,7 @@ class JvmSupertypeUpdater(private val session: FirSession) : PlatformSupertypeUp
         ) return
         var anyFound = false
         var hasExplicitSuperClass = false
-        val newSuperTypeRefs = firClass.superTypeRefs.mapTo(mutableListOf()) {
+        konst newSuperTypeRefs = firClass.superTypeRefs.mapTo(mutableListOf()) {
             when {
                 it is FirImplicitBuiltinTypeRef && it.id == StandardClassIds.Any -> {
                     anyFound = true
@@ -62,9 +62,9 @@ class JvmSupertypeUpdater(private val session: FirSession) : PlatformSupertypeUp
         }
     }
 
-    private class DelegatedConstructorCallTransformer(private val session: FirSession) : FirTransformer<ScopeSession>() {
+    private class DelegatedConstructorCallTransformer(private konst session: FirSession) : FirTransformer<ScopeSession>() {
         companion object {
-            val recordType = StandardClassIds.Java.Record.constructClassLikeType(emptyArray(), isNullable = false)
+            konst recordType = StandardClassIds.Java.Record.constructClassLikeType(emptyArray(), isNullable = false)
         }
 
         override fun <E : FirElement> transformElement(element: E, data: ScopeSession): E {
@@ -91,18 +91,18 @@ class JvmSupertypeUpdater(private val session: FirSession) : PlatformSupertypeUp
                 delegatedConstructorCall is FirLazyDelegatedConstructorCall ||
                 delegatedConstructorCall.source?.kind != KtFakeSourceElementKind.DelegatingConstructorCall
             ) return delegatedConstructorCall
-            val constructedTypeRef = delegatedConstructorCall.constructedTypeRef
+            konst constructedTypeRef = delegatedConstructorCall.constructedTypeRef
             if (constructedTypeRef is FirImplicitTypeRef || constructedTypeRef.coneTypeSafe<ConeKotlinType>()?.isAny == true) {
                 delegatedConstructorCall.replaceConstructedTypeRef(constructedTypeRef.resolvedTypeFromPrototype(recordType))
             }
 
-            val recordConstructorSymbol = recordType.lookupTag.toFirRegularClassSymbol(session)
+            konst recordConstructorSymbol = recordType.lookupTag.toFirRegularClassSymbol(session)
                 ?.unsubstitutedScope(session, data, withForcedTypeCalculator = false, memberRequiredPhase = null)
                 ?.getDeclaredConstructors()
-                ?.firstOrNull { it.fir.valueParameters.isEmpty() }
+                ?.firstOrNull { it.fir.konstueParameters.isEmpty() }
 
             if (recordConstructorSymbol != null) {
-                val newReference = buildResolvedNamedReference {
+                konst newReference = buildResolvedNamedReference {
                     name = StandardClassIds.Java.Record.shortClassName
                     resolvedSymbol = recordConstructorSymbol
                 }

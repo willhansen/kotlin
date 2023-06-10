@@ -6,7 +6,7 @@ package p
 
 public class A
 public class B {
-    public val a: A = A()
+    public konst a: A = A()
 }
 
 // MODULE: m2(m1)
@@ -17,5 +17,5 @@ import p.*
 class A
 
 fun test() {
-    val a: A = <!TYPE_MISMATCH!>B().a<!>
+    konst a: A = <!TYPE_MISMATCH!>B().a<!>
 }

@@ -38,7 +38,7 @@ internal object LLFirBodyLazyResolver : LLFirLazyResolver(FirResolvePhase.BODY_R
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirBodyTargetResolver(target, lockProvider, session, scopeSession, towerDataContextCollector)
+        konst resolver = LLFirBodyTargetResolver(target, lockProvider, session, scopeSession, towerDataContextCollector)
         resolver.resolveDesignation()
     }
 
@@ -74,7 +74,7 @@ private class LLFirBodyTargetResolver(
     scopeSession,
     FirResolvePhase.BODY_RESOLVE,
 ) {
-    override val transformer = object : FirBodyResolveTransformer(
+    override konst transformer = object : FirBodyResolveTransformer(
         session,
         phase = resolverPhase,
         implicitTypeOnly = false,
@@ -82,7 +82,7 @@ private class LLFirBodyTargetResolver(
         returnTypeCalculator = createReturnTypeCalculator(towerDataContextCollector = towerDataContextCollector),
         firTowerDataContextCollector = towerDataContextCollector,
     ) {
-        override val preserveCFGForClasses: Boolean get() = false
+        override konst preserveCFGForClasses: Boolean get() = false
     }
 
     override fun doResolveWithoutLock(target: FirElementWithResolveState): Boolean {
@@ -111,9 +111,9 @@ private class LLFirBodyTargetResolver(
             withFirEntry("firClass", target)
         }
 
-        val dataFlowAnalyzer = transformer.declarationsTransformer.dataFlowAnalyzer
+        konst dataFlowAnalyzer = transformer.declarationsTransformer.dataFlowAnalyzer
         dataFlowAnalyzer.enterClass(target, buildGraph = true)
-        val controlFlowGraph = dataFlowAnalyzer.exitClass()
+        konst controlFlowGraph = dataFlowAnalyzer.exitClass()
             ?: buildErrorWithAttachment("CFG should not be null as buildGraph is specified") {
                 withFirEntry("firClass", target)
             }
@@ -138,9 +138,9 @@ private class LLFirBodyTargetResolver(
     }
 
     override fun doLazyResolveUnderLock(target: FirElementWithResolveState) {
-        val contextCollector = transformer.firTowerDataContextCollector
+        konst contextCollector = transformer.firTowerDataContextCollector
         if (contextCollector != null && target is FirDeclaration) {
-            val bodyResolveContext = transformer.context
+            konst bodyResolveContext = transformer.context
             if (target is FirFunction) {
                 bodyResolveContext.forFunctionBody(target, transformer.components) {
                     contextCollector.addDeclarationContext(target, bodyResolveContext.towerDataContext)

@@ -2,7 +2,7 @@
 // FILE: test.kt
 
 fun box() {
-    val a = foo()
+    konst a = foo()
     a()
 }
 // FILE: test1.kt

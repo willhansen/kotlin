@@ -1,7 +1,7 @@
 package
 
 public fun foo(/*0*/ b: MyClass<B>, /*1*/ c: MyClass<C>): kotlin.Unit
-public fun </*0*/ T> hashSetOf(/*0*/ vararg values: T /*kotlin.Array<out T>*/): java.util.HashSet<T>
+public fun </*0*/ T> hashSetOf(/*0*/ vararg konstues: T /*kotlin.Array<out T>*/): java.util.HashSet<T>
 
 public interface A {
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

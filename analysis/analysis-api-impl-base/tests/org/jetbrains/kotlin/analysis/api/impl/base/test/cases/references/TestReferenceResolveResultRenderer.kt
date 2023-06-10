@@ -22,7 +22,7 @@ object TestReferenceResolveResultRenderer {
         symbols.map { renderResolveResult(it, renderer) }
             .sorted()
             .withIndex()
-            .joinToString(separator = "\n") { "${it.index}: ${it.value}" }
+            .joinToString(separator = "\n") { "${it.index}: ${it.konstue}" }
 
     private fun KtAnalysisSession.renderResolveResult(
         symbol: KtSymbol,
@@ -47,7 +47,7 @@ object TestReferenceResolveResultRenderer {
     @Suppress("unused")// KtAnalysisSession receiver
     private fun KtAnalysisSession.symbolContainerFqName(symbol: KtSymbol): String? {
         if (symbol is KtPackageSymbol || symbol is KtValueParameterSymbol) return null
-        val nonLocalFqName = when (symbol) {
+        konst nonLocalFqName = when (symbol) {
             is KtConstructorSymbol -> symbol.containingClassIdIfNonLocal?.asSingleFqName()
             is KtCallableSymbol -> symbol.callableIdIfNonLocal?.asSingleFqName()?.parent()
             is KtClassLikeSymbol -> symbol.classIdIfNonLocal?.asSingleFqName()?.parent()
@@ -58,8 +58,8 @@ object TestReferenceResolveResultRenderer {
             FqName.ROOT -> return "ROOT"
             else -> return nonLocalFqName.asString()
         }
-        val container = (symbol as? KtSymbolWithKind)?.getContainingSymbol() ?: return null
-        val parents = generateSequence(container) { it.getContainingSymbol() }.toList().asReversed()
+        konst container = (symbol as? KtSymbolWithKind)?.getContainingSymbol() ?: return null
+        konst parents = generateSequence(container) { it.getContainingSymbol() }.toList().asReversed()
         return "<local>: " + parents.joinToString(separator = ".") { (it as? KtNamedSymbol)?.name?.asString() ?: "<no name>" }
     }
 }

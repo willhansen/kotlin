@@ -1,5 +1,5 @@
 interface Intf {
-    val str: String
+    konst str: String
 }
 
 class A : Intf {
@@ -15,7 +15,7 @@ class A : Intf {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.setMyStr()
     return a.getMyStr()
 }

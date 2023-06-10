@@ -38,7 +38,7 @@ import org.jetbrains.kotlin.test.KotlinTestUtils.newConfiguration
 import org.jetbrains.kotlin.test.TestCaseWithTmpdir
 import org.jetbrains.kotlin.test.TestJdkKind
 import org.jetbrains.kotlin.test.util.KtTestUtil
-import org.jetbrains.kotlin.test.util.RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptorWithFile
+import org.jetbrains.kotlin.test.util.RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptorWithFile
 import org.junit.Assert
 import java.io.File
 import java.lang.annotation.Retention
@@ -55,11 +55,11 @@ abstract class AbstractCompileKotlinAgainstJavaTest : TestCaseWithTmpdir() {
 
     private fun doTest(ktFilePath: String, aptMode: Boolean) {
         Assert.assertTrue(ktFilePath.endsWith(".kt"))
-        val ktFile = File(ktFilePath)
-        val javaFile = File(ktFilePath.replaceFirst("\\.kt$".toRegex(), ".java"))
-        val out = File(tmpdir, "out")
+        konst ktFile = File(ktFilePath)
+        konst javaFile = File(ktFilePath.replaceFirst("\\.kt$".toRegex(), ".java"))
+        konst out = File(tmpdir, "out")
 
-        val compiledSuccessfully = compileKotlinWithJava(
+        konst compiledSuccessfully = compileKotlinWithJava(
             listOf(javaFile),
             listOf(ktFile),
             out, testRootDisposable,
@@ -67,7 +67,7 @@ abstract class AbstractCompileKotlinAgainstJavaTest : TestCaseWithTmpdir() {
         )
         if (!compiledSuccessfully) return
 
-        val environment = KotlinCoreEnvironment.createForTests(
+        konst environment = KotlinCoreEnvironment.createForTests(
             testRootDisposable,
             newConfiguration(
                 ConfigurationKind.ALL, TestJdkKind.MOCK_JDK,
@@ -79,12 +79,12 @@ abstract class AbstractCompileKotlinAgainstJavaTest : TestCaseWithTmpdir() {
         environment.configuration.put(JVMConfigurationKeys.OUTPUT_DIRECTORY, out)
         environment.registerJavac(emptyList(), bootClasspath = listOf(KtTestUtil.findMockJdkRtJar()))
 
-        val analysisResult = JvmResolveUtil.analyze(environment)
-        val packageView = analysisResult.moduleDescriptor.getPackage(LoadDescriptorUtil.TEST_PACKAGE_FQNAME)
+        konst analysisResult = JvmResolveUtil.analyze(environment)
+        konst packageView = analysisResult.moduleDescriptor.getPackage(LoadDescriptorUtil.TEST_PACKAGE_FQNAME)
         assertFalse("Nothing found in package ${LoadDescriptorUtil.TEST_PACKAGE_FQNAME}", packageView.isEmpty())
 
-        val expectedFile = File(ktFilePath.replaceFirst("\\.kt$".toRegex(), ".txt"))
-        validateAndCompareDescriptorWithFile(packageView, CONFIGURATION, expectedFile)
+        konst expectedFile = File(ktFilePath.replaceFirst("\\.kt$".toRegex(), ".txt"))
+        konstidateAndCompareDescriptorWithFile(packageView, CONFIGURATION, expectedFile)
     }
 
     fun compileKotlinWithJava(
@@ -94,11 +94,11 @@ abstract class AbstractCompileKotlinAgainstJavaTest : TestCaseWithTmpdir() {
         disposable: Disposable,
         aptMode: Boolean
     ): Boolean {
-        val environment = createEnvironmentWithMockJdkAndIdeaAnnotations(disposable)
+        konst environment = createEnvironmentWithMockJdkAndIdeaAnnotations(disposable)
         updateConfiguration(environment.configuration)
         environment.configuration.put(JVMConfigurationKeys.USE_JAVAC, true)
         environment.configuration.put(JVMConfigurationKeys.COMPILE_JAVA, true)
-        val ktFiles = kotlinFiles.map { kotlinFile: File ->
+        konst ktFiles = kotlinFiles.map { kotlinFile: File ->
             KtTestUtil.createFile(
                 kotlinFile.name,
                 FileUtil.loadFile(kotlinFile, true),
@@ -118,7 +118,7 @@ abstract class AbstractCompileKotlinAgainstJavaTest : TestCaseWithTmpdir() {
         if (kotlinFiles.isNotEmpty()) {
             GenerationUtils.compileFilesTo(ktFiles, environment, outDir)
         } else {
-            val mkdirs = outDir.mkdirs()
+            konst mkdirs = outDir.mkdirs()
             assert(mkdirs) { "Not created: $outDir" }
         }
 
@@ -130,7 +130,7 @@ abstract class AbstractCompileKotlinAgainstJavaTest : TestCaseWithTmpdir() {
     companion object {
         // Do not render parameter names because there are test cases where classes inherit from JDK collections,
         // and some versions of JDK have debug information in the class files (including parameter names), and some don't
-        private val CONFIGURATION = AbstractLoadJavaTest.COMPARATOR_CONFIGURATION.withRenderer(
+        private konst CONFIGURATION = AbstractLoadJavaTest.COMPARATOR_CONFIGURATION.withRenderer(
             DescriptorRenderer.withOptions {
                 withDefinedIn = false
                 parameterNameRenderingPolicy = ParameterNameRenderingPolicy.NONE

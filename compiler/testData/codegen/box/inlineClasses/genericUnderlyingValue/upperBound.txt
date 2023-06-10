@@ -2,7 +2,7 @@
 @kotlin.Metadata
 public final class ICString {
     // source: 'upperBound.kt'
-    private final @org.jetbrains.annotations.NotNull field value: java.lang.String
+    private final @org.jetbrains.annotations.NotNull field konstue: java.lang.String
     private synthetic method <init>(p0: java.lang.String): void
     public synthetic final static method box-impl(p0: java.lang.String): ICString
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.NotNull p0: java.lang.String): java.lang.String

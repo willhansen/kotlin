@@ -5,5 +5,5 @@
 
 package org.jetbrains.kotlin.build
 
-val DEFAULT_KOTLIN_SOURCE_FILES_EXTENSIONS = listOf("kt", "kts")
+konst DEFAULT_KOTLIN_SOURCE_FILES_EXTENSIONS = listOf("kt", "kts")
 

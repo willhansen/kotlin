@@ -18,19 +18,19 @@ import kotlin.test.assertEquals
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Ann(val x: String)
+annotation class Ann(konst x: String)
 
 fun testMethod(method: Method, name: String) {
     assertEquals("OK", method.getAnnotation(Ann::class.java).x, "On method of test named `$name`")
 
     for ((index, annotations) in method.getParameterAnnotations().withIndex()) {
-        val ann = annotations.filterIsInstance<Ann>().single()
+        konst ann = annotations.filterIsInstance<Ann>().single()
         assertEquals("OK$index", ann.x, "On parameter $index of test named `$name`")
     }
 }
 
 fun testClass(clazz: Class<*>, name: String) {
-    val invokes = clazz.getDeclaredMethods().single() { !it.isBridge() }
+    konst invokes = clazz.getDeclaredMethods().single() { !it.isBridge() }
     testMethod(invokes, name)
 }
 

@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 class ShortenReferences {
     companion object {
-        val DEFAULT = ShortenReferences()
+        konst DEFAULT = ShortenReferences()
     }
 
     fun process(

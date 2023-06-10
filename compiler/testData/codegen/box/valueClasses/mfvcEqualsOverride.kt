@@ -10,19 +10,19 @@ interface I {
 }
 
 @JvmInline
-value class MFVC(val value: Int, val y: Int) : I {
+konstue class MFVC(konst konstue: Int, konst y: Int) : I {
     override fun equals(param: MFVC): Boolean {
-        return abs(value - param.value) < 2
+        return abs(konstue - param.konstue) < 2
     }
 }
 
 fun box(): String {
-    val a1Typed: MFVC = MFVC(1, 2)
-    val b1Typed: MFVC = MFVC(2, 3)
-    val c1Typed: MFVC = MFVC(3, 4)
-    val a1Untyped: I = a1Typed
-    val b1Untyped: I = b1Typed
-    val c1Untyped: I = c1Typed
+    konst a1Typed: MFVC = MFVC(1, 2)
+    konst b1Typed: MFVC = MFVC(2, 3)
+    konst c1Typed: MFVC = MFVC(3, 4)
+    konst a1Untyped: I = a1Typed
+    konst b1Untyped: I = b1Typed
+    konst c1Untyped: I = c1Typed
 
     require(a1Typed == a1Typed && a1Untyped == a1Untyped)
     require(a1Typed == b1Typed && a1Untyped == b1Untyped)

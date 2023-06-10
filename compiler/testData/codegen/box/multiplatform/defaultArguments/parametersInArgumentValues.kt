@@ -4,15 +4,15 @@
 
 // FILE: common.kt
 
-class B(val value: Int)
+class B(konst konstue: Int)
 
-expect fun test(a: Int = 2, b: Int = B(a * 2).value, c: String = "${b}$a"): String
+expect fun test(a: Int = 2, b: Int = B(a * 2).konstue, c: String = "${b}$a"): String
 
 // FILE: platform.kt
 
 actual fun test(a: Int, b: Int, c: String): String = c
 
 fun box(): String {
-    val result = test()
+    konst result = test()
     return if (result == "42") "OK" else "Fail: $result"
 }

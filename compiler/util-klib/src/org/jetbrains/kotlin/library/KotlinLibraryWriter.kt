@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.library
 import org.jetbrains.kotlin.konan.properties.Properties
 
 interface BaseWriter {
-    val versions: KotlinLibraryVersioning
+    konst versions: KotlinLibraryVersioning
     fun addLinkDependencies(libraries: List<KotlinLibrary>)
     fun addManifestAddend(properties: Properties)
     fun commit()
@@ -27,25 +27,25 @@ interface KotlinLibraryWriter : MetadataWriter, BaseWriter, IrWriter
 
 // TODO: Move SerializedIr here too to eliminate dependency on backend.common.serialization
 class SerializedMetadata(
-    val module: ByteArray,
-    val fragments: List<List<ByteArray>>,
-    val fragmentNames: List<String>
+    konst module: ByteArray,
+    konst fragments: List<List<ByteArray>>,
+    konst fragmentNames: List<String>
 )
 
-class SerializedDeclaration(val id: Int, val declarationName: String, val bytes: ByteArray) {
-    val size = bytes.size
+class SerializedDeclaration(konst id: Int, konst declarationName: String, konst bytes: ByteArray) {
+    konst size = bytes.size
 }
 
 class SerializedIrFile(
-    val fileData: ByteArray,
-    val fqName: String,
-    val path: String,
-    val types: ByteArray,
-    val signatures: ByteArray,
-    val strings: ByteArray,
-    val bodies: ByteArray,
-    val declarations: ByteArray,
-    val debugInfo: ByteArray?
+    konst fileData: ByteArray,
+    konst fqName: String,
+    konst path: String,
+    konst types: ByteArray,
+    konst signatures: ByteArray,
+    konst strings: ByteArray,
+    konst bodies: ByteArray,
+    konst declarations: ByteArray,
+    konst debugInfo: ByteArray?
 )
 
-class SerializedIrModule(val files: Collection<SerializedIrFile>)
+class SerializedIrModule(konst files: Collection<SerializedIrFile>)

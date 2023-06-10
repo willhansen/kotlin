@@ -15,44 +15,44 @@ import org.jetbrains.kotlin.konan.target.HostManager
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
-internal val NamedDomainObjectContainer<KotlinSourceSet>.commonMain
+internal konst NamedDomainObjectContainer<KotlinSourceSet>.commonMain
     get() = maybeCreate("commonMain")
 
-internal val NamedDomainObjectContainer<KotlinSourceSet>.nativeMain
+internal konst NamedDomainObjectContainer<KotlinSourceSet>.nativeMain
     get() = maybeCreate("nativeMain")
 
-internal val Project.nativeWarmup: Int
+internal konst Project.nativeWarmup: Int
     get() = (property("nativeWarmup") as String).toInt()
 
-internal val Project.attempts: Int
+internal konst Project.attempts: Int
     get() = (property("attempts") as String).toInt()
 
-internal val Project.nativeBenchResults: String
+internal konst Project.nativeBenchResults: String
     get() = property("nativeBenchResults") as String
 
 // Gradle property to add flags to benchmarks run from command line.
-internal val Project.compilerArgs: List<String>
+internal konst Project.compilerArgs: List<String>
     get() = (findProperty("compilerArgs") as String?)?.split("\\s".toRegex()).orEmpty()
 
-internal val Project.kotlinVersion: String
+internal konst Project.kotlinVersion: String
     get() = property("kotlinVersion") as String
 
-internal val Project.konanVersion: String
+internal konst Project.konanVersion: String
     get() = property("konanVersion") as String
 
-internal val Project.nativeJson: String
+internal konst Project.nativeJson: String
     get() = project.property("nativeJson") as String
 
-internal val Project.jvmJson: String
+internal konst Project.jvmJson: String
     get() = project.property("jvmJson") as String
 
-internal val Project.buildType: NativeBuildType
-    get() = (findProperty("nativeBuildType") as String?)?.let { NativeBuildType.valueOf(it) } ?: NativeBuildType.RELEASE
+internal konst Project.buildType: NativeBuildType
+    get() = (findProperty("nativeBuildType") as String?)?.let { NativeBuildType.konstueOf(it) } ?: NativeBuildType.RELEASE
 
-internal val Project.crossTarget: String?
+internal konst Project.crossTarget: String?
     get() = findProperty("crossTarget") as String?
 
-internal val Project.commonBenchmarkProperties: Map<String, Any>
+internal konst Project.commonBenchmarkProperties: Map<String, Any>
     get() = mapOf(
             "cpu" to System.getProperty("os.arch"),
             "os" to System.getProperty("os.name"),
@@ -61,7 +61,7 @@ internal val Project.commonBenchmarkProperties: Map<String, Any>
             "kotlinVersion" to kotlinVersion
     )
 
-open class BenchmarkExtension @Inject constructor(val project: Project) {
+open class BenchmarkExtension @Inject constructor(konst project: Project) {
     var applicationName: String = project.name
     var commonSrcDirs: Collection<Any> = emptyList()
     var nativeSrcDirs: Collection<Any> = emptyList()
@@ -72,7 +72,7 @@ open class BenchmarkExtension @Inject constructor(val project: Project) {
     var repeatingType: BenchmarkRepeatingType = BenchmarkRepeatingType.INTERNAL
     var cleanBeforeRunTask: String? = "konanRun"
 
-    val dependencies: BenchmarkDependencies = BenchmarkDependencies()
+    konst dependencies: BenchmarkDependencies = BenchmarkDependencies()
 
     fun dependencies(action: BenchmarkDependencies.() -> Unit) =
             dependencies.action()
@@ -82,7 +82,7 @@ open class BenchmarkExtension @Inject constructor(val project: Project) {
     }
 
     inner class BenchmarkDependencies  {
-        public val sourceSets: NamedDomainObjectContainer<KotlinSourceSet>
+        public konst sourceSets: NamedDomainObjectContainer<KotlinSourceSet>
             get() = project.kotlin.sourceSets
 
         fun project(path: String): Dependency = project.dependencies.project(mapOf("path" to path))
@@ -104,13 +104,13 @@ open class BenchmarkExtension @Inject constructor(val project: Project) {
  * A plugin configuring a benchmark Kotlin/Native project.
  */
 abstract class BenchmarkingPlugin: Plugin<Project> {
-    protected abstract val Project.nativeExecutable: String
-    protected abstract val Project.nativeLinkTask: Task
-    protected abstract val Project.benchmark: BenchmarkExtension
-    protected abstract val benchmarkExtensionName: String
-    protected abstract val benchmarkExtensionClass: KClass<*>
+    protected abstract konst Project.nativeExecutable: String
+    protected abstract konst Project.nativeLinkTask: Task
+    protected abstract konst Project.benchmark: BenchmarkExtension
+    protected abstract konst benchmarkExtensionName: String
+    protected abstract konst benchmarkExtensionClass: KClass<*>
 
-    protected val mingwPath: String = System.getenv("MINGW64_DIR") ?: "c:/msys64/mingw64"
+    protected konst mingwPath: String = System.getenv("MINGW64_DIR") ?: "c:/msys64/mingw64"
 
     protected open fun Project.determinePreset(): AbstractKotlinNativeTargetPreset<*> =
             (crossTarget?.let { targetHostPreset(this, it) } ?:
@@ -135,7 +135,7 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
             additionalConfigurations(this@configureSourceSets)
 
             // Add sources specified by a user in the benchmark DSL.
-            afterEvaluate {
+            afterEkonstuate {
                 configureSources(project)
             }
         }
@@ -153,7 +153,7 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
             }
 
             // Specify settings configured by a user in the benchmark extension.
-            project.afterEvaluate {
+            project.afterEkonstuate {
                 linkerOpts.addAll(project.benchmark.linkerOpts)
                 freeCompilerArgs = project.benchmark.compilerOpts + project.compilerArgs
             }
@@ -179,13 +179,13 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
     }
 
     protected open fun Project.configureNativeTask(nativeTarget: KotlinNativeTarget): Task {
-        val konanRun = createRunTask(this, "konanRun", nativeLinkTask,
+        konst konanRun = createRunTask(this, "konanRun", nativeLinkTask,
                 nativeExecutable, buildDir.resolve(nativeBenchResults).absolutePath).apply {
             group = BENCHMARKING_GROUP
             description = "Runs the benchmark for Kotlin/Native."
         }
-        afterEvaluate {
-            val task = konanRun as RunKotlinNativeTask
+        afterEkonstuate {
+            konst task = konanRun as RunKotlinNativeTask
             task.args("-p", "${benchmark.applicationName}::")
             task.warmupCount = nativeWarmup
             task.repeatCount = attempts
@@ -197,7 +197,7 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
     protected abstract fun Project.configureJvmTask(): Task
 
     protected fun compilerFlagsFromBinary(project: Project): List<String> {
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
         if (project.benchmark.buildType.optimized) {
             result.add("-opt")
         }
@@ -221,15 +221,15 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
             description = "Builds the benchmarking report for Kotlin/Native."
 
             doLast {
-                val applicationName = benchmark.applicationName
-                val benchContents = buildDir.resolve(nativeBenchResults).readText()
-                val nativeCompileTasks = if (benchmark.compileTasks.isEmpty()) {
+                konst applicationName = benchmark.applicationName
+                konst benchContents = buildDir.resolve(nativeBenchResults).readText()
+                konst nativeCompileTasks = if (benchmark.compileTasks.isEmpty()) {
                    listOf("linkBenchmark${benchmark.buildType.name.lowercase().replaceFirstChar { it.uppercase() }}ExecutableNative")
                 } else benchmark.compileTasks
 
-                val nativeCompileTime = getNativeCompileTime(project, applicationName, nativeCompileTasks)
+                konst nativeCompileTime = getNativeCompileTime(project, applicationName, nativeCompileTasks)
 
-                val properties = commonBenchmarkProperties + mapOf(
+                konst properties = commonBenchmarkProperties + mapOf(
                         "type" to "native",
                         "compilerVersion" to konanVersion,
                         "flags" to getCompilerFlags(project, nativeTarget).sorted(),
@@ -238,7 +238,7 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
                         "codeSize" to collectCodeSize(applicationName)
                 )
 
-                val output = createJsonReport(properties)
+                konst output = createJsonReport(properties)
                 buildDir.resolve(nativeJson).writeText(output)
             }
         }
@@ -249,13 +249,13 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
     protected open fun Project.configureExtraTasks() {}
 
     private fun Project.configureTasks() {
-        val nativeTarget = kotlin.targets.getByName(NATIVE_TARGET_NAME) as KotlinNativeTarget
+        konst nativeTarget = kotlin.targets.getByName(NATIVE_TARGET_NAME) as KotlinNativeTarget
         configureExtraTasks()
         // Native run task.
         configureNativeTask(nativeTarget)
 
         // JVM run task.
-        val jvmRun = configureJvmTask()
+        konst jvmRun = configureJvmTask()
 
         // Native report task.
         configureKonanJsonTask(nativeTarget)
@@ -263,7 +263,7 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
         // JVM report task.
         configureJvmJsonTask(jvmRun)
 
-        project.afterEvaluate {
+        project.afterEkonstuate {
             // Need to rebuild benchmark to collect compile time.
             project.benchmark.cleanBeforeRunTask?.let { tasks.getByName(it).dependsOn("clean") }
         }
@@ -288,8 +288,8 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
     }
 
     companion object {
-        const val NATIVE_TARGET_NAME = "native"
-        const val NATIVE_EXECUTABLE_NAME = "benchmark"
-        const val BENCHMARKING_GROUP = "benchmarking"
+        const konst NATIVE_TARGET_NAME = "native"
+        const konst NATIVE_EXECUTABLE_NAME = "benchmark"
+        const konst BENCHMARKING_GROUP = "benchmarking"
     }
 }

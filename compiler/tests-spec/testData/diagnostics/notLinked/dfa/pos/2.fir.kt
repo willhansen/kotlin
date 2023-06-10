@@ -14,7 +14,7 @@ import otherpackage.*
 
 // TESTCASE NUMBER: 8, 16
 class Case8_16__2 {
-    val x: otherpackage.Case8_16__1?
+    konst x: otherpackage.Case8_16__1?
     init {
         x = otherpackage.Case8_16__1()
     }
@@ -57,16 +57,16 @@ fun case_2(a: DeepObject.A.B.C.D.E.F.G.J?) =
  * ISSUES: KT-28328
  */
 fun case_3(b: Boolean) {
-    val x = {
+    konst x = {
         if (b) object {
-            val a = 10
+            konst a = 10
         } else null
     }
 
-    val y = if (b) x else null
+    konst y = if (b) x else null
 
     if (false || false || false || false || y !== null) {
-        val z = <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>y<!>()<!>
+        konst z = <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>y<!>()<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function0<<anonymous>?>?")!>y<!><!UNSAFE_CALL!>.<!>equals(null)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function0<<anonymous>?>?")!>y<!>.propT
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function0<<anonymous>?>?")!>y<!><!UNSAFE_CALL!>.<!>propAny
@@ -86,7 +86,7 @@ fun case_3(b: Boolean) {
 // TESTCASE NUMBER: 4
 fun case_4(a: ((Float) -> Int?)?, b: Float?) {
     if (a != null == true && b != null == true || false || false || false || false || false || false || false || false || false) {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float?")!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float?")!>b<!>)<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.Float, kotlin.Int?>?")!>a<!><!UNSAFE_CALL!>.<!>equals(null)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.Float, kotlin.Int?>?")!>a<!>.propT
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.Float, kotlin.Int?>?")!>a<!><!UNSAFE_CALL!>.<!>propAny
@@ -105,15 +105,15 @@ fun case_4(a: ((Float) -> Int?)?, b: Float?) {
 
 // TESTCASE NUMBER: 5
 fun case_5(b: Boolean) {
-    val a = if (b) {
+    konst a = if (b) {
         object {
-            val B5 = if (b) {
+            konst B5 = if (b) {
                 object {
-                    val C5 = if (b) {
+                    konst C5 = if (b) {
                         object {
-                            val D5 = if (b) {
+                            konst D5 = if (b) {
                                 object {
-                                    val x: Number? = 10
+                                    konst x: Number? = 10
                                 }
                             } else null
                         }
@@ -155,7 +155,7 @@ fun case_6(z: Boolean?) {
 
 // TESTCASE NUMBER: 7
 fun case_7(a: DeepObject.A.B.C.D.E.F.G.J?) {
-    val g = false
+    konst g = false
 
     if (a != null && g) {
         <!DEBUG_INFO_EXPRESSION_TYPE("DeepObject.A.B.C.D.E.F.G.J? & DeepObject.A.B.C.D.E.F.G.J")!>a<!>
@@ -177,7 +177,7 @@ fun case_7(a: DeepObject.A.B.C.D.E.F.G.J?) {
  * ISSUES: KT-28329
  */
 fun case_8(b: Boolean, c: Boolean?) {
-    val a = Case8_16__2()
+    konst a = Case8_16__2()
 
     if (a.x !== null && false) {
         if (false || false || false || false || <!SENSELESS_COMPARISON!>a.x != null<!> || false || false || false) {
@@ -264,16 +264,16 @@ fun case_10(a: DeepObject.A.B.C.D.E.F.G.J?) =
  * ISSUES: KT-28328
  */
 fun case_11(b: Boolean) {
-    val x = {
+    konst x = {
         if (b) object {
-            val a = 10
+            konst a = 10
         } else null
     }
 
-    val y = if (b) x else null
+    konst y = if (b) x else null
 
     if (y === null && true) else {
-        val z = <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>y<!>()<!>
+        konst z = <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>y<!>()<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function0<<anonymous>?>?")!>y<!><!UNSAFE_CALL!>.<!>equals(null)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function0<<anonymous>?>?")!>y<!>.propT
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function0<<anonymous>?>?")!>y<!><!UNSAFE_CALL!>.<!>propAny
@@ -297,7 +297,7 @@ fun case_12(a: ((Float) -> Int?)?, b: Float?, c: Boolean?) {
     if (true && a == null == true || b == null == true) {
 
     } else {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float? & kotlin.Float")!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float? & kotlin.Float")!>b<!>)<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.Float, kotlin.Int?>?")!>a<!><!UNSAFE_CALL!>.<!>equals(null)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.Float, kotlin.Int?>?")!>a<!>.propT
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function1<kotlin.Float, kotlin.Int?>?")!>a<!><!UNSAFE_CALL!>.<!>propAny
@@ -335,15 +335,15 @@ fun case_12(a: ((Float) -> Int?)?, b: Float?, c: Boolean?) {
 
 // TESTCASE NUMBER: 13
 fun case_13(b: Boolean, c: Boolean, d: Boolean) {
-    val a = if (b) {
+    konst a = if (b) {
         object {
-            val B19 = if (b) {
+            konst B19 = if (b) {
                 object {
-                    val C19 = if (b) {
+                    konst C19 = if (b) {
                         object {
-                            val D19 = if (b) {
+                            konst D19 = if (b) {
                                 object {
-                                    val x: Number? = 10
+                                    konst x: Number? = 10
                                 }
                             } else null
                         }
@@ -393,7 +393,7 @@ fun case_14(z: Boolean?) {
 
 // TESTCASE NUMBER: 15
 fun case_15(a: DeepObject.A.B.C.D.E.F.G.J?) {
-    val g = false
+    konst g = false
 
     if (true && a != null || g || !g || true || !true) {
 
@@ -404,7 +404,7 @@ fun case_15(a: DeepObject.A.B.C.D.E.F.G.J?) {
 
 // TESTCASE NUMBER: 16
 fun case_16(b: Boolean, c: Boolean?) {
-    val a = Case8_16__2()
+    konst a = Case8_16__2()
 
     if (a.x != null && false && false && false && false && false && false) {
         if ( <!SENSELESS_COMPARISON!>a.x == null<!> || false) {

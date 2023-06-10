@@ -15,13 +15,13 @@ import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
 class KonanReflectionTypes(module: ModuleDescriptor) {
 
-    private val kotlinReflectScope: MemberScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst kotlinReflectScope: MemberScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
         module.getPackage(KOTLIN_REFLECT_FQ_NAME).memberScope
     }
 
 
     private fun find(memberScope: MemberScope, className: String): ClassDescriptor {
-        val name = Name.identifier(className)
+        konst name = Name.identifier(className)
         return memberScope.getContributedClassifier(name, NoLookupLocation.FROM_REFLECTION) as ClassDescriptor
     }
 

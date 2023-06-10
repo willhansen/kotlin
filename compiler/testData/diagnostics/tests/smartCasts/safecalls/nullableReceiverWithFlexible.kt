@@ -14,7 +14,7 @@ public class Foo {
 
 // FILE: Test.kt
 fun test() {
-    val foo = Foo.create(null)
+    konst foo = Foo.create(null)
     foo?.bar.let {
         // Error, foo?.bar is nullable
         it<!UNSAFE_CALL!>.<!>length

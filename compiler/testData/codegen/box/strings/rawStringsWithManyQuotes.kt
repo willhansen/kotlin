@@ -1,8 +1,8 @@
-class P(val actual: String, val expected: String)
+class P(konst actual: String, konst expected: String)
 fun array(vararg s: P) = s
 
 fun box() : String {
-  val data = array(
+  konst data = array(
     P("""""", ""),
     P(""""""", "\""),
     P("""""""", "\"\""),
@@ -20,7 +20,7 @@ fun box() : String {
   )
 
   for (i in 0..data.size-1) {
-    val p = data[i]
+    konst p = data[i]
     if (p.actual != p.expected) return "Fail at #$i. actual='${p.actual}', expected='${p.expected}'"
   }
 

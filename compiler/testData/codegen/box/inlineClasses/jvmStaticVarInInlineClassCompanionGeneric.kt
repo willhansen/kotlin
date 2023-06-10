@@ -6,7 +6,7 @@
 // FILE: test.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R<T: Int>(private val r: T) {
+konstue class R<T: Int>(private konst r: T) {
 
     companion object {
         private var ok_ = ""
@@ -14,7 +14,7 @@ value class R<T: Int>(private val r: T) {
         @JvmStatic
         var ok
             get() = ok_
-            set(value) { ok_ = value }
+            set(konstue) { ok_ = konstue }
     }
 }
 

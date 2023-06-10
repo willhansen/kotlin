@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.ir.symbols.IrSymbol
 
 // An IR builder with a reference to the JvmBackendContext
 class JvmIrBuilder(
-    val backendContext: JvmBackendContext,
-    val symbol: IrSymbol,
+    konst backendContext: JvmBackendContext,
+    konst symbol: IrSymbol,
     startOffset: Int = UNDEFINED_OFFSET,
     endOffset: Int = UNDEFINED_OFFSET,
 ) : IrBuilderWithScope(
@@ -27,7 +27,7 @@ class JvmIrBuilder(
     startOffset,
     endOffset
 ) {
-    val irSymbols: JvmSymbols
+    konst irSymbols: JvmSymbols
         get() = backendContext.ir.symbols
 }
 

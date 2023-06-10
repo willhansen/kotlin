@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class Generator<V> {
     @NotNull
-    private final Map<DeclarationDescriptor, V> values = new HashMap<>();
+    private final Map<DeclarationDescriptor, V> konstues = new HashMap<>();
     @NotNull
     private final List<Rule<V>> rules = Lists.newArrayList();
 
@@ -37,12 +37,12 @@ public class Generator<V> {
 
     @Nullable
     public V get(@NotNull DeclarationDescriptor descriptor) {
-        V result = values.get(descriptor);
+        V result = konstues.get(descriptor);
         if (result != null) {
             return result;
         }
         result = generate(descriptor);
-        values.put(descriptor, result);
+        konstues.put(descriptor, result);
         return result;
     }
 

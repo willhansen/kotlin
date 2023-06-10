@@ -9,7 +9,7 @@ import android.os.Parcelable
 import java.util.Arrays
 
 @Parcelize
-data class Film(val genres: Array<Int>) : Parcelable {
+data class Film(konst genres: Array<Int>) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -27,13 +27,13 @@ data class Film(val genres: Array<Int>) : Parcelable {
 }
 
 fun box() = parcelTest { parcel ->
-    val film = Film(arrayOf(3, 5, 7))
+    konst film = Film(arrayOf(3, 5, 7))
     film.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val film2 = parcelableCreator<Film>().createFromParcel(parcel)
+    konst film2 = parcelableCreator<Film>().createFromParcel(parcel)
     assert(film == film2)
 }

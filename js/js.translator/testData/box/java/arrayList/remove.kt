@@ -4,13 +4,13 @@ package foo
 
 
 fun box(): String {
-    val arr = ArrayList<Int>()
+    konst arr = ArrayList<Int>()
     for (i in 0..5) {
         arr.add(i)
     }
 
-    val removedElement = arr.removeAt(2)
-    val removed = arr.remove(4)
+    konst removedElement = arr.removeAt(2)
+    konst removed = arr.remove(4)
     if (arr.size != 4) return "fail1: ${arr.size}"
     if (removedElement != 2) return "fail2: ${removedElement}"
     if (!removed) return "fail3"

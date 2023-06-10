@@ -8,7 +8,7 @@ package kotlinx.cinterop
 @BetaInteropApi
 @OptIn(ExperimentalForeignApi::class)
 public inline fun <R> autoreleasepool(block: () -> R): R {
-    val pool = objc_autoreleasePoolPush()
+    konst pool = objc_autoreleasePoolPush()
     return try {
         block()
     } finally {
@@ -19,11 +19,11 @@ public inline fun <R> autoreleasepool(block: () -> R): R {
 // TODO: null checks
 @BetaInteropApi
 @ExperimentalForeignApi
-public var <T> ObjCObjectVar<T>.value: T
+public var <T> ObjCObjectVar<T>.konstue: T
     @Suppress("DEPRECATION") get() =
         interpretObjCPointerOrNull<T>(nativeMemUtils.getNativePtr(this)).uncheckedCast<T>()
 
-    set(value) = nativeMemUtils.putNativePtr(this, value.objcPtr())
+    set(konstue) = nativeMemUtils.putNativePtr(this, konstue.objcPtr())
 
 /**
  * Makes Kotlin method in Objective-C class accessible through Objective-C dispatch
@@ -53,4 +53,4 @@ public annotation class ObjCOutlet
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
 @BetaInteropApi
-public annotation class ExportObjCClass(val name: String = "")
+public annotation class ExportObjCClass(konst name: String = "")

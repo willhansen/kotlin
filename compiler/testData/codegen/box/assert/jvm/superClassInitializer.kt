@@ -16,36 +16,36 @@ open class IntHolder(i: Int)
 class ShouldBeDisabled : Checker {
     override fun checkTrue(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
 
-        val local = object : IntHolder(run { assert(l()); 0 }) {}
+        konst local = object : IntHolder(run { assert(l()); 0 }) {}
 
         return hit
     }
 
     override fun checkFalse(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
 
-        val local = object : IntHolder(run { assert(l()); 0 }) {}
+        konst local = object : IntHolder(run { assert(l()); 0 }) {}
 
         return hit
     }
 
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
 
-        val local = object : IntHolder(run { assert(l()) { "BOOYA!" }; 0 }) {}
+        konst local = object : IntHolder(run { assert(l()) { "BOOYA!" }; 0 }) {}
 
         return hit
     }
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
 
-        val local = object : IntHolder(run { assert(l()) { "BOOYA!" }; 0 }) {}
+        konst local = object : IntHolder(run { assert(l()) { "BOOYA!" }; 0 }) {}
 
         return hit
     }
@@ -54,45 +54,45 @@ class ShouldBeDisabled : Checker {
 class ShouldBeEnabled : Checker {
     override fun checkTrue(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
 
-        val local = object : IntHolder(run { assert(l()); 0 }) {}
+        konst local = object : IntHolder(run { assert(l()); 0 }) {}
 
         return hit
     }
 
     override fun checkFalse(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
 
-        val local = object : IntHolder(run { assert(l()); 0 }) {}
+        konst local = object : IntHolder(run { assert(l()); 0 }) {}
 
         return hit
     }
 
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
 
-        val local = object : IntHolder(run { assert(l()) { "BOOYA!" }; 0 }) {}
+        konst local = object : IntHolder(run { assert(l()) { "BOOYA!" }; 0 }) {}
 
         return hit
     }
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
 
-        val local = object : IntHolder(run { assert(l()) { "BOOYA!" }; 0 }) {}
+        konst local = object : IntHolder(run { assert(l()) { "BOOYA!" }; 0 }) {}
 
         return hit
     }
 }
 
 fun setDesiredAssertionStatus(v: Boolean): Checker {
-    val loader = Checker::class.java.classLoader
+    konst loader = Checker::class.java.classLoader
     loader.setPackageAssertionStatus("superClassInitializer", v)
-    val c = loader.loadClass(if (v) "superClassInitializer.ShouldBeEnabled" else "superClassInitializer.ShouldBeDisabled")
+    konst c = loader.loadClass(if (v) "superClassInitializer.ShouldBeEnabled" else "superClassInitializer.ShouldBeDisabled")
     return c.newInstance() as Checker
 }
 

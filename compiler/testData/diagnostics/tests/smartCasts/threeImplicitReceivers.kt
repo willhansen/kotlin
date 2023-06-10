@@ -5,7 +5,7 @@ interface IC
 object Host : IB
 
 object Prop : IA {
-    val Host.foo: Callee get() = Callee
+    konst Host.foo: Callee get() = Callee
 }
 
 object Callee

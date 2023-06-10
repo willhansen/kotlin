@@ -9,6 +9,6 @@ fun f1(): () -> Result<String> {
 }
 
 fun box(): String {
-    val r = f1()()
+    konst r = f1()()
     return r.getOrNull() ?: "fail: $r"
 }

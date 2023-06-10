@@ -9,11 +9,11 @@
  */
 
 fun box(): String? {
-    val `true` = "0"
-    val `false` = "1"
+    konst `true` = "0"
+    konst `false` = "1"
 
-    val x1 = "${`false`}"
-    val x2 = "..." + "...$`true`..." + "..."
+    konst x1 = "${`false`}"
+    konst x2 = "..." + "...$`true`..." + "..."
     var x3 = "$`false`${`true`}$`false`"
 
     if (`false` != "1") return null

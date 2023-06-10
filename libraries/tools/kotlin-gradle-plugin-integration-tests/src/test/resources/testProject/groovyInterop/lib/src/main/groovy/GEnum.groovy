@@ -9,9 +9,9 @@ import java.lang.annotation.RetentionPolicy
 enum GEnum {
     FOO("123");
 
-    String value
+    String konstue
 
-    GEnum(@FooEnum String value) {
-        this.value = value
+    GEnum(@FooEnum String konstue) {
+        this.konstue = konstue
     }
 }

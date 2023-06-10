@@ -1,20 +1,20 @@
 // LANGUAGE: -NativeJsProhibitLateinitIsInitializedIntrinsicWithoutPrivateAccess
 // WITH_STDLIB
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class Foo {
     private lateinit var foo: String
 
     fun test(): Boolean {
-        val result = eval { ::foo.isInitialized }
+        konst result = ekonst { ::foo.isInitialized }
         foo = ""
         return result
     }
 }
 
 fun box(): String {
-    val f = Foo()
+    konst f = Foo()
     if (f.test()) return "Fail 1"
     if (!f.test()) return "Fail 2"
     return "OK"

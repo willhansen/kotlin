@@ -21,7 +21,7 @@ object ContextualDeclarationChecker : DeclarationChecker {
             return
         }
         if (declaration.isContextualDeclaration()) {
-            val contextReceiverList = declaration.findDescendantOfType<KtContextReceiverList>() ?: return
+            konst contextReceiverList = declaration.findDescendantOfType<KtContextReceiverList>() ?: return
             checkContextReceiversAreEnabled(context.trace, context.languageVersionSettings, contextReceiverList)
             return
         }
@@ -33,12 +33,12 @@ object SubtypingBetweenContextReceiversChecker : DeclarationChecker {
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.ContextReceivers) || !declaration.isContextualDeclaration()) {
             return
         }
-        val contextReceivers = when (descriptor) {
+        konst contextReceivers = when (descriptor) {
             is CallableDescriptor -> descriptor.contextReceiverParameters
             is ClassDescriptor -> descriptor.contextReceivers
             else -> return
         }
-        val contextReceiverList = declaration.findDescendantOfType<KtContextReceiverList>() ?: return
+        konst contextReceiverList = declaration.findDescendantOfType<KtContextReceiverList>() ?: return
         checkSubtypingBetweenContextReceivers(context.trace, contextReceiverList, contextReceivers.map { it.type })
     }
 }

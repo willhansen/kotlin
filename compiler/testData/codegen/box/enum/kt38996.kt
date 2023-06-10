@@ -1,4 +1,4 @@
-enum class E(val b: Boolean) {
+enum class E(konst b: Boolean) {
     TRUE(1 == 1)
 }
 

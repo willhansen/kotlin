@@ -1,7 +1,7 @@
 import abitestutils.abiTest
 
 fun box() = abiTest {
-    val checker = Checker()
+    konst checker = Checker()
 
     expectFailure(linkage("Constructor 'RemovedClass.<init>' can not be called: No constructor found for symbol '/RemovedClass.<init>'")) { createRemovedClass() }
 
@@ -9,16 +9,16 @@ fun box() = abiTest {
     expectFailure(linkage("Property accessor 'removedClassProperty.<set-removedClassProperty>' can not be called: Property accessor uses unlinked class symbol '/RemovedClass'")) { checker.writeToRemovedClassProperty() }
     expectSuccess("Checker.useClassAsValueParameter(Class)") { checker.createAndPassClassAsValueParameter() }
 
-    expectFailure(linkage("Can not read value from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInFunction() }
-    expectFailure(linkage("Can not write value to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInFunction() }
-    expectFailure(linkage("Can not read value from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInLocalFunction() }
-    expectFailure(linkage("Can not write value to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInLocalFunction() }
-    expectFailure(linkage("Can not read value from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInLocalClass() }
-    expectFailure(linkage("Can not write value to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInLocalClass() }
-    expectFailure(linkage("Can not read value from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInAnonymousObject() }
-    expectFailure(linkage("Can not write value to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInAnonymousObject() }
-    expectFailure(linkage("Can not read value from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInAnonymousObjectThroughLocalVar() }
-    expectFailure(linkage("Can not write value to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInAnonymousObjectThroughLocalVar() }
+    expectFailure(linkage("Can not read konstue from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInFunction() }
+    expectFailure(linkage("Can not write konstue to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInFunction() }
+    expectFailure(linkage("Can not read konstue from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInLocalFunction() }
+    expectFailure(linkage("Can not write konstue to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInLocalFunction() }
+    expectFailure(linkage("Can not read konstue from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInLocalClass() }
+    expectFailure(linkage("Can not write konstue to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInLocalClass() }
+    expectFailure(linkage("Can not read konstue from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInAnonymousObject() }
+    expectFailure(linkage("Can not write konstue to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInAnonymousObject() }
+    expectFailure(linkage("Can not read konstue from variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { readVariableInAnonymousObjectThroughLocalVar() }
+    expectFailure(linkage("Can not write konstue to variable 'removed': Variable uses unlinked class symbol '/RemovedClass'")) { writeVariableInAnonymousObjectThroughLocalVar() }
 
     expectFailure(linkage("Function 'createRemovedClass' can not be called: Function uses unlinked class symbol '/RemovedClass'")) { checker.createRemovedClassAndCallFunction() }
     expectFailure(linkage("Property accessor 'getRemovedClass.<get-getRemovedClass>' can not be called: Property accessor uses unlinked class symbol '/RemovedClass'")) { checker.getRemovedClassAndReadProperty }
@@ -56,15 +56,15 @@ fun box() = abiTest {
     expectFailure(linkage("Property accessor 'anonymousObjectChildOfRemovedInterface.<get-anonymousObjectChildOfRemovedInterface>' can not be called: Property accessor uses unlinked class symbol '/RemovedInterface'")) { anonymousObjectChildOfRemovedInterface }
     expectFailure(linkage("Constructor 'LocalClass.<init>' can not be called: Class 'LocalClass' uses unlinked class symbol '/RemovedAbstractClass'")) { topLevelFunctionWithLocalClassChildOfRemovedAbstractClass() }
     expectFailure(linkage("Constructor 'LocalClass.<init>' can not be called: Class 'LocalClass' uses unlinked class symbol '/RemovedInterface'")) { topLevelFunctionWithLocalClassChildOfRemovedInterface() }
-    expectFailure(linkage("Can not read value from variable 'anonymousObject': Variable uses unlinked class symbol '/RemovedAbstractClass' (via anonymous object)")) { topLevelFunctionWithAnonymousObjectChildOfRemovedAbstractClass() }
-    expectFailure(linkage("Can not read value from variable 'anonymousObject': Variable uses unlinked class symbol '/RemovedInterface' (via anonymous object)")) { topLevelFunctionWithAnonymousObjectChildOfRemovedInterface() }
+    expectFailure(linkage("Can not read konstue from variable 'anonymousObject': Variable uses unlinked class symbol '/RemovedAbstractClass' (via anonymous object)")) { topLevelFunctionWithAnonymousObjectChildOfRemovedAbstractClass() }
+    expectFailure(linkage("Can not read konstue from variable 'anonymousObject': Variable uses unlinked class symbol '/RemovedInterface' (via anonymous object)")) { topLevelFunctionWithAnonymousObjectChildOfRemovedInterface() }
 
-    expectFailure(linkage("Can not read value from variable 'foo': Variable uses unlinked class symbol '/RemovedOpenClass'")) { inlinedFunctionWithRemovedOpenClassVariableType() }
-    expectFailure(linkage("Can not read value from variable 'foo': Variable uses unlinked class symbol '/RemovedOpenClass' (via class 'OpenClassImpl')")) { inlinedFunctionWithOpenClassImplVariableType() }
+    expectFailure(linkage("Can not read konstue from variable 'foo': Variable uses unlinked class symbol '/RemovedOpenClass'")) { inlinedFunctionWithRemovedOpenClassVariableType() }
+    expectFailure(linkage("Can not read konstue from variable 'foo': Variable uses unlinked class symbol '/RemovedOpenClass' (via class 'OpenClassImpl')")) { inlinedFunctionWithOpenClassImplVariableType() }
     expectFailure(linkage("Constructor 'RemovedOpenClass.<init>' can not be called: No constructor found for symbol '/RemovedOpenClass.<init>'")) { inlinedFunctionWithCreationOfRemovedOpenClass() }
     expectFailure(linkage("Constructor 'OpenClassImpl.<init>' can not be called: Class 'OpenClassImpl' uses unlinked class symbol '/RemovedOpenClass'")) { inlinedFunctionWithCreationOfOpenClassImpl() }
-    expectFailure(linkage("Reference to constructor 'RemovedOpenClass.<init>' can not be evaluated: No constructor found for symbol '/RemovedOpenClass.<init>'")) { inlinedFunctionWithCreationOfRemovedOpenClassThroughReference() }
-    expectFailure(linkage("Reference to constructor 'OpenClassImpl.<init>' can not be evaluated: Class 'OpenClassImpl' uses unlinked class symbol '/RemovedOpenClass'")) { inlinedFunctionWithCreationOfOpenClassImplThroughReference() }
-    expectFailure(linkage("Can not read value from variable 'foo': Variable uses unlinked class symbol '/RemovedOpenClass' (via anonymous object)")) { inlinedFunctionWithRemovedOpenClassAnonymousObject() }
-    expectFailure(linkage("Can not read value from variable 'foo': Variable uses unlinked class symbol '/RemovedOpenClass' (via anonymous object)")) { inlinedFunctionWithOpenClassImplAnonymousObject() }
+    expectFailure(linkage("Reference to constructor 'RemovedOpenClass.<init>' can not be ekonstuated: No constructor found for symbol '/RemovedOpenClass.<init>'")) { inlinedFunctionWithCreationOfRemovedOpenClassThroughReference() }
+    expectFailure(linkage("Reference to constructor 'OpenClassImpl.<init>' can not be ekonstuated: Class 'OpenClassImpl' uses unlinked class symbol '/RemovedOpenClass'")) { inlinedFunctionWithCreationOfOpenClassImplThroughReference() }
+    expectFailure(linkage("Can not read konstue from variable 'foo': Variable uses unlinked class symbol '/RemovedOpenClass' (via anonymous object)")) { inlinedFunctionWithRemovedOpenClassAnonymousObject() }
+    expectFailure(linkage("Can not read konstue from variable 'foo': Variable uses unlinked class symbol '/RemovedOpenClass' (via anonymous object)")) { inlinedFunctionWithOpenClassImplAnonymousObject() }
 }

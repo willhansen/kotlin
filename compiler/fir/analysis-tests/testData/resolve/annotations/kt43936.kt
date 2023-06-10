@@ -5,8 +5,8 @@ import FooOperation.*
 
 interface Operation<T>
 
-class FooOperation(val foo: String) : Operation<Boom> {
+class FooOperation(konst foo: String) : Operation<Boom> {
 
     @Suppress("test")
-    class Boom(val bar: String)
+    class Boom(konst bar: String)
 }

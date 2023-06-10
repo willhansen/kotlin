@@ -81,30 +81,30 @@ class UintMap implements Serializable {
     }
 
     /**
-     * Get object value assigned with key.
-     * @return key object value or null if key is absent
+     * Get object konstue assigned with key.
+     * @return key object konstue or null if key is absent
      */
     public Object getObject(int key) {
         if (key < 0) Context.codeBug();
-        if (values != null) {
+        if (konstues != null) {
             int index = findIndex(key);
             if (0 <= index) {
-                return values[index];
+                return konstues[index];
             }
         }
         return null;
     }
 
     /**
-     * Get integer value assigned with key.
-     * @return key integer value or defaultValue if key is absent
+     * Get integer konstue assigned with key.
+     * @return key integer konstue or defaultValue if key is absent
      */
     public int getInt(int key, int defaultValue) {
         if (key < 0) Context.codeBug();
         int index = findIndex(key);
         if (0 <= index) {
-            if (ivaluesShift != 0) {
-                return keys[ivaluesShift + index];
+            if (ikonstuesShift != 0) {
+                return keys[ikonstuesShift + index];
             }
             return 0;
         }
@@ -112,17 +112,17 @@ class UintMap implements Serializable {
     }
 
     /**
-     * Get integer value assigned with key.
-     * @return key integer value or defaultValue if key does not exist or does
-     * not have int value
+     * Get integer konstue assigned with key.
+     * @return key integer konstue or defaultValue if key does not exist or does
+     * not have int konstue
      * @throws RuntimeException if key does not exist
      */
     public int getExistingInt(int key) {
         if (key < 0) Context.codeBug();
         int index = findIndex(key);
         if (0 <= index) {
-            if (ivaluesShift != 0) {
-                return keys[ivaluesShift + index];
+            if (ikonstuesShift != 0) {
+                return keys[ikonstuesShift + index];
             }
             return 0;
         }
@@ -132,36 +132,36 @@ class UintMap implements Serializable {
     }
 
     /**
-     * Set object value of the key.
-     * If key does not exist, also set its int value to 0.
+     * Set object konstue of the key.
+     * If key does not exist, also set its int konstue to 0.
      */
-    public void put(int key, Object value) {
+    public void put(int key, Object konstue) {
         if (key < 0) Context.codeBug();
         int index = ensureIndex(key, false);
-        if (values == null) {
-            values = new Object[1 << power];
+        if (konstues == null) {
+            konstues = new Object[1 << power];
         }
-        values[index] = value;
+        konstues[index] = konstue;
     }
 
     /**
-     * Set int value of the key.
-     * If key does not exist, also set its object value to null.
+     * Set int konstue of the key.
+     * If key does not exist, also set its object konstue to null.
      */
-    public void put(int key, int value) {
+    public void put(int key, int konstue) {
         if (key < 0) Context.codeBug();
         int index = ensureIndex(key, true);
-        if (ivaluesShift == 0) {
+        if (ikonstuesShift == 0) {
             int N = 1 << power;
-            // keys.length can be N * 2 after clear which set ivaluesShift to 0
+            // keys.length can be N * 2 after clear which set ikonstuesShift to 0
             if (keys.length != N * 2) {
                 int[] tmp = new int[N * 2];
                 System.arraycopy(keys, 0, tmp, 0, N);
                 keys = tmp;
             }
-            ivaluesShift = N;
+            ikonstuesShift = N;
         }
-        keys[ivaluesShift + index] = value;
+        keys[ikonstuesShift + index] = konstue;
     }
 
     public void remove(int key) {
@@ -170,10 +170,10 @@ class UintMap implements Serializable {
         if (0 <= index) {
             keys[index] = DELETED;
             --keyCount;
-            // Allow to GC value and make sure that new key with the deleted
-            // slot shall get proper default values
-            if (values != null) { values[index] = null; }
-            if (ivaluesShift != 0) { keys[ivaluesShift + index] = 0; }
+            // Allow to GC konstue and make sure that new key with the deleted
+            // slot shall get proper default konstues
+            if (konstues != null) { konstues[index] = null; }
+            if (ikonstuesShift != 0) { keys[ikonstuesShift + index] = 0; }
         }
     }
 
@@ -183,13 +183,13 @@ class UintMap implements Serializable {
             for (int i = 0; i != N; ++i) {
                 keys[i] = EMPTY;
             }
-            if (values != null) {
+            if (konstues != null) {
                 for (int i = 0; i != N; ++i) {
-                    values[i] = null;
+                    konstues[i] = null;
                 }
             }
         }
-        ivaluesShift = 0;
+        ikonstuesShift = 0;
         keyCount = 0;
         occupiedCount = 0;
     }
@@ -278,17 +278,17 @@ class UintMap implements Serializable {
         }
         int N = 1 << power;
         int[] old = keys;
-        int oldShift = ivaluesShift;
+        int oldShift = ikonstuesShift;
         if (oldShift == 0 && !ensureIntSpace) {
             keys = new int[N];
         }
         else {
-            ivaluesShift = N; keys = new int[N * 2];
+            ikonstuesShift = N; keys = new int[N * 2];
         }
         for (int i = 0; i != N; ++i) { keys[i] = EMPTY; }
 
-        Object[] oldValues = values;
-        if (oldValues != null) { values = new Object[N]; }
+        Object[] oldValues = konstues;
+        if (oldValues != null) { konstues = new Object[N]; }
 
         int oldCount = keyCount;
         occupiedCount = 0;
@@ -299,10 +299,10 @@ class UintMap implements Serializable {
                 if (key != EMPTY && key != DELETED) {
                     int index = insertNewKey(key);
                     if (oldValues != null) {
-                        values[index] = oldValues[i];
+                        konstues[index] = oldValues[i];
                     }
                     if (oldShift != 0) {
-                        keys[ivaluesShift + index] = old[oldShift + i];
+                        keys[ikonstuesShift + index] = old[oldShift + i];
                     }
                     --remaining;
                 }
@@ -367,8 +367,8 @@ class UintMap implements Serializable {
 
         int count = keyCount;
         if (count != 0) {
-            boolean hasIntValues = (ivaluesShift != 0);
-            boolean hasObjectValues = (values != null);
+            boolean hasIntValues = (ikonstuesShift != 0);
+            boolean hasObjectValues = (konstues != null);
             out.writeBoolean(hasIntValues);
             out.writeBoolean(hasObjectValues);
 
@@ -378,10 +378,10 @@ class UintMap implements Serializable {
                     --count;
                     out.writeInt(key);
                     if (hasIntValues) {
-                        out.writeInt(keys[ivaluesShift + i]);
+                        out.writeInt(keys[ikonstuesShift + i]);
                     }
                     if (hasObjectValues) {
-                        out.writeObject(values[i]);
+                        out.writeObject(konstues[i]);
                     }
                 }
             }
@@ -402,7 +402,7 @@ class UintMap implements Serializable {
             int N = 1 << power;
             if (hasIntValues) {
                 keys = new int[2 * N];
-                ivaluesShift = N;
+                ikonstuesShift = N;
             }else {
                 keys = new int[N];
             }
@@ -410,17 +410,17 @@ class UintMap implements Serializable {
                 keys[i] = EMPTY;
             }
             if (hasObjectValues) {
-                values = new Object[N];
+                konstues = new Object[N];
             }
             for (int i = 0; i != writtenKeyCount; ++i) {
                 int key = in.readInt();
                 int index = insertNewKey(key);
                 if (hasIntValues) {
-                    int ivalue = in.readInt();
-                    keys[ivaluesShift + index] = ivalue;
+                    int ikonstue = in.readInt();
+                    keys[ikonstuesShift + index] = ikonstue;
                 }
                 if (hasObjectValues) {
-                    values[index] = in.readObject();
+                    konstues[index] = in.readObject();
                 }
             }
         }
@@ -436,21 +436,21 @@ class UintMap implements Serializable {
     private static final int EMPTY = -1;
     private static final int DELETED = -2;
 
-// Structure of kyes and values arrays (N == 1 << power):
-// keys[0 <= i < N]: key value or EMPTY or DELETED mark
-// values[0 <= i < N]: value of key at keys[i]
-// keys[N <= i < 2N]: int values of keys at keys[i - N]
+// Structure of kyes and konstues arrays (N == 1 << power):
+// keys[0 <= i < N]: key konstue or EMPTY or DELETED mark
+// konstues[0 <= i < N]: konstue of key at keys[i]
+// keys[N <= i < 2N]: int konstues of keys at keys[i - N]
 
     private transient int[] keys;
-    private transient Object[] values;
+    private transient Object[] konstues;
 
     private int power;
     private int keyCount;
     private transient int occupiedCount; // == keyCount + deleted_count
 
-    // If ivaluesShift != 0, keys[ivaluesShift + index] contains integer
-    // values associated with keys
-    private transient int ivaluesShift;
+    // If ikonstuesShift != 0, keys[ikonstuesShift + index] contains integer
+    // konstues associated with keys
+    private transient int ikonstuesShift;
 
 // If true, enables consistency checks
     private static final boolean check = false;

@@ -10,26 +10,26 @@ import org.jetbrains.kotlin.resolve.multiplatform.findCompatibleActualsForExpect
 import org.jetbrains.kotlin.resolve.scopes.receivers.ExtensionReceiver
 
 /**
- * This [FrameMap] subclass substitutes values declared in the expected declaration with the corresponding value in the actual declaration,
- * which is needed for the case when expected function declares parameters with default values, which refer to other parameters.
+ * This [FrameMap] subclass substitutes konstues declared in the expected declaration with the corresponding konstue in the actual declaration,
+ * which is needed for the case when expected function declares parameters with default konstues, which refer to other parameters.
  */
-class FrameMapWithExpectActualSupport(private val module: ModuleDescriptor) : FrameMap() {
+class FrameMapWithExpectActualSupport(private konst module: ModuleDescriptor) : FrameMap() {
     override fun getIndex(descriptor: DeclarationDescriptor): Int {
-        val tmp = if (descriptor is ParameterDescriptor) findActualParameter(descriptor) ?: descriptor else descriptor
+        konst tmp = if (descriptor is ParameterDescriptor) findActualParameter(descriptor) ?: descriptor else descriptor
         return super.getIndex(tmp)
     }
 
     private fun findActualParameter(parameter: ParameterDescriptor): ParameterDescriptor? {
-        val container = parameter.containingDeclaration
+        konst container = parameter.containingDeclaration
         if (container !is CallableMemberDescriptor || !container.isExpect) return null
 
-        // Generation of value parameters is supported by the fact that FunctionCodegen.generateDefaultImplBody substitutes value parameters
+        // Generation of konstue parameters is supported by the fact that FunctionCodegen.generateDefaultImplBody substitutes konstue parameters
         // of the generated actual function with the parameters of the expected declaration in the first place.
-        // Generation of dispatch receiver parameters (this and outer receiver values) is supported
+        // Generation of dispatch receiver parameters (this and outer receiver konstues) is supported
         // in ExpressionCodegen.generateThisOrOuterFromContext by comparing classes by type constructor equality.
-        if (parameter !is ReceiverParameterDescriptor || parameter.value !is ExtensionReceiver) return null
+        if (parameter !is ReceiverParameterDescriptor || parameter.konstue !is ExtensionReceiver) return null
 
-        val actual = container.findCompatibleActualsForExpected(module).firstOrNull()
+        konst actual = container.findCompatibleActualsForExpected(module).firstOrNull()
 
         return (actual as? CallableDescriptor)?.extensionReceiverParameter
     }

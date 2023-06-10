@@ -15,10 +15,10 @@ object O {
 }
 
 class C {
-    val s: String by O
+    konst s: String by O
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     return if (initialized) "OK" else "FAILURE"
 }

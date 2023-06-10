@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.gradle.targets.js.writeWasmUnitTestRunner
 import org.jetbrains.kotlin.gradle.utils.doNotTrackStateCompat
 import org.jetbrains.kotlin.gradle.utils.getValue
 
-internal class KotlinWasmD8(private val kotlinJsTest: KotlinJsTest) : KotlinJsTestFramework {
-    override val settingsState: String = "KotlinWasmD8"
+internal class KotlinWasmD8(private konst kotlinJsTest: KotlinJsTest) : KotlinJsTestFramework {
+    override konst settingsState: String = "KotlinWasmD8"
     @Transient
-    override val compilation: KotlinJsCompilation = kotlinJsTest.compilation
+    override konst compilation: KotlinJsCompilation = kotlinJsTest.compilation
     @Transient
-    private val project: Project = compilation.target.project
+    private konst project: Project = compilation.target.project
 
-    private val d8 = D8RootPlugin.apply(project.rootProject)
-    private val d8Executable by project.provider { d8.requireConfigured().executablePath }
-    private val isTeamCity = project.providers.gradleProperty(TCServiceMessagesTestExecutor.TC_PROJECT_PROPERTY)
+    private konst d8 = D8RootPlugin.apply(project.rootProject)
+    private konst d8Executable by project.provider { d8.requireConfigured().executablePath }
+    private konst isTeamCity = project.providers.gradleProperty(TCServiceMessagesTestExecutor.TC_PROJECT_PROPERTY)
 
     init {
         kotlinJsTest.doNotTrackStateCompat("Should always re-run for WASM")
@@ -40,12 +40,12 @@ internal class KotlinWasmD8(private val kotlinJsTest: KotlinJsTest) : KotlinJsTe
         nodeJsArgs: MutableList<String>,
         debug: Boolean
     ): TCServiceMessagesTestExecutionSpec {
-        val testRunnerFile = writeWasmUnitTestRunner(task.inputFileProperty.get().asFile)
+        konst testRunnerFile = writeWasmUnitTestRunner(task.inputFileProperty.get().asFile)
 
         forkOptions.executable = d8Executable.absolutePath
         forkOptions.workingDir = testRunnerFile.parentFile
 
-        val clientSettings = TCServiceMessagesClientSettings(
+        konst clientSettings = TCServiceMessagesClientSettings(
             task.name,
             testNameSuffix = task.targetName,
             prependSuiteName = true,
@@ -54,12 +54,12 @@ internal class KotlinWasmD8(private val kotlinJsTest: KotlinJsTest) : KotlinJsTe
             escapeTCMessagesInLog = isTeamCity.isPresent
         )
 
-        val cliArgs = KotlinTestRunnerCliArgs(
+        konst cliArgs = KotlinTestRunnerCliArgs(
             include = task.includePatterns,
             exclude = task.excludePatterns
         )
 
-        val args = mutableListOf<String>()
+        konst args = mutableListOf<String>()
         with(args) {
             addWasmExperimentalArguments()
             add(testRunnerFile.absolutePath)
@@ -76,7 +76,7 @@ internal class KotlinWasmD8(private val kotlinJsTest: KotlinJsTest) : KotlinJsTe
         )
     }
 
-    override val requiredNpmDependencies: Set<RequiredKotlinJsDependency> = emptySet()
+    override konst requiredNpmDependencies: Set<RequiredKotlinJsDependency> = emptySet()
 
     override fun getPath(): String = "${kotlinJsTest.path}:kotlinTestFrameworkStub"
 }

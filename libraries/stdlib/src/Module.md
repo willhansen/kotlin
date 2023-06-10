@@ -83,7 +83,7 @@ Convenience extension functions for `java.util.Optional` to simplify Kotlin-Java
 
 Mathematical functions and constants. 
 
-The functions include trigonometric, hyperbolic, exponentiation and power, logarithmic, rounding, sign and absolute value.
+The functions include trigonometric, hyperbolic, exponentiation and power, logarithmic, rounding, sign and absolute konstue.
 
 # Package kotlin.properties
 
@@ -92,7 +92,7 @@ and helper functions for implementing custom delegates.
 
 # Package kotlin.random
 
-Provides the default generator of pseudo-random values, the repeatable generator, and a base class for other RNG implementations.
+Provides the default generator of pseudo-random konstues, the repeatable generator, and a base class for other RNG implementations.
 
 # Package kotlin.ranges
 
@@ -113,7 +113,7 @@ Java reflection provided by `kotlin-reflect` library.
 
 # Package kotlin.sequences
 
-[Sequence][kotlin.sequences.Sequence] type that represents lazily evaluated collections. Top-level functions for instantiating sequences
+[Sequence][kotlin.sequences.Sequence] type that represents lazily ekonstuated collections. Top-level functions for instantiating sequences
 and extension functions for sequences.
 
 ## Classification of sequences
@@ -149,7 +149,7 @@ Functions for working with text and regular expressions.
 
 # Package kotlin.time
 
-API for representing [Duration][kotlin.time.Duration] values and experimental API for measuring time intervals.
+API for representing [Duration][kotlin.time.Duration] konstues and experimental API for measuring time interkonsts.
 
 # Package org.khronos.webgl
 

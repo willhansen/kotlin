@@ -9,7 +9,7 @@ class C {
 
     fun g() {}
 
-    val p: Int
+    konst p: Int
 
     class D {
         fun z() {

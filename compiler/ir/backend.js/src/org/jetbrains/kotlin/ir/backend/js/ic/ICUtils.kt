@@ -22,7 +22,7 @@ internal inline fun <T> File.useCodedInputIfExists(f: CodedInputStream.() -> T) 
 }
 
 internal inline fun OutputStream.useCodedOutput(f: CodedOutputStream.() -> Unit) = use {
-    val out = CodedOutputStream.newInstance(it)
+    konst out = CodedOutputStream.newInstance(it)
     out.f()
     out.flush()
 }
@@ -33,8 +33,8 @@ internal inline fun File.useCodedOutput(f: CodedOutputStream.() -> Unit) {
 }
 
 internal fun icError(what: String, libFile: KotlinLibraryFile? = null, srcFile: KotlinSourceFile? = null): Nothing {
-    val filePath = listOfNotNull(libFile?.path, srcFile?.path).joinToString(":") { File(it).name }
-    val msg = if (filePath.isEmpty()) what else "$what for $filePath"
+    konst filePath = listOfNotNull(libFile?.path, srcFile?.path).joinToString(":") { File(it).name }
+    konst msg = if (filePath.isEmpty()) what else "$what for $filePath"
     error("IC internal error: $msg")
 }
 
@@ -54,9 +54,9 @@ internal fun findStdlib(
     mainFragment: IrModuleFragment,
     allFragments: Map<KotlinLibraryFile, IrModuleFragment>
 ): Pair<KotlinLibraryFile, IrModuleFragment> {
-    val stdlibDescriptor = mainFragment.descriptor.builtIns.builtInsModule
-    val (stdlibFile, stdlibIr) = allFragments.entries.find {
-        it.value.descriptor === stdlibDescriptor
+    konst stdlibDescriptor = mainFragment.descriptor.builtIns.builtInsModule
+    konst (stdlibFile, stdlibIr) = allFragments.entries.find {
+        it.konstue.descriptor === stdlibDescriptor
     } ?: notFoundIcError("stdlib fragment")
     return stdlibFile to stdlibIr
 }
@@ -65,9 +65,9 @@ internal class StopwatchIC {
     private var lapStart: Long = 0
     private var lapDescription: String? = null
 
-    private val lapsImpl = mutableListOf<Pair<String, Long>>()
+    private konst lapsImpl = mutableListOf<Pair<String, Long>>()
 
-    val laps: List<Pair<String, Long>>
+    konst laps: List<Pair<String, Long>>
         get() = lapsImpl
 
     fun clear() {
@@ -77,7 +77,7 @@ internal class StopwatchIC {
     }
 
     fun startNext(description: String) {
-        val now = System.nanoTime()
+        konst now = System.nanoTime()
         stop(now)
         lapDescription = description
         lapStart = now
@@ -92,7 +92,7 @@ internal class StopwatchIC {
 
     inline fun <T> measure(description: String, f: () -> T): T {
         startNext(description)
-        val result = f()
+        konst result = f()
         stop()
         return result
     }

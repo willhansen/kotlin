@@ -1,7 +1,7 @@
 package test
 
-public class AnnotatedFlexibleTypes(val javaClass: d.JavaClass) {
+public class AnnotatedFlexibleTypes(konst javaClass: d.JavaClass) {
     fun foo() = javaClass.foo()
 
-    val bar = javaClass.bar()
+    konst bar = javaClass.bar()
 }

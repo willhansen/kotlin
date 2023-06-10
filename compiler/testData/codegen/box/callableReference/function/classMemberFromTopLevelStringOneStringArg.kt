@@ -3,6 +3,6 @@ class A {
 }
 
 fun box(): String {
-    val x = A::foo
+    konst x = A::foo
     return x(A(), "OK")
 }

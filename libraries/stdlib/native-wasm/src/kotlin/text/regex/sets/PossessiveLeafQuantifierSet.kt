@@ -44,7 +44,7 @@ internal class PossessiveLeafQuantifierSet(
                 return -1
             }
 
-            val shift = leaf.accepts(index, testString)
+            konst shift = leaf.accepts(index, testString)
             if (shift < 1) {
                 return -1
             }
@@ -53,7 +53,7 @@ internal class PossessiveLeafQuantifierSet(
         }
 
         while ((max == Quantifier.INF || occurrences < max) && index + leaf.charCount <= testString.length) {
-            val shift = leaf.accepts(index, testString)
+            konst shift = leaf.accepts(index, testString)
             if (shift < 1) {
                 break
             }

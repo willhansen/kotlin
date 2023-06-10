@@ -83,35 +83,35 @@ internal fun Project.getProperty(property: KonanPlugin.ProjectProperty) = findPr
 internal fun Project.getProperty(property: KonanPlugin.ProjectProperty, defaultValue: Any) =
         findProperty(property) ?: defaultValue
 
-internal fun Project.setProperty(property: KonanPlugin.ProjectProperty, value: Any) {
-    extensions.extraProperties.set(property.propertyName, value)
+internal fun Project.setProperty(property: KonanPlugin.ProjectProperty, konstue: Any) {
+    extensions.extraProperties.set(property.propertyName, konstue)
 }
 
 // konanHome extension is set by downloadKonanCompiler task.
-internal val Project.konanHome: String
+internal konst Project.konanHome: String
     get() {
         return project.kotlinNativeDist.absolutePath
     }
 
 // Used only for distribution downloading that is not used in the project and should be removed
-internal val Project.konanVersion: String
+internal konst Project.konanVersion: String
     get() = project.findProperty(KonanPlugin.ProjectProperty.KONAN_VERSION)
         ?.toString()
         ?: project.version.toString()
 
-internal val Project.konanBuildRoot          get() = buildDir.resolve("konan")
-internal val Project.konanBinBaseDir         get() = konanBuildRoot.resolve("bin")
-internal val Project.konanLibsBaseDir        get() = konanBuildRoot.resolve("libs")
-internal val Project.konanBitcodeBaseDir     get() = konanBuildRoot.resolve("bitcode")
+internal konst Project.konanBuildRoot          get() = buildDir.resolve("konan")
+internal konst Project.konanBinBaseDir         get() = konanBuildRoot.resolve("bin")
+internal konst Project.konanLibsBaseDir        get() = konanBuildRoot.resolve("libs")
+internal konst Project.konanBitcodeBaseDir     get() = konanBuildRoot.resolve("bitcode")
 
 internal fun File.targetSubdir(target: KonanTarget) = resolve(target.visibleName)
 
-internal val Project.konanDefaultSrcFiles         get() = fileTree("${projectDir.canonicalPath}/src/main/kotlin")
+internal konst Project.konanDefaultSrcFiles         get() = fileTree("${projectDir.canonicalPath}/src/main/kotlin")
 internal fun Project.konanDefaultDefFile(libName: String)
         = file("${projectDir.canonicalPath}/src/main/c_interop/$libName.def")
 
 @Suppress("UNCHECKED_CAST")
-internal val Project.konanArtifactsContainer: KonanArtifactContainer
+internal konst Project.konanArtifactsContainer: KonanArtifactContainer
     get() = extensions.getByName(KonanPlugin.ARTIFACTS_CONTAINER_NAME) as KonanArtifactContainer
 
 // TODO: The Kotlin/Native compiler is downloaded manually by a special task so the compilation tasks
@@ -119,38 +119,38 @@ internal val Project.konanArtifactsContainer: KonanArtifactContainer
 // we need .properties files from the distribution to configure targets. This is worked around here
 // by using HostManager instead of PlatformManager. But we need to download the compiler at the configuration
 // stage (e.g. by getting it from maven as a plugin dependency) and bring back the PlatformManager here.
-internal val Project.hostManager: HostManager
+internal konst Project.hostManager: HostManager
     get() = findProperty("hostManager") as HostManager? ?:
             if (hasProperty("org.jetbrains.kotlin.native.experimentalTargets"))
                 HostManager(buildDistribution(rootProject.rootDir.absolutePath), true)
             else
                 HostManager(customerDistribution(konanHome))
 
-internal val Project.konanTargets: List<KonanTarget>
+internal konst Project.konanTargets: List<KonanTarget>
     get() = hostManager.toKonanTargets(konanExtension.targets)
                 .filter{ hostManager.isEnabled(it) }
                 .distinct()
 
 @Suppress("UNCHECKED_CAST")
-internal val Project.konanExtension: KonanExtension
+internal konst Project.konanExtension: KonanExtension
     get() = extensions.getByName(KonanPlugin.KONAN_EXTENSION_NAME) as KonanExtension
 
-internal val Project.konanCompilerDownloadTask
+internal konst Project.konanCompilerDownloadTask
     get() = tasks.getByName(KonanPlugin.KONAN_DOWNLOAD_TASK_NAME)
 
-internal val Project.requestedTargets
+internal konst Project.requestedTargets
     get() = findProperty(KonanPlugin.ProjectProperty.KONAN_BUILD_TARGETS)?.let {
         it.toString().trim().split("\\s+".toRegex())
     }.orEmpty()
 
-internal val Project.jvmArgs
+internal konst Project.jvmArgs
     get() = (findProperty(KonanPlugin.ProjectProperty.KONAN_JVM_ARGS) as String?)?.split("\\s+".toRegex()).orEmpty()
 
-internal val Project.compileAllTask
+internal konst Project.compileAllTask
     get() = getOrCreateTask(COMPILE_ALL_TASK_NAME)
 
 internal fun Project.targetIsRequested(target: KonanTarget): Boolean {
-    val targets = requestedTargets
+    konst targets = requestedTargets
     return (targets.isEmpty() || targets.contains(target.visibleName) || targets.contains("all"))
 }
 
@@ -173,20 +173,20 @@ internal fun Project.konanCompilerDownloadDir(): String =
 
 // region Useful extensions and functions ---------------------------------------
 
-internal fun MutableList<String>.addArg(parameter: String, value: String) {
+internal fun MutableList<String>.addArg(parameter: String, konstue: String) {
     add(parameter)
-    add(value)
+    add(konstue)
 }
 
-internal fun MutableList<String>.addArgs(parameter: String, values: Iterable<String>) {
-    values.forEach {
+internal fun MutableList<String>.addArgs(parameter: String, konstues: Iterable<String>) {
+    konstues.forEach {
         addArg(parameter, it)
     }
 }
 
-internal fun MutableList<String>.addArgIfNotNull(parameter: String, value: String?) {
-    if (value != null) {
-        addArg(parameter, value)
+internal fun MutableList<String>.addArgIfNotNull(parameter: String, konstue: String?) {
+    if (konstue != null) {
+        addArg(parameter, konstue)
     }
 }
 
@@ -196,14 +196,14 @@ internal fun MutableList<String>.addKey(key: String, enabled: Boolean) {
     }
 }
 
-internal fun MutableList<String>.addFileArgs(parameter: String, values: FileCollection) {
-    values.files.forEach {
+internal fun MutableList<String>.addFileArgs(parameter: String, konstues: FileCollection) {
+    konstues.files.forEach {
         addArg(parameter, it.canonicalPath)
     }
 }
 
-internal fun MutableList<String>.addFileArgs(parameter: String, values: Collection<FileCollection>) {
-    values.forEach {
+internal fun MutableList<String>.addFileArgs(parameter: String, konstues: Collection<FileCollection>) {
+    konstues.forEach {
         addFileArgs(parameter, it)
     }
 }
@@ -276,11 +276,11 @@ open class KonanExtension {
     var jvmArgs = mutableListOf<String>()
 }
 
-open class KonanSoftwareComponent(val project: ProjectInternal?): SoftwareComponentInternal, ComponentWithVariants {
-    private val usages = mutableSetOf<UsageContext>()
+open class KonanSoftwareComponent(konst project: ProjectInternal?): SoftwareComponentInternal, ComponentWithVariants {
+    private konst usages = mutableSetOf<UsageContext>()
     override fun getUsages(): MutableSet<out UsageContext> = usages
 
-    private val variants = mutableSetOf<SoftwareComponent>()
+    private konst variants = mutableSetOf<SoftwareComponent>()
     override fun getName() = "main"
 
     override fun getVariants(): Set<SoftwareComponent> = variants
@@ -288,10 +288,10 @@ open class KonanSoftwareComponent(val project: ProjectInternal?): SoftwareCompon
     fun addVariant(component: SoftwareComponent) = variants.add(component)
 }
 
-class KonanPlugin @Inject constructor(private val registry: ToolingModelBuilderRegistry)
+class KonanPlugin @Inject constructor(private konst registry: ToolingModelBuilderRegistry)
     : Plugin<ProjectInternal> {
 
-    enum class ProjectProperty(val propertyName: String, val deprecatedPropertyName: String? = null) {
+    enum class ProjectProperty(konst propertyName: String, konst deprecatedPropertyName: String? = null) {
         KONAN_HOME                     ("org.jetbrains.kotlin.native.home", "konan.home"),
         KONAN_VERSION                  ("org.jetbrains.kotlin.native.version"),
         KONAN_BUILD_TARGETS            ("konan.build.targets"),
@@ -308,14 +308,14 @@ class KonanPlugin @Inject constructor(private val registry: ToolingModelBuilderR
     }
 
     companion object {
-        internal const val ARTIFACTS_CONTAINER_NAME = "konanArtifacts"
-        internal const val KONAN_DOWNLOAD_TASK_NAME = "checkKonanCompiler"
-        internal const val KONAN_GENERATE_CMAKE_TASK_NAME = "generateCMake"
-        internal const val COMPILE_ALL_TASK_NAME = "compileKonan"
+        internal const konst ARTIFACTS_CONTAINER_NAME = "konanArtifacts"
+        internal const konst KONAN_DOWNLOAD_TASK_NAME = "checkKonanCompiler"
+        internal const konst KONAN_GENERATE_CMAKE_TASK_NAME = "generateCMake"
+        internal const konst COMPILE_ALL_TASK_NAME = "compileKonan"
 
-        internal const val KONAN_EXTENSION_NAME = "konan"
+        internal const konst KONAN_EXTENSION_NAME = "konan"
 
-        internal val REQUIRED_GRADLE_VERSION = GradleVersion.version("6.7")
+        internal konst REQUIRED_GRADLE_VERSION = GradleVersion.version("6.7")
     }
 
     private fun Project.cleanKonan() = project.tasks.withType(KonanBuildingTask::class.java).forEach {
@@ -334,8 +334,8 @@ class KonanPlugin @Inject constructor(private val registry: ToolingModelBuilderR
 
     private fun getJavaLauncher(project: Project): Provider<JavaLauncher> = project.providers.provider {
         if (!::konanJvmLauncher.isInitialized) {
-            val toolchain = project.extensions.getByType(JavaPluginExtension::class.java).toolchain
-            val service = project.extensions.getByType(JavaToolchainService::class.java)
+            konst toolchain = project.extensions.getByType(JavaPluginExtension::class.java).toolchain
+            konst service = project.extensions.getByType(JavaToolchainService::class.java)
             konanJvmLauncher = try {
                 service.launcherFor(toolchain).get()
             } catch (ex: GradleException) {
@@ -356,7 +356,7 @@ class KonanPlugin @Inject constructor(private val registry: ToolingModelBuilderR
         project.plugins.apply("java")
         // Create necessary tasks and extensions.
         project.extensions.create(KONAN_EXTENSION_NAME, KonanExtension::class.java)
-        val container = project.extensions.create(
+        konst container = project.extensions.create(
                 KonanArtifactContainer::class.java,
                 ARTIFACTS_CONTAINER_NAME,
                 KonanArtifactContainer::class.java,
@@ -373,7 +373,7 @@ class KonanPlugin @Inject constructor(private val registry: ToolingModelBuilderR
         }
 
         // Create and set up aggregate building tasks.
-        val compileKonanTask = project.getOrCreateTask(COMPILE_ALL_TASK_NAME).apply {
+        konst compileKonanTask = project.getOrCreateTask(COMPILE_ALL_TASK_NAME).apply {
             group = BasePlugin.BUILD_GROUP
             description = "Compiles all the Kotlin/Native artifacts"
         }
@@ -384,30 +384,30 @@ class KonanPlugin @Inject constructor(private val registry: ToolingModelBuilderR
             doLast { project.cleanKonan() }
         }
 
-        project.afterEvaluate {
+        project.afterEkonstuate {
             project.tasks
                 .withType(KonanCompileProgramTask::class.java)
                 .forEach { task ->
-                    val isCrossCompile = (task.target != HostManager.host.visibleName)
+                    konst isCrossCompile = (task.target != HostManager.host.visibleName)
                     if (!isCrossCompile && !project.hasProperty("konanNoRun"))
                     task.runTask = project.tasks.register(
                         "run${task.artifactName.replaceFirstChar { it.uppercase() }}", Exec::class.java) {
                         group = "run"
                         dependsOn(task)
-                        val artifactPathClosure = object : Closure<String>(this) {
+                        konst artifactPathClosure = object : Closure<String>(this) {
                             override fun call() = task.artifactPath
                         }
-                        // Use GString to evaluate a path to the artifact lazily thus allow changing it at configuration phase.
-                        val lazyArtifactPath = GStringImpl(arrayOf(artifactPathClosure), arrayOf(""))
+                        // Use GString to ekonstuate a path to the artifact lazily thus allow changing it at configuration phase.
+                        konst lazyArtifactPath = GStringImpl(arrayOf(artifactPathClosure), arrayOf(""))
                         executable(lazyArtifactPath)
-                        // Add values passed in the runArgs project property as arguments.
+                        // Add konstues passed in the runArgs project property as arguments.
                         argumentProviders.add(task.RunArgumentProvider())
                     }
                 }
         }
 
-        val runTask = project.getOrCreateTask("run")
-        project.afterEvaluate {
+        konst runTask = project.getOrCreateTask("run")
+        project.afterEkonstuate {
             project.konanArtifactsContainer
                 .filterIsInstance(KonanProgram::class.java)
                 .forEach { program ->
@@ -419,13 +419,13 @@ class KonanPlugin @Inject constructor(private val registry: ToolingModelBuilderR
 
         // Enable multiplatform support
         project.pluginManager.apply(KotlinNativePlatformPlugin::class.java)
-        project.afterEvaluate {
+        project.afterEkonstuate {
             project.pluginManager.withPlugin("maven-publish") {
                 container.all { buildingConfig ->
-                    val konanSoftwareComponent = buildingConfig.mainVariant
+                    konst konanSoftwareComponent = buildingConfig.mainVariant
                     project.extensions.configure(PublishingExtension::class.java) {
-                        val builtArtifact = buildingConfig.name
-                        val mavenPublication = publications.maybeCreate(builtArtifact, MavenPublication::class.java)
+                        konst builtArtifact = buildingConfig.name
+                        konst mavenPublication = publications.maybeCreate(builtArtifact, MavenPublication::class.java)
                         mavenPublication.apply {
                             artifactId = builtArtifact
                             groupId = project.group.toString()
@@ -440,7 +440,7 @@ class KonanPlugin @Inject constructor(private val registry: ToolingModelBuilderR
                     project.extensions.configure(PublishingExtension::class.java) {
                         for (v in konanSoftwareComponent.variants) {
                             this@configure.publications.create(v.name, MavenPublication::class.java) {
-                                val coordinates = (v as NativeVariantIdentity).coordinates
+                                konst coordinates = (v as NativeVariantIdentity).coordinates
                                 project.logger.info("variant with coordinates($coordinates) and module: ${coordinates.module}")
                                 artifactId = coordinates.module.name
                                 groupId = coordinates.group

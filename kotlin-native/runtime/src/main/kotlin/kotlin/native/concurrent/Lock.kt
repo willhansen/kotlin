@@ -12,20 +12,20 @@ import kotlin.concurrent.AtomicInt
 @ThreadLocal
 @OptIn(FreezingIsDeprecated::class)
 private object CurrentThread {
-    val id = Any().freeze()
+    konst id = Any().freeze()
 }
 
 @Frozen
 @OptIn(FreezingIsDeprecated::class, ExperimentalNativeApi::class)
 internal class Lock {
-    private val locker_ = AtomicInt(0)
-    private val reenterCount_ = AtomicInt(0)
+    private konst locker_ = AtomicInt(0)
+    private konst reenterCount_ = AtomicInt(0)
 
     // TODO: make it properly reschedule instead of spinning.
     fun lock() {
-        val lockData = CurrentThread.id.hashCode()
+        konst lockData = CurrentThread.id.hashCode()
         loop@ do {
-            val old = locker_.compareAndExchange(0, lockData)
+            konst old = locker_.compareAndExchange(0, lockData)
             when (old) {
                 lockData -> {
                     // Was locked by us already.
@@ -34,7 +34,7 @@ internal class Lock {
                 }
                 0 -> {
                     // We just got the lock.
-                    assert(reenterCount_.value == 0)
+                    assert(reenterCount_.konstue == 0)
                     break@loop
                 }
             }
@@ -42,11 +42,11 @@ internal class Lock {
     }
 
     fun unlock() {
-        if (reenterCount_.value > 0) {
+        if (reenterCount_.konstue > 0) {
             reenterCount_.decrementAndGet()
         } else {
-            val lockData = CurrentThread.id.hashCode()
-            val old = locker_.compareAndExchange(lockData, 0)
+            konst lockData = CurrentThread.id.hashCode()
+            konst old = locker_.compareAndExchange(lockData, 0)
             assert(old == lockData)
         }
     }

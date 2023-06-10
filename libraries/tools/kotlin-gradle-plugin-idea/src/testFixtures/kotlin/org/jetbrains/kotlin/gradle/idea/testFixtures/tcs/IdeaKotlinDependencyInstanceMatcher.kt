@@ -7,8 +7,8 @@ package org.jetbrains.kotlin.gradle.idea.testFixtures.tcs
 
 import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinDependency
 
-internal class IdeaKotlinDependencyInstanceMatcher(private val instance: IdeaKotlinDependency) : IdeaKotlinDependencyMatcher {
-    override val description: String
+internal class IdeaKotlinDependencyInstanceMatcher(private konst instance: IdeaKotlinDependency) : IdeaKotlinDependencyMatcher {
+    override konst description: String
         get() = instance.toString()
 
     override fun matches(dependency: IdeaKotlinDependency): Boolean {

@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val a = arrayListOf<String>()
+    konst a = arrayListOf<String>()
 
     while (true) {
         if (a.size == 0) {

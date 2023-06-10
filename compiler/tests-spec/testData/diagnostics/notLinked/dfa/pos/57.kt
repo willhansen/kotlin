@@ -17,9 +17,9 @@
 fun case_1(x: Any?) {
     if (x is String) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.String")!>x<!>
-        val y = if (true) Class::fun_1 else Class::fun_1
+        konst y = if (true) Class::fun_1 else Class::fun_1
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.String")!>x<!>
-        val z: String = <!DEBUG_INFO_SMARTCAST!>x<!>
+        konst z: String = <!DEBUG_INFO_SMARTCAST!>x<!>
     }
 }
 
@@ -30,13 +30,13 @@ fun case_1(x: Any?) {
 fun case_2(x: Any?, b: Boolean?) {
     x!!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any?")!>x<!>
-    val y = when (b) {
+    konst y = when (b) {
         true -> Class::fun_1
         false -> Class::fun_2
         null -> Class::fun_3
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any?")!>x<!>
-    val z: Any = <!DEBUG_INFO_SMARTCAST!>x<!>
+    konst z: Any = <!DEBUG_INFO_SMARTCAST!>x<!>
 }
 
 /*
@@ -46,11 +46,11 @@ fun case_2(x: Any?, b: Boolean?) {
 fun case_3(x: Any?, b: Boolean?) {
     x as Int
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>x<!>
-    val y = when (b) {
+    konst y = when (b) {
         else -> Class::fun_1
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>x<!>
-    val z: Int = <!DEBUG_INFO_SMARTCAST!>x<!>
+    konst z: Int = <!DEBUG_INFO_SMARTCAST!>x<!>
 }
 
 // TESTCASE NUMBER: 4
@@ -58,10 +58,10 @@ fun case_4(x: Any?, b: Boolean?) {
     x as Int
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>x<!>
     if (b!!) {
-        val m = Class::fun_1
+        konst m = Class::fun_1
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>x<!>
-    val z: Int = <!DEBUG_INFO_SMARTCAST!>x<!>
+    konst z: Int = <!DEBUG_INFO_SMARTCAST!>x<!>
 }
 
 /*
@@ -71,9 +71,9 @@ fun case_4(x: Any?, b: Boolean?) {
 fun case_5(x: Any?, b: Class) {
     x as Int
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>x<!>
-    val y = if (true) b::fun_1 else b::fun_1
+    konst y = if (true) b::fun_1 else b::fun_1
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>x<!>
-    val z: Int = <!DEBUG_INFO_SMARTCAST!>x<!>
+    konst z: Int = <!DEBUG_INFO_SMARTCAST!>x<!>
 }
 
 /*
@@ -82,12 +82,12 @@ fun case_5(x: Any?, b: Class) {
  */
 fun case_6(x: Any?, b: Class) {
     x as Int
-    val z1 = x
+    konst z1 = x
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>x<!>
-    val y = if (true) b::fun_1 else b::fun_1
+    konst y = if (true) b::fun_1 else b::fun_1
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>x<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Int")!>z1<!>
-    val z2: Int = <!DEBUG_INFO_SMARTCAST!>z1<!>
+    konst z2: Int = <!DEBUG_INFO_SMARTCAST!>z1<!>
 }
 
 /*
@@ -98,9 +98,9 @@ fun case_7_1() {}
 fun case_7(x: Any?) {
     if (x is String) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.String")!>x<!>
-        val y = if (true) ::case_7_1 else ::case_7_1
+        konst y = if (true) ::case_7_1 else ::case_7_1
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.String")!>x<!>
-        val z: String = <!DEBUG_INFO_SMARTCAST!>x<!>
+        konst z: String = <!DEBUG_INFO_SMARTCAST!>x<!>
     }
 }
 
@@ -109,13 +109,13 @@ fun case_8_1() {}
 fun case_8(x: Any?) {
     if (x is String) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.String")!>x<!>
-        val m = try {
+        konst m = try {
             ::case_8_1
         } catch (e: Exception) {
             ::case_8_1
         }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.String")!>x<!>
-        val z: String = <!DEBUG_INFO_SMARTCAST!>x<!>
+        konst z: String = <!DEBUG_INFO_SMARTCAST!>x<!>
     }
 }
 
@@ -123,12 +123,12 @@ fun case_8(x: Any?) {
 fun case_9(x: Any?) {
     if (x is String) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.String")!>x<!>
-        val m = try {
+        konst m = try {
             Class::fun_1
         } finally {
             Class::fun_1
         }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.String")!>x<!>
-        val z: String = <!DEBUG_INFO_SMARTCAST!>x<!>
+        konst z: String = <!DEBUG_INFO_SMARTCAST!>x<!>
     }
 }

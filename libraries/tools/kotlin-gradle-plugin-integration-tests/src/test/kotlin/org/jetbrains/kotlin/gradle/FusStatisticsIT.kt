@@ -15,7 +15,7 @@ import java.nio.file.Path
 @DisplayName("FUS statistic")
 //Tests for FUS statistics have to create new instance of KotlinBuildStatsService
 class FusStatisticsIT : KGPDaemonsBaseTest() {
-    private val expectedMetrics = arrayOf(
+    private konst expectedMetrics = arrayOf(
         "OS_TYPE",
         "BUILD_FAILED=false",
         "EXECUTED_FROM_IDEA=false",
@@ -58,7 +58,7 @@ class FusStatisticsIT : KGPDaemonsBaseTest() {
         )
     }
 
-    private val GradleProject.fusStatisticsPath: Path
+    private konst GradleProject.fusStatisticsPath: Path
         get() = projectPath.getSingleFileInDir("kotlin-profile")
 
     @DisplayName("general fields")
@@ -74,7 +74,7 @@ class FusStatisticsIT : KGPDaemonsBaseTest() {
             gradleVersion,
         ) {
             build("compileKotlin", "-Pkotlin.session.logger.root.path=$projectPath") {
-                val fusStatisticsPath = fusStatisticsPath
+                konst fusStatisticsPath = fusStatisticsPath
                 assertFileContains(
                     fusStatisticsPath,
                     *expectedMetrics,
@@ -101,7 +101,7 @@ class FusStatisticsIT : KGPDaemonsBaseTest() {
             gradleVersion,
         ) {
             build("compileKotlin", "-Pkotlin.session.logger.root.path=$projectPath") {
-                val fusStatisticsPath = fusStatisticsPath
+                konst fusStatisticsPath = fusStatisticsPath
                 assertFileContains(
                     fusStatisticsPath,
                     *expectedMetrics,
@@ -124,14 +124,14 @@ class FusStatisticsIT : KGPDaemonsBaseTest() {
             buildOptions = defaultBuildOptions.copy(configurationCache = true)
         ) {
             build("compileKotlin", "-Pkotlin.session.logger.root.path=$projectPath") {
-                val fusStatisticsPath = fusStatisticsPath
+                konst fusStatisticsPath = fusStatisticsPath
                 assertFileContains(
                     fusStatisticsPath,
                     *expectedMetrics,
                 )
             }
             build("compileKotlin", "-Pkotlin.session.logger.root.path=$projectPath") {
-                val fusStatisticsPath = fusStatisticsPath
+                konst fusStatisticsPath = fusStatisticsPath
                 assertFileContains(
                     fusStatisticsPath,
                     *expectedMetrics,

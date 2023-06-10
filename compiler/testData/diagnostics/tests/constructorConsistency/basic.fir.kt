@@ -1,9 +1,9 @@
 class My {
-    val x: String
+    konst x: String
 
     constructor() {
-        val y = bar(this)
-        val z = foo()
+        konst y = bar(this)
+        konst z = foo()
         x = "$y$z"
     }
 

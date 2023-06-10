@@ -17,7 +17,7 @@ fun bar(p: Int) {
     }
     { yield: Int -> }
 
-    val (yield) = listOf(4)
+    konst (yield) = listOf(4)
 
 }
 

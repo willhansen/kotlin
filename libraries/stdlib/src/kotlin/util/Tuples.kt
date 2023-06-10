@@ -9,27 +9,27 @@ package kotlin
 
 
 /**
- * Represents a generic pair of two values.
+ * Represents a generic pair of two konstues.
  *
- * There is no meaning attached to values in this class, it can be used for any purpose.
- * Pair exhibits value semantics, i.e. two pairs are equal if both components are equal.
+ * There is no meaning attached to konstues in this class, it can be used for any purpose.
+ * Pair exhibits konstue semantics, i.e. two pairs are equal if both components are equal.
  *
- * An example of decomposing it into values:
+ * An example of decomposing it into konstues:
  * @sample samples.misc.Tuples.pairDestructuring
  *
- * @param A type of the first value.
- * @param B type of the second value.
- * @property first First value.
- * @property second Second value.
+ * @param A type of the first konstue.
+ * @param B type of the second konstue.
+ * @property first First konstue.
+ * @property second Second konstue.
  * @constructor Creates a new instance of Pair.
  */
 public data class Pair<out A, out B>(
-    public val first: A,
-    public val second: B
+    public konst first: A,
+    public konst second: B
 ) : Serializable {
 
     /**
-     * Returns string representation of the [Pair] including its [first] and [second] values.
+     * Returns string representation of the [Pair] including its [first] and [second] konstues.
      */
     public override fun toString(): String = "($first, $second)"
 }
@@ -49,28 +49,28 @@ public infix fun <A, B> A.to(that: B): Pair<A, B> = Pair(this, that)
 public fun <T> Pair<T, T>.toList(): List<T> = listOf(first, second)
 
 /**
- * Represents a triad of values
+ * Represents a triad of konstues
  *
- * There is no meaning attached to values in this class, it can be used for any purpose.
- * Triple exhibits value semantics, i.e. two triples are equal if all three components are equal.
- * An example of decomposing it into values:
+ * There is no meaning attached to konstues in this class, it can be used for any purpose.
+ * Triple exhibits konstue semantics, i.e. two triples are equal if all three components are equal.
+ * An example of decomposing it into konstues:
  * @sample samples.misc.Tuples.tripleDestructuring
  *
- * @param A type of the first value.
- * @param B type of the second value.
- * @param C type of the third value.
- * @property first First value.
- * @property second Second value.
- * @property third Third value.
+ * @param A type of the first konstue.
+ * @param B type of the second konstue.
+ * @param C type of the third konstue.
+ * @property first First konstue.
+ * @property second Second konstue.
+ * @property third Third konstue.
  */
 public data class Triple<out A, out B, out C>(
-    public val first: A,
-    public val second: B,
-    public val third: C
+    public konst first: A,
+    public konst second: B,
+    public konst third: C
 ) : Serializable {
 
     /**
-     * Returns string representation of the [Triple] including its [first], [second] and [third] values.
+     * Returns string representation of the [Triple] including its [first], [second] and [third] konstues.
      */
     public override fun toString(): String = "($first, $second, $third)"
 }

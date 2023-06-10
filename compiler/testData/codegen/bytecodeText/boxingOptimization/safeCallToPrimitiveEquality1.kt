@@ -22,4 +22,4 @@ fun doShortReceiver2(x: Short?, y: Short) = y == x?.id()
 fun doIf2(s: String?) =
         if (1 == s?.length) "A" else "B"
 
-// 0 valueOf
+// 0 konstueOf

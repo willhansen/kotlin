@@ -18,29 +18,29 @@ import org.jetbrains.kotlin.fir.types.impl.FirImplicitBuiltinTypeRef
 
 internal class KtFirBuiltInTypes(
     builtinTypes: BuiltinTypes,
-    private val builder: KtSymbolByFirBuilder,
-    override val token: KtLifetimeToken
+    private konst builder: KtSymbolByFirBuilder,
+    override konst token: KtLifetimeToken
 ) : KtBuiltinTypes() {
 
-    override val INT: KtType by cachedBuiltin(builtinTypes.intType)
-    override val LONG: KtType by cachedBuiltin(builtinTypes.longType)
-    override val SHORT: KtType by cachedBuiltin(builtinTypes.shortType)
-    override val BYTE: KtType by cachedBuiltin(builtinTypes.byteType)
+    override konst INT: KtType by cachedBuiltin(builtinTypes.intType)
+    override konst LONG: KtType by cachedBuiltin(builtinTypes.longType)
+    override konst SHORT: KtType by cachedBuiltin(builtinTypes.shortType)
+    override konst BYTE: KtType by cachedBuiltin(builtinTypes.byteType)
 
-    override val FLOAT: KtType by cachedBuiltin(builtinTypes.floatType)
-    override val DOUBLE: KtType by cachedBuiltin(builtinTypes.doubleType)
+    override konst FLOAT: KtType by cachedBuiltin(builtinTypes.floatType)
+    override konst DOUBLE: KtType by cachedBuiltin(builtinTypes.doubleType)
 
-    override val CHAR: KtType by cachedBuiltin(builtinTypes.charType)
-    override val BOOLEAN: KtType by cachedBuiltin(builtinTypes.booleanType)
-    override val STRING: KtType by cachedBuiltin(builtinTypes.stringType)
+    override konst CHAR: KtType by cachedBuiltin(builtinTypes.charType)
+    override konst BOOLEAN: KtType by cachedBuiltin(builtinTypes.booleanType)
+    override konst STRING: KtType by cachedBuiltin(builtinTypes.stringType)
 
-    override val UNIT: KtType by cachedBuiltin(builtinTypes.unitType)
-    override val NOTHING: KtType by cachedBuiltin(builtinTypes.nothingType)
-    override val ANY: KtType by cachedBuiltin(builtinTypes.anyType)
+    override konst UNIT: KtType by cachedBuiltin(builtinTypes.unitType)
+    override konst NOTHING: KtType by cachedBuiltin(builtinTypes.nothingType)
+    override konst ANY: KtType by cachedBuiltin(builtinTypes.anyType)
 
-    override val THROWABLE: KtType by cachedBuiltin(builtinTypes.throwableType)
-    override val NULLABLE_ANY: KtType by cachedBuiltin(builtinTypes.nullableAnyType)
-    override val NULLABLE_NOTHING: KtType by cachedBuiltin(builtinTypes.nullableNothingType)
+    override konst THROWABLE: KtType by cachedBuiltin(builtinTypes.throwableType)
+    override konst NULLABLE_ANY: KtType by cachedBuiltin(builtinTypes.nullableAnyType)
+    override konst NULLABLE_NOTHING: KtType by cachedBuiltin(builtinTypes.nullableNothingType)
 
     private fun cachedBuiltin(builtinTypeRef: FirImplicitBuiltinTypeRef): ValidityAwareCachedValue<KtFirUsualClassType> = cached {
         KtFirUsualClassType(builtinTypeRef.type as ConeClassLikeTypeImpl, builder)

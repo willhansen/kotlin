@@ -8,12 +8,12 @@ package org.jetbrains.kotlin.ir.backend.js.transformers.irToJs
 import org.jetbrains.kotlin.js.backend.ast.*
 
 fun JsNode.resolveTemporaryNames() {
-    val renamings = resolveNames()
+    konst renamings = resolveNames()
     accept(object : RecursiveJsVisitor() {
         override fun visitElement(node: JsNode) {
             super.visitElement(node)
             if (node is HasName) {
-                val name = node.name
+                konst name = node.name
                 if (name != null) {
                     renamings[name]?.let { node.name = it }
                 }
@@ -23,12 +23,12 @@ fun JsNode.resolveTemporaryNames() {
 }
 
 private fun JsNode.resolveNames(): Map<JsName, JsName> {
-    val rootScope = computeScopes().liftUsedNames()
-    val replacements = hashMapOf<JsName, JsName>()
+    konst rootScope = computeScopes().liftUsedNames()
+    konst replacements = hashMapOf<JsName, JsName>()
     fun traverse(scope: Scope) {
         // Don't clash with non-temporary names declared in current scope. It's for rare cases like `_` or `Kotlin` names,
         // since most of local declarations are temporary.
-        val occupiedNames = scope.declaredNames.asSequence().filter { !it.isTemporary }.map { it.ident }.toMutableSet()
+        konst occupiedNames = scope.declaredNames.asSequence().filter { !it.isTemporary }.map { it.ident }.toMutableSet()
 
         // Don't clash with non-temporary names used in current scope. It's ok to clash with unused names.
         // Don't clash with used temporary names from outer scopes that get their resolved names. For example,
@@ -37,7 +37,7 @@ private fun JsNode.resolveNames(): Map<JsName, JsName> {
         // Outer `foo` resolves first, so when traversing inner scope, we should take it into account.
         occupiedNames += scope.usedNames.asSequence().mapNotNull { if (!it.isTemporary) it.ident else replacements[it]?.ident }
 
-        val nextSuffix = hashMapOf<String, Int>()
+        konst nextSuffix = hashMapOf<String, Int>()
         for (temporaryName in scope.declaredNames.asSequence().filter { it.isTemporary }) {
             var resolvedName = temporaryName.ident
             var suffix = nextSuffix.getOrDefault(temporaryName.ident, 0)
@@ -70,7 +70,7 @@ private fun Scope.liftUsedNames(): Scope {
 }
 
 private fun JsNode.computeScopes(): Scope {
-    val rootScope = Scope()
+    konst rootScope = Scope()
     accept(object : RecursiveJsVisitor() {
         var currentScope: Scope = rootScope
 
@@ -88,7 +88,7 @@ private fun JsNode.computeScopes(): Scope {
 
         fun visitFunction(x: JsFunction, shouldReserveName: Boolean) {
             x.name?.takeIf { shouldReserveName }?.let { currentScope.declaredNames += it }
-            val oldScope = currentScope
+            konst oldScope = currentScope
             currentScope = Scope().apply {
                 currentScope.children += this
             }
@@ -109,7 +109,7 @@ private fun JsNode.computeScopes(): Scope {
 
         override fun visitNameRef(nameRef: JsNameRef) {
             if (nameRef.qualifier == null) {
-                val name = nameRef.name
+                konst name = nameRef.name
                 currentScope.usedNames += name ?: JsDynamicScope.declareName(nameRef.ident)
             }
 
@@ -117,7 +117,7 @@ private fun JsNode.computeScopes(): Scope {
         }
 
         override fun visitImport(import: JsImport) {
-            when (val target = import.target) {
+            when (konst target = import.target) {
                 is JsImport.Target.All -> target.alias.name?.let { currentScope.declaredNames += it }
                 is JsImport.Target.Default -> target.name.name?.let { currentScope.declaredNames += it }
                 is JsImport.Target.Elements -> target.elements.forEach {
@@ -136,7 +136,7 @@ private fun JsNode.computeScopes(): Scope {
 }
 
 private class Scope {
-    val declaredNames = mutableSetOf<JsName>()
-    val usedNames = mutableSetOf<JsName>()
-    val children = mutableSetOf<Scope>()
+    konst declaredNames = mutableSetOf<JsName>()
+    konst usedNames = mutableSetOf<JsName>()
+    konst children = mutableSetOf<Scope>()
 }

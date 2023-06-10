@@ -40,7 +40,7 @@ public class TrackingSlicedMap extends SlicedMapImpl {
 
     @Override
     public <K, V> V get(ReadOnlySlice<K, V> slice, K key) {
-        return super.get(wrapSlice(slice), key).value;
+        return super.get(wrapSlice(slice), key).konstue;
     }
 
     @Override
@@ -50,33 +50,33 @@ public class TrackingSlicedMap extends SlicedMapImpl {
 
     @Override
     public void forEach(@NotNull Function3<WritableSlice, Object, Object, Void> f) {
-        super.forEach((slice, key, value) -> {
-            f.invoke(((SliceWithStackTrace) slice).getWritableDelegate(), key, ((TrackableValue<?>) value).value);
+        super.forEach((slice, key, konstue) -> {
+            f.invoke(((SliceWithStackTrace) slice).getWritableDelegate(), key, ((TrackableValue<?>) konstue).konstue);
             return null;
         });
     }
 
     @Override
-    public <K, V> void put(WritableSlice<K, V> slice, K key, V value) {
-        super.put(wrapSlice(slice), key, new TrackableValue<>(value, trackWithStackTraces));
+    public <K, V> void put(WritableSlice<K, V> slice, K key, V konstue) {
+        super.put(wrapSlice(slice), key, new TrackableValue<>(konstue, trackWithStackTraces));
     }
 
     private static class TrackableValue<V> {
         private final static StackTraceElement[] EMPTY_STACK_TRACE = new StackTraceElement[0];
 
-        private final V value;
+        private final V konstue;
         private final StackTraceElement[] stackTrace;
         private final String threadName;
 
-        private TrackableValue(V value, boolean storeStack) {
-            this.value = value;
+        private TrackableValue(V konstue, boolean storeStack) {
+            this.konstue = konstue;
             this.stackTrace = storeStack ? Thread.currentThread().getStackTrace() : EMPTY_STACK_TRACE;
             this.threadName = Thread.currentThread().getName();
         }
 
         private Appendable printStackTrace(Appendable appendable) {
             Printer s = new Printer(appendable);
-            s.println(value);
+            s.println(konstue);
             s.println("Thread: " + threadName);
             s.println("Written at ");
             StackTraceElement[] trace = stackTrace;
@@ -99,14 +99,14 @@ public class TrackingSlicedMap extends SlicedMapImpl {
 
             TrackableValue other = (TrackableValue) o;
 
-            if (value != null ? !value.equals(other.value) : other.value != null) return false;
+            if (konstue != null ? !konstue.equals(other.konstue) : other.konstue != null) return false;
 
             return true;
         }
 
         @Override
         public int hashCode() {
-            return value != null ? value.hashCode() : 0;
+            return konstue != null ? konstue.hashCode() : 0;
         }
     }
 
@@ -124,8 +124,8 @@ public class TrackingSlicedMap extends SlicedMapImpl {
         // Methods of ReadOnlySlice
 
         @Override
-        public TrackableValue<V> computeValue(SlicedMap map, K key, TrackableValue<V> value, boolean valueNotFound) {
-            return new TrackableValue<>(delegate.computeValue(map, key, value == null ? null : value.value, valueNotFound), trackWithStackTraces);
+        public TrackableValue<V> computeValue(SlicedMap map, K key, TrackableValue<V> konstue, boolean konstueNotFound) {
+            return new TrackableValue<>(delegate.computeValue(map, key, konstue == null ? null : konstue.konstue, konstueNotFound), trackWithStackTraces);
         }
 
         @Override
@@ -150,13 +150,13 @@ public class TrackingSlicedMap extends SlicedMapImpl {
         }
 
         @Override
-        public void afterPut(MutableSlicedMap map, K key, TrackableValue<V> value) {
-            getWritableDelegate().afterPut(map, key, value.value);
+        public void afterPut(MutableSlicedMap map, K key, TrackableValue<V> konstue) {
+            getWritableDelegate().afterPut(map, key, konstue.konstue);
         }
 
         @Override
-        public boolean check(K key, TrackableValue<V> value) {
-            return getWritableDelegate().check(key, value.value);
+        public boolean check(K key, TrackableValue<V> konstue) {
+            return getWritableDelegate().check(key, konstue.konstue);
         }
     }
 }

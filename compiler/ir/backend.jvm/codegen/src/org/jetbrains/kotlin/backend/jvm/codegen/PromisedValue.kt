@@ -23,20 +23,20 @@ import org.jetbrains.org.objectweb.asm.Label
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
-// A value that may not have been fully constructed yet. The ability to "roll back" code generation
+// A konstue that may not have been fully constructed yet. The ability to "roll back" code generation
 // is useful for certain optimizations.
-abstract class PromisedValue(val codegen: ExpressionCodegen, val type: Type, val irType: IrType) {
-    // If this value is immaterial, construct an object on the top of the stack. This
-    // must always be done before generating other values or emitting raw bytecode.
+abstract class PromisedValue(konst codegen: ExpressionCodegen, konst type: Type, konst irType: IrType) {
+    // If this konstue is immaterial, construct an object on the top of the stack. This
+    // must always be done before generating other konstues or emitting raw bytecode.
     open fun materializeAt(target: Type, irTarget: IrType, castForReified: Boolean) {
-        val erasedSourceType = irType.eraseTypeParameters()
-        val erasedTargetType = irTarget.eraseTypeParameters()
+        konst erasedSourceType = irType.eraseTypeParameters()
+        konst erasedTargetType = irTarget.eraseTypeParameters()
 
         // Coerce inline classes
-        val isFromTypeUnboxed = InlineClassAbi.unboxType(erasedSourceType)?.let(typeMapper::mapType) == type
-        val isToTypeUnboxed = InlineClassAbi.unboxType(erasedTargetType)?.let(typeMapper::mapType) == target
+        konst isFromTypeUnboxed = InlineClassAbi.unboxType(erasedSourceType)?.let(typeMapper::mapType) == type
+        konst isToTypeUnboxed = InlineClassAbi.unboxType(erasedTargetType)?.let(typeMapper::mapType) == target
         if (isFromTypeUnboxed && !isToTypeUnboxed) {
-            val boxed = typeMapper.mapType(erasedSourceType, TypeMappingMode.CLASS_DECLARATION)
+            konst boxed = typeMapper.mapType(erasedSourceType, TypeMappingMode.CLASS_DECLARATION)
             StackValue.boxInlineClass(type, boxed, erasedSourceType.isNullable(), mv)
 
             if (typeMapper.mapType(erasedTargetType) == target) {
@@ -48,8 +48,8 @@ abstract class PromisedValue(val codegen: ExpressionCodegen, val type: Type, val
             return
         }
         if (!isFromTypeUnboxed && isToTypeUnboxed) {
-            val boxed = typeMapper.mapType(erasedTargetType, TypeMappingMode.CLASS_DECLARATION)
-            val irClass = codegen.irFunction.parentAsClass
+            konst boxed = typeMapper.mapType(erasedTargetType, TypeMappingMode.CLASS_DECLARATION)
+            konst irClass = codegen.irFunction.parentAsClass
             if (irClass.isSingleFieldValueClass && irClass.symbol == irType.classifierOrNull && !irType.isNullable()) {
                 // Use getfield instead of unbox-impl inside inline classes
                 codegen.mv.getfield(boxed.internalName, irClass.inlineClassFieldName.asString(), target.descriptor)
@@ -66,10 +66,10 @@ abstract class PromisedValue(val codegen: ExpressionCodegen, val type: Type, val
 
     abstract fun discard()
 
-    val mv: InstructionAdapter
+    konst mv: InstructionAdapter
         get() = codegen.mv
 
-    val typeMapper: IrTypeMapper
+    konst typeMapper: IrTypeMapper
         get() = codegen.typeMapper
 }
 
@@ -82,7 +82,7 @@ fun IrType.anyTypeArgument(check: (IrTypeParameter) -> Boolean): Boolean {
     return false
 }
 
-// A value that *has* been fully constructed.
+// A konstue that *has* been fully constructed.
 class MaterialValue(codegen: ExpressionCodegen, type: Type, irType: IrType) : PromisedValue(codegen, type, irType) {
     override fun discard() {
         if (type !== Type.VOID_TYPE)
@@ -90,7 +90,7 @@ class MaterialValue(codegen: ExpressionCodegen, type: Type, irType: IrType) : Pr
     }
 }
 
-// A value that can be branched on. JVM has certain branching instructions which can be used
+// A konstue that can be branched on. JVM has certain branching instructions which can be used
 // to optimize these.
 abstract class BooleanValue(codegen: ExpressionCodegen) :
     PromisedValue(codegen, Type.BOOLEAN_TYPE, codegen.context.irBuiltIns.booleanType) {
@@ -98,8 +98,8 @@ abstract class BooleanValue(codegen: ExpressionCodegen) :
     abstract fun jumpIfTrue(target: Label)
 
     override fun materializeAt(target: Type, irTarget: IrType, castForReified: Boolean) {
-        val const0 = Label()
-        val end = Label()
+        konst const0 = Label()
+        konst end = Label()
         jumpIfFalse(const0)
         mv.iconst(1)
         mv.goTo(end)
@@ -112,11 +112,11 @@ abstract class BooleanValue(codegen: ExpressionCodegen) :
     }
 }
 
-class BooleanConstant(codegen: ExpressionCodegen, val value: Boolean) : BooleanValue(codegen) {
-    override fun jumpIfFalse(target: Label) = if (value) Unit else mv.goTo(target)
-    override fun jumpIfTrue(target: Label) = if (value) mv.goTo(target) else Unit
+class BooleanConstant(codegen: ExpressionCodegen, konst konstue: Boolean) : BooleanValue(codegen) {
+    override fun jumpIfFalse(target: Label) = if (konstue) Unit else mv.goTo(target)
+    override fun jumpIfTrue(target: Label) = if (konstue) mv.goTo(target) else Unit
     override fun materializeAt(target: Type, irTarget: IrType, castForReified: Boolean) {
-        mv.iconst(if (value) 1 else 0)
+        mv.iconst(if (konstue) 1 else 0)
         if (Type.BOOLEAN_TYPE != target) {
             StackValue.coerce(Type.BOOLEAN_TYPE, target, mv)
         }
@@ -171,11 +171,11 @@ fun PromisedValue.materializeAtBoxed(irTarget: IrType) {
     materializeAt(typeMapper.boxType(irTarget), irTarget)
 }
 
-// A Non-materialized value of Unit type that is only materialized through coercion.
-val ExpressionCodegen.unitValue: PromisedValue
+// A Non-materialized konstue of Unit type that is only materialized through coercion.
+konst ExpressionCodegen.unitValue: PromisedValue
     get() = MaterialValue(this, Type.VOID_TYPE, context.irBuiltIns.unitType)
 
-val ExpressionCodegen.nullConstant: PromisedValue
+konst ExpressionCodegen.nullConstant: PromisedValue
     get() = object : PromisedValue(this, AsmTypes.OBJECT_TYPE, context.irBuiltIns.nothingNType) {
         override fun materializeAt(target: Type, irTarget: IrType, castForReified: Boolean) {
             mv.aconst(null)

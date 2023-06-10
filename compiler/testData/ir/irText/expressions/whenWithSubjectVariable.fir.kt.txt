@@ -4,13 +4,13 @@ fun foo(): Any {
 
 fun test(): Int {
   return { // BLOCK
-    val y: Any = foo()
+    konst y: Any = foo()
     when {
       EQEQ(arg0 = y, arg1 = 42) -> 1
       y is String -> y /*as String */.<get-length>()
       y !is Int -> 2
-      0.rangeTo(other = 10).contains(value = y /*as Int */) -> 3
-      10.rangeTo(other = 20).contains(value = y /*as Int */).not() -> 4
+      0.rangeTo(other = 10).contains(konstue = y /*as Int */) -> 3
+      10.rangeTo(other = 20).contains(konstue = y /*as Int */).not() -> 4
       else -> -1
     }
   }

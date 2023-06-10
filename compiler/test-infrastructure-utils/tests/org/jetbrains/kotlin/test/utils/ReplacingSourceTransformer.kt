@@ -7,12 +7,12 @@ package org.jetbrains.kotlin.test.utils
 
 import java.util.function.Function
 
-class ReplacingSourceTransformer(val from: String, val to: String) : Function<String, String>, (String) -> String {
+class ReplacingSourceTransformer(konst from: String, konst to: String) : Function<String, String>, (String) -> String {
     init {
         require(from.isNotEmpty()) { "Cannot replace empty string" }
     }
 
-    private val randomComment: String = CharArray(6) { (('0'..'9') + ('a'..'z') + ('A'..'Z')).random() }
+    private konst randomComment: String = CharArray(6) { (('0'..'9') + ('a'..'z') + ('A'..'Z')).random() }
         .joinToString("", prefix = "/* ", postfix = " */")
 
     fun invokeForTestFile(source: String): String = source.replace(from, to + randomComment)

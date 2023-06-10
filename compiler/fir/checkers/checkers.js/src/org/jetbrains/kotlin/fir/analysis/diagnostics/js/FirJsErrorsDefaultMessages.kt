@@ -67,9 +67,9 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.js.FirJsErrors.WRONG_OPERAT
 
 @Suppress("unused")
 object FirJsErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
-    override val MAP = KtDiagnosticFactoryToRendererMap("FIR").also { map ->
+    override konst MAP = KtDiagnosticFactoryToRendererMap("FIR").also { map ->
         map.put(WRONG_JS_QUALIFIER, "Qualifier contains illegal characters")
-        map.put(JS_MODULE_PROHIBITED_ON_VAR, "@JsModule and @JsNonModule annotations prohibited for 'var' declarations. Use 'val' instead.")
+        map.put(JS_MODULE_PROHIBITED_ON_VAR, "@JsModule and @JsNonModule annotations prohibited for 'var' declarations. Use 'konst' instead.")
         map.put(JS_MODULE_PROHIBITED_ON_NON_NATIVE, "@JsModule and @JsNonModule annotations prohibited for non-external declarations.")
         map.put(
             NESTED_JS_MODULE_PROHIBITED,
@@ -80,9 +80,9 @@ object FirJsErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
             "Can''t apply multiple inheritance here, since it''s impossible to generate bridge for system function {0}",
             FirDiagnosticRenderers.SYMBOL
         )
-        map.put(DELEGATION_BY_DYNAMIC, "Can't delegate to dynamic value")
+        map.put(DELEGATION_BY_DYNAMIC, "Can't delegate to dynamic konstue")
         map.put(SPREAD_OPERATOR_IN_DYNAMIC_CALL, "Can't apply spread operator in dynamic call")
-        map.put(WRONG_OPERATION_WITH_DYNAMIC, "Wrong operation with dynamic value: {0}", CommonRenderers.STRING)
+        map.put(WRONG_OPERATION_WITH_DYNAMIC, "Wrong operation with dynamic konstue: {0}", CommonRenderers.STRING)
         map.put(IMPLEMENTING_FUNCTION_INTERFACE, "Implementing function interface is prohibited in JavaScript")
         map.put(OVERRIDING_EXTERNAL_FUN_WITH_OPTIONAL_PARAMS, "Overriding `external` function with optional parameters")
         map.put(
@@ -108,7 +108,7 @@ object FirJsErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(WRONG_INITIALIZER_OF_EXTERNAL_DECLARATION, "Wrong initializer of external declaration. Must be ' = definedExternally'")
         map.put(
             WRONG_DEFAULT_VALUE_FOR_EXTERNAL_FUN_PARAMETER,
-            "Wrong default value for parameter of external function. Must be ' = definedExternally'"
+            "Wrong default konstue for parameter of external function. Must be ' = definedExternally'"
         )
         map.put(NESTED_EXTERNAL_DECLARATION, "Non-top-level `external` declaration")
         map.put(WRONG_EXTERNAL_DECLARATION, "Declaration of such kind ({0}) can''t be external", CommonRenderers.STRING)
@@ -117,7 +117,7 @@ object FirJsErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(INLINE_EXTERNAL_DECLARATION, "Inline external declaration")
         map.put(
             INLINE_CLASS_IN_EXTERNAL_DECLARATION_WARNING,
-            "Using value classes as parameter type or return type of external declarations is experimental"
+            "Using konstue classes as parameter type or return type of external declarations is experimental"
         )
         map.put(
             ENUM_CLASS_IN_EXTERNAL_DECLARATION_WARNING,
@@ -125,7 +125,7 @@ object FirJsErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(
             INLINE_CLASS_IN_EXTERNAL_DECLARATION,
-            "Using value classes as parameter type or return type of external declarations is not supported"
+            "Using konstue classes as parameter type or return type of external declarations is not supported"
         )
         map.put(EXTENSION_FUNCTION_IN_EXTERNAL_DECLARATION, "Function types with receiver are prohibited in external declarations")
         map.put(
@@ -142,7 +142,7 @@ object FirJsErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
             "Native {0}''s first parameter type should be ''kotlin.String'' or subtype of ''kotlin.Number''",
             CommonRenderers.STRING
         )
-        map.put(NATIVE_INDEXER_CAN_NOT_HAVE_DEFAULT_ARGUMENTS, "Native {0}''s parameter can not have default value", CommonRenderers.STRING)
+        map.put(NATIVE_INDEXER_CAN_NOT_HAVE_DEFAULT_ARGUMENTS, "Native {0}''s parameter can not have default konstue", CommonRenderers.STRING)
         map.put(NATIVE_GETTER_RETURN_TYPE_SHOULD_BE_NULLABLE, "Native getter's return type should be nullable")
         map.put(
             NATIVE_SETTER_WRONG_RETURN_TYPE,

@@ -19,18 +19,18 @@ import org.jetbrains.kotlin.gradle.plugin.sources.internal
 
 internal object IdeOriginalMetadataDependencyResolver : IdeDependencyResolver {
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
-        val metadataDependenciesConfiguration = sourceSet.internal.resolvableMetadataConfiguration
+        konst metadataDependenciesConfiguration = sourceSet.internal.resolvableMetadataConfiguration
 
-        val keptOriginalDependencyResolutionIds = sourceSet.resolveMetadata<MetadataDependencyResolution.KeepOriginalDependency>()
+        konst keptOriginalDependencyResolutionIds = sourceSet.resolveMetadata<MetadataDependencyResolution.KeepOriginalDependency>()
             .map { it.dependency.id }.toSet()
 
-        val artifactsView = metadataDependenciesConfiguration.incoming.artifactView { view ->
+        konst artifactsView = metadataDependenciesConfiguration.incoming.artifactView { view ->
             view.componentFilter { id -> id in keptOriginalDependencyResolutionIds }
             view.isLenient = true
         }
 
         return artifactsView.artifacts.mapNotNull { artifact ->
-            val moduleId = artifact.id.componentIdentifier as? ModuleComponentIdentifier ?: return@mapNotNull null
+            konst moduleId = artifact.id.componentIdentifier as? ModuleComponentIdentifier ?: return@mapNotNull null
             IdeaKotlinResolvedBinaryDependency(
                 binaryType = IdeaKotlinBinaryDependency.KOTLIN_COMPILE_BINARY_TYPE,
                 classpath = IdeaKotlinClasspath(artifact.file),

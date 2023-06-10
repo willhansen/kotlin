@@ -3,7 +3,7 @@
 // LANGUAGE:-ProhibitMissedMustBeInitializedWhenThereIsNoPrimaryConstructor
 class Foo {
     <!MUST_BE_INITIALIZED!>var foo: Int<!>
-        set(value) {}
+        set(konstue) {}
 
     constructor() {
         if (1 != 1) {

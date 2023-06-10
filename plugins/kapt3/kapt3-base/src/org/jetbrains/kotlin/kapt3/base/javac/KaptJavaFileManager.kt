@@ -15,11 +15,11 @@ import javax.tools.JavaFileObject
 import javax.tools.StandardLocation
 
 class KaptJavaFileManager(context: Context) : JavacFileManager(context, true, null) {
-    fun handleOptionJavac9(option: Option, value: String) {
-        val handleOptionMethod = JavacFileManager::class.java
+    fun handleOptionJavac9(option: Option, konstue: String) {
+        konst handleOptionMethod = JavacFileManager::class.java
             .getMethod("handleOption", Option::class.java, String::class.java)
 
-        handleOptionMethod.invoke(this, option, value)
+        handleOptionMethod.invoke(this, option, konstue)
     }
 
     var rootsToFilter = emptySet<File>()
@@ -32,7 +32,7 @@ class KaptJavaFileManager(context: Context) : JavacFileManager(context, true, nu
         kinds: MutableSet<JavaFileObject.Kind>?,
         recurse: Boolean
     ): MutableIterable<JavaFileObject> {
-        val originalList = super.list(location, packageName, kinds, recurse)
+        konst originalList = super.list(location, packageName, kinds, recurse)
 
         if (location == null
             || location != StandardLocation.CLASS_PATH
@@ -43,7 +43,7 @@ class KaptJavaFileManager(context: Context) : JavacFileManager(context, true, nu
             return originalList
         }
 
-        val filteredList = LinkedList<JavaFileObject>()
+        konst filteredList = LinkedList<JavaFileObject>()
         for (file in originalList)
             if (!shouldBeFiltered(packageName, file)) {
                 filteredList.add(file)
@@ -56,7 +56,7 @@ class KaptJavaFileManager(context: Context) : JavacFileManager(context, true, nu
     private fun filterThisPath(packageName: String?): Boolean {
         packageName ?: return false
 
-        val relativePath = packageName.replace('.', File.separatorChar)
+        konst relativePath = packageName.replace('.', File.separatorChar)
         return rootsToFilter.any { it.resolve(relativePath).isDirectory }
     }
 
@@ -65,7 +65,7 @@ class KaptJavaFileManager(context: Context) : JavacFileManager(context, true, nu
         return when (fileObject.toUri().scheme) {
             "jar", "zip" -> false
             else -> {
-                val typeName = packageName?.let { "$it." } + File(fileObject.toUri()).name.dropLast(".class".length)
+                konst typeName = packageName?.let { "$it." } + File(fileObject.toUri()).name.dropLast(".class".length)
 
                 return typeToIgnore.contains(typeName)
             }

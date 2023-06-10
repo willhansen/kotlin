@@ -1,6 +1,6 @@
 package com.example
 
 class FineGrainedFirstBuild_FineGrainedSecondBuild_Class {
-    val modifiedProperty: Int = 0
+    konst modifiedProperty: Int = 0
     fun modifiedFunction(): Int = 0
 }

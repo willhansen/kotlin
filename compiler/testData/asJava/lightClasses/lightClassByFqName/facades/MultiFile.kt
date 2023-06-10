@@ -5,6 +5,6 @@
 
 package test
 
-val foo = 42
+konst foo = 42
 
 typealias A = String

@@ -62,19 +62,19 @@ fun markSingleElement(
     tree: FlyweightCapableTreeStructure<LighterASTNode>,
     originalNode: LighterASTNode
 ): TextRange {
-    val betterFrom = from.nonFillerFirstChildOrSelf(tree)
-    val betterTo = to.nonFillerLastChildOrSelf(tree)
-    val startDelta = tree.getStartOffset(betterFrom) - tree.getStartOffset(originalNode)
-    val endDelta = tree.getEndOffset(betterTo) - tree.getEndOffset(originalNode)
+    konst betterFrom = from.nonFillerFirstChildOrSelf(tree)
+    konst betterTo = to.nonFillerLastChildOrSelf(tree)
+    konst startDelta = tree.getStartOffset(betterFrom) - tree.getStartOffset(originalNode)
+    konst endDelta = tree.getEndOffset(betterTo) - tree.getEndOffset(originalNode)
     return TextRange(startDelta + startOffset, endDelta + endOffset)
 }
 
-private val DOC_AND_COMMENT_TOKENS = setOf(
+private konst DOC_AND_COMMENT_TOKENS = setOf(
     WHITE_SPACE, KtTokens.IDENTIFIER,
     KtTokens.EOL_COMMENT, KtTokens.BLOCK_COMMENT, KtTokens.SHEBANG_COMMENT, KtTokens.DOC_COMMENT
 )
 
-private val FILLER_TOKENS = setOf(
+private konst FILLER_TOKENS = setOf(
     KtTokens.WHITE_SPACE,
     KtTokens.EOL_COMMENT,
     KtTokens.BLOCK_COMMENT,
@@ -93,20 +93,20 @@ internal fun LighterASTNode.isFiller() = tokenType in FILLER_TOKENS
 private fun hasSyntaxErrors(node: LighterASTNode, tree: FlyweightCapableTreeStructure<LighterASTNode>): Boolean {
     if (node.tokenType == TokenType.ERROR_ELEMENT) return true
 
-    val children = node.getChildren(tree)
+    konst children = node.getChildren(tree)
     return children.lastOrNull {
-        val tokenType = it.tokenType
+        konst tokenType = it.tokenType
         tokenType !is KtSingleValueToken && tokenType !in DOC_AND_COMMENT_TOKENS
     }?.let { hasSyntaxErrors(it, tree) } == true
 }
 
-val KtLightSourceElement.startOffsetSkippingComments: Int
+konst KtLightSourceElement.startOffsetSkippingComments: Int
     get() {
-        val children = lighterASTNode.getChildren(treeStructure)
+        konst children = lighterASTNode.getChildren(treeStructure)
 
         // The solution to find first non comment children will not work here. `treeStructure` can have different root
-        // than original program. Because of that `startOffset` is relative and not in absolute value.
-        val comments = children.takeWhile { it.tokenType in FILLER_TOKENS }
+        // than original program. Because of that `startOffset` is relative and not in absolute konstue.
+        konst comments = children.takeWhile { it.tokenType in FILLER_TOKENS }
         return startOffset + comments.sumOf { it.textLength }
     }
 

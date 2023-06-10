@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.FqName
 
-private val JS_CLASS_GETTER = FqName("kotlin.js.<get-js>")
+private konst JS_CLASS_GETTER = FqName("kotlin.js.<get-js>")
 
-class JsClassUsageInReflectionLowering(val backendContext: JsIrBackendContext) : BodyLoweringPass {
+class JsClassUsageInReflectionLowering(konst backendContext: JsIrBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitCall(expression: IrCall): IrExpression {
@@ -33,7 +33,7 @@ class JsClassUsageInReflectionLowering(val backendContext: JsIrBackendContext) :
                     return super.visitCall(expression)
                 }
 
-                return when (val extensionReceiver = expression.extensionReceiver) {
+                return when (konst extensionReceiver = expression.extensionReceiver) {
                     is IrClassReference -> extensionReceiver.generateDirectValueUsage() ?: super.visitCall(expression)
                     is IrGetClass -> extensionReceiver.generateDirectConstructorUsage()
                     else -> super.visitCall(expression)
@@ -45,7 +45,7 @@ class JsClassUsageInReflectionLowering(val backendContext: JsIrBackendContext) :
 
     private fun IrClassReference.generateDirectValueUsage(): IrExpression? {
         return with(backendContext) {
-            when (val classSymbol = symbol as? IrClassSymbol ?: return null) {
+            when (konst classSymbol = symbol as? IrClassSymbol ?: return null) {
                 irBuiltIns.nothingClass -> null
                 irBuiltIns.anyClass ->
                     JsIrBuilder.buildCall(intrinsics.jsCode).apply {

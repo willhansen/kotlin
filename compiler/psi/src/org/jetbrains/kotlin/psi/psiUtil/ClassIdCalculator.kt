@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.*
 internal object ClassIdCalculator {
     fun calculateClassId(declaration: KtClassLikeDeclaration): ClassId? {
         var ktFile: KtFile? = null
-        val containingClasses = mutableListOf<KtClassLikeDeclaration>()
+        konst containingClasses = mutableListOf<KtClassLikeDeclaration>()
 
         for (element in declaration.parentsWithSelf) {
             when (element) {
@@ -37,7 +37,7 @@ internal object ClassIdCalculator {
             }
         }
         if (ktFile == null) return null
-        val relativeClassName = FqName.fromSegments(containingClasses.reversed().map { containingClass ->
+        konst relativeClassName = FqName.fromSegments(containingClasses.reversed().map { containingClass ->
             containingClass.name ?: SpecialNames.NO_NAME_PROVIDED.asString()
         }
         )

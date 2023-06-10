@@ -19,17 +19,17 @@ FILE: typeParameterVsNested.kt
 
         }
 
-        public abstract val x: R|T|
+        public abstract konst x: R|T|
             public get(): R|T|
 
         public final fun foo(arg: R|T|): R|kotlin/Int| {
             ^foo R|<local>/arg|.R|test/Some.test|().R|kotlin/Int.plus|(this@R|test/My|.R|test/My.x|.R|test/Some.test|())
         }
 
-        public abstract val y: R|test/My.T|
+        public abstract konst y: R|test/My.T|
             public get(): R|test/My.T|
 
-        public abstract val z: R|test/My.T|
+        public abstract konst z: R|test/My.T|
             public get(): R|test/My.T|
 
         public final fun boo(): R|kotlin/String| {

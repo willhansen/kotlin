@@ -9,19 +9,19 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.findValueForMostSpecificFqname
 import org.jetbrains.kotlin.storage.LockBasedStorageManager
 
-val JSPECIFY_OLD_ANNOTATIONS_PACKAGE = FqName("org.jspecify.nullness")
-val JSPECIFY_ANNOTATIONS_PACKAGE = FqName("org.jspecify.annotations")
-val RXJAVA3_ANNOTATIONS_PACKAGE = FqName("io.reactivex.rxjava3.annotations")
-val CHECKER_FRAMEWORK_COMPATQUAL_ANNOTATIONS_PACKAGE = FqName("org.checkerframework.checker.nullness.compatqual")
+konst JSPECIFY_OLD_ANNOTATIONS_PACKAGE = FqName("org.jspecify.nullness")
+konst JSPECIFY_ANNOTATIONS_PACKAGE = FqName("org.jspecify.annotations")
+konst RXJAVA3_ANNOTATIONS_PACKAGE = FqName("io.reactivex.rxjava3.annotations")
+konst CHECKER_FRAMEWORK_COMPATQUAL_ANNOTATIONS_PACKAGE = FqName("org.checkerframework.checker.nullness.compatqual")
 
-private val RXJAVA3_ANNOTATIONS_PACKAGE_NAME = RXJAVA3_ANNOTATIONS_PACKAGE.asString()
+private konst RXJAVA3_ANNOTATIONS_PACKAGE_NAME = RXJAVA3_ANNOTATIONS_PACKAGE.asString()
 
-val RXJAVA3_ANNOTATIONS = arrayOf(
+konst RXJAVA3_ANNOTATIONS = arrayOf(
     FqName("$RXJAVA3_ANNOTATIONS_PACKAGE_NAME.Nullable"),
     FqName("$RXJAVA3_ANNOTATIONS_PACKAGE_NAME.NonNull")
 )
 
-val NULLABILITY_ANNOTATION_SETTINGS: NullabilityAnnotationStates<JavaNullabilityAnnotationsStatus> = NullabilityAnnotationStatesImpl(
+konst NULLABILITY_ANNOTATION_SETTINGS: NullabilityAnnotationStates<JavaNullabilityAnnotationsStatus> = NullabilityAnnotationStatesImpl(
     mapOf(
         FqName("org.jetbrains.annotations") to JavaNullabilityAnnotationsStatus.DEFAULT,
         FqName("androidx.annotation") to JavaNullabilityAnnotationsStatus.DEFAULT,
@@ -61,19 +61,19 @@ val NULLABILITY_ANNOTATION_SETTINGS: NullabilityAnnotationStates<JavaNullability
     )
 )
 
-private val JSR_305_DEFAULT_SETTINGS = JavaNullabilityAnnotationsStatus(
+private konst JSR_305_DEFAULT_SETTINGS = JavaNullabilityAnnotationsStatus(
     reportLevelBefore = ReportLevel.WARN,
     sinceVersion = null
 )
 
 fun getDefaultJsr305Settings(configuredKotlinVersion: KotlinVersion = KotlinVersion.CURRENT): Jsr305Settings {
-    val globalReportLevel =
+    konst globalReportLevel =
         if (JSR_305_DEFAULT_SETTINGS.sinceVersion != null && JSR_305_DEFAULT_SETTINGS.sinceVersion <= configuredKotlinVersion) {
             JSR_305_DEFAULT_SETTINGS.reportLevelAfter
         } else {
             JSR_305_DEFAULT_SETTINGS.reportLevelBefore
         }
-    val migrationLevel = getDefaultMigrationJsr305ReportLevelForGivenGlobal(globalReportLevel)
+    konst migrationLevel = getDefaultMigrationJsr305ReportLevelForGivenGlobal(globalReportLevel)
     return Jsr305Settings(globalReportLevel, migrationLevel)
 }
 
@@ -90,7 +90,7 @@ fun getReportLevelForAnnotation(
 ): ReportLevel {
     configuredReportLevels[annotation]?.let { return it }
 
-    val defaultStatus = NULLABILITY_ANNOTATION_SETTINGS[annotation] ?: return ReportLevel.IGNORE
+    konst defaultStatus = NULLABILITY_ANNOTATION_SETTINGS[annotation] ?: return ReportLevel.IGNORE
 
     return if (defaultStatus.sinceVersion != null && defaultStatus.sinceVersion <= configuredKotlinVersion) {
         defaultStatus.reportLevelAfter
@@ -103,14 +103,14 @@ interface NullabilityAnnotationStates<out T : Any> {
     operator fun get(fqName: FqName): T?
 
     companion object {
-        val EMPTY: NullabilityAnnotationStates<Nothing> = NullabilityAnnotationStatesImpl(emptyMap())
+        konst EMPTY: NullabilityAnnotationStates<Nothing> = NullabilityAnnotationStatesImpl(emptyMap())
     }
 }
 
-class NullabilityAnnotationStatesImpl<T : Any>(val states: Map<FqName, T>) : NullabilityAnnotationStates<T> {
-    val storageManager = LockBasedStorageManager("Java nullability annotation states")
+class NullabilityAnnotationStatesImpl<T : Any>(konst states: Map<FqName, T>) : NullabilityAnnotationStates<T> {
+    konst storageManager = LockBasedStorageManager("Java nullability annotation states")
 
-    private val cache = storageManager.createMemoizedFunctionWithNullableValues<FqName, T> {
+    private konst cache = storageManager.createMemoizedFunctionWithNullableValues<FqName, T> {
         it.findValueForMostSpecificFqname(states)
     }
 

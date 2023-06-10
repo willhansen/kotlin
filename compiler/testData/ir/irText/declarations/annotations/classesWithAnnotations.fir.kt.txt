@@ -5,7 +5,7 @@ open annotation class TestAnn : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 
@@ -63,11 +63,11 @@ enum class TestEnum : Enum<TestEnum> {
 
   }
 
-  fun values(): Array<TestEnum> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestEnum> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestEnum /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestEnum /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestEnum>
+  konst entries: EnumEntries<TestEnum>
     get(): EnumEntries<TestEnum> /* Synthetic body for ENUM_ENTRIES */
 
 }

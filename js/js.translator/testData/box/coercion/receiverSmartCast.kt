@@ -16,16 +16,16 @@ fun bar(x: Any): String {
 fun Char.baz(): Boolean = jsTypeOf(asDynamic()) == "number"
 
 fun box(): String {
-    val a = foo('0')
+    konst a = foo('0')
     if (a != "char: 48") return "fail1: $a"
 
-    val b = foo(23)
+    konst b = foo(23)
     if (b != "other: 23") return "fail2: $b"
 
-    val c = bar('0')
+    konst c = bar('0')
     if (c != "char: true") return "fail3: $c"
 
-    val d = bar(23)
+    konst d = bar(23)
     if (d != "other: 23") return "fail4: $d"
 
     return "OK"

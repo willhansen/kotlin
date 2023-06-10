@@ -19,7 +19,7 @@ KtFile: 1.1.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         REFERENCE_EXPRESSION
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
         PsiElement(RPAR)(')')
         PsiWhiteSpace(' ')
         PsiElement(LBRACE)('{')
@@ -46,7 +46,7 @@ KtFile: 1.1.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         REFERENCE_EXPRESSION
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
         PsiElement(RPAR)(')')
         PsiWhiteSpace(' ')
         PsiElement(LBRACE)('{')

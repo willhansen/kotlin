@@ -1,5 +1,5 @@
 @AllOpen
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class AllOpen {
     // source: 'allOpenOnNotClasses.kt'
@@ -12,8 +12,8 @@ public enum class Enum {
     private synthetic final static field $VALUES: Enum[]
     static method <clinit>(): void
     private method <init>(p0: java.lang.String, p1: int): void
-    public static method valueOf(p0: java.lang.String): Enum
-    public static method values(): Enum[]
+    public static method konstueOf(p0: java.lang.String): Enum
+    public static method konstues(): Enum[]
 }
 
 @AllOpen

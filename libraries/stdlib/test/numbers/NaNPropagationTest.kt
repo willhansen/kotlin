@@ -7,8 +7,8 @@ package test.numbers
 
 import kotlin.test.*
 
-val Double.Companion.values get() = listOf(0.0, NEGATIVE_INFINITY, MIN_VALUE, MAX_VALUE, POSITIVE_INFINITY, NaN)
-val Float.Companion.values get() = listOf(0.0f, NEGATIVE_INFINITY, MIN_VALUE, MAX_VALUE, POSITIVE_INFINITY, NaN)
+konst Double.Companion.konstues get() = listOf(0.0, NEGATIVE_INFINITY, MIN_VALUE, MAX_VALUE, POSITIVE_INFINITY, NaN)
+konst Float.Companion.konstues get() = listOf(0.0f, NEGATIVE_INFINITY, MIN_VALUE, MAX_VALUE, POSITIVE_INFINITY, NaN)
 
 class NaNPropagationTest {
 
@@ -18,13 +18,13 @@ class NaNPropagationTest {
         function: String
     ) {
         with(Double) {
-            for (d in values) {
+            for (d in konstues) {
                 assertTrue(f2d(d, NaN).isNaN(), "$function($d, NaN)")
                 assertTrue(f2d(NaN, d).isNaN(), "$function(NaN, $d)")
             }
         }
         with(Float) {
-            for (f in values) {
+            for (f in konstues) {
                 assertTrue(f2f(f, NaN).isNaN(), "$function($f, NaN)")
                 assertTrue(f2f(NaN, f).isNaN(), "$function(NaN, $f)")
             }
@@ -37,14 +37,14 @@ class NaNPropagationTest {
     ) {
 
         with(Double) {
-            for (d in values) {
+            for (d in konstues) {
                 assertTrue(f3d(NaN, d, POSITIVE_INFINITY).isNaN(), "$function(NaN, $d, +inf)")
                 assertTrue(f3d(d, NaN, POSITIVE_INFINITY).isNaN(), "$function($d, NaN, +inf)")
                 assertTrue(f3d(d, POSITIVE_INFINITY, NaN).isNaN(), "$function($d, +inf, NaN)")
             }
         }
         with(Float) {
-            for (f in values) {
+            for (f in konstues) {
                 assertTrue(f3f(NaN, f, POSITIVE_INFINITY).isNaN(), "$function(NaN, $f, +inf)")
                 assertTrue(f3f(f, NaN, POSITIVE_INFINITY).isNaN(), "$function($f, NaN, +inf)")
                 assertTrue(f3f(f, POSITIVE_INFINITY, NaN).isNaN(), "$function($f, +inf, NaN)")
@@ -144,8 +144,8 @@ class NaNPropagationTest {
             "primitiveArrayOf().minOf()"
         )
         propagateOf3(
-            { a, b, c -> val arr = doubleArrayOf(a, b, c); intArrayOf(0, 1, 2).minOf { arr[it] } },
-            { a, b, c -> val arr = floatArrayOf(a, b, c); intArrayOf(0, 1, 2).minOf { arr[it] } },
+            { a, b, c -> konst arr = doubleArrayOf(a, b, c); intArrayOf(0, 1, 2).minOf { arr[it] } },
+            { a, b, c -> konst arr = floatArrayOf(a, b, c); intArrayOf(0, 1, 2).minOf { arr[it] } },
             "intArrayOf().minOf()"
         )
     }
@@ -158,8 +158,8 @@ class NaNPropagationTest {
             "primitiveArrayOf().maxOf()"
         )
         propagateOf3(
-            { a, b, c -> val arr = doubleArrayOf(a, b, c); intArrayOf(0, 1, 2).maxOf { arr[it] } },
-            { a, b, c -> val arr = floatArrayOf(a, b, c); intArrayOf(0, 1, 2).maxOf { arr[it] } },
+            { a, b, c -> konst arr = doubleArrayOf(a, b, c); intArrayOf(0, 1, 2).maxOf { arr[it] } },
+            { a, b, c -> konst arr = floatArrayOf(a, b, c); intArrayOf(0, 1, 2).maxOf { arr[it] } },
             "intArrayOf().maxOf()"
         )
     }

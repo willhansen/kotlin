@@ -54,7 +54,7 @@ fun others(
 inline fun <reified T : Any> wrapper(): KClass<T> = T::class
 
 fun check(f: KFunction<*>, vararg expected: KClass<*>) {
-    val actual = f.parameters.map { it.type.classifier as KClass<*> }
+    konst actual = f.parameters.map { it.type.classifier as KClass<*> }
     for ((e, a) in expected.toList().zip(actual)) {
         assertEquals(e, a, "$e (${e.java}) != $a (${a.java})")
     }

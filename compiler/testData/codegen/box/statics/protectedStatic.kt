@@ -17,10 +17,10 @@ package anotherPackage
 import First
 
 class Second : First() {
-    val some = { First.TEST }
+    konst some = { First.TEST }
     fun foo() = { First.test() }
 
-    val some2 = { TEST }
+    konst some2 = { TEST }
     fun foo2() = { test() }
 }
 

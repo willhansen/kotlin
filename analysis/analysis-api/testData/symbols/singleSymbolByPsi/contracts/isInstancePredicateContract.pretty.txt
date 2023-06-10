@@ -1,2 +1,2 @@
 @kotlin.OptIn(markerClass = [kotlin.contracts.ExperimentalContracts::class])
-fun isInstancePredicateContract(value: kotlin.Any)
+fun isInstancePredicateContract(konstue: kotlin.Any)

@@ -25,12 +25,12 @@ package kotlin.text.regex
 /**
  * Back reference node;
  */
-open internal class BackReferenceSet(val referencedGroup: Int, val consCounter: Int, val ignoreCase: Boolean = false)
+open internal class BackReferenceSet(konst referencedGroup: Int, konst consCounter: Int, konst ignoreCase: Boolean = false)
     : SimpleSet() {
 
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val groupValue = getReferencedGroupValue(matchResult)
+        konst groupValue = getReferencedGroupValue(matchResult)
 
         if (groupValue == null || startIndex + groupValue.length > testString.length) {
             return -1
@@ -44,7 +44,7 @@ open internal class BackReferenceSet(val referencedGroup: Int, val consCounter: 
     }
 
     override fun find(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val groupValue = getReferencedGroupValue(matchResult)
+        konst groupValue = getReferencedGroupValue(matchResult)
         if (groupValue == null || startIndex + groupValue.length > testString.length) {
             return -1
         }
@@ -65,7 +65,7 @@ open internal class BackReferenceSet(val referencedGroup: Int, val consCounter: 
     }
 
     override fun findBack(leftLimit: Int, rightLimit: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val groupValue = getReferencedGroupValue(matchResult)
+        konst groupValue = getReferencedGroupValue(matchResult)
         if (groupValue == null || leftLimit + groupValue.length > rightLimit) {
             return -1
         }
@@ -86,11 +86,11 @@ open internal class BackReferenceSet(val referencedGroup: Int, val consCounter: 
 
 
     protected fun getReferencedGroupValue(matchResult: MatchResultImpl) = matchResult.group(referencedGroup)
-    override val name: String
+    override konst name: String
             get() = "back reference: $referencedGroup"
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean {
-        val result = matchResult.getConsumed(consCounter) != 0
+        konst result = matchResult.getConsumed(consCounter) != 0
         matchResult.setConsumed(consCounter, -1)
         return result
     }

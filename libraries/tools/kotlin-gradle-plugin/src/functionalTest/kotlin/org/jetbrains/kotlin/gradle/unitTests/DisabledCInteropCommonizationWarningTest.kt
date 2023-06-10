@@ -24,15 +24,15 @@ import kotlin.test.assertTrue
 
 class DisabledCInteropCommonizationWarningTest {
 
-    private val project by lazy { ProjectBuilder.builder().build() as ProjectInternal }
+    private konst project by lazy { ProjectBuilder.builder().build() as ProjectInternal }
 
     @Test
     fun `test warning shows affected source sets, affected cinterops and how to hide the warning`() {
         project.enableCInteropCommonization(false)
         project.setupNativeTargetsWithCInterops()
-        project.evaluate()
+        project.ekonstuate()
 
-        val warningMessage = project.runHealthCheckAndGetWarning()
+        konst warningMessage = project.runHealthCheckAndGetWarning()
 
         assertNotNull(warningMessage, "Expected a warning message to be logged")
 
@@ -62,7 +62,7 @@ class DisabledCInteropCommonizationWarningTest {
         project.enableCInteropCommonization(false)
         project.setupNativeTargetsWithCInterops()
         project.propertiesExtension.set("$KOTLIN_MPP_ENABLE_CINTEROP_COMMONIZATION.nowarn", "true")
-        project.evaluate()
+        project.ekonstuate()
 
         assertNull(
             project.runHealthCheckAndGetWarning(),
@@ -74,7 +74,7 @@ class DisabledCInteropCommonizationWarningTest {
     fun `test warning is not shown when cinterop commonization is enabled`() {
         project.enableCInteropCommonization(true)
         project.setupNativeTargetsWithCInterops()
-        project.evaluate()
+        project.ekonstuate()
         assertNull(
             project.runHealthCheckAndGetWarning(),
             "Expected no error message shown when cinterop commonization is enabled"
@@ -86,7 +86,7 @@ class DisabledCInteropCommonizationWarningTest {
         project.enableCInteropCommonization(false)
         project.enableHierarchicalStructureByDefault(false)
         project.setupNativeTargetsWithCInterops()
-        project.evaluate()
+        project.ekonstuate()
         assertNull(
             project.runHealthCheckAndGetWarning(),
             "Expected no error message shown when hmpp is disabled"
@@ -97,7 +97,7 @@ class DisabledCInteropCommonizationWarningTest {
     fun `test warning is not shown when no cinterops are defined`() {
         project.enableCInteropCommonization(false)
         project.setupNativeTargets()
-        project.evaluate()
+        project.ekonstuate()
         assertNull(
             project.runHealthCheckAndGetWarning(),
             "Expected no error message shown when no cinterops are defined"
@@ -106,14 +106,14 @@ class DisabledCInteropCommonizationWarningTest {
 }
 
 private fun Project.setupNativeTargets(): List<KotlinNativeTarget> {
-    val kotlin = applyMultiplatformPlugin()
-    val linuxX64 = kotlin.linuxX64()
-    val linuxArm64 = kotlin.linuxArm64()
+    konst kotlin = applyMultiplatformPlugin()
+    konst linuxX64 = kotlin.linuxX64()
+    konst linuxArm64 = kotlin.linuxArm64()
 
-    val commonMain = kotlin.sourceSets.getByName("commonMain")
-    val nativeMain = kotlin.sourceSets.create("nativeMain")
-    val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-    val linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
+    konst commonMain = kotlin.sourceSets.getByName("commonMain")
+    konst nativeMain = kotlin.sourceSets.create("nativeMain")
+    konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+    konst linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
 
     nativeMain.dependsOn(commonMain)
     linuxX64Main.dependsOn(nativeMain)

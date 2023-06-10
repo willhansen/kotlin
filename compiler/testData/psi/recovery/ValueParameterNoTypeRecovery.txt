@@ -11,7 +11,7 @@ KtFile: ValueParameterNoTypeRecovery.kt
       VALUE_PARAMETER_LIST
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('a')
           PsiErrorElement:Parameters must have type annotation
@@ -24,7 +24,7 @@ KtFile: ValueParameterNoTypeRecovery.kt
         PsiElement(COMMA)(',')
         PsiWhiteSpace(' ')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('b')
           PsiWhiteSpace(' ')

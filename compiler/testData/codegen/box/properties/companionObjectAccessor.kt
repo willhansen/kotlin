@@ -12,15 +12,15 @@ public class J {
 
 class A {
     companion object {
-        val i1 = 1
-        val i2 = 2
+        konst i1 = 1
+        konst i2 = 2
     }
 }
 
 class B {
     companion object Named {
-        val i1 = 3
-        val i2 = 4
+        konst i1 = 3
+        konst i2 = 4
     }
 }
 

@@ -14,7 +14,7 @@ KtConstructorSymbol:
     type: JavaClass.InnerClass
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

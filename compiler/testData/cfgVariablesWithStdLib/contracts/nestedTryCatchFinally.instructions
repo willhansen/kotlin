@@ -95,7 +95,7 @@ sink:
 =====================
 == outerFinallyInitializes ==
 fun outerFinallyInitializes() {
-    val x: Int
+    konst x: Int
 
     try {
         myRun {
@@ -124,8 +124,8 @@ fun outerFinallyInitializes() {
 ---------------------
 L0:
   1 <START>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   INIT: in: {} out: {}              USE: in: {} out: {}
-  2 mark({ val x: Int try { myRun { try { x = innerComputation() } catch (e: java.lang.Exception) { log() } // possible reassignment if innerComputation finished x = 42 } // Definite reassignment here, cause can get here only if myRun finished x = outerComputation() } catch (e: java.lang.Exception) { // can catch exception thrown by the inner, so x can be not initialized log() } finally { // Possible reassignment (e.g. if everything finished) x = 42 } // Properly initialized x.inc() })
-    v(val x: Int)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             INIT: in: {} out: {x=D}
+  2 mark({ konst x: Int try { myRun { try { x = innerComputation() } catch (e: java.lang.Exception) { log() } // possible reassignment if innerComputation finished x = 42 } // Definite reassignment here, cause can get here only if myRun finished x = outerComputation() } catch (e: java.lang.Exception) { // can catch exception thrown by the inner, so x can be not initialized log() } finally { // Possible reassignment (e.g. if everything finished) x = 42 } // Properly initialized x.inc() })
+    v(konst x: Int)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             INIT: in: {} out: {x=D}
     mark(try { myRun { try { x = innerComputation() } catch (e: java.lang.Exception) { log() } // possible reassignment if innerComputation finished x = 42 } // Definite reassignment here, cause can get here only if myRun finished x = outerComputation() } catch (e: java.lang.Exception) { // can catch exception thrown by the inner, so x can be not initialized log() } finally { // Possible reassignment (e.g. if everything finished) x = 42 })                                                   INIT: in: {x=D} out: {x=D}
     jmp?(L2)
     jmp?(L3)
@@ -220,7 +220,7 @@ sink:
 =====================
 == innerFinalltInitializes ==
 fun innerFinalltInitializes() {
-    val x: Int
+    konst x: Int
     try {
         myRun {
             try {
@@ -244,8 +244,8 @@ fun innerFinalltInitializes() {
 ---------------------
 L0:
   1 <START>                                                                                                                                                                                                                                                                                INIT: in: {} out: {}              USE: in: {} out: {}
-  2 mark({ val x: Int try { myRun { try { innerComputation() } catch (e: java.lang.Exception) { log() } finally { x = 42 } } // Properly initialized x.inc() } catch (e: java.lang.Exception) { log() } // Still can be non-initialized (e.g. if x.inc() threw an exception) x.inc() })
-    v(val x: Int)                                                                                                                                                                                                                                                                          INIT: in: {} out: {x=D}
+  2 mark({ konst x: Int try { myRun { try { innerComputation() } catch (e: java.lang.Exception) { log() } finally { x = 42 } } // Properly initialized x.inc() } catch (e: java.lang.Exception) { log() } // Still can be non-initialized (e.g. if x.inc() threw an exception) x.inc() })
+    v(konst x: Int)                                                                                                                                                                                                                                                                          INIT: in: {} out: {x=D}
     mark(try { myRun { try { innerComputation() } catch (e: java.lang.Exception) { log() } finally { x = 42 } } // Properly initialized x.inc() } catch (e: java.lang.Exception) { log() })                                                                                                INIT: in: {x=D} out: {x=D}
     jmp?(L2)                                                                                                                                                                                                                                                                                                                 USE: in: {x=READ} out: {x=READ}
   3 mark({ myRun { try { innerComputation() } catch (e: java.lang.Exception) { log() } finally { x = 42 } } // Properly initialized x.inc() })

@@ -19,7 +19,7 @@ sink:
 =====================
 == test1 ==
 fun test1(nonLocal: String): String {
-    val localResult = doCall {
+    konst localResult = doCall {
         return nonLocal  //unreachable
     }
     return "NON_LOCAL_FAILED $localResult"  //unreachable
@@ -30,8 +30,8 @@ L0:
     v(nonLocal: String)
     magic[FAKE_INITIALIZER](nonLocal: String) -> <v0>
     w(nonLocal|<v0>)
-  2 mark({ val localResult = doCall { return nonLocal //unreachable } return "NON_LOCAL_FAILED $localResult" //unreachable })
-    v(val localResult = doCall { return nonLocal //unreachable })
+  2 mark({ konst localResult = doCall { return nonLocal //unreachable } return "NON_LOCAL_FAILED $localResult" //unreachable })
+    v(konst localResult = doCall { return nonLocal //unreachable })
     mark({ return nonLocal //unreachable })
     jmp?(L2)                                                                                                                     NEXT:[r({ return nonLocal //unreachable }) -> <v1>, d({ return nonLocal //unreachable })]
     d({ return nonLocal //unreachable })                                                                                         NEXT:[<SINK>]

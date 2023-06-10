@@ -25,18 +25,18 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFe10DescEnumEntrySymbol(
-    override val descriptor: ClassDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: ClassDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtEnumEntrySymbol(), KtFe10DescMemberSymbol<ClassDescriptor> {
-    private val enumDescriptor: ClassDescriptor
+    private konst enumDescriptor: ClassDescriptor
         get() = descriptor.containingDeclaration as ClassDescriptor
 
-    override val containingEnumClassIdIfNonLocal: ClassId?
+    override konst containingEnumClassIdIfNonLocal: ClassId?
         get() = withValidityAssertion { enumDescriptor.classId }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion {
-            val enumClassId = enumDescriptor.classId ?: return null
+            konst enumClassId = enumDescriptor.classId ?: return null
             CallableId(
                 packageName = enumClassId.packageFqName,
                 className = enumClassId.relativeClassName,
@@ -44,10 +44,10 @@ internal class KtFe10DescEnumEntrySymbol(
             )
         }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { enumDescriptor.defaultType.toKtType(analysisContext) }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { descriptor.name }
 
     context(KtAnalysisSession)
@@ -56,7 +56,7 @@ internal class KtFe10DescEnumEntrySymbol(
             return it
         }
 
-        val enumClassId = enumDescriptor.classId
+        konst enumClassId = enumDescriptor.classId
         if (enumClassId != null) {
             return KtFe10DescEnumEntrySymbolPointer(enumClassId, descriptor.name)
         }

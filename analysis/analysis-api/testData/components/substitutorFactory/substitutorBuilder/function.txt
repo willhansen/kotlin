@@ -10,7 +10,7 @@ KtFunctionLikeSignature:
   receiverType = kotlin.Int
   returnType = kotlin.collections.List<kotlin.String>
   symbol = /fooo(<extension receiver>: A, x: kotlin.collections.List<B>): C
-  valueParameters = [
+  konstueParameters = [
     KtVariableLikeSignature:
       name = x
       receiverType = null

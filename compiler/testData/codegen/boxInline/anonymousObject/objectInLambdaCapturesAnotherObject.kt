@@ -13,7 +13,7 @@ import test.*
 fun box(): String {
     var res = ""
     myRun {
-        val x = object {
+        konst x = object {
             fun foo() {
                 res = "OK"
             }

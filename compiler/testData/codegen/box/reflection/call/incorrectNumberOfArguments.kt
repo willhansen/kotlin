@@ -25,14 +25,14 @@ object O {
 }
 
 fun check(callable: KCallable<*>, vararg args: Any?) {
-    val expected = callable.parameters.size
-    val actual = args.size
+    konst expected = callable.parameters.size
+    konst actual = args.size
 
     if (expected == actual) {
         throw AssertionError("Bad test case: expected and actual number of arguments should differ (was $expected vs $actual)")
     }
 
-    val expectedExceptionMessage = "Callable expects $expected arguments, but $actual were provided."
+    konst expectedExceptionMessage = "Callable expects $expected arguments, but $actual were provided."
 
     try {
         callable.call(*args)
@@ -58,7 +58,7 @@ fun box(): String {
     check(O.getGetBaz(), null, "")
 
 
-    val f = ::foo
+    konst f = ::foo
     check(f, null)
     check(f, null, null)
     check(f, arrayOf<Any?>(null))
@@ -74,7 +74,7 @@ fun box(): String {
     check(f.setter, null, "")
 
 
-    val b = A().getBar()
+    konst b = A().getBar()
 
     check(b)
     check(b, null, null)
@@ -89,7 +89,7 @@ fun box(): String {
     check(b.setter, "")
 
 
-    val z = O.getBaz()
+    konst z = O.getBaz()
 
     check(z)
     check(z, null, null)

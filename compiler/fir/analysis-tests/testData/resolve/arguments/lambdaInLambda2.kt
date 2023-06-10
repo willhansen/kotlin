@@ -16,13 +16,13 @@ public class AdapterProcessor<T, S> {
 // FILE: main.kt
 
 interface PsiMethod {
-    val containingClass: PsiClass?
+    konst containingClass: PsiClass?
 }
 
 interface PsiClass
 
 fun test() {
-    val processor = AdapterProcessor<PsiMethod, PsiClass>(
+    konst processor = AdapterProcessor<PsiMethod, PsiClass>(
         Function { method: PsiMethod? -> method?.containingClass }
     )
 }

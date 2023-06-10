@@ -38,10 +38,10 @@ fun notinline(block: () -> Unit) {
 
 @kotlin.contracts.ExperimentalContracts
 class Test {
-    val a: String
-    val b: String
-    val c: String
-    val d: String
+    konst a: String
+    konst b: String
+    konst c: String
+    konst d: String
 
     init {
         inlineMe {
@@ -61,10 +61,10 @@ class Test {
 
 @kotlin.contracts.ExperimentalContracts
 class Test1 {
-    val a: String = ""
-    val b: String = ""
-    val c: String = ""
-    val d: String = ""
+    konst a: String = ""
+    konst b: String = ""
+    konst c: String = ""
+    konst d: String = ""
 
     init {
         inlineMe {
@@ -84,10 +84,10 @@ class Test1 {
 
 @kotlin.contracts.ExperimentalContracts
 class Test2 {
-    val a: String = ""
-    val b: String = ""
-    val c: String = ""
-    val d: String = ""
+    konst a: String = ""
+    konst b: String = ""
+    konst c: String = ""
+    konst d: String = ""
 
     init {
         var blackhole = ""
@@ -108,10 +108,10 @@ class Test2 {
 
 @kotlin.contracts.ExperimentalContracts
 class Test4 {
-    val a: String = ""
-    val b: String = ""
-    val c: String = ""
-    val d: String = ""
+    konst a: String = ""
+    konst b: String = ""
+    konst c: String = ""
+    konst d: String = ""
 
     init {
         var <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE!>blackhole<!>: String
@@ -132,21 +132,21 @@ class Test4 {
 
 @kotlin.contracts.ExperimentalContracts
 class Test5 {
-    val a: String
-    val b: String
-    val c: String
-    val d: String
+    konst a: String
+    konst b: String
+    konst c: String
+    konst d: String
 
-    val aInit = inlineMe {
+    konst aInit = inlineMe {
         a = "OK"
     }
-    val bInit = crossinlineMe {
+    konst bInit = crossinlineMe {
         <!CAPTURED_VAL_INITIALIZATION!>b<!> = "OK"
     }
-    val cInit = noinlineMe {
+    konst cInit = noinlineMe {
         <!CAPTURED_VAL_INITIALIZATION!>c<!> = "OK"
     }
-    val dInit = notinline {
+    konst dInit = notinline {
         <!CAPTURED_VAL_INITIALIZATION!>d<!> = "OK"
     }
 }

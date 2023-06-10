@@ -3,15 +3,15 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo(val x: Int) : Comparable<Foo> {
+konstue class Foo(konst x: Int) : Comparable<Foo> {
     override fun compareTo(other: Foo): Int {
         return 10
     }
 }
 
 fun box(): String {
-    val f1 = Foo(42)
-    val ff1: Comparable<Foo> = f1
+    konst f1 = Foo(42)
+    konst ff1: Comparable<Foo> = f1
 
     if (ff1.compareTo(f1) != 10) return "Fail"
 

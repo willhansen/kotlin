@@ -1,11 +1,11 @@
 // IGNORE_ANNOTATIONS
 
-inline class IT(val x: Int)
+inline class IT(konst x: Int)
 
-inline class IT2(val x: IT)
+inline class IT2(konst x: IT)
 
-inline class InlineMutableSet2(private val ms: MutableSet<IT2>) : MutableSet<IT2> {
-    override val size: Int get() = ms.size
+inline class InlineMutableSet2(private konst ms: MutableSet<IT2>) : MutableSet<IT2> {
+    override konst size: Int get() = ms.size
     override fun contains(element: IT2): Boolean = ms.contains(element)
     override fun containsAll(elements: Collection<IT2>): Boolean = ms.containsAll(elements)
     override fun isEmpty(): Boolean = ms.isEmpty()

@@ -36,7 +36,7 @@ NSObject* objc_support::internal::ObjectPtrImpl::get() const noexcept {
     return object_;
 }
 
-bool objc_support::internal::ObjectPtrImpl::valid() const noexcept {
+bool objc_support::internal::ObjectPtrImpl::konstid() const noexcept {
     return object_ != nil;
 }
 

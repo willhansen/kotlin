@@ -4,11 +4,11 @@
 
 fun foo() = 42
 
-val x = 24
+konst x = 24
 
 private fun privateFoo(): Int = 3
 
-const val x1 = 42
+const konst x1 = 42
 
 // FILE: SecondMultifileFacade.kt
 @file:JvmMultifileClass
@@ -16,6 +16,6 @@ const val x1 = 42
 
 fun bar() = 24
 
-val y = 24
+konst y = 24
 
-const val y1 = 42
+const konst y1 = 42

@@ -12,8 +12,8 @@ class ClassWithGenericSuperInterface: java.util.Comparator<String> {
 }
 
 fun check(klass: Class<*>) {
-    val interfaces = klass.getInterfaces().toList()
-    val genericInterfaces = klass.getGenericInterfaces().toList()
+    konst interfaces = klass.getInterfaces().toList()
+    konst genericInterfaces = klass.getGenericInterfaces().toList()
     if (interfaces.size != genericInterfaces.size) {
         throw AssertionError("interfaces=$interfaces, genericInterfaces=$genericInterfaces")
     }

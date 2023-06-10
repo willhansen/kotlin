@@ -37,23 +37,23 @@ class PreliminaryLoopVisitor private constructor() : AssignedVariablesSearcher()
         languageVersionSettings: LanguageVersionSettings
     ): DataFlowInfo {
         var resultFlowInfo = dataFlowInfo
-        val nonTrivialValues = THashSet<DataFlowValue>().apply {
+        konst nonTrivialValues = THashSet<DataFlowValue>().apply {
             addAll(dataFlowInfo.completeNullabilityInfo.iterator().map { it._1 })
             addAll(dataFlowInfo.completeTypeInfo.iterator().map { it._1 })
         }
-        val valueSetToClear = LinkedHashSet<DataFlowValue>()
-        for (value in nonTrivialValues) {
+        konst konstueSetToClear = LinkedHashSet<DataFlowValue>()
+        for (konstue in nonTrivialValues) {
             // Only stable variables are under interest here
-            val identifierInfo = value.identifierInfo
-            if (value.kind == DataFlowValue.Kind.STABLE_VARIABLE && identifierInfo is IdentifierInfo.Variable) {
-                val variableDescriptor = identifierInfo.variable
+            konst identifierInfo = konstue.identifierInfo
+            if (konstue.kind == DataFlowValue.Kind.STABLE_VARIABLE && identifierInfo is IdentifierInfo.Variable) {
+                konst variableDescriptor = identifierInfo.variable
                 if (variableDescriptor is LocalVariableDescriptor && hasWriters(variableDescriptor)) {
-                    valueSetToClear.add(value)
+                    konstueSetToClear.add(konstue)
                 }
             }
         }
-        for (valueToClear in valueSetToClear) {
-            resultFlowInfo = resultFlowInfo.clearValueInfo(valueToClear, languageVersionSettings)
+        for (konstueToClear in konstueSetToClear) {
+            resultFlowInfo = resultFlowInfo.clearValueInfo(konstueToClear, languageVersionSettings)
         }
         return resultFlowInfo
     }
@@ -62,14 +62,14 @@ class PreliminaryLoopVisitor private constructor() : AssignedVariablesSearcher()
 
         @JvmStatic
         fun visitLoop(loopExpression: KtLoopExpression): PreliminaryLoopVisitor {
-            val visitor = PreliminaryLoopVisitor()
+            konst visitor = PreliminaryLoopVisitor()
             loopExpression.accept(visitor, null)
             return visitor
         }
 
         @JvmStatic
         fun visitTryBlock(tryExpression: KtTryExpression): PreliminaryLoopVisitor {
-            val visitor = PreliminaryLoopVisitor()
+            konst visitor = PreliminaryLoopVisitor()
             tryExpression.tryBlock.accept(visitor, null)
             return visitor
         }
@@ -80,9 +80,9 @@ class PreliminaryLoopVisitor private constructor() : AssignedVariablesSearcher()
 
         @JvmStatic
         fun visitCatchBlocks(tryExpression: KtTryExpression, isBlockShouldBeVisited: List<Boolean>): PreliminaryLoopVisitor {
-            val catchClauses = tryExpression.catchClauses
+            konst catchClauses = tryExpression.catchClauses
             assert(catchClauses.size == isBlockShouldBeVisited.size)
-            val visitor = PreliminaryLoopVisitor()
+            konst visitor = PreliminaryLoopVisitor()
             catchClauses.zip(isBlockShouldBeVisited)
                 .filter { (_, shouldBeVisited) -> shouldBeVisited }
                 .forEach { (clause, _) -> clause.catchBody?.accept(visitor, null) }

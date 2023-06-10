@@ -19,11 +19,11 @@ annotation class AnnoWithCompanion() {
     companion object {
         fun foo() {}
         @JvmField
-        val x: Int = 42
+        konst x: Int = 42
     }
 }
 
-annotation class Anno(val p: String = "", val x: Array<Anno> = arrayOf(Anno(p = "a"), Anno(p = "b")))
+annotation class Anno(konst p: String = "", konst x: Array<Anno> = arrayOf(Anno(p = "a"), Anno(p = "b")))
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION,
         AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.EXPRESSION)
 @Retention(AnnotationRetention.SOURCE)
@@ -31,15 +31,15 @@ annotation class Anno(val p: String = "", val x: Array<Anno> = arrayOf(Anno(p = 
 @Deprecated("This anno is deprecated, use === instead", ReplaceWith("this === other"))
 annotation class Fancy
 
-annotation class ReplaceWith(val expression: String)
+annotation class ReplaceWith(konst expression: String)
 
-annotation class AnnotatedAttribute(@get:Anno val x: String)
+annotation class AnnotatedAttribute(@get:Anno konst x: String)
 
 annotation class Deprecated(
-    val message: String,
-    val replaceWith: ReplaceWith = ReplaceWith(""))
+    konst message: String,
+    konst replaceWith: ReplaceWith = ReplaceWith(""))
 
-annotation class Ann(val arg1: KClass<*>, val arg2: KClass<out Any>)
+annotation class Ann(konst arg1: KClass<*>, konst arg2: KClass<out Any>)
 
 
 @Anno class F: Runnable {
@@ -58,10 +58,10 @@ class Foo @Anno constructor(dependency: MyDependency) {
 
 @Ann(String::class, Int::class) class MyClass
 
-class Example(@field:Ann val foo: String,    // annotate Java field
-              @get:Ann val bar: String,      // annotate Java getter
-              @param:Ann val quux: String)   // annotate Java constructor parameter
+class Example(@field:Ann konst foo: String,    // annotate Java field
+              @get:Ann konst bar: String,      // annotate Java getter
+              @param:Ann konst quux: String)   // annotate Java constructor parameter
 
-class CtorAnnotations(@Anno val x: String, @param:Anno val y: String, val z: String)
+class CtorAnnotations(@Anno konst x: String, @param:Anno konst y: String, konst z: String)
 
 // COMPILATION_ERRORS

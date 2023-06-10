@@ -4,10 +4,10 @@
 import kotlinx.serialization.*
 
 @Serializable
-class Simple(val firstName: String, val lastName: String)
+class Simple(konst firstName: String, konst lastName: String)
 
 @Serializable
-data class Box<out T>(val boxed: T)
+data class Box<out T>(konst boxed: T)
 
 @Serializable
 object SerializableObject {}

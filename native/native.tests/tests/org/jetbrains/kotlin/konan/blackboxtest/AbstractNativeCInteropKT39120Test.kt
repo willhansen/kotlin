@@ -27,46 +27,46 @@ abstract class AbstractNativeCInteropKT39120Test : AbstractNativeCInteropBaseTes
         // KT-39120 is about Objective-C, so this test is for Apple hosts/targets only
         Assumptions.assumeTrue(targets.hostTarget.family.isAppleFamily && targets.testTarget.family.isAppleFamily)
 
-        val testPathFull = getAbsoluteFile(testPath)
-        val testDataDir = testPathFull.parentFile.parentFile
-        val def1File = testPathFull.resolve("pod1.def")
-        val def2File = testPathFull.resolve("pod2.def")
-        val golden1File = testPathFull.resolve("pod1.contents.gold.txt")
-        val golden2File = testPathFull.resolve("pod2.contents.gold.txt")
+        konst testPathFull = getAbsoluteFile(testPath)
+        konst testDataDir = testPathFull.parentFile.parentFile
+        konst def1File = testPathFull.resolve("pod1.def")
+        konst def2File = testPathFull.resolve("pod2.def")
+        konst golden1File = testPathFull.resolve("pod1.contents.gold.txt")
+        konst golden2File = testPathFull.resolve("pod2.contents.gold.txt")
 
-        val includeFrameworkArgs = TestCompilerArgs("-compiler-option", "-F${testDataDir.canonicalPath}")
-        val klib1: KLIB = cinteropToLibrary(targets, def1File, buildDir, includeFrameworkArgs).assertSuccess().resultingArtifact
-        val contents1 = klib1.getContents(kotlinNativeClassLoader.classLoader)
+        konst includeFrameworkArgs = TestCompilerArgs("-compiler-option", "-F${testDataDir.canonicalPath}")
+        konst klib1: KLIB = cinteropToLibrary(targets, def1File, buildDir, includeFrameworkArgs).assertSuccess().resultingArtifact
+        konst contents1 = klib1.getContents(kotlinNativeClassLoader.classLoader)
 
-        val expectedFiltered1Output = golden1File.readText()
-        val actualFiltered1Output = filterContentsOutput(contents1, " pod.Version|POD|class Pod")
+        konst expectedFiltered1Output = golden1File.readText()
+        konst actualFiltered1Output = filterContentsOutput(contents1, " pod.Version|POD|class Pod")
         assertEquals(StringUtilRt.convertLineSeparators(expectedFiltered1Output), StringUtilRt.convertLineSeparators(actualFiltered1Output))
 
-        val cinterop2ExtraArgs = TestCompilerArgs("-l", klib1.klibFile.canonicalPath, "-compiler-option", "-fmodules")
-        val klib2: KLIB = cinteropToLibrary(targets, def2File, buildDir, includeFrameworkArgs + cinterop2ExtraArgs).assertSuccess().resultingArtifact
-        val contents2 = klib2.getContents(kotlinNativeClassLoader.classLoader)
+        konst cinterop2ExtraArgs = TestCompilerArgs("-l", klib1.klibFile.canonicalPath, "-compiler-option", "-fmodules")
+        konst klib2: KLIB = cinteropToLibrary(targets, def2File, buildDir, includeFrameworkArgs + cinterop2ExtraArgs).assertSuccess().resultingArtifact
+        konst contents2 = klib2.getContents(kotlinNativeClassLoader.classLoader)
 
-        val expectedFiltered2Output = golden2File.readText()
-        val actualFiltered2Output = filterContentsOutput(contents2, " pod.Version|POD|class Pod")
+        konst expectedFiltered2Output = golden2File.readText()
+        konst actualFiltered2Output = filterContentsOutput(contents2, " pod.Version|POD|class Pod")
         assertEquals(StringUtilRt.convertLineSeparators(expectedFiltered2Output), StringUtilRt.convertLineSeparators(actualFiltered2Output))
 
-        val ktFile = testPathFull.resolve(DEFAULT_FILE_NAME)
+        konst ktFile = testPathFull.resolve(DEFAULT_FILE_NAME)
         if (ktFile.exists()) {
             // Just compile "main.kt" with klib1 and klib2, without running resulting executable
-            val module = TestModule.Exclusive(DEFAULT_MODULE_NAME, emptySet(), emptySet(), emptySet()).apply {
+            konst module = TestModule.Exclusive(DEFAULT_MODULE_NAME, emptySet(), emptySet(), emptySet()).apply {
                 files += TestFile.createCommitted(ktFile, this)
             }
-            val compilationResult = compileToExecutable(
+            konst compilationResult = compileToExecutable(
                 createTestCaseNoTestRun(module, TestCompilerArgs(listOf())),
                 klib1.asLibraryDependency(),
                 klib2.asLibraryDependency()
             )
 
-            val expectedFailureTxtFile = testPathFull.resolve("expected.compilation.failure.txt")
+            konst expectedFailureTxtFile = testPathFull.resolve("expected.compilation.failure.txt")
             if (expectedFailureTxtFile.exists()) {
                 assertIs<TestCompilationResult.CompilationToolFailure>(compilationResult)
-                val expectedFailureSubstring = expectedFailureTxtFile.readText()
-                val actualFailure = compilationResult.loggedData.toString()
+                konst expectedFailureSubstring = expectedFailureTxtFile.readText()
+                konst actualFailure = compilationResult.loggedData.toString()
                 assert(actualFailure.contains(expectedFailureSubstring)) {
                     "Expected failure substring:\n$expectedFailureSubstring\nActual failure logged data:\n$actualFailure"
                 }

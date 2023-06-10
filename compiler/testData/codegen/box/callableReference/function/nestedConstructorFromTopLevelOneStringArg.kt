@@ -1,5 +1,5 @@
 class A {
-    class Nested(val result: String)
+    class Nested(konst result: String)
 }
 
 fun box() = (A::Nested).let { it("OK") }.result

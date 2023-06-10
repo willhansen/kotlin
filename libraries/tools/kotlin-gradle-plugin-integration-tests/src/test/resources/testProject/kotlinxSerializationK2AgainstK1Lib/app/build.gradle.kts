@@ -22,7 +22,7 @@ dependencies {
     implementation("com.example.serialization_lib:serialization_lib:1.0")
 }
 
-val compileKotlin: KotlinCompile by tasks
+konst compileKotlin: KotlinCompile by tasks
 
 compileKotlin.compilerOptions {
     languageVersion.set(KotlinVersion.KOTLIN_2_0)

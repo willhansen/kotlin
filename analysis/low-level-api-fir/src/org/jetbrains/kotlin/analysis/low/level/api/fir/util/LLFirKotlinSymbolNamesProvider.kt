@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.name.Name
  * A [FirSymbolNamesProvider] that fetches top-level names from a Kotlin [declarationProvider].
  */
 internal open class LLFirKotlinSymbolNamesProvider(
-    private val declarationProvider: KotlinDeclarationProvider,
+    private konst declarationProvider: KotlinDeclarationProvider,
 ) : FirSymbolNamesProvider() {
     override fun getTopLevelClassifierNamesInPackage(packageFqName: FqName): Set<String> =
         declarationProvider

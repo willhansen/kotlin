@@ -15,13 +15,13 @@ interface Flow<out T> {
 }
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 fun <T> ReceiveChannel<T>.consumeAsFlow(): Flow<T> = ChannelAsFlow(this)
 
 class ChannelAsFlow<T>(
-    private val channel: ReceiveChannel<T>
+    private konst channel: ReceiveChannel<T>
 ): ChannelFlow<T>() {
     override suspend fun collect(collector: FlowCollector<T>) {
         collector.emit(channel.receive())
@@ -33,8 +33,8 @@ abstract class ChannelFlow<T>: Flow<T>
 var res = "FAIL"
 
 object StringCollector : FlowCollector<String> {
-    override suspend fun emit(value: String) {
-        res = value
+    override suspend fun emit(konstue: String) {
+        res = konstue
     }
 }
 

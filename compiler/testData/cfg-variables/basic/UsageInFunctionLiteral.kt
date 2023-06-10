@@ -1,7 +1,7 @@
 fun foo() {
-    val a = 1
-    val f = { x: Int ->
-        val y = x + a
+    konst a = 1
+    konst f = { x: Int ->
+        konst y = x + a
         use(a)
     }
 }

@@ -1,74 +1,74 @@
-public val <T> kotlin.Array<out T>.indices: kotlin.ranges.IntRange { get; }
+public konst <T> kotlin.Array<out T>.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.BooleanArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.BooleanArray.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.ByteArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.ByteArray.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.CharArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.CharArray.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.DoubleArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.DoubleArray.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.FloatArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.FloatArray.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.IntArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.IntArray.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.LongArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.LongArray.indices: kotlin.ranges.IntRange { get; }
 
-public val kotlin.ShortArray.indices: kotlin.ranges.IntRange { get; }
-
-@kotlin.SinceKotlin(version = "1.3")
-@kotlin.ExperimentalUnsignedTypes
-public val kotlin.UByteArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.ShortArray.indices: kotlin.ranges.IntRange { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
-public val kotlin.UIntArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.UByteArray.indices: kotlin.ranges.IntRange { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
-public val kotlin.ULongArray.indices: kotlin.ranges.IntRange { get; }
+public konst kotlin.UIntArray.indices: kotlin.ranges.IntRange { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
-public val kotlin.UShortArray.indices: kotlin.ranges.IntRange { get; }
-
-public val kotlin.collections.Collection<*>.indices: kotlin.ranges.IntRange { get; }
-
-public val <T> kotlin.Array<out T>.lastIndex: kotlin.Int { get; }
-
-public val kotlin.BooleanArray.lastIndex: kotlin.Int { get; }
-
-public val kotlin.ByteArray.lastIndex: kotlin.Int { get; }
-
-public val kotlin.CharArray.lastIndex: kotlin.Int { get; }
-
-public val kotlin.DoubleArray.lastIndex: kotlin.Int { get; }
-
-public val kotlin.FloatArray.lastIndex: kotlin.Int { get; }
-
-public val kotlin.IntArray.lastIndex: kotlin.Int { get; }
-
-public val kotlin.LongArray.lastIndex: kotlin.Int { get; }
-
-public val kotlin.ShortArray.lastIndex: kotlin.Int { get; }
+public konst kotlin.ULongArray.indices: kotlin.ranges.IntRange { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
-public val kotlin.UByteArray.lastIndex: kotlin.Int { get; }
+public konst kotlin.UShortArray.indices: kotlin.ranges.IntRange { get; }
+
+public konst kotlin.collections.Collection<*>.indices: kotlin.ranges.IntRange { get; }
+
+public konst <T> kotlin.Array<out T>.lastIndex: kotlin.Int { get; }
+
+public konst kotlin.BooleanArray.lastIndex: kotlin.Int { get; }
+
+public konst kotlin.ByteArray.lastIndex: kotlin.Int { get; }
+
+public konst kotlin.CharArray.lastIndex: kotlin.Int { get; }
+
+public konst kotlin.DoubleArray.lastIndex: kotlin.Int { get; }
+
+public konst kotlin.FloatArray.lastIndex: kotlin.Int { get; }
+
+public konst kotlin.IntArray.lastIndex: kotlin.Int { get; }
+
+public konst kotlin.LongArray.lastIndex: kotlin.Int { get; }
+
+public konst kotlin.ShortArray.lastIndex: kotlin.Int { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
-public val kotlin.UIntArray.lastIndex: kotlin.Int { get; }
+public konst kotlin.UByteArray.lastIndex: kotlin.Int { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
-public val kotlin.ULongArray.lastIndex: kotlin.Int { get; }
+public konst kotlin.UIntArray.lastIndex: kotlin.Int { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
-public val kotlin.UShortArray.lastIndex: kotlin.Int { get; }
+public konst kotlin.ULongArray.lastIndex: kotlin.Int { get; }
 
-public val <T> kotlin.collections.List<T>.lastIndex: kotlin.Int { get; }
+@kotlin.SinceKotlin(version = "1.3")
+@kotlin.ExperimentalUnsignedTypes
+public konst kotlin.UShortArray.lastIndex: kotlin.Int { get; }
+
+public konst <T> kotlin.collections.List<T>.lastIndex: kotlin.Int { get; }
 
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable(crossinline iterator: () -> kotlin.collections.Iterator<T>): kotlin.collections.Iterable<T>
@@ -502,83 +502,83 @@ public inline fun <T, K, V> kotlin.collections.Iterable<T>.associate(transform: 
 
 public inline fun <T, K> kotlin.Array<out T>.associateBy(keySelector: (T) -> K): kotlin.collections.Map<K, T>
 
-public inline fun <T, K, V> kotlin.Array<out T>.associateBy(keySelector: (T) -> K, valueTransform: (T) -> V): kotlin.collections.Map<K, V>
+public inline fun <T, K, V> kotlin.Array<out T>.associateBy(keySelector: (T) -> K, konstueTransform: (T) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K> kotlin.BooleanArray.associateBy(keySelector: (kotlin.Boolean) -> K): kotlin.collections.Map<K, kotlin.Boolean>
 
-public inline fun <K, V> kotlin.BooleanArray.associateBy(keySelector: (kotlin.Boolean) -> K, valueTransform: (kotlin.Boolean) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.BooleanArray.associateBy(keySelector: (kotlin.Boolean) -> K, konstueTransform: (kotlin.Boolean) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K> kotlin.ByteArray.associateBy(keySelector: (kotlin.Byte) -> K): kotlin.collections.Map<K, kotlin.Byte>
 
-public inline fun <K, V> kotlin.ByteArray.associateBy(keySelector: (kotlin.Byte) -> K, valueTransform: (kotlin.Byte) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.ByteArray.associateBy(keySelector: (kotlin.Byte) -> K, konstueTransform: (kotlin.Byte) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K> kotlin.CharArray.associateBy(keySelector: (kotlin.Char) -> K): kotlin.collections.Map<K, kotlin.Char>
 
-public inline fun <K, V> kotlin.CharArray.associateBy(keySelector: (kotlin.Char) -> K, valueTransform: (kotlin.Char) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.CharArray.associateBy(keySelector: (kotlin.Char) -> K, konstueTransform: (kotlin.Char) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K> kotlin.DoubleArray.associateBy(keySelector: (kotlin.Double) -> K): kotlin.collections.Map<K, kotlin.Double>
 
-public inline fun <K, V> kotlin.DoubleArray.associateBy(keySelector: (kotlin.Double) -> K, valueTransform: (kotlin.Double) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.DoubleArray.associateBy(keySelector: (kotlin.Double) -> K, konstueTransform: (kotlin.Double) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K> kotlin.FloatArray.associateBy(keySelector: (kotlin.Float) -> K): kotlin.collections.Map<K, kotlin.Float>
 
-public inline fun <K, V> kotlin.FloatArray.associateBy(keySelector: (kotlin.Float) -> K, valueTransform: (kotlin.Float) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.FloatArray.associateBy(keySelector: (kotlin.Float) -> K, konstueTransform: (kotlin.Float) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K> kotlin.IntArray.associateBy(keySelector: (kotlin.Int) -> K): kotlin.collections.Map<K, kotlin.Int>
 
-public inline fun <K, V> kotlin.IntArray.associateBy(keySelector: (kotlin.Int) -> K, valueTransform: (kotlin.Int) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.IntArray.associateBy(keySelector: (kotlin.Int) -> K, konstueTransform: (kotlin.Int) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K> kotlin.LongArray.associateBy(keySelector: (kotlin.Long) -> K): kotlin.collections.Map<K, kotlin.Long>
 
-public inline fun <K, V> kotlin.LongArray.associateBy(keySelector: (kotlin.Long) -> K, valueTransform: (kotlin.Long) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.LongArray.associateBy(keySelector: (kotlin.Long) -> K, konstueTransform: (kotlin.Long) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <K> kotlin.ShortArray.associateBy(keySelector: (kotlin.Short) -> K): kotlin.collections.Map<K, kotlin.Short>
 
-public inline fun <K, V> kotlin.ShortArray.associateBy(keySelector: (kotlin.Short) -> K, valueTransform: (kotlin.Short) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.ShortArray.associateBy(keySelector: (kotlin.Short) -> K, konstueTransform: (kotlin.Short) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <T, K> kotlin.collections.Iterable<T>.associateBy(keySelector: (T) -> K): kotlin.collections.Map<K, T>
 
-public inline fun <T, K, V> kotlin.collections.Iterable<T>.associateBy(keySelector: (T) -> K, valueTransform: (T) -> V): kotlin.collections.Map<K, V>
+public inline fun <T, K, V> kotlin.collections.Iterable<T>.associateBy(keySelector: (T) -> K, konstueTransform: (T) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <T, K, M : kotlin.collections.MutableMap<in K, in T>> kotlin.Array<out T>.associateByTo(destination: M, keySelector: (T) -> K): M
 
-public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.Array<out T>.associateByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M
+public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.Array<out T>.associateByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Boolean>> kotlin.BooleanArray.associateByTo(destination: M, keySelector: (kotlin.Boolean) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.BooleanArray.associateByTo(destination: M, keySelector: (kotlin.Boolean) -> K, valueTransform: (kotlin.Boolean) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.BooleanArray.associateByTo(destination: M, keySelector: (kotlin.Boolean) -> K, konstueTransform: (kotlin.Boolean) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Byte>> kotlin.ByteArray.associateByTo(destination: M, keySelector: (kotlin.Byte) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.ByteArray.associateByTo(destination: M, keySelector: (kotlin.Byte) -> K, valueTransform: (kotlin.Byte) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.ByteArray.associateByTo(destination: M, keySelector: (kotlin.Byte) -> K, konstueTransform: (kotlin.Byte) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Char>> kotlin.CharArray.associateByTo(destination: M, keySelector: (kotlin.Char) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.CharArray.associateByTo(destination: M, keySelector: (kotlin.Char) -> K, valueTransform: (kotlin.Char) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.CharArray.associateByTo(destination: M, keySelector: (kotlin.Char) -> K, konstueTransform: (kotlin.Char) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Double>> kotlin.DoubleArray.associateByTo(destination: M, keySelector: (kotlin.Double) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.DoubleArray.associateByTo(destination: M, keySelector: (kotlin.Double) -> K, valueTransform: (kotlin.Double) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.DoubleArray.associateByTo(destination: M, keySelector: (kotlin.Double) -> K, konstueTransform: (kotlin.Double) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Float>> kotlin.FloatArray.associateByTo(destination: M, keySelector: (kotlin.Float) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.FloatArray.associateByTo(destination: M, keySelector: (kotlin.Float) -> K, valueTransform: (kotlin.Float) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.FloatArray.associateByTo(destination: M, keySelector: (kotlin.Float) -> K, konstueTransform: (kotlin.Float) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Int>> kotlin.IntArray.associateByTo(destination: M, keySelector: (kotlin.Int) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.IntArray.associateByTo(destination: M, keySelector: (kotlin.Int) -> K, valueTransform: (kotlin.Int) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.IntArray.associateByTo(destination: M, keySelector: (kotlin.Int) -> K, konstueTransform: (kotlin.Int) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Long>> kotlin.LongArray.associateByTo(destination: M, keySelector: (kotlin.Long) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.LongArray.associateByTo(destination: M, keySelector: (kotlin.Long) -> K, valueTransform: (kotlin.Long) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.LongArray.associateByTo(destination: M, keySelector: (kotlin.Long) -> K, konstueTransform: (kotlin.Long) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, in kotlin.Short>> kotlin.ShortArray.associateByTo(destination: M, keySelector: (kotlin.Short) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.ShortArray.associateByTo(destination: M, keySelector: (kotlin.Short) -> K, valueTransform: (kotlin.Short) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.ShortArray.associateByTo(destination: M, keySelector: (kotlin.Short) -> K, konstueTransform: (kotlin.Short) -> V): M
 
 public inline fun <T, K, M : kotlin.collections.MutableMap<in K, in T>> kotlin.collections.Iterable<T>.associateByTo(destination: M, keySelector: (T) -> K): M
 
-public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.collections.Iterable<T>.associateByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M
+public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.collections.Iterable<T>.associateByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M
 
 public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.Array<out T>.associateTo(destination: M, transform: (T) -> kotlin.Pair<K, V>): M
 
@@ -601,120 +601,120 @@ public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.S
 public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.collections.Iterable<T>.associateTo(destination: M, transform: (T) -> kotlin.Pair<K, V>): M
 
 @kotlin.SinceKotlin(version = "1.4")
-public inline fun <K, V> kotlin.Array<out K>.associateWith(valueSelector: (K) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.Array<out K>.associateWith(konstueSelector: (K) -> V): kotlin.collections.Map<K, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.BooleanArray.associateWith(valueSelector: (kotlin.Boolean) -> V): kotlin.collections.Map<kotlin.Boolean, V>
+public inline fun <V> kotlin.BooleanArray.associateWith(konstueSelector: (kotlin.Boolean) -> V): kotlin.collections.Map<kotlin.Boolean, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.ByteArray.associateWith(valueSelector: (kotlin.Byte) -> V): kotlin.collections.Map<kotlin.Byte, V>
+public inline fun <V> kotlin.ByteArray.associateWith(konstueSelector: (kotlin.Byte) -> V): kotlin.collections.Map<kotlin.Byte, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.CharArray.associateWith(valueSelector: (kotlin.Char) -> V): kotlin.collections.Map<kotlin.Char, V>
+public inline fun <V> kotlin.CharArray.associateWith(konstueSelector: (kotlin.Char) -> V): kotlin.collections.Map<kotlin.Char, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.DoubleArray.associateWith(valueSelector: (kotlin.Double) -> V): kotlin.collections.Map<kotlin.Double, V>
+public inline fun <V> kotlin.DoubleArray.associateWith(konstueSelector: (kotlin.Double) -> V): kotlin.collections.Map<kotlin.Double, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.FloatArray.associateWith(valueSelector: (kotlin.Float) -> V): kotlin.collections.Map<kotlin.Float, V>
+public inline fun <V> kotlin.FloatArray.associateWith(konstueSelector: (kotlin.Float) -> V): kotlin.collections.Map<kotlin.Float, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.IntArray.associateWith(valueSelector: (kotlin.Int) -> V): kotlin.collections.Map<kotlin.Int, V>
+public inline fun <V> kotlin.IntArray.associateWith(konstueSelector: (kotlin.Int) -> V): kotlin.collections.Map<kotlin.Int, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.LongArray.associateWith(valueSelector: (kotlin.Long) -> V): kotlin.collections.Map<kotlin.Long, V>
+public inline fun <V> kotlin.LongArray.associateWith(konstueSelector: (kotlin.Long) -> V): kotlin.collections.Map<kotlin.Long, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.ShortArray.associateWith(valueSelector: (kotlin.Short) -> V): kotlin.collections.Map<kotlin.Short, V>
-
-@kotlin.SinceKotlin(version = "1.4")
-@kotlin.ExperimentalUnsignedTypes
-@kotlin.internal.InlineOnly
-public inline fun <V> kotlin.UByteArray.associateWith(valueSelector: (kotlin.UByte) -> V): kotlin.collections.Map<kotlin.UByte, V>
+public inline fun <V> kotlin.ShortArray.associateWith(konstueSelector: (kotlin.Short) -> V): kotlin.collections.Map<kotlin.Short, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.UIntArray.associateWith(valueSelector: (kotlin.UInt) -> V): kotlin.collections.Map<kotlin.UInt, V>
+public inline fun <V> kotlin.UByteArray.associateWith(konstueSelector: (kotlin.UByte) -> V): kotlin.collections.Map<kotlin.UByte, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.ULongArray.associateWith(valueSelector: (kotlin.ULong) -> V): kotlin.collections.Map<kotlin.ULong, V>
+public inline fun <V> kotlin.UIntArray.associateWith(konstueSelector: (kotlin.UInt) -> V): kotlin.collections.Map<kotlin.UInt, V>
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V> kotlin.UShortArray.associateWith(valueSelector: (kotlin.UShort) -> V): kotlin.collections.Map<kotlin.UShort, V>
+public inline fun <V> kotlin.ULongArray.associateWith(konstueSelector: (kotlin.ULong) -> V): kotlin.collections.Map<kotlin.ULong, V>
+
+@kotlin.SinceKotlin(version = "1.4")
+@kotlin.ExperimentalUnsignedTypes
+@kotlin.internal.InlineOnly
+public inline fun <V> kotlin.UShortArray.associateWith(konstueSelector: (kotlin.UShort) -> V): kotlin.collections.Map<kotlin.UShort, V>
 
 @kotlin.SinceKotlin(version = "1.3")
-public inline fun <K, V> kotlin.collections.Iterable<K>.associateWith(valueSelector: (K) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.collections.Iterable<K>.associateWith(konstueSelector: (K) -> V): kotlin.collections.Map<K, V>
 
 @kotlin.SinceKotlin(version = "1.4")
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.Array<out K>.associateWithTo(destination: M, valueSelector: (K) -> V): M
-
-@kotlin.SinceKotlin(version = "1.4")
-@kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Boolean, in V>> kotlin.BooleanArray.associateWithTo(destination: M, valueSelector: (kotlin.Boolean) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.Array<out K>.associateWithTo(destination: M, konstueSelector: (K) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Byte, in V>> kotlin.ByteArray.associateWithTo(destination: M, valueSelector: (kotlin.Byte) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Boolean, in V>> kotlin.BooleanArray.associateWithTo(destination: M, konstueSelector: (kotlin.Boolean) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Char, in V>> kotlin.CharArray.associateWithTo(destination: M, valueSelector: (kotlin.Char) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Byte, in V>> kotlin.ByteArray.associateWithTo(destination: M, konstueSelector: (kotlin.Byte) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Double, in V>> kotlin.DoubleArray.associateWithTo(destination: M, valueSelector: (kotlin.Double) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Char, in V>> kotlin.CharArray.associateWithTo(destination: M, konstueSelector: (kotlin.Char) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Float, in V>> kotlin.FloatArray.associateWithTo(destination: M, valueSelector: (kotlin.Float) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Double, in V>> kotlin.DoubleArray.associateWithTo(destination: M, konstueSelector: (kotlin.Double) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Int, in V>> kotlin.IntArray.associateWithTo(destination: M, valueSelector: (kotlin.Int) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Float, in V>> kotlin.FloatArray.associateWithTo(destination: M, konstueSelector: (kotlin.Float) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Long, in V>> kotlin.LongArray.associateWithTo(destination: M, valueSelector: (kotlin.Long) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Int, in V>> kotlin.IntArray.associateWithTo(destination: M, konstueSelector: (kotlin.Int) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Short, in V>> kotlin.ShortArray.associateWithTo(destination: M, valueSelector: (kotlin.Short) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Long, in V>> kotlin.LongArray.associateWithTo(destination: M, konstueSelector: (kotlin.Long) -> V): M
+
+@kotlin.SinceKotlin(version = "1.4")
+@kotlin.internal.InlineOnly
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.Short, in V>> kotlin.ShortArray.associateWithTo(destination: M, konstueSelector: (kotlin.Short) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.UByte, in V>> kotlin.UByteArray.associateWithTo(destination: M, valueSelector: (kotlin.UByte) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.UByte, in V>> kotlin.UByteArray.associateWithTo(destination: M, konstueSelector: (kotlin.UByte) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.UInt, in V>> kotlin.UIntArray.associateWithTo(destination: M, valueSelector: (kotlin.UInt) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.UInt, in V>> kotlin.UIntArray.associateWithTo(destination: M, konstueSelector: (kotlin.UInt) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.ULong, in V>> kotlin.ULongArray.associateWithTo(destination: M, valueSelector: (kotlin.ULong) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.ULong, in V>> kotlin.ULongArray.associateWithTo(destination: M, konstueSelector: (kotlin.ULong) -> V): M
 
 @kotlin.SinceKotlin(version = "1.4")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.UShort, in V>> kotlin.UShortArray.associateWithTo(destination: M, valueSelector: (kotlin.UShort) -> V): M
+public inline fun <V, M : kotlin.collections.MutableMap<in kotlin.UShort, in V>> kotlin.UShortArray.associateWithTo(destination: M, konstueSelector: (kotlin.UShort) -> V): M
 
 @kotlin.SinceKotlin(version = "1.3")
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.collections.Iterable<K>.associateWithTo(destination: M, valueSelector: (K) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.collections.Iterable<K>.associateWithTo(destination: M, konstueSelector: (K) -> V): M
 
 @kotlin.jvm.JvmName(name = "averageOfByte")
 public fun kotlin.Array<out kotlin.Byte>.average(): kotlin.Double
@@ -1043,11 +1043,11 @@ public operator fun kotlin.ByteArray.contains(element: kotlin.Byte): kotlin.Bool
 
 public operator fun kotlin.CharArray.contains(element: kotlin.Char): kotlin.Boolean
 
-@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero values and will be removed soon. Use 'any { it == element }' instead to continue using this behavior, or '.asList().contains(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "any { it == element }", imports = {}))
+@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero konstues and will be removed soon. Use 'any { it == element }' instead to continue using this behavior, or '.asList().contains(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "any { it == element }", imports = {}))
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.6", hiddenSince = "1.7", warningSince = "1.4")
 public operator fun kotlin.DoubleArray.contains(element: kotlin.Double): kotlin.Boolean
 
-@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero values and will be removed soon. Use 'any { it == element }' instead to continue using this behavior, or '.asList().contains(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "any { it == element }", imports = {}))
+@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero konstues and will be removed soon. Use 'any { it == element }' instead to continue using this behavior, or '.asList().contains(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "any { it == element }", imports = {}))
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.6", hiddenSince = "1.7", warningSince = "1.4")
 public operator fun kotlin.FloatArray.contains(element: kotlin.Float): kotlin.Boolean
 
@@ -1074,7 +1074,7 @@ K> kotlin.collections.Map<out K, *>.containsKey(key: K): kotlin.Boolean
 
 @kotlin.internal.InlineOnly
 public inline fun <K, @kotlin.internal.OnlyInputTypes
-V> kotlin.collections.Map<K, V>.containsValue(value: V): kotlin.Boolean
+V> kotlin.collections.Map<K, V>.containsValue(konstue: V): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.1")
 @kotlin.internal.LowPriorityInOverloadResolution
@@ -1888,7 +1888,7 @@ public fun kotlin.ULongArray.fill(element: kotlin.ULong, fromIndex: kotlin.Int =
 public fun kotlin.UShortArray.fill(element: kotlin.UShort, fromIndex: kotlin.Int = ..., toIndex: kotlin.Int = ...): kotlin.Unit
 
 @kotlin.SinceKotlin(version = "1.2")
-public fun <T> kotlin.collections.MutableList<T>.fill(value: T): kotlin.Unit
+public fun <T> kotlin.collections.MutableList<T>.fill(konstue: T): kotlin.Unit
 
 public inline fun <T> kotlin.Array<out T>.filter(predicate: (T) -> kotlin.Boolean): kotlin.collections.List<T>
 
@@ -3120,39 +3120,39 @@ public inline operator fun <V, V1 : V> kotlin.collections.MutableMap<in kotlin.S
 
 public inline fun <T, K> kotlin.Array<out T>.groupBy(keySelector: (T) -> K): kotlin.collections.Map<K, kotlin.collections.List<T>>
 
-public inline fun <T, K, V> kotlin.Array<out T>.groupBy(keySelector: (T) -> K, valueTransform: (T) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <T, K, V> kotlin.Array<out T>.groupBy(keySelector: (T) -> K, konstueTransform: (T) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K> kotlin.BooleanArray.groupBy(keySelector: (kotlin.Boolean) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Boolean>>
 
-public inline fun <K, V> kotlin.BooleanArray.groupBy(keySelector: (kotlin.Boolean) -> K, valueTransform: (kotlin.Boolean) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.BooleanArray.groupBy(keySelector: (kotlin.Boolean) -> K, konstueTransform: (kotlin.Boolean) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K> kotlin.ByteArray.groupBy(keySelector: (kotlin.Byte) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Byte>>
 
-public inline fun <K, V> kotlin.ByteArray.groupBy(keySelector: (kotlin.Byte) -> K, valueTransform: (kotlin.Byte) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.ByteArray.groupBy(keySelector: (kotlin.Byte) -> K, konstueTransform: (kotlin.Byte) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K> kotlin.CharArray.groupBy(keySelector: (kotlin.Char) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Char>>
 
-public inline fun <K, V> kotlin.CharArray.groupBy(keySelector: (kotlin.Char) -> K, valueTransform: (kotlin.Char) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.CharArray.groupBy(keySelector: (kotlin.Char) -> K, konstueTransform: (kotlin.Char) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K> kotlin.DoubleArray.groupBy(keySelector: (kotlin.Double) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Double>>
 
-public inline fun <K, V> kotlin.DoubleArray.groupBy(keySelector: (kotlin.Double) -> K, valueTransform: (kotlin.Double) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.DoubleArray.groupBy(keySelector: (kotlin.Double) -> K, konstueTransform: (kotlin.Double) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K> kotlin.FloatArray.groupBy(keySelector: (kotlin.Float) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Float>>
 
-public inline fun <K, V> kotlin.FloatArray.groupBy(keySelector: (kotlin.Float) -> K, valueTransform: (kotlin.Float) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.FloatArray.groupBy(keySelector: (kotlin.Float) -> K, konstueTransform: (kotlin.Float) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K> kotlin.IntArray.groupBy(keySelector: (kotlin.Int) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Int>>
 
-public inline fun <K, V> kotlin.IntArray.groupBy(keySelector: (kotlin.Int) -> K, valueTransform: (kotlin.Int) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.IntArray.groupBy(keySelector: (kotlin.Int) -> K, konstueTransform: (kotlin.Int) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K> kotlin.LongArray.groupBy(keySelector: (kotlin.Long) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Long>>
 
-public inline fun <K, V> kotlin.LongArray.groupBy(keySelector: (kotlin.Long) -> K, valueTransform: (kotlin.Long) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.LongArray.groupBy(keySelector: (kotlin.Long) -> K, konstueTransform: (kotlin.Long) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <K> kotlin.ShortArray.groupBy(keySelector: (kotlin.Short) -> K): kotlin.collections.Map<K, kotlin.collections.List<kotlin.Short>>
 
-public inline fun <K, V> kotlin.ShortArray.groupBy(keySelector: (kotlin.Short) -> K, valueTransform: (kotlin.Short) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.ShortArray.groupBy(keySelector: (kotlin.Short) -> K, konstueTransform: (kotlin.Short) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
@@ -3162,7 +3162,7 @@ public inline fun <K> kotlin.UByteArray.groupBy(keySelector: (kotlin.UByte) -> K
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V> kotlin.UByteArray.groupBy(keySelector: (kotlin.UByte) -> K, valueTransform: (kotlin.UByte) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.UByteArray.groupBy(keySelector: (kotlin.UByte) -> K, konstueTransform: (kotlin.UByte) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
@@ -3172,7 +3172,7 @@ public inline fun <K> kotlin.UIntArray.groupBy(keySelector: (kotlin.UInt) -> K):
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V> kotlin.UIntArray.groupBy(keySelector: (kotlin.UInt) -> K, valueTransform: (kotlin.UInt) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.UIntArray.groupBy(keySelector: (kotlin.UInt) -> K, konstueTransform: (kotlin.UInt) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
@@ -3182,7 +3182,7 @@ public inline fun <K> kotlin.ULongArray.groupBy(keySelector: (kotlin.ULong) -> K
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V> kotlin.ULongArray.groupBy(keySelector: (kotlin.ULong) -> K, valueTransform: (kotlin.ULong) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.ULongArray.groupBy(keySelector: (kotlin.ULong) -> K, konstueTransform: (kotlin.ULong) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
@@ -3192,47 +3192,47 @@ public inline fun <K> kotlin.UShortArray.groupBy(keySelector: (kotlin.UShort) ->
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V> kotlin.UShortArray.groupBy(keySelector: (kotlin.UShort) -> K, valueTransform: (kotlin.UShort) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <K, V> kotlin.UShortArray.groupBy(keySelector: (kotlin.UShort) -> K, konstueTransform: (kotlin.UShort) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <T, K> kotlin.collections.Iterable<T>.groupBy(keySelector: (T) -> K): kotlin.collections.Map<K, kotlin.collections.List<T>>
 
-public inline fun <T, K, V> kotlin.collections.Iterable<T>.groupBy(keySelector: (T) -> K, valueTransform: (T) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <T, K, V> kotlin.collections.Iterable<T>.groupBy(keySelector: (T) -> K, konstueTransform: (T) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <T, K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<T>>> kotlin.Array<out T>.groupByTo(destination: M, keySelector: (T) -> K): M
 
-public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.Array<out T>.groupByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M
+public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.Array<out T>.groupByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Boolean>>> kotlin.BooleanArray.groupByTo(destination: M, keySelector: (kotlin.Boolean) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.BooleanArray.groupByTo(destination: M, keySelector: (kotlin.Boolean) -> K, valueTransform: (kotlin.Boolean) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.BooleanArray.groupByTo(destination: M, keySelector: (kotlin.Boolean) -> K, konstueTransform: (kotlin.Boolean) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Byte>>> kotlin.ByteArray.groupByTo(destination: M, keySelector: (kotlin.Byte) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.ByteArray.groupByTo(destination: M, keySelector: (kotlin.Byte) -> K, valueTransform: (kotlin.Byte) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.ByteArray.groupByTo(destination: M, keySelector: (kotlin.Byte) -> K, konstueTransform: (kotlin.Byte) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Char>>> kotlin.CharArray.groupByTo(destination: M, keySelector: (kotlin.Char) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.CharArray.groupByTo(destination: M, keySelector: (kotlin.Char) -> K, valueTransform: (kotlin.Char) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.CharArray.groupByTo(destination: M, keySelector: (kotlin.Char) -> K, konstueTransform: (kotlin.Char) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Double>>> kotlin.DoubleArray.groupByTo(destination: M, keySelector: (kotlin.Double) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.DoubleArray.groupByTo(destination: M, keySelector: (kotlin.Double) -> K, valueTransform: (kotlin.Double) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.DoubleArray.groupByTo(destination: M, keySelector: (kotlin.Double) -> K, konstueTransform: (kotlin.Double) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Float>>> kotlin.FloatArray.groupByTo(destination: M, keySelector: (kotlin.Float) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.FloatArray.groupByTo(destination: M, keySelector: (kotlin.Float) -> K, valueTransform: (kotlin.Float) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.FloatArray.groupByTo(destination: M, keySelector: (kotlin.Float) -> K, konstueTransform: (kotlin.Float) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Int>>> kotlin.IntArray.groupByTo(destination: M, keySelector: (kotlin.Int) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.IntArray.groupByTo(destination: M, keySelector: (kotlin.Int) -> K, valueTransform: (kotlin.Int) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.IntArray.groupByTo(destination: M, keySelector: (kotlin.Int) -> K, konstueTransform: (kotlin.Int) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Long>>> kotlin.LongArray.groupByTo(destination: M, keySelector: (kotlin.Long) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.LongArray.groupByTo(destination: M, keySelector: (kotlin.Long) -> K, valueTransform: (kotlin.Long) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.LongArray.groupByTo(destination: M, keySelector: (kotlin.Long) -> K, konstueTransform: (kotlin.Long) -> V): M
 
 public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<kotlin.Short>>> kotlin.ShortArray.groupByTo(destination: M, keySelector: (kotlin.Short) -> K): M
 
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.ShortArray.groupByTo(destination: M, keySelector: (kotlin.Short) -> K, valueTransform: (kotlin.Short) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.ShortArray.groupByTo(destination: M, keySelector: (kotlin.Short) -> K, konstueTransform: (kotlin.Short) -> V): M
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
@@ -3242,7 +3242,7 @@ public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.UByteArray.groupByTo(destination: M, keySelector: (kotlin.UByte) -> K, valueTransform: (kotlin.UByte) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.UByteArray.groupByTo(destination: M, keySelector: (kotlin.UByte) -> K, konstueTransform: (kotlin.UByte) -> V): M
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
@@ -3252,7 +3252,7 @@ public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.UIntArray.groupByTo(destination: M, keySelector: (kotlin.UInt) -> K, valueTransform: (kotlin.UInt) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.UIntArray.groupByTo(destination: M, keySelector: (kotlin.UInt) -> K, konstueTransform: (kotlin.UInt) -> V): M
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
@@ -3262,7 +3262,7 @@ public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.ULongArray.groupByTo(destination: M, keySelector: (kotlin.ULong) -> K, valueTransform: (kotlin.ULong) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.ULongArray.groupByTo(destination: M, keySelector: (kotlin.ULong) -> K, konstueTransform: (kotlin.ULong) -> V): M
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
@@ -3272,11 +3272,11 @@ public inline fun <K, M : kotlin.collections.MutableMap<in K, kotlin.collections
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.UShortArray.groupByTo(destination: M, keySelector: (kotlin.UShort) -> K, valueTransform: (kotlin.UShort) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.UShortArray.groupByTo(destination: M, keySelector: (kotlin.UShort) -> K, konstueTransform: (kotlin.UShort) -> V): M
 
 public inline fun <T, K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<T>>> kotlin.collections.Iterable<T>.groupByTo(destination: M, keySelector: (T) -> K): M
 
-public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.collections.Iterable<T>.groupByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M
+public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.collections.Iterable<T>.groupByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M
 
 @kotlin.SinceKotlin(version = "1.1")
 public inline fun <T, K> kotlin.Array<out T>.groupingBy(crossinline keySelector: (T) -> K): kotlin.collections.Grouping<T, K>
@@ -3305,11 +3305,11 @@ public fun kotlin.ByteArray.indexOf(element: kotlin.Byte): kotlin.Int
 
 public fun kotlin.CharArray.indexOf(element: kotlin.Char): kotlin.Int
 
-@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero values and will be removed soon. Use 'indexOfFirst { it == element }' instead to continue using this behavior, or '.asList().indexOf(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "indexOfFirst { it == element }", imports = {}))
+@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero konstues and will be removed soon. Use 'indexOfFirst { it == element }' instead to continue using this behavior, or '.asList().indexOf(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "indexOfFirst { it == element }", imports = {}))
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.6", hiddenSince = "1.7", warningSince = "1.4")
 public fun kotlin.DoubleArray.indexOf(element: kotlin.Double): kotlin.Int
 
-@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero values and will be removed soon. Use 'indexOfFirst { it == element }' instead to continue using this behavior, or '.asList().indexOf(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "indexOfFirst { it == element }", imports = {}))
+@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero konstues and will be removed soon. Use 'indexOfFirst { it == element }' instead to continue using this behavior, or '.asList().indexOf(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "indexOfFirst { it == element }", imports = {}))
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.6", hiddenSince = "1.7", warningSince = "1.4")
 public fun kotlin.FloatArray.indexOf(element: kotlin.Float): kotlin.Int
 
@@ -3664,11 +3664,11 @@ public fun kotlin.ByteArray.lastIndexOf(element: kotlin.Byte): kotlin.Int
 
 public fun kotlin.CharArray.lastIndexOf(element: kotlin.Char): kotlin.Int
 
-@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero values and will be removed soon. Use 'indexOfLast { it == element }' instead to continue using this behavior, or '.asList().lastIndexOf(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "indexOfLast { it == element }", imports = {}))
+@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero konstues and will be removed soon. Use 'indexOfLast { it == element }' instead to continue using this behavior, or '.asList().lastIndexOf(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "indexOfLast { it == element }", imports = {}))
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.6", hiddenSince = "1.7", warningSince = "1.4")
 public fun kotlin.DoubleArray.lastIndexOf(element: kotlin.Double): kotlin.Int
 
-@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero values and will be removed soon. Use 'indexOfLast { it == element }' instead to continue using this behavior, or '.asList().lastIndexOf(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "indexOfLast { it == element }", imports = {}))
+@kotlin.Deprecated(message = "The function has unclear behavior when searching for NaN or zero konstues and will be removed soon. Use 'indexOfLast { it == element }' instead to continue using this behavior, or '.asList().lastIndexOf(element: T)' to get the same search behavior as in a list.", replaceWith = kotlin.ReplaceWith(expression = "indexOfLast { it == element }", imports = {}))
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.6", hiddenSince = "1.7", warningSince = "1.4")
 public fun kotlin.FloatArray.lastIndexOf(element: kotlin.Float): kotlin.Int
 
@@ -7699,10 +7699,10 @@ public inline fun <R> kotlin.UShortArray.scanIndexed(initial: R, operation: (ind
 public inline fun <T, R> kotlin.collections.Iterable<T>.scanIndexed(initial: R, operation: (index: kotlin.Int, acc: R, T) -> R): kotlin.collections.List<R>
 
 @kotlin.internal.InlineOnly
-public inline operator fun <K, V> kotlin.collections.MutableMap<K, V>.set(key: K, value: V): kotlin.Unit
+public inline operator fun <K, V> kotlin.collections.MutableMap<K, V>.set(key: K, konstue: V): kotlin.Unit
 
 @kotlin.internal.InlineOnly
-public inline operator fun <V> kotlin.collections.MutableMap<in kotlin.String, in V>.setValue(thisRef: kotlin.Any?, property: kotlin.reflect.KProperty<*>, value: V): kotlin.Unit
+public inline operator fun <V> kotlin.collections.MutableMap<in kotlin.String, in V>.setValue(thisRef: kotlin.Any?, property: kotlin.reflect.KProperty<*>, konstue: V): kotlin.Unit
 
 @kotlin.SinceKotlin(version = "1.4")
 public fun <T> kotlin.Array<T>.shuffle(): kotlin.Unit
@@ -9978,7 +9978,7 @@ public inline fun <T, R> kotlin.collections.Iterable<T>.zipWithNext(transform: (
 public abstract class AbstractCollection<out E> : kotlin.collections.Collection<E> {
     protected constructor AbstractCollection<out E>()
 
-    public abstract override val size: kotlin.Int { get; }
+    public abstract override konst size: kotlin.Int { get; }
 
     public open override operator fun contains(element: E): kotlin.Boolean
 
@@ -10007,14 +10007,14 @@ public abstract class AbstractIterator<T> : kotlin.collections.Iterator<T> {
 
     public open override operator fun next(): T
 
-    protected final fun setNext(value: T): kotlin.Unit
+    protected final fun setNext(konstue: T): kotlin.Unit
 }
 
 @kotlin.SinceKotlin(version = "1.1")
 public abstract class AbstractList<out E> : kotlin.collections.AbstractCollection<E>, kotlin.collections.List<E> {
     protected constructor AbstractList<out E>()
 
-    public abstract override val size: kotlin.Int { get; }
+    public abstract override konst size: kotlin.Int { get; }
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -10039,15 +10039,15 @@ public abstract class AbstractList<out E> : kotlin.collections.AbstractCollectio
 public abstract class AbstractMap<K, out V> : kotlin.collections.Map<K, V> {
     protected constructor AbstractMap<K, out V>()
 
-    public open override val keys: kotlin.collections.Set<K> { get; }
+    public open override konst keys: kotlin.collections.Set<K> { get; }
 
-    public open override val size: kotlin.Int { get; }
+    public open override konst size: kotlin.Int { get; }
 
-    public open override val values: kotlin.collections.Collection<V> { get; }
+    public open override konst konstues: kotlin.collections.Collection<V> { get; }
 
     public open override fun containsKey(key: K): kotlin.Boolean
 
-    public open override fun containsValue(value: V): kotlin.Boolean
+    public open override fun containsValue(konstue: V): kotlin.Boolean
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -10125,13 +10125,13 @@ public abstract class AbstractMutableList<E> : kotlin.collections.AbstractMutabl
 public abstract class AbstractMutableMap<K, V> : kotlin.collections.AbstractMap<K, V>, kotlin.collections.MutableMap<K, V> {
     protected constructor AbstractMutableMap<K, V>()
 
-    public open override val keys: kotlin.collections.MutableSet<K> { get; }
+    public open override konst keys: kotlin.collections.MutableSet<K> { get; }
 
-    public open override val values: kotlin.collections.MutableCollection<V> { get; }
+    public open override konst konstues: kotlin.collections.MutableCollection<V> { get; }
 
     public open override fun clear(): kotlin.Unit
 
-    public abstract override fun put(key: K, value: V): V?
+    public abstract override fun put(key: K, konstue: V): V?
 
     public open override fun putAll(from: kotlin.collections.Map<out K, V>): kotlin.Unit
 
@@ -10228,7 +10228,7 @@ public open class ArrayList<E> : kotlin.collections.AbstractMutableList<E>, kotl
 
     public constructor ArrayList<E>(elements: kotlin.collections.Collection<E>)
 
-    public open override val size: kotlin.Int { get; }
+    public open override konst size: kotlin.Int { get; }
 
     public open override fun add(element: E): kotlin.Boolean
 
@@ -10314,7 +10314,7 @@ public abstract class CharIterator : kotlin.collections.Iterator<kotlin.Char> {
 /*∆*/ }
 /*∆*/ 
 public interface Collection<out E> : kotlin.collections.Iterable<E> {
-    public abstract val size: kotlin.Int { get; }
+    public abstract konst size: kotlin.Int { get; }
 
     public abstract operator fun contains(element: E): kotlin.Boolean
 
@@ -10326,7 +10326,7 @@ public interface Collection<out E> : kotlin.collections.Iterable<E> {
 }
 
 /*∆*/ public interface Collection<out E> : kotlin.collections.Iterable<E> {
-/*∆*/     public abstract val size: kotlin.Int { get; }
+/*∆*/     public abstract konst size: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public abstract operator fun contains(element: E): kotlin.Boolean
 /*∆*/ 
@@ -10385,19 +10385,19 @@ public open class HashMap<K, V> : kotlin.collections.AbstractMutableMap<K, V>, k
 
     public constructor HashMap<K, V>(original: kotlin.collections.Map<out K, V>)
 
-    public open override val entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<K, V>> { get; }
+    public open override konst entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<K, V>> { get; }
 
-    public open override val size: kotlin.Int { get; }
+    public open override konst size: kotlin.Int { get; }
 
     public open override fun clear(): kotlin.Unit
 
     public open override fun containsKey(key: K): kotlin.Boolean
 
-    public open override fun containsValue(value: V): kotlin.Boolean
+    public open override fun containsValue(konstue: V): kotlin.Boolean
 
     public open override operator fun get(key: K): V?
 
-    public open override fun put(key: K, value: V): V?
+    public open override fun put(key: K, konstue: V): V?
 
     public open override fun remove(key: K): V?
 }
@@ -10411,7 +10411,7 @@ public open class HashSet<E> : kotlin.collections.AbstractMutableSet<E>, kotlin.
 
     public constructor HashSet<E>(elements: kotlin.collections.Collection<E>)
 
-    public open override val size: kotlin.Int { get; }
+    public open override konst size: kotlin.Int { get; }
 
     public open override fun add(element: E): kotlin.Boolean
 
@@ -10427,17 +10427,17 @@ public open class HashSet<E> : kotlin.collections.AbstractMutableSet<E>, kotlin.
 }
 
 public final data class IndexedValue<out T> {
-    public constructor IndexedValue<out T>(index: kotlin.Int, value: T)
+    public constructor IndexedValue<out T>(index: kotlin.Int, konstue: T)
 
-    public final val index: kotlin.Int { get; }
+    public final konst index: kotlin.Int { get; }
 
-    public final val value: T { get; }
+    public final konst konstue: T { get; }
 
     public final operator fun component1(): kotlin.Int
 
     public final operator fun component2(): T
 
-    public final fun copy(index: kotlin.Int = ..., value: T = ...): kotlin.collections.IndexedValue<T>
+    public final fun copy(index: kotlin.Int = ..., konstue: T = ...): kotlin.collections.IndexedValue<T>
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -10491,17 +10491,17 @@ public open class LinkedHashMap<K, V> : kotlin.collections.HashMap<K, V>, kotlin
 
     public constructor LinkedHashMap<K, V>(original: kotlin.collections.Map<out K, V>)
 
-    public open override val size: kotlin.Int { get; }
+    public open override konst size: kotlin.Int { get; }
 
     public open override fun clear(): kotlin.Unit
 
     public open override fun containsKey(key: K): kotlin.Boolean
 
-    public open override fun containsValue(value: V): kotlin.Boolean
+    public open override fun containsValue(konstue: V): kotlin.Boolean
 
     public open override operator fun get(key: K): V?
 
-    public open override fun put(key: K, value: V): V?
+    public open override fun put(key: K, konstue: V): V?
 
     public open override fun remove(key: K): V?
 }
@@ -10517,7 +10517,7 @@ public open class LinkedHashSet<E> : kotlin.collections.HashSet<E>, kotlin.colle
 }
 
 public interface List<out E> : kotlin.collections.Collection<E> {
-    public abstract override val size: kotlin.Int { get; }
+    public abstract override konst size: kotlin.Int { get; }
 
     public abstract override operator fun contains(element: E): kotlin.Boolean
 
@@ -10541,7 +10541,7 @@ public interface List<out E> : kotlin.collections.Collection<E> {
 }
 
 /*∆*/ public interface List<out E> : kotlin.collections.Collection<E> {
-/*∆*/     public abstract override val size: kotlin.Int { get; }
+/*∆*/     public abstract override konst size: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public abstract override operator fun contains(element: E): kotlin.Boolean
 /*∆*/ 
@@ -10609,50 +10609,50 @@ public abstract class LongIterator : kotlin.collections.Iterator<kotlin.Long> {
 /*∆*/ }
 /*∆*/ 
 public interface Map<K, out V> {
-    public abstract val entries: kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>> { get; }
+    public abstract konst entries: kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>> { get; }
 
-    public abstract val keys: kotlin.collections.Set<K> { get; }
+    public abstract konst keys: kotlin.collections.Set<K> { get; }
 
-    public abstract val size: kotlin.Int { get; }
+    public abstract konst size: kotlin.Int { get; }
 
-    public abstract val values: kotlin.collections.Collection<V> { get; }
+    public abstract konst konstues: kotlin.collections.Collection<V> { get; }
 
     public abstract fun containsKey(key: K): kotlin.Boolean
 
-    public abstract fun containsValue(value: V): kotlin.Boolean
+    public abstract fun containsValue(konstue: V): kotlin.Boolean
 
     public abstract operator fun get(key: K): V?
 
     public abstract fun isEmpty(): kotlin.Boolean
 
     public interface Entry<out K, out V> {
-        public abstract val key: K { get; }
+        public abstract konst key: K { get; }
 
-        public abstract val value: V { get; }
+        public abstract konst konstue: V { get; }
     }
 }
 
 /*∆*/ public interface Map<K, out V> {
-/*∆*/     public abstract val entries: kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>> { get; }
+/*∆*/     public abstract konst entries: kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>> { get; }
 /*∆*/ 
-/*∆*/     public abstract val keys: kotlin.collections.Set<K> { get; }
+/*∆*/     public abstract konst keys: kotlin.collections.Set<K> { get; }
 /*∆*/ 
-/*∆*/     public abstract val size: kotlin.Int { get; }
+/*∆*/     public abstract konst size: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public abstract val values: kotlin.collections.Collection<V> { get; }
+/*∆*/     public abstract konst konstues: kotlin.collections.Collection<V> { get; }
 /*∆*/ 
 /*∆*/     public abstract fun containsKey(key: K): kotlin.Boolean
 /*∆*/ 
-/*∆*/     public abstract fun containsValue(value: V): kotlin.Boolean
+/*∆*/     public abstract fun containsValue(konstue: V): kotlin.Boolean
 /*∆*/ 
 /*∆*/     public abstract operator fun get(key: K): V?
 /*∆*/ 
 /*∆*/     public abstract fun isEmpty(): kotlin.Boolean
 /*∆*/ 
 /*∆*/     public interface Entry<out K, out V> {
-/*∆*/         public abstract val key: K { get; }
+/*∆*/         public abstract konst key: K { get; }
 /*∆*/ 
-/*∆*/         public abstract val value: V { get; }
+/*∆*/         public abstract konst konstue: V { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -10785,15 +10785,15 @@ public interface MutableListIterator<T> : kotlin.collections.ListIterator<T>, ko
 /*∆*/ }
 /*∆*/ 
 public interface MutableMap<K, V> : kotlin.collections.Map<K, V> {
-    public abstract override val entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<K, V>> { get; }
+    public abstract override konst entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<K, V>> { get; }
 
-    public abstract override val keys: kotlin.collections.MutableSet<K> { get; }
+    public abstract override konst keys: kotlin.collections.MutableSet<K> { get; }
 
-    public abstract override val values: kotlin.collections.MutableCollection<V> { get; }
+    public abstract override konst konstues: kotlin.collections.MutableCollection<V> { get; }
 
     public abstract fun clear(): kotlin.Unit
 
-    public abstract fun put(key: K, value: V): V?
+    public abstract fun put(key: K, konstue: V): V?
 
     public abstract fun putAll(from: kotlin.collections.Map<out K, V>): kotlin.Unit
 
@@ -10805,15 +10805,15 @@ public interface MutableMap<K, V> : kotlin.collections.Map<K, V> {
 }
 
 /*∆*/ public interface MutableMap<K, V> : kotlin.collections.Map<K, V> {
-/*∆*/     public abstract override val entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<K, V>> { get; }
+/*∆*/     public abstract override konst entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<K, V>> { get; }
 /*∆*/ 
-/*∆*/     public abstract override val keys: kotlin.collections.MutableSet<K> { get; }
+/*∆*/     public abstract override konst keys: kotlin.collections.MutableSet<K> { get; }
 /*∆*/ 
-/*∆*/     public abstract override val values: kotlin.collections.MutableCollection<V> { get; }
+/*∆*/     public abstract override konst konstues: kotlin.collections.MutableCollection<V> { get; }
 /*∆*/ 
 /*∆*/     public abstract fun clear(): kotlin.Unit
 /*∆*/ 
-/*∆*/     public abstract fun put(key: K, value: V): V?
+/*∆*/     public abstract fun put(key: K, konstue: V): V?
 /*∆*/ 
 /*∆*/     public abstract fun putAll(from: kotlin.collections.Map<out K, V>): kotlin.Unit
 /*∆*/ 
@@ -10860,7 +10860,7 @@ public interface RandomAccess {
 }
 
 public interface Set<out E> : kotlin.collections.Collection<E> {
-    public abstract override val size: kotlin.Int { get; }
+    public abstract override konst size: kotlin.Int { get; }
 
     public abstract override operator fun contains(element: E): kotlin.Boolean
 
@@ -10872,7 +10872,7 @@ public interface Set<out E> : kotlin.collections.Collection<E> {
 }
 
 /*∆*/ public interface Set<out E> : kotlin.collections.Collection<E> {
-/*∆*/     public abstract override val size: kotlin.Int { get; }
+/*∆*/     public abstract override konst size: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public abstract override operator fun contains(element: E): kotlin.Boolean
 /*∆*/ 

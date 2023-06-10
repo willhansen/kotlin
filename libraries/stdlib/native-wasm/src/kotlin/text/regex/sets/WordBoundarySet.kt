@@ -28,11 +28,11 @@ package kotlin.text.regex
 internal class WordBoundarySet(var positive: Boolean) : SimpleSet() {
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val curChar = if (startIndex >= testString.length) ' ' else testString[startIndex]
-        val prevChar = if (startIndex == 0) ' ' else testString[startIndex - 1]
+        konst curChar = if (startIndex >= testString.length) ' ' else testString[startIndex]
+        konst prevChar = if (startIndex == 0) ' ' else testString[startIndex - 1]
 
-        val right = curChar == ' ' || isSpace(curChar, startIndex, testString)
-        val left = prevChar == ' ' || isSpace(prevChar, startIndex - 1, testString)
+        konst right = curChar == ' ' || isSpace(curChar, startIndex, testString)
+        konst left = prevChar == ' ' || isSpace(prevChar, startIndex - 1, testString)
 
         return if (left xor right xor positive)
             -1
@@ -42,7 +42,7 @@ internal class WordBoundarySet(var positive: Boolean) : SimpleSet() {
 
     /** Returns false, because word boundary does not consumes any characters and do not move string index. */
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean = false
-    override val name: String
+    override konst name: String
         get() = "WordBoundarySet"
 
     private fun isSpace(char: Char, startIndex: Int, testString: CharSequence): Boolean {
@@ -52,7 +52,7 @@ internal class WordBoundarySet(var positive: Boolean) : SimpleSet() {
         if (char.category == CharCategory.NON_SPACING_MARK) {
             var index = startIndex
             while (--index >= 0) {
-                val ch = testString[index]
+                konst ch = testString[index]
                 when {
                     ch.isLetterOrDigit() -> return false
                     char.category != CharCategory.NON_SPACING_MARK -> return true

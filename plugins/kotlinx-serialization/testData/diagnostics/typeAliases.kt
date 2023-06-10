@@ -9,15 +9,15 @@ typealias MyString = String
 typealias MyLong = Long
 
 @Serializable
-class Box<T>(val t: T)
+class Box<T>(konst t: T)
 
 typealias MyBox<T> = Box<T>
 
 @Serializable
 class Foo(
-    val s: MyString,
-    val l: MyLong,
-    val b: Box<MyLong>,
-    val bb: MyBox<Long>,
-    val bbb: MyBox<MyLong>
+    konst s: MyString,
+    konst l: MyLong,
+    konst b: Box<MyLong>,
+    konst bb: MyBox<Long>,
+    konst bbb: MyBox<MyLong>
 )

@@ -24,10 +24,10 @@ object JvmIdePlatformKind : IdePlatformKind() {
     override fun platformByCompilerArguments(arguments: CommonCompilerArguments): TargetPlatform? {
         if (arguments !is K2JVMCompilerArguments) return null
 
-        val jvmTargetDescription = arguments.jvmTarget
+        konst jvmTargetDescription = arguments.jvmTarget
             ?: return JvmPlatforms.defaultJvmPlatform
 
-        val jvmTarget = JvmTarget.values()
+        konst jvmTarget = JvmTarget.konstues()
             .firstOrNull { VersionComparatorUtil.COMPARATOR.compare(it.description, jvmTargetDescription) >= 0 }
             ?: return JvmPlatforms.defaultJvmPlatform
 
@@ -44,21 +44,21 @@ object JvmIdePlatformKind : IdePlatformKind() {
         return K2JVMCompilerArguments()
     }
 
-    val platforms: List<TargetPlatform> = JvmTarget.values()
+    konst platforms: List<TargetPlatform> = JvmTarget.konstues()
         .map { ver -> JvmPlatforms.jvmPlatformByTargetVersion(ver) } + listOf(JvmPlatforms.unspecifiedJvmPlatform)
 
-    override val defaultPlatform get() = JvmPlatforms.defaultJvmPlatform
+    override konst defaultPlatform get() = JvmPlatforms.defaultJvmPlatform
 
-    override val argumentsClass get() = K2JVMCompilerArguments::class.java
+    override konst argumentsClass get() = K2JVMCompilerArguments::class.java
 
-    override val name get() = "JVM"
+    override konst name get() = "JVM"
 
     @Deprecated(
         message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
         level = DeprecationLevel.ERROR
     )
-    data class Platform(override val version: JvmTarget) : IdePlatform<JvmIdePlatformKind, K2JVMCompilerArguments>() {
-        override val kind get() = JvmIdePlatformKind
+    data class Platform(override konst version: JvmTarget) : IdePlatform<JvmIdePlatformKind, K2JVMCompilerArguments>() {
+        override konst kind get() = JvmIdePlatformKind
 
         override fun createArguments(init: K2JVMCompilerArguments.() -> Unit) = K2JVMCompilerArguments()
             .apply(init)
@@ -66,12 +66,12 @@ object JvmIdePlatformKind : IdePlatformKind() {
     }
 }
 
-val IdePlatformKind?.isJvm
+konst IdePlatformKind?.isJvm
     get() = this is JvmIdePlatformKind
 
 @Deprecated(
     message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
     level = DeprecationLevel.ERROR
 )
-val IdePlatform<*, *>.isJvm: Boolean
+konst IdePlatform<*, *>.isJvm: Boolean
     get() = this is JvmIdePlatformKind.Platform

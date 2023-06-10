@@ -5,7 +5,7 @@ enum class Test {
 fun peek() = Test.A
 
 fun box(): String {
-    val x = when (val type = peek()) {
+    konst x = when (konst type = peek()) {
         Test.A -> "OK"
         else -> "other"
     }

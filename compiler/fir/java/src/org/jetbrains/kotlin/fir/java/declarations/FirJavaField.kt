@@ -31,20 +31,20 @@ import kotlin.contracts.contract
 import kotlin.properties.Delegates
 
 class FirJavaField @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin.Java,
-    override val symbol: FirFieldSymbol,
-    override val name: Name,
+    override konst source: KtSourceElement?,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin.Java,
+    override konst symbol: FirFieldSymbol,
+    override konst name: Name,
     resolvePhase: FirResolvePhase,
     override var returnTypeRef: FirTypeRef,
     override var status: FirDeclarationStatus,
-    override val isVar: Boolean,
+    override konst isVar: Boolean,
     annotationBuilder: () -> List<FirAnnotation>,
-    override val typeParameters: MutableList<FirTypeParameterRef>,
+    override konst typeParameters: MutableList<FirTypeParameterRef>,
     lazyInitializer: Lazy<FirExpression?>,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
-    override val attributes: FirDeclarationAttributes,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst attributes: FirDeclarationAttributes,
 ) : FirField() {
     internal var lazyInitializer: Lazy<FirExpression?> = lazyInitializer
         private set
@@ -56,23 +56,23 @@ class FirJavaField @FirImplementationDetail constructor(
         this.resolveState = resolvePhase.asResolveState()
     }
 
-    override val receiverParameter: FirReceiverParameter? get() = null
-    override val isVal: Boolean get() = !isVar
-    override val getter: FirPropertyAccessor? get() = null
-    override val setter: FirPropertyAccessor? get() = null
-    override val backingField: FirBackingField? = null
-    override val controlFlowGraphReference: FirControlFlowGraphReference? get() = null
+    override konst receiverParameter: FirReceiverParameter? get() = null
+    override konst isVal: Boolean get() = !isVar
+    override konst getter: FirPropertyAccessor? get() = null
+    override konst setter: FirPropertyAccessor? get() = null
+    override konst backingField: FirBackingField? = null
+    override konst controlFlowGraphReference: FirControlFlowGraphReference? get() = null
 
-    override val annotations: List<FirAnnotation> by lazy { annotationBuilder() }
+    override konst annotations: List<FirAnnotation> by lazy { annotationBuilder() }
 
-    override val initializer: FirExpression?
-        get() = lazyInitializer.value
+    override konst initializer: FirExpression?
+        get() = lazyInitializer.konstue
 
-    override val deprecationsProvider: DeprecationsProvider by lazy {
+    override konst deprecationsProvider: DeprecationsProvider by lazy {
         annotations.getDeprecationsProviderFromAnnotations(moduleData.session, fromJava = true)
     }
 
-    override val contextReceivers: List<FirContextReceiver>
+    override konst contextReceivers: List<FirContextReceiver>
         get() = emptyList()
 
     override fun <D> transformReturnTypeRef(transformer: FirTransformer<D>, data: D): FirField {
@@ -142,7 +142,7 @@ class FirJavaField @FirImplementationDetail constructor(
         return this
     }
 
-    override val delegate: FirExpression?
+    override konst delegate: FirExpression?
         get() = null
 
     override var containerSource: DeserializedContainerSource? = null
@@ -207,7 +207,7 @@ internal class FirJavaFieldBuilder : FirFieldBuilder() {
     @Deprecated("Modification of 'origin' has no impact for FirJavaFieldBuilder", level = DeprecationLevel.HIDDEN)
     override var origin: FirDeclarationOrigin
         get() = throw IllegalStateException()
-        set(@Suppress("UNUSED_PARAMETER") value) {
+        set(@Suppress("UNUSED_PARAMETER") konstue) {
             throw IllegalStateException()
         }
 }

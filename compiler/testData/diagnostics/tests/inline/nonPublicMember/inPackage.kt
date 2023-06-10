@@ -1,10 +1,10 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_EXPRESSION -UNUSED_PARAMETER -UNUSED_VARIABLE -NOTHING_TO_INLINE
 
-private val privateProperty = 11;
+private konst privateProperty = 11;
 private fun privateFun() {}
 
-internal val internalProperty = 11;
+internal konst internalProperty = 11;
 internal fun internalFun() {}
 
 public inline fun test() {

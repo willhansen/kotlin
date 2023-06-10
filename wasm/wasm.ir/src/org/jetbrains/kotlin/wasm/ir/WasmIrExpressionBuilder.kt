@@ -28,7 +28,7 @@ private fun WasmOp.pureStacklessInstruction() = when (this) {
  * TODO merge into [WasmExpressionBuilder]
  */
 class WasmIrExpressionBuilder(
-    val expression: MutableList<WasmInstr>
+    konst expression: MutableList<WasmInstr>
 ) : WasmExpressionBuilder() {
 
     private var eatEverythingUntilLevel: Int? = null
@@ -40,7 +40,7 @@ class WasmIrExpressionBuilder(
     }
 
     private fun getCurrentEatLevel(op: WasmOp): Int? {
-        val eatLevel = eatEverythingUntilLevel ?: return null
+        konst eatLevel = eatEverythingUntilLevel ?: return null
         if (numberOfNestedBlocks == eatLevel && op.isInCfgNode()) {
             eatEverythingUntilLevel = null
             return null
@@ -53,7 +53,7 @@ class WasmIrExpressionBuilder(
     }
 
     override fun buildInstr(op: WasmOp, location: SourceLocation, vararg immediates: WasmImmediate) {
-        val currentEatUntil = getCurrentEatLevel(op)
+        konst currentEatUntil = getCurrentEatLevel(op)
         if (currentEatUntil != null) {
             if (currentEatUntil <= numberOfNestedBlocks) return
         } else {
@@ -69,8 +69,8 @@ class WasmIrExpressionBuilder(
             return
         }
 
-        val lastInstruction = expression[lastInstructionIndex]
-        val lastOperator = lastInstruction.operator
+        konst lastInstruction = expression[lastInstructionIndex]
+        konst lastOperator = lastInstruction.operator
 
         // droppable instructions + drop/unreachable -> nothing
         if ((op == WasmOp.DROP || op == WasmOp.UNREACHABLE) && lastOperator.pureStacklessInstruction()) {
@@ -80,9 +80,9 @@ class WasmIrExpressionBuilder(
 
         // local set and local get for the same argument -> local tee
         if (lastOperator == WasmOp.LOCAL_SET && op == WasmOp.LOCAL_GET) {
-            val localSetNumber = (lastInstruction.immediates.firstOrNull() as? WasmImmediate.LocalIdx)?.value
+            konst localSetNumber = (lastInstruction.immediates.firstOrNull() as? WasmImmediate.LocalIdx)?.konstue
             if (localSetNumber != null) {
-                val localGetNumber = (immediates.firstOrNull() as? WasmImmediate.LocalIdx)?.value
+                konst localGetNumber = (immediates.firstOrNull() as? WasmImmediate.LocalIdx)?.konstue
                 if (localGetNumber == localSetNumber) {
                     trimInstructionsUntil(lastInstructionIndex)
                     addInstruction(WasmOp.LOCAL_TEE, location, immediates)
@@ -100,17 +100,17 @@ class WasmIrExpressionBuilder(
     }
 
     override var numberOfNestedBlocks: Int = 0
-        set(value) {
-            assert(value >= 0) { "end without matching block" }
-            field = value
+        set(konstue) {
+            assert(konstue >= 0) { "end without matching block" }
+            field = konstue
         }
 
-    private val WasmOp.isPseudoInstruction: Boolean
+    private konst WasmOp.isPseudoInstruction: Boolean
         get() = opcode == WASM_OP_PSEUDO_OPCODE
 }
 
 inline fun buildWasmExpression(body: WasmExpressionBuilder.() -> Unit): MutableList<WasmInstr> {
-    val res = mutableListOf<WasmInstr>()
+    konst res = mutableListOf<WasmInstr>()
     WasmIrExpressionBuilder(res).body()
     return res
 }

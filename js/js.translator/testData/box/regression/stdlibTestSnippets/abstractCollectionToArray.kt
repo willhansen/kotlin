@@ -2,9 +2,9 @@
 // KJS_WITH_FULL_RUNTIME
 
 fun abstractCollectionToArray() {
-    class TestCollection<out E>(val data: Collection<E>) : AbstractCollection<E>() {
-        val invocations = mutableListOf<String>()
-        override val size get() = data.size
+    class TestCollection<out E>(konst data: Collection<E>) : AbstractCollection<E>() {
+        konst invocations = mutableListOf<String>()
+        override konst size get() = data.size
         override fun iterator() = data.iterator()
 
         override fun toArray(): Array<Any?> {
@@ -16,14 +16,14 @@ fun abstractCollectionToArray() {
             return super.toArray(array)
         }
     }
-    val data = listOf("abc", "def")
-    val coll = TestCollection(data)
+    konst data = listOf("abc", "def")
+    konst coll = TestCollection(data)
 
-    val arr1 = coll.toTypedArray()
+    konst arr1 = coll.toTypedArray()
     assertEquals(data, arr1.asList())
     assertTrue("toArray1" in coll.invocations || "toArray2" in coll.invocations)
 
-    val arr2: Array<String> = coll.toArray(Array(coll.size + 1) { "" })
+    konst arr2: Array<String> = coll.toArray(Array(coll.size + 1) { "" })
     assertEquals(data + listOf(null), arr2.asList())
 }
 

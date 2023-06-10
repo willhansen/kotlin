@@ -8,10 +8,10 @@ package kotlin.sequences
 import kotlin.comparisons.*
 
 internal actual class ConstrainedOnceSequence<T> actual constructor(sequence: Sequence<T>) : Sequence<T> {
-    private val sequenceRef = kotlin.concurrent.AtomicReference<Sequence<T>?>(sequence)
+    private konst sequenceRef = kotlin.concurrent.AtomicReference<Sequence<T>?>(sequence)
 
     override actual fun iterator(): Iterator<T> {
-        val sequence = sequenceRef.getAndSet(null) ?: throw IllegalStateException("This sequence can be consumed only once.")
+        konst sequence = sequenceRef.getAndSet(null) ?: throw IllegalStateException("This sequence can be consumed only once.")
         return sequence.iterator()
     }
 }

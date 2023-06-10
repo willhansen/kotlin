@@ -6,7 +6,7 @@
 import kotlin.reflect.jvm.reflect
 
 class C {
-    val x = { OK: String -> }
+    konst x = { OK: String -> }
 }
 
 fun box(): String {

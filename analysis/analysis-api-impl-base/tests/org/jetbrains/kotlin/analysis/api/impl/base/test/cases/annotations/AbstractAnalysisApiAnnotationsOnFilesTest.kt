@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractAnalysisApiAnnotationsOnFilesTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val actual = analyseForTest(ktFile) {
-            val fileSymbol = ktFile.getFileSymbol()
+        konst actual = analyseForTest(ktFile) {
+            konst fileSymbol = ktFile.getFileSymbol()
             TestAnnotationRenderer.renderAnnotations(fileSymbol.annotationsList)
         }
 

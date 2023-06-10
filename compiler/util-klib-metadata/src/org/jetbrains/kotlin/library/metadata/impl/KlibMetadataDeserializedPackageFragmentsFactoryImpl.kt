@@ -29,13 +29,13 @@ open class KlibMetadataDeserializedPackageFragmentsFactoryImpl : KlibMetadataDes
         storageManager: StorageManager,
         configuration: DeserializationConfiguration
     ): List<KlibMetadataDeserializedPackageFragment> {
-        val libraryHeader = (packageAccessedHandler ?: SimplePackageAccessHandler).loadModuleHeader(library)
+        konst libraryHeader = (packageAccessedHandler ?: SimplePackageAccessHandler).loadModuleHeader(library)
 
         return packageFragmentNames.flatMap {
-            val fqName = FqName(it)
-            val containerSource = KlibDeserializedContainerSource(library, libraryHeader, configuration, fqName)
-            val parts = library.packageMetadataParts(fqName.asString())
-            val isBuiltInModule = moduleDescriptor.builtIns.builtInsModule === moduleDescriptor
+            konst fqName = FqName(it)
+            konst containerSource = KlibDeserializedContainerSource(library, libraryHeader, configuration, fqName)
+            konst parts = library.packageMetadataParts(fqName.asString())
+            konst isBuiltInModule = moduleDescriptor.builtIns.builtInsModule === moduleDescriptor
             parts.map { partName ->
                 if (isBuiltInModule)
                     BuiltInKlibMetadataDeserializedPackageFragment(
@@ -77,14 +77,14 @@ open class KlibMetadataDeserializedPackageFragmentsFactoryImpl : KlibMetadataDes
 
         if (!library.isInterop) return emptyList()
 
-        val mainPackageFqName = library.packageFqName?. let{ FqName(it) }
+        konst mainPackageFqName = library.packageFqName?. let{ FqName(it) }
             ?: error("Inconsistent manifest: interop library ${library.libraryName} should have `package` specified")
-        val exportForwardDeclarations = library.exportForwardDeclarations.map{ FqName(it) }
+        konst exportForwardDeclarations = library.exportForwardDeclarations.map{ FqName(it) }
 
-        val aliasedPackageFragments = deserializedPackageFragments.filter { it.fqName == mainPackageFqName }
+        konst aliasedPackageFragments = deserializedPackageFragments.filter { it.fqName == mainPackageFqName }
 
-        val result = mutableListOf<PackageFragmentDescriptor>()
-        ExportedForwardDeclarationChecker.values().mapTo(result) { checker ->
+        konst result = mutableListOf<PackageFragmentDescriptor>()
+        ExportedForwardDeclarationChecker.konstues().mapTo(result) { checker ->
             ClassifierAliasingPackageFragmentDescriptor(aliasedPackageFragments, moduleDescriptor, checker)
         }
 
@@ -105,14 +105,14 @@ class ExportedForwardDeclarationsPackageFragmentDescriptor(
     declarations: List<FqName>
 ) : PackageFragmentDescriptorImpl(module, fqName) {
 
-    private val memberScope = object : MemberScopeImpl() {
+    private konst memberScope = object : MemberScopeImpl() {
 
-        private val nameToFqName = declarations.map { it.shortName() to it }.toMap()
+        private konst nameToFqName = declarations.map { it.shortName() to it }.toMap()
 
         override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? {
-            val declFqName = nameToFqName[name] ?: return null
+            konst declFqName = nameToFqName[name] ?: return null
 
-            val packageView = module.getPackage(declFqName.parent())
+            konst packageView = module.getPackage(declFqName.parent())
             return packageView.memberScope.getContributedClassifier(name, location) // ?: FIXME(ddol): delegate to forward declarations synthetic module!
         }
 
@@ -137,9 +137,9 @@ class ExportedForwardDeclarationsPackageFragmentDescriptor(
 class ClassifierAliasingPackageFragmentDescriptor(
     targets: List<KlibMetadataPackageFragment>,
     module: ModuleDescriptor,
-    private val checker: ExportedForwardDeclarationChecker,
+    private konst checker: ExportedForwardDeclarationChecker,
 ) : PackageFragmentDescriptorImpl(module, checker.fqName) {
-    private val memberScope = object : MemberScopeImpl() {
+    private konst memberScope = object : MemberScopeImpl() {
         override fun getContributedClassifier(name: Name, location: LookupLocation) =
             targets.firstNotNullOfOrNull {
                 if (it.hasTopLevelClassifier(name)) {
@@ -169,7 +169,7 @@ class ClassifierAliasingPackageFragmentDescriptor(
  * we need to check declaration type before returning the result of lookup.
  * See KT-49034.
  */
-enum class ExportedForwardDeclarationChecker(val fqName: FqName) {
+enum class ExportedForwardDeclarationChecker(konst fqName: FqName) {
 
     Struct(ForwardDeclarationsFqNames.cNamesStructs) {
         override fun check(classifierDescriptor: ClassifierDescriptor): Boolean =
@@ -192,9 +192,9 @@ enum class ExportedForwardDeclarationChecker(val fqName: FqName) {
     abstract fun check(classifierDescriptor: ClassifierDescriptor): Boolean
 
     companion object {
-        private val cStructVarFqName = FqName("kotlinx.cinterop.CStructVar")
-        private val objCObjectBaseFqName = FqName("kotlinx.cinterop.ObjCObjectBase")
-        private val objCObjectFqName = FqName("kotlinx.cinterop.ObjCObject")
+        private konst cStructVarFqName = FqName("kotlinx.cinterop.CStructVar")
+        private konst objCObjectBaseFqName = FqName("kotlinx.cinterop.ObjCObjectBase")
+        private konst objCObjectFqName = FqName("kotlinx.cinterop.ObjCObject")
 
         // We can stop at ObjCObjectBase when checking Obj-C classes.
         // Checking @ExternalObjCClass would be faster, but this annotation is not commonized. See KT-57541.

@@ -17,15 +17,15 @@ abstract class A {
     }
 }
 
-class O(val x: String) {
+class O(konst x: String) {
     inner class I() : A(13, 37) {
         override fun foo() = x
     }
 }
 
 fun box(): String {
-    val o = O("OK")
-    val i = o.I()
+    konst o = O("OK")
+    konst i = o.I()
 
     assertEquals("#init: OK#50#OK", sideEffect)
 

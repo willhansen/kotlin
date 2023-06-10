@@ -40,16 +40,16 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 
 interface ObjCExportLazy {
     interface Configuration {
-        val frameworkName: String
+        konst frameworkName: String
         fun isIncluded(moduleInfo: ModuleInfo): Boolean
         fun getCompilerModuleName(moduleInfo: ModuleInfo): String
-        val objcGenerics: Boolean
+        konst objcGenerics: Boolean
 
-        val disableSwiftMemberNameMangling: Boolean
+        konst disableSwiftMemberNameMangling: Boolean
             get() = false
 
-        val unitSuspendFunctionExport: UnitSuspendFunctionObjCExport
-        val ignoreInterfaceMethodCollisions: Boolean
+        konst unitSuspendFunctionExport: UnitSuspendFunctionObjCExport
+        konst ignoreInterfaceMethodCollisions: Boolean
             get() = false
     }
 
@@ -80,25 +80,25 @@ fun createObjCExportLazy(
 )
 
 internal class ObjCExportLazyImpl(
-        private val configuration: ObjCExportLazy.Configuration,
+        private konst configuration: ObjCExportLazy.Configuration,
         problemCollector: ObjCExportProblemCollector,
-        private val codeAnalyzer: KotlinCodeAnalyzer,
-        private val typeResolver: TypeResolver,
-        private val descriptorResolver: DescriptorResolver,
-        private val fileScopeProvider: FileScopeProvider,
+        private konst codeAnalyzer: KotlinCodeAnalyzer,
+        private konst typeResolver: TypeResolver,
+        private konst descriptorResolver: DescriptorResolver,
+        private konst fileScopeProvider: FileScopeProvider,
         builtIns: KotlinBuiltIns,
         deprecationResolver: DeprecationResolver?
 ) : ObjCExportLazy {
 
-    private val namerConfiguration = createNamerConfiguration(configuration)
+    private konst namerConfiguration = createNamerConfiguration(configuration)
 
-    private val nameTranslator: ObjCExportNameTranslator = ObjCExportNameTranslatorImpl(namerConfiguration)
+    private konst nameTranslator: ObjCExportNameTranslator = ObjCExportNameTranslatorImpl(namerConfiguration)
 
-    private val mapper = ObjCExportMapper(deprecationResolver, local = true, configuration.unitSuspendFunctionExport)
+    private konst mapper = ObjCExportMapper(deprecationResolver, local = true, configuration.unitSuspendFunctionExport)
 
-    private val namer = ObjCExportNamerImpl(namerConfiguration, builtIns, mapper, local = true)
+    private konst namer = ObjCExportNamerImpl(namerConfiguration, builtIns, mapper, local = true)
 
-    private val translator: ObjCExportTranslator = ObjCExportTranslatorImpl(
+    private konst translator: ObjCExportTranslator = ObjCExportTranslatorImpl(
             null,
             mapper,
             namer,
@@ -106,7 +106,7 @@ internal class ObjCExportLazyImpl(
             configuration.objcGenerics
     )
 
-    private val isValid: Boolean
+    private konst isValid: Boolean
         get() = codeAnalyzer.moduleDescriptor.isValid
 
     override fun generateBase() = translator.generateBaseDeclarations()
@@ -115,7 +115,7 @@ internal class ObjCExportLazyImpl(
             translateClasses(file) + translateTopLevels(file)
 
     private fun translateClasses(container: KtDeclarationContainer): List<ObjCClass<*>> {
-        val result = mutableListOf<ObjCClass<*>>()
+        konst result = mutableListOf<ObjCClass<*>>()
         container.declarations.forEach { declaration ->
             // Supposed to be true if ObjCExportMapper.shouldBeVisible is true.
             if (declaration is KtClassOrObject && declaration.isPublic && declaration !is KtEnumEntry
@@ -134,17 +134,17 @@ internal class ObjCExportLazyImpl(
     }
 
     private fun translateClass(ktClassOrObject: KtClassOrObject): ObjCClass<*> {
-        val name = nameTranslator.getClassOrProtocolName(ktClassOrObject)
+        konst name = nameTranslator.getClassOrProtocolName(ktClassOrObject)
 
         // Note: some attributes may be missing (e.g. "unavailable" for unexposed classes).
 
         return if (ktClassOrObject.isInterface) {
             LazyObjCProtocolImpl(name, ktClassOrObject, this)
         } else {
-            val isFinal = ktClassOrObject.modalityModifier() == null ||
+            konst isFinal = ktClassOrObject.modalityModifier() == null ||
                     ktClassOrObject.hasModifier(KtTokens.FINAL_KEYWORD)
 
-            val attributes = if (isFinal) {
+            konst attributes = if (isFinal) {
                 listOf(OBJC_SUBCLASSING_RESTRICTED)
             } else {
                 emptyList()
@@ -172,15 +172,15 @@ internal class ObjCExportLazyImpl(
     }
 
     private fun translateTopLevels(file: KtFile): List<ObjCInterface> {
-        val extensions =
+        konst extensions =
                 mutableMapOf<ClassDescriptor, MutableList<KtCallableDeclaration>>()
 
-        val topLevel = mutableListOf<KtCallableDeclaration>()
+        konst topLevel = mutableListOf<KtCallableDeclaration>()
 
         file.children.filterIsInstance<KtCallableDeclaration>().forEach {
             // Supposed to be similar to ObjCExportMapper.shouldBeVisible.
             if ((it is KtFunction || it is KtProperty) && it.isPublic && !it.hasExpectModifier()) {
-                val classDescriptor = getClassIfExtension(it)
+                konst classDescriptor = getClassIfExtension(it)
                 if (classDescriptor != null) {
                     // If a class is hidden from Objective-C API then it is meaningless
                     // to export its extensions.
@@ -193,7 +193,7 @@ internal class ObjCExportLazyImpl(
             }
         }
 
-        val result = mutableListOf<ObjCInterface>()
+        konst result = mutableListOf<ObjCInterface>()
 
         extensions.mapTo(result) { (classDescriptor, declarations) ->
             translateExtensions(file, classDescriptor, declarations)
@@ -205,7 +205,7 @@ internal class ObjCExportLazyImpl(
     }
 
     private fun translateFileClass(file: KtFile, declarations: List<KtCallableDeclaration>): ObjCInterface {
-        val name = nameTranslator.getFileClassName(file)
+        konst name = nameTranslator.getFileClassName(file)
         return LazyObjCFileInterface(name, file, declarations, this)
     }
 
@@ -216,7 +216,7 @@ internal class ObjCExportLazyImpl(
     ): ObjCInterface {
         // TODO: consider using file-based categories in compiler too.
 
-        val name = if (ErrorUtils.isError(classDescriptor)) {
+        konst name = if (ErrorUtils.isError(classDescriptor)) {
             ObjCExportNamer.ClassOrProtocolName("ERROR", "ERROR")
         } else {
             namer.getClassOrProtocolName(classDescriptor)
@@ -235,12 +235,12 @@ internal class ObjCExportLazyImpl(
             resolveDeclaration(ktCallableDeclaration) as CallableMemberDescriptor
 
     private fun getClassIfExtension(topLevelDeclaration: KtCallableDeclaration): ClassDescriptor? {
-        val receiverType = topLevelDeclaration.receiverTypeReference ?: return null
-        val fileScope = fileScopeProvider.getFileResolutionScope(topLevelDeclaration.containingKtFile)
+        konst receiverType = topLevelDeclaration.receiverTypeReference ?: return null
+        konst fileScope = fileScopeProvider.getFileResolutionScope(topLevelDeclaration.containingKtFile)
 
-        val trace = BindingTraceContext() // TODO: revise.
+        konst trace = BindingTraceContext() // TODO: revise.
 
-        val kotlinReceiverType = typeResolver.resolveType(
+        konst kotlinReceiverType = typeResolver.resolveType(
                 createHeaderScope(topLevelDeclaration, fileScope, trace),
                 receiverType,
                 trace,
@@ -257,11 +257,11 @@ internal class ObjCExportLazyImpl(
     ): LexicalScope {
         if (declaration.typeParameters.isEmpty()) return parent
 
-        val fakeName = Name.special("<fake>")
-        val sourceElement = SourceElement.NO_SOURCE
+        konst fakeName = Name.special("<fake>")
+        konst sourceElement = SourceElement.NO_SOURCE
 
-        val descriptor: CallableMemberDescriptor
-        val scopeKind: LexicalScopeKind
+        konst descriptor: CallableMemberDescriptor
+        konst scopeKind: LexicalScopeKind
 
         when (declaration) {
             is KtFunction -> {
@@ -296,7 +296,7 @@ internal class ObjCExportLazyImpl(
             else -> TODO("${declaration::class}")
         }
 
-        val result = LexicalWritableScope(
+        konst result = LexicalWritableScope(
                 parent,
                 descriptor,
                 false,
@@ -304,7 +304,7 @@ internal class ObjCExportLazyImpl(
                 scopeKind
         )
 
-        val typeParameters = descriptorResolver.resolveTypeParametersForDescriptor(
+        konst typeParameters = descriptorResolver.resolveTypeParametersForDescriptor(
                 descriptor,
                 result,
                 result,
@@ -319,12 +319,12 @@ internal class ObjCExportLazyImpl(
 
     private class LazyObjCProtocolImpl(
         name: ObjCExportNamer.ClassOrProtocolName,
-        override val psi: KtClassOrObject,
-        private val lazy: ObjCExportLazyImpl
+        override konst psi: KtClassOrObject,
+        private konst lazy: ObjCExportLazyImpl
     ) : LazyObjCProtocol(name) {
-        override val descriptor: ClassDescriptor by lazy { lazy.resolve(psi) }
+        override konst descriptor: ClassDescriptor by lazy { lazy.resolve(psi) }
 
-        override val isValid: Boolean
+        override konst isValid: Boolean
             get() = lazy.isValid
 
         override fun computeRealStub(): ObjCProtocol = lazy.translator.translateInterface(descriptor)
@@ -334,12 +334,12 @@ internal class ObjCExportLazyImpl(
         name: ObjCExportNamer.ClassOrProtocolName,
         attributes: List<String>,
         generics: List<ObjCGenericTypeDeclaration>,
-        override val psi: KtClassOrObject,
-        private val lazy: ObjCExportLazyImpl
+        override konst psi: KtClassOrObject,
+        private konst lazy: ObjCExportLazyImpl
     ) : LazyObjCInterface(name = name, generics = generics, categoryName = null, attributes = attributes) {
-        override val descriptor: ClassDescriptor by lazy { lazy.resolve(psi) }
+        override konst descriptor: ClassDescriptor by lazy { lazy.resolve(psi) }
 
-        override val isValid: Boolean
+        override konst isValid: Boolean
             get() = lazy.isValid
 
         override fun computeRealStub(): ObjCInterface = lazy.translator.translateClass(descriptor)
@@ -347,17 +347,17 @@ internal class ObjCExportLazyImpl(
 
     private class LazyObjCFileInterface(
         name: ObjCExportNamer.ClassOrProtocolName,
-        private val file: KtFile,
-        private val declarations: List<KtCallableDeclaration>,
-        private val lazy: ObjCExportLazyImpl
+        private konst file: KtFile,
+        private konst declarations: List<KtCallableDeclaration>,
+        private konst lazy: ObjCExportLazyImpl
     ) : LazyObjCInterface(name = name, generics = emptyList(), categoryName = null, attributes = listOf(OBJC_SUBCLASSING_RESTRICTED)) {
-        override val descriptor: ClassDescriptor?
+        override konst descriptor: ClassDescriptor?
             get() = null
 
-        override val isValid: Boolean
+        override konst isValid: Boolean
             get() = lazy.isValid
 
-        override val psi: PsiElement?
+        override konst psi: PsiElement?
             get() = null
 
         override fun computeRealStub(): ObjCInterface = lazy.translator.translateFile(
@@ -373,17 +373,17 @@ internal class ObjCExportLazyImpl(
     private class LazyObjCExtensionInterface(
         name: ObjCExportNamer.ClassOrProtocolName,
         categoryName: String,
-        private val classDescriptor: ClassDescriptor,
-        private val declarations: List<KtCallableDeclaration>,
-        private val lazy: ObjCExportLazyImpl
+        private konst classDescriptor: ClassDescriptor,
+        private konst declarations: List<KtCallableDeclaration>,
+        private konst lazy: ObjCExportLazyImpl
     ) : LazyObjCInterface(name = name.objCName, generics = emptyList(), categoryName = categoryName, attributes = emptyList()) {
-        override val descriptor: ClassDescriptor?
+        override konst descriptor: ClassDescriptor?
             get() = null
 
-        override val isValid: Boolean
+        override konst isValid: Boolean
             get() = lazy.isValid
 
-        override val psi: PsiElement?
+        override konst psi: PsiElement?
             get() = null
 
         override fun computeRealStub(): ObjCInterface = lazy.translator.translateExtensions(
@@ -413,18 +413,18 @@ private abstract class LazyObjCInterface : ObjCInterface {
 
     protected abstract fun computeRealStub(): ObjCInterface
 
-    private val realStub by lazy { computeRealStub() }
+    private konst realStub by lazy { computeRealStub() }
 
-    override val members: List<Stub<*>>
+    override konst members: List<Stub<*>>
         get() = realStub.members
 
-    override val superProtocols: List<String>
+    override konst superProtocols: List<String>
         get() = realStub.superProtocols
 
-    override val superClass: String?
+    override konst superClass: String?
         get() = realStub.superClass
 
-    override val superClassGenerics: List<ObjCNonNullReferenceType>
+    override konst superClassGenerics: List<ObjCNonNullReferenceType>
         get() = realStub.superClassGenerics
 }
 
@@ -434,32 +434,32 @@ private abstract class LazyObjCProtocol(
 
     protected abstract fun computeRealStub(): ObjCProtocol
 
-    private val realStub by lazy { computeRealStub() }
+    private konst realStub by lazy { computeRealStub() }
 
-    override val members: List<Stub<*>>
+    override konst members: List<Stub<*>>
         get() = realStub.members
 
-    override val superProtocols: List<String>
+    override konst superProtocols: List<String>
         get() = realStub.superProtocols
 }
 
 internal fun createNamerConfiguration(configuration: ObjCExportLazy.Configuration): ObjCExportNamer.Configuration {
     return object : ObjCExportNamer.Configuration {
-        override val topLevelNamePrefix = abbreviate(configuration.frameworkName)
+        override konst topLevelNamePrefix = abbreviate(configuration.frameworkName)
 
         override fun getAdditionalPrefix(module: ModuleDescriptor): String? {
             if (module.isStdlib()) return "Kotlin"
 
             // Note: incorrect for compiler since it doesn't store ModuleInfo to ModuleDescriptor.
-            val moduleInfo = module.getCapability(ModuleInfo.Capability) ?: return null
+            konst moduleInfo = module.getCapability(ModuleInfo.Capability) ?: return null
             if (configuration.isIncluded(moduleInfo)) return null
             return abbreviate(configuration.getCompilerModuleName(moduleInfo))
         }
 
-        override val objcGenerics = configuration.objcGenerics
-        override val disableSwiftMemberNameMangling = configuration.disableSwiftMemberNameMangling
+        override konst objcGenerics = configuration.objcGenerics
+        override konst disableSwiftMemberNameMangling = configuration.disableSwiftMemberNameMangling
 
-        override val ignoreInterfaceMethodCollisions: Boolean = configuration.ignoreInterfaceMethodCollisions
+        override konst ignoreInterfaceMethodCollisions: Boolean = configuration.ignoreInterfaceMethodCollisions
     }
 }
 
@@ -467,18 +467,18 @@ internal fun createNamerConfiguration(configuration: ObjCExportLazy.Configuratio
 private fun ModuleDescriptor.isStdlib(): Boolean =
         this.builtIns == this || this.isCommonStdlib() || this.isNativeStdlib()
 
-private val kotlinSequenceClassId = ClassId.topLevel(FqName("kotlin.sequences.Sequence"))
+private konst kotlinSequenceClassId = ClassId.topLevel(FqName("kotlin.sequences.Sequence"))
 
 private fun ModuleDescriptor.isCommonStdlib() =
         this.findClassAcrossModuleDependencies(kotlinSequenceClassId)?.module == this
 
 
-private val KtModifierListOwner.isPublic: Boolean
+private konst KtModifierListOwner.isPublic: Boolean
     get() = this.visibilityModifierTypeOrDefault() == KtTokens.PUBLIC_KEYWORD
 
-internal val KtPureClassOrObject.isInterface: Boolean
+internal konst KtPureClassOrObject.isInterface: Boolean
     get() = this is KtClass && this.isInterface()
 
-internal val KtClassOrObject.typeParametersWithOuter
+internal konst KtClassOrObject.typeParametersWithOuter
     get() = generateSequence(this, { if (it is KtClass && it.isInner()) it.containingClassOrObject else null })
             .flatMap { it.typeParameters.asSequence() }

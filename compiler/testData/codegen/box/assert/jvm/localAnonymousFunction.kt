@@ -14,8 +14,8 @@ interface Checker {
 class ShouldBeDisabled : Checker {
     override fun checkTrue(): Boolean {
         var hit = false
-        val l = { hit = true; true }
-        val local = fun() {
+        konst l = { hit = true; true }
+        konst local = fun() {
             assert(l())
         }
         local()
@@ -24,8 +24,8 @@ class ShouldBeDisabled : Checker {
 
     override fun checkFalse(): Boolean {
         var hit = false
-        val l = { hit = true; false }
-        val local = fun() {
+        konst l = { hit = true; false }
+        konst local = fun() {
             assert(l())
         }
         local()
@@ -34,8 +34,8 @@ class ShouldBeDisabled : Checker {
 
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
-        val local = fun() {
+        konst l = { hit = true; true }
+        konst local = fun() {
             assert(l()) { "BOOYA" }
         }
         local()
@@ -44,8 +44,8 @@ class ShouldBeDisabled : Checker {
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
-        val local = fun() {
+        konst l = { hit = true; false }
+        konst local = fun() {
             assert(l()) { "BOOYA" }
         }
         local()
@@ -56,8 +56,8 @@ class ShouldBeDisabled : Checker {
 class ShouldBeEnabled : Checker {
     override fun checkTrue(): Boolean {
         var hit = false
-        val l = { hit = true; true }
-        val local = fun() {
+        konst l = { hit = true; true }
+        konst local = fun() {
             assert(l())
         }
         local()
@@ -66,8 +66,8 @@ class ShouldBeEnabled : Checker {
 
     override fun checkFalse(): Boolean {
         var hit = false
-        val l = { hit = true; false }
-        val local = fun() {
+        konst l = { hit = true; false }
+        konst local = fun() {
             assert(l())
         }
         local()
@@ -76,8 +76,8 @@ class ShouldBeEnabled : Checker {
 
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
-        val local = fun() {
+        konst l = { hit = true; true }
+        konst local = fun() {
             assert(l()) { "BOOYA" }
         }
         local()
@@ -86,8 +86,8 @@ class ShouldBeEnabled : Checker {
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
-        val local = fun() {
+        konst l = { hit = true; false }
+        konst local = fun() {
             assert(l()) { "BOOYA" }
         }
         local()
@@ -96,9 +96,9 @@ class ShouldBeEnabled : Checker {
 }
 
 fun setDesiredAssertionStatus(v: Boolean): Checker {
-    val loader = Checker::class.java.classLoader
+    konst loader = Checker::class.java.classLoader
     loader.setPackageAssertionStatus("localAnonymousFunction", v)
-    val c = loader.loadClass(if (v) "localAnonymousFunction.ShouldBeEnabled" else "localAnonymousFunction.ShouldBeDisabled")
+    konst c = loader.loadClass(if (v) "localAnonymousFunction.ShouldBeEnabled" else "localAnonymousFunction.ShouldBeDisabled")
     return c.newInstance() as Checker
 }
 

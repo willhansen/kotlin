@@ -7,7 +7,7 @@ inline fun <R> foo(x : R, block : (R) -> R) : R {
 }
 
 fun box() : String {
-    val result = foo(1) { x -> x + 1 }
+    konst result = foo(1) { x -> x + 1 }
     assertEquals(2, result)
 
     return "OK"

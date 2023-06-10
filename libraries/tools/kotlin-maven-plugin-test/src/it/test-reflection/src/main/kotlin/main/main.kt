@@ -21,25 +21,25 @@ import kotlin.reflect.full.*
 
 fun topLevelFun() {}
 
-class A(val prop: String)
+class A(konst prop: String)
 
-val Int.extProp: Int get() = this
+konst Int.extProp: Int get() = this
 
 fun box(): String {
-    val u = ::topLevelFun
+    konst u = ::topLevelFun
     u()
 
     fun localFun() {}
-    val l = ::localFun
+    konst l = ::localFun
     l()
 
-    val ext = Int::extProp
+    konst ext = Int::extProp
     if (ext.get(42) != 42) return "Fail ext: ${ext.get(42)}"
 
-    val a = A::class
+    konst a = A::class
     if (a.memberProperties.size != 1) return "Fail: ${a.memberProperties}"
 
-    val p = A::prop
+    konst p = A::prop
     if (p.name != "prop") return "Fail name: ${p.name}"
 
     return p.get(A("OK"))

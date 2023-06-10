@@ -10,7 +10,7 @@ public fun myrun(block: () -> Unit) {
 }
 
 fun box(): String {
-    val x: Long
+    konst x: Long
     myrun {
         x = 1L
     }

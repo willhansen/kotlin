@@ -28,16 +28,16 @@ class KlibMetadataVersion(vararg numbers: Int) : BinaryVersion(*numbers) {
 
     companion object {
         @JvmField
-        val INSTANCE = KlibMetadataVersion(1, 4, 1)
+        konst INSTANCE = KlibMetadataVersion(1, 4, 1)
 
         @JvmField
-        val INVALID_VERSION = KlibMetadataVersion()
+        konst INVALID_VERSION = KlibMetadataVersion()
     }
 }
 
-val KotlinLibrary.metadataVersion: KlibMetadataVersion?
+konst KotlinLibrary.metadataVersion: KlibMetadataVersion?
     get() {
-        val versionString = manifestProperties.getProperty(KLIB_PROPERTY_METADATA_VERSION) ?: return null
-        val versionIntArray = BinaryVersion.parseVersionArray(versionString) ?: return null
+        konst versionString = manifestProperties.getProperty(KLIB_PROPERTY_METADATA_VERSION) ?: return null
+        konst versionIntArray = BinaryVersion.parseVersionArray(versionString) ?: return null
         return KlibMetadataVersion(*versionIntArray)
     }

@@ -1,3 +1,3 @@
 class Bar(name: () -> String) {
-    val name = name()
+    konst name = name()
 }

@@ -16,24 +16,24 @@ import org.jetbrains.kotlin.ir.util.setDeclarationsParent
 
 //This lower takes part of old LocalDeclarationLowering job to pop up local classes from functions
 open class LocalClassPopupLowering(
-    val context: BackendContext,
-    val recordExtractedLocalClasses: BackendContext.(IrClass) -> Unit = {},
+    konst context: BackendContext,
+    konst recordExtractedLocalClasses: BackendContext.(IrClass) -> Unit = {},
 ) : BodyLoweringPass {
     override fun lower(irFile: IrFile) {
         runOnFilePostfix(irFile, withLocalDeclarations = true)
     }
 
     private data class ExtractedLocalClass(
-        val local: IrClass, val newContainer: IrDeclarationParent, val extractedUnder: IrStatement?
+        konst local: IrClass, konst newContainer: IrDeclarationParent, konst extractedUnder: IrStatement?
     )
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val extractedLocalClasses = arrayListOf<ExtractedLocalClass>()
+        konst extractedLocalClasses = arrayListOf<ExtractedLocalClass>()
 
         irBody.transform(object : IrElementTransformerVoidWithContext() {
 
             override fun visitClassNew(declaration: IrClass): IrStatement {
-                val currentScope =
+                konst currentScope =
                     if (allScopes.size > 1) allScopes[allScopes.lastIndex - 1] else createScope(container as IrSymbolOwner)
                 if (!shouldPopUp(declaration, currentScope)) return declaration
 
@@ -64,7 +64,7 @@ open class LocalClassPopupLowering(
         for ((local, newContainer, extractedUnder) in extractedLocalClasses) {
             when (newContainer) {
                 is IrStatementContainer -> {
-                    val insertIndex = extractedUnder?.let { newContainer.statements.indexOf(it) } ?: -1
+                    konst insertIndex = extractedUnder?.let { newContainer.statements.indexOf(it) } ?: -1
                     if (insertIndex >= 0) {
                         newContainer.statements.add(insertIndex, local)
                     } else {

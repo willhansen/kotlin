@@ -3,7 +3,7 @@
 
 class View
 
-context(View) val Int.dp get() = 42 * this
+context(View) konst Int.dp get() = 42 * this
 
 fun View.f() {
     123.dp

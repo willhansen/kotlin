@@ -11,8 +11,8 @@ private class NSObjectImpl : NSObject() {
 
 // Also see counterpart interop/objc/illegal_sharing.kt
 @Test fun testSharing() = withWorker {
-    val obj = NSObjectImpl()
-    val array = nsArrayOf(obj)
+    konst obj = NSObjectImpl()
+    konst array = nsArrayOf(obj)
 
     assertFalse(obj.isFrozen)
 
@@ -22,8 +22,8 @@ private class NSObjectImpl : NSObject() {
         obj.freeze()
         assertTrue(obj.isFrozen)
         runInWorker {
-            val obj1 = array.objectAtIndex(0) as NSObjectImpl
-            assertFailsWith<InvalidMutabilityException> {
+            konst obj1 = array.objectAtIndex(0) as NSObjectImpl
+            assertFailsWith<InkonstidMutabilityException> {
                 obj1.x = 333
             }
         }

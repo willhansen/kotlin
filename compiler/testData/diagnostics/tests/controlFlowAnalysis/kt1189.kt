@@ -4,9 +4,9 @@ package kt1189
 import java.util.concurrent.locks.ReentrantReadWriteLock
 
 inline fun <T> ReentrantReadWriteLock.write(action: ()->T) : T {
-    val rl = readLock()
+    konst rl = readLock()
     var readCount = 0
-    val writeCount = getWriteHoldCount()
+    konst writeCount = getWriteHoldCount()
     if(writeCount == 0) {
         readCount = getReadHoldCount()
         if(readCount > 0)
@@ -14,7 +14,7 @@ inline fun <T> ReentrantReadWriteLock.write(action: ()->T) : T {
                 rl.unlock()
     }
 
-    val wl = writeLock()
+    konst wl = writeLock()
     wl.lock()
     try {
         return action()

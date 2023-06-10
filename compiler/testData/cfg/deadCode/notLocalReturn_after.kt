@@ -4,7 +4,7 @@
 inline fun doCall(f: () -> Unit) = f()
 
 fun test1(nonLocal: String): String {
-    val localResult = doCall {
+    konst localResult = doCall {
         return nonLocal  //unreachable
     }
     return "NON_LOCAL_FAILED $localResult"  //unreachable

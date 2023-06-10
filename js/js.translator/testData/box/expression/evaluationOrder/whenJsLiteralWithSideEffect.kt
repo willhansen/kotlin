@@ -20,7 +20,7 @@ fun testWhen() {
 
 fun testIntrinsic() {
     global = ""
-    val x = arrayOf(bar("A")) == try { arrayOf(bar("B")) } finally {}
+    konst x = arrayOf(bar("A")) == try { arrayOf(bar("B")) } finally {}
     assertEquals("AB", global)
 }
 

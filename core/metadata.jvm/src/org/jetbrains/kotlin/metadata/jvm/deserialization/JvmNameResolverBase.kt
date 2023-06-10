@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.metadata.jvm.JvmProtoBuf.StringTableTypes.Record
 import org.jetbrains.kotlin.metadata.jvm.JvmProtoBuf.StringTableTypes.Record.Operation.*
 
 open class JvmNameResolverBase(
-    val strings: Array<String>,
-    private val localNameIndices: Set<Int>,
-    private val records: List<Record>
+    konst strings: Array<String>,
+    private konst localNameIndices: Set<Int>,
+    private konst records: List<Record>
 ) : NameResolver {
 
     override fun getString(index: Int): String {
-        val record = records[index]
+        konst record = records[index]
 
         var string = when {
             record.hasString() -> record.string
@@ -26,14 +26,14 @@ open class JvmNameResolverBase(
         }
 
         if (record.substringIndexCount >= 2) {
-            val (begin, end) = record.substringIndexList
+            konst (begin, end) = record.substringIndexList
             if (0 <= begin && begin <= end && end <= string.length) {
                 string = string.substring(begin, end)
             }
         }
 
         if (record.replaceCharCount >= 2) {
-            val (from, to) = record.replaceCharList
+            konst (from, to) = record.replaceCharList
             string = string.replace(from.toChar(), to.toChar())
         }
 
@@ -63,9 +63,9 @@ open class JvmNameResolverBase(
 
     companion object {
         // Simply "kotlin", but to avoid being renamed by namespace relocation (e.g., Shadow.relocate gradle plugin)
-        private val kotlin = listOf('k', 'o', 't', 'l', 'i', 'n').joinToString(separator = "")
+        private konst kotlin = listOf('k', 'o', 't', 'l', 'i', 'n').joinToString(separator = "")
 
-        val PREDEFINED_STRINGS = listOf(
+        konst PREDEFINED_STRINGS = listOf(
             "$kotlin/Any",
             "$kotlin/Nothing",
             "$kotlin/Unit",
@@ -98,7 +98,7 @@ open class JvmNameResolverBase(
             "$kotlin/collections/ListIterator", "$kotlin/collections/MutableListIterator"
         )
 
-        private val PREDEFINED_STRINGS_MAP = PREDEFINED_STRINGS.withIndex().associateBy({ it.value }, { it.index })
+        private konst PREDEFINED_STRINGS_MAP = PREDEFINED_STRINGS.withIndex().associateBy({ it.konstue }, { it.index })
 
         fun getPredefinedStringIndex(string: String): Int? = PREDEFINED_STRINGS_MAP[string]
     }

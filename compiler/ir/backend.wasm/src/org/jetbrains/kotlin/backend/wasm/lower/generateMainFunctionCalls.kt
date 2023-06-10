@@ -25,17 +25,17 @@ fun generateMainFunctionCalls(
     context: WasmBackendContext,
     module: IrModuleFragment
 ) {
-    val mainFunction = JsMainFunctionDetector(context).getMainFunctionOrNull(module) ?: return
-    val generateArgv = mainFunction.valueParameters.firstOrNull()?.isStringArrayParameter() ?: false
-    val generateContinuation = mainFunction.isLoweredSuspendFunction(context)
+    konst mainFunction = JsMainFunctionDetector(context).getMainFunctionOrNull(module) ?: return
+    konst generateArgv = mainFunction.konstueParameters.firstOrNull()?.isStringArrayParameter() ?: false
+    konst generateContinuation = mainFunction.isLoweredSuspendFunction(context)
     with(context.createIrBuilder(context.mainCallsWrapperFunction.symbol)) {
-        val argv = if (generateArgv) {
+        konst argv = if (generateArgv) {
             context.createArrayOfExpression(UNDEFINED_OFFSET, UNDEFINED_OFFSET, context.irBuiltIns.stringType, emptyList())
         } else {
             null
         }
 
-        val continuation =
+        konst continuation =
             if (generateContinuation) {
                 irCall(context.wasmSymbols.coroutineEmptyContinuation.owner.getter!!)
             } else {

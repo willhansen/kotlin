@@ -1,1 +1,1 @@
-val result = "OK"
+konst result = "OK"

@@ -16,10 +16,10 @@ public enum Color /* Color*/ {
   private final int rgb;
 
   @org.jetbrains.annotations.NotNull()
-  public static Color valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static Color konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static Color[] values();//  values()
+  public static Color[] konstues();//  konstues()
 
   private  Color(@org.jetbrains.annotations.NotNull() java.lang.String);//  .ctor(java.lang.String)
 
@@ -35,10 +35,10 @@ public enum Direction /* Direction*/ {
   EAST;
 
   @org.jetbrains.annotations.NotNull()
-  public static Direction valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static Direction konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static Direction[] values();//  values()
+  public static Direction[] konstues();//  konstues()
 
   private  Direction();//  .ctor()
 }
@@ -58,10 +58,10 @@ public enum IntArithmetics /* IntArithmetics*/ implements java.util.function.Bin
   };
 
   @org.jetbrains.annotations.NotNull()
-  public static IntArithmetics valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static IntArithmetics konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static IntArithmetics[] values();//  values()
+  public static IntArithmetics[] konstues();//  konstues()
 
   private  IntArithmetics();//  .ctor()
 
@@ -97,10 +97,10 @@ public enum ProtocolState /* ProtocolState*/ {
   public abstract ProtocolState signal();//  signal()
 
   @org.jetbrains.annotations.NotNull()
-  public static ProtocolState valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static ProtocolState konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static ProtocolState[] values();//  values()
+  public static ProtocolState[] konstues();//  konstues()
 
   private  ProtocolState();//  .ctor()
 
@@ -109,7 +109,7 @@ public enum ProtocolState /* ProtocolState*/ {
   class WAITING ...
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 public abstract @interface Some /* Some*/ {
 }
 

@@ -9,12 +9,12 @@ import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinDependency
 import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinSourceDependency
 
 internal class IdeaKotlinSourceDependencyMatcher(
-    val type: IdeaKotlinSourceDependency.Type,
-    val buildId: String,
-    val projectPath: String,
-    val sourceSetName: String
+    konst type: IdeaKotlinSourceDependency.Type,
+    konst buildId: String,
+    konst projectPath: String,
+    konst sourceSetName: String
 ) : IdeaKotlinDependencyMatcher {
-    override val description: String =
+    override konst description: String =
         "source($type)::$projectPath/$sourceSetName"
 
     override fun matches(dependency: IdeaKotlinDependency): Boolean {

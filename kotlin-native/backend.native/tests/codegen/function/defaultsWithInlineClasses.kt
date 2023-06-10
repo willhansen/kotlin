@@ -7,8 +7,8 @@ package codegen.function.defaultsWithInlineClasses
 
 import kotlin.test.*
 
-inline class Foo(val value: Int)
-fun foo(x: Foo = Foo(42)) = x.value
+inline class Foo(konst konstue: Int)
+fun foo(x: Foo = Foo(42)) = x.konstue
 
 @Test fun runTest() {
     assertEquals(foo(), 42)

@@ -6,4 +6,4 @@ fun test(map: MutableMap<Int, Int>, t: Int) {
 }
 
 //from library
-operator fun <K, V> MutableMap<K, V>.set(key : K, value : V) : V? = this.put(key, value)
+operator fun <K, V> MutableMap<K, V>.set(key : K, konstue : V) : V? = this.put(key, konstue)

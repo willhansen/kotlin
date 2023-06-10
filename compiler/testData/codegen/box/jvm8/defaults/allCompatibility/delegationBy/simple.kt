@@ -11,9 +11,9 @@ class Delegate : Test {
     override fun test(): String = "OK"
 }
 
-class TestClass(val foo: Test) : Test by foo
+class TestClass(konst foo: Test) : Test by foo
 
 fun box(): String {
-    val testClass = TestClass(Delegate())
+    konst testClass = TestClass(Delegate())
     return testClass.test()
 }

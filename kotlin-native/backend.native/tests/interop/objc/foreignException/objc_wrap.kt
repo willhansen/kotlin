@@ -24,14 +24,14 @@ fun testInner(name: String, reason: String) {
 typealias CallMe = (String, String) -> Unit
 
 @Test fun testExceptionWrap(raise: CallMe) {
-    val name = "Some native exception"
-    val reason = "Illegal value"
+    konst name = "Some native exception"
+    konst reason = "Illegal konstue"
     var finallyBlockTest = "FAILED"
     var catchBlockTest = "FAILED"
     try {
         raise(name, reason)
     } catch (e: ForeignException) {
-        val ret = logExc(e.nativeException) // return NSException name
+        konst ret = logExc(e.nativeException) // return NSException name
         assertEquals(name, ret)
         assertEquals("$name:: $reason", e.message)
         catchBlockTest = "PASSED"

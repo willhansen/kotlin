@@ -4,7 +4,7 @@
 
 class X {
     fun foo(): String = "in final class"
-    val bar: String = "in final class"
+    konst bar: String = "in final class"
 }
 
 fun qux(): X = X()
@@ -14,7 +14,7 @@ fun qux(): X = X()
 
 open class X {
     fun foo(): String = "in open class"
-    val bar: String = "in open class"
+    konst bar: String = "in open class"
 }
 
 class Y: X()

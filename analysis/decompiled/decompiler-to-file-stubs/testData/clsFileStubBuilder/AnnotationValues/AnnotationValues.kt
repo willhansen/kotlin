@@ -3,7 +3,7 @@ package test
 import test.E.E1
 import kotlin.reflect.KClass
 
-const val CONSTANT = 12
+const konst CONSTANT = 12
 
 class AnnotationValues {
     @Simple(
@@ -46,64 +46,64 @@ class AnnotationValues {
     )
     class WithClassLiteral<T>
 
-    @Outer("value", nested = Nested(12, "nested value"))
+    @Outer("konstue", nested = Nested(12, "nested konstue"))
     class WithNested
 }
 
 annotation class Simple(
-    val i: Int,
-    val l: Long,
-    val b: Byte,
+    konst i: Int,
+    konst l: Long,
+    konst b: Byte,
 
-    val d: Double,
-    val f: Float,
+    konst d: Double,
+    konst f: Float,
 
-    val c: Char,
+    konst c: Char,
 
-    val b1: Boolean,
-    val b2: Boolean
+    konst b1: Boolean,
+    konst b2: Boolean
 )
 
 annotation class StringLiteral(
-    val s1: String,
-    val s2: String,
-    val s3: String
+    konst s1: String,
+    konst s2: String,
+    konst s3: String
 )
 
 enum class E {
     E1, E2
 }
 annotation class EnumLiteral(
-    val e1: E,
-    val e2: E,
-    val e3: E
+    konst e1: E,
+    konst e2: E,
+    konst e3: E
 )
 
 annotation class VarArg(
-    vararg val v: Int
+    vararg konst v: Int
 )
 
 annotation class Arrays(
-    val ia: IntArray,
-    val la: LongArray,
-    val fa: FloatArray,
-    val da: DoubleArray,
-    val ca: CharArray,
-    val ba: BooleanArray
+    konst ia: IntArray,
+    konst la: LongArray,
+    konst fa: FloatArray,
+    konst da: DoubleArray,
+    konst ca: CharArray,
+    konst ba: BooleanArray
 )
 
 annotation class ClassLiteral(
-    val c1: KClass<*>,
-    val c2: KClass<*>
+    konst c1: KClass<*>,
+    konst c2: KClass<*>
 )
 
 
 annotation class Nested(
-    val i: Int,
-    val s: String
+    konst i: Int,
+    konst s: String
 )
 
 annotation class Outer(
-    val some: String,
-    val nested: Nested
+    konst some: String,
+    konst nested: Nested
 )

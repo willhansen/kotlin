@@ -12,7 +12,7 @@ fun foo(o: String = "O", k: String = "K"): String = o + k
 @file:JvmName("Facade")
 @file:JvmMultifileClass
 
-val bar = ""
+konst bar = ""
 
 // Default argument handling should not happen in the facade, only in parts.
 // @Facade.class:

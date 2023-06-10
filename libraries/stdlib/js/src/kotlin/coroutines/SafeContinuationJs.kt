@@ -12,22 +12,22 @@ import kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
 @SinceKotlin("1.3")
 internal actual class SafeContinuation<in T>
 internal actual constructor(
-    private val delegate: Continuation<T>,
+    private konst delegate: Continuation<T>,
     initialResult: Any?
 ) : Continuation<T> {
     @PublishedApi
     internal actual constructor(delegate: Continuation<T>) : this(delegate, UNDECIDED)
 
-    public actual override val context: CoroutineContext
+    public actual override konst context: CoroutineContext
         get() = delegate.context
 
     private var result: Any? = initialResult
 
     public actual override fun resumeWith(result: Result<T>) {
-        val cur = this.result
+        konst cur = this.result
         when {
             cur === UNDECIDED -> {
-                this.result = result.value
+                this.result = result.konstue
             }
             cur === COROUTINE_SUSPENDED -> {
                 this.result = RESUMED
@@ -43,7 +43,7 @@ internal actual constructor(
             result = COROUTINE_SUSPENDED
             return COROUTINE_SUSPENDED
         }
-        val result = this.result
+        konst result = this.result
         return when {
             result === RESUMED -> COROUTINE_SUSPENDED // already called continuation, indicate COROUTINE_SUSPENDED upstream
             result is Result.Failure -> throw result.exception

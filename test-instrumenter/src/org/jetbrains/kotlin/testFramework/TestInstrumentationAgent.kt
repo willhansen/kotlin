@@ -23,9 +23,9 @@ object TestInstrumentationAgent {
     @JvmStatic
     fun premain(arg: String?, instrumentation: Instrumentation) {
 
-        val arguments = arg.orEmpty().split(",")
+        konst arguments = arg.orEmpty().split(",")
 
-        val debug = "debug" in arguments
+        konst debug = "debug" in arguments
         if (debug) {
             println("org.jetbrains.kotlin.testFramework.TestInstrumentationAgent: premain")
         }

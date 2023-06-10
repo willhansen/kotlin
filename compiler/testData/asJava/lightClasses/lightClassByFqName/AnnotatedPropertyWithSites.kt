@@ -17,5 +17,5 @@ class Test(@get:MyAnnotation @set:MyAnnotation2 @setparam:MyAnnotation3 @propert
     fun @receiver:MyAnnotation7 @MyAnnotation8 Int?.fooWithNullableReceiver(l: Long) = Unit
     var @receiver:MyAnnotation7 @MyAnnotation8 Int.fooP
         get() = Unit
-        set(value) {}
+        set(konstue) {}
 }

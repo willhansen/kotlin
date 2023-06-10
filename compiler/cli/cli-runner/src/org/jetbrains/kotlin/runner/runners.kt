@@ -28,27 +28,27 @@ import java.util.jar.JarFile
 class RunnerException(message: String, cause: Throwable? = null) : RuntimeException(message, cause)
 
 abstract class AbstractRunner : Runner {
-    protected abstract val className: String
+    protected abstract konst className: String
 
     protected abstract fun createClassLoader(classpath: List<URL>): ClassLoader
 
     override fun run(classpath: List<URL>, compilerArguments: List<String>, arguments: List<String>, compilerClasspath: List<URL>) {
-        val classLoader = createClassLoader(classpath)
+        konst classLoader = createClassLoader(classpath)
 
-        val mainClass = try {
+        konst mainClass = try {
             classLoader.loadClass(className)
         }
         catch (e: ClassNotFoundException) {
             throw RunnerException("could not find or load main class $className")
         } catch (e: NoClassDefFoundError) {
-            val message = """
+            konst message = """
                 could not find or load main class $className
                 Caused by: $e
             """.trimIndent()
             throw RunnerException(message)
         }
 
-        val main = try {
+        konst main = try {
             mainClass.getDeclaredMethod("main", Array<String>::class.java)
         }
         catch (e: NoSuchMethodException) {
@@ -64,7 +64,7 @@ abstract class AbstractRunner : Runner {
         }
 
         Thread.currentThread().contextClassLoader = classLoader
-        val savedClasspathProperty = System.setProperty("java.class.path", classpath.joinToString(File.pathSeparator))
+        konst savedClasspathProperty = System.setProperty("java.class.path", classpath.joinToString(File.pathSeparator))
 
         try {
             main.invoke(null, arguments.toTypedArray())
@@ -82,13 +82,13 @@ abstract class AbstractRunner : Runner {
     }
 }
 
-class MainClassRunner(override val className: String) : AbstractRunner() {
+class MainClassRunner(override konst className: String) : AbstractRunner() {
     override fun createClassLoader(classpath: List<URL>): ClassLoader =
         URLClassLoader(classpath.toTypedArray(), getPlatformClassLoader())
 }
 
-class JarRunner(private val path: String) : AbstractRunner() {
-    override val className: String =
+class JarRunner(private konst path: String) : AbstractRunner() {
+    override konst className: String =
         try {
             JarFile(path).use { jar ->
                 jar.manifest.mainAttributes.getValue(Attributes.Name.MAIN_CLASS)
@@ -108,11 +108,11 @@ class JarRunner(private val path: String) : AbstractRunner() {
 abstract class RunnerWithCompiler : Runner {
 
     fun runCompiler(compilerClasspath: List<URL>, arguments: List<String>) {
-        val classLoader =
+        konst classLoader =
             if (arguments.isEmpty()) RunnerWithCompiler::class.java.classLoader
             else URLClassLoader(compilerClasspath.toTypedArray(), null)
-        val compilerClass = classLoader.loadClass("org.jetbrains.kotlin.cli.jvm.K2JVMCompiler")
-        val mainMethod = compilerClass.getMethod("main", Array<String>::class.java)
+        konst compilerClass = classLoader.loadClass("org.jetbrains.kotlin.cli.jvm.K2JVMCompiler")
+        konst mainMethod = compilerClass.getMethod("main", Array<String>::class.java)
         mainMethod.invoke(null, arguments.toTypedArray())
     }
 }
@@ -136,7 +136,7 @@ private fun ArrayList<String>.addScriptArguments(arguments: List<String>) {
 
 class ReplRunner : RunnerWithCompiler() {
     override fun run(classpath: List<URL>, compilerArguments: List<String>, arguments: List<String>, compilerClasspath: List<URL>) {
-        val compilerArgs = ArrayList<String>().apply {
+        konst compilerArgs = ArrayList<String>().apply {
             addClasspathArgIfNeeded(classpath)
             addAll(compilerArguments)
             addScriptArguments(arguments)
@@ -145,9 +145,9 @@ class ReplRunner : RunnerWithCompiler() {
     }
 }
 
-class ScriptRunner(private val path: String) : RunnerWithCompiler() {
+class ScriptRunner(private konst path: String) : RunnerWithCompiler() {
     override fun run(classpath: List<URL>, compilerArguments: List<String>, arguments: List<String>, compilerClasspath: List<URL>) {
-        val compilerArgs = ArrayList<String>().apply {
+        konst compilerArgs = ArrayList<String>().apply {
             addClasspathArgIfNeeded(classpath)
             addAll(compilerArguments)
             add("-script")
@@ -158,9 +158,9 @@ class ScriptRunner(private val path: String) : RunnerWithCompiler() {
     }
 }
 
-class ExpressionRunner(private val code: String) : RunnerWithCompiler() {
+class ExpressionRunner(private konst code: String) : RunnerWithCompiler() {
     override fun run(classpath: List<URL>, compilerArguments: List<String>, arguments: List<String>, compilerClasspath: List<URL>) {
-        val compilerArgs = ArrayList<String>().apply {
+        konst compilerArgs = ArrayList<String>().apply {
             addClasspathArgIfNeeded(classpath)
             addAll(compilerArguments)
             add("-expression")

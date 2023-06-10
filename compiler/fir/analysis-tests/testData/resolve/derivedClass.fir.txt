@@ -4,7 +4,7 @@ FILE: derivedClass.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|T1| = R|<local>/x|
+        public final konst x: R|T1| = R|<local>/x|
             public get(): R|T1|
 
     }

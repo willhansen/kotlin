@@ -11,7 +11,7 @@ public class J implements Sized {
 // FILE: test.kt
 
 interface Sized {
-    val size: Int
+    konst size: Int
 }
 
 class A<T> : J(), Collection<T> {
@@ -33,13 +33,13 @@ class A<T> : J(), Collection<T> {
 }
 
 fun box(): String {
-    val a = A<String>()
+    konst a = A<String>()
     if (a.size != 123) return "fail 1"
 
-    val c: Collection<String> = a
+    konst c: Collection<String> = a
     if (c.size != 123) return "fail 2"
 
-    val sized: Sized = a
+    konst sized: Sized = a
     if (sized.size != 123) return "fail 3"
 
     return "OK"

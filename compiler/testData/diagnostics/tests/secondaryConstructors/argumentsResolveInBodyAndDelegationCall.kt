@@ -1,9 +1,9 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
-open class B(open val parentProp: Int)
-val global: Int = 1
+open class B(open konst parentProp: Int)
+konst global: Int = 1
 class A : B {
-    val myProp: Int = 1
-    override val parentProp = 1
+    konst myProp: Int = 1
+    override konst parentProp = 1
 
     constructor(x: Int, y: Int = global): super(x + y + global) {
         foo(x, y, myProp)

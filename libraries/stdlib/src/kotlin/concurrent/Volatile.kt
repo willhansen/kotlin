@@ -11,8 +11,8 @@ import kotlin.internal.RequireKotlinVersionKind
 
 /**
  * Marks the backing field of the annotated `var` property as `volatile`, meaning that reads and writes to this field
- * are atomic and writes are always made visible to other threads. If another thread reads the value of this field (e.g. through its accessor),
- * it sees not only that value, but all side effects that led to writing that value.
+ * are atomic and writes are always made visible to other threads. If another thread reads the konstue of this field (e.g. through its accessor),
+ * it sees not only that konstue, but all side effects that led to writing that konstue.
  *
  * This annotation has effect in Kotlin/JVM and Kotlin/Native.
  *

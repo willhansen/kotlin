@@ -3,16 +3,16 @@
  * that can be found in the LICENSE file.
  */
 
-class A(val msg: String) {
+class A(konst msg: String) {
     init {
         println("init $msg")
     }
     override fun toString(): String = msg
 }
 
-val globalValue1 = 1
-val globalValue2 = A("globalValue2")
-val globalValue3 = A("globalValue3")
+konst globalValue1 = 1
+konst globalValue2 = A("globalValue2")
+konst globalValue3 = A("globalValue3")
 
 fun main(args: Array<String>) {
     println(globalValue1.toString())

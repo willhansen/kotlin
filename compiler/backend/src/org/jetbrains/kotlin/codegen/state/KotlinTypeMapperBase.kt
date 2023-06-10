@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.org.objectweb.asm.Type
 
 abstract class KotlinTypeMapperBase {
-    abstract val typeSystem: TypeSystemCommonBackendContext
+    abstract konst typeSystem: TypeSystemCommonBackendContext
 
     abstract fun mapClass(classifier: ClassifierDescriptor): Type
 

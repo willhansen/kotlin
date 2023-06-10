@@ -1,11 +1,11 @@
 // FIR_IDENTICAL
-//KT-1219 Incorrect 'unused value' error in closures
+//KT-1219 Incorrect 'unused konstue' error in closures
 
 package kt1219
 
 fun <T, R> Iterable<T>.fold(a: R, op: (T, R) -> R) : R {
     var r = a
-    this.foreach { r = op(it, r) } //unused value here
+    this.foreach { r = op(it, r) } //unused konstue here
     return r
 }
 

@@ -20,7 +20,7 @@ publishing {
 
 kotlin {
     mingwX64()
-    val targetsWithInterop = listOf(linuxX64(), linuxArm64())
+    konst targetsWithInterop = listOf(linuxX64(), linuxArm64())
 
     targets.withType<KotlinNativeTarget>().forEach { target ->
         if (!HostManager().isEnabled(target.konanTarget)) {
@@ -28,10 +28,10 @@ kotlin {
         }
     }
 
-    val commonMain by sourceSets.getting
-    val withInteropMain by sourceSets.creating
-    val linuxX64Main by sourceSets.getting
-    val linuxArm64Main by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst withInteropMain by sourceSets.creating
+    konst linuxX64Main by sourceSets.getting
+    konst linuxArm64Main by sourceSets.getting
 
     withInteropMain.dependsOn(commonMain)
     linuxX64Main.dependsOn(withInteropMain)

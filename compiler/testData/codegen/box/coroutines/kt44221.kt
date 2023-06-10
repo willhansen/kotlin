@@ -11,10 +11,10 @@ fun launch(block: suspend () -> String): String {
 
 
 private class CharTest {
-    private val test: Char = '!'
+    private konst test: Char = '!'
 
     fun simpleTest() = launch {
-        val ch = get()
+        konst ch = get()
         if (ch == '!') "OK" else "Fail"
     }
 

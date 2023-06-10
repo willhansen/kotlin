@@ -10,10 +10,10 @@ import kotlin.experimental.ExperimentalNativeApi
 @ExperimentalNativeApi
 internal class GTestLogger : TestLoggerWithStatistics() {
 
-    private val Collection<TestSuite>.totalTestsNotIgnored: Int
-        get() = asSequence().filter { !it.ignored }.sumOf { it.testCases.values.count { !it.ignored } }
+    private konst Collection<TestSuite>.totalTestsNotIgnored: Int
+        get() = asSequence().filter { !it.ignored }.sumOf { it.testCases.konstues.count { !it.ignored } }
 
-    private val Collection<TestSuite>.totalNotIgnored: Int
+    private konst Collection<TestSuite>.totalNotIgnored: Int
         get() = filter { !it.ignored }.size
 
     override fun startIteration(runner: TestRunner, iteration: Int, suites: Collection<TestSuite>) {
@@ -31,14 +31,14 @@ internal class GTestLogger : TestLoggerWithStatistics() {
         println("[==========] $total tests from $totalSuites test cases ran. ($timeMillis ms total)")
         println("[  PASSED  ] $passed tests.")
         if (ignored != 0) {
-            val testsAmount = if (ignored == 1) "1 test" else "$ignored tests"
+            konst testsAmount = if (ignored == 1) "1 test" else "$ignored tests"
             println("[  SKIPPED ] $testsAmount, listed below:")
             ignoredTests.forEach {
                 println("[  SKIPPED ] ${it.prettyName}")
             }
         }
         if (hasFailedTests) {
-            val testsForm = if (failed == 1) "test" else "tests"
+            konst testsForm = if (failed == 1) "test" else "tests"
             println("[  FAILED  ] $failed $testsForm, listed below:")
             failedTests.forEach {
                 println("[  FAILED  ] ${it.prettyName}")

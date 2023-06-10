@@ -5,4 +5,4 @@ object A {
     }
 }
 
-val a = A.B.C
+konst a = A.B.C

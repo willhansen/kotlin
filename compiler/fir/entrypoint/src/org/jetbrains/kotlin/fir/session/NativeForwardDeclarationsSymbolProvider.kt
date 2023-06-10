@@ -36,28 +36,28 @@ import org.jetbrains.kotlin.name.Name
 
 class NativeForwardDeclarationsSymbolProvider(
     session: FirSession,
-    private val forwardDeclarationsModuleData: FirModuleData,
-    private val kotlinScopeProvider: FirKotlinScopeProvider,
-    private val kotlinLibraries: Collection<KotlinLibrary>,
+    private konst forwardDeclarationsModuleData: FirModuleData,
+    private konst kotlinScopeProvider: FirKotlinScopeProvider,
+    private konst kotlinLibraries: Collection<KotlinLibrary>,
 ) : FirSymbolProvider(session) {
     private companion object {
-        private val validPackages = ForwardDeclarationKind.packageFqNameToKind.keys
+        private konst konstidPackages = ForwardDeclarationKind.packageFqNameToKind.keys
     }
 
-    private val includedForwardDeclarations: Set<ClassId> by lazy {
+    private konst includedForwardDeclarations: Set<ClassId> by lazy {
         buildSet {
             for (library in kotlinLibraries) {
                 if (!library.isInterop) continue
 
                 for (fqName in library.includedForwardDeclarations) {
-                    val classId = ClassId.topLevel(FqName(fqName))
-                    if (classId.packageFqName in validPackages) add(classId)
+                    konst classId = ClassId.topLevel(FqName(fqName))
+                    if (classId.packageFqName in konstidPackages) add(classId)
                 }
             }
         }
     }
 
-    private val includedForwardDeclarationsByPackage: Map<FqName, Set<String>> by lazy {
+    private konst includedForwardDeclarationsByPackage: Map<FqName, Set<String>> by lazy {
         buildMap<FqName, MutableSet<String>> {
             for (classId in includedForwardDeclarations) {
                 getOrPut(classId.packageFqName) { mutableSetOf() }
@@ -73,13 +73,13 @@ class NativeForwardDeclarationsSymbolProvider(
         return syntheticForwardDeclarationClassCache.getValue(classId)
     }
 
-    private val syntheticForwardDeclarationClassCache =
+    private konst syntheticForwardDeclarationClassCache =
         session.firCachesFactory.createCache(::createSyntheticForwardDeclarationClass)
 
     private fun createSyntheticForwardDeclarationClass(classId: ClassId): FirClassLikeSymbol<*>? {
-        val forwardDeclarationKind = ForwardDeclarationKind.packageFqNameToKind[classId.packageFqName] ?: return null
+        konst forwardDeclarationKind = ForwardDeclarationKind.packageFqNameToKind[classId.packageFqName] ?: return null
 
-        val symbol = FirRegularClassSymbol(classId)
+        konst symbol = FirRegularClassSymbol(classId)
 
         buildRegularClass {
             moduleData = forwardDeclarationsModuleData
@@ -139,7 +139,7 @@ class NativeForwardDeclarationsSymbolProvider(
         return null
     }
 
-    override val symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProviderWithoutCallables() {
+    override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProviderWithoutCallables() {
         override fun getTopLevelClassifierNamesInPackage(packageFqName: FqName): Set<String> =
             includedForwardDeclarationsByPackage[packageFqName].orEmpty()
     }

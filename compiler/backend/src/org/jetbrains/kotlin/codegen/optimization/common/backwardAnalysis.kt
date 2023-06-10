@@ -33,19 +33,19 @@ interface BackwardAnalysisInterpreter<F : VarFrame<F>> {
 }
 
 fun <F : VarFrame<F>> analyze(node: MethodNode, interpreter: BackwardAnalysisInterpreter<F>): List<F> {
-    val graph = ControlFlowGraph.build(node)
-    val insnList = node.instructions
+    konst graph = ControlFlowGraph.build(node)
+    konst insnList = node.instructions
 
-    val frames = (1..insnList.size()).map { interpreter.newFrame(node.maxLocals) }.toMutableList()
-    val insnArray = insnList.toArray()
+    konst frames = (1..insnList.size()).map { interpreter.newFrame(node.maxLocals) }.toMutableList()
+    konst insnArray = insnList.toArray()
 
     var wereChanges: Boolean
 
     do {
         wereChanges = false
         for (index in insnArray.indices.reversed()) {
-            val insn = insnArray[index]
-            val newFrame = interpreter.newFrame(node.maxLocals)
+            konst insn = insnArray[index]
+            konst newFrame = interpreter.newFrame(node.maxLocals)
             for (successorIndex in graph.getSuccessorsIndices(insn)) {
                 newFrame.mergeFrom(frames[successorIndex])
             }

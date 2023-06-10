@@ -52,11 +52,11 @@ fun <T : FirCallBuilder> T.extractArgumentsFrom(container: List<FirExpression>):
 inline fun isClassLocal(classNode: LighterASTNode, getParent: LighterASTNode.() -> LighterASTNode?): Boolean {
     var currentNode: LighterASTNode? = classNode
     while (currentNode != null) {
-        val tokenType = currentNode.tokenType
-        val parent = currentNode.getParent()
-        val parentTokenType = parent?.tokenType
+        konst tokenType = currentNode.tokenType
+        konst parent = currentNode.getParent()
+        konst parentTokenType = parent?.tokenType
         if (tokenType == PROPERTY || tokenType == FUN) {
-            val grandParent = parent?.getParent()
+            konst grandParent = parent?.getParent()
             when {
                 parentTokenType == KT_FILE -> return true
                 parentTokenType == CLASS_BODY && !(grandParent?.tokenType == OBJECT_DECLARATION && grandParent?.getParent()?.tokenType == OBJECT_LITERAL) -> return true
@@ -85,7 +85,7 @@ fun generateDestructuringBlock(
         if (tmpVariable) {
             statements += container
         }
-        val isVar = multiDeclaration.isVar
+        konst isVar = multiDeclaration.isVar
         for ((index, entry) in multiDeclaration.entries.withIndex()) {
             if (entry == null) continue
             statements += buildProperty {
@@ -94,7 +94,7 @@ fun generateDestructuringBlock(
                 returnTypeRef = entry.returnTypeRef
                 name = entry.name
                 initializer = buildComponentCall {
-                    val componentCallSource = entry.source?.fakeElement(KtFakeSourceElementKind.DesugaredComponentFunctionCall)
+                    konst componentCallSource = entry.source?.fakeElement(KtFakeSourceElementKind.DesugaredComponentFunctionCall)
                     source = componentCallSource
                     explicitReceiver = generateResolvedAccessExpression(componentCallSource, container)
                     componentIndex = index + 1
@@ -110,4 +110,4 @@ fun generateDestructuringBlock(
     }
 }
 
-val FirUserTypeRef.isUnderscored get() = qualifier.lastOrNull()?.name?.asString() == "_"
+konst FirUserTypeRef.isUnderscored get() = qualifier.lastOrNull()?.name?.asString() == "_"

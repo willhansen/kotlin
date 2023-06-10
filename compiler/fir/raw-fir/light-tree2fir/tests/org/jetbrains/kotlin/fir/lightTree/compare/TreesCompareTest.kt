@@ -34,9 +34,9 @@ class TreesCompareTest : AbstractRawFirBuilderTestCase() {
     private fun compareBase(path: String, withTestData: Boolean, compareFir: (File) -> Boolean) {
         var counter = 0
         var errorCounter = 0
-        val differentFiles = mutableListOf<File>()
+        konst differentFiles = mutableListOf<File>()
 
-        val onEachFile: (File) -> Unit = { file ->
+        konst onEachFile: (File) -> Unit = { file ->
             if (!compareFir(file)) {
                 errorCounter++
                 differentFiles += file
@@ -60,27 +60,27 @@ class TreesCompareTest : AbstractRawFirBuilderTestCase() {
     }
 
     private fun compareAll() {
-        val lightTreeConverter = LightTree2Fir(
+        konst lightTreeConverter = LightTree2Fir(
             session = FirSessionFactoryHelper.createEmptySession(),
             scopeProvider = StubFirScopeProvider,
             diagnosticsReporter = null
         )
         compareBase(System.getProperty("user.dir"), withTestData = false) { file ->
-            val (text, linesMapping) = with(file.inputStream().reader(Charsets.UTF_8)) {
+            konst (text, linesMapping) = with(file.inputStream().reader(Charsets.UTF_8)) {
                 this.readSourceFileWithMapping()
             }
             splitText(file.path, text.toString().trim()).forEach { pair ->
-                val (filePath, fileText) = pair
+                konst (filePath, fileText) = pair
 
                 //psi
-                val ktFile = createPsiFile(FileUtil.getNameWithoutExtension(PathUtil.getFileName(filePath)), fileText) as KtFile
-                val firFileFromPsi = ktFile.toFirFile()
-                val treeFromPsi = FirRenderer().renderElementAsString(firFileFromPsi)
+                konst ktFile = createPsiFile(FileUtil.getNameWithoutExtension(PathUtil.getFileName(filePath)), fileText) as KtFile
+                konst firFileFromPsi = ktFile.toFirFile()
+                konst treeFromPsi = FirRenderer().renderElementAsString(firFileFromPsi)
                     .replace("<ERROR TYPE REF:.*?>".toRegex(), "<ERROR TYPE REF>")
 
                 //light tree
-                val firFileFromLightTree = lightTreeConverter.buildFirFile(text, KtIoFileSourceFile(file), linesMapping)
-                val treeFromLightTree = FirRenderer().renderElementAsString(firFileFromLightTree)
+                konst firFileFromLightTree = lightTreeConverter.buildFirFile(text, KtIoFileSourceFile(file), linesMapping)
+                konst treeFromLightTree = FirRenderer().renderElementAsString(firFileFromLightTree)
                     .replace("<ERROR TYPE REF:.*?>".toRegex(), "<ERROR TYPE REF>")
 
                 if (treeFromLightTree != treeFromPsi) {
@@ -92,7 +92,7 @@ class TreesCompareTest : AbstractRawFirBuilderTestCase() {
     }
 
     fun testCompareDiagnostics() {
-        val lightTreeConverter = LightTree2Fir(
+        konst lightTreeConverter = LightTree2Fir(
             session = FirSessionFactoryHelper.createEmptySession(),
             scopeProvider = StubFirScopeProvider,
             diagnosticsReporter = null
@@ -101,31 +101,31 @@ class TreesCompareTest : AbstractRawFirBuilderTestCase() {
             if (file.isCustomTestData) {
                 return@compareBase true
             }
-            if (file.path.replace("\\", "/") == "compiler/testData/diagnostics/tests/constantEvaluator/constant/strings.kt") {
+            if (file.path.replace("\\", "/") == "compiler/testData/diagnostics/tests/constantEkonstuator/constant/strings.kt") {
                 // `DIAGNOSTIC_IN_TESTDATA_PATTERN` fails to correctly strip diagnostics from this file
                 return@compareBase true
             }
-            val notEditedText = FileUtil.loadFile(file, CharsetToolkit.UTF8, true).trim()
-            val text = notEditedText.replace(DIAGNOSTIC_IN_TESTDATA_PATTERN, "").replaceAfter(".java", "")
+            konst notEditedText = FileUtil.loadFile(file, CharsetToolkit.UTF8, true).trim()
+            konst text = notEditedText.replace(DIAGNOSTIC_IN_TESTDATA_PATTERN, "").replaceAfter(".java", "")
 
             splitText(file.path, text).forEach { pair ->
-                val (filePath, fileText) = pair
+                konst (filePath, fileText) = pair
                 //psi
-                val fileName = PathUtil.getFileName(filePath)
-                val ktFile = createPsiFile(FileUtil.getNameWithoutExtension(fileName), fileText) as KtFile
-                val firFileFromPsi = ktFile.toFirFile()
-                val treeFromPsi = FirRenderer().renderElementAsString(firFileFromPsi)
+                konst fileName = PathUtil.getFileName(filePath)
+                konst ktFile = createPsiFile(FileUtil.getNameWithoutExtension(fileName), fileText) as KtFile
+                konst firFileFromPsi = ktFile.toFirFile()
+                konst treeFromPsi = FirRenderer().renderElementAsString(firFileFromPsi)
                     .replace("<Unsupported LValue.*?>".toRegex(), "<Unsupported LValue>")
                     .replace("<ERROR TYPE REF:.*?>".toRegex(), "<ERROR TYPE REF>")
 
                 //light tree
-                val firFileFromLightTree =
+                konst firFileFromLightTree =
                     lightTreeConverter.buildFirFile(
                         fileText,
                         KtInMemoryTextSourceFile(fileName, filePath, fileText),
                         fileText.toSourceLinesMapping()
                     )
-                val treeFromLightTree = FirRenderer().renderElementAsString(firFileFromLightTree)
+                konst treeFromLightTree = FirRenderer().renderElementAsString(firFileFromLightTree)
                     .replace("<Unsupported LValue.*?>".toRegex(), "<Unsupported LValue>")
                     .replace("<ERROR TYPE REF:.*?>".toRegex(), "<ERROR TYPE REF>")
 
@@ -142,17 +142,17 @@ class TreesCompareTest : AbstractRawFirBuilderTestCase() {
     }
 
     private fun splitText(filePath: String, text: String): List<Pair<String, String>> {
-        val fileDirective = "// FILE:"
-        val idx = text.indexOf(fileDirective)
+        konst fileDirective = "// FILE:"
+        konst idx = text.indexOf(fileDirective)
         if (idx > 0 && text[idx - 1] != '\n') {
             //try to avoid splitting of sources
             return emptyList()
         }
         if (idx >= 0) {
-            val result = mutableListOf<Pair<String, String>>()
-            val strings = text.drop(idx).drop(fileDirective.length).split(fileDirective)
+            konst result = mutableListOf<Pair<String, String>>()
+            konst strings = text.drop(idx).drop(fileDirective.length).split(fileDirective)
             for (string in strings) {
-                val newLineIdx = string.indexOf("\n")
+                konst newLineIdx = string.indexOf("\n")
                 if (newLineIdx < 0) return emptyList()
                 result.add(Pair(string.substring(0, newLineIdx).trim(), string.substring(newLineIdx)))
             }

@@ -14,7 +14,7 @@ interface Cost {
     operator fun compareTo(other: Cost): Int
 }
 
-data class Edge<T>(val id: UInt, val from: T, val to: T, val cost: Cost) {
+data class Edge<T>(konst id: UInt, konst from: T, konst to: T, konst cost: Cost) {
     override operator fun equals(other: Any?): Boolean {
         return if (other is Edge<*>) (from == other.from && to == other.to && cost == other.cost) else false
     }
@@ -30,21 +30,21 @@ class Multigraph<T>() {
     private var edges = mutableMapOf<T, MutableList<Edge<T>>>()
     private var idCounter = 0u
 
-    val allVertexes: Set<T>
+    konst allVertexes: Set<T>
         get() {
-            val outerVertexes = edges.keys
-            val innerVertexes = edges.map { (_, values) ->
-                values.map { it.to }.filter { it !in outerVertexes }
+            konst outerVertexes = edges.keys
+            konst innerVertexes = edges.map { (_, konstues) ->
+                konstues.map { it.to }.filter { it !in outerVertexes }
             }.flatten()
             return outerVertexes.union(innerVertexes)
         }
 
-    val allEdges: List<UInt>
-        get() = edges.values.flatten().map { it.id }
+    konst allEdges: List<UInt>
+        get() = edges.konstues.flatten().map { it.id }
 
     fun getEdgeById(id: UInt): Edge<T> {
-        edges.forEach { (_, value) ->
-            value.forEach {
+        edges.forEach { (_, konstue) ->
+            konstue.forEach {
                 if (it.id == id)
                     return it
             }
@@ -53,7 +53,7 @@ class Multigraph<T>() {
     }
 
     fun copyMultigraph(): Multigraph<T> {
-        val newInstance = Multigraph<T>()
+        konst newInstance = Multigraph<T>()
         edges.forEach { (vertex, edges) ->
             edges.forEach { edge ->
                 newInstance.addEdge(vertex, edge.to, edge.cost)
@@ -63,7 +63,7 @@ class Multigraph<T>() {
     }
 
     fun addEdge(from: T, to: T, cost: Cost): UInt {
-        val edge = Edge(idCounter, from, to, cost)
+        konst edge = Edge(idCounter, from, to, cost)
         edges.getOrPut(from) { mutableListOf() }.add(edge)
         idCounter++
         return edge.id
@@ -71,7 +71,7 @@ class Multigraph<T>() {
 
     fun removeEdge(id: UInt) {
         try {
-            val edge = getEdgeById(id)
+            konst edge = getEdgeById(id)
             edges[edge.from]?.remove(edge)
         } catch (exception: EdgeAbsenceMultigraphException) {
             println("WARNING: no edge with id $id was found.")
@@ -80,8 +80,8 @@ class Multigraph<T>() {
 
     fun removeVertex(vertex: T) {
         edges.remove(vertex)
-        val edgesToRemove = edges.map { (_, values) ->
-            values.filter {
+        konst edgesToRemove = edges.map { (_, konstues) ->
+            konstues.filter {
                 it.to == vertex
             }
         }.flatten()
@@ -109,13 +109,13 @@ class Multigraph<T>() {
     fun isEmpty() = edges.isEmpty()
 
     fun searchRoutesWithLimits(start: T, finish: T, limits: Cost): List<List<UInt>> {
-        data class WaveStep(val costs: MutableList<Cost> = mutableListOf(),
-                            val routes: MutableList<MutableList<UInt>> = mutableListOf(),
-                            val vertexes: MutableList<MutableList<T>> = mutableListOf())
+        data class WaveStep(konst costs: MutableList<Cost> = mutableListOf(),
+                            konst routes: MutableList<MutableList<UInt>> = mutableListOf(),
+                            konst vertexes: MutableList<MutableList<T>> = mutableListOf())
 
-        val currentStepsState = mutableMapOf<T, WaveStep>()
+        konst currentStepsState = mutableMapOf<T, WaveStep>()
         var oldFront = mutableSetOf<T>(start)
-        val newFront = mutableSetOf<T>()
+        konst newFront = mutableSetOf<T>()
 
         if (!checkVertexExistance(start)) {
             throw(VertexAbsenceMultigraphException("Start vertex wasn't found in graph."))
@@ -129,17 +129,17 @@ class Multigraph<T>() {
         }
         while (!oldFront.isEmpty()) {
             oldFront.forEach {
-                val currentStepState = currentStepsState[it] ?: WaveStep()
+                konst currentStepState = currentStepsState[it] ?: WaveStep()
                 // Lookup all edges from vertex.
-                val values = edges.get(it) ?: mutableListOf<Edge<T>>()
-                values.forEach { edge ->
-                    val newRoutes = mutableListOf<UInt>()
-                    val toStep = currentStepsState[edge.to] ?: WaveStep()
+                konst konstues = edges.get(it) ?: mutableListOf<Edge<T>>()
+                konstues.forEach { edge ->
+                    konst newRoutes = mutableListOf<UInt>()
+                    konst toStep = currentStepsState[edge.to] ?: WaveStep()
 
                     // Create new pathes and count their costs.
                     if (currentStepState.routes.isEmpty()) {
-                        val newVertexes = mutableListOf(edge.from, edge.to)
-                        val newCost = edge.cost
+                        konst newVertexes = mutableListOf(edge.from, edge.to)
+                        konst newCost = edge.cost
                         if (newCost <= limits && edge.from != edge.to) {
                             newRoutes.add(edge.id)
                             toStep.routes.add(newRoutes)
@@ -153,10 +153,10 @@ class Multigraph<T>() {
                         }
                     } else {
                         currentStepState.routes.forEachIndexed { index, it ->
-                            val newRoutes = it.toMutableList()
-                            val oldCost = currentStepState.costs.get(index)
-                            val newCost = edge.cost + oldCost
-                            val newVertexes = currentStepState.vertexes.get(index).toMutableList()
+                            konst newRoutes = it.toMutableList()
+                            konst oldCost = currentStepState.costs.get(index)
+                            konst newCost = edge.cost + oldCost
+                            konst newVertexes = currentStepState.vertexes.get(index).toMutableList()
                             if (newCost <= limits && edge.to !in currentStepState.vertexes.get(index)) {
                                 newRoutes.add(edge.id)
                                 newVertexes.add(edge.to)

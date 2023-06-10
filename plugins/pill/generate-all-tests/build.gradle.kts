@@ -4,7 +4,7 @@ plugins {
     id("jps-compatible")
 }
 
-val depenencyProjects = arrayOf(
+konst depenencyProjects = arrayOf(
     ":generators",
     ":compiler",
     ":compiler:test-infrastructure",

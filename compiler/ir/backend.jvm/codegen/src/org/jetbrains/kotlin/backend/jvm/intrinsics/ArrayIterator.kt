@@ -29,10 +29,10 @@ object ArrayIterator : IntrinsicMethod() {
         signature: JvmMethodSignature,
         classCodegen: ClassCodegen
     ): IrIntrinsicFunction {
-        val owner = classCodegen.typeMapper.mapClass(expression.symbol.owner.parentAsClass)
+        konst owner = classCodegen.typeMapper.mapClass(expression.symbol.owner.parentAsClass)
         return IrIntrinsicFunction.create(expression, signature, classCodegen, owner) {
-            val methodSignature = "(${owner.descriptor})${signature.returnType.descriptor}"
-            val intrinsicOwner =
+            konst methodSignature = "(${owner.descriptor})${signature.returnType.descriptor}"
+            konst intrinsicOwner =
                 if (AsmUtil.isPrimitive(owner.elementType))
                     "kotlin/jvm/internal/ArrayIteratorsKt"
                 else

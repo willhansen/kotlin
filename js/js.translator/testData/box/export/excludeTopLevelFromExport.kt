@@ -5,10 +5,10 @@
 // FILE: lib.kt
 @file:JsExport
 
-val value: String = "TEST"
+konst konstue: String = "TEST"
 
 @JsExport.Ignore
-val excludedValue: Int = 42
+konst excludedValue: Int = 42
 
 fun foo(): String = "FOO"
 
@@ -33,7 +33,7 @@ object Companion {
 function box() {
     var lib = this.lib;
 
-    if (lib.value !== "TEST") return "Error: exported property was not exported"
+    if (lib.konstue !== "TEST") return "Error: exported property was not exported"
     if (lib.excludedValue === 42) return "Error: not exported property was exported"
 
     if (lib.foo() !== "FOO") return "Error: exported function was not exported"

@@ -14,51 +14,51 @@ interface KtSourceFileLinesMapping {
     fun getLineAndColumnByOffset(offset: Int): Pair<Int, Int>
     fun getLineByOffset(offset: Int): Int
 
-    val lastOffset: Int
-    val linesCount: Int
+    konst lastOffset: Int
+    konst linesCount: Int
 }
 
-class KtPsiSourceFileLinesMapping(val psiFile: PsiFile) : KtSourceFileLinesMapping {
-    private val document: Document? by lazy { psiFile.viewProvider.document }
+class KtPsiSourceFileLinesMapping(konst psiFile: PsiFile) : KtSourceFileLinesMapping {
+    private konst document: Document? by lazy { psiFile.viewProvider.document }
 
     override fun getLineStartOffset(line: Int): Int =
         document?.getLineStartOffset(line) ?: -1
 
     override fun getLineAndColumnByOffset(offset: Int): Pair<Int, Int> =
         document?.let {
-            val lineNumber = it.getLineNumber(offset)
-            val lineStartOffset = it.getLineStartOffset(lineNumber)
+            konst lineNumber = it.getLineNumber(offset)
+            konst lineStartOffset = it.getLineStartOffset(lineNumber)
             lineNumber to offset - lineStartOffset
         } ?: (-1 to -1)
 
     override fun getLineByOffset(offset: Int): Int =
         document?.getLineNumber(offset) ?: -1
 
-    override val lastOffset: Int
+    override konst lastOffset: Int
         get() = document?.textLength ?: -1
 
-    override val linesCount: Int
+    override konst linesCount: Int
         get() = document?.lineCount ?: 0
 }
 
 open class KtSourceFileLinesMappingFromLineStartOffsets(
-    val lineStartOffsets: IntArray, override val lastOffset: Int
+    konst lineStartOffsets: IntArray, override konst lastOffset: Int
 ) : KtSourceFileLinesMapping {
     override fun getLineStartOffset(line: Int): Int = lineStartOffsets[line]
 
     override fun getLineAndColumnByOffset(offset: Int): Pair<Int, Int> {
-        val lineNumber = getLineByOffset(offset)
+        konst lineNumber = getLineByOffset(offset)
         if (lineNumber < 0) return -1 to -1
-        val lineStartOffset = lineStartOffsets[lineNumber]
+        konst lineStartOffset = lineStartOffsets[lineNumber]
         return lineNumber to offset - lineStartOffset
     }
 
     override fun getLineByOffset(offset: Int): Int {
-        val index = lineStartOffsets.binarySearch(offset)
+        konst index = lineStartOffsets.binarySearch(offset)
         return if (index >= 0) index else -index - 2
     }
 
-    override val linesCount: Int
+    override konst linesCount: Int
         get() = lineStartOffsets.size
 }
 
@@ -69,15 +69,15 @@ open class KtSourceFileLinesMappingFromLineStartOffsets(
  *  The separators are converted similarly to the com.intellij.openapi.util.text.StringUtilRt algorithms
  */
 fun InputStreamReader.readSourceFileWithMapping(): Pair<CharSequence, KtSourceFileLinesMapping> {
-    val buffer = CharArray(255)
+    konst buffer = CharArray(255)
     var bufLength = -1
     var bufPos = 0
     var skipNextLf = false
 
     var charsRead = 0
 
-    val lineOffsets = mutableListOf(0) // TODO: consider using implicit first line offset (needs to be handled properly in IR)
-    val sb = StringBuilder()
+    konst lineOffsets = mutableListOf(0) // TODO: consider using implicit first line offset (needs to be handled properly in IR)
+    konst sb = StringBuilder()
 
     while (true) {
         if (bufPos >= bufLength) {
@@ -87,7 +87,7 @@ fun InputStreamReader.readSourceFileWithMapping(): Pair<CharSequence, KtSourceFi
                 break
             }
         } else {
-            val c = buffer[bufPos++]
+            konst c = buffer[bufPos++]
             charsRead++
             when {
                 c == '\n' && skipNextLf -> {
@@ -116,7 +116,7 @@ fun InputStreamReader.readSourceFileWithMapping(): Pair<CharSequence, KtSourceFi
  * intended for using mainly in tests, so no care is taken about performance or possible corner cases
  */
 fun CharSequence.toSourceLinesMapping(): KtSourceFileLinesMapping {
-    val lineOffsets = mutableListOf(0)
+    konst lineOffsets = mutableListOf(0)
     var offset = 0
     for (c in this) {
         offset++

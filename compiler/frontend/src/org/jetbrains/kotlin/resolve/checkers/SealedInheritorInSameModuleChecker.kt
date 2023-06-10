@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.resolve.source.PsiSourceFile
 object SealedInheritorInSameModuleChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is ClassDescriptor || declaration !is KtClassOrObject) return
-        val currentModule = descriptor.module
+        konst currentModule = descriptor.module
         for (superTypeListEntry in declaration.superTypeListEntries) {
-            val typeReference = superTypeListEntry.typeReference ?: continue
-            val superType = typeReference.getAbbreviatedTypeOrType(context.trace.bindingContext)?.unwrap() ?: continue
-            val superClass = superType.constructor.declarationDescriptor ?: continue
+            konst typeReference = superTypeListEntry.typeReference ?: continue
+            konst superType = typeReference.getAbbreviatedTypeOrType(context.trace.bindingContext)?.unwrap() ?: continue
+            konst superClass = superType.constructor.declarationDescriptor ?: continue
             if (superClass.isSealed()) {
                 /*
                  * If this condition is true then we compile code from CLI mode and class came from
@@ -71,6 +71,6 @@ object SealedInheritorInSameModuleChecker : DeclarationChecker {
         }
     }
 
-    private val ClassifierDescriptor.isFromCommonSource: Boolean
+    private konst ClassifierDescriptor.isFromCommonSource: Boolean
         get() = ((this.source.containingFile as? PsiSourceFile)?.psiFile as? KtFile)?.isCommonSource ?: false
 }

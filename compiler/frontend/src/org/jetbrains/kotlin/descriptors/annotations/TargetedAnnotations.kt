@@ -6,8 +6,8 @@
 package org.jetbrains.kotlin.descriptors.annotations
 
 class TargetedAnnotations(
-    private val standardAnnotations: List<AnnotationDescriptor>,
-    private val targetedAnnotations: List<AnnotationWithTarget>
+    private konst standardAnnotations: List<AnnotationDescriptor>,
+    private konst targetedAnnotations: List<AnnotationWithTarget>
 ) : Annotations {
     override fun isEmpty(): Boolean = standardAnnotations.isEmpty() && targetedAnnotations.isEmpty()
 

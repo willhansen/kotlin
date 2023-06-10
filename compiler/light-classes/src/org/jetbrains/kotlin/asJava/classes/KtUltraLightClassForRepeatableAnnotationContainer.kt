@@ -41,7 +41,7 @@ class KtUltraLightClassForRepeatableAnnotationContainer(classOrObject: KtClassOr
         support,
     )
 
-    private val _modifierList: PsiModifierList? by lazyPub {
+    private konst _modifierList: PsiModifierList? by lazyPub {
         KtUltraLightModifierListForRepeatableAnnotationContainer(this, support)
     }
 
@@ -51,15 +51,15 @@ class KtUltraLightClassForRepeatableAnnotationContainer(classOrObject: KtClassOr
     override fun setName(name: String): PsiElement =
         throw IncorrectOperationException("Impossible to rename ${JvmAbi.REPEATABLE_ANNOTATION_CONTAINER_NAME}")
 
-    private val _ownMethods: List<KtLightMethod> by lazyPub {
-        val lightMethodBuilder = LightMethodBuilder(
-            manager, language, "value",
+    private konst _ownMethods: List<KtLightMethod> by lazyPub {
+        konst lightMethodBuilder = LightMethodBuilder(
+            manager, language, "konstue",
             LightParameterListBuilder(manager, language),
             LightModifierList(manager, language, PsiModifier.PUBLIC, PsiModifier.ABSTRACT)
         )
 
         lightMethodBuilder.setMethodReturnType {
-            val qualifier = containingClass?.qualifiedName ?: return@setMethodReturnType null
+            konst qualifier = containingClass?.qualifiedName ?: return@setMethodReturnType null
             JavaPsiFacade.getElementFactory(project).createTypeByFQClassName(qualifier, resolveScope).createArrayType()
         }
 
@@ -77,16 +77,16 @@ class KtUltraLightClassForRepeatableAnnotationContainer(classOrObject: KtClassOr
 }
 
 private class KtUltraLightModifierListForRepeatableAnnotationContainer(
-    private val containingClass: KtLightClassForSourceDeclaration,
+    private konst containingClass: KtLightClassForSourceDeclaration,
     support: KtUltraLightSupport,
 ) : KtUltraLightModifierList<KtLightClassForSourceDeclaration>(containingClass, support) {
     override fun hasModifierProperty(name: String): Boolean = name in modifiers
     override fun copy() = KtUltraLightModifierListForRepeatableAnnotationContainer(containingClass, support)
     override fun PsiAnnotation.additionalConverter(): KtLightAbstractAnnotation? = tryConvertAsRepeatableContainer()
-    override val annotationsFilter: ((KtLightAbstractAnnotation) -> Boolean) = { it.qualifiedName in allowedAnnotations }
+    override konst annotationsFilter: ((KtLightAbstractAnnotation) -> Boolean) = { it.qualifiedName in allowedAnnotations }
 
     companion object {
-        private val allowedAnnotations = setOf(
+        private konst allowedAnnotations = setOf(
             KOTLIN_JVM_INTERNAL_REPEATABLE_CONTAINER,
             CommonClassNames.JAVA_LANG_ANNOTATION_RETENTION,
             StandardNames.FqNames.retention.asString(),
@@ -96,6 +96,6 @@ private class KtUltraLightModifierListForRepeatableAnnotationContainer(
 
         // It is marked as Abstract because all the annotation classes are marked as Abstract
         // It is marked as Static because all nested interfaces marked as Static
-        private val modifiers = setOf(PsiModifier.PUBLIC, PsiModifier.ABSTRACT, PsiModifier.STATIC)
+        private konst modifiers = setOf(PsiModifier.PUBLIC, PsiModifier.ABSTRACT, PsiModifier.STATIC)
     }
 }

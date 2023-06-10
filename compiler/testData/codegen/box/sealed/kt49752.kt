@@ -13,14 +13,14 @@ abstract class Interpreter<IS, TS, SELF>
 
 sealed interface BaseTerminal<I : Interpreter<*, out BaseTerminal<I>, I>> : Interpreter.Terminal<I> {
     data class Success<I : Interpreter<*, out BaseTerminal<I>, I>>(
-        val result: Int
+        konst result: Int
     ) : BaseTerminal<I>
 }
 
 class CountingInterpreter : Interpreter<CountingInterpreter.Intermediary, BaseTerminal.Success<CountingInterpreter>, CountingInterpreter>() {
     sealed interface Intermediary : Interpreter.Intermediary<CountingInterpreter> {
         data class KeepCounting(
-            val togo: Int
+            konst togo: Int
         ) : Intermediary
     }
     var count = 0
@@ -39,7 +39,7 @@ class CountingInterpreter : Interpreter<CountingInterpreter.Intermediary, BaseTe
 }
 
 fun box(): String {
-    val interpreter = CountingInterpreter()
+    konst interpreter = CountingInterpreter()
     var step: Interpreter.Step<CountingInterpreter> = CountingInterpreter.Intermediary.KeepCounting(1)
     while (step is CountingInterpreter.Intermediary) {
         step = interpreter.next(step).invoke()

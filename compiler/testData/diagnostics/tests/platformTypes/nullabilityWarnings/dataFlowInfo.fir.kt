@@ -13,7 +13,7 @@ public class J {
 // FILE: k.kt
 
 fun test() {
-    val n = J.staticN
+    konst n = J.staticN
     foo(<!ARGUMENT_TYPE_MISMATCH!>n<!>)
     J.staticNN = <!ASSIGNMENT_TYPE_MISMATCH!>n<!>
     if (n != null) {
@@ -21,7 +21,7 @@ fun test() {
         J.staticNN = n
     }
 
-    val x: J? = null
+    konst x: J? = null
     J.staticNN = <!ASSIGNMENT_TYPE_MISMATCH!>x<!>
     if (x != null) {
         J.staticNN = x

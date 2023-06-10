@@ -138,7 +138,7 @@ fun checkPrimitives() {
     id(15uL)
 }
 
-value class CharWrapper(val ch: Char)
+konstue class CharWrapper(konst ch: Char)
 
 // CHECK-LABEL: zeroext i16 @"kfun:#id(CharWrapper){}CharWrapper"(i16 zeroext %0)
 // CHECK-LABEL-AAPCS: i16 @"kfun:#id(CharWrapper){}CharWrapper"(i16 %0)
@@ -147,7 +147,7 @@ fun id(arg: CharWrapper): CharWrapper {
     return arg
 }
 
-// Check that value classes doesn't affect parameter attributes
+// Check that konstue classes doesn't affect parameter attributes
 
 fun checkInlineClasses() {
     // CHECK: call zeroext i16 @"kfun:#id(CharWrapper){}CharWrapper"(i16 zeroext {{.*}})

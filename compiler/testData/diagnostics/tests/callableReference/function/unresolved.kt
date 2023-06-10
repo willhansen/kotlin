@@ -3,7 +3,7 @@
 class A
 
 fun test1() {
-    val foo = ::<!UNRESOLVED_REFERENCE!>foo<!>
+    konst foo = ::<!UNRESOLVED_REFERENCE!>foo<!>
 
     ::<!UNRESOLVED_REFERENCE!>bar<!>
 

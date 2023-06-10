@@ -17,7 +17,7 @@ public interface KtSuperTypeListRenderer {
     public object AS_LIST : KtSuperTypeListRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderSuperTypes(symbol: KtClassOrObjectSymbol, printer: PrettyPrinter): Unit = printer {
-            val superTypesToRender = symbol.superTypes.filter { superTypesFilter.filter(it, symbol) }.ifEmpty { return }
+            konst superTypesToRender = symbol.superTypes.filter { superTypesFilter.filter(it, symbol) }.ifEmpty { return }
             printCollection(superTypesToRender) { type ->
                 superTypeRenderer.renderSuperType(type, symbol, printer)
                 superTypesArgumentRenderer.renderSuperTypeArguments(type, symbol, printer)

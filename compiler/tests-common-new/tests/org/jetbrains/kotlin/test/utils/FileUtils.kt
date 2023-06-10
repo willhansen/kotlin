@@ -14,7 +14,7 @@ fun File.withExtension(extension: String): File {
 
 fun File.withSuffixAndExtension(suffix: String, extension: String): File {
     @Suppress("NAME_SHADOWING")
-    val extension = extension.removePrefix(".")
+    konst extension = extension.removePrefix(".")
     return parentFile.resolve("$nameWithoutExtension$suffix.$extension")
 }
 
@@ -29,11 +29,11 @@ fun File.isDirectiveDefined(directive: String): Boolean = this.useLines { line -
 fun File.removeDirectiveFromFile(directive: Directive) {
     if (!exists()) return
 
-    val directiveName = directive.name
-    val directiveRegexp = "^// $directiveName(:.*)?$(\n)?".toRegex(RegexOption.MULTILINE)
-    val text = readText()
-    val directiveRange = directiveRegexp.find(text)?.range
+    konst directiveName = directive.name
+    konst directiveRegexp = "^// $directiveName(:.*)?$(\n)?".toRegex(RegexOption.MULTILINE)
+    konst text = readText()
+    konst directiveRange = directiveRegexp.find(text)?.range
         ?: error("Directive $directiveName was not found in $this")
-    val textWithoutDirective = text.removeRange(directiveRange)
+    konst textWithoutDirective = text.removeRange(directiveRange)
     writeText(textWithoutDirective)
 }

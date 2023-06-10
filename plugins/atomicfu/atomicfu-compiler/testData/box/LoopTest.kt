@@ -2,29 +2,29 @@ import kotlinx.atomicfu.*
 import kotlin.test.*
 
 class LoopTest {
-    val a = atomic(0)
-    val a1 = atomic(1)
-    val b = atomic(true)
-    val l = atomic(5000000000)
-    val r = atomic<A>(A("aaaa"))
-    val rs = atomic<String>("bbbb")
+    konst a = atomic(0)
+    konst a1 = atomic(1)
+    konst b = atomic(true)
+    konst l = atomic(5000000000)
+    konst r = atomic<A>(A("aaaa"))
+    konst rs = atomic<String>("bbbb")
 
-    class A(val s: String)
+    class A(konst s: String)
 
     fun atomicfuIntLoopTest() {
-        a.loop { value ->
-            if (a.compareAndSet(value, 777)) {
-                assertEquals(777, a.value)
+        a.loop { konstue ->
+            if (a.compareAndSet(konstue, 777)) {
+                assertEquals(777, a.konstue)
                 return
             }
         }
     }
 
     fun atomicfuBooleanLoopTest() {
-        b.loop { value ->
-            assertTrue(value)
-            if (!b.value) return
-            if (b.compareAndSet(value, false)) {
+        b.loop { konstue ->
+            assertTrue(konstue)
+            if (!b.konstue) return
+            if (b.compareAndSet(konstue, false)) {
                 return
             }
         }
@@ -51,76 +51,76 @@ class LoopTest {
 
     inline fun atomicfuLoopTest() {
         atomicfuIntLoopTest()
-        assertEquals(777, a.value)
+        assertEquals(777, a.konstue)
         atomicfuBooleanLoopTest()
-        assertFalse(b.value)
+        assertFalse(b.konstue)
         atomicfuLongLoopTest()
-        assertEquals(9000000000, l.value)
+        assertEquals(9000000000, l.konstue)
         atomicfuRefLoopTest()
-        assertEquals("bbbb", r.value.s)
+        assertEquals("bbbb", r.konstue.s)
     }
 
     fun atomicfuUpdateTest() {
-        a.value = 0
-        a.update { value ->
-            val newValue = value + 1000
+        a.konstue = 0
+        a.update { konstue ->
+            konst newValue = konstue + 1000
             if (newValue >= 0) Int.MAX_VALUE else newValue
         }
-        assertEquals(Int.MAX_VALUE, a.value)
+        assertEquals(Int.MAX_VALUE, a.konstue)
         b.update { true }
-        assertEquals(true, b.value)
-        assertTrue(b.value)
-        l.value = 0L
+        assertEquals(true, b.konstue)
+        assertTrue(b.konstue)
+        l.konstue = 0L
         l.update { cur ->
-            val newValue = cur + 1000
+            konst newValue = cur + 1000
             if (newValue >= 0L) Long.MAX_VALUE else newValue
         }
-        assertEquals(Long.MAX_VALUE, l.value)
+        assertEquals(Long.MAX_VALUE, l.konstue)
         r.lazySet(A("aaaa"))
         r.update { cur ->
             A("cccc${cur.s}")
         }
-        assertEquals("ccccaaaa", r.value.s)
+        assertEquals("ccccaaaa", r.konstue.s)
     }
 
     fun atomicfuUpdateAndGetTest() {
-        val res1 = a.updateAndGet { value ->
-            if (value >= 0) Int.MAX_VALUE else value
+        konst res1 = a.updateAndGet { konstue ->
+            if (konstue >= 0) Int.MAX_VALUE else konstue
         }
         assertEquals(Int.MAX_VALUE, res1)
         assertTrue(b.updateAndGet { true })
-        val res2 = l.updateAndGet { cur ->
+        konst res2 = l.updateAndGet { cur ->
             if (cur >= 0L) Long.MAX_VALUE else cur
         }
         assertEquals(Long.MAX_VALUE, res2)
         r.lazySet(A("aaaa"))
-        val res3 = r.updateAndGet { cur ->
+        konst res3 = r.updateAndGet { cur ->
             A("cccc${cur.s}")
         }
         assertEquals("ccccaaaa", res3.s)
     }
 
     fun atomicfuGetAndUpdateTest() {
-        a.getAndUpdate { value ->
-            if (value >= 0) Int.MAX_VALUE else value
+        a.getAndUpdate { konstue ->
+            if (konstue >= 0) Int.MAX_VALUE else konstue
         }
-        assertEquals(Int.MAX_VALUE, a.value)
+        assertEquals(Int.MAX_VALUE, a.konstue)
         b.getAndUpdate { true }
-        assertTrue(b.value)
+        assertTrue(b.konstue)
         l.getAndUpdate { cur ->
             if (cur >= 0L) Long.MAX_VALUE else cur
         }
-        assertEquals(Long.MAX_VALUE, l.value)
+        assertEquals(Long.MAX_VALUE, l.konstue)
         r.lazySet(A("aaaa"))
         r.getAndUpdate { cur ->
             A("cccc${cur.s}")
         }
-        assertEquals("ccccaaaa", r.value.s)
+        assertEquals("ccccaaaa", r.konstue.s)
     }
 }
 
 fun box(): String {
-    val testClass = LoopTest()
+    konst testClass = LoopTest()
     testClass.atomicfuLoopTest()
     testClass.atomicfuUpdateTest()
     testClass.atomicfuUpdateAndGetTest()

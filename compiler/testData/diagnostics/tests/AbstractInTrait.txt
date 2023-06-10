@@ -3,10 +3,10 @@ package
 package abstract {
 
     public interface MyTrait {
-        public abstract val a: kotlin.Int
-        public open val a1: kotlin.Int = 1
-        public abstract val a2: kotlin.Int
-        public abstract val a3: kotlin.Int = 1
+        public abstract konst a: kotlin.Int
+        public open konst a1: kotlin.Int = 1
+        public abstract konst a2: kotlin.Int
+        public abstract konst a3: kotlin.Int = 1
         public abstract var b: kotlin.Int
         public open var b1: kotlin.Int
         public abstract var b2: kotlin.Int
@@ -15,10 +15,10 @@ package abstract {
         public open var c1: kotlin.Int
         public abstract var c2: kotlin.Int
         public abstract var c3: kotlin.Int
-        public open val e: kotlin.Int
-        public open val e1: kotlin.Int = 0
-        public abstract val e2: kotlin.Int
-        public abstract val e3: kotlin.Int = 0
+        public open konst e: kotlin.Int
+        public open konst e1: kotlin.Int = 0
+        public abstract konst e2: kotlin.Int
+        public abstract konst e3: kotlin.Int = 0
         public abstract var i: kotlin.Int
         public open var i1: kotlin.Int
         public open var j: kotlin.Int

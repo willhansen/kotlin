@@ -8,8 +8,8 @@ inline fun le(a: Any, b: Any) = lex(a as Comparable<Any>, b)
 inline fun ge(a: Any, b: Any) = gex(a as Comparable<Any>, b)
 inline fun gt(a: Any, b: Any) = gtx(a as Comparable<Any>, b)
 
-val ONE = 1
-val ONEL = 1L
+konst ONE = 1
+konst ONEL = 1L
 
 fun box(): String {
     return when {

@@ -388,34 +388,34 @@ private static final long serialVersionUID = 0L;
 
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto parseFrom(
       java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto parseFrom(
       com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto parseFrom(java.io.InputStream input)
@@ -650,8 +650,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.setField(field, value);
+        java.lang.Object konstue) {
+      return super.setField(field, konstue);
     }
     @java.lang.Override
     public Builder clearField(
@@ -666,14 +666,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return super.setRepeatedField(field, index, value);
+        int index, java.lang.Object konstue) {
+      return super.setRepeatedField(field, index, konstue);
     }
     @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.addRepeatedField(field, value);
+        java.lang.Object konstue) {
+      return super.addRepeatedField(field, konstue);
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -868,7 +868,7 @@ private static final long serialVersionUID = 0L;
             } // default:
           } // switch (tag)
         } // while (!done)
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.unwrapIOException();
       } finally {
         onChanged();
@@ -901,15 +901,15 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
      */
-    public Builder setExtras(org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto value) {
+    public Builder setExtras(org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto konstue) {
       if (extrasBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        extras_ = value;
+        extras_ = konstue;
         onChanged();
       } else {
-        extrasBuilder_.setMessage(value);
+        extrasBuilder_.setMessage(konstue);
       }
       bitField0_ |= 0x00000001;
       return this;
@@ -931,19 +931,19 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
      */
-    public Builder mergeExtras(org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto value) {
+    public Builder mergeExtras(org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto konstue) {
       if (extrasBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0) &&
             extras_ != null &&
             extras_ != org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto.getDefaultInstance()) {
           extras_ =
-            org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto.newBuilder(extras_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto.newBuilder(extras_).mergeFrom(konstue).buildPartial();
         } else {
-          extras_ = value;
+          extras_ = konstue;
         }
         onChanged();
       } else {
-        extrasBuilder_.mergeFrom(value);
+        extrasBuilder_.mergeFrom(konstue);
       }
       bitField0_ |= 0x00000001;
       return this;
@@ -1021,15 +1021,15 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto coordinates = 2;</code>
      */
-    public Builder setCoordinates(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto value) {
+    public Builder setCoordinates(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto konstue) {
       if (coordinatesBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        coordinates_ = value;
+        coordinates_ = konstue;
         onChanged();
       } else {
-        coordinatesBuilder_.setMessage(value);
+        coordinatesBuilder_.setMessage(konstue);
       }
       bitField0_ |= 0x00000002;
       return this;
@@ -1051,19 +1051,19 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto coordinates = 2;</code>
      */
-    public Builder mergeCoordinates(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto value) {
+    public Builder mergeCoordinates(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto konstue) {
       if (coordinatesBuilder_ == null) {
         if (((bitField0_ & 0x00000002) != 0) &&
             coordinates_ != null &&
             coordinates_ != org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto.getDefaultInstance()) {
           coordinates_ =
-            org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto.newBuilder(coordinates_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto.newBuilder(coordinates_).mergeFrom(konstue).buildPartial();
         } else {
-          coordinates_ = value;
+          coordinates_ = konstue;
         }
         onChanged();
       } else {
-        coordinatesBuilder_.mergeFrom(value);
+        coordinatesBuilder_.mergeFrom(konstue);
       }
       bitField0_ |= 0x00000002;
       return this;
@@ -1163,16 +1163,16 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
      */
     public Builder setPlatforms(
-        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto value) {
+        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto konstue) {
       if (platformsBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensurePlatformsIsMutable();
-        platforms_.set(index, value);
+        platforms_.set(index, konstue);
         onChanged();
       } else {
-        platformsBuilder_.setMessage(index, value);
+        platformsBuilder_.setMessage(index, konstue);
       }
       return this;
     }
@@ -1193,16 +1193,16 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
      */
-    public Builder addPlatforms(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto value) {
+    public Builder addPlatforms(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto konstue) {
       if (platformsBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensurePlatformsIsMutable();
-        platforms_.add(value);
+        platforms_.add(konstue);
         onChanged();
       } else {
-        platformsBuilder_.addMessage(value);
+        platformsBuilder_.addMessage(konstue);
       }
       return this;
     }
@@ -1210,16 +1210,16 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
      */
     public Builder addPlatforms(
-        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto value) {
+        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto konstue) {
       if (platformsBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensurePlatformsIsMutable();
-        platforms_.add(index, value);
+        platforms_.add(index, konstue);
         onChanged();
       } else {
-        platformsBuilder_.addMessage(index, value);
+        platformsBuilder_.addMessage(index, konstue);
       }
       return this;
     }
@@ -1255,14 +1255,14 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
      */
     public Builder addAllPlatforms(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto> konstues) {
       if (platformsBuilder_ == null) {
         ensurePlatformsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, platforms_);
+            konstues, platforms_);
         onChanged();
       } else {
-        platformsBuilder_.addAllMessages(values);
+        platformsBuilder_.addAllMessages(konstues);
       }
       return this;
     }
@@ -1381,15 +1381,15 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto language_settings = 4;</code>
      */
-    public Builder setLanguageSettings(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto value) {
+    public Builder setLanguageSettings(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto konstue) {
       if (languageSettingsBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        languageSettings_ = value;
+        languageSettings_ = konstue;
         onChanged();
       } else {
-        languageSettingsBuilder_.setMessage(value);
+        languageSettingsBuilder_.setMessage(konstue);
       }
       bitField0_ |= 0x00000008;
       return this;
@@ -1411,19 +1411,19 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto language_settings = 4;</code>
      */
-    public Builder mergeLanguageSettings(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto value) {
+    public Builder mergeLanguageSettings(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto konstue) {
       if (languageSettingsBuilder_ == null) {
         if (((bitField0_ & 0x00000008) != 0) &&
             languageSettings_ != null &&
             languageSettings_ != org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto.getDefaultInstance()) {
           languageSettings_ =
-            org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto.newBuilder(languageSettings_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto.newBuilder(languageSettings_).mergeFrom(konstue).buildPartial();
         } else {
-          languageSettings_ = value;
+          languageSettings_ = konstue;
         }
         onChanged();
       } else {
-        languageSettingsBuilder_.mergeFrom(value);
+        languageSettingsBuilder_.mergeFrom(konstue);
       }
       bitField0_ |= 0x00000008;
       return this;
@@ -1523,16 +1523,16 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
      */
     public Builder setDependencies(
-        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto value) {
+        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto konstue) {
       if (dependenciesBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDependenciesIsMutable();
-        dependencies_.set(index, value);
+        dependencies_.set(index, konstue);
         onChanged();
       } else {
-        dependenciesBuilder_.setMessage(index, value);
+        dependenciesBuilder_.setMessage(index, konstue);
       }
       return this;
     }
@@ -1553,16 +1553,16 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
      */
-    public Builder addDependencies(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto value) {
+    public Builder addDependencies(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto konstue) {
       if (dependenciesBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDependenciesIsMutable();
-        dependencies_.add(value);
+        dependencies_.add(konstue);
         onChanged();
       } else {
-        dependenciesBuilder_.addMessage(value);
+        dependenciesBuilder_.addMessage(konstue);
       }
       return this;
     }
@@ -1570,16 +1570,16 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
      */
     public Builder addDependencies(
-        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto value) {
+        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto konstue) {
       if (dependenciesBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDependenciesIsMutable();
-        dependencies_.add(index, value);
+        dependencies_.add(index, konstue);
         onChanged();
       } else {
-        dependenciesBuilder_.addMessage(index, value);
+        dependenciesBuilder_.addMessage(index, konstue);
       }
       return this;
     }
@@ -1615,14 +1615,14 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
      */
     public Builder addAllDependencies(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto> konstues) {
       if (dependenciesBuilder_ == null) {
         ensureDependenciesIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, dependencies_);
+            konstues, dependencies_);
         onChanged();
       } else {
-        dependenciesBuilder_.addAllMessages(values);
+        dependenciesBuilder_.addAllMessages(konstues);
       }
       return this;
     }
@@ -1763,16 +1763,16 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
      */
     public Builder setSourceDirectories(
-        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto value) {
+        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto konstue) {
       if (sourceDirectoriesBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureSourceDirectoriesIsMutable();
-        sourceDirectories_.set(index, value);
+        sourceDirectories_.set(index, konstue);
         onChanged();
       } else {
-        sourceDirectoriesBuilder_.setMessage(index, value);
+        sourceDirectoriesBuilder_.setMessage(index, konstue);
       }
       return this;
     }
@@ -1793,16 +1793,16 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
      */
-    public Builder addSourceDirectories(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto value) {
+    public Builder addSourceDirectories(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto konstue) {
       if (sourceDirectoriesBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureSourceDirectoriesIsMutable();
-        sourceDirectories_.add(value);
+        sourceDirectories_.add(konstue);
         onChanged();
       } else {
-        sourceDirectoriesBuilder_.addMessage(value);
+        sourceDirectoriesBuilder_.addMessage(konstue);
       }
       return this;
     }
@@ -1810,16 +1810,16 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
      */
     public Builder addSourceDirectories(
-        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto value) {
+        int index, org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto konstue) {
       if (sourceDirectoriesBuilder_ == null) {
-        if (value == null) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureSourceDirectoriesIsMutable();
-        sourceDirectories_.add(index, value);
+        sourceDirectories_.add(index, konstue);
         onChanged();
       } else {
-        sourceDirectoriesBuilder_.addMessage(index, value);
+        sourceDirectoriesBuilder_.addMessage(index, konstue);
       }
       return this;
     }
@@ -1855,14 +1855,14 @@ private static final long serialVersionUID = 0L;
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
      */
     public Builder addAllSourceDirectories(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto> konstues) {
       if (sourceDirectoriesBuilder_ == null) {
         ensureSourceDirectoriesIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sourceDirectories_);
+            konstues, sourceDirectories_);
         onChanged();
       } else {
-        sourceDirectoriesBuilder_.addAllMessages(values);
+        sourceDirectoriesBuilder_.addAllMessages(konstues);
       }
       return this;
     }
@@ -1988,16 +1988,16 @@ private static final long serialVersionUID = 0L;
     public IdeaKpmFragmentProto parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        throws com.google.protobuf.InkonstidProtocolBufferException {
       Builder builder = newBuilder();
       try {
         builder.mergeFrom(input, extensionRegistry);
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
       } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        throw e.asInkonstidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+        throw new com.google.protobuf.InkonstidProtocolBufferException(e)
             .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();

@@ -7,7 +7,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = Anno
         symbol = <constructor>(): Anno
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = null
     typeArgumentsMapping = {}
     argumentMapping = {}

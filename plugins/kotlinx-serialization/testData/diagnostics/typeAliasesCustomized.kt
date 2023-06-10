@@ -8,15 +8,15 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 @Serializable(ExplicitSerializer::class)
-data class Klass(val s: String)
+data class Klass(konst s: String)
 
 object ExplicitSerializer : KSerializer<Klass> {
-    override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor("klass", PrimitiveKind.STRING)
-    override fun serialize(encoder: Encoder, value: Klass) { encoder.encodeString(value.s) }
+    override konst descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor("klass", PrimitiveKind.STRING)
+    override fun serialize(encoder: Encoder, konstue: Klass) { encoder.encodeString(konstue.s) }
     override fun deserialize(decoder: Decoder): Klass { return Klass(decoder.decodeString()) }
 }
 
 typealias KlassAlias = Klass
 
 @Serializable
-data class DataKlass(val k: KlassAlias)
+data class DataKlass(konst k: KlassAlias)

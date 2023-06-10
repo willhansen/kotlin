@@ -20,45 +20,45 @@ class KpmCoreCasesTestClassModel(
     // Then folders "foo/bar/A" and "foo/bar/B" expected to exist and contain sources
     // for cases A, B. If they do not exist, they will be auto-generated with template
     // sources.
-    private val additionalTestDataRoot: File,
+    private konst additionalTestDataRoot: File,
 ) : TestClassModel() {
     // Metadata-annotations enable IDE support for tests, like "Navigate to test data" action
-    override val dataString: String // Will be used in @TestMetadata, needs to be path to folder with test data
+    override konst dataString: String // Will be used in @TestMetadata, needs to be path to folder with test data
         get() = KtTestUtil.getFilePath(additionalTestDataRoot)
 
-    override val dataPathRoot: String? // Will be used in @com.intellij.testFramework.TestDataPath
+    override konst dataPathRoot: String? // Will be used in @com.intellij.testFramework.TestDataPath
         get() = null // $PROJECT_ROOT will be used instead
 
-    override val name: String
+    override konst name: String
         get() = error("Unused by infra, shouldn't be called")
 
-    override val tags: List<String>
+    override konst tags: List<String>
         get() = emptyList()
 
-    override val innerTestClasses: Collection<TestClassModel>
+    override konst innerTestClasses: Collection<TestClassModel>
         get() = emptyList()
 
-    override val methods: Collection<MethodModel> by lazy {
+    override konst methods: Collection<MethodModel> by lazy {
         doCollectMethods()
     }
 
-    override val isEmpty: Boolean
+    override konst isEmpty: Boolean
         get() = methods.isEmpty()
 
-    override val imports: Set<Class<*>>
+    override konst imports: Set<Class<*>>
         get() = super.imports + setOf(
             KpmTestCase::class.java,
             this::class.java.classLoader.loadClass("org.jetbrains.kotlin.project.model.infra.SourcesKt") // file-facade :(
         )
 
-    override val annotations: Collection<AnnotationModel>
+    override konst annotations: Collection<AnnotationModel>
         get() = emptyList() // Don't need to annotate with `@ExtendWith`, because we inherit [KpmCoreCasesTestRunner]
 
     private fun doCollectMethods(): Collection<MethodModel> {
-        val allCoreCasesNames: Set<String> = KpmTestCaseDescriptor.allCasesNames
-        val allAdditionalTestdata: Set<File> = additionalTestDataRoot.listFiles().orEmpty().toSet()
+        konst allCoreCasesNames: Set<String> = KpmTestCaseDescriptor.allCasesNames
+        konst allAdditionalTestdata: Set<File> = additionalTestDataRoot.listFiles().orEmpty().toSet()
 
-        val methodModelsForCoreCasesWithExistingTestData = allAdditionalTestdata.map { testDataForCase ->
+        konst methodModelsForCoreCasesWithExistingTestData = allAdditionalTestdata.map { testDataForCase ->
             check(!testDataForCase.isFile) {
                 "Expected to find only folders in testdata root ${additionalTestDataRoot.absolutePath}\n," +
                         "but found a file ${testDataForCase.absolutePath}"
@@ -77,13 +77,13 @@ class KpmCoreCasesTestClassModel(
             )
         }
 
-        val coreCasesNamesWithoutTestData = allCoreCasesNames - methodModelsForCoreCasesWithExistingTestData.mapTo(mutableSetOf()) {
+        konst coreCasesNamesWithoutTestData = allCoreCasesNames - methodModelsForCoreCasesWithExistingTestData.mapTo(mutableSetOf()) {
             it.name
         }
 
-        val methodModelsForCoreCasesWithoutTestData = coreCasesNamesWithoutTestData.map {
-            val expectedTestDataPath = additionalTestDataRoot.resolve(it)
-            val kpmTestCaseDescriptor = KpmTestCaseDescriptor.allCaseDescriptorsByNames[it]!!
+        konst methodModelsForCoreCasesWithoutTestData = coreCasesNamesWithoutTestData.map {
+            konst expectedTestDataPath = additionalTestDataRoot.resolve(it)
+            konst kpmTestCaseDescriptor = KpmTestCaseDescriptor.allCaseDescriptorsByNames[it]!!
             println("Generating template sources testdata for uncovered KPM Core Case $it at ${additionalTestDataRoot.path}")
             kpmTestCaseDescriptor.generateTemplateCanonicalFileStructure(expectedTestDataPath)
 

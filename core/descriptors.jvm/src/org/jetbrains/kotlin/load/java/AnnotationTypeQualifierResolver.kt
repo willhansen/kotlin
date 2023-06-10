@@ -27,13 +27,13 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.annotationClass
 class AnnotationTypeQualifierResolver(javaTypeEnhancementState: JavaTypeEnhancementState) :
     AbstractAnnotationTypeQualifierResolver<AnnotationDescriptor>(javaTypeEnhancementState) {
 
-    override val AnnotationDescriptor.metaAnnotations: Iterable<AnnotationDescriptor>
+    override konst AnnotationDescriptor.metaAnnotations: Iterable<AnnotationDescriptor>
         get() = annotationClass?.annotations ?: emptyList()
 
-    override val AnnotationDescriptor.key: Any
+    override konst AnnotationDescriptor.key: Any
         get() = annotationClass!!
 
-    override val AnnotationDescriptor.fqName: FqName?
+    override konst AnnotationDescriptor.fqName: FqName?
         get() = fqName
 
     override fun AnnotationDescriptor.enumArguments(onlyValue: Boolean): Iterable<String> =
@@ -46,7 +46,7 @@ class AnnotationTypeQualifierResolver(javaTypeEnhancementState: JavaTypeEnhancem
 
     private fun ConstantValue<*>.toEnumNames(): List<String> =
         when (this) {
-            is ArrayValue -> value.flatMap { it.toEnumNames() }
+            is ArrayValue -> konstue.flatMap { it.toEnumNames() }
             is EnumValue -> listOf(enumEntryName.identifier)
             else -> emptyList()
         }

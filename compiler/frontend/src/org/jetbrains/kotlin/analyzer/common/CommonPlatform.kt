@@ -18,7 +18,7 @@ private object CommonPlatformConfigurator : PlatformConfiguratorBase() {
 object CommonPlatformAnalyzerServices : PlatformDependentAnalyzerServices() {
     override fun computePlatformSpecificDefaultImports(storageManager: StorageManager, result: MutableList<ImportPath>) {}
 
-    override val platformConfigurator: PlatformConfigurator = CommonPlatformConfigurator
+    override konst platformConfigurator: PlatformConfigurator = CommonPlatformConfigurator
 
     override fun dependencyOnBuiltIns(): ModuleInfo.DependencyOnBuiltIns = ModuleInfo.DependencyOnBuiltIns.AFTER_SDK
 }

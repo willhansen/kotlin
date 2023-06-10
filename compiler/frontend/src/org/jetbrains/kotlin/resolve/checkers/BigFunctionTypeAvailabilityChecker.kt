@@ -17,7 +17,7 @@ object BigFunctionTypeAvailabilityChecker : ClassifierUsageChecker {
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.FunctionTypesWithBigArity)) return
 
         if (targetDescriptor.defaultType.contains { argumentType ->
-            val descriptor = argumentType.constructor.declarationDescriptor
+            konst descriptor = argumentType.constructor.declarationDescriptor
             descriptor is FunctionClassDescriptor && descriptor.hasBigArity
         }) {
             context.trace.report(

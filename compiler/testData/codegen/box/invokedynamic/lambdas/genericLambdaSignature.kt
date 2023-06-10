@@ -11,8 +11,8 @@
 // JVM_IR_TEMPLATES
 // 1 java/lang/invoke/LambdaMetafactory
 
-fun <T1, R> call(value: T1, f: (T1) -> R): R {
-    return f(value)
+fun <T1, R> call(konstue: T1, f: (T1) -> R): R {
+    return f(konstue)
 }
 
 fun <T2> test(x: T2) = call(x) { it }

@@ -83,18 +83,18 @@ private fun KotlinTargetContainerWithJsPresetFunctions.jsInternal(
     compiler: KotlinJsCompilerType? = null,
     configure: KotlinJsTargetDsl.() -> Unit
 ): KotlinJsTargetDsl {
-    val existingTarget = getExistingTarget(name, compiler)
+    konst existingTarget = getExistingTarget(name, compiler)
 
-    val kotlinJsCompilerType = (compiler
+    konst kotlinJsCompilerType = (compiler
         ?: existingTarget?.calculateJsCompilerType())
 
-    val compilerOrDefault = kotlinJsCompilerType
+    konst compilerOrDefault = kotlinJsCompilerType
         ?: defaultJsCompilerType
 
-    val targetName = getTargetName(name, compilerOrDefault)
+    konst targetName = getTargetName(name, compilerOrDefault)
 
     if (existingTarget != null) {
-        val previousCompilerType = existingTarget.calculateJsCompilerType()
+        konst previousCompilerType = existingTarget.calculateJsCompilerType()
         check(compiler == null || previousCompilerType == compiler) {
             "You already registered Kotlin/JS target '$targetName' with another compiler: ${previousCompilerType.lowerName}"
         }
@@ -129,19 +129,19 @@ private fun KotlinTargetContainerWithJsPresetFunctions.getExistingTarget(
         targetName: String,
         currentBoth: Boolean
     ): KotlinJsTargetDsl? {
-        val singleTarget = targets.findByName(
+        konst singleTarget = targets.findByName(
             targetName
         ) as KotlinJsTargetDsl?
 
         return singleTarget?.let {
-            val previousCompiler = it.calculateJsCompilerType()
+            konst previousCompiler = it.calculateJsCompilerType()
             if (compiler == KotlinJsCompilerType.BOTH && currentBoth || previousCompiler == KotlinJsCompilerType.BOTH && !currentBoth) {
                 it
             } else null
         }
     }
 
-    val targetNameCandidate = getTargetName(name, compiler)
+    konst targetNameCandidate = getTargetName(name, compiler)
 
     return targets.findByName(targetNameCandidate) as KotlinJsTargetDsl?
         ?: getPreviousTarget(targetNameCandidate.removeJsCompilerSuffix(KotlinJsCompilerType.LEGACY), true)

@@ -1,6 +1,6 @@
 // FILE: main.kt
 class A : B() {
-    override val x<caret>: Int get() = super.x
+    override konst x<caret>: Int get() = super.x
 }
 
 // FILE: B.java
@@ -13,7 +13,7 @@ public class B extends C {
 
 // FILE: C.kt
 abstract class C {
-    abstract val x: Int
+    abstract konst x: Int
 }
 
 

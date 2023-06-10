@@ -48,7 +48,7 @@ fun <T> foo(): Array<T> = (object {} as Any) as Array<T>
 fun test6() = foo<Nothing>()
 
 
-class B<T>(val array: Array<T>)
+class B<T>(konst array: Array<T>)
 
 fun <T> bar() = B<Array<T>>(<!TYPE_PARAMETER_AS_REIFIED_ARRAY_ERROR!>arrayOf<!>())
 

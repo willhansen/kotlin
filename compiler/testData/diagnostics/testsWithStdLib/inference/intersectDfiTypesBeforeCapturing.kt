@@ -1,6 +1,6 @@
 // !DIAGNOSTICS: -UNCHECKED_CAST -UNUSED_DESTRUCTURED_PARAMETER_ENTRY -USELESS_CAST -UNUSED_PARAMETER -UNUSED_EXPRESSION
 
-class Inv<T>(val y: T)
+class Inv<T>(konst y: T)
 
 fun <K> takeTwoInv(x: Inv<K>, y: Inv<K>) = x.y
 
@@ -16,13 +16,13 @@ fun test1(y: Any) {
 fun test2(x: Any, y: Inv<String>) {
     x as Inv<String>
     x as Inv<out CharSequence>
-    val z = takeTwoInv(<!DEBUG_INFO_SMARTCAST!>x<!>, y)
+    konst z = takeTwoInv(<!DEBUG_INFO_SMARTCAST!>x<!>, y)
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>z<!>
 }
 
 fun test3(x: Any, y: Inv<String>) {
     x as Inv<out CharSequence>
     x as Inv<String>
-    val z = takeTwoInvOut(<!DEBUG_INFO_SMARTCAST!>x<!>, y)
+    konst z = takeTwoInvOut(<!DEBUG_INFO_SMARTCAST!>x<!>, y)
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>z<!>
 }

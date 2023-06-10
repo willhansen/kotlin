@@ -8,7 +8,7 @@ public final class Outer1 {
 
     public final class C1 {
         public constructor C1()
-        public final val b: Outer1.Nested
+        public final konst b: Outer1.Nested
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -16,7 +16,7 @@ public final class Outer1 {
 
     public final class C2 {
         public constructor C2(/*0*/ b: kotlin.Any = ...)
-        public final val b: kotlin.Any
+        public final konst b: kotlin.Any
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -24,7 +24,7 @@ public final class Outer1 {
 
     public final inner class C3 {
         public constructor C3()
-        public final val b: Outer1.Nested
+        public final konst b: Outer1.Nested
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -32,7 +32,7 @@ public final class Outer1 {
 
     public final inner class C4 {
         public constructor C4(/*0*/ b: kotlin.Any = ...)
-        public final val b: kotlin.Any
+        public final konst b: kotlin.Any
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -40,7 +40,7 @@ public final class Outer1 {
 
     public final class C5 {
         public constructor C5()
-        public final val b: [Error type: Not found recorded type for Inner()]
+        public final konst b: [Error type: Not found recorded type for Inner()]
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -48,7 +48,7 @@ public final class Outer1 {
 
     public final class C6 {
         public constructor C6(/*0*/ b: kotlin.Any = ...)
-        public final val b: kotlin.Any
+        public final konst b: kotlin.Any
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -56,7 +56,7 @@ public final class Outer1 {
 
     public final inner class C7 {
         public constructor C7()
-        public final val b: Outer1.Inner
+        public final konst b: Outer1.Inner
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -64,7 +64,7 @@ public final class Outer1 {
 
     public final inner class C8 {
         public constructor C8(/*0*/ b: kotlin.Any = ...)
-        public final val b: kotlin.Any
+        public final konst b: kotlin.Any
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

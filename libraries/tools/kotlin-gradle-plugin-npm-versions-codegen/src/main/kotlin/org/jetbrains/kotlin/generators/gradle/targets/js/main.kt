@@ -12,29 +12,29 @@ import org.apache.velocity.runtime.RuntimeConstants.RESOURCE_LOADER
 import java.io.File
 
 fun main() {
-    val outputSourceRoot = System.getProperties()["org.jetbrains.kotlin.generators.gradle.targets.js.outputSourceRoot"]
-    val packageName = "org.jetbrains.kotlin.gradle.targets.js"
-    val className = "NpmVersions"
-    val fileName = "$className.kt"
-    val targetFile = File("$outputSourceRoot")
+    konst outputSourceRoot = System.getProperties()["org.jetbrains.kotlin.generators.gradle.targets.js.outputSourceRoot"]
+    konst packageName = "org.jetbrains.kotlin.gradle.targets.js"
+    konst className = "NpmVersions"
+    konst fileName = "$className.kt"
+    konst targetFile = File("$outputSourceRoot")
         .resolve(packageName.replace(".", "/"))
         .resolve(fileName)
 
-    val context = VelocityContext()
+    konst context = VelocityContext()
         .apply {
             put("package", packageName)
             put("class", className)
         }
 
-    val velocityEngine = VelocityEngine().apply {
+    konst velocityEngine = VelocityEngine().apply {
         setProperty(RESOURCE_LOADER, "class")
         setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader")
         init()
     }
 
-    val template = velocityEngine.getTemplate("$fileName.vm")
+    konst template = velocityEngine.getTemplate("$fileName.vm")
 
-    val packages = VersionFetcher().use {
+    konst packages = VersionFetcher().use {
         runBlocking {
             it.fetch()
         }
@@ -53,7 +53,7 @@ fun main() {
 fun findLastVersions(packages: List<PackageInformation>): List<Package> {
     return packages
         .map { packageInformation ->
-            val maximumVersion = when (packageInformation) {
+            konst maximumVersion = when (packageInformation) {
                 is RealPackageInformation -> packageInformation.versions
                     .map { SemVer.from(it) }
                     .filter { it.preRelease == null && it.build == null }

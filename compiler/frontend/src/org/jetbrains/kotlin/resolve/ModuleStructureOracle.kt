@@ -31,6 +31,6 @@ interface ModuleStructureOracle {
     }
 }
 
-class ModulePath(val nodes: List<ModuleDescriptor>) {
+class ModulePath(konst nodes: List<ModuleDescriptor>) {
     constructor(vararg nodes: ModuleDescriptor) : this(nodes.toList())
 }

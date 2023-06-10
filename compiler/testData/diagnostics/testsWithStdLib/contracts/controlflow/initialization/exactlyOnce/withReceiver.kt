@@ -13,13 +13,13 @@ fun <T, R> T.myLet(block: (T) -> R): R {
 }
 
 fun initializationWithReceiver(y: String) {
-    val x: Int
+    konst x: Int
     y.myLet { x = 42 }
     x.inc()
 }
 
 fun initializationWithSafeCall(y: String?) {
-    val x: Int
+    konst x: Int
     y?.myLet { x = 42 }
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
 }

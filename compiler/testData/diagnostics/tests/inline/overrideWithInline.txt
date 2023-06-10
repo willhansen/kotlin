@@ -2,7 +2,7 @@ package
 
 public final class CDerived : IBase {
     public constructor CDerived()
-    public final val anObject: IBase
+    public final konst anObject: IBase
     public final fun aMethod(): kotlin.Unit
     public open override /*1*/ inline fun bar(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -24,7 +24,7 @@ public final class CDerived : IBase {
 
 public open class COpen : IBase {
     public constructor COpen()
-    public final val anObject: IBase
+    public final konst anObject: IBase
     public final fun aMethod(): kotlin.Unit
     public open override /*1*/ inline fun bar(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

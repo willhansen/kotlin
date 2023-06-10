@@ -2,15 +2,15 @@
 // FILE: file1.kt
 typealias <!REDECLARATION!>Test<!> = String
 
-val <!REDECLARATION!>Test<!> = 42
+konst <!REDECLARATION!>Test<!> = 42
 
 class Outer {
     typealias <!REDECLARATION!>Test<!> = String
 
-    val <!REDECLARATION!>Test<!> = 42
+    konst <!REDECLARATION!>Test<!> = 42
 }
 
 typealias Test2 = String
 
 // FILE: file2.kt
-val Test2 = 42
+konst Test2 = 42

@@ -11,4 +11,4 @@ public fun </*0*/ T> runTwice(/*0*/ block: () -> T): T
     CallsInPlace(block, AT_LEAST_ONCE)
 
 public fun shadowing(): kotlin.Unit
-public fun valueReassignment(): kotlin.Unit
+public fun konstueReassignment(): kotlin.Unit

@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // FILE: A.kt
 
-open class A<T>(val x: T)
+open class A<T>(konst x: T)
 
 // FILE: AFactory.kt
 

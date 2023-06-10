@@ -9,20 +9,20 @@ import kotlinx.android.synthetic.clearFindViewByIdCache
 class R {
     class id {
         companion object {
-            const val item_detail_container = 0
-            const val textView1 = 1
-            const val password = 2
-            const val textView2 = 3
-            const val passwordConfirmation = 4
-            const val login = 5
+            const konst item_detail_container = 0
+            const konst textView1 = 1
+            const konst password = 2
+            const konst textView2 = 3
+            const konst passwordConfirmation = 4
+            const konst login = 5
         }
     }
 }
 
 open class MyActivity(): Activity() {
-    val textViewWidget = TextView(this)
-    val editTextWidget = EditText(this)
-    val buttonWidget = Button(this)
+    konst textViewWidget = TextView(this)
+    konst editTextWidget = EditText(this)
+    konst buttonWidget = Button(this)
 
     override fun <T : View> findViewById(id: Int): T? {
         return when (id) {
@@ -35,8 +35,8 @@ open class MyActivity(): Activity() {
 
     open fun findPasswordWidget(): View = null!!
 
-    private val textViewReadInInit = textView1
-    private val passwordReadThroughOverride = findPasswordWidget()
+    private konst textViewReadInInit = textView1
+    private konst passwordReadThroughOverride = findPasswordWidget()
 
     private fun check(expect: String, actual: String) =
         if (expect != actual) "'$actual' != '$expect'" else null

@@ -13,11 +13,11 @@ FILE: uselessCastLeadsToRecursiveProblem.kt
         }
 
     }
-    public final val <T : R|C|> R|kotlin/reflect/KClass<T>|.extProp1: R|kotlin/String|
+    public final konst <T : R|C|> R|kotlin/reflect/KClass<T>|.extProp1: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ String(I'm C)
         }
-    public final val R|A|.extProp1: R|kotlin/String|
+    public final konst R|A|.extProp1: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ when (this@R|/extProp1|) {
                 ($subj$ is R|B|) ->  {
@@ -32,11 +32,11 @@ FILE: uselessCastLeadsToRecursiveProblem.kt
             }
 
         }
-    public final val <T : R|C|> R|kotlin/reflect/KClass<T>|.extProp2: R|kotlin/String|
+    public final konst <T : R|C|> R|kotlin/reflect/KClass<T>|.extProp2: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ String(I'm C)
         }
-    public final val R|A|.extProp2: R|kotlin/String|
+    public final konst R|A|.extProp2: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ when (this@R|/extProp2|) {
                 ($subj$ is R|B|) ->  {

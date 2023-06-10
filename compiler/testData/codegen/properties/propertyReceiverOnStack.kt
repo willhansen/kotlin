@@ -1,5 +1,5 @@
-class Evaluator(val expr: StringBuilder) {
-  fun evaluateArg(): Int {
+class Ekonstuator(konst expr: StringBuilder) {
+  fun ekonstuateArg(): Int {
     return expr.length
   }
 }

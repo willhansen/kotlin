@@ -7,7 +7,7 @@ class O {
         if (thisRef is I) "OK" else "Failed"
 
     inner class I {
-        val s: String by this@O
+        konst s: String by this@O
     }
 }
 

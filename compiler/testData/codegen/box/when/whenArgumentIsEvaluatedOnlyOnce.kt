@@ -5,7 +5,7 @@ fun inc(): Int {
     return 0
 }
 fun box(): String {
-  val al = ArrayList<Int>()
+  konst al = ArrayList<Int>()
   when (inc()) {
       in al -> return "fail 1"
       else -> {}

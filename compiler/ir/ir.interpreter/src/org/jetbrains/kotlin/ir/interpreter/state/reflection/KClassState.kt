@@ -19,7 +19,7 @@ import kotlin.reflect.KFunction
 import kotlin.reflect.KType
 import kotlin.reflect.KTypeParameter
 
-internal class KClassState(val classReference: IrClass, override val irClass: IrClass) : ReflectionState() {
+internal class KClassState(konst classReference: IrClass, override konst irClass: IrClass) : ReflectionState() {
     private var _members: Collection<KCallable<*>>? = null
     private var _constructors: Collection<KFunction<*>>? = null
     private var _typeParameters: List<KTypeParameter>? = null
@@ -34,7 +34,7 @@ internal class KClassState(val classReference: IrClass, override val irClass: Ir
             .map {
                 when (it) {
                     is IrProperty -> {
-                        val withExtension = it.getter?.extensionReceiverParameter != null
+                        konst withExtension = it.getter?.extensionReceiverParameter != null
                         when {
                             !withExtension && !it.isVar ->
                                 KProperty1Proxy(KPropertyState(it, callInterceptor.irBuiltIns.getKPropertyClass(false, 1).owner), callInterceptor)
@@ -52,7 +52,7 @@ internal class KClassState(val classReference: IrClass, override val irClass: Ir
                         }
                     }
                     is IrFunction -> {
-                        val irClass = callInterceptor.irBuiltIns.kFunctionN(it.valueParameters.size)
+                        konst irClass = callInterceptor.irBuiltIns.kFunctionN(it.konstueParameters.size)
                         KFunctionProxy(KFunctionState(it, irClass, callInterceptor.environment), callInterceptor)
                     }
                     else -> TODO()
@@ -66,7 +66,7 @@ internal class KClassState(val classReference: IrClass, override val irClass: Ir
         _constructors = classReference.declarations
             .filterIsInstance<IrConstructor>()
             .map {
-                val irClass = callInterceptor.irBuiltIns.kFunctionN(it.valueParameters.size)
+                konst irClass = callInterceptor.irBuiltIns.kFunctionN(it.konstueParameters.size)
                 KFunctionProxy(KFunctionState(it, irClass, callInterceptor.environment), callInterceptor)
             }
         return _constructors!!
@@ -74,14 +74,14 @@ internal class KClassState(val classReference: IrClass, override val irClass: Ir
 
     fun getTypeParameters(callInterceptor: CallInterceptor): List<KTypeParameter> {
         if (_typeParameters != null) return _typeParameters!!
-        val kTypeParameterIrClass = callInterceptor.environment.kTypeParameterClass.owner
+        konst kTypeParameterIrClass = callInterceptor.environment.kTypeParameterClass.owner
         _typeParameters = classReference.typeParameters.map { KTypeParameterProxy(KTypeParameterState(it, kTypeParameterIrClass), callInterceptor) }
         return _typeParameters!!
     }
 
     fun getSupertypes(callInterceptor: CallInterceptor): List<KType> {
         if (_supertypes != null) return _supertypes!!
-        val kTypeIrClass = callInterceptor.environment.kTypeClass.owner
+        konst kTypeIrClass = callInterceptor.environment.kTypeClass.owner
         _supertypes = (classReference.superTypes.map { it } + callInterceptor.irBuiltIns.anyType).toSet()
             .map { KTypeProxy(KTypeState(it, kTypeIrClass), callInterceptor) }
         return _supertypes!!

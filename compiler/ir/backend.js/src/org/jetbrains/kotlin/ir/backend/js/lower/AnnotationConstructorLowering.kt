@@ -15,15 +15,15 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrInstanceInitializerCallImpl
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.parentAsClass
 
-class AnnotationConstructorLowering(val context: JsCommonBackendContext) : DeclarationTransformer {
+class AnnotationConstructorLowering(konst context: JsCommonBackendContext) : DeclarationTransformer {
 
-    private val unitType = context.irBuiltIns.unitType
-    private val anyConstructor = context.irBuiltIns.anyClass.constructors.first()
+    private konst unitType = context.irBuiltIns.unitType
+    private konst anyConstructor = context.irBuiltIns.anyClass.constructors.first()
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration !is IrConstructor || !declaration.isPrimary) return null
 
-        val irClass = declaration.parentAsClass
+        konst irClass = declaration.parentAsClass
 
         if (irClass.kind != ClassKind.ANNOTATION_CLASS) return null
 

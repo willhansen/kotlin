@@ -1,5 +1,5 @@
 fun test(): java.lang.Integer {
-    val c: java.lang.Integer
+    konst c: java.lang.Integer
     run {
         c = java.lang.Integer(1)
     }

@@ -32,9 +32,9 @@ import org.jetbrains.kotlin.load.kotlin.VirtualFileFinderFactory
 import org.jetbrains.kotlin.resolve.jvm.modules.JavaModuleResolver
 import java.io.File
 
-class PsiBasedProjectFileSearchScope(val psiSearchScope: GlobalSearchScope) : AbstractProjectFileSearchScope {
+class PsiBasedProjectFileSearchScope(konst psiSearchScope: GlobalSearchScope) : AbstractProjectFileSearchScope {
 
-    override val isEmpty: Boolean
+    override konst isEmpty: Boolean
         get() = psiSearchScope == GlobalSearchScope.EMPTY_SCOPE
 
     override operator fun minus(other: AbstractProjectFileSearchScope): AbstractProjectFileSearchScope =
@@ -48,9 +48,9 @@ class PsiBasedProjectFileSearchScope(val psiSearchScope: GlobalSearchScope) : Ab
 }
 
 open class VfsBasedProjectEnvironment(
-    val project: Project,
-    val localFileSystem: VirtualFileSystem,
-    private val getPackagePartProviderFn: (GlobalSearchScope) -> PackagePartProvider
+    konst project: Project,
+    konst localFileSystem: VirtualFileSystem,
+    private konst getPackagePartProviderFn: (GlobalSearchScope) -> PackagePartProvider
 ) : AbstractProjectEnvironment {
 
     override fun getKotlinClassFinder(fileSearchScope: AbstractProjectFileSearchScope): KotlinClassFinder =
@@ -63,7 +63,7 @@ open class VfsBasedProjectEnvironment(
         getPackagePartProviderFn(fileSearchScope.asPsiSearchScope())
 
     override fun registerAsJavaElementFinder(firSession: FirSession) {
-        val psiFinderExtensionPoint = PsiElementFinder.EP.getPoint(project)
+        konst psiFinderExtensionPoint = PsiElementFinder.EP.getPoint(project)
         if (psiFinderExtensionPoint.extensionList.any { it is JavaElementFinder }) {
             psiFinderExtensionPoint.unregisterExtension(JavaElementFinder::class.java)
         }

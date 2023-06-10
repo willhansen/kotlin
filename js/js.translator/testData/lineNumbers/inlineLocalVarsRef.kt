@@ -1,5 +1,5 @@
 inline fun foo(x: Int) {
-    val y = x > 23
+    konst y = x > 23
     if (y) {
         println("foo")
     }

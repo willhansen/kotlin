@@ -2,9 +2,9 @@
 package test
 
 annotation class Ann(
-        val d1: Double,
-        val d2: Double,
-        val d3: Double
+        konst d1: Double,
+        konst d2: Double,
+        konst d3: Double
 )
 
 @Ann(1.0 + 1.0, 1.0 + 1, 1 + 1.0) class MyClass

@@ -13,6 +13,6 @@ abstract class ModuleStructureTransformer {
 }
 
 class ExceptionFromModuleStructureTransformer(
-    override val cause: Throwable,
-    val alreadyParsedModuleStructure: TestModuleStructure
+    override konst cause: Throwable,
+    konst alreadyParsedModuleStructure: TestModuleStructure
 ) : Exception(cause)

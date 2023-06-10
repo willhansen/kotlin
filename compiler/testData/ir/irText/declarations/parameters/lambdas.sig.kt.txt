@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Function1<String, String>
+konst test1: Function1<String, String>
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Function1<kotlin.String,kotlin.String>
   //   Public signature: /test1.<get-test1>|2788097897117242625[0]
@@ -13,7 +13,7 @@ val test1: Function1<String, String>
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: @ExtensionFunctionType Function2<Any, Any, Any>
+konst test2: @ExtensionFunctionType Function2<Any, Any, Any>
   // CHECK JVM_IR:
   //   Mangled name: #<get-test2>(){}kotlin.Function2<kotlin.Any,kotlin.Any,kotlin.Any>
   //   Public signature: /test2.<get-test2>|-8953585576935292690[0]
@@ -25,7 +25,7 @@ val test2: @ExtensionFunctionType Function2<Any, Any, Any>
 // CHECK:
 //   Mangled name: {}test3
 //   Public signature: /test3|7677556066983021166[0]
-val test3: Function2<Int, Int, Unit>
+konst test3: Function2<Int, Int, Unit>
   // CHECK JVM_IR:
   //   Mangled name: #<get-test3>(){}kotlin.Function2<kotlin.Int,kotlin.Int,kotlin.Unit>
   //   Public signature: /test3.<get-test3>|7794341945053892780[0]
@@ -37,7 +37,7 @@ val test3: Function2<Int, Int, Unit>
 // CHECK:
 //   Mangled name: {}test4
 //   Public signature: /test4|-9115637610245762085[0]
-val test4: Function2<Int, Int, Unit>
+konst test4: Function2<Int, Int, Unit>
   // CHECK JVM_IR:
   //   Mangled name: #<get-test4>(){}kotlin.Function2<kotlin.Int,kotlin.Int,kotlin.Unit>
   //   Public signature: /test4.<get-test4>|6534158501518091161[0]

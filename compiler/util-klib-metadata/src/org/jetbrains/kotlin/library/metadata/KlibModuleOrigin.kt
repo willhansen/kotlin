@@ -13,13 +13,13 @@ import org.jetbrains.kotlin.library.isInterop
 sealed class KlibModuleOrigin {
 
     companion object {
-        val CAPABILITY = ModuleCapability<KlibModuleOrigin>("KlibModuleOrigin")
+        konst CAPABILITY = ModuleCapability<KlibModuleOrigin>("KlibModuleOrigin")
     }
 }
 
 sealed class CompiledKlibModuleOrigin: KlibModuleOrigin()
 
-class DeserializedKlibModuleOrigin(val library: KotlinLibrary) : CompiledKlibModuleOrigin()
+class DeserializedKlibModuleOrigin(konst library: KotlinLibrary) : CompiledKlibModuleOrigin()
 
 object CurrentKlibModuleOrigin: CompiledKlibModuleOrigin()
 
@@ -30,8 +30,8 @@ internal fun KlibModuleOrigin.isInteropLibrary(): Boolean = when (this) {
     CurrentKlibModuleOrigin, SyntheticModulesOrigin -> false
 }
 
-val ModuleDescriptor.klibModuleOrigin get() = this.getCapability(KlibModuleOrigin.CAPABILITY)!!
+konst ModuleDescriptor.klibModuleOrigin get() = this.getCapability(KlibModuleOrigin.CAPABILITY)!!
 
-val ModuleDescriptor.kotlinLibrary get() =
+konst ModuleDescriptor.kotlinLibrary get() =
     (this.klibModuleOrigin as DeserializedKlibModuleOrigin)
         .library

@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import org.jetbrains.kotlin.types.KotlinType
 
 open class GeneratorExtensions : StubGeneratorExtensions() {
-    open val samConversion: SamConversion
+    open konst samConversion: SamConversion
         get() = SamConversion
 
     open class SamConversion {
@@ -38,17 +38,17 @@ open class GeneratorExtensions : StubGeneratorExtensions() {
         context: GeneratorContext,
     ): IrDelegatingConstructorCall? = null
 
-    open val shouldPreventDeprecatedIntegerValueTypeLiteralConversion: Boolean
+    open konst shouldPreventDeprecatedIntegerValueTypeLiteralConversion: Boolean
         get() = false
 
     open fun getPreviousScripts(): List<IrScriptSymbol>? = null
-    open val lowerScriptToClass: Boolean get() = true
+    open konst lowerScriptToClass: Boolean get() = true
 
     open fun unwrapSyntheticJavaProperty(descriptor: PropertyDescriptor): Pair<FunctionDescriptor, FunctionDescriptor?>? = null
 
     open fun remapDebuggerFieldPropertyDescriptor(propertyDescriptor: PropertyDescriptor): PropertyDescriptor = propertyDescriptor
 
-    open val parametersAreAssignable: Boolean
+    open konst parametersAreAssignable: Boolean
         get() = false
 
     /**
@@ -57,21 +57,21 @@ open class GeneratorExtensions : StubGeneratorExtensions() {
      *
      * Local variables defined by destructuring, e.g.
      *
-     *   val (x, y) = destructee()
+     *   konst (x, y) = destructee()
      *
      * is represented in IR by
      *
      *  block {
-     *   val containerTmp = destructee()
-     *   val x = containerTmp.component1()
-     *   val y = containerTmp.component2()
+     *   konst containerTmp = destructee()
+     *   konst x = containerTmp.component1()
+     *   konst y = containerTmp.component2()
      *  }
      *
      * When [debugInfoOnlyOnVariablesInDestructuringDeclarations] is `false`, the
      * access to `containerTmp` in the calls to `component` calls are given source
      * positions corresponding to `destructee()` which causes multi-line
      * destructuring declarations to step back and forth between the variables being
-     * declared and the right-hand side, implying the repeated evaluation of the
+     * declared and the right-hand side, implying the repeated ekonstuation of the
      * right-hand side.
      *
      * When `true`, only the stores to `x` and `y` in the generated code are are
@@ -79,6 +79,6 @@ open class GeneratorExtensions : StubGeneratorExtensions() {
      * declaration, giving fewer, more accurate steps, that are closer to the JVM
      * backend in behavior.
      */
-    open val debugInfoOnlyOnVariablesInDestructuringDeclarations: Boolean
+    open konst debugInfoOnlyOnVariablesInDestructuringDeclarations: Boolean
         get() = false
 }

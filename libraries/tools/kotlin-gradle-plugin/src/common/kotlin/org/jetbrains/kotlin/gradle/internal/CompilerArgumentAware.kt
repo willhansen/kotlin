@@ -36,17 +36,17 @@ interface CompilerArgumentAware<T : CommonToolArguments> : KotlinCompilerArgumen
 
     @Deprecated("Replaced by KotlinCompilerArgumentsProducer", level = DeprecationLevel.ERROR)
     @get:Internal
-    val serializedCompilerArguments: List<String>
+    konst serializedCompilerArguments: List<String>
         get() = convertArgumentsToStringList(prepareCompilerArguments())
 
     @Deprecated("Replaced by KotlinCompilerArgumentsProducer", level = DeprecationLevel.ERROR)
     @get:Internal
-    val serializedCompilerArgumentsIgnoreClasspathIssues: List<String>
+    konst serializedCompilerArgumentsIgnoreClasspathIssues: List<String>
         get() = convertArgumentsToStringList(prepareCompilerArguments(ignoreClasspathResolutionErrors = true))
 
     @Deprecated("Replaced by KotlinCompilerArgumentsProducer", level = DeprecationLevel.ERROR)
     @get:Internal
-    val defaultSerializedCompilerArguments: List<String>
+    konst defaultSerializedCompilerArguments: List<String>
         get() = createCompilerArguments(
             CreateCompilerArgumentsContext(includeArgumentTypes = setOf(ArgumentType.Primitive))
         ).let(ArgumentUtils::convertArgumentsToStringList)
@@ -56,7 +56,7 @@ interface CompilerArgumentAware<T : CommonToolArguments> : KotlinCompilerArgumen
 
     @Deprecated("Replaced by KotlinCompilerArgumentsProducer", level = DeprecationLevel.ERROR)
     fun setupCompilerArgs(args: T, defaultsOnly: Boolean = false, ignoreClasspathResolutionErrors: Boolean = false) {
-        val newArgs = createCompilerArguments(
+        konst newArgs = createCompilerArguments(
             CreateCompilerArgumentsContext(
                 includeArgumentTypes = if (defaultsOnly) setOf(ArgumentType.Primitive) else includedArgumentTypes,
                 isLenient = ignoreClasspathResolutionErrors
@@ -78,7 +78,7 @@ interface CompilerArgumentAware<T : CommonToolArguments> : KotlinCompilerArgumen
     )
 }
 
-private val includedArgumentTypes = setOf(
+private konst includedArgumentTypes = setOf(
     ArgumentType.Primitive,
     ArgumentType.PluginClasspath,
 )

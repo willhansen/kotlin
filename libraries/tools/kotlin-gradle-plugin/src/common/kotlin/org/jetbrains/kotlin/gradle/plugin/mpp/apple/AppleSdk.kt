@@ -12,7 +12,7 @@ internal object AppleSdk {
         class UnknownArchitectureException(platform: String, arch: String) :
             IllegalArgumentException("Architecture $arch is not supported for platform $platform")
 
-        val targets: MutableSet<KonanTarget> = mutableSetOf()
+        konst targets: MutableSet<KonanTarget> = mutableSetOf()
 
         when {
             platform.startsWith("iphoneos") -> {

@@ -9,11 +9,11 @@ import kotlinx.serialization.json.*
 import kotlinx.serialization.*
 
 @Serializable
-class EnumUsage(val access: Access)
+class EnumUsage(konst access: Access)
 
 fun main() {
-    val s = Json.encodeToString(EnumUsage.serializer(), EnumUsage(Access.ReadWrite))
+    konst s = Json.encodeToString(EnumUsage.serializer(), EnumUsage(Access.ReadWrite))
     if (s != """{"access":"rw"}""") throw AssertionError("Unexpected serialized form: $s")
-    val usage = Json.decodeFromString<EnumUsage>(s)
+    konst usage = Json.decodeFromString<EnumUsage>(s)
     if (usage.access != Access.ReadWrite) throw AssertionError("Unexpected deserialized result: ${usage.access}")
 }

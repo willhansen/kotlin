@@ -21,4 +21,4 @@ import org.jetbrains.kotlin.types.KotlinType
 
 // ClassReceiver cast to given target type
 // NB: equals / hashCode are inherited from ImplicitClassReceiver (as designed)
-class CastImplicitClassReceiver(originalDescriptor: ClassDescriptor, val targetType: KotlinType) : ImplicitClassReceiver(originalDescriptor)
+class CastImplicitClassReceiver(originalDescriptor: ClassDescriptor, konst targetType: KotlinType) : ImplicitClassReceiver(originalDescriptor)

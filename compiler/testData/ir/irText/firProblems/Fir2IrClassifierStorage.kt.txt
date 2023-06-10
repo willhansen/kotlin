@@ -5,17 +5,17 @@ class FirSession {
 
   }
 
-  val name: String
+  konst name: String
     field = name
     get
 
 }
 
 interface Fir2IrComponents {
-  abstract val session: FirSession
+  abstract konst session: FirSession
     abstract get
 
-  abstract val classifierStorage: Fir2IrClassifierStorage
+  abstract konst classifierStorage: Fir2IrClassifierStorage
     abstract get
 
 }
@@ -27,7 +27,7 @@ class Fir2IrComponentsStorage : Fir2IrComponents {
 
   }
 
-  override val session: FirSession
+  override konst session: FirSession
     field = session
     override get
 
@@ -44,21 +44,21 @@ class Fir2IrClassifierStorage : Fir2IrComponents {
 
   }
 
-  private val components: Fir2IrComponents
+  private konst components: Fir2IrComponents
     field = components
     private get
 
-  override val classifierStorage: Fir2IrClassifierStorage
+  override konst classifierStorage: Fir2IrClassifierStorage
     override get(): Fir2IrClassifierStorage {
       return <this>.#components.<get-classifierStorage>()
     }
 
-  override val session: FirSession
+  override konst session: FirSession
     override get(): FirSession {
       return <this>.#components.<get-session>()
     }
 
-  private val name: String
+  private konst name: String
     field = <this>.<get-session>().<get-name>()
     private get
 

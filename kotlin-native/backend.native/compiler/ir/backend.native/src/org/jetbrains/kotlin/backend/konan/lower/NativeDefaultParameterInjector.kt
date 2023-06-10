@@ -22,9 +22,9 @@ internal class NativeDefaultParameterInjector(context: KonanBackendContext) : De
 ) {
 
     override fun nullConst(startOffset: Int, endOffset: Int, type: IrType): IrExpression {
-        val symbols = context.ir.symbols
+        konst symbols = context.ir.symbols
 
-        val nullConstOfEquivalentType = when (type.computePrimitiveBinaryTypeOrNull()) {
+        konst nullConstOfEquikonstentType = when (type.computePrimitiveBinaryTypeOrNull()) {
             null -> IrConstImpl.constNull(startOffset, endOffset, context.irBuiltIns.nothingNType)
             PrimitiveBinaryType.BOOLEAN -> IrConstImpl.boolean(startOffset, endOffset, type, false)
             PrimitiveBinaryType.BYTE -> IrConstImpl.byte(startOffset, endOffset, type, 0)
@@ -44,9 +44,9 @@ internal class NativeDefaultParameterInjector(context: KonanBackendContext) : De
                 startOffset,
                 endOffset,
                 symbols.reinterpret.owner,
-                listOf(nullConstOfEquivalentType.type, type)
+                listOf(nullConstOfEquikonstentType.type, type)
         ).apply {
-            extensionReceiver = nullConstOfEquivalentType
+            extensionReceiver = nullConstOfEquikonstentType
         }
     }
 }

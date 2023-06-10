@@ -2428,12 +2428,12 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
     }
 
     @Nested
-    @TestMetadata("compiler/testData/codegen/bytecodeListing/valueClasses")
+    @TestMetadata("compiler/testData/codegen/bytecodeListing/konstueClasses")
     @TestDataPath("$PROJECT_ROOT")
     public class ValueClasses {
         @Test
         public void testAllFilesPresentInValueClasses() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeListing/valueClasses"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeListing/konstueClasses"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true);
         }
     }
 }

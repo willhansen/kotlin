@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val data: T)
+konstue class Z<T: Int>(konst data: T)
 
 fun box(): String {
     if (Z(0) != Z(0)) throw AssertionError()

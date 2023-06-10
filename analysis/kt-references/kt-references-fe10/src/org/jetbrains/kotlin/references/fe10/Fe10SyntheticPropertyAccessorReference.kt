@@ -23,10 +23,10 @@ class Fe10SyntheticPropertyAccessorReference(
 ) : SyntheticPropertyAccessorReference(expression, getter), KtFe10Reference {
 
     override fun getTargetDescriptors(context: BindingContext): Collection<DeclarationDescriptor> {
-        val descriptors = expression.getReferenceTargets(context)
+        konst descriptors = expression.getReferenceTargets(context)
         if (descriptors.none { it is SyntheticJavaPropertyDescriptor }) return emptyList()
 
-        val result = SmartList<FunctionDescriptor>()
+        konst result = SmartList<FunctionDescriptor>()
         for (descriptor in descriptors) {
             if (descriptor is SyntheticJavaPropertyDescriptor) {
                 if (getter) {

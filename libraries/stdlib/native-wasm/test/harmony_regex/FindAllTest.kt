@@ -13,7 +13,7 @@ class FindAllTest {
     internal fun Regex.allGroups(text: String) =
             findAll(text).map {
                 it.groups.mapIndexed { index, it ->
-                    "$index => ${it?.value}"
+                    "$index => ${it?.konstue}"
                 }.joinToString("; ")
             }.toList()
 

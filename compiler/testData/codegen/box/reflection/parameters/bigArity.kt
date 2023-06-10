@@ -8,9 +8,9 @@ import kotlin.test.assertEquals
 class A
 
 data class BigDataClass(
-    val p00: A, val p01: A, val p02: A, val p03: A, val p04: A, val p05: A, val p06: A, val p07: A, val p08: A, val p09: A,
-    val p10: A, val p11: A, val p12: A, val p13: A, val p14: A, val p15: A, val p16: A, val p17: A, val p18: A, val p19: A,
-    val p20: A, val p21: A, val p22: A, val p23: A, val p24: A, val p25: A, val p26: A, val p27: A, val p28: A, val p29: A
+    konst p00: A, konst p01: A, konst p02: A, konst p03: A, konst p04: A, konst p05: A, konst p06: A, konst p07: A, konst p08: A, konst p09: A,
+    konst p10: A, konst p11: A, konst p12: A, konst p13: A, konst p14: A, konst p15: A, konst p16: A, konst p17: A, konst p18: A, konst p19: A,
+    konst p20: A, konst p21: A, konst p22: A, konst p23: A, konst p24: A, konst p25: A, konst p26: A, konst p27: A, konst p28: A, konst p29: A
 )
 
 fun box(): String {

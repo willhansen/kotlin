@@ -18,18 +18,18 @@ import org.jetbrains.kotlin.fir.types.ConeIntersectionType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 
 internal class KtFirIntersectionType(
-    override val coneType: ConeIntersectionType,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeIntersectionType,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtIntersectionType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
+    override konst token: KtLifetimeToken get() = builder.token
 
-    override val conjuncts: List<KtType> by cached {
+    override konst conjuncts: List<KtType> by cached {
         coneType.intersectedTypes.map { conjunct -> builder.typeBuilder.buildKtType(conjunct) }
     }
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
 
     override fun asStringForDebugging(): String = withValidityAssertion { coneType.renderForDebugging() }
     override fun equals(other: Any?) = typeEquals(other)

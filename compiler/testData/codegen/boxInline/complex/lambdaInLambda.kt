@@ -3,7 +3,7 @@
 // FILE: 1.kt
 package test
 
-public class Input(val s1: String, val s2: String) {
+public class Input(konst s1: String, konst s2: String) {
     public fun iterator() : Iterator<String> {
         return arrayListOf(s1, s2).iterator()
     }
@@ -32,8 +32,8 @@ fun sample(): Input {
 }
 
 fun testForEachLine() {
-    val list = ArrayList<String>()
-    val reader = sample()
+    konst list = ArrayList<String>()
+    konst reader = sample()
 
     reader.forEachLine{
         list.add("111")

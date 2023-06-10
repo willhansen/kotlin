@@ -1,6 +1,6 @@
 package
 
-public val </*0*/ T : kotlin.Any> kotlin.collections.List<T>.bar: T
+public konst </*0*/ T : kotlin.Any> kotlin.collections.List<T>.bar: T
 public var </*0*/ T : kotlin.Any> kotlin.collections.List<T>.foo: T
 public fun main(/*0*/ listInt: kotlin.collections.List<kotlin.Int>, /*1*/ listStr: kotlin.collections.List<kotlin.String>): kotlin.Unit
 public fun useString(/*0*/ s: kotlin.String): kotlin.Unit
@@ -18,7 +18,7 @@ public final class Delegate</*0*/ T : kotlin.Any> {
 
 public final class Wrapper</*0*/ T> {
     public constructor Wrapper</*0*/ T>(/*0*/ v: T? = ...)
-    public final val v: T?
+    public final konst v: T?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

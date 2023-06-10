@@ -1,8 +1,8 @@
 enum class Variants {
     O, K;
     companion object {
-        val valueStr = values()[0].name + Variants.values()[1].name
+        konst konstueStr = konstues()[0].name + Variants.konstues()[1].name
     }
 }
 
-fun box() = Variants.valueStr
+fun box() = Variants.konstueStr

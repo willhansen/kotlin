@@ -21,9 +21,9 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicLong
 
 class TeamcityStatisticsLogger {
-    private val isOnTeamcity = System.getenv("TEAMCITY_VERSION") != null
+    private konst isOnTeamcity = System.getenv("TEAMCITY_VERSION") != null
 
-    private val totalTime = AtomicLong()
+    private konst totalTime = AtomicLong()
 
     //NOTE: mostly copied from TeamCityBuildInfoPrinter
     private fun escapedChar(c: Char): Char {
@@ -42,9 +42,9 @@ class TeamcityStatisticsLogger {
     }
 
     private fun escape(text: String): String {
-        val escaped = StringBuilder()
+        konst escaped = StringBuilder()
         for (c in text.toCharArray()) {
-            val escChar = escapedChar(c)
+            konst escChar = escapedChar(c)
             if (escChar == 0.toChar()) {
                 escaped.append(c)
             } else {
@@ -79,8 +79,8 @@ class TeamcityStatisticsLogger {
     }
 
 
-    private fun printStatisticMessage(key: String, value: String) {
-        println("##teamcity[buildStatisticValue key='${escape(key)}' value='${escape(value)}']")
+    private fun printStatisticMessage(key: String, konstue: String) {
+        println("##teamcity[buildStatisticValue key='${escape(key)}' konstue='${escape(konstue)}']")
     }
 
     private fun Long.nanosToMillis() = TimeUnit.NANOSECONDS.toMillis(this)

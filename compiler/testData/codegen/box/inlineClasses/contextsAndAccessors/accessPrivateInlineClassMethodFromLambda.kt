@@ -2,11 +2,11 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R(private val r: Int) {
-    fun test() = eval { ok() }
+konstue class R(private konst r: Int) {
+    fun test() = ekonst { ok() }
 
     private fun ok() = "OK"
 }

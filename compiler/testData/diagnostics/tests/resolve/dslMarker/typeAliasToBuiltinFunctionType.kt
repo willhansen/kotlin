@@ -12,10 +12,10 @@ class A
 
 fun a(block: A.() -> Unit) {}
 
-val useX1: X.() -> Unit = TODO()
+konst useX1: X.() -> Unit = TODO()
 typealias FunctionType = X.() -> Unit
 
-val useX2: FunctionType = TODO()
+konst useX2: FunctionType = TODO()
 
 
 fun test() {

@@ -25,38 +25,38 @@ import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
 // see utils/ScopeUtils.kt
 
 interface HierarchicalScope : ResolutionScope {
-    val parent: HierarchicalScope?
+    konst parent: HierarchicalScope?
 
     fun printStructure(p: Printer)
 }
 
 interface LexicalScope : HierarchicalScope {
-    override val parent: HierarchicalScope
+    override konst parent: HierarchicalScope
 
-    val ownerDescriptor: DeclarationDescriptor
-    val isOwnerDescriptorAccessibleByLabel: Boolean
+    konst ownerDescriptor: DeclarationDescriptor
+    konst isOwnerDescriptorAccessibleByLabel: Boolean
 
-    val implicitReceiver: ReceiverParameterDescriptor?
-    val contextReceiversGroup: List<ReceiverParameterDescriptor>
+    konst implicitReceiver: ReceiverParameterDescriptor?
+    konst contextReceiversGroup: List<ReceiverParameterDescriptor>
 
-    val kind: LexicalScopeKind
+    konst kind: LexicalScopeKind
 
     class Base(
         parent: HierarchicalScope,
-        override val ownerDescriptor: DeclarationDescriptor
+        override konst ownerDescriptor: DeclarationDescriptor
     ) : BaseHierarchicalScope(parent), LexicalScope {
-        override val parent: HierarchicalScope
+        override konst parent: HierarchicalScope
             get() = super.parent!!
 
-        override val isOwnerDescriptorAccessibleByLabel: Boolean
+        override konst isOwnerDescriptorAccessibleByLabel: Boolean
             get() = false
 
-        override val implicitReceiver: ReceiverParameterDescriptor?
+        override konst implicitReceiver: ReceiverParameterDescriptor?
             get() = null
-        override val contextReceiversGroup: List<ReceiverParameterDescriptor>
+        override konst contextReceiversGroup: List<ReceiverParameterDescriptor>
             get() = emptyList()
 
-        override val kind: LexicalScopeKind
+        override konst kind: LexicalScopeKind
             get() = LexicalScopeKind.EMPTY
 
         override fun definitelyDoesNotContainName(name: Name) = true
@@ -67,7 +67,7 @@ interface LexicalScope : HierarchicalScope {
     }
 }
 
-enum class LexicalScopeKind(val withLocalDescriptors: Boolean) {
+enum class LexicalScopeKind(konst withLocalDescriptors: Boolean) {
     EMPTY(false),
     THROWING(false),
 
@@ -111,7 +111,7 @@ enum class LexicalScopeKind(val withLocalDescriptors: Boolean) {
 }
 
 interface ImportingScope : HierarchicalScope {
-    override val parent: ImportingScope?
+    override konst parent: ImportingScope?
 
     fun getContributedPackage(name: Name): PackageViewDescriptor?
 
@@ -141,7 +141,7 @@ interface ImportingScope : HierarchicalScope {
     }
 }
 
-abstract class BaseHierarchicalScope(override val parent: HierarchicalScope?) : HierarchicalScope {
+abstract class BaseHierarchicalScope(override konst parent: HierarchicalScope?) : HierarchicalScope {
     override fun getContributedDescriptors(
         kindFilter: DescriptorKindFilter,
         nameFilter: (Name) -> Boolean
@@ -155,7 +155,7 @@ abstract class BaseHierarchicalScope(override val parent: HierarchicalScope?) : 
 }
 
 abstract class BaseImportingScope(parent: ImportingScope?) : BaseHierarchicalScope(parent), ImportingScope {
-    override val parent: ImportingScope?
+    override konst parent: ImportingScope?
         get() = super.parent as ImportingScope?
 
     override fun getContributedPackage(name: Name): PackageViewDescriptor? = null
@@ -175,10 +175,10 @@ abstract class BaseImportingScope(parent: ImportingScope?) : BaseHierarchicalSco
 }
 
 class CompositePrioritizedImportingScope(
-    private val primaryScope: ImportingScope,
-    private val secondaryScope: ImportingScope,
+    private konst primaryScope: ImportingScope,
+    private konst secondaryScope: ImportingScope,
 ) : ImportingScope {
-    override val parent: ImportingScope?
+    override konst parent: ImportingScope?
         get() = primaryScope.parent ?: secondaryScope.parent
 
     override fun getContributedPackage(name: Name): PackageViewDescriptor? {
@@ -196,8 +196,8 @@ class CompositePrioritizedImportingScope(
     }
 
     override fun computeImportedNames(): Set<Name>? {
-        val primaryNames = primaryScope.computeImportedNames()
-        val secondaryNames = secondaryScope.computeImportedNames()
+        konst primaryNames = primaryScope.computeImportedNames()
+        konst secondaryNames = secondaryScope.computeImportedNames()
         return primaryNames?.union(secondaryNames.orEmpty()) ?: secondaryNames
     }
 

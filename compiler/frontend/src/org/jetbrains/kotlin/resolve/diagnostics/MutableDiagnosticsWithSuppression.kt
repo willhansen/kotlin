@@ -28,23 +28,23 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtStubbedPsiUtil
 
 class MutableDiagnosticsWithSuppression(
-    private val suppressCache: KotlinSuppressCache,
-    private val delegateDiagnostics: Diagnostics,
+    private konst suppressCache: KotlinSuppressCache,
+    private konst delegateDiagnostics: Diagnostics,
 ) : Diagnostics {
-    private val diagnosticList = ArrayList<Diagnostic>()
+    private konst diagnosticList = ArrayList<Diagnostic>()
 
     @Volatile
     private var diagnosticsCallback: DiagnosticSink.DiagnosticsCallback? = null
 
     //NOTE: CachedValuesManager is not used because it requires Project passed to this object
-    private val cache = CachedValueImpl {
-        val allDiagnostics = delegateDiagnostics.noSuppression().all() + diagnosticList
+    private konst cache = CachedValueImpl {
+        konst allDiagnostics = delegateDiagnostics.noSuppression().all() + diagnosticList
         CachedValueProvider.Result(DiagnosticsWithSuppression(suppressCache, allDiagnostics), modificationTracker)
     }
 
-    private fun readonlyView(): DiagnosticsWithSuppression = cache.value!!
+    private fun readonlyView(): DiagnosticsWithSuppression = cache.konstue!!
 
-    override val modificationTracker = CompositeModificationTracker(delegateDiagnostics.modificationTracker)
+    override konst modificationTracker = CompositeModificationTracker(delegateDiagnostics.modificationTracker)
 
     override fun all(): Collection<Diagnostic> = readonlyView().all()
     override fun forElement(psiElement: PsiElement) = readonlyView().forElement(psiElement)
@@ -76,17 +76,17 @@ class MutableDiagnosticsWithSuppression(
     }
 
     private fun onTheFlyDiagnosticsCallback(diagnostic: Diagnostic): DiagnosticSink.DiagnosticsCallback? {
-        val callback = diagnosticsCallback ?: return null
+        konst callback = diagnosticsCallback ?: return null
         // Due to a potential recursion in filter.invoke (via LazyAnnotations) do not try to report
         // diagnostic on-the-fly if it happened in annotations, and do not report any potentially suppressed elements
         var element: PsiElement? = diagnostic.psiElement
         while (element != null && element !is PsiFile) {
-            val annotated = KtStubbedPsiUtil.getPsiOrStubParent(element, KtAnnotated::class.java, false)
-            val annotationEntries = annotated?.annotationEntries
+            konst annotated = KtStubbedPsiUtil.getPsiOrStubParent(element, KtAnnotated::class.java, false)
+            konst annotationEntries = annotated?.annotationEntries
             if (annotationEntries?.isNotEmpty() == true) return null
             element = annotated?.parent
         }
-        val filtered = suppressCache.filter.invoke(diagnostic)
+        konst filtered = suppressCache.filter.invoke(diagnostic)
         if (!filtered) return null
         return callback
     }

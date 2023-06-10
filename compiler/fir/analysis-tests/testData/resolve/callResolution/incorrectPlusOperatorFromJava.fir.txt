@@ -8,12 +8,12 @@ FILE: main.kt
         }
 
         public final fun test_1(x: R|Base|): R|kotlin/Unit| {
-            lval y: R|kotlin/Int| = R|<local>/x|.R|/plus|(String())
+            lkonst y: R|kotlin/Int| = R|<local>/x|.R|/plus|(String())
             R|<local>/y|.R|kotlin/Int.inc|()
         }
 
         public final fun test_2(x: R|Base|): R|kotlin/Unit| {
-            lval y: R|kotlin/String!| = R|<local>/x|.R|/Base.plus|(vararg(String()))
+            lkonst y: R|kotlin/String!| = R|<local>/x|.R|/Base.plus|(vararg(String()))
             R|<local>/y|.R|kotlin/String.length|
         }
 

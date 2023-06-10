@@ -5,7 +5,7 @@ open class A
 class B1 : A()
 class B2 : A()
 
-annotation class Ann1(val arg: Array<KClass<in A>>)
+annotation class Ann1(konst arg: Array<KClass<in A>>)
 
 @Ann1(arrayOf(A::class))
 class MyClass1
@@ -16,7 +16,7 @@ class MyClass1a
 @Ann1(<!ARGUMENT_TYPE_MISMATCH!>arrayOf(B1::class)<!>)
 class MyClass2
 
-annotation class Ann2(val arg: Array<KClass<in B1>>)
+annotation class Ann2(konst arg: Array<KClass<in B1>>)
 
 @Ann2(arrayOf(A::class))
 class MyClass3

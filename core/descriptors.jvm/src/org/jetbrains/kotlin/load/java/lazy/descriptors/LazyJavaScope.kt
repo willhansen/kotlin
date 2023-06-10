@@ -53,14 +53,14 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 import java.util.*
 
 abstract class LazyJavaScope(
-    protected val c: LazyJavaResolverContext,
-    protected val mainScope: LazyJavaScope? = null
+    protected konst c: LazyJavaResolverContext,
+    protected konst mainScope: LazyJavaScope? = null
 ) : MemberScopeImpl() {
-    protected abstract val ownerDescriptor: DeclarationDescriptor
+    protected abstract konst ownerDescriptor: DeclarationDescriptor
 
-    // this lazy value is not used at all in LazyPackageFragmentScopeForJavaPackage because we do not use caching there
+    // this lazy konstue is not used at all in LazyPackageFragmentScopeForJavaPackage because we do not use caching there
     // but is placed in the base class to not duplicate code
-    protected val allDescriptors = c.storageManager.createRecursionTolerantLazyValue<Collection<DeclarationDescriptor>>(
+    protected konst allDescriptors = c.storageManager.createRecursionTolerantLazyValue<Collection<DeclarationDescriptor>>(
         { computeDescriptors(DescriptorKindFilter.ALL, MemberScope.ALL_NAME_FILTER) },
         // This is to avoid the following recursive case:
         //    when computing getAllPackageNames() we ask the JavaPsiFacade for all subpackages of foo
@@ -69,13 +69,13 @@ abstract class LazyJavaScope(
         listOf()
     )
 
-    protected val declaredMemberIndex: NotNullLazyValue<DeclaredMemberIndex> = c.storageManager.createLazyValue { computeMemberIndex() }
+    protected konst declaredMemberIndex: NotNullLazyValue<DeclaredMemberIndex> = c.storageManager.createLazyValue { computeMemberIndex() }
 
     fun wasContentRequested() = declaredMemberIndex.isComputed()
 
     protected abstract fun computeMemberIndex(): DeclaredMemberIndex
 
-    // Fake overrides, values()/valueOf(), etc.
+    // Fake overrides, konstues()/konstueOf(), etc.
     protected abstract fun computeNonDeclaredFunctions(result: MutableCollection<SimpleFunctionDescriptor>, name: Name)
 
     // It has a similar semantics to computeNonDeclaredFunctions, but it's being called just once per class
@@ -84,14 +84,14 @@ abstract class LazyJavaScope(
 
     protected abstract fun getDispatchReceiverParameter(): ReceiverParameterDescriptor?
 
-    private val declaredFunctions: MemoizedFunctionToNotNull<Name, Collection<SimpleFunctionDescriptor>> =
+    private konst declaredFunctions: MemoizedFunctionToNotNull<Name, Collection<SimpleFunctionDescriptor>> =
         c.storageManager.createMemoizedFunction { name ->
             if (mainScope != null) return@createMemoizedFunction mainScope.declaredFunctions(name)
 
-            val result = mutableListOf<SimpleFunctionDescriptor>()
+            konst result = mutableListOf<SimpleFunctionDescriptor>()
 
             for (method in declaredMemberIndex().findMethodsByName(name)) {
-                val descriptor = resolveMethodToFunctionDescriptor(method)
+                konst descriptor = resolveMethodToFunctionDescriptor(method)
                 if (!descriptor.isVisibleAsFunction()) continue
 
                 c.components.javaResolverCache.recordMethod(method, descriptor)
@@ -103,11 +103,11 @@ abstract class LazyJavaScope(
             result
         }
 
-    private val declaredField: MemoizedFunctionToNullable<Name, PropertyDescriptor> =
+    private konst declaredField: MemoizedFunctionToNullable<Name, PropertyDescriptor> =
         c.storageManager.createMemoizedFunctionWithNullableValues { name ->
             if (mainScope != null) return@createMemoizedFunctionWithNullableValues mainScope.declaredField(name)
 
-            val field = declaredMemberIndex().findFieldByName(name)
+            konst field = declaredMemberIndex().findFieldByName(name)
             if (field != null && !field.isEnumEntry)
                 resolveProperty(field)
             else
@@ -115,8 +115,8 @@ abstract class LazyJavaScope(
         }
 
 
-    private val functions = c.storageManager.createMemoizedFunction<Name, Collection<SimpleFunctionDescriptor>> { name ->
-        val result = LinkedHashSet<SimpleFunctionDescriptor>(declaredFunctions(name))
+    private konst functions = c.storageManager.createMemoizedFunction<Name, Collection<SimpleFunctionDescriptor>> { name ->
+        konst result = LinkedHashSet<SimpleFunctionDescriptor>(declaredFunctions(name))
 
         result.retainMostSpecificMethods()
 
@@ -126,10 +126,10 @@ abstract class LazyJavaScope(
     }
 
     private fun MutableSet<SimpleFunctionDescriptor>.retainMostSpecificMethods() {
-        val groups = groupBy { it.computeJvmDescriptor(withReturnType = false) }.values
+        konst groups = groupBy { it.computeJvmDescriptor(withReturnType = false) }.konstues
         for (group in groups) {
             if (group.size == 1) continue
-            val mostSpecificMethods = group.selectMostSpecificInEachOverridableGroup { this }
+            konst mostSpecificMethods = group.selectMostSpecificInEachOverridableGroup { this }
             removeAll(group)
             addAll(mostSpecificMethods)
         }
@@ -138,36 +138,36 @@ abstract class LazyJavaScope(
     protected open fun JavaMethodDescriptor.isVisibleAsFunction() = true
 
     protected data class MethodSignatureData(
-        val returnType: KotlinType,
-        val receiverType: KotlinType?,
-        val valueParameters: List<ValueParameterDescriptor>,
-        val typeParameters: List<TypeParameterDescriptor>,
-        val hasStableParameterNames: Boolean,
-        val errors: List<String>
+        konst returnType: KotlinType,
+        konst receiverType: KotlinType?,
+        konst konstueParameters: List<ValueParameterDescriptor>,
+        konst typeParameters: List<TypeParameterDescriptor>,
+        konst hasStableParameterNames: Boolean,
+        konst errors: List<String>
     )
 
     protected abstract fun resolveMethodSignature(
         method: JavaMethod,
         methodTypeParameters: List<TypeParameterDescriptor>,
         returnType: KotlinType,
-        valueParameters: List<ValueParameterDescriptor>
+        konstueParameters: List<ValueParameterDescriptor>
     ): MethodSignatureData
 
     protected fun resolveMethodToFunctionDescriptor(method: JavaMethod): JavaMethodDescriptor {
-        val annotations = c.resolveAnnotations(method)
-        val functionDescriptorImpl = JavaMethodDescriptor.createJavaMethod(
+        konst annotations = c.resolveAnnotations(method)
+        konst functionDescriptorImpl = JavaMethodDescriptor.createJavaMethod(
             ownerDescriptor, annotations, method.name, c.components.sourceElementFactory.source(method),
-            declaredMemberIndex().findRecordComponentByName(method.name) != null && method.valueParameters.isEmpty()
+            declaredMemberIndex().findRecordComponentByName(method.name) != null && method.konstueParameters.isEmpty()
         )
 
-        val c = c.childForMethod(functionDescriptorImpl, method)
+        konst c = c.childForMethod(functionDescriptorImpl, method)
 
-        val methodTypeParameters = method.typeParameters.map { p -> c.typeParameterResolver.resolveTypeParameter(p)!! }
-        val valueParameters = resolveValueParameters(c, functionDescriptorImpl, method.valueParameters)
+        konst methodTypeParameters = method.typeParameters.map { p -> c.typeParameterResolver.resolveTypeParameter(p)!! }
+        konst konstueParameters = resolveValueParameters(c, functionDescriptorImpl, method.konstueParameters)
 
-        val returnType = computeMethodReturnType(method, c)
+        konst returnType = computeMethodReturnType(method, c)
 
-        val effectiveSignature = resolveMethodSignature(method, methodTypeParameters, returnType, valueParameters.descriptors)
+        konst effectiveSignature = resolveMethodSignature(method, methodTypeParameters, returnType, konstueParameters.descriptors)
 
         functionDescriptorImpl.initialize(
             effectiveSignature.receiverType?.let {
@@ -176,17 +176,17 @@ abstract class LazyJavaScope(
             getDispatchReceiverParameter(),
             emptyList(),
             effectiveSignature.typeParameters,
-            effectiveSignature.valueParameters,
+            effectiveSignature.konstueParameters,
             effectiveSignature.returnType,
             Modality.convertFromFlags(sealed = false, method.isAbstract, !method.isFinal),
             method.visibility.toDescriptorVisibility(),
             if (effectiveSignature.receiverType != null)
-                mapOf(JavaMethodDescriptor.ORIGINAL_VALUE_PARAMETER_FOR_EXTENSION_RECEIVER to valueParameters.descriptors.first())
+                mapOf(JavaMethodDescriptor.ORIGINAL_VALUE_PARAMETER_FOR_EXTENSION_RECEIVER to konstueParameters.descriptors.first())
             else
                 emptyMap<CallableDescriptor.UserDataKey<ValueParameterDescriptor>, ValueParameterDescriptor>()
         )
 
-        functionDescriptorImpl.setParameterNamesStatus(effectiveSignature.hasStableParameterNames, valueParameters.hasSynthesizedNames)
+        functionDescriptorImpl.setParameterNamesStatus(effectiveSignature.hasStableParameterNames, konstueParameters.hasSynthesizedNames)
 
         if (effectiveSignature.errors.isNotEmpty()) {
             c.components.signaturePropagator.reportSignatureErrors(functionDescriptorImpl, effectiveSignature.errors)
@@ -196,12 +196,12 @@ abstract class LazyJavaScope(
     }
 
     protected fun computeMethodReturnType(method: JavaMethod, c: LazyJavaResolverContext): KotlinType {
-        val annotationMethod = method.containingClass.isAnnotationType
-        val returnTypeAttrs = TypeUsage.COMMON.toAttributes(isForAnnotationParameter = annotationMethod)
+        konst annotationMethod = method.containingClass.isAnnotationType
+        konst returnTypeAttrs = TypeUsage.COMMON.toAttributes(isForAnnotationParameter = annotationMethod)
         return c.typeResolver.transformJavaType(method.returnType, returnTypeAttrs)
     }
 
-    protected class ResolvedValueParameters(val descriptors: List<ValueParameterDescriptor>, val hasSynthesizedNames: Boolean)
+    protected class ResolvedValueParameters(konst descriptors: List<ValueParameterDescriptor>, konst hasSynthesizedNames: Boolean)
 
     protected fun resolveValueParameters(
         c: LazyJavaResolverContext,
@@ -209,21 +209,21 @@ abstract class LazyJavaScope(
         jValueParameters: List<JavaValueParameter>
     ): ResolvedValueParameters {
         var synthesizedNames = false
-        val descriptors = jValueParameters.withIndex().map { (index, javaParameter) ->
-            val annotations = c.resolveAnnotations(javaParameter)
-            val typeUsage = TypeUsage.COMMON.toAttributes()
+        konst descriptors = jValueParameters.withIndex().map { (index, javaParameter) ->
+            konst annotations = c.resolveAnnotations(javaParameter)
+            konst typeUsage = TypeUsage.COMMON.toAttributes()
 
-            val (outType, varargElementType) =
+            konst (outType, varargElementType) =
                 if (javaParameter.isVararg) {
-                    val paramType = javaParameter.type as? JavaArrayType
+                    konst paramType = javaParameter.type as? JavaArrayType
                         ?: throw AssertionError("Vararg parameter should be an array: $javaParameter")
-                    val outType = c.typeResolver.transformArrayType(paramType, typeUsage, true)
+                    konst outType = c.typeResolver.transformArrayType(paramType, typeUsage, true)
                     outType to c.module.builtIns.getArrayElementType(outType)
                 } else {
                     c.typeResolver.transformJavaType(javaParameter.type, typeUsage) to null
                 }
 
-            val name = if (function.name.asString() == "equals" &&
+            konst name = if (function.name.asString() == "equals" &&
                 jValueParameters.size == 1 &&
                 c.module.builtIns.nullableAnyType == outType
             ) {
@@ -234,7 +234,7 @@ abstract class LazyJavaScope(
                 Name.identifier("other")
             } else {
                 // TODO: parameter names may be drawn from attached sources, which is slow; it's better to make them lazy
-                val javaName = javaParameter.name
+                konst javaName = javaParameter.name
                 if (javaName == null) synthesizedNames = true
                 javaName ?: Name.identifier("p$index")
             }
@@ -256,9 +256,9 @@ abstract class LazyJavaScope(
         return ResolvedValueParameters(descriptors, synthesizedNames)
     }
 
-    private val functionNamesLazy by c.storageManager.createLazyValue { computeFunctionNames(DescriptorKindFilter.FUNCTIONS, null) }
-    private val propertyNamesLazy by c.storageManager.createLazyValue { computePropertyNames(DescriptorKindFilter.VARIABLES, null) }
-    private val classNamesLazy by c.storageManager.createLazyValue { computeClassNames(DescriptorKindFilter.CLASSIFIERS, null) }
+    private konst functionNamesLazy by c.storageManager.createLazyValue { computeFunctionNames(DescriptorKindFilter.FUNCTIONS, null) }
+    private konst propertyNamesLazy by c.storageManager.createLazyValue { computePropertyNames(DescriptorKindFilter.VARIABLES, null) }
+    private konst classNamesLazy by c.storageManager.createLazyValue { computeClassNames(DescriptorKindFilter.CLASSIFIERS, null) }
 
     override fun getFunctionNames() = functionNamesLazy
     override fun getVariableNames() = propertyNamesLazy
@@ -279,8 +279,8 @@ abstract class LazyJavaScope(
 
     protected abstract fun computePropertyNames(kindFilter: DescriptorKindFilter, nameFilter: ((Name) -> Boolean)?): Set<Name>
 
-    private val properties = c.storageManager.createMemoizedFunction { name: Name ->
-        val properties = ArrayList<PropertyDescriptor>()
+    private konst properties = c.storageManager.createMemoizedFunction { name: Name ->
+        konst properties = ArrayList<PropertyDescriptor>()
 
         properties.addIfNotNull(declaredField(name))
         computeNonDeclaredProperties(name, properties)
@@ -296,7 +296,7 @@ abstract class LazyJavaScope(
         // Annotations on Java fields are loaded as property annotations, therefore backingField = null below
         propertyDescriptor.initialize(null, null, null, null)
 
-        val propertyType = getPropertyType(field)
+        konst propertyType = getPropertyType(field)
 
         propertyDescriptor.setType(
             propertyType,
@@ -312,7 +312,7 @@ abstract class LazyJavaScope(
         if (DescriptorUtils.shouldRecordInitializerForProperty(propertyDescriptor, propertyDescriptor.type)) {
             propertyDescriptor.setCompileTimeInitializerFactory {
                 c.storageManager.createNullableLazyValue {
-                    c.components.javaPropertyInitializerEvaluator.getInitializerConstant(field, propertyDescriptor)
+                    c.components.javaPropertyInitializerEkonstuator.getInitializerConstant(field, propertyDescriptor)
                 }
             }
         }
@@ -323,8 +323,8 @@ abstract class LazyJavaScope(
     }
 
     private fun createPropertyDescriptor(field: JavaField): PropertyDescriptorImpl {
-        val isVar = !field.isFinal
-        val annotations = c.resolveAnnotations(field)
+        konst isVar = !field.isFinal
+        konst annotations = c.resolveAnnotations(field)
 
         return JavaPropertyDescriptor.create(
             ownerDescriptor, annotations, Modality.FINAL, field.visibility.toDescriptorVisibility(), isVar, field.name,
@@ -332,14 +332,14 @@ abstract class LazyJavaScope(
         )
     }
 
-    private val JavaField.isFinalStatic: Boolean
+    private konst JavaField.isFinalStatic: Boolean
         get() = isFinal && isStatic
 
     private fun getPropertyType(field: JavaField): KotlinType {
         // Fields do not have their own generic parameters.
         // Simple static constants should not have flexible types.
-        val propertyType = c.typeResolver.transformJavaType(field.type, TypeUsage.COMMON.toAttributes())
-        val isNotNullable =
+        konst propertyType = c.typeResolver.transformJavaType(field.type, TypeUsage.COMMON.toAttributes())
+        konst isNotNullable =
             (KotlinBuiltIns.isPrimitiveType(propertyType) || KotlinBuiltIns.isString(propertyType)) &&
                     field.isFinalStatic && field.hasConstantNotNullInitializer
         if (isNotNullable) {
@@ -360,8 +360,8 @@ abstract class LazyJavaScope(
         kindFilter: DescriptorKindFilter,
         nameFilter: (Name) -> Boolean
     ): List<DeclarationDescriptor> {
-        val location = NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS
-        val result = LinkedHashSet<DeclarationDescriptor>()
+        konst location = NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS
+        konst result = LinkedHashSet<DeclarationDescriptor>()
 
         if (kindFilter.acceptsKinds(DescriptorKindFilter.CLASSIFIERS_MASK)) {
             for (name in computeClassNames(kindFilter, nameFilter)) {

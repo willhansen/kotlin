@@ -4,7 +4,7 @@
 
 interface Foo<T> {
     fun test(p: T) = "fail"
-    val T.prop: String
+    konst T.prop: String
         get() = "fail"
 }
 
@@ -64,6 +64,6 @@ fun interface F : Foo<String> {
 fun test(): String {
     if (F { o -> o + "K" }.invoke("O") != "OK") return "Fail"
 
-    val lambda: (String) -> String = { o -> o + "K" }
+    konst lambda: (String) -> String = { o -> o + "K" }
     return F(lambda).invoke("O")
 }

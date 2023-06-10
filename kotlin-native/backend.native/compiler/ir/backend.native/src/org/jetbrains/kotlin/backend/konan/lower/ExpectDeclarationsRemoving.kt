@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.resolve.multiplatform.findCompatibleActualsForExpect
  * This pass removes all declarations with `isExpect == true`.
  * Note: org.jetbrains.kotlin.backend.common.lower.ExpectDeclarationsRemoving is copy of this lower.
  */
-internal class ExpectDeclarationsRemoving(val context: Context) : FileLoweringPass {
+internal class ExpectDeclarationsRemoving(konst context: Context) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         // All declarations with `isExpect == true` are nested into a top-level declaration with `isExpect == true`.
         irFile.declarations.removeAll {
@@ -42,10 +42,10 @@ internal class ExpectDeclarationsRemoving(val context: Context) : FileLoweringPa
     }
 }
 
-internal class ExpectToActualDefaultValueCopier(private val irModule: IrModuleFragment) {
+internal class ExpectToActualDefaultValueCopier(private konst irModule: IrModuleFragment) {
 
     // Note: local declarations aren't required here; TODO: use more lightweight index.
-    private val moduleIndex = ModuleIndex(irModule)
+    private konst moduleIndex = ModuleIndex(irModule)
 
     fun process() {
         irModule.files.forEach { this.process(it) }
@@ -69,18 +69,18 @@ internal class ExpectToActualDefaultValueCopier(private val irModule: IrModuleFr
             override fun visitValueParameter(declaration: IrValueParameter) {
                 super.visitValueParameter(declaration)
 
-                val defaultValue = declaration.defaultValue ?: return
-                val function = declaration.parent as IrFunction
+                konst defaultValue = declaration.defaultValue ?: return
+                konst function = declaration.parent as IrFunction
 
-                val index = declaration.index
-                assert(function.valueParameters[index] == declaration)
+                konst index = declaration.index
+                assert(function.konstueParameters[index] == declaration)
 
                 if (function is IrConstructor && OptionalAnnotationUtil.isOptionalAnnotationClass(function.descriptor.constructedClass)) {
                     return
                 }
 
-                val actualForExpected = function.findActualForExpected()
-                actualForExpected.valueParameters[index].defaultValue =
+                konst actualForExpected = function.findActualForExpected()
+                actualForExpected.konstueParameters[index].defaultValue =
                         IrExpressionBodyImpl(
                                 defaultValue.startOffset, defaultValue.endOffset,
                                 defaultValue.expression.remapExpectValueSymbols().patchDeclarationParents(actualForExpected)
@@ -136,9 +136,9 @@ internal class ExpectToActualDefaultValueCopier(private val irModule: IrModuleFr
                 symbol.descriptor.isExpect -> symbol.owner.findActualForExpected().symbol
 
                 symbol.descriptor.propertyIfAccessor.isExpect -> {
-                    val property = symbol.owner.correspondingPropertySymbol!!.owner
-                    val actualPropertyDescriptor = property.descriptor.findActualForExpect()
-                    val accessorDescriptor = when (symbol.owner) {
+                    konst property = symbol.owner.correspondingPropertySymbol!!.owner
+                    konst actualPropertyDescriptor = property.descriptor.findActualForExpect()
+                    konst accessorDescriptor = when (symbol.owner) {
                         property.getter -> actualPropertyDescriptor.getter!!
                         property.setter -> actualPropertyDescriptor.setter!!
                         else -> error("Unexpected accessor of $symbol ${symbol.descriptor}")
@@ -165,14 +165,14 @@ internal class ExpectToActualDefaultValueCopier(private val irModule: IrModuleFr
                     remapExpectValue(symbol)?.symbol ?: super.getReferencedValue(symbol)
         }
 
-        val symbolRemapper = SymbolRemapper()
+        konst symbolRemapper = SymbolRemapper()
         acceptVoid(symbolRemapper)
         return transform(DeepCopyIrTreeWithSymbols(symbolRemapper, DeepCopyTypeRemapper(symbolRemapper)), data = null)
     }
 
     private fun remapExpectTypeParameter(symbol: IrTypeParameterSymbol): IrTypeParameter {
-        val parameter = symbol.owner
-        val parent = parameter.parent
+        konst parameter = symbol.owner
+        konst parent = parameter.parent
 
         return when (parent) {
             is IrClass ->
@@ -194,8 +194,8 @@ internal class ExpectToActualDefaultValueCopier(private val irModule: IrModuleFr
             return null
         }
 
-        val parameter = symbol.owner
-        val parent = parameter.parent
+        konst parameter = symbol.owner
+        konst parent = parameter.parent
 
         return when (parent) {
             is IrClass ->
@@ -213,8 +213,8 @@ internal class ExpectToActualDefaultValueCopier(private val irModule: IrModuleFr
                     parent.dispatchReceiverParameter -> parent.findActualForExpected().dispatchReceiverParameter!!
                     parent.extensionReceiverParameter -> parent.findActualForExpected().extensionReceiverParameter!!
                     else -> {
-                        assert(parent.valueParameters[parameter.index] == parameter)
-                        parent.findActualForExpected().valueParameters[parameter.index]
+                        assert(parent.konstueParameters[parameter.index] == parameter)
+                        parent.findActualForExpected().konstueParameters[parameter.index]
                     }
                 }
 

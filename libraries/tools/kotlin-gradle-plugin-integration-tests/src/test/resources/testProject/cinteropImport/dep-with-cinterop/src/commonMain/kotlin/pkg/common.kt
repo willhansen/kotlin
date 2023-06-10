@@ -3,5 +3,5 @@ package pkg
 import dep.*
 
 class DependencyKotlinClass {
-    val mode: Dependency = Dependency.GOO
+    konst mode: Dependency = Dependency.GOO
 }

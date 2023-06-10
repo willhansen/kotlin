@@ -15,10 +15,10 @@ import org.jetbrains.kotlin.analysis.providers.KotlinModificationTrackerFactory
 import org.jetbrains.kotlin.analysis.providers.KtModuleStateTracker
 
 public class KotlinStaticModificationTrackerFactory : KotlinModificationTrackerFactory() {
-    private val projectWide = SimpleModificationTracker()
-    private val librariesWide = SimpleModificationTracker()
-    private val moduleOutOfBlock = mutableMapOf<KtSourceModule, SimpleModificationTracker>()
-    private val moduleState = mutableMapOf<KtModule, KtModuleStateTrackerImpl>()
+    private konst projectWide = SimpleModificationTracker()
+    private konst librariesWide = SimpleModificationTracker()
+    private konst moduleOutOfBlock = mutableMapOf<KtSourceModule, SimpleModificationTracker>()
+    private konst moduleState = mutableMapOf<KtModule, KtModuleStateTrackerImpl>()
 
     override fun createProjectWideOutOfBlockModificationTracker(): ModificationTracker {
         return projectWide
@@ -43,7 +43,7 @@ public class KotlinStaticModificationTrackerFactory : KotlinModificationTrackerF
         if (includeBinaryTrackers) {
             librariesWide.incModificationCount()
         }
-        moduleOutOfBlock.values.forEach { it.incModificationCount() }
+        moduleOutOfBlock.konstues.forEach { it.incModificationCount() }
         moduleState.entries.forEach { (ktModule, tracker) ->
             if (ktModule is KtBinaryModule && !includeBinaryTrackers) return@forEach
             tracker.incModificationCount()
@@ -52,11 +52,11 @@ public class KotlinStaticModificationTrackerFactory : KotlinModificationTrackerF
 }
 
 private class KtModuleStateTrackerImpl: KtModuleStateTracker {
-    override val isValid: Boolean get() = true
+    override konst isValid: Boolean get() = true
 
     private var _rootModificationCount = 0L
 
-    override val rootModificationCount: Long get() = _rootModificationCount
+    override konst rootModificationCount: Long get() = _rootModificationCount
 
     @TestOnly
     fun incModificationCount() {

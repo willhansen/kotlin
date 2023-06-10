@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.plugin.sources
 
-import org.gradle.api.InvalidUserDataException
+import org.gradle.api.InkonstidUserDataException
 import org.gradle.api.file.FileCollection
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.config.ApiVersion
@@ -28,10 +28,10 @@ internal class DefaultLanguageSettingsBuilder : LanguageSettingsBuilder {
 
     override var languageVersion: String?
         get() = languageVersionImpl?.versionString
-        set(value) {
-            languageVersionImpl = value?.let { versionString ->
-                LanguageVersion.fromVersionString(versionString) ?: throw InvalidUserDataException(
-                    "Incorrect language version. Expected one of: ${LanguageVersion.values().joinToString { "'${it.versionString}'" }}"
+        set(konstue) {
+            languageVersionImpl = konstue?.let { versionString ->
+                LanguageVersion.fromVersionString(versionString) ?: throw InkonstidUserDataException(
+                    "Incorrect language version. Expected one of: ${LanguageVersion.konstues().joinToString { "'${it.versionString}'" }}"
                 )
             }
         }
@@ -40,36 +40,36 @@ internal class DefaultLanguageSettingsBuilder : LanguageSettingsBuilder {
 
     override var apiVersion: String?
         get() = apiVersionImpl?.versionString
-        set(value) {
-            apiVersionImpl = value?.let { versionString ->
-                parseApiVersionSettings(versionString) ?: throw InvalidUserDataException(
+        set(konstue) {
+            apiVersionImpl = konstue?.let { versionString ->
+                parseApiVersionSettings(versionString) ?: throw InkonstidUserDataException(
                     "Incorrect API version. Expected one of: ${apiVersionValues.joinToString { "'${it.versionString}'" }}"
                 )
             }
         }
 
-    // By using 'observable' delegate we are tracking value set by user and not default value,
+    // By using 'observable' delegate we are tracking konstue set by user and not default konstue,
     // so we could propagate it to the compiler options only if it was configured explicitly
     internal var setByUserProgressiveMode: Boolean? = null
     override var progressiveMode: Boolean by Delegates.observable(false) { _, _, newValue ->
         setByUserProgressiveMode = newValue
     }
 
-    private val enabledLanguageFeaturesImpl = mutableSetOf<LanguageFeature>()
+    private konst enabledLanguageFeaturesImpl = mutableSetOf<LanguageFeature>()
 
-    override val enabledLanguageFeatures: Set<String>
+    override konst enabledLanguageFeatures: Set<String>
         get() = enabledLanguageFeaturesImpl.map { it.name }.toSet()
 
     override fun enableLanguageFeature(name: String) {
-        val languageFeature = parseLanguageFeature(name) ?: throw InvalidUserDataException(
+        konst languageFeature = parseLanguageFeature(name) ?: throw InkonstidUserDataException(
             "Unknown language feature '${name}'"
         )
         enabledLanguageFeaturesImpl += languageFeature
     }
 
-    private val optInAnnotationsInUseImpl = mutableSetOf<String>()
+    private konst optInAnnotationsInUseImpl = mutableSetOf<String>()
 
-    override val optInAnnotationsInUse: Set<String> = optInAnnotationsInUseImpl
+    override konst optInAnnotationsInUse: Set<String> = optInAnnotationsInUseImpl
 
     override fun optIn(annotationName: String) {
         optInAnnotationsInUseImpl += annotationName
@@ -79,9 +79,9 @@ internal class DefaultLanguageSettingsBuilder : LanguageSettingsBuilder {
     @Transient // not needed during Gradle Instant Execution
     var compilerPluginOptionsTask: Lazy<AbstractKotlinCompileTool<*>?> = lazyOf(null)
 
-    val compilerPluginArguments: List<String>?
+    konst compilerPluginArguments: List<String>?
         get() {
-            val pluginOptionsTask = compilerPluginOptionsTask.value ?: return null
+            konst pluginOptionsTask = compilerPluginOptionsTask.konstue ?: return null
             return when (pluginOptionsTask) {
                 is AbstractKotlinCompile<*> -> pluginOptionsTask.pluginOptions.toSingleCompilerPluginOptions()
                 is AbstractKotlinNativeCompile<*, *> -> pluginOptionsTask.compilerPluginOptions
@@ -89,9 +89,9 @@ internal class DefaultLanguageSettingsBuilder : LanguageSettingsBuilder {
             }.arguments
         }
 
-    val compilerPluginClasspath: FileCollection?
+    konst compilerPluginClasspath: FileCollection?
         get() {
-            val pluginClasspathTask = compilerPluginOptionsTask.value ?: return null
+            konst pluginClasspathTask = compilerPluginOptionsTask.konstue ?: return null
             return when (pluginClasspathTask) {
                 is AbstractKotlinCompile<*> -> pluginClasspathTask.pluginClasspath
                 is AbstractKotlinNativeCompile<*, *> -> pluginClasspathTask.compilerPluginClasspath ?: pluginClasspathTask.project.files()
@@ -105,10 +105,10 @@ internal class DefaultLanguageSettingsBuilder : LanguageSettingsBuilder {
     // inspections
     internal var explicitApi: Provider<String>? = null
 
-    internal val freeCompilerArgsForNonImport: List<String>
+    internal konst freeCompilerArgsForNonImport: List<String>
         get() = freeCompilerArgsProvider?.get().orEmpty()
 
-    val freeCompilerArgs: List<String>
+    konst freeCompilerArgs: List<String>
         get() = freeCompilerArgsProvider?.get()
             .orEmpty()
             .plus(explicitApi?.orNull)
@@ -119,7 +119,7 @@ internal fun applyLanguageSettingsToCompilerOptions(
     languageSettingsBuilder: LanguageSettings,
     compilerOptions: KotlinCommonCompilerOptions,
 ) = with(compilerOptions) {
-    val languageSettingsBuilderDefault = languageSettingsBuilder as DefaultLanguageSettingsBuilder
+    konst languageSettingsBuilderDefault = languageSettingsBuilder as DefaultLanguageSettingsBuilder
     languageSettingsBuilderDefault.languageVersion?.let {
         languageVersion.convention(KotlinVersion.fromVersion(it))
     }
@@ -131,7 +131,7 @@ internal fun applyLanguageSettingsToCompilerOptions(
     }
     if (languageSettingsBuilder.optInAnnotationsInUse.isNotEmpty()) optIn.addAll(languageSettingsBuilder.optInAnnotationsInUse)
 
-    val freeArgs = mutableListOf<String>()
+    konst freeArgs = mutableListOf<String>()
     languageSettingsBuilder.enabledLanguageFeatures.forEach { featureName ->
         freeArgs.add("-XXLanguage:+$featureName")
     }
@@ -142,7 +142,7 @@ internal fun applyLanguageSettingsToCompilerOptions(
     }
 }
 
-private val apiVersionValues = ApiVersion.run {
+private konst apiVersionValues = ApiVersion.run {
     listOf(
         KOTLIN_1_0,
         KOTLIN_1_1,

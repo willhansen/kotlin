@@ -20,12 +20,12 @@ enum JavaEnum {
 
 // FILE: KotlinClass.kt
 fun box(): String {
-    val z = JavaEnum.Val_3
-    val when1 = when (z) {
+    konst z = JavaEnum.Val_3
+    konst when1 = when (z) {
         JavaEnum.Val_1 -> { false }
         else -> {true}
     }
-    val when2 = when (z) {
+    konst when2 = when (z) {
         JavaEnum.Val_3 -> { true }
         else -> {false}
     }

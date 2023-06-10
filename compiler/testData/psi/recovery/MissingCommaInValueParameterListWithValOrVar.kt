@@ -1,7 +1,7 @@
-class Test(val a: Int var b: Int val c: Int) {
+class Test(konst a: Int var b: Int konst c: Int) {
     override fun toString() = "$a $b $c"
 }
 
-fun test(val a: Int var b: Int val c: Int) {
+fun test(konst a: Int var b: Int konst c: Int) {
 
 }

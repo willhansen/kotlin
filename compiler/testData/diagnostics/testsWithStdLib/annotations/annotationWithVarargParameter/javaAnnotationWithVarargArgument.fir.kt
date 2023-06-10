@@ -1,7 +1,7 @@
 
 // FILE: A.java
 public @interface A {
-    String[] value();
+    String[] konstue();
 }
 
 // FILE: b.kt

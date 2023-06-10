@@ -32,57 +32,57 @@ import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 
 class ScriptTest : TestCase() {
     fun testStandardScriptWithParams() {
-        val aClass = compileScript("fib_std.kts", StandardScriptDefinition)
+        konst aClass = compileScript("fib_std.kts", StandardScriptDefinition)
         Assert.assertNotNull(aClass)
-        val out = captureOut {
-            val anObj = tryConstructClassFromStringArgs(aClass!!, listOf("4", "comment"))
+        konst out = captureOut {
+            konst anObj = tryConstructClassFromStringArgs(aClass!!, listOf("4", "comment"))
             Assert.assertNotNull(anObj)
         }
         assertEqualsTrimmed("$NUM_4_LINE (comment)$FIB_SCRIPT_OUTPUT_TAIL", out)
     }
 
     fun testStandardScriptWithoutParams() {
-        val aClass = compileScript("fib_std.kts", StandardScriptDefinition)
+        konst aClass = compileScript("fib_std.kts", StandardScriptDefinition)
         Assert.assertNotNull(aClass)
-        val out = captureOut {
-            val anObj = tryConstructClassFromStringArgs(aClass!!, emptyList())
+        konst out = captureOut {
+            konst anObj = tryConstructClassFromStringArgs(aClass!!, emptyList())
             Assert.assertNotNull(anObj)
         }
         assertEqualsTrimmed("$NUM_4_LINE (none)$FIB_SCRIPT_OUTPUT_TAIL", out)
     }
 
     fun testStandardScriptWithSaving() {
-        val tmpdir = File(KotlinTestUtils.tmpDirForTest(this), "withSaving")
+        konst tmpdir = File(KotlinTestUtils.tmpDirForTest(this), "withSaving")
         tmpdir.mkdirs()
-        val aClass = compileScript("fib_std.kts", StandardScriptDefinition, saveClassesDir = tmpdir)
+        konst aClass = compileScript("fib_std.kts", StandardScriptDefinition, saveClassesDir = tmpdir)
         Assert.assertNotNull(aClass)
-        val out1 = captureOut {
-            val anObj = tryConstructClassFromStringArgs(aClass!!, emptyList())
+        konst out1 = captureOut {
+            konst anObj = tryConstructClassFromStringArgs(aClass!!, emptyList())
             Assert.assertNotNull(anObj)
         }
         assertEqualsTrimmed("$NUM_4_LINE (none)$FIB_SCRIPT_OUTPUT_TAIL", out1)
-        val savedClassLoader = URLClassLoader(arrayOf(tmpdir.toURI().toURL()), aClass!!.classLoader)
-        val aClassSaved = savedClassLoader.loadClass(aClass.name)
+        konst savedClassLoader = URLClassLoader(arrayOf(tmpdir.toURI().toURL()), aClass!!.classLoader)
+        konst aClassSaved = savedClassLoader.loadClass(aClass.name)
         Assert.assertNotNull(aClassSaved)
-        val out2 = captureOut {
-            val anObjSaved = tryConstructClassFromStringArgs(aClassSaved!!, emptyList())
+        konst out2 = captureOut {
+            konst anObjSaved = tryConstructClassFromStringArgs(aClassSaved!!, emptyList())
             Assert.assertNotNull(anObjSaved)
         }
         assertEqualsTrimmed("$NUM_4_LINE (none)$FIB_SCRIPT_OUTPUT_TAIL", out2)
     }
 
     fun testUseCompilerInternals() {
-        val scriptClass = compileScript("use_compiler_internals.kts", StandardScriptDefinition)!!
+        konst scriptClass = compileScript("use_compiler_internals.kts", StandardScriptDefinition)!!
         assertEquals("OK", captureOut {
             tryConstructClassFromStringArgs(scriptClass, emptyList())!!
         })
     }
 
     fun testKt42530() {
-        val aClass = compileScript("kt42530.kts", StandardScriptDefinition)
+        konst aClass = compileScript("kt42530.kts", StandardScriptDefinition)
         Assert.assertNotNull(aClass)
-        val out = captureOut {
-            val anObj = tryConstructClassFromStringArgs(aClass!!, emptyList())
+        konst out = captureOut {
+            konst anObj = tryConstructClassFromStringArgs(aClass!!, emptyList())
             Assert.assertNotNull(anObj)
         }
         assertEqualsTrimmed("[(1, a)]", out)
@@ -92,12 +92,12 @@ class ScriptTest : TestCase() {
         // Test that we're writing the flag to [Metadata.extraInt] that distinguishes scripts from other classes.
 
         fun Class<*>.isFlagSet(): Boolean {
-            val metadata = annotations.single { it.annotationClass.java.name == Metadata::class.java.name }
-            val extraInt = metadata.javaClass.methods.single { it.name == JvmAnnotationNames.METADATA_EXTRA_INT_FIELD_NAME }
+            konst metadata = annotations.single { it.annotationClass.java.name == Metadata::class.java.name }
+            konst extraInt = metadata.javaClass.methods.single { it.name == JvmAnnotationNames.METADATA_EXTRA_INT_FIELD_NAME }
             return (extraInt(metadata) as Int) and JvmAnnotationNames.METADATA_SCRIPT_FLAG != 0
         }
 
-        val scriptClass = compileScript("metadata_flag.kts", StandardScriptDefinition)!!
+        konst scriptClass = compileScript("metadata_flag.kts", StandardScriptDefinition)!!
         assertTrue("Script class SHOULD have the metadata flag set", scriptClass.isFlagSet())
         assertFalse(
             "Non-script class in a script should NOT have the metadata flag set",
@@ -112,13 +112,13 @@ class ScriptTest : TestCase() {
         suppressOutput: Boolean = false,
         saveClassesDir: File? = null
     ): Class<*>? {
-        val messageCollector =
+        konst messageCollector =
             if (suppressOutput) MessageCollector.NONE
             else PrintingMessageCollector(System.err, MessageRenderer.PLAIN_FULL_PATHS, false)
 
-        val rootDisposable = Disposer.newDisposable()
+        konst rootDisposable = Disposer.newDisposable()
         try {
-            val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.FULL_JDK)
+            konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.FULL_JDK)
             configuration.updateWithBaseCompilerArguments()
             configuration.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, messageCollector)
             configuration.add(
@@ -135,7 +135,7 @@ class ScriptTest : TestCase() {
 
             loadScriptingPlugin(configuration)
 
-            val environment = KotlinCoreEnvironment.createForTests(rootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+            konst environment = KotlinCoreEnvironment.createForTests(rootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
             try {
                 return compileScript(

@@ -19,7 +19,7 @@ class ExtrasTest {
 
     @Test
     fun `test - add and get`() {
-        val extras = mutableExtrasOf()
+        konst extras = mutableExtrasOf()
         assertNull(extras[extrasKeyOf<String>()])
         assertNull(extras[extrasKeyOf<String>("a")])
         assertNull(extras[extrasKeyOf<String>("b")])
@@ -29,36 +29,36 @@ class ExtrasTest {
         assertNull(extras[extrasKeyOf("a")])
         assertNull(extras[extrasKeyOf("b")])
 
-        extras[extrasKeyOf("a")] = "value a"
+        extras[extrasKeyOf("a")] = "konstue a"
         assertEquals("22222", extras[extrasKeyOf()])
-        assertEquals("value a", extras[extrasKeyOf("a")])
+        assertEquals("konstue a", extras[extrasKeyOf("a")])
         assertNull(extras[extrasKeyOf("b")])
 
-        extras[extrasKeyOf("b")] = "value b"
+        extras[extrasKeyOf("b")] = "konstue b"
         assertEquals("22222", extras[extrasKeyOf()])
-        assertEquals("value a", extras[extrasKeyOf("a")])
-        assertEquals("value b", extras[extrasKeyOf("b")])
+        assertEquals("konstue a", extras[extrasKeyOf("a")])
+        assertEquals("konstue b", extras[extrasKeyOf("b")])
 
         assertNull(extras[extrasKeyOf("c")])
     }
 
     @Test
     fun `test - ids`() {
-        val stringKey = extrasKeyOf<String>()
-        val stringKeyA = extrasKeyOf<String>("a")
-        val intKey = extrasKeyOf<Int>()
-        val intKeyA = extrasKeyOf<Int>("a")
+        konst stringKey = extrasKeyOf<String>()
+        konst stringKeyA = extrasKeyOf<String>("a")
+        konst intKey = extrasKeyOf<Int>()
+        konst intKeyA = extrasKeyOf<Int>("a")
 
-        val keys = setOf(stringKey, stringKeyA, intKey, intKeyA)
+        konst keys = setOf(stringKey, stringKeyA, intKey, intKeyA)
 
-        val extras = extrasOf(
+        konst extras = extrasOf(
             stringKey withValue "string",
             stringKeyA withValue "stringA",
             intKey withValue 1,
             intKeyA withValue 2
         )
 
-        val mutableExtras = mutableExtrasOf(
+        konst mutableExtras = mutableExtrasOf(
             stringKey withValue "string",
             stringKeyA withValue "stringA",
             intKey withValue 1,
@@ -71,21 +71,21 @@ class ExtrasTest {
 
     @Test
     fun `test - keys`() {
-        val stringKey = extrasKeyOf<String>()
-        val stringKeyA = extrasKeyOf<String>("a")
-        val intKey = extrasKeyOf<Int>()
-        val intKeyA = extrasKeyOf<Int>("a")
+        konst stringKey = extrasKeyOf<String>()
+        konst stringKeyA = extrasKeyOf<String>("a")
+        konst intKey = extrasKeyOf<Int>()
+        konst intKeyA = extrasKeyOf<Int>("a")
 
-        val keys = listOf(stringKey, stringKeyA, intKey, intKeyA)
+        konst keys = listOf(stringKey, stringKeyA, intKey, intKeyA)
 
-        val extras = extrasOf(
+        konst extras = extrasOf(
             stringKey withValue "string",
             stringKeyA withValue "stringA",
             intKey withValue 1,
             intKeyA withValue 2
         )
 
-        val mutableExtras = mutableExtrasOf(
+        konst mutableExtras = mutableExtrasOf(
             stringKey withValue "string",
             stringKeyA withValue "stringA",
             intKey withValue 1,
@@ -98,19 +98,19 @@ class ExtrasTest {
 
     @Test
     fun `test - equality`() {
-        val stringKey = extrasKeyOf<String>()
-        val stringKeyA = extrasKeyOf<String>("a")
-        val intKey = extrasKeyOf<Int>()
-        val intKeyA = extrasKeyOf<Int>("a")
+        konst stringKey = extrasKeyOf<String>()
+        konst stringKeyA = extrasKeyOf<String>("a")
+        konst intKey = extrasKeyOf<Int>()
+        konst intKeyA = extrasKeyOf<Int>("a")
 
-        val extras = extrasOf(
+        konst extras = extrasOf(
             stringKey withValue "string",
             stringKeyA withValue "stringA",
             intKey withValue 1,
             intKeyA withValue 2
         )
 
-        val mutableExtras = mutableExtrasOf(
+        konst mutableExtras = mutableExtrasOf(
             stringKey withValue "string",
             stringKeyA withValue "stringA",
             intKey withValue 1,
@@ -130,9 +130,9 @@ class ExtrasTest {
 
     @Test
     fun `test - equality - empty`() {
-        val extras0 = extrasOf()
-        val extras1 = mutableExtrasOf()
-        val extras2 = mutableExtrasOf()
+        konst extras0 = extrasOf()
+        konst extras1 = mutableExtrasOf()
+        konst extras2 = mutableExtrasOf()
 
         assertNotSame(extras0, extras1)
         assertNotSame(extras1, extras2)
@@ -153,8 +153,8 @@ class ExtrasTest {
 
     @Test
     fun `test - overwrite - mutable`() {
-        val key = extrasKeyOf<Int>()
-        val extras = mutableExtrasOf()
+        konst key = extrasKeyOf<Int>()
+        konst extras = mutableExtrasOf()
         assertNull(extras.set(key, 1))
         assertEquals(1, extras[key])
         assertEquals(1, extras.set(key, 2))
@@ -163,13 +163,13 @@ class ExtrasTest {
 
     @Test
     fun `test - overwrite - immutable`() {
-        val key = extrasKeyOf<Int>()
-        val extras0 = extrasOf()
-        val extras1 = extras0 + (key withValue 1)
+        konst key = extrasKeyOf<Int>()
+        konst extras0 = extrasOf()
+        konst extras1 = extras0 + (key withValue 1)
         assertNull(extras0[key])
         assertEquals(1, extras1[key])
 
-        val extras2 = extras1 + (key withValue 2)
+        konst extras2 = extras1 + (key withValue 2)
         assertNull(extras0[key])
         assertEquals(1, extras1[key])
         assertEquals(2, extras2[key])
@@ -187,25 +187,25 @@ class ExtrasTest {
 
     @Test
     fun `test - add two extras`() {
-        val keyA = extrasKeyOf<Int>("a")
-        val keyB = extrasKeyOf<Int>("b")
-        val keyC = extrasKeyOf<Int>("c")
-        val keyD = extrasKeyOf<Int>()
-        val keyE = extrasKeyOf<Int>()
+        konst keyA = extrasKeyOf<Int>("a")
+        konst keyB = extrasKeyOf<Int>("b")
+        konst keyC = extrasKeyOf<Int>("c")
+        konst keyD = extrasKeyOf<Int>()
+        konst keyE = extrasKeyOf<Int>()
 
-        val extras1 = extrasOf(
+        konst extras1 = extrasOf(
             keyA withValue 0,
             keyB withValue 1,
             keyC withValue 2,
             keyD withValue 3
         )
 
-        val extras2 = extrasOf(
+        konst extras2 = extrasOf(
             keyC withValue 4,
             keyE withValue 5
         )
 
-        val combinedExtras = extras1 + extras2
+        konst combinedExtras = extras1 + extras2
 
         assertEquals(
             extrasOf(
@@ -220,7 +220,7 @@ class ExtrasTest {
 
     @Test
     fun `test - mutable extras - remove`() {
-        val extras = mutableExtrasOf(
+        konst extras = mutableExtrasOf(
             extrasKeyOf<String>() withValue "2",
             extrasKeyOf<String>("other") withValue "4",
             extrasKeyOf<Int>() withValue 1,
@@ -248,7 +248,7 @@ class ExtrasTest {
 
     @Test
     fun `test - mutable extras - clear`() {
-        val extras = mutableExtrasOf(
+        konst extras = mutableExtrasOf(
             extrasKeyOf<String>() withValue "2",
             extrasKeyOf<String>("other") withValue "4",
             extrasKeyOf<Int>() withValue 1,
@@ -265,7 +265,7 @@ class ExtrasTest {
 
     @Test
     fun `test mutable extras - putAll`() {
-        val extras = mutableExtrasOf(
+        konst extras = mutableExtrasOf(
             extrasKeyOf<String>() withValue "1",
             extrasKeyOf<String>("overwrite") withValue "2"
         )

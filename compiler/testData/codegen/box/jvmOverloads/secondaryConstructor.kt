@@ -2,7 +2,7 @@
 
 // WITH_STDLIB
 
-class C(val i: Int) {
+class C(konst i: Int) {
     var status = "fail"
 
     @kotlin.jvm.JvmOverloads constructor(o: String, k: String = "K"): this(-1) {
@@ -11,6 +11,6 @@ class C(val i: Int) {
 }
 
 fun box(): String {
-    val c = (C::class.java.getConstructor(String::class.java).newInstance("O"))
+    konst c = (C::class.java.getConstructor(String::class.java).newInstance("O"))
     return c.status
 }

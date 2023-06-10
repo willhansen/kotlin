@@ -31,6 +31,6 @@ fun main() {
     TestClasses.cls()
 
     // All ok
-    val cls = DOMElementTestClasses.cls2
+    konst cls = DOMElementTestClasses.cls2
     cls()
 }

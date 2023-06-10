@@ -4,7 +4,7 @@
 // WORKS_WHEN_VALUE_CLASS
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val x: String)
+konstue class S(konst x: String)
 
 class Test {
     @Suppress("INAPPLICABLE_JVM_NAME")
@@ -13,6 +13,6 @@ class Test {
 }
 
 fun box(): String {
-    val t = Test()
+    konst t = Test()
     return t.getOK().x
 }

@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isPublishedApi
 
 class ExplicitApiDeclarationChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val state = context.languageVersionSettings.getFlag(AnalysisFlags.explicitApiMode)
+        konst state = context.languageVersionSettings.getFlag(AnalysisFlags.explicitApiMode)
         if (state == ExplicitApiMode.DISABLED) return
 
         if (descriptor !is DeclarationDescriptorWithVisibility) return
@@ -36,11 +36,11 @@ class ExplicitApiDeclarationChecker : DeclarationChecker {
         descriptor: DeclarationDescriptorWithVisibility,
         context: DeclarationCheckerContext
     ) {
-        val modifier = declaration.visibilityModifier()
+        konst modifier = declaration.visibilityModifier()
         if (modifier != null) return
 
         if (explicitVisibilityIsNotRequired(descriptor)) return
-        val diagnostic =
+        konst diagnostic =
             if (state == ExplicitApiMode.STRICT)
                 Errors.NO_EXPLICIT_VISIBILITY_IN_API_MODE
             else
@@ -57,14 +57,14 @@ class ExplicitApiDeclarationChecker : DeclarationChecker {
         if (declaration !is KtCallableDeclaration) return
         if (!returnTypeCheckIsApplicable(declaration)) return
 
-        val shouldReport = returnTypeRequired(
+        konst shouldReport = returnTypeRequired(
             declaration, descriptor,
             checkForPublicApi = true,
             checkForInternal = false,
             checkForPrivate = false
         )
         if (shouldReport) {
-            val diagnostic =
+            konst diagnostic =
                 if (state == ExplicitApiMode.STRICT)
                     Errors.NO_EXPLICIT_RETURN_TYPE_IN_API_MODE
                 else
@@ -104,10 +104,10 @@ class ExplicitApiDeclarationChecker : DeclarationChecker {
             if (element is KtFunction && element.isLocal) return false
             if (element is KtProperty && element.isLocal) return false
 
-            val callableMemberDescriptor = descriptor as? CallableMemberDescriptor
+            konst callableMemberDescriptor = descriptor as? CallableMemberDescriptor
 
-            val visibility = callableMemberDescriptor?.effectiveVisibility()?.toVisibility()
-            val isPublicApi =
+            konst visibility = callableMemberDescriptor?.effectiveVisibility()?.toVisibility()
+            konst isPublicApi =
                 visibility?.isPublicAPI == true || (visibility == Visibilities.Internal && callableMemberDescriptor.isPublishedApi())
             return (checkForPublicApi && isPublicApi) || (checkForInternal && visibility == Visibilities.Internal) ||
                     (checkForPrivate && visibility == Visibilities.Internal)
@@ -129,7 +129,7 @@ class ExplicitApiDeclarationChecker : DeclarationChecker {
             languageVersionSettings: LanguageVersionSettings,
             descriptor: DeclarationDescriptor?
         ): Boolean {
-            val isInApiMode = languageVersionSettings.getFlag(AnalysisFlags.explicitApiMode) != ExplicitApiMode.DISABLED
+            konst isInApiMode = languageVersionSettings.getFlag(AnalysisFlags.explicitApiMode) != ExplicitApiMode.DISABLED
             return isInApiMode && returnTypeRequired(
                 element,
                 descriptor,
@@ -141,5 +141,5 @@ class ExplicitApiDeclarationChecker : DeclarationChecker {
     }
 }
 
-val LanguageVersionSettings.explicitApiEnabled: Boolean
+konst LanguageVersionSettings.explicitApiEnabled: Boolean
     get() = getFlag(AnalysisFlags.explicitApiMode) != ExplicitApiMode.DISABLED

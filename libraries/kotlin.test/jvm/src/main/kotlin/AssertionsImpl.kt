@@ -18,7 +18,7 @@ import kotlin.reflect.*
 internal actual fun <T : Throwable> checkResultIsFailure(exceptionClass: KClass<T>, message: String?, blockResult: Result<Unit>): T {
     blockResult.fold(
         onSuccess = {
-            val msg = messagePrefix(message)
+            konst msg = messagePrefix(message)
             asserter.fail(msg + "Expected an exception of ${exceptionClass.java} to be thrown, but was completed successfully.")
         },
         onFailure = { e ->
@@ -114,7 +114,7 @@ inline fun currentStackTrace() = @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") (j
 
 /** Platform-specific construction of AssertionError with cause */
 internal actual fun AssertionErrorWithCause(message: String?, cause: Throwable?): AssertionError {
-    val assertionError = if (message == null) AssertionError() else AssertionError(message)
+    konst assertionError = if (message == null) AssertionError() else AssertionError(message)
     assertionError.initCause(cause)
     return assertionError
 }

@@ -1,6 +1,6 @@
 // IGNORE K2
 
-class SimpleClass<in A>(val p: Int = 42) {
+class SimpleClass<in A>(konst p: Int = 42) {
     constructor(s: Array<String?>?) : this(s?.size ?: 0)
 
     var x: Long = p.toLong()

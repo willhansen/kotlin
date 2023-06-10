@@ -87,7 +87,7 @@ KtFile: CommentsBindingInStatementBlock.kt
                   PsiElement(KDOC_TEXT)(' doc ')
                 PsiElement(KDOC_END)('*/')
               PsiWhiteSpace('\n        ')
-              PsiElement(val)('val')
+              PsiElement(konst)('konst')
               PsiWhiteSpace(' ')
               PsiElement(IDENTIFIER)('a')
               PsiWhiteSpace(' ')

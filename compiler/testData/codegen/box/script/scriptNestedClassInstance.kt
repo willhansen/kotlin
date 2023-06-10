@@ -11,5 +11,5 @@ fun box(): String =
 // FILE: script.kts
 
 class Nested {
-    val x = "OK"
+    konst x = "OK"
 }

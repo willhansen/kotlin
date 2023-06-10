@@ -16,7 +16,7 @@ fun boo(x: () -> String) = x()
 // MODULE: main(lib)
 // FILE: main.kt
 fun box(): String {
-    val result = foo()
+    konst result = foo()
     if (result != "([(OK)])") return "fail: $result"
     return "OK"
 }

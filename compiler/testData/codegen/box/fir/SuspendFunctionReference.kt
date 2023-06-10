@@ -9,9 +9,9 @@ fun fooref() = ::foo
 // FILE: B.kt
 
 fun box(): String {
-    val expectedRefNameJVM = "function foo (Kotlin reflection is not available)"
-    val expectedRefNameNative = "suspend function foo"
-    val actualRefName = fooref().toString()
+    konst expectedRefNameJVM = "function foo (Kotlin reflection is not available)"
+    konst expectedRefNameNative = "suspend function foo"
+    konst actualRefName = fooref().toString()
 
     if (actualRefName == expectedRefNameJVM) return "OK"
     if (actualRefName == expectedRefNameNative) return "OK"

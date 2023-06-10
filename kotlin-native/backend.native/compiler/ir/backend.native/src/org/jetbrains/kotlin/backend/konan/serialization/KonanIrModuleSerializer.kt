@@ -13,15 +13,15 @@ import org.jetbrains.kotlin.ir.util.IrMessageLogger
 class KonanIrModuleSerializer(
     messageLogger: IrMessageLogger,
     irBuiltIns: IrBuiltIns,
-    private val expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
-    val skipExpects: Boolean,
+    private konst expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
+    konst skipExpects: Boolean,
     compatibilityMode: CompatibilityMode,
     normalizeAbsolutePaths: Boolean,
     sourceBaseDirs: Collection<String>,
-    private val languageVersionSettings: LanguageVersionSettings,
+    private konst languageVersionSettings: LanguageVersionSettings,
 ) : IrModuleSerializer<KonanIrFileSerializer>(messageLogger, compatibilityMode, normalizeAbsolutePaths, sourceBaseDirs) {
 
-    private val globalDeclarationTable = KonanGlobalDeclarationTable(irBuiltIns)
+    private konst globalDeclarationTable = KonanGlobalDeclarationTable(irBuiltIns)
 
     // We skip files with IR for C structs and enums because they should be
     // generated anew.

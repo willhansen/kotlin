@@ -25,12 +25,12 @@ public annotation class Metadata(
      * The class file with a kind not listed here is treated as a non-Kotlin file.
      */
     @get:JvmName("k")
-    val kind: Int = 1,
+    konst kind: Int = 1,
     /**
      * The version of the metadata provided in the arguments of this annotation.
      */
     @get:JvmName("mv")
-    val metadataVersion: IntArray = [],
+    konst metadataVersion: IntArray = [],
     /**
      * The version of the bytecode interface (naming conventions, signatures) of the class file annotated with this annotation.
      */
@@ -39,23 +39,23 @@ public annotation class Metadata(
         level = DeprecationLevel.WARNING,
     )
     @get:JvmName("bv")
-    val bytecodeVersion: IntArray = [1, 0, 3],
+    konst bytecodeVersion: IntArray = [1, 0, 3],
     /**
      * Metadata in a custom format. The format may be different (or even absent) for different kinds.
      */
     @get:JvmName("d1")
-    val data1: Array<String> = [],
+    konst data1: Array<String> = [],
     /**
      * An addition to [data1]: array of strings which occur in metadata, written in plain text so that strings already present
      * in the constant pool are reused. These strings may be then indexed in the metadata by an integer index in this array.
      */
     @get:JvmName("d2")
-    val data2: Array<String> = [],
+    konst data2: Array<String> = [],
     /**
      * An extra string. For a multi-file part class, internal name of the facade class.
      */
     @get:JvmName("xs")
-    val extraString: String = "",
+    konst extraString: String = "",
     /**
      * Fully qualified name of the package this class is located in, from Kotlin's point of view, or empty string if this name
      * does not differ from the JVM's package FQ name. These names can be different in case the [JvmPackageName] annotation is used.
@@ -63,7 +63,7 @@ public annotation class Metadata(
      */
     @SinceKotlin("1.2")
     @get:JvmName("pn")
-    val packageName: String = "",
+    konst packageName: String = "",
     /**
      * An extra int. Bits of this number represent the following flags:
      *
@@ -76,10 +76,10 @@ public annotation class Metadata(
      * * 5 - this class file has stable metadata and ABI. This is used only for class files compiled with JVM IR (see flag #4) or FIR (#6),
      *   and prevents metadata incompatibility diagnostics from being reported where the class is used.
      * * 6 - this class file is compiled with the new Kotlin compiler frontend (FIR).
-     * * 7 - this class is used in the scope of an inline function and implicitly part of the public ABI. Only valid from
+     * * 7 - this class is used in the scope of an inline function and implicitly part of the public ABI. Only konstid from
      *   metadata version 1.6.0.
      */
     @SinceKotlin("1.1")
     @get:JvmName("xi")
-    val extraInt: Int = 0
+    konst extraInt: Int = 0
 )

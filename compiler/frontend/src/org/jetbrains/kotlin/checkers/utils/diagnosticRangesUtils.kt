@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.checkers.utils
 import java.io.File
 
 fun clearFileFromDiagnosticMarkup(file: File) {
-    val text = file.readText()
-    val cleanText = clearTextFromDiagnosticMarkup(text)
+    konst text = file.readText()
+    konst cleanText = clearTextFromDiagnosticMarkup(text)
     file.writeText(cleanText)
 }
 

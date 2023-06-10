@@ -7,8 +7,8 @@ plugins {
     kotlin("jvm")
 }
 
-val kotlinpAsmVersion = "9.0"
-val shadows by configurations.creating
+konst kotlinpAsmVersion = "9.0"
+konst shadows by configurations.creating
 
 dependencies {
     compileOnly(project(":kotlinx-metadata"))
@@ -40,9 +40,9 @@ projectTest {
     workingDir = rootDir
 }
 
-val generateTests by generator("org.jetbrains.kotlin.kotlinp.test.GenerateKotlinpTestsKt")
+konst generateTests by generator("org.jetbrains.kotlin.kotlinp.test.GenerateKotlinpTestsKt")
 
-val shadowJar by task<ShadowJar> {
+konst shadowJar by task<ShadowJar> {
     archiveClassifier.set("shadow")
     archiveVersion.set("")
     configurations = listOf(shadows)

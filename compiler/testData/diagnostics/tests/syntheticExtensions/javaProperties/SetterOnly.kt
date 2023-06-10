@@ -6,5 +6,5 @@ fun foo(javaClass: JavaClass) {
 
 // FILE: JavaClass.java
 public class JavaClass {
-    public void setSomething(int value) { }
+    public void setSomething(int konstue) { }
 }

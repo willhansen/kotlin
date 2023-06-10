@@ -1,5 +1,5 @@
 fun box() {
-    val x = Array(1) { "" }
+    konst x = Array(1) { "" }
 }
 
 // 0 IFNULL

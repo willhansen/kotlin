@@ -1,6 +1,6 @@
 package test
 
-public val inn3r: testing.Outer.Inner
-public val nested: testing.Outer.Nested
-public val outer: testing.Outer
-public val testObjectProperty: testing.TopLevelObject
+public konst inn3r: testing.Outer.Inner
+public konst nested: testing.Outer.Nested
+public konst outer: testing.Outer
+public konst testObjectProperty: testing.TopLevelObject

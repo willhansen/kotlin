@@ -7,7 +7,7 @@ interface S : I {
 fun s(): S = TODO()
 
 class Main {
-    private val x: I
+    private konst x: I
     init {
         x = s()
         x.foo()

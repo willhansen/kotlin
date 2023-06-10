@@ -7,7 +7,7 @@ class A constructor(a: Int) {
         }
     }
 
-    val i: Int = 42
+    konst i: Int = 42
 
     init {
         fun foo() {

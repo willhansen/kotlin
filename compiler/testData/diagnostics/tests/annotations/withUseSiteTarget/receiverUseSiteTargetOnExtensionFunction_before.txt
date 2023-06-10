@@ -1,6 +1,6 @@
 package
 
-public val @receiver:Fancy kotlin.Int.asVal: kotlin.Int
+public konst @receiver:Fancy kotlin.Int.asVal: kotlin.Int
 public fun ((kotlin.Int) -> kotlin.Unit).complexReceiver1(): kotlin.Unit
 public fun ((kotlin.Int) -> kotlin.Unit).complexReceiver2(): kotlin.Unit
 public fun @receiver:Fancy kotlin.String.myExtension(): kotlin.Unit

@@ -20,20 +20,20 @@ internal fun setupKpmModulesPublication(project: Project) {
 }
 
 private fun setupPublicationForModule(module: GradleKpmModule) {
-    val project = module.project
+    konst project = module.project
 
-    val metadataElements = project.configurations.getByName(metadataElementsConfigurationName(module))
-    val sourceElements = project.configurations.getByName(sourceElementsConfigurationName(module))
+    konst metadataElements = project.configurations.getByName(metadataElementsConfigurationName(module))
+    konst sourceElements = project.configurations.getByName(sourceElementsConfigurationName(module))
 
-    val componentName = rootPublicationComponentName(module)
-    val rootSoftwareComponent = SoftwareComponentFactoryHolder(project).softwareComponentFactory.adhoc(componentName).also {
+    konst componentName = rootPublicationComponentName(module)
+    konst rootSoftwareComponent = SoftwareComponentFactoryHolder(project).softwareComponentFactory.adhoc(componentName).also {
         project.components.add(it)
         it.addVariantsFromConfiguration(metadataElements) { }
         it.addVariantsFromConfiguration(sourceElements) { }
     }
 
     module.ifMadePublic {
-        val metadataDependencyConfiguration = resolvableMetadataConfiguration(module)
+        konst metadataDependencyConfiguration = resolvableMetadataConfiguration(module)
         project.pluginManager.withPlugin("maven-publish") {
             project.extensions.getByType(PublishingExtension::class.java).publications.create(
                 componentName,
@@ -52,7 +52,7 @@ private fun setupPublicationForModule(module: GradleKpmModule) {
 }
 
 private fun MavenPublication.setupKotlinToolingMetadataIfNeeded(module: GradleKpmModule) {
-    val buildKotlinToolingMetadataTask = module.buildKotlinToolingMetadataTask ?: return
+    konst buildKotlinToolingMetadataTask = module.buildKotlinToolingMetadataTask ?: return
 
     artifact(buildKotlinToolingMetadataTask.map { it.outputFile }) { artifact ->
         artifact.classifier = "kotlin-tooling-metadata"
@@ -61,7 +61,7 @@ private fun MavenPublication.setupKotlinToolingMetadataIfNeeded(module: GradleKp
 }
 
 private open class SoftwareComponentFactoryHolder @Inject constructor(
-    @Inject val softwareComponentFactory: SoftwareComponentFactory
+    @Inject konst softwareComponentFactory: SoftwareComponentFactory
 ) {
     companion object {
         operator fun invoke(project: Project): SoftwareComponentFactoryHolder {

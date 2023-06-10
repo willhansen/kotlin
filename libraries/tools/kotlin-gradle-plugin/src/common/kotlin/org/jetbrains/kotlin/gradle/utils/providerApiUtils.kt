@@ -22,8 +22,8 @@ import kotlin.reflect.KProperty
 
 internal operator fun <T> Provider<T>.getValue(thisRef: Any?, property: KProperty<*>) = get()
 
-internal operator fun <T> Property<T>.setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-    set(value)
+internal operator fun <T> Property<T>.setValue(thisRef: Any?, property: KProperty<*>, konstue: T) {
+    set(konstue)
 }
 
 internal fun <T : Any> Project.newProperty(initialize: (() -> T)? = null): Property<T> =
@@ -39,13 +39,13 @@ internal inline fun <reified T : Any?> ObjectFactory.listProperty() = listProper
 
 internal inline fun <reified T : Any?> ObjectFactory.setProperty() = setProperty(T::class.java)
 
-internal inline fun <reified T : Any?> ObjectFactory.property(initialValue: T) = property<T>().value(initialValue)
+internal inline fun <reified T : Any?> ObjectFactory.property(initialValue: T) = property<T>().konstue(initialValue)
 
-internal inline fun <reified T : Any?> ObjectFactory.property(initialValue: Provider<T>) = property<T>().value(initialValue)
+internal inline fun <reified T : Any?> ObjectFactory.property(initialValue: Provider<T>) = property<T>().konstue(initialValue)
 
 internal inline fun <reified T : Any?> ObjectFactory.setPropertyWithValue(
     initialValue: Provider<Iterable<T>>
-) = setProperty<T>().value(initialValue)
+) = setProperty<T>().konstue(initialValue)
 
 internal inline fun <reified T : Any?> ObjectFactory.setPropertyWithLazyValue(
     noinline lazyValue: () -> Iterable<T>
@@ -99,7 +99,7 @@ internal fun <PropType : Any?, T : Property<PropType>> T.chainedDisallowChanges(
 // Before 5.0 fileProperty is created via ProjectLayout
 // https://docs.gradle.org/current/javadoc/org/gradle/api/model/ObjectFactory.html#fileProperty--
 internal fun Project.newFileProperty(initialize: (() -> File)? = null): RegularFileProperty {
-    val regularFileProperty = project.objects.fileProperty()
+    konst regularFileProperty = project.objects.fileProperty()
 
     return regularFileProperty.apply {
         if (initialize != null) {
@@ -120,7 +120,7 @@ internal fun <T : Task> T.outputFilesProvider(provider: T.() -> Any): Configurab
 }
 
 internal fun <T : Task> T.outputFilesProvider(lazy: Lazy<Any>): ConfigurableFileCollection {
-    return project.filesProvider(this) { lazy.value }
+    return project.filesProvider(this) { lazy.konstue }
 }
 
 internal inline fun <reified T> Project.listProperty(noinline itemsProvider: () -> Iterable<T>): ListProperty<T> =
@@ -130,10 +130,10 @@ internal inline fun <reified T> Project.setProperty(noinline itemsProvider: () -
     objects.setProperty(T::class.java).apply { set(provider(itemsProvider)) }
 
 /**
- * Changing Provider will be evaluated every time it accessed.
+ * Changing Provider will be ekonstuated every time it accessed.
  *
  * And its producing [code] will be serilalised to Configuration Cache as is
- * So that it still will be evaluated during Task Execution phase.
+ * So that it still will be ekonstuated during Task Execution phase.
  * It is very convenient for Configuration Cache compatibility.
  *
  * It is recommended to use Task Output's and map/flatMap them to other Task Inputs but in cases when TaskOutput's is not available
@@ -145,9 +145,9 @@ internal inline fun <reified T> Project.setProperty(noinline itemsProvider: () -
  */
 internal fun <T> ProviderFactory.changing(code: () -> T): Provider<T> {
     @Suppress("UNCHECKED_CAST")
-    val adhocValueSourceClass = AdhocValueSource::class.java as Class<AdhocValueSource<T>>
-    return of(adhocValueSourceClass) { valueSourceSpec ->
-        valueSourceSpec.parameters {
+    konst adhocValueSourceClass = AdhocValueSource::class.java as Class<AdhocValueSource<T>>
+    return of(adhocValueSourceClass) { konstueSourceSpec ->
+        konstueSourceSpec.parameters {
             it.producingLambda.set(code)
         }
     }
@@ -158,7 +158,7 @@ private abstract class AdhocValueSource<T> : ValueSource<T, AdhocValueSource.Par
     // this interface can't be parameterized with T since it breaks internal Gradle logic
     // This is why producingLambda is '() -> Any?' but not '() -> T'
     interface Parameters : ValueSourceParameters {
-        val producingLambda: Property<() -> Any?>
+        konst producingLambda: Property<() -> Any?>
     }
 
     override fun obtain(): T {

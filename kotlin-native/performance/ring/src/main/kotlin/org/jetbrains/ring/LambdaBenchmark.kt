@@ -48,7 +48,7 @@ open class LambdaBenchmark {
 
     //Benchmark
     fun capturingLambda(): Int {
-        val addendum = globalAddendum + 1
+        konst addendum = globalAddendum + 1
         var x: Int = 0
         for (i in 0..BENCHMARK_SIZE) {
             x += runLambda { addendum }
@@ -58,7 +58,7 @@ open class LambdaBenchmark {
 
     //Benchmark
     fun capturingLambdaNoInline(): Int {
-        val addendum = globalAddendum + 1
+        konst addendum = globalAddendum + 1
         var x: Int = 0
         for (i in 0..BENCHMARK_SIZE) {
             x += runLambdaNoInline { addendum }

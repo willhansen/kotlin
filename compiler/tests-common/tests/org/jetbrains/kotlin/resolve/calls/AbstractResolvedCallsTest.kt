@@ -50,18 +50,18 @@ abstract class AbstractResolvedCallsTest : KotlinTestWithEnvironment() {
     override fun createEnvironment(): KotlinCoreEnvironment = createEnvironmentWithMockJdk(ConfigurationKind.ALL)
 
     fun doTest(filePath: String) {
-        val originalText = KtTestUtil.doLoadFile(File(filePath))!!
-        val (text, carets) = extractCarets(originalText)
+        konst originalText = KtTestUtil.doLoadFile(File(filePath))!!
+        konst (text, carets) = extractCarets(originalText)
 
         setupLanguageVersionSettingsForCompilerTests(originalText, environment)
 
-        val ktFile = KtPsiFactory(project).createFile(text)
-        val bindingContext = JvmResolveUtil.analyze(ktFile, environment).bindingContext
+        konst ktFile = KtPsiFactory(project).createFile(text)
+        konst bindingContext = JvmResolveUtil.analyze(ktFile, environment).bindingContext
 
-        val resolvedCallsAt = carets.map { caret -> caret to run {
-            val (element, cachedCall) = buildCachedCallAtIndex(bindingContext, ktFile, caret)
+        konst resolvedCallsAt = carets.map { caret -> caret to run {
+            konst (element, cachedCall) = buildCachedCallAtIndex(bindingContext, ktFile, caret)
 
-            val resolvedCall = when {
+            konst resolvedCall = when {
                 cachedCall !is VariableAsFunctionResolvedCall -> cachedCall
                 "(" == element?.text -> cachedCall.functionCall
                 else -> cachedCall.variableCall
@@ -70,9 +70,9 @@ abstract class AbstractResolvedCallsTest : KotlinTestWithEnvironment() {
             resolvedCall
         }}
 
-        val output = renderOutput(originalText, text, resolvedCallsAt)
+        konst output = renderOutput(originalText, text, resolvedCallsAt)
 
-        val resolvedCallInfoFileName = FileUtil.getNameWithoutExtension(filePath) + ".txt"
+        konst resolvedCallInfoFileName = FileUtil.getNameWithoutExtension(filePath) + ".txt"
         KotlinTestUtils.assertEqualsToFile(File(resolvedCallInfoFileName), output)
     }
 
@@ -82,11 +82,11 @@ abstract class AbstractResolvedCallsTest : KotlinTestWithEnvironment() {
             }
 
     protected fun extractCarets(text: String): Pair<String, List<Int>> {
-        val parts = text.split("<caret>")
+        konst parts = text.split("<caret>")
         if (parts.size < 2) return text to emptyList()
         // possible to rewrite using 'scan' function to get partial sums of parts lengths
-        val indices = mutableListOf<Int>()
-        val resultText = buildString {
+        konst indices = mutableListOf<Int>()
+        konst resultText = buildString {
             parts.dropLast(1).forEach { part ->
                 append(part)
                 indices.add(this.length)
@@ -99,10 +99,10 @@ abstract class AbstractResolvedCallsTest : KotlinTestWithEnvironment() {
     protected open fun buildCachedCallAtIndex(
         bindingContext: BindingContext, ktFile: KtFile, index: Int
     ): Pair<PsiElement?, ResolvedCall<out CallableDescriptor>?> {
-        val element = ktFile.findElementAt(index)!!
-        val expression = element.getStrictParentOfType<KtExpression>()
+        konst element = ktFile.findElementAt(index)!!
+        konst expression = element.getStrictParentOfType<KtExpression>()
 
-        val cachedCall = expression?.getParentResolvedCall(bindingContext, strict = false)
+        konst cachedCall = expression?.getParentResolvedCall(bindingContext, strict = false)
         return Pair(element, cachedCall)
     }
 }
@@ -119,14 +119,14 @@ internal fun ValueArgument.getText() = this.getArgumentExpression()?.text?.repla
 
 internal fun ArgumentMapping.getText() = when (this) {
     is ArgumentMatch -> {
-        val parameterType = DescriptorRenderer.SHORT_NAMES_IN_TYPES.renderType(valueParameter.type)
-        "${status.name}  ${valueParameter.name} : ${parameterType} ="
+        konst parameterType = DescriptorRenderer.SHORT_NAMES_IN_TYPES.renderType(konstueParameter.type)
+        "${status.name}  ${konstueParameter.name} : ${parameterType} ="
     }
     else -> "ARGUMENT UNMAPPED: "
 }
 
 internal fun DeclarationDescriptor.getText(): String = when (this) {
-    is ReceiverParameterDescriptor -> "${value.getText()}::this"
+    is ReceiverParameterDescriptor -> "${konstue.getText()}::this"
     else -> DescriptorRenderer.COMPACT_WITH_SHORT_TYPES.render(this)
 }
 
@@ -145,15 +145,15 @@ internal fun ResolvedCall<*>.renderToText(): String {
         appendLine("Dispatch receiver = ${dispatchReceiver.getText()}")
         appendLine("Extension receiver = ${extensionReceiver.getText()}")
 
-        val valueArguments = call.valueArguments
-        if (!valueArguments.isEmpty()) {
+        konst konstueArguments = call.konstueArguments
+        if (!konstueArguments.isEmpty()) {
             appendLine()
             appendLine("Value arguments mapping:")
             appendLine()
 
-            for (valueArgument in valueArguments) {
-                val argumentText = valueArgument!!.getText()
-                val argumentMappingText = getArgumentMapping(valueArgument).getText()
+            for (konstueArgument in konstueArguments) {
+                konst argumentText = konstueArgument!!.getText()
+                konst argumentMappingText = getArgumentMapping(konstueArgument).getText()
 
                 appendLine("$argumentMappingText $argumentText")
             }

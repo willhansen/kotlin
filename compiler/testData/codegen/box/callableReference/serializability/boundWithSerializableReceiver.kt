@@ -4,17 +4,17 @@
 import java.io.*
 import kotlin.test.*
 
-data class Foo(val value: String) : Serializable
+data class Foo(konst konstue: String) : Serializable
 
 fun box(): String {
-    val baos = ByteArrayOutputStream()
-    val oos = ObjectOutputStream(baos)
-    oos.writeObject(Foo("abacaba")::value)
+    konst baos = ByteArrayOutputStream()
+    konst oos = ObjectOutputStream(baos)
+    oos.writeObject(Foo("abacaba")::konstue)
     oos.close()
 
-    val bais = ByteArrayInputStream(baos.toByteArray())
-    val ois = ObjectInputStream(bais)
-    assertEquals(Foo("abacaba")::value, ois.readObject())
+    konst bais = ByteArrayInputStream(baos.toByteArray())
+    konst ois = ObjectInputStream(bais)
+    assertEquals(Foo("abacaba")::konstue, ois.readObject())
     ois.close()
 
     return "OK"

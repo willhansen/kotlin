@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 @Retention(AnnotationRetention.SOURCE)
 @Repeatable
-annotation class Ann(vararg val i: Int)
+annotation class Ann(vararg konst i: Int)
 
 @Ann(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>i<!>)
 @Ann(i2)
@@ -14,15 +14,15 @@ annotation class Ann(vararg val i: Int)
 class Test
 
 var i = 1
-const val i2 = 1
-val i3 = foo()
+const konst i2 = 1
+konst i3 = foo()
 
 fun foo(): Int = 1
 
 @Retention(AnnotationRetention.SOURCE)
 @Repeatable
-annotation class AnnAnn(vararg val i: Ann)
+annotation class AnnAnn(vararg konst i: Ann)
 @AnnAnn(*arrayOf(Ann(1)))
 @AnnAnn(*<!NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION!>arrayOf(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>iAnn<!>)<!>)
 class TestAnn
-val iAnn = Ann(1)
+konst iAnn = Ann(1)

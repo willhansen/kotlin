@@ -1,17 +1,17 @@
 package
 
 package api {
-    @api.ExperimentalAPI public const val MEANING: kotlin.Int = 42
+    @api.ExperimentalAPI public const konst MEANING: kotlin.Int = 42
 
     public final annotation class Anno : kotlin.Annotation {
-        public constructor Anno(/*0*/ value: kotlin.Int)
-        public final val value: kotlin.Int
+        public constructor Anno(/*0*/ konstue: kotlin.Int)
+        public final konst konstue: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
     }
 
-    @kotlin.RequiresOptIn(level = Level.WARNING) @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION}) @kotlin.annotation.Retention(value = AnnotationRetention.BINARY) public final annotation class ExperimentalAPI : kotlin.Annotation {
+    @kotlin.RequiresOptIn(level = Level.WARNING) @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION}) @kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY) public final annotation class ExperimentalAPI : kotlin.Annotation {
         public constructor ExperimentalAPI()
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -20,13 +20,13 @@ package api {
 }
 
 package usage1 {
-    @api.ExperimentalAPI @api.Anno(value = 42) public fun usage(): kotlin.Unit
+    @api.ExperimentalAPI @api.Anno(konstue = 42) public fun usage(): kotlin.Unit
 }
 
 package usage2 {
-    @api.Anno(value = 42) public fun usage(): kotlin.Unit
+    @api.Anno(konstue = 42) public fun usage(): kotlin.Unit
 }
 
 package usage3 {
-    @api.Anno(value = 42) public fun usage(): kotlin.Unit
+    @api.Anno(konstue = 42) public fun usage(): kotlin.Unit
 }

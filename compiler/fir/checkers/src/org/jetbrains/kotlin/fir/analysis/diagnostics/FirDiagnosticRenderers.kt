@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.name.CallableId
 
 object FirDiagnosticRenderers {
     @OptIn(SymbolInternals::class)
-    val SYMBOL = Renderer { symbol: FirBasedSymbol<*> ->
+    konst SYMBOL = Renderer { symbol: FirBasedSymbol<*> ->
         when (symbol) {
             is FirClassLikeSymbol<*>,
             is FirCallableSymbol<*> -> FirRenderer(
@@ -36,17 +36,17 @@ object FirDiagnosticRenderers {
                 propertyAccessorRenderer = null,
                 callArgumentsRenderer = FirCallNoArgumentsRenderer(),
                 modifierRenderer = FirPartialModifierRenderer(),
-                valueParameterRenderer = FirValueParameterRendererNoDefaultValue(),
+                konstueParameterRenderer = FirValueParameterRendererNoDefaultValue(),
             ).renderElementAsString(symbol.fir, trim = true)
             is FirTypeParameterSymbol -> symbol.name.asString()
             else -> "???"
         }
     }
 
-    val SYMBOLS = KtDiagnosticRenderers.COLLECTION(SYMBOL)
+    konst SYMBOLS = KtDiagnosticRenderers.COLLECTION(SYMBOL)
 
-    val SYMBOLS_ON_NEWLINE_WITH_INDENT = object : ContextIndependentParameterRenderer<Collection<FirCallableSymbol<*>>> {
-        private val mode = MultiplatformDiagnosticRenderingMode()
+    konst SYMBOLS_ON_NEWLINE_WITH_INDENT = object : ContextIndependentParameterRenderer<Collection<FirCallableSymbol<*>>> {
+        private konst mode = MultiplatformDiagnosticRenderingMode()
 
         override fun render(obj: Collection<FirCallableSymbol<*>>): String {
             return buildString {
@@ -58,22 +58,22 @@ object FirDiagnosticRenderers {
         }
     }
 
-    val RENDER_COLLECTION_OF_TYPES = Renderer { types: Collection<ConeKotlinType> ->
+    konst RENDER_COLLECTION_OF_TYPES = Renderer { types: Collection<ConeKotlinType> ->
         types.joinToString(separator = ", ") { type ->
             RENDER_TYPE.render(type)
         }
     }
 
-    val VARIABLE_NAME = Renderer { symbol: FirVariableSymbol<*> ->
+    konst VARIABLE_NAME = Renderer { symbol: FirVariableSymbol<*> ->
         symbol.name.asString()
     }
 
-    val FIR = Renderer { element: FirElement ->
+    konst FIR = Renderer { element: FirElement ->
         element.render()
     }
 
-    val DECLARATION_NAME = Renderer { symbol: FirBasedSymbol<*> ->
-        val name = when (symbol) {
+    konst DECLARATION_NAME = Renderer { symbol: FirBasedSymbol<*> ->
+        konst name = when (symbol) {
             is FirCallableSymbol<*> -> symbol.name
             is FirClassLikeSymbol<*> -> symbol.classId.shortClassName
             else -> return@Renderer "???"
@@ -81,9 +81,9 @@ object FirDiagnosticRenderers {
         name.asString()
     }
 
-    val RENDER_CLASS_OR_OBJECT = Renderer { classSymbol: FirClassSymbol<*> ->
-        val name = classSymbol.classId.relativeClassName.asString()
-        val classOrObject = when (classSymbol.classKind) {
+    konst RENDER_CLASS_OR_OBJECT = Renderer { classSymbol: FirClassSymbol<*> ->
+        konst name = classSymbol.classId.relativeClassName.asString()
+        konst classOrObject = when (classSymbol.classKind) {
             ClassKind.OBJECT -> "Object"
             ClassKind.INTERFACE -> "Interface"
             else -> "Class"
@@ -91,9 +91,9 @@ object FirDiagnosticRenderers {
         "$classOrObject $name"
     }
 
-    val RENDER_CLASS_OR_OBJECT_NAME = Renderer { firClassLike: FirClassLikeSymbol<*> ->
-        val name = firClassLike.classId.relativeClassName.shortName().asString()
-        val prefix = when (firClassLike) {
+    konst RENDER_CLASS_OR_OBJECT_NAME = Renderer { firClassLike: FirClassLikeSymbol<*> ->
+        konst name = firClassLike.classId.relativeClassName.shortName().asString()
+        konst prefix = when (firClassLike) {
             is FirTypeAliasSymbol -> "typealias"
             is FirRegularClassSymbol -> {
                 when {
@@ -110,45 +110,45 @@ object FirDiagnosticRenderers {
         "$prefix '$name'"
     }
 
-    val RENDER_TYPE = Renderer { t: ConeKotlinType ->
+    konst RENDER_TYPE = Renderer { t: ConeKotlinType ->
         // TODO: need a way to tune granuality, e.g., without parameter names in functional types.
         t.renderReadableWithFqNames()
     }
 
     // TODO: properly implement
-    val RENDER_TYPE_WITH_ANNOTATIONS = RENDER_TYPE
+    konst RENDER_TYPE_WITH_ANNOTATIONS = RENDER_TYPE
 
-    val FQ_NAMES_IN_TYPES = Renderer { symbol: FirBasedSymbol<*> ->
+    konst FQ_NAMES_IN_TYPES = Renderer { symbol: FirBasedSymbol<*> ->
         @OptIn(SymbolInternals::class)
         FirRenderer(
             annotationRenderer = null, bodyRenderer = null, idRenderer = ConeIdFullRenderer()
         ).renderElementAsString(symbol.fir, trim = true)
     }
 
-    val AMBIGUOUS_CALLS = Renderer { candidates: Collection<FirBasedSymbol<*>> ->
+    konst AMBIGUOUS_CALLS = Renderer { candidates: Collection<FirBasedSymbol<*>> ->
         candidates.joinToString(separator = "\n", prefix = "\n") { symbol ->
             SYMBOL.render(symbol)
         }
     }
 
-    private const val WHEN_MISSING_LIMIT = 7
+    private const konst WHEN_MISSING_LIMIT = 7
 
-    val WHEN_MISSING_CASES = Renderer { missingCases: List<WhenMissingCase> ->
+    konst WHEN_MISSING_CASES = Renderer { missingCases: List<WhenMissingCase> ->
         if (missingCases.firstOrNull() == WhenMissingCase.Unknown) {
             "'else' branch"
         } else {
-            val list = missingCases.joinToString(", ", limit = WHEN_MISSING_LIMIT) { "'$it'" }
-            val branches = if (missingCases.size > 1) "branches" else "branch"
+            konst list = missingCases.joinToString(", ", limit = WHEN_MISSING_LIMIT) { "'$it'" }
+            konst branches = if (missingCases.size > 1) "branches" else "branch"
             "$list $branches or 'else' branch instead"
         }
     }
 
-    val MODULE_DATA = Renderer<FirModuleData> {
+    konst MODULE_DATA = Renderer<FirModuleData> {
         "Module ${it.name}"
     }
 
-    val NAME_OF_CONTAINING_DECLARATION_OR_FILE = Renderer { symbol: CallableId ->
-        val classId = symbol.classId
+    konst NAME_OF_CONTAINING_DECLARATION_OR_FILE = Renderer { symbol: CallableId ->
+        konst classId = symbol.classId
         if (classId == null) {
             "file"
         } else {
@@ -156,11 +156,11 @@ object FirDiagnosticRenderers {
         }
     }
 
-    val FUNCTIONAL_TYPE_KIND = Renderer { kind: FunctionTypeKind ->
+    konst FUNCTIONAL_TYPE_KIND = Renderer { kind: FunctionTypeKind ->
         kind.prefixForTypeRender ?: kind.classNamePrefix
     }
 
-    val FUNCTIONAL_TYPE_KINDS = KtDiagnosticRenderers.COLLECTION(FUNCTIONAL_TYPE_KIND)
+    konst FUNCTIONAL_TYPE_KINDS = KtDiagnosticRenderers.COLLECTION(FUNCTIONAL_TYPE_KIND)
 
     @Suppress("FunctionName")
     fun <T> COLLECTION(renderer: ContextIndependentParameterRenderer<T>): ContextIndependentParameterRenderer<Collection<T>> {

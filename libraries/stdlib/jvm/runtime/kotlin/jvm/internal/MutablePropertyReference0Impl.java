@@ -35,7 +35,7 @@ public class MutablePropertyReference0Impl extends MutablePropertyReference0 {
     }
 
     @Override
-    public void set(Object value) {
-        getSetter().call(value);
+    public void set(Object konstue) {
+        getSetter().call(konstue);
     }
 }

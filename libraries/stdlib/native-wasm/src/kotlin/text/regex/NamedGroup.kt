@@ -5,9 +5,9 @@
 
 package kotlin.text.regex
 
-internal class NamedGroup(val name: String) : SpecialToken() {
+internal class NamedGroup(konst name: String) : SpecialToken() {
 
     override fun toString() = "NamedGroup(name=$name)"
 
-    override val type: Type = SpecialToken.Type.NAMED_GROUP
+    override konst type: Type = SpecialToken.Type.NAMED_GROUP
 }

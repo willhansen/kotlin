@@ -6,17 +6,17 @@ object A {
         log("A.init")
     }
 
-    val x = 23
+    konst x = 23
 }
 
-inline fun bar(value: Int) {
+inline fun bar(konstue: Int) {
     log("bar->begin")
-    log("value=$value")
+    log("konstue=$konstue")
     log("bar->end")
 }
 
 fun box(): String {
     bar(A.x)
-    assertEquals("A.init;bar->begin;value=23;bar->end;", pullLog())
+    assertEquals("A.init;bar->begin;konstue=23;bar->end;", pullLog())
     return "OK"
 }

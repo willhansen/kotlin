@@ -11,16 +11,16 @@ fun foo(s: String): String {
     return s + "F"
 }
 
-open class A(val s: String) {
+open class A(konst s: String) {
     fun me(): A {
         global += s; return this
     }
 
-    open val f = "A"
+    open konst f = "A"
 }
 
 class B(s: String) : A(s) {
-    override val f = "B"
+    override konst f = "B"
 }
 
 fun test(b1: Boolean, b2: Boolean): String {

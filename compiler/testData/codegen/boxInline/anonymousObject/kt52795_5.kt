@@ -7,7 +7,7 @@ inline fun <T> mrun2(noinline block: () -> T, block2: () -> Unit): T { block2();
 
 // FILE: 2.kt
 fun bar(o: String): String {
-    val obj = mrun2(
+    konst obj = mrun2(
         {
             object {
                 fun foo() = o + "K"

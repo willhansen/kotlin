@@ -25,7 +25,7 @@ public final class OutDto {
 
 public final class RestClient {
     public constructor RestClient(/*0*/ webClient: WebClient)
-    private final val webClient: WebClient
+    private final konst webClient: WebClient
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun post(/*0*/ outDto: OutDto): Mono<InDto>

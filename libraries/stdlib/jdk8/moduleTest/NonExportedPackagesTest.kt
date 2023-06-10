@@ -35,29 +35,29 @@ class NonExportedPackagesTest {
     }
 
     private fun checkNonExportedPackages(jarShortName: String, expectedPackages: Set<String>) {
-        val file = findJar(jarShortName)
+        konst file = findJar(jarShortName)
         JarFile(file).use { jar ->
-            val moduleInfoEntry = jar.getJarEntry("META-INF/versions/9/module-info.class") ?: error("module-info is not found in $file")
-            val descriptor = jar.getInputStream(moduleInfoEntry).use { infoStream -> ModuleDescriptor.read(infoStream) }
-            val packages = mutableSetOf<String>()
+            konst moduleInfoEntry = jar.getJarEntry("META-INF/versions/9/module-info.class") ?: error("module-info is not found in $file")
+            konst descriptor = jar.getInputStream(moduleInfoEntry).use { infoStream -> ModuleDescriptor.read(infoStream) }
+            konst packages = mutableSetOf<String>()
 
             for (entry in jar.entries()) {
                 if (entry.isDirectory) continue
-                val name = entry.name
+                konst name = entry.name
                 if (name == moduleInfoEntry.name) continue
                 if (name.endsWith(".class", ignoreCase = true) &&
                     (!name.startsWith("META-INF", ignoreCase = true)) ||
                     name.startsWith("META-INF/versions", ignoreCase = true)
                 ) {
                     jar.getInputStream(entry).use { classStream ->
-                        val visitor = ClassFqnVisitor()
+                        konst visitor = ClassFqnVisitor()
                         ClassReader(classStream).accept(visitor, ClassReader.SKIP_CODE)
                         visitor.fqname?.run { substringBeforeLast('/').replace('/', '.') }?.let(packages::add)
                     }
                 }
             }
 
-            val nonExported = packages - descriptor.exports().filter { it.targets().isEmpty() }.map { it.source() }
+            konst nonExported = packages - descriptor.exports().filter { it.targets().isEmpty() }.map { it.source() }
             assertEquals(expectedPackages, nonExported)
         }
     }
@@ -65,7 +65,7 @@ class NonExportedPackagesTest {
 
 
     private fun findJar(shortName: String): File {
-        val jars = System.getProperty("stdlibJars").split(File.pathSeparator)
+        konst jars = System.getProperty("stdlibJars").split(File.pathSeparator)
         return jars.map(::File).single { it.name.matches(Regex("""${Regex.escape(shortName)}(?!-[a-z]).+\.jar""")) }
     }
 

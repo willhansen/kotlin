@@ -12,19 +12,19 @@ interface MemoryView<T> where T : Number {
     fun get(index: Int): T
 }
 
-class MemoryViewIntArray(val data: IntArray) : MemoryView<Int> {
+class MemoryViewIntArray(konst data: IntArray) : MemoryView<Int> {
     override fun get(index: Int): Int = data[index]
 }
 
-class MemoryViewLongArray(val data: LongArray) : MemoryView<Long> {
+class MemoryViewLongArray(konst data: LongArray) : MemoryView<Long> {
     override fun get(index: Int): Long = data[index]
 }
 
-class MemoryViewDoubleArray(val data: DoubleArray) : MemoryView<Double> {
+class MemoryViewDoubleArray(konst data: DoubleArray) : MemoryView<Double> {
     override fun get(index: Int): Double = data[index]
 }
 
-class Array2D<T>(val data: MemoryView<T>, val width: Int) where T : Number{
+class Array2D<T>(konst data: MemoryView<T>, konst width: Int) where T : Number{
     fun getGeneric(ind1: Int, ind2: Int): Int {
         return data.get(width * ind1 + ind2).toInt()
     }
@@ -39,12 +39,12 @@ class Array2D<T>(val data: MemoryView<T>, val width: Int) where T : Number{
 }
 
 open class GenericArrayViewBenchmark {
-    private val N = 2000
+    private konst N = 2000
 
-    private val intArr = Array2D(MemoryViewIntArray(IntArray(N * N) { Random.nextInt() }), N)
+    private konst intArr = Array2D(MemoryViewIntArray(IntArray(N * N) { Random.nextInt() }), N)
     // To confuse devirtualizer:
-    private val longArr = Array2D(MemoryViewLongArray(LongArray(N * N) { Random.nextInt().toLong() }), N)
-    private val doubleArr = Array2D(MemoryViewDoubleArray(DoubleArray(N * N) { Random.nextDouble() }), N)
+    private konst longArr = Array2D(MemoryViewLongArray(LongArray(N * N) { Random.nextInt().toLong() }), N)
+    private konst doubleArr = Array2D(MemoryViewDoubleArray(DoubleArray(N * N) { Random.nextDouble() }), N)
 
     init {
         bench(longArr) { a, i, j -> a.getGeneric(i, j) }

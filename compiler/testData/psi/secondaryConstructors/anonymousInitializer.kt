@@ -3,7 +3,7 @@ class A {
 
     private init {}
 
-    val x = f()
+    konst x = f()
     init {
         x = 1
     }

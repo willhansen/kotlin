@@ -20,8 +20,8 @@ class IssuesListUserProfile : DelegateProvider<IssuesListUserProfile>() {
                 return IssueListView()
             }
 
-            override fun setValue(thisRef: IssuesListUserProfile, property: KProperty<*>, value: IssueListView) {
-                return IssueListView().updateFrom(value)
+            override fun setValue(thisRef: IssuesListUserProfile, property: KProperty<*>, konstue: IssueListView) {
+                return IssueListView().updateFrom(konstue)
             }
         }
     }

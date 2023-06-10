@@ -10,8 +10,8 @@ class B()
 fun takeB(b: B) {}
 
 fun test_1() {
-    val flag = SomeEnum.A1
-    val b: B = when (flag<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>) {
+    konst flag = SomeEnum.A1
+    konst b: B = when (flag<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>) {
         SomeEnum.A1 -> B()
         SomeEnum.A2 -> B()
     }
@@ -19,9 +19,9 @@ fun test_1() {
 }
 
 fun test_2() {
-    val flag = SomeEnum.A1
+    konst flag = SomeEnum.A1
 
-    val b = when (flag<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>) {
+    konst b = when (flag<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>) {
         SomeEnum.A1 -> B()
         SomeEnum.A2 -> B()
     }
@@ -29,8 +29,8 @@ fun test_2() {
 }
 
 fun test_3() {
-    val flag = SomeEnum.A1
-    val b = when (flag) { //there is no null-assertion! , no explicit type
+    konst flag = SomeEnum.A1
+    konst b = when (flag) { //there is no null-assertion! , no explicit type
         SomeEnum.A1 -> B()
         SomeEnum.A2 -> B()
     }

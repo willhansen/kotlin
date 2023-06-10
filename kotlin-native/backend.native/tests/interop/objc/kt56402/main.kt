@@ -12,15 +12,15 @@ import kotlin.test.*
 import kotlinx.cinterop.*
 
 class LockedSet<T> {
-    private val lock = AtomicInt(0)
-    private val impl = mutableSetOf<T>()
+    private konst lock = AtomicInt(0)
+    private konst impl = mutableSetOf<T>()
 
     private inline fun <R> locked(f: () -> R): R {
         while (!lock.compareAndSet(0, 1)) {}
         try {
             return f()
         } finally {
-            lock.value = 0
+            lock.konstue = 0
         }
     }
 
@@ -41,10 +41,10 @@ class LockedSet<T> {
 
 class OnDestroyHookSub(onDestroy: (ULong) -> Unit) : OnDestroyHook(onDestroy)
 
-val aliveObjectIds = LockedSet<ULong>()
+konst aliveObjectIds = LockedSet<ULong>()
 
 fun alloc(ctor: ((ULong) -> Unit) -> ULong): ULong = autoreleasepool {
-    val id = ctor {
+    konst id = ctor {
         aliveObjectIds.remove(it)
     }
     aliveObjectIds.add(id)
@@ -70,7 +70,7 @@ fun waitDestruction(id: ULong) {
 @Test
 fun testOnMainThread() {
     assertTrue(isMainThread())
-    val id = alloc { onDestroy ->
+    konst id = alloc { onDestroy ->
         OnDestroyHook {
             assertTrue(isMainThread())
             onDestroy(it)
@@ -81,7 +81,7 @@ fun testOnMainThread() {
 
 @Test
 fun testOnSecondaryThread() {
-    val id = withWorker {
+    konst id = withWorker {
         execute(TransferMode.SAFE, {}) {
             assertFalse(isMainThread())
             alloc { onDestroy ->
@@ -98,7 +98,7 @@ fun testOnSecondaryThread() {
 @Test
 fun testSubOnMainThread() {
     assertTrue(isMainThread())
-    val id = alloc { onDestroy ->
+    konst id = alloc { onDestroy ->
         OnDestroyHookSub {
             assertTrue(isMainThread())
             onDestroy(it)
@@ -109,7 +109,7 @@ fun testSubOnMainThread() {
 
 @Test
 fun testSubOnSecondaryThread() {
-    val id = withWorker {
+    konst id = withWorker {
         execute(TransferMode.SAFE, {}) {
             assertFalse(isMainThread())
             alloc { onDestroy ->
@@ -126,8 +126,8 @@ fun testSubOnSecondaryThread() {
 @Test
 fun testGlobalOnMainThread() {
     assertTrue(isMainThread())
-    val id = alloc { onDestroy ->
-        val obj = newGlobal {
+    konst id = alloc { onDestroy ->
+        konst obj = newGlobal {
             assertTrue(isMainThread())
             onDestroy(it)
         }!!
@@ -139,11 +139,11 @@ fun testGlobalOnMainThread() {
 
 @Test
 fun testGlobalOnSecondaryThread() {
-    val id = withWorker {
+    konst id = withWorker {
         execute(TransferMode.SAFE, {}) {
             assertFalse(isMainThread())
             alloc { onDestroy ->
-                val obj = newGlobal {
+                konst obj = newGlobal {
                     assertFalse(isMainThread())
                     onDestroy(it)
                 }!!
@@ -158,7 +158,7 @@ fun testGlobalOnSecondaryThread() {
 @Test
 fun testProtocolOnMainThread() {
     assertTrue(isMainThread())
-    val id = alloc { onDestroy ->
+    konst id = alloc { onDestroy ->
         newOnDestroyHook {
             assertTrue(isMainThread())
             onDestroy(it)
@@ -169,7 +169,7 @@ fun testProtocolOnMainThread() {
 
 @Test
 fun testProtocolOnSecondaryThread() {
-    val id = withWorker {
+    konst id = withWorker {
         execute(TransferMode.SAFE, {}) {
             assertFalse(isMainThread())
             alloc { onDestroy ->
@@ -184,7 +184,7 @@ fun testProtocolOnSecondaryThread() {
 }
 
 fun runAllTests(args: Array<String>) = startApp {
-    val exitCode = testLauncherEntryPoint(args)
+    konst exitCode = testLauncherEntryPoint(args)
     if (exitCode != 0) {
         exitProcess(exitCode)
     }

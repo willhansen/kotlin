@@ -21,14 +21,14 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtStringTemplateExpressionElement
 object ElementTypeUtils {
     @JvmStatic
     fun getKotlinBlockImbalanceCount(seq: CharSequence): Int {
-        val lexer = KotlinLexer()
+        konst lexer = KotlinLexer()
 
         lexer.start(seq)
         if (lexer.tokenType !== KtTokens.LBRACE) return IErrorCounterReparseableElementType.FATAL_ERROR
         lexer.advance()
         var balance = 1
         while (lexer.tokenType != KtTokens.EOF) {
-            val type = lexer.tokenType ?: break
+            konst type = lexer.tokenType ?: break
             if (balance == 0) {
                 return IErrorCounterReparseableElementType.FATAL_ERROR
             }
@@ -44,13 +44,13 @@ object ElementTypeUtils {
 
     fun String.getOperationSymbol(): IElementType {
         KotlinExpressionParsing.ALL_OPERATIONS.types.forEach {
-            if (it is KtSingleValueToken && it.value == this) return it
+            if (it is KtSingleValueToken && it.konstue == this) return it
         }
         if (this == "as?") return KtTokens.AS_SAFE
         return KtTokens.IDENTIFIER
     }
 
-    private val expressionSet = listOf(
+    private konst expressionSet = listOf(
         REFERENCE_EXPRESSION,
         DOT_QUALIFIED_EXPRESSION,
         LAMBDA_EXPRESSION,

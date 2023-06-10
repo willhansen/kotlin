@@ -12,6 +12,6 @@ class JavaClass {
 // FILE: 1.kt
 
 fun box(): String {
-    val f: (() -> Unit)? = null
+    konst f: (() -> Unit)? = null
     return JavaClass.run(f)!!
 }

@@ -24,8 +24,8 @@ fun createTestingCompilerEnvironment(
     outputItemsCollector: OutputItemsCollectorImpl,
     services: Services
 ): JpsCompilerEnvironment {
-    val paths = PathUtil.kotlinPathsForDistDirectoryForTests
-    val wrappedMessageCollector = MessageCollectorToOutputItemsCollectorAdapter(messageCollector, outputItemsCollector)
+    konst paths = PathUtil.kotlinPathsForDistDirectoryForTests
+    konst wrappedMessageCollector = MessageCollectorToOutputItemsCollectorAdapter(messageCollector, outputItemsCollector)
     return JpsCompilerEnvironment(
         paths,
         services,
@@ -37,12 +37,12 @@ fun createTestingCompilerEnvironment(
 }
 
 fun runJSCompiler(args: K2JSCompilerArguments, env: JpsCompilerEnvironment): ExitCode? {
-    val argsArray = ArgumentUtils.convertArgumentsToStringList(args).toTypedArray()
+    konst argsArray = ArgumentUtils.convertArgumentsToStringList(args).toTypedArray()
 
-    val stream = ByteArrayOutputStream()
-    val out = PrintStream(stream)
-    val exitCode = CompilerRunnerUtil.invokeExecMethod(K2JSCompiler::class.java.name, argsArray, env, out)
-    val reader = BufferedReader(StringReader(stream.toString()))
+    konst stream = ByteArrayOutputStream()
+    konst out = PrintStream(stream)
+    konst exitCode = CompilerRunnerUtil.invokeExecMethod(K2JSCompiler::class.java.name, argsArray, env, out)
+    konst reader = BufferedReader(StringReader(stream.toString()))
     CompilerOutputParser.parseCompilerMessagesFromReader(env.messageCollector, reader, env.outputItemsCollector)
     return exitCode as? ExitCode
 }

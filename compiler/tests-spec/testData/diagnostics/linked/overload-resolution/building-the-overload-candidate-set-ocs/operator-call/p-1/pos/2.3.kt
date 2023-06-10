@@ -20,14 +20,14 @@ package testPackCase1
 fun case1(a: A, c: C) {
     a.b.<!DEBUG_INFO_CALL("fqName: testPackCase1.B.plusAssign; typeCall: operator function")!>plusAssign(c)<!>
 
-    val x = {
+    konst x = {
         a.b.<!DEBUG_INFO_CALL("fqName: testPackCase1.B.plusAssign; typeCall: operator function")!>plusAssign(c)<!>
     }()
 
     a.b.<!DEBUG_INFO_CALL("fqName: testPackCase1.B.plusAssign; typeCall: operator function")!>plusAssign({ c }())<!>
 }
 
-class A(val b: B)
+class A(konst b: B)
 
 class B {
     operator fun plusAssign(c: C) {

@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.types.KotlinType
 object MissingDependencySupertypeChecker {
     object ForDeclarations : DeclarationChecker {
         override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-            val trace = context.trace
+            konst trace = context.trace
 
             if (descriptor is ClassDescriptor) {
                 checkSupertypes(descriptor, declaration, trace, context.missingSupertypesResolver)
@@ -33,7 +33,7 @@ object MissingDependencySupertypeChecker {
 
             if (declaration is KtTypeParameterListOwner) {
                 for (ktTypeParameter in declaration.typeParameters) {
-                    val typeParameterDescriptor = trace.bindingContext.get(BindingContext.TYPE_PARAMETER, ktTypeParameter) ?: continue
+                    konst typeParameterDescriptor = trace.bindingContext.get(BindingContext.TYPE_PARAMETER, ktTypeParameter) ?: continue
                     for (upperBound in typeParameterDescriptor.upperBounds) {
                         checkSupertypes(upperBound, ktTypeParameter, trace, context.missingSupertypesResolver)
                     }
@@ -44,15 +44,15 @@ object MissingDependencySupertypeChecker {
 
     object ForCalls : CallChecker {
         override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-            val descriptor = resolvedCall.resultingDescriptor
+            konst descriptor = resolvedCall.resultingDescriptor
 
-            val errorReported = checkSupertypes(
+            konst errorReported = checkSupertypes(
                 descriptor.dispatchReceiverParameter?.declaration, reportOn,
                 context.trace, context.missingSupertypesResolver
             )
 
-            val eagerChecksAllowed = context.languageVersionSettings.getFlag(AnalysisFlags.extendedCompilerChecks)
-            val unresolvedLazySupertypesByDefault = descriptor is ConstructorDescriptor || descriptor is FakeCallableDescriptorForObject
+            konst eagerChecksAllowed = context.languageVersionSettings.getFlag(AnalysisFlags.extendedCompilerChecks)
+            konst unresolvedLazySupertypesByDefault = descriptor is ConstructorDescriptor || descriptor is FakeCallableDescriptorForObject
 
             if (eagerChecksAllowed || !unresolvedLazySupertypesByDefault && !errorReported) {
                 // The constructed class' own supertypes are not resolved after constructor call,
@@ -66,8 +66,8 @@ object MissingDependencySupertypeChecker {
             }
         }
 
-        private val ReceiverParameterDescriptor.declaration
-            get() = value.type.constructor.declarationDescriptor
+        private konst ReceiverParameterDescriptor.declaration
+            get() = konstue.type.constructor.declarationDescriptor
     }
 
     // true for reported error
@@ -88,7 +88,7 @@ object MissingDependencySupertypeChecker {
         if (declaration !is ClassifierDescriptor)
             return false
 
-        val missingSupertypes = missingSupertypesResolver.getMissingSuperClassifiers(declaration)
+        konst missingSupertypes = missingSupertypesResolver.getMissingSuperClassifiers(declaration)
         for (missingClassifier in missingSupertypes) {
             trace.report(
                 Errors.MISSING_DEPENDENCY_SUPERCLASS.on(

@@ -6,7 +6,7 @@ interface IdSignatureRenderer {
     fun render(descriptor: DeclarationDescriptor): String?
 
     companion object {
-        val NO_SIGNATURE = object : IdSignatureRenderer {
+        konst NO_SIGNATURE = object : IdSignatureRenderer {
             override fun render(descriptor: DeclarationDescriptor): String? = null
         }
     }

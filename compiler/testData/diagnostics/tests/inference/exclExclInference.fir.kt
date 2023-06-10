@@ -2,7 +2,7 @@
 // ISSUE: KT-55804
 
 fun foo() {
-    val x: String?
+    konst x: String?
     x = materialize()!! // Should be treated as non-nullable assignment
     x.length // Should be allowed
 }

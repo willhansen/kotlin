@@ -6,35 +6,35 @@ import kotlin.reflect.KClass
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-annotation class Nested(val value: String)
+annotation class Nested(konst konstue: String)
 
 @Target(AnnotationTarget.TYPE)
 annotation class Anno(
-    val b: Byte,
-    val c: Char,
-    val d: Double,
-    val f: Float,
-    val i: Int,
-    val j: Long,
-    val s: Short,
-    val z: Boolean,
-    val ba: ByteArray,
-    val ca: CharArray,
-    val da: DoubleArray,
-    val fa: FloatArray,
-    val ia: IntArray,
-    val ja: LongArray,
-    val sa: ShortArray,
-    val za: BooleanArray,
-    val str: String,
-    val k: KClass<*>,
-    val k2: KClass<*>,
-    val e: AnnotationTarget,
-    val a: Nested,
-    val stra: Array<String>,
-    val ka: Array<KClass<*>>,
-    val ea: Array<AnnotationTarget>,
-    val aa: Array<Nested>
+    konst b: Byte,
+    konst c: Char,
+    konst d: Double,
+    konst f: Float,
+    konst i: Int,
+    konst j: Long,
+    konst s: Short,
+    konst z: Boolean,
+    konst ba: ByteArray,
+    konst ca: CharArray,
+    konst da: DoubleArray,
+    konst fa: FloatArray,
+    konst ia: IntArray,
+    konst ja: LongArray,
+    konst sa: ShortArray,
+    konst za: BooleanArray,
+    konst str: String,
+    konst k: KClass<*>,
+    konst k2: KClass<*>,
+    konst e: AnnotationTarget,
+    konst a: Nested,
+    konst stra: Array<String>,
+    konst ka: Array<KClass<*>>,
+    konst ea: Array<AnnotationTarget>,
+    konst aa: Array<Nested>
 )
 
 fun f(): @Anno(
@@ -66,13 +66,13 @@ fun f(): @Anno(
 ) Unit {}
 
 fun box(): String {
-    val anno = ::f.returnType.annotations.single() as Anno
+    konst anno = ::f.returnType.annotations.single() as Anno
     assertEquals(
         "@test.Anno(b=1, c=x, d=3.14, f=-2.72, i=42424242, j=239239239239239, s=42, z=true, " +
                 "ba=[-1], ca=[y], da=[-3.14159], fa=[2.7218], ia=[424242], ja=[239239239239], sa=[-43], za=[false, true], " +
-                "str=lol, k=class java.lang.Number, k2=class [I, e=EXPRESSION, a=@test.Nested(value=1), stra=[lmao], " +
+                "str=lol, k=class java.lang.Number, k2=class [I, e=EXPRESSION, a=@test.Nested(konstue=1), stra=[lmao], " +
                 "ka=[class java.lang.Double, class kotlin.Unit, class [J, class [Ljava.lang.String;], " +
-                "ea=[TYPEALIAS, FIELD], aa=[@test.Nested(value=2), @test.Nested(value=3)])",
+                "ea=[TYPEALIAS, FIELD], aa=[@test.Nested(konstue=2), @test.Nested(konstue=3)])",
         anno.toString()
     )
 
@@ -85,13 +85,13 @@ fun box(): String {
     assertTrue(anno.ja is LongArray)
     assertTrue(anno.sa is ShortArray)
     assertTrue(anno.za is BooleanArray)
-    val stra = anno.stra
+    konst stra = anno.stra
     assertTrue(stra is Array<*> && stra.isArrayOf<String>())
-    val ka = anno.ka
+    konst ka = anno.ka
     assertTrue(ka is Array<*> && ka.isArrayOf<KClass<*>>())
-    val ea = anno.ea
+    konst ea = anno.ea
     assertTrue(ea is Array<*> && ea.isArrayOf<AnnotationTarget>())
-    val aa = anno.aa
+    konst aa = anno.aa
     assertTrue(aa is Array<*> && aa.isArrayOf<Nested>())
 
     return "OK"

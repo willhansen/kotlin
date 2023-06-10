@@ -37,8 +37,8 @@ external public actual fun cos(x: Double): Double
 external public actual fun tan(x: Double): Double
 
 /**
- * Computes the arc sine of the value [x];
- * the returned value is an angle in the range from `-PI/2` to `PI/2` radians.
+ * Computes the arc sine of the konstue [x];
+ * the returned konstue is an angle in the range from `-PI/2` to `PI/2` radians.
  *
  * Special cases:
  *    - `asin(x)` is `NaN`, when `abs(x) > 1` or x is `NaN`
@@ -48,8 +48,8 @@ external public actual fun tan(x: Double): Double
 external public actual fun asin(x: Double): Double
 
 /**
- * Computes the arc cosine of the value [x];
- * the returned value is an angle in the range from `0.0` to `PI` radians.
+ * Computes the arc cosine of the konstue [x];
+ * the returned konstue is an angle in the range from `0.0` to `PI` radians.
  *
  * Special cases:
  *    - `acos(x)` is `NaN`, when `abs(x) > 1` or x is `NaN`
@@ -59,8 +59,8 @@ external public actual fun asin(x: Double): Double
 external public actual fun acos(x: Double): Double
 
 /**
- * Computes the arc tangent of the value [x];
- * the returned value is an angle in the range from `-PI/2` to `PI/2` radians.
+ * Computes the arc tangent of the konstue [x];
+ * the returned konstue is an angle in the range from `-PI/2` to `PI/2` radians.
  *
  * Special cases:
  *   - `atan(NaN)` is `NaN`
@@ -71,8 +71,8 @@ external public actual fun atan(x: Double): Double
 
 /**
  * Returns the angle `theta` of the polar coordinates `(r, theta)` that correspond
- * to the rectangular coordinates `(x, y)` by computing the arc tangent of the value [y] / [x];
- * the returned value is an angle in the range from `-PI` to `PI` radians.
+ * to the rectangular coordinates `(x, y)` by computing the arc tangent of the konstue [y] / [x];
+ * the returned konstue is an angle in the range from `-PI` to `PI` radians.
  *
  * Special cases:
  *   - `atan2(0.0, 0.0)` is `0.0`
@@ -90,7 +90,7 @@ external public actual fun atan(x: Double): Double
 external public actual fun atan2(y: Double, x: Double): Double
 
 /**
- * Computes the hyperbolic sine of the value [x].
+ * Computes the hyperbolic sine of the konstue [x].
  *
  * Special cases:
  *   - `sinh(NaN)` is `NaN`
@@ -102,7 +102,7 @@ external public actual fun atan2(y: Double, x: Double): Double
 external public actual fun sinh(x: Double): Double
 
 /**
- * Computes the hyperbolic cosine of the value [x].
+ * Computes the hyperbolic cosine of the konstue [x].
  *
  * Special cases:
  *   - `cosh(NaN)` is `NaN`
@@ -113,7 +113,7 @@ external public actual fun sinh(x: Double): Double
 external public actual fun cosh(x: Double): Double
 
 /**
- * Computes the hyperbolic tangent of the value [x].
+ * Computes the hyperbolic tangent of the konstue [x].
  *
  * Special cases:
  *   - `tanh(NaN)` is `NaN`
@@ -125,9 +125,9 @@ external public actual fun cosh(x: Double): Double
 external public actual fun tanh(x: Double): Double
 
 /**
- * Computes the inverse hyperbolic sine of the value [x].
+ * Computes the inverse hyperbolic sine of the konstue [x].
  *
- * The returned value is `y` such that `sinh(y) == x`.
+ * The returned konstue is `y` such that `sinh(y) == x`.
  *
  * Special cases:
  *   - `asinh(NaN)` is `NaN`
@@ -139,9 +139,9 @@ external public actual fun tanh(x: Double): Double
 external public actual fun asinh(x: Double): Double
 
 /**
- * Computes the inverse hyperbolic cosine of the value [x].
+ * Computes the inverse hyperbolic cosine of the konstue [x].
  *
- * The returned value is positive `y` such that `cosh(y) == x`.
+ * The returned konstue is positive `y` such that `cosh(y) == x`.
  *
  * Special cases:
  *   - `acosh(NaN)` is `NaN`
@@ -153,9 +153,9 @@ external public actual fun asinh(x: Double): Double
 external public actual fun acosh(x: Double): Double
 
 /**
- * Computes the inverse hyperbolic tangent of the value [x].
+ * Computes the inverse hyperbolic tangent of the konstue [x].
  *
- * The returned value is `y` such that `tanh(y) == x`.
+ * The returned konstue is `y` such that `tanh(y) == x`.
  *
  * Special cases:
  *   - `tanh(NaN)` is `NaN`
@@ -179,7 +179,7 @@ external public actual fun atanh(x: Double): Double
 external public actual fun hypot(x: Double, y: Double): Double
 
 /**
- * Computes the positive square root of the value [x].
+ * Computes the positive square root of the konstue [x].
  *
  * Special cases:
  *   - `sqrt(x)` is `NaN` when `x < 0` or `x` is `NaN`
@@ -189,7 +189,7 @@ external public actual fun hypot(x: Double, y: Double): Double
 external public actual fun sqrt(x: Double): Double
 
 /**
- * Computes Euler's number `e` raised to the power of the value [x].
+ * Computes Euler's number `e` raised to the power of the konstue [x].
  *
  * Special cases:
  *   - `exp(NaN)` is `NaN`
@@ -217,7 +217,7 @@ external public actual fun exp(x: Double): Double
 external public actual fun expm1(x: Double): Double
 
 /**
- * Computes the logarithm of the value [x] to the given [base].
+ * Computes the logarithm of the konstue [x] to the given [base].
  *
  * Special cases:
  *   - `log(x, b)` is `NaN` if either `x` or `b` are `NaN`
@@ -235,7 +235,7 @@ public actual fun log(x: Double, base: Double): Double {
 }
 
 /**
- * Computes the natural logarithm (base `E`) of the value [x].
+ * Computes the natural logarithm (base `E`) of the konstue [x].
  *
  * Special cases:
  *   - `ln(NaN)` is `NaN`
@@ -248,7 +248,7 @@ public actual fun log(x: Double, base: Double): Double {
 external public actual fun ln(x: Double): Double
 
 /**
- * Computes the common logarithm (base 10) of the value [x].
+ * Computes the common logarithm (base 10) of the konstue [x].
  *
  * @see [ln] actual function for special cases.
  */
@@ -257,7 +257,7 @@ external public actual fun ln(x: Double): Double
 external public actual fun log10(x: Double): Double
 
 /**
- * Computes the binary logarithm (base 2) of the value [x].
+ * Computes the binary logarithm (base 2) of the konstue [x].
  *
  * @see [ln] actual function for special cases.
  */
@@ -284,9 +284,9 @@ external public actual fun log2(x: Double): Double
 external public actual fun ln1p(x: Double): Double
 
 /**
- * Rounds the given value [x] to an integer towards positive infinity.
+ * Rounds the given konstue [x] to an integer towards positive infinity.
 
- * @return the smallest double value that is greater than or equal to the given value [x] and is a mathematical integer.
+ * @return the smallest double konstue that is greater than or equal to the given konstue [x] and is a mathematical integer.
  *
  * Special cases:
  *   - `ceil(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -296,9 +296,9 @@ external public actual fun ln1p(x: Double): Double
 external public actual fun ceil(x: Double): Double
 
 /**
- * Rounds the given value [x] to an integer towards negative infinity.
+ * Rounds the given konstue [x] to an integer towards negative infinity.
 
- * @return the largest double value that is smaller than or equal to the given value [x] and is a mathematical integer.
+ * @return the largest double konstue that is smaller than or equal to the given konstue [x] and is a mathematical integer.
  *
  * Special cases:
  *   - `floor(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -308,9 +308,9 @@ external public actual fun ceil(x: Double): Double
 external public actual fun floor(x: Double): Double
 
 /**
- * Rounds the given value [x] to an integer towards zero.
+ * Rounds the given konstue [x] to an integer towards zero.
  *
- * @return the value [x] having its fractional part truncated.
+ * @return the konstue [x] having its fractional part truncated.
  *
  * Special cases:
  *   - `truncate(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -323,7 +323,7 @@ public actual fun truncate(x: Double): Double = when {
 }
 
 /**
- * Rounds the given value [x] towards the closest integer with ties rounded towards even integer.
+ * Rounds the given konstue [x] towards the closest integer with ties rounded towards even integer.
  *
  * Special cases:
  *   - `round(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -333,7 +333,7 @@ public actual fun truncate(x: Double): Double = when {
 external public actual fun round(x: Double): Double
 
 /**
- * Returns the absolute value of the given value [x].
+ * Returns the absolute konstue of the given konstue [x].
  *
  * Special cases:
  *   - `abs(NaN)` is `NaN`
@@ -345,10 +345,10 @@ external public actual fun round(x: Double): Double
 external public actual fun abs(x: Double): Double
 
 /**
- * Returns the sign of the given value [x]:
- *   - `-1.0` if the value is negative,
- *   - zero if the value is zero,
- *   - `1.0` if the value is positive
+ * Returns the sign of the given konstue [x]:
+ *   - `-1.0` if the konstue is negative,
+ *   - zero if the konstue is zero,
+ *   - `1.0` if the konstue is positive
  *
  * Special case:
  *   - `sign(NaN)` is `NaN`
@@ -362,9 +362,9 @@ public actual fun sign(x: Double): Double = when {
 }
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  *
- * If either value is `NaN`, then the result is `NaN`.
+ * If either konstue is `NaN`, then the result is `NaN`.
  */
 @SinceKotlin("1.2")
 public actual fun min(a: Double, b: Double): Double = when {
@@ -373,9 +373,9 @@ public actual fun min(a: Double, b: Double): Double = when {
     else -> if (a < b) a else b
 }
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  *
- * If either value is `NaN`, then the result is `NaN`.
+ * If either konstue is `NaN`, then the result is `NaN`.
  */
 @SinceKotlin("1.2")
 public actual fun max(a: Double, b: Double): Double = when {
@@ -387,8 +387,8 @@ public actual fun max(a: Double, b: Double): Double = when {
 
 /**
  * Returns the cube root of [x]. For any `x`, `cbrt(-x) == -cbrt(x)`;
- * that is, the cube root of a negative value is the negative of the cube root
- * of that value's magnitude. Special cases:
+ * that is, the cube root of a negative konstue is the negative of the cube root
+ * of that konstue's magnitude. Special cases:
  *
  * Special cases:
  *   - If the argument is `NaN`, then the result is `NaN`.
@@ -404,7 +404,7 @@ public external actual fun cbrt(x: Double): Double
 // extensions
 
 /**
- * Raises this value to the power [x].
+ * Raises this konstue to the power [x].
  *
  * Special cases:
  *   - `b.pow(0.0)` is `1.0`
@@ -419,7 +419,7 @@ public external actual fun cbrt(x: Double): Double
 external public actual fun Double.pow(x: Double): Double
 
 /**
- * Raises this value to the integer power [n].
+ * Raises this konstue to the integer power [n].
  *
  * See the other overload of [pow] for details.
  */
@@ -427,7 +427,7 @@ external public actual fun Double.pow(x: Double): Double
 public actual fun Double.pow(n: Int): Double = pow(n.toDouble())
 
 /**
- * Computes the remainder of division of this value by the [divisor] value according to the IEEE 754 standard.
+ * Computes the remainder of division of this konstue by the [divisor] konstue according to the IEEE 754 standard.
  *
  * The result is computed as `r = this - (q * divisor)` where `q` is the quotient of division rounded to the nearest integer,
  * `q = round(this / other)`.
@@ -443,7 +443,7 @@ public actual fun Double.pow(n: Int): Double = pow(n.toDouble())
 external public fun Double.IEEErem(divisor: Double): Double
 
 /**
- * Returns the absolute value of this value.
+ * Returns the absolute konstue of this konstue.
  *
  * Special cases:
  *   - `NaN.absoluteValue` is `NaN`
@@ -451,24 +451,24 @@ external public fun Double.IEEErem(divisor: Double): Double
  * @see abs actual function
  */
 @SinceKotlin("1.2")
-public actual val Double.absoluteValue: Double
+public actual konst Double.absoluteValue: Double
     get() = abs(this)
 
 /**
- * Returns the sign of this value:
- *   - `-1.0` if the value is negative,
- *   - zero if the value is zero,
- *   - `1.0` if the value is positive
+ * Returns the sign of this konstue:
+ *   - `-1.0` if the konstue is negative,
+ *   - zero if the konstue is zero,
+ *   - `1.0` if the konstue is positive
  *
  * Special case:
  *   - `NaN.sign` is `NaN`
  */
 @SinceKotlin("1.2")
-public actual val Double.sign: Double
+public actual konst Double.sign: Double
     get() = sign(this)
 
 /**
- * Returns this value with the sign bit same as of the [sign] value.
+ * Returns this konstue with the sign bit same as of the [sign] konstue.
  *
  * If [sign] is `NaN` the sign of the result is undefined.
  */
@@ -477,15 +477,15 @@ public actual val Double.sign: Double
 external public actual fun Double.withSign(sign: Double): Double
 
 /**
- * Returns this value with the sign bit same as of the [sign] value.
+ * Returns this konstue with the sign bit same as of the [sign] konstue.
  */
 @SinceKotlin("1.2")
 public actual fun Double.withSign(sign: Int): Double = withSign(sign.toDouble())
 
 /**
- * Returns the ulp (unit in the last place) of this value.
+ * Returns the ulp (unit in the last place) of this konstue.
  *
- * An ulp is a positive distance between this value and the next nearest [Double] value larger in magnitude.
+ * An ulp is a positive distance between this konstue and the next nearest [Double] konstue larger in magnitude.
  *
  * Special Cases:
  *   - `NaN.ulp` is `NaN`
@@ -493,32 +493,32 @@ public actual fun Double.withSign(sign: Int): Double = withSign(sign.toDouble())
  *   - `0.0.ulp` is `Double.MIN_VALUE`
  */
 @SinceKotlin("1.2")
-public actual val Double.ulp: Double
+public actual konst Double.ulp: Double
     get() = when {
         isNaN() -> Double.NaN
         isInfinite() -> Double.POSITIVE_INFINITY
         this == Double.MAX_VALUE || this == -Double.MAX_VALUE -> 2.0.pow(971)
         else -> {
-            val d = absoluteValue
+            konst d = absoluteValue
             d.nextUp() - d
         }
     }
 
 /**
- * Returns the [Double] value nearest to this value in direction of positive infinity.
+ * Returns the [Double] konstue nearest to this konstue in direction of positive infinity.
  */
 @SinceKotlin("1.2")
 @GCUnsafeCall("Kotlin_math_Double_nextUp")
 external public actual fun Double.nextUp(): Double
 /**
- * Returns the [Double] value nearest to this value in direction of negative infinity.
+ * Returns the [Double] konstue nearest to this konstue in direction of negative infinity.
  */
 @SinceKotlin("1.2")
 @GCUnsafeCall("Kotlin_math_Double_nextDown")
 external public actual fun Double.nextDown(): Double
 
 /**
- * Returns the [Double] value nearest to this value in direction from this value towards the value [to].
+ * Returns the [Double] konstue nearest to this konstue in direction from this konstue towards the konstue [to].
  *
  * Special cases:
  *   - `x.nextTowards(y)` is `NaN` if either `x` or `y` are `NaN`
@@ -530,42 +530,42 @@ external public actual fun Double.nextDown(): Double
 external public actual fun Double.nextTowards(to: Double): Double
 
 /**
- * Returns true if the sign of [this] value is negative and false otherwise
+ * Returns true if the sign of [this] konstue is negative and false otherwise
  */
 @GCUnsafeCall("Kotlin_math_Double_signBit")
 external private fun Double.signBit(): Boolean
 
 /**
- * Rounds this [Double] value to the nearest integer and converts the result to [Int].
+ * Rounds this [Double] konstue to the nearest integer and converts the result to [Int].
  * Ties are rounded towards positive infinity.
  *
  * Special cases:
  *   - `x.roundToInt() == Int.MAX_VALUE` when `x > Int.MAX_VALUE`
  *   - `x.roundToInt() == Int.MIN_VALUE` when `x < Int.MIN_VALUE`
  *
- * @throws IllegalArgumentException when this value is `NaN`
+ * @throws IllegalArgumentException when this konstue is `NaN`
  */
 @SinceKotlin("1.2")
 public actual fun Double.roundToInt(): Int = when {
-    isNaN() -> throw IllegalArgumentException("Cannot round NaN value.")
+    isNaN() -> throw IllegalArgumentException("Cannot round NaN konstue.")
     this > Int.MAX_VALUE -> Int.MAX_VALUE
     this < Int.MIN_VALUE -> Int.MIN_VALUE
     else -> floor(this + 0.5).toInt()
 }
 
 /**
- * Rounds this [Double] value to the nearest integer and converts the result to [Long].
+ * Rounds this [Double] konstue to the nearest integer and converts the result to [Long].
  * Ties are rounded towards positive infinity.
  *
  * Special cases:
  *   - `x.roundToLong() == Long.MAX_VALUE` when `x > Long.MAX_VALUE`
  *   - `x.roundToLong() == Long.MIN_VALUE` when `x < Long.MIN_VALUE`
  *
- * @throws IllegalArgumentException when this value is `NaN`
+ * @throws IllegalArgumentException when this konstue is `NaN`
  */
 @SinceKotlin("1.2")
 public actual fun Double.roundToLong(): Long = when {
-    isNaN() -> throw IllegalArgumentException("Cannot round NaN value.")
+    isNaN() -> throw IllegalArgumentException("Cannot round NaN konstue.")
     this > Long.MAX_VALUE -> Long.MAX_VALUE
     this < Long.MIN_VALUE -> Long.MIN_VALUE
     else -> floor(this + 0.5).toLong()
@@ -603,8 +603,8 @@ external public actual fun cos(x: Float): Float
 external public actual fun tan(x: Float): Float
 
 /**
- * Computes the arc sine of the value [x];
- * the returned value is an angle in the range from `-PI/2` to `PI/2` radians.
+ * Computes the arc sine of the konstue [x];
+ * the returned konstue is an angle in the range from `-PI/2` to `PI/2` radians.
  *
  * Special cases:
  *    - `asin(x)` is `NaN`, when `abs(x) > 1` or x is `NaN`
@@ -614,8 +614,8 @@ external public actual fun tan(x: Float): Float
 external public actual fun asin(x: Float): Float
 
 /**
- * Computes the arc cosine of the value [x];
- * the returned value is an angle in the range from `0.0` to `PI` radians.
+ * Computes the arc cosine of the konstue [x];
+ * the returned konstue is an angle in the range from `0.0` to `PI` radians.
  *
  * Special cases:
  *    - `acos(x)` is `NaN`, when `abs(x) > 1` or x is `NaN`
@@ -625,8 +625,8 @@ external public actual fun asin(x: Float): Float
 external public actual fun acos(x: Float): Float
 
 /**
- * Computes the arc tangent of the value [x];
- * the returned value is an angle in the range from `-PI/2` to `PI/2` radians.
+ * Computes the arc tangent of the konstue [x];
+ * the returned konstue is an angle in the range from `-PI/2` to `PI/2` radians.
  *
  * Special cases:
  *   - `atan(NaN)` is `NaN`
@@ -637,8 +637,8 @@ external public actual fun atan(x: Float): Float
 
 /**
  * Returns the angle `theta` of the polar coordinates `(r, theta)` that correspond
- * to the rectangular coordinates `(x, y)` by computing the arc tangent of the value [y] / [x];
- * the returned value is an angle in the range from `-PI` to `PI` radians.
+ * to the rectangular coordinates `(x, y)` by computing the arc tangent of the konstue [y] / [x];
+ * the returned konstue is an angle in the range from `-PI` to `PI` radians.
  *
  * Special cases:
  *   - `atan2(0.0, 0.0)` is `0.0`
@@ -656,7 +656,7 @@ external public actual fun atan(x: Float): Float
 external public actual fun atan2(y: Float, x: Float): Float
 
 /**
- * Computes the hyperbolic sine of the value [x].
+ * Computes the hyperbolic sine of the konstue [x].
  *
  * Special cases:
  *   - `sinh(NaN)` is `NaN`
@@ -668,7 +668,7 @@ external public actual fun atan2(y: Float, x: Float): Float
 external public actual fun sinh(x: Float): Float
 
 /**
- * Computes the hyperbolic cosine of the value [x].
+ * Computes the hyperbolic cosine of the konstue [x].
  *
  * Special cases:
  *   - `cosh(NaN)` is `NaN`
@@ -679,7 +679,7 @@ external public actual fun sinh(x: Float): Float
 external public actual fun cosh(x: Float): Float
 
 /**
- * Computes the hyperbolic tangent of the value [x].
+ * Computes the hyperbolic tangent of the konstue [x].
  *
  * Special cases:
  *   - `tanh(NaN)` is `NaN`
@@ -691,9 +691,9 @@ external public actual fun cosh(x: Float): Float
 external public actual fun tanh(x: Float): Float
 
 /**
- * Computes the inverse hyperbolic sine of the value [x].
+ * Computes the inverse hyperbolic sine of the konstue [x].
  *
- * The returned value is `y` such that `sinh(y) == x`.
+ * The returned konstue is `y` such that `sinh(y) == x`.
  *
  * Special cases:
  *   - `asinh(NaN)` is `NaN`
@@ -705,9 +705,9 @@ external public actual fun tanh(x: Float): Float
 external public actual fun asinh(x: Float): Float
 
 /**
- * Computes the inverse hyperbolic cosine of the value [x].
+ * Computes the inverse hyperbolic cosine of the konstue [x].
  *
- * The returned value is positive `y` such that `cosh(y) == x`.
+ * The returned konstue is positive `y` such that `cosh(y) == x`.
  *
  * Special cases:
  *   - `acosh(NaN)` is `NaN`
@@ -719,9 +719,9 @@ external public actual fun asinh(x: Float): Float
 external public actual fun acosh(x: Float): Float
 
 /**
- * Computes the inverse hyperbolic tangent of the value [x].
+ * Computes the inverse hyperbolic tangent of the konstue [x].
  *
- * The returned value is `y` such that `tanh(y) == x`.
+ * The returned konstue is `y` such that `tanh(y) == x`.
  *
  * Special cases:
  *   - `tanh(NaN)` is `NaN`
@@ -745,7 +745,7 @@ external public actual fun atanh(x: Float): Float
 external public actual fun hypot(x: Float, y: Float): Float
 
 /**
- * Computes the positive square root of the value [x].
+ * Computes the positive square root of the konstue [x].
  *
  * Special cases:
  *   - `sqrt(x)` is `NaN` when `x < 0` or `x` is `NaN`
@@ -755,7 +755,7 @@ external public actual fun hypot(x: Float, y: Float): Float
 external public actual fun sqrt(x: Float): Float
 
 /**
- * Computes Euler's number `e` raised to the power of the value [x].
+ * Computes Euler's number `e` raised to the power of the konstue [x].
  *
  * Special cases:
  *   - `exp(NaN)` is `NaN`
@@ -783,7 +783,7 @@ external public actual fun exp(x: Float): Float
 external public actual fun expm1(x: Float): Float
 
 /**
- * Computes the logarithm of the value [x] to the given [base].
+ * Computes the logarithm of the konstue [x] to the given [base].
  *
  * Special cases:
  *   - `log(x, b)` is `NaN` if either `x` or `b` are `NaN`
@@ -801,7 +801,7 @@ public actual fun log(x: Float, base: Float): Float {
 }
 
 /**
- * Computes the natural logarithm (base `E`) of the value [x].
+ * Computes the natural logarithm (base `E`) of the konstue [x].
  *
  * Special cases:
  *   - `ln(NaN)` is `NaN`
@@ -814,7 +814,7 @@ public actual fun log(x: Float, base: Float): Float {
 external public actual fun ln(x: Float): Float
 
 /**
- * Computes the common logarithm (base 10) of the value [x].
+ * Computes the common logarithm (base 10) of the konstue [x].
  *
  * @see [ln] function for special cases.
  */
@@ -823,7 +823,7 @@ external public actual fun ln(x: Float): Float
 external public actual fun log10(x: Float): Float
 
 /**
- * Computes the binary logarithm (base 2) of the value [x].
+ * Computes the binary logarithm (base 2) of the konstue [x].
  *
  * @see [ln] function for special cases.
  */
@@ -850,9 +850,9 @@ external public actual fun log2(x: Float): Float
 external public actual fun ln1p(x: Float): Float
 
 /**
- * Rounds the given value [x] to an integer towards positive infinity.
+ * Rounds the given konstue [x] to an integer towards positive infinity.
 
- * @return the smallest Float value that is greater than or equal to the given value [x] and is a mathematical integer.
+ * @return the smallest Float konstue that is greater than or equal to the given konstue [x] and is a mathematical integer.
  *
  * Special cases:
  *   - `ceil(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -862,9 +862,9 @@ external public actual fun ln1p(x: Float): Float
 external public actual fun ceil(x: Float): Float
 
 /**
- * Rounds the given value [x] to an integer towards negative infinity.
+ * Rounds the given konstue [x] to an integer towards negative infinity.
 
- * @return the largest Float value that is smaller than or equal to the given value [x] and is a mathematical integer.
+ * @return the largest Float konstue that is smaller than or equal to the given konstue [x] and is a mathematical integer.
  *
  * Special cases:
  *   - `floor(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -874,9 +874,9 @@ external public actual fun ceil(x: Float): Float
 external public actual fun floor(x: Float): Float
 
 /**
- * Rounds the given value [x] to an integer towards zero.
+ * Rounds the given konstue [x] to an integer towards zero.
  *
- * @return the value [x] having its fractional part truncated.
+ * @return the konstue [x] having its fractional part truncated.
  *
  * Special cases:
  *   - `truncate(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -889,7 +889,7 @@ public actual fun truncate(x: Float): Float = when {
 }
 
 /**
- * Rounds the given value [x] towards the closest integer with ties rounded towards even integer.
+ * Rounds the given konstue [x] towards the closest integer with ties rounded towards even integer.
  *
  * Special cases:
  *   - `round(x)` is `x` where `x` is `NaN` or `+Inf` or `-Inf` or already a mathematical integer.
@@ -900,7 +900,7 @@ external public actual fun round(x: Float): Float
 
 
 /**
- * Returns the absolute value of the given value [x].
+ * Returns the absolute konstue of the given konstue [x].
  *
  * Special cases:
  *   - `abs(NaN)` is `NaN`
@@ -912,10 +912,10 @@ external public actual fun round(x: Float): Float
 external public actual fun abs(x: Float): Float
 
 /**
- * Returns the sign of the given value [x]:
- *   - `-1.0` if the value is negative,
- *   - zero if the value is zero,
- *   - `1.0` if the value is positive
+ * Returns the sign of the given konstue [x]:
+ *   - `-1.0` if the konstue is negative,
+ *   - zero if the konstue is zero,
+ *   - `1.0` if the konstue is positive
  *
  * Special case:
  *   - `sign(NaN)` is `NaN`
@@ -929,9 +929,9 @@ public actual fun sign(x: Float): Float = when {
 }
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  *
- * If either value is `NaN`, then the result is `NaN`.
+ * If either konstue is `NaN`, then the result is `NaN`.
  */
 @SinceKotlin("1.2")
 public actual fun min(a: Float, b: Float): Float = when {
@@ -940,9 +940,9 @@ public actual fun min(a: Float, b: Float): Float = when {
     else -> if (a < b) a else b
 }
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  *
- * If either value is `NaN`, then the result is `NaN`.
+ * If either konstue is `NaN`, then the result is `NaN`.
  */
 @SinceKotlin("1.2")
 public actual fun max(a: Float, b: Float): Float = when {
@@ -954,8 +954,8 @@ public actual fun max(a: Float, b: Float): Float = when {
 
 /**
  * Returns the cube root of [x]. For any `x`, `cbrt(-x) == -cbrt(x)`;
- * that is, the cube root of a negative value is the negative of the cube root
- * of that value's magnitude. Special cases:
+ * that is, the cube root of a negative konstue is the negative of the cube root
+ * of that konstue's magnitude. Special cases:
  *
  * Special cases:
  *   - If the argument is `NaN`, then the result is `NaN`.
@@ -971,7 +971,7 @@ public external actual fun cbrt(x: Float): Float
 // extensions
 
 /**
- * Raises this value to the power [x].
+ * Raises this konstue to the power [x].
  *
  * Special cases:
  *   - `b.pow(0.0)` is `1.0`
@@ -986,7 +986,7 @@ public external actual fun cbrt(x: Float): Float
 external public actual fun Float.pow(x: Float): Float
 
 /**
- * Raises this value to the integer power [n].
+ * Raises this konstue to the integer power [n].
  *
  * See the other overload of [pow] for details.
  */
@@ -994,7 +994,7 @@ external public actual fun Float.pow(x: Float): Float
 public actual fun Float.pow(n: Int): Float = pow(n.toFloat())
 
 /**
- * Computes the remainder of division of this value by the [divisor] value according to the IEEE 754 standard.
+ * Computes the remainder of division of this konstue by the [divisor] konstue according to the IEEE 754 standard.
  *
  * The result is computed as `r = this - (q * divisor)` where `q` is the quotient of division rounded to the nearest integer,
  * `q = round(this / other)`.
@@ -1010,7 +1010,7 @@ public actual fun Float.pow(n: Int): Float = pow(n.toFloat())
 external public fun Float.IEEErem(divisor: Float): Float
 
 /**
- * Returns the absolute value of this value.
+ * Returns the absolute konstue of this konstue.
  *
  * Special cases:
  *   - `NaN.absoluteValue` is `NaN`
@@ -1018,24 +1018,24 @@ external public fun Float.IEEErem(divisor: Float): Float
  * @see abs function
  */
 @SinceKotlin("1.2")
-public actual val Float.absoluteValue: Float
+public actual konst Float.absoluteValue: Float
     get() = abs(this)
 
 /**
- * Returns the sign of this value:
- *   - `-1.0` if the value is negative,
- *   - zero if the value is zero,
- *   - `1.0` if the value is positive
+ * Returns the sign of this konstue:
+ *   - `-1.0` if the konstue is negative,
+ *   - zero if the konstue is zero,
+ *   - `1.0` if the konstue is positive
  *
  * Special case:
  *   - `NaN.sign` is `NaN`
  */
 @SinceKotlin("1.2")
-public actual val Float.sign: Float
+public actual konst Float.sign: Float
     get() = sign(this)
 
 /**
- * Returns this value with the sign bit same as of the [sign] value.
+ * Returns this konstue with the sign bit same as of the [sign] konstue.
  *
  * If [sign] is `NaN` the sign of the result is undefined.
  */
@@ -1043,15 +1043,15 @@ public actual val Float.sign: Float
 @GCUnsafeCall("Kotlin_math_Float_withSign")
 external public actual fun Float.withSign(sign: Float): Float
 /**
- * Returns this value with the sign bit same as of the [sign] value.
+ * Returns this konstue with the sign bit same as of the [sign] konstue.
  */
 @SinceKotlin("1.2")
 public actual fun Float.withSign(sign: Int): Float = withSign(sign.toFloat())
 
 /**
- * Returns the ulp of this value.
+ * Returns the ulp of this konstue.
  *
- * An ulp is a positive distance between this value and the next nearest [Float] value larger in magnitude.
+ * An ulp is a positive distance between this konstue and the next nearest [Float] konstue larger in magnitude.
  *
  * Special Cases:
  *   - `NaN.ulp` is `NaN`
@@ -1059,32 +1059,32 @@ public actual fun Float.withSign(sign: Int): Float = withSign(sign.toFloat())
  *   - `0.0.ulp` is `Float.MIN_VALUE`
  */
 @SinceKotlin("1.2")
-public val Float.ulp: Float
+public konst Float.ulp: Float
     get() = when {
         isNaN() -> Float.NaN
         isInfinite() -> Float.POSITIVE_INFINITY
         this == Float.MAX_VALUE || this == -Float.MAX_VALUE -> 2.0f.pow(104)
         else -> {
-            val d = absoluteValue
+            konst d = absoluteValue
             d.nextUp() - d
         }
     }
 
 /**
- * Returns the [Float] value nearest to this value in direction of positive infinity.
+ * Returns the [Float] konstue nearest to this konstue in direction of positive infinity.
  */
 @SinceKotlin("1.2")
 @GCUnsafeCall("Kotlin_math_Float_nextUp")
 external public fun Float.nextUp(): Float
 /**
- * Returns the [Float] value nearest to this value in direction of negative infinity.
+ * Returns the [Float] konstue nearest to this konstue in direction of negative infinity.
  */
 @SinceKotlin("1.2")
 @GCUnsafeCall("Kotlin_math_Float_nextDown")
 external public fun Float.nextDown(): Float
 
 /**
- * Returns the [Float] value nearest to this value in direction from this value towards the value [to].
+ * Returns the [Float] konstue nearest to this konstue in direction from this konstue towards the konstue [to].
  *
  * Special cases:
  *   - `x.nextTowards(y)` is `NaN` if either `x` or `y` are `NaN`
@@ -1096,42 +1096,42 @@ external public fun Float.nextDown(): Float
 external public fun Float.nextTowards(to: Float): Float
 
 /**
- * Returns true if the sign of [this] value is negative and false otherwise
+ * Returns true if the sign of [this] konstue is negative and false otherwise
  */
 @GCUnsafeCall("Kotlin_math_Float_signBit")
 external private fun Float.signBit(): Boolean
 
 /**
- * Rounds this [Float] value to the nearest integer and converts the result to [Int].
+ * Rounds this [Float] konstue to the nearest integer and converts the result to [Int].
  * Ties are rounded towards positive infinity.
  *
  * Special cases:
  *   - `x.roundToInt() == Int.MAX_VALUE` when `x > Int.MAX_VALUE`
  *   - `x.roundToInt() == Int.MIN_VALUE` when `x < Int.MIN_VALUE`
  *
- * @throws IllegalArgumentException when this value is `NaN`
+ * @throws IllegalArgumentException when this konstue is `NaN`
  */
 @SinceKotlin("1.2")
 public actual fun Float.roundToInt(): Int = when {
-    isNaN() -> throw IllegalArgumentException("Cannot round NaN value.")
+    isNaN() -> throw IllegalArgumentException("Cannot round NaN konstue.")
     this > Int.MAX_VALUE -> Int.MAX_VALUE
     this < Int.MIN_VALUE -> Int.MIN_VALUE
     else -> floor(this + 0.5f).toInt()
 }
 
 /**
- * Rounds this [Float] value to the nearest integer and converts the result to [Long].
+ * Rounds this [Float] konstue to the nearest integer and converts the result to [Long].
  * Ties are rounded towards positive infinity.
  *
  * Special cases:
  *   - `x.roundToLong() == Long.MAX_VALUE` when `x > Long.MAX_VALUE`
  *   - `x.roundToLong() == Long.MIN_VALUE` when `x < Long.MIN_VALUE`
  *
- * @throws IllegalArgumentException when this value is `NaN`
+ * @throws IllegalArgumentException when this konstue is `NaN`
  */
 @SinceKotlin("1.2")
 public actual fun Float.roundToLong(): Long = when {
-    isNaN() -> throw IllegalArgumentException("Cannot round NaN value.")
+    isNaN() -> throw IllegalArgumentException("Cannot round NaN konstue.")
     this > Long.MAX_VALUE -> Long.MAX_VALUE
     this < Long.MIN_VALUE -> Long.MIN_VALUE
     else -> floor(this + 0.5f).toLong()
@@ -1142,7 +1142,7 @@ public actual fun Float.roundToLong(): Long = when {
 // region ================ Integer Math ========================================
 
 /**
- * Returns the absolute value of the given value [n].
+ * Returns the absolute konstue of the given konstue [n].
  *
  * Special cases:
  *   - `abs(Int.MIN_VALUE)` is `Int.MIN_VALUE` due to an overflow
@@ -1154,19 +1154,19 @@ public actual fun Float.roundToLong(): Long = when {
 external public actual fun abs(n: Int): Int
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  */
 @SinceKotlin("1.2")
 public actual fun min(a: Int, b: Int): Int = if (a < b) a else b
 
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  */
 @SinceKotlin("1.2")
 public actual fun max(a: Int, b: Int): Int = if (a > b) a else b
 
 /**
- * Returns the absolute value of this value.
+ * Returns the absolute konstue of this konstue.
  *
  * Special cases:
  *   - `Int.MIN_VALUE.absoluteValue` is `Int.MIN_VALUE` due to an overflow
@@ -1174,17 +1174,17 @@ public actual fun max(a: Int, b: Int): Int = if (a > b) a else b
  * @see abs actual function
  */
 @SinceKotlin("1.2")
-public actual val Int.absoluteValue: Int
+public actual konst Int.absoluteValue: Int
     get() = abs(this)
 
 /**
- * Returns the sign of this value:
- *   - `-1` if the value is negative,
- *   - `0` if the value is zero,
- *   - `1` if the value is positive
+ * Returns the sign of this konstue:
+ *   - `-1` if the konstue is negative,
+ *   - `0` if the konstue is zero,
+ *   - `1` if the konstue is positive
  */
 @SinceKotlin("1.2")
-public actual val Int.sign: Int
+public actual konst Int.sign: Int
     get() = when {
         this < 0 -> -1
         this > 0 -> 1
@@ -1193,7 +1193,7 @@ public actual val Int.sign: Int
 
 
 /**
- * Returns the absolute value of the given value [n].
+ * Returns the absolute konstue of the given konstue [n].
  *
  * Special cases:
  *   - `abs(Long.MIN_VALUE)` is `Long.MIN_VALUE` due to an overflow
@@ -1205,19 +1205,19 @@ public actual val Int.sign: Int
 external public actual fun abs(n: Long): Long
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  */
 @SinceKotlin("1.2")
 public actual fun min(a: Long, b: Long): Long = if (a < b) a else b
 
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  */
 @SinceKotlin("1.2")
 public actual fun max(a: Long, b: Long): Long = if (a > b) a else b
 
 /**
- * Returns the absolute value of this value.
+ * Returns the absolute konstue of this konstue.
  *
  * Special cases:
  *   - `Long.MIN_VALUE.absoluteValue` is `Long.MIN_VALUE` due to an overflow
@@ -1225,17 +1225,17 @@ public actual fun max(a: Long, b: Long): Long = if (a > b) a else b
  * @see abs function
  */
 @SinceKotlin("1.2")
-public actual val Long.absoluteValue: Long
+public actual konst Long.absoluteValue: Long
     get() = abs(this)
 
 /**
- * Returns the sign of this value:
- *   - `-1` if the value is negative,
- *   - `0` if the value is zero,
- *   - `1` if the value is positive
+ * Returns the sign of this konstue:
+ *   - `-1` if the konstue is negative,
+ *   - `0` if the konstue is zero,
+ *   - `1` if the konstue is positive
  */
 @SinceKotlin("1.2")
-public actual val Long.sign: Int
+public actual konst Long.sign: Int
     get() = when {
         this < 0 -> -1
         this > 0 -> 1

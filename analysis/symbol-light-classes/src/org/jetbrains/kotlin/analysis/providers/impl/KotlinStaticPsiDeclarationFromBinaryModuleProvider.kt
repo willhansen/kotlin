@@ -26,13 +26,13 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.decapitalizeSmart
 
 private class KotlinStaticPsiDeclarationFromBinaryModuleProvider(
-    private val project: Project,
-    override val scope: GlobalSearchScope,
-    override val packagePartProvider: PackagePartProvider,
-    private val binaryModules: Collection<KtBinaryModule>,
-    override val jarFileSystem: CoreJarFileSystem,
+    private konst project: Project,
+    override konst scope: GlobalSearchScope,
+    override konst packagePartProvider: PackagePartProvider,
+    private konst binaryModules: Collection<KtBinaryModule>,
+    override konst jarFileSystem: CoreJarFileSystem,
 ) : KotlinPsiDeclarationProvider(), AbstractDeclarationFromBinaryModuleProvider {
-    private val psiManager by lazyPub { PsiManager.getInstance(project) }
+    private konst psiManager by lazyPub { PsiManager.getInstance(project) }
 
     private fun clsClassImplsByFqName(
         fqName: FqName,
@@ -40,8 +40,8 @@ private class KotlinStaticPsiDeclarationFromBinaryModuleProvider(
     ): Collection<ClsClassImpl> {
         return binaryModules
             .flatMap {
-                val virtualFilesFromKotlinModule = if (isPackageName) virtualFilesFromKotlinModule(it, fqName) else emptySet()
-                // NB: this assumes Kotlin module has a valid `kotlin_module` info,
+                konst virtualFilesFromKotlinModule = if (isPackageName) virtualFilesFromKotlinModule(it, fqName) else emptySet()
+                // NB: this assumes Kotlin module has a konstid `kotlin_module` info,
                 // i.e., package part info for the given `fqName` points to exact class paths we're looking for,
                 // and thus it's redundant to walk through the folders in an exhaustive way.
                 virtualFilesFromKotlinModule.ifEmpty { virtualFilesFromModule(it, fqName, isPackageName) }
@@ -54,9 +54,9 @@ private class KotlinStaticPsiDeclarationFromBinaryModuleProvider(
     private fun createClsJavaClassFromVirtualFile(
         classFile: VirtualFile,
     ): ClsClassImpl? {
-        val javaFileStub = ClsJavaStubByVirtualFileCache.getInstance(project).get(classFile) ?: return null
+        konst javaFileStub = ClsJavaStubByVirtualFileCache.getInstance(project).get(classFile) ?: return null
         javaFileStub.psiFactory = ClsWrapperStubPsiFactory.INSTANCE
-        val fakeFile = object : ClsFileImpl(ClassFileViewProvider(psiManager, classFile)) {
+        konst fakeFile = object : ClsFileImpl(ClassFileViewProvider(psiManager, classFile)) {
             override fun getStub() = javaFileStub
 
             override fun isPhysical() = false
@@ -67,7 +67,7 @@ private class KotlinStaticPsiDeclarationFromBinaryModuleProvider(
 
     override fun getClassesByClassId(classId: ClassId): Collection<PsiClass> {
         classId.parentClassId?.let { parentClassId ->
-            val innerClassName = classId.relativeClassName.asString().split(".").last()
+            konst innerClassName = classId.relativeClassName.asString().split(".").last()
             return getClassesByClassId(parentClassId).mapNotNull { parentClsClass ->
                 parentClsClass.innerClasses.find { it.name == innerClassName }
             }
@@ -77,7 +77,7 @@ private class KotlinStaticPsiDeclarationFromBinaryModuleProvider(
 
     // TODO(dimonchik0036): support 'is' accessor
     override fun getProperties(callableId: CallableId): Collection<PsiMember> {
-        val classes = callableId.classId?.let { classId ->
+        konst classes = callableId.classId?.let { classId ->
             getClassesByClassId(classId)
         } ?: clsClassImplsByFqName(callableId.packageName)
         return classes.flatMap { psiClass ->
@@ -85,7 +85,7 @@ private class KotlinStaticPsiDeclarationFromBinaryModuleProvider(
                 .filterIsInstance<PsiMember>()
                 .filter { psiMember ->
                     if (psiMember !is PsiMethod && psiMember !is PsiField) return@filter false
-                    val name = psiMember.name ?: return@filter false
+                    konst name = psiMember.name ?: return@filter false
                     // PsiField a.k.a. backing field
                     name == callableId.callableName.identifier ||
                             // PsiMethod, i.e., accessors
@@ -98,7 +98,7 @@ private class KotlinStaticPsiDeclarationFromBinaryModuleProvider(
     }
 
     override fun getFunctions(callableId: CallableId): Collection<PsiMethod> {
-        val classes = callableId.classId?.let { classId ->
+        konst classes = callableId.classId?.let { classId ->
             getClassesByClassId(classId)
         } ?: clsClassImplsByFqName(callableId.packageName)
         return classes.flatMap { psiClass ->
@@ -112,9 +112,9 @@ private class KotlinStaticPsiDeclarationFromBinaryModuleProvider(
 // TODO: we can't register this in IDE yet due to non-trivial parameters: lib modules and jar file system.
 //  We need a session or facade that maintains such information
 class KotlinStaticPsiDeclarationProviderFactory(
-    private val project: Project,
-    private val binaryModules: Collection<KtBinaryModule>,
-    private val jarFileSystem: CoreJarFileSystem,
+    private konst project: Project,
+    private konst binaryModules: Collection<KtBinaryModule>,
+    private konst jarFileSystem: CoreJarFileSystem,
 ) : KotlinPsiDeclarationProviderFactory() {
     override fun createPsiDeclarationProvider(searchScope: GlobalSearchScope): KotlinPsiDeclarationProvider {
         return KotlinStaticPsiDeclarationFromBinaryModuleProvider(

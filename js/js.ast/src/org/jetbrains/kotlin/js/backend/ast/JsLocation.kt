@@ -19,40 +19,40 @@ package org.jetbrains.kotlin.js.backend.ast
 import java.io.Reader
 
 data class JsLocation @JvmOverloads constructor(
-    override val file: String,
-    override val startLine: Int,
-    override val startChar: Int,
-    override val name: String? = null
+    override konst file: String,
+    override konst startLine: Int,
+    override konst startChar: Int,
+    override konst name: String? = null
 ) : JsLocationWithSource {
-    override val fileIdentity: Any?
+    override konst fileIdentity: Any?
         get() = null
-    override val sourceProvider: () -> Reader?
+    override konst sourceProvider: () -> Reader?
         get() = { null }
 
     override fun asSimpleLocation(): JsLocation = this
 }
 
 interface JsLocationWithSource {
-    val file: String
-    val startLine: Int
-    val startChar: Int
+    konst file: String
+    konst startLine: Int
+    konst startChar: Int
 
     /**
      * The original name of the entity in the source code that this JS node was generated from.
      */
-    val name: String?
+    konst name: String?
 
     /**
      * An object to distinguish different files with the same paths
      */
-    val fileIdentity: Any?
-    val sourceProvider: () -> Reader?
+    konst fileIdentity: Any?
+    konst sourceProvider: () -> Reader?
 
     fun asSimpleLocation(): JsLocation
 }
 
 class JsLocationWithEmbeddedSource(
-    private val location: JsLocation,
-    override val fileIdentity: Any?,
-    override val sourceProvider: () -> Reader?
+    private konst location: JsLocation,
+    override konst fileIdentity: Any?,
+    override konst sourceProvider: () -> Reader?
 ) : JsLocationWithSource by location

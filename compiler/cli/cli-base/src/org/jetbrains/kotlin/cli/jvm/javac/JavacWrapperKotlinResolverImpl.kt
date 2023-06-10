@@ -29,19 +29,19 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.classId
 
-class JavacWrapperKotlinResolverImpl(private val lightClassGenerationSupport: LightClassGenerationSupport) : JavacWrapperKotlinResolver {
+class JavacWrapperKotlinResolverImpl(private konst lightClassGenerationSupport: LightClassGenerationSupport) : JavacWrapperKotlinResolver {
 
-    private val supersCache = hashMapOf<KtClassOrObject, List<ClassId>>()
+    private konst supersCache = hashMapOf<KtClassOrObject, List<ClassId>>()
 
     override fun resolveSupertypes(classOrObject: KtClassOrObject): List<ClassId> {
-        val cachedItem = supersCache[classOrObject]
+        konst cachedItem = supersCache[classOrObject]
         if (cachedItem != null) {
             return cachedItem
         }
 
-        val classDescriptor =
+        konst classDescriptor =
             lightClassGenerationSupport.analyze(classOrObject).get(BindingContext.CLASS, classOrObject) ?: return emptyList()
-        val classIds = classDescriptor.defaultType.constructor.supertypes
+        konst classIds = classDescriptor.defaultType.constructor.supertypes
             .mapNotNull { (it.constructor.declarationDescriptor as? ClassDescriptor)?.classId }
         supersCache[classOrObject] = classIds
 
@@ -49,13 +49,13 @@ class JavacWrapperKotlinResolverImpl(private val lightClassGenerationSupport: Li
     }
 
     override fun findField(classOrObject: KtClassOrObject, name: String): JavaField? {
-        val lightClass = classOrObject.toLightClass() ?: return null
+        konst lightClass = classOrObject.toLightClass() ?: return null
 
         return lightClass.allFields.find { it.name == name }?.let(::MockKotlinField)
     }
 
     override fun findField(ktFile: KtFile?, name: String): JavaField? {
-        val lightClass = ktFile?.findFacadeClass() ?: return null
+        konst lightClass = ktFile?.findFacadeClass() ?: return null
 
         return lightClass.allFields.find { it.name == name }?.let(::MockKotlinField)
     }

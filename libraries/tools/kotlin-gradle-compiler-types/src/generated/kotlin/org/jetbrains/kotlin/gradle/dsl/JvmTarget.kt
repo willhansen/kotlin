@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.dsl
 
-enum class JvmTarget(val target: String) {
+enum class JvmTarget(konst target: String) {
     JVM_1_8("1.8"),
     JVM_9("9"),
     JVM_10("10"),
@@ -23,9 +23,9 @@ enum class JvmTarget(val target: String) {
 
     companion object {
         fun fromTarget(target: String): JvmTarget =
-            JvmTarget.values().firstOrNull { it.target == target }
+            JvmTarget.konstues().firstOrNull { it.target == target }
                 ?: throw IllegalArgumentException("Unknown Kotlin JVM target: $target")
 
-        val DEFAULT = JVM_1_8
+        konst DEFAULT = JVM_1_8
     }
 }

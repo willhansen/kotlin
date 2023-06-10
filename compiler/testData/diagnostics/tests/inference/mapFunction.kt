@@ -7,15 +7,15 @@ import java.util.*
 import checkSubtype
 
 fun foo() {
-    val v = array(1, 2, 3)
+    konst v = array(1, 2, 3)
 
-    val u = v map { it * 2 }
+    konst u = v map { it * 2 }
 
     checkSubtype<List<Int>>(u)
 
-    val a = 1..5
+    konst a = 1..5
 
-    val b = a.map { it * 2 }
+    konst b = a.map { it * 2 }
 
     checkSubtype<List<Int>>(b)
 

@@ -2,10 +2,10 @@
 
 fun foo() = "OK"
 
-open class A(val foo: Boolean = true) {
-    val ok = foo()
+open class A(konst foo: Boolean = true) {
+    konst ok = foo()
 }
 
-val q = object : A() {}
+konst q = object : A() {}
 
 fun box() = q.ok

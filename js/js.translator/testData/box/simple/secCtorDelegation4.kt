@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1287
 package foo
 
-class Test(val bs: String) {
+class Test(konst bs: String) {
 
     var i: Int = 0
     var i2: Int = 0
@@ -21,6 +21,6 @@ class Test(val bs: String) {
 
 fun box(): String {
 
-    val t = Test(1)
+    konst t = Test(1)
     return t.foo()
 }

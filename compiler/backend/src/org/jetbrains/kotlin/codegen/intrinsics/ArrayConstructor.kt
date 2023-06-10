@@ -22,6 +22,6 @@ import org.jetbrains.kotlin.name.FqName
 
 object ArrayConstructor : IntrinsicMethod() {
     override fun toCallable(method: CallableMethod): Callable {
-        return object : IntrinsicCallable(method.owner, method.valueParameterTypes, null, null) {}
+        return object : IntrinsicCallable(method.owner, method.konstueParameterTypes, null, null) {}
     }
 }

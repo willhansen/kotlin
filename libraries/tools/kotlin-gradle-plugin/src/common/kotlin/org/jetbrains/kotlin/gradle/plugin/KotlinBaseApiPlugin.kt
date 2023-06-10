@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.gradle.utils.configureExperimentalTryK2
 abstract class KotlinBaseApiPlugin : DefaultKotlinBasePlugin(), KotlinJvmFactory {
 
     private lateinit var myProject: Project
-    private val taskCreator = KotlinTasksProvider()
+    private konst taskCreator = KotlinTasksProvider()
 
     override fun apply(project: Project) {
         super.apply(project)
@@ -52,15 +52,15 @@ abstract class KotlinBaseApiPlugin : DefaultKotlinBasePlugin(), KotlinJvmFactory
     @Deprecated("Replaced by compilerJvmOptions", replaceWith = ReplaceWith("createCompilerJvmOptions()"))
     override fun createKotlinJvmOptions(): KotlinJvmOptions {
         return object : KotlinJvmOptions {
-            override val options: KotlinJvmCompilerOptions = createCompilerJvmOptions()
+            override konst options: KotlinJvmCompilerOptions = createCompilerJvmOptions()
         }
     }
 
-    override val kotlinExtension: KotlinProjectExtension by lazy {
+    override konst kotlinExtension: KotlinProjectExtension by lazy {
         myProject.objects.newInstance(KotlinProjectExtension::class.java, myProject)
     }
 
-    override val kaptExtension: KaptExtension by lazy {
+    override konst kaptExtension: KaptExtension by lazy {
         myProject.objects.newInstance(KaptExtension::class.java)
     }
 
@@ -74,14 +74,14 @@ abstract class KotlinBaseApiPlugin : DefaultKotlinBasePlugin(), KotlinJvmFactory
     }
 
     override fun registerKaptGenerateStubsTask(taskName: String): TaskProvider<out KaptGenerateStubs> {
-        val taskConfig = KaptGenerateStubsConfig(myProject, kotlinExtension, kaptExtension)
+        konst taskConfig = KaptGenerateStubsConfig(myProject, kotlinExtension, kaptExtension)
         return myProject.registerTask(taskName, KaptGenerateStubsTask::class.java, listOf(myProject)).also {
             taskConfig.execute(it)
         }
     }
 
     override fun registerKaptTask(taskName: String): TaskProvider<out Kapt> {
-        val taskConfiguration = KaptWithoutKotlincConfig(myProject, kaptExtension)
+        konst taskConfiguration = KaptWithoutKotlincConfig(myProject, kaptExtension)
         return myProject.registerTask(taskName, KaptWithoutKotlincTask::class.java, emptyList()).also {
             taskConfiguration.execute(it)
         }

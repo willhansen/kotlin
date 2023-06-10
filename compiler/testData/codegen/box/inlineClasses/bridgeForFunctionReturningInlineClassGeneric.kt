@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: String>(val x: T)
+konstue class IC<T: String>(konst x: T)
 
 interface I<T> {
     fun foo(): T

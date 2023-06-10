@@ -5,7 +5,7 @@ class A {
     }
 
     inline fun inlineFun(crossinline lambda: () -> Unit) {
-        val s = object {
+        konst s = object {
             fun run() {
                 lambda()
             }

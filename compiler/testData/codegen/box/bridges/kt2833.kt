@@ -1,14 +1,14 @@
 package test
 
 public interface FunDependencyEdge {
-    val from: FunctionNode
+    konst from: FunctionNode
 }
 
 public interface FunctionNode
 
 public class FunctionNodeImpl : FunctionNode
 
-class FunDependencyEdgeImpl(override val from: FunctionNodeImpl): FunDependencyEdge {
+class FunDependencyEdgeImpl(override konst from: FunctionNodeImpl): FunDependencyEdge {
 }
 
 fun box(): String {

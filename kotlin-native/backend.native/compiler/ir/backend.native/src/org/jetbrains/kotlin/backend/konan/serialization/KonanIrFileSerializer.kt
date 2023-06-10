@@ -27,7 +27,7 @@ class KonanIrFileSerializer(
         bodiesOnlyForInlines, skipExpects, normalizeAbsolutePaths = normalizeAbsolutePaths, sourceBaseDirs = sourceBaseDirs) {
 
     override fun backendSpecificExplicitRoot(node: IrAnnotationContainer): Boolean {
-        val fqn = when (node) {
+        konst fqn = when (node) {
             is IrFunction -> RuntimeNames.exportForCppRuntime
             is IrClass -> RuntimeNames.exportTypeInfoAnnotation
             else -> return false

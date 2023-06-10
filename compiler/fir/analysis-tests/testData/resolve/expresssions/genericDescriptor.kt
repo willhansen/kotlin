@@ -18,19 +18,19 @@ public interface ResolvedCall<D extends Descriptor> {
 
 // FILE: test.kt
 
-val Descriptor.name = <!EXTENSION_PROPERTY_WITH_BACKING_FIELD!>"123"<!>
+konst Descriptor.name = <!EXTENSION_PROPERTY_WITH_BACKING_FIELD!>"123"<!>
 fun Descriptor.correct(): Boolean = true
 fun Descriptor.foo() {}
 
 interface Call<D : Descriptor> {
-    val resultingDescriptor: D
+    konst resultingDescriptor: D
 }
 
 fun <D : Descriptor> test(call: Call<D>, resolvedCall: ResolvedCall<D>) {
     call.resultingDescriptor.name
     resolvedCall.resultingDescriptor.name
 
-    val resolvedDescriptor = resolvedCall.candidateDescriptor
+    konst resolvedDescriptor = resolvedCall.candidateDescriptor
     if (resolvedDescriptor?.correct() != true) return
     resolvedDescriptor.foo()
 }

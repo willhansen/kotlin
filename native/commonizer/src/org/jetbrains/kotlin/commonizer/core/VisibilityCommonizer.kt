@@ -19,14 +19,14 @@ abstract class VisibilityCommonizer : Commonizer<CirHasVisibility, Visibility> {
 
     private var temp: Visibility? = null
 
-    override val result: Visibility
+    override konst result: Visibility
         get() = checkState(temp, temp == Visibilities.Unknown)
 
     override fun commonizeWith(next: CirHasVisibility): Boolean {
         if (temp == Visibilities.Unknown)
             return false
 
-        val nextVisibility = next.visibility
+        konst nextVisibility = next.visibility
         if (Visibilities.isPrivate(nextVisibility) || !canBeCommonized(next)) {
             temp = Visibilities.Unknown
             return false
@@ -57,7 +57,7 @@ private class LoweringVisibilityCommonizer : VisibilityCommonizer() {
     }
 
     override fun getNext(current: Visibility, next: Visibility): Visibility {
-        val comparisonResult: Int = Visibilities.compare(current, next)
+        konst comparisonResult: Int = Visibilities.compare(current, next)
             ?: return Visibilities.Unknown // two visibilities that can't be compared against each one, ex: protected vs internal
 
         if (!atLeastTwoVisibilitiesMet)

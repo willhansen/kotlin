@@ -3,14 +3,14 @@ abstract class A @CompileTimeCalculation constructor() {
     abstract fun getIntNum(): Int
 }
 
-open class B @CompileTimeCalculation constructor(@CompileTimeCalculation val b: Int) : A() {
+open class B @CompileTimeCalculation constructor(@CompileTimeCalculation konst b: Int) : A() {
     @CompileTimeCalculation
     override fun getIntNum(): Int {
         return b
     }
 }
 
-class C @CompileTimeCalculation constructor(@CompileTimeCalculation val c: Int) : B(c + 1) {
+class C @CompileTimeCalculation constructor(@CompileTimeCalculation konst c: Int) : B(c + 1) {
     @CompileTimeCalculation
     override fun getIntNum(): Int {
         return c
@@ -42,10 +42,10 @@ fun getClassCAsC(num: Int): C {
     return C(num)
 }
 
-const val num1 = <!EVALUATED: `1`!>getAClassImplementation(1).getIntNum()<!>
-const val num2 = <!EVALUATED: `2`!>getBClassImplementation(2).getIntNum()<!>
+const konst num1 = <!EVALUATED: `1`!>getAClassImplementation(1).getIntNum()<!>
+const konst num2 = <!EVALUATED: `2`!>getBClassImplementation(2).getIntNum()<!>
 
 // all `getIntNum` methods are from class C
-const val num3 = <!EVALUATED: `3`!>getClassCAsA(3).getIntNum()<!>
-const val num4 = <!EVALUATED: `4`!>getClassCAsB(4).getIntNum()<!>
-const val num5 = <!EVALUATED: `5`!>getClassCAsC(5).getIntNum()<!>
+const konst num3 = <!EVALUATED: `3`!>getClassCAsA(3).getIntNum()<!>
+const konst num4 = <!EVALUATED: `4`!>getClassCAsB(4).getIntNum()<!>
+const konst num5 = <!EVALUATED: `5`!>getClassCAsC(5).getIntNum()<!>

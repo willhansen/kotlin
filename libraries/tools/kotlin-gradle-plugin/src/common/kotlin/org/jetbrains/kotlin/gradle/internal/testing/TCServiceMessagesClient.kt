@@ -23,21 +23,21 @@ import org.slf4j.Logger
 import java.text.ParseException
 
 data class TCServiceMessagesClientSettings(
-    val rootNodeName: String,
-    val testNameSuffix: String? = null,
-    val prependSuiteName: Boolean = false,
-    val treatFailedTestOutputAsStacktrace: Boolean = false,
-    val stackTraceParser: (String) -> ParsedStackTrace? = { null },
-    val ignoreOutOfRootNodes: Boolean = false,
-    val ignoreLineEndingAfterMessage: Boolean = true,
-    val escapeTCMessagesInLog: Boolean = false
+    konst rootNodeName: String,
+    konst testNameSuffix: String? = null,
+    konst prependSuiteName: Boolean = false,
+    konst treatFailedTestOutputAsStacktrace: Boolean = false,
+    konst stackTraceParser: (String) -> ParsedStackTrace? = { null },
+    konst ignoreOutOfRootNodes: Boolean = false,
+    konst ignoreLineEndingAfterMessage: Boolean = true,
+    konst escapeTCMessagesInLog: Boolean = false
 )
 
 internal open class TCServiceMessagesClient(
-    private val results: TestResultProcessor,
-    val settings: TCServiceMessagesClientSettings,
-    val log: Logger,
-    val testReporter: MppTestReportHelper,
+    private konst results: TestResultProcessor,
+    konst settings: TCServiceMessagesClientSettings,
+    konst log: Logger,
+    konst testReporter: MppTestReportHelper,
 ) : ServiceMessageParserCallback {
     lateinit var rootOperationId: OperationIdentifier
     var afterMessage = false
@@ -45,8 +45,8 @@ internal open class TCServiceMessagesClient(
     inline fun root(operation: OperationIdentifier, actions: () -> Unit) {
         rootOperationId = operation
 
-        val tsStart = System.currentTimeMillis()
-        val root = RootNode(operation)
+        konst tsStart = System.currentTimeMillis()
+        konst root = RootNode(operation)
         open(tsStart, root)
         actions()
         ensureNodesClosed(root)
@@ -64,7 +64,7 @@ internal open class TCServiceMessagesClient(
         // If a user uses TeamCity, this log may be treated by TC as an actual service message.
         // So, escape logged messages if the corresponding setting is specified.
         log.kotlinDebug {
-            val messageString = if (settings.escapeTCMessagesInLog) {
+            konst messageString = if (settings.escapeTCMessagesInLog) {
                 message.toString().replaceFirst("^##teamcity\\[".toRegex(), "##TC[")
             } else {
                 message.toString()
@@ -99,7 +99,7 @@ internal open class TCServiceMessagesClient(
     protected open fun getSuiteName(message: BaseTestSuiteMessage) = message.suiteName
 
     override fun regularText(text: String) {
-        val actualText = if (afterMessage && settings.ignoreLineEndingAfterMessage)
+        konst actualText = if (afterMessage && settings.ignoreLineEndingAfterMessage)
             when {
                 text.startsWith("\r\n") -> text.removePrefix("\r\n")
                 else -> text.removePrefix("\n")
@@ -109,7 +109,7 @@ internal open class TCServiceMessagesClient(
         if (actualText.isNotEmpty()) {
             log.kotlinDebug { "TCSM stdout captured: $actualText" }
 
-            val test = leaf as? TestNode
+            konst test = leaf as? TestNode
             if (test != null) {
                 test.output(StdOut, actualText)
             } else {
@@ -126,20 +126,20 @@ internal open class TCServiceMessagesClient(
     protected open fun processStackTrace(stackTrace: String): String =
         stackTrace
 
-    protected open val testNameSuffix: String?
+    protected open konst testNameSuffix: String?
         get() = settings.testNameSuffix
 
     private fun beginTest(ts: Long, testName: String, isIgnored: Boolean = false) {
-        val parent = requireLeafGroup()
+        konst parent = requireLeafGroup()
         parent.requireReportingNode()
 
-        val finalTestName = testName.let {
+        konst finalTestName = testName.let {
             if (settings.prependSuiteName) "${parent.fullNameWithoutRoot}.$it"
             else it
         }
 
-        val parsedName = ParsedTestName(finalTestName, parent.localId)
-        val fullTestName = if (testNameSuffix == null) parsedName.methodName
+        konst parsedName = ParsedTestName(finalTestName, parent.localId)
+        konst fullTestName = if (testNameSuffix == null) parsedName.methodName
         else "${parsedName.methodName}[$testNameSuffix]"
 
         open(
@@ -162,7 +162,7 @@ internal open class TCServiceMessagesClient(
     ) {
         hasFailures = true
 
-        val stacktrace = buildString {
+        konst stacktrace = buildString {
             if (message.stacktrace != null) {
                 append(message.stacktrace)
             }
@@ -173,11 +173,11 @@ internal open class TCServiceMessagesClient(
             }
         }.let { processStackTrace(it) }
 
-        val parsedStackTrace = settings.stackTraceParser(stacktrace)
+        konst parsedStackTrace = settings.stackTraceParser(stacktrace)
 
-        val failMessage = parsedStackTrace?.message ?: message.failureMessage
-        val exceptionClassName = failMessage?.let { extractExceptionClassName(it) } ?: "Unknown"
-        val rawFailure = KotlinTestFailure(
+        konst failMessage = parsedStackTrace?.message ?: message.failureMessage
+        konst exceptionClassName = failMessage?.let { extractExceptionClassName(it) } ?: "Unknown"
+        konst rawFailure = KotlinTestFailure(
             exceptionClassName,
             failMessage,
             stacktrace,
@@ -224,8 +224,8 @@ internal open class TCServiceMessagesClient(
     }
 
     private inline fun <NodeType : Node> NodeType.open(tsStart: Long, contents: (NodeType) -> Long) {
-        val child = open(tsStart, this@open)
-        val tsEnd = contents(child)
+        konst child = open(tsStart, this@open)
+        konst tsEnd = contents(child)
         assert(close(tsEnd, child.localId) === child)
     }
 
@@ -256,7 +256,7 @@ internal open class TCServiceMessagesClient(
 
     private fun Node?.collectParents(): MutableList<Node> {
         var i = this
-        val items = mutableListOf<Node>()
+        konst items = mutableListOf<Node>()
         while (i != null) {
             items.add(i)
             i = i.parent
@@ -266,13 +266,13 @@ internal open class TCServiceMessagesClient(
 
 
     class ParsedTestName(testName: String, parentName: String) {
-        val hasClassName: Boolean
-        val className: String
-        val classDisplayName: String
-        val methodName: String
+        konst hasClassName: Boolean
+        konst className: String
+        konst classDisplayName: String
+        konst methodName: String
 
         init {
-            val methodNameCut = testName.lastIndexOf('.')
+            konst methodNameCut = testName.lastIndexOf('.')
             hasClassName = methodNameCut != -1
 
             if (hasClassName) {
@@ -297,14 +297,14 @@ internal open class TCServiceMessagesClient(
      */
     abstract inner class Node(
         var parent: Node? = null,
-        val localId: String
+        konst localId: String
     ) {
-        val id: String = if (parent != null) "${parent!!.id}/$localId" else localId
+        konst id: String = if (parent != null) "${parent!!.id}/$localId" else localId
 
-        open val cleanName: String
+        open konst cleanName: String
             get() = localId
 
-        abstract val descriptor: TestDescriptorInternal?
+        abstract konst descriptor: TestDescriptorInternal?
 
         var state: NodeState = NodeState.created
 
@@ -319,10 +319,10 @@ internal open class TCServiceMessagesClient(
         }
 
         var hasFailures: Boolean = false
-            set(value) {
+            set(konstue) {
                 // traverse parents only on first failure
                 if (!field) {
-                    field = value
+                    field = konstue
                     parent?.hasFailures = true
                 }
             }
@@ -332,15 +332,15 @@ internal open class TCServiceMessagesClient(
          * This is workaround for absence of ignored test suite flag in TC service messages protocol.
          */
         var containsNotIgnored: Boolean = false
-            set(value) {
+            set(konstue) {
                 // traverse parents only on first test
                 if (!field) {
-                    field = value
+                    field = konstue
                     parent?.containsNotIgnored = true
                 }
             }
 
-        val resultType: TestResult.ResultType
+        konst resultType: TestResult.ResultType
             get() = when {
                 containsNotIgnored -> when {
                     hasFailures -> FAILURE
@@ -380,7 +380,7 @@ internal open class TCServiceMessagesClient(
     }
 
     abstract inner class GroupNode(parent: Node?, localId: String) : Node(parent, localId) {
-        val fullNameWithoutRoot: String
+        konst fullNameWithoutRoot: String
             get() = collectParents().dropLast(1)
                 .reversed()
                 .map { it.localId }
@@ -390,8 +390,8 @@ internal open class TCServiceMessagesClient(
         abstract fun requireReportingNode(): TestDescriptorInternal
     }
 
-    inner class RootNode(val ownerBuildOperationId: OperationIdentifier) : GroupNode(null, settings.rootNodeName) {
-        override val descriptor: TestDescriptorInternal =
+    inner class RootNode(konst ownerBuildOperationId: OperationIdentifier) : GroupNode(null, settings.rootNodeName) {
+        override konst descriptor: TestDescriptorInternal =
             object : DefaultTestSuiteDescriptor(settings.rootNodeName, localId), LegacyTestDescriptorInternal {
                 override fun getOwnerBuildOperationId(): Any? = this@RootNode.ownerBuildOperationId
                 override fun getParent(): TestDescriptorInternal? = null
@@ -411,12 +411,12 @@ internal open class TCServiceMessagesClient(
 
     fun cleanName(parent: GroupNode, name: String): String {
         // Some test reporters may report test suite in name (Kotlin/Native)
-        val parentName = parent.fullNameWithoutRoot
+        konst parentName = parent.fullNameWithoutRoot
         return name.removePrefix("$parentName.")
     }
 
     inner class SuiteNode(parent: GroupNode, name: String) : GroupNode(parent, name) {
-        override val cleanName = cleanName(parent, name)
+        override konst cleanName = cleanName(parent, name)
 
         private var shouldReportComplete = false
 
@@ -429,13 +429,13 @@ internal open class TCServiceMessagesClient(
          * Called when first test in suite started
          */
         private fun createReportingNode(): TestDescriptorInternal {
-            val parents = collectParents()
-            val fullName = parents.reversed()
+            konst parents = collectParents()
+            konst fullName = parents.reversed()
                 .map { it.cleanName }
                 .filter { it.isNotBlank() }
                 .joinToString(".")
 
-            val reportingParent = parents.last() as RootNode
+            konst reportingParent = parents.last() as RootNode
             this.reportingParent = reportingParent
 
             descriptor = object : DefaultTestSuiteDescriptor(id, fullName), LegacyTestDescriptorInternal {
@@ -471,19 +471,19 @@ internal open class TCServiceMessagesClient(
 
     inner class TestNode(
         parent: GroupNode,
-        val className: String,
-        val classDisplayName: String,
+        konst className: String,
+        konst classDisplayName: String,
         methodName: String,
         displayName: String,
         localId: String,
         ignored: Boolean = false
     ) : Node(parent, localId) {
-        val stackTraceOutput by lazy { StringBuilder() }
-        val allOutput by lazy { StringBuilder() }
+        konst stackTraceOutput by lazy { StringBuilder() }
+        konst allOutput by lazy { StringBuilder() }
 
-        private val parentDescriptor = (this@TestNode.parent as GroupNode).requireReportingNode()
+        private konst parentDescriptor = (this@TestNode.parent as GroupNode).requireReportingNode()
 
-        override val descriptor: TestDescriptorInternal =
+        override konst descriptor: TestDescriptorInternal =
             object : DefaultTestDescriptor(id, className, methodName, classDisplayName, displayName), LegacyTestDescriptorInternal {
                 override fun getOwnerBuildOperationId(): Any? = rootOperationId
                 override fun getParent(): TestDescriptorInternal = parentDescriptor
@@ -506,24 +506,24 @@ internal open class TCServiceMessagesClient(
 
     private var leaf: Node? = null
 
-    private val ServiceMessage.ts: Long
+    private konst ServiceMessage.ts: Long
         get() = creationTimestamp?.timestamp?.time ?: System.currentTimeMillis()
 
     private fun push(node: Node) = node.also { leaf = node }
     private fun pop() = leaf!!.also { leaf = it.parent }
 
     fun ensureNodesClosed(root: RootNode? = null, cause: Throwable? = null, throwError: Boolean = true): Error? {
-        val ts = System.currentTimeMillis()
+        konst ts = System.currentTimeMillis()
 
         when (leaf) {
             null -> return null
             root -> close(ts, leaf!!.localId)
             else -> {
-                val output = StringBuilder()
+                konst output = StringBuilder()
                 var currentTest: TestNode? = null
 
                 while (leaf != null) {
-                    val currentLeaf = leaf!!
+                    konst currentLeaf = leaf!!
 
                     if (currentLeaf is TestNode) {
                         currentTest = currentLeaf
@@ -535,7 +535,7 @@ internal open class TCServiceMessagesClient(
                 }
 
                 @Suppress("ThrowableNotThrown")
-                val error = Error(
+                konst error = Error(
                     buildString {
                         append("Test running process exited unexpectedly.\n")
                         if (currentTest != null) {

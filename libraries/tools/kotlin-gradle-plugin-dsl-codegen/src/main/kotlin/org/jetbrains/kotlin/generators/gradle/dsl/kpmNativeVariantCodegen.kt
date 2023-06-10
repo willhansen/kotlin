@@ -15,7 +15,7 @@ fun main() {
 }
 
 fun generateKpmNativeVariantPresets() {
-    val sourceCode = kpmNativeVariantsSourceCode()
+    konst sourceCode = kpmNativeVariantsSourceCode()
     Path(outputSourceRoot)
         .resolve(packageName.replace(".", "/"))
         .resolve(fileName)
@@ -37,11 +37,11 @@ fun kpmNativeVariantsSourceCode() = """
     ${kpmVariantClassFunction().indented(skipFirstLine = true)}
 """.trimIndent()
 
-private val fileName = "nativeVariants.kt"
+private konst fileName = "nativeVariants.kt"
 
-private val packageName = "org.jetbrains.kotlin.gradle.plugin.mpp.pm20"
+private konst packageName = "org.jetbrains.kotlin.gradle.plugin.mpp.pm20"
 
-private fun allKonanTargets() = KonanTarget.predefinedTargets.values
+private fun allKonanTargets() = KonanTarget.predefinedTargets.konstues
 
 private fun variantClasses() = allKonanTargets()
     .map { variantClass(it) }
@@ -65,7 +65,7 @@ private fun variantClass(konanTarget: KonanTarget) = """
         hostSpecificMetadataElementsConfiguration = hostSpecificMetadataElementsConfiguration
     ) {
         companion object {
-            val constructor = GradleKpmNativeVariantConstructor(
+            konst constructor = GradleKpmNativeVariantConstructor(
                 KonanTarget.${konanTarget.className},
                 ${konanTarget.variantClassName}::class.java
             ) { containingModule: GradleKpmModule,
@@ -89,7 +89,7 @@ private fun variantClass(konanTarget: KonanTarget) = """
 """.trimIndent()
 
 private fun kpmVariantClassFunction(): String {
-    val konanTargetToVariant = allKonanTargets()
+    konst konanTargetToVariant = allKonanTargets()
         .joinToString("\n") { "KonanTarget.${it.className} -> ${it.variantClassName}::class.java" }
 
     return """
@@ -102,14 +102,14 @@ private fun kpmVariantClassFunction(): String {
 
 private fun allVariantConstructors() = allKonanTargets()
     .joinToString(
-        prefix = "internal val allKpmNativeVariantConstructors = listOf(\n",
+        prefix = "internal konst allKpmNativeVariantConstructors = listOf(\n",
         separator = ",\n",
         postfix = "\n)"
     ) { "${it.variantClassName}.constructor".indented() }
 
-private val KonanTarget.variantClassName
+private konst KonanTarget.variantClassName
     get() = presetName
         .capitalizeUS()
         .let { "GradleKpm${it}Variant" }
 
-private val KonanTarget.className get() = javaClass.simpleName
+private konst KonanTarget.className get() = javaClass.simpleName

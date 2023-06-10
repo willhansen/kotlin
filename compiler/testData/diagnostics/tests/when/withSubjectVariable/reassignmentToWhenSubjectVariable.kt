@@ -5,7 +5,7 @@
 fun foo(): Any = 42
 
 fun test1(x: Any) {
-    when (val y = foo()) {
+    when (konst y = foo()) {
         is String -> <!VAL_REASSIGNMENT!>y<!> = ""
     }
 }

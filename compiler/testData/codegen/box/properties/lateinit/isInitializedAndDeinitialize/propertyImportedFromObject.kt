@@ -6,7 +6,7 @@ package test
 
 import test.Derived.p
 
-open class Base(val b: Boolean)
+open class Base(konst b: Boolean)
 
 object Derived : Base(::p.isInitialized) {
     lateinit var p: String

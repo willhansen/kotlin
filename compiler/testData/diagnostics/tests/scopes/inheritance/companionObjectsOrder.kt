@@ -5,8 +5,8 @@ open class A {
         fun bar() = 1
     }
     init {
-        val a: Int = foo()
-        val b: Int = bar()
+        konst a: Int = foo()
+        konst b: Int = bar()
     }
 }
 
@@ -15,8 +15,8 @@ open class B: A() {
         fun bar() = ""
     }
     init {
-        val a: String = foo()
-        val b: String = bar()
+        konst a: String = foo()
+        konst b: String = bar()
     }
 }
 
@@ -25,14 +25,14 @@ fun B.Companion.foo() = ""
 
 class C: A() {
     init {
-        val a: Int = foo()
-        val b: Int = bar()
+        konst a: Int = foo()
+        konst b: Int = bar()
     }
 }
 
 class D: B() {
     init {
-        val a: String = foo()
-        val b: String = bar()
+        konst a: String = foo()
+        konst b: String = bar()
     }
 }

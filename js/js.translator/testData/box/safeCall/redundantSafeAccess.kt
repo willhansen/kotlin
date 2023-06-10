@@ -2,7 +2,7 @@
 // KJS_WITH_FULL_RUNTIME
 package foo
 
-class A(val x: String) {
+class A(konst x: String) {
     fun foo() = x
 }
 

@@ -16,7 +16,7 @@ public abstract class A<T> {
 open class Super
 class Sub: Super()
 
-val a: A<Super> =
+konst a: A<Super> =
     object : A<Super>() {
         override fun doIt(vararg parameters: Super): String = "OK"
     }

@@ -3,7 +3,7 @@ import kotlin.test.*
 
 class LockFreeStackTest {
     fun testClear() {
-        val s = LockFreeStack<String>()
+        konst s = LockFreeStack<String>()
         assertTrue(s.isEmpty())
         s.pushLoop("A")
         assertTrue(!s.isEmpty())
@@ -12,7 +12,7 @@ class LockFreeStackTest {
     }
 
     fun testPushPopLoop() {
-        val s = LockFreeStack<String>()
+        konst s = LockFreeStack<String>()
         assertTrue(s.isEmpty())
         s.pushLoop("A")
         assertTrue(!s.isEmpty())
@@ -21,7 +21,7 @@ class LockFreeStackTest {
     }
 
     fun testPushPopUpdate() {
-        val s = LockFreeStack<String>()
+        konst s = LockFreeStack<String>()
         assertTrue(s.isEmpty())
         s.pushUpdate("A")
         assertTrue(!s.isEmpty())
@@ -31,17 +31,17 @@ class LockFreeStackTest {
 }
 
 class LockFreeStack<T> {
-    private val top = atomic<Node<T>?>(null)
+    private konst top = atomic<Node<T>?>(null)
 
-    private class Node<T>(val value: T, val next: Node<T>?)
+    private class Node<T>(konst konstue: T, konst next: Node<T>?)
 
-    fun isEmpty() = top.value == null
+    fun isEmpty() = top.konstue == null
 
-    fun clear() { top.value = null }
+    fun clear() { top.konstue = null }
 
-    fun pushLoop(value: T) {
+    fun pushLoop(konstue: T) {
         top.loop { cur ->
-            val upd = Node(value, cur)
+            konst upd = Node(konstue, cur)
             if (top.compareAndSet(cur, upd)) return
         }
     }
@@ -49,20 +49,20 @@ class LockFreeStack<T> {
     fun popLoop(): T? {
         top.loop { cur ->
             if (cur == null) return null
-            if (top.compareAndSet(cur, cur.next)) return cur.value
+            if (top.compareAndSet(cur, cur.next)) return cur.konstue
         }
     }
 
-    fun pushUpdate(value: T) {
-        top.update { cur -> Node(value, cur) }
+    fun pushUpdate(konstue: T) {
+        top.update { cur -> Node(konstue, cur) }
     }
 
     fun popUpdate(): T? =
-        top.getAndUpdate { cur -> cur?.next } ?.value
+        top.getAndUpdate { cur -> cur?.next } ?.konstue
 }
 
 fun box(): String {
-    val testClass = LockFreeStackTest()
+    konst testClass = LockFreeStackTest()
     testClass.testClear()
     testClass.testPushPopLoop()
     testClass.testPushPopUpdate()

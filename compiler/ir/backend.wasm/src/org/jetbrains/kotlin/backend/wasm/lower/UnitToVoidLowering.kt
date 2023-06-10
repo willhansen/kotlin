@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrConstImpl
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 // NOTE: This is an optional lowering.
-// In the wasm backend we treat Unit type as a regular object (except for the function return values). This means that all expressions
+// In the wasm backend we treat Unit type as a regular object (except for the function return konstues). This means that all expressions
 // with Unit return type will actually produce a real Unit instance. However sometimes Unit type signifies that the result of the
 // expression will never be used and for such cases we want to be able to avoid generating redundant Unit objects.
-// In order to simplify the reasoning we introduce special type 'Void'. It means absence of any value, so there are never any real
+// In order to simplify the reasoning we introduce special type 'Void'. It means absence of any konstue, so there are never any real
 // objects of type Void. The only way to produce a Void type is by calling intrinsic 'consumeAnyIntoVoid'. In the wasm code it will turn
 // into a single drop instruction.
 // This lowering visits all statements with Unit return type and tries to replace it with Void type. In the result of
@@ -52,12 +52,12 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 //    }
 // NOTE: In order to reduce the amount of new nodes in the IR we only do this transformation if it involves 'when' or 'try/catch' statements
 // because WASM backend handles other cases well enough.
-// As a further optimization we can directly mark 'call', 'set_value' and 'set_field' with Void return type and handle them as special
+// As a further optimization we can directly mark 'call', 'set_konstue' and 'set_field' with Void return type and handle them as special
 // cases in the backend.
 
-class UnitToVoidLowering(val context: WasmBackendContext) : FileLoweringPass, AbstractValueUsageTransformer(context.irBuiltIns) {
-    val builtIns = context.irBuiltIns
-    val symbols = context.wasmSymbols
+class UnitToVoidLowering(konst context: WasmBackendContext) : FileLoweringPass, AbstractValueUsageTransformer(context.irBuiltIns) {
+    konst builtIns = context.irBuiltIns
+    konst symbols = context.wasmSymbols
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(this)

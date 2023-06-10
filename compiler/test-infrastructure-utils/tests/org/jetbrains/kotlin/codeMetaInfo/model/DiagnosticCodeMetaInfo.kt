@@ -10,10 +10,10 @@ import org.jetbrains.kotlin.codeMetaInfo.renderConfigurations.DiagnosticCodeMeta
 import org.jetbrains.kotlin.diagnostics.Diagnostic
 
 class DiagnosticCodeMetaInfo(
-    override val start: Int,
-    override val end: Int,
+    override konst start: Int,
+    override konst end: Int,
     renderConfiguration: DiagnosticCodeMetaInfoRenderConfiguration,
-    val diagnostic: Diagnostic
+    konst diagnostic: Diagnostic
 ) : CodeMetaInfo {
     constructor(
         range: TextRange,
@@ -28,10 +28,10 @@ class DiagnosticCodeMetaInfo(
         this.renderConfiguration = renderConfiguration
     }
 
-    override val tag: String
+    override konst tag: String
         get() = renderConfiguration.getTag(this)
 
-    override val attributes: MutableList<String> = mutableListOf()
+    override konst attributes: MutableList<String> = mutableListOf()
 
     override fun asString(): String = renderConfiguration.asString(this)
 }

@@ -8,14 +8,14 @@ class TopLevel {
         fun a() {}
 
         @JvmStatic
-        val q = "A"
+        konst q = "A"
     }
 
     fun b() {}
 
-    val x: String
+    konst x: String
 
-    val y = 5
+    konst y = 5
 
     class NestedClass {
         inner class NestedInnerClass

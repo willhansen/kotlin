@@ -24,11 +24,11 @@ object EnumCompanionInEnumConstructorCallChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (declaration !is KtEnumEntry || descriptor !is ClassDescriptor) return
         if (descriptor.kind != ClassKind.ENUM_ENTRY) return
-        val enumDescriptor = descriptor.containingDeclaration as? ClassDescriptor ?: return
-        val enumCompanion = enumDescriptor.companionObjectDescriptor ?: return
-        val initializer = declaration.initializerList?.initializers?.firstIsInstanceOrNull<KtSuperTypeCallEntry>() ?: return
-        val bindingTrace = context.trace
-        val visitor = Visitor(
+        konst enumDescriptor = descriptor.containingDeclaration as? ClassDescriptor ?: return
+        konst enumCompanion = enumDescriptor.companionObjectDescriptor ?: return
+        konst initializer = declaration.initializerList?.initializers?.firstIsInstanceOrNull<KtSuperTypeCallEntry>() ?: return
+        konst bindingTrace = context.trace
+        konst visitor = Visitor(
             enumDescriptor,
             enumCompanion,
             bindingTrace.bindingContext,
@@ -39,41 +39,41 @@ object EnumCompanionInEnumConstructorCallChecker : DeclarationChecker {
     }
 
     private class Visitor(
-        val enumDescriptor: ClassDescriptor,
-        val companionDescriptor: ClassDescriptor,
-        val context: BindingContext,
-        val reporter: DiagnosticSink,
-        val reportError: Boolean
+        konst enumDescriptor: ClassDescriptor,
+        konst companionDescriptor: ClassDescriptor,
+        konst context: BindingContext,
+        konst reporter: DiagnosticSink,
+        konst reportError: Boolean
     ) : KtVisitorVoid() {
         override fun visitElement(element: PsiElement) {
             element.acceptChildren(this)
         }
 
         override fun visitExpression(expression: KtExpression) {
-            val needAnalyzeReceiver = analyzeExpression(expression)
+            konst needAnalyzeReceiver = analyzeExpression(expression)
             if (needAnalyzeReceiver) {
                 expression.acceptChildren(this)
             } else if (expression is KtCallExpression) {
-                expression.valueArgumentList?.acceptChildren(this)
+                expression.konstueArgumentList?.acceptChildren(this)
             }
         }
 
         private fun analyzeExpression(expression: KtExpression): Boolean {
             if (expression.parent is KtCallExpression) return true
-            val resolvedCall = expression.getResolvedCall(context) ?: return true
+            konst resolvedCall = expression.getResolvedCall(context) ?: return true
 
-            val dispatchDescriptor = resolvedCall.dispatchReceiver.resolvedDescriptor
-            val extensionDescriptor = resolvedCall.extensionReceiver.resolvedDescriptor
-            val dispatchIsCompanion = dispatchDescriptor == companionDescriptor
-            val extensionIsCompanion = extensionDescriptor == companionDescriptor
+            konst dispatchDescriptor = resolvedCall.dispatchReceiver.resolvedDescriptor
+            konst extensionDescriptor = resolvedCall.extensionReceiver.resolvedDescriptor
+            konst dispatchIsCompanion = dispatchDescriptor == companionDescriptor
+            konst extensionIsCompanion = extensionDescriptor == companionDescriptor
 
             if (dispatchIsCompanion || extensionIsCompanion) {
-                val reportOn = when (val receiverExpression = (expression as? KtQualifiedExpression)?.receiverExpression) {
+                konst reportOn = when (konst receiverExpression = (expression as? KtQualifiedExpression)?.receiverExpression) {
                     is KtSimpleNameExpression -> receiverExpression
                     is KtQualifiedExpression -> receiverExpression.selectorExpression
                     else -> null
                 } ?: expression
-                val factory = if (reportError) {
+                konst factory = if (reportError) {
                     Errors.UNINITIALIZED_ENUM_COMPANION
                 } else {
                     Errors.UNINITIALIZED_ENUM_COMPANION_WARNING
@@ -85,7 +85,7 @@ object EnumCompanionInEnumConstructorCallChecker : DeclarationChecker {
         }
     }
 
-    private val ReceiverValue?.resolvedDescriptor: DeclarationDescriptor?
+    private konst ReceiverValue?.resolvedDescriptor: DeclarationDescriptor?
         get() {
             if (this !is ClassValueReceiver && this !is ImplicitClassReceiver) return null
             return this.type.unwrap().constructor.declarationDescriptor

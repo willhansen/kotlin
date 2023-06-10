@@ -24,24 +24,24 @@ internal fun PrettyPrinter.renderFe10Annotations(
     analysisContext: Fe10AnalysisContext,
     predicate: (ClassId) -> Boolean = { true }
 ) {
-    val separator = if (isSingleLineAnnotations) " " else "\n"
+    konst separator = if (isSingleLineAnnotations) " " else "\n"
     for (annotation in annotations) {
-        val annotationClass = annotation.annotationClass ?: continue
-        val classId = annotationClass.classId
+        konst annotationClass = annotation.annotationClass ?: continue
+        konst classId = annotationClass.classId
         if (classId != null && !predicate(classId)) {
             continue
         }
 
         if (annotationClass.fqNameSafe != StandardNames.FqNames.parameterName) {
             append('@')
-            val rendered = if (renderAnnotationWithShortNames) annotation.fqName?.shortName()?.render() else annotation.fqName?.render()
+            konst rendered = if (renderAnnotationWithShortNames) annotation.fqName?.shortName()?.render() else annotation.fqName?.render()
             append(rendered ?: "ERROR")
 
-            val valueArguments = annotation.allValueArguments.entries.sortedBy { it.key.asString() }
-            printCollectionIfNotEmpty(valueArguments, separator = ", ", prefix = "(", postfix = ")") { (name, value) ->
+            konst konstueArguments = annotation.allValueArguments.entries.sortedBy { it.key.asString() }
+            printCollectionIfNotEmpty(konstueArguments, separator = ", ", prefix = "(", postfix = ")") { (name, konstue) ->
                 append(name.render())
                 append(" = ")
-                append(value.toKtAnnotationValue(analysisContext).renderAsSourceCode())
+                append(konstue.toKtAnnotationValue(analysisContext).renderAsSourceCode())
             }
 
             append(separator)

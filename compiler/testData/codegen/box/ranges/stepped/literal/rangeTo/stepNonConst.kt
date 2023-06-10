@@ -5,19 +5,19 @@ import kotlin.test.*
 fun two() = 2
 
 fun box(): String {
-    val intList = mutableListOf<Int>()
+    konst intList = mutableListOf<Int>()
     for (i in 1..8 step two()) {
         intList += i
     }
     assertEquals(listOf(1, 3, 5, 7), intList)
 
-    val longList = mutableListOf<Long>()
+    konst longList = mutableListOf<Long>()
     for (i in 1L..8L step two().toLong()) {
         longList += i
     }
     assertEquals(listOf(1L, 3L, 5L, 7L), longList)
 
-    val charList = mutableListOf<Char>()
+    konst charList = mutableListOf<Char>()
     for (i in 'a'..'h' step two()) {
         charList += i
     }

@@ -32,8 +32,8 @@ class TypeApproximator(
     fun approximateDeclarationType(baseType: KotlinType, local: Boolean): UnwrappedType {
         if (!languageVersionSettings.supportsFeature(LanguageFeature.NewInference)) return baseType.unwrap()
 
-        val configuration = if (local) TypeApproximatorConfiguration.LocalDeclaration else TypeApproximatorConfiguration.PublicDeclaration.SaveAnonymousTypes
-        val preparedType = if (local) baseType.unwrap() else substituteAlternativesInPublicType(baseType)
+        konst configuration = if (local) TypeApproximatorConfiguration.LocalDeclaration else TypeApproximatorConfiguration.PublicDeclaration.SaveAnonymousTypes
+        konst preparedType = if (local) baseType.unwrap() else substituteAlternativesInPublicType(baseType)
         return approximateToSuperType(preparedType, configuration) ?: preparedType
     }
 

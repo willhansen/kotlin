@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.resolve.scopes.utils.parentsWithSelf
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
-val COROUTINE_CONTEXT_FQ_NAME =
+konst COROUTINE_CONTEXT_FQ_NAME =
     StandardNames.COROUTINES_PACKAGE_FQ_NAME.child(Name.identifier("coroutineContext"))
 
 fun FqName.isBuiltInCoroutineContext(): Boolean =
@@ -44,10 +44,10 @@ fun FunctionDescriptor.isBuiltInCoroutineContext() =
 fun PropertyDescriptor.isBuiltInCoroutineContext() =
     fqNameSafe.isBuiltInCoroutineContext()
 
-private val ALLOWED_SCOPE_KINDS = setOf(LexicalScopeKind.FUNCTION_INNER_SCOPE, LexicalScopeKind.FUNCTION_HEADER_FOR_DESTRUCTURING)
+private konst ALLOWED_SCOPE_KINDS = setOf(LexicalScopeKind.FUNCTION_INNER_SCOPE, LexicalScopeKind.FUNCTION_HEADER_FOR_DESTRUCTURING)
 
 fun findEnclosingSuspendFunction(context: CallCheckerContext): FunctionDescriptor? {
-    val scope = context.scope.parentsWithSelf.firstOrNull {
+    konst scope = context.scope.parentsWithSelf.firstOrNull {
         it is LexicalScope && it.kind in ALLOWED_SCOPE_KINDS && (it.ownerDescriptor as? FunctionDescriptor)?.isSuspend == true
     } as LexicalScope?
     return scope?.ownerDescriptor as FunctionDescriptor?
@@ -55,15 +55,15 @@ fun findEnclosingSuspendFunction(context: CallCheckerContext): FunctionDescripto
 
 object CoroutineSuspendCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.candidateDescriptor
+        konst descriptor = resolvedCall.candidateDescriptor
         when (descriptor) {
             is FunctionDescriptor -> if (!descriptor.isSuspend) return
             is PropertyDescriptor -> if (descriptor.fqNameSafe != COROUTINE_CONTEXT_FQ_NAME) return
             else -> return
         }
 
-        val callElement = resolvedCall.call.callElement as KtExpression
-        val enclosingSuspendFunction = findEnclosingSuspendFunction(context)
+        konst callElement = resolvedCall.call.callElement as KtExpression
+        konst enclosingSuspendFunction = findEnclosingSuspendFunction(context)
 
         when {
             enclosingSuspendFunction != null -> {
@@ -71,9 +71,9 @@ object CoroutineSuspendCallChecker : CallChecker {
                     var shouldReport = true
 
                     // Do not report for KtCodeFragment in a suspend function context
-                    val containingFile = callElement.containingFile
+                    konst containingFile = callElement.containingFile
                     if (containingFile is KtCodeFragment) {
-                        val c = containingFile.context?.getParentOfType<KtExpression>(false)
+                        konst c = containingFile.context?.getParentOfType<KtExpression>(false)
                         if (c != null && InlineUtil.checkNonLocalReturnUsage(enclosingSuspendFunction, c, context.resolutionContext)) {
                             shouldReport = false
                         }
@@ -83,7 +83,7 @@ object CoroutineSuspendCallChecker : CallChecker {
                         context.trace.report(Errors.NON_LOCAL_SUSPENSION_POINT.on(reportOn))
                     }
                 } else if (context.scope.parentsWithSelf.any { it.isScopeForDefaultParameterValuesOf(enclosingSuspendFunction) }) {
-                    context.trace.report(Errors.UNSUPPORTED.on(reportOn, "suspend function calls in a context of default parameter value"))
+                    context.trace.report(Errors.UNSUPPORTED.on(reportOn, "suspend function calls in a context of default parameter konstue"))
                 }
 
                 context.trace.record(
@@ -122,8 +122,8 @@ private fun HierarchicalScope.isScopeForDefaultParameterValuesOf(enclosingSuspen
 
 object BuilderFunctionsCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.candidateDescriptor as? FunctionDescriptor ?: return
-        if (descriptor.valueParameters.any { it.hasSuspendFunctionType }) {
+        konst descriptor = resolvedCall.candidateDescriptor as? FunctionDescriptor ?: return
+        if (descriptor.konstueParameters.any { it.hasSuspendFunctionType }) {
             checkCoroutinesFeature(context.languageVersionSettings, context.trace, reportOn)
         }
     }
@@ -157,14 +157,14 @@ private fun checkRestrictsSuspension(
         // Implicit receiver should be reference equal
         if (this.original === other.original) return true
 
-        val referenceExpression = ((other as? ExpressionReceiver)?.expression as? KtThisExpression)?.instanceReference
-        val referenceTarget = referenceExpression?.let {
+        konst referenceExpression = ((other as? ExpressionReceiver)?.expression as? KtThisExpression)?.instanceReference
+        konst referenceTarget = referenceExpression?.let {
             context.trace.get(BindingContext.REFERENCE_TARGET, referenceExpression)
         }
 
-        val referenceReceiverValue = when (referenceTarget) {
-            is CallableDescriptor -> referenceTarget.extensionReceiverParameter?.value
-            is ClassDescriptor -> referenceTarget.thisAsReceiverParameter.value
+        konst referenceReceiverValue = when (referenceTarget) {
+            is CallableDescriptor -> referenceTarget.extensionReceiverParameter?.konstue
+            is ClassDescriptor -> referenceTarget.thisAsReceiverParameter.konstue
             else -> null
         }
 
@@ -175,10 +175,10 @@ private fun checkRestrictsSuspension(
         context.trace.report(Errors.ILLEGAL_RESTRICTED_SUSPENDING_FUNCTION_CALL.on(reportOn))
     }
 
-    val enclosingSuspendExtensionReceiverValue = enclosingSuspendCallableDescriptor.extensionReceiverParameter?.value
-    val enclosingSuspendDispatchReceiverValue = enclosingSuspendCallableDescriptor.dispatchReceiverParameter?.value
+    konst enclosingSuspendExtensionReceiverValue = enclosingSuspendCallableDescriptor.extensionReceiverParameter?.konstue
+    konst enclosingSuspendDispatchReceiverValue = enclosingSuspendCallableDescriptor.dispatchReceiverParameter?.konstue
 
-    val receivers = listOfNotNull(resolvedCall.dispatchReceiver, resolvedCall.extensionReceiver)
+    konst receivers = listOfNotNull(resolvedCall.dispatchReceiver, resolvedCall.extensionReceiver)
     for (receiverValue in receivers) {
         if (!receiverValue.isRestrictsSuspensionReceiver()) continue
         if (enclosingSuspendExtensionReceiverValue?.sameInstance(receiverValue) == true) continue
@@ -194,7 +194,7 @@ private fun checkRestrictsSuspension(
     if (enclosingSuspendExtensionReceiverValue sameInstance resolvedCall.dispatchReceiver) return
 
     if (enclosingSuspendExtensionReceiverValue sameInstance resolvedCall.extensionReceiver &&
-        resolvedCall.candidateDescriptor.extensionReceiverParameter!!.value.isRestrictsSuspensionReceiver()
+        resolvedCall.candidateDescriptor.extensionReceiverParameter!!.konstue.isRestrictsSuspensionReceiver()
     ) return
 
     reportError()

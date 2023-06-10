@@ -19,7 +19,7 @@ fun bbb() {
 }
 
 fun foo(expr: StringBuilder): Int {
-    val c = 'a'
+    konst c = 'a'
     when(c) {
         0.toChar() -> throw Exception("zero")
         else -> throw Exception("nonzero" + c)
@@ -118,7 +118,7 @@ fun blockReturnValueTypeMatch12() : Int {
     else return <!CONSTANT_EXPECTED_TYPE_MISMATCH!>1.0<!>
 }
 fun blockNoReturnIfValDeclaration(): Int {
-    val x = 1
+    konst x = 1
     <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 fun blockNoReturnIfEmptyIf(): Int {
     if (1 < 2) {} else {}
@@ -136,7 +136,7 @@ fun blockNoReturnIfUnitInOneBranch(): Int {
 fun nonBlockReturnIfEmptyIf(): Int = if (1 < 2) <!TYPE_MISMATCH!>{}<!> else <!TYPE_MISMATCH!>{}<!>
 fun nonBlockNoReturnIfUnitInOneBranch(): Int = if (1 < 2) <!TYPE_MISMATCH!>{}<!> else 2
 
-val a = <!RETURN_NOT_ALLOWED!>return<!> 1
+konst a = <!RETURN_NOT_ALLOWED!>return<!> 1
 
 class A() {
 }
@@ -170,37 +170,37 @@ class B() {
 }
 
 fun testFunctionLiterals() {
-    val endsWithVarDeclaration : () -> Boolean = {
-        <!EXPECTED_TYPE_MISMATCH!>val x = 2<!>
+    konst endsWithVarDeclaration : () -> Boolean = {
+        <!EXPECTED_TYPE_MISMATCH!>konst x = 2<!>
     }
 
-    val endsWithAssignment: () -> Int = {
+    konst endsWithAssignment: () -> Int = {
         var <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE!>x<!> = 1
         <!EXPECTED_TYPE_MISMATCH!>x = 333<!>
     }
 
-    val endsWithReAssignment: () -> Int = {
+    konst endsWithReAssignment: () -> Int = {
         var x = 1
         <!ASSIGNMENT_TYPE_MISMATCH!>x += 333<!>
     }
 
-    val endsWithFunDeclaration : () -> String = {
+    konst endsWithFunDeclaration : () -> String = {
         var <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE!>x<!> = 1
         x = 333
         <!EXPECTED_TYPE_MISMATCH!>fun meow() : Unit {}<!>
     }
 
-    val endsWithObjectDeclaration : () -> Int = {
+    konst endsWithObjectDeclaration : () -> Int = {
         var <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE!>x<!> = 1
         x = 333
         <!EXPECTED_TYPE_MISMATCH, LOCAL_OBJECT_NOT_ALLOWED!>object A<!> {}
     }
 
-    val expectedUnitReturnType1: () -> Unit = {
-        val x = 1
+    konst expectedUnitReturnType1: () -> Unit = {
+        konst x = 1
     }
 
-    val expectedUnitReturnType2: () -> Unit = {
+    konst expectedUnitReturnType2: () -> Unit = {
         fun meow() : Unit {}
         <!LOCAL_OBJECT_NOT_ALLOWED!>object A<!> {}
     }

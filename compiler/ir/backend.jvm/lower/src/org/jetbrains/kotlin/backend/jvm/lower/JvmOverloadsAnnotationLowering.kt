@@ -20,18 +20,18 @@ import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.name.JvmNames.JVM_OVERLOADS_FQ_NAME
 
-internal val jvmOverloadsAnnotationPhase = makeIrFilePhase(
+internal konst jvmOverloadsAnnotationPhase = makeIrFilePhase(
     ::JvmOverloadsAnnotationLowering,
     name = "JvmOverloadsAnnotation",
     description = "Handle JvmOverloads annotations"
 )
 
-// TODO: `IrValueParameter.defaultValue` property does not track default values in super-parameters. See KT-28637.
+// TODO: `IrValueParameter.defaultValue` property does not track default konstues in super-parameters. See KT-28637.
 
-private class JvmOverloadsAnnotationLowering(val context: JvmBackendContext) : ClassLoweringPass {
+private class JvmOverloadsAnnotationLowering(konst context: JvmBackendContext) : ClassLoweringPass {
 
     override fun lower(irClass: IrClass) {
-        val functions = irClass.declarations.filterIsInstance<IrFunction>().filter {
+        konst functions = irClass.declarations.filterIsInstance<IrFunction>().filter {
             it.hasAnnotation(JVM_OVERLOADS_FQ_NAME)
         }
 
@@ -41,17 +41,17 @@ private class JvmOverloadsAnnotationLowering(val context: JvmBackendContext) : C
     }
 
     private fun generateWrappers(target: IrFunction, irClass: IrClass) {
-        val numDefaultParameters = target.valueParameters.count { it.defaultValue != null }
+        konst numDefaultParameters = target.konstueParameters.count { it.defaultValue != null }
         for (i in numDefaultParameters - 1 downTo 0) {
-            val wrapper = generateWrapper(target, i)
+            konst wrapper = generateWrapper(target, i)
             irClass.addMember(wrapper)
         }
     }
 
     private fun generateWrapper(target: IrFunction, numDefaultParametersToExpect: Int): IrFunction {
-        val wrapperIrFunction = context.irFactory.generateWrapperHeader(target, numDefaultParametersToExpect)
+        konst wrapperIrFunction = context.irFactory.generateWrapperHeader(target, numDefaultParametersToExpect)
 
-        val call = when (target) {
+        konst call = when (target) {
             is IrConstructor ->
                 IrDelegatingConstructorCallImpl.fromSymbolOwner(
                     UNDEFINED_OFFSET, UNDEFINED_OFFSET, context.irBuiltIns.unitType, target.symbol
@@ -79,15 +79,15 @@ private class JvmOverloadsAnnotationLowering(val context: JvmBackendContext) : C
 
         var parametersCopied = 0
         var defaultParametersCopied = 0
-        for ((i, valueParameter) in target.valueParameters.withIndex()) {
-            if (valueParameter.defaultValue != null) {
+        for ((i, konstueParameter) in target.konstueParameters.withIndex()) {
+            if (konstueParameter.defaultValue != null) {
                 if (defaultParametersCopied < numDefaultParametersToExpect) {
                     defaultParametersCopied++
                     call.putValueArgument(
                         i,
                         IrGetValueImpl(
                             UNDEFINED_OFFSET, UNDEFINED_OFFSET,
-                            wrapperIrFunction.valueParameters[parametersCopied++].symbol
+                            wrapperIrFunction.konstueParameters[parametersCopied++].symbol
                         )
                     )
                 } else {
@@ -98,7 +98,7 @@ private class JvmOverloadsAnnotationLowering(val context: JvmBackendContext) : C
                     i,
                     IrGetValueImpl(
                         UNDEFINED_OFFSET, UNDEFINED_OFFSET,
-                        wrapperIrFunction.valueParameters[parametersCopied++].symbol
+                        wrapperIrFunction.konstueParameters[parametersCopied++].symbol
                     )
                 )
             }
@@ -117,7 +117,7 @@ private class JvmOverloadsAnnotationLowering(val context: JvmBackendContext) : C
     }
 
     private fun IrFactory.generateWrapperHeader(oldFunction: IrFunction, numDefaultParametersToExpect: Int): IrFunction {
-        val res = when (oldFunction) {
+        konst res = when (oldFunction) {
             is IrConstructor -> {
                 buildConstructor {
                     origin = JvmLoweredDeclarationOrigin.JVM_OVERLOADS_WRAPPER
@@ -146,7 +146,7 @@ private class JvmOverloadsAnnotationLowering(val context: JvmBackendContext) : C
         res.copyTypeParametersFrom(oldFunction)
         res.dispatchReceiverParameter = oldFunction.dispatchReceiverParameter?.copyTo(res)
         res.extensionReceiverParameter = oldFunction.extensionReceiverParameter?.copyTo(res)
-        res.valueParameters += res.generateNewValueParameters(oldFunction, numDefaultParametersToExpect)
+        res.konstueParameters += res.generateNewValueParameters(oldFunction, numDefaultParametersToExpect)
         return res
     }
 
@@ -156,8 +156,8 @@ private class JvmOverloadsAnnotationLowering(val context: JvmBackendContext) : C
     ): List<IrValueParameter> {
         var parametersCopied = 0
         var defaultParametersCopied = 0
-        val result = mutableListOf<IrValueParameter>()
-        for (oldValueParameter in oldFunction.valueParameters) {
+        konst result = mutableListOf<IrValueParameter>()
+        for (oldValueParameter in oldFunction.konstueParameters) {
             if (oldValueParameter.defaultValue != null &&
                 defaultParametersCopied < numDefaultParametersToExpect
             ) {

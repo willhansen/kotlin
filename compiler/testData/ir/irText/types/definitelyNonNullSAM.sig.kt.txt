@@ -5,7 +5,7 @@ abstract class AC<T : Any?> : I1<T>, I2<T> {
   // CHECK:
   //   Mangled name: AC{}sam
   //   Public signature: /AC.sam|8824598858531533052[0]
-  override val sam: FIn<T>
+  override konst sam: FIn<T>
     // CHECK JVM_IR:
     //   Mangled name: AC#<get-sam>(){}FIn<1:0>
     //   Public signature: /AC.sam.<get-sam>|7063493038287370262[0]
@@ -22,7 +22,7 @@ abstract class AC<T : Any?> : I1<T>, I2<T> {
   // CHECK:
   //   Mangled name: AC{}l
   //   Public signature: /AC.l|3307215303229595169[0]
-  abstract /* fake */ override val l: @ExtensionFunctionType Function1<T, Unit>
+  abstract /* fake */ override konst l: @ExtensionFunctionType Function1<T, Unit>
     // CHECK JVM_IR:
     //   Mangled name: AC#<get-l>(){}kotlin.Function1<1:0,kotlin.Unit>
     //   Public signature: /AC.l.<get-l>|-5292723073790207311[0]
@@ -40,7 +40,7 @@ abstract class AD<T : Any?> : AC<(T & Any)> {
   // CHECK:
   //   Mangled name: AD{}l
   //   Public signature: /AD.l|3307215303229595169[0]
-  override val l: @ExtensionFunctionType Function1<(T & Any), Unit>
+  override konst l: @ExtensionFunctionType Function1<(T & Any), Unit>
     // CHECK JVM_IR:
     //   Mangled name: AD#<get-l>(){}kotlin.Function1<1:0,kotlin.Unit>
     //   Public signature: /AD.l.<get-l>|-5292723073790207311[0]
@@ -57,7 +57,7 @@ abstract class AD<T : Any?> : AC<(T & Any)> {
   // CHECK:
   //   Mangled name: AD{}sam
   //   Public signature: /AD.sam|8824598858531533052[0]
-  /* fake */ override val sam: FIn<(T & Any)>
+  /* fake */ override konst sam: FIn<(T & Any)>
     // CHECK JVM_IR:
     //   Mangled name: AD#<get-sam>(){}FIn<1:0>
     //   Public signature: /AD.sam.<get-sam>|7063493038287370262[0]
@@ -107,7 +107,7 @@ interface I1<in T : Any?> {
   // CHECK:
   //   Mangled name: I1{}l
   //   Public signature: /I1.l|3307215303229595169[0]
-  abstract val l: @ExtensionFunctionType Function1<T, Unit>
+  abstract konst l: @ExtensionFunctionType Function1<T, Unit>
     // CHECK JVM_IR:
     //   Mangled name: I1#<get-l>(){}kotlin.Function1<1:0,kotlin.Unit>
     //   Public signature: /I1.l.<get-l>|-5292723073790207311[0]
@@ -126,7 +126,7 @@ interface I2<in T : Any?> {
   // CHECK:
   //   Mangled name: I2{}sam
   //   Public signature: /I2.sam|8824598858531533052[0]
-  abstract val sam: FIn<T>
+  abstract konst sam: FIn<T>
     // CHECK JVM_IR:
     //   Mangled name: I2#<get-sam>(){}FIn<1:0>
     //   Public signature: /I2.sam.<get-sam>|7063493038287370262[0]

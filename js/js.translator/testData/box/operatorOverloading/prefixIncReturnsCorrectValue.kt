@@ -13,6 +13,6 @@ class MyInt() {
 
 fun box(): String {
     var c = MyInt()
-    val d = --c;
+    konst d = --c;
     return if (c.b == 1) "OK" else "fail: ${c.b}"
 }

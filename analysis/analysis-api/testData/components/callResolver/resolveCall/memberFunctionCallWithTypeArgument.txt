@@ -11,7 +11,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /A.foo(<dispatch receiver>: A<T>, r: R): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = r
             receiverType = null

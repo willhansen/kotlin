@@ -15,7 +15,7 @@ fun AT<*>.bar() {
 }
 
 fun box(): String {
-    val a = AT<String>()
+    konst a = AT<String>()
     a.bar()
     return a.result
 }

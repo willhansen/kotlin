@@ -19,7 +19,7 @@ object O : J<Long> {
 class A : J<Long> by O
 
 fun box(): String {
-    val m = A::class.java.getDeclaredMethod("foo", List::class.java, Map::class.java)
+    konst m = A::class.java.getDeclaredMethod("foo", List::class.java, Map::class.java)
     assertEquals(
         "[interface java.util.List, interface java.util.Map]",
         m.parameterTypes.contentToString()

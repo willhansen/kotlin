@@ -9,8 +9,8 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 class AnalysisFlag<out T> internal constructor(
-    private val name: String,
-    val defaultValue: T
+    private konst name: String,
+    konst defaultValue: T
 ) {
     override fun equals(other: Any?): Boolean = other is AnalysisFlag<*> && other.name == name
 
@@ -19,7 +19,7 @@ class AnalysisFlag<out T> internal constructor(
     override fun toString(): String = name
 
     class Delegate<out T>(name: String, defaultValue: T) : ReadOnlyProperty<Any?, AnalysisFlag<T>> {
-        private val flag = AnalysisFlag(name, defaultValue)
+        private konst flag = AnalysisFlag(name, defaultValue)
 
         override fun getValue(thisRef: Any?, property: KProperty<*>): AnalysisFlag<T> = flag
     }

@@ -3,11 +3,11 @@ fun <T, R> T.letNoInline(fn: (T) -> R) =
 
 enum class X {
     B {
-        val value2 = "K"
-        override val value = "O".letNoInline { it + value2 }
+        konst konstue2 = "K"
+        override konst konstue = "O".letNoInline { it + konstue2 }
     };
 
-    abstract val value: String
+    abstract konst konstue: String
 }
 
-fun box() = X.B.value
+fun box() = X.B.konstue

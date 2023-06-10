@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.utils.SmartSet
 
 internal class FirDefaultDeclarationPresenter : FirDeclarationPresenter
 
-private val NO_NAME_PROVIDED = Name.special("<no name provided>")
+private konst NO_NAME_PROVIDED = Name.special("<no name provided>")
 
 // - see testEnumValuesValueOf.
 // it generates a static function that has
@@ -49,10 +49,10 @@ private fun FirDeclaration.isCollectable() = when (this) {
  * Collects FirDeclarations for further analysis.
  */
 class FirDeclarationInspector {
-    val declarationConflictingSymbols: HashMap<FirDeclaration, SmartSet<FirBasedSymbol<*>>> = hashMapOf()
-    private val presenter: FirDeclarationPresenter = FirDefaultDeclarationPresenter()
-    private val otherDeclarations = mutableMapOf<String, MutableList<FirDeclaration>>()
-    private val functionDeclarations = mutableMapOf<String, MutableList<FirSimpleFunction>>()
+    konst declarationConflictingSymbols: HashMap<FirDeclaration, SmartSet<FirBasedSymbol<*>>> = hashMapOf()
+    private konst presenter: FirDeclarationPresenter = FirDefaultDeclarationPresenter()
+    private konst otherDeclarations = mutableMapOf<String, MutableList<FirDeclaration>>()
+    private konst functionDeclarations = mutableMapOf<String, MutableList<FirSimpleFunction>>()
 
     fun collect(declaration: FirDeclaration) {
         when {
@@ -72,7 +72,7 @@ class FirDeclarationInspector {
     ) {
         collect(declaration)
         var declarationName: Name? = null
-        val declarationPresentation = presenter.represent(declaration) ?: return
+        konst declarationPresentation = presenter.represent(declaration) ?: return
 
         when (declaration) {
             is FirSimpleFunction -> {
@@ -86,7 +86,7 @@ class FirDeclarationInspector {
                     packageMemberScope.processClassifiersByNameWithSubstitution(declarationName) { symbol, _ ->
                         symbol.lazyResolveToPhase(FirResolvePhase.STATUS)
                         @OptIn(SymbolInternals::class)
-                        val classWithSameName = symbol.fir as? FirRegularClass
+                        konst classWithSameName = symbol.fir as? FirRegularClass
                         classWithSameName?.onConstructors { constructor ->
                             collectExternalConflict(
                                 declaration, declarationPresentation, containingFile,
@@ -188,7 +188,7 @@ class FirDeclarationInspector {
         }
 
     private fun collectLocalConflicts(declaration: FirDeclaration, conflicting: List<FirDeclaration>) {
-        val localConflicts = SmartSet.create<FirBasedSymbol<*>>()
+        konst localConflicts = SmartSet.create<FirBasedSymbol<*>>()
         for (otherDeclaration in conflicting) {
             if (otherDeclaration is FirField && otherDeclaration.source?.kind == KtFakeSourceElementKind.ClassDelegationField) {
                 // class delegation field will be renamed after by the IR backend in a case of a name clash
@@ -229,11 +229,11 @@ class FirDeclarationInspector {
     ) {
         conflictingSymbol.lazyResolveToPhase(FirResolvePhase.STATUS)
         @OptIn(SymbolInternals::class)
-        val conflicting = conflictingSymbol.fir
+        konst conflicting = conflictingSymbol.fir
         if (conflicting == declaration || declaration.moduleData != conflicting.moduleData) return
-        val actualConflictingPresentation = conflictingPresentation ?: presenter.represent(conflicting)
+        konst actualConflictingPresentation = conflictingPresentation ?: presenter.represent(conflicting)
         if (actualConflictingPresentation != declarationPresentation) return
-        val actualConflictingFile =
+        konst actualConflictingFile =
             conflictingFile ?: when (conflictingSymbol) {
                 is FirClassLikeSymbol<*> -> session.firProvider.getFirClassifierContainerFileIfAny(conflictingSymbol)
                 is FirCallableSymbol<*> -> session.firProvider.getFirCallableContainerFile(conflictingSymbol)
@@ -248,8 +248,8 @@ class FirDeclarationInspector {
             conflicting is FirMemberDeclaration &&
             !session.visibilityChecker.isVisible(conflicting, session, containingFile, emptyList(), dispatchReceiver = null)
         ) return
-        val declarationIsLowPriority = hasLowPriorityAnnotation(declaration.annotations)
-        val conflictingIsLowPriority = hasLowPriorityAnnotation(conflicting.annotations)
+        konst declarationIsLowPriority = hasLowPriorityAnnotation(declaration.annotations)
+        konst conflictingIsLowPriority = hasLowPriorityAnnotation(conflicting.annotations)
         if (declarationIsLowPriority != conflictingIsLowPriority) return
         declarationConflictingSymbols.getOrPut(declaration) { SmartSet.create() }.add(conflictingSymbol)
     }
@@ -286,10 +286,10 @@ class FirDeclarationInspector {
 fun checkConflictingElements(elements: List<FirElement>, context: CheckerContext, reporter: DiagnosticReporter) {
     if (elements.size <= 1) return
 
-    val multimap = ListMultimap<Name, FirBasedSymbol<*>>()
+    konst multimap = ListMultimap<Name, FirBasedSymbol<*>>()
     for (element in elements) {
-        val name: Name?
-        val symbol: FirBasedSymbol<*>?
+        konst name: Name?
+        konst symbol: FirBasedSymbol<*>?
         when (element) {
             is FirVariable -> {
                 symbol = element.symbol
@@ -312,7 +312,7 @@ fun checkConflictingElements(elements: List<FirElement>, context: CheckerContext
         }
     }
     for (key in multimap.keys) {
-        val conflictingElements = multimap[key]
+        konst conflictingElements = multimap[key]
         if (conflictingElements.size > 1) {
             for (conflictingElement in conflictingElements) {
                 reporter.reportOn(conflictingElement.source, FirErrors.REDECLARATION, conflictingElements, context)

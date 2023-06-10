@@ -3,7 +3,7 @@
 
 class Foo<K>
 
-fun <T> getFoo(value: T) = null as Foo<out Foo<T>>
+fun <T> getFoo(konstue: T) = null as Foo<out Foo<T>>
 fun <R> takeLambda(block: () -> R) {}
 
 fun main(x: Int) {

@@ -9,9 +9,9 @@ fun interface SAM {
 }
 
 fun box(): String {
-    val sam1 = SAM { x -> x + 1 }
-    val sam2 = SAM { 2 }
-    val sam3 = SAM { it + 1 }
+    konst sam1 = SAM { x -> x + 1 }
+    konst sam2 = SAM { 2 }
+    konst sam3 = SAM { it + 1 }
 
     with(Context()) {
         sam1.foo(0)

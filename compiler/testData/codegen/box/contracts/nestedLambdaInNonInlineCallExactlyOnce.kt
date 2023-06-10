@@ -13,7 +13,7 @@ fun block(lambda: () -> Unit) {
 }
 
 fun box(): String {
-    val list: List<Int>
+    konst list: List<Int>
 
     block {
         list = listOf(1, 2, 3)

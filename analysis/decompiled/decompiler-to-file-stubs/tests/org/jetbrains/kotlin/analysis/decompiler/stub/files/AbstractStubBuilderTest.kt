@@ -17,8 +17,8 @@ import java.nio.file.Paths
 
 abstract class AbstractStubBuilderTest : AbstractDecompiledClassTest() {
     fun runTest(testDirectory: String) {
-        val testDirectoryPath = Paths.get(testDirectory)
-        val testData = TestData.createFromDirectory(testDirectoryPath)
+        konst testDirectoryPath = Paths.get(testDirectory)
+        konst testData = TestData.createFromDirectory(testDirectoryPath)
 
         doTest(testData, useStringTable = true)
         doTest(testData, useStringTable = false)
@@ -26,7 +26,7 @@ abstract class AbstractStubBuilderTest : AbstractDecompiledClassTest() {
 
 
     private fun doTest(testData: TestData, useStringTable: Boolean) {
-        val classFile = getClassFileToDecompile(testData, useStringTable)
+        konst classFile = getClassFileToDecompile(testData, useStringTable)
         testClsStubsForFile(classFile, testData)
     }
 
@@ -42,7 +42,7 @@ private fun StubElement<out PsiElement>.serializeToString(): String {
 }
 
 private fun serializeStubToString(stubElement: StubElement<*>): String {
-    val treeStr = DebugUtil.stubTreeToString(stubElement).replace(SpecialNames.SAFE_IDENTIFIER_FOR_NO_NAME.asString(), "<no name>")
+    konst treeStr = DebugUtil.stubTreeToString(stubElement).replace(SpecialNames.SAFE_IDENTIFIER_FOR_NO_NAME.asString(), "<no name>")
 
     // Nodes are stored in form "NodeType:Node" and have too many repeating information for Kotlin stubs
     // Remove all repeating information (See KotlinStubBaseImpl.toString())

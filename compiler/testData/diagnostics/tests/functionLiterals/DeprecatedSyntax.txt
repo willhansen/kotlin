@@ -1,18 +1,18 @@
 package
 
-public val newSyntax: (kotlin.Int) -> kotlin.Unit
-public val newSyntax1: (???, ???) -> kotlin.Unit
-public val newSyntax2: (kotlin.Int, kotlin.Int) -> kotlin.Unit
-public val newSyntax3: (???, kotlin.Int) -> kotlin.Unit
-public val newSyntax4: (kotlin.Int, ???) -> kotlin.Unit
-public val none: () -> kotlin.Unit
-public val parameterWithFunctionType: (((kotlin.Int) -> kotlin.Int) -> [Error type: No type specified for unknown element]) -> kotlin.Unit
-public val parenthesizedParameters: (???) -> kotlin.Unit
-public val parenthesizedParameters2: (???) -> kotlin.Unit
-public val receiver: () -> ???
-public val receiverAndReturnType: () -> ???
-public val receiverAndReturnTypeWithParameter: () -> ???
-public val receiverWithFunctionType: () -> kotlin.Int.Companion
-public val receiverWithParameter: () -> ???
-public val returnType: (kotlin.Int) -> kotlin.Int
-public val returnTypeWithParameter: (kotlin.Int) -> kotlin.Int
+public konst newSyntax: (kotlin.Int) -> kotlin.Unit
+public konst newSyntax1: (???, ???) -> kotlin.Unit
+public konst newSyntax2: (kotlin.Int, kotlin.Int) -> kotlin.Unit
+public konst newSyntax3: (???, kotlin.Int) -> kotlin.Unit
+public konst newSyntax4: (kotlin.Int, ???) -> kotlin.Unit
+public konst none: () -> kotlin.Unit
+public konst parameterWithFunctionType: (((kotlin.Int) -> kotlin.Int) -> [Error type: No type specified for unknown element]) -> kotlin.Unit
+public konst parenthesizedParameters: (???) -> kotlin.Unit
+public konst parenthesizedParameters2: (???) -> kotlin.Unit
+public konst receiver: () -> ???
+public konst receiverAndReturnType: () -> ???
+public konst receiverAndReturnTypeWithParameter: () -> ???
+public konst receiverWithFunctionType: () -> kotlin.Int.Companion
+public konst receiverWithParameter: () -> ???
+public konst returnType: (kotlin.Int) -> kotlin.Int
+public konst returnTypeWithParameter: (kotlin.Int) -> kotlin.Int

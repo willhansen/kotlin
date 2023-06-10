@@ -48,32 +48,32 @@ import java.util.jar.Manifest
 import kotlin.LazyThreadSafetyMode.NONE
 
 class ClasspathRootsResolver(
-    private val psiManager: PsiManager,
-    private val messageCollector: MessageCollector?,
-    private val additionalModules: List<String>,
-    private val contentRootToVirtualFile: (JvmContentRootBase) -> VirtualFile?,
-    private val javaModuleFinder: CliJavaModuleFinder,
-    private val requireStdlibModule: Boolean,
-    private val outputDirectory: VirtualFile?,
-    private val javaFileManager: KotlinCliJavaFileManager,
-    private val jdkRelease: Int?
+    private konst psiManager: PsiManager,
+    private konst messageCollector: MessageCollector?,
+    private konst additionalModules: List<String>,
+    private konst contentRootToVirtualFile: (JvmContentRootBase) -> VirtualFile?,
+    private konst javaModuleFinder: CliJavaModuleFinder,
+    private konst requireStdlibModule: Boolean,
+    private konst outputDirectory: VirtualFile?,
+    private konst javaFileManager: KotlinCliJavaFileManager,
+    private konst jdkRelease: Int?
 ) {
-    val javaModuleGraph = JavaModuleGraph(javaModuleFinder)
+    konst javaModuleGraph = JavaModuleGraph(javaModuleFinder)
 
-    private val searchScope = GlobalSearchScope.allScope(psiManager.project)
+    private konst searchScope = GlobalSearchScope.allScope(psiManager.project)
 
-    data class RootsAndModules(val roots: List<JavaRoot>, val modules: List<JavaModule>)
+    data class RootsAndModules(konst roots: List<JavaRoot>, konst modules: List<JavaModule>)
 
-    private data class RootWithPrefix(val root: VirtualFile, val packagePrefix: String?)
+    private data class RootWithPrefix(konst root: VirtualFile, konst packagePrefix: String?)
 
     fun convertClasspathRoots(contentRoots: List<ContentRoot>): RootsAndModules {
-        val javaSourceRoots = mutableListOf<RootWithPrefix>()
-        val jvmClasspathRoots = mutableListOf<VirtualFile>()
-        val jvmModulePathRoots = mutableListOf<VirtualFile>()
+        konst javaSourceRoots = mutableListOf<RootWithPrefix>()
+        konst jvmClasspathRoots = mutableListOf<VirtualFile>()
+        konst jvmModulePathRoots = mutableListOf<VirtualFile>()
 
         for (contentRoot in contentRoots) {
             if (contentRoot !is JvmContentRootBase) continue
-            val root = contentRootToVirtualFile(contentRoot) ?: continue
+            konst root = contentRootToVirtualFile(contentRoot) ?: continue
             when (contentRoot) {
                 is JavaSourceRoot -> javaSourceRoots += RootWithPrefix(root, contentRoot.packagePrefix)
                 is JvmClasspathRootBase -> jvmClasspathRoots += root
@@ -90,20 +90,20 @@ class ClasspathRootsResolver(
         jvmClasspathRoots: List<VirtualFile>,
         jvmModulePathRoots: List<VirtualFile>
     ): RootsAndModules {
-        val result = mutableListOf<JavaRoot>()
-        val modules = mutableListOf<JavaModule>()
+        konst result = mutableListOf<JavaRoot>()
+        konst modules = mutableListOf<JavaModule>()
 
-        val hasOutputDirectoryInClasspath = outputDirectory in jvmClasspathRoots || outputDirectory in jvmModulePathRoots
+        konst hasOutputDirectoryInClasspath = outputDirectory in jvmClasspathRoots || outputDirectory in jvmModulePathRoots
 
         for ((root, packagePrefix) in javaSourceRoots) {
-            val modularRoot = modularSourceRoot(root, hasOutputDirectoryInClasspath)
+            konst modularRoot = modularSourceRoot(root, hasOutputDirectoryInClasspath)
             if (modularRoot != null) {
                 modules += modularRoot
             } else {
                 result += JavaRoot(root, JavaRoot.RootType.SOURCE, packagePrefix?.let { prefix ->
                     if (isValidJavaFqName(prefix)) FqName(prefix)
                     else null.also {
-                        report(STRONG_WARNING, "Invalid package prefix name is ignored: $prefix")
+                        report(STRONG_WARNING, "Inkonstid package prefix name is ignored: $prefix")
                     }
                 })
             }
@@ -113,14 +113,14 @@ class ClasspathRootsResolver(
             result += JavaRoot(root, JavaRoot.RootType.BINARY)
         }
 
-        val outputDirectoryAddedAsPartOfModule = modules.any { module -> module.moduleRoots.any { it.file == outputDirectory } }
+        konst outputDirectoryAddedAsPartOfModule = modules.any { module -> module.moduleRoots.any { it.file == outputDirectory } }
 
         for (root in jvmModulePathRoots) {
             // Do not add output directory as a separate module if we're compiling an explicit named module.
             // It's going to be included as a root of our module in modularSourceRoot.
             if (outputDirectoryAddedAsPartOfModule && root == outputDirectory) continue
 
-            val module = modularBinaryRoot(root)
+            konst module = modularBinaryRoot(root)
             if (module != null) {
                 modules += module
             }
@@ -136,23 +136,23 @@ class ClasspathRootsResolver(
     }
 
     private fun findSourceModuleInfo(root: VirtualFile): Pair<VirtualFile, PsiJavaModule>? {
-        val moduleInfoFile =
+        konst moduleInfoFile =
             when {
                 root.isDirectory -> root.findChild(PsiJavaModule.MODULE_INFO_FILE)
                 root.name == PsiJavaModule.MODULE_INFO_FILE -> root
                 else -> null
             } ?: return null
 
-        val psiFile = psiManager.findFile(moduleInfoFile) ?: return null
-        val psiJavaModule = psiFile.children.singleOrNull { it is PsiJavaModule } as? PsiJavaModule ?: return null
+        konst psiFile = psiManager.findFile(moduleInfoFile) ?: return null
+        konst psiJavaModule = psiFile.children.singleOrNull { it is PsiJavaModule } as? PsiJavaModule ?: return null
 
         return moduleInfoFile to psiJavaModule
     }
 
     private fun modularSourceRoot(root: VirtualFile, hasOutputDirectoryInClasspath: Boolean): JavaModule.Explicit? {
-        val (moduleInfoFile, psiJavaModule) = findSourceModuleInfo(root) ?: return null
-        val sourceRoot = JavaModule.Root(root, isBinary = false)
-        val roots =
+        konst (moduleInfoFile, psiJavaModule) = findSourceModuleInfo(root) ?: return null
+        konst sourceRoot = JavaModule.Root(root, isBinary = false)
+        konst roots =
             if (hasOutputDirectoryInClasspath)
                 listOf(sourceRoot, JavaModule.Root(outputDirectory!!, isBinary = true))
             else listOf(sourceRoot)
@@ -160,29 +160,29 @@ class ClasspathRootsResolver(
     }
 
     private fun modularBinaryRoot(root: VirtualFile): JavaModule? {
-        val isJar = root.fileSystem.protocol == StandardFileSystems.JAR_PROTOCOL
-        val manifest = lazy(NONE) { readManifestAttributes(root) }
+        konst isJar = root.fileSystem.protocol == StandardFileSystems.JAR_PROTOCOL
+        konst manifest = lazy(NONE) { readManifestAttributes(root) }
 
-        val moduleInfoFile =
+        konst moduleInfoFile =
             root.findChild(PsiJavaModule.MODULE_INFO_CLS_FILE)
                 ?: if (isJar) tryLoadVersionSpecificModuleInfo(root, manifest) else null
 
         if (moduleInfoFile != null) {
-            val moduleInfo = JavaModuleInfo.read(moduleInfoFile, javaFileManager, searchScope) ?: return null
+            konst moduleInfo = JavaModuleInfo.read(moduleInfoFile, javaFileManager, searchScope) ?: return null
             return JavaModule.Explicit(moduleInfo, listOf(JavaModule.Root(root, isBinary = true)), moduleInfoFile)
         }
 
         // Only .jar files can be automatic modules
         if (isJar) {
-            val moduleRoot = listOf(JavaModule.Root(root, isBinary = true))
+            konst moduleRoot = listOf(JavaModule.Root(root, isBinary = true))
 
-            val automaticModuleName = manifest.value?.getValue(AUTOMATIC_MODULE_NAME)
+            konst automaticModuleName = manifest.konstue?.getValue(AUTOMATIC_MODULE_NAME)
             if (automaticModuleName != null) {
                 return JavaModule.Automatic(automaticModuleName, moduleRoot)
             }
 
-            val originalFile = VfsUtilCore.virtualToIoFile(root)
-            val moduleName = LightJavaModule.moduleName(originalFile.nameWithoutExtension)
+            konst originalFile = VfsUtilCore.virtualToIoFile(root)
+            konst moduleName = LightJavaModule.moduleName(originalFile.nameWithoutExtension)
             if (moduleName.isEmpty()) {
                 report(ERROR, "Cannot infer automatic module name for the file", VfsUtilCore.getVirtualFileForJar(root) ?: root)
                 return null
@@ -194,24 +194,24 @@ class ClasspathRootsResolver(
     }
 
     private fun tryLoadVersionSpecificModuleInfo(root: VirtualFile, manifest: Lazy<Attributes?>): VirtualFile? {
-        val versionsDir = root.findChild("META-INF")?.findChild("versions") ?: return null
+        konst versionsDir = root.findChild("META-INF")?.findChild("versions") ?: return null
 
-        val isMultiReleaseJar = manifest.value?.getValue(IS_MULTI_RELEASE)?.equals("true", ignoreCase = true)
+        konst isMultiReleaseJar = manifest.konstue?.getValue(IS_MULTI_RELEASE)?.equals("true", ignoreCase = true)
         if (isMultiReleaseJar != true) return null
 
-        val versions = versionsDir.children.filter {
-            val version = it.name.toIntOrNull()
+        konst versions = versionsDir.children.filter {
+            konst version = it.name.toIntOrNull()
             version != null && version >= 9
         }.sortedBy { it.name.toInt() }
         for (version in versions) {
-            val file = version.findChild(PsiJavaModule.MODULE_INFO_CLS_FILE)
+            konst file = version.findChild(PsiJavaModule.MODULE_INFO_CLS_FILE)
             if (file != null) return file
         }
         return null
     }
 
     private fun readManifestAttributes(jarRoot: VirtualFile): Attributes? {
-        val manifestFile = jarRoot.findChild("META-INF")?.findChild("MANIFEST.MF")
+        konst manifestFile = jarRoot.findChild("META-INF")?.findChild("MANIFEST.MF")
         return try {
             manifestFile?.inputStream?.let(::Manifest)?.mainAttributes
         } catch (e: IOException) {
@@ -222,7 +222,7 @@ class ClasspathRootsResolver(
     private fun addModularRoots(modules: List<JavaModule>, result: MutableList<JavaRoot>) {
         // In current implementation, at most one source module is supported. This can be relaxed in the future if we support another
         // compilation mode, similar to java's --module-source-path
-        val sourceModules = modules.filterIsInstance<JavaModule.Explicit>().filter(JavaModule::isSourceModule)
+        konst sourceModules = modules.filterIsInstance<JavaModule.Explicit>().filter(JavaModule::isSourceModule)
         if (sourceModules.size > 1) {
             for (module in sourceModules) {
                 report(ERROR, "Too many source module declarations found", module.moduleInfoFile)
@@ -231,16 +231,16 @@ class ClasspathRootsResolver(
         }
 
         for (module in modules) {
-            val existing = javaModuleFinder.findModule(module.name)
+            konst existing = javaModuleFinder.findModule(module.name)
             if (existing == null) {
                 javaModuleFinder.addUserModule(module)
             } else if (module.moduleRoots != existing.moduleRoots) {
                 fun JavaModule.getRootFile() =
                     moduleRoots.firstOrNull()?.file?.let { VfsUtilCore.getVirtualFileForJar(it) ?: it }
 
-                val thisFile = module.getRootFile()
-                val existingFile = existing.getRootFile()
-                val atExistingPath = if (existingFile == null) "" else " at: ${existingFile.path}"
+                konst thisFile = module.getRootFile()
+                konst existingFile = existing.getRootFile()
+                konst atExistingPath = if (existingFile == null) "" else " at: ${existingFile.path}"
                 report(
                     STRONG_WARNING, "The root is ignored because a module with the same name '${module.name}' " +
                             "has been found earlier on the module path$atExistingPath", thisFile
@@ -250,20 +250,20 @@ class ClasspathRootsResolver(
 
         if (javaModuleFinder.allObservableModules.none()) return
 
-        val sourceModule = sourceModules.singleOrNull()
-        val addAllModulePathToRoots = "ALL-MODULE-PATH" in additionalModules
+        konst sourceModule = sourceModules.singleOrNull()
+        konst addAllModulePathToRoots = "ALL-MODULE-PATH" in additionalModules
         if (addAllModulePathToRoots && sourceModule != null) {
             report(ERROR, "-Xadd-modules=ALL-MODULE-PATH can only be used when compiling the unnamed module")
             return
         }
 
-        val rootModules = when {
+        konst rootModules = when {
             sourceModule != null -> listOf(sourceModule.name) + additionalModules
             addAllModulePathToRoots -> modules.map(JavaModule::name)
             else -> javaModuleFinder.computeDefaultRootModules() + additionalModules
         }
 
-        val allDependencies = javaModuleGraph.getAllDependencies(rootModules)
+        konst allDependencies = javaModuleGraph.getAllDependencies(rootModules)
         if (allDependencies.any { moduleName -> javaModuleFinder.findModule(moduleName) is JavaModule.Automatic }) {
             // According to java.lang.module javadoc, if at least one automatic module is added to the module graph,
             // all observable automatic modules should be added.
@@ -278,7 +278,7 @@ class ClasspathRootsResolver(
         report(LOGGING, "Loading modules: $allDependencies")
 
         for (moduleName in allDependencies) {
-            val module = javaModuleFinder.findModule(moduleName)
+            konst module = javaModuleFinder.findModule(moduleName)
             if (module == null) {
                 report(ERROR, "Module $moduleName cannot be found in the module graph")
             } else {
@@ -307,7 +307,7 @@ class ClasspathRootsResolver(
     }
 
     private companion object {
-        const val AUTOMATIC_MODULE_NAME = "Automatic-Module-Name"
-        const val IS_MULTI_RELEASE = "Multi-Release"
+        const konst AUTOMATIC_MODULE_NAME = "Automatic-Module-Name"
+        const konst IS_MULTI_RELEASE = "Multi-Release"
     }
 }

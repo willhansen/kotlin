@@ -26,12 +26,12 @@ import kotlin.jvm.optionals.getOrNull
 
 abstract class AbstractKotlinCompilerTest {
     companion object {
-        val defaultDirectiveContainers = listOf(
+        konst defaultDirectiveContainers = listOf(
             ConfigurationDirectives,
             LanguageSettingsDirectives
         )
 
-        val defaultPreprocessors: List<Constructor<SourceFilePreprocessor>> = listOf(
+        konst defaultPreprocessors: List<Constructor<SourceFilePreprocessor>> = listOf(
             ::MetaInfosCleanupPreprocessor
         )
 
@@ -40,7 +40,7 @@ abstract class AbstractKotlinCompilerTest {
             FlexibleTypeImpl.RUN_SLOW_ASSERTIONS = true
         }
 
-        val defaultConfiguration: TestConfigurationBuilder.() -> Unit = {
+        konst defaultConfiguration: TestConfigurationBuilder.() -> Unit = {
             assertions = JUnit5Assertions
             useAdditionalService<TemporaryDirectoryManager>(::TemporaryDirectoryManagerImpl)
             useSourcePreprocessor(*defaultPreprocessors.toTypedArray())
@@ -50,7 +50,7 @@ abstract class AbstractKotlinCompilerTest {
         }
     }
 
-    protected val configuration: TestConfigurationBuilder.() -> Unit = {
+    protected konst configuration: TestConfigurationBuilder.() -> Unit = {
         defaultConfiguration()
         useAdditionalService { createApplicationDisposableProvider() }
         useAdditionalService { createKotlinStandardLibrariesPathProvider() }

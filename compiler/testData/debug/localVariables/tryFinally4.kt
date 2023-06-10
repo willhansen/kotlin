@@ -6,20 +6,20 @@
 fun compute(): String {
     var result = ""
     try {
-        val a = "a"
+        konst a = "a"
         try {
-            val b = "b"
+            konst b = "b"
             for (i in 0 until 1) {
-                val e = "e"
+                konst e = "e"
                 result += b
                 return result
             }
         } finally {
-            val c = "c"
+            konst c = "c"
             result += c
         }
     } finally {
-        val d = "d"
+        konst d = "d"
         result += d
     }
     return result

@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 class My {
 
-    val x: Int
+    konst x: Int
         get() = 1
 
     init {

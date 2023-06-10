@@ -1,11 +1,11 @@
 fun foo() {
     "before"
-    class A(val x: Int) {
+    class A(konst x: Int) {
         init {
-            val a = x
+            konst a = x
         }
         fun foo() {
-            val b = x
+            konst b = x
         }
     }
     "after"

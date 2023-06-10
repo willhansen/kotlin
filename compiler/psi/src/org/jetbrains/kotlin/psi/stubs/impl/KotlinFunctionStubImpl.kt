@@ -30,15 +30,15 @@ import java.io.IOException
 
 class KotlinFunctionStubImpl(
     parent: StubElement<out PsiElement>?,
-    private val nameRef: StringRef?,
-    private val isTopLevel: Boolean,
-    private val fqName: FqName?,
-    private val isExtension: Boolean,
-    private val hasBlockBody: Boolean,
-    private val hasBody: Boolean,
-    private val hasTypeParameterListBeforeFunctionName: Boolean,
-    private val mayHaveContract: Boolean,
-    val contract: List<KtContractDescriptionElement<KotlinTypeBean, Nothing?>>?
+    private konst nameRef: StringRef?,
+    private konst isTopLevel: Boolean,
+    private konst fqName: FqName?,
+    private konst isExtension: Boolean,
+    private konst hasBlockBody: Boolean,
+    private konst hasBody: Boolean,
+    private konst hasTypeParameterListBeforeFunctionName: Boolean,
+    private konst mayHaveContract: Boolean,
+    konst contract: List<KtContractDescriptionElement<KotlinTypeBean, Nothing?>>?
 ) : KotlinStubBaseImpl<KtNamedFunction>(parent, KtStubElementTypes.FUNCTION), KotlinFunctionStub {
     init {
         if (isTopLevel && fqName == null) {
@@ -58,18 +58,18 @@ class KotlinFunctionStubImpl(
 
     @Throws(IOException::class)
     fun serializeContract(dataStream: StubOutputStream) {
-        val effects: List<KtContractDescriptionElement<KotlinTypeBean, Nothing?>>? = contract
+        konst effects: List<KtContractDescriptionElement<KotlinTypeBean, Nothing?>>? = contract
         dataStream.writeInt(effects?.size ?: 0)
-        val visitor = KotlinContractSerializationVisitor(dataStream)
+        konst visitor = KotlinContractSerializationVisitor(dataStream)
         effects?.forEach { it.accept(visitor, null) }
     }
 
     companion object {
         fun deserializeContract(dataStream: StubInputStream): List<KtContractDescriptionElement<KotlinTypeBean, Nothing?>> {
-            val effects = mutableListOf<KtContractDescriptionElement<KotlinTypeBean, Nothing?>>()
-            val count: Int = dataStream.readInt()
+            konst effects = mutableListOf<KtContractDescriptionElement<KotlinTypeBean, Nothing?>>()
+            konst count: Int = dataStream.readInt()
             for (i in 0 until count) {
-                val effectType: KotlinContractEffectType = KotlinContractEffectType.values()[dataStream.readInt()]
+                konst effectType: KotlinContractEffectType = KotlinContractEffectType.konstues()[dataStream.readInt()]
                 effects.add(effectType.deserialize(dataStream))
             }
             return effects

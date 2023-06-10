@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.languageVersionSettings
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.descriptors.impl.ModuleDescriptorImpl
 import org.jetbrains.kotlin.diagnostics.impl.BaseDiagnosticsCollector
 import org.jetbrains.kotlin.diagnostics.impl.PendingDiagnosticsCollectorWithSuppress
@@ -62,20 +62,20 @@ inline fun <F> compileModuleToAnalyzedFir(
     buildResolveAndCheckFir: (FirSession, List<F>) -> ModuleCompilerAnalyzedOutput,
 ): List<ModuleCompilerAnalyzedOutput> {
     // FIR
-    val extensionRegistrars = FirExtensionRegistrar.getInstances(moduleStructure.project)
+    konst extensionRegistrars = FirExtensionRegistrar.getInstances(moduleStructure.project)
 
-    val mainModuleName = moduleStructure.compilerConfiguration.get(CommonConfigurationKeys.MODULE_NAME)!!
-    val escapedMainModuleName = Name.special("<$mainModuleName>")
+    konst mainModuleName = moduleStructure.compilerConfiguration.get(CommonConfigurationKeys.MODULE_NAME)!!
+    konst escapedMainModuleName = Name.special("<$mainModuleName>")
 
-    val binaryModuleData = BinaryModuleData.initialize(escapedMainModuleName, JsPlatforms.defaultJsPlatform, JsPlatformAnalyzerServices)
-    val dependencyList = DependencyListForCliModule.build(binaryModuleData) {
+    konst binaryModuleData = BinaryModuleData.initialize(escapedMainModuleName, JsPlatforms.defaultJsPlatform, JsPlatformAnalyzerServices)
+    konst dependencyList = DependencyListForCliModule.build(binaryModuleData) {
         dependencies(libraries.map { Paths.get(it).toAbsolutePath() })
         friendDependencies(friendLibraries.map { Paths.get(it).toAbsolutePath() })
         // TODO: !!! dependencies module data?
     }
 
-    val resolvedLibraries = moduleStructure.allDependencies
-    val sessionsWithSources = prepareJsSessions(
+    konst resolvedLibraries = moduleStructure.allDependencies
+    konst sessionsWithSources = prepareJsSessions(
         files, moduleStructure.compilerConfiguration, escapedMainModuleName,
         resolvedLibraries, dependencyList, extensionRegistrars,
         isCommonSource = isCommonSource,
@@ -84,14 +84,14 @@ inline fun <F> compileModuleToAnalyzedFir(
         icData = incrementalDataProvider?.let(::KlibIcData),
     )
 
-    val outputs = sessionsWithSources.map {
+    konst outputs = sessionsWithSources.map {
         buildResolveAndCheckFir(it.session, it.files)
     }
 
     return outputs
 }
 
-open class AnalyzedFirOutput(val output: List<ModuleCompilerAnalyzedOutput>) {
+open class AnalyzedFirOutput(konst output: List<ModuleCompilerAnalyzedOutput>) {
     protected open fun checkSyntaxErrors(messageCollector: MessageCollector) = false
 
     fun reportCompilationErrors(
@@ -100,7 +100,7 @@ open class AnalyzedFirOutput(val output: List<ModuleCompilerAnalyzedOutput>) {
         messageCollector: MessageCollector,
     ): Boolean {
         if (checkSyntaxErrors(messageCollector) || diagnosticsReporter.hasErrors) {
-            val renderName = moduleStructure.compilerConfiguration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
+            konst renderName = moduleStructure.compilerConfiguration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
             FirDiagnosticsCompilerResultsReporter.reportToMessageCollector(diagnosticsReporter, messageCollector, renderName)
             return true
         }
@@ -111,7 +111,7 @@ open class AnalyzedFirOutput(val output: List<ModuleCompilerAnalyzedOutput>) {
 
 class AnalyzedFirWithPsiOutput(
     output: List<ModuleCompilerAnalyzedOutput>,
-    private val compiledFiles: List<KtFile>
+    private konst compiledFiles: List<KtFile>
 ) : AnalyzedFirOutput(output) {
     override fun checkSyntaxErrors(messageCollector: MessageCollector): Boolean {
         return compiledFiles.fold(false) { errorsFound, file ->
@@ -129,7 +129,7 @@ fun compileModuleToAnalyzedFirWithPsi(
     incrementalDataProvider: IncrementalDataProvider?,
     lookupTracker: LookupTracker?,
 ): AnalyzedFirWithPsiOutput {
-    val output = compileModuleToAnalyzedFir(
+    konst output = compileModuleToAnalyzedFir(
         moduleStructure,
         ktFiles,
         libraries,
@@ -155,7 +155,7 @@ fun compileModulesToAnalyzedFirWithLightTree(
     incrementalDataProvider: IncrementalDataProvider?,
     lookupTracker: LookupTracker?,
 ): AnalyzedFirOutput {
-    val output = compileModuleToAnalyzedFir(
+    konst output = compileModuleToAnalyzedFir(
         moduleStructure,
         ktSourceFiles,
         libraries,
@@ -176,15 +176,15 @@ fun transformFirToIr(
     firOutputs: List<ModuleCompilerAnalyzedOutput>,
     diagnosticsReporter: PendingDiagnosticsCollectorWithSuppress,
 ): Fir2IrActualizedResult {
-    val fir2IrExtensions = Fir2IrExtensions.Default
+    konst fir2IrExtensions = Fir2IrExtensions.Default
 
     var builtInsModule: KotlinBuiltIns? = null
-    val dependencies = mutableListOf<ModuleDescriptorImpl>()
+    konst dependencies = mutableListOf<ModuleDescriptorImpl>()
 
-    val librariesDescriptors = moduleStructure.allDependencies.map { resolvedLibrary ->
-        val storageManager = LockBasedStorageManager("ModulesStructure")
+    konst librariesDescriptors = moduleStructure.allDependencies.map { resolvedLibrary ->
+        konst storageManager = LockBasedStorageManager("ModulesStructure")
 
-        val moduleDescriptor = JsFactories.DefaultDeserializedDescriptorFactory.createDescriptorOptionalBuiltIns(
+        konst moduleDescriptor = JsFactories.DefaultDeserializedDescriptorFactory.createDescriptorOptionalBuiltIns(
             resolvedLibrary,
             moduleStructure.compilerConfiguration.languageVersionSettings,
             storageManager,
@@ -195,20 +195,20 @@ fun transformFirToIr(
         dependencies += moduleDescriptor
         moduleDescriptor.setDependencies(ArrayList(dependencies))
 
-        val isBuiltIns = resolvedLibrary.unresolvedDependencies.isEmpty()
+        konst isBuiltIns = resolvedLibrary.unresolvedDependencies.isEmpty()
         if (isBuiltIns) builtInsModule = moduleDescriptor.builtIns
 
         moduleDescriptor
     }
 
-    val firResult = FirResult(firOutputs)
+    konst firResult = FirResult(firOutputs)
     return firResult.convertToIrAndActualize(
         fir2IrExtensions,
         Fir2IrConfiguration(
             languageVersionSettings = moduleStructure.compilerConfiguration.languageVersionSettings,
             linkViaSignatures = false,
-            evaluatedConstTracker = moduleStructure.compilerConfiguration
-                .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EvaluatedConstTracker.create()),
+            ekonstuatedConstTracker = moduleStructure.compilerConfiguration
+                .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EkonstuatedConstTracker.create()),
         ),
         IrGenerationExtension.getInstances(moduleStructure.project),
         signatureComposer = DescriptorSignatureComposerStub(JsManglerDesc),
@@ -225,10 +225,10 @@ fun transformFirToIr(
 
 private class Fir2KlibSerializer(
     moduleStructure: ModulesStructure,
-    private val firOutputs: List<ModuleCompilerAnalyzedOutput>,
-    private val fir2IrActualizedResult: Fir2IrActualizedResult
+    private konst firOutputs: List<ModuleCompilerAnalyzedOutput>,
+    private konst fir2IrActualizedResult: Fir2IrActualizedResult
 ) {
-    private val firFilesAndSessionsBySourceFile = buildMap {
+    private konst firFilesAndSessionsBySourceFile = buildMap {
         for (output in firOutputs) {
             output.fir.forEach {
                 put(it.sourceFile!!, Triple(it, output.session, output.scopeSession))
@@ -236,18 +236,18 @@ private class Fir2KlibSerializer(
         }
     }
 
-    private val actualizedExpectDeclarations by lazy {
+    private konst actualizedExpectDeclarations by lazy {
         fir2IrActualizedResult.irActualizedResult.extractFirDeclarations()
     }
 
-    private val metadataVersion = moduleStructure.compilerConfiguration.metadataVersion()
+    private konst metadataVersion = moduleStructure.compilerConfiguration.metadataVersion()
 
-    private val languageVersionSettings = moduleStructure.compilerConfiguration.languageVersionSettings
+    private konst languageVersionSettings = moduleStructure.compilerConfiguration.languageVersionSettings
 
-    val sourceFiles: List<KtSourceFile> = firFilesAndSessionsBySourceFile.keys.toList()
+    konst sourceFiles: List<KtSourceFile> = firFilesAndSessionsBySourceFile.keys.toList()
 
     fun serializeSingleFirFile(file: KtSourceFile): ProtoBuf.PackageFragment {
-        val (firFile, session, scopeSession) = firFilesAndSessionsBySourceFile[file]
+        konst (firFile, session, scopeSession) = firFilesAndSessionsBySourceFile[file]
             ?: error("cannot find FIR file by source file ${file.name} (${file.path})")
 
         return serializeSingleFirFile(
@@ -274,8 +274,8 @@ fun serializeFirKlib(
     diagnosticsReporter: BaseDiagnosticsCollector,
     jsOutputName: String?
 ) {
-    val fir2KlibSerializer = Fir2KlibSerializer(moduleStructure, firOutputs, fir2IrActualizedResult)
-    val icData = moduleStructure.compilerConfiguration.incrementalDataProvider?.getSerializedData(fir2KlibSerializer.sourceFiles)
+    konst fir2KlibSerializer = Fir2KlibSerializer(moduleStructure, firOutputs, fir2IrActualizedResult)
+    konst icData = moduleStructure.compilerConfiguration.incrementalDataProvider?.getSerializedData(fir2KlibSerializer.sourceFiles)
 
     serializeModuleIntoKlib(
         moduleStructure.compilerConfiguration[CommonConfigurationKeys.MODULE_NAME]!!,
@@ -301,12 +301,12 @@ fun shouldGoToNextIcRound(
     firOutputs: List<ModuleCompilerAnalyzedOutput>,
     fir2IrActualizedResult: Fir2IrActualizedResult
 ): Boolean {
-    val nextRoundChecker = moduleStructure.compilerConfiguration.get(JSConfigurationKeys.INCREMENTAL_NEXT_ROUND_CHECKER) ?: return false
+    konst nextRoundChecker = moduleStructure.compilerConfiguration.get(JSConfigurationKeys.INCREMENTAL_NEXT_ROUND_CHECKER) ?: return false
 
-    val fir2KlibSerializer = Fir2KlibSerializer(moduleStructure, firOutputs, fir2IrActualizedResult)
+    konst fir2KlibSerializer = Fir2KlibSerializer(moduleStructure, firOutputs, fir2IrActualizedResult)
 
     for (ktFile in fir2KlibSerializer.sourceFiles) {
-        val packageFragment = fir2KlibSerializer.serializeSingleFirFile(ktFile)
+        konst packageFragment = fir2KlibSerializer.serializeSingleFirFile(ktFile)
 
         // to minimize a number of IC rounds, we should inspect all proto for changes first,
         // then go to a next round if needed, with all new dirty files

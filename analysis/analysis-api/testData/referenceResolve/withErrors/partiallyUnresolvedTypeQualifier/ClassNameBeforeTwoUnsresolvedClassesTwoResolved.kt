@@ -4,6 +4,6 @@ class Foo {
 }
 
 class C {
-    val prop: <caret>Foo.Bar.Baz.Bazzzz
+    konst prop: <caret>Foo.Bar.Baz.Bazzzz
 }
 

@@ -22,20 +22,20 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.prepareReceiverRegardingCap
 
 
 class FakeKotlinCallArgumentForCallableReference(
-    val index: Int,
-    val name: Name?
+    konst index: Int,
+    konst name: Name?
 ) : KotlinCallArgument {
-    override val isSpread: Boolean get() = false
-    override val argumentName: Name? get() = name
+    override konst isSpread: Boolean get() = false
+    override konst argumentName: Name? get() = name
 }
 
 class ReceiverExpressionKotlinCallArgument private constructor(
-    override val receiver: ReceiverValueWithSmartCastInfo,
-    override val isSafeCall: Boolean = false,
-    val isForImplicitInvoke: Boolean = false
+    override konst receiver: ReceiverValueWithSmartCastInfo,
+    override konst isSafeCall: Boolean = false,
+    konst isForImplicitInvoke: Boolean = false
 ) : ExpressionKotlinCallArgument {
-    override val isSpread: Boolean get() = false
-    override val argumentName: Name? get() = null
+    override konst isSpread: Boolean get() = false
+    override konst argumentName: Name? get() = null
     override fun toString() = "$receiver" + if (isSafeCall) "?" else ""
 
     companion object {

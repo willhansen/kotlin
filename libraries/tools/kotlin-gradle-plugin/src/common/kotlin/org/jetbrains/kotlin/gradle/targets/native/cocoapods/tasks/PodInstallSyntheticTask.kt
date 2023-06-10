@@ -18,17 +18,17 @@ import java.io.File
 abstract class PodInstallSyntheticTask : AbstractPodInstallTask() {
 
     @get:Input
-    abstract val family: Property<Family>
+    abstract konst family: Property<Family>
 
     @get:Input
-    abstract val podName: Property<String>
+    abstract konst podName: Property<String>
 
     @get:OutputDirectory
-    internal val syntheticXcodeProject: Provider<File> = workingDir.map { it.resolve("synthetic.xcodeproj") }
+    internal konst syntheticXcodeProject: Provider<File> = workingDir.map { it.resolve("synthetic.xcodeproj") }
 
     override fun doPodInstall() {
-        val projResource = "/cocoapods/project.pbxproj"
-        val projDestination = syntheticXcodeProject.get().resolve("project.pbxproj")
+        konst projResource = "/cocoapods/project.pbxproj"
+        konst projDestination = syntheticXcodeProject.get().resolve("project.pbxproj")
 
         syntheticXcodeProject.get().mkdirs()
         projDestination.outputStream().use { file ->

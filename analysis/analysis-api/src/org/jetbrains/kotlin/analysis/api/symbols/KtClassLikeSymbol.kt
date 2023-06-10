@@ -18,23 +18,23 @@ import org.jetbrains.kotlin.types.Variance
 
 public sealed class KtClassifierSymbol : KtSymbol, KtPossiblyNamedSymbol, KtDeclarationSymbol
 
-public val KtClassifierSymbol.nameOrAnonymous: Name
+public konst KtClassifierSymbol.nameOrAnonymous: Name
     get() = name ?: SpecialNames.ANONYMOUS
 
 public abstract class KtTypeParameterSymbol : KtClassifierSymbol(), KtNamedSymbol {
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtTypeParameterSymbol>
 
-    final override val typeParameters: List<KtTypeParameterSymbol>
+    final override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { emptyList() }
 
-    public abstract val upperBounds: List<KtType>
-    public abstract val variance: Variance
-    public abstract val isReified: Boolean
+    public abstract konst upperBounds: List<KtType>
+    public abstract konst variance: Variance
+    public abstract konst isReified: Boolean
 }
 
 public sealed class KtClassLikeSymbol : KtClassifierSymbol(), KtSymbolWithKind, KtPossibleMemberSymbol {
-    public abstract val classIdIfNonLocal: ClassId?
+    public abstract konst classIdIfNonLocal: ClassId?
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtClassLikeSymbol>
@@ -48,7 +48,7 @@ public abstract class KtTypeAliasSymbol : KtClassLikeSymbol(),
      * Returns type from right-hand site of type alias
      * If type alias has type parameters, then those type parameters will be present in result type
      */
-    public abstract val expandedType: KtType
+    public abstract konst expandedType: KtType
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtTypeAliasSymbol>
@@ -56,20 +56,20 @@ public abstract class KtTypeAliasSymbol : KtClassLikeSymbol(),
 
 public sealed class KtClassOrObjectSymbol : KtClassLikeSymbol(), KtSymbolWithMembers {
 
-    public abstract val classKind: KtClassKind
-    public abstract val superTypes: List<KtType>
+    public abstract konst classKind: KtClassKind
+    public abstract konst superTypes: List<KtType>
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtClassOrObjectSymbol>
 }
 
 public abstract class KtAnonymousObjectSymbol : KtClassOrObjectSymbol() {
-    final override val classKind: KtClassKind get() = withValidityAssertion { KtClassKind.ANONYMOUS_OBJECT }
-    final override val classIdIfNonLocal: ClassId? get() = withValidityAssertion { null }
-    final override val symbolKind: KtSymbolKind get() = withValidityAssertion { KtSymbolKind.LOCAL }
-    final override val name: Name? get() = withValidityAssertion { null }
+    final override konst classKind: KtClassKind get() = withValidityAssertion { KtClassKind.ANONYMOUS_OBJECT }
+    final override konst classIdIfNonLocal: ClassId? get() = withValidityAssertion { null }
+    final override konst symbolKind: KtSymbolKind get() = withValidityAssertion { KtSymbolKind.LOCAL }
+    final override konst name: Name? get() = withValidityAssertion { null }
 
-    final override val typeParameters: List<KtTypeParameterSymbol>
+    final override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { emptyList() }
 
     context(KtAnalysisSession)
@@ -82,14 +82,14 @@ public abstract class KtNamedClassOrObjectSymbol : KtClassOrObjectSymbol(),
     KtNamedSymbol,
     KtContextReceiversOwner {
 
-    public abstract val isInner: Boolean
-    public abstract val isData: Boolean
-    public abstract val isInline: Boolean
-    public abstract val isFun: Boolean
+    public abstract konst isInner: Boolean
+    public abstract konst isData: Boolean
+    public abstract konst isInline: Boolean
+    public abstract konst isFun: Boolean
 
-    public abstract val isExternal: Boolean
+    public abstract konst isExternal: Boolean
 
-    public abstract val companionObject: KtNamedClassOrObjectSymbol?
+    public abstract konst companionObject: KtNamedClassOrObjectSymbol?
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtNamedClassOrObjectSymbol>
@@ -104,6 +104,6 @@ public enum class KtClassKind {
     INTERFACE,
     ANONYMOUS_OBJECT;
 
-    public val isObject: Boolean get() = this == OBJECT || this == COMPANION_OBJECT || this == ANONYMOUS_OBJECT
-    public val isClass: Boolean get() = this == CLASS || this == ANNOTATION_CLASS || this == ENUM_CLASS
+    public konst isObject: Boolean get() = this == OBJECT || this == COMPANION_OBJECT || this == ANONYMOUS_OBJECT
+    public konst isClass: Boolean get() = this == CLASS || this == ANNOTATION_CLASS || this == ENUM_CLASS
 }

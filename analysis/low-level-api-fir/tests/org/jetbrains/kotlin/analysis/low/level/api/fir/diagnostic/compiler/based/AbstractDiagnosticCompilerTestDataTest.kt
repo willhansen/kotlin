@@ -27,14 +27,14 @@ abstract class AbstractDiagnosticCompilerTestDataTest : AbstractCompilerBasedTes
 }
 
 private class ContractViolationSuppressor(testServices: TestServices) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer> get() = listOf(Companion)
+    override konst directiveContainers: List<DirectivesContainer> get() = listOf(Companion)
 
     override fun suppressIfNeeded(failedAssertions: List<WrappedException>): List<WrappedException> {
         if (!isDisabled()) {
             return failedAssertions
         }
 
-        val filteredExceptions = failedAssertions.filterNot { it.cause is FirLazyResolveContractViolationException }
+        konst filteredExceptions = failedAssertions.filterNot { it.cause is FirLazyResolveContractViolationException }
         return if (filteredExceptions.isEmpty()) {
             listOf(
                 AssertionError(
@@ -49,12 +49,12 @@ private class ContractViolationSuppressor(testServices: TestServices) : AfterAna
     private fun isDisabled(): Boolean = IGNORE_CONTRACT_VIOLATIONS in testServices.moduleStructure.allDirectives
 
     companion object : SimpleDirectivesContainer() {
-        val IGNORE_CONTRACT_VIOLATIONS by directive("Temporary disables test with contract violation until the issue is fixed")
+        konst IGNORE_CONTRACT_VIOLATIONS by directive("Temporary disables test with contract violation until the issue is fixed")
     }
 }
 
 private class DiagnosticSuppressor(testServices: TestServices) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer> get() = listOf(Companion)
+    override konst directiveContainers: List<DirectivesContainer> get() = listOf(Companion)
 
     override fun suppressIfNeeded(failedAssertions: List<WrappedException>): List<WrappedException> {
         if (!isDisabled()) {
@@ -75,6 +75,6 @@ private class DiagnosticSuppressor(testServices: TestServices) : AfterAnalysisCh
     private fun isDisabled(): Boolean = IGNORE_DIAGNOSTIC_API in testServices.moduleStructure.allDirectives
 
     companion object : SimpleDirectivesContainer() {
-        val IGNORE_DIAGNOSTIC_API by directive("Temporary disables diagnostic api test until the issue is fixed")
+        konst IGNORE_DIAGNOSTIC_API by directive("Temporary disables diagnostic api test until the issue is fixed")
     }
 }

@@ -32,7 +32,7 @@ enum class StringOverridePolicy: IMetricContainerFactory<String> {
 }
 
 private fun applyIfLong(v: String, action: (Long) -> IMetricContainer<Long>) : IMetricContainer<Long>? {
-    val longVal = v.toLongOrNull()
+    konst longVal = v.toLongOrNull()
     return if (longVal == null) {
         null
     } else {
@@ -87,19 +87,19 @@ enum class BooleanAnonymizationPolicy : ValueAnonymizer<Boolean> {
 
 abstract class StringAnonymizationPolicy : ValueAnonymizer<String> {
 
-    abstract fun validationRegexp(): String
+    abstract fun konstidationRegexp(): String
 
-    class AllowedListAnonymizer(val allowedValues: Collection<String>) : StringAnonymizationPolicy() {
+    class AllowedListAnonymizer(konst allowedValues: Collection<String>) : StringAnonymizationPolicy() {
         companion object {
-            const val UNEXPECTED_VALUE = "UNEXPECTED-VALUE"
+            const konst UNEXPECTED_VALUE = "UNEXPECTED-VALUE"
         }
 
-        override fun validationRegexp(): String {
+        override fun konstidationRegexp(): String {
             return "^((${UNEXPECTED_VALUE}|${allowedValues.joinToString("|")})${ConcatMetricContainer.SEPARATOR}?)+$"
         }
 
         override fun anonymize(t: String): String {
-            return if (t.matches(Regex(validationRegexp()))) {
+            return if (t.matches(Regex(konstidationRegexp()))) {
                 t
             } else {
                 t.split(ConcatMetricContainer.SEPARATOR).joinToString(ConcatMetricContainer.SEPARATOR) {
@@ -112,8 +112,8 @@ abstract class StringAnonymizationPolicy : ValueAnonymizer<String> {
         }
     }
 
-    class RegexControlled(private val regex: String, private val anonymizeInIde: Boolean) : StringAnonymizationPolicy() {
-        override fun validationRegexp() = regex
+    class RegexControlled(private konst regex: String, private konst anonymizeInIde: Boolean) : StringAnonymizationPolicy() {
+        override fun konstidationRegexp() = regex
 
         override fun anonymize(t: String) = t
 
@@ -122,7 +122,7 @@ abstract class StringAnonymizationPolicy : ValueAnonymizer<String> {
     }
 
     class ComponentVersionAnonymizer() : StringAnonymizationPolicy() {
-        override fun validationRegexp() = "(\\d+).(\\d+).(\\d+)-?(dev|snapshot|m\\d?|rc\\d?|beta\\d?)?"
+        override fun konstidationRegexp() = "(\\d+).(\\d+).(\\d+)-?(dev|snapshot|m\\d?|rc\\d?|beta\\d?)?"
 
         override fun anonymize(t: String) = anonymizeComponentVersion(t)
     }
@@ -135,11 +135,11 @@ enum class NumberAnonymizationPolicy : ValueAnonymizer<Long> {
     RANDOM_10_PERCENT {
         override fun anonymize(t: Long): Long {
             if (abs(t) < 10) return t
-            val sign = if (t < 0)
+            konst sign = if (t < 0)
                 -1
             else
                 1
-            val absT = t * sign
+            konst absT = t * sign
             var div: Long = 1
             while (div * 10 < absT) {
                 div *= 10

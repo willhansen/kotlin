@@ -17,4 +17,4 @@ import kotlin.reflect.KClass
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER, AnnotationTarget.CONSTRUCTOR)
 @Retention(AnnotationRetention.BINARY)
 @OptionalExpectation
-public expect annotation class Throws(vararg val exceptionClasses: KClass<out Throwable>)
+public expect annotation class Throws(vararg konst exceptionClasses: KClass<out Throwable>)

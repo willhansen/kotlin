@@ -30,7 +30,7 @@ class Case1() {
     }
 
     fun case1() {
-        val regex = Regex("")
+        konst regex = Regex("")
         "" <!INFIX_MODIFIER_REQUIRED!>contains<!> regex
     }
 }
@@ -47,7 +47,7 @@ interface Case2 {
     }
 
     fun case2() {
-        val regex = Regex("")
+        konst regex = Regex("")
         "" <!INFIX_MODIFIER_REQUIRED!>contains<!> regex
     }
 }
@@ -68,7 +68,7 @@ fun case3() {
         return true
     }
 
-    val regex = Regex("")
+    konst regex = Regex("")
     "" <!INFIX_MODIFIER_REQUIRED!>contains<!> regex
 }
 
@@ -96,7 +96,7 @@ fun case4() {
             return true
         }
 
-        val regex = Regex("")
+        konst regex = Regex("")
         "" <!INFIX_MODIFIER_REQUIRED!>contains<!> regex
 
     }

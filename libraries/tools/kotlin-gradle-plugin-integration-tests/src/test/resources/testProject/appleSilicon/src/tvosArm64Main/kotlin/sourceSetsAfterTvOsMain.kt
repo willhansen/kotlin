@@ -1,1 +1,1 @@
-actual val sourceSetsAfterTvOsMain: String = "tvosArm64Main"
+actual konst sourceSetsAfterTvOsMain: String = "tvosArm64Main"

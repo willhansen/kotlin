@@ -12,7 +12,7 @@ class B() : A<Unit>() {
 }
 
 fun box(): String {
-    val a: A<Any> = B()
+    konst a: A<Any> = B()
     if (a.foo() != Unit) return "fail1"
     if (log != "B.foo()") return "fail2"
 

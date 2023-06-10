@@ -170,13 +170,13 @@ public final class ListOfUsers$$serializer : java/lang/Object, kotlinx/serializa
         LABEL (L1)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, ListOfUsers value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, ListOfUsers konstue) {
         LABEL (L0)
           ALOAD (1)
           LDC (encoder)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           ALOAD (2)
-          LDC (value)
+          LDC (konstue)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
         LABEL (L1)
         LINENUMBER (12)
@@ -198,7 +198,7 @@ public final class ListOfUsers$$serializer : java/lang/Object, kotlinx/serializa
         LABEL (L2)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue) {
         LABEL (L0)
         LINENUMBER (12)
           ALOAD (0)
@@ -492,13 +492,13 @@ public final class OptionalUser$$serializer : java/lang/Object, kotlinx/serializ
         LABEL (L1)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, OptionalUser value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, OptionalUser konstue) {
         LABEL (L0)
           ALOAD (1)
           LDC (encoder)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           ALOAD (2)
-          LDC (value)
+          LDC (konstue)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
         LABEL (L1)
         LINENUMBER (9)
@@ -520,7 +520,7 @@ public final class OptionalUser$$serializer : java/lang/Object, kotlinx/serializ
         LABEL (L2)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue) {
         LABEL (L0)
         LINENUMBER (9)
           ALOAD (0)
@@ -891,13 +891,13 @@ public final class User$$serializer : java/lang/Object, kotlinx/serialization/in
         LABEL (L1)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, User value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, User konstue) {
         LABEL (L0)
           ALOAD (1)
           LDC (encoder)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           ALOAD (2)
-          LDC (value)
+          LDC (konstue)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
         LABEL (L1)
         LINENUMBER (6)
@@ -919,7 +919,7 @@ public final class User$$serializer : java/lang/Object, kotlinx/serialization/in
         LABEL (L2)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue) {
         LABEL (L0)
         LINENUMBER (6)
           ALOAD (0)

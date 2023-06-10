@@ -10,7 +10,7 @@ interface SuspendRunnable {
 }
 
 suspend inline fun crossinlineMe(crossinline c1: suspend () -> Unit, crossinline c2: suspend () -> Unit) {
-    val o = object : SuspendRunnable {
+    konst o = object : SuspendRunnable {
         override suspend fun run1() {
             c1()
             c1()

@@ -9,7 +9,7 @@ interface A {
 }
 
 fun box(): String {
-    val type = A::class.members.single { it.name == "f" }.returnType.javaType
+    konst type = A::class.members.single { it.name == "f" }.returnType.javaType
     assertEquals("java.util.List<? super java.lang.String>", type.toString())
 
     return "OK"

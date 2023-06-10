@@ -46,23 +46,23 @@ import org.jetbrains.kotlin.utils.KotlinJavascriptMetadataUtils
 import java.io.File
 
 class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(JsEnvironmentConfigurationDirectives)
 
     companion object {
-        const val TEST_DATA_DIR_PATH = "js/js.translator/testData"
-        const val OLD_MODULE_SUFFIX = "_old"
+        const konst TEST_DATA_DIR_PATH = "js/js.translator/testData"
+        const konst OLD_MODULE_SUFFIX = "_old"
 
         // Keep names short to keep path lengths under 255 for Windows
-        private val outputDirByMode = mapOf(
+        private konst outputDirByMode = mapOf(
             TranslationMode.FULL_DEV to "out",
             TranslationMode.FULL_PROD_MINIMIZED_NAMES to "outMin",
             TranslationMode.PER_MODULE_DEV to "outPm",
             TranslationMode.PER_MODULE_PROD_MINIMIZED_NAMES to "outPmMin"
         )
 
-        private const val OUTPUT_KLIB_DIR_NAME = "outputKlibDir"
-        private const val MINIFICATION_OUTPUT_DIR_NAME = "minOutputDir"
+        private const konst OUTPUT_KLIB_DIR_NAME = "outputKlibDir"
+        private const konst MINIFICATION_OUTPUT_DIR_NAME = "minOutputDir"
 
         object ExceptionThrowingReporter : JsConfig.Reporter() {
             override fun error(message: String) {
@@ -70,18 +70,18 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
             }
         }
 
-        private val METADATA_CACHE by lazy {
+        private konst METADATA_CACHE by lazy {
             (JsConfig.JS_STDLIB + JsConfig.JS_KOTLIN_TEST).flatMap { path ->
                 KotlinJavascriptMetadataUtils.loadMetadata(path).map { metadata ->
-                    val parts = KotlinJavascriptSerializationUtil.readModuleAsProto(metadata.body, metadata.version)
+                    konst parts = KotlinJavascriptSerializationUtil.readModuleAsProto(metadata.body, metadata.version)
                     JsModuleDescriptor(metadata.moduleName, parts.kind, parts.importedModules, parts)
                 }
             }
         }
 
         fun getJsArtifactSimpleName(testServices: TestServices, moduleName: String): String {
-            val testName = testServices.testInfo.methodName.removePrefix("test").decapitalizeAsciiOnly()
-            val outputFileSuffix = if (moduleName == ModuleStructureExtractor.DEFAULT_MODULE_NAME) "" else "-$moduleName"
+            konst testName = testServices.testInfo.methodName.removePrefix("test").decapitalizeAsciiOnly()
+            konst outputFileSuffix = if (moduleName == ModuleStructureExtractor.DEFAULT_MODULE_NAME) "" else "-$moduleName"
             return testName + outputFileSuffix
         }
 
@@ -115,8 +115,8 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
 
 
         private fun getPrefixPostfixFile(module: TestModule, prefix: Boolean): File? {
-            val suffix = if (prefix) ".prefix" else ".postfix"
-            val originalFile = module.files.first().originalFile
+            konst suffix = if (prefix) ".prefix" else ".postfix"
+            konst originalFile = module.files.first().originalFile
             return originalFile.parentFile.resolve(originalFile.name + suffix).takeIf { it.exists() }
         }
 
@@ -133,8 +133,8 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
         }
 
         fun getMainModule(testServices: TestServices): TestModule {
-            val modules = testServices.moduleStructure.modules
-            val inferMainModule = JsEnvironmentConfigurationDirectives.INFER_MAIN_MODULE in testServices.moduleStructure.allDirectives
+            konst modules = testServices.moduleStructure.modules
+            konst inferMainModule = JsEnvironmentConfigurationDirectives.INFER_MAIN_MODULE in testServices.moduleStructure.allDirectives
             return when {
                 inferMainModule -> modules.last()
                 else -> modules.singleOrNull { it.name == ModuleStructureExtractor.DEFAULT_MODULE_NAME } ?: modules.last()
@@ -150,18 +150,18 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
         }
 
         fun getRuntimePathsForModule(module: TestModule, testServices: TestServices): List<String> {
-            val result = mutableListOf<String>()
-            val needsFullIrRuntime = JsEnvironmentConfigurationDirectives.KJS_WITH_FULL_RUNTIME in module.directives ||
+            konst result = mutableListOf<String>()
+            konst needsFullIrRuntime = JsEnvironmentConfigurationDirectives.KJS_WITH_FULL_RUNTIME in module.directives ||
                     ConfigurationDirectives.WITH_STDLIB in module.directives
 
-            val pathProvider = testServices.standardLibrariesPathProvider
+            konst pathProvider = testServices.standardLibrariesPathProvider
             if (needsFullIrRuntime) {
                 result += pathProvider.fullJsStdlib().absolutePath
                 result += pathProvider.kotlinTestJsKLib().absolutePath
             } else {
                 result += pathProvider.defaultJsStdlib().absolutePath
             }
-            val runtimeClasspaths = testServices.runtimeClasspathProviders.flatMap { it.runtimeClassPaths(module) }
+            konst runtimeClasspaths = testServices.runtimeClasspathProviders.flatMap { it.runtimeClassPaths(module) }
             runtimeClasspaths.mapTo(result) { it.absolutePath }
             return result
         }
@@ -174,7 +174,7 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
         }
 
         fun getAllRecursiveDependenciesFor(module: TestModule, testServices: TestServices): Set<ModuleDescriptorImpl> {
-            val visited = mutableSetOf<ModuleDescriptorImpl>()
+            konst visited = mutableSetOf<ModuleDescriptorImpl>()
             fun getRecursive(descriptor: ModuleDescriptor) {
                 descriptor.allDependencyModules.forEach {
                     if (it is ModuleDescriptorImpl && it !in visited) {
@@ -189,16 +189,16 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
         }
 
         fun getAllRecursiveLibrariesFor(module: TestModule, testServices: TestServices): Map<KotlinLibrary, ModuleDescriptorImpl> {
-            val dependencies = getAllRecursiveDependenciesFor(module, testServices)
+            konst dependencies = getAllRecursiveDependenciesFor(module, testServices)
             return dependencies.associateBy { testServices.jsLibraryProvider.getCompiledLibraryByDescriptor(it) }
         }
 
         fun getAllDependenciesMappingFor(module: TestModule, testServices: TestServices): Map<KotlinLibrary, List<KotlinLibrary>> {
-            val allRecursiveLibraries: Map<KotlinLibrary, ModuleDescriptor> = getAllRecursiveLibrariesFor(module, testServices)
-            val m2l = allRecursiveLibraries.map { it.value to it.key }.toMap()
+            konst allRecursiveLibraries: Map<KotlinLibrary, ModuleDescriptor> = getAllRecursiveLibrariesFor(module, testServices)
+            konst m2l = allRecursiveLibraries.map { it.konstue to it.key }.toMap()
 
             return allRecursiveLibraries.keys.associateWith { m ->
-                val descriptor = allRecursiveLibraries[m] ?: error("No descriptor found for library ${m.libraryName}")
+                konst descriptor = allRecursiveLibraries[m] ?: error("No descriptor found for library ${m.libraryName}")
                 descriptor.allDependencyModules.filter { it != descriptor }.map { m2l.getValue(it) }
             }
         }
@@ -228,9 +228,9 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
     }
 
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
-        val registeredDirectives = module.directives
-        val moduleKinds = registeredDirectives[MODULE_KIND]
-        val moduleKind = when (moduleKinds.size) {
+        konst registeredDirectives = module.directives
+        konst moduleKinds = registeredDirectives[MODULE_KIND]
+        konst moduleKind = when (moduleKinds.size) {
             0 -> testServices.moduleStructure.allDirectives[MODULE_KIND].singleOrNull()
                 ?: if (JsEnvironmentConfigurationDirectives.ES_MODULES in registeredDirectives) ModuleKind.ES else ModuleKind.PLAIN
             1 -> moduleKinds.single()
@@ -238,14 +238,14 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
         }
         configuration.put(JSConfigurationKeys.MODULE_KIND, moduleKind)
 
-        val noInline = registeredDirectives.contains(NO_INLINE)
+        konst noInline = registeredDirectives.contains(NO_INLINE)
         configuration.put(CommonConfigurationKeys.DISABLE_INLINE, noInline)
 
-        val dependencies = module.regularDependencies.map { getJsModuleArtifactPath(testServices, it.moduleName) + ".meta.js" }
-        val allDependencies = module.allTransitiveDependencies().map { getJsModuleArtifactPath(testServices, it.moduleName) + ".meta.js" }
-        val friends = module.friendDependencies.map { getJsModuleArtifactPath(testServices, it.moduleName) + ".meta.js" }
+        konst dependencies = module.regularDependencies.map { getJsModuleArtifactPath(testServices, it.moduleName) + ".meta.js" }
+        konst allDependencies = module.allTransitiveDependencies().map { getJsModuleArtifactPath(testServices, it.moduleName) + ".meta.js" }
+        konst friends = module.friendDependencies.map { getJsModuleArtifactPath(testServices, it.moduleName) + ".meta.js" }
 
-        val libraries = when (module.targetBackend) {
+        konst libraries = when (module.targetBackend) {
             null -> JsConfig.JS_STDLIB + JsConfig.JS_KOTLIN_TEST
             TargetBackend.JS_IR, TargetBackend.JS_IR_ES6 -> dependencies + friends
             TargetBackend.JS -> JsConfig.JS_STDLIB + JsConfig.JS_KOTLIN_TEST + dependencies + friends
@@ -258,7 +258,7 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
         configuration.put(CommonConfigurationKeys.MODULE_NAME, module.name.removeSuffix(OLD_MODULE_SUFFIX))
         configuration.put(JSConfigurationKeys.TARGET, EcmaVersion.v5)
 
-        val errorIgnorancePolicy = registeredDirectives[ERROR_POLICY].singleOrNull() ?: ErrorTolerancePolicy.DEFAULT
+        konst errorIgnorancePolicy = registeredDirectives[ERROR_POLICY].singleOrNull() ?: ErrorTolerancePolicy.DEFAULT
         configuration.put(JSConfigurationKeys.ERROR_TOLERANCE_POLICY, errorIgnorancePolicy)
         if (errorIgnorancePolicy.allowErrors) {
             configuration.put(JSConfigurationKeys.DEVELOPER_MODE, true)
@@ -267,14 +267,14 @@ class JsEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigu
             configuration.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
         }
 
-        val multiModule = testServices.moduleStructure.modules.size > 1
+        konst multiModule = testServices.moduleStructure.modules.size > 1
         configuration.put(JSConfigurationKeys.META_INFO, multiModule)
 
-        val sourceDirs = module.files.map { it.originalFile.parent }.distinct()
+        konst sourceDirs = module.files.map { it.originalFile.parent }.distinct()
         configuration.put(JSConfigurationKeys.SOURCE_MAP_SOURCE_ROOTS, sourceDirs)
         configuration.put(JSConfigurationKeys.SOURCE_MAP, true)
 
-        val sourceMapSourceEmbedding = registeredDirectives[SOURCE_MAP_EMBED_SOURCES].singleOrNull() ?: SourceMapSourceEmbedding.NEVER
+        konst sourceMapSourceEmbedding = registeredDirectives[SOURCE_MAP_EMBED_SOURCES].singleOrNull() ?: SourceMapSourceEmbedding.NEVER
         configuration.put(JSConfigurationKeys.SOURCE_MAP_EMBED_SOURCES, sourceMapSourceEmbedding)
 
         configuration.put(JSConfigurationKeys.TYPED_ARRAYS_ENABLED, TYPED_ARRAYS in registeredDirectives)

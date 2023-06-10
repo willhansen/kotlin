@@ -25,17 +25,17 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-internal class PropertyDelegationLowering(val generationState: NativeGenerationState) : FileLoweringPass {
-    private val context = generationState.context
+internal class PropertyDelegationLowering(konst generationState: NativeGenerationState) : FileLoweringPass {
+    private konst context = generationState.context
     private var tempIndex = 0
 
     private fun getKPropertyImpl(receiverTypes: List<IrType>,
                                  isLocal: Boolean,
                                  isMutable: Boolean): IrClass {
 
-        val symbols = context.ir.symbols
+        konst symbols = context.ir.symbols
 
-        val classSymbol =
+        konst classSymbol =
                 if (isLocal) {
                     assert(receiverTypes.isEmpty()) { "Local delegated property cannot have explicit receiver" }
                     when {
@@ -66,16 +66,16 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
     override fun lower(irFile: IrFile) {
         // Somehow there is no reasonable common ancestor for IrProperty and IrLocalDelegatedProperty,
         // so index by IrDeclaration.
-        val kProperties = mutableMapOf<IrDeclaration, IrField>()
-        val generatedClasses = mutableListOf<IrClass>()
+        konst kProperties = mutableMapOf<IrDeclaration, IrField>()
+        konst generatedClasses = mutableListOf<IrClass>()
 
-        fun kPropertyField(value: IrExpressionBody, id:Int) =
+        fun kPropertyField(konstue: IrExpressionBody, id:Int) =
                 IrFieldImpl(
                         SYNTHETIC_OFFSET, SYNTHETIC_OFFSET,
                         DECLARATION_ORIGIN_KPROPERTIES_FOR_DELEGATION,
                         IrFieldSymbolImpl(),
                         "KPROPERTY${id}".synthesizedName,
-                        value.expression.type,
+                        konstue.expression.type,
                         DescriptorVisibilities.PRIVATE,
                         isFinal = true,
                         isExternal = false,
@@ -84,7 +84,7 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
                     parent = irFile
                     annotations += buildSimpleAnnotation(context.irBuiltIns, startOffset, endOffset, context.ir.symbols.eagerInitialization.owner)
                     annotations += buildSimpleAnnotation(context.irBuiltIns, startOffset, endOffset, context.ir.symbols.sharedImmutable.owner)
-                    initializer = value
+                    initializer = konstue
                 }
 
         irFile.transformChildrenVoid(object : IrElementTransformerVoidWithContext() {
@@ -92,18 +92,18 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
             override fun visitPropertyReference(expression: IrPropertyReference): IrExpression {
                 expression.transformChildrenVoid(this)
 
-                val startOffset = expression.startOffset
-                val endOffset = expression.endOffset
-                val irBuilder = context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol, startOffset, endOffset)
+                konst startOffset = expression.startOffset
+                konst endOffset = expression.endOffset
+                konst irBuilder = context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol, startOffset, endOffset)
                 irBuilder.run {
-                    val receiversCount = listOf(expression.dispatchReceiver, expression.extensionReceiver).count { it != null }
+                    konst receiversCount = listOf(expression.dispatchReceiver, expression.extensionReceiver).count { it != null }
                     return when (receiversCount) {
                         1 -> createKProperty(expression, this, irFile, generatedClasses) // Has receiver.
 
                         2 -> error("Callable reference to properties with two receivers is not allowed: ${expression.symbol.owner.name}")
 
                         else -> { // Cache KProperties with no arguments.
-                            val field = kProperties.getOrPut(expression.symbol.owner) {
+                            konst field = kProperties.getOrPut(expression.symbol.owner) {
                                 kPropertyField(
                                     irExprBody(createKProperty(expression, this, irFile, generatedClasses) as IrConstantValue),
                                     kProperties.size
@@ -119,16 +119,16 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
             override fun visitLocalDelegatedPropertyReference(expression: IrLocalDelegatedPropertyReference): IrExpression {
                 expression.transformChildrenVoid(this)
 
-                val startOffset = expression.startOffset
-                val endOffset = expression.endOffset
-                val irBuilder = context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol, startOffset, endOffset)
+                konst startOffset = expression.startOffset
+                konst endOffset = expression.endOffset
+                konst irBuilder = context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol, startOffset, endOffset)
                 irBuilder.run {
-                    val receiversCount = listOf(expression.dispatchReceiver, expression.extensionReceiver).count { it != null }
+                    konst receiversCount = listOf(expression.dispatchReceiver, expression.extensionReceiver).count { it != null }
                     if (receiversCount == 2)
                         throw AssertionError("Callable reference to properties with two receivers is not allowed: ${expression}")
                     else { // Cache KProperties with no arguments.
                         // TODO: what about `receiversCount == 1` case?
-                        val field = kProperties.getOrPut(expression.symbol.owner) {
+                        konst field = kProperties.getOrPut(expression.symbol.owner) {
                             kPropertyField(irExprBody(createLocalKProperty(
                                     expression.symbol.owner.name.asString(),
                                     expression.getter.owner.returnType,
@@ -142,7 +142,7 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
                 }
             }
         })
-        irFile.declarations.addAll(0, kProperties.values)
+        irFile.declarations.addAll(0, kProperties.konstues)
         irFile.declarations.addAll(generatedClasses)
     }
 
@@ -152,25 +152,25 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
             irFile: IrFile,
             generatedClasses: MutableList<IrClass>
     ): IrExpression {
-        val startOffset = expression.startOffset
-        val endOffset = expression.endOffset
+        konst startOffset = expression.startOffset
+        konst endOffset = expression.endOffset
         return irBuilder.irBlock(expression) {
-            val receiverTypes = mutableListOf<IrType>()
-            val dispatchReceiver = expression.dispatchReceiver.let {
+            konst receiverTypes = mutableListOf<IrType>()
+            konst dispatchReceiver = expression.dispatchReceiver.let {
                 if (it == null)
                     null
                 else
-                    irTemporary(value = it, nameHint = "\$dispatchReceiver${tempIndex++}")
+                    irTemporary(konstue = it, nameHint = "\$dispatchReceiver${tempIndex++}")
             }
-            val extensionReceiver = expression.extensionReceiver.let {
+            konst extensionReceiver = expression.extensionReceiver.let {
                 if (it == null)
                     null
                 else
-                    irTemporary(value = it, nameHint = "\$extensionReceiver${tempIndex++}")
+                    irTemporary(konstue = it, nameHint = "\$extensionReceiver${tempIndex++}")
             }
-            val returnType = expression.getter?.owner?.returnType ?: expression.field!!.owner.type
+            konst returnType = expression.getter?.owner?.returnType ?: expression.field!!.owner.type
 
-            val getterCallableReference = expression.getter!!.owner.let { getter ->
+            konst getterCallableReference = expression.getter!!.owner.let { getter ->
                 getter.extensionReceiverParameter.let {
                     if (it != null && expression.extensionReceiver == null)
                         receiverTypes.add(it.type)
@@ -179,7 +179,7 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
                     if (it != null && expression.dispatchReceiver == null)
                         receiverTypes.add(it.type)
                 }
-                val getterKFunctionType = this@PropertyDelegationLowering.context.ir.symbols.getKFunctionType(
+                konst getterKFunctionType = this@PropertyDelegationLowering.context.ir.symbols.getKFunctionType(
                         returnType,
                         receiverTypes
                 )
@@ -189,7 +189,7 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
                         type = getterKFunctionType,
                         symbol = expression.getter!!,
                         typeArgumentsCount = getter.typeParameters.size,
-                        valueArgumentsCount = getter.valueParameters.size,
+                        konstueArgumentsCount = getter.konstueParameters.size,
                         reflectionTarget = expression.getter!!
                 ).apply {
                     this.dispatchReceiver = dispatchReceiver?.let { irGet(it) }
@@ -199,10 +199,10 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
                 }
             }
 
-            val setterCallableReference = expression.setter?.owner?.let { setter ->
+            konst setterCallableReference = expression.setter?.owner?.let { setter ->
                 if (!isKMutablePropertyType(expression.type)) null
                 else {
-                    val setterKFunctionType = this@PropertyDelegationLowering.context.ir.symbols.getKFunctionType(
+                    konst setterKFunctionType = this@PropertyDelegationLowering.context.ir.symbols.getKFunctionType(
                             context.irBuiltIns.unitType,
                             receiverTypes + returnType
                     )
@@ -212,7 +212,7 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
                             type = setterKFunctionType,
                             symbol = expression.setter!!,
                             typeArgumentsCount = setter.typeParameters.size,
-                            valueArgumentsCount = setter.valueParameters.size,
+                            konstueArgumentsCount = setter.konstueParameters.size,
                             reflectionTarget = expression.setter!!
                     ).apply {
                         this.dispatchReceiver = dispatchReceiver?.let { irGet(it) }
@@ -223,23 +223,23 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
                 }
             }
 
-            val clazz = getKPropertyImpl(
+            konst clazz = getKPropertyImpl(
                     receiverTypes = receiverTypes,
                     isLocal = false,
                     isMutable = setterCallableReference != null)
 
-            val name = irString(expression.symbol.owner.name.asString())
+            konst name = irString(expression.symbol.owner.name.asString())
 
-            val initializer = if (dispatchReceiver == null && extensionReceiver == null) {
+            konst initializer = if (dispatchReceiver == null && extensionReceiver == null) {
                 fun IrFunctionReference.convert() : IrConstantValue {
-                    val builder = FunctionReferenceLowering.FunctionReferenceBuilder(
+                    konst builder = FunctionReferenceLowering.FunctionReferenceBuilder(
                             irFile,
                             irFile,
                             this,
                             generationState,
                             irBuilder,
                     )
-                    val (newClass, newExpression) = builder.build()
+                    konst (newClass, newExpression) = builder.build()
                     generatedClasses.add(newClass)
                     return newExpression as IrConstantValue
                 }
@@ -264,7 +264,7 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
                                      propertyType: IrType,
                                      kTypeGenerator: KTypeGenerator,
                                      irBuilder: IrBuilderWithScope): IrConstantValue {
-        val symbols = context.ir.symbols
+        konst symbols = context.ir.symbols
         return irBuilder.run {
             irConstantObject(
                     symbols.kLocalDelegatedPropertyImpl.owner,
@@ -278,7 +278,7 @@ internal class PropertyDelegationLowering(val generationState: NativeGenerationS
 
     private fun isKMutablePropertyType(type: IrType): Boolean {
         if (type !is IrSimpleType) return false
-        val expectedClass = when (type.arguments.size) {
+        konst expectedClass = when (type.arguments.size) {
             0 -> return false
             1 -> context.ir.symbols.kMutableProperty0
             2 -> context.ir.symbols.kMutableProperty1

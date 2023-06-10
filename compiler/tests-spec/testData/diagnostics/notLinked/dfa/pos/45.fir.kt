@@ -7,8 +7,8 @@
  * ISSUES: KT-28759
  */
 fun case_1() {
-    val x: Int? = 10
-    val y: Int?
+    konst x: Int? = 10
+    konst y: Int?
     y = x
     if (y != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -22,8 +22,8 @@ fun case_1() {
  * ISSUES: KT-28759
  */
 fun case_2() {
-    val x: Int? = 10
-    val y: Int?
+    konst x: Int? = 10
+    konst y: Int?
     y = x
     y!!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -37,7 +37,7 @@ fun case_2() {
  */
 fun case_3() {
     var x: Int? = 10
-    val y: Int?
+    konst y: Int?
     y = x
     y!!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -50,7 +50,7 @@ fun case_3() {
  * ISSUES: KT-28759
  */
 fun case_4() {
-    val x: Int? = 10
+    konst x: Int? = 10
     var y: Int?
     y = x
     if (y != null) {
@@ -61,8 +61,8 @@ fun case_4() {
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    val x: Int?
-    val y: Int?
+    konst x: Int?
+    konst y: Int?
     x = 10;y = x
     if (<!SENSELESS_COMPARISON!>y != null<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -73,7 +73,7 @@ fun case_5() {
 // TESTCASE NUMBER: 6
 fun case_6() {
     var x: Int?
-    val y: Int?
+    konst y: Int?
     x = 10;y = x
     if (<!SENSELESS_COMPARISON!>y != null<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -83,7 +83,7 @@ fun case_6() {
 
 // TESTCASE NUMBER: 7
 fun case_7() {
-    val x: Int?
+    konst x: Int?
     var y: Int?
     x = 10;y = x
     if (<!SENSELESS_COMPARISON!>y != null<!>) {

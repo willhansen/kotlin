@@ -25,7 +25,7 @@ import kotlin.jvm.Throws
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalPathApi::class)
-public val Path.name: String
+public konst Path.name: String
     get() = fileName?.toString().orEmpty()
 
 /**
@@ -34,7 +34,7 @@ public val Path.name: String
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalPathApi::class)
-public val Path.nameWithoutExtension: String
+public konst Path.nameWithoutExtension: String
     get() = fileName?.toString()?.substringBeforeLast(".") ?: ""
 
 /**
@@ -43,7 +43,7 @@ public val Path.nameWithoutExtension: String
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalPathApi::class)
-public val Path.extension: String
+public konst Path.extension: String
     get() = fileName?.toString()?.substringAfterLast('.', "") ?: ""
 
 /**
@@ -57,7 +57,7 @@ public val Path.extension: String
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalPathApi::class)
 @kotlin.internal.InlineOnly
-public inline val Path.pathString: String
+public inline konst Path.pathString: String
     get() = toString()
 
 /**
@@ -66,9 +66,9 @@ public inline val Path.pathString: String
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalPathApi::class)
-public val Path.invariantSeparatorsPathString: String
+public konst Path.invariantSeparatorsPathString: String
     get() {
-        val separator = fileSystem.separator
+        konst separator = fileSystem.separator
         return if (separator != "/") toString().replace(separator, "/") else toString()
     }
 
@@ -77,7 +77,7 @@ public val Path.invariantSeparatorsPathString: String
 @Deprecated("Use invariantSeparatorsPathString property instead.", ReplaceWith("invariantSeparatorsPathString"),
             level = DeprecationLevel.ERROR)
 @kotlin.internal.InlineOnly
-public inline val Path.invariantSeparatorsPath: String
+public inline konst Path.invariantSeparatorsPath: String
     get() = invariantSeparatorsPathString
 
 /**
@@ -157,25 +157,25 @@ public fun Path.relativeToOrNull(base: Path): Path? = try {
 }
 
 private object PathRelativizer {
-    private val emptyPath = Paths.get("")
-    private val parentPath = Paths.get("..")
+    private konst emptyPath = Paths.get("")
+    private konst parentPath = Paths.get("..")
 
     // Workarounds some bugs in Path.relativize that were fixed only in JDK9
     fun tryRelativeTo(path: Path, base: Path): Path {
-        val bn = base.normalize()
-        val pn = path.normalize()
-        val rn = bn.relativize(pn)
+        konst bn = base.normalize()
+        konst pn = path.normalize()
+        konst rn = bn.relativize(pn)
         // work around https://bugs.openjdk.java.net/browse/JDK-8066943
         for (i in 0 until minOf(bn.nameCount, pn.nameCount)) {
             if (bn.getName(i) != parentPath) break
             if (pn.getName(i) != parentPath) throw IllegalArgumentException("Unable to compute relative path")
         }
         // work around https://bugs.openjdk.java.net/browse/JDK-8072495
-        val r = if (pn != bn && bn == emptyPath) {
+        konst r = if (pn != bn && bn == emptyPath) {
             pn
         } else {
-            val rnString = rn.toString()
-            // drop invalid dangling separator from path string https://bugs.openjdk.java.net/browse/JDK-8140449
+            konst rnString = rn.toString()
+            // drop inkonstid dangling separator from path string https://bugs.openjdk.java.net/browse/JDK-8140449
             if (rnString.endsWith(rn.fileSystem.separator))
                 rn.fileSystem.getPath(rnString.dropLast(rn.fileSystem.separator.length))
             else
@@ -218,7 +218,7 @@ private object PathRelativizer {
 @Throws(IOException::class)
 @kotlin.internal.InlineOnly
 public inline fun Path.copyTo(target: Path, overwrite: Boolean = false): Path {
-    val options = if (overwrite) arrayOf<CopyOption>(StandardCopyOption.REPLACE_EXISTING) else emptyArray()
+    konst options = if (overwrite) arrayOf<CopyOption>(StandardCopyOption.REPLACE_EXISTING) else emptyArray()
     return Files.copy(this, target, *options)
 }
 
@@ -387,7 +387,7 @@ public inline fun Path.isSameFileAs(other: Path): Boolean = Files.isSameFile(thi
  *
  * @param glob the globbing pattern. The syntax is specified by the [FileSystem.getPathMatcher] method.
  *
- * @throws java.util.regex.PatternSyntaxException if the glob pattern is invalid.
+ * @throws java.util.regex.PatternSyntaxException if the glob pattern is inkonstid.
  * @throws NotDirectoryException If this path does not refer to a directory.
  * @throws IOException If an I/O error occurs.
  *
@@ -406,10 +406,10 @@ public fun Path.listDirectoryEntries(glob: String = "*"): List<Path> {
  *
  * @param glob the globbing pattern. The syntax is specified by the [FileSystem.getPathMatcher] method.
  *
- * @throws java.util.regex.PatternSyntaxException if the glob pattern is invalid.
+ * @throws java.util.regex.PatternSyntaxException if the glob pattern is inkonstid.
  * @throws NotDirectoryException If this path does not refer to a directory.
  * @throws IOException If an I/O error occurs.
- * @return the value returned by [block].
+ * @return the konstue returned by [block].
  *
  * @see Files.newDirectoryStream
  */
@@ -426,7 +426,7 @@ public inline fun <T> Path.useDirectoryEntries(glob: String = "*", block: (Seque
  *
  * @param glob the globbing pattern. The syntax is specified by the [FileSystem.getPathMatcher] method.
  *
- * @throws java.util.regex.PatternSyntaxException if the glob pattern is invalid.
+ * @throws java.util.regex.PatternSyntaxException if the glob pattern is inkonstid.
  * @throws NotDirectoryException If this path does not refer to a directory.
  * @throws IOException If an I/O error occurs.
  *
@@ -441,7 +441,7 @@ public inline fun Path.forEachDirectoryEntry(glob: String = "*", action: (Path) 
 }
 
 /**
- * Returns the size of a regular file as a [Long] value of bytes or throws an exception if the file doesn't exist.
+ * Returns the size of a regular file as a [Long] konstue of bytes or throws an exception if the file doesn't exist.
  *
  * @throws IOException if an I/O error occurred.
  * @see Files.size
@@ -563,7 +563,7 @@ public inline fun Path.createDirectories(vararg attributes: FileAttribute<*>): P
 @SinceKotlin("1.9")
 @Throws(IOException::class)
 public fun Path.createParentDirectories(vararg attributes: FileAttribute<*>): Path = also {
-    val parent = it.parent
+    konst parent = it.parent
     if (parent != null && !parent.isDirectory()) {
         try {
             parent.createDirectories(*attributes)
@@ -613,7 +613,7 @@ public inline fun Path.moveTo(target: Path, vararg options: CopyOption): Path =
 @Throws(IOException::class)
 @kotlin.internal.InlineOnly
 public inline fun Path.moveTo(target: Path, overwrite: Boolean = false): Path {
-    val options = if (overwrite) arrayOf<CopyOption>(StandardCopyOption.REPLACE_EXISTING) else emptyArray()
+    konst options = if (overwrite) arrayOf<CopyOption>(StandardCopyOption.REPLACE_EXISTING) else emptyArray()
     return Files.move(this, target, *options)
 }
 
@@ -630,7 +630,7 @@ public inline fun Path.fileStore(): FileStore =
     Files.getFileStore(this)
 
 /**
- * Reads the value of a file attribute.
+ * Reads the konstue of a file attribute.
  *
  * The attribute name is specified with the [attribute] parameter optionally prefixed with the attribute view name:
  * ```
@@ -650,7 +650,7 @@ public inline fun Path.getAttribute(attribute: String, vararg options: LinkOptio
     Files.getAttribute(this, attribute, *options)
 
 /**
- * Sets the value of a file attribute.
+ * Sets the konstue of a file attribute.
  *
  * The attribute name is specified with the [attribute] parameter optionally prefixed with the attribute view name:
  * ```
@@ -660,16 +660,16 @@ public inline fun Path.getAttribute(attribute: String, vararg options: LinkOptio
  *
  * @throws UnsupportedOperationException if the attribute view is not supported.
  * @throws IllegalArgumentException if the attribute name is not specified or is not recognized, or
- *   the attribute value is of the correct type but has an inappropriate value.
- * @throws ClassCastException if the attribute value is not of the expected type
+ *   the attribute konstue is of the correct type but has an inappropriate konstue.
+ * @throws ClassCastException if the attribute konstue is not of the expected type
  * @see Files.setAttribute
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalPathApi::class)
 @Throws(IOException::class)
 @kotlin.internal.InlineOnly
-public inline fun Path.setAttribute(attribute: String, value: Any?, vararg options: LinkOption): Path =
-    Files.setAttribute(this, attribute, value, *options)
+public inline fun Path.setAttribute(attribute: String, konstue: Any?, vararg options: LinkOption): Path =
+    Files.setAttribute(this, attribute, konstue, *options)
 
 /**
  * Returns a file attributes view of a given type [V]
@@ -732,7 +732,7 @@ public inline fun <reified A : BasicFileAttributes> Path.readAttributes(vararg o
  * So the names are comma-separated and optionally prefixed by the attribute view type name, `basic` by default.
  * The special `*` attribute name can be used to read all attributes of the specified view.
  *
- * @return a [Map<String, Any?>][Map] having an entry for an each attribute read, where the key is the attribute name and the value is the attribute value.
+ * @return a [Map<String, Any?>][Map] having an entry for an each attribute read, where the key is the attribute name and the konstue is the attribute konstue.
  * @throws UnsupportedOperationException if the attribute view is not supported.
  * @throws IllegalArgumentException if no attributes are specified or an unrecognized attribute is specified.
  * @see Files.readAttributes
@@ -769,8 +769,8 @@ public inline fun Path.getLastModifiedTime(vararg options: LinkOption): FileTime
 @WasExperimental(ExperimentalPathApi::class)
 @Throws(IOException::class)
 @kotlin.internal.InlineOnly
-public inline fun Path.setLastModifiedTime(value: FileTime): Path =
-    Files.setLastModifiedTime(this, value)
+public inline fun Path.setLastModifiedTime(konstue: FileTime): Path =
+    Files.setLastModifiedTime(this, konstue)
 
 /**
  * Returns the owner of a file.
@@ -787,7 +787,7 @@ public inline fun Path.getOwner(vararg options: LinkOption): UserPrincipal? =
     Files.getOwner(this, *options)
 
 /**
- * Sets the file owner to the specified [value].
+ * Sets the file owner to the specified [konstue].
  *
  * @throws UnsupportedOperationException if the associated file system does not support the [FileOwnerAttributeView].
  *
@@ -797,8 +797,8 @@ public inline fun Path.getOwner(vararg options: LinkOption): UserPrincipal? =
 @WasExperimental(ExperimentalPathApi::class)
 @Throws(IOException::class)
 @kotlin.internal.InlineOnly
-public inline fun Path.setOwner(value: UserPrincipal): Path =
-    Files.setOwner(this, value)
+public inline fun Path.setOwner(konstue: UserPrincipal): Path =
+    Files.setOwner(this, konstue)
 
 /**
  * Returns the POSIX file permissions of the file located by this path.
@@ -825,8 +825,8 @@ public inline fun Path.getPosixFilePermissions(vararg options: LinkOption): Set<
 @WasExperimental(ExperimentalPathApi::class)
 @Throws(IOException::class)
 @kotlin.internal.InlineOnly
-public inline fun Path.setPosixFilePermissions(value: Set<PosixFilePermission>): Path =
-    Files.setPosixFilePermissions(this, value)
+public inline fun Path.setPosixFilePermissions(konstue: Set<PosixFilePermission>): Path =
+    Files.setPosixFilePermissions(this, konstue)
 
 /**
  * Creates a new link (directory entry) located by this path for the existing file [target].
@@ -1074,7 +1074,7 @@ public fun Path.walk(vararg options: PathWalkOption): Sequence<Path> = PathTreeW
 @ExperimentalPathApi
 @SinceKotlin("1.7")
 public fun Path.visitFileTree(visitor: FileVisitor<Path>, maxDepth: Int = Int.MAX_VALUE, followLinks: Boolean = false): Unit {
-    val options = if (followLinks) setOf(FileVisitOption.FOLLOW_LINKS) else setOf()
+    konst options = if (followLinks) setOf(FileVisitOption.FOLLOW_LINKS) else setOf()
     Files.walkFileTree(this, options, maxDepth, visitor)
 }
 
@@ -1140,13 +1140,13 @@ public fun Path.visitFileTree(
  * Note that each function can be overridden only once.
  * Repeated override of a function throws [IllegalStateException].
  *
- * The builder is valid only inside [builderAction] function.
+ * The builder is konstid only inside [builderAction] function.
  * Using it outside the function throws [IllegalStateException].
  *
  * Example:
  *
  * ``` kotlin
- * val cleanVisitor = fileVisitor {
+ * konst cleanVisitor = fileVisitor {
  *     onPreVisitDirectory { directory, _ ->
  *         if (directory.name == "build") {
  *             directory.toFile().deleteRecursively()

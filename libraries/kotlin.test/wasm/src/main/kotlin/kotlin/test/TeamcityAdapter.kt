@@ -27,7 +27,7 @@ internal class TeamcityAdapter : FrameworkAdapter {
 
     private fun runOrScheduleNextWithResult(block: () -> Promise<JsAny?>?) {
         if (scheduleNextTaskAfter == null) {
-            val result = block()
+            konst result = block()
             if (result != null)
                 scheduleNextTaskAfter = result
         } else {
@@ -37,7 +37,7 @@ internal class TeamcityAdapter : FrameworkAdapter {
         }
     }
 
-    private enum class MessageType(val type: String) {
+    private enum class MessageType(konst type: String) {
         Started("testStarted"),
         Finished("testFinished"),
         Failed("testFailed"),
@@ -59,7 +59,7 @@ internal class TeamcityAdapter : FrameworkAdapter {
         ?.replace("]", "|]")
         ?: ""
 
-    private val flowId: String = "flowId='wasmTcAdapter${abs(hashCode())}'"
+    private konst flowId: String = "flowId='wasmTcAdapter${abs(hashCode())}'"
 
     private fun MessageType.report(name: String) {
         println("##teamcity[$type name='${name.tcEscape()}' $flowId]")
@@ -78,16 +78,16 @@ internal class TeamcityAdapter : FrameworkAdapter {
     }
 
     private var _testArguments: FrameworkTestArguments? = null
-    private val testArguments: FrameworkTestArguments
+    private konst testArguments: FrameworkTestArguments
         get() {
-            var value = _testArguments
-            if (value == null) {
-                val arguments = d8Arguments().ifEmpty { nodeArguments() }
-                value = FrameworkTestArguments.parse(arguments.split(' '))
-                _testArguments = value
+            var konstue = _testArguments
+            if (konstue == null) {
+                konst arguments = d8Arguments().ifEmpty { nodeArguments() }
+                konstue = FrameworkTestArguments.parse(arguments.split(' '))
+                _testArguments = konstue
             }
 
-            return value
+            return konstue
         }
 
     private fun runSuite(name: String, suiteFn: () -> Unit) {
@@ -125,16 +125,16 @@ internal class TeamcityAdapter : FrameworkAdapter {
             return
         }
 
-        val oldQualifiedName = qualifiedName
-        val oldClassName = className
+        konst oldQualifiedName = qualifiedName
+        konst oldClassName = className
         try {
             qualifiedName = if (oldQualifiedName.isEmpty()) name else "$oldQualifiedName.$name"
             className = name
             if (isSuit) {
                 body()
             } else {
-                val runTest = testArguments.run {
-                    val included =
+                konst runTest = testArguments.run {
+                    konst included =
                         includedClassMethods.any { it.first == oldClassName && name.matched(it.second) } ||
                                 includedQualifiers.any { oldQualifiedName.matched(it) || qualifiedName.matched(it) }
                     included &&
@@ -203,7 +203,7 @@ internal class TeamcityAdapter : FrameworkAdapter {
             runOrScheduleNextWithResult {
                 MessageType.Started.report(name)
 
-                val result = try {
+                konst result = try {
                     if (!testArguments.dryRun) {
                         testFn()
                     } else {
@@ -214,12 +214,12 @@ internal class TeamcityAdapter : FrameworkAdapter {
                 }
                 if (result is Promise<*>) {
                     return@runOrScheduleNextWithResult result.then(
-                        onFulfilled = { value ->
+                        onFulfilled = { konstue ->
                             MessageType.Finished.report(name)
-                            value
+                            konstue
                         },
                         onRejected = { e ->
-                            val throwable = e.toThrowableOrNull()
+                            konst throwable = e.toThrowableOrNull()
                             if (throwable != null) {
                                 MessageType.Failed.report(name, throwable)
                             } else {
@@ -245,11 +245,11 @@ private fun String.matched(prefix: String, startSourceIndex: Int = 0, startPrefi
     if (sourceIndex > this.lastIndex) return false
 
     while (prefixIndex <= prefix.lastIndex && sourceIndex <= this.lastIndex) {
-        val currentSearchSymbol = prefix[prefixIndex]
+        konst currentSearchSymbol = prefix[prefixIndex]
         if (currentSearchSymbol == '*') {
             if (prefixIndex == prefix.lastIndex) return true
-            val searchSymbolAfterStar = prefix[prefixIndex + 1]
-            val foundIndexOfSymbolAfterStar = this.indexOf(searchSymbolAfterStar, sourceIndex)
+            konst searchSymbolAfterStar = prefix[prefixIndex + 1]
+            konst foundIndexOfSymbolAfterStar = this.indexOf(searchSymbolAfterStar, sourceIndex)
             if (foundIndexOfSymbolAfterStar == -1) return false
             if (this.matched(prefix, foundIndexOfSymbolAfterStar + 1, prefixIndex)) return true
             sourceIndex = foundIndexOfSymbolAfterStar

@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 // FILE: A.kt
-class A(@Deprecated("") val s: String) {
+class A(@Deprecated("") konst s: String) {
 
     constructor(i: Int) : this(i.toString()) {
 

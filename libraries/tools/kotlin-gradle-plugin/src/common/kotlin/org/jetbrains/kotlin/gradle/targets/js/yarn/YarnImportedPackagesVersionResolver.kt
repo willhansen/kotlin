@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.resolved.PreparedKotlinCompila
 import java.io.File
 
 class YarnImportedPackagesVersionResolver(
-    private val logger: Logger,
+    private konst logger: Logger,
     npmProjects: Collection<PreparedKotlinCompilationNpmResolution>,
-    private val nodeJsWorldDir: File
+    private konst nodeJsWorldDir: File
 ) {
-    private val resolvedVersion = mutableMapOf<String, ResolvedNpmDependency>()
-    private val importedProjectWorkspaces = mutableListOf<String>()
-    private val externalModules = npmProjects.flatMapTo(mutableSetOf()) {
+    private konst resolvedVersion = mutableMapOf<String, ResolvedNpmDependency>()
+    private konst importedProjectWorkspaces = mutableListOf<String>()
+    private konst externalModules = npmProjects.flatMapTo(mutableSetOf()) {
         it.externalGradleDependencies
     }
 
@@ -29,9 +29,9 @@ class YarnImportedPackagesVersionResolver(
 
     private fun resolve(modules: MutableSet<GradleNodeModule>) {
         modules.groupBy { it.name }.forEach { (name, versions) ->
-            val selected: GradleNodeModule = if (versions.size > 1) {
-                val sorted = versions.sortedBy { it.semver }
-                val selected = sorted.last()
+            konst selected: GradleNodeModule = if (versions.size > 1) {
+                konst sorted = versions.sortedBy { it.semver }
+                konst selected = sorted.last()
                 resolvedVersion[name] = ResolvedNpmDependency(
                     version = selected.version,
                     file = selected.path
@@ -45,6 +45,6 @@ class YarnImportedPackagesVersionResolver(
 }
 
 private data class ResolvedNpmDependency(
-    val version: String,
-    val file: File
+    konst version: String,
+    konst file: File
 )

@@ -5,7 +5,7 @@ import kotlin.contracts.*
 class Success : Result()
 
 open class Result {
-    val someProperty = run { 10 }
+    konst someProperty = run { 10 }
 
     fun isSuccess1(): Boolean {
         contract {

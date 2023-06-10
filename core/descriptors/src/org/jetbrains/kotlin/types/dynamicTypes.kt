@@ -28,12 +28,12 @@ import org.jetbrains.kotlin.types.typeUtil.builtIns
 
 @DefaultImplementation(impl = DynamicTypesSettings::class)
 open class DynamicTypesSettings : PlatformSpecificExtension<DynamicTypesSettings> {
-    open val dynamicTypesAllowed: Boolean
+    open konst dynamicTypesAllowed: Boolean
         get() = false
 }
 
 class DynamicTypesAllowed : DynamicTypesSettings() {
-    override val dynamicTypesAllowed: Boolean
+    override konst dynamicTypesAllowed: Boolean
         get() = true
 }
 
@@ -43,14 +43,14 @@ fun createDynamicType(builtIns: KotlinBuiltIns) = DynamicType(builtIns, TypeAttr
 
 class DynamicType(
     builtIns: KotlinBuiltIns,
-    override val attributes: TypeAttributes
+    override konst attributes: TypeAttributes
 ) : FlexibleType(builtIns.nothingType, builtIns.nullableAnyType), DynamicTypeMarker {
-    override val delegate: SimpleType get() = upperBound
+    override konst delegate: SimpleType get() = upperBound
 
     // Nullability has no effect on dynamics
     override fun makeNullableAsSpecified(newNullability: Boolean): DynamicType = this
 
-    override val isMarkedNullable: Boolean get() = false
+    override konst isMarkedNullable: Boolean get() = false
 
     override fun replaceAttributes(newAttributes: TypeAttributes): DynamicType =
         DynamicType(delegate.builtIns, newAttributes)

@@ -15,17 +15,17 @@ var IdeaKotlinBinaryDependency.klibExtra by KlibExtra.key.readWriteProperty
 
 @IdeaKotlinExtra
 data class KlibExtra(
-    val builtInsPlatform: String?,
-    val uniqueName: String?,
-    val shortName: String?,
-    val packageFqName: String?,
-    val nativeTargets: List<String>?,
-    val commonizerNativeTargets: List<String>?,
-    val commonizerTarget: String?,
-    val isInterop: Boolean?
+    konst builtInsPlatform: String?,
+    konst uniqueName: String?,
+    konst shortName: String?,
+    konst packageFqName: String?,
+    konst nativeTargets: List<String>?,
+    konst commonizerNativeTargets: List<String>?,
+    konst commonizerTarget: String?,
+    konst isInterop: Boolean?
 ) : Serializable {
     companion object {
-        private const val serialVersionUID = 0L
-        val key = extrasKeyOf<KlibExtra>()
+        private const konst serialVersionUID = 0L
+        konst key = extrasKeyOf<KlibExtra>()
     }
 }

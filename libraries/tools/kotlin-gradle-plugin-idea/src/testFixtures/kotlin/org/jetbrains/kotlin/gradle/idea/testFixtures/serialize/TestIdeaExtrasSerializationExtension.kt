@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.tooling.core.extrasTypeOf
 @Suppress("UNCHECKED_CAST")
 object TestIdeaExtrasSerializationExtension : IdeaKotlinExtrasSerializationExtension {
 
-    val ignoredStringKey = extrasKeyOf<String>("ignored")
-    val anySerializableKey = extrasKeyOf<Any>("serializable")
+    konst ignoredStringKey = extrasKeyOf<String>("ignored")
+    konst anySerializableKey = extrasKeyOf<Any>("serializable")
 
     override fun <T : Any> serializer(key: Extras.Key<T>): IdeaKotlinExtrasSerializer<T>? = when {
         key == ignoredStringKey -> null

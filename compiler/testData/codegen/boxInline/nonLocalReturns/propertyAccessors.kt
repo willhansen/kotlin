@@ -30,7 +30,7 @@ class A {
 
 fun box(): String {
 
-    val a = A()
+    konst a = A()
     if (a.field != 1) return "fail 1: ${a.field}"
 
     a.field = 4

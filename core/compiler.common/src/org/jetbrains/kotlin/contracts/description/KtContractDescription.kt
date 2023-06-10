@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.contracts.description
 interface KtContractDescriptionElement<Type, Diagnostic> {
     fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R
 
-    val erroneous: Boolean
+    konst erroneous: Boolean
 }
 
 abstract class KtEffectDeclaration<Type, Diagnostic> : KtContractDescriptionElement<Type, Diagnostic> {

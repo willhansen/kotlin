@@ -1,9 +1,9 @@
 interface I<F, G>
 
-val aImpl: A.Companion.Interface
+konst aImpl: A.Companion.Interface
     get() = null!!
 
-val bImpl: B.Companion.Interface
+konst bImpl: B.Companion.Interface
     get() = null!!
 
 interface A {

@@ -32,7 +32,7 @@ class ExampleTest : TestCase() {
     }
 
     fun testAssert() {
-        val coffee = DaggerExampleTest_Coffee.builder().build()
+        konst coffee = DaggerExampleTest_Coffee.builder().build()
         coffee.maker().brew()
         assert(executed)
     }

@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val x: String
+    konst x: String
     run {
         x = "OK"
-        val y = x
+        konst y = x
     }
     return x
 }

@@ -3,6 +3,6 @@
  * that can be found in the LICENSE file.
  */
 
-class B(val a: Int)
+class B(konst a: Int)
 
 fun B.foo() = this.a

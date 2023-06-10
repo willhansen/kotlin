@@ -17,11 +17,11 @@ import kotlin.ranges.reversed
  * Reverses elements in the list in-place.
  */
 public actual fun <T> MutableList<T>.reverse(): Unit {
-    val midPoint = (size / 2) - 1
+    konst midPoint = (size / 2) - 1
     if (midPoint < 0) return
     var reverseIndex = lastIndex
     for (index in 0..midPoint) {
-        val tmp = this[index]
+        konst tmp = this[index]
         this[index] = this[reverseIndex]
         this[reverseIndex] = tmp
         reverseIndex--

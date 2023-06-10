@@ -6,28 +6,28 @@
 package org.jetbrains.kotlin.js.backend.ast
 
 class JsImport(
-    val module: String,
-    val target: Target,
+    konst module: String,
+    konst target: Target,
 ) : SourceInfoAwareJsNode(), JsStatement {
     constructor(module: String, vararg elements: Element) : this(module, Target.Elements(elements.toMutableList()))
 
-    val elements: MutableList<Element>
+    konst elements: MutableList<Element>
         get() = (target as Target.Elements).elements
 
     sealed class Target {
-        class Elements(val elements: MutableList<Element>) : Target()
-        class Default(val name: JsNameRef) : Target() {
+        class Elements(konst elements: MutableList<Element>) : Target()
+        class Default(konst name: JsNameRef) : Target() {
             constructor(name: String) : this(JsNameRef(name))
         }
 
-        class All(val alias: JsNameRef) : Target() {
+        class All(konst alias: JsNameRef) : Target() {
             constructor(alias: String) : this(JsNameRef(alias))
         }
     }
 
     class Element(
-        val name: JsName,
-        val alias: JsNameRef? = null
+        konst name: JsName,
+        konst alias: JsNameRef? = null
     )
 
     override fun accept(visitor: JsVisitor) {

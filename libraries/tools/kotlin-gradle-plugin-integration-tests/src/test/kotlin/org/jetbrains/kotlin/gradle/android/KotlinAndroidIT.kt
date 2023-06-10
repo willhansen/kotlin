@@ -39,11 +39,11 @@ class KotlinAndroidIT : KGPBaseTest() {
             buildOptions = defaultBuildOptions.copy(androidVersion = agpVersion, logLevel = LogLevel.DEBUG),
             buildJdk = jdkVersion.location
         ) {
-            val modules = listOf("Android", "Lib")
-            val flavors = listOf("Flavor1", "Flavor2")
-            val buildTypes = listOf("Debug")
+            konst modules = listOf("Android", "Lib")
+            konst flavors = listOf("Flavor1", "Flavor2")
+            konst buildTypes = listOf("Debug")
 
-            val expectedTasks = mutableListOf<String>()
+            konst expectedTasks = mutableListOf<String>()
             for (module in modules) {
                 for (flavor in flavors) {
                     for (buildType in buildTypes) {
@@ -53,7 +53,7 @@ class KotlinAndroidIT : KGPBaseTest() {
             }
 
             build("assembleDebug", "test") {
-                val pattern = ":Test:compile[\\w\\d]+Kotlin"
+                konst pattern = ":Test:compile[\\w\\d]+Kotlin"
                 expectedTasks.addAll(findTasksByPattern(pattern.toRegex()))
                 assertTasksExecuted(expectedTasks)
                 assertOutputContains("InternalDummyTest PASSED")
@@ -252,7 +252,7 @@ class KotlinAndroidIT : KGPBaseTest() {
                             defaultPublishConfig 'flavor1Debug'
                         }
                         
-                        afterEvaluate {
+                        afterEkonstuate {
                             publishing {
                                 publications {
                                     flavorDebug(MavenPublication) {
@@ -275,9 +275,9 @@ class KotlinAndroidIT : KGPBaseTest() {
 
             build(":Lib:assembleFlavor1Debug", ":Lib:publish") {
                 assertTasksExecuted(":Lib:compileFlavor1DebugKotlin", ":Lib:publishFlavorDebugPublicationToMavenRepository")
-                val pomLines = subProject("Lib").projectPath.resolve("build/repo/com/example/flavor1Debug/1.0/flavor1Debug-1.0.pom").readLines()
-                val stdlibVersionLineNumber = pomLines.indexOfFirst { "<artifactId>kotlin-stdlib</artifactId>" in it } + 1
-                val versionLine = pomLines[stdlibVersionLineNumber]
+                konst pomLines = subProject("Lib").projectPath.resolve("build/repo/com/example/flavor1Debug/1.0/flavor1Debug-1.0.pom").readLines()
+                konst stdlibVersionLineNumber = pomLines.indexOfFirst { "<artifactId>kotlin-stdlib</artifactId>" in it } + 1
+                konst versionLine = pomLines[stdlibVersionLineNumber]
                 assertContains(versionLine, "<version>${buildOptions.kotlinVersion}</version>")
             }
         }

@@ -11,6 +11,6 @@ import org.jetbrains.kotlin.test.model.*
 import org.jetbrains.kotlin.visualizer.AbstractVisualizerTest
 
 abstract class AbstractPsiVisualizerTest : AbstractVisualizerTest() {
-    override val frontendKind: FrontendKind<*> = FrontendKinds.ClassicFrontend
-    override val handler: Constructor<FrontendOutputHandler<*>> = ::PsiOutputHandler
+    override konst frontendKind: FrontendKind<*> = FrontendKinds.ClassicFrontend
+    override konst handler: Constructor<FrontendOutputHandler<*>> = ::PsiOutputHandler
 }

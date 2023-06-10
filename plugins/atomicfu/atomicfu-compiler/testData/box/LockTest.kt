@@ -2,7 +2,7 @@ import kotlinx.atomicfu.*
 import kotlin.test.*
 
 class LockTest {
-    private val inProgressLock = atomic(false)
+    private konst inProgressLock = atomic(false)
 
     fun testLock() {
         var result = ""
@@ -23,7 +23,7 @@ private inline fun AtomicBoolean.tryAcquire(): Boolean = compareAndSet(false, tr
 fun <AA, BB : Number> String.reflectionTest(mapParam: Map<in AA, BB>): List<BB> = error("no impl")
 
 fun box(): String {
-    val testClass = LockTest()
+    konst testClass = LockTest()
     testClass.testLock()
     return "OK"
 }

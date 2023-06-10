@@ -1,12 +1,12 @@
 // WITH_STDLIB
 
 class Host {
-    val ok = "OK"
+    konst ok = "OK"
 
     fun foo() = run { bar(ok) }
 
     companion object {
-        val ok = 0
+        konst ok = 0
 
         fun bar(s: String) = s.substring(ok)
     }

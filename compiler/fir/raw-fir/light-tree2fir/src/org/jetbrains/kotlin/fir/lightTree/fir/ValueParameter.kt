@@ -45,24 +45,24 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 class ValueParameter(
-    private val isVal: Boolean,
-    private val isVar: Boolean,
-    private val modifiers: Modifier,
-    val returnTypeRef: FirTypeRef,
-    val source: KtSourceElement,
-    private val moduleData: FirModuleData,
-    private val isFromPrimaryConstructor: Boolean,
-    private val additionalAnnotations: List<FirAnnotation>,
-    val name: Name,
-    val defaultValue: FirExpression?,
-    private val containingFunctionSymbol: FirFunctionSymbol<*>?,
-    val destructuringDeclaration: DestructuringDeclaration? = null
+    private konst isVal: Boolean,
+    private konst isVar: Boolean,
+    private konst modifiers: Modifier,
+    konst returnTypeRef: FirTypeRef,
+    konst source: KtSourceElement,
+    private konst moduleData: FirModuleData,
+    private konst isFromPrimaryConstructor: Boolean,
+    private konst additionalAnnotations: List<FirAnnotation>,
+    konst name: Name,
+    konst defaultValue: FirExpression?,
+    private konst containingFunctionSymbol: FirFunctionSymbol<*>?,
+    konst destructuringDeclaration: DestructuringDeclaration? = null
 ) {
     fun hasValOrVar(): Boolean {
         return isVal || isVar
     }
 
-    val annotations: List<FirAnnotation> by lazy(LazyThreadSafetyMode.NONE) {
+    konst annotations: List<FirAnnotation> by lazy(LazyThreadSafetyMode.NONE) {
         buildList {
             if (!isFromPrimaryConstructor)
                 addAll(modifiers.annotations)
@@ -72,7 +72,7 @@ class ValueParameter(
         }
     }
 
-    val firValueParameter: FirValueParameter by lazy(LazyThreadSafetyMode.NONE) {
+    konst firValueParameter: FirValueParameter by lazy(LazyThreadSafetyMode.NONE) {
         buildValueParameter {
             source = this@ValueParameter.source
             moduleData = this@ValueParameter.moduleData
@@ -99,14 +99,14 @@ class ValueParameter(
         currentDispatchReceiver: ConeClassLikeType?,
         context: Context<T>
     ): FirProperty {
-        val name = this.firValueParameter.name
+        konst name = this.firValueParameter.name
         var type = this.firValueParameter.returnTypeRef
         if (type is FirImplicitTypeRef) {
             type = buildErrorTypeRef { diagnostic = ConeSyntaxDiagnostic("Incomplete code") }
         }
 
         return buildProperty {
-            val propertySource = firValueParameter.source?.fakeElement(KtFakeSourceElementKind.PropertyFromParameter)
+            konst propertySource = firValueParameter.source?.fakeElement(KtFakeSourceElementKind.PropertyFromParameter)
             source = propertySource
             this.moduleData = moduleData
             origin = FirDeclarationOrigin.Source
@@ -132,7 +132,7 @@ class ValueParameter(
                 isConst = modifiers.hasConst()
             }
 
-            val defaultAccessorSource = propertySource?.fakeElement(KtFakeSourceElementKind.DefaultAccessor)
+            konst defaultAccessorSource = propertySource?.fakeElement(KtFakeSourceElementKind.DefaultAccessor)
             backingField = FirDefaultPropertyBackingField(
                 moduleData = moduleData,
                 origin = FirDeclarationOrigin.Source,

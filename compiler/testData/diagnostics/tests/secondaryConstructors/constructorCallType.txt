@@ -1,18 +1,18 @@
 package
 
-public val x1: A
-public val x2: A
-public val x3: A
-public val y1: B<kotlin.Int>
-public val y10: [ERROR : Type for B("")]
-public val y2: B<kotlin.Int>
-public val y3: B<kotlin.Int>
-public val y4: B<kotlin.Int>
-public val y5: B<kotlin.String>
-public val y6: B<kotlin.String>
-public val y7: B<kotlin.String>
-public val y8: B<kotlin.String>
-public val y9: B<kotlin.Int>
+public konst x1: A
+public konst x2: A
+public konst x3: A
+public konst y1: B<kotlin.Int>
+public konst y10: [ERROR : Type for B("")]
+public konst y2: B<kotlin.Int>
+public konst y3: B<kotlin.Int>
+public konst y4: B<kotlin.Int>
+public konst y5: B<kotlin.String>
+public konst y6: B<kotlin.String>
+public konst y7: B<kotlin.String>
+public konst y8: B<kotlin.String>
+public konst y9: B<kotlin.Int>
 
 public final class A {
     public constructor A(/*0*/ x: kotlin.Double)

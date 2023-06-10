@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.daemon.common.DaemonReportCategory
 import java.io.IOException
 
 class NativePlatformLauncherWrapper {
-    private val nativeLauncher: net.rubygrapefruit.platform.ProcessLauncher by lazy {
+    private konst nativeLauncher: net.rubygrapefruit.platform.ProcessLauncher by lazy {
         net.rubygrapefruit.platform.Native.get(net.rubygrapefruit.platform.ProcessLauncher::class.java)
     }
 

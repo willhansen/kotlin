@@ -1,5 +1,5 @@
 // EXPECTED_REACHABLE_NODES: 1281
-// KT-2470 another name mangling bug: kotlin.test.failsWith() gets generated to invalid JS
+// KT-2470 another name mangling bug: kotlin.test.failsWith() gets generated to inkonstid JS
 
 package foo
 
@@ -15,7 +15,7 @@ public inline fun <reified T : Throwable> failsWith(block: () -> Any): T {
 }
 
 fun box(): String {
-    val a = failsWith<Exception> {
+    konst a = failsWith<Exception> {
         throw Exception("OK")
     }
 

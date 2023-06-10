@@ -59,8 +59,8 @@ extension String {
 
 private func addNeighbors(_ line: String, _ graph: Graph, _ lineNumber: Int) -> Node {
     let node = graph[lineNumber]
-    for (index, value) in line.split(separator: ",").enumerated() {
-        node.neighbors[graph[index]] = Int(value.trimmingCharacters(in: .whitespacesAndNewlines))
+    for (index, konstue) in line.split(separator: ",").enumerated() {
+        node.neighbors[graph[index]] = Int(konstue.trimmingCharacters(in: .whitespacesAndNewlines))
     }
     return node
 }
@@ -88,9 +88,9 @@ class Greedy {
     }
     
     private func getClosest(_ node: Node) -> ClosestNode? {
-        let nodes = node.neighbors.filter { $0.value != 0 && !visitedNodes.contains($0.key)}
-        let closest = nodes.min { a,b in a.value < b.value }!
-        return ClosestNode(node: closest.key, distance: closest.value)
+        let nodes = node.neighbors.filter { $0.konstue != 0 && !visitedNodes.contains($0.key)}
+        let closest = nodes.min { a,b in a.konstue < b.konstue }!
+        return ClosestNode(node: closest.key, distance: closest.konstue)
     }
     
     func solve() {

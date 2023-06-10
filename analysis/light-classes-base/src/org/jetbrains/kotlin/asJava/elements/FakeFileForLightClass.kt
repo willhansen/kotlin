@@ -30,9 +30,9 @@ import org.jetbrains.kotlin.psi.KtFile
 import java.lang.ref.Reference
 
 open class FakeFileForLightClass(
-    val ktFile: KtFile,
-    private val lightClass: KtLightClass,
-    private val packageFqName: FqName = ktFile.packageFqName,
+    konst ktFile: KtFile,
+    private konst lightClass: KtLightClass,
+    private konst packageFqName: FqName = ktFile.packageFqName,
 ) : ClsFileImpl(ktFile.viewProvider) {
     @Deprecated("A light class should be provided directly")
     constructor(
@@ -51,7 +51,7 @@ open class FakeFileForLightClass(
     override fun getPackageName() = packageFqName.asString()
 
     private fun createFakeJavaFileStub(): PsiJavaFileStub {
-        val javaFileStub = PsiJavaFileStubImpl(packageFqName.asString(), /* compiled = */true)
+        konst javaFileStub = PsiJavaFileStubImpl(packageFqName.asString(), /* compiled = */true)
         javaFileStub.psiFactory = ClsStubPsiFactory.INSTANCE
         javaFileStub.psi = this
         return javaFileStub
@@ -70,24 +70,24 @@ open class FakeFileForLightClass(
 
     @Volatile
     private var myMirrorFileElement: Reference<TreeElement>? = null
-    private val myMirrorLock: Any = Any()
+    private konst myMirrorLock: Any = Any()
 
     override fun getMirror(): PsiElement {
         SoftReference.dereference(myMirrorFileElement)?.let { return it.psi }
 
-        val mirrorElement = synchronized(myMirrorLock) {
+        konst mirrorElement = synchronized(myMirrorLock) {
             SoftReference.dereference(myMirrorFileElement)?.let { return@synchronized it }
 
-            val file = this.virtualFile
+            konst file = this.virtualFile
             AstLoadingFilter.assertTreeLoadingAllowed(file)
-            val classes: Array<KtLightClass> = this.classes
-            val fileName = (if (classes.isNotEmpty()) classes[0].name else file.nameWithoutExtension) + ".java"
-            val document = FileDocumentManager.getInstance().getDocument(file) ?: error(file.url)
+            konst classes: Array<KtLightClass> = this.classes
+            konst fileName = (if (classes.isNotEmpty()) classes[0].name else file.nameWithoutExtension) + ".java"
+            konst document = FileDocumentManager.getInstance().getDocument(file) ?: error(file.url)
 
-            val factory = PsiFileFactory.getInstance(this.manager.project)
-            val mirror = factory.createFileFromText(fileName, JavaLanguage.INSTANCE, document.immutableCharSequence, false, false, true)
+            konst factory = PsiFileFactory.getInstance(this.manager.project)
+            konst mirror = factory.createFileFromText(fileName, JavaLanguage.INSTANCE, document.immutableCharSequence, false, false, true)
             mirror.putUserData(PsiUtil.FILE_LANGUAGE_LEVEL_KEY, this.languageLevel)
-            val mirrorTreeElement = SourceTreeToPsiMap.psiToTreeNotNull(mirror)
+            konst mirrorTreeElement = SourceTreeToPsiMap.psiToTreeNotNull(mirror)
             if (mirror is PsiFileImpl) {
                 mirror.originalFile = this
             }
@@ -108,7 +108,7 @@ open class FakeFileForLightClass(
         if (this === other) return true
         if (other !is FakeFileForLightClass) return false
 
-        val anotherClass = other.lightClass
+        konst anotherClass = other.lightClass
         if (lightClass is KtLightClassForSourceDeclaration) {
             return anotherClass is KtLightClassForSourceDeclaration && ktFile == other.ktFile
         }
@@ -116,7 +116,7 @@ open class FakeFileForLightClass(
         return lightClass == anotherClass
     }
 
-    override fun isEquivalentTo(another: PsiElement?) = this == another
+    override fun isEquikonstentTo(another: PsiElement?) = this == another
 
     override fun setPackageName(packageName: String) {
         if (lightClass is KtLightClassForFacade) {

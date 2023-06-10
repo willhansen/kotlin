@@ -2,7 +2,7 @@ package foo
 
 var ok = "FAIL"
 
-val hello = Pair("Hello", "World")
+konst hello = Pair("Hello", "World")
 
 fun main() {
     ok = "OK"

@@ -14,11 +14,11 @@ fun check(element: KAnnotatedElement, annotationExists: Boolean) {
 }
 
 class PrivateProperties(
-    @get:Ann private val y0: Int,
-    @get:Ann private vararg val y1: String
+    @get:Ann private konst y0: Int,
+    @get:Ann private vararg konst y1: String
 ) {
     @get:Ann
-    private val x1 = ""
+    private konst x1 = ""
 
     @set:Ann
     private var x2 = ""
@@ -30,13 +30,13 @@ class PrivateProperties(
     private var x4 = ""
 
     @get:Ann
-    internal val x5 = ""
+    internal konst x5 = ""
 
     @get:Ann
-    protected val x6 = ""
+    protected konst x6 = ""
 
     @get:Ann
-    private val x7: String = ""
+    private konst x7: String = ""
         @AnnRepeat get
 
     @get:Ann
@@ -72,9 +72,9 @@ class PrivateProperties(
 }
 
 private class EffetivelyPrivate private constructor(
-    @get:Ann val x0: Int,
-    @get:Ann protected val x1: Int,
-    @get:Ann internal val x2: Int
+    @get:Ann konst x0: Int,
+    @get:Ann protected konst x1: Int,
+    @get:Ann internal konst x2: Int
 ) {
     companion object {
         fun test() {
@@ -84,7 +84,7 @@ private class EffetivelyPrivate private constructor(
 
     private class Nested {
         @get:Ann
-        val fofo = 0
+        konst fofo = 0
     }
 
     fun test() {
@@ -100,10 +100,10 @@ class Statics {
     companion object {
         @JvmField
         @get:Ann
-        val x0 = ""
+        konst x0 = ""
 
         @get:Ann
-        const val x1 = ""
+        const konst x1 = ""
 
         @JvmStatic
         @AnnRepeat
@@ -114,10 +114,10 @@ class Statics {
 
         @JvmStatic
         @get:Ann
-        private val x3 = ""
+        private konst x3 = ""
 
         @get:Ann
-        val x4 = ""
+        konst x4 = ""
     }
 
     fun test() {

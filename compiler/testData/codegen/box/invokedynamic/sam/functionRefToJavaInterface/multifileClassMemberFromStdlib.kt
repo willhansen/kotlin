@@ -13,7 +13,7 @@ fun test(a: List<String>, b: List<String>, bf: BF) =
     bf.apply(a, b)
 
 fun box(): String {
-    val ss = test(listOf("O"), listOf("K"), List<String>::plus)
+    konst ss = test(listOf("O"), listOf("K"), List<String>::plus)
     return ss[0] + ss[1]
 }
 

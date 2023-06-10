@@ -21,7 +21,7 @@ class C {
 }
 
 fun box(): String {
-  val c = C()
+  konst c = C()
   if (c.myIntProp != 0) return "fail Int"
   if (c.myByteProp != 0.toByte()) return "fail Byte"
   if (c.myLongProp != 0L) return "fail Long"

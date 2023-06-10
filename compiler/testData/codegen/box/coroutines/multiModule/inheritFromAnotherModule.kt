@@ -37,11 +37,11 @@ fun runF(x: A, f: suspend A.() -> Int) : Int {
 }
 
 fun box() : String {
-    val x = if (true) ImplementA() else A() // to avoid devirtualization
+    konst x = if (true) ImplementA() else A() // to avoid devirtualization
     if (x.f(AAA()) != 2) return "FAIL 1"
     if (x.f(ZZZ()) != 3) return "FAIL 2"
     if (runF(x, { f(1) }) != 4) return "FAIL 3"
-    val y = if (true) NotImplementA() else A() // to avoid devirtualization
+    konst y = if (true) NotImplementA() else A() // to avoid devirtualization
     if (y.f(AAA()) != 2) return "FAIL 4"
     if (y.f(ZZZ()) != 3) return "FAIL 5"
     if (runF(y, { f(1) }) != 1) return "FAIL 6"

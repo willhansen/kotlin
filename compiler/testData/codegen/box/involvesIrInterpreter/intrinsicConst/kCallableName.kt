@@ -1,21 +1,21 @@
-// !LANGUAGE: +IntrinsicConstEvaluation
+// !LANGUAGE: +IntrinsicConstEkonstuation
 // TARGET_BACKEND: JVM_IR
 // IGNORE_BACKEND_K1: JVM_IR
 fun <T> T.id() = this
 
-class A(val OK: Int, val somePropertyWithLongName: String) {
+class A(konst OK: Int, konst somePropertyWithLongName: String) {
     fun foo() {}
     suspend fun bar() {}
 }
-val topLevelProp = 1
+konst topLevelProp = 1
 
-const val propertyName1 = A::OK.<!EVALUATED("OK")!>name<!>
-const val propertyName2 = A::somePropertyWithLongName.<!EVALUATED("somePropertyWithLongName")!>name<!>
-const val methodName = A::foo.<!EVALUATED("foo")!>name<!>
-const val suspendMethodName = A::bar.<!EVALUATED("bar")!>name<!>
-const val className = ::A.<!EVALUATED("<init>")!>name<!>
-const val topLevelPropName = ::topLevelProp.<!EVALUATED("topLevelProp")!>name<!>
-const val nameInComplexExpression = A::OK.<!EVALUATED("OK")!>name<!> <!EVALUATED("OK!")!>+ "!"<!>
+const konst propertyName1 = A::OK.<!EVALUATED("OK")!>name<!>
+const konst propertyName2 = A::somePropertyWithLongName.<!EVALUATED("somePropertyWithLongName")!>name<!>
+const konst methodName = A::foo.<!EVALUATED("foo")!>name<!>
+const konst suspendMethodName = A::bar.<!EVALUATED("bar")!>name<!>
+const konst className = ::A.<!EVALUATED("<init>")!>name<!>
+const konst topLevelPropName = ::topLevelProp.<!EVALUATED("topLevelProp")!>name<!>
+const konst nameInComplexExpression = A::OK.<!EVALUATED("OK")!>name<!> <!EVALUATED("OK!")!>+ "!"<!>
 
 // STOP_EVALUATION_CHECKS
 fun box(): String {

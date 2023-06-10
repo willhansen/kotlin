@@ -1,4 +1,4 @@
-class C(val f : () -> Unit)
+class C(konst f : () -> Unit)
 
 fun test(e : Any) {
     if (e is C) {

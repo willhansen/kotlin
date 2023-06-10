@@ -9,7 +9,7 @@ public class JavaInv<T> {
 // FILE: main.kt
 
 class KotlinInv<T> {
-    val stringVal: String = ""
+    konst stringVal: String = ""
 }
 
 fun test() {

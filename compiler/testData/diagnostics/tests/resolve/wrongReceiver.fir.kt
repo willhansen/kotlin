@@ -2,8 +2,8 @@ package some
 
 class A()
 
-val Int.some: Int get() = 4
-val Int.foo: Int get() = 4
+konst Int.some: Int get() = 4
+konst Int.foo: Int get() = 4
 
 fun Int.extFun() = 4
 

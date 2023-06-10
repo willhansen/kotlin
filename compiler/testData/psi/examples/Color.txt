@@ -14,7 +14,7 @@ KtFile: Color.kt
       VALUE_PARAMETER_LIST
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('r')
           PsiWhiteSpace(' ')
@@ -27,7 +27,7 @@ KtFile: Color.kt
         PsiElement(COMMA)(',')
         PsiWhiteSpace(' ')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('g')
           PsiWhiteSpace(' ')
@@ -40,7 +40,7 @@ KtFile: Color.kt
         PsiElement(COMMA)(',')
         PsiWhiteSpace(' ')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('sb')
           PsiWhiteSpace(' ')

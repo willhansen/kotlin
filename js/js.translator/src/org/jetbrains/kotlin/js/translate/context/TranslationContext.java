@@ -583,7 +583,7 @@ public class TranslationContext {
 
         ClassifierDescriptor classifier = descriptor.getValue().getType().getConstructor().getDeclarationDescriptor();
 
-        // TODO: can't tell why this assertion is valid, revisit this code later
+        // TODO: can't tell why this assertion is konstid, revisit this code later
         assert classifier instanceof ClassDescriptor;
 
         ClassDescriptor cls = (ClassDescriptor) classifier;
@@ -908,7 +908,7 @@ public class TranslationContext {
     public JsExpression declareConstantValue(
             @NotNull DeclarationDescriptor descriptor,
             @NotNull KtSimpleNameExpression expression,
-            @NotNull JsExpression value) {
+            @NotNull JsExpression konstue) {
         if (!isPublicInlineFunction() && isFromCurrentModule(descriptor)) {
             return ReferenceTranslator.translateSimpleName(expression, this);
         }
@@ -917,18 +917,18 @@ public class TranslationContext {
         String tag = Objects.requireNonNull(staticContext.getTag(descriptor));
         String suggestedName = StaticContext.getSuggestedName(descriptor);
 
-        return declareConstantValue(suggestedName, tag, value, descriptor);
+        return declareConstantValue(suggestedName, tag, konstue, descriptor);
     }
 
     @NotNull
     public JsExpression declareConstantValue(
             @NotNull String suggestedName,
             @NotNull String tag,
-            @NotNull JsExpression value,
+            @NotNull JsExpression konstue,
             @Nullable DeclarationDescriptor descriptor
     ) {
         if (inlineFunctionContext == null || !isPublicInlineFunction()) {
-            return staticContext.importDeclaration(suggestedName, tag, value).makeRef();
+            return staticContext.importDeclaration(suggestedName, tag, konstue).makeRef();
         }
         else {
             return inlineFunctionContext.getImports().computeIfAbsent(tag, t -> {
@@ -937,7 +937,7 @@ public class TranslationContext {
                 if (descriptor != null && isFromCurrentModule(descriptor) && !AnnotationsUtils.isNativeObject(descriptor)) {
                     MetadataProperties.setLocalAlias(result, new LocalAlias(getInnerNameForDescriptor(descriptor), tag));
                 }
-                inlineFunctionContext.getImportBlock().getStatements().add(JsAstUtils.newVar(result, value));
+                inlineFunctionContext.getImportBlock().getStatements().add(JsAstUtils.newVar(result, konstue));
                 return result;
             }).makeRef();
         }

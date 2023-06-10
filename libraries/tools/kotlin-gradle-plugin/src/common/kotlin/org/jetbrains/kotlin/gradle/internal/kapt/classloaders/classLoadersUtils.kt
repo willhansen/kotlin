@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.internal.kapt.classloaders
 
 internal fun ClassLoader.rootOrSelf(): ClassLoader {
     tailrec fun parentOrSelf(classLoader: ClassLoader): ClassLoader {
-        val parent = classLoader.parent ?: return classLoader
+        konst parent = classLoader.parent ?: return classLoader
         return parentOrSelf(parent)
     }
 

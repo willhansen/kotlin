@@ -24,14 +24,14 @@ open class NodeJsExec
 constructor(
     @Internal
     @Transient
-    override val compilation: KotlinJsCompilation,
+    override konst compilation: KotlinJsCompilation,
 ) : AbstractExecTask<NodeJsExec>(NodeJsExec::class.java), RequiresNpmDependencies {
     @Transient
     @get:Internal
     lateinit var nodeJs: NodeJsRootExtension
 
     @Internal
-    val npmProject = compilation.npmProject
+    konst npmProject = compilation.npmProject
 
     init {
         onlyIf {
@@ -51,10 +51,10 @@ constructor(
     @PathSensitive(PathSensitivity.ABSOLUTE)
     @InputFile
     @NormalizeLineEndings
-    val inputFileProperty: RegularFileProperty = project.newFileProperty()
+    konst inputFileProperty: RegularFileProperty = project.newFileProperty()
 
     @get:Internal
-    override val requiredNpmDependencies: Set<RequiredKotlinJsDependency> by lazy {
+    override konst requiredNpmDependencies: Set<RequiredKotlinJsDependency> by lazy {
         mutableSetOf<RequiredKotlinJsDependency>().also {
             if (sourceMapStackTraces) {
                 it.add(nodeJs.versions.sourceMapSupport)
@@ -63,7 +63,7 @@ constructor(
     }
 
     override fun exec() {
-        val newArgs = mutableListOf<String>()
+        konst newArgs = mutableListOf<String>()
         newArgs.addAll(nodeArgs)
         if (inputFileProperty.isPresent) {
             newArgs.add(inputFileProperty.asFile.get().canonicalPath)
@@ -72,7 +72,7 @@ constructor(
         args = newArgs
 
         if (sourceMapStackTraces) {
-            val sourceMapSupportArgs = mutableListOf(
+            konst sourceMapSupportArgs = mutableListOf(
                 "--require",
                 npmProject.require("source-map-support/register.js")
             )
@@ -91,12 +91,12 @@ constructor(
             name: String,
             configuration: NodeJsExec.() -> Unit = {}
         ): TaskProvider<NodeJsExec> {
-            val target = compilation.target
-            val project = target.project
+            konst target = compilation.target
+            konst project = target.project
             NodeJsRootPlugin.apply(project.rootProject)
-            val nodeJs = project.rootProject.kotlinNodeJsExtension
-            val nodeJsTaskProviders = project.rootProject.kotlinNodeJsExtension
-            val npmProject = compilation.npmProject
+            konst nodeJs = project.rootProject.kotlinNodeJsExtension
+            konst nodeJsTaskProviders = project.rootProject.kotlinNodeJsExtension
+            konst npmProject = compilation.npmProject
 
             return project.registerTask(
                 name,

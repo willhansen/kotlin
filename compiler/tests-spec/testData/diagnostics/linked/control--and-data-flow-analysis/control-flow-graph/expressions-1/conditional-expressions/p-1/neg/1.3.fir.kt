@@ -17,13 +17,13 @@ fun throwExc(b: Boolean): Boolean {
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (throwExc(false)) true
+    konst x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (throwExc(false)) true
 }
 
 
 // TESTCASE NUMBER: 3
 fun case3() {
-    val x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (throwExc(true)) true
+    konst x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (throwExc(true)) true
 }
 
 /*
@@ -32,18 +32,18 @@ fun case3() {
  * ISSUES: KT-35510
  */
 fun case4() {
-    val x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (throw Exception()) true
+    konst x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (throw Exception()) true
 
-    val x2 = <!INVALID_IF_AS_EXPRESSION!>if<!> (TODO()) true
+    konst x2 = <!INVALID_IF_AS_EXPRESSION!>if<!> (TODO()) true
 
-    val x0 = <!INVALID_IF_AS_EXPRESSION!>if<!> (false) true else if (throw Exception()) ;
+    konst x0 = <!INVALID_IF_AS_EXPRESSION!>if<!> (false) true else if (throw Exception()) ;
 
 }
 
 // TESTCASE NUMBER: 5
 fun case5() {
     var flag: Boolean? = null
-    val x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (flag ?: throw Exception()) true
+    konst x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (flag ?: throw Exception()) true
 }
 
 /*
@@ -52,7 +52,7 @@ fun case5() {
  * ISSUES: KT-35510
  */
 fun case6() {
-    val k1 = <!INVALID_IF_AS_EXPRESSION!>if<!>(throw Exception());
+    konst k1 = <!INVALID_IF_AS_EXPRESSION!>if<!>(throw Exception());
 }
 
 /*
@@ -61,7 +61,7 @@ fun case6() {
  * ISSUES: KT-35510
  */
 fun case7(nothing: Nothing) {
-    val k1 = if(throw Exception())
+    konst k1 = if(throw Exception())
 <!SYNTAX!><!>}
 
 /*
@@ -70,7 +70,7 @@ fun case7(nothing: Nothing) {
  * ISSUES: KT-35510
  */
 fun case8(nothing: Nothing) {
-    val x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (nothing) true
+    konst x1 = <!INVALID_IF_AS_EXPRESSION!>if<!> (nothing) true
 }
 
 /*
@@ -78,5 +78,5 @@ fun case8(nothing: Nothing) {
  * UNEXPECTED BEHAVIOUR
  * ISSUES: KT-35510
  */fun case9() {
-    val k1 = if(throw Exception())
+    konst k1 = if(throw Exception())
 <!SYNTAX!><!>}

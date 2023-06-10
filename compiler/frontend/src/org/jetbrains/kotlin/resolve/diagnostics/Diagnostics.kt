@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.diagnostics.GenericDiagnostics
 interface Diagnostics : GenericDiagnostics<Diagnostic> {
     //should not be called on readonly views
     //any Diagnostics object returned by BindingContext#getDiagnostics() should implement this property
-    val modificationTracker: ModificationTracker
+    konst modificationTracker: ModificationTracker
         get() = throw IllegalStateException("Trying to obtain modification tracker for Diagnostics object of class ${this::class.java}")
 
     override fun all(): Collection<Diagnostic>
@@ -47,9 +47,9 @@ interface Diagnostics : GenericDiagnostics<Diagnostic> {
     fun resetCallback() {}
 
     companion object {
-        val EMPTY: Diagnostics = object : Diagnostics {
+        konst EMPTY: Diagnostics = object : Diagnostics {
             override fun noSuppression(): Diagnostics = this
-            override val modificationTracker: ModificationTracker = ModificationTracker.NEVER_CHANGED
+            override konst modificationTracker: ModificationTracker = ModificationTracker.NEVER_CHANGED
             override fun all() = listOf<Diagnostic>()
             override fun forElement(psiElement: PsiElement) = listOf<Diagnostic>()
         }

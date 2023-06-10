@@ -22,8 +22,8 @@ open class TCServiceMessagesClientTest {
     protected var treatFailedTestOutputAsStacktrace: Boolean = false
 
     internal fun assertEvents(assertion: String, produceServiceMessage: TCServiceMessagesClient.() -> Unit) {
-        val results = RecordingTestResultProcessor()
-        val client = createClient(results)
+        konst results = RecordingTestResultProcessor()
+        konst client = createClient(results)
 
         client.root(OperationIdentifier(1)) {
             client.produceServiceMessage()

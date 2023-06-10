@@ -36,7 +36,7 @@ import org.jetbrains.kotlin.resolve.calls.results.OverloadResolutionResults;
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowInfoFactory;
 import org.jetbrains.kotlin.resolve.calls.util.CallMaker;
 import org.jetbrains.kotlin.resolve.constants.ConstantValue;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 import org.jetbrains.kotlin.resolve.lazy.ForceResolveUtil;
 import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor;
 import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationsContextImpl;
@@ -58,15 +58,15 @@ public class AnnotationResolverImpl extends AnnotationResolver {
     @NotNull private final CallResolver callResolver;
     @NotNull private final StorageManager storageManager;
     @NotNull private TypeResolver typeResolver;
-    @NotNull private final ConstantExpressionEvaluator constantExpressionEvaluator;
+    @NotNull private final ConstantExpressionEkonstuator constantExpressionEkonstuator;
 
     public AnnotationResolverImpl(
             @NotNull CallResolver callResolver,
-            @NotNull ConstantExpressionEvaluator constantExpressionEvaluator,
+            @NotNull ConstantExpressionEkonstuator constantExpressionEkonstuator,
             @NotNull StorageManager storageManager
     ) {
         this.callResolver = callResolver;
-        this.constantExpressionEvaluator = constantExpressionEvaluator;
+        this.constantExpressionEkonstuator = constantExpressionEkonstuator;
         this.storageManager = storageManager;
     }
 
@@ -193,9 +193,9 @@ public class AnnotationResolverImpl extends AnnotationResolver {
     @Nullable
     public ConstantValue<?> getAnnotationArgumentValue(
             @NotNull BindingTrace trace,
-            @NotNull ValueParameterDescriptor valueParameter,
+            @NotNull ValueParameterDescriptor konstueParameter,
             @NotNull ResolvedValueArgument resolvedArgument
     ) {
-        return constantExpressionEvaluator.getAnnotationArgumentValue(trace, valueParameter, resolvedArgument);
+        return constantExpressionEkonstuator.getAnnotationArgumentValue(trace, konstueParameter, resolvedArgument);
     }
 }

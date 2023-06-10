@@ -1,6 +1,6 @@
 package
 
-public fun </*0*/ T> createAssert(/*0*/ value: T): Assert<T>
+public fun </*0*/ T> createAssert(/*0*/ konstue: T): Assert<T>
 public fun getNullableLong(): kotlin.Long?
 public fun takeLong(/*0*/ x: kotlin.Long): kotlin.Unit
 public fun test_1(/*0*/ long: kotlin.Long): kotlin.Unit

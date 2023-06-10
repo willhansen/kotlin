@@ -7,8 +7,8 @@ class A {
     class Nested
     
     fun main() {
-        val x = ::Nested
-        val y = A::Nested
+        konst x = ::Nested
+        konst y = A::Nested
 
         checkSubtype<KFunction0<Nested>>(x)
         checkSubtype<KFunction0<Nested>>(y)
@@ -17,7 +17,7 @@ class A {
     companion object {
         fun main() {
             ::Nested
-            val y = A::Nested
+            konst y = A::Nested
 
             checkSubtype<KFunction0<A.Nested>>(y)
         }
@@ -27,7 +27,7 @@ class A {
 class B {
     fun main() {
         ::<!UNRESOLVED_REFERENCE!>Nested<!>
-        val y = A::Nested
+        konst y = A::Nested
 
         checkSubtype<KFunction0<A.Nested>>(y)
     }

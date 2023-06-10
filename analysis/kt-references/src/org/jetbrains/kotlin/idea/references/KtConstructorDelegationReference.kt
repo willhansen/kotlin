@@ -17,7 +17,7 @@ abstract class KtConstructorDelegationReference(
         return TextRange(0, element.textLength)
     }
 
-    override val resolvesByNames: Collection<Name>
+    override konst resolvesByNames: Collection<Name>
         get() = emptyList()
 
     override fun handleElementRename(newElementName: String): PsiElement? {

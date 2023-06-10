@@ -5,7 +5,7 @@
 // ^ KT-57755
 
 fun main() {
-    val foo: String.(suspend () -> Unit) -> Unit = {}
-    val f: () -> Unit = {}
+    konst foo: String.(suspend () -> Unit) -> Unit = {}
+    konst f: () -> Unit = {}
     "".foo(f)
 }

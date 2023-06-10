@@ -1,7 +1,7 @@
 // !DIAGNOSTICS: -UNUSED_EXPRESSION
 import kotlin.reflect.*
 
-class Foo(val prop: Any) {
+class Foo(konst prop: Any) {
     fun func() {}
 }
 

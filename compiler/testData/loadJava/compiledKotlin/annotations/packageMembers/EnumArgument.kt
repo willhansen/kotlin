@@ -4,8 +4,8 @@ package test
 
 import java.lang.annotation.ElementType
 
-annotation class Anno(val t: ElementType)
+annotation class Anno(konst t: ElementType)
 
 @Anno(ElementType.METHOD) fun foo() {}
 
-@field:Anno(ElementType.FIELD) val bar = { 42 }()
+@field:Anno(ElementType.FIELD) konst bar = { 42 }()

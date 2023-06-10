@@ -1,10 +1,10 @@
 package
 
-public val p1: kotlin.Int = 0
-public val p2: kotlin.Long = 0.toLong()
-public val p3: kotlin.Int = 0
-public val p4: kotlin.Int = 0
-public val p5: kotlin.Int = 0
+public konst p1: kotlin.Int = 0
+public konst p2: kotlin.Long = 0.toLong()
+public konst p3: kotlin.Int = 0
+public konst p4: kotlin.Int = 0
+public konst p5: kotlin.Int = 0
 public fun fooByte(/*0*/ p: kotlin.Byte): kotlin.Byte
 public fun fooInt(/*0*/ p: kotlin.Int): kotlin.Int
 public fun fooLong(/*0*/ p: kotlin.Long): kotlin.Long

@@ -11,10 +11,10 @@ import kotlin.test.*
 import kotlinx.serialization.*
 
 @SerialInfo
-annotation class Foo(val x: Int, val y: String)
+annotation class Foo(konst x: Int, konst y: String)
 
 @Test fun runTest() {
-    val foo = @Suppress("ANNOTATION_CLASS_CONSTRUCTOR_CALL") Foo(42, "17")
+    konst foo = @Suppress("ANNOTATION_CLASS_CONSTRUCTOR_CALL") Foo(42, "17")
     assertEquals(foo.x, 42)
     assertEquals(foo.y, "17")
 }

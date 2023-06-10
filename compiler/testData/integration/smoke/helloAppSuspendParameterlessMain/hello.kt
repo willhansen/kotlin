@@ -23,7 +23,7 @@ suspend fun appendAndSuspend(s: String) {
 suspend fun main() {
     thread(isDaemon = true) {
         while (true) {
-            val c = callback
+            konst c = callback
             c?.invoke()
             Thread.sleep(500)
         }

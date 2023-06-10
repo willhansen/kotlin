@@ -29,8 +29,8 @@ class CustomScriptCodegenTest : CodegenTestCase() {
 
     fun testAnnotatedDefinition() {
         createScriptTestEnvironment("org.jetbrains.kotlin.codegen.TestScriptWithAnnotatedBaseClass")
-        loadScript("val x = 1")
-        val res = generateScriptClass()
+        loadScript("konst x = 1")
+        konst res = generateScriptClass()
         assertNull(res.safeGetAnnotation(KotlinScript::class))
         assertNotNull(res.safeGetAnnotation(MyScriptClassAnnotation::class))
         assertNotNull(res.getConstructor().safeGetAnnotation(MyScriptConstructorAnnotation::class))
@@ -57,7 +57,7 @@ class CustomScriptCodegenTest : CodegenTestCase() {
                         ).mapNotNull { jarName -> File(libPath, jarName).also { assertTrue("$it not found", it.exists()) } }
                     }
 
-        val configuration = createConfiguration(
+        konst configuration = createConfiguration(
             ConfigurationKind.ALL,
             TestJdkKind.MOCK_JDK,
             TargetBackend.JVM,

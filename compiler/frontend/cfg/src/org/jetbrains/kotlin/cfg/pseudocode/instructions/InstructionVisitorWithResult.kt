@@ -17,7 +17,7 @@
 package org.jetbrains.kotlin.cfg.pseudocode.instructions
 
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.jumps.*
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.*
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.*
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.special.*
 
 abstract class InstructionVisitorWithResult<out R> {

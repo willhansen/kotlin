@@ -3,7 +3,7 @@ typealias S = String
 typealias SS = S
 typealias SSS = SS
 
-val s1: SSS = ""
-val s2: SSS? = null
-val s3: List<SSS>? = null
-val s4: List<List<SSS>?>? = null
+konst s1: SSS = ""
+konst s2: SSS? = null
+konst s3: List<SSS>? = null
+konst s4: List<List<SSS>?>? = null

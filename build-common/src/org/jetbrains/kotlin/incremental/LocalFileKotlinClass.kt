@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 import java.io.File
 
 class LocalFileKotlinClass private constructor(
-    private val file: File,
-    private val fileContents: ByteArray,
+    private konst file: File,
+    private konst fileContents: ByteArray,
     className: ClassId,
     classVersion: Int,
     classHeader: KotlinClassHeader,
@@ -34,7 +34,7 @@ class LocalFileKotlinClass private constructor(
 
     companion object {
         fun create(file: File, jvmMetadataVersionFromLanguageVersion: JvmMetadataVersion): LocalFileKotlinClass? {
-            val fileContents = file.readBytes()
+            konst fileContents = file.readBytes()
             return FileBasedKotlinClass.create(
                 fileContents,
                 jvmMetadataVersionFromLanguageVersion
@@ -44,9 +44,9 @@ class LocalFileKotlinClass private constructor(
         }
     }
 
-    val className: JvmClassName by lazy { JvmClassName.byClassId(classId) }
+    konst className: JvmClassName by lazy { JvmClassName.byClassId(classId) }
 
-    override val location: String
+    override konst location: String
         get() = file.absolutePath
 
     public override fun getFileContents(): ByteArray = fileContents

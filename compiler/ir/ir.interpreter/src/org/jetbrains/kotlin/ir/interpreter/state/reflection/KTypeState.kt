@@ -16,16 +16,16 @@ import org.jetbrains.kotlin.types.Variance
 import kotlin.reflect.KClassifier
 import kotlin.reflect.KTypeProjection
 
-internal class KTypeState(val irType: IrType, override val irClass: IrClass) : ReflectionState() {
+internal class KTypeState(konst irType: IrType, override konst irClass: IrClass) : ReflectionState() {
     private var _classifier: KClassifier? = null
     private var _arguments: List<KTypeProjection>? = null
 
     fun getClassifier(callInterceptor: CallInterceptor): KClassifier? {
         if (_classifier != null) return _classifier!!
-        _classifier = when (val classifier = irType.classifierOrFail.owner) {
+        _classifier = when (konst classifier = irType.classifierOrFail.owner) {
             is IrClass -> KClassProxy(KClassState(classifier, callInterceptor.irBuiltIns.kClassClass.owner), callInterceptor)
             is IrTypeParameter -> {
-                val kTypeParameterIrClass = callInterceptor.environment.kTypeParameterClass.owner
+                konst kTypeParameterIrClass = callInterceptor.environment.kTypeParameterClass.owner
                 KTypeParameterProxy(KTypeParameterState(classifier, kTypeParameterIrClass), callInterceptor)
             }
             else -> TODO()

@@ -1,8 +1,8 @@
 var global = 0;
 
-function se(value) {
+function se(konstue) {
     ++global;
-    return value;
+    return konstue;
 }
 
 function test() {

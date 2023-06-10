@@ -1,6 +1,6 @@
 package
 
-public val a: Base
+public konst a: Base
 
 public final class A {
     public constructor A()

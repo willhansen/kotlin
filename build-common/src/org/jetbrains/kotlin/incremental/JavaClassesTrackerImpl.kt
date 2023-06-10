@@ -31,22 +31,22 @@ import java.io.DataInput
 import java.io.DataOutput
 import java.io.File
 
-val CONVERTING_JAVA_CLASSES_TO_PROTO = PerformanceCounter.create("Converting Java sources to proto")
+konst CONVERTING_JAVA_CLASSES_TO_PROTO = PerformanceCounter.create("Converting Java sources to proto")
 
 class JavaClassesTrackerImpl(
-        private val cache: IncrementalJvmCache,
-        private val untrackedJavaClasses: Set<ClassId>,
-        private val languageVersionSettings: LanguageVersionSettings,
+        private konst cache: IncrementalJvmCache,
+        private konst untrackedJavaClasses: Set<ClassId>,
+        private konst languageVersionSettings: LanguageVersionSettings,
 ) : JavaClassesTracker {
-    private val classToSourceSerialized: MutableMap<ClassId, SerializedJavaClassWithSource> = hashMapOf()
+    private konst classToSourceSerialized: MutableMap<ClassId, SerializedJavaClassWithSource> = hashMapOf()
 
-    val javaClassesUpdates: Collection<SerializedJavaClassWithSource>
-        get() = classToSourceSerialized.values
+    konst javaClassesUpdates: Collection<SerializedJavaClassWithSource>
+        get() = classToSourceSerialized.konstues
 
-    private val classDescriptors: MutableList<JavaClassDescriptor> = mutableListOf()
+    private konst classDescriptors: MutableList<JavaClassDescriptor> = mutableListOf()
 
     override fun reportClass(classDescriptor: JavaClassDescriptor) {
-        val classId = classDescriptor.classId!!
+        konst classId = classDescriptor.classId!!
         if (!cache.isJavaClassToTrack(classId) || classDescriptor.javaSourceFile == null) return
 
         classDescriptors.add(classDescriptor)
@@ -61,7 +61,7 @@ class JavaClassesTrackerImpl(
         }
 
         for (classDescriptor in classDescriptors.toList()) {
-            val classId = classDescriptor.classId!!
+            konst classId = classDescriptor.classId!!
             if (cache.isJavaClassAlreadyInCache(classId) || classId in untrackedJavaClasses || classDescriptor.wasContentRequested()) {
                 assert(classId !in classToSourceSerialized) {
                     "Duplicated JavaClassDescriptor $classId reported to IC"
@@ -82,16 +82,16 @@ class JavaClassesTrackerImpl(
             this.safeAs<LazyJavaClassDescriptor>()?.wasScopeContentRequested() != false
 }
 
-private val JavaClassDescriptor.javaSourceFile: File?
+private konst JavaClassDescriptor.javaSourceFile: File?
     get() = source.safeAs<PsiSourceElement>()
             ?.psi?.containingFile?.takeIf { it is PsiJavaFile }
             ?.virtualFile?.path?.let(::File)
 
 fun JavaClassDescriptor.convertToProto(languageVersionSettings: LanguageVersionSettings): SerializedJavaClassWithSource {
-    val file = javaSourceFile.sure { "convertToProto should only be called for source based classes" }
+    konst file = javaSourceFile.sure { "convertToProto should only be called for source based classes" }
 
-    val extension = JavaClassesSerializerExtension()
-    val classProto = try {
+    konst extension = JavaClassesSerializerExtension()
+    konst classProto = try {
         DescriptorSerializer.create(
             this, extension, null, languageVersionSettings
         ).classProto(this).build()
@@ -103,38 +103,38 @@ fun JavaClassDescriptor.convertToProto(languageVersionSettings: LanguageVersionS
         )
     }
 
-    val (stringTable, qualifiedNameTable) = extension.stringTable.buildProto()
+    konst (stringTable, qualifiedNameTable) = extension.stringTable.buildProto()
 
     return SerializedJavaClassWithSource(file, SerializedJavaClass(classProto, stringTable, qualifiedNameTable))
 }
 
 class SerializedJavaClass(
-        val proto: ProtoBuf.Class,
-        val stringTable: ProtoBuf.StringTable,
-        val qualifiedNameTable: ProtoBuf.QualifiedNameTable
+        konst proto: ProtoBuf.Class,
+        konst stringTable: ProtoBuf.StringTable,
+        konst qualifiedNameTable: ProtoBuf.QualifiedNameTable
 ) {
-    val classId: ClassId
+    konst classId: ClassId
         get() = NameResolverImpl(stringTable, qualifiedNameTable).getClassId(proto.fqName)
 }
 
 data class SerializedJavaClassWithSource(
-        val source: File,
-        val proto: SerializedJavaClass
+        konst source: File,
+        konst proto: SerializedJavaClass
 )
 
 fun SerializedJavaClass.toProtoData() = ClassProtoData(proto, NameResolverImpl(stringTable, qualifiedNameTable))
 
-val JAVA_CLASS_PROTOBUF_REGISTRY =
+konst JAVA_CLASS_PROTOBUF_REGISTRY =
         ExtensionRegistryLite.newInstance()
                 .also(JavaClassProtoBuf::registerAllExtensions)
                 // Built-ins extensions are used for annotations' serialization
                 .also(BuiltInsProtoBuf::registerAllExtensions)
 
 object JavaClassProtoMapValueExternalizer : DataExternalizer<SerializedJavaClass> {
-    override fun save(output: DataOutput, value: SerializedJavaClass) {
-        output.writeBytesWithSize(value.proto.toByteArray())
-        output.writeBytesWithSize(value.stringTable.toByteArray())
-        output.writeBytesWithSize(value.qualifiedNameTable.toByteArray())
+    override fun save(output: DataOutput, konstue: SerializedJavaClass) {
+        output.writeBytesWithSize(konstue.proto.toByteArray())
+        output.writeBytesWithSize(konstue.stringTable.toByteArray())
+        output.writeBytesWithSize(konstue.qualifiedNameTable.toByteArray())
     }
 
     private fun DataOutput.writeBytesWithSize(bytes: ByteArray) {
@@ -143,16 +143,16 @@ object JavaClassProtoMapValueExternalizer : DataExternalizer<SerializedJavaClass
     }
 
     private fun DataInput.readBytesWithSize(): ByteArray {
-        val bytesLength = readInt()
+        konst bytesLength = readInt()
         return ByteArray(bytesLength).also {
             readFully(it, 0, bytesLength)
         }
     }
 
     override fun read(input: DataInput): SerializedJavaClass {
-        val proto = ProtoBuf.Class.parseFrom(input.readBytesWithSize(), JAVA_CLASS_PROTOBUF_REGISTRY)
-        val stringTable = ProtoBuf.StringTable.parseFrom(input.readBytesWithSize(), JAVA_CLASS_PROTOBUF_REGISTRY)
-        val qualifiedNameTable = ProtoBuf.QualifiedNameTable.parseFrom(input.readBytesWithSize(), JAVA_CLASS_PROTOBUF_REGISTRY)
+        konst proto = ProtoBuf.Class.parseFrom(input.readBytesWithSize(), JAVA_CLASS_PROTOBUF_REGISTRY)
+        konst stringTable = ProtoBuf.StringTable.parseFrom(input.readBytesWithSize(), JAVA_CLASS_PROTOBUF_REGISTRY)
+        konst qualifiedNameTable = ProtoBuf.QualifiedNameTable.parseFrom(input.readBytesWithSize(), JAVA_CLASS_PROTOBUF_REGISTRY)
 
         return SerializedJavaClass(proto, stringTable, qualifiedNameTable)
     }

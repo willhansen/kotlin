@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirResolvedReifiedParameterReferenceBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var symbol: FirTypeParameterSymbol
 
     override fun build(): FirResolvedReifiedParameterReference {

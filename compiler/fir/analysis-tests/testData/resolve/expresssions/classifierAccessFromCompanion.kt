@@ -4,7 +4,7 @@ class Factory {
     }
 
     companion object {
-        val f = <!NO_COMPANION_OBJECT!>Function<!>
-        val x = Function.Default
+        konst f = <!NO_COMPANION_OBJECT!>Function<!>
+        konst x = Function.Default
     }
 }

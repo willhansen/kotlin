@@ -9,10 +9,10 @@ import kotlin.reflect.KType
 import kotlin.reflect.KTypeProjection
 
 internal fun kTypeStub(): KType = object : KType {
-    override val classifier: KClassifier?
+    override konst classifier: KClassifier?
         get() = null
-    override val arguments: List<KTypeProjection>
+    override konst arguments: List<KTypeProjection>
         get() = emptyList()
-    override val isMarkedNullable: Boolean
+    override konst isMarkedNullable: Boolean
         get() = false
 }

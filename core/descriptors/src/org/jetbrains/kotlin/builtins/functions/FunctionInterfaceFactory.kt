@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.utils.Printer
 
 class FunctionInterfaceMemberScope(
-    private val classDescriptorFactory: ClassDescriptorFactory,
-    val packageName: FqName
+    private konst classDescriptorFactory: ClassDescriptorFactory,
+    konst packageName: FqName
 ) : MemberScopeImpl() {
 
     override fun getContributedDescriptors(
@@ -50,7 +50,7 @@ class FunctionInterfaceMemberScope(
         TODO()
     }
 
-    private val classifiers = mutableMapOf<Name, ClassifierDescriptor>()
+    private konst classifiers = mutableMapOf<Name, ClassifierDescriptor>()
 
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? = when {
         classDescriptorFactory.shouldCreateClass(packageName, name) ->
@@ -67,7 +67,7 @@ class FunctionInterfacePackageFragmentImpl(
     name: FqName
 ) : FunctionInterfacePackageFragment,
     PackageFragmentDescriptorImpl(module, name) {
-    private val memberScope = FunctionInterfaceMemberScope(classDescriptorFactory, fqName)
+    private konst memberScope = FunctionInterfaceMemberScope(classDescriptorFactory, fqName)
     override fun getMemberScope() = memberScope
 }
 
@@ -75,8 +75,8 @@ fun functionInterfacePackageFragmentProvider(
     storageManager: StorageManager,
     module: ModuleDescriptor
 ): PackageFragmentProvider {
-    val classFactory = BuiltInFictitiousFunctionClassFactory(storageManager, module)
-    val fragments = listOf(
+    konst classFactory = BuiltInFictitiousFunctionClassFactory(storageManager, module)
+    konst fragments = listOf(
         KOTLIN_REFLECT_FQ_NAME,
         BUILT_INS_PACKAGE_FQ_NAME,
         COROUTINES_PACKAGE_FQ_NAME

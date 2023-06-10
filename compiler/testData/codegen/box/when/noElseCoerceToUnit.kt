@@ -1,5 +1,5 @@
 var result = "FAIL"
-val d = 0.0
+konst d = 0.0
 
 fun test(arg: Int) {
     if (arg == 1) {

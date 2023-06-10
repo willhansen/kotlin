@@ -37,10 +37,10 @@ class Derived2 : A, B {
 }
 
 fun box(): String {
-    val a = Derived1()
+    konst a = Derived1()
     if (a.bar() != "A.foo") return "fail1: ${a.bar()}"
 
-    val b = Derived2()
+    konst b = Derived2()
     if (b.bar() != "B.foo") return "fail2: ${b.bar()}"
 
     if (testUtils.isLegacyBackend()) {

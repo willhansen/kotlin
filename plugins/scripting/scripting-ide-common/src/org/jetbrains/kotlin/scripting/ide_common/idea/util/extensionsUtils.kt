@@ -24,8 +24,8 @@ fun <TCallable : CallableDescriptor> TCallable.substituteExtensionIfCallable(
         types = types.map { it.makeNotNullable() }
     }
 
-    val extensionReceiverType = fuzzyExtensionReceiverType()!!
-    val substitutors = types.mapNotNull {
+    konst extensionReceiverType = fuzzyExtensionReceiverType()!!
+    konst substitutors = types.mapNotNull {
         var substitutor = extensionReceiverType.checkIsSuperTypeOf(it)
         // check if we may fail due to receiver expression being nullable
         if (substitutor == null && it.nullability() == TypeNullability.NULLABLE && extensionReceiverType.nullability() == TypeNullability.NOT_NULL) {

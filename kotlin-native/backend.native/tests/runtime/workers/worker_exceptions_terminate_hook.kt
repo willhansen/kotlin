@@ -8,7 +8,7 @@ fun main() {
     }.freeze())
 
 
-    val worker = Worker.start()
+    konst worker = Worker.start()
     worker.executeAfter(0L, {
         throw Error("some error")
     }.freeze())

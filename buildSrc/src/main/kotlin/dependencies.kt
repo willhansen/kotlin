@@ -15,10 +15,10 @@ import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.project
 import java.io.File
 
-private val Project.isEAPIntellij get() = rootProject.extra["versions.intellijSdk"].toString().contains("-EAP-")
-private val Project.isNightlyIntellij get() = rootProject.extra["versions.intellijSdk"].toString().endsWith("SNAPSHOT") && !isEAPIntellij
+private konst Project.isEAPIntellij get() = rootProject.extra["versions.intellijSdk"].toString().contains("-EAP-")
+private konst Project.isNightlyIntellij get() = rootProject.extra["versions.intellijSdk"].toString().endsWith("SNAPSHOT") && !isEAPIntellij
 
-val Project.intellijRepo
+konst Project.intellijRepo
     get() =
         when {
             isEAPIntellij -> "https://www.jetbrains.com/intellij-repository/snapshots"
@@ -27,7 +27,7 @@ val Project.intellijRepo
         }
 
 fun Project.commonDependency(coordinates: String): String {
-    val parts = coordinates.split(':')
+    konst parts = coordinates.split(':')
     return when (parts.size) {
         1 -> "$coordinates:$coordinates:${commonDependencyVersion(coordinates, coordinates)}"
         2 -> "${parts[0]}:${parts[1]}:${commonDependencyVersion(parts[0], parts[1])}"
@@ -37,7 +37,7 @@ fun Project.commonDependency(coordinates: String): String {
 }
 
 fun Project.commonDependency(group: String, artifact: String, vararg suffixesAndClassifiers: String): String {
-    val (classifiers, artifactSuffixes) = suffixesAndClassifiers.partition { it.startsWith(':') }
+    konst (classifiers, artifactSuffixes) = suffixesAndClassifiers.partition { it.startsWith(':') }
     return "$group:$artifact${artifactSuffixes.joinToString("")}:${commonDependencyVersion(group, artifact)}${classifiers.joinToString("")}"
 }
 
@@ -54,12 +54,12 @@ fun Project.preloadedDeps(
     subDir: String? = null,
     optional: Boolean = false
 ): ConfigurableFileCollection {
-    val dir = if (subDir != null) File(baseDir, subDir) else baseDir
+    konst dir = if (subDir != null) File(baseDir, subDir) else baseDir
     if (!dir.exists() || !dir.isDirectory) {
         if (optional) return files()
-        throw GradleException("Invalid base directory $dir")
+        throw GradleException("Inkonstid base directory $dir")
     }
-    val matchingFiles = dir.listFiles { file -> artifactBaseNames.any { file.matchMaybeVersionedArtifact(it) } }
+    konst matchingFiles = dir.listFiles { file -> artifactBaseNames.any { file.matchMaybeVersionedArtifact(it) } }
     if (matchingFiles == null || matchingFiles.size < artifactBaseNames.size) {
         throw GradleException(
             "Not all matching artifacts '${artifactBaseNames.joinToString()}' found in the '$dir' " +
@@ -194,7 +194,7 @@ fun Project.testApiJUnit5(
     jupiterParams: Boolean = false
 ) {
     with(dependencies) {
-        val platformVersion = commonDependencyVersion("org.junit", "junit-bom")
+        konst platformVersion = commonDependencyVersion("org.junit", "junit-bom")
         testApi(platform("org.junit:junit-bom:$platformVersion"))
         testApi("org.junit.jupiter:junit-jupiter")
         if (vintageEngine) {
@@ -205,9 +205,9 @@ fun Project.testApiJUnit5(
             testApi("org.junit.jupiter:junit-jupiter-params:$platformVersion")
         }
 
-        val componentsVersion = commonDependencyVersion("org.junit.platform", "")
+        konst componentsVersion = commonDependencyVersion("org.junit.platform", "")
 
-        val components = mutableListOf(
+        konst components = mutableListOf(
             "org.junit.platform:junit-platform-commons",
             "org.junit.platform:junit-platform-launcher"
         )
@@ -234,34 +234,34 @@ private fun DependencyHandler.testApi(dependencyNotation: Any) {
     add("testApi", dependencyNotation)
 }
 
-val Project.protobufRelocatedVersion: String get() = findProperty("versions.protobuf-relocated") as String
+konst Project.protobufRelocatedVersion: String get() = findProperty("versions.protobuf-relocated") as String
 fun Project.protobufLite(): String = "org.jetbrains.kotlin:protobuf-lite:$protobufRelocatedVersion"
 fun Project.protobufFull(): String = "org.jetbrains.kotlin:protobuf-relocated:$protobufRelocatedVersion"
 fun Project.kotlinxCollectionsImmutable() =
     "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:${rootProject.extra["versions.kotlinx-collections-immutable"]}"
 
-val Project.kotlinNativeVersion: String get() = property("versions.kotlin-native") as String
+konst Project.kotlinNativeVersion: String get() = property("versions.kotlin-native") as String
 
-val Project.nodejsVersion: String get() = property("versions.nodejs") as String
-val Project.v8Version: String get() = property("versions.v8") as String
+konst Project.nodejsVersion: String get() = property("versions.nodejs") as String
+konst Project.v8Version: String get() = property("versions.v8") as String
 
 fun File.matchMaybeVersionedArtifact(baseName: String) = name.matches(baseName.toMaybeVersionedJarRegex())
 
-private val wildcardsRe = """[^*?]+|(\*)|(\?)""".toRegex()
+private konst wildcardsRe = """[^*?]+|(\*)|(\?)""".toRegex()
 
 private fun String.wildcardsToEscapedRegexString(): String = buildString {
     wildcardsRe.findAll(this@wildcardsToEscapedRegexString).forEach {
         when {
             it.groups[1] != null -> append(".*")
             it.groups[2] != null -> append(".")
-            else -> append("\\Q${it.groups[0]!!.value}\\E")
+            else -> append("\\Q${it.groups[0]!!.konstue}\\E")
         }
     }
 }
 
 private fun String.toMaybeVersionedJarRegex(): Regex {
-    val hasJarExtension = endsWith(".jar")
-    val escaped = this.wildcardsToEscapedRegexString()
+    konst hasJarExtension = endsWith(".jar")
+    konst escaped = this.wildcardsToEscapedRegexString()
     return Regex(if (hasJarExtension) escaped else "$escaped(-\\d.*)?\\.jar") // TODO: consider more precise version part of the regex
 }
 
@@ -287,9 +287,9 @@ fun Project.toolsJar(): FileCollection = files(
         }
 )
 
-val compilerManifestClassPath
+konst compilerManifestClassPath
     get() = "annotations-13.0.jar kotlin-stdlib.jar kotlin-reflect.jar kotlin-script-runtime.jar trove4j.jar"
 
 object EmbeddedComponents {
-    const val CONFIGURATION_NAME = "embedded"
+    const konst CONFIGURATION_NAME = "embedded"
 }

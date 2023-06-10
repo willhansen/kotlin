@@ -34,16 +34,16 @@ import kotlin.contracts.contract
 
 class DeprecationResolver(
     storageManager: StorageManager,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val deprecationSettings: DeprecationSettings
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst deprecationSettings: DeprecationSettings
 ) {
-    private val deprecations: MemoizedFunctionToNotNull<DeclarationDescriptor, DeprecationInfo> =
+    private konst deprecations: MemoizedFunctionToNotNull<DeclarationDescriptor, DeprecationInfo> =
         storageManager.createMemoizedFunction { descriptor ->
-            val deprecations = descriptor.getOwnDeprecations()
+            konst deprecations = descriptor.getOwnDeprecations()
             when {
                 deprecations.isNotEmpty() -> DeprecationInfo(deprecations, hasInheritedDeprecations = false)
                 descriptor is CallableMemberDescriptor -> {
-                    val inheritedDeprecations = listOfNotNull(deprecationByOverridden(descriptor))
+                    konst inheritedDeprecations = listOfNotNull(deprecationByOverridden(descriptor))
                     when (inheritedDeprecations.isNotEmpty()) {
                         true -> when (languageVersionSettings.supportsFeature(LanguageFeature.StopPropagatingDeprecationThroughOverrides)) {
                             true -> DeprecationInfo(emptyList(), hasInheritedDeprecations = true, inheritedDeprecations)
@@ -57,16 +57,16 @@ class DeprecationResolver(
         }
 
     private data class DeprecationInfo(
-        val deprecations: List<DescriptorBasedDeprecationInfo>,
-        val hasInheritedDeprecations: Boolean,
-        val hiddenInheritedDeprecations: List<DescriptorBasedDeprecationInfo> = emptyList()
+        konst deprecations: List<DescriptorBasedDeprecationInfo>,
+        konst hasInheritedDeprecations: Boolean,
+        konst hiddenInheritedDeprecations: List<DescriptorBasedDeprecationInfo> = emptyList()
     ) {
         companion object {
-            val EMPTY = DeprecationInfo(emptyList(), hasInheritedDeprecations = false, emptyList())
+            konst EMPTY = DeprecationInfo(emptyList(), hasInheritedDeprecations = false, emptyList())
         }
     }
 
-    private val isHiddenBecauseOfKotlinVersionAccessibility = storageManager.createMemoizedFunction { descriptor: DeclarationDescriptor ->
+    private konst isHiddenBecauseOfKotlinVersionAccessibility = storageManager.createMemoizedFunction { descriptor: DeclarationDescriptor ->
         descriptor.checkSinceKotlinVersionAccessibility(languageVersionSettings)
     }
 
@@ -109,7 +109,7 @@ class DeprecationResolver(
             if (descriptor.isHiddenForResolutionEverywhereBesideSupercalls && !isSuperCall) return true
         }
 
-        val sinceKotlinAccessibility = isHiddenBecauseOfKotlinVersionAccessibility(descriptor.original)
+        konst sinceKotlinAccessibility = isHiddenBecauseOfKotlinVersionAccessibility(descriptor.original)
         if (sinceKotlinAccessibility is SinceKotlinAccessibility.NotAccessible) return true
 
         if (sinceKotlinAccessibility is SinceKotlinAccessibility.NotAccessibleButWasExperimental) {
@@ -140,8 +140,8 @@ class DeprecationResolver(
         }
 
     private fun deprecationByOverridden(root: CallableMemberDescriptor): DescriptorBasedDeprecationInfo? {
-        val visited = HashSet<CallableMemberDescriptor>()
-        val deprecations = LinkedHashSet<DescriptorBasedDeprecationInfo>()
+        konst visited = HashSet<CallableMemberDescriptor>()
+        konst deprecations = LinkedHashSet<DescriptorBasedDeprecationInfo>()
         var hasUndeprecatedOverridden = false
 
         fun traverse(node: CallableMemberDescriptor) {
@@ -149,8 +149,8 @@ class DeprecationResolver(
 
             visited.add(node)
 
-            val deprecationsByAnnotation = node.getOwnDeprecations()
-            val overriddenDescriptors = node.original.overriddenDescriptors
+            konst deprecationsByAnnotation = node.getOwnDeprecations()
+            konst overriddenDescriptors = node.original.overriddenDescriptors
             when {
                 deprecationsByAnnotation.isNotEmpty() -> {
                     deprecations.addAll(deprecationsByAnnotation)
@@ -205,7 +205,7 @@ class DeprecationResolver(
             return emptyList()
         }
 
-        val result = SmartList<DescriptorBasedDeprecationInfo>()
+        konst result = SmartList<DescriptorBasedDeprecationInfo>()
 
         addDeprecationIfPresent(result)
 
@@ -228,16 +228,16 @@ class DeprecationResolver(
     }
 
     private fun DeclarationDescriptor.addDeprecationIfPresent(result: MutableList<DescriptorBasedDeprecationInfo>) {
-        val annotation = annotations.findAnnotation(StandardNames.FqNames.deprecated) ?: annotations.findAnnotation(JAVA_DEPRECATED)
+        konst annotation = annotations.findAnnotation(StandardNames.FqNames.deprecated) ?: annotations.findAnnotation(JAVA_DEPRECATED)
         if (annotation != null) {
-            val deprecatedByAnnotation =
+            konst deprecatedByAnnotation =
                 DeprecatedByAnnotation.create(
                     annotation, annotations.findAnnotation(StandardNames.FqNames.deprecatedSinceKotlin),
                     this, deprecationSettings.propagatedToOverrides(annotation),
                     languageVersionSettings.apiVersion
                 )
             if (deprecatedByAnnotation != null) {
-                val deprecation = when {
+                konst deprecation = when {
                     this is TypeAliasConstructorDescriptor ->
                         DeprecatedTypealiasByAnnotation(typeAliasDescriptor, deprecatedByAnnotation)
 
@@ -256,7 +256,7 @@ class DeprecationResolver(
         getDeprecationFromUserData(this)?.let(result::add)
     }
 
-    private val DeclarationDescriptor.isBuiltInOperatorMod: Boolean
+    private konst DeclarationDescriptor.isBuiltInOperatorMod: Boolean
         get() = this is FunctionDescriptor && this.isOperatorMod() && KotlinBuiltIns.isUnderKotlinPackage(this)
 
     private fun shouldSkipDeprecationOnKotlinIoReadBytes(
@@ -265,7 +265,7 @@ class DeprecationResolver(
         descriptor.name.asString() == "readBytes" &&
                 (descriptor.containingDeclaration as? PackageFragmentDescriptor)?.fqName?.asString() == "kotlin.io" &&
                 descriptor is FunctionDescriptor &&
-                descriptor.valueParameters.singleOrNull()?.type?.let(KotlinBuiltIns::isInt) == true &&
+                descriptor.konstueParameters.singleOrNull()?.type?.let(KotlinBuiltIns::isInt) == true &&
                 languageVersionSettings.apiVersion < ApiVersion.KOTLIN_1_3
 
     private fun getDeprecationFromUserData(target: DeclarationDescriptor): DescriptorBasedDeprecationInfo? =
@@ -278,14 +278,14 @@ class DeprecationResolver(
             null
         }
 
-        val versionRequirements =
+        konst versionRequirements =
             (target as? DeserializedMemberDescriptor)?.versionRequirements
                 ?: (target as? DeserializedClassDescriptor)?.versionRequirements
                 ?: return emptyList()
 
         return versionRequirements.mapNotNull { versionRequirement ->
-            val requiredVersion = createVersion(versionRequirement.version.asString())
-            val currentVersion = when (versionRequirement.kind) {
+            konst requiredVersion = createVersion(versionRequirement.version.asString())
+            konst currentVersion = when (versionRequirement.kind) {
                 ProtoBuf.VersionRequirement.VersionKind.LANGUAGE_VERSION ->
                     MavenComparableVersion(languageVersionSettings.languageVersion.versionString)
                 ProtoBuf.VersionRequirement.VersionKind.API_VERSION ->
@@ -302,6 +302,6 @@ class DeprecationResolver(
     }
 
     companion object {
-        val JAVA_DEPRECATED = FqName("java.lang.Deprecated")
+        konst JAVA_DEPRECATED = FqName("java.lang.Deprecated")
     }
 }

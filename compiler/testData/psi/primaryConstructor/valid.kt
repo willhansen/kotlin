@@ -2,7 +2,7 @@ class A0
 constructor() {}
 class A1
 private constructor(y: Int) : Base1(), Base2 {
-    val x: Int
+    konst x: Int
 }
 class A2 @private constructor(y: Int)
 

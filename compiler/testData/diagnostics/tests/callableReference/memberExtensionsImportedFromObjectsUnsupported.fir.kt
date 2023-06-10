@@ -4,12 +4,12 @@ import Obj.ext
 import A.Companion.ext2
 
 object Obj {
-    val String.ext: String get() = this
+    konst String.ext: String get() = this
 }
 
 class A {
     companion object {
-        val String.ext2: String get() = this
+        konst String.ext2: String get() = this
     }
 }
 

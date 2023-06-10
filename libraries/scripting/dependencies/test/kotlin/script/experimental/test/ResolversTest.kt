@@ -18,7 +18,7 @@ import kotlin.script.experimental.dependencies.impl.makeResolveFailureResult
 class ResolversTest : ResolversTestBase() {
 
     private fun <T> withTempFile(body: (file: File) -> T): T {
-        val file = Files.createTempFile(null, null).toFile()
+        konst file = Files.createTempFile(null, null).toFile()
         file.deleteOnExit()
         try {
             return body(file)
@@ -32,12 +32,12 @@ class ResolversTest : ResolversTestBase() {
     fun testFileSystemResolver() {
         withTempFile { file ->
 
-            val resolver = FileSystemDependenciesResolver()
+            konst resolver = FileSystemDependenciesResolver()
 
             resolver.assertNotResolve(1, file.name)
             resolver.assertResolve(file, file.canonicalPath)
 
-            val dir = file.parent!!
+            konst dir = file.parent!!
             resolver.assertAcceptsRepository(dir)
             resolver.addRepository(dir)
 
@@ -46,9 +46,9 @@ class ResolversTest : ResolversTestBase() {
     }
 
     fun testFileSystemResolverFail() {
-        val file = getNonExistingFile()
+        konst file = getNonExistingFile()
 
-        val resolver = FileSystemDependenciesResolver()
+        konst resolver = FileSystemDependenciesResolver()
         resolver.assertAcceptsArtifact(file.path)
         resolver.assertNotResolve(1, file.path)
 
@@ -62,25 +62,25 @@ class ResolversTest : ResolversTestBase() {
     }
 
     fun testFileSystemAcceptsLinuxPath() {
-        val resolver = FileSystemDependenciesResolver()
+        konst resolver = FileSystemDependenciesResolver()
         resolver.assertAcceptsArtifact("/usr/local/bin/temp")
     }
 
     fun testFileSystemAcceptsWindowsPath() {
-        val resolver = FileSystemDependenciesResolver()
+        konst resolver = FileSystemDependenciesResolver()
         resolver.assertAcceptsArtifact("C:\\temp\\myfile")
     }
 
     fun testFileSystemNotAcceptsMavenPath() {
-        val resolver = FileSystemDependenciesResolver()
+        konst resolver = FileSystemDependenciesResolver()
         resolver.assertNotAcceptsArtifact("  ")
     }
 
     class TestDependenciesResolver(
-        val acceptsArt: (String) -> Boolean,
-        val doResolve: (String) -> File?,
-        val acceptsRepo: (String) -> Boolean,
-        val addRepo: (String) -> Unit
+        konst acceptsArt: (String) -> Boolean,
+        konst doResolve: (String) -> File?,
+        konst acceptsRepo: (String) -> Boolean,
+        konst addRepo: (String) -> Unit
     ) : ExternalDependenciesResolver {
 
         override fun acceptsArtifact(artifactCoordinates: String): Boolean = acceptsArt(artifactCoordinates)
@@ -90,8 +90,8 @@ class ResolversTest : ResolversTestBase() {
             options: ExternalDependenciesResolver.Options,
             sourceCodeLocation: SourceCode.LocationWithId?
         ): ResultWithDiagnostics<List<File>> {
-            if (!acceptsArtifact(artifactCoordinates)) throw Exception("Path is invalid")
-            val file = doResolve(artifactCoordinates)
+            if (!acceptsArtifact(artifactCoordinates)) throw Exception("Path is inkonstid")
+            konst file = doResolve(artifactCoordinates)
                 ?: return makeResolveFailureResult("Failed to resolve '$artifactCoordinates'", sourceCodeLocation)
             return ResultWithDiagnostics.Success(listOf(file))
         }
@@ -112,20 +112,20 @@ class ResolversTest : ResolversTestBase() {
     }
 
     fun testCompoundResolver() {
-        val file1 = getNonExistingFile()
-        val file2 = getNonExistingFile()
-        val resolver1 = TestDependenciesResolver(acceptsArt = { it.startsWith("file") },
+        konst file1 = getNonExistingFile()
+        konst file2 = getNonExistingFile()
+        konst resolver1 = TestDependenciesResolver(acceptsArt = { it.startsWith("file") },
                                                  doResolve = { if (it == "file1") file1 else null },
                                                  acceptsRepo = { false },
                                                  addRepo = {})
 
         var prefix: String? = null
-        val resolver2 = TestDependenciesResolver(acceptsArt = { a -> prefix?.let { a.startsWith(it) } ?: false },
+        konst resolver2 = TestDependenciesResolver(acceptsArt = { a -> prefix?.let { a.startsWith(it) } ?: false },
                                                  doResolve = { if (it.contains(".")) file2 else null },
                                                  acceptsRepo = { true },
                                                  addRepo = { prefix = it })
 
-        val resolver = CompoundDependenciesResolver(resolver1, resolver2)
+        konst resolver = CompoundDependenciesResolver(resolver1, resolver2)
 
         resolver.assertNotResolve(1, "abc")
         resolver.assertNotResolve(1, "file2")

@@ -1,6 +1,6 @@
 // NI_EXPECTED_FILE
 
-open class MyClass private constructor(val x: Int) {
+open class MyClass private constructor(konst x: Int) {
 
     protected constructor(x: String) : this(x.length)
 
@@ -9,20 +9,20 @@ open class MyClass private constructor(val x: Int) {
 
 typealias MyAlias = MyClass
 
-val test1 = <!INVISIBLE_MEMBER!>MyAlias<!>(1)
-val test1a = <!INVISIBLE_MEMBER!>MyClass<!>(1)
+konst test1 = <!INVISIBLE_MEMBER!>MyAlias<!>(1)
+konst test1a = <!INVISIBLE_MEMBER!>MyClass<!>(1)
 
-val test2 = <!INVISIBLE_MEMBER!>MyAlias<!>("")
-val test2a = <!INVISIBLE_MEMBER!>MyClass<!>("")
+konst test2 = <!INVISIBLE_MEMBER!>MyAlias<!>("")
+konst test2a = <!INVISIBLE_MEMBER!>MyClass<!>("")
 
-val test3 = MyAlias(1.0)
-val test3a = MyClass(1.0)
+konst test3 = MyAlias(1.0)
+konst test3a = MyClass(1.0)
 
 class MyDerived : MyClass(1.0) {
-    val test4 = <!INVISIBLE_MEMBER!>MyAlias<!>(1)
-    val test4a = <!INVISIBLE_MEMBER!>MyClass<!>(1)
-    val test5 = <!PROTECTED_CONSTRUCTOR_NOT_IN_SUPER_CALL!>MyAlias<!>("")
-    val test5a = <!PROTECTED_CONSTRUCTOR_NOT_IN_SUPER_CALL!>MyClass<!>("")
-    val test6 = MyAlias(1.0)
-    val test6a = MyClass(1.0)
+    konst test4 = <!INVISIBLE_MEMBER!>MyAlias<!>(1)
+    konst test4a = <!INVISIBLE_MEMBER!>MyClass<!>(1)
+    konst test5 = <!PROTECTED_CONSTRUCTOR_NOT_IN_SUPER_CALL!>MyAlias<!>("")
+    konst test5a = <!PROTECTED_CONSTRUCTOR_NOT_IN_SUPER_CALL!>MyClass<!>("")
+    konst test6 = MyAlias(1.0)
+    konst test6a = MyClass(1.0)
 }

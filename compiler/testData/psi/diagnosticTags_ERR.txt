@@ -716,7 +716,7 @@ KtFile: diagnosticTags_ERR.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace(' ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiElement(COLON)(':')
@@ -839,7 +839,7 @@ KtFile: diagnosticTags_ERR.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace(' ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiElement(COLON)(':')
@@ -1008,9 +1008,9 @@ KtFile: diagnosticTags_ERR.kt
       VALUE_PARAMETER_LIST
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
           PsiElement(COLON)(':')
           PsiWhiteSpace(' ')
           TYPE_REFERENCE

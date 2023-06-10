@@ -12,9 +12,9 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import java.io.File
 
-class GeneratedFile(val file: File, val newText: String)
+class GeneratedFile(konst file: File, konst newText: String)
 
-class Import(val packageName: String, val className: String)
+class Import(konst packageName: String, konst className: String)
 
 fun ClassName.parameterizedByIfAny(typeArguments: List<TypeName>) =
     if (typeArguments.isNotEmpty()) parameterizedBy(typeArguments) else this

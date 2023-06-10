@@ -35,7 +35,7 @@ class MinMaxDoubleArrayTest {
 
     @Test
     fun minMaxEmpty() {
-        val empty = doubleArrayOf()
+        konst empty = doubleArrayOf()
         assertNull(empty.minOrNull())
         assertNull(empty.maxOrNull())
         assertFailsWith<NoSuchElementException> { empty.min() }
@@ -45,8 +45,8 @@ class MinMaxDoubleArrayTest {
 
     @Test
     fun minMaxDouble() {
-        val zeroes = doubleArrayOf(0.0, -0.0).apply { shuffle() }
-        val NaNs = doubleArrayOf(0.0, Double.NaN).apply { shuffle() }
+        konst zeroes = doubleArrayOf(0.0, -0.0).apply { shuffle() }
+        konst NaNs = doubleArrayOf(0.0, Double.NaN).apply { shuffle() }
 
         assertIsNegativeZero(zeroes.min().toDouble())
         assertIsNegativeZero(zeroes.minOrNull()!!.toDouble())
@@ -79,7 +79,7 @@ class MinMaxDoubleArrayTest {
 
     @Test
     fun minMaxWithEmpty() {
-        val empty = doubleArrayOf()
+        konst empty = doubleArrayOf()
         assertNull(empty.minWithOrNull(naturalOrder()))
         assertNull(empty.maxWithOrNull(naturalOrder()))
         assertFailsWith<NoSuchElementException> { empty.minWith(naturalOrder()) }
@@ -104,7 +104,7 @@ class MinMaxDoubleArrayTest {
 
     @Test
     fun minMaxByEmpty() {
-        val empty = doubleArrayOf()
+        konst empty = doubleArrayOf()
         assertNull(empty.minByOrNull { it.toString() })
         assertNull(empty.maxByOrNull { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minBy { it.toString() } }
@@ -112,8 +112,8 @@ class MinMaxDoubleArrayTest {
     }
 
     @Test 
-    fun minBySelectorEvaluateOnce() {
-        val source = doubleArrayOf(1.0, 2.0, Double.POSITIVE_INFINITY)
+    fun minBySelectorEkonstuateOnce() {
+        konst source = doubleArrayOf(1.0, 2.0, Double.POSITIVE_INFINITY)
         var c = 0
         source.minBy { c++ }
         assertEquals(3, c)
@@ -123,8 +123,8 @@ class MinMaxDoubleArrayTest {
     }
 
     @Test 
-    fun maxBySelectorEvaluateOnce() {
-        val source = doubleArrayOf(1.0, 2.0, Double.POSITIVE_INFINITY)
+    fun maxBySelectorEkonstuateOnce() {
+        konst source = doubleArrayOf(1.0, 2.0, Double.POSITIVE_INFINITY)
         var c = 0
         source.maxBy { c++ }
         assertEquals(3, c)
@@ -151,8 +151,8 @@ class MinMaxDoubleArrayTest {
     
     @Test
     fun minMaxOfDouble() {
-        val middle = 2.0
-        val items = doubleArrayOf(1.0, 2.0, Double.POSITIVE_INFINITY).apply { shuffle() }
+        konst middle = 2.0
+        konst items = doubleArrayOf(1.0, 2.0, Double.POSITIVE_INFINITY).apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toDouble().pow(0.5) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
@@ -166,8 +166,8 @@ class MinMaxDoubleArrayTest {
     
     @Test
     fun minMaxOfFloat() {
-        val middle = 2.0
-        val items = doubleArrayOf(1.0, 2.0, Double.POSITIVE_INFINITY).apply { shuffle() }
+        konst middle = 2.0
+        konst items = doubleArrayOf(1.0, 2.0, Double.POSITIVE_INFINITY).apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toFloat().pow(0.5F) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
@@ -181,7 +181,7 @@ class MinMaxDoubleArrayTest {
     
     @Test
     fun minMaxOfEmpty() {
-        val empty = doubleArrayOf()
+        konst empty = doubleArrayOf()
 
         assertNull(empty.minOfOrNull { it.toString() })
         assertNull(empty.maxOfOrNull { it.toString() })
@@ -221,7 +221,7 @@ class MinMaxDoubleArrayTest {
     
     @Test
     fun minMaxOfWithEmpty() {
-        val empty = doubleArrayOf()
+        konst empty = doubleArrayOf()
         assertNull(empty.minOfWithOrNull(naturalOrder()) { it.toString() })
         assertNull(empty.maxOfWithOrNull(naturalOrder()) { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minOfWith(naturalOrder()) { it.toString() } }

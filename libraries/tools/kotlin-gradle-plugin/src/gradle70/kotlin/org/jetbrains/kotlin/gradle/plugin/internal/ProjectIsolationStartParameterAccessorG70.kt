@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.plugin.internal
 import org.gradle.api.invocation.Gradle
 
 internal class ProjectIsolationStartParameterAccessorG70() : ProjectIsolationStartParameterAccessor {
-    override val isProjectIsolationEnabled: Boolean
+    override konst isProjectIsolationEnabled: Boolean
         get() = false
 
     internal class Factory : ProjectIsolationStartParameterAccessor.Factory {

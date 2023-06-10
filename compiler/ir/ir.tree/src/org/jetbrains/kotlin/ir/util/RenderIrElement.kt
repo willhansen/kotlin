@@ -26,10 +26,10 @@ import org.jetbrains.kotlin.utils.addToStdlib.ifTrue
 fun IrElement.render(options: DumpIrTreeOptions = DumpIrTreeOptions()) =
     accept(RenderIrElementVisitor(options), null)
 
-class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTreeOptions()) :
+class RenderIrElementVisitor(private konst options: DumpIrTreeOptions = DumpIrTreeOptions()) :
     IrElementVisitor<String, Nothing?> {
 
-    private val variableNameData = VariableNameData(options.normalizeNames)
+    private konst variableNameData = VariableNameData(options.normalizeNames)
 
     fun renderType(type: IrType) = type.renderTypeWithRenderer(this@RenderIrElementVisitor, options)
 
@@ -48,8 +48,8 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
             "UNBOUND ${javaClass.simpleName}"
 
     private class BoundSymbolReferenceRenderer(
-        private val variableNameData: VariableNameData,
-        private val options: DumpIrTreeOptions,
+        private konst variableNameData: VariableNameData,
+        private konst options: DumpIrTreeOptions,
     ) : IrElementVisitor<String, Nothing?> {
 
         override fun visitElement(element: IrElement, data: Nothing?) = buildTrimEnd {
@@ -79,7 +79,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
 
         override fun visitVariable(declaration: IrVariable, data: Nothing?) =
             buildTrimEnd {
-                if (declaration.isVar) append("var ") else append("val ")
+                if (declaration.isVar) append("var ") else append("konst ")
 
                 append(declaration.normalizedName(variableNameData))
                 append(": ")
@@ -128,17 +128,17 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
 
                 renderTypeParameters(declaration)
 
-                appendIterableWith(declaration.valueParameters, "(", ")", ", ") { valueParameter ->
-                    val varargElementType = valueParameter.varargElementType
+                appendIterableWith(declaration.konstueParameters, "(", ")", ", ") { konstueParameter ->
+                    konst varargElementType = konstueParameter.varargElementType
                     if (varargElementType != null) {
                         append("vararg ")
-                        append(valueParameter.name.asString())
+                        append(konstueParameter.name.asString())
                         append(": ")
                         append(varargElementType.renderTypeWithRenderer(null, options))
                     } else {
-                        append(valueParameter.name.asString())
+                        append(konstueParameter.name.asString())
                         append(": ")
-                        append(valueParameter.type.renderTypeWithRenderer(null, options))
+                        append(konstueParameter.type.renderTypeWithRenderer(null, options))
                     }
                 }
 
@@ -176,7 +176,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
 
                 append(declaration.name.asString())
 
-                val getter = declaration.getter
+                konst getter = declaration.getter
                 if (getter != null) {
                     append(": ")
                     append(getter.renderReturnType(null, options))
@@ -193,7 +193,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
 
         override fun visitLocalDelegatedProperty(declaration: IrLocalDelegatedProperty, data: Nothing?): String =
             buildTrimEnd {
-                if (declaration.isVar) append("var ") else append("val ")
+                if (declaration.isVar) append("var ") else append("konst ")
                 append(declaration.name.asString())
                 append(": ")
                 append(declaration.type.renderTypeWithRenderer(null, options))
@@ -206,7 +206,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
         }
 
         private fun StringBuilder.renderParentOfReferencedDeclaration(declaration: IrDeclaration) {
-            val parent = try {
+            konst parent = try {
                 declaration.parent
             } catch (e: Exception) {
                 append("<no parent>")
@@ -214,7 +214,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
             }
             when (parent) {
                 is IrPackageFragment -> {
-                    val fqn = parent.packageFqName.asString()
+                    konst fqn = parent.packageFqName.asString()
                     append(fqn.ifEmpty { "<root>" })
                 }
                 is IrDeclaration -> {
@@ -271,7 +271,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
         ArrayList<String>().apply {
             addIfNotNull(dispatchReceiverParameter?.run { "\$this:${type.render()}" })
             addIfNotNull(extensionReceiverParameter?.run { "\$receiver:${type.render()}" })
-            valueParameters.mapTo(this) { "${it.name}:${it.type.render()}" }
+            konstueParameters.mapTo(this) { "${it.name}:${it.type.render()}" }
         }.joinToString(separator = ", ", prefix = "(", postfix = ")")
 
     override fun visitConstructor(declaration: IrConstructor, data: Nothing?): String =
@@ -347,7 +347,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
         "? ${expression::class.java.simpleName} type=${expression.type.render()}"
 
     override fun visitConst(expression: IrConst<*>, data: Nothing?): String =
-        "CONST ${expression.kind} type=${expression.type.render()} value=${expression.value?.escapeIfRequired()}"
+        "CONST ${expression.kind} type=${expression.type.render()} konstue=${expression.konstue?.escapeIfRequired()}"
 
     private fun Any.escapeIfRequired() =
         when (this) {
@@ -363,7 +363,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
         "SPREAD_ELEMENT"
 
     override fun visitBlock(expression: IrBlock, data: Nothing?): String {
-        val prefix = when (expression) {
+        konst prefix = when (expression) {
             is IrReturnableBlock -> "RETURNABLE_"
             is IrInlinedFunctionBlock -> "INLINED_"
             else -> ""
@@ -466,10 +466,10 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
             append("origin=${expression.origin}")
         }
 
-    private inline fun <T : Any> StringBuilder.appendNullableAttribute(prefix: String, value: T?, toString: (T) -> String) {
+    private inline fun <T : Any> StringBuilder.appendNullableAttribute(prefix: String, konstue: T?, toString: (T) -> String) {
         append(prefix)
-        if (value != null) {
-            append(toString(value))
+        if (konstue != null) {
+            append(toString(konstue))
         } else {
             append("null")
         }
@@ -531,7 +531,7 @@ class RenderIrElementVisitor(private val options: DumpIrTreeOptions = DumpIrTree
         "CONSTANT_PRIMITIVE type=${expression.type.render()}"
 
 
-    private val descriptorRendererForErrorDeclarations = DescriptorRenderer.ONLY_NAMES_WITH_SHORT_TYPES
+    private konst descriptorRendererForErrorDeclarations = DescriptorRenderer.ONLY_NAMES_WITH_SHORT_TYPES
 }
 
 internal fun DescriptorRenderer.renderDescriptor(descriptor: DeclarationDescriptor): String =
@@ -545,7 +545,7 @@ internal fun IrDeclaration.renderOriginIfNonTrivial(): String =
 
 internal fun IrClassifierSymbol.renderClassifierFqn(options: DumpIrTreeOptions): String =
     if (isBound)
-        when (val owner = owner) {
+        when (konst owner = owner) {
             is IrClass -> owner.renderClassFqn(options)
             is IrScript -> owner.renderScriptFqn(options)
             is IrTypeParameter -> owner.renderTypeParameterFqn(options)
@@ -597,7 +597,7 @@ private fun IrDeclaration.renderDeclarationFqn(sb: StringBuilder, options: DumpI
 
 private fun IrDeclaration.renderDeclarationParentFqn(sb: StringBuilder, options: DumpIrTreeOptions) {
     try {
-        val parent = this.parent
+        konst parent = this.parent
         if (parent is IrDeclaration) {
             parent.renderDeclarationFqn(sb, options)
         } else if (parent is IrPackageFragment) {
@@ -656,7 +656,7 @@ private fun IrClass.renderClassFlags() =
         "inner".takeIf { isInner },
         "data".takeIf { isData },
         "external".takeIf { isExternal },
-        "value".takeIf { isValue },
+        "konstue".takeIf { isValue },
         "expect".takeIf { isExpect },
         "fun".takeIf { isFun }
     )
@@ -696,14 +696,14 @@ private fun IrProperty.renderPropertyFlags() =
         "delegated".takeIf { isDelegated },
         "expect".takeIf { isExpect },
         "fake_override".takeIf { isFakeOverride },
-        if (isVar) "var" else "val"
+        if (isVar) "var" else "konst"
     )
 
 private fun IrVariable.renderVariableFlags(): String =
     renderFlagsList(
         "const".takeIf { isConst },
         "lateinit".takeIf { isLateinit },
-        if (isVar) "var" else "val"
+        if (isVar) "var" else "konst"
     )
 
 private fun IrValueParameter.renderValueParameterFlags(): String =
@@ -722,7 +722,7 @@ private fun IrTypeAlias.renderTypeAliasFlags(): String =
 private fun IrFunction.renderTypeParameters(): String =
     typeParameters.joinToString(separator = ", ", prefix = "<", postfix = ">") { it.name.toString() }
 
-private val IrFunction.safeReturnType: IrType?
+private konst IrFunction.safeReturnType: IrType?
     get() = try {
         returnType
     } catch (e: ReturnTypeIsNotInitializedException) {
@@ -730,10 +730,10 @@ private val IrFunction.safeReturnType: IrType?
     }
 
 private fun IrLocalDelegatedProperty.renderLocalDelegatedPropertyFlags() =
-    if (isVar) "var" else "val"
+    if (isVar) "var" else "konst"
 
-private class VariableNameData(val normalizeNames: Boolean) {
-    val nameMap: MutableMap<IrVariableSymbol, String> = mutableMapOf()
+private class VariableNameData(konst normalizeNames: Boolean) {
+    konst nameMap: MutableMap<IrVariableSymbol, String> = mutableMapOf()
     var temporaryIndex: Int = 0
 }
 
@@ -757,7 +757,7 @@ private fun IrType.renderTypeInner(renderer: RenderIrElementVisitor?, options: D
         is IrErrorType -> "IrErrorType(${options.verboseErrorTypes.ifTrue { originalKotlinType }})"
 
         is IrSimpleType -> buildTrimEnd {
-            val isDefinitelyNotNullType =
+            konst isDefinitelyNotNullType =
                 classifier is IrTypeParameterSymbol && nullability == SimpleTypeNullability.DEFINITELY_NOT_NULL
             if (isDefinitelyNotNullType) append("{")
             append(classifier.renderClassifierFqn(options))
@@ -827,7 +827,7 @@ private fun StringBuilder.renderAsAnnotation(
     renderer: RenderIrElementVisitor?,
     options: DumpIrTreeOptions,
 ) {
-    val annotationClassName = irAnnotation.symbol.takeIf { it.isBound }?.owner?.parentAsClass?.name?.asString() ?: "<unbound>"
+    konst annotationClassName = irAnnotation.symbol.takeIf { it.isBound }?.owner?.parentAsClass?.name?.asString() ?: "<unbound>"
     append(annotationClassName)
 
     if (irAnnotation.typeArgumentsCount != 0) {
@@ -836,12 +836,12 @@ private fun StringBuilder.renderAsAnnotation(
         }
     }
 
-    if (irAnnotation.valueArgumentsCount == 0) return
+    if (irAnnotation.konstueArgumentsCount == 0) return
 
-    val valueParameterNames = irAnnotation.getValueParameterNamesForDebug()
+    konst konstueParameterNames = irAnnotation.getValueParameterNamesForDebug()
 
-    appendIterableWith(0 until irAnnotation.valueArgumentsCount, separator = ", ", prefix = "(", postfix = ")") {
-        append(valueParameterNames[it])
+    appendIterableWith(0 until irAnnotation.konstueArgumentsCount, separator = ", ", prefix = "(", postfix = ")") {
+        append(konstueParameterNames[it])
         append(" = ")
         renderAsAnnotationArgument(irAnnotation.getValueArgument(it), renderer, options)
     }
@@ -853,7 +853,7 @@ private fun StringBuilder.renderAsAnnotationArgument(irElement: IrElement?, rend
         is IrConstructorCall -> renderAsAnnotation(irElement, renderer, options)
         is IrConst<*> -> {
             append('\'')
-            append(irElement.value.toString())
+            append(irElement.konstue.toString())
             append('\'')
         }
         is IrVararg -> {

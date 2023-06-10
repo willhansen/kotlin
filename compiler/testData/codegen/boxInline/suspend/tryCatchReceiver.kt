@@ -8,29 +8,29 @@ interface Flow<out T> {
 }
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
-inline suspend fun <T> Flow<T>.collect(crossinline action: suspend (value: T) -> Unit): Unit =
+inline suspend fun <T> Flow<T>.collect(crossinline action: suspend (konstue: T) -> Unit): Unit =
     collect(object : FlowCollector<T> {
-        override suspend fun emit(value: T) = action(value)
+        override suspend fun emit(konstue: T) = action(konstue)
     })
 
 inline fun <T, R> Flow<T>.transform(
-    crossinline transform: suspend FlowCollector<R>.(value: T) -> Unit
+    crossinline transform: suspend FlowCollector<R>.(konstue: T) -> Unit
 ): Flow<R> = flow {
-    collect { value ->
-        return@collect transform(value)
+    collect { konstue ->
+        return@collect transform(konstue)
     }
 }
 
-inline fun <T, R> Flow<T>.map(crossinline transform: suspend (value: T) -> R): Flow<R> = transform { value ->
-   return@transform emit(transform(value))
+inline fun <T, R> Flow<T>.map(crossinline transform: suspend (konstue: T) -> R): Flow<R> = transform { konstue ->
+   return@transform emit(transform(konstue))
 }
 
 public fun <T> flow(block: suspend FlowCollector<T>.() -> Unit): Flow<T> = SafeFlow(block)
 
-private class SafeFlow<T>(private val block: suspend FlowCollector<T>.() -> Unit) : Flow<T> {
+private class SafeFlow<T>(private konst block: suspend FlowCollector<T>.() -> Unit) : Flow<T> {
     override suspend fun collect(collector: FlowCollector<T>) {
         collector.block()
     }

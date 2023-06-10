@@ -7,8 +7,8 @@ import kotlin.IllegalStateException
 // FILE: 1.kt
 inline fun <T> mrun(block: () -> T) = block()
 inline fun <T> mrunTwice(block: () -> T) : T {
-    val first = block()
-    val second = block()
+    konst first = block()
+    konst second = block()
     if (first!!::class != second!!::class)
         throw IllegalStateException("${first!!::class} != ${second!!::class}")
     return first
@@ -16,7 +16,7 @@ inline fun <T> mrunTwice(block: () -> T) : T {
 
 // FILE: 2.kt
 fun bar(o: String): String {
-    val callable = mrun {
+    konst callable = mrun {
         fun localAnonymousFun(k: String): String {
             fun localAnonymousFunLevel2() = mrunTwice {
                 object {

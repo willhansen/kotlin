@@ -8,9 +8,9 @@ class Preconditions {
     @Sample
     @Suppress("UNUSED_VARIABLE")
     fun failWithError() {
-        val name: String? = null
+        konst name: String? = null
 
-        assertFailsWith<IllegalStateException> { val nonNullName = name ?: error("Name is missing") }
+        assertFailsWith<IllegalStateException> { konst nonNullName = name ?: error("Name is missing") }
     }
 
     @Sample
@@ -31,19 +31,19 @@ class Preconditions {
     fun failRequireNotNullWithLazyMessage() {
 
         fun printRequiredParam(params: Map<String, String?>) {
-            val required: String = requireNotNull(params["required"]) { "Required value must be non-null" } // returns a non-null value
+            konst required: String = requireNotNull(params["required"]) { "Required konstue must be non-null" } // returns a non-null konstue
             println(required)
             // ...
         }
 
         fun printRequiredParamByUpperCase(params: Map<String, String?>) {
-            val requiredParam: String? = params["required"]
-            requireNotNull(requiredParam) { "Required value must be non-null" }
+            konst requiredParam: String? = params["required"]
+            requireNotNull(requiredParam) { "Required konstue must be non-null" }
             // now requiredParam is smartcast to String so that it is unnecessary to use the safe call(?.)
             println(requiredParam.uppercase())
         }
 
-        val params: MutableMap<String, String?> = mutableMapOf("required" to null)
+        konst params: MutableMap<String, String?> = mutableMapOf("required" to null)
         assertFailsWith<IllegalArgumentException> { printRequiredParam(params) }
         assertFailsWith<IllegalArgumentException> { printRequiredParamByUpperCase(params) }
 
@@ -57,7 +57,7 @@ class Preconditions {
 
         var someState: String? = null
         fun getStateValue(): String {
-            val state = checkNotNull(someState) { "State must be set beforehand" }
+            konst state = checkNotNull(someState) { "State must be set beforehand" }
             check(state.isNotEmpty()) { "State must be non-empty" }
             // ...
             return state

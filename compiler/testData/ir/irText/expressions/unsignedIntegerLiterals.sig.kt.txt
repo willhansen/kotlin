@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}testSimpleUIntLiteral
 //   Public signature: /testSimpleUIntLiteral|-5462154717039801349[0]
-val testSimpleUIntLiteral: UInt
+konst testSimpleUIntLiteral: UInt
   // CHECK JVM_IR:
   //   Mangled name: #<get-testSimpleUIntLiteral>(){}kotlin.UInt
   //   Public signature: /testSimpleUIntLiteral.<get-testSimpleUIntLiteral>|-4653191023207023329[0]
@@ -13,7 +13,7 @@ val testSimpleUIntLiteral: UInt
 // CHECK:
 //   Mangled name: {}testSimpleUIntLiteralWithOverflow
 //   Public signature: /testSimpleUIntLiteralWithOverflow|5568529828713576484[0]
-val testSimpleUIntLiteralWithOverflow: UInt
+konst testSimpleUIntLiteralWithOverflow: UInt
   // CHECK JVM_IR:
   //   Mangled name: #<get-testSimpleUIntLiteralWithOverflow>(){}kotlin.UInt
   //   Public signature: /testSimpleUIntLiteralWithOverflow.<get-testSimpleUIntLiteralWithOverflow>|-8518123773042217261[0]
@@ -25,7 +25,7 @@ val testSimpleUIntLiteralWithOverflow: UInt
 // CHECK:
 //   Mangled name: {}testUByteWithExpectedType
 //   Public signature: /testUByteWithExpectedType|3852078077095318718[0]
-val testUByteWithExpectedType: UByte
+konst testUByteWithExpectedType: UByte
   // CHECK JVM_IR:
   //   Mangled name: #<get-testUByteWithExpectedType>(){}kotlin.UByte
   //   Public signature: /testUByteWithExpectedType.<get-testUByteWithExpectedType>|-6501427247498652278[0]
@@ -37,7 +37,7 @@ val testUByteWithExpectedType: UByte
 // CHECK:
 //   Mangled name: {}testUShortWithExpectedType
 //   Public signature: /testUShortWithExpectedType|6165338656044520744[0]
-val testUShortWithExpectedType: UShort
+konst testUShortWithExpectedType: UShort
   // CHECK JVM_IR:
   //   Mangled name: #<get-testUShortWithExpectedType>(){}kotlin.UShort
   //   Public signature: /testUShortWithExpectedType.<get-testUShortWithExpectedType>|-7410031910894675749[0]
@@ -49,7 +49,7 @@ val testUShortWithExpectedType: UShort
 // CHECK:
 //   Mangled name: {}testUIntWithExpectedType
 //   Public signature: /testUIntWithExpectedType|6767656315821705452[0]
-val testUIntWithExpectedType: UInt
+konst testUIntWithExpectedType: UInt
   // CHECK JVM_IR:
   //   Mangled name: #<get-testUIntWithExpectedType>(){}kotlin.UInt
   //   Public signature: /testUIntWithExpectedType.<get-testUIntWithExpectedType>|870704205305295065[0]
@@ -61,7 +61,7 @@ val testUIntWithExpectedType: UInt
 // CHECK:
 //   Mangled name: {}testULongWithExpectedType
 //   Public signature: /testULongWithExpectedType|-2014270652591396342[0]
-val testULongWithExpectedType: ULong
+konst testULongWithExpectedType: ULong
   // CHECK JVM_IR:
   //   Mangled name: #<get-testULongWithExpectedType>(){}kotlin.ULong
   //   Public signature: /testULongWithExpectedType.<get-testULongWithExpectedType>|4475524496791661545[0]
@@ -73,7 +73,7 @@ val testULongWithExpectedType: ULong
 // CHECK:
 //   Mangled name: {}testToUByte
 //   Public signature: /testToUByte|5171013167243366088[0]
-val testToUByte: UByte
+konst testToUByte: UByte
   // CHECK JVM_IR:
   //   Mangled name: #<get-testToUByte>(){}kotlin.UByte
   //   Public signature: /testToUByte.<get-testToUByte>|4718877243529221360[0]
@@ -85,7 +85,7 @@ val testToUByte: UByte
 // CHECK:
 //   Mangled name: {}testToUShort
 //   Public signature: /testToUShort|-7150535629935793542[0]
-val testToUShort: UShort
+konst testToUShort: UShort
   // CHECK JVM_IR:
   //   Mangled name: #<get-testToUShort>(){}kotlin.UShort
   //   Public signature: /testToUShort.<get-testToUShort>|1257054497303804599[0]
@@ -97,7 +97,7 @@ val testToUShort: UShort
 // CHECK:
 //   Mangled name: {}testToUInt
 //   Public signature: /testToUInt|9156445495607337470[0]
-val testToUInt: UInt
+konst testToUInt: UInt
   // CHECK JVM_IR:
   //   Mangled name: #<get-testToUInt>(){}kotlin.UInt
   //   Public signature: /testToUInt.<get-testToUInt>|-5858848290517809988[0]
@@ -109,7 +109,7 @@ val testToUInt: UInt
 // CHECK:
 //   Mangled name: {}testToULong
 //   Public signature: /testToULong|901391237959692446[0]
-val testToULong: ULong
+konst testToULong: ULong
   // CHECK JVM_IR:
   //   Mangled name: #<get-testToULong>(){}kotlin.ULong
   //   Public signature: /testToULong.<get-testToULong>|-1569892355870406141[0]

@@ -152,7 +152,7 @@ fun main() {
     X().remove("")
     X().removeAt(1)
 
-    val y: MutableList<String> = Y()
+    konst y: MutableList<String> = Y()
     y.removeAt(1)
 
     Y().remove("")

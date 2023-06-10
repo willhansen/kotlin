@@ -3,8 +3,8 @@ class A<T>(t: T) {
 }
 
 abstract class B<E>(e: E) {
-    val myE: E = id(e)
-    val a = A(e)
+    konst myE: E = id(e)
+    konst a = A(e)
 
     fun id(e: E): E = e
 }

@@ -43,7 +43,7 @@ public class KaptTestJvmCompilerMojo extends KaptJVMCompilerMojo {
     private boolean skip;
 
     // TODO it would be nice to avoid using 2 injected fields for sources
-    // but I've not figured out how to have a defaulted parameter value
+    // but I've not figured out how to have a defaulted parameter konstue
     // which is also customisable inside an <execution> in a maven pom.xml
     // so for now lets just use 2 fields
 

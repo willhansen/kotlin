@@ -22,8 +22,8 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
     override fun createArguments(): K2JSDceArguments = K2JSDceArguments()
 
     override fun execImpl(messageCollector: MessageCollector, services: Services, arguments: K2JSDceArguments): ExitCode {
-        val baseDir = File(arguments.outputDirectory ?: "min")
-        val files = arguments.freeArgs.flatMap { arg ->
+        konst baseDir = File(arguments.outputDirectory ?: "min")
+        konst files = arguments.freeArgs.flatMap { arg ->
             collectInputFiles(baseDir, arg, messageCollector)
         }
 
@@ -34,7 +34,7 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
             return ExitCode.COMPILATION_ERROR
         }
 
-        val existingFiles = mutableMapOf<String, InputFile>()
+        konst existingFiles = mutableMapOf<String, InputFile>()
         for (file in files) {
             existingFiles[file.outputPath]?.let {
                 messageCollector.report(
@@ -53,11 +53,11 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
         return if (!arguments.devMode) {
             performDce(files, arguments, messageCollector)
         } else {
-            val devModeOverwritingStrategy =
+            konst devModeOverwritingStrategy =
                 arguments.devModeOverwritingStrategy ?:
                 System.getProperty("kotlin.js.dce.devmode.overwriting.strategy", DevModeOverwritingStrategies.OLDER)
 
-            val overwriteOnlyOlderFiles = devModeOverwritingStrategy == DevModeOverwritingStrategies.OLDER
+            konst overwriteOnlyOlderFiles = devModeOverwritingStrategy == DevModeOverwritingStrategies.OLDER
 
             copyFiles(files, overwriteOnlyOlderFiles)
             ExitCode.OK
@@ -65,10 +65,10 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
     }
 
     private fun performDce(files: List<InputFile>, arguments: K2JSDceArguments, messageCollector: MessageCollector): ExitCode {
-        val includedDeclarations = arguments.declarationsToKeep.orEmpty().toSet()
+        konst includedDeclarations = arguments.declarationsToKeep.orEmpty().toSet()
 
-        val logConsumer = { level: DCELogLevel, message: String ->
-            val severity = when (level) {
+        konst logConsumer = { level: DCELogLevel, message: String ->
+            konst severity = when (level) {
                 DCELogLevel.ERROR -> CompilerMessageSeverity.ERROR
                 DCELogLevel.WARN -> CompilerMessageSeverity.WARNING
                 DCELogLevel.INFO -> CompilerMessageSeverity.LOGGING
@@ -76,7 +76,7 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
             messageCollector.report(severity, message)
         }
 
-        val dceResult = DeadCodeElimination.run(
+        konst dceResult = DeadCodeElimination.run(
             files,
             includedDeclarations,
             arguments.printReachabilityInfo,
@@ -85,7 +85,7 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
         if (dceResult.status == DeadCodeEliminationStatus.FAILED) return ExitCode.COMPILATION_ERROR
 
         if (arguments.printReachabilityInfo) {
-            val reachabilitySeverity = CompilerMessageSeverity.INFO
+            konst reachabilitySeverity = CompilerMessageSeverity.INFO
             messageCollector.report(reachabilitySeverity, "")
             for (node in dceResult.reachableNodes.extractReachableRoots(dceResult.context!!)) {
                 printTree(
@@ -102,8 +102,8 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
         for (file in files) {
             copyResource(file.resource, File(file.outputPath), overwriteOnlyOlderFiles)
             file.sourceMapResource?.let { sourceMap ->
-                val sourceMapTarget = File(file.outputPath + ".map")
-                val inputFile = File(sourceMap.name)
+                konst sourceMapTarget = File(file.outputPath + ".map")
+                konst inputFile = File(sourceMap.name)
                 if (!inputFile.exists() || !mapSourcePaths(inputFile, sourceMapTarget)) {
                     copyResource(sourceMap, sourceMapTarget, overwriteOnlyOlderFiles)
                 }
@@ -124,11 +124,11 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
     }
 
     private fun mapSourcePaths(inputFile: File, targetFile: File): Boolean {
-        val jsonOut = StringWriter()
-        val pathCalculator = RelativePathCalculator(targetFile.parentFile)
-        val sourceMapChanged = try {
+        konst jsonOut = StringWriter()
+        konst pathCalculator = RelativePathCalculator(targetFile.parentFile)
+        konst sourceMapChanged = try {
             SourceMap.mapSources(inputFile.readText(), jsonOut) {
-                val result = pathCalculator.calculateRelativePathTo(File(inputFile.parentFile, it))
+                konst result = pathCalculator.calculateRelativePathTo(File(inputFile.parentFile, it))
                 if (result != null) {
                     if (File(targetFile.parentFile, result).exists()) {
                         result
@@ -152,7 +152,7 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
     }
 
     private fun collectInputFiles(baseDir: File, fileName: String, messageCollector: MessageCollector): List<InputFile> {
-        val file = File(fileName)
+        konst file = File(fileName)
         return when {
             file.isDirectory -> {
                 collectInputFilesFromDirectory(baseDir, fileName)
@@ -168,7 +168,7 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
                     else -> {
                         messageCollector.report(
                             CompilerMessageSeverity.WARNING,
-                            "invalid file name '${file.absolutePath}'; must end either with '.js', '.zip' or '.jar'"
+                            "inkonstid file name '${file.absolutePath}'; must end either with '.js', '.zip' or '.jar'"
                         )
                         emptyList()
                     }
@@ -182,9 +182,9 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
     }
 
     private fun singleInputFile(baseDir: File, path: String): InputFile {
-        val moduleName = getModuleNameFromPath(path)
-        val pathToSourceMapCandidate = "$path.map"
-        val pathToSourceMap = if (File(pathToSourceMapCandidate).exists()) pathToSourceMapCandidate else null
+        konst moduleName = getModuleNameFromPath(path)
+        konst pathToSourceMapCandidate = "$path.map"
+        konst pathToSourceMap = if (File(pathToSourceMapCandidate).exists()) pathToSourceMapCandidate else null
         return InputFile(
             InputResource.file(path), pathToSourceMap?.let { InputResource.file(it) },
             File(baseDir, "$moduleName.js").absolutePath, moduleName
@@ -199,9 +199,9 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
                 .filter { zipFile.getEntry(it.name.metaJs()) != null }
                 .distinctBy { it.name }
                 .map { entry ->
-                    val moduleName = getModuleNameFromPath(entry.name)
-                    val pathToSourceMapCandidate = "${entry.name}.map"
-                    val pathToSourceMap = if (zipFile.getEntry(pathToSourceMapCandidate) != null) pathToSourceMapCandidate else null
+                    konst moduleName = getModuleNameFromPath(entry.name)
+                    konst pathToSourceMapCandidate = "${entry.name}.map"
+                    konst pathToSourceMap = if (zipFile.getEntry(pathToSourceMapCandidate) != null) pathToSourceMapCandidate else null
                     InputFile(
                         InputResource.zipFile(path, entry.name), pathToSourceMap?.let { InputResource.zipFile(path, it) },
                         File(baseDir, "$moduleName.js").absolutePath, moduleName
@@ -217,9 +217,9 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
             .filter { it.name.endsWith(".js") }
             .filter { File(it.path.metaJs()).exists() }
             .map { entry ->
-                val moduleName = getModuleNameFromPath(entry.name)
-                val pathToSourceMapCandidate = "${entry.path}.map"
-                val pathToSourceMap = if (File(pathToSourceMapCandidate).exists()) pathToSourceMapCandidate else null
+                konst moduleName = getModuleNameFromPath(entry.name)
+                konst pathToSourceMapCandidate = "${entry.path}.map"
+                konst pathToSourceMap = if (File(pathToSourceMapCandidate).exists()) pathToSourceMapCandidate else null
                 InputFile(
                     InputResource.file(entry.path), pathToSourceMap?.let { InputResource.file(it) },
                     File(baseDir, "$moduleName.js").absolutePath, moduleName
@@ -231,8 +231,8 @@ class K2JSDce : CLITool<K2JSDceArguments>() {
     private fun String.metaJs() = removeSuffix(".js") + ".meta.js"
 
     private fun getModuleNameFromPath(path: String): String {
-        val dotIndex = path.lastIndexOf('.')
-        val slashIndex = maxOf(path.lastIndexOf('/'), path.lastIndexOf('\\'))
+        konst dotIndex = path.lastIndexOf('.')
+        konst slashIndex = maxOf(path.lastIndexOf('/'), path.lastIndexOf('\\'))
         return path.substring(slashIndex + 1, if (dotIndex < 0) path.length else dotIndex)
     }
 

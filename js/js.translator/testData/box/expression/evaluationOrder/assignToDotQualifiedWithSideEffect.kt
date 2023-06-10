@@ -16,7 +16,7 @@ fun bar(s: String, a: A): A {
 
 
 fun box(): String {
-    val a = A()
+    konst a = A()
 
     global = ""
     bar("A", a).prop = try { global += "B"; 10 } finally {}

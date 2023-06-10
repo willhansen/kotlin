@@ -15,16 +15,16 @@ import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 
 class MultifileFacadeFileEntry(
-    private val className: JvmClassName,
-    val partFiles: List<IrFile>
+    private konst className: JvmClassName,
+    konst partFiles: List<IrFile>
 ) : IrFileEntry {
-    override val name: String
+    override konst name: String
         get() = "<multi-file facade $className>"
 
-    override val maxOffset: Int
+    override konst maxOffset: Int
         get() = UNDEFINED_OFFSET
 
-    override val supportsDebugInfo get() = false
+    override konst supportsDebugInfo get() = false
 
     override fun getSourceRangeInfo(beginOffset: Int, endOffset: Int): SourceRangeInfo =
         error("Multifile facade doesn't support debug info: $className")

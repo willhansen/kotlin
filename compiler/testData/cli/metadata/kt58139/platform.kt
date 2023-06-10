@@ -1,6 +1,6 @@
-const val DOUBLE_BATCH_SIZE = 2 * BATCH_SIZE
+const konst DOUBLE_BATCH_SIZE = 2 * BATCH_SIZE
 
-annotation class A(val value: Int)
+annotation class A(konst konstue: Int)
 
 @A(BATCH_SIZE)
 fun bar() {}

@@ -39,10 +39,10 @@ fun test_5() {
     takeString(<!ARGUMENT_TYPE_MISMATCH!>run { 1 }<!>)
 }
 
-annotation class Ann(val x: Byte)
+annotation class Ann(konst x: Byte)
 
 @Ann(10)
 fun test_6() {
     @Ann(<!ARGUMENT_TYPE_MISMATCH!>300<!>)
-    val x = ""
+    konst x = ""
 }

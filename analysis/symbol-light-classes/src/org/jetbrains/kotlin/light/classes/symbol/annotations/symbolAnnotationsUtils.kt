@@ -52,9 +52,9 @@ internal fun KtAnnotatedSymbol.hasJvmSyntheticAnnotation(
 internal fun KtAnnotatedSymbol.getJvmNameFromAnnotation(
     useSiteTargetFilter: AnnotationUseSiteTargetFilter = AnyAnnotationUseSiteTargetFilter,
 ): String? {
-    val annotation = findAnnotation(StandardClassIds.Annotations.JvmName, useSiteTargetFilter)
+    konst annotation = findAnnotation(StandardClassIds.Annotations.JvmName, useSiteTargetFilter)
     return annotation?.let {
-        (it.arguments.firstOrNull()?.expression as? KtConstantAnnotationValue)?.constantValue?.value as? String
+        (it.arguments.firstOrNull()?.expression as? KtConstantAnnotationValue)?.constantValue?.konstue as? String
     }
 }
 
@@ -109,15 +109,15 @@ internal fun KtAnnotatedSymbol.computeThrowsList(
         builder.addReference(java.lang.NullPointerException::class.qualifiedName)
     }
 
-    val annoApp = findAnnotation(StandardClassIds.Annotations.Throws, useSiteTargetFilter) ?: return
+    konst annoApp = findAnnotation(StandardClassIds.Annotations.Throws, useSiteTargetFilter) ?: return
 
     fun handleAnnotationValue(annotationValue: KtAnnotationValue) = when (annotationValue) {
         is KtArrayAnnotationValue -> {
-            annotationValue.values.forEach(::handleAnnotationValue)
+            annotationValue.konstues.forEach(::handleAnnotationValue)
         }
 
         is KtNonLocalKClassAnnotationValue -> {
-            val psiType = buildClassType(annotationValue.classId).asPsiType(
+            konst psiType = buildClassType(annotationValue.classId).asPsiType(
                 useSitePosition,
                 allowErrorTypes = true,
                 KtTypeMappingMode.DEFAULT,

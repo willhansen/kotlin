@@ -14,5 +14,5 @@ fun IA.extFun(x: IB) {}
 fun IB.extFun(x: IA) {}
 
 fun testWithExpectedType() {
-    val extFun_AA_B: IA.(IA) -> Unit = IB::<!UNRESOLVED_REFERENCE!>extFun<!> // extFun is unresolved, type of IB::extFun is implicit
+    konst extFun_AA_B: IA.(IA) -> Unit = IB::<!UNRESOLVED_REFERENCE!>extFun<!> // extFun is unresolved, type of IB::extFun is implicit
 }

@@ -62,7 +62,7 @@ FILE: moreSpecificProtected.fir.kt
             super<R|A|>()
         }
 
-        public final val fromB: R|kotlin/Any| = R|kotlin/Any.Any|()
+        public final konst fromB: R|kotlin/Any| = R|kotlin/Any.Any|()
             public get(): R|kotlin/Any|
 
         protected open override fun foo(a1: R|Base|, a2: R|Derived|): R|M2Sub| {
@@ -153,7 +153,7 @@ FILE: moreSpecificProtected.fir.kt
             super<R|B|>()
         }
 
-        public final val fromC: R|kotlin/Any| = R|kotlin/Any.Any|()
+        public final konst fromC: R|kotlin/Any| = R|kotlin/Any.Any|()
             public get(): R|kotlin/Any|
 
         protected open override fun foo(a1: R|Derived|, a2: R|Derived|): R|M3Sub| {

@@ -35,7 +35,7 @@ class MetricPolicyTest {
 
     @Test
     fun versionAnonymization() {
-        assertEquals("0.0.0", StringAnonymizationPolicy.ComponentVersionAnonymizer().anonymize("some.invalid.string"))
+        assertEquals("0.0.0", StringAnonymizationPolicy.ComponentVersionAnonymizer().anonymize("some.inkonstid.string"))
         assertEquals("1.0.0", StringAnonymizationPolicy.ComponentVersionAnonymizer().anonymize("1"))
         assertEquals("1.2.0", StringAnonymizationPolicy.ComponentVersionAnonymizer().anonymize("1.2"))
 
@@ -59,13 +59,13 @@ class MetricPolicyTest {
 
     @Test
     fun versionStringValidation() {
-        val separator = ConcatMetricContainer.SEPARATOR
-        val container = MetricsContainer()
+        konst separator = ConcatMetricContainer.SEPARATOR
+        konst container = MetricsContainer()
         fun whenAdded(newValue: String, expected: String) {
             container.report(StringMetrics.MPP_PLATFORMS, newValue)
-            val currentValue = container.getMetric(StringMetrics.MPP_PLATFORMS)!!.toStringRepresentation()
+            konst currentValue = container.getMetric(StringMetrics.MPP_PLATFORMS)!!.toStringRepresentation()
             assertEquals(expected, currentValue)
-            val regex = StringMetrics.MPP_PLATFORMS.anonymization.validationRegexp()
+            konst regex = StringMetrics.MPP_PLATFORMS.anonymization.konstidationRegexp()
             assertTrue(currentValue.matches(Regex(regex)), "'${currentValue}' should match '${regex}'")
         }
         whenAdded("js", "js")

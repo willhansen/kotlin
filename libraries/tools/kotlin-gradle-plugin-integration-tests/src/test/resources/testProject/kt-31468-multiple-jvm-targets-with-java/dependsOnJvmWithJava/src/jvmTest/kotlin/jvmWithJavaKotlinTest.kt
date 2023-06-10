@@ -1,6 +1,6 @@
 package test
 
 fun main() {
-    val kotlin = JvmWithJavaKotlin()
-    val java = JvmWithJava()
+    konst kotlin = JvmWithJavaKotlin()
+    konst java = JvmWithJava()
 }

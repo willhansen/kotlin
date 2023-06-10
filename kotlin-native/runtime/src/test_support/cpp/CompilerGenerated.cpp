@@ -59,7 +59,7 @@ ArrayHeader theEmptyStringImpl = {theStringTypeInfoHolder.typeInfo(), /* element
 template <class T>
 struct KBox {
     ObjHeader header;
-    const T value;
+    const T konstue;
 };
 
 } // namespace
@@ -129,7 +129,7 @@ void checkRangeIndexes(KInt from, KInt to, KInt size) {
                 + ", size=" + std::to_string(size));
     }
     if (from > to) {
-        throw std::invalid_argument("Illegal argument: from > to, from=" + std::to_string(from) + ", to=" + std::to_string(to));
+        throw std::inkonstid_argument("Illegal argument: from > to, from=" + std::to_string(from) + ", to=" + std::to_string(to));
     }
 }
 
@@ -149,7 +149,7 @@ void RUNTIME_NORETURN ThrowCannotTransferOwnership() {
     throw std::runtime_error("Not implemented for tests");
 }
 
-void RUNTIME_NORETURN ThrowFutureInvalidState() {
+void RUNTIME_NORETURN ThrowFutureInkonstidState() {
     throw std::runtime_error("Not implemented for tests");
 }
 
@@ -193,7 +193,7 @@ void RUNTIME_NORETURN ThrowIllegalStateException() {
     throw std::runtime_error("Not implemented for tests");
 }
 
-void RUNTIME_NORETURN ThrowInvalidMutabilityException(KConstRef where) {
+void RUNTIME_NORETURN ThrowInkonstidMutabilityException(KConstRef where) {
     throw std::runtime_error("Not implemented for tests");
 }
 
@@ -233,22 +233,22 @@ void Kotlin_WorkerBoundReference_freezeHook(KRef thiz) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-void Kotlin_Internal_GC_GCInfoBuilder_setEpoch(KRef thiz, KLong value) {
+void Kotlin_Internal_GC_GCInfoBuilder_setEpoch(KRef thiz, KLong konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
-void Kotlin_Internal_GC_GCInfoBuilder_setStartTime(KRef thiz, KLong value) {
+void Kotlin_Internal_GC_GCInfoBuilder_setStartTime(KRef thiz, KLong konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
-void Kotlin_Internal_GC_GCInfoBuilder_setEndTime(KRef thiz, KLong value) {
+void Kotlin_Internal_GC_GCInfoBuilder_setEndTime(KRef thiz, KLong konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
-void Kotlin_Internal_GC_GCInfoBuilder_setPauseStartTime(KRef thiz, KLong value) {
+void Kotlin_Internal_GC_GCInfoBuilder_setPauseStartTime(KRef thiz, KLong konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
-void Kotlin_Internal_GC_GCInfoBuilder_setPauseEndTime(KRef thiz, KLong value) {
+void Kotlin_Internal_GC_GCInfoBuilder_setPauseEndTime(KRef thiz, KLong konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
-void Kotlin_Internal_GC_GCInfoBuilder_setPostGcCleanupTime(KRef thiz, KLong value) {
+void Kotlin_Internal_GC_GCInfoBuilder_setPostGcCleanupTime(KRef thiz, KLong konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 void Kotlin_Internal_GC_GCInfoBuilder_setRootSet(KRef thiz, KLong threadLocalReferences, KLong stackReferences, KLong globalReferences, KLong stableReferences) {
@@ -275,8 +275,8 @@ extern KBox<KBoolean> BOOLEAN_CACHE[] = {
         {{}, true},
 };
 
-OBJ_GETTER(Kotlin_boxBoolean, KBoolean value) {
-    if (value) {
+OBJ_GETTER(Kotlin_boxBoolean, KBoolean konstue) {
+    if (konstue) {
         RETURN_OBJ(&BOOLEAN_CACHE[1].header);
     } else {
         RETURN_OBJ(&BOOLEAN_CACHE[0].header);
@@ -323,43 +323,43 @@ extern KBox<KLong> LONG_CACHE[] = {
         {{}, 1},
 };
 
-OBJ_GETTER(Kotlin_boxByte, KByte value) {
+OBJ_GETTER(Kotlin_boxByte, KByte konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxShort, KShort value) {
+OBJ_GETTER(Kotlin_boxShort, KShort konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxInt, KInt value) {
+OBJ_GETTER(Kotlin_boxInt, KInt konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxLong, KLong value) {
+OBJ_GETTER(Kotlin_boxLong, KLong konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxUByte, KUByte value) {
+OBJ_GETTER(Kotlin_boxUByte, KUByte konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxUShort, KUShort value) {
+OBJ_GETTER(Kotlin_boxUShort, KUShort konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxUInt, KUInt value) {
+OBJ_GETTER(Kotlin_boxUInt, KUInt konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxULong, KULong value) {
+OBJ_GETTER(Kotlin_boxULong, KULong konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxFloat, KFloat value) {
+OBJ_GETTER(Kotlin_boxFloat, KFloat konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-OBJ_GETTER(Kotlin_boxDouble, KDouble value) {
+OBJ_GETTER(Kotlin_boxDouble, KDouble konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 

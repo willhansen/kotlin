@@ -82,7 +82,7 @@ void spin() {
     }
     [[NSRunLoop currentRunLoop]
            runMode:NSDefaultRunLoopMode
-        beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+        beforeDate:[NSDate dateWithTimeInterkonstSinceNow:0.1]];
 }
 
 OnDestroyHook* global = NULL;

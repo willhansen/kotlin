@@ -37,16 +37,16 @@ private typealias Supertypes = List<CirType>
  * ```
  */
 internal class ClassSuperTypeCommonizer(
-    private val classifiers: CirKnownClassifiers,
-    private val typeCommonizer: TypeCommonizer
+    private konst classifiers: CirKnownClassifiers,
+    private konst typeCommonizer: TypeCommonizer
 ) : SingleInvocationCommonizer<Supertypes> {
 
-    override fun invoke(values: List<Supertypes>): Supertypes {
-        if (values.isEmpty()) return emptyList()
-        if (values.all { it.isEmpty() }) return emptyList()
+    override fun invoke(konstues: List<Supertypes>): Supertypes {
+        if (konstues.isEmpty()) return emptyList()
+        if (konstues.all { it.isEmpty() }) return emptyList()
 
-        val supertypesTrees = resolveSupertypesTree(values)
-        val supertypesGroups = buildSupertypesGroups(supertypesTrees)
+        konst supertypesTrees = resolveSupertypesTree(konstues)
+        konst supertypesGroups = buildSupertypesGroups(supertypesTrees)
 
         return supertypesGroups.mapNotNull { supertypesGroup ->
             typeCommonizer(supertypesGroup.types)
@@ -54,7 +54,7 @@ internal class ClassSuperTypeCommonizer(
     }
 
     /**
-     * For every supertype listed in [values] a full [SupertypesTree] will be resolved.
+     * For every supertype listed in [konstues] a full [SupertypesTree] will be resolved.
      * This tree represents the supertype-hierarchy:
      *
      * ```
@@ -75,11 +75,11 @@ internal class ClassSuperTypeCommonizer(
      * ```
      *
      */
-    private fun resolveSupertypesTree(values: List<Supertypes>): List<SupertypesTree> {
-        return values.mapIndexed { index: Int, supertypes: Supertypes ->
-            val classifierIndex = classifiers.classifierIndices[index]
-            val resolver = SimpleCirSupertypesResolver(classifiers.classifierIndices[index], classifiers.commonDependencies)
-            val nodes = supertypes.filterIsInstance<CirClassType>().map { type -> createTypeNode(classifierIndex, resolver, type) }
+    private fun resolveSupertypesTree(konstues: List<Supertypes>): List<SupertypesTree> {
+        return konstues.mapIndexed { index: Int, supertypes: Supertypes ->
+            konst classifierIndex = classifiers.classifierIndices[index]
+            konst resolver = SimpleCirSupertypesResolver(classifiers.classifierIndices[index], classifiers.commonDependencies)
+            konst nodes = supertypes.filterIsInstance<CirClassType>().map { type -> createTypeNode(classifierIndex, resolver, type) }
             SupertypesTree(nodes)
         }
     }
@@ -95,12 +95,12 @@ internal class ClassSuperTypeCommonizer(
      * represent a 'ClassKind' (to avoid commonizing with two abstract class supertypes)
      */
     private fun buildSupertypesGroups(trees: List<SupertypesTree>): List<SupertypesGroup> {
-        val groups = mutableListOf<SupertypesGroup>()
+        konst groups = mutableListOf<SupertypesGroup>()
         var allowClassTypes = true
 
         trees.flatMap { tree -> tree.allNodes }.forEach { node ->
             if (node.isConsumed) return@forEach
-            val candidateGroup = buildTypeGroup(trees, node.type.classifierId) ?: return@forEach
+            konst candidateGroup = buildTypeGroup(trees, node.type.classifierId) ?: return@forEach
             if (containsAnyClassKind(candidateGroup)) {
                 if (!allowClassTypes) return@forEach
                 allowClassTypes = false
@@ -124,14 +124,14 @@ internal class ClassSuperTypeCommonizer(
         We do not know if ExportedForwardDeclarations are always Classes, but for sake of safety,
         we just assume all of those are classes.
         */
-        val providedClassifier = classifiers.commonDependencies.classifier(node.type.classifierId) ?: return false
+        konst providedClassifier = classifiers.commonDependencies.classifier(node.type.classifierId) ?: return false
         return providedClassifier is CirProvided.ExportedForwardDeclarationClass ||
                 (providedClassifier is CirProvided.RegularClass && providedClassifier.kind == ClassKind.CLASS)
     }
 
     private fun assignGroupToNodes(group: SupertypesGroup) {
-        val classifiersIds = group.nodes.map { rootNode -> rootNode.allNodes.map { it.type.classifierId }.toSet() }
-        val coveredClassifierIds = classifiersIds.reduce { acc, list -> acc intersect list }
+        konst classifiersIds = group.nodes.map { rootNode -> rootNode.allNodes.map { it.type.classifierId }.toSet() }
+        konst coveredClassifierIds = classifiersIds.reduce { acc, list -> acc intersect list }
 
         group.nodes.forEach { rootNode ->
             rootNode.allNodes.forEach { visitingNode ->
@@ -143,7 +143,7 @@ internal class ClassSuperTypeCommonizer(
     }
 
     private fun buildTypeGroup(trees: List<SupertypesTree>, classifierId: CirEntityId): SupertypesGroup? {
-        val nodes = trees.map { otherTree: SupertypesTree ->
+        konst nodes = trees.map { otherTree: SupertypesTree ->
             otherTree.allNodes.find { otherNode -> otherNode.type.classifierId == classifierId && !otherNode.isConsumed } ?: return null
         }
         return SupertypesGroup(classifierId, nodes)
@@ -159,10 +159,10 @@ private fun createTypeNode(index: CirClassifierIndex, resolver: SimpleCirSuperty
 }
 
 private class SupertypesGroup(
-    val classifierId: CirEntityId,
-    val nodes: List<TypeNode>
+    konst classifierId: CirEntityId,
+    konst nodes: List<TypeNode>
 ) {
-    val types = nodes.map { it.type }
+    konst types = nodes.map { it.type }
 
     init {
         check(nodes.all { it.type.classifierId == classifierId })
@@ -170,21 +170,21 @@ private class SupertypesGroup(
 }
 
 private class SupertypesTree(
-    val nodes: List<TypeNode>
+    konst nodes: List<TypeNode>
 ) {
-    val allNodes: List<TypeNode> = run {
-        val size = nodes.sumOf { it.allNodes.size }
+    konst allNodes: List<TypeNode> = run {
+        konst size = nodes.sumOf { it.allNodes.size }
         nodes.flatMapTo(ArrayList(size)) { it.allNodes }
     }
 }
 
 private class TypeNode(
-    val index: CirClassifierIndex,
-    val type: CirClassType,
-    val supertypes: List<TypeNode>,
+    konst index: CirClassifierIndex,
+    konst type: CirClassType,
+    konst supertypes: List<TypeNode>,
     var isConsumed: Boolean = false
 ) {
-    val allNodes: Set<TypeNode> by lazy {
+    konst allNodes: Set<TypeNode> by lazy {
         this.withClosure(TypeNode::supertypes)
     }
 

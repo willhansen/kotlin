@@ -37,8 +37,8 @@ class FirCompilerRequiredAnnotationsResolveProcessor(
 ) : FirGlobalResolveProcessor(session, scopeSession, FirResolvePhase.COMPILER_REQUIRED_ANNOTATIONS) {
 
     override fun process(files: Collection<FirFile>) {
-        val computationSession = CompilerRequiredAnnotationsComputationSession()
-        val transformer = FirCompilerRequiredAnnotationsResolveTransformer(session, scopeSession, computationSession)
+        konst computationSession = CompilerRequiredAnnotationsComputationSession()
+        konst transformer = FirCompilerRequiredAnnotationsResolveTransformer(session, scopeSession, computationSession)
         files.forEach {
             withFileAnalysisExceptionWrapping(it) {
                 it.transformSingle(transformer, null)
@@ -56,13 +56,13 @@ class FirCompilerRequiredAnnotationsResolveProcessor(
     override fun afterPhase() {
         super.afterPhase()
 
-        val generatedDeclarationsSymbolProvider = session.generatedDeclarationsSymbolProvider
+        konst generatedDeclarationsSymbolProvider = session.generatedDeclarationsSymbolProvider
         generatedDeclarationsSymbolProvider?.enable()
 
         // This part is a bit hacky way to clear the caches in FirCachingCompositeSymbolProvider when there are plugins that may generate new entities.
         // It's necessary because otherwise, when symbol provider is being queried on the stage of compiler-required annotations resolution
         // we record incorrect (incomplete) results to its cache, so after the phase is completed we just start from the scratch
-        val symbolProvider = session.symbolProvider
+        konst symbolProvider = session.symbolProvider
         if (generatedDeclarationsSymbolProvider != null && symbolProvider is FirCachingCompositeSymbolProvider) {
             @OptIn(SessionConfiguration::class)
             session.register(FirSymbolProvider::class, symbolProvider.createCopyWithCleanCaches())
@@ -71,13 +71,13 @@ class FirCompilerRequiredAnnotationsResolveProcessor(
 }
 
 abstract class AbstractFirCompilerRequiredAnnotationsResolveTransformer(
-    final override val session: FirSession,
+    final override konst session: FirSession,
     computationSession: CompilerRequiredAnnotationsComputationSession
 ) : FirAbstractPhaseTransformer<Nothing?>(COMPILER_REQUIRED_ANNOTATIONS) {
-    abstract val annotationTransformer: AbstractFirSpecificAnnotationResolveTransformer
-    private val importTransformer = FirPartialImportResolveTransformer(session, computationSession)
+    abstract konst annotationTransformer: AbstractFirSpecificAnnotationResolveTransformer
+    private konst importTransformer = FirPartialImportResolveTransformer(session, computationSession)
 
-    val extensionService = session.extensionService
+    konst extensionService = session.extensionService
     override fun <E : FirElement> transformElement(element: E, data: Nothing?): E {
         throw IllegalStateException("Should not be here")
     }
@@ -115,7 +115,7 @@ open class FirCompilerRequiredAnnotationsResolveTransformer(
     scopeSession: ScopeSession,
     computationSession: CompilerRequiredAnnotationsComputationSession
 ) : AbstractFirCompilerRequiredAnnotationsResolveTransformer(session, computationSession) {
-    override val annotationTransformer: AbstractFirSpecificAnnotationResolveTransformer =
+    override konst annotationTransformer: AbstractFirSpecificAnnotationResolveTransformer =
         FirSpecificAnnotationResolveTransformer(session, scopeSession, computationSession)
 }
 
@@ -125,18 +125,18 @@ class FirDesignatedCompilerRequiredAnnotationsResolveTransformer(
     computationSession: CompilerRequiredAnnotationsComputationSession,
     designation: DesignationState
 ) : AbstractFirCompilerRequiredAnnotationsResolveTransformer(session, computationSession) {
-    override val annotationTransformer: AbstractFirSpecificAnnotationResolveTransformer =
+    override konst annotationTransformer: AbstractFirSpecificAnnotationResolveTransformer =
         FirDesignatedSpecificAnnotationResolveTransformer(session, scopeSession, computationSession, designation)
 }
 
 open class CompilerRequiredAnnotationsComputationSession {
-    private val filesWithResolvedImports = mutableSetOf<FirFile>()
+    private konst filesWithResolvedImports = mutableSetOf<FirFile>()
 
     fun importsAreResolved(file: FirFile): Boolean {
         return file in filesWithResolvedImports
     }
 
-    open val useCacheForImportScope: Boolean get() = false
+    open konst useCacheForImportScope: Boolean get() = false
 
     fun recordThatImportsAreResolved(file: FirFile) {
         if (!filesWithResolvedImports.add(file)) {
@@ -144,7 +144,7 @@ open class CompilerRequiredAnnotationsComputationSession {
         }
     }
 
-    private val declarationsWithResolvedAnnotations = mutableSetOf<FirAnnotationContainer>()
+    private konst declarationsWithResolvedAnnotations = mutableSetOf<FirAnnotationContainer>()
 
     fun annotationsAreResolved(declaration: FirAnnotationContainer, treatNonSourceDeclarationsAsResolved: Boolean): Boolean {
         if (declaration is FirFile) return false
@@ -162,15 +162,15 @@ open class CompilerRequiredAnnotationsComputationSession {
     }
 
     fun resolveAnnotationsOnAnnotationIfNeeded(symbol: FirRegularClassSymbol, scopeSession: ScopeSession) {
-        val regularClass = symbol.fir
+        konst regularClass = symbol.fir
         if (annotationsAreResolved(regularClass, treatNonSourceDeclarationsAsResolved = true)) return
 
         resolveAnnotationSymbol(symbol, scopeSession)
     }
 
     open fun resolveAnnotationSymbol(symbol: FirRegularClassSymbol, scopeSession: ScopeSession) {
-        val designation = DesignationState.create(symbol, emptyMap(), includeFile = true) ?: return
-        val transformer = FirDesignatedCompilerRequiredAnnotationsResolveTransformer(
+        konst designation = DesignationState.create(symbol, emptyMap(), includeFile = true) ?: return
+        konst transformer = FirDesignatedCompilerRequiredAnnotationsResolveTransformer(
             designation.firstDeclaration.moduleData.session,
             scopeSession,
             this,
@@ -183,11 +183,11 @@ open class CompilerRequiredAnnotationsComputationSession {
 
 private class FirPartialImportResolveTransformer(
     session: FirSession,
-    private val computationSession: CompilerRequiredAnnotationsComputationSession
+    private konst computationSession: CompilerRequiredAnnotationsComputationSession
 ) : FirImportResolveTransformer(session, COMPILER_REQUIRED_ANNOTATIONS) {
-    private val acceptableFqNames: Set<FqName> = session.registeredPluginAnnotations.annotations
+    private konst acceptableFqNames: Set<FqName> = session.registeredPluginAnnotations.annotations
 
-    override val FqName.isAcceptable: Boolean
+    override konst FqName.isAcceptable: Boolean
         get() = this in acceptableFqNames
 
     override fun transformFile(file: FirFile, data: Any?): FirFile {
@@ -213,7 +213,7 @@ private class FirDesignatedSpecificAnnotationResolveTransformer(
     session: FirSession,
     scopeSession: ScopeSession,
     computationSession: CompilerRequiredAnnotationsComputationSession,
-    private val designation: DesignationState
+    private konst designation: DesignationState
 ) : AbstractFirSpecificAnnotationResolveTransformer(session, scopeSession, computationSession) {
     override fun shouldTransformDeclaration(declaration: FirDeclaration): Boolean {
         return !designation.shouldSkipClass(declaration)
@@ -227,8 +227,8 @@ fun <F : FirClassLikeDeclaration> F.runCompilerRequiredAnnotationsResolvePhaseFo
     useSiteFile: FirFile,
     containingDeclarations: List<FirDeclaration>,
 ): F {
-    val computationSession = CompilerRequiredAnnotationsComputationSession()
-    val annotationsResolveTransformer = FirSpecificAnnotationForLocalClassesResolveTransformer(
+    konst computationSession = CompilerRequiredAnnotationsComputationSession()
+    konst annotationsResolveTransformer = FirSpecificAnnotationForLocalClassesResolveTransformer(
         session,
         scopeSession,
         computationSession,
@@ -245,7 +245,7 @@ private class FirSpecificAnnotationForLocalClassesResolveTransformer(
     scopeSession: ScopeSession,
     computationSession: CompilerRequiredAnnotationsComputationSession,
     containingDeclarations: List<FirDeclaration>,
-    private val localClassesNavigationInfo: LocalClassesNavigationInfo
+    private konst localClassesNavigationInfo: LocalClassesNavigationInfo
 ) : AbstractFirSpecificAnnotationResolveTransformer(session, scopeSession, computationSession, containingDeclarations) {
     override fun shouldTransformDeclaration(declaration: FirDeclaration): Boolean {
         return when (declaration) {
@@ -254,6 +254,6 @@ private class FirSpecificAnnotationForLocalClassesResolveTransformer(
         }
     }
 
-    override val shouldRecordIntoPredicateBasedProvider: Boolean
+    override konst shouldRecordIntoPredicateBasedProvider: Boolean
         get() = false
 }

@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.commonizer.cli
 import org.jetbrains.kotlin.commonizer.OptimisticNumberCommonizationEnabledKey
 import org.jetbrains.kotlin.commonizer.PlatformIntegerCommonizationEnabledKey
 
-internal val ADDITIONAL_COMMONIZER_SETTINGS: List<CommonizerSettingOptionType<*>> = listOf(
+internal konst ADDITIONAL_COMMONIZER_SETTINGS: List<CommonizerSettingOptionType<*>> = listOf(
     OptimisticNumberCommonizationOptionType,
     PlatformIntegerCommonizationOptionType,
 )

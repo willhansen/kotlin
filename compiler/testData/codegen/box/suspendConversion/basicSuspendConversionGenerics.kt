@@ -23,23 +23,23 @@ fun <T, K> foo31(f: suspend (T) -> K): Inv2<T, K> = Inv2()
 fun <I> id(e: I): I = e
 
 fun test(f: (C) -> String, g: () -> String) {
-    val a0 = foo1(f)
-    val a01 = foo11(f)
+    konst a0 = foo1(f)
+    konst a01 = foo11(f)
 
-    val a1 = foo2(g)
-    val a11 = foo21(g)
+    konst a1 = foo2(g)
+    konst a11 = foo21(g)
 
-    val a2 = foo3(f)
-    val a21 = foo31(f)
+    konst a2 = foo3(f)
+    konst a21 = foo31(f)
 
-    val a3 = foo1(id(f))
-    val a31 = foo11(id(f))
+    konst a3 = foo1(id(f))
+    konst a31 = foo11(id(f))
 
-    val a4 = foo2(id(g))
-    val a41 = foo21(id(g))
+    konst a4 = foo2(id(g))
+    konst a41 = foo21(id(g))
 
-    val a5 = foo3(id(f))
-    val a51 = foo31(id(f))
+    konst a5 = foo3(id(f))
+    konst a51 = foo31(id(f))
 }
 
 fun box(): String {

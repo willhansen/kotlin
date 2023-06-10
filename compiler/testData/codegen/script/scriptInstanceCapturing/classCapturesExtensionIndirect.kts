@@ -6,7 +6,7 @@
 fun foo() {
     B()
 }
-val b = B()
+konst b = B()
 
 class A
 fun A.ext() = Unit
@@ -17,4 +17,4 @@ class B {
     }
 }
 
-val rv = foo()
+konst rv = foo()

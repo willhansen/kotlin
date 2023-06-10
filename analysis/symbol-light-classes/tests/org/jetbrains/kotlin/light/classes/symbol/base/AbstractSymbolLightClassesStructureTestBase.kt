@@ -25,23 +25,23 @@ import java.nio.file.Path
 import kotlin.io.path.forEachLine
 import kotlin.io.path.notExists
 
-private const val INHERITORS_EXTENSION = "inheritors.txt"
-private const val PAIRS_DELIMITER = ", "
-private const val VALUE_DELIMITER = ": "
+private const konst INHERITORS_EXTENSION = "inheritors.txt"
+private const konst PAIRS_DELIMITER = ", "
+private const konst VALUE_DELIMITER = ": "
 
 open class AbstractSymbolLightClassesStructureTestBase(
     configurator: AnalysisApiTestConfigurator,
-    protected val testPrefix: String,
-    override val isTestAgainstCompiledCode: Boolean,
+    protected konst testPrefix: String,
+    override konst isTestAgainstCompiledCode: Boolean,
 ) : AbstractSymbolLightClassesTestBase(configurator) {
-    override val currentExtension: String get() = throw UnsupportedOperationException()
+    override konst currentExtension: String get() = throw UnsupportedOperationException()
     protected fun doTestInheritors(ktFiles: List<KtFile>, testServices: TestServices) {
-        val testData = getTestDataFileSiblingPath(extension = INHERITORS_EXTENSION, testPrefix = testPrefix)
+        konst testData = getTestDataFileSiblingPath(extension = INHERITORS_EXTENSION, testPrefix = testPrefix)
         if (testData.notExists()) return
-        val project = ktFiles.first().project
+        konst project = ktFiles.first().project
 
-        val queries = parseInheritorsFile(testData)
-        val result = buildString {
+        konst queries = parseInheritorsFile(testData)
+        konst result = buildString {
             for (query in queries) {
                 append("subClass")
                 append(VALUE_DELIMITER)
@@ -70,8 +70,8 @@ open class AbstractSymbolLightClassesStructureTestBase(
     }
 
     private fun InheritorStructure.isInheritor(project: Project): Boolean {
-        val lightClass = findLightClass(fqNameToCheck, project) ?: error("Can't find light class by '$fqNameToCheck' qualifier")
-        val baseClass = JavaPsiFacade.getInstance(project).findClass(baseFqName, GlobalSearchScope.allScope(project))
+        konst lightClass = findLightClass(fqNameToCheck, project) ?: error("Can't find light class by '$fqNameToCheck' qualifier")
+        konst baseClass = JavaPsiFacade.getInstance(project).findClass(baseFqName, GlobalSearchScope.allScope(project))
             ?: error("Can't find class by '$baseFqName' qualifier")
 
         return lightClass.isInheritor(/* baseClass = */ baseClass, /* checkDeep = */ deep)
@@ -81,16 +81,16 @@ open class AbstractSymbolLightClassesStructureTestBase(
         path.forEachLine { line: String ->
             if (line.isBlank()) return@forEachLine
 
-            val arguments = line.split(PAIRS_DELIMITER)
-            val fqNameToCheck = arguments.getOrNull(0)
+            konst arguments = line.split(PAIRS_DELIMITER)
+            konst fqNameToCheck = arguments.getOrNull(0)
                 ?.substringAfter(VALUE_DELIMITER)
                 ?: wrongInheritorStructure(line)
 
-            val baseFqName = arguments.getOrNull(1)
+            konst baseFqName = arguments.getOrNull(1)
                 ?.substringAfter(VALUE_DELIMITER)
                 ?: wrongInheritorStructure(line)
 
-            val deep = arguments.getOrNull(2)
+            konst deep = arguments.getOrNull(2)
                 ?.substringAfter(VALUE_DELIMITER)
                 ?.substringBefore(' ')
                 ?.toBoolean()
@@ -102,7 +102,7 @@ open class AbstractSymbolLightClassesStructureTestBase(
 
     private fun wrongInheritorStructure(line: String): Nothing = error("Can't parse '$line' line correctly")
     protected fun PrettyPrinter.handleFile(ktFile: KtFile) {
-        val text = ktFile.text
+        konst text = ktFile.text
         if (ktFile.isCompiled) {
             ktFile.declarations.forEach { classOrObject ->
                 if (classOrObject is KtClassOrObject) {
@@ -130,12 +130,12 @@ open class AbstractSymbolLightClassesStructureTestBase(
     private fun PrettyPrinter.handleClassDeclaration(declaration: KtClassOrObject, fileText: String) {
         appendLine("${declaration::class.simpleName}:")
         withIndent {
-            val lineNumber = fileText.subSequence(0, declaration.startOffset).count { it == '\n' } + 1
+            konst lineNumber = fileText.subSequence(0, declaration.startOffset).count { it == '\n' } + 1
             appendLine("line: $lineNumber")
             appendLine("name: ${declaration.name}")
             appendLine("qualifier: ${declaration.fqName}")
             append("light: ")
-            val lightClass = declaration.toLightClass()
+            konst lightClass = declaration.toLightClass()
             if (lightClass != null) {
                 handleClass(lightClass)
             } else {
@@ -182,4 +182,4 @@ open class AbstractSymbolLightClassesStructureTestBase(
     }
 }
 
-private data class InheritorStructure(val fqNameToCheck: String, val baseFqName: String, val deep: Boolean)
+private data class InheritorStructure(konst fqNameToCheck: String, konst baseFqName: String, konst deep: Boolean)

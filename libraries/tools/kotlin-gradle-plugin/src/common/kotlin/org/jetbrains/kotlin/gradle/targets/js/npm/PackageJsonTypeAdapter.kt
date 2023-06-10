@@ -12,9 +12,9 @@ import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 import java.lang.reflect.Field
 
-// Necessary to get rid of all fields with null value (private, workspace etc)
-// But we need to leave customFields because it is user's null value and it is ok
-// Here we remove all null-valuable fields, read customFields, add them to jsonObject as elements and remove customFields field
+// Necessary to get rid of all fields with null konstue (private, workspace etc)
+// But we need to leave customFields because it is user's null konstue and it is ok
+// Here we remove all null-konstuable fields, read customFields, add them to jsonObject as elements and remove customFields field
 // It helps to not get such json
 // { name: "foo", private: null, customFields: { customField1: null }, customField1: null }
 // but just
@@ -27,28 +27,28 @@ class PackageJsonTypeAdapter : TypeAdapterFactory {
 
         fun Field.serializedName() = declaredAnnotations
             .filterIsInstance<SerializedName>()
-            .firstOrNull()?.value ?: name
+            .firstOrNull()?.konstue ?: name
 
-        val declaredFields = type.rawType.declaredFields
+        konst declaredFields = type.rawType.declaredFields
 
-        val customFieldsField = declaredFields
+        konst customFieldsField = declaredFields
             .single { it.name == PackageJson::customFields.name }
 
         return object : TypeAdapter<T>() {
-            private val delegateAdapter = gson.getDelegateAdapter(this@PackageJsonTypeAdapter, type)
-            private val elementAdapter = gson.getAdapter(JsonElement::class.java)
+            private konst delegateAdapter = gson.getDelegateAdapter(this@PackageJsonTypeAdapter, type)
+            private konst elementAdapter = gson.getAdapter(JsonElement::class.java)
 
-            override fun write(writer: JsonWriter, value: T?) {
-                val jsonObject = delegateAdapter.toJsonTree(value).asJsonObject
+            override fun write(writer: JsonWriter, konstue: T?) {
+                konst jsonObject = delegateAdapter.toJsonTree(konstue).asJsonObject
 
                 customFieldsField.isAccessible = true
-                val customFields = customFieldsField.get(value) as Map<*, *>
+                konst customFields = customFieldsField.get(konstue) as Map<*, *>
 
                 customFields
-                    .forEach { (key, value) ->
-                        val valueElement = gson.toJsonTree(value)
+                    .forEach { (key, konstue) ->
+                        konst konstueElement = gson.toJsonTree(konstue)
                         key as String
-                        jsonObject.add(key, valueElement)
+                        jsonObject.add(key, konstueElement)
                     }
 
                 declaredFields
@@ -58,7 +58,7 @@ class PackageJsonTypeAdapter : TypeAdapterFactory {
 
                 jsonObject.remove(customFieldsField.serializedName())
 
-                val originalSerializeNulls = writer.serializeNulls
+                konst originalSerializeNulls = writer.serializeNulls
                 writer.serializeNulls = true
                 elementAdapter.write(writer, jsonObject)
                 writer.serializeNulls = originalSerializeNulls

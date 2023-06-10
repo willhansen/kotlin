@@ -6,7 +6,7 @@ class Result<T> {
 }
 
 class TupleX<T1, T2, T3, T4>(
-    val _1: T1, val _2: T2, val _3: T3, val _4: T4
+    konst _1: T1, konst _2: T2, konst _3: T3, konst _4: T4
 )
 
 fun <K1, K2, K3, K4> rules(res: Result<Any>):

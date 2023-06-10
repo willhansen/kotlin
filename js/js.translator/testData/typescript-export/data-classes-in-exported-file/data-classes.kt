@@ -14,16 +14,16 @@ package foo
 
 
 
-data class TestDataClass(val name: String) {
+data class TestDataClass(konst name: String) {
     class Nested {
-        val prop: String = "hello"
+        konst prop: String = "hello"
     }
 }
 
 
 data class KT39423(
-    val a: String,
-    val b: Int? = null
+    konst a: String,
+    konst b: Int? = null
 )
 
 
@@ -32,4 +32,4 @@ abstract class WithComponent1 {
 }
 
 
-data class Test2(val value1: String, val value2: String): WithComponent1()
+data class Test2(konst konstue1: String, konst konstue2: String): WithComponent1()

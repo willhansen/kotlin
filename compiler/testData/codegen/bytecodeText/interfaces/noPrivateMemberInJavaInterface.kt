@@ -1,6 +1,6 @@
 interface A {
 
-    private val prop: String
+    private konst prop: String
         get() = "1"
 
     private fun foo() {

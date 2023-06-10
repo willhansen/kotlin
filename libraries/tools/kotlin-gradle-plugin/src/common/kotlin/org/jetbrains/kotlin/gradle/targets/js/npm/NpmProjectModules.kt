@@ -16,10 +16,10 @@ import java.io.Serializable
  * Search modules in node_modules according to https://nodejs.org/api/modules.html.
  */
 open class NpmProjectModules(
-    val dir: File,
-    val packageJsonEntries: Collection<String> = listOf("main", "module", "browser"),
-    val indexFileNames: Collection<String> = listOf(INDEX_FILE_NAME),
-    val indexFileSuffixes: Collection<String> = listOf(JS_SUFFIX)
+    konst dir: File,
+    konst packageJsonEntries: Collection<String> = listOf("main", "module", "browser"),
+    konst indexFileNames: Collection<String> = listOf(INDEX_FILE_NAME),
+    konst indexFileSuffixes: Collection<String> = listOf(JS_SUFFIX)
 ) : Serializable {
     /**
      * Require [request] nodejs module and return canonical path to it's main js file.
@@ -48,7 +48,7 @@ open class NpmProjectModules(
     private fun resolveAsRelative(prefix: String, name: String, context: File): File? {
         if (!name.startsWith(prefix)) return null
 
-        val relative = context.resolve(name.removePrefix(prefix))
+        konst relative = context.resolve(name.removePrefix(prefix))
         return resolveAsFile(relative)
             ?: resolveAsDirectory(relative)
     }
@@ -59,10 +59,10 @@ open class NpmProjectModules(
     }
 
     private fun resolveAsDirectory(dir: File): File? {
-        val packageJsonFile = dir.resolve(PACKAGE_JSON)
+        konst packageJsonFile = dir.resolve(PACKAGE_JSON)
 
-        val main: String? = if (packageJsonFile.isFile) {
-            val packageJson = packageJsonFile.reader().use {
+        konst main: String? = if (packageJsonFile.isFile) {
+            konst packageJson = packageJsonFile.reader().use {
                 Gson().fromJson(it, JsonObject::class.java)
             }
 
@@ -75,16 +75,16 @@ open class NpmProjectModules(
         } else null
 
         return if (main != null) {
-            val mainFile = dir.resolve(main)
+            konst mainFile = dir.resolve(main)
             resolveAsFile(mainFile)
                 ?: resolveIndex(mainFile)
         } else resolveIndex(dir)
     }
 
     private fun JsonObject.getStringOrNull(key: String): String? {
-        val value = get(key)
-        if (value == null || !value.isJsonPrimitive) return null
-        val jsonPrimitive = value.asJsonPrimitive
+        konst konstue = get(key)
+        if (konstue == null || !konstue.isJsonPrimitive) return null
+        konst jsonPrimitive = konstue.asJsonPrimitive
         if (jsonPrimitive.isString) return jsonPrimitive.asString
         return null
     }
@@ -101,7 +101,7 @@ open class NpmProjectModules(
         if (file.isFile) return file
 
         indexFileSuffixes.forEach {
-            val js = File(file.path + it)
+            konst js = File(file.path + it)
             if (js.isFile) return js
         }
 
@@ -111,7 +111,7 @@ open class NpmProjectModules(
     override fun toString(): String = "$dir"
 
     companion object {
-        const val JS_SUFFIX = ".js"
-        const val INDEX_FILE_NAME = "index"
+        const konst JS_SUFFIX = ".js"
+        const konst INDEX_FILE_NAME = "index"
     }
 }

@@ -18,7 +18,7 @@ import kotlin.script.experimental.dependencies.impl.SimpleExternalDependenciesRe
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class DependsOn(vararg val artifactsCoordinates: String, val options: Array<String> = [])
+annotation class DependsOn(vararg konst artifactsCoordinates: String, konst options: Array<String> = [])
 
 /**
  * A common annotation that could be used in a script to denote a repository for an ExternalDependenciesResolver
@@ -28,7 +28,7 @@ annotation class DependsOn(vararg val artifactsCoordinates: String, val options:
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class Repository(vararg val repositoriesCoordinates: String, val options: Array<String> = [])
+annotation class Repository(vararg konst repositoriesCoordinates: String, konst options: Array<String> = [])
 
 /**
  * An extension function that configures repositories and resolves artifacts denoted by the [Repository] and [DependsOn] annotations
@@ -36,17 +36,17 @@ annotation class Repository(vararg val repositoriesCoordinates: String, val opti
 suspend fun ExternalDependenciesResolver.resolveFromScriptSourceAnnotations(
     annotations: Iterable<ScriptSourceAnnotation<*>>
 ): ResultWithDiagnostics<List<File>> {
-    val reports = mutableListOf<ScriptDiagnostic>()
+    konst reports = mutableListOf<ScriptDiagnostic>()
     annotations.forEach { (annotation, locationWithId) ->
         when (annotation) {
             is Repository -> {
-                val options = SimpleExternalDependenciesResolverOptionsParser(*annotation.options, locationWithId = locationWithId)
-                    .valueOr { return it }
+                konst options = SimpleExternalDependenciesResolverOptionsParser(*annotation.options, locationWithId = locationWithId)
+                    .konstueOr { return it }
 
                 for (coordinates in annotation.repositoriesCoordinates) {
-                    val added = addRepository(coordinates, options, locationWithId)
+                    konst added = addRepository(coordinates, options, locationWithId)
                         .also { reports.addAll(it.reports) }
-                        .valueOr { return it }
+                        .konstueOr { return it }
 
                     if (!added)
                         return reports + makeFailureResult(
@@ -79,6 +79,6 @@ suspend fun ExternalDependenciesResolver.resolveFromScriptSourceAnnotations(
 suspend fun ExternalDependenciesResolver.resolveFromAnnotations(
     annotations: Iterable<Annotation>
 ): ResultWithDiagnostics<List<File>> {
-    val scriptSourceAnnotations = annotations.map { ScriptSourceAnnotation(it, null) }
+    konst scriptSourceAnnotations = annotations.map { ScriptSourceAnnotation(it, null) }
     return resolveFromScriptSourceAnnotations(scriptSourceAnnotations)
 }

@@ -4,31 +4,31 @@ package a.b
 // FILE:b.kt
 package a
 
-val foo = object {
+konst foo = object {
     fun bar() {}
 }
 
 fun bar() = object {
-    val foo = 239
+    konst foo = 239
 }
 
 class B {
-    val foo = object {
+    konst foo = object {
         fun bar() {}
     }
 
     fun bar() = object {
-        val foo = 239
+        konst foo = 239
     }
 }
 
 object C {
-    val foo = object {
+    konst foo = object {
         fun bar() {}
     }
 
     fun bar() = object {
-        val foo = 239
+        konst foo = 239
     }
 
     class Nested
@@ -36,12 +36,12 @@ object C {
 
 class D {
     companion object {
-        val foo = object {
+        konst foo = object {
             fun bar() {}
         }
 
         fun bar() = object {
-            val foo = 239
+            konst foo = 239
         }
     }
 }

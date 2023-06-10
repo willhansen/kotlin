@@ -5,7 +5,7 @@
 
 // Does not fail with TR.
 
-public val z: Any = Z
+public konst z: Any = Z
 
 private object Z
 

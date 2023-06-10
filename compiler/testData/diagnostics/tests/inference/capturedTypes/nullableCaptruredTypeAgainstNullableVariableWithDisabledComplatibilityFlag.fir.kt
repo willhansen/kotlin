@@ -14,7 +14,7 @@ fun <T : Any> Bar<T?>.bar(): T = null as T
 fun <T : Any> Foo<T>.boo1(): T = null as T
 fun <T : Any> Foo<T?>.boo2(): T = null as T
 
-open class Bar<out K>(val x: K)
+open class Bar<out K>(konst x: K)
 
 fun main(x: Foo<out Number?>, y: Bar<out Number?>, z1: Foo<out Number>, z2: Bar<out Number>) {
     x.foo()

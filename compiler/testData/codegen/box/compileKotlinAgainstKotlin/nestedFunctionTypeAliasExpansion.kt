@@ -14,6 +14,6 @@ fun <Msg> noEffect(): Effect<Msg> = TODO()
 import lib.*
 
 fun box(): String {
-    val s = { noEffect<Unit>() }
+    konst s = { noEffect<Unit>() }
     return "OK"
 }

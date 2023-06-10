@@ -11,18 +11,18 @@ class B {
 }
 
 open class C
-val C.attr: A
+konst C.attr: A
     get() = A()
 
 open class D: C()
-val D.attr: B
+konst D.attr: B
     get() = B()
 
 
 fun main() {
-    val b =  D()
+    konst b =  D()
     b.attr {} // overload resolution ambiguity
 
-    val d = b.attr
+    konst d = b.attr
     d {}      // no error
 }

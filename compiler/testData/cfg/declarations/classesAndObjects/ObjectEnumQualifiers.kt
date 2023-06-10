@@ -1,16 +1,16 @@
 import E.E1
 
 object O {
-    val y = 1
+    konst y = 1
 }
 
-enum class E(val x: Int) {
+enum class E(konst x: Int) {
     E1(0)
 }
 
 class C {
     companion object {
-        val z = 2
+        konst z = 2
     }
 }
 

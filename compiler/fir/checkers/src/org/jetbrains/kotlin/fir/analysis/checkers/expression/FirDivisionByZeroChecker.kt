@@ -17,13 +17,13 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 object FirDivisionByZeroChecker : FirFunctionCallChecker() {
-    private val defaultPackageName = FqName("kotlin")
-    private val defaultDivName = Name.identifier("div")
+    private konst defaultPackageName = FqName("kotlin")
+    private konst defaultDivName = Name.identifier("div")
 
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val firstValue = (expression.arguments.singleOrNull() as? FirConstExpression<*>)?.value
+        konst firstValue = (expression.arguments.singleOrNull() as? FirConstExpression<*>)?.konstue
         if (firstValue != null && (firstValue == 0L || firstValue == 0.0f || firstValue == 0.0)) {
-            val callableId = (expression.calleeReference.toResolvedFunctionSymbol())?.callableId
+            konst callableId = (expression.calleeReference.toResolvedFunctionSymbol())?.callableId
             if (callableId != null && callableId.packageName == defaultPackageName && callableId.callableName == defaultDivName) {
                 reporter.reportOn(expression.source, FirErrors.DIVISION_BY_ZERO, context)
             }

@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.test.services.fir.FirOldFrontendMetaConfigurator
 
 abstract class AbstractFirForeignAnnotationsTestBase(
     kind: ForeignAnnotationsTestKind,
-    val parser: FirParser
+    konst parser: FirParser
 ) : AbstractForeignAnnotationsTestBase(kind) {
     override fun TestConfigurationBuilder.configureFrontend() {
         globalDefaults {

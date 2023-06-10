@@ -10,13 +10,13 @@ inline fun <reified T, R> emptyFlow(crossinline transform: suspend (Array<T>) ->
 inline fun <reified T, R> emptyFlow(crossinline transform: (Array<T>) -> R): Flow1<R> =
     flowOf1(transform(emptyArray()))
 
-fun <T> flowOf1(value: T): Flow1<T> = TODO()
+fun <T> flowOf1(konstue: T): Flow1<T> = TODO()
 
 @OptIn(ExperimentalTypeInference::class)
 fun <T> flow1(block: suspend FlowCollector1<T>.() -> Unit): Flow1<T> = TODO()
 
 interface FlowCollector1<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 interface Flow1<out T>

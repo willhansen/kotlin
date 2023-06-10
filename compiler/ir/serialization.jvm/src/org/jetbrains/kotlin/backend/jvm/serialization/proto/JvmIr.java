@@ -57,7 +57,7 @@ public final class JvmIr {
     private XStatementOrExpression(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -108,10 +108,10 @@ public final class JvmIr {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -129,7 +129,7 @@ public final class JvmIr {
       public XStatementOrExpression parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new XStatementOrExpression(input, extensionRegistry);
       }
     };
@@ -147,12 +147,12 @@ public final class JvmIr {
       STATEMENT(1),
       EXPRESSION(2),
       KIND_NOT_SET(0);
-      private int value = 0;
-      private KindCase(int value) {
-        this.value = value;
+      private int konstue = 0;
+      private KindCase(int konstue) {
+        this.konstue = konstue;
       }
-      public static KindCase valueOf(int value) {
-        switch (value) {
+      public static KindCase konstueOf(int konstue) {
+        switch (konstue) {
           case 1: return STATEMENT;
           case 2: return EXPRESSION;
           case 0: return KIND_NOT_SET;
@@ -161,13 +161,13 @@ public final class JvmIr {
         }
       }
       public int getNumber() {
-        return this.value;
+        return this.konstue;
       }
     };
 
     public KindCase
     getKindCase() {
-      return KindCase.valueOf(
+      return KindCase.konstueOf(
           kindCase_);
     }
 
@@ -269,23 +269,23 @@ public final class JvmIr {
 
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression parseFrom(java.io.InputStream input)
@@ -428,7 +428,7 @@ public final class JvmIr {
         org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -442,7 +442,7 @@ public final class JvmIr {
       private java.lang.Object kind_;
       public KindCase
           getKindCase() {
-        return KindCase.valueOf(
+        return KindCase.konstueOf(
             kindCase_);
       }
 
@@ -472,11 +472,11 @@ public final class JvmIr {
       /**
        * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement statement = 1;</code>
        */
-      public Builder setStatement(org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement value) {
-        if (value == null) {
+      public Builder setStatement(org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        kind_ = value;
+        kind_ = konstue;
 
         kindCase_ = 1;
         return this;
@@ -494,13 +494,13 @@ public final class JvmIr {
       /**
        * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement statement = 1;</code>
        */
-      public Builder mergeStatement(org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement value) {
+      public Builder mergeStatement(org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement konstue) {
         if (kindCase_ == 1 &&
             kind_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement.getDefaultInstance()) {
           kind_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement) kind_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          kind_ = value;
+          kind_ = konstue;
         }
 
         kindCase_ = 1;
@@ -536,11 +536,11 @@ public final class JvmIr {
       /**
        * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression expression = 2;</code>
        */
-      public Builder setExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-        if (value == null) {
+      public Builder setExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        kind_ = value;
+        kind_ = konstue;
 
         kindCase_ = 2;
         return this;
@@ -558,13 +558,13 @@ public final class JvmIr {
       /**
        * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression expression = 2;</code>
        */
-      public Builder mergeExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+      public Builder mergeExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
         if (kindCase_ == 2 &&
             kind_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
           kind_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression) kind_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          kind_ = value;
+          kind_ = konstue;
         }
 
         kindCase_ = 2;
@@ -732,7 +732,7 @@ public final class JvmIr {
     private ClassOrFile(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -813,10 +813,10 @@ public final class JvmIr {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -852,7 +852,7 @@ public final class JvmIr {
       public ClassOrFile parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ClassOrFile(input, extensionRegistry);
       }
     };
@@ -1235,23 +1235,23 @@ public final class JvmIr {
 
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.ClassOrFile parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.ClassOrFile parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.ClassOrFile parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.ClassOrFile parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.ClassOrFile parseFrom(java.io.InputStream input)
@@ -1501,7 +1501,7 @@ public final class JvmIr {
         org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.ClassOrFile parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.ClassOrFile) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -1544,12 +1544,12 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 1;</code>
        */
       public Builder setDeclaration(
-          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDeclarationIsMutable();
-        declaration_.set(index, value);
+        declaration_.set(index, konstue);
 
         return this;
       }
@@ -1566,12 +1566,12 @@ public final class JvmIr {
       /**
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 1;</code>
        */
-      public Builder addDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration value) {
-        if (value == null) {
+      public Builder addDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDeclarationIsMutable();
-        declaration_.add(value);
+        declaration_.add(konstue);
 
         return this;
       }
@@ -1579,12 +1579,12 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 1;</code>
        */
       public Builder addDeclaration(
-          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDeclarationIsMutable();
-        declaration_.add(index, value);
+        declaration_.add(index, konstue);
 
         return this;
       }
@@ -1612,10 +1612,10 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 1;</code>
        */
       public Builder addAllDeclaration(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration> konstues) {
         ensureDeclarationIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, declaration_);
+            konstues, declaration_);
 
         return this;
       }
@@ -1669,12 +1669,12 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrType type = 2;</code>
        */
       public Builder setType(
-          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrType value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrType konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureTypeIsMutable();
-        type_.set(index, value);
+        type_.set(index, konstue);
 
         return this;
       }
@@ -1691,12 +1691,12 @@ public final class JvmIr {
       /**
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrType type = 2;</code>
        */
-      public Builder addType(org.jetbrains.kotlin.backend.common.serialization.proto.IrType value) {
-        if (value == null) {
+      public Builder addType(org.jetbrains.kotlin.backend.common.serialization.proto.IrType konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureTypeIsMutable();
-        type_.add(value);
+        type_.add(konstue);
 
         return this;
       }
@@ -1704,12 +1704,12 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrType type = 2;</code>
        */
       public Builder addType(
-          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrType value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrType konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureTypeIsMutable();
-        type_.add(index, value);
+        type_.add(index, konstue);
 
         return this;
       }
@@ -1737,10 +1737,10 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrType type = 2;</code>
        */
       public Builder addAllType(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrType> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrType> konstues) {
         ensureTypeIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, type_);
+            konstues, type_);
 
         return this;
       }
@@ -1794,12 +1794,12 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature signature = 3;</code>
        */
       public Builder setSignature(
-          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureSignatureIsMutable();
-        signature_.set(index, value);
+        signature_.set(index, konstue);
 
         return this;
       }
@@ -1816,12 +1816,12 @@ public final class JvmIr {
       /**
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature signature = 3;</code>
        */
-      public Builder addSignature(org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature value) {
-        if (value == null) {
+      public Builder addSignature(org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureSignatureIsMutable();
-        signature_.add(value);
+        signature_.add(konstue);
 
         return this;
       }
@@ -1829,12 +1829,12 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature signature = 3;</code>
        */
       public Builder addSignature(
-          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureSignatureIsMutable();
-        signature_.add(index, value);
+        signature_.add(index, konstue);
 
         return this;
       }
@@ -1862,10 +1862,10 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature signature = 3;</code>
        */
       public Builder addAllSignature(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature> konstues) {
         ensureSignatureIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, signature_);
+            konstues, signature_);
 
         return this;
       }
@@ -1925,12 +1925,12 @@ public final class JvmIr {
        * <code>repeated string string = 4;</code>
        */
       public Builder setString(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureStringIsMutable();
-        string_.set(index, value);
+        string_.set(index, konstue);
         
         return this;
       }
@@ -1938,12 +1938,12 @@ public final class JvmIr {
        * <code>repeated string string = 4;</code>
        */
       public Builder addString(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureStringIsMutable();
-        string_.add(value);
+        string_.add(konstue);
         
         return this;
       }
@@ -1951,10 +1951,10 @@ public final class JvmIr {
        * <code>repeated string string = 4;</code>
        */
       public Builder addAllString(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureStringIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, string_);
+            konstues, string_);
         
         return this;
       }
@@ -1971,12 +1971,12 @@ public final class JvmIr {
        * <code>repeated string string = 4;</code>
        */
       public Builder addStringBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureStringIsMutable();
-        string_.add(value);
+        string_.add(konstue);
         
         return this;
       }
@@ -2012,12 +2012,12 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.jvm.serialization.proto.XStatementOrExpression body = 5;</code>
        */
       public Builder setBody(
-          int index, org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBodyIsMutable();
-        body_.set(index, value);
+        body_.set(index, konstue);
 
         return this;
       }
@@ -2034,12 +2034,12 @@ public final class JvmIr {
       /**
        * <code>repeated .org.jetbrains.kotlin.backend.jvm.serialization.proto.XStatementOrExpression body = 5;</code>
        */
-      public Builder addBody(org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression value) {
-        if (value == null) {
+      public Builder addBody(org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBodyIsMutable();
-        body_.add(value);
+        body_.add(konstue);
 
         return this;
       }
@@ -2047,12 +2047,12 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.jvm.serialization.proto.XStatementOrExpression body = 5;</code>
        */
       public Builder addBody(
-          int index, org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBodyIsMutable();
-        body_.add(index, value);
+        body_.add(index, konstue);
 
         return this;
       }
@@ -2080,10 +2080,10 @@ public final class JvmIr {
        * <code>repeated .org.jetbrains.kotlin.backend.jvm.serialization.proto.XStatementOrExpression body = 5;</code>
        */
       public Builder addAllBody(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr.XStatementOrExpression> konstues) {
         ensureBodyIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, body_);
+            konstues, body_);
 
         return this;
       }
@@ -2143,12 +2143,12 @@ public final class JvmIr {
        * <code>repeated string debug_info = 6;</code>
        */
       public Builder setDebugInfo(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureDebugInfoIsMutable();
-        debugInfo_.set(index, value);
+        debugInfo_.set(index, konstue);
         
         return this;
       }
@@ -2156,12 +2156,12 @@ public final class JvmIr {
        * <code>repeated string debug_info = 6;</code>
        */
       public Builder addDebugInfo(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureDebugInfoIsMutable();
-        debugInfo_.add(value);
+        debugInfo_.add(konstue);
         
         return this;
       }
@@ -2169,10 +2169,10 @@ public final class JvmIr {
        * <code>repeated string debug_info = 6;</code>
        */
       public Builder addAllDebugInfo(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureDebugInfoIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, debugInfo_);
+            konstues, debugInfo_);
         
         return this;
       }
@@ -2189,12 +2189,12 @@ public final class JvmIr {
        * <code>repeated string debug_info = 6;</code>
        */
       public Builder addDebugInfoBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureDebugInfoIsMutable();
-        debugInfo_.add(value);
+        debugInfo_.add(konstue);
         
         return this;
       }
@@ -2243,12 +2243,12 @@ public final class JvmIr {
        * <code>required string file_facade_fq_name = 7;</code>
        */
       public Builder setFileFacadeFqName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000040;
-        fileFacadeFqName_ = value;
+        fileFacadeFqName_ = konstue;
         
         return this;
       }
@@ -2265,12 +2265,12 @@ public final class JvmIr {
        * <code>required string file_facade_fq_name = 7;</code>
        */
       public Builder setFileFacadeFqNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000040;
-        fileFacadeFqName_ = value;
+        fileFacadeFqName_ = konstue;
         
         return this;
       }

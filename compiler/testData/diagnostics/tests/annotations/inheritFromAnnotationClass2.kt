@@ -5,7 +5,7 @@
 
 annotation class Ann : Target()
 
-annotation class Ann2(vararg val allowedTargets: AnnotationTarget) : Target()
+annotation class Ann2(vararg konst allowedTargets: AnnotationTarget) : Target()
 
 interface I : J {
     override fun foo(): List<String> = throw Exception()

@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // FILE: test1.kt
 class <!CONFLICTING_OVERLOADS!>A<!>
-class B<!CONFLICTING_OVERLOADS!>(val x: Int)<!> {
+class B<!CONFLICTING_OVERLOADS!>(konst x: Int)<!> {
     <!CONFLICTING_OVERLOADS!>constructor(x: Int, y: Int)<!>: this(x + y)
 }
 

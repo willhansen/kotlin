@@ -13,10 +13,10 @@ public class JavaClass {
 // FILE: Test.kt
 
 fun test() {
-    val jc = JavaClass()
-    val result = jc.text
+    konst jc = JavaClass()
+    konst result = jc.text
 }
 
 fun otherTest(jc: JavaClass) {
-    val result = jc.text
+    konst result = jc.text
 }

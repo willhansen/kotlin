@@ -1,14 +1,14 @@
 
 class State @JvmOverloads constructor(
-        val someInt: Int,
-        val someLong: Long,
-        val someString: String = ""
+        konst someInt: Int,
+        konst someLong: Long,
+        konst someString: String = ""
 )
 
 class State2 @JvmOverloads constructor(
-        @JvmField val someInt: Int,
-        @JvmField val someLong: Long = 2,
-        @JvmField val someString: String = ""
+        @JvmField konst someInt: Int,
+        @JvmField konst someLong: Long = 2,
+        @JvmField konst someString: String = ""
 ) {
     @JvmOverloads
     fun test(someInt: Int, someLong: Long = 1, someString: String = "A"): Int = 5

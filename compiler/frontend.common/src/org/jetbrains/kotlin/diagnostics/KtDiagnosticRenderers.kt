@@ -10,28 +10,28 @@ import org.jetbrains.kotlin.diagnostics.rendering.ContextIndependentParameterRen
 import org.jetbrains.kotlin.diagnostics.rendering.Renderer
 
 object KtDiagnosticRenderers {
-    val NULLABLE_STRING = Renderer<String?> { it ?: "null" }
+    konst NULLABLE_STRING = Renderer<String?> { it ?: "null" }
 
-    val TO_STRING = Renderer { element: Any? ->
+    konst TO_STRING = Renderer { element: Any? ->
         element.toString()
     }
 
-    val OPTIONAL_COLON_TO_STRING = Renderer { element: Any? ->
-        val string = element.toString()
+    konst OPTIONAL_COLON_TO_STRING = Renderer { element: Any? ->
+        konst string = element.toString()
         if (string.isNotEmpty()) ": $string" else ""
     }
 
-    val EMPTY = Renderer { _: Any? -> "" }
+    konst EMPTY = Renderer { _: Any? -> "" }
 
-    val VISIBILITY = Renderer { visibility: Visibility ->
+    konst VISIBILITY = Renderer { visibility: Visibility ->
         visibility.externalDisplayName
     }
 
-    val NOT_RENDERED = Renderer<Any?> {
+    konst NOT_RENDERED = Renderer<Any?> {
         ""
     }
 
-    val FUNCTION_PARAMETERS = Renderer { hasValueParameters: Boolean -> if (hasValueParameters) "..." else "" }
+    konst FUNCTION_PARAMETERS = Renderer { hasValueParameters: Boolean -> if (hasValueParameters) "..." else "" }
 
     @Suppress("FunctionName")
     fun <T> COLLECTION(renderer: ContextIndependentParameterRenderer<T>): ContextIndependentParameterRenderer<Collection<T>> {

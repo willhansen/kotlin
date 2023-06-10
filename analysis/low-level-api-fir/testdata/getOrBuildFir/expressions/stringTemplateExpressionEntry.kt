@@ -1,1 +1,1 @@
-val x = "string <expr>${1 + 2}</expr> template"
+konst x = "string <expr>${1 + 2}</expr> template"

@@ -30,20 +30,20 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.decapitalizeAsciiOnly
 import org.jetbrains.org.objectweb.asm.Opcodes.*
 import org.jetbrains.org.objectweb.asm.Type
 
-class IrIntrinsicMethods(val irBuiltIns: IrBuiltIns, val symbols: JvmSymbols) {
-    private val kotlinFqn = StandardNames.BUILT_INS_PACKAGE_FQ_NAME
-    private val kotlinJvmFqn = FqName("kotlin.jvm")
-    private val kotlinJvmInternalUnsafeFqn = FqName("kotlin.jvm.internal.unsafe")
-    private val kotlinReflectFqn = StandardNames.KOTLIN_REFLECT_FQ_NAME
+class IrIntrinsicMethods(konst irBuiltIns: IrBuiltIns, konst symbols: JvmSymbols) {
+    private konst kotlinFqn = StandardNames.BUILT_INS_PACKAGE_FQ_NAME
+    private konst kotlinJvmFqn = FqName("kotlin.jvm")
+    private konst kotlinJvmInternalUnsafeFqn = FqName("kotlin.jvm.internal.unsafe")
+    private konst kotlinReflectFqn = StandardNames.KOTLIN_REFLECT_FQ_NAME
 
-    private val anyFqn = StandardNames.FqNames.any.toSafe()
-    private val arrayFqn = StandardNames.FqNames.array.toSafe()
-    private val cloneableFqn = StandardNames.FqNames.cloneable.toSafe()
-    private val intFqn = StandardNames.FqNames._int.toSafe()
-    private val kClassFqn = StandardNames.FqNames.kClass.toSafe()
-    private val stringFqn = StandardNames.FqNames.string.toSafe()
+    private konst anyFqn = StandardNames.FqNames.any.toSafe()
+    private konst arrayFqn = StandardNames.FqNames.array.toSafe()
+    private konst cloneableFqn = StandardNames.FqNames.cloneable.toSafe()
+    private konst intFqn = StandardNames.FqNames._int.toSafe()
+    private konst kClassFqn = StandardNames.FqNames.kClass.toSafe()
+    private konst stringFqn = StandardNames.FqNames.string.toSafe()
 
-    private val intrinsicsMap = (
+    private konst intrinsicsMap = (
             listOf(
                 Key(kotlinJvmFqn, FqName("T"), "<get-javaClass>", emptyList()) to JavaClassProperty,
                 Key(kotlinJvmFqn, kClassFqn, "<get-javaObjectType>", emptyList()) to GetJavaObjectType,
@@ -110,7 +110,7 @@ class IrIntrinsicMethods(val irBuiltIns: IrBuiltIns, val symbols: JvmSymbols) {
                     binaryFunForPrimitivesAcrossPrimitives("compareTo", CompareTo) +
                     createKeyMapping(Not, irBuiltIns.booleanClass, "not") +
                     createKeyMapping(StringGetChar, irBuiltIns.stringClass, "get", irBuiltIns.intClass) +
-                    symbols.primitiveIteratorsByType.values.map { iteratorClass ->
+                    symbols.primitiveIteratorsByType.konstues.map { iteratorClass ->
                         createKeyMapping(IteratorNext, iteratorClass, "next")
                     } +
                     arrayMethods() +
@@ -124,9 +124,9 @@ class IrIntrinsicMethods(val irBuiltIns: IrBuiltIns, val symbols: JvmSymbols) {
 
     private fun intrinsicsThatShouldHaveBeenLowered() =
         (symbols.primitiveTypesToPrimitiveArrays.map { (_, primitiveClassSymbol) ->
-            val name = primitiveClassSymbol.owner.name.asString()
+            konst name = primitiveClassSymbol.owner.name.asString()
             // IntArray -> intArrayOf
-            val arrayOfFunName = name.decapitalizeAsciiOnly() + "Of"
+            konst arrayOfFunName = name.decapitalizeAsciiOnly() + "Of"
             Key(kotlinFqn, null, arrayOfFunName, listOf(primitiveClassSymbol.owner.fqNameWhenAvailable))
         } + listOf(
             Key(kotlinFqn, anyFqn, "toString", emptyList()),
@@ -134,18 +134,18 @@ class IrIntrinsicMethods(val irBuiltIns: IrBuiltIns, val symbols: JvmSymbols) {
             Key(stringFqn, null, "plus", listOf(anyFqn)),
         )).map { it to IntrinsicShouldHaveBeenLowered }
 
-    private val PrimitiveType.symbol
+    private konst PrimitiveType.symbol
         get() = irBuiltIns.primitiveTypeToIrType[this]!!.classOrNull!!
 
     fun getIntrinsic(symbol: IrFunctionSymbol): IntrinsicMethod? = intrinsicsMap[symbol.toKey()]
 
     private fun unaryFunForPrimitives(name: String, intrinsic: IntrinsicMethod): List<Pair<Key, IntrinsicMethod>> =
-        PrimitiveType.values().map { type ->
+        PrimitiveType.konstues().map { type ->
             createKeyMapping(intrinsic, type.symbol, name)
         }
 
     private fun binaryFunForPrimitivesAcrossPrimitives(name: String, intrinsic: IntrinsicMethod): List<Pair<Key, IntrinsicMethod>> =
-        PrimitiveType.values().flatMap { parameter ->
+        PrimitiveType.konstues().flatMap { parameter ->
             binaryFunForPrimitives(name, intrinsic, parameter.symbol)
         }
 
@@ -155,7 +155,7 @@ class IrIntrinsicMethods(val irBuiltIns: IrBuiltIns, val symbols: JvmSymbols) {
         intrinsic: IntrinsicMethod,
         parameter: IrClassifierSymbol
     ): List<Pair<Key, IntrinsicMethod>> =
-        PrimitiveType.values().map { type ->
+        PrimitiveType.konstues().map { type ->
             createKeyMapping(intrinsic, type.symbol, name, parameter)
         }
 
@@ -186,23 +186,23 @@ class IrIntrinsicMethods(val irBuiltIns: IrBuiltIns, val symbols: JvmSymbols) {
         typeToIrFun: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>,
         operator: KtSingleValueToken
     ): List<Pair<Key, PrimitiveComparison>> =
-        PrimitiveType.values().mapNotNull { primitiveType ->
-            val irPrimitiveClassifier = irBuiltIns.primitiveTypeToIrType[primitiveType]!!.classifierOrFail
-            val irFunSymbol = typeToIrFun[irPrimitiveClassifier] ?: return@mapNotNull null
+        PrimitiveType.konstues().mapNotNull { primitiveType ->
+            konst irPrimitiveClassifier = irBuiltIns.primitiveTypeToIrType[primitiveType]!!.classifierOrFail
+            konst irFunSymbol = typeToIrFun[irPrimitiveClassifier] ?: return@mapNotNull null
             irFunSymbol.toKey()!! to PrimitiveComparison(primitiveType, operator)
         }
 
-    data class Key(val owner: FqName, val receiverParameterTypeName: FqName?, val name: String, val valueParameterTypeNames: List<FqName?>)
+    data class Key(konst owner: FqName, konst receiverParameterTypeName: FqName?, konst name: String, konst konstueParameterTypeNames: List<FqName?>)
 
     companion object {
-        private val INC = Increment(1)
+        private konst INC = Increment(1)
 
-        private val DEC = Increment(-1)
-        private val EXPLICIT_EQUALS = ExplicitEquals()
+        private konst DEC = Increment(-1)
+        private konst EXPLICIT_EQUALS = ExplicitEquals()
 
         private fun IrFunctionSymbol.toKey(): Key? {
-            val parent = owner.parent
-            val ownerFqName = when {
+            konst parent = owner.parent
+            konst ownerFqName = when {
                 parent is IrClass && parent.isFileClass ->
                     (parent.parent as IrPackageFragment).packageFqName
                 parent is IrClass -> parent.fqNameWhenAvailable ?: return null
@@ -213,7 +213,7 @@ class IrIntrinsicMethods(val irBuiltIns: IrBuiltIns, val symbols: JvmSymbols) {
                 ownerFqName,
                 getParameterFqName(owner.extensionReceiverParameter),
                 owner.name.asString(),
-                owner.valueParameters.map(::getParameterFqName)
+                owner.konstueParameters.map(::getParameterFqName)
             )
         }
 

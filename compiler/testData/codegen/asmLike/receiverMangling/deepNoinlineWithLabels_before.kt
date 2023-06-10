@@ -4,12 +4,12 @@
 // LAMBDAS: CLASS
 
 fun String.foo(count: Int) {
-    val x = false
+    konst x = false
 
     block b1@ {
-        val y = false
+        konst y = false
         block b2@ {
-            val z = true
+            konst z = true
             block b3@ {
                 this@foo + this@b1 + this@b2 + this@b3 + x + y + z + count
             }

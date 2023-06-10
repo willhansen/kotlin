@@ -17,19 +17,19 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractExpectForActualTest : AbstractAnalysisApiBasedTest() {
     override fun doTestByModuleStructure(moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val (declaration, _) = moduleStructure.modules.flatMap { module ->
-            val ktFiles = testServices.ktModuleProvider.getModuleFiles(module).filterIsInstance<KtFile>()
+        konst (declaration, _) = moduleStructure.modules.flatMap { module ->
+            konst ktFiles = testServices.ktModuleProvider.getModuleFiles(module).filterIsInstance<KtFile>()
             testServices.expressionMarkerProvider.getElementsOfTypeAtCarets<KtDeclaration>(ktFiles)
         }.single()
 
-        val expectedSymbolText: String? = executeOnPooledThreadInReadAction {
+        konst expectedSymbolText: String? = executeOnPooledThreadInReadAction {
             analyseForTest(declaration) {
-                val expectedSymbol = declaration.getSymbol().getExpectForActual() ?: return@analyseForTest null
+                konst expectedSymbol = declaration.getSymbol().getExpectForActual() ?: return@analyseForTest null
                 expectedSymbol.psi?.containingFile?.name + " : " + expectedSymbol.render()
             }
         }
 
-        val actual = buildString {
+        konst actual = buildString {
             appendLine("expected symbol: $expectedSymbolText")
         }
 

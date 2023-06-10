@@ -8,12 +8,12 @@ operator fun <C, T> T.provideDelegate(thisRef: C, property: KProperty<*>) =
         override operator fun getValue(thisRef: C, property: KProperty<*>) = this@provideDelegate
     }
 
-val byInt by 42
-val byIntAsLong: Long by 42L
-val byIntNullable: Int? by 42
+konst byInt by 42
+konst byIntAsLong: Long by 42L
+konst byIntNullable: Int? by 42
 
-val byString by "str"
-val byStringNullable: String? = "strNullable"
+konst byString by "str"
+konst byStringNullable: String? = "strNullable"
 
 
 fun box(): String {

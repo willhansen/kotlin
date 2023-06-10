@@ -16,7 +16,7 @@ fun testKT42482() {
     {
         assertEquals(41, KT42482().fortyTwo())
 
-        val obj: KT42482 = KT42482Impl()
+        konst obj: KT42482 = KT42482Impl()
         assertEquals(42, obj.fortyTwo())
 
         kt42482Swizzle(obj)

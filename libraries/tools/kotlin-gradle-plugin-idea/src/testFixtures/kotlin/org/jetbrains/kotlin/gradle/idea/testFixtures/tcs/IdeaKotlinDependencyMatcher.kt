@@ -8,12 +8,12 @@ package org.jetbrains.kotlin.gradle.idea.testFixtures.tcs
 import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinDependency
 
 interface IdeaKotlinDependencyMatcher {
-    val description: String
+    konst description: String
     fun matches(dependency: IdeaKotlinDependency): Boolean
 }
 
 fun IdeaKotlinDependencyMatcher(description: String, matches: (dependency: IdeaKotlinDependency) -> Boolean) =
     object : IdeaKotlinDependencyMatcher {
-        override val description: String = description
+        override konst description: String = description
         override fun matches(dependency: IdeaKotlinDependency): Boolean = matches(dependency)
     }

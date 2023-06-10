@@ -127,7 +127,7 @@ gc::ConcurrentMarkAndSweep::ConcurrentMarkAndSweep(GCScheduler& gcScheduler) noe
     gcThread_ = ScopedThread(ScopedThread::attributes().name("GC thread"), [this] {
         while (true) {
             auto epoch = state_.waitScheduled();
-            if (epoch.has_value()) {
+            if (epoch.has_konstue()) {
                 PerformFullGC(*epoch);
             } else {
                 break;

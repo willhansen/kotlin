@@ -17,8 +17,8 @@ class ContentsTest {
     private fun testLibrary(name: String) = LIBRARY_DIRECTORY.resolve("$name.klib").toFile().absolutePath
 
     private fun klibContents(library: String, printOutput: Boolean = false, expected: () -> String) {
-        val output = StringBuilder()
-        val lib = Library(library, null, "host")
+        konst output = StringBuilder()
+        konst lib = Library(library, null, "host")
         lib.contents(output, false)
         if (printOutput) {
             println(output.trim().toString())
@@ -32,8 +32,8 @@ class ContentsTest {
 
     @Test
     fun `Stdlib content should be printed without exceptions`() {
-        val output = StringBuilder()
-        val distributionPath = System.getProperty("konan.home")
+        konst output = StringBuilder()
+        konst distributionPath = System.getProperty("konan.home")
         Library(Distribution(distributionPath).stdlib, null, "host").contents(output, false)
     }
 
@@ -136,17 +136,17 @@ class ContentsTest {
         package <root> {
 
             class A constructor() {
-                val aVal: Int = 0
+                konst aVal: Int = 0
                 var aVar: String
                 fun aFun()
 
                 inner class B constructor() {
-                    val bVal: Int = 0
+                    konst bVal: Int = 0
                     var bVar: String
                     fun bFun()
 
                     inner class C constructor() {
-                        val cVal: Int = 0
+                        konst cVal: Int = 0
                         var cVar: String
                         fun cFun()
                     }
@@ -154,7 +154,7 @@ class ContentsTest {
                 }
 
                 class E constructor() {
-                    val eVal: Int = 0
+                    konst eVal: Int = 0
                     var eVar: String
                     fun eFun()
                 }
@@ -162,7 +162,7 @@ class ContentsTest {
             }
 
             data class F constructor(fVal: Int, fVar: String) {
-                val fVal: Int
+                konst fVal: Int
                 var fVar: String
                 operator fun component1(): Int
                 operator fun component2(): String
@@ -174,19 +174,19 @@ class ContentsTest {
             }
 
             class FinalImpl constructor() : OpenImpl {
-                override val iVal: Int = 0
+                override konst iVal: Int = 0
                 override var iVar: String
                 override fun iFun()
             }
 
             interface Interface {
-                val iVal: Int
+                konst iVal: Int
                 var iVar: String
                 fun iFun()
             }
 
             open class OpenImpl constructor() : Interface {
-                override val iVal: Int = 0
+                override konst iVal: Int = 0
                 override var iVar: String
                 override fun iFun()
             }
@@ -253,9 +253,9 @@ class ContentsTest {
                 enum entry A
                 enum entry B
                 enum entry C
-                val enumVal: Int = 0
+                konst enumVal: Int = 0
                 var enumVar: String
-                val x: Int
+                konst x: Int
                 open fun enumFun(): Int
             }
 
@@ -271,18 +271,18 @@ class ContentsTest {
             annotation class A constructor() : Annotation
 
             class Foo constructor() {
-                @A val annotated: Int = 0
+                @A konst annotated: Int = 0
                 var annotatedAccessors: Int
                     @A get
                     @A set
-                val annotatedGetter: Int = 0
+                konst annotatedGetter: Int = 0
                     @A get
                 var annotatedSetter: Int
                     @A set
                 var privateSetter: Int
                     private set
-                protected val protectedSimple: Int = 0
-                val simple: Int = 0
+                protected konst protectedSimple: Int = 0
+                konst simple: Int = 0
             }
 
         }
@@ -297,10 +297,10 @@ class ContentsTest {
         }
 
         package custom.pkg {
-            val v1: Int = 1
-            val v2: String = "hello"
-            val v3: (String) -> Int
-            val v4: MyTransformer /* = (String) -> Int */
+            konst v1: Int = 1
+            konst v2: String = "hello"
+            konst v3: (String) -> Int
+            konst v4: MyTransformer /* = (String) -> Int */
         }
         """.trimIndent()
     }
@@ -313,10 +313,10 @@ class ContentsTest {
         }
 
         package <root> {
-            val v1: Int = 1
-            val v2: String = "hello"
-            val v3: (String) -> Int
-            val v4: MyTransformer /* = (String) -> Int */
+            konst v1: Int = 1
+            konst v2: String = "hello"
+            konst v3: (String) -> Int
+            konst v4: MyTransformer /* = (String) -> Int */
         }
         """.trimIndent()
     }
@@ -331,10 +331,10 @@ class ContentsTest {
         }
 
         package custom.pkg {
-            val v1: Int = 1
-            val v2: String = "hello"
-            val v3: (String) -> Int
-            val v4: MyTransformer /* = (String) -> Int */
+            konst v1: Int = 1
+            konst v2: String = "hello"
+            konst v3: (String) -> Int
+            konst v4: MyTransformer /* = (String) -> Int */
         }
         """.trimIndent()
     }
@@ -349,15 +349,15 @@ class ContentsTest {
         }
 
         package <root> {
-            val v1: Int = 1
-            val v2: String = "hello"
-            val v3: (String) -> Int
-            val v4: MyTransformer /* = (String) -> Int */
+            konst v1: Int = 1
+            konst v2: String = "hello"
+            konst v3: (String) -> Int
+            konst v4: MyTransformer /* = (String) -> Int */
         }
         """.trimIndent()
     }
 
     companion object {
-        val LIBRARY_DIRECTORY = Paths.get("build/konan/libs").resolve(HostManager.hostName)
+        konst LIBRARY_DIRECTORY = Paths.get("build/konan/libs").resolve(HostManager.hostName)
     }
 }

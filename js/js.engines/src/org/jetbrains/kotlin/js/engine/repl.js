@@ -9,7 +9,7 @@
 Some of non-standard APIs available in standalone JS engines:
 
             v8   sm  jsc
-load         +    +    +    load and evaluate a file
+load         +    +    +    load and ekonstuate a file
 print        +    +    +    print to stdout
 printErr     +    +    +    print to stderr
 read         +    +    +    read a file as a text (v8, sm, jsc) or binary (sm, jsc)
@@ -91,7 +91,7 @@ async function loop() {
                     restoreGlobalState();
                     break;
                 default:
-                    print(await Realm.eval(currentRealmIndex, code));
+                    print(await Realm.ekonst(currentRealmIndex, code));
             }
         } catch(e) {
             printErr(e.stack != null ? e.stack : e.toString());

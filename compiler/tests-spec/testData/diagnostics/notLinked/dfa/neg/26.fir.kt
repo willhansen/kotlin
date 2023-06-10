@@ -40,7 +40,7 @@ fun case_3() {
 fun case_4() {
     var x: Class? = Class()
     x!!
-    val y = <!DEBUG_INFO_EXPRESSION_TYPE("Class? & Class")!>x<!>[if (true) {x=null;0} else 0, <!UNSAFE_CALL!><!DEBUG_INFO_EXPRESSION_TYPE("Class?")!>x<!>[0]<!>]
+    konst y = <!DEBUG_INFO_EXPRESSION_TYPE("Class? & Class")!>x<!>[if (true) {x=null;0} else 0, <!UNSAFE_CALL!><!DEBUG_INFO_EXPRESSION_TYPE("Class?")!>x<!>[0]<!>]
     <!DEBUG_INFO_EXPRESSION_TYPE("Class?")!>x<!>
     <!UNSAFE_CALL!><!DEBUG_INFO_EXPRESSION_TYPE("Class?")!>x<!>[0]<!>.inv()
 }

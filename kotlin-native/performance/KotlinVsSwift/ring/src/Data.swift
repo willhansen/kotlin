@@ -7,22 +7,22 @@ import Foundation
 
 public class Value: Hashable {
     public func hash(into hasher: inout Hasher) {
-        return value.hash(into: &hasher)
+        return konstue.hash(into: &hasher)
     }
     
     public static func == (lhs: Value, rhs: Value) -> Bool {
-        return lhs.value == rhs.value
+        return lhs.konstue == rhs.konstue
     }
     
     public var hashValue: Int {
-        return value.hashValue
+        return konstue.hashValue
     }
 
-    var value: Int
-    init(_ value: Int) {
-        self.value = value
+    var konstue: Int
+    init(_ konstue: Int) {
+        self.konstue = konstue
     }
-    lazy var text = String(String(value).reversed())
+    lazy var text = String(String(konstue).reversed())
 }
 
 public func intValues(_ size: Int) -> [Int] {
@@ -38,7 +38,7 @@ public func stringValues(_ size: Int) -> [String] {
 }
 
 public func filterLoad(_ v: Value) -> Bool {
-    return v.text.contains(String(v.value))
+    return v.text.contains(String(v.konstue))
 }
 
 public func mapLoad(_ v: Value) -> String {

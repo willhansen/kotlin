@@ -20,8 +20,8 @@ class ComposableLikeFunctionTypeKindExtension(session: FirSession) : FirFunction
     }
 }
 
-private val COMPOSABLE_PACKAGE_FQN = FqName.topLevel(Name.identifier("some"))
-private val MY_COMPOSABLE_ANNOTATION_CLASS_ID = ClassId.topLevel("MyComposable".fqn())
+private konst COMPOSABLE_PACKAGE_FQN = FqName.topLevel(Name.identifier("some"))
+private konst MY_COMPOSABLE_ANNOTATION_CLASS_ID = ClassId.topLevel("MyComposable".fqn())
 
 object ComposableFunction : FunctionTypeKind(
     COMPOSABLE_PACKAGE_FQN,
@@ -29,10 +29,10 @@ object ComposableFunction : FunctionTypeKind(
     MY_COMPOSABLE_ANNOTATION_CLASS_ID,
     isReflectType = false
 ) {
-    override val prefixForTypeRender: String
+    override konst prefixForTypeRender: String
         get() = "@MyComposable"
 
-    override val serializeAsFunctionWithAnnotationUntil: String
+    override konst serializeAsFunctionWithAnnotationUntil: String
         get() = LanguageVersion.KOTLIN_2_1.versionString
 
     override fun reflectKind(): FunctionTypeKind = KComposableFunction
@@ -44,7 +44,7 @@ object KComposableFunction : FunctionTypeKind(
     MY_COMPOSABLE_ANNOTATION_CLASS_ID,
     isReflectType = true
 ) {
-    override val serializeAsFunctionWithAnnotationUntil: String
+    override konst serializeAsFunctionWithAnnotationUntil: String
         get() = LanguageVersion.KOTLIN_2_1.versionString
 
     override fun nonReflectKind(): FunctionTypeKind = ComposableFunction

@@ -4,9 +4,9 @@ KtFile: 1.2.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -17,9 +17,9 @@ KtFile: 1.2.kt
       PsiElement(IDENTIFIER)('abcdef')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -32,9 +32,9 @@ KtFile: 1.2.kt
         <empty list>
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -44,9 +44,9 @@ KtFile: 1.2.kt
       PsiElement(INTEGER_LITERAL)('0L')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -56,9 +56,9 @@ KtFile: 1.2.kt
       PsiElement(INTEGER_LITERAL)('7l')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -71,9 +71,9 @@ KtFile: 1.2.kt
         <empty list>
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -83,9 +83,9 @@ KtFile: 1.2.kt
       PsiElement(INTEGER_LITERAL)('0')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -103,9 +103,9 @@ KtFile: 1.2.kt
       PsiElement(INTEGER_LITERAL)('9l')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -118,9 +118,9 @@ KtFile: 1.2.kt
         <empty list>
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -130,9 +130,9 @@ KtFile: 1.2.kt
       PsiElement(INTEGER_LITERAL)('1______________0')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')
@@ -142,9 +142,9 @@ KtFile: 1.2.kt
       PsiElement(INTEGER_LITERAL)('0L')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(EQ)('=')
     PsiWhiteSpace(' ')

@@ -7,10 +7,10 @@
  * DESCRIPTION: Hexadecimal integer literals with underscore symbol after the last digit.
  */
 
-val value = 0x3_c_c_c_7_8_____
-val value = 0Xc_______5_______6_______F_
-val value = 0X000000000_
-val value = 0x_
-val value = 0X______________
-val value = 0X0_
-val value = 0X1e_
+konst konstue = 0x3_c_c_c_7_8_____
+konst konstue = 0Xc_______5_______6_______F_
+konst konstue = 0X000000000_
+konst konstue = 0x_
+konst konstue = 0X______________
+konst konstue = 0X0_
+konst konstue = 0X1e_

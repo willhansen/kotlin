@@ -3,7 +3,7 @@
 
 import kotlin.contracts.*
 
-class C(val x: Int)
+class C(konst x: Int)
 
 @OptIn(ExperimentalContracts::class)
 fun isNotNullAlsoCall(a: String?, b: () -> Unit): Boolean {
@@ -23,7 +23,7 @@ fun binaryBooleanExpression() {
 }
 
 fun unoverriddenEquals(a: Any?) {
-    val c = C(1)
+    konst c = C(1)
     var b: Any?
     b = c
     if (b == c.also { b = a }) {

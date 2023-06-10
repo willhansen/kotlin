@@ -1,1 +1,1 @@
-inline class Cl(val a: String)
+inline class Cl(konst a: String)

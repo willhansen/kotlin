@@ -2,7 +2,7 @@ FILE: nullableTypeDelegate.kt
     public abstract interface ReadWriteProperty<R, T> : R|kotlin/Any| {
         public abstract operator fun getValue(thisRef: R|R|, prop: R|kotlin/Any|): R|T|
 
-        public abstract operator fun setValue(thisRef: R|R|, prop: R|kotlin/Any|, value: R|T|): R|kotlin/Unit|
+        public abstract operator fun setValue(thisRef: R|R|, prop: R|kotlin/Any|, konstue: R|T|): R|kotlin/Unit|
 
     }
     public abstract interface Delegate<R, T> : R|ReadWriteProperty<R, T>| {

@@ -14,17 +14,17 @@ import org.jetbrains.kotlin.gradle.utils.clearAnsiColor
 import java.text.ParseException
 
 class TeamCityMessageCommonClient(
-    internal val clientType: LogType,
-    internal val log: Logger
+    internal konst clientType: LogType,
+    internal konst log: Logger
 ) : ServiceMessageParserCallback {
 
     var afterMessage = false
 
     var progressLogger: ProgressLogger? = null
 
-    private val errors = mutableListOf<String>()
+    private konst errors = mutableListOf<String>()
 
-    private val stackTraceProcessor =
+    private konst stackTraceProcessor =
         TeamCityMessageStackTraceProcessor()
 
     override fun parseException(e: ParseException, text: String) {
@@ -53,17 +53,17 @@ class TeamCityMessageCommonClient(
     }
 
     private fun printMessage(text: String, type: LogType?) {
-        val value = text.trimEnd()
-        progressLogger?.progress(value)
+        konst konstue = text.trimEnd()
+        progressLogger?.progress(konstue)
 
-        val actualText = if (afterMessage)
+        konst actualText = if (afterMessage)
             when {
-                value.startsWith("\r\n") -> value.removePrefix("\r\n")
-                else -> value.removePrefix("\n")
+                konstue.startsWith("\r\n") -> konstue.removePrefix("\r\n")
+                else -> konstue.removePrefix("\n")
             }
-        else value
+        else konstue
 
-        val inStackTrace = stackTraceProcessor.process(actualText) { line, logType ->
+        konst inStackTrace = stackTraceProcessor.process(actualText) { line, logType ->
             log.processLogMessage(line, logType)
             errors.add(line.clearAnsiColor())
         }

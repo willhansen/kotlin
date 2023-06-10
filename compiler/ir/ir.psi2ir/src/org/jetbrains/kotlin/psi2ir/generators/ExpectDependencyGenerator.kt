@@ -27,8 +27,8 @@ internal fun referenceExpectsForUsedActuals(
 }
 
 private class ExpectDependencyGenerator(
-    private val expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
-    private val symbolTable: SymbolTable,
+    private konst expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
+    private konst symbolTable: SymbolTable,
 ) : IrElementVisitorVoid {
     private fun <T> T.forEachExpect(body: (DeclarationDescriptor) -> Unit) where T : IrDeclaration {
         this.descriptor.findExpects().forEach {
@@ -42,7 +42,7 @@ private class ExpectDependencyGenerator(
 
     override fun visitClass(declaration: IrClass) {
         declaration.forEachExpect { expectDescriptor ->
-            val symbol = symbolTable.referenceClass(expectDescriptor as ClassDescriptor)
+            konst symbol = symbolTable.referenceClass(expectDescriptor as ClassDescriptor)
             expectDescriptorToSymbol[expectDescriptor] = symbol
             expectDescriptor.constructors.forEach {
                 expectDescriptorToSymbol[it] = symbolTable.referenceConstructor(it as ClassConstructorDescriptor)
@@ -53,7 +53,7 @@ private class ExpectDependencyGenerator(
 
     override fun visitSimpleFunction(declaration: IrSimpleFunction) {
         declaration.forEachExpect {
-            val symbol = symbolTable.referenceSimpleFunction(it as FunctionDescriptor)
+            konst symbol = symbolTable.referenceSimpleFunction(it as FunctionDescriptor)
             expectDescriptorToSymbol[it] = symbol
         }
         super.visitDeclaration(declaration)
@@ -61,7 +61,7 @@ private class ExpectDependencyGenerator(
 
     override fun visitConstructor(declaration: IrConstructor) {
         declaration.forEachExpect {
-            val symbol = symbolTable.referenceConstructor(it as ClassConstructorDescriptor)
+            konst symbol = symbolTable.referenceConstructor(it as ClassConstructorDescriptor)
             expectDescriptorToSymbol[it] = symbol
 
         }
@@ -70,7 +70,7 @@ private class ExpectDependencyGenerator(
 
     override fun visitProperty(declaration: IrProperty) {
         declaration.forEachExpect {
-            val symbol = symbolTable.referenceProperty(it as PropertyDescriptor)
+            konst symbol = symbolTable.referenceProperty(it as PropertyDescriptor)
             expectDescriptorToSymbol[it] = symbol
         }
         super.visitDeclaration(declaration)
@@ -78,7 +78,7 @@ private class ExpectDependencyGenerator(
 
     override fun visitEnumEntry(declaration: IrEnumEntry) {
         declaration.forEachExpect {
-            val symbol = symbolTable.referenceEnumEntry(it as ClassDescriptor)
+            konst symbol = symbolTable.referenceEnumEntry(it as ClassDescriptor)
             expectDescriptorToSymbol[it] = symbol
 
         }
@@ -87,7 +87,7 @@ private class ExpectDependencyGenerator(
 
     override fun visitTypeAlias(declaration: IrTypeAlias) {
         declaration.forEachExpect {
-            val symbol = when (it) {
+            konst symbol = when (it) {
                 is ClassDescriptor -> symbolTable.referenceClass(it)
                 else -> error("Unexpected expect for actual type alias: $it")
             }

@@ -11,28 +11,28 @@ fun foo1(x: Any) = when (x) {
 }
 
 fun foo2(x: Any) {
-    val z = when (val y: Int = x as Int) {
+    konst z = when (konst y: Int = x as Int) {
         1, -> println(1)
         else -> println(3)
     }
 }
 
 fun foo3(x: (Any) -> Any) {
-    val z = when (val y: (Any) -> Any = x) {
+    konst z = when (konst y: (Any) -> Any = x) {
         {x: Any, -> x}, {y: Any, -> y}, -> println(1)
         else -> println(3)
     }
 }
 
 fun foo4(x: Any) {
-    val z = when (x) {
+    konst z = when (x) {
         is Int, is Double, -> println(1)
         else -> println(3)
     }
 }
 
 fun foo5(x: Int, y: IntArray, z: IntArray) {
-    val u = when (x) {
+    konst u = when (x) {
         in y,
         in z,
             -> println(1)

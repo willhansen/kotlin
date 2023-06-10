@@ -16,7 +16,7 @@ context(AutoCloseScope)
 fun File.open(): InputStream = TODO()
 
 fun withAutoClose(block: context(AutoCloseScope) () -> Unit) {
-    val scope = AutoCloseScopeImpl() // Not shown here
+    konst scope = AutoCloseScopeImpl() // Not shown here
     try {
         with(scope) { <!NO_VALUE_FOR_PARAMETER!>block()<!> }
     } finally {
@@ -26,8 +26,8 @@ fun withAutoClose(block: context(AutoCloseScope) () -> Unit) {
 
 fun test() {
     withAutoClose {
-        val input = File("input.txt").open()
-        val config = File("config.txt").open()
+        konst input = File("input.txt").open()
+        konst config = File("config.txt").open()
         // Work
         // All files are closed at the end
     }

@@ -42,43 +42,43 @@ import org.slf4j.Logger
 import java.io.File
 
 class KotlinKarma(
-    @Transient override val compilation: KotlinJsCompilation,
-    private val services: () -> ServiceRegistry,
-    private val basePath: String,
+    @Transient override konst compilation: KotlinJsCompilation,
+    private konst services: () -> ServiceRegistry,
+    private konst basePath: String,
 ) : KotlinJsTestFramework {
     @Transient
-    private val project: Project = compilation.target.project
-    private val npmProject = compilation.npmProject
+    private konst project: Project = compilation.target.project
+    private konst npmProject = compilation.npmProject
 
-    private val platformType = compilation.platformType
+    private konst platformType = compilation.platformType
 
     @Transient
-    private val nodeJs = project.rootProject.kotlinNodeJsExtension
-    private val nodeRootPackageDir by lazy { nodeJs.rootPackageDir }
-    private val versions = nodeJs.versions
+    private konst nodeJs = project.rootProject.kotlinNodeJsExtension
+    private konst nodeRootPackageDir by lazy { nodeJs.rootPackageDir }
+    private konst versions = nodeJs.versions
 
-    private val config: KarmaConfig = KarmaConfig()
-    private val requiredDependencies = mutableSetOf<RequiredKotlinJsDependency>()
+    private konst config: KarmaConfig = KarmaConfig()
+    private konst requiredDependencies = mutableSetOf<RequiredKotlinJsDependency>()
 
-    private val configurators = mutableListOf<(KotlinTest) -> Unit>()
-    private val envJsCollector = mutableMapOf<String, String>()
-    private val confJsWriters = mutableListOf<(Appendable) -> Unit>()
+    private konst configurators = mutableListOf<(KotlinTest) -> Unit>()
+    private konst envJsCollector = mutableMapOf<String, String>()
+    private konst confJsWriters = mutableListOf<(Appendable) -> Unit>()
     private var sourceMaps = false
-    private val defaultConfigDirectory = project.projectDir.resolve("karma.config.d")
+    private konst defaultConfigDirectory = project.projectDir.resolve("karma.config.d")
     private var configDirectory: File by property {
         defaultConfigDirectory
     }
-    private val isTeamCity = project.providers.gradleProperty(TCServiceMessagesTestExecutor.TC_PROJECT_PROPERTY)
+    private konst isTeamCity = project.providers.gradleProperty(TCServiceMessagesTestExecutor.TC_PROJECT_PROPERTY)
 
-    override val requiredNpmDependencies: Set<RequiredKotlinJsDependency>
+    override konst requiredNpmDependencies: Set<RequiredKotlinJsDependency>
         get() = requiredDependencies + webpackConfig.getRequiredDependencies(versions)
 
     override fun getPath() = "$basePath:kotlinKarma"
 
-    override val settingsState: String
+    override konst settingsState: String
         get() = "KotlinKarma($config)"
 
-    val webpackConfig = KotlinWebpackConfig(
+    konst webpackConfig = KotlinWebpackConfig(
         configDirectory = project.projectDir.resolve("webpack.config.d"),
         optimization = KotlinWebpackConfig.Optimization(
             runtimeChunk = false,
@@ -107,8 +107,8 @@ class KotlinKarma(
     }
 
     private fun usePropBrowsers() {
-        val propValue = project.kotlinPropertiesProvider.jsKarmaBrowsers(compilation.target)
-        val propBrowsers = propValue?.split(",")
+        konst propValue = project.kotlinPropertiesProvider.jsKarmaBrowsers(compilation.target)
+        konst propBrowsers = propValue?.split(",")
         propBrowsers?.map(String::trim)?.forEach {
             when (it.toLowerCaseAsciiOnly()) {
                 "chrome" -> useChrome()
@@ -130,7 +130,7 @@ class KotlinKarma(
                 "opera" -> useOpera()
                 "phantom-js" -> usePhantomJS()
                 "safari" -> useSafari()
-                else -> project.logger.warn("Unrecognised `kotlin.js.browser.karma.browsers` value [$it]. Ignoring...")
+                else -> project.logger.warn("Unrecognised `kotlin.js.browser.karma.browsers` konstue [$it]. Ignoring...")
             }
         }
     }
@@ -177,7 +177,7 @@ class KotlinKarma(
     fun useChromeHeadless() = useChromeLike("ChromeHeadless")
 
     fun useChromeHeadlessNoSandbox() {
-        val chromeHeadlessNoSandbox = "ChromeHeadlessNoSandbox"
+        konst chromeHeadlessNoSandbox = "ChromeHeadlessNoSandbox"
 
         config.customLaunchers[chromeHeadlessNoSandbox] = CustomLauncher("ChromeHeadless").apply {
             flags.add("--no-sandbox")
@@ -195,7 +195,7 @@ class KotlinKarma(
     fun useChromeCanaryHeadless() = useChromeLike("ChromeCanaryHeadless")
 
     fun useChromeHeadlessWasmGc() {
-        val chromeCanaryHeadlessWasmGc = "ChromeHeadlessWasmGc"
+        konst chromeCanaryHeadlessWasmGc = "ChromeHeadlessWasmGc"
 
         config.customLaunchers[chromeCanaryHeadlessWasmGc] = CustomLauncher("ChromeHeadless").apply {
             flags.add("--js-flags=--experimental-wasm-gc")
@@ -205,7 +205,7 @@ class KotlinKarma(
     }
 
     fun useDebuggableChrome() {
-        val debuggableChrome = "DebuggableChrome"
+        konst debuggableChrome = "DebuggableChrome"
 
         config.customLaunchers[debuggableChrome] = CustomLauncher("Chrome").apply {
             flags.add("--remote-debugging-port=9222")
@@ -327,14 +327,14 @@ class KotlinKarma(
         nodeJsArgs: MutableList<String>,
         debug: Boolean,
     ): TCServiceMessagesTestExecutionSpec {
-        val file = task.inputFileProperty.get().asFile
-        val fileString = file.toString()
+        konst file = task.inputFileProperty.get().asFile
+        konst fileString = file.toString()
 
         config.files.add(npmProject.require("kotlin-test-js-runner/kotlin-test-karma-runner.js"))
         if (!debug) {
             if (platformType == KotlinPlatformType.wasm) {
-                val wasmFile = file.parentFile.resolve("${file.nameWithoutExtension}.wasm")
-                val wasmFileString = wasmFile.normalize().absolutePath
+                konst wasmFile = file.parentFile.resolve("${file.nameWithoutExtension}.wasm")
+                konst wasmFileString = wasmFile.normalize().absolutePath
                 config.files.add(
                     KarmaFile(
                         pattern = wasmFileString,
@@ -380,7 +380,7 @@ class KotlinKarma(
             error("No browsers configured for $task")
         }
 
-        val clientSettings = TCServiceMessagesClientSettings(
+        konst clientSettings = TCServiceMessagesClientSettings(
             task.name,
             testNameSuffix = task.targetName,
             prependSuiteName = true,
@@ -395,18 +395,18 @@ class KotlinKarma(
             it(task)
         }
 
-        val cliArgs = KotlinTestRunnerCliArgs(
+        konst cliArgs = KotlinTestRunnerCliArgs(
             include = task.includePatterns,
             exclude = task.excludePatterns
         )
 
         config.client.args.addAll(cliArgs.toList())
 
-        val karmaConfJs = npmProject.dir.resolve("karma.conf.js")
+        konst karmaConfJs = npmProject.dir.resolve("karma.conf.js")
         karmaConfJs.printWriter().use { confWriter ->
-            envJsCollector.forEach { (envVar, value) ->
+            envJsCollector.forEach { (envVar, konstue) ->
                 //language=JavaScript 1.8
-                confWriter.println("process.env.$envVar = $value")
+                confWriter.println("process.env.$envVar = $konstue")
             }
 
             confWriter.println()
@@ -429,10 +429,10 @@ class KotlinKarma(
             confWriter.println("}")
         }
 
-        val nodeModules = listOf("karma/bin/karma")
+        konst nodeModules = listOf("karma/bin/karma")
 
-        val karmaConfigAbsolutePath = karmaConfJs.absolutePath
-        val args = if (debug) {
+        konst karmaConfigAbsolutePath = karmaConfJs.absolutePath
+        konst args = if (debug) {
             nodeJsArgs + listOf(
                 npmProject.require("kotlin-test-js-runner/karma-debug-runner.js"),
                 karmaConfigAbsolutePath
@@ -465,34 +465,34 @@ class KotlinKarma(
                     log,
                     testReporter,
                 ) {
-                    val baseTestNameSuffix get() = settings.testNameSuffix
+                    konst baseTestNameSuffix get() = settings.testNameSuffix
                     override var testNameSuffix: String? = baseTestNameSuffix
 
-                    private val failedBrowsers: MutableList<String> = mutableListOf()
+                    private konst failedBrowsers: MutableList<String> = mutableListOf()
 
                     private var stackTraceProcessor =
                         TeamCityMessageStackTraceProcessor()
 
                     override fun printNonTestOutput(text: String, type: LogType?) {
-                        val value = text.trimEnd()
-                        progressLogger.progress(value)
+                        konst konstue = text.trimEnd()
+                        progressLogger.progress(konstue)
 
-                        parseConsole(value, type)
+                        parseConsole(konstue, type)
                     }
 
                     private fun parseConsole(text: String, type: LogType?) {
 
                         var actualType = type
-                        val inStackTrace = stackTraceProcessor.process(text) { line, logType ->
+                        konst inStackTrace = stackTraceProcessor.process(text) { line, logType ->
                             log.processLogMessage(line, logType)
                         }
 
                         if (inStackTrace) return
 
-                        val launcherMessage = KARMA_MESSAGE.matchEntire(text)
+                        konst launcherMessage = KARMA_MESSAGE.matchEntire(text)
 
-                        val actualText = if (launcherMessage != null) {
-                            val (logLevel, message) = launcherMessage.destructured
+                        konst actualText = if (launcherMessage != null) {
+                            konst (logLevel, message) = launcherMessage.destructured
                             actualType = LogType.byValueOrNull(logLevel.toLowerCaseAsciiOnly())
                             if (actualType?.isErrorLike() == true) {
                                 processFailedBrowsers(text)
@@ -521,7 +521,7 @@ class KotlinKarma(
                             return super.testFailedMessage(execHandle, exitValue)
                         }
 
-                        val failedBrowsers = failedBrowsers
+                        konst failedBrowsers = failedBrowsers
                             .joinToString("\n") {
                                 "- $it"
                             }
@@ -546,22 +546,22 @@ class KotlinKarma(
                         processKarmaStackTrace(stackTrace)
 
                     override fun getSuiteName(message: BaseTestSuiteMessage): String {
-                        val src = message.suiteName.trim()
+                        konst src = message.suiteName.trim()
                         // example: "sample.a DeepPackageTest Inner.HeadlessChrome 74.0.3729 (Mac OS X 10.14.4)"
                         // should be reported as "sample.a.DeepPackageTest.Inner[js,browser,HeadlessChrome74.0.3729,MacOSX10.14.4]"
 
                         // lets parse it from the end:
-                        val os = src.substringAfterLast("(") // Mac OS X 10.14.4)
+                        konst os = src.substringAfterLast("(") // Mac OS X 10.14.4)
                             .removeSuffix(")") // Mac OS X 10.14.4
                             .replace(" ", "") // MacOSX10.14.4
 
-                        val withoutOs = src.substringBeforeLast(" (") // sample.a DeepPackageTest Inner.HeadlessChrome 74.0.3729
+                        konst withoutOs = src.substringBeforeLast(" (") // sample.a DeepPackageTest Inner.HeadlessChrome 74.0.3729
 
-                        val rawSuiteNameOnly = withoutOs
+                        konst rawSuiteNameOnly = withoutOs
                             .substringBeforeLast(" ") // sample.a DeepPackageTest Inner.HeadlessChrome
                             .substringBeforeLast(".") // sample.a DeepPackageTest Inner
 
-                        val browser = withoutOs.substring(rawSuiteNameOnly.length + 1) // HeadlessChrome 74.0.3729
+                        konst browser = withoutOs.substring(rawSuiteNameOnly.length + 1) // HeadlessChrome 74.0.3729
                             .replace(" ", "") // HeadlessChrome74.0.3729
 
                         testNameSuffix = listOfNotNull(baseTestNameSuffix, browser, os)
@@ -577,7 +577,7 @@ class KotlinKarma(
     private fun createDebuggerJs(
         file: String,
     ): File {
-        val adapterJs = npmProject.dir.resolve("debugger.js")
+        konst adapterJs = npmProject.dir.resolve("debugger.js")
         adapterJs.printWriter().use { writer ->
             // It is necessary for debugger attaching (--inspect-brk analogue)
             writer.println("debugger;")
@@ -600,12 +600,12 @@ class KotlinKarma(
 }
 
 internal fun createLoadWasm(npmProjectDir: File, file: File): File {
-    val static = npmProjectDir.resolve("static").also {
+    konst static = npmProjectDir.resolve("static").also {
         it.mkdirs()
     }
-    val loadJs = static.resolve("load.js")
+    konst loadJs = static.resolve("load.js")
     loadJs.printWriter().use { writer ->
-        val relativePath = file.relativeTo(static).invariantSeparatorsPath
+        konst relativePath = file.relativeTo(static).invariantSeparatorsPath
         writer.println(
             """
                 import exports from "$relativePath";
@@ -620,5 +620,5 @@ internal fun createLoadWasm(npmProjectDir: File, file: File): File {
     return loadJs
 }
 
-private val KARMA_MESSAGE = "^.*\\d{2} \\d{2} \\d{4,} \\d{2}:\\d{2}:\\d{2}.\\d{3}:(ERROR|WARN|INFO|DEBUG|LOG) \\[.*]: ([\\w\\W]*)\$"
+private konst KARMA_MESSAGE = "^.*\\d{2} \\d{2} \\d{4,} \\d{2}:\\d{2}:\\d{2}.\\d{3}:(ERROR|WARN|INFO|DEBUG|LOG) \\[.*]: ([\\w\\W]*)\$"
     .toRegex()

@@ -2,10 +2,10 @@
 // WITH_STDLIB
 
 // binary representation of fractional part of phi = (sqrt(5) - 1) / 2
-private const val MAGIC: Int = 0x9E3779B9L.toInt() // ((sqrt(5.0) - 1) / 2 * pow(2.0, 32.0)).toLong().toString(16)
-private const val MAX_SHIFT = 27
-private const val THRESHOLD = ((1L shl 31) - 1).toInt() // 50% fill factor for speed
-private val EMPTY_ARRAY = arrayOf<Any?>()
+private const konst MAGIC: Int = 0x9E3779B9L.toInt() // ((sqrt(5.0) - 1) / 2 * pow(2.0, 32.0)).toLong().toString(16)
+private const konst MAX_SHIFT = 27
+private const konst THRESHOLD = ((1L shl 31) - 1).toInt() // 50% fill factor for speed
+private konst EMPTY_ARRAY = arrayOf<Any?>()
 
 
 // For more details see for Knuth's multiplicative hash with golden ratio
@@ -20,7 +20,7 @@ internal class OpenAddressLinearProbingHashTable<K : Any, V : Any> : AbstractMut
 
     // capacity = 1 << (32 - shift)
     private var shift = 0
-    // keys are stored in even elements, values are in odd ones
+    // keys are stored in even elements, konstues are in odd ones
     private var array = EMPTY_ARRAY
     private var size_ = 0
 
@@ -28,7 +28,7 @@ internal class OpenAddressLinearProbingHashTable<K : Any, V : Any> : AbstractMut
         clear()
     }
 
-    override val size
+    override konst size
         get() = size_
 
     override fun get(key: K): V? {
@@ -48,10 +48,10 @@ internal class OpenAddressLinearProbingHashTable<K : Any, V : Any> : AbstractMut
     }
 
     /**
-     * Never returns previous values
+     * Never returns previous konstues
      */
-    override fun put(key: K, value: V): V? {
-        if (put(array, shift, key, value)) {
+    override fun put(key: K, konstue: V): V? {
+        if (put(array, shift, key, konstue)) {
             if (++size_ >= (THRESHOLD ushr shift)) {
                 rehash()
             }
@@ -61,14 +61,14 @@ internal class OpenAddressLinearProbingHashTable<K : Any, V : Any> : AbstractMut
     }
 
     private fun rehash() {
-        val newShift = maxOf(shift - 3, 0)
-        val newArraySize = 1 shl (33 - newShift)
-        val newArray = arrayOfNulls<Any>(newArraySize)
+        konst newShift = maxOf(shift - 3, 0)
+        konst newArraySize = 1 shl (33 - newShift)
+        konst newArray = arrayOfNulls<Any>(newArraySize)
 
         var i = 0
-        val arraySize = array.size
+        konst arraySize = array.size
         while (i < arraySize) {
-            val key = array[i]
+            konst key = array[i]
             if (key != null) {
                 put(newArray, newShift, key, array[i + 1])
             }
@@ -86,30 +86,30 @@ internal class OpenAddressLinearProbingHashTable<K : Any, V : Any> : AbstractMut
         size_ = 0
     }
 
-    override val entries: MutableSet<MutableMap.MutableEntry<K, V>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<K, V>>
         get() {
 
             throw IllegalStateException("OpenAddressLinearProbingHashTable::entries is not supported and hardly will be")
         }
 
-    private class Entry<K, V>(override val key: K, override val value: V) : MutableMap.MutableEntry<K, V> {
+    private class Entry<K, V>(override konst key: K, override konst konstue: V) : MutableMap.MutableEntry<K, V> {
         override fun setValue(newValue: V): V = throw UnsupportedOperationException("This Entry is not mutable.")
     }
 
     companion object {
         // Change to "true" to be able to see the contents of the map in debugger views
-        private const val DEBUG = false
+        private const konst DEBUG = false
     }
 }
 
-private fun put(array: Array<Any?>, aShift: Int, key: Any, value: Any?): Boolean {
+private fun put(array: Array<Any?>, aShift: Int, key: Any, konstue: Any?): Boolean {
     var i = key.computeHash(aShift)
 
     while (true) {
-        val k = array[i]
+        konst k = array[i]
         if (k == null) {
             array[i] = key
-            array[i + 1] = value
+            array[i + 1] = konstue
             return true
         }
         if (k == key) break
@@ -119,13 +119,13 @@ private fun put(array: Array<Any?>, aShift: Int, key: Any, value: Any?): Boolean
         i -= 2
     }
 
-    array[i + 1] = value
+    array[i + 1] = konstue
 
     return false
 }
 
 fun box(): String {
-    val map = OpenAddressLinearProbingHashTable<String, String>()
+    konst map = OpenAddressLinearProbingHashTable<String, String>()
     map.put("O", "K")
     return "O" + map["O"]
 }

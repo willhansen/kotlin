@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.test.services.dependencyProvider
 import org.jetbrains.kotlin.test.services.moduleStructure
 
 class BytecodeInliningHandler(testServices: TestServices) : JvmBinaryArtifactHandler(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
     override fun processModule(module: TestModule, info: BinaryArtifacts.Jvm) {}
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
-        val classFiles = testServices.moduleStructure.modules.flatMap {
+        konst classFiles = testServices.moduleStructure.modules.flatMap {
             testServices.dependencyProvider.getArtifact(it, ArtifactKinds.Jvm).classFileFactory.getClassFiles()
         }
-        val allDirectives = testServices.moduleStructure.allDirectives
+        konst allDirectives = testServices.moduleStructure.allDirectives
         InlineTestUtil.checkNoCallsToInline(
             classFiles,
             skipParameterCheckingInDirectives = NO_CHECK_LAMBDA_INLINING in allDirectives,

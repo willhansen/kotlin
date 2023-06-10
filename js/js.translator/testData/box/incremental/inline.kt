@@ -11,7 +11,7 @@ inline fun baz(f: () -> String): String = "baz(${f()})"
 // RECOMPILE
 
 fun box(): String {
-    val result = foo { "O" } + baz { "K" }
+    konst result = foo { "O" } + baz { "K" }
     if (result != "foo(bar(O))baz(K)") return "fail: $result"
 
     return "OK"

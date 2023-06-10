@@ -16,13 +16,13 @@ import org.gradle.api.artifacts.result.ResolvedComponentResult
  * Often, these dependencies needs to be handled differently not as usual ProjectDependencies
  * Since included build *has to* produce their artifacts on which "current build projects" will depend on.
  */
-internal val ComponentIdentifier.isProjectComponentIdentifierInCurrentBuild: Boolean
+internal konst ComponentIdentifier.isProjectComponentIdentifierInCurrentBuild: Boolean
     get() = currentBuildProjectIdOrNull != null
 
-internal val ComponentIdentifier.currentBuildProjectIdOrNull
+internal konst ComponentIdentifier.currentBuildProjectIdOrNull
     get(): ProjectComponentIdentifier? = when {
         this is ProjectComponentIdentifier && build.isCurrentBuild -> this
         else -> null
     }
 
-internal val ResolvedComponentResult.currentBuildProjectIdOrNull get() = id.currentBuildProjectIdOrNull
+internal konst ResolvedComponentResult.currentBuildProjectIdOrNull get() = id.currentBuildProjectIdOrNull

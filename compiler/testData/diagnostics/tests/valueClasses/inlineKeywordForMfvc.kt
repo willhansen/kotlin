@@ -4,34 +4,34 @@
 
 @file:Suppress("INLINE_CLASS_DEPRECATED")
 
-inline class A1(val x: Int)
+inline class A1(konst x: Int)
 
 @JvmInline
-value class A2(val x: Int)
+konstue class A2(konst x: Int)
 
 <!JVM_INLINE_WITHOUT_VALUE_CLASS!>@JvmInline<!>
-inline class A3(val x: Int)
+inline class A3(konst x: Int)
 
-<!VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION!>value<!> class A4(val x: Int)
+<!VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION!>konstue<!> class A4(konst x: Int)
 
 
-inline class B1(val x: Int, val y: Int)
+inline class B1(konst x: Int, konst y: Int)
 
 @JvmInline
-value class B2(val x: Int, val y: Int)
+konstue class B2(konst x: Int, konst y: Int)
 
 <!JVM_INLINE_WITHOUT_VALUE_CLASS!>@JvmInline<!>
-inline class B3(val x: Int, val y: Int)
+inline class B3(konst x: Int, konst y: Int)
 
-<!VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION!>value<!> class B4(val x: Int, val y: Int)
+<!VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION!>konstue<!> class B4(konst x: Int, konst y: Int)
 
 
-inline class C1(val x: B2)
+inline class C1(konst x: B2)
 
 @JvmInline
-value class C2(val x: B2)
+konstue class C2(konst x: B2)
 
 <!JVM_INLINE_WITHOUT_VALUE_CLASS!>@JvmInline<!>
-inline class C3(val x: B2)
+inline class C3(konst x: B2)
 
-<!VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION!>value<!> class C4(val x: B2)
+<!VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION!>konstue<!> class C4(konst x: B2)

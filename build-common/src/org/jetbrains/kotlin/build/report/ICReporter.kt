@@ -10,7 +10,7 @@ import java.io.File
 
 interface ICReporter {
 
-    enum class ReportSeverity(val level: Int) {
+    enum class ReportSeverity(konst level: Int) {
         WARNING(3),
         INFO(2),
         DEBUG(1);

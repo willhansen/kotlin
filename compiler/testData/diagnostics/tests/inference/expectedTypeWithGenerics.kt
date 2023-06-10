@@ -5,13 +5,13 @@ class X<S> {
 }
 
 fun test(x: X<Number>) {
-    val y = x.foo() as Int
+    konst y = x.foo() as Int
 }
 
 fun <S, D: S> g() {
     fun <T : S> foo(): T = TODO()
 
-    val y = <!TYPE_MISMATCH!>foo<!>() as Int
+    konst y = <!TYPE_MISMATCH!>foo<!>() as Int
 
-    val y2 = foo() as D
+    konst y2 = foo() as D
 }

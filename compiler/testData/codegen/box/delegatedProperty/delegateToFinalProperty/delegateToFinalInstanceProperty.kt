@@ -3,11 +3,11 @@
 
 
 class C {
-    val impl = 123
-    val s: String by impl
+    konst impl = 123
+    konst s: String by impl
 }
 
-val c = C()
+konst c = C()
 
 operator fun Any?.getValue(thisRef: Any?, property: Any?) =
     if (this == 123 && thisRef == c) "OK" else "Failed"

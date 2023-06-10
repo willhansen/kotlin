@@ -3,4 +3,4 @@ class B<R> {
     constructor(x: R) {}
 }
 
-val y8: B<String> = <caret>B("")
+konst y8: B<String> = <caret>B("")

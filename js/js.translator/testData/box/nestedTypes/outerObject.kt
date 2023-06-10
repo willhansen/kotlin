@@ -1,14 +1,14 @@
 // EXPECTED_REACHABLE_NODES: 1288
 package foo
 
-val q = "baz"
+konst q = "baz"
 
 object A {
-    val x = "foo"
+    konst x = "foo"
 
     class B {
-        val y = x + "_bar"
-        val z = q + "_bar"
+        konst y = x + "_bar"
+        konst z = q + "_bar"
     }
 }
 

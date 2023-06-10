@@ -1,5 +1,5 @@
 fun foo() {
     do {
-        val x = 42
+        konst x = 42
     } while (x != 42)
 }

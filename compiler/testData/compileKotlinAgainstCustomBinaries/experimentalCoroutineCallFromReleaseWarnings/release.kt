@@ -2,7 +2,7 @@ suspend fun callRelease() {
     builder {}
     builder2 { }
 
-    val x: suspend (Int) -> Unit = {}
+    konst x: suspend (Int) -> Unit = {}
     x.start()
 
     dummy()

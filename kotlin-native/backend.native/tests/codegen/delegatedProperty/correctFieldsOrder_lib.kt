@@ -6,7 +6,7 @@
 package zzz
 
 open class B {
-    val z by lazy { "qzz" }
-    val x = 117
-    val zzz = "zzz"
+    konst z by lazy { "qzz" }
+    konst x = 117
+    konst zzz = "zzz"
 }

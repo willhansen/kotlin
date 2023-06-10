@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.name.Name
 import java.lang.invoke.MethodType
 
 internal interface Proxy {
-    val state: State
-    val callInterceptor: CallInterceptor
-    val environment
+    konst state: State
+    konst callInterceptor: CallInterceptor
+    konst environment
         get() = callInterceptor.environment
 
     override fun equals(other: Any?): Boolean
@@ -34,11 +34,11 @@ internal interface Proxy {
 internal fun State.wrap(callInterceptor: CallInterceptor, remainArraysAsIs: Boolean, extendFrom: Class<*>? = null): Any? {
     return when (this) {
         is ExceptionState -> this
-        is Wrapper -> this.value
+        is Wrapper -> this.konstue
         is Primitive<*> -> when {
             this.isNull() -> null
-            this.type.isArray() || this.type.isPrimitiveArray() -> if (remainArraysAsIs) this else this.value
-            else -> this.value
+            this.type.isArray() || this.type.isPrimitiveArray() -> if (remainArraysAsIs) this else this.konstue
+            else -> this.konstue
         }
         is Common -> this.asProxy(callInterceptor, extendFrom)
         is ReflectionState -> this.asProxy(callInterceptor)
@@ -46,14 +46,14 @@ internal fun State.wrap(callInterceptor: CallInterceptor, remainArraysAsIs: Bool
     }
 }
 
-private val eqeqName = IrBuiltIns.KOTLIN_INTERNAL_IR_FQN.child(Name.identifier(BuiltInOperatorNames.EQEQ)).asString()
-private val checkNotNullName = IrBuiltIns.KOTLIN_INTERNAL_IR_FQN.child(Name.identifier(BuiltInOperatorNames.CHECK_NOT_NULL)).asString()
+private konst eqeqName = IrBuiltIns.KOTLIN_INTERNAL_IR_FQN.child(Name.identifier(BuiltInOperatorNames.EQEQ)).asString()
+private konst checkNotNullName = IrBuiltIns.KOTLIN_INTERNAL_IR_FQN.child(Name.identifier(BuiltInOperatorNames.CHECK_NOT_NULL)).asString()
 
 /**
  * Prepare state object to be passed in outer world
  */
 internal fun List<State>.wrap(callInterceptor: CallInterceptor, irFunction: IrFunction, methodType: MethodType? = null): List<Any?> {
-    val name = irFunction.fqName
+    konst name = irFunction.fqName
     if (name == eqeqName && this.any { it is Common }) {
         // in case of custom `equals` it is important not to lose information obout type
         // so all states remain as is, only common will be converted to Proxy
@@ -64,7 +64,7 @@ internal fun List<State>.wrap(callInterceptor: CallInterceptor, irFunction: IrFu
     }
     return this.mapIndexed { index, state ->
         // don't get arrays from Primitive in case of "set" and "Pair.<init>"; information about type will be lost
-        val unwrapArrays = (name == "kotlin.Array.set" && index != 0) || name == "kotlin.Pair.<init>" || name == checkNotNullName
+        konst unwrapArrays = (name == "kotlin.Array.set" && index != 0) || name == "kotlin.Pair.<init>" || name == checkNotNullName
         state.wrap(callInterceptor, unwrapArrays, methodType?.parameterType(index))
     }
 }

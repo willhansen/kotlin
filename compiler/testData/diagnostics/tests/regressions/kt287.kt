@@ -4,7 +4,7 @@
 import java.util.*
 
 fun attributes() : Map<String, String> = HashMap() // Should be inferred;
-val attributes : Map<String, String> = HashMap() // Should be inferred;
+konst attributes : Map<String, String> = HashMap() // Should be inferred;
 
 fun foo(m : Map<String, String>) {}
 

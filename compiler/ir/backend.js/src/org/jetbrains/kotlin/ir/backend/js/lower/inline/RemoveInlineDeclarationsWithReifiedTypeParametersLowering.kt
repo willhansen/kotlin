@@ -28,7 +28,7 @@ class RemoveInlineDeclarationsWithReifiedTypeParametersLowering: DeclarationTran
     }
 }
 
-class CopyInlineFunctionBodyLowering(val context: JsIrBackendContext) : DeclarationTransformer {
+class CopyInlineFunctionBodyLowering(konst context: JsIrBackendContext) : DeclarationTransformer {
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration is IrFunction && declaration.isInline) {
             declaration.body?.let { originalBody ->

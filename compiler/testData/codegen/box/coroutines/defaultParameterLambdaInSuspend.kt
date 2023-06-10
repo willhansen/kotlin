@@ -16,7 +16,7 @@ class Controller1 {
     }
     suspend fun getDef() = "DEF2"
     suspend fun suspendHere2(block : suspend () -> String = { getDef() }): String {
-        val result = block()
+        konst result = block()
         return suspendCoroutineUninterceptedOrReturn { x ->
             x.resume(result)
             COROUTINE_SUSPENDED
@@ -80,7 +80,7 @@ class Controller2 {
     }
     suspend fun getDef() = "DEF2"
     suspend fun suspendHere2(block : suspend () -> String = { getDef() }): String {
-        val result = block()
+        konst result = block()
         return suspendCoroutineUninterceptedOrReturn { x ->
             x.resume(result)
             COROUTINE_SUSPENDED

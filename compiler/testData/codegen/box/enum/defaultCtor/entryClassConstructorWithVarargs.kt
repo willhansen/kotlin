@@ -5,7 +5,7 @@ enum class Test(vararg xs: Int) {
     OK {
         fun foo() {}
     };
-    val xs = xs
+    konst xs = xs
 }
 
 fun box(): String =

@@ -5,8 +5,8 @@
 import kotlin.test.assertEquals
 
 @JvmInline
-value class S(val value1: UInt, val value2: Int) {
-    operator fun plus(other: S): S = S(this.value1 + other.value1, this.value2 + other.value2)
+konstue class S(konst konstue1: UInt, konst konstue2: Int) {
+    operator fun plus(other: S): S = S(this.konstue1 + other.konstue1, this.konstue2 + other.konstue2)
 }
 
 class C {
@@ -19,18 +19,18 @@ fun S.extension1(y: S, z: S?): S = this + y + z!!
 
 fun S?.extension2(y: S, z: S?) = this!! + y + z!!
 
-fun S.extension3_1(): UInt = value1
-fun S.extension3_2(): Int = value2
+fun S.extension3_1(): UInt = konstue1
+fun S.extension3_2(): Int = konstue2
 
-fun S?.extension4_1(): UInt = this!!.value1
-fun S?.extension4_2(): Int = this!!.value2
+fun S?.extension4_1(): UInt = this!!.konstue1
+fun S?.extension4_2(): Int = this!!.konstue2
 
 fun box(): String {
-    val zero = S(0U, 1000)
-    val one = S(1U, -1)
-    val two = S(2U, -2)
-    val four = S(4U, -4)
-    val seven = S(7U, -7)
+    konst zero = S(0U, 1000)
+    konst one = S(1U, -1)
+    konst two = S(2U, -2)
+    konst four = S(4U, -4)
+    konst seven = S(7U, -7)
 
     assertEquals(seven, C::member.call(C(), one, 2U, -2, four))
     assertEquals(seven, ::topLevel.call(1U, -1, two, four))

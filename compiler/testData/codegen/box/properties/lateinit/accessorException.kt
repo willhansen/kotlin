@@ -2,7 +2,7 @@
 public class A {
     fun getFromClass(): Boolean {
         try {
-            val a = str
+            konst a = str
             return false
         } catch (e: RuntimeException) {
             return true
@@ -16,7 +16,7 @@ public class A {
 
         fun getFromCompanion(): Boolean {
             try {
-                val a = str
+                konst a = str
                 return false
             } catch (e: RuntimeException) {
                 return true

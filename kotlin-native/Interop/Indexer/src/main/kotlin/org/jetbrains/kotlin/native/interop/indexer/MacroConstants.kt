@@ -20,7 +20,7 @@ import clang.*
 import kotlinx.cinterop.*
 import java.io.File
 
-val predefinedMacros = setOf("__DATE__", "__TIME__", "__TIMESTAMP__", "__FILE__", "__FILE_NAME__", "__BASE_FILE__", "__LINE__")
+konst predefinedMacros = setOf("__DATE__", "__TIME__", "__TIMESTAMP__", "__FILE__", "__FILE_NAME__", "__BASE_FILE__", "__LINE__")
 
 /**
  * Finds all "macro constants" and registers them as [NativeIndex.constants] in given index.
@@ -31,9 +31,9 @@ internal fun findMacros(
         translationUnits: List<CXTranslationUnit>,
         headers: Set<CXFile?>
 ) {
-    val names = collectMacroNames(nativeIndex, translationUnits, headers)
+    konst names = collectMacroNames(nativeIndex, translationUnits, headers)
     // TODO: apply user-defined filters.
-    val macros = expandMacros(compilation, names, typeConverter = { nativeIndex.convertType(it) })
+    konst macros = expandMacros(compilation, names, typeConverter = { nativeIndex.convertType(it) })
 
     macros.filterIsInstanceTo(nativeIndex.macroConstants)
     macros.filterIsInstanceTo(nativeIndex.wrappedMacros)
@@ -56,8 +56,8 @@ private fun expandMacros(
         typeConverter: TypeConverter
 ): List<MacroDef> {
     withIndex(excludeDeclarationsFromPCH = true) { index ->
-        val sourceFile = library.createTempSource()
-        val compilerArgs = library.compilerArgs.toMutableList()
+        konst sourceFile = library.createTempSource()
+        konst compilerArgs = library.compilerArgs.toMutableList()
         // We disable implicit function declaration to filter out cases when a macro is expanded as a function
         // or function-like construction (e.g. #define FOO throw()) but such a function is undeclared.
         compilerArgs += "-Werror=implicit-function-declaration"
@@ -65,15 +65,15 @@ private fun expandMacros(
         // Ensure libclang reports all errors:
         compilerArgs += "-ferror-limit=0"
 
-        val translationUnit = parseTranslationUnit(index, sourceFile, compilerArgs, options = CXTranslationUnit_DetailedPreprocessingRecord)
+        konst translationUnit = parseTranslationUnit(index, sourceFile, compilerArgs, options = CXTranslationUnit_DetailedPreprocessingRecord)
         try {
-            val nameToMacroDef = mutableMapOf<String, MacroDef>()
-            val unprocessedMacros = names.toMutableList()
+            konst nameToMacroDef = mutableMapOf<String, MacroDef>()
+            konst unprocessedMacros = names.toMutableList()
 
             // Note: will be slow for a library with a lot of macros having unbalanced '{'. TODO: Optimize this case too.
 
             while (unprocessedMacros.isNotEmpty()) {
-                val processedMacros =
+                konst processedMacros =
                         tryExpandMacros(library, translationUnit, sourceFile, unprocessedMacros, typeConverter)
 
                 unprocessedMacros -= (processedMacros.keys + unprocessedMacros.first())
@@ -93,7 +93,7 @@ private fun expandMacros(
 
 /**
  * Tries to expand macros [names] defined in [library].
- * Returns the map of successfully processed macros with resulting constant as a value
+ * Returns the map of successfully processed macros with resulting constant as a konstue
  * or `null` if the result is not a constant (expression).
  *
  * As a side effect, modifies the [sourceFile] and reparses the [translationUnit].
@@ -108,13 +108,13 @@ private fun tryExpandMacros(
 
     reparseWithCodeSnippets(library, translationUnit, sourceFile, names)
 
-    val macrosWithErrorsInSnippetFunctionHeader = mutableSetOf<String>()
-    val macrosWithErrorsInSnippetFunctionBody = mutableSetOf<String>()
+    konst macrosWithErrorsInSnippetFunctionHeader = mutableSetOf<String>()
+    konst macrosWithErrorsInSnippetFunctionBody = mutableSetOf<String>()
 
-    val preambleSize = library.preambleLines.size
+    konst preambleSize = library.preambleLines.size
 
     translationUnit.getErrorLineNumbers().map { it - preambleSize - 1 }.forEach { lineNumber ->
-        val index = lineNumber / CODE_SNIPPET_LINES_NUMBER
+        konst index = lineNumber / CODE_SNIPPET_LINES_NUMBER
         if (index >= 0 && index < names.size) {
             when (lineNumber % CODE_SNIPPET_LINES_NUMBER) {
                 0 -> macrosWithErrorsInSnippetFunctionHeader += names[index]
@@ -124,13 +124,13 @@ private fun tryExpandMacros(
         }
     }
 
-    val result = mutableMapOf<String, MacroDef?>()
+    konst result = mutableMapOf<String, MacroDef?>()
 
     visitChildren(translationUnit) { cursor, _ ->
         if (cursor.kind == CXCursorKind.CXCursor_FunctionDecl) {
-            val functionName = getCursorSpelling(cursor)
+            konst functionName = getCursorSpelling(cursor)
             if (functionName.startsWith(CODE_SNIPPET_FUNCTION_NAME_PREFIX)) {
-                val macroName = functionName.removePrefix(CODE_SNIPPET_FUNCTION_NAME_PREFIX)
+                konst macroName = functionName.removePrefix(CODE_SNIPPET_FUNCTION_NAME_PREFIX)
                 if (macroName in macrosWithErrorsInSnippetFunctionHeader) {
                     // Code snippet is likely affected by previous macros' snippets, skip it for now.
                 } else {
@@ -150,14 +150,14 @@ private fun tryExpandMacros(
     return result
 }
 
-private const val CODE_SNIPPET_LINES_NUMBER = 3
-private const val CODE_SNIPPET_FUNCTION_NAME_PREFIX = "kni_indexer_function_"
+private const konst CODE_SNIPPET_LINES_NUMBER = 3
+private const konst CODE_SNIPPET_FUNCTION_NAME_PREFIX = "kni_indexer_function_"
 
 /**
  * Adds code snippets to be then processed with [processCodeSnippet] to the [sourceFile]
  * and reparses the [translationUnit].
  *
- *  - If a code snippet allows extracting the constant value using libclang API, we'll add a [ConstantDef] in the
+ *  - If a code snippet allows extracting the constant konstue using libclang API, we'll add a [ConstantDef] in the
  * native index and generate a Kotlin constant for it.
  *  - If the expression type can be inferred by libclang, we'll add a [WrappedMacroDef] in the native index and
  * generate a bridge for this macro.
@@ -172,7 +172,7 @@ private fun reparseWithCodeSnippets(library: CompilationWithPCH,
         writer.appendPreamble(library)
 
         names.forEach { name ->
-            val codeSnippetLines = when (library.language) {
+            konst codeSnippetLines = when (library.language) {
                 Language.C, Language.CPP, Language.OBJECTIVE_C ->
                     listOf("void $CODE_SNIPPET_FUNCTION_NAME_PREFIX$name() {",
                             "    __auto_type KNI_INDEXER_VARIABLE_$name = $name;",
@@ -196,16 +196,16 @@ private fun processCodeSnippet(
         typeConverter: TypeConverter
 ): MacroDef? {
 
-    val kindsToSkip = setOf(CXCursorKind.CXCursor_CompoundStmt)
+    konst kindsToSkip = setOf(CXCursorKind.CXCursor_CompoundStmt)
     var state = VisitorState.EXPECT_NODES_TO_SKIP
-    var evalResultOrNull: CXEvalResult? = null
+    var ekonstResultOrNull: CXEkonstResult? = null
     var typeOrNull: Type? = null
 
-    val visitor: CursorVisitor = { cursor, _ ->
-        val kind = cursor.kind
+    konst visitor: CursorVisitor = { cursor, _ ->
+        konst kind = cursor.kind
         when {
             state == VisitorState.EXPECT_VARIABLE && kind == CXCursorKind.CXCursor_VarDecl -> {
-                evalResultOrNull = clang_Cursor_Evaluate(cursor)
+                ekonstResultOrNull = clang_Cursor_Ekonstuate(cursor)
                 state = VisitorState.EXPECT_VARIABLE_VALUE
                 CXChildVisitResult.CXChildVisit_Recurse
             }
@@ -239,9 +239,9 @@ private fun processCodeSnippet(
             return null
         }
 
-        val type = typeOrNull!!
-        return if (evalResultOrNull == null) {
-            // The macro cannot be evaluated as a constant so we will wrap it in a bridge.
+        konst type = typeOrNull!!
+        return if (ekonstResultOrNull == null) {
+            // The macro cannot be ekonstuated as a constant so we will wrap it in a bridge.
             when(type.unwrapTypedefs()) {
                 is PrimitiveType,
                 is PointerType,
@@ -249,34 +249,34 @@ private fun processCodeSnippet(
                 else -> null
             }
         } else {
-            // Otherwise we can evaluate the expression and create a Kotlin constant for it.
-            val evalResult = evalResultOrNull!!
-            val evalResultKind = clang_EvalResult_getKind(evalResult)
-            when (evalResultKind) {
-                CXEvalResultKind.CXEval_Int ->
-                    IntegerConstantDef(name, type, clang_EvalResult_getAsLongLong(evalResult))
+            // Otherwise we can ekonstuate the expression and create a Kotlin constant for it.
+            konst ekonstResult = ekonstResultOrNull!!
+            konst ekonstResultKind = clang_EkonstResult_getKind(ekonstResult)
+            when (ekonstResultKind) {
+                CXEkonstResultKind.CXEkonst_Int ->
+                    IntegerConstantDef(name, type, clang_EkonstResult_getAsLongLong(ekonstResult))
 
-                CXEvalResultKind.CXEval_Float ->
-                    FloatingConstantDef(name, type, clang_EvalResult_getAsDouble(evalResult))
+                CXEkonstResultKind.CXEkonst_Float ->
+                    FloatingConstantDef(name, type, clang_EkonstResult_getAsDouble(ekonstResult))
 
-                CXEvalResultKind.CXEval_CFStr,
-                CXEvalResultKind.CXEval_ObjCStrLiteral,
-                CXEvalResultKind.CXEval_StrLiteral ->
-                    if (evalResultKind == CXEvalResultKind.CXEval_StrLiteral && !type.canonicalIsPointerToChar()) {
+                CXEkonstResultKind.CXEkonst_CFStr,
+                CXEkonstResultKind.CXEkonst_ObjCStrLiteral,
+                CXEkonstResultKind.CXEkonst_StrLiteral ->
+                    if (ekonstResultKind == CXEkonstResultKind.CXEkonst_StrLiteral && !type.canonicalIsPointerToChar()) {
                         // libclang doesn't seem to support wide string literals properly in this API;
                         // thus disable wide literals here:
                         null
                     } else {
-                        StringConstantDef(name, type, clang_EvalResult_getAsStr(evalResult)!!.toKString())
+                        StringConstantDef(name, type, clang_EkonstResult_getAsStr(ekonstResult)!!.toKString())
                     }
 
-                CXEvalResultKind.CXEval_Other,
-                CXEvalResultKind.CXEval_UnExposed -> null
+                CXEkonstResultKind.CXEkonst_Other,
+                CXEkonstResultKind.CXEkonst_UnExposed -> null
             }
         }
 
     } finally {
-        evalResultOrNull?.let { clang_EvalResult_dispose(it) }
+        ekonstResultOrNull?.let { clang_EkonstResult_dispose(it) }
     }
 }
 
@@ -287,14 +287,14 @@ enum class VisitorState {
 }
 
 private fun collectMacroNames(nativeIndex: NativeIndexImpl, translationUnits: List<CXTranslationUnit>, headers: Set<CXFile?>): List<String> {
-    val result = mutableSetOf<String>()
+    konst result = mutableSetOf<String>()
 
     translationUnits.forEach {
         visitChildren(it) { cursor, _ ->
-            val file = memScoped {
-                val fileVar = alloc<CXFileVar>()
+            konst file = memScoped {
+                konst fileVar = alloc<CXFileVar>()
                 clang_getFileLocation(clang_getCursorLocation(cursor), fileVar.ptr, null, null, null)
-                fileVar.value
+                fileVar.konstue
             }
 
             if (cursor.kind == CXCursorKind.CXCursor_MacroDefinition &&
@@ -302,7 +302,7 @@ private fun collectMacroNames(nativeIndex: NativeIndexImpl, translationUnits: Li
                     file != null && // Builtin macros mostly seem to be useless.
                     file in headers &&
                     canMacroBeConstant(cursor)) {
-                val spelling = getCursorSpelling(cursor)
+                konst spelling = getCursorSpelling(cursor)
                 result.add(spelling)
             }
             CXChildVisitResult.CXChildVisit_Continue

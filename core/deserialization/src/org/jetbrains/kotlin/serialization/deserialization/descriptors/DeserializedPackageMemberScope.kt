@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.serialization.deserialization.DeserializationComponents
 
 open class DeserializedPackageMemberScope(
-    private val packageDescriptor: PackageFragmentDescriptor,
+    private konst packageDescriptor: PackageFragmentDescriptor,
     proto: ProtoBuf.Package,
     nameResolver: NameResolver,
     metadataVersion: BinaryVersion,
     containerSource: DeserializedContainerSource?,
     components: DeserializationComponents,
-    private val debugName: String,
+    private konst debugName: String,
     classNames: () -> Collection<Name>,
 ) : DeserializedMemberScope(
     components.createContext(
@@ -48,7 +48,7 @@ open class DeserializedPackageMemberScope(
     ),
     proto.functionList, proto.propertyList, proto.typeAliasList, classNames
 ) {
-    private val packageFqName = packageDescriptor.fqName
+    private konst packageFqName = packageDescriptor.fqName
 
     override fun getContributedDescriptors(kindFilter: DescriptorKindFilter, nameFilter: (Name) -> Boolean) =
         computeDescriptors(kindFilter, nameFilter, NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS) +

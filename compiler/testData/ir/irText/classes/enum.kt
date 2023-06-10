@@ -9,7 +9,7 @@ enum class TestEnum1 {
     TEST1, TEST2
 }
 
-enum class TestEnum2(val x: Int) {
+enum class TestEnum2(konst x: Int) {
     TEST1(1),
     TEST2(2),
     TEST3(3) {}
@@ -25,14 +25,14 @@ enum class TestEnum3 {
     abstract fun foo()
 }
 
-enum class TestEnum4(val x: Int) {
+enum class TestEnum4(konst x: Int) {
     TEST1(1) {
         override fun foo() {
             println(TEST1)
         }
     },
     TEST2(2) {
-        val z: Int
+        konst z: Int
         init {
             z = x
         }
@@ -44,12 +44,12 @@ enum class TestEnum4(val x: Int) {
     abstract fun foo()
 }
 
-enum class TestEnum5(val x: Int = 0) {
+enum class TestEnum5(konst x: Int = 0) {
     TEST1, TEST2(), TEST3(0)
 }
 
 fun f(): Int = 1
 
-enum class TestEnum6(val x: Int, val y: Int) {
+enum class TestEnum6(konst x: Int, konst y: Int) {
     TEST(y = f(), x = f())
 }

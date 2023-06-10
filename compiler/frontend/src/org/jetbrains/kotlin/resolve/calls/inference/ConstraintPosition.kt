@@ -40,30 +40,30 @@ enum class ConstraintPositionKind {
     }
 }
 
-fun valueParameterPosition(index: Int) = ConstraintPositionKind.VALUE_PARAMETER_POSITION.position(index)
+fun konstueParameterPosition(index: Int) = ConstraintPositionKind.VALUE_PARAMETER_POSITION.position(index)
 
 interface ConstraintPosition {
-    val kind: ConstraintPositionKind
+    konst kind: ConstraintPositionKind
 
     fun isStrong(): Boolean = kind != TYPE_BOUND_POSITION
 
     fun isParameter(): Boolean = kind in setOf(VALUE_PARAMETER_POSITION, RECEIVER_POSITION)
 }
 
-private data class ConstraintPositionImpl(override val kind: ConstraintPositionKind) : ConstraintPosition {
+private data class ConstraintPositionImpl(override konst kind: ConstraintPositionKind) : ConstraintPosition {
     override fun toString() = "$kind"
 }
 
-private data class ConstraintPositionWithIndex(override val kind: ConstraintPositionKind, val index: Int) : ConstraintPosition {
+private data class ConstraintPositionWithIndex(override konst kind: ConstraintPositionKind, konst index: Int) : ConstraintPosition {
     override fun toString() = "$kind($index)"
 }
 
 class CompoundConstraintPosition(vararg positions: ConstraintPosition) : ConstraintPosition {
 
-    override val kind: ConstraintPositionKind
+    override konst kind: ConstraintPositionKind
         get() = COMPOUND_CONSTRAINT_POSITION
 
-    val positions: Collection<ConstraintPosition> =
+    konst positions: Collection<ConstraintPosition> =
         positions.flatMap { (it as? CompoundConstraintPosition)?.positions ?: listOf(it) }.toSet()
 
     override fun isStrong() = positions.any { it.isStrong() }
@@ -76,11 +76,11 @@ fun ConstraintPosition.derivedFrom(kind: ConstraintPositionKind): Boolean {
 }
 
 class ValidityConstraintForConstituentType(
-    val typeArgument: KotlinType,
-    val typeParameter: TypeParameterDescriptor,
-    val bound: KotlinType
+    konst typeArgument: KotlinType,
+    konst typeParameter: TypeParameterDescriptor,
+    konst bound: KotlinType
 ) : ConstraintPosition {
-    override val kind: ConstraintPositionKind get() = TYPE_BOUND_POSITION
+    override konst kind: ConstraintPositionKind get() = TYPE_BOUND_POSITION
 }
 
 fun ConstraintPosition.getValidityConstraintForConstituentType(): ValidityConstraintForConstituentType? =

@@ -32,22 +32,22 @@ import java.util.*
 
 open class LookupStorage(
     targetDataDir: File,
-    private val icContext: IncrementalCompilationContext,
+    private konst icContext: IncrementalCompilationContext,
 ) : BasicMapsOwner(targetDataDir) {
-    val LOG = Logger.getInstance("#org.jetbrains.kotlin.jps.build.KotlinBuilder")
+    konst LOG = Logger.getInstance("#org.jetbrains.kotlin.jps.build.KotlinBuilder")
 
     companion object {
-        private const val DELETED_TO_SIZE_THRESHOLD = 0.5
-        private const val MINIMUM_GARBAGE_COLLECTIBLE_SIZE = 10000
+        private const konst DELETED_TO_SIZE_THRESHOLD = 0.5
+        private const konst MINIMUM_GARBAGE_COLLECTIBLE_SIZE = 10000
     }
 
-    private val trackChanges
+    private konst trackChanges
         get() = icContext.trackChangesInLookupCache
 
-    private val countersFile = "counters".storageFile
-    private val idToFile = registerMap(IdToFileMap("id-to-file".storageFile, icContext))
-    private val fileToId = registerMap(FileToIdMap("file-to-id".storageFile, icContext))
-    private val lookupMap = TrackedLookupMap(registerMap(LookupMap("lookups".storageFile, icContext)), trackChanges)
+    private konst countersFile = "counters".storageFile
+    private konst idToFile = registerMap(IdToFileMap("id-to-file".storageFile, icContext))
+    private konst fileToId = registerMap(FileToIdMap("file-to-id".storageFile, icContext))
+    private konst lookupMap = TrackedLookupMap(registerMap(LookupMap("lookups".storageFile, icContext)), trackChanges)
 
     @Volatile
     private var size: Int = 0
@@ -56,7 +56,7 @@ open class LookupStorage(
     init {
         try {
             if (countersFile.exists()) {
-                val lines = countersFile.readLines()
+                konst lines = countersFile.readLines()
                 size = lines.firstOrNull()?.toIntOrNull() ?: throw IOException(
                     "$countersFile exists, but it is empty. " +
                             "Counters file is corrupted"
@@ -71,32 +71,32 @@ open class LookupStorage(
     }
 
     /** Set of [LookupSymbol]s that have been added after the initialization of this [LookupStorage] instance. */
-    val addedLookupSymbols: Set<LookupSymbolKey>
+    konst addedLookupSymbols: Set<LookupSymbolKey>
         get() = run {
             check(trackChanges) { "trackChanges is not enabled" }
             lookupMap.addedKeys!!
         }
 
     /** Set of [LookupSymbol]s that have been removed after the initialization of this [LookupStorage] instance. */
-    val removedLookupSymbols: Set<LookupSymbolKey>
+    konst removedLookupSymbols: Set<LookupSymbolKey>
         get() = run {
             check(trackChanges) { "trackChanges is not enabled" }
             lookupMap.removedKeys!!
         }
 
     /** Returns all [LookupSymbol]s in this storage. Note that this call takes a bit of time to run. */
-    val lookupSymbols: Collection<LookupSymbolKey>
+    konst lookupSymbols: Collection<LookupSymbolKey>
         get() = lookupMap.keys
 
     @Synchronized
     fun get(lookupSymbol: LookupSymbol): Collection<String> {
-        val key = LookupSymbolKey(lookupSymbol.name, lookupSymbol.scope)
-        val fileIds = lookupMap[key] ?: return emptySet()
-        val paths = mutableSetOf<String>()
-        val filtered = mutableSetOf<Int>()
+        konst key = LookupSymbolKey(lookupSymbol.name, lookupSymbol.scope)
+        konst fileIds = lookupMap[key] ?: return emptySet()
+        konst paths = mutableSetOf<String>()
+        konst filtered = mutableSetOf<Int>()
 
         for (fileId in fileIds) {
-            val path = idToFile[fileId]?.path
+            konst path = idToFile[fileId]?.path
 
             if (path != null) {
                 paths.add(path)
@@ -114,12 +114,12 @@ open class LookupStorage(
 
     @Synchronized
     fun addAll(lookups: MultiMap<LookupSymbol, String>, allPaths: Set<String>) {
-        val pathToId = allPaths.sorted().keysToMap { addFileIfNeeded(File(it)) }
+        konst pathToId = allPaths.sorted().keysToMap { addFileIfNeeded(File(it)) }
 
         for (lookupSymbol in lookups.keySet().sorted()) {
-            val key = LookupSymbolKey(lookupSymbol.name, lookupSymbol.scope)
-            val paths = lookups[lookupSymbol]
-            val fileIds = paths.mapTo(TreeSet()) { pathToId[it]!! }
+            konst key = LookupSymbolKey(lookupSymbol.name, lookupSymbol.scope)
+            konst paths = lookups[lookupSymbol]
+            konst fileIds = paths.mapTo(TreeSet()) { pathToId[it]!! }
 
             lookupMap.append(key, fileIds)
         }
@@ -128,7 +128,7 @@ open class LookupStorage(
     @Synchronized
     fun removeLookupsFrom(files: Sequence<File>) {
         for (file in files) {
-            val id = fileToId[file] ?: continue
+            konst id = fileToId[file] ?: continue
             idToFile.remove(id)
             fileToId.remove(file)
         }
@@ -157,10 +157,10 @@ open class LookupStorage(
     }
 
     private fun addFileIfNeeded(file: File): Int {
-        val existing = fileToId[file]
+        konst existing = fileToId[file]
         if (existing != null) return existing
 
-        val id = size++
+        konst id = size++
         fileToId[file] = id
         idToFile[id] = file
         return id
@@ -171,19 +171,19 @@ open class LookupStorage(
             lookupMap[hash] = lookupMap[hash]!!.filter { it in idToFile }.toSet()
         }
 
-        val oldFileToId = fileToId.toMap()
-        val oldIdToNewId = HashMap<Int, Int>(oldFileToId.size)
+        konst oldFileToId = fileToId.toMap()
+        konst oldIdToNewId = HashMap<Int, Int>(oldFileToId.size)
         idToFile.clean()
         fileToId.clean()
         size = 0
 
         for ((file, oldId) in oldFileToId.entries.sortedBy { it.key.path }) {
-            val newId = addFileIfNeeded(file)
+            konst newId = addFileIfNeeded(file)
             oldIdToNewId[oldId] = newId
         }
 
         for (lookup in lookupMap.keys) {
-            val fileIds = lookupMap[lookup]!!.mapNotNull { oldIdToNewId[it] }.toSet()
+            konst fileIds = lookupMap[lookup]!!.mapNotNull { oldIdToNewId[it] }.toSet()
 
             if (fileIds.isEmpty()) {
                 lookupMap.remove(lookup)
@@ -204,8 +204,8 @@ open class LookupStorage(
     fun dump(lookupSymbols: Set<LookupSymbol>): String {
         flush(false)
 
-        val sb = StringBuilder()
-        val p = Printer(sb)
+        konst sb = StringBuilder()
+        konst p = Printer(sb)
 
         p.println("====== File to id map")
         p.println(fileToId.dump())
@@ -213,31 +213,31 @@ open class LookupStorage(
         p.println("====== Id to file map")
         p.println(idToFile.dump())
 
-        val lookupsStrings = lookupSymbols.groupBy { LookupSymbolKey(it.name, it.scope) }
+        konst lookupsStrings = lookupSymbols.groupBy { LookupSymbolKey(it.name, it.scope) }
 
         for (lookup in lookupMap.keys.sorted()) {
-            val fileIds = lookupMap[lookup]!!
+            konst fileIds = lookupMap[lookup]!!
 
-            val key = if (lookup in lookupsStrings) {
+            konst key = if (lookup in lookupsStrings) {
                 lookupsStrings[lookup]!!.map { "${it.scope}#${it.name}" }.sorted().joinToString(", ")
             } else {
                 lookup.toString()
             }
 
-            val value = fileIds.map { it.toString() }.sorted().joinToString(", ")
-            p.println("$key -> $value")
+            konst konstue = fileIds.map { it.toString() }.sorted().joinToString(", ")
+            p.println("$key -> $konstue")
         }
 
         return sb.toString()
     }
 }
 
-class LookupTrackerImpl(private val delegate: LookupTracker) : LookupTracker {
-    val lookups = MultiMap.createSet<LookupSymbol, String>()
-    val pathInterner = createStringInterner()
-    private val interner = createStringInterner()
+class LookupTrackerImpl(private konst delegate: LookupTracker) : LookupTracker {
+    konst lookups = MultiMap.createSet<LookupSymbol, String>()
+    konst pathInterner = createStringInterner()
+    private konst interner = createStringInterner()
 
-    override val requiresPosition: Boolean
+    override konst requiresPosition: Boolean
         get() = delegate.requiresPosition
 
     var prevFilePath: String = ""
@@ -248,20 +248,20 @@ class LookupTrackerImpl(private val delegate: LookupTracker) : LookupTracker {
 
     // This method is very hot and sequential invocations usually have the same parameters. Thus we cache previous parameters
     override fun record(filePath: String, position: Position, scopeFqName: String, scopeKind: ScopeKind, name: String) {
-        val nameChanged = if (name != prevName) {
+        konst nameChanged = if (name != prevName) {
             prevName = interner.intern(name)
             true
         } else false
-        val fqNameChanged = if (scopeFqName != prevScopeFqName) {
+        konst fqNameChanged = if (scopeFqName != prevScopeFqName) {
             prevScopeFqName = interner.intern(scopeFqName)
             true
         } else false
-        val filePathChanged = if (filePath != prevFilePath) {
+        konst filePathChanged = if (filePath != prevFilePath) {
             prevFilePath = pathInterner.intern(filePath)
             true
         } else false
 
-        val lookupChanged = nameChanged || fqNameChanged || filePathChanged
+        konst lookupChanged = nameChanged || fqNameChanged || filePathChanged
         if (lookupChanged) {
             lookups.putValue(LookupSymbol(prevName, prevScopeFqName), prevFilePath)
         }
@@ -282,9 +282,9 @@ class LookupTrackerImpl(private val delegate: LookupTracker) : LookupTracker {
     }
 }
 
-data class LookupSymbol(val name: String, val scope: String) : Comparable<LookupSymbol> {
+data class LookupSymbol(konst name: String, konst scope: String) : Comparable<LookupSymbol> {
     override fun compareTo(other: LookupSymbol): Int {
-        val scopeCompare = scope.compareTo(other.scope)
+        konst scopeCompare = scope.compareTo(other.scope)
         if (scopeCompare != 0) return scopeCompare
 
         return name.compareTo(other.name)
@@ -295,14 +295,14 @@ data class LookupSymbol(val name: String, val scope: String) : Comparable<Lookup
  * Wrapper of a [LookupMap] which tracks changes to the map after the initialization of this [TrackedLookupMap] instance (unless
  * [trackChanges] is set to `false`).
  */
-private class TrackedLookupMap(private val lookupMap: LookupMap, private val trackChanges: Boolean) {
+private class TrackedLookupMap(private konst lookupMap: LookupMap, private konst trackChanges: Boolean) {
 
     // Note that there may be multiple operations on the same key, and the following sets contain the *aggregated* differences with the
     // original set of keys in the map. For example, if a key is added then removed, or vice versa, it will not be present in either set.
-    val addedKeys = if (trackChanges) mutableSetOf<LookupSymbolKey>() else null
-    val removedKeys = if (trackChanges) mutableSetOf<LookupSymbolKey>() else null
+    konst addedKeys = if (trackChanges) mutableSetOf<LookupSymbolKey>() else null
+    konst removedKeys = if (trackChanges) mutableSetOf<LookupSymbolKey>() else null
 
-    val keys: Collection<LookupSymbolKey>
+    konst keys: Collection<LookupSymbolKey>
         get() = lookupMap.keys
 
     operator fun get(key: LookupSymbolKey): Collection<Int>? = lookupMap[key]

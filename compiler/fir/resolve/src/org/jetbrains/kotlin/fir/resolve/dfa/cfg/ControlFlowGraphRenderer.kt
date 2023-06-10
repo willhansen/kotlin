@@ -18,17 +18,17 @@ import java.util.*
 
 class FirControlFlowGraphRenderVisitor(
     builder: StringBuilder,
-    private val renderLevels: Boolean = false
+    private konst renderLevels: Boolean = false
 ) : FirVisitorVoid() {
     companion object {
-        private const val EDGE = " -> "
-        private const val RED = "red"
-        private const val BLUE = "blue"
+        private const konst EDGE = " -> "
+        private const konst RED = "red"
+        private const konst BLUE = "blue"
 
-        private val DIGIT_REGEX = """\d""".toRegex()
+        private konst DIGIT_REGEX = """\d""".toRegex()
     }
 
-    private val printer = Printer(builder)
+    private konst printer = Printer(builder)
 
     private var nodeCounter = 0
     private var clusterCounter = 0
@@ -58,8 +58,8 @@ class FirControlFlowGraphRenderVisitor(
                 enterCluster(color)
                 color = BLUE
             }
-            val attributes = mutableListOf<String>()
-            val label = buildString {
+            konst attributes = mutableListOf<String>()
+            konst label = buildString {
                 append(node.render().replace("\"", ""))
                 if (renderLevels) {
                     append(" [${node.level}]")
@@ -83,7 +83,7 @@ class FirControlFlowGraphRenderVisitor(
         }
     }
 
-    private val Edge.style: String?
+    private konst Edge.style: String?
         get() = listOfNotNull(
             when {
                 !kind.usedInDfa && !kind.usedInDeadDfa -> "color=green"
@@ -101,14 +101,14 @@ class FirControlFlowGraphRenderVisitor(
     private fun Printer.renderEdges(nodes: Map<CFGNode<*>, Int>) {
         for ((node, index) in nodes) {
             for ((style, group) in node.followingNodes.groupBy { node.edgeTo(it).style }.entries.sortedBy { it.key }) {
-                val mappedGroup = group.map { nodes.getValue(it) }.sorted()
+                konst mappedGroup = group.map { nodes.getValue(it) }.sorted()
                 print(index, EDGE, mappedGroup.joinToString(prefix = "{", postfix = "}", separator = " "))
                 style?.let { printWithNoIndent(" $it") }
                 printlnWithNoIndent(";")
             }
 
             if (node is CFGNodeWithSubgraphs<*>) {
-                val subNodes = node.subGraphs.mapNotNull { nodes[it.enterNode] }.sorted()
+                konst subNodes = node.subGraphs.mapNotNull { nodes[it.enterNode] }.sorted()
                 if (subNodes.isNotEmpty()) {
                     print(index, EDGE, subNodes.joinToString(prefix = "{", postfix = "}", separator = " "))
                     printlnWithNoIndent(" [style=dashed];")
@@ -122,12 +122,12 @@ class FirControlFlowGraphRenderVisitor(
     }
 
     override fun visitControlFlowGraphReference(controlFlowGraphReference: FirControlFlowGraphReference) {
-        val controlFlowGraph = (controlFlowGraphReference as? FirControlFlowGraphReferenceImpl)?.controlFlowGraph ?: return
+        konst controlFlowGraph = (controlFlowGraphReference as? FirControlFlowGraphReferenceImpl)?.controlFlowGraph ?: return
         if (controlFlowGraph.isSubGraph) return
 
         // TODO: nodes are already in a topological order, but grouping nodes into clusters requires something more.
         //  But what exactly? And is there a way to do `renderNodes` differently so that any topological order is ok?
-        val nodes = DFS.topologicalOrder(listOf(controlFlowGraph.enterNode)) { it.followingNodes }
+        konst nodes = DFS.topologicalOrder(listOf(controlFlowGraph.enterNode)) { it.followingNodes }
             .associateWithTo(linkedMapOf()) { nodeCounter++ }
         printer.renderNodes(nodes)
         printer.renderEdges(nodes)

@@ -13,7 +13,7 @@ fun foo(): Int {
 }
 
 fun box(): String {
-    val test = foo()
+    konst test = foo()
     if (test != 150) return "Failed, test=$test"
 
     return "OK"

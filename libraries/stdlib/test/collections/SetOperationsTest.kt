@@ -38,8 +38,8 @@ class SetOperationsTest {
     }
 
     fun testPlus(doPlus: (Set<String>) -> Set<String>) {
-        val set = setOf("foo", "bar")
-        val set2: Set<String> = doPlus(set)
+        konst set = setOf("foo", "bar")
+        konst set2: Set<String> = doPlus(set)
         assertEquals(setOf("foo", "bar"), set)
         assertEquals(setOf("foo", "bar", "cheese", "wine"), set2)
     }
@@ -52,7 +52,7 @@ class SetOperationsTest {
     @Test fun plusAssign() {
         // lets use a mutable variable
         var set = setOf("a")
-        val setOriginal = set
+        konst setOriginal = set
         set += "foo"
         set += listOf("beer", "a")
         set += arrayOf("cheese", "beer")
@@ -60,7 +60,7 @@ class SetOperationsTest {
         assertEquals(setOf("a", "foo", "beer", "cheese", "bar"), set)
         assertTrue(set !== setOriginal)
 
-        val mset = mutableSetOf("a")
+        konst mset = mutableSetOf("a")
         mset += "foo"
         mset += listOf("beer", "a")
         mset += arrayOf("cheese", "beer")
@@ -69,8 +69,8 @@ class SetOperationsTest {
     }
 
     private fun testMinus(doMinus: (Set<String>) -> Set<String>) {
-        val a = setOf("foo", "bar")
-        val b: Set<String> = doMinus(a)
+        konst a = setOf("foo", "bar")
+        konst b: Set<String> = doMinus(a)
         assertEquals(setOf("foo"), b)
     }
 

@@ -122,9 +122,9 @@ void runKonan_start(bool startThread) {
 }
 
 void putEventSynchronously(void* event) {
-  auto value = reinterpret_cast<uintptr_t>(event);
+  auto konstue = reinterpret_cast<uintptr_t>(event);
 
-  if (write(launcherState->pipeC, &value, sizeof(value)) != sizeof(value)) {
+  if (write(launcherState->pipeC, &konstue, sizeof(konstue)) != sizeof(konstue)) {
     LOGE("Failure writing event: %s\n", strerror(errno));
   }
   int8_t response;

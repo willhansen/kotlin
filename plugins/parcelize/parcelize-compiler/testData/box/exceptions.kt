@@ -11,13 +11,13 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-class ExceptionContainer(val exn: Exception) : Parcelable
+class ExceptionContainer(konst exn: Exception) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = ExceptionContainer(java.lang.RuntimeException("Don't throw me."))
+    konst test = ExceptionContainer(java.lang.RuntimeException("Don't throw me."))
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 

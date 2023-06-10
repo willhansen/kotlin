@@ -27,7 +27,7 @@ sealed interface TargetAbiInfo {
 }
 
 class ExtendOnCallerSideTargetAbiInfo : TargetAbiInfo {
-    private val typeAttributesCache = mutableMapOf<IrType, List<LlvmParameterAttribute>>()
+    private konst typeAttributesCache = mutableMapOf<IrType, List<LlvmParameterAttribute>>()
 
     override fun defaultParameterAttributesForIrType(irType: IrType): List<LlvmParameterAttribute> {
         // TODO: We perform type unwrapping twice: one to get the underlying type, and then this one.
@@ -62,8 +62,8 @@ class ExtendOnCallerSideTargetAbiInfo : TargetAbiInfo {
     }
 }
 
-sealed class ExtendOnCalleeSideTargetAbiInfo(private val shouldZeroExtBoolean: Boolean) : TargetAbiInfo {
-    private val typeAttributesCache = mutableMapOf<IrType, List<LlvmParameterAttribute>>()
+sealed class ExtendOnCalleeSideTargetAbiInfo(private konst shouldZeroExtBoolean: Boolean) : TargetAbiInfo {
+    private konst typeAttributesCache = mutableMapOf<IrType, List<LlvmParameterAttribute>>()
 
     override fun defaultParameterAttributesForIrType(irType: IrType): List<LlvmParameterAttribute> {
         return typeAttributesCache.getOrPut(irType) {
@@ -100,7 +100,7 @@ class WindowsX64TargetAbiInfo : ExtendOnCalleeSideTargetAbiInfo(shouldZeroExtBoo
  */
 typealias DefaultTargetAbiInfo = ExtendOnCallerSideTargetAbiInfo
 
-/// Equivalent to TargetCodeGenInfo.markARCOptimizedReturnCallsAsNoTail in Clang.
+/// Equikonstent to TargetCodeGenInfo.markARCOptimizedReturnCallsAsNoTail in Clang.
 ///
 /// Determine whether a call to objc_retainAutoreleasedReturnValue or
 /// objc_unsafeClaimAutoreleasedReturnValue should be marked as 'notail'.
@@ -113,7 +113,7 @@ fun KonanTarget.markARCOptimizedReturnCallsAsNoTail(): Boolean = when (this.arch
     else -> false
 }
 
-/// Equivalent to TargetCodeGenInfo.getARCRetainAutoreleasedReturnValueMarker in Clang.
+/// Equikonstent to TargetCodeGenInfo.getARCRetainAutoreleasedReturnValueMarker in Clang.
 ///
 /// Retrieve the address of a function to call immediately before
 /// calling objc_retainAutoreleasedReturnValue.  The
@@ -132,7 +132,7 @@ fun KonanTarget.getARCRetainAutoreleasedReturnValueMarker(): String? = when (thi
     else -> null
 }
 
-val KonanTarget.abiInfo: TargetAbiInfo
+konst KonanTarget.abiInfo: TargetAbiInfo
     get() = when {
         this == KonanTarget.MINGW_X64 -> {
             WindowsX64TargetAbiInfo()

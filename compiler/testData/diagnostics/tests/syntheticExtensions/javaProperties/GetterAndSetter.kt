@@ -8,8 +8,8 @@ fun foo(javaClass: JavaClass) {
 // FILE: JavaClass.java
 public class JavaClass {
     public int getSomething1() { return 1; }
-    public void setSomething1(int value) { }
+    public void setSomething1(int konstue) { }
 
     public int getSomething2() { return 1; }
-    public JavaClass setSomething2(int value) { return this; }
+    public JavaClass setSomething2(int konstue) { return this; }
 }

@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val string: T)
+konstue class S<T: String>(konst string: T)
 
-sealed class Sealed(val x: S<String>)
+sealed class Sealed(konst x: S<String>)
 
 class Test(x: S<String>) : Sealed(x)
 

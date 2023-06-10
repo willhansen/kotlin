@@ -58,15 +58,15 @@ class IdeJvmAndAndroidDependencyResolutionTest {
 
     @Test
     fun `test - MVIKotlin - on jvmAndAndroidMain`() {
-        val project = buildProject { configureAndroidAndMultiplatform(enableDefaultStdlib = false) }
-        val kotlin = project.multiplatformExtension
+        konst project = buildProject { configureAndroidAndMultiplatform(enableDefaultStdlib = false) }
+        konst kotlin = project.multiplatformExtension
         kotlin.sourceSets.getByName("commonMain").dependencies {
             implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val jvmAndAndroidDependencies = listOf(
+        konst jvmAndAndroidDependencies = listOf(
             binaryCoordinates("com.arkivanov.mvikotlin:mvikotlin-jvm:3.0.2"),
             binaryCoordinates("com.arkivanov.essenty:lifecycle-jvm:0.4.2"),
             binaryCoordinates("com.arkivanov.essenty:instance-keeper-jvm:0.4.2"),
@@ -85,13 +85,13 @@ class IdeJvmAndAndroidDependencyResolutionTest {
 
     @Test
     fun `test - project to project dependency`() {
-        val root = buildProject { setMultiplatformAndroidSourceSetLayoutVersion(2) }
-        val producer = buildProject({ withParent(root).withName("producer") }) { configureAndroidAndMultiplatform() }
-        val consumer = buildProject({ withParent(root).withName("consumer") }) { configureAndroidAndMultiplatform() }
+        konst root = buildProject { setMultiplatformAndroidSourceSetLayoutVersion(2) }
+        konst producer = buildProject({ withParent(root).withName("producer") }) { configureAndroidAndMultiplatform() }
+        konst consumer = buildProject({ withParent(root).withName("consumer") }) { configureAndroidAndMultiplatform() }
 
-        root.evaluate()
-        producer.evaluate()
-        consumer.evaluate()
+        root.ekonstuate()
+        producer.ekonstuate()
+        consumer.ekonstuate()
 
         consumer.multiplatformExtension.sourceSets.getByName("commonMain").dependencies {
             implementation(project(":producer"))
@@ -114,9 +114,9 @@ class IdeJvmAndAndroidDependencyResolutionTest {
 
     @Test
     fun `test - KT-59020 - transitive project dependency to self`() {
-        val root = buildProject { setMultiplatformAndroidSourceSetLayoutVersion(2) }
-        val a = buildProject({ withParent(root).withName("a") }) { configureAndroidAndMultiplatform() }
-        val b = buildProject({ withParent(root).withName("b") }) { configureAndroidAndMultiplatform() }
+        konst root = buildProject { setMultiplatformAndroidSourceSetLayoutVersion(2) }
+        konst a = buildProject({ withParent(root).withName("a") }) { configureAndroidAndMultiplatform() }
+        konst b = buildProject({ withParent(root).withName("b") }) { configureAndroidAndMultiplatform() }
 
         b.multiplatformExtension.commonMain.dependencies {
             api(project(":a"))
@@ -126,9 +126,9 @@ class IdeJvmAndAndroidDependencyResolutionTest {
             api(project(":b"))
         }
 
-        root.evaluate()
-        a.evaluate()
-        b.evaluate()
+        root.ekonstuate()
+        a.ekonstuate()
+        b.ekonstuate()
 
         a.kotlinIdeMultiplatformImport.resolveDependencies("jvmAndAndroidTest").assertMatches(
             friendSourceDependency(":a/commonMain"),
@@ -141,11 +141,11 @@ class IdeJvmAndAndroidDependencyResolutionTest {
 
     @Test
     fun `test - default stdlib with no other dependencies`() {
-        val project = buildProject { configureAndroidAndMultiplatform(enableDefaultStdlib = true) }
-        project.evaluate()
+        konst project = buildProject { configureAndroidAndMultiplatform(enableDefaultStdlib = true) }
+        project.ekonstuate()
 
-        val stdlibVersion = project.getKotlinPluginVersion()
-        val stdlibDependencies = listOf(
+        konst stdlibVersion = project.getKotlinPluginVersion()
+        konst stdlibDependencies = listOf(
             binaryCoordinates("org.jetbrains.kotlin:kotlin-stdlib:${stdlibVersion}"),
             binaryCoordinates("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${stdlibVersion}"),
             binaryCoordinates("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${stdlibVersion}"),
@@ -160,16 +160,16 @@ class IdeJvmAndAndroidDependencyResolutionTest {
 
     @Test
     fun `test - MVIKotlin - binary dependencies - with stdlib enabled by default`() {
-        val project = buildProject { configureAndroidAndMultiplatform(enableDefaultStdlib = true) }
-        val kotlin = project.multiplatformExtension
+        konst project = buildProject { configureAndroidAndMultiplatform(enableDefaultStdlib = true) }
+        konst kotlin = project.multiplatformExtension
         kotlin.sourceSets.getByName("commonMain").dependencies {
             implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val kgpVersion = project.getKotlinPluginVersion()
-        val jvmAndAndroidDependencies = listOf(
+        konst kgpVersion = project.getKotlinPluginVersion()
+        konst jvmAndAndroidDependencies = listOf(
             binaryCoordinates("com.arkivanov.mvikotlin:mvikotlin-jvm:3.0.2"),
             binaryCoordinates("com.arkivanov.essenty:lifecycle-jvm:0.4.2"),
             binaryCoordinates("com.arkivanov.essenty:instance-keeper-jvm:0.4.2"),

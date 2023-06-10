@@ -16,7 +16,7 @@ fun t1(b: Boolean) {
 }
 
 fun t2(b: Boolean) {
-    val i = 3
+    konst i = 3
     if (b) {
         return;
     }

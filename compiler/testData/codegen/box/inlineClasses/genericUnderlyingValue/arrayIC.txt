@@ -8,7 +8,7 @@ public final class ArrayICKt {
 @kotlin.Metadata
 public final class ICIStr {
     // source: 'arrayIC.kt'
-    private final @org.jetbrains.annotations.NotNull field value: java.lang.String
+    private final @org.jetbrains.annotations.NotNull field konstue: java.lang.String
     private synthetic method <init>(p0: java.lang.String): void
     public synthetic final static method box-impl(p0: java.lang.String): ICIStr
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.NotNull p0: java.lang.String): java.lang.String
@@ -27,7 +27,7 @@ public final class ICIStr {
 @kotlin.Metadata
 public final class ICIStrArray {
     // source: 'arrayIC.kt'
-    private final @org.jetbrains.annotations.NotNull field value: ICStr[]
+    private final @org.jetbrains.annotations.NotNull field konstue: ICStr[]
     private synthetic method <init>(p0: ICStr[]): void
     public synthetic final static method box-impl(p0: ICStr[]): ICIStrArray
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.NotNull p0: ICStr[]): ICStr[]
@@ -46,7 +46,7 @@ public final class ICIStrArray {
 @kotlin.Metadata
 public final class ICStr {
     // source: 'arrayIC.kt'
-    private final @org.jetbrains.annotations.NotNull field value: java.lang.String
+    private final @org.jetbrains.annotations.NotNull field konstue: java.lang.String
     private synthetic method <init>(p0: java.lang.String): void
     public synthetic final static method box-impl(p0: java.lang.String): ICStr
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.NotNull p0: java.lang.String): java.lang.String

@@ -2,7 +2,7 @@
 package foo
 
 fun box(): String {
-    val c: Int = 3
+    konst c: Int = 3
     if (c.toDouble() != 3.0) {
         return "fail1"
     }
@@ -18,7 +18,7 @@ fun box(): String {
     if (c.toShort() != 3.toShort()) {
         return "fail5"
     }
-    val c2: Int = -5
+    konst c2: Int = -5
     if (c2.toShort() != (-5).toShort()) {
         return "fail6"
     }

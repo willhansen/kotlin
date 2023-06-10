@@ -102,7 +102,7 @@ public class MappingClassesForWhenByEnumCodegen {
     ) {
         Type enumType = state.getTypeMapper().mapClass(mapping.getEnumClassDescriptor());
 
-        v.invokestatic(enumType.getInternalName(), "values", Type.getMethodDescriptor(Type.getType("[" + enumType.getDescriptor())), false);
+        v.invokestatic(enumType.getInternalName(), "konstues", Type.getMethodDescriptor(Type.getType("[" + enumType.getDescriptor())), false);
         v.arraylength();
 
         v.newarray(Type.INT_TYPE);

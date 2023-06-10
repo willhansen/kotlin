@@ -5,5 +5,5 @@ class A {
     class B
 }
 
-val x1 = A.B()
+konst x1 = A.B()
 

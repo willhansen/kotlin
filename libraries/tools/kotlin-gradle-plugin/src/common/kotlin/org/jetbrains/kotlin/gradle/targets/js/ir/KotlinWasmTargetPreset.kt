@@ -12,22 +12,22 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinCompilationFactory
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinOnlyTargetPreset
-import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEvaluated
+import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEkonstuated
 
 class KotlinWasmTargetPreset(
     project: Project,
 ) : KotlinOnlyTargetPreset<KotlinJsIrTarget, KotlinJsIrCompilation>(project) {
-    override val platformType: KotlinPlatformType = KotlinPlatformType.wasm
+    override konst platformType: KotlinPlatformType = KotlinPlatformType.wasm
 
     override fun instantiateTarget(name: String): KotlinJsIrTarget {
         if (!PropertiesProvider(project).wasmStabilityNoWarn) {
             project.logger.warn("New 'wasm' target is Work-in-Progress and is subject to change without notice.")
         }
 
-        val irTarget = project.objects.newInstance(KotlinJsIrTarget::class.java, project, KotlinPlatformType.wasm, false)
+        konst irTarget = project.objects.newInstance(KotlinJsIrTarget::class.java, project, KotlinPlatformType.wasm, false)
         irTarget.isMpp = true
 
-        project.runProjectConfigurationHealthCheckWhenEvaluated {
+        project.runProjectConfigurationHealthCheckWhenEkonstuated {
             if (!irTarget.isBrowserConfigured && !irTarget.isNodejsConfigured && !irTarget.isD8Configured) {
                 project.logger.warn(
                     """
@@ -59,6 +59,6 @@ class KotlinWasmTargetPreset(
         KotlinJsIrCompilationFactory(forTarget)
 
     companion object {
-        private const val WASM_PRESET_NAME = "wasm"
+        private const konst WASM_PRESET_NAME = "wasm"
     }
 }

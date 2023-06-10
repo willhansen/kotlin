@@ -78,19 +78,19 @@ internal fun AnnotationDescriptor.properValue(key: String) =
 
 private fun functionImplName(descriptor: DeclarationDescriptor, default: String, shortName: Boolean): String {
     assert(descriptor is FunctionDescriptor)
-    val annotation = descriptor.annotations.findAnnotation(RuntimeNames.cnameAnnotation) ?: return default
-    val key = if (shortName) "shortName" else "externName"
-    val value = annotation.properValue(key)
-    return value.takeIf { value != null && value.isNotEmpty() } ?: default
+    konst annotation = descriptor.annotations.findAnnotation(RuntimeNames.cnameAnnotation) ?: return default
+    konst key = if (shortName) "shortName" else "externName"
+    konst konstue = annotation.properValue(key)
+    return konstue.takeIf { konstue != null && konstue.isNotEmpty() } ?: default
 }
 
-internal data class SignatureElement(val name: String, val type: KotlinType)
+internal data class SignatureElement(konst name: String, konst type: KotlinType)
 
-internal class ExportedElementScope(val kind: ScopeKind, val name: String) {
-    val elements = mutableListOf<ExportedElement>()
-    val scopes = mutableListOf<ExportedElementScope>()
-    private val scopeNames = mutableSetOf<String>()
-    private val scopeNamesMap = mutableMapOf<Pair<DeclarationDescriptor, Boolean>, String>()
+internal class ExportedElementScope(konst kind: ScopeKind, konst name: String) {
+    konst elements = mutableListOf<ExportedElement>()
+    konst scopes = mutableListOf<ExportedElementScope>()
+    private konst scopeNames = mutableSetOf<String>()
+    private konst scopeNamesMap = mutableMapOf<Pair<DeclarationDescriptor, Boolean>, String>()
 
     override fun toString(): String {
         return "$kind: $name ${elements.joinToString(", ")} ${scopes.joinToString("\n")}"
@@ -120,17 +120,17 @@ internal class ExportedElementScope(val kind: ScopeKind, val name: String) {
 }
 
 internal class ExportedElement(
-        val kind: ElementKind,
-        val scope: ExportedElementScope,
-        val declaration: DeclarationDescriptor,
-        val owner: CAdapterGenerator,
-        val typeTranslator: CAdapterTypeTranslator,
+        konst kind: ElementKind,
+        konst scope: ExportedElementScope,
+        konst declaration: DeclarationDescriptor,
+        konst owner: CAdapterGenerator,
+        konst typeTranslator: CAdapterTypeTranslator,
 ) {
     init {
         scope.elements.add(this)
     }
 
-    val name: String
+    konst name: String
         get() = declaration.fqNameSafe.shortName().asString()
 
     lateinit var cname: String
@@ -142,21 +142,21 @@ internal class ExportedElement(
     fun uniqueName(descriptor: DeclarationDescriptor, shortName: Boolean) =
             scope.scopeUniqueName(descriptor, shortName)
 
-    val isFunction = declaration is FunctionDescriptor
-    val isTopLevelFunction: Boolean
+    konst isFunction = declaration is FunctionDescriptor
+    konst isTopLevelFunction: Boolean
         get() {
             if (declaration !is FunctionDescriptor ||
                     !declaration.annotations.hasAnnotation(RuntimeNames.cnameAnnotation))
                 return false
-            val annotation = declaration.annotations.findAnnotation(RuntimeNames.cnameAnnotation)!!
-            val externName = annotation.properValue("externName")
+            konst annotation = declaration.annotations.findAnnotation(RuntimeNames.cnameAnnotation)!!
+            konst externName = annotation.properValue("externName")
             return externName != null && externName.isNotEmpty()
         }
-    val isClass = declaration is ClassDescriptor && declaration.kind != ClassKind.ENUM_ENTRY
-    val isEnumEntry = declaration is ClassDescriptor && declaration.kind == ClassKind.ENUM_ENTRY
-    val isSingletonObject = declaration is ClassDescriptor && DescriptorUtils.isObject(declaration)
+    konst isClass = declaration is ClassDescriptor && declaration.kind != ClassKind.ENUM_ENTRY
+    konst isEnumEntry = declaration is ClassDescriptor && declaration.kind == ClassKind.ENUM_ENTRY
+    konst isSingletonObject = declaration is ClassDescriptor && DescriptorUtils.isObject(declaration)
 
-    val irSymbol = when {
+    konst irSymbol = when {
         isFunction -> owner.symbolTable.referenceFunction(declaration as FunctionDescriptor)
         isClass -> owner.symbolTable.referenceClass(declaration as ClassDescriptor)
         isEnumEntry -> owner.symbolTable.referenceEnumEntry(declaration as ClassDescriptor)
@@ -169,16 +169,16 @@ internal class ExportedElement(
         if (!isFunction) {
             throw Error("only for functions")
         }
-        val descriptor = declaration
-        val original = descriptor.original as FunctionDescriptor
-        val returned = when {
+        konst descriptor = declaration
+        konst original = descriptor.original as FunctionDescriptor
+        konst returned = when {
             original is ConstructorDescriptor ->
                 SignatureElement(uniqueName(original, shortName), original.constructedClass.defaultType)
             else ->
                 SignatureElement(uniqueName(original, shortName), original.returnType!!)
         }
-        val uniqueNames = owner.paramsToUniqueNames(original.explicitParameters)
-        val params = ArrayList(original.explicitParameters
+        konst uniqueNames = owner.paramsToUniqueNames(original.explicitParameters)
+        konst params = ArrayList(original.explicitParameters
                 .filter { it.type.includeToSignature() }
                 .map { SignatureElement(uniqueNames[it]!!, it.type) })
         return listOf(returned) + params
@@ -188,13 +188,13 @@ internal class ExportedElement(
         if (!isFunction) {
             throw Error("only for functions")
         }
-        val descriptor = declaration
-        val original = descriptor.original as FunctionDescriptor
-        val returnedType = when {
+        konst descriptor = declaration
+        konst original = descriptor.original as FunctionDescriptor
+        konst returnedType = when {
             original is ConstructorDescriptor -> typeTranslator.builtIns.unitType
             else -> original.returnType!!
         }
-        val params = ArrayList(original.allParameters
+        konst params = ArrayList(original.allParameters
                 .filter { it.type.includeToSignature() }
                 .map {
                     typeTranslator.translateTypeBridge(it.type)
@@ -207,22 +207,22 @@ internal class ExportedElement(
 
 
     fun makeFunctionPointerString(): String {
-        val signature = makeCFunctionSignature(true)
+        konst signature = makeCFunctionSignature(true)
         return "${typeTranslator.translateType(signature[0])} (*${signature[0].name})(${signature.drop(1).map { "${typeTranslator.translateType(it)} ${it.name}" }.joinToString(", ")});"
     }
 
     fun makeTopLevelFunctionString(): Pair<String, String> {
-        val signature = makeCFunctionSignature(false)
-        val name = signature[0].name
+        konst signature = makeCFunctionSignature(false)
+        konst name = signature[0].name
         return (name to
                 "extern ${typeTranslator.translateType(signature[0])} $name(${signature.drop(1).map { "${typeTranslator.translateType(it)} ${it.name}" }.joinToString(", ")});")
     }
 
     fun makeFunctionDeclaration(): String {
         assert(isFunction)
-        val bridge = makeBridgeSignature()
+        konst bridge = makeBridgeSignature()
 
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
         builder.append("extern \"C\" ${bridge[0]} $cname")
         builder.append("(${bridge.drop(1).joinToString(", ")});\n")
 
@@ -233,9 +233,9 @@ internal class ExportedElement(
 
     fun makeClassDeclaration(): String {
         assert(isClass)
-        val typeGetter = "extern \"C\" ${owner.prefix}_KType* ${cname}_type(void);"
-        val instanceGetter = if (isSingletonObject) {
-            val objectClassC = typeTranslator.translateType((declaration as ClassDescriptor).defaultType)
+        konst typeGetter = "extern \"C\" ${owner.prefix}_KType* ${cname}_type(void);"
+        konst instanceGetter = if (isSingletonObject) {
+            konst objectClassC = typeTranslator.translateType((declaration as ClassDescriptor).defaultType)
             """
             |
             |extern "C" KObjHeader* ${cname}_instance(KObjHeader**);
@@ -253,8 +253,8 @@ internal class ExportedElement(
 
     fun makeEnumEntryDeclaration(): String {
         assert(isEnumEntry)
-        val enumClass = declaration.containingDeclaration as ClassDescriptor
-        val enumClassC = typeTranslator.translateType(enumClass.defaultType)
+        konst enumClass = declaration.containingDeclaration as ClassDescriptor
+        konst enumClassC = typeTranslator.translateType(enumClass.defaultType)
 
         return """
               |extern "C" KObjHeader* $cname(KObjHeader**);
@@ -294,28 +294,28 @@ internal class ExportedElement(
         }
     }
 
-    val cnameImpl: String
+    konst cnameImpl: String
         get() = if (isTopLevelFunction)
-            functionImplName(declaration, "******" /* Default value must never be used. */, false)
+            functionImplName(declaration, "******" /* Default konstue must never be used. */, false)
         else
             "${cname}_impl"
 
     private fun translateBody(cfunction: List<SignatureElement>): String {
-        val visibility = if (isTopLevelFunction) "RUNTIME_USED extern \"C\"" else "static"
-        val builder = StringBuilder()
+        konst visibility = if (isTopLevelFunction) "RUNTIME_USED extern \"C\"" else "static"
+        konst builder = StringBuilder()
         builder.append("$visibility ${typeTranslator.translateType(cfunction[0])} ${cnameImpl}(${cfunction.drop(1).
                 mapIndexed { index, it -> "${typeTranslator.translateType(it)} arg${index}" }.joinToString(", ")}) {\n")
         // TODO: do we really need that in every function?
         builder.append("  Kotlin_initRuntimeIfNeeded();\n")
         builder.append("  ScopedRunnableState stateGuard;\n")
         builder.append("  FrameOverlay* frame = getCurrentFrame();")
-        val args = ArrayList(cfunction.drop(1).mapIndexed { index, pair ->
+        konst args = ArrayList(cfunction.drop(1).mapIndexed { index, pair ->
             translateArgument("arg$index", pair, Direction.C_TO_KOTLIN, builder)
         })
-        val isVoidReturned = typeTranslator.isMappedToVoid(cfunction[0].type)
-        val isConstructor = declaration is ConstructorDescriptor
-        val isObjectReturned = !isConstructor && typeTranslator.isMappedToReference(cfunction[0].type)
-        val isStringReturned = typeTranslator.isMappedToString(cfunction[0].type)
+        konst isVoidReturned = typeTranslator.isMappedToVoid(cfunction[0].type)
+        konst isConstructor = declaration is ConstructorDescriptor
+        konst isObjectReturned = !isConstructor && typeTranslator.isMappedToReference(cfunction[0].type)
+        konst isStringReturned = typeTranslator.isMappedToString(cfunction[0].type)
         builder.append("   try {\n")
         if (isObjectReturned || isStringReturned) {
             builder.append("  KObjHolder result_holder;\n")
@@ -323,7 +323,7 @@ internal class ExportedElement(
         }
         if (isConstructor) {
             builder.append("  KObjHolder result_holder;\n")
-            val clazz = scope.elements[0]
+            konst clazz = scope.elements[0]
             assert(clazz.kind == ElementKind.TYPE)
             builder.append("  KObjHeader* result = AllocInstance((const KTypeInfo*)${clazz.cname}_type(), result_holder.slot());\n")
             args.add(0, "result")
@@ -336,7 +336,7 @@ internal class ExportedElement(
         builder.append(");\n")
 
         if (!isVoidReturned) {
-            val result = translateArgument(
+            konst result = translateArgument(
                     "result", cfunction[0], Direction.KOTLIN_TO_C, builder)
             builder.append("  return $result;\n")
         }
@@ -356,15 +356,15 @@ internal class ExportedElement(
     }
 
     fun addUsedTypes(set: MutableSet<KotlinType>) {
-        val descriptor = declaration
+        konst descriptor = declaration
         when (descriptor) {
             is FunctionDescriptor -> {
-                val original = descriptor.original
+                konst original = descriptor.original
                 original.allParameters.forEach { addUsedType(it.type, set) }
                 original.returnType?.let { addUsedType(it, set) }
             }
             is PropertyAccessorDescriptor -> {
-                val original = descriptor.original
+                konst original = descriptor.original
                 addUsedType(original.correspondingProperty.type, set)
             }
             is ClassDescriptor -> {
@@ -375,7 +375,7 @@ internal class ExportedElement(
 }
 
 private fun getPackagesFqNames(module: ModuleDescriptor): Set<FqName> {
-    val result = mutableSetOf<FqName>()
+    konst result = mutableSetOf<FqName>()
 
     fun getSubPackages(fqName: FqName) {
         result.add(fqName)
@@ -395,21 +395,21 @@ private fun ModuleDescriptor.getPackageFragments(): List<PackageFragmentDescript
  * First phase of C export: walk given declaration descriptors and create [CAdapterExportedElements] from them.
  */
 internal class CAdapterGenerator(
-        private val context: PsiToIrContext,
-        private val configuration: CompilerConfiguration,
-        private val typeTranslator: CAdapterTypeTranslator,
+        private konst context: PsiToIrContext,
+        private konst configuration: CompilerConfiguration,
+        private konst typeTranslator: CAdapterTypeTranslator,
 ) : DeclarationDescriptorVisitor<Boolean, Void?> {
-    private val scopes = mutableListOf<ExportedElementScope>()
-    internal val prefix = typeTranslator.prefix
-    private val paramNamesRecorded = mutableMapOf<String, Int>()
+    private konst scopes = mutableListOf<ExportedElementScope>()
+    internal konst prefix = typeTranslator.prefix
+    private konst paramNamesRecorded = mutableMapOf<String, Int>()
 
-    internal val symbolTable get() = context.symbolTable!!
+    internal konst symbolTable get() = context.symbolTable!!
 
     internal fun paramsToUniqueNames(params: List<ParameterDescriptor>): Map<ParameterDescriptor, String> {
         paramNamesRecorded.clear()
         return params.associate {
-            val name = translateName(it.name)
-            val count = paramNamesRecorded.getOrPut(name) { 0 }
+            konst name = translateName(it.name)
+            konst count = paramNamesRecorded.getOrPut(name) { 0 }
             paramNamesRecorded[name] = count + 1
             if (count == 0) {
                 it to name
@@ -444,10 +444,10 @@ internal class CAdapterGenerator(
     override fun visitClassDescriptor(descriptor: ClassDescriptor, ignored: Void?): Boolean {
         if (!isExportedClass(descriptor)) return true
         // TODO: fix me!
-        val shortName = descriptor.fqNameSafe.shortName()
+        konst shortName = descriptor.fqNameSafe.shortName()
         if (shortName.isSpecial || shortName.asString().contains("<anonymous>"))
             return true
-        val classScope = ExportedElementScope(ScopeKind.CLASS, shortName.asString())
+        konst classScope = ExportedElementScope(ScopeKind.CLASS, shortName.asString())
         scopes.last().scopes += classScope
         scopes.push(classScope)
         // Add type getter.
@@ -481,14 +481,14 @@ internal class CAdapterGenerator(
 
     override fun visitPackageViewDescriptor(descriptor: PackageViewDescriptor, ignored: Void?): Boolean {
         if (descriptor.module !in moduleDescriptors) return true
-        val fragments = descriptor.module.getPackage(FqName.ROOT).fragments.filter {
+        konst fragments = descriptor.module.getPackage(FqName.ROOT).fragments.filter {
             it.module in moduleDescriptors }
         visitChildren(fragments)
 
         // K2 does not serialize empty package fragments, thus breaking the scope chain.
         // The following traverse definitely reaches every subpackage fragment.
         scopes.push(getPackageScope(FqName.ROOT))
-        val subfragments = descriptor.module.getSubPackagesOf(FqName.ROOT) { true }
+        konst subfragments = descriptor.module.getSubPackagesOf(FqName.ROOT) { true }
                 .flatMap {
                     descriptor.module.getPackage(it).fragments.filter {
                         it.module in moduleDescriptors
@@ -512,9 +512,9 @@ internal class CAdapterGenerator(
 
     override fun visitTypeParameterDescriptor(descriptor: TypeParameterDescriptor, ignored: Void?) = true
 
-    private val seenPackageFragments = mutableSetOf<PackageFragmentDescriptor>()
+    private konst seenPackageFragments = mutableSetOf<PackageFragmentDescriptor>()
     private var currentPackageFragments: List<PackageFragmentDescriptor> = emptyList()
-    private val packageScopes = mutableMapOf<FqName, ExportedElementScope>()
+    private konst packageScopes = mutableMapOf<FqName, ExportedElementScope>()
 
     override fun visitModuleDeclaration(descriptor: ModuleDescriptor, ignored: Void?): Boolean {
         TODO("Shall not be called directly")
@@ -523,8 +523,8 @@ internal class CAdapterGenerator(
     override fun visitTypeAliasDescriptor(descriptor: TypeAliasDescriptor, ignored: Void?) = true
 
     override fun visitPackageFragmentDescriptor(descriptor: PackageFragmentDescriptor, ignored: Void?): Boolean {
-        val fqName = descriptor.fqName
-        val packageScope = getPackageScope(fqName)
+        konst fqName = descriptor.fqName
+        konst packageScope = getPackageScope(fqName)
         scopes.push(packageScope)
         if (!seenPackageFragments.contains(descriptor))
             visitChildren(DescriptorUtils.getAllDescriptors(descriptor.getMemberScope()))
@@ -540,14 +540,14 @@ internal class CAdapterGenerator(
     }
 
     private fun getPackageScope(fqName: FqName) = packageScopes.getOrPut(fqName) {
-        val name = if (fqName.isRoot) "root" else translateName(fqName.shortName())
-        val scope = ExportedElementScope(ScopeKind.PACKAGE, name)
+        konst name = if (fqName.isRoot) "root" else translateName(fqName.shortName())
+        konst scope = ExportedElementScope(ScopeKind.PACKAGE, name)
         scopes.last().scopes += scope
         scope
     }
 
 
-    private val moduleDescriptors = mutableSetOf<ModuleDescriptor>()
+    private konst moduleDescriptors = mutableSetOf<ModuleDescriptor>()
 
     fun buildExports(moduleDescriptor: ModuleDescriptor): CAdapterExportedElements {
         scopes.push(ExportedElementScope(ScopeKind.TOP, "kotlin"))
@@ -563,13 +563,13 @@ internal class CAdapterGenerator(
         return CAdapterExportedElements(typeTranslator, scopes)
     }
 
-    private val simpleNameMapping = mapOf(
+    private konst simpleNameMapping = mapOf(
             "<this>" to "thiz",
             "<set-?>" to "set"
     )
 
     private fun translateName(name: Name): String {
-        val nameString = name.asString()
+        konst nameString = name.asString()
         return when {
             simpleNameMapping.contains(nameString) -> simpleNameMapping[nameString]!!
             cKeywords.contains(nameString) -> "${nameString}_"

@@ -39,10 +39,10 @@ class RedundantGotoMethodTransformer : MethodTransformer() {
      *      ...
      */
     override fun transform(internalClassName: String, methodNode: MethodNode) {
-        val insns = methodNode.instructions.toArray().apply { reverse() }
-        val insnsToRemove = arrayListOf<AbstractInsnNode>()
-        val currentLabels = hashSetOf<LabelNode>()
-        val labelsToReplace = hashMapOf<LabelNode, JumpInsnNode>()
+        konst insns = methodNode.instructions.toArray().apply { reverse() }
+        konst insnsToRemove = arrayListOf<AbstractInsnNode>()
+        konst currentLabels = hashSetOf<LabelNode>()
+        konst labelsToReplace = hashMapOf<LabelNode, JumpInsnNode>()
         var pendingGoto: JumpInsnNode? = null
 
         for (insn in insns) {
@@ -85,7 +85,7 @@ class RedundantGotoMethodTransformer : MethodTransformer() {
         jumpInsn: JumpInsnNode,
         labelsToReplace: Map<LabelNode, JumpInsnNode>
     ) {
-        val lastJumpInsn = getLastTargetJumpInsn(jumpInsn, labelsToReplace, mutableListOf())
+        konst lastJumpInsn = getLastTargetJumpInsn(jumpInsn, labelsToReplace, mutableListOf())
         if (lastJumpInsn != null && lastJumpInsn != jumpInsn) {
             // Do not remove the old label because it can be used to define a local variable range.
             jumpInsn.label = lastJumpInsn.label

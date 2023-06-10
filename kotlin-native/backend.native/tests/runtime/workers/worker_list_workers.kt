@@ -5,13 +5,13 @@ package runtime.workers.worker_list_workers
 import kotlin.native.concurrent.*
 import kotlin.test.*
 
-const val WORKER_COUNT = 10
+const konst WORKER_COUNT = 10
 
 @Test
 fun getAllWorkers() {
-    val workers = Array(WORKER_COUNT) { Worker.start() }
+    konst workers = Array(WORKER_COUNT) { Worker.start() }
 
-    val expectedWorkers = listOf(Worker.current) + workers
+    konst expectedWorkers = listOf(Worker.current) + workers
 
     assertEquals(expectedWorkers.toSet(), Worker.activeWorkers.toSet())
 
@@ -22,9 +22,9 @@ fun getAllWorkers() {
 
 @Test
 fun getActiveWorkers() {
-    val workers = Array(WORKER_COUNT) { Worker.start() }
+    konst workers = Array(WORKER_COUNT) { Worker.start() }
 
-    val expectedWorkers = mutableListOf(Worker.current)
+    konst expectedWorkers = mutableListOf(Worker.current)
     (0 until WORKER_COUNT step 2).forEach { i ->
         workers[i].requestTermination().result
         expectedWorkers.add(workers[i + 1])

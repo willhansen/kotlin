@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.gradle.plugin.mpp.pm20
 
 internal class GradleKpmFragmentGranularMetadataResolverFactory {
-    private val resolvers = mutableMapOf<GradleKpmFragment, GradleKpmFragmentGranularMetadataResolver>()
+    private konst resolvers = mutableMapOf<GradleKpmFragment, GradleKpmFragmentGranularMetadataResolver>()
 
     fun getOrCreate(fragment: GradleKpmFragment): GradleKpmFragmentGranularMetadataResolver = resolvers.getOrPut(fragment) {
         GradleKpmFragmentGranularMetadataResolver(fragment, lazy {

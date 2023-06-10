@@ -1,8 +1,8 @@
 // FIR_IDENTICAL
 // FILE: KotlinFile.kt
 fun foo(javaInterface: JavaInterface) {
-    val value = javaInterface.compute { "" }
-    value<!UNSAFE_CALL!>.<!>length
+    konst konstue = javaInterface.compute { "" }
+    konstue<!UNSAFE_CALL!>.<!>length
 }
 
 // FILE: JavaInterface.java

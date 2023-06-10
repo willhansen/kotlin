@@ -1,9 +1,9 @@
 // !LANGUAGE: +InlineClasses
 
-inline class InlinePrimitive(val x: Int)
-inline class InlineReference(val y: String)
-inline class InlineNullablePrimitive(val x: Int?)
-inline class InlineNullableReference(val y: String?)
+inline class InlinePrimitive(konst x: Int)
+inline class InlineReference(konst y: String)
+inline class InlineNullablePrimitive(konst x: Int?)
+inline class InlineNullableReference(konst y: String?)
 
 object Test {
     fun withPrimitiveAsNullable(a: InlinePrimitive?) {}

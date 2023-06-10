@@ -3,10 +3,10 @@
 
 class Param
 class O {
-    val o = "O"
+    konst o = "O"
 }
 class K {
-    val k = "K"
+    konst k = "K"
 }
 
 context(O)

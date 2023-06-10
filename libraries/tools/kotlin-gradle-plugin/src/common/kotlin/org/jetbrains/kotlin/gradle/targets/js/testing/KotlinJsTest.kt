@@ -36,21 +36,21 @@ constructor(
 ) : KotlinTest(),
     RequiresNpmDependencies {
     @Transient
-    private val nodeJs = project.rootProject.kotlinNodeJsExtension
+    private konst nodeJs = project.rootProject.kotlinNodeJsExtension
 
-    private val nodeExecutable by project.provider { nodeJs.requireConfigured().nodeExecutable }
+    private konst nodeExecutable by project.provider { nodeJs.requireConfigured().nodeExecutable }
 
-    private val npmProjectDir by project.provider { compilation.npmProject.dir }
+    private konst npmProjectDir by project.provider { compilation.npmProject.dir }
 
     @Input
     var environment = mutableMapOf<String, String>()
 
     @get:Internal
     var testFramework: KotlinJsTestFramework? = null
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
             onTestFrameworkCallbacks.all { callback ->
-                callback.execute(value)
+                callback.execute(konstue)
             }
         }
 
@@ -62,13 +62,13 @@ constructor(
     }
 
     @Suppress("unused")
-    val testFrameworkSettings: String
+    konst testFrameworkSettings: String
         @Input get() = testFramework!!.settingsState
 
     @PathSensitive(PathSensitivity.ABSOLUTE)
     @InputFile
     @NormalizeLineEndings
-    val inputFileProperty: RegularFileProperty = project.newFileProperty()
+    konst inputFileProperty: RegularFileProperty = project.newFileProperty()
 
     @Input
     var debug: Boolean = false
@@ -78,7 +78,7 @@ constructor(
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:InputFiles
-    val runtimeClasspath: FileCollection by lazy {
+    konst runtimeClasspath: FileCollection by lazy {
         compilation.runtimeDependencyFiles
     }
 
@@ -87,24 +87,24 @@ constructor(
     @get:InputFiles
     @get:NormalizeLineEndings
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
-    internal val compilationOutputs: FileCollection by lazy {
+    internal konst compilationOutputs: FileCollection by lazy {
         compilation.output.allOutputs
     }
 
     @Suppress("unused")
     @get:Input
-    val compilationId: String by lazy {
+    konst compilationId: String by lazy {
         compilation.let {
-            val target = it.target
+            konst target = it.target
             target.project.path + "@" + target.name + ":" + it.compilationPurpose
         }
     }
 
     @Input
-    val nodeJsArgs: MutableList<String> =
+    konst nodeJsArgs: MutableList<String> =
         mutableListOf()
 
-    override val requiredNpmDependencies: Set<RequiredKotlinJsDependency>
+    override konst requiredNpmDependencies: Set<RequiredKotlinJsDependency>
         @Internal get() = testFramework!!.requiredNpmDependencies
 
     @Deprecated("Use useMocha instead", ReplaceWith("useMocha()"))
@@ -140,8 +140,8 @@ constructor(
         }
     }
 
-    fun environment(key: String, value: String) {
-        this.environment[key] = value
+    fun environment(key: String, konstue: String) {
+        this.environment[key] = konstue
     }
 
     private inline fun <T : KotlinJsTestFramework> use(runner: T, body: T.() -> Unit): T {
@@ -149,19 +149,19 @@ constructor(
             "testFramework already configured for task ${this.path}"
         }
 
-        val testFramework = runner.also(body)
+        konst testFramework = runner.also(body)
         this.testFramework = testFramework
 
         return testFramework
     }
 
     override fun createTestExecutionSpec(): TCServiceMessagesTestExecutionSpec {
-        val forkOptions = DefaultProcessForkOptions(fileResolver)
+        konst forkOptions = DefaultProcessForkOptions(fileResolver)
         forkOptions.workingDir = npmProjectDir
         forkOptions.executable = nodeExecutable
 
-        environment.forEach { (key, value) ->
-            forkOptions.environment(key, value)
+        environment.forEach { (key, konstue) ->
+            forkOptions.environment(key, konstue)
         }
 
         return testFramework!!.createTestExecutionSpec(

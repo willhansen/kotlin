@@ -1,18 +1,18 @@
 // FIR_IDENTICAL
 // WITH_STDLIB
 
-class C(x: Int, val y: Int, var z: Int = 1) {
+class C(x: Int, konst y: Int, var z: Int = 1) {
     constructor() : this(0, 0, 0) {}
 
-    val property: Int = 0
+    konst property: Int = 0
 
-    val propertyWithGet: Int
+    konst propertyWithGet: Int
         get() = 42
 
     var propertyWithGetAndSet: Int
         get() = z
-        set(value) {
-            z = value
+        set(konstue) {
+            z = konstue
         }
 
     fun function() {

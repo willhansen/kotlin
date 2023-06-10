@@ -17,25 +17,25 @@ import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-class ES6ConstructorCallLowering(val context: JsIrBackendContext) : BodyLoweringPass {
+class ES6ConstructorCallLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
     private var IrConstructor.constructorFactory by context.mapping.secondaryConstructorToFactory
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         if (!context.es6mode) return
 
-        val containerFunction = container as? IrFunction
+        konst containerFunction = container as? IrFunction
 
         irBody.transformChildrenVoid(object : IrElementTransformerVoidWithContext() {
             override fun visitConstructorCall(expression: IrConstructorCall): IrExpression {
-                val currentConstructor = expression.symbol.owner
-                val irClass = currentConstructor.parentAsClass
-                val currentFunction = currentFunction?.irElement as? IrFunction ?: containerFunction
+                konst currentConstructor = expression.symbol.owner
+                konst irClass = currentConstructor.parentAsClass
+                konst currentFunction = currentFunction?.irElement as? IrFunction ?: containerFunction
 
                 if (irClass.symbol == context.irBuiltIns.anyClass || currentConstructor.hasStrictSignature(context)) {
                     return super.visitConstructorCall(expression)
                 }
 
-                val factoryFunction = currentConstructor.constructorFactory ?: error("Replacement for the constructor is not found")
+                konst factoryFunction = currentConstructor.constructorFactory ?: error("Replacement for the constructor is not found")
 
                 if (expression.isInitCall) {
                     assert(factoryFunction.isInitFunction) { "Expect to have init function replacement" }
@@ -44,10 +44,10 @@ class ES6ConstructorCallLowering(val context: JsIrBackendContext) : BodyLowering
                     }
                 }
 
-                val isDelegatingCall =
+                konst isDelegatingCall =
                     expression.isSyntheticDelegatingReplacement && currentFunction != null && currentFunction.parentAsClass != irClass
 
-                val factoryFunctionCall = JsIrBuilder.buildCall(
+                konst factoryFunctionCall = JsIrBuilder.buildCall(
                     factoryFunction.symbol,
                     superQualifierSymbol = irClass.symbol.takeIf { isDelegatingCall },
                     origin = if (isDelegatingCall) ES6_DELEGATING_CONSTRUCTOR_REPLACEMENT else JsStatementOrigins.SYNTHESIZED_STATEMENT
@@ -56,7 +56,7 @@ class ES6ConstructorCallLowering(val context: JsIrBackendContext) : BodyLowering
 
                     if (expression.isSyntheticDelegatingReplacement) {
                         currentFunction?.boxParameter?.let {
-                            putValueArgument(valueArgumentsCount - 1, JsIrBuilder.buildGetValue(it.symbol))
+                            putValueArgument(konstueArgumentsCount - 1, JsIrBuilder.buildGetValue(it.symbol))
                         }
                         if (superQualifierSymbol == null) {
                             dispatchReceiver = JsIrBuilder.buildGetValue(factoryFunction.dispatchReceiverParameter!!.symbol)

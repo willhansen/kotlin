@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 import kotlin.reflect.KClass
 
-annotation class A(val klass: KClass<*>)
+annotation class A(konst klass: KClass<*>)
 
 class C
 

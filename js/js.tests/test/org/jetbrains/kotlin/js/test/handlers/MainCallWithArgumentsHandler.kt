@@ -14,12 +14,12 @@ class MainCallWithArgumentsHandler(testServices: TestServices) : AbstractJsArtif
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (someAssertionWasFailed) return
 
-        val testFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val expectedFile = testFile.parentFile.resolve(testFile.nameWithoutExtension + ".out")
+        konst testFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst expectedFile = testFile.parentFile.resolve(testFile.nameWithoutExtension + ".out")
         if (!expectedFile.exists()) {
             throw IllegalArgumentException("File ${expectedFile.absolutePath} with expected result doesn't exists")
         }
-        val allJsFiles = getOnlyJsFilesForRunner(testServices, modulesToArtifact)
+        konst allJsFiles = getOnlyJsFilesForRunner(testServices, modulesToArtifact)
 
         getTestChecker(testServices).checkStdout(allJsFiles, expectedFile.readText())
     }

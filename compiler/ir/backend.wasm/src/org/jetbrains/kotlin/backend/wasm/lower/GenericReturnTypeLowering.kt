@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * This lowering adds implicit casts in places where erased generic function return type
  * differs from expected type on the call site.
  */
-class GenericReturnTypeLowering(val context: WasmBackendContext) : FileLoweringPass {
+class GenericReturnTypeLowering(konst context: WasmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(object : IrElementTransformerVoidWithContext() {
             override fun visitCall(expression: IrCall): IrExpression =
@@ -40,7 +40,7 @@ class GenericReturnTypeLowering(val context: WasmBackendContext) : FileLoweringP
     }
 
     private fun IrType.eraseUpperBoundType(): IrType {
-        val type = erasedUpperBound?.defaultType ?: return context.irBuiltIns.anyNType
+        konst type = erasedUpperBound?.defaultType ?: return context.irBuiltIns.anyNType
         return if (this.isNullable())
             type.makeNullable()
         else
@@ -48,20 +48,20 @@ class GenericReturnTypeLowering(val context: WasmBackendContext) : FileLoweringP
     }
 
     private fun transformGenericCall(call: IrCall, scopeOwnerSymbol: IrSymbol): IrExpression {
-        val function: IrSimpleFunction =
+        konst function: IrSimpleFunction =
             call.symbol.owner as? IrSimpleFunction ?: return call
 
-        val erasedReturnType: IrType =
+        konst erasedReturnType: IrType =
             function.realOverrideTarget.returnType.eraseUpperBoundType()
 
-        val callType = call.type
+        konst callType = call.type
 
         if (erasedReturnType != call.type) {
             if (callType.isNothing()) return call
             if (erasedReturnType.isSubtypeOf(callType, context.typeSystem)) return call
 
             // Erase type parameter from call return type
-            val newCall = irCall(
+            konst newCall = irCall(
                 call,
                 function.symbol,
                 newReturnType = erasedReturnType,

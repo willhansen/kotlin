@@ -19,11 +19,11 @@ interface D3 : F2 {
 class D4 : D3
 
 fun box(): String {
-    val x = D4()
+    konst x = D4()
     x.foo()
-    val d3: D3 = x
-    val f2: F2 = x
-    val d1: D1 = x
+    konst d3: D3 = x
+    konst f2: F2 = x
+    konst d1: D1 = x
     d3.foo()
     f2.foo()
     d1.foo()

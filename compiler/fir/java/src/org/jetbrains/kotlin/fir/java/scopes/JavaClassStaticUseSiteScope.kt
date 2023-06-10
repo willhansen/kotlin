@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 
 class JavaClassStaticUseSiteScope internal constructor(
     session: FirSession,
-    private val declaredMemberScope: FirContainingNamesAwareScope,
-    private val superClassScope: FirContainingNamesAwareScope,
-    private val superTypesScopes: List<FirContainingNamesAwareScope>,
+    private konst declaredMemberScope: FirContainingNamesAwareScope,
+    private konst superClassScope: FirContainingNamesAwareScope,
+    private konst superTypesScopes: List<FirContainingNamesAwareScope>,
     javaTypeParameterStack: JavaTypeParameterStack,
 ) : FirContainingNamesAwareScope() {
-    private val functions = hashMapOf<Name, Collection<FirNamedFunctionSymbol>>()
-    private val properties = hashMapOf<Name, Collection<FirVariableSymbol<*>>>()
-    private val overrideChecker = JavaOverrideChecker(session, javaTypeParameterStack, baseScopes = null, considerReturnTypeKinds = false)
+    private konst functions = hashMapOf<Name, Collection<FirNamedFunctionSymbol>>()
+    private konst properties = hashMapOf<Name, Collection<FirVariableSymbol<*>>>()
+    private konst overrideChecker = JavaOverrideChecker(session, javaTypeParameterStack, baseScopes = null, considerReturnTypeKinds = false)
 
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
         functions.getOrPut(name) {
@@ -32,12 +32,12 @@ class JavaClassStaticUseSiteScope internal constructor(
     }
 
     private fun computeFunctions(name: Name): MutableList<FirNamedFunctionSymbol> {
-        val superClassSymbols = mutableListOf<FirNamedFunctionSymbol>()
+        konst superClassSymbols = mutableListOf<FirNamedFunctionSymbol>()
         superClassScope.processFunctionsByName(name) {
             superClassSymbols.addIfNotNull(it as? FirNamedFunctionSymbol)
         }
 
-        val result = mutableListOf<FirNamedFunctionSymbol>()
+        konst result = mutableListOf<FirNamedFunctionSymbol>()
 
         declaredMemberScope.processFunctionsByName(name) l@{ functionSymbol ->
             if (!functionSymbol.isStatic) return@l
@@ -61,7 +61,7 @@ class JavaClassStaticUseSiteScope internal constructor(
     }
 
     private fun computeProperties(name: Name): MutableList<FirVariableSymbol<*>> {
-        val result: MutableList<FirVariableSymbol<*>> = mutableListOf()
+        konst result: MutableList<FirVariableSymbol<*>> = mutableListOf()
         declaredMemberScope.processPropertiesByName(name) l@{ propertySymbol ->
             if (!propertySymbol.isStatic) return@l
             result.add(propertySymbol)
@@ -101,6 +101,6 @@ class JavaClassStaticUseSiteScope internal constructor(
         return declaredMemberScope.mayContainName(name) || superTypesScopes.any { it.mayContainName(name) }
     }
 
-    override val scopeOwnerLookupNames: List<String>
+    override konst scopeOwnerLookupNames: List<String>
         get() = declaredMemberScope.scopeOwnerLookupNames
 }

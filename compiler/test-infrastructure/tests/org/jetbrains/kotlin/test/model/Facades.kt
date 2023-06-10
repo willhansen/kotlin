@@ -10,26 +10,26 @@ import org.jetbrains.kotlin.test.services.ServiceRegistrationData
 import org.jetbrains.kotlin.test.services.TestServices
 
 interface ServicesAndDirectivesContainer {
-    val additionalServices: List<ServiceRegistrationData>
+    konst additionalServices: List<ServiceRegistrationData>
         get() = emptyList()
 
-    val directiveContainers: List<DirectivesContainer>
+    konst directiveContainers: List<DirectivesContainer>
         get() = emptyList()
 }
 
 abstract class AbstractTestFacade<I : ResultingArtifact<I>, O : ResultingArtifact<O>> : ServicesAndDirectivesContainer {
-    abstract val inputKind: TestArtifactKind<I>
-    abstract val outputKind: TestArtifactKind<O>
+    abstract konst inputKind: TestArtifactKind<I>
+    abstract konst outputKind: TestArtifactKind<O>
 
     abstract fun transform(module: TestModule, inputArtifact: I): O?
     abstract fun shouldRunAnalysis(module: TestModule): Boolean
 }
 
 abstract class FrontendFacade<R : ResultingArtifact.FrontendOutput<R>>(
-    val testServices: TestServices,
-    final override val outputKind: FrontendKind<R>
+    konst testServices: TestServices,
+    final override konst outputKind: FrontendKind<R>
 ) : AbstractTestFacade<ResultingArtifact.Source, R>() {
-    final override val inputKind: TestArtifactKind<ResultingArtifact.Source>
+    final override konst inputKind: TestArtifactKind<ResultingArtifact.Source>
         get() = SourcesKind
 
     override fun shouldRunAnalysis(module: TestModule): Boolean {
@@ -45,9 +45,9 @@ abstract class FrontendFacade<R : ResultingArtifact.FrontendOutput<R>>(
 }
 
 abstract class Frontend2BackendConverter<R : ResultingArtifact.FrontendOutput<R>, I : ResultingArtifact.BackendInput<I>>(
-    val testServices: TestServices,
-    final override val inputKind: FrontendKind<R>,
-    final override val outputKind: BackendKind<I>
+    konst testServices: TestServices,
+    final override konst inputKind: FrontendKind<R>,
+    final override konst outputKind: BackendKind<I>
 ) : AbstractTestFacade<R, I>() {
     override fun shouldRunAnalysis(module: TestModule): Boolean {
         return module.backendKind == outputKind
@@ -55,9 +55,9 @@ abstract class Frontend2BackendConverter<R : ResultingArtifact.FrontendOutput<R>
 }
 
 abstract class BackendFacade<I : ResultingArtifact.BackendInput<I>, A : ResultingArtifact.Binary<A>>(
-    val testServices: TestServices,
-    final override val inputKind: BackendKind<I>,
-    final override val outputKind: BinaryKind<A>
+    konst testServices: TestServices,
+    final override konst inputKind: BackendKind<I>,
+    final override konst outputKind: BinaryKind<A>
 ) : AbstractTestFacade<I, A>() {
     override fun shouldRunAnalysis(module: TestModule): Boolean {
         return module.backendKind == inputKind && module.binaryKind == outputKind

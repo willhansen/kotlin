@@ -15,10 +15,10 @@ import org.jetbrains.kotlin.ir.util.isSetter
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 
 class Fir2IrConversionScope {
-    private val parentStack = mutableListOf<IrDeclarationParent>()
+    private konst parentStack = mutableListOf<IrDeclarationParent>()
 
-    private val containingFirClassStack = mutableListOf<FirClass>()
-    private val currentlyGeneratedDelegatedConstructors = mutableMapOf<IrClass, IrConstructor>()
+    private konst containingFirClassStack = mutableListOf<FirClass>()
+    private konst currentlyGeneratedDelegatedConstructors = mutableMapOf<IrClass, IrConstructor>()
 
     fun <T : IrDeclarationParent?> withParent(parent: T, f: T.() -> Unit): T {
         if (parent == null) return parent
@@ -30,7 +30,7 @@ class Fir2IrConversionScope {
 
     fun <T> forDelegatingConstructorCall(constructor: IrConstructor, irClass: IrClass, f: () -> T): T {
         currentlyGeneratedDelegatedConstructors[irClass] = constructor
-        val result = f()
+        konst result = f()
         currentlyGeneratedDelegatedConstructors.remove(irClass)
         return result
     }
@@ -65,7 +65,7 @@ class Fir2IrConversionScope {
 
     fun containerFirClass(): FirClass? = containingFirClassStack.lastOrNull()
 
-    private val functionStack = mutableListOf<IrFunction>()
+    private konst functionStack = mutableListOf<IrFunction>()
 
     fun <T : IrFunction> withFunction(function: T, f: T.() -> Unit): T {
         functionStack += function
@@ -74,7 +74,7 @@ class Fir2IrConversionScope {
         return function
     }
 
-    private val propertyStack = mutableListOf<Pair<IrProperty, FirProperty?>>()
+    private konst propertyStack = mutableListOf<Pair<IrProperty, FirProperty?>>()
 
     fun withProperty(property: IrProperty, firProperty: FirProperty? = null, f: IrProperty.() -> Unit): IrProperty {
         propertyStack += (property to firProperty)
@@ -83,7 +83,7 @@ class Fir2IrConversionScope {
         return property
     }
 
-    private val classStack = mutableListOf<IrClass>()
+    private konst classStack = mutableListOf<IrClass>()
 
     fun withClass(klass: IrClass, f: IrClass.() -> Unit): IrClass {
         classStack += klass
@@ -92,25 +92,25 @@ class Fir2IrConversionScope {
         return klass
     }
 
-    private val whenSubjectVariableStack = mutableListOf<IrVariable>()
-    private val safeCallSubjectVariableStack = mutableListOf<IrVariable>()
+    private konst whenSubjectVariableStack = mutableListOf<IrVariable>()
+    private konst safeCallSubjectVariableStack = mutableListOf<IrVariable>()
 
     fun <T> withWhenSubject(subject: IrVariable?, f: () -> T): T {
         if (subject != null) whenSubjectVariableStack += subject
-        val result = f()
+        konst result = f()
         if (subject != null) whenSubjectVariableStack.removeAt(whenSubjectVariableStack.size - 1)
         return result
     }
 
     fun <T> withSafeCallSubject(subject: IrVariable?, f: () -> T): T {
         if (subject != null) safeCallSubjectVariableStack += subject
-        val result = f()
+        konst result = f()
         if (subject != null) safeCallSubjectVariableStack.removeAt(safeCallSubjectVariableStack.size - 1)
         return result
     }
 
     fun returnTarget(expression: FirReturnExpression, declarationStorage: Fir2IrDeclarationStorage): IrFunction {
-        val irTarget = when (val firTarget = expression.target.labeledElement) {
+        konst irTarget = when (konst firTarget = expression.target.labeledElement) {
             is FirConstructor -> declarationStorage.getCachedIrConstructor(firTarget)
             is FirPropertyAccessor -> {
                 var answer: IrFunction? = null

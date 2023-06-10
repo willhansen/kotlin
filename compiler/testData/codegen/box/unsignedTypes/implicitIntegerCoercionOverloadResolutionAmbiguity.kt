@@ -40,7 +40,7 @@ class FooMyUInt {
 
 fun box(): String {
     FooInt(19)  // overload match
-    // `FooInt(19u)` is invalid in K1/N and K2/N
+    // `FooInt(19u)` is inkonstid in K1/N and K2/N
     FooInt("19")  // overload match
 
     FooUInt(42)  // coercion

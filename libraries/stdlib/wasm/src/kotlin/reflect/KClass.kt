@@ -18,18 +18,18 @@ public actual interface KClass<T : Any> : KClassifier {
      * The simple name of the class as it was declared in the source code,
      * or `null` if the class has no name (if, for example, it is a class of an anonymous object).
      */
-    public actual val simpleName: String?
+    public actual konst simpleName: String?
 
     /**
      * The fully qualified dot-separated name of the class,
      * or `null` if the class is local or a class of an anonymous object.
      */
-    public actual val qualifiedName: String?
+    public actual konst qualifiedName: String?
 
     /**
-     * Returns `true` if [value] is an instance of this class on a given platform.
+     * Returns `true` if [konstue] is an instance of this class on a given platform.
      */
     @SinceKotlin("1.1")
-    public actual fun isInstance(value: Any?): Boolean
+    public actual fun isInstance(konstue: Any?): Boolean
 
 }

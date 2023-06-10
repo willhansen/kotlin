@@ -20,12 +20,12 @@ typealias ScoreChange = Pair<MeanVariance, MeanVariance>
 
 class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResult>>,
                                previousBenchmarks: Map<String, List<BenchmarkResult>>? = null,
-                               val meaningfulChangesValue: Double = 0.5) {
+                               konst meaningfulChangesValue: Double = 0.5) {
     // Report created by joining comparing reports.
-    val mergedReport: Map<String, SummaryBenchmark>
+    konst mergedReport: Map<String, SummaryBenchmark>
 
     // Lists of benchmarks in different status.
-    private val benchmarksWithChangedStatus = mutableListOf<FieldChange<BenchmarkResult.Status>>()
+    private konst benchmarksWithChangedStatus = mutableListOf<FieldChange<BenchmarkResult.Status>>()
 
     // Maps with changes of performance.
     var regressions = mapOf<String, ScoreChange>()
@@ -33,30 +33,30 @@ class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResu
     var improvements = mapOf<String, ScoreChange>()
         private set
 
-    // Summary value of report - geometric mean.
-    val geoMeanBenchmark: SummaryBenchmark
+    // Summary konstue of report - geometric mean.
+    konst geoMeanBenchmark: SummaryBenchmark
     var geoMeanScoreChange: ScoreChange? = null
         private set
 
-    val maximumRegression: Double
+    konst maximumRegression: Double
         get() = getMaximumChange(regressions)
 
-    val maximumImprovement: Double
+    konst maximumImprovement: Double
         get() = getMaximumChange(improvements)
 
-    val regressionsGeometricMean: Double
+    konst regressionsGeometricMean: Double
         get() = getGeometricMeanOfChanges(regressions)
 
-    val improvementsGeometricMean: Double
+    konst improvementsGeometricMean: Double
         get() = getGeometricMeanOfChanges(improvements)
 
-    val benchmarksNumber: Int
+    konst benchmarksNumber: Int
         get() = mergedReport.keys.size
 
     init {
-        // Count avarage values for each benchmark.
-        val currentBenchmarksTable = collectMeanResults(currentBenchmarks)
-        val previousBenchmarksTable = previousBenchmarks?.let {
+        // Count avarage konstues for each benchmark.
+        konst currentBenchmarksTable = collectMeanResults(currentBenchmarks)
+        konst previousBenchmarksTable = previousBenchmarks?.let {
             collectMeanResults(previousBenchmarks)
         }
         mergedReport = createMergedReport(currentBenchmarksTable, previousBenchmarksTable)
@@ -70,11 +70,11 @@ class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResu
 
     private fun getMaximumChange(bucket: Map<String, ScoreChange>): Double =
             // Maps of regressions and improvements are sorted.
-            if (bucket.isEmpty()) 0.0 else bucket.values.map { it.first.mean }.first()
+            if (bucket.isEmpty()) 0.0 else bucket.konstues.map { it.first.mean }.first()
 
     // Analyze and collect changes in performance between same becnhmarks.
     private fun analyzePerformanceChanges() {
-        val performanceChanges = mergedReport.asSequence().map { (name, element) ->
+        konst performanceChanges = mergedReport.asSequence().map { (name, element) ->
             getBenchmarkPerfomanceChange(name, element)
         }.filterNotNull().groupBy {
             if (it.second.first.mean > 0) "regressions" else "improvements"
@@ -89,7 +89,7 @@ class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResu
                 ?.toMap() ?: mapOf<String, ScoreChange>()
 
         // Calculate change for geometric mean.
-        val (current, previous) = geoMeanBenchmark
+        konst (current, previous) = geoMeanBenchmark
         geoMeanScoreChange = current?.let {
             previous?.let {
                 Pair(current.calcPercentageDiff(previous), current.calcRatio(previous))
@@ -100,7 +100,7 @@ class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResu
     private fun getGeometricMeanOfChanges(bucket: Map<String, ScoreChange>): Double {
         if (bucket.isEmpty())
             return 0.0
-        var percentsList = bucket.values.map { it.first.mean }
+        var percentsList = bucket.konstues.map { it.first.mean }
         return if (percentsList.first() > 0.0) {
             geometricMean(percentsList, benchmarksNumber)
         } else {
@@ -115,18 +115,18 @@ class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResu
     // Merge current and compare to report.
     private fun createMergedReport(currentBenchmarks: BenchmarksTable, previousBenchmarks: BenchmarksTable?):
             Map<String, SummaryBenchmark> {
-        val mergedTable = mutableMapOf<String, SummaryBenchmark>()
+        konst mergedTable = mutableMapOf<String, SummaryBenchmark>()
         mergedTable.apply {
             currentBenchmarks.forEach { (name, current) ->
                 // Check existance of benchmark in previous results.
                 if (previousBenchmarks == null || name !in previousBenchmarks) {
                     getOrPut(name) { SummaryBenchmark(current, null) }
                 } else {
-                    val previousBenchmark = previousBenchmarks.getValue(name)
+                    konst previousBenchmark = previousBenchmarks.getValue(name)
                     getOrPut(name) { SummaryBenchmark(current, previousBenchmarks[name]) }
                     // Explore change of status.
                     if (previousBenchmark.status != current.status) {
-                        val statusChange = FieldChange("$name", previousBenchmark.status, current.status)
+                        konst statusChange = FieldChange("$name", previousBenchmark.status, current.status)
                         benchmarksWithChangedStatus.add(statusChange)
                     }
                 }
@@ -135,8 +135,8 @@ class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResu
 
         // Add removed benchmarks to merged report.
         mergedTable.apply {
-            previousBenchmarks?.filter { (key, _) -> key !in currentBenchmarks }?.forEach { (key, value) ->
-                getOrPut(key) { SummaryBenchmark(null, value) }
+            previousBenchmarks?.filter { (key, _) -> key !in currentBenchmarks }?.forEach { (key, konstue) ->
+                getOrPut(key) { SummaryBenchmark(null, konstue) }
             }
         }
 
@@ -147,18 +147,18 @@ class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResu
     private fun calculateGeoMeanBenchmark(currentBenchmarks: BenchmarksTable, previousBenchmarks: BenchmarksTable?):
             SummaryBenchmark {
         // Calculate geometric mean.
-        val currentGeoMean = createGeoMeanBenchmark(currentBenchmarks)
-        val previousGeoMean = previousBenchmarks?.let { createGeoMeanBenchmark(previousBenchmarks) }
+        konst currentGeoMean = createGeoMeanBenchmark(currentBenchmarks)
+        konst previousGeoMean = previousBenchmarks?.let { createGeoMeanBenchmark(previousBenchmarks) }
         return SummaryBenchmark(currentGeoMean, previousGeoMean)
     }
 
     private fun getBenchmarkPerfomanceChange(name: String, benchmark: SummaryBenchmark): Pair<String, ScoreChange>? {
-        val (current, previous) = benchmark
+        konst (current, previous) = benchmark
         current?.let {
             previous?.let {
                 // Calculate metrics for showing difference.
-                val percent = current.calcPercentageDiff(previous)
-                val ratio = current.calcRatio(previous)
+                konst percent = current.calcPercentageDiff(previous)
+                konst ratio = current.calcRatio(previous)
                 if (abs(percent.mean) - percent.variance >= meaningfulChangesValue) {
                     return Pair(name, Pair(percent, ratio))
                 }
@@ -169,70 +169,70 @@ class DetailedBenchmarksReport(currentBenchmarks: Map<String, List<BenchmarkResu
 
     // Create geometric mean.
     private fun createGeoMeanBenchmark(benchTable: BenchmarksTable): MeanVarianceBenchmark {
-        val geoMeanBenchmarkName = "Geometric mean"
-        val geoMean = geometricMean(benchTable.toList().map { (_, value) -> value.score })
-        val varianceGeoMean = geometricMean(benchTable.toList().map { (_, value) -> value.variance })
+        konst geoMeanBenchmarkName = "Geometric mean"
+        konst geoMean = geometricMean(benchTable.toList().map { (_, konstue) -> konstue.score })
+        konst varianceGeoMean = geometricMean(benchTable.toList().map { (_, konstue) -> konstue.variance })
         return MeanVarianceBenchmark(geoMeanBenchmarkName, geoMean, varianceGeoMean)
     }
 }
 
 // Summary report with comparasion of separate benchmarks results.
-class SummaryBenchmarksReport(val currentReport: BenchmarksReport,
-                              val previousReport: BenchmarksReport? = null,
-                              val meaningfulChangesValue: Double = 0.5,
-                              private val unstableBenchmarks: List<String> = emptyList()) {
+class SummaryBenchmarksReport(konst currentReport: BenchmarksReport,
+                              konst previousReport: BenchmarksReport? = null,
+                              konst meaningfulChangesValue: Double = 0.5,
+                              private konst unstableBenchmarks: List<String> = emptyList()) {
 
-    val detailedMetricReports: Map<BenchmarkResult.Metric, DetailedBenchmarksReport>
+    konst detailedMetricReports: Map<BenchmarkResult.Metric, DetailedBenchmarksReport>
 
-    private val benchmarksDurations: Map<String, Pair<Double?, Double?>>
+    private konst benchmarksDurations: Map<String, Pair<Double?, Double?>>
 
     // Lists of benchmarks in different status.
-    val benchmarksWithChangedStatus
+    konst benchmarksWithChangedStatus
         get() = getReducedResult { report ->
             report.getBenchmarksWithChangedStatus()
         }
 
     // Environment and tools.
-    val environments: Pair<Environment, Environment?>
-    val compilers: Pair<Compiler, Compiler?>
+    konst environments: Pair<Environment, Environment?>
+    konst compilers: Pair<Compiler, Compiler?>
 
     private fun <T> getReducedResult(convertor: (DetailedBenchmarksReport) -> List<T>): List<T> {
-        return detailedMetricReports.values.map {
+        return detailedMetricReports.konstues.map {
             convertor(it)
         }.flatten()
     }
 
     // Countable properties.
-    val failedBenchmarks: List<String>
+    konst failedBenchmarks: List<String>
         get() = getReducedResult { report ->
-            report.mergedReport.filter { it.value.first?.status == BenchmarkResult.Status.FAILED }.map { it.key }
+            report.mergedReport.filter { it.konstue.first?.status == BenchmarkResult.Status.FAILED }.map { it.key }
         }
 
-    val addedBenchmarks: List<String>
+    konst addedBenchmarks: List<String>
         get() = getReducedResult { report ->
-            report.mergedReport.filter { it.value.second == null }.map { it.key }
+            report.mergedReport.filter { it.konstue.second == null }.map { it.key }
         }
 
-    val removedBenchmarks: List<String>
+    konst removedBenchmarks: List<String>
         get() = getReducedResult { report ->
-            report.mergedReport.filter { it.value.first == null }.map { it.key }
+            report.mergedReport.filter { it.konstue.first == null }.map { it.key }
         }
 
-    val currentMeanVarianceBenchmarks: List<MeanVarianceBenchmark>
+    konst currentMeanVarianceBenchmarks: List<MeanVarianceBenchmark>
         get() = getReducedResult { report ->
-            report.mergedReport.filter { it.value.first != null }.map { it.value.first!! }
+            report.mergedReport.filter { it.konstue.first != null }.map { it.konstue.first!! }
         }
 
-    val benchmarksNumber: Int
-        get() = detailedMetricReports.values.fold(0) { acc, it -> acc + it.benchmarksNumber }
+    konst benchmarksNumber: Int
+        get() = detailedMetricReports.konstues.fold(0) { acc, it -> acc + it.benchmarksNumber }
 
-    val currentBenchmarksDuration: Map<String, Double>
-        get() = benchmarksDurations.filter { it.value.first != null }.map { it.key to it.value.first!! }.toMap()
+    konst currentBenchmarksDuration: Map<String, Double>
+        get() = benchmarksDurations.filter { it.konstue.first != null }.map { it.key to it.konstue.first!! }.toMap()
 
-    val envChanges: List<FieldChange<String>>
+    konst envChanges: List<FieldChange<String>>
         get() {
-            val previousEnvironment = environments.second
-            val currentEnvironment = environments.first
+            konst previousEnvironment = environments.second
+            konst currentEnvironment = environments.first
             return previousEnvironment?.let {
                 mutableListOf<FieldChange<String>>().apply {
                     addFieldChange("Machine CPU", previousEnvironment.machine.cpu, currentEnvironment.machine.cpu)
@@ -243,10 +243,10 @@ class SummaryBenchmarksReport(val currentReport: BenchmarksReport,
             } ?: listOf<FieldChange<String>>()
         }
 
-    val kotlinChanges: List<FieldChange<String>>
+    konst kotlinChanges: List<FieldChange<String>>
         get() {
-            val previousCompiler = compilers.second
-            val currentCompiler = compilers.first
+            konst previousCompiler = compilers.second
+            konst currentCompiler = compilers.first
             return previousCompiler?.let {
                 mutableListOf<FieldChange<String>>().apply {
                     addFieldChange("Backend type", previousCompiler.backend.type.type, currentCompiler.backend.type.type)
@@ -259,12 +259,12 @@ class SummaryBenchmarksReport(val currentReport: BenchmarksReport,
         }
 
     init {
-        // Count avarage values for each benchmark.
-        detailedMetricReports = BenchmarkResult.Metric.values().map { metric ->
-            val currentBenchmarks = currentReport.benchmarks.map { (name, benchmarks) ->
+        // Count avarage konstues for each benchmark.
+        detailedMetricReports = BenchmarkResult.Metric.konstues().map { metric ->
+            konst currentBenchmarks = currentReport.benchmarks.map { (name, benchmarks) ->
                 name to benchmarks.filter { it.metric == metric }
             }.filter { it.second.isNotEmpty() }.toMap()
-            val previousBenchmarks = previousReport?.benchmarks?.map { (name, benchmarks) ->
+            konst previousBenchmarks = previousReport?.benchmarks?.map { (name, benchmarks) ->
                 name to benchmarks.filter { it.metric == metric }
             }?.filter { it.second.isNotEmpty() }?.toMap()
             metric to DetailedBenchmarksReport(
@@ -282,11 +282,11 @@ class SummaryBenchmarksReport(val currentReport: BenchmarksReport,
     fun getBenchmarksReport(takeMainReport: Boolean = true) =
             if (takeMainReport)
                 BenchmarksReport(environments.first, getReducedResult { report ->
-                    report.mergedReport.map { (_, value) -> value.first!! }
+                    report.mergedReport.map { (_, konstue) -> konstue.first!! }
                 }, compilers.first)
             else
                 BenchmarksReport(environments.second!!, getReducedResult { report ->
-                    report.mergedReport.map { (_, value) -> value.second!! }
+                    report.mergedReport.map { (_, konstue) -> konstue.second!! }
                 }, compilers.second!!)
 
     fun getUnstableBenchmarksForMetric(metric: BenchmarkResult.Metric) =
@@ -295,8 +295,8 @@ class SummaryBenchmarksReport(val currentReport: BenchmarksReport,
     // Generate map with summary durations of each benchmark.
     private fun calculateBenchmarksDuration(currentReport: BenchmarksReport, previousReport: BenchmarksReport?):
             Map<String, Pair<Double?, Double?>> {
-        val currentDurations = collectBenchmarksDurations(currentReport.benchmarks)
-        val previousDurations = previousReport?.let {
+        konst currentDurations = collectBenchmarksDurations(currentReport.benchmarks)
+        konst previousDurations = previousReport?.let {
             collectBenchmarksDurations(previousReport.benchmarks)
         } ?: mapOf<String, Double>()
         return currentDurations.keys.union(previousDurations.keys)

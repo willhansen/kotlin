@@ -30,17 +30,17 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.parentsWithSelf
 
 object ProtectedConstructorCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.resultingDescriptor as? ConstructorDescriptor ?: return
-        val constructorOwner = descriptor.containingDeclaration.original
-        val scopeOwner = context.scope.ownerDescriptor
+        konst descriptor = resolvedCall.resultingDescriptor as? ConstructorDescriptor ?: return
+        konst constructorOwner = descriptor.containingDeclaration.original
+        konst scopeOwner = context.scope.ownerDescriptor
 
-        val actualConstructor = (descriptor as? TypeAliasConstructorDescriptor)?.underlyingConstructorDescriptor ?: descriptor
+        konst actualConstructor = (descriptor as? TypeAliasConstructorDescriptor)?.underlyingConstructorDescriptor ?: descriptor
 
         if (actualConstructor.visibility.normalize() != DescriptorVisibilities.PROTECTED) return
         // Error already reported
         if (!DescriptorVisibilityUtils.isVisibleWithAnyReceiver(descriptor, scopeOwner, context.languageVersionSettings)) return
 
-        val calleeExpression = resolvedCall.call.calleeExpression
+        konst calleeExpression = resolvedCall.call.calleeExpression
 
         // Permit constructor super-calls
         when (calleeExpression) {

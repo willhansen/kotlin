@@ -3,32 +3,32 @@
 package org.jetbrains.<!ELEMENT(1)!>
 
 open class <!ELEMENT(2)!> {
-    val x1 = false
+    konst x1 = false
 }
 open class <!ELEMENT(3)!><T> {
-    val x1 = true
+    konst x1 = true
 }
 
 typealias A<<!ELEMENT(4)!>> = <!ELEMENT(3)!><<!ELEMENT(4)!>>
 
 class B<<!ELEMENT(5)!>, <!ELEMENT(6)!>> {
-    val x1: <!ELEMENT(5)!> = <!ELEMENT(3)!><<!ELEMENT(6)!>>() as <!ELEMENT(5)!>
-    val x2: A<<!ELEMENT(6)!>> = <!ELEMENT(3)!><<!ELEMENT(5)!>>() as A<<!ELEMENT(6)!>>
-    val x3: <!ELEMENT(6)!> = <!ELEMENT(2)!>() as <!ELEMENT(6)!>
+    konst x1: <!ELEMENT(5)!> = <!ELEMENT(3)!><<!ELEMENT(6)!>>() as <!ELEMENT(5)!>
+    konst x2: A<<!ELEMENT(6)!>> = <!ELEMENT(3)!><<!ELEMENT(5)!>>() as A<<!ELEMENT(6)!>>
+    konst x3: <!ELEMENT(6)!> = <!ELEMENT(2)!>() as <!ELEMENT(6)!>
 }
 
 fun <<!ELEMENT(7)!>: Number> f1(): Boolean {
-    val x1: <!ELEMENT(7)!> = 10 as <!ELEMENT(7)!>
+    konst x1: <!ELEMENT(7)!> = 10 as <!ELEMENT(7)!>
     return false
 }
 
 inline fun <reified <!ELEMENT(8)!>, reified <!ELEMENT(9)!> : Any> <!ELEMENT(8)!>.f2() = true
 
-val <<!ELEMENT(10)!>> <!ELEMENT(10)!>.x1: <!ELEMENT(3)!><Int>
+konst <<!ELEMENT(10)!>> <!ELEMENT(10)!>.x1: <!ELEMENT(3)!><Int>
     get() = <!ELEMENT(3)!><Int>()
 
 fun box(): String? {
-    val b = B<<!ELEMENT(3)!><<!ELEMENT(2)!>>, <!ELEMENT(2)!>>()
+    konst b = B<<!ELEMENT(3)!><<!ELEMENT(2)!>>, <!ELEMENT(2)!>>()
 
     if (!null.x1.x1) return null
     if (!b.x1.x1 || !b.x2.x1 || b.x3.x1) return null

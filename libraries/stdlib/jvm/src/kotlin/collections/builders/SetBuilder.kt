@@ -8,10 +8,10 @@ package kotlin.collections.builders
 import java.io.NotSerializableException
 
 internal class SetBuilder<E> internal constructor(
-    private val backing: MapBuilder<E, *>
+    private konst backing: MapBuilder<E, *>
 ) : MutableSet<E>, AbstractMutableSet<E>(), Serializable {
     private companion object {
-        private val Empty = SetBuilder(MapBuilder.Empty)
+        private konst Empty = SetBuilder(MapBuilder.Empty)
     }
 
     constructor() : this(MapBuilder<E, Nothing>())
@@ -29,7 +29,7 @@ internal class SetBuilder<E> internal constructor(
         else
             throw NotSerializableException("The set cannot be serialized while it is being built.")
 
-    override val size: Int get() = backing.size
+    override konst size: Int get() = backing.size
     override fun isEmpty(): Boolean = backing.isEmpty()
     override fun contains(element: E): Boolean = backing.containsKey(element)
     override fun clear() = backing.clear()

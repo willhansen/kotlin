@@ -82,7 +82,7 @@ interface MetadataExtensions {
     fun createValueParameterExtension(): KmValueParameterExtension?
 
     companion object {
-        val INSTANCES: List<MetadataExtensions> by lazy {
+        konst INSTANCES: List<MetadataExtensions> by lazy {
             ServiceLoader.load(MetadataExtensions::class.java, MetadataExtensions::class.java.classLoader).toList().also {
                 if (it.isEmpty()) error(
                     "No MetadataExtensions instances found in the classpath. Please ensure that the META-INF/services/ " +

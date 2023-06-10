@@ -43,7 +43,7 @@ internal fun doubleCompareTo(a: dynamic, b: dynamic): Int =
             if (a !== 0)
                 0
             else {
-                val ia = 1.asDynamic() / a
+                konst ia = 1.asDynamic() / a
                 if (ia === 1.asDynamic() / b) {
                     0
                 } else if (ia < 0) {

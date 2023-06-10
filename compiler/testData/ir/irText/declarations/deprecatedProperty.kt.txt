@@ -1,5 +1,5 @@
 @Deprecated(message = "")
-val testVal: Int
+konst testVal: Int
   field = 1
   get
 
@@ -10,12 +10,12 @@ var testVar: Int
   set
 
 @Deprecated(message = "")
-val testValWithExplicitDefaultGet: Int
+konst testValWithExplicitDefaultGet: Int
   field = 1
   get
 
 @Deprecated(message = "")
-val testValWithExplicitGet: Int
+konst testValWithExplicitGet: Int
   get(): Int {
     return 1
   }
@@ -52,7 +52,7 @@ lateinit var testLateinitVar: Any
   set
 
 @Deprecated(message = "")
-val Any.testExtVal: Int
+konst Any.testExtVal: Int
   get(): Int {
     return 1
   }

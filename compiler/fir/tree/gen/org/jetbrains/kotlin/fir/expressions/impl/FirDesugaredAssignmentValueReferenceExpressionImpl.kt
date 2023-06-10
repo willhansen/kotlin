@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirDesugaredAssignmentValueReferenceExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val expressionRef: FirExpressionRef<FirExpression>,
+    override konst expressionRef: FirExpressionRef<FirExpression>,
 ) : FirDesugaredAssignmentValueReferenceExpression() {
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
 

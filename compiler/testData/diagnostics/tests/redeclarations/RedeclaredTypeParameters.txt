@@ -1,6 +1,6 @@
 package
 
-public val </*0*/ T, /*1*/ T> T.foo: kotlin.Int
+public konst </*0*/ T, /*1*/ T> T.foo: kotlin.Int
 public fun </*0*/ T, /*1*/ T> Pair(): kotlin.Unit
 
 public final class P</*0*/ T, /*1*/ T> {

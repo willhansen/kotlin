@@ -13,7 +13,7 @@ fun foo() {
         "FINALLY"
     }
 
-    val t = try {
+    konst t = try {
         log += "5"
         mightThrow2()
         log += "6"

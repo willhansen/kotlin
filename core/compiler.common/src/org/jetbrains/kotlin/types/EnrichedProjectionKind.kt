@@ -39,7 +39,7 @@ enum class EnrichedProjectionKind {
 
             // If they are not both invariant, let's make b not invariant for sure
             if (b === Variance.INVARIANT) {
-                val t = a
+                konst t = a
                 a = b
                 b = t
             }

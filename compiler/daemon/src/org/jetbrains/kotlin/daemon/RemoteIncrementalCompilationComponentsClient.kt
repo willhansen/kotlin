@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.load.kotlin.incremental.components.IncrementalCompil
 import org.jetbrains.kotlin.modules.TargetId
 
 class RemoteIncrementalCompilationComponentsClient(
-    @Suppress("DEPRECATION") val facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
-    val profiler: Profiler = DummyProfiler()
+    @Suppress("DEPRECATION") konst facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
+    konst profiler: Profiler = DummyProfiler()
 ) : IncrementalCompilationComponents {
     override fun getIncrementalCache(target: TargetId): IncrementalCache = RemoteIncrementalCacheClient(facade, target, profiler)
 }

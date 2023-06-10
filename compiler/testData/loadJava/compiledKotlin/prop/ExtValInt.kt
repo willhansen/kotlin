@@ -1,4 +1,4 @@
 package test
 
-val Int.itIs: Int
+konst Int.itIs: Int
     get() = this

@@ -14,7 +14,7 @@
 
 // TESTCASE NUMBER: 1
 fun foo1() {
-    val proc = "case 1"
+    konst proc = "case 1"
 }
 
 fun case1() {
@@ -29,14 +29,14 @@ fun case2foo(m: String, bar: () -> Unit) {
 
 class Case2Boo {
     fun buz() {
-        val proc = "case 2"
+        konst proc = "case 2"
     }
 }
 
 
 fun case2() {
-    val boo = Case2Boo()
-    val res = case2foo("s", boo::buz)
+    konst boo = Case2Boo()
+    konst res = case2foo("s", boo::buz)
     res checkType { check<Unit>() }
 }
 
@@ -47,12 +47,12 @@ interface ProcessableCase3<T> {
 
 class Processor : ProcessableCase3<Unit> {
     override fun process() {
-        val proc = "case 3"
+        konst proc = "case 3"
     }
 }
 
 fun case3() {
-    val p1 = Processor().process()
+    konst p1 = Processor().process()
     p1 checkType { check<Unit>() }
 }
 
@@ -62,9 +62,9 @@ interface Processable<T> {
 }
 
 fun case4() {
-    val p2 = object : Processable<Unit> {
+    konst p2 = object : Processable<Unit> {
         override fun process() {
-            val proc = "case 4"
+            konst proc = "case 4"
         }
     }
     p2.process() checkType { check<Unit>() }

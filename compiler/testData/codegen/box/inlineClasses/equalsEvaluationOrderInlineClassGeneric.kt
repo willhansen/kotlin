@@ -4,10 +4,10 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Inner<T: Int>(val x: T)
+konstue class Inner<T: Int>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: Inner<Int>>(val x: T)
+konstue class A<T: Inner<Int>>(konst x: T)
 
 var i = 0
 

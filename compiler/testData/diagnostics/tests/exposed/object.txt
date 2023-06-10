@@ -9,7 +9,7 @@ internal open class Inter {
 
 public object My : Inter {
     private constructor My()
-    public final val x: Inter? = null
+    public final konst x: Inter? = null
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(/*0*/ arg: Inter): Inter
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

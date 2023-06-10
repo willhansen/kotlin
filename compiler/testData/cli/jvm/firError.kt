@@ -1,12 +1,12 @@
-fun println(val x: Int) {}
+fun println(konst x: Int) {}
 
 fun main() {
-    val x: Int
+    konst x: Int
     println(x)
 }
 
 private class Private
 
 class Public : Private() {
-    val x: Private
+    konst x: Private
 }

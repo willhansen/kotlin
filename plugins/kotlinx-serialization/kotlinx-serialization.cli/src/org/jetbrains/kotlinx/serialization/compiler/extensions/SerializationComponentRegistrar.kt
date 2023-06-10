@@ -28,24 +28,24 @@ import org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationConf
 import org.jetbrains.kotlinx.serialization.compiler.fir.FirSerializationExtensionRegistrar
 
 object SerializationConfigurationKeys {
-    val DISABLE_INTRINSIC: CompilerConfigurationKey<Boolean> =
-        CompilerConfigurationKey.create("Disable replacement of serializer<T>() call with direct serializer retrieval.")
+    konst DISABLE_INTRINSIC: CompilerConfigurationKey<Boolean> =
+        CompilerConfigurationKey.create("Disable replacement of serializer<T>() call with direct serializer retriekonst.")
 }
 
 class SerializationPluginOptions : CommandLineProcessor {
     companion object {
-        val DISABLE_INTRINSIC_OPTION = CliOption(
+        konst DISABLE_INTRINSIC_OPTION = CliOption(
             "disableIntrinsic", "true/false",
-            "Disable replacement of serializer<T>() call with direct serializer retrieval. Use if you experience errors during inlining.",
+            "Disable replacement of serializer<T>() call with direct serializer retriekonst. Use if you experience errors during inlining.",
             required = false, allowMultipleOccurrences = false
         )
     }
 
-    override val pluginId = "org.jetbrains.kotlinx.serialization"
-    override val pluginOptions = listOf(DISABLE_INTRINSIC_OPTION)
+    override konst pluginId = "org.jetbrains.kotlinx.serialization"
+    override konst pluginOptions = listOf(DISABLE_INTRINSIC_OPTION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) = when (option) {
-        DISABLE_INTRINSIC_OPTION -> configuration.put(DISABLE_INTRINSIC, value == "true")
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) = when (option) {
+        DISABLE_INTRINSIC_OPTION -> configuration.put(DISABLE_INTRINSIC, konstue == "true")
         else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
     }
 }
@@ -59,7 +59,7 @@ class SerializationComponentRegistrar : CompilerPluginRegistrar() {
     private fun loadDisableIntrinsic(configuration: CompilerConfiguration) =
         if (configuration.get(DISABLE_INTRINSIC) == true) SerializationIntrinsicsState.DISABLED else SerializationIntrinsicsState.NORMAL
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 
     companion object {
@@ -68,7 +68,7 @@ class SerializationComponentRegistrar : CompilerPluginRegistrar() {
             // Since IDE does not perform any serialization of descriptors, metadata written to the 'serializationDescriptorSerializer'
             // is never deleted, effectively causing memory leaks.
             // So we create SerializationDescriptorSerializerPlugin only outside of IDE.
-            val serializationDescriptorSerializer = SerializationDescriptorSerializerPlugin()
+            konst serializationDescriptorSerializer = SerializationDescriptorSerializerPlugin()
             DescriptorSerializerPlugin.registerExtension(serializationDescriptorSerializer)
             registerProtoExtensions()
 

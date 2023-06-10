@@ -30,8 +30,8 @@ internal class KotlinCommonSourceSetProcessor(
             }
         }
 
-        project.whenEvaluated {
-            val subpluginEnvironment: SubpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
+        project.whenEkonstuated {
+            konst subpluginEnvironment: SubpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
             /* Not supported in KPM yet */
             compilationInfo.tcsOrNull?.compilation?.let { compilation ->
                 subpluginEnvironment.addSubpluginOptions(project, compilation)
@@ -40,7 +40,7 @@ internal class KotlinCommonSourceSetProcessor(
     }
 
     override fun doRegisterTask(project: Project, taskName: String): TaskProvider<out KotlinCompileCommon> {
-        val configAction = KotlinCompileCommonConfig(compilationInfo)
+        konst configAction = KotlinCompileCommonConfig(compilationInfo)
         applyStandardTaskConfiguration(configAction)
         return tasksProvider.registerKotlinCommonTask(
             project,

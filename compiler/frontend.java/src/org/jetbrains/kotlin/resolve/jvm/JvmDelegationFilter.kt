@@ -33,7 +33,7 @@ object JvmDelegationFilter : DelegationFilter {
         if (!languageVersionSettings.supportsFeature(LanguageFeature.NoDelegationToJavaDefaultInterfaceMembers)) return true
 
         //We always have only one implementation otherwise it's an error in kotlin and java
-        val realMember = DescriptorUtils.unwrapFakeOverride(interfaceMember)
+        konst realMember = DescriptorUtils.unwrapFakeOverride(interfaceMember)
         return !isJavaDefaultMethod(realMember) &&
                 !realMember.hasJvmDefaultAnnotation() &&
                 !isBuiltInMemberMappedToJavaDefault(realMember)

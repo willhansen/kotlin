@@ -21,7 +21,7 @@ object Z {
   // CHECK:
   //   Mangled name: Z{}aLambda
   //   Public signature: /Z.aLambda|3337321219156655813[0]
-  val aLambda: Function0<Unit>
+  konst aLambda: Function0<Unit>
     // CHECK JVM_IR:
     //   Mangled name: Z#<get-aLambda>(){}kotlin.Function0<kotlin.Unit>
     //   Public signature: /Z.aLambda.<get-aLambda>|9058518221524596568[0]
@@ -33,7 +33,7 @@ object Z {
   // CHECK:
   //   Mangled name: Z{}anObject
   //   Public signature: /Z.anObject|409091113626572731[0]
-  val anObject: Any
+  konst anObject: Any
     // CHECK JVM_IR:
     //   Mangled name: Z#<get-anObject>(){}kotlin.Any
     //   Public signature: /Z.anObject.<get-anObject>|-6807306499596507825[0]

@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ULong(val l: Long)
+konstue class ULong(konst l: Long)
 
 fun nonLocal(): ULong? {
-    val u1 = ULong(1)
+    konst u1 = ULong(1)
 
     run {
         return u1 // box
@@ -18,7 +18,7 @@ fun nonLocal(): ULong? {
 fun foo(): Boolean = true
 
 fun labeled(): ULong? {
-    val u = ULong(2)
+    konst u = ULong(2)
     return run {
         if (foo()) return@run u
         ULong(-1) // box

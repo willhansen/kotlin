@@ -37,55 +37,55 @@ import kotlin.reflect.KCallable
 import kotlin.reflect.jvm.internal.KDeclarationContainerImpl.MemberBelonginess.DECLARED
 
 internal class KPackageImpl(
-    override val jClass: Class<*>,
+    override konst jClass: Class<*>,
 ) : KDeclarationContainerImpl() {
     private inner class Data : KDeclarationContainerImpl.Data() {
-        private val kotlinClass: ReflectKotlinClass? by ReflectProperties.lazySoft {
+        private konst kotlinClass: ReflectKotlinClass? by ReflectProperties.lazySoft {
             ReflectKotlinClass.create(jClass)
         }
 
-        val scope: MemberScope by ReflectProperties.lazySoft {
-            val klass = kotlinClass
+        konst scope: MemberScope by ReflectProperties.lazySoft {
+            konst klass = kotlinClass
 
             if (klass != null)
                 moduleData.packagePartScopeCache.getPackagePartScope(klass)
             else MemberScope.Empty
         }
 
-        val multifileFacade: Class<*>? by lazy(PUBLICATION) {
-            val facadeName = kotlinClass?.classHeader?.multifileClassName
-            // We need to check isNotEmpty because this is the value read from the annotation which cannot be null.
-            // The default value for 'xs' is empty string, as declared in kotlin.Metadata
+        konst multifileFacade: Class<*>? by lazy(PUBLICATION) {
+            konst facadeName = kotlinClass?.classHeader?.multifileClassName
+            // We need to check isNotEmpty because this is the konstue read from the annotation which cannot be null.
+            // The default konstue for 'xs' is empty string, as declared in kotlin.Metadata
             if (facadeName != null && facadeName.isNotEmpty())
                 jClass.classLoader.loadClass(facadeName.replace('/', '.'))
             else null
         }
 
-        val metadata: Triple<JvmNameResolver, ProtoBuf.Package, JvmMetadataVersion>? by lazy(PUBLICATION) {
+        konst metadata: Triple<JvmNameResolver, ProtoBuf.Package, JvmMetadataVersion>? by lazy(PUBLICATION) {
             kotlinClass?.classHeader?.let { header ->
-                val data = header.data
-                val strings = header.strings
+                konst data = header.data
+                konst strings = header.strings
                 if (data != null && strings != null) {
-                    val (nameResolver, proto) = JvmProtoBufUtil.readPackageDataFrom(data, strings)
+                    konst (nameResolver, proto) = JvmProtoBufUtil.readPackageDataFrom(data, strings)
                     Triple(nameResolver, proto, header.metadataVersion)
                 } else null
             }
         }
 
-        val members: Collection<KCallableImpl<*>> by ReflectProperties.lazySoft {
+        konst members: Collection<KCallableImpl<*>> by ReflectProperties.lazySoft {
             getMembers(scope, DECLARED)
         }
     }
 
-    private val data = lazy(PUBLICATION) { Data() }
+    private konst data = lazy(PUBLICATION) { Data() }
 
-    override val methodOwner: Class<*> get() = data.value.multifileFacade ?: jClass
+    override konst methodOwner: Class<*> get() = data.konstue.multifileFacade ?: jClass
 
-    private val scope: MemberScope get() = data.value.scope
+    private konst scope: MemberScope get() = data.konstue.scope
 
-    override val members: Collection<KCallable<*>> get() = data.value.members
+    override konst members: Collection<KCallable<*>> get() = data.konstue.members
 
-    override val constructorDescriptors: Collection<ConstructorDescriptor>
+    override konst constructorDescriptors: Collection<ConstructorDescriptor>
         get() = emptyList()
 
     override fun getProperties(name: Name): Collection<PropertyDescriptor> =
@@ -95,7 +95,7 @@ internal class KPackageImpl(
         scope.getContributedFunctions(name, NoLookupLocation.FROM_REFLECTION)
 
     override fun getLocalProperty(index: Int): PropertyDescriptor? {
-        return data.value.metadata?.let { (nameResolver, packageProto, metadataVersion) ->
+        return data.konstue.metadata?.let { (nameResolver, packageProto, metadataVersion) ->
             packageProto.getExtensionOrNull(JvmProtoBuf.packageLocalVariable, index)?.let { proto ->
                 deserializeToDescriptor(
                     jClass, proto, nameResolver, TypeTable(packageProto.typeTable), metadataVersion,

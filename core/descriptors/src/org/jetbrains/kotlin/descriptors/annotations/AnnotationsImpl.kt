@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.descriptors.annotations
 /**
  * Use [Annotations.create] to create an instance of this class if necessary.
  */
-internal class AnnotationsImpl(private val annotations: List<AnnotationDescriptor>) : Annotations {
+internal class AnnotationsImpl(private konst annotations: List<AnnotationDescriptor>) : Annotations {
     override fun isEmpty(): Boolean = annotations.isEmpty()
 
     override fun iterator(): Iterator<AnnotationDescriptor> = annotations.iterator()

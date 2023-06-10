@@ -5,7 +5,7 @@ class Inv<T : Any?> {
 
   }
 
-  val x: T
+  konst x: T
     field = x
     get
 
@@ -18,7 +18,7 @@ class Test_1<TT : Any?> : JavaClass1<TT> {
 
   }
 
-  val x: TT
+  konst x: TT
     field = x
     get
 

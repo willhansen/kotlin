@@ -75,11 +75,11 @@ fun foo(b: Boolean): String {
 
 
 fun box(): String {
-    val r1 = foo(true)
+    konst r1 = foo(true)
 
     if (r1 != "BBO") return "FAIL1: $r1"
 
-    val r2 = foo(false)
+    konst r2 = foo(false)
     if (r2 != "424271") return "FAIL2: $r2"
 
     return "OK"

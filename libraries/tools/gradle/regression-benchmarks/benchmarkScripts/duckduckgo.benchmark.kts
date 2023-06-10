@@ -10,7 +10,7 @@
 
 import java.io.File
 
-val repoPatch = {
+konst repoPatch = {
     "duckduckgo-kotlin-repo.patch" to File("benchmarkScripts/files/duckduckgo-kotlin-repo.patch")
         .readText()
         .run { replace("<kotlin_version>", currentKotlinVersion) }
@@ -58,7 +58,7 @@ runBenchmarks(
 
             runTasks(":app:assemblePlayDebug")
 
-            applyAndroidResourceValueChange("common/src/main/res/values/strings-common.xml")
+            applyAndroidResourceValueChange("common/src/main/res/konstues/strings-common.xml")
         }
 
         scenario {

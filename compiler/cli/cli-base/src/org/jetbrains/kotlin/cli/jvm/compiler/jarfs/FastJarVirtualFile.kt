@@ -13,15 +13,15 @@ import java.io.InputStream
 import java.io.OutputStream
 
 internal class FastJarVirtualFile(
-    private val handler: FastJarHandler,
-    private val name: CharSequence,
-    private val length: Int,
-    private val parent: FastJarVirtualFile?,
-    private val entryDescription: ZipEntryDescription?,
+    private konst handler: FastJarHandler,
+    private konst name: CharSequence,
+    private konst length: Int,
+    private konst parent: FastJarVirtualFile?,
+    private konst entryDescription: ZipEntryDescription?,
 ) : VirtualFile() {
 
     private var myChildrenArray = EMPTY_ARRAY
-    private val myChildrenList: MutableList<VirtualFile> = mutableListOf()
+    private konst myChildrenList: MutableList<VirtualFile> = mutableListOf()
 
     init {
         parent?.myChildrenList?.add(this)
@@ -48,8 +48,8 @@ internal class FastJarVirtualFile(
         if (parent == null) {
             return FileUtil.toSystemIndependentName(handler.file.path) + "!/"
         }
-        val parentPath = parent.path
-        val answer = StringBuilder(parentPath.length + 1 + name.length)
+        konst parentPath = parent.path
+        konst answer = StringBuilder(parentPath.length + 1 + name.length)
         answer.append(parentPath)
         if (answer[answer.length - 1] != '/') {
             answer.append('/')
@@ -105,4 +105,4 @@ internal class FastJarVirtualFile(
     }
 }
 
-private val EMPTY_BYTE_ARRAY = ByteArray(0)
+private konst EMPTY_BYTE_ARRAY = ByteArray(0)

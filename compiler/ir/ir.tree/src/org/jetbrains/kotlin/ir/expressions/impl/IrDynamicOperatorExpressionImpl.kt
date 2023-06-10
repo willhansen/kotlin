@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.utils.SmartList
 
 class IrDynamicOperatorExpressionImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var operator: IrDynamicOperator
 ) : IrDynamicOperatorExpression() {
     override lateinit var receiver: IrExpression
 
-    override val arguments: MutableList<IrExpression> = SmartList()
+    override konst arguments: MutableList<IrExpression> = SmartList()
 }

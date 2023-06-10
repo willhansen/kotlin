@@ -29,27 +29,27 @@ import org.jetbrains.org.objectweb.asm.Type
 class ForInArrayLoopGenerator(
     codegen: ExpressionCodegen,
     forExpression: KtForExpression,
-    private val canCacheArrayLength: Boolean,
-    private val shouldAlwaysStoreArrayInNewVar: Boolean
+    private konst canCacheArrayLength: Boolean,
+    private konst shouldAlwaysStoreArrayInNewVar: Boolean
 ) : AbstractForLoopGenerator(codegen, forExpression) {
     private var indexVar: Int = 0
     private var arrayVar: Int = 0
     private var arrayLengthVar: Int = 0
-    private val loopRangeType: KotlinType = bindingContext.getType(forExpression.loopRange!!)!!
+    private konst loopRangeType: KotlinType = bindingContext.getType(forExpression.loopRange!!)!!
 
     override fun beforeLoop() {
         super.beforeLoop()
 
         indexVar = createLoopTempVariable(Type.INT_TYPE)
 
-        val loopRange = forExpression.loopRange
-        val value = codegen.gen(loopRange)
-        val asmLoopRangeType = codegen.asmType(loopRangeType)
-        if (!shouldAlwaysStoreArrayInNewVar && value is StackValue.Local && value.type == asmLoopRangeType) {
-            arrayVar = value.index // no need to copy local variable into another variable
+        konst loopRange = forExpression.loopRange
+        konst konstue = codegen.gen(loopRange)
+        konst asmLoopRangeType = codegen.asmType(loopRangeType)
+        if (!shouldAlwaysStoreArrayInNewVar && konstue is StackValue.Local && konstue.type == asmLoopRangeType) {
+            arrayVar = konstue.index // no need to copy local variable into another variable
         } else {
             arrayVar = createLoopTempVariable(OBJECT_TYPE)
-            value.put(asmLoopRangeType, loopRangeType, v)
+            konstue.put(asmLoopRangeType, loopRangeType, v)
             v.store(arrayVar, OBJECT_TYPE)
         }
 
@@ -78,7 +78,7 @@ class ForInArrayLoopGenerator(
     }
 
     override fun assignToLoopParameter() {
-        val arrayElParamType =
+        konst arrayElParamType =
             if (KotlinBuiltIns.isArray(loopRangeType)) DescriptorAsmUtil.boxType(asmElementType, elementType, codegen.state.typeMapper) else asmElementType
 
         v.load(arrayVar, OBJECT_TYPE)

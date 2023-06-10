@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.diagnostics.rendering.DefaultErrorMessages
 import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticFactoryToRendererMap
 import org.jetbrains.kotlin.diagnostics.rendering.Renderers
 
-private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
+private konst DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
     DiagnosticFactoryToRendererMap("Wasm").apply {
         put(
             ErrorsWasm.NON_EXTERNAL_TYPE_EXTENDS_EXTERNAL_TYPE,
@@ -27,7 +27,7 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
 
         put(ErrorsWasm.NESTED_WASM_IMPORT, "Only top-level functions can be imported with @WasmImport")
         put(ErrorsWasm.WASM_IMPORT_ON_NON_EXTERNAL_DECLARATION, "Functions annotated with @WasmImport must be external")
-        put(ErrorsWasm.WASM_IMPORT_PARAMETER_DEFAULT_VALUE, "Default parameter values are not supported with @WasmImport")
+        put(ErrorsWasm.WASM_IMPORT_PARAMETER_DEFAULT_VALUE, "Default parameter konstues are not supported with @WasmImport")
         put(ErrorsWasm.WASM_IMPORT_VARARG_PARAMETER, "Vararg parameters are not supported with @WasmImport")
         put(ErrorsWasm.WASM_IMPORT_UNSUPPORTED_PARAMETER_TYPE, "Unsupported @WasmImport parameter type {0}", Renderers.RENDER_TYPE)
         put(ErrorsWasm.WASM_IMPORT_UNSUPPORTED_RETURN_TYPE, "Unsupported @WasmImport return type {0}", Renderers.RENDER_TYPE)
@@ -45,7 +45,7 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
         )
         put(
             ErrorsWasm.JSCODE_INVALID_PARAMETER_NAME,
-            "Parameters passed to js(code) should have a valid JavaScript name"
+            "Parameters passed to js(code) should have a konstid JavaScript name"
         )
 
     }

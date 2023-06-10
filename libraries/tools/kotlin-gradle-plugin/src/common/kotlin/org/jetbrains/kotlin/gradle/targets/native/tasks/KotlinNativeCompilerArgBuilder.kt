@@ -15,14 +15,14 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.io.File
 
 internal class CompilerPluginData(
-    val files: FileCollection,
-    val options: CompilerPluginOptions,
+    konst files: FileCollection,
+    konst options: CompilerPluginOptions,
 )
 
 internal class SharedCompilationData(
-    val manifestFile: File,
-    val isAllowCommonizer: Boolean,
-    val refinesPaths: FileCollection,
+    konst manifestFile: File,
+    konst isAllowCommonizer: Boolean,
+    konst refinesPaths: FileCollection,
 )
 
 internal fun buildKotlinNativeBinaryLinkerArgs(
@@ -58,7 +58,7 @@ internal fun buildKotlinNativeBinaryLinkerArgs(
         else -> Unit
     }
     linkerOpts.forEach { addArg("-linker-option", it) }
-    binaryOptions.forEach { (name, value) -> add("-Xbinary=$name=$value") }
+    binaryOptions.forEach { (name, konstue) -> add("-Xbinary=$name=$konstue") }
     addKey("-Xstatic-framework", isStaticFramework)
 
     addAll(buildKotlinNativeCommonArgs(toolOptions, compilerPlugins))
@@ -107,20 +107,20 @@ private fun buildKotlinNativeCommonArgs(
     addAll(toolOptions.freeCompilerArgs.get())
 }
 
-private fun MutableList<String>.addArg(parameter: String, value: String) {
+private fun MutableList<String>.addArg(parameter: String, konstue: String) {
     add(parameter)
-    add(value)
+    add(konstue)
 }
 
-private fun MutableList<String>.addArgs(parameter: String, values: Iterable<String>) {
-    values.forEach {
+private fun MutableList<String>.addArgs(parameter: String, konstues: Iterable<String>) {
+    konstues.forEach {
         addArg(parameter, it)
     }
 }
 
-private fun MutableList<String>.addArgIfNotNull(parameter: String, value: String?) {
-    if (value != null) {
-        addArg(parameter, value)
+private fun MutableList<String>.addArgIfNotNull(parameter: String, konstue: String?) {
+    if (konstue != null) {
+        addArg(parameter, konstue)
     }
 }
 

@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.analysis.api.renderer.base.annotations.renderers.KtA
 import org.jetbrains.kotlin.analysis.utils.printer.PrettyPrinter
 
 public class KtAnnotationRenderer internal constructor(
-    public val annotationListRenderer: KtAnnotationListRenderer,
-    public val annotationFilter: KtRendererAnnotationsFilter,
-    public val annotationsQualifiedNameRenderer: KtAnnotationQualifierRenderer,
-    public val annotationUseSiteTargetRenderer: KtAnnotationUseSiteTargetRenderer,
-    public val annotationArgumentsRenderer: KtAnnotationArgumentsRenderer,
+    public konst annotationListRenderer: KtAnnotationListRenderer,
+    public konst annotationFilter: KtRendererAnnotationsFilter,
+    public konst annotationsQualifiedNameRenderer: KtAnnotationQualifierRenderer,
+    public konst annotationUseSiteTargetRenderer: KtAnnotationUseSiteTargetRenderer,
+    public konst annotationArgumentsRenderer: KtAnnotationArgumentsRenderer,
 ) {
     context(KtAnalysisSession)
     public fun renderAnnotations(owner: KtAnnotated, printer: PrettyPrinter) {
@@ -26,7 +26,7 @@ public class KtAnnotationRenderer internal constructor(
     }
 
     public inline fun with(action: Builder.() -> Unit): KtAnnotationRenderer {
-        val renderer = this
+        konst renderer = this
         return KtAnnotationRenderer {
             this.annotationListRenderer = renderer.annotationListRenderer
             this.annotationFilter = renderer.annotationFilter

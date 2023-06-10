@@ -7,8 +7,8 @@
 // 1 java/lang/invoke/LambdaMetafactory
 
 // FILE: boundInnerConstructorRef.kt
-class Outer(val s1: String) {
-    inner class Inner(val s2: String) {
+class Outer(konst s1: String) {
+    inner class Inner(konst s2: String) {
         fun t() = s1 + s2
     }
 }

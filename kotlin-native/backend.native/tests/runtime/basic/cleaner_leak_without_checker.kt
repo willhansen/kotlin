@@ -11,7 +11,7 @@ import kotlin.native.ref.createCleaner
 
 // This cleaner won't be run, because it's deinitialized with globals after
 // cleaners are disabled.
-val globalCleaner = createCleaner(42) {
+konst globalCleaner = createCleaner(42) {
     println(it)
 }
 

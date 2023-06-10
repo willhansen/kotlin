@@ -14,8 +14,8 @@ fun check(condition: Boolean, msg: () -> Unit) {
 fun fn1(x: Any) {}
 suspend fun suspendFn0() {}
 
-val lambda1 = { x: Any -> } as (Any) -> Unit
-val suspendLambda0: suspend () -> Unit = {}
+konst lambda1 = { x: Any -> } as (Any) -> Unit
+konst suspendLambda0: suspend () -> Unit = {}
 
 fun Any.extFun(a: Any) {}
 suspend fun Any.suspendExtFun() {}
@@ -30,20 +30,20 @@ inline fun <reified T : suspend () -> Unit> checkReified(noinline x: (Any?) -> U
 }
 
 fun box(): String {
-    val f1 = ::fn1 as Any
-    val sf0 = ::suspendFn0 as Any
+    konst f1 = ::fn1 as Any
+    konst sf0 = ::suspendFn0 as Any
 
-    val ef = Any::extFun as Any
-    val sef = Any::suspendExtFun as Any
+    konst ef = Any::extFun as Any
+    konst sef = Any::suspendExtFun as Any
 
-    val afoo = A::foo
-    val safoo = A::suspendFoo
+    konst afoo = A::foo
+    konst safoo = A::suspendFoo
 
     fun local1(x: Any) {}
     suspend fun suspendLocal0() {}
 
-    val localFun1 = ::local1 as Any
-    val suspendLocalFun0 = ::suspendLocal0 as Any
+    konst localFun1 = ::local1 as Any
+    konst suspendLocalFun0 = ::suspendLocal0 as Any
 
     check(f1 !is SuspendFunction0<*>) { "Failed: f1 !is SuspendFunction0<*>" }
     check(sf0 is SuspendFunction0<*>) { "Failed: f1 is SuspendFunction0<*>" }

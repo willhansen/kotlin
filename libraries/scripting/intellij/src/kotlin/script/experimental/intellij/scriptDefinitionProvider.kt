@@ -28,7 +28,7 @@ interface ScriptDefinitionsProvider {
     /**
      * A display name used to identify particular providers
      */
-    val id: String
+    konst id: String
 
     /**
      * Should return a list of the FQNs of the script definition template classes to load explicitly, if any
@@ -55,7 +55,7 @@ interface ScriptDefinitionsProvider {
     ): Iterable<ScriptDefinition> = loadedScriptDefinitions
 
     companion object {
-        val EP_NAME: ExtensionPointName<ScriptDefinitionsProvider> =
+        konst EP_NAME: ExtensionPointName<ScriptDefinitionsProvider> =
             ExtensionPointName.create("org.jetbrains.kotlin.scriptDefinitionsProvider")
     }
 }

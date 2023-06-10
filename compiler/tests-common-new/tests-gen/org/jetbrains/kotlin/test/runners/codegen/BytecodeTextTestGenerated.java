@@ -98,9 +98,9 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
     }
 
     @Test
-    @TestMetadata("componentEvaluatesOnlyOnce.kt")
-    public void testComponentEvaluatesOnlyOnce() throws Exception {
-        runTest("compiler/testData/codegen/bytecodeText/componentEvaluatesOnlyOnce.kt");
+    @TestMetadata("componentEkonstuatesOnlyOnce.kt")
+    public void testComponentEkonstuatesOnlyOnce() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeText/componentEkonstuatesOnlyOnce.kt");
     }
 
     @Test
@@ -416,9 +416,9 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
     }
 
     @Test
-    @TestMetadata("preEvaluateInlineJavaStaticFields.kt")
-    public void testPreEvaluateInlineJavaStaticFields() throws Exception {
-        runTest("compiler/testData/codegen/bytecodeText/preEvaluateInlineJavaStaticFields.kt");
+    @TestMetadata("preEkonstuateInlineJavaStaticFields.kt")
+    public void testPreEkonstuateInlineJavaStaticFields() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeText/preEkonstuateInlineJavaStaticFields.kt");
     }
 
     @Test
@@ -2405,9 +2405,9 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         }
 
         @Test
-        @TestMetadata("loopVarInterval.kt")
-        public void testLoopVarInterval() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/forLoop/loopVarInterval.kt");
+        @TestMetadata("loopVarInterkonst.kt")
+        public void testLoopVarInterkonst() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/forLoop/loopVarInterkonst.kt");
         }
 
         @Test
@@ -5480,12 +5480,12 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
     }
 
     @Nested
-    @TestMetadata("compiler/testData/codegen/bytecodeText/valueClasses")
+    @TestMetadata("compiler/testData/codegen/bytecodeText/konstueClasses")
     @TestDataPath("$PROJECT_ROOT")
     public class ValueClasses {
         @Test
         public void testAllFilesPresentInValueClasses() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeText/valueClasses"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeText/konstueClasses"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true);
         }
     }
 

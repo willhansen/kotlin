@@ -10,7 +10,7 @@ fun fn1(x: Any) {}
 
 inline fun safeAsReturnsNull(operation: String, cast: () -> Any?) {
     try {
-        val x = cast()
+        konst x = cast()
         require(x == null) { "$operation: should return null, got $x" }
     }
     catch (e: Throwable) {
@@ -20,7 +20,7 @@ inline fun safeAsReturnsNull(operation: String, cast: () -> Any?) {
 
 inline fun safeAsReturnsNonNull(operation: String, cast: () -> Any?) {
     try {
-        val x = cast()
+        konst x = cast()
         require(x != null) { "$operation: should return non-null" }
     }
     catch (e: Throwable) {
@@ -29,8 +29,8 @@ inline fun safeAsReturnsNonNull(operation: String, cast: () -> Any?) {
 }
 
 fun box(): String {
-    val f0 = ::fn0 as Any
-    val f1 = ::fn1 as Any
+    konst f0 = ::fn0 as Any
+    konst f1 = ::fn1 as Any
 
     safeAsReturnsNonNull("f0 as? Function0<*>") { f0 as? Function0<*> }
     safeAsReturnsNull("f0 as? Function1<*, *>") { f0 as? Function1<*, *> }

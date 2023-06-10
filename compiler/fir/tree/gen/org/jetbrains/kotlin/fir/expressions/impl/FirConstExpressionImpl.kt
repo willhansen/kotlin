@@ -23,10 +23,10 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirConstExpressionImpl<T> (
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var kind: ConstantValueKind<T>,
-    override val value: T,
+    override konst konstue: T,
 ) : FirConstExpression<T>() {
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
 

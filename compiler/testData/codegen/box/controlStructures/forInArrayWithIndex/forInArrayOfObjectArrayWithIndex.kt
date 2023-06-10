@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val arr = Array(4) { arrayOf("x$it") }
+    konst arr = Array(4) { arrayOf("x$it") }
 
     var s = ""
     for ((i, sarr) in arr.withIndex()) {

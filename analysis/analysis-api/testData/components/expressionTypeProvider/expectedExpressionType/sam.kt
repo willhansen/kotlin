@@ -1,1 +1,1 @@
-val baz = java.lang.Runnable <caret>{ /* SAM */ }
+konst baz = java.lang.Runnable <caret>{ /* SAM */ }

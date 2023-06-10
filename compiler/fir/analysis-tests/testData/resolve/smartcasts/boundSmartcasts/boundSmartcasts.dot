@@ -40,7 +40,7 @@ digraph boundSmartcasts_kt {
             color=blue
             9 [label="Enter block"];
             10 [label="Access variable R|<local>/x|"];
-            11 [label="Variable declaration: lval y: R|kotlin/Any|"];
+            11 [label="Variable declaration: lkonst y: R|kotlin/Any|"];
             subgraph cluster_6 {
                 color=blue
                 12 [label="Enter when"];
@@ -101,7 +101,7 @@ digraph boundSmartcasts_kt {
             color=blue
             32 [label="Enter block"];
             33 [label="Access variable R|<local>/x|"];
-            34 [label="Variable declaration: lval y: R|kotlin/Any|"];
+            34 [label="Variable declaration: lkonst y: R|kotlin/Any|"];
             subgraph cluster_11 {
                 color=blue
                 35 [label="Enter when"];
@@ -391,7 +391,7 @@ digraph boundSmartcasts_kt {
             144 [label="Stub" style="filled" fillcolor=gray];
             145 [label="Lhs of ?: is not null"];
             146 [label="Exit ?:"];
-            147 [label="Variable declaration: lval a: R|kotlin/Any|"];
+            147 [label="Variable declaration: lkonst a: R|kotlin/Any|"];
             148 [label="Access variable R|<local>/a|"];
             149 [label="Function call: R|<local>/a|.R|/baz|()" style="filled" fillcolor=yellow];
             150 [label="Access variable R|<local>/d|"];
@@ -440,7 +440,7 @@ digraph boundSmartcasts_kt {
             162 [label="Enter block"];
             163 [label="Access variable R|<local>/d1|"];
             164 [label="Access variable R|/D.any|"];
-            165 [label="Variable declaration: lval a: R|kotlin/Any?|"];
+            165 [label="Variable declaration: lkonst a: R|kotlin/Any?|"];
             166 [label="Access variable R|<local>/a|"];
             167 [label="Type operator: (R|<local>/a| as R|A|)"];
             168 [label="Access variable R|<local>/a|"];
@@ -488,12 +488,12 @@ digraph boundSmartcasts_kt {
             184 [label="Enter safe call"];
             185 [label="Access variable R|/D.any|"];
             186 [label="Exit safe call"];
-            187 [label="Variable declaration: lval a: R|kotlin/Any?|"];
+            187 [label="Variable declaration: lkonst a: R|kotlin/Any?|"];
             188 [label="Access variable R|<local>/d2|"];
             189 [label="Enter safe call"];
             190 [label="Access variable R|/D.any|"];
             191 [label="Exit safe call"];
-            192 [label="Variable declaration: lval b: R|kotlin/Any?|"];
+            192 [label="Variable declaration: lkonst b: R|kotlin/Any?|"];
             193 [label="Access variable R|<local>/a|"];
             194 [label="Type operator: (R|<local>/a| as R|A|)"];
             195 [label="Access variable R|<local>/a|"];

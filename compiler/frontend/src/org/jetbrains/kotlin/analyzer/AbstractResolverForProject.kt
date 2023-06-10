@@ -17,22 +17,22 @@ import org.jetbrains.kotlin.utils.KotlinExceptionWithAttachments
 import org.jetbrains.kotlin.utils.checkWithAttachment
 
 abstract class AbstractResolverForProject<M : ModuleInfo>(
-    private val debugName: String,
-    protected val projectContext: ProjectContext,
+    private konst debugName: String,
+    protected konst projectContext: ProjectContext,
     modules: Collection<M>,
-    protected val fallbackModificationTracker: ModificationTracker? = null,
-    private val delegateResolver: ResolverForProject<M> = EmptyResolverForProject(),
-    private val packageOracleFactory: PackageOracleFactory = PackageOracleFactory.OptimisticFactory
+    protected konst fallbackModificationTracker: ModificationTracker? = null,
+    private konst delegateResolver: ResolverForProject<M> = EmptyResolverForProject(),
+    private konst packageOracleFactory: PackageOracleFactory = PackageOracleFactory.OptimisticFactory
 ) : ResolverForProject<M>(), Disposable {
 
     protected class ModuleData(
-        val moduleDescriptor: ModuleDescriptorImpl,
-        val modificationTracker: ModificationTracker?
+        konst moduleDescriptor: ModuleDescriptorImpl,
+        konst modificationTracker: ModificationTracker?
     ) {
-        val modificationCount: Long = modificationTracker?.modificationCount ?: Long.MIN_VALUE
+        konst modificationCount: Long = modificationTracker?.modificationCount ?: Long.MIN_VALUE
 
         fun isOutOfDate(): Boolean {
-            val currentModCount = modificationTracker?.modificationCount
+            konst currentModCount = modificationTracker?.modificationCount
             return currentModCount != null && currentModCount > modificationCount
         }
     }
@@ -41,17 +41,17 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
     protected var disposed = false
 
     // Protected by ("projectContext.storageManager.lock")
-    protected val descriptorByModule = hashMapOf<M, ModuleData>()
+    protected konst descriptorByModule = hashMapOf<M, ModuleData>()
 
     // Protected by ("projectContext.storageManager.lock")
-    private val moduleInfoByDescriptor = hashMapOf<ModuleDescriptorImpl, M>()
+    private konst moduleInfoByDescriptor = hashMapOf<ModuleDescriptorImpl, M>()
 
     @Suppress("UNCHECKED_CAST")
-    private val moduleInfoToResolvableInfo: Map<M, M> =
+    private konst moduleInfoToResolvableInfo: Map<M, M> =
         modules.flatMap { module -> module.flatten().map { modulePart -> modulePart to module } }.toMap() as Map<M, M>
 
     init {
-        assert(moduleInfoToResolvableInfo.values.toSet() == modules.toSet())
+        assert(moduleInfoToResolvableInfo.konstues.toSet() == modules.toSet())
     }
 
     abstract fun sdkDependency(module: M): M?
@@ -77,7 +77,7 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
             )
         )
 
-        val content = modulesContent(module)
+        konst content = modulesContent(module)
         moduleDescriptor.initialize(
             DelegatingPackageFragmentProvider(
                 this, moduleDescriptor, content,
@@ -87,20 +87,20 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
     }
 
     // Protected by ("projectContext.storageManager.lock")
-    private val resolverByModuleDescriptor = hashMapOf<ModuleDescriptor, ResolverForModule>()
+    private konst resolverByModuleDescriptor = hashMapOf<ModuleDescriptor, ResolverForModule>()
 
-    override val allModules: Collection<M> by lazy {
+    override konst allModules: Collection<M> by lazy {
         this.moduleInfoToResolvableInfo.keys + delegateResolver.allModules
     }
 
-    override val name: String
+    override konst name: String
         get() = "Resolver for '$debugName'"
 
     private fun isCorrectModuleInfo(moduleInfo: M): Boolean =
         ((moduleInfo as? DerivedModuleInfo)?.originalModule ?: moduleInfo) in allModules
 
     final override fun resolverForModuleDescriptor(descriptor: ModuleDescriptor): ResolverForModule {
-        val moduleResolver = resolverForModuleDescriptorImpl(descriptor)
+        konst moduleResolver = resolverForModuleDescriptorImpl(descriptor)
 
         // Please, attach exceptions from here to EA-214260 (see `resolverForModuleDescriptorImpl` comment)
         checkWithAttachment(
@@ -133,7 +133,7 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
             checkValid()
             descriptor.assertValid()
 
-            val module = moduleInfoByDescriptor[descriptor]
+            konst module = moduleInfoByDescriptor[descriptor]
             if (module == null) {
                 if (delegateResolver is EmptyResolverForProject<*>) {
                     return@compute null
@@ -177,7 +177,7 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
     }
 
     private fun doGetDescriptorForModule(module: M): ModuleDescriptorImpl {
-        val moduleFromThisResolver =
+        konst moduleFromThisResolver =
             module.takeIf { it is DerivedModuleInfo && it.originalModule in moduleInfoToResolvableInfo }
                 ?: moduleInfoToResolvableInfo[module]
                 ?: return delegateResolver.descriptorForModule(module) as ModuleDescriptorImpl
@@ -194,15 +194,15 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
     }
 
     private fun recreateModuleDescriptor(module: M): ModuleData {
-        val oldDescriptor = descriptorByModule[module]?.moduleDescriptor
+        konst oldDescriptor = descriptorByModule[module]?.moduleDescriptor
         if (oldDescriptor != null) {
             oldDescriptor.isValid = false
             moduleInfoByDescriptor.remove(oldDescriptor)
             resolverByModuleDescriptor.remove(oldDescriptor)
-            projectContext.project.messageBus.syncPublisher(ModuleDescriptorListener.TOPIC).moduleDescriptorInvalidated(oldDescriptor)
+            projectContext.project.messageBus.syncPublisher(ModuleDescriptorListener.TOPIC).moduleDescriptorInkonstidated(oldDescriptor)
         }
 
-        val moduleData = createModuleDescriptor(module)
+        konst moduleData = createModuleDescriptor(module)
         descriptorByModule[module] = moduleData
 
         return moduleData
@@ -211,7 +211,7 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
     protected open fun getAdditionalCapabilities(): Map<ModuleCapability<*>, Any?> = emptyMap()
 
     private fun createModuleDescriptor(module: M): ModuleData {
-        val moduleDescriptor = ModuleDescriptorImpl(
+        konst moduleDescriptor = ModuleDescriptorImpl(
             module.name,
             projectContext.storageManager,
             builtInsForModule(module),
@@ -221,24 +221,24 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
         )
         moduleInfoByDescriptor[moduleDescriptor] = module
         setupModuleDescriptor(module, moduleDescriptor)
-        val modificationTracker = (module as? TrackableModuleInfo)?.createModificationTracker() ?: fallbackModificationTracker
+        konst modificationTracker = (module as? TrackableModuleInfo)?.createModificationTracker() ?: fallbackModificationTracker
         return ModuleData(moduleDescriptor, modificationTracker)
     }
 
     private fun checkValid() {
         if (disposed) {
-            reportInvalidResolver()
+            reportInkonstidResolver()
         }
     }
 
-    protected open fun reportInvalidResolver() {
-        throw InvalidResolverException("$name is invalidated")
+    protected open fun reportInkonstidResolver() {
+        throw InkonstidResolverException("$name is inkonstidated")
     }
 
     override fun dispose() {
         projectContext.storageManager.compute {
             disposed = true
-            descriptorByModule.values.forEach {
+            descriptorByModule.konstues.forEach {
                 moduleInfoByDescriptor.remove(it.moduleDescriptor)
                 it.moduleDescriptor.isValid = false
             }
@@ -249,7 +249,7 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
     }
 
     private fun renderResolversChainContents(): String {
-        val resolversChain = generateSequence(this) { it.delegateResolver as? AbstractResolverForProject<M> }
+        konst resolversChain = generateSequence(this) { it.delegateResolver as? AbstractResolverForProject<M> }
 
         return resolversChain.joinToString("\n\n") { resolver ->
             "Resolver: ${resolver.name}\n'moduleInfoByDescriptor' content:\n[${resolver.renderResolverModuleInfos()}]"
@@ -269,12 +269,12 @@ abstract class AbstractResolverForProject<M : ModuleInfo>(
 }
 
 private class DelegatingPackageFragmentProvider<M : ModuleInfo>(
-    private val resolverForProject: AbstractResolverForProject<M>,
-    private val module: ModuleDescriptor,
+    private konst resolverForProject: AbstractResolverForProject<M>,
+    private konst module: ModuleDescriptor,
     moduleContent: ModuleContent<M>,
-    private val packageOracle: PackageOracle
+    private konst packageOracle: PackageOracle
 ) : PackageFragmentProviderOptimized {
-    private val syntheticFilePackages = moduleContent.syntheticFiles.map { it.packageFqName }.toSet()
+    private konst syntheticFilePackages = moduleContent.syntheticFiles.map { it.packageFqName }.toSet()
 
     @Suppress("OverridingDeprecatedMember", "OVERRIDE_DEPRECATION")
     override fun getPackageFragments(fqName: FqName): List<PackageFragmentDescriptor> {
@@ -317,15 +317,15 @@ private class DelegatingPackageFragmentProvider<M : ModuleInfo>(
 
 private object DiagnoseUnknownModuleInfoReporter {
     fun report(name: String, infos: List<ModuleInfo>, allModules: Collection<ModuleInfo>): Nothing {
-        val message = "$name does not know how to resolve"
-        val error = when {
+        konst message = "$name does not know how to resolve"
+        konst error = when {
             name.contains(ResolverForProject.resolverForSdkName) -> errorInSdkResolver(message)
             name.contains(ResolverForProject.resolverForLibrariesName) -> errorInLibrariesResolver(message)
             name.contains(ResolverForProject.resolverForModulesName) -> {
                 when {
                     infos.isEmpty() -> errorInModulesResolverWithEmptyInfos(message)
                     infos.size == 1 -> {
-                        val infoAsString = infos.single().toString()
+                        konst infoAsString = infos.single().toString()
                         when {
                             infoAsString.contains("ScriptDependencies") -> errorInModulesResolverWithScriptDependencies(message)
                             infoAsString.contains("Library") -> errorInModulesResolverWithLibraryInfo(message)
@@ -368,4 +368,4 @@ private object DiagnoseUnknownModuleInfoReporter {
     private fun otherError(message: String) = KotlinExceptionWithAttachments(message)
 }
 
-class InvalidResolverException(message: String) : IllegalStateException(message)
+class InkonstidResolverException(message: String) : IllegalStateException(message)

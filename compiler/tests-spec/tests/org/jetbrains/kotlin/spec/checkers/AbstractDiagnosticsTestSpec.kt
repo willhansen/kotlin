@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.spec.utils.SpecTestLinkedType
 import org.jetbrains.kotlin.spec.utils.models.AbstractSpecTest
 import org.jetbrains.kotlin.spec.utils.parsers.CommonParser
-import org.jetbrains.kotlin.spec.utils.validators.DiagnosticTestTypeValidator
-import org.jetbrains.kotlin.spec.utils.validators.SpecTestValidationException
+import org.jetbrains.kotlin.spec.utils.konstidators.DiagnosticTestTypeValidator
+import org.jetbrains.kotlin.spec.utils.konstidators.SpecTestValidationException
 import org.jetbrains.kotlin.test.ConfigurationKind
 import org.jetbrains.kotlin.test.util.KtTestUtil
 import org.junit.Assert
@@ -27,20 +27,20 @@ import java.util.regex.Matcher
 @OptIn(ObsoleteTestInfrastructure::class)
 abstract class AbstractDiagnosticsTestSpec : org.jetbrains.kotlin.checkers.AbstractDiagnosticsTest() {
     companion object {
-        private val withoutDescriptorsTestGroups = listOf(
+        private konst withoutDescriptorsTestGroups = listOf(
             "linked/when-expression"
         )
 
-        private const val MODULE_PATH = "compiler/tests-spec"
-        private const val DIAGNOSTICS_TESTDATA_PATH = "$MODULE_PATH/testData/diagnostics"
-        private const val HELPERS_PATH = "$DIAGNOSTICS_TESTDATA_PATH/helpers"
+        private const konst MODULE_PATH = "compiler/tests-spec"
+        private const konst DIAGNOSTICS_TESTDATA_PATH = "$MODULE_PATH/testData/diagnostics"
+        private const konst HELPERS_PATH = "$DIAGNOSTICS_TESTDATA_PATH/helpers"
 
         fun additionalKtFiles(specTest: AbstractSpecTest, project: Project): List<KtFile> {
             if (specTest.helpers == null) return emptyList()
 
             return specTest.helpers.map {
-                val filename = "$it.kt"
-                val helperContent = FileUtil.loadFile(File("$HELPERS_PATH/$filename"), true)
+                konst filename = "$it.kt"
+                konst helperContent = FileUtil.loadFile(File("$HELPERS_PATH/$filename"), true)
 
 
                 KtTestUtil.createFile(filename, helperContent, project)
@@ -58,7 +58,7 @@ abstract class AbstractDiagnosticsTestSpec : org.jetbrains.kotlin.checkers.Abstr
 
     private fun enableDescriptorsGenerationIfNeeded(testFilePath: String) {
         skipDescriptors = withoutDescriptorsTestGroups.any {
-            val testGroupAbsolutePath = File("$DIAGNOSTICS_TESTDATA_PATH/$it").absolutePath
+            konst testGroupAbsolutePath = File("$DIAGNOSTICS_TESTDATA_PATH/$it").absolutePath
             testFilePath.startsWith(testGroupAbsolutePath)
         }
     }
@@ -70,7 +70,7 @@ abstract class AbstractDiagnosticsTestSpec : org.jetbrains.kotlin.checkers.Abstr
     override fun skipDescriptorsValidation() = skipDescriptors
 
     override fun getKtFiles(testFiles: List<TestFile>, includeExtras: Boolean): List<KtFile> {
-        val ktFiles = super.getKtFiles(testFiles, includeExtras) as ArrayList
+        konst ktFiles = super.getKtFiles(testFiles, includeExtras) as ArrayList
 
         ktFiles.addAll(additionalKtFiles(specTest, project))
 
@@ -78,7 +78,7 @@ abstract class AbstractDiagnosticsTestSpec : org.jetbrains.kotlin.checkers.Abstr
     }
 
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
-        val testFilePath = testDataFile.canonicalPath
+        konst testFilePath = testDataFile.canonicalPath
 
         enableDescriptorsGenerationIfNeeded(testFilePath)
 
@@ -89,21 +89,21 @@ abstract class AbstractDiagnosticsTestSpec : org.jetbrains.kotlin.checkers.Abstr
 
         println(specTest)
 
-        val computeExceptionPoint: (Matcher?) -> Set<Int>? = l@{ matches ->
+        konst computeExceptionPoint: (Matcher?) -> Set<Int>? = l@{ matches ->
             if (matches == null) return@l null
 
-            val lineNumber = matches.group("lineNumber").toInt()
-            val symbolNumber = matches.group("symbolNumber").toInt()
-            val filename = matches.group("filename")
-            val fileContent = files.find { it.ktFile?.name == filename }!!.clearText
-            val exceptionPosition = fileContent.lines().subList(0, lineNumber).joinToString("\n").length + symbolNumber
-            val testCases = specTest.cases.byRanges[filename]
-            val testCasesWithSamePosition = testCases!!.floorEntry(exceptionPosition).value
+            konst lineNumber = matches.group("lineNumber").toInt()
+            konst symbolNumber = matches.group("symbolNumber").toInt()
+            konst filename = matches.group("filename")
+            konst fileContent = files.find { it.ktFile?.name == filename }!!.clearText
+            konst exceptionPosition = fileContent.lines().subList(0, lineNumber).joinToString("\n").length + symbolNumber
+            konst testCases = specTest.cases.byRanges[filename]
+            konst testCasesWithSamePosition = testCases!!.floorEntry(exceptionPosition).konstue
 
             return@l testCasesWithSamePosition.keys.toSet()
         }
 
-        val exceptionsInCases = specTest.cases.byNumbers.entries.associate { it.key to it.value.exception }
+        konst exceptionsInCases = specTest.cases.byNumbers.entries.associate { it.key to it.konstue.exception }
         TestExceptionsComparator(testDataFile).run(specTest.exception, exceptionsInCases, computeExceptionPoint) {
             super.analyzeAndCheck(testDataFile, files)
         }
@@ -117,7 +117,7 @@ abstract class AbstractDiagnosticsTestSpec : org.jetbrains.kotlin.checkers.Abstr
         moduleBindings: Map<TestModule?, BindingContext>,
         languageVersionSettingsByModule: Map<TestModule?, LanguageVersionSettings>
     ) {
-        val diagnosticValidator = try {
+        konst diagnosticValidator = try {
             DiagnosticTestTypeValidator(testFiles, testDataFile, specTest)
         } catch (e: SpecTestValidationException) {
             Assert.fail(e.description)
@@ -125,8 +125,8 @@ abstract class AbstractDiagnosticsTestSpec : org.jetbrains.kotlin.checkers.Abstr
         }
 
         try {
-            diagnosticValidator.validatePathConsistency(testLinkedType)
-            diagnosticValidator.validateTestType()
+            diagnosticValidator.konstidatePathConsistency(testLinkedType)
+            diagnosticValidator.konstidateTestType()
         } catch (e: SpecTestValidationException) {
             Assert.fail(e.description)
         } finally {

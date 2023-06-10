@@ -11,21 +11,21 @@ package foo
 
 @JsExport
 open class ClassWithoutPrimary {
-    val value: String
+    konst konstue: String
 
     @JsName("fromInt")
-    constructor(value: Int) {
-        this.value = value.toString()
+    constructor(konstue: Int) {
+        this.konstue = konstue.toString()
     }
 
     @JsName("fromString")
-    constructor(value: String) {
-        this.value = value
+    constructor(konstue: String) {
+        this.konstue = konstue
     }
 }
 
 @JsExport
-open class SomeBaseClass private constructor(val answer: Int): ClassWithoutPrimary(answer) {
+open class SomeBaseClass private constructor(konst answer: Int): ClassWithoutPrimary(answer) {
     @JsName("secondary")
     constructor() : this(42)
 }

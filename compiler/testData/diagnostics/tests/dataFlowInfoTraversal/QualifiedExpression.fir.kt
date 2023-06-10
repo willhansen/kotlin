@@ -5,7 +5,7 @@ class A {
 }
 
 fun foo() {
-    val x: Int? = null
+    konst x: Int? = null
 
     A().bar(<!ARGUMENT_TYPE_MISMATCH!>x<!>)
     if (x == null) return

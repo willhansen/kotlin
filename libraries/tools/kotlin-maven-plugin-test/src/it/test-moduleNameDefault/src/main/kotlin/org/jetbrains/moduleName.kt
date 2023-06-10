@@ -5,8 +5,8 @@ fun main(args : Array<String>) {
 }
 
 fun isModuleFileExists() : Boolean {
-    val systemClassLoader = ClassLoader.getSystemClassLoader()
-    val moduleFile = "META-INF/test-moduleNameDefault.kotlin_module"
-    val resourceAsStream = systemClassLoader.getResourceAsStream(moduleFile)
+    konst systemClassLoader = ClassLoader.getSystemClassLoader()
+    konst moduleFile = "META-INF/test-moduleNameDefault.kotlin_module"
+    konst resourceAsStream = systemClassLoader.getResourceAsStream(moduleFile)
     return resourceAsStream != null
 }

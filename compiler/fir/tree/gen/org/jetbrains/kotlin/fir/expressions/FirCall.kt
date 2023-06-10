@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 sealed interface FirCall : FirStatement {
-    override val source: KtSourceElement?
-    override val annotations: List<FirAnnotation>
-    val argumentList: FirArgumentList
+    override konst source: KtSourceElement?
+    override konst annotations: List<FirAnnotation>
+    konst argumentList: FirArgumentList
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitCall(this, data)
 

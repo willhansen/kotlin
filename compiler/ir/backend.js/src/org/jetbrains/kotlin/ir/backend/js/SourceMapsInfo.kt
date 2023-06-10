@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.js.config.SourceMapSourceEmbedding
 import java.io.File
 
 data class SourceMapsInfo(
-    val sourceMapPrefix: String,
-    val sourceRoots: List<String>,
-    val outputDir: File?,
-    val sourceMapContentEmbedding: SourceMapSourceEmbedding,
-    val namesPolicy: SourceMapNamesPolicy,
+    konst sourceMapPrefix: String,
+    konst sourceRoots: List<String>,
+    konst outputDir: File?,
+    konst sourceMapContentEmbedding: SourceMapSourceEmbedding,
+    konst namesPolicy: SourceMapNamesPolicy,
 ) {
     companion object {
         fun from(configuration: CompilerConfiguration): SourceMapsInfo? =
@@ -34,5 +34,5 @@ data class SourceMapsInfo(
     }
 }
 
-val JsCommonBackendContext.sourceMapsInfo: SourceMapsInfo?
+konst JsCommonBackendContext.sourceMapsInfo: SourceMapsInfo?
     get() = SourceMapsInfo.from(configuration)

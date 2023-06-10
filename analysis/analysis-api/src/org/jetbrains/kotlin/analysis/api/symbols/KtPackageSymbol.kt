@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 import org.jetbrains.kotlin.name.FqName
 
 public abstract class KtPackageSymbol : KtSymbol {
-    public abstract val fqName: FqName
+    public abstract konst fqName: FqName
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtPackageSymbol>

@@ -1,8 +1,8 @@
 fun testForBreak1(ss: List<String>) {
   { // BLOCK
-    val <iterator>: Iterator<String> = ss.iterator()
+    konst <iterator>: Iterator<String> = ss.iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val s: String = <iterator>.next()
+      konst s: String = <iterator>.next()
       break
     }
   }
@@ -10,14 +10,14 @@ fun testForBreak1(ss: List<String>) {
 
 fun testForBreak2(ss: List<String>) {
   { // BLOCK
-    val <iterator>: Iterator<String> = ss.iterator()
+    konst <iterator>: Iterator<String> = ss.iterator()
     OUTER@ while (<iterator>.hasNext()) { // BLOCK
-      val s1: String = <iterator>.next()
+      konst s1: String = <iterator>.next()
       { // BLOCK
         { // BLOCK
-          val <iterator>: Iterator<String> = ss.iterator()
+          konst <iterator>: Iterator<String> = ss.iterator()
           INNER@ while (<iterator>.hasNext()) { // BLOCK
-            val s2: String = <iterator>.next()
+            konst s2: String = <iterator>.next()
             { // BLOCK
               break@OUTER
               break@INNER
@@ -33,9 +33,9 @@ fun testForBreak2(ss: List<String>) {
 
 fun testForContinue1(ss: List<String>) {
   { // BLOCK
-    val <iterator>: Iterator<String> = ss.iterator()
+    konst <iterator>: Iterator<String> = ss.iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val s: String = <iterator>.next()
+      konst s: String = <iterator>.next()
       continue
     }
   }
@@ -43,14 +43,14 @@ fun testForContinue1(ss: List<String>) {
 
 fun testForContinue2(ss: List<String>) {
   { // BLOCK
-    val <iterator>: Iterator<String> = ss.iterator()
+    konst <iterator>: Iterator<String> = ss.iterator()
     OUTER@ while (<iterator>.hasNext()) { // BLOCK
-      val s1: String = <iterator>.next()
+      konst s1: String = <iterator>.next()
       { // BLOCK
         { // BLOCK
-          val <iterator>: Iterator<String> = ss.iterator()
+          konst <iterator>: Iterator<String> = ss.iterator()
           INNER@ while (<iterator>.hasNext()) { // BLOCK
-            val s2: String = <iterator>.next()
+            konst s2: String = <iterator>.next()
             { // BLOCK
               continue@OUTER
               continue@INNER

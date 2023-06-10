@@ -1,9 +1,9 @@
 package
 
 public interface My {
-    public abstract val x: kotlin.Int
-    public open val y: kotlin.String
-    public abstract val z: kotlin.Double
+    public abstract konst x: kotlin.Int
+    public open konst y: kotlin.String
+    public abstract konst z: kotlin.Double
     public open fun bar(): kotlin.Unit
     public abstract fun baz(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

@@ -6,7 +6,7 @@ open class A {
 }
 
 class B : A() {
-    override <!VAR_OVERRIDDEN_BY_VAL!>val<!> a = 34
+    override <!VAR_OVERRIDDEN_BY_VAL!>konst<!> a = 34
 
     var b : Int
         <!REDUNDANT_MODIFIER_IN_GETTER!>public<!> get() = 23

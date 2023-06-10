@@ -15,16 +15,16 @@ interface IFoo {
     fun foo(): String
 }
 
-class A(val x: String, f: () -> IFoo = {
-    val y = "K"
+class A(konst x: String, f: () -> IFoo = {
+    konst y = "K"
     myRun {
-        val o = object: IFoo {
+        konst o = object: IFoo {
             override fun foo() = x + y
         }
         o
     }
 }) {
-    val foo: IFoo = f()
+    konst foo: IFoo = f()
 }
 
 fun box(): String {

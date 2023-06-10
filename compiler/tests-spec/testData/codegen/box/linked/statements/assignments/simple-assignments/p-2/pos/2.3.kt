@@ -14,7 +14,7 @@ import kotlin.reflect.KProperty
 var data = "FooBoo"
 
 fun box(): String {
-    val e = Example()
+    konst e = Example()
     e.p = data
     if ( e.p == data) return "OK"
     return "NOK"

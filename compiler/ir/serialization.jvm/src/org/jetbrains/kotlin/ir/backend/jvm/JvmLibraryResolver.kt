@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.library.metadata.resolver.KotlinLibraryResolveResult
 import org.jetbrains.kotlin.library.metadata.resolver.impl.libraryResolver
 import org.jetbrains.kotlin.util.Logger
 
-val jvmLibrariesProvidedByDefault = setOf("stdlib", "kotlin")
+konst jvmLibrariesProvidedByDefault = setOf("stdlib", "kotlin")
 
 class JvmLibraryResolver(
     repositories: List<String>,
@@ -42,10 +42,10 @@ class JvmLibraryResolver(
 
 // TODO: This is a temporary set of library resolver policies for jvm compiler.
 fun jvmResolveLibraries(libraries: List<String>, logger: Logger): KotlinLibraryResolveResult {
-    val unresolvedLibraries = libraries.map { UnresolvedLibrary(it, null) }
-    val libraryAbsolutePaths = libraries.map { File(it).absolutePath }
+    konst unresolvedLibraries = libraries.map { UnresolvedLibrary(it, null) }
+    konst libraryAbsolutePaths = libraries.map { File(it).absolutePath }
     // Configure the resolver to only work with absolute paths for now.
-    val libraryResolver = JvmLibraryResolver(
+    konst libraryResolver = JvmLibraryResolver(
         repositories = emptyList(),
         directLibs = libraryAbsolutePaths,
         distributionKlib = null,
@@ -53,7 +53,7 @@ fun jvmResolveLibraries(libraries: List<String>, logger: Logger): KotlinLibraryR
         skipCurrentDir = false,
         logger = logger
     ).libraryResolver()
-    val resolvedLibraries =
+    konst resolvedLibraries =
         libraryResolver.resolveWithDependencies(
             unresolvedLibraries = unresolvedLibraries,
             noStdLib = true,

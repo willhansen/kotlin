@@ -15,7 +15,7 @@ interface TestInterface<R> {
 }
 
 fun test() {
-    val ret = combined({ }) {
+    konst ret = combined({ }) {
         emit(1)
     }
 }

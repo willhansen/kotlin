@@ -18,5 +18,5 @@ public class JavaClass {
     private int getSomethingPrivate() { return 1; }
     int getSomethingPackage() { return 1; }
 
-    protected void setSomethingPublic(int value) {}
+    protected void setSomethingPublic(int konstue) {}
 }

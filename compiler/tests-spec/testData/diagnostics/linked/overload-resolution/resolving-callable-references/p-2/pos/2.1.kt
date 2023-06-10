@@ -27,7 +27,7 @@ interface C
 fun <T : C> process(call: (T) -> T, x: T): T = call.invoke(x)
 
 fun case1() {
-    val case = Case1()
+    konst case = Case1()
 
     <!DEBUG_INFO_EXPRESSION_TYPE("testsCase1.A")!>process(case::foo, A())<!>
     process(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction1<testsCase1.A, testsCase1.A>")!>case::foo<!>, A())

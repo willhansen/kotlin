@@ -4,7 +4,7 @@
 
 package test
 
-inline class S(val string: String)
+inline class S(konst string: String)
 
 inline fun foo() = S("OK")
 

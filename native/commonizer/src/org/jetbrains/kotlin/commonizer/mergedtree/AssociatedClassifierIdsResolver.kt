@@ -38,8 +38,8 @@ internal interface AssociatedClassifierIdsResolverCache {
     }
 
     private class Default : AssociatedClassifierIdsResolverCache {
-        private val cachedResults = THashMap<CirEntityId, AssociatedClassifierIds>()
-        private val cachedNullResults = THashSet<CirEntityId>()
+        private konst cachedResults = THashMap<CirEntityId, AssociatedClassifierIds>()
+        private konst cachedNullResults = THashSet<CirEntityId>()
 
         override fun set(id: CirEntityId, result: AssociatedClassifierIds?) {
             if (result == null) cachedNullResults.add(id)
@@ -58,31 +58,31 @@ internal interface AssociatedClassifierIdsResolverCache {
 }
 
 private class AssociatedClassifierIdsResolverImpl(
-    private val classifierIndices: TargetDependent<CirClassifierIndex>,
-    private val targetDependencies: TargetDependent<CirProvidedClassifiers>,
-    private val commonDependencies: CirProvidedClassifiers,
-    private val cache: AssociatedClassifierIdsResolverCache
+    private konst classifierIndices: TargetDependent<CirClassifierIndex>,
+    private konst targetDependencies: TargetDependent<CirProvidedClassifiers>,
+    private konst commonDependencies: CirProvidedClassifiers,
+    private konst cache: AssociatedClassifierIdsResolverCache
 ) : AssociatedClassifierIdsResolver {
 
     override fun resolveAssociatedIds(id: CirEntityId): AssociatedClassifierIds? {
         cache[id]?.let { return it }
 
-        val results = THashSet<CirEntityId>()
+        konst results = THashSet<CirEntityId>()
 
         /* Set of every classifier id that once was enqueued already */
-        val visited = THashSet<CirEntityId>()
+        konst visited = THashSet<CirEntityId>()
 
         /* Actual, current queue of classifiers to resolve */
-        val queue = ArrayDeque<CirEntityId>()
+        konst queue = ArrayDeque<CirEntityId>()
 
         visited.add(id)
         queue.add(id)
 
         while (queue.isNotEmpty()) {
-            val nextClassifierId = queue.removeFirst()
+            konst nextClassifierId = queue.removeFirst()
 
             /* Either CirClassifier or CirProvided.Classifier or null */
-            val foundClassifiers = classifierIndices.targets.associateWith { index ->
+            konst foundClassifiers = classifierIndices.targets.associateWith { index ->
                 classifierIndices[index].findClassifier(nextClassifierId)
                     ?: targetDependencies[index].classifier(nextClassifierId)
                     ?: commonDependencies.classifier(nextClassifierId)
@@ -130,7 +130,7 @@ private class AssociatedClassifierIdsResolverImpl(
             }
         }
 
-        val result = if (results.isNotEmpty()) AssociatedClassifierIds(results) else null
+        konst result = if (results.isNotEmpty()) AssociatedClassifierIds(results) else null
         visited.forEach { visitedId -> cache[visitedId] = result }
         return result
     }

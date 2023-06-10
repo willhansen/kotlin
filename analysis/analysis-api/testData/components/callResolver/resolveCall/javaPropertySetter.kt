@@ -1,6 +1,6 @@
 // FILE: call.kt
 fun call() {
-    val javaClass = JavaClass()
+    konst javaClass = JavaClass()
     javaClass.<expr>foo</expr> = 42
 }
 

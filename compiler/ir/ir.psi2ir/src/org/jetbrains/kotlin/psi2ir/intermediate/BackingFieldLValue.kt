@@ -25,13 +25,13 @@ import org.jetbrains.kotlin.ir.symbols.IrFieldSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 internal class BackingFieldLValue(
-    private val context: IrGeneratorContext,
-    private val startOffset: Int,
-    private val endOffset: Int,
-    override val type: IrType,
-    private val symbol: IrFieldSymbol,
-    private val receiver: IntermediateValue?,
-    private val origin: IrStatementOrigin?
+    private konst context: IrGeneratorContext,
+    private konst startOffset: Int,
+    private konst endOffset: Int,
+    override konst type: IrType,
+    private konst symbol: IrFieldSymbol,
+    private konst receiver: IntermediateValue?,
+    private konst origin: IrStatementOrigin?
 ) : LValue, AssignmentReceiver {
 
     override fun store(irExpression: IrExpression): IrExpression =

@@ -4,7 +4,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val value: String)
+konstue class A(konst konstue: String)
 
 fun interface B {
     fun f(x: A): A
@@ -15,6 +15,6 @@ inline fun g(unit: Unit = Unit, b: B): A {
 }
 
 fun box(): String {
-    val b = { _ : A -> A("O") }
-    return g(b = b).value + g { A("K") }.value
+    konst b = { _ : A -> A("O") }
+    return g(b = b).konstue + g { A("K") }.konstue
 }

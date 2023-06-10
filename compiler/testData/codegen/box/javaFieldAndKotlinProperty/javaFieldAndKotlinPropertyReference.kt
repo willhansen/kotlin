@@ -9,10 +9,10 @@ public class BaseJava {
 
 // FILE: Derived.kt
 class Derived : BaseJava() {
-    private val a = "FAIL"
+    private konst a = "FAIL"
 }
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     return d::a.get()
 }

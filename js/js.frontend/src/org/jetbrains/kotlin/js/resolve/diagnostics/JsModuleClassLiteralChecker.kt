@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.types.expressions.ClassLiteralChecker
 
 object JsModuleClassLiteralChecker : ClassLiteralChecker {
     override fun check(expression: KtClassLiteralExpression, type: KotlinType, context: ResolutionContext<*>) {
-        val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return
+        konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return
         checkJsModuleUsage(context.trace.bindingContext, context.trace, context.scope.ownerDescriptor, descriptor, expression)
     }
 }

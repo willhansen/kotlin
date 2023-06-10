@@ -8,7 +8,7 @@ FILE fqName:<root> fileName:/Derived.kt
     PROPERTY name:a visibility:public modality:FINAL [var]
       FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:private
         EXPRESSION_BODY
-          CONST String type=kotlin.String value="OK"
+          CONST String type=kotlin.String konstue="OK"
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> ($this:<root>.Derived) returnType:kotlin.String
         correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [var]
         $this: VALUE_PARAMETER name:<this> type:<root>.Derived
@@ -23,7 +23,7 @@ FILE fqName:<root> fileName:/Derived.kt
         BLOCK_BODY
           SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:private' type=kotlin.Unit origin=null
             receiver: GET_VAR '<this>: <root>.Derived declared in <root>.Derived.<set-a>' type=<root>.Derived origin=null
-            value: GET_VAR '<set-?>: kotlin.String declared in <root>.Derived.<set-a>' type=kotlin.String origin=null
+            konstue: GET_VAR '<set-?>: kotlin.String declared in <root>.Derived.<set-a>' type=kotlin.String origin=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.BaseJava
@@ -39,18 +39,18 @@ FILE fqName:<root> fileName:/Derived.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
-      VAR name:first type:kotlin.String [val]
+      VAR name:first type:kotlin.String [konst]
         CALL 'public final fun <get-a> (): kotlin.String declared in <root>.Derived' type=kotlin.String origin=GET_PROPERTY
           $this: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.Derived' type=<root>.Derived origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: GET_VAR 'val first: kotlin.String declared in <root>.box' type=kotlin.String origin=null
-              arg1: CONST String type=kotlin.String value="OK"
+              arg0: GET_VAR 'konst first: kotlin.String declared in <root>.box' type=kotlin.String origin=null
+              arg1: CONST String type=kotlin.String konstue="OK"
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-            GET_VAR 'val first: kotlin.String declared in <root>.box' type=kotlin.String origin=null
-      VAR name:d type:<root>.Derived [val]
+            GET_VAR 'konst first: kotlin.String declared in <root>.box' type=kotlin.String origin=null
+      VAR name:d type:<root>.Derived [konst]
         CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.Derived' type=<root>.Derived origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
@@ -58,26 +58,26 @@ FILE fqName:<root> fileName:/Derived.kt
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
               arg0: CALL 'public abstract fun get (): V of kotlin.reflect.KMutableProperty0 declared in kotlin.reflect.KMutableProperty0' type=kotlin.String origin=null
                 $this: PROPERTY_REFERENCE 'public final a: kotlin.String' field=null getter='public final fun <get-a> (): kotlin.String declared in <root>.Derived' setter='public final fun <set-a> (<set-?>: kotlin.String): kotlin.Unit declared in <root>.Derived' type=kotlin.reflect.KMutableProperty0<kotlin.String> origin=null
-                  $this: GET_VAR 'val d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
-              arg1: CONST String type=kotlin.String value="OK"
+                  $this: GET_VAR 'konst d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
+              arg1: CONST String type=kotlin.String konstue="OK"
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
             CALL 'public abstract fun get (): V of kotlin.reflect.KMutableProperty0 declared in kotlin.reflect.KMutableProperty0' type=kotlin.String origin=null
               $this: PROPERTY_REFERENCE 'public final a: kotlin.String' field=null getter='public final fun <get-a> (): kotlin.String declared in <root>.Derived' setter='public final fun <set-a> (<set-?>: kotlin.String): kotlin.Unit declared in <root>.Derived' type=kotlin.reflect.KMutableProperty0<kotlin.String> origin=null
-                $this: GET_VAR 'val d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
+                $this: GET_VAR 'konst d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
       CALL 'public final fun <set-a> (<set-?>: kotlin.String): kotlin.Unit declared in <root>.Derived' type=kotlin.Unit origin=EQ
-        $this: GET_VAR 'val d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
-        <set-?>: CONST String type=kotlin.String value="12"
+        $this: GET_VAR 'konst d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
+        <set-?>: CONST String type=kotlin.String konstue="12"
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
               arg0: CALL 'public final fun <get-a> (): kotlin.String declared in <root>.Derived' type=kotlin.String origin=GET_PROPERTY
-                $this: GET_VAR 'val d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
-              arg1: CONST String type=kotlin.String value="12"
+                $this: GET_VAR 'konst d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
+              arg1: CONST String type=kotlin.String konstue="12"
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
             STRING_CONCATENATION type=kotlin.String
-              CONST String type=kotlin.String value="Error writing: "
+              CONST String type=kotlin.String konstue="Error writing: "
               CALL 'public final fun <get-a> (): kotlin.String declared in <root>.Derived' type=kotlin.String origin=GET_PROPERTY
-                $this: GET_VAR 'val d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
+                $this: GET_VAR 'konst d: <root>.Derived declared in <root>.box' type=<root>.Derived origin=null
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK"
+        CONST String type=kotlin.String konstue="OK"

@@ -2,17 +2,17 @@
 // ISSUE: KT-57958
 
 fun ListVM<*>.foo() {
-    val currentItem1: MutableProperty<out ListItemVM<*>?> = currentItem
+    konst currentItem1: MutableProperty<out ListItemVM<*>?> = currentItem
 }
 
 interface MutableProperty<T> {
-    var value: T
+    var konstue: T
 }
 
 interface ListItemVM<out TItem> {
-    val value: TItem
+    konst konstue: TItem
 }
 
 interface ListVM<TItemVM : ListItemVM<*>> {
-    val currentItem: MutableProperty<TItemVM?>
+    konst currentItem: MutableProperty<TItemVM?>
 }

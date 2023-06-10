@@ -1,25 +1,25 @@
 package
 
-public val testExclExcl1: kotlin.String
-public val testExclExcl2: kotlin.String?
-public val testExclExcl3: kotlin.String
-public val testExclExcl4: kotlin.String?
-public val testIf1: kotlin.String
-public val testIf2: kotlin.String?
-public val testIf3: kotlin.String
-public val testIf4: kotlin.String?
-public val testImplicitExclExcl1: kotlin.String
-public val testImplicitExclExcl2: kotlin.String?
-public val testImplicitExclExcl3: kotlin.String
-public val testImplicitExclExcl4: kotlin.String?
-public val testSafeCall1: kotlin.String
-public val testSafeCall2: kotlin.String?
-public val testSafeCall3: kotlin.String
-public val testSafeCall4: kotlin.String?
-public val testWhen1: kotlin.String
-public val testWhen2: kotlin.String?
-public val testWhen3: kotlin.String
-public val testWhen4: kotlin.String?
+public konst testExclExcl1: kotlin.String
+public konst testExclExcl2: kotlin.String?
+public konst testExclExcl3: kotlin.String
+public konst testExclExcl4: kotlin.String?
+public konst testIf1: kotlin.String
+public konst testIf2: kotlin.String?
+public konst testIf3: kotlin.String
+public konst testIf4: kotlin.String?
+public konst testImplicitExclExcl1: kotlin.String
+public konst testImplicitExclExcl2: kotlin.String?
+public konst testImplicitExclExcl3: kotlin.String
+public konst testImplicitExclExcl4: kotlin.String?
+public konst testSafeCall1: kotlin.String
+public konst testSafeCall2: kotlin.String?
+public konst testSafeCall3: kotlin.String
+public konst testSafeCall4: kotlin.String?
+public konst testWhen1: kotlin.String
+public konst testWhen2: kotlin.String?
+public konst testWhen3: kotlin.String
+public konst testWhen4: kotlin.String?
 
 public open class J {
     public constructor J()

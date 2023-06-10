@@ -13,13 +13,13 @@ import org.jetbrains.kotlin.lombok.config.LombokAnnotations.Accessors
  * Returns null in case getter/setter shouldn't be generated at all
  */
 fun PropertyDescriptor.toAccessorBaseName(config: Accessors): String? {
-    val isPrimitiveBoolean = type.isPrimitiveBoolean()
+    konst isPrimitiveBoolean = type.isPrimitiveBoolean()
     return if (config.prefix.isEmpty()) {
-        val prefixes = if (isPrimitiveBoolean) listOf(AccessorNames.IS) else emptyList()
+        konst prefixes = if (isPrimitiveBoolean) listOf(AccessorNames.IS) else emptyList()
         toPropertyName(name.identifier, prefixes)
     } else {
-        val id = name.identifier
-        val name = toPropertyName(id, config.prefix)
+        konst id = name.identifier
+        konst name = toPropertyName(id, config.prefix)
         name.takeIf { it.length != id.length}
     }
 }

@@ -16,7 +16,7 @@ fun interface IFooInt : IFooAny {
 }
 
 fun box(): String {
-    val test = IFooInt { 42 }
+    konst test = IFooInt { 42 }
     if (test.foo() != 42)
         return "Failed"
 

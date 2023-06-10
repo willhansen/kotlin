@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KFunction0
 
 inline fun <reified T> test(kFunction: KFunction0<Unit>, test: T.() -> String): String {
-    val annotation = kFunction.annotations.single() as T
+    konst annotation = kFunction.annotations.single() as T
     return annotation.test()
 }
 
@@ -16,11 +16,11 @@ fun check(b: Boolean, message: String) {
 }
 
 annotation class Foo(
-        val a: IntArray = [],
-        val b: IntArray = [1, 2, 3],
-        val c: Array<String> = ["/"],
-        val d: Array<KClass<*>> = [Int::class, Array<Int>::class],
-        val e: DoubleArray = [1.0]
+        konst a: IntArray = [],
+        konst b: IntArray = [1, 2, 3],
+        konst c: Array<String> = ["/"],
+        konst d: Array<KClass<*>> = [Int::class, Array<Int>::class],
+        konst e: DoubleArray = [1.0]
 )
 
 @Foo

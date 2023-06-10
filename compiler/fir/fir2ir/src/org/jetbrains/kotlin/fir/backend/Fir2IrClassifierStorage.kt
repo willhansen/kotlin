@@ -41,28 +41,28 @@ import org.jetbrains.kotlin.utils.addToStdlib.runIf
 import org.jetbrains.kotlin.utils.addToStdlib.runUnless
 
 class Fir2IrClassifierStorage(
-    private val components: Fir2IrComponents,
+    private konst components: Fir2IrComponents,
     commonMemberStorage: Fir2IrCommonMemberStorage
 ) : Fir2IrComponents by components {
-    private val firProvider = session.firProvider
+    private konst firProvider = session.firProvider
 
-    private val classCache: MutableMap<FirRegularClass, IrClass> = commonMemberStorage.classCache
+    private konst classCache: MutableMap<FirRegularClass, IrClass> = commonMemberStorage.classCache
 
-    private val localClassesCreatedOnTheFly: MutableMap<FirClass, IrClass> = mutableMapOf()
+    private konst localClassesCreatedOnTheFly: MutableMap<FirClass, IrClass> = mutableMapOf()
 
     private var processMembersOfClassesOnTheFlyImmediately = false
 
-    private val typeAliasCache: MutableMap<FirTypeAlias, IrTypeAlias> = mutableMapOf()
+    private konst typeAliasCache: MutableMap<FirTypeAlias, IrTypeAlias> = mutableMapOf()
 
-    private val typeParameterCache: MutableMap<FirTypeParameter, IrTypeParameter> = commonMemberStorage.typeParameterCache
+    private konst typeParameterCache: MutableMap<FirTypeParameter, IrTypeParameter> = commonMemberStorage.typeParameterCache
 
-    private val typeParameterCacheForSetter: MutableMap<FirTypeParameter, IrTypeParameter> = mutableMapOf()
+    private konst typeParameterCacheForSetter: MutableMap<FirTypeParameter, IrTypeParameter> = mutableMapOf()
 
-    private val enumEntryCache: MutableMap<FirEnumEntry, IrEnumEntry> = commonMemberStorage.enumEntryCache
+    private konst enumEntryCache: MutableMap<FirEnumEntry, IrEnumEntry> = commonMemberStorage.enumEntryCache
 
-    private val fieldsForContextReceivers: MutableMap<IrClass, List<IrField>> = mutableMapOf()
+    private konst fieldsForContextReceivers: MutableMap<IrClass, List<IrField>> = mutableMapOf()
 
-    private val localStorage: Fir2IrLocalClassStorage = Fir2IrLocalClassStorage(
+    private konst localStorage: Fir2IrLocalClassStorage = Fir2IrLocalClassStorage(
         // Using existing cache is necessary here to be able to serialize local classes from common code in expression codegen
         commonMemberStorage.localClassCache
     )
@@ -72,16 +72,16 @@ class Fir2IrClassifierStorage(
 
     fun preCacheBuiltinClasses() {
         for ((classId, irBuiltinSymbol) in typeConverter.classIdToSymbolMap) {
-            val firClass = classId.toSymbol(session)!!.fir as FirRegularClass
-            val irClass = irBuiltinSymbol.owner
+            konst firClass = classId.toSymbol(session)!!.fir as FirRegularClass
+            konst irClass = irBuiltinSymbol.owner
             classCache[firClass] = irClass
             processClassHeader(firClass, irClass)
             declarationStorage.preCacheBuiltinClassMembers(firClass, irClass)
         }
         for ((primitiveClassId, primitiveArrayId) in StandardClassIds.primitiveArrayTypeByElementType) {
-            val firClass = primitiveArrayId.toLookupTag().toSymbol(session)!!.fir as FirRegularClass
-            val irType = typeConverter.classIdToTypeMap[primitiveClassId]
-            val irClass = irBuiltIns.primitiveArrayForType[irType]!!.owner
+            konst firClass = primitiveArrayId.toLookupTag().toSymbol(session)!!.fir as FirRegularClass
+            konst irType = typeConverter.classIdToTypeMap[primitiveClassId]
+            konst irClass = irBuiltIns.primitiveArrayForType[irType]!!.owner
             classCache[firClass] = irClass
             processClassHeader(firClass, irClass)
             declarationStorage.preCacheBuiltinClassMembers(firClass, irClass)
@@ -91,7 +91,7 @@ class Fir2IrClassifierStorage(
     // Note: declareTypeParameters should be called before!
     private fun IrClass.setThisReceiver(typeParameters: List<FirTypeParameterRef>) {
         symbolTable.enterScope(this)
-        val typeArguments = typeParameters.map {
+        konst typeArguments = typeParameters.map {
             IrSimpleTypeImpl(getIrTypeParameterSymbol(it.symbol, ConversionTypeContext.DEFAULT), false, emptyList(), emptyList())
         }
         thisReceiver = declareThisReceiverParameter(
@@ -103,11 +103,11 @@ class Fir2IrClassifierStorage(
 
     internal fun preCacheTypeParameters(owner: FirTypeParameterRefsOwner, irOwnerSymbol: IrSymbol) {
         for ((index, typeParameter) in owner.typeParameters.withIndex()) {
-            val original = typeParameter.symbol.fir
+            konst original = typeParameter.symbol.fir
             getCachedIrTypeParameter(original)
                 ?: createIrTypeParameterWithoutBounds(original, index, irOwnerSymbol)
             if (owner is FirProperty && owner.isVar) {
-                val context = ConversionTypeContext.IN_SETTER
+                konst context = ConversionTypeContext.IN_SETTER
                 getCachedIrTypeParameter(original, context)
                     ?: createIrTypeParameterWithoutBounds(original, index, irOwnerSymbol, context)
             }
@@ -133,7 +133,7 @@ class Fir2IrClassifierStorage(
         preCacheTypeParameters(klass, symbol)
         setTypeParameters(klass)
         if (klass is FirRegularClass) {
-            val fieldsForContextReceiversOfCurrentClass = createContextReceiverFields(klass)
+            konst fieldsForContextReceiversOfCurrentClass = createContextReceiverFields(klass)
             if (fieldsForContextReceiversOfCurrentClass.isNotEmpty()) {
                 declarations.addAll(fieldsForContextReceiversOfCurrentClass)
                 fieldsForContextReceivers[this] = fieldsForContextReceiversOfCurrentClass
@@ -144,9 +144,9 @@ class Fir2IrClassifierStorage(
     fun IrClass.createContextReceiverFields(klass: FirRegularClass): List<IrField> {
         if (klass.contextReceivers.isEmpty()) return emptyList()
 
-        val contextReceiverFields = mutableListOf<IrField>()
+        konst contextReceiverFields = mutableListOf<IrField>()
         for ((index, contextReceiver) in klass.contextReceivers.withIndex()) {
-            val irField = components.irFactory.createField(
+            konst irField = components.irFactory.createField(
                 UNDEFINED_OFFSET, UNDEFINED_OFFSET,
                 IrDeclarationOrigin.FIELD_FOR_CLASS_CONTEXT_RECEIVER,
                 IrFieldSymbolImpl(),
@@ -172,7 +172,7 @@ class Fir2IrClassifierStorage(
 
     private fun IrClass.declareValueClassRepresentation(klass: FirRegularClass) {
         if (this !is Fir2IrLazyClass) {
-            valueClassRepresentation = computeValueClassRepresentation(klass)
+            konstueClassRepresentation = computeValueClassRepresentation(klass)
         }
     }
 
@@ -208,8 +208,8 @@ class Fir2IrClassifierStorage(
     }
 
     private fun FirRegularClass.hasAbstractMembersInScope(): Boolean {
-        val scope = unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = false, memberRequiredPhase = null)
-        val names = scope.getCallableNames()
+        konst scope = unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = false, memberRequiredPhase = null)
+        konst names = scope.getCallableNames()
         var hasAbstract = false
         for (name in names) {
             scope.processFunctionsByName(name) {
@@ -232,17 +232,17 @@ class Fir2IrClassifierStorage(
     // This can happen e.g. when implicit return type has a local class constructor
     private fun createLocalIrClassOnTheFly(klass: FirClass): IrClass {
         // finding the parent class that actually contains the [klass] in the tree - it is the root one that should be created on the fly
-        val classOrLocalParent = generateSequence(klass) { c ->
+        konst classOrLocalParent = generateSequence(klass) { c ->
             (c as? FirRegularClass)?.containingClassForLocalAttr?.let { lookupTag ->
                 (firProvider.symbolProvider.getSymbolByLookupTag(lookupTag)?.fir as? FirClass)?.takeIf {
                     it.declarations.contains(c)
                 }
             }
         }.last()
-        val result = converter.processLocalClassAndNestedClassesOnTheFly(classOrLocalParent, temporaryParent)
+        konst result = converter.processLocalClassAndNestedClassesOnTheFly(classOrLocalParent, temporaryParent)
         // Note: usually member creation and f/o binding is delayed till non-local classes are processed in Fir2IrConverter
         // If non-local classes are already created (this means we are in body translation) we do everything immediately
-        // The last variant is possible for local variables like 'val a = object : Any() { ... }'
+        // The last variant is possible for local variables like 'konst a = object : Any() { ... }'
         if (processMembersOfClassesOnTheFlyImmediately) {
             processMembersOfClassCreatedOnTheFly(classOrLocalParent, result)
             converter.bindFakeOverridesInClass(result)
@@ -263,11 +263,11 @@ class Fir2IrClassifierStorage(
             processMembersOfClassCreatedOnTheFly(klass, irClass)
             // See the problem from KT-57441
 //            class Wrapper {
-//                private val dummy = object: Bar {}
-//                private val bar = object: Bar by dummy {}
+//                private konst dummy = object: Bar {}
+//                private konst bar = object: Bar by dummy {}
 //            }
 //            interface Bar {
-//                val foo: String
+//                konst foo: String
 //                    get() = ""
 //            }
             // When we are building bar.foo fake override, we should call dummy.foo,
@@ -304,11 +304,11 @@ class Fir2IrClassifierStorage(
         typeAlias: FirTypeAlias,
         parent: IrFile
     ): IrTypeAlias {
-        val signature = signatureComposer.composeSignature(typeAlias)
+        konst signature = signatureComposer.composeSignature(typeAlias)
         return typeAlias.convertWithOffsets { startOffset, endOffset ->
             declareIrTypeAlias(signature) { symbol ->
                 preCacheTypeParameters(typeAlias, symbol)
-                val irTypeAlias = irFactory.createTypeAlias(
+                konst irTypeAlias = irFactory.createTypeAlias(
                     startOffset, endOffset, symbol,
                     typeAlias.name, components.visibilityConverter.convertToDescriptorVisibility(typeAlias.visibility),
                     typeAlias.expandedTypeRef.toIrType(),
@@ -337,16 +337,16 @@ class Fir2IrClassifierStorage(
         parent: IrDeclarationParent,
         predefinedOrigin: IrDeclarationOrigin? = null
     ): IrClass {
-        val visibility = regularClass.visibility
-        val modality = when (regularClass.classKind) {
+        konst visibility = regularClass.visibility
+        konst modality = when (regularClass.classKind) {
             ClassKind.ENUM_CLASS -> regularClass.enumClassModality()
             ClassKind.ANNOTATION_CLASS -> Modality.OPEN
             else -> regularClass.modality ?: Modality.FINAL
         }
-        val signature = runUnless(regularClass.isLocal || !configuration.linkViaSignatures) {
+        konst signature = runUnless(regularClass.isLocal || !configuration.linkViaSignatures) {
             signatureComposer.composeSignature(regularClass)
         }
-        val irClass = regularClass.convertWithOffsets { startOffset, endOffset ->
+        konst irClass = regularClass.convertWithOffsets { startOffset, endOffset ->
             declareIrClass(signature) { symbol ->
                 irFactory.createClass(
                     startOffset,
@@ -384,9 +384,9 @@ class Fir2IrClassifierStorage(
         name: Name = Name.special("<no name provided>"),
         irParent: IrDeclarationParent? = null
     ): IrClass {
-        val origin = IrDeclarationOrigin.DEFINED
-        val modality = Modality.FINAL
-        val irAnonymousObject = anonymousObject.convertWithOffsets { startOffset, endOffset ->
+        konst origin = IrDeclarationOrigin.DEFINED
+        konst modality = Modality.FINAL
+        konst irAnonymousObject = anonymousObject.convertWithOffsets { startOffset, endOffset ->
             irFactory.createClass(
                 startOffset, endOffset, origin, IrClassSymbolImpl(), name,
                 // NB: for unknown reason, IR uses 'CLASS' kind for simple anonymous objects
@@ -405,7 +405,7 @@ class Fir2IrClassifierStorage(
 
     private fun getIrAnonymousObjectForEnumEntry(anonymousObject: FirAnonymousObject, name: Name, irParent: IrClass?): IrClass {
         localStorage[anonymousObject]?.let { return it }
-        val irAnonymousObject = registerIrAnonymousObject(anonymousObject, Visibilities.Private, name, irParent)
+        konst irAnonymousObject = registerIrAnonymousObject(anonymousObject, Visibilities.Private, name, irParent)
         processClassHeader(anonymousObject, irAnonymousObject)
         return irAnonymousObject
     }
@@ -417,8 +417,8 @@ class Fir2IrClassifierStorage(
         typeContext: ConversionTypeContext = ConversionTypeContext.DEFAULT,
     ): IrTypeParameter {
         require(index >= 0)
-        val origin = typeParameter.computeIrOrigin()
-        val irTypeParameter = with(typeParameter) {
+        konst origin = typeParameter.computeIrOrigin()
+        konst irTypeParameter = with(typeParameter) {
             convertWithOffsets { startOffset, endOffset ->
                 signatureComposer.composeTypeParameterSignature(
                     typeParameter, index, ownerSymbol.signature
@@ -486,7 +486,7 @@ class Fir2IrClassifierStorage(
     ): IrTypeParameter {
         getCachedIrTypeParameter(typeParameter, typeContext)?.let { return it }
         return typeParameter.run {
-            val irTypeParameter = createIrTypeParameterWithoutBounds(typeParameter, index, ownerSymbol, typeContext)
+            konst irTypeParameter = createIrTypeParameterWithoutBounds(typeParameter, index, ownerSymbol, typeContext)
             irTypeParameter.superTypes = bounds.map { it.toIrType() }
             irTypeParameter
         }
@@ -511,10 +511,10 @@ class Fir2IrClassifierStorage(
         forceTopLevelPrivate: Boolean = false,
     ): IrEnumEntry {
         getCachedIrEnumEntry(enumEntry)?.let { return it }
-        val containingFile = firProvider.getFirCallableContainerFile(enumEntry.symbol)
+        konst containingFile = firProvider.getFirCallableContainerFile(enumEntry.symbol)
 
         @Suppress("NAME_SHADOWING")
-        val predefinedOrigin = predefinedOrigin ?: if (containingFile != null) {
+        konst predefinedOrigin = predefinedOrigin ?: if (containingFile != null) {
             IrDeclarationOrigin.DEFINED
         } else {
             irParent.origin
@@ -531,7 +531,7 @@ class Fir2IrClassifierStorage(
         return if (lookupTag.classId.isLocal) {
             getCachedLocalClass(lookupTag)
         } else {
-            val firSymbol = lookupTag.toSymbol(session)
+            konst firSymbol = lookupTag.toSymbol(session)
             if (firSymbol is FirClassSymbol) {
                 getIrClassSymbol(firSymbol).owner
             } else {
@@ -547,9 +547,9 @@ class Fir2IrClassifierStorage(
         forceTopLevelPrivate: Boolean = false,
     ): IrEnumEntry {
         return enumEntry.convertWithOffsets { startOffset, endOffset ->
-            val signature = signatureComposer.composeSignature(enumEntry, forceTopLevelPrivate = forceTopLevelPrivate)
-            val result = declareIrEnumEntry(signature) { symbol ->
-                val origin = enumEntry.computeIrOrigin(predefinedOrigin)
+            konst signature = signatureComposer.composeSignature(enumEntry, forceTopLevelPrivate = forceTopLevelPrivate)
+            konst result = declareIrEnumEntry(signature) { symbol ->
+                konst origin = enumEntry.computeIrOrigin(predefinedOrigin)
                 irFactory.createEnumEntry(
                     startOffset, endOffset, origin, symbol, enumEntry.name
                 ).apply {
@@ -561,7 +561,7 @@ class Fir2IrClassifierStorage(
                         // An enum entry with its own members requires an anonymous object generated.
                         // Otherwise, this is a default-ish enum entry whose initializer would be a delegating constructor call,
                         // which will be translated via visitor later.
-                        val klass = getIrAnonymousObjectForEnumEntry(
+                        konst klass = getIrAnonymousObjectForEnumEntry(
                             (enumEntry.initializer as FirAnonymousObjectExpression).anonymousObject, enumEntry.name, irParent
                         )
                         this.correspondingClass = klass
@@ -575,29 +575,29 @@ class Fir2IrClassifierStorage(
     }
 
     private fun isEnumEntryWhichRequiresSubclass(enumEntry: FirEnumEntry): Boolean {
-        val initializer = enumEntry.initializer
+        konst initializer = enumEntry.initializer
         return initializer is FirAnonymousObjectExpression && initializer.anonymousObject.declarations.any { it !is FirConstructor }
     }
 
     fun getIrClassSymbol(firClassSymbol: FirClassSymbol<*>, forceTopLevelPrivate: Boolean = false): IrClassSymbol {
-        val firClass = firClassSymbol.fir
+        konst firClass = firClassSymbol.fir
         getCachedIrClass(firClass)?.let { return it.symbol }
         if (firClass is FirAnonymousObject || firClass is FirRegularClass && firClass.visibility == Visibilities.Local) {
             return createLocalIrClassOnTheFly(firClass).symbol
         }
         firClass as FirRegularClass
-        val classId = firClassSymbol.classId
-        val parentId = classId.outerClassId
-        val parentClass = parentId?.let { session.symbolProvider.getClassLikeSymbolByClassId(it) }
-        val irParent = declarationStorage.findIrParent(classId.packageFqName, parentClass?.toLookupTag(), firClassSymbol, firClass.origin)!!
+        konst classId = firClassSymbol.classId
+        konst parentId = classId.outerClassId
+        konst parentClass = parentId?.let { session.symbolProvider.getClassLikeSymbolByClassId(it) }
+        konst irParent = declarationStorage.findIrParent(classId.packageFqName, parentClass?.toLookupTag(), firClassSymbol, firClass.origin)!!
 
         // firClass may be referenced by some parent's type parameters as a bound. In that case, getIrClassSymbol will be called recursively.
         getCachedIrClass(firClass)?.let { return it.symbol }
 
-        val signature = runIf(configuration.linkViaSignatures) {
+        konst signature = runIf(configuration.linkViaSignatures) {
             signatureComposer.composeSignature(firClass, forceTopLevelPrivate = forceTopLevelPrivate)
         }
-        val irClass = firClass.convertWithOffsets { startOffset, endOffset ->
+        konst irClass = firClass.convertWithOffsets { startOffset, endOffset ->
             declareIrClass(signature) { irClassSymbol ->
                 Fir2IrLazyClass(components, startOffset, endOffset, firClass.irOrigin(firProvider), firClass, irClassSymbol).apply {
                     parent = irParent
@@ -612,14 +612,14 @@ class Fir2IrClassifierStorage(
     }
 
     fun getIrClassSymbolForNotFoundClass(classLikeLookupTag: ConeClassLikeLookupTag): IrClassSymbol {
-        val classId = classLikeLookupTag.classId
-        val signature = IdSignature.CommonSignature(
+        konst classId = classLikeLookupTag.classId
+        konst signature = IdSignature.CommonSignature(
             classId.packageFqName.asString(), classId.relativeClassName.asString(), 0, 0,
         )
 
-        val parentId = classId.outerClassId
-        val parentClass = parentId?.let { getIrClassSymbolForNotFoundClass(it.toLookupTag()) }
-        val irParent = parentClass?.owner ?: declarationStorage.getIrExternalPackageFragment(classId.packageFqName)
+        konst parentId = classId.outerClassId
+        konst parentClass = parentId?.let { getIrClassSymbolForNotFoundClass(it.toLookupTag()) }
+        konst irParent = parentClass?.owner ?: declarationStorage.getIrExternalPackageFragment(classId.packageFqName)
 
         return symbolTable.referenceClass(signature, { Fir2IrClassSymbol(signature) }) {
             irFactory.createClass(
@@ -635,14 +635,14 @@ class Fir2IrClassifierStorage(
         firTypeParameterSymbol: FirTypeParameterSymbol,
         typeContext: ConversionTypeContext
     ): IrTypeParameterSymbol {
-        val firTypeParameter = firTypeParameterSymbol.fir
+        konst firTypeParameter = firTypeParameterSymbol.fir
         return getCachedIrTypeParameter(firTypeParameter, typeContext)?.symbol
         // We can try to use default cache because setter can use parent type parameters
             ?: typeParameterCache[firTypeParameter]?.symbol
             ?: error("Cannot find cached type parameter by FIR symbol: ${firTypeParameterSymbol.name}")
     }
 
-    private val temporaryParent by lazy {
+    private konst temporaryParent by lazy {
         irFactory.createFunction(
             startOffset = UNDEFINED_OFFSET, endOffset = UNDEFINED_OFFSET,
             IrDeclarationOrigin.DEFINED, IrSimpleFunctionSymbolImpl(),

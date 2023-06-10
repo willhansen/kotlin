@@ -7,21 +7,21 @@
 // FILE: javaDefaultMethod.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class K(val k: String) : J {
+konstue class K(konst k: String) : J {
     override fun get2() = k
 }
 
 fun box(): String {
-    val k = K("K")
+    konst k = K("K")
 
-    val test1 = k.get1() + k.get2()
+    konst test1 = k.get1() + k.get2()
     if (test1 != "OK") throw AssertionError("test1: $test1")
 
-    val j: J = k
-    val test2 = j.get1() + j.get2()
+    konst j: J = k
+    konst test2 = j.get1() + j.get2()
     if (test2 != "OK") throw AssertionError("test2: $test2")
 
-    val test3 = JT.test(k)
+    konst test3 = JT.test(k)
     if (test3 != "OK") throw AssertionError("test3: $test3")
 
     return "OK"

@@ -32,7 +32,7 @@ fun <E> select3(x: E?, y: Out<E?>): E = x!!
 fun <E> select4(x: E?, y: Out<E>): E = x!!
 
 fun test() {
-    val ret = build {
+    konst ret = build {
         emit("1")
         select1(get(), getOut())
         select1(get(), Test.foo(getOut()))

@@ -13,17 +13,17 @@
  * expressions, constant-literals, character-literals -> paragraph 4 -> sentence 1
  * expressions, constant-literals, character-literals -> paragraph 6 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: A character literal defines a constant holding a unicode character value
+ * DESCRIPTION: A character literal defines a constant holding a unicode character konstue
  * HELPERS: checkType
  */
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val c = ' ' //u+0020
+    konst c = ' ' //u+0020
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Char")!>c<!>
     c checkType { check<Char>()}
 
-    val cMax = '￿' //u+ffff
+    konst cMax = '￿' //u+ffff
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Char")!>cMax<!>
     cMax checkType { check<Char>()}
 }

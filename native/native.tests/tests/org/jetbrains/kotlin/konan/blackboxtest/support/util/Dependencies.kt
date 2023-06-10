@@ -15,9 +15,9 @@ internal fun <N : Any> StorageManager.lazyNeighbors(
     computeNeighbors: (N) -> Set<N>,
     describe: (N) -> String = { it.toString() }
 ): ReadOnlyProperty<N, Set<N>> = object : ReadOnlyProperty<N, Set<N>> {
-    private val lazyValue: NotNullLazyValue<Set<N>> = this@lazyNeighbors.createLazyValue(
+    private konst lazyValue: NotNullLazyValue<Set<N>> = this@lazyNeighbors.createLazyValue(
         computable = {
-            val neighbors = directNeighbors()
+            konst neighbors = directNeighbors()
             if (neighbors.isEmpty())
                 emptySet()
             else
@@ -36,11 +36,11 @@ internal fun <N : Any> StorageManager.lazyNeighbors(
 }
 
 private class CyclicNeighborsException : Exception() {
-    private val backtrace = mutableListOf<String>()
+    private konst backtrace = mutableListOf<String>()
 
     fun trace(element: String) = apply { backtrace += element }
 
-    override val message
+    override konst message
         get() = buildString {
             appendLine("Cyclic neighbors detected. Backtrace (${backtrace.size} elements):")
             backtrace.joinTo(this, separator = "\n")

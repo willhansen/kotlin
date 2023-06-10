@@ -30,13 +30,13 @@ public class J {
 
 fun test() {
     // @NotNull platform type
-    val platformNN = J.staticNN
+    konst platformNN = J.staticNN
     // @Nullable platform type
-    val platformN = J.staticN
+    konst platformN = J.staticN
     // platform type with no annotation
-    val platformJ = J.staticJ
+    konst platformJ = J.staticJ
 
-    val v0 = platformNN <!USELESS_ELVIS!>?: J()<!>
+    konst v0 = platformNN <!USELESS_ELVIS!>?: J()<!>
     platformNN <!USELESS_ELVIS!>?: J()<!>
     platformN ?: J()
     platformJ ?: J()
@@ -60,8 +60,8 @@ fun test() {
     takeNotNull(J.getNNAny() <!USELESS_ELVIS!>?: J()<!>)
     takeNotNull(J.getNAny() ?: J())
 
-    val x = <!UNRESOLVED_REFERENCE!>unresolved<!> ?: null
-    <!UNREACHABLE_CODE!>val y =<!> <!UNRESOLVED_REFERENCE!>unresolved<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!> ?: return
+    konst x = <!UNRESOLVED_REFERENCE!>unresolved<!> ?: null
+    <!UNREACHABLE_CODE!>konst y =<!> <!UNRESOLVED_REFERENCE!>unresolved<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!> ?: return
 }
 
 fun takeNotNull(s: J) {}

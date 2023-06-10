@@ -13,10 +13,10 @@
  */
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Boolean, value_2: Boolean, value_3: Long) {
-    when (value_1) {
-        value_2, !value_2, <!CONFUSING_BRANCH_CONDITION_ERROR!>getBoolean() && value_2<!>, <!CONFUSING_BRANCH_CONDITION_ERROR!>getChar() != 'a'<!> -> {}
-            <!CONFUSING_BRANCH_CONDITION_ERROR!>getList() === getAny()<!>, <!CONFUSING_BRANCH_CONDITION_ERROR!>value_3 <= 11<!> -> {}
+fun case_1(konstue_1: Boolean, konstue_2: Boolean, konstue_3: Long) {
+    when (konstue_1) {
+        konstue_2, !konstue_2, <!CONFUSING_BRANCH_CONDITION_ERROR!>getBoolean() && konstue_2<!>, <!CONFUSING_BRANCH_CONDITION_ERROR!>getChar() != 'a'<!> -> {}
+            <!CONFUSING_BRANCH_CONDITION_ERROR!>getList() === getAny()<!>, <!CONFUSING_BRANCH_CONDITION_ERROR!>konstue_3 <= 11<!> -> {}
         else -> {}
     }
 }

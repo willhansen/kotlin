@@ -1,3 +1,3 @@
 fun test(set: Set<String?>) {
-    val filtered = set.filterNotNull()
+    konst filtered = set.filterNotNull()
 }

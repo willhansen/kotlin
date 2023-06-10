@@ -1,7 +1,7 @@
 var sideEffects: String = ""
 
 internal abstract class B {
-    val parentProp: String
+    konst parentProp: String
     init {
         sideEffects += "minus-one#"
     }
@@ -44,19 +44,19 @@ internal class A : B {
 }
 
 fun box(): String {
-    val a1 = A(5, 10)
+    konst a1 = A(5, 10)
     if (a1.prop != "5") return "fail0: ${a1.prop}"
     if (a1.parentProp != "15") return "fail1: ${a1.parentProp}"
     if (sideEffects != "minus-one#zero#0.7#first#second#third") return "fail2: ${sideEffects}"
 
     sideEffects = ""
-    val a2 = A(123)
+    konst a2 = A(123)
     if (a2.prop != "123#int") return "fail3: ${a2.prop}"
     if (a2.parentProp != "126") return "fail4: ${a2.parentProp}"
     if (sideEffects != "minus-one#zero#0.5#first#second#fourth") return "fail5: ${sideEffects}"
 
     sideEffects = ""
-    val a3 = A()
+    konst a3 = A()
     if (a3.prop != "7#int") return "fail6: ${a3.prop}"
     if (a3.parentProp != "10") return "fail7: ${a3.parentProp}"
     if (sideEffects != "minus-one#zero#0.5#first#second#fourth#fifth") return "fail8: ${sideEffects}"

@@ -1,3 +1,3 @@
-val x = <!UNINITIALIZED_VARIABLE!>y<!>
+konst x = <!UNINITIALIZED_VARIABLE!>y<!>
 
-val y = 2
+konst y = 2

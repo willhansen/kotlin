@@ -5,17 +5,17 @@ enum class EE : Enum<EE> {
 
   }
 
-  val myName: String
+  konst myName: String
     field = myName
     get
 
   ENTRY = EE()
 
-  fun values(): Array<EE> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<EE> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): EE /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): EE /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<EE>
+  konst entries: EnumEntries<EE>
     get(): EnumEntries<EE> /* Synthetic body for ENUM_ENTRIES */
 
 }

@@ -1,8 +1,8 @@
 package
 
-public val test1a: X1
-public val test1b: X1
-public val test1c: X2
+public konst test1a: X1
+public konst test1b: X1
+public konst test1c: X2
 public fun overloadedFun(/*0*/ arg: kotlin.String, /*1*/ vararg args: kotlin.String /*kotlin.Array<out kotlin.String>*/): X1
 public fun overloadedFun(/*0*/ arg: kotlin.String, /*1*/ vararg args: kotlin.String /*kotlin.Array<out kotlin.String>*/, /*2*/ flag: kotlin.Boolean = ...): X2
 

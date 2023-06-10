@@ -19,12 +19,12 @@ import org.junit.jupiter.api.condition.OS
 @NativeGradlePluginTests
 class JsSetupConfigurationCacheIT : KGPBaseTest() {
     @Suppress("DEPRECATION")
-    private val defaultJsOptions = BuildOptions.JsOptions(
+    private konst defaultJsOptions = BuildOptions.JsOptions(
         useIrBackend = true,
         jsCompilerType = KotlinJsCompilerType.IR
     )
 
-    override val defaultBuildOptions =
+    override konst defaultBuildOptions =
         super.defaultBuildOptions.copy(
             jsOptions = defaultJsOptions,
             configurationCache = true,

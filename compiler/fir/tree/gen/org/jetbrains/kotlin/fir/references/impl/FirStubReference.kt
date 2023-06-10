@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 object FirStubReference : FirReference() {
-    override val source: KtSourceElement? get() = null
+    override konst source: KtSourceElement? get() = null
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

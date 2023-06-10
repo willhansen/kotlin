@@ -21,10 +21,10 @@ class Z : B<Int>, C<String> {
 
 @Test
 fun runTest() {
-    val z = Z()
-    val c: C<String> = z
-    val b: B<Int> = z
-    val a: A<String, Int> = z
+    konst z = Z()
+    konst c: C<String> = z
+    konst b: B<Int> = z
+    konst a: A<String, Int> = z
 
     assertEquals("Z", z.foo("", 0))
     assertEquals("Z", c.foo("", 0))

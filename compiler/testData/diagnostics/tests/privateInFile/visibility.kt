@@ -10,12 +10,12 @@ private open class A {
 private var x: Int = 10
 
 var xx: Int = 20
-  private set(value: Int) {}
+  private set(konstue: Int) {}
 
 private fun foo() {}
 
 private fun bar() {
-    val y = x
+    konst y = x
     x = 20
     xx = 30
 }
@@ -28,18 +28,18 @@ private object PO {}
 package a
 
 fun test() {
-    val y = makeA()
+    konst y = makeA()
     y.<!INVISIBLE_MEMBER("A; private; file")!>bar<!>()
     <!INVISIBLE_MEMBER("foo; private; file")!>foo<!>()
 
-    val u : <!INVISIBLE_REFERENCE("A; private; file")!>A<!> = <!INVISIBLE_MEMBER("A; private; file")!>A<!>()
+    konst u : <!INVISIBLE_REFERENCE("A; private; file")!>A<!> = <!INVISIBLE_MEMBER("A; private; file")!>A<!>()
 
-    val z = <!INVISIBLE_MEMBER("x; private; file")!>x<!>
+    konst z = <!INVISIBLE_MEMBER("x; private; file")!>x<!>
     <!INVISIBLE_MEMBER("x; private; file")!>x<!> = 30
 
-    val po = <!INVISIBLE_MEMBER("PO; private; file")!>PO<!>
+    konst po = <!INVISIBLE_MEMBER("PO; private; file")!>PO<!>
 
-    val v = xx
+    konst v = xx
     <!INVISIBLE_SETTER("xx; private; file")!>xx<!> = 40
 }
 
@@ -48,7 +48,7 @@ class B : <!EXPOSED_SUPER_CLASS!><!INVISIBLE_MEMBER("A; private; file"), INVISIB
 class Q {
     class W {
         fun foo() {
-            val y = makeA() //assure that 'makeA' is visible
+            konst y = makeA() //assure that 'makeA' is visible
         }
     }
 }

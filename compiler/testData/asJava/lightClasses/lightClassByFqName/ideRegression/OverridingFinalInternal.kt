@@ -4,7 +4,7 @@
 package p
 
 class C : A() {
-    override val ap: Int
+    override konst ap: Int
         get() = super.c
 
     override fun af(): Int {
@@ -16,6 +16,6 @@ class C : A() {
 package p
 
 abstract class A {
-    internal val ap: Int = 4
+    internal konst ap: Int = 4
     internal fun af(): Int
 }

@@ -19,12 +19,12 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirPackageScope(
-    private val fqName: FqName,
-    private val analysisSession: KtFirAnalysisSession,
+    private konst fqName: FqName,
+    private konst analysisSession: KtFirAnalysisSession,
 ) : KtScope {
-    override val token: KtLifetimeToken get() = analysisSession.token
+    override konst token: KtLifetimeToken get() = analysisSession.token
 
-    private val firScope: FirPackageMemberScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst firScope: FirPackageMemberScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
         FirPackageMemberScope(fqName, analysisSession.useSiteSession)
     }
 

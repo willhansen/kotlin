@@ -17,19 +17,19 @@ import org.jetbrains.kotlin.gradle.plugin.usageByName
 import org.jetbrains.kotlin.gradle.targets.metadata.isCompatibilityMetadataVariantEnabled
 
 object KotlinUsages {
-    const val KOTLIN_API = "kotlin-api"
-    const val KOTLIN_RUNTIME = "kotlin-runtime"
-    const val KOTLIN_METADATA = "kotlin-metadata"
-    const val KOTLIN_CINTEROP = "kotlin-cinterop"
-    const val KOTLIN_SOURCES = "kotlin-sources"
+    const konst KOTLIN_API = "kotlin-api"
+    const konst KOTLIN_RUNTIME = "kotlin-runtime"
+    const konst KOTLIN_METADATA = "kotlin-metadata"
+    const konst KOTLIN_CINTEROP = "kotlin-cinterop"
+    const konst KOTLIN_SOURCES = "kotlin-sources"
 
     // Following two constants were removed in Gradle 8.0 from 'Usages' class
-    private const val JAVA_RUNTIME_CLASSES = "java-runtime-classes"
-    private const val JAVA_RUNTIME_RESOURCES = "java-runtime-resources"
+    private const konst JAVA_RUNTIME_CLASSES = "java-runtime-classes"
+    private const konst JAVA_RUNTIME_RESOURCES = "java-runtime-resources"
 
-    val values = setOf(KOTLIN_API, KOTLIN_RUNTIME)
+    konst konstues = setOf(KOTLIN_API, KOTLIN_RUNTIME)
 
-    private val jvmPlatformTypes: Set<KotlinPlatformType> = setOf(jvm, androidJvm)
+    private konst jvmPlatformTypes: Set<KotlinPlatformType> = setOf(jvm, androidJvm)
 
     internal fun consumerApiUsage(project: Project, platformType: KotlinPlatformType) = project.usageByName(
         when {
@@ -81,13 +81,13 @@ object KotlinUsages {
             when {
                 consumerValue?.name == KOTLIN_API && producerValue?.name.let { it == JAVA_API || it == "java-api-jars" } ->
                     compatible()
-                consumerValue?.name in values && producerValue?.name.let { it == JAVA_RUNTIME || it == "java-runtime-jars" } ->
+                consumerValue?.name in konstues && producerValue?.name.let { it == JAVA_RUNTIME || it == "java-runtime-jars" } ->
                     compatible()
             }
         }
     }
 
-    private val javaUsagesForKotlinMetadataConsumers = listOf("java-api-jars", JAVA_API, "java-runtime-jars", JAVA_RUNTIME)
+    private konst javaUsagesForKotlinMetadataConsumers = listOf("java-api-jars", JAVA_API, "java-runtime-jars", JAVA_RUNTIME)
 
     private class KotlinMetadataCompatibility : AttributeCompatibilityRule<Usage> {
         override fun execute(details: CompatibilityCheckDetails<Usage>) = with(details) {
@@ -103,7 +103,7 @@ object KotlinUsages {
     }
 
     private class KotlinCinteropCompatibility : AttributeCompatibilityRule<Usage> {
-        private val compatibleProducerValues = setOf(KOTLIN_API, JAVA_API, JAVA_RUNTIME)
+        private konst compatibleProducerValues = setOf(KOTLIN_API, JAVA_API, JAVA_RUNTIME)
         override fun execute(details: CompatibilityCheckDetails<Usage>) = with(details) {
             if (consumerValue?.name == KOTLIN_CINTEROP && producerValue?.name in compatibleProducerValues) {
                 compatible()
@@ -114,7 +114,7 @@ object KotlinUsages {
     private class KotlinCinteropDisambiguation : AttributeDisambiguationRule<Usage> {
         override fun execute(details: MultipleCandidatesDetails<Usage?>) = details.run {
             if (consumerValue?.name == KOTLIN_CINTEROP) {
-                val candidateNames = candidateValues.map { it?.name }
+                konst candidateNames = candidateValues.map { it?.name }
                 when {
                     KOTLIN_CINTEROP in candidateNames -> chooseCandidateByName(KOTLIN_CINTEROP)
                     KOTLIN_API in candidateNames -> chooseCandidateByName(KOTLIN_API)
@@ -130,8 +130,8 @@ object KotlinUsages {
             if (consumerValue?.name == KOTLIN_METADATA) {
                 // Prefer Kotlin metadata, but if there's no such variant then accept 'kotlin-api' or the Java usages
                 // (see the compatibility rule):
-                val acceptedProducerValues = listOf(KOTLIN_METADATA, KOTLIN_API, *javaUsagesForKotlinMetadataConsumers.toTypedArray())
-                val candidatesMap = candidateValues.associateBy { it.name }
+                konst acceptedProducerValues = listOf(KOTLIN_METADATA, KOTLIN_API, *javaUsagesForKotlinMetadataConsumers.toTypedArray())
+                konst candidatesMap = candidateValues.associateBy { it.name }
                 acceptedProducerValues.firstOrNull { it in candidatesMap }?.let { closestMatch(candidatesMap.getValue(it)) }
             }
         }
@@ -139,7 +139,7 @@ object KotlinUsages {
 
     private class KotlinUsagesDisambiguation : AttributeDisambiguationRule<Usage> {
         override fun execute(details: MultipleCandidatesDetails<Usage?>) = with(details) {
-            val candidateNames = candidateValues.map { it?.name }.toSet()
+            konst candidateNames = candidateValues.map { it?.name }.toSet()
 
             // if both API and runtime artifacts are chosen according to the compatibility rules, then
             // the consumer requested nothing specific, so provide them with the runtime variant, which is more complete:
@@ -147,12 +147,12 @@ object KotlinUsages {
                 chooseCandidateByName(KOTLIN_RUNTIME)
             }
 
-            val javaApiUsages = setOf(JAVA_API, "java-api-jars")
-            val javaRuntimeUsages = setOf("java-runtime-jars", JAVA_RUNTIME)
+            konst javaApiUsages = setOf(JAVA_API, "java-api-jars")
+            konst javaRuntimeUsages = setOf("java-runtime-jars", JAVA_RUNTIME)
 
             if (javaApiUsages.any { it in candidateNames } &&
                 javaRuntimeUsages.any { it in candidateNames } &&
-                values.none { it in candidateNames }
+                konstues.none { it in candidateNames }
             ) {
                 when (consumerValue?.name) {
                     KOTLIN_API, in javaApiUsages ->

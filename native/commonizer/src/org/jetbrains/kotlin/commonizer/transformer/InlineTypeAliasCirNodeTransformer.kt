@@ -16,20 +16,20 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.storage.StorageManager
 
 internal class InlineTypeAliasCirNodeTransformer(
-    private val storageManager: StorageManager,
-    private val classifiers: CirKnownClassifiers,
-    private val settings: CommonizerSettings,
+    private konst storageManager: StorageManager,
+    private konst classifiers: CirKnownClassifiers,
+    private konst settings: CommonizerSettings,
 ) : CirNodeTransformer {
     override fun invoke(root: CirRootNode) {
-        root.modules.values.forEach(::invoke)
+        root.modules.konstues.forEach(::invoke)
     }
 
     private operator fun invoke(module: CirModuleNode) {
-        val classNodeIndex = ClassNodeIndex(module)
+        konst classNodeIndex = ClassNodeIndex(module)
 
-        module.packages.values.forEach { packageNode ->
-            packageNode.typeAliases.values.forEach { typeAliasNode ->
-                val targetClassNode = classNodeIndex[typeAliasNode.id] ?: packageNode.createArtificialClassNode(typeAliasNode)
+        module.packages.konstues.forEach { packageNode ->
+            packageNode.typeAliases.konstues.forEach { typeAliasNode ->
+                konst targetClassNode = classNodeIndex[typeAliasNode.id] ?: packageNode.createArtificialClassNode(typeAliasNode)
                 inlineTypeAliasIfPossible(classNodeIndex, typeAliasNode, targetClassNode)
             }
         }
@@ -63,9 +63,9 @@ internal class InlineTypeAliasCirNodeTransformer(
             return
         }
 
-        val fromAliasedClassNode = classes[fromTypeAlias.expandedType.classifierId]
+        konst fromAliasedClassNode = classes[fromTypeAlias.expandedType.classifierId]
 
-        val intoArtificialClass = ArtificialAliasedCirClass(
+        konst intoArtificialClass = ArtificialAliasedCirClass(
             pointingTypeAlias = fromTypeAlias,
             pointedClass = fromAliasedClassNode?.targetDeclarations?.get(targetIndex) ?: fromTypeAlias.toArtificialCirClass(targetIndex)
         )
@@ -83,24 +83,24 @@ internal class InlineTypeAliasCirNodeTransformer(
         intoClass: CirClass,
         targetIndex: Int
     ) {
-        val targetSize = intoClassNode.targetDeclarations.size
+        konst targetSize = intoClassNode.targetDeclarations.size
 
         fromAliasedClassNode.constructors.forEach { (key, aliasedConstructorNode) ->
-            val aliasedConstructor = aliasedConstructorNode.targetDeclarations[targetIndex] ?: return@forEach
+            konst aliasedConstructor = aliasedConstructorNode.targetDeclarations[targetIndex] ?: return@forEach
             intoClassNode.constructors.getOrPut(key) {
                 buildClassConstructorNode(storageManager, targetSize, classifiers, settings, ParentNode(intoClassNode))
             }.targetDeclarations[targetIndex] = aliasedConstructor.withContainingClass(intoClass)
         }
 
         fromAliasedClassNode.functions.forEach { (key, aliasedFunctionNode) ->
-            val aliasedFunction = aliasedFunctionNode.targetDeclarations[targetIndex] ?: return@forEach
+            konst aliasedFunction = aliasedFunctionNode.targetDeclarations[targetIndex] ?: return@forEach
             intoClassNode.functions.getOrPut(key) {
                 buildFunctionNode(storageManager, targetSize, classifiers, settings, ParentNode(intoClassNode))
             }.targetDeclarations[targetIndex] = aliasedFunction.withContainingClass(intoClass)
         }
 
         fromAliasedClassNode.properties.forEach { (key, aliasedPropertyNode) ->
-            val aliasedProperty = aliasedPropertyNode.targetDeclarations[targetIndex] ?: return@forEach
+            konst aliasedProperty = aliasedPropertyNode.targetDeclarations[targetIndex] ?: return@forEach
             intoClassNode.properties.getOrPut(key) {
                 buildPropertyNode(storageManager, targetSize, classifiers, settings, ParentNode(intoClassNode))
             }.targetDeclarations[targetIndex] = aliasedProperty.withContainingClass(intoClass)
@@ -108,7 +108,7 @@ internal class InlineTypeAliasCirNodeTransformer(
     }
 
     private fun CirPackageNode.createArtificialClassNode(typeAliasNode: CirTypeAliasNode): CirClassNode {
-        val classNode = buildClassNode(
+        konst classNode = buildClassNode(
             storageManager = storageManager,
             size = typeAliasNode.targetDeclarations.size,
             classifiers = classifiers,
@@ -132,7 +132,7 @@ internal class InlineTypeAliasCirNodeTransformer(
 
     private fun CirTypeAlias.resolveSupertypes(targetIndex: Int): List<CirType> {
         if (expandedType.isMarkedNullable) return emptyList()
-        val resolver = SimpleCirSupertypesResolver(
+        konst resolver = SimpleCirSupertypesResolver(
             classifiers = classifiers.classifierIndices[targetIndex],
             dependencies = CirProvidedClassifiers.of(
                 classifiers.commonDependencies, classifiers.targetDependencies[targetIndex]
@@ -144,15 +144,15 @@ internal class InlineTypeAliasCirNodeTransformer(
 
 private typealias ClassNodeIndex = Map<CirEntityId, CirClassNode>
 
-private fun ClassNodeIndex(module: CirModuleNode): ClassNodeIndex = module.packages.values
-    .flatMap { pkg -> pkg.classes.values }
+private fun ClassNodeIndex(module: CirModuleNode): ClassNodeIndex = module.packages.konstues
+    .flatMap { pkg -> pkg.classes.konstues }
     .associateBy { clazz -> clazz.id }
 
 private data class ArtificialAliasedCirClass(
-    val pointingTypeAlias: CirTypeAlias,
-    val pointedClass: CirClass
+    konst pointingTypeAlias: CirTypeAlias,
+    konst pointedClass: CirClass
 ) : CirClass by pointedClass {
-    override val name: CirName = pointingTypeAlias.name
+    override konst name: CirName = pointingTypeAlias.name
     override var companion: CirName?
         get() = null
         set(_) = throw UnsupportedOperationException("Can't set companion on artificial class (pointed by $pointingTypeAlias)")

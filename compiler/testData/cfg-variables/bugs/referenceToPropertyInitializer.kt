@@ -1,22 +1,22 @@
 class TestFunctionLiteral {
-    val sum: (Int)->Int = { x: Int ->
+    konst sum: (Int)->Int = { x: Int ->
         sum(x - 1) + x
     }
 }
 
-open class A(val a: A)
+open class A(konst a: A)
 
 class TestObjectLiteral {
-    val obj: A = object: A(obj) {
+    konst obj: A = object: A(obj) {
         init {
-            val x = obj
+            konst x = obj
         }
         fun foo() {
-            val y = obj
+            konst y = obj
         }
     }
 }
 
 class TestOther {
-    val x: Int = x + 1
+    konst x: Int = x + 1
 }

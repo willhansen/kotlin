@@ -11,6 +11,6 @@ inline fun inlineFun(a: Int, lambda: (Int) -> Int = 1::plus): Int {
 import test.*
 
 fun box(): String {
-    val result = inlineFun(2)
+    konst result = inlineFun(2)
     return if (result == 3) return "OK" else "fail $result"
 }

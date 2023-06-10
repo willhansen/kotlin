@@ -38,7 +38,7 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 interface FirVariableBuilder : FirDeclarationBuilder {
     abstract override var source: KtSourceElement?
     abstract override var resolvePhase: FirResolvePhase
-    abstract override val annotations: MutableList<FirAnnotation>
+    abstract override konst annotations: MutableList<FirAnnotation>
     abstract override var moduleData: FirModuleData
     abstract override var origin: FirDeclarationOrigin
     abstract override var attributes: FirDeclarationAttributes
@@ -48,7 +48,7 @@ interface FirVariableBuilder : FirDeclarationBuilder {
     abstract var deprecationsProvider: DeprecationsProvider
     abstract var containerSource: DeserializedContainerSource?
     abstract var dispatchReceiverType: ConeSimpleKotlinType?
-    abstract val contextReceivers: MutableList<FirContextReceiver>
+    abstract konst contextReceivers: MutableList<FirContextReceiver>
     abstract var name: Name
     abstract var initializer: FirExpression?
     abstract var delegate: FirExpression?

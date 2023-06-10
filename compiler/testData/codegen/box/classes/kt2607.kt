@@ -1,5 +1,5 @@
 fun box() : String {
-    val o = object {
+    konst o = object {
 
         inner class C {
             fun foo() = "OK"

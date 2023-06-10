@@ -30,7 +30,7 @@ public final class ExpectActualTable extends
   private ExpectActualTable(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -63,10 +63,10 @@ public final class ExpectActualTable extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -87,7 +87,7 @@ public final class ExpectActualTable extends
     public ExpectActualTable parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new ExpectActualTable(input, extensionRegistry);
     }
   };
@@ -184,23 +184,23 @@ public final class ExpectActualTable extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.ExpectActualTable parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.ExpectActualTable parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.ExpectActualTable parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.ExpectActualTable parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.ExpectActualTable parseFrom(java.io.InputStream input)
@@ -330,7 +330,7 @@ public final class ExpectActualTable extends
       org.jetbrains.kotlin.backend.common.serialization.proto.ExpectActualTable parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.ExpectActualTable) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -373,12 +373,12 @@ public final class ExpectActualTable extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual expectToActuals = 1;</code>
      */
     public Builder setExpectToActuals(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureExpectToActualsIsMutable();
-      expectToActuals_.set(index, value);
+      expectToActuals_.set(index, konstue);
 
       return this;
     }
@@ -395,12 +395,12 @@ public final class ExpectActualTable extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual expectToActuals = 1;</code>
      */
-    public Builder addExpectToActuals(org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual value) {
-      if (value == null) {
+    public Builder addExpectToActuals(org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureExpectToActualsIsMutable();
-      expectToActuals_.add(value);
+      expectToActuals_.add(konstue);
 
       return this;
     }
@@ -408,12 +408,12 @@ public final class ExpectActualTable extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual expectToActuals = 1;</code>
      */
     public Builder addExpectToActuals(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureExpectToActualsIsMutable();
-      expectToActuals_.add(index, value);
+      expectToActuals_.add(index, konstue);
 
       return this;
     }
@@ -441,10 +441,10 @@ public final class ExpectActualTable extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual expectToActuals = 1;</code>
      */
     public Builder addAllExpectToActuals(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.ExpectToActual> konstues) {
       ensureExpectToActualsIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, expectToActuals_);
+          konstues, expectToActuals_);
 
       return this;
     }

@@ -33,15 +33,15 @@ class SerializerForEnumsGenerator(
         fun irThis(): IrExpression =
             IrGetValueImpl(startOffset, endOffset, saveFunc.dispatchReceiverParameter!!.symbol)
 
-        val encoderClass = compilerContext.getClassFromRuntime(SerialEntityNames.ENCODER_CLASS)
-        val descriptorGetterSymbol = irAnySerialDescProperty?.getter!!.symbol
-        val encodeEnum = encoderClass.functionByName(CallingConventions.encodeEnum)
-        val serialDescGetter = irGet(descriptorGetterSymbol.owner.returnType, irThis(), descriptorGetterSymbol)
+        konst encoderClass = compilerContext.getClassFromRuntime(SerialEntityNames.ENCODER_CLASS)
+        konst descriptorGetterSymbol = irAnySerialDescProperty?.getter!!.symbol
+        konst encodeEnum = encoderClass.functionByName(CallingConventions.encodeEnum)
+        konst serialDescGetter = irGet(descriptorGetterSymbol.owner.returnType, irThis(), descriptorGetterSymbol)
 
-        val serializableIrClass = requireNotNull(serializableIrClass) { "Enums do not support external serialization" }
-        val ordinalProp = serializableIrClass.properties.single { it.name == Name.identifier("ordinal") }.getter!!
-        val getOrdinal = irInvoke(irGet(saveFunc.valueParameters[1]), ordinalProp.symbol)
-        val call = irInvoke(irGet(saveFunc.valueParameters[0]), encodeEnum, serialDescGetter, getOrdinal)
+        konst serializableIrClass = requireNotNull(serializableIrClass) { "Enums do not support external serialization" }
+        konst ordinalProp = serializableIrClass.properties.single { it.name == Name.identifier("ordinal") }.getter!!
+        konst getOrdinal = irInvoke(irGet(saveFunc.konstueParameters[1]), ordinalProp.symbol)
+        konst call = irInvoke(irGet(saveFunc.konstueParameters[0]), encodeEnum, serialDescGetter, getOrdinal)
         +call
     }
 
@@ -49,32 +49,32 @@ class SerializerForEnumsGenerator(
         fun irThis(): IrExpression =
             IrGetValueImpl(startOffset, endOffset, loadFunc.dispatchReceiverParameter!!.symbol)
 
-        val decoderClass = compilerContext.getClassFromRuntime(SerialEntityNames.DECODER_CLASS)
-        val descriptorGetterSymbol = irAnySerialDescProperty?.getter!!.symbol
-        val decode = decoderClass.functionByName(CallingConventions.decodeEnum)
-        val serialDescGetter = irGet(descriptorGetterSymbol.owner.returnType, irThis(), descriptorGetterSymbol)
+        konst decoderClass = compilerContext.getClassFromRuntime(SerialEntityNames.DECODER_CLASS)
+        konst descriptorGetterSymbol = irAnySerialDescProperty?.getter!!.symbol
+        konst decode = decoderClass.functionByName(CallingConventions.decodeEnum)
+        konst serialDescGetter = irGet(descriptorGetterSymbol.owner.returnType, irThis(), descriptorGetterSymbol)
 
-        val valuesF = this@SerializerForEnumsGenerator.serializableIrClass.functions.single { it.name == StandardNames.ENUM_VALUES }
-        val getValues = irInvoke(dispatchReceiver = null, callee = valuesF.symbol)
+        konst konstuesF = this@SerializerForEnumsGenerator.serializableIrClass.functions.single { it.name == StandardNames.ENUM_VALUES }
+        konst getValues = irInvoke(dispatchReceiver = null, callee = konstuesF.symbol)
 
 
-        val arrayGet = compilerContext.irBuiltIns.arrayClass.owner.declarations.filterIsInstance<IrSimpleFunction>()
+        konst arrayGet = compilerContext.irBuiltIns.arrayClass.owner.declarations.filterIsInstance<IrSimpleFunction>()
             .single { it.name.asString() == "get" }
 
-        val getValueByOrdinal =
+        konst getValueByOrdinal =
             irInvoke(
                 getValues,
                 arrayGet.symbol,
-                irInvoke(irGet(loadFunc.valueParameters[0]), decode, serialDescGetter),
+                irInvoke(irGet(loadFunc.konstueParameters[0]), decode, serialDescGetter),
                 typeHint = this@SerializerForEnumsGenerator.serializableIrClass.defaultType
             )
         +irReturn(getValueByOrdinal)
     }
 
-    override val serialDescImplClass: IrClassSymbol = compilerContext.getClassFromInternalSerializationPackage(SerialEntityNames.SERIAL_DESCRIPTOR_FOR_ENUM)
+    override konst serialDescImplClass: IrClassSymbol = compilerContext.getClassFromInternalSerializationPackage(SerialEntityNames.SERIAL_DESCRIPTOR_FOR_ENUM)
 
     override fun IrBlockBodyBuilder.instantiateNewDescriptor(serialDescImplClass: IrClassSymbol, correctThis: IrExpression): IrExpression {
-        val ctor = serialDescImplClass.constructors.single { it.owner.isPrimary }
+        konst ctor = serialDescImplClass.constructors.single { it.owner.isPrimary }
         return irInvoke(
             null, ctor,
             irString(serialName),
@@ -87,11 +87,11 @@ class SerializerForEnumsGenerator(
         localDescriptor: IrVariable,
         addFunction: IrFunctionSymbol
     ) {
-        val enumEntries = serializableIrClass.enumEntries()
+        konst enumEntries = serializableIrClass.enumEntries()
         for (entry in enumEntries) {
             // regular .serialName() produces fqName here, which is kinda inconvenient for enum entry
-            val serialName = entry.annotations.serialNameValue ?: entry.name.toString()
-            val call = irInvoke(
+            konst serialName = entry.annotations.serialNameValue ?: entry.name.toString()
+            konst call = irInvoke(
                 irGet(localDescriptor),
                 addFunction,
                 irString(serialName),

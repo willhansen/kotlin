@@ -6,7 +6,7 @@ package a {
 
     public final class A</*0*/ T> {
         public constructor A</*0*/ T>(/*0*/ x: T)
-        public final val p: T
+        public final konst p: T
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

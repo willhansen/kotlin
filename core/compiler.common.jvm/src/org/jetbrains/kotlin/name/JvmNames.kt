@@ -7,64 +7,64 @@ package org.jetbrains.kotlin.name
 
 object JvmNames {
     @JvmField
-    val JVM_NAME: FqName = FqName("kotlin.jvm.JvmName")
+    konst JVM_NAME: FqName = FqName("kotlin.jvm.JvmName")
 
     @JvmField
-    val JVM_NAME_CLASS_ID = ClassId.topLevel(JVM_NAME)
+    konst JVM_NAME_CLASS_ID = ClassId.topLevel(JVM_NAME)
 
-    val JVM_NAME_SHORT: String = JVM_NAME.shortName().asString()
+    konst JVM_NAME_SHORT: String = JVM_NAME.shortName().asString()
 
-    val JVM_MULTIFILE_CLASS: FqName = FqName("kotlin.jvm.JvmMultifileClass")
-    val JVM_MULTIFILE_CLASS_ID: ClassId = ClassId(FqName("kotlin.jvm"), Name.identifier("JvmMultifileClass"))
-    val JVM_MULTIFILE_CLASS_SHORT = JVM_MULTIFILE_CLASS.shortName().asString()
+    konst JVM_MULTIFILE_CLASS: FqName = FqName("kotlin.jvm.JvmMultifileClass")
+    konst JVM_MULTIFILE_CLASS_ID: ClassId = ClassId(FqName("kotlin.jvm"), Name.identifier("JvmMultifileClass"))
+    konst JVM_MULTIFILE_CLASS_SHORT = JVM_MULTIFILE_CLASS.shortName().asString()
 
-    val JVM_PACKAGE_NAME: FqName = FqName("kotlin.jvm.JvmPackageName")
-    val JVM_PACKAGE_NAME_SHORT = JVM_PACKAGE_NAME.shortName().asString()
+    konst JVM_PACKAGE_NAME: FqName = FqName("kotlin.jvm.JvmPackageName")
+    konst JVM_PACKAGE_NAME_SHORT = JVM_PACKAGE_NAME.shortName().asString()
 
-    val JVM_DEFAULT_FQ_NAME = FqName("kotlin.jvm.JvmDefault")
-    val JVM_DEFAULT_CLASS_ID = ClassId.topLevel(JVM_DEFAULT_FQ_NAME)
-    val JVM_DEFAULT_NO_COMPATIBILITY_FQ_NAME = FqName("kotlin.jvm.JvmDefaultWithoutCompatibility")
-    val JVM_DEFAULT_WITH_COMPATIBILITY_FQ_NAME = FqName("kotlin.jvm.JvmDefaultWithCompatibility")
-    val JVM_DEFAULT_NO_COMPATIBILITY_CLASS_ID = ClassId.topLevel(JVM_DEFAULT_NO_COMPATIBILITY_FQ_NAME)
-    val JVM_DEFAULT_WITH_COMPATIBILITY_CLASS_ID = ClassId.topLevel(JVM_DEFAULT_WITH_COMPATIBILITY_FQ_NAME)
-    val JVM_OVERLOADS_FQ_NAME = FqName("kotlin.jvm.JvmOverloads")
-    val JVM_OVERLOADS_CLASS_ID = ClassId.topLevel(JVM_OVERLOADS_FQ_NAME)
-
-    @JvmField
-    val JVM_SYNTHETIC_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSynthetic")
+    konst JVM_DEFAULT_FQ_NAME = FqName("kotlin.jvm.JvmDefault")
+    konst JVM_DEFAULT_CLASS_ID = ClassId.topLevel(JVM_DEFAULT_FQ_NAME)
+    konst JVM_DEFAULT_NO_COMPATIBILITY_FQ_NAME = FqName("kotlin.jvm.JvmDefaultWithoutCompatibility")
+    konst JVM_DEFAULT_WITH_COMPATIBILITY_FQ_NAME = FqName("kotlin.jvm.JvmDefaultWithCompatibility")
+    konst JVM_DEFAULT_NO_COMPATIBILITY_CLASS_ID = ClassId.topLevel(JVM_DEFAULT_NO_COMPATIBILITY_FQ_NAME)
+    konst JVM_DEFAULT_WITH_COMPATIBILITY_CLASS_ID = ClassId.topLevel(JVM_DEFAULT_WITH_COMPATIBILITY_FQ_NAME)
+    konst JVM_OVERLOADS_FQ_NAME = FqName("kotlin.jvm.JvmOverloads")
+    konst JVM_OVERLOADS_CLASS_ID = ClassId.topLevel(JVM_OVERLOADS_FQ_NAME)
 
     @JvmField
-    val JVM_SYNTHETIC_ANNOTATION_CLASS_ID = ClassId.topLevel(JVM_SYNTHETIC_ANNOTATION_FQ_NAME)
+    konst JVM_SYNTHETIC_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSynthetic")
 
     @JvmField
-    val JVM_RECORD_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmRecord")
+    konst JVM_SYNTHETIC_ANNOTATION_CLASS_ID = ClassId.topLevel(JVM_SYNTHETIC_ANNOTATION_FQ_NAME)
 
     @JvmField
-    val JVM_RECORD_ANNOTATION_CLASS_ID = ClassId.topLevel(JVM_RECORD_ANNOTATION_FQ_NAME)
+    konst JVM_RECORD_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmRecord")
 
     @JvmField
-    val SYNCHRONIZED_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Synchronized")
+    konst JVM_RECORD_ANNOTATION_CLASS_ID = ClassId.topLevel(JVM_RECORD_ANNOTATION_FQ_NAME)
 
     @JvmField
-    val SYNCHRONIZED_ANNOTATION_CLASS_ID = ClassId.topLevel(SYNCHRONIZED_ANNOTATION_FQ_NAME)
+    konst SYNCHRONIZED_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Synchronized")
 
     @JvmField
-    val STRICTFP_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Strictfp")
+    konst SYNCHRONIZED_ANNOTATION_CLASS_ID = ClassId.topLevel(SYNCHRONIZED_ANNOTATION_FQ_NAME)
 
     @JvmField
-    val STRICTFP_ANNOTATION_CLASS_ID = ClassId.topLevel(STRICTFP_ANNOTATION_FQ_NAME)
+    konst STRICTFP_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Strictfp")
 
     @JvmField
-    val VOLATILE_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Volatile")
+    konst STRICTFP_ANNOTATION_CLASS_ID = ClassId.topLevel(STRICTFP_ANNOTATION_FQ_NAME)
 
     @JvmField
-    val VOLATILE_ANNOTATION_CLASS_ID = ClassId.topLevel(VOLATILE_ANNOTATION_FQ_NAME)
+    konst VOLATILE_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Volatile")
 
     @JvmField
-    val TRANSIENT_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Transient")
+    konst VOLATILE_ANNOTATION_CLASS_ID = ClassId.topLevel(VOLATILE_ANNOTATION_FQ_NAME)
 
     @JvmField
-    val TRANSIENT_ANNOTATION_CLASS_ID = ClassId.topLevel(TRANSIENT_ANNOTATION_FQ_NAME)
+    konst TRANSIENT_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.Transient")
 
-    const val MULTIFILE_PART_NAME_DELIMITER = "__"
+    @JvmField
+    konst TRANSIENT_ANNOTATION_CLASS_ID = ClassId.topLevel(TRANSIENT_ANNOTATION_FQ_NAME)
+
+    const konst MULTIFILE_PART_NAME_DELIMITER = "__"
 }

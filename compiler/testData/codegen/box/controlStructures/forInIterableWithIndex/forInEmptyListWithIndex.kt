@@ -1,9 +1,9 @@
 // WITH_STDLIB
 
-val xs = listOf<Any>()
+konst xs = listOf<Any>()
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
     for ((index, x) in xs.withIndex()) {
         return "Loop over empty list should not be executed"
     }

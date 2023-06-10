@@ -1,4 +1,4 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class IntentionsBundle {
     companion object {
@@ -7,10 +7,10 @@ class IntentionsBundle {
         }
 
         fun message2(key: String): String {
-            return eval { key + BUNDLE }
+            return ekonst { key + BUNDLE }
         }
 
-        private const val BUNDLE = "K"
+        private const konst BUNDLE = "K"
     }
 }
 

@@ -1,9 +1,9 @@
 // TARGET_BACKEND: JS_IR
 // FIR_IDENTICAL
 
-val d: dynamic = 1
+konst d: dynamic = 1
 
-val p: Int = d
+konst p: Int = d
 
 fun test1(d: dynamic): Int = d
 

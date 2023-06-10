@@ -9,22 +9,22 @@ import org.jetbrains.kotlin.name.Name
 
 
 interface KotlinCall : ResolutionAtom {
-    val callKind: KotlinCallKind
+    konst callKind: KotlinCallKind
 
-    val explicitReceiver: ReceiverKotlinCallArgument?
+    konst explicitReceiver: ReceiverKotlinCallArgument?
 
     // a.(foo)() -- (foo) is dispatchReceiverForInvoke
-    val dispatchReceiverForInvokeExtension: ReceiverKotlinCallArgument? get() = null
+    konst dispatchReceiverForInvokeExtension: ReceiverKotlinCallArgument? get() = null
 
-    val name: Name
+    konst name: Name
 
-    val typeArguments: List<TypeArgument>
+    konst typeArguments: List<TypeArgument>
 
-    val argumentsInParenthesis: List<KotlinCallArgument>
+    konst argumentsInParenthesis: List<KotlinCallArgument>
 
-    val externalArgument: KotlinCallArgument?
+    konst externalArgument: KotlinCallArgument?
 
-    val isForImplicitInvoke: Boolean
+    konst isForImplicitInvoke: Boolean
 }
 
 private fun SimpleKotlinCallArgument.checkReceiverInvariants() {
@@ -72,7 +72,7 @@ fun KotlinCall.checkCallInvariants() {
 
         KotlinCallKind.CALLABLE_REFERENCE -> {
             assert(argumentsInParenthesis.isEmpty()) {
-                "Callable references can't have value arguments"
+                "Callable references can't have konstue arguments"
             }
             assert(typeArguments.isEmpty()) {
                 "Callable references can't have explicit type arguments"

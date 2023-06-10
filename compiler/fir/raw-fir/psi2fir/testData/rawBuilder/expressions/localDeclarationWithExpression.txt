@@ -1,6 +1,6 @@
 FILE: localDeclarationWithExpression.kt
-    private final? val nonLocalProperty: List<XXX>by lazy#(<L> = lazy@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
-        lval localProperty: <implicit> = mutableListOf#<KtLightField>()
+    private final? konst nonLocalProperty: List<XXX>by lazy#(<L> = lazy@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
+        lkonst localProperty: <implicit> = mutableListOf#<KtLightField>()
         localProperty#
     }
     )

@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 // This tests both KT-37013 and KT-37015.
 
-inline class A(val x: Int = 0)
+inline class A(konst x: Int = 0)
 
 // 0 <init>\(\)V
 // 1 private synthetic <init>\(I\)V

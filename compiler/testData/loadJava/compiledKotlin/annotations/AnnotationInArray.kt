@@ -3,14 +3,14 @@
 package test
 
 annotation class Anno(
-    val value: Array<Bnno>
+    konst konstue: Array<Bnno>
 )
 
 annotation class Bnno(
-    val value: String
+    konst konstue: String
 )
 
 @Anno(
-    value = [Bnno("x"), Bnno("y")]
+    konstue = [Bnno("x"), Bnno("y")]
 )
 public class AnnotationInArray

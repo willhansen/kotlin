@@ -19,46 +19,46 @@ class CallableValueParametersCommonizer(
     typeCommonizer: TypeCommonizer,
 ) : Commonizer<CirCallableMemberWithParameters, CallableValueParametersCommonizer.Result?> {
     class Result(
-        val hasStableParameterNames: Boolean,
-        val valueParameters: List<CirValueParameter>,
-        val patchCallables: () -> Unit
+        konst hasStableParameterNames: Boolean,
+        konst konstueParameters: List<CirValueParameter>,
+        konst patchCallables: () -> Unit
     )
 
     private class CallableToPatch(
-        val callable: CirCallableMemberWithParameters,
-        val originalNames: ValueParameterNames
+        konst callable: CirCallableMemberWithParameters,
+        konst originalNames: ValueParameterNames
     ) {
         init {
             check(originalNames is ValueParameterNames.Generated || originalNames is ValueParameterNames.Real)
         }
 
-        val canNamesBeOverwritten by lazy { callable.canNamesBeOverwritten() }
+        konst canNamesBeOverwritten by lazy { callable.canNamesBeOverwritten() }
 
         companion object {
             fun doNothing(): () -> Unit = {}
 
             fun List<CallableToPatch>.patchCallables(generated: Boolean, newNames: List<CirName>): () -> Unit {
-                val callablesToPatch = filter { it.originalNames is ValueParameterNames.Generated == generated }
+                konst callablesToPatch = filter { it.originalNames is ValueParameterNames.Generated == generated }
                     .takeIf { it.isNotEmpty() }
                     ?: return doNothing()
 
                 return {
                     callablesToPatch.forEach { callableToPatch ->
-                        val callable = callableToPatch.callable
+                        konst callable = callableToPatch.callable
                         callable.hasStableParameterNames = false
-                        callable.valueParameters = callable.valueParameters.compactMapIndexed { index, valueParameter ->
-                            val newName = newNames[index]
-                            if (valueParameter.name != newName) {
+                        callable.konstueParameters = callable.konstueParameters.compactMapIndexed { index, konstueParameter ->
+                            konst newName = newNames[index]
+                            if (konstueParameter.name != newName) {
                                 CirValueParameter.createInterned(
-                                    annotations = valueParameter.annotations,
+                                    annotations = konstueParameter.annotations,
                                     name = newName,
-                                    returnType = valueParameter.returnType,
-                                    varargElementType = valueParameter.varargElementType,
-                                    declaresDefaultValue = valueParameter.declaresDefaultValue,
-                                    isCrossinline = valueParameter.isCrossinline,
-                                    isNoinline = valueParameter.isNoinline
+                                    returnType = konstueParameter.returnType,
+                                    varargElementType = konstueParameter.varargElementType,
+                                    declaresDefaultValue = konstueParameter.declaresDefaultValue,
+                                    isCrossinline = konstueParameter.isCrossinline,
+                                    isNoinline = konstueParameter.isNoinline
                                 )
-                            } else valueParameter
+                            } else konstueParameter
                         }
                     }
                 }
@@ -69,24 +69,24 @@ class CallableValueParametersCommonizer(
     private sealed class ValueParameterNames {
         object Generated : ValueParameterNames()
 
-        data class Real(val names: List<CirName>) : ValueParameterNames()
+        data class Real(konst names: List<CirName>) : ValueParameterNames()
 
-        class MultipleReal(valueParameters: List<CirValueParameter>) : ValueParameterNames() {
-            val generatedNames: List<CirName> = generatedNames(valueParameters)
+        class MultipleReal(konstueParameters: List<CirValueParameter>) : ValueParameterNames() {
+            konst generatedNames: List<CirName> = generatedNames(konstueParameters)
         }
 
         companion object {
             fun buildFor(callable: CirCallableMemberWithParameters): ValueParameterNames {
-                val valueParameters = callable.valueParameters
-                if (valueParameters.isEmpty())
+                konst konstueParameters = callable.konstueParameters
+                if (konstueParameters.isEmpty())
                     return Real(emptyList())
 
                 var real = false
-                val names = callable.valueParameters.mapIndexed { index, valueParameter ->
-                    val name = valueParameter.name
-                    val plainName = name.name
+                konst names = callable.konstueParameters.mapIndexed { index, konstueParameter ->
+                    konst name = konstueParameter.name
+                    konst plainName = name.name
 
-                    if (valueParameter.varargElementType != null) {
+                    if (konstueParameter.varargElementType != null) {
                         if (plainName != VARIADIC_ARGUMENTS) {
                             real = true
                         }
@@ -104,9 +104,9 @@ class CallableValueParametersCommonizer(
                 return if (real) Real(names) else Generated
             }
 
-            fun generatedNames(valueParameters: List<CirValueParameter>): List<CirName> =
-                valueParameters.mapIndexed { index, valueParameter ->
-                    if (valueParameter.varargElementType != null) {
+            fun generatedNames(konstueParameters: List<CirValueParameter>): List<CirName> =
+                konstueParameters.mapIndexed { index, konstueParameter ->
+                    if (konstueParameter.varargElementType != null) {
                         VARIADIC_ARGUMENTS_NAME
                     } else {
                         REGULAR_ARGUMENT_NAMES.getValue(index)
@@ -115,33 +115,33 @@ class CallableValueParametersCommonizer(
         }
     }
 
-    private val valueParameters = ValueParameterListCommonizer(typeCommonizer)
-    private val callables: MutableList<CallableToPatch> = mutableListOf()
+    private konst konstueParameters = ValueParameterListCommonizer(typeCommonizer)
+    private konst callables: MutableList<CallableToPatch> = mutableListOf()
     private var hasStableParameterNames = true
-    private var valueParameterNames: ValueParameterNames? = null
+    private var konstueParameterNames: ValueParameterNames? = null
     private var error = false
 
-    override val result: Result?
+    override konst result: Result?
         get() {
             // don't inline `patchCallables` property;
-            // valueParameters.overwriteNames() should be called strongly before valueParameters.result
-            val patchCallables = when (val valueParameterNames = checkState(valueParameterNames, error)) {
+            // konstueParameters.overwriteNames() should be called strongly before konstueParameters.result
+            konst patchCallables = when (konst konstueParameterNames = checkState(konstueParameterNames, error)) {
                 ValueParameterNames.Generated -> doNothing()
                 is ValueParameterNames.Real -> {
-                    val newNames = valueParameterNames.names
-                    valueParameters.overwriteNames(newNames)
+                    konst newNames = konstueParameterNames.names
+                    konstueParameters.overwriteNames(newNames)
                     callables.patchCallables(generated = true, newNames)
                 }
                 is ValueParameterNames.MultipleReal -> {
-                    val generatedNames = valueParameterNames.generatedNames
-                    valueParameters.overwriteNames(generatedNames)
+                    konst generatedNames = konstueParameterNames.generatedNames
+                    konstueParameters.overwriteNames(generatedNames)
                     callables.patchCallables(generated = false, generatedNames)
                 }
             }
 
             return Result(
                 hasStableParameterNames = hasStableParameterNames,
-                valueParameters = valueParameters.result ?: return null,
+                konstueParameters = konstueParameters.result ?: return null,
                 patchCallables = patchCallables
             )
         }
@@ -150,17 +150,17 @@ class CallableValueParametersCommonizer(
         if (error)
             return false
 
-        error = !valueParameters.commonizeWith(next.valueParameters)
+        error = !konstueParameters.commonizeWith(next.konstueParameters)
                 || !commonizeValueParameterNames(next)
 
         return !error
     }
 
     private fun commonizeValueParameterNames(next: CirCallableMemberWithParameters): Boolean {
-        val nextNames = ValueParameterNames.buildFor(next)
-        val nextCallable = CallableToPatch(next, nextNames)
+        konst nextNames = ValueParameterNames.buildFor(next)
+        konst nextCallable = CallableToPatch(next, nextNames)
 
-        valueParameterNames = when (val currentNames = valueParameterNames) {
+        konstueParameterNames = when (konst currentNames = konstueParameterNames) {
             null -> {
                 when (nextNames) {
                     ValueParameterNames.Generated,
@@ -199,7 +199,7 @@ class CallableValueParametersCommonizer(
                         } else {
                             if (callables.any { !it.canNamesBeOverwritten } || !nextCallable.canNamesBeOverwritten) return false
                             hasStableParameterNames = false
-                            ValueParameterNames.MultipleReal(nextCallable.callable.valueParameters)
+                            ValueParameterNames.MultipleReal(nextCallable.callable.konstueParameters)
                         }
                     }
                     else -> failIllegalState(currentNames, nextNames)
@@ -217,11 +217,11 @@ class CallableValueParametersCommonizer(
     }
 
     companion object {
-        private const val VARIADIC_ARGUMENTS = "variadicArguments"
-        private const val REGULAR_ARGUMENT_PREFIX = "arg"
+        private const konst VARIADIC_ARGUMENTS = "variadicArguments"
+        private const konst REGULAR_ARGUMENT_PREFIX = "arg"
 
-        private val VARIADIC_ARGUMENTS_NAME = CirName.create(VARIADIC_ARGUMENTS)
-        private val REGULAR_ARGUMENT_NAMES = FactoryMap.create<Int, CirName> { index ->
+        private konst VARIADIC_ARGUMENTS_NAME = CirName.create(VARIADIC_ARGUMENTS)
+        private konst REGULAR_ARGUMENT_NAMES = FactoryMap.create<Int, CirName> { index ->
             CirName.create(REGULAR_ARGUMENT_PREFIX + index)
         }
 

@@ -69,13 +69,13 @@ ALWAYS_INLINE KBoolean Kotlin_Double_isFinite(KDouble a)          { return isfin
 
 //--- Bit operations ---------------------------------------------------------//
 
-ALWAYS_INLINE KInt Kotlin_Int_countOneBits(KInt value) { return __builtin_popcount(value); }
-ALWAYS_INLINE KInt Kotlin_Long_countOneBits(KLong value) { return __builtin_popcountll(value); }
+ALWAYS_INLINE KInt Kotlin_Int_countOneBits(KInt konstue) { return __builtin_popcount(konstue); }
+ALWAYS_INLINE KInt Kotlin_Long_countOneBits(KLong konstue) { return __builtin_popcountll(konstue); }
 
-ALWAYS_INLINE KInt Kotlin_Int_countTrailingZeroBits(KInt value) { return __builtin_ctz(value); }
-ALWAYS_INLINE KInt Kotlin_Long_countTrailingZeroBits(KLong value) { return __builtin_ctzll(value); }
+ALWAYS_INLINE KInt Kotlin_Int_countTrailingZeroBits(KInt konstue) { return __builtin_ctz(konstue); }
+ALWAYS_INLINE KInt Kotlin_Long_countTrailingZeroBits(KLong konstue) { return __builtin_ctzll(konstue); }
 
-ALWAYS_INLINE KInt Kotlin_Int_countLeadingZeroBits(KInt value) { return __builtin_clz(value); }
-ALWAYS_INLINE KInt Kotlin_Long_countLeadingZeroBits(KLong value) { return __builtin_clzll(value); }
+ALWAYS_INLINE KInt Kotlin_Int_countLeadingZeroBits(KInt konstue) { return __builtin_clz(konstue); }
+ALWAYS_INLINE KInt Kotlin_Long_countLeadingZeroBits(KLong konstue) { return __builtin_clzll(konstue); }
 
 }  // extern "C"

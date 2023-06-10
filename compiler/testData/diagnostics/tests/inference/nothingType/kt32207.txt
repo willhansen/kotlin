@@ -7,7 +7,7 @@ public final class Test</*0*/ X, /*1*/ T> {
     public constructor Test</*0*/ X, /*1*/ T>()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public final fun hereIdeaFail(/*0*/ values: kotlin.collections.List<kotlin.Int>, /*1*/ others: kotlin.collections.List<kotlin.String>): kotlin.collections.List<Test<out kotlin.Int, out kotlin.String>>
+    public final fun hereIdeaFail(/*0*/ konstues: kotlin.collections.List<kotlin.Int>, /*1*/ others: kotlin.collections.List<kotlin.String>): kotlin.collections.List<Test<out kotlin.Int, out kotlin.String>>
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     public companion object Companion {

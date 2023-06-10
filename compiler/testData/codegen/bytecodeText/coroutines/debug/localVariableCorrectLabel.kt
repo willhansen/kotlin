@@ -2,9 +2,9 @@ import kotlin.sequences.*
 import kotlin.experimental.*
 
 fun main(args: Array<String>) {
-    val s = sequence {
+    konst s = sequence {
         yield(1)
-        val a = awaitSeq()
+        konst a = awaitSeq()
         println(a) // (1)
     }
     println(s.toList())

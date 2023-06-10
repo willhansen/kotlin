@@ -31,12 +31,12 @@ class InitializersLowering(context: CommonBackendContext) : InitializersLowering
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         if (container !is IrConstructor) return
 
-        val irClass = container.constructedClass
-        val instanceInitializerStatements = extractInitializers(irClass) {
+        konst irClass = container.constructedClass
+        konst instanceInitializerStatements = extractInitializers(irClass) {
             (it is IrField && !it.isStatic && (container.isPrimary || !it.primaryConstructorParameter)) ||
                     (it is IrAnonymousInitializer && !it.isStatic)
         }
-        val block = IrBlockImpl(irClass.startOffset, irClass.endOffset, context.irBuiltIns.unitType, null, instanceInitializerStatements)
+        konst block = IrBlockImpl(irClass.startOffset, irClass.endOffset, context.irBuiltIns.unitType, null, instanceInitializerStatements)
         // Check that the initializers contain no local classes. Deep-copying them is a disaster for code size, and liable to break randomly.
         block.accept(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) =
@@ -53,10 +53,10 @@ class InitializersLowering(context: CommonBackendContext) : InitializersLowering
     }
 }
 
-private val IrField.primaryConstructorParameter: Boolean
+private konst IrField.primaryConstructorParameter: Boolean
     get() = (initializer?.expression as? IrGetValue)?.origin == IrStatementOrigin.INITIALIZE_PROPERTY_FROM_PARAMETER
 
-abstract class InitializersLoweringBase(open val context: CommonBackendContext) {
+abstract class InitializersLoweringBase(open konst context: CommonBackendContext) {
     protected fun extractInitializers(irClass: IrClass, filter: (IrDeclaration) -> Boolean) =
         // TODO What about fields that were added by lowerings? e.g. captured outer class or locals?
         irClass.declarations.mapNotNull { if (it is IrProperty) it.backingField else it }.filter(filter).mapNotNull {
@@ -69,7 +69,7 @@ abstract class InitializersLoweringBase(open val context: CommonBackendContext) 
 
     private fun handleField(irClass: IrClass, declaration: IrField): IrStatement? =
         declaration.initializer?.run {
-            val receiver = if (!declaration.isStatic) // TODO isStaticField
+            konst receiver = if (!declaration.isStatic) // TODO isStaticField
                 IrGetValueImpl(startOffset, endOffset, irClass.thisReceiver!!.type, irClass.thisReceiver!!.symbol)
             else
                 null
@@ -92,10 +92,10 @@ abstract class InitializersLoweringBase(open val context: CommonBackendContext) 
 
 // Remove anonymous initializers and set field initializers to `null`
 class InitializersCleanupLowering(
-    val context: CommonBackendContext,
-    private val shouldEraseFieldInitializer: (IrField) -> Boolean = { it.correspondingPropertySymbol?.owner?.isConst != true }
+    konst context: CommonBackendContext,
+    private konst shouldEraseFieldInitializer: (IrField) -> Boolean = { it.correspondingPropertySymbol?.owner?.isConst != true }
 ) : DeclarationTransformer {
-    override val withLocalDeclarations: Boolean get() = true
+    override konst withLocalDeclarations: Boolean get() = true
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration is IrAnonymousInitializer) return emptyList()

@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class HierarchicalClassCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test simple class`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)", "(a, b, c, d, e)")
             simpleSingleSourceTarget("a", "class X")
             simpleSingleSourceTarget("b", "class X")
@@ -27,14 +27,14 @@ class HierarchicalClassCommonizationTest : AbstractInlineSourcesCommonizationTes
     }
 
     fun `test sample class`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             simpleSingleSourceTarget(
                 "a", """
                    class X {
-                        val a: Int = 42
-                        val ab: Int = 42
-                        val abcd: Int = 42
+                        konst a: Int = 42
+                        konst ab: Int = 42
+                        konst abcd: Int = 42
                    } 
                 """
             )
@@ -42,9 +42,9 @@ class HierarchicalClassCommonizationTest : AbstractInlineSourcesCommonizationTes
             simpleSingleSourceTarget(
                 "b", """
                    class X {
-                        val b: Int = 42
-                        val ab: Int = 42
-                        val abcd: Int = 42
+                        konst b: Int = 42
+                        konst ab: Int = 42
+                        konst abcd: Int = 42
                    } 
                 """
             )
@@ -52,9 +52,9 @@ class HierarchicalClassCommonizationTest : AbstractInlineSourcesCommonizationTes
             simpleSingleSourceTarget(
                 "c", """
                    class X {
-                        val c: Int = 42
-                        val cd: Int = 42
-                        val abcd: Int = 42
+                        konst c: Int = 42
+                        konst cd: Int = 42
+                        konst abcd: Int = 42
                    } 
                 """
             )
@@ -62,9 +62,9 @@ class HierarchicalClassCommonizationTest : AbstractInlineSourcesCommonizationTes
             simpleSingleSourceTarget(
                 "d", """
                    class X {
-                        val d: Int = 42
-                        val cd: Int = 42
-                        val abcd: Int = 42
+                        konst d: Int = 42
+                        konst cd: Int = 42
+                        konst abcd: Int = 42
                    } 
                 """
             )
@@ -73,8 +73,8 @@ class HierarchicalClassCommonizationTest : AbstractInlineSourcesCommonizationTes
         result.assertCommonized(
             "(a,b)", """
                expect class X() {
-                    val ab: Int
-                    val abcd: Int
+                    konst ab: Int
+                    konst abcd: Int
                } 
                 """
         )
@@ -82,8 +82,8 @@ class HierarchicalClassCommonizationTest : AbstractInlineSourcesCommonizationTes
         result.assertCommonized(
             "(c,d)", """
                expect class X() {
-                    val cd: Int
-                    val abcd: Int
+                    konst cd: Int
+                    konst abcd: Int
                } 
                 """
         )
@@ -91,7 +91,7 @@ class HierarchicalClassCommonizationTest : AbstractInlineSourcesCommonizationTes
         result.assertCommonized(
             "((a,b), (c,d))", """
                expect class X() {
-                    val abcd: Int
+                    konst abcd: Int
                } 
                 """
         )

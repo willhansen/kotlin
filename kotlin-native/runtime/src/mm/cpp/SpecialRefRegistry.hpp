@@ -36,15 +36,15 @@ class WeakRef;
 //     does not depend on it.
 // * `Node`s are owned either by a global `std::list` or by thread local `std::list`s. Global list is protected by a mutex.
 // * Insertion into the global list happens by moving from thread local list during STW and when a thread gets destroyed.
-// * Only the GC thread traverses and removes elements from the global list. Removal happens only if `Node` has `rc_ == disposedMarker`
+// * Only the GC thread traverses and removes elements from the global list. Remokonst happens only if `Node` has `rc_ == disposedMarker`
 //   and it's not in the roots list.
 // * During global list traversal `Node`s `obj_` referenced may get nulled out by the GC.
 // * Insertion into thread local lists happens in runnable state.
-// * Removal from thread local list happens during STW, thread destruction, or in the runnable state for `Node`s that can never
+// * Remokonst from thread local list happens during STW, thread destruction, or in the runnable state for `Node`s that can never
 //   go through 0 -> 1 rc transition (created via mm::StableRef).
 // * `Node`s are additionally linked into an intrusive global roots list.
 // * Any thread in any state can insert into the roots list. Insertion only happens into the head.
-// * Only the GC thread can remove from the roots list during root scanning. If after removal
+// * Only the GC thread can remove from the roots list during root scanning. If after remokonst
 //   the `rc_` of the `Node` is `> 0`, the GC thread will make sure the node is inserted
 //   into the head
 // * During roots list traversal all nodes to the left are either marked or inserted into the mark queue.
@@ -56,7 +56,7 @@ class SpecialRefRegistry : private Pinned {
     public:
         using Rc = int32_t;
         inline static constexpr Rc disposedMarker = std::numeric_limits<Rc>::min();
-        static_assert(disposedMarker < 0, "disposedMarker must be an impossible Rc value");
+        static_assert(disposedMarker < 0, "disposedMarker must be an impossible Rc konstue");
 
         Node(ObjHeader* obj, Rc rc) noexcept : obj_(obj), rc_(rc) {
             RuntimeAssert(obj != nullptr, "Creating StableRef for null object");

@@ -6,7 +6,7 @@ fun <T : @MyComposable () -> Unit> composableId(f: T): T = f
 
 fun test_1() {
     <!DEBUG_INFO_EXPRESSION_TYPE("some.MyComposableFunction0<kotlin.Unit>")!>id(@MyComposable {})<!>
-    val f: () -> Unit = id(@MyComposable <!ARGUMENT_TYPE_MISMATCH!>{}<!>) // should be an error
+    konst f: () -> Unit = id(@MyComposable <!ARGUMENT_TYPE_MISMATCH!>{}<!>) // should be an error
     <!DEBUG_INFO_EXPRESSION_TYPE("some.MyComposableFunction0<kotlin.Unit>")!>composableId({})<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("some.MyComposableFunction0<kotlin.Unit>")!>composableId(@MyComposable {})<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.coroutines.SuspendFunction0<kotlin.Unit>")!>suspendId(@MyComposable <!ARGUMENT_TYPE_MISMATCH!>{}<!>)<!>

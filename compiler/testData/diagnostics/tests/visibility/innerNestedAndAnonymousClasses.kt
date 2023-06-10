@@ -3,7 +3,7 @@
 import kotlin.reflect.KFunction0
 
 open class A {
-    private val x: String? = null
+    private konst x: String? = null
 
     fun test0() {
         x
@@ -11,7 +11,7 @@ open class A {
     }
 
     open class Nested : A() {
-        private val y: String? = null
+        private konst y: String? = null
 
         fun test1(): String? = <!INVISIBLE_MEMBER!>x<!>
         fun test2(): String? = this.<!INVISIBLE_MEMBER!>x<!>
@@ -32,7 +32,7 @@ open class A {
     }
 
     open inner class Inner : A(), I {
-        private val y: String? = null
+        private konst y: String? = null
 
         fun test3(): String? = x
         fun test4(): String? = this.<!INVISIBLE_MEMBER!>x<!>
@@ -67,8 +67,8 @@ open class A {
 fun A.extensionFun(): String? = this.<!INVISIBLE_MEMBER!>x<!>
 
 abstract class B<T: B<T>> {
-    protected abstract val thisBuilder: T
-    private val x: String? = null
+    protected abstract konst thisBuilder: T
+    private konst x: String? = null
 
     fun test6(obj: Any?) = thisBuilder.apply {
         obj?.let { this.x }

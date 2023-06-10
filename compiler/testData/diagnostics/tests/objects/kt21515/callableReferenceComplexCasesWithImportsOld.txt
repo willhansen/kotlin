@@ -30,7 +30,7 @@ public object A {
 
     public final class Derived : A.Base {
         public constructor Derived()
-        public final val a: kotlin.reflect.KFunction1<A.Base.Companion.FromABaseCompanion, kotlin.Int>
+        public final konst a: kotlin.reflect.KFunction1<A.Base.Companion.FromABaseCompanion, kotlin.Int>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -74,7 +74,7 @@ public object B {
 
     public final class Derived : B.Base {
         public constructor Derived()
-        public final val a: kotlin.reflect.KFunction1<B.Base.Companion.FromBBaseCompanion, kotlin.Int>
+        public final konst a: kotlin.reflect.KFunction1<B.Base.Companion.FromBBaseCompanion, kotlin.Int>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -118,7 +118,7 @@ public object C {
 
     public final class Derived : C.Base {
         public constructor Derived()
-        public final val a: kotlin.reflect.KFunction1<C.Base.Companion.FromCBaseCompanion, kotlin.Int>
+        public final konst a: kotlin.reflect.KFunction1<C.Base.Companion.FromCBaseCompanion, kotlin.Int>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -155,7 +155,7 @@ public object D {
 
     public final class Derived : D.Base {
         public constructor Derived()
-        public final val a: kotlin.reflect.KFunction0<kotlin.Int>
+        public final konst a: kotlin.reflect.KFunction0<kotlin.Int>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

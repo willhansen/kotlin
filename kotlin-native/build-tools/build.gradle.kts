@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Properties
 
 buildscript {
-    val rootBuildDirectory by extra(project.file("../.."))
+    konst rootBuildDirectory by extra(project.file("../.."))
     apply(from = rootBuildDirectory.resolve("kotlin-native/gradle/loadRootProperties.gradle"))
 
     dependencies {
@@ -39,7 +39,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-build-common:${project.bootstrapKotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${project.bootstrapKotlinVersion}")
 
-    val versionProperties = Properties()
+    konst versionProperties = Properties()
     project.rootProject.projectDir.resolve("../../gradle/versions.properties").inputStream().use { propInput ->
         versionProperties.load(propInput)
     }
@@ -54,7 +54,7 @@ dependencies {
     }
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-    val metadataVersion = "0.0.1-dev-10"
+    konst metadataVersion = "0.0.1-dev-10"
     implementation("org.jetbrains.kotlinx:kotlinx-metadata-klib:$metadataVersion")
 
     implementation("org.jetbrains.kotlin:kotlin-util-klib:${project.bootstrapKotlinVersion}")
@@ -69,8 +69,8 @@ java {
     }
 }
 
-val compileKotlin: KotlinCompile by tasks
-val compileGroovy: GroovyCompile by tasks
+konst compileKotlin: KotlinCompile by tasks
+konst compileGroovy: GroovyCompile by tasks
 
 compileKotlin.apply {
     kotlinOptions {

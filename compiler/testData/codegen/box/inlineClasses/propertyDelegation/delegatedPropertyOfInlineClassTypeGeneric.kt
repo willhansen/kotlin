@@ -6,29 +6,29 @@
 import kotlin.reflect.KProperty
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICInt<T: Int>(val i: T)
+konstue class ICInt<T: Int>(konst i: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICLong<T: Long>(val l: T)
+konstue class ICLong<T: Long>(konst l: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICOverIC<T: ICLong<Long>>(val o: T)
+konstue class ICOverIC<T: ICLong<Long>>(konst o: T)
 
 class Delegate<T>(var f: () -> T) {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T = f()
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        f = { value }
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: T) {
+        f = { konstue }
     }
 }
 
 object Demo {
-    val i0 by Delegate { ICInt(1) }
-    val l0 by Delegate { ICLong(2L) }
-    val o0 by Delegate { ICOverIC(ICLong(3L)) }
+    konst i0 by Delegate { ICInt(1) }
+    konst l0 by Delegate { ICLong(2L) }
+    konst o0 by Delegate { ICOverIC(ICLong(3L)) }
 
-    val i1: ICInt<Int> by Delegate { ICInt(11) }
-    val l1: ICLong<Long> by Delegate { ICLong(22) }
-    val o1: ICOverIC<ICLong<Long>> by Delegate { ICOverIC(ICLong(33)) }
+    konst i1: ICInt<Int> by Delegate { ICInt(11) }
+    konst l1: ICLong<Long> by Delegate { ICLong(22) }
+    konst o1: ICOverIC<ICLong<Long>> by Delegate { ICOverIC(ICLong(33)) }
 
     var i2 by Delegate { ICInt(0) }
     var l2 by Delegate { ICLong(0) }
@@ -52,9 +52,9 @@ fun box(): String {
     if (Demo.l2.l != 33L) return "Fail 3 2"
     if (Demo.o2.o.l != 33L) return "Fail 3 3"
 
-    val localI by Delegate { ICInt(44) }
-    val localL by Delegate { ICLong(44) }
-    val localO by Delegate { ICOverIC(ICLong(44)) }
+    konst localI by Delegate { ICInt(44) }
+    konst localL by Delegate { ICLong(44) }
+    konst localO by Delegate { ICOverIC(ICLong(44)) }
 
     if (localI.i != 44) return "Fail 4 1"
     if (localL.l != 44L) return "Fail 4 2"

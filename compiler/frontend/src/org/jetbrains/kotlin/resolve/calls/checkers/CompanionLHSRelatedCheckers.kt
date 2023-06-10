@@ -21,14 +21,14 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 
 /**
  * Deprecate callable references in a form of (SomeClass)::name when SomeClass has a companion
- * and `(SomeClass)` is being used just like a value reference to the companion
+ * and `(SomeClass)` is being used just like a konstue reference to the companion
  */
 object CompanionInParenthesesLHSCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val callableReference = resolvedCall.call.callElement.parent as? KtCallableReferenceExpression ?: return
-        val parenthesizedExpression = callableReference.lhs as? KtParenthesizedExpression ?: return
-        val unwrappedLhs = parenthesizedExpression.expression ?: return
-        val expressionReceiver = resolvedCall.call.explicitReceiver as? ExpressionReceiver ?: return
+        konst callableReference = resolvedCall.call.callElement.parent as? KtCallableReferenceExpression ?: return
+        konst parenthesizedExpression = callableReference.lhs as? KtParenthesizedExpression ?: return
+        konst unwrappedLhs = parenthesizedExpression.expression ?: return
+        konst expressionReceiver = resolvedCall.call.explicitReceiver as? ExpressionReceiver ?: return
 
         if (!isReferenceToShortFormCompanion(expressionReceiver, unwrappedLhs, context)) return
 
@@ -43,9 +43,9 @@ object CompanionInParenthesesLHSCallChecker : CallChecker {
  */
 object CompanionIncorrectlyUnboundedWhenUsedAsLHSCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val callableReference = resolvedCall.call.callElement.parent as? KtCallableReferenceExpression ?: return
-        val classQualifier = resolvedCall.call.explicitReceiver as? ClassQualifier ?: return
-        val dispatchReceiver = resolvedCall.dispatchReceiver ?: return
+        konst callableReference = resolvedCall.call.callElement.parent as? KtCallableReferenceExpression ?: return
+        konst classQualifier = resolvedCall.call.explicitReceiver as? ClassQualifier ?: return
+        konst dispatchReceiver = resolvedCall.dispatchReceiver ?: return
 
         if (dispatchReceiver != classQualifier.classValueReceiver) return
 
@@ -53,7 +53,7 @@ object CompanionIncorrectlyUnboundedWhenUsedAsLHSCallChecker : CallChecker {
         // References nested in calls have CallPosition.Unknown
         if (context.resolutionContext.callPosition !is CallPosition.CallableReferenceRhs) return
 
-        val referencedClass = dispatchReceiver.type.constructor.declarationDescriptor as? ClassDescriptor ?: return
+        konst referencedClass = dispatchReceiver.type.constructor.declarationDescriptor as? ClassDescriptor ?: return
         if (!referencedClass.isCompanionObject) return
 
         context.trace.report(Errors.INCORRECT_CALLABLE_REFERENCE_RESOLUTION_FOR_COMPANION_LHS.on(callableReference))
@@ -66,11 +66,11 @@ private fun isReferenceToShortFormCompanion(
     lhs: PsiElement?,
     context: CallCheckerContext
 ): Boolean {
-    val referencedClass = receiver.type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
+    konst referencedClass = receiver.type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
     if (!referencedClass.isCompanionObject) return false
 
     // We should also consider cases like (package.MyClassWithCompanion)::foo
-    val simpleReference =
+    konst simpleReference =
         ((lhs as? KtDotQualifiedExpression)?.selectorExpression ?: lhs) as? KtReferenceExpression
             ?: return false
 

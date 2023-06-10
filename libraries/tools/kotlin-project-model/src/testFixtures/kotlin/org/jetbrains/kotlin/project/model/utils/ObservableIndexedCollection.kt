@@ -8,11 +8,11 @@ package org.jetbrains.kotlin.project.model.utils
 import org.jetbrains.kotlin.project.model.infra.KpmTestEntity
 
 class ObservableIndexedCollection<T : KpmTestEntity> private constructor(
-    private val _items: MutableMap<String, T>
-) : Collection<T> by _items.values {
+    private konst _items: MutableMap<String, T>
+) : Collection<T> by _items.konstues {
     constructor() : this(mutableMapOf())
 
-    private val allItemsActions = mutableListOf<T.() -> Unit>()
+    private konst allItemsActions = mutableListOf<T.() -> Unit>()
 
     fun add(item: T) {
         _items[item.name] = item
@@ -20,7 +20,7 @@ class ObservableIndexedCollection<T : KpmTestEntity> private constructor(
     }
 
     fun withAll(action: T.() -> Unit) {
-        _items.values.forEach(action)
+        _items.konstues.forEach(action)
         allItemsActions.add(action)
     }
 

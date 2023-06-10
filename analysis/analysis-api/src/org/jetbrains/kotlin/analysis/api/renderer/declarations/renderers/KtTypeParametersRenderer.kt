@@ -32,7 +32,7 @@ public interface KtTypeParametersRenderer {
     public object WIHTOUT_BOUNDS : KtTypeParametersRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderTypeParameters(symbol: KtDeclarationSymbol, printer: PrettyPrinter) {
-            val typeParameters = symbol.typeParameters
+            konst typeParameters = symbol.typeParameters
                 .filter { typeParametersFilter.filter(it, symbol) }
                 .ifEmpty { return }
             printer.printCollection(typeParameters, prefix = "<", postfix = ">") { typeParameter ->
@@ -52,7 +52,7 @@ public interface KtTypeParametersRenderer {
     public object WITH_BOUNDS_IN_WHERE_CLAUSE : KtTypeParametersRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderTypeParameters(symbol: KtDeclarationSymbol, printer: PrettyPrinter) {
-            val typeParameters = symbol.typeParameters
+            konst typeParameters = symbol.typeParameters
                 .filter { typeParametersFilter.filter(it, symbol) }
                 .ifEmpty { return }
             printer.printCollection(typeParameters, prefix = "<", postfix = ">") { typeParameter ->
@@ -70,7 +70,7 @@ public interface KtTypeParametersRenderer {
 
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderWhereClause(symbol: KtDeclarationSymbol, printer: PrettyPrinter): Unit = printer {
-            val allBounds = symbol.typeParameters
+            konst allBounds = symbol.typeParameters
                 .filter { typeParametersFilter.filter(it, symbol) }
                 .flatMap { typeParam ->
                     if (typeParam.upperBounds.size > 1) {

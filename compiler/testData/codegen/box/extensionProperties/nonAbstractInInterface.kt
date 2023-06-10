@@ -1,5 +1,5 @@
 interface I {
-    val String.foo: String
+    konst String.foo: String
         get() = this + ";" + bar()
 
     fun bar(): String
@@ -12,7 +12,7 @@ class C : I {
 }
 
 fun box(): String {
-    val r = C().test()
+    konst r = C().test()
     if (r != "test;C.bar") return "fail: $r"
 
     return "OK"

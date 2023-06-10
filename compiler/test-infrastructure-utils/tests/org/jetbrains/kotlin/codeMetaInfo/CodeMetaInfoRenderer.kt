@@ -28,14 +28,14 @@ object CodeMetaInfoRenderer {
             builder.append(originalText)
             return
         }
-        val sortedMetaInfos = getSortedCodeMetaInfos(codeMetaInfos).groupBy { it.start }
-        val opened = Stack<CodeMetaInfo>()
+        konst sortedMetaInfos = getSortedCodeMetaInfos(codeMetaInfos).groupBy { it.start }
+        konst opened = Stack<CodeMetaInfo>()
 
         for ((i, c) in originalText.withIndex()) {
             processMetaInfosStartedAtOffset(i, sortedMetaInfos, opened, builder)
             builder.append(c)
         }
-        val lastSymbolIsNewLine = builder.last() == '\n'
+        konst lastSymbolIsNewLine = builder.last() == '\n'
         if (lastSymbolIsNewLine) {
             builder.deleteCharAt(builder.length - 1)
         }
@@ -52,15 +52,15 @@ object CodeMetaInfoRenderer {
         builder: StringBuilder
     ) {
         checkOpenedAndCloseStringIfNeeded(opened, offset, builder)
-        val matchedCodeMetaInfos = sortedMetaInfos[offset] ?: emptyList()
+        konst matchedCodeMetaInfos = sortedMetaInfos[offset] ?: emptyList()
         if (matchedCodeMetaInfos.isNotEmpty()) {
-            val iterator = matchedCodeMetaInfos.listIterator()
+            konst iterator = matchedCodeMetaInfos.listIterator()
             var current: CodeMetaInfo? = iterator.next()
 
             if (current != null) builder.append(current.tagPrefix)
 
             while (current != null) {
-                val next: CodeMetaInfo? = if (iterator.hasNext()) iterator.next() else null
+                konst next: CodeMetaInfo? = if (iterator.hasNext()) iterator.next() else null
                 opened.push(current)
                 builder.append(current.asString())
                 when {
@@ -80,7 +80,7 @@ object CodeMetaInfoRenderer {
         checkOpenedAndCloseStringIfNeeded(opened, offset, builder)
     }
 
-    private val metaInfoComparator = (compareBy<CodeMetaInfo> { it.start } then compareByDescending { it.end }) then compareBy { it.tag }
+    private konst metaInfoComparator = (compareBy<CodeMetaInfo> { it.start } then compareByDescending { it.end }) then compareBy { it.tag }
 
     private fun getSortedCodeMetaInfos(metaInfos: Collection<CodeMetaInfo>): List<CodeMetaInfo> {
         return metaInfos.sortedWith(metaInfoComparator)
@@ -97,8 +97,8 @@ object CodeMetaInfoRenderer {
 }
 
 fun clearFileFromDiagnosticMarkup(file: File) {
-    val text = file.readText()
-    val cleanText = clearTextFromDiagnosticMarkup(text)
+    konst text = file.readText()
+    konst cleanText = clearTextFromDiagnosticMarkup(text)
     file.writeText(cleanText)
 }
 

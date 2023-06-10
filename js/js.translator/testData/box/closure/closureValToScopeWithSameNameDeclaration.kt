@@ -1,20 +1,20 @@
 // EXPECTED_REACHABLE_NODES: 1282
 package foo
 
-val f = true
+konst f = true
 
 fun box(): String {
-    val bar = "test "
-    val boo = "another "
+    konst bar = "test "
+    konst boo = "another "
 
     fun baz(): String {
         var result = bar
 
         if (f) {
-            val bar = 42
+            konst bar = 42
             result += bar
 
-            val boo = 7
+            konst boo = 7
             result += boo
         }
 
@@ -24,7 +24,7 @@ fun box(): String {
         return result
     }
 
-    val r = baz()
+    konst r = baz()
     if (r != "test 427another test ") return r;
 
     return "OK"

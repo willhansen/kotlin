@@ -15,40 +15,40 @@ import org.jetbrains.kotlin.name.FqName
  */
 sealed class ProgramSymbol
 
-data class ClassSymbol(val classId: ClassId) : ProgramSymbol()
+data class ClassSymbol(konst classId: ClassId) : ProgramSymbol()
 
-data class ClassMember(val classId: ClassId, val memberName: String) : ProgramSymbol()
+data class ClassMember(konst classId: ClassId, konst memberName: String) : ProgramSymbol()
 
-data class PackageMember(val packageFqName: FqName, val memberName: String) : ProgramSymbol()
+data class PackageMember(konst packageFqName: FqName, konst memberName: String) : ProgramSymbol()
 
 /** Compact representation for set of [ClassMember]s having the same [ClassId]. */
-data class ClassMembers(val classId: ClassId, val memberNames: Set<String>)
+data class ClassMembers(konst classId: ClassId, konst memberNames: Set<String>)
 
 /** Compact representation for a set of [ProgramSymbol]s. */
 class ProgramSymbolSet private constructor(
 
     /** Compact set of [ClassSymbol]s. */
-    val classes: Set<ClassId>,
+    konst classes: Set<ClassId>,
 
     /** Compact set of [ClassMember]s (map from a [ClassId] to the class members' names). */
-    val classMembers: Map<ClassId, Set<String>>,
+    konst classMembers: Map<ClassId, Set<String>>,
 
     /** Compact set of [PackageMember]s (map from a package's [FqName] to the package members' names). */
-    val packageMembers: Map<FqName, Set<String>>
+    konst packageMembers: Map<FqName, Set<String>>
 ) {
 
-    fun isEmpty() = classes.isEmpty() && classMembers.all { it.value.isEmpty() } && packageMembers.all { it.value.isEmpty() }
+    fun isEmpty() = classes.isEmpty() && classMembers.all { it.konstue.isEmpty() } && packageMembers.all { it.konstue.isEmpty() }
 
     operator fun plus(other: ProgramSymbolSet): ProgramSymbolSet {
         return Collector().run {
             addClasses(classes)
             addClasses(other.classes)
 
-            classMembers.forEach { addClassMembers(it.key, it.value) }
-            other.classMembers.forEach { addClassMembers(it.key, it.value) }
+            classMembers.forEach { addClassMembers(it.key, it.konstue) }
+            other.classMembers.forEach { addClassMembers(it.key, it.konstue) }
 
-            packageMembers.forEach { addPackageMembers(it.key, it.value) }
-            other.packageMembers.forEach { addPackageMembers(it.key, it.value) }
+            packageMembers.forEach { addPackageMembers(it.key, it.konstue) }
+            other.packageMembers.forEach { addPackageMembers(it.key, it.konstue) }
 
             getResult()
         }
@@ -72,9 +72,9 @@ class ProgramSymbolSet private constructor(
      * [ProgramSymbolSet] to avoid redundancy.
      */
     class Collector {
-        private val classes = mutableSetOf<ClassId>()
-        private val classMembers = mutableMapOf<ClassId, MutableSet<String>>()
-        private val packageMembers = mutableMapOf<FqName, MutableSet<String>>()
+        private konst classes = mutableSetOf<ClassId>()
+        private konst classMembers = mutableMapOf<ClassId, MutableSet<String>>()
+        private konst packageMembers = mutableMapOf<FqName, MutableSet<String>>()
 
         fun addClass(classId: ClassId) {
             classMembers.remove(classId)
@@ -104,7 +104,7 @@ class ProgramSymbolSet private constructor(
 /** Compact representation for a set of [LookupSymbol]s. It also allows O(1) operation for [getLookupNamesInScope]. */
 class LookupSymbolSet(lookupSymbols: Iterable<LookupSymbol>) {
 
-    private val scopeToLookupNames: Map<FqName, Set<String>> = mutableMapOf<FqName, MutableSet<String>>().also { map ->
+    private konst scopeToLookupNames: Map<FqName, Set<String>> = mutableMapOf<FqName, MutableSet<String>>().also { map ->
         lookupSymbols.forEach {
             map.getOrPut(FqName(it.scope)) { mutableSetOf() }.add(it.name)
         }
@@ -145,9 +145,9 @@ internal fun ProgramSymbol.toLookupSymbol(): LookupSymbol {
  */
 internal fun Collection<LookupSymbol>.toProgramSymbolSet(allClasses: Iterable<AccessibleClassSnapshot>): ProgramSymbolSet {
     // Use LookupSymbolSet for efficiency
-    val lookupSymbols = LookupSymbolSet(this)
+    konst lookupSymbols = LookupSymbolSet(this)
 
-    val collector = ProgramSymbolSet.Collector()
+    konst collector = ProgramSymbolSet.Collector()
     allClasses.forEach { clazz ->
         when (clazz) {
             is RegularKotlinClassSnapshot, is JavaClassSnapshot -> {
@@ -160,14 +160,14 @@ internal fun Collection<LookupSymbol>.toProgramSymbolSet(allClasses: Iterable<Ac
                 // We want to get the intersection of clazz.classMemberNames and lookupNamesInScope. However, we currently don't store
                 // information about clazz.classMemberNames, so we'll take all of lookupNamesInScope (it's okay to over-approximate the
                 // result).
-                val lookupNamesInScope = lookupSymbols.getLookupNamesInScope(clazz.classId.asSingleFqName())
+                konst lookupNamesInScope = lookupSymbols.getLookupNamesInScope(clazz.classId.asSingleFqName())
                 collector.addClassMembers(clazz.classId, lookupNamesInScope)
             }
             is PackageFacadeKotlinClassSnapshot, is MultifileClassKotlinClassSnapshot -> {
                 // Collect PackageMembers
-                val lookupNamesInScope = lookupSymbols.getLookupNamesInScope(clazz.classId.packageFqName)
+                konst lookupNamesInScope = lookupSymbols.getLookupNamesInScope(clazz.classId.packageFqName)
                 if (lookupNamesInScope.isEmpty()) return@forEach
-                val packageMemberNames = when (clazz) {
+                konst packageMemberNames = when (clazz) {
                     is PackageFacadeKotlinClassSnapshot -> clazz.packageMemberNames
                     else -> (clazz as MultifileClassKotlinClassSnapshot).constantNames
                 }
@@ -179,12 +179,12 @@ internal fun Collection<LookupSymbol>.toProgramSymbolSet(allClasses: Iterable<Ac
 }
 
 internal fun ProgramSymbolSet.toChangesEither(): ChangesEither.Known {
-    val lookupSymbols = mutableSetOf<LookupSymbol>()
-    val fqNames = mutableSetOf<FqName>()
+    konst lookupSymbols = mutableSetOf<LookupSymbol>()
+    konst fqNames = mutableSetOf<FqName>()
 
     asSequence().forEach {
         lookupSymbols.add(it.toLookupSymbol())
-        val fqName = when (it) {
+        konst fqName = when (it) {
             is ClassSymbol -> it.classId.asSingleFqName()
             is ClassMember -> it.classId.asSingleFqName()
             is PackageMember -> it.packageFqName

@@ -5,11 +5,11 @@
  * SPEC VERSION: 0.1-313
  * MAIN LINK: expressions, when-expression -> paragraph 6 -> sentence 7
  * NUMBER: 1
- * DESCRIPTION: 'When' with bound value and else branch.
+ * DESCRIPTION: 'When' with bound konstue and else branch.
  */
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Int?) = when (value_1) {
+fun case_1(konstue_1: Int?) = when (konstue_1) {
     0 -> ""
     1 -> ""
     2 -> ""
@@ -17,7 +17,7 @@ fun case_1(value_1: Int?) = when (value_1) {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Any) = when (value_1) {
+fun case_2(konstue_1: Any) = when (konstue_1) {
     is Int -> ""
     is Boolean -> ""
     is String -> ""
@@ -25,7 +25,7 @@ fun case_2(value_1: Any) = when (value_1) {
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(value_1: Int) = when (value_1) {
+fun case_3(konstue_1: Int) = when (konstue_1) {
     in -10..10 -> ""
     in 11..1000 -> ""
     in 1000..Int.MAX_VALUE -> ""

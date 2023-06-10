@@ -23,7 +23,7 @@ abstract class AbstractLoadJavaWithPsiClassReadingTest : AbstractLoadJavaTest() 
     override fun usePsiClassFilesReading() = true
 
     override fun getExpectedFile(expectedFileName: String): File {
-        val differentResultFile = KotlinTestUtils.replaceExtension(File(expectedFileName), "psi.txt")
+        konst differentResultFile = KotlinTestUtils.replaceExtension(File(expectedFileName), "psi.txt")
         if (differentResultFile.exists()) return differentResultFile
         return super.getExpectedFile(expectedFileName)
     }

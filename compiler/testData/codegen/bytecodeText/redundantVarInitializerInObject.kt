@@ -2,14 +2,14 @@
 object RedundantInitializersToDefault {
     // Constants
 
-    const val constInt: Int = 0
-    const val constByte: Byte = 0
-    const val constLong: Long = 0L
-    const val constShort: Short = 0
-    const val constDouble: Double = 0.0
-    const val constFloat: Float = 0.0f
-    const val constBoolean: Boolean = false
-    const val constChar: Char = '\u0000'
+    const konst constInt: Int = 0
+    const konst constByte: Byte = 0
+    const konst constLong: Long = 0L
+    const konst constShort: Short = 0
+    const konst constDouble: Double = 0.0
+    const konst constFloat: Float = 0.0f
+    const konst constBoolean: Boolean = false
+    const konst constChar: Char = '\u0000'
 
     // Properties
 
@@ -83,7 +83,7 @@ object RedundantInitializersToDefault {
 }
 
 object NonRedundantInitializers {
-    // NOT redundant because the JVM's default values for floating-point types are positive 0.0.
+    // NOT redundant because the JVM's default konstues for floating-point types are positive 0.0.
     // See: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.3
     var myDouble: Double = -0.0
     var myFloat: Float = -0.0f

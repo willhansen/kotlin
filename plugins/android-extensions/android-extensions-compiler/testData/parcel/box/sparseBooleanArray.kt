@@ -9,17 +9,17 @@ import android.os.Parcelable
 import android.util.SparseBooleanArray
 
 @Parcelize
-data class User(val a: SparseBooleanArray) : Parcelable
+data class User(konst a: SparseBooleanArray) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = User(SparseBooleanArray().apply { put(1, false); put(5, true); put(1000, false) })
+    konst test = User(SparseBooleanArray().apply { put(1, false); put(5, true); put(1000, false) })
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = readFromParcel<User>(parcel)
+    konst test2 = readFromParcel<User>(parcel)
 
     assert(compareSparseBooleanArrays(test.a, test2.a))
 }
@@ -30,7 +30,7 @@ private fun compareSparseBooleanArrays(first: SparseBooleanArray, second: Sparse
 
     for (i in 0 until first.size()) {
         if (first.keyAt(i) != second.keyAt(i)) return false
-        if (first.valueAt(i) != second.valueAt(i)) return false
+        if (first.konstueAt(i) != second.konstueAt(i)) return false
     }
 
     return true

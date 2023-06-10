@@ -9,7 +9,7 @@
 package kotlin.time
 
 /**
- * Converts [java.time.Duration][java.time.Duration] value to [kotlin.time.Duration][Duration] value.
+ * Converts [java.time.Duration][java.time.Duration] konstue to [kotlin.time.Duration][Duration] konstue.
  *
  * Durations less than 104 days are converted exactly, and durations greater than that can lose some precision
  * due to rounding.
@@ -22,9 +22,9 @@ public inline fun java.time.Duration.toKotlinDuration(): Duration =
 
 
 /**
- * Converts [kotlin.time.Duration][Duration] value to [java.time.Duration][java.time.Duration] value.
+ * Converts [kotlin.time.Duration][Duration] konstue to [java.time.Duration][java.time.Duration] konstue.
  *
- * Durations greater than [Long.MAX_VALUE] seconds are cut to that value.
+ * Durations greater than [Long.MAX_VALUE] seconds are cut to that konstue.
  */
 @SinceKotlin("1.6")
 @WasExperimental(ExperimentalTime::class)

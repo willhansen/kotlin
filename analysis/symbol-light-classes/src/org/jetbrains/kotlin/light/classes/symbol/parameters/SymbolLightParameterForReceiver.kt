@@ -24,10 +24,10 @@ import org.jetbrains.kotlin.light.classes.symbol.modifierLists.SymbolLightClassM
 import org.jetbrains.kotlin.psi.KtParameter
 
 internal class SymbolLightParameterForReceiver private constructor(
-    private val receiverPointer: KtSymbolPointer<KtReceiverParameterSymbol>,
+    private konst receiverPointer: KtSymbolPointer<KtReceiverParameterSymbol>,
     methodName: String,
     method: SymbolLightMethodBase,
-    private val forPropertyAnnotations: Boolean
+    private konst forPropertyAnnotations: Boolean
 ) : SymbolLightParameterBase(method) {
     private inline fun <T> withReceiverSymbol(crossinline action: context(KtAnalysisSession) (KtReceiverParameterSymbol) -> T): T =
         receiverPointer.withSymbol(ktModule, action)
@@ -40,7 +40,7 @@ internal class SymbolLightParameterForReceiver private constructor(
         ): SymbolLightParameterForReceiver? = callableSymbolPointer.withSymbol(method.ktModule) { callableSymbol ->
             if (callableSymbol !is KtNamedSymbol) return@withSymbol null
             if (!callableSymbol.isExtension) return@withSymbol null
-            val receiverSymbol = callableSymbol.receiverParameter ?: return@withSymbol null
+            konst receiverSymbol = callableSymbol.receiverParameter ?: return@withSymbol null
 
             SymbolLightParameterForReceiver(
                 receiverPointer = receiverSymbol.createPointer(),
@@ -51,7 +51,7 @@ internal class SymbolLightParameterForReceiver private constructor(
         }
     }
 
-    private val _name: String by lazyPub {
+    private konst _name: String by lazyPub {
         if (forPropertyAnnotations) "p0" else AsmUtil.getLabeledThisName(methodName, AsmUtil.LABELED_THIS_PARAMETER, AsmUtil.RECEIVER_PARAMETER_NAME)
     }
 
@@ -62,11 +62,11 @@ internal class SymbolLightParameterForReceiver private constructor(
     override fun isVarArgs() = false
     override fun hasModifierProperty(name: String): Boolean = false
 
-    override val kotlinOrigin: KtParameter? = null
+    override konst kotlinOrigin: KtParameter? = null
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         if (forPropertyAnnotations)
             SymbolLightClassModifierList(containingDeclaration = this)
         else SymbolLightClassModifierList(
@@ -86,10 +86,10 @@ internal class SymbolLightParameterForReceiver private constructor(
         )
     }
 
-    private val _type: PsiType by lazyPub {
+    private konst _type: PsiType by lazyPub {
         withReceiverSymbol { receiver ->
-            val ktType = receiver.type
-            val psiType = ktType.asPsiTypeElement(this, allowErrorTypes = true)?.let {
+            konst ktType = receiver.type
+            konst psiType = ktType.asPsiTypeElement(this, allowErrorTypes = true)?.let {
                 annotateByKtType(it.type, ktType, it, modifierList)
             }
             if (forPropertyAnnotations) TypeConversionUtil.erasure(psiType) else psiType

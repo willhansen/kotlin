@@ -19,7 +19,7 @@ public interface CoroutineStackFrame {
      * that is a frame before this frame in coroutine call stack.
      * The result is `null` for the first frame of coroutine.
      */
-    public val callerFrame: CoroutineStackFrame?
+    public konst callerFrame: CoroutineStackFrame?
 
     /**
      * Returns stack trace element that correspond to this stack frame.

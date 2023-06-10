@@ -30,7 +30,7 @@ module {
     // signature: <init>(I)V
     public constructor(x: kotlin/Int)
 
-    public final expect val x: kotlin/Int
+    public final expect konst x: kotlin/Int
       public final get
 
     // module name: main
@@ -40,7 +40,7 @@ module {
     // signature: <init>(Lkotlin/Array;)V
     public constructor(a: kotlin/Array<kotlin/String>)
 
-    public final expect val a: kotlin/Array<kotlin/String>
+    public final expect konst a: kotlin/Array<kotlin/String>
       public final get
 
     // module name: main

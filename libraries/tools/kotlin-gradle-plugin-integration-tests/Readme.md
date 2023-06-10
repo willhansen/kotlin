@@ -28,7 +28,7 @@ also require the Gradle plugin marker artifacts to be installed:
 ./gradlew :kotlin-gradle-plugin-integration-tests:test
 ```
 
-If you want to run only one test class, you need to append `--tests` flag with value of test class, which you want to run
+If you want to run only one test class, you need to append `--tests` flag with konstue of test class, which you want to run
 ```shell
 ./gradlew :kotlin-gradle-plugin-integration-tests:kgpAllTests --tests <class-name-with-package>
 ```
@@ -151,7 +151,7 @@ pluginManagement {
         mavenLocal()
     }
 
-    val test_fixes_version: String by settings
+    konst test_fixes_version: String by settings
     plugins {
        id("org.jetbrains.kotlin.test.fixes.android") version test_fixes_version
     }

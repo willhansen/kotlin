@@ -1,2 +1,2 @@
-val a = 12
-val x = <expr>12.toByte()</expr>
+konst a = 12
+konst x = <expr>12.toByte()</expr>

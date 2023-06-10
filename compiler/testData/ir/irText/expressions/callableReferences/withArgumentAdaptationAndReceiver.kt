@@ -8,7 +8,7 @@ class Host {
     }
 
     fun testBoundReceiverLocalVal() {
-        val h = Host()
+        konst h = Host()
         use(h::withVararg)
     }
 

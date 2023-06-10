@@ -13,13 +13,13 @@ import kotlin.reflect.KClass
 
 abstract class FirSupertypeGenerationExtension(session: FirSession) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("SupertypeGenerator")
+        konst NAME = FirExtensionPointName("SupertypeGenerator")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension> = FirSupertypeGenerationExtension::class
+    final override konst extensionType: KClass<out FirExtension> = FirSupertypeGenerationExtension::class
 
     abstract fun needTransformSupertypes(declaration: FirClassLikeDeclaration): Boolean
 
@@ -32,12 +32,12 @@ abstract class FirSupertypeGenerationExtension(session: FirSession) : FirExtensi
 
     fun interface Factory : FirExtension.Factory<FirSupertypeGenerationExtension>
 
-    class TypeResolveServiceContainer(val typeResolver: TypeResolveService)
+    class TypeResolveServiceContainer(konst typeResolver: TypeResolveService)
 
     abstract class TypeResolveService {
         abstract fun resolveUserType(type: FirUserTypeRef): FirResolvedTypeRef
     }
 }
 
-val FirExtensionService.supertypeGenerators: List<FirSupertypeGenerationExtension> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.supertypeGenerators: List<FirSupertypeGenerationExtension> by FirExtensionService.registeredExtensions()
 

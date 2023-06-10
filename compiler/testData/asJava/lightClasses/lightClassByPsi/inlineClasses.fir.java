@@ -25,5 +25,5 @@ public final class InlinedDelegate /* InlinedDelegate*/<T>  {
 }
 
 public final class UInt /* UInt*/ {
-  private final int value;
+  private final int konstue;
 }

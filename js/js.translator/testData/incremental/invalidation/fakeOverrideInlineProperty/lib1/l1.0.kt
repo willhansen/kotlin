@@ -1,5 +1,5 @@
 abstract class AbstractClassA {
-    inline val propertyWithGetter: String
+    inline konst propertyWithGetter: String
         get() = "0"
 
     inline var propertyWithSetter: String

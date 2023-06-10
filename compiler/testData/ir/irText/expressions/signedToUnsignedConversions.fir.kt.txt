@@ -13,32 +13,32 @@ open annotation class ImplicitIntegerCoercion : Annotation {
 // FILE: signedToUnsignedConversions_test.kt
 
 @ImplicitIntegerCoercion
-const val IMPLICIT_INT: Int
+const konst IMPLICIT_INT: Int
   field = 255
   get
 
 @ImplicitIntegerCoercion
-const val EXPLICIT_INT: Int
+const konst EXPLICIT_INT: Int
   field = 255
   get
 
 @ImplicitIntegerCoercion
-const val LONG_CONST: Long
+const konst LONG_CONST: Long
   field = 255L
   get
 
 @ImplicitIntegerCoercion
-val NON_CONST: Int
+konst NON_CONST: Int
   field = 255
   get
 
 @ImplicitIntegerCoercion
-const val BIGGER_THAN_UBYTE: Int
+const konst BIGGER_THAN_UBYTE: Int
   field = 256
   get
 
 @ImplicitIntegerCoercion
-const val UINT_CONST: UInt
+const konst UINT_CONST: UInt
   field = 42
   get
 

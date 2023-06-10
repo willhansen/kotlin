@@ -3,11 +3,11 @@ enum class <!CONFLICTING_JVM_DECLARATIONS, CONFLICTING_JVM_DECLARATIONS!>A<!> {
     A1,
     A2;
 
-    <!CONFLICTING_JVM_DECLARATIONS!>fun valueOf(s: String): A<!> = valueOf(s)
+    <!CONFLICTING_JVM_DECLARATIONS!>fun konstueOf(s: String): A<!> = konstueOf(s)
 
-    fun valueOf() = "OK"
+    fun konstueOf() = "OK"
 
-    <!CONFLICTING_JVM_DECLARATIONS!>fun values(): Array<A><!> = null!!
+    <!CONFLICTING_JVM_DECLARATIONS!>fun konstues(): Array<A><!> = null!!
 
-    fun values(x: String) = x
+    fun konstues(x: String) = x
 }

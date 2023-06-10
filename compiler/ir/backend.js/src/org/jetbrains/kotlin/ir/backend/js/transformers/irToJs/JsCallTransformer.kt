@@ -13,14 +13,14 @@ import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.js.backend.ast.*
 
-class JsCallTransformer(private val jsOrJsFuncCall: IrCall, private val context: JsGenerationContext) {
-    private val statements = getJsStatements()
+class JsCallTransformer(private konst jsOrJsFuncCall: IrCall, private konst context: JsGenerationContext) {
+    private konst statements = getJsStatements()
 
     fun generateStatement(): JsStatement {
         if (statements.isEmpty()) return JsEmpty
 
-        val newStatements = statements.toMutableList().apply {
-            val expression = (last() as? JsReturn)?.expression ?: return@apply
+        konst newStatements = statements.toMutableList().apply {
+            konst expression = (last() as? JsReturn)?.expression ?: return@apply
 
             if (expression is JsPrefixOperation && expression.operator == JsUnaryOperator.VOID) {
                 removeLastOrNull()
@@ -40,8 +40,8 @@ class JsCallTransformer(private val jsOrJsFuncCall: IrCall, private val context:
     fun generateExpression(): JsExpression {
         if (statements.isEmpty()) return JsPrefixOperation(JsUnaryOperator.VOID, JsIntLiteral(3)) // TODO: report warning or even error
 
-        val lastStatement = statements.findLast { it !is JsSingleLineComment && it !is JsMultiLineComment }
-        val lastExpression = when (lastStatement) {
+        konst lastStatement = statements.findLast { it !is JsSingleLineComment && it !is JsMultiLineComment }
+        konst lastExpression = when (lastStatement) {
             is JsReturn -> lastStatement.expression
             is JsExpressionStatement -> lastStatement.expression
             else -> null
@@ -50,7 +50,7 @@ class JsCallTransformer(private val jsOrJsFuncCall: IrCall, private val context:
             return lastExpression.withSource(jsOrJsFuncCall, context)
         }
 
-        val newStatements = statements.toMutableList()
+        konst newStatements = statements.toMutableList()
 
         when (lastStatement) {
             is JsReturn -> {
@@ -62,8 +62,8 @@ class JsCallTransformer(private val jsOrJsFuncCall: IrCall, private val context:
             else -> newStatements += JsReturn(JsPrefixOperation(JsUnaryOperator.VOID, JsIntLiteral(3)))
         }
 
-        val syntheticFunction = JsFunction(emptyScope, JsBlock(newStatements), "")
-        val currentFunction = context.currentFunction
+        konst syntheticFunction = JsFunction(emptyScope, JsBlock(newStatements), "")
+        konst currentFunction = context.currentFunction
 
         return if (
             currentFunction != null &&

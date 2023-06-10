@@ -39,7 +39,7 @@ object FirMethodOfAnyImplementedInInterfaceChecker : FirRegularClassChecker(), F
         for (function in declaration.declarations) {
             if (function !is FirSimpleFunction || !function.isOverride || !function.hasBody) continue
             var methodOfAny = false
-            if (function.valueParameters.isEmpty() &&
+            if (function.konstueParameters.isEmpty() &&
                 (function.name == HASHCODE_NAME || function.name == TO_STRING)
             ) {
                 methodOfAny = true

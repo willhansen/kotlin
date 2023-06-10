@@ -10,14 +10,14 @@
 package foo
 
 interface Base<T : Any> {
-    val capacity: Int
+    konst capacity: Int
 }
 
 expect abstract class Derived<T : Any>(capacity: Int) : Base<T> {
-    final override val capacity: Int
+    final override konst capacity: Int
 }
 
-internal val ByteArrayPool = object : Derived<ByteArray>(128) {}
+internal konst ByteArrayPool = object : Derived<ByteArray>(128) {}
 
 // MODULE: lib()()(lib-common)
 // FILE: platform.kt
@@ -25,8 +25,8 @@ internal val ByteArrayPool = object : Derived<ByteArray>(128) {}
 package foo
 
 actual abstract class Derived<T : Any>
-actual constructor(actual final override val capacity: Int) : Base<T> {
-    private val instances = arrayOfNulls<Any?>(capacity)
+actual constructor(actual final override konst capacity: Int) : Base<T> {
+    private konst instances = arrayOfNulls<Any?>(capacity)
 }
 
 fun box(): String {

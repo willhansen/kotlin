@@ -18,9 +18,9 @@ import org.jetbrains.kotlin.gradle.utils.getByType
  * From Gradle 7.1 [org.gradle.api.plugins.BasePluginConvention] was replaced with [org.gradle.api.plugins.BasePluginExtension].
  */
 internal interface BasePluginConfiguration {
-    val archivesName: Property<String>
-    val distsDirectory: DirectoryProperty
-    val libsDirectory: DirectoryProperty
+    konst archivesName: Property<String>
+    konst distsDirectory: DirectoryProperty
+    konst libsDirectory: DirectoryProperty
 
     interface BasePluginConfigurationVariantFactory : VariantImplementationFactories.VariantImplementationFactory {
         fun getInstance(project: Project): BasePluginConfiguration
@@ -34,14 +34,14 @@ internal class DefaultBasePluginConfigurationVariantFactory : BasePluginConfigur
 }
 
 internal class DefaultBasePluginConfiguration(
-    private val basePluginExtension: BasePluginExtension
+    private konst basePluginExtension: BasePluginExtension
 ) : BasePluginConfiguration {
-    override val archivesName: Property<String>
+    override konst archivesName: Property<String>
         get() = basePluginExtension.archivesName
 
-    override val distsDirectory: DirectoryProperty
+    override konst distsDirectory: DirectoryProperty
         get() = basePluginExtension.distsDirectory
 
-    override val libsDirectory: DirectoryProperty
+    override konst libsDirectory: DirectoryProperty
         get() = basePluginExtension.libsDirectory
 }

@@ -10,13 +10,13 @@ import org.jetbrains.report.json.*
 // List of commits.
 class CommitsList(data: JsonElement): ConvertedFromJson {
 
-    val commits: List<Commit>
+    konst commits: List<Commit>
 
     init {
         if (data !is JsonObject) {
             error("Commits description is expected to be a json object!")
         }
-        val changesElement = data.getOptionalField("change")
+        konst changesElement = data.getOptionalField("change")
         commits = changesElement?.let {
             if (changesElement !is JsonArray) {
                 error("Change field is expected to be an array. Please, check source.")

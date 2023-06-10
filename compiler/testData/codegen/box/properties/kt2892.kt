@@ -4,8 +4,8 @@ class B : A() {
 }
 
 class Test {
-    val a : A = B()
-    private val b : B get() = a as B //'private' is important here
+    konst a : A = B()
+    private konst b : B get() = a as B //'private' is important here
 
     fun outer() : Int {
         fun inner() : Int = b.foo() //'no such field error' here

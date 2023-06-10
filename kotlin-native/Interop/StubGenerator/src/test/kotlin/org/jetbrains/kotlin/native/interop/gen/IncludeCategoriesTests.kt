@@ -27,48 +27,48 @@ class IncludeCategoriesTests : InteropTestsBase() {
 
     @Test
     fun `smoke 0`() {
-        val index = buildNativeIndex("IncludeCategories", "includeCategory0.def")
-        val myClass = index.getObjCClass("MyClass")
-        val myClassCategories = myClass.includedCategories.map { it.name }
+        konst index = buildNativeIndex("IncludeCategories", "includeCategory0.def")
+        konst myClass = index.getObjCClass("MyClass")
+        konst myClassCategories = myClass.includedCategories.map { it.name }
         assertContains(myClassCategories, "IncludeCategory")
         assertContains(myClassCategories, "IncludeCategory2")
     }
 
     @Test
     fun `only specific classes include categories`() {
-        val index = buildNativeIndex("IncludeCategories", "includeCategory0.def")
-        val skipClass = index.getObjCClass("SkipClass")
+        konst index = buildNativeIndex("IncludeCategories", "includeCategory0.def")
+        konst skipClass = index.getObjCClass("SkipClass")
         assertTrue(skipClass.includedCategories.isEmpty())
     }
 
     @Test
     fun `category from another header is not included`() {
-        val index = buildNativeIndex("IncludeCategories", "includeCategory0.def")
-        val myClass = index.getObjCClass("MyClass")
-        val myClassCategories = myClass.includedCategories.map { it.name }
+        konst index = buildNativeIndex("IncludeCategories", "includeCategory0.def")
+        konst myClass = index.getObjCClass("MyClass")
+        konst myClassCategories = myClass.includedCategories.map { it.name }
         assertContains(myClassCategories, "IncludeCategory")
         assertFalse("SkipCategory" in myClassCategories)
     }
 
     @Test
     fun `external category is not included into index`() {
-        val dependencyIndex = buildNativeIndex("IncludeCategories", "includeCategory0.def")
-        val index = buildNativeIndex("IncludeCategories", "includeCategory1.def", mockImports(dependencyIndex))
+        konst dependencyIndex = buildNativeIndex("IncludeCategories", "includeCategory0.def")
+        konst index = buildNativeIndex("IncludeCategories", "includeCategory1.def", mockImports(dependencyIndex))
 
-        val derivedClass = index.getObjCClass("Derived")
-        val myClass = derivedClass.baseClass!!
+        konst derivedClass = index.getObjCClass("Derived")
+        konst myClass = derivedClass.baseClass!!
         assertEquals("MyClass", myClass.name)
         assertFalse(myClass in index.index.objCClasses)
-        val myClassCategories = myClass.includedCategories
+        konst myClassCategories = myClass.includedCategories
         assertTrue(myClassCategories.isNotEmpty())
         assertTrue(myClassCategories.all { it !in index.index.objCCategories })
     }
 
     @Test
     fun `category is not included into dependency class`() {
-        val dependencyIndex = buildNativeIndex("IncludeCategories", "includeCategory0.def")
-        val index = buildNativeIndex("IncludeCategories", "includeCategory2.def", mockImports(dependencyIndex))
-        val category = index.getObjCCategory("ChildCategory")
+        konst dependencyIndex = buildNativeIndex("IncludeCategories", "includeCategory0.def")
+        konst index = buildNativeIndex("IncludeCategories", "includeCategory2.def", mockImports(dependencyIndex))
+        konst category = index.getObjCCategory("ChildCategory")
         assertFalse(category in category.clazz.includedCategories)
     }
 }

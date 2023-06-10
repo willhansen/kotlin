@@ -6,7 +6,7 @@ interface AAA
 
 fun <K : AAA, R : K> assign(dest: R, vararg src: K?): R = null as R
 
-class DIV(val tabIndex: String): AAA
+class DIV(konst tabIndex: String): AAA
 
 fun <T: AAA> jsObject(builder: T.() -> Unit): T = null as T
 

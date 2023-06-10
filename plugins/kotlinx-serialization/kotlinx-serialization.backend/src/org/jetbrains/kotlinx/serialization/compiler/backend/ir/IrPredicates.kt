@@ -32,29 +32,29 @@ import org.jetbrains.kotlinx.serialization.compiler.fir.SerializationPluginKey
 import org.jetbrains.kotlinx.serialization.compiler.resolve.*
 
 internal fun IrType.isKSerializer(): Boolean {
-    val simpleType = this as? IrSimpleType ?: return false
-    val classifier = simpleType.classifier as? IrClassSymbol ?: return false
-    val fqName = classifier.owner.fqNameWhenAvailable
+    konst simpleType = this as? IrSimpleType ?: return false
+    konst classifier = simpleType.classifier as? IrClassSymbol ?: return false
+    konst fqName = classifier.owner.fqNameWhenAvailable
     return fqName == SerialEntityNames.KSERIALIZER_NAME_FQ || fqName == SerialEntityNames.GENERATED_SERIALIZER_FQ
 }
 
 internal fun IrType.isGeneratedKSerializer(): Boolean = classifierOrNull?.isClassWithFqName(SerialEntityNames.GENERATED_SERIALIZER_FQ.toUnsafe()) == true
 
-internal val IrClass.isInternalSerializable: Boolean
+internal konst IrClass.isInternalSerializable: Boolean
     get() {
         if (kind != ClassKind.CLASS) return false
         return hasSerializableOrMetaAnnotationWithoutArgs()
     }
 
-internal val IrClass.isAbstractOrSealedSerializableClass: Boolean get() = isInternalSerializable && (modality == Modality.ABSTRACT || modality == Modality.SEALED)
+internal konst IrClass.isAbstractOrSealedSerializableClass: Boolean get() = isInternalSerializable && (modality == Modality.ABSTRACT || modality == Modality.SEALED)
 
-internal val IrClass.isStaticSerializable: Boolean get() = this.typeParameters.isEmpty()
+internal konst IrClass.isStaticSerializable: Boolean get() = this.typeParameters.isEmpty()
 
 
-internal val IrClass.hasCompanionObjectAsSerializer: Boolean
+internal konst IrClass.hasCompanionObjectAsSerializer: Boolean
     get() = isInternallySerializableObject || companionObject()?.serializerForClass == this.symbol
 
-internal val IrClass.isInternallySerializableObject: Boolean
+internal konst IrClass.isInternallySerializableObject: Boolean
     get() = kind == ClassKind.OBJECT && hasSerializableOrMetaAnnotationWithoutArgs()
 
 
@@ -76,7 +76,7 @@ internal fun IrClass.findEnumLegacySerializer(): IrClass? {
     }
 }
 
-internal val IrClass.isSealedSerializableInterface: Boolean
+internal konst IrClass.isSealedSerializableInterface: Boolean
     get() = kind == ClassKind.INTERFACE && modality == Modality.SEALED && hasSerializableOrMetaAnnotation()
 
 internal fun IrClass.isInternallySerializableEnum(): Boolean =
@@ -86,7 +86,7 @@ fun IrType.isGeneratedSerializableObject(): Boolean {
     return classOrNull?.run { owner.kind == ClassKind.OBJECT && owner.hasSerializableOrMetaAnnotationWithoutArgs() } == true
 }
 
-internal val IrClass.isSerializableObject: Boolean
+internal konst IrClass.isSerializableObject: Boolean
     get() = kind == ClassKind.OBJECT && hasSerializableOrMetaAnnotation()
 
 internal fun IrClass.hasSerializableOrMetaAnnotationWithoutArgs(): Boolean = checkSerializableOrMetaAnnotationArgs(mustDoNotHaveArgs = true)
@@ -94,7 +94,7 @@ internal fun IrClass.hasSerializableOrMetaAnnotationWithoutArgs(): Boolean = che
 fun IrClass.hasSerializableOrMetaAnnotation() = checkSerializableOrMetaAnnotationArgs(mustDoNotHaveArgs = false)
 
 private fun IrClass.checkSerializableOrMetaAnnotationArgs(mustDoNotHaveArgs: Boolean): Boolean {
-    val annot = getAnnotation(SerializationAnnotations.serializableAnnotationFqName)
+    konst annot = getAnnotation(SerializationAnnotations.serializableAnnotationFqName)
     if (annot != null) { // @Serializable have higher priority
         if (!mustDoNotHaveArgs) return true
         if (annot.getValueArgument(0) != null) return false
@@ -105,24 +105,24 @@ private fun IrClass.checkSerializableOrMetaAnnotationArgs(mustDoNotHaveArgs: Boo
         .any { it.hasAnnotation(SerializationAnnotations.metaSerializableAnnotationFqName) }
 }
 
-internal val IrClass.isSerialInfoAnnotation: Boolean
+internal konst IrClass.isSerialInfoAnnotation: Boolean
     get() = annotations.hasAnnotation(SerializationAnnotations.serialInfoFqName)
             || annotations.hasAnnotation(SerializationAnnotations.inheritableSerialInfoFqName)
             || annotations.hasAnnotation(SerializationAnnotations.metaSerializableAnnotationFqName)
 
-internal val IrClass.isInheritableSerialInfoAnnotation: Boolean
+internal konst IrClass.isInheritableSerialInfoAnnotation: Boolean
     get() = annotations.hasAnnotation(SerializationAnnotations.inheritableSerialInfoFqName)
 
 internal fun IrClass.shouldHaveGeneratedSerializer(): Boolean =
     (isInternalSerializable && (modality == Modality.FINAL || modality == Modality.OPEN))
             || isEnumWithLegacyGeneratedSerializer()
 
-internal val IrClass.shouldHaveGeneratedMethodsInCompanion: Boolean
+internal konst IrClass.shouldHaveGeneratedMethodsInCompanion: Boolean
     get() = this.isSerializableObject || this.isSerializableEnum() || (this.kind == ClassKind.CLASS && hasSerializableOrMetaAnnotation()) || this.isSealedSerializableInterface
 
 internal fun IrClass.isSerializableEnum(): Boolean = kind == ClassKind.ENUM_CLASS && hasSerializableOrMetaAnnotation()
 
-internal val IrType.genericIndex: Int?
+internal konst IrType.genericIndex: Int?
     get() = (this.classifierOrNull as? IrTypeParameterSymbol)?.owner?.index
 
 fun IrType.serialName(): String = this.classOrUpperBound()!!.owner.serialName()
@@ -132,8 +132,8 @@ fun IrClass.serialName(): String {
 }
 
 fun IrClass.findEnumValuesMethod() = this.functions.singleOrNull { f ->
-    f.name == Name.identifier("values") && f.valueParameters.isEmpty() && f.extensionReceiverParameter == null && f.dispatchReceiverParameter == null
-} ?: error("Enum class does not have single .values() function")
+    f.name == Name.identifier("konstues") && f.konstueParameters.isEmpty() && f.extensionReceiverParameter == null && f.dispatchReceiverParameter == null
+} ?: error("Enum class does not have single .konstues() function")
 
 internal fun IrClass.enumEntries(): List<IrEnumEntry> {
     check(this.kind == ClassKind.ENUM_CLASS)
@@ -150,7 +150,7 @@ fun IrClass.findWriteSelfMethod(): IrSimpleFunction? =
     functions.singleOrNull { it.name == SerialEntityNames.WRITE_SELF_NAME && !it.isFakeOverride }
 
 fun IrClass.getSuperClassNotAny(): IrClass? {
-    val parentClass =
+    konst parentClass =
         superTypes
             .mapNotNull { it.classOrNull?.owner }
             .singleOrNull { it.kind == ClassKind.CLASS || it.kind == ClassKind.ENUM_CLASS } ?: return null
@@ -168,7 +168,7 @@ internal fun IrDeclaration.isFromPlugin(afterK2: Boolean): Boolean =
 
 internal fun IrConstructor.isSerializationCtor(): Boolean {
     /*kind == CallableMemberDescriptor.Kind.SYNTHESIZED does not work because DeserializedClassConstructorDescriptor loses its kind*/
-    return valueParameters.lastOrNull()?.run {
+    return konstueParameters.lastOrNull()?.run {
         name == SerialEntityNames.dummyParamName && type.classFqName == SerializationPackages.internalPackageFqName.child(
             SerialEntityNames.SERIAL_CTOR_MARKER_NAME
         )
@@ -177,7 +177,7 @@ internal fun IrConstructor.isSerializationCtor(): Boolean {
 
 
 internal fun IrConstructor.lastArgumentIsAnnotationArray(): Boolean {
-    val lastArgType = valueParameters.lastOrNull()?.type
+    konst lastArgType = konstueParameters.lastOrNull()?.type
     if (lastArgType == null || !lastArgType.isArray()) return false
     return ((lastArgType as? IrSimpleType)?.arguments?.firstOrNull()?.typeOrNull?.classFqName?.toString() == "kotlin.Annotation")
 }
@@ -188,7 +188,7 @@ fun IrClass.findSerializableSyntheticConstructor(): IrConstructorSymbol? {
 
 internal fun IrClass.needSerializerFactory(compilerContext: SerializationPluginContext): Boolean {
     if (!(compilerContext.platform?.isNative() == true || compilerContext.platform.isJs() || compilerContext.platform.isWasm())) return false
-    val serializableClass = getSerializableClassDescriptorByCompanion(this) ?: return false
+    konst serializableClass = getSerializableClassDescriptorByCompanion(this) ?: return false
     if (serializableClass.isSerializableObject) return true
     if (serializableClass.isSerializableEnum()) return true
     if (serializableClass.isAbstractOrSealedSerializableClass) return true
@@ -201,7 +201,7 @@ internal fun IrClass.needSerializerFactory(compilerContext: SerializationPluginC
 internal fun getSerializableClassDescriptorByCompanion(companion: IrClass): IrClass? {
     if (companion.isSerializableObject) return companion
     if (!companion.isCompanion) return null
-    val classDescriptor = (companion.parent as? IrClass) ?: return null
+    konst classDescriptor = (companion.parent as? IrClass) ?: return null
     if (!classDescriptor.shouldHaveGeneratedMethodsInCompanion) return null
     return classDescriptor
 }
@@ -210,17 +210,17 @@ internal fun getSerializableClassDescriptorByCompanion(companion: IrClass): IrCl
 internal fun IrExpression.isInitializePropertyFromParameter(): Boolean =
     this is IrGetValueImpl && this.origin == IrStatementOrigin.INITIALIZE_PROPERTY_FROM_PARAMETER
 
-internal val IrConstructorCall.constructedClass
+internal konst IrConstructorCall.constructedClass
     get() = this.symbol.owner.constructedClass
 
-internal val List<IrConstructorCall>.hasAnySerialAnnotation: Boolean
+internal konst List<IrConstructorCall>.hasAnySerialAnnotation: Boolean
     get() = serialNameValue != null || any { it.constructedClass.isSerialInfoAnnotation }
 
-internal val List<IrConstructorCall>.serialNameValue: String?
+internal konst List<IrConstructorCall>.serialNameValue: String?
     get() = findAnnotation(SerializationAnnotations.serialNameAnnotationFqName)?.getStringConstArgument(0) // @SerialName("foo")
 
 
-val IrClass.primaryConstructorOrFail get() = primaryConstructor ?: error("$this is expected to have a primary constructor")
+konst IrClass.primaryConstructorOrFail get() = primaryConstructor ?: error("$this is expected to have a primary constructor")
 
 /**
  * True — ALWAYS
@@ -228,27 +228,27 @@ val IrClass.primaryConstructorOrFail get() = primaryConstructor ?: error("$this 
  * null — not specified
  */
 fun IrProperty.getEncodeDefaultAnnotationValue(): Boolean? {
-    val call = annotations.findAnnotation(SerializationAnnotations.encodeDefaultFqName) ?: return null
-    val arg = call.getValueArgument(0) ?: return true // ALWAYS by default
-    val argValue = (arg as? IrGetEnumValue
+    konst call = annotations.findAnnotation(SerializationAnnotations.encodeDefaultFqName) ?: return null
+    konst arg = call.getValueArgument(0) ?: return true // ALWAYS by default
+    konst argValue = (arg as? IrGetEnumValue
         ?: error("Argument of enum constructor expected to implement IrGetEnumValue, got $arg")).symbol.owner.name.toString()
     return when (argValue) {
         "ALWAYS" -> true
         "NEVER" -> false
-        else -> error("Unknown EncodeDefaultMode enum value: $argValue")
+        else -> error("Unknown EncodeDefaultMode enum konstue: $argValue")
     }
 }
 
 fun findSerializerConstructorForTypeArgumentsSerializers(serializer: IrClass): IrConstructorSymbol? {
-    val typeParamsCount = ((serializer.superTypes.find { it.isKSerializer() } as IrSimpleType).arguments.first().typeOrNull!! as IrSimpleType).arguments.size
+    konst typeParamsCount = ((serializer.superTypes.find { it.isKSerializer() } as IrSimpleType).arguments.first().typeOrNull!! as IrSimpleType).arguments.size
     if (typeParamsCount == 0) return null //don't need it
 
     return serializer.constructors.singleOrNull {
-        it.valueParameters.let { vps -> vps.size == typeParamsCount && vps.all { vp -> vp.type.isKSerializer() } }
+        it.konstueParameters.let { vps -> vps.size == typeParamsCount && vps.all { vp -> vp.type.isKSerializer() } }
     }?.symbol
 }
 
-fun IrType.classOrUpperBound(): IrClassSymbol? = when (val cls = classifierOrNull) {
+fun IrType.classOrUpperBound(): IrClassSymbol? = when (konst cls = classifierOrNull) {
     is IrClassSymbol -> cls
     is IrScriptSymbol -> cls.owner.targetClass
     is IrTypeParameterSymbol -> cls.owner.representativeUpperBound.classOrUpperBound()
@@ -260,7 +260,7 @@ fun IrType.classOrUpperBound(): IrClassSymbol? = when (val cls = classifierOrNul
  * to mimic behaviour of old FE (see StarProjectionImpl.getType())
  */
 fun IrSimpleType.argumentTypesOrUpperBounds(): List<IrType> {
-    val params = this.classOrUpperBound()!!.owner.typeParameters
+    konst params = this.classOrUpperBound()!!.owner.typeParameters
     return arguments.mapIndexed { index, argument ->
         argument.typeOrNull ?: params[index].representativeUpperBound
     }

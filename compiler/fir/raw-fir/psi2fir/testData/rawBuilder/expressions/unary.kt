@@ -1,30 +1,30 @@
 // WITH_STDLIB
 fun test() {
     var x = 0
-    val x1 = x++
-    val x2 = ++x
-    val x3 = --x
-    val x4 = x--
+    konst x1 = x++
+    konst x2 = ++x
+    konst x3 = --x
+    konst x4 = x--
     if (!(x == 0)) {
         println("000")
     }
 }
 
-class X(val i: Int)
+class X(konst i: Int)
 
 fun test2(x: X) {
-    val x1 = x.i++
-    val x2 = ++x.i
+    konst x1 = x.i++
+    konst x2 = ++x.i
 }
 
 fun test3(arr: Array<Int>) {
-    val x1 = arr[0]++
-    val x2 = ++arr[1]
+    konst x1 = arr[0]++
+    konst x2 = ++arr[1]
 }
 
-class Y(val arr: Array<Int>)
+class Y(konst arr: Array<Int>)
 
 fun test4(y: Y) {
-    val x1 = y.arr[0]++
-    val x2 = ++y.arr[1]
+    konst x1 = y.arr[0]++
+    konst x2 = ++y.arr[1]
 }

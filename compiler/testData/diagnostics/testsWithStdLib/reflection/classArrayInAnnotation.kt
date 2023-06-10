@@ -13,10 +13,10 @@ public @interface MyAnn {
     /**
      * @return the classes to be run
      */
-    public Class<?>[] value();
+    public Class<?>[] konstue();
 }
 // FILE: main.kt
 
 fun foo(y: MyAnn?): List<Class<*>>? {
-    return y?.value?.map { it.java }
+    return y?.konstue?.map { it.java }
 }

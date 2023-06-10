@@ -6,7 +6,7 @@
 // ^ KT-57428
 
 class C {
-    val c = 42
+    konst c = 42
 }
 
 context(C)

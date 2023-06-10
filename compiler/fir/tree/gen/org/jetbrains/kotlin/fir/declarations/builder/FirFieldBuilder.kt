@@ -53,18 +53,18 @@ open class FirFieldBuilder : FirVariableBuilder, FirAnnotationContainerBuilder {
     override lateinit var moduleData: FirModuleData
     override lateinit var origin: FirDeclarationOrigin
     override var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
-    open val typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
+    open konst typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
     override lateinit var status: FirDeclarationStatus
     override lateinit var returnTypeRef: FirTypeRef
     override var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     override var containerSource: DeserializedContainerSource? = null
     override var dispatchReceiverType: ConeSimpleKotlinType? = null
-    override val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    override konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
     override lateinit var name: Name
     override var initializer: FirExpression? = null
     override var isVar: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
     override var backingField: FirBackingField? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     open lateinit var symbol: FirFieldSymbol
 
     @OptIn(FirImplementationDetail::class)

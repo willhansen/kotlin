@@ -21,12 +21,12 @@ import java.lang.annotation.Target;
 
 /**
  * Qualifier for a reference type in a {@link ElementType#TYPE_USE TYPE_USE} position:
- * The type that has this annotation explicitly includes the value <code>null</code>.
+ * The type that has this annotation explicitly includes the konstue <code>null</code>.
  * <p>
  * If annotation based null analysis is enabled using this annotation has two consequences:
  * </p>
  * <ol>
- * <li>Binding a <code>null</code> value to an entity (field, local variable, method parameter or method return value)
+ * <li>Binding a <code>null</code> konstue to an entity (field, local variable, method parameter or method return konstue)
  *     of this type is legal.</li>
  * <li>Dereferencing an expression of this type is unsafe, i.e., a <code>NullPointerException</code> can occur at runtime.</li>
  * </ol>

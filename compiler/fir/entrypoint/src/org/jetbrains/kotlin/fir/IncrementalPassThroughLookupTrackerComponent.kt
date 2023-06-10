@@ -16,24 +16,24 @@ import org.jetbrains.kotlin.utils.SmartList
 import java.util.concurrent.ConcurrentHashMap
 
 class IncrementalPassThroughLookupTrackerComponent(
-    private val lookupTracker: LookupTracker,
-    private val sourceToFilePath: (KtSourceElement) -> String?
+    private konst lookupTracker: LookupTracker,
+    private konst sourceToFilePath: (KtSourceElement) -> String?
 ) : FirLookupTrackerComponent() {
 
-    private val requiresPosition = lookupTracker.requiresPosition
-    private val sourceToFilePathsCache = ConcurrentHashMap<KtSourceElement, String>()
+    private konst requiresPosition = lookupTracker.requiresPosition
+    private konst sourceToFilePathsCache = ConcurrentHashMap<KtSourceElement, String>()
 
     override fun recordLookup(name: Name, inScopes: List<String>, source: KtSourceElement?, fileSource: KtSourceElement?) {
         // finding file for a source only possible for PSI, here it means
         // that we allow null for file source only for PSI-only "sources", currently - java ones, ignoring the other cases
-        // TODO: although there are valid use cases for missing fileSource, the ignore may hide some possible bugs; consider stricter implementation
-        val definedSource = fileSource ?: (source as? KtPsiSourceElement) ?: return
-        val path = sourceToFilePathsCache.getOrPut(definedSource) {
+        // TODO: although there are konstid use cases for missing fileSource, the ignore may hide some possible bugs; consider stricter implementation
+        konst definedSource = fileSource ?: (source as? KtPsiSourceElement) ?: return
+        konst path = sourceToFilePathsCache.getOrPut(definedSource) {
             sourceToFilePath(definedSource) ?:
                 // TODO: the lookup by non-file source mostly doesn't work for the LT, so we cannot afford null file sources here
                 return
         }
-        val position = if (requiresPosition && source != null && source is KtPsiSourceElement) {
+        konst position = if (requiresPosition && source != null && source is KtPsiSourceElement) {
             getLineAndColumnInPsiFile(source.psi.containingFile, source.psi.textRange).let { Position(it.line, it.column) }
         } else Position.NO_POSITION
 

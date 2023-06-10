@@ -15,7 +15,7 @@ public interface JavaDerived extends JavaInterface<Derived> {
 }
 
 // FILE: Kotlin.kt
-class Derived(val value: String)
+class Derived(konst konstue: String)
 
 class Test : JavaDerived {
     override fun foo(a: Derived?): Derived {
@@ -24,5 +24,5 @@ class Test : JavaDerived {
 }
 
 fun box(): String {
-    return Test().foo(Derived("OK")).value
+    return Test().foo(Derived("OK")).konstue
 }

@@ -12,8 +12,8 @@ import kotlin.test.Test
 
 class ProjectTest : AbstractSerializationTest<IdeaKpmProject>() {
 
-    override fun serialize(value: IdeaKpmProject): ByteArray {
-        return value.toByteArray(this)
+    override fun serialize(konstue: IdeaKpmProject): ByteArray {
+        return konstue.toByteArray(this)
     }
 
     override fun deserialize(data: ByteArray): IdeaKpmProject {

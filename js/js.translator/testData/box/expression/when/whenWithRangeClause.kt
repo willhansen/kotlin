@@ -11,7 +11,7 @@ fun box(): String {
     return "OK"
 }
 fun testFun(index: Int): String {
-    val thirdRange = 500..1000
+    konst thirdRange = 500..1000
     return when (get(index)) {
         in 0..9 -> "hit"
         in 100.rangeTo(200) -> "hit!"
@@ -26,8 +26,8 @@ fun testFun2(index: Int): String {
     }
 }
 
-fun get(value: Int): Int {
+fun get(konstue: Int): Int {
     invocationCount++
-    return value
+    return konstue
 }
 var invocationCount = 0

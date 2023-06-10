@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.descriptors.SourceFile
 import org.jetbrains.kotlin.load.java.sources.JavaSourceElement
 import org.jetbrains.kotlin.load.java.structure.JavaElement
 
-class JavacBasedSourceElement(override val javaElement: JavaElement) : JavaSourceElement {
+class JavacBasedSourceElement(override konst javaElement: JavaElement) : JavaSourceElement {
 
     override fun getContainingFile(): SourceFile = SourceFile.NO_SOURCE_FILE
 }

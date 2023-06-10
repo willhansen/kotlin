@@ -51,16 +51,16 @@ object FirClassVarianceChecker : FirClassChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val memberSource = member.source
+        konst memberSource = member.source
         if (member is FirSimpleFunction) {
             if (memberSource != null && memberSource.kind !is KtFakeSourceElementKind) {
-                for (param in member.valueParameters) {
+                for (param in member.konstueParameters) {
                     checkVarianceConflict(param.returnTypeRef, Variance.IN_VARIANCE, context, reporter)
                 }
             }
         }
 
-        val returnTypeVariance =
+        konst returnTypeVariance =
             if (member is FirProperty && member.isVar) Variance.INVARIANT else Variance.OUT_VARIANCE
 
         var returnSource = member.returnTypeRef.source
@@ -74,7 +74,7 @@ object FirClassVarianceChecker : FirClassChecker() {
 
         checkVarianceConflict(member.returnTypeRef, returnTypeVariance, context, reporter, returnSource)
 
-        val receiverTypeRef = member.receiverParameter?.typeRef
+        konst receiverTypeRef = member.receiverParameter?.typeRef
         if (receiverTypeRef != null) {
             checkVarianceConflict(receiverTypeRef, Variance.IN_VARIANCE, context, reporter)
         }
@@ -112,14 +112,14 @@ object FirClassVarianceChecker : FirClassChecker() {
         isInAbbreviation: Boolean = false
     ) {
         if (type is ConeTypeParameterType) {
-            val fullyExpandedType = type.fullyExpandedType(context.session)
-            val typeParameterSymbol = type.lookupTag.typeParameterSymbol
-            val resultSource = source ?: typeRef?.source
+            konst fullyExpandedType = type.fullyExpandedType(context.session)
+            konst typeParameterSymbol = type.lookupTag.typeParameterSymbol
+            konst resultSource = source ?: typeRef?.source
             if (resultSource != null &&
                 !typeParameterSymbol.variance.allowsPosition(variance) &&
                 !fullyExpandedType.attributes.contains(CompilerConeAttributes.UnsafeVariance)
             ) {
-                val factory =
+                konst factory =
                     if (isInAbbreviation) FirErrors.TYPE_VARIANCE_CONFLICT_IN_EXPANDED_TYPE else FirErrors.TYPE_VARIANCE_CONFLICT_ERROR
                 reporter.reportOn(
                     resultSource,
@@ -135,23 +135,23 @@ object FirClassVarianceChecker : FirClassChecker() {
         }
 
         if (type is ConeClassLikeType) {
-            val fullyExpandedType = type.fullyExpandedType(context.session)
-            val classSymbol = fullyExpandedType.lookupTag.toSymbol(context.session)
+            konst fullyExpandedType = type.fullyExpandedType(context.session)
+            konst classSymbol = fullyExpandedType.lookupTag.toSymbol(context.session)
             if (classSymbol is FirClassSymbol<*>) {
-                val typeRefAndSourcesForArguments = extractArgumentsTypeRefAndSource(typeRef)
+                konst typeRefAndSourcesForArguments = extractArgumentsTypeRefAndSource(typeRef)
                 for ((index, typeArgument) in fullyExpandedType.typeArguments.withIndex()) {
-                    val paramVariance = classSymbol.typeParameterSymbols.getOrNull(index)?.variance ?: continue
+                    konst paramVariance = classSymbol.typeParameterSymbols.getOrNull(index)?.variance ?: continue
 
-                    val argVariance = when (typeArgument.kind) {
+                    konst argVariance = when (typeArgument.kind) {
                         ProjectionKind.IN -> Variance.IN_VARIANCE
                         ProjectionKind.OUT -> Variance.OUT_VARIANCE
                         ProjectionKind.INVARIANT -> Variance.INVARIANT
                         else -> continue
                     }
 
-                    val typeArgumentType = typeArgument.type ?: continue
+                    konst typeArgumentType = typeArgument.type ?: continue
 
-                    val newVariance = when (EnrichedProjectionKind.getEffectiveProjectionKind(paramVariance, argVariance)) {
+                    konst newVariance = when (EnrichedProjectionKind.getEffectiveProjectionKind(paramVariance, argVariance)) {
                         EnrichedProjectionKind.OUT -> variance
                         EnrichedProjectionKind.IN -> variance.opposite()
                         EnrichedProjectionKind.INV -> Variance.INVARIANT
@@ -159,7 +159,7 @@ object FirClassVarianceChecker : FirClassChecker() {
                     }
 
                     if (newVariance != null) {
-                        val subTypeRefAndSource = typeRefAndSourcesForArguments?.getOrNull(index)
+                        konst subTypeRefAndSource = typeRefAndSourcesForArguments?.getOrNull(index)
 
                         checkVarianceConflict(
                             typeArgumentType, newVariance, subTypeRefAndSource?.typeRef, containingType,

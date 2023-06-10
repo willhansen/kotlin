@@ -124,7 +124,7 @@ digraph implicitReceiverAsWhenSubject_kt {
                 color=blue
                 38 [label="Enter when"];
                 39 [label="Access variable this@R|/test_2|"];
-                40 [label="Variable declaration: lval x: R|kotlin/Any|"];
+                40 [label="Variable declaration: lkonst x: R|kotlin/Any|"];
                 subgraph cluster_12 {
                     color=blue
                     41 [label="Enter when branch condition "];
@@ -178,7 +178,7 @@ digraph implicitReceiverAsWhenSubject_kt {
                 73 [label="Exit when branch result"];
                 74 [label="Exit when"];
             }
-            75 [label="Jump: ^test_2 when (lval x: R|kotlin/Any| = this@R|/test_2|) {
+            75 [label="Jump: ^test_2 when (lkonst x: R|kotlin/Any| = this@R|/test_2|) {
     ($subj$ is R|kotlin/collections/List<*>|) ->  {
         R|<local>/x|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|
         this@R|/test_2|.R|SubstitutionOverride<kotlin/collections/List.size: R|kotlin/Int|>|

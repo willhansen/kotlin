@@ -31,7 +31,7 @@ import kotlin.native.ObsoleteNativeApi
  */
 // TODO: replace the implementation with one using BitSet for first 256 symbols and a hash table / tree for the rest of UTF.
 @OptIn(ObsoleteNativeApi::class)
-internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = false)  : AbstractCharClass()  {
+internal class CharClass(konst ignoreCase: Boolean = false, negative: Boolean = false)  : AbstractCharClass()  {
 
     var invertedSurrogates = false
 
@@ -47,7 +47,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
     var hideBits = false
 
     internal var bits_ = BitSet()
-    override val bits: BitSet?
+    override konst bits: BitSet?
         get() {
             if (hideBits)
                 return null
@@ -56,13 +56,13 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
 
     var nonBitSet: AbstractCharClass? = null
 
-    private val Int.asciiSupplement: Int
+    private konst Int.asciiSupplement: Int
         get() = when {
             this in 'a'.toInt()..'z'.toInt() -> this - 32
             this in 'A'.toInt()..'Z'.toInt() -> this + 32
             else -> this
         }
-    private val Int.isSurrogate: Boolean
+    private konst Int.isSurrogate: Boolean
         get() = this in Char.MIN_SURROGATE.toInt()..Char.MAX_SURROGATE.toInt()
 
     init {
@@ -134,7 +134,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
             }
         }
 
-        val anotherBits = another.bits
+        konst anotherBits = another.bits
         if (!hideBits && anotherBits != null) {
             if (!inverted) {
 
@@ -162,7 +162,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
             }
         // Some of charclasses hides its bits
         } else {
-            val curAlt = alt
+            konst curAlt = alt
 
             if (nonBitSet == null) {
 
@@ -175,7 +175,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
                 } else {
 
                     /*
-                     * We keep the value of alt unchanged for
+                     * We keep the konstue of alt unchanged for
                      * constructions like [^[abc]fgb] by using
                      * the formula a ^ b == !a ^ !b.
                      */
@@ -196,7 +196,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
 
                 hideBits = true
             } else {
-                val nb = nonBitSet
+                konst nb = nonBitSet
 
                 if (curAlt) {
                     nonBitSet = object : AbstractCharClass() {
@@ -221,8 +221,8 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
     fun add(start: Int, end: Int): CharClass {
         if (start > end)
             throw IllegalArgumentException("Incorrect range of symbols (start > end)")
-        val minSurrogate = Char.MIN_SURROGATE.toInt()
-        val maxSurrogate = Char.MAX_SURROGATE.toInt()
+        konst minSurrogate = Char.MIN_SURROGATE.toInt()
+        konst maxSurrogate = Char.MAX_SURROGATE.toInt()
         if (ignoreCase) {
             // TODO: Make a faster implementation.
             for (i in start..end) {
@@ -233,8 +233,8 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
             if (end < minSurrogate || start > maxSurrogate) {
                 bits_.set(start, end + 1, !inverted)
             } else {
-                val surrogatesStart = maxOf(start, minSurrogate)
-                val surrogatesEnd = minOf(end, maxSurrogate)
+                konst surrogatesStart = maxOf(start, minSurrogate)
+                konst surrogatesEnd = minOf(end, maxSurrogate)
                 bits_.set(start, end + 1, !inverted)
                 lowHighSurrogates.set(surrogatesStart - minSurrogate,
                         surrogatesEnd - minSurrogate + 1,
@@ -291,7 +291,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
             }
         }
 
-        val anotherBits = another.bits
+        konst anotherBits = another.bits
         if (!hideBits && anotherBits != null) {
             if (alt xor another.isNegative()) {
 
@@ -318,7 +318,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
                 }
             }
         } else {
-            val curAlt = alt
+            konst curAlt = alt
 
             if (nonBitSet == null) {
 
@@ -354,7 +354,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
                 }
                 hideBits = true
             } else {
-                val nb = nonBitSet
+                konst nb = nonBitSet
 
                 if (curAlt) {
                     nonBitSet = object : AbstractCharClass() {
@@ -403,7 +403,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
             }
         }
 
-        val anotherBits = another.bits
+        konst anotherBits = another.bits
         if (!hideBits && anotherBits != null) {
 
             if (alt xor another.isNegative()) {
@@ -430,7 +430,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
                 }
             }
         } else {
-            val curAlt = alt
+            konst curAlt = alt
 
             if (nonBitSet == null) {
 
@@ -466,7 +466,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
                 }
                 hideBits = true
             } else {
-                val nb = nonBitSet
+                konst nb = nonBitSet
 
                 if (curAlt) {
                     nonBitSet = object : AbstractCharClass() {
@@ -503,19 +503,19 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
     }
 
     @OptIn(ExperimentalNativeApi::class)
-    override val instance: AbstractCharClass
+    override konst instance: AbstractCharClass
         get() {
 
             if (nonBitSet == null) {
-                val bs = bits
+                konst bs = bits
 
-                val res = object : AbstractCharClass() {
+                konst res = object : AbstractCharClass() {
                     override operator fun contains(ch: Int): Boolean {
                         return this.alt xor bs!!.get(ch)
                     }
 
                     override fun toString(): String {
-                        val temp = StringBuilder()
+                        konst temp = StringBuilder()
                         var i = bs!!.nextSetBit(0)
                         while (i >= 0) {
                             temp.append(Char.toChars(i))
@@ -539,7 +539,7 @@ internal class CharClass(val ignoreCase: Boolean = false, negative: Boolean = fa
     @OptIn(ExperimentalNativeApi::class)
     //for debugging purposes only
     override fun toString(): String {
-        val temp = StringBuilder()
+        konst temp = StringBuilder()
         var i = bits_.nextSetBit(0)
         while (i >= 0) {
             temp.append(Char.toChars(i))

@@ -15,16 +15,16 @@ FILE: annotationsOnNullableParenthesizedTypes.kt
 
         public? final? fun returnArgument(): B<@A() C?>
 
-        public? final? val lambdaType: @A() ( () -> C )?
+        public? final? konst lambdaType: @A() ( () -> C )?
             public? [ContainingClassKey=AnnotationsOnNullableParenthesizedTypes] get(): @A() ( () -> C )?
 
-        public? final? val lambdaParameter: ( (@A() C?) -> C )
+        public? final? konst lambdaParameter: ( (@A() C?) -> C )
             public? [ContainingClassKey=AnnotationsOnNullableParenthesizedTypes] get(): ( (@A() C?) -> C )
 
-        public? final? val lambdaReturnValue: ( () -> @A() C? )
+        public? final? konst lambdaReturnValue: ( () -> @A() C? )
             public? [ContainingClassKey=AnnotationsOnNullableParenthesizedTypes] get(): ( () -> @A() C? )
 
-        public? final? val lambdaReceiver: ( @A() C?.() -> C )
+        public? final? konst lambdaReceiver: ( @A() C?.() -> C )
             public? [ContainingClassKey=AnnotationsOnNullableParenthesizedTypes] get(): ( @A() C?.() -> C )
 
     }

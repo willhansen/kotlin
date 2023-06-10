@@ -3,5 +3,5 @@ package foo
 class ReverseChild : ReverseInter()
 
 open class ReverseBase {
-    open val x get() = 0
+    open konst x get() = 0
 }

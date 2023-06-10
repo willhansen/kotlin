@@ -6,7 +6,7 @@ annotation class An
 @An
 interface A {
     @An
-    val p1: @An String
+    konst p1: @An String
     @An
     var p2: @An String
     @An
@@ -15,9 +15,9 @@ interface A {
 
 @An
 interface B : A {
-    override val p1: <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE("p1; public abstract val p1: String defined in A")!>Int<!>
+    override konst p1: <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE("p1; public abstract konst p1: String defined in A")!>Int<!>
     @An
-    override <!VAR_OVERRIDDEN_BY_VAL("public abstract val p2: String defined in B; public abstract var p2: String defined in A")!>val<!> p2: @An String
+    override <!VAR_OVERRIDDEN_BY_VAL("public abstract konst p2: String defined in B; public abstract var p2: String defined in A")!>konst<!> p2: @An String
     override fun test(arg: String): <!RETURN_TYPE_MISMATCH_ON_OVERRIDE("test; public abstract fun test(arg: String): String defined in A")!>Int<!>
 }
 

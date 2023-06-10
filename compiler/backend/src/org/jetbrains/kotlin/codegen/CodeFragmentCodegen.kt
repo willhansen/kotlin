@@ -27,28 +27,28 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 import org.jetbrains.kotlin.codegen.extensions.ExpressionCodegenExtension.Context as InCo
 
 class CodeFragmentCodegenInfo(
-    val classDescriptor: ClassDescriptor,
-    val methodDescriptor: FunctionDescriptor,
-    val parameters: List<IParameter>
+    konst classDescriptor: ClassDescriptor,
+    konst methodDescriptor: FunctionDescriptor,
+    konst parameters: List<IParameter>
 ) {
-    val classType: Type = Type.getObjectType(classDescriptor.name.asString())
+    konst classType: Type = Type.getObjectType(classDescriptor.name.asString())
 
     interface IParameter {
-        val targetDescriptor: DeclarationDescriptor
-        val targetType: KotlinType
-        val isLValue: Boolean
+        konst targetDescriptor: DeclarationDescriptor
+        konst targetType: KotlinType
+        konst isLValue: Boolean
     }
 }
 
 class CodeFragmentCodegen private constructor(
-    private val codeFragment: KtCodeFragment,
-    private val info: CodeFragmentCodegenInfo,
-    private val calculatedInfo: CalculatedCodeFragmentCodegenInfo,
-    private val classContext: CodeFragmentContext,
+    private konst codeFragment: KtCodeFragment,
+    private konst info: CodeFragmentCodegenInfo,
+    private konst calculatedInfo: CalculatedCodeFragmentCodegenInfo,
+    private konst classContext: CodeFragmentContext,
     state: GenerationState,
     builder: ClassBuilder
 ) : MemberCodegen<KtCodeFragment>(state, null, classContext, codeFragment, builder) {
-    private val methodDescriptor = info.methodDescriptor
+    private konst methodDescriptor = info.methodDescriptor
 
     override fun generateDeclaration() {
         v.defineClass(
@@ -65,7 +65,7 @@ class CodeFragmentCodegen private constructor(
     override fun generateBody() {
         genConstructor()
 
-        val methodContext = object : MethodContext(methodDescriptor, classContext.contextKind, classContext, null, false) {
+        konst methodContext = object : MethodContext(methodDescriptor, classContext.contextKind, classContext, null, false) {
             override fun <D : CallableMemberDescriptor> getAccessorForSuperCallIfNeeded(
                 descriptor: D,
                 superCallTarget: ClassDescriptor?,
@@ -83,12 +83,12 @@ class CodeFragmentCodegen private constructor(
     }
 
     private fun genConstructor() {
-        val mv = v.newMethod(NO_ORIGIN, ACC_PUBLIC, "<init>", "()V", null, null)
+        konst mv = v.newMethod(NO_ORIGIN, ACC_PUBLIC, "<init>", "()V", null, null)
 
         if (state.classBuilderMode.generateBodies) {
             mv.visitCode()
 
-            val iv = InstructionAdapter(mv)
+            konst iv = InstructionAdapter(mv)
             iv.load(0, info.classType)
             iv.invokespecial("java/lang/Object", "<init>", "()V", false)
             iv.areturn(Type.VOID_TYPE)
@@ -99,12 +99,12 @@ class CodeFragmentCodegen private constructor(
     }
 
     private fun genMethod(methodContext: MethodContext) {
-        val returnType = calculatedInfo.returnAsmType
-        val parameters = calculatedInfo.parameters
+        konst returnType = calculatedInfo.returnAsmType
+        konst parameters = calculatedInfo.parameters
 
-        val methodDesc = Type.getMethodDescriptor(returnType, *parameters.map { it.asmType }.toTypedArray())
+        konst methodDesc = Type.getMethodDescriptor(returnType, *parameters.map { it.asmType }.toTypedArray())
 
-        val mv = v.newMethod(
+        konst mv = v.newMethod(
             OtherOrigin(codeFragment, methodContext.functionDescriptor),
             ACC_PUBLIC or ACC_STATIC,
             methodDescriptor.name.asString(), methodDesc,
@@ -114,12 +114,12 @@ class CodeFragmentCodegen private constructor(
         if (state.classBuilderMode.generateBodies) {
             mv.visitCode()
 
-            val frameMap = FrameMap()
+            konst frameMap = FrameMap()
             parameters.forEach { frameMap.enter(it.targetDescriptor, it.asmType) }
 
-            val codegen = object : ExpressionCodegen(mv, frameMap, returnType, methodContext, state, this) {
+            konst codegen = object : ExpressionCodegen(mv, frameMap, returnType, methodContext, state, this) {
                 override fun findCapturedValue(descriptor: DeclarationDescriptor): StackValue? {
-                    val parameter = calculatedInfo.findParameter(descriptor) ?: return super.findCapturedValue(descriptor)
+                    konst parameter = calculatedInfo.findParameter(descriptor) ?: return super.findCapturedValue(descriptor)
                     return parameter.stackValue
                 }
 
@@ -129,7 +129,7 @@ class CodeFragmentCodegen private constructor(
                 }
 
                 override fun generateExtensionReceiver(descriptor: CallableDescriptor): StackValue {
-                    val receiverParameter = descriptor.extensionReceiverParameter
+                    konst receiverParameter = descriptor.extensionReceiverParameter
                     if (receiverParameter != null) {
                         findCapturedValue(receiverParameter)?.let { return it }
                     }
@@ -141,7 +141,7 @@ class CodeFragmentCodegen private constructor(
                     expression: KtSimpleNameExpression, receiver: StackValue,
                     descriptor: DeclarationDescriptor, resolvedCall: ResolvedCall<*>?, isSyntheticField: Boolean
                 ): StackValue {
-                    val resultingDescriptor = resolvedCall?.resultingDescriptor
+                    konst resultingDescriptor = resolvedCall?.resultingDescriptor
                     if (resultingDescriptor != null) {
                         findCapturedValue(resultingDescriptor)?.let { return it }
                     }
@@ -149,8 +149,8 @@ class CodeFragmentCodegen private constructor(
                 }
 
                 override fun visitThisExpression(expression: KtThisExpression, receiver: StackValue?): StackValue {
-                    val instanceReference = expression.instanceReference
-                    val target = bindingContext[BindingContext.REFERENCE_TARGET, instanceReference]
+                    konst instanceReference = expression.instanceReference
+                    konst target = bindingContext[BindingContext.REFERENCE_TARGET, instanceReference]
                     if (target != null) {
                         findCapturedValue(target)?.let { return it }
                     }
@@ -170,7 +170,7 @@ class CodeFragmentCodegen private constructor(
     }
 
     companion object {
-        private val INFO_USERDATA_KEY = Key.create<CodeFragmentCodegenInfo>("CODE_FRAGMENT_CODEGEN_INFO")
+        private konst INFO_USERDATA_KEY = Key.create<CodeFragmentCodegenInfo>("CODE_FRAGMENT_CODEGEN_INFO")
 
         fun setCodeFragmentInfo(codeFragment: KtCodeFragment, info: CodeFragmentCodegenInfo) {
             codeFragment.putUserData(INFO_USERDATA_KEY, info)
@@ -191,41 +191,41 @@ class CodeFragmentCodegen private constructor(
             state: GenerationState,
             parentContext: CodegenContext<*>
         ): CodeFragmentCodegen {
-            val info = getCodeFragmentInfo(declaration)
-            val classDescriptor = info.classDescriptor
-            val builder = state.factory.newVisitor(OtherOrigin(declaration, classDescriptor), info.classType, declaration.containingFile)
-            val calculatedInfo = calculateInfo(info, state.typeMapper)
-            val classContext = CodeFragmentContext(state.typeMapper, classDescriptor, parentContext, calculatedInfo)
+            konst info = getCodeFragmentInfo(declaration)
+            konst classDescriptor = info.classDescriptor
+            konst builder = state.factory.newVisitor(OtherOrigin(declaration, classDescriptor), info.classType, declaration.containingFile)
+            konst calculatedInfo = calculateInfo(info, state.typeMapper)
+            konst classContext = CodeFragmentContext(state.typeMapper, classDescriptor, parentContext, calculatedInfo)
             return CodeFragmentCodegen(declaration, info, calculatedInfo, classContext, state, builder)
         }
 
         private fun calculateInfo(info: CodeFragmentCodegenInfo, typeMapper: KotlinTypeMapper): CalculatedCodeFragmentCodegenInfo {
-            val methodSignature = typeMapper.mapSignatureSkipGeneric(info.methodDescriptor)
-            require(info.parameters.size == methodSignature.valueParameters.size)
-            require(info.parameters.size == info.methodDescriptor.valueParameters.size)
+            konst methodSignature = typeMapper.mapSignatureSkipGeneric(info.methodDescriptor)
+            require(info.parameters.size == methodSignature.konstueParameters.size)
+            require(info.parameters.size == info.methodDescriptor.konstueParameters.size)
 
             var stackIndex = 0
-            val parameters = mutableListOf<CalculatedParameter>()
+            konst parameters = mutableListOf<CalculatedParameter>()
 
             for (parameterIndex in 0 until info.parameters.size) {
-                val parameter = info.parameters[parameterIndex]
-                val asmParameter = methodSignature.valueParameters[parameterIndex]
-                val parameterDescriptor = info.methodDescriptor.valueParameters[parameterIndex]
+                konst parameter = info.parameters[parameterIndex]
+                konst asmParameter = methodSignature.konstueParameters[parameterIndex]
+                konst parameterDescriptor = info.methodDescriptor.konstueParameters[parameterIndex]
 
-                val asmType: Type
-                val stackValue: StackValue
+                konst asmType: Type
+                konst stackValue: StackValue
 
-                val sharedAsmType = getSharedTypeIfApplicable(parameter, typeMapper)
+                konst sharedAsmType = getSharedTypeIfApplicable(parameter, typeMapper)
                 if (sharedAsmType != null) {
                     asmType = sharedAsmType
-                    val unwrappedType = typeMapper.mapType(parameter.targetType)
+                    konst unwrappedType = typeMapper.mapType(parameter.targetType)
                     stackValue = StackValue.shared(stackIndex, unwrappedType)
                 } else {
                     asmType = asmParameter.asmType
                     stackValue = StackValue.local(stackIndex, asmType)
                 }
 
-                val calculatedParameter = CalculatedParameter(parameter, asmType, stackValue, parameterDescriptor)
+                konst calculatedParameter = CalculatedParameter(parameter, asmType, stackValue, parameterDescriptor)
                 parameters += calculatedParameter
 
                 stackIndex += if (asmType == Type.DOUBLE_TYPE || asmType == Type.LONG_TYPE) 2 else 1
@@ -235,7 +235,7 @@ class CodeFragmentCodegen private constructor(
         }
 
         fun getSharedTypeIfApplicable(parameter: IParameter, typeMapper: KotlinTypeMapper): Type? {
-            return when (val descriptor = parameter.targetDescriptor) {
+            return when (konst descriptor = parameter.targetDescriptor) {
                 is LocalVariableDescriptor -> {
                     var result = typeMapper.getSharedVarType(descriptor)
                     if (result == null && parameter.isLValue) {
@@ -249,12 +249,12 @@ class CodeFragmentCodegen private constructor(
     }
 }
 
-private class CalculatedCodeFragmentCodegenInfo(val parameters: List<CalculatedParameter>, val returnAsmType: Type) {
+private class CalculatedCodeFragmentCodegenInfo(konst parameters: List<CalculatedParameter>, konst returnAsmType: Type) {
     class CalculatedParameter(
         parameter: IParameter,
-        val asmType: Type,
-        val stackValue: StackValue,
-        val parameterDescriptor: ValueParameterDescriptor
+        konst asmType: Type,
+        konst stackValue: StackValue,
+        konst parameterDescriptor: ValueParameterDescriptor
     ) : IParameter by parameter
 
     fun findParameter(target: DeclarationDescriptor): CalculatedParameter? {
@@ -272,30 +272,30 @@ private class CodeFragmentContext(
     typeMapper: KotlinTypeMapper,
     contextDescriptor: ClassDescriptor,
     parentContext: CodegenContext<*>?,
-    private val calculatedInfo: CalculatedCodeFragmentCodegenInfo
+    private konst calculatedInfo: CalculatedCodeFragmentCodegenInfo
 ) : ScriptLikeContext(typeMapper, contextDescriptor, parentContext) {
-    private val localLookup = object : LocalLookup {
+    private konst localLookup = object : LocalLookup {
         override fun isLocal(descriptor: DeclarationDescriptor?): Boolean {
             return calculatedInfo.parameters.any { descriptor == it.targetDescriptor || descriptor == it.parameterDescriptor }
         }
     }
 
     override fun getOuterReceiverExpression(prefix: StackValue?, thisOrOuterClass: ClassDescriptor): StackValue {
-        val parameter = calculatedInfo.findParameter(thisOrOuterClass)
-            ?: throw IllegalStateException("Can not generate outer receiver value for $thisOrOuterClass")
+        konst parameter = calculatedInfo.findParameter(thisOrOuterClass)
+            ?: throw IllegalStateException("Can not generate outer receiver konstue for $thisOrOuterClass")
 
         return parameter.stackValue
     }
 
     override fun captureVariable(closure: MutableClosure, target: DeclarationDescriptor): StackValue? {
-        val parameter = calculatedInfo.findParameter(target) ?: return null
-        val parameterDescriptor = parameter.parameterDescriptor
+        konst parameter = calculatedInfo.findParameter(target) ?: return null
+        konst parameterDescriptor = parameter.parameterDescriptor
 
         // Value is already captured
         closure.captureVariables[parameterDescriptor]?.let { return it.innerValue }
 
-        // Capture new value
-        val closureAsmType = typeMapper.mapType(closure.closureClass)
+        // Capture new konstue
+        konst closureAsmType = typeMapper.mapType(closure.closureClass)
         return LocalLookupCase.VAR.innerValue(parameterDescriptor, localLookup, state, closure, closureAsmType)
     }
 }

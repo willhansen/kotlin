@@ -21,17 +21,17 @@ import java.util.concurrent.ConcurrentHashMap
 
 internal object TestRunners {
     fun createProperTestRunner(testRun: TestRun, settings: Settings): Runner<Unit> = with(settings) {
-        if (get<ForcedNoopTestRunner>().value) {
+        if (get<ForcedNoopTestRunner>().konstue) {
             NoopTestRunner
         } else with(get<KotlinNativeTargets>()) {
             if (testTarget == hostTarget) {
                 LocalTestRunner(testRun)
             } else {
-                val nativeHome = get<KotlinNativeHome>()
-                val distribution = Distribution(nativeHome.dir.path)
-                val configurables = PlatformManager(distribution, true).platform(testTarget).configurables
+                konst nativeHome = get<KotlinNativeHome>()
+                konst distribution = Distribution(nativeHome.dir.path)
+                konst configurables = PlatformManager(distribution, true).platform(testTarget).configurables
 
-                val executor = cached(
+                konst executor = cached(
                     when {
                         configurables is ConfigurablesWithEmulator -> EmulatorExecutor(configurables)
                         configurables is AppleConfigurables && configurables.targetTriple.isSimulator ->
@@ -45,7 +45,7 @@ internal object TestRunners {
         }
     }
 
-    private val runnersCache: ConcurrentHashMap<String, Executor> = ConcurrentHashMap()
+    private konst runnersCache: ConcurrentHashMap<String, Executor> = ConcurrentHashMap()
 
     private inline fun <reified T : Executor> cached(executor: T): Executor =
         runnersCache.computeIfAbsent(T::class.java.simpleName) { executor }

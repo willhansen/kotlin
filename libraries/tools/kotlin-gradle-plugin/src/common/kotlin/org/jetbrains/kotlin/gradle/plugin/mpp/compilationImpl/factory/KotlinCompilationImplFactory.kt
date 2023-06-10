@@ -15,36 +15,36 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.decoratedInstance
 import org.jetbrains.kotlin.gradle.plugin.mpp.internal
 
 internal class KotlinCompilationImplFactory(
-    private val compilerOptionsFactory: KotlinCompilerOptionsFactory,
+    private konst compilerOptionsFactory: KotlinCompilerOptionsFactory,
 
-    private val compilationSourceSetsContainerFactory: KotlinCompilationSourceSetsContainerFactory =
+    private konst compilationSourceSetsContainerFactory: KotlinCompilationSourceSetsContainerFactory =
         DefaultKotlinCompilationSourceSetsContainerFactory(),
 
-    private val compilationDependencyConfigurationsFactory: KotlinCompilationDependencyConfigurationsFactory =
+    private konst compilationDependencyConfigurationsFactory: KotlinCompilationDependencyConfigurationsFactory =
         DefaultKotlinCompilationDependencyConfigurationsFactory.WithRuntime,
 
-    private val compilationAssociator: KotlinCompilationAssociator =
+    private konst compilationAssociator: KotlinCompilationAssociator =
         DefaultKotlinCompilationAssociator,
 
-    private val compilationFriendPathsResolver: KotlinCompilationFriendPathsResolver =
+    private konst compilationFriendPathsResolver: KotlinCompilationFriendPathsResolver =
         DefaultKotlinCompilationFriendPathsResolver(),
 
-    private val compilationSourceSetInclusion: KotlinCompilationSourceSetInclusion =
+    private konst compilationSourceSetInclusion: KotlinCompilationSourceSetInclusion =
         KotlinCompilationSourceSetInclusion(),
 
-    private val compilationOutputFactory: KotlinCompilationOutputFactory =
+    private konst compilationOutputFactory: KotlinCompilationOutputFactory =
         DefaultKotlinCompilationOutputFactory,
 
-    private val compilationTaskNamesContainerFactory: KotlinCompilationTaskNamesContainerFactory =
+    private konst compilationTaskNamesContainerFactory: KotlinCompilationTaskNamesContainerFactory =
         DefaultKotlinCompilationTaskNamesContainerFactory,
 
-    private val processResourcesTaskNameFactory: ProcessResourcesTaskNameFactory =
+    private konst processResourcesTaskNameFactory: ProcessResourcesTaskNameFactory =
         DefaultProcessResourcesTaskNameFactory,
 
-    private val preConfigureAction: PreConfigure =
+    private konst preConfigureAction: PreConfigure =
         DefaultKotlinCompilationPreConfigure,
 
-    private val postConfigureAction: PostConfigure =
+    private konst postConfigureAction: PostConfigure =
         DefaultKotlinCompilationPostConfigure
 ) {
 
@@ -69,7 +69,7 @@ internal class KotlinCompilationImplFactory(
     }
 
     fun interface KotlinCompilerOptionsFactory {
-        data class Options(val compilerOptions: HasCompilerOptions<*>, val kotlinOptions: KotlinCommonOptions)
+        data class Options(konst compilerOptions: HasCompilerOptions<*>, konst kotlinOptions: KotlinCommonOptions)
 
         fun create(target: KotlinTarget, compilationName: String): Options
     }
@@ -91,8 +91,8 @@ internal class KotlinCompilationImplFactory(
     }
 
     fun create(target: KotlinTarget, compilationName: String): KotlinCompilationImpl {
-        val options = compilerOptionsFactory.create(target, compilationName)
-        val compilation = KotlinCompilationImpl(
+        konst options = compilerOptionsFactory.create(target, compilationName)
+        konst compilation = KotlinCompilationImpl(
             KotlinCompilationImpl.Params(
                 target = target,
                 compilationName = compilationName,
@@ -127,21 +127,21 @@ internal class KotlinCompilationImplFactory(
 internal operator fun KotlinCompilationImplFactory.PreConfigure.plus(
     other: KotlinCompilationImplFactory.PreConfigure
 ): KotlinCompilationImplFactory.PreConfigure {
-    val thisElements = if (this is CompositePreConfigure) this.elements else listOf(this)
-    val otherElements = if (other is CompositePreConfigure) other.elements else listOf(other)
+    konst thisElements = if (this is CompositePreConfigure) this.elements else listOf(this)
+    konst otherElements = if (other is CompositePreConfigure) other.elements else listOf(other)
     return CompositePreConfigure(thisElements + otherElements)
 }
 
 internal operator fun KotlinCompilationImplFactory.PostConfigure.plus(
     other: KotlinCompilationImplFactory.PostConfigure
 ): KotlinCompilationImplFactory.PostConfigure {
-    val thisElements = if (this is CompositePostConfigure) this.elements else listOf(this)
-    val otherElements = if (other is CompositePostConfigure) other.elements else listOf(other)
+    konst thisElements = if (this is CompositePostConfigure) this.elements else listOf(this)
+    konst otherElements = if (other is CompositePostConfigure) other.elements else listOf(other)
     return CompositePostConfigure(thisElements + otherElements)
 }
 
 private class CompositePreConfigure(
-    val elements: List<KotlinCompilationImplFactory.PreConfigure>
+    konst elements: List<KotlinCompilationImplFactory.PreConfigure>
 ) : KotlinCompilationImplFactory.PreConfigure {
     override fun configure(compilation: KotlinCompilationImpl) {
         elements.forEach { element -> element.configure(compilation) }
@@ -149,7 +149,7 @@ private class CompositePreConfigure(
 }
 
 private class CompositePostConfigure(
-    val elements: List<KotlinCompilationImplFactory.PostConfigure>
+    konst elements: List<KotlinCompilationImplFactory.PostConfigure>
 ) : KotlinCompilationImplFactory.PostConfigure {
     override fun configure(compilation: DecoratedKotlinCompilation<*>) {
         elements.forEach { element -> element.configure(compilation) }

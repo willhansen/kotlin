@@ -13,20 +13,20 @@ import java.io.StringWriter
 
 object CommonRenderers {
     @JvmField
-    val EMPTY = Renderer<Any> { "" }
+    konst EMPTY = Renderer<Any> { "" }
 
     @JvmField
-    val STRING = Renderer<String> { it }
+    konst STRING = Renderer<String> { it }
 
     @JvmField
-    val THROWABLE = Renderer<Throwable> {
-        val writer = StringWriter()
+    konst THROWABLE = Renderer<Throwable> {
+        konst writer = StringWriter()
         it.printStackTrace(PrintWriter(writer))
         StringUtil.first(writer.toString(), 2048, true)
     }
 
     @JvmField
-    val RENDER_POSITION_VARIANCE = Renderer { variance: Variance ->
+    konst RENDER_POSITION_VARIANCE = Renderer { variance: Variance ->
         when (variance) {
             Variance.INVARIANT -> "invariant"
             Variance.IN_VARIANCE -> "in"
@@ -35,7 +35,7 @@ object CommonRenderers {
     }
 
     @JvmField
-    val CLASS_KIND = Renderer { classKind: ClassKind ->
+    konst CLASS_KIND = Renderer { classKind: ClassKind ->
         when (classKind) {
             ClassKind.CLASS -> "class"
             ClassKind.INTERFACE -> "interface"
@@ -49,9 +49,9 @@ object CommonRenderers {
     @JvmStatic
     fun <T> commaSeparated(itemRenderer: DiagnosticParameterRenderer<T>) = ContextDependentRenderer<Collection<T>> { collection, context ->
         buildString {
-            val iterator = collection.iterator()
+            konst iterator = collection.iterator()
             while (iterator.hasNext()) {
-                val next = iterator.next()
+                konst next = iterator.next()
                 append(itemRenderer.render(next, context))
                 if (iterator.hasNext()) {
                     append(", ")

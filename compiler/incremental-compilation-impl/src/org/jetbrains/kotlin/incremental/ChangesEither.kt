@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.name.FqName
 
 internal sealed class ChangesEither {
     internal class Known(
-        val lookupSymbols: Collection<LookupSymbol> = emptyList(),
-        val fqNames: Collection<FqName> = emptyList()
+        konst lookupSymbols: Collection<LookupSymbol> = emptyList(),
+        konst fqNames: Collection<FqName> = emptyList()
     ) : ChangesEither()
 
-    internal class Unknown(val reason: BuildAttribute) : ChangesEither()
+    internal class Unknown(konst reason: BuildAttribute) : ChangesEither()
 }

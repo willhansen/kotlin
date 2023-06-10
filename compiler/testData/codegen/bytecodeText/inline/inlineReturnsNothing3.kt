@@ -6,7 +6,7 @@ inline fun exitb(): Nothing = exita() // ATHROW
 inline fun exitc(): Nothing = exitb() // ATHROW
 
 fun box(): String {
-    val a: String
+    konst a: String
     try {
         a = "OK"
     }

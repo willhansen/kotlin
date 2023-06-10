@@ -1,3 +1,3 @@
 class ClassB : Interface {
-    val x = 3
+    konst x = 3
 }

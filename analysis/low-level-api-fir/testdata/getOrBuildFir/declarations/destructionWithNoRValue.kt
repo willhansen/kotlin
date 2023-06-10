@@ -1,1 +1,1 @@
-val (<expr>o</expr>, r)
+konst (<expr>o</expr>, r)

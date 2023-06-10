@@ -25,13 +25,13 @@ import org.jetbrains.kotlin.gradle.utils.property
 import java.io.File
 
 open class NodeJsRootExtension(
-    val project: Project,
+    konst project: Project,
 ) : ConfigurationPhaseAware<NodeJsEnv>() {
 
     init {
         check(project.rootProject == project)
 
-        val projectProperties = PropertiesProvider(project)
+        konst projectProperties = PropertiesProvider(project)
 
         if (projectProperties.errorJsGenerateExternals != null) {
             project.logger.warn(
@@ -47,10 +47,10 @@ open class NodeJsRootExtension(
         }
     }
 
-    val rootProjectDir
+    konst rootProjectDir
         get() = project.rootDir
 
-    private val gradleHome = project.gradle.gradleUserHomeDir.also {
+    private konst gradleHome = project.gradle.gradleUserHomeDir.also {
         project.logger.kotlinInfo("Storing cached files in $it")
     }
 
@@ -69,40 +69,40 @@ open class NodeJsRootExtension(
 
     var packageManager: NpmApi by Property(Yarn())
 
-    val taskRequirements: TasksRequirements
+    konst taskRequirements: TasksRequirements
         get() = resolver.tasksRequirements
 
     lateinit var resolver: KotlinRootNpmResolver
 
-    val rootPackageDir: File = project.buildDir.resolve("js")
+    konst rootPackageDir: File = project.buildDir.resolve("js")
 
-    val projectPackagesDir: File
+    konst projectPackagesDir: File
         get() = rootPackageDir.resolve("packages")
 
-    val nodeModulesGradleCacheDir: File
+    konst nodeModulesGradleCacheDir: File
         get() = rootPackageDir.resolve("packages_imported")
 
-    internal val platform: org.gradle.api.provider.Property<Platform> = project.objects.property<Platform>()
+    internal konst platform: org.gradle.api.provider.Property<Platform> = project.objects.property<Platform>()
 
-    val versions = NpmVersions()
+    konst versions = NpmVersions()
 
     override fun finalizeConfiguration(): NodeJsEnv {
-        val name = platform.get().name
-        val architecture = platform.get().arch
+        konst name = platform.get().name
+        konst architecture = platform.get().arch
 
-        val nodeDirName = "node-v$nodeVersion-$name-$architecture"
-        val cleanableStore = CleanableStore[installationDir.absolutePath]
-        val nodeDir = cleanableStore[nodeDirName].use()
-        val isWindows = platform.get().isWindows()
-        val nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
+        konst nodeDirName = "node-v$nodeVersion-$name-$architecture"
+        konst cleanableStore = CleanableStore[installationDir.absolutePath]
+        konst nodeDir = cleanableStore[nodeDirName].use()
+        konst isWindows = platform.get().isWindows()
+        konst nodeBinDir = if (isWindows) nodeDir else nodeDir.resolve("bin")
 
         fun getExecutable(command: String, customCommand: String, windowsExtension: String): String {
-            val finalCommand = if (isWindows && customCommand == command) "$command.$windowsExtension" else customCommand
+            konst finalCommand = if (isWindows && customCommand == command) "$command.$windowsExtension" else customCommand
             return if (download) File(nodeBinDir, finalCommand).absolutePath else finalCommand
         }
 
         fun getIvyDependency(): String {
-            val type = if (isWindows) "zip" else "tar.gz"
+            konst type = if (isWindows) "zip" else "tar.gz"
             return "org.nodejs:node:$nodeVersion:$name-$architecture@$type"
         }
 
@@ -120,25 +120,25 @@ open class NodeJsRootExtension(
         )
     }
 
-    val nodeJsSetupTaskProvider: TaskProvider<out NodeJsSetupTask>
+    konst nodeJsSetupTaskProvider: TaskProvider<out NodeJsSetupTask>
         get() = project.tasks.withType(NodeJsSetupTask::class.java).named(NodeJsSetupTask.NAME)
 
-    val npmInstallTaskProvider: TaskProvider<out KotlinNpmInstallTask>
+    konst npmInstallTaskProvider: TaskProvider<out KotlinNpmInstallTask>
         get() = project.tasks.withType(KotlinNpmInstallTask::class.java).named(KotlinNpmInstallTask.NAME)
 
-    val rootPackageJsonTaskProvider: TaskProvider<RootPackageJsonTask>
+    konst rootPackageJsonTaskProvider: TaskProvider<RootPackageJsonTask>
         get() = project.tasks.withType(RootPackageJsonTask::class.java).named(RootPackageJsonTask.NAME)
 
-    val packageJsonUmbrellaTaskProvider: TaskProvider<Task>
+    konst packageJsonUmbrellaTaskProvider: TaskProvider<Task>
         get() = project.tasks.named(PACKAGE_JSON_UMBRELLA_TASK_NAME)
 
-    val npmCachesSetupTaskProvider: TaskProvider<out KotlinNpmCachesSetup>
+    konst npmCachesSetupTaskProvider: TaskProvider<out KotlinNpmCachesSetup>
         get() = project.tasks.withType(KotlinNpmCachesSetup::class.java).named(KotlinNpmCachesSetup.NAME)
 
-    val storeYarnLockTaskProvider: TaskProvider<out YarnLockCopyTask>
+    konst storeYarnLockTaskProvider: TaskProvider<out YarnLockCopyTask>
         get() = project.tasks.withType(YarnLockCopyTask::class.java).named(YarnLockCopyTask.STORE_YARN_LOCK_NAME)
 
     companion object {
-        const val EXTENSION_NAME: String = "kotlinNodeJs"
+        const konst EXTENSION_NAME: String = "kotlinNodeJs"
     }
 }

@@ -14,9 +14,9 @@ import kotlin.jvm.internal.Lambda
 public annotation class SomeAnnotation
 
 fun box(): String {
-    val a = @SomeAnnotation {}
-    val b = @SomeAnnotation fun () {}
-    val c = @SomeAnnotation fun Any.() {}
+    konst a = @SomeAnnotation {}
+    konst b = @SomeAnnotation fun () {}
+    konst c = @SomeAnnotation fun Any.() {}
 
     return "OK"
 }

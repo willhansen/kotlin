@@ -15,16 +15,16 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
 open class KtLightPsiLiteral(
-    override val kotlinOrigin: KtExpression,
-    private val lightParent: PsiElement
+    override konst kotlinOrigin: KtExpression,
+    private konst lightParent: PsiElement
 ) : KtLightElementBase(lightParent), PsiLiteralExpression {
 
     override fun getValue(): Any? = computeExpression(this)
 
     override fun getType(): PsiType? {
-        val bindingContext = LightClassGenerationSupport.getInstance(this.project).analyze(kotlinOrigin)
-        val kotlinType = bindingContext[BindingContext.EXPECTED_EXPRESSION_TYPE, kotlinOrigin] ?: return null
-        val typeFqName = kotlinType.constructor.declarationDescriptor?.fqNameSafe?.asString() ?: return null
+        konst bindingContext = LightClassGenerationSupport.getInstance(this.project).analyze(kotlinOrigin)
+        konst kotlinType = bindingContext[BindingContext.EXPECTED_EXPRESSION_TYPE, kotlinOrigin] ?: return null
+        konst typeFqName = kotlinType.constructor.declarationDescriptor?.fqNameSafe?.asString() ?: return null
         return psiType(typeFqName, kotlinOrigin)
     }
 
@@ -33,8 +33,8 @@ open class KtLightPsiLiteral(
     override fun isPhysical(): Boolean = false
 
     override fun replace(newElement: PsiElement): PsiElement {
-        val value = (newElement as? PsiLiteral)?.value as? String ?: return this
-        kotlinOrigin.replace(KtPsiFactory(project).createExpression("\"${StringUtil.escapeStringCharacters(value)}\""))
+        konst konstue = (newElement as? PsiLiteral)?.konstue as? String ?: return this
+        kotlinOrigin.replace(KtPsiFactory(project).createExpression("\"${StringUtil.escapeStringCharacters(konstue)}\""))
         return this
     }
 

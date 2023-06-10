@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
 class FunctionTypeInterfacePackages {
     companion object {
-        private const val FUNCTION_TYPE_INTERFACE_DIR = "function-type-interface"
+        private const konst FUNCTION_TYPE_INTERFACE_DIR = "function-type-interface"
     }
 
-    private val functionTypeInterfacePackageFiles = hashSetOf<IrFile>()
+    private konst functionTypeInterfacePackageFiles = hashSetOf<IrFile>()
 
     // Function type interfaces are not declared in a standard library, and they are generated on flight during a klib deserialization.
     // The accessor allows finding a package for storing the generated function type interfaces.
@@ -25,11 +25,11 @@ class FunctionTypeInterfacePackages {
     //      512 interfaces in one package increase the size of uncompressed klib up to 14.5+MB!
     // We need 3 packages.
     fun makePackageAccessor(stdlibModule: IrModuleFragment) = { packageFragmentDescriptor: PackageFragmentDescriptor ->
-        val packageFqName = packageFragmentDescriptor.fqName.toString()
+        konst packageFqName = packageFragmentDescriptor.fqName.toString()
         check(checkIsFunctionTypeInterfacePackageFqName(packageFqName)) { "unexpected function type interface package $packageFqName" }
 
-        val fileWithRequiredPackage = "${packageFqName.replace('.', '-')}-package.kt"
-        val packageFile = stdlibModule.files.singleOrNull {
+        konst fileWithRequiredPackage = "${packageFqName.replace('.', '-')}-package.kt"
+        konst packageFile = stdlibModule.files.singleOrNull {
             // Do not check by name "$FUNCTION_TYPE_INTERFACE_DIR/$fileWithRequiredPackage" because the path separator depends on OS
             it.fileEntry.name.endsWith(fileWithRequiredPackage) && it.fileEntry.name.contains(FUNCTION_TYPE_INTERFACE_DIR)
         } ?: error("can not find a functional interface file for $packageFqName package")

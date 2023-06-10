@@ -4,18 +4,18 @@
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Ann(
-        val b: Byte,
-        val s: Short,
-        val i: Int,
-        val f: Float,
-        val d: Double,
-        val l: Long,
-        val c: Char,
-        val bool: Boolean
+        konst b: Byte,
+        konst s: Short,
+        konst i: Int,
+        konst f: Float,
+        konst d: Double,
+        konst l: Long,
+        konst c: Char,
+        konst bool: Boolean
 )
 
 fun box(): String {
-    val ann = MyClass::class.java.getAnnotation(Ann::class.java)
+    konst ann = MyClass::class.java.getAnnotation(Ann::class.java)
     if (ann == null) return "fail: cannot find Ann on MyClass}"
     if (ann.b != 1.toByte()) return "fail: annotation parameter b should be 1, but was ${ann.b}"
     if (ann.s != 1.toShort()) return "fail: annotation parameter s should be 1, but was ${ann.s}"

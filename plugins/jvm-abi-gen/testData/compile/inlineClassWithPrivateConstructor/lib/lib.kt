@@ -1,8 +1,8 @@
 package lib
 
 @JvmInline
-value class IC private constructor(val value: String) {
+konstue class IC private constructor(konst konstue: String) {
     companion object {
-        fun of(value: String) = IC(value)
+        fun of(konstue: String) = IC(konstue)
     }
 }

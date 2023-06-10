@@ -31,7 +31,7 @@ void consolePrintf(const char* format, ...) __attribute__((format(printf, 1, 2))
 void consoleErrorf(const char* format, ...) __attribute__((format(printf, 1, 2)));
 void consoleWriteUtf8(const char* utf8, uint32_t sizeBytes);
 void consoleErrorUtf8(const char* utf8, uint32_t sizeBytes);
-// Negative return value denotes that read wasn't successful.
+// Negative return konstue denotes that read wasn't successful.
 int32_t consoleReadUtf8(void* utf8, uint32_t maxSizeBytes);
 void consoleFlush();
 

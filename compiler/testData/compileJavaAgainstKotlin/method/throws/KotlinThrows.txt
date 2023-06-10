@@ -5,8 +5,8 @@ public fun ktJvm(): kotlin.Unit
 
 public final class E1 : kotlin.Exception /* = java.lang.Exception */ {
     public constructor E1()
-    public open /*fake_override*/ val cause: kotlin.Throwable?
-    public open /*fake_override*/ val message: kotlin.String?
+    public open /*fake_override*/ konst cause: kotlin.Throwable?
+    public open /*fake_override*/ konst message: kotlin.String?
     public final /*fake_override*/ fun addSuppressed(/*0*/ kotlin.Throwable!): kotlin.Unit
     public open /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
     public open /*fake_override*/ fun getLocalizedMessage(): kotlin.String!
@@ -21,8 +21,8 @@ public final class E1 : kotlin.Exception /* = java.lang.Exception */ {
 
 public final class E2 : kotlin.Exception /* = java.lang.Exception */ {
     public constructor E2()
-    public open /*fake_override*/ val cause: kotlin.Throwable?
-    public open /*fake_override*/ val message: kotlin.String?
+    public open /*fake_override*/ konst cause: kotlin.Throwable?
+    public open /*fake_override*/ konst message: kotlin.String?
     public final /*fake_override*/ fun addSuppressed(/*0*/ kotlin.Throwable!): kotlin.Unit
     public open /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
     public open /*fake_override*/ fun getLocalizedMessage(): kotlin.String!

@@ -21,78 +21,78 @@ import java.io.Serializable
 abstract class CommonToolArguments : Freezable(), Serializable {
     companion object {
         @JvmStatic
-        private val serialVersionUID = 0L
+        private konst serialVersionUID = 0L
     }
 
     var freeArgs: List<String> = emptyList()
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Transient
     var errors: ArgumentParseErrors? = null
 
-    @Argument(value = "-help", shortName = "-h", description = "Print a synopsis of standard options")
+    @Argument(konstue = "-help", shortName = "-h", description = "Print a synopsis of standard options")
     var help = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-X", description = "Print a synopsis of advanced options")
+    @Argument(konstue = "-X", description = "Print a synopsis of advanced options")
     var extraHelp = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-version", description = "Display compiler version")
+    @Argument(konstue = "-version", description = "Display compiler version")
     var version = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @GradleOption(
-        value = DefaultValue.BOOLEAN_FALSE_DEFAULT,
+        konstue = DefaultValue.BOOLEAN_FALSE_DEFAULT,
         gradleInputType = GradleInputTypes.INTERNAL,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
-    @Argument(value = "-verbose", description = "Enable verbose logging output")
+    @Argument(konstue = "-verbose", description = "Enable verbose logging output")
     var verbose = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @GradleOption(
-        value = DefaultValue.BOOLEAN_FALSE_DEFAULT,
+        konstue = DefaultValue.BOOLEAN_FALSE_DEFAULT,
         gradleInputType = GradleInputTypes.INTERNAL,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
-    @Argument(value = "-nowarn", description = "Generate no warnings")
+    @Argument(konstue = "-nowarn", description = "Generate no warnings")
     var suppressWarnings = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @GradleOption(
-        value = DefaultValue.BOOLEAN_FALSE_DEFAULT,
+        konstue = DefaultValue.BOOLEAN_FALSE_DEFAULT,
         gradleInputType = GradleInputTypes.INPUT,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
-    @Argument(value = "-Werror", description = "Report an error if there are any warnings")
+    @Argument(konstue = "-Werror", description = "Report an error if there are any warnings")
     var allWarningsAsErrors = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     var internalArguments: List<InternalArgument> = emptyList()
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 }

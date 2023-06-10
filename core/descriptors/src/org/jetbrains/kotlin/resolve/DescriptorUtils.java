@@ -141,7 +141,7 @@ public class DescriptorUtils {
 
     /**
      * @return true iff this is a top-level declaration or a class member with no expected "this" object (e.g. static members in Java,
-     * values() and valueOf() methods of enum classes, etc.)
+     * konstues() and konstueOf() methods of enum classes, etc.)
      */
     public static boolean isStaticDeclaration(@NotNull CallableDescriptor descriptor) {
         if (descriptor instanceof ConstructorDescriptor) return false;
@@ -580,7 +580,7 @@ public class DescriptorUtils {
         Map<Name, ConstantValue<?>> arguments = jvmNameAnnotation.getAllValueArguments();
         if (arguments.isEmpty()) return null;
 
-        ConstantValue<?> name = arguments.values().iterator().next();
+        ConstantValue<?> name = arguments.konstues().iterator().next();
         if (!(name instanceof StringValue)) return null;
 
         return ((StringValue) name).getValue();

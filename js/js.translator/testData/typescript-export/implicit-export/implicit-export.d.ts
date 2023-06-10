@@ -6,12 +6,12 @@ declare namespace JS_TESTS {
                 readonly "foo.ExportedInterface": unique symbol;
             };
         }
-        function producer(value: number): any/* foo.NonExportedType */;
-        function consumer(value: any/* foo.NonExportedType */): number;
+        function producer(konstue: number): any/* foo.NonExportedType */;
+        function consumer(konstue: any/* foo.NonExportedType */): number;
         class A {
-            constructor(value: any/* foo.NonExportedType */);
-            get value(): any/* foo.NonExportedType */;
-            set value(value: any/* foo.NonExportedType */);
+            constructor(konstue: any/* foo.NonExportedType */);
+            get konstue(): any/* foo.NonExportedType */;
+            set konstue(konstue: any/* foo.NonExportedType */);
             increment<T extends unknown/* foo.NonExportedType */>(t: T): any/* foo.NonExportedType */;
         }
         class B /* extends foo.NonExportedType */ {

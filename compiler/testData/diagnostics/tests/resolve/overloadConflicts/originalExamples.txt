@@ -1,9 +1,9 @@
 package
 
-public val test1: Right
-public val test1a: Wrong
-public val test2: Right
-public val test2a: Right
+public konst test1: Right
+public konst test1a: Wrong
+public konst test2: Right
+public konst test2a: Right
 public fun overloadedFun1(/*0*/ b: kotlin.Any = ..., /*1*/ c: kotlin.Any = ..., /*2*/ e: kotlin.String = ...): Wrong
 public fun overloadedFun1(/*0*/ c: kotlin.Any = ..., /*1*/ b: kotlin.String = ..., /*2*/ f: kotlin.Any = ...): Right
 public fun overloadedFun2(/*0*/ a: kotlin.Any, /*1*/ b: kotlin.String = ...): Wrong

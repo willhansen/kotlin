@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import java.util.ArrayList
 
 internal class BufferingMessageCollector : MessageCollector {
-    private class Message(val severity: CompilerMessageSeverity, val message: String, val location: CompilerMessageSourceLocation?)
+    private class Message(konst severity: CompilerMessageSeverity, konst message: String, konst location: CompilerMessageSourceLocation?)
 
-    private val messages = ArrayList<Message>()
+    private konst messages = ArrayList<Message>()
 
     override fun clear() {
         messages.clear()

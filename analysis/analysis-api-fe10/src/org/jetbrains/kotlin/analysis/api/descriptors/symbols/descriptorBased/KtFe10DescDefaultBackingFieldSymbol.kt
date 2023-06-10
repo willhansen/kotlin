@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.descriptors.FieldDescriptor
 import org.jetbrains.kotlin.descriptors.annotations.Annotations
 
 internal class KtFe10DescDefaultBackingFieldSymbol(
-    private val fieldDescriptor: FieldDescriptor?,
-    override val owningProperty: KtKotlinPropertySymbol,
-    override val analysisContext: Fe10AnalysisContext
+    private konst fieldDescriptor: FieldDescriptor?,
+    override konst owningProperty: KtKotlinPropertySymbol,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtBackingFieldSymbol(), KtFe10Symbol {
     context(KtAnalysisSession) override fun createPointer(): KtSymbolPointer<KtBackingFieldSymbol> = withValidityAssertion {
         KtPsiBasedSymbolPointer.createForSymbolFromSource<KtPropertySymbol>(owningProperty)
@@ -34,13 +34,13 @@ internal class KtFe10DescDefaultBackingFieldSymbol(
             ?: KtFe10NeverRestoringSymbolPointer()
     }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { owningProperty.returnType }
 
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = owningProperty.token
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFe10AnnotationsList.create(fieldDescriptor?.annotations ?: Annotations.EMPTY, analysisContext)
         }

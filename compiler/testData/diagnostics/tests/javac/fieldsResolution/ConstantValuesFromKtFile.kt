@@ -2,12 +2,12 @@
 // FILE: test.kt
 package a
 
-const val CONST = "CONST"
+const konst CONST = "CONST"
 
 open class Test {
 
     companion object {
-        const val CONST = 42
+        const konst CONST = 42
     }
 
 }

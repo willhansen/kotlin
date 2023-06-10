@@ -3,7 +3,7 @@ interface Something {
 }
 
 interface Recursive<R> where R : Recursive<R>, R : Something {
-  abstract val symbol: AbstractSymbol<R>
+  abstract konst symbol: AbstractSymbol<R>
     abstract get
 
 }
@@ -16,7 +16,7 @@ abstract class AbstractSymbol<E> where E : Recursive<E>, E : Something {
   }
 
   fun foo(list: List<Any>) {
-    val result: List<AbstractSymbol<*>> = list.filterIsInstance<Recursive<*>>().map<Recursive<*>, AbstractSymbol<*>>(transform = Recursive::symbol)
+    konst result: List<AbstractSymbol<*>> = list.filterIsInstance<Recursive<*>>().map<Recursive<*>, AbstractSymbol<*>>(transform = Recursive::symbol)
   }
 
 }

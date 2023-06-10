@@ -106,11 +106,11 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
         this.inlineFun = inlineFun;
         this.properFinallySplit = properFinallySplit;
         for (TryCatchBlockNodeInfo block : inlineFunTryBlockInfo) {
-            getTryBlocksMetaInfo().addNewInterval(block);
+            getTryBlocksMetaInfo().addNewInterkonst(block);
         }
 
         for (LocalVarNodeWrapper wrapper : localVariableInfo) {
-            getLocalVarsMetaInfo().addNewInterval(wrapper);
+            getLocalVarsMetaInfo().addNewInterkonst(wrapper);
         }
     }
 
@@ -143,7 +143,7 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
             }
 
             List<TryCatchBlockNodeInfo> currentCoveringNodesFromInnermost =
-                    sortTryCatchBlocks(new ArrayList<>(getTryBlocksMetaInfo().getCurrentIntervals()));
+                    sortTryCatchBlocks(new ArrayList<>(getTryBlocksMetaInfo().getCurrentInterkonsts()));
             checkCoveringBlocksInvariant(Lists.reverse(currentCoveringNodesFromInnermost));
 
             if (currentCoveringNodesFromInnermost.isEmpty() ||
@@ -159,7 +159,7 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
             LabelNode newFinallyEnd = (LabelNode) markedReturn.getNext();
             Type nonLocalReturnType = getReturnType(markedReturn.getOpcode());
 
-            //Generally there could be several tryCatch blocks (group) on one code interval (same start and end labels, but maybe different handlers) -
+            //Generally there could be several tryCatch blocks (group) on one code interkonst (same start and end labels, but maybe different handlers) -
             // all of them refer to one try/*catches*/finally or try/catches.
             // Each group that corresponds to try/*catches*/finally contains tryCatch block with default handler.
             // For each such group we should insert corresponding finally before non-local return.
@@ -178,7 +178,7 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
                 TryCatchBlockNodeInfo nodeWithDefaultHandlerIfExists = clusterBlocks.get(clusterBlocks.size() - 1);
 
                 FinallyBlockInfo finallyInfo =
-                        findFinallyBlockBody(nodeWithDefaultHandlerIfExists, getTryBlocksMetaInfo().getAllIntervals());
+                        findFinallyBlockBody(nodeWithDefaultHandlerIfExists, getTryBlocksMetaInfo().getAllInterkonsts());
                 if (finallyInfo == null)  {
                     nestedUnsplitBlocksWithoutFinally.addAll(clusterToFindFinally.getBlocks());
                     continue;
@@ -255,7 +255,7 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
                 instructions.insert(curIns, startNode);
                 //TODO: note that on return expression we have no variables
                 instructions.insert(markedReturn, endNode);
-                getLocalVarsMetaInfo().splitCurrentIntervals(new SimpleInterval(startNode, endNode), true);
+                getLocalVarsMetaInfo().splitCurrentInterkonsts(new SimpleInterkonst(startNode, endNode), true);
             }
         }
 
@@ -330,7 +330,7 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
         List<TryBlockCluster<TryCatchBlockNodePosition>> clusters = TryBlockClusteringKt.doClustering(tryCatchBlockPresentInFinally);
         Map<LabelNode, TryBlockCluster<TryCatchBlockNodePosition>> handler2Cluster = new HashMap<>();
 
-        IntervalMetaInfo<TryCatchBlockNodeInfo> tryBlocksMetaInfo = getTryBlocksMetaInfo();
+        InterkonstMetaInfo<TryCatchBlockNodeInfo> tryBlocksMetaInfo = getTryBlocksMetaInfo();
         for (TryBlockCluster<TryCatchBlockNodePosition> cluster : clusters) {
             List<TryCatchBlockNodePosition> clusterBlocks = cluster.getBlocks();
             TryCatchBlockNodePosition block0 = clusterBlocks.get(0);
@@ -352,7 +352,7 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
                     assert inlineFun.instructions.indexOf(additionalTryCatchBlock.start) <=
                            inlineFun.instructions.indexOf(additionalTryCatchBlock.end);
 
-                    tryBlocksMetaInfo.addNewInterval(new TryCatchBlockNodeInfo(additionalTryCatchBlock, true));
+                    tryBlocksMetaInfo.addNewInterkonst(new TryCatchBlockNodeInfo(additionalTryCatchBlock, true));
                 }
             }
             else if (clusterPosition == TryCatchPosition.END) {
@@ -380,21 +380,21 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
                                                                                    endNode.getType();
 
                     getTryBlocksMetaInfo()
-                            .split(endNode, new SimpleInterval((LabelNode) endNode.getNode().end.getLabel().info,
+                            .split(endNode, new SimpleInterkonst((LabelNode) endNode.getNode().end.getLabel().info,
                                                                (LabelNode) startNode.getStartLabel().getLabel().info), false);
                 }
             }
         }
 
         if (handler2Cluster.size() == 1) {
-            TryBlockCluster<TryCatchBlockNodePosition> singleCluster = handler2Cluster.values().iterator().next();
+            TryBlockCluster<TryCatchBlockNodePosition> singleCluster = handler2Cluster.konstues().iterator().next();
             if (singleCluster.getBlocks().get(0).getPosition() == TryCatchPosition.END) {
                 //Pair that starts on default handler don't added to tryCatchBlockPresentInFinally cause it's out of finally block
                 //TODO rewrite to clusters
                 for (TryCatchBlockNodePosition endBlockPosition : singleCluster.getBlocks()) {
                     TryCatchBlockNodeInfo endNode = endBlockPosition.getNodeInfo();
                     getTryBlocksMetaInfo()
-                            .split(endNode, new SimpleInterval((LabelNode) endNode.getNode().end.getLabel().info,
+                            .split(endNode, new SimpleInterkonst((LabelNode) endNode.getNode().end.getLabel().info,
                                                                (LabelNode) insertedBlockEnd.getLabel().info), false);
                 }
 
@@ -403,12 +403,12 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
         }
         assert handler2Cluster.isEmpty() : "Unmatched clusters " + handler2Cluster.size();
 
-        SimpleInterval splitBy = new SimpleInterval((LabelNode) newFinallyStart.info, newFinallyEnd);
+        SimpleInterkonst splitBy = new SimpleInterkonst((LabelNode) newFinallyStart.info, newFinallyEnd);
         // Inserted finally shouldn't be handled by corresponding catches,
-        // so we should split original interval by inserted finally one
+        // so we should split original interkonst by inserted finally one
         for (TryCatchBlockNodeInfo block : updatingClusterBlocks) {
             //update exception mapping
-            SplitPair<TryCatchBlockNodeInfo> split = tryBlocksMetaInfo.splitAndRemoveIntervalFromCurrents(block, splitBy, false);
+            SplitPair<TryCatchBlockNodeInfo> split = tryBlocksMetaInfo.splitAndRemoveInterkonstFromCurrents(block, splitBy, false);
             checkFinally(split.getNewPart());
             checkFinally(split.getPatchedPart());
             //block patched in split method
@@ -416,7 +416,7 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
             //TODO add assert
         }
 
-        sortTryCatchBlocks(tryBlocksMetaInfo.getAllIntervals());
+        sortTryCatchBlocks(tryBlocksMetaInfo.getAllInterkonsts());
     }
 
     private static LabelNode getNewOrOldLabel(LabelNode oldHandler, @NotNull Set<LabelNode> labelsInsideFinally) {
@@ -472,13 +472,13 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
             return null;
         }
 
-        TryCatchBlockNodeInfo nextIntervalWithSameDefaultHandler = sameDefaultHandler.get(1);
+        TryCatchBlockNodeInfo nextInterkonstWithSameDefaultHandler = sameDefaultHandler.get(1);
         AbstractInsnNode startFinallyChain = tryCatchBlock.getNode().end;
         AbstractInsnNode meaningful = getNextMeaningful(startFinallyChain);
         assert meaningful != null : "Can't find meaningful in finally block" + startFinallyChain;
 
         Integer finallyDepth = getConstant(meaningful);
-        AbstractInsnNode endFinallyChainExclusive = nextIntervalWithSameDefaultHandler.getNode().start;
+        AbstractInsnNode endFinallyChainExclusive = nextInterkonstWithSameDefaultHandler.getNode().start;
         AbstractInsnNode current = meaningful.getNext();
         while (endFinallyChainExclusive != current) {
             current = current.getNext();
@@ -502,13 +502,13 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
         checkFinally(finallyInfo.startIns, finallyInfo.endInsExclusive);
     }
 
-    private void checkFinally(IntervalWithHandler intervalWithHandler) {
-        checkFinally(intervalWithHandler.getStartLabel(), intervalWithHandler.getEndLabel());
+    private void checkFinally(InterkonstWithHandler interkonstWithHandler) {
+        checkFinally(interkonstWithHandler.getStartLabel(), interkonstWithHandler.getEndLabel());
     }
 
     private void checkFinally(AbstractInsnNode startIns, AbstractInsnNode endInsExclusive) {
         if (inlineFun.instructions.indexOf(startIns) >= inlineFun.instructions.indexOf(endInsExclusive)) {
-            throw new AssertionError("Inconsistent finally: block end occurs before start " + traceInterval(endInsExclusive, startIns));
+            throw new AssertionError("Inconsistent finally: block end occurs before start " + traceInterkonst(endInsExclusive, startIns));
         }
     }
 
@@ -552,7 +552,7 @@ public class InternalFinallyBlockInliner extends CoveringTryCatchNodeProcessor {
         return inlineFun.instructions.indexOf(inst);
     }
 
-    private static String traceInterval(AbstractInsnNode startNode, AbstractInsnNode stopNode) {
+    private static String traceInterkonst(AbstractInsnNode startNode, AbstractInsnNode stopNode) {
         Textifier p = new Textifier();
         TraceMethodVisitor visitor = new TraceMethodVisitor(p);
         while (startNode != stopNode) {

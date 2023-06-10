@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
 }
 
-val disambiguationAttribute = Attribute.of("disambiguationAttribute", String::class.java)
+konst disambiguationAttribute = Attribute.of("disambiguationAttribute", String::class.java)
 
 kotlin {
     jvm("plainJvm") {

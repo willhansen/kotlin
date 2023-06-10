@@ -2,7 +2,7 @@ class MyClass() {
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN)
     var test: Int
         get() = 0
-        set(value) {}
+        set(konstue) {}
 }
 
 // TESTED_OBJECT_KIND: function

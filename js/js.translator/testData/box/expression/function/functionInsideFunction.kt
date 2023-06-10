@@ -17,6 +17,6 @@ fun b(): Int {
         fun c() = 4
         return c() * 3
     }
-    val a = 2
+    konst a = 2
     return a() * a
 }

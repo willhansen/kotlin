@@ -12,5 +12,5 @@ package dependency
 
 class Bar
 
-val Bar.fooExtProp: Int
+konst Bar.fooExtProp: Int
     get() = 10

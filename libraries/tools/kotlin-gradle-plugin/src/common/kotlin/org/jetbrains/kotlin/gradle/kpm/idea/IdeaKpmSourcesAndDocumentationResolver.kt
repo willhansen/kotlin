@@ -27,12 +27,12 @@ internal class IdeaKpmSourcesAndDocumentationResolver : IdeaKpmDependencyResolve
             return resolve(fragment.project, fragment.compileDependenciesConfiguration)
         }
 
-        val metadataDependencies = fragment.project.configurations.getByName(fragment.containingModule.resolvableMetadataConfigurationName)
+        konst metadataDependencies = fragment.project.configurations.getByName(fragment.containingModule.resolvableMetadataConfigurationName)
         return resolve(fragment.project, metadataDependencies)
     }
 
     private fun resolve(project: Project, configuration: Configuration): Set<IdeaKpmDependency> {
-        val resolutionResult = project.dependencies.createArtifactResolutionQuery()
+        konst resolutionResult = project.dependencies.createArtifactResolutionQuery()
             .forComponents(configuration.incoming.resolutionResult.allComponents.map { it.id })
             .withArtifacts(JvmLibrary::class.java, SourcesArtifact::class.java, JavadocArtifact::class.java)
             .execute()
@@ -48,7 +48,7 @@ internal class IdeaKpmSourcesAndDocumentationResolver : IdeaKpmDependencyResolve
             resolved.getArtifacts(artifactType)
                 .filterIsInstance<ResolvedArtifactResult>()
                 .mapNotNull { artifact ->
-                    val id = artifact.id.componentIdentifier as? ModuleComponentIdentifier ?: return@mapNotNull null
+                    konst id = artifact.id.componentIdentifier as? ModuleComponentIdentifier ?: return@mapNotNull null
                     IdeaKpmResolvedBinaryDependencyImpl(
                         coordinates = IdeaKpmBinaryCoordinatesImpl(group = id.group, module = id.module, version = id.version),
                         binaryType = binaryType,

@@ -1,5 +1,5 @@
 // ISSUE: KT-57377
 package kt57377
 
-internal class StringBox(val value: String)
-internal fun createBox(value: String): StringBox = StringBox(value)
+internal class StringBox(konst konstue: String)
+internal fun createBox(konstue: String): StringBox = StringBox(konstue)

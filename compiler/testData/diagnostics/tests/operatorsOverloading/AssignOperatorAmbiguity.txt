@@ -6,7 +6,7 @@ package kt1820 {
 
     public final class MyInt {
         public constructor MyInt(/*0*/ i: kotlin.Int)
-        public final val i: kotlin.Int
+        public final konst i: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public final operator fun plus(/*0*/ m: kt1820.MyInt): kt1820.MyInt

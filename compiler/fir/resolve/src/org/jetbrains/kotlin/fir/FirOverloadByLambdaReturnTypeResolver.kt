@@ -24,12 +24,12 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.OVERLOAD_RESOLUTION_BY_LAMBDA
 import org.jetbrains.kotlin.utils.addToStdlib.same
 
 class FirOverloadByLambdaReturnTypeResolver(
-    val components: FirAbstractBodyResolveTransformer.BodyResolveTransformerComponents
+    konst components: FirAbstractBodyResolveTransformer.BodyResolveTransformerComponents
 ) {
-    private val session = components.session
-    private val callCompleter: FirCallCompleter
+    private konst session = components.session
+    private konst callCompleter: FirCallCompleter
         get() = components.callCompleter
-    private val inferenceSession: FirInferenceSession
+    private konst inferenceSession: FirInferenceSession
         get() = components.transformer.context.inferenceSession
 
     fun <T> reduceCandidates(
@@ -43,9 +43,9 @@ class FirOverloadByLambdaReturnTypeResolver(
          * Inference session may look into candidate of call, and for that it uses callee reference.
          * So we need replace reference with proper candidate before calling inference session
          */
-        val shouldRunCompletion = if (inferenceSession != FirInferenceSession.DEFAULT) {
+        konst shouldRunCompletion = if (inferenceSession != FirInferenceSession.DEFAULT) {
             var shouldRunCompletion = true
-            val originalReference = qualifiedAccess.calleeReference
+            konst originalReference = qualifiedAccess.calleeReference
             for (candidate in bestCandidates) {
                 qualifiedAccess.replaceCalleeReference(FirNamedReferenceWithCandidate(null, candidate.callInfo.name, candidate))
                 shouldRunCompletion = shouldRunCompletion && inferenceSession.shouldRunCompletion(qualifiedAccess)
@@ -71,14 +71,14 @@ class FirOverloadByLambdaReturnTypeResolver(
         reducedCandidates: Set<Candidate>,
         allCandidates: Collection<Candidate>
     ): Set<Candidate>? where T : FirResolvable, T : FirStatement {
-        val candidatesWithAnnotation = allCandidates.filter { candidate ->
+        konst candidatesWithAnnotation = allCandidates.filter { candidate ->
             (candidate.symbol.fir as FirAnnotationContainer).annotations.any {
                 it.annotationTypeRef.coneType.classId == OVERLOAD_RESOLUTION_BY_LAMBDA_ANNOTATION_CLASS_ID
             }
         }
         if (candidatesWithAnnotation.isEmpty()) return null
-        val candidatesWithoutAnnotation = reducedCandidates - candidatesWithAnnotation
-        val newCandidates =
+        konst candidatesWithoutAnnotation = reducedCandidates - candidatesWithAnnotation
+        konst newCandidates =
             analyzeLambdaAndReduceNumberOfCandidatesRegardingOverloadResolutionByLambdaReturnType(call, reducedCandidates) ?: return null
 
         var maximallySpecificCandidates = components.callResolver.conflictResolver.chooseMaximallySpecificCandidates(newCandidates)
@@ -94,17 +94,17 @@ class FirOverloadByLambdaReturnTypeResolver(
         candidates: Set<Candidate>,
     ): Set<Candidate>? where T : FirResolvable, T : FirStatement {
         if (candidates.any { !it.isSuccessful }) return candidates
-        val lambdas = candidates.flatMap { candidate ->
+        konst lambdas = candidates.flatMap { candidate ->
             candidate.postponedAtoms
                 .filter { it is ResolvedLambdaAtom && !it.analyzed }
                 .map { candidate to it as ResolvedLambdaAtom }
         }.groupBy { (_, atom) -> atom.atom }
-            .values.singleOrNull()?.toMap() ?: return null
+            .konstues.singleOrNull()?.toMap() ?: return null
 
-        if (!lambdas.values.same { it.parameters.size }) return null
-        if (!lambdas.values.all { it.expectedType?.isSomeFunctionType(session) == true }) return null
+        if (!lambdas.konstues.same { it.parameters.size }) return null
+        if (!lambdas.konstues.all { it.expectedType?.isSomeFunctionType(session) == true }) return null
 
-        val originalCalleeReference = call.calleeReference
+        konst originalCalleeReference = call.calleeReference
 
         for (candidate in lambdas.keys) {
             call.replaceCalleeReference(FirNamedReferenceWithCandidate(null, candidate.callInfo.name, candidate))
@@ -117,30 +117,30 @@ class FirOverloadByLambdaReturnTypeResolver(
         }
 
         try {
-            val inputTypesAreSame = lambdas.entries.same { (candidate, lambda) ->
-                val substitutor = candidate.system.buildCurrentSubstitutor() as ConeSubstitutor
+            konst inputTypesAreSame = lambdas.entries.same { (candidate, lambda) ->
+                konst substitutor = candidate.system.buildCurrentSubstitutor() as ConeSubstitutor
                 lambda.inputTypes.map { substitutor.substituteOrSelf(it) }
             }
             if (!inputTypesAreSame) return null
             lambdas.entries.forEach { (candidate, atom) ->
                 callCompleter.prepareLambdaAtomForFactoryPattern(atom, candidate)
             }
-            val iterator = lambdas.entries.iterator()
-            val (firstCandidate, firstAtom) = iterator.next()
+            konst iterator = lambdas.entries.iterator()
+            konst (firstCandidate, firstAtom) = iterator.next()
 
-            val postponedArgumentsAnalyzer = callCompleter.createPostponedArgumentsAnalyzer(
+            konst postponedArgumentsAnalyzer = callCompleter.createPostponedArgumentsAnalyzer(
                 components.transformer.resolutionContext
             )
 
             call.replaceCalleeReference(FirNamedReferenceWithCandidate(null, firstCandidate.callInfo.name, firstCandidate))
-            val results = postponedArgumentsAnalyzer.analyzeLambda(
+            konst results = postponedArgumentsAnalyzer.analyzeLambda(
                 firstCandidate.system,
                 firstAtom,
                 firstCandidate,
                 ConstraintSystemCompletionMode.FULL,
             )
             while (iterator.hasNext()) {
-                val (candidate, atom) = iterator.next()
+                konst (candidate, atom) = iterator.next()
                 call.replaceCalleeReference(FirNamedReferenceWithCandidate(null, candidate.callInfo.name, candidate))
                 postponedArgumentsAnalyzer.applyResultsOfAnalyzedLambdaToCandidateSystem(
                     candidate.system,
@@ -151,8 +151,8 @@ class FirOverloadByLambdaReturnTypeResolver(
                 )
             }
 
-            val errorCandidates = mutableSetOf<Candidate>()
-            val successfulCandidates = mutableSetOf<Candidate>()
+            konst errorCandidates = mutableSetOf<Candidate>()
+            konst successfulCandidates = mutableSetOf<Candidate>()
 
             for (candidate in candidates) {
                 if (candidate.isSuccessful) {

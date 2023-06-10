@@ -79,7 +79,7 @@ ext {
 
 allprojects {
     if (path != ":kotlin-native:dependencies") {
-        evaluationDependsOn(":kotlin-native:dependencies")
+        ekonstuationDependsOn(":kotlin-native:dependencies")
     }
 
     repositories {
@@ -110,7 +110,7 @@ void loadLocalProperties() {
     if (new File("$project.rootDir/local.properties").exists()) {
         Properties props = new Properties()
         props.load(new FileInputStream("$project.rootDir/local.properties"))
-        props.each { prop -> project.ext.set(prop.key, prop.value) }
+        props.each { prop -> project.ext.set(prop.key, prop.konstue) }
     }
 }
 
@@ -697,7 +697,7 @@ Map<KonanTarget, File> createConfigurations(List<File> bundles) {
     def result = hostTargets.collectEntries { target ->
         [ (target): bundles.find { it.name.contains(platformName(target)) }]
     }
-    result.retainAll { it.value != null }
+    result.retainAll { it.konstue != null }
     def missingBundles = hostTargets - result.keySet()
     if (!missingBundles.isEmpty()) {
         println("Some of the archive bundles are missing for targets $missingBundles:")

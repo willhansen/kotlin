@@ -1,9 +1,9 @@
 package foo
 
 actual class PlatformClassA {
-    actual val valueA: String = "JVM"
+    actual konst konstueA: String = "JVM"
 }
 
 actual class PlatformClassB {
-    actual val valueB: String = "JVM"
+    actual konst konstueB: String = "JVM"
 }

@@ -25,9 +25,9 @@ class CoreJrtFsTest {
 
     private fun checkClassVersion(expectedVersion: Int, actualClass: VirtualFile?) {
         requireNotNull(actualClass)
-        val reader = ClassReader(actualClass.contentsToByteArray())
+        konst reader = ClassReader(actualClass.contentsToByteArray())
 
-        val node = ClassNode()
+        konst node = ClassNode()
         reader.accept(node, ClassReader.SKIP_CODE)
         assertEquals(
             "Expected class version($expectedVersion) differs in ${actualClass.path} (${node.version})",
@@ -54,18 +54,18 @@ class CoreJrtFsTest {
      */
     @Test
     fun testClassVersionsInJavaLangOfJdk11() {
-        val configuration = CompilerConfiguration()
-        val jdkHome = JvmEnvironmentConfigurator.getJdkHome(TestJdkKind.FULL_JDK_11)
+        konst configuration = CompilerConfiguration()
+        konst jdkHome = JvmEnvironmentConfigurator.getJdkHome(TestJdkKind.FULL_JDK_11)
         requireNotNull(jdkHome)
         configuration.put(JVMConfigurationKeys.JDK_HOME, jdkHome)
-        val environment =
+        konst environment =
             KotlinCoreEnvironment.getOrCreateApplicationEnvironmentForTests(this.testRootDisposable, configuration)
 
-        val jrt = environment.jrtFileSystem ?: error("No jrt-fs configured")
+        konst jrt = environment.jrtFileSystem ?: error("No jrt-fs configured")
 
-        val root = jrt.findFileByPath("$jdkHome!/modules/java.base/java/lang/")
+        konst root = jrt.findFileByPath("$jdkHome!/modules/java.base/java/lang/")
         requireNotNull(root)
-        val children = root.children.filter { it.extension == "class" }
+        konst children = root.children.filter { it.extension == "class" }
         assert(children.isNotEmpty())
         children.forEach { file ->
             checkClassVersion(

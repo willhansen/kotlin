@@ -1,6 +1,6 @@
 import kotlinx.benchmark.gradle.benchmark
 
-val benchmarks_version = "0.3.1"
+konst benchmarks_version = "0.3.1"
 
 plugins {
     java
@@ -70,7 +70,7 @@ tasks.withType<Zip>().matching { it.name == "mainBenchmarkJar" }.configureEach {
     archiveFileName.set("benchmarks.jar")
 }
 
-val benchmarkTasks = listOf("mainBenchmark", "mainFirBenchmark", "mainNiBenchmark")
+konst benchmarkTasks = listOf("mainBenchmark", "mainFirBenchmark", "mainNiBenchmark")
 tasks.withType<JavaExec>().matching { it.name in benchmarkTasks }.configureEach {
     dependsOn(":createIdeaHomeForTests")
     systemProperty("idea.home.path", ideaHomePathForTests().canonicalPath)
@@ -81,34 +81,34 @@ tasks.register<JavaExec>("runBenchmark") {
     dependsOn(":createIdeaHomeForTests")
 
     // jmhArgs example: -PjmhArgs='CommonCalls -p size=500 -p isIR=true -p useNI=true -f 1'
-    val jmhArgs = if (project.hasProperty("jmhArgs")) project.property("jmhArgs").toString() else ""
-    val resultFilePath = "$buildDir/benchmarks/jmh-result.json"
-    val ideaHome = ideaHomePathForTests().canonicalPath
+    konst jmhArgs = if (project.hasProperty("jmhArgs")) project.property("jmhArgs").toString() else ""
+    konst resultFilePath = "$buildDir/benchmarks/jmh-result.json"
+    konst ideaHome = ideaHomePathForTests().canonicalPath
 
-    val benchmarkJarPath = "$buildDir/benchmarks/main/jars/benchmarks.jar"
+    konst benchmarkJarPath = "$buildDir/benchmarks/main/jars/benchmarks.jar"
     args = mutableListOf("-Didea.home.path=$ideaHome", benchmarkJarPath, "-rf", "json", "-rff", resultFilePath) + jmhArgs.split("\\s".toRegex())
     mainClass.set("-jar")
 
     doLast {
         if (project.kotlinBuildProperties.isTeamcityBuild) {
-            val jsonArray = com.google.gson.JsonParser.parseString(File(resultFilePath).readText()).asJsonArray
+            konst jsonArray = com.google.gson.JsonParser.parseString(File(resultFilePath).readText()).asJsonArray
             jsonArray.forEach {
-                val benchmark = it.asJsonObject
+                konst benchmark = it.asJsonObject
                 // remove unnecessary name parts from string like this "org.jetbrains.kotlin.benchmarks.CommonCallsBenchmark.benchmark"
-                val name = benchmark["benchmark"].asString.removeSuffix(".benchmark").let {
-                    val indexOfLastDot = it.indexOfLast { it == '.' }
+                konst name = benchmark["benchmark"].asString.removeSuffix(".benchmark").let {
+                    konst indexOfLastDot = it.indexOfLast { it == '.' }
                     it.removeRange(0..indexOfLastDot)
                 }
-                val params = benchmark["params"].asJsonObject
-                val isIR = if (params.has("isIR")) params["isIR"].asString else "false"
-                val useNI = if (params.has("useNI")) params["useNI"].asString else "false"
-                val size = params["size"].asString
-                val score = "%.3f".format(benchmark["primaryMetric"].asJsonObject["score"].asString.toFloat())
+                konst params = benchmark["params"].asJsonObject
+                konst isIR = if (params.has("isIR")) params["isIR"].asString else "false"
+                konst useNI = if (params.has("useNI")) params["useNI"].asString else "false"
+                konst size = params["size"].asString
+                konst score = "%.3f".format(benchmark["primaryMetric"].asJsonObject["score"].asString.toFloat())
 
-                val irPostfix = if (isIR.toBoolean()) " isIR=true" else ""
-                val niPostfix = if (useNI.toBoolean() && !isIR.toBoolean()) " isNI=true" else ""
+                konst irPostfix = if (isIR.toBoolean()) " isIR=true" else ""
+                konst niPostfix = if (useNI.toBoolean() && !isIR.toBoolean()) " isNI=true" else ""
 
-                println("""##teamcity[buildStatisticValue key='$name size=$size${irPostfix}$niPostfix' value='$score']""")
+                println("""##teamcity[buildStatisticValue key='$name size=$size${irPostfix}$niPostfix' konstue='$score']""")
             }
         }
     }

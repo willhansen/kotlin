@@ -10,17 +10,17 @@ import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
 
 internal sealed interface TestCompilationResult<A : TestCompilationArtifact> {
     sealed interface ImmediateResult<A : TestCompilationArtifact> : TestCompilationResult<A> {
-        val loggedData: LoggedData
+        konst loggedData: LoggedData
     }
 
     sealed interface Failure : ImmediateResult<Nothing>
 
-    data class Success<A : TestCompilationArtifact>(val resultingArtifact: A, override val loggedData: LoggedData.CompilerCall) :
+    data class Success<A : TestCompilationArtifact>(konst resultingArtifact: A, override konst loggedData: LoggedData.CompilerCall) :
         ImmediateResult<A>
 
-    data class CompilationToolFailure(override val loggedData: LoggedData.CompilationToolCall) : Failure
-    data class UnexpectedFailure(override val loggedData: LoggedData) : Failure
-    data class DependencyFailures(val causes: Set<Failure>) : TestCompilationResult<Nothing>
+    data class CompilationToolFailure(override konst loggedData: LoggedData.CompilationToolCall) : Failure
+    data class UnexpectedFailure(override konst loggedData: LoggedData) : Failure
+    data class DependencyFailures(konst causes: Set<Failure>) : TestCompilationResult<Nothing>
 
     companion object {
         fun <A : TestCompilationArtifact> TestCompilationResult<A>.assertSuccess(): Success<A> = when (this) {

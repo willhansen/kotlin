@@ -9,6 +9,6 @@ class Z : A<String> {
 fun A<String>.result() = "O".foo("K")
 
 fun box(): String {
-    val a: A<String> = Z()
+    konst a: A<String> = Z()
     return a.result()
 }

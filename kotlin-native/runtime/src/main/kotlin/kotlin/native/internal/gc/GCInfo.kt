@@ -10,15 +10,15 @@ package kotlin.native.internal.gc
  *
  * @property objectsCount The number of allocated objects.
  * @property totalObjectsSizeBytes The total size of allocated objects. System allocator overhead is not included,
- *                                 so it can not perfectly match the value received by os tools.
+ *                                 so it can not perfectly match the konstue received by os tools.
  *                                 All alignment and auxiliary object headers are included.
  */
 @Deprecated("Use kotlin.native.runtime.MemoryUsage instead.", ReplaceWith("MemoryUsage", "kotlin.native.runtime.MemoryUsage"))
 @DeprecatedSinceKotlin(warningSince = "1.9")
 @ExperimentalStdlibApi
 public class MemoryUsage(
-        val objectsCount: Long,
-        val totalObjectsSizeBytes: Long,
+        konst objectsCount: Long,
+        konst totalObjectsSizeBytes: Long,
 )
 
 /**
@@ -28,8 +28,8 @@ public class MemoryUsage(
  * @property threadLocalReferences The number of objects in global variables with `@ThreadLocal` annotation.
  *                                 Object is counted once per each thread it was initialized in.
  * @property stackReferences The number of objects referenced from the stack of any thread.
- *                           These are function local variables and different temporary values, as function call arguments and
- *                           return values. They would be automatically removed from the root set when a corresponding function
+ *                           These are function local variables and different temporary konstues, as function call arguments and
+ *                           return konstues. They would be automatically removed from the root set when a corresponding function
  *                           call is finished.
  * @property globalReferences The number of objects in global variables. The object is counted only if the variable is initialized.
  * @property stableReferences The number of objects referenced by [kotlinx.cinterop.StableRef]. It includes both explicit usage
@@ -39,10 +39,10 @@ public class MemoryUsage(
 @Deprecated("Use kotlin.native.runtime.RootSetStatistics instead.", ReplaceWith("RootSetStatistics", "kotlin.native.runtime.RootSetStatistics"))
 @DeprecatedSinceKotlin(warningSince = "1.9")
 public class RootSetStatistics(
-        val threadLocalReferences: Long,
-        val stackReferences: Long,
-        val globalReferences: Long,
-        val stableReferences: Long
+        konst threadLocalReferences: Long,
+        konst stackReferences: Long,
+        konst globalReferences: Long,
+        konst stableReferences: Long
 )
 
 /**
@@ -71,20 +71,20 @@ public class RootSetStatistics(
 @OptIn(kotlin.native.runtime.NativeRuntimeApi::class)
 @Suppress("DEPRECATION")
 public class GCInfo(
-        val epoch: Long,
-        val startTimeNs: Long,
-        val endTimeNs: Long,
-        val pauseStartTimeNs: Long,
-        val pauseEndTimeNs: Long,
-        val postGcCleanupTimeNs: Long?,
-        val rootSet: RootSetStatistics,
-        val memoryUsageBefore: Map<String, MemoryUsage>,
-        val memoryUsageAfter: Map<String, MemoryUsage>,
+        konst epoch: Long,
+        konst startTimeNs: Long,
+        konst endTimeNs: Long,
+        konst pauseStartTimeNs: Long,
+        konst pauseEndTimeNs: Long,
+        konst postGcCleanupTimeNs: Long?,
+        konst rootSet: RootSetStatistics,
+        konst memoryUsageBefore: Map<String, MemoryUsage>,
+        konst memoryUsageAfter: Map<String, MemoryUsage>,
 ) {
     internal companion object {
-        val lastGCInfo: GCInfo?
+        konst lastGCInfo: GCInfo?
             get() {
-                val info = kotlin.native.runtime.GCInfo.lastGCInfo ?: return null
+                konst info = kotlin.native.runtime.GCInfo.lastGCInfo ?: return null
                 return GCInfo(
                         info.epoch,
                         info.startTimeNs,

@@ -34,21 +34,21 @@ import kotlin.reflect.KClass
 import kotlin.test.assertEquals
 
 private data class TestKtFile(
-    val name: String,
-    val content: String
+    konst name: String,
+    konst content: String
 )
 
-private val simple = TestKtFile("Simple.kt", "class Simple")
-private val classNotFound = TestKtFile("C.kt", "class C : ClassNotFound")
-private val repeatedAnalysis = TestKtFile("D.kt", "class D : Generated")
+private konst simple = TestKtFile("Simple.kt", "class Simple")
+private konst classNotFound = TestKtFile("C.kt", "class C : ClassNotFound")
+private konst repeatedAnalysis = TestKtFile("D.kt", "class D : Generated")
 
 class AnalysisHandlerExtensionTest : TestCaseWithTmpdir() {
 
     // Writes the service file only; CustomComponentRegistrar is already in classpath.
     private fun writePlugin(klass: KClass<out ComponentRegistrar>): String {
-        val jarFile = tmpdir.resolve("plugin.jar")
+        konst jarFile = tmpdir.resolve("plugin.jar")
         ZipOutputStream(jarFile.outputStream()).use {
-            val entry = ZipEntry("META-INF/services/org.jetbrains.kotlin.compiler.plugin.ComponentRegistrar")
+            konst entry = ZipEntry("META-INF/services/org.jetbrains.kotlin.compiler.plugin.ComponentRegistrar")
             it.putNextEntry(entry)
             it.write(klass.java.name.toByteArray())
         }
@@ -62,17 +62,17 @@ class AnalysisHandlerExtensionTest : TestCaseWithTmpdir() {
         expectedExitCode: ExitCode = ExitCode.OK,
         extras: List<String> = emptyList(),
     ) {
-        val mainKt = tmpdir.resolve(src.name).apply {
+        konst mainKt = tmpdir.resolve(src.name).apply {
             writeText(src.content)
         }
-        val plugin = writePlugin(klass)
-        val args = listOf("-Xplugin=$plugin", mainKt.absolutePath)
-        val outputPath = if (compiler is K2JSCompiler)
+        konst plugin = writePlugin(klass)
+        konst args = listOf("-Xplugin=$plugin", mainKt.absolutePath)
+        konst outputPath = if (compiler is K2JSCompiler)
             listOf("-Xforce-deprecated-legacy-compiler-usage", "-output", tmpdir.resolve("out.js").absolutePath)
         else
             listOf("-d", tmpdir.resolve("out").absolutePath)
 
-        val (output, exitCode) = CompilerTestUtil.executeCompiler(compiler, args + outputPath + extras)
+        konst (output, exitCode) = CompilerTestUtil.executeCompiler(compiler, args + outputPath + extras)
         assertEquals(expectedExitCode, exitCode, output)
     }
 
@@ -129,12 +129,12 @@ private class CustomAnalysisHandler : AnalysisHandlerExtension {
         bindingTrace: BindingTrace,
         componentProvider: ComponentProvider
     ): AnalysisResult? {
-        val filenames = files.map { it.name }
+        konst filenames = files.map { it.name }
         if (repeatedAnalysis.name in filenames) {
             if ("Generated.kt" in filenames) {
                 return null
             } else {
-                val outDir = File(files.single { it.name == repeatedAnalysis.name }.virtualFilePath).parentFile
+                konst outDir = File(files.single { it.name == repeatedAnalysis.name }.virtualFilePath).parentFile
                 outDir.resolve("Generated.kt").apply {
                     writeText("interface Generated")
                 }

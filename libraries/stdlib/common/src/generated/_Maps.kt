@@ -18,20 +18,20 @@ import kotlin.ranges.contains
 import kotlin.ranges.reversed
 
 /**
- * Returns the first non-null value produced by [transform] function being applied to entries of this map in iteration order,
- * or throws [NoSuchElementException] if no non-null value was produced.
+ * Returns the first non-null konstue produced by [transform] function being applied to entries of this map in iteration order,
+ * or throws [NoSuchElementException] if no non-null konstue was produced.
  * 
  * @sample samples.collections.Collections.Transformations.firstNotNullOf
  */
 @SinceKotlin("1.5")
 @kotlin.internal.InlineOnly
 public inline fun <K, V, R : Any> Map<out K, V>.firstNotNullOf(transform: (Map.Entry<K, V>) -> R?): R {
-    return firstNotNullOfOrNull(transform) ?: throw NoSuchElementException("No element of the map was transformed to a non-null value.")
+    return firstNotNullOfOrNull(transform) ?: throw NoSuchElementException("No element of the map was transformed to a non-null konstue.")
 }
 
 /**
- * Returns the first non-null value produced by [transform] function being applied to entries of this map in iteration order,
- * or `null` if no non-null value was produced.
+ * Returns the first non-null konstue produced by [transform] function being applied to entries of this map in iteration order,
+ * or `null` if no non-null konstue was produced.
  * 
  * @sample samples.collections.Collections.Transformations.firstNotNullOf
  */
@@ -39,7 +39,7 @@ public inline fun <K, V, R : Any> Map<out K, V>.firstNotNullOf(transform: (Map.E
 @kotlin.internal.InlineOnly
 public inline fun <K, V, R : Any> Map<out K, V>.firstNotNullOfOrNull(transform: (Map.Entry<K, V>) -> R?): R? {
     for (element in this) {
-        val result = transform(element)
+        konst result = transform(element)
         if (result != null) {
             return result
         }
@@ -48,18 +48,18 @@ public inline fun <K, V, R : Any> Map<out K, V>.firstNotNullOfOrNull(transform: 
 }
 
 /**
- * Returns a [List] containing all key-value pairs.
+ * Returns a [List] containing all key-konstue pairs.
  */
 public fun <K, V> Map<out K, V>.toList(): List<Pair<K, V>> {
     if (size == 0)
         return emptyList()
-    val iterator = entries.iterator()
+    konst iterator = entries.iterator()
     if (!iterator.hasNext())
         return emptyList()
-    val first = iterator.next()
+    konst first = iterator.next()
     if (!iterator.hasNext())
         return listOf(first.toPair())
-    val result = ArrayList<Pair<K, V>>(size)
+    konst result = ArrayList<Pair<K, V>>(size)
     result.add(first.toPair())
     do {
         result.add(iterator.next().toPair())
@@ -94,7 +94,7 @@ public inline fun <K, V, R> Map<out K, V>.flatMap(transform: (Map.Entry<K, V>) -
  */
 public inline fun <K, V, R, C : MutableCollection<in R>> Map<out K, V>.flatMapTo(destination: C, transform: (Map.Entry<K, V>) -> Iterable<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -109,7 +109,7 @@ public inline fun <K, V, R, C : MutableCollection<in R>> Map<out K, V>.flatMapTo
 @kotlin.jvm.JvmName("flatMapSequenceTo")
 public inline fun <K, V, R, C : MutableCollection<in R>> Map<out K, V>.flatMapTo(destination: C, transform: (Map.Entry<K, V>) -> Sequence<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -216,7 +216,7 @@ public inline fun <K, V> Map<out K, V>.forEach(action: (Map.Entry<K, V>) -> Unit
 }
 
 /**
- * Returns the first entry yielding the largest value of the given function.
+ * Returns the first entry yielding the largest konstue of the given function.
  * 
  * @throws NoSuchElementException if the map is empty.
  * 
@@ -231,7 +231,7 @@ public inline fun <K, V, R : Comparable<R>> Map<out K, V>.maxBy(selector: (Map.E
 }
 
 /**
- * Returns the first entry yielding the largest value of the given function or `null` if there are no entries.
+ * Returns the first entry yielding the largest konstue of the given function or `null` if there are no entries.
  * 
  * @sample samples.collections.Collections.Aggregates.maxByOrNull
  */
@@ -242,10 +242,10 @@ public inline fun <K, V, R : Comparable<R>> Map<out K, V>.maxByOrNull(selector: 
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each entry in the map.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the map is empty.
  */
@@ -258,10 +258,10 @@ public inline fun <K, V> Map<out K, V>.maxOf(selector: (Map.Entry<K, V>) -> Doub
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each entry in the map.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the map is empty.
  */
@@ -274,7 +274,7 @@ public inline fun <K, V> Map<out K, V>.maxOf(selector: (Map.Entry<K, V>) -> Floa
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each entry in the map.
  * 
  * @throws NoSuchElementException if the map is empty.
@@ -288,10 +288,10 @@ public inline fun <K, V, R : Comparable<R>> Map<out K, V>.maxOf(selector: (Map.E
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each entry in the map or `null` if there are no entries.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -302,10 +302,10 @@ public inline fun <K, V> Map<out K, V>.maxOfOrNull(selector: (Map.Entry<K, V>) -
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each entry in the map or `null` if there are no entries.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -316,7 +316,7 @@ public inline fun <K, V> Map<out K, V>.maxOfOrNull(selector: (Map.Entry<K, V>) -
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each entry in the map or `null` if there are no entries.
  */
 @SinceKotlin("1.4")
@@ -328,8 +328,8 @@ public inline fun <K, V, R : Comparable<R>> Map<out K, V>.maxOfOrNull(selector: 
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each entry in the map.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each entry in the map.
  * 
  * @throws NoSuchElementException if the map is empty.
  */
@@ -342,8 +342,8 @@ public inline fun <K, V, R> Map<out K, V>.maxOfWith(comparator: Comparator<in R>
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each entry in the map or `null` if there are no entries.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each entry in the map or `null` if there are no entries.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -354,7 +354,7 @@ public inline fun <K, V, R> Map<out K, V>.maxOfWithOrNull(comparator: Comparator
 }
 
 /**
- * Returns the first entry having the largest value according to the provided [comparator].
+ * Returns the first entry having the largest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the map is empty.
  */
@@ -367,7 +367,7 @@ public inline fun <K, V> Map<out K, V>.maxWith(comparator: Comparator<in Map.Ent
 }
 
 /**
- * Returns the first entry having the largest value according to the provided [comparator] or `null` if there are no entries.
+ * Returns the first entry having the largest konstue according to the provided [comparator] or `null` if there are no entries.
  */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
@@ -376,7 +376,7 @@ public inline fun <K, V> Map<out K, V>.maxWithOrNull(comparator: Comparator<in M
 }
 
 /**
- * Returns the first entry yielding the smallest value of the given function.
+ * Returns the first entry yielding the smallest konstue of the given function.
  * 
  * @throws NoSuchElementException if the map is empty.
  * 
@@ -391,7 +391,7 @@ public inline fun <K, V, R : Comparable<R>> Map<out K, V>.minBy(selector: (Map.E
 }
 
 /**
- * Returns the first entry yielding the smallest value of the given function or `null` if there are no entries.
+ * Returns the first entry yielding the smallest konstue of the given function or `null` if there are no entries.
  * 
  * @sample samples.collections.Collections.Aggregates.minByOrNull
  */
@@ -402,10 +402,10 @@ public inline fun <K, V, R : Comparable<R>> Map<out K, V>.minByOrNull(selector: 
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each entry in the map.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the map is empty.
  */
@@ -418,10 +418,10 @@ public inline fun <K, V> Map<out K, V>.minOf(selector: (Map.Entry<K, V>) -> Doub
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each entry in the map.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the map is empty.
  */
@@ -434,7 +434,7 @@ public inline fun <K, V> Map<out K, V>.minOf(selector: (Map.Entry<K, V>) -> Floa
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each entry in the map.
  * 
  * @throws NoSuchElementException if the map is empty.
@@ -448,10 +448,10 @@ public inline fun <K, V, R : Comparable<R>> Map<out K, V>.minOf(selector: (Map.E
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each entry in the map or `null` if there are no entries.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -462,10 +462,10 @@ public inline fun <K, V> Map<out K, V>.minOfOrNull(selector: (Map.Entry<K, V>) -
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each entry in the map or `null` if there are no entries.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -476,7 +476,7 @@ public inline fun <K, V> Map<out K, V>.minOfOrNull(selector: (Map.Entry<K, V>) -
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each entry in the map or `null` if there are no entries.
  */
 @SinceKotlin("1.4")
@@ -488,8 +488,8 @@ public inline fun <K, V, R : Comparable<R>> Map<out K, V>.minOfOrNull(selector: 
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each entry in the map.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each entry in the map.
  * 
  * @throws NoSuchElementException if the map is empty.
  */
@@ -502,8 +502,8 @@ public inline fun <K, V, R> Map<out K, V>.minOfWith(comparator: Comparator<in R>
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each entry in the map or `null` if there are no entries.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each entry in the map or `null` if there are no entries.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -514,7 +514,7 @@ public inline fun <K, V, R> Map<out K, V>.minOfWithOrNull(comparator: Comparator
 }
 
 /**
- * Returns the first entry having the smallest value according to the provided [comparator].
+ * Returns the first entry having the smallest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the map is empty.
  */
@@ -527,7 +527,7 @@ public inline fun <K, V> Map<out K, V>.minWith(comparator: Comparator<in Map.Ent
 }
 
 /**
- * Returns the first entry having the smallest value according to the provided [comparator] or `null` if there are no entries.
+ * Returns the first entry having the smallest konstue according to the provided [comparator] or `null` if there are no entries.
  */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly

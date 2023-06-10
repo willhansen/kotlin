@@ -6,9 +6,9 @@ import android.os.Parcelable
 import kotlin.jvm.JvmStatic
 
 @Parcelize
-class User(val firstName: String) : Parcelable {
+class User(konst firstName: String) : Parcelable {
     companion object {
         @JvmStatic
-        private val test = StringBuilder()
+        private konst test = StringBuilder()
     }
 }

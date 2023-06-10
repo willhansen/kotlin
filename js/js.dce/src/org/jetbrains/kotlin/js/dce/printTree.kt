@@ -23,13 +23,13 @@ fun printTree(root: Node, consumer: (String) -> Unit, printNestedMembers: Boolea
 }
 
 private fun printTree(node: Node, consumer: (String) -> Unit, depth: Int, settings: Settings) {
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
     sb.append("  ".repeat(depth)).append(node.memberName ?: node.toString())
 
     if (node.reachable) {
         sb.append(" (reachable")
         if (settings.showLocations) {
-            val locations = node.usedByAstNodes.mapNotNull { it.extractLocation() }
+            konst locations = node.usedByAstNodes.mapNotNull { it.extractLocation() }
             if (locations.isNotEmpty()) {
                 sb.append(" from ").append(locations.joinToString { it.asString() })
             }
@@ -40,7 +40,7 @@ private fun printTree(node: Node, consumer: (String) -> Unit, depth: Int, settin
     consumer(sb.toString())
 
     for (memberName in node.memberNames.sorted()) {
-        val member = node.member(memberName)
+        konst member = node.member(memberName)
         if (!member.declarationReachable) continue
 
         if ((!node.reachable || !member.reachable) || settings.printNestedMembers) {
@@ -49,4 +49,4 @@ private fun printTree(node: Node, consumer: (String) -> Unit, depth: Int, settin
     }
 }
 
-private class Settings(val printNestedMembers: Boolean, val showLocations: Boolean)
+private class Settings(konst printNestedMembers: Boolean, konst showLocations: Boolean)

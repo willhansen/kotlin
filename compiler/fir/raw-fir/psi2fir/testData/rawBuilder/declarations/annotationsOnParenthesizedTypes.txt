@@ -15,19 +15,19 @@ FILE: annotationsOnParenthesizedTypes.kt
 
         public? final? fun returnArgument(): B<@A() C>
 
-        public? final? val lambdaType: @A() ( () -> C )
+        public? final? konst lambdaType: @A() ( () -> C )
             public? [ContainingClassKey=AnnotationsOnParenthesizedTypes] get(): @A() ( () -> C )
 
-        public? final? val lambdaParameter: ( (@A() C) -> C )
+        public? final? konst lambdaParameter: ( (@A() C) -> C )
             public? [ContainingClassKey=AnnotationsOnParenthesizedTypes] get(): ( (@A() C) -> C )
 
-        public? final? val lambdaReturnValue: ( () -> @A() C )
+        public? final? konst lambdaReturnValue: ( () -> @A() C )
             public? [ContainingClassKey=AnnotationsOnParenthesizedTypes] get(): ( () -> @A() C )
 
-        public? final? val lambdaReceiver: ( @A() C.() -> C )
+        public? final? konst lambdaReceiver: ( @A() C.() -> C )
             public? [ContainingClassKey=AnnotationsOnParenthesizedTypes] get(): ( @A() C.() -> C )
 
-        public? final? val lambdaParameterNP: ( (@A() C) -> C )
+        public? final? konst lambdaParameterNP: ( (@A() C) -> C )
             public? [ContainingClassKey=AnnotationsOnParenthesizedTypes] get(): ( (@A() C) -> C )
 
     }

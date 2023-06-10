@@ -31,19 +31,19 @@ import org.jetbrains.kotlin.utils.addToStdlib.shouldNotBeCalled
  * This allows to use both 'invoke' and reflection API on function references obtained by '::'.
  */
 class FunctionClassDescriptor(
-    private val storageManager: StorageManager,
-    private val containingDeclaration: PackageFragmentDescriptor,
-    val functionTypeKind: FunctionTypeKind,
-    val arity: Int
+    private konst storageManager: StorageManager,
+    private konst containingDeclaration: PackageFragmentDescriptor,
+    konst functionTypeKind: FunctionTypeKind,
+    konst arity: Int
 ) : AbstractClassDescriptor(storageManager, functionTypeKind.numberedClassName(arity)) {
 
-    private val typeConstructor = FunctionTypeConstructor()
-    private val memberScope = FunctionClassScope(storageManager, this)
+    private konst typeConstructor = FunctionTypeConstructor()
+    private konst memberScope = FunctionClassScope(storageManager, this)
 
-    private val parameters: List<TypeParameterDescriptor>
+    private konst parameters: List<TypeParameterDescriptor>
 
     init {
-        val result = ArrayList<TypeParameterDescriptor>()
+        konst result = ArrayList<TypeParameterDescriptor>()
 
         fun typeParameter(variance: Variance, name: String) {
             result.add(TypeParameterDescriptorImpl.createWithDefaultBound(
@@ -61,7 +61,7 @@ class FunctionClassDescriptor(
     }
 
     @get:JvmName("hasBigArity")
-    val hasBigArity: Boolean
+    konst hasBigArity: Boolean
         get() = arity >= BuiltInFunctionArity.BIG_ARITY
 
     override fun getContainingDeclaration() = containingDeclaration
@@ -87,7 +87,7 @@ class FunctionClassDescriptor(
     override fun isExpect() = false
     override fun isActual() = false
     override fun isExternal() = false
-    override val annotations: Annotations get() = Annotations.EMPTY
+    override konst annotations: Annotations get() = Annotations.EMPTY
     override fun getSource(): SourceElement = SourceElement.NO_SOURCE
     override fun getSealedSubclasses() = emptyList<ClassDescriptor>()
     override fun getValueClassRepresentation(): ValueClassRepresentation<SimpleType>? = null
@@ -97,7 +97,7 @@ class FunctionClassDescriptor(
     private inner class FunctionTypeConstructor : AbstractClassTypeConstructor(storageManager) {
         override fun computeSupertypes(): Collection<KotlinType> {
             // For K{Suspend}Function{n}, add corresponding numbered {Suspend}Function{n} class, e.g. {Suspend}Function2 for K{Suspend}Function2
-            val supertypes = when (functionTypeKind) {
+            konst supertypes = when (functionTypeKind) {
                 FunctionTypeKind.Function -> // Function$N <: Function
                     listOf(functionClassId)
                 FunctionTypeKind.KFunction -> // KFunction$N <: KFunction
@@ -109,12 +109,12 @@ class FunctionClassDescriptor(
                 else -> shouldNotBeCalled()
             }
 
-            val moduleDescriptor = containingDeclaration.containingDeclaration
+            konst moduleDescriptor = containingDeclaration.containingDeclaration
             return supertypes.map { id ->
-                val descriptor = moduleDescriptor.findClassAcrossModuleDependencies(id) ?: error("Built-in class $id not found")
+                konst descriptor = moduleDescriptor.findClassAcrossModuleDependencies(id) ?: error("Built-in class $id not found")
 
                 // Substitute all type parameters of the super class with our last type parameters
-                val arguments = parameters.takeLast(descriptor.typeConstructor.parameters.size).map {
+                konst arguments = parameters.takeLast(descriptor.typeConstructor.parameters.size).map {
                     TypeProjectionImpl(it.defaultType)
                 }
 
@@ -129,17 +129,17 @@ class FunctionClassDescriptor(
 
         override fun toString() = declarationDescriptor.toString()
 
-        override val supertypeLoopChecker: SupertypeLoopChecker
+        override konst supertypeLoopChecker: SupertypeLoopChecker
             get() = SupertypeLoopChecker.EMPTY
     }
 
     override fun toString() = name.asString()
 
     companion object {
-        private val functionClassId = ClassId(BUILT_INS_PACKAGE_FQ_NAME, Name.identifier("Function"))
-        private val kFunctionClassId = ClassId(KOTLIN_REFLECT_FQ_NAME, Name.identifier("KFunction"))
+        private konst functionClassId = ClassId(BUILT_INS_PACKAGE_FQ_NAME, Name.identifier("Function"))
+        private konst kFunctionClassId = ClassId(KOTLIN_REFLECT_FQ_NAME, Name.identifier("KFunction"))
     }
 
     @IDEAPluginsCompatibilityAPI(IDEAPlatforms._223, message = "Please migrate to the functionTypeKind", plugins = "android")
-    val functionKind: FunctionClassKind = FunctionClassKind.getFunctionClassKind(functionTypeKind)
+    konst functionKind: FunctionClassKind = FunctionClassKind.getFunctionClassKind(functionTypeKind)
 }

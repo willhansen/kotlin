@@ -25,10 +25,10 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.InternalKotlinTarget
  * ```kotlin
  * class MyCustomJvmTarget(delegate: Delegate): DecoratedExternalKotlinTarget(delegate) {
  *     // Some property decorating our target
- *     val myCustomProperty: String = "hello there"
+ *     konst myCustomProperty: String = "hello there"
  *
  *     // Covariant override that allows for narrowing the type of compilations that this target contains
- *     override val compilations: NamedDomainObjectContainer<MyCustomCompilationType>
+ *     override konst compilations: NamedDomainObjectContainer<MyCustomCompilationType>
  *         get() = super.compilations as NamedDomainObjectContainer<MyCustomCompilationType>
  * }
  * ```
@@ -40,25 +40,25 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.InternalKotlinTarget
  */
 @ExternalKotlinTargetApi
 open class DecoratedExternalKotlinTarget internal constructor(
-    internal val delegate: ExternalKotlinTargetImpl
+    internal konst delegate: ExternalKotlinTargetImpl
 ) : InternalKotlinTarget by delegate {
     constructor(delegate: Delegate) : this(delegate.impl)
 
-    class Delegate internal constructor(internal val impl: ExternalKotlinTargetImpl)
+    class Delegate internal constructor(internal konst impl: ExternalKotlinTargetImpl)
 
-    val apiElementsConfiguration: Configuration = delegate.apiElementsConfiguration
+    konst apiElementsConfiguration: Configuration = delegate.apiElementsConfiguration
 
-    val runtimeElementsConfiguration: Configuration = delegate.runtimeElementsConfiguration
+    konst runtimeElementsConfiguration: Configuration = delegate.runtimeElementsConfiguration
 
-    val apiElementsPublishedConfiguration: Configuration = delegate.apiElementsPublishedConfiguration
+    konst apiElementsPublishedConfiguration: Configuration = delegate.apiElementsPublishedConfiguration
 
-    val runtimeElementsPublishedConfiguration: Configuration = delegate.runtimeElementsPublishedConfiguration
+    konst runtimeElementsPublishedConfiguration: Configuration = delegate.runtimeElementsPublishedConfiguration
 
-    internal val logger: Logger = delegate.logger
+    internal konst logger: Logger = delegate.logger
 }
 
-internal val ExternalKotlinTargetImpl.decoratedInstance: DecoratedExternalKotlinTarget
+internal konst ExternalKotlinTargetImpl.decoratedInstance: DecoratedExternalKotlinTarget
     get() = project.multiplatformExtension.targets.getByName(name) as DecoratedExternalKotlinTarget
 
-internal val ExternalKotlinTargetImpl.decoratedInstanceOrNull: DecoratedExternalKotlinTarget?
+internal konst ExternalKotlinTargetImpl.decoratedInstanceOrNull: DecoratedExternalKotlinTarget?
     get() = project.multiplatformExtensionOrNull?.targets?.findByName(name) as? DecoratedExternalKotlinTarget

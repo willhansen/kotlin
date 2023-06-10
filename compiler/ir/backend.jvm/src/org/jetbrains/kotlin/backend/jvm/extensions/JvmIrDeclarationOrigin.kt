@@ -19,12 +19,12 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind
 class JvmIrDeclarationOrigin(
     originKind: JvmDeclarationOriginKind,
     element: PsiElement?,
-    val declaration: IrDeclaration?,
+    konst declaration: IrDeclaration?,
 ) : JvmDeclarationOrigin(originKind, element, declaration?.toIrBasedDescriptor(), null)
 
-val IrDeclaration.descriptorOrigin: JvmIrDeclarationOrigin
+konst IrDeclaration.descriptorOrigin: JvmIrDeclarationOrigin
     get() {
-        val psiElement = findPsiElementForDeclarationOrigin()
+        konst psiElement = findPsiElementForDeclarationOrigin()
         return when {
             origin == IrDeclarationOrigin.FILE_CLASS ->
                 JvmIrDeclarationOrigin(JvmDeclarationOriginKind.PACKAGE_PART, psiElement, this)
@@ -40,13 +40,13 @@ private fun IrDeclaration.findPsiElementForDeclarationOrigin(): PsiElement? {
     // For synthetic $annotations methods for properties, use the PSI for the property or the constructor parameter.
     // It's used in KAPT stub generation to sort the properties correctly based on their source position (see KT-44130).
     if (this is IrFunction && name.asString().endsWith("\$annotations")) {
-        val metadata = metadata as? DescriptorMetadataSource.Property
+        konst metadata = metadata as? DescriptorMetadataSource.Property
         if (metadata != null) {
             return metadata.descriptor.psiElement
         }
     }
 
-    val element = PsiSourceManager.findPsiElement(this)
+    konst element = PsiSourceManager.findPsiElement(this)
 
     // Offsets for accessors and field of delegated property in IR point to the 'by' keyword, so the closest PSI element is the
     // KtPropertyDelegate (`by ...` expression). However, old JVM backend passed the PSI element of the property instead.

@@ -14,31 +14,31 @@ import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.util.*
 
-internal class KotlinObjCClassInfoGenerator(override val generationState: NativeGenerationState) : ContextUtils {
+internal class KotlinObjCClassInfoGenerator(override konst generationState: NativeGenerationState) : ContextUtils {
     fun generate(irClass: IrClass) {
         assert(irClass.isFinalClass)
 
-        val objCLLvmDeclarations = generationState.llvmDeclarations.forClass(irClass).objCDeclarations!!
+        konst objCLLvmDeclarations = generationState.llvmDeclarations.forClass(irClass).objCDeclarations!!
 
-        val instanceMethods = generateInstanceMethodDescs(irClass)
+        konst instanceMethods = generateInstanceMethodDescs(irClass)
 
-        val companionObject = irClass.companionObject()
-        val classMethods = companionObject?.generateMethodDescs().orEmpty()
+        konst companionObject = irClass.companionObject()
+        konst classMethods = companionObject?.generateMethodDescs().orEmpty()
 
-        val superclassName = irClass.getSuperClassNotAny()!!.let {
+        konst superclassName = irClass.getSuperClassNotAny()!!.let {
             llvm.dependenciesTracker.add(it)
             it.descriptor.getExternalObjCClassBinaryName()
         }
-        val protocolNames = irClass.getSuperInterfaces().map {
+        konst protocolNames = irClass.getSuperInterfaces().map {
             llvm.dependenciesTracker.add(it)
             it.name.asString().removeSuffix("Protocol")
         }
 
-        val exportedClassName = selectExportedClassName(irClass)
-        val className = exportedClassName ?: selectInternalClassName(irClass)
+        konst exportedClassName = selectExportedClassName(irClass)
+        konst className = exportedClassName ?: selectInternalClassName(irClass)
 
-        val classNameLiteral = className?.let { staticData.cStringLiteral(it) } ?: NullPointer(llvm.int8Type)
-        val info = Struct(runtime.kotlinObjCClassInfo,
+        konst classNameLiteral = className?.let { staticData.cStringLiteral(it) } ?: NullPointer(llvm.int8Type)
+        konst info = Struct(runtime.kotlinObjCClassInfo,
                           classNameLiteral,
                           llvm.constInt32(if (exportedClassName != null) 1 else 0),
 
@@ -76,10 +76,10 @@ internal class KotlinObjCClassInfoGenerator(override val generationState: Native
             irClass: IrClass
     ): List<ObjCMethodDesc> = mutableListOf<ObjCMethodDesc>().apply {
         addAll(irClass.generateMethodDescs())
-        val allImplementedSelectors = this.map { it.selector }.toSet()
+        konst allImplementedSelectors = this.map { it.selector }.toSet()
 
         assert(irClass.getSuperClassNotAny()!!.isExternalObjCClass())
-        val allInitMethodsInfo = irClass.getSuperClassNotAny()!!.constructors
+        konst allInitMethodsInfo = irClass.getSuperClassNotAny()!!.constructors
                 .mapNotNull { it.getObjCInitMethod()?.getExternalObjCMethodInfo() }
                 .filter { it.selector !in allImplementedSelectors }
                 .distinctBy { it.selector }
@@ -90,8 +90,8 @@ internal class KotlinObjCClassInfoGenerator(override val generationState: Native
     }
 
     private fun selectExportedClassName(irClass: IrClass): String? {
-        val exportObjCClassAnnotation = InteropFqNames.exportObjCClass
-        val explicitName = irClass.getAnnotationArgumentValue<String>(exportObjCClassAnnotation, "name")
+        konst exportObjCClassAnnotation = InteropFqNames.exportObjCClass
+        konst explicitName = irClass.getAnnotationArgumentValue<String>(exportObjCClassAnnotation, "name")
         if (explicitName != null) return explicitName
 
         return if (irClass.annotations.hasAnnotation(exportObjCClassAnnotation)) irClass.name.asString() else null
@@ -103,10 +103,10 @@ internal class KotlinObjCClassInfoGenerator(override val generationState: Native
         null // Generate as anonymous.
     }
 
-    private val impType = pointerType(functionType(llvm.int8PtrType, true, llvm.int8PtrType, llvm.int8PtrType))
+    private konst impType = pointerType(functionType(llvm.int8PtrType, true, llvm.int8PtrType, llvm.int8PtrType))
 
     private inner class ObjCMethodDesc(
-            val selector: String, val encoding: String, val impFunction: ConstPointer
+            konst selector: String, konst encoding: String, konst impFunction: ConstPointer
     ) : Struct(
             runtime.objCMethodDescription,
             impFunction.bitcast(impType),
@@ -117,7 +117,7 @@ internal class KotlinObjCClassInfoGenerator(override val generationState: Native
     private fun IrClass.generateImpMethodDescs(): List<ObjCMethodDesc> = this.declarations
             .filterIsInstance<IrSimpleFunction>()
             .mapNotNull {
-                val annotation =
+                konst annotation =
                         it.annotations.findAnnotation(InteropFqNames.objCMethodImp) ?:
                                 return@mapNotNull null
 
@@ -129,12 +129,12 @@ internal class KotlinObjCClassInfoGenerator(override val generationState: Native
             }
 
     private fun generateClassDataImp(irClass: IrClass): ConstPointer {
-        val classDataPointer = staticData.placeGlobal(
+        konst classDataPointer = staticData.placeGlobal(
                 "kobjcclassdata:${irClass.fqNameForIrSerialization}#internal",
                 Zero(runtime.kotlinObjCClassData)
         ).pointer
 
-        val functionProto = LlvmFunctionSignature(
+        konst functionProto = LlvmFunctionSignature(
                 returnType = LlvmRetType(classDataPointer.llvmType),
                 parameterTypes = listOf(LlvmParamType(llvm.int8PtrType), LlvmParamType(llvm.int8PtrType)),
         ).toProto(
@@ -142,17 +142,17 @@ internal class KotlinObjCClassInfoGenerator(override val generationState: Native
                 origin = null,
                 LLVMLinkage.LLVMPrivateLinkage
         )
-        val functionCallable = generateFunctionNoRuntime(codegen, functionProto) {
+        konst functionCallable = generateFunctionNoRuntime(codegen, functionProto) {
             ret(classDataPointer.llvm)
         }
 
         return functionCallable.toConstPointer()
     }
 
-    private val codegen = CodeGenerator(generationState)
+    private konst codegen = CodeGenerator(generationState)
 
     companion object {
-        const val createdClassFieldIndex = 11
+        const konst createdClassFieldIndex = 11
     }
 }
 

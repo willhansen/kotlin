@@ -7,24 +7,24 @@
  * DESCRIPTION: Real literals separeted by comments.
  */
 
-val value = 0/* comment */.000001
-val value = 9999/** some doc */.1
+konst konstue = 0/* comment */.000001
+konst konstue = 9999/** some doc */.1
 
-val value = 4/**//** some doc */.1
+konst konstue = 4/**//** some doc */.1
 
-val value = 0/*
+konst konstue = 0/*
     ...
 */.000001
-val value = 9999/**
+konst konstue = 9999/**
  some doc
  */.1
-val value = 9999// comment
+konst konstue = 9999// comment
 .1
-val value = 9999/***/
+konst konstue = 9999/***/
 .1
 
-val value = 1000/***/000.0
-val value = 1000/*.*/000.0
+konst konstue = 1000/***/000.0
+konst konstue = 1000/*.*/000.0
 
-val value = 4/** some/**/ doc */.1
-val value = 4/* some/***/ doc */.19999
+konst konstue = 4/** some/**/ doc */.1
+konst konstue = 4/* some/***/ doc */.19999

@@ -146,19 +146,19 @@ class ArgsToParamsMatchingTest {
 
 private fun assertParamMapsEquals(actuals: Map<KParameter, Any?>?, vararg expected: Pair<String, Any?>) {
     Assert.assertNotNull(actuals)
-    val stringifiedActuals = actuals!!.mapKeys { it.key.name }
-    val mappedExpected = expected.toMap()
+    konst stringifiedActuals = actuals!!.mapKeys { it.key.name }
+    konst mappedExpected = expected.toMap()
     if (expected != stringifiedActuals) {
         Assert.assertEquals(stringifiedActuals.keys, mappedExpected.keys)
         mappedExpected.forEach { exp ->
-            val actVal = stringifiedActuals[exp.key]
-            if (exp.value != actVal) {
-                val msg = "Unexpected value for key '${exp.key}'; expected: ${exp.value}, actual: $actVal"
-                if ((exp.value?.javaClass?.isArray ?: false) && (actVal?.javaClass?.isArray ?: false )) {
-                    Assert.assertArrayEquals(msg, arrayOf(exp.value), arrayOf(actVal)) // tricking Array.deepEquals to compare single element arrays (instead of tedious casting to typed array)
+            konst actVal = stringifiedActuals[exp.key]
+            if (exp.konstue != actVal) {
+                konst msg = "Unexpected konstue for key '${exp.key}'; expected: ${exp.konstue}, actual: $actVal"
+                if ((exp.konstue?.javaClass?.isArray ?: false) && (actVal?.javaClass?.isArray ?: false )) {
+                    Assert.assertArrayEquals(msg, arrayOf(exp.konstue), arrayOf(actVal)) // tricking Array.deepEquals to compare single element arrays (instead of tedious casting to typed array)
                 }
                 else {
-                    Assert.assertEquals(msg, exp.value, actVal)
+                    Assert.assertEquals(msg, exp.konstue, actVal)
                 }
             }
         }

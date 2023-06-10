@@ -48,5 +48,5 @@ class Foo {
     private lateinit var bars: List<Bar>
 
     @Parcelize
-    data class Bar(val intent: Intent): Parcelable
+    data class Bar(konst intent: Intent): Parcelable
 }

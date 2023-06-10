@@ -1,6 +1,6 @@
 
 fun test(ix: Int?): String {
-    val arr = arrayOf("fail 1")
+    konst arr = arrayOf("fail 1")
 
     if (ix != null) {
         arr[ix] = "OK"

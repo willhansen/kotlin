@@ -5,7 +5,7 @@ where advanced options include:
   -Xerror-tolerance-policy   Set up error tolerance policy (NONE, SEMANTIC, SYNTAX, ALL)
   -Xenable-extension-functions-in-externals
                              Enable extensions functions members in external interfaces
-  -Xfake-override-validator  Enable IR fake override validator
+  -Xfake-override-konstidator  Enable IR fake override konstidator
   -Xforce-deprecated-legacy-compiler-usage
                              The flag is used only for our inner infrastructure. It will be removed soon, so it's unsafe to use it nowadays.
   -Xfriend-modules=<path>    Paths to friend modules
@@ -25,7 +25,7 @@ where advanced options include:
   -Xir-dce-runtime-diagnostic={log|exception}
                              Enable runtime diagnostics when performing DCE instead of removing declarations
   -Xir-generate-inline-anonymous-functions
-                             Lambda expressions that capture values are translated into in-line anonymous JavaScript functions
+                             Lambda expressions that capture konstues are translated into in-line anonymous JavaScript functions
   -Xir-keep                  Comma-separated list of fully-qualified names to not be eliminated by DCE (if it can be reached), and for which to keep non-minified names.
   -Xir-minimized-member-names Perform minimization for names of members
   -Xir-module-name=<name>    Specify a compilation module name for IR backend
@@ -40,7 +40,7 @@ where advanced options include:
   -Xir-produce-klib-file     Generate packed klib into file specified by -output. Disables pre-IR backend
   -Xir-property-lazy-initialization
                              Perform lazy initialization for properties
-  -Xir-safe-external-boolean Safe access via Boolean() to Boolean properties in externals to safely cast falsy values.
+  -Xir-safe-external-boolean Safe access via Boolean() to Boolean properties in externals to safely cast falsy konstues.
   -Xir-safe-external-boolean-diagnostic={log|exception}
                              Enable runtime diagnostics when access safely to boolean in external declarations
   -Xmetadata-only            Generate *.meta.js and *.kjsm files only
@@ -111,14 +111,14 @@ where advanced options include:
   -Xphases-to-dump           Dump backend state both before and after these phases
   -Xphases-to-dump-after     Dump backend state after these phases
   -Xphases-to-dump-before    Dump backend state before these phases
-  -Xphases-to-validate       Validate backend state both before and after these phases
-  -Xphases-to-validate-after Validate backend state after these phases
-  -Xphases-to-validate-before Validate backend state before these phases
+  -Xphases-to-konstidate       Validate backend state both before and after these phases
+  -Xphases-to-konstidate-after Validate backend state after these phases
+  -Xphases-to-konstidate-before Validate backend state before these phases
   -Xplugin=<path>            Load plugins from the given classpath
-  -Xcompiler-plugin=<path1>,<path2>:<optionName>=<value>,<optionName>=<value>
+  -Xcompiler-plugin=<path1>,<path2>:<optionName>=<konstue>,<optionName>=<konstue>
                              Register compiler plugin
   -Xprofile-phases           Profile backend phases
-  -Xproper-ieee754-comparisons Generate proper IEEE 754 comparisons in all cases if values are statically known to be of primitive numeric types
+  -Xproper-ieee754-comparisons Generate proper IEEE 754 comparisons in all cases if konstues are statically known to be of primitive numeric types
   -Xread-deserialized-contracts Enable reading of contracts from metadata
   -Xklib-relative-path-base  Provide a base paths to compute source's relative paths in klib (default is empty)
   -Xrender-internal-diagnostic-names

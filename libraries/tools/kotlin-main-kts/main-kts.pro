@@ -36,5 +36,5 @@
 
 -keepclassmembers class * extends java.lang.Enum {
     <fields>;
-    **[] values();
+    **[] konstues();
 }

@@ -11,30 +11,30 @@ package kotlin.collections
  * The implementor is required to implement [entries] property, which should return mutable set of map entries, and [put] function.
  *
  * @param K the type of map keys. The map is invariant in its key type.
- * @param V the type of map values. The map is invariant in its value type.
+ * @param V the type of map konstues. The map is invariant in its konstue type.
  */
 @SinceKotlin("1.3")
 public expect abstract class AbstractMutableMap<K, V> : MutableMap<K, V> {
     protected constructor()
 
     /**
-     * Associates the specified [value] with the specified [key] in the map.
+     * Associates the specified [konstue] with the specified [key] in the map.
      *
      * This method is redeclared as abstract, because it's not implemented in the base class,
      * so it must be always overridden in the concrete mutable collection implementation.
      *
-     * @return the previous value associated with the key, or `null` if the key was not present in the map.
+     * @return the previous konstue associated with the key, or `null` if the key was not present in the map.
      */
-    abstract override fun put(key: K, value: V): V?
+    abstract override fun put(key: K, konstue: V): V?
 
-    abstract override val entries: MutableSet<MutableMap.MutableEntry<K, V>>
+    abstract override konst entries: MutableSet<MutableMap.MutableEntry<K, V>>
 
-    override val keys: MutableSet<K>
-    override val size: Int
-    override val values: MutableCollection<V>
+    override konst keys: MutableSet<K>
+    override konst size: Int
+    override konst konstues: MutableCollection<V>
     override fun clear()
     override fun containsKey(key: K): Boolean
-    override fun containsValue(value: V): Boolean
+    override fun containsValue(konstue: V): Boolean
     override fun get(key: K): V?
     override fun isEmpty(): Boolean
     override fun putAll(from: Map<out K, V>)

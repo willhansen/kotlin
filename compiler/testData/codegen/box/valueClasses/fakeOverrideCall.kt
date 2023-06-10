@@ -5,17 +5,17 @@
 
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double)
+konstue class DPoint(konst x: Double, konst y: Double)
 
 class A : B()
 
 class C {
-    fun set(value: DPoint) = A().set(value)
+    fun set(konstue: DPoint) = A().set(konstue)
 }
 
 open class B {
 
-    fun set(value: DPoint) = "OK"
+    fun set(konstue: DPoint) = "OK"
 }
 
 fun box(): String = A().set(DPoint(1.0, 2.0))

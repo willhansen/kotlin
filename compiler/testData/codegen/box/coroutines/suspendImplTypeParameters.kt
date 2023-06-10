@@ -7,7 +7,7 @@ abstract class AbstractPersistence<T, U> {
 }
 
 fun box(): String {
-    val genericString =
+    konst genericString =
         AbstractPersistence::class.java.declaredMethods
             .single { it.name.contains("\$suspendImpl") }
             .toGenericString()

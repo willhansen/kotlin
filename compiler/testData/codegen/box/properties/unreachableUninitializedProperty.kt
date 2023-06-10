@@ -2,9 +2,9 @@
 // KT-44496
 
 class C {
-    val todo: String = TODO()
+    konst todo: String = TODO()
 
-    val uninitializedVal: String
+    konst uninitializedVal: String
 
     var uninitializedVar: String
 }
@@ -14,19 +14,19 @@ class Foo {
         TODO()
     }
 
-    val uninitializedVal: String
+    konst uninitializedVal: String
 
     var uninitializedVar: String
 }
 
 class Bar {
-    val initializedVal = 43
+    konst initializedVal = 43
 
     init {
         TODO()
     }
 
-    val uninitializedVal: String
+    konst uninitializedVal: String
 
     var uninitializedVar: String
 }

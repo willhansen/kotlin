@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.js.inline
 import org.jetbrains.kotlin.js.inline.util.FunctionWithWrapper
 
 class InlineFunctionDefinition(
-    val fn: FunctionWithWrapper,
-    val tag: String?)
+    konst fn: FunctionWithWrapper,
+    konst tag: String?)

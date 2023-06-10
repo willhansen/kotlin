@@ -70,9 +70,9 @@ public fun Path.copyToRecursively(
 ): Path {
     return if (overwrite) {
         copyToRecursively(target, onError, followLinks) { src, dst ->
-            val options = LinkFollowing.toLinkOptions(followLinks)
-            val dstIsDirectory = dst.isDirectory(LinkOption.NOFOLLOW_LINKS)
-            val srcIsDirectory = src.isDirectory(*options)
+            konst options = LinkFollowing.toLinkOptions(followLinks)
+            konst dstIsDirectory = dst.isDirectory(LinkOption.NOFOLLOW_LINKS)
+            konst srcIsDirectory = src.isDirectory(*options)
             if ((srcIsDirectory && dstIsDirectory).not()) {
                 if (dstIsDirectory)
                     dst.deleteRecursively()
@@ -118,7 +118,7 @@ public fun Path.copyToRecursively(
  * [followLinks] determines whether to copy a symbolic link itself or its target.
  * Symbolic links in the target subtree are not followed.
  *
- * If a custom implementation of [copyAction] is provided, consider making it consistent with [followLinks] value.
+ * If a custom implementation of [copyAction] is provided, consider making it consistent with [followLinks] konstue.
  * See [CopyActionResult] for available options.
  *
  * If [copyAction] throws an exception, it is passed to [onError] for handling.
@@ -155,13 +155,13 @@ public fun Path.copyToRecursively(
         //   * toRealPath takes LinkOption, but the option also applies to the directories on the way to the file
         // Thus links are always followed in isSameFileAs and toRealPath
 
-        val targetExistsAndNotSymlink = target.exists() && !target.isSymbolicLink()
+        konst targetExistsAndNotSymlink = target.exists() && !target.isSymbolicLink()
 
         if (targetExistsAndNotSymlink && this.isSameFileAs(target)) {
             // TODO: KT-38678
             // source and target files are the same entry, continue recursive copy operation
         } else {
-            val isSubdirectory = when {
+            konst isSubdirectory = when {
                 this.fileSystem != target.fileSystem ->
                     false
                 targetExistsAndNotSymlink ->
@@ -179,7 +179,7 @@ public fun Path.copyToRecursively(
     }
 
     fun destination(source: Path): Path {
-        val relativePath = source.relativeTo(this@copyToRecursively)
+        konst relativePath = source.relativeTo(this@copyToRecursively)
         return target.resolve(relativePath.pathString)
     }
 
@@ -216,7 +216,7 @@ public fun Path.copyToRecursively(
 @ExperimentalPathApi
 private object DefaultCopyActionContext : CopyActionContext {
     override fun Path.copyToIgnoringExistingDirectory(target: Path, followLinks: Boolean): CopyActionResult {
-        val options = LinkFollowing.toLinkOptions(followLinks)
+        konst options = LinkFollowing.toLinkOptions(followLinks)
         if (this.isDirectory(*options) && target.isDirectory(LinkOption.NOFOLLOW_LINKS)) {
             // do nothing, the destination directory already exists
         } else {
@@ -250,7 +250,7 @@ private fun OnErrorResult.toFileVisitResult() = when (this) {
  * This function does nothing if the entry located by this path does not exist.
  *
  * If the underlying platform supports [SecureDirectoryStream],
- * traversal of the file tree and removal of entries are performed using it.
+ * traversal of the file tree and remokonst of entries are performed using it.
  * Otherwise, directories in the file tree are opened with the less secure [Files.newDirectoryStream].
  * Note that on a platform that supports symbolic links and does not support [SecureDirectoryStream],
  * it is possible for a recursive delete to delete files and directories that are outside the directory being deleted.
@@ -267,7 +267,7 @@ private fun OnErrorResult.toFileVisitResult() = when (this) {
 @ExperimentalPathApi
 @SinceKotlin("1.8")
 public fun Path.deleteRecursively(): Unit {
-    val suppressedExceptions = this.deleteRecursivelyImpl()
+    konst suppressedExceptions = this.deleteRecursivelyImpl()
 
     if (suppressedExceptions.isNotEmpty()) {
         throw FileSystemException("Failed to delete one or more files. See suppressed exceptions for details.").apply {
@@ -276,11 +276,11 @@ public fun Path.deleteRecursively(): Unit {
     }
 }
 
-private class ExceptionsCollector(private val limit: Int = 64) {
+private class ExceptionsCollector(private konst limit: Int = 64) {
     var totalExceptions: Int = 0
         private set
 
-    val collectedExceptions = mutableListOf<Exception>()
+    konst collectedExceptions = mutableListOf<Exception>()
 
     var path: Path? = null
 
@@ -295,9 +295,9 @@ private class ExceptionsCollector(private val limit: Int = 64) {
 
     fun collect(exception: Exception) {
         totalExceptions += 1
-        val shouldCollect = collectedExceptions.size < limit
+        konst shouldCollect = collectedExceptions.size < limit
         if (shouldCollect) {
-            val restoredException = if (path != null) {
+            konst restoredException = if (path != null) {
                 // When SecureDirectoryStream is used, only entry name gets reported in exception message.
                 // Thus, wrap such exceptions in FileSystemException with restored path.
                 FileSystemException(path.toString()).initCause(exception) as FileSystemException
@@ -310,12 +310,12 @@ private class ExceptionsCollector(private val limit: Int = 64) {
 }
 
 private fun Path.deleteRecursivelyImpl(): List<Exception> {
-    val collector = ExceptionsCollector()
+    konst collector = ExceptionsCollector()
     var useInsecure = true
 
     // TODO: KT-54077
     this.parent?.let { parent ->
-        val directoryStream = try { Files.newDirectoryStream(parent) } catch (_: Throwable) { null }
+        konst directoryStream = try { Files.newDirectoryStream(parent) } catch (_: Throwable) { null }
         directoryStream?.use { stream ->
             if (stream is SecureDirectoryStream<Path>) {
                 useInsecure = false
@@ -351,7 +351,7 @@ private fun SecureDirectoryStream<Path>.handleEntry(name: Path, collector: Excep
 
     collectIfThrows(collector) {
         if (this.isDirectory(name, LinkOption.NOFOLLOW_LINKS)) {
-            val preEnterTotalExceptions = collector.totalExceptions
+            konst preEnterTotalExceptions = collector.totalExceptions
 
             this.enterDirectory(name, collector)
 
@@ -391,7 +391,7 @@ private fun SecureDirectoryStream<Path>.isDirectory(entryName: Path, vararg opti
 private fun insecureHandleEntry(entry: Path, collector: ExceptionsCollector) {
     collectIfThrows(collector) {
         if (entry.isDirectory(LinkOption.NOFOLLOW_LINKS)) {
-            val preEnterTotalExceptions = collector.totalExceptions
+            konst preEnterTotalExceptions = collector.totalExceptions
 
             insecureEnterDirectory(entry, collector)
 

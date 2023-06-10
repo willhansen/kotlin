@@ -2,14 +2,14 @@
 // WITH_STDLIB
 
 
-val MinI = Int.MIN_VALUE
-val MinB = Byte.MIN_VALUE
-val MinS = Short.MIN_VALUE
-val MinL = Long.MIN_VALUE
-val MinC = Char.MIN_VALUE
+konst MinI = Int.MIN_VALUE
+konst MinB = Byte.MIN_VALUE
+konst MinS = Short.MIN_VALUE
+konst MinL = Long.MIN_VALUE
+konst MinC = Char.MIN_VALUE
 
 fun box(): String {
-    val list1 = ArrayList<Int>()
+    konst list1 = ArrayList<Int>()
     for (i in (MinI + 2) downTo MinI step 1) {
         list1.add(i)
         if (list1.size > 23) break
@@ -18,7 +18,7 @@ fun box(): String {
         return "Wrong elements for (MinI + 2) downTo MinI step 1: $list1"
     }
 
-    val list2 = ArrayList<Int>()
+    konst list2 = ArrayList<Int>()
     for (i in (MinB + 2).toByte() downTo MinB step 1) {
         list2.add(i)
         if (list2.size > 23) break
@@ -27,7 +27,7 @@ fun box(): String {
         return "Wrong elements for (MinB + 2).toByte() downTo MinB step 1: $list2"
     }
 
-    val list3 = ArrayList<Int>()
+    konst list3 = ArrayList<Int>()
     for (i in (MinS + 2).toShort() downTo MinS step 1) {
         list3.add(i)
         if (list3.size > 23) break
@@ -36,7 +36,7 @@ fun box(): String {
         return "Wrong elements for (MinS + 2).toShort() downTo MinS step 1: $list3"
     }
 
-    val list4 = ArrayList<Long>()
+    konst list4 = ArrayList<Long>()
     for (i in (MinL + 2).toLong() downTo MinL step 1) {
         list4.add(i)
         if (list4.size > 23) break
@@ -45,7 +45,7 @@ fun box(): String {
         return "Wrong elements for (MinL + 2).toLong() downTo MinL step 1: $list4"
     }
 
-    val list5 = ArrayList<Char>()
+    konst list5 = ArrayList<Char>()
     for (i in (MinC + 2) downTo MinC step 1) {
         list5.add(i)
         if (list5.size > 23) break

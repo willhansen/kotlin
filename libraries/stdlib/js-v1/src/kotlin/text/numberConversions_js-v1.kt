@@ -6,9 +6,9 @@
 package kotlin.text
 
 /**
- * Returns a string representation of this [Long] value in the specified [radix].
+ * Returns a string representation of this [Long] konstue in the specified [radix].
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for number to string conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for number to string conversion.
  */
 @SinceKotlin("1.2")
 public actual fun Long.toString(radix: Int): String = asDynamic().toString(checkRadix(radix))

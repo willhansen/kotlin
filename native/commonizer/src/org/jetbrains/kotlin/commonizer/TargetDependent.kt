@@ -10,8 +10,8 @@ package org.jetbrains.kotlin.commonizer
 import gnu.trove.THashMap
 
 sealed interface TargetDependent<T> : Iterable<T> {
-    val size: Int get() = targets.size
-    val targets: List<CommonizerTarget>
+    konst size: Int get() = targets.size
+    konst targets: List<CommonizerTarget>
     fun indexOf(target: CommonizerTarget): Int = targets.indexOf(target)
 
     fun <R> map(mapper: (target: CommonizerTarget, T) -> R): TargetDependent<R> {
@@ -42,13 +42,13 @@ sealed interface TargetDependent<T> : Iterable<T> {
     }
 
     object Empty : TargetDependent<Any?> {
-        override val targets: List<CommonizerTarget> = emptyList()
+        override konst targets: List<CommonizerTarget> = emptyList()
         override fun get(target: CommonizerTarget) = throwMissingTarget(target)
     }
 }
 
 internal fun <T : Any> TargetDependent<T?>.filterNonNull(): TargetDependent<T> {
-    val nonNullTargets = targets.filter { this[it] != null }
+    konst nonNullTargets = targets.filter { this[it] != null }
     return TargetDependent(nonNullTargets) { target -> this@filterNonNull[target] ?: throw NullPointerException() }
 }
 
@@ -100,8 +100,8 @@ internal inline fun <T> EagerTargetDependent(
     return keys.associateWith(factory).toTargetDependent()
 }
 
-private class MapBasedTargetDependent<T>(private val map: Map<CommonizerTarget, T>) : TargetDependent<T> {
-    override val targets: List<CommonizerTarget> = map.keys.toList()
+private class MapBasedTargetDependent<T>(private konst map: Map<CommonizerTarget, T>) : TargetDependent<T> {
+    override konst targets: List<CommonizerTarget> = map.keys.toList()
     override fun get(target: CommonizerTarget): T = map.getValue(target)
 }
 
@@ -109,28 +109,28 @@ private class MapBasedTargetDependent<T>(private val map: Map<CommonizerTarget, 
  * Not thread safe!
  */
 private class FactoryBasedTargetDependent<T>(
-    override val targets: List<CommonizerTarget>,
+    override konst targets: List<CommonizerTarget>,
     private var factory: ((target: CommonizerTarget) -> T)?
 ) : TargetDependent<T> {
 
     private object Null
     private object Uninitialized
 
-    private val values = targets.associateWithTo(THashMap<CommonizerTarget, Any>(targets.size)) { Uninitialized }
+    private konst konstues = targets.associateWithTo(THashMap<CommonizerTarget, Any>(targets.size)) { Uninitialized }
 
     @Suppress("UNCHECKED_CAST")
     override fun get(target: CommonizerTarget): T {
-        val value = values[target] ?: throwMissingTarget(target)
-        if (value === Null) return null as T
-        if (value === Uninitialized) {
-            val initializedValue = checkNotNull(factory)(target)
-            values[target] = initializedValue ?: Null
-            if (values.none { it.value !== Uninitialized }) {
+        konst konstue = konstues[target] ?: throwMissingTarget(target)
+        if (konstue === Null) return null as T
+        if (konstue === Uninitialized) {
+            konst initializedValue = checkNotNull(factory)(target)
+            konstues[target] = initializedValue ?: Null
+            if (konstues.none { it.konstue !== Uninitialized }) {
                 factory = null
             }
             return initializedValue
         }
-        return value as T
+        return konstue as T
     }
 }
 

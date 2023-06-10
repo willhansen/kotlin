@@ -5,25 +5,25 @@ package test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-annotation class Anno(@get:JvmName("uglyJvmName") val value: String)
+annotation class Anno(@get:JvmName("uglyJvmName") konst konstue: String)
 
-@Anno(value = "OK")
+@Anno(konstue = "OK")
 class Foo
 
 
-annotation class Meta(val anno: Anno)
+annotation class Meta(konst anno: Anno)
 
-@Meta(Anno(value = "OK"))
+@Meta(Anno(konstue = "OK"))
 fun bar() {}
 
 fun box(): String {
-    val f = Foo::class.annotations.single()
+    konst f = Foo::class.annotations.single()
     assertTrue("@test.Anno\\(uglyJvmName=\"?OK\"?\\)".toRegex().matches(f.toString()))
-    assertEquals("OK", (f as Anno).value)
+    assertEquals("OK", (f as Anno).konstue)
 
-    val b = ::bar.annotations.single()
+    konst b = ::bar.annotations.single()
     assertEquals("@test.Meta(anno=$f)", b.toString())
-    assertEquals("OK", (b as Meta).anno.value)
+    assertEquals("OK", (b as Meta).anno.konstue)
 
     return "OK"
 }

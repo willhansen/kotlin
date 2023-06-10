@@ -15,11 +15,11 @@ class BB : AA() {
 }
 
 fun test() {
-    val bbd = BB.D
-    val aac = AA.C
+    konst bbd = BB.D
+    konst aac = AA.C
     JavaClass.bar()
 
-    val errC = BB.<!UNRESOLVED_REFERENCE!>C<!>
-    val errBarViaBB = BB.<!UNRESOLVED_REFERENCE!>bar<!>()
-    val errBarViaAA = AA.<!UNRESOLVED_REFERENCE!>bar<!>()
+    konst errC = BB.<!UNRESOLVED_REFERENCE!>C<!>
+    konst errBarViaBB = BB.<!UNRESOLVED_REFERENCE!>bar<!>()
+    konst errBarViaAA = AA.<!UNRESOLVED_REFERENCE!>bar<!>()
 }

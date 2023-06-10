@@ -2,8 +2,8 @@ package
 
 public final class My {
     public constructor My()
-    @delegate:kotlin.jvm.JvmSynthetic public final val s: kotlin.String
-    @get:kotlin.jvm.JvmSynthetic public final val t: kotlin.String
+    @delegate:kotlin.jvm.JvmSynthetic public final konst s: kotlin.String
+    @get:kotlin.jvm.JvmSynthetic public final konst t: kotlin.String
     @set:kotlin.jvm.JvmSynthetic public final var z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

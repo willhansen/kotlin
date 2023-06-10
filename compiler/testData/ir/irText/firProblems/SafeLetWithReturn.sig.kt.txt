@@ -17,7 +17,7 @@ fun foo(s: String?): String
 // CHECK:
 //   Mangled name: @kotlin.String?{}baz
 //   Public signature: /baz|7411160368245609818[0]
-val String?.baz: String
+konst String?.baz: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-baz>@kotlin.String?(){}kotlin.String
   //   Public signature: /baz.<get-baz>|4455067775993214927[0]

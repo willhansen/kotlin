@@ -1,8 +1,8 @@
 interface I
 
-inline class ICI(val i: I): I
+inline class ICI(konst i: I): I
 
-class Wrapper(val s: String): I
+class Wrapper(konst s: String): I
 
 suspend fun suspendICI(): ICI = ICI(Wrapper(""))
 suspend fun suspendI(): I = ICI(Wrapper(""))

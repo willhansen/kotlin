@@ -1,8 +1,8 @@
 // FILE: test.kt
 
-var value = false
+var konstue = false
 
-fun cond() = value
+fun cond() = konstue
 
 fun foo() {
     if (cond())
@@ -13,7 +13,7 @@ fun foo() {
 
 fun box() {
     foo()
-    value = true
+    konstue = true
     foo()
 }
 

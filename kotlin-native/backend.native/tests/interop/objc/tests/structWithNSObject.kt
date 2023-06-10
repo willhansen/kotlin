@@ -3,13 +3,13 @@ import kotlin.test.*
 import objcTests.*
 
 private class NSObjectSubClass : NSObject() {
-    val x = 111
+    konst x = 111
 }
 
 @Test
 fun testStructWithNSObject() {
     memScoped {
-        val struct = alloc<CStructWithNSObjects>()
+        konst struct = alloc<CStructWithNSObjects>()
 
         struct.any = 5
         assertEquals(5, struct.any)

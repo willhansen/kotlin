@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.commonizer.cli
 
 internal abstract class OptionType<T>(
-    val alias: String,
-    val description: String,
-    val mandatory: Boolean = true
+    konst alias: String,
+    konst description: String,
+    konst mandatory: Boolean = true
 ) {
     abstract fun parse(rawValue: String, onError: (reason: String) -> Nothing): Option<T>
 }

@@ -1,6 +1,6 @@
 fun main() {
-    val x = foo<Int, _>()
-    val x = foo<_, _, _>()
-    val x = foo<_, _, Int>()
-    val x = foo<_>()
+    konst x = foo<Int, _>()
+    konst x = foo<_, _, _>()
+    konst x = foo<_, _, Int>()
+    konst x = foo<_>()
 }

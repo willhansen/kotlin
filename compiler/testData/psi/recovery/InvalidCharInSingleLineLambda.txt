@@ -1,10 +1,10 @@
-KtFile: InvalidCharInSingleLineLambda.kt
+KtFile: InkonstidCharInSingleLineLambda.kt
   PACKAGE_DIRECTIVE
     <empty list>
   IMPORT_LIST
     <empty list>
   FUN
-    PsiComment(EOL_COMMENT)('// checks that invalid characters (inserted e.g. by completion) inside single-line block do not cause wrong scopes for declarations below')
+    PsiComment(EOL_COMMENT)('// checks that inkonstid characters (inserted e.g. by completion) inside single-line block do not cause wrong scopes for declarations below')
     PsiWhiteSpace('\n')
     PsiElement(fun)('fun')
     PsiWhiteSpace(' ')
@@ -38,7 +38,7 @@ KtFile: InvalidCharInSingleLineLambda.kt
               PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('v')
         PsiWhiteSpace(' ')

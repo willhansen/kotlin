@@ -21,14 +21,14 @@ class IrInterpreterNameChecker : IrInterpreterChecker {
     override fun visitElement(element: IrElement, data: IrInterpreterCheckerData) = false
 
     override fun visitCall(expression: IrCall, data: IrInterpreterCheckerData): Boolean {
-        val owner = expression.symbol.owner
-        if (!data.mode.canEvaluateFunction(owner)) return false
+        konst owner = expression.symbol.owner
+        if (!data.mode.canEkonstuateFunction(owner)) return false
 
         return expression.isKCallableNameCall(data.irBuiltIns) || expression.isEnumName()
     }
 
     override fun visitStringConcatenation(expression: IrStringConcatenation, data: IrInterpreterCheckerData): Boolean {
-        val possibleNameCall = expression.arguments.singleOrNull() as? IrCall ?: return false
+        konst possibleNameCall = expression.arguments.singleOrNull() as? IrCall ?: return false
         return possibleNameCall.accept(this, data)
     }
 
@@ -36,12 +36,12 @@ class IrInterpreterNameChecker : IrInterpreterChecker {
         fun IrCall.isKCallableNameCall(irBuiltIns: IrBuiltIns): Boolean {
             if (this.dispatchReceiver !is IrCallableReference<*>) return false
 
-            val directMember = this.symbol.owner.let { it.property ?: it }
+            konst directMember = this.symbol.owner.let { it.property ?: it }
 
-            val irClass = directMember.parent as? IrClass ?: return false
+            konst irClass = directMember.parent as? IrClass ?: return false
             if (!irClass.isSubclassOf(irBuiltIns.kCallableClass.owner)) return false
 
-            val name = when (directMember) {
+            konst name = when (directMember) {
                 is IrSimpleFunction -> directMember.name
                 is IrProperty -> directMember.name
                 else -> throw AssertionError("Should be IrSimpleFunction or IrProperty, got $directMember")
@@ -50,9 +50,9 @@ class IrInterpreterNameChecker : IrInterpreterChecker {
         }
 
         private fun IrCall.isEnumName(): Boolean {
-            val owner = this.symbol.owner
-            if (owner.extensionReceiverParameter != null || owner.valueParameters.isNotEmpty()) return false
-            val property = owner.property ?: return false
+            konst owner = this.symbol.owner
+            if (owner.extensionReceiverParameter != null || owner.konstueParameters.isNotEmpty()) return false
+            konst property = owner.property ?: return false
             return this.dispatchReceiver is IrGetEnumValue && property.name.asString() == "name"
         }
     }

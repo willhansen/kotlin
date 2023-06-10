@@ -1,7 +1,7 @@
 // MODULE: lib
 // FILE: Typography.kt
 object Typography {
-    const val ellipsis: Char = 'O'
+    const konst ellipsis: Char = 'O'
 }
 
 // MODULE: main(lib)
@@ -12,7 +12,7 @@ class A {
             return ellipsis
         }
 
-        const val ellipsis = "${Typography.ellipsis}"
+        const konst ellipsis = "${Typography.ellipsis}"
     }
 
     object B {

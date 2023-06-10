@@ -9,5 +9,5 @@ fun <T : Any?> magic(): T
 // CHECK:
 //   Mangled name: #test(0:0;0:0){0§<kotlin.Any?>}
 //   Public signature: /test|112304132393930964[0]
-fun <T : Any?> test(value: T, value2: T): Unit
+fun <T : Any?> test(konstue: T, konstue2: T): Unit
 

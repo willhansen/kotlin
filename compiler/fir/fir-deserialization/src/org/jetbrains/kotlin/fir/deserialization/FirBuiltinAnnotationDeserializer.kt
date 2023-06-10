@@ -18,7 +18,7 @@ class FirBuiltinAnnotationDeserializer(
 
     override fun loadTypeAnnotations(typeProto: ProtoBuf.Type, nameResolver: NameResolver): List<FirAnnotation> {
         if (!Flags.HAS_ANNOTATIONS.get(typeProto.flags)) return emptyList()
-        val annotations = typeProto.getExtension(protocol.typeAnnotation).orEmpty()
+        konst annotations = typeProto.getExtension(protocol.typeAnnotation).orEmpty()
         return annotations.map { deserializeAnnotation(it, nameResolver) }
     }
 }

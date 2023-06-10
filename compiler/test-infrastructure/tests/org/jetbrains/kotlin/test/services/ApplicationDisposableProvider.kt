@@ -11,4 +11,4 @@ abstract class ApplicationDisposableProvider : TestService {
     abstract fun getApplicationRootDisposable(): Disposable
 }
 
-val TestServices.applicationDisposableProvider: ApplicationDisposableProvider by TestServices.testServiceAccessor()
+konst TestServices.applicationDisposableProvider: ApplicationDisposableProvider by TestServices.testServiceAccessor()

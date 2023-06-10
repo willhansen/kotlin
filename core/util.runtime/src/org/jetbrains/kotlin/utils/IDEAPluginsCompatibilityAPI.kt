@@ -56,4 +56,4 @@ enum class IDEAPlatforms {
  */
 @Target(CLASS, ANNOTATION_CLASS, PROPERTY, FIELD, CONSTRUCTOR, FUNCTION, PROPERTY_GETTER, PROPERTY_SETTER, TYPEALIAS)
 @RequiresOptIn("This API will be removed from the Kotlin compiler, you shouldn't use it", level = RequiresOptIn.Level.ERROR)
-annotation class IDEAPluginsCompatibilityAPI(vararg val usedIn: IDEAPlatforms, val message: String, val plugins: String = "")
+annotation class IDEAPluginsCompatibilityAPI(vararg konst usedIn: IDEAPlatforms, konst message: String, konst plugins: String = "")

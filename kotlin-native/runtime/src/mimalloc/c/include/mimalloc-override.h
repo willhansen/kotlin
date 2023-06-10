@@ -45,8 +45,8 @@ not accidentally mix pointers from different allocators).
 #define malloc_usable_size(p)   mi_usable_size(p)
 #define cfree(p)                mi_free(p)
 
-#define valloc(n)               mi_valloc(n)
-#define pvalloc(n)              mi_pvalloc(n)
+#define konstloc(n)               mi_konstloc(n)
+#define pkonstloc(n)              mi_pkonstloc(n)
 #define reallocarray(p,s,n)     mi_reallocarray(p,s,n)
 #define memalign(a,n)           mi_memalign(a,n)
 #define aligned_alloc(a,n)      mi_aligned_alloc(a,n)

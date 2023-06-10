@@ -32,14 +32,14 @@ class KaptContextForStubGeneration(
     options: KaptOptions,
     withJdk: Boolean,
     logger: KaptLogger,
-    val compiledClasses: List<ClassNode>,
-    val origins: Map<Any, JvmDeclarationOrigin>,
-    val generationState: GenerationState
+    konst compiledClasses: List<ClassNode>,
+    konst origins: Map<Any, JvmDeclarationOrigin>,
+    konst generationState: GenerationState
 ) : KaptContext(options, withJdk, logger) {
-    private val treeMaker = TreeMaker.instance(context)
+    private konst treeMaker = TreeMaker.instance(context)
 
-    val project: Project get() = generationState.project
-    val bindingContext: BindingContext get() = generationState.bindingContext
+    konst project: Project get() = generationState.project
+    konst bindingContext: BindingContext get() = generationState.bindingContext
 
     override fun preregisterTreeMaker(context: Context) {
         KaptTreeMaker.preRegister(context, this)

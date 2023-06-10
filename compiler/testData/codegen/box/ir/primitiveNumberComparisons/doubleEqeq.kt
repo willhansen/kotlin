@@ -6,8 +6,8 @@ fun anyEqeq(x: Any, y: Any) =
         x == y
 
 fun box(): String {
-    val Z = 0.0
-    val NZ = -0.0
+    konst Z = 0.0
+    konst NZ = -0.0
 
     if (!(Z == NZ)) return "Fail 1"
     if (!eqeq(Z, NZ)) return "Fail 2"

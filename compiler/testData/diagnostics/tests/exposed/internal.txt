@@ -2,7 +2,7 @@ package
 
 public open class His : Your {
     public constructor His()
-    public final val x: My
+    public final konst x: My
     internal final var y: My?
     private final fun bar(): My
     protected final fun baz(): Your
@@ -28,7 +28,7 @@ internal open class My {
 
 internal final class Their : His {
     public constructor Their()
-    public final override /*1*/ /*fake_override*/ val x: My
+    public final override /*1*/ /*fake_override*/ konst x: My
     internal final override /*1*/ /*fake_override*/ var y: My?
     invisible_fake final override /*1*/ /*fake_override*/ fun bar(): My
     protected final override /*1*/ /*fake_override*/ fun baz(): Your

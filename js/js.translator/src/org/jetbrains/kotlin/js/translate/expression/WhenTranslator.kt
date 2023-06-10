@@ -34,38 +34,38 @@ import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowValueFactory
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowValueFactoryImpl
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant
 import org.jetbrains.kotlin.resolve.constants.EnumValue
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.descriptorUtil.getSuperClassOrAny
 import org.jetbrains.kotlin.types.KotlinType
 
 private typealias EntryWithConstants = Pair<List<JsExpression>, KtWhenEntry>
 
 class WhenTranslator
-private constructor(private val whenExpression: KtWhenExpression, context: TranslationContext) : AbstractTranslator(context) {
-    private val subjectType: KotlinType?
-    private val expressionToMatch: JsExpression?
-    private val type: KotlinType?
-    private val uniqueConstants = mutableSetOf<Any>()
-    private val uniqueEnumNames = mutableSetOf<String>()
-    private val dataFlowValueFactory: DataFlowValueFactory = DataFlowValueFactoryImpl(context.languageVersionSettings)
+private constructor(private konst whenExpression: KtWhenExpression, context: TranslationContext) : AbstractTranslator(context) {
+    private konst subjectType: KotlinType?
+    private konst expressionToMatch: JsExpression?
+    private konst type: KotlinType?
+    private konst uniqueConstants = mutableSetOf<Any>()
+    private konst uniqueEnumNames = mutableSetOf<String>()
+    private konst dataFlowValueFactory: DataFlowValueFactory = DataFlowValueFactoryImpl(context.languageVersionSettings)
 
-    private val isExhaustive: Boolean
+    private konst isExhaustive: Boolean
         get() {
-            val type = bindingContext().getType(whenExpression)
-            val isStatement = type != null && KotlinBuiltIns.isUnit(type) && !type.isMarkedNullable
+            konst type = bindingContext().getType(whenExpression)
+            konst isStatement = type != null && KotlinBuiltIns.isUnit(type) && !type.isMarkedNullable
             return CodegenUtil.isExhaustive(bindingContext(), whenExpression, isStatement)
         }
 
     init {
-        val subjectVariable = whenExpression.subjectVariable
-        val subjectExpression = whenExpression.subjectExpression
+        konst subjectVariable = whenExpression.subjectVariable
+        konst subjectExpression = whenExpression.subjectExpression
 
         when {
             subjectVariable != null -> {
-                val variable = Translation.translateAsStatement(subjectVariable, context) as JsVars
+                konst variable = Translation.translateAsStatement(subjectVariable, context) as JsVars
                 context.addStatementToCurrentBlock(variable)
 
-                val descriptor = BindingUtils.getDescriptorForElement(context.bindingContext(), subjectVariable) as? CallableDescriptor
+                konst descriptor = BindingUtils.getDescriptorForElement(context.bindingContext(), subjectVariable) as? CallableDescriptor
                 subjectType = descriptor?.returnType
                 expressionToMatch = variable.vars.first().name.makeRef()
             }
@@ -89,9 +89,9 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
         var i = 0
         var hasElse = false
         while (i < whenExpression.entries.size) {
-            val asSwitch = translateAsSwitch(i)
+            konst asSwitch = translateAsSwitch(i)
             if (asSwitch != null) {
-                val (jsSwitch, next) = asSwitch
+                konst (jsSwitch, next) = asSwitch
                 setWhenStatement(jsSwitch)
                 setWhenStatement = { whenStatement ->
                     jsSwitch.cases += JsDefault().apply {
@@ -103,8 +103,8 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
                 continue
             }
 
-            val entry = whenExpression.entries[i++]
-            val statementBlock = JsBlock()
+            konst entry = whenExpression.entries[i++]
+            konst statementBlock = JsBlock()
             var statement = translateEntryExpression(entry, context(), statementBlock)
 
             if (resultIf == null && entry.isElse) {
@@ -113,22 +113,22 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
             }
             statement = JsAstUtils.mergeStatementInBlockIfNeeded(statement, statementBlock)
 
-            val conditionsBlock = JsBlock()
+            konst conditionsBlock = JsBlock()
             if (entry.isElse) {
                 hasElse = true
                 setWhenStatement(statement)
                 break
             }
-            val jsIf = JsAstUtils.newJsIf(translateConditions(entry, context().innerBlock(conditionsBlock)), statement)
+            konst jsIf = JsAstUtils.newJsIf(translateConditions(entry, context().innerBlock(conditionsBlock)), statement)
             jsIf.source = entry
 
-            val statementToAdd = JsAstUtils.mergeStatementInBlockIfNeeded(jsIf, conditionsBlock)
+            konst statementToAdd = JsAstUtils.mergeStatementInBlockIfNeeded(jsIf, conditionsBlock)
             setWhenStatement(statementToAdd)
             setWhenStatement = { jsIf.elseStatement = it }
         }
 
         if (isExhaustive && !hasElse) {
-            val noWhenMatchedInvocation = JsInvocation(JsAstUtils.pureFqn("noWhenBranchMatched", Namer.kotlinObject()))
+            konst noWhenMatchedInvocation = JsInvocation(JsAstUtils.pureFqn("noWhenBranchMatched", Namer.kotlinObject()))
             setWhenStatement(JsAstUtils.asSyntheticStatement(noWhenMatchedInvocation))
         }
 
@@ -136,22 +136,22 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
     }
 
     private fun translateAsSwitch(fromIndex: Int): Pair<JsSwitch, Int>? {
-        val subjectType = subjectType ?: return null
-        val ktSubject = whenExpression.subjectExpression ?: return null
+        konst subjectType = subjectType ?: return null
+        konst ktSubject = whenExpression.subjectExpression ?: return null
 
-        val dataFlow = dataFlowValueFactory.createDataFlowValue(
+        konst dataFlow = dataFlowValueFactory.createDataFlowValue(
                 ktSubject, subjectType, bindingContext(), context().declarationDescriptor ?: context().currentModule)
-        val languageVersionSettings = context().config.configuration.languageVersionSettings
-        val expectedTypes = bindingContext().getDataFlowInfoBefore(ktSubject).getStableTypes(dataFlow, languageVersionSettings) +
+        konst languageVersionSettings = context().config.configuration.languageVersionSettings
+        konst expectedTypes = bindingContext().getDataFlowInfoBefore(ktSubject).getStableTypes(dataFlow, languageVersionSettings) +
                             setOf(subjectType)
-        val subject = expressionToMatch ?: return null
+        konst subject = expressionToMatch ?: return null
         var subjectSupplier = { subject }
 
-        val enumClass = expectedTypes.asSequence().mapNotNull { it.getEnumClass() }.firstOrNull()
-        val (entriesForSwitch, nextIndex) = if (enumClass != null) {
+        konst enumClass = expectedTypes.asSequence().mapNotNull { it.getEnumClass() }.firstOrNull()
+        konst (entriesForSwitch, nextIndex) = if (enumClass != null) {
             subjectSupplier = {
-                val enumBaseClass = enumClass.getSuperClassOrAny()
-                val nameProperty = DescriptorUtils.getPropertyByName(enumBaseClass.unsubstitutedMemberScope, StandardNames.NAME)
+                konst enumBaseClass = enumClass.getSuperClassOrAny()
+                konst nameProperty = DescriptorUtils.getPropertyByName(enumBaseClass.unsubstitutedMemberScope, StandardNames.NAME)
                 JsNameRef(context().getNameForDescriptor(nameProperty), subject)
             }
             collectEnumEntries(fromIndex, whenExpression.entries, enumClass.defaultType)
@@ -161,16 +161,16 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
         }
 
         return if (entriesForSwitch.asSequence().map { it.first.size }.sum() > 1) {
-            val switchEntries = mutableListOf<JsSwitchMember>()
+            konst switchEntries = mutableListOf<JsSwitchMember>()
             entriesForSwitch.flatMapTo(switchEntries) { (conditions, entry) ->
-                val members = conditions.map {
+                konst members = conditions.map {
                     JsCase().apply {
                         caseExpression = it.source(entry)
                     }
                 }
-                val block = JsBlock()
-                val statement = translateEntryExpression(entry, context(), block)
-                val lastEntry = members.last()
+                konst block = JsBlock()
+                konst statement = translateEntryExpression(entry, context(), block)
+                konst lastEntry = members.last()
                 lastEntry.statements += block.statements
                 lastEntry.statements += statement
                 lastEntry.statements += JsBreak().apply { source = entry }
@@ -210,7 +210,7 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
             entries: List<KtWhenEntry>,
             expectedType: KotlinType
     ): Pair<List<EntryWithConstants>, Int> {
-        val classId = WhenChecker.getClassIdForTypeIfEnum(expectedType)
+        konst classId = WhenChecker.getClassIdForTypeIfEnum(expectedType)
         return collectConstantEntries(
             fromIndex, entries,
             {
@@ -230,23 +230,23 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
             filter: (T) -> Boolean,
             wrapper: (T) -> JsExpression?
     ): Pair<List<EntryWithConstants>, Int> {
-        val entriesForSwitch = mutableListOf<EntryWithConstants>()
+        konst entriesForSwitch = mutableListOf<EntryWithConstants>()
         var i = fromIndex
         while (i < entries.size) {
-            val entry = entries[i]
+            konst entry = entries[i]
             if (entry.isElse) break
 
             var hasImproperConstants = false
-            val constantValues = entry.conditions.mapNotNull { condition ->
-                val expression = (condition as? KtWhenConditionWithExpression)?.expression
-                expression?.let { ConstantExpressionEvaluator.getConstant(it, bindingContext()) }?.let(extractor) ?: run {
+            konst constantValues = entry.conditions.mapNotNull { condition ->
+                konst expression = (condition as? KtWhenConditionWithExpression)?.expression
+                expression?.let { ConstantExpressionEkonstuator.getConstant(it, bindingContext()) }?.let(extractor) ?: run {
                     hasImproperConstants = true
                     null
                 }
             }
             if (hasImproperConstants) break
 
-            val constants = constantValues.filter(filter).mapNotNull {
+            konst constants = constantValues.filter(filter).mapNotNull {
                 wrapper(it) ?: run {
                     hasImproperConstants = true
                     null
@@ -265,7 +265,7 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
 
     private fun KotlinType.getEnumClass(): ClassDescriptor? {
         if (isMarkedNullable) return null
-        val classDescriptor = (constructor.declarationDescriptor as? ClassDescriptor)
+        konst classDescriptor = (constructor.declarationDescriptor as? ClassDescriptor)
         return if (classDescriptor?.kind == ClassKind.ENUM_CLASS && !classDescriptor.isExternal) classDescriptor else null
     }
 
@@ -274,8 +274,8 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
             context: TranslationContext,
             block: JsBlock
     ): JsStatement {
-        val expressionToExecute = entry.expression ?: error("WhenEntry should have whenExpression to execute.")
-        val result = Translation.translateAsStatement(expressionToExecute, context, block)
+        konst expressionToExecute = entry.expression ?: error("WhenEntry should have whenExpression to execute.")
+        konst result = Translation.translateAsStatement(expressionToExecute, context, block)
         return if (type != null) {
             LastExpressionMutator.mutateLastExpression(result, CoercionMutator(type, context))
         }
@@ -285,10 +285,10 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
     }
 
     private fun translateConditions(entry: KtWhenEntry, context: TranslationContext): JsExpression {
-        val conditions = entry.conditions
+        konst conditions = entry.conditions
         assert(conditions.isNotEmpty()) { "When entry (not else) should have at least one condition" }
 
-        val first = translateCondition(conditions[0], context)
+        konst first = translateCondition(conditions[0], context)
         return conditions.asSequence().drop(1).fold(first) { acc, condition -> translateOrCondition(acc, condition, context) }
     }
 
@@ -297,16 +297,16 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
             condition: KtWhenCondition,
             context: TranslationContext
     ): JsExpression {
-        val rightContext = context.innerBlock()
-        val rightExpression = translateCondition(condition, rightContext)
+        konst rightContext = context.innerBlock()
+        konst rightExpression = translateCondition(condition, rightContext)
         context.moveVarsFrom(rightContext)
         return if (rightContext.currentBlockIsEmpty()) {
             JsBinaryOperation(JsBinaryOperator.OR, leftExpression, rightExpression)
         }
         else {
             assert(rightExpression is JsNameRef) { "expected JsNameRef, but: " + rightExpression }
-            val result = rightExpression as JsNameRef
-            val ifStatement = JsAstUtils.newJsIf(leftExpression, JsAstUtils.assignment(result, JsBooleanLiteral(true)).makeStmt(),
+            konst result = rightExpression as JsNameRef
+            konst ifStatement = JsAstUtils.newJsIf(leftExpression, JsAstUtils.assignment(result, JsBooleanLiteral(true)).makeStmt(),
                                                  rightContext.currentBlock)
             ifStatement.source = condition
             context.addStatementToCurrentBlock(ifStatement)
@@ -315,7 +315,7 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
     }
 
     private fun translateCondition(condition: KtWhenCondition, context: TranslationContext): JsExpression {
-        val patternMatchExpression = translateWhenConditionToBooleanExpression(condition, context)
+        konst patternMatchExpression = translateWhenConditionToBooleanExpression(condition, context)
         return if (isNegated(condition)) not(patternMatchExpression) else patternMatchExpression
     }
 
@@ -330,17 +330,17 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
     }
 
     private fun translateIsCondition(conditionIsPattern: KtWhenConditionIsPattern, context: TranslationContext): JsExpression {
-        val expressionToMatch = expressionToMatch ?: error("An is-check is not allowed in when() without subject.")
-        val typeReference = conditionIsPattern.typeReference ?: error("An is-check must have a type reference.")
+        konst expressionToMatch = expressionToMatch ?: error("An is-check is not allowed in when() without subject.")
+        konst typeReference = conditionIsPattern.typeReference ?: error("An is-check must have a type reference.")
 
-        val result = Translation.patternTranslator(context).translateIsCheck(expressionToMatch, typeReference)
+        konst result = Translation.patternTranslator(context).translateIsCheck(expressionToMatch, typeReference)
         return (result ?: JsBooleanLiteral(true)).source(conditionIsPattern)
     }
 
     private fun translateExpressionCondition(condition: KtWhenConditionWithExpression, context: TranslationContext): JsExpression {
-        val patternExpression = condition.expression ?: error("Expression pattern should have an expression.")
+        konst patternExpression = condition.expression ?: error("Expression pattern should have an expression.")
 
-        val patternTranslator = Translation.patternTranslator(context)
+        konst patternTranslator = Translation.patternTranslator(context)
         return if (expressionToMatch == null) {
             patternTranslator.translateExpressionForExpressionPattern(patternExpression)
         } else {
@@ -349,13 +349,13 @@ private constructor(private val whenExpression: KtWhenExpression, context: Trans
     }
 
     private fun translateRangeCondition(condition: KtWhenConditionInRange, context: TranslationContext): JsExpression {
-        val expressionToMatch = expressionToMatch ?: error("Range pattern is only available for " +
+        konst expressionToMatch = expressionToMatch ?: error("Range pattern is only available for " +
                                                            "'when (C) { in ... }'  expressions: ${condition.getTextWithLocation()}")
 
-        val subjectAliases = hashMapOf<KtExpression, JsExpression>()
+        konst subjectAliases = hashMapOf<KtExpression, JsExpression>()
         subjectAliases[whenExpression.subjectExpression!!] = expressionToMatch
-        val callContext = context.innerContextWithAliasesForExpressions(subjectAliases)
-        val negated = condition.operationReference.getReferencedNameElementType() === KtTokens.NOT_IN
+        konst callContext = context.innerContextWithAliasesForExpressions(subjectAliases)
+        konst negated = condition.operationReference.getReferencedNameElementType() === KtTokens.NOT_IN
         return InOperationTranslator(callContext, expressionToMatch, condition.rangeExpression!!, condition.operationReference,
                                      negated).translate().source(condition)
     }

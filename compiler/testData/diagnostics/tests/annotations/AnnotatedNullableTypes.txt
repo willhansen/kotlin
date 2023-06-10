@@ -1,9 +1,9 @@
 package
 
-public val a: @Ann kotlin.String? = ""
-public val b: @Ann kotlin.String? = ""
-public val c: @TypeAnn kotlin.String? = ""
-public val d: @TypeAnn kotlin.String? = ""
+public konst a: @Ann kotlin.String? = ""
+public konst b: @Ann kotlin.String? = ""
+public konst c: @TypeAnn kotlin.String? = ""
+public konst d: @TypeAnn kotlin.String? = ""
 
 public final annotation class Ann : kotlin.Annotation {
     public constructor Ann()

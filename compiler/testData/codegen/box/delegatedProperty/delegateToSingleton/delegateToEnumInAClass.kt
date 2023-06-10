@@ -7,10 +7,10 @@ enum class E {
 }
 
 class C {
-    val s: String by E.OK
+    konst s: String by E.OK
 }
 
-val c = C()
+konst c = C()
 
 operator fun E.getValue(thisRef: Any?, property: Any?): String =
     if (this == E.OK && thisRef == c) "OK" else "Failed"

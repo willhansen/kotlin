@@ -1,7 +1,7 @@
 interface A<T> {
     fun test() = 0
 
-    val testProp: Int
+    konst testProp: Int
         get() = 2
 
     fun testWithDefault(x: Int = 1) = x

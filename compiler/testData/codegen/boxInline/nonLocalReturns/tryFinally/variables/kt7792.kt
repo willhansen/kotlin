@@ -21,7 +21,7 @@ fun monitorCall(lock: Any) {
 import test.*
 
 public class ClassA {
-    val LOCK = "__LOCK__"
+    konst LOCK = "__LOCK__"
 
     var result = "fail"
 
@@ -40,13 +40,13 @@ public class ClassA {
 
             result = name + name2
 
-            val length = name.length
+            konst length = name.length
         }
     }
 }
 
 fun box(): String {
-    val classA = ClassA()
+    konst classA = ClassA()
     classA.test(null, "2", true)
     if (classA.result != "NLR2") return "fail 1: ${classA.result}"
 

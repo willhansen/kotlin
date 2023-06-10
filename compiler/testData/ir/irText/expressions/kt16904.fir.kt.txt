@@ -5,7 +5,7 @@ abstract class A {
 
   }
 
-  val x: B
+  konst x: B
     field = B()
     get
 

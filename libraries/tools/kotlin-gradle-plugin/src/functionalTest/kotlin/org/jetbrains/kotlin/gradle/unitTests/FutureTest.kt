@@ -24,13 +24,13 @@ import kotlin.test.assertNull
 
 class FutureTest {
 
-    private val project = buildProject().also { project ->
+    private konst project = buildProject().also { project ->
         project.startKotlinPluginLifecycle()
     }
 
     @Test
     fun `test - simple deferred future`() = project.runLifecycleAwareTest {
-        val future = project.future {
+        konst future = project.future {
             FinaliseDsl.await()
             42
         }
@@ -43,12 +43,12 @@ class FutureTest {
 
     @Test
     fun `test - future depending on another future`() = project.runLifecycleAwareTest {
-        val futureA = project.future {
+        konst futureA = project.future {
             FinaliseDsl.await()
             42
         }
 
-        val futureB = project.future {
+        konst futureB = project.future {
             futureA.await().toString()
         }
 
@@ -59,11 +59,11 @@ class FutureTest {
 
     @Test
     fun `test - after lifecycle finished`() {
-        val project = buildProject()
+        konst project = buildProject()
         project.startKotlinPluginLifecycle()
-        project.evaluate()
+        project.ekonstuate()
 
-        val future = project.future {
+        konst future = project.future {
             FinaliseDsl.await()
             42
         }
@@ -73,7 +73,7 @@ class FutureTest {
 
     @Test
     fun `test - lenient future`() {
-        val future = CompletableFuture<Int>()
+        konst future = CompletableFuture<Int>()
         assertNull(future.lenient.getOrNull())
         assertThrows<IllegalLifecycleException> { future.lenient.getOrThrow() }
 
@@ -84,27 +84,27 @@ class FutureTest {
 
     @Test
     fun `test - lenient future serialize`() {
-        val future = CompletableFuture<Int>()
+        konst future = CompletableFuture<Int>()
         assertFailsWith<IllegalLifecycleException> { future.serialize() }
 
         run {
-            val futureBinary = future.lenient.serialize()
-            val deserializedFuture = futureBinary.deserialize() as LenientFuture<*>
+            konst futureBinary = future.lenient.serialize()
+            konst deserializedFuture = futureBinary.deserialize() as LenientFuture<*>
             assertNull(deserializedFuture.getOrNull())
         }
 
         run {
             future.complete(42)
-            val futureBinary = future.lenient.serialize()
-            val deserializedFuture = futureBinary.deserialize() as LenientFuture<*>
+            konst futureBinary = future.lenient.serialize()
+            konst deserializedFuture = futureBinary.deserialize() as LenientFuture<*>
             assertEquals(42, deserializedFuture.getOrNull())
         }
     }
 
     @Test
     fun `test - lazy future`() = project.runLifecycleAwareTest {
-        val futureInvocations = AtomicInteger(0)
-        val future = project.lazyFuture {
+        konst futureInvocations = AtomicInteger(0)
+        konst future = project.lazyFuture {
             assertEquals(1, futureInvocations.incrementAndGet())
         }
 

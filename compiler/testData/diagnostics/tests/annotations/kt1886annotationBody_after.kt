@@ -2,7 +2,7 @@
 // !LANGUAGE: +NestedClassesInAnnotations
 
 annotation class Annotation2() {
-    <!ANNOTATION_CLASS_MEMBER!>public val s: String = ""<!>
+    <!ANNOTATION_CLASS_MEMBER!>public konst s: String = ""<!>
 }
 
 annotation class Annotation3() {
@@ -23,10 +23,10 @@ annotation class Annotation6() {
 
 annotation class Annotation1() {}
 
-annotation class Annotation7(val name: String) {}
+annotation class Annotation7(konst name: String) {}
 
 annotation class Annotation8(<!VAR_ANNOTATION_PARAMETER!>var<!> name: String = "") {}
 
-annotation class Annotation9(val name: String)
+annotation class Annotation9(konst name: String)
 
 annotation class Annotation10

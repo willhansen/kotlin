@@ -9,7 +9,7 @@ package kotlin.jvm
 
 annotation class JvmInline
 
-expect value class VC(val a: Any)
+expect konstue class VC(konst a: Any)
 
 // MODULE: m2-jvm()()(m1-common)
 // FILE: jvm.kt
@@ -17,4 +17,4 @@ expect value class VC(val a: Any)
 package kotlin.jvm
 
 @JvmInline
-actual value class VC(val a: Any)
+actual konstue class VC(konst a: Any)

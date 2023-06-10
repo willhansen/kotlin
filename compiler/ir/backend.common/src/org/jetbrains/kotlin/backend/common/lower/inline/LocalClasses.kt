@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.ir.visitors.*
     So in this case all local classes MIGHT BE COPIED.
  */
 
-class LocalClassesInInlineLambdasLowering(val context: CommonBackendContext) : BodyLoweringPass {
+class LocalClassesInInlineLambdasLowering(konst context: CommonBackendContext) : BodyLoweringPass {
     override fun lower(irFile: IrFile) {
         runOnFilePostfix(irFile)
     }
@@ -40,27 +40,27 @@ class LocalClassesInInlineLambdasLowering(val context: CommonBackendContext) : B
                 super.visitDeclaration(declaration, (declaration as? IrDeclarationParent) ?: data)
 
             override fun visitCall(expression: IrCall, data: IrDeclarationParent): IrElement {
-                val rootCallee = expression.symbol.owner
+                konst rootCallee = expression.symbol.owner
                 if (!rootCallee.isInline)
                     return super.visitCall(expression, data)
 
                 expression.extensionReceiver = expression.extensionReceiver?.transform(this, data)
                 expression.dispatchReceiver = expression.dispatchReceiver?.transform(this, data)
-                val inlineLambdas = mutableListOf<IrFunction>()
-                for (index in 0 until expression.valueArgumentsCount) {
-                    val argument = expression.getValueArgument(index)
-                    val inlineLambda = (argument as? IrFunctionExpression)?.function
-                        ?.takeIf { rootCallee.valueParameters[index].isInlineParameter() }
+                konst inlineLambdas = mutableListOf<IrFunction>()
+                for (index in 0 until expression.konstueArgumentsCount) {
+                    konst argument = expression.getValueArgument(index)
+                    konst inlineLambda = (argument as? IrFunctionExpression)?.function
+                        ?.takeIf { rootCallee.konstueParameters[index].isInlineParameter() }
                     if (inlineLambda == null)
                         expression.putValueArgument(index, argument?.transform(this, data))
                     else
                         inlineLambdas.add(inlineLambda)
                 }
 
-                val localClasses = mutableSetOf<IrClass>()
-                val localFunctions = mutableSetOf<IrFunction>()
-                val adaptedFunctions = mutableSetOf<IrSimpleFunction>()
-                val transformer = this
+                konst localClasses = mutableSetOf<IrClass>()
+                konst localFunctions = mutableSetOf<IrFunction>()
+                konst adaptedFunctions = mutableSetOf<IrSimpleFunction>()
+                konst transformer = this
                 for (lambda in inlineLambdas) {
                     lambda.acceptChildrenVoid(object : IrElementVisitorVoid {
                         override fun visitElement(element: IrElement) {
@@ -82,7 +82,7 @@ class LocalClassesInInlineLambdasLowering(val context: CommonBackendContext) : B
                         }
 
                         override fun visitCall(expression: IrCall) {
-                            val callee = expression.symbol.owner
+                            konst callee = expression.symbol.owner
                             if (!callee.isInline) {
                                 expression.acceptChildrenVoid(this)
                                 return
@@ -90,9 +90,9 @@ class LocalClassesInInlineLambdasLowering(val context: CommonBackendContext) : B
 
                             expression.extensionReceiver?.acceptVoid(this)
                             expression.dispatchReceiver?.acceptVoid(this)
-                            (0 until expression.valueArgumentsCount).forEach { index ->
-                                val argument = expression.getValueArgument(index)
-                                val parameter = callee.valueParameters[index]
+                            (0 until expression.konstueArgumentsCount).forEach { index ->
+                                konst argument = expression.getValueArgument(index)
+                                konst parameter = callee.konstueParameters[index]
                                 // Skip adapted function references - they will be inlined later.
                                 if (parameter.isInlineParameter() && argument?.isAdaptedFunctionReference() == true)
                                     adaptedFunctions += (argument as IrBlock).statements[0] as IrSimpleFunction
@@ -106,7 +106,7 @@ class LocalClassesInInlineLambdasLowering(val context: CommonBackendContext) : B
                 if (localClasses.isEmpty() && localFunctions.isEmpty())
                     return expression
 
-                val irBlock = IrBlockImpl(expression.startOffset, expression.endOffset, expression.type).apply {
+                konst irBlock = IrBlockImpl(expression.startOffset, expression.endOffset, expression.type).apply {
                     statements += expression
                 }
                 LocalDeclarationsLowering(context).lower(irBlock, container, data, localClasses, adaptedFunctions)
@@ -130,19 +130,19 @@ class LocalClassesInInlineLambdasLowering(val context: CommonBackendContext) : B
     }
 }
 
-class LocalClassesInInlineFunctionsLowering(val context: CommonBackendContext) : BodyLoweringPass {
+class LocalClassesInInlineFunctionsLowering(konst context: CommonBackendContext) : BodyLoweringPass {
     override fun lower(irFile: IrFile) {
         runOnFilePostfix(irFile)
     }
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val function = container as? IrFunction ?: return
+        konst function = container as? IrFunction ?: return
         if (!function.isInline) return
         // Conservatively assume that functions with reified type parameters must be copied.
         if (function.typeParameters.any { it.isReified }) return
 
-        val crossinlineParameters = function.valueParameters.filter { it.isCrossinline }.toSet()
-        val classesToExtract = mutableSetOf<IrClass>()
+        konst crossinlineParameters = function.konstueParameters.filter { it.isCrossinline }.toSet()
+        konst classesToExtract = mutableSetOf<IrClass>()
         function.acceptChildrenVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
                 element.acceptChildrenVoid(this)
@@ -177,15 +177,15 @@ class LocalClassesExtractionFromInlineFunctionsLowering(
     context: CommonBackendContext,
     recordExtractedLocalClasses: BackendContext.(IrClass) -> Unit = {},
 ) : LocalClassPopupLowering(context, recordExtractedLocalClasses) {
-    private val classesToExtract = mutableSetOf<IrClass>()
+    private konst classesToExtract = mutableSetOf<IrClass>()
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val function = container as? IrFunction ?: return
+        konst function = container as? IrFunction ?: return
         if (!function.isInline) return
         // Conservatively assume that functions with reified type parameters must be copied.
         if (function.typeParameters.any { it.isReified }) return
 
-        val crossinlineParameters = function.valueParameters.filter { it.isCrossinline }.toSet()
+        konst crossinlineParameters = function.konstueParameters.filter { it.isCrossinline }.toSet()
 
         function.acceptChildrenVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {

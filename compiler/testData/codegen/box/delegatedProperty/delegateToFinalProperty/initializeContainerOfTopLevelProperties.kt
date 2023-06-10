@@ -1,7 +1,7 @@
 // FILE: 1.kt
 
 var result = "Fail"
-val unused by c
+konst unused by c
 
 fun box(): String = result
 
@@ -15,4 +15,4 @@ class C {
 
 operator fun C.getValue(x: Any?, y: Any?): String = throw IllegalStateException()
 
-val c = C()
+konst c = C()

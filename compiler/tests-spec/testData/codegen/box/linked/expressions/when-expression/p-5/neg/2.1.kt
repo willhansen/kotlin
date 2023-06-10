@@ -7,7 +7,7 @@
  * SPEC VERSION: 0.1-313
  * MAIN LINK: expressions, when-expression -> paragraph 5 -> sentence 2
  * NUMBER: 1
- * DESCRIPTION: The else condition is a special condition which evaluates to true if none of the branches above it evaluated to true.
+ * DESCRIPTION: The else condition is a special condition which ekonstuates to true if none of the branches above it ekonstuated to true.
  * EXCEPTION: compiletime
  */
 
@@ -21,8 +21,8 @@ enum JavaEnum {
 
 // FILE: KotlinClass.kt
 fun box(): String {
-    val z = JavaEnum.Val_3
-    val when1 = when (z) {
+    konst z = JavaEnum.Val_3
+    konst when1 = when (z) {
         JavaEnum.Val_1 -> { false }
         else -> {true}
         JavaEnum.Val_2 -> { false }

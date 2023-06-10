@@ -1,6 +1,6 @@
 FILE: KotlinClass.kt
     public final fun case1(javaClass: R|JavaClass?|): R|kotlin/Unit| {
-        lval validType: R|(JavaClass) -> kotlin/Boolean| = when () {
+        lkonst konstidType: R|(JavaClass) -> kotlin/Boolean| = when () {
             !=(R|<local>/javaClass|, Null(null)) ->  {
                 fun <anonymous>(it: R|JavaClass|): R|kotlin/Boolean| <inline=Unknown>  {
                     ^ ==(R|<local>/it|, R|<local>/javaClass|)
@@ -12,7 +12,7 @@ FILE: KotlinClass.kt
             }
         }
 
-        lval invalidType: R|(JavaClass) -> kotlin/Boolean| = when () {
+        lkonst inkonstidType: R|(JavaClass) -> kotlin/Boolean| = when () {
             !=(R|<local>/javaClass|, Null(null)) ->  {
                 fun <anonymous>(it: R|JavaClass|): R|kotlin/Boolean| <inline=Unknown>  {
                     ^ ==(R|<local>/it|, R|<local>/javaClass|)
@@ -24,11 +24,11 @@ FILE: KotlinClass.kt
             }
         }
 
-        R|<local>/validType|.R|/checkType|<R|(JavaClass) -> kotlin/Boolean|>(<L> = checkType@fun R|CheckTypeInv<kotlin/Function1<JavaClass, kotlin/Boolean>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        R|<local>/konstidType|.R|/checkType|<R|(JavaClass) -> kotlin/Boolean|>(<L> = checkType@fun R|CheckTypeInv<kotlin/Function1<JavaClass, kotlin/Boolean>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|/_|<R|(JavaClass) -> kotlin/Boolean|>()
         }
         )
-        R|<local>/invalidType|.R|/checkType|<R|(JavaClass) -> kotlin/Boolean|>(<L> = checkType@fun R|CheckTypeInv<kotlin/Function1<JavaClass, kotlin/Boolean>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        R|<local>/inkonstidType|.R|/checkType|<R|(JavaClass) -> kotlin/Boolean|>(<L> = checkType@fun R|CheckTypeInv<kotlin/Function1<JavaClass, kotlin/Boolean>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|/_<None of the following candidates is applicable because of receiver type mismatch: [/_]>#|<R|(kotlin/Nothing) -> kotlin/Boolean|>()
         }
         )
@@ -42,10 +42,10 @@ FILE: KotlinClass.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val javaClass: R|JavaClass?| = R|<local>/javaClass|
+        public final konst javaClass: R|JavaClass?| = R|<local>/javaClass|
             public get(): R|JavaClass?|
 
-        public final val x: R|(KotlinClass) -> kotlin/Boolean| = when () {
+        public final konst x: R|(KotlinClass) -> kotlin/Boolean| = when () {
             !=(this@R|/Case1|.R|/Case1.javaClass|, Null(null)) ->  {
                 fun <anonymous>(it: R|KotlinClass|): R|kotlin/Boolean| <inline=Unknown>  {
                     ^ ==(R|<local>/it|, this@R|/Case1|.R|/Case1.javaClass|)
@@ -70,7 +70,7 @@ FILE: KotlinClass.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val FILTER: R|(JavaClass) -> kotlin/Boolean| = fun <anonymous>(it: R|JavaClass|): R|kotlin/Boolean| <inline=Unknown>  {
+            public final konst FILTER: R|(JavaClass) -> kotlin/Boolean| = fun <anonymous>(it: R|JavaClass|): R|kotlin/Boolean| <inline=Unknown>  {
                 ^ Boolean(true)
             }
 
@@ -84,7 +84,7 @@ FILE: KotlinClass.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val name: R|kotlin/String| = R|<local>/name|
+        private final konst name: R|kotlin/String| = R|<local>/name|
             private get(): R|kotlin/String|
 
         public open override operator fun compareTo(that: R|KotlinClass|): R|kotlin/Int| {
@@ -93,7 +93,7 @@ FILE: KotlinClass.kt
 
     }
     public final fun case2(kotlinClass: R|KotlinClass?|): R|kotlin/Unit| {
-        lval validType: R|(KotlinClass) -> kotlin/Boolean| = when () {
+        lkonst konstidType: R|(KotlinClass) -> kotlin/Boolean| = when () {
             !=(R|<local>/kotlinClass|, Null(null)) ->  {
                 fun <anonymous>(it: R|KotlinClass|): R|kotlin/Boolean| <inline=Unknown>  {
                     ^ ==(R|<local>/it|, R|<local>/kotlinClass|)
@@ -105,7 +105,7 @@ FILE: KotlinClass.kt
             }
         }
 
-        lval invalidType: R|(KotlinClass) -> kotlin/Boolean| = when () {
+        lkonst inkonstidType: R|(KotlinClass) -> kotlin/Boolean| = when () {
             !=(R|<local>/kotlinClass|, Null(null)) ->  {
                 fun <anonymous>(it: R|KotlinClass|): R|kotlin/Boolean| <inline=Unknown>  {
                     ^ ==(R|<local>/it|, R|<local>/kotlinClass|)
@@ -117,11 +117,11 @@ FILE: KotlinClass.kt
             }
         }
 
-        R|<local>/validType|.R|/checkType|<R|(KotlinClass) -> kotlin/Boolean|>(<L> = checkType@fun R|CheckTypeInv<kotlin/Function1<KotlinClass, kotlin/Boolean>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        R|<local>/konstidType|.R|/checkType|<R|(KotlinClass) -> kotlin/Boolean|>(<L> = checkType@fun R|CheckTypeInv<kotlin/Function1<KotlinClass, kotlin/Boolean>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|/_|<R|(KotlinClass) -> kotlin/Boolean|>()
         }
         )
-        R|<local>/invalidType|.R|/checkType|<R|(KotlinClass) -> kotlin/Boolean|>(<L> = checkType@fun R|CheckTypeInv<kotlin/Function1<KotlinClass, kotlin/Boolean>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        R|<local>/inkonstidType|.R|/checkType|<R|(KotlinClass) -> kotlin/Boolean|>(<L> = checkType@fun R|CheckTypeInv<kotlin/Function1<KotlinClass, kotlin/Boolean>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|/_<None of the following candidates is applicable because of receiver type mismatch: [/_]>#|<R|(kotlin/Nothing) -> kotlin/Boolean|>()
         }
         )
@@ -135,10 +135,10 @@ FILE: KotlinClass.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val kotlinClass: R|KotlinClass?| = R|<local>/kotlinClass|
+        public final konst kotlinClass: R|KotlinClass?| = R|<local>/kotlinClass|
             public get(): R|KotlinClass?|
 
-        public final val x: R|(KotlinClass) -> kotlin/Boolean| = when () {
+        public final konst x: R|(KotlinClass) -> kotlin/Boolean| = when () {
             !=(this@R|/Case2|.R|/Case2.kotlinClass|, Null(null)) ->  {
                 fun <anonymous>(it: R|KotlinClass|): R|kotlin/Boolean| <inline=Unknown>  {
                     ^ ==(R|<local>/it|, this@R|/Case2|.R|/Case2.kotlinClass|)
@@ -163,7 +163,7 @@ FILE: KotlinClass.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val FILTER: R|(KotlinClass) -> kotlin/Boolean| = fun <anonymous>(it: R|KotlinClass|): R|kotlin/Boolean| <inline=Unknown>  {
+            public final konst FILTER: R|(KotlinClass) -> kotlin/Boolean| = fun <anonymous>(it: R|KotlinClass|): R|kotlin/Boolean| <inline=Unknown>  {
                 ^ Boolean(true)
             }
 

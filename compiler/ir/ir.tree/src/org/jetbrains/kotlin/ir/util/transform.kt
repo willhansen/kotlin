@@ -39,7 +39,7 @@ fun <T : IrElement, D> MutableList<T>.transformInPlace(transformer: IrElementTra
 fun <T : IrElement, D> Array<T?>.transformInPlace(transformer: IrElementTransformer<D>, data: D) {
     for (i in indices) {
         // Cast to IrElementBase to avoid casting to interface and invokeinterface, both of which are slow.
-        val element = get(i) as IrElementBase?
+        konst element = get(i) as IrElementBase?
         if (element != null) {
             @Suppress("UNCHECKED_CAST")
             set(i, element.transform(transformer, data) as T)
@@ -55,7 +55,7 @@ fun <T : IrElement, D> Array<T?>.transformInPlace(transformer: IrElementTransfor
 inline fun <T> MutableList<T>.transformFlat(transformation: (T) -> List<T>?) {
     var i = 0
     while (i < size) {
-        val item = get(i)
+        konst item = get(i)
 
         i = replaceInPlace(transformation(item), i)
     }
@@ -69,7 +69,7 @@ inline fun <T> MutableList<T>.transformFlat(transformation: (T) -> List<T>?) {
 inline fun <T, reified S : T> MutableList<T>.transformSubsetFlat(transformation: (S) -> List<S>?) {
     var i = 0
     while (i < size) {
-        val item = get(i)
+        konst item = get(i)
 
         if (item !is S) {
             i++
@@ -102,7 +102,7 @@ inline fun <T, reified S : T> MutableList<T>.transformSubsetFlat(transformation:
  */
 fun IrDeclarationContainer.transformDeclarationsFlat(transformation: (IrDeclaration) -> List<IrDeclaration>?) {
     declarations.transformFlat { declaration ->
-        val transformed = transformation(declaration)
+        konst transformed = transformation(declaration)
         transformed?.forEach { it.parent = this }
         transformed
     }
@@ -115,7 +115,7 @@ fun <T : IrElement, D> List<T>.transformIfNeeded(transformer: IrElementTransform
     var result: ArrayList<T>? = null
     for ((i, item) in withIndex()) {
         @Suppress("UNCHECKED_CAST")
-        val transformed = item.transform(transformer, data) as T
+        konst transformed = item.transform(transformer, data) as T
         if (transformed !== item && result == null) {
             result = ArrayList(this)
         }

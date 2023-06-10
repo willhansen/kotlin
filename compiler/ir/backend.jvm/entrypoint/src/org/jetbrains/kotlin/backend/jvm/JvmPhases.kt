@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.util.render
 
 private fun codegenPhase(generateMultifileFacade: Boolean): SameTypeNamedCompilerPhase<JvmBackendContext, IrModuleFragment> {
-    val suffix = if (generateMultifileFacade) "MultifileFacades" else "Regular"
-    val descriptionSuffix = if (generateMultifileFacade) ", multifile facades" else ", regular files"
+    konst suffix = if (generateMultifileFacade) "MultifileFacades" else "Regular"
+    konst descriptionSuffix = if (generateMultifileFacade) ", multifile facades" else ", regular files"
     return performByIrFile(
         name = "CodegenByIrFile$suffix",
         description = "Code generation by IrFile$descriptionSuffix",
@@ -33,9 +33,9 @@ private fun codegenPhase(generateMultifileFacade: Boolean): SameTypeNamedCompile
     )
 }
 
-private class FileCodegen(private val context: JvmBackendContext, private val generateMultifileFacade: Boolean) : FileLoweringPass {
+private class FileCodegen(private konst context: JvmBackendContext, private konst generateMultifileFacade: Boolean) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
-        val isMultifileFacade = irFile.fileEntry is MultifileFacadeFileEntry
+        konst isMultifileFacade = irFile.fileEntry is MultifileFacadeFileEntry
         if (isMultifileFacade == generateMultifileFacade) {
             for (loweredClass in irFile.declarations) {
                 if (loweredClass !is IrClass) {
@@ -50,7 +50,7 @@ private class FileCodegen(private val context: JvmBackendContext, private val ge
 // Generate multifile facades first, to compute and store JVM signatures of const properties which are later used
 // when serializing metadata in the multifile parts.
 // TODO: consider dividing codegen itself into separate phases (bytecode generation, metadata serialization) to avoid this
-internal val jvmCodegenPhases = SameTypeNamedCompilerPhase(
+internal konst jvmCodegenPhases = SameTypeNamedCompilerPhase(
     name = "Codegen",
     description = "Code generation",
     nlevels = 1,
@@ -60,5 +60,5 @@ internal val jvmCodegenPhases = SameTypeNamedCompilerPhase(
 
 // This property is needed to avoid dependencies from "leaf" modules (cli, tests-common-new) on backend.jvm:lower.
 // It's used to create PhaseConfig and is the only thing needed from lowerings in the leaf modules.
-val jvmPhases: SameTypeNamedCompilerPhase<JvmBackendContext, IrModuleFragment>
+konst jvmPhases: SameTypeNamedCompilerPhase<JvmBackendContext, IrModuleFragment>
     get() = jvmLoweringPhases

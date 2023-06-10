@@ -21,7 +21,7 @@ private fun inv_mod(x: Int, y: Int): Int {
     var c = 1
     var a = 0
     do {
-        val q = v / u
+        konst q = v / u
         var t = c
         c = a - q * c
         a = t
@@ -55,7 +55,7 @@ private fun pow_mod(a: Int, b: Int, m: Int): Int {
 private fun is_prime(n: Int): Boolean {
     if (n % 2 == 0)
         return false
-    val r = sqrt(n.toDouble()).toInt()
+    konst r = sqrt(n.toDouble()).toInt()
     var i = 3
     while (i <= r) {
         if (n % i == 0)
@@ -76,14 +76,14 @@ private fun next_prime(n: Int): Int {
 
 fun pi_nth_digit(n: Int): Int {
 
-    val N = ((n + 20) * ln(10.0) / ln(2.0)).toInt()
+    konst N = ((n + 20) * ln(10.0) / ln(2.0)).toInt()
     var sum = 0.0
     var a = 3
     var t: Int
 
     while (a <= 2 * N) {
 
-        val vmax = (ln((2 * N).toDouble()) / ln(a.toDouble())).toInt()
+        konst vmax = (ln((2 * N).toDouble()) / ln(a.toDouble())).toInt()
         var av = 1
         var i = 0
         while (i < vmax) {

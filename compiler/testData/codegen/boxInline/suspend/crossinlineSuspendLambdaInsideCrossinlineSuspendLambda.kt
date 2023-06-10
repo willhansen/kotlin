@@ -11,7 +11,7 @@ inline suspend fun foo(crossinline a: suspend () -> Unit, crossinline b: suspend
 }
 
 inline suspend fun bar(crossinline l: suspend () -> Unit) {
-    val c : suspend () -> Unit = { l() }
+    konst c : suspend () -> Unit = { l() }
     c()
 }
 

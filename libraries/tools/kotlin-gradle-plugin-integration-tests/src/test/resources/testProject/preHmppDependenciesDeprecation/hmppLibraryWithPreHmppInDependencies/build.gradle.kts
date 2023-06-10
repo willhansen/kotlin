@@ -24,7 +24,7 @@ kotlin {
     linuxX64()
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 api("org.jetbrains.kotlin.tests:preHmppLibrary:0.1")
             }

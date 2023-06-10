@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.ir.expressions.impl.copyWithOffsets
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
 abstract class InlineConstTransformer : IrElementTransformerVoid() {
-    abstract val IrField.constantInitializer: IrConst<*>?
+    abstract konst IrField.constantInitializer: IrConst<*>?
     private fun IrExpression.lowerConstRead(receiver: IrExpression?, field: IrField?): IrExpression? {
-        val value = field?.constantInitializer ?: return null
+        konst konstue = field?.constantInitializer ?: return null
         transformChildrenVoid()
-        reportInlineConst(field, value)
+        reportInlineConst(field, konstue)
 
-        val resultExpression = value.copyWithOffsets(startOffset, endOffset)
+        konst resultExpression = konstue.copyWithOffsets(startOffset, endOffset)
 
         return if (receiver == null || receiver.shouldDropConstReceiver())
             resultExpression
@@ -31,15 +31,15 @@ abstract class InlineConstTransformer : IrElementTransformerVoid() {
             )
     }
 
-    abstract fun reportInlineConst(field: IrField, value: IrConst<*>)
+    abstract fun reportInlineConst(field: IrField, konstue: IrConst<*>)
 
     fun IrExpression.shouldDropConstReceiver(): Boolean {
         return this is IrConst<*> || this is IrGetValue || this is IrGetObjectValue
     }
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val function = (expression.symbol.owner as? IrSimpleFunction) ?: return super.visitCall(expression)
-        val property = function.correspondingPropertySymbol?.owner ?: return super.visitCall(expression)
+        konst function = (expression.symbol.owner as? IrSimpleFunction) ?: return super.visitCall(expression)
+        konst property = function.correspondingPropertySymbol?.owner ?: return super.visitCall(expression)
         // If `constantValue` is not null, `function` can only be the getter because the property is immutable.
         return expression.lowerConstRead(expression.dispatchReceiver, property.backingField) ?: super.visitCall(expression)
     }

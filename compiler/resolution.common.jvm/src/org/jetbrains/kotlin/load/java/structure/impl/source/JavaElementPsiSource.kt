@@ -8,14 +8,14 @@ package org.jetbrains.kotlin.load.java.structure.impl.source
 import com.intellij.psi.PsiElement
 
 abstract class JavaElementPsiSource<PSI : PsiElement> {
-    abstract val psi: PSI
-    abstract val factory: JavaElementSourceFactory
+    abstract konst psi: PSI
+    abstract konst factory: JavaElementSourceFactory
 }
 
 class JavaElementPsiSourceWithFixedPsi<PSI : PsiElement>(
-    override val psi: PSI
+    override konst psi: PSI
 ) : JavaElementPsiSource<PSI>() {
-    override val factory: JavaElementSourceFactory
+    override konst factory: JavaElementSourceFactory
         get() = JavaElementSourceFactory.getInstance(psi.project)
 
     override fun toString(): String {

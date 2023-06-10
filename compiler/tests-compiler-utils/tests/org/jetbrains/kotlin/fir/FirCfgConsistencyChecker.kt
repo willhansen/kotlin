@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.fir.resolve.dfa.cfg.GraphExitNodeMarker
 import org.jetbrains.kotlin.fir.visitors.FirVisitorVoid
 import org.jetbrains.kotlin.test.Assertions
 
-class FirCfgConsistencyChecker(private val assertions: Assertions) : FirVisitorVoid() {
+class FirCfgConsistencyChecker(private konst assertions: Assertions) : FirVisitorVoid() {
     override fun visitElement(element: FirElement) {
         element.acceptChildren(this)
     }
 
     override fun visitControlFlowGraphReference(controlFlowGraphReference: FirControlFlowGraphReference) {
-        val graph = (controlFlowGraphReference as? FirControlFlowGraphReferenceImpl)?.controlFlowGraph ?: return
+        konst graph = (controlFlowGraphReference as? FirControlFlowGraphReferenceImpl)?.controlFlowGraph ?: return
         assertions.assertEquals(graph.nodes.single { it is GraphEnterNodeMarker }, graph.enterNode)
         assertions.assertEquals(graph.nodes.single { it is GraphExitNodeMarker }, graph.exitNode)
         checkConsistency(graph)
@@ -45,7 +45,7 @@ class FirCfgConsistencyChecker(private val assertions: Assertions) : FirVisitorV
     }
 
     private fun checkOrder(graph: ControlFlowGraph) {
-        val visited = mutableSetOf<CFGNode<*>>()
+        konst visited = mutableSetOf<CFGNode<*>>()
         for (node in graph.nodes) {
             for (previousNode in node.previousNodes) {
                 if (previousNode.owner != graph) continue

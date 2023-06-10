@@ -35,15 +35,15 @@ class KlibMetadataIncrementalSerializer(
         fqName: FqName
     ): ProtoBuf.PackageFragment {
 
-        val allDescriptors = scope.filter {
+        konst allDescriptors = scope.filter {
             it.module == module
         }
 
-        val classifierDescriptors = allDescriptors
+        konst classifierDescriptors = allDescriptors
             .filterIsInstance<ClassifierDescriptor>()
             .sortedBy { it.fqNameSafe.asString() }
 
-        val topLevelDescriptors = DescriptorSerializer.sort(
+        konst topLevelDescriptors = DescriptorSerializer.sort(
             allDescriptors
                 .filterIsInstance<CallableDescriptor>()
         )
@@ -61,16 +61,16 @@ class KlibMetadataIncrementalSerializer(
     // This is no always the case, actually.
     // But marrying split package fragments with incremental compilation is an endeavour.
     // See monolithic serializer for details.
-    override val TOP_LEVEL_DECLARATION_COUNT_PER_FILE = null
-    override val TOP_LEVEL_CLASS_DECLARATION_COUNT_PER_FILE = null
+    override konst TOP_LEVEL_DECLARATION_COUNT_PER_FILE = null
+    override konst TOP_LEVEL_CLASS_DECLARATION_COUNT_PER_FILE = null
 }
 
 fun makeSerializedKlibMetadata(
     fragments: Map<String, List<ByteArray>>,
     header: ByteArray
 ): SerializedMetadata {
-    val fragmentNames = mutableListOf<String>()
-    val fragmentParts = mutableListOf<List<ByteArray>>()
+    konst fragmentNames = mutableListOf<String>()
+    konst fragmentParts = mutableListOf<List<ByteArray>>()
 
     for ((fqName, fragment) in fragments.entries.sortedBy { it.key }) {
         fragmentNames += fqName

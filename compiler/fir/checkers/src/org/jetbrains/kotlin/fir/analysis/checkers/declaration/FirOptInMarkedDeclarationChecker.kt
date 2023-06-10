@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.fir.declarations.*
 object FirOptInMarkedDeclarationChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         for (annotation in declaration.annotations) {
-            val annotationClass = annotation.getAnnotationClassForOptInMarker(context.session) ?: continue
-            val useSiteTarget = annotation.useSiteTarget
+            konst annotationClass = annotation.getAnnotationClassForOptInMarker(context.session) ?: continue
+            konst useSiteTarget = annotation.useSiteTarget
             if ((declaration is FirPropertyAccessor && declaration.isGetter) || useSiteTarget == PROPERTY_GETTER) {
                 reporter.reportOn(annotation.source, FirErrors.OPT_IN_MARKER_ON_WRONG_TARGET, "getter", context)
             }
@@ -38,7 +38,7 @@ object FirOptInMarkedDeclarationChecker : FirBasicDeclarationChecker() {
         }
 
         if (declaration !is FirCallableDeclaration) return
-        val receiver = declaration.receiverParameter ?: return
+        konst receiver = declaration.receiverParameter ?: return
         for (annotation in receiver.annotations) {
             if (annotation.getAnnotationClassForOptInMarker(context.session) != null) {
                 reporter.reportOn(annotation.source, FirErrors.OPT_IN_MARKER_ON_WRONG_TARGET, "parameter", context)

@@ -9,7 +9,7 @@
 // FILE: intReturnTypeAsNumber.kt
 
 fun box(): String {
-    val num = Sam { 42 }
+    konst num = Sam { 42 }
     if (num.get() != 42)
         return "Failed"
     return "OK"

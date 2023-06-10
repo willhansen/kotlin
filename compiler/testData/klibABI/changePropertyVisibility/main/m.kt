@@ -3,8 +3,8 @@ import abitestutils.TestBuilder
 import abitestutils.TestMode.NATIVE_CACHE_STATIC_EVERYWHERE
 
 fun box() = abiTest {
-    val c = Container()
-    val ci = ContainerImpl()
+    konst c = Container()
+    konst ci = ContainerImpl()
 
     success("publicToInternalTopLevelProperty1.v2") { publicToInternalTopLevelProperty1 } // Signature remains the same.
     success("publicToInternalTopLevelProperty2.v2") { publicToInternalTopLevelProperty2 } // Signature remains the same.
@@ -119,13 +119,13 @@ private inline fun TestBuilder.success(expectedOutcome: String, noinline block: 
     expectSuccess(expectedOutcome, block)
 
 private inline fun TestBuilder.unlinkedSymbol(signature: String, noinline block: () -> Unit) {
-    val accessorName = signature.removePrefix("/").split('.').takeLast(2).joinToString(".")
+    konst accessorName = signature.removePrefix("/").split('.').takeLast(2).joinToString(".")
     expectFailure(linkage("Property accessor '$accessorName' can not be called: No property accessor found for symbol '$signature'"), block)
 }
 
 private inline fun TestBuilder.unlinkedTopLevelPrivateSymbol(signature: String, noinline block: () -> Unit) {
     if (testMode == NATIVE_CACHE_STATIC_EVERYWHERE) {
-        val accessorName = signature.removePrefix("/").split('.').takeLast(2).joinToString(".")
+        konst accessorName = signature.removePrefix("/").split('.').takeLast(2).joinToString(".")
         expectFailure(linkage("Property accessor '$accessorName' can not be called: Private property accessor declared in module <lib1> can not be accessed in module <main>"), block)
     } else
         unlinkedSymbol(signature, block)

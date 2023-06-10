@@ -23,12 +23,12 @@ class WithCPI_Dup(x : Int) {
 }
 
 class WithCPI(x : Int) {
-  val a = 1
-  val xy : Int = x
+  konst a = 1
+  konst xy : Int = x
 }
 
 class NoCPI {
-  val a = 1
+  konst a = 1
   var ab = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>1<!>
     get() = 1
     set(v) {}

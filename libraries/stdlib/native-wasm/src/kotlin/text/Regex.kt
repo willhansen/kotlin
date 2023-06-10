@@ -7,15 +7,15 @@ package kotlin.text
 
 import kotlin.text.regex.*
 
-private fun Iterable<RegexOption>.toInt(): Int = this.fold(0, { value, option -> value or option.value })
+private fun Iterable<RegexOption>.toInt(): Int = this.fold(0, { konstue, option -> konstue or option.konstue })
 
-private fun fromInt(value: Int): Set<RegexOption> =
-        RegexOption.values().filterTo(mutableSetOf<RegexOption>()) { value and it.mask == it.value  }
+private fun fromInt(konstue: Int): Set<RegexOption> =
+        RegexOption.konstues().filterTo(mutableSetOf<RegexOption>()) { konstue and it.mask == it.konstue  }
 
 /**
- * Provides enumeration values to use to set regular expression options.
+ * Provides enumeration konstues to use to set regular expression options.
  */
-public actual enum class RegexOption(internal val value: Int, internal val mask: Int = value) {
+public actual enum class RegexOption(internal konst konstue: Int, internal konst mask: Int = konstue) {
     // common
 
     /** Enables case-insensitive matching. Case comparison is Unicode-aware. */
@@ -45,7 +45,7 @@ public actual enum class RegexOption(internal val value: Int, internal val mask:
     /** Enables the mode, when the expression `.` matches any character, including a line terminator. */
     DOT_MATCHES_ALL(Pattern.DOTALL),
 
-    /** Enables equivalence by canonical decomposition. */
+    /** Enables equikonstence by canonical decomposition. */
     CANON_EQ(Pattern.CANON_EQ)
 }
 
@@ -53,10 +53,10 @@ public actual enum class RegexOption(internal val value: Int, internal val mask:
 /**
  * Represents the results from a single capturing group within a [MatchResult] of [Regex].
  *
- * @param value The value of captured group.
+ * @param konstue The konstue of captured group.
  * @param range The range of indices in the input string where group was captured.
  */
-public actual data class MatchGroup(actual val value: String, val range: IntRange)
+public actual data class MatchGroup(actual konst konstue: String, konst range: IntRange)
 
 
 /**
@@ -69,7 +69,7 @@ public actual data class MatchGroup(actual val value: String, val range: IntRang
  */
 @SinceKotlin("1.7")
 public actual operator fun MatchGroupCollection.get(name: String): MatchGroup? {
-    val namedGroups = this as? MatchNamedGroupCollection
+    konst namedGroups = this as? MatchNamedGroupCollection
         ?: throw UnsupportedOperationException("Retrieving groups by name is not supported on this platform.")
 
     return namedGroups[name]
@@ -80,7 +80,7 @@ public actual operator fun MatchGroupCollection.get(name: String): MatchGroup? {
  * Represents a compiled regular expression.
  * Provides functions to match strings in text with a pattern, replace the found occurrences and split text around matches.
  */
-public actual class Regex internal constructor(internal val nativePattern: Pattern) {
+public actual class Regex internal constructor(internal konst nativePattern: Pattern) {
 
     internal enum class Mode {
         FIND, MATCH
@@ -90,20 +90,20 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
     actual constructor(pattern: String): this(Pattern(pattern))
 
     /** Creates a regular expression from the specified [pattern] string and the specified single [option].  */
-    actual constructor(pattern: String, option: RegexOption): this(Pattern(pattern, option.value))
+    actual constructor(pattern: String, option: RegexOption): this(Pattern(pattern, option.konstue))
 
     /** Creates a regular expression from the specified [pattern] string and the specified set of [options].  */
     actual constructor(pattern: String, options: Set<RegexOption>): this(Pattern(pattern, options.toInt()))
 
 
     /** The pattern string of this regular expression. */
-    actual val pattern: String
+    actual konst pattern: String
         get() = nativePattern.pattern
 
-    private val startNode = nativePattern.startNode
+    private konst startNode = nativePattern.startNode
 
     /** The set of options that were used to create this regular expression.  */
-    actual val options: Set<RegexOption> = fromInt(nativePattern.flags)
+    actual konst options: Set<RegexOption> = fromInt(nativePattern.flags)
 
     actual companion object {
         /**
@@ -126,7 +126,7 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
             if (!literal.contains('\\') && !literal.contains('$'))
                 return literal
 
-            val result = StringBuilder(literal.length * 2)
+            konst result = StringBuilder(literal.length * 2)
             literal.forEach {
                 if (it == '\\' || it == '$') {
                     result.append('\\')
@@ -141,9 +141,9 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
     private fun doMatch(input: CharSequence, mode: Mode): MatchResult? {
         // TODO: Harmony has a default constructor for MatchResult. Do we need it?
         // TODO: Reuse the matchResult.
-        val matchResult = MatchResultImpl(input, this)
+        konst matchResult = MatchResultImpl(input, this)
         matchResult.mode = mode
-        val matches = startNode.matches(0, input, matchResult) >= 0
+        konst matches = startNode.matches(0, input, matchResult) >= 0
         if (!matches) {
             return null
         }
@@ -176,10 +176,10 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
         if (startIndex < 0 || startIndex > input.length) {
             throw IndexOutOfBoundsException("Start index is out of bounds: $startIndex, input length: ${input.length}")
         }
-        val matchResult = MatchResultImpl(input, this)
+        konst matchResult = MatchResultImpl(input, this)
         matchResult.mode = Mode.FIND
         matchResult.startIndex = startIndex
-        val foundIndex = startNode.find(startIndex, input, matchResult)
+        konst foundIndex = startNode.find(startIndex, input, matchResult)
         if (foundIndex >= 0) {
             matchResult.finalizeMatch()
             return matchResult
@@ -216,10 +216,10 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
         if (index < 0 || index > input.length) {
             throw IndexOutOfBoundsException("index is out of bounds: $index, input length: ${input.length}")
         }
-        val matchResult = MatchResultImpl(input, this)
+        konst matchResult = MatchResultImpl(input, this)
         matchResult.mode = Mode.FIND
         matchResult.startIndex = index
-        val matches = startNode.matches(index, input, matchResult) >= 0
+        konst matches = startNode.matches(index, input, matchResult) >= 0
         if (!matches) {
             return null
         }
@@ -233,7 +233,7 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
      * The replacement string may contain references to the captured groups during a match. Occurrences of `${name}` or `$index`
      * in the replacement string will be substituted with the subsequences corresponding to the captured groups with the specified name or index.
      * In case of `$index`, the first digit after '$' is always treated as a part of group reference. Subsequent digits are incorporated
-     * into `index` only if they would form a valid group reference. Only the digits '0'..'9' are considered as potential components
+     * into `index` only if they would form a konstid group reference. Only the digits '0'..'9' are considered as potential components
      * of the group reference. Note that indexes of captured groups start from 1, and the group with index 0 is the whole match.
      * In case of `${name}`, the `name` can consist of latin letters 'a'..'z' and 'A'..'Z', or digits '0'..'9'. The first character must be
      * a letter.
@@ -243,7 +243,7 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
      *
      * @param input the char sequence to find matches of this regular expression in
      * @param replacement the expression to replace found matches with
-     * @return the result of replacing each occurrence of this regular expression in [input] with the result of evaluating the [replacement] expression
+     * @return the result of replacing each occurrence of this regular expression in [input] with the result of ekonstuating the [replacement] expression
      * @throws RuntimeException if [replacement] expression is malformed, or capturing group with specified `name` or `index` does not exist
      */
     actual fun replace(input: CharSequence, replacement: String): String
@@ -258,10 +258,10 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
         var match: MatchResult? = find(input) ?: return input.toString()
 
         var lastStart = 0
-        val length = input.length
-        val sb = StringBuilder(length)
+        konst length = input.length
+        konst sb = StringBuilder(length)
         do {
-            val foundMatch = match!!
+            konst foundMatch = match!!
             sb.append(input, lastStart, foundMatch.range.start)
             sb.append(transform(foundMatch))
             lastStart = foundMatch.range.endInclusive + 1
@@ -281,7 +281,7 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
      * The replacement string may contain references to the captured groups during a match. Occurrences of `${name}` or `$index`
      * in the replacement string will be substituted with the subsequences corresponding to the captured groups with the specified name or index.
      * In case of `$index`, the first digit after '$' is always treated as a part of group reference. Subsequent digits are incorporated
-     * into `index` only if they would form a valid group reference. Only the digits '0'..'9' are considered as potential components
+     * into `index` only if they would form a konstid group reference. Only the digits '0'..'9' are considered as potential components
      * of the group reference. Note that indexes of captured groups start from 1, and the group with index 0 is the whole match.
      * In case of `${name}`, the `name` can consist of latin letters 'a'..'z' and 'A'..'Z', or digits '0'..'9'. The first character must be
      * a letter.
@@ -291,13 +291,13 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
      *
      * @param input the char sequence to find a match of this regular expression in
      * @param replacement the expression to replace the found match with
-     * @return the result of replacing the first occurrence of this regular expression in [input] with the result of evaluating the [replacement] expression
+     * @return the result of replacing the first occurrence of this regular expression in [input] with the result of ekonstuating the [replacement] expression
      * @throws RuntimeException if [replacement] expression is malformed, or capturing group with specified `name` or `index` does not exist
      */
     actual fun replaceFirst(input: CharSequence, replacement: String): String {
-        val match = find(input) ?: return input.toString()
-        val length = input.length
-        val result = StringBuilder(length)
+        konst match = find(input) ?: return input.toString()
+        konst length = input.length
+        konst result = StringBuilder(length)
         result.append(input, 0, match.range.start)
         result.append(substituteGroupRefs(match, replacement))
         if (match.range.endInclusive + 1 < length) {
@@ -309,7 +309,7 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
     /**
      * Splits the [input] CharSequence to a list of strings around matches of this regular expression.
      *
-     * @param limit Non-negative value specifying the maximum number of substrings the string can be split to.
+     * @param limit Non-negative konstue specifying the maximum number of substrings the string can be split to.
      * Zero by default means no limit is set.
      */
     @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
@@ -320,9 +320,9 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
 
         if (match == null || limit == 1) return listOf(input.toString())
 
-        val result = ArrayList<String>(if (limit > 0) limit.coerceAtMost(10) else 10)
+        konst result = ArrayList<String>(if (limit > 0) limit.coerceAtMost(10) else 10)
         var lastStart = 0
-        val lastSplit = limit - 1 // negative if there's no limit
+        konst lastSplit = limit - 1 // negative if there's no limit
 
         do {
             result.add(input.substring(lastStart, match!!.range.start))
@@ -339,7 +339,7 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
     /**
      * Splits the [input] CharSequence to a sequence of strings around matches of this regular expression.
      *
-     * @param limit Non-negative value specifying the maximum number of substrings the string can be split to.
+     * @param limit Non-negative konstue specifying the maximum number of substrings the string can be split to.
      * Zero by default means no limit is set.
      * @sample samples.text.Regexps.splitToSequence
      */
@@ -360,7 +360,7 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
             var splitCount = 0
 
             do {
-                val foundMatch = match!!
+                konst foundMatch = match!!
                 yield(input.substring(nextStart, foundMatch.range.first))
                 nextStart = foundMatch.range.endInclusive + 1
                 match = foundMatch.next()
@@ -382,10 +382,10 @@ public actual class Regex internal constructor(internal val nativePattern: Patte
 // The same code from K/JS regex.kt
 private fun substituteGroupRefs(match: MatchResult, replacement: String): String {
     var index = 0
-    val result = StringBuilder(replacement.length)
+    konst result = StringBuilder(replacement.length)
 
     while (index < replacement.length) {
-        val char = replacement[index++]
+        konst char = replacement[index++]
         if (char == '\\') {
             if (index == replacement.length)
                 throw IllegalArgumentException("The Char to be escaped is missing")
@@ -396,8 +396,8 @@ private fun substituteGroupRefs(match: MatchResult, replacement: String): String
                 throw IllegalArgumentException("Capturing group index is missing")
 
             if (replacement[index] == '{') {
-                val endIndex = replacement.readGroupName(++index)
-                val groupName = replacement.substring(index, endIndex)
+                konst endIndex = replacement.readGroupName(++index)
+                konst groupName = replacement.substring(index, endIndex)
 
                 if (groupName.isEmpty())
                     throw IllegalArgumentException("Named capturing group reference should have a non-empty name")
@@ -407,20 +407,20 @@ private fun substituteGroupRefs(match: MatchResult, replacement: String): String
                 if (endIndex == replacement.length || replacement[endIndex] != '}')
                     throw IllegalArgumentException("Named capturing group reference is missing trailing '}'")
 
-                result.append(match.groups[groupName]?.value ?: "")
+                result.append(match.groups[groupName]?.konstue ?: "")
                 index = endIndex + 1    // skip past '}'
             } else {
                 if (replacement[index] !in '0'..'9')
-                    throw IllegalArgumentException("Invalid capturing group reference")
+                    throw IllegalArgumentException("Inkonstid capturing group reference")
 
-                val groups = match.groups
-                val endIndex = replacement.readGroupIndex(index, groups.size)
-                val groupIndex = replacement.substring(index, endIndex).toInt()
+                konst groups = match.groups
+                konst endIndex = replacement.readGroupIndex(index, groups.size)
+                konst groupIndex = replacement.substring(index, endIndex).toInt()
 
                 if (groupIndex >= groups.size)
                     throw IndexOutOfBoundsException("Group with index $groupIndex does not exist")
 
-                result.append(groups[groupIndex]?.value ?: "")
+                result.append(groups[groupIndex]?.konstue ?: "")
                 index = endIndex
             }
         } else {
@@ -433,7 +433,7 @@ private fun substituteGroupRefs(match: MatchResult, replacement: String): String
 private fun String.readGroupName(startIndex: Int): Int {
     var index = startIndex
     while (index < length) {
-        val char = this[index]
+        konst char = this[index]
         if (char in 'a'..'z' || char in 'A'..'Z' || char in '0'..'9') {
             index++
         } else {
@@ -448,9 +448,9 @@ private fun String.readGroupIndex(startIndex: Int, groupCount: Int): Int {
     var index = startIndex + 1
     var groupIndex = this[startIndex] - '0'
 
-    // capture the largest valid group index
+    // capture the largest konstid group index
     while (index < length && this[index] in '0'..'9') {
-        val newGroupIndex = (groupIndex * 10) + (this[index] - '0')
+        konst newGroupIndex = (groupIndex * 10) + (this[index] - '0')
         if (newGroupIndex in 0 until groupCount) {
             groupIndex = newGroupIndex
             index++

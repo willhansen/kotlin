@@ -13,31 +13,31 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.CompilerConfigurationKey
 
 object ImportsDumperCliOptions {
-    val DESTINATION = CliOption(
+    konst DESTINATION = CliOption(
         optionName = "output-imports",
-        valueDescription = "<path>",
+        konstueDescription = "<path>",
         description = "Output imports from all compiled files to the specified file in JSON format",
         required = false // non-required because importsDumper is a bundled plugin
     )
 }
 
 object ImportsDumperConfigurationKeys {
-    val DESTINATION = CompilerConfigurationKey.create<String>("Destination of imports dump")
+    konst DESTINATION = CompilerConfigurationKey.create<String>("Destination of imports dump")
 }
 
 class ImportsDumperCommandLineProcessor : CommandLineProcessor {
-    override val pluginId: String = PLUGIN_ID
+    override konst pluginId: String = PLUGIN_ID
 
-    override val pluginOptions: Collection<AbstractCliOption> = listOf(ImportsDumperCliOptions.DESTINATION)
+    override konst pluginOptions: Collection<AbstractCliOption> = listOf(ImportsDumperCliOptions.DESTINATION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) {
         when (option) {
-            ImportsDumperCliOptions.DESTINATION -> configuration.put(ImportsDumperConfigurationKeys.DESTINATION, value)
+            ImportsDumperCliOptions.DESTINATION -> configuration.put(ImportsDumperConfigurationKeys.DESTINATION, konstue)
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }
     }
 
     companion object {
-        const val PLUGIN_ID = "org.jetbrains.kotlin.importsDumper"
+        const konst PLUGIN_ID = "org.jetbrains.kotlin.importsDumper"
     }
 }

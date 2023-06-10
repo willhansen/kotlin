@@ -7,15 +7,15 @@ FILE: operatorsOverLiterals.kt
         R|/foo|(Int(1))
     }
     public final fun test_1(): R|kotlin/Unit| {
-        lval x1: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(Int(1))
-        lval x2: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(Int(1))
+        lkonst x1: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(Int(1))
+        lkonst x2: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(Int(1))
         Int(1).R|kotlin/Int.plus|(Int(1))
         Int(127).R|kotlin/Int.plus|(Int(1))
-        lval x3: R|kotlin/Int| = Int(2000000000).R|kotlin/Int.times|(Int(4))
+        lkonst x3: R|kotlin/Int| = Int(2000000000).R|kotlin/Int.times|(Int(4))
     }
     public final fun test_2(n: R|kotlin/Int|): R|kotlin/Unit| {
-        lval x: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(R|<local>/n|)
-        lval y: R|kotlin/Int| = R|<local>/n|.R|kotlin/Int.plus|(Int(1))
+        lkonst x: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(R|<local>/n|)
+        lkonst y: R|kotlin/Int| = R|<local>/n|.R|kotlin/Int.plus|(Int(1))
     }
     public final fun R|kotlin/Int|.bar(): R|kotlin/Int| {
     }
@@ -24,8 +24,8 @@ FILE: operatorsOverLiterals.kt
     public final fun R|kotlin/Byte|.baz(): R|kotlin/Byte| {
     }
     public final fun test_3(): R|kotlin/Unit| {
-        lval x: R|kotlin/Int| = Int(1).R|/bar|()
-        lval y: R|kotlin/Int| = Int(1).R|/baz|()
+        lkonst x: R|kotlin/Int| = Int(1).R|/bar|()
+        lkonst y: R|kotlin/Int| = Int(1).R|/baz|()
     }
     public final fun takeByte(b: R|kotlin/Byte|): R|kotlin/Unit| {
     }
@@ -75,6 +75,6 @@ FILE: operatorsOverLiterals.kt
         ))
     }
     public final fun test_7(d: R|kotlin/Double|): R|kotlin/Unit| {
-        lval x1: R|kotlin/Double| = Int(1).R|kotlin/Int.plus|(R|<local>/d|)
-        lval x2: R|kotlin/Double| = R|<local>/d|.R|kotlin/Double.plus|(Int(1))
+        lkonst x1: R|kotlin/Double| = Int(1).R|kotlin/Int.plus|(R|<local>/d|)
+        lkonst x2: R|kotlin/Double| = R|<local>/d|.R|kotlin/Double.plus|(Int(1))
     }

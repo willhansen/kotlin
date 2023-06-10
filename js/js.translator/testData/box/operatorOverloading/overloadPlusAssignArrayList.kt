@@ -4,7 +4,7 @@ package foo
 
 
 class ArrayWrapper<T>() {
-    val contents = ArrayList<T>()
+    konst contents = ArrayList<T>()
 
     fun add(item: T) {
         contents.add(item)
@@ -21,7 +21,7 @@ class ArrayWrapper<T>() {
 
 fun box(): String {
     var v1 = ArrayWrapper<String>()
-    val v2 = ArrayWrapper<String>()
+    konst v2 = ArrayWrapper<String>()
     v1.add("foo")
     v2.add("bar")
     v1 += v2

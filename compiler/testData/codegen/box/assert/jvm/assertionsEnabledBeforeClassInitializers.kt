@@ -12,7 +12,7 @@ class Checker {
 
 open class Bar {
     companion object {
-        val barAssertionThrown = try {
+        konst barAssertionThrown = try {
             Baz().assertFalse()
             false
         } catch(error: java.lang.AssertionError) {
@@ -25,7 +25,7 @@ class Baz : Bar() {
     fun assertFalse() = assert(false)
 
     companion object {
-        val bazAssertionThrown = try {
+        konst bazAssertionThrown = try {
             Baz().assertFalse()
             false
         } catch(error: java.lang.AssertionError) {
@@ -43,7 +43,7 @@ class Baz : Bar() {
 class Dummy
 
 fun disableAssertions(): Checker {
-    val loader = Dummy::class.java.classLoader
+    konst loader = Dummy::class.java.classLoader
     loader.setPackageAssertionStatus("initializerAssertionsEnabled", false)
     return loader.loadClass("initializerAssertionsEnabled.Checker").newInstance() as Checker
 }

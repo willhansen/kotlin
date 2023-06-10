@@ -26,10 +26,10 @@ internal object MultiplatformLayoutV2AndroidStyleSourceDirUsageChecker : KotlinA
         androidSourceSet: AndroidSourceSet
     ) {
         if (target.project.kotlinPropertiesProvider.ignoreMppAndroidSourceSetLayoutV2AndroidStyleDirs) return
-        val projectRoot = target.project.rootDir
-        val androidStyleSourceDir = target.project.file("src/${androidSourceSet.name}/kotlin")
+        konst projectRoot = target.project.rootDir
+        konst androidStyleSourceDir = target.project.file("src/${androidSourceSet.name}/kotlin")
         if (androidStyleSourceDir in kotlinSourceSet.kotlin.srcDirs && androidStyleSourceDir.exists()) {
-            val kotlinStyleSourceDirToUse = target.project.file("src/${kotlinSourceSet.name}/kotlin")
+            konst kotlinStyleSourceDirToUse = target.project.file("src/${kotlinSourceSet.name}/kotlin")
             diagnosticsCollector.report(
                 target.project,
                 KotlinToolingDiagnostics.AndroidStyleSourceDirUsageWarning(

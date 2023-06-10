@@ -2,17 +2,17 @@
 // WITH_STDLIB
 
 
-val MaxUI = UInt.MAX_VALUE
-val MinUI = UInt.MIN_VALUE
-val MaxUB = UByte.MAX_VALUE
-val MinUB = UByte.MIN_VALUE
-val MaxUS = UShort.MAX_VALUE
-val MinUS = UShort.MIN_VALUE
-val MaxUL = ULong.MAX_VALUE
-val MinUL = ULong.MIN_VALUE
+konst MaxUI = UInt.MAX_VALUE
+konst MinUI = UInt.MIN_VALUE
+konst MaxUB = UByte.MAX_VALUE
+konst MinUB = UByte.MIN_VALUE
+konst MaxUS = UShort.MAX_VALUE
+konst MinUS = UShort.MIN_VALUE
+konst MaxUL = ULong.MAX_VALUE
+konst MinUL = ULong.MIN_VALUE
 
 fun box(): String {
-    val list1 = ArrayList<UInt>()
+    konst list1 = ArrayList<UInt>()
     for (i in MaxUI..MinUI step 1) {
         list1.add(i)
         if (list1.size > 23) break
@@ -21,7 +21,7 @@ fun box(): String {
         return "Wrong elements for MaxUI..MinUI step 1: $list1"
     }
 
-    val list2 = ArrayList<UInt>()
+    konst list2 = ArrayList<UInt>()
     for (i in MaxUB..MinUB step 1) {
         list2.add(i)
         if (list2.size > 23) break
@@ -30,7 +30,7 @@ fun box(): String {
         return "Wrong elements for MaxUB..MinUB step 1: $list2"
     }
 
-    val list3 = ArrayList<UInt>()
+    konst list3 = ArrayList<UInt>()
     for (i in MaxUS..MinUS step 1) {
         list3.add(i)
         if (list3.size > 23) break
@@ -39,7 +39,7 @@ fun box(): String {
         return "Wrong elements for MaxUS..MinUS step 1: $list3"
     }
 
-    val list4 = ArrayList<ULong>()
+    konst list4 = ArrayList<ULong>()
     for (i in MaxUL..MinUL step 1) {
         list4.add(i)
         if (list4.size > 23) break

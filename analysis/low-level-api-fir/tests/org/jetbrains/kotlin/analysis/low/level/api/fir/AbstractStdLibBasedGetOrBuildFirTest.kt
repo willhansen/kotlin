@@ -18,24 +18,24 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractStdLibBasedGetOrBuildFirTest : AbstractLowLevelApiSingleFileTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val project = ktFile.project
+        konst project = ktFile.project
         assert(!project.isDisposed) { "$project is disposed" }
-        val caretPosition = testServices.expressionMarkerProvider.getCaretPosition(ktFile)
-        val ktReferences = ktFile.findReferenceAt(caretPosition)?.unwrapMultiReferences().orEmpty().filterIsInstance<KtReference>()
+        konst caretPosition = testServices.expressionMarkerProvider.getCaretPosition(ktFile)
+        konst ktReferences = ktFile.findReferenceAt(caretPosition)?.unwrapMultiReferences().orEmpty().filterIsInstance<KtReference>()
         if (ktReferences.size != 1) {
             testServices.assertions.fail { "No references at caret found" }
         }
-        val declaration =
+        konst declaration =
             analyseForTest(ktReferences.first().element) {
                 ktReferences.first().resolveToSymbol()?.psi as KtDeclaration
             }
 
-        val module = ProjectStructureProvider.getModule(project, ktFile, contextualModule = null)
-        val resolveSession = LLFirResolveSessionService.getInstance(project).getFirResolveSession(module)
-        val fir = declaration.resolveToFirSymbol(resolveSession).fir
+        konst module = ProjectStructureProvider.getModule(project, ktFile, contextualModule = null)
+        konst resolveSession = LLFirResolveSessionService.getInstance(project).getFirResolveSession(module)
+        konst fir = declaration.resolveToFirSymbol(resolveSession).fir
         testServices.assertions.assertEqualsToTestDataFileSibling(renderActualFir(fir, declaration))
     }
 }

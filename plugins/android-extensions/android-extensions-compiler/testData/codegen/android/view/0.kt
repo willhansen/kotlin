@@ -9,15 +9,15 @@ import kotlinx.android.synthetic.main.layout.view.*
 class R {
     class id {
         companion object {
-            const val container = 0
-            const val login = 1
+            const konst container = 0
+            const konst login = 1
         }
     }
 }
 
 class MyActivity(): Activity() {
-    val containerWidget = object : FrameLayout(this) {
-        val loginWidget = Button(this@MyActivity)
+    konst containerWidget = object : FrameLayout(this) {
+        konst loginWidget = Button(this@MyActivity)
 
         override fun <T : View> findViewById(id: Int): T? {
             return when (id) {

@@ -13,7 +13,7 @@ inline fun <T> myRun(block: () -> T): T {
 fun someComputation(): Int = 42
 
 fun tryCatchInlined() {
-    val x: Int
+    konst x: Int
 
     myRun {
         try {
@@ -31,7 +31,7 @@ fun tryCatchInlined() {
 }
 
 fun possibleReassignmentInTryCatch() {
-    val x: Int
+    konst x: Int
 
     myRun {
         x = 42

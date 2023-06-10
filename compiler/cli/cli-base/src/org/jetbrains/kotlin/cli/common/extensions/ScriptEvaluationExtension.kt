@@ -11,15 +11,15 @@ import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.extensions.ProjectExtensionDescriptor
 
-interface ScriptEvaluationExtension {
-    companion object : ProjectExtensionDescriptor<ScriptEvaluationExtension>(
-        "org.jetbrains.kotlin.scriptEvaluationExtension",
-        ScriptEvaluationExtension::class.java
+interface ScriptEkonstuationExtension {
+    companion object : ProjectExtensionDescriptor<ScriptEkonstuationExtension>(
+        "org.jetbrains.kotlin.scriptEkonstuationExtension",
+        ScriptEkonstuationExtension::class.java
     )
 
     fun isAccepted(arguments: CommonCompilerArguments): Boolean
 
-    fun eval(
+    fun ekonst(
         arguments: CommonCompilerArguments,
         configuration: CompilerConfiguration,
         projectEnvironment: KotlinCoreEnvironment.ProjectEnvironment

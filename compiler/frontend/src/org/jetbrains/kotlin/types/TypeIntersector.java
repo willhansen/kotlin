@@ -140,7 +140,7 @@ public class TypeIntersector {
     /**
      * Note: this method was used in overload and override bindings to approximate type parameters with several bounds,
      * but as it turned out at some point, that logic was inconsistent with Java rules, so it was simplified.
-     * Most of the other usages of this method are left untouched but probably should be investigated closely if they're still valid.
+     * Most of the other usages of this method are left untouched but probably should be investigated closely if they're still konstid.
      */
     @NotNull
     public static KotlinType getUpperBoundsAsType(@NotNull TypeParameterDescriptor descriptor) {

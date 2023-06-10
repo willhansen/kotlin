@@ -3,7 +3,7 @@
 
 // FILE: A.kt
 
-val a = "A".let {
+konst a = "A".let {
     flag = !flag
     if (flag) {
         it
@@ -12,7 +12,7 @@ val a = "A".let {
     }
 }
 
-val b = "B".let {
+konst b = "B".let {
     flag = !flag
     if (!flag) {
         it

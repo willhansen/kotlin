@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.test.getAnalyzerServices
 import org.jetbrains.kotlin.test.services.*
 
 abstract class AnalysisApiEnvironmentManager : TestService {
-    abstract val testServices: TestServices
-    abstract val testRootDisposable: Disposable
+    abstract konst testServices: TestServices
+    abstract konst testRootDisposable: Disposable
     abstract fun initializeEnvironment()
 
     fun getProject(): Project =
@@ -36,10 +36,10 @@ abstract class AnalysisApiEnvironmentManager : TestService {
 }
 
 class AnalysisApiEnvironmentManagerImpl(
-    override val testServices: TestServices,
-    override val testRootDisposable: Disposable,
+    override konst testServices: TestServices,
+    override konst testRootDisposable: Disposable,
 ) : AnalysisApiEnvironmentManager() {
-    private val _projectEnvironment: KotlinCoreProjectEnvironment by lazy {
+    private konst _projectEnvironment: KotlinCoreProjectEnvironment by lazy {
         StandaloneProjectFactory.createProjectEnvironment(
             testRootDisposable,
             testServices.applicationDisposableProvider.getApplicationRootDisposable(),
@@ -54,10 +54,10 @@ class AnalysisApiEnvironmentManagerImpl(
     }
 
     override fun initializeProjectStructure() {
-        val ktModuleProjectStructure = testServices.ktModuleProvider.getModuleStructure()
-        val useSiteModule = testServices.moduleStructure.modules.first()
-        val useSiteCompilerConfiguration = testServices.compilerConfigurationProvider.getCompilerConfiguration(useSiteModule)
-        val builtinsModule = KtBuiltinsModule(
+        konst ktModuleProjectStructure = testServices.ktModuleProvider.getModuleStructure()
+        konst useSiteModule = testServices.moduleStructure.modules.first()
+        konst useSiteCompilerConfiguration = testServices.compilerConfigurationProvider.getCompilerConfiguration(useSiteModule)
+        konst builtinsModule = KtBuiltinsModule(
             useSiteModule.targetPlatform,
             useSiteModule.targetPlatform.getAnalyzerServices(),
             getProject()
@@ -83,4 +83,4 @@ class AnalysisApiEnvironmentManagerImpl(
 
 }
 
-val TestServices.environmentManager: AnalysisApiEnvironmentManager by TestServices.testServiceAccessor()
+konst TestServices.environmentManager: AnalysisApiEnvironmentManager by TestServices.testServiceAccessor()

@@ -10,12 +10,12 @@ class A {
 
     inline var z: Int
         get() = result
-        set(value) {
-            result = value
+        set(konstue) {
+            result = konstue
         }
 }
 
-val a = A()
+konst a = A()
 
 fun test1(): Int {
     a.z += 1

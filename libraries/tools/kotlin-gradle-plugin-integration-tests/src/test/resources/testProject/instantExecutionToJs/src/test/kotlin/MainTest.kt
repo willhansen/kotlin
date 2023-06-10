@@ -8,6 +8,6 @@ import kotlin.test.*
 class MainTest {
     @Test
     fun mySimpleTest() {
-        assertEquals("instant", Main().value())
+        assertEquals("instant", Main().konstue())
     }
 }

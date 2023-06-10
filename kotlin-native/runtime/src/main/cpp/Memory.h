@@ -70,7 +70,7 @@ struct ObjHeader {
    * To make this correct with llvm memory model we need to use [LLVMAtomicOrdering.LLVMAtomicOrderingAcquire] here.
    * Unfortunately, this is dramatically harmful for performance on arm architecture. So, we are using
    * [LLVMAtomicOrdering.LLVMAtomicOrderingMonotonic] for both this read and following load of metaObject->typeInfo.
-   * At this point, we have no data race, but llvm memory model allows uninitialized value to be read from metaObject->typeInfo.
+   * At this point, we have no data race, but llvm memory model allows uninitialized konstue to be read from metaObject->typeInfo.
    *
    * Hardware guaranties on many supported platforms doesn't allow this to happen.
    */
@@ -126,7 +126,7 @@ struct ObjHeader {
   static void destroyMetaObject(ObjHeader* object);
 };
 
-// Header of value type array objects. Keep layout in sync with that of object header.
+// Header of konstue type array objects. Keep layout in sync with that of object header.
 struct ArrayHeader {
   TypeInfo* typeInfoOrMeta_;
 
@@ -167,7 +167,7 @@ extern "C" {
 #define OBJ_RESULT __result__
 #define OBJ_GETTER0(name) ObjHeader* name(ObjHeader** OBJ_RESULT)
 #define OBJ_GETTER(name, ...) ObjHeader* name(__VA_ARGS__, ObjHeader** OBJ_RESULT)
-#define RETURN_OBJ(value) { ObjHeader* __obj = value; \
+#define RETURN_OBJ(konstue) { ObjHeader* __obj = konstue; \
     UpdateReturnRef(OBJ_RESULT, __obj);               \
     return __obj; }
 #define RETURN_RESULT_OF0(name) {       \
@@ -203,7 +203,7 @@ OBJ_GETTER(AllocInstance, const TypeInfo* type_info) RUNTIME_NOTHROW;
 OBJ_GETTER(AllocArrayInstance, const TypeInfo* type_info, int32_t elements);
 
 
-// `initialValue` may be `nullptr`, which signifies that the appropriate initial value was already
+// `initialValue` may be `nullptr`, which signifies that the appropriate initial konstue was already
 // set by static initialization.
 // TODO: When global initialization becomes lazy, this signature won't do.
 void InitAndRegisterGlobal(ObjHeader** location, const ObjHeader* initialValue) RUNTIME_NOTHROW;
@@ -215,8 +215,8 @@ void InitAndRegisterGlobal(ObjHeader** location, const ObjHeader* initialValue) 
 // one could implement either pure reference counting scheme, or tracing collector without
 // much ado.
 // Most important primitive is Update*Ref() API, which modifies location to use new
-// object reference. In pure reference counted scheme it will check old value,
-// decrement reference, increment counter on the new value, and store it into the field.
+// object reference. In pure reference counted scheme it will check old konstue,
+// decrement reference, increment counter on the new konstue, and store it into the field.
 // In tracing collector-like scheme, only field updates counts, and all other operations are
 // essentially no-ops.
 //
@@ -327,18 +327,18 @@ void Kotlin_native_internal_GC_suspend(ObjHeader*);
 void Kotlin_native_internal_GC_resume(ObjHeader*);
 void Kotlin_native_internal_GC_stop(ObjHeader*);
 void Kotlin_native_internal_GC_start(ObjHeader*);
-void Kotlin_native_internal_GC_setThreshold(ObjHeader*, int32_t value);
+void Kotlin_native_internal_GC_setThreshold(ObjHeader*, int32_t konstue);
 int32_t Kotlin_native_internal_GC_getThreshold(ObjHeader*);
-void Kotlin_native_internal_GC_setCollectCyclesThreshold(ObjHeader*, int64_t value);
+void Kotlin_native_internal_GC_setCollectCyclesThreshold(ObjHeader*, int64_t konstue);
 int64_t Kotlin_native_internal_GC_getCollectCyclesThreshold(ObjHeader*);
-void Kotlin_native_internal_GC_setThresholdAllocations(ObjHeader*, int64_t value);
+void Kotlin_native_internal_GC_setThresholdAllocations(ObjHeader*, int64_t konstue);
 int64_t Kotlin_native_internal_GC_getThresholdAllocations(ObjHeader*);
-void Kotlin_native_internal_GC_setTuneThreshold(ObjHeader*, bool value);
+void Kotlin_native_internal_GC_setTuneThreshold(ObjHeader*, bool konstue);
 bool Kotlin_native_internal_GC_getTuneThreshold(ObjHeader*);
 OBJ_GETTER(Kotlin_native_internal_GC_detectCycles, ObjHeader*);
 OBJ_GETTER(Kotlin_native_internal_GC_findCycle, ObjHeader*, ObjHeader* root);
 bool Kotlin_native_internal_GC_getCyclicCollector(ObjHeader* gc);
-void Kotlin_native_internal_GC_setCyclicCollector(ObjHeader* gc, bool value);
+void Kotlin_native_internal_GC_setCyclicCollector(ObjHeader* gc, bool konstue);
 
 bool Kotlin_Any_isShareable(ObjHeader* thiz);
 void Kotlin_Any_share(ObjHeader* thiz);

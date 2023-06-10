@@ -39,15 +39,15 @@ import org.jetbrains.kotlin.name.Name
 class FirScriptBuilder : FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
     var resolvePhase: FirResolvePhase = FirResolvePhase.RAW_FIR
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var moduleData: FirModuleData
     lateinit var origin: FirDeclarationOrigin
     var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
     lateinit var name: Name
-    val statements: MutableList<FirStatement> = mutableListOf()
+    konst statements: MutableList<FirStatement> = mutableListOf()
     lateinit var symbol: FirScriptSymbol
-    val parameters: MutableList<FirVariable> = mutableListOf()
-    val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    konst parameters: MutableList<FirVariable> = mutableListOf()
+    konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
 
     override fun build(): FirScript {
         return FirScriptImpl(
@@ -80,7 +80,7 @@ inline fun buildScriptCopy(original: FirScript, init: FirScriptBuilder.() -> Uni
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirScriptBuilder()
+    konst copyBuilder = FirScriptBuilder()
     copyBuilder.source = original.source
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.annotations.addAll(original.annotations)

@@ -6,7 +6,7 @@ package f {
 
     public final class Sub : f.Super {
         public constructor Sub(/*0*/ str: kotlin.String)
-        public final override /*1*/ /*fake_override*/ val property: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst property: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -14,7 +14,7 @@ package f {
 
     public open class Super {
         public constructor Super(/*0*/ property: kotlin.String)
-        public final val property: kotlin.String
+        public final konst property: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

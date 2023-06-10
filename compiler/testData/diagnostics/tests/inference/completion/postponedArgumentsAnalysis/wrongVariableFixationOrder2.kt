@@ -4,7 +4,7 @@
 
 interface Proxy<in D>
 
-class A<E : Any>(val left: E) : Proxy<E>
+class A<E : Any>(konst left: E) : Proxy<E>
 
 abstract class Api {
     abstract fun <T> magic(): T

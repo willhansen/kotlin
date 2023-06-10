@@ -5,15 +5,15 @@ data class Test1 {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
-  val y: String
+  konst y: String
     field = y
     get
 
-  val z: Any
+  konst z: Any
     field = z
     get
 
@@ -40,7 +40,7 @@ data class Test1 {
     when {
       other !is Test1 -> return false
     }
-    val tmp0_other_with_cast: Test1 = other as Test1
+    konst tmp0_other_with_cast: Test1 = other as Test1
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }
@@ -73,7 +73,7 @@ data class Test2 {
 
   }
 
-  val x: Any?
+  konst x: Any?
     field = x
     get
 
@@ -92,7 +92,7 @@ data class Test2 {
     when {
       other !is Test2 -> return false
     }
-    val tmp0_other_with_cast: Test2 = other as Test2
+    konst tmp0_other_with_cast: Test2 = other as Test2
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }
@@ -119,19 +119,19 @@ data class Test3 {
 
   }
 
-  val d: Double
+  konst d: Double
     field = d
     get
 
-  val dn: Double?
+  konst dn: Double?
     field = dn
     get
 
-  val f: Float
+  konst f: Float
     field = f
     get
 
-  val df: Float?
+  konst df: Float?
     field = df
     get
 
@@ -162,7 +162,7 @@ data class Test3 {
     when {
       other !is Test3 -> return false
     }
-    val tmp0_other_with_cast: Test3 = other as Test3
+    konst tmp0_other_with_cast: Test3 = other as Test3
     when {
       EQEQ(arg0 = <this>.#d, arg1 = tmp0_other_with_cast.#d).not() -> return false
     }

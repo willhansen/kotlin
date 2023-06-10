@@ -21,7 +21,7 @@ import org.jetbrains.benchmarksLauncher.*
 import kotlinx.cli.*
 
 class RingLauncher : Launcher() {
-    override val baseBenchmarksSet =
+    override konst baseBenchmarksSet =
             mutableMapOf(
                     "AbstractMethod.sortStrings" to BenchmarkEntryWithInit.create(::AbstractMethodBenchmark, { sortStrings() }),
                     "ClassArray.copy" to BenchmarkEntryWithInit.create(::ClassArrayBenchmark, { copy() }),
@@ -89,7 +89,7 @@ class RingLauncher : Launcher() {
             )
 
 
-    override val extendedBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry> =
+    override konst extendedBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry> =
             mutableMapOf(
                     "AbstractMethod.sortStringsWithComparator" to BenchmarkEntryWithInit.create(::AbstractMethodBenchmark, { sortStringsWithComparator() }),
                     "AllocationBenchmark.allocateObjects" to BenchmarkEntryWithInit.create(::AllocationBenchmark, { allocateObjects() }),
@@ -252,7 +252,7 @@ class RingLauncher : Launcher() {
 }
 
 fun main(args: Array<String>) {
-    val launcher = RingLauncher()
+    konst launcher = RingLauncher()
     BenchmarksRunner.runBenchmarks(args, { arguments: BenchmarkArguments ->
         if (arguments is BaseBenchmarkArguments) {
             launcher.launch(arguments.warmup, arguments.repeat, arguments.prefix,

@@ -31,6 +31,6 @@ public class Foo<E> {
 // FILE: main.kt
 
 fun test() {
-    val collection: Collection<Int> = listOf(1, 2, 3)
+    konst collection: Collection<Int> = listOf(1, 2, 3)
     Foo(collection)
 }

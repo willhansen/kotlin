@@ -80,7 +80,7 @@ typedef void const* VTableElement;
 
 typedef int32_t ClassId;
 
-const ClassId kInvalidInterfaceId = 0;
+const ClassId kInkonstidInterfaceId = 0;
 
 struct InterfaceTableRecord {
     ClassId id;
@@ -101,7 +101,7 @@ struct TypeInfo {
     const ExtendedTypeInfo* extendedInfo_;
     // Unused field.
     uint32_t unused_;
-    // Negative value marks array class/string, and it is negated element size.
+    // Negative konstue marks array class/string, and it is negated element size.
     int32_t instanceSize_;
     // Must be pointer to Any for array classes, and null for Any.
     const TypeInfo* superType_;

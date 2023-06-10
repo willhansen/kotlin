@@ -9,15 +9,15 @@ internal abstract class KotlinCommonCompilerToolOptionsDefault @javax.inject.Inj
     objectFactory: org.gradle.api.model.ObjectFactory
 ) : org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerToolOptions {
 
-    override val allWarningsAsErrors: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst allWarningsAsErrors: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 
-    override val suppressWarnings: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst suppressWarnings: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 
-    override val verbose: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst verbose: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 
-    override val freeCompilerArgs: org.gradle.api.provider.ListProperty<kotlin.String> =
+    override konst freeCompilerArgs: org.gradle.api.provider.ListProperty<kotlin.String> =
         objectFactory.listProperty(kotlin.String::class.java).convention(emptyList<String>())
 }

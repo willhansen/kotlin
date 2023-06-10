@@ -17,7 +17,7 @@ fun box(s: String): String {
             x = z.length
         }
 
-        val x: Int
+        konst x: Int
 
         fun result() = s
     }

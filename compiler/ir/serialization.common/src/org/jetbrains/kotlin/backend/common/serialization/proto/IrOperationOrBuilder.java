@@ -116,11 +116,11 @@ public interface IrOperationOrBuilder extends
   org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass getGetClass();
 
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
    */
   boolean hasGetEnumValue();
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue getGetEnumValue();
 
@@ -143,11 +143,11 @@ public interface IrOperationOrBuilder extends
   org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject getGetObject();
 
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
    */
   boolean hasGetValue();
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue getGetValue();
 
@@ -188,11 +188,11 @@ public interface IrOperationOrBuilder extends
   org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField getSetField();
 
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
    */
   boolean hasSetValue();
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue getSetValue();
 

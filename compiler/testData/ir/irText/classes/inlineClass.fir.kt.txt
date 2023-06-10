@@ -1,11 +1,11 @@
-value class Test {
+konstue class Test {
   constructor(x: Int) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -13,7 +13,7 @@ value class Test {
     when {
       other !is Test -> return false
     }
-    val tmp0_other_with_cast: Test = other as Test
+    konst tmp0_other_with_cast: Test = other as Test
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }

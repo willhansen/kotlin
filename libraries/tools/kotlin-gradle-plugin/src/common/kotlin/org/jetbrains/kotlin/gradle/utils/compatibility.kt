@@ -36,13 +36,13 @@ import org.gradle.util.GradleVersion
 import java.io.File
 import java.io.Serializable
 
-const val minSupportedGradleVersion = "6.8.3"
+const konst minSupportedGradleVersion = "6.8.3"
 
 internal fun checkGradleCompatibility(
     withComponent: String = "the Kotlin Gradle plugin",
     minSupportedVersion: GradleVersion = GradleVersion.version(minSupportedGradleVersion)
 ) {
-    val currentVersion = GradleVersion.current()
+    konst currentVersion = GradleVersion.current()
     if (currentVersion < minSupportedVersion) {
         throw GradleException(
             "The current Gradle version ${currentVersion.version} is not compatible with $withComponent. " +
@@ -51,7 +51,7 @@ internal fun checkGradleCompatibility(
     }
 }
 
-internal val AbstractArchiveTask.archivePathCompatible: File
+internal konst AbstractArchiveTask.archivePathCompatible: File
     get() = archiveFile.get().asFile
 
 // Gradle dropped out getOwnerBuildOperationId. Workaround to build correct plugin for Gradle < 6.8

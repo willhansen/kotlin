@@ -19,25 +19,25 @@ fun assertFalse(cond: Boolean) {
         println("FAIL")
 }
 
-fun assertEquals(value1: Any?, value2: Any?) {
-    if (value1 != value2)
+fun assertEquals(konstue1: Any?, konstue2: Any?) {
+    if (konstue1 != konstue2)
         println("FAIL")
 }
 
-fun assertNotEquals(value1: Any?, value2: Any?) {
-    if (value1 == value2)
+fun assertNotEquals(konstue1: Any?, konstue2: Any?) {
+    if (konstue1 == konstue2)
         println("FAIL")
 }
 
-fun assertEquals(value1: Int, value2: Int) {
-    if (value1 != value2)
+fun assertEquals(konstue1: Int, konstue2: Int) {
+    if (konstue1 != konstue2)
         println("FAIL")
 }
 
 fun testRehashAndCompact() {
-    val m = HashMap<String, String>()
+    konst m = HashMap<String, String>()
     for (repeat in 1..10) {
-        val n = when (repeat) {
+        konst n = when (repeat) {
             1 -> 1000
             2 -> 10000
             3 -> 10
@@ -45,7 +45,7 @@ fun testRehashAndCompact() {
         }
         for (i in 1..n) {
             assertFalse(m.containsKey(i.toString()))
-            assertEquals(null, m.put(i.toString(), "val$i"))
+            assertEquals(null, m.put(i.toString(), "konst$i"))
             assertTrue(m.containsKey(i.toString()))
             assertEquals(i, m.size)
         }
@@ -53,7 +53,7 @@ fun testRehashAndCompact() {
             assertTrue(m.containsKey(i.toString()))
         }
         for (i in 1..n) {
-            assertEquals("val$i", m.remove(i.toString()))
+            assertEquals("konst$i", m.remove(i.toString()))
             assertFalse(m.containsKey(i.toString()))
             assertEquals(n - i, m.size)
         }
@@ -62,9 +62,9 @@ fun testRehashAndCompact() {
 }
 
 fun testClear() {
-    val m = HashMap<String, String>()
+    konst m = HashMap<String, String>()
     for (repeat in 1..10) {
-        val n = when (repeat) {
+        konst n = when (repeat) {
             1 -> 1000
             2 -> 10000
             3 -> 10
@@ -72,7 +72,7 @@ fun testClear() {
         }
         for (i in 1..n) {
             assertFalse(m.containsKey(i.toString()))
-            assertEquals(null, m.put(i.toString(), "val$i"))
+            assertEquals(null, m.put(i.toString(), "konst$i"))
             assertTrue(m.containsKey(i.toString()))
             assertEquals(i, m.size)
         }

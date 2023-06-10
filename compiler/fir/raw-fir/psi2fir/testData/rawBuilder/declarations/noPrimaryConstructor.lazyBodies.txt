@@ -1,6 +1,6 @@
 FILE: noPrimaryConstructor.kt
     public? final? class NoPrimary : R|kotlin/Any| {
-        public? final? val x: String
+        public? final? konst x: String
             public? get(): String
 
         public? constructor(x: String): R|NoPrimary| { LAZY_BLOCK }

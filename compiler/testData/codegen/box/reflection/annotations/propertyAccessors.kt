@@ -7,7 +7,7 @@ annotation class SetParam
 
 var foo: String
     @Get get() = ""
-    @Set set(@SetParam value) {}
+    @Set set(@SetParam konstue) {}
 
 fun box(): String {
     assert(::foo.getter.annotations.single() is Get)

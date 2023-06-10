@@ -5,7 +5,7 @@ class Test1<T1 : Any?, T2 : Any?> {
   // CHECK:
   //   Mangled name: Test1{}x
   //   Public signature: /Test1.x|-8060530855978347579[0]
-  val x: T1
+  konst x: T1
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-x>(){}1:0
     //   Public signature: /Test1.x.<get-x>|-8893883356128097563[0]
@@ -17,7 +17,7 @@ class Test1<T1 : Any?, T2 : Any?> {
   // CHECK:
   //   Mangled name: Test1{}y
   //   Public signature: /Test1.y|3625903257357557171[0]
-  val y: T2
+  konst y: T2
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-y>(){}1:1
     //   Public signature: /Test1.y.<get-y>|6657541212363005233[0]
@@ -40,7 +40,7 @@ class Test2 {
   // CHECK:
   //   Mangled name: Test2{}y
   //   Public signature: /Test2.y|3625903257357557171[0]
-  val y: String
+  konst y: String
     // CHECK JVM_IR:
     //   Mangled name: Test2#<get-y>(){}kotlin.String
     //   Public signature: /Test2.y.<get-y>|1760775372995524147[0]
@@ -56,7 +56,7 @@ class Test2 {
     // CHECK:
     //   Mangled name: Test2.TestInner{}z
     //   Public signature: /Test2.TestInner.z|7549650372729116193[0]
-    val z: Z
+    konst z: Z
       // CHECK JVM_IR:
       //   Mangled name: Test2.TestInner#<get-z>(){}1:0
       //   Public signature: /Test2.TestInner.z.<get-z>|6635558627205321915[0]
@@ -90,7 +90,7 @@ class Test3 {
   // CHECK:
   //   Mangled name: Test3{}x
   //   Public signature: /Test3.x|-8060530855978347579[0]
-  val x: Int
+  konst x: Int
     // CHECK JVM_IR:
     //   Mangled name: Test3#<get-x>(){}kotlin.Int
     //   Public signature: /Test3.x.<get-x>|4966956098150895696[0]
@@ -102,7 +102,7 @@ class Test3 {
   // CHECK:
   //   Mangled name: Test3{}y
   //   Public signature: /Test3.y|3625903257357557171[0]
-  val y: String
+  konst y: String
     // CHECK JVM_IR:
     //   Mangled name: Test3#<get-y>(){}kotlin.String
     //   Public signature: /Test3.y.<get-y>|1760775372995524147[0]
@@ -125,7 +125,7 @@ class Test4<T : Any?> {
   // CHECK:
   //   Mangled name: Test4{}x
   //   Public signature: /Test4.x|-8060530855978347579[0]
-  val x: Int
+  konst x: Int
     // CHECK JVM_IR:
     //   Mangled name: Test4#<get-x>(){}kotlin.Int
     //   Public signature: /Test4.x.<get-x>|4966956098150895696[0]

@@ -1,6 +1,6 @@
 package test
 
-annotation class Anno(val value: String = "0", val x: Int = 0)
+annotation class Anno(konst konstue: String = "0", konst x: Int = 0)
 annotation class Bnno
 
 enum class Eee {

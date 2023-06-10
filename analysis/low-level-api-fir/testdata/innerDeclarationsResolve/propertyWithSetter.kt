@@ -9,6 +9,6 @@ class Bar : Foo() {
 }
 
 fun test() {
-    val bar = Bar()
+    konst bar = Bar()
     bar.id = 1
 }

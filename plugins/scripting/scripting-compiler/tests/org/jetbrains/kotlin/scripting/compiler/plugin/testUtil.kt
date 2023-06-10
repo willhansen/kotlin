@@ -20,7 +20,7 @@ import java.nio.file.Files
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
-const val SCRIPT_TEST_BASE_COMPILER_ARGUMENTS_PROPERTY = "kotlin.script.test.base.compiler.arguments"
+const konst SCRIPT_TEST_BASE_COMPILER_ARGUMENTS_PROPERTY = "kotlin.script.test.base.compiler.arguments"
 
 internal fun getBaseCompilerArgumentsFromProperty(): List<String>? =
     System.getProperty(SCRIPT_TEST_BASE_COMPILER_ARGUMENTS_PROPERTY)?.takeIf { it.isNotBlank() }?.split(' ')
@@ -49,12 +49,12 @@ fun runWithKotlinLauncherScript(
     classpath: List<File> = emptyList(),
     additionalEnvVars: Iterable<Pair<String, String>>? = null
 ) {
-    val executableFileName =
+    konst executableFileName =
         if (System.getProperty("os.name").contains("windows", ignoreCase = true)) "$launcherScriptName.bat" else launcherScriptName
-    val launcherFile = File("dist/kotlinc/bin/$executableFileName")
+    konst launcherFile = File("dist/kotlinc/bin/$executableFileName")
     Assert.assertTrue("Launcher script not found, run dist task: ${launcherFile.absolutePath}", launcherFile.exists())
 
-    val args = arrayListOf(launcherFile.absolutePath).apply {
+    konst args = arrayListOf(launcherFile.absolutePath).apply {
         if (classpath.isNotEmpty()) {
             add("-cp")
             add(classpath.joinToString(File.pathSeparator))
@@ -86,36 +86,36 @@ fun runAndCheckResults(
     workDirectory: File? = null,
     additionalEnvVars: Iterable<Pair<String, String>>? = null
 ) {
-    val processBuilder = ProcessBuilder(args)
+    konst processBuilder = ProcessBuilder(args)
     if (workDirectory != null) {
         processBuilder.directory(workDirectory)
     }
     if (additionalEnvVars != null) {
         processBuilder.environment().putAll(additionalEnvVars)
     }
-    val process = processBuilder.start()
+    konst process = processBuilder.start()
 
     data class ExceptionContainer(
-        var value: Throwable? = null
+        var konstue: Throwable? = null
     )
 
     fun InputStream.captureStream(): Triple<Thread, ExceptionContainer, ArrayList<String>> {
-        val out = ArrayList<String>()
-        val exceptionContainer = ExceptionContainer()
-        val thread = thread {
+        konst out = ArrayList<String>()
+        konst exceptionContainer = ExceptionContainer()
+        konst thread = thread {
             try {
                 reader().forEachLine {
                     out.add(it.trim())
                 }
             } catch (e: Throwable) {
-                exceptionContainer.value = e
+                exceptionContainer.konstue = e
             }
         }
         return Triple(thread, exceptionContainer, out)
     }
 
-    val (stdoutThread, stdoutException, processOut) = process.inputStream.captureStream()
-    val (stderrThread, stderrException, processErr) = process.errorStream.captureStream()
+    konst (stdoutThread, stdoutException, processOut) = process.inputStream.captureStream()
+    konst (stderrThread, stderrException, processErr) = process.errorStream.captureStream()
 
     process.waitFor(30000, TimeUnit.MILLISECONDS)
 
@@ -126,10 +126,10 @@ fun runAndCheckResults(
         }
         stdoutThread.join(300)
         Assert.assertFalse("stdout thread not finished", stdoutThread.isAlive)
-        Assert.assertNull(stdoutException.value)
+        Assert.assertNull(stdoutException.konstue)
         stderrThread.join(300)
         Assert.assertFalse("stderr thread not finished", stderrThread.isAlive)
-        Assert.assertNull(stderrException.value)
+        Assert.assertNull(stderrException.konstue)
         Assert.assertEquals(expectedOutPatterns.size, processOut.size)
         for ((expectedPattern, actualLine) in expectedOutPatterns.zip(processOut)) {
             Assert.assertTrue(
@@ -152,7 +152,7 @@ fun runWithK2JVMCompiler(
     expectedExitCode: Int = 0,
     classpath: List<File> = emptyList()
 ) {
-    val args = arrayListOf("-kotlin-home", "dist/kotlinc").apply {
+    konst args = arrayListOf("-kotlin-home", "dist/kotlinc").apply {
         if (classpath.isNotEmpty()) {
             add("-cp")
             add(classpath.joinToString(File.pathSeparator))
@@ -169,15 +169,15 @@ fun runWithK2JVMCompiler(
     expectedExitCode: Int = 0,
     expectedSomeErrPatterns: List<String>? = null
 ) {
-    val argsWithBasefromProp = getBaseCompilerArgumentsFromProperty()?.let { (it + args).toTypedArray() } ?: args
-    val (out, err, ret) = captureOutErrRet {
+    konst argsWithBasefromProp = getBaseCompilerArgumentsFromProperty()?.let { (it + args).toTypedArray() } ?: args
+    konst (out, err, ret) = captureOutErrRet {
         CLITool.doMainNoExit(
             K2JVMCompiler(),
             argsWithBasefromProp
         )
     }
     try {
-        val outLines = if (out.isEmpty()) emptyList() else out.lines()
+        konst outLines = if (out.isEmpty()) emptyList() else out.lines()
         Assert.assertEquals(
             "Expecting pattern:\n  ${expectedAllOutPatterns.joinToString("\n  ")}\nGot:\n  ${outLines.joinToString("\n  ")}",
             expectedAllOutPatterns.size, outLines.size
@@ -189,9 +189,9 @@ fun runWithK2JVMCompiler(
             )
         }
         if (expectedSomeErrPatterns != null) {
-            val errLines = err.lines()
+            konst errLines = err.lines()
             for (expectedPattern in expectedSomeErrPatterns) {
-                val re = Regex(expectedPattern)
+                konst re = Regex(expectedPattern)
                 Assert.assertTrue(
                     "Expected pattern \"$expectedPattern\" is not found in the stderr:\n${errLines.joinToString("\n")}",
                     errLines.any { re.find(it) != null }
@@ -207,13 +207,13 @@ fun runWithK2JVMCompiler(
 }
 
 internal fun <T> captureOutErrRet(body: () -> T): Triple<String, String, T> {
-    val outStream = ByteArrayOutputStream()
-    val errStream = ByteArrayOutputStream()
-    val prevOut = System.out
-    val prevErr = System.err
+    konst outStream = ByteArrayOutputStream()
+    konst errStream = ByteArrayOutputStream()
+    konst prevOut = System.out
+    konst prevErr = System.err
     System.setOut(PrintStream(outStream))
     System.setErr(PrintStream(errStream))
-    val ret = try {
+    konst ret = try {
         body()
     } finally {
         System.out.flush()
@@ -225,7 +225,7 @@ internal fun <T> captureOutErrRet(body: () -> T): Triple<String, String, T> {
 }
 
 internal fun <R> withTempDir(keyName: String = "tmp", body: (File) -> R): R {
-    val tempDir = Files.createTempDirectory(keyName).toFile()
+    konst tempDir = Files.createTempDirectory(keyName).toFile()
     try {
         return body(tempDir)
     } finally {
@@ -234,7 +234,7 @@ internal fun <R> withTempDir(keyName: String = "tmp", body: (File) -> R): R {
 }
 
 internal fun <R> withDisposable(body: (Disposable) -> R) {
-    val disposable = Disposer.newDisposable()
+    konst disposable = Disposer.newDisposable()
     try {
         body(disposable)
     } finally {

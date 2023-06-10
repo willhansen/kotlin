@@ -28,7 +28,7 @@ KtFile: recovery.kt
               <empty list>
             PsiElement(RBRACKET)(']')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')

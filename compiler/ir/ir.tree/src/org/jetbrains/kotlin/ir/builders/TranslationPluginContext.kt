@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.ir.util.ReferenceSymbolTable
 import org.jetbrains.kotlin.ir.util.TypeTranslator
 
 interface TranslationPluginContext : IrGeneratorContext {
-    val moduleDescriptor: ModuleDescriptor
-    val symbolTable: ReferenceSymbolTable
-    val typeTranslator: TypeTranslator
+    konst moduleDescriptor: ModuleDescriptor
+    konst symbolTable: ReferenceSymbolTable
+    konst typeTranslator: TypeTranslator
 }

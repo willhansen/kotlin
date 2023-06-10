@@ -59,24 +59,24 @@ fun Project.applyKotlinAndroidPlugin() {
 }
 
 fun Project.kotlin(code: KotlinMultiplatformExtension.() -> Unit) {
-    val kotlin = project.kotlinExtension as KotlinMultiplatformExtension
+    konst kotlin = project.kotlinExtension as KotlinMultiplatformExtension
     kotlin.code()
 }
 
 fun Project.androidLibrary(code: LibraryExtension.() -> Unit) {
     plugins.findPlugin("com.android.library") ?: plugins.apply("com.android.library")
-    val androidExtension = project.extensions.getByName("android") as LibraryExtension
+    konst androidExtension = project.extensions.getByName("android") as LibraryExtension
     androidExtension.code()
 }
 
 fun Project.androidApplication(code: ApplicationExtension.() -> Unit) {
     plugins.findPlugin("com.android.application") ?: plugins.apply("com.android.application")
-    val androidExtension = project.extensions.getByName("android") as ApplicationExtension
+    konst androidExtension = project.extensions.getByName("android") as ApplicationExtension
     androidExtension.code()
 }
 
 fun Project.projectModel(code: KotlinPm20ProjectExtension.() -> Unit) {
-    val extension = project.extensions.getByType(KotlinPm20ProjectExtension::class.java)
+    konst extension = project.extensions.getByType(KotlinPm20ProjectExtension::class.java)
     extension.code()
 }
 
@@ -87,7 +87,7 @@ fun Project.applyMultiplatformPlugin(): KotlinMultiplatformExtension {
     return extensions.getByName("kotlin") as KotlinMultiplatformExtension
 }
 
-val Project.propertiesExtension: ExtraPropertiesExtension
+konst Project.propertiesExtension: ExtraPropertiesExtension
     get() = extensions.getByType(ExtraPropertiesExtension::class.java)
 
 fun Project.enableGranularSourceSetsMetadata() {

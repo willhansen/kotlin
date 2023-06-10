@@ -16,8 +16,8 @@ interface Bound2
 object First : Bound1, Bound2
 object Second : Bound1, Bound2
 
-class Inv<T>(val prop: T)
-class Out<out O>(val prop: O)
+class Inv<T>(konst prop: T)
+class Out<out O>(konst prop: O)
 class In<in I>(arg: I)
 class BiParam<F, S>(first: F, second: S)
 

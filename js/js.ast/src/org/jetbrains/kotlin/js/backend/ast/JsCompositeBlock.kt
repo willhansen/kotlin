@@ -19,8 +19,8 @@ class JsCompositeBlock : JsBlock {
     }
 
     override fun deepCopy(): JsCompositeBlock {
-        val globalBlockCopy = JsCompositeBlock()
-        val statementscopy = AstUtil.deepCopy(statements);
+        konst globalBlockCopy = JsCompositeBlock()
+        konst statementscopy = AstUtil.deepCopy(statements);
         globalBlockCopy.statements.addAll(statementscopy);
         return globalBlockCopy.withMetadataFrom(this);
     }

@@ -8,7 +8,7 @@ object ExtProvider {
 fun box(): String {
     with (ExtProvider) {
         var x = 0L
-        val y = x[0]++
+        konst y = x[0]++
         return if (y == 0L) "OK" else "Failed, y=$y"
     }
 }

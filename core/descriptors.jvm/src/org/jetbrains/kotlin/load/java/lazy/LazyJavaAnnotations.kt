@@ -24,11 +24,11 @@ import org.jetbrains.kotlin.load.java.structure.JavaAnnotationOwner
 import org.jetbrains.kotlin.name.FqName
 
 class LazyJavaAnnotations(
-    private val c: LazyJavaResolverContext,
-    private val annotationOwner: JavaAnnotationOwner,
-    private val areAnnotationsFreshlySupported: Boolean = false
+    private konst c: LazyJavaResolverContext,
+    private konst annotationOwner: JavaAnnotationOwner,
+    private konst areAnnotationsFreshlySupported: Boolean = false
 ) : Annotations {
-    private val annotationDescriptors = c.components.storageManager.createMemoizedFunctionWithNullableValues { annotation: JavaAnnotation ->
+    private konst annotationDescriptors = c.components.storageManager.createMemoizedFunctionWithNullableValues { annotation: JavaAnnotation ->
         JavaAnnotationMapper.mapOrResolveJavaAnnotation(annotation, c, areAnnotationsFreshlySupported)
     }
 

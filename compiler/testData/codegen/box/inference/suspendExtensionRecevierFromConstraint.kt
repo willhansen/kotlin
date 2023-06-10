@@ -5,7 +5,7 @@ typealias SuspendExtensionFunction = suspend ExtensionReceiver.() -> Unit
 suspend fun ExtensionReceiver.extensionMethod() {}
 
 fun test() {
-    val map = mutableMapOf<Unit, SuspendExtensionFunction>()
+    konst map = mutableMapOf<Unit, SuspendExtensionFunction>()
 
     map[Unit] = {
         extensionMethod()

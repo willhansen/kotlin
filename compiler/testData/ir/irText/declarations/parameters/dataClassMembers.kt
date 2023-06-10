@@ -1,1 +1,1 @@
-data class Test<T>(val x: T, val y: String = "")
+data class Test<T>(konst x: T, konst y: String = "")

@@ -18,17 +18,17 @@ import org.jetbrains.kotlin.fir.types.FirTypeRef
 import java.io.File
 
 fun main(args: Array<String>) {
-    val arguments = args.toList()
-    val generationPath = arguments.firstOrNull()?.let { File(it) } ?: File("compiler/fir/checkers/gen").absoluteFile
+    konst arguments = args.toList()
+    konst generationPath = arguments.firstOrNull()?.let { File(it) } ?: File("compiler/fir/checkers/gen").absoluteFile
 
-    val basePackage = "org.jetbrains.kotlin.fir.analysis"
+    konst basePackage = "org.jetbrains.kotlin.fir.analysis"
 
-    val typePackage = "$basePackage.checkers.type"
+    konst typePackage = "$basePackage.checkers.type"
     generateCheckersComponents(generationPath, typePackage, "FirTypeChecker") {
         alias<FirTypeRef>("TypeRefChecker")
     }
 
-    val expressionPackage = "$basePackage.checkers.expression"
+    konst expressionPackage = "$basePackage.checkers.expression"
     generateCheckersComponents(generationPath, expressionPackage, "FirExpressionChecker") {
         alias<FirStatement>("BasicExpressionChecker")
         alias<FirQualifiedAccessExpression>("QualifiedAccessExpressionChecker")
@@ -65,7 +65,7 @@ fun main(args: Array<String>) {
         alias<FirInaccessibleReceiverExpression>("InaccessibleReceiverChecker")
     }
 
-    val declarationPackage = "$basePackage.checkers.declaration"
+    konst declarationPackage = "$basePackage.checkers.declaration"
     generateCheckersComponents(generationPath, declarationPackage, "FirDeclarationChecker") {
         alias<FirDeclaration>("BasicDeclarationChecker")
         alias<FirCallableDeclaration>("CallableDeclarationChecker")
@@ -98,10 +98,10 @@ fun main(args: Array<String>) {
         )
     }
 
-    val jvmGenerationPath = File(arguments.getOrElse(1) { "compiler/fir/checkers/checkers.jvm/gen" })
-    val jsGenerationPath = File(arguments.getOrElse(2) { "compiler/fir/checkers/checkers.js/gen" })
-    val nativeGenerationPath = File(arguments.getOrElse(3) { "compiler/fir/checkers/checkers.native/gen" })
-    val rawFirGenerationPath = File("compiler/fir/raw-fir/raw-fir.common/gen")
+    konst jvmGenerationPath = File(arguments.getOrElse(1) { "compiler/fir/checkers/checkers.jvm/gen" })
+    konst jsGenerationPath = File(arguments.getOrElse(2) { "compiler/fir/checkers/checkers.js/gen" })
+    konst nativeGenerationPath = File(arguments.getOrElse(3) { "compiler/fir/checkers/checkers.native/gen" })
+    konst rawFirGenerationPath = File("compiler/fir/raw-fir/raw-fir.common/gen")
 
     generateDiagnostics(generationPath, "$basePackage.diagnostics", DIAGNOSTICS_LIST, starImportsToAdd = setOf(ErrorListDiagnosticListRenderer.BASE_PACKAGE, ErrorListDiagnosticListRenderer.DIAGNOSTICS_PACKAGE))
     generateDiagnostics(jvmGenerationPath, "$basePackage.diagnostics.jvm", JVM_DIAGNOSTICS_LIST, starImportsToAdd = setOf(ErrorListDiagnosticListRenderer.BASE_PACKAGE, ErrorListDiagnosticListRenderer.DIAGNOSTICS_PACKAGE))

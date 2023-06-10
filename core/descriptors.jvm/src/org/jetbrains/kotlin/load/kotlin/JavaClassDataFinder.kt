@@ -22,11 +22,11 @@ import org.jetbrains.kotlin.serialization.deserialization.ClassDataFinder
 import org.jetbrains.kotlin.utils.jvmMetadataVersionOrDefault
 
 class JavaClassDataFinder(
-    internal val kotlinClassFinder: KotlinClassFinder,
-    private val deserializedDescriptorResolver: DeserializedDescriptorResolver
+    internal konst kotlinClassFinder: KotlinClassFinder,
+    private konst deserializedDescriptorResolver: DeserializedDescriptorResolver
 ) : ClassDataFinder {
     override fun findClassData(classId: ClassId): ClassData? {
-        val kotlinClass = kotlinClassFinder.findKotlinClass(
+        konst kotlinClass = kotlinClassFinder.findKotlinClass(
             classId, deserializedDescriptorResolver.components.configuration.jvmMetadataVersionOrDefault()
         ) ?: return null
         assert(kotlinClass.classId == classId) {

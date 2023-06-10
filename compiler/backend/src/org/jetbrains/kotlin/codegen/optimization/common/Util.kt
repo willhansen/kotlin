@@ -25,14 +25,14 @@ import org.jetbrains.org.objectweb.asm.Opcodes.*
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.tree.*
 
-val AbstractInsnNode.isMeaningful: Boolean
+konst AbstractInsnNode.isMeaningful: Boolean
     get() =
         when (this.type) {
             AbstractInsnNode.LABEL, AbstractInsnNode.LINE, AbstractInsnNode.FRAME -> false
             else -> true
         }
 
-val AbstractInsnNode.isBranchOrCall: Boolean
+konst AbstractInsnNode.isBranchOrCall: Boolean
     get() =
         when (this.type) {
             AbstractInsnNode.JUMP_INSN,
@@ -42,14 +42,14 @@ val AbstractInsnNode.isBranchOrCall: Boolean
             else -> false
         }
 
-class InsnSequence(val from: AbstractInsnNode, val to: AbstractInsnNode?) : Sequence<AbstractInsnNode> {
+class InsnSequence(konst from: AbstractInsnNode, konst to: AbstractInsnNode?) : Sequence<AbstractInsnNode> {
     constructor(insnList: InsnList) : this(insnList.first, null)
 
     override fun iterator(): Iterator<AbstractInsnNode> {
         return object : Iterator<AbstractInsnNode> {
             var current: AbstractInsnNode? = from
             override fun next(): AbstractInsnNode {
-                val result = current
+                konst result = current
                 current = current!!.next
                 return result!!
             }
@@ -75,7 +75,7 @@ fun MethodNode.prepareForEmitting() {
     // because they point to index of non-existing instruction and it leads to VerifyError
     var current = instructions.last
     while (!current.isMeaningful) {
-        val prev = current.previous
+        konst prev = current.previous
 
         if (current.type == AbstractInsnNode.LINE) {
             instructions.remove(current)
@@ -120,12 +120,12 @@ fun MethodNode.removeEmptyCatchBlocks() {
 }
 
 fun MethodNode.removeUnusedLocalVariables() {
-    val used = BooleanArray(maxLocals) { false }
+    konst used = BooleanArray(maxLocals) { false }
 
     // Arguments are always used whether or not they are in the local variable table
     // or used by instructions.
     var argumentIndex = 0
-    val isStatic = (access and ACC_STATIC) != 0
+    konst isStatic = (access and ACC_STATIC) != 0
     if (!isStatic) {
         used[argumentIndex++] = true
     }
@@ -138,7 +138,7 @@ fun MethodNode.removeUnusedLocalVariables() {
     for (insn in instructions) {
         when (insn) {
             is VarInsnNode -> {
-                val varIndex = insn.`var`
+                konst varIndex = insn.`var`
                 used[varIndex] = true
                 if (insn.isSize2LoadStoreOperation()) {
                     used[varIndex + 1] = true
@@ -149,9 +149,9 @@ fun MethodNode.removeUnusedLocalVariables() {
         }
     }
     for (localVar in localVariables) {
-        val varIndex = localVar.index
+        konst varIndex = localVar.index
         used[varIndex] = true
-        val type = Type.getType(localVar.desc)
+        konst type = Type.getType(localVar.desc)
         if (type.size == 2) {
             used[varIndex + 1] = true
         }
@@ -159,7 +159,7 @@ fun MethodNode.removeUnusedLocalVariables() {
 
     if (used.all { it }) return
 
-    val remapping = IntArray(maxLocals) { 0 }
+    konst remapping = IntArray(maxLocals) { 0 }
     var lastUnused = 0
     for (i in remapping.indices) {
         remapping[i] = lastUnused
@@ -221,7 +221,7 @@ fun AbstractInsnNode.hasOpcode(): Boolean =
 //           mv.visitLdcInsn(new Integer(cst));
 //       }
 //   }
-val AbstractInsnNode.intConstant: Int?
+konst AbstractInsnNode.intConstant: Int?
     get() =
         when (opcode) {
             in ICONST_M1..ICONST_5 -> opcode - ICONST_0
@@ -235,7 +235,7 @@ fun insnListOf(vararg insns: AbstractInsnNode) = InsnList().apply { insns.forEac
 fun AbstractInsnNode.isStoreOperation(): Boolean = opcode in ISTORE..ASTORE
 fun AbstractInsnNode.isLoadOperation(): Boolean = opcode in ILOAD..ALOAD
 
-val AbstractInsnNode?.debugText
+konst AbstractInsnNode?.debugText
     get() =
         if (this == null) "<null>" else "${this::class.java.simpleName}: $insnText"
 

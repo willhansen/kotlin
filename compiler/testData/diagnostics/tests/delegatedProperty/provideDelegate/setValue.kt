@@ -3,7 +3,7 @@
 class Delegate<T>
 
 operator fun Delegate<*>.getValue(receiver: Any?, p: Any): String = ""
-operator fun <T> Delegate<T>.setValue(receiver: Any?, p: Any, value: T) {}
+operator fun <T> Delegate<T>.setValue(receiver: Any?, p: Any, konstue: T) {}
 
 operator fun <T> String.provideDelegate(receiver: Any?, p: Any) = Delegate<T>()
 

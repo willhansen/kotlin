@@ -21,7 +21,7 @@ fun test(c: Counter, ex: Exception): Unit = js("""
 """)
 
 fun box(): String {
-    val c = Counter()
+    konst c = Counter()
     test(c, NullPointerException())
     assertEquals(2, c.count)
 

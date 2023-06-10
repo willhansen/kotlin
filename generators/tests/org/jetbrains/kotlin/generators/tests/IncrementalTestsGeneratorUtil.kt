@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.test.TargetBackend
 
 class IncrementalTestsGeneratorUtil {
     companion object {
-        enum class IcTestTypes(val folderName: String) {
+        enum class IcTestTypes(konst folderName: String) {
             ALL("all"),
             PURE_KOTLIN("pureKotlin"),
             CLASS_HIERARCHY_AFFECTED("classHierarchyAffected"),
@@ -27,7 +27,7 @@ class IncrementalTestsGeneratorUtil {
             targetBackend: TargetBackend,
             folderToExcludePatternMap: Map<IcTestTypes, String>? = null
         ): TestGroup.TestClass.() -> Unit = {
-            val excludeForAllTestData = folderToExcludePatternMap?.get(ALL)
+            konst excludeForAllTestData = folderToExcludePatternMap?.get(ALL)
             model(
                 "incremental/${PURE_KOTLIN.folderName}",
                 extension = null,

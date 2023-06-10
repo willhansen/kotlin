@@ -3,7 +3,7 @@
 fun <K> materialize(): K = null!!
 
 fun test_1() {
-    val x = if (true) {
+    konst x = if (true) {
         run { materialize() }
     } else {
         ""
@@ -11,7 +11,7 @@ fun test_1() {
 }
 
 fun test_2() {
-    val x = try {
+    konst x = try {
         run {
             materialize()
         }
@@ -21,5 +21,5 @@ fun test_2() {
 }
 
 fun test_3() {
-    val x: String = run { materialize() }!!
+    konst x: String = run { materialize() }!!
 }

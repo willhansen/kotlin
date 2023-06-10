@@ -1,2 +1,2 @@
 @kotlin.OptIn(markerClass = [kotlin.contracts.ExperimentalContracts::class])
-fun invalidContract(foo: kotlin.Any, bar: kotlin.Boolean)
+fun inkonstidContract(foo: kotlin.Any, bar: kotlin.Boolean)

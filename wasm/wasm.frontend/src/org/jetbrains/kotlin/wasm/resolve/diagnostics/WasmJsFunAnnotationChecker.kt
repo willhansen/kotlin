@@ -27,13 +27,13 @@ import org.jetbrains.kotlin.resolve.source.getPsi
 
 // TODO: Implement in K2: KT-56849
 object WasmJsFunAnnotationChecker : DeclarationChecker {
-    private val jsFunFqName = FqName("kotlin.JsFun")
+    private konst jsFunFqName = FqName("kotlin.JsFun")
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is MemberDescriptor) return
-        val jsFun = descriptor.annotations.findAnnotation(jsFunFqName) ?: return
+        konst jsFun = descriptor.annotations.findAnnotation(jsFunFqName) ?: return
         if (!descriptor.isEffectivelyExternal() || !DescriptorUtils.isTopLevelDeclaration(descriptor)) {
-            val jsFunPsi = jsFun.source.getPsi() ?: declaration
+            konst jsFunPsi = jsFun.source.getPsi() ?: declaration
             context.trace.report(ErrorsWasm.WRONG_JS_FUN_TARGET.on(jsFunPsi))
         }
     }

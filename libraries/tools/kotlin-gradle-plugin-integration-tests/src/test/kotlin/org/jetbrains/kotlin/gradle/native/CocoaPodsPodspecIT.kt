@@ -17,8 +17,8 @@ import kotlin.test.assertEquals
 @NativeGradlePluginTests
 class CocoaPodsPodspecIT : KGPBaseTest() {
 
-    private val cocoapodsSingleKtPod = "native-cocoapods-single"
-    private val cocoapodsMultipleKtPods = "native-cocoapods-multiple"
+    private konst cocoapodsSingleKtPod = "native-cocoapods-single"
+    private konst cocoapodsMultipleKtPods = "native-cocoapods-multiple"
 
     @DisplayName("Build project with a single podspec")
     @GradleTest
@@ -83,10 +83,10 @@ class CocoaPodsPodspecIT : KGPBaseTest() {
                     assertTasksExecuted(":$subproject:podspec")
 
                     // Check that the podspec file is correctly generated.
-                    val podspecFileName = "$subproject/${subproject.normalizeCocoapadsFrameworkName}.podspec"
+                    konst podspecFileName = "$subproject/${subproject.normalizeCocoapadsFrameworkName}.podspec"
 
                     assertFileInProjectExists(podspecFileName)
-                    val actualPodspecContentWithoutBlankLines = projectPath.resolve(podspecFileName).readText()
+                    konst actualPodspecContentWithoutBlankLines = projectPath.resolve(podspecFileName).readText()
                         .lineSequence()
                         .filter { it.isNotBlank() }
                         .joinToString("\n")

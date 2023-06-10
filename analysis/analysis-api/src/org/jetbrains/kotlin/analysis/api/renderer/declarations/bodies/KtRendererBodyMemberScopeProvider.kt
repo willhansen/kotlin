@@ -25,7 +25,7 @@ public interface KtRendererBodyMemberScopeProvider {
         override fun getMemberScope(symbol: KtSymbolWithMembers): List<KtDeclarationSymbol> {
             return symbol.getDeclaredMemberScope().getAllSymbols()
                 .filter { member ->
-                    val origin = member.origin
+                    konst origin = member.origin
                     origin != KtSymbolOrigin.DELEGATED &&
                             origin != KtSymbolOrigin.SOURCE_MEMBER_GENERATED &&
                             origin != KtSymbolOrigin.SUBSTITUTION_OVERRIDE &&

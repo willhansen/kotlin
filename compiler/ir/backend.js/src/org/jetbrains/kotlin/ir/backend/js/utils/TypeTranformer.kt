@@ -16,13 +16,13 @@ import org.jetbrains.kotlin.ir.util.defaultType
 fun IrType.eraseGenerics(irBuiltIns: IrBuiltIns): IrType {
     if (this is IrDynamicType) return this
     if (this is IrErrorType) return this
-    val defaultType = this.erasedUpperBound?.defaultType ?: irBuiltIns.anyType
+    konst defaultType = this.erasedUpperBound?.defaultType ?: irBuiltIns.anyType
     if (!this.isNullable()) return defaultType
     return defaultType.makeNullable()
 }
 
 // Return null if upper bound is Any
-private val IrTypeParameter.erasedUpperBound: IrClass?
+private konst IrTypeParameter.erasedUpperBound: IrClass?
     get() {
         // Pick the (necessarily unique) non-interface upper bound if it exists
         for (type in superTypes) {
@@ -32,9 +32,9 @@ private val IrTypeParameter.erasedUpperBound: IrClass?
         return null
     }
 
-val IrType.erasedUpperBound: IrClass?
+konst IrType.erasedUpperBound: IrClass?
     get() =
-        when (val classifier = classifierOrNull) {
+        when (konst classifier = classifierOrNull) {
             is IrClassSymbol -> classifier.owner
             is IrTypeParameterSymbol -> classifier.owner.erasedUpperBound
             else -> throw IllegalStateException()

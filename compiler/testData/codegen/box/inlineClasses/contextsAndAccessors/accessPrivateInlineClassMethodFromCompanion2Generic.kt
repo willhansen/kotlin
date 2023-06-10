@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R<T: Long>(private val r: T) {
+konstue class R<T: Long>(private konst r: T) {
     private fun ok() = "OK"
 
     companion object {

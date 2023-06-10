@@ -31,50 +31,50 @@ import java.io.File
 open class PodspecTask : DefaultTask() {
 
     @get:Input
-    internal val specName = project.objects.property(String::class.java)
+    internal konst specName = project.objects.property(String::class.java)
 
     @get:Internal
-    internal val outputDir = project.objects.property(File::class.java)
+    internal konst outputDir = project.objects.property(File::class.java)
 
     @get:OutputFile
-    val outputFile: File
+    konst outputFile: File
         get() = outputDir.get().resolve("${specName.get()}.podspec")
 
     @get:Input
     internal lateinit var needPodspec: Provider<Boolean>
 
     @get:Nested
-    val pods = project.objects.listProperty(CocoapodsDependency::class.java)
+    konst pods = project.objects.listProperty(CocoapodsDependency::class.java)
 
     @get:Input
-    internal val version = project.objects.property(String::class.java)
+    internal konst version = project.objects.property(String::class.java)
 
     @get:Input
-    internal val publishing = project.objects.property(Boolean::class.java)
-
-    @get:Input
-    @get:Optional
-    internal val source = project.objects.property(String::class.java)
+    internal konst publishing = project.objects.property(Boolean::class.java)
 
     @get:Input
     @get:Optional
-    internal val homepage = project.objects.property(String::class.java)
+    internal konst source = project.objects.property(String::class.java)
 
     @get:Input
     @get:Optional
-    internal val license = project.objects.property(String::class.java)
+    internal konst homepage = project.objects.property(String::class.java)
 
     @get:Input
     @get:Optional
-    internal val authors = project.objects.property(String::class.java)
+    internal konst license = project.objects.property(String::class.java)
 
     @get:Input
     @get:Optional
-    internal val summary = project.objects.property(String::class.java)
+    internal konst authors = project.objects.property(String::class.java)
 
     @get:Input
     @get:Optional
-    internal val extraSpecAttributes = project.objects.mapProperty(String::class.java, String::class.java)
+    internal konst summary = project.objects.property(String::class.java)
+
+    @get:Input
+    @get:Optional
+    internal konst extraSpecAttributes = project.objects.mapProperty(String::class.java, String::class.java)
 
     @get:Input
     internal lateinit var frameworkName: Provider<String>
@@ -107,7 +107,7 @@ open class PodspecTask : DefaultTask() {
             """.trimIndent()
         }
 
-        val gradleWrapper = (project.rootProject.tasks.getByName("wrapper") as? Wrapper)?.scriptFile
+        konst gradleWrapper = (project.rootProject.tasks.getByName("wrapper") as? Wrapper)?.scriptFile
         require(gradleWrapper != null && gradleWrapper.exists()) {
             """
             The Gradle wrapper is required to run the build from Xcode.
@@ -118,24 +118,24 @@ open class PodspecTask : DefaultTask() {
             """.trimIndent()
         }
 
-        val deploymentTargets = run {
+        konst deploymentTargets = run {
             listOf(ios, osx, tvos, watchos).map { it.get() }.filter { it.deploymentTarget != null }.joinToString("\n") {
                 if (extraSpecAttributes.get().containsKey("${it.name}.deployment_target")) "" else "|    spec.${it.name}.deployment_target = '${it.deploymentTarget}'"
             }
         }
 
-        val dependencies = pods.get().map { pod ->
-            val versionSuffix = if (pod.version != null) ", '${pod.version}'" else ""
+        konst dependencies = pods.get().map { pod ->
+            konst versionSuffix = if (pod.version != null) ", '${pod.version}'" else ""
             "|    spec.dependency '${pod.name}'$versionSuffix"
         }.joinToString(separator = "\n")
 
-        val frameworkDir = project.cocoapodsBuildDirs.framework.relativeTo(outputFile.parentFile)
-        val vendoredFramework = if (publishing.get()) "${frameworkName.get()}.xcframework" else frameworkDir.resolve("${frameworkName.get()}.framework").invariantSeparatorsPath
-        val vendoredFrameworks = if (extraSpecAttributes.get().containsKey("vendored_frameworks")) "" else "|    spec.vendored_frameworks      = '$vendoredFramework'"
+        konst frameworkDir = project.cocoapodsBuildDirs.framework.relativeTo(outputFile.parentFile)
+        konst vendoredFramework = if (publishing.get()) "${frameworkName.get()}.xcframework" else frameworkDir.resolve("${frameworkName.get()}.framework").invariantSeparatorsPath
+        konst vendoredFrameworks = if (extraSpecAttributes.get().containsKey("vendored_frameworks")) "" else "|    spec.vendored_frameworks      = '$vendoredFramework'"
 
-        val libraries = if (extraSpecAttributes.get().containsKey("libraries")) "" else "|    spec.libraries                = 'c++'"
+        konst libraries = if (extraSpecAttributes.get().containsKey("libraries")) "" else "|    spec.libraries                = 'c++'"
 
-        val xcConfig = if (publishing.get() || extraSpecAttributes.get().containsKey("pod_target_xcconfig")) "" else
+        konst xcConfig = if (publishing.get() || extraSpecAttributes.get().containsKey("pod_target_xcconfig")) "" else
             """ |
                 |    spec.pod_target_xcconfig = {
                 |        'KOTLIN_PROJECT_PATH' => '${if (project.depth != 0) project.path else ""}',
@@ -143,8 +143,8 @@ open class PodspecTask : DefaultTask() {
                 |    }
             """.trimMargin()
 
-        val gradleCommand = "\$REPO_ROOT/${gradleWrapper.relativeTo(project.projectDir).invariantSeparatorsPath}"
-        val scriptPhase = if (publishing.get() || extraSpecAttributes.get().containsKey("script_phases")) "" else
+        konst gradleCommand = "\$REPO_ROOT/${gradleWrapper.relativeTo(project.projectDir).invariantSeparatorsPath}"
+        konst scriptPhase = if (publishing.get() || extraSpecAttributes.get().containsKey("script_phases")) "" else
             """ |
                 |    spec.script_phases = [
                 |        {
@@ -167,7 +167,7 @@ open class PodspecTask : DefaultTask() {
                 |    ]
         """.trimMargin()
 
-        val customSpec = extraSpecAttributes.get().map { "|    spec.${it.key} = ${it.value}" }.joinToString("\n")
+        konst customSpec = extraSpecAttributes.get().map { "|    spec.${it.key} = ${it.konstue}" }.joinToString("\n")
 
         with(outputFile) {
             writeText(
@@ -212,7 +212,7 @@ open class PodspecTask : DefaultTask() {
         if (startsWith("{") || startsWith("<<-") || startsWith("'")) this else "'$this'"
 
     companion object {
-        private val KotlinMultiplatformExtension?.cocoapodsExtensionOrNull: CocoapodsExtension?
+        private konst KotlinMultiplatformExtension?.cocoapodsExtensionOrNull: CocoapodsExtension?
             get() = (this as? ExtensionAware)?.extensions?.findByName(COCOAPODS_EXTENSION_NAME) as? CocoapodsExtension
 
         private fun hasPodfileOwnOrParent(project: Project): Boolean =

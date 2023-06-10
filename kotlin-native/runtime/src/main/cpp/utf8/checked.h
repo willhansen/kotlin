@@ -38,27 +38,27 @@ namespace utf8
     };
 
     // Exceptions that may be thrown from the library functions.
-    class invalid_code_point : public exception {
+    class inkonstid_code_point : public exception {
         uint32_t cp;
     public:
-        invalid_code_point(uint32_t cp) : cp(cp) {}
-        virtual const char* what() const throw() { return "Invalid code point"; }
+        inkonstid_code_point(uint32_t cp) : cp(cp) {}
+        virtual const char* what() const throw() { return "Inkonstid code point"; }
         uint32_t code_point() const {return cp;}
     };
 
-    class invalid_utf8 : public exception {
+    class inkonstid_utf8 : public exception {
         uint8_t u8;
     public:
-        invalid_utf8 (uint8_t u) : u8(u) {}
-        virtual const char* what() const throw() { return "Invalid UTF-8"; }
+        inkonstid_utf8 (uint8_t u) : u8(u) {}
+        virtual const char* what() const throw() { return "Inkonstid UTF-8"; }
         uint8_t utf8_octet() const {return u8;}
     };
 
-    class invalid_utf16 : public exception {
+    class inkonstid_utf16 : public exception {
         uint16_t u16;
     public:
-        invalid_utf16 (uint16_t u) : u16(u) {}
-        virtual const char* what() const throw() { return "Invalid UTF-16"; }
+        inkonstid_utf16 (uint16_t u) : u16(u) {}
+        virtual const char* what() const throw() { return "Inkonstid UTF-16"; }
         uint16_t utf16_word() const {return u16;}
     };
 
@@ -72,8 +72,8 @@ namespace utf8
     template <typename octet_iterator>
     octet_iterator append(uint32_t cp, octet_iterator result)
     {
-        if (!utf8::internal::is_code_point_valid(cp))
-            throw invalid_code_point(cp);
+        if (!utf8::internal::is_code_point_konstid(cp))
+            throw inkonstid_code_point(cp);
 
         if (cp < 0x80)                        // one octet
             *(result++) = static_cast<uint8_t>(cp);
@@ -96,11 +96,11 @@ namespace utf8
     }
 
     template <typename octet_iterator, typename output_iterator>
-    output_iterator replace_invalid(octet_iterator start, octet_iterator end, output_iterator out, uint32_t replacement)
+    output_iterator replace_inkonstid(octet_iterator start, octet_iterator end, output_iterator out, uint32_t replacement)
     {
         while (start != end) {
             octet_iterator sequence_start = start;
-            internal::utf_error err_code = utf8::internal::validate_next(start, end);
+            internal::utf_error err_code = utf8::internal::konstidate_next(start, end);
             switch (err_code) {
                 case internal::UTF8_OK :
                     for (octet_iterator it = sequence_start; it != start; ++it)
@@ -127,17 +127,17 @@ namespace utf8
     }
 
     template <typename octet_iterator, typename output_iterator>
-    inline output_iterator replace_invalid(octet_iterator start, octet_iterator end, output_iterator out)
+    inline output_iterator replace_inkonstid(octet_iterator start, octet_iterator end, output_iterator out)
     {
         static const uint32_t replacement_marker = utf8::internal::mask16(0xfffd);
-        return utf8::replace_invalid(start, end, out, replacement_marker);
+        return utf8::replace_inkonstid(start, end, out, replacement_marker);
     }
 
     template <typename octet_iterator>
     uint32_t next(octet_iterator& it, octet_iterator end)
     {
         uint32_t cp = 0;
-        internal::utf_error err_code = utf8::internal::validate_next(it, end, cp);
+        internal::utf_error err_code = utf8::internal::konstidate_next(it, end, cp);
         switch (err_code) {
             case internal::UTF8_OK :
                 break;
@@ -146,9 +146,9 @@ namespace utf8
             case internal::INVALID_LEAD :
             case internal::INCOMPLETE_SEQUENCE :
             case internal::OVERLONG_SEQUENCE :
-                throw invalid_utf8(*it);
+                throw inkonstid_utf8(*it);
             case internal::INVALID_CODE_POINT :
-                throw invalid_code_point(cp);
+                throw inkonstid_code_point(cp);
         }
         return cp;
     }
@@ -170,7 +170,7 @@ namespace utf8
         // Go back until we hit either a lead octet or start
         while (utf8::internal::is_trail(*(--it)))
             if (it == start)
-                throw invalid_utf8(*it); // error - no lead byte in the sequence
+                throw inkonstid_utf8(*it); // error - no lead byte in the sequence
         return utf8::peek_next(it, end);
     }
 
@@ -181,7 +181,7 @@ namespace utf8
         octet_iterator end = it;
         while (utf8::internal::is_trail(*(--it)))
             if (it == pass_start)
-                throw invalid_utf8(*it); // error - no lead byte in the sequence
+                throw inkonstid_utf8(*it); // error - no lead byte in the sequence
         octet_iterator temp = it;
         return utf8::next(temp, end);
     }
@@ -195,7 +195,7 @@ namespace utf8
 
     /**
      * Calculates a count of characters needed to represent the string from first to last in UTF-16
-     * taking into account surrogate symbols. Throws an exception if the input is invalid.
+     * taking into account surrogate symbols. Throws an exception if the input is inkonstid.
      */
     template<typename octet_iterator>
     uint32_t utf16_length(octet_iterator first, octet_iterator last) {
@@ -229,15 +229,15 @@ namespace utf8
                     if (utf8::internal::is_trail_surrogate(trail_surrogate))
                         cp = (cp << 10) + trail_surrogate + internal::SURROGATE_OFFSET;
                     else
-                        throw invalid_utf16(static_cast<uint16_t>(trail_surrogate));
+                        throw inkonstid_utf16(static_cast<uint16_t>(trail_surrogate));
                 }
                 else
-                    throw invalid_utf16(static_cast<uint16_t>(cp));
+                    throw inkonstid_utf16(static_cast<uint16_t>(cp));
 
             }
             // Lone trail surrogate
             else if (utf8::internal::is_trail_surrogate(cp))
-                throw invalid_utf16(static_cast<uint16_t>(cp));
+                throw inkonstid_utf16(static_cast<uint16_t>(cp));
 
             result = utf8::append(cp, result);
         }
@@ -291,7 +291,7 @@ namespace utf8
                it(octet_it), range_start(range_start), range_end(range_end)
       {
           if (it < range_start || it > range_end)
-              throw std::out_of_range("Invalid utf-8 iterator position");
+              throw std::out_of_range("Inkonstid utf-8 iterator position");
       }
       // the default "big three" are OK
       octet_iterator base () const { return it; }

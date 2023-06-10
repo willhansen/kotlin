@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.incremental.storage
 import java.io.File
 
 open class RelativeFileToPathConverter(baseDirFile: File?) : FileToPathConverter {
-    private val baseDirPath = baseDirFile?.normalize()?.invariantSeparatorsPath
+    private konst baseDirPath = baseDirFile?.normalize()?.invariantSeparatorsPath
 
     override fun toPath(file: File): String {
-        val path = file.normalize().invariantSeparatorsPath
+        konst path = file.normalize().invariantSeparatorsPath
         return when {
             baseDirPath != null && path.startsWith(baseDirPath) ->
                 PROJECT_DIR_PLACEHOLDER + path.substring(baseDirPath.length)
@@ -22,13 +22,13 @@ open class RelativeFileToPathConverter(baseDirFile: File?) : FileToPathConverter
     override fun toFile(path: String): File =
         when {
             path.startsWith(PROJECT_DIR_PLACEHOLDER) -> {
-                val basePath = baseDirPath ?: error("Could not get project root dir")
+                konst basePath = baseDirPath ?: error("Could not get project root dir")
                 File(basePath + path.substring(PROJECT_DIR_PLACEHOLDER.length))
             }
             else -> File(path)
         }
 
     private companion object {
-        private const val PROJECT_DIR_PLACEHOLDER = "${'$'}PROJECT_DIR$"
+        private const konst PROJECT_DIR_PLACEHOLDER = "${'$'}PROJECT_DIR$"
     }
 }

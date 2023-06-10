@@ -11,10 +11,10 @@
 expect class C()
 
 @OptionalExpectation
-expect annotation class WithActual(val x: Int)
+expect annotation class WithActual(konst x: Int)
 
 @OptionalExpectation
-expect annotation class WithoutActual(val s: String)
+expect annotation class WithoutActual(konst s: String)
 
 expect fun k(): String
 
@@ -25,7 +25,7 @@ actual class C {
     fun o() = "O"
 }
 
-actual annotation class WithActual(actual val x: Int)
+actual annotation class WithActual(actual konst x: Int)
 
 actual fun k() = "K"
 

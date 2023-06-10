@@ -1,4 +1,4 @@
-/incorrectUsage.kt:18:5: error: val cannot be reassigned
+/incorrectUsage.kt:18:5: error: konst cannot be reassigned
     task.input = 42
     ^
 /incorrectUsage.kt:18:16: error: no applicable 'assign' function found for '=' overload
@@ -7,7 +7,7 @@
 /incorrectUsage.kt:18:18: error: the integer literal does not conform to the expected type StringProperty
     task.input = 42
                  ^
-/incorrectUsage.kt:24:9: error: val cannot be reassigned
+/incorrectUsage.kt:24:9: error: konst cannot be reassigned
         input = 42
         ^
 /incorrectUsage.kt:24:15: error: no applicable 'assign' function found for '=' overload

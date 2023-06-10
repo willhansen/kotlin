@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val value: Long)
+konstue class Z(konst konstue: Long)
 
 fun f(g: (
     z: Z,
@@ -17,7 +17,7 @@ fun f(g: (
 fun box(): String {
     var result = ""
     f { z, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ ->
-        result = if (z.value == 42L) "OK" else "FAIL"
+        result = if (z.konstue == 42L) "OK" else "FAIL"
     }
     return result
 }

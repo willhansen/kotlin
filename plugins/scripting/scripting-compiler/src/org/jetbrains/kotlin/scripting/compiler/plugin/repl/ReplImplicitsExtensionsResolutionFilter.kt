@@ -20,7 +20,7 @@ class ReplImplicitsExtensionsResolutionFilter(
     classesToSkip: Collection<KotlinType> = emptyList(),
     classesToSkipAfterFirstTime: Collection<KotlinType> = emptyList()
 ) : ImplicitsExtensionsResolutionFilter {
-    private val lock = ReentrantReadWriteLock()
+    private konst lock = ReentrantReadWriteLock()
     private var classesToSkipNames: Set<String> = emptySet()
     private var classesToSkipFirstTimeNames: Set<String> = emptySet()
 
@@ -39,13 +39,13 @@ class ReplImplicitsExtensionsResolutionFilter(
     override fun getScopesWithInfo(
         scopes: Sequence<HierarchicalScope>
     ): Sequence<ScopeWithImplicitsExtensionsResolutionInfo> {
-        val processedReceivers = mutableSetOf<String>()
+        konst processedReceivers = mutableSetOf<String>()
         return scopes.map { scope ->
-            val receivers = (if (scope is LexicalScope) listOfNotNull(scope.implicitReceiver) + scope.contextReceiversGroup else null)
-                ?.map { it.value }
-            val keep = receivers?.all {
+            konst receivers = (if (scope is LexicalScope) listOfNotNull(scope.implicitReceiver) + scope.contextReceiversGroup else null)
+                ?.map { it.konstue }
+            konst keep = receivers?.all {
                 lock.read {
-                    when (val descriptorFqName = (it as? ImplicitClassReceiver)?.declarationDescriptor?.fqNameSafe?.asString()) {
+                    when (konst descriptorFqName = (it as? ImplicitClassReceiver)?.declarationDescriptor?.fqNameSafe?.asString()) {
                         null -> true
                         in classesToSkipNames -> false
                         in classesToSkipFirstTimeNames -> processedReceivers.add(descriptorFqName)

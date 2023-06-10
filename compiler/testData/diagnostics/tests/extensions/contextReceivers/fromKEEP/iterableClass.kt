@@ -8,7 +8,7 @@ fun <C, T> C.iterator(any: Any?): Iterator<T> = this@IterableClass.invoke(this)
 fun <T> listOf(vararg items: T): List<T> = null!!
 
 fun test() {
-    val f: IterableClass<List<Int>, Int> = {
+    konst f: IterableClass<List<Int>, Int> = {
         it.listIterator()
     }
     with(f) {

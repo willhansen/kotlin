@@ -24,13 +24,13 @@ import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 internal class DelegatedLocalPropertyLValue(
-    private val context: IrGeneratorContext,
-    val startOffset: Int,
-    val endOffset: Int,
-    override val type: IrType,
-    private val getterSymbol: IrSimpleFunctionSymbol?,
-    private val setterSymbol: IrSimpleFunctionSymbol?,
-    val origin: IrStatementOrigin? = null
+    private konst context: IrGeneratorContext,
+    konst startOffset: Int,
+    konst endOffset: Int,
+    override konst type: IrType,
+    private konst getterSymbol: IrSimpleFunctionSymbol?,
+    private konst setterSymbol: IrSimpleFunctionSymbol?,
+    konst origin: IrStatementOrigin? = null
 ) :
     LValue,
     AssignmentReceiver {

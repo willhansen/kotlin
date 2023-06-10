@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.types.model.*
 // ----------------------------------- Type variable type -----------------------------------
 
 class ConeTypeVariableType(
-    override val nullability: ConeNullability,
-    override val lookupTag: ConeTypeVariableTypeConstructor,
-    override val attributes: ConeAttributes = ConeAttributes.Empty,
+    override konst nullability: ConeNullability,
+    override konst lookupTag: ConeTypeVariableTypeConstructor,
+    override konst attributes: ConeAttributes = ConeAttributes.Empty,
 ) : ConeLookupTagBasedType() {
-    override val typeArguments: Array<out ConeTypeProjection> get() = emptyArray()
+    override konst typeArguments: Array<out ConeTypeProjection> get() = emptyArray()
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is ConeTypeVariableType) return false
@@ -36,10 +36,10 @@ class ConeTypeVariableType(
 }
 
 class ConeTypeVariableTypeConstructor(
-    val debugName: String,
-    val originalTypeParameter: TypeParameterMarker?
+    konst debugName: String,
+    konst originalTypeParameter: TypeParameterMarker?
 ) : ConeClassifierLookupTag(), TypeVariableTypeConstructorMarker {
-    override val name: Name get() = Name.identifier(debugName)
+    override konst name: Name get() = Name.identifier(debugName)
 
     var isContainedInInvariantOrContravariantPositions: Boolean = false
         private set
@@ -52,18 +52,18 @@ class ConeTypeVariableTypeConstructor(
 // ----------------------------------- Stub types -----------------------------------
 
 data class ConeStubTypeConstructor(
-    val variable: ConeTypeVariable,
-    val isTypeVariableInSubtyping: Boolean,
-    val isForFixation: Boolean = false,
+    konst variable: ConeTypeVariable,
+    konst isTypeVariableInSubtyping: Boolean,
+    konst isForFixation: Boolean = false,
 ) : TypeConstructorMarker
 
-sealed class ConeStubType(val constructor: ConeStubTypeConstructor, override val nullability: ConeNullability) : StubTypeMarker,
+sealed class ConeStubType(konst constructor: ConeStubTypeConstructor, override konst nullability: ConeNullability) : StubTypeMarker,
     ConeSimpleKotlinType() {
 
-    override val typeArguments: Array<out ConeTypeProjection>
+    override konst typeArguments: Array<out ConeTypeProjection>
         get() = emptyArray()
 
-    override val attributes: ConeAttributes
+    override konst attributes: ConeAttributes
         get() = ConeAttributes.Empty
 
     override fun equals(other: Any?): Boolean {
@@ -116,8 +116,8 @@ class ConeStubTypeForTypeVariableInSubtyping(
 }
 
 open class ConeTypeVariable(name: String, originalTypeParameter: TypeParameterMarker? = null) : TypeVariableMarker {
-    val typeConstructor = ConeTypeVariableTypeConstructor(name, originalTypeParameter)
-    val defaultType = ConeTypeVariableType(ConeNullability.NOT_NULL, typeConstructor)
+    konst typeConstructor = ConeTypeVariableTypeConstructor(name, originalTypeParameter)
+    konst defaultType = ConeTypeVariableType(ConeNullability.NOT_NULL, typeConstructor)
 
     override fun toString(): String {
         return defaultType.toString()

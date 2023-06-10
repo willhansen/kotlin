@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.codegen.CallableMethod
 class ArrayGet : IntrinsicMethod() {
     override fun toCallable(method: CallableMethod): Callable =
             createIntrinsicCallable(method) {
-                val type = correctElementType(calcReceiverType())
+                konst type = correctElementType(calcReceiverType())
                 it.aload(type)
             }
 }

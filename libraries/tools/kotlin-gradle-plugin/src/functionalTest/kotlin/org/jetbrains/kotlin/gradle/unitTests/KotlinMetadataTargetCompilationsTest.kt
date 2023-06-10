@@ -20,8 +20,8 @@ import kotlin.test.fail
 class KotlinMetadataTargetCompilationsTest {
     @Test
     fun `test - metadata compilations created for shared source sets`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
 
         kotlin.jvm()
         kotlin.linuxX64()
@@ -29,8 +29,8 @@ class KotlinMetadataTargetCompilationsTest {
         kotlin.targetHierarchy.default()
 
         project.runLifecycleAwareTest {
-            val target = kotlin.metadata() as KotlinMetadataTarget
-            val metadataCompilations = target.awaitMetadataCompilationsCreated()
+            konst target = kotlin.metadata() as KotlinMetadataTarget
+            konst metadataCompilations = target.awaitMetadataCompilationsCreated()
             metadataCompilations.assertExists("commonMain")
             metadataCompilations.assertExists("nativeMain")
             metadataCompilations.assertExists("linuxMain")
@@ -43,14 +43,14 @@ class KotlinMetadataTargetCompilationsTest {
 
     @Test
     fun `test - metadata compilations - single target project`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.targetHierarchy.default()
 
         project.runLifecycleAwareTest {
-            val target = kotlin.metadata() as KotlinMetadataTarget
-            val compilations = target.awaitMetadataCompilationsCreated()
+            konst target = kotlin.metadata() as KotlinMetadataTarget
+            konst compilations = target.awaitMetadataCompilationsCreated()
             compilations.assertExistsNot("commonMain")
         }
     }

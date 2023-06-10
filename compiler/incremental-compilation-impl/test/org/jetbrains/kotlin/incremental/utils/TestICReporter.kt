@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.build.report.ICReporterBase
 import java.io.File
 
 class TestICReporter : ICReporterBase() {
-    private val compiledSourcesMutable = arrayListOf<File>()
+    private konst compiledSourcesMutable = arrayListOf<File>()
 
-    val compiledSources: List<File>
+    konst compiledSources: List<File>
         get() = compiledSourcesMutable
 
     var exitCode: ExitCode = ExitCode.OK

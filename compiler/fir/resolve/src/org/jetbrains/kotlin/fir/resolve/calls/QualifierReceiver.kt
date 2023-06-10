@@ -31,10 +31,10 @@ fun createQualifierReceiver(
     useSiteSession: FirSession,
     scopeSession: ScopeSession,
 ): QualifierReceiver? {
-    val classLikeSymbol = explicitReceiver.symbol
+    konst classLikeSymbol = explicitReceiver.symbol
     return when {
         classLikeSymbol != null -> {
-            val classSymbol = classLikeSymbol.fir.fullyExpandedClass(useSiteSession)?.symbol ?: return null
+            konst classSymbol = classLikeSymbol.fir.fullyExpandedClass(useSiteSession)?.symbol ?: return null
             ClassQualifierReceiver(explicitReceiver, classSymbol, classLikeSymbol, useSiteSession, scopeSession)
         }
         else -> PackageQualifierReceiver(explicitReceiver, useSiteSession)
@@ -42,7 +42,7 @@ fun createQualifierReceiver(
 }
 
 abstract class QualifierReceiver(
-    final override val explicitReceiver: FirResolvedQualifier
+    final override konst explicitReceiver: FirResolvedQualifier
 ) : AbstractExplicitReceiver<FirResolvedQualifier>() {
     abstract fun classifierScope(): FirScope?
     abstract fun callableScope(): FirScope?
@@ -50,20 +50,20 @@ abstract class QualifierReceiver(
 
 class ClassQualifierReceiver(
     explicitReceiver: FirResolvedQualifier,
-    val classSymbol: FirRegularClassSymbol,
-    val originalSymbol: FirClassLikeSymbol<*>,
-    val useSiteSession: FirSession,
-    val scopeSession: ScopeSession
+    konst classSymbol: FirRegularClassSymbol,
+    konst originalSymbol: FirClassLikeSymbol<*>,
+    konst useSiteSession: FirSession,
+    konst scopeSession: ScopeSession
 ) : QualifierReceiver(explicitReceiver) {
 
     override fun callableScope(): FirScope? {
-        val klass = classSymbol.fir
-        val provider = klass.scopeProvider
+        konst klass = classSymbol.fir
+        konst provider = klass.scopeProvider
         return provider.getStaticMemberScopeForCallables(klass, useSiteSession, scopeSession)
     }
 
     override fun classifierScope(): FirScope? {
-        val klass = classSymbol.fir
+        konst klass = classSymbol.fir
         return klass.scopeProvider.getNestedClassifierScope(klass, useSiteSession, scopeSession)
     }
 }
@@ -72,7 +72,7 @@ class PackageQualifierReceiver(
     explicitReceiver: FirResolvedQualifier,
     useSiteSession: FirSession
 ) : QualifierReceiver(explicitReceiver) {
-    val scope = FirPackageMemberScope(explicitReceiver.packageFqName, useSiteSession)
+    konst scope = FirPackageMemberScope(explicitReceiver.packageFqName, useSiteSession)
     override fun classifierScope(): FirScope {
         return FirOnlyClassifiersScope(scope)
     }

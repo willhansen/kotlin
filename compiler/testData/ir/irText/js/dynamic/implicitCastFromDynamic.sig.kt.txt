@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}d
 //   Public signature: /d|5174763769109925331[0]
-val d: dynamic
+konst d: dynamic
   // CHECK JS_IR NATIVE:
   //   Mangled name: #<get-d>(){}
   //   Public signature: /d.<get-d>|-6701718004621354461[0]
@@ -10,7 +10,7 @@ val d: dynamic
 // CHECK:
 //   Mangled name: {}p
 //   Public signature: /p|6715504260787941082[0]
-val p: Int
+konst p: Int
   // CHECK JS_IR NATIVE:
   //   Mangled name: #<get-p>(){}
   //   Public signature: /p.<get-p>|-1162552463316289847[0]

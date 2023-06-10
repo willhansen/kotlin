@@ -30,14 +30,14 @@ import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
 import org.jetbrains.kotlin.name.Name
 
 abstract class IrBuilder(
-    override val context: IrGeneratorContext,
+    override konst context: IrGeneratorContext,
     var startOffset: Int,
     var endOffset: Int
 ) : IrGenerator
 
 abstract class IrBuilderWithScope(
     context: IrGeneratorContext,
-    override val scope: Scope,
+    override konst scope: Scope,
     startOffset: Int,
     endOffset: Int
 ) : IrBuilder(context, startOffset, endOffset), IrGeneratorWithScope
@@ -66,7 +66,7 @@ open class IrBlockBodyBuilder(
     startOffset: Int,
     endOffset: Int
 ) : IrStatementsBuilder<IrBlockBody>(context, scope, startOffset, endOffset) {
-    private val irBlockBody = context.irFactory.createBlockBody(startOffset, endOffset)
+    private konst irBlockBody = context.irFactory.createBlockBody(startOffset, endOffset)
 
     inline fun blockBody(body: IrBlockBodyBuilder.() -> Unit): IrBlockBody {
         body()
@@ -87,12 +87,12 @@ class IrBlockBuilder(
     scope: Scope,
     startOffset: Int,
     endOffset: Int,
-    val origin: IrStatementOrigin? = null,
+    konst origin: IrStatementOrigin? = null,
     var resultType: IrType? = null,
-    val isTransparent:Boolean = false
+    konst isTransparent:Boolean = false
 ) : IrStatementsBuilder<IrContainerExpression>(context, scope, startOffset, endOffset) {
 
-    private val statements = ArrayList<IrStatement>()
+    private konst statements = ArrayList<IrStatement>()
 
     inline fun block(body: IrBlockBuilder.() -> Unit): IrContainerExpression {
         body()
@@ -104,10 +104,10 @@ class IrBlockBuilder(
     }
 
     override fun doBuild(): IrContainerExpression {
-        val resultType = this.resultType
+        konst resultType = this.resultType
             ?: (statements.lastOrNull() as? IrExpression)?.type
             ?: context.irBuiltIns.unitType
-        val irBlock =
+        konst irBlock =
             if (isTransparent) IrCompositeImpl(startOffset, endOffset, resultType, origin)
             else IrBlockImpl(startOffset, endOffset, resultType, origin)
         irBlock.statements.addAll(statements)
@@ -120,7 +120,7 @@ class IrSingleStatementBuilder(
     scope: Scope,
     startOffset: Int,
     endOffset: Int,
-    val origin: IrStatementOrigin? = null
+    konst origin: IrStatementOrigin? = null
 ) : IrBuilderWithScope(context, scope, startOffset, endOffset) {
 
     inline fun <T : IrElement> build(statementBuilder: IrSingleStatementBuilder.() -> T): T =
@@ -206,7 +206,7 @@ fun <T : IrElement> IrStatementsBuilder<T>.createTmpVariable(
     origin: IrDeclarationOrigin = IrDeclarationOrigin.IR_TEMPORARY_VARIABLE,
     irType: IrType? = null
 ): IrVariable {
-    val variable = scope.createTmpVariable(irExpression, nameHint, isMutable, origin, irType)
+    konst variable = scope.createTmpVariable(irExpression, nameHint, isMutable, origin, irType)
     +variable
     return variable
 }

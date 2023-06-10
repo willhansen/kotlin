@@ -12,25 +12,25 @@ interface A {
 @CompileTimeCalculation
 class B : A {}
 
-const val sum1 = <!EVALUATED: `6`!>sum()<!>
-const val sum2 = <!EVALUATED: `1`!>sum(b = -3)<!>
-const val sum3 = <!EVALUATED: `3`!>sum(c = 1, a = 1, b = 1)<!>
+const konst sum1 = <!EVALUATED: `6`!>sum()<!>
+const konst sum2 = <!EVALUATED: `1`!>sum(b = -3)<!>
+const konst sum3 = <!EVALUATED: `3`!>sum(c = 1, a = 1, b = 1)<!>
 
-const val sumBasedOnPrevious1 = <!EVALUATED: `11`!>sumBasedOnPrevious()<!>
-const val sumBasedOnPrevious2 = <!EVALUATED: `5`!>sumBasedOnPrevious(b = 1, c = 1)<!>
-const val sumBasedOnPrevious3 = <!EVALUATED: `8`!>sumBasedOnPrevious(a = 1, c = 1)<!>
+const konst sumBasedOnPrevious1 = <!EVALUATED: `11`!>sumBasedOnPrevious()<!>
+const konst sumBasedOnPrevious2 = <!EVALUATED: `5`!>sumBasedOnPrevious(b = 1, c = 1)<!>
+const konst sumBasedOnPrevious3 = <!EVALUATED: `8`!>sumBasedOnPrevious(a = 1, c = 1)<!>
 
-const val sumInInterfaceDefault1 = <!EVALUATED: `42`!>B().foo(1)<!>
-const val sumInInterfaceDefault2 = <!EVALUATED: `4`!>B().foo(x = 1, y = 2)<!>
-const val sumInInterfaceDefault3 = <!EVALUATED: `-1`!>B().foo(x = 1, y = 2, z = -1)<!>
+const konst sumInInterfaceDefault1 = <!EVALUATED: `42`!>B().foo(1)<!>
+const konst sumInInterfaceDefault2 = <!EVALUATED: `4`!>B().foo(x = 1, y = 2)<!>
+const konst sumInInterfaceDefault3 = <!EVALUATED: `-1`!>B().foo(x = 1, y = 2, z = -1)<!>
 
-const val someConstProp = 0
+const konst someConstProp = 0
 @CompileTimeCalculation
 class Outer {
-    val prop = -1
+    konst prop = -1
 
     inner class Inner {
-        val innerProp = -2
+        konst innerProp = -2
 
         fun withInner(x: Int = prop) = x
         fun withOuter(x: Int = innerProp) = x
@@ -38,16 +38,16 @@ class Outer {
     }
 }
 
-const val inner1 = <!EVALUATED: `100`!>Outer().Inner().withInner(100)<!>
-const val inner2 = <!EVALUATED: `-1`!>Outer().Inner().withInner()<!>
-const val inner3 = <!EVALUATED: `100`!>Outer().Inner().withOuter(100)<!>
-const val inner4 = <!EVALUATED: `-2`!>Outer().Inner().withOuter()<!>
-const val inner5 = <!EVALUATED: `100`!>Outer().Inner().withGlobal(100)<!>
-const val inner6 = <!EVALUATED: `0`!>Outer().Inner().withGlobal()<!>
+const konst inner1 = <!EVALUATED: `100`!>Outer().Inner().withInner(100)<!>
+const konst inner2 = <!EVALUATED: `-1`!>Outer().Inner().withInner()<!>
+const konst inner3 = <!EVALUATED: `100`!>Outer().Inner().withOuter(100)<!>
+const konst inner4 = <!EVALUATED: `-2`!>Outer().Inner().withOuter()<!>
+const konst inner5 = <!EVALUATED: `100`!>Outer().Inner().withGlobal(100)<!>
+const konst inner6 = <!EVALUATED: `0`!>Outer().Inner().withGlobal()<!>
 
 @CompileTimeCalculation
 interface I<T> {
-    val prop: T
+    konst prop: T
 
     fun foo(x: T = prop): T
 }
@@ -57,7 +57,7 @@ open class C<T> {
 }
 
 @CompileTimeCalculation
-class D(override val prop: Int): C<Int>(), I<Int> {}
+class D(override konst prop: Int): C<Int>(), I<Int> {}
 
-const val fooB1 = <!EVALUATED: `10`!>D(10).foo()<!>
-const val fooB2 = <!EVALUATED: `-1`!>D(10).foo(-1)<!>
+const konst fooB1 = <!EVALUATED: `10`!>D(10).foo()<!>
+const konst fooB2 = <!EVALUATED: `-1`!>D(10).foo(-1)<!>

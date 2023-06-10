@@ -1,1 +1,1 @@
-const val PASSWORD = <expr>"nananananananana " + "batman"</expr>
+const konst PASSWORD = <expr>"nananananananana " + "batman"</expr>

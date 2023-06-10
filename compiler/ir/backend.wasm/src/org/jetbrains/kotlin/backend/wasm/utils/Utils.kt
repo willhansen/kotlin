@@ -22,5 +22,5 @@ internal fun IrTry.isCanonical(builtIns: IrBuiltIns) =
     catches.singleOrNull()?.catchParameter?.symbol?.owner?.type == builtIns.throwableType &&
     finallyExpression == null
 
-internal val IrClass.isAbstractOrSealed
+internal konst IrClass.isAbstractOrSealed
     get() = modality == Modality.ABSTRACT || modality == Modality.SEALED

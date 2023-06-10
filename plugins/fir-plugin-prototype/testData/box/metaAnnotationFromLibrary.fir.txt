@@ -45,28 +45,28 @@ FILE: module_main_metaAnnotationFromLibrary.kt
 
     }
     public final fun box(): R|kotlin/String| {
-        lval a: R|<anonymous>| = object : R|Zero| {
+        lkonst a: R|<anonymous>| = object : R|Zero| {
             private constructor(): R|<anonymous>| {
                 super<R|Zero|>()
             }
 
         }
 
-        lval b: R|<anonymous>| = object : R|First| {
+        lkonst b: R|<anonymous>| = object : R|First| {
             private constructor(): R|<anonymous>| {
                 super<R|First|>()
             }
 
         }
 
-        lval c: R|<anonymous>| = object : R|Second| {
+        lkonst c: R|<anonymous>| = object : R|Second| {
             private constructor(): R|<anonymous>| {
                 super<R|Second|>()
             }
 
         }
 
-        lval d: R|<anonymous>| = object : R|Third| {
+        lkonst d: R|<anonymous>| = object : R|Third| {
             private constructor(): R|<anonymous>| {
                 super<R|Third|>()
             }

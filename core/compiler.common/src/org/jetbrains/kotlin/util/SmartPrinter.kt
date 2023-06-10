@@ -9,10 +9,10 @@ import java.lang.Appendable
 
 class SmartPrinter(appendable: Appendable, indent: String = DEFAULT_INDENT) {
     companion object {
-        private const val DEFAULT_INDENT = "    "
+        private const konst DEFAULT_INDENT = "    "
     }
 
-    private val printer = org.jetbrains.kotlin.utils.Printer(appendable, indent)
+    private konst printer = org.jetbrains.kotlin.utils.Printer(appendable, indent)
 
     private var notFirstPrint: Boolean = false
 

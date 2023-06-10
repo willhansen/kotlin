@@ -1,7 +1,7 @@
 // Derived
 
 interface Base {
-    val boo: String
+    konst boo: String
 }
 
 class Derived(x: Base): Base by x

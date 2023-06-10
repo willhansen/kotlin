@@ -9,10 +9,10 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 
 class MultiFieldValueClassRepresentation<Type : SimpleTypeMarker>(
-    override val underlyingPropertyNamesToTypes: List<Pair<Name, Type>>
+    override konst underlyingPropertyNamesToTypes: List<Pair<Name, Type>>
 ) : ValueClassRepresentation<Type>() {
 
-    private val map = underlyingPropertyNamesToTypes.toMap().also {
+    private konst map = underlyingPropertyNamesToTypes.toMap().also {
         require(it.size == underlyingPropertyNamesToTypes.size) { "Some properties have the same names" }
     }
 

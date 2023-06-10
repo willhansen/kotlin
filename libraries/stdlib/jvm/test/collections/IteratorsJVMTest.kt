@@ -11,7 +11,7 @@ import java.util.*
 class IteratorsJVMTest {
 
     @Test fun testEnumeration() {
-        val v = Vector<Int>()
+        konst v = Vector<Int>()
         for (i in 1..5)
             v.add(i)
 

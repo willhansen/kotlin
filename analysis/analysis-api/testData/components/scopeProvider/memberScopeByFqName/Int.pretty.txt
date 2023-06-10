@@ -1,89 +1,89 @@
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 infix fun and(other: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun compareTo(other: kotlin.Byte): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun compareTo(other: kotlin.Double): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun compareTo(other: kotlin.Float): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open operator fun compareTo(other: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun compareTo(other: kotlin.Long): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun compareTo(other: kotlin.Short): kotlin.Int
 
 operator fun dec(): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun div(other: kotlin.Byte): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun div(other: kotlin.Double): kotlin.Double
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun div(other: kotlin.Float): kotlin.Float
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun div(other: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun div(other: kotlin.Long): kotlin.Long
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun div(other: kotlin.Short): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
 operator fun inc(): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 fun inv(): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun minus(other: kotlin.Byte): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun minus(other: kotlin.Double): kotlin.Double
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun minus(other: kotlin.Float): kotlin.Float
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun minus(other: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun minus(other: kotlin.Long): kotlin.Long
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun minus(other: kotlin.Short): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 infix fun or(other: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun plus(other: kotlin.Byte): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun plus(other: kotlin.Double): kotlin.Double
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun plus(other: kotlin.Float): kotlin.Float
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun plus(other: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun plus(other: kotlin.Long): kotlin.Long
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun plus(other: kotlin.Short): kotlin.Int
 
 operator fun rangeTo(other: kotlin.Byte): kotlin.ranges.IntRange
@@ -111,87 +111,87 @@ operator fun rangeUntil(other: kotlin.Long): kotlin.ranges.LongRange
 operator fun rangeUntil(other: kotlin.Short): kotlin.ranges.IntRange
 
 @kotlin.SinceKotlin(version = "1.1")
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun rem(other: kotlin.Byte): kotlin.Int
 
 @kotlin.SinceKotlin(version = "1.1")
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun rem(other: kotlin.Double): kotlin.Double
 
 @kotlin.SinceKotlin(version = "1.1")
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun rem(other: kotlin.Float): kotlin.Float
 
 @kotlin.SinceKotlin(version = "1.1")
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun rem(other: kotlin.Int): kotlin.Int
 
 @kotlin.SinceKotlin(version = "1.1")
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun rem(other: kotlin.Long): kotlin.Long
 
 @kotlin.SinceKotlin(version = "1.1")
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun rem(other: kotlin.Short): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 infix fun shl(bitCount: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 infix fun shr(bitCount: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun times(other: kotlin.Byte): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun times(other: kotlin.Double): kotlin.Double
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun times(other: kotlin.Float): kotlin.Float
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun times(other: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun times(other: kotlin.Long): kotlin.Long
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun times(other: kotlin.Short): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open fun toByte(): kotlin.Byte
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open fun toChar(): kotlin.Char
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open fun toDouble(): kotlin.Double
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open fun toFloat(): kotlin.Float
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open fun toInt(): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open fun toLong(): kotlin.Long
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open fun toShort(): kotlin.Short
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 open fun toString(): kotlin.String
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun unaryMinus(): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 operator fun unaryPlus(): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 infix fun ushr(bitCount: kotlin.Int): kotlin.Int
 
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 infix fun xor(other: kotlin.Int): kotlin.Int
 
 open fun hashCode(): kotlin.Int

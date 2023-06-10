@@ -20,17 +20,17 @@ import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
 class KtFe10DescFunctionLikeSymbolPointer<T : KtFunctionLikeSymbol>(
-    private val callableId: CallableId,
-    private val signature: String
+    private konst callableId: CallableId,
+    private konst signature: String
 ) : KtSymbolPointer<T>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): T? {
         check(analysisSession is KtFe10AnalysisSession)
-        val analysisContext = analysisSession.analysisContext
+        konst analysisContext = analysisSession.analysisContext
 
-        val className = callableId.className
-        val memberScope = if (className != null) {
-            val outerClassId = ClassId(callableId.packageName, className, false)
+        konst className = callableId.className
+        konst memberScope = if (className != null) {
+            konst outerClassId = ClassId(callableId.packageName, className, false)
             analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(outerClassId)
                 ?.unsubstitutedMemberScope
                 ?: MemberScope.Empty

@@ -8,13 +8,13 @@
 interface I1 {
     fun f(): String
 
-    val p: Int
+    konst p: Int
 }
 
 interface I2 {
     fun f(): String
 
-    val p: Int
+    konst p: Int
 }
 
 expect class C() : I1, I2
@@ -25,5 +25,5 @@ expect class C() : I1, I2
 actual class C : I1, I2 {
     override fun f() = "OK"
 
-    override val p = 42
+    override konst p = 42
 }

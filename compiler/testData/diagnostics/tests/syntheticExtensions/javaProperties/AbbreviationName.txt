@@ -8,7 +8,7 @@ public open class JavaClass {
     public open fun getHTMLFile(): kotlin.String!
     public open fun getURL(): kotlin.String!
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public open fun setHTMLFile(/*0*/ value: kotlin.String!): kotlin.Unit
-    public open fun setURL(/*0*/ value: kotlin.String!): kotlin.Unit
+    public open fun setHTMLFile(/*0*/ konstue: kotlin.String!): kotlin.Unit
+    public open fun setURL(/*0*/ konstue: kotlin.String!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }

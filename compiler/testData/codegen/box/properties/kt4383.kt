@@ -5,8 +5,8 @@ class D {
 }
 
 object P {
-    val u = Unit
-    val v by D()
+    konst u = Unit
+    konst v by D()
     var w = Unit
 }
 

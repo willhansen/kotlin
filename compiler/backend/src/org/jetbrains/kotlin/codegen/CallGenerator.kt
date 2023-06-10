@@ -24,7 +24,7 @@ enum class ValueKind {
 
 interface CallGenerator {
 
-    class DefaultCallGenerator(private val codegen: ExpressionCodegen) : CallGenerator {
+    class DefaultCallGenerator(private konst codegen: ExpressionCodegen) : CallGenerator {
 
         override fun genCallInner(
             callableMethod: Callable,
@@ -44,56 +44,56 @@ interface CallGenerator {
         override fun putHiddenParamsIntoLocals() {}
 
         override fun genValueAndPut(
-            valueParameterDescriptor: ValueParameterDescriptor?,
+            konstueParameterDescriptor: ValueParameterDescriptor?,
             argumentExpression: KtExpression,
             parameterType: JvmKotlinType,
             parameterIndex: Int
         ) {
-            val container = valueParameterDescriptor?.containingDeclaration
-            val isVarargInvoke = container != null && JvmCodegenUtil.isDeclarationOfBigArityFunctionInvoke(container)
+            konst container = konstueParameterDescriptor?.containingDeclaration
+            konst isVarargInvoke = container != null && JvmCodegenUtil.isDeclarationOfBigArityFunctionInvoke(container)
 
-            val v = codegen.v
+            konst v = codegen.v
             if (isVarargInvoke) {
                 if (parameterIndex == 0) {
-                    v.iconst(container!!.valueParameters.size)
+                    v.iconst(container!!.konstueParameters.size)
                     v.newarray(OBJECT_TYPE)
                 }
                 v.dup()
                 v.iconst(parameterIndex)
             }
 
-            val value = codegen.gen(argumentExpression)
-            value.put(parameterType.type, parameterType.kotlinType, v)
+            konst konstue = codegen.gen(argumentExpression)
+            konstue.put(parameterType.type, parameterType.kotlinType, v)
 
             if (isVarargInvoke) {
                 v.astore(OBJECT_TYPE)
             }
         }
 
-        override fun putCapturedValueOnStack(stackValue: StackValue, valueType: Type, paramIndex: Int) {
+        override fun putCapturedValueOnStack(stackValue: StackValue, konstueType: Type, paramIndex: Int) {
             stackValue.put(stackValue.type, stackValue.kotlinType, codegen.v)
         }
 
-        override fun putValueIfNeeded(parameterType: JvmKotlinType, value: StackValue, kind: ValueKind, parameterIndex: Int) {
-            value.put(value.type, value.kotlinType, codegen.v)
+        override fun putValueIfNeeded(parameterType: JvmKotlinType, konstue: StackValue, kind: ValueKind, parameterIndex: Int) {
+            konstue.put(konstue.type, konstue.kotlinType, codegen.v)
         }
 
-        override fun reorderArgumentsIfNeeded(actualArgsWithDeclIndex: List<ArgumentAndDeclIndex>, valueParameterTypes: List<Type>) {
-            val mark = codegen.myFrameMap.mark()
-            val reordered = actualArgsWithDeclIndex.withIndex().dropWhile {
-                it.value.declIndex == it.index
+        override fun reorderArgumentsIfNeeded(actualArgsWithDeclIndex: List<ArgumentAndDeclIndex>, konstueParameterTypes: List<Type>) {
+            konst mark = codegen.myFrameMap.mark()
+            konst reordered = actualArgsWithDeclIndex.withIndex().dropWhile {
+                it.konstue.declIndex == it.index
             }
 
             reordered.reversed().map {
-                val argumentAndDeclIndex = it.value
-                val type = valueParameterTypes.get(argumentAndDeclIndex.declIndex)
-                val stackValue = StackValue.local(codegen.frameMap.enterTemp(type), type)
+                konst argumentAndDeclIndex = it.konstue
+                konst type = konstueParameterTypes.get(argumentAndDeclIndex.declIndex)
+                konst stackValue = StackValue.local(codegen.frameMap.enterTemp(type), type)
                 stackValue.store(StackValue.onStack(type), codegen.v)
                 Pair(argumentAndDeclIndex.declIndex, stackValue)
             }.sortedBy {
                 it.first
             }.forEach {
-                it.second.put(valueParameterTypes.get(it.first), codegen.v)
+                it.second.put(konstueParameterTypes.get(it.first), codegen.v)
             }
             mark.dropTo()
         }
@@ -101,7 +101,7 @@ interface CallGenerator {
 
     fun genCall(callableMethod: Callable, resolvedCall: ResolvedCall<*>?, callDefault: Boolean, codegen: ExpressionCodegen) {
         if (resolvedCall != null) {
-            val calleeExpression = resolvedCall.call.calleeExpression
+            konst calleeExpression = resolvedCall.call.calleeExpression
             if (calleeExpression != null) {
                 codegen.markStartLineNumber(calleeExpression)
             }
@@ -113,26 +113,26 @@ interface CallGenerator {
     fun genCallInner(callableMethod: Callable, resolvedCall: ResolvedCall<*>?, callDefault: Boolean, codegen: ExpressionCodegen)
 
     fun genValueAndPut(
-        valueParameterDescriptor: ValueParameterDescriptor?,
+        konstueParameterDescriptor: ValueParameterDescriptor?,
         argumentExpression: KtExpression,
         parameterType: JvmKotlinType,
         parameterIndex: Int
     )
 
-    fun putValueIfNeeded(parameterType: JvmKotlinType, value: StackValue) {
-        putValueIfNeeded(parameterType, value, ValueKind.GENERAL)
+    fun putValueIfNeeded(parameterType: JvmKotlinType, konstue: StackValue) {
+        putValueIfNeeded(parameterType, konstue, ValueKind.GENERAL)
     }
 
     fun putValueIfNeeded(
         parameterType: JvmKotlinType,
-        value: StackValue,
+        konstue: StackValue,
         kind: ValueKind = ValueKind.GENERAL,
         parameterIndex: Int = -1
     )
 
     fun putCapturedValueOnStack(
         stackValue: StackValue,
-        valueType: Type,
+        konstueType: Type,
         paramIndex: Int
     )
 
@@ -140,5 +140,5 @@ interface CallGenerator {
 
     fun putHiddenParamsIntoLocals()
 
-    fun reorderArgumentsIfNeeded(actualArgsWithDeclIndex: List<ArgumentAndDeclIndex>, valueParameterTypes: List<Type>)
+    fun reorderArgumentsIfNeeded(actualArgsWithDeclIndex: List<ArgumentAndDeclIndex>, konstueParameterTypes: List<Type>)
 }

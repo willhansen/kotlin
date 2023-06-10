@@ -10,7 +10,7 @@ object IdeaKotlinSourceDependencyProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKotlinSourceDependencyProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKotlinSourceDependencyProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKotlinSourceDependencyProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKotlinSourceDependencyProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKotlinSourceDependencyProtoKt {
       @JvmName("getType")
       get() = _builder.getType()
       @JvmName("setType")
-      set(value) {
-        _builder.setType(value)
+      set(konstue) {
+        _builder.setType(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto.Type type = 2;</code>
@@ -79,8 +79,8 @@ object IdeaKotlinSourceDependencyProtoKt {
       @JvmName("getCoordinates")
       get() = _builder.getCoordinates()
       @JvmName("setCoordinates")
-      set(value) {
-        _builder.setCoordinates(value)
+      set(konstue) {
+        _builder.setCoordinates(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto coordinates = 3;</code>
@@ -95,7 +95,7 @@ object IdeaKotlinSourceDependencyProtoKt {
     fun hasCoordinates(): kotlin.Boolean {
       return _builder.hasCoordinates()
     }
-    val IdeaKotlinSourceDependencyProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto?
+    konst IdeaKotlinSourceDependencyProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto?
       get() = _builder.coordinatesOrNull
   }
 }
@@ -103,9 +103,9 @@ object IdeaKotlinSourceDependencyProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto?
   get() = if (hasCoordinates()) getCoordinates() else null
 

@@ -115,7 +115,7 @@ KtFile: CommentsBinding.kt
       PROPERTY
         PsiComment(EOL_COMMENT)('// This is v1')
         PsiWhiteSpace('\n    ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('v1')
         PsiWhiteSpace(' ')
@@ -133,7 +133,7 @@ KtFile: CommentsBinding.kt
             PsiElement(KDOC_TEXT)(' v2 doc comment ')
           PsiElement(KDOC_END)('*/')
         PsiWhiteSpace('\n    ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('v2')
         PsiWhiteSpace(' ')
@@ -199,7 +199,7 @@ KtFile: CommentsBinding.kt
                     REFERENCE_EXPRESSION
                       PsiElement(IDENTIFIER)('c')
                   PsiElement(RPAR)(')')
-            PsiComment(BLOCK_COMMENT)('/*parameter with default value*/')
+            PsiComment(BLOCK_COMMENT)('/*parameter with default konstue*/')
           PsiElement(RPAR)(')')
         PsiWhiteSpace(' ')
         BLOCK
@@ -208,7 +208,7 @@ KtFile: CommentsBinding.kt
           PsiComment(EOL_COMMENT)('// before local var')
           PsiWhiteSpace('\n        ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('local')
             PsiWhiteSpace(' ')
@@ -283,7 +283,7 @@ KtFile: CommentsBinding.kt
   PROPERTY
     PsiComment(EOL_COMMENT)('// This is v')
     PsiWhiteSpace('\n')
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('v')
     PsiWhiteSpace(' ')
@@ -311,7 +311,7 @@ KtFile: CommentsBinding.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('local')
         PsiWhiteSpace(' ')
@@ -325,7 +325,7 @@ KtFile: CommentsBinding.kt
       PsiComment(EOL_COMMENT)('// declare another local')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('local2')
         PsiWhiteSpace(' ')
@@ -438,7 +438,7 @@ KtFile: CommentsBinding.kt
       PsiElement(LPAR)('(')
       VALUE_PARAMETER_LIST
         VALUE_PARAMETER
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
       PsiElement(RPAR)(')')
       PsiWhiteSpace(' ')
       BLOCK
@@ -448,7 +448,7 @@ KtFile: CommentsBinding.kt
       PsiComment(EOL_COMMENT)('// this is setter')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('prop2')
     PsiElement(COLON)(':')
@@ -506,7 +506,7 @@ KtFile: CommentsBinding.kt
       PsiElement(LPAR)('(')
       VALUE_PARAMETER_LIST
         VALUE_PARAMETER
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
       PsiElement(RPAR)(')')
       PsiWhiteSpace(' ')
       BLOCK

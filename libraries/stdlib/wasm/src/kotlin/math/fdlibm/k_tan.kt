@@ -46,7 +46,7 @@
 
 package kotlin.math.fdlibm
 
-private val xxx = doubleArrayOf(
+private konst xxx = doubleArrayOf(
     3.33333333333334091986e-01,    /* 3FD55555, 55555563 */
     1.33333333333201242699e-01,    /* 3FC11111, 1110FE7A */
     5.39682539762260521377e-02,    /* 3FABA1BA, 1BB341FE */
@@ -64,10 +64,10 @@ private val xxx = doubleArrayOf(
 /* pio4 */     7.85398163397448278999e-01,    /* 3FE921FB, 54442D18 */
 /* pio4lo */     3.06161699786838301793e-17    /* 3C81A626, 33145C07 */
 )
-private val one = xxx[13]
-private val pio4 = xxx[14]
-private val pio4lo = xxx[15]
-private val T = xxx
+private konst one = xxx[13]
+private konst pio4 = xxx[14]
+private konst pio4lo = xxx[15]
+private konst T = xxx
 /* INDENT ON */
 
 internal fun __kernel_tan(_x: Double, _y: Double, iy: Int): Double {

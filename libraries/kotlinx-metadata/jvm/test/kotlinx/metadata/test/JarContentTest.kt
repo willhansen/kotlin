@@ -20,24 +20,24 @@ import java.util.zip.ZipFile
 class JarContentTest {
     @Test
     fun testJarContents() {
-        val jars = File("build/libs").walk().filter { it.name.endsWith(".jar") }.toList()
+        konst jars = File("build/libs").walk().filter { it.name.endsWith(".jar") }.toList()
         assertTrue(jars.isNotEmpty())
         jars.forEach(::checkClassesHasNoSpecificStringConstants)
     }
 
     private fun checkClassesHasNoSpecificStringConstants(jar: File) {
-        val zipFile = ZipFile(jar)
+        konst zipFile = ZipFile(jar)
         for (entry in zipFile.entries()) {
             if (!entry.name.endsWith(".class")) continue
 
-            val loadedConstants = mutableListOf<String>()
+            konst loadedConstants = mutableListOf<String>()
             zipFile.getInputStream(entry).use { stream ->
                 ClassReader(stream).accept(object : ClassVisitor(API_VERSION) {
                     override fun visitMethod(
                         access: Int, name: String?, descriptor: String?, signature: String?, exceptions: Array<out String>?
                     ): MethodVisitor = object : MethodVisitor(API_VERSION) {
-                        override fun visitLdcInsn(value: Any?) {
-                            if (value is String && value.isNotEmpty()) loadedConstants.add(value)
+                        override fun visitLdcInsn(konstue: Any?) {
+                            if (konstue is String && konstue.isNotEmpty()) loadedConstants.add(konstue)
                         }
                     }
                 }, SKIP_DEBUG or SKIP_FRAMES)
@@ -56,10 +56,10 @@ class JarContentTest {
     }
 
     companion object {
-        private val INTERNAL_COMPANIONS =
+        private konst INTERNAL_COMPANIONS =
             listOf("Char", "Byte", "Short", "Int", "Float", "Long", "Double", "String", "Enum")
                 .map { "kotlin/jvm/internal/${it}CompanionObject" }
-        val PREDEFINED_STRINGS =
+        konst PREDEFINED_STRINGS =
             JvmNameResolverBase.PREDEFINED_STRINGS + listOf("kotlin/jvm/functions", "kotlin/reflect/KFunction") + INTERNAL_COMPANIONS
     }
 }

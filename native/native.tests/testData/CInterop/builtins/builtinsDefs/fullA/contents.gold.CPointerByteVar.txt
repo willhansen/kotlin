@@ -6,7 +6,7 @@ package pod1 {
     var A_va_list: __builtin_va_list? /* = CPointer<ByteVar /* = ByteVarOf<Byte> */>? */
         @CCall(id = "knifunptr_pod12_A_va_list_getter") get
         @CCall(id = "knifunptr_pod13_A_va_list_setter") set
-    const val __GNUC_VA_LIST: Int = 1
+    const konst __GNUC_VA_LIST: Int = 1
     typealias __builtin_va_list = CPointer<ByteVar /* = ByteVarOf<Byte> */>
     typealias __builtin_va_listVar = CPointerVarOf<__builtin_va_list /* = CPointer<ByteVar /* = ByteVarOf<Byte> */> */>
     typealias __gnuc_va_list = __builtin_va_list

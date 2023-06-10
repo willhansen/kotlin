@@ -17,9 +17,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTasksProvider
 
 open class GradleKpmCompilationTaskConfigurator(
-    protected val project: Project
+    protected konst project: Project
 ) {
-    open val fragmentSourcesProvider: GradleKpmFragmentSourcesProvider = GradleKpmFragmentSourcesProvider()
+    open konst fragmentSourcesProvider: GradleKpmFragmentSourcesProvider = GradleKpmFragmentSourcesProvider()
 
     open fun getSourcesForFragmentCompilation(fragment: GradleKpmFragment): MultipleSourceRootsProvider =
         fragmentSourcesProvider.getSourcesFromRefinesClosure(fragment)
@@ -32,14 +32,14 @@ open class GradleKpmCompilationTaskConfigurator(
         compilationData: GradleKpmCompilationData<*>
     ): TaskProvider<out KotlinCompile> {
         Kotlin2JvmSourceSetProcessor(KotlinTasksProvider(), KotlinCompilationInfo.KPM(compilationData)).run()
-        val allSources = getSourcesForFragmentCompilation(variant)
-        val commonSources = getCommonSourcesForFragmentCompilation(variant)
+        konst allSources = getSourcesForFragmentCompilation(variant)
+        konst commonSources = getCommonSourcesForFragmentCompilation(variant)
 
         // FIXME support custom source file extensions in the two calls below
         addSourcesToKotlinCompileTask(project, compilationData.compileKotlinTaskName, emptyList()) { allSources }
         addCommonSourcesToKotlinCompileTask(project, compilationData.compileKotlinTaskName, emptyList()) { commonSources }
 
-        val result = project.tasks.named(compilationData.compileKotlinTaskName, KotlinCompile::class.java) {
+        konst result = project.tasks.named(compilationData.compileKotlinTaskName, KotlinCompile::class.java) {
             it.kotlinPluginData = project.compilerPluginProviderForPlatformCompilation(variant, compilationData)
         }
         compilationData.output.classesDirs.from(result.flatMap { it.destinationDirectory })
@@ -51,12 +51,12 @@ open class GradleKpmCompilationTaskConfigurator(
         compilationData: GradleKpmNativeCompilationData<*>,
         configure: KotlinNativeCompile.() -> Unit
     ): TaskProvider<KotlinNativeCompile> {
-        val compileTask = KotlinNativeTargetConfigurator.createKlibCompilationTask(
+        konst compileTask = KotlinNativeTargetConfigurator.createKlibCompilationTask(
             KotlinCompilationInfo.KPM(compilationData), compilationData.konanTarget
         )
 
-        val allSources = getSourcesForFragmentCompilation(fragment)
-        val commonSources = getCommonSourcesForFragmentCompilation(fragment)
+        konst allSources = getSourcesForFragmentCompilation(fragment)
+        konst commonSources = getCommonSourcesForFragmentCompilation(fragment)
 
         compileTask.configure {
             it.setSource(allSources)

@@ -10,7 +10,7 @@ fun foobar(x: Boolean, y: String, z: String) {}
 inline fun foo() = runAfterLoop { "-" }
 
 fun test() {
-    val result = foobar(if (1 == 1) true else bar(), foo(), "OK")
+    konst result = foobar(if (1 == 1) true else bar(), foo(), "OK")
 }
 
 // 2 ASTORE

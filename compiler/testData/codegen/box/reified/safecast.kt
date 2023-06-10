@@ -7,12 +7,12 @@ inline fun<reified T> safecast(x: Any?): T? {
 }
 
 fun box(): String {
-    val x = safecast<String>("abc")
+    konst x = safecast<String>("abc")
     assertEquals("abc", x)
-    val y = safecast<Int>(1)
+    konst y = safecast<Int>(1)
     assertEquals(1, y)
 
-    val z = safecast<Int>("abc")
+    konst z = safecast<Int>("abc")
     assertEquals(null, z)
 
     return "OK"

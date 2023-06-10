@@ -35,7 +35,7 @@ fun test4() = run {
     3
 }
 
-val foo: Int
+konst foo: Int
     get() = run {
         if (true) return <!RETURN_TYPE_MISMATCH!>""<!>
 

@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.utils.sure
 import java.util.concurrent.atomic.AtomicLong
 
 interface KtAnonymousInitializer : KtDeclaration, KtStatementExpression {
-    val containingDeclaration: KtDeclaration
-    val body: KtExpression?
+    konst containingDeclaration: KtDeclaration
+    konst body: KtExpression?
 }
 
 class KtClassInitializer : KtDeclarationStub<KotlinPlaceHolderStub<KtClassInitializer>>, KtAnonymousInitializer {
@@ -37,29 +37,29 @@ class KtClassInitializer : KtDeclarationStub<KotlinPlaceHolderStub<KtClassInitia
 
     override fun <R, D> accept(visitor: KtVisitor<R, D>, data: D) = visitor.visitClassInitializer(this, data)
 
-    override val body: KtExpression?
+    override konst body: KtExpression?
         get() = findChildByClass(KtExpression::class.java)
 
-    val openBraceNode: PsiElement?
+    konst openBraceNode: PsiElement?
         get() = (body as? KtBlockExpression)?.lBrace
 
-    val initKeyword: PsiElement
+    konst initKeyword: PsiElement
         get() = findChildByType(KtTokens.INIT_KEYWORD)!!
 
-    override val containingDeclaration: KtClassOrObject
+    override konst containingDeclaration: KtClassOrObject
         get() = getParentOfType<KtClassOrObject>(true).sure { "Should only be present in class or object" }
 }
 
 class KtScriptInitializer(node: ASTNode) : KtDeclarationImpl(node), KtAnonymousInitializer {
-    override val body: KtExpression?
+    override konst body: KtExpression?
         get() = findChildByClass(KtExpression::class.java)
 
-    override val containingDeclaration: KtScript
+    override konst containingDeclaration: KtScript
         get() = getParentOfType<KtScript>(true).sure { "Should only be present in script" }
 
     override fun <R, D> accept(visitor: KtVisitor<R, D>, data: D) = visitor.visitScriptInitializer(this, data)
 
-    private val modificationStamp = AtomicLong()
+    private konst modificationStamp = AtomicLong()
 
     override fun subtreeChanged() {
         super.subtreeChanged()

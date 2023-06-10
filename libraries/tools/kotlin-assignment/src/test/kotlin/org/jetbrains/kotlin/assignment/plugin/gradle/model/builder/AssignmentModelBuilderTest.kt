@@ -13,7 +13,7 @@ class AssignmentModelBuilderTest {
 
     @Test
     fun testCanBuild() {
-        val modelBuilder = AssignmentModelBuilder()
+        konst modelBuilder = AssignmentModelBuilder()
         Assert.assertTrue(modelBuilder.canBuild(Assignment::class.java.name))
         Assert.assertFalse(modelBuilder.canBuild("wrongModel"))
     }

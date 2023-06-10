@@ -15,9 +15,9 @@ class IdeaKpmProjectContainerTest {
 
     @Test
     fun `test - binary container - equality`() {
-        val container1 = IdeaKpmProjectContainer(byteArrayOf(1))
-        val container2 = IdeaKpmProjectContainer(byteArrayOf(1))
-        val container3 = IdeaKpmProjectContainer(byteArrayOf(1, 2))
+        konst container1 = IdeaKpmProjectContainer(byteArrayOf(1))
+        konst container2 = IdeaKpmProjectContainer(byteArrayOf(1))
+        konst container3 = IdeaKpmProjectContainer(byteArrayOf(1, 2))
 
         assertEquals(container1, container2)
         assertNotEquals(container2, container3)
@@ -25,9 +25,9 @@ class IdeaKpmProjectContainerTest {
 
     @Test
     fun `test - instance container - equality`() {
-        val container1 = IdeaKpmProjectContainer(TestIdeaKpmInstances.simpleProject)
-        val container2 = IdeaKpmProjectContainer(TestIdeaKpmInstances.simpleProject.copy())
-        val container3 = IdeaKpmProjectContainer(TestIdeaKpmInstances.simpleProject.copy(gradlePluginVersion = "some.other.version"))
+        konst container1 = IdeaKpmProjectContainer(TestIdeaKpmInstances.simpleProject)
+        konst container2 = IdeaKpmProjectContainer(TestIdeaKpmInstances.simpleProject.copy())
+        konst container3 = IdeaKpmProjectContainer(TestIdeaKpmInstances.simpleProject.copy(gradlePluginVersion = "some.other.version"))
 
         assertEquals(container1, container2)
         assertNotEquals(container2, container3)
@@ -47,7 +47,7 @@ class IdeaKpmProjectContainerTest {
 
     @Test
     fun `test - binary container - binaryOrNull`() {
-        val binary = byteArrayOf()
+        konst binary = byteArrayOf()
         assertEquals(binary, IdeaKpmProjectContainer(binary).binaryOrNull)
         assertNotNull(IdeaKpmProjectBinaryContainer::class.java.getMethod("getBinaryOrNull"))
     }

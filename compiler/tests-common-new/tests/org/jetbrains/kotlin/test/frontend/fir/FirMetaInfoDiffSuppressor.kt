@@ -15,16 +15,16 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.moduleStructure
 
 class FirMetaInfoDiffSuppressor(testServices: TestServices) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
     override fun suppressIfNeeded(failedAssertions: List<WrappedException>): List<WrappedException> {
-        val ignoreErrors = testServices.moduleStructure.modules.any { IGNORE_FIR_DIAGNOSTICS in it.directives }
-        val ignoreDiff = testServices.moduleStructure.modules.any { IGNORE_FIR_DIAGNOSTICS_DIFF in it.directives }
+        konst ignoreErrors = testServices.moduleStructure.modules.any { IGNORE_FIR_DIAGNOSTICS in it.directives }
+        konst ignoreDiff = testServices.moduleStructure.modules.any { IGNORE_FIR_DIAGNOSTICS_DIFF in it.directives }
         if (!(ignoreErrors || ignoreDiff)) {
             return failedAssertions
         }
-        val filteredAssertions = failedAssertions.filterNot { it is WrappedException.FromMetaInfoHandler }
+        konst filteredAssertions = failedAssertions.filterNot { it is WrappedException.FromMetaInfoHandler }
         return if (failedAssertions.size == filteredAssertions.size && ignoreDiff) {
             failedAssertions + AssertionError(
                 "Test contains $IGNORE_FIR_DIAGNOSTICS_DIFF directive but no errors was reported. Please remove directive"

@@ -1,4 +1,4 @@
-const val ONE: Int
+const konst ONE: Int
   field = 1
   get
 
@@ -9,7 +9,7 @@ open annotation class A : Annotation {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 

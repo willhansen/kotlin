@@ -14,13 +14,13 @@ public class F extends B {
 // FILE: main.kt
 
 open class B {
-    open val foo: Int = 1
+    open konst foo: Int = 1
 }
 
 class C1 : A() {
-    override val foo: Int = 2
+    override konst foo: Int = 2
 }
 
 class C2 : F() {
-    <!OVERRIDING_FINAL_MEMBER!>override<!> val foo: Int = 3
+    <!OVERRIDING_FINAL_MEMBER!>override<!> konst foo: Int = 3
 }

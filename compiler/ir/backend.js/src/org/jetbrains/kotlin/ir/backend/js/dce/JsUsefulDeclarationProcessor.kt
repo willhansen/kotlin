@@ -21,15 +21,15 @@ import org.jetbrains.kotlin.js.config.JSConfigurationKeys
 import org.jetbrains.kotlin.serialization.js.ModuleKind
 
 internal class JsUsefulDeclarationProcessor(
-    override val context: JsIrBackendContext,
+    override konst context: JsIrBackendContext,
     printReachabilityInfo: Boolean,
     removeUnusedAssociatedObjects: Boolean
 ) : UsefulDeclarationProcessor(printReachabilityInfo, removeUnusedAssociatedObjects) {
-    private val equalsMethod = getMethodOfAny("equals")
-    private val hashCodeMethod = getMethodOfAny("hashCode")
-    private val isEsModules = context.configuration[JSConfigurationKeys.MODULE_KIND] == ModuleKind.ES
+    private konst equalsMethod = getMethodOfAny("equals")
+    private konst hashCodeMethod = getMethodOfAny("hashCode")
+    private konst isEsModules = context.configuration[JSConfigurationKeys.MODULE_KIND] == ModuleKind.ES
 
-    override val bodyVisitor: BodyVisitorBase = object : BodyVisitorBase() {
+    override konst bodyVisitor: BodyVisitorBase = object : BodyVisitorBase() {
         override fun visitCall(expression: IrCall, data: IrDeclaration) {
             super.visitCall(expression, data)
 
@@ -39,13 +39,13 @@ internal class JsUsefulDeclarationProcessor(
 
             when (expression.symbol) {
                 context.intrinsics.jsBoxIntrinsic -> {
-                    val inlineClass = context.inlineClassesUtils.getInlinedClass(expression.getTypeArgument(0)!!)!!
-                    val constructor = inlineClass.declarations.filterIsInstance<IrConstructor>().single { it.isPrimary }
+                    konst inlineClass = context.inlineClassesUtils.getInlinedClass(expression.getTypeArgument(0)!!)!!
+                    konst constructor = inlineClass.declarations.filterIsInstance<IrConstructor>().single { it.isPrimary }
                     constructor.enqueue(data, "intrinsic: jsBoxIntrinsic")
                 }
 
                 context.intrinsics.jsClass -> {
-                    val ref = expression.getTypeArgument(0)!!.classifierOrFail.owner as IrDeclaration
+                    konst ref = expression.getTypeArgument(0)!!.classifierOrFail.owner as IrDeclaration
                     ref.enqueue(data, "intrinsic: jsClass")
                     referencedJsClasses += ref
                     // When class reference provided as parameter to external function
@@ -66,26 +66,26 @@ internal class JsUsefulDeclarationProcessor(
                 }
 
                 context.reflectionSymbols.getKClassFromExpression -> {
-                    val ref = expression.getTypeArgument(0)?.classOrNull ?: context.irBuiltIns.anyClass
+                    konst ref = expression.getTypeArgument(0)?.classOrNull ?: context.irBuiltIns.anyClass
                     referencedJsClassesFromExpressions += ref.owner
                 }
 
                 context.intrinsics.jsObjectCreateSymbol -> {
-                    val classToCreate = expression.getTypeArgument(0)!!.classifierOrFail.owner as IrClass
+                    konst classToCreate = expression.getTypeArgument(0)!!.classifierOrFail.owner as IrClass
                     classToCreate.enqueue(data, "intrinsic: jsObjectCreateSymbol")
                     constructedClasses += classToCreate
                 }
 
                 context.intrinsics.jsCreateThisSymbol -> {
-                    val jsClassOrThis = expression.getValueArgument(0)
+                    konst jsClassOrThis = expression.getValueArgument(0)
 
-                    val classTypeToCreate = when (jsClassOrThis) {
+                    konst classTypeToCreate = when (jsClassOrThis) {
                         is IrCall -> jsClassOrThis.getTypeArgument(0)!!
                         is IrGetValue -> jsClassOrThis.type
                         else -> error("Unexpected first argument of createThis function call")
                     }
 
-                    val classToCreate = classTypeToCreate.classifierOrFail.owner as IrClass
+                    konst classToCreate = classTypeToCreate.classifierOrFail.owner as IrClass
 
                     classToCreate.enqueue(data, "intrinsic: jsCreateThis")
                     constructedClasses += classToCreate
@@ -122,7 +122,7 @@ internal class JsUsefulDeclarationProcessor(
 
     override fun processSuperTypes(irClass: IrClass) {
         irClass.superTypes.forEach {
-            val shouldClassBeKept = it.classOrNull?.let { context.keeper.shouldKeep(it.owner) } ?: false
+            konst shouldClassBeKept = it.classOrNull?.let { context.keeper.shouldKeep(it.owner) } ?: false
             if (!it.isInterface() || shouldClassBeKept) {
                 (it.classifierOrNull as? IrClassSymbol)?.owner?.enqueue(irClass, "superTypes")
             }
@@ -187,7 +187,7 @@ internal class JsUsefulDeclarationProcessor(
 
         if (context.es6mode && isEsModules) return
 
-        val property = irFunction.correspondingPropertySymbol?.owner ?: return
+        konst property = irFunction.correspondingPropertySymbol?.owner ?: return
 
         if (property.isExported(context) || property.getJsName() != null || property.isOverriddenExternal()) {
             context.intrinsics.jsPrototypeOfSymbol.owner.enqueue(irFunction, "property for export")
@@ -203,8 +203,8 @@ internal class JsUsefulDeclarationProcessor(
 
         super.processConstructedClassDeclaration(declaration)
 
-        if (declaration is IrSimpleFunction && declaration.getJsNameOrKotlinName().asString() == "valueOf") {
-            declaration.enqueue(declaration, "valueOf")
+        if (declaration is IrSimpleFunction && declaration.getJsNameOrKotlinName().asString() == "konstueOf") {
+            declaration.enqueue(declaration, "konstueOf")
         }
 
         // A hack to support `toJson` and other js-specific members
@@ -216,8 +216,8 @@ internal class JsUsefulDeclarationProcessor(
         }
     }
 
-    private val referencedJsClasses = hashSetOf<IrDeclaration>()
-    private val referencedJsClassesFromExpressions = hashSetOf<IrClass>()
+    private konst referencedJsClasses = hashSetOf<IrDeclaration>()
+    private konst referencedJsClassesFromExpressions = hashSetOf<IrClass>()
 
     override fun handleAssociatedObjects() {
         //Handle objects, constructed via `findAssociatedObject` annotation
@@ -226,7 +226,7 @@ internal class JsUsefulDeclarationProcessor(
             if (removeUnusedAssociatedObjects && klass !in referencedJsClasses && klass !in referencedJsClassesFromExpressions) continue
 
             for (annotation in klass.annotations) {
-                val annotationClass = annotation.symbol.owner.constructedClass
+                konst annotationClass = annotation.symbol.owner.constructedClass
                 if (removeUnusedAssociatedObjects && annotationClass !in referencedJsClasses) continue
 
                 annotation.associatedObject()?.let { obj ->
@@ -241,8 +241,8 @@ internal class JsUsefulDeclarationProcessor(
     private fun IrCall.usePrototype(container: IrDeclaration?): Boolean {
         if (superQualifierSymbol == null) return false
 
-        val currentFun = (container as? IrSimpleFunction)
-        val currentClass = currentFun?.parentClassOrNull
+        konst currentFun = (container as? IrSimpleFunction)
+        konst currentClass = currentFun?.parentClassOrNull
 
         return !context.es6mode ||
                 currentFun?.dispatchReceiverParameter == null ||
@@ -257,8 +257,8 @@ internal class JsUsefulDeclarationProcessor(
 }
 
 private fun Collection<IrClass>.filterDescendantsOf(bases: Collection<IrClass>): Collection<IrClass> {
-    val visited = hashSetOf<IrClass>()
-    val baseDescendants = hashSetOf<IrClass>()
+    konst visited = hashSetOf<IrClass>()
+    konst baseDescendants = hashSetOf<IrClass>()
     baseDescendants += bases
 
     fun overridesAnyBase(klass: IrClass): Boolean {

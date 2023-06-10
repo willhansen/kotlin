@@ -4,6 +4,6 @@
 
 package test
 
-abstract class A(val s: String)
+abstract class A(konst s: String)
 
 class B : A(C.foo())

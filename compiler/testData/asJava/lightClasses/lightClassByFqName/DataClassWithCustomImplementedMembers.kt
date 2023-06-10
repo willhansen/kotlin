@@ -2,15 +2,15 @@
 package p
 
 class Wrapper {
-    data class Equals(val code: G) {
+    data class Equals(konst code: G) {
         override fun equals(other: Any?): Boolean = true
     }
 
-    data class HashCode(val code: G) {
+    data class HashCode(konst code: G) {
         override fun hashCode() = 3
     }
 
-    data class ToString(val code: G) {
+    data class ToString(konst code: G) {
         override fun toString() = "b"
     }
 }

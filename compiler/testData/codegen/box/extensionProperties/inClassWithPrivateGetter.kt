@@ -1,5 +1,5 @@
 class Test {
-    private val Int.foo: String
+    private konst Int.foo: String
         get() {
             return "OK"
         }

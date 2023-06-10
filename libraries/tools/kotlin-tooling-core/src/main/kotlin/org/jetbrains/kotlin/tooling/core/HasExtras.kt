@@ -7,9 +7,9 @@ package org.jetbrains.kotlin.tooling.core
 
 
 interface HasExtras {
-    val extras: Extras
+    konst extras: Extras
 }
 
 interface HasMutableExtras : HasExtras {
-    override val extras: MutableExtras
+    override konst extras: MutableExtras
 }

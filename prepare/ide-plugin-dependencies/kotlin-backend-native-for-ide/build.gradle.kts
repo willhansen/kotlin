@@ -8,14 +8,14 @@ idePluginDependency {
     if (!kotlinBuildProperties.isKotlinNativeEnabled) return@idePluginDependency
 
     description = "Stripped down variant of Kotlin Backend Native for IDE (AppCode KMM)"
-    val jarBaseName = property("archivesBaseName") as String
+    konst jarBaseName = property("archivesBaseName") as String
 
-    val proguardLibraryJars by configurations.creating {
+    konst proguardLibraryJars by configurations.creating {
         attributes {
             attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_API))
         }
     }
-    val embedded by configurations
+    konst embedded by configurations
 
     dependencies {
         embedded(project(":kotlin-native:backend.native")) { isTransitive = false }
@@ -28,14 +28,14 @@ idePluginDependency {
 
     noDefaultJar()
 
-    val shadowJar by task<ShadowJar> {
+    konst shadowJar by task<ShadowJar> {
         configurations = listOf(embedded)
         duplicatesStrategy = DuplicatesStrategy.FAIL
         destinationDirectory.set(File(buildDir, "libs"))
         archiveClassifier.set("shadow")
     }
 
-    val proguard by task<CacheableProguardTask> {
+    konst proguard by task<CacheableProguardTask> {
         dependsOn(shadowJar)
 
         configuration(fileFrom(projectDir, "backend-native-for-ide.pro"))
@@ -68,7 +68,7 @@ idePluginDependency {
         )
     }
 
-    val resultJar by task<Jar> {
+    konst resultJar by task<Jar> {
         dependsOn(proguard)
         manifest.attributes.apply {
             put("Implementation-Vendor", "JetBrains")

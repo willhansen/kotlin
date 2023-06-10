@@ -29,17 +29,17 @@ import java.io.File
 abstract class DummyFrameworkTask : DefaultTask() {
 
     @get:Input
-    abstract val frameworkName: Property<String>
+    abstract konst frameworkName: Property<String>
 
     @get:Input
-    abstract val useStaticFramework: Property<Boolean>
+    abstract konst useStaticFramework: Property<Boolean>
 
     @get:OutputDirectory
-    val outputFramework: Provider<File> = project.provider { project.cocoapodsBuildDirs.dummyFramework }
+    konst outputFramework: Provider<File> = project.provider { project.cocoapodsBuildDirs.dummyFramework }
 
-    private val dummyFrameworkResource: String
+    private konst dummyFrameworkResource: String
         get() {
-            val staticOrDynamic = if (!useStaticFramework.get()) "dynamic" else "static"
+            konst staticOrDynamic = if (!useStaticFramework.get()) "dynamic" else "static"
             return "/cocoapods/$staticOrDynamic/dummy.framework/"
         }
 

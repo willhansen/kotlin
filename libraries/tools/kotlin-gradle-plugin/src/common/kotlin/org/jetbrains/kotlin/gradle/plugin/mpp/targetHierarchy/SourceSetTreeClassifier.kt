@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.tooling.core.extrasLazyProperty
  * Consider the following setup:
  * ```kotlin
  * kotlin {
- *     val testCompilation = jvm().compilations.getByName("test")
+ *     konst testCompilation = jvm().compilations.getByName("test")
  * }
  * ```
  *
@@ -67,20 +67,20 @@ sealed class SourceSetTreeClassifier {
      * Predefined [SourceSetTree] using the [tree] specified.
      */
     @ExternalKotlinTargetApi
-    data class Value(val tree: SourceSetTree) : SourceSetTreeClassifier()
+    data class Value(konst tree: SourceSetTree) : SourceSetTreeClassifier()
 
     /**
      * Predefined [SourceSetTree] using the [name] specified
      */
     @ExternalKotlinTargetApi
-    data class Name(val name: String) : SourceSetTreeClassifier()
+    data class Name(konst name: String) : SourceSetTreeClassifier()
 
     /**
      * Wrapper around [org.gradle.api.provider.Property] of a given [SourceSetTree] in order to
      * make the [SourceSetTree] configurable.
      */
     @ExternalKotlinTargetApi
-    class Property(val property: org.gradle.api.provider.Property<SourceSetTree>) : SourceSetTreeClassifier() {
+    class Property(konst property: org.gradle.api.provider.Property<SourceSetTree>) : SourceSetTreeClassifier() {
         override fun toString(): String {
             return property.toString()
         }
@@ -104,7 +104,7 @@ sealed class SourceSetTreeClassifier {
  * - The KGP maintained target will set the classifier within the [KotlinJvmAndroidCompilationFactory]
  * - The external Android target will set this classifier within the 'createCompilation'
  *
- * It is therefore safe to access this value as soon as a compilation is provided
+ * It is therefore safe to access this konstue as soon as a compilation is provided
  */
 internal var KotlinCompilation<*>.sourceSetTreeClassifier: SourceSetTreeClassifier by extrasLazyProperty {
     SourceSetTreeClassifier.Default

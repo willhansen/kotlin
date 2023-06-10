@@ -1,5 +1,5 @@
 fun main(arg: Nothing?) {
-    val flag = true
+    konst flag = true
     consumeTicker(
         if (flag) null else { num -> num.dec() }
     )

@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1302
 package foo
 
-open class A(val barVal: Int) {
+open class A(konst barVal: Int) {
     open fun bar(): Int = 1
     open fun bar2(): Int = barVal + 1
     open fun bar3(t: Int) = t + 2
@@ -24,7 +24,7 @@ class B : A(1) {
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     if (b.bar() != 11) return "Simple call fail. b.bar() is ${b.bar()}"
     if (b.bar2() != 12) return "Wrong 'this' in supercall. b.bar2() is ${b.bar2()}"
     if (b.bar3(2) != 14) return "Supercall with parameter fail. b.bar3(2) is ${b.bar3(2)}"

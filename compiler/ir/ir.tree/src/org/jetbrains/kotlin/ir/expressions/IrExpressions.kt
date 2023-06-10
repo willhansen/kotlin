@@ -13,25 +13,25 @@ import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.impl.IrTypeOperatorCallImpl
 import org.jetbrains.kotlin.ir.types.IrType
 
-val IrFunctionReference.isWithReflection: Boolean
+konst IrFunctionReference.isWithReflection: Boolean
     get() = reflectionTarget != null
 
-val IrFunctionReference.isAdapterWithReflection: Boolean
+konst IrFunctionReference.isAdapterWithReflection: Boolean
     get() = reflectionTarget != null && reflectionTarget != symbol
 
 var IrDynamicOperatorExpression.left: IrExpression
     get() = receiver
-    set(value) {
-        receiver = value
+    set(konstue) {
+        receiver = konstue
     }
 
 var IrDynamicOperatorExpression.right: IrExpression
     get() = arguments[0]
-    set(value) {
+    set(konstue) {
         if (arguments.isEmpty())
-            arguments.add(value)
+            arguments.add(konstue)
         else
-            arguments[0] = value
+            arguments[0] = konstue
     }
 
 fun IrFunctionAccessExpression.putArgument(parameter: IrValueParameter, argument: IrExpression): Unit =
@@ -49,7 +49,7 @@ fun IrStringConcatenation.addArgument(argument: IrExpression) {
     arguments.add(argument)
 }
 
-val IrContainerExpression.isTransparentScope: Boolean
+konst IrContainerExpression.isTransparentScope: Boolean
     get() = this is IrComposite
 
 fun IrExpression.implicitCastTo(expectedType: IrType?): IrExpression {
@@ -86,7 +86,7 @@ fun IrMemberAccessExpression<*>.copyTypeArgumentsFrom(other: IrMemberAccessExpre
     }
 }
 
-val CallableDescriptor.typeParametersCount: Int
+konst CallableDescriptor.typeParametersCount: Int
     get() =
         when (this) {
             is PropertyAccessorDescriptor -> correspondingProperty.typeParameters.size

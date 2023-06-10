@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.generators.builtins
 import org.jetbrains.kotlin.generators.builtins.ProgressionKind.CHAR
 import java.io.PrintWriter
 
-enum class PrimitiveType(val byteSize: Int) {
+enum class PrimitiveType(konst byteSize: Int) {
     BYTE(1),
     CHAR(2),
     SHORT(2),
@@ -18,17 +18,17 @@ enum class PrimitiveType(val byteSize: Int) {
     DOUBLE(8),
     BOOLEAN(1);
 
-    val capitalized: String get() = name.lowercase().replaceFirstChar(Char::uppercase)
-    val bitSize = byteSize * 8
+    konst capitalized: String get() = name.lowercase().replaceFirstChar(Char::uppercase)
+    konst bitSize = byteSize * 8
 
-    val isFloatingPoint: Boolean get() = this in floatingPoint
-    val isIntegral: Boolean get() = this in integral
+    konst isFloatingPoint: Boolean get() = this in floatingPoint
+    konst isIntegral: Boolean get() = this in integral
 
     companion object {
-        val exceptBoolean = PrimitiveType.values().filterNot { it == BOOLEAN }
-        val onlyNumeric = PrimitiveType.values().filterNot { it == BOOLEAN || it == CHAR }
-        val floatingPoint = listOf(FLOAT, DOUBLE)
-        val integral = exceptBoolean - floatingPoint
+        konst exceptBoolean = PrimitiveType.konstues().filterNot { it == BOOLEAN }
+        konst onlyNumeric = PrimitiveType.konstues().filterNot { it == BOOLEAN || it == CHAR }
+        konst floatingPoint = listOf(FLOAT, DOUBLE)
+        konst integral = exceptBoolean - floatingPoint
     }
 }
 
@@ -38,12 +38,12 @@ enum class UnsignedType {
     UINT,
     ULONG;
 
-    val capitalized: String get() = name.substring(0, 2) + name.substring(2).lowercase()
-    val asSigned: PrimitiveType = PrimitiveType.valueOf(name.substring(1))
+    konst capitalized: String get() = name.substring(0, 2) + name.substring(2).lowercase()
+    konst asSigned: PrimitiveType = PrimitiveType.konstueOf(name.substring(1))
 
-    val byteSize = (1 shl ordinal)
-    val bitSize = byteSize * 8
-    val mask = "0x${List(byteSize) { "FF" }.chunked(2).joinToString("_") { it.joinToString("") }}"
+    konst byteSize = (1 shl ordinal)
+    konst bitSize = byteSize * 8
+    konst mask = "0x${List(byteSize) { "FF" }.chunked(2).joinToString("_") { it.joinToString("") }}"
 }
 
 enum class ProgressionKind {
@@ -51,7 +51,7 @@ enum class ProgressionKind {
     INT,
     LONG;
 
-    val capitalized: String get() = name.lowercase().replaceFirstChar(Char::uppercase)
+    konst capitalized: String get() = name.lowercase().replaceFirstChar(Char::uppercase)
 }
 
 fun progressionIncrementType(kind: ProgressionKind) = when (kind) {
@@ -69,7 +69,7 @@ fun convert(v: String, from: PrimitiveType, to: PrimitiveType) = if (from == to)
 
 
 fun PrintWriter.printDoc(documentation: String, indent: String) {
-    val docLines = documentation.lines()
+    konst docLines = documentation.lines()
     if (docLines.size == 1) {
         this.println("$indent/** $documentation */")
     } else {

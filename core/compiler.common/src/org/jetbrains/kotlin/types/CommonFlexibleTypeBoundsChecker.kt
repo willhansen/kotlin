@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.builtins.StandardNames.FqNames
 import org.jetbrains.kotlin.name.FqName
 
 object CommonFlexibleTypeBoundsChecker {
-    val baseTypesToMutableEquivalent = mapOf(
+    konst baseTypesToMutableEquikonstent = mapOf(
         FqNames.iterable to FqNames.mutableIterable,
         FqNames.iterator to FqNames.mutableIterator,
         FqNames.listIterator to FqNames.mutableListIterator,
@@ -19,9 +19,9 @@ object CommonFlexibleTypeBoundsChecker {
         FqNames.map to FqNames.mutableMap,
         FqNames.mapEntry to FqNames.mutableMapEntry
     )
-    val mutableToBaseMap = baseTypesToMutableEquivalent.entries.associateBy({ it.value }) { it.key }
+    konst mutableToBaseMap = baseTypesToMutableEquikonstent.entries.associateBy({ it.konstue }) { it.key }
 
     fun getBaseBoundFqNameByMutability(fqName: FqName): FqName? =
-        if (fqName in baseTypesToMutableEquivalent) fqName
+        if (fqName in baseTypesToMutableEquikonstent) fqName
         else mutableToBaseMap[fqName]
 }

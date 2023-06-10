@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 class FirUnitExpression @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
 ) : FirExpression() {
     override var typeRef: FirTypeRef = FirImplicitUnitTypeRef(source?.fakeElement(KtFakeSourceElementKind.ImplicitTypeRef))

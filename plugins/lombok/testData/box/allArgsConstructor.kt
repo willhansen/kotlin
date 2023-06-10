@@ -12,7 +12,7 @@ public class ConstructorExample {
     private boolean otherField;
 
     static void javaUsage() {
-        val generated = new ConstructorExample(12, "sdf", true);
+        konst generated = new ConstructorExample(12, "sdf", true);
     }
 }
 
@@ -20,6 +20,6 @@ public class ConstructorExample {
 // FILE: test.kt
 
 fun box(): String {
-    val generated = ConstructorExample(12, "sdf", true)
+    konst generated = ConstructorExample(12, "sdf", true)
     return "OK"
 }

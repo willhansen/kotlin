@@ -1,14 +1,14 @@
 //ALLOW_AST_ACCESS
 package test
 
-annotation class IntAnno(val value: Int)
-annotation class ShortAnno(val value: Short)
-annotation class ByteAnno(val value: Byte)
-annotation class LongAnno(val value: Long)
-annotation class CharAnno(val value: Char)
-annotation class BooleanAnno(val value: Boolean)
-annotation class FloatAnno(val value: Float)
-annotation class DoubleAnno(val value: Double)
+annotation class IntAnno(konst konstue: Int)
+annotation class ShortAnno(konst konstue: Short)
+annotation class ByteAnno(konst konstue: Byte)
+annotation class LongAnno(konst konstue: Long)
+annotation class CharAnno(konst konstue: Char)
+annotation class BooleanAnno(konst konstue: Boolean)
+annotation class FloatAnno(konst konstue: Float)
+annotation class DoubleAnno(konst konstue: Double)
 
 @IntAnno(42.toInt())
 @ShortAnno(42.toShort())

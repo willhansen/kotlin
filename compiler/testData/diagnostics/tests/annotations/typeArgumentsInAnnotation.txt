@@ -4,7 +4,7 @@ package
 
 public final annotation class Foo</*0*/ T> : kotlin.Annotation {
     public constructor Foo</*0*/ T>(/*0*/ s: kotlin.String)
-    public final val s: kotlin.String
+    public final konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -22,8 +22,8 @@ internal fun <T> Sequence<T>.windowedSequence(size: Int, step: Int, partialWindo
 internal fun <T> windowedIterator(iterator: Iterator<T>, size: Int, step: Int, partialWindows: Boolean, reuseBuffer: Boolean): Iterator<List<T>> {
     if (!iterator.hasNext()) return EmptyIterator
     return iterator<List<T>> {
-        val bufferInitialCapacity = size.coerceAtMost(1024)
-        val gap = step - size
+        konst bufferInitialCapacity = size.coerceAtMost(1024)
+        konst gap = step - size
         if (gap >= 0) {
             var buffer = ArrayList<T>(bufferInitialCapacity)
             var skip = 0
@@ -61,7 +61,7 @@ internal fun <T> windowedIterator(iterator: Iterator<T>, size: Int, step: Int, p
     }
 }
 
-internal class MovingSubList<out E>(private val list: List<E>) : AbstractList<E>(), RandomAccess {
+internal class MovingSubList<out E>(private konst list: List<E>) : AbstractList<E>(), RandomAccess {
     private var fromIndex: Int = 0
     private var _size: Int = 0
 
@@ -77,7 +77,7 @@ internal class MovingSubList<out E>(private val list: List<E>) : AbstractList<E>
         return list[fromIndex + index]
     }
 
-    override val size: Int get() = _size
+    override konst size: Int get() = _size
 }
 
 
@@ -86,7 +86,7 @@ internal class MovingSubList<out E>(private val list: List<E>) : AbstractList<E>
  *
  * Buffer overflow is not allowed so [add] doesn't overwrite tail but raises an exception.
  */
-private class RingBuffer<T>(private val buffer: Array<Any?>, filledSize: Int) : AbstractList<T>(), RandomAccess {
+private class RingBuffer<T>(private konst buffer: Array<Any?>, filledSize: Int) : AbstractList<T>(), RandomAccess {
     init {
         require(filledSize >= 0) { "ring buffer filled size should not be negative but it is $filledSize" }
         require(filledSize <= buffer.size) { "ring buffer filled size: $filledSize cannot be larger than the buffer size: ${buffer.size}" }
@@ -94,7 +94,7 @@ private class RingBuffer<T>(private val buffer: Array<Any?>, filledSize: Int) : 
 
     constructor(capacity: Int) : this(arrayOfNulls<Any?>(capacity), 0)
 
-    private val capacity = buffer.size
+    private konst capacity = buffer.size
     private var startIndex: Int = 0
 
     override var size: Int = filledSize
@@ -126,10 +126,10 @@ private class RingBuffer<T>(private val buffer: Array<Any?>, filledSize: Int) : 
 
     @Suppress("UNCHECKED_CAST")
     override fun <T> toArray(array: Array<T>): Array<T> {
-        val result: Array<T?> =
+        konst result: Array<T?> =
             if (array.size < this.size) array.copyOf(this.size) else array as Array<T?>
 
-        val size = this.size
+        konst size = this.size
 
         var widx = 0
         var idx = startIndex
@@ -160,8 +160,8 @@ private class RingBuffer<T>(private val buffer: Array<Any?>, filledSize: Int) : 
      * The returned ring buffer contains the same elements as this ring buffer.
      */
     fun expanded(maxCapacity: Int): RingBuffer<T> {
-        val newCapacity = (capacity + (capacity shr 1) + 1).coerceAtMost(maxCapacity)
-        val newBuffer = if (startIndex == 0) buffer.copyOf(newCapacity) else toArray(arrayOfNulls(newCapacity))
+        konst newCapacity = (capacity + (capacity shr 1) + 1).coerceAtMost(maxCapacity)
+        konst newBuffer = if (startIndex == 0) buffer.copyOf(newCapacity) else toArray(arrayOfNulls(newCapacity))
         return RingBuffer(newBuffer, size)
     }
 
@@ -185,8 +185,8 @@ private class RingBuffer<T>(private val buffer: Array<Any?>, filledSize: Int) : 
         require(n <= size) { "n shouldn't be greater than the buffer size: n = $n, size = $size" }
 
         if (n > 0) {
-            val start = startIndex
-            val end = start.forward(n)
+            konst start = startIndex
+            konst end = start.forward(n)
 
             if (start > end) {
                 buffer.fill(null, start, capacity)

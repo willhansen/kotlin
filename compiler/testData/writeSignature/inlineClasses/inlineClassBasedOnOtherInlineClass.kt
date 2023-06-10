@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Foo(val b: Bar)
-inline class Bar(val i: Int)
+inline class Foo(konst b: Bar)
+inline class Bar(konst i: Int)
 
 object Test {
     fun simple(f: Foo) {}

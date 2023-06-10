@@ -2,7 +2,7 @@
 import kotlin.test.*
 
 fun box(): String {
-    val xs = listOf(1, 1, 1, 1)
+    konst xs = listOf(1, 1, 1, 1)
     var sum = 0
     for (i in xs.indices.reversed()) {
         sum = sum * 10 + i + xs[i]

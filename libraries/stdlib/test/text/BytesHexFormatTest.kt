@@ -9,8 +9,8 @@ import kotlin.test.*
 
 class BytesHexFormatTest {
     companion object {
-        val fourBytes = ByteArray(4) { (10 + it).toByte() }
-        val twentyBytes = ByteArray(20) { it.toByte() }
+        konst fourBytes = ByteArray(4) { (10 + it).toByte() }
+        konst twentyBytes = ByteArray(20) { it.toByte() }
     }
 
     private fun testFormatAndParse(bytes: ByteArray, expected: String, format: HexFormat) {
@@ -23,7 +23,7 @@ class BytesHexFormatTest {
 
     @Test
     fun ignoreNumberFormat() {
-        val format = HexFormat {
+        konst format = HexFormat {
             number {
                 prefix = "0x"
                 suffix = "h"
@@ -72,15 +72,15 @@ class BytesHexFormatTest {
     fun bytesPerLine() {
         // Fewer bytes in the last line
         run {
-            val format = HexFormat { bytes.bytesPerLine = 8 }
-            val expected = "0001020304050607\n08090a0b0c0d0e0f\n10111213"
+            konst format = HexFormat { bytes.bytesPerLine = 8 }
+            konst expected = "0001020304050607\n08090a0b0c0d0e0f\n10111213"
             testFormatAndParse(twentyBytes, expected, format)
         }
 
         // The last line is not ended by the line separator
         run {
-            val format = HexFormat { bytes.bytesPerLine = 4 }
-            val expected = "00010203\n04050607\n08090a0b\n0c0d0e0f\n10111213"
+            konst format = HexFormat { bytes.bytesPerLine = 4 }
+            konst expected = "00010203\n04050607\n08090a0b\n0c0d0e0f\n10111213"
             testFormatAndParse(twentyBytes, expected, format)
         }
     }
@@ -89,34 +89,34 @@ class BytesHexFormatTest {
     fun bytesPerGroup() {
         // The default group separator, and fewer bytes in the last group
         run {
-            val format = HexFormat { bytes.bytesPerGroup = 8 }
-            val expected = "0001020304050607  08090a0b0c0d0e0f  10111213"
+            konst format = HexFormat { bytes.bytesPerGroup = 8 }
+            konst expected = "0001020304050607  08090a0b0c0d0e0f  10111213"
             testFormatAndParse(twentyBytes, expected, format)
         }
 
         // The specified group separator
         run {
-            val format = HexFormat {
+            konst format = HexFormat {
                 bytes {
                     bytesPerGroup = 8
                     groupSeparator = "---"
                 }
             }
-            val expected = "0001020304050607---08090a0b0c0d0e0f---10111213"
+            konst expected = "0001020304050607---08090a0b0c0d0e0f---10111213"
             testFormatAndParse(twentyBytes, expected, format)
         }
 
         // The last group is not ended by the group separator
         run {
-            val format = HexFormat { bytes.bytesPerGroup = 4 }
-            val expected = "00010203  04050607  08090a0b  0c0d0e0f  10111213"
+            konst format = HexFormat { bytes.bytesPerGroup = 4 }
+            konst expected = "00010203  04050607  08090a0b  0c0d0e0f  10111213"
             testFormatAndParse(twentyBytes, expected, format)
         }
     }
 
     @Test
     fun bytesPerLineAndBytesPerGroup() {
-        val format = HexFormat {
+        konst format = HexFormat {
             upperCase = true
             bytes {
                 bytesPerLine = 10
@@ -128,9 +128,9 @@ class BytesHexFormatTest {
             }
         }
 
-        val byteArray = ByteArray(31) { it.toByte() }
+        konst byteArray = ByteArray(31) { it.toByte() }
 
-        val expected = """
+        konst expected = """
             #00; #01; #02; #03;---#04; #05; #06; #07;---#08; #09;
             #0A; #0B; #0C; #0D;---#0E; #0F; #10; #11;---#12; #13;
             #14; #15; #16; #17;---#18; #19; #1A; #1B;---#1C; #1D;
@@ -142,7 +142,7 @@ class BytesHexFormatTest {
 
     @Test
     fun macAddress() {
-        val address = byteArrayOf(0x00, 0x1b, 0x63, 0x84.toByte(), 0x45, 0xe6.toByte())
+        konst address = byteArrayOf(0x00, 0x1b, 0x63, 0x84.toByte(), 0x45, 0xe6.toByte())
 
         testFormatAndParse(
             address,
@@ -173,7 +173,7 @@ class BytesHexFormatTest {
             "03a".hexToByteArray()
         }
 
-        val format = HexFormat { bytes.bytePrefix = "#"; bytes.byteSuffix = ";" }
+        konst format = HexFormat { bytes.bytePrefix = "#"; bytes.byteSuffix = ";" }
         assertContentEquals(byteArrayOf(58), "#3a;".hexToByteArray(format))
         assertFailsWith<NumberFormatException> {
             "#a;".hexToByteArray(format)
@@ -193,12 +193,12 @@ class BytesHexFormatTest {
             twentyBytes,
             "000102030405060708090A0B0C0D0E0F10111213".hexToByteArray()
         )
-        val hexString = "0x00H bs 0x01H bS 0x02H Bs 0x03H  gs  " +
+        konst hexString = "0x00H bs 0x01H bS 0x02H Bs 0x03H  gs  " +
                 "0x04h BS 0x05h bs 0x06h Bs 0x07h  Gs  " +
                 "0X08H bS 0X09H Bs 0X0aH bs 0X0bH  gS  " +
                 "0X0Ch bs 0X0Dh BS 0X0Eh Bs 0X0Fh  GS  " +
                 "0x10H Bs 0x11H bS 0x12H BS 0x13H"
-        val format = HexFormat {
+        konst format = HexFormat {
             upperCase = true
             bytes {
                 bytesPerGroup = 4
@@ -260,19 +260,19 @@ class BytesHexFormatTest {
 
     @Test
     fun bytesPerGroupBiggerThanBytesPerLine() {
-        val format = HexFormat { bytes.bytesPerLine = 8; bytes.bytesPerGroup = 10 }
-        val expected = "0001020304050607\n08090a0b0c0d0e0f\n10111213"
+        konst format = HexFormat { bytes.bytesPerLine = 8; bytes.bytesPerGroup = 10 }
+        konst expected = "0001020304050607\n08090a0b0c0d0e0f\n10111213"
         testFormatAndParse(twentyBytes, expected, format)
     }
 
     @Test
     fun groupSeparatorWithNewLine() {
-        val format = HexFormat { bytes.bytesPerLine = 8; bytes.bytesPerGroup = 3; bytes.groupSeparator = "\n" }
-        val expected = "000102\n030405\n0607\n08090a\n0b0c0d\n0e0f\n101112\n13"
+        konst format = HexFormat { bytes.bytesPerLine = 8; bytes.bytesPerGroup = 3; bytes.groupSeparator = "\n" }
+        konst expected = "000102\n030405\n0607\n08090a\n0b0c0d\n0e0f\n101112\n13"
         testFormatAndParse(twentyBytes, expected, format)
     }
 
-    // Invalid HexFormat configuration
+    // Inkonstid HexFormat configuration
 
     @Test
     fun nonPositiveBytesPerLine() {
@@ -310,7 +310,7 @@ class BytesHexFormatTest {
 
     @Test
     fun formatToString() {
-        val format = HexFormat {
+        konst format = HexFormat {
             upperCase = true
             bytes {
                 bytesPerLine = 10
@@ -327,7 +327,7 @@ class BytesHexFormatTest {
             }
         }
 
-        val expectedHexFormat = """
+        konst expectedHexFormat = """
             HexFormat(
                 upperCase = true,
                 bytes = BytesHexFormat(
@@ -347,7 +347,7 @@ class BytesHexFormatTest {
             """.trimIndent()
         assertEquals(expectedHexFormat, format.toString())
 
-        val expectedBytesHexFormat = """
+        konst expectedBytesHexFormat = """
             BytesHexFormat(
                 bytesPerLine = 10,
                 bytesPerGroup = 4,
@@ -359,7 +359,7 @@ class BytesHexFormatTest {
             """.trimIndent()
         assertEquals(expectedBytesHexFormat, format.bytes.toString())
 
-        val expectedNumberHexFormat = """
+        konst expectedNumberHexFormat = """
             NumberHexFormat(
                 prefix = "0x",
                 suffix = "h",
@@ -376,17 +376,17 @@ class BytesHexFormatTest {
         assertSame(HexFormat.Default.bytes, HexFormat.UpperCase.bytes)
         assertSame(HexFormat.Default.number, HexFormat.UpperCase.number)
 
-        val emptyFormat = HexFormat {}
+        konst emptyFormat = HexFormat {}
         assertNotSame(HexFormat.Default, emptyFormat)
         assertEquals(HexFormat.Default.upperCase, emptyFormat.upperCase)
         assertSame(HexFormat.Default.bytes, emptyFormat.bytes)
         assertSame(HexFormat.Default.number, emptyFormat.number)
 
-        val bytesFormat = HexFormat { bytes }
+        konst bytesFormat = HexFormat { bytes }
         assertNotSame(HexFormat.Default.bytes, bytesFormat.bytes)
         assertSame(HexFormat.Default.number, bytesFormat.number)
 
-        val numberFormat = HexFormat { number {} }
+        konst numberFormat = HexFormat { number {} }
         assertSame(HexFormat.Default.bytes, numberFormat.bytes)
         assertNotSame(HexFormat.Default.number, numberFormat.number)
     }
@@ -395,7 +395,7 @@ class BytesHexFormatTest {
     fun formattedStringLength() {
         run {
 //            00010203\n04050607\n08090a0b\n0c0d0e0f\n10111213
-            val length = formattedStringLength(
+            konst length = formattedStringLength(
                 totalBytes = 20,
                 bytesPerLine = 4,
                 bytesPerGroup = Int.MAX_VALUE,
@@ -408,7 +408,7 @@ class BytesHexFormatTest {
         }
         run {
 //            0001020304050607---08090a0b0c0d0e0f---10111213
-            val length = formattedStringLength(
+            konst length = formattedStringLength(
                 totalBytes = 20,
                 bytesPerLine = Int.MAX_VALUE,
                 bytesPerGroup = 8,
@@ -424,7 +424,7 @@ class BytesHexFormatTest {
 //            #0A; #0B; #0C; #0D;---#0E; #0F; #10; #11;---#12; #13;
 //            #14; #15; #16; #17;---#18; #19; #1A; #1B;---#1C; #1D;
 //            #1E;
-            val length = formattedStringLength(
+            konst length = formattedStringLength(
                 totalBytes = 31,
                 bytesPerLine = 10,
                 bytesPerGroup = 4,
@@ -436,7 +436,7 @@ class BytesHexFormatTest {
             assertEquals(166, length)
         }
         run {
-            val length = formattedStringLength(
+            konst length = formattedStringLength(
                 totalBytes = Int.MAX_VALUE / 2,
                 bytesPerLine = Int.MAX_VALUE,
                 bytesPerGroup = Int.MAX_VALUE,
@@ -475,7 +475,7 @@ class BytesHexFormatTest {
     fun parsedByteArrayMaxSize() {
         run {
 //            00010203\n04050607\n08090a0b\n0c0d0e0f\n10111213
-            val maxSize = parsedByteArrayMaxSize(
+            konst maxSize = parsedByteArrayMaxSize(
                 stringLength = 44,
                 bytesPerLine = 4,
                 bytesPerGroup = Int.MAX_VALUE,
@@ -488,7 +488,7 @@ class BytesHexFormatTest {
         }
         run {
 //            0001020304050607---08090a0b0c0d0e0f---10111213
-            val maxSize = parsedByteArrayMaxSize(
+            konst maxSize = parsedByteArrayMaxSize(
                 stringLength = 46,
                 bytesPerLine = Int.MAX_VALUE,
                 bytesPerGroup = 8,
@@ -504,7 +504,7 @@ class BytesHexFormatTest {
 //            #0A; #0B; #0C; #0D;---#0E; #0F; #10; #11;---#12; #13;
 //            #14; #15; #16; #17;---#18; #19; #1A; #1B;---#1C; #1D;
 //            #1E;
-            val maxSize = parsedByteArrayMaxSize(
+            konst maxSize = parsedByteArrayMaxSize(
                 stringLength = 166,
                 bytesPerLine = 10,
                 bytesPerGroup = 4,
@@ -518,7 +518,7 @@ class BytesHexFormatTest {
         run {
 //            0001020304050607\n08090a0b0c0d0e0f\n10111213
             // bytesPerGroup > bytesPerLine
-            val maxSize = parsedByteArrayMaxSize(
+            konst maxSize = parsedByteArrayMaxSize(
                 stringLength = 42,
                 bytesPerLine = 8,
                 bytesPerGroup = 10,
@@ -530,7 +530,7 @@ class BytesHexFormatTest {
             assertEquals(20, maxSize)
         }
         run {
-            val maxSize = parsedByteArrayMaxSize(
+            konst maxSize = parsedByteArrayMaxSize(
                 stringLength = Int.MAX_VALUE,
                 bytesPerLine = Int.MAX_VALUE,
                 bytesPerGroup = Int.MAX_VALUE,
@@ -542,7 +542,7 @@ class BytesHexFormatTest {
             assertEquals(Int.MAX_VALUE / 2 + 1, maxSize)
         }
         run {
-            val maxSize = parsedByteArrayMaxSize(
+            konst maxSize = parsedByteArrayMaxSize(
                 stringLength = Int.MAX_VALUE,
                 bytesPerLine = Int.MAX_VALUE,
                 bytesPerGroup = Int.MAX_VALUE,
@@ -554,7 +554,7 @@ class BytesHexFormatTest {
             assertEquals(1, maxSize)
         }
         run {
-            val maxSize = parsedByteArrayMaxSize(
+            konst maxSize = parsedByteArrayMaxSize(
                 stringLength = Int.MAX_VALUE,
                 bytesPerLine = Int.MAX_VALUE,
                 bytesPerGroup = Int.MAX_VALUE / 2,

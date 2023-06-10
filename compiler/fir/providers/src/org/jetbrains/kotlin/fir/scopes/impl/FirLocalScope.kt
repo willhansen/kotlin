@@ -24,10 +24,10 @@ import org.jetbrains.kotlin.fir.util.PersistentMultimap
 import org.jetbrains.kotlin.name.Name
 
 class FirLocalScope private constructor(
-    val properties: PersistentMap<Name, FirVariableSymbol<*>>,
-    val functions: PersistentMultimap<Name, FirNamedFunctionSymbol>,
-    val classes: PersistentMap<Name, FirRegularClassSymbol>,
-    val useSiteSession: FirSession
+    konst properties: PersistentMap<Name, FirVariableSymbol<*>>,
+    konst functions: PersistentMultimap<Name, FirNamedFunctionSymbol>,
+    konst classes: PersistentMap<Name, FirRegularClassSymbol>,
+    konst useSiteSession: FirSession
 ) : FirContainingNamesAwareScope() {
     constructor(session: FirSession) : this(persistentMapOf(), PersistentMultimap(), persistentMapOf(), session)
 
@@ -50,7 +50,7 @@ class FirLocalScope private constructor(
     }
 
     fun storeBackingField(property: FirProperty, session: FirSession): FirLocalScope {
-        val enhancedProperties = property.backingField?.symbol?.let {
+        konst enhancedProperties = property.backingField?.symbol?.let {
             properties.put(BACKING_FIELD, it)
         }
 
@@ -69,16 +69,16 @@ class FirLocalScope private constructor(
     }
 
     override fun processPropertiesByName(name: Name, processor: (FirVariableSymbol<*>) -> Unit) {
-        val property = properties[name]
+        konst property = properties[name]
         if (property != null) {
             processor(property)
         }
     }
 
     override fun processClassifiersByNameWithSubstitution(name: Name, processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit) {
-        val klass = classes[name]
+        konst klass = classes[name]
         if (klass != null) {
-            val substitution = klass.typeParameterSymbols.associateWith { it.toConeType() }
+            konst substitution = klass.typeParameterSymbols.associateWith { it.toConeType() }
             processor(klass, ConeSubstitutorByMap(substitution, useSiteSession))
         }
     }

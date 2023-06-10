@@ -28,19 +28,19 @@ class FixStackInterpreter : BasicTypeInterpreter<FixStackValue>() {
     override fun typeConstValue(typeConst: Type) = FixStackValue.OBJECT
     override fun aaLoadValue(arrayValue: FixStackValue) = FixStackValue.OBJECT
 
-    override fun copyOperation(insn: AbstractInsnNode, value: FixStackValue): FixStackValue =
+    override fun copyOperation(insn: AbstractInsnNode, konstue: FixStackValue): FixStackValue =
         when (insn.opcode) {
             ILOAD -> FixStackValue.INT
             LLOAD -> FixStackValue.LONG
             FLOAD -> FixStackValue.FLOAT
             DLOAD -> FixStackValue.DOUBLE
             ALOAD -> FixStackValue.OBJECT
-            else -> value
+            else -> konstue
         }
 
     override fun merge(v: FixStackValue, w: FixStackValue): FixStackValue =
         if (v == w)
             v
         else
-            throw AssertionError("Mismatching value kinds: $v != $w")
+            throw AssertionError("Mismatching konstue kinds: $v != $w")
 }

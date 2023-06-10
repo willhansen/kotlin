@@ -8,9 +8,9 @@ package kotlin.reflect.js.internal
 import kotlin.reflect.*
 
 internal class KTypeImpl(
-    override val classifier: KClassifier,
-    override val arguments: List<KTypeProjection>,
-    override val isMarkedNullable: Boolean
+    override konst classifier: KClassifier,
+    override konst arguments: List<KTypeProjection>,
+    override konst isMarkedNullable: Boolean
 ) : KType {
     override fun equals(other: Any?): Boolean =
         other is KTypeImpl &&
@@ -20,25 +20,25 @@ internal class KTypeImpl(
         (classifier.hashCode() * 31 + arguments.hashCode()) * 31 + isMarkedNullable.hashCode()
 
     override fun toString(): String {
-        val kClass = (classifier as? KClass<*>)
-        val classifierName = when {
+        konst kClass = (classifier as? KClass<*>)
+        konst classifierName = when {
             kClass == null -> classifier.toString()
             kClass.simpleName != null -> kClass.simpleName
             else -> "(non-denotable type)"
         }
 
-        val args =
+        konst args =
             if (arguments.isEmpty()) ""
             else arguments.joinToString(", ", "<", ">")
-        val nullable = if (isMarkedNullable) "?" else ""
+        konst nullable = if (isMarkedNullable) "?" else ""
 
         return classifierName + args + nullable
     }
 }
 
 internal object DynamicKType : KType {
-    override val classifier: KClassifier? = null
-    override val arguments: List<KTypeProjection> = emptyList()
-    override val isMarkedNullable: Boolean = false
+    override konst classifier: KClassifier? = null
+    override konst arguments: List<KTypeProjection> = emptyList()
+    override konst isMarkedNullable: Boolean = false
     override fun toString(): String = "dynamic"
 }

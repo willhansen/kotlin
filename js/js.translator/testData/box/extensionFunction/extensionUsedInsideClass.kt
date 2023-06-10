@@ -2,7 +2,7 @@
 package foo
 
 class A(var a: Int) {
-    fun eval() = f();
+    fun ekonst() = f();
 }
 
 fun A.f(): Int {
@@ -11,6 +11,6 @@ fun A.f(): Int {
 }
 
 fun box(): String {
-    val a = A(4)
-    return if ((a.eval() == 10) && (a.a == 3)) "OK" else "fail"
+    konst a = A(4)
+    return if ((a.ekonst() == 10) && (a.a == 3)) "OK" else "fail"
 }

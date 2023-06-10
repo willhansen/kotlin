@@ -32,40 +32,40 @@ interface KotlinProject {
      *
      * @return the version of this model.
      */
-    val modelVersion: Long
+    konst modelVersion: Long
 
     /**
      * Returns the module (Gradle project) name.
      *
      * @return the module name.
      */
-    val name: String
+    konst name: String
 
     /**
      * Return the Kotlin version.
      *
      * @return the Kotlin version.
      */
-    val kotlinVersion: String
+    konst kotlinVersion: String
 
     /**
      * Return the type of the platform plugin applied.
      *
-     * @return the type of the platform plugin applied. Possible values are defined in the enum.
+     * @return the type of the platform plugin applied. Possible konstues are defined in the enum.
      */
-    val projectType: ProjectType
+    konst projectType: ProjectType
 
     /**
      * Return all source sets used by Kotlin.
      *
      * @return all source sets.
      */
-    val sourceSets: Collection<SourceSet>
+    konst sourceSets: Collection<SourceSet>
 
     /**
      * Return all modules (Gradle projects) registered as 'expectedBy' dependency.
      *
      * @return expectedBy dependencies.
      */
-    val expectedByDependencies: Collection<String>
+    konst expectedByDependencies: Collection<String>
 }

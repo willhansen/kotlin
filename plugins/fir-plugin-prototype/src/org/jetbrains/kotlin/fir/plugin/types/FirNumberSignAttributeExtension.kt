@@ -19,13 +19,13 @@ import org.jetbrains.kotlin.name.Name
 
 class FirNumberSignAttributeExtension(session: FirSession) : FirTypeAttributeExtension(session) {
     companion object {
-        private val PACKAGE_FQN = FqName("org.jetbrains.kotlin.fir.plugin")
-        private val PositiveClassId = ClassId(PACKAGE_FQN, Name.identifier("Positive"))
-        private val NegativeClassId = ClassId(PACKAGE_FQN, Name.identifier("Negative"))
+        private konst PACKAGE_FQN = FqName("org.jetbrains.kotlin.fir.plugin")
+        private konst PositiveClassId = ClassId(PACKAGE_FQN, Name.identifier("Positive"))
+        private konst NegativeClassId = ClassId(PACKAGE_FQN, Name.identifier("Negative"))
     }
 
     override fun extractAttributeFromAnnotation(annotation: FirAnnotation): ConeAttribute<*>? {
-        val sign = when (annotation.annotationTypeRef.coneTypeSafe<ConeClassLikeType>()?.classId) {
+        konst sign = when (annotation.annotationTypeRef.coneTypeSafe<ConeClassLikeType>()?.classId) {
             PositiveClassId -> ConeNumberSignAttribute.Sign.Positive
             NegativeClassId -> ConeNumberSignAttribute.Sign.Negative
             else -> return null
@@ -35,7 +35,7 @@ class FirNumberSignAttributeExtension(session: FirSession) : FirTypeAttributeExt
 
     override fun convertAttributeToAnnotation(attribute: ConeAttribute<*>): FirAnnotation? {
         if (attribute !is ConeNumberSignAttribute) return null
-        val classId = when (attribute.sign) {
+        konst classId = when (attribute.sign) {
             ConeNumberSignAttribute.Sign.Positive -> PositiveClassId
             ConeNumberSignAttribute.Sign.Negative -> NegativeClassId
         }

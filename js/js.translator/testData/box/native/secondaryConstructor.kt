@@ -7,13 +7,13 @@ external class A {
     constructor(s: String)
     constructor(i: Int)
 
-    val value: Any?
+    konst konstue: Any?
 }
 
 fun test(a: A, expectedValue: Any?, expectedTypeOfValue: String) {
     assertTrue(a is A)
-    assertEquals(expectedValue, a.value)
-    assertEquals(expectedTypeOfValue, jsTypeOf(a.value))
+    assertEquals(expectedValue, a.konstue)
+    assertEquals(expectedTypeOfValue, jsTypeOf(a.konstue))
 }
 
 fun box(): String {

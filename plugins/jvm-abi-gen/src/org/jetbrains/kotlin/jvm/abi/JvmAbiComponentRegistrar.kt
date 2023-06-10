@@ -16,15 +16,15 @@ import java.io.File
 
 class JvmAbiComponentRegistrar : CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        val outputPath = configuration.getNotNull(JvmAbiConfigurationKeys.OUTPUT_PATH)
-        val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
+        konst outputPath = configuration.getNotNull(JvmAbiConfigurationKeys.OUTPUT_PATH)
+        konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
         configuration.put(JVMConfigurationKeys.RETAIN_OUTPUT_IN_MEMORY, true)
-        val builderExtension = JvmAbiClassBuilderInterceptor()
-        val outputExtension = JvmAbiOutputExtension(File(outputPath), builderExtension.abiClassInfo, messageCollector)
+        konst builderExtension = JvmAbiClassBuilderInterceptor()
+        konst outputExtension = JvmAbiOutputExtension(File(outputPath), builderExtension.abiClassInfo, messageCollector)
         ClassGeneratorExtension.registerExtension(builderExtension)
         ClassFileFactoryFinalizerExtension.registerExtension(outputExtension)
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 }

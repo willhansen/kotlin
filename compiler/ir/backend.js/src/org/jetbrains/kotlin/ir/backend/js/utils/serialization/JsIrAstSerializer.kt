@@ -21,8 +21,8 @@ fun JsIrProgramFragment.serializeTo(output: OutputStream) {
 
 private class DataWriter {
 
-    val data = ByteArrayOutputStream()
-    private val output = DataOutputStream(data)
+    konst data = ByteArrayOutputStream()
+    private konst output = DataOutputStream(data)
 
     fun saveTo(output: DataOutputStream) {
         output.let {
@@ -31,7 +31,7 @@ private class DataWriter {
     }
 
     fun writeByte(byte: Int) {
-        // Limit bytes to positive values to avoid conversion in deserializer
+        // Limit bytes to positive konstues to avoid conversion in deserializer
         if ((byte and 0x7F.inv()) != 0) error("Byte out of bounds: $byte")
         output.writeByte(byte)
     }
@@ -80,14 +80,14 @@ private class DataWriter {
 
 private class JsIrAstSerializer {
 
-    private val fragmentSerializer = DataWriter()
-    private val nameSerializer = DataWriter()
-    private val stringSerializer = DataWriter()
+    private konst fragmentSerializer = DataWriter()
+    private konst nameSerializer = DataWriter()
+    private konst stringSerializer = DataWriter()
 
-    private val nameMap = mutableMapOf<JsName, Int>()
-    private val stringMap = mutableMapOf<String, Int>()
-    private val fileStack: Deque<String> = ArrayDeque()
-    private val importedNames = mutableSetOf<JsName>()
+    private konst nameMap = mutableMapOf<JsName, Int>()
+    private konst stringMap = mutableMapOf<String, Int>()
+    private konst fileStack: Deque<String> = ArrayDeque()
+    private konst importedNames = mutableSetOf<JsName>()
 
     fun append(fragment: JsIrProgramFragment): JsIrAstSerializer {
         importedNames += fragment.imports.map { fragment.nameBindings[it.key]!! }
@@ -172,7 +172,7 @@ private class JsIrAstSerializer {
     }
 
     private fun DataWriter.writeStatement(statement: JsStatement) {
-        val visitor = object : JsVisitor() {
+        konst visitor = object : JsVisitor() {
             override fun visitReturn(x: JsReturn) {
                 writeByte(StatementIds.RETURN)
                 ifNotNull(x.expression) {
@@ -302,7 +302,7 @@ private class JsIrAstSerializer {
             override fun visitExport(export: JsExport) {
                 writeByte(StatementIds.EXPORT)
 
-                when (val subject = export.subject) {
+                when (konst subject = export.subject) {
                     is JsExport.Subject.All -> writeByte(ExportType.ALL)
                     is JsExport.Subject.Elements -> {
                         writeByte(ExportType.ITEMS)
@@ -320,7 +320,7 @@ private class JsIrAstSerializer {
                 writeByte(StatementIds.IMPORT)
                 writeString(import.module)
 
-                when (val target = import.target) {
+                when (konst target = import.target) {
                     is JsImport.Target.All -> {
                         writeByte(ImportType.ALL)
                         writeInt(internalizeName(target.alias.name!!))
@@ -368,7 +368,7 @@ private class JsIrAstSerializer {
     }
 
     private fun DataWriter.writeExpression(expression: JsExpression) {
-        val visitor = object : JsVisitor() {
+        konst visitor = object : JsVisitor() {
 
             override fun visitThis(x: JsThisRef) {
                 writeByte(ExpressionIds.THIS_REF)
@@ -383,7 +383,7 @@ private class JsIrAstSerializer {
             }
 
             override fun visitBoolean(x: JsBooleanLiteral) {
-                if (x.value) {
+                if (x.konstue) {
                     writeByte(ExpressionIds.TRUE_LITERAL)
                 } else {
                     writeByte(ExpressionIds.FALSE_LITERAL)
@@ -392,7 +392,7 @@ private class JsIrAstSerializer {
 
             override fun visitString(x: JsStringLiteral) {
                 writeByte(ExpressionIds.STRING_LITERAL)
-                writeInt(internalizeString(x.value))
+                writeInt(internalizeString(x.konstue))
             }
 
             override fun visitRegExp(x: JsRegExp) {
@@ -403,12 +403,12 @@ private class JsIrAstSerializer {
 
             override fun visitInt(x: JsIntLiteral) {
                 writeByte(ExpressionIds.INT_LITERAL)
-                writeInt(x.value)
+                writeInt(x.konstue)
             }
 
             override fun visitDouble(x: JsDoubleLiteral) {
                 writeByte(ExpressionIds.DOUBLE_LITERAL)
-                writeDouble(x.value)
+                writeDouble(x.konstue)
             }
 
             override fun visitArray(x: JsArrayLiteral) {
@@ -422,7 +422,7 @@ private class JsIrAstSerializer {
                 writeByte(ExpressionIds.OBJECT_LITERAL)
                 writeCollection(x.propertyInitializers) {
                     writeExpression(it.labelExpr)
-                    writeExpression(it.valueExpr)
+                    writeExpression(it.konstueExpr)
                 }
                 writeBoolean(x.isMultiline)
             }
@@ -451,15 +451,15 @@ private class JsIrAstSerializer {
 
             override fun visitDocComment(comment: JsDocComment) {
                 writeByte(ExpressionIds.DOC_COMMENT)
-                writeCollection(comment.tags.entries) { (name, value) ->
+                writeCollection(comment.tags.entries) { (name, konstue) ->
                     writeInt(internalizeString(name))
 
-                    ifNotNull(value as? JsNameRef) {
+                    ifNotNull(konstue as? JsNameRef) {
                         writeExpression(it)
-                    } ?: if (value is String) {
-                        writeInt(internalizeString(value))
+                    } ?: if (konstue is String) {
+                        writeInt(internalizeString(konstue))
                     } else {
-                        error("Unsupported tag: ${value::class.qualifiedName}")
+                        error("Unsupported tag: ${konstue::class.qualifiedName}")
                     }
                 }
             }
@@ -497,8 +497,8 @@ private class JsIrAstSerializer {
             }
 
             override fun visitNameRef(nameRef: JsNameRef) {
-                val name = nameRef.name
-                val qualifier = nameRef.qualifier
+                konst name = nameRef.name
+                konst qualifier = nameRef.qualifier
                 if (name != null) {
                     if (qualifier != null || nameRef.isInline == true) {
                         writeByte(ExpressionIds.NAME_REFERENCE)
@@ -617,11 +617,11 @@ private class JsIrAstSerializer {
     }
 
     private inline fun DataWriter.withLocation(node: JsNode, inner: () -> Unit) {
-        val location = node.source.safeAs<JsLocationWithSource>()?.asSimpleLocation()
+        konst location = node.source.safeAs<JsLocationWithSource>()?.asSimpleLocation()
         ifNotNull(location) {
-            val lastFile = fileStack.peek()
-            val newFile = it.file
-            val fileChanged = lastFile != newFile
+            konst lastFile = fileStack.peek()
+            konst newFile = it.file
+            konst fileChanged = lastFile != newFile
             ifTrue(fileChanged) {
                 writeInt(internalizeString(newFile))
                 fileStack.push(it.file)

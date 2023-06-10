@@ -1,4 +1,4 @@
 package lib
 
 @kotlin.jvm.JvmInline
-value class ValueClass(val value: Int)
+konstue class ValueClass(konst konstue: Int)

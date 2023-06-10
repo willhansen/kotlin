@@ -28,16 +28,16 @@ import org.jetbrains.org.objectweb.asm.tree.AbstractInsnNode
 import org.jetbrains.org.objectweb.asm.tree.JumpInsnNode
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
-internal class FixStackContext(val methodNode: MethodNode) {
-    val breakContinueGotoNodes = linkedSetOf<JumpInsnNode>()
-    val fakeAlwaysTrueIfeqMarkers = arrayListOf<AbstractInsnNode>()
-    val fakeAlwaysFalseIfeqMarkers = arrayListOf<AbstractInsnNode>()
+internal class FixStackContext(konst methodNode: MethodNode) {
+    konst breakContinueGotoNodes = linkedSetOf<JumpInsnNode>()
+    konst fakeAlwaysTrueIfeqMarkers = arrayListOf<AbstractInsnNode>()
+    konst fakeAlwaysFalseIfeqMarkers = arrayListOf<AbstractInsnNode>()
 
-    val isThereAnyTryCatch: Boolean
-    val saveStackMarkerForRestoreMarker = insertTryCatchBlocksMarkers(methodNode)
-    val restoreStackMarkersForSaveMarker = hashMapOf<AbstractInsnNode, MutableList<AbstractInsnNode>>()
+    konst isThereAnyTryCatch: Boolean
+    konst saveStackMarkerForRestoreMarker = insertTryCatchBlocksMarkers(methodNode)
+    konst restoreStackMarkersForSaveMarker = hashMapOf<AbstractInsnNode, MutableList<AbstractInsnNode>>()
 
-    val openingInlineMethodMarker = hashMapOf<AbstractInsnNode, AbstractInsnNode>()
+    konst openingInlineMethodMarker = hashMapOf<AbstractInsnNode, AbstractInsnNode>()
     var consistentInlineMarkers: Boolean = true; private set
 
     init {
@@ -46,10 +46,10 @@ internal class FixStackContext(val methodNode: MethodNode) {
             restoreStackMarkersForSaveMarker.getOrPut(save) { SmartList() }.add(restore)
         }
 
-        val inlineMarkersStack = Stack<AbstractInsnNode>()
+        konst inlineMarkersStack = Stack<AbstractInsnNode>()
 
         InsnSequence(methodNode.instructions).forEach { insnNode ->
-            val pseudoInsn = parsePseudoInsnOrNull(insnNode)
+            konst pseudoInsn = parsePseudoInsnOrNull(insnNode)
             when {
                 pseudoInsn == PseudoInsn.FIX_STACK_BEFORE_JUMP ->
                     visitFixStackBeforeJump(insnNode)
@@ -73,7 +73,7 @@ internal class FixStackContext(val methodNode: MethodNode) {
     }
 
     private fun visitFixStackBeforeJump(insnNode: AbstractInsnNode) {
-        val next = insnNode.next
+        konst next = insnNode.next
         assert(next.opcode == Opcodes.GOTO) { "${indexOf(insnNode)}: should be followed by GOTO" }
         breakContinueGotoNodes.add(next as JumpInsnNode)
     }

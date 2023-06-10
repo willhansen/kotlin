@@ -31,19 +31,19 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
  * [FakeOverrideBuilder.provideFakeOverrides] is made leaving no chance for proper linkage of fake overrides. This IR provider
  * should be applied only after the fake overrides generation.
  */
-internal class MissingDeclarationStubGenerator(private val builtIns: IrBuiltIns) : IrProvider {
-    private val commonParent by lazy {
+internal class MissingDeclarationStubGenerator(private konst builtIns: IrBuiltIns) : IrProvider {
+    private konst commonParent by lazy {
         IrExternalPackageFragmentImpl.createEmptyExternalPackageFragment(ErrorUtils.errorModule, FqName.ROOT)
     }
 
     private var declarationsToPatch = arrayListOf<IrDeclaration>()
 
-    private val stubbedSymbols = hashSetOf<IrSymbol>()
+    private konst stubbedSymbols = hashSetOf<IrSymbol>()
 
-    val allStubbedSymbols: Set<IrSymbol> get() = stubbedSymbols
+    konst allStubbedSymbols: Set<IrSymbol> get() = stubbedSymbols
 
     fun grabDeclarationsToPatch(): Collection<IrDeclaration> {
-        val result = declarationsToPatch
+        konst result = declarationsToPatch
         declarationsToPatch = arrayListOf()
         return result
     }

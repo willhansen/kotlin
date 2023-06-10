@@ -4,5 +4,5 @@ fun foo() = run {
             return this
         }
     }
-    val p<caret> = Local().bar()
+    konst p<caret> = Local().bar()
 }

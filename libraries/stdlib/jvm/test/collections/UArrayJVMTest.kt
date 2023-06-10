@@ -25,7 +25,7 @@ class UArrayJVMTest {
             }
         }
 
-        val array = uintArrayOf(1u, 0u, 4u, 5u, 8u, 12u, 2u, 3u, 7u, 7u, 7u, 9u, 2u)
+        konst array = uintArrayOf(1u, 0u, 4u, 5u, 8u, 12u, 2u, 3u, 7u, 7u, 7u, 9u, 2u)
 
         testFailures(array.toUByteArray(), UByteArray::binarySearch, 0u, array.size)
         testFailures(array.toUShortArray(), UShortArray::binarySearch, 0u, array.size)
@@ -39,12 +39,12 @@ class UArrayJVMTest {
             transform: UInt.() -> E
         ) {
             operations.forEach { o ->
-                val result = array.binarySearch(o.element.transform(), o.fromIndex, o.toIndex)
+                konst result = array.binarySearch(o.element.transform(), o.fromIndex, o.toIndex)
                 assertEquals(o.expectedResult, result)
             }
         }
 
-        val operations = listOf(
+        konst operations = listOf(
             OperationOnRange(0u, 1, 6, 1),
             OperationOnRange(12u, 1, 6, 5),
             OperationOnRange(8u, 1, 6, 4),
@@ -68,10 +68,10 @@ class UArrayJVMTest {
     }
 
     private class OperationOnRange<E, R>(
-        val element: E,
-        val fromIndex: Int,
-        val toIndex: Int,
-        val expectedResult: R
+        konst element: E,
+        konst fromIndex: Int,
+        konst toIndex: Int,
+        konst expectedResult: R
     )
 }
 

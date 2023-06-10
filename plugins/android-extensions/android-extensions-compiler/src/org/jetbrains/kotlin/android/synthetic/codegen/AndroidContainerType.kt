@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.android.synthetic.AndroidConst
 import org.jetbrains.kotlin.descriptors.ClassifierDescriptor
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 
-enum class AndroidContainerType(className: String, val doesSupportCache: Boolean = false, val isFragment: Boolean = false) {
+enum class AndroidContainerType(className: String, konst doesSupportCache: Boolean = false, konst isFragment: Boolean = false) {
     ACTIVITY(AndroidConst.ACTIVITY_FQNAME, doesSupportCache = true),
     FRAGMENT(AndroidConst.FRAGMENT_FQNAME, doesSupportCache = true, isFragment = true),
     DIALOG(AndroidConst.DIALOG_FQNAME, doesSupportCache = false),
@@ -33,10 +33,10 @@ enum class AndroidContainerType(className: String, val doesSupportCache: Boolean
     LAYOUT_CONTAINER(LayoutContainer::class.java.canonicalName, doesSupportCache = true),
     UNKNOWN("");
 
-    val internalClassName: String = className.replace('.', '/')
+    konst internalClassName: String = className.replace('.', '/')
 
     companion object {
-        private val LAYOUT_CONTAINER_FQNAME = LayoutContainer::class.java.canonicalName
+        private konst LAYOUT_CONTAINER_FQNAME = LayoutContainer::class.java.canonicalName
 
         fun get(descriptor: ClassifierDescriptor): AndroidContainerType {
             fun getContainerTypeInternal(name: String): AndroidContainerType? = when (name) {
@@ -55,9 +55,9 @@ enum class AndroidContainerType(className: String, val doesSupportCache: Boolean
             getContainerTypeInternal(DescriptorUtils.getFqName(descriptor).asString())?.let { return it }
 
             for (supertype in descriptor.typeConstructor.supertypes) {
-                val declarationDescriptor = supertype.constructor.declarationDescriptor
+                konst declarationDescriptor = supertype.constructor.declarationDescriptor
                 if (declarationDescriptor != null) {
-                    val containerType = get(declarationDescriptor)
+                    konst containerType = get(declarationDescriptor)
                     if (containerType != AndroidContainerType.UNKNOWN) return containerType
                 }
             }

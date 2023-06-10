@@ -8,7 +8,7 @@ class C1 {
     fun f1() {}
 
     <!NESTED_JS_EXPORT!>@JsExport<!>
-    val p: Int = 10
+    konst p: Int = 10
 
     <!NESTED_JS_EXPORT!>@JsExport<!>
     object O

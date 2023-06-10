@@ -18,9 +18,9 @@ public class KotlinStaticPackageProvider(
     scope: GlobalSearchScope,
     files: Collection<KtFile>
 ) : KotlinPackageProviderBase(project, scope) {
-    private val kotlinPackageToSubPackages: Map<FqName, Set<Name>> = run {
-        val filesInScope = files.filter { scope.contains(it.virtualFile) }
-        val packages = mutableMapOf<FqName, MutableSet<Name>>()
+    private konst kotlinPackageToSubPackages: Map<FqName, Set<Name>> = run {
+        konst filesInScope = files.filter { scope.contains(it.virtualFile) }
+        konst packages = mutableMapOf<FqName, MutableSet<Name>>()
         filesInScope.forEach { file ->
             var currentPackage = FqName.ROOT
             for (subPackage in file.packageFqName.pathSegments()) {
@@ -42,8 +42,8 @@ public class KotlinStaticPackageProvider(
 }
 
 public class KotlinStaticPackageProviderFactory(
-    private val project: Project,
-    private val files: Collection<KtFile>
+    private konst project: Project,
+    private konst files: Collection<KtFile>
 ) : KotlinPackageProviderFactory() {
     override fun createPackageProvider(searchScope: GlobalSearchScope): KotlinPackageProvider {
         return KotlinStaticPackageProvider(project, searchScope, files)

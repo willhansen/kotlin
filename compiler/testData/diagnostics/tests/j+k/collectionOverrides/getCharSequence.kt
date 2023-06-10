@@ -15,7 +15,7 @@ abstract public class C implements CharSequence {
 
 abstract class B : A(), CharSequence {
     override operator fun get(index: Int) = '1'
-    override val length: Int get() = 1
+    override konst length: Int get() = 1
 }
 
 fun main(a: A, b: B, c: C) {

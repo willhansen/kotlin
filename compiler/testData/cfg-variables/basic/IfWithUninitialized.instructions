@@ -1,6 +1,6 @@
 == foo ==
 fun foo() {
-    val b: Boolean
+    konst b: Boolean
     if (1 < 2) {
         use(b)
     }
@@ -11,8 +11,8 @@ fun foo() {
 ---------------------
 L0:
   1 <START>                                                               INIT: in: {} out: {}              USE: in: {} out: {}
-  2 mark({ val b: Boolean if (1 < 2) { use(b) } else { b = true } })
-    v(val b: Boolean)                                                     INIT: in: {} out: {b=D}
+  2 mark({ konst b: Boolean if (1 < 2) { use(b) } else { b = true } })
+    v(konst b: Boolean)                                                     INIT: in: {} out: {b=D}
     mark(if (1 < 2) { use(b) } else { b = true })                         INIT: in: {b=D} out: {b=D}
     r(1) -> <v0>
     r(2) -> <v1>

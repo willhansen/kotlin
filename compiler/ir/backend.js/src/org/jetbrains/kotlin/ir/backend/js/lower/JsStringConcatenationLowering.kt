@@ -16,17 +16,17 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
-class JsStringConcatenationLowering(val context: CommonBackendContext) : FileLoweringPass {
+class JsStringConcatenationLowering(konst context: CommonBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(JsStringConcatenationTransformer(context))
     }
 }
 
-private class JsStringConcatenationTransformer(val context: CommonBackendContext) : IrElementTransformerVoid() {
+private class JsStringConcatenationTransformer(konst context: CommonBackendContext) : IrElementTransformerVoid() {
 
-    private val IrType.shouldExplicitlyConvertToString: Boolean
+    private konst IrType.shouldExplicitlyConvertToString: Boolean
         get() {
-            // If the type is Long or a supertype of Long, we want to call toString() on values of that type.
+            // If the type is Long or a supertype of Long, we want to call toString() on konstues of that type.
             // See KT-39891
             if (this !is IrSimpleType) return false
             return when (classifier.signature) {
@@ -49,13 +49,13 @@ private class JsStringConcatenationTransformer(val context: CommonBackendContext
         }
     }
 
-    private val IrFunctionSymbol.isStringPlus: Boolean
+    private konst IrFunctionSymbol.isStringPlus: Boolean
         get() = context.ir.symbols.isStringPlus(this)
 
     override fun visitCall(expression: IrCall): IrExpression {
         fun explicitlyConvertToStringIfNeeded(): IrExpression {
-            val lastArgIndex = expression.valueArgumentsCount - 1
-            val plusArg = expression.getValueArgument(lastArgIndex) ?: return super.visitCall(expression)
+            konst lastArgIndex = expression.konstueArgumentsCount - 1
+            konst plusArg = expression.getValueArgument(lastArgIndex) ?: return super.visitCall(expression)
             if (!plusArg.type.shouldExplicitlyConvertToString)
                 return super.visitCall(expression)
 
@@ -63,7 +63,7 @@ private class JsStringConcatenationTransformer(val context: CommonBackendContext
             return expression
         }
 
-        if (expression.valueArgumentsCount == 0)
+        if (expression.konstueArgumentsCount == 0)
             return super.visitCall(expression)
 
         if (expression.symbol.isStringPlus)

@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream
 import java.io.Serializable
 
 internal class MetricsWriter(
-    private val outputFile: File,
+    private konst outputFile: File,
 ): Serializable {
     fun process(build: BuildExecutionData, log: Logger) {
         if (build.failureMessages.isNotEmpty()) return
@@ -25,11 +25,11 @@ internal class MetricsWriter(
         try {
             outputFile.parentFile?.apply { mkdirs() }
 
-            val buildMetricsData = GradleBuildMetricsData()
-            for (metric in BuildTime.values()) {
+            konst buildMetricsData = GradleBuildMetricsData()
+            for (metric in BuildTime.konstues()) {
                 buildMetricsData.parentMetric[metric.name] = metric.parent?.name
             }
-            for (attr in BuildAttribute.values()) {
+            for (attr in BuildAttribute.konstues()) {
                 buildMetricsData.buildAttributeKind[attr.name] = attr.kind.name
             }
 

@@ -24,27 +24,27 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.jvm.internal.TypeIntrinsics
 import kotlin.reflect.KClass
 
-const val REPL_CODE_LINE_FIRST_NO = 0
-const val REPL_CODE_LINE_FIRST_GEN = 1
+const konst REPL_CODE_LINE_FIRST_NO = 0
+const konst REPL_CODE_LINE_FIRST_GEN = 1
 
-data class ReplCodeLine(val no: Int, val generation: Int, val code: String) : Serializable {
+data class ReplCodeLine(konst no: Int, konst generation: Int, konst code: String) : Serializable {
     companion object {
-        private val serialVersionUID: Long = 8228357578L
+        private konst serialVersionUID: Long = 8228357578L
     }
 }
 
-data class CompiledReplCodeLine(val className: String, val source: ReplCodeLine) : Serializable {
+data class CompiledReplCodeLine(konst className: String, konst source: ReplCodeLine) : Serializable {
     companion object {
-        private val serialVersionUID: Long = 8228307678L
+        private konst serialVersionUID: Long = 8228307678L
     }
 }
 
-data class CompiledClassData(val path: String, val bytes: ByteArray) : Serializable {
+data class CompiledClassData(konst path: String, konst bytes: ByteArray) : Serializable {
     override fun equals(other: Any?): Boolean = (other as? CompiledClassData)?.let { path == it.path && Arrays.equals(bytes, it.bytes) } ?: false
     override fun hashCode(): Int = path.hashCode() + Arrays.hashCode(bytes)
 
     companion object {
-        private val serialVersionUID: Long = 8228357578L
+        private konst serialVersionUID: Long = 8228357578L
     }
 }
 
@@ -60,20 +60,20 @@ interface ReplCheckAction {
 
 sealed class ReplCheckResult : Serializable {
     class Ok : ReplCheckResult() {
-        companion object { private val serialVersionUID: Long = 1L }
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
     class Incomplete : ReplCheckResult() {
-        companion object { private val serialVersionUID: Long = 1L }
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
-    class Error(val message: String, val location: CompilerMessageLocation? = null) : ReplCheckResult() {
+    class Error(konst message: String, konst location: CompilerMessageLocation? = null) : ReplCheckResult() {
         override fun toString(): String = "Error(message = \"$message\")"
-        companion object { private val serialVersionUID: Long = 1L }
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
     companion object {
-        private val serialVersionUID: Long = 8228307678L
+        private konst serialVersionUID: Long = 8228307678L
     }
 }
 
@@ -84,29 +84,29 @@ interface ReplCompileAction {
 }
 
 sealed class ReplCompileResult : Serializable {
-    class CompiledClasses(val lineId: LineId,
-                          val previousLines: List<ILineId>,
-                          val mainClassName: String,
-                          val classes: List<CompiledClassData>,
-                          val hasResult: Boolean,
-                          val classpathAddendum: List<File>,
-                          val type: String?,
-                          val data: Any? // TODO: temporary; migration to new scripting infrastructure
+    class CompiledClasses(konst lineId: LineId,
+                          konst previousLines: List<ILineId>,
+                          konst mainClassName: String,
+                          konst classes: List<CompiledClassData>,
+                          konst hasResult: Boolean,
+                          konst classpathAddendum: List<File>,
+                          konst type: String?,
+                          konst data: Any? // TODO: temporary; migration to new scripting infrastructure
     ) : ReplCompileResult() {
-        companion object { private val serialVersionUID: Long = 2L }
+        companion object { private konst serialVersionUID: Long = 2L }
     }
 
-    class Incomplete(val message: String) : ReplCompileResult() {
-        companion object { private val serialVersionUID: Long = 1L }
+    class Incomplete(konst message: String) : ReplCompileResult() {
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
-    class Error(val message: String, val location: CompilerMessageLocation? = null) : ReplCompileResult() {
+    class Error(konst message: String, konst location: CompilerMessageLocation? = null) : ReplCompileResult() {
         override fun toString(): String = "Error(message = \"$message\""
-        companion object { private val serialVersionUID: Long = 1L }
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
     companion object {
-        private val serialVersionUID: Long = 8228307678L
+        private konst serialVersionUID: Long = 8228307678L
     }
 }
 
@@ -114,93 +114,93 @@ interface ReplCompilerWithoutCheck : ReplCompileAction, CreateReplStageStateActi
 
 interface ReplCompiler : ReplCompilerWithoutCheck, ReplCheckAction
 
-// --- eval
+// --- ekonst
 
-data class EvalClassWithInstanceAndLoader(val klass: KClass<*>, val instance: Any?, val classLoader: ClassLoader, val invokeWrapper: InvokeWrapper?)
+data class EkonstClassWithInstanceAndLoader(konst klass: KClass<*>, konst instance: Any?, konst classLoader: ClassLoader, konst invokeWrapper: InvokeWrapper?)
 
-interface ReplEvalAction {
-    fun eval(state: IReplStageState<*>,
+interface ReplEkonstAction {
+    fun ekonst(state: IReplStageState<*>,
              compileResult: ReplCompileResult.CompiledClasses,
              scriptArgs: ScriptArgsWithTypes? = null,
-             invokeWrapper: InvokeWrapper? = null): ReplEvalResult
+             invokeWrapper: InvokeWrapper? = null): ReplEkonstResult
 }
 
-sealed class ReplEvalResult : Serializable {
-    class ValueResult(val name: String, val value: Any?, val type: String?, val snippetInstance: Any? = null) : ReplEvalResult() {
+sealed class ReplEkonstResult : Serializable {
+    class ValueResult(konst name: String, konst konstue: Any?, konst type: String?, konst snippetInstance: Any? = null) : ReplEkonstResult() {
         override fun toString(): String {
-            val v = if (value is Function<*>) "<function${TypeIntrinsics.getFunctionArity(value)}>" else value
+            konst v = if (konstue is Function<*>) "<function${TypeIntrinsics.getFunctionArity(konstue)}>" else konstue
             return "$name: $type = $v"
         }
 
-        companion object { private val serialVersionUID: Long = 1L }
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
-    class UnitResult : ReplEvalResult() {
-        companion object { private val serialVersionUID: Long = 1L }
+    class UnitResult : ReplEkonstResult() {
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
-    class Incomplete(val message: String) : ReplEvalResult() {
-        companion object { private val serialVersionUID: Long = 1L }
+    class Incomplete(konst message: String) : ReplEkonstResult() {
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
-    class HistoryMismatch(val lineNo: Int) : ReplEvalResult() {
-        companion object { private val serialVersionUID: Long = 1L }
+    class HistoryMismatch(konst lineNo: Int) : ReplEkonstResult() {
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
-    sealed class Error(val message: String) : ReplEvalResult() {
-        class Runtime(message: String, val cause: Throwable? = null) : Error(message) {
-            companion object { private val serialVersionUID: Long = 1L }
+    sealed class Error(konst message: String) : ReplEkonstResult() {
+        class Runtime(message: String, konst cause: Throwable? = null) : Error(message) {
+            companion object { private konst serialVersionUID: Long = 1L }
         }
 
-        class CompileTime(message: String, val location: CompilerMessageLocation? = null) : Error(message) {
-            companion object { private val serialVersionUID: Long = 1L }
+        class CompileTime(message: String, konst location: CompilerMessageLocation? = null) : Error(message) {
+            companion object { private konst serialVersionUID: Long = 1L }
         }
 
         override fun toString(): String = "${this::class.simpleName}Error(message = \"$message\""
 
-        companion object { private val serialVersionUID: Long = 1L }
+        companion object { private konst serialVersionUID: Long = 1L }
     }
 
     companion object {
-        private val serialVersionUID: Long = 8228307678L
+        private konst serialVersionUID: Long = 8228307678L
     }
 }
 
-interface ReplEvaluator : ReplEvalAction, CreateReplStageStateAction
+interface ReplEkonstuator : ReplEkonstAction, CreateReplStageStateAction
 
-// --- compileAdnEval
+// --- compileAdnEkonst
 
-interface ReplAtomicEvalAction {
-    fun compileAndEval(state: IReplStageState<*>,
+interface ReplAtomicEkonstAction {
+    fun compileAndEkonst(state: IReplStageState<*>,
                        codeLine: ReplCodeLine,
                        scriptArgs: ScriptArgsWithTypes? = null,
-                       invokeWrapper: InvokeWrapper? = null): ReplEvalResult
+                       invokeWrapper: InvokeWrapper? = null): ReplEkonstResult
 }
 
-interface ReplAtomicEvaluator : ReplAtomicEvalAction
+interface ReplAtomicEkonstuator : ReplAtomicEkonstAction
 
-interface ReplDelayedEvalAction {
-    fun compileToEvaluable(state: IReplStageState<*>,
+interface ReplDelayedEkonstAction {
+    fun compileToEkonstuable(state: IReplStageState<*>,
                            codeLine: ReplCodeLine,
-                           defaultScriptArgs: ScriptArgsWithTypes? = null): Pair<ReplCompileResult, Evaluable?>
+                           defaultScriptArgs: ScriptArgsWithTypes? = null): Pair<ReplCompileResult, Ekonstuable?>
 }
 
 // other
 
-interface Evaluable {
-    val compiledCode: ReplCompileResult.CompiledClasses
-    fun eval(scriptArgs: ScriptArgsWithTypes? = null, invokeWrapper: InvokeWrapper? = null): ReplEvalResult
+interface Ekonstuable {
+    konst compiledCode: ReplCompileResult.CompiledClasses
+    fun ekonst(scriptArgs: ScriptArgsWithTypes? = null, invokeWrapper: InvokeWrapper? = null): ReplEkonstResult
 }
 
-interface ReplFullEvaluator : ReplEvaluator, ReplAtomicEvaluator, ReplDelayedEvalAction
+interface ReplFullEkonstuator : ReplEkonstuator, ReplAtomicEkonstuator, ReplDelayedEkonstAction
 
 /**
  * Keep args and arg types together, so as a whole they are present or absent
  */
-class ScriptArgsWithTypes(val scriptArgs: Array<out Any?>, val scriptArgsTypes: Array<out KClass<out Any>>) : Serializable {
+class ScriptArgsWithTypes(konst scriptArgs: Array<out Any?>, konst scriptArgsTypes: Array<out KClass<out Any>>) : Serializable {
     init { assert(scriptArgs.size == scriptArgsTypes.size) }
     companion object {
-        private val serialVersionUID: Long = 8529357500L
+        private konst serialVersionUID: Long = 8529357500L
     }
 }
 

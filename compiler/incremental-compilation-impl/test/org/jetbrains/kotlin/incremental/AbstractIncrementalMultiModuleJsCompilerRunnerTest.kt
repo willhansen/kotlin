@@ -19,7 +19,7 @@ import java.util.zip.ZipOutputStream
 abstract class AbstractIncrementalMultiModuleJsCompilerRunnerTest :
     AbstractIncrementalMultiModuleCompilerRunnerTest<K2JSCompilerArguments, ModulesApiHistoryJs>() {
 
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = super.buildLogFinder.copy(
             isJsEnabled = true,
             isScopeExpansionEnabled = scopeExpansionMode != CompileScopeExpansionMode.NEVER
@@ -57,7 +57,7 @@ abstract class AbstractIncrementalMultiModuleJsCompilerRunnerTest :
     }
 
     override fun K2JSCompilerArguments.updateForSingleModule(moduleDependencies: List<String>, outFile: File) {
-        val dependencies = moduleDependencies.joinToString(File.pathSeparator) {
+        konst dependencies = moduleDependencies.joinToString(File.pathSeparator) {
             File(repository, it.asArtifactFileName()).absolutePath
         }
 
@@ -66,17 +66,17 @@ abstract class AbstractIncrementalMultiModuleJsCompilerRunnerTest :
     }
 
     override fun transformToDependency(moduleName: String, rawArtifact: File): File {
-        val rawDir = rawArtifact.parentFile
-        val artifactFile = File(repository, moduleName.asArtifactFileName())
-        val zipOut = ZipOutputStream(FileOutputStream(artifactFile))
+        konst rawDir = rawArtifact.parentFile
+        konst artifactFile = File(repository, moduleName.asArtifactFileName())
+        konst zipOut = ZipOutputStream(FileOutputStream(artifactFile))
 
         fun walkFiles(dir: File) {
             dir.listFiles()?.let { files ->
                 files.forEach { file ->
                     if (file.isDirectory) walkFiles(file)
                     else {
-                        val relativePath = file.relativeTo(rawDir).path
-                        val zipEntry = ZipEntry(relativePath)
+                        konst relativePath = file.relativeTo(rawDir).path
+                        konst zipEntry = ZipEntry(relativePath)
                         zipEntry.time = 0
                         zipOut.putNextEntry(zipEntry)
                         file.readBytes().let { bytes ->
@@ -95,10 +95,10 @@ abstract class AbstractIncrementalMultiModuleJsCompilerRunnerTest :
         return artifactFile
     }
 
-    override val modulesApiHistory: ModulesApiHistoryJs by lazy { ModulesApiHistoryJs(incrementalModuleInfo) }
+    override konst modulesApiHistory: ModulesApiHistoryJs by lazy { ModulesApiHistoryJs(incrementalModuleInfo) }
 
     override fun String.asOutputFileName(): String = "$this.js"
     override fun String.asArtifactFileName(): String = "$this.jar"
 
-    override val scopeExpansionMode = CompileScopeExpansionMode.NEVER
+    override konst scopeExpansionMode = CompileScopeExpansionMode.NEVER
 }

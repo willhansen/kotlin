@@ -30,29 +30,29 @@ abstract class KotlinTest : AbstractTestTask(), UsesVariantImplementationFactori
     @Deprecated("Use filter.excludePatterns instead.", ReplaceWith("filter.excludePatterns"))
     var excludes = mutableSetOf<String>()
 
-    protected val filterExt: DefaultTestFilter
+    protected konst filterExt: DefaultTestFilter
         @Internal get() = filter as DefaultTestFilter
 
     init {
         filterExt.isFailOnNoMatchingTests = false
     }
 
-    val includePatterns: Set<String>
+    konst includePatterns: Set<String>
         @Input get() = filterExt.includePatterns + filterExt.commandLineIncludePatterns
 
     @Suppress("DEPRECATION")
-    val excludePatterns: Set<String>
+    konst excludePatterns: Set<String>
         @Input get() = excludes + filterExt.excludePatterns
 
     @get:Inject
-    open val fileResolver: FileResolver
+    open konst fileResolver: FileResolver
         get() = injected
 
     @get:Inject
-    open val execHandleFactory: ExecHandleFactory
+    open konst execHandleFactory: ExecHandleFactory
         get() = injected
 
-    private val runListeners = mutableListOf<KotlinTestRunnerListener>()
+    private konst runListeners = mutableListOf<KotlinTestRunnerListener>()
 
     @Internal
     var ignoreRunFailures: Boolean = false
@@ -61,11 +61,11 @@ abstract class KotlinTest : AbstractTestTask(), UsesVariantImplementationFactori
         runListeners.add(listener)
     }
 
-    private val ignoreTcsmOverflow by lazy {
+    private konst ignoreTcsmOverflow by lazy {
         PropertiesProvider(project).ignoreTcsmOverflow
     }
 
-    private val testReporter = project
+    private konst testReporter = project
         .variantImplementationFactoryProvider<MppTestReportHelper.MppTestReportHelperVariantFactory>()
         .map { it.getInstance() }
 

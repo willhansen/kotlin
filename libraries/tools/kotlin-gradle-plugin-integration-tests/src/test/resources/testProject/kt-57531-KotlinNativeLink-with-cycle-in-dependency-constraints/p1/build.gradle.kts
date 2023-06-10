@@ -26,7 +26,7 @@ kotlin {
 dependencies {
     constraints {
         kotlin.sourceSets.all {
-            val apiConfiguration = configurations.getByName(apiConfigurationName)
+            konst apiConfiguration = configurations.getByName(apiConfigurationName)
             apiConfiguration(project(":p2"))
         }
     }

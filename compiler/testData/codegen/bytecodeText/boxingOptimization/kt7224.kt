@@ -4,4 +4,4 @@ fun box(): String {
     return "OK"
 }
 
-// 0 INVOKESTATIC java/lang/Integer.valueOf
+// 0 INVOKESTATIC java/lang/Integer.konstueOf

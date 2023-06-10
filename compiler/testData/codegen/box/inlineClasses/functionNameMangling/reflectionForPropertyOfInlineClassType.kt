@@ -5,12 +5,12 @@
 import kotlin.test.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
 var prop = S("")
 
 fun box(): String {
-    val propRef = ::prop
+    konst propRef = ::prop
 
     assertEquals(S(""), propRef.get())
 

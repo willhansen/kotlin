@@ -30,9 +30,9 @@ fun <T : Any?> run(fn: Function0<T>): T {
 
 fun foo(): Any {
   return run<Any>(fn = local fun <anonymous>(): Any {
-    val mm: B = B()
-    val nn: C = C()
-    val c: Any = when {
+    konst mm: B = B()
+    konst nn: C = C()
+    konst c: Any = when {
       true -> mm
       else -> nn
     }

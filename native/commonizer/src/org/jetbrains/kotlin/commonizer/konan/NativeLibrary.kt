@@ -20,19 +20,19 @@ interface NativeManifestDataProvider {
  * A separate Kotlin/Native library.
  */
 internal class NativeLibrary(
-    val library: KotlinLibrary
+    konst library: KotlinLibrary
 ) {
-    val manifestData = NativeSensitiveManifestData.readFrom(library)
+    konst manifestData = NativeSensitiveManifestData.readFrom(library)
 }
 
 /**
  * A collection of Kotlin/Native libraries for a certain Native target.
  */
 internal class NativeLibrariesToCommonize(
-    private val target: CommonizerTarget,
-    val libraries: List<NativeLibrary>
+    private konst target: CommonizerTarget,
+    konst libraries: List<NativeLibrary>
 ) : NativeManifestDataProvider {
-    private val manifestIndex: Map<String, NativeSensitiveManifestData> = buildManifestIndex()
+    private konst manifestIndex: Map<String, NativeSensitiveManifestData> = buildManifestIndex()
 
     override fun buildManifest(
         libraryName: String
@@ -50,15 +50,15 @@ internal class NativeLibrariesToCommonize(
 }
 
 internal class CommonNativeManifestDataProvider(
-    private val target: CommonizerTarget,
-    private val manifests: Map<UniqueLibraryName, List<NativeSensitiveManifestData>>
+    private konst target: CommonizerTarget,
+    private konst manifests: Map<UniqueLibraryName, List<NativeSensitiveManifestData>>
 ) : NativeManifestDataProvider {
 
     override fun buildManifest(libraryName: UniqueLibraryName): NativeSensitiveManifestData {
-        val rawManifests = manifests[libraryName] ?: error("Missing manifests for $libraryName")
+        konst rawManifests = manifests[libraryName] ?: error("Missing manifests for $libraryName")
         check(rawManifests.isNotEmpty()) { "No manifests for $libraryName" }
 
-        val isInterop = rawManifests.all { it.isInterop }
+        konst isInterop = rawManifests.all { it.isInterop }
 
         return NativeSensitiveManifestData(
             uniqueName = libraryName,
@@ -76,7 +76,7 @@ internal class CommonNativeManifestDataProvider(
 }
 
 internal fun NativeManifestDataProvider(target: CommonizerTarget, libraries: List<NativeLibrariesToCommonize>): NativeManifestDataProvider {
-    val manifestsByName = libraries
+    konst manifestsByName = libraries
         .flatMap { it.libraries }
         .groupByTo(THashMap()) { it.manifestData.uniqueName }
         .mapValues { (_, libraries) -> libraries.map { it.manifestData } }

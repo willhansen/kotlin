@@ -181,8 +181,8 @@ fun delete(n: Int): Int {
 
 @CompileTimeCalculation
 fun tryTryFinally(): Int {
-    val zero = 0
-    val nullable: Int? = null
+    konst zero = 0
+    konst nullable: Int? = null
     try {
         try {
             1 / zero
@@ -198,28 +198,28 @@ fun tryTryFinally(): Int {
     return 0
 }
 
-const val a1 = <!EVALUATED: `0`!>tryFinally(0)<!>
-const val a2 = <!EVALUATED: `10`!>tryFinally(10)<!>
-const val a3 = <!EVALUATED: `10`!>outerReturnTryFinally(10)<!>
-const val a4 = <!EVALUATED: `10`!>outerReturnUnitTryFinally(10)<!>
-const val b1 = <!EVALUATED: `Inside try block; Inside finally; Outside try; `!>tryFinally2()<!>
-const val c1 = <!WAS_NOT_EVALUATED: `
+const konst a1 = <!EVALUATED: `0`!>tryFinally(0)<!>
+const konst a2 = <!EVALUATED: `10`!>tryFinally(10)<!>
+const konst a3 = <!EVALUATED: `10`!>outerReturnTryFinally(10)<!>
+const konst a4 = <!EVALUATED: `10`!>outerReturnUnitTryFinally(10)<!>
+const konst b1 = <!EVALUATED: `Inside try block; Inside finally; Outside try; `!>tryFinally2()<!>
+const konst c1 = <!WAS_NOT_EVALUATED: `
 Exception java.lang.IllegalArgumentException: In finally
 	at TryFinallyKt.tryCatchFinally(tryFinally.kt:57)
 	at TryFinallyKt.<clinit>(tryFinally.kt:206)`!>tryCatchFinally()<!>
-const val c2 = <!EVALUATED: `0`!>exceptionInFinally(10)<!>
-const val c3 = <!WAS_NOT_EVALUATED: `
+const konst c2 = <!EVALUATED: `0`!>exceptionInFinally(10)<!>
+const konst c3 = <!WAS_NOT_EVALUATED: `
 Exception java.lang.ArithmeticException: / by zero
 	at TryFinallyKt.exceptionInFinally(tryFinally.kt:46)
 	at TryFinallyKt.<clinit>(tryFinally.kt:208)`!>exceptionInFinally(0)<!>
-const val d1 = <!EVALUATED: `OK`!>returnTryFinally()<!>
-const val d2 = <!EVALUATED: `1`!>tryCatchReturnFinally(10)<!>
-const val d3 = <!EVALUATED: `0`!>tryCatchReturnFinally(0)<!>
-const val e1 = <!EVALUATED: `10`!>tryFinallyContinue()<!>
-const val e2 = <!EVALUATED: `1`!>tryFinallyBreak()<!>
-const val e3 = <!EVALUATED: `10`!>tryCatchFinallyContinue(0)<!>
-const val f1 = <!EVALUATED: `1`!>innerTryFinally(10)<!>
-const val f2 = <!EVALUATED: `20`!>innerTryFinallyReturn(10)<!>
-const val g1 = <!EVALUATED: `0`!>tryCatch(10)<!>
-const val g2 = <!EVALUATED: `-1`!>tryCatch(0)<!>
-const val h1 = <!EVALUATED: `-1`!>tryTryFinally()<!>
+const konst d1 = <!EVALUATED: `OK`!>returnTryFinally()<!>
+const konst d2 = <!EVALUATED: `1`!>tryCatchReturnFinally(10)<!>
+const konst d3 = <!EVALUATED: `0`!>tryCatchReturnFinally(0)<!>
+const konst e1 = <!EVALUATED: `10`!>tryFinallyContinue()<!>
+const konst e2 = <!EVALUATED: `1`!>tryFinallyBreak()<!>
+const konst e3 = <!EVALUATED: `10`!>tryCatchFinallyContinue(0)<!>
+const konst f1 = <!EVALUATED: `1`!>innerTryFinally(10)<!>
+const konst f2 = <!EVALUATED: `20`!>innerTryFinallyReturn(10)<!>
+const konst g1 = <!EVALUATED: `0`!>tryCatch(10)<!>
+const konst g2 = <!EVALUATED: `-1`!>tryCatch(0)<!>
+const konst h1 = <!EVALUATED: `-1`!>tryTryFinally()<!>

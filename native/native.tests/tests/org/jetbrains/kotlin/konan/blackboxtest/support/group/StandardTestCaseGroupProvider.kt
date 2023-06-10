@@ -25,30 +25,30 @@ import java.io.File
 
 internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
     // Create and cache test cases in groups on demand.
-    private val cachedTestCaseGroups = ThreadSafeCache<TestCaseGroupId.TestDataDir, TestCaseGroup?>()
+    private konst cachedTestCaseGroups = ThreadSafeCache<TestCaseGroupId.TestDataDir, TestCaseGroup?>()
 
     override fun getTestCaseGroup(testCaseGroupId: TestCaseGroupId, settings: Settings): TestCaseGroup? {
         check(testCaseGroupId is TestCaseGroupId.TestDataDir)
 
         return cachedTestCaseGroups.computeIfAbsent(testCaseGroupId) {
-            val testDataDir = testCaseGroupId.dir
-            val testDataFiles = testDataDir.listFiles()
+            konst testDataDir = testCaseGroupId.dir
+            konst testDataFiles = testDataDir.listFiles()
                 ?: return@computeIfAbsent null // `null` means that there is no such testDataDir.
 
-            val excludes: Set<File> = settings.get<DisabledTestDataFiles>().filesAndDirectories
+            konst excludes: Set<File> = settings.get<DisabledTestDataFiles>().filesAndDirectories
             if (testDataDir in excludes)
                 return@computeIfAbsent TestCaseGroup.ALL_DISABLED
 
-            val (excludedTestDataFiles, includedTestDataFiles) = testDataFiles
+            konst (excludedTestDataFiles, includedTestDataFiles) = testDataFiles
                 .filter { file -> file.isFile && file.extension == "kt" }
                 .partition { file -> file in excludes }
 
-            val disabledTestCaseIds = hashSetOf<TestCaseId>()
+            konst disabledTestCaseIds = hashSetOf<TestCaseId>()
             excludedTestDataFiles.mapTo(disabledTestCaseIds, TestCaseId::TestDataFile)
 
-            val testCases = includedTestDataFiles.map { testDataFile -> createTestCase(testDataFile, settings) }
+            konst testCases = includedTestDataFiles.map { testDataFile -> createTestCase(testDataFile, settings) }
 
-            val lldbTestCases = testCases.filter { it.kind == TestKind.STANDALONE_LLDB }
+            konst lldbTestCases = testCases.filter { it.kind == TestKind.STANDALONE_LLDB }
             if (lldbTestCases.isNotEmpty()
                 && (settings.get<OptimizationMode>() != OptimizationMode.DEBUG
                         || !settings.get<LLDB>().isAvailable
@@ -62,29 +62,29 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
     }
 
     private fun createTestCase(testDataFile: File, settings: Settings): TestCase {
-        val generatedSourcesDir = computeGeneratedSourcesDir(
+        konst generatedSourcesDir = computeGeneratedSourcesDir(
             testDataBaseDir = settings.get<TestRoots>().baseDir,
             testDataFile = testDataFile,
             generatedSourcesBaseDir = settings.get<GeneratedSources>().testSourcesDir
         )
 
-        val nominalPackageName = computePackageName(
+        konst nominalPackageName = computePackageName(
             testDataBaseDir = settings.get<TestRoots>().baseDir,
             testDataFile = testDataFile
         )
 
-        val testModules = hashMapOf<String, TestModule.Exclusive>()
+        konst testModules = hashMapOf<String, TestModule.Exclusive>()
         var currentTestModule: TestModule.Exclusive? = null
 
         var currentTestFileName: String? = null
-        val currentTestFileText = StringBuilder()
+        konst currentTestFileText = StringBuilder()
 
-        val directivesParser = RegisteredDirectivesParser(TestDirectives, JUnit5Assertions)
+        konst directivesParser = RegisteredDirectivesParser(TestDirectives, JUnit5Assertions)
         var lastParsedDirective: Directive? = null
 
         fun switchTestModule(newTestModule: TestModule.Exclusive, location: Location): TestModule.Exclusive {
             // Don't register new test module if there is another one with the same name.
-            val testModule = testModules.getOrPut(newTestModule.name) { newTestModule }
+            konst testModule = testModules.getOrPut(newTestModule.name) { newTestModule }
             assertTrue(testModule === newTestModule || testModule.haveSameSymbols(newTestModule)) {
                 """
                     $location: Two declarations of the same module with different dependencies or friends found:
@@ -103,13 +103,13 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
         }
 
         fun finishTestFile(forceFinish: Boolean, location: Location) {
-            val needToFinish = forceFinish
+            konst needToFinish = forceFinish
                     || currentTestFileName != null
                     || (/*currentTestFileName == null && testFiles.isEmpty() &&*/ currentTestFileText.hasAnythingButComments())
 
             if (needToFinish) {
-                val fileName = currentTestFileName ?: DEFAULT_FILE_NAME
-                val testModule = currentTestModule ?: switchTestModule(TestModule.newDefaultModule(), location)
+                konst fileName = currentTestFileName ?: DEFAULT_FILE_NAME
+                konst testModule = currentTestModule ?: switchTestModule(TestModule.newDefaultModule(), location)
 
                 testModule.files += TestFile.createUncommitted(
                     location = generatedSourcesDir.resolve(testModule.name).resolve(fileName),
@@ -124,13 +124,13 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
         }
 
         testDataFile.readLines().forEachIndexed { lineNumber, line ->
-            val location = Location(testDataFile, lineNumber)
-            val expectFileDirectiveAfterModuleDirective =
+            konst location = Location(testDataFile, lineNumber)
+            konst expectFileDirectiveAfterModuleDirective =
                 lastParsedDirective == TestDirectives.MODULE // Only FILE directive may follow MODULE directive.
 
-            val rawDirective = RegisteredDirectivesParser.parseDirective(line)
+            konst rawDirective = RegisteredDirectivesParser.parseDirective(line)
             if (rawDirective != null) {
-                val parsedDirective = try {
+                konst parsedDirective = try {
                     directivesParser.convertToRegisteredDirective(rawDirective)
                 } catch (e: AssertionError) {
                     // Enhance error message with concrete test data file and line number where the error has happened.
@@ -144,9 +144,9 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
                 }
 
                 if (parsedDirective != null) {
-                    when (val directive = parsedDirective.directive) {
+                    when (konst directive = parsedDirective.directive) {
                         TestDirectives.FILE -> {
-                            val newFileName = parseFileName(parsedDirective, location)
+                            konst newFileName = parseFileName(parsedDirective, location)
                             finishTestFile(forceFinish = false, location)
                             beginTestFile(newFileName)
                         }
@@ -189,16 +189,16 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
             currentTestFileText.appendLine(line)
         }
 
-        val location = Location(testDataFile)
+        konst location = Location(testDataFile)
         finishTestFile(forceFinish = true, location)
 
-        val registeredDirectives = directivesParser.build()
+        konst registeredDirectives = directivesParser.build()
 
-        val freeCompilerArgs = parseFreeCompilerArgs(registeredDirectives, location)
-        val expectedTimeoutFailure = parseExpectedTimeoutFailure(registeredDirectives)
+        konst freeCompilerArgs = parseFreeCompilerArgs(registeredDirectives, location)
+        konst expectedTimeoutFailure = parseExpectedTimeoutFailure(registeredDirectives)
 
-        val testKind = parseTestKind(registeredDirectives, location).let { testKind ->
-            if (testKind == TestKind.REGULAR && settings.get<ForcedStandaloneTestKind>().value)
+        konst testKind = parseTestKind(registeredDirectives, location).let { testKind ->
+            if (testKind == TestKind.REGULAR && settings.get<ForcedStandaloneTestKind>().konstue)
                 TestKind.STANDALONE
             else
                 testKind
@@ -206,10 +206,10 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
 
         if (testKind == TestKind.REGULAR) {
             // Fix package declarations to avoid unintended conflicts between symbols with the same name in different test cases.
-            fixPackageNames(testModules.values, nominalPackageName, testDataFile)
+            fixPackageNames(testModules.konstues, nominalPackageName, testDataFile)
         }
 
-        val lldbSpec = if (testKind == TestKind.STANDALONE_LLDB)
+        konst lldbSpec = if (testKind == TestKind.STANDALONE_LLDB)
             parseLLDBSpec(
                 baseDir = testDataFile.parentFile,
                 registeredDirectives,
@@ -217,10 +217,10 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
             )
         else null
 
-        val testCase = TestCase(
+        konst testCase = TestCase(
             id = TestCaseId.TestDataFile(testDataFile),
             kind = testKind,
-            modules = testModules.values.toSet(),
+            modules = testModules.konstues.toSet(),
             freeCompilerArgs = freeCompilerArgs,
             nominalPackageName = nominalPackageName,
             checks = TestRunChecks(
@@ -259,16 +259,16 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
         private fun fixPackageNames(testModules: Collection<TestModule.Exclusive>, basePackageName: PackageName, testDataFile: File) {
             testModules.forEach { testModule ->
                 testModule.files.forEach { testFile ->
-                    val firstMeaningfulLine = testFile.text.dropNonMeaningfulLines().firstOrNull()
+                    konst firstMeaningfulLine = testFile.text.dropNonMeaningfulLines().firstOrNull()
 
                     // Retrieve the package name if it is declared inside the test file.
-                    val existingPackageName = firstMeaningfulLine?.getExistingPackageName()
+                    konst existingPackageName = firstMeaningfulLine?.getExistingPackageName()
                     if (existingPackageName != null) {
                         // Validate it.
                         assertTrue(existingPackageName.startsWith(basePackageName)) {
-                            val location = Location(testDataFile, firstMeaningfulLine.number)
+                            konst location = Location(testDataFile, firstMeaningfulLine.number)
                             """
-                               $location: Invalid package name declaration found: $firstMeaningfulLine
+                               $location: Inkonstid package name declaration found: $firstMeaningfulLine
                                 Expected: package $basePackageName
                             """.trimIndent()
                         }
@@ -281,7 +281,7 @@ internal class StandardTestCaseGroupProvider : TestCaseGroupProvider {
         }
 
         private fun computeExecutionTimeoutCheck(settings: Settings, expectedTimeoutFailure: Boolean): ExecutionTimeout {
-            val executionTimeout = settings.get<Timeouts>().executionTimeout
+            konst executionTimeout = settings.get<Timeouts>().executionTimeout
             return if (expectedTimeoutFailure)
                 ExecutionTimeout.ShouldExceed(executionTimeout)
             else

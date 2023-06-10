@@ -3,26 +3,26 @@
 @RequiresOptIn
 annotation class ApiMarker
 
-// final classes are not valid targets for @SubclassOptInRequired
+// final classes are not konstid targets for @SubclassOptInRequired
 
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
 class Klass
 
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
-data class DataKlass(val arg: Int)
+data class DataKlass(konst arg: Int)
 
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
-@JvmInline value class ValueKlass(val arg: Int)
+@JvmInline konstue class ValueKlass(konst arg: Int)
 
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
 annotation class AnnotationKlass
 
-// functional interface is not a valid target for @SubclassOptInRequired
+// functional interface is not a konstid target for @SubclassOptInRequired
 
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
 fun interface FunctionalInterface { fun func() }
 
-// enum classes and objects are not valid targets for @SubclassOptInRequired
+// enum classes and objects are not konstid targets for @SubclassOptInRequired
 
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
 enum class EnumKlass { ENTRY }
@@ -30,7 +30,7 @@ enum class EnumKlass { ENTRY }
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
 object Objekt
 
-// sealed classifiers are not valid targets for @SubclassOptInRequired
+// sealed classifiers are not konstid targets for @SubclassOptInRequired
 
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
 sealed class SealedKlass
@@ -38,7 +38,7 @@ sealed class SealedKlass
 <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
 sealed interface SealedInterface
 
-// local classes are not valid targets for @SubclassOptInRequired
+// local classes are not konstid targets for @SubclassOptInRequired
 
 fun foo() {
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
@@ -48,14 +48,14 @@ fun foo() {
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
     class LocalKlass
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
-    data class LocalDataKlass(val arg: Int)
+    data class LocalDataKlass(konst arg: Int)
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
     object {}
 }
 
 class OuterKlass {
 
-    // final classes are not valid targets for @SubclassOptInRequired
+    // final classes are not konstid targets for @SubclassOptInRequired
 
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
     class NestedKlass
@@ -64,20 +64,20 @@ class OuterKlass {
     inner class InnerKlass
 
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
-    data class NestedDataKlass(val arg: Int)
+    data class NestedDataKlass(konst arg: Int)
 
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
-    @JvmInline value class NestedValueKlass(val arg: Int)
+    @JvmInline konstue class NestedValueKlass(konst arg: Int)
 
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
     annotation class NestedAnnotationKlass
 
-    // functional interface is not a valid target for @SubclassOptInRequired
+    // functional interface is not a konstid target for @SubclassOptInRequired
 
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
     fun interface NestedFunctionalInterface { fun func() }
 
-    // enum classes and objects are not valid targets for @SubclassOptInRequired
+    // enum classes and objects are not konstid targets for @SubclassOptInRequired
 
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
     enum class NestedEnumKlass { ENTRY }
@@ -88,7 +88,7 @@ class OuterKlass {
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
     companion object
 
-    // sealed classifiers are not valid targets for @SubclassOptInRequired
+    // sealed classifiers are not konstid targets for @SubclassOptInRequired
 
     <!SUBCLASS_OPT_IN_INAPPLICABLE!>@SubclassOptInRequired(ApiMarker::class)<!>
     sealed class NestedSealedKlass

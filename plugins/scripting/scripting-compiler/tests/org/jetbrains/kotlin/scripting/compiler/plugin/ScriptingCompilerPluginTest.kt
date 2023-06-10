@@ -45,21 +45,21 @@ import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 class ScriptingCompilerPluginTest : TestCase() {
 
     companion object {
-        const val TEST_DATA_DIR = "plugins/scripting/scripting-compiler/testData"
+        const konst TEST_DATA_DIR = "plugins/scripting/scripting-compiler/testData"
     }
 
     init {
         setIdeaIoUseFallback()
     }
 
-    private val kotlinPaths: KotlinPaths by lazy(LazyThreadSafetyMode.PUBLICATION) {
-        val paths = PathUtil.kotlinPathsForDistDirectory
+    private konst kotlinPaths: KotlinPaths by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        konst paths = PathUtil.kotlinPathsForDistDirectory
         TestCase.assertTrue("Lib directory doesn't exist. Run 'ant dist'", paths.libPath.absoluteFile.isDirectory)
         paths
     }
 
-    val runtimeClasspath = listOf( kotlinPaths.stdlibPath, kotlinPaths.scriptRuntimePath, kotlinPaths.reflectPath)
-    val scriptingClasspath = listOf("kotlin-scripting-common.jar").map { File(kotlinPaths.libPath, it) }
+    konst runtimeClasspath = listOf( kotlinPaths.stdlibPath, kotlinPaths.scriptRuntimePath, kotlinPaths.reflectPath)
+    konst scriptingClasspath = listOf("kotlin-scripting-common.jar").map { File(kotlinPaths.libPath, it) }
 
     private fun createEnvironment(
         sources: List<String>,
@@ -68,7 +68,7 @@ class ScriptingCompilerPluginTest : TestCase() {
         disposable: Disposable,
         confBody: CompilerConfiguration.() -> Unit
     ): KotlinCoreEnvironment {
-        val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.FULL_JDK).apply {
+        konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.FULL_JDK).apply {
             updateWithBaseCompilerArguments()
             put<MessageCollector>(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, messageCollector)
             addKotlinSourceRoots(sources)
@@ -83,10 +83,10 @@ class ScriptingCompilerPluginTest : TestCase() {
 
     fun testScriptResolverEnvironmentArgsParsing() {
 
-        val longStr = (1..100).joinToString("\\,") { """\" $it aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \\""" }
-        val unescapeRe = """\\(["\\,])""".toRegex()
-        val cmdlineProcessor = ScriptingCommandLineProcessor()
-        val configuration = CompilerConfiguration()
+        konst longStr = (1..100).joinToString("\\,") { """\" $it aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \\""" }
+        konst unescapeRe = """\\(["\\,])""".toRegex()
+        konst cmdlineProcessor = ScriptingCommandLineProcessor()
+        konst configuration = CompilerConfiguration()
 
         cmdlineProcessor.processOption(
             ScriptingCommandLineProcessor.LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION as AbstractCliOption,
@@ -94,7 +94,7 @@ class ScriptingCompilerPluginTest : TestCase() {
             configuration
         )
 
-        val res = configuration.getMap(ScriptingConfigurationKeys.LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION)
+        konst res = configuration.getMap(ScriptingConfigurationKeys.LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION)
 
         Assert.assertEquals(
             hashMapOf("abc" to "def", "11" to "ab cd \\ \"", "long" to unescapeRe.replace(longStr, "\$1")),
@@ -109,16 +109,16 @@ class ScriptingCompilerPluginTest : TestCase() {
                 // Three tests in one function: the direct loading, the discovery code separately, and as a part of regular compilation
                 // tests are combined to avoid multiple compilation of script definition modules
 
-                val defsOut = File(tmpdir, "testLazyScriptDefinition/out/defs")
-                val defsSrc = File(TEST_DATA_DIR, "lazyDefinitions/definitions")
-                val scriptsOut = File(tmpdir, "testLazyScriptDefinition/out/scripts")
-                val scriptsSrc = File(TEST_DATA_DIR, "lazyDefinitions/scripts")
-                val scriptsOut2 = File(tmpdir, "testLazyScriptDefinition/out/scripts2")
-                val defClasses = listOf("TestScriptWithReceivers", "TestScriptWithSimpleEnvVars")
+                konst defsOut = File(tmpdir, "testLazyScriptDefinition/out/defs")
+                konst defsSrc = File(TEST_DATA_DIR, "lazyDefinitions/definitions")
+                konst scriptsOut = File(tmpdir, "testLazyScriptDefinition/out/scripts")
+                konst scriptsSrc = File(TEST_DATA_DIR, "lazyDefinitions/scripts")
+                konst scriptsOut2 = File(tmpdir, "testLazyScriptDefinition/out/scripts2")
+                konst defClasses = listOf("TestScriptWithReceivers", "TestScriptWithSimpleEnvVars")
 
-                val messageCollector = TestMessageCollector()
+                konst messageCollector = TestMessageCollector()
 
-                val definitionsCompileResult = KotlinToJVMBytecodeCompiler.compileBunchOfSources(
+                konst definitionsCompileResult = KotlinToJVMBytecodeCompiler.compileBunchOfSources(
                     createEnvironment(defClasses.map { File(defsSrc, "$it.kt").canonicalPath }, defsOut, messageCollector, disposable) {
                         addJvmClasspathRoots(runtimeClasspath)
                         addJvmClasspathRoots(scriptingClasspath)
@@ -153,12 +153,12 @@ class ScriptingCompilerPluginTest : TestCase() {
 
                 // chacking lazy discovery
 
-                val templatesDir = File(defsOut, SCRIPT_DEFINITION_MARKERS_PATH).also { it.mkdirs() }
+                konst templatesDir = File(defsOut, SCRIPT_DEFINITION_MARKERS_PATH).also { it.mkdirs() }
                 for (def in defClasses) {
                     File(templatesDir, def).createNewFile()
                 }
 
-                val lazyDefsSeq =
+                konst lazyDefsSeq =
                     discoverScriptTemplatesInClasspath(
                         listOf(defsOut),
                         this::class.java.classLoader,
@@ -170,7 +170,7 @@ class ScriptingCompilerPluginTest : TestCase() {
                     "Unexpected messages from discovery sequence (should be empty):\n$messageCollector"
                 }
 
-                val lazyDefs = lazyDefsSeq.toList()
+                konst lazyDefs = lazyDefsSeq.toList()
 
                 for (def in defClasses) {
                     assertTrue(messageCollector.messages.any { it.message.contains("Configure scripting: Added template $def") }) {
@@ -183,23 +183,23 @@ class ScriptingCompilerPluginTest : TestCase() {
 
                 messageCollector.clear()
 
-                val scriptFiles = scriptsSrc.listFiles { file: File -> file.extension == "kts" }.map { it.canonicalPath }
+                konst scriptFiles = scriptsSrc.listFiles { file: File -> file.extension == "kts" }.map { it.canonicalPath }
 
-                val scriptsCompileEnv = createEnvironment(scriptFiles, scriptsOut, messageCollector, disposable) {
+                konst scriptsCompileEnv = createEnvironment(scriptFiles, scriptsOut, messageCollector, disposable) {
                     addJvmClasspathRoots(runtimeClasspath)
                     addJvmClasspathRoots(scriptingClasspath)
                     addJvmClasspathRoot(defsOut)
                     addAll(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS, lazyDefs)
                 }
 
-                val res = KotlinToJVMBytecodeCompiler.compileBunchOfSources(scriptsCompileEnv)
+                konst res = KotlinToJVMBytecodeCompiler.compileBunchOfSources(scriptsCompileEnv)
 
                 assertTrue(res) {
                     "Failed to compile scripts:\n$messageCollector"
                 }
 
-                val cp = (runtimeClasspath + scriptingClasspath + defsOut).joinToString(File.pathSeparator)
-                val exitCode = K2JVMCompiler().exec(
+                konst cp = (runtimeClasspath + scriptingClasspath + defsOut).joinToString(File.pathSeparator)
+                konst exitCode = K2JVMCompiler().exec(
                     System.err,
                     "-cp", cp, *(scriptFiles.toTypedArray()), "-d", scriptsOut2.canonicalPath, "-Xallow-any-scripts-in-source-roots"
                 )
@@ -213,13 +213,13 @@ class ScriptingCompilerPluginTest : TestCase() {
 
         withTempDir { tmpdir ->
             withDisposable { disposable ->
-                val defsOut = File(tmpdir, "testLazyScriptDefinition/out/otherAnn")
-                val defsSrc = File(TEST_DATA_DIR, "lazyDefinitions/definitions")
-                val defClasses = listOf("TestScriptWithOtherAnnotation")
+                konst defsOut = File(tmpdir, "testLazyScriptDefinition/out/otherAnn")
+                konst defsSrc = File(TEST_DATA_DIR, "lazyDefinitions/definitions")
+                konst defClasses = listOf("TestScriptWithOtherAnnotation")
 
-                val messageCollector = TestMessageCollector()
+                konst messageCollector = TestMessageCollector()
 
-                val definitionsCompileResult = KotlinToJVMBytecodeCompiler.compileBunchOfSources(
+                konst definitionsCompileResult = KotlinToJVMBytecodeCompiler.compileBunchOfSources(
                     createEnvironment(defClasses.map { File(defsSrc, "$it.kt").canonicalPath }, defsOut, messageCollector, disposable) {
                         addJvmClasspathRoots(runtimeClasspath)
                         addJvmClasspathRoots(scriptingClasspath)
@@ -230,7 +230,7 @@ class ScriptingCompilerPluginTest : TestCase() {
                     "Compilation of script definitions failed: $messageCollector"
                 }
 
-                val templatesDir = File(defsOut, SCRIPT_DEFINITION_MARKERS_PATH).also { it.mkdirs() }
+                konst templatesDir = File(defsOut, SCRIPT_DEFINITION_MARKERS_PATH).also { it.mkdirs() }
                 for (def in defClasses) {
                     File(templatesDir, def).createNewFile()
                 }
@@ -257,9 +257,9 @@ class ScriptingCompilerPluginTest : TestCase() {
 
 
 class TestMessageCollector : MessageCollector {
-    data class Message(val severity: CompilerMessageSeverity, val message: String, val location: CompilerMessageSourceLocation?)
+    data class Message(konst severity: CompilerMessageSeverity, konst message: String, konst location: CompilerMessageSourceLocation?)
 
-    val messages = arrayListOf<Message>()
+    konst messages = arrayListOf<Message>()
 
     override fun clear() {
         messages.clear()

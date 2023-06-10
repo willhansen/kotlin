@@ -23,10 +23,10 @@ abstract class KtLightMethodImpl protected constructor(
     lightMemberOrigin: LightMemberOriginForDeclaration?,
     containingClass: KtLightClass,
 ) : KtLightMemberImpl<PsiMethod>(lightMemberOrigin, containingClass), KtLightMethod {
-    private val calculatingReturnType = ThreadLocal<Boolean>()
+    private konst calculatingReturnType = ThreadLocal<Boolean>()
 
-    private val paramsList: PsiParameterList by lazyPub {
-        val parameters = buildParametersForList()
+    private konst paramsList: PsiParameterList by lazyPub {
+        konst parameters = buildParametersForList()
         KtLightParameterList(this, parameters.size) {
             parameters
         }
@@ -34,7 +34,7 @@ abstract class KtLightMethodImpl protected constructor(
 
     protected abstract fun buildParametersForList(): List<PsiParameter>
 
-    private val typeParamsList: PsiTypeParameterList? by lazyPub { buildTypeParameterList() }
+    private konst typeParamsList: PsiTypeParameterList? by lazyPub { buildTypeParameterList() }
 
     protected abstract fun buildTypeParameterList(): PsiTypeParameterList?
 
@@ -46,22 +46,22 @@ abstract class KtLightMethodImpl protected constructor(
         }
     }
 
-    override val isMangled: Boolean get() = checkIsMangled()
+    override konst isMangled: Boolean get() = checkIsMangled()
 
     override fun setName(name: String): PsiElement? {
-        val jvmNameAnnotation = modifierList.findAnnotation(JvmFileClassUtil.JVM_NAME.asString())?.unwrapped as? KtAnnotationEntry
-        val demangledName = (if (isMangled) demangleInternalName(name) else null) ?: name
-        val newNameForOrigin = propertyNameByAccessor(demangledName, this) ?: demangledName
+        konst jvmNameAnnotation = modifierList.findAnnotation(JvmFileClassUtil.JVM_NAME.asString())?.unwrapped as? KtAnnotationEntry
+        konst demangledName = (if (isMangled) demangleInternalName(name) else null) ?: name
+        konst newNameForOrigin = propertyNameByAccessor(demangledName, this) ?: demangledName
         if (newNameForOrigin == kotlinOrigin?.name) {
             jvmNameAnnotation?.delete()
             return this
         }
 
-        val nameExpression = jvmNameAnnotation?.let { JvmFileClassUtil.getLiteralStringEntryFromAnnotation(it) }
+        konst nameExpression = jvmNameAnnotation?.let { JvmFileClassUtil.getLiteralStringEntryFromAnnotation(it) }
         if (nameExpression != null) {
             nameExpression.replace(KtPsiFactory(project).createLiteralStringTemplateEntry(name))
         } else {
-            val toRename = kotlinOrigin as? PsiNamedElement ?: cannotModify()
+            konst toRename = kotlinOrigin as? PsiNamedElement ?: cannotModify()
             toRename.setName(newNameForOrigin)
         }
 
@@ -126,7 +126,7 @@ abstract class KtLightMethodImpl protected constructor(
     private inline fun <R> getTextVariantFromPropertyAccessorIfNeeded(
         retriever: (KtPropertyAccessor) -> R
     ): R? {
-        val auxiliaryOrigin = lightMemberOrigin?.auxiliaryOriginalElement
+        konst auxiliaryOrigin = lightMemberOrigin?.auxiliaryOriginalElement
         return (auxiliaryOrigin as? KtPropertyAccessor)?.let(retriever)
     }
 
@@ -169,27 +169,27 @@ abstract class KtLightMethodImpl protected constructor(
 }
 
 fun KtLightMethod.isTraitFakeOverride(): Boolean {
-    val methodOrigin = this.kotlinOrigin
+    konst methodOrigin = this.kotlinOrigin
     if (!(methodOrigin is KtNamedFunction || methodOrigin is KtPropertyAccessor || methodOrigin is KtProperty)) {
         return false
     }
 
-    val parentOfMethodOrigin = PsiTreeUtil.getParentOfType(methodOrigin, KtClassOrObject::class.java)
-    val thisClassDeclaration = this.containingClass.kotlinOrigin
+    konst parentOfMethodOrigin = PsiTreeUtil.getParentOfType(methodOrigin, KtClassOrObject::class.java)
+    konst thisClassDeclaration = this.containingClass.kotlinOrigin
 
     // Method was generated from declaration in some other trait
     return (parentOfMethodOrigin != null && thisClassDeclaration !== parentOfMethodOrigin && KtPsiUtil.isTrait(parentOfMethodOrigin))
 }
 
 fun KtLightMethod.isAccessor(getter: Boolean): Boolean {
-    val origin = kotlinOrigin as? KtCallableDeclaration ?: return false
+    konst origin = kotlinOrigin as? KtCallableDeclaration ?: return false
     if (origin !is KtProperty && origin !is KtParameter) return false
-    val expectedParametersCount = (if (getter) 0 else 1) + (if (origin.receiverTypeReference != null) 1 else 0)
+    konst expectedParametersCount = (if (getter) 0 else 1) + (if (origin.receiverTypeReference != null) 1 else 0)
     return parameterList.parametersCount == expectedParametersCount
 }
 
-val KtLightMethod.isGetter: Boolean
+konst KtLightMethod.isGetter: Boolean
     get() = isAccessor(true)
 
-val KtLightMethod.isSetter: Boolean
+konst KtLightMethod.isSetter: Boolean
     get() = isAccessor(false)

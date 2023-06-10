@@ -21,30 +21,30 @@ import com.intellij.openapi.util.UserDataHolder
 import com.intellij.psi.PsiElement
 import kotlin.reflect.KProperty
 
-class UserDataProperty<in R : UserDataHolder, T : Any>(val key: Key<T>) {
+class UserDataProperty<in R : UserDataHolder, T : Any>(konst key: Key<T>) {
     operator fun getValue(thisRef: R, desc: KProperty<*>) = thisRef.getUserData(key)
 
-    operator fun setValue(thisRef: R, desc: KProperty<*>, value: T?) = thisRef.putUserData(key, value)
+    operator fun setValue(thisRef: R, desc: KProperty<*>, konstue: T?) = thisRef.putUserData(key, konstue)
 }
 
-class NotNullableUserDataProperty<in R : UserDataHolder, T : Any>(val key: Key<T>, val defaultValue: T) {
+class NotNullableUserDataProperty<in R : UserDataHolder, T : Any>(konst key: Key<T>, konst defaultValue: T) {
     operator fun getValue(thisRef: R, desc: KProperty<*>) = thisRef.getUserData(key) ?: defaultValue
 
-    operator fun setValue(thisRef: R, desc: KProperty<*>, value: T) {
-        thisRef.putUserData(key, if (value != defaultValue) value else null)
+    operator fun setValue(thisRef: R, desc: KProperty<*>, konstue: T) {
+        thisRef.putUserData(key, if (konstue != defaultValue) konstue else null)
     }
 }
 
-class CopyablePsiUserDataProperty<in R : PsiElement, T : Any>(val key: Key<T>) {
+class CopyablePsiUserDataProperty<in R : PsiElement, T : Any>(konst key: Key<T>) {
     operator fun getValue(thisRef: R, property: KProperty<*>) = thisRef.getCopyableUserData(key)
 
-    operator fun setValue(thisRef: R, property: KProperty<*>, value: T?) = thisRef.putCopyableUserData(key, value)
+    operator fun setValue(thisRef: R, property: KProperty<*>, konstue: T?) = thisRef.putCopyableUserData(key, konstue)
 }
 
-class NotNullablePsiCopyableUserDataProperty<in R : PsiElement, T : Any>(val key: Key<T>, val defaultValue: T) {
+class NotNullablePsiCopyableUserDataProperty<in R : PsiElement, T : Any>(konst key: Key<T>, konst defaultValue: T) {
     operator fun getValue(thisRef: R, property: KProperty<*>) = thisRef.getCopyableUserData(key) ?: defaultValue
 
-    operator fun setValue(thisRef: R, property: KProperty<*>, value: T) {
-        thisRef.putCopyableUserData(key, if (value != defaultValue) value else null)
+    operator fun setValue(thisRef: R, property: KProperty<*>, konstue: T) {
+        thisRef.putCopyableUserData(key, if (konstue != defaultValue) konstue else null)
     }
 }

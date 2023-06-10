@@ -2,8 +2,8 @@
 
 class A {
     companion object {
-        val prop0 = 1
-        val prop1 = 2
+        konst prop0 = 1
+        konst prop1 = 2
         fun foo(): Int {
             return prop0 + prop1
         }

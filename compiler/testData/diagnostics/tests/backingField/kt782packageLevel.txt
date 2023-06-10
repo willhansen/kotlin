@@ -1,8 +1,8 @@
 package
 
 package kt782 {
-    public val w: kotlin.Int = 56
-    public val x: kotlin.Int
-    public val y: kotlin.Int = 11
-    public val z: kotlin.Int = 34
+    public konst w: kotlin.Int = 56
+    public konst x: kotlin.Int
+    public konst y: kotlin.Int = 11
+    public konst z: kotlin.Int = 34
 }

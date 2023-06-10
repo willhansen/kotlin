@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.types
 import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.storage.StorageManager
 
-open class WrappedTypeFactory(private val storageManager: StorageManager) {
+open class WrappedTypeFactory(private konst storageManager: StorageManager) {
     open fun createDeferredType(trace: BindingTrace, computation: () -> KotlinType): KotlinType =
         DeferredType.create(storageManager, trace, computation)
 

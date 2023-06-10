@@ -9,6 +9,6 @@ import org.jetbrains.kotlin.fir.analysis.collectors.components.AbstractDiagnosti
 import org.jetbrains.kotlin.fir.analysis.collectors.components.ReportCommitterDiagnosticComponent
 
 class DiagnosticCollectorComponents(
-    val regularComponents: List<AbstractDiagnosticCollectorComponent>,
-    val reportCommitter: ReportCommitterDiagnosticComponent
+    konst regularComponents: List<AbstractDiagnosticCollectorComponent>,
+    konst reportCommitter: ReportCommitterDiagnosticComponent
 )

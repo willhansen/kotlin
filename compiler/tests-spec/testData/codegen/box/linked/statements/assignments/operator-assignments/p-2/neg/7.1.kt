@@ -15,14 +15,14 @@ class B(var a: Int) {
     var times = false
     var timesAssign = false
 
-    operator fun times(value: Int): B {
+    operator fun times(konstue: Int): B {
         times = true
-        return B(a * value)
+        return B(a * konstue)
     }
 
-    operator fun timesAssign(value: Int) {
+    operator fun timesAssign(konstue: Int) {
         timesAssign = true
-        a = a * value
+        a = a * konstue
     }
 }
 

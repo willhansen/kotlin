@@ -13,7 +13,7 @@ fun box(): String {
 }
 
 // FILE: test.kt
-val withAssertion = J().nullString()
+konst withAssertion = J().nullString()
 
 fun clinitTrigger() {}
 

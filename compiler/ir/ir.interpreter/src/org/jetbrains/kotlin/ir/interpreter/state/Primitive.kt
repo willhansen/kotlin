@@ -15,19 +15,19 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.util.defaultType
 
-internal class Primitive<T>(val value: T, val type: IrType) : State {
-    override val fields: Fields = mutableMapOf()
-    override val irClass: IrClass = type.classOrNull!!.owner
+internal class Primitive<T>(konst konstue: T, konst type: IrType) : State {
+    override konst fields: Fields = mutableMapOf()
+    override konst irClass: IrClass = type.classOrNull!!.owner
 
     override fun getField(symbol: IrSymbol): State? = null
 
     override fun getIrFunctionByIrCall(expression: IrCall): IrFunction {
-        val owner = expression.symbol.owner
+        konst owner = expression.symbol.owner
         return if (owner.isFakeOverride) owner.getFirstNonInterfaceOverridden() else owner
     }
 
     override fun toString(): String {
-        return "Primitive(value=$value, type=${irClass.defaultType})"
+        return "Primitive(konstue=$konstue, type=${irClass.defaultType})"
     }
 
     companion object {

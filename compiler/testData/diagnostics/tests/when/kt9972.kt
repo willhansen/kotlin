@@ -10,7 +10,7 @@
  */
 
 fun test1(): Int {
-    val x: String = if (true) <!TYPE_MISMATCH!>{
+    konst x: String = if (true) <!TYPE_MISMATCH!>{
         when {
             true -> Any()
             else -> null
@@ -20,7 +20,7 @@ fun test1(): Int {
 }
 
 fun test2(): Int {
-    val x: String = <!TYPE_MISMATCH!>when {
+    konst x: String = <!TYPE_MISMATCH!>when {
                         true -> Any()
                         else -> null
                     } ?: return 0<!>

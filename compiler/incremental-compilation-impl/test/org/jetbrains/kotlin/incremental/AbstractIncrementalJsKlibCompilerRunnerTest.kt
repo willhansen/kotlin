@@ -17,12 +17,12 @@ abstract class AbstractIncrementalJsKlibCompilerRunnerTest : AbstractIncremental
             irOnly = true
         }
 
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = super.buildLogFinder.copy(isKlibEnabled = true)
 }
 
 abstract class AbstractIncrementalJsKlibCompilerWithScopeExpansionRunnerTest : AbstractIncrementalJsKlibCompilerRunnerTest() {
-    override val scopeExpansionMode = CompileScopeExpansionMode.ALWAYS
+    override konst scopeExpansionMode = CompileScopeExpansionMode.ALWAYS
 }
 
 abstract class AbstractIncrementalJsFirKlibCompilerWithScopeExpansionRunnerTest : AbstractIncrementalJsKlibCompilerWithScopeExpansionRunnerTest() {
@@ -33,6 +33,6 @@ abstract class AbstractIncrementalJsFirKlibCompilerWithScopeExpansionRunnerTest 
         }
     }
 
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = super.buildLogFinder.copy(isFirEnabled = true)
 }

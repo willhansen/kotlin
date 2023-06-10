@@ -23,15 +23,15 @@ import java.util.concurrent.atomic.AtomicReference
  * https://github.com/gradle/gradle/issues/16774 (Waiting for Gradle 7.5)
  */
 internal fun addBuildEventsListenerRegistryMock(project: Project) {
-    val executedExtensionKey = "addBuildEventsListenerRegistryMock.executed"
+    konst executedExtensionKey = "addBuildEventsListenerRegistryMock.executed"
     try {
         if (project.findExtension<Boolean>(executedExtensionKey) == true) return
-        val projectScopeServices = (project as DefaultProject).services as ProjectScopeServices
-        val state: Field = ProjectScopeServices::class.java.superclass.getDeclaredField("state")
+        konst projectScopeServices = (project as DefaultProject).services as ProjectScopeServices
+        konst state: Field = ProjectScopeServices::class.java.superclass.getDeclaredField("state")
         state.isAccessible = true
         @Suppress("UNCHECKED_CAST")
-        val stateValue: AtomicReference<Any> = state.get(projectScopeServices) as AtomicReference<Any>
-        val enumClass = Class.forName(DefaultServiceRegistry::class.java.name + "\$State")
+        konst stateValue: AtomicReference<Any> = state.get(projectScopeServices) as AtomicReference<Any>
+        konst enumClass = Class.forName(DefaultServiceRegistry::class.java.name + "\$State")
         stateValue.set(enumClass.enumConstants[0])
 
         // add service and set state so that future mutations are not allowed

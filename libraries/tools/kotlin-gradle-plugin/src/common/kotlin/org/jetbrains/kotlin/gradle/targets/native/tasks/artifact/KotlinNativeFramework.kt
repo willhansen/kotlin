@@ -28,16 +28,16 @@ import javax.inject.Inject
 abstract class KotlinNativeFrameworkConfigImpl @Inject constructor(artifactName: String) :
     KotlinNativeArtifactConfigImpl(artifactName), KotlinNativeFrameworkConfig {
 
-    override fun validate() {
-        super.validate()
-        val kind = NativeOutputKind.FRAMEWORK
+    override fun konstidate() {
+        super.konstidate()
+        konst kind = NativeOutputKind.FRAMEWORK
         check(kind.availableFor(target)) {
             "Native artifact '$artifactName' wasn't configured because ${kind.description} is not available for ${target.visibleName}"
         }
     }
 
     override fun createArtifact(extensions: ExtensionAware): KotlinNativeFrameworkImpl {
-        validate()
+        konstidate()
         return KotlinNativeFrameworkImpl(
             artifactName = artifactName,
             modules = modules,
@@ -55,34 +55,34 @@ abstract class KotlinNativeFrameworkConfigImpl @Inject constructor(artifactName:
 }
 
 class KotlinNativeFrameworkImpl(
-    override val artifactName: String,
-    override val modules: Set<Any>,
-    override val modes: Set<NativeBuildType>,
-    override val isStatic: Boolean,
-    override val linkerOptions: List<String>,
-    override val kotlinOptionsFn: KotlinCommonToolOptions.() -> Unit,
-    override val toolOptionsConfigure: KotlinCommonCompilerToolOptions.() -> Unit,
-    override val binaryOptions: Map<String, String>,
-    override val target: KonanTarget,
-    override val embedBitcode: BitcodeEmbeddingMode?,
+    override konst artifactName: String,
+    override konst modules: Set<Any>,
+    override konst modes: Set<NativeBuildType>,
+    override konst isStatic: Boolean,
+    override konst linkerOptions: List<String>,
+    override konst kotlinOptionsFn: KotlinCommonToolOptions.() -> Unit,
+    override konst toolOptionsConfigure: KotlinCommonCompilerToolOptions.() -> Unit,
+    override konst binaryOptions: Map<String, String>,
+    override konst target: KonanTarget,
+    override konst embedBitcode: BitcodeEmbeddingMode?,
     extensions: ExtensionAware
 ) : KotlinNativeFramework, ExtensionAware by extensions {
-    private val kind = NativeOutputKind.FRAMEWORK
+    private konst kind = NativeOutputKind.FRAMEWORK
     override fun getName() = lowerCamelCaseName(artifactName, kind.taskNameClassifier, target.presetName)
-    override val taskName = lowerCamelCaseName("assemble", name)
-    override val outDir = "out/${kind.visibleName}"
+    override konst taskName = lowerCamelCaseName("assemble", name)
+    override konst outDir = "out/${kind.visibleName}"
 
     override fun registerAssembleTask(project: Project) {
-        val resultTask = project.registerTask<Task>(taskName) { task ->
+        konst resultTask = project.registerTask<Task>(taskName) { task ->
             task.group = BasePlugin.BUILD_GROUP
             task.description = "Assemble ${kind.description} '$artifactName' for ${target.visibleName}."
             task.enabled = target.enabledOnCurrentHost
         }
 
-        val librariesConfigurationName = project.registerLibsDependencies(target, artifactName, modules)
-        val exportConfigurationName = project.registerExportDependencies(target, artifactName, modules)
+        konst librariesConfigurationName = project.registerLibsDependencies(target, artifactName, modules)
+        konst exportConfigurationName = project.registerExportDependencies(target, artifactName, modules)
         modes.forEach { buildType ->
-            val targetTask = registerLinkFrameworkTask(
+            konst targetTask = registerLinkFrameworkTask(
                 project = project,
                 name = artifactName,
                 target = target,
@@ -107,9 +107,9 @@ internal fun KotlinNativeArtifact.registerLinkFrameworkTask(
     outDirName: String = outDir,
     taskNameSuffix: String = ""
 ): TaskProvider<KotlinNativeLinkArtifactTask> {
-    val kind = NativeOutputKind.FRAMEWORK
-    val destinationDir = project.buildDir.resolve("$outDirName/${target.visibleName}/${buildType.visibleName}")
-    val resultTask = project.registerTask<KotlinNativeLinkArtifactTask>(
+    konst kind = NativeOutputKind.FRAMEWORK
+    konst destinationDir = project.buildDir.resolve("$outDirName/${target.visibleName}/${buildType.visibleName}")
+    konst resultTask = project.registerTask<KotlinNativeLinkArtifactTask>(
         lowerCamelCaseName("assemble", name, buildType.visibleName, kind.taskNameClassifier, target.presetName, taskNameSuffix),
         listOf(target, kind.compilerOutputKind)
     ) { task ->

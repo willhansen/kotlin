@@ -5,7 +5,7 @@ class Some(var foo: Int) {
         }
     }
 
-    val y = run {
+    konst y = run {
         foo = 1
         foo
     }

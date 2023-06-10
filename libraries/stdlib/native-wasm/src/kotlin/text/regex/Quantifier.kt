@@ -28,24 +28,24 @@ import kotlin.IllegalArgumentException
  * Represents RE quantifier; contains two fields responsible for min and max number of repetitions.
  * -1 as a maximum number of repetition represents infinity(i.e. +,*).
  */
-internal class Quantifier(val min: Int, val max: Int = min) : SpecialToken() {
+internal class Quantifier(konst min: Int, konst max: Int = min) : SpecialToken() {
 
     init {
         if (min < 0 || max < -1) {
-            throw IllegalArgumentException("Incorrect quantifier value: $this")
+            throw IllegalArgumentException("Incorrect quantifier konstue: $this")
         }
     }
 
     override fun toString() = "{$min, ${if (max == INF) "" else max}}"
 
-    override val type: Type = SpecialToken.Type.QUANTIFIER
+    override konst type: Type = SpecialToken.Type.QUANTIFIER
 
     companion object {
-        val starQuantifier = Quantifier(0, -1)
-        val plusQuantifier = Quantifier(1, -1)
-        val altQuantifier  = Quantifier(0,  1)
+        konst starQuantifier = Quantifier(0, -1)
+        konst plusQuantifier = Quantifier(1, -1)
+        konst altQuantifier  = Quantifier(0,  1)
 
-        val INF = -1
+        konst INF = -1
 
         fun fromLexerToken(token: Int) = when(token) {
             Lexer.QUANT_STAR, Lexer.QUANT_STAR_P, Lexer.QUANT_STAR_R -> starQuantifier

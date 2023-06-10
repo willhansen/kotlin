@@ -18,7 +18,7 @@ fun box(): String {
     check("java.util.List<java.lang.String!>!", returnTypeOf { J.bothFlexible() })
 
     // Type flexibility affects equality! Platform type is neither nullable nor non-nullable.
-    val platform = returnTypeOf { J.nullabilityFlexible() }
+    konst platform = returnTypeOf { J.nullabilityFlexible() }
     if (platform == returnTypeOf { J.nullable() }) return "Fail: platform type should not be equal to nullable type"
     if (platform == returnTypeOf { J.notNull() }) return "Fail: platform type should not be equal to non-nullable type"
 

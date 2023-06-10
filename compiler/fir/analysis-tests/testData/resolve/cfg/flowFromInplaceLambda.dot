@@ -1325,7 +1325,7 @@ digraph flowFromInplaceLambda_kt {
             503 [label="Postponed exit from lambda"];
             504 [label="Function call: R|kotlin/run|<R|kotlin/Int|>(...)" style="filled" fillcolor=yellow];
             505 [label="Function call: R|/select|<R|kotlin/Int|>(...)" style="filled" fillcolor=yellow];
-            506 [label="Variable declaration: lval x: R|kotlin/Int|"];
+            506 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
             507 [label="Access variable R|<local>/x|"];
             508 [label="Function call: R|<local>/x|.R|kotlin/Int.inc|()" style="filled" fillcolor=yellow];
             509 [label="Exit block"];
@@ -1396,7 +1396,7 @@ digraph flowFromInplaceLambda_kt {
             526 [label="Postponed exit from lambda"];
             527 [label="Function call: R|/noContract|<R|kotlin/Int|>(...)" style="filled" fillcolor=yellow];
             528 [label="Function call: R|/id|<R|kotlin/Int|>(...)" style="filled" fillcolor=yellow];
-            529 [label="Variable declaration: lval x: R|kotlin/Int|"];
+            529 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
             530 [label="Access variable R|<local>/x|"];
             531 [label="Function call: R|<local>/x|.R|kotlin/Int.inc|()" style="filled" fillcolor=yellow];
             532 [label="Exit block"];

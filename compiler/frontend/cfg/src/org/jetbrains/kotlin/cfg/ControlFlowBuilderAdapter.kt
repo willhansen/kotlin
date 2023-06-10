@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.cfg
 
 import org.jetbrains.kotlin.cfg.pseudocode.PseudoValue
 import org.jetbrains.kotlin.cfg.pseudocode.Pseudocode
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.*
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.*
 import org.jetbrains.kotlin.contracts.description.EventOccurrencesRange
 import org.jetbrains.kotlin.descriptors.ValueParameterDescriptor
 import org.jetbrains.kotlin.psi.*
@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 
 abstract class ControlFlowBuilderAdapter : ControlFlowBuilder {
 
-    protected abstract val delegateBuilder: ControlFlowBuilder
+    protected abstract konst delegateBuilder: ControlFlowBuilder
 
     override fun loadUnit(expression: KtExpression) {
         delegateBuilder.loadUnit(expression)
@@ -47,10 +47,10 @@ abstract class ControlFlowBuilderAdapter : ControlFlowBuilder {
 
     override fun magic(
         instructionElement: KtElement,
-        valueElement: KtElement?,
+        konstueElement: KtElement?,
         inputValues: List<PseudoValue>,
         kind: MagicKind
-    ): MagicInstruction = delegateBuilder.magic(instructionElement, valueElement, inputValues, kind)
+    ): MagicInstruction = delegateBuilder.magic(instructionElement, konstueElement, inputValues, kind)
 
     override fun merge(expression: KtExpression, inputValues: List<PseudoValue>): MergeInstruction =
         delegateBuilder.merge(expression, inputValues)
@@ -63,12 +63,12 @@ abstract class ControlFlowBuilderAdapter : ControlFlowBuilder {
         delegateBuilder.readVariable(expression, resolvedCall, receiverValues)
 
     override fun call(
-        valueElement: KtElement,
+        konstueElement: KtElement,
         resolvedCall: ResolvedCall<*>,
         receiverValues: Map<PseudoValue, ReceiverValue>,
         arguments: Map<PseudoValue, ValueParameterDescriptor>
     ): CallInstruction =
-        delegateBuilder.call(valueElement, resolvedCall, receiverValues, arguments)
+        delegateBuilder.call(konstueElement, resolvedCall, receiverValues, arguments)
 
     override fun predefinedOperation(
         expression: KtExpression,
@@ -128,7 +128,7 @@ abstract class ControlFlowBuilderAdapter : ControlFlowBuilder {
         delegateBuilder.exitLoopBody(expression)
     }
 
-    override val currentLoop: KtLoopExpression?
+    override konst currentLoop: KtLoopExpression?
         get() = delegateBuilder.currentLoop
 
     override fun enterTryFinally(trigger: GenerationTrigger) {
@@ -146,10 +146,10 @@ abstract class ControlFlowBuilderAdapter : ControlFlowBuilder {
     override fun exitSubroutine(subroutine: KtElement, eventOccurrencesRange: EventOccurrencesRange?): Pseudocode =
         delegateBuilder.exitSubroutine(subroutine, eventOccurrencesRange)
 
-    override val currentSubroutine: KtElement
+    override konst currentSubroutine: KtElement
         get() = delegateBuilder.currentSubroutine
 
-    override val returnSubroutine: KtElement
+    override konst returnSubroutine: KtElement
         get() = delegateBuilder.returnSubroutine
 
     override fun returnValue(returnExpression: KtExpression, returnValue: PseudoValue, subroutine: KtElement) {
@@ -203,8 +203,8 @@ abstract class ControlFlowBuilderAdapter : ControlFlowBuilder {
 
     override fun getBoundValue(element: KtElement?): PseudoValue? = delegateBuilder.getBoundValue(element)
 
-    override fun bindValue(value: PseudoValue, element: KtElement) {
-        delegateBuilder.bindValue(value, element)
+    override fun bindValue(konstue: PseudoValue, element: KtElement) {
+        delegateBuilder.bindValue(konstue, element)
     }
 
     override fun newValue(element: KtElement?): PseudoValue = delegateBuilder.newValue(element)

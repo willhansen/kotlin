@@ -26,37 +26,37 @@ import org.jetbrains.kotlin.name.Name
 private object OPTIMISED_WHEN_SUBJECT : IrDeclarationOriginImpl("OPTIMISED_WHEN_SUBJECT")
 
 class WasmStringSwitchOptimizerLowering(
-    private val context: WasmBackendContext
+    private konst context: WasmBackendContext
 ) : FileLoweringPass, IrElementTransformerVoidWithContext() {
-    private val symbols = context.wasmSymbols
+    private konst symbols = context.wasmSymbols
 
-    private val stringHashCode by lazy {
+    private konst stringHashCode by lazy {
         symbols.irBuiltIns.stringClass.getSimpleFunction("hashCode")!!
     }
 
-    private val intType: IrType = symbols.irBuiltIns.intType
-    private val booleanType: IrType = symbols.irBuiltIns.booleanType
+    private konst intType: IrType = symbols.irBuiltIns.intType
+    private konst booleanType: IrType = symbols.irBuiltIns.booleanType
 
-    private fun IrBlockBuilder.createEqEqForIntVariable(tempIntVariable: IrVariable, value: Int) =
+    private fun IrBlockBuilder.createEqEqForIntVariable(tempIntVariable: IrVariable, konstue: Int) =
         irCall(context.irBuiltIns.eqeqSymbol, booleanType).also {
             it.putValueArgument(0, irGet(tempIntVariable))
-            it.putValueArgument(1, value.toIrConst(intType))
+            it.putValueArgument(1, konstue.toIrConst(intType))
         }
 
     private fun asEqCall(expression: IrExpression): IrCall? =
         (expression as? IrCall)?.takeIf { it.symbol == context.irBuiltIns.eqeqSymbol }
 
-    private class MatchedCase(val condition: IrCall, val branchIndex: Int)
-    private class BucketSelector(val hashCode: Int, val selector: IrExpression)
+    private class MatchedCase(konst condition: IrCall, konst branchIndex: Int)
+    private class BucketSelector(konst hashCode: Int, konst selector: IrExpression)
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(this)
     }
 
     private fun tryMatchCaseToNullableStringConstant(condition: IrExpression): IrConst<*>? {
-        val eqCall = asEqCall(condition) ?: return null
-        if (eqCall.valueArgumentsCount < 2) return null
-        val constantReceiver =
+        konst eqCall = asEqCall(condition) ?: return null
+        if (eqCall.konstueArgumentsCount < 2) return null
+        konst constantReceiver =
             eqCall.getValueArgument(0) as? IrConst<*>
                 ?: eqCall.getValueArgument(1) as? IrConst<*>
                 ?: return null
@@ -67,9 +67,9 @@ class WasmStringSwitchOptimizerLowering(
     }
 
     private fun IrBlockBuilder.addHashCodeVariable(firstEqCall: IrCall): IrVariable {
-        val subject: IrExpression
-        val subjectArgumentIndex: Int
-        val firstArgument = firstEqCall.getValueArgument(0)!!
+        konst subject: IrExpression
+        konst subjectArgumentIndex: Int
+        konst firstArgument = firstEqCall.getValueArgument(0)!!
         if (firstArgument is IrConst<*>) {
             subject = firstEqCall.getValueArgument(1)!!
             subjectArgumentIndex = 1
@@ -78,9 +78,9 @@ class WasmStringSwitchOptimizerLowering(
             subjectArgumentIndex = 0
         }
 
-        val subjectType = subject.type
+        konst subjectType = subject.type
 
-        val whenSubject = buildVariable(
+        konst whenSubject = buildVariable(
             scope.getLocalDeclarationParent(),
             startOffset,
             endOffset,
@@ -93,7 +93,7 @@ class WasmStringSwitchOptimizerLowering(
         +whenSubject
         firstEqCall.putValueArgument(subjectArgumentIndex, irGet(whenSubject))
 
-        val tmpIntWhenSubject = buildVariable(
+        konst tmpIntWhenSubject = buildVariable(
             scope.getLocalDeclarationParent(),
             startOffset,
             endOffset,
@@ -102,12 +102,12 @@ class WasmStringSwitchOptimizerLowering(
             intType,
         )
 
-        val getHashCode = irCall(stringHashCode, intType).also {
+        konst getHashCode = irCall(stringHashCode, intType).also {
             it.dispatchReceiver = irGet(whenSubject)
         }
 
-        val hashCode: IrExpression = if (subjectType.isNullable()) {
-            val stringIsNull = irCall(context.irBuiltIns.eqeqeqSymbol, booleanType).also {
+        konst hashCode: IrExpression = if (subjectType.isNullable()) {
+            konst stringIsNull = irCall(context.irBuiltIns.eqeqeqSymbol, booleanType).also {
                 it.putValueArgument(0, irGet(whenSubject))
                 it.putValueArgument(1, irNull(subjectType))
             }
@@ -139,18 +139,18 @@ class WasmStringSwitchOptimizerLowering(
         buckets: Map<Int, List<String?>>,
         transformedWhen: IrWhen,
     ): List<BucketSelector> = buckets.entries.map { bucket ->
-        val selector = if (bucket.value.size == 1) {
-            val bucketCase = bucket.value[0]
-            val matchedCase = stringConstantToMatchedCase.getValue(bucketCase)
+        konst selector = if (bucket.konstue.size == 1) {
+            konst bucketCase = bucket.konstue[0]
+            konst matchedCase = stringConstantToMatchedCase.getValue(bucketCase)
             irIfThen(
                 type = transformedWhen.type,
                 condition = matchedCase.condition,
                 thenPart = transformedWhen.branches[matchedCase.branchIndex].result,
             )
         } else {
-            val bucketBranches = mutableListOf<IrBranch>()
-            bucket.value.mapTo(bucketBranches) { bucketCase ->
-                val matchedCase = stringConstantToMatchedCase.getValue(bucketCase)
+            konst bucketBranches = mutableListOf<IrBranch>()
+            bucket.konstue.mapTo(bucketBranches) { bucketCase ->
+                konst matchedCase = stringConstantToMatchedCase.getValue(bucketCase)
                 irBranch(matchedCase.condition, transformedWhen.branches[matchedCase.branchIndex].result)
             }
             irWhen(transformedWhen.type, bucketBranches)
@@ -164,9 +164,9 @@ class WasmStringSwitchOptimizerLowering(
         selectorsType: IrType,
         elseBranchExpression: IrExpression?
     ): IrWhen {
-        val allBucketsWhenBranches = mutableListOf<IrBranch>()
+        konst allBucketsWhenBranches = mutableListOf<IrBranch>()
         bucketsSelectors.mapTo(allBucketsWhenBranches) { bucketSelector ->
-            val condition = createEqEqForIntVariable(tempIntVariable, bucketSelector.hashCode)
+            konst condition = createEqEqForIntVariable(tempIntVariable, bucketSelector.hashCode)
             irBranch(condition, bucketSelector.selector)
         }
         if (elseBranchExpression != null) {
@@ -197,9 +197,9 @@ class WasmStringSwitchOptimizerLowering(
         buckets: Map<Int, List<String?>>,
         elseBranchIndex: Int,
     ): List<BucketSelector> = buckets.entries.map { bucket ->
-        val selector = if (bucket.value.size == 1) {
-            val bucketCase = bucket.value[0]
-            val matchedCase = stringConstantToMatchedCase.getValue(bucketCase)
+        konst selector = if (bucket.konstue.size == 1) {
+            konst bucketCase = bucket.konstue[0]
+            konst matchedCase = stringConstantToMatchedCase.getValue(bucketCase)
             irIfThenElse(
                 type = intType,
                 condition = matchedCase.condition,
@@ -207,9 +207,9 @@ class WasmStringSwitchOptimizerLowering(
                 elsePart = elseBranchIndex.toIrConst(intType)
             )
         } else {
-            val bucketBranches = mutableListOf<IrBranch>()
-            bucket.value.mapTo(bucketBranches) { bucketCase ->
-                val matchedCase = stringConstantToMatchedCase.getValue(bucketCase)
+            konst bucketBranches = mutableListOf<IrBranch>()
+            bucket.konstue.mapTo(bucketBranches) { bucketCase ->
+                konst matchedCase = stringConstantToMatchedCase.getValue(bucketCase)
                 irBranch(matchedCase.condition, matchedCase.branchIndex.toIrConst(intType))
             }
             bucketBranches.add(irElseBranch(elseBranchIndex.toIrConst(intType)))
@@ -219,7 +219,7 @@ class WasmStringSwitchOptimizerLowering(
     }
 
     private fun IrBlockBuilder.createTransformedWhen(tempIntVariable: IrVariable, transformedWhen: IrWhen): IrWhen {
-        val mainResultsBranches = mutableListOf<IrBranch>()
+        konst mainResultsBranches = mutableListOf<IrBranch>()
         transformedWhen.branches.mapIndexedTo(mainResultsBranches) { index, branch ->
             if (!isElseBranch(branch)) {
                 irBranch(createEqEqForIntVariable(tempIntVariable, index), branch.result)
@@ -231,21 +231,21 @@ class WasmStringSwitchOptimizerLowering(
     }
 
     override fun visitWhen(expression: IrWhen): IrExpression {
-        val visitedWhen = super.visitWhen(expression) as IrWhen
+        konst visitedWhen = super.visitWhen(expression) as IrWhen
         if (visitedWhen.branches.size <= 2) return visitedWhen
 
         var firstEqCall: IrCall? = null
         var isSimpleWhen = true //simple when is when without else block and commas
-        val stringConstantToMatchedCase = mutableMapOf<String?, MatchedCase>()
+        konst stringConstantToMatchedCase = mutableMapOf<String?, MatchedCase>()
         visitedWhen.branches.forEachIndexed { branchIndex, branch ->
             if (!isElseBranch(branch)) {
-                val conditions = IrWhenUtils.matchConditions(context.irBuiltIns.ororSymbol, branch.condition) ?: return visitedWhen
+                konst conditions = IrWhenUtils.matchConditions(context.irBuiltIns.ororSymbol, branch.condition) ?: return visitedWhen
                 if (conditions.isEmpty()) return visitedWhen
 
                 isSimpleWhen = isSimpleWhen && conditions.size == 1
                 for (condition in conditions) {
-                    val matchedStringConstant = tryMatchCaseToNullableStringConstant(condition) ?: return visitedWhen
-                    val matchedString = matchedStringConstant.value as? String
+                    konst matchedStringConstant = tryMatchCaseToNullableStringConstant(condition) ?: return visitedWhen
+                    konst matchedString = matchedStringConstant.konstue as? String
                     if (matchedString !in stringConstantToMatchedCase) {
                         stringConstantToMatchedCase[matchedString] = MatchedCase(condition, branchIndex)
                         firstEqCall = firstEqCall ?: asEqCall(condition)
@@ -258,14 +258,14 @@ class WasmStringSwitchOptimizerLowering(
 
         if (firstEqCall == null || stringConstantToMatchedCase.size < 2) return visitedWhen
 
-        val convertedBlock = context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol).run {
+        konst convertedBlock = context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol).run {
             irBlock(resultType = visitedWhen.type) {
-                val tempIntVariable = addHashCodeVariable(firstEqCall!!)
+                konst tempIntVariable = addHashCodeVariable(firstEqCall!!)
 
-                val buckets = stringConstantToMatchedCase.keys.groupBy { it.hashCode() }
+                konst buckets = stringConstantToMatchedCase.keys.groupBy { it.hashCode() }
 
                 if (isSimpleWhen) {
-                    val bucketsSelectors = createSimpleBucketSelectors(
+                    konst bucketsSelectors = createSimpleBucketSelectors(
                         stringConstantToMatchedCase = stringConstantToMatchedCase,
                         buckets = buckets,
                         transformedWhen = expression
@@ -277,13 +277,13 @@ class WasmStringSwitchOptimizerLowering(
                         elseBranchExpression = null
                     )
                 } else {
-                    val elseBranchIndex = expression.branches.size
-                    val bucketsSelectors = createBucketSelectors(
+                    konst elseBranchIndex = expression.branches.size
+                    konst bucketsSelectors = createBucketSelectors(
                         stringConstantToMatchedCase = stringConstantToMatchedCase,
                         buckets = buckets,
                         elseBranchIndex = elseBranchIndex
                     )
-                    val caseSelectorWhen = createWhenForBucketSelectors(
+                    konst caseSelectorWhen = createWhenForBucketSelectors(
                         tempIntVariable = tempIntVariable,
                         bucketsSelectors = bucketsSelectors,
                         selectorsType = intType,

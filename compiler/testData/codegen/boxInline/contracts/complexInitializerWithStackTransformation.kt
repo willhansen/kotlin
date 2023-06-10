@@ -20,7 +20,7 @@ import test.*
 fun test(s: String) = s
 
 fun box(): String {
-    val x: String
+    konst x: String
     myrun {
         x = try { test("OK") } catch (e: Exception) { test("fail") }
     }

@@ -12,23 +12,23 @@ plugins {
 }
 
 
-val fatJarContents by configurations.creating {
+konst fatJarContents by configurations.creating {
     isCanBeResolved = true
     isCanBeConsumed = false
     attributes {
         attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.JAR))
     }
 }
-val fatJarContentsStripMetadata by configurations.creating
-val fatJarContentsStripServices by configurations.creating
-val fatJarContentsStripVersions by configurations.creating
+konst fatJarContentsStripMetadata by configurations.creating
+konst fatJarContentsStripServices by configurations.creating
+konst fatJarContentsStripVersions by configurations.creating
 
-val compilerVersion by configurations.creating
+konst compilerVersion by configurations.creating
 
 // JPS build assumes fat jar is built from embedded configuration,
 // but we can't use it in gradle build since slightly more complex processing is required like stripping metadata & services from some jars
 if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
-    val embedded by configurations
+    konst embedded by configurations
     embedded.apply {
         extendsFrom(fatJarContents)
         extendsFrom(fatJarContentsStripMetadata)
@@ -38,54 +38,54 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
     }
 }
 
-val api by configurations
-val proguardLibraries by configurations.creating {
+konst api by configurations
+konst proguardLibraries by configurations.creating {
     extendsFrom(api)
 }
 
 // Libraries to copy to the lib directory
-val libraries by configurations.creating {
+konst libraries by configurations.creating {
     exclude("org.jetbrains.kotlin", "kotlin-stdlib-common")
 }
 
-val librariesStripVersion by configurations.creating
+konst librariesStripVersion by configurations.creating
 
 // Compiler plugins should be copied without `kotlin-` prefix
-val compilerPlugins by configurations.creating {
+konst compilerPlugins by configurations.creating {
     exclude("org.jetbrains.kotlin", "kotlin-stdlib-common")
 
     isCanBeConsumed = false
     isCanBeResolved = true
 }
-val compilerPluginsCompat by configurations.creating {
+konst compilerPluginsCompat by configurations.creating {
     exclude("org.jetbrains.kotlin", "kotlin-stdlib-common")
 
     isCanBeConsumed = false
     isCanBeResolved = true
 }
 
-val sources by configurations.creating {
+konst sources by configurations.creating {
     exclude("org.jetbrains.kotlin", "kotlin-stdlib-common")
     isTransitive = false
 }
 
 // contents of dist/maven directory
-val distMavenContents by configurations.creating {
+konst distMavenContents by configurations.creating {
     isTransitive = false
 }
 // contents of dist/common directory
-val distCommonContents by configurations.creating
-val distStdlibMinimalForTests by configurations.creating
-val buildNumber by configurations.creating
-val distJSContents by configurations.creating
+konst distCommonContents by configurations.creating
+konst distStdlibMinimalForTests by configurations.creating
+konst buildNumber by configurations.creating
+konst distJSContents by configurations.creating
 
-val compilerBaseName = name
+konst compilerBaseName = name
 
-val outputJar = fileFrom(buildDir, "libs", "$compilerBaseName.jar")
+konst outputJar = fileFrom(buildDir, "libs", "$compilerBaseName.jar")
 
-val compilerModules: Array<String> by rootProject.extra
+konst compilerModules: Array<String> by rootProject.extra
 
-val distLibraryProjects = listOfNotNull(
+konst distLibraryProjects = listOfNotNull(
     ":kotlin-annotation-processing",
     ":kotlin-annotation-processing-cli",
     ":kotlin-annotation-processing-runtime",
@@ -117,7 +117,7 @@ val distLibraryProjects = listOfNotNull(
     ":plugins:jvm-abi-gen"
 )
 
-val distCompilerPluginProjects = listOf(
+konst distCompilerPluginProjects = listOf(
     ":kotlin-allopen-compiler-plugin",
     ":kotlin-android-extensions-runtime",
     ":plugins:parcelize:parcelize-compiler",
@@ -129,11 +129,11 @@ val distCompilerPluginProjects = listOf(
     ":kotlin-assignment-compiler-plugin",
     ":kotlin-scripting-compiler"
 )
-val distCompilerPluginProjectsCompat = listOf(
+konst distCompilerPluginProjectsCompat = listOf(
     ":kotlinx-serialization-compiler-plugin",
 )
 
-val distSourcesProjects = listOfNotNull(
+konst distSourcesProjects = listOfNotNull(
     ":kotlin-annotations-jvm",
     ":kotlin-script-runtime",
     ":kotlin-test:kotlin-test-js".takeIf { !kotlinBuildProperties.isInJpsBuildIdeaSync },
@@ -253,13 +253,13 @@ dependencies {
 publish()
 
 // sbom for dist
-val distSbomTask = configureSbom(
+konst distSbomTask = configureSbom(
     target = "Dist",
     documentName = "Kotlin Compiler Distribution",
     setOf(configurations.runtimeClasspath.name, libraries.name, librariesStripVersion.name, compilerPlugins.name)
 )
 
-val packCompiler by task<Jar> {
+konst packCompiler by task<Jar> {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     destinationDirectory.set(File(buildDir, "libs"))
     archiveClassifier.set("before-proguard")
@@ -291,7 +291,7 @@ val packCompiler by task<Jar> {
     }
 }
 
-val proguard by task<CacheableProguardTask> {
+konst proguard by task<CacheableProguardTask> {
     dependsOn(packCompiler)
 
     javaLauncher.set(project.getToolchainLauncherFor(JdkMajorVersion.JDK_1_8))
@@ -343,10 +343,10 @@ val proguard by task<CacheableProguardTask> {
     printconfiguration("$buildDir/compiler.pro.dump")
 }
 
-val pack = if (kotlinBuildProperties.proguard) proguard else packCompiler
-val distDir: String by rootProject.extra
+konst pack = if (kotlinBuildProperties.proguard) proguard else packCompiler
+konst distDir: String by rootProject.extra
 
-val jar = runtimeJar {
+konst jar = runtimeJar {
     dependsOn(pack)
     dependsOn(compilerVersion)
 
@@ -374,28 +374,28 @@ sourcesJar {
 
 javadocJar()
 
-val distKotlinc = distTask<Sync>("distKotlinc") {
+konst distKotlinc = distTask<Sync>("distKotlinc") {
     destinationDir = File("$distDir/kotlinc")
 
     from(buildNumber)
 
-    val binFiles = files("$rootDir/compiler/cli/bin")
+    konst binFiles = files("$rootDir/compiler/cli/bin")
     into("bin") {
         from(binFiles)
     }
 
-    val licenseFiles = files("$rootDir/license")
+    konst licenseFiles = files("$rootDir/license")
     into("license") {
         from(licenseFiles)
     }
 
-    val compilerBaseName = compilerBaseName
-    val jarFiles = files(jar)
-    val librariesFiles = files(libraries)
-    val librariesStripVersionFiles = files(librariesStripVersion)
-    val sourcesFiles = files(sources)
-    val compilerPluginsFiles = files(compilerPlugins)
-    val compilerPluginsCompatFiles = files(compilerPluginsCompat)
+    konst compilerBaseName = compilerBaseName
+    konst jarFiles = files(jar)
+    konst librariesFiles = files(libraries)
+    konst librariesStripVersionFiles = files(librariesStripVersion)
+    konst sourcesFiles = files(sources)
+    konst compilerPluginsFiles = files(compilerPlugins)
+    konst compilerPluginsCompatFiles = files(compilerPluginsCompat)
     into("lib") {
         from(jarFiles) { rename { "$compilerBaseName.jar" } }
         from(librariesFiles)
@@ -422,17 +422,17 @@ val distKotlinc = distTask<Sync>("distKotlinc") {
     }
 }
 
-val distCommon = distTask<Sync>("distCommon") {
+konst distCommon = distTask<Sync>("distCommon") {
     destinationDir = File("$distDir/common")
     from(distCommonContents)
 }
 
-val distMaven = distTask<Sync>("distMaven") {
+konst distMaven = distTask<Sync>("distMaven") {
     destinationDir = File("$distDir/maven")
     from(distMavenContents)
 }
 
-val distJs = distTask<Sync>("distJs") {
+konst distJs = distTask<Sync>("distJs") {
     destinationDir = File("$distDir/js")
     from(distJSContents)
 }

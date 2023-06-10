@@ -348,24 +348,24 @@ public class ResolvedCallsTestGenerated extends AbstractResolvedCallsTest {
             runTest("compiler/testData/resolvedCalls/functionTypes/invokeForFunctionType.kt");
         }
 
-        @TestMetadata("valOfExtensionFunctionType.kt")
+        @TestMetadata("konstOfExtensionFunctionType.kt")
         public void testValOfExtensionFunctionType() throws Exception {
-            runTest("compiler/testData/resolvedCalls/functionTypes/valOfExtensionFunctionType.kt");
+            runTest("compiler/testData/resolvedCalls/functionTypes/konstOfExtensionFunctionType.kt");
         }
 
-        @TestMetadata("valOfExtensionFunctionTypeInvoke.kt")
+        @TestMetadata("konstOfExtensionFunctionTypeInvoke.kt")
         public void testValOfExtensionFunctionTypeInvoke() throws Exception {
-            runTest("compiler/testData/resolvedCalls/functionTypes/valOfExtensionFunctionTypeInvoke.kt");
+            runTest("compiler/testData/resolvedCalls/functionTypes/konstOfExtensionFunctionTypeInvoke.kt");
         }
 
-        @TestMetadata("valOfFunctionType.kt")
+        @TestMetadata("konstOfFunctionType.kt")
         public void testValOfFunctionType() throws Exception {
-            runTest("compiler/testData/resolvedCalls/functionTypes/valOfFunctionType.kt");
+            runTest("compiler/testData/resolvedCalls/functionTypes/konstOfFunctionType.kt");
         }
 
-        @TestMetadata("valOfFunctionTypeInvoke.kt")
+        @TestMetadata("konstOfFunctionTypeInvoke.kt")
         public void testValOfFunctionTypeInvoke() throws Exception {
-            runTest("compiler/testData/resolvedCalls/functionTypes/valOfFunctionTypeInvoke.kt");
+            runTest("compiler/testData/resolvedCalls/functionTypes/konstOfFunctionTypeInvoke.kt");
         }
     }
 

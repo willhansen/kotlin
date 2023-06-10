@@ -3,11 +3,11 @@ class B {
 }
 
 class A {
-    val message = B()
+    konst message = B()
 
     fun foo(w: Boolean) {
         if (w) {
-            val message = ""
+            konst message = ""
             message.toString()
         } else {
             message.append() // message here should relate to the class-level property

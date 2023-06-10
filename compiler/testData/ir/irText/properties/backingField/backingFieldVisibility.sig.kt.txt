@@ -5,7 +5,7 @@ class A {
   // CHECK:
   //   Mangled name: A{}a
   //   Public signature: /A.a|-1200697420457237799[0]
-  val a: Int
+  konst a: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-a>(){}kotlin.Number
     //   Public signature: /A.a.<get-a>|-5418543833660929450[0]
@@ -17,7 +17,7 @@ class A {
   // CHECK:
   //   Mangled name: A{}b
   //   Public signature: /A.b|772347207915745207[0]
-  val b: Int
+  konst b: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-b>(){}kotlin.Number
     //   Public signature: /A.b.<get-b>|2675477957877241625[0]
@@ -29,7 +29,7 @@ class A {
   // CHECK:
   //   Mangled name: A{}c
   //   Public signature: /A.c|-4416962153448040627[0]
-  val c: Int
+  konst c: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-c>(){}kotlin.Int
     //   Public signature: /A.c.<get-c>|-2440337234483931882[0]
@@ -41,7 +41,7 @@ class A {
   // CHECK:
   //   Mangled name: A{}d
   //   Public signature: /A.d|5174763769109925331[0]
-  val d: Int
+  konst d: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-d>(){}kotlin.Int
     //   Public signature: /A.d.<get-d>|-3703416348690628760[0]

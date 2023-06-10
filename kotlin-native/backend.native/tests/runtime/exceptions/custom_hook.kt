@@ -11,14 +11,14 @@ import kotlin.native.internal.*
 import kotlin.native.runtime.Debugging
 
 fun mainLegacyMM() {
-    val wrong = "wrong"
-    assertFailsWith<InvalidMutabilityException> {
+    konst wrong = "wrong"
+    assertFailsWith<InkonstidMutabilityException> {
         setUnhandledExceptionHook { _ -> println(wrong) }
     }
 
-    val x = 42
-    val old = setUnhandledExceptionHook({ throwable: Throwable ->
-        println("value $x: ${throwable::class.simpleName}. Runnable state: ${Debugging.isThreadStateRunnable}")
+    konst x = 42
+    konst old = setUnhandledExceptionHook({ throwable: Throwable ->
+        println("konstue $x: ${throwable::class.simpleName}. Runnable state: ${Debugging.isThreadStateRunnable}")
     }.freeze())
 
     assertNull(old)
@@ -27,12 +27,12 @@ fun mainLegacyMM() {
 }
 
 fun mainExperimentalMM() {
-    val unset = setUnhandledExceptionHook { _ -> println("ok") }
+    konst unset = setUnhandledExceptionHook { _ -> println("ok") }
     assertNull(unset)
 
-    val x = 42
-    val old = setUnhandledExceptionHook { throwable: Throwable ->
-        println("value $x: ${throwable::class.simpleName}. Runnable state: ${Debugging.isThreadStateRunnable}")
+    konst x = 42
+    konst old = setUnhandledExceptionHook { throwable: Throwable ->
+        println("konstue $x: ${throwable::class.simpleName}. Runnable state: ${Debugging.isThreadStateRunnable}")
     }
 
     assertNotNull(old)

@@ -334,8 +334,8 @@ public class KotlinTestUtils {
         Matcher directiveMatcher = DIRECTIVE_PATTERN.matcher(expectedText);
         while (directiveMatcher.find()) {
             String name = directiveMatcher.group(1);
-            String value = directiveMatcher.group(3);
-            directives.put(name, value);
+            String konstue = directiveMatcher.group(3);
+            directives.put(name, konstue);
         }
         return directives;
     }

@@ -8,4 +8,4 @@ import android.os.*
 import android.accounts.Account
 
 @Parcelize
-class Foo(val kp: Account): Parcelable
+class Foo(konst kp: Account): Parcelable

@@ -2,21 +2,21 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
-class BoxT<T>(val boxed: T)
-class BoxT2<T: Any>(val boxed: T?)
-class BoxAny(val boxed: Any?)
-class BoxFoo(val boxed: IFoo?)
+class BoxT<T>(konst boxed: T)
+class BoxT2<T: Any>(konst boxed: T?)
+class BoxAny(konst boxed: Any?)
+class BoxFoo(konst boxed: IFoo?)
 
 interface IFoo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str<T: String>(val value: T) : IFoo
+konstue class Str<T: String>(konst konstue: T) : IFoo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str2<T: Str<String>>(val value: T): IFoo
+konstue class Str2<T: Str<String>>(konst konstue: T): IFoo
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class StrArr(val value: Array<String>): IFoo
+konstue class StrArr(konst konstue: Array<String>): IFoo
 
 fun <T: String> boxToTypeParameter(x: Str<T>?) = BoxT(x)
 fun <T: String> boxToTypeParameter2(x: Str<T>?) = BoxT2(x)

@@ -14,13 +14,13 @@ interface AnnotationsOnNullableParenthesizedTypes {
 
     fun returnArgument(): B<(@A C)?>
 
-    val lambdaType: (@A() (() -> C))?
+    konst lambdaType: (@A() (() -> C))?
 
-    val lambdaParameter: ((@A C)?) -> C
+    konst lambdaParameter: ((@A C)?) -> C
 
-    val lambdaReturnValue: () -> (@A C)?
+    konst lambdaReturnValue: () -> (@A C)?
 
-    val lambdaReceiver: (@A C)?.() -> C
+    konst lambdaReceiver: (@A C)?.() -> C
 }
 
 @Target(AnnotationTarget.TYPE, AnnotationTarget.TYPE_PARAMETER)

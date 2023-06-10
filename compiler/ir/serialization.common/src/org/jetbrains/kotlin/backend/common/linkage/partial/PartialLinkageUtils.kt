@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.ir.linkage.partial.PartialLinkageUtils.File as PLFile
 
 internal object PartialLinkageUtils {
-    val UNKNOWN_NAME = Name.identifier("<unknown name>")
+    konst UNKNOWN_NAME = Name.identifier("<unknown name>")
 
     fun IdSignature.guessName(nameSegmentsToPickUp: Int): String? = when (this) {
         is IdSignature.CommonSignature -> if (nameSegmentsToPickUp == 1)
@@ -30,16 +30,16 @@ internal object PartialLinkageUtils {
     }
 
     /** Like [ClassId], but can be used for any declaration. */
-    data class DeclarationId(val packageFqName: String, val declarationRelativeFqName: String) {
+    data class DeclarationId(konst packageFqName: String, konst declarationRelativeFqName: String) {
         private fun createNested(name: String) =
             DeclarationId(packageFqName, if (declarationRelativeFqName.isNotEmpty()) "$declarationRelativeFqName.$name" else name)
 
         override fun toString() = "$packageFqName/$declarationRelativeFqName"
 
         companion object {
-            val IrDeclarationWithName.declarationId: DeclarationId?
+            konst IrDeclarationWithName.declarationId: DeclarationId?
                 get() {
-                    return when (val parent = parent) {
+                    return when (konst parent = parent) {
                         is IrPackageFragment -> DeclarationId(parent.packageFqName.asString(), name.asString())
                         is IrDeclarationWithName -> parent.declarationId?.createNested(name.asString())
                         else -> null
@@ -64,7 +64,7 @@ internal object PartialLinkageUtils {
      *      }
      * 3. Module B -> A.v1:
      *      fun bar() {
-     *          val a = A()
+     *          konst a = A()
      *          a.foo() // IR call references a function symbol with ID signature: "/A.foo|123"
      *      }
      * 4. Module App -> A.v2, B
@@ -72,8 +72,8 @@ internal object PartialLinkageUtils {
      *      // because no declaration found for symbol "/A.foo|123" during the IR linkage phase.
      */
     fun IrLazyDeclarationBase.isEffectivelyMissingLazyIrDeclaration(): Boolean {
-        val nearestClass = this as? IrClass ?: parentClassOrNull ?: return false
-        val outermostClass = generateSequence(nearestClass) { it.parentClassOrNull }.last()
+        konst nearestClass = this as? IrClass ?: parentClassOrNull ?: return false
+        konst outermostClass = generateSequence(nearestClass) { it.parentClassOrNull }.last()
         return outermostClass.visibility == DescriptorVisibilities.PRIVATE
     }
 }
@@ -81,10 +81,10 @@ internal object PartialLinkageUtils {
 /** An optimization to avoid re-computing file for every visited declaration */
 internal abstract class FileAwareIrElementTransformerVoid(startingFile: PLFile?) : IrElementTransformerVoid() {
     private var _currentFile: PLFile? = startingFile
-    val currentFile: PLFile get() = _currentFile ?: error("No information about current file")
+    konst currentFile: PLFile get() = _currentFile ?: error("No information about current file")
 
     protected fun <T> runInFile(file: PLFile, block: () -> T): T {
-        val previousFile = _currentFile
+        konst previousFile = _currentFile
         _currentFile = file
         try {
             return block()

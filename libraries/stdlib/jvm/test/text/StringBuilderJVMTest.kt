@@ -12,8 +12,8 @@ class StringBuilderJVMTest {
     // Tests that the deprecated Common StringBuilder.append(CharArray, Int, Int) does not affect JVM target.
     @Test
     fun deprecatedAppend() {
-        val chars = charArrayOf('a', 'b', 'c', 'd')
-        val sb = StringBuilder()
+        konst chars = charArrayOf('a', 'b', 'c', 'd')
+        konst sb = StringBuilder()
         sb.append(chars, 1, 2)
         assertEquals("bc", sb.toString())
     }

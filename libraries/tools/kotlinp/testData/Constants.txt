@@ -7,22 +7,22 @@ public final class A : kotlin/Any {
 
   // field: constantDouble:D
   // getter: getConstantDouble()D
-  public final val constantDouble: kotlin/Double /* = ... */
+  public final konst constantDouble: kotlin/Double /* = ... */
     public final get
 
   // field: constantInt:I
   // getter: getConstantInt()I
-  public final val constantInt: kotlin/Int /* = ... */
+  public final konst constantInt: kotlin/Int /* = ... */
     public final get
 
   // field: constantNull:Ljava/lang/String;
   // getter: getConstantNull()Ljava/lang/String;
-  public final val constantNull: kotlin/String?
+  public final konst constantNull: kotlin/String?
     public final get
 
   // field: constantString:Ljava/lang/String;
   // getter: getConstantString()Ljava/lang/String;
-  public final val constantString: kotlin/String /* = ... */
+  public final konst constantString: kotlin/String /* = ... */
     public final get
 
   // module name: test-module
@@ -32,7 +32,7 @@ public final class A : kotlin/Any {
 package {
 
   // field: four:I
-  public final const val four: kotlin/Int /* = ... */
+  public final const konst four: kotlin/Int /* = ... */
     public final get
 
   // module name: test-module

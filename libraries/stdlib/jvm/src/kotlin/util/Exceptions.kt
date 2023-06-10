@@ -39,7 +39,7 @@ public inline fun Throwable.printStackTrace(stream: PrintStream): Unit = (this a
  * pertaining to this throwable.
  */
 @Suppress("ConflictingExtensionProperty")
-public val Throwable.stackTrace: Array<StackTraceElement>
+public konst Throwable.stackTrace: Array<StackTraceElement>
     get() = (this as java.lang.Throwable).stackTrace!!
 
 /**
@@ -53,8 +53,8 @@ public val Throwable.stackTrace: Array<StackTraceElement>
  */
 @SinceKotlin("1.4")
 public actual fun Throwable.stackTraceToString(): String {
-    val sw = StringWriter()
-    val pw = PrintWriter(sw)
+    konst sw = StringWriter()
+    konst pw = PrintWriter(sw)
     printStackTrace(pw)
     pw.flush()
     return sw.toString()
@@ -80,5 +80,5 @@ public actual fun Throwable.addSuppressed(exception: Throwable) {
  * - if this [Throwable] instance has disabled the suppression.
  */
 @SinceKotlin("1.4")
-public actual val Throwable.suppressedExceptions: List<Throwable>
+public actual konst Throwable.suppressedExceptions: List<Throwable>
     get() = IMPLEMENTATIONS.getSuppressed(this)

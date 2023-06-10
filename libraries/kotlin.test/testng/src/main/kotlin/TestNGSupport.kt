@@ -16,7 +16,7 @@ class TestNGContributor : AsserterContributor {
         return if (hasTestNGInClassPath) TestNGAsserter else null
     }
 
-    private val hasTestNGInClassPath = try {
+    private konst hasTestNGInClassPath = try {
         Class.forName("org.testng.Assert")
         true
     } catch (_: ClassNotFoundException) {
@@ -45,11 +45,11 @@ object TestNGAsserter : Asserter {
     }
 
     override fun assertNotNull(message: String?, actual: Any?) {
-        Assert.assertNotNull(actual, message ?: "actual value is null")
+        Assert.assertNotNull(actual, message ?: "actual konstue is null")
     }
 
     override fun assertNull(message: String?, actual: Any?) {
-        Assert.assertNull(actual, message ?: "actual value is not null")
+        Assert.assertNull(actual, message ?: "actual konstue is not null")
     }
 
     override fun fail(message: String?): Nothing {

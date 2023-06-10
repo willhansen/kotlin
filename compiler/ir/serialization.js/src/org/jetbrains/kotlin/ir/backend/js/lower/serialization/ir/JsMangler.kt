@@ -35,7 +35,7 @@ object JsManglerIr : AbstractJsManglerIr()
 abstract class AbstractJsDescriptorMangler : DescriptorBasedKotlinManglerImpl() {
 
     companion object {
-        private val exportChecker = JsDescriptorExportChecker()
+        private konst exportChecker = JsDescriptorExportChecker()
     }
 
     private class JsDescriptorExportChecker : DescriptorExportCheckerVisitor() {

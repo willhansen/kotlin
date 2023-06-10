@@ -16,19 +16,19 @@ import org.jetbrains.kotlin.name.StandardClassIds
 
 object KtFirArrayOfSymbolProvider {
     internal fun KtFirAnalysisSession.arrayOfSymbol(identifier: Name): KtFirFunctionSymbol? {
-        val firSymbol = useSiteSession.symbolProvider.getTopLevelCallableSymbols(kotlinPackage, identifier).firstOrNull {
+        konst firSymbol = useSiteSession.symbolProvider.getTopLevelCallableSymbols(kotlinPackage, identifier).firstOrNull {
             /* choose (for byte array)
              * public fun byteArrayOf(vararg elements: kotlin.Byte): kotlin.ByteArray
              */
-            (it as? FirFunctionSymbol<*>)?.fir?.valueParameters?.singleOrNull()?.isVararg == true
+            (it as? FirFunctionSymbol<*>)?.fir?.konstueParameters?.singleOrNull()?.isVararg == true
         } as? FirNamedFunctionSymbol ?: return null
         return firSymbolBuilder.functionLikeBuilder.buildFunctionSymbol(firSymbol)
     }
 
-    private val kotlinPackage = FqName("kotlin")
-    internal val arrayOf = Name.identifier("arrayOf")
-    internal val arrayTypeToArrayOfCall = run {
-        StandardClassIds.primitiveArrayTypeByElementType.values + StandardClassIds.unsignedArrayTypeByElementType.values
+    private konst kotlinPackage = FqName("kotlin")
+    internal konst arrayOf = Name.identifier("arrayOf")
+    internal konst arrayTypeToArrayOfCall = run {
+        StandardClassIds.primitiveArrayTypeByElementType.konstues + StandardClassIds.unsignedArrayTypeByElementType.konstues
     }.associateWith { it.correspondingArrayOfCallFqName() }
 
     private fun ClassId.correspondingArrayOfCallFqName(): Name =

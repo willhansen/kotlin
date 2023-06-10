@@ -16,23 +16,23 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
 public class ExceptionAttachmentBuilder {
-    private val printer = PrettyPrinter()
+    private konst printer = PrettyPrinter()
 
-    public fun <T> withEntry(name: String, value: T, render: (T & Any) -> String) {
+    public fun <T> withEntry(name: String, konstue: T, render: (T & Any) -> String) {
         withEntry(name) {
-            appendLine("Class: ${value?.let { it::class.java.name } ?: "<null>"}")
+            appendLine("Class: ${konstue?.let { it::class.java.name } ?: "<null>"}")
             appendLine("Value:")
             withIndent {
-                appendLine(value?.let(render) ?: "<null>")
+                appendLine(konstue?.let(render) ?: "<null>")
             }
         }
     }
 
-    public fun withEntry(name: String, value: String?) {
+    public fun withEntry(name: String, konstue: String?) {
         with(printer) {
             appendLine("- $name:")
             withIndent {
-                appendLine(value ?: "<null>")
+                appendLine(konstue ?: "<null>")
             }
             appendLine(separator)
         }
@@ -43,14 +43,14 @@ public class ExceptionAttachmentBuilder {
     }
 
     public fun withEntryGroup(groupName: String, build: ExceptionAttachmentBuilder.() -> Unit) {
-        val builder = ExceptionAttachmentBuilder().apply(build)
+        konst builder = ExceptionAttachmentBuilder().apply(build)
         withEntry(groupName, builder) { it.buildString() }
     }
 
     public fun buildString(): String = printer.toString()
 
     private companion object {
-        private const val separator = "========"
+        private const konst separator = "========"
     }
 }
 
@@ -67,7 +67,7 @@ public inline fun buildErrorWithAttachment(
     attachmentName: String = "info.txt",
     buildAttachment: ExceptionAttachmentBuilder.() -> Unit = {}
 ): Nothing {
-    val exception = KotlinExceptionWithAttachments(message, cause)
+    konst exception = KotlinExceptionWithAttachments(message, cause)
     exception.buildAttachment(attachmentName) { buildAttachment() }
     throw exception
 }
@@ -78,7 +78,7 @@ public inline fun Logger.logErrorWithAttachment(
     attachmentName: String = "info.txt",
     buildAttachment: ExceptionAttachmentBuilder.() -> Unit = {}
 ) {
-    val attachment = Attachment(attachmentName, ExceptionAttachmentBuilder().apply(buildAttachment).buildString())
+    konst attachment = Attachment(attachmentName, ExceptionAttachmentBuilder().apply(buildAttachment).buildString())
     this.error(message, cause, attachment)
 }
 
@@ -89,7 +89,7 @@ public inline fun rethrowExceptionWithDetails(
     buildAttachment: ExceptionAttachmentBuilder.() -> Unit = {}
 ): Nothing {
     if (shouldIjPlatformExceptionBeRethrown(exception)) throw exception
-    val unwrappedException = if (exception is SourceCodeAnalysisException) exception.cause else exception
+    konst unwrappedException = if (exception is SourceCodeAnalysisException) exception.cause else exception
     if (unwrappedException !is Exception) throw unwrappedException
     buildErrorWithAttachment(message, unwrappedException, attachmentName, buildAttachment)
 }

@@ -31,7 +31,7 @@ interface Disposable {
  * it ensures that all the resource that were allocated so far will get freed.
  */
 abstract class DisposableContainer : Disposable {
-    val arena = Arena()
+    konst arena = Arena()
     
     override fun dispose() {
         arena.clear()

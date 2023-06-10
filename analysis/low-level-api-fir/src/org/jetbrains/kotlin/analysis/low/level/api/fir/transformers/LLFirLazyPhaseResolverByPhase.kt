@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import java.util.*
 
 internal object LLFirLazyPhaseResolverByPhase {
-    private val byPhase = EnumMap<FirResolvePhase, LLFirLazyResolver>(FirResolvePhase::class.java).apply {
+    private konst byPhase = EnumMap<FirResolvePhase, LLFirLazyResolver>(FirResolvePhase::class.java).apply {
         this[FirResolvePhase.COMPANION_GENERATION] = LLFirGeneratedCompanionObjectLazyResolver
         this[FirResolvePhase.SUPER_TYPES] = LLFirSupertypeLazyResolver
         this[FirResolvePhase.TYPES] = LLFirTypeLazyResolver

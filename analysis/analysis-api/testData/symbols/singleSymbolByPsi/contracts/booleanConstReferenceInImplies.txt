@@ -9,7 +9,7 @@ KtFunctionSymbol:
     KtContractConditionalContractEffectDeclaration:
       effect:
         KtContractReturnsSpecificValueEffectDeclaration:
-          value:
+          konstue:
             KtContractConstantValue:
               constantType: TRUE
       condition:
@@ -36,7 +36,7 @@ KtFunctionSymbol:
     type: kotlin/Boolean
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

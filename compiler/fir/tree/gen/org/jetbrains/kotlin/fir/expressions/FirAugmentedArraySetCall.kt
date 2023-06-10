@@ -17,13 +17,13 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirAugmentedArraySetCall : FirPureAbstractElement(), FirStatement {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract val lhsGetCall: FirFunctionCall
-    abstract val rhs: FirExpression
-    abstract val operation: FirOperation
-    abstract val calleeReference: FirReference
-    abstract val arrayAccessSource: KtSourceElement?
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract konst lhsGetCall: FirFunctionCall
+    abstract konst rhs: FirExpression
+    abstract konst operation: FirOperation
+    abstract konst calleeReference: FirReference
+    abstract konst arrayAccessSource: KtSourceElement?
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitAugmentedArraySetCall(this, data)
 

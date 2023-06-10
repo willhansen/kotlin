@@ -15,7 +15,7 @@ FILE: complexTypes.kt
 
     }
     public abstract interface Test : R|kotlin/Any| {
-        public abstract val x: R|a/b/C.D<in kotlin/collections/List<*>, *, out kotlin/CharSequence, *>|
+        public abstract konst x: R|a/b/C.D<in kotlin/collections/List<*>, *, out kotlin/CharSequence, *>|
             public get(): R|a/b/C.D<in kotlin/collections/List<*>, *, out kotlin/CharSequence, *>|
 
     }

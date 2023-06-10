@@ -11,7 +11,7 @@ operator fun <P1> ((prop1: P1) -> Unit).getValue(
     property: KProperty<*>
 ): (prop1: P1) -> Unit = this
 
-val pdfDocumentViewer by xComponent { _: String? ->
+konst pdfDocumentViewer by xComponent { _: String? ->
 }
 
 fun xPDFDocumentViewer(

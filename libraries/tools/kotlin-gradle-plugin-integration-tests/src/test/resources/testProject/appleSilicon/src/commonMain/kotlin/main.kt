@@ -2,4 +2,4 @@ fun main() {
     println("Executed Code from: commonMain/$sourceSetsAfterCommonMain")
 }
 
-expect val sourceSetsAfterCommonMain: String
+expect konst sourceSetsAfterCommonMain: String

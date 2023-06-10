@@ -159,7 +159,7 @@ class InfrastructureGTestListingTest {
                 GTestListing.parse(listing)
                 fail { "Listing parsed without errors" }
             } catch (e: AssertionError) {
-                val message = e.message.orEmpty()
+                konst message = e.message.orEmpty()
                 if (message.startsWith(expectedMessage) && "at line #$lineNumber" in message) {
                     // it's OK
                 } else

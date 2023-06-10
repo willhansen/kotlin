@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
 /**
  * If put on a parameter, lombok will insert a null-check at the start of the method / constructor's body, throwing a
  * {@code NullPointerException} with the parameter's name as message. If put on a field, any generated method assigning
- * a value to this field will also produce these nullchecks.
+ * a konstue to this field will also produce these nullchecks.
  * <p>
  * Note that any annotation named {@code NonNull} with any casing and any package will result in nullchecks produced for
  * generated methods (and the annotation will be copied to the getter return type and any parameters of generated methods),

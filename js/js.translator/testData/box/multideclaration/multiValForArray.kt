@@ -7,7 +7,7 @@ class A {
 operator fun A.component2(): String = "n"
 
 fun box(): String {
-    val list = Array<A>(1, { A() })
+    konst list = Array<A>(1, { A() })
 
     var i = 0;
     var s = ""

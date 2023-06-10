@@ -7,6 +7,6 @@ class Controller<T : Number> {
 
 fun <S : Number> generate(g: suspend Controller<S>.() -> Unit): S = TODO()
 
-val test = generate {
+konst test = generate {
     yield(<!TYPE_MISMATCH!>"foo"<!>)
 }

@@ -11,6 +11,6 @@ object O {
 
 operator fun O.P.getValue(thisRef: Any?, property: Any?) = if (thisRef == null) "OK" else "Failed"
 
-val result by O.P
+konst result by O.P
 
 fun box(): String = result

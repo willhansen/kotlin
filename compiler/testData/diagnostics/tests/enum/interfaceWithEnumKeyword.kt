@@ -4,5 +4,5 @@
 
     // Interface like part
     fun test()
-    val foo: Int
+    konst foo: Int
 }

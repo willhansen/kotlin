@@ -18,13 +18,13 @@ import org.jetbrains.kotlin.incremental.components.NoLookupLocation
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
-class KtFe10DescEnumEntrySymbolPointer(private val classId: ClassId, private val entryName: Name) : KtSymbolPointer<KtEnumEntrySymbol>() {
+class KtFe10DescEnumEntrySymbolPointer(private konst classId: ClassId, private konst entryName: Name) : KtSymbolPointer<KtEnumEntrySymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtEnumEntrySymbol? {
         check(analysisSession is KtFe10AnalysisSession)
-        val analysisContext = analysisSession.analysisContext
+        konst analysisContext = analysisSession.analysisContext
 
-        val entryDescriptor = analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(classId)
+        konst entryDescriptor = analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(classId)
             ?.unsubstitutedMemberScope
             ?.getContributedClassifier(entryName, NoLookupLocation.FROM_IDE)
 

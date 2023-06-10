@@ -9,10 +9,10 @@ class First
 class Second
 
 fun box(): String {
-    val result1 = dummyFirst(First())
+    konst result1 = dummyFirst(First())
     if (result1 != "foo.First") return "Error: $result1"
 
-    val result2 = dummySecond(Second())
+    konst result2 = dummySecond(Second())
     if (result2 != "foo.Second") return "Error: $result2"
 
     return "OK"

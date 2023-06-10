@@ -10,7 +10,7 @@ package foo
 
 // See KT-39364
 @JsExport
-abstract class TestAbstract(val name: String) {
+abstract class TestAbstract(konst name: String) {
     class AA : TestAbstract("AA") {
         fun bar(): String = "bar"
     }

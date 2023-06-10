@@ -34,11 +34,11 @@ public class PsiTreeUtil {
 import java.util.function.Consumer
 
 interface PsiFile : PsiElement {
-    val name: String
+    konst name: String
 }
 
-class KtFile(override val name: String) : PsiFile {
-    val docComment: PsiDocCommentBase get() = PsiDocCommentBase()
+class KtFile(override konst name: String) : PsiFile {
+    konst docComment: PsiDocCommentBase get() = PsiDocCommentBase()
 }
 
 class PsiDocCommentBase : PsiElement
@@ -47,7 +47,7 @@ fun collectDocComments(file: PsiFile, sink: Consumer<PsiDocCommentBase>): String
     if (file !is KtFile) return "FAIL"
 
     PsiTreeUtil.processElements(file) {
-        val comment = (it as? KtFile)?.docComment
+        konst comment = (it as? KtFile)?.docComment
         if (comment != null) sink.accept(comment)
         true
     }

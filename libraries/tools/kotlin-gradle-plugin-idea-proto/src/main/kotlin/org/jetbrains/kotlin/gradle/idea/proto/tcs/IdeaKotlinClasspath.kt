@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.idea.proto.tcs
 
-import com.google.protobuf.InvalidProtocolBufferException
+import com.google.protobuf.InkonstidProtocolBufferException
 import org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinClasspathProto
 import org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.ideaKotlinClasspathProto
 import org.jetbrains.kotlin.gradle.idea.serialize.IdeaKotlinExtrasSerializer
@@ -30,21 +30,21 @@ fun IdeaKotlinClasspath(data: ByteArray): IdeaKotlinClasspath? {
     return try {
         if (data.isEmpty()) return IdeaKotlinClasspath()
         IdeaKotlinClasspathProto.parseFrom(data).toIdeaKotlinClasspath()
-    } catch (exception: InvalidProtocolBufferException) {
+    } catch (exception: InkonstidProtocolBufferException) {
         return null
     }
 }
 
 object IdeaKotlinClasspathSerializer : IdeaKotlinExtrasSerializer<IdeaKotlinClasspath> {
-    override fun serialize(context: IdeaKotlinSerializationContext, value: IdeaKotlinClasspath): ByteArray {
-        return value.toByteArray()
+    override fun serialize(context: IdeaKotlinSerializationContext, konstue: IdeaKotlinClasspath): ByteArray {
+        return konstue.toByteArray()
     }
 
     override fun deserialize(context: IdeaKotlinSerializationContext, data: ByteArray): IdeaKotlinClasspath? {
         return try {
             if (data.isEmpty()) return IdeaKotlinClasspath()
             IdeaKotlinClasspathProto.parseFrom(data).toIdeaKotlinClasspath()
-        } catch (exception: InvalidProtocolBufferException) {
+        } catch (exception: InkonstidProtocolBufferException) {
             context.logger.error("Failed to deserialize ${IdeaKotlinClasspath::class.java.simpleName}", exception)
             return null
         }

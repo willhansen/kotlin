@@ -10,4 +10,4 @@ public class Keyboard {
 
 // FILE: main.kt
 
-annotation class ModuleInfo(val keyBind: Int = Keyboard.CHAR_NONE)
+annotation class ModuleInfo(konst keyBind: Int = Keyboard.CHAR_NONE)

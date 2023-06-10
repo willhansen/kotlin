@@ -1,4 +1,4 @@
 // FIR_IDENTICAL
 import java.util.ArrayList
 
-val al: ArrayList<String>? = null
+konst al: ArrayList<String>? = null

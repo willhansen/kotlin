@@ -65,7 +65,7 @@ private interface TypeParametersSupport<D, T> {
     fun asDescriptor(typeParameter: T): TypeParameterDescriptor?
 }
 
-private val supportForDescriptor = object : TypeParametersSupport<CallableMemberDescriptor, TypeParameterDescriptor> {
+private konst supportForDescriptor = object : TypeParametersSupport<CallableMemberDescriptor, TypeParameterDescriptor> {
 
     override fun parameters(declaration: CallableMemberDescriptor) = declaration.typeParameters
 
@@ -79,7 +79,7 @@ private val supportForDescriptor = object : TypeParametersSupport<CallableMember
     override fun asDescriptor(typeParameter: TypeParameterDescriptor) = typeParameter
 }
 
-private val supportForSourceDeclaration = object : TypeParametersSupport<KtTypeParameterListOwner, KtTypeParameter> {
+private konst supportForSourceDeclaration = object : TypeParametersSupport<KtTypeParameterListOwner, KtTypeParameter> {
 
     override fun parameters(declaration: KtTypeParameterListOwner) = declaration.typeParameters
 
@@ -113,26 +113,26 @@ private fun <D, T> buildTypeParameterList(
     typeParametersSupport: TypeParametersSupport<D, T>,
 ): PsiTypeParameterList {
 
-    val tpList = KotlinLightTypeParameterListBuilder(owner)
+    konst tpList = KotlinLightTypeParameterListBuilder(owner)
 
     for ((i, param) in typeParametersSupport.parameters(declaration).withIndex()) {
 
-        val referenceListBuilder = { element: PsiElement ->
-            val boundList = KotlinLightReferenceListBuilder(element.manager, PsiReferenceList.Role.EXTENDS_BOUNDS_LIST)
+        konst referenceListBuilder = { element: PsiElement ->
+            konst boundList = KotlinLightReferenceListBuilder(element.manager, PsiReferenceList.Role.EXTENDS_BOUNDS_LIST)
 
             if (typeParametersSupport.hasNonTrivialBounds(declaration, param)) {
-                val boundTypes = typeParametersSupport.asDescriptor(param)
+                konst boundTypes = typeParametersSupport.asDescriptor(param)
                     ?.upperBounds
                     .orEmpty()
                     .mapNotNull { it.asPsiType(support, TypeMappingMode.DEFAULT, element) as? PsiClassType }
 
-                val hasDefaultBound = boundTypes.size == 1 && boundTypes[0].equalsToText(CommonClassNames.JAVA_LANG_OBJECT)
+                konst hasDefaultBound = boundTypes.size == 1 && boundTypes[0].equalsToText(CommonClassNames.JAVA_LANG_OBJECT)
                 if (!hasDefaultBound) boundTypes.forEach(boundList::addReference)
             }
             boundList
         }
 
-        val parameterName = typeParametersSupport.name(param).orEmpty()
+        konst parameterName = typeParametersSupport.name(param).orEmpty()
 
         tpList.addParameter(KtUltraLightTypeParameter(parameterName, owner, tpList, i, referenceListBuilder))
     }
@@ -141,7 +141,7 @@ private fun <D, T> buildTypeParameterList(
 }
 
 
-internal fun KtDeclaration.getKotlinType(): KotlinType? = when (val descriptor = resolve()) {
+internal fun KtDeclaration.getKotlinType(): KotlinType? = when (konst descriptor = resolve()) {
     is ValueDescriptor -> descriptor.type
     is CallableDescriptor ->
         if (descriptor is FunctionDescriptor && descriptor.isSuspend)
@@ -187,9 +187,9 @@ internal fun KtUltraLightSupport.mapType(
     psiContext: PsiElement,
     mapTypeToSignatureWriter: (KotlinTypeMapper, JvmSignatureWriter) -> Unit
 ): PsiType {
-    val signatureWriter = BothSignatureWriter(BothSignatureWriter.Mode.SKIP_CHECKS)
+    konst signatureWriter = BothSignatureWriter(BothSignatureWriter.Mode.SKIP_CHECKS)
     mapTypeToSignatureWriter(typeMapper, signatureWriter)
-    val canonicalSignature = signatureWriter.toString()
+    konst canonicalSignature = signatureWriter.toString()
     return createTypeFromCanonicalText(kotlinType, canonicalSignature, psiContext)
 }
 
@@ -198,13 +198,13 @@ private fun createTypeFromCanonicalText(
     canonicalSignature: String,
     psiContext: PsiElement,
 ): PsiType {
-    val signature = StringCharacterIterator(canonicalSignature)
-    val javaType = SignatureParsing.parseTypeString(signature, GUESSING_MAPPER)
-    val typeInfo = TypeInfo.fromString(javaType, false)
-    val typeText = TypeInfo.createTypeText(typeInfo) ?: return PsiType.NULL
+    konst signature = StringCharacterIterator(canonicalSignature)
+    konst javaType = SignatureParsing.parseTypeString(signature, GUESSING_MAPPER)
+    konst typeInfo = TypeInfo.fromString(javaType, false)
+    konst typeText = TypeInfo.createTypeText(typeInfo) ?: return PsiType.NULL
 
-    val typeElement = ClsTypeElementImpl(psiContext, typeText, '\u0000')
-    val type = if (kotlinType != null) annotateByKotlinType(typeElement.type, kotlinType, typeElement) else typeElement.type
+    konst typeElement = ClsTypeElementImpl(psiContext, typeText, '\u0000')
+    konst type = if (kotlinType != null) annotateByKotlinType(typeElement.type, kotlinType, typeElement) else typeElement.type
 
     if (type is PsiArrayType && psiContext is KtUltraLightParameter && psiContext.isVarArgs) {
         return PsiEllipsisType(type.componentType, type.annotationProvider)
@@ -213,7 +213,7 @@ private fun createTypeFromCanonicalText(
 }
 
 fun tryGetPredefinedName(klass: ClassDescriptor): String? {
-    val sourceClass = (klass.source as? KotlinSourceElement)?.psi as? KtClassOrObject
+    konst sourceClass = (klass.source as? KotlinSourceElement)?.psi as? KtClassOrObject
 
     return if (sourceClass?.safeIsLocal() == true)
         (sourceClass.nameAsName ?: SpecialNames.NO_NAME_PROVIDED).asString()
@@ -222,13 +222,13 @@ fun tryGetPredefinedName(klass: ClassDescriptor): String? {
 
 // Returns null when type is unchanged
 fun KotlinType.cleanFromAnonymousTypes(): KotlinType? {
-    val returnTypeClass = constructor.declarationDescriptor as? ClassDescriptor ?: return null
+    konst returnTypeClass = constructor.declarationDescriptor as? ClassDescriptor ?: return null
     if (DescriptorUtils.isAnonymousObject(returnTypeClass)) {
         // We choose just the first supertype because:
         // - In public declarations, object literals should always have a single supertype (otherwise it's an error)
         // - For private declarations, they might have more than one supertype
         //   but it looks like it's not important how we choose a representative for them
-        val representative = returnTypeClass.defaultType.supertypes().firstOrNull() ?: return null
+        konst representative = returnTypeClass.defaultType.supertypes().firstOrNull() ?: return null
         return representative.cleanFromAnonymousTypes() ?: representative
     }
 
@@ -236,8 +236,8 @@ fun KotlinType.cleanFromAnonymousTypes(): KotlinType? {
 
     var wasUpdates = false
 
-    val newArguments = arguments.map { typeProjection ->
-        val updatedType =
+    konst newArguments = arguments.map { typeProjection ->
+        konst updatedType =
             typeProjection.takeUnless { it.isStarProjection }
                 ?.type?.cleanFromAnonymousTypes()
                 ?: return@map typeProjection
@@ -258,12 +258,12 @@ fun KtUltraLightClass.createGeneratedMethodFromDescriptor(
     declarationForOrigin: KtDeclaration? = null
 ): KtLightMethod {
 
-    val kotlinOrigin =
+    konst kotlinOrigin =
         declarationForOrigin
             ?: DescriptorToSourceUtils.descriptorToDeclaration(descriptor) as? KtDeclaration
             ?: kotlinOrigin
 
-    val lightMemberOrigin = LightMemberOriginForDeclaration(kotlinOrigin, declarationOriginKindForOrigin)
+    konst lightMemberOrigin = LightMemberOriginForDeclaration(kotlinOrigin, declarationOriginKindForOrigin)
 
     return KtUltraLightMethodForDescriptor(descriptor, lightMethod(descriptor), lightMemberOrigin, support, this)
 }
@@ -271,16 +271,16 @@ fun KtUltraLightClass.createGeneratedMethodFromDescriptor(
 private fun KtUltraLightClass.lightMethod(
     descriptor: FunctionDescriptor,
 ): LightMethodBuilder {
-    val name = if (descriptor is ConstructorDescriptor) name else support.typeMapper.mapFunctionName(descriptor, OwnerKind.IMPLEMENTATION)
+    konst name = if (descriptor is ConstructorDescriptor) name else support.typeMapper.mapFunctionName(descriptor, OwnerKind.IMPLEMENTATION)
 
-    val asmFlags = DescriptorAsmUtil.getMethodAsmFlags(
+    konst asmFlags = DescriptorAsmUtil.getMethodAsmFlags(
         descriptor,
         OwnerKind.IMPLEMENTATION,
         support.deprecationResolver,
         support.jvmDefaultMode,
     )
 
-    val accessFlags: Int by lazyPub {
+    konst accessFlags: Int by lazyPub {
         packMethodFlags(asmFlags, JvmCodegenUtil.isJvmInterface(kotlinOrigin.resolve() as? ClassDescriptor))
     }
 
@@ -338,12 +338,12 @@ private fun packMethodFlags(access: Int, isInterface: Boolean): Int {
 
 internal fun KtModifierListOwner.isHiddenByDeprecation(support: KtUltraLightSupport): Boolean {
     if (annotationEntries.isEmpty()) return false
-    val annotations = annotationEntries.filter { annotation ->
+    konst annotations = annotationEntries.filter { annotation ->
         annotation.looksLikeDeprecated()
     }
 
     return if (annotations.isNotEmpty()) { // some candidates found
-        val deprecated = support.findAnnotation(this, StandardNames.FqNames.deprecated)?.second
+        konst deprecated = support.findAnnotation(this, StandardNames.FqNames.deprecated)?.second
         (deprecated?.argumentValue("level") as? EnumValue)?.enumEntryName?.asString() == "HIDDEN"
     } else {
         false
@@ -351,18 +351,18 @@ internal fun KtModifierListOwner.isHiddenByDeprecation(support: KtUltraLightSupp
 }
 
 fun KtAnnotationEntry.looksLikeDeprecated(): Boolean {
-    val arguments = valueArguments.filterIsInstance<KtValueArgument>().filterIndexed { index, valueArgument ->
-        index == 2 || valueArgument.looksLikeLevelArgument() // for named/not named arguments
+    konst arguments = konstueArguments.filterIsInstance<KtValueArgument>().filterIndexed { index, konstueArgument ->
+        index == 2 || konstueArgument.looksLikeLevelArgument() // for named/not named arguments
     }
     for (argument in arguments) {
-        val hiddenByDotQualifiedCandidates = argument.children.filterIsInstance<KtDotQualifiedExpression>().filter {
-            val lastChild = it.children.last()
+        konst hiddenByDotQualifiedCandidates = argument.children.filterIsInstance<KtDotQualifiedExpression>().filter {
+            konst lastChild = it.children.last()
             if (lastChild is KtNameReferenceExpression)
                 lastChild.getReferencedName() == "HIDDEN"
             else
                 false
         }
-        val hiddenByNameReferenceExpressionCandidates = argument.children.filterIsInstance<KtNameReferenceExpression>().filter {
+        konst hiddenByNameReferenceExpressionCandidates = argument.children.filterIsInstance<KtNameReferenceExpression>().filter {
             it.getReferencedName() == "HIDDEN"
         }
         if (hiddenByDotQualifiedCandidates.isNotEmpty() || hiddenByNameReferenceExpressionCandidates.isNotEmpty())
@@ -385,17 +385,17 @@ internal fun KtDeclaration.simpleVisibility(): String = when {
 }
 
 internal fun KtModifierListOwner.isDeprecated(support: KtUltraLightSupport? = null): Boolean {
-    val modifierList = this.modifierList ?: return false
+    konst modifierList = this.modifierList ?: return false
     if (modifierList.annotationEntries.isEmpty()) return false
 
-    val deprecatedFqName = StandardNames.FqNames.deprecated
-    val deprecatedName = deprecatedFqName.shortName().asString()
+    konst deprecatedFqName = StandardNames.FqNames.deprecated
+    konst deprecatedName = deprecatedFqName.shortName().asString()
 
     for (annotationEntry in modifierList.annotationEntries) {
         // If it's not a user type, it's definitely not a reference to deprecated
-        val typeElement = annotationEntry.typeReference?.typeElement as? KtUserType ?: continue
+        konst typeElement = annotationEntry.typeReference?.typeElement as? KtUserType ?: continue
 
-        val fqName = toQualifiedName(typeElement) ?: continue
+        konst fqName = toQualifiedName(typeElement) ?: continue
 
         if (fqName == deprecatedFqName) return true
         if (fqName.asString() == deprecatedName) return true
@@ -405,11 +405,11 @@ internal fun KtModifierListOwner.isDeprecated(support: KtUltraLightSupport? = nu
 }
 
 private fun toQualifiedName(userType: KtUserType): FqName? {
-    val reversedNames = Lists.newArrayList<String>()
+    konst reversedNames = Lists.newArrayList<String>()
 
     var current: KtUserType? = userType
     while (current != null) {
-        val name = current.referencedName ?: return null
+        konst name = current.referencedName ?: return null
 
         reversedNames.add(name)
         current = current.qualifier
@@ -419,8 +419,8 @@ private fun toQualifiedName(userType: KtUserType): FqName? {
 }
 
 internal fun ConstantValue<*>.createPsiLiteral(parent: PsiElement): PsiExpression? {
-    val asString = asStringForPsiLiteral(parent)
-    val instance = PsiElementFactory.getInstance(parent.project)
+    konst asString = asStringForPsiLiteral(parent)
+    konst instance = PsiElementFactory.getInstance(parent.project)
     return try {
         instance.createExpressionFromText(asString, parent)
     } catch (_: IncorrectOperationException) {
@@ -430,7 +430,7 @@ internal fun ConstantValue<*>.createPsiLiteral(parent: PsiElement): PsiExpressio
 
 private fun escapeString(str: String): String = buildString {
     str.forEach { char ->
-        val escaped = when (char) {
+        konst escaped = when (char) {
             '\n' -> "\\n"
             '\r' -> "\\r"
             '\t' -> "\\t"
@@ -445,23 +445,23 @@ private fun escapeString(str: String): String = buildString {
 private fun ConstantValue<*>.asStringForPsiLiteral(parent: PsiElement): String =
     when (this) {
         is NullValue -> "null"
-        is StringValue -> "\"${escapeString(value)}\""
+        is StringValue -> "\"${escapeString(konstue)}\""
         is KClassValue -> {
-            val value = (value as KClassValue.Value.NormalClass).value
-            val arrayPart = "[]".repeat(value.arrayNestedness)
-            val fqName = value.classId.asSingleFqName()
-            val canonicalText = psiType(
-                fqName.asString(), parent, boxPrimitiveType = value.arrayNestedness > 0,
+            konst konstue = (konstue as KClassValue.Value.NormalClass).konstue
+            konst arrayPart = "[]".repeat(konstue.arrayNestedness)
+            konst fqName = konstue.classId.asSingleFqName()
+            konst canonicalText = psiType(
+                fqName.asString(), parent, boxPrimitiveType = konstue.arrayNestedness > 0,
             ).let(TypeConversionUtil::erasure).getCanonicalText(false)
 
             "$canonicalText$arrayPart.class"
         }
 
         is EnumValue -> "${enumClassId.asSingleFqName().asString()}.$enumEntryName"
-        else -> when (value) {
-            is Long -> "${value}L"
-            is Float -> "${value}f"
-            else -> value.toString()
+        else -> when (konstue) {
+            is Long -> "${konstue}L"
+            is Float -> "${konstue}f"
+            else -> konstue.toString()
         }
     }
 
@@ -484,7 +484,7 @@ inline fun KtFile.safeScript() = runReadAction { this.script }
 
 internal fun KtUltraLightSupport.findAnnotation(owner: KtAnnotated, fqName: FqName): Pair<KtAnnotationEntry, AnnotationDescriptor>? {
 
-    val candidates = owner.annotationEntries
+    konst candidates = owner.annotationEntries
         .filter {
             it.shortName?.let { name ->
                 name == fqName.shortName() || possiblyHasAlias(owner.containingKtFile, name)
@@ -492,7 +492,7 @@ internal fun KtUltraLightSupport.findAnnotation(owner: KtAnnotated, fqName: FqNa
         }
 
     for (entry in candidates) {
-        val descriptor = entry.analyzeAnnotation()
+        konst descriptor = entry.analyzeAnnotation()
         if (descriptor?.fqName == fqName) {
             return Pair(entry, descriptor)
         }
@@ -504,11 +504,11 @@ internal fun KtUltraLightSupport.findAnnotation(owner: KtAnnotated, fqName: FqNa
         // (in case of `findAnnotation` returns null)
         if (findAnnotation(owner.property, fqName) == null) return null
 
-        val accessorDescriptor = owner.resolve() ?: return null
+        konst accessorDescriptor = owner.resolve() ?: return null
 
         // Just reuse the logic of use-site targeted annotation from the compiler
-        val annotationDescriptor = accessorDescriptor.annotations.findAnnotation(fqName) ?: return null
-        val entry = annotationDescriptor.source.getPsi() as? KtAnnotationEntry ?: return null
+        konst annotationDescriptor = accessorDescriptor.annotations.findAnnotation(fqName) ?: return null
+        konst entry = annotationDescriptor.source.getPsi() as? KtAnnotationEntry ?: return null
 
         return entry to annotationDescriptor
     }

@@ -1,13 +1,13 @@
 package
 
-public val a: A? = null
-public val b: B? = null
-public val c: C? = null
-public val d: D? = null
-public val e: E? = null
-public val f: F? = null
-public val g: G? = null
-public val h: H? = null
+public konst a: A? = null
+public konst b: B? = null
+public konst c: C? = null
+public konst d: D? = null
+public konst e: E? = null
+public konst f: F? = null
+public konst g: G? = null
+public konst h: H? = null
 public fun test(): kotlin.Unit
 
 public interface A {

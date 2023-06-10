@@ -11,28 +11,28 @@ import org.jetbrains.kotlin.kapt.cli.transformArgs
 import org.jetbrains.kotlin.test.services.JUnit5Assertions
 import java.io.File
 
-private val LINE_SEPARATOR: String = System.getProperty("line.separator")
+private konst LINE_SEPARATOR: String = System.getProperty("line.separator")
 
 abstract class AbstractArgumentParsingTest {
     fun runTest(filePath: String) {
-        val testFile = File(filePath)
+        konst testFile = File(filePath)
 
-        val sections = Section.parse(testFile)
-        val before = sections.single { it.name == "before" }
+        konst sections = Section.parse(testFile)
+        konst before = sections.single { it.name == "before" }
 
-        val messageCollector = TestMessageCollector()
-        val transformedArgs = transformArgs(before.content.lines(), messageCollector, isTest = true)
-        val actualAfter = if (messageCollector.hasErrors()) messageCollector.toString() else transformedArgs.joinToString(LINE_SEPARATOR)
-        val actual = sections.replacingSection("after", actualAfter).render()
+        konst messageCollector = TestMessageCollector()
+        konst transformedArgs = transformArgs(before.content.lines(), messageCollector, isTest = true)
+        konst actualAfter = if (messageCollector.hasErrors()) messageCollector.toString() else transformedArgs.joinToString(LINE_SEPARATOR)
+        konst actual = sections.replacingSection("after", actualAfter).render()
 
         JUnit5Assertions.assertEqualsToFile(testFile, actual)
     }
 }
 
 class TestMessageCollector : MessageCollector {
-    data class Message(val severity: CompilerMessageSeverity, val message: String, val location: CompilerMessageSourceLocation?)
+    data class Message(konst severity: CompilerMessageSeverity, konst message: String, konst location: CompilerMessageSourceLocation?)
 
-    val messages = arrayListOf<Message>()
+    konst messages = arrayListOf<Message>()
 
     override fun clear() {
         messages.clear()

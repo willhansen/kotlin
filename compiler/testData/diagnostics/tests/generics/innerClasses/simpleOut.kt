@@ -17,10 +17,10 @@ class Outer<out E> {
 fun factoryString(): Outer<String>.Inner = null!!
 
 fun <T> infer(x: T): Outer<T>.Inner = null!!
-val inferred = infer("")
+konst inferred = infer("")
 
 fun main() {
-    val outer = Outer<String>()
+    konst outer = Outer<String>()
 
     checkSubtype<Outer<String>.Inner>(outer.bar())
     checkSubtype<Outer<String>.Inner>(outer.Inner())
@@ -33,6 +33,6 @@ fun main() {
     outer.set(outer.bar())
     outer.set(outer.Inner())
 
-    val x: Outer<String>.Inner = factoryString()
+    konst x: Outer<String>.Inner = factoryString()
     outer.set(x)
 }

@@ -29,30 +29,30 @@ import org.jetbrains.kotlin.psi.KtProperty
 
 @ThreadSafeMutableState
 internal class LLFirProvider(
-    val session: LLFirSession,
-    private val moduleComponents: LLFirModuleResolveComponents,
+    konst session: LLFirSession,
+    private konst moduleComponents: LLFirModuleResolveComponents,
     canContainKotlinPackage: Boolean,
     declarationProviderFactory: (GlobalSearchScope) -> KotlinDeclarationProvider?,
 ) : FirProvider() {
-    override val symbolProvider: FirSymbolProvider = SymbolProvider()
+    override konst symbolProvider: FirSymbolProvider = SymbolProvider()
 
-    private val providerHelper = LLFirProviderHelper(
+    private konst providerHelper = LLFirProviderHelper(
         session,
         moduleComponents.firFileBuilder,
         canContainKotlinPackage,
         declarationProviderFactory,
     )
 
-    val searchScope: GlobalSearchScope
+    konst searchScope: GlobalSearchScope
         get() = providerHelper.searchScope
 
-    override val isPhasedFirAllowed: Boolean get() = true
+    override konst isPhasedFirAllowed: Boolean get() = true
 
     override fun getFirClassifierByFqName(classId: ClassId): FirClassLikeDeclaration? =
         getFirClassifierByFqNameAndDeclaration(classId, classLikeDeclaration = null)
 
     fun getFirClassifierByDeclaration(classLikeDeclaration: KtClassLikeDeclaration): FirClassLikeDeclaration? {
-        val classId = classLikeDeclaration.getClassId() ?: return null
+        konst classId = classLikeDeclaration.getClassId() ?: return null
         return getFirClassifierByFqNameAndDeclaration(classId, classLikeDeclaration)
     }
 
@@ -87,7 +87,7 @@ internal class LLFirProvider(
             return originalSymbol.moduleData.session.firProvider.getFirCallableContainerFile(originalSymbol)
         }
 
-        val fir = symbol.fir
+        konst fir = symbol.fir
         return when {
             symbol is FirBackingFieldSymbol -> getFirCallableContainerFile(symbol.fir.propertySymbol)
             symbol is FirSyntheticPropertySymbol && fir is FirSyntheticProperty -> getFirCallableContainerFile(fir.getter.delegate.symbol)
@@ -108,9 +108,9 @@ internal class LLFirProvider(
 
     @NoMutableState
     internal inner class SymbolProvider : LLFirKotlinSymbolProvider(session) {
-        override val declarationProvider: KotlinDeclarationProvider get() = providerHelper.declarationProvider
+        override konst declarationProvider: KotlinDeclarationProvider get() = providerHelper.declarationProvider
 
-        override val symbolNamesProvider: FirSymbolNamesProvider get() = providerHelper.symbolNameCache
+        override konst symbolNamesProvider: FirSymbolNamesProvider get() = providerHelper.symbolNameCache
 
         override fun getClassLikeSymbolByClassId(classId: ClassId): FirClassLikeSymbol<*>? {
             if (!providerHelper.symbolNameCache.mayHaveTopLevelClassifier(classId)) return null

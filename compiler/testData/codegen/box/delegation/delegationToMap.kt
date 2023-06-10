@@ -16,7 +16,7 @@ class MapWithBadDefaults : HashMap<String, String>() {
         throw RuntimeException("Shouldn't be executed")
     }
 
-    override fun remove(key: String, value: String): Boolean {
+    override fun remove(key: String, konstue: String): Boolean {
         throw RuntimeException("Shouldn't be executed")
     }
 }
@@ -25,9 +25,9 @@ class MapWithBadDefaults : HashMap<String, String>() {
 class Test(map: MutableMap<String, String>) : MutableMap<String, String> by map
 
 fun box(): String {
-    val test = Test(MapWithBadDefaults())
+    konst test = Test(MapWithBadDefaults())
     test.put("O", "K")
-    if (!test.containsKey("O")) return "fail 1: can't find value for key 'O'"
+    if (!test.containsKey("O")) return "fail 1: can't find konstue for key 'O'"
     if (!test.remove("O", "K")) return "fail 2: entry wasn't removed"
 
     return test.getOrDefault("absent", "OK")

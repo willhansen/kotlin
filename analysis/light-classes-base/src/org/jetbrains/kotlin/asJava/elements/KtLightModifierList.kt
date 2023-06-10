@@ -15,36 +15,36 @@ import org.jetbrains.kotlin.psi.KtModifierList
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 abstract class KtLightModifierList<out T : KtLightElement<KtModifierListOwner, PsiModifierListOwner>>(
-    protected val owner: T
+    protected konst owner: T
 ) : KtLightElementBase(owner), PsiModifierList, KtLightElement<KtModifierList, PsiModifierList> {
-    private val _annotations by lazyPub {
-        val annotations = computeAnnotations()
+    private konst _annotations by lazyPub {
+        konst annotations = computeAnnotations()
         annotationsFilter?.let(annotations::filter) ?: annotations
     }
 
-    protected open val annotationsFilter: ((KtLightAbstractAnnotation) -> Boolean)? = null
+    protected open konst annotationsFilter: ((KtLightAbstractAnnotation) -> Boolean)? = null
 
-    override val kotlinOrigin: KtModifierList?
+    override konst kotlinOrigin: KtModifierList?
         get() = owner.kotlinOrigin?.modifierList
 
     override fun getParent() = owner
 
     override fun hasExplicitModifier(name: String) = hasModifierProperty(name)
 
-    private fun throwInvalidOperation(): Nothing = throw IncorrectOperationException()
+    private fun throwInkonstidOperation(): Nothing = throw IncorrectOperationException()
 
-    override fun setModifierProperty(name: String, value: Boolean): Unit = throwInvalidOperation()
+    override fun setModifierProperty(name: String, konstue: Boolean): Unit = throwInkonstidOperation()
 
-    override fun checkSetModifierProperty(name: String, value: Boolean): Unit = throwInvalidOperation()
+    override fun checkSetModifierProperty(name: String, konstue: Boolean): Unit = throwInkonstidOperation()
 
-    override fun addAnnotation(qualifiedName: String): PsiAnnotation = throwInvalidOperation()
+    override fun addAnnotation(qualifiedName: String): PsiAnnotation = throwInkonstidOperation()
 
     override fun getApplicableAnnotations(): Array<out PsiAnnotation> = annotations
 
     override fun getAnnotations(): Array<out PsiAnnotation> = _annotations.toTypedArray()
     override fun findAnnotation(qualifiedName: String) = _annotations.firstOrNull { it.fqNameMatches(qualifiedName) }
 
-    override fun isEquivalentTo(another: PsiElement?) =
+    override fun isEquikonstentTo(another: PsiElement?) =
         another is KtLightModifierList<*> && owner == another.owner
 
     override fun isWritable() = false

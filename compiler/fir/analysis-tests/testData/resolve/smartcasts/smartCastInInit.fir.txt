@@ -13,7 +13,7 @@ FILE: smartCastInInit.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val x: R|I|
+        private final konst x: R|I|
             private get(): R|I|
 
         init {

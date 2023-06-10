@@ -20,14 +20,14 @@ import org.jetbrains.kotlin.psi.KtForExpression
 open class KtFirForLoopInReference(expression: KtForExpression) : KtForLoopInReference(expression), KtFirReference {
     override fun KtAnalysisSession.resolveToSymbols(): Collection<KtSymbol> {
         check(this is KtFirAnalysisSession)
-        val firLoop = expression.getOrBuildFirSafe<FirWhileLoop>(firResolveSession) ?: return emptyList()
-        val condition = firLoop.condition as? FirFunctionCall
-        val iterator = this@KtFirForLoopInReference.run {
-            val callee = (condition?.explicitReceiver as? FirQualifiedAccessExpression)?.calleeReference
+        konst firLoop = expression.getOrBuildFirSafe<FirWhileLoop>(firResolveSession) ?: return emptyList()
+        konst condition = firLoop.condition as? FirFunctionCall
+        konst iterator = this@KtFirForLoopInReference.run {
+            konst callee = (condition?.explicitReceiver as? FirQualifiedAccessExpression)?.calleeReference
             (callee?.getResolvedSymbolOfNameReference()?.fir as? FirProperty)?.getInitializerFunctionCall()
         }
-        val hasNext = condition?.calleeReference?.getResolvedSymbolOfNameReference()
-        val next = (firLoop.block.statements.firstOrNull() as? FirProperty?)?.getInitializerFunctionCall()
+        konst hasNext = condition?.calleeReference?.getResolvedSymbolOfNameReference()
+        konst next = (firLoop.block.statements.firstOrNull() as? FirProperty?)?.getInitializerFunctionCall()
         return listOfNotNull(
             iterator?.fir?.buildSymbol(firSymbolBuilder),
             hasNext?.fir?.buildSymbol(firSymbolBuilder),

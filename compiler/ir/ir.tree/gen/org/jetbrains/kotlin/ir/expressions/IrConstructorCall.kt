@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.constructorCall]
  */
 abstract class IrConstructorCall : IrFunctionAccessExpression() {
-    abstract override val symbol: IrConstructorSymbol
+    abstract override konst symbol: IrConstructorSymbol
 
     abstract var source: SourceElement
 

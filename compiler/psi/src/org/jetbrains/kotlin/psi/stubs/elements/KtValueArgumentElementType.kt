@@ -25,7 +25,7 @@ class KtValueArgumentElementType<T : KtValueArgument>(debugName: String, psiClas
     }
 
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<PsiElement>?): KotlinValueArgumentStub<T> {
-        val isSpread = dataStream.readBoolean()
+        konst isSpread = dataStream.readBoolean()
         return KotlinValueArgumentStubImpl(parentStub, this, isSpread)
     }
 }

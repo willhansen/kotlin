@@ -1,17 +1,17 @@
-// !LANGUAGE: +IntrinsicConstEvaluation
+// !LANGUAGE: +IntrinsicConstEkonstuation
 // TARGET_BACKEND: JVM_IR
 // TARGET_BACKEND: NATIVE
 // TARGET_BACKEND: JS_IR
 // IGNORE_BACKEND_K1: JVM_IR, NATIVE, JS_IR, JS_IR_ES6
 fun <T> T.id() = this
 
-const val flag = <!EVALUATED("true")!>true<!>
-const val value = <!EVALUATED("10")!>10<!>
-const val condition = <!EVALUATED("True")!>if (flag) "True" else "Error"<!>
-const val withWhen = <!EVALUATED("True")!>when (flag) { true -> "True"; else -> "Error" }<!>
-const val withWhen2 = <!EVALUATED("True")!>when { flag == true -> "True"; else -> "Error" }<!>
-const val withWhen3 = <!EVALUATED("1")!>when(value) { 10 -> "1"; 100 -> "2"; else -> "3" }<!>
-const val multibranchIf = <!EVALUATED("3")!>if (value == 100) 1 else if (value == 1000) 2 else 3<!>
+const konst flag = <!EVALUATED("true")!>true<!>
+const konst konstue = <!EVALUATED("10")!>10<!>
+const konst condition = <!EVALUATED("True")!>if (flag) "True" else "Error"<!>
+const konst withWhen = <!EVALUATED("True")!>when (flag) { true -> "True"; else -> "Error" }<!>
+const konst withWhen2 = <!EVALUATED("True")!>when { flag == true -> "True"; else -> "Error" }<!>
+const konst withWhen3 = <!EVALUATED("1")!>when(konstue) { 10 -> "1"; 100 -> "2"; else -> "3" }<!>
+const konst multibranchIf = <!EVALUATED("3")!>if (konstue == 100) 1 else if (konstue == 1000) 2 else 3<!>
 
 // STOP_EVALUATION_CHECKS
 fun box(): String {

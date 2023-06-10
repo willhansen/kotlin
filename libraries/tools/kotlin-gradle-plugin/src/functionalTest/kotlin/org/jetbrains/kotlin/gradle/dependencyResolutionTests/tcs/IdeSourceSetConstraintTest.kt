@@ -22,16 +22,16 @@ import java.util.*
 class IdeSourceSetConstraintTest {
     @Test
     fun `test single target JVM project`() {
-        val project = buildMppProject()
-        val kotlin = project.multiplatformExtension
+        konst project = buildMppProject()
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (commonSourceSet in listOf(commonMain, commonTest)) {
             assertConstraint(commonSourceSet, IdeMultiplatformImport.SourceSetConstraint.isAndroid, isMatchExpected = false)
@@ -54,16 +54,16 @@ class IdeSourceSetConstraintTest {
 
     @Test
     fun `test single target JS project`() {
-        val project = buildMppProject()
-        val kotlin = project.multiplatformExtension
+        konst project = buildMppProject()
+        konst kotlin = project.multiplatformExtension
         kotlin.js(KotlinJsCompilerType.IR)
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jsMain = kotlin.sourceSets.getByName("jsMain")
-        val jsTest = kotlin.sourceSets.getByName("jsTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jsMain = kotlin.sourceSets.getByName("jsMain")
+        konst jsTest = kotlin.sourceSets.getByName("jsTest")
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (commonSourceSet in listOf(commonMain, commonTest)) {
             assertConstraint(commonSourceSet, IdeMultiplatformImport.SourceSetConstraint.isAndroid, isMatchExpected = false)
@@ -86,16 +86,16 @@ class IdeSourceSetConstraintTest {
 
     @Test
     fun `test single target Linux project`() {
-        val project = buildMppProject()
-        val kotlin = project.multiplatformExtension
+        konst project = buildMppProject()
+        konst kotlin = project.multiplatformExtension
         kotlin.linuxX64("linux")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (commonSourceSet in listOf(commonMain, commonTest)) {
             assertConstraint(commonSourceSet, IdeMultiplatformImport.SourceSetConstraint.isAndroid, isMatchExpected = false)
@@ -118,20 +118,20 @@ class IdeSourceSetConstraintTest {
 
     @Test
     fun `test JVM + Android project`() {
-        val project = buildMppProjectWithAndroidPlugin()
-        val kotlin = project.multiplatformExtension
+        konst project = buildMppProjectWithAndroidPlugin()
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.androidTarget()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
-        val androidMain = kotlin.sourceSets.getByName("androidMain")
-        val androidUnitTest = kotlin.sourceSets.getByName("androidUnitTest")
-        val androidInstrumentedTest = kotlin.sourceSets.getByName("androidInstrumentedTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst androidMain = kotlin.sourceSets.getByName("androidMain")
+        konst androidUnitTest = kotlin.sourceSets.getByName("androidUnitTest")
+        konst androidInstrumentedTest = kotlin.sourceSets.getByName("androidInstrumentedTest")
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (commonSourceSet in listOf(commonMain, commonTest)) {
             assertConstraint(commonSourceSet, IdeMultiplatformImport.SourceSetConstraint.isAndroid, isMatchExpected = false)
@@ -163,27 +163,27 @@ class IdeSourceSetConstraintTest {
 
     @Test
     fun `test bamboo JVM project`() {
-        val project = buildMppProject()
-        val kotlin = project.multiplatformExtension
+        konst project = buildMppProject()
+        konst kotlin = project.multiplatformExtension
         kotlin.linuxX64("linux")
         kotlin.jvm()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
-        val jvmIntermediateMain = kotlin.sourceSets.create("jvmIntermediateMain") { intermediate ->
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst jvmIntermediateMain = kotlin.sourceSets.create("jvmIntermediateMain") { intermediate ->
             intermediate.dependsOn(commonMain)
             jvmMain.dependsOn(intermediate)
         }
-        val jvmIntermediateTest = kotlin.sourceSets.create("jvmIntermediateTest") { intermediate ->
+        konst jvmIntermediateTest = kotlin.sourceSets.create("jvmIntermediateTest") { intermediate ->
             intermediate.dependsOn(commonTest)
             jvmTest.dependsOn(intermediate)
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (commonSourceSet in listOf(commonMain, commonTest)) {
             assertConstraint(commonSourceSet, IdeMultiplatformImport.SourceSetConstraint.isAndroid, isMatchExpected = false)
@@ -224,27 +224,27 @@ class IdeSourceSetConstraintTest {
 
     @Test
     fun `test bamboo Linux project`() {
-        val project = buildMppProject()
-        val kotlin = project.multiplatformExtension
+        konst project = buildMppProject()
+        konst kotlin = project.multiplatformExtension
         kotlin.linuxX64("linux")
         kotlin.jvm()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
-        val linuxIntermediateMain = kotlin.sourceSets.create("linuxIntermediateMain") { intermediate ->
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst linuxIntermediateMain = kotlin.sourceSets.create("linuxIntermediateMain") { intermediate ->
             intermediate.dependsOn(commonMain)
             linuxMain.dependsOn(intermediate)
         }
-        val linuxIntermediateTest = kotlin.sourceSets.create("linuxIntermediateTest") { intermediate ->
+        konst linuxIntermediateTest = kotlin.sourceSets.create("linuxIntermediateTest") { intermediate ->
             intermediate.dependsOn(commonTest)
             linuxTest.dependsOn(intermediate)
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (commonSourceSet in listOf(commonMain, commonTest)) {
             assertConstraint(commonSourceSet, IdeMultiplatformImport.SourceSetConstraint.isAndroid, isMatchExpected = false)
@@ -285,27 +285,27 @@ class IdeSourceSetConstraintTest {
 
     @Test
     fun `test bamboo JS project`() {
-        val project = buildMppProject()
-        val kotlin = project.multiplatformExtension
+        konst project = buildMppProject()
+        konst kotlin = project.multiplatformExtension
         kotlin.linuxX64("linux")
         kotlin.js(KotlinJsCompilerType.IR)
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val jsMain = kotlin.sourceSets.getByName("jsMain")
-        val jsTest = kotlin.sourceSets.getByName("jsTest")
-        val jsIntermediateMain = kotlin.sourceSets.create("jsIntermediateMain") { intermediate ->
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst jsMain = kotlin.sourceSets.getByName("jsMain")
+        konst jsTest = kotlin.sourceSets.getByName("jsTest")
+        konst jsIntermediateMain = kotlin.sourceSets.create("jsIntermediateMain") { intermediate ->
             intermediate.dependsOn(commonMain)
             jsMain.dependsOn(intermediate)
         }
-        val jsIntermediateTest = kotlin.sourceSets.create("jsIntermediateTest") { intermediate ->
+        konst jsIntermediateTest = kotlin.sourceSets.create("jsIntermediateTest") { intermediate ->
             intermediate.dependsOn(commonTest)
             jsTest.dependsOn(intermediate)
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (commonSourceSet in listOf(commonMain, commonTest)) {
             assertConstraint(commonSourceSet, IdeMultiplatformImport.SourceSetConstraint.isAndroid, isMatchExpected = false)
@@ -346,8 +346,8 @@ class IdeSourceSetConstraintTest {
 
     @Test
     fun `test JVM + JS + native targets with natural hierarchy`() {
-        val project = buildMppProject()
-        val kotlin = project.multiplatformExtension
+        konst project = buildMppProject()
+        konst kotlin = project.multiplatformExtension
 
         kotlin.targetHierarchy.default()
 
@@ -356,22 +356,22 @@ class IdeSourceSetConstraintTest {
         kotlin.linuxX64()
         kotlin.linuxArm64()
 
-        val jsMain = kotlin.sourceSets.getByName("jsMain")
-        val jsTest = kotlin.sourceSets.getByName("jsTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
-        val linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
-        val linuxArm64Test = kotlin.sourceSets.getByName("linuxArm64Test")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
-        val nativeMain = kotlin.sourceSets.getByName("nativeMain")
-        val nativeTest = kotlin.sourceSets.getByName("nativeTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jsMain = kotlin.sourceSets.getByName("jsMain")
+        konst jsTest = kotlin.sourceSets.getByName("jsTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
+        konst linuxArm64Test = kotlin.sourceSets.getByName("linuxArm64Test")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst nativeMain = kotlin.sourceSets.getByName("nativeMain")
+        konst nativeTest = kotlin.sourceSets.getByName("nativeTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (commonSourceSet in listOf(commonMain, commonTest)) {
             assertConstraint(commonSourceSet, IdeMultiplatformImport.SourceSetConstraint.isAndroid, isMatchExpected = false)
@@ -429,7 +429,7 @@ class IdeSourceSetConstraintTest {
         }
     }
 
-    private val constraintNames = IdentityHashMap<IdeMultiplatformImport.SourceSetConstraint, String>().apply {
+    private konst constraintNames = IdentityHashMap<IdeMultiplatformImport.SourceSetConstraint, String>().apply {
         this[IdeMultiplatformImport.SourceSetConstraint.isAndroid] = "isAndroid"
         this[IdeMultiplatformImport.SourceSetConstraint.isJvmAndAndroid] = "isJvmAndAndroid"
         this[IdeMultiplatformImport.SourceSetConstraint.isLeaf] = "isLeaf"

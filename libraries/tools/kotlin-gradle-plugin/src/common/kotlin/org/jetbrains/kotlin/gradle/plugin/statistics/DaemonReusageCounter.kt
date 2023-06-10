@@ -23,7 +23,7 @@ interface IDaemonReuseCounterMXBean {
  * of Kotlin plugin, they are still able to reuse this build counter vis JXM interface
  */
 class DaemonReuseCounter private constructor() : IDaemonReuseCounterMXBean {
-    private val count = AtomicLong()
+    private konst count = AtomicLong()
 
     override fun getOrdinal(): Long {
         return count.get()
@@ -35,7 +35,7 @@ class DaemonReuseCounter private constructor() : IDaemonReuseCounterMXBean {
 
     companion object {
         // Do not rename this bean otherwise compatibility with the older Kotlin Gradle Plugins would be lost
-        const val JMX_BEAN_NAME = "org.jetbrains.kotlin.gradle.plugin.statistics:type=BuildCounter"
+        const konst JMX_BEAN_NAME = "org.jetbrains.kotlin.gradle.plugin.statistics:type=BuildCounter"
 
         private fun ensureRegistered(beanName: ObjectName, mbs: MBeanServer) {
             if (!mbs.isRegistered(beanName)) {
@@ -44,15 +44,15 @@ class DaemonReuseCounter private constructor() : IDaemonReuseCounterMXBean {
         }
 
         fun incrementAndGetOrdinal(): Long {
-            val beanName = ObjectName(JMX_BEAN_NAME)
-            val mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer()
+            konst beanName = ObjectName(JMX_BEAN_NAME)
+            konst mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer()
             ensureRegistered(beanName, mbs)
             return mbs.invoke(beanName, "incrementAndGetOrdinal", emptyArray(), emptyArray<String>()) as? Long ?: 0
         }
 
         fun getOrdinal(): Long {
-            val beanName = ObjectName(KotlinBuildStatsService.JMX_BEAN_NAME)
-            val mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer()
+            konst beanName = ObjectName(KotlinBuildStatsService.JMX_BEAN_NAME)
+            konst mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer()
             ensureRegistered(beanName, mbs)
             return mbs.invoke(beanName, "getOrdinal", emptyArray(), emptyArray<String>()) as? Long ?: 0
         }

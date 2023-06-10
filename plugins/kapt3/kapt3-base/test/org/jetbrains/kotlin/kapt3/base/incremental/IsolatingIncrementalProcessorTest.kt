@@ -12,8 +12,8 @@ import java.io.File
 class IsolationgIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir() {
     @Test
     fun testDependenciesRecorded() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val isolating = SimpleProcessor().toIsolating()
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst isolating = SimpleProcessor().toIsolating()
         runAnnotationProcessing(srcFiles, listOf(isolating), generatedSources)
 
         assertEquals(RuntimeProcType.ISOLATING, isolating.getRuntimeType())
@@ -29,8 +29,8 @@ class IsolationgIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir()
 
     @Test
     fun testNoSourcesToProcess() {
-        val srcFiles = listOf("Observable.java").map { File(TEST_DATA_DIR, it) }
-        val isolating = SimpleProcessor().toIsolating()
+        konst srcFiles = listOf("Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst isolating = SimpleProcessor().toIsolating()
         runAnnotationProcessing(srcFiles, listOf(isolating), generatedSources)
 
         assertEquals(RuntimeProcType.ISOLATING, isolating.getRuntimeType())
@@ -39,8 +39,8 @@ class IsolationgIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir()
 
     @Test
     fun testGeneratingSourcesClassesResources() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val isolating = SimpleCreatingClassFilesAndResources().toIsolating()
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst isolating = SimpleCreatingClassFilesAndResources().toIsolating()
         runAnnotationProcessing(srcFiles, listOf(isolating), generatedSources)
 
         assertEquals(RuntimeProcType.ISOLATING, isolating.getRuntimeType())
@@ -60,8 +60,8 @@ class IsolationgIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir()
 
     @Test
     fun testWrongOriginElement() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val isolating = SimpleProcessor(wrongOrigin = true).toIsolating()
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst isolating = SimpleProcessor(wrongOrigin = true).toIsolating()
         runAnnotationProcessing(srcFiles, listOf(isolating), generatedSources)
 
         assertEquals(RuntimeProcType.NON_INCREMENTAL, isolating.getRuntimeType())
@@ -70,8 +70,8 @@ class IsolationgIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir()
 
     @Test
     fun testTwoIsolating() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val isolating = listOf(
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst isolating = listOf(
             SimpleProcessor().toIsolating(),
             SimpleProcessor(generatedSuffix = "Two").toIsolating()
         )
@@ -95,8 +95,8 @@ class IsolationgIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir()
 
     @Test
     fun testIsolatingWithMultipleOriginatingElements() {
-        val srcFiles = listOf("User.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val isolating = listOf(ReportTwoOriginElements().toIsolating())
+        konst srcFiles = listOf("User.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst isolating = listOf(ReportTwoOriginElements().toIsolating())
         runAnnotationProcessing(srcFiles, isolating, generatedSources)
 
         assertEquals(

@@ -4,4 +4,4 @@ class C
 
 fun f() {}
 
-val v = Unit
+konst v = Unit

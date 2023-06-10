@@ -3,11 +3,11 @@
 package kt1248
 
 interface ParseResult<out T> {
-    public val success : Boolean
-    public val value : T
+    public konst success : Boolean
+    public konst konstue : T
 }
 
-class Success<T>(<!CANNOT_WEAKEN_ACCESS_PRIVILEGE!>internal<!> override val value : T) : ParseResult<T> {
-    <!CANNOT_WEAKEN_ACCESS_PRIVILEGE!>internal<!> override val success : Boolean = true
+class Success<T>(<!CANNOT_WEAKEN_ACCESS_PRIVILEGE!>internal<!> override konst konstue : T) : ParseResult<T> {
+    <!CANNOT_WEAKEN_ACCESS_PRIVILEGE!>internal<!> override konst success : Boolean = true
 }
 

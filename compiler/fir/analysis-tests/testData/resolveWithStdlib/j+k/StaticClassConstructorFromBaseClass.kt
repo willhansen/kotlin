@@ -10,7 +10,7 @@ public abstract class AbstractClass {
 
 class User : AbstractClass() {
     fun foo() {
-        val sc = StaticClass()
+        konst sc = StaticClass()
     }
 }
 

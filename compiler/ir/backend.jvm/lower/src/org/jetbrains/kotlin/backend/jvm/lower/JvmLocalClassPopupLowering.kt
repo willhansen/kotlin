@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.backend.jvm.isGeneratedLambdaClass
 import org.jetbrains.kotlin.ir.declarations.*
 
 class JvmLocalClassPopupLowering(context: JvmBackendContext) : LocalClassPopupLowering(context) {
-    private val inlineLambdaToScope = mutableMapOf<IrFunction, IrDeclaration>()
+    private konst inlineLambdaToScope = mutableMapOf<IrFunction, IrDeclaration>()
 
     override fun lower(irFile: IrFile) {
         irFile.findInlineLambdas(context as JvmBackendContext) { argument, _, _, scope ->

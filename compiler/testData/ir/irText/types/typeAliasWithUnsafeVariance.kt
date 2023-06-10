@@ -3,7 +3,7 @@
 
 typealias Action<RenderingT> = (@UnsafeVariance RenderingT) -> Unit
 
-data class Tag<out RenderingT>(val action: Action<RenderingT>)
+data class Tag<out RenderingT>(konst action: Action<RenderingT>)
 
 fun getTag(): Tag<*> = throw Exception()
 fun doAction() {

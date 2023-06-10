@@ -73,8 +73,8 @@ object HLDiagnosticConverter {
     }
 
     private fun convertParameter(index: Int, diagnosticParameter: DiagnosticParameter): HLDiagnosticParameter {
-        val conversion = FirToKtConversionCreator.createConversion(diagnosticParameter.type)
-        val convertedType = conversion.convertType(diagnosticParameter.type)
+        konst conversion = FirToKtConversionCreator.createConversion(diagnosticParameter.type)
+        konst convertedType = conversion.convertType(diagnosticParameter.type)
         return HLDiagnosticParameter(
             name = diagnosticParameter.name,
             conversion = conversion,
@@ -91,7 +91,7 @@ object HLDiagnosticConverter {
         "${getHLDiagnosticClassName()}Impl"
 
     private fun DeprecationDiagnosticData.getHLDiagnosticClassName(severity: Severity): String {
-        val diagnosticName = "${name}_${severity.name}"
+        konst diagnosticName = "${name}_${severity.name}"
         return diagnosticName.sanitizeName()
     }
 
@@ -110,8 +110,8 @@ object HLDiagnosticConverter {
 
 internal object FirToKtConversionCreator {
     fun createConversion(type: KType): HLParameterConversion {
-        val nullable = type.isMarkedNullable
-        val kClass = type.classifier as KClass<*>
+        konst nullable = type.isMarkedNullable
+        konst kClass = type.classifier as KClass<*>
         return tryMapAllowedType(kClass)
             ?: tryMapPsiElementType(kClass)
             ?: tryMapFirTypeToKtType(kClass, nullable)
@@ -126,14 +126,14 @@ internal object FirToKtConversionCreator {
                 Map::class,
                 HLMapParameterConversion(
                     "key",
-                    "value",
+                    "konstue",
                     conversionForCollectionValues,
                     conversionForCollectionValues
                 )
             )
             put(
                 Collection::class,
-                HLCollectionParameterConversion("value", conversionForCollectionValues)
+                HLCollectionParameterConversion("konstue", conversionForCollectionValues)
             )
             put(
                 Pair::class,
@@ -164,29 +164,29 @@ internal object FirToKtConversionCreator {
 
     private fun tryMapPlatformType(type: KType, kClass: KClass<*>): HLParameterConversion? {
         if (kClass.isSubclassOf(Collection::class)) {
-            val elementType = type.arguments.single().type ?: return HLIdParameterConversion
+            konst elementType = type.arguments.single().type ?: return HLIdParameterConversion
             return HLCollectionParameterConversion(
                 parameterName = elementType.toParameterName(),
                 mappingConversion = createConversion(elementType)
             )
         }
         if (kClass.isSubclassOf(Map::class)) {
-            val keyType = type.arguments.getOrNull(0)?.type
-            val valueType = type.arguments.getOrNull(1)?.type
+            konst keyType = type.arguments.getOrNull(0)?.type
+            konst konstueType = type.arguments.getOrNull(1)?.type
 
-            val keyConversion = keyType?.let { createConversion(it) } ?: HLIdParameterConversion
-            val valueConversion = valueType?.let { createConversion(it) } ?: HLIdParameterConversion
-            if (keyConversion.isTrivial && valueConversion.isTrivial) return HLIdParameterConversion
+            konst keyConversion = keyType?.let { createConversion(it) } ?: HLIdParameterConversion
+            konst konstueConversion = konstueType?.let { createConversion(it) } ?: HLIdParameterConversion
+            if (keyConversion.isTrivial && konstueConversion.isTrivial) return HLIdParameterConversion
             return HLMapParameterConversion(
                 keyName = keyType?.toParameterName() ?: "key",
-                valueName = valueType?.toParameterName() ?: "value",
+                konstueName = konstueType?.toParameterName() ?: "konstue",
                 mappingConversionForKeys = keyConversion,
-                mappingConversionForValues = valueConversion
+                mappingConversionForValues = konstueConversion
             )
         }
         if (kClass.isSubclassOf(Pair::class)) {
-            val first = type.arguments.getOrNull(0)?.type ?: return HLIdParameterConversion
-            val second = type.arguments.getOrNull(1)?.type ?: return HLIdParameterConversion
+            konst first = type.arguments.getOrNull(0)?.type ?: return HLIdParameterConversion
+            konst second = type.arguments.getOrNull(1)?.type ?: return HLIdParameterConversion
             return HLPairParameterConversion(
                 mappingConversionFirst = createConversion(first),
                 mappingConversionSecond = createConversion(second)
@@ -202,7 +202,7 @@ internal object FirToKtConversionCreator {
         return null
     }
 
-    private val nullableTypeMapping: Map<KClass<*>, HLFunctionCallConversion> = mapOf(
+    private konst nullableTypeMapping: Map<KClass<*>, HLFunctionCallConversion> = mapOf(
         FirExpression::class to HLFunctionCallConversion(
             "{0}?.source?.psi as? KtExpression",
             KtExpression::class.createType(nullable = true),
@@ -213,7 +213,7 @@ internal object FirToKtConversionCreator {
         ),
     )
 
-    private val typeMapping: Map<KClass<*>, HLFunctionCallConversion> = mapOf(
+    private konst typeMapping: Map<KClass<*>, HLFunctionCallConversion> = mapOf(
         // ------------------ symbols ------------------
         FirRegularClass::class to HLFunctionCallConversion(
             "firSymbolBuilder.classifierBuilder.buildClassLikeSymbol({0}.symbol) as KtNamedClassOrObjectSymbol",
@@ -343,7 +343,7 @@ internal object FirToKtConversionCreator {
         )
     )
 
-    private val allowedTypesWithoutTypeParams = setOf(
+    private konst allowedTypesWithoutTypeParams = setOf(
         Boolean::class,
         String::class,
         Int::class,
@@ -370,6 +370,6 @@ internal object FirToKtConversionCreator {
         FunctionTypeKind::class,
     )
 
-    private val KType.kClass: KClass<*>
+    private konst KType.kClass: KClass<*>
         get() = classifier as KClass<*>
 }

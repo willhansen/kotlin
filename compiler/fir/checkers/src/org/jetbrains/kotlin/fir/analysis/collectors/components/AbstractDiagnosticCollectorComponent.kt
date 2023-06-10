@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.fir.declarations.FirFile
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 
 abstract class AbstractDiagnosticCollectorComponent(
-    protected val session: FirSession,
-    protected val reporter: DiagnosticReporter,
+    protected konst session: FirSession,
+    protected konst reporter: DiagnosticReporter,
 ) : FirVisitor<Unit, CheckerContext>() {
     override fun visitElement(element: FirElement, data: CheckerContext) {}
 
     protected fun checkAndCommitReportsOn(element: FirElement, context: DiagnosticContext?) {
-        val source = element.source ?: return
+        konst source = element.source ?: return
         reporter.checkAndCommitReportsOn(source, context)
     }
 }

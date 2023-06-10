@@ -16,28 +16,28 @@ import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.constructType
 
 class FirOuterClassManager(
-    private val session: FirSession,
-    private val outerLocalClassForNested: Map<FirClassLikeSymbol<*>, FirClassLikeSymbol<*>>,
+    private konst session: FirSession,
+    private konst outerLocalClassForNested: Map<FirClassLikeSymbol<*>, FirClassLikeSymbol<*>>,
 ) {
-    private val symbolProvider = session.symbolProvider
+    private konst symbolProvider = session.symbolProvider
 
     fun outerClass(classSymbol: FirClassLikeSymbol<*>): FirClassLikeSymbol<*>? {
         if (classSymbol !is FirClassSymbol<*>) return null
-        val classId = classSymbol.classId
+        konst classId = classSymbol.classId
         if (classId.isLocal) return outerLocalClassForNested[classSymbol]
-        val outerClassId = classId.outerClassId ?: return null
+        konst outerClassId = classId.outerClassId ?: return null
         return symbolProvider.getClassLikeSymbolByClassId(outerClassId)
     }
 
     fun outerType(classLikeType: ConeClassLikeType): ConeClassLikeType? {
-        val fullyExpandedType = classLikeType.fullyExpandedType(session)
+        konst fullyExpandedType = classLikeType.fullyExpandedType(session)
 
-        val symbol = fullyExpandedType.lookupTag.toSymbol(session) ?: return null
+        konst symbol = fullyExpandedType.lookupTag.toSymbol(session) ?: return null
 
         if (symbol is FirRegularClassSymbol && !symbol.fir.isInner) return null
 
-        val containingSymbol = outerClass(symbol) ?: return null
-        val currentTypeArgumentsNumber = (symbol as? FirRegularClassSymbol)?.fir?.typeParameters?.count { it is FirTypeParameter } ?: 0
+        konst containingSymbol = outerClass(symbol) ?: return null
+        konst currentTypeArgumentsNumber = (symbol as? FirRegularClassSymbol)?.fir?.typeParameters?.count { it is FirTypeParameter } ?: 0
 
         return containingSymbol.constructType(
             fullyExpandedType.typeArguments.drop(currentTypeArgumentsNumber).toTypedArray(),

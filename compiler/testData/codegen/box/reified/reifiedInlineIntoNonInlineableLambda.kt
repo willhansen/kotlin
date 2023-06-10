@@ -15,13 +15,13 @@ interface A {
 }
 
 fun box(): String {
-    val x = foo() {
+    konst x = foo() {
         className<String>()
     }
 
     assertEquals("java.lang.String", x)
 
-    val y: A = object : A {
+    konst y: A = object : A {
         override fun f(): String = foo { className<String>() }
         override fun g(): String = foo { className<Int>() }
     }

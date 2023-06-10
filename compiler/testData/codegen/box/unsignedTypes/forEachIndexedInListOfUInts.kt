@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val a = listOf(1u, 2u, 3u)
+    konst a = listOf(1u, 2u, 3u)
     var sum = 0
     a.forEachIndexed { index, uInt ->
         sum = sum * 10 + (index + 1) * uInt.toInt()

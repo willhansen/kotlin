@@ -19,6 +19,6 @@ public class Service<D extends Device, S extends Service> {
 // FILE: loop.kt
 
 fun box(): String {
-    val x = Device.getLoop()?.firstOrNull() // compilation error
+    konst x = Device.getLoop()?.firstOrNull() // compilation error
     return "OK"
 }

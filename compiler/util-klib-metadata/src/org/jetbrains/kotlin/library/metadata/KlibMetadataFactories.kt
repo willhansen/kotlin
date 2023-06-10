@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.storage.StorageManager
  */
 class KlibMetadataFactories(
     createBuiltIns: (StorageManager) -> KotlinBuiltIns,
-    val flexibleTypeDeserializer: FlexibleTypeDeserializer,
-    val platformDependentTypeTransformer: PlatformDependentTypeTransformer
+    konst flexibleTypeDeserializer: FlexibleTypeDeserializer,
+    konst platformDependentTypeTransformer: PlatformDependentTypeTransformer
 ) {
 
     constructor(createBuiltIns:(StorageManager) -> KotlinBuiltIns, flexibleTypeDeserializer: FlexibleTypeDeserializer) :
@@ -29,18 +29,18 @@ class KlibMetadataFactories(
     /**
      * The default [KlibModuleDescriptorFactory] factory instance.
      */
-    val DefaultDescriptorFactory: KlibModuleDescriptorFactory = KlibModuleDescriptorFactoryImpl(createBuiltIns)
+    konst DefaultDescriptorFactory: KlibModuleDescriptorFactory = KlibModuleDescriptorFactoryImpl(createBuiltIns)
 
     /**
      * The default [KlibMetadataDeserializedPackageFragmentsFactory] factory instance.
      */
-    val DefaultPackageFragmentsFactory: KlibMetadataDeserializedPackageFragmentsFactory =
+    konst DefaultPackageFragmentsFactory: KlibMetadataDeserializedPackageFragmentsFactory =
         KlibMetadataDeserializedPackageFragmentsFactoryImpl()
 
     /**
      * The default [KlibMetadataModuleDescriptorFactory] factory instance.
      */
-    val DefaultDeserializedDescriptorFactory: KlibMetadataModuleDescriptorFactory =
+    konst DefaultDeserializedDescriptorFactory: KlibMetadataModuleDescriptorFactory =
         createDefaultKonanDeserializedModuleDescriptorFactory(
             DefaultDescriptorFactory, DefaultPackageFragmentsFactory
         )
@@ -48,7 +48,7 @@ class KlibMetadataFactories(
     /**
      * The default [KlibResolvedModuleDescriptorsFactory] factory instance.
      */
-    val DefaultResolvedDescriptorsFactory: KlibResolvedModuleDescriptorsFactory =
+    konst DefaultResolvedDescriptorsFactory: KlibResolvedModuleDescriptorsFactory =
         createDefaultKonanResolvedModuleDescriptorsFactory(DefaultDeserializedDescriptorFactory)
 
     fun createDefaultKonanDeserializedModuleDescriptorFactory(

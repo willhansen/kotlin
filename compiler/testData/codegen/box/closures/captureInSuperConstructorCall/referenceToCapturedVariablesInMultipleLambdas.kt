@@ -1,13 +1,13 @@
-open class Base(val fn1: () -> String, val fn2: () -> String)
+open class Base(konst fn1: () -> String, konst fn2: () -> String)
 
 fun box(): String {
-    val x = "x"
+    konst x = "x"
 
     class Local(y: String) : Base({ x + y }, { y + x })
 
-    val local = Local("y")
-    val z1 = local.fn1()
-    val z2 = local.fn2()
+    konst local = Local("y")
+    konst z1 = local.fn1()
+    konst z2 = local.fn2()
 
     if (z1 != "xy") return "Fail: z1=$z1"
     if (z2 != "yx") return "Fail: z2=$z2"

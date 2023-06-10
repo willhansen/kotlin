@@ -23,7 +23,7 @@ fun bar() {
 }
 
 fun gav() {
-    val x: String
+    konst x: String
     class B {
         init {
             // Error! See KT-10445
@@ -32,8 +32,8 @@ fun gav() {
     }
     // Error! See KT-10042
     <!UNINITIALIZED_VARIABLE!>x<!>.length
-    val y: String
-    class C(val s: String) {
+    konst y: String
+    class C(konst s: String) {
         constructor(): this("") {
             // Error!
             <!CAPTURED_VAL_INITIALIZATION!>y<!> = s
@@ -42,10 +42,10 @@ fun gav() {
     <!UNINITIALIZED_VARIABLE!>y<!>.length
 }
 
-open class Gau(val s: String)
+open class Gau(konst s: String)
 
 fun gau() {
-    val x: String
+    konst x: String
     object: Any() {
         init {
             // Ok
@@ -54,7 +54,7 @@ fun gau() {
     }
     // Ok
     x.length
-    val y: String
+    konst y: String
     fun local() {
         object: Any() {
             init {
@@ -63,7 +63,7 @@ fun gau() {
             }
         }
     }
-    val z: String
+    konst z: String
     object: Gau(if (true) {
         z = ""
         z
@@ -73,7 +73,7 @@ fun gau() {
 
 class My {
     init {
-        val x: String
+        konst x: String
         class Your {
             init {
                 // Error! See KT-10445
@@ -83,7 +83,7 @@ class My {
     }
 }
 
-<!MUST_BE_INITIALIZED!>val top: Int<!>
+<!MUST_BE_INITIALIZED!>konst top: Int<!>
 
 fun init() {
     <!VAL_REASSIGNMENT!>top<!> = 1

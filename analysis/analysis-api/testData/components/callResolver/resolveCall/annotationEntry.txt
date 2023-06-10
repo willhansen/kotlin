@@ -6,22 +6,22 @@ KtSuccessCallInfo:
       signature = KtFunctionLikeSignature:
         receiverType = null
         returnType = AnnotationInner
-        symbol = <constructor>(value: Annotation): AnnotationInner
-        valueParameters = [
+        symbol = <constructor>(konstue: Annotation): AnnotationInner
+        konstueParameters = [
           KtVariableLikeSignature:
-            name = value
+            name = konstue
             receiverType = null
             returnType = Annotation
-            symbol = value: Annotation
+            symbol = konstue: Annotation
             callableIdIfNonLocal = null
         ]
         callableIdIfNonLocal = null
     typeArgumentsMapping = {}
     argumentMapping = {
       Annotation("v1", "v2") -> (KtVariableLikeSignature:
-        name = value
+        name = konstue
         receiverType = null
         returnType = Annotation
-        symbol = value: Annotation
+        symbol = konstue: Annotation
         callableIdIfNonLocal = null)
     }

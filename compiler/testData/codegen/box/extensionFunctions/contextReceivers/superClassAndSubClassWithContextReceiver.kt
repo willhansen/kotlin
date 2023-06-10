@@ -1,7 +1,7 @@
 // !LANGUAGE: +ContextReceivers
 // TARGET_BACKEND: JVM_IR
 
-class Components(val x: String)
+class Components(konst x: String)
 
 context(Components)
 abstract class A {

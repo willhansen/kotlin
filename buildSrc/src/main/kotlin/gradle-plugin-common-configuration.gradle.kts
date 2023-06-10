@@ -13,7 +13,7 @@ plugins {
 }
 
 // Enable signing for publications into Gradle Plugin Portal
-val signPublication = !version.toString().contains("-SNAPSHOT") &&
+konst signPublication = !version.toString().contains("-SNAPSHOT") &&
         (project.gradle.startParameter.taskNames.contains("publishPlugins") || signLibraryPublication)
 
 configureCommonPublicationSettingsForGradle(signPublication)
@@ -44,11 +44,11 @@ publishing {
 
 tasks {
     named("install") {
-        dependsOn(named("validatePlugins"))
+        dependsOn(named("konstidatePlugins"))
     }
 }
 
-val commonSourceSet = createGradleCommonSourceSet()
+konst commonSourceSet = createGradleCommonSourceSet()
 reconfigureMainSourcesSetForGradlePlugin(commonSourceSet)
 publishShadowedJar(sourceSets[SourceSet.MAIN_SOURCE_SET_NAME], commonSourceSet)
 
@@ -61,49 +61,49 @@ tasks.named("jar") {
 
 if (!kotlinBuildProperties.isInJpsBuildIdeaSync) {
     // Used for Gradle 7.0 version
-    val gradle70SourceSet = createGradlePluginVariant(
+    konst gradle70SourceSet = createGradlePluginVariant(
         GradlePluginVariant.GRADLE_70,
         commonSourceSet = commonSourceSet
     )
     publishShadowedJar(gradle70SourceSet, commonSourceSet)
 
     // Used for Gradle 7.1+ versions
-    val gradle71SourceSet = createGradlePluginVariant(
+    konst gradle71SourceSet = createGradlePluginVariant(
         GradlePluginVariant.GRADLE_71,
         commonSourceSet = commonSourceSet
     )
     publishShadowedJar(gradle71SourceSet, commonSourceSet)
 
     // Used for Gradle 7.4+ versions
-    val gradle74SourceSet = createGradlePluginVariant(
+    konst gradle74SourceSet = createGradlePluginVariant(
         GradlePluginVariant.GRADLE_74,
         commonSourceSet = commonSourceSet
     )
     publishShadowedJar(gradle74SourceSet, commonSourceSet)
 
     // Used for Gradle 7.5+ versions
-    val gradle75SourceSet = createGradlePluginVariant(
+    konst gradle75SourceSet = createGradlePluginVariant(
         GradlePluginVariant.GRADLE_75,
         commonSourceSet = commonSourceSet
     )
     publishShadowedJar(gradle75SourceSet, commonSourceSet)
 
     // Used for Gradle 7.6+ versions
-    val gradle76SourceSet = createGradlePluginVariant(
+    konst gradle76SourceSet = createGradlePluginVariant(
         GradlePluginVariant.GRADLE_76,
         commonSourceSet = commonSourceSet
     )
     publishShadowedJar(gradle76SourceSet, commonSourceSet)
 
     // Used for Gradle 8.0+ versions
-    val gradle80SourceSet = createGradlePluginVariant(
+    konst gradle80SourceSet = createGradlePluginVariant(
         GradlePluginVariant.GRADLE_80,
         commonSourceSet = commonSourceSet
     )
     publishShadowedJar(gradle80SourceSet, commonSourceSet)
 
     // Used for Gradle 8.1+ versions
-    val gradle81SourceSet = createGradlePluginVariant(
+    konst gradle81SourceSet = createGradlePluginVariant(
         GradlePluginVariant.GRADLE_81,
         commonSourceSet = commonSourceSet
     )

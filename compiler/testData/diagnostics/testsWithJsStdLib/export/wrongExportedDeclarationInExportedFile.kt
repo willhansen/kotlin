@@ -10,7 +10,7 @@ package foo
 
 <!WRONG_EXPORTED_DECLARATION("suspend function")!>suspend fun suspendFun()<!> { }
 
-<!WRONG_EXPORTED_DECLARATION("extension property")!>val String.extensionProperty<!>
+<!WRONG_EXPORTED_DECLARATION("extension property")!>konst String.extensionProperty<!>
     get() = this.length
 
 annotation class <!WRONG_EXPORTED_DECLARATION("annotation class")!>AnnotationClass<!>

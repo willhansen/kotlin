@@ -19,7 +19,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -27,7 +27,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.5.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -35,7 +35,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.4.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -43,7 +43,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.8.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -51,7 +51,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.7.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -59,7 +59,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.3.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -67,7 +67,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.2.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -75,7 +75,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.6.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -89,7 +89,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "if-expression: check the correct branch is evaluating",
+          "description": "if-expression: check the correct branch is ekonstuating",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-1/pos/2.3.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -103,7 +103,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "branchless conditional expression, despite being of almost no practical use, is valid in Kotlin",
+          "description": "branchless conditional expression, despite being of almost no practical use, is konstid in Kotlin",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/conditional-expression/p-2/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"

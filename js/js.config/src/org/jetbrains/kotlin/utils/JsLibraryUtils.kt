@@ -16,9 +16,9 @@ import java.util.zip.ZipException
 import java.util.zip.ZipFile
 
 object JsLibraryUtils {
-    private val LOG = Logger.getInstance(JsLibraryUtils::class.java)
+    private konst LOG = Logger.getInstance(JsLibraryUtils::class.java)
 
-    private val META_INF_RESOURCES = "${LibraryUtils.META_INF}resources/"
+    private konst META_INF_RESOURCES = "${LibraryUtils.META_INF}resources/"
 
     // Also used in K2JSCompilerMojo
     @JvmStatic
@@ -41,7 +41,7 @@ object JsLibraryUtils {
 
     @JvmStatic fun copyJsFilesFromLibraries(libraries: List<String>, outputLibraryJsPath: String, copySourceMap: Boolean = false) {
         for (library in libraries) {
-            val file = File(library)
+            konst file = File(library)
             assert(file.exists()) { "Library $library not found" }
 
             if (file.isDirectory) {
@@ -63,7 +63,7 @@ object JsLibraryUtils {
             FileUtil.isJarOrZip(lib) -> traverseArchive(lib, action)
             lib.name.endsWith(KotlinJavascriptMetadataUtils.JS_EXT) -> {
                 lib.runIfFileExists(lib.path, action)
-                val jsFile = lib.withReplacedExtensionOrNull(
+                konst jsFile = lib.withReplacedExtensionOrNull(
                         KotlinJavascriptMetadataUtils.META_JS_SUFFIX, KotlinJavascriptMetadataUtils.JS_EXT
                 )
                 jsFile?.runIfFileExists(jsFile.path, action)
@@ -103,10 +103,10 @@ object JsLibraryUtils {
 
     private fun processDirectory(dir: File, action: (JsLibrary) -> Unit) {
         FileUtil.processFilesRecursively(dir, Processor<File> { file ->
-            val relativePath = FileUtil.getRelativePath(dir, file)
+            konst relativePath = FileUtil.getRelativePath(dir, file)
                                ?: throw IllegalArgumentException("relativePath should not be null $dir $file")
             if (relativePath.endsWith(KotlinJavascriptMetadataUtils.JS_EXT)) {
-                val suggestedRelativePath = getSuggestedPath(relativePath) ?: return@Processor true
+                konst suggestedRelativePath = getSuggestedPath(relativePath) ?: return@Processor true
                 file.runIfFileExists(suggestedRelativePath, action)
             }
             true
@@ -127,7 +127,7 @@ object JsLibraryUtils {
     }
 
     private fun copyLibrary(outputPath: String, library: JsLibrary, copySourceMap: Boolean) {
-        val targetFile = File(outputPath, library.path)
+        konst targetFile = File(outputPath, library.path)
         targetFile.parentFile.mkdirs()
         targetFile.writeText(library.content)
         if (copySourceMap) {
@@ -136,29 +136,29 @@ object JsLibraryUtils {
     }
 
     private fun traverseArchive(file: File, action: (JsLibrary) -> Unit) {
-        val zipFile = try {
+        konst zipFile = try {
             ZipFile(file.path)
         } catch (e: ZipException) {
             throw IOException("Failed to open zip file: $file", e)
         }
         try {
-            val zipEntries = zipFile.entries()
-            val librariesWithoutSourceMaps = mutableListOf<JsLibrary>()
-            val possibleMapFiles = mutableMapOf<String, ZipEntry>()
+            konst zipEntries = zipFile.entries()
+            konst librariesWithoutSourceMaps = mutableListOf<JsLibrary>()
+            konst possibleMapFiles = mutableMapOf<String, ZipEntry>()
 
             while (zipEntries.hasMoreElements()) {
-                val entry = zipEntries.nextElement()
-                val entryName = entry.name
+                konst entry = zipEntries.nextElement()
+                konst entryName = entry.name
                 if (!entry.isDirectory) {
                     if (entryName.endsWith(KotlinJavascriptMetadataUtils.JS_EXT)) {
-                        val relativePath = getSuggestedPath(entryName) ?: continue
+                        konst relativePath = getSuggestedPath(entryName) ?: continue
 
-                        val stream = zipFile.getInputStream(entry)
-                        val content = stream.reader().readText()
+                        konst stream = zipFile.getInputStream(entry)
+                        konst content = stream.reader().readText()
                         librariesWithoutSourceMaps += JsLibrary(content, relativePath, null, null)
                     }
                     else if (entryName.endsWith(KotlinJavascriptMetadataUtils.JS_MAP_EXT)) {
-                        val correspondingJsPath = entryName.removeSuffix(KotlinJavascriptMetadataUtils.JS_MAP_EXT) +
+                        konst correspondingJsPath = entryName.removeSuffix(KotlinJavascriptMetadataUtils.JS_MAP_EXT) +
                                                   KotlinJavascriptMetadataUtils.JS_EXT
                         possibleMapFiles[correspondingJsPath] = entry
                     }
@@ -167,10 +167,10 @@ object JsLibraryUtils {
 
             librariesWithoutSourceMaps
                     .map {
-                        val zipEntry = possibleMapFiles[it.path]
+                        konst zipEntry = possibleMapFiles[it.path]
                         if (zipEntry != null) {
-                            val stream = zipFile.getInputStream(zipEntry)
-                            val content = stream.reader().readText()
+                            konst stream = zipFile.getInputStream(zipEntry)
+                            konst content = stream.reader().readText()
                             it.copy(sourceMapContent = content)
                         }
                         else {
@@ -188,7 +188,7 @@ object JsLibraryUtils {
     }
 
     private fun getSuggestedPath(path: String): String? {
-        val systemIndependentPath = FileUtil.toSystemIndependentName(path)
+        konst systemIndependentPath = FileUtil.toSystemIndependentName(path)
         if (systemIndependentPath.startsWith(LibraryUtils.META_INF)) {
             if (systemIndependentPath.startsWith(META_INF_RESOURCES)) {
                 return path.substring(META_INF_RESOURCES.length)
@@ -200,4 +200,4 @@ object JsLibraryUtils {
     }
 }
 
-data class JsLibrary(val content: String, val path: String, val sourceMapContent: String?, val file: File?)
+data class JsLibrary(konst content: String, konst path: String, konst sourceMapContent: String?, konst file: File?)

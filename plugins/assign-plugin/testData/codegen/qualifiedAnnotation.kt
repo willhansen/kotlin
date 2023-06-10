@@ -13,7 +13,7 @@ class StringProperty(var v: String) {
     }
 }
 
-val property = StringProperty("Initial")
+konst property = StringProperty("Initial")
 
 fun box(): String {
     property = "OK"

@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.propertyWithLateBinding]
  */
 interface IrPropertyWithLateBinding : IrDeclaration {
-    override val symbol: IrPropertySymbol
+    override konst symbol: IrPropertySymbol
 
     var modality: Modality
 
@@ -25,7 +25,7 @@ interface IrPropertyWithLateBinding : IrDeclaration {
 
     var setter: IrSimpleFunction?
 
-    val isBound: Boolean
+    konst isBound: Boolean
 
     fun acquireSymbol(symbol: IrPropertySymbol): IrProperty
 }

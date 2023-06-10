@@ -12,7 +12,7 @@ public class Test {
 
 // FILE: simple.kt
 
-class C(@JvmField val foo: String) {
+class C(@JvmField konst foo: String) {
 
 }
 

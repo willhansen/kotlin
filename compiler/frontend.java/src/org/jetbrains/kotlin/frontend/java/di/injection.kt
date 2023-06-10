@@ -118,7 +118,7 @@ fun StorageComponentContainer.configureJavaSpecificComponents(
 ) {
     useImpl<JavaDescriptorResolver>()
     useImpl<DeserializationComponentsForJava>()
-    useInstance(JavaPropertyInitializerEvaluatorImpl)
+    useInstance(JavaPropertyInitializerEkonstuatorImpl)
     useImpl<SignaturePropagatorImpl>()
     useImpl<TraceBasedErrorReporter>()
     useInstance(InternalFlexibleTypeTransformer)
@@ -137,7 +137,7 @@ fun StorageComponentContainer.configureJavaSpecificComponents(
 
     useInstance(languageVersionSettings.getFlag(JvmAnalysisFlags.javaTypeEnhancementState))
 
-    val builtIns = moduleContext.module.builtIns
+    konst builtIns = moduleContext.module.builtIns
     if (useBuiltInsProvider && builtIns is JvmBuiltIns) {
         // TODO(dsavvinov): make sure that useBuiltInsProvider == true <=> builtIns is JvmBuiltIns
         // Currently, that's not the case at least in IDE unit-tests, because they do not set-up

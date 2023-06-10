@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.fir.BuiltinTypes
 internal class LLFirLibraryOrLibrarySourceResolvableModuleSession(
     ktModule: KtModule,
     dependencyTracker: ModificationTracker,
-    override val moduleComponents: LLFirModuleResolveComponents,
+    override konst moduleComponents: LLFirModuleResolveComponents,
     builtinTypes: BuiltinTypes,
 ) : LLFirResolvableModuleSession(ktModule, dependencyTracker, builtinTypes) {
     init {

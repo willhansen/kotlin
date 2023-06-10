@@ -3,7 +3,7 @@ package
 public final data class A1 {
     public constructor A1()
     public constructor A1(/*0*/ x: kotlin.String)
-    public final val x: kotlin.String
+    public final konst x: kotlin.String
     public final operator /*synthesized*/ fun component1(): kotlin.String
     public final /*synthesized*/ fun copy(/*0*/ x: kotlin.String = ...): A1
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -14,8 +14,8 @@ public final data class A1 {
 public final data class A2 {
     public constructor A2(/*0*/ x: kotlin.String)
     public constructor A2(/*0*/ y: kotlin.String, /*1*/ z: kotlin.Int)
-    public final val y: kotlin.String
-    public final val z: kotlin.Int
+    public final konst y: kotlin.String
+    public final konst z: kotlin.Int
     public final operator /*synthesized*/ fun component1(): kotlin.String
     public final operator /*synthesized*/ fun component2(): kotlin.Int
     public final /*synthesized*/ fun copy(/*0*/ y: kotlin.String = ..., /*1*/ z: kotlin.Int = ...): A2

@@ -4,10 +4,10 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, constant-literals, integer-literals, binary-integer-literals -> paragraph 1 -> sentence 1
  * NUMBER: 2
- * DESCRIPTION: Binary integer literals with invalid [2-9] digit symbols.
+ * DESCRIPTION: Binary integer literals with inkonstid [2-9] digit symbols.
  */
 
-val value = 0B000123412
-val value = 0b000000009
-val value = 0b200000000
-val value = 0b1234567890
+konst konstue = 0B000123412
+konst konstue = 0b000000009
+konst konstue = 0b200000000
+konst konstue = 0b1234567890

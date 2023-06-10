@@ -40,16 +40,16 @@ object LabelResolver {
         labelExpression: KtSimpleNameExpression,
         classNameLabelsEnabled: Boolean
     ): Pair<LinkedHashSet<KtElement>, KtCallableDeclaration?> {
-        val elements = linkedSetOf<KtElement>()
+        konst elements = linkedSetOf<KtElement>()
         var typedElement: KtCallableDeclaration? = null
         var parent: PsiElement? = labelExpression.parent
         while (parent != null) {
-            val names = getLabelNamesIfAny(parent, classNameLabelsEnabled)
+            konst names = getLabelNamesIfAny(parent, classNameLabelsEnabled)
             if (names.contains(labelName)) {
                 elements.add(getExpressionUnderLabel(parent as KtExpression))
             } else if (parent is KtCallableDeclaration && typedElement == null) {
-                val receiverTypeReference = parent.receiverTypeReference
-                val nameForReceiverLabel = receiverTypeReference?.nameForReceiverLabel()
+                konst receiverTypeReference = parent.receiverTypeReference
+                konst nameForReceiverLabel = receiverTypeReference?.nameForReceiverLabel()
                 if (nameForReceiverLabel == labelName.asString()) {
                     typedElement = parent
                 }
@@ -60,7 +60,7 @@ object LabelResolver {
     }
 
     fun getLabelNamesIfAny(element: PsiElement, addClassNameLabels: Boolean): List<Name> {
-        val result = mutableListOf<Name>()
+        konst result = mutableListOf<Name>()
         when (element) {
             is KtLabeledExpression -> result.addIfNotNull(element.getLabelNameAsName())
             // TODO: Support context receivers in function literals
@@ -73,7 +73,7 @@ object LabelResolver {
                 .mapNotNullTo(result) { it.name()?.let { s -> Name.identifier(s) } }
         }
 
-        val functionOrProperty = when (element) {
+        konst functionOrProperty = when (element) {
             is KtNamedFunction -> {
                 result.addIfNotNull(element.nameAsName ?: getLabelForFunctionalExpression(element))
                 element
@@ -90,7 +90,7 @@ object LabelResolver {
     }
 
     private fun getLabelForFunctionalExpression(element: KtExpression): Name? {
-        return when (val parent = element.parent) {
+        return when (konst parent = element.parent) {
             is KtLabeledExpression -> getLabelNamesIfAny(parent, false).singleOrNull()
             is KtBinaryExpression -> parent.operationReference.getReferencedNameAsName()
             else -> getCallerName(element)
@@ -98,22 +98,22 @@ object LabelResolver {
     }
 
     private fun getExpressionUnderLabel(labeledExpression: KtExpression): KtExpression {
-        val expression = KtPsiUtil.safeDeparenthesize(labeledExpression)
+        konst expression = KtPsiUtil.safeDeparenthesize(labeledExpression)
         return if (expression is KtLambdaExpression) expression.functionLiteral else expression
     }
 
     private fun getCallerName(expression: KtExpression): Name? {
-        val callExpression = getContainingCallExpression(expression) ?: return null
-        val calleeExpression = callExpression.calleeExpression as? KtSimpleNameExpression
+        konst callExpression = getContainingCallExpression(expression) ?: return null
+        konst calleeExpression = callExpression.calleeExpression as? KtSimpleNameExpression
         return calleeExpression?.getReferencedNameAsName()
 
     }
 
     private fun getContainingCallExpression(expression: KtExpression): KtCallExpression? {
-        val parent = expression.parent
+        konst parent = expression.parent
         if (parent is KtLambdaArgument) {
             // f {}
-            val call = parent.parent
+            konst call = parent.parent
             if (call is KtCallExpression) {
                 return call
             }
@@ -121,8 +121,8 @@ object LabelResolver {
 
         if (parent is KtValueArgument) {
             // f ({}) or f(p = {}) or f (fun () {})
-            val argList = parent.parent ?: return null
-            val call = argList.parent
+            konst argList = parent.parent ?: return null
+            konst call = argList.parent
             if (call is KtCallExpression) {
                 return call
             }
@@ -131,12 +131,12 @@ object LabelResolver {
     }
 
     fun resolveControlLabel(expression: KtExpressionWithLabel, context: ResolutionContext<*>): KtElement? {
-        val labelElement = expression.getTargetLabel()
+        konst labelElement = expression.getTargetLabel()
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.YieldIsNoMoreReserved)) {
             checkReservedYield(labelElement, context.trace)
         }
 
-        val labelName = expression.getLabelNameAsName()
+        konst labelName = expression.getLabelNameAsName()
         if (labelElement == null || labelName == null) return null
 
         return resolveNamedLabel(labelName, labelElement, context.trace) ?: run {
@@ -150,7 +150,7 @@ object LabelResolver {
         labelExpression: KtSimpleNameExpression,
         trace: BindingTrace
     ): KtElement? {
-        val list = getElementsByLabelName(labelName, labelExpression, classNameLabelsEnabled = false).first
+        konst list = getElementsByLabelName(labelName, labelExpression, classNameLabelsEnabled = false).first
         if (list.isEmpty()) return null
 
         if (list.size > 1) {
@@ -165,31 +165,31 @@ object LabelResolver {
         context: ResolutionContext<*>,
         labelName: Name
     ): LabeledReceiverResolutionResult {
-        val referenceExpression = expression.instanceReference
-        val targetLabelExpression = expression.getTargetLabel() ?: error(expression)
+        konst referenceExpression = expression.instanceReference
+        konst targetLabelExpression = expression.getTargetLabel() ?: error(expression)
 
-        val scope = context.scope
-        val declarationsByLabel = scope.getDeclarationsByLabel(labelName)
-        val (elementsByLabel, typedElement) = getElementsByLabelName(
+        konst scope = context.scope
+        konst declarationsByLabel = scope.getDeclarationsByLabel(labelName)
+        konst (elementsByLabel, typedElement) = getElementsByLabelName(
             labelName, targetLabelExpression,
             classNameLabelsEnabled = expression is KtThisExpression && context.languageVersionSettings.supportsFeature(ContextReceivers)
         )
-        val trace = context.trace
+        konst trace = context.trace
         when (declarationsByLabel.size) {
             1 -> {
-                val declarationDescriptor = declarationsByLabel.single()
-                val thisReceiver = when (declarationDescriptor) {
+                konst declarationDescriptor = declarationsByLabel.single()
+                konst thisReceiver = when (declarationDescriptor) {
                     is ClassDescriptor -> declarationDescriptor.thisAsReceiverParameter
                     is FunctionDescriptor -> declarationDescriptor.extensionReceiverParameter
                     is PropertyDescriptor -> declarationDescriptor.extensionReceiverParameter
                     else -> throw UnsupportedOperationException("Unsupported descriptor: $declarationDescriptor") // TODO
                 }
 
-                val declarationElement = DescriptorToSourceUtils.descriptorToDeclaration(declarationDescriptor)
+                konst declarationElement = DescriptorToSourceUtils.descriptorToDeclaration(declarationDescriptor)
                     ?: error("No PSI element for descriptor: $declarationDescriptor")
                 trace.record(LABEL_TARGET, targetLabelExpression, declarationElement)
                 trace.record(REFERENCE_TARGET, referenceExpression, declarationDescriptor)
-                val closestElement = elementsByLabel.firstOrNull()
+                konst closestElement = elementsByLabel.firstOrNull()
                 if (closestElement != null && declarationElement in closestElement.parents) {
                     reportLabelResolveWillChange(
                         trace, targetLabelExpression, declarationElement, closestElement, isForExtensionReceiver = false
@@ -215,17 +215,17 @@ object LabelResolver {
                 if (elementsByLabel.size > 1) {
                     trace.report(LABEL_NAME_CLASH.on(targetLabelExpression))
                 }
-                val element = elementsByLabel.firstOrNull()?.also {
+                konst element = elementsByLabel.firstOrNull()?.also {
                     trace.record(LABEL_TARGET, targetLabelExpression, it)
                 }
-                val declarationDescriptor = trace.bindingContext[DECLARATION_TO_DESCRIPTOR, element]
+                konst declarationDescriptor = trace.bindingContext[DECLARATION_TO_DESCRIPTOR, element]
                 if (declarationDescriptor is FunctionDescriptor || declarationDescriptor is ClassDescriptor) {
-                    val labelNameToReceiverMap = trace.bindingContext[
+                    konst labelNameToReceiverMap = trace.bindingContext[
                             DESCRIPTOR_TO_CONTEXT_RECEIVER_MAP,
                             if (declarationDescriptor is PropertyAccessorDescriptor) declarationDescriptor.correspondingProperty else declarationDescriptor
                     ]
-                    val thisReceivers = labelNameToReceiverMap?.get(labelName.identifier)
-                    val thisReceiver = when {
+                    konst thisReceivers = labelNameToReceiverMap?.get(labelName.identifier)
+                    konst thisReceiver = when {
                         thisReceivers.isNullOrEmpty() ->
                             (declarationDescriptor as? FunctionDescriptor)?.extensionReceiverParameter
                         thisReceivers.size == 1 -> thisReceivers.single()
@@ -256,13 +256,13 @@ object LabelResolver {
     ) {
         fun suffix() = if (isForExtensionReceiver) "extension receiver" else "context receiver"
 
-        val closestDescription = when (closestElement) {
+        konst closestDescription = when (closestElement) {
             is KtFunctionLiteral -> "anonymous function"
             is KtNamedFunction -> "function ${closestElement.name} ${suffix()}"
             is KtPropertyAccessor -> "property ${closestElement.property.name} ${suffix()}"
             else -> "???"
         }
-        val declarationDescription = when (declarationElement) {
+        konst declarationDescription = when (declarationElement) {
             is KtClass -> "class ${declarationElement.name}"
             is KtNamedFunction -> "function ${declarationElement.name}"
             is KtProperty -> "property ${declarationElement.name}"
@@ -273,8 +273,8 @@ object LabelResolver {
     }
 
     class LabeledReceiverResolutionResult private constructor(
-        val code: Code,
-        private val receiverParameterDescriptor: ReceiverParameterDescriptor?
+        konst code: Code,
+        private konst receiverParameterDescriptor: ReceiverParameterDescriptor?
     ) {
         enum class Code {
             LABEL_RESOLUTION_ERROR,

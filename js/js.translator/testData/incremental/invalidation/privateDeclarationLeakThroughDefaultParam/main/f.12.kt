@@ -1,5 +1,5 @@
 private object Obj {
-    inline val x get() = "12"
+    inline konst x get() = "12"
 }
 
 private inline fun bar() = Obj.x

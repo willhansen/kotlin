@@ -16,6 +16,6 @@ fun <U> materialize(): B<U>? = null
 import lib.*
 
 fun box(): String {
-    val s = { materialize<Unit>() }
+    konst s = { materialize<Unit>() }
     return "OK"
 }

@@ -4,12 +4,12 @@ package foo
 
 public fun <T> List<T>.some(): T = this[0]
 public fun String.some(): Char = this[0]
-public val <T> List<T>.some: T get() = this[1]
-public val String.some: Char get() = this[1]
+public konst <T> List<T>.some: T get() = this[1]
+public konst String.some: Char get() = this[1]
 
 fun box(): String {
 
-    val data = listOf("foo", "bar")
+    konst data = listOf("foo", "bar")
 
     assertEquals("foo", data.some())
     assertEquals("bar", data.some)

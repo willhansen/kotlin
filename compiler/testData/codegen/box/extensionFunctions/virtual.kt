@@ -1,4 +1,4 @@
-class Request(val path: String) {
+class Request(konst path: String) {
 
 }
 
@@ -9,7 +9,7 @@ class Handler() {
     }
 
 //    fun Request.getPath() : String {
-//        val sb = java.lang.StringBuilder()
+//        konst sb = java.lang.StringBuilder()
 //        10.times {
 //            sb.append(path)?.append(this)
 //        }

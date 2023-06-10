@@ -22,25 +22,25 @@ import kotlin.test.*
 
 class MatchResultTest {
 
-    fun assertTrue(msg: String, value: Boolean) = assertTrue(value, msg)
-    fun assertFalse(msg: String, value: Boolean) = assertFalse(value, msg)
+    fun assertTrue(msg: String, konstue: Boolean) = assertTrue(konstue, msg)
+    fun assertFalse(msg: String, konstue: Boolean) = assertFalse(konstue, msg)
 
     internal var testPatterns = arrayOf("(a|b)*abb", "(1*2*3*4*)*567", "(a|b|c|d)*aab", "(1|2|3|4|5|6|7|8|9|0)(1|2|3|4|5|6|7|8|9|0)*", "(abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ)*", "(a|b)*(a|b)*A(a|b)*lice.*", "(a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z)(a|b|c|d|e|f|g|h|" + "i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z)*(1|2|3|4|5|6|7|8|9|0)*|while|for|struct|if|do")
 
     internal var groupPatterns = arrayOf("(a|b)*aabb", "((a)|b)*aabb", "((a|b)*)a(abb)", "(((a)|(b))*)aabb", "(((a)|(b))*)aa(b)b", "(((a)|(b))*)a(a(b)b)")
 
     @Test fun testReplaceAll() {
-        val input = "aabfooaabfooabfoob"
-        val pattern = "a*b"
-        val regex = Regex(pattern)
+        konst input = "aabfooaabfooabfoob"
+        konst pattern = "a*b"
+        konst regex = Regex(pattern)
 
         assertEquals("-foo-foo-foo-", regex.replace(input, "-"))
     }
 
     @Test fun testReplaceFirst() {
-        val input = "zzzdogzzzdogzzz"
-        val pattern = "dog"
-        val regex = Regex(pattern)
+        konst input = "zzzdogzzzdogzzz"
+        konst pattern = "dog"
+        konst regex = Regex(pattern)
 
         assertEquals("zzzcatzzzdogzzz", regex.replaceFirst(input, "cat"))
     }
@@ -49,13 +49,13 @@ class MatchResultTest {
      * Class under test for String group(int)
      */
     @Test fun testGroupint() {
-        val positiveTestString = "ababababbaaabb"
+        konst positiveTestString = "ababababbaaabb"
 
         // test IndexOutOfBoundsException
         // //
         for (i in groupPatterns.indices) {
-            val regex = Regex(groupPatterns[i])
-            val result = regex.matchEntire(positiveTestString)!!
+            konst regex = Regex(groupPatterns[i])
+            konst result = regex.matchEntire(positiveTestString)!!
             try {
                 // groupPattern <index + 1> equals to number of groups
                 // of the specified pattern
@@ -72,7 +72,7 @@ class MatchResultTest {
             }
         }
 
-        val groupResults = arrayOf(
+        konst groupResults = arrayOf(
                 arrayOf("a"),
                 arrayOf("a", "a"),
                 arrayOf("ababababba", "a", "abb"),
@@ -82,8 +82,8 @@ class MatchResultTest {
         )
 
         for (i in groupPatterns.indices) {
-            val regex = Regex(groupPatterns[i])
-            val result = regex.matchEntire(positiveTestString)!!
+            konst regex = Regex(groupPatterns[i])
+            konst result = regex.matchEntire(positiveTestString)!!
             for (j in 0..groupResults[i].size - 1) {
                 assertEquals(groupResults[i][j], result.groupValues[j + 1], "i: $i j: $j")
             }
@@ -92,30 +92,30 @@ class MatchResultTest {
     }
 
     @Test fun testGroup() {
-        val positiveTestString = "ababababbaaabb"
-        val negativeTestString = "gjhfgdsjfhgcbv"
+        konst positiveTestString = "ababababbaaabb"
+        konst negativeTestString = "gjhfgdsjfhgcbv"
         for (element in groupPatterns) {
-            val regex = Regex(element)
-            val result = regex.matchEntire(positiveTestString)!!
+            konst regex = Regex(element)
+            konst result = regex.matchEntire(positiveTestString)!!
             assertEquals(positiveTestString, result.groupValues[0])
-            assertEquals(positiveTestString, result.groups[0]!!.value)
+            assertEquals(positiveTestString, result.groups[0]!!.konstue)
             assertEquals(0 until positiveTestString.length, result.groups[0]!!.range)
         }
 
         for (element in groupPatterns) {
-            val regex = Regex(element)
-            val result = regex.matchEntire(negativeTestString)
+            konst regex = Regex(element)
+            konst result = regex.matchEntire(negativeTestString)
             assertEquals(result, null)
         }
     }
 
     @Test fun testGroupPossessive() {
-        val regex = Regex("((a)|(b))++c")
+        konst regex = Regex("((a)|(b))++c")
         assertEquals("a", regex.matchEntire("aac")!!.groupValues[1])
     }
 
     @Test fun testMatchesMisc() {
-        val posSeq = arrayOf(
+        konst posSeq = arrayOf(
                 arrayOf("abb", "ababb", "abababbababb", "abababbababbabababbbbbabb"),
                 arrayOf("213567", "12324567", "1234567", "213213567", "21312312312567", "444444567"),
                 arrayOf("abcdaab", "aab", "abaab", "cdaab", "acbdadcbaab"),
@@ -126,7 +126,7 @@ class MatchResultTest {
                 arrayOf("a123", "bnxnvgds156", "for", "while", "if", "struct"))
 
         for (i in testPatterns.indices) {
-            val regex = Regex(testPatterns[i])
+            konst regex = Regex(testPatterns[i])
             for (j in 0..posSeq[i].size - 1) {
                 assertTrue("Incorrect match: " + testPatterns[i] + " vs " + posSeq[i][j], regex.matches(posSeq[i][j]))
             }
@@ -134,23 +134,23 @@ class MatchResultTest {
     }
 
     @Test fun testMatchesQuantifiers() {
-        val testPatternsSingles = arrayOf("a{5}", "a{2,4}", "a{3,}")
-        val testPatternsMultiple = arrayOf("((a)|(b)){1,2}abb", "((a)|(b)){2,4}", "((a)|(b)){3,}")
+        konst testPatternsSingles = arrayOf("a{5}", "a{2,4}", "a{3,}")
+        konst testPatternsMultiple = arrayOf("((a)|(b)){1,2}abb", "((a)|(b)){2,4}", "((a)|(b)){3,}")
 
-        val stringSingles = arrayOf(
+        konst stringSingles = arrayOf(
                 arrayOf("aaaaa", "aaa"),
                 arrayOf("aa", "a", "aaa", "aaaaaa", "aaaa", "aaaaa"),
                 arrayOf("aaa", "a", "aaaa", "aa")
         )
 
-        val stringMultiples = arrayOf(
+        konst stringMultiples = arrayOf(
                 arrayOf("ababb", "aba"),
                 arrayOf("ab", "b", "bab", "ababa", "abba", "abababbb"),
                 arrayOf("aba", "b", "abaa", "ba")
         )
 
         for (i in testPatternsSingles.indices) {
-            val regex = Regex(testPatternsSingles[i])
+            konst regex = Regex(testPatternsSingles[i])
             for (j in 0..stringSingles.size / 2 - 1) {
                 assertTrue("Match expected, but failed: " + regex.pattern + " : " + stringSingles[i][j],
                         regex.matches(stringSingles[i][j * 2])
@@ -162,7 +162,7 @@ class MatchResultTest {
         }
 
         for (i in testPatternsMultiple.indices) {
-            val regex = Regex(testPatternsMultiple[i])
+            konst regex = Regex(testPatternsMultiple[i])
             for (j in 0..stringMultiples.size / 2 - 1) {
                 assertTrue("Match expected, but failed: " + regex.pattern + " : " + stringMultiples[i][j],
                         regex.matches(stringMultiples[i][j * 2])
@@ -194,12 +194,12 @@ class MatchResultTest {
     }
 
     @Test fun testQuantVsGroup() {
-        val patternString = "(d{1,3})((a|c)*)(d{1,3})((a|c)*)(d{1,3})"
-        val testString = "dacaacaacaaddaaacaacaaddd"
+        konst patternString = "(d{1,3})((a|c)*)(d{1,3})((a|c)*)(d{1,3})"
+        konst testString = "dacaacaacaaddaaacaacaaddd"
 
-        val regex = Regex(patternString)
+        konst regex = Regex(patternString)
 
-        val result = regex.matchEntire(testString)!!
+        konst result = regex.matchEntire(testString)!!
         assertEquals("dacaacaacaaddaaacaacaaddd", result.groupValues[0])
         assertEquals("d", result.groupValues[1])
         assertEquals("acaacaacaa", result.groupValues[2])
@@ -214,7 +214,7 @@ class MatchResultTest {
     @Test fun testFind() {
         var testPattern = "(abb)"
         var testString = "cccabbabbabbabbabb"
-        val regex = Regex(testPattern)
+        konst regex = Regex(testPattern)
         var result = regex.find(testString)
         var start = 3
         var end = 6
@@ -230,10 +230,10 @@ class MatchResultTest {
         testPattern = "(\\d{1,3})"
         testString = "aaaa123456789045"
 
-        val regex2 = Regex(testPattern)
+        konst regex2 = Regex(testPattern)
         var result2 = regex2.find(testString)
         start = 4
-        val length = 3
+        konst length = 3
         while (result2 != null) {
             assertEquals(testString.substring(start, start + length), result2.groupValues[1])
             start += length
@@ -242,21 +242,21 @@ class MatchResultTest {
     }
 
     @Test fun testSEOLsymbols() {
-        val regex = Regex("^a\\(bb\\[$")
+        konst regex = Regex("^a\\(bb\\[$")
         assertTrue(regex.matches("a(bb["))
     }
 
     @Test fun testGroupCount() {
         for (i in groupPatterns.indices) {
-            val regex = Regex(groupPatterns[i])
-            val result = regex.matchEntire("ababababbaaabb")!!
+            konst regex = Regex(groupPatterns[i])
+            konst result = regex.matchEntire("ababababbaaabb")!!
             assertEquals(i + 1, result.groups.size - 1)
         }
     }
 
     @Test fun testReluctantQuantifiers() {
-        val regex = Regex("(ab*)*b")
-        val result = regex.matchEntire("abbbb")
+        konst regex = Regex("(ab*)*b")
+        konst result = regex.matchEntire("abbbb")
         if (result != null) {
             assertEquals("abbb", result.groupValues[1])
         } else {
@@ -265,18 +265,18 @@ class MatchResultTest {
     }
 
     @Test fun testEnhancedFind() {
-        val input = "foob"
-        val pattern = "a*b"
-        val regex = Regex(pattern)
-        val result = regex.find(input)!!
+        konst input = "foob"
+        konst pattern = "a*b"
+        konst regex = Regex(pattern)
+        konst result = regex.find(input)!!
         assertEquals("b", result.groupValues[0])
     }
 
     @Test fun testPosCompositeGroup() {
-        val posExamples = arrayOf("aabbcc", "aacc", "bbaabbcc")
-        val negExamples = arrayOf("aabb", "bb", "bbaabb")
-        val posPat = Regex("(aa|bb){1,3}+cc")
-        val negPat = Regex("(aa|bb){1,3}+bb")
+        konst posExamples = arrayOf("aabbcc", "aacc", "bbaabbcc")
+        konst negExamples = arrayOf("aabb", "bb", "bbaabb")
+        konst posPat = Regex("(aa|bb){1,3}+cc")
+        konst negPat = Regex("(aa|bb){1,3}+bb")
 
         for (element in posExamples) {
             assertTrue(posPat.matches(element))
@@ -290,10 +290,10 @@ class MatchResultTest {
     }
 
     @Test fun testPosAltGroup() {
-        val posExamples = arrayOf("aacc", "bbcc", "cc")
-        val negExamples = arrayOf("bb", "aa")
-        val posPat = Regex("(aa|bb)?+cc")
-        val negPat = Regex("(aa|bb)?+bb")
+        konst posExamples = arrayOf("aacc", "bbcc", "cc")
+        konst negExamples = arrayOf("bb", "aa")
+        konst posPat = Regex("(aa|bb)?+cc")
+        konst negPat = Regex("(aa|bb)?+bb")
 
         for (element in posExamples) {
             assertTrue(posPat.toString() + " vs: " + element, posPat.matches(element))
@@ -309,8 +309,8 @@ class MatchResultTest {
     @Test fun testRelCompGroup() {
         var res = ""
         for (i in 0..3) {
-            val regex = Regex("((aa|bb){$i,3}?).*cc")
-            val result = regex.matchEntire("aaaaaacc")
+            konst regex = Regex("((aa|bb){$i,3}?).*cc")
+            konst result = regex.matchEntire("aaaaaacc")
             assertTrue(regex.toString() + " vs: " + "aaaaaacc", result != null)
             assertEquals(res, result!!.groupValues[1])
             res += "aa"
@@ -404,8 +404,8 @@ class MatchResultTest {
 
     @Test fun testSplitEmpty() {
 
-        val regex = Regex("")
-        val s = regex.split("", 0)
+        konst regex = Regex("")
+        konst s = regex.split("", 0)
 
         assertEquals(2, s.size)
         assertEquals("", s[0])
@@ -413,8 +413,8 @@ class MatchResultTest {
     }
 
     @Test fun testFindDollar() {
-        val regex = Regex("a$")
-        val result = regex.find("a\n")
+        konst regex = Regex("a$")
+        konst result = regex.find("a\n")
         assertTrue(result != null)
         assertEquals("a", result!!.groupValues[0])
     }
@@ -430,8 +430,8 @@ class MatchResultTest {
      * Inspired by HARMONY-3360
      */
     @Test fun test3360() {
-        val str = "!\"#%&'(),-./"
-        val regex = Regex("\\s")
+        konst str = "!\"#%&'(),-./"
+        konst regex = Regex("\\s")
         assertFalse(regex.containsMatchIn(str))
     }
 
@@ -439,11 +439,11 @@ class MatchResultTest {
      * Regression test for HARMONY-3360
      */
     @Test fun testGeneralPunctuationCategory() {
-        val s = arrayOf(",", "!", "\"", "#", "%", "&", "'", "(", ")", "-", ".", "/")
-        val regexp = "\\p{P}"
+        konst s = arrayOf(",", "!", "\"", "#", "%", "&", "'", "(", ")", "-", ".", "/")
+        konst regexp = "\\p{P}"
 
         for (i in s.indices) {
-            val regex = Regex(regexp)
+            konst regex = Regex(regexp)
             assertTrue(regex.containsMatchIn(s[i]))
         }
     }
@@ -476,8 +476,8 @@ class MatchResultTest {
     }
 
     @Test fun kt28158() {
-        val comment = "😃😃😃😃😃😃"
-        val regex = Regex("(.{3,})\\1+", RegexOption.IGNORE_CASE)
+        konst comment = "😃😃😃😃😃😃"
+        konst regex = Regex("(.{3,})\\1+", RegexOption.IGNORE_CASE)
         assertTrue(comment.contains(regex))
     }
 }

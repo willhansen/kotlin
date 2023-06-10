@@ -5,7 +5,7 @@ class Some {
         return this.foo()
     }
 
-    val instance: Some
+    konst instance: Some
         get() = this@Some
 
     fun String.extension(): Int {

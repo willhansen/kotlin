@@ -3,19 +3,19 @@
 package foo
 
 // workaround for Rhino
-class Done(val i: Int)
+class Done(konst i: Int)
 
 var done = Done(0)
 
 object foo {
     var result = "FAIL"
 
-    val lambda = {
+    konst lambda = {
         result = "foo.lambda OK"
         done = Done(3)
     }
 
-    val extLambda: Done.() -> Unit = {
+    konst extLambda: Done.() -> Unit = {
         result = "foo.extLambda OK"
         done = this
     }
@@ -24,24 +24,24 @@ object foo {
 class Foo {
     var result = "FAIL"
 
-    val lambda = {
+    konst lambda = {
         result = "Foo::lambda OK"
         done = Done(-7)
     }
 
-    val extLambda: Done.() -> Unit = {
+    konst extLambda: Done.() -> Unit = {
         result = "Foo::extLambda OK"
         done = this
     }
 }
 
 fun box(): String {
-    val a = foo.lambda
-    val b = foo.extLambda
+    konst a = foo.lambda
+    konst b = foo.extLambda
 
-    val f = Foo()
-    val c = f.lambda
-    val d = f.extLambda
+    konst f = Foo()
+    konst c = f.lambda
+    konst d = f.extLambda
 
     a()
     if (foo.result != "foo.lambda OK") return "foo.result = \"${foo.result}\", but expected \"foo.lambda OK\""

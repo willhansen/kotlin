@@ -18,19 +18,19 @@ fun test3(s: String?) {
 }
 
 fun test4() {
-    val s: String? = null;
+    konst s: String? = null;
     assert(s!!.isEmpty())
     s<!UNNECESSARY_SAFE_CALL!>?.<!>length
 }
 
 fun test5() {
-    val s: String? = null;
+    konst s: String? = null;
     assert(s!!.isEmpty())
     s<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>.length
 }
 
 fun test6() {
-    val s: String? = null;
+    konst s: String? = null;
     assert(s!!.isEmpty())
     <!DEBUG_INFO_SMARTCAST!>s<!>.length
 }

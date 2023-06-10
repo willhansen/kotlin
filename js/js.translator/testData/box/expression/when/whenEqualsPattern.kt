@@ -2,7 +2,7 @@
 // EXPECTED_REACHABLE_NODES: 1692
 package foo
 
-data class A(val bar: Int)
+data class A(konst bar: Int)
 
 external class B
 

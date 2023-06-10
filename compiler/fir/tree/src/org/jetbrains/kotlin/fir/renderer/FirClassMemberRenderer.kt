@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.fir.declarations.FirRegularClass
 
 open class FirClassMemberRenderer {
     internal lateinit var components: FirRendererComponents
-    protected val visitor get() = components.visitor
-    protected val printer get() = components.printer
+    protected konst visitor get() = components.visitor
+    protected konst printer get() = components.printer
 
     open fun render(regularClass: FirRegularClass) {
         render(regularClass.declarations)

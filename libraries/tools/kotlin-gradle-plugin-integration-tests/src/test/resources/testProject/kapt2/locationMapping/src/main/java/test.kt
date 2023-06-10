@@ -2,7 +2,7 @@ package example
 
 class Test {
     @field:example.GenError
-    val a: String
+    konst a: String
 
     fun b(@example.GenError a: Boolean) {}
 }

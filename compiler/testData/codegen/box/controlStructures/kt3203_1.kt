@@ -1,7 +1,7 @@
 fun testIf() {
-    val condition = true
-    val result = if (condition) {
-        val hello: String? = "hello"
+    konst condition = true
+    konst result = if (condition) {
+        konst hello: String? = "hello"
         if (hello == null) {
             false
         }

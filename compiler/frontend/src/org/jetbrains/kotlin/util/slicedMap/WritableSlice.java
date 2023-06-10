@@ -24,9 +24,9 @@ public interface WritableSlice<K, V> extends ReadOnlySlice<K, V> {
     KeyWithSlice<K, V, WritableSlice<K, V>> getKey();
 
     // True to put, false to skip
-    boolean check(K key, V value);
+    boolean check(K key, V konstue);
 
-    void afterPut(MutableSlicedMap map, K key, V value);
+    void afterPut(MutableSlicedMap map, K key, V konstue);
 
     RewritePolicy getRewritePolicy();
 

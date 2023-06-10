@@ -2,13 +2,13 @@
 // ISSUE: KT-58135
 
 class Test(
-    val x: Int, // (1)
+    konst x: Int, // (1)
     y: Int // (2)
 ) {
-    val String.x: String get() = this // (3)
-    val String.y: String get() = this // (4)
+    konst String.x: String get() = this // (3)
+    konst String.y: String get() = this // (4)
 
-    val y: Int = y // (5)
+    konst y: Int = y // (5)
 
     fun test(s: String) {
         with(s) {
@@ -17,7 +17,7 @@ class Test(
         }
     }
 
-    val test = with("hello") {
+    konst test = with("hello") {
         x.length // (3)
         y.inc() // (2)
     }

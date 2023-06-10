@@ -17,11 +17,11 @@ import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 
 class PropertyInitializationInfoData(
-    val properties: Set<FirPropertySymbol>,
-    val receiver: FirBasedSymbol<*>?,
-    val graph: ControlFlowGraph,
+    konst properties: Set<FirPropertySymbol>,
+    konst receiver: FirBasedSymbol<*>?,
+    konst graph: ControlFlowGraph,
 ) {
-    private val data by lazy(LazyThreadSafetyMode.NONE) {
+    private konst data by lazy(LazyThreadSafetyMode.NONE) {
         graph.collectDataForNode(TraverseDirection.Forward, PropertyInitializationInfoCollector(properties, receiver))
     }
 
@@ -31,15 +31,15 @@ class PropertyInitializationInfoData(
 }
 
 class PropertyInitializationInfoCollector(
-    private val localProperties: Set<FirPropertySymbol>,
-    private val expectedReceiver: FirBasedSymbol<*>? = null,
-    private val declaredVariableCollector: DeclaredVariableCollector = DeclaredVariableCollector(),
+    private konst localProperties: Set<FirPropertySymbol>,
+    private konst expectedReceiver: FirBasedSymbol<*>? = null,
+    private konst declaredVariableCollector: DeclaredVariableCollector = DeclaredVariableCollector(),
 ) : PathAwareControlFlowGraphVisitor<PropertyInitializationInfo>() {
     companion object {
-        private val EMPTY_INFO: PathAwarePropertyInitializationInfo = persistentMapOf(NormalPath to PropertyInitializationInfo.EMPTY)
+        private konst EMPTY_INFO: PathAwarePropertyInitializationInfo = persistentMapOf(NormalPath to PropertyInitializationInfo.EMPTY)
     }
 
-    override val emptyInfo: PathAwarePropertyInitializationInfo
+    override konst emptyInfo: PathAwarePropertyInitializationInfo
         get() = EMPTY_INFO
 
     // When looking for initializations of member properties, skip subgraphs of member functions;
@@ -51,10 +51,10 @@ class PropertyInitializationInfoCollector(
         node: VariableAssignmentNode,
         data: PathAwarePropertyInitializationInfo
     ): PathAwarePropertyInitializationInfo {
-        val dataForNode = visitNode(node, data)
-        val receiver = (node.fir.dispatchReceiver.unwrapSmartcastExpression() as? FirThisReceiverExpression)?.calleeReference?.boundSymbol
+        konst dataForNode = visitNode(node, data)
+        konst receiver = (node.fir.dispatchReceiver.unwrapSmartcastExpression() as? FirThisReceiverExpression)?.calleeReference?.boundSymbol
         if (receiver != expectedReceiver) return dataForNode
-        val symbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: return dataForNode
+        konst symbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: return dataForNode
         if (symbol !in localProperties) return dataForNode
         return addRange(dataForNode, symbol, EventOccurrencesRange.EXACTLY_ONCE)
     }
@@ -63,7 +63,7 @@ class PropertyInitializationInfoCollector(
         node: VariableDeclarationNode,
         data: PathAwarePropertyInitializationInfo
     ): PathAwarePropertyInitializationInfo {
-        val dataForNode = visitNode(node, data)
+        konst dataForNode = visitNode(node, data)
         return when {
             expectedReceiver != null ->
                 dataForNode
@@ -81,7 +81,7 @@ class PropertyInitializationInfoCollector(
         // If member property initializer is empty (there are no nodes between enter and exit node)
         //   then property is not initialized in its declaration
         // Otherwise it is
-        val dataForNode = visitNode(node, data)
+        konst dataForNode = visitNode(node, data)
         if (node.firstPreviousNode is PropertyInitializerEnterNode) return dataForNode
         return overwriteRange(dataForNode, node.fir.symbol, EventOccurrencesRange.EXACTLY_ONCE)
     }
@@ -96,9 +96,9 @@ class PropertyInitializationInfoCollector(
         metadata: Edge,
         data: PathAwarePropertyInitializationInfo
     ): PathAwarePropertyInitializationInfo {
-        val result = super.visitEdge(from, to, metadata, data)
+        konst result = super.visitEdge(from, to, metadata, data)
         if (!metadata.kind.isBack) return result
-        val declaredVariableSymbolsInCapturedScope = when (to) {
+        konst declaredVariableSymbolsInCapturedScope = when (to) {
             is LoopEnterNode -> declaredVariableCollector.declaredVariablesPerElement[to.fir]
             is LoopBlockEnterNode -> declaredVariableCollector.declaredVariablesPerElement[to.fir]
             is LoopConditionEnterNode -> declaredVariableCollector.declaredVariablesPerElement[to.loop]
@@ -153,8 +153,8 @@ private inline fun <S : ControlFlowInfo<S, K, EventOccurrencesRange>, K : Any> u
     var resultMap = persistentMapOf<EdgeLabel, S>()
     // before: { |-> { p1 |-> PI1 }, l1 |-> { p2 |-> PI2 } }
     for ((label, dataPerLabel) in pathAwareInfo) {
-        val existingKind = dataPerLabel[key] ?: EventOccurrencesRange.ZERO
-        val kind = computeNewRange.invoke(existingKind)
+        konst existingKind = dataPerLabel[key] ?: EventOccurrencesRange.ZERO
+        konst kind = computeNewRange.invoke(existingKind)
         resultMap = resultMap.put(label, dataPerLabel.put(key, kind))
     }
     // after (if key is p1):

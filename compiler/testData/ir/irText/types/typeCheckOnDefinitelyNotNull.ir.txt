@@ -22,9 +22,9 @@ FILE fqName:<root> fileName:/typeCheckOnDefinitelyNotNull.kt
           BRANCH
             if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=T of <root>.implicitAsFoo
               GET_VAR 'x: kotlin.Any declared in <root>.implicitAsFoo' type=kotlin.Any origin=null
-            then: CONST Int type=kotlin.Int value=0
+            then: CONST Int type=kotlin.Int konstue=0
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
+            if: CONST Boolean type=kotlin.Boolean konstue=true
             then: CALL 'public abstract fun <get-length> (): kotlin.Int declared in kotlin.CharSequence' type=kotlin.Int origin=GET_PROPERTY
               $this: TYPE_OP type={T of <root>.implicitAsFoo & Any} origin=IMPLICIT_CAST typeOperand={T of <root>.implicitAsFoo & Any}
                 GET_VAR 'x: kotlin.Any declared in <root>.implicitAsFoo' type=kotlin.Any origin=null

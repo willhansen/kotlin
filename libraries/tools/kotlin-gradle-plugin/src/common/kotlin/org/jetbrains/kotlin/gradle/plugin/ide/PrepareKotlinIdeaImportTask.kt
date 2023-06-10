@@ -19,7 +19,7 @@ internal fun Project.ideaImportDependsOn(task: TaskProvider<*>) {
 }
 
 @Idea222Api
-internal val Project.prepareKotlinIdeaImportTask: TaskProvider<Task>
+internal konst Project.prepareKotlinIdeaImportTask: TaskProvider<Task>
     get() = locateOrRegisterTask(
         "prepareKotlinIdeaImport",
         configureTask = {

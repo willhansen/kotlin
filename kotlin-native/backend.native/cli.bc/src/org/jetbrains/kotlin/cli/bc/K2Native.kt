@@ -45,7 +45,7 @@ class K2Native : CLICompiler<K2NativeCompilerArguments>() {
 
     override fun createMetadataVersion(versionArray: IntArray): BinaryVersion = KlibMetadataVersion(*versionArray)
 
-    override val defaultPerformanceManager: CommonCompilerPerformanceManager by lazy {
+    override konst defaultPerformanceManager: CommonCompilerPerformanceManager by lazy {
         K2NativeCompilerPerformanceManager()
     }
 
@@ -59,13 +59,13 @@ class K2Native : CLICompiler<K2NativeCompilerArguments>() {
             return ExitCode.OK
         }
 
-        val pluginLoadResult =
+        konst pluginLoadResult =
                 PluginCliParser.loadPluginsSafe(arguments.pluginClasspaths, arguments.pluginOptions, arguments.pluginConfigurations, configuration)
         if (pluginLoadResult != ExitCode.OK) return pluginLoadResult
 
-        val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY) ?: MessageCollector.NONE
+        konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY) ?: MessageCollector.NONE
 
-        val enoughArguments = arguments.freeArgs.isNotEmpty() || arguments.isUsefulWithoutFreeArgs
+        konst enoughArguments = arguments.freeArgs.isNotEmpty() || arguments.isUsefulWithoutFreeArgs
         if (!enoughArguments) {
             messageCollector.report(ERROR, "You have not specified any compilation arguments. No output has been produced.")
         }
@@ -77,19 +77,19 @@ class K2Native : CLICompiler<K2NativeCompilerArguments>() {
             // - source files are compiled to intermediate KLib by FIR frontend
             // - intermediate Klib is compiled to binary by K2/Native backend
             // In this implementation, 'arguments' is not changed accordingly to changes in `firstStageConfiguration` and `configuration`,
-            // since values of fields `produce`, `output`, `freeArgs`, `includes` does not seem to matter downstream in prepareEnvironment()
+            // since konstues of fields `produce`, `output`, `freeArgs`, `includes` does not seem to matter downstream in prepareEnvironment()
 
-            val firstStageConfiguration = configuration.copy()
+            konst firstStageConfiguration = configuration.copy()
             // For the first stage, use "-p library" produce mode
             firstStageConfiguration.put(KonanConfigKeys.PRODUCE, CompilerOutputKind.LIBRARY)
             // For the first stage, construct a temporary file name for an intermediate KLib
-            val intermediateKLib = File(System.getProperty("java.io.tmpdir"), "${UUID.randomUUID()}.klib").also {
+            konst intermediateKLib = File(System.getProperty("java.io.tmpdir"), "${UUID.randomUUID()}.klib").also {
                 require(!it.exists) { "Collision writing intermediate KLib $it"}
                 it.deleteOnExit()
             }
             firstStageConfiguration.put(KonanConfigKeys.OUTPUT, intermediateKLib.absolutePath)
 
-            val firstStageExitCode = executeStage(firstStageConfiguration, arguments, rootDisposable)
+            konst firstStageExitCode = executeStage(firstStageConfiguration, arguments, rootDisposable)
             if (firstStageExitCode != ExitCode.OK)
                 return firstStageExitCode
 
@@ -108,7 +108,7 @@ class K2Native : CLICompiler<K2NativeCompilerArguments>() {
             arguments: K2NativeCompilerArguments,
             rootDisposable: Disposable
     ): ExitCode {
-        val environment = prepareEnvironment(arguments, configuration, rootDisposable)
+        konst environment = prepareEnvironment(arguments, configuration, rootDisposable)
 
         try {
             runKonanDriver(configuration, environment, rootDisposable)
@@ -135,18 +135,18 @@ class K2Native : CLICompiler<K2NativeCompilerArguments>() {
             configuration: CompilerConfiguration,
             rootDisposable: Disposable
     ): KotlinCoreEnvironment {
-        val environment = KotlinCoreEnvironment.createForProduction(rootDisposable,
+        konst environment = KotlinCoreEnvironment.createForProduction(rootDisposable,
                 configuration, EnvironmentConfigFiles.NATIVE_CONFIG_FILES)
 
         configuration.put(CLIConfigurationKeys.FLEXIBLE_PHASE_CONFIG, createFlexiblePhaseConfig(arguments))
 
         /* Set default version of metadata version */
-        val metadataVersionString = arguments.metadataVersion
+        konst metadataVersionString = arguments.metadataVersion
         if (metadataVersionString == null) {
             configuration.put(CommonConfigurationKeys.METADATA_VERSION, KlibMetadataVersion.INSTANCE)
         }
 
-        val relativePathBases = arguments.relativePathBases
+        konst relativePathBases = arguments.relativePathBases
         if (relativePathBases != null) {
             configuration.put(CommonConfigurationKeys.KLIB_RELATIVE_PATH_BASES, relativePathBases.toList())
         }
@@ -162,10 +162,10 @@ class K2Native : CLICompiler<K2NativeCompilerArguments>() {
             environment: KotlinCoreEnvironment,
             rootDisposable: Disposable
     ) {
-        val konanDriver = KonanDriver(environment.project, environment, configuration) { args, setupConfiguration ->
-            val spawnedArguments = K2NativeCompilerArguments()
+        konst konanDriver = KonanDriver(environment.project, environment, configuration) { args, setupConfiguration ->
+            konst spawnedArguments = K2NativeCompilerArguments()
             parseCommandLineArguments(args, spawnedArguments)
-            val spawnedConfiguration = CompilerConfiguration()
+            konst spawnedConfiguration = CompilerConfiguration()
 
             spawnedConfiguration.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY))
             spawnedConfiguration.put(IrMessageLogger.IR_MESSAGE_LOGGER, configuration.getNotNull(IrMessageLogger.IR_MESSAGE_LOGGER))
@@ -173,13 +173,13 @@ class K2Native : CLICompiler<K2NativeCompilerArguments>() {
             spawnedConfiguration.setupFromArguments(spawnedArguments)
             spawnedConfiguration.setupPartialLinkageConfig(configuration.partialLinkageConfig)
             spawnedConfiguration.setupConfiguration()
-            val spawnedEnvironment = prepareEnvironment(spawnedArguments, spawnedConfiguration, rootDisposable)
+            konst spawnedEnvironment = prepareEnvironment(spawnedArguments, spawnedConfiguration, rootDisposable)
             runKonanDriver(spawnedConfiguration, spawnedEnvironment, rootDisposable)
         }
         konanDriver.run()
     }
 
-    private val K2NativeCompilerArguments.isUsefulWithoutFreeArgs: Boolean
+    private konst K2NativeCompilerArguments.isUsefulWithoutFreeArgs: Boolean
         get() = listTargets || listPhases || checkDependencies || !includes.isNullOrEmpty() ||
                 libraryToAddToCache != null || !exportedLibraries.isNullOrEmpty() || !compileFromBitcode.isNullOrEmpty()
 

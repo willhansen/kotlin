@@ -13,8 +13,8 @@ package kotlin
  */
 @JsName("Error")
 public external open class Throwable {
-    public open val message: String?
-    public open val cause: Throwable?
+    public open konst message: String?
+    public open konst cause: Throwable?
 
     public constructor(message: String?, cause: Throwable?)
     public constructor(message: String?)

@@ -43,7 +43,7 @@ interface SVGGeometryElement : SVGGraphicsElement {
   DOMPoint getPointAtLength(float distance);
 };
 interface SVGNumber {
-  attribute float value;
+  attribute float konstue;
 };
 interface SVGLength {
 
@@ -61,11 +61,11 @@ interface SVGLength {
   const unsigned short SVG_LENGTHTYPE_PC = 10;
 
   readonly attribute unsigned short unitType;
-           attribute float value;
-           attribute float valueInSpecifiedUnits;
-           attribute DOMString valueAsString;
+           attribute float konstue;
+           attribute float konstueInSpecifiedUnits;
+           attribute DOMString konstueAsString;
 
-  void newValueSpecifiedUnits(unsigned short unitType, float valueInSpecifiedUnits);
+  void newValueSpecifiedUnits(unsigned short unitType, float konstueInSpecifiedUnits);
   void convertToSpecifiedUnits(unsigned short unitType);
 };
 interface SVGAngle {
@@ -78,11 +78,11 @@ interface SVGAngle {
   const unsigned short SVG_ANGLETYPE_GRAD = 4;
 
   readonly attribute unsigned short unitType;
-           attribute float value;
-           attribute float valueInSpecifiedUnits;
-           attribute DOMString valueAsString;
+           attribute float konstue;
+           attribute float konstueInSpecifiedUnits;
+           attribute DOMString konstueAsString;
 
-  void newValueSpecifiedUnits(unsigned short unitType, float valueInSpecifiedUnits);
+  void newValueSpecifiedUnits(unsigned short unitType, float konstueInSpecifiedUnits);
   void convertToSpecifiedUnits(unsigned short unitType);
 };
 interface SVGNameList {
@@ -660,7 +660,7 @@ interface SVGGeometryElement : SVGGraphicsElement {
 };
 
 interface SVGNumber {
-  attribute float value;
+  attribute float konstue;
 };
 
 interface SVGLength {
@@ -679,11 +679,11 @@ interface SVGLength {
   const unsigned short SVG_LENGTHTYPE_PC = 10;
 
   readonly attribute unsigned short unitType;
-           attribute float value;
-           attribute float valueInSpecifiedUnits;
-           attribute DOMString valueAsString;
+           attribute float konstue;
+           attribute float konstueInSpecifiedUnits;
+           attribute DOMString konstueAsString;
 
-  void newValueSpecifiedUnits(unsigned short unitType, float valueInSpecifiedUnits);
+  void newValueSpecifiedUnits(unsigned short unitType, float konstueInSpecifiedUnits);
   void convertToSpecifiedUnits(unsigned short unitType);
 };
 
@@ -697,11 +697,11 @@ interface SVGAngle {
   const unsigned short SVG_ANGLETYPE_GRAD = 4;
 
   readonly attribute unsigned short unitType;
-           attribute float value;
-           attribute float valueInSpecifiedUnits;
-           attribute DOMString valueAsString;
+           attribute float konstue;
+           attribute float konstueInSpecifiedUnits;
+           attribute DOMString konstueAsString;
 
-  void newValueSpecifiedUnits(unsigned short unitType, float valueInSpecifiedUnits);
+  void newValueSpecifiedUnits(unsigned short unitType, float konstueInSpecifiedUnits);
   void convertToSpecifiedUnits(unsigned short unitType);
 };
 

@@ -14,18 +14,18 @@ open class ReplCompletionOptionsBuilder : PropertiesCollection.Builder(), ReplCo
     companion object : ReplCompletionOptionsKeys
 }
 
-fun ReplCompletionOptionsBuilder.filterOutShadowedDescriptors(value: Boolean) {
-    this[filterOutShadowedDescriptors] = value
+fun ReplCompletionOptionsBuilder.filterOutShadowedDescriptors(konstue: Boolean) {
+    this[filterOutShadowedDescriptors] = konstue
 }
 
-fun ReplCompletionOptionsBuilder.nameFilter(value: (String, String) -> Boolean) {
-    this[nameFilter] = value
+fun ReplCompletionOptionsBuilder.nameFilter(konstue: (String, String) -> Boolean) {
+    this[nameFilter] = konstue
 }
 
-val ReplCompletionOptionsKeys.filterOutShadowedDescriptors by PropertiesCollection.key(true)
-val ReplCompletionOptionsKeys.nameFilter
+konst ReplCompletionOptionsKeys.filterOutShadowedDescriptors by PropertiesCollection.key(true)
+konst ReplCompletionOptionsKeys.nameFilter
         by PropertiesCollection.key<(String, String) -> Boolean>({ name, namePart -> name.startsWith(namePart) })
 
 @Suppress("unused")
-val ScriptCompilationConfigurationKeys.completion
+konst ScriptCompilationConfigurationKeys.completion
     get() = ReplCompletionOptionsBuilder()

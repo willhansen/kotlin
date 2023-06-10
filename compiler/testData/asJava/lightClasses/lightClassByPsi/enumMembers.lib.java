@@ -26,10 +26,10 @@ public enum Event /* Event*/ {
   public static final Event upTo(@org.jetbrains.annotations.NotNull() State);//  upTo(State)
 
   @org.jetbrains.annotations.NotNull()
-  public static Event valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static Event konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static Event[] values();//  values()
+  public static Event[] konstues();//  konstues()
 
   @org.jetbrains.annotations.NotNull()
   public static kotlin.enums.EnumEntries<Event> getEntries();//  getEntries()
@@ -51,10 +51,10 @@ public enum State /* State*/ {
   public static final State.Companion Companion;
 
   @org.jetbrains.annotations.NotNull()
-  public static State valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static State konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static State[] values();//  values()
+  public static State[] konstues();//  konstues()
 
   @org.jetbrains.annotations.NotNull()
   public static kotlin.enums.EnumEntries<State> getEntries();//  getEntries()

@@ -2,9 +2,9 @@
 // WITH_COROUTINES
 
 typealias AsyncFun = suspend () -> Unit
-val actions = arrayListOf<AsyncFun>()
+konst actions = arrayListOf<AsyncFun>()
 
-private class SyncFunAdapter(private val target: () -> Unit) : AsyncFun {
+private class SyncFunAdapter(private konst target: () -> Unit) : AsyncFun {
     override fun equals(other: Any?): Boolean {
         return if (other is SyncFunAdapter) {
             target == other.target
@@ -21,7 +21,7 @@ private class SyncFunAdapter(private val target: () -> Unit) : AsyncFun {
 }
 
 fun box(): String {
-    val x = SyncFunAdapter { }
+    konst x = SyncFunAdapter { }
     actions.add(x)
     if (!actions.remove(x)) return "FAIL 1"
 

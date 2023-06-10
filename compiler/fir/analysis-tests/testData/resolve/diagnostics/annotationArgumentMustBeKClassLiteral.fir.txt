@@ -4,7 +4,7 @@ FILE: annotationArgumentMustBeKClassLiteral.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/Array<kotlin/reflect/KClass<*>>| = R|<local>/a|
+        public final konst a: R|kotlin/Array<kotlin/reflect/KClass<*>>| = R|<local>/a|
             public get(): R|kotlin/Array<kotlin/reflect/KClass<*>>|
 
     }
@@ -14,7 +14,7 @@ FILE: annotationArgumentMustBeKClassLiteral.kt
         }
 
     }
-    public final val foo: R|kotlin/reflect/KClass<Foo>| = <getClass>(Q|Foo|)
+    public final konst foo: R|kotlin/reflect/KClass<Foo>| = <getClass>(Q|Foo|)
         public get(): R|kotlin/reflect/KClass<Foo>|
     public final fun bar(): R|kotlin/reflect/KClass<Foo>| {
         ^bar <getClass>(Q|Foo|)

@@ -11,7 +11,7 @@ import generators.unicode.mappings.oneToOne.patterns.MappingPattern
 
 internal class TitlecaseMappingsBuilder : MappingsBuilder() {
 
-    override fun mappingEquivalent(line: UnicodeDataLine): String? {
+    override fun mappingEquikonstent(line: UnicodeDataLine): String? {
         if (line.titlecaseMapping == line.uppercaseMapping) return null
         check(line.titlecaseMapping.isNotEmpty()) { "UnicodeData.txt format has changed!" }
         return line.titlecaseMapping

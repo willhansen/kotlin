@@ -31,38 +31,38 @@ suspend
     public
     internal open
  > (a : B) : A by b {
-    public protected private internal val abstract
-    val open
-    val enum
-    val open
-    val annotation
-    val override
-    val open
-    val abstract
-    val private
-    val protected
-    val public
-    val internal
-    val lazy
-    val wraps
-    val import
-    val where
-    val by
-    val get
-    val set
-    val public
-    val private
-    val protected
-    val internal
-    val field
-    val property
-    val receiver
-    val param
-    val setparam
-    val lateinit
-    val const
-    val suspend
-    val coroutine
+    public protected private internal konst abstract
+    konst open
+    konst enum
+    konst open
+    konst annotation
+    konst override
+    konst open
+    konst abstract
+    konst private
+    konst protected
+    konst public
+    konst internal
+    konst lazy
+    konst wraps
+    konst import
+    konst where
+    konst by
+    konst get
+    konst set
+    konst public
+    konst private
+    konst protected
+    konst internal
+    konst field
+    konst property
+    konst receiver
+    konst param
+    konst setparam
+    konst lateinit
+    konst const
+    konst suspend
+    konst coroutine
       get() = a
       set(S : s) {}
 
@@ -148,7 +148,7 @@ suspend
 }
 
 
-class F(val foo : bar,
+class F(konst foo : bar,
         abstract  : t,
         open   : t,
         enum      : t,

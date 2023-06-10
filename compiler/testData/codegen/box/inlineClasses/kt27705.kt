@@ -3,15 +3,15 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int) {
+konstue class Z(konst x: Int) {
     @Suppress("INNER_CLASS_INSIDE_VALUE_CLASS")
-    inner class Inner(val y: Int) {
-        val xx = x
+    inner class Inner(konst y: Int) {
+        konst xx = x
     }
 }
 
 fun box(): String {
-    val zi = Z(42).Inner(100)
+    konst zi = Z(42).Inner(100)
     if (zi.xx != 42) throw AssertionError()
     if (zi.y != 100) throw AssertionError()
 

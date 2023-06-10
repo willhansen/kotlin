@@ -2,17 +2,17 @@
 // FILE: lib.kt
 package lib
 
-class Provider<T>(val _value: T) {
+class Provider<T>(konst _konstue: T) {
     inline operator fun provideDelegate(thisRef: Any?, kProperty: Any?) =
-        Mut(_value)
+        Mut(_konstue)
 }
 
-class Mut<T>(var _value: T) {
+class Mut<T>(var _konstue: T) {
 
-    inline operator fun getValue(thisRef: Any?, kProperty: Any?) = _value
+    inline operator fun getValue(thisRef: Any?, kProperty: Any?) = _konstue
 
     inline operator fun setValue(thisRef: Any?, kProperty: Any?, newValue: T) {
-        _value = newValue
+        _konstue = newValue
     }
 }
 
@@ -21,24 +21,24 @@ class Mut<T>(var _value: T) {
 import lib.*
 
 class C {
-    val delegatedVal by Mut(1)
+    konst delegatedVal by Mut(1)
     var delegatedVar by Mut(2)
-    val delegatedValByProvider by Provider(1)
+    konst delegatedValByProvider by Provider(1)
     var delegatedVarByProvider by Provider(2)
 }
 
-val topLevelDelegatedVal by Mut(1)
+konst topLevelDelegatedVal by Mut(1)
 var topLevelDelegatedVar by Mut(2)
-val topLevelDelegatedValByProvider by Provider(1)
+konst topLevelDelegatedValByProvider by Provider(1)
 var topLevelDelegatedVarByProvider by Provider(2)
 
 fun box(): String {
-    val localDelegatedVal by Mut(1)
+    konst localDelegatedVal by Mut(1)
     var localDelegatedVar by Mut(2)
-    val localDelegatedValByProvider by Provider(1)
+    konst localDelegatedValByProvider by Provider(1)
     var localDelegatedVarByProvider by Provider(1)
 
-    val x = C()
+    konst x = C()
     if (x.delegatedVal != 1) throw AssertionError()
     if (x.delegatedVar != 2) throw AssertionError()
     x.delegatedVar = 3

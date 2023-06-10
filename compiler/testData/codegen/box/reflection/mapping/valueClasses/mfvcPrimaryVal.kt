@@ -7,60 +7,60 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 @JvmInline
-value class Z1(val publicX1: UInt, val publicX2: Int) {
+konstue class Z1(konst publicX1: UInt, konst publicX2: Int) {
     companion object {
-        val publicX1Ref = Z1::publicX1
-        val publicX2Ref = Z1::publicX2
-        val publicX1BoundRef = Z1(42U, -42)::publicX1
-        val publicX2BoundRef = Z1(42U, -42)::publicX2
+        konst publicX1Ref = Z1::publicX1
+        konst publicX2Ref = Z1::publicX2
+        konst publicX1BoundRef = Z1(42U, -42)::publicX1
+        konst publicX2BoundRef = Z1(42U, -42)::publicX2
     }
 }
 
 @JvmInline
-value class Z2(internal val internalX1: UInt, internal val internalX2: Int) {
+konstue class Z2(internal konst internalX1: UInt, internal konst internalX2: Int) {
     companion object {
-        val internalX1Ref = Z2::internalX1
-        val internalX2Ref = Z2::internalX2
-        val internalX1BoundRef = Z2(42U, -42)::internalX1
-        val internalX2BoundRef = Z2(42U, -42)::internalX2
+        konst internalX1Ref = Z2::internalX1
+        konst internalX2Ref = Z2::internalX2
+        konst internalX1BoundRef = Z2(42U, -42)::internalX1
+        konst internalX2BoundRef = Z2(42U, -42)::internalX2
     }
 }
 
 @JvmInline
-value class Z3(private val privateX1: UInt, private val privateX2: Int) {
+konstue class Z3(private konst privateX1: UInt, private konst privateX2: Int) {
     companion object {
-        val privateX1Ref = Z3::privateX1
-        val privateX2Ref = Z3::privateX2
-        val privateX1BoundRef = Z3(42U, -42)::privateX1
-        val privateX2BoundRef = Z3(42U, -42)::privateX2
+        konst privateX1Ref = Z3::privateX1
+        konst privateX2Ref = Z3::privateX2
+        konst privateX1BoundRef = Z3(42U, -42)::privateX1
+        konst privateX2BoundRef = Z3(42U, -42)::privateX2
     }
 }
 @JvmInline
-value class Z1_2(val publicX: Z1) {
+konstue class Z1_2(konst publicX: Z1) {
     companion object {
-        val publicXRef = Z1_2::publicX
-        val publicXBoundRef = Z1_2(Z1(42U, -42))::publicX
-    }
-}
-
-@JvmInline
-value class Z2_2(internal val internalX: Z2) {
-    companion object {
-        val internalXRef = Z2_2::internalX
-        val internalXBoundRef = Z2_2(Z2(42U, -42))::internalX
+        konst publicXRef = Z1_2::publicX
+        konst publicXBoundRef = Z1_2(Z1(42U, -42))::publicX
     }
 }
 
 @JvmInline
-value class Z3_2(private val privateX: Z3) {
+konstue class Z2_2(internal konst internalX: Z2) {
     companion object {
-        val privateXRef = Z3_2::privateX
-        val privateXBoundRef = Z3_2(Z3(42U, -42))::privateX
+        konst internalXRef = Z2_2::internalX
+        konst internalXBoundRef = Z2_2(Z2(42U, -42))::internalX
+    }
+}
+
+@JvmInline
+konstue class Z3_2(private konst privateX: Z3) {
+    companion object {
+        konst privateXRef = Z3_2::privateX
+        konst privateXBoundRef = Z3_2(Z3(42U, -42))::privateX
     }
 }
 
 fun box(): String {
-    val suffix = "-pVg5ArA"
+    konst suffix = "-pVg5ArA"
     assertEquals("getPublicX1$suffix", Z1.publicX1Ref.javaGetter!!.name)
     assertEquals("getPublicX2", Z1.publicX2Ref.javaGetter!!.name)
     assertEquals("getPublicX1$suffix", Z1.publicX1BoundRef.javaGetter!!.name)

@@ -14,7 +14,7 @@ class A {
 
     private fun method() = "O"
 
-    private val prop = "K"
+    private konst prop = "K"
 
     fun test1(): String {
         return call {
@@ -32,7 +32,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.test1() != "OK") return "fail 1: ${a.test1()}"
     return a.test2()
 }

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.test.services.isMjsFile
 import org.jetbrains.kotlin.test.services.moduleStructure
 
 class JsIrPathReplacer(testServices: TestServices) : DeclarationTransformer {
-    private val replacements = testServices.collectReplacementsMap()
+    private konst replacements = testServices.collectReplacementsMap()
 
     override fun lower(irFile: IrFile) {
         super.lower(irFile)
@@ -34,16 +34,16 @@ class JsIrPathReplacer(testServices: TestServices) : DeclarationTransformer {
     }
 
     private fun IrAnnotationContainer.replaceJsModulePath() {
-        val jsModuleAnnotation = getAnnotation(JsAnnotations.jsModuleFqn) ?: return
+        konst jsModuleAnnotation = getAnnotation(JsAnnotations.jsModuleFqn) ?: return
         @Suppress("UNCHECKED_CAST")
-        val stringLiteral = jsModuleAnnotation.getValueArgument(0) as IrConst<String>
-        val pathReplacement = stringLiteral.getReplacement() ?: return
+        konst stringLiteral = jsModuleAnnotation.getValueArgument(0) as IrConst<String>
+        konst pathReplacement = stringLiteral.getReplacement() ?: return
 
         jsModuleAnnotation.putValueArgument(0, pathReplacement)
     }
 
     private fun IrConst<String>.getReplacement(): IrConst<String>? {
-        val replacement = replacements[value] ?: replacements[value.replace("./", "")] ?: return null
+        konst replacement = replacements[konstue] ?: replacements[konstue.replace("./", "")] ?: return null
         return IrConstImpl.string(startOffset, endOffset, type, "./" + replacement.replace("./", ""))
     }
 

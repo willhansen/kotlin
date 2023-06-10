@@ -13,18 +13,18 @@ import org.jetbrains.kotlin.analysis.api.lifetime.withValidityAssertion
  * See: [KtContractBooleanExpression].
  */
 public class KtContractBinaryLogicExpression(
-    private val _left: KtContractBooleanExpression,
-    private val _right: KtContractBooleanExpression,
-    private val _operation: KtLogicOperation
+    private konst _left: KtContractBooleanExpression,
+    private konst _right: KtContractBooleanExpression,
+    private konst _operation: KtLogicOperation
 ) : KtContractBooleanExpression {
     init {
         check(left.token === right.token) { "$left and $right should have the same lifetime token" }
     }
 
-    override val token: KtLifetimeToken get() = _left.token
-    public val left: KtContractBooleanExpression get() = withValidityAssertion { _left }
-    public val right: KtContractBooleanExpression get() = withValidityAssertion { _right }
-    public val operation: KtLogicOperation get() = withValidityAssertion { _operation }
+    override konst token: KtLifetimeToken get() = _left.token
+    public konst left: KtContractBooleanExpression get() = withValidityAssertion { _left }
+    public konst right: KtContractBooleanExpression get() = withValidityAssertion { _right }
+    public konst operation: KtLogicOperation get() = withValidityAssertion { _operation }
 
     override fun hashCode(): Int = Objects.hashCode(_left, _right, _operation)
     override fun equals(other: Any?): Boolean =
@@ -38,9 +38,9 @@ public class KtContractBinaryLogicExpression(
 /**
  * See: [KtContractBooleanExpression].
  */
-public class KtContractLogicalNotExpression(private val _argument: KtContractBooleanExpression) : KtContractBooleanExpression {
-    override val token: KtLifetimeToken get() = _argument.token
-    public val argument: KtContractBooleanExpression get() = withValidityAssertion { _argument }
+public class KtContractLogicalNotExpression(private konst _argument: KtContractBooleanExpression) : KtContractBooleanExpression {
+    override konst token: KtLifetimeToken get() = _argument.token
+    public konst argument: KtContractBooleanExpression get() = withValidityAssertion { _argument }
 
     override fun equals(other: Any?): Boolean = other is KtContractLogicalNotExpression && other._argument == _argument
     override fun hashCode(): Int = _argument.hashCode()

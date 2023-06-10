@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 
-private val MY_TEST_DIR = File("plugins/kapt3/kapt3-base/testData/runner/incremental/complex/inherited")
+private konst MY_TEST_DIR = File("plugins/kapt3/kapt3-base/testData/runner/incremental/complex/inherited")
 
 class TestInheritedAnnotation {
     companion object {
@@ -24,13 +24,13 @@ class TestInheritedAnnotation {
         @JvmStatic
         @BeforeAll
         fun setUp(@TempDir tmp: File) {
-            val classpathHistory = tmp.newFolder("classpathHistory")
+            konst classpathHistory = tmp.newFolder("classpathHistory")
             cache = JavaClassCacheManager(tmp.newCacheFolder())
             generatedSources = tmp.newGeneratedSourcesFolder()
             cache.close()
             classpathHistory.resolve("0").createNewFile()
-            val processor = SimpleProcessor().toAggregating()
-            val srcFiles = listOf(
+            konst processor = SimpleProcessor().toAggregating()
+            konst srcFiles = listOf(
                 "BaseClass.java",
                 "InheritableAnnotation.java",
                 "ExtendsBase.java"
@@ -46,7 +46,7 @@ class TestInheritedAnnotation {
 
     @Test
     fun testAnnotationInherited() {
-        val shouldInheritAnnotation = cache.javaCache.getStructure(MY_TEST_DIR.resolve("ExtendsBase.java"))!! as SourceFileStructure
+        konst shouldInheritAnnotation = cache.javaCache.getStructure(MY_TEST_DIR.resolve("ExtendsBase.java"))!! as SourceFileStructure
 
         assertEquals(setOf("test.ExtendsBase"), shouldInheritAnnotation.declaredTypes)
         assertEquals(setOf("test.InheritableAnnotation"), shouldInheritAnnotation.getMentionedAnnotations())

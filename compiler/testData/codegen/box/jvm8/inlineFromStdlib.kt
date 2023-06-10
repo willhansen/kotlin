@@ -3,7 +3,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val list = listOf("O", "K")
+    konst list = listOf("O", "K")
     return list.fold("") {a, b -> a +b}
 }
 

@@ -1,5 +1,5 @@
 fun test1() {
-    val x: Int
+    konst x: Int
 
     fun func() {
         <!CAPTURED_VAL_INITIALIZATION!>x<!> = 0
@@ -10,8 +10,8 @@ fun test1() {
 
 
 fun test2() {
-    val x: Int
-    val y: Int
+    konst x: Int
+    konst y: Int
 
     object {
         init {
@@ -28,8 +28,8 @@ fun test2() {
 }
 
 fun test3() {
-    val x: Int
-    val y: Int
+    konst x: Int
+    konst y: Int
 
     class A {
         init {

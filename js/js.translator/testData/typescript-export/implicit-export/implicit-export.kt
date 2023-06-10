@@ -25,26 +25,26 @@ import qualified.CompileError
 
 interface NonExportedInterface
 interface NonExportedGenericInterface<T>
-open class NonExportedType(val value: Int)
-open class NonExportedGenericType<T>(val value: T)
+open class NonExportedType(konst konstue: Int)
+open class NonExportedGenericType<T>(konst konstue: T)
 
 @JsExport
 interface ExportedInterface
 
 @JsExport
-fun producer(value: Int): NonExportedType {
-    return NonExportedType(value)
+fun producer(konstue: Int): NonExportedType {
+    return NonExportedType(konstue)
 }
 
 @JsExport
-fun consumer(value: NonExportedType): Int {
-    return value.value
+fun consumer(konstue: NonExportedType): Int {
+    return konstue.konstue
 }
 
 @JsExport
-open class A(var value: NonExportedType) {
+open class A(var konstue: NonExportedType) {
     fun <T: NonExportedType> increment(t: T): NonExportedType {
-        return NonExportedType(value = t.value + 1)
+        return NonExportedType(konstue = t.konstue + 1)
     }
 }
 
@@ -80,11 +80,11 @@ fun bar(): Throwable {
 }
 
 @JsExport
-val console: Console
+konst console: Console
     get() = js("console")
 
 @JsExport
-val error: CompileError
+konst error: CompileError
     get() = js("{}")
 
 typealias NotExportedTypeAlias = NonExportedGenericInterface<NonExportedType>

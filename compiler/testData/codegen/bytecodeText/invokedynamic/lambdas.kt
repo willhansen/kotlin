@@ -4,9 +4,9 @@
 // LAMBDAS: INDY
 
 fun test(): String {
-    val lam = {
-        val lamO = { "O" }
-        val lamK = { "K" }
+    konst lam = {
+        konst lamO = { "O" }
+        konst lamK = { "K" }
         lamO() + lamK()
     }
     return lam()

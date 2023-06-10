@@ -24,7 +24,7 @@ public final class Scope {
 
     public final class WorkItem {
         public constructor WorkItem(/*0*/ block: suspend CoroutineScope.() -> kotlin.Unit)
-        public final val block: suspend CoroutineScope.() -> kotlin.Unit
+        public final konst block: suspend CoroutineScope.() -> kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

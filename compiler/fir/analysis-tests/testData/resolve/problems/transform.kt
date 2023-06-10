@@ -44,7 +44,7 @@ interface FirClass<F : FirClass<F>> : FirClassLikeDeclaration<F>, FirStatement, 
 private class FirApplySupertypesTransformer() : FirTransformer<Nothing?>()
 
 fun <F : FirClass<F>> F.runSupertypeResolvePhaseForLocalClass(): F {
-    val applySupertypesTransformer = FirApplySupertypesTransformer()
+    konst applySupertypesTransformer = FirApplySupertypesTransformer()
     return this.transform<F, Nothing?>(applySupertypesTransformer, null)
 }
 
@@ -63,12 +63,12 @@ abstract class FirVariable<F : FirVariable<F>> : FirPureAbstractElement(), FirCa
 }
 
 abstract class FirWhenExpression {
-    abstract val subjectVariable: FirVariable<*>?
+    abstract konst subjectVariable: FirVariable<*>?
 }
 
 class FirRenderer : FirVisitorVoid() {
     fun foo(expression: FirWhenExpression) {
-        val variable = expression.subjectVariable
+        konst variable = expression.subjectVariable
         if (variable != null) {
             variable.accept(this)
         }

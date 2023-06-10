@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.TargetEnvironment
 
 interface AbstractAnalyzerWithCompilerReport {
-    val targetEnvironment: TargetEnvironment
+    konst targetEnvironment: TargetEnvironment
 
-    val analysisResult: AnalysisResult
+    konst analysisResult: AnalysisResult
 
     fun analyzeAndReport(files: Collection<KtFile>, analyze: () -> AnalysisResult)
 

@@ -19,15 +19,15 @@ class JsWrongModuleHandler(testServices: TestServices) : JsBinaryArtifactHandler
     override fun processModule(module: TestModule, info: BinaryArtifacts.Js) {}
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
-        val originalFileName = testServices.moduleStructure.originalTestDataFiles.first().nameWithoutExtension
-        val parentDir = JsEnvironmentConfigurator.getJsArtifactsOutputDir(testServices)
-        val mainJsFile = File(parentDir, "${originalFileName}_v5.js").path
-        val libJsFile = File(parentDir, "$originalFileName-lib_v5.js").path
+        konst originalFileName = testServices.moduleStructure.originalTestDataFiles.first().nameWithoutExtension
+        konst parentDir = JsEnvironmentConfigurator.getJsArtifactsOutputDir(testServices)
+        konst mainJsFile = File(parentDir, "${originalFileName}_v5.js").path
+        konst libJsFile = File(parentDir, "$originalFileName-lib_v5.js").path
         try {
             getTestChecker(testServices).run(listOf(mainJsFile, libJsFile))
         } catch (e: RuntimeException) {
             testServices.assertions.assertTrue(e is IllegalStateException)
-            val message = e.message!!
+            konst message = e.message!!
 
             testServices.assertions.assertTrue("'lib'" in message) {
                 "Exception message should contain reference to dependency (lib)"

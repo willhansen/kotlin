@@ -3,7 +3,7 @@
 
 // TODO remove stdlib dependency
 
-class A(val list: List<String>) {
+class A(konst list: List<String>) {
     init {
         run {
             list.map { it }

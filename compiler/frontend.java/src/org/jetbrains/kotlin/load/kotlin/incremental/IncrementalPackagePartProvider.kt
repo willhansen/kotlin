@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.serialization.deserialization.ClassData
 import org.jetbrains.kotlin.serialization.deserialization.DeserializationConfiguration
 
 class IncrementalPackagePartProvider(
-    private val parent: PackagePartProvider,
+    private konst parent: PackagePartProvider,
     incrementalCaches: List<IncrementalCache>
 ) : PackagePartProvider {
 
@@ -38,7 +38,7 @@ class IncrementalPackagePartProvider(
         }
     }
 
-    private val moduleMappings by lazy {
+    private konst moduleMappings by lazy {
         incrementalCaches.map { cache ->
             ModuleMapping.loadModuleMapping(cache.getModuleMappingData(), "<incremental>", deserializationConfiguration) { version ->
                 // Incremental compilation should fall back to full rebuild if the minor component of the metadata version has changed
@@ -52,7 +52,7 @@ class IncrementalPackagePartProvider(
                 parent.findPackageParts(packageFqName)).distinct()
     }
 
-    private val allPackageNames: Set<String> by lazy {
+    private konst allPackageNames: Set<String> by lazy {
         buildSet {
             moduleMappings.flatMapTo(this@buildSet) { it.packageFqName2Parts.keys }
             addAll(parent.computePackageSetWithNonClassDeclarations())

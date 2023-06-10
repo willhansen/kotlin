@@ -5,7 +5,7 @@ interface T {
     fun foo(): String
 }
 
-class TImpl(val v: String) : T {
+class TImpl(konst v: String) : T {
     override fun foo() = v
 }
 

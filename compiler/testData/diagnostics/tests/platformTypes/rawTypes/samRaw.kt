@@ -5,7 +5,7 @@
 import java.util.List;
 
 public interface A<T> {
-    boolean value(T t);
+    boolean konstue(T t);
 }
 
 // FILE: B.java

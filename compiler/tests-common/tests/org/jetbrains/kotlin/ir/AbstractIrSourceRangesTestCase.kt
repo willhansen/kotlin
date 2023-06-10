@@ -27,11 +27,11 @@ import java.io.File
 
 abstract class AbstractIrSourceRangesTestCase : AbstractIrGeneratorTestCase() {
     override fun doTest(wholeFile: File, testFiles: List<TestFile>) {
-        val dir = wholeFile.parentFile
-        val testFileToIrFile = generateIrFilesAsSingleModule(testFiles)
+        konst dir = wholeFile.parentFile
+        konst testFileToIrFile = generateIrFilesAsSingleModule(testFiles)
         for ((testFile, irFile) in testFileToIrFile) {
-            val irFileDump = irFile.dumpWithSourceLocations(irFile.fileEntry)
-            val expectedSourceLocations = File(dir, testFile.name.replace(".kt", ".txt"))
+            konst irFileDump = irFile.dumpWithSourceLocations(irFile.fileEntry)
+            konst expectedSourceLocations = File(dir, testFile.name.replace(".kt", ".txt"))
             KotlinTestUtils.assertEqualsToFile(expectedSourceLocations, irFileDump)
         }
     }
@@ -43,13 +43,13 @@ abstract class AbstractIrSourceRangesTestCase : AbstractIrGeneratorTestCase() {
 
     private class DumpSourceLocations(
         out: Appendable,
-        val fileEntry: IrFileEntry
+        konst fileEntry: IrFileEntry
     ) : IrElementVisitorVoid {
-        val printer = Printer(out, "  ")
-        val elementRenderer = RenderIrElementVisitor()
+        konst printer = Printer(out, "  ")
+        konst elementRenderer = RenderIrElementVisitor()
 
         private fun printElement(element: IrElement) {
-            val sourceRangeInfo = fileEntry.getSourceRangeInfo(element.startOffset, element.endOffset)
+            konst sourceRangeInfo = fileEntry.getSourceRangeInfo(element.startOffset, element.endOffset)
             printer.println("@${sourceRangeInfo.render()} ${element.accept(elementRenderer, null)}")
         }
 

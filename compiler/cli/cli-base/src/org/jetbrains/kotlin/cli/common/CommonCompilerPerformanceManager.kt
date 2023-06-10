@@ -11,9 +11,9 @@ import java.lang.management.GarbageCollectorMXBean
 import java.lang.management.ManagementFactory
 import java.util.concurrent.TimeUnit
 
-abstract class CommonCompilerPerformanceManager(private val presentableName: String) {
+abstract class CommonCompilerPerformanceManager(private konst presentableName: String) {
     @Suppress("MemberVisibilityCanBePrivate")
-    protected val measurements: MutableList<PerformanceMeasurement> = mutableListOf()
+    protected konst measurements: MutableList<PerformanceMeasurement> = mutableListOf()
     protected var isEnabled: Boolean = false
     private var initStartNanos = PerformanceCounter.currentTime()
     private var analysisStart: Long = 0
@@ -69,7 +69,7 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
     }
 
     open fun notifyAnalysisFinished() {
-        val time = PerformanceCounter.currentTime() - analysisStart
+        konst time = PerformanceCounter.currentTime() - analysisStart
         measurements += CodeAnalysisMeasurement(lines, TimeUnit.NANOSECONDS.toMillis(time))
     }
 
@@ -78,7 +78,7 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
     }
 
     open fun notifyGenerationFinished() {
-        val time = PerformanceCounter.currentTime() - generationStart
+        konst time = PerformanceCounter.currentTime() - generationStart
         measurements += CodeGenerationMeasurement(lines, TimeUnit.NANOSECONDS.toMillis(time))
     }
 
@@ -87,7 +87,7 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
     }
 
     open fun notifyIRTranslationFinished() {
-        val time = deltaTime(irTranslationStart)
+        konst time = deltaTime(irTranslationStart)
         measurements += IRMeasurement(
             lines,
             TimeUnit.NANOSECONDS.toMillis(time),
@@ -100,7 +100,7 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
     }
 
     open fun notifyIRLoweringFinished() {
-        val time = deltaTime(irLoweringStart)
+        konst time = deltaTime(irLoweringStart)
         measurements += IRMeasurement(
             lines,
             TimeUnit.NANOSECONDS.toMillis(time),
@@ -113,7 +113,7 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
     }
 
     open fun notifyIRGenerationFinished() {
-        val time = deltaTime(irGenerationStart)
+        konst time = deltaTime(irGenerationStart)
         measurements += IRMeasurement(
             lines,
             TimeUnit.NANOSECONDS.toMillis(time),
@@ -129,9 +129,9 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
         if (!isEnabled) return
 
         ManagementFactory.getGarbageCollectorMXBeans().forEach {
-            val startCounts = startGCData[it.name]
-            val startCollectionTime = startCounts?.collectionTime ?: 0
-            val startCollectionCount = startCounts?.collectionCount ?: 0
+            konst startCounts = startGCData[it.name]
+            konst startCollectionTime = startCounts?.collectionTime ?: 0
+            konst startCollectionCount = startCounts?.collectionCount ?: 0
             measurements += GarbageCollectionMeasurement(
                 it.name,
                 it.collectionTime - startCollectionTime,
@@ -143,12 +143,12 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
     private fun recordJitCompilationTime() {
         if (!isEnabled) return
 
-        val bean = ManagementFactory.getCompilationMXBean() ?: return
+        konst bean = ManagementFactory.getCompilationMXBean() ?: return
         measurements += JitCompilationMeasurement(bean.totalCompilationTime)
     }
 
     private fun recordInitializationTime() {
-        val time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - initStartNanos)
+        konst time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - initStartNanos)
         measurements += CompilerInitializationMeasurement(time)
     }
 
@@ -163,12 +163,12 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
 
     open fun notifyRepeat(total: Int, number: Int) {}
 
-    private data class GCData(val name: String, val collectionTime: Long, val collectionCount: Long) {
+    private data class GCData(konst name: String, konst collectionTime: Long, konst collectionCount: Long) {
         constructor(bean: GarbageCollectorMXBean) : this(bean.name, bean.collectionTime, bean.collectionCount)
     }
 
     fun renderCompilerPerformance(): String {
-        val relevantMeasurements = getMeasurementResults().filter {
+        konst relevantMeasurements = getMeasurementResults().filter {
             it is CompilerInitializationMeasurement || it is CodeAnalysisMeasurement || it is CodeGenerationMeasurement || it is PerformanceCounterMeasurement
         }
 

@@ -4,8 +4,8 @@
 var log = ""
 
 fun test() {
-    val (a, _) = idAndLog(Pair(idAndLog(1), idAndLog(2)))
-    val (_, b) = idAndLog(Pair(idAndLog(3), idAndLog(4)))
+    konst (a, _) = idAndLog(Pair(idAndLog(1), idAndLog(2)))
+    konst (_, b) = idAndLog(Pair(idAndLog(3), idAndLog(4)))
     log += "result:$a,$b;"
 }
 

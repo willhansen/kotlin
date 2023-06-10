@@ -8,14 +8,14 @@ fun foo(): String = TODO("")
 @JsName("  ___  ")
 private fun bar(): String = TODO("")
 
-@JsName("validName")
+@JsName("konstidName")
 private fun ` .private with @JsName `(): String = TODO("")
 
 private class ` .private class ` {
-    val ` .field. ` = ""
+    konst ` .field. ` = ""
 }
 
-val x: Int
+konst x: Int
     @JsName(".")
     get() = TODO("")
 

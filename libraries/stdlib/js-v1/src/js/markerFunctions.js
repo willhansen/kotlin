@@ -51,8 +51,8 @@ Kotlin.andPredicate = function (a, b) {
 Kotlin.kotlinModuleMetadata = function (abiVersion, moduleName, data) {
 };
 
-Kotlin.suspendCall = function(value) {
-    return value;
+Kotlin.suspendCall = function(konstue) {
+    return konstue;
 };
 
 Kotlin.coroutineResult = function(qualifier) {
@@ -67,7 +67,7 @@ Kotlin.coroutineReceiver = function(qualifier) {
     throwMarkerError();
 };
 
-Kotlin.setCoroutineResult = function(value, qualifier) {
+Kotlin.setCoroutineResult = function(konstue, qualifier) {
     throwMarkerError();
 };
 

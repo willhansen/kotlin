@@ -5,13 +5,13 @@
 // TODO: muted automatically, investigate should it be ran for JS or not
 // IGNORE_BACKEND: JS
 
-class Foo(val s: String)
+class Foo(konst s: String)
 fun foo(): Foo? = Foo("OK")
 
 fun <T> run(f: () -> T): T = f()
 
-val foo: Foo = run {
-    val x = foo()
+konst foo: Foo = run {
+    konst x = foo()
     if (x == null) throw Exception()
     x
 }

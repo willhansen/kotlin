@@ -1,3 +1,3 @@
 class A {
-    val x = 0
+    konst x = 0
 }

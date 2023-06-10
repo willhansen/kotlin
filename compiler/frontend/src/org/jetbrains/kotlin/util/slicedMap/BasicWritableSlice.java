@@ -27,9 +27,9 @@ public class BasicWritableSlice<K, V> extends AbstractWritableSlice<K, V> {
         for (Field field : declarationOwner.getFields()) {
             if (!Modifier.isStatic(field.getModifiers())) continue;
             try {
-                Object value = field.get(null);
-                if (value instanceof BasicWritableSlice) {
-                    BasicWritableSlice slice = (BasicWritableSlice) value;
+                Object konstue = field.get(null);
+                if (konstue instanceof BasicWritableSlice) {
+                    BasicWritableSlice slice = (BasicWritableSlice) konstue;
                     slice.debugName = field.getName();
                 }
             } catch (IllegalAccessException e) {
@@ -56,21 +56,21 @@ public class BasicWritableSlice<K, V> extends AbstractWritableSlice<K, V> {
 
     // True to put, false to skip
     @Override
-    public boolean check(K key, V value) {
+    public boolean check(K key, V konstue) {
 //        assert key != null : this + " called with null key";
-        assert value != null : this + " called with null value";
+        assert konstue != null : this + " called with null konstue";
         return true;
     }
 
     @Override
-    public void afterPut(MutableSlicedMap map, K key, V value) {
+    public void afterPut(MutableSlicedMap map, K key, V konstue) {
         // Do nothing
     }
 
     @Override
-    public V computeValue(SlicedMap map, K key, V value, boolean valueNotFound) {
-        if (valueNotFound) assert value == null;
-        return value;
+    public V computeValue(SlicedMap map, K key, V konstue, boolean konstueNotFound) {
+        if (konstueNotFound) assert konstue == null;
+        return konstue;
     }
 
     @Override
@@ -99,9 +99,9 @@ public class BasicWritableSlice<K, V> extends AbstractWritableSlice<K, V> {
     public ReadOnlySlice<K, V> makeRawValueVersion() {
         return new DelegatingSlice<K, V>(this) {
             @Override
-            public V computeValue(SlicedMap map, K key, V value, boolean valueNotFound) {
-                if (valueNotFound) assert value == null;
-                return value;
+            public V computeValue(SlicedMap map, K key, V konstue, boolean konstueNotFound) {
+                if (konstueNotFound) assert konstue == null;
+                return konstue;
             }
         };
     }

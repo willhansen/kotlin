@@ -15,12 +15,12 @@
 // TESTCASE NUMBER: 1
 fun case_1() {
     checkSubtype<Any>("")
-    val x: Any = ""
+    konst x: Any = ""
     funWithAnyArg("")
     checkSubtype<Any>("""
         ………
     """)
-    val y: Any = """0"""
+    konst y: Any = """0"""
     funWithAnyArg("""
         =====
     """.trimIndent())
@@ -62,14 +62,14 @@ fun case_5() {
 // TESTCASE NUMBER: 6
 fun case_6() {
     checkSubtype<Any>({})
-    val z: Any = { x: Any -> println(x) }
+    konst z: Any = { x: Any -> println(x) }
     funWithAnyArg {}
 }
 
 // TESTCASE NUMBER: 7
 fun case_7() {
     checkSubtype<Any>(object {})
-    val z: Any = { x: Any -> object { val y = x } }(10)
+    konst z: Any = { x: Any -> object { konst y = x } }(10)
     funWithAnyArg(object : Comparable<Any> {
         override fun compareTo(other: Any) = TODO()
     })
@@ -78,21 +78,21 @@ fun case_7() {
 // TESTCASE NUMBER: 8
 fun case_8() {
     checkSubtype<Any>(object {}::class)
-    val z: Any = {}::class
+    konst z: Any = {}::class
     funWithAnyArg(0E0::class)
 }
 
 // TESTCASE NUMBER: 9
 fun case_9() {
     checkSubtype<Any>(object {}::class)
-    val z: Any = {}::class
+    konst z: Any = {}::class
     funWithAnyArg(0E0::class)
 }
 
 // TESTCASE NUMBER: 10
 fun case_10() {
     checkSubtype<Any>(0 + 0.0)
-    val z: Any = if (true) "" else '"'
+    konst z: Any = if (true) "" else '"'
     label@ <!UNUSED_LAMBDA_EXPRESSION!>{
         <!UNREACHABLE_CODE!>funWithAnyArg(<!>return@label<!UNREACHABLE_CODE!>)<!>
     }<!>
@@ -101,6 +101,6 @@ fun case_10() {
 // TESTCASE NUMBER: 11
 fun case_11() {
     checkSubtype<Any>(Any())
-    val z: Any = if (true) Any() else Any()
+    konst z: Any = if (true) Any() else Any()
     funWithAnyArg(Any())
 }

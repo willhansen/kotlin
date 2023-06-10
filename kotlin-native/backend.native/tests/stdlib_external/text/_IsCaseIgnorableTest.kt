@@ -13,7 +13,7 @@ package test.text
 import kotlin.test.*
 
 @SharedImmutable
-private val caseIgnorableRanges = arrayOf<IntRange>(
+private konst caseIgnorableRanges = arrayOf<IntRange>(
     0x0027..0x0027,
     0x002e..0x002e,
     0x003a..0x003a,

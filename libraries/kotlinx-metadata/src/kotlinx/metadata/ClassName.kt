@@ -16,7 +16,7 @@ package kotlinx.metadata
  * If this name starts with '.', it represents a local class or an anonymous object. This is used by the Kotlin compiler
  * to prevent lookup of this name in the resolution.
  */
-typealias ClassName = String // Not a value class because of Java usages
+typealias ClassName = String // Not a konstue class because of Java usages
 
 /**
  * Checks whether a class name [this] represents a local class or an anonymous object.
@@ -31,4 +31,4 @@ fun ClassName.isLocalClassName(): Boolean = this.startsWith(".")
     ReplaceWith("isLocalClassName()"),
     level = DeprecationLevel.WARNING
 )
-val ClassName.isLocal: Boolean get() = isLocalClassName()
+konst ClassName.isLocal: Boolean get() = isLocalClassName()

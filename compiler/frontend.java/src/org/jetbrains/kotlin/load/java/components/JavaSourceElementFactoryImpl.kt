@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.load.java.structure.JavaElement
 import org.jetbrains.kotlin.load.java.structure.impl.JavaElementImpl
 import org.jetbrains.kotlin.resolve.source.PsiSourceElement
 
-private class JavaSourceElementImpl(override val javaElement: JavaElement) : PsiSourceElement, JavaSourceElement {
-    override val psi: PsiElement?
+private class JavaSourceElementImpl(override konst javaElement: JavaElement) : PsiSourceElement, JavaSourceElement {
+    override konst psi: PsiElement?
         get() = (javaElement as? JavaElementImpl<*>)?.psi
 }
 

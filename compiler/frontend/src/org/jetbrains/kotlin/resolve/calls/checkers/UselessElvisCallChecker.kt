@@ -23,11 +23,11 @@ class UselessElvisCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (resolvedCall.resultingDescriptor.name != ControlStructureTypingUtils.ResolveConstruct.ELVIS.specialFunctionName) return
 
-        val elvisBinaryExpression = resolvedCall.call.callElement as? KtBinaryExpression ?: return
-        val left = elvisBinaryExpression.left ?: return
-        val right = elvisBinaryExpression.right ?: return
+        konst elvisBinaryExpression = resolvedCall.call.callElement as? KtBinaryExpression ?: return
+        konst left = elvisBinaryExpression.left ?: return
+        konst right = elvisBinaryExpression.right ?: return
 
-        val leftType = context.trace.getType(left) ?: return
+        konst leftType = context.trace.getType(left) ?: return
 
         // if type contains not fixed `TypeVariable` it means that call wasn't completed, we should wait for its completion first
         if (leftType.isError || leftType.contains { it.constructor is TypeVariableTypeConstructor }) return
@@ -37,7 +37,7 @@ class UselessElvisCallChecker : CallChecker {
             return
         }
 
-        val dataFlowValue = context.dataFlowValueFactory.createDataFlowValue(left, leftType, context.resolutionContext)
+        konst dataFlowValue = context.dataFlowValueFactory.createDataFlowValue(left, leftType, context.resolutionContext)
         if (context.dataFlowInfo.getStableNullability(dataFlowValue) == Nullability.NOT_NULL) {
             context.trace.reportDiagnosticOnce(Errors.USELESS_ELVIS.on(elvisBinaryExpression, leftType))
             return

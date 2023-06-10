@@ -20,25 +20,25 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 abstract class NumericForLoopHeader<T : NumericHeaderInfo>(
-    val headerInfo: T,
+    konst headerInfo: T,
     builder: DeclarationIrBuilder,
-    protected val context: CommonBackendContext
+    protected konst context: CommonBackendContext
 ) : ForLoopHeader {
 
-    override val consumesLoopVariableComponents = false
+    override konst consumesLoopVariableComponents = false
 
-    val inductionVariable: IrVariable
+    konst inductionVariable: IrVariable
 
-    protected val stepVariable: IrVariable?
-    val stepExpression: IrExpression
+    protected konst stepVariable: IrVariable?
+    konst stepExpression: IrExpression
 
-    protected val lastVariableIfCanCacheLast: IrVariable?
-    protected val lastExpression: IrExpression
+    protected konst lastVariableIfCanCacheLast: IrVariable?
+    protected konst lastExpression: IrExpression
         // If this is not `IrExpressionWithCopy`, then it is `<IrGetValue>.getSize()` built in `IndexedGetIterationHandler`.
         // It is therefore safe to deep-copy as it does not contain any functions or classes.
         get() = field.shallowCopyOrNull() ?: field.deepCopyWithSymbols()
 
-    protected val symbols = context.ir.symbols
+    protected konst symbols = context.ir.symbols
 
     init {
         with(builder) {
@@ -65,10 +65,10 @@ abstract class NumericForLoopHeader<T : NumericHeaderInfo>(
                 // they are non-nullable (the frontend takes care about this). So we need to cast
                 // them to non-nullable.
                 // TODO: Confirm if casting to non-nullable is still necessary
-                val last = headerInfo.last.asElementType()
+                konst last = headerInfo.last.asElementType()
 
                 if (headerInfo.canCacheLast) {
-                    val (variable, expression) = createLoopTemporaryVariableIfNecessary(last, nameHint = "last")
+                    konst (variable, expression) = createLoopTemporaryVariableIfNecessary(last, nameHint = "last")
                     lastVariableIfCanCacheLast = variable
                     lastExpression = expression.shallowCopy()
                 } else {
@@ -76,7 +76,7 @@ abstract class NumericForLoopHeader<T : NumericHeaderInfo>(
                     lastExpression = last
                 }
 
-                val (tmpStepVar, tmpStepExpression) =
+                konst (tmpStepVar, tmpStepExpression) =
                     createLoopTemporaryVariableIfNecessary(
                         ensureNotNullable(headerInfo.step.asStepType()),
                         nameHint = "step",
@@ -99,13 +99,13 @@ abstract class NumericForLoopHeader<T : NumericHeaderInfo>(
     protected fun incrementInductionVariable(builder: DeclarationIrBuilder): IrStatement = with(builder) {
         with(headerInfo.progressionType) {
             // inductionVariable = inductionVariable + step
-            // NOTE: We cannot use `stepExpression.type` to match the value parameter type because it may be of type `Nothing`.
+            // NOTE: We cannot use `stepExpression.type` to match the konstue parameter type because it may be of type `Nothing`.
             // This happens in the case of an illegal step where the "step" is actually a `throw IllegalArgumentException(...)`.
-            val stepType = stepClass.defaultType
-            val plusFun = elementClass.defaultType.getClass()!!.functions.single {
+            konst stepType = stepClass.defaultType
+            konst plusFun = elementClass.defaultType.getClass()!!.functions.single {
                 it.name == OperatorNameConventions.PLUS &&
-                        it.valueParameters.size == 1 &&
-                        it.valueParameters[0].type == stepType
+                        it.konstueParameters.size == 1 &&
+                        it.konstueParameters[0].type == stepType
             }
             irSet(
                 inductionVariable.symbol, irCallOp(
@@ -120,25 +120,25 @@ abstract class NumericForLoopHeader<T : NumericHeaderInfo>(
     protected fun buildLoopCondition(builder: DeclarationIrBuilder): IrExpression {
         with(builder) {
             with(headerInfo.progressionType) {
-                val builtIns = context.irBuiltIns
+                konst builtIns = context.irBuiltIns
 
                 // Bounds are signed for unsigned progressions but bound comparisons should be done as unsigned, to ensure that the
                 // correct comparison function is used (`UInt/ULongCompare`). Also, `compareTo` must be used for UInt/ULong;
                 // they don't have intrinsic comparison operators.
-                val intCompFun = if (headerInfo.isLastInclusive) {
+                konst intCompFun = if (headerInfo.isLastInclusive) {
                     builtIns.lessOrEqualFunByOperandType.getValue(builtIns.intClass)
                 } else {
                     builtIns.lessFunByOperandType.getValue(builtIns.intClass)
                 }
-                val unsignedCompareToFun = if (this is UnsignedProgressionType) {
+                konst unsignedCompareToFun = if (this is UnsignedProgressionType) {
                     unsignedType.getClass()!!.functions.single {
                         it.name == OperatorNameConventions.COMPARE_TO &&
                                 it.dispatchReceiverParameter != null && it.extensionReceiverParameter == null &&
-                                it.valueParameters.size == 1 && it.valueParameters[0].type == unsignedType
+                                it.konstueParameters.size == 1 && it.konstueParameters[0].type == unsignedType
                     }
                 } else null
 
-                val elementCompFun =
+                konst elementCompFun =
                     if (headerInfo.isLastInclusive) {
                         builtIns.lessOrEqualFunByOperandType[elementClass.symbol]
                     } else {
@@ -184,7 +184,7 @@ abstract class NumericForLoopHeader<T : NumericHeaderInfo>(
                     ProgressionDirection.DECREASING -> conditionForDecreasing()
                     ProgressionDirection.INCREASING -> conditionForIncreasing()
                     ProgressionDirection.UNKNOWN -> {
-                        // If the direction is unknown, we check depending on the "step" value:
+                        // If the direction is unknown, we check depending on the "step" konstue:
                         //   // (use `<` if last is exclusive)
                         //   (step > 0 && inductionVar <= last) || (step < 0 || last <= inductionVar)
                         context.oror(

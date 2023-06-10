@@ -2,5 +2,5 @@
   ~foo~fun foo() = A()
 }
 
-val a: Int by `A`A().`foo`foo()
+konst a: Int by `A`A().`foo`foo()
 

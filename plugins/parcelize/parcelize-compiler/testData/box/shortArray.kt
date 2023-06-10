@@ -9,16 +9,16 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-class A(val value: ShortArray) : Parcelable
+class A(konst konstue: ShortArray) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val a = A(shortArrayOf(0, 1, 2, 3))
+    konst a = A(shortArrayOf(0, 1, 2, 3))
     a.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val a2 = parcelableCreator<A>().createFromParcel(parcel)
-    assert(a.value.contentEquals(a2.value))
+    konst a2 = parcelableCreator<A>().createFromParcel(parcel)
+    assert(a.konstue.contentEquals(a2.konstue))
 }

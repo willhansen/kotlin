@@ -1,5 +1,5 @@
 fun WithCompanion.test() {
-  val test1: <no name provided> = { // BLOCK
+  konst test1: <no name provided> = { // BLOCK
     local class <no name provided> : WithCompanion {
       constructor() /* primary */ {
         super/*WithCompanion*/(a = Companion)
@@ -11,7 +11,7 @@ fun WithCompanion.test() {
 
     <no name provided>()
   }
-  val test2: <no name provided> = { // BLOCK
+  konst test2: <no name provided> = { // BLOCK
     local class <no name provided> : WithCompanion {
       constructor() /* primary */ {
         super/*WithCompanion*/(a = Companion.foo())

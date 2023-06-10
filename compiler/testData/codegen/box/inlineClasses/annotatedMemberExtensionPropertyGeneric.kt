@@ -6,11 +6,11 @@
 annotation class Anno
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: String>(val s: T)
+konstue class Z<T: String>(konst s: T)
 
 class A {
     @Anno
-    val Z<String>.r: String get() = s
+    konst Z<String>.r: String get() = s
 }
 
 fun box(): String {

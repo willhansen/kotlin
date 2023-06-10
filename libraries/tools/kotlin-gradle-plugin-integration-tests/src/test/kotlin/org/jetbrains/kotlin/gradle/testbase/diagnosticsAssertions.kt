@@ -22,7 +22,7 @@ fun BaseGradleIT.CompiledProject.assertNoDiagnostic(diagnosticFactory: ToolingDi
 }
 
 fun String.assertHasDiagnostic(diagnosticFactory: ToolingDiagnosticFactory, withSubstring: String? = null) {
-    val diagnosticMessage = extractVerboselyRenderedDiagnostic(diagnosticFactory, this)
+    konst diagnosticMessage = extractVerboselyRenderedDiagnostic(diagnosticFactory, this)
     assertNotNull(diagnosticMessage) { "Diagnostic with id=${diagnosticFactory.id} not found" }
     if (withSubstring != null) {
         assertTrue(
@@ -35,7 +35,7 @@ fun String.assertHasDiagnostic(diagnosticFactory: ToolingDiagnosticFactory, with
 }
 
 fun String.assertNoDiagnostic(diagnosticFactory: ToolingDiagnosticFactory) {
-    val diagnosticMessage = extractVerboselyRenderedDiagnostic(diagnosticFactory, this)
+    konst diagnosticMessage = extractVerboselyRenderedDiagnostic(diagnosticFactory, this)
     assertNull(
         diagnosticMessage,
         "Diagnostic with id=${diagnosticFactory.id} was expected to be absent, but was reported. " +
@@ -90,7 +90,7 @@ fun BuildResult.extractProjectsAndTheirVerboseDiagnostics(): String = buildStrin
 Expected format
       w: [DIAGNOSTIC_ID | WARNING] first line of diagnostic's text
  */
-private val DIAGNOSTIC_START_REGEX = """\s*[we]:\s*\[[^\[]*].*""".toRegex()
+private konst DIAGNOSTIC_START_REGEX = """\s*[we]:\s*\[[^\[]*].*""".toRegex()
 
 
 /*
@@ -113,15 +113,15 @@ private val DIAGNOSTIC_START_REGEX = """\s*[we]:\s*\[[^\[]*].*""".toRegex()
          Text"
   */
 private fun extractVerboselyRenderedDiagnostic(diagnostic: ToolingDiagnosticFactory, fromText: String): String? {
-    val diagnosticStartIndex = fromText.indexOf("[${diagnostic.id}")
+    konst diagnosticStartIndex = fromText.indexOf("[${diagnostic.id}")
     if (diagnosticStartIndex == -1) return null
 
-    val diagnosticHeaderEnd = fromText.indexOf("]", startIndex = diagnosticStartIndex)
-    val diagnosticMessageStart = diagnosticHeaderEnd + 1
+    konst diagnosticHeaderEnd = fromText.indexOf("]", startIndex = diagnosticStartIndex)
+    konst diagnosticMessageStart = diagnosticHeaderEnd + 1
 
-    val diagnosticSeparatorStartIndex = fromText.indexOf(VERBOSE_DIAGNOSTIC_SEPARATOR, startIndex = diagnosticStartIndex)
+    konst diagnosticSeparatorStartIndex = fromText.indexOf(VERBOSE_DIAGNOSTIC_SEPARATOR, startIndex = diagnosticStartIndex)
     // NB: substring's endIndex is exclusive, which gives us exactly the message
     return fromText.substring(diagnosticMessageStart, diagnosticSeparatorStartIndex).trim { it.isWhitespace() || it == '\n' }
 }
 
-private const val CONFIGURE_PROJECT_PREFIX = "> Configure project"
+private const konst CONFIGURE_PROJECT_PREFIX = "> Configure project"

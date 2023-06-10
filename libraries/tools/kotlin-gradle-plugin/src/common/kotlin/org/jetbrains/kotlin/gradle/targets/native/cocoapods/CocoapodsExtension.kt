@@ -21,7 +21,7 @@ import java.net.URI
 import javax.inject.Inject
 
 @Suppress("unused", "MemberVisibilityCanBePrivate") // Public API
-abstract class CocoapodsExtension @Inject constructor(private val project: Project) {
+abstract class CocoapodsExtension @Inject constructor(private konst project: Project) {
     /**
      * Configure version of the pod
      */
@@ -104,30 +104,30 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
         forAllPodFrameworks(configure)
     }
 
-    val ios: PodspecPlatformSettings = PodspecPlatformSettings("ios")
+    konst ios: PodspecPlatformSettings = PodspecPlatformSettings("ios")
 
-    val osx: PodspecPlatformSettings = PodspecPlatformSettings("osx")
+    konst osx: PodspecPlatformSettings = PodspecPlatformSettings("osx")
 
-    val tvos: PodspecPlatformSettings = PodspecPlatformSettings("tvos")
+    konst tvos: PodspecPlatformSettings = PodspecPlatformSettings("tvos")
 
-    val watchos: PodspecPlatformSettings = PodspecPlatformSettings("watchos")
+    konst watchos: PodspecPlatformSettings = PodspecPlatformSettings("watchos")
 
-    private val anyPodFramework = project.provider {
-        val anyTarget = project.multiplatformExtension.supportedTargets().first()
-        val anyFramework = anyTarget.binaries
+    private konst anyPodFramework = project.provider {
+        konst anyTarget = project.multiplatformExtension.supportedTargets().first()
+        konst anyFramework = anyTarget.binaries
             .matching { it.name.startsWith(POD_FRAMEWORK_PREFIX) }
             .withType(Framework::class.java)
             .first()
         anyFramework
     }
 
-    internal val podFrameworkName = anyPodFramework.map { it.baseName.asValidFrameworkName() }
-    internal val podFrameworkIsStatic = anyPodFramework.map { it.isStatic }
+    internal konst podFrameworkName = anyPodFramework.map { it.baseName.asValidFrameworkName() }
+    internal konst podFrameworkIsStatic = anyPodFramework.map { it.isStatic }
 
     /**
      * Configure custom Xcode Configurations to Native Build Types mapping
      */
-    val xcodeConfigurationToNativeBuildType: MutableMap<String, NativeBuildType> = mutableMapOf(
+    konst xcodeConfigurationToNativeBuildType: MutableMap<String, NativeBuildType> = mutableMapOf(
         "Debug" to NativeBuildType.DEBUG,
         "Release" to NativeBuildType.RELEASE
     )
@@ -137,17 +137,17 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
      */
     var publishDir: File = CocoapodsBuildDirs(project).publish
 
-    internal val specRepos = SpecRepos()
+    internal konst specRepos = SpecRepos()
 
-    private val _pods = project.container(CocoapodsDependency::class.java)
+    private konst _pods = project.container(CocoapodsDependency::class.java)
 
-    val podsAsTaskInput: List<CocoapodsDependency>
+    konst podsAsTaskInput: List<CocoapodsDependency>
         get() = _pods.toList()
 
     /**
      * Returns a list of pod dependencies.
      */
-    val pods: NamedDomainObjectSet<CocoapodsDependency>
+    konst pods: NamedDomainObjectSet<CocoapodsDependency>
         get() = _pods
 
     /**
@@ -170,13 +170,13 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
         require(name.isNotEmpty()) { "Please provide not empty pod name to avoid ambiguity" }
         var podSource = path
         if (path != null && !path.isDirectory) {
-            val pattern = "\\W*pod(.*\"${name}\".*)".toRegex()
-            val buildScript = project.buildFile
-            val lines = buildScript.readLines()
-            val lineNumber = lines.indexOfFirst { pattern.matches(it) }
-            val warnMessage = if (lineNumber != -1) run {
-                val lineContent = lines[lineNumber].trimIndent()
-                val newContent = lineContent.replace(path.name, "")
+            konst pattern = "\\W*pod(.*\"${name}\".*)".toRegex()
+            konst buildScript = project.buildFile
+            konst lines = buildScript.readLines()
+            konst lineNumber = lines.indexOfFirst { pattern.matches(it) }
+            konst warnMessage = if (lineNumber != -1) run {
+                konst lineContent = lines[lineNumber].trimIndent()
+                konst newContent = lineContent.replace(path.name, "")
                 """
                 |Deprecated DSL found on ${buildScript.absolutePath}${File.pathSeparator}${lineNumber + 1}:
                 |Found: "${lineContent}"
@@ -215,7 +215,7 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
         // Empty string will lead to an attempt to create two podDownload tasks.
         // One is original podDownload and second is podDownload + pod.name
         require(name.isNotEmpty()) { "Please provide not empty pod name to avoid ambiguity" }
-        val dependency = project.objects.newInstance(CocoapodsDependency::class.java, name, name.asModuleName())
+        konst dependency = project.objects.newInstance(CocoapodsDependency::class.java, name, name.asModuleName())
         dependency.configure()
         addToPods(dependency)
     }
@@ -228,7 +228,7 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
     }
 
     private fun addToPods(dependency: CocoapodsDependency) {
-        val name = dependency.name
+        konst name = dependency.name
         check(_pods.findByName(name) == null) { "Project already has a CocoaPods dependency with name $name" }
         _pods.add(dependency)
     }
@@ -260,7 +260,7 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
     }
 
     abstract class CocoapodsDependency @Inject constructor(
-        private val name: String,
+        private konst name: String,
         @get:Input var moduleName: String
     ) : Named {
 
@@ -286,7 +286,7 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
          * Designates that the pod will be used only for dynamic framework linking and not for the cinterops. Code from it won't be
          * accessible for referencing from Kotlin but its native symbols will be visible while linking the framework.
          *
-         * For static frameworks adding this flag is equivalent to removing the pod dependency entirely (because pods are not used for
+         * For static frameworks adding this flag is equikonstent to removing the pod dependency entirely (because pods are not used for
          * static framework linking).
          */
         @get:Input
@@ -298,7 +298,7 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
          * @see useInteropBindingFrom
          */
         @get:Input
-        val interopBindingDependencies: MutableList<String> = mutableListOf()
+        konst interopBindingDependencies: MutableList<String> = mutableListOf()
 
         /**
          * Specify that the pod depends on another pod **podName** and a Kotlin-binding for **podName** should be used while building
@@ -331,7 +331,7 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
          */
         @JvmOverloads
         fun git(url: String, configure: (Git.() -> Unit)? = null): PodLocation {
-            val git = Git(URI(url))
+            konst git = Git(URI(url))
             if (configure != null) {
                 git.configure()
             }
@@ -352,13 +352,13 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
             data class Path(
                 @get:InputDirectory
                 @get:IgnoreEmptyDirectories
-                val dir: File
+                konst dir: File
             ) : PodLocation() {
                 override fun getPodSourcePath() = ":path => '${dir.absolutePath}'"
             }
 
             data class Git(
-                @get:Input val url: URI,
+                @get:Input konst url: URI,
                 @get:Input @get:Optional var branch: String? = null,
                 @get:Input @get:Optional var tag: String? = null,
                 @get:Input @get:Optional var commit: String? = null
@@ -376,7 +376,7 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
     }
 
     data class PodspecPlatformSettings(
-        private val name: String,
+        private konst name: String,
         @get:Optional @get:Input var deploymentTarget: String? = null
     ) : Named {
 
@@ -386,7 +386,7 @@ abstract class CocoapodsExtension @Inject constructor(private val project: Proje
 
     class SpecRepos {
         @get:Internal
-        internal val specRepos = mutableSetOf("https://cdn.cocoapods.org")
+        internal konst specRepos = mutableSetOf("https://cdn.cocoapods.org")
 
         fun url(url: String) {
             specRepos.add(url)

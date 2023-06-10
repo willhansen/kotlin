@@ -10,9 +10,9 @@ suspend fun suspendThere(v: String): String = suspendCoroutineUninterceptedOrRet
 }
 
 suspend fun suspendHere(): String {
-    val k = "K"
-    val x = suspendThere("O")
-    val y = x + suspendThere(k)
+    konst k = "K"
+    konst x = suspendThere("O")
+    konst y = x + suspendThere(k)
 
     return y
 }

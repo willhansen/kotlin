@@ -10,11 +10,11 @@ function assert(condition: boolean) {
 }
 
 function box(): string {
-    assert(processInterface(new TestInterfaceImpl("bar")) === "Owner TestInterfaceImpl has value 'bar'")
-    assert(processInterface(new ChildTestInterfaceImpl()) === "Owner TestInterfaceImpl has value 'Test'")
+    assert(processInterface(new TestInterfaceImpl("bar")) === "Owner TestInterfaceImpl has konstue 'bar'")
+    assert(processInterface(new ChildTestInterfaceImpl()) === "Owner TestInterfaceImpl has konstue 'Test'")
 
     // @ts-expect-error "Just test that this code will throw compilation error for a user"
-    assert(processInterface({ value: "bar", getOwnerName: () => "RandomObject" }) === "Owner RandomObject has value 'bar'")
+    assert(processInterface({ konstue: "bar", getOwnerName: () => "RandomObject" }) === "Owner RandomObject has konstue 'bar'")
 
     assert(processOptionalInterface({ required: 4 }) == "4unknown")
     assert(processOptionalInterface({ required: 4, notRequired: null }) == "4unknown")

@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.test.utils
 import org.jetbrains.kotlin.test.model.TestModule
 
 // TODO: consider about tests with multiple testdata files
-class MultiModuleInfoDumper(private val moduleHeaderTemplate: String? = "Module: %s") {
-    private val builderByModule = LinkedHashMap<String, StringBuilder>()
+class MultiModuleInfoDumper(private konst moduleHeaderTemplate: String? = "Module: %s") {
+    private konst builderByModule = LinkedHashMap<String, StringBuilder>()
 
     fun builderForModule(module: TestModule): StringBuilder = builderForModule(module.name)
 
@@ -18,7 +18,7 @@ class MultiModuleInfoDumper(private val moduleHeaderTemplate: String? = "Module:
     }
 
     fun generateResultingDump(): String {
-        builderByModule.values.singleOrNull()?.let {
+        builderByModule.konstues.singleOrNull()?.let {
             it.addNewLineIfNeeded()
             return it.toString()
         }

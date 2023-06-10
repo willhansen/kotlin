@@ -11,6 +11,6 @@ class A {
 
 <!WRONG_MODIFIER_TARGET!>annotation<!> fun f() = 0
 
-<!WRONG_MODIFIER_TARGET!>annotation<!> val x = 0
+<!WRONG_MODIFIER_TARGET!>annotation<!> konst x = 0
 
 <!WRONG_MODIFIER_TARGET!>annotation<!> var y = 0

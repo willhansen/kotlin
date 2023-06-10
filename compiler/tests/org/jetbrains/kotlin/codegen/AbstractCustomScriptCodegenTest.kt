@@ -31,7 +31,7 @@ import kotlin.script.experimental.jvm.util.scriptCompilationClasspathFromContext
 abstract class AbstractCustomScriptCodegenTest : CodegenTestCase() {
     private lateinit var scriptDefinitions: List<String>
 
-    override val backend = TargetBackend.JVM_OLD
+    override konst backend = TargetBackend.JVM_OLD
 
     override fun setUp() {
         super.setUp()
@@ -62,8 +62,8 @@ abstract class AbstractCustomScriptCodegenTest : CodegenTestCase() {
             return
         }
 
-        val file = files.single()
-        val content = file.content
+        konst file = files.single()
+        konst content = file.content
 
         scriptDefinitions = InTextDirectivesUtils.findListWithPrefixes(content, "KOTLIN_SCRIPT_DEFINITION:")
         if (scriptDefinitions.isNotEmpty()) {
@@ -83,15 +83,15 @@ abstract class AbstractCustomScriptCodegenTest : CodegenTestCase() {
         myFiles = CodegenTestFiles.create(file.name, content, myEnvironment.project)
 
         try {
-            val scriptClass = generateClass(myFiles.psiFile.script!!.fqName.asString())
+            konst scriptClass = generateClass(myFiles.psiFile.script!!.fqName.asString())
 
             // TODO: add types to receivers, envVars and params
-            val receivers = InTextDirectivesUtils.findListWithPrefixes(content, "receiver:")
-            val environmentVars = extractAllKeyValPairs(content, "envVar:")
-            val scriptParams = InTextDirectivesUtils.findListWithPrefixes(content, "param:")
-            val scriptInstance = runScript(scriptClass, receivers, environmentVars, scriptParams)
+            konst receivers = InTextDirectivesUtils.findListWithPrefixes(content, "receiver:")
+            konst environmentVars = extractAllKeyValPairs(content, "envVar:")
+            konst scriptParams = InTextDirectivesUtils.findListWithPrefixes(content, "param:")
+            konst scriptInstance = runScript(scriptClass, receivers, environmentVars, scriptParams)
 
-            val expectedFields = extractAllKeyValPairs(content, "expected:")
+            konst expectedFields = extractAllKeyValPairs(content, "expected:")
             checkExpectedFields(expectedFields, scriptClass, scriptInstance)
         } catch (e: Throwable) {
             printReport(wholeFile)
@@ -106,12 +106,12 @@ abstract class AbstractCustomScriptCodegenTest : CodegenTestCase() {
 
     private fun runScript(scriptClass: Class<*>, receivers: List<Any?>, environmentVars: Map<String, Any?>, scriptParams: List<Any>): Any? {
 
-        val ctorParams = arrayListOf<Any?>()
+        konst ctorParams = arrayListOf<Any?>()
         ctorParams.addAll(scriptParams)
         ctorParams.addAll(receivers)
-        ctorParams.addAll(environmentVars.values)
+        ctorParams.addAll(environmentVars.konstues)
 
-        val constructor = scriptClass.constructors[0]
+        konst constructor = scriptClass.constructors[0]
         return constructor.newInstance(*ctorParams.toTypedArray())
     }
 
@@ -129,16 +129,16 @@ abstract class AbstractCustomScriptCodegenTest : CodegenTestCase() {
                 }
             }
 
-            val field = scriptClass.getDeclaredField(fieldName)
+            konst field = scriptClass.getDeclaredField(fieldName)
             field.isAccessible = true
-            val resultString = field.get(scriptInstance)?.toString() ?: "null"
+            konst resultString = field.get(scriptInstance)?.toString() ?: "null"
             Assert.assertEquals("comparing field $fieldName", expectedValue, resultString)
         }
     }
 }
 
 abstract class AbstractIrCustomScriptCodegenTest : AbstractCustomScriptCodegenTest() {
-    override val backend: TargetBackend = TargetBackend.JVM_IR
+    override konst backend: TargetBackend = TargetBackend.JVM_IR
 }
 
 object TestScriptWithReceiversConfiguration : ScriptCompilationConfiguration(
@@ -161,8 +161,8 @@ abstract class TestScriptWithSimpleEnvVars
 
 @Suppress("unused")
 @KotlinScript(fileExtension = "customext")
-abstract class TestScriptWithNonKtsExtension(val name: String)
+abstract class TestScriptWithNonKtsExtension(konst name: String)
 
 @Suppress("unused")
 @KotlinScript(filePathPattern = "(.*/)?pathPattern[0-9]\\..+")
-abstract class TestScriptWithPathPattern(val name2: String)
+abstract class TestScriptWithPathPattern(konst name2: String)

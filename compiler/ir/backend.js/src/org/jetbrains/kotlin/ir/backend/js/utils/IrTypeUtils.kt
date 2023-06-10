@@ -48,14 +48,14 @@ private fun IrClassifierSymbol.asString() = when (this) {
     is IrScriptSymbol -> unexpectedSymbolKind<IrClassifierSymbol>()
 }
 
-tailrec fun erase(type: IrType): IrClass? = when (val classifier = type.classifierOrFail) {
+tailrec fun erase(type: IrType): IrClass? = when (konst classifier = type.classifierOrFail) {
     is IrClassSymbol -> classifier.owner
     is IrTypeParameterSymbol -> erase(classifier.owner.superTypes.first())
     is IrScriptSymbol -> null
 }
 
 fun IrType.getClassRef(context: JsGenerationContext): JsNameRef =
-    when (val klass = classifierOrFail.owner) {
+    when (konst klass = classifierOrFail.owner) {
         is IrClass ->
             if (klass.isEffectivelyExternal())
                 context.getRefForExternalClass(klass)

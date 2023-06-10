@@ -16,9 +16,9 @@ fun foo(s: String?): String {
 
 fun box(): String {
     var result = "NOK"
-    val b = foo("")
+    konst b = foo("")
     try {
-        val a = foo(null)
+        konst a = foo(null)
     } catch (e: IllegalArgumentException) {
         result = "OK"
     }

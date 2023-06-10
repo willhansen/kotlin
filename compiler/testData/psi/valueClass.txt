@@ -1,4 +1,4 @@
-KtFile: valueClass.kt
+KtFile: konstueClass.kt
   PACKAGE_DIRECTIVE
     <empty list>
   IMPORT_LIST
@@ -6,14 +6,14 @@ KtFile: valueClass.kt
   CLASS
     PsiElement(class)('class')
     PsiWhiteSpace(' ')
-    PsiElement(IDENTIFIER)('value')
+    PsiElement(IDENTIFIER)('konstue')
   PsiWhiteSpace(' ')
   PsiErrorElement:Expecting a top level declaration
     PsiElement(IDENTIFIER)('Foo')
   PsiWhiteSpace('\n\n')
   CLASS
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
       PsiWhiteSpace(' ')
       PsiElement(private)('private')
     PsiWhiteSpace(' ')
@@ -23,7 +23,7 @@ KtFile: valueClass.kt
   PsiWhiteSpace('\n\n')
   CLASS
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
       PsiWhiteSpace(' ')
       ANNOTATION_ENTRY
         PsiElement(AT)('@')
@@ -39,7 +39,7 @@ KtFile: valueClass.kt
   PsiWhiteSpace('\n\n')
   CLASS
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(interface)('interface')
     PsiWhiteSpace(' ')
@@ -47,7 +47,7 @@ KtFile: valueClass.kt
   PsiWhiteSpace('\n\n')
   CLASS
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
       PsiWhiteSpace(' ')
       PsiElement(abstract)('abstract')
     PsiWhiteSpace(' ')
@@ -57,7 +57,7 @@ KtFile: valueClass.kt
   PsiWhiteSpace('\n\n')
   OBJECT_DECLARATION
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(object)('object')
     PsiWhiteSpace(' ')
@@ -65,7 +65,7 @@ KtFile: valueClass.kt
   PsiWhiteSpace('\n\n')
   FUN
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(fun)('fun')
     PsiWhiteSpace(' ')
@@ -79,7 +79,7 @@ KtFile: valueClass.kt
   PsiWhiteSpace('\n\n')
   CLASS
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(class)('class')
     PsiWhiteSpace(' ')
@@ -87,7 +87,7 @@ KtFile: valueClass.kt
   PsiWhiteSpace('\n\n')
   CLASS
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(class)('class')
     PsiWhiteSpace(' ')
@@ -97,7 +97,7 @@ KtFile: valueClass.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('l')
         PsiWhiteSpace(' ')
@@ -120,7 +120,7 @@ KtFile: valueClass.kt
     MODIFIER_LIST
       PsiElement(private)('private')
       PsiWhiteSpace(' ')
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(class)('class')
     PsiWhiteSpace(' ')
@@ -130,7 +130,7 @@ KtFile: valueClass.kt
     MODIFIER_LIST
       PsiElement(expect)('expect')
       PsiWhiteSpace(' ')
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(class)('class')
     PsiWhiteSpace(' ')
@@ -140,7 +140,7 @@ KtFile: valueClass.kt
     MODIFIER_LIST
       PsiElement(actual)('actual')
       PsiWhiteSpace(' ')
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(class)('class')
     PsiWhiteSpace(' ')
@@ -156,7 +156,7 @@ KtFile: valueClass.kt
               REFERENCE_EXPRESSION
                 PsiElement(IDENTIFIER)('Bar')
       PsiWhiteSpace(' ')
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace(' ')
     PsiElement(class)('class')
     PsiWhiteSpace(' ')
@@ -172,7 +172,7 @@ KtFile: valueClass.kt
       PsiWhiteSpace('\n    ')
       CLASS
         MODIFIER_LIST
-          PsiElement(value)('value')
+          PsiElement(konstue)('konstue')
         PsiWhiteSpace(' ')
         PsiElement(class)('class')
         PsiWhiteSpace(' ')
@@ -182,7 +182,7 @@ KtFile: valueClass.kt
   PsiWhiteSpace('\n\n')
   CLASS
     MODIFIER_LIST
-      PsiElement(value)('value')
+      PsiElement(konstue)('konstue')
     PsiWhiteSpace('\n')
     PsiElement(class)('class')
     PsiWhiteSpace(' ')

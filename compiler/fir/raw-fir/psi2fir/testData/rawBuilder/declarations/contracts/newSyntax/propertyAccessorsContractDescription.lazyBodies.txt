@@ -10,7 +10,7 @@ FILE: propertyAccessorsContractDescription.kt
                     LAZY_EXPRESSION
                 >
              { LAZY_BLOCK }
-            public? set(value: Int): R|kotlin/Unit| { LAZY_BLOCK }
+            public? set(konstue: Int): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
     public? final? class AnotherClass : R|kotlin/Any| {
@@ -24,7 +24,7 @@ FILE: propertyAccessorsContractDescription.kt
                     LAZY_EXPRESSION
                 >
              { LAZY_BLOCK }
-            public? set(value: Int): R|kotlin/Unit|
+            public? set(konstue: Int): R|kotlin/Unit|
                 [Contract description] <
                     LAZY_EXPRESSION
                 >
@@ -42,7 +42,7 @@ FILE: propertyAccessorsContractDescription.kt
                     LAZY_EXPRESSION
                 >
              { LAZY_BLOCK }
-            public? set(value: Int): R|kotlin/Unit|
+            public? set(konstue: Int): R|kotlin/Unit|
                 [Contract description] <
                     LAZY_EXPRESSION
                 >

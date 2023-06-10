@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Anno {
-    Class<?> value() default void.class;
+    Class<?> konstue() default void.class;
 }
 
 // FILE: test.kt
@@ -23,7 +23,7 @@ class C {
 }
 
 fun box(): String {
-    assertTrue("\\[@Anno\\((value=)?void(\\.class)?\\)\\]".toRegex().matches(C::f1.annotations.toString()))
-    assertTrue("\\[@Anno\\((value=)?(class )?java.lang.Void(\\.class)?\\)\\]".toRegex().matches(C::f2.annotations.toString()))
+    assertTrue("\\[@Anno\\((konstue=)?void(\\.class)?\\)\\]".toRegex().matches(C::f1.annotations.toString()))
+    assertTrue("\\[@Anno\\((konstue=)?(class )?java.lang.Void(\\.class)?\\)\\]".toRegex().matches(C::f2.annotations.toString()))
     return "OK"
 }

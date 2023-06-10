@@ -12,21 +12,21 @@ import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
 open class CliScriptDefinitionProvider : LazyScriptDefinitionProvider() {
-    private val definitionsLock = ReentrantLock()
-    private val definitionsFromSources: MutableList<Sequence<ScriptDefinition>> = arrayListOf()
-    private val definitions: MutableList<ScriptDefinition> = arrayListOf()
+    private konst definitionsLock = ReentrantLock()
+    private konst definitionsFromSources: MutableList<Sequence<ScriptDefinition>> = arrayListOf()
+    private konst definitions: MutableList<ScriptDefinition> = arrayListOf()
     private var defaultDefinition: ScriptDefinition? = null
 
-    override val currentDefinitions: Sequence<ScriptDefinition>
+    override konst currentDefinitions: Sequence<ScriptDefinition>
         get() {
-            val base = definitions.asSequence() + definitionsFromSources.asSequence().flatMap { it }
+            konst base = definitions.asSequence() + definitionsFromSources.asSequence().flatMap { it }
             return base + getDefaultDefinition()
         }
 
     fun setScriptDefinitions(newDefinitions: List<ScriptDefinition>) {
         definitionsLock.withLock {
             definitions.clear()
-            val (withoutStdDef, stdDef) = newDefinitions.partition { !it.isDefault }
+            konst (withoutStdDef, stdDef) = newDefinitions.partition { !it.isDefault }
             definitions.addAll(withoutStdDef)
             // TODO: consider reporting an error when several default definitions are supplied
             defaultDefinition = stdDef.firstOrNull()

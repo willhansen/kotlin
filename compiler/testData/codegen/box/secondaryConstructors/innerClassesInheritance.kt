@@ -1,5 +1,5 @@
 class Outer {
-    val outerProp: String
+    konst outerProp: String
     constructor(x: String) {
         outerProp = x
     }
@@ -50,14 +50,14 @@ class Outer {
 }
 
 fun box(): String {
-    val outer1 = Outer("propValue1")
-    val a1 = outer1.A2("abc")
+    konst outer1 = Outer("propValue1")
+    konst a1 = outer1.A2("abc")
     if (a1.parentProp != "abc#propValue1#propValue1") return "fail1: ${a1.parentProp}"
     if (a1.prop != "abc#propValue1") return "fail2: ${a1.prop}"
     if (outer1.sideEffects != "propValue1#first#third#second#propValue1#fifth#seventh#sixth") return "fail1-sideEffects: ${outer1.sideEffects}"
 
-    val outer2 = Outer("propValue2")
-    val a2 = outer2.A2(123)
+    konst outer2 = Outer("propValue2")
+    konst a2 = outer2.A2(123)
     if (a2.parentProp != "124#propValue2#propValue2#int") return "fail3: ${a2.parentProp}"
     if (a2.prop != "123#propValue2#int") return "fail4: ${a2.prop}"
     if (outer2.sideEffects != "propValue2#first#third#second#fourth#propValue2#fifth#seventh#eighth") return "fail2-sideEffects: ${outer2.sideEffects}"

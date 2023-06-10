@@ -9,9 +9,9 @@ buildscript {
         properties.load(new java.io.FileReader(project.file("$rootBuildDirectory/../gradle.properties")))
         properties.each { k, v ->
             def key = k as String
-            def value = project.findProperty(key) ?: v
-            project.logger.info("${project.name} $key: $value")
-            set(key, value)
+            def konstue = project.findProperty(key) ?: v
+            project.logger.info("${project.name} $key: $konstue")
+            set(key, konstue)
         }
     }
     ext["withoutEmbedabble"] = true

@@ -6,10 +6,10 @@ package serialization.deserialized_fields
 
 import kotlin.test.*
 
-class CustomThrowable(val extraInfo: String): Throwable("Some message", null)
+class CustomThrowable(konst extraInfo: String): Throwable("Some message", null)
 
 @Test fun runTest() {
-    val custom = CustomThrowable("Extra info")
+    konst custom = CustomThrowable("Extra info")
     assertEquals(custom.extraInfo, "Extra info")
     assertEquals(custom.message, "Some message")
     assertEquals(custom.cause, null)

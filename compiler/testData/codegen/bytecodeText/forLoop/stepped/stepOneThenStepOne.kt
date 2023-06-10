@@ -17,7 +17,7 @@ fun box(): String {
 }
 
 // For "step" progressions in JVM IR, when the step is constant and == 1, and "step" is called on a literal progression which we already
-// know to have a step whose absolute value is 1, we can essentially ignore the "step" call.
+// know to have a step whose absolute konstue is 1, we can essentially ignore the "step" call.
 
 
 // 0 iterator

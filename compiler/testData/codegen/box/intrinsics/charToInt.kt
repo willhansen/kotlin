@@ -1,5 +1,5 @@
 fun box(): String {
-    val x: Any = 'A'
+    konst x: Any = 'A'
     var y = 0
     if (x is Char) {
         y = x.toInt()

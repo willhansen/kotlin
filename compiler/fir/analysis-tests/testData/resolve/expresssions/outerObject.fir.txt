@@ -4,7 +4,7 @@ FILE: outerObject.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = Int(0)
+        public final konst x: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
 
         public final fun R|Outer.Nested|.foo(): R|kotlin/Unit| {
@@ -15,7 +15,7 @@ FILE: outerObject.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val y: R|kotlin/Int| = this@R|/Outer|.R|/Outer.x|
+            public final konst y: R|kotlin/Int| = this@R|/Outer|.R|/Outer.x|
                 public get(): R|kotlin/Int|
 
             public final fun test(): R|kotlin/Unit| {

@@ -11,7 +11,7 @@ enum class Foo {
        
         override var xxx: String
             get() =  "xxx"
-            set(value: String) {
+            set(konstue: String) {
             }
     };
 
@@ -29,7 +29,7 @@ fun box(): String {
     Foo.FOO.xxx = "zzzz"
     assertEquals(Foo.FOO.xxx, "xxx")
     assertEquals(Foo.FOO.toString(), "FOO")
-    assertEquals(Foo.valueOf("FOO").toString(), "FOO")
+    assertEquals(Foo.konstueOf("FOO").toString(), "FOO")
     assertEquals(Foo.FOO.bar(), "bar")
     return "OK"
 }

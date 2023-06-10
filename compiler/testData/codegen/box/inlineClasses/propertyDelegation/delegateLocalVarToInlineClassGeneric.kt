@@ -7,7 +7,7 @@ var setterInvoked = 0
 var backing = 42
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class DelegateStr<T: String>(val ignored: T) {
+konstue class DelegateStr<T: String>(konst ignored: T) {
 
     operator fun getValue(thisRef: Any?, prop: Any?) =
         backing
@@ -19,7 +19,7 @@ value class DelegateStr<T: String>(val ignored: T) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class DelegateInt<T: Int>(val ignored: T) {
+konstue class DelegateInt<T: Int>(konst ignored: T) {
 
     operator fun getValue(thisRef: Any?, prop: Any?) =
         backing
@@ -31,7 +31,7 @@ value class DelegateInt<T: Int>(val ignored: T) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class DelegateLong<T: Long>(val ignored: T) {
+konstue class DelegateLong<T: Long>(konst ignored: T) {
 
     operator fun getValue(thisRef: Any?, prop: Any?) =
         backing

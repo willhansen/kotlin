@@ -5,7 +5,7 @@ open annotation class TestAnn : Annotation {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 

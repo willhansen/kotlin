@@ -1,4 +1,4 @@
-val p: Any?
+konst p: Any?
   field = null
   get
 
@@ -8,7 +8,7 @@ fun foo(): Any? {
 
 fun test1(a: Any?, b: Any): Any {
   return { // BLOCK
-    val <elvis>: Any? = a
+    konst <elvis>: Any? = a
     when {
       EQEQ(arg0 = <elvis>, arg1 = null) -> b
       else -> <elvis>
@@ -18,7 +18,7 @@ fun test1(a: Any?, b: Any): Any {
 
 fun test2(a: String?, b: Any): Any {
   return { // BLOCK
-    val <elvis>: String? = a
+    konst <elvis>: String? = a
     when {
       EQEQ(arg0 = <elvis>, arg1 = null) -> b
       else -> <elvis>
@@ -34,7 +34,7 @@ fun test3(a: Any?, b: Any?): String {
     a !is String? -> return ""
   }
   return { // BLOCK
-    val <elvis>: String? = a /*as String? */
+    konst <elvis>: String? = a /*as String? */
     when {
       EQEQ(arg0 = <elvis>, arg1 = null) -> b /*as String */
       else -> <elvis>
@@ -44,7 +44,7 @@ fun test3(a: Any?, b: Any?): String {
 
 fun test4(x: Any): Any {
   return { // BLOCK
-    val <elvis>: Any? = <get-p>()
+    konst <elvis>: Any? = <get-p>()
     when {
       EQEQ(arg0 = <elvis>, arg1 = null) -> x
       else -> <elvis>
@@ -54,7 +54,7 @@ fun test4(x: Any): Any {
 
 fun test5(x: Any): Any {
   return { // BLOCK
-    val <elvis>: Any? = foo()
+    konst <elvis>: Any? = foo()
     when {
       EQEQ(arg0 = <elvis>, arg1 = null) -> x
       else -> <elvis>

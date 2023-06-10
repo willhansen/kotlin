@@ -14,15 +14,15 @@ internal data class IntPair(public var fst: Int, public var snd: Int) {
 // CHECK_BREAKS_COUNT: function=myAdd count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=myAdd name=$l$block count=0 TARGET_BACKENDS=JS_IR
 internal fun myAdd(p: IntPair, toFst: Int, toSnd: Int) {
-    val fst = p.getFst()
+    konst fst = p.getFst()
     p.setFst(fst + toFst)
 
-    val snd = p.getSnd()
+    konst snd = p.getSnd()
     p.setSnd(snd + toSnd)
 }
 
 fun box(): String {
-    val p = IntPair(0, 0)
+    konst p = IntPair(0, 0)
     myAdd(p, 1, 2)
     assertEquals(IntPair(1, 2), p)
 

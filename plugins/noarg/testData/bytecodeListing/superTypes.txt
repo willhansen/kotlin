@@ -18,7 +18,7 @@ public final class MyClass {
     public method <init>(@org.jetbrains.annotations.NotNull p0: java.lang.String): void
 }
 
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class NoArg {
     // source: 'superTypes.kt'

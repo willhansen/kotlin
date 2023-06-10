@@ -50,31 +50,31 @@ abstract class KotlinWebpack
 constructor(
     @Internal
     @Transient
-    override val compilation: KotlinJsCompilation,
-    private val objects: ObjectFactory
+    override konst compilation: KotlinJsCompilation,
+    private konst objects: ObjectFactory
 ) : DefaultTask(), RequiresNpmDependencies, WebpackRulesDsl, UsesBuildMetricsService {
     @Transient
-    private val nodeJs = project.rootProject.kotlinNodeJsExtension
-    private val versions = nodeJs.versions
-    private val rootPackageDir by lazy { nodeJs.rootPackageDir }
+    private konst nodeJs = project.rootProject.kotlinNodeJsExtension
+    private konst versions = nodeJs.versions
+    private konst rootPackageDir by lazy { nodeJs.rootPackageDir }
 
-    private val npmProject = compilation.npmProject
+    private konst npmProject = compilation.npmProject
 
-    override val rules: KotlinWebpackRulesContainer =
+    override konst rules: KotlinWebpackRulesContainer =
         project.objects.webpackRulesContainer()
 
     @get:Inject
-    open val execHandleFactory: ExecHandleFactory
+    open konst execHandleFactory: ExecHandleFactory
         get() = injected
 
-    private val metrics: Property<BuildMetricsReporter> = project.objects
+    private konst metrics: Property<BuildMetricsReporter> = project.objects
         .property(BuildMetricsReporterImpl())
 
     @Suppress("unused")
     @get:Input
-    val compilationId: String by lazy {
+    konst compilationId: String by lazy {
         compilation.let {
-            val target = it.target
+            konst target = it.target
             target.project.path + "@" + target.name + ":" + it.compilationPurpose
         }
     }
@@ -83,39 +83,39 @@ constructor(
     var mode: Mode = Mode.DEVELOPMENT
 
     @get:Internal
-    abstract val inputFilesDirectory: DirectoryProperty
+    abstract konst inputFilesDirectory: DirectoryProperty
 
     @get:Input
-    abstract val entryModuleName: Property<String>
+    abstract konst entryModuleName: Property<String>
 
     @get:Internal
-    val npmProjectDir: Provider<File>
+    konst npmProjectDir: Provider<File>
         get() = inputFilesDirectory.map { it.asFile.parentFile }
 
     @get:PathSensitive(PathSensitivity.RELATIVE)
     @get:InputFiles
     @get:NormalizeLineEndings
-    val inputFiles: FileTree
+    konst inputFiles: FileTree
         get() = objects.fileTree()
             // in webpack.config.js there is path relative to npmProjectDir (kotlin/<module>.js).
             // And we need have relative path in build cache
             // That's why we use npmProjectDir with filter instead of just inputFilesDirectory,
             // if we would use inputFilesDirectory, we will get in cache just file names,
-            // and if directory is changed to kotlin2, webpack config will be invalid.
+            // and if directory is changed to kotlin2, webpack config will be inkonstid.
             .from(npmProjectDir)
             .matching {
                 it.include { element: FileTreeElement ->
-                    val inputFilesDirectory = inputFilesDirectory.get().asFile
+                    konst inputFilesDirectory = inputFilesDirectory.get().asFile
                     element.file == inputFilesDirectory ||
                             element.file.parentFile == inputFilesDirectory
                 }
             }
 
     @get:Input
-    abstract val esModules: Property<Boolean>
+    abstract konst esModules: Property<Boolean>
 
     @get:Internal
-    val entry: Provider<RegularFile>
+    konst entry: Provider<RegularFile>
         get() = inputFilesDirectory.map {
             it.file(entryModuleName.get() + if (esModules.get()) ".mjs" else ".js")
         }
@@ -130,11 +130,11 @@ constructor(
     internal var resolveFromModulesFirst: Boolean = false
 
     @get:OutputFile
-    open val configFile: Provider<File> =
+    open konst configFile: Provider<File> =
         npmProjectDir.map { it.resolve("webpack.config.js") }
 
     @Nested
-    val output: KotlinWebpackOutput = KotlinWebpackOutput(
+    konst output: KotlinWebpackOutput = KotlinWebpackOutput(
         library = project.archivesName.orNull,
         libraryTarget = KotlinWebpackOutput.Target.UMD,
         globalObject = "this"
@@ -144,41 +144,41 @@ constructor(
     @Deprecated("Use `outputDirectory` instead", ReplaceWith("outputDirectory"))
     var destinationDirectory: File
         get() = outputDirectory.asFile.get()
-        set(value) {
-            outputDirectory.set(value)
+        set(konstue) {
+            outputDirectory.set(konstue)
         }
 
     @get:OutputDirectory
     @get:Optional
-    abstract val outputDirectory: DirectoryProperty
+    abstract konst outputDirectory: DirectoryProperty
 
     @get:Internal
     @Deprecated("Use `mainOutputFileName` instead", ReplaceWith("mainOutputFileName"))
     var outputFileName: String
         get() = mainOutputFileName.get()
-        set(value) {
-            mainOutputFileName.set(value)
+        set(konstue) {
+            mainOutputFileName.set(konstue)
         }
 
     @get:Internal
-    abstract val mainOutputFileName: Property<String>
+    abstract konst mainOutputFileName: Property<String>
 
     @get:Internal
     @Deprecated("Use `mainOutputFile` instead", ReplaceWith("mainOutputFile"))
-    open val outputFile: File
+    open konst outputFile: File
         get() = mainOutputFile.get().asFile
 
     @get:Internal
-    val mainOutputFile: Provider<RegularFile> = objects.providerWithLazyConvention { outputDirectory.file(mainOutputFileName) }.flatMap { it }
+    konst mainOutputFile: Provider<RegularFile> = objects.providerWithLazyConvention { outputDirectory.file(mainOutputFileName) }.flatMap { it }
 
-    private val projectDir = project.projectDir
+    private konst projectDir = project.projectDir
 
     @get:PathSensitive(PathSensitivity.NAME_ONLY)
     @get:Optional
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:InputDirectory
-    open val configDirectory: File?
+    open konst configDirectory: File?
         get() = projectDir.resolve("webpack.config.d").takeIf { it.isDirectory }
 
     @Input
@@ -213,10 +213,10 @@ constructor(
     }
 
     @get:Nested
-    internal val webpackConfigAppliers: MutableList<Action<KotlinWebpackConfig>> =
+    internal konst webpackConfigAppliers: MutableList<Action<KotlinWebpackConfig>> =
         mutableListOf()
 
-    private val platformType by project.provider {
+    private konst platformType by project.provider {
         compilation.platformType
     }
 
@@ -240,7 +240,7 @@ constructor(
     )
 
     private fun createRunner(): KotlinWebpackRunner {
-        val config = createWebpackConfig()
+        konst config = createWebpackConfig()
 
         if (platformType == KotlinPlatformType.wasm) {
             config.experiments += listOf(
@@ -264,14 +264,14 @@ constructor(
         )
     }
 
-    override val requiredNpmDependencies: Set<RequiredKotlinJsDependency>
+    override konst requiredNpmDependencies: Set<RequiredKotlinJsDependency>
         @Internal get() = createWebpackConfig(true).getRequiredDependencies(versions)
 
-    private val isContinuous = project.gradle.startParameter.isContinuous
+    private konst isContinuous = project.gradle.startParameter.isContinuous
 
     @TaskAction
     fun doExecute() {
-        val runner = createRunner()
+        konst runner = createRunner()
 
         if (generateConfigOnly) {
             runner.config.save(configFile.get())
@@ -279,8 +279,8 @@ constructor(
         }
 
         if (isContinuous) {
-            val deploymentRegistry = services.get(DeploymentRegistry::class.java)
-            val deploymentHandle = deploymentRegistry.get("webpack", Handle::class.java)
+            konst deploymentRegistry = services.get(DeploymentRegistry::class.java)
+            konst deploymentHandle = deploymentRegistry.get("webpack", Handle::class.java)
             if (deploymentHandle == null) {
                 deploymentRegistry.start("webpack", DeploymentRegistry.ChangeBehavior.BLOCK, Handle::class.java, runner)
             }
@@ -292,7 +292,7 @@ constructor(
                 )
             ).execute(services)
 
-            val buildMetrics = metrics.get()
+            konst buildMetrics = metrics.get()
             outputDirectory.get().asFile.walkTopDown()
                 .filter { it.isFile }
                 .filter { it.extension == "js" }
@@ -306,7 +306,7 @@ constructor(
         }
     }
 
-    internal open class Handle @Inject constructor(val runner: KotlinWebpackRunner) : DeploymentHandle {
+    internal open class Handle @Inject constructor(konst runner: KotlinWebpackRunner) : DeploymentHandle {
         var process: ExecHandle? = null
 
         override fun isRunning() = process != null

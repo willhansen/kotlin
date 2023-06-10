@@ -3,9 +3,9 @@
 package test
 
 inline fun test(s: () -> Unit) {
-    val z = 1;
+    konst z = 1;
     s()
-    val x = 1;
+    konst x = 1;
 }
 
 

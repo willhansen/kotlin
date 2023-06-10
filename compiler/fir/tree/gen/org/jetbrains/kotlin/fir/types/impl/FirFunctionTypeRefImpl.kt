@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirFunctionTypeRefImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val isMarkedNullable: Boolean,
+    override konst isMarkedNullable: Boolean,
     override var receiverTypeRef: FirTypeRef?,
-    override val parameters: MutableList<FirFunctionTypeParameter>,
+    override konst parameters: MutableList<FirFunctionTypeParameter>,
     override var returnTypeRef: FirTypeRef,
-    override val isSuspend: Boolean,
-    override val contextReceiverTypeRefs: MutableList<FirTypeRef>,
+    override konst isSuspend: Boolean,
+    override konst contextReceiverTypeRefs: MutableList<FirTypeRef>,
 ) : FirFunctionTypeRef() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotations.forEach { it.accept(visitor, data) }

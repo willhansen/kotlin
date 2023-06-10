@@ -41,10 +41,10 @@ import org.jetbrains.org.objectweb.asm.Label
 class ForInDefinitelySafeSimpleProgressionLoopGenerator(
     codegen: ExpressionCodegen,
     forExpression: KtForExpression,
-    private val startValue: StackValue,
-    private val isStartInclusive: Boolean,
-    private val endValue: StackValue,
-    private val isEndInclusive: Boolean,
+    private konst startValue: StackValue,
+    private konst isStartInclusive: Boolean,
+    private konst endValue: StackValue,
+    private konst isEndInclusive: Boolean,
     comparisonGenerator: ComparisonGenerator,
     step: Int
 ) : AbstractForInRangeLoopGenerator(codegen, forExpression, step, comparisonGenerator) {

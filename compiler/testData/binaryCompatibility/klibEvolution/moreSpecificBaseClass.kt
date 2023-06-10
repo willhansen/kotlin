@@ -2,11 +2,11 @@
 // FILE: base.kt
 
 open class X {
-    open val bar: String = "base class"
+    open konst bar: String = "base class"
 }
 
 open class Y: X() {
-    override val bar: String = "child class"
+    override konst bar: String = "child class"
 }
 
 // MODULE: lib(base)

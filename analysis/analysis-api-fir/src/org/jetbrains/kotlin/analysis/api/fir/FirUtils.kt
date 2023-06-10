@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.analysis.api.annotations.KtAnnotationApplicationInfo
 import org.jetbrains.kotlin.analysis.api.annotations.KtAnnotationApplicationWithArgumentsInfo
 import org.jetbrains.kotlin.analysis.api.annotations.KtNamedAnnotationValue
 import org.jetbrains.kotlin.analysis.api.fir.annotations.mapAnnotationParameters
-import org.jetbrains.kotlin.analysis.api.fir.evaluate.FirAnnotationValueConverter
+import org.jetbrains.kotlin.analysis.api.fir.ekonstuate.FirAnnotationValueConverter
 import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.toAnnotationClassId

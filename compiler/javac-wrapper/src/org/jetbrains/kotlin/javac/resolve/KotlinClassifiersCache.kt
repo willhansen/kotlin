@@ -37,21 +37,21 @@ import org.jetbrains.kotlin.psi.psiUtil.containingClassOrObject
 import org.jetbrains.kotlin.psi.psiUtil.visibilityModifierType
 
 class KotlinClassifiersCache(sourceFiles: Collection<KtFile>,
-                             private val javac: JavacWrapper) {
+                             private konst javac: JavacWrapper) {
 
-    private val kotlinPackages = hashSetOf<FqName>()
-    private val kotlinFacadeClasses = hashMapOf<ClassId, KtFile>()
-    private val kotlinClasses: Map<ClassId?, KtClassOrObject?> =
+    private konst kotlinPackages = hashSetOf<FqName>()
+    private konst kotlinFacadeClasses = hashMapOf<ClassId, KtFile>()
+    private konst kotlinClasses: Map<ClassId?, KtClassOrObject?> =
             sourceFiles.flatMap { ktFile ->
                 kotlinPackages.add(ktFile.packageFqName)
-                val facadeFqName = ktFile.javaFileFacadeFqName
+                konst facadeFqName = ktFile.javaFileFacadeFqName
                 kotlinFacadeClasses[ClassId(facadeFqName.parent(), facadeFqName.shortName())] = ktFile
                 ktFile.declarations
                         .filterIsInstance<KtClassOrObject>()
                         .map { it.computeClassId() to it }
             }.toMap()
 
-    private val classifiers = hashMapOf<ClassId, JavaClass>()
+    private konst classifiers = hashMapOf<ClassId, JavaClass>()
 
     fun getKotlinClassifier(classId: ClassId) = classifiers[classId] ?: createClassifier(classId)
 
@@ -72,8 +72,8 @@ class KotlinClassifiersCache(sourceFiles: Collection<KtFile>,
         }
         if (classId.isNestedClass) {
             classifiers[classId]?.let { return it }
-            val pathSegments = classId.relativeClassName.pathSegments().map { it.asString() }
-            val outerClassId = ClassId(classId.packageFqName, Name.identifier(pathSegments.first()))
+            konst pathSegments = classId.relativeClassName.pathSegments().map { it.asString() }
+            konst outerClassId = ClassId(classId.packageFqName, Name.identifier(pathSegments.first()))
             var outerClass: JavaClass = kotlinClasses[outerClassId]?.let { createMockKotlinClassifier(it, null, outerClassId) } ?: return null
 
             pathSegments.drop(1).forEach {
@@ -83,23 +83,23 @@ class KotlinClassifiersCache(sourceFiles: Collection<KtFile>,
             return outerClass.apply { classifiers[classId] = this }
         }
 
-        val kotlinClassifier = kotlinClasses[classId] ?: return null
+        konst kotlinClassifier = kotlinClasses[classId] ?: return null
 
         return createMockKotlinClassifier(kotlinClassifier, null, classId)
     }
 
 }
 
-class MockKotlinClassifier(override val classId: ClassId,
-                           private val classOrObject: KtClassOrObject?,
-                           private val ktFile: KtFile?,
-                           private val cache: KotlinClassifiersCache,
-                           private val javac: JavacWrapper) : JavaClassWithClassId {
+class MockKotlinClassifier(override konst classId: ClassId,
+                           private konst classOrObject: KtClassOrObject?,
+                           private konst ktFile: KtFile?,
+                           private konst cache: KotlinClassifiersCache,
+                           private konst javac: JavacWrapper) : JavaClassWithClassId {
 
-    override val fqName: FqName
+    override konst fqName: FqName
         get() = classId.asSingleFqName()
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = if (classOrObject == null) {
             Visibilities.Public
         }
@@ -110,7 +110,7 @@ class MockKotlinClassifier(override val classId: ClassId,
             else -> JavaVisibilities.PackageVisibility
         }
 
-    override val supertypes: Collection<JavaClassifierType>
+    override konst supertypes: Collection<JavaClassifierType>
         get() = if (classOrObject == null) {
             emptyList()
         }
@@ -118,90 +118,90 @@ class MockKotlinClassifier(override val classId: ClassId,
                 .mapNotNull { javac.getKotlinClassifier(it) ?: javac.findClass(it) }
                 .map { MockKotlinClassifierType(it) }
 
-    val innerClasses: Collection<JavaClass>
+    konst innerClasses: Collection<JavaClass>
         get() = classOrObject?.declarations
                         ?.filterIsInstance<KtClassOrObject>()
                         ?.mapNotNull { nestedClassOrObject ->
                             cache.createMockKotlinClassifier(nestedClassOrObject, ktFile, classId.createNestedClassId(nestedClassOrObject.nameAsSafeName))
                         } ?: emptyList()
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
 
-    override val lightClassOriginKind
+    override konst lightClassOriginKind
         get() = LightClassOriginKind.SOURCE
 
-    override val virtualFile: VirtualFile?
+    override konst virtualFile: VirtualFile?
         get() = null
 
-    override val name
+    override konst name
         get() = fqName.shortNameOrSpecial()
 
     override fun isFromSourceCodeInScope(scope: SearchScope) = true
 
-    override val innerClassNames
+    override konst innerClassNames
         get() = innerClasses.map(JavaClass::name)
 
     override fun findInnerClass(name: Name) = innerClasses.find { it.name == name }
 
-    val typeParametersNumber: Int
+    konst typeParametersNumber: Int
         get() = classOrObject?.typeParameters?.size ?: 0
 
-    val hasTypeParameters: Boolean
+    konst hasTypeParameters: Boolean
         get() = typeParametersNumber > 0
 
     fun findField(name: String) = classOrObject?.let { javac.kotlinResolver.findField(it, name) } ?: javac.kotlinResolver.findField(ktFile, name)
 
-    override val isAbstract get() = shouldNotBeCalled()
-    override val isStatic get() = shouldNotBeCalled()
-    override val isFinal get() = shouldNotBeCalled()
-    override val typeParameters get() = shouldNotBeCalled()
-    override val outerClass get() = shouldNotBeCalled()
-    override val isInterface get() = shouldNotBeCalled()
-    override val isAnnotationType get() = shouldNotBeCalled()
-    override val isEnum get() = shouldNotBeCalled()
-    override val isRecord get() = shouldNotBeCalled()
-    override val isSealed: Boolean get() = shouldNotBeCalled()
-    override val permittedTypes: Collection<JavaClassifierType> get() = shouldNotBeCalled()
-    override val methods get() = shouldNotBeCalled()
-    override val fields get() = shouldNotBeCalled()
-    override val constructors get() = shouldNotBeCalled()
-    override val recordComponents get() = shouldNotBeCalled()
+    override konst isAbstract get() = shouldNotBeCalled()
+    override konst isStatic get() = shouldNotBeCalled()
+    override konst isFinal get() = shouldNotBeCalled()
+    override konst typeParameters get() = shouldNotBeCalled()
+    override konst outerClass get() = shouldNotBeCalled()
+    override konst isInterface get() = shouldNotBeCalled()
+    override konst isAnnotationType get() = shouldNotBeCalled()
+    override konst isEnum get() = shouldNotBeCalled()
+    override konst isRecord get() = shouldNotBeCalled()
+    override konst isSealed: Boolean get() = shouldNotBeCalled()
+    override konst permittedTypes: Collection<JavaClassifierType> get() = shouldNotBeCalled()
+    override konst methods get() = shouldNotBeCalled()
+    override konst fields get() = shouldNotBeCalled()
+    override konst constructors get() = shouldNotBeCalled()
+    override konst recordComponents get() = shouldNotBeCalled()
 
     override fun hasDefaultConstructor() = shouldNotBeCalled()
-    override val annotations get() = shouldNotBeCalled()
-    override val isDeprecatedInJavaDoc get() = shouldNotBeCalled()
+    override konst annotations get() = shouldNotBeCalled()
+    override konst isDeprecatedInJavaDoc get() = shouldNotBeCalled()
     override fun findAnnotation(fqName: FqName) = shouldNotBeCalled()
 }
 
-class MockKotlinClassifierType(override val classifier: JavaClassifier) : JavaClassifierType {
-    override val typeArguments get() = shouldNotBeCalled()
-    override val isRaw get() = shouldNotBeCalled()
-    override val annotations get() = shouldNotBeCalled()
-    override val classifierQualifiedName get() = shouldNotBeCalled()
-    override val presentableText get() = shouldNotBeCalled()
+class MockKotlinClassifierType(override konst classifier: JavaClassifier) : JavaClassifierType {
+    override konst typeArguments get() = shouldNotBeCalled()
+    override konst isRaw get() = shouldNotBeCalled()
+    override konst annotations get() = shouldNotBeCalled()
+    override konst classifierQualifiedName get() = shouldNotBeCalled()
+    override konst presentableText get() = shouldNotBeCalled()
     override fun findAnnotation(fqName: FqName) = shouldNotBeCalled()
-    override val isDeprecatedInJavaDoc get() = shouldNotBeCalled()
+    override konst isDeprecatedInJavaDoc get() = shouldNotBeCalled()
 }
 
-class MockKotlinField(private val psiField: PsiField) : JavaField {
+class MockKotlinField(private konst psiField: PsiField) : JavaField {
 
-    override val initializerValue: Any?
-        get() = (psiField.initializer as? PsiLiteralExpression)?.value
+    override konst initializerValue: Any?
+        get() = (psiField.initializer as? PsiLiteralExpression)?.konstue
 
-    override val name get() = shouldNotBeCalled()
-    override val annotations get() = shouldNotBeCalled()
-    override val isDeprecatedInJavaDoc get() = shouldNotBeCalled()
-    override val isAbstract get() = shouldNotBeCalled()
-    override val isStatic get() = shouldNotBeCalled()
-    override val isFinal get() = shouldNotBeCalled()
-    override val visibility: Visibility get() = shouldNotBeCalled()
-    override val containingClass get() = shouldNotBeCalled()
-    override val isEnumEntry get() = shouldNotBeCalled()
-    override val type get() = shouldNotBeCalled()
-    override val hasConstantNotNullInitializer get() = shouldNotBeCalled()
+    override konst name get() = shouldNotBeCalled()
+    override konst annotations get() = shouldNotBeCalled()
+    override konst isDeprecatedInJavaDoc get() = shouldNotBeCalled()
+    override konst isAbstract get() = shouldNotBeCalled()
+    override konst isStatic get() = shouldNotBeCalled()
+    override konst isFinal get() = shouldNotBeCalled()
+    override konst visibility: Visibility get() = shouldNotBeCalled()
+    override konst containingClass get() = shouldNotBeCalled()
+    override konst isEnumEntry get() = shouldNotBeCalled()
+    override konst type get() = shouldNotBeCalled()
+    override konst hasConstantNotNullInitializer get() = shouldNotBeCalled()
     override fun findAnnotation(fqName: FqName) = shouldNotBeCalled()
-    override val isFromSource: Boolean get() = shouldNotBeCalled()
+    override konst isFromSource: Boolean get() = shouldNotBeCalled()
 }
 
 private fun KtClassOrObject.computeClassId(): ClassId? =

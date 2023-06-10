@@ -27,32 +27,32 @@ class JavaClassifierTypeImpl(
 
     private var resolutionResult: ResolutionResult? = null
 
-    override val classifier: JavaClassifierImpl<*>?
+    override konst classifier: JavaClassifierImpl<*>?
         get() = resolve().classifier
 
-    val substitutor: PsiSubstitutor
+    konst substitutor: PsiSubstitutor
         get() = resolve().substitutor
 
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = psi.canonicalText.convertCanonicalNameToQName()
 
-    override val presentableText: String
+    override konst presentableText: String
         get() = psi.presentableText
 
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = resolve().isRaw
 
     override// parameters including ones from outer class
-    val typeArguments: List<JavaType?>
+    konst typeArguments: List<JavaType?>
         get() {
-            val classifier = classifier as? JavaClassImpl ?: return emptyList()
-            val parameters = getTypeParameters(classifier.psi)
+            konst classifier = classifier as? JavaClassImpl ?: return emptyList()
+            konst parameters = getTypeParameters(classifier.psi)
 
-            val substitutor = substitutor
+            konst substitutor = substitutor
 
-            val result = ArrayList<JavaType?>(parameters.size)
+            konst result = ArrayList<JavaType?>(parameters.size)
             for (typeParameter in parameters) {
-                val substitutedType = substitutor.substitute(typeParameter)
+                konst substitutedType = substitutor.substitute(typeParameter)
                 result.add(substitutedType?.let { JavaTypeImpl.create(createTypeSource(it)) })
             }
 
@@ -60,16 +60,16 @@ class JavaClassifierTypeImpl(
         }
 
     private class ResolutionResult(
-        val classifier: JavaClassifierImpl<*>?,
-        val substitutor: PsiSubstitutor,
-        val isRaw: Boolean
+        konst classifier: JavaClassifierImpl<*>?,
+        konst substitutor: PsiSubstitutor,
+        konst isRaw: Boolean
     )
 
     private fun resolve(): ResolutionResult {
         return resolutionResult ?: run {
-            val result = psi.resolveGenerics()
-            val psiClass = result.element
-            val substitutor = result.substitutor
+            konst result = psi.resolveGenerics()
+            konst psiClass = result.element
+            konst substitutor = result.substitutor
             ResolutionResult(
                 psiClass?.let { JavaClassifierImpl.create(it, sourceFactory) }, substitutor, PsiClassType.isRaw(result)
             ).apply {
@@ -92,7 +92,7 @@ class JavaClassifierTypeImpl(
 
         var currentOwner: PsiTypeParameterListOwner? = owner
         while (currentOwner != null) {
-            val typeParameters = currentOwner.typeParameters
+            konst typeParameters = currentOwner.typeParameters
             if (typeParameters.isNotEmpty()) {
                 result = result?.let { it + typeParameters } ?: typeParameters.toList()
             }

@@ -20,9 +20,9 @@ class B : A<Int>(), I {
 }
 
 @Test fun runTest() {
-    val b = B()
-    val a: A<Int> = b
-    val c: I = b
+    konst b = B()
+    konst a: A<Int> = b
+    konst c: I = b
     b.foo(42)
     a.foo(42)
     c.foo(42)

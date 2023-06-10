@@ -111,11 +111,11 @@ class FirStdlibTest : AbstractNativeBlackBoxTest() {
     fun worker() = dynamicTestCase(TestCaseId.Named("worker"))
 }
 
-private const val ENABLE_MPP = "-Xmulti-platform"
-internal const val STDLIB_IS_A_FRIEND = "-friend-modules=$KOTLIN_NATIVE_DISTRIBUTION/klib/common/stdlib"
-private const val ENABLE_X_STDLIB_API = "-opt-in=kotlin.ExperimentalStdlibApi"
-private const val ENABLE_X_ENCODING_API = "-opt-in=kotlin.io.encoding.ExperimentalEncodingApi"
-private const val ENABLE_RANGE_UNTIL = "-XXLanguage:+RangeUntilOperator" // keep until 1.8
-private const val DISABLED_STDLIB_TEST = "test.collections.CollectionTest.abstractCollectionToArray"
+private const konst ENABLE_MPP = "-Xmulti-platform"
+internal const konst STDLIB_IS_A_FRIEND = "-friend-modules=$KOTLIN_NATIVE_DISTRIBUTION/klib/common/stdlib"
+private const konst ENABLE_X_STDLIB_API = "-opt-in=kotlin.ExperimentalStdlibApi"
+private const konst ENABLE_X_ENCODING_API = "-opt-in=kotlin.io.encoding.ExperimentalEncodingApi"
+private const konst ENABLE_RANGE_UNTIL = "-XXLanguage:+RangeUntilOperator" // keep until 1.8
+private const konst DISABLED_STDLIB_TEST = "test.collections.CollectionTest.abstractCollectionToArray"
 
-private const val DISABLED_K2_ARRAYS = "libraries/stdlib/test/collections/ArraysTest.kt"  // KT-57487
+private const konst DISABLED_K2_ARRAYS = "libraries/stdlib/test/collections/ArraysTest.kt"  // KT-57487

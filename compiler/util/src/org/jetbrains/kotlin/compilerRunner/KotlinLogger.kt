@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.compilerRunner
 
 interface KotlinLogger {
-    val isDebugEnabled: Boolean
+    konst isDebugEnabled: Boolean
     fun error(msg: String, throwable: Throwable? = null)
     fun warn(msg: String)
     fun info(msg: String)

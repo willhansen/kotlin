@@ -20,14 +20,14 @@ import java.util.*
 
 /**
  * A set which is optimized for small sizes and maintains the order in which the elements were added.
- * This set is not synchronized and it does not support removal operations such as [MutableSet.remove],
+ * This set is not synchronized and it does not support remokonst operations such as [MutableSet.remove],
  * [MutableSet.removeAll] and [MutableSet.retainAll].
  * Also, [iterator] returns an iterator which does not support [MutableIterator.remove].
  */
 @Suppress("UNCHECKED_CAST")
 class SmartSet<T> private constructor() : AbstractSet<T>() {
     companion object {
-        private const val ARRAY_THRESHOLD = 5
+        private const konst ARRAY_THRESHOLD = 5
 
         @JvmStatic
         fun <T> create() = SmartSet<T>()
@@ -58,13 +58,13 @@ class SmartSet<T> private constructor() : AbstractSet<T>() {
                 data = arrayOf(data, element)
             }
             size < ARRAY_THRESHOLD -> {
-                val arr = data as Array<T>
+                konst arr = data as Array<T>
                 if (element in arr) return false
                 data = if (size == ARRAY_THRESHOLD - 1) linkedSetOf(*arr).apply { add(element) }
                 else arr.copyOf(size + 1).apply { set(size - 1, element) }
             }
             else -> {
-                val set = data as MutableSet<T>
+                konst set = data as MutableSet<T>
                 if (!set.add(element)) return false
             }
         }
@@ -85,7 +85,7 @@ class SmartSet<T> private constructor() : AbstractSet<T>() {
         else -> element in data as Set<T>
     }
 
-    private class SingletonIterator<out T>(private val element: T) : MutableIterator<T> {
+    private class SingletonIterator<out T>(private konst element: T) : MutableIterator<T> {
         private var hasNext = true
 
         override fun next(): T =
@@ -100,7 +100,7 @@ class SmartSet<T> private constructor() : AbstractSet<T>() {
     }
 
     private class ArrayIterator<out T>(array: Array<T>) : MutableIterator<T> {
-        private val arrayIterator = array.iterator()
+        private konst arrayIterator = array.iterator()
 
         override fun hasNext(): Boolean = arrayIterator.hasNext()
         override fun next(): T = arrayIterator.next()

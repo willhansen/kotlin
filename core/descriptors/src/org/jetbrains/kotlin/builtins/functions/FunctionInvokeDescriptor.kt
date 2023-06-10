@@ -55,13 +55,13 @@ class FunctionInvokeDescriptor private constructor(
      * type with big arity is called, the JVM back-end wraps all arguments into an array and passes it to `FunctionN.invoke`.
      */
     @get:JvmName("hasBigArity")
-    val hasBigArity: Boolean
-        get() = valueParameters.size >= BuiltInFunctionArity.BIG_ARITY
+    konst hasBigArity: Boolean
+        get() = konstueParameters.size >= BuiltInFunctionArity.BIG_ARITY
 
     override fun doSubstitute(configuration: CopyConfiguration): FunctionDescriptor? {
-        val substituted = super.doSubstitute(configuration) as FunctionInvokeDescriptor? ?: return null
-        if (substituted.valueParameters.none { it.type.extractParameterNameFromFunctionTypeArgument() != null }) return substituted
-        val parameterNames = substituted.valueParameters.map { it.type.extractParameterNameFromFunctionTypeArgument() }
+        konst substituted = super.doSubstitute(configuration) as FunctionInvokeDescriptor? ?: return null
+        if (substituted.konstueParameters.none { it.type.extractParameterNameFromFunctionTypeArgument() != null }) return substituted
+        konst parameterNames = substituted.konstueParameters.map { it.type.extractParameterNameFromFunctionTypeArgument() }
         return substituted.replaceParameterNames(parameterNames)
     }
 
@@ -83,18 +83,18 @@ class FunctionInvokeDescriptor private constructor(
     override fun isTailrec(): Boolean = false
 
     private fun replaceParameterNames(parameterNames: List<Name?>): FunctionDescriptor {
-        val indexShift = valueParameters.size - parameterNames.size
+        konst indexShift = konstueParameters.size - parameterNames.size
         assert(indexShift == 0 || indexShift == 1) // indexShift == 1 for extension function type
-        if (indexShift == 0 && parameterNames.zip(valueParameters).all { (name, parameter) -> name == parameter.name }) {
+        if (indexShift == 0 && parameterNames.zip(konstueParameters).all { (name, parameter) -> name == parameter.name }) {
             return this
         }
 
-        val newValueParameters = valueParameters.map {
+        konst newValueParameters = konstueParameters.map {
             var newName = it.name
-            val parameterIndex = it.index
-            val nameIndex = parameterIndex - indexShift
+            konst parameterIndex = it.index
+            konst nameIndex = parameterIndex - indexShift
             if (nameIndex >= 0) {
-                val parameterName = parameterNames[nameIndex]
+                konst parameterName = parameterNames[nameIndex]
                 if (parameterName != null) {
                     newName = parameterName
                 }
@@ -102,7 +102,7 @@ class FunctionInvokeDescriptor private constructor(
             it.copy(this, newName, parameterIndex)
         }
 
-        val copyConfiguration = newCopyBuilder(TypeSubstitutor.EMPTY)
+        konst copyConfiguration = newCopyBuilder(TypeSubstitutor.EMPTY)
             .setHasSynthesizedParameterNames(parameterNames.any { it == null })
             .setValueParameters(newValueParameters)
             .setOriginal(original)
@@ -112,16 +112,16 @@ class FunctionInvokeDescriptor private constructor(
 
     companion object Factory {
         fun create(functionClass: FunctionClassDescriptor, isSuspend: Boolean): FunctionInvokeDescriptor {
-            val typeParameters = functionClass.declaredTypeParameters
+            konst typeParameters = functionClass.declaredTypeParameters
 
-            val result = FunctionInvokeDescriptor(functionClass, null, CallableMemberDescriptor.Kind.DECLARATION, isSuspend)
+            konst result = FunctionInvokeDescriptor(functionClass, null, CallableMemberDescriptor.Kind.DECLARATION, isSuspend)
             result.initialize(
                 null,
                 functionClass.thisAsReceiverParameter,
                 listOf(), listOf(),
                 typeParameters.takeWhile { it.variance == Variance.IN_VARIANCE }
                     .withIndex()
-                    .map { createValueParameter(result, it.index, it.value) },
+                    .map { createValueParameter(result, it.index, it.konstue) },
                 typeParameters.last().defaultType,
                 Modality.ABSTRACT,
                 DescriptorVisibilities.PUBLIC
@@ -135,11 +135,11 @@ class FunctionInvokeDescriptor private constructor(
             index: Int,
             typeParameter: TypeParameterDescriptor
         ): ValueParameterDescriptor {
-            val name = when (val typeParameterName = typeParameter.name.asString()) {
+            konst name = when (konst typeParameterName = typeParameter.name.asString()) {
                 "T" -> "instance"
                 "E" -> "receiver"
                 else -> {
-                    // Type parameter "P1" -> value parameter "p1", "P2" -> "p2", etc.
+                    // Type parameter "P1" -> konstue parameter "p1", "P2" -> "p2", etc.
                     typeParameterName.lowercase()
                 }
             }

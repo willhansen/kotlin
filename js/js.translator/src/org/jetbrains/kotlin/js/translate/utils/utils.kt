@@ -59,31 +59,31 @@ fun generateDelegateCall(
             context.getNameForDescriptor(this)
         }
 
-    val overriddenMemberFunctionName = toDescriptor.getNameForFunctionWithPossibleDefaultParam()
-    val overriddenMemberFunctionRef = JsNameRef(overriddenMemberFunctionName, thisObject)
+    konst overriddenMemberFunctionName = toDescriptor.getNameForFunctionWithPossibleDefaultParam()
+    konst overriddenMemberFunctionRef = JsNameRef(overriddenMemberFunctionName, thisObject)
 
-    val parameters = SmartList<JsParameter>()
-    val args = SmartList<JsExpression>()
+    konst parameters = SmartList<JsParameter>()
+    konst args = SmartList<JsExpression>()
 
     if (DescriptorUtils.isExtension(fromDescriptor)) {
-        val extensionFunctionReceiverName = JsScope.declareTemporaryName(Namer.getReceiverParameterName())
+        konst extensionFunctionReceiverName = JsScope.declareTemporaryName(Namer.getReceiverParameterName())
         parameters.add(JsParameter(extensionFunctionReceiverName))
         args.add(JsNameRef(extensionFunctionReceiverName))
     }
 
-    val valueParameterDescriptors = if (fromDescriptor.isSuspend) {
-        fromDescriptor.valueParameters + context.continuationParameterDescriptor!!
-    } else fromDescriptor.valueParameters
+    konst konstueParameterDescriptors = if (fromDescriptor.isSuspend) {
+        fromDescriptor.konstueParameters + context.continuationParameterDescriptor!!
+    } else fromDescriptor.konstueParameters
 
-    for (param in valueParameterDescriptors) {
-        val paramName = param.name.asString()
-        val jsParamName = JsScope.declareTemporaryName(paramName)
+    for (param in konstueParameterDescriptors) {
+        konst paramName = param.name.asString()
+        konst jsParamName = JsScope.declareTemporaryName(paramName)
         parameters.add(JsParameter(jsParamName))
         args.add(JsNameRef(jsParamName))
     }
 
-    val intrinsic = context.intrinsics().getFunctionIntrinsic(toDescriptor, context)
-    val invocation = if (intrinsic is FunctionIntrinsicWithReceiverComputed) {
+    konst intrinsic = context.intrinsics().getFunctionIntrinsic(toDescriptor, context)
+    konst invocation = if (intrinsic is FunctionIntrinsicWithReceiverComputed) {
         intrinsic.apply(thisObject, args, context)
     } else {
         JsInvocation(overriddenMemberFunctionRef, args)
@@ -91,7 +91,7 @@ fun generateDelegateCall(
 
     invocation.source = source
 
-    val functionObject = simpleReturnFunction(context.scope(), invocation)
+    konst functionObject = simpleReturnFunction(context.scope(), invocation)
     functionObject.source = source
     functionObject.body.source = source?.finalElement as? LeafPsiElement
     functionObject.parameters.addAll(parameters)
@@ -99,10 +99,10 @@ fun generateDelegateCall(
         functionObject.fillCoroutineMetadata(context, fromDescriptor, false)
     }
 
-    val fromFunctionName = fromDescriptor.getNameForFunctionWithPossibleDefaultParam()
+    konst fromFunctionName = fromDescriptor.getNameForFunctionWithPossibleDefaultParam()
 
-    val prototypeRef = JsAstUtils.prototypeOf(context.getInnerReference(classDescriptor))
-    val functionRef = JsNameRef(fromFunctionName, prototypeRef)
+    konst prototypeRef = JsAstUtils.prototypeOf(context.getInnerReference(classDescriptor))
+    konst functionRef = JsNameRef(fromFunctionName, prototypeRef)
     return JsAstUtils.assignment(functionRef, functionObject).makeStmt()
 }
 
@@ -111,10 +111,10 @@ fun <T, S> List<T>.splitToRanges(classifier: (T) -> S): List<Pair<List<T>, S>> {
 
     var lastIndex = 0
     var lastClass: S = classifier(this[0])
-    val result = mutableListOf<Pair<List<T>, S>>()
+    konst result = mutableListOf<Pair<List<T>, S>>()
 
     for ((index, e) in asSequence().withIndex().drop(1)) {
-        val cls = classifier(e)
+        konst cls = classifier(e)
         if (cls != lastClass) {
             result += Pair(subList(lastIndex, index), lastClass)
             lastClass = cls
@@ -132,7 +132,7 @@ fun getReferenceToJsClass(type: KotlinType, context: TranslationContext): JsExpr
     }
 
 fun getReferenceToJsClassOrArray(type: KotlinType, context: TranslationContext): JsExpression {
-    val classifierDescriptor = type.constructor.declarationDescriptor
+    konst classifierDescriptor = type.constructor.declarationDescriptor
         ?: return JsArrayLiteral(type.constructor.supertypes.map { getReferenceToJsClass(it.constructor.declarationDescriptor, context) })
 
     return getReferenceToJsClass(classifierDescriptor, context)
@@ -164,8 +164,8 @@ fun TranslationContext.addFunctionToPrototype(
     descriptor: FunctionDescriptor,
     function: JsExpression
 ): JsStatement {
-    val prototypeRef = JsAstUtils.prototypeOf(getInnerReference(classDescriptor))
-    val functionRef = JsNameRef(getNameForDescriptor(descriptor), prototypeRef)
+    konst prototypeRef = JsAstUtils.prototypeOf(getInnerReference(classDescriptor))
+    konst functionRef = JsNameRef(getNameForDescriptor(descriptor), prototypeRef)
     return JsAstUtils.assignment(functionRef, function).makeStmt()
 }
 
@@ -174,9 +174,9 @@ fun TranslationContext.addAccessorsToPrototype(
     propertyDescriptor: PropertyDescriptor,
     literal: JsObjectLiteral
 ) {
-    val prototypeRef = JsAstUtils.prototypeOf(getInnerReference(containingClass))
-    val propertyName = getNameForDescriptor(propertyDescriptor)
-    val defineProperty = JsAstUtils.defineProperty(prototypeRef, propertyName.ident, literal)
+    konst prototypeRef = JsAstUtils.prototypeOf(getInnerReference(containingClass))
+    konst propertyName = getNameForDescriptor(propertyDescriptor)
+    konst defineProperty = JsAstUtils.defineProperty(prototypeRef, propertyName.ident, literal)
     addDeclarationStatement(defineProperty.makeStmt())
 }
 
@@ -185,13 +185,13 @@ fun JsFunction.fillCoroutineMetadata(
     descriptor: FunctionDescriptor,
     hasController: Boolean
 ) {
-    val suspendPropertyDescriptor = context.currentModule.getPackage(StandardNames.COROUTINES_INTRINSICS_PACKAGE_FQ_NAME)
+    konst suspendPropertyDescriptor = context.currentModule.getPackage(StandardNames.COROUTINES_INTRINSICS_PACKAGE_FQ_NAME)
         .memberScope
         .getContributedVariables(COROUTINE_SUSPENDED_NAME, NoLookupLocation.FROM_BACKEND).first()
 
     fun getCoroutinePropertyName(id: String) = context.getNameForDescriptor(TranslationUtils.getCoroutineProperty(context, id))
 
-    val suspendObject = CallTranslator.translateGet(context, resolveAccessorCall(suspendPropertyDescriptor, context), null)
+    konst suspendObject = CallTranslator.translateGet(context, resolveAccessorCall(suspendPropertyDescriptor, context), null)
 
     coroutineMetadata = CoroutineMetadata(
         doResumeName = context.getNameForDescriptor(TranslationUtils.getCoroutineDoResumeFunction(context)),
@@ -237,7 +237,7 @@ private fun resolveAccessorCall(
         override fun getExplicitReceiverKind() = ExplicitReceiverKind.NO_EXPLICIT_RECEIVER
         override fun getValueArguments(): MutableMap<ValueParameterDescriptor, ResolvedValueArgument> = mutableMapOf()
         override fun getValueArgumentsByIndex(): MutableList<ResolvedValueArgument> = mutableListOf()
-        override fun getArgumentMapping(valueArgument: ValueArgument) = ArgumentUnmapped
+        override fun getArgumentMapping(konstueArgument: ValueArgument) = ArgumentUnmapped
         override fun getTypeArguments(): MutableMap<TypeParameterDescriptor, KotlinType> = mutableMapOf()
         override fun getDataFlowInfoForArguments(): DataFlowInfoForArguments = throw IllegalStateException()
         override fun getSmartCastDispatchReceiverType(): KotlinType? = null
@@ -245,13 +245,13 @@ private fun resolveAccessorCall(
 }
 
 fun definePackageAlias(name: String, varName: JsName, tag: String, parentRef: JsExpression): JsStatement {
-    val selfRef = JsNameRef(name, parentRef)
-    val rhs = JsAstUtils.or(selfRef, JsAstUtils.assignment(selfRef.deepCopy(), JsObjectLiteral(false)))
+    konst selfRef = JsNameRef(name, parentRef)
+    konst rhs = JsAstUtils.or(selfRef, JsAstUtils.assignment(selfRef.deepCopy(), JsObjectLiteral(false)))
 
     return JsAstUtils.newVar(varName, rhs).apply { exportedPackage = tag }
 }
 
-val PsiElement.finalElement: PsiElement
+konst PsiElement.finalElement: PsiElement
     get() = when (this) {
         is KtFunctionLiteral -> rBrace ?: this
         is KtDeclarationWithBody -> bodyBlockExpression?.rBrace ?: bodyExpression ?: this
@@ -276,23 +276,23 @@ fun TranslationContext.addFunctionButNotExport(name: JsName, expression: JsExpre
 }
 
 fun createPrototypeStatements(superName: JsName, name: JsName): List<JsStatement> {
-    val superclassRef = superName.makeRef()
-    val superPrototype = JsAstUtils.prototypeOf(superclassRef)
-    val superPrototypeInstance = JsInvocation(JsNameRef("create", "Object"), superPrototype)
+    konst superclassRef = superName.makeRef()
+    konst superPrototype = JsAstUtils.prototypeOf(superclassRef)
+    konst superPrototypeInstance = JsInvocation(JsNameRef("create", "Object"), superPrototype)
 
-    val classRef = name.makeRef()
-    val prototype = JsAstUtils.prototypeOf(classRef)
-    val prototypeStatement = JsAstUtils.assignment(prototype, superPrototypeInstance).makeStmt()
+    konst classRef = name.makeRef()
+    konst prototype = JsAstUtils.prototypeOf(classRef)
+    konst prototypeStatement = JsAstUtils.assignment(prototype, superPrototypeInstance).makeStmt()
 
-    val constructorRef = JsNameRef("constructor", prototype.deepCopy())
-    val constructorStatement = JsAstUtils.assignment(constructorRef, classRef.deepCopy()).makeStmt()
+    konst constructorRef = JsNameRef("constructor", prototype.deepCopy())
+    konst constructorStatement = JsAstUtils.assignment(constructorRef, classRef.deepCopy()).makeStmt()
 
     return listOf(prototypeStatement, constructorStatement)
 }
 
 fun TranslationContext.createCoroutineResult(resolvedCall: ResolvedCall<*>): JsExpression {
-    val callElement = resolvedCall.call.callElement
-    val coroutineRef = TranslationUtils.translateContinuationArgument(this).source(callElement)
+    konst callElement = resolvedCall.call.callElement
+    konst coroutineRef = TranslationUtils.translateContinuationArgument(this).source(callElement)
     return JsNameRef("\$\$coroutineResult\$\$", coroutineRef).apply {
         sideEffects = SideEffectKind.DEPENDS_ON_STATE
         source = callElement
@@ -315,8 +315,8 @@ fun KotlinType.refineType() =
  * Also see org/jetbrains/kotlin/codegen/codegenUtil.kt#calcTypeForIEEE754ArithmeticIfNeeded
  */
 fun TranslationContext.getPrecisePrimitiveType(expression: KtExpression): KotlinType? {
-    val bindingContext = bindingContext()
-    val ktType = bindingContext.getType(expression) ?: return null
+    konst bindingContext = bindingContext()
+    konst ktType = bindingContext.getType(expression) ?: return null
 
     return ktType.refineType()
 }
@@ -341,4 +341,4 @@ fun FunctionDescriptor.hasOrInheritsParametersWithDefaultValue(): Boolean = DFS.
 )
 
 fun FunctionDescriptor.hasOwnParametersWithDefaultValue() =
-    original.valueParameters.any { it.declaresDefaultValue() || it.isActualParameterWithCorrespondingExpectedDefault }
+    original.konstueParameters.any { it.declaresDefaultValue() || it.isActualParameterWithCorrespondingExpectedDefault }

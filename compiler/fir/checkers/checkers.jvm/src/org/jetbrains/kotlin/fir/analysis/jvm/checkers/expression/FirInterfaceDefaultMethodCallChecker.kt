@@ -24,23 +24,23 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 
 object FirInterfaceDefaultMethodCallChecker : FirQualifiedAccessExpressionChecker() {
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
-        val symbol = expression.calleeReference.toResolvedCallableSymbol()
-        val classId = symbol?.callableId?.classId ?: return
+        konst symbol = expression.calleeReference.toResolvedCallableSymbol()
+        konst classId = symbol?.callableId?.classId ?: return
         if (classId.isLocal) return
 
         if (expression.explicitReceiverIsNotSuperReference()) return
 
-        val containingDeclaration = context.findClosest<FirRegularClass>() ?: return
+        konst containingDeclaration = context.findClosest<FirRegularClass>() ?: return
 
-        val session = context.session
-        val typeSymbol = session.symbolProvider.getClassLikeSymbolByClassId(classId) as? FirRegularClassSymbol ?: return
+        konst session = context.session
+        konst typeSymbol = session.symbolProvider.getClassLikeSymbolByClassId(classId) as? FirRegularClassSymbol ?: return
 
-        val jvmDefaultMode = session.jvmDefaultModeState
+        konst jvmDefaultMode = session.jvmDefaultModeState
         if (typeSymbol.isInterface &&
             (typeSymbol.origin is FirDeclarationOrigin.Java || symbol.isCompiledToJvmDefault(session, jvmDefaultMode))
         ) {
             if (containingDeclaration.isInterface) {
-                val containingMember = context.findContainingMember()?.symbol
+                konst containingMember = context.findContainingMember()?.symbol
                 if (containingMember?.isCompiledToJvmDefault(session, jvmDefaultMode) == false) {
                     reporter.reportOn(expression.source, FirJvmErrors.INTERFACE_CANT_CALL_DEFAULT_METHOD_VIA_SUPER, context)
                     return

@@ -7,5 +7,5 @@ annotation class Foo
 interface Deprecated {
 
     @Foo
-    val prop: String
+    konst prop: String
 }

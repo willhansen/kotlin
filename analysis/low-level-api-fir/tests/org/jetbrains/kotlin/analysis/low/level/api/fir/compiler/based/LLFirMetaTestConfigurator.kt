@@ -15,7 +15,7 @@ import java.io.File
  */
 class LLFirMetaTestConfigurator(testServices: TestServices) : MetaTestConfigurator(testServices) {
     override fun transformTestDataPath(testDataFileName: String): String {
-        val llFirFile = File(testDataFileName).llFirTestDataFile
+        konst llFirFile = File(testDataFileName).llFirTestDataFile
         return if (llFirFile.exists()) llFirFile.path else testDataFileName
     }
 }

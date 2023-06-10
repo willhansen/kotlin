@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.native.interop.gen
 
-class DeepCopyForManagedWrapper(val originalClass: ClassStub, val context: StubsBuildingContext) : StubIrTransformer {
+class DeepCopyForManagedWrapper(konst originalClass: ClassStub, konst context: StubsBuildingContext) : StubIrTransformer {
     override fun visitClass(element: ClassStub): ClassStub = error("Not implemented")
 
     override fun visitTypealias(element: TypealiasStub): TypealiasStub = error("Not implemented")
@@ -104,9 +104,9 @@ class DeepCopyForManagedWrapper(val originalClass: ClassStub, val context: Stubs
         if (type !is ClassifierStubType) return type
         if (type.classifier.topLevelName != "CPointer" && type.classifier.topLevelName != "CValuesRef") return type
         if (type.classifier.pkg != "kotlinx.cinterop") return type
-        val argument = type.typeArguments.single() as? TypeArgumentStub ?: return type
+        konst argument = type.typeArguments.single() as? TypeArgumentStub ?: return type
         if (argument.type !is ClassifierStubType) return type
-        val newClassifier = managedWrapperClassifier(argument.type.classifier) ?: return type
+        konst newClassifier = managedWrapperClassifier(argument.type.classifier) ?: return type
 
         return ClassifierStubType(newClassifier, nullable = type.nullable)
     }

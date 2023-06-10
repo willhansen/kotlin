@@ -11,7 +11,7 @@ interface Path {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class RealPath<T: Int>(val x: T, val y: T) : Path {
+konstue class RealPath<T: Int>(konst x: T, konst y: T) : Path {
     override fun dispatch(maxDepth: Int) = Unit
 
     fun childrenDispatch(recursively: Boolean): Unit =

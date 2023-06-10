@@ -1,11 +1,11 @@
 fun call() {
-    val ktClass = KtClass()
+    konst ktClass = KtClass()
     ktClass.<expr>instance</expr>.foo = 42
 }
 
 
 class KtClass {
-    val instance : KtSubClass = KtSubClass()
+    konst instance : KtSubClass = KtSubClass()
 }
 
 class KtSubClass {

@@ -25,13 +25,13 @@ import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 
 internal class KtFirClassErrorType(
-    override val coneType: ConeClassLikeType,
-    private val coneDiagnostic: ConeDiagnostic,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeClassLikeType,
+    private konst coneDiagnostic: ConeDiagnostic,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtClassErrorType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
+    override konst token: KtLifetimeToken get() = builder.token
 
-    override val qualifiers: List<KtClassTypeQualifier> by cached {
+    override konst qualifiers: List<KtClassTypeQualifier> by cached {
         when (coneDiagnostic) {
             is ConeUnresolvedError ->
                 ErrorClassTypeQualifierBuilder.createQualifiersForUnresolvedType(coneDiagnostic, builder)
@@ -42,16 +42,16 @@ internal class KtFirClassErrorType(
     }
 
 
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
-    override val errorMessage: String get() = withValidityAssertion { coneDiagnostic.reason }
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst errorMessage: String get() = withValidityAssertion { coneDiagnostic.reason }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
 
 
-    override val candidateClassSymbols: Collection<KtClassLikeSymbol> by cached {
-        val symbols = coneDiagnostic.getCandidateSymbols().filterIsInstance<FirClassLikeSymbol<*>>()
+    override konst candidateClassSymbols: Collection<KtClassLikeSymbol> by cached {
+        konst symbols = coneDiagnostic.getCandidateSymbols().filterIsInstance<FirClassLikeSymbol<*>>()
         symbols.map { builder.classifierBuilder.buildClassLikeSymbol(it) }
     }
 

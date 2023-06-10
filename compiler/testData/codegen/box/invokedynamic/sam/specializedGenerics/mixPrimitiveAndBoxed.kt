@@ -25,11 +25,11 @@ fun interface IFooMixed1 : IFooInt, IFooT<Int> {
 }
 
 fun box(): String {
-    val f0 = IFooMixed0 { it * 2 }
+    konst f0 = IFooMixed0 { it * 2 }
     if (f0.foo(21) != 42)
         return "Failed: f0.foo(21)=${f0.foo(21)}"
 
-    val f1 = IFooMixed1 { it * 2 }
+    konst f1 = IFooMixed1 { it * 2 }
     if (f1.foo(21) != 42)
         return "Failed: f1.foo(21)=${f1.foo(21)}"
 

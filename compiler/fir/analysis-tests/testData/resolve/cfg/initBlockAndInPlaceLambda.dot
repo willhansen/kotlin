@@ -46,7 +46,7 @@ digraph initBlockAndInPlaceLambda_kt {
                 18 [label="Postponed exit from lambda"];
                 19 [label="Function call: $subj$.R|kotlin/let|<R|B|, R|C|>(...)" style="filled" fillcolor=yellow];
                 20 [label="Exit safe call"];
-                21 [label="Variable declaration: lval c: R|C?|"];
+                21 [label="Variable declaration: lkonst c: R|C?|"];
                 22 [label="Exit block"];
             }
             23 [label="Exit init block" style="filled" fillcolor=red];

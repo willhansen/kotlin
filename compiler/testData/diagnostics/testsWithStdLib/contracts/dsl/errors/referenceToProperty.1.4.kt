@@ -4,7 +4,7 @@
 
 import kotlin.contracts.*
 
-class Foo(val x: Int?) {
+class Foo(konst x: Int?) {
     fun isXNull(): Boolean {
         contract {
             returns(false) implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>x<!> != null)

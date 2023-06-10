@@ -22,14 +22,14 @@ open class KotlinCommonCompilation @Inject internal constructor(compilation: Kot
     KotlinMetadataCompilation<KotlinCommonOptions> {
     @Suppress("DEPRECATION")
     @Deprecated("Accessing task instance directly is deprecated", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTask: KotlinCompileCommon
+    override konst compileKotlinTask: KotlinCompileCommon
         get() = compilation.compileKotlinTask as KotlinCompileCommon
 
     @Suppress("UNCHECKED_CAST")
-    override val compileTaskProvider: TaskProvider<KotlinCompilationTask<KotlinMultiplatformCommonCompilerOptions>>
+    override konst compileTaskProvider: TaskProvider<KotlinCompilationTask<KotlinMultiplatformCommonCompilerOptions>>
         get() = compilation.compileTaskProvider as TaskProvider<KotlinCompilationTask<KotlinMultiplatformCommonCompilerOptions>>
 
-    internal val isKlibCompilation: Boolean
+    internal konst isKlibCompilation: Boolean
         get() = target.project.isKotlinGranularMetadataEnabled && !forceCompilationToKotlinMetadata
 
     internal var forceCompilationToKotlinMetadata: Boolean = false

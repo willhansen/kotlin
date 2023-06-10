@@ -3,7 +3,7 @@
 // without instanceof or 'is...'.
 
 fun test() {
-    val x: Any = arrayListOf("abc", "def")
+    konst x: Any = arrayListOf("abc", "def")
     x as? MutableList<*>
 }
 

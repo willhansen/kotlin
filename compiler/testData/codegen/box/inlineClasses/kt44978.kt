@@ -4,12 +4,12 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class StringArray(val values: Array<String>)
+konstue class StringArray(konst konstues: Array<String>)
 
 fun foo(a1: StringArray, a2: StringArray): String {
     var result = ""
     for ((_, a) in arrayOf(a1, a2).withIndex()) {
-        result += a.values[0]
+        result += a.konstues[0]
     }
     return result
 }

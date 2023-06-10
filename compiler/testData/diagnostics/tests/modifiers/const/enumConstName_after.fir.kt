@@ -1,10 +1,10 @@
-// !LANGUAGE: +IntrinsicConstEvaluation
+// !LANGUAGE: +IntrinsicConstEkonstuation
 
 enum class EnumClass {
     OK, VALUE, anotherValue, WITH_UNDERSCORE
 }
 
-const val name1 = EnumClass.OK.name
-const val name2 = EnumClass.VALUE.name
-const val name3 = EnumClass.anotherValue.name
-const val name4 = EnumClass.WITH_UNDERSCORE.name
+const konst name1 = EnumClass.OK.name
+const konst name2 = EnumClass.VALUE.name
+const konst name3 = EnumClass.anotherValue.name
+const konst name4 = EnumClass.WITH_UNDERSCORE.name

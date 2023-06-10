@@ -1,1 +1,1 @@
-class A(val x: String)
+class A(konst x: String)

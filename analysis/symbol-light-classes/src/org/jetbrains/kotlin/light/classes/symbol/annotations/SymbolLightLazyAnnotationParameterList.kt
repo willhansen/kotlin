@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.light.classes.symbol.toArrayIfNotEmptyOrDefault
 
 internal class SymbolLightLazyAnnotationParameterList(
     parent: SymbolLightAbstractAnnotation,
-    private val lazyArguments: Lazy<List<KtNamedAnnotationValue>>,
+    private konst lazyArguments: Lazy<List<KtNamedAnnotationValue>>,
 ) : SymbolLightAbstractAnnotationParameterList(parent) {
-    private val _attributes: Collection<PsiNameValuePair> by lazyPub {
-        val attributes = lazyArguments.value.map {
+    private konst _attributes: Collection<PsiNameValuePair> by lazyPub {
+        konst attributes = lazyArguments.konstue.map {
             SymbolNameValuePairForAnnotationArgument(it, this)
         }
 

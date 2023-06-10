@@ -1,3 +1,3 @@
 private fun test() {
-    val sink: okio.Sink = null!!
+    konst sink: okio.Sink = null!!
 }

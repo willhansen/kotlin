@@ -11,29 +11,29 @@ import org.jetbrains.kotlin.wasm.ir.*
 import java.nio.ByteBuffer
 
 
-class WasmBinaryToIR(val b: MyByteReader) {
-    val validVersion = 1u
+class WasmBinaryToIR(konst b: MyByteReader) {
+    konst konstidVersion = 1u
 
-    val functionTypes: MutableList<WasmFunctionType> = mutableListOf()
-    val gcTypes: MutableList<WasmTypeDeclaration> = mutableListOf()
+    konst functionTypes: MutableList<WasmFunctionType> = mutableListOf()
+    konst gcTypes: MutableList<WasmTypeDeclaration> = mutableListOf()
 
-    val importsInOrder: MutableList<WasmNamedModuleField> = mutableListOf()
-    val importedFunctions: MutableList<WasmFunction.Imported> = mutableListOf()
-    val importedMemories: MutableList<WasmMemory> = mutableListOf()
-    val importedTables: MutableList<WasmTable> = mutableListOf()
-    val importedGlobals: MutableList<WasmGlobal> = mutableListOf()
-    val importedTags: MutableList<WasmTag> = mutableListOf()
+    konst importsInOrder: MutableList<WasmNamedModuleField> = mutableListOf()
+    konst importedFunctions: MutableList<WasmFunction.Imported> = mutableListOf()
+    konst importedMemories: MutableList<WasmMemory> = mutableListOf()
+    konst importedTables: MutableList<WasmTable> = mutableListOf()
+    konst importedGlobals: MutableList<WasmGlobal> = mutableListOf()
+    konst importedTags: MutableList<WasmTag> = mutableListOf()
 
-    val definedFunctions: MutableList<WasmFunction.Defined> = mutableListOf()
-    val table: MutableList<WasmTable> = mutableListOf()
-    val memory: MutableList<WasmMemory> = mutableListOf()
-    val globals: MutableList<WasmGlobal> = mutableListOf()
-    val exports: MutableList<WasmExport<*>> = mutableListOf()
+    konst definedFunctions: MutableList<WasmFunction.Defined> = mutableListOf()
+    konst table: MutableList<WasmTable> = mutableListOf()
+    konst memory: MutableList<WasmMemory> = mutableListOf()
+    konst globals: MutableList<WasmGlobal> = mutableListOf()
+    konst exports: MutableList<WasmExport<*>> = mutableListOf()
     var startFunction: WasmFunction? = null
-    val elements: MutableList<WasmElement> = mutableListOf()
-    val data: MutableList<WasmData> = mutableListOf()
+    konst elements: MutableList<WasmElement> = mutableListOf()
+    konst data: MutableList<WasmData> = mutableListOf()
     var dataCount: Boolean = true
-    val tags: MutableList<WasmTag> = mutableListOf()
+    konst tags: MutableList<WasmTag> = mutableListOf()
 
     private fun <T> byIdx(l1: List<T>, l2: List<T>, index: Int): T {
         if (index < l1.size)
@@ -50,26 +50,26 @@ class WasmBinaryToIR(val b: MyByteReader) {
 
     fun parseModule(): WasmModule {
         if (b.readUInt32() != 0x6d736100u)
-            error("InvalidMagicNumber")
+            error("InkonstidMagicNumber")
 
-        val version = b.readUInt32()
-        if (version != validVersion)
-            error("InvalidVersion(version.toLong(), listOf(validVersion.toLong()))")
+        konst version = b.readUInt32()
+        if (version != konstidVersion)
+            error("InkonstidVersion(version.toLong(), listOf(konstidVersion.toLong()))")
 
         var maxSectionId = 0
         while (true) {
-            val sectionId = try {
+            konst sectionId = try {
                 b.readVarUInt7().toInt()
             } catch (e: Throwable) { // Unexpected end
                 break
             }
-            if (sectionId > 12) error("InvalidSectionId(sectionId)")
+            if (sectionId > 12) error("InkonstidSectionId(sectionId)")
             require(sectionId == 12 || maxSectionId == 12 || sectionId == 0 || sectionId > maxSectionId) {
                 "Section ID $sectionId came after $maxSectionId"
             }
             maxSectionId = maxOf(sectionId, maxSectionId)
 
-            val sectionLength = b.readVarUInt32AsInt()
+            konst sectionLength = b.readVarUInt32AsInt()
             b.limitSize(sectionLength, "Wasm section $sectionId of size $sectionLength") {
                 when (sectionId) {
                     // Skip custom section
@@ -78,7 +78,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Type section
                     1 -> {
                         forEachVectorElement {
-                            when (val type = readTypeDeclaration()) {
+                            when (konst type = readTypeDeclaration()) {
                                 is WasmFunctionType ->
                                     functionTypes += type
                                 is WasmStructDeclaration ->
@@ -91,10 +91,10 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Import section
                     2 -> {
                         forEachVectorElement {
-                            val importPair = WasmImportDescriptor(readString(), readString())
-                            when (val kind = b.readByte().toInt()) {
+                            konst importPair = WasmImportDescriptor(readString(), readString())
+                            when (konst kind = b.readByte().toInt()) {
                                 0 -> {
-                                    val type = functionTypes[b.readVarUInt32AsInt()]
+                                    konst type = functionTypes[b.readVarUInt32AsInt()]
                                     importedFunctions += WasmFunction.Imported(
                                         name = "",
                                         type = WasmSymbol(type),
@@ -103,12 +103,12 @@ class WasmBinaryToIR(val b: MyByteReader) {
                                 }
                                 // Table
                                 1 -> {
-                                    val elementType = readRefType()
-                                    val limits = readLimits()
+                                    konst elementType = readRefType()
+                                    konst limits = readLimits()
                                     importedTables.add(WasmTable(limits, elementType, importPair).also { importsInOrder.add(it) })
                                 }
                                 2 -> {
-                                    val limits = readLimits()
+                                    konst limits = readLimits()
                                     importedMemories.add(WasmMemory(limits, importPair).also { importsInOrder.add(it) })
                                 }
                                 3 -> {
@@ -123,7 +123,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
                                     )
                                 }
                                 4 -> {
-                                    val tag = readTag(importPair)
+                                    konst tag = readTag(importPair)
                                     importedTags.add(tag)
                                     importsInOrder.add(tag)
                                 }
@@ -137,7 +137,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Function section
                     3 -> {
                         forEachVectorElement {
-                            val functionType = functionTypes[b.readVarUInt32AsInt()]
+                            konst functionType = functionTypes[b.readVarUInt32AsInt()]
                             definedFunctions.add(
                                 WasmFunction.Defined(
                                     "",
@@ -154,8 +154,8 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Table section
                     4 -> {
                         forEachVectorElement {
-                            val elementType = readRefType()
-                            val limits = readLimits()
+                            konst elementType = readRefType()
+                            konst limits = readLimits()
                             table.add(
                                 WasmTable(limits, elementType)
                             )
@@ -165,7 +165,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Memory section
                     5 -> {
                         forEachVectorElement {
-                            val limits = readLimits()
+                            konst limits = readLimits()
                             memory.add(WasmMemory(limits))
                         }
                     }
@@ -180,7 +180,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Globals section
                     6 -> {
                         forEachVectorElement {
-                            val expr = mutableListOf<WasmInstr>()
+                            konst expr = mutableListOf<WasmInstr>()
                             globals.add(
                                 WasmGlobal(
                                     name = "",
@@ -196,9 +196,9 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Export section
                     7 -> {
                         forEachVectorElement {
-                            val name = readString()
-                            val kind = b.readByte().toInt()
-                            val index = b.readVarUInt32AsInt()
+                            konst name = readString()
+                            konst kind = b.readByte().toInt()
+                            konst index = b.readVarUInt32AsInt()
                             exports.add(
                                 when (kind) {
                                     0 -> WasmExport.Function(name, funByIdx(index))
@@ -206,7 +206,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
                                     2 -> WasmExport.Memory(name, memoryByIdx(index))
                                     3 -> WasmExport.Global(name, globalByIdx(index))
                                     4 -> WasmExport.Tag(name, tagByIdx(index))
-                                    else -> error("Invalid export kind $kind")
+                                    else -> error("Inkonstid export kind $kind")
                                 }
                             )
                         }
@@ -221,11 +221,11 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Element section
                     9 -> {
                         forEachVectorElement {
-                            val firstByte = b.readUByte().toInt()
+                            konst firstByte = b.readUByte().toInt()
 
-                            val mode: WasmElement.Mode = when (firstByte) {
+                            konst mode: WasmElement.Mode = when (firstByte) {
                                 0, 4 -> {
-                                    val offset = readExpression()
+                                    konst offset = readExpression()
                                     WasmElement.Mode.Active(tableByIdx(0), offset)
                                 }
 
@@ -233,8 +233,8 @@ class WasmBinaryToIR(val b: MyByteReader) {
                                     WasmElement.Mode.Passive
 
                                 2, 6 -> {
-                                    val tableIdx = b.readVarUInt32()
-                                    val offset = readExpression()
+                                    konst tableIdx = b.readVarUInt32()
+                                    konst offset = readExpression()
                                     WasmElement.Mode.Active(tableByIdx(tableIdx.toInt()), offset)
                                 }
 
@@ -242,12 +242,12 @@ class WasmBinaryToIR(val b: MyByteReader) {
                                     WasmElement.Mode.Declarative
 
                                 else ->
-                                    error("Invalid element first byte $firstByte")
+                                    error("Inkonstid element first byte $firstByte")
                             }
 
-                            val type = if (firstByte < 5) {
+                            konst type = if (firstByte < 5) {
                                 if (firstByte in 1..3) {
-                                    val elemKind = b.readByte()
+                                    konst elemKind = b.readByte()
                                     require(elemKind == 0.toByte())
                                 }
                                 WasmFuncRef
@@ -255,11 +255,11 @@ class WasmBinaryToIR(val b: MyByteReader) {
                                 readValueType()
                             }
 
-                            val values: List<WasmTable.Value> = mapVector {
+                            konst konstues: List<WasmTable.Value> = mapVector {
                                 if (firstByte < 4) {
                                     WasmTable.Value.Function(funByIdx(b.readVarUInt32AsInt()))
                                 } else {
-                                    val exprBody = mutableListOf<WasmInstr>()
+                                    konst exprBody = mutableListOf<WasmInstr>()
                                     readExpression(exprBody)
                                     WasmTable.Value.Expression(exprBody)
                                 }
@@ -267,7 +267,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
 
                             elements += WasmElement(
                                 type,
-                                values,
+                                konstues,
                                 mode,
                             )
                         }
@@ -276,14 +276,14 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Code section
                     10 -> {
                         forEachVectorElement { functionId ->
-                            val function = definedFunctions[functionId.toInt()]
-                            val size = b.readVarUInt32AsInt()
+                            konst function = definedFunctions[functionId.toInt()]
+                            konst size = b.readVarUInt32AsInt()
                             b.limitSize(size, "function body size") {
                                 mapVector {
-                                    val count = b.readVarUInt32AsInt()
-                                    val valueType = readValueType()
+                                    konst count = b.readVarUInt32AsInt()
+                                    konst konstueType = readValueType()
 
-                                    val firstLocalId =
+                                    konst firstLocalId =
                                         function.locals.lastOrNull()?.id?.plus(1) ?: 0
 
                                     repeat(count) { thisIdx ->
@@ -291,7 +291,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
                                             WasmLocal(
                                                 firstLocalId + thisIdx,
                                                 "",
-                                                valueType,
+                                                konstueType,
                                                 false
                                             )
                                         )
@@ -306,14 +306,14 @@ class WasmBinaryToIR(val b: MyByteReader) {
                     // Data section
                     11 -> {
                         forEachVectorElement {
-                            val mode = when (val firstByte = b.readByte().toInt()) {
+                            konst mode = when (konst firstByte = b.readByte().toInt()) {
                                 0 -> WasmDataMode.Active(0, readExpression())
                                 1 -> WasmDataMode.Passive
                                 2 -> WasmDataMode.Active(b.readVarUInt32AsInt(), readExpression())
                                 else -> error("Unsupported data mode $firstByte")
                             }
-                            val size = b.readVarUInt32AsInt()
-                            val bytes = b.readBytes(size)
+                            konst size = b.readVarUInt32AsInt()
+                            konst bytes = b.readBytes(size)
                             data += WasmData(mode, bytes)
                         }
                     }
@@ -352,7 +352,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
     }
 
     private fun readLimits(): WasmLimits {
-        val hasMax = b.readVarUInt1()
+        konst hasMax = b.readVarUInt1()
         return WasmLimits(
             minSize = b.readVarUInt32(),
             maxSize = if (hasMax) b.readVarUInt32() else null
@@ -360,9 +360,9 @@ class WasmBinaryToIR(val b: MyByteReader) {
     }
 
     private fun readTag(importPair: WasmImportDescriptor? = null): WasmTag {
-        val attribute = b.readByte()
+        konst attribute = b.readByte()
         check(attribute.toInt() == 0) { "as per spec" }
-        val type = functionTypes[b.readVarUInt32AsInt()]
+        konst type = functionTypes[b.readVarUInt32AsInt()]
         return WasmTag(type, importPair)
     }
 
@@ -373,7 +373,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
         var blockCount = 0
         while (true) {
             require(blockCount >= 0)
-            val inst = readInstruction(locals)
+            konst inst = readInstruction(locals)
 
             when (inst.operator) {
                 WasmOp.END -> {
@@ -395,19 +395,19 @@ class WasmBinaryToIR(val b: MyByteReader) {
     }
 
     private fun readInstruction(locals: List<WasmLocal>): WasmInstr {
-        val firstByte = b.readByte().toUByte().toInt()
-        val opcode = if (firstByte in twoByteOpcodes) {
-            val secondByte = b.readByte().toUByte().toInt()
+        konst firstByte = b.readByte().toUByte().toInt()
+        konst opcode = if (firstByte in twoByteOpcodes) {
+            konst secondByte = b.readByte().toUByte().toInt()
             (firstByte shl 8) + secondByte
         } else {
             firstByte
         }
 
-        val op = opcodesToOp[opcode]
+        konst op = opcodesToOp[opcode]
             ?: error("Wrong opcode 0x${opcode.toString(16)}")
 
 
-        val immediates = op.immediates.map {
+        konst immediates = op.immediates.map {
             when (it) {
                 WasmImmediateKind.CONST_I32 -> WasmImmediate.ConstI32(b.readVarInt32())
                 WasmImmediateKind.CONST_I64 -> WasmImmediate.ConstI64(b.readVarInt64())
@@ -448,8 +448,8 @@ class WasmBinaryToIR(val b: MyByteReader) {
     private fun readTypeDeclaration(): WasmTypeDeclaration {
         when (b.readVarInt7()) {
             (-0x20).toByte() -> {
-                val types = mapVector { readValueType() }
-                val returnTypes = mapVector { readValueType() }
+                konst types = mapVector { readValueType() }
+                konst returnTypes = mapVector { readValueType() }
                 return WasmFunctionType(types, returnTypes)
             }
 
@@ -457,7 +457,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
         }
     }
 
-    private val codeToSimpleValueType: Map<Byte, WasmType> = listOf(
+    private konst codeToSimpleValueType: Map<Byte, WasmType> = listOf(
         WasmI32,
         WasmI64,
         WasmF32,
@@ -472,12 +472,12 @@ class WasmBinaryToIR(val b: MyByteReader) {
     ).associateBy { it.code }
 
     private fun readValueType(): WasmType {
-        val code = b.readVarInt7()
+        konst code = b.readVarInt7()
         return readValueTypeImpl(code)
     }
 
     private fun readBlockType(): WasmImmediate.BlockType {
-        val code = b.readVarInt64()
+        konst code = b.readVarInt64()
         return when {
             code >= 0 -> WasmImmediate.BlockType.Function(functionTypes[code.toInt()])
             code == -0x40L -> WasmImmediate.BlockType.Value(null)
@@ -486,7 +486,7 @@ class WasmBinaryToIR(val b: MyByteReader) {
     }
 
     private fun readRefType(): WasmType {
-        val code = b.readByte()
+        konst code = b.readByte()
 
         return when (code.toInt()) {
             0x70 -> WasmFuncRef
@@ -501,11 +501,11 @@ class WasmBinaryToIR(val b: MyByteReader) {
             return it
         }
 
-        error("InvalidType 0x${code.toString(16)}")
+        error("InkonstidType 0x${code.toString(16)}")
     }
 
     private inline fun forEachVectorElement(block: (index: UInt) -> Unit) {
-        val size = b.readVarUInt32()
+        konst size = b.readVarUInt32()
         for (index in 0u until size) {
             block(index)
         }
@@ -524,15 +524,15 @@ class WasmBinaryToIR(val b: MyByteReader) {
     }
 }
 
-class MyByteReader(val ins: java.io.InputStream) : ByteReader() {
+class MyByteReader(konst ins: java.io.InputStream) : ByteReader() {
     var offset: Long = 0
 
-    class SizeLimit(val maxSize: Long, val reason: String)
+    class SizeLimit(konst maxSize: Long, konst reason: String)
 
     var sizeLimits = mutableListOf(SizeLimit(Long.MAX_VALUE, "Root"))
     var currentMaxSize: Long = Long.MAX_VALUE
 
-    override val isEof: Boolean
+    override konst isEof: Boolean
         get() {
             error("Not implemented")
         }
@@ -543,7 +543,7 @@ class MyByteReader(val ins: java.io.InputStream) : ByteReader() {
 
     @OptIn(ExperimentalStdlibApi::class)
     inline fun limitSize(size: Int, reason: String, block: () -> Unit) {
-        val maxSize = offset + size
+        konst maxSize = offset + size
         sizeLimits.add(SizeLimit(maxSize, reason))
         currentMaxSize = maxSize
         block()
@@ -555,7 +555,7 @@ class MyByteReader(val ins: java.io.InputStream) : ByteReader() {
     }
 
     override fun readByte(): Byte {
-        val b = ins.read()
+        konst b = ins.read()
         if (b == -1)
             error("UnexpectedEnd")
 
@@ -573,12 +573,12 @@ class MyByteReader(val ins: java.io.InputStream) : ByteReader() {
 }
 
 // First byte of two byte opcodes
-val twoByteOpcodes: Set<Int> =
+konst twoByteOpcodes: Set<Int> =
     opcodesToOp.keys.filter { it > 0xFF }.map { it ushr 8 }.toSet()
 
 
 abstract class ByteReader {
-    abstract val isEof: Boolean
+    abstract konst isEof: Boolean
 
     // Slices the next set off as its own and moves the position up that much
     abstract fun read(amount: Int): ByteReader
@@ -606,24 +606,24 @@ abstract class ByteReader {
 
 
     fun readVarInt7() = readSignedLeb128().let {
-        if (it < Byte.MIN_VALUE.toLong() || it > Byte.MAX_VALUE.toLong()) error("InvalidLeb128Number")
+        if (it < Byte.MIN_VALUE.toLong() || it > Byte.MAX_VALUE.toLong()) error("InkonstidLeb128Number")
         it.toByte()
     }
 
     fun readVarInt32() = readSignedLeb128().let {
-        if (it < Int.MIN_VALUE.toLong() || it > Int.MAX_VALUE.toLong()) error("InvalidLeb128Number")
+        if (it < Int.MIN_VALUE.toLong() || it > Int.MAX_VALUE.toLong()) error("InkonstidLeb128Number")
         it.toInt()
     }
 
     fun readVarInt64() = readSignedLeb128(9)
 
     fun readVarUInt1() = readUnsignedLeb128().let {
-        if (it != 1u && it != 0u) error("InvalidLeb128Number")
+        if (it != 1u && it != 0u) error("InkonstidLeb128Number")
         it == 1u
     }
 
     fun readVarUInt7() = readUnsignedLeb128().let {
-        if (it > 255u) error("InvalidLeb128Number")
+        if (it > 255u) error("InkonstidLeb128Number")
         it.toShort()
     }
 
@@ -639,7 +639,7 @@ abstract class ByteReader {
             result = result or ((cur and 0x7fu) shl (count * 7))
             count++
         } while (cur and 0x80u == 0x80u && count <= maxCount)
-        if (cur and 0x80u == 0x80u) error("InvalidLeb128Number")
+        if (cur and 0x80u == 0x80u) error("InkonstidLeb128Number")
         return result
     }
 
@@ -655,16 +655,16 @@ abstract class ByteReader {
             signBits = signBits shl 7
             count++
         } while (cur and 0x80 == 0x80 && count <= maxCount)
-        if (cur and 0x80 == 0x80) error("InvalidLeb128Number")
+        if (cur and 0x80 == 0x80) error("InkonstidLeb128Number")
 
-        // Check for 64 bit invalid, taken from Apache/MIT licensed:
+        // Check for 64 bit inkonstid, taken from Apache/MIT licensed:
         //  https://github.com/paritytech/parity-wasm/blob/2650fc14c458c6a252c9dc43dd8e0b14b6d264ff/src/elements/primitives.rs#L351
         // TODO: probably need 32 bit checks too, but meh, not in the suite
         if (count > maxCount && maxCount == 9) {
             if (cur and 0b0100_0000 == 0b0100_0000) {
-                if ((cur or 0b1000_0000).toByte() != (-1).toByte()) error("InvalidLeb128Number")
+                if ((cur or 0b1000_0000).toByte() != (-1).toByte()) error("InkonstidLeb128Number")
             } else if (cur != 0) {
-                error("InvalidLeb128Number")
+                error("InkonstidLeb128Number")
             }
         }
 

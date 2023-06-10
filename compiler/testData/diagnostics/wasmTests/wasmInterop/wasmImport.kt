@@ -18,7 +18,7 @@ fun foo2() {
     }
 }
 
-val p1 = (<!NESTED_WASM_IMPORT, WASM_IMPORT_ON_NON_EXTERNAL_DECLARATION!>@WasmImport("a", "b")<!> fun () {})
+konst p1 = (<!NESTED_WASM_IMPORT, WASM_IMPORT_ON_NON_EXTERNAL_DECLARATION!>@WasmImport("a", "b")<!> fun () {})
 
 @WasmImport("a", "b")
 external fun foo3(

@@ -1,3 +1,3 @@
 
-val __FILE__ = "success"
+konst __FILE__ = "success"
 __FILE__

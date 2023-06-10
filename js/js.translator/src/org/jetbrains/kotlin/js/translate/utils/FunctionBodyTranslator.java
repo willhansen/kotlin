@@ -79,25 +79,25 @@ public final class FunctionBodyTranslator extends AbstractTranslator {
             @NotNull FunctionDescriptor descriptor,
             @NotNull TranslationContext context
     ) {
-        List<ValueParameterDescriptor> valueParameters = descriptor.getValueParameters();
-        List<ValueParameterDescriptor> valueParametersForDefaultValue =
+        List<ValueParameterDescriptor> konstueParameters = descriptor.getValueParameters();
+        List<ValueParameterDescriptor> konstueParametersForDefaultValue =
                 CodegenUtil.getFunctionParametersForDefaultValueGeneration(descriptor, context.bindingTrace());
 
-        List<JsStatement> result = new ArrayList<>(valueParameters.size());
-        for (int i = 0; i < valueParameters.size(); i++) {
-            ValueParameterDescriptor valueParameter = valueParameters.get(i);
-            ValueParameterDescriptor valueParameterForDefaultValue = valueParametersForDefaultValue.get(i);
+        List<JsStatement> result = new ArrayList<>(konstueParameters.size());
+        for (int i = 0; i < konstueParameters.size(); i++) {
+            ValueParameterDescriptor konstueParameter = konstueParameters.get(i);
+            ValueParameterDescriptor konstueParameterForDefaultValue = konstueParametersForDefaultValue.get(i);
 
-            if (!valueParameterForDefaultValue.declaresDefaultValue()) continue;
+            if (!konstueParameterForDefaultValue.declaresDefaultValue()) continue;
 
-            JsExpression jsNameRef = ReferenceTranslator.translateAsValueReference(valueParameter, context);
+            JsExpression jsNameRef = ReferenceTranslator.translateAsValueReference(konstueParameter, context);
 
-            KtExpression defaultArgument = BindingUtils.getDefaultArgument(valueParameterForDefaultValue);
+            KtExpression defaultArgument = BindingUtils.getDefaultArgument(konstueParameterForDefaultValue);
             JsBlock defaultArgBlock = new JsBlock();
             JsExpression defaultValue = Translation.translateAsExpression(defaultArgument, context, defaultArgBlock);
 
             // parameterName = defaultValue
-            PsiElement psi = PsiSourceElementKt.getPsi(valueParameter.getSource());
+            PsiElement psi = PsiSourceElementKt.getPsi(konstueParameter.getSource());
             JsStatement assignStatement = assignment(jsNameRef, defaultValue).source(psi).makeStmt();
 
             JsStatement thenStatement = JsAstUtils.mergeStatementInBlockIfNeeded(assignStatement, defaultArgBlock);

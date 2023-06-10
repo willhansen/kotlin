@@ -44,7 +44,7 @@ FILE fqName:<root> fileName:/conventionComparisons.kt
             $this: GET_VAR '<this>: <root>.IB declared in <root>.test1' type=<root>.IB origin=null
             $receiver: GET_VAR 'a1: <root>.IA declared in <root>.test1' type=<root>.IA origin=null
             other: GET_VAR 'a2: <root>.IA declared in <root>.test1' type=<root>.IA origin=null
-          arg1: CONST Int type=kotlin.Int value=0
+          arg1: CONST Int type=kotlin.Int konstue=0
   FUN name:test2 visibility:public modality:FINAL <> ($receiver:<root>.IB, a1:<root>.IA, a2:<root>.IA) returnType:kotlin.Boolean
     $receiver: VALUE_PARAMETER name:<this> type:<root>.IB
     VALUE_PARAMETER name:a1 index:0 type:<root>.IA
@@ -56,7 +56,7 @@ FILE fqName:<root> fileName:/conventionComparisons.kt
             $this: GET_VAR '<this>: <root>.IB declared in <root>.test2' type=<root>.IB origin=null
             $receiver: GET_VAR 'a1: <root>.IA declared in <root>.test2' type=<root>.IA origin=null
             other: GET_VAR 'a2: <root>.IA declared in <root>.test2' type=<root>.IA origin=null
-          arg1: CONST Int type=kotlin.Int value=0
+          arg1: CONST Int type=kotlin.Int konstue=0
   FUN name:test3 visibility:public modality:FINAL <> ($receiver:<root>.IB, a1:<root>.IA, a2:<root>.IA) returnType:kotlin.Boolean
     $receiver: VALUE_PARAMETER name:<this> type:<root>.IB
     VALUE_PARAMETER name:a1 index:0 type:<root>.IA
@@ -68,7 +68,7 @@ FILE fqName:<root> fileName:/conventionComparisons.kt
             $this: GET_VAR '<this>: <root>.IB declared in <root>.test3' type=<root>.IB origin=null
             $receiver: GET_VAR 'a1: <root>.IA declared in <root>.test3' type=<root>.IA origin=null
             other: GET_VAR 'a2: <root>.IA declared in <root>.test3' type=<root>.IA origin=null
-          arg1: CONST Int type=kotlin.Int value=0
+          arg1: CONST Int type=kotlin.Int konstue=0
   FUN name:test4 visibility:public modality:FINAL <> ($receiver:<root>.IB, a1:<root>.IA, a2:<root>.IA) returnType:kotlin.Boolean
     $receiver: VALUE_PARAMETER name:<this> type:<root>.IB
     VALUE_PARAMETER name:a1 index:0 type:<root>.IA
@@ -80,4 +80,4 @@ FILE fqName:<root> fileName:/conventionComparisons.kt
             $this: GET_VAR '<this>: <root>.IB declared in <root>.test4' type=<root>.IB origin=null
             $receiver: GET_VAR 'a1: <root>.IA declared in <root>.test4' type=<root>.IA origin=null
             other: GET_VAR 'a2: <root>.IA declared in <root>.test4' type=<root>.IA origin=null
-          arg1: CONST Int type=kotlin.Int value=0
+          arg1: CONST Int type=kotlin.Int konstue=0

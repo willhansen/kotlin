@@ -11,10 +11,10 @@ inline fun CallbackComposer.addToExtension(noinline block: Callback) {
 }
 
 fun createCallbackBuilder(builder: CallbackComposer.() -> Unit): () -> Callback = {
-    val callbacks = arrayOf<Callback>()
+    konst callbacks = arrayOf<Callback>()
     builder(callbacks.unsafeCast<CallbackComposer>())
 
-    val composed: Callback = {
+    konst composed: Callback = {
         for (cb in callbacks) {
             cb()
         }
@@ -29,12 +29,12 @@ fun appendToRetVal(c: String): () -> Unit = {
 }
 
 fun box(): String {
-    val callbackBuilder = createCallbackBuilder {
+    konst callbackBuilder = createCallbackBuilder {
         appendToRetVal("O").also(::addTo)
         appendToRetVal("K").also(::addToExtension)
     }
 
-    val callback = callbackBuilder()
+    konst callback = callbackBuilder()
     callback()
 
     return retVal

@@ -1,8 +1,8 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 fun main() {
-    val baseDir: String? = ""
-    val networkParameters: String? = ""
+    konst baseDir: String? = ""
+    konst networkParameters: String? = ""
     if (baseDir != null) {
         if (networkParameters != null) {
             Unit

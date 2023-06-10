@@ -1,5 +1,5 @@
 class X {
-    val foo = object {
+    konst foo = object {
         class Foo
     }
 

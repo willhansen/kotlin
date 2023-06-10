@@ -1,14 +1,14 @@
 package qualified_this {
-    ~qtA~class A(val a:Int) {
+    ~qtA~class A(konst a:Int) {
 
       inner ~qtB~class B() {
-        val x = `qtB`this`qtB`@B
-        val y = `qtA`this`qtA`@A
-        val z = `qtB`this
-        ~xx~val Int.xx get() = `xx`this : Int
+        konst x = `qtB`this`qtB`@B
+        konst y = `qtA`this`qtA`@A
+        konst z = `qtB`this
+        ~xx~konst Int.xx get() = `xx`this : Int
         ~xx()~fun Int.xx() {
             `xx()`this : Int
-            val a = (fun Int.() = `xx()`this`xx()`@xx + this)
+            konst a = (fun Int.() = `xx()`this`xx()`@xx + this)
 
         }
       }
@@ -17,12 +17,12 @@ package qualified_this {
 
 
 class A<~T~T, ~E~E> {
-  val a : `T`T
-  val x : A<`T`T, `E`E>
+  konst a : `T`T
+  konst x : A<`T`T, `E`E>
 
   inner class X<~X.T~T> : A<`X.T`T, `E`E> {
-    val a : `X.T`T
-    val b : `X.E`E
+    konst a : `X.T`T
+    konst b : `X.E`E
 
     ~X.E~class E {}
   }

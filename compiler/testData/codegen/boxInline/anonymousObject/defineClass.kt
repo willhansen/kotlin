@@ -49,6 +49,6 @@ inline fun i3(crossinline s: () -> String): Run {
 }
 
 fun box(): String {
-    val i4 = i4 { "OK" }
+    konst i4 = i4 { "OK" }
     return i4.run()
 }

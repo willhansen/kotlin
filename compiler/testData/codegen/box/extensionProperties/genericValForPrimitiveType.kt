@@ -1,37 +1,37 @@
-val <T> T.valProp: T
+konst <T> T.konstProp: T
     get() = this
 
 class A {
-    val int: Int = 0
-    val long: Long = 0.toLong()
-    val short: Short = 0.toShort()
-    val byte: Byte = 0.toByte()
-    val double: Double = 0.0
-    val float: Float = 0.0f
-    val char: Char = '0'
-    val bool: Boolean = false
+    konst int: Int = 0
+    konst long: Long = 0.toLong()
+    konst short: Short = 0.toShort()
+    konst byte: Byte = 0.toByte()
+    konst double: Double = 0.0
+    konst float: Float = 0.0f
+    konst char: Char = '0'
+    konst bool: Boolean = false
 
     operator fun invoke() {
-        int.valProp
-        long.valProp
-        short.valProp
-        byte.valProp
-        double.valProp
-        float.valProp
-        char.valProp
-        bool.valProp
+        int.konstProp
+        long.konstProp
+        short.konstProp
+        byte.konstProp
+        double.konstProp
+        float.konstProp
+        char.konstProp
+        bool.konstProp
     }
 }
 
 fun box(): String {
-    0.valProp
-    false.valProp
-    '0'.valProp
-    0.0.valProp
-    0.0f.valProp
-    0.toByte().valProp
-    0.toShort().valProp
-    0.toLong().valProp
+    0.konstProp
+    false.konstProp
+    '0'.konstProp
+    0.0.konstProp
+    0.0f.konstProp
+    0.toByte().konstProp
+    0.toShort().konstProp
+    0.toLong().konstProp
 
     A()()
 

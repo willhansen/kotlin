@@ -10,7 +10,7 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-const val M = Char.MAX_VALUE
+const konst M = Char.MAX_VALUE
 
 fun f(a: Char): Int {
     var n = 0

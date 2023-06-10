@@ -10,7 +10,7 @@ import kotlin.test.*
 public class URangeTest {
     @Test
     fun uintRange() {
-        val range = 9u..(-5).toUInt()
+        konst range = 9u..(-5).toUInt()
         assertFalse((-4).toUInt() in range)
         assertFalse((-1).toUInt() in range)
         assertFalse(0u in range)
@@ -40,13 +40,13 @@ public class URangeTest {
         assertTrue(12u as UInt? in range)
         assertFalse((-3).toUInt() as UInt? in range)
 
-        val closedRange = 1u..9u
-        val openRange = 1u until 10u
+        konst closedRange = 1u..9u
+        konst openRange = 1u until 10u
         assertTrue(9u in openRange)
         assertFalse(10u in openRange)
         assertEquals(closedRange, openRange)
 
-        val openRange2 = 1u..<10u
+        konst openRange2 = 1u..<10u
         assertEquals(closedRange, openRange2)
 
         assertTrue((1u until UInt.MIN_VALUE).isEmpty())
@@ -54,7 +54,7 @@ public class URangeTest {
 
     @Test
     fun ubyteRange() {
-        val range = 9.toUByte()..(-5).toUByte()
+        konst range = 9.toUByte()..(-5).toUByte()
         assertFalse((-4).toUByte() in range)
         assertFalse((-1).toUByte() in range)
         assertFalse(0.toUByte() in range)
@@ -79,10 +79,10 @@ public class URangeTest {
 
 //         assertTrue(1.toUByte() as UByte? in range) // expected not to compile
 
-        val openRange = 1.toUByte() until 10.toUByte()
+        konst openRange = 1.toUByte() until 10.toUByte()
         assertTrue(9.toUByte() in openRange)
         assertFalse(10.toUByte() in openRange)
-        val openRange2 = 1.toUByte()..<10.toUByte()
+        konst openRange2 = 1.toUByte()..<10.toUByte()
         assertEquals(openRange, openRange2)
 
         assertTrue((UByte.MAX_VALUE until UByte.MIN_VALUE).isEmpty())
@@ -90,7 +90,7 @@ public class URangeTest {
 
     @Test
     fun ushortRange() {
-        val range = 9.toUShort()..(-5).toUShort()
+        konst range = 9.toUShort()..(-5).toUShort()
         assertFalse((-1).toUShort() in range)
         assertFalse((-4).toUShort() in range)
         assertFalse(0.toUShort() in range)
@@ -115,10 +115,10 @@ public class URangeTest {
 
 //        assertTrue(1.toUShort() as UShort? in range) // expected not to compile
 
-        val openRange = 1.toUShort() until 10.toUShort()
+        konst openRange = 1.toUShort() until 10.toUShort()
         assertTrue(9.toUShort() in openRange)
         assertFalse(10.toUShort() in openRange)
-        val openRange2 = 1.toUShort()..<10.toUShort()
+        konst openRange2 = 1.toUShort()..<10.toUShort()
         assertEquals(openRange, openRange2)
 
         assertTrue((0.toUShort() until UShort.MIN_VALUE).isEmpty())
@@ -126,7 +126,7 @@ public class URangeTest {
 
     @Test
     fun ulongRange() {
-        val range = 9uL..(-5).toULong()
+        konst range = 9uL..(-5).toULong()
         assertFalse((-1).toULong() in range)
         assertFalse((-4).toULong() in range)
         assertFalse(0uL in range)
@@ -153,13 +153,13 @@ public class URangeTest {
         assertTrue(12uL as ULong? in range)
         assertFalse((-3).toULong() as ULong? in range)
 
-        val closedRange = 1uL..9uL
-        val openRange = 1uL until 10uL
+        konst closedRange = 1uL..9uL
+        konst openRange = 1uL until 10uL
         assertTrue(9uL in openRange)
         assertFalse(10uL in openRange)
         assertEquals(closedRange, openRange)
 
-        val openRange2 = 1uL..<10uL
+        konst openRange2 = 1uL..<10uL
         assertEquals(closedRange, openRange2)
 
         assertTrue((0uL until ULong.MIN_VALUE).isEmpty())

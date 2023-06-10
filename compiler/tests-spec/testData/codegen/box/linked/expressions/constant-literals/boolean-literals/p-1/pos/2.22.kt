@@ -13,14 +13,14 @@
 annotation class Foo
 
 fun box(): String? {
-    val lambda_1 = `true`@ {
+    konst lambda_1 = `true`@ {
         return@`true` false
     }
-    val lambda_2 = @Foo `false`@ { Boolean
+    konst lambda_2 = @Foo `false`@ { Boolean
         return@`false` false
     }
 
-    val x1 = `true`@ true
+    konst x1 = `true`@ true
 
     var i = 0
 

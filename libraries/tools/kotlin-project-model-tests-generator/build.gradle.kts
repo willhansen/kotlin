@@ -25,5 +25,5 @@ dependencies {
     }
 }
 
-val generateKpmTests by generator("org.jetbrains.kotlin.kpm.GenerateKpmTestsKt") {
+konst generateKpmTests by generator("org.jetbrains.kotlin.kpm.GenerateKpmTestsKt") {
 }

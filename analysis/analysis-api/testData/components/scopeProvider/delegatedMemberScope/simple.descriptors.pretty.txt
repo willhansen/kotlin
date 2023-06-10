@@ -4,8 +4,8 @@ fun foo()
 
 fun kotlin.Int.smth(): kotlin.Short
 
-val foo: kotlin.Int
+konst foo: kotlin.Int
 
 var bar: kotlin.Long
 
-val kotlin.Int.doo: kotlin.String
+konst kotlin.Int.doo: kotlin.String

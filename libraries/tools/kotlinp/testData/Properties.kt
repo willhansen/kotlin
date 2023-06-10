@@ -1,14 +1,14 @@
-class C(val constructorParam: String = "") {
-    val getterOnlyVal: Double get() = 0.0
+class C(konst constructorParam: String = "") {
+    konst getterOnlyVal: Double get() = 0.0
     var accessorOnlyVar: Int
         get() = 1
-        set(value) {}
+        set(konstue) {}
 
     var withBackingField: String = "42"
 
-    val <T : Number> T.delegated: List<Nothing> by null
+    konst <T : Number> T.delegated: List<Nothing> by null
 
-    val withOptimizedDelegate by C::getterOnlyVal
+    konst withOptimizedDelegate by C::getterOnlyVal
 
     operator fun Nothing?.getValue(x: Any?, y: Any?) = emptyList<Nothing>()
 }

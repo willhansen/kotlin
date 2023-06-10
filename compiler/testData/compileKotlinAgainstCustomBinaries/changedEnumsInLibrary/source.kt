@@ -13,6 +13,6 @@ fun f2(x: E2) = when (x) {
 }
 
 fun run(): String {
-    val c2 = try { f2(E2.C) } catch (e: java.lang.NoSuchFieldError) { "" }
+    konst c2 = try { f2(E2.C) } catch (e: java.lang.NoSuchFieldError) { "" }
     return f1(E1.A) + f1(E1.B) + f1(E1.C) + f2(E2.A) + f2(E2.B) + c2
 }

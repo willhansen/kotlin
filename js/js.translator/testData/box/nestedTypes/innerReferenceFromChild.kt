@@ -4,7 +4,7 @@ package foo
 var i = 0
 
 abstract class Base {
-    val base = "b" + i++
+    konst base = "b" + i++
     inner class Inner {
         fun o() = "O" + base
         fun k() = "K" + base

@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.test.services.TestService
 import org.jetbrains.kotlin.test.services.TestServices
 import java.io.File
 
-class JsClassicIncrementalDataProvider(private val testServices: TestServices) : TestService {
+class JsClassicIncrementalDataProvider(private konst testServices: TestServices) : TestService {
     class IncrementalData(
         var header: ByteArray? = null,
-        val translatedFiles: MutableMap<File, TranslationResultValue> = hashMapOf(),
-        val packageMetadata: MutableMap<String, ByteArray> = hashMapOf()
+        konst translatedFiles: MutableMap<File, TranslationResultValue> = hashMapOf(),
+        konst packageMetadata: MutableMap<String, ByteArray> = hashMapOf()
     ) {
         fun copy(): IncrementalData {
             return IncrementalData(
@@ -26,7 +26,7 @@ class JsClassicIncrementalDataProvider(private val testServices: TestServices) :
         }
     }
 
-    private val cache: MutableMap<TestModule, IncrementalData> = mutableMapOf()
+    private konst cache: MutableMap<TestModule, IncrementalData> = mutableMapOf()
 
     fun recordIncrementalData(module: TestModule, incrementalData: IncrementalData) {
         cache[module] = incrementalData
@@ -41,4 +41,4 @@ class JsClassicIncrementalDataProvider(private val testServices: TestServices) :
     }
 }
 
-val TestServices.jsClassicIncrementalDataProvider: JsClassicIncrementalDataProvider by TestServices.testServiceAccessor()
+konst TestServices.jsClassicIncrementalDataProvider: JsClassicIncrementalDataProvider by TestServices.testServiceAccessor()

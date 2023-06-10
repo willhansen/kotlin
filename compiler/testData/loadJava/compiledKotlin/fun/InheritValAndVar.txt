@@ -10,7 +10,7 @@ public interface Sub : test.Super1, test.Super2 {
 }
 
 public interface Super1 {
-    public abstract val x: kotlin.String
+    public abstract konst x: kotlin.String
         public abstract fun `<get-x>`(): kotlin.String
     public abstract var y: kotlin.String
         public abstract fun `<get-y>`(): kotlin.String
@@ -21,6 +21,6 @@ public interface Super2 {
     public abstract var x: kotlin.String
         public abstract fun `<get-x>`(): kotlin.String
         public abstract fun `<set-x>`(/*0*/ `<set-?>`: kotlin.String): kotlin.Unit
-    public abstract val y: kotlin.String
+    public abstract konst y: kotlin.String
         public abstract fun `<get-y>`(): kotlin.String
 }

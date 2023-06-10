@@ -6,14 +6,14 @@ class Base {
 
     fun test() {
         object {
-            val x: Private = Private()
+            konst x: Private = Private()
 
             init {
-                val y: Private = Private()
+                konst y: Private = Private()
             }
 
             fun foo() {
-                val z: Private = Private()
+                konst z: Private = Private()
             }
         }
     }

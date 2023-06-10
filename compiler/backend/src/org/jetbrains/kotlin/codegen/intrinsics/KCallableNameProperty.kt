@@ -19,17 +19,17 @@ import org.jetbrains.org.objectweb.asm.Type.VOID_TYPE
 
 class KCallableNameProperty : IntrinsicPropertyGetter() {
     override fun generate(resolvedCall: ResolvedCall<*>?, codegen: ExpressionCodegen, returnType: Type, receiver: StackValue): StackValue? {
-        val expressionReceiver = resolvedCall!!.dispatchReceiver as? ExpressionReceiver ?: return null
-        val expression = expressionReceiver.expression as? KtCallableReferenceExpression ?: return null
+        konst expressionReceiver = resolvedCall!!.dispatchReceiver as? ExpressionReceiver ?: return null
+        konst expression = expressionReceiver.expression as? KtCallableReferenceExpression ?: return null
 
-        val referenceResolvedCall = expression.callableReference.getResolvedCall(codegen.bindingContext) ?: return null
-        val callableReferenceReceiver = JvmCodegenUtil.getBoundCallableReferenceReceiver(referenceResolvedCall)
+        konst referenceResolvedCall = expression.callableReference.getResolvedCall(codegen.bindingContext) ?: return null
+        konst callableReferenceReceiver = JvmCodegenUtil.getBoundCallableReferenceReceiver(referenceResolvedCall)
 
         return StackValue.operation(returnType) { iv ->
             // Generate the left-hand side of a bound callable reference expression
             if (callableReferenceReceiver != null && callableReferenceReceiver !is ImplicitClassReceiver) {
-                val stackValue = codegen.generateReceiverValue(callableReferenceReceiver, false)
-                val kotlinType = callableReferenceReceiver.type
+                konst stackValue = codegen.generateReceiverValue(callableReferenceReceiver, false)
+                konst kotlinType = callableReferenceReceiver.type
                 StackValue.coercion(stackValue, codegen.asmType(kotlinType), kotlinType).put(VOID_TYPE, iv)
             }
 

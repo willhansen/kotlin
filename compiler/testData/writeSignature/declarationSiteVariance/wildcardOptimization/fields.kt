@@ -5,7 +5,7 @@ class Final
 open class Open
 
 @JvmField
-val NO_WILDCARDS: Out<Open> = Out()
+konst NO_WILDCARDS: Out<Open> = Out()
 // field: FieldsKt::NO_WILDCARDS
 // generic signature: LOut<LOpen;>;
 

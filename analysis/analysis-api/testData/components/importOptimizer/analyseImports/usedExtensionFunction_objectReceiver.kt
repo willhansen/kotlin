@@ -11,7 +11,7 @@ fun usage() {
 
     Bar.extVal
 
-    val ref = Bar::extCallable
+    konst ref = Bar::extCallable
 }
 
 // FILE: dependency.kt
@@ -21,6 +21,6 @@ object Bar
 
 fun Bar.extFun() {}
 
-val Bar.extVal: Int get() = 10
+konst Bar.extVal: Int get() = 10
 
 fun Bar.extCallable() {}

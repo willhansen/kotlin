@@ -1,7 +1,7 @@
 abstract class AbstractClassA {
     inline fun String.fakeOverrideExtension() = "${this} fakeOverrideExtension 1"
 
-    inline val String.fakeOverrideGetProperty
+    inline konst String.fakeOverrideGetProperty
         get() = "${this} fakeOverrideGetProperty 2"
 
     inline var String.fakeOverrideSetProperty: String

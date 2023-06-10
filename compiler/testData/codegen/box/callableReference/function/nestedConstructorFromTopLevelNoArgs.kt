@@ -1,6 +1,6 @@
 class A {
     class Nested {
-        val result = "OK"
+        konst result = "OK"
     }
 }
 

@@ -7,5 +7,5 @@ object Derived : Base() {
     override fun foo(arg: Int, def: String) {}
 }
 fun test() {
-    foo(42) // No value passed for parameter 'def'
+    foo(42) // No konstue passed for parameter 'def'
 }

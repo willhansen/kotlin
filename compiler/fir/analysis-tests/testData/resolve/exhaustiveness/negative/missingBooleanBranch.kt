@@ -1,25 +1,25 @@
 fun test_1(cond: Boolean) {
-    val x = <!NO_ELSE_IN_WHEN!>when<!> (cond) {
+    konst x = <!NO_ELSE_IN_WHEN!>when<!> (cond) {
         true -> 1
     }
 
-    val y = <!NO_ELSE_IN_WHEN!>when<!> (cond) {
+    konst y = <!NO_ELSE_IN_WHEN!>when<!> (cond) {
         false -> 2
     }
 
-    val z = when (cond) {
+    konst z = when (cond) {
         true -> 1
         false -> 2
     }
 }
 
 fun test_2(cond: Boolean?) {
-    val x = <!NO_ELSE_IN_WHEN!>when<!> (cond) {
+    konst x = <!NO_ELSE_IN_WHEN!>when<!> (cond) {
         true -> 1
         false -> 2
     }
 
-    val y = when (cond) {
+    konst y = when (cond) {
         true -> 1
         false -> 2
         null -> 3

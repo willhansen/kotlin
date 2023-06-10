@@ -10,10 +10,10 @@ package foo
 import test.*
 
 fun Data.test1(d: Data) : Int  {
-    val input2 = Input(this)
-    val input = Input(this)
+    konst input2 = Input(this)
+    konst input = Input(this)
     return input.use<Input, Int>{
-        val output = Output(d)
+        konst output = Output(d)
         output.use<Output,Int>{
             input.copyTo(output, 10)
         }
@@ -23,7 +23,7 @@ fun Data.test1(d: Data) : Int  {
 
 fun box(): String {
 
-    val result = Data().test1(Data())
+    konst result = Data().test1(Data())
     if (result != 100) return "test1: ${result}"
 
     return "OK"
@@ -35,11 +35,11 @@ package test
 
 public class Data()
 
-public data class Input(val d: Data) : Closeable {
+public data class Input(konst d: Data) : Closeable {
     public fun data() : Int = 100
 }
 
-public  class Output(val d: Data) : Closeable {
+public  class Output(konst d: Data) : Closeable {
     public fun doOutput(data: Int): Int = data
 }
 

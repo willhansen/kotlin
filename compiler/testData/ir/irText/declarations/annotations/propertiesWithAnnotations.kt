@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 
-annotation class TestAnn(val x: String)
+annotation class TestAnn(konst x: String)
 
 @TestAnn("testVal.property")
-val testVal: String = ""
+konst testVal: String = ""

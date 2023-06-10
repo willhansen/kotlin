@@ -1,4 +1,4 @@
 package
 
-public val f: () -> kotlin.Int
-public val i: kotlin.Int = 17
+public konst f: () -> kotlin.Int
+public konst i: kotlin.Int = 17

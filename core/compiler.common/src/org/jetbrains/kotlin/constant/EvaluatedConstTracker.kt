@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.constant
 
 import java.util.concurrent.ConcurrentHashMap
 
-abstract class EvaluatedConstTracker {
+abstract class EkonstuatedConstTracker {
     abstract fun save(start: Int, end: Int, file: String, constant: ConstantValue<*>)
     abstract fun load(start: Int, end: Int, file: String): ConstantValue<*>?
     abstract fun load(file: String): Map<Pair<Int, Int>, ConstantValue<*>>?
@@ -15,17 +15,17 @@ abstract class EvaluatedConstTracker {
     companion object {
         /**
          * Right now there are two places where we want to create this tracker.
-         * 1. Right before `fir2ir` phase. We need to store evaluated values to use them later in const value serialization.
+         * 1. Right before `fir2ir` phase. We need to store ekonstuated konstues to use them later in const konstue serialization.
          * 2. In tests for K1 IR. This is needed ONLY for tests to log results of interpretation on lowering level.
          */
-        fun create(): EvaluatedConstTracker {
-            return DefaultEvaluatedConstTracker()
+        fun create(): EkonstuatedConstTracker {
+            return DefaultEkonstuatedConstTracker()
         }
     }
 }
 
-private class DefaultEvaluatedConstTracker : EvaluatedConstTracker() {
-    private val storage = ConcurrentHashMap<String, ConcurrentHashMap<Pair<Int, Int>, ConstantValue<*>>>()
+private class DefaultEkonstuatedConstTracker : EkonstuatedConstTracker() {
+    private konst storage = ConcurrentHashMap<String, ConcurrentHashMap<Pair<Int, Int>, ConstantValue<*>>>()
 
     override fun save(start: Int, end: Int, file: String, constant: ConstantValue<*>) {
         storage

@@ -13,7 +13,7 @@ class Outer<U> {
 }
 
 fun box(): String {
-    val genericString = Outer<Unit>().foo()
+    konst genericString = Outer<Unit>().foo()
     if (!genericString.startsWith("static <T,U>")) {
         return genericString
     }

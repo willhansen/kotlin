@@ -9,7 +9,7 @@
  * NUMBER: 2
  * DESCRIPTION:
  */
-val flag = false
+konst flag = false
 
 fun box(): String {
     try {
@@ -25,7 +25,7 @@ fun box(): String {
 class Case1
 
 fun fooCase1(): Case1 {
-    val x = Case1()
+    konst x = Case1()
     return x
     flag = true
     TODO()

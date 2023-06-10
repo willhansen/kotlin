@@ -28,12 +28,12 @@ suspend fun callLocal() {
 }
 
 fun builder(c: suspend () -> Unit) {
-    val continuation = object: Continuation<Unit> {
-        override val context: CoroutineContext
+    konst continuation = object: Continuation<Unit> {
+        override konst context: CoroutineContext
             get() = EmptyCoroutineContext
 
-        override fun resumeWith(value: Result<Unit>) {
-            value.getOrThrow()
+        override fun resumeWith(konstue: Result<Unit>) {
+            konstue.getOrThrow()
             proceed = {
                 result = "OK"
                 finished = true

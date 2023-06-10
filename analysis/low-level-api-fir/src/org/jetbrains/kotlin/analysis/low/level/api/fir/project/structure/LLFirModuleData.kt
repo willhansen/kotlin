@@ -15,41 +15,41 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 
-val FirElementWithResolveState.llFirModuleData: LLFirModuleData
+konst FirElementWithResolveState.llFirModuleData: LLFirModuleData
     get() {
         return moduleData as LLFirModuleData
     }
 
-val FirSession.llFirModuleData: LLFirModuleData
+konst FirSession.llFirModuleData: LLFirModuleData
     get() {
         return moduleData as LLFirModuleData
     }
 
 
-val FirBasedSymbol<*>.llFirModuleData: LLFirModuleData
+konst FirBasedSymbol<*>.llFirModuleData: LLFirModuleData
     get() = fir.llFirModuleData
 
 
 class LLFirModuleData(
-    val ktModule: KtModule,
+    konst ktModule: KtModule,
 ) : FirModuleData() {
-    override val name: Name get() = Name.special("<${ktModule.moduleDescription}>")
+    override konst name: Name get() = Name.special("<${ktModule.moduleDescription}>")
 
-    override val dependencies: List<FirModuleData> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst dependencies: List<FirModuleData> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         ktModule.directRegularDependencies.map(::LLFirModuleData)
     }
 
-    override val dependsOnDependencies: List<FirModuleData> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst dependsOnDependencies: List<FirModuleData> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         ktModule.directDependsOnDependencies.map(::LLFirModuleData)
     }
 
-    override val friendDependencies: List<FirModuleData> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst friendDependencies: List<FirModuleData> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         ktModule.directFriendDependencies.map(::LLFirModuleData)
     }
 
-    override val platform: TargetPlatform get() = ktModule.platform
+    override konst platform: TargetPlatform get() = ktModule.platform
 
-    override val analyzerServices: PlatformDependentAnalyzerServices get() = ktModule.analyzerServices
+    override konst analyzerServices: PlatformDependentAnalyzerServices get() = ktModule.analyzerServices
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -26,18 +26,18 @@ import kotlin.script.experimental.jvmhost.jsr223.KotlinJsr223ScriptEngineImpl
  * (Thread.currentThread().contextClassLoader) using reflection and other techniques (experimental!).
  * Otherwise the same classloader will be used to extract the classpath first, and this classpath will be used instead.
  */
-const val KOTLIN_JSR223_RESOLVE_FROM_CLASSLOADER_PROPERTY = "kotlin.jsr223.experimental.resolve.dependencies.from.context.classloader"
+const konst KOTLIN_JSR223_RESOLVE_FROM_CLASSLOADER_PROPERTY = "kotlin.jsr223.experimental.resolve.dependencies.from.context.classloader"
 
 class KotlinJsr223DefaultScriptEngineFactory : KotlinJsr223JvmScriptEngineFactoryBase() {
 
-    private val scriptDefinition = createJvmScriptDefinitionFromTemplate<KotlinJsr223DefaultScript>()
+    private konst scriptDefinition = createJvmScriptDefinitionFromTemplate<KotlinJsr223DefaultScript>()
     private var lastClassLoader: ClassLoader? = null
     private var lastClassPath: List<File>? = null
 
     @Synchronized
     private fun JvmScriptCompilationConfigurationBuilder.dependenciesFromCurrentContext() {
-        val currentClassLoader = Thread.currentThread().contextClassLoader
-        val classPath = if (lastClassLoader == null || lastClassLoader != currentClassLoader) {
+        konst currentClassLoader = Thread.currentThread().contextClassLoader
+        konst classPath = if (lastClassLoader == null || lastClassLoader != currentClassLoader) {
             scriptCompilationClasspathFromContext(
                 classLoader = currentClassLoader,
                 wholeClasspath = true,
@@ -62,7 +62,7 @@ class KotlinJsr223DefaultScriptEngineFactory : KotlinJsr223JvmScriptEngineFactor
                     }
                 }
             },
-            scriptDefinition.evaluationConfiguration
+            scriptDefinition.ekonstuationConfiguration
         ) { ScriptArgsWithTypes(arrayOf(it.getBindings(ScriptContext.ENGINE_SCOPE).orEmpty()), arrayOf(Bindings::class)) }
 }
 

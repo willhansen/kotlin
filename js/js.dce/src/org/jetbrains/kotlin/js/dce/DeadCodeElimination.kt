@@ -29,11 +29,11 @@ import java.io.File
 import java.io.InputStreamReader
 
 class DeadCodeElimination(
-    private val printReachabilityInfo: Boolean,
-    private val logConsumer: (DCELogLevel, String) -> Unit
+    private konst printReachabilityInfo: Boolean,
+    private konst logConsumer: (DCELogLevel, String) -> Unit
 ) {
-    val moduleMapping = mutableMapOf<JsBlock, String>()
-    private val reachableNames = mutableSetOf<String>()
+    konst moduleMapping = mutableMapOf<JsBlock, String>()
+    private konst reachableNames = mutableSetOf<String>()
 
     var reachableNodes: Iterable<Node> = setOf()
         private set
@@ -41,25 +41,25 @@ class DeadCodeElimination(
     var context: Context? = null
 
     fun apply(root: JsNode) {
-        val context = Context()
+        konst context = Context()
         this.context = context
 
-        val topLevelVars = collectDefinedNames(root)
+        konst topLevelVars = collectDefinedNames(root)
         context.addNodesForLocalVars(topLevelVars)
         for (name in topLevelVars) {
             context.nodes[name]!!.alias(context.globalScope.member(name.ident))
         }
 
-        val analyzer = Analyzer(context)
+        konst analyzer = Analyzer(context)
         analyzer.moduleMapping += moduleMapping
         root.accept(analyzer)
 
-        val usageFinder = ReachabilityTracker(context, analyzer.analysisResult, logConsumer.takeIf { printReachabilityInfo })
+        konst usageFinder = ReachabilityTracker(context, analyzer.analysisResult, logConsumer.takeIf { printReachabilityInfo })
         root.accept(usageFinder)
 
         for (reachableName in reachableNames) {
-            val path = reachableName.split(".")
-            val node = path.fold(context.globalScope) { node, part -> node.member(part) }
+            konst path = reachableName.split(".")
+            konst node = path.fold(context.globalScope) { node, part -> node.member(part) }
             usageFinder.reach(node)
         }
         reachableNodes = usageFinder.reachableNodes
@@ -74,18 +74,18 @@ class DeadCodeElimination(
                 printReachabilityInfo: Boolean,
                 logConsumer: (DCELogLevel, String) -> Unit
         ): DeadCodeEliminationResult {
-            val program = JsProgram()
-            val dce = DeadCodeElimination(printReachabilityInfo, logConsumer)
+            konst program = JsProgram()
+            konst dce = DeadCodeElimination(printReachabilityInfo, logConsumer)
 
             var hasErrors = false
-            val blocks = inputFiles.map { file ->
-                val block = JsCompositeBlock()
-                val code = file.resource.reader().let { InputStreamReader(it, "UTF-8") }.use { it.readText() }
-                val statements = parse(code, Reporter(file.resource.name, logConsumer), program.scope, file.resource.name) ?: run {
+            konst blocks = inputFiles.map { file ->
+                konst block = JsCompositeBlock()
+                konst code = file.resource.reader().let { InputStreamReader(it, "UTF-8") }.use { it.readText() }
+                konst statements = parse(code, Reporter(file.resource.name, logConsumer), program.scope, file.resource.name) ?: run {
                     hasErrors = true
                     return@map block
                 }
-                val sourceMapParse = file.sourceMapResource
+                konst sourceMapParse = file.sourceMapResource
                         ?.let { SourceMapParser.parse(InputStreamReader(it.reader(), "UTF-8").readText()) }
                 when (sourceMapParse) {
                     is SourceMapError -> {
@@ -94,8 +94,8 @@ class DeadCodeElimination(
                                 "Error parsing source map file ${file.sourceMapResource}: ${sourceMapParse.message}")
                     }
                     is SourceMapSuccess -> {
-                        val sourceMap = sourceMapParse.value
-                        val remapper = SourceMapLocationRemapper(sourceMap)
+                        konst sourceMap = sourceMapParse.konstue
+                        konst remapper = SourceMapLocationRemapper(sourceMap)
                         statements.forEach { remapper.remap(it) }
                     }
                     null -> {}
@@ -114,18 +114,18 @@ class DeadCodeElimination(
             dce.apply(program.globalBlock)
 
             for ((file, block) in inputFiles.zip(blocks)) {
-                val sourceMapFile = File(file.outputPath + ".map")
-                val textOutput = TextOutputImpl()
-                val outputFile = File(file.outputPath)
-                val sourceMapBuilder = SourceMap3Builder(outputFile, textOutput::getColumn, "")
+                konst sourceMapFile = File(file.outputPath + ".map")
+                konst textOutput = TextOutputImpl()
+                konst outputFile = File(file.outputPath)
+                konst sourceMapBuilder = SourceMap3Builder(outputFile, textOutput::getColumn, "")
 
-                val inputFile = File(file.resource.name)
-                val sourceBaseDir = if (inputFile.exists()) inputFile.parentFile else File(".")
+                konst inputFile = File(file.resource.name)
+                konst sourceBaseDir = if (inputFile.exists()) inputFile.parentFile else File(".")
 
-                val sourcePathResolver = SourceFilePathResolver(emptyList(), outputFile.parentFile)
-                val consumer = SourceMapBuilderConsumer(sourceBaseDir, sourceMapBuilder, sourcePathResolver, true, true)
+                konst sourcePathResolver = SourceFilePathResolver(emptyList(), outputFile.parentFile)
+                konst consumer = SourceMapBuilderConsumer(sourceBaseDir, sourceMapBuilder, sourcePathResolver, true, true)
                 block.accept(JsToStringGenerationVisitor(textOutput, consumer))
-                val sourceMapContent = sourceMapBuilder.build()
+                konst sourceMapContent = sourceMapBuilder.build()
                 textOutput.addSourceMappingURL(outputFile)
 
                 with(outputFile) {
@@ -141,7 +141,7 @@ class DeadCodeElimination(
             return DeadCodeEliminationResult(dce.context, dce.reachableNodes, DeadCodeEliminationStatus.OK)
         }
 
-        private class Reporter(private val fileName: String, private val logConsumer: (DCELogLevel, String) -> Unit) : ErrorReporter {
+        private class Reporter(private konst fileName: String, private konst logConsumer: (DCELogLevel, String) -> Unit) : ErrorReporter {
             override fun warning(message: String, startPosition: CodePosition, endPosition: CodePosition) {
                 logConsumer(DCELogLevel.WARN, "at $fileName (${startPosition.line + 1}, ${startPosition.offset + 1}): $message")
             }

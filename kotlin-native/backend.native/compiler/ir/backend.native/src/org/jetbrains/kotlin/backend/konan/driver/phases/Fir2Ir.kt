@@ -17,16 +17,16 @@ import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.library.metadata.resolver.KotlinResolvedLibrary
 
 internal data class Fir2IrOutput(
-        val firResult: FirResult,
-        val symbols: KonanSymbols,
-        val irModuleFragment: IrModuleFragment,
-        val components: Fir2IrComponents,
-        val pluginContext: Fir2IrPluginContext,
-        val irActualizedResult: IrActualizedResult?,
-        val usedLibraries: Set<KotlinResolvedLibrary>
+        konst firResult: FirResult,
+        konst symbols: KonanSymbols,
+        konst irModuleFragment: IrModuleFragment,
+        konst components: Fir2IrComponents,
+        konst pluginContext: Fir2IrPluginContext,
+        konst irActualizedResult: IrActualizedResult?,
+        konst usedLibraries: Set<KotlinResolvedLibrary>
 )
 
-internal val Fir2IrPhase = createSimpleNamedCompilerPhase(
+internal konst Fir2IrPhase = createSimpleNamedCompilerPhase(
         "Fir2Ir", "Compiler Fir2Ir Frontend phase",
         outputIfNotEnabled = { _, _, _, _ -> error("Fir2Ir phase cannot be disabled") }
 ) { context: PhaseContext, input: FirOutput.Full ->

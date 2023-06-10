@@ -25,11 +25,11 @@ import org.jetbrains.kotlin.protobuf.GeneratedMessageLite
 import org.jetbrains.kotlin.serialization.deserialization.DYNAMIC_TYPE_DESERIALIZER_ID
 
 class FirKLibSerializerExtension(
-    override val session: FirSession,
-    override val metadataVersion: BinaryVersion,
-    override val constValueProvider: ConstValueProvider?,
-    private val allowErrorTypes: Boolean,
-    private val exportKDoc: Boolean
+    override konst session: FirSession,
+    override konst metadataVersion: BinaryVersion,
+    override konst constValueProvider: ConstValueProvider?,
+    private konst allowErrorTypes: Boolean,
+    private konst exportKDoc: Boolean
 ) : FirSerializerExtensionBase(KlibMetadataSerializerProtocol) {
     override fun shouldUseTypeTable(): Boolean = true
 
@@ -84,7 +84,7 @@ class FirKLibSerializerExtension(
         super.serializeFunction(function, proto, versionRequirementTable, childSerializer)
     }
 
-    private val firProvider = session.firProvider
+    private konst firProvider = session.firProvider
 
     @Suppress("Reformat")
     private fun <
@@ -101,7 +101,7 @@ class FirKLibSerializerExtension(
 
     private fun FirDeclaration.findKDocString(): String? =
         source?.let {
-            val kidsRef = Ref<Array<LighterASTNode?>>()
+            konst kidsRef = Ref<Array<LighterASTNode?>>()
             it.treeStructure.getChildren(it.lighterASTNode, kidsRef)
             kidsRef.get().singleOrNull { it?.tokenType == KtTokens.DOC_COMMENT }?.toString()
         }
@@ -118,7 +118,7 @@ class FirKLibSerializerExtension(
     }
 
     private fun declarationFileId(declaration: FirDeclaration): Int? {
-        val file = when (val symbol = declaration.symbol) {
+        konst file = when (konst symbol = declaration.symbol) {
             is FirCallableSymbol<*> -> firProvider.getFirCallableContainerFile(symbol)
             is FirClassLikeSymbol<*> -> firProvider.getFirClassifierContainerFileIfAny(symbol)
             else -> null

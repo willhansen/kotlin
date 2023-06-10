@@ -26,4 +26,4 @@ fun box() = test(Foo("OK"))
 // FILE: Foo.kt
 package a
 
-class Foo(val s: String)
+class Foo(konst s: String)

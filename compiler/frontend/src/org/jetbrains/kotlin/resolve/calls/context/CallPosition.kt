@@ -26,15 +26,15 @@ import org.jetbrains.kotlin.types.expressions.DoubleColonLHS
 sealed class CallPosition {
     object Unknown : CallPosition()
 
-    class ExtensionReceiverPosition(val resolvedCall: ResolvedCall<*>) : CallPosition()
+    class ExtensionReceiverPosition(konst resolvedCall: ResolvedCall<*>) : CallPosition()
 
     class ValueArgumentPosition(
-        val resolvedCall: ResolvedCall<*>,
-        val valueParameter: ValueParameterDescriptor,
-        val valueArgument: ValueArgument
+        konst resolvedCall: ResolvedCall<*>,
+        konst konstueParameter: ValueParameterDescriptor,
+        konst konstueArgument: ValueArgument
     ) : CallPosition()
 
-    class PropertyAssignment(val leftPart: KtExpression?, val isLeft: Boolean) : CallPosition()
+    class PropertyAssignment(konst leftPart: KtExpression?, konst isLeft: Boolean) : CallPosition()
 
-    class CallableReferenceRhs(val lhs: DoubleColonLHS?) : CallPosition()
+    class CallableReferenceRhs(konst lhs: DoubleColonLHS?) : CallPosition()
 }

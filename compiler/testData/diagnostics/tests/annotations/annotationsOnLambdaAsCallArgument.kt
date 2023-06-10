@@ -1,7 +1,7 @@
 @Target(AnnotationTarget.EXPRESSION)
 @Retention(AnnotationRetention.SOURCE)
 @Repeatable
-annotation class Ann(val x: Int = 1)
+annotation class Ann(konst x: Int = 1)
 
 inline fun bar(block: () -> Int): Int = block()
 

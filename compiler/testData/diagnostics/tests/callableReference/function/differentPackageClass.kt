@@ -21,9 +21,9 @@ import checkSubtype
 import first.A
 
 fun main() {
-    val x = first.A::foo
-    val y = first.A::bar
-    val z = A::baz
+    konst x = first.A::foo
+    konst y = first.A::bar
+    konst z = A::baz
 
     checkSubtype<KFunction1<A, Unit>>(x)
     checkSubtype<KFunction2<A, Int, Unit>>(y)

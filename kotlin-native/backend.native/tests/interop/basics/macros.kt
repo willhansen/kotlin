@@ -15,20 +15,20 @@ fun main(args: Array<String>) {
     assertEquals(Long.MAX_VALUE, MAX_LONG)
     assertEquals(42, FOURTY_TWO)
 
-    val seventeen: Long = SEVENTEEN
+    konst seventeen: Long = SEVENTEEN
     assertEquals(17L, seventeen)
 
-    val onePointFive: Float = ONE_POINT_FIVE
-    val onePointZero: Double = ONE_POINT_ZERO
+    konst onePointFive: Float = ONE_POINT_FIVE
+    konst onePointZero: Double = ONE_POINT_ZERO
 
     assertEquals(1.5f, onePointFive)
     assertEquals(1.0, onePointZero)
 
-    val nullPtr: COpaquePointer? = NULL_PTR
-    val voidPtr: COpaquePointer? = VOID_PTR
-    val intPtr: CPointer<IntVar>? = INT_PTR
-    val ptrSum: CPointer<IntVar>?  = PTR_SUM
-    val ptrCall: CPointer<IntVar>? = PTR_CALL
+    konst nullPtr: COpaquePointer? = NULL_PTR
+    konst voidPtr: COpaquePointer? = VOID_PTR
+    konst intPtr: CPointer<IntVar>? = INT_PTR
+    konst ptrSum: CPointer<IntVar>?  = PTR_SUM
+    konst ptrCall: CPointer<IntVar>? = PTR_CALL
 
     assertEquals(null, nullPtr)
     assertEquals(1L, voidPtr.rawValue.toLong())
@@ -41,22 +41,22 @@ fun main(args: Array<String>) {
     assertEquals(5, GLOBAL_VAR)
 
     memScoped {
-        val counter = alloc<IntVar>()
-        counter.value = 42
+        konst counter = alloc<IntVar>()
+        counter.konstue = 42
         increment(counter.ptr)
-        assertEquals(43, counter.value)
+        assertEquals(43, counter.konstue)
     }
 
 
     /**
      * Mips processors are using different notation for quite/signaling nans.
      * In particular, same clang intrinsic __builtin_nan() return other bitpatterns on mips,
-     * to avoid values, which would be singaling on MIPS. So, tested values are incorrect in that case.
+     * to avoid konstues, which would be singaling on MIPS. So, tested konstues are incorrect in that case.
      */
     if (Platform.cpuArchitecture != CpuArchitecture.MIPS32 && Platform.cpuArchitecture != CpuArchitecture.MIPSEL32) {
-        val floatNanBase = Float.NaN.toRawBits()
+        konst floatNanBase = Float.NaN.toRawBits()
         assertEquals(floatNanBase, 0x7fc00000)
-        val doubleNanBase = Double.NaN.toRawBits()
+        konst doubleNanBase = Double.NaN.toRawBits()
         assertEquals(doubleNanBase, 0x7ff8000000000000L)
         assertEquals(floatNanBase, DEFAULT_FLOAT_NAN.toRawBits())
         assertEquals(doubleNanBase, DEFAULT_DOUBLE_NAN.toRawBits())

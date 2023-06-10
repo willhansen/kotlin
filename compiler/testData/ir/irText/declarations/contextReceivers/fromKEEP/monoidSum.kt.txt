@@ -4,7 +4,7 @@ interface Semigroup<T : Any?> {
 }
 
 interface Monoid<T : Any?> : Semigroup<T> {
-  abstract val unit: T
+  abstract konst unit: T
     abstract get
 
 }
@@ -20,7 +20,7 @@ object IntMonoid : Monoid<Int> {
     return <this>.plus(other = other)
   }
 
-  override val unit: Int
+  override konst unit: Int
     field = 0
     override get
 
@@ -37,7 +37,7 @@ object StringMonoid : Monoid<String> {
     return <this>.plus(other = other)
   }
 
-  override val unit: String
+  override konst unit: String
     field = ""
     override get
 

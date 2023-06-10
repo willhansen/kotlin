@@ -30,7 +30,7 @@ KtFile: DeclarationAfterDotSelectorExpected.kt
           <empty list>
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('foo')
         PsiWhiteSpace(' ')
@@ -116,7 +116,7 @@ KtFile: DeclarationAfterDotSelectorExpected.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('z')
         PsiWhiteSpace(' ')
@@ -133,7 +133,7 @@ KtFile: DeclarationAfterDotSelectorExpected.kt
             <empty list>
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -143,7 +143,7 @@ KtFile: DeclarationAfterDotSelectorExpected.kt
           PsiElement(INTEGER_LITERAL)('4')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('y')
         PsiWhiteSpace(' ')
@@ -173,7 +173,7 @@ KtFile: DeclarationAfterDotSelectorExpected.kt
           PsiElement(INTEGER_LITERAL)('5')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('q')
         PsiWhiteSpace(' ')

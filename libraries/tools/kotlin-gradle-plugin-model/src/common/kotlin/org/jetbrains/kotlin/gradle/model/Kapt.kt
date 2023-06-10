@@ -17,19 +17,19 @@ interface Kapt {
      *
      * @return the version of this model.
      */
-    val modelVersion: Long
+    konst modelVersion: Long
 
     /**
      * Returns the module (Gradle project) name.
      *
      * @return the module name.
      */
-    val name: String
+    konst name: String
 
     /**
      * Return all kapt source sets.
      *
      * @return all kapt source sets.
      */
-    val kaptSourceSets: Collection<KaptSourceSet>
+    konst kaptSourceSets: Collection<KaptSourceSet>
 }

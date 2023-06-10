@@ -5,4 +5,4 @@ class C {
 
 typealias CA = C
 
-val cf = CA::foo
+konst cf = CA::foo

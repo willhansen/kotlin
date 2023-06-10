@@ -9,13 +9,13 @@ class A {
 }
 
 fun check(x: Any) {
-    val baos = ByteArrayOutputStream()
-    val oos = ObjectOutputStream(baos)
+    konst baos = ByteArrayOutputStream()
+    konst oos = ObjectOutputStream(baos)
     oos.writeObject(x)
     oos.close()
 
-    val bais = ByteArrayInputStream(baos.toByteArray())
-    val ois = ObjectInputStream(bais)
+    konst bais = ByteArrayInputStream(baos.toByteArray())
+    konst ois = ObjectInputStream(bais)
     assertEquals(x, ois.readObject())
     ois.close()
 }

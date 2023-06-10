@@ -10,7 +10,7 @@ class A {
     
     fun main() {
         ::Inner
-        val y = A::Inner
+        konst y = A::Inner
 
         checkSubtype<KFunction1<A, Inner>>(y)
     }
@@ -18,7 +18,7 @@ class A {
     companion object {
         fun main() {
             ::<!UNRESOLVED_REFERENCE!>Inner<!>
-            val y = A::Inner
+            konst y = A::Inner
 
             checkSubtype<KFunction1<A, A.Inner>>(y)
         }
@@ -28,7 +28,7 @@ class A {
 class B {
     fun main() {
         ::<!UNRESOLVED_REFERENCE!>Inner<!>
-        val y = A::Inner
+        konst y = A::Inner
 
         checkSubtype<KFunction1<A, A.Inner>>(y)
     }

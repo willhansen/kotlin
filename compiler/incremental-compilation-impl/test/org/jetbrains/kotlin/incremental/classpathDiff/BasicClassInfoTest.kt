@@ -17,12 +17,12 @@ import kotlin.test.assertEquals
 class BasicClassInfoTest {
 
     @get:Rule
-    val tmpDir = TemporaryFolder()
+    konst tmpDir = TemporaryFolder()
 
     @Test
     fun `compute BasicClassInfo`() {
-        val compiledClasses = compileJava(className, sourceCode)
-        val classIds = compiledClasses.map { BasicClassInfo.compute(it).classId }
+        konst compiledClasses = compileJava(className, sourceCode)
+        konst classIds = compiledClasses.map { BasicClassInfo.compute(it).classId }
 
         assertEquals(
             listOf(
@@ -45,11 +45,11 @@ class BasicClassInfoTest {
 
     @Suppress("SameParameterValue")
     private fun compileJava(className: String, sourceCode: String): List<ByteArray> {
-        val sourceFile = File(tmpDir.newFolder(), "$className.java").apply {
+        konst sourceFile = File(tmpDir.newFolder(), "$className.java").apply {
             parentFile.mkdirs()
             writeText(sourceCode)
         }
-        val classesDir = tmpDir.newFolder()
+        konst classesDir = tmpDir.newFolder()
 
         KotlinTestUtils.compileJavaFiles(listOf(sourceFile), listOf("-d", classesDir.path))
 
@@ -63,8 +63,8 @@ class BasicClassInfoTest {
         ClassId(FqName(packageFqName), FqName(relativeClassName), local)
 }
 
-private const val className = "com/example/TopLevelClass"
-private val sourceCode = """
+private const konst className = "com/example/TopLevelClass"
+private konst sourceCode = """
 package com.example;
 
 public class TopLevelClass {

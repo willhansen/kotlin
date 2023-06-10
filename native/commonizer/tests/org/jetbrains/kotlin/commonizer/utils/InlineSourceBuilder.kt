@@ -19,10 +19,10 @@ import java.io.File
 interface InlineSourceBuilder {
     annotation class ModuleBuilderDsl
 
-    data class SourceFile(val name: String, @Language("kotlin") val content: String)
+    data class SourceFile(konst name: String, @Language("kotlin") konst content: String)
 
     data class Module(
-        val name: String, val sourceFiles: List<SourceFile>, val dependencies: List<Module>
+        konst name: String, konst sourceFiles: List<SourceFile>, konst dependencies: List<Module>
     )
 
     @InlineSourcesCommonizationTestDsl
@@ -101,8 +101,8 @@ fun InlineSourceBuilder.createCirTreeRootFromSourceCode(@Language("kotlin") sour
 
 @InlineSourceBuilder.ModuleBuilderDsl
 fun InlineSourceBuilder.createCirProvidedClassifiers(module: InlineSourceBuilder.Module): CirProvidedClassifiers {
-    val modulesProvider = object : ModulesProvider {
-        override val moduleInfos: Collection<ModulesProvider.ModuleInfo> = listOf(
+    konst modulesProvider = object : ModulesProvider {
+        override konst moduleInfos: Collection<ModulesProvider.ModuleInfo> = listOf(
             ModulesProvider.ModuleInfo(name = "CirProvidedForTest", cInteropAttributes = null)
         )
 

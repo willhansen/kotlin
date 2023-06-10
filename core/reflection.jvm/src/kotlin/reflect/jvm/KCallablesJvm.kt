@@ -59,29 +59,29 @@ var KCallable<*>.isAccessible: Boolean
             else -> throw UnsupportedOperationException("Unknown callable: $this ($javaClass)")
         }
     }
-    set(value) {
+    set(konstue) {
         when (this) {
             is KMutableProperty -> {
-                javaField?.isAccessible = value
-                javaGetter?.isAccessible = value
-                javaSetter?.isAccessible = value
+                javaField?.isAccessible = konstue
+                javaGetter?.isAccessible = konstue
+                javaSetter?.isAccessible = konstue
             }
             is KProperty -> {
-                javaField?.isAccessible = value
-                javaGetter?.isAccessible = value
+                javaField?.isAccessible = konstue
+                javaGetter?.isAccessible = konstue
             }
             is KProperty.Getter -> {
-                property.javaField?.isAccessible = value
-                javaMethod?.isAccessible = value
+                property.javaField?.isAccessible = konstue
+                javaMethod?.isAccessible = konstue
             }
             is KMutableProperty.Setter<*> -> {
-                property.javaField?.isAccessible = value
-                javaMethod?.isAccessible = value
+                property.javaField?.isAccessible = konstue
+                javaMethod?.isAccessible = konstue
             }
             is KFunction -> {
-                javaMethod?.isAccessible = value
+                javaMethod?.isAccessible = konstue
                 (this.asKCallableImpl()?.defaultCaller?.member as? AccessibleObject)?.isAccessible = true
-                this.javaConstructor?.isAccessible = value
+                this.javaConstructor?.isAccessible = konstue
             }
             else -> throw UnsupportedOperationException("Unknown callable: $this ($javaClass)")
         }

@@ -14,27 +14,27 @@ import java.io.File
 abstract class AbstractBytecodeListingTest : CodegenTestCase() {
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
         compile(files)
-        val actualTxt = BytecodeListingTextCollectingVisitor.getText(
+        konst actualTxt = BytecodeListingTextCollectingVisitor.getText(
             classFileFactory,
             withSignatures = isWithSignatures(wholeFile),
             withAnnotations = isWithAnnotations(wholeFile),
             filter = BytecodeListingTextCollectingVisitor.Filter.ForCodegenTests
         )
 
-        val prefixes = when {
+        konst prefixes = when {
             backend.isIR -> listOf("_ir", "")
             else -> listOf("")
         }
 
-        val txtFile =
+        konst txtFile =
             prefixes.firstNotNullOfOrNull { File(wholeFile.parentFile, wholeFile.nameWithoutExtension + "$it.txt").takeIf(File::exists) }
                 .sure { "No testData file exists: ${wholeFile.nameWithoutExtension}.txt" }
 
         KotlinTestUtils.assertEqualsToFile(txtFile, actualTxt)
 
         if (backend.isIR) {
-            val jvmGoldenFile = File(wholeFile.parentFile, wholeFile.nameWithoutExtension + ".txt")
-            val jvmIrGoldenFile = File(wholeFile.parentFile, wholeFile.nameWithoutExtension + "_ir.txt")
+            konst jvmGoldenFile = File(wholeFile.parentFile, wholeFile.nameWithoutExtension + ".txt")
+            konst jvmIrGoldenFile = File(wholeFile.parentFile, wholeFile.nameWithoutExtension + "_ir.txt")
             if (jvmGoldenFile.exists() && jvmIrGoldenFile.exists()) {
                 if (jvmGoldenFile.readText() == jvmIrGoldenFile.readText()) {
                     fail("JVM and JVM_IR golden files are identical. Remove $jvmIrGoldenFile.")
@@ -50,7 +50,7 @@ abstract class AbstractBytecodeListingTest : CodegenTestCase() {
         !IGNORE_ANNOTATIONS.containsMatchIn(wholeFile.readText())
 
     companion object {
-        private val WITH_SIGNATURES = Regex.fromLiteral("// WITH_SIGNATURES")
-        private val IGNORE_ANNOTATIONS = Regex.fromLiteral("// IGNORE_ANNOTATIONS")
+        private konst WITH_SIGNATURES = Regex.fromLiteral("// WITH_SIGNATURES")
+        private konst IGNORE_ANNOTATIONS = Regex.fromLiteral("// IGNORE_ANNOTATIONS")
     }
 }

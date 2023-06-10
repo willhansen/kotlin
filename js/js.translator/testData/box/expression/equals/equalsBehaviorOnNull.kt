@@ -11,7 +11,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
 
     assertTrue(a.equals("aaa"))
     assertEquals("aaa;", log)

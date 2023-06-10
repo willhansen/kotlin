@@ -5,7 +5,7 @@ import java.util.AbstractList
 class MyList(): AbstractList<String>() {
      public fun getModificationCount(): Int = modCount
      public override fun get(index: Int): String = ""
-     public override val size: Int get() = 0
+     public override konst size: Int get() = 0
 }
 
 fun box(): String {

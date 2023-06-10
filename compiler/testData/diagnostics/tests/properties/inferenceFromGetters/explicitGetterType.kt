@@ -1,12 +1,12 @@
 // FIR_IDENTICAL
 // !CHECK_TYPE
-val x get(): String = foo()
-val y get(): List<Int> = bar()
-val z get(): List<Int> {
+konst x get(): String = foo()
+konst y get(): List<Int> = bar()
+konst z get(): List<Int> {
     return bar()
 }
 
-<!MUST_BE_INITIALIZED!>val u<!> get(): String = field
+<!MUST_BE_INITIALIZED!>konst u<!> get(): String = field
 
 fun <E> foo(): E = null!!
 fun <E> bar(): List<E> = null!!

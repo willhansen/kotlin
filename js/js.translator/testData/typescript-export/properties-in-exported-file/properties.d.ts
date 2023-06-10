@@ -1,12 +1,12 @@
 declare namespace JS_TESTS {
     type Nullable<T> = T | null | undefined
     namespace foo {
-        const _val: number;
+        const _konst: number;
         let _var: number;
-        const _valCustomWithField: number;
+        const _konstCustomWithField: number;
         let _varCustomWithField: number;
-        const _const_val: number;
-        const _valCustom: number;
+        const _const_konst: number;
+        const _konstCustom: number;
         let _varCustom: number;
     }
 }

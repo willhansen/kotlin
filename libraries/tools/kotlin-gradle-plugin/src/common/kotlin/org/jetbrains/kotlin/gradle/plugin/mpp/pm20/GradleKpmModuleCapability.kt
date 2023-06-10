@@ -9,7 +9,7 @@ import org.gradle.api.artifacts.Configuration
 import org.gradle.api.capabilities.Capability
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.ComputedCapability
 
-val GradleKpmModuleCapability = GradleKpmConfigurationCapabilitiesSetup<GradleKpmFragment> {
+konst GradleKpmModuleCapability = GradleKpmConfigurationCapabilitiesSetup<GradleKpmFragment> {
     capability(fragment.containingModule.moduleCapability ?: return@GradleKpmConfigurationCapabilitiesSetup)
 }
 
@@ -17,5 +17,5 @@ internal fun setModuleCapability(configuration: Configuration, module: GradleKpm
     configuration.outgoing.capability(module.moduleCapability ?: return)
 }
 
-internal val GradleKpmModule.moduleCapability: Capability?
+internal konst GradleKpmModule.moduleCapability: Capability?
     get() = if (moduleClassifier != null) ComputedCapability.fromModule(this) else null

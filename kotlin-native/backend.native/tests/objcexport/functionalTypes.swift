@@ -33,15 +33,15 @@ private func test1() {
 }
 
 private func test2() throws {
-    try assertEquals(actual: FunctionalTypesKt.getDynTypeLambda2().value("one", nil) as? String, expected: "one")
+    try assertEquals(actual: FunctionalTypesKt.getDynTypeLambda2().konstue("one", nil) as? String, expected: "one")
     try assertEquals(actual: FunctionalTypesKt.getStaticLambda2()("two", nil) as? String, expected: "two")
 
-    try assertEquals(actual: FunctionalTypesKt.getDynTypeRef2().value("three", nil) as? String, expected: "three")
+    try assertEquals(actual: FunctionalTypesKt.getDynTypeRef2().konstue("three", nil) as? String, expected: "three")
     try assertEquals(actual: FunctionalTypesKt.getStaticRef2()("four", nil) as? String, expected: "four")
 
     // 32 params is mapped as regular; calling result as block is OK
     try assertEquals(
-        actual: FunctionalTypesKt.getDynType32().value(
+        actual: FunctionalTypesKt.getDynType32().konstue(
             "five",
             nil, nil, nil, nil, nil, nil, nil, nil,
             nil, nil, nil, nil, nil, nil, nil, nil,
@@ -64,7 +64,7 @@ private func test2() throws {
 
     // 33 params requires explicit invocation of KotlinFunction33.invoke
     try assertEquals(
-        actual: FunctionalTypesKt.getDynTypeRef33().value.invoke(
+        actual: FunctionalTypesKt.getDynTypeRef33().konstue.invoke(
             p1: "seven",
             p2: nil, p3: nil, p4: nil, p5: nil, p6: nil, p7: nil, p8: nil, p9: nil,
             p10: nil, p11: nil, p12: nil, p13: nil, p14: nil, p15: nil, p16: nil, p17: nil,
@@ -87,7 +87,7 @@ private func test2() throws {
     )
 
     try assertEquals(
-        actual: FunctionalTypesKt.getDynTypeLambda33().value.invoke(
+        actual: FunctionalTypesKt.getDynTypeLambda33().konstue.invoke(
             p1: "nine",
             p2: nil, p3: nil, p4: nil, p5: nil, p6: nil, p7: nil, p8: nil, p9: nil,
             p10: nil, p11: nil, p12: nil, p13: nil, p14: nil, p15: nil, p16: nil, p17: nil,

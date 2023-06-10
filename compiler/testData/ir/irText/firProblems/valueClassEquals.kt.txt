@@ -1,12 +1,12 @@
 @JvmInline
-value class Z {
+konstue class Z {
   constructor(s: String) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val s: String
+  konst s: String
     field = s
     get
 
@@ -22,7 +22,7 @@ value class Z {
     when {
       other !is Z -> return false
     }
-    val tmp0_other_with_cast: Z = other as Z
+    konst tmp0_other_with_cast: Z = other as Z
     when {
       EQEQ(arg0 = <this>.#s, arg1 = tmp0_other_with_cast.#s).not() -> return false
     }
@@ -31,6 +31,6 @@ value class Z {
 
 }
 
-val equals: KFunction2<Z, @ParameterName(name = "other") Any?, Boolean>
+konst equals: KFunction2<Z, @ParameterName(name = "other") Any?, Boolean>
   field = Z::equals
   get

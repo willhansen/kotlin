@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.gradle.plugin.getOrNull
 
 internal object IdeDependencyLogger : IdeDependencyEffect {
 
-    private const val propertyKey = "IdeDependencyLogger.log"
+    private const konst propertyKey = "IdeDependencyLogger.log"
 
     override fun invoke(sourceSet: KotlinSourceSet, dependencies: Set<IdeaKotlinDependency>) {
-        val log = sourceSet.project.extraProperties.getOrNull(propertyKey)?.toString() ?: return
-        val coordinates = IdeaKotlinSourceCoordinates(sourceSet)
+        konst log = sourceSet.project.extraProperties.getOrNull(propertyKey)?.toString() ?: return
+        konst coordinates = IdeaKotlinSourceCoordinates(sourceSet)
         if (log.isEmpty() || Regex(log).matches(coordinates.toString())) {
             IdeMultiplatformImport.logger.quiet(
                 "\n$coordinates resolved:\n" + dependencies.mapNotNull { it.coordinates }

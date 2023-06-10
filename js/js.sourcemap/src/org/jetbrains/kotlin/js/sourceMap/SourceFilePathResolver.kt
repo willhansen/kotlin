@@ -11,9 +11,9 @@ import java.io.File
 import java.io.IOException
 
 class SourceFilePathResolver(sourceRoots: List<File>, outputDir: File? = null) {
-    private val sourceRoots = sourceRoots.mapTo(mutableSetOf<File>()) { it.absoluteFile }
-    private val outputDirPathResolver = outputDir?.let(::RelativePathCalculator)
-    private val cache = mutableMapOf<File, String>()
+    private konst sourceRoots = sourceRoots.mapTo(mutableSetOf<File>()) { it.absoluteFile }
+    private konst outputDirPathResolver = outputDir?.let(::RelativePathCalculator)
+    private konst cache = mutableMapOf<File, String>()
 
     @Throws(IOException::class)
     fun getPathRelativeToSourceRoots(file: File): String {
@@ -27,9 +27,9 @@ class SourceFilePathResolver(sourceRoots: List<File>, outputDir: File? = null) {
 
     @Throws(IOException::class)
     private fun calculatePathRelativeToSourceRoots(file: File): String {
-        val pathRelativeToOutput = calculatePathRelativeToOutput(file)
+        konst pathRelativeToOutput = calculatePathRelativeToOutput(file)
         if (pathRelativeToOutput != null) return pathRelativeToOutput
-        val parts = mutableListOf<String>()
+        konst parts = mutableListOf<String>()
         var currentFile: File? = file.absoluteFile.normalize()
         while (currentFile != null) {
             if (sourceRoots.contains(currentFile)) {
@@ -62,7 +62,7 @@ class SourceFilePathResolver(sourceRoots: List<File>, outputDir: File? = null) {
 
         @JvmStatic
         fun create(sourceRoots: List<String>, sourceMapPrefix: String, outputDir: File?): SourceFilePathResolver {
-            val generateRelativePathsInSourceMap = sourceMapPrefix.isEmpty() && sourceRoots.isEmpty()
+            konst generateRelativePathsInSourceMap = sourceMapPrefix.isEmpty() && sourceRoots.isEmpty()
             return SourceFilePathResolver(
                 sourceRoots.map(::File),
                 outputDir.takeIf { generateRelativePathsInSourceMap }

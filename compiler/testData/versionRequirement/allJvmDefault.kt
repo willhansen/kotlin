@@ -7,7 +7,7 @@ interface Base {
 interface Derived : Base
 
 interface BaseWithProperty {
-    val prop: String
+    konst prop: String
         get() = "123"
 }
 

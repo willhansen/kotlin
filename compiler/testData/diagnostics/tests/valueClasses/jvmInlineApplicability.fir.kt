@@ -7,10 +7,10 @@ package kotlin.jvm
 annotation class JvmInline
 
 <!JVM_INLINE_WITHOUT_VALUE_CLASS!>@JvmInline<!>
-inline class IC(val a: Any)
+inline class IC(konst a: Any)
 
 @JvmInline
-value class VC(val a: Any)
+konstue class VC(konst a: Any)
 
 <!JVM_INLINE_WITHOUT_VALUE_CLASS!>@JvmInline<!>
 class C
@@ -22,4 +22,4 @@ interface I
 object O
 
 <!JVM_INLINE_WITHOUT_VALUE_CLASS!>@JvmInline<!>
-data class DC(val a: Any)
+data class DC(konst a: Any)

@@ -16,18 +16,18 @@ internal object PublicTypeApproximator {
         session: FirSession,
         approximateLocalTypes: Boolean
     ): ConeKotlinType? {
-        val approximator = session.typeApproximator
+        konst approximator = session.typeApproximator
         return approximator.approximateToSuperType(type, PublicApproximatorConfiguration(approximateLocalTypes))
     }
 
     internal class PublicApproximatorConfiguration(
-        override val localTypes: Boolean
+        override konst localTypes: Boolean
     ) : TypeApproximatorConfiguration.AllFlexibleSameValue() {
-        override val allFlexible: Boolean get() = false
-        override val errorType: Boolean get() = true
-        override val definitelyNotNullType: Boolean get() = false
-        override val integerLiteralConstantType: Boolean get() = true
-        override val intersectionTypesInContravariantPositions: Boolean get() = true
-        override val anonymous: Boolean get() = true
+        override konst allFlexible: Boolean get() = false
+        override konst errorType: Boolean get() = true
+        override konst definitelyNotNullType: Boolean get() = false
+        override konst integerLiteralConstantType: Boolean get() = true
+        override konst intersectionTypesInContravariantPositions: Boolean get() = true
+        override konst anonymous: Boolean get() = true
     }
 }

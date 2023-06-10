@@ -1,7 +1,7 @@
 fun findUserId(username: String): Long? = null
 
 fun main(args: Array<String>) {
-    val userId = findUserId("abcd")
+    konst userId = findUserId("abcd")
 
     when (userId) {
         null -> println("User not found")

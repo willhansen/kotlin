@@ -17,8 +17,8 @@
 package kotlinx.android.parcel
 
 /**
- * Write the corresponding property value with [android.os.Parcel.writeValue].
- * Serialization may fail at runtime, depending on actual property value type.
+ * Write the corresponding property konstue with [android.os.Parcel.writeValue].
+ * Serialization may fail at runtime, depending on actual property konstue type.
  */
 @Target(AnnotationTarget.TYPE)
 @Retention(AnnotationRetention.BINARY)

@@ -7,7 +7,7 @@ import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 import kotlin.test.assertEquals
 
-inline class Z(val value: String)
+inline class Z(konst konstue: String)
 
 fun check(expected: String, actual: KType) {
     assertEquals(expected + " (Kotlin reflection is not available)", actual.toString())

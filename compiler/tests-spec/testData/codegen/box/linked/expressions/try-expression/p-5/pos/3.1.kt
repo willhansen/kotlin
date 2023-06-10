@@ -8,7 +8,7 @@
  * PRIMARY LINKS: expressions, try-expression -> paragraph 4 -> sentence 1
  * exceptions, catching-exceptions -> paragraph 4 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: If an exception was thrown, but no catch block matched its type, the finally block is evaluated before propagating the exception up the call stack
+ * DESCRIPTION: If an exception was thrown, but no catch block matched its type, the finally block is ekonstuated before propagating the exception up the call stack
  */
 fun throwExceptionA(b: Boolean) = run { if (b) throw ExcA() }
 

@@ -23,14 +23,14 @@ import org.jetbrains.kotlin.gradle.utils.future
 import org.jetbrains.kotlin.gradle.utils.futureExtension
 import org.jetbrains.kotlin.tooling.core.UnsafeApi
 
-internal val KotlinSourceSet.commonizerTarget: Future<CommonizerTarget?> by futureExtension {
+internal konst KotlinSourceSet.commonizerTarget: Future<CommonizerTarget?> by futureExtension {
     inferCommonizerTarget(internal.awaitPlatformCompilations())
 }
 
-internal val KotlinSourceSet.sharedCommonizerTarget: Future<SharedCommonizerTarget?>
+internal konst KotlinSourceSet.sharedCommonizerTarget: Future<SharedCommonizerTarget?>
     get() = project.future { commonizerTarget.await() as? SharedCommonizerTarget }
 
-internal val KotlinCompilation<*>.commonizerTarget: Future<CommonizerTarget?> by futureExtension {
+internal konst KotlinCompilation<*>.commonizerTarget: Future<CommonizerTarget?> by futureExtension {
     KotlinPluginLifecycle.Stage.AfterFinaliseRefinesEdges.await()
     @OptIn(UnsafeApi::class)
     inferCommonizerTarget(this)
@@ -38,7 +38,7 @@ internal val KotlinCompilation<*>.commonizerTarget: Future<CommonizerTarget?> by
 
 @UnsafeApi("Use sourceSet.commonizerTarget instead")
 internal fun inferCommonizerTarget(sourceSet: KotlinSourceSet): CommonizerTarget? {
-    val platformCompilations = sourceSet.internal.compilations
+    konst platformCompilations = sourceSet.internal.compilations
         .filter { compilation -> compilation !is KotlinMetadataCompilation }
     return inferCommonizerTarget(platformCompilations)
 }
@@ -46,7 +46,7 @@ internal fun inferCommonizerTarget(sourceSet: KotlinSourceSet): CommonizerTarget
 
 private fun inferCommonizerTarget(compilations: Iterable<KotlinCompilation<*>>): CommonizerTarget? {
     @OptIn(UnsafeApi::class)
-    val allCompilationLeafTargets = compilations
+    konst allCompilationLeafTargets = compilations
         .filter { compilation -> compilation !is KotlinMetadataCompilation }
         .map { compilation -> inferCommonizerTarget(compilation) ?: return null }
         .allLeaves()

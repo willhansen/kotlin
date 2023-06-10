@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.resolve.multiplatform.OptionalAnnotationUtil
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
-private val FLEXIBLE_NULLABILITY_ANNOTATION_FQ_NAME = StandardClassIds.Annotations.FlexibleNullability.asSingleFqName()
+private konst FLEXIBLE_NULLABILITY_ANNOTATION_FQ_NAME = StandardClassIds.Annotations.FlexibleNullability.asSingleFqName()
 
 internal fun Map<String, List<IrDeclaration>>.getMatches(
     expectDeclaration: IrDeclaration,
@@ -39,7 +39,7 @@ internal fun Map<String, List<IrDeclaration>>.getMatches(
     expectDeclaration: IrDeclaration,
     expectActualTypesMap: Map<IrSymbol, IrSymbol>
 ): List<IrDeclaration> {
-    val members = this[mainSignature] ?: return emptyList()
+    konst members = this[mainSignature] ?: return emptyList()
     return when (expectDeclaration) {
         is IrFunction -> members.getMatches(expectDeclaration, expectActualTypesMap) { it as IrFunction }
         is IrProperty -> members.getMatches(expectDeclaration, expectActualTypesMap) { (it as IrProperty).getter!! }
@@ -52,7 +52,7 @@ private inline fun List<IrDeclaration>.getMatches(
     expectActualTypesMap: Map<IrSymbol, IrSymbol>,
     functionExtractor: (IrDeclaration) -> IrFunction
 ): List<IrDeclaration> {
-    val expectFunction = functionExtractor(expect)
+    konst expectFunction = functionExtractor(expect)
     return filter { expectFunction.match(functionExtractor(it), expectActualTypesMap) }
 }
 
@@ -62,7 +62,7 @@ private fun IrFunction.match(actualFunction: IrFunction, expectActualTypesMap: M
         localTypeParametersMap: Map<IrTypeParameterSymbol, IrTypeParameterSymbol>? = null
     ): IrSymbol {
         return expectParameter.type.classifierOrFail.let {
-            val localMappedSymbol = if (localTypeParametersMap != null && it is IrTypeParameterSymbol) {
+            konst localMappedSymbol = if (localTypeParametersMap != null && it is IrTypeParameterSymbol) {
                 localTypeParametersMap[it]
             } else {
                 null
@@ -103,11 +103,11 @@ private fun IrFunction.match(actualFunction: IrFunction, expectActualTypesMap: M
         return true
     }
 
-    if (valueParameters.size != actualFunction.valueParameters.size || typeParameters.size != actualFunction.typeParameters.size) {
+    if (konstueParameters.size != actualFunction.konstueParameters.size || typeParameters.size != actualFunction.typeParameters.size) {
         return false
     }
 
-    val localTypeParametersMap = mutableMapOf<IrTypeParameterSymbol, IrTypeParameterSymbol>()
+    konst localTypeParametersMap = mutableMapOf<IrTypeParameterSymbol, IrTypeParameterSymbol>()
     for ((expectTypeParameter, actualTypeParameter) in typeParameters.zip(actualFunction.typeParameters)) {
         if (expectTypeParameter.name != actualTypeParameter.name) {
             return false
@@ -119,7 +119,7 @@ private fun IrFunction.match(actualFunction: IrFunction, expectActualTypesMap: M
         return false
     }
 
-    for ((expectParameter, actualParameter) in valueParameters.zip(actualFunction.valueParameters)) {
+    for ((expectParameter, actualParameter) in konstueParameters.zip(actualFunction.konstueParameters)) {
         if (!checkParameter(expectParameter, actualParameter, localTypeParametersMap)) {
             return false
         }
@@ -144,18 +144,18 @@ private fun appendElementFullName(
 ) {
     if (declaration !is IrDeclarationBase) return
 
-    val parents = mutableListOf<String>()
+    konst parents = mutableListOf<String>()
     var parent: IrDeclarationParent? = declaration.parent
     while (parent != null) {
         if (parent is IrDeclarationWithName) {
-            val parentParent = parent.parent
+            konst parentParent = parent.parent
             if (parentParent is IrClass) {
                 parents.add(parent.name.asString())
                 parent = parentParent
                 continue
             }
         }
-        val parentString = parent.kotlinFqName.let { (expectActualTypeAliasMap[it] ?: it).asString() }
+        konst parentString = parent.kotlinFqName.let { (expectActualTypeAliasMap[it] ?: it).asString() }
         if (parentString.isNotEmpty()) {
             parents.add(parentString)
         }
@@ -179,9 +179,9 @@ private fun appendElementFullName(
 internal fun MutableMap<IrSymbol, IrSymbol>.addLink(expectMember: IrDeclarationBase, actualMember: IrDeclaration) {
     this[expectMember.symbol] = actualMember.symbol
     if (expectMember is IrProperty) {
-        val actualProperty = actualMember as IrProperty
+        konst actualProperty = actualMember as IrProperty
         expectMember.getter!!.let {
-            val getter = actualProperty.getter!!
+            konst getter = actualProperty.getter!!
             this[it.symbol] = getter.symbol
             this.appendTypeParametersMap(it, getter)
         }
@@ -216,7 +216,7 @@ internal fun createFakeOverrideMember(actualMembers: List<IrDeclaration>, declar
 }
 
 private fun createFakeOverrideProperty(actualProperties: List<IrProperty>, parent: IrClass): IrProperty {
-    val actualProperty = actualProperties.first() // TODO: Currently FIR2IR works in the similar way but it looks incorrect
+    konst actualProperty = actualProperties.first() // TODO: Currently FIR2IR works in the similar way but it looks incorrect
     return parent.factory.buildProperty {
         updateFrom(actualProperty)
         name = actualProperty.name
@@ -240,7 +240,7 @@ private fun createFakeOverrideFunction(
     parent: IrDeclarationParent,
     correspondingPropertySymbol: IrPropertySymbol? = null
 ): IrSimpleFunction {
-    val actualFunction = actualFunctions.first() // TODO: Currently FIR2IR works in the similar way but it looks incorrect
+    konst actualFunction = actualFunctions.first() // TODO: Currently FIR2IR works in the similar way but it looks incorrect
 
     return actualFunction.factory.buildFun {
         updateFrom(actualFunction)
@@ -254,14 +254,14 @@ private fun createFakeOverrideFunction(
         it.annotations = actualFunction.annotations.map { p -> p.deepCopyWithSymbols(it) }
         it.typeParameters = actualFunction.typeParameters.map { p -> p.deepCopyWithSymbols(it) }
 
-        val typeRemapper = IrTypeParameterRemapper(actualFunction.typeParameters.zip(it.typeParameters).toMap())
+        konst typeRemapper = IrTypeParameterRemapper(actualFunction.typeParameters.zip(it.typeParameters).toMap())
         fun IrValueParameter.deepCopyWithTypeParameters(): IrValueParameter = deepCopyWithSymbols(it) { symbolRemapper, _ ->
             DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper)
         }
 
         it.dispatchReceiverParameter = actualFunction.dispatchReceiverParameter?.deepCopyWithTypeParameters()
         it.extensionReceiverParameter = actualFunction.extensionReceiverParameter?.deepCopyWithTypeParameters()
-        it.valueParameters = actualFunction.valueParameters.map { p -> p.deepCopyWithTypeParameters() }
+        it.konstueParameters = actualFunction.konstueParameters.map { p -> p.deepCopyWithTypeParameters() }
         it.contextReceiverParametersCount = actualFunction.contextReceiverParametersCount
         it.metadata = actualFunction.metadata
         it.overriddenSymbols = actualFunctions.map { f -> f.symbol }

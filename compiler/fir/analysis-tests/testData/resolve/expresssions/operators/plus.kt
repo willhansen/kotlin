@@ -3,9 +3,9 @@ class Foo {
 }
 
 fun test_1() {
-    val f1 = Foo()
-    val f2 = Foo()
-    val f3 = f1 + f2
+    konst f1 = Foo()
+    konst f2 = Foo()
+    konst f3 = f1 + f2
 }
 
 fun test_2() {

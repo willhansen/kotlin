@@ -35,7 +35,7 @@ class MinMaxByteArrayTest {
 
     @Test
     fun minMaxEmpty() {
-        val empty = byteArrayOf()
+        konst empty = byteArrayOf()
         assertNull(empty.minOrNull())
         assertNull(empty.maxOrNull())
         assertFailsWith<NoSuchElementException> { empty.min() }
@@ -61,7 +61,7 @@ class MinMaxByteArrayTest {
 
     @Test
     fun minMaxWithEmpty() {
-        val empty = byteArrayOf()
+        konst empty = byteArrayOf()
         assertNull(empty.minWithOrNull(naturalOrder()))
         assertNull(empty.maxWithOrNull(naturalOrder()))
         assertFailsWith<NoSuchElementException> { empty.minWith(naturalOrder()) }
@@ -86,7 +86,7 @@ class MinMaxByteArrayTest {
 
     @Test
     fun minMaxByEmpty() {
-        val empty = byteArrayOf()
+        konst empty = byteArrayOf()
         assertNull(empty.minByOrNull { it.toString() })
         assertNull(empty.maxByOrNull { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minBy { it.toString() } }
@@ -94,8 +94,8 @@ class MinMaxByteArrayTest {
     }
 
     @Test 
-    fun minBySelectorEvaluateOnce() {
-        val source = byteArrayOf(1, 2, Byte.MAX_VALUE)
+    fun minBySelectorEkonstuateOnce() {
+        konst source = byteArrayOf(1, 2, Byte.MAX_VALUE)
         var c = 0
         source.minBy { c++ }
         assertEquals(3, c)
@@ -105,8 +105,8 @@ class MinMaxByteArrayTest {
     }
 
     @Test 
-    fun maxBySelectorEvaluateOnce() {
-        val source = byteArrayOf(1, 2, Byte.MAX_VALUE)
+    fun maxBySelectorEkonstuateOnce() {
+        konst source = byteArrayOf(1, 2, Byte.MAX_VALUE)
         var c = 0
         source.maxBy { c++ }
         assertEquals(3, c)
@@ -133,8 +133,8 @@ class MinMaxByteArrayTest {
     
     @Test
     fun minMaxOfDouble() {
-        val middle = 2
-        val items = byteArrayOf(1, 2, Byte.MAX_VALUE).apply { shuffle() }
+        konst middle = 2
+        konst items = byteArrayOf(1, 2, Byte.MAX_VALUE).apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toDouble().pow(0.5) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
@@ -148,8 +148,8 @@ class MinMaxByteArrayTest {
     
     @Test
     fun minMaxOfFloat() {
-        val middle = 2
-        val items = byteArrayOf(1, 2, Byte.MAX_VALUE).apply { shuffle() }
+        konst middle = 2
+        konst items = byteArrayOf(1, 2, Byte.MAX_VALUE).apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toFloat().pow(0.5F) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
@@ -163,7 +163,7 @@ class MinMaxByteArrayTest {
     
     @Test
     fun minMaxOfEmpty() {
-        val empty = byteArrayOf()
+        konst empty = byteArrayOf()
 
         assertNull(empty.minOfOrNull { it.toString() })
         assertNull(empty.maxOfOrNull { it.toString() })
@@ -203,7 +203,7 @@ class MinMaxByteArrayTest {
     
     @Test
     fun minMaxOfWithEmpty() {
-        val empty = byteArrayOf()
+        konst empty = byteArrayOf()
         assertNull(empty.minOfWithOrNull(naturalOrder()) { it.toString() })
         assertNull(empty.maxOfWithOrNull(naturalOrder()) { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minOfWith(naturalOrder()) { it.toString() } }

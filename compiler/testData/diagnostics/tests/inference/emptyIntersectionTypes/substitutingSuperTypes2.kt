@@ -14,6 +14,6 @@ interface B<T> : B2<T>
 interface C<T> : C2<T>
 
 fun <K : C<Int>> main() {
-    val foo = Foo<K>()
+    konst foo = Foo<K>()
     Bar<B<String>>().takeFoo(foo) // error in 1.3.72, no error in 1.4.31
 }

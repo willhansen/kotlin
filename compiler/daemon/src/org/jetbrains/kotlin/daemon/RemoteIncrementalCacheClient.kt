@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.load.kotlin.incremental.components.JvmPackagePartPro
 import org.jetbrains.kotlin.modules.TargetId
 
 class RemoteIncrementalCacheClient(
-    @Suppress("DEPRECATION") val facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
-    val target: TargetId,
-    val profiler: Profiler = DummyProfiler()
+    @Suppress("DEPRECATION") konst facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
+    konst target: TargetId,
+    konst profiler: Profiler = DummyProfiler()
 ): IncrementalCache {
     override fun getObsoletePackageParts(): Collection<String> = profiler.withMeasure(this) { facade.incrementalCache_getObsoletePackageParts(target) }
 

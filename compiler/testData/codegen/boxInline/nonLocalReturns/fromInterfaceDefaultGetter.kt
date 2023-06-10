@@ -7,7 +7,7 @@ inline fun myRun(f: () -> Nothing): Nothing = f()
 import test.*
 
 interface I {
-    val ok: String
+    konst ok: String
         get() { myRun { return "OK" } }
 }
 

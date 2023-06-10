@@ -21,7 +21,7 @@ fun case_1(x: Class?) {
  * ISSUES: KT-17386
  */
 fun case_2(x: Class?) {
-    val y = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction0<(kotlin.Int) -> (kotlin.Int) -> kotlin.Int>?")!>if (x != null) x::fun_1 else null<!>
+    konst y = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction0<(kotlin.Int) -> (kotlin.Int) -> kotlin.Int>?")!>if (x != null) x::fun_1 else null<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction0<(kotlin.Int) -> (kotlin.Int) -> kotlin.Int>?")!>y<!>
 }
 
@@ -31,7 +31,7 @@ fun case_2(x: Class?) {
  * ISSUES: KT-17386
  */
 fun case_3(x: Class?) {
-    val y = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction1<Class, (kotlin.Int) -> (kotlin.Int) -> kotlin.Int>?")!>if (x != null) Class::fun_1 else null<!>
+    konst y = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction1<Class, (kotlin.Int) -> (kotlin.Int) -> kotlin.Int>?")!>if (x != null) Class::fun_1 else null<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction1<Class, (kotlin.Int) -> (kotlin.Int) -> kotlin.Int>?")!>y<!>
 }
 
@@ -40,7 +40,7 @@ fun case_3(x: Class?) {
  * ISSUES: KT-17386
  */
 fun case_4(x: Class?) {
-    val y = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>if (x != null) <!IMPLICIT_CAST_TO_ANY!>x::fun_1<!> else <!IMPLICIT_CAST_TO_ANY!>10<!><!>
+    konst y = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>if (x != null) <!IMPLICIT_CAST_TO_ANY!>x::fun_1<!> else <!IMPLICIT_CAST_TO_ANY!>10<!><!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>y<!>
 }
 
@@ -49,6 +49,6 @@ fun case_4(x: Class?) {
  * ISSUES: KT-17386
  */
 fun case_5(x: Class?) {
-    val y = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>if (x != null) <!IMPLICIT_CAST_TO_ANY!>Class::fun_1<!> else <!IMPLICIT_CAST_TO_ANY!>10<!><!>
+    konst y = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>if (x != null) <!IMPLICIT_CAST_TO_ANY!>Class::fun_1<!> else <!IMPLICIT_CAST_TO_ANY!>10<!><!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>y<!>
 }

@@ -21,23 +21,23 @@ import java.io.File
 // byte arrays are used to simplify passing to different classloaders
 interface IncrementalDataProvider {
     /** gets header metadata (serialized [JsProtoBuf.Header]) from previous compilation */
-    val headerMetadata: ByteArray
+    konst headerMetadata: ByteArray
 
     /** gets non-dirty package parts data from previous compilation */
-    val compiledPackageParts: Map<File, TranslationResultValue>
+    konst compiledPackageParts: Map<File, TranslationResultValue>
 
-    val metadataVersion: IntArray
+    konst metadataVersion: IntArray
 
     /** gets non-dirty package metadata from previous compilation */
-    val packageMetadata: Map<String, ByteArray>
+    konst packageMetadata: Map<String, ByteArray>
 
-    val serializedIrFiles: Map<File, IrTranslationResultValue>
+    konst serializedIrFiles: Map<File, IrTranslationResultValue>
 }
 
 class IncrementalDataProviderImpl(
-    override val headerMetadata: ByteArray,
-    override val compiledPackageParts: Map<File, TranslationResultValue>,
-    override val metadataVersion: IntArray,
-    override val packageMetadata: Map<String, ByteArray>,
-    override val serializedIrFiles: Map<File, IrTranslationResultValue>
+    override konst headerMetadata: ByteArray,
+    override konst compiledPackageParts: Map<File, TranslationResultValue>,
+    override konst metadataVersion: IntArray,
+    override konst packageMetadata: Map<String, ByteArray>,
+    override konst serializedIrFiles: Map<File, IrTranslationResultValue>
 ) : IncrementalDataProvider

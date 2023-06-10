@@ -2,10 +2,10 @@
 package foo
 
 fun box(): String {
-    val ints: Any? = arrayOf(1, 2)
-    val strings: Any? = arrayOf("a", "b")
-    val nil: Any? = null
-    val obj: Any? = object{}
+    konst ints: Any? = arrayOf(1, 2)
+    konst strings: Any? = arrayOf("a", "b")
+    konst nil: Any? = null
+    konst obj: Any? = object{}
 
     success("ints") { ints as Array<*> }
     success("strings") { strings as Array<*> }

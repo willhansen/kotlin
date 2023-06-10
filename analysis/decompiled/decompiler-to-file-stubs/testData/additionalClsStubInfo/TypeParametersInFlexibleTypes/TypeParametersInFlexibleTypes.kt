@@ -1,9 +1,9 @@
 package test
 
-public class TypeParametersInFlexibleTypes<A, D>(val javaClass: d.JavaClass<A>, val t: D & Any) {
+public class TypeParametersInFlexibleTypes<A, D>(konst javaClass: d.JavaClass<A>, konst t: D & Any) {
     fun foo() = javaClass.foo()
 
-    val bar = javaClass.bar()
+    konst bar = javaClass.bar()
 
-    val baz = d.JavaClass.baz(t)
+    konst baz = d.JavaClass.baz(t)
 }

@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 
 class MyCollection<T>: Collection<T> {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(o: T): Boolean = false
     override fun iterator(): Iterator<T> = throw UnsupportedOperationException()
@@ -19,8 +19,8 @@ fun expectUoe(block: () -> Any) {
 }
 
 fun box(): String {
-    val myCollection = MyCollection<String>()
-    val collection = myCollection as java.util.Collection<String>
+    konst myCollection = MyCollection<String>()
+    konst collection = myCollection as java.util.Collection<String>
 
     expectUoe { collection.add("") }
     expectUoe { collection.remove("") }

@@ -22,11 +22,11 @@ fun test(x: MyInterface) {
 }
 
 fun box(): String {
-    val x = FinalClassWithOverride()
+    konst x = FinalClassWithOverride()
     x.foo()
     test(x)
 
-    val y = AnnotatedClassWithExplicitInheritance()
+    konst y = AnnotatedClassWithExplicitInheritance()
     y.foo()
     test(y)
 

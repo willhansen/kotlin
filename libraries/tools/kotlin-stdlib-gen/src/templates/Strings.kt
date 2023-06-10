@@ -10,14 +10,14 @@ import templates.SequenceClass.*
 
 object StringJoinOps : TemplateGroupBase() {
 
-    val f_joinTo = fn("joinTo(buffer: A, separator: CharSequence = \", \", prefix: CharSequence = \"\", postfix: CharSequence = \"\", limit: Int = -1, truncated: CharSequence = \"...\", transform: ((T) -> CharSequence)? = null)") {
+    konst f_joinTo = fn("joinTo(buffer: A, separator: CharSequence = \", \", prefix: CharSequence = \"\", postfix: CharSequence = \"\", limit: Int = -1, truncated: CharSequence = \"...\", transform: ((T) -> CharSequence)? = null)") {
         includeDefault()
     } builder {
         doc {
             """
             Appends the string from all the elements separated using [separator] and using the given [prefix] and [postfix] if supplied.
 
-            If the collection could be huge, you can specify a non-negative value of [limit], in which case only the first [limit]
+            If the collection could be huge, you can specify a non-negative konstue of [limit], in which case only the first [limit]
             elements will be appended, followed by the [truncated] string (which defaults to "...").
             """
         }
@@ -60,14 +60,14 @@ object StringJoinOps : TemplateGroupBase() {
         }
     }
 
-    val f_joinToString = fn("joinToString(separator: CharSequence = \", \", prefix: CharSequence = \"\", postfix: CharSequence = \"\", limit: Int = -1, truncated: CharSequence = \"...\", transform: ((T) -> CharSequence)? = null)") {
+    konst f_joinToString = fn("joinToString(separator: CharSequence = \", \", prefix: CharSequence = \"\", postfix: CharSequence = \"\", limit: Int = -1, truncated: CharSequence = \"...\", transform: ((T) -> CharSequence)? = null)") {
         includeDefault()
     } builder {
         doc {
             """
             Creates a string from all the elements separated using [separator] and using the given [prefix] and [postfix] if supplied.
 
-            If the collection could be huge, you can specify a non-negative value of [limit], in which case only the first [limit]
+            If the collection could be huge, you can specify a non-negative konstue of [limit], in which case only the first [limit]
             elements will be appended, followed by the [truncated] string (which defaults to "...").
             """
         }

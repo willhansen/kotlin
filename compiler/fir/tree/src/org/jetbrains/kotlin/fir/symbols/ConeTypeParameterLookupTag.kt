@@ -10,10 +10,10 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.model.TypeParameterMarker
 
 data class ConeTypeParameterLookupTag(
-    val typeParameterSymbol: FirTypeParameterSymbol
+    konst typeParameterSymbol: FirTypeParameterSymbol
 ) : ConeClassifierLookupTagWithFixedSymbol(), TypeParameterMarker {
-    override val name: Name get() = typeParameterSymbol.name
-    override val symbol: FirTypeParameterSymbol
+    override konst name: Name get() = typeParameterSymbol.name
+    override konst symbol: FirTypeParameterSymbol
         get() = typeParameterSymbol
 
 }

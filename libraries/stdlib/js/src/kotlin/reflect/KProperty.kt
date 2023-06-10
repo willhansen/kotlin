@@ -7,13 +7,13 @@
 package kotlin.reflect
 
 /**
- * Represents a property, such as a named `val` or `var` declaration.
+ * Represents a property, such as a named `konst` or `var` declaration.
  * Instances of this class are obtainable by the `::` operator.
  * 
  * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/reflection.html)
  * for more information.
  *
- * @param V the type of the property value.
+ * @param V the type of the property konstue.
  */
 public actual interface KProperty<out V> : KCallable<V>
 
@@ -30,7 +30,7 @@ public actual interface KMutableProperty<V> : KProperty<V>
  */
 public actual interface KProperty0<out V> : KProperty<V>, () -> V {
     /**
-     * Returns the current value of the property.
+     * Returns the current konstue of the property.
      */
     public actual fun get(): V
 }
@@ -40,25 +40,25 @@ public actual interface KProperty0<out V> : KProperty<V>, () -> V {
  */
 public actual interface KMutableProperty0<V> : KProperty0<V>, KMutableProperty<V> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(value: V)
+    public actual fun set(konstue: V)
 }
 
 
 /**
  * Represents a property, operations on which take one receiver as a parameter.
  *
- * @param T the type of the receiver which should be used to obtain the value of the property.
- * @param V the type of the property value.
+ * @param T the type of the receiver which should be used to obtain the konstue of the property.
+ * @param V the type of the property konstue.
  */
 public actual interface KProperty1<T, out V> : KProperty<V>, (T) -> V {
     /**
-     * Returns the current value of the property.
+     * Returns the current konstue of the property.
      *
-     * @param receiver the receiver which is used to obtain the value of the property.
+     * @param receiver the receiver which is used to obtain the konstue of the property.
      *                 For example, it should be a class instance if this is a member property of that class,
      *                 or an extension receiver if this is a top level extension property.
      */
@@ -70,14 +70,14 @@ public actual interface KProperty1<T, out V> : KProperty<V>, (T) -> V {
  */
 public actual interface KMutableProperty1<T, V> : KProperty1<T, V>, KMutableProperty<V> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
-     * @param receiver the receiver which is used to modify the value of the property.
+     * @param receiver the receiver which is used to modify the konstue of the property.
      *                 For example, it should be a class instance if this is a member property of that class,
      *                 or an extension receiver if this is a top level extension property.
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(receiver: T, value: V)
+    public actual fun set(receiver: T, konstue: V)
 }
 
 
@@ -89,11 +89,11 @@ public actual interface KMutableProperty1<T, V> : KProperty1<T, V>, KMutableProp
  *        the type of the declaring class of the property, or any subclass of that class.
  * @param E the type of the second receiver. In case of the extension property in a class this is
  *        the type of the extension receiver.
- * @param V the type of the property value.
+ * @param V the type of the property konstue.
  */
 public actual interface KProperty2<D, E, out V> : KProperty<V>, (D, E) -> V {
     /**
-     * Returns the current value of the property. In case of the extension property in a class,
+     * Returns the current konstue of the property. In case of the extension property in a class,
      * the instance of the class should be passed first and the instance of the extension receiver second.
      *
      * @param receiver1 the instance of the first receiver.
@@ -107,11 +107,11 @@ public actual interface KProperty2<D, E, out V> : KProperty<V>, (D, E) -> V {
  */
 public actual interface KMutableProperty2<D, E, V> : KProperty2<D, E, V>, KMutableProperty<V> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
      * @param receiver1 the instance of the first receiver.
      * @param receiver2 the instance of the second receiver.
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(receiver1: D, receiver2: E, value: V)
+    public actual fun set(receiver1: D, receiver2: E, konstue: V)
 }

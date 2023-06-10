@@ -21,8 +21,8 @@ public final expect class C {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     public final expect enum class E : kotlin.Enum<C.E> {
-        @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-        public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+        @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
         protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
         public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: C.E): kotlin.Int
         public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -30,8 +30,8 @@ public final expect class C {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): C.E
-        public final /*synthesized*/ fun values(): kotlin.Array<C.E>
+        public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): C.E
+        public final /*synthesized*/ fun konstues(): kotlin.Array<C.E>
     }
 
     public final expect inner class I {
@@ -98,8 +98,8 @@ public final actual class C {
 
     public final actual enum class E : kotlin.Enum<C.E> {
         private constructor E()
-        @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-        public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+        @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
         protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
         public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: C.E): kotlin.Int
         public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -109,9 +109,9 @@ public final actual class C {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<C.E>
-        public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): C.E
-        public final /*synthesized*/ fun values(): kotlin.Array<C.E>
+        public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<C.E>
+        public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): C.E
+        public final /*synthesized*/ fun konstues(): kotlin.Array<C.E>
     }
 
     public final actual inner class I {

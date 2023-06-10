@@ -5,9 +5,9 @@
 package org.jetbrains.kotlin.cli.jvm.compiler.jarfs
 
 class ByteArrayCharSequence(
-    private val bytes: ByteArray,
-    private val start: Int = 0,
-    private val end: Int = bytes.size
+    private konst bytes: ByteArray,
+    private konst start: Int = 0,
+    private konst end: Int = bytes.size
 ) : CharSequence {
 
     override fun hashCode(): Int {
@@ -18,7 +18,7 @@ class ByteArrayCharSequence(
         error("Do not try comparing ByteArrayCharSequence")
     }
 
-    override val length get() = end - start
+    override konst length get() = end - start
 
     override fun get(index: Int): Char = bytes[index + start].toInt().toChar()
 
@@ -28,7 +28,7 @@ class ByteArrayCharSequence(
     }
 
     override fun toString(): String {
-        val chars = CharArray(length)
+        konst chars = CharArray(length)
 
         for (i in 0 until length) {
             chars[i] = bytes[i + start].toInt().toChar()

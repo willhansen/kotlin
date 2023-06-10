@@ -12,13 +12,13 @@ import java.io.File
 import java.net.URL
 
 fun main(args: Array<String>) {
-    val dir = File("../../stdlib/js/idl")
+    konst dir = File("../../stdlib/js/idl")
     dir.mkdirs()
 
     var packageFilter: String? = null
-    val argsIterator = args.iterator()
+    konst argsIterator = args.iterator()
     while (argsIterator.hasNext()) {
-        val arg = argsIterator.next()
+        konst arg = argsIterator.next()
 
         when (arg) {
             "--pkg" -> if (argsIterator.hasNext()) packageFilter = argsIterator.next() else throw IllegalArgumentException("argument $arg requires argument")
@@ -26,22 +26,22 @@ fun main(args: Array<String>) {
         }
     }
 
-    val urlsPerFiles = urls.filter { packageFilter == null || it.second == packageFilter }.groupBy { it.second + ".idl" }
+    konst urlsPerFiles = urls.filter { packageFilter == null || it.second == packageFilter }.groupBy { it.second + ".idl" }
 
     urlsPerFiles.forEach { e ->
-        val fileName = e.key
-        val pkg = e.value.first().second
+        konst fileName = e.key
+        konst pkg = e.konstue.first().second
 
         File(dir, fileName).bufferedWriter().use { w ->
             w.appendLine("package $pkg;")
             w.appendLine()
             w.appendLine()
 
-            e.value.forEach { (url) ->
+            e.konstue.forEach { (url) ->
                 println("Loading $url...")
 
                 w.appendLine("// Downloaded from $url")
-                val content = fetch(url)
+                konst content = fetch(url)
 
                 if (content != null) {
                     if (url.endsWith(".idl")) {
@@ -68,7 +68,7 @@ private fun fetch(url: String): String? {
 }
 
 private fun Appendable.append(element: Element) {
-    val text = element.text()
+    konst text = element.text()
     appendLine(text)
     if (!text.trimEnd().endsWith(";")) {
         appendLine(";")
@@ -78,13 +78,13 @@ private fun Appendable.append(element: Element) {
 
 private fun List<Element>.attachTo(out: Appendable) = map { element ->
     if (!element.tag().preserveWhitespace()) {
-        Element(Tag.valueOf("pre"), element.baseUri()).appendChild(element)
+        Element(Tag.konstueOf("pre"), element.baseUri()).appendChild(element)
     } else element
 }.forEach { out.append(it) }
 
 
 private fun extractIDLText(rawContent: String, out: Appendable) {
-    val soup = Jsoup.parse(rawContent)
+    konst soup = Jsoup.parse(rawContent)
 
     soup.select(".dfn-panel").remove()
 
@@ -93,7 +93,7 @@ private fun extractIDLText(rawContent: String, out: Appendable) {
     soup.select("spec-idl").attachTo(out)
 }
 
-private val urls = listOf(
+private konst urls = listOf(
     "https://raw.githubusercontent.com/whatwg/html-mirror/master/source" to "org.w3c.dom",
     "https://html.spec.whatwg.org/" to "org.w3c.dom",
     "https://raw.githubusercontent.com/whatwg/dom/master/dom.html" to "org.w3c.dom",

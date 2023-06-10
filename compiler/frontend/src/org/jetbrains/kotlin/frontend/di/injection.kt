@@ -133,7 +133,7 @@ fun StorageComponentContainer.configureModule(
     useInstance(platform)
     useInstance(analyzerServices)
 
-    val nonTrivialPlatformVersion = platform
+    konst nonTrivialPlatformVersion = platform
         .mapNotNull { it.targetPlatformVersion.takeIf { it != TargetPlatformVersion.NoVersion } }
         .singleOrNull()
 

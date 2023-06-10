@@ -67,7 +67,7 @@ KtFile: newModifiers.kt
         MODIFIER_LIST
           PsiElement(noinline)('noinline')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x1')
         PsiWhiteSpace(' ')
@@ -85,7 +85,7 @@ KtFile: newModifiers.kt
       PsiElement(SEMICOLON)(';')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x2')
         PsiWhiteSpace(' ')
@@ -99,7 +99,7 @@ KtFile: newModifiers.kt
       PsiElement(SEMICOLON)(';')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x3')
         PsiWhiteSpace(' ')
@@ -114,7 +114,7 @@ KtFile: newModifiers.kt
           PsiWhiteSpace('\n\n\n    ')
           PsiElement(private)('private')
         PsiWhiteSpace('\n    ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x4')
         PsiWhiteSpace(' ')
@@ -228,7 +228,7 @@ KtFile: newModifiers.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiElement(COLON)(':')
@@ -253,7 +253,7 @@ KtFile: newModifiers.kt
           PsiElement(get)('get')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('y')
         PsiElement(COLON)(':')
@@ -299,7 +299,7 @@ KtFile: newModifiers.kt
             PsiElement(INTEGER_LITERAL)('2')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('z')
         PsiElement(COLON)(':')
@@ -322,7 +322,7 @@ KtFile: newModifiers.kt
           PsiElement(set)('set')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('z0')
         PsiElement(COLON)(':')

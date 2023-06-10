@@ -16,7 +16,7 @@
 
 package org.jetbrains.ring
 
-private const val RUNS = 1_000_000
+private const konst RUNS = 1_000_000
 
 open class CallsBenchmark {
 
@@ -150,21 +150,21 @@ open class CallsBenchmark {
         override fun foo() = 78298734
     }
 
-    val d = D()
-    val a1: A = B()
-    val a2: A = C()
-    val a3: A = d
-    val i1: I = a1
-    val i2: I = a2
-    val i3: I = d
-    val i4: I = X()
-    val i5: I = Y()
-    val i6: I = Z()
+    konst d = D()
+    konst a1: A = B()
+    konst a2: A = C()
+    konst a3: A = d
+    konst i1: I = a1
+    konst i2: I = a2
+    konst i3: I = d
+    konst i4: I = X()
+    konst i5: I = Y()
+    konst i6: I = Z()
 
     fun finalMethodCall(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val d = d
+        konst d = d
         for (i in 0 until RUNS)
             x += d.foo()
         return x
@@ -173,7 +173,7 @@ open class CallsBenchmark {
     fun classOpenMethodCall_MonomorphicCallsite(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val a1 = a1
+        konst a1 = a1
         for (i in 0 until RUNS)
             x += a1.foo()
         return x
@@ -182,8 +182,8 @@ open class CallsBenchmark {
     fun classOpenMethodCall_BimorphicCallsite(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val a1 = a1
-        val a2 = a2
+        konst a1 = a1
+        konst a2 = a2
         for (i in 0 until RUNS)
             x += (if (i and 1 == 0) a1 else a2).foo()
         return x
@@ -192,9 +192,9 @@ open class CallsBenchmark {
     fun classOpenMethodCall_TrimorphicCallsite(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val a1 = a1
-        val a2 = a2
-        val a3 = a3
+        konst a1 = a1
+        konst a2 = a2
+        konst a3 = a3
         for (i in 0 until RUNS)
             x += (when (i % 3) {
                 1 -> a1
@@ -207,7 +207,7 @@ open class CallsBenchmark {
     fun interfaceMethodCall_MonomorphicCallsite(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val i1 = i1
+        konst i1 = i1
         for (i in 0 until RUNS)
             x += i1.foo()
         return x
@@ -216,8 +216,8 @@ open class CallsBenchmark {
     fun interfaceMethodCall_BimorphicCallsite(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val i1 = i1
-        val i2 = i2
+        konst i1 = i1
+        konst i2 = i2
         for (i in 0 until RUNS)
             x += (if (i and 1 == 0) i1 else i2).foo()
         return x
@@ -226,9 +226,9 @@ open class CallsBenchmark {
     fun interfaceMethodCall_TrimorphicCallsite(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val i1 = i1
-        val i2 = i2
-        val i3 = i3
+        konst i1 = i1
+        konst i2 = i2
+        konst i3 = i3
         for (i in 0 until RUNS)
             x += (when (i % 3) {
                 1 -> i1
@@ -241,12 +241,12 @@ open class CallsBenchmark {
     fun interfaceMethodCall_HexamorphicCallsite(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val i1 = i1
-        val i2 = i2
-        val i3 = i3
-        val i4 = i4
-        val i5 = i5
-        val i6 = i6
+        konst i1 = i1
+        konst i2 = i2
+        konst i3 = i3
+        konst i4 = i4
+        konst i5 = i5
+        konst i6 = i6
         for (i in 0 until RUNS)
             x += (when (i % 6) {
                 1 -> i1
@@ -267,12 +267,12 @@ open class CallsBenchmark {
         override fun foo(): Int = 42
     }
 
-    val e: E = F()
+    konst e: E = F()
 
     fun returnBoxUnboxFolding(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val e = e
+        konst e = e
         for (i in 0 until RUNS)
             x += e.foo() as Int
         return x
@@ -288,12 +288,12 @@ open class CallsBenchmark {
         }
     }
 
-    val g: G<Any> = H() as G<Any>
+    konst g: G<Any> = H() as G<Any>
 
     fun parameterBoxUnboxFolding(): Int {
         var x = 0
         // TODO: optimize fields accesses
-        val g = g
+        konst g = g
         for (i in 0 until RUNS)
             x += g.foo(i)
         return x

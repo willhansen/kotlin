@@ -17,15 +17,15 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.KotlinNati
 import org.jetbrains.kotlin.konan.target.KonanTarget
 
 open class KotlinSharedNativeCompilationFactory internal constructor(
-    override val target: KotlinMetadataTarget,
-    private val konanTargets: Set<KonanTarget>,
-    private val defaultSourceSet: KotlinSourceSet
+    override konst target: KotlinMetadataTarget,
+    private konst konanTargets: Set<KonanTarget>,
+    private konst defaultSourceSet: KotlinSourceSet
 ) : KotlinCompilationFactory<KotlinSharedNativeCompilation> {
 
-    override val itemClass: Class<KotlinSharedNativeCompilation>
+    override konst itemClass: Class<KotlinSharedNativeCompilation>
         get() = KotlinSharedNativeCompilation::class.java
 
-    private val compilationImplFactory: KotlinCompilationImplFactory =
+    private konst compilationImplFactory: KotlinCompilationImplFactory =
         KotlinCompilationImplFactory(
             compilationDependencyConfigurationsFactory = DefaultKotlinCompilationDependencyConfigurationsFactory.WithoutRuntime,
             compilerOptionsFactory = KotlinNativeCompilerOptionsFactory,

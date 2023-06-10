@@ -26,25 +26,25 @@ import org.jetbrains.kotlin.test.utils.MultiModuleInfoDumper
 class FirDumpHandler(
     testServices: TestServices
 ) : FirAnalysisHandler(testServices) {
-    private val dumper: MultiModuleInfoDumper = MultiModuleInfoDumper()
+    private konst dumper: MultiModuleInfoDumper = MultiModuleInfoDumper()
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(FirDiagnosticsDirectives)
 
     override fun processModule(module: TestModule, info: FirOutputArtifact) {
         for (part in info.partsForDependsOnModules) {
-            val currentModule = part.module
+            konst currentModule = part.module
             if (FirDiagnosticsDirectives.FIR_DUMP !in currentModule.directives) return
-            val builderForModule = dumper.builderForModule(currentModule)
-            val firFiles = info.mainFirFiles
+            konst builderForModule = dumper.builderForModule(currentModule)
+            konst firFiles = info.mainFirFiles
 
-            val allFiles = buildList {
-                addAll(firFiles.values)
+            konst allFiles = buildList {
+                addAll(firFiles.konstues)
                 addAll(part.session.createFilesWithGeneratedDeclarations())
             }
             part.session.lazyDeclarationResolver.startResolvingPhase(FirResolvePhase.BODY_RESOLVE)
 
-            val renderer = FirRenderer(
+            konst renderer = FirRenderer(
                 builder = builderForModule,
                 packageDirectiveRenderer = FirPackageDirectiveRenderer(),
                 classMemberRenderer = FirClassMemberRendererWithGeneratedDeclarations(part.session)
@@ -59,15 +59,15 @@ class FirDumpHandler(
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
         // TODO: change according to multiple testdata files
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val expectedFile = testDataFile.parentFile.resolve("${testDataFile.nameWithoutFirExtension}.fir.txt")
-        val actualText = dumper.generateResultingDump()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst expectedFile = testDataFile.parentFile.resolve("${testDataFile.nameWithoutFirExtension}.fir.txt")
+        konst actualText = dumper.generateResultingDump()
         assertions.assertEqualsToFile(expectedFile, actualText, message = { "Content is not equal" })
     }
 
-    private class FirClassMemberRendererWithGeneratedDeclarations(val session: FirSession) : FirClassMemberRenderer() {
+    private class FirClassMemberRendererWithGeneratedDeclarations(konst session: FirSession) : FirClassMemberRenderer() {
         override fun render(regularClass: FirRegularClass) {
-            val allDeclarations = buildList {
+            konst allDeclarations = buildList {
                 addAll(regularClass.declarations)
                 addAll(regularClass.generatedMembers(session))
                 addAll(regularClass.generatedNestedClassifiers(session))

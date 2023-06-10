@@ -8,7 +8,7 @@ fun String.call() = this + "O"
 inline fun O() = "".call()
 
 object A {
-    val foo = Foo
+    konst foo = Foo
 }
 
 object Foo {
@@ -21,7 +21,7 @@ inline fun K(a: A) = a.foo.call(a, "K")
 // MODULE: main(lib)
 // FILE: main.kt
 
-val a = A
+konst a = A
 
 // CHECK_BREAKS_COUNT: function=box count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=box name=$l$block count=0 TARGET_BACKENDS=JS_IR

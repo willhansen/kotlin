@@ -75,7 +75,7 @@ public class TokenStream {
         EOF_CHAR = -1;
 
     /**
-     * Token types.  These values correspond to JSTokenType values in
+     * Token types.  These konstues correspond to JSTokenType konstues in
      * jsscan.c.
      */
 
@@ -84,7 +84,7 @@ public class TokenStream {
         ERROR       = -1, // well-known as the only code < EOF
         EOF         = 0,  // end of file token - (not EOF_CHAR)
         EOL         = 1,  // end of line
-        // Beginning here are interpreter bytecodes. Their values
+        // Beginning here are interpreter bytecodes. Their konstues
         // must not exceed 127.
         POPV        = 2,
         ENTERWITH   = 3,
@@ -254,7 +254,7 @@ public class TokenStream {
         LAST_TOKEN  = 147,
         NUMBER_INT  = 148,
 
-        // This value is only used as a return value for getTokenHelper,
+        // This konstue is only used as a return konstue for getTokenHelper,
         // which is only called from getToken and exists to avoid an excessive
         // recursion problem if a number of lines in a row are comments.
         RETRY_TOKEN     = 65535;
@@ -681,7 +681,7 @@ public class TokenStream {
                         if (escapeVal < 0) { break; }
                     }
                     if (escapeVal < 0) {
-                        reportTokenError("msg.invalid.escape", null);
+                        reportTokenError("msg.inkonstid.escape", null);
                         return ERROR;
                     }
                     addToString(escapeVal);
@@ -793,11 +793,11 @@ public class TokenStream {
             in.unread();
             String numString = getStringFromBuffer();
 
-            double dval;
+            double dkonst;
             if (base == 10 && !isInteger) {
                 try {
                     // Use Java conversion to number from string...
-                    dval = (Double.valueOf(numString)).doubleValue();
+                    dkonst = (Double.konstueOf(numString)).doubleValue();
                 }
                 catch (NumberFormatException ex) {
                     Object[] errArgs = { ex.getMessage() };
@@ -805,10 +805,10 @@ public class TokenStream {
                     return ERROR;
                 }
             } else {
-                dval = ScriptRuntime.stringToNumber(numString, 0, base);
+                dkonst = ScriptRuntime.stringToNumber(numString, 0, base);
             }
 
-            this.number = dval;
+            this.number = dkonst;
 
             if (isInteger) {
                 return NUMBER_INT;
@@ -825,7 +825,7 @@ public class TokenStream {
             // building it out of a StringBuffer.
 
             int quoteChar = c;
-            int val = 0;
+            int konst = 0;
             stringBufferTop = 0;
 
             c = in.read();
@@ -869,7 +869,7 @@ public class TokenStream {
                                 addToString(c);
                             }
                             // prepare for replace of stored 'u' sequence
-                            // by escape value
+                            // by escape konstue
                             stringBufferTop = escapeStart;
                             c = escapeVal;
                         } break;
@@ -904,20 +904,20 @@ public class TokenStream {
                             continue strLoop;
 
                         default: if ('0' <= c && c < '8') {
-                            val = c - '0';
+                            konst = c - '0';
                             c = in.read();
                             if ('0' <= c && c < '8') {
-                                val = 8 * val + c - '0';
+                                konst = 8 * konst + c - '0';
                                 c = in.read();
-                                if ('0' <= c && c < '8' && val <= 037) {
+                                if ('0' <= c && c < '8' && konst <= 037) {
                                     // c is 3rd char of octal sequence only if
-                                    // the resulting val <= 0377
-                                    val = 8 * val + c - '0';
+                                    // the resulting konst <= 0377
+                                    konst = 8 * konst + c - '0';
                                     c = in.read();
                                 }
                             }
                             in.unread();
-                            c = val;
+                            c = konst;
                         }
                     }
                 }
@@ -1117,7 +1117,7 @@ public class TokenStream {
                 }
 
                 if (isAlpha(in.peek())) {
-                    reportTokenError("msg.invalid.re.flag", null);
+                    reportTokenError("msg.inkonstid.re.flag", null);
                     return ERROR;
                 }
 
@@ -1255,7 +1255,7 @@ public class TokenStream {
         in.unread();
       } while (jsniMatchParamTypeSignature());
 
-      // If we made it here, we can assume that there was an invalid type
+      // If we made it here, we can assume that there was an inkonstid type
       // signature that was already reported and that the offending char
       // was already unread.
       //
@@ -1523,7 +1523,7 @@ public class TokenStream {
     private int op;
     public boolean treatKeywordAsIdentifier;
 
-    // Set this to an initial non-null value so that the Parser has
+    // Set this to an initial non-null konstue so that the Parser has
     // something to retrieve even if an error has occurred and no
     // string is found.  Fosters one class of error, but saves lots of
     // code.

@@ -1,1 +1,1 @@
-val foo = <!INVISIBLE_REFERENCE!>UInt<!>()
+konst foo = <!INVISIBLE_REFERENCE!>UInt<!>()

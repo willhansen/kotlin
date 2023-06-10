@@ -119,12 +119,12 @@ FILE fqName:<root> fileName:/DelegationAndInheritanceFromJava.kt
             $this: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:<root>.Foo.B visibility:private [final]' type=<root>.Foo.B origin=null
               receiver: GET_VAR '<this>: <root>.Impl declared in <root>.Impl.containsAll' type=<root>.Impl origin=null
             elements: GET_VAR 'elements: kotlin.collections.Collection<@[FlexibleNullability] kotlin.String?> declared in <root>.Impl.containsAll' type=kotlin.collections.Collection<@[FlexibleNullability] kotlin.String?> origin=null
-    PROPERTY DELEGATED_MEMBER name:size visibility:public modality:OPEN [val]
+    PROPERTY DELEGATED_MEMBER name:size visibility:public modality:OPEN [konst]
       overridden:
         public abstract size: kotlin.Int
         public abstract size: kotlin.Int
       FUN DELEGATED_MEMBER name:<get-size> visibility:public modality:OPEN <> ($this:<root>.Impl) returnType:kotlin.Int
-        correspondingProperty: PROPERTY DELEGATED_MEMBER name:size visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY DELEGATED_MEMBER name:size visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-size> (): kotlin.Int declared in <root>.Foo.A
           public abstract fun <get-size> (): kotlin.Int declared in <root>.Foo.B
@@ -156,4 +156,4 @@ FILE fqName:<root> fileName:/DelegationAndInheritanceFromJava.kt
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK"
+        CONST String type=kotlin.String konstue="OK"

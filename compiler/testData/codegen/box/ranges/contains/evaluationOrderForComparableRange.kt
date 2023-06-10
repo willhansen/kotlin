@@ -10,7 +10,7 @@ inline fun expectOrder(at: String, expected: String, body: () -> Unit) {
     }
 }
 
-class Z(val x: Int) : Comparable<Z> {
+class Z(konst x: Int) : Comparable<Z> {
     override fun compareTo(other: Z): Int {
         order.append("c:$x,${other.x} ")
         return x.compareTo(other.x)

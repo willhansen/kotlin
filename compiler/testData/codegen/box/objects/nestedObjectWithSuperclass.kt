@@ -1,4 +1,4 @@
-open class A (val s: Int) {
+open class A (konst s: Int) {
     open fun foo(): Int {
         return s
     }
@@ -7,7 +7,7 @@ open class A (val s: Int) {
 object Outer: A(1) {
     object O: A(2) {
         override fun foo(): Int {
-            val s = super<A>.foo()
+            konst s = super<A>.foo()
             return s + 3
         }
     }

@@ -1,13 +1,13 @@
 package foo;
 
 fun foo1() {};
-val x = 1;;;;
+konst x = 1;;;;
 class A() {
-    val x = 1;
+    konst x = 1;
 
     fun foo() {
         class A1;
-        val x = 1;
+        konst x = 1;
     }
     fun bar();
 
@@ -19,9 +19,9 @@ class A() {
 };
 
 fun foo;
-val;
+konst;
 class B {
-    val;
+    konst;
     init;
     constructor;
 }

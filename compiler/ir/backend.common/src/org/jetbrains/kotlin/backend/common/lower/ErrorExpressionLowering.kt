@@ -26,7 +26,7 @@ abstract class ErrorDeclarationLowering : DeclarationTransformer {
 
 abstract class ErrorExpressionLowering(context: CommonBackendContext) : BodyLoweringPass {
 
-    protected val nothingType = context.irBuiltIns.nothingType
+    protected konst nothingType = context.irBuiltIns.nothingType
 
     abstract fun transformErrorExpression(expression: IrExpression, nodeKind: String): IrExpression
 
@@ -39,7 +39,7 @@ abstract class ErrorExpressionLowering(context: CommonBackendContext) : BodyLowe
 
             override fun visitErrorCallExpression(expression: IrErrorCallExpression): IrExpression {
                 expression.transformChildrenVoid(this)
-                val statements = mutableListOf<IrExpression>().apply {
+                konst statements = mutableListOf<IrExpression>().apply {
                     expression.explicitReceiver?.let { add(it) }
                     addAll(expression.arguments)
                     add(transformErrorExpression(expression, "Error Call"))

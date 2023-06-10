@@ -5,19 +5,19 @@ interface Trait {
 
 class Outer : Trait {
     fun foo() {
-        val t = this@Outer
-        val s = super@Outer.bar()
+        konst t = this@Outer
+        konst s = super@Outer.bar()
 
         class Local : Trait {
-            val t = this@Outer
-            val s = super@Outer.bar()
+            konst t = this@Outer
+            konst s = super@Outer.bar()
 
             inner class Inner {
-                val t = this@Local
-                val s = super@Local.bar()
+                konst t = this@Local
+                konst s = super@Local.bar()
 
-                val tt = this@Outer
-                val ss = super@Outer.bar()
+                konst tt = this@Outer
+                konst ss = super@Outer.bar()
             }
         }
     }

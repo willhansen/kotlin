@@ -18,7 +18,7 @@ fun box() : String {
     return "Fail"
   }
 
-  val x = X()
+  konst x = X()
   x.zzzValue = "aa"
   if (x.zzzValue != "aa") {
     return "Fail 2";

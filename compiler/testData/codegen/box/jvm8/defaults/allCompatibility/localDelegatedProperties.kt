@@ -17,7 +17,7 @@ class Delegate {
 interface Foo {
 
     fun test(): String {
-        val OK by Delegate()
+        konst OK by Delegate()
         return OK
     }
 }

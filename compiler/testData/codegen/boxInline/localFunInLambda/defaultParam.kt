@@ -14,8 +14,8 @@ interface RunnableString {
 }
 
 fun fooInt(): String {
-    val r = "O"
-    val a = run {
+    konst r = "O"
+    konst a = run {
         fun f(x: Int, y: String? = null): String = r + x + y
         f(1, "K")
     }
@@ -23,8 +23,8 @@ fun fooInt(): String {
 }
 
 fun fooLong(): String {
-    val r = "O"
-    val a = run {
+    konst r = "O"
+    konst a = run {
         fun f(x: Long, y: String? = null): String = r + x + y
         f(2, "K")
     }
@@ -32,8 +32,8 @@ fun fooLong(): String {
 }
 
 fun fooLongInsideObject(): String {
-    val r = "O"
-    val a = object: Runnable {
+    konst r = "O"
+    konst a = object: Runnable {
         override fun run(): String {
             fun f(x: Long, y: String? = null): String = r + x + y
             return f(3, "K")
@@ -43,8 +43,8 @@ fun fooLongInsideObject(): String {
 }
 
 fun fooLongCallableReference(): String {
-    val r = "O"
-    val a = run {
+    konst r = "O"
+    konst a = run {
         fun f(x: Long, y: String? = null): String = r + x + y
         (::f).let { it(4, "K") }
     }
@@ -53,7 +53,7 @@ fun fooLongCallableReference(): String {
 
 class A {
     fun fooLongSyntheticAccessor(capt: Int): String {
-        val o: RunnableString = run {
+        konst o: RunnableString = run {
             object: RunnableString {
                 override fun run(captured: String): String {
                     return {

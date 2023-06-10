@@ -1,33 +1,33 @@
 interface IStr {
-    val foo: String
+    konst foo: String
 }
 
 class CStr : IStr {
-    override val foo: String get() = ""
+    override konst foo: String get() = ""
 }
 
 interface IInt {
-    val foo: Int
+    konst foo: Int
 }
 
 class CInt : IInt {
-    override val foo: Int get() = 42
+    override konst foo: Int get() = 42
 }
 
 interface IAny {
-    val foo: Any
+    konst foo: Any
 }
 
 class CAny : IAny {
-    override val foo: Any get() = null!!
+    override konst foo: Any get() = null!!
 }
 
 interface IGeneric<T> {
-    val foo: T
+    konst foo: T
 }
 
 class CGeneric<T> : IGeneric<T> {
-    override val foo: T get() = null!!
+    override konst foo: T get() = null!!
 }
 
 abstract <!PROPERTY_TYPE_MISMATCH_ON_INHERITANCE!>class Test1<!> : IStr by CStr(), IInt

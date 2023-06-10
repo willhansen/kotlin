@@ -1,7 +1,7 @@
-data class A(val a: Any?, var x: Int)
-data class B(val a: Any?)
-data class C(val a: Int, var x: Int?)
-data class D(val a: Int?)
+data class A(konst a: Any?, var x: Int)
+data class B(konst a: Any?)
+data class C(konst a: Int, var x: Int?)
+data class D(konst a: Int?)
 
 fun box() : String {
    if( A(null,19).hashCode() != 19) "fail"

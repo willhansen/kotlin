@@ -4,11 +4,11 @@ package foo
 
 
 fun testNullable(): String {
-    val undefined: Double? = js("undefined")
-    val doubleNull: Double? = null
+    konst undefined: Double? = js("undefined")
+    konst doubleNull: Double? = null
 
-    val plusZero: Double? = +0.0
-    val minusZero: Double? = -0.0
+    konst plusZero: Double? = +0.0
+    konst minusZero: Double? = -0.0
 
     if ((+0.0).equals(minusZero)) return "Total order fail"
     if (plusZero != minusZero) return "IEEE 754 equals fail"
@@ -21,8 +21,8 @@ fun testNullable(): String {
     if (doubleNull != doubleNull) return "doubleNull = doubleNull fail"
 
     // Double == Float
-    val plusZeroAny: Any? = +0.0
-    val minusZeroAny: Any? = -0.0f
+    konst plusZeroAny: Any? = +0.0
+    konst minusZeroAny: Any? = -0.0f
 
     if (plusZeroAny is Double && minusZeroAny is Float) {
         if  (plusZeroAny != minusZeroAny) return "IEEE 754 quals fail 2"
@@ -32,14 +32,14 @@ fun testNullable(): String {
 }
 
 fun box(): String {
-    val plusZero: Double = +0.0
-    val minusZero: Double = -0.0
+    konst plusZero: Double = +0.0
+    konst minusZero: Double = -0.0
 
     if (plusZero.equals(minusZero)) return "Total order fail"
     if (plusZero != minusZero) return "IEEE 754 equals fail"
 
-    val plusZeroFloat: Float = +0.0f
-    val minusZeroFloat: Float = -0.0f
+    konst plusZeroFloat: Float = +0.0f
+    konst minusZeroFloat: Float = -0.0f
 
     if (plusZeroFloat.equals(minusZeroFloat)) return "Total order fail 2"
     if (plusZeroFloat != minusZeroFloat) return "IEEE 754 equals fail 2"
@@ -48,7 +48,7 @@ fun box(): String {
     if ((plusZeroFloat as Any) == (minusZeroFloat as Any)) return "Total order fail 5"
     if (plusZero == (minusZero as Any)) return "Total order fail 6"
 
-    val nullableRes = testNullable()
+    konst nullableRes = testNullable()
     if (nullableRes != "OK")
         return "Nullable" + nullableRes
 

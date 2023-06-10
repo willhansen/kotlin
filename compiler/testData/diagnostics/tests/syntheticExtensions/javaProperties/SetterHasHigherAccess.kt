@@ -4,7 +4,7 @@ package k
 import JavaClass
 
 fun foo(javaClass: JavaClass) {
-    val v = javaClass.<!INVISIBLE_MEMBER!>something<!>
+    konst v = javaClass.<!INVISIBLE_MEMBER!>something<!>
     javaClass.<!INVISIBLE_MEMBER!>something<!> = 1
     javaClass.<!INVISIBLE_MEMBER!>something<!>++
 }
@@ -12,5 +12,5 @@ fun foo(javaClass: JavaClass) {
 // FILE: JavaClass.java
 public class JavaClass {
     protected int getSomething() { return 1; }
-    public void setSomething(int value) {}
+    public void setSomething(int konstue) {}
 }

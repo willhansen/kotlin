@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
-internal val enumExternalEntriesPhase = makeIrFilePhase(
+internal konst enumExternalEntriesPhase = makeIrFilePhase(
     ::EnumExternalEntriesLowering,
     name = "EnumExternalEntries",
     description = "Replaces '.entries' on Java and pre-compiled Kotlin enums with access to entries in generated \$EntriesMapping "
@@ -53,7 +53,7 @@ internal val enumExternalEntriesPhase = makeIrFilePhase(
  * synthetic class FKt$EntriesMappings {
  *    static final EnumEntries<JavaOrOldKotlinEnum> entries$1
  *    static {
- *        entries$1 = EnumEntries(JavaOrOldKotlinEnum::values)
+ *        entries$1 = EnumEntries(JavaOrOldKotlinEnum::konstues)
  *    }
  * }
  *
@@ -61,7 +61,7 @@ internal val enumExternalEntriesPhase = makeIrFilePhase(
  * FKt$EntriesMappings.entries$1
  * ```
  */
-class EnumExternalEntriesLowering(private val context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
+class EnumExternalEntriesLowering(private konst context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
 
     override fun lower(irFile: IrFile) {
         if (!context.state.languageVersionSettings.supportsFeature(LanguageFeature.EnumEntries)) {
@@ -73,8 +73,8 @@ class EnumExternalEntriesLowering(private val context: JvmBackendContext) : File
     private var state: EntriesMappingState? = null
 
     private inner class EntriesMappingState {
-        val mappings = mutableMapOf<IrClass /* enum */, IrField>()
-        val mappingsClass by lazy {
+        konst mappings = mutableMapOf<IrClass /* enum */, IrField>()
+        konst mappingsClass by lazy {
             context.irFactory.buildClass {
                 name = Name.identifier("EntriesMappings")
                 origin = JvmLoweredDeclarationOrigin.ENUM_MAPPINGS_FOR_ENTRIES
@@ -97,18 +97,18 @@ class EnumExternalEntriesLowering(private val context: JvmBackendContext) : File
     }
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val owner = expression.symbol.owner as? IrSimpleFunction
-        val parentClass = owner?.parent as? IrClass ?: return super.visitCall(expression)
+        konst owner = expression.symbol.owner as? IrSimpleFunction
+        konst parentClass = owner?.parent as? IrClass ?: return super.visitCall(expression)
         /*
          * Candidates for lowering:
          * * Java enums
          * * Kotlin enums that have no 'getEntries' function (thus compiled with pre-1.8 LV/AV)
          */
-        val shouldBeLowered = parentClass.isEnumClass &&
+        konst shouldBeLowered = parentClass.isEnumClass &&
                 owner.name == SpecialNames.ENUM_GET_ENTRIES &&
                 (parentClass.isFromJava() || !parentClass.hasEnumEntriesFunction())
         if (!shouldBeLowered) return super.visitCall(expression)
-        val field = state!!.getEntriesFieldForEnum(parentClass)
+        konst field = state!!.getEntriesFieldForEnum(parentClass)
         return IrGetFieldImpl(expression.startOffset, expression.endOffset, field.symbol, field.type)
     }
 
@@ -124,16 +124,16 @@ class EnumExternalEntriesLowering(private val context: JvmBackendContext) : File
         name.toString() == "<get-entries>"
                 && dispatchReceiverParameter == null
                 && extensionReceiverParameter == null
-                && valueParameters.isEmpty()
+                && konstueParameters.isEmpty()
 
     override fun visitClassNew(declaration: IrClass): IrStatement {
-        val oldState = state
-        val mappingState = EntriesMappingState()
+        konst oldState = state
+        konst mappingState = EntriesMappingState()
         state = mappingState
         super.visitClassNew(declaration)
 
         for ((enum, field) in mappingState.mappings) {
-            val enumValues = enum.findEnumValuesFunction(context)
+            konst enumValues = enum.findEnumValuesFunction(context)
             field.initializer =
                 context.createIrBuilder(field.symbol).run {
                     irExprBody(

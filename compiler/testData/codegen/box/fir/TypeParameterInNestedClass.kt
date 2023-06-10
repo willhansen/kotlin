@@ -15,7 +15,7 @@ fun <T> runBlocking(c: suspend () -> T): T {
 
 object Retry {
     class Builder<B>(
-        private val action: suspend () -> B,
+        private konst action: suspend () -> B,
     ) {
         fun foo() = runBlocking {
             action.invoke()

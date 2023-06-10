@@ -12,7 +12,7 @@ interface JpsLikeDependency {
     fun normalizedForComparison(): JpsLikeDependency
 }
 
-class JpsLikeDependencyWithComment(private val base: JpsLikeDependency, private val comment: String) : JpsLikeDependency {
+class JpsLikeDependencyWithComment(private konst base: JpsLikeDependency, private konst comment: String) : JpsLikeDependency {
     override fun convertToGradleCall(): String {
         return "${base.convertToGradleCall()} // $comment"
     }
@@ -21,10 +21,10 @@ class JpsLikeDependencyWithComment(private val base: JpsLikeDependency, private 
 }
 
 data class JpsLikeJarDependency(
-    val dependencyNotation: String,
-    val scope: JpsJavaDependencyScope,
-    val dependencyConfiguration: String?,
-    val exported: Boolean
+    konst dependencyNotation: String,
+    konst scope: JpsJavaDependencyScope,
+    konst dependencyConfiguration: String?,
+    konst exported: Boolean
 ) : JpsLikeDependency {
     init {
         require(!dependencyNotation.contains(DEFAULT_KOTLIN_SNAPSHOT_VERSION)) {
@@ -34,8 +34,8 @@ data class JpsLikeJarDependency(
     }
 
     override fun convertToGradleCall(): String {
-        val scopeArg = "JpsDepScope.$scope"
-        val exportedArg = "exported = true".takeIf { exported }
+        konst scopeArg = "JpsDepScope.$scope"
+        konst exportedArg = "exported = true".takeIf { exported }
         return "jpsLikeJarDependency(${listOfNotNull(dependencyNotation, scopeArg, dependencyConfiguration, exportedArg).joinToString()})"
     }
 
@@ -43,13 +43,13 @@ data class JpsLikeJarDependency(
 }
 
 data class JpsLikeModuleDependency(
-    val moduleName: String,
-    val scope: JpsJavaDependencyScope,
-    val exported: Boolean
+    konst moduleName: String,
+    konst scope: JpsJavaDependencyScope,
+    konst exported: Boolean
 ) : JpsLikeDependency {
     override fun convertToGradleCall(): String {
-        val scopeArg = "JpsDepScope.$scope"
-        val exportedArg = "exported = true".takeIf { exported }
+        konst scopeArg = "JpsDepScope.$scope"
+        konst exportedArg = "exported = true".takeIf { exported }
         return "jpsLikeModuleDependency(${listOfNotNull("\"$moduleName\"", scopeArg, exportedArg).joinToString()})"
     }
 

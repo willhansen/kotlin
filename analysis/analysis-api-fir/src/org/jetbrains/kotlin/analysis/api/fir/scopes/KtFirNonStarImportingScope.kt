@@ -21,12 +21,12 @@ internal class KtFirNonStarImportingScope(
     builder: KtSymbolByFirBuilder,
 ) : KtFirBasedScope<FirAbstractSimpleImportingScope>(firScope, builder) {
 
-    private val imports: List<NonStarImport> by cached {
+    private konst imports: List<NonStarImport> by cached {
         buildList {
-            firScope.simpleImports.values.forEach { imports ->
+            firScope.simpleImports.konstues.forEach { imports ->
                 imports.forEach { import ->
-                    val importedClassId = import.importedName?.let { importedName ->
-                        val importedClassId =
+                    konst importedClassId = import.importedName?.let { importedName ->
+                        konst importedClassId =
                             import.resolvedParentClassId?.createNestedClassId(importedName) ?: ClassId(import.packageFqName, importedName)
                         importedClassId.takeIf { firScope.session.symbolProvider.getClassLikeSymbolByClassId(it) != null }
                     }

@@ -30,10 +30,10 @@ public class JClass {
 
 object KoKobject {
     @JvmField
-    val JvmStatic: Int = 1
+    konst JvmStatic: Int = 1
 
     @JvmField
-    val JvmStaticString: String? = "123"
+    konst JvmStaticString: String? = "123"
 }
 
 fun Any?.use() {}

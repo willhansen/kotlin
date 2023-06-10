@@ -4,40 +4,40 @@ public <!REPEATED_MODIFIER!>public<!> class Bar
     private <!REPEATED_MODIFIER!>private<!> fun foo() {}
 }
 
-class Bzz(public <!REPEATED_MODIFIER!>public<!> val q: Int = 1) {
-    public <!REPEATED_MODIFIER!>public<!> val x: Int = 2
+class Bzz(public <!REPEATED_MODIFIER!>public<!> konst q: Int = 1) {
+    public <!REPEATED_MODIFIER!>public<!> konst x: Int = 2
 
-    public val y: Int
+    public konst y: Int
         public <!REPEATED_MODIFIER!>public<!> get() = 3
 
-    val z: Int
+    konst z: Int
         <!WRONG_MODIFIER_TARGET!>open<!> <!INCOMPATIBLE_MODIFIERS!>final<!> get() = 4
 
-    public <!REPEATED_MODIFIER!>public<!> class B(public <!REPEATED_MODIFIER!>public<!> val z: Int = 1) {
-        public <!REPEATED_MODIFIER!>public<!> val y: Int = 2
+    public <!REPEATED_MODIFIER!>public<!> class B(public <!REPEATED_MODIFIER!>public<!> konst z: Int = 1) {
+        public <!REPEATED_MODIFIER!>public<!> konst y: Int = 2
 
-        public val x: Int
+        public konst x: Int
             public <!REPEATED_MODIFIER!>public<!> get() = 3
     }
 
     public <!REPEATED_MODIFIER!>public<!> object C {
-        public <!REPEATED_MODIFIER!>public<!> val y: Int = 1
+        public <!REPEATED_MODIFIER!>public<!> konst y: Int = 1
         public <!REPEATED_MODIFIER!>public<!> fun z(): Int = 1
     }
 }
 
-public <!REPEATED_MODIFIER!>public<!> val bar: Int = 1
+public <!REPEATED_MODIFIER!>public<!> konst bar: Int = 1
 
 public <!REPEATED_MODIFIER!>public<!> fun foo(): Int = 1
 
 fun test() {
-    <!WRONG_MODIFIER_TARGET!>public<!> <!REPEATED_MODIFIER!>public<!> class B(public <!REPEATED_MODIFIER!>public<!> val z: Int = 1) {
-        public <!REPEATED_MODIFIER!>public<!> val y: Int = 2
+    <!WRONG_MODIFIER_TARGET!>public<!> <!REPEATED_MODIFIER!>public<!> class B(public <!REPEATED_MODIFIER!>public<!> konst z: Int = 1) {
+        public <!REPEATED_MODIFIER!>public<!> konst y: Int = 2
 
-        public val x: Int
+        public konst x: Int
             public <!REPEATED_MODIFIER!>public<!> get() = 3
     }
 }
 
-<!WRONG_MODIFIER_TARGET!>external<!> <!REPEATED_MODIFIER!>external<!> val i = 0
+<!WRONG_MODIFIER_TARGET!>external<!> <!REPEATED_MODIFIER!>external<!> konst i = 0
 <!WRONG_MODIFIER_TARGET!>const<!> <!REPEATED_MODIFIER!>const<!> var x = 0

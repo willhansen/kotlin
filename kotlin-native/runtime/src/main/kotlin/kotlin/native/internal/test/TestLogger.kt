@@ -19,7 +19,7 @@ internal open class BaseTestLogger: BaseTestListener(), TestLogger {
     override fun logTestList(runner: TestRunner, suites: Collection<TestSuite>) {
         suites.forEach { suite ->
             println("${suite.name}.")
-            suite.testCases.values.forEach {
+            suite.testCases.konstues.forEach {
                 println("  ${it.name}")
             }
         }
@@ -29,7 +29,7 @@ internal open class BaseTestLogger: BaseTestListener(), TestLogger {
 @ExperimentalNativeApi
 internal open class TestLoggerWithStatistics: BaseTestLogger() {
 
-    protected val statistics = MutableTestStatistics()
+    protected konst statistics = MutableTestStatistics()
 
     override fun startTesting(runner: TestRunner) = statistics.reset()
     override fun startIteration(runner: TestRunner, iteration: Int, suites: Collection<TestSuite>) = statistics.reset()

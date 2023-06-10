@@ -17,6 +17,6 @@ interface Runnable {
 }
 
 fun box(): String {
-    val x = C().foo("", 0)
+    konst x = C().foo("", 0)
     return if (x == null) "OK" else "Fail: $x"
 }

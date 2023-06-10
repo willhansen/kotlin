@@ -2,14 +2,14 @@
 package test
 
 annotation class Ann(
-        val b1: Char,
-        val b2: Char,
-        val b3: Int,
-        val b4: Long,
-        val b5: Byte,
-        val b6: Short,
-        val b7: Double,
-        val b8: Float
+        konst b1: Char,
+        konst b2: Char,
+        konst b3: Int,
+        konst b4: Long,
+        konst b5: Byte,
+        konst b6: Short,
+        konst b7: Double,
+        konst b8: Float
 )
 
 @Ann('c', 99.toChar(), 'c'.<!DEPRECATION!>toInt<!>(), 'c'.<!DEPRECATION!>toLong<!>(), 'c'.<!DEPRECATION!>toByte<!>(), 'c'.<!DEPRECATION!>toShort<!>(), 'c'.<!DEPRECATION!>toDouble<!>(), 'c'.<!DEPRECATION!>toFloat<!>()) class MyClass

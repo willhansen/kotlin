@@ -13,12 +13,12 @@ public class J {
 // FILE: test.kt
 
 fun nonInlineFun() {
-    val f: (String?) -> Int = { s -> 0 }
+    konst f: (String?) -> Int = { s -> 0 }
     J.g(f)
 }
 
 inline fun inlineFun() {
-    val f: (String?) -> Int = { s -> 0 }
+    konst f: (String?) -> Int = { s -> 0 }
     J.g(f)
 }
 

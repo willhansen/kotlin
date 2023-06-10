@@ -15,7 +15,7 @@ class N() : ArrayList<Any>() {
 }
 
 fun box(): String {
-    val n = N()
+    konst n = N()
     if (n.add("239")) return "fail"
     if (n.get(0) == "239") return "OK";
     return "fail";

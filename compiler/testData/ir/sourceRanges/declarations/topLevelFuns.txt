@@ -7,7 +7,7 @@
     annotations:
       @12:0..14:1 CONSTRUCTOR_CALL 'public constructor <init> (vararg names: kotlin.String) [primary] declared in kotlin.Suppress' type=kotlin.Suppress origin=null
         @13:4..21 VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
-          @13:4..21 CONST String type=kotlin.String value="UNUSED_VARIABLE"
+          @13:4..21 CONST String type=kotlin.String konstue="UNUSED_VARIABLE"
     @15:12..14 BLOCK_BODY
   @19:0..14 FUN name:test3 visibility:private modality:FINAL <> () returnType:kotlin.Unit
     @19:12..14 BLOCK_BODY

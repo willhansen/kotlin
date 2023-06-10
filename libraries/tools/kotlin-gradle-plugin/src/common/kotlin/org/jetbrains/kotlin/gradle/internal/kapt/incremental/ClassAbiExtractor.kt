@@ -7,22 +7,22 @@ package org.jetbrains.kotlin.gradle.internal.kapt.incremental
 
 import org.jetbrains.org.objectweb.asm.*
 
-const val metadataDescriptor: String = "Lkotlin/Metadata;"
+const konst metadataDescriptor: String = "Lkotlin/Metadata;"
 
 /**
- * Use this to get the ASM version, as otherwise value gets inlined which may cause runtime issues if
+ * Use this to get the ASM version, as otherwise konstue gets inlined which may cause runtime issues if
  * another plugin adds ASM to the classpath. See https://youtrack.jetbrains.com/issue/KT-31291 for more details.
  */
-internal val lazyAsmApiVersion = lazy {
+internal konst lazyAsmApiVersion = lazy {
     try {
-        val field = Opcodes::class.java.getField("API_VERSION")
+        konst field = Opcodes::class.java.getField("API_VERSION")
         field.get(null) as Int
     } catch(e: Throwable) {
         Opcodes.API_VERSION
     }
 }
 
-class ClassAbiExtractor(private val writer: ClassWriter) : ClassVisitor(lazyAsmApiVersion.value, writer) {
+class ClassAbiExtractor(private konst writer: ClassWriter) : ClassVisitor(lazyAsmApiVersion.konstue, writer) {
 
     override fun visitMethod(
         access: Int,
@@ -46,9 +46,9 @@ class ClassAbiExtractor(private val writer: ClassWriter) : ClassVisitor(lazyAsmA
         }
     }
 
-    override fun visitField(access: Int, name: String?, desc: String?, signature: String?, value: Any?): FieldVisitor? {
+    override fun visitField(access: Int, name: String?, desc: String?, signature: String?, konstue: Any?): FieldVisitor? {
         return if (access.isAbi()) {
-            super.visitField(access, name, desc, signature, value)
+            super.visitField(access, name, desc, signature, konstue)
         } else {
             null
         }

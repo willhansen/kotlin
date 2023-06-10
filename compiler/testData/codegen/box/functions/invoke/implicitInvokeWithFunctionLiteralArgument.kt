@@ -3,8 +3,8 @@ class TestClass {
 }
 
 fun box(): String {
-    val test = TestClass()
-    val ok = "OK"
+    konst test = TestClass()
+    konst ok = "OK"
 
-    val x = test { return ok }
+    konst x = test { return ok }
 }

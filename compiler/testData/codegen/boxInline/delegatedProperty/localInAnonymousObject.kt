@@ -9,10 +9,10 @@ class Delegate {
 }
 
 inline fun test(crossinline s: () -> String): String {
-    val delegate = Delegate()
-    val o = object {
+    konst delegate = Delegate()
+    konst o = object {
         fun run(): String {
-            val prop: String by delegate
+            konst prop: String by delegate
             return prop + s()
         }
     }

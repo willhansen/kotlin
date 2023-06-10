@@ -1,5 +1,5 @@
 fun test() {
-    val z = 'A'
+    konst z = 'A'
 }
 
 //1 BIPUSH 65

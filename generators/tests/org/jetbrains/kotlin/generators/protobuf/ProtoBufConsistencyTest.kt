@@ -14,21 +14,21 @@ import java.lang.reflect.ParameterizedType
 
 class ProtoBufConsistencyTest : TestCase() {
     fun testExtensionNumbersDoNotIntersect() {
-        data class Key(val messageType: Class<*>, val index: Int)
+        data class Key(konst messageType: Class<*>, konst index: Int)
 
-        val extensions = LinkedHashMultimap.create<Key, Descriptors.FieldDescriptor>()
+        konst extensions = LinkedHashMultimap.create<Key, Descriptors.FieldDescriptor>()
 
         for (protoPath in PROTO_PATHS) {
             if (protoPath.generateDebug) {
-                val classFqName = protoPath.packageName + "." + protoPath.debugClassName
-                val klass = this::class.java.classLoader.loadClass(classFqName) ?: error("Class not found: $classFqName")
+                konst classFqName = protoPath.packageName + "." + protoPath.debugClassName
+                konst klass = this::class.java.classLoader.loadClass(classFqName) ?: error("Class not found: $classFqName")
                 for (field in klass.declaredFields) {
                     if (Modifier.isStatic(field.modifiers) && field.type == GeneratedExtension::class.java) {
                         // The only place where type information for an extension is stored is the field's declared generic type.
                         // The message type which this extension extends is the first argument to GeneratedExtension<*, *>
-                        val containingType = (field.genericType as ParameterizedType).actualTypeArguments.first() as Class<*>
-                        val value = field.get(null) as GeneratedExtension<*, *>
-                        val desc = value.descriptor
+                        konst containingType = (field.genericType as ParameterizedType).actualTypeArguments.first() as Class<*>
+                        konst konstue = field.get(null) as GeneratedExtension<*, *>
+                        konst desc = konstue.descriptor
                         extensions.put(Key(containingType, desc.number), desc)
                     }
                 }

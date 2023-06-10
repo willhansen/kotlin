@@ -7,7 +7,7 @@ enum class MyEnumClass {
   SecondEntry {
     override fun foo()
 
-    override val i: kotlin.Int
+    override konst i: kotlin.Int
       get()
   },
   ThirdEntry {
@@ -20,5 +20,5 @@ enum class MyEnumClass {
 
   open fun foo(i: kotlin.Int)
 
-  open val i: kotlin.Int
+  open konst i: kotlin.Int
 }

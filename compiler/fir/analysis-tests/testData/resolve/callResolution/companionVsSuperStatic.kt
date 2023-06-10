@@ -8,7 +8,7 @@ public class JavaClass {
 
 class A : JavaClass() {
     companion object {
-        val FIELD = 1
+        konst FIELD = 1
     }
 
     fun foo() {

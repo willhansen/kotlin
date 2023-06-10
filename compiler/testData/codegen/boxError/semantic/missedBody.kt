@@ -14,7 +14,7 @@ fun foo(): String {
 // FILE: b.kt
 
 fun box(): String {
-    val r = foo()
+    konst r = foo()
     if (r is String) return r
     return "OK"
 }

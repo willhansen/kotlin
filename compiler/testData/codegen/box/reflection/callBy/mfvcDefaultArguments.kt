@@ -5,7 +5,7 @@
 import kotlin.test.assertEquals
 
 @JvmInline
-value class A(val x: UInt, val y: Int)
+konstue class A(konst x: UInt, konst y: Int)
 
 fun test1(x: A = A(0U, 1)) = "OK"
 

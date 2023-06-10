@@ -34,13 +34,13 @@ public class DelegatingSlice<K, V> implements WritableSlice<K, V> {
     }
 
     @Override
-    public boolean check(K key, V value) {
-        return delegate.check(key, value);
+    public boolean check(K key, V konstue) {
+        return delegate.check(key, konstue);
     }
 
     @Override
-    public void afterPut(MutableSlicedMap map, K key, V value) {
-        delegate.afterPut(map, key, value);
+    public void afterPut(MutableSlicedMap map, K key, V konstue) {
+        delegate.afterPut(map, key, konstue);
     }
 
     @Override
@@ -55,8 +55,8 @@ public class DelegatingSlice<K, V> implements WritableSlice<K, V> {
     }
 
     @Override
-    public V computeValue(SlicedMap map, K key, V value, boolean valueNotFound) {
-        return delegate.computeValue(map, key, value, valueNotFound);
+    public V computeValue(SlicedMap map, K key, V konstue, boolean konstueNotFound) {
+        return delegate.computeValue(map, key, konstue, konstueNotFound);
     }
 
     @Override

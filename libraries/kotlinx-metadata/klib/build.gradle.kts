@@ -9,14 +9,14 @@ plugins {
 
 group = "org.jetbrains.kotlinx"
 
-val deployVersion = findProperty("kotlinxMetadataKlibDeployVersion") as String?
+konst deployVersion = findProperty("kotlinxMetadataKlibDeployVersion") as String?
 version = deployVersion ?: "0.0.1-SNAPSHOT"
 
 sourceSets {
     "main" { projectDefault() }
 }
 
-val embedded by configurations
+konst embedded by configurations
 embedded.isTransitive = false
 configurations.getByName("compileOnly").extendsFrom(embedded)
 configurations.getByName("testApi").extendsFrom(embedded)

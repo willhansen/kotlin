@@ -42,11 +42,11 @@ class FirSyntheticFunctionSymbol(
 ) : FirNamedFunctionSymbol(callableId), SyntheticSymbol
 
 class FirSyntheticPropertiesScope private constructor(
-    val session: FirSession,
-    private val baseScope: FirTypeScope,
-    private val dispatchReceiverType: ConeKotlinType,
-    private val syntheticNamesProvider: FirSyntheticNamesProvider,
-    private val returnTypeCalculator: ReturnTypeCalculator?,
+    konst session: FirSession,
+    private konst baseScope: FirTypeScope,
+    private konst dispatchReceiverType: ConeKotlinType,
+    private konst syntheticNamesProvider: FirSyntheticNamesProvider,
+    private konst returnTypeCalculator: ReturnTypeCalculator?,
 ) : FirContainingNamesAwareScope() {
     companion object {
         fun createIfSyntheticNamesProviderIsDefined(
@@ -55,7 +55,7 @@ class FirSyntheticPropertiesScope private constructor(
             baseScope: FirTypeScope,
             returnTypeCalculator: ReturnTypeCalculator? = null,
         ): FirSyntheticPropertiesScope? {
-            val syntheticNamesProvider = session.syntheticNamesProvider ?: return null
+            konst syntheticNamesProvider = session.syntheticNamesProvider ?: return null
             return FirSyntheticPropertiesScope(
                 session,
                 baseScope,
@@ -67,7 +67,7 @@ class FirSyntheticPropertiesScope private constructor(
     }
 
     override fun processPropertiesByName(name: Name, processor: (FirVariableSymbol<*>) -> Unit) {
-        val getterNames = syntheticNamesProvider.possibleGetterNamesByPropertyName(name)
+        konst getterNames = syntheticNamesProvider.possibleGetterNamesByPropertyName(name)
         var getterFound = false
         for (getterName in getterNames) {
             baseScope.processFunctionsByName(getterName) {
@@ -90,7 +90,7 @@ class FirSyntheticPropertiesScope private constructor(
          *   class is not a java record then there is no need to additional
          *   search for record components
          */
-        val dispatchSymbol = dispatchReceiverType.toRegularClassSymbol(session) ?: return true
+        konst dispatchSymbol = dispatchReceiverType.toRegularClassSymbol(session) ?: return true
         return dispatchSymbol.fir.isJavaRecord ?: false
     }
 
@@ -107,10 +107,10 @@ class FirSyntheticPropertiesScope private constructor(
         needCheckForSetter: Boolean,
         processor: (FirVariableSymbol<*>) -> Unit
     ) {
-        val getter = getterSymbol.fir
+        konst getter = getterSymbol.fir
 
         if (getter.typeParameters.isNotEmpty()) return
-        if (getter.valueParameters.isNotEmpty()) return
+        if (getter.konstueParameters.isNotEmpty()) return
         if (getter.isStatic) return
 
         var getterReturnType = (getter.returnTypeRef as? FirResolvedTypeRef)?.type
@@ -129,20 +129,20 @@ class FirSyntheticPropertiesScope private constructor(
 
         var matchingSetter: FirSimpleFunction? = null
         if (needCheckForSetter && getterReturnType != null) {
-            val setterName = syntheticNamesProvider.setterNameByGetterName(getterName)
+            konst setterName = syntheticNamesProvider.setterNameByGetterName(getterName)
             baseScope.processFunctionsByName(setterName, fun(setterSymbol: FirNamedFunctionSymbol) {
                 if (matchingSetter != null) return
 
-                val setter = setterSymbol.fir
-                val parameter = setter.valueParameters.singleOrNull() ?: return
+                konst setter = setterSymbol.fir
+                konst parameter = setter.konstueParameters.singleOrNull() ?: return
                 if (setter.typeParameters.isNotEmpty() || setter.isStatic) return
-                val parameterType = (parameter.returnTypeRef as? FirResolvedTypeRef)?.type ?: return
+                konst parameterType = (parameter.returnTypeRef as? FirResolvedTypeRef)?.type ?: return
                 if (!setterTypeIsConsistentWithGetterType(propertyName, getterSymbol, setterSymbol, parameterType)) return
                 matchingSetter = setterSymbol.fir
             })
         }
 
-        val property = buildSyntheticProperty(propertyName, getter, matchingSetter)
+        konst property = buildSyntheticProperty(propertyName, getter, matchingSetter)
         getter.originalForSubstitutionOverride?.let {
             property.originalForSubstitutionOverrideAttr = buildSyntheticProperty(
                 propertyName,
@@ -150,7 +150,7 @@ class FirSyntheticPropertiesScope private constructor(
                 matchingSetter?.originalForSubstitutionOverride ?: matchingSetter
             )
         }
-        val syntheticSymbol = property.symbol
+        konst syntheticSymbol = property.symbol
         (baseScope as? FirUnstableSmartcastTypeScope)?.apply {
             if (isSymbolFromUnstableSmartcast(getterSymbol)) {
                 markSymbolFromUnstableSmartcast(syntheticSymbol)
@@ -160,9 +160,9 @@ class FirSyntheticPropertiesScope private constructor(
     }
 
     private fun buildSyntheticProperty(propertyName: Name, getter: FirSimpleFunction, setter: FirSimpleFunction?): FirSyntheticProperty {
-        val classLookupTag = getter.symbol.originalOrSelf().dispatchReceiverClassLookupTagOrNull()
-        val packageName = classLookupTag?.classId?.packageFqName ?: getter.symbol.callableId.packageName
-        val className = classLookupTag?.classId?.relativeClassName
+        konst classLookupTag = getter.symbol.originalOrSelf().dispatchReceiverClassLookupTagOrNull()
+        konst packageName = classLookupTag?.classId?.packageFqName ?: getter.symbol.callableId.packageName
+        konst className = classLookupTag?.classId?.relativeClassName
 
         return buildSyntheticProperty {
             moduleData = session.moduleData
@@ -183,7 +183,7 @@ class FirSyntheticPropertiesScope private constructor(
         setterSymbol: FirNamedFunctionSymbol,
         setterParameterType: ConeKotlinType
     ): Boolean {
-        val getterReturnType = getterSymbol.resolvedReturnTypeRef.type
+        konst getterReturnType = getterSymbol.resolvedReturnTypeRef.type
         if (AbstractTypeChecker.equalTypes(session.typeContext, getterReturnType, setterParameterType)) return true
         if (!AbstractTypeChecker.isSubtypeOf(session.typeContext, getterReturnType, setterParameterType)) return false
 
@@ -212,11 +212,11 @@ class FirSyntheticPropertiesScope private constructor(
             var hasMatchingSetter = false
             baseScope.processDirectOverriddenFunctionsWithBaseScope(symbolToStart) l@{ symbol, scope ->
                 if (hasMatchingSetter) return@l ProcessorAction.STOP
-                val baseDispatchReceiverType = symbol.dispatchReceiverType ?: return@l ProcessorAction.NEXT
-                val syntheticScope = FirSyntheticPropertiesScope(session, scope, baseDispatchReceiverType, syntheticNamesProvider, returnTypeCalculator)
-                val baseProperties = syntheticScope.getProperties(propertyName)
-                val propertyFound = baseProperties.any {
-                    val baseProperty = it.fir
+                konst baseDispatchReceiverType = symbol.dispatchReceiverType ?: return@l ProcessorAction.NEXT
+                konst syntheticScope = FirSyntheticPropertiesScope(session, scope, baseDispatchReceiverType, syntheticNamesProvider, returnTypeCalculator)
+                konst baseProperties = syntheticScope.getProperties(propertyName)
+                konst propertyFound = baseProperties.any {
+                    konst baseProperty = it.fir
                     baseProperty is FirSyntheticProperty && baseProperty.setter?.delegate?.symbol == (setterSymbolToCompare ?: symbol)
                 }
                 if (propertyFound) {
@@ -237,7 +237,7 @@ class FirSyntheticPropertiesScope private constructor(
         var result = false
         var isHiddenEverywhereBesideSuperCalls = false
         baseScope.processOverriddenFunctionsAndSelf(this) {
-            val unwrapped = it.unwrapFakeOverrides().fir
+            konst unwrapped = it.unwrapFakeOverrides().fir
             if (unwrapped.origin == FirDeclarationOrigin.Enhancement) {
                 result = true
             }

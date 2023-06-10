@@ -7,20 +7,20 @@ FILE fqName:<root> fileName:/Box.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Box modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:foo visibility:public modality:FINAL [val]
+    PROPERTY name:foo visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:foo type:T of <root>.Box visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'foo: T of <root>.Box declared in <root>.Box.<init>' type=T of <root>.Box origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-foo> visibility:public modality:FINAL <> ($this:<root>.Box<T of <root>.Box>) returnType:T of <root>.Box
-        correspondingProperty: PROPERTY name:foo visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:foo visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Box<T of <root>.Box>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-foo> (): T of <root>.Box declared in <root>.Box'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:foo type:T of <root>.Box visibility:private [final]' type=T of <root>.Box origin=null
               receiver: GET_VAR '<this>: <root>.Box<T of <root>.Box> declared in <root>.Box.<get-foo>' type=<root>.Box<T of <root>.Box> origin=null
-    PROPERTY name:str visibility:public modality:FINAL [val]
+    PROPERTY name:str visibility:public modality:FINAL [konst]
       FUN name:<get-str> visibility:public modality:FINAL <> ($this:<root>.Box<T of <root>.Box>) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:str visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:str visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Box<T of <root>.Box>
         BLOCK_BODY
           VAR name:foo type:<root>.Foo [var]
@@ -36,7 +36,7 @@ FILE fqName:<root> fileName:/Box.kt
                     receiver: TYPE_OP type=<root>.Foo.Buz origin=IMPLICIT_CAST typeOperand=<root>.Foo.Buz
                       GET_VAR 'var foo: <root>.Foo declared in <root>.Box.<get-str>' type=<root>.Foo origin=null
           RETURN type=kotlin.Nothing from='public final fun <get-str> (): kotlin.String declared in <root>.Box'
-            CONST String type=kotlin.String value=""
+            CONST String type=kotlin.String konstue=""
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any

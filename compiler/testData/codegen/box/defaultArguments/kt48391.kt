@@ -12,6 +12,6 @@ interface A<T> {
         s as T
 
     companion object {
-        private val RESULT = "OK"
+        private konst RESULT = "OK"
     }
 }

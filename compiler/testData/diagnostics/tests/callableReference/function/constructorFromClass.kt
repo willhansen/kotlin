@@ -5,7 +5,7 @@ import kotlin.reflect.KFunction0
 
 class A {
     fun main() {
-        val x = ::A
+        konst x = ::A
 
         checkSubtype<KFunction0<A>>(x)
     }
@@ -13,7 +13,7 @@ class A {
 
 class SomeOtherClass {
     fun main() {
-        val x = ::A
+        konst x = ::A
 
         checkSubtype<KFunction0<A>>(x)
     }

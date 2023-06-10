@@ -12,7 +12,7 @@ interface Two : Base, Base2
 fun <S: Base> intersectNullable(vararg elements: S): S? = TODO()
 
 fun smartCastAfterIntersection(a: One, b: Two) = run {
-    val v = intersectNullable(a, b)
+    konst v = intersectNullable(a, b)
     if (v == null) throw Exception()
     v
 }

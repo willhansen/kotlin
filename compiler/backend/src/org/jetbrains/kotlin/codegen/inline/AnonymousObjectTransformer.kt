@@ -31,27 +31,27 @@ import java.util.*
 
 class AnonymousObjectTransformer(
     transformationInfo: AnonymousObjectTransformationInfo,
-    private val inliningContext: InliningContext,
-    private val isSameModule: Boolean,
-    private val continuationClassName: String?
+    private konst inliningContext: InliningContext,
+    private konst isSameModule: Boolean,
+    private konst continuationClassName: String?
 ) : ObjectTransformer<AnonymousObjectTransformationInfo>(transformationInfo, inliningContext.state) {
 
-    private val oldObjectType = Type.getObjectType(transformationInfo.oldClassName)
+    private konst oldObjectType = Type.getObjectType(transformationInfo.oldClassName)
 
-    private val fieldNames = hashMapOf<String, MutableList<String>>()
+    private konst fieldNames = hashMapOf<String, MutableList<String>>()
 
     private var constructor: MethodNode? = null
     private lateinit var sourceMap: SMAP
     private lateinit var sourceMapper: SourceMapper
 
     // TODO: use IrTypeMapper in the IR backend
-    private val typeMapper: KotlinTypeMapperBase = state.typeMapper
+    private konst typeMapper: KotlinTypeMapperBase = state.typeMapper
 
     override fun doTransform(parentRemapper: FieldRemapper): InlineResult {
-        val innerClassNodes = ArrayList<InnerClassNode>()
-        val classBuilder = createRemappingClassBuilderViaFactory(inliningContext)
-        val methodsToTransform = ArrayList<MethodNode>()
-        val metadataReader = ReadKotlinClassHeaderAnnotationVisitor()
+        konst innerClassNodes = ArrayList<InnerClassNode>()
+        konst classBuilder = createRemappingClassBuilderViaFactory(inliningContext)
+        konst methodsToTransform = ArrayList<MethodNode>()
+        konst metadataReader = ReadKotlinClassHeaderAnnotationVisitor()
         lateinit var superClassName: String
         var sourceInfo: String? = null
         var debugInfo: String? = null
@@ -74,7 +74,7 @@ class AnonymousObjectTransformer(
                 when (desc) {
                     JvmAnnotationNames.METADATA_DESC -> {
                         // Empty inner class info because no inner classes are used in kotlin.Metadata and its arguments
-                        val innerClassesInfo = FileBasedKotlinClass.InnerClassesInfo()
+                        konst innerClassesInfo = FileBasedKotlinClass.InnerClassesInfo()
                         return FileBasedKotlinClass.convertAnnotationVisitor(metadataReader, desc, innerClassesInfo)
                     }
                     DEBUG_METADATA_ANNOTATION_ASM_TYPE.descriptor -> {
@@ -82,7 +82,7 @@ class AnonymousObjectTransformer(
                         return debugMetadataAnnotation
                     }
                     JvmAnnotationNames.SOURCE_DEBUG_EXTENSION_DESC -> {
-                        // The new value of @SourceDebugExtension will be written along with the new SMAP via ClassBuilder.visitSMAP.
+                        // The new konstue of @SourceDebugExtension will be written along with the new SMAP via ClassBuilder.visitSMAP.
                         return null
                     }
                     else -> return classBuilder.newAnnotation(desc, visible)
@@ -92,7 +92,7 @@ class AnonymousObjectTransformer(
             override fun visitMethod(
                 access: Int, name: String, desc: String, signature: String?, exceptions: Array<String>?
             ): MethodVisitor {
-                val node = MethodNode(access, name, desc, signature, exceptions)
+                konst node = MethodNode(access, name, desc, signature, exceptions)
                 if (name == "<init>") {
                     if (constructor != null) {
                         throw RuntimeException(
@@ -107,12 +107,12 @@ class AnonymousObjectTransformer(
                 return node
             }
 
-            override fun visitField(access: Int, name: String, desc: String, signature: String?, value: Any?): FieldVisitor? {
+            override fun visitField(access: Int, name: String, desc: String, signature: String?, konstue: Any?): FieldVisitor? {
                 addUniqueField(name)
                 return if (isCapturedFieldName(name)) {
                     null
                 } else {
-                    classBuilder.newField(NO_ORIGIN, access, name, desc, signature, value)
+                    classBuilder.newField(NO_ORIGIN, access, name, desc, signature, konstue)
                 }
             }
 
@@ -123,29 +123,29 @@ class AnonymousObjectTransformer(
 
             override fun visitEnd() {}
         }, ClassReader.SKIP_FRAMES)
-        val header = metadataReader.createHeader(inliningContext.state.languageVersionSettings.languageVersion.toMetadataVersion())
+        konst header = metadataReader.createHeader(inliningContext.state.languageVersionSettings.languageVersion.toMetadataVersion())
         assert(isSameModule || (header != null && isPublicAbi(header))) {
             "Trying to inline an anonymous object which is not part of the public ABI: ${oldObjectType.className}"
         }
 
         // When regenerating objects in inline lambdas, keep the old SMAP and don't remap the line numbers to
         // save time. The result is effectively the same anyway.
-        val debugInfoToParse = if (inliningContext.isInliningLambda) null else debugInfo
-        val (firstLine, lastLine) = (methodsToTransform + listOfNotNull(constructor)).lineNumberRange()
+        konst debugInfoToParse = if (inliningContext.isInliningLambda) null else debugInfo
+        konst (firstLine, lastLine) = (methodsToTransform + listOfNotNull(constructor)).lineNumberRange()
         sourceMap = SMAPParser.parseOrCreateDefault(debugInfoToParse, sourceInfo, oldObjectType.internalName, firstLine, lastLine)
         sourceMapper = SourceMapper(sourceMap.fileMappings.firstOrNull { it.name == sourceInfo }?.toSourceInfo())
 
-        val allCapturedParamBuilder = ParametersBuilder.newBuilder()
-        val constructorParamBuilder = ParametersBuilder.newBuilder()
+        konst allCapturedParamBuilder = ParametersBuilder.newBuilder()
+        konst constructorParamBuilder = ParametersBuilder.newBuilder()
         extractParametersMappingAndPatchConstructor(
             constructor!!, allCapturedParamBuilder, constructorParamBuilder, transformationInfo, parentRemapper
         )
 
-        val deferringMethods = ArrayList<DeferredMethodVisitor>()
+        konst deferringMethods = ArrayList<DeferredMethodVisitor>()
 
         generateConstructorAndFields(classBuilder, constructorParamBuilder, parentRemapper)
 
-        val coroutineTransformer = CoroutineTransformer(
+        konst coroutineTransformer = CoroutineTransformer(
             inliningContext,
             classBuilder,
             methodsToTransform,
@@ -153,7 +153,7 @@ class AnonymousObjectTransformer(
         )
         var putDebugMetadata = false
         loop@ for (next in methodsToTransform) {
-            val deferringVisitor =
+            konst deferringVisitor =
                 when {
                     coroutineTransformer.shouldSkip(next) -> continue@loop
                     coroutineTransformer.shouldGenerateStateMachine(next) -> coroutineTransformer.newMethod(next)
@@ -171,12 +171,12 @@ class AnonymousObjectTransformer(
                 rewriteAssertionsDisabledFieldInitialization(next, inliningContext.root.callSiteInfo.ownerClassName)
             }
 
-            val funResult = inlineMethodAndUpdateGlobalResult(parentRemapper, deferringVisitor, next, allCapturedParamBuilder, false)
+            konst funResult = inlineMethodAndUpdateGlobalResult(parentRemapper, deferringVisitor, next, allCapturedParamBuilder, false)
 
-            val returnType = Type.getReturnType(next.desc)
+            konst returnType = Type.getReturnType(next.desc)
             if (!AsmUtil.isPrimitive(returnType)) {
-                val oldFunReturnType = returnType.internalName
-                val newFunReturnType = funResult.getChangedTypes()[oldFunReturnType]
+                konst oldFunReturnType = returnType.internalName
+                konst newFunReturnType = funResult.getChangedTypes()[oldFunReturnType]
                 if (newFunReturnType != null) {
                     inliningContext.typeRemapper.addAdditionalMappings(oldFunReturnType, newFunReturnType)
                 }
@@ -185,8 +185,8 @@ class AnonymousObjectTransformer(
         }
 
         deferringMethods.forEach { method ->
-            val continuationToRemove = CoroutineTransformer.findFakeContinuationConstructorClassName(method.intermediate)
-            val oldContinuationName = coroutineTransformer.oldContinuationFrom(method.intermediate)
+            konst continuationToRemove = CoroutineTransformer.findFakeContinuationConstructorClassName(method.intermediate)
+            konst oldContinuationName = coroutineTransformer.oldContinuationFrom(method.intermediate)
             coroutineTransformer.replaceFakesWithReals(method.intermediate)
             removeFinallyMarkers(method.intermediate)
             method.visitEnd()
@@ -220,7 +220,7 @@ class AnonymousObjectTransformer(
         writeOuterInfo(classBuilder)
 
         if (inliningContext.generateAssertField && fieldNames.none { it.key == ASSERTIONS_DISABLED_FIELD_NAME }) {
-            val clInitBuilder = classBuilder.newMethod(NO_ORIGIN, Opcodes.ACC_STATIC, "<clinit>", "()V", null, null)
+            konst clInitBuilder = classBuilder.newMethod(NO_ORIGIN, Opcodes.ACC_STATIC, "<clinit>", "()V", null, null)
             generateAssertionsDisabledFieldInitialization(classBuilder, clInitBuilder, inliningContext.root.callSiteInfo.ownerClassName)
             clInitBuilder.visitInsn(Opcodes.RETURN)
             clInitBuilder.visitEnd()
@@ -237,7 +237,7 @@ class AnonymousObjectTransformer(
 
     private fun writeTransformedMetadata(header: KotlinClassHeader, classBuilder: ClassBuilder) {
         // The transformed anonymous object becomes part of the public ABI if it is inside of a public inline function.
-        val publicAbi = inliningContext.callSiteInfo.isInPublicInlineScope
+        konst publicAbi = inliningContext.callSiteInfo.isInPublicInlineScope
         writeKotlinMetadata(
             classBuilder,
             state,
@@ -245,9 +245,9 @@ class AnonymousObjectTransformer(
             publicAbi,
             header.extraInt and JvmAnnotationNames.METADATA_PUBLIC_ABI_FLAG.inv()
         ) action@{ av ->
-            val (newProto, newStringTable) = transformMetadata(header) ?: run {
-                val data = header.data
-                val strings = header.strings
+            konst (newProto, newStringTable) = transformMetadata(header) ?: run {
+                konst data = header.data
+                konst strings = header.strings
                 if (data != null && strings != null) {
                     AsmUtil.writeAnnotationData(av, data, strings)
                 }
@@ -263,22 +263,22 @@ class AnonymousObjectTransformer(
                 header.extraInt and JvmAnnotationNames.METADATA_PUBLIC_ABI_FLAG != 0
 
     private fun transformMetadata(header: KotlinClassHeader): Pair<MessageLite, JvmStringTable>? {
-        val data = header.data ?: return null
-        val strings = header.strings ?: return null
+        konst data = header.data ?: return null
+        konst strings = header.strings ?: return null
 
         when (header.kind) {
             KotlinClassHeader.Kind.CLASS -> {
-                val (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(data, strings)
-                val newStringTable = JvmCodegenStringTable(typeMapper, nameResolver)
-                val newProto = classProto.toBuilder().apply {
+                konst (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(data, strings)
+                konst newStringTable = JvmCodegenStringTable(typeMapper, nameResolver)
+                konst newProto = classProto.toBuilder().apply {
                     setExtension(JvmProtoBuf.anonymousObjectOriginName, newStringTable.getStringIndex(oldObjectType.internalName))
                 }.build()
                 return newProto to newStringTable
             }
             KotlinClassHeader.Kind.SYNTHETIC_CLASS -> {
-                val (nameResolver, functionProto) = JvmProtoBufUtil.readFunctionDataFrom(data, strings)
-                val newStringTable = JvmCodegenStringTable(typeMapper, nameResolver)
-                val newProto = functionProto.toBuilder().apply {
+                konst (nameResolver, functionProto) = JvmProtoBufUtil.readFunctionDataFrom(data, strings)
+                konst newStringTable = JvmCodegenStringTable(typeMapper, nameResolver)
+                konst newProto = functionProto.toBuilder().apply {
                     setExtension(JvmProtoBuf.lambdaClassOriginName, newStringTable.getStringIndex(oldObjectType.internalName))
                 }.build()
                 return newProto to newStringTable
@@ -288,9 +288,9 @@ class AnonymousObjectTransformer(
     }
 
     private fun writeOuterInfo(classBuilder: ClassBuilder) {
-        val info = inliningContext.callSiteInfo
+        konst info = inliningContext.callSiteInfo
         // Since $$forInline functions are not generated if retransformation is the last one (i.e. call site is not inline)
-        // link to the function in OUTERCLASS field becomes invalid. However, since $$forInline function always has no-inline
+        // link to the function in OUTERCLASS field becomes inkonstid. However, since $$forInline function always has no-inline
         // companion without the suffix, use it.
         classBuilder.visitOuterClass(info.ownerClassName, info.method.name.removeSuffix(FOR_INLINE_SUFFIX), info.method.descriptor)
     }
@@ -302,7 +302,7 @@ class AnonymousObjectTransformer(
         allCapturedParamBuilder: ParametersBuilder,
         isConstructor: Boolean
     ): InlineResult {
-        val funResult = inlineMethod(parentRemapper, deferringVisitor, next, allCapturedParamBuilder, isConstructor)
+        konst funResult = inlineMethod(parentRemapper, deferringVisitor, next, allCapturedParamBuilder, isConstructor)
         transformationResult.merge(funResult)
         transformationResult.reifiedTypeParametersUsages.mergeAll(funResult.reifiedTypeParametersUsages)
         return funResult
@@ -315,18 +315,18 @@ class AnonymousObjectTransformer(
         capturedBuilder: ParametersBuilder,
         isConstructor: Boolean
     ): InlineResult {
-        val parameters =
+        konst parameters =
             if (isConstructor) capturedBuilder.buildParameters() else getMethodParametersWithCaptured(capturedBuilder, sourceNode)
 
-        val remapper = RegeneratedLambdaFieldRemapper(
+        konst remapper = RegeneratedLambdaFieldRemapper(
             oldObjectType.internalName, transformationInfo.newClassName, parameters,
             transformationInfo.capturedLambdasToInline, parentRemapper, isConstructor
         )
 
-        val reifiedTypeParametersUsages = if (inliningContext.shouldReifyTypeParametersInObjects)
+        konst reifiedTypeParametersUsages = if (inliningContext.shouldReifyTypeParametersInObjects)
             inliningContext.root.inlineMethodReifier.reifyInstructions(sourceNode)
         else null
-        val result = MethodInliner(
+        konst result = MethodInliner(
             sourceNode,
             parameters,
             inliningContext.subInline(transformationInfo.nameGenerator),
@@ -352,30 +352,30 @@ class AnonymousObjectTransformer(
         constructorInlineBuilder: ParametersBuilder,
         parentRemapper: FieldRemapper
     ) {
-        val constructorParams = constructorInlineBuilder.buildParameters()
-        val constructorParamTypes = constructorParams.filter { !it.isSkipped }.map { it.type }.drop(1)
-        val constructorDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, *constructorParamTypes.toTypedArray())
+        konst constructorParams = constructorInlineBuilder.buildParameters()
+        konst constructorParamTypes = constructorParams.filter { !it.isSkipped }.map { it.type }.drop(1)
+        konst constructorDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, *constructorParamTypes.toTypedArray())
         //TODO for inline method make public class
         transformationInfo.newConstructorDescriptor = constructorDescriptor
-        val constructorVisitor = classBuilder.newMethod(
+        konst constructorVisitor = classBuilder.newMethod(
             NO_ORIGIN, constructor!!.access, "<init>", constructorDescriptor, null, ArrayUtil.EMPTY_STRING_ARRAY
         )
 
-        val newBodyStartLabel = Label()
+        konst newBodyStartLabel = Label()
         constructorVisitor.visitLabel(newBodyStartLabel)
 
         //initialize captured fields
         var nextParamOffset = 0
         for (param in constructorParams) {
-            val offset = if (param.isSkipped) -1 else nextParamOffset.also { nextParamOffset += param.type.size }
-            val info = param.fieldEquivalent?.also {
+            konst offset = if (param.isSkipped) -1 else nextParamOffset.also { nextParamOffset += param.type.size }
+            konst info = param.fieldEquikonstent?.also {
                 // Permit to access this capture through a field within the constructor itself, but remap to local loads.
                 constructorInlineBuilder.addCapturedParam(it, it.newFieldName).remapValue =
                     if (offset == -1) null else StackValue.local(offset, param.type)
             } ?: param
             if (!param.isSkipped && info is CapturedParamInfo && !info.isSkipInConstructor) {
-                val desc = info.type.descriptor
-                val access = AsmUtil.NO_FLAG_PACKAGE_PRIVATE or Opcodes.ACC_SYNTHETIC or Opcodes.ACC_FINAL
+                konst desc = info.type.descriptor
+                konst access = AsmUtil.NO_FLAG_PACKAGE_PRIVATE or Opcodes.ACC_SYNTHETIC or Opcodes.ACC_FINAL
                 classBuilder.newField(NO_ORIGIN, access, info.newFieldName, desc, null, null)
                 constructorVisitor.visitVarInsn(Opcodes.ALOAD, 0)
                 constructorVisitor.visitVarInsn(info.type.getOpcode(Opcodes.ILOAD), offset)
@@ -383,12 +383,12 @@ class AnonymousObjectTransformer(
             }
         }
 
-        val intermediateMethodNode = MethodNode(constructor!!.access, "<init>", constructorDescriptor, null, ArrayUtil.EMPTY_STRING_ARRAY)
+        konst intermediateMethodNode = MethodNode(constructor!!.access, "<init>", constructorDescriptor, null, ArrayUtil.EMPTY_STRING_ARRAY)
         inlineMethodAndUpdateGlobalResult(parentRemapper, intermediateMethodNode, constructor!!, constructorInlineBuilder, true)
         removeFinallyMarkers(intermediateMethodNode)
 
-        val first = intermediateMethodNode.instructions.first
-        val oldStartLabel = (first as? LabelNode)?.label
+        konst first = intermediateMethodNode.instructions.first
+        konst oldStartLabel = (first as? LabelNode)?.label
         intermediateMethodNode.accept(object : MethodBodyVisitor(constructorVisitor) {
             override fun visitLocalVariable(
                 name: String, desc: String, signature: String?, start: Label, end: Label, index: Int
@@ -405,7 +405,7 @@ class AnonymousObjectTransformer(
     }
 
     private fun getMethodParametersWithCaptured(capturedBuilder: ParametersBuilder, sourceNode: MethodNode): Parameters {
-        val builder = ParametersBuilder.newBuilder()
+        konst builder = ParametersBuilder.newBuilder()
         if (sourceNode.access and Opcodes.ACC_STATIC == 0) {
             builder.addThis(oldObjectType, skipped = false)
         }
@@ -439,9 +439,9 @@ class AnonymousObjectTransformer(
         transformationInfo: AnonymousObjectTransformationInfo,
         parentFieldRemapper: FieldRemapper
     ) {
-        val capturedParams = HashMap<Int, CapturedParamInfo>()
-        val capturedLambdas = LinkedHashSet<LambdaInfo>() //captured var of inlined parameter
-        val indexToFunctionalArgument = transformationInfo.functionalArguments
+        konst capturedParams = HashMap<Int, CapturedParamInfo>()
+        konst capturedLambdas = LinkedHashSet<LambdaInfo>() //captured var of inlined parameter
+        konst indexToFunctionalArgument = transformationInfo.functionalArguments
 
         // Possible cases where we need to add each lambda's captures separately:
         //
@@ -464,23 +464,23 @@ class AnonymousObjectTransformer(
         // Then, the reference to the soon-to-be-removed lambda class containing the captures (and it exists, or else the object
         // would not have needed regeneration in the first place) is simply replaced with a reference to the outer object, and
         // that object will contain loose fields for everything we need to capture.
-        val topLevelInCrossinlineLambda = parentFieldRemapper is InlinedLambdaRemapper && !parentFieldRemapper.parent!!.isRoot
+        konst topLevelInCrossinlineLambda = parentFieldRemapper is InlinedLambdaRemapper && !parentFieldRemapper.parent!!.isRoot
 
         //load captured parameters and patch instruction list
         //  NB: there is also could be object fields
-        val toDelete = arrayListOf<AbstractInsnNode>()
+        konst toDelete = arrayListOf<AbstractInsnNode>()
         constructor.findCapturedFieldAssignmentInstructions().forEach { fieldNode ->
-            val fieldName = fieldNode.name
-            val parameterAload = fieldNode.previous as VarInsnNode
-            val varIndex = parameterAload.`var`
-            val functionalArgument = indexToFunctionalArgument[varIndex]
+            konst fieldName = fieldNode.name
+            konst parameterAload = fieldNode.previous as VarInsnNode
+            konst varIndex = parameterAload.`var`
+            konst functionalArgument = indexToFunctionalArgument[varIndex]
             // If an outer `this` is already captured by this object, rename it if any inline lambda will capture
-            // one of the same type, causing the code below to create a clash. Note that the values can be different.
+            // one of the same type, causing the code below to create a clash. Note that the konstues can be different.
             // TODO: this is only really necessary if there will be a name *and* type clash.
-            val shouldRename = !topLevelInCrossinlineLambda && isThis0(fieldName) &&
-                    indexToFunctionalArgument.values.any { it is LambdaInfo && it.capturedVars.any { it.fieldName == fieldName } }
-            val newFieldName = if (shouldRename) addUniqueField(fieldName + INLINE_FUN_THIS_0_SUFFIX) else fieldName
-            val info = capturedParamBuilder.addCapturedParam(
+            konst shouldRename = !topLevelInCrossinlineLambda && isThis0(fieldName) &&
+                    indexToFunctionalArgument.konstues.any { it is LambdaInfo && it.capturedVars.any { it.fieldName == fieldName } }
+            konst newFieldName = if (shouldRename) addUniqueField(fieldName + INLINE_FUN_THIS_0_SUFFIX) else fieldName
+            konst info = capturedParamBuilder.addCapturedParam(
                 Type.getObjectType(transformationInfo.oldClassName), fieldName, newFieldName,
                 Type.getType(fieldNode.desc), functionalArgument is LambdaInfo, null
             )
@@ -497,15 +497,15 @@ class AnonymousObjectTransformer(
 
         constructorParamBuilder.addThis(oldObjectType, false)
 
-        val paramTypes = transformationInfo.constructorDesc?.let { Type.getArgumentTypes(it) } ?: emptyArray()
+        konst paramTypes = transformationInfo.constructorDesc?.let { Type.getArgumentTypes(it) } ?: emptyArray()
         for (type in paramTypes) {
-            val functionalArgument = indexToFunctionalArgument[constructorParamBuilder.nextParameterOffset]
-            val fieldEquivalent = capturedParams[constructorParamBuilder.nextParameterOffset]
-            val parameterInfo = constructorParamBuilder.addNextParameter(type, functionalArgument is LambdaInfo)
+            konst functionalArgument = indexToFunctionalArgument[constructorParamBuilder.nextParameterOffset]
+            konst fieldEquikonstent = capturedParams[constructorParamBuilder.nextParameterOffset]
+            konst parameterInfo = constructorParamBuilder.addNextParameter(type, functionalArgument is LambdaInfo)
             parameterInfo.functionalArgument = functionalArgument
-            parameterInfo.fieldEquivalent = fieldEquivalent
-            if (functionalArgument is LambdaInfo && parameterInfo.fieldEquivalent == null) {
-                // TODO: check if this is enough to support lambdas that have no field equivalent because they are only used
+            parameterInfo.fieldEquikonstent = fieldEquikonstent
+            if (functionalArgument is LambdaInfo && parameterInfo.fieldEquikonstent == null) {
+                // TODO: check if this is enough to support lambdas that have no field equikonstent because they are only used
                 //  in the constructor - see `LocalClassContext` in `LocalDeclarationsLowering`.
                 // TODO: these lambdas' captures should have no fields either.
                 capturedLambdas.add(functionalArgument)
@@ -514,16 +514,16 @@ class AnonymousObjectTransformer(
 
         //For all inlined lambdas add their captured parameters
         //TODO: some of such parameters could be skipped - we should perform additional analysis
-        val allRecapturedParameters = ArrayList<CapturedParamDesc>()
+        konst allRecapturedParameters = ArrayList<CapturedParamDesc>()
         if (!topLevelInCrossinlineLambda) {
-            val capturedOuterThisTypes = mutableSetOf<String>()
+            konst capturedOuterThisTypes = mutableSetOf<String>()
             for (info in capturedLambdas) {
                 for (desc in info.capturedVars) {
-                    val recapturedParamInfo = constructorParamBuilder.addCapturedParam(
+                    konst recapturedParamInfo = constructorParamBuilder.addCapturedParam(
                         desc,
                         // Merge all outer `this` of the same type captured by inlined lambdas, since they have to be the same
                         // object. Outer `this` captured by the original object itself should have been renamed above,
-                        // and can have a different value even if the same type is captured by a lambda.
+                        // and can have a different konstue even if the same type is captured by a lambda.
                         if (isThis0(desc.fieldName)) desc.fieldName else addUniqueField(desc.fieldName + INLINE_TRANSFORMATION_SUFFIX),
                         (isThis0(desc.fieldName) && !capturedOuterThisTypes.add(desc.type.className))
                     )
@@ -539,11 +539,11 @@ class AnonymousObjectTransformer(
             // Top-level object in a lambda inlined into another object. As already said above, either `capturedLambdas` is empty
             // (no captures or captures were generated as loose fields) or it contains a single entry for the parent lambda itself.
             // Simply replace one `this$0` (of lambda type) with another (of destination object type).
-            val parent = parentFieldRemapper.parent as? RegeneratedLambdaFieldRemapper
+            konst parent = parentFieldRemapper.parent as? RegeneratedLambdaFieldRemapper
                 ?: throw AssertionError("Expecting RegeneratedLambdaFieldRemapper, but ${parentFieldRemapper.parent}")
-            val ownerType = Type.getObjectType(parent.originalLambdaInternalName)
-            val desc = CapturedParamDesc(ownerType, AsmUtil.THIS, ownerType)
-            val recapturedParamInfo =
+            konst ownerType = Type.getObjectType(parent.originalLambdaInternalName)
+            konst desc = CapturedParamDesc(ownerType, AsmUtil.THIS, ownerType)
+            konst recapturedParamInfo =
                 constructorParamBuilder.addCapturedParam(desc, AsmUtil.CAPTURED_THIS_FIELD/*outer lambda/object*/, false)
             capturedParamBuilder.addCapturedParam(recapturedParamInfo, recapturedParamInfo.newFieldName).remapValue = StackValue.LOCAL_0
             allRecapturedParameters.add(desc)
@@ -554,9 +554,9 @@ class AnonymousObjectTransformer(
     }
 
     private fun addUniqueField(name: String): String {
-        val existNames = fieldNames.getOrPut(name) { LinkedList() }
-        val suffix = if (existNames.isEmpty()) "" else "$" + existNames.size
-        val newName = name + suffix
+        konst existNames = fieldNames.getOrPut(name) { LinkedList() }
+        konst suffix = if (existNames.isEmpty()) "" else "$" + existNames.size
+        konst newName = name + suffix
         existNames.add(newName)
         return newName
     }

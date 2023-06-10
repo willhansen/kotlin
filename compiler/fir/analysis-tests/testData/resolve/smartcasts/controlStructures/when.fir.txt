@@ -64,7 +64,7 @@ FILE: when.kt
 
     }
     public final fun test_3(x: R|kotlin/Any?|): R|kotlin/Unit| {
-        when (lval y: R|kotlin/Any?| = R|<local>/x|) {
+        when (lkonst y: R|kotlin/Any?| = R|<local>/x|) {
             ($subj$ is R|A|) ->  {
                 R|<local>/x|.R|/A.foo|()
                 R|<local>/y|.R|/A.foo|()
@@ -75,7 +75,7 @@ FILE: when.kt
             }
         }
 
-        when (lval y: R|kotlin/Any?| = R|<local>/x|) {
+        when (lkonst y: R|kotlin/Any?| = R|<local>/x|) {
             ($subj$ !is R|A|) ->  {
             }
             ($subj$ !is R|B|) ->  {

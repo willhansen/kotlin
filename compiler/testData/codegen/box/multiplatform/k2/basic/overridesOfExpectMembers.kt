@@ -7,13 +7,13 @@
 class C2 : C1() {
     override fun o() = super.o()
 
-    override val k = "K"
+    override konst k = "K"
 }
 
 expect open class C1() {
     open fun o(): String
 
-    open val k: String
+    open konst k: String
 }
 
 fun foo(c2: C2) = c2.o() + c2.k
@@ -24,7 +24,7 @@ fun foo(c2: C2) = c2.o() + c2.k
 actual open class C1 {
     actual open fun o() = "O"
 
-    actual open val k = "K"
+    actual open konst k = "K"
 }
 
 fun box() = foo(C2())

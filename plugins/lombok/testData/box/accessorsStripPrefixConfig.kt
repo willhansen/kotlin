@@ -16,7 +16,7 @@ public class AccessorsTest {
     private Boolean isNonPrimitiveHuman;
 
     static void test() {
-        val obj = new AccessorsTest();
+        konst obj = new AccessorsTest();
 
         obj.getTarget();
         obj.setTarget(34);
@@ -40,7 +40,7 @@ public class AccessorsTest {
 // FILE: test.kt
 
 fun box(): String {
-    val obj = AccessorsTest()
+    konst obj = AccessorsTest()
 
     obj.getTarget()
     obj.setTarget(34)

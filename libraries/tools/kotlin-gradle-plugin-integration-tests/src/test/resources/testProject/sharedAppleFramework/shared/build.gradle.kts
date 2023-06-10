@@ -6,10 +6,10 @@ plugins {
 kotlin {
     android()
 
-    val macosX64 = macosX64()
-    val iosX64 = iosX64()
-    val iosSimulatorArm64 = iosSimulatorArm64()
-    val iosArm64 = iosArm64()
+    konst macosX64 = macosX64()
+    konst iosX64 = iosX64()
+    konst iosSimulatorArm64 = iosSimulatorArm64()
+    konst iosArm64 = iosArm64()
     configure(listOf(macosX64, iosX64, iosSimulatorArm64, iosArm64))  {
         binaries {
             framework {
@@ -21,13 +21,13 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting
+        konst commonMain by getting
 
-        val iosX64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosArm64Main by getting
+        konst iosX64Main by getting
+        konst iosSimulatorArm64Main by getting
+        konst iosArm64Main by getting
 
-        val iosMain by creating {
+        konst iosMain by creating {
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)

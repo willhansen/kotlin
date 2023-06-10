@@ -30,6 +30,6 @@ fun case2() {
 
 fun case3() {
     try
-        <!SYNTAX!><!>val a = ""
+        <!SYNTAX!><!>konst a = ""
 }<!SYNTAX!><!>
 

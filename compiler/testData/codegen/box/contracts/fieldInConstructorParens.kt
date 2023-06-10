@@ -4,7 +4,7 @@
 import kotlin.contracts.*
 
 class Smth {
-    val whatever: Int
+    konst whatever: Int
 
     init {
         calculate({ whatever = it })
@@ -20,6 +20,6 @@ class Smth {
 }
 
 fun box(): String {
-    val smth = Smth()
+    konst smth = Smth()
     return if (smth.whatever == 42) "OK" else "FAIL ${smth.whatever}"
 }

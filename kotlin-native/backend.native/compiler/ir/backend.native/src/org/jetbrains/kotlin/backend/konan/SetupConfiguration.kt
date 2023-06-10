@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.konan.target.CompilerOutputKind
 import org.jetbrains.kotlin.konan.util.visibleName
 
 fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArguments) = with(KonanConfigKeys) {
-    val commonSources = arguments.commonSources?.toSet().orEmpty().map { it.absoluteNormalizedFile() }
-    val hmppModuleStructure = get(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE)
+    konst commonSources = arguments.commonSources?.toSet().orEmpty().map { it.absoluteNormalizedFile() }
+    konst hmppModuleStructure = get(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE)
     arguments.freeArgs.forEach {
         addKotlinSourceRoot(it, isCommon = it.absoluteNormalizedFile() in commonSources, hmppModuleStructure?.getModuleNameForSource(it))
     }
@@ -52,7 +52,7 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
     // and teach the compiler to work with temporaries and -save-temps.
 
     arguments.outputName?.let { put(OUTPUT, it) }
-    val outputKind = CompilerOutputKind.valueOf(
+    konst outputKind = CompilerOutputKind.konstueOf(
             (arguments.produce ?: "program").uppercase())
     put(PRODUCE, outputKind)
     put(METADATA_KLIB, arguments.metadataKlib)
@@ -74,21 +74,21 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
                 "-Xg0 is now deprecated and skipped by compiler. Light debug information is enabled by default for Darwin platforms." +
                         " For other targets, please, use `-Xadd-light-debug=enable` instead.")
     }
-    putIfNotNull(LIGHT_DEBUG, when (val it = arguments.lightDebugString) {
+    putIfNotNull(LIGHT_DEBUG, when (konst it = arguments.lightDebugString) {
         "enable" -> true
         "disable" -> false
         null -> null
         else -> {
-            report(ERROR, "Unsupported -Xadd-light-debug= value: $it. Possible values are 'enable'/'disable'")
+            report(ERROR, "Unsupported -Xadd-light-debug= konstue: $it. Possible konstues are 'enable'/'disable'")
             null
         }
     })
-    putIfNotNull(GENERATE_DEBUG_TRAMPOLINE, when (val it = arguments.generateDebugTrampolineString) {
+    putIfNotNull(GENERATE_DEBUG_TRAMPOLINE, when (konst it = arguments.generateDebugTrampolineString) {
         "enable" -> true
         "disable" -> false
         null -> null
         else -> {
-            report(ERROR, "Unsupported -Xg-generate-debug-tramboline= value: $it. Possible values are 'enable'/'disable'")
+            report(ERROR, "Unsupported -Xg-generate-debug-tramboline= konstue: $it. Possible konstues are 'enable'/'disable'")
             null
         }
     })
@@ -120,7 +120,7 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
 
     put(ENABLE_ASSERTIONS, arguments.enableAssertions)
 
-    val memoryModelFromArgument = when (arguments.memoryModel) {
+    konst memoryModelFromArgument = when (arguments.memoryModel) {
         "relaxed" -> MemoryModel.RELAXED
         "strict" -> MemoryModel.STRICT
         "experimental" -> MemoryModel.EXPERIMENTAL
@@ -131,7 +131,7 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
         }
     }
 
-    // TODO: revise priority and/or report conflicting values.
+    // TODO: revise priority and/or report conflicting konstues.
     if (get(BinaryOptions.memoryModel) == null) {
         putIfNotNull(BinaryOptions.memoryModel, memoryModelFromArgument)
     }
@@ -169,7 +169,7 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
     put(OBJC_GENERICS, !arguments.noObjcGenerics)
     put(DEBUG_PREFIX_MAP, parseDebugPrefixMap(arguments, this@setupFromArguments))
 
-    val libraryToAddToCache = parseLibraryToAddToCache(arguments, this@setupFromArguments, outputKind)
+    konst libraryToAddToCache = parseLibraryToAddToCache(arguments, this@setupFromArguments, outputKind)
     if (libraryToAddToCache != null && !arguments.outputName.isNullOrEmpty())
         report(ERROR, "${K2NativeCompilerArguments.ADD_CACHE} already implicitly sets output file name")
     libraryToAddToCache?.let { put(LIBRARY_TO_ADD_TO_CACHE, it) }
@@ -177,16 +177,16 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
     put(CACHE_DIRECTORIES, arguments.cacheDirectories.toNonNullList())
     put(AUTO_CACHEABLE_FROM, arguments.autoCacheableFrom.toNonNullList())
     arguments.autoCacheDir?.let { put(AUTO_CACHE_DIR, it) }
-    val incrementalCacheDir = arguments.incrementalCacheDir
+    konst incrementalCacheDir = arguments.incrementalCacheDir
     if ((incrementalCacheDir != null) xor (arguments.incrementalCompilation == true))
         report(ERROR, "For incremental compilation both flags should be supplied: " +
                 "-Xenable-incremental-compilation and ${K2NativeCompilerArguments.INCREMENTAL_CACHE_DIR}")
     incrementalCacheDir?.let { put(INCREMENTAL_CACHE_DIR, it) }
     arguments.filesToCache?.let { put(FILES_TO_CACHE, it.toList()) }
     put(MAKE_PER_FILE_CACHE, arguments.makePerFileCache)
-    val nThreadsRaw = parseBackendThreads(arguments.backendThreads)
-    val availableProcessors = Runtime.getRuntime().availableProcessors()
-    val nThreads = if (nThreadsRaw == 0) availableProcessors else nThreadsRaw
+    konst nThreadsRaw = parseBackendThreads(arguments.backendThreads)
+    konst availableProcessors = Runtime.getRuntime().availableProcessors()
+    konst nThreads = if (nThreadsRaw == 0) availableProcessors else nThreadsRaw
     if (nThreads > 1) {
         report(LOGGING, "Running backend in parallel with $nThreads threads")
     }
@@ -211,27 +211,27 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
         }
     })
 
-    val gcFromArgument = when (arguments.gc) {
+    konst gcFromArgument = when (arguments.gc) {
         null -> null
         "noop" -> GC.NOOP
         "stms" -> GC.STOP_THE_WORLD_MARK_AND_SWEEP
         "cms" -> GC.PARALLEL_MARK_CONCURRENT_SWEEP
         else -> {
-            val validValues = enumValues<GC>().map {
-                val fullName = "$it".lowercase()
+            konst konstidValues = enumValues<GC>().map {
+                konst fullName = "$it".lowercase()
                 it.shortcut?.let { short ->
                     "$fullName (or: $short)"
                 } ?: fullName
             }.joinToString("|")
-            report(ERROR, "Unsupported argument -Xgc=${arguments.gc}. Use -Xbinary=gc= with values ${validValues}")
+            report(ERROR, "Unsupported argument -Xgc=${arguments.gc}. Use -Xbinary=gc= with konstues ${konstidValues}")
             null
         }
     }
     if (gcFromArgument != null) {
-        val newValue = gcFromArgument.shortcut ?: "$gcFromArgument".lowercase()
+        konst newValue = gcFromArgument.shortcut ?: "$gcFromArgument".lowercase()
         report(WARNING, "-Xgc=${arguments.gc} compiler argument is deprecated. Use -Xbinary=gc=${newValue} instead")
     }
-    // TODO: revise priority and/or report conflicting values.
+    // TODO: revise priority and/or report conflicting konstues.
     if (get(BinaryOptions.gc) == null) {
         putIfNotNull(BinaryOptions.gc, gcFromArgument)
     }
@@ -275,12 +275,12 @@ fun CompilerConfiguration.setupFromArguments(arguments: K2NativeCompilerArgument
     })
 
     arguments.externalDependencies?.let { put(EXTERNAL_DEPENDENCIES, it) }
-    putIfNotNull(LLVM_VARIANT, when (val variant = arguments.llvmVariant) {
+    putIfNotNull(LLVM_VARIANT, when (konst variant = arguments.llvmVariant) {
         "user" -> LlvmVariant.User
         "dev" -> LlvmVariant.Dev
         null -> null
         else -> {
-            val file = File(variant)
+            konst file = File(variant)
             if (!file.exists) {
                 report(ERROR, "`-Xllvm-variant` should be `user`, `dev` or an absolute path. Got: $variant")
                 null
@@ -346,13 +346,13 @@ private fun selectFrameworkType(
 
 private fun parsePreLinkCachesValue(
         configuration: CompilerConfiguration,
-        value: String?
-): Boolean? = when (value) {
+        konstue: String?
+): Boolean? = when (konstue) {
     "enable" -> true
     "disable" -> false
     null -> null
     else -> {
-        configuration.report(ERROR, "Unsupported `-Xpre-link-caches` value: $value. Possible values are 'enable'/'disable'")
+        configuration.report(ERROR, "Unsupported `-Xpre-link-caches` konstue: $konstue. Possible konstues are 'enable'/'disable'")
         null
     }
 }
@@ -381,7 +381,7 @@ private fun selectExportedLibraries(
         arguments: K2NativeCompilerArguments,
         outputKind: CompilerOutputKind
 ): List<String> {
-    val exportedLibraries = arguments.exportedLibraries?.toList().orEmpty()
+    konst exportedLibraries = arguments.exportedLibraries?.toList().orEmpty()
 
     return if (exportedLibraries.isNotEmpty() && outputKind != CompilerOutputKind.FRAMEWORK &&
             outputKind != CompilerOutputKind.STATIC && outputKind != CompilerOutputKind.DYNAMIC) {
@@ -400,7 +400,7 @@ private fun selectIncludes(
         arguments: K2NativeCompilerArguments,
         outputKind: CompilerOutputKind
 ): List<String> {
-    val includes = arguments.includes?.toList().orEmpty()
+    konst includes = arguments.includes?.toList().orEmpty()
 
     return if (includes.isNotEmpty() && outputKind == CompilerOutputKind.LIBRARY) {
         configuration.report(
@@ -417,7 +417,7 @@ private fun parseCachedLibraries(
         arguments: K2NativeCompilerArguments,
         configuration: CompilerConfiguration
 ): Map<String, String> = arguments.cachedLibraries?.asList().orEmpty().mapNotNull {
-    val libraryAndCache = it.split(",")
+    konst libraryAndCache = it.split(",")
     if (libraryAndCache.size != 2) {
         configuration.report(
                 ERROR,
@@ -434,7 +434,7 @@ private fun parseLibraryToAddToCache(
         configuration: CompilerConfiguration,
         outputKind: CompilerOutputKind
 ): String? {
-    val input = arguments.libraryToAddToCache
+    konst input = arguments.libraryToAddToCache
 
     return if (input != null && !outputKind.isCache) {
         configuration.report(ERROR, "${K2NativeCompilerArguments.ADD_CACHE} can't be used when not producing cache")
@@ -445,11 +445,11 @@ private fun parseLibraryToAddToCache(
 }
 
 private fun parseBackendThreads(stringValue: String): Int {
-    val value = stringValue.toIntOrNull()
-            ?: throw KonanCompilationException("Cannot parse -Xbackend-threads value: \"$stringValue\". Please use an integer number")
-    if (value < 0)
-        throw KonanCompilationException("-Xbackend-threads value cannot be negative")
-    return value
+    konst konstue = stringValue.toIntOrNull()
+            ?: throw KonanCompilationException("Cannot parse -Xbackend-threads konstue: \"$stringValue\". Please use an integer number")
+    if (konstue < 0)
+        throw KonanCompilationException("-Xbackend-threads konstue cannot be negative")
+    return konstue
 }
 
 // TODO: Support short names for current module in ObjC export and lift this limitation.
@@ -458,7 +458,7 @@ private fun parseShortModuleName(
         configuration: CompilerConfiguration,
         outputKind: CompilerOutputKind
 ): String? {
-    val input = arguments.shortModuleName
+    konst input = arguments.shortModuleName
 
     return if (input != null && outputKind != CompilerOutputKind.LIBRARY) {
         configuration.report(
@@ -476,7 +476,7 @@ private fun parseDebugPrefixMap(
         arguments: K2NativeCompilerArguments,
         configuration: CompilerConfiguration
 ): Map<String, String> = arguments.debugPrefixMap?.asList().orEmpty().mapNotNull {
-    val libraryAndCache = it.split("=")
+    konst libraryAndCache = it.split("=")
     if (libraryAndCache.size != 2) {
         configuration.report(ERROR, "incorrect debug prefix map format: expected '<old>=<new>', got '$it'")
         null
@@ -485,41 +485,41 @@ private fun parseDebugPrefixMap(
     }
 }.toMap()
 
-class BinaryOptionWithValue<T : Any>(val option: BinaryOption<T>, val value: T)
+class BinaryOptionWithValue<T : Any>(konst option: BinaryOption<T>, konst konstue: T)
 
 private fun <T : Any> CompilerConfiguration.put(binaryOptionWithValue: BinaryOptionWithValue<T>) {
-    this.put(binaryOptionWithValue.option.compilerConfigurationKey, binaryOptionWithValue.value)
+    this.put(binaryOptionWithValue.option.compilerConfigurationKey, binaryOptionWithValue.konstue)
 }
 
 fun parseBinaryOptions(
         arguments: K2NativeCompilerArguments,
         configuration: CompilerConfiguration
 ): List<BinaryOptionWithValue<*>> {
-    val keyValuePairs = parseKeyValuePairs(arguments.binaryOptions, configuration) ?: return emptyList()
+    konst keyValuePairs = parseKeyValuePairs(arguments.binaryOptions, configuration) ?: return emptyList()
 
-    return keyValuePairs.mapNotNull { (key, value) ->
-        val option = BinaryOptions.getByName(key)
+    return keyValuePairs.mapNotNull { (key, konstue) ->
+        konst option = BinaryOptions.getByName(key)
         if (option == null) {
             configuration.report(STRONG_WARNING, "Unknown binary option '$key'")
             null
         } else {
-            parseBinaryOption(option, value, configuration)
+            parseBinaryOption(option, konstue, configuration)
         }
     }
 }
 
 private fun <T : Any> parseBinaryOption(
         option: BinaryOption<T>,
-        valueName: String,
+        konstueName: String,
         configuration: CompilerConfiguration
 ): BinaryOptionWithValue<T>? {
-    val value = option.valueParser.parse(valueName)
-    return if (value == null) {
-        configuration.report(STRONG_WARNING, "Unknown value '$valueName' of binary option '${option.name}'. " +
-                "Possible values are: ${option.valueParser.validValuesHint}")
+    konst konstue = option.konstueParser.parse(konstueName)
+    return if (konstue == null) {
+        configuration.report(STRONG_WARNING, "Unknown konstue '$konstueName' of binary option '${option.name}'. " +
+                "Possible konstues are: ${option.konstueParser.konstidValuesHint}")
         null
     } else {
-        BinaryOptionWithValue(option, value)
+        BinaryOptionWithValue(option, konstue)
     }
 }
 
@@ -532,11 +532,11 @@ private fun parseKeyValuePairs(
         argumentValue: Array<String>?,
         configuration: CompilerConfiguration
 ): Map<String, String>? = argumentValue?.mapNotNull {
-    val keyValueSeparatorIndex = it.indexOf('=')
+    konst keyValueSeparatorIndex = it.indexOf('=')
     if (keyValueSeparatorIndex > 0) {
         it.substringBefore('=') to it.substringAfter('=')
     } else {
-        configuration.report(ERROR, "incorrect property format: expected '<key>=<value>', got '$it'")
+        configuration.report(ERROR, "incorrect property format: expected '<key>=<konstue>', got '$it'")
         null
     }
 }?.toMap()
@@ -546,7 +546,7 @@ private fun parseBundleId(
         outputKind: CompilerOutputKind,
         configuration: CompilerConfiguration
 ): String? {
-    val argumentValue = arguments.bundleId
+    konst argumentValue = arguments.bundleId
     return if (argumentValue != null && outputKind != CompilerOutputKind.FRAMEWORK) {
         configuration.report(STRONG_WARNING, "Setting a bundle ID is only supported when producing a framework " +
                 "but the compiler is producing ${outputKind.name.lowercase()}")

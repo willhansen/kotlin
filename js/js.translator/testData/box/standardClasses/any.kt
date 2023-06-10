@@ -8,7 +8,7 @@ class A : Any()
 fun Any?.asAny() = this
 
 fun box(): String {
-    val x = Any().asAny()
+    konst x = Any().asAny()
     if (x !is Any) return "fail1"
     if (x.asDynamic().constructor !== js("Object")) return "fail1a"
 

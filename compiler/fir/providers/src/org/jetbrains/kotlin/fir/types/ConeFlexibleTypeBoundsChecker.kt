@@ -6,22 +6,22 @@
 package org.jetbrains.kotlin.fir.types
 
 import org.jetbrains.kotlin.name.ClassId
-import org.jetbrains.kotlin.name.StandardClassIds.Collections.baseCollectionToMutableEquivalent
+import org.jetbrains.kotlin.name.StandardClassIds.Collections.baseCollectionToMutableEquikonstent
 import org.jetbrains.kotlin.name.StandardClassIds.Collections.mutableCollectionToBaseCollection
 
 object ConeFlexibleTypeBoundsChecker {
     fun areTypesMayBeLowerAndUpperBoundsOfSameFlexibleTypeByMutability(a: ConeKotlinType, b: ConeKotlinType): Boolean {
-        val classId = a.classId ?: return false
-        val possiblePairBound = (baseCollectionToMutableEquivalent[classId] ?: mutableCollectionToBaseCollection[classId]) ?: return false
+        konst classId = a.classId ?: return false
+        konst possiblePairBound = (baseCollectionToMutableEquikonstent[classId] ?: mutableCollectionToBaseCollection[classId]) ?: return false
 
         return possiblePairBound == b.classId
     }
 
     // We consider base bounds as not mutable collections
     fun getBaseBoundFqNameByMutability(a: ConeKotlinType): ClassId? {
-        val classId = a.classId ?: return null
+        konst classId = a.classId ?: return null
 
-        if (classId in baseCollectionToMutableEquivalent) return classId
+        if (classId in baseCollectionToMutableEquikonstent) return classId
 
         return mutableCollectionToBaseCollection[classId]
     }

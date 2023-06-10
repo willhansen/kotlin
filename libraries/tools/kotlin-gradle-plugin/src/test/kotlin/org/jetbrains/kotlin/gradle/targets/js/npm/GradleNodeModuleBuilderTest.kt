@@ -11,11 +11,11 @@ import kotlin.test.assertNotNull
 
 class GradleNodeModuleBuilderTest {
 
-    // Gson (used in fromSrcPackageJson) deserialize json to PackageJson no matter on nullability and default values
+    // Gson (used in fromSrcPackageJson) deserialize json to PackageJson no matter on nullability and default konstues
     //  Check that in case where there is no dependencies fields, we don't get nullable fields, that declared as non-nullable
     @Test
-    fun validPackageJsonWithoutDependencies() {
-        val packageJson = fromSrcPackageJson(
+    fun konstidPackageJsonWithoutDependencies() {
+        konst packageJson = fromSrcPackageJson(
             File("libraries/tools/kotlin-gradle-plugin/src/test/resources/org/jetbrains/kotlin/gradle/targets/js/npm/GradleNodeModuleBuilderTest/package.json")
         )
         assertNotNull(packageJson, "package.json should be deserialized")

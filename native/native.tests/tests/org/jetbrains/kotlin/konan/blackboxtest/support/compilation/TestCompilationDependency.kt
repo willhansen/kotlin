@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.konan.blackboxtest.support.compilation.TestCompilati
  * [IncludedLibrary] - similarly but included modules (-Xinclude).
  * Note: there cannot be DependsOnLibrary type, since `dependsOn` dependency works only within a KLIB, not between KLIBs.
  */
-internal sealed class TestCompilationDependencyType<A : TestCompilationArtifact>(private val artifactClass: Class<A>) {
+internal sealed class TestCompilationDependencyType<A : TestCompilationArtifact>(private konst artifactClass: Class<A>) {
     object Library : TestCompilationDependencyType<KLIB>(KLIB::class.java)
     object FriendLibrary : TestCompilationDependencyType<KLIB>(KLIB::class.java)
     object IncludedLibrary : TestCompilationDependencyType<KLIB>(KLIB::class.java)
@@ -26,18 +26,18 @@ internal sealed class TestCompilationDependencyType<A : TestCompilationArtifact>
 }
 
 internal sealed interface TestCompilationDependency<A : TestCompilationArtifact> {
-    val artifact: A
-    val type: TestCompilationDependencyType<A>
+    konst artifact: A
+    konst type: TestCompilationDependencyType<A>
 }
 
 internal class CompiledDependency<A : TestCompilationArtifact>(
-    val compilation: TestCompilation<A>,
-    override val type: TestCompilationDependencyType<A>
+    konst compilation: TestCompilation<A>,
+    override konst type: TestCompilationDependencyType<A>
 ) : TestCompilationDependency<A> {
-    override val artifact: A get() = compilation.result.assertSuccess().resultingArtifact
+    override konst artifact: A get() = compilation.result.assertSuccess().resultingArtifact
 }
 
 internal class ExistingDependency<A : TestCompilationArtifact>(
-    override val artifact: A,
-    override val type: TestCompilationDependencyType<A>
+    override konst artifact: A,
+    override konst type: TestCompilationDependencyType<A>
 ) : TestCompilationDependency<A>

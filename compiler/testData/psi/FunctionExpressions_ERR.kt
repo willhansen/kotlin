@@ -1,22 +1,22 @@
-val a = fun )
-val a = fun foo)
+konst a = fun )
+konst a = fun foo)
 
-val a = fun @[a] T.foo(a : ) : bar
+konst a = fun @[a] T.foo(a : ) : bar
 
-val a = fun @[a()] T.foo<>(a : foo) : bar
-val a = fun @[a()] T.<>(a : foo) : bar
+konst a = fun @[a()] T.foo<>(a : foo) : bar
+konst a = fun @[a()] T.<>(a : foo) : bar
 
-val a = fun T.foo<T, , T>(a : foo) : bar
-val a = fun T.foo<, T, , T>(a : foo) : bar
-val a = fun T.foo<T, T>(, a : foo, , a: b) : bar
+konst a = fun T.foo<T, , T>(a : foo) : bar
+konst a = fun T.foo<, T, , T>(a : foo) : bar
+konst a = fun T.foo<T, T>(, a : foo, , a: b) : bar
 
-val a = fun foo() : = a;
+konst a = fun foo() : = a;
 
-val public_fun = public fun ()
-val open_fun = open fun ()
-val final_fun = final fun ()
+konst public_fun = public fun ()
+konst open_fun = open fun ()
+konst final_fun = final fun ()
 
-val where_fun = fun () where T: V
+konst where_fun = fun () where T: V
 fun where_fun() = fun () where T: V
 
 fun outer() {

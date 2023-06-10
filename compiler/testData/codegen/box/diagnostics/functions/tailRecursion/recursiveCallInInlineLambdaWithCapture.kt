@@ -13,6 +13,6 @@ fun listOfFactor(number: Int): List<Int> {
 }
 
 fun box(): String {
-    val factors = listOfFactor(60)
+    konst factors = listOfFactor(60)
     return if (factors.size == 4) "OK" else "Fail: $factors"
 }

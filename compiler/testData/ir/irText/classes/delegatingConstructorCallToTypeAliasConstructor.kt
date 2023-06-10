@@ -1,4 +1,4 @@
-open class Cell<T>(val value: T)
+open class Cell<T>(konst konstue: T)
 
 typealias CT<T> = Cell<T>
 typealias CStr = Cell<String>

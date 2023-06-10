@@ -7,13 +7,13 @@ class A {
     var it: Int
         field = 3.14
         get() = (field + 10).toInt()
-        set(value) {
-            field = (value - 10).toDouble()
+        set(konstue) {
+            field = (konstue - 10).toDouble()
         }
 }
 
 fun test() {
-    val a = A()
-    val it: Int = A().it and 10
+    konst a = A()
+    konst it: Int = A().it and 10
     a.it = it
 }

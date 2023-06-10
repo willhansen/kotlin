@@ -18,51 +18,51 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-enum class EvaluationMode {
+enum class EkonstuationMode {
     FULL {
-        override fun canEvaluateFunction(function: IrFunction): Boolean = true
-        override fun canEvaluateEnumValue(enumEntry: IrGetEnumValue): Boolean = true
-        override fun canEvaluateFunctionExpression(expression: IrFunctionExpression): Boolean = true
-        override fun canEvaluateCallableReference(reference: IrCallableReference<*>): Boolean = true
-        override fun canEvaluateClassReference(reference: IrDeclarationReference): Boolean = true
+        override fun canEkonstuateFunction(function: IrFunction): Boolean = true
+        override fun canEkonstuateEnumValue(enumEntry: IrGetEnumValue): Boolean = true
+        override fun canEkonstuateFunctionExpression(expression: IrFunctionExpression): Boolean = true
+        override fun canEkonstuateCallableReference(reference: IrCallableReference<*>): Boolean = true
+        override fun canEkonstuateClassReference(reference: IrDeclarationReference): Boolean = true
 
-        override fun canEvaluateBlock(block: IrBlock): Boolean = true
-        override fun canEvaluateComposite(composite: IrComposite): Boolean = true
+        override fun canEkonstuateBlock(block: IrBlock): Boolean = true
+        override fun canEkonstuateComposite(composite: IrComposite): Boolean = true
 
-        override fun canEvaluateExpression(expression: IrExpression): Boolean = true
+        override fun canEkonstuateExpression(expression: IrExpression): Boolean = true
 
         override fun mustCheckBodyOf(function: IrFunction): Boolean = true
     },
 
     ONLY_BUILTINS {
-        private val allowedMethodsOnPrimitives = setOf(
+        private konst allowedMethodsOnPrimitives = setOf(
             "not", "unaryMinus", "unaryPlus", "inv",
             "toString", "toChar", "toByte", "toShort", "toInt", "toLong", "toFloat", "toDouble",
             "equals", "compareTo", "plus", "minus", "times", "div", "rem", "and", "or", "xor", "shl", "shr", "ushr",
             "less", "lessOrEqual", "greater", "greaterOrEqual"
         )
-        private val allowedMethodsOnStrings = setOf(
+        private konst allowedMethodsOnStrings = setOf(
             "<get-length>", "plus", "get", "compareTo", "equals", "toString"
         )
-        private val allowedExtensionFunctions = setOf(
+        private konst allowedExtensionFunctions = setOf(
             "kotlin.floorDiv", "kotlin.mod", "kotlin.NumbersKt.floorDiv", "kotlin.NumbersKt.mod", "kotlin.<get-code>"
         )
-        private val allowedBuiltinExtensionFunctions = listOf(
+        private konst allowedBuiltinExtensionFunctions = listOf(
             BuiltInOperatorNames.LESS, BuiltInOperatorNames.LESS_OR_EQUAL,
             BuiltInOperatorNames.GREATER, BuiltInOperatorNames.GREATER_OR_EQUAL,
             BuiltInOperatorNames.EQEQ, BuiltInOperatorNames.IEEE754_EQUALS,
             BuiltInOperatorNames.ANDAND, BuiltInOperatorNames.OROR
         ).map { IrBuiltIns.KOTLIN_INTERNAL_IR_FQN.child(Name.identifier(it)).asString() }.toSet()
 
-        override fun canEvaluateFunction(function: IrFunction): Boolean {
+        override fun canEkonstuateFunction(function: IrFunction): Boolean {
             if (function.property?.isConst == true) return true
 
-            val returnType = function.returnType
+            konst returnType = function.returnType
             if (!returnType.isPrimitiveType() && !returnType.isString() && !returnType.isUnsignedType()) return false
 
-            val fqName = function.fqNameWhenAvailable?.asString()
-            val parent = function.parentClassOrNull
-            val parentType = parent?.defaultType
+            konst fqName = function.fqNameWhenAvailable?.asString()
+            konst parent = function.parentClassOrNull
+            konst parentType = parent?.defaultType
             return when {
                 parentType == null -> fqName in allowedExtensionFunctions || fqName in allowedBuiltinExtensionFunctions
                 parentType.isPrimitiveType() -> function.name.asString() in allowedMethodsOnPrimitives
@@ -73,42 +73,42 @@ enum class EvaluationMode {
             }
         }
 
-        override fun canEvaluateBlock(block: IrBlock): Boolean = block.statements.size == 1
-        override fun canEvaluateExpression(expression: IrExpression): Boolean = expression is IrCall
+        override fun canEkonstuateBlock(block: IrBlock): Boolean = block.statements.size == 1
+        override fun canEkonstuateExpression(expression: IrExpression): Boolean = expression is IrCall
     },
 
     ONLY_INTRINSIC_CONST {
-        override fun canEvaluateFunction(function: IrFunction): Boolean {
-            return function.isCompileTimePropertyAccessor() || function.isMarkedAsIntrinsicConstEvaluation()
+        override fun canEkonstuateFunction(function: IrFunction): Boolean {
+            return function.isCompileTimePropertyAccessor() || function.isMarkedAsIntrinsicConstEkonstuation()
         }
 
         private fun IrFunction?.isCompileTimePropertyAccessor(): Boolean {
-            val property = this?.property ?: return false
-            return property.isConst || (property.resolveFakeOverride() ?: property).isMarkedAsIntrinsicConstEvaluation()
+            konst property = this?.property ?: return false
+            return property.isConst || (property.resolveFakeOverride() ?: property).isMarkedAsIntrinsicConstEkonstuation()
         }
 
-        override fun canEvaluateBlock(block: IrBlock): Boolean = block.origin == IrStatementOrigin.WHEN || block.statements.size == 1
-        override fun canEvaluateExpression(expression: IrExpression): Boolean = expression is IrCall || expression is IrWhen
+        override fun canEkonstuateBlock(block: IrBlock): Boolean = block.origin == IrStatementOrigin.WHEN || block.statements.size == 1
+        override fun canEkonstuateExpression(expression: IrExpression): Boolean = expression is IrCall || expression is IrWhen
     };
 
-    open fun canEvaluateFunction(function: IrFunction): Boolean = false
-    open fun canEvaluateEnumValue(enumEntry: IrGetEnumValue): Boolean = false
-    open fun canEvaluateFunctionExpression(expression: IrFunctionExpression): Boolean = false
-    open fun canEvaluateCallableReference(reference: IrCallableReference<*>): Boolean = false
-    open fun canEvaluateClassReference(reference: IrDeclarationReference): Boolean = false
+    open fun canEkonstuateFunction(function: IrFunction): Boolean = false
+    open fun canEkonstuateEnumValue(enumEntry: IrGetEnumValue): Boolean = false
+    open fun canEkonstuateFunctionExpression(expression: IrFunctionExpression): Boolean = false
+    open fun canEkonstuateCallableReference(reference: IrCallableReference<*>): Boolean = false
+    open fun canEkonstuateClassReference(reference: IrDeclarationReference): Boolean = false
 
-    open fun canEvaluateBlock(block: IrBlock): Boolean = false
-    open fun canEvaluateComposite(composite: IrComposite): Boolean {
+    open fun canEkonstuateBlock(block: IrBlock): Boolean = false
+    open fun canEkonstuateComposite(composite: IrComposite): Boolean {
         return composite.origin == IrStatementOrigin.DESTRUCTURING_DECLARATION || composite.origin == null
     }
 
-    open fun canEvaluateExpression(expression: IrExpression): Boolean = false
+    open fun canEkonstuateExpression(expression: IrExpression): Boolean = false
 
     open fun mustCheckBodyOf(function: IrFunction): Boolean {
         return function.property != null
     }
 
-    protected fun IrDeclaration.isMarkedAsIntrinsicConstEvaluation() = isMarkedWith(intrinsicConstEvaluationAnnotation)
+    protected fun IrDeclaration.isMarkedAsIntrinsicConstEkonstuation() = isMarkedWith(intrinsicConstEkonstuationAnnotation)
 
     protected fun IrDeclaration.isMarkedWith(annotation: FqName): Boolean {
         if (this is IrClass && this.isCompanion) return false

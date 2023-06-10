@@ -49,10 +49,10 @@ abstract class FirAbstractSessionFactory {
             registerCommonComponents(languageVersionSettings)
             registerExtraComponents(this)
 
-            val kotlinScopeProvider = createKotlinScopeProvider.invoke()
+            konst kotlinScopeProvider = createKotlinScopeProvider.invoke()
             register(FirKotlinScopeProvider::class, kotlinScopeProvider)
 
-            val builtinsModuleData = BinaryModuleData.createDependencyModuleData(
+            konst builtinsModuleData = BinaryModuleData.createDependencyModuleData(
                 Name.special("<builtins of ${mainModuleName.asString()}"),
                 moduleDataProvider.platform,
                 moduleDataProvider.analyzerServices,
@@ -66,9 +66,9 @@ abstract class FirAbstractSessionFactory {
             }.configure()
             registerCommonComponentsAfterExtensionsAreConfigured()
 
-            val providers = createProviders(this, builtinsModuleData, kotlinScopeProvider)
+            konst providers = createProviders(this, builtinsModuleData, kotlinScopeProvider)
 
-            val symbolProvider = FirCachingCompositeSymbolProvider(this, providers)
+            konst symbolProvider = FirCachingCompositeSymbolProvider(this, providers)
             register(FirSymbolProvider::class, symbolProvider)
             register(FirProvider::class, FirLibrarySessionProvider(symbolProvider))
         }
@@ -101,10 +101,10 @@ abstract class FirAbstractSessionFactory {
             registerResolveComponents(lookupTracker, enumWhenTracker)
             registerExtraComponents(this)
 
-            val kotlinScopeProvider = createKotlinScopeProvider.invoke()
+            konst kotlinScopeProvider = createKotlinScopeProvider.invoke()
             register(FirKotlinScopeProvider::class, kotlinScopeProvider)
 
-            val firProvider = FirProviderImpl(this, kotlinScopeProvider)
+            konst firProvider = FirProviderImpl(this, kotlinScopeProvider)
             register(FirProvider::class, firProvider)
 
             FirSessionConfigurator(this).apply {
@@ -118,12 +118,12 @@ abstract class FirAbstractSessionFactory {
             }.configure()
             registerCommonComponentsAfterExtensionsAreConfigured()
 
-            val dependencyProviders = computeDependencyProviderList(moduleData)
-            val generatedSymbolsProvider = FirSwitchableExtensionDeclarationsSymbolProvider.createIfNeeded(this)
-            val syntheticFunctionInterfaceProvider =
+            konst dependencyProviders = computeDependencyProviderList(moduleData)
+            konst generatedSymbolsProvider = FirSwitchableExtensionDeclarationsSymbolProvider.createIfNeeded(this)
+            konst syntheticFunctionInterfaceProvider =
                 FirExtensionSyntheticFunctionInterfaceProvider.createIfNeeded(this, moduleData, kotlinScopeProvider)
 
-            val providers = createProviders(
+            konst providers = createProviders(
                 this,
                 kotlinScopeProvider,
                 firProvider.symbolProvider,
@@ -146,12 +146,12 @@ abstract class FirAbstractSessionFactory {
     }
 
     private fun FirSession.computeDependencyProviderList(moduleData: FirModuleData): List<FirSymbolProvider> {
-        val visited = mutableSetOf<FirSymbolProvider>()
+        konst visited = mutableSetOf<FirSymbolProvider>()
 
         // dependsOnDependencies can actualize declarations from their dependencies. Because actual declarations can be more specific
         // (e.g. have additional supertypes), the modules must be ordered from most specific (i.e. actual) to most generic (i.e. expect)
         // to prevent false positive resolution errors (see KT-57369 for an example).
-        val dependsOnDependencies = topologicalSort(moduleData.dependsOnDependencies) { it.dependsOnDependencies }
+        konst dependsOnDependencies = topologicalSort(moduleData.dependsOnDependencies) { it.dependsOnDependencies }
 
         return (moduleData.dependencies + moduleData.friendDependencies + dependsOnDependencies)
             .mapNotNull { sessionProvider?.getSession(it) }
@@ -167,7 +167,7 @@ abstract class FirAbstractSessionFactory {
         visited: MutableSet<FirSymbolProvider>,
         collectSourceProviders: Boolean
     ): List<FirSymbolProvider> {
-        val result = mutableListOf<FirSymbolProvider>()
+        konst result = mutableListOf<FirSymbolProvider>()
 
         fun FirSymbolProvider.collectProviders() {
             if (!visited.add(this)) return

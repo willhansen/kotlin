@@ -66,7 +66,7 @@ digraph simpleIf_kt {
             21 [label="Enter block"];
             22 [label="Access variable R|<local>/x|"];
             23 [label="Type operator: (R|<local>/x| is R|kotlin/String|)"];
-            24 [label="Variable declaration: lval b: R|kotlin/Boolean|"];
+            24 [label="Variable declaration: lkonst b: R|kotlin/Boolean|"];
             subgraph cluster_7 {
                 color=blue
                 25 [label="Enter when"];

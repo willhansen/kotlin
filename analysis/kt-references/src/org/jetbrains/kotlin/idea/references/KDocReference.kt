@@ -19,5 +19,5 @@ abstract class KDocReference(element: KDocName) : KtMultiReference<KDocName>(ele
 
     override fun getCanonicalText(): String = element.getNameText()
 
-    override val resolvesByNames: Collection<Name> get() = listOf(Name.identifier(element.getNameText()))
+    override konst resolvesByNames: Collection<Name> get() = listOf(Name.identifier(element.getNameText()))
 }

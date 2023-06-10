@@ -5,6 +5,6 @@ fun main(): Unit {
 
         08<!>;""")
 
-    val code = "var a = 08;"
+    konst code = "var a = 08;"
     js(<!JSCODE_WARNING!>code<!>)
 }

@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.resolve.descriptorUtil.getImportableDescriptor
 import org.jetbrains.kotlin.types.KotlinType
 
-val DeclarationDescriptor.importableFqName: FqName?
+konst DeclarationDescriptor.importableFqName: FqName?
     get() {
         if (!canBeReferencedViaImport()) return null
         return getImportableDescriptor().fqNameSafe
@@ -32,7 +32,7 @@ fun DeclarationDescriptor.canBeReferencedViaImport(): Boolean {
     }
 
     //Both TypeAliasDescriptor and ClassDescriptor
-    val parentClassifier = containingDeclaration as? ClassifierDescriptorWithTypeParameters ?: return false
+    konst parentClassifier = containingDeclaration as? ClassifierDescriptorWithTypeParameters ?: return false
     if (!parentClassifier.canBeReferencedViaImport()) return false
 
     return when (this) {
@@ -45,13 +45,13 @@ fun DeclarationDescriptor.canBeReferencedViaImport(): Boolean {
 fun DeclarationDescriptor.canBeAddedToImport(): Boolean = this !is PackageViewDescriptor && canBeReferencedViaImport()
 
 fun KotlinType.canBeReferencedViaImport(): Boolean {
-    val descriptor = constructor.declarationDescriptor
+    konst descriptor = constructor.declarationDescriptor
     return descriptor != null && descriptor.canBeReferencedViaImport()
 }
 
 // for cases when class qualifier refers companion object treats it like reference to class itself
 fun KtReferenceExpression.getImportableTargets(bindingContext: BindingContext): Collection<DeclarationDescriptor> {
-    val targets = bindingContext[BindingContext.SHORT_REFERENCE_TO_COMPANION_OBJECT, this]?.let { listOf(it) }
+    konst targets = bindingContext[BindingContext.SHORT_REFERENCE_TO_COMPANION_OBJECT, this]?.let { listOf(it) }
         ?: getReferenceTargets(bindingContext)
     return targets.map { it.getImportableDescriptor() }.toSet()
 }

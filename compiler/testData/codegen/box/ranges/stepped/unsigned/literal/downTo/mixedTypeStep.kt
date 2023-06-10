@@ -3,7 +3,7 @@
 import kotlin.test.*
 
 fun box(): String {
-    val uintList = mutableListOf<UInt>()
+    konst uintList = mutableListOf<UInt>()
     for (i in 7.toUByte() downTo 1.toUByte() step 2) {
         uintList += i
     }

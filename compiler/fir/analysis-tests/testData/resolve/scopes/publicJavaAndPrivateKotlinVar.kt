@@ -20,6 +20,6 @@ public class D extends C {}
 
 // FILE: main.kt
 fun test(d: D) {
-    val name = d.name
+    konst name = d.name
 }
 

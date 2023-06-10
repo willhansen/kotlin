@@ -1,8 +1,8 @@
 class A {/* NonReanalyzableClassDeclarationStructureElement */
-    val a = run {
+    konst a = run {
         class X()
 
-        val y = 10
+        konst y = 10
     }/* NonReanalyzableNonClassDeclarationStructureElement */
 }
 

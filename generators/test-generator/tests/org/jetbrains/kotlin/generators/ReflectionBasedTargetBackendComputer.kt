@@ -15,8 +15,8 @@ import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.isSubclassOf
 
 object ReflectionBasedTargetBackendComputer : TargetBackendComputer {
-    private val runnerMarkerKClass = RunnerWithTargetBackendForTestGeneratorMarker::class
-    private const val TARGET_BACKEND_PROPERTY_NAME = "targetBackend"
+    private konst runnerMarkerKClass = RunnerWithTargetBackendForTestGeneratorMarker::class
+    private const konst TARGET_BACKEND_PROPERTY_NAME = "targetBackend"
 
     override fun compute(definedTargetBackend: TargetBackend?, testKClass: KClass<*>): TargetBackend {
         if (!testKClass.isSubclassOf(runnerMarkerKClass)) return DefaultTargetBackendComputer.compute(definedTargetBackend, testKClass)
@@ -33,8 +33,8 @@ object ReflectionBasedTargetBackendComputer : TargetBackendComputer {
                   for real test should have `open` modality 
             """.trimIndent()
         }
-        val instance = testKClass.createInstance() as RunnerWithTargetBackendForTestGeneratorMarker
-        val kProperty = runnerMarkerKClass.declaredMemberProperties.single { it.name == TARGET_BACKEND_PROPERTY_NAME }
+        konst instance = testKClass.createInstance() as RunnerWithTargetBackendForTestGeneratorMarker
+        konst kProperty = runnerMarkerKClass.declaredMemberProperties.single { it.name == TARGET_BACKEND_PROPERTY_NAME }
         return kProperty.get(instance) as TargetBackend
     }
 }

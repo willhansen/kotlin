@@ -40,10 +40,10 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
         fun runWithKtorService(action: (Int) -> Unit) {
             var server: ApplicationEngine? = null
             try {
-                val port = getEmptyPort().localPort
+                konst port = getEmptyPort().localPort
                 server = embeddedServer(Netty, host = "localhost", port = port)
                 {
-                    val requests = ArrayBlockingQueue<String>(10)
+                    konst requests = ArrayBlockingQueue<String>(10)
 
                     routing {
                         get("/isReady") {
@@ -53,11 +53,11 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
                             call.respond(HttpStatusCode.BadRequest, "Some reason")
                         }
                         post("/put") {
-                            val body = call.receive<String>()
+                            konst body = call.receive<String>()
                             requests.add(body)
                             call.respond(HttpStatusCode.OK)
                         }
-                        get("/validate") {
+                        get("/konstidate") {
                             try {
                                 call.respond(status = HttpStatusCode.OK, requests.poll(2, TimeUnit.SECONDS))
                             } catch (e: Exception) {
@@ -75,8 +75,8 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
         }
 
         private fun getEmptyPort(): ServerSocket {
-            val startPort = 8080
-            val endPort = 8180
+            konst startPort = 8080
+            konst endPort = 8180
             for (port in startPort..endPort) {
                 try {
                     return ServerSocket().apply {
@@ -94,8 +94,8 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
 
         private fun awaitInitialization(port: Int, maxAttempts: Int = 20) {
             var attempts = 0
-            val waitingTime = 500L
-            while (initCall(port) != HttpStatusCode.OK.value) {
+            konst waitingTime = 500L
+            while (initCall(port) != HttpStatusCode.OK.konstue) {
                 attempts += 1
                 if (attempts == maxAttempts) {
                     fail("Failed to await server initialization for ${waitingTime * attempts}ms")
@@ -106,7 +106,7 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
 
         private fun initCall(port: Int): Int {
             return try {
-                val connection = URL("http://localhost:$port/isReady").openConnection() as HttpURLConnection
+                konst connection = URL("http://localhost:$port/isReady").openConnection() as HttpURLConnection
                 connection.requestMethod = "GET"
                 connection.connect()
                 connection.responseCode
@@ -115,35 +115,35 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
             }
         }
 
-        private fun validateCall(port: Int, validate: (JsonObject) -> Unit) {
+        private fun konstidateCall(port: Int, konstidate: (JsonObject) -> Unit) {
             try {
-                val connection = URL("http://localhost:$port/validate").openConnection() as HttpURLConnection
+                konst connection = URL("http://localhost:$port/konstidate").openConnection() as HttpURLConnection
                 connection.requestMethod = "GET"
                 connection.connect()
-                assertEquals(HttpStatusCode.OK.value, connection.responseCode)
-                val body = connection.inputStream.bufferedReader().readText()
-                val jsonObject = JsonParser.parseString(body).asJsonObject
-                validate(jsonObject)
+                assertEquals(HttpStatusCode.OK.konstue, connection.responseCode)
+                konst body = connection.inputStream.bufferedReader().readText()
+                konst jsonObject = JsonParser.parseString(body).asJsonObject
+                konstidate(jsonObject)
             } catch (e: IOException) {
                 fail("Unable to open connection: ${e.message}", e)
             }
         }
 
-        fun validateTaskData(port: Int, validate: (CompileStatisticsData) -> Unit) {
-            validateCall(port) { jsonObject ->
-                val type = jsonObject["type"].asString
-                assertEquals(BuildDataType.TASK_DATA, BuildDataType.valueOf(type))
-                val taskData = Gson().fromJson(jsonObject, CompileStatisticsData::class.java)
-                validate(taskData)
+        fun konstidateTaskData(port: Int, konstidate: (CompileStatisticsData) -> Unit) {
+            konstidateCall(port) { jsonObject ->
+                konst type = jsonObject["type"].asString
+                assertEquals(BuildDataType.TASK_DATA, BuildDataType.konstueOf(type))
+                konst taskData = Gson().fromJson(jsonObject, CompileStatisticsData::class.java)
+                konstidate(taskData)
             }
         }
 
-        fun validateBuildData(port: Int, validate: (BuildFinishStatisticsData) -> Unit) {
-            validateCall(port) { jsonObject ->
-                val type = jsonObject["type"].asString
-                assertEquals(BuildDataType.BUILD_DATA, BuildDataType.valueOf(type))
-                val buildData = Gson().fromJson(jsonObject, BuildFinishStatisticsData::class.java)
-                validate(buildData)
+        fun konstidateBuildData(port: Int, konstidate: (BuildFinishStatisticsData) -> Unit) {
+            konstidateCall(port) { jsonObject ->
+                konst type = jsonObject["type"].asString
+                assertEquals(BuildDataType.BUILD_DATA, BuildDataType.konstueOf(type))
+                konst buildData = Gson().fromJson(jsonObject, BuildFinishStatisticsData::class.java)
+                konstidate(buildData)
             }
         }
 
@@ -175,15 +175,15 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
                     assertOutputDoesNotContain("Failed to send statistic to")
                 }
             }
-            validateTaskData(port) { taskData ->
+            konstidateTaskData(port) { taskData ->
                 assertEquals(":lib:compileKotlin", taskData.taskName)
                 compileTaskAssertions(taskData)
             }
-            validateTaskData(port) { taskData ->
+            konstidateTaskData(port) { taskData ->
                 assertEquals(":app:compileKotlin", taskData.taskName)
                 compileTaskAssertions(taskData)
             }
-            validateBuildData(port) { buildData ->
+            konstidateBuildData(port) { buildData ->
                 assertContains(buildData.startParameters.tasks, "assemble")
             }
         }
@@ -233,7 +233,7 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
     fun testConfigurationCache(gradleVersion: GradleVersion) {
         runWithKtorService { port ->
 
-            val buildOptions = defaultBuildOptions.copy(configurationCache = true)
+            konst buildOptions = defaultBuildOptions.copy(configurationCache = true)
             project("incrementalMultiproject", gradleVersion) {
                 setProjectForTest(port)
                 build("assemble", buildOptions = buildOptions) {
@@ -244,7 +244,7 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
                     assertOutputDoesNotContain("Failed to send statistic to")
                 }
             }
-            validateTaskData(port) { taskData ->
+            konstidateTaskData(port) { taskData ->
                 assertEquals(":lib:compileKotlin", taskData.taskName)
                 assertContentEquals(
                     listOf(
@@ -259,7 +259,7 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
                                            "Unexpected kotlinVersion: ${taskData.kotlinVersion} instead of ${defaultBuildOptions.kotlinVersion}"
                 )
             }
-            validateTaskData(port) { taskData ->
+            konstidateTaskData(port) { taskData ->
                 assertEquals(":app:compileKotlin", taskData.taskName)
                 assertContentEquals(listOf(StatTag.ARTIFACT_TRANSFORM, StatTag.NON_INCREMENTAL, StatTag.CONFIGURATION_CACHE, StatTag.KOTLIN_1), taskData.tags.sorted())
                 assertEquals(
@@ -267,15 +267,15 @@ class BuildStatisticsWithKtorIT : KGPBaseTest() {
                     "Unexpected kotlinVersion: ${taskData.kotlinVersion} instead of ${defaultBuildOptions.kotlinVersion}"
                 )
             }
-            validateBuildData(port) { buildData ->
+            konstidateBuildData(port) { buildData ->
                 assertContains(buildData.startParameters.tasks, "assemble")
             }
             //second build
-            validateTaskData(port) { taskData ->
+            konstidateTaskData(port) { taskData ->
                 assertEquals(":lib:compileKotlin", taskData.taskName)
                 assertContentEquals(listOf(StatTag.ARTIFACT_TRANSFORM, StatTag.INCREMENTAL, StatTag.CONFIGURATION_CACHE, StatTag.KOTLIN_1), taskData.tags.sorted())
             }
-            validateTaskData(port) { taskData ->
+            konstidateTaskData(port) { taskData ->
                 assertEquals(":app:compileKotlin", taskData.taskName)
                 assertContentEquals(listOf(StatTag.ARTIFACT_TRANSFORM, StatTag.INCREMENTAL, StatTag.CONFIGURATION_CACHE, StatTag.KOTLIN_1), taskData.tags.sorted())
             }

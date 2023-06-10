@@ -1,13 +1,13 @@
 // EXPECTED_REACHABLE_NODES: 1288
 package foo
 
-class A(val f: (B.() -> Int)?)
+class A(konst f: (B.() -> Int)?)
 
-class B(val x: Int)
+class B(konst x: Int)
 
 fun test(g: (B.() -> Int)?): Int? {
-    val a = A(g)
-    val b = B(2)
+    konst a = A(g)
+    konst b = B(2)
     return a.f?.invoke(b)
 }
 

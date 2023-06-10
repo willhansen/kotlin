@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.fir.declarations.FirRegularClass
  * [LLFirResolveTarget] representing a class with all callable members (functions and properties).
  */
 class LLFirClassWithAllCallablesResolveTarget(
-    override val firFile: FirFile,
-    override val path: List<FirRegularClass>,
-    val target: FirRegularClass,
+    override konst firFile: FirFile,
+    override konst path: List<FirRegularClass>,
+    konst target: FirRegularClass,
 ) : LLFirResolveTarget() {
     override fun forEachTarget(action: (FirElementWithResolveState) -> Unit) {
         action(target)

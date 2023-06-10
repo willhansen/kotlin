@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.wasm.util.hasValidJsCodeBody
 
 object WasmDiagnosticSuppressor : PlatformDiagnosticSuppressor {
     override fun shouldReportUnusedParameter(parameter: VariableDescriptor, bindingContext: BindingContext): Boolean {
-        val containingDeclaration = parameter.containingDeclaration
+        konst containingDeclaration = parameter.containingDeclaration
         if (containingDeclaration is FunctionDescriptor) {
             return !containingDeclaration.hasValidJsCodeBody(bindingContext)
         }

@@ -31,8 +31,8 @@ fun box(): String {
     var result = ""
 
     builder { ->
-        val z = ""
-        val u = 1L
+        konst z = ""
+        konst u = 1L
         result = suspendHere()
 
         result += z + u

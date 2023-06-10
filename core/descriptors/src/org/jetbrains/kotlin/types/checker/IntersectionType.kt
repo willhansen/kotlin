@@ -35,7 +35,7 @@ fun intersectTypes(types: List<UnwrappedType>): UnwrappedType {
     }
     var hasFlexibleTypes = false
     var hasErrorType = false
-    val lowerBounds = types.map {
+    konst lowerBounds = types.map {
         hasErrorType = hasErrorType || it.isError
         when (it) {
             is SimpleType -> it
@@ -55,7 +55,7 @@ fun intersectTypes(types: List<UnwrappedType>): UnwrappedType {
         return TypeIntersector.intersectTypes(lowerBounds)
     }
 
-    val upperBounds = types.map { it.upperIfFlexible() }
+    konst upperBounds = types.map { it.upperIfFlexible() }
     /**
      * We should save this rules:
      *  - if for each type from types type is subtype of A, then intersectionType should be subtype of A
@@ -74,7 +74,7 @@ object TypeIntersector {
             "Size should be at least 2, but it is ${types.size}"
         }
 
-        val inputTypes = ArrayList<SimpleType>()
+        konst inputTypes = ArrayList<SimpleType>()
         for (type in types) {
             if (type.constructor is IntersectionTypeConstructor) {
                 inputTypes.addAll(type.constructor.supertypes.map {
@@ -84,7 +84,7 @@ object TypeIntersector {
                 inputTypes.add(type)
             }
         }
-        val resultNullability = inputTypes.fold(ResultNullability.START, ResultNullability::combine)
+        konst resultNullability = inputTypes.fold(ResultNullability.START, ResultNullability::combine)
         /**
          * resultNullability. Value description:
          * ACCEPT_NULL means that all types marked nullable
@@ -95,13 +95,13 @@ object TypeIntersector {
          * UNKNOWN means, that we do not know, i.e. more precisely, all singleClassifier types marked nullable if any,
          * and other types is captured types or type parameters without not-null upper bound. Example: `String? & T` such types we should leave as is.
          */
-        val correctNullability = inputTypes.mapTo(LinkedHashSet()) {
+        konst correctNullability = inputTypes.mapTo(LinkedHashSet()) {
             if (resultNullability == ResultNullability.NOT_NULL) {
                 (if (it is NewCapturedType) it.withNotNullProjection() else it).makeSimpleTypeDefinitelyNotNullOrNotNull()
             } else it
         }
 
-        val resultAttributes = types.map { it.attributes }.reduce { x, y -> x.intersect(y) }
+        konst resultAttributes = types.map { it.attributes }.reduce { x, y -> x.intersect(y) }
         return intersectTypesWithoutIntersectionType(correctNullability).replaceAttributes(resultAttributes)
     }
 
@@ -111,14 +111,14 @@ object TypeIntersector {
 
         // Any and Nothing should leave
         // Note that duplicates should be dropped because we have Set here.
-        val errorMessage = { "This collections cannot be empty! input types: ${inputTypes.joinToString()}" }
+        konst errorMessage = { "This collections cannot be empty! input types: ${inputTypes.joinToString()}" }
 
-        val filteredEqualTypes = filterTypes(inputTypes, ::isStrictSupertype)
+        konst filteredEqualTypes = filterTypes(inputTypes, ::isStrictSupertype)
         assert(filteredEqualTypes.isNotEmpty(), errorMessage)
 
         IntegerLiteralTypeConstructor.findIntersectionType(filteredEqualTypes)?.let { return it }
 
-        val filteredSuperAndEqualTypes = filterTypes(filteredEqualTypes, NewKotlinTypeChecker.Default::equalTypes)
+        konst filteredSuperAndEqualTypes = filterTypes(filteredEqualTypes, NewKotlinTypeChecker.Default::equalTypes)
         assert(filteredSuperAndEqualTypes.isNotEmpty(), errorMessage)
 
         if (filteredSuperAndEqualTypes.size < 2) return filteredSuperAndEqualTypes.single()
@@ -130,11 +130,11 @@ object TypeIntersector {
         inputTypes: Collection<SimpleType>,
         predicate: (lower: SimpleType, upper: SimpleType) -> Boolean
     ): Collection<SimpleType> {
-        val filteredTypes = ArrayList(inputTypes)
-        val iterator = filteredTypes.iterator()
+        konst filteredTypes = ArrayList(inputTypes)
+        konst iterator = filteredTypes.iterator()
         while (iterator.hasNext()) {
-            val upper = iterator.next()
-            val shouldFilter = filteredTypes.any { lower -> lower !== upper && predicate(lower, upper) }
+            konst upper = iterator.next()
+            konst shouldFilter = filteredTypes.any { lower -> lower !== upper && predicate(lower, upper) }
 
             if (shouldFilter) iterator.remove()
         }
@@ -170,7 +170,7 @@ object TypeIntersector {
 
         abstract fun combine(nextType: UnwrappedType): ResultNullability
 
-        protected val UnwrappedType.resultNullability: ResultNullability
+        protected konst UnwrappedType.resultNullability: ResultNullability
             get() = when {
                 isMarkedNullable -> ACCEPT_NULL
                 this is DefinitelyNotNullType && this.original is StubTypeForBuilderInference -> NOT_NULL

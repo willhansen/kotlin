@@ -26,7 +26,7 @@ fun test() {
     takeNotNull(notNull() ?: "")
     takeNotNull(nullable() ?: "")
 
-    val x: String? = null
+    konst x: String? = null
     takeNotNull(dependOn(x) ?: "")
     takeNotNull(dependOn(dependOn(x)) ?: "")
     takeNotNull(dependOn(dependOn(x as String)) <!USELESS_ELVIS!>?: ""<!>)

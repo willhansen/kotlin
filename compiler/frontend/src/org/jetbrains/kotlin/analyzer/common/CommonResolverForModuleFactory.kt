@@ -51,28 +51,28 @@ import org.jetbrains.kotlin.serialization.deserialization.MetadataPartProvider
 import org.jetbrains.kotlin.storage.StorageManager
 
 class CommonAnalysisParameters(
-    val metadataPartProviderFactory: (ModuleContent<*>) -> MetadataPartProvider,
-    val klibMetadataPackageFragmentProviderFactory: KlibMetadataPackageFragmentProviderFactory? = null,
+    konst metadataPartProviderFactory: (ModuleContent<*>) -> MetadataPartProvider,
+    konst klibMetadataPackageFragmentProviderFactory: KlibMetadataPackageFragmentProviderFactory? = null,
 ) : PlatformAnalysisParameters
 
 /**
  * A facade that is used to analyze common (platform-independent) modules in multi-platform projects.
  */
 class CommonResolverForModuleFactory(
-    private val platformParameters: CommonAnalysisParameters,
-    private val targetEnvironment: TargetEnvironment,
-    private val targetPlatform: TargetPlatform,
-    private val shouldCheckExpectActual: Boolean,
-    private val commonDependenciesContainer: CommonDependenciesContainer? = null
+    private konst platformParameters: CommonAnalysisParameters,
+    private konst targetEnvironment: TargetEnvironment,
+    private konst targetPlatform: TargetPlatform,
+    private konst shouldCheckExpectActual: Boolean,
+    private konst commonDependenciesContainer: CommonDependenciesContainer? = null
 ) : ResolverForModuleFactory() {
     private class SourceModuleInfo(
-        override val name: Name,
-        override val capabilities: Map<ModuleCapability<*>, Any?>,
-        private val dependencies: Iterable<ModuleInfo>,
-        override val expectedBy: List<ModuleInfo>,
-        override val platform: TargetPlatform,
-        private val modulesWhoseInternalsAreVisible: Collection<ModuleInfo>,
-        private val dependOnOldBuiltIns: Boolean
+        override konst name: Name,
+        override konst capabilities: Map<ModuleCapability<*>, Any?>,
+        private konst dependencies: Iterable<ModuleInfo>,
+        override konst expectedBy: List<ModuleInfo>,
+        override konst platform: TargetPlatform,
+        private konst modulesWhoseInternalsAreVisible: Collection<ModuleInfo>,
+        private konst dependOnOldBuiltIns: Boolean
     ) : ModuleInfo {
         override fun dependencies() = listOf(this, *dependencies.toList().toTypedArray())
 
@@ -81,7 +81,7 @@ class CommonResolverForModuleFactory(
         override fun dependencyOnBuiltIns(): ModuleInfo.DependencyOnBuiltIns =
             if (dependOnOldBuiltIns) ModuleInfo.DependencyOnBuiltIns.LAST else ModuleInfo.DependencyOnBuiltIns.NONE
 
-        override val analyzerServices: PlatformDependentAnalyzerServices
+        override konst analyzerServices: PlatformDependentAnalyzerServices
             get() = CommonPlatformAnalyzerServices
     }
 
@@ -95,17 +95,17 @@ class CommonResolverForModuleFactory(
         resolveOptimizingOptions: OptimizingOptions?,
         absentDescriptorHandlerClass: Class<out AbsentDescriptorHandler>?
     ): ResolverForModule {
-        val (moduleInfo, syntheticFiles, moduleContentScope) = moduleContent
-        val project = moduleContext.project
-        val declarationProviderFactory = DeclarationProviderFactoryService.createDeclarationProviderFactory(
+        konst (moduleInfo, syntheticFiles, moduleContentScope) = moduleContent
+        konst project = moduleContext.project
+        konst declarationProviderFactory = DeclarationProviderFactoryService.createDeclarationProviderFactory(
             project, moduleContext.storageManager, syntheticFiles,
             moduleContentScope,
             moduleInfo
         )
 
-        val metadataPartProvider = platformParameters.metadataPartProviderFactory(moduleContent)
-        val trace = CodeAnalyzerInitializer.getInstance(project).createTrace()
-        val container = createContainerToResolveCommonCode(
+        konst metadataPartProvider = platformParameters.metadataPartProviderFactory(moduleContent)
+        konst trace = CodeAnalyzerInitializer.getInstance(project).createTrace()
+        konst container = createContainerToResolveCommonCode(
             moduleContext,
             trace,
             declarationProviderFactory,
@@ -119,12 +119,12 @@ class CommonResolverForModuleFactory(
             absentDescriptorHandlerClass
         )
 
-        val klibMetadataPackageFragmentProvider =
+        konst klibMetadataPackageFragmentProvider =
             platformParameters.klibMetadataPackageFragmentProviderFactory?.createPackageFragmentProvider(
                 PackageFragmentProviderCreationContext(moduleInfo, moduleContext.storageManager, languageVersionSettings, moduleDescriptor)
             )
 
-        val packageFragmentProviders =
+        konst packageFragmentProviders =
             /** If this is a dependency module that [commonDependenciesContainer] knows about, get the package fragments from there */
             commonDependenciesContainer?.packageFragmentProviderForModuleInfo(moduleInfo)?.let(::listOf)
                 ?: listOfNotNull(
@@ -148,7 +148,7 @@ class CommonResolverForModuleFactory(
             dependenciesContainer: CommonDependenciesContainer? = null,
             metadataPartProviderFactory: (ModuleContent<ModuleInfo>) -> MetadataPartProvider
         ): AnalysisResult {
-            val moduleInfo = SourceModuleInfo(
+            konst moduleInfo = SourceModuleInfo(
                 moduleName,
                 capabilities,
                 dependenciesContainer?.moduleInfos?.toList().orEmpty(),
@@ -157,15 +157,15 @@ class CommonResolverForModuleFactory(
                 dependenciesContainer?.friendModuleInfos.orEmpty(),
                 dependOnBuiltIns
             )
-            val project = files.firstOrNull()?.project ?: throw AssertionError("No files to analyze")
+            konst project = files.firstOrNull()?.project ?: throw AssertionError("No files to analyze")
 
-            val multiplatformLanguageSettings = object : LanguageVersionSettings by languageVersionSettings {
+            konst multiplatformLanguageSettings = object : LanguageVersionSettings by languageVersionSettings {
                 override fun getFeatureSupport(feature: LanguageFeature): LanguageFeature.State =
                     if (feature == LanguageFeature.MultiPlatformProjects) LanguageFeature.State.ENABLED
                     else languageVersionSettings.getFeatureSupport(feature)
             }
 
-            val resolverForModuleFactory = CommonResolverForModuleFactory(
+            konst resolverForModuleFactory = CommonResolverForModuleFactory(
                 CommonAnalysisParameters(metadataPartProviderFactory),
                 targetEnvironment,
                 targetPlatform,
@@ -173,9 +173,9 @@ class CommonResolverForModuleFactory(
                 dependenciesContainer
             )
 
-            val projectContext = ProjectContext(project, "metadata serializer")
+            konst projectContext = ProjectContext(project, "metadata serializer")
 
-            val resolver = ResolverForSingleModuleProject<ModuleInfo>(
+            konst resolver = ResolverForSingleModuleProject<ModuleInfo>(
                 "sources for metadata serializer",
                 projectContext,
                 moduleInfo,
@@ -187,14 +187,14 @@ class CommonResolverForModuleFactory(
                     ?.associateWith(dependenciesContainer::moduleDescriptorForModuleInfo).orEmpty()
             )
 
-            val moduleDescriptor = resolver.descriptorForModule(moduleInfo)
+            konst moduleDescriptor = resolver.descriptorForModule(moduleInfo)
 
             dependenciesContainer?.registerDependencyForAllModules(moduleInfo, moduleDescriptor)
 
-            val container = resolver.resolverForModule(moduleInfo).componentProvider
+            konst container = resolver.resolverForModule(moduleInfo).componentProvider
 
-            val analysisHandlerExtensions = AnalysisHandlerExtension.getInstances(project)
-            val trace = container.get<BindingTrace>()
+            konst analysisHandlerExtensions = AnalysisHandlerExtension.getInstances(project)
+            konst trace = container.get<BindingTrace>()
 
             // Mimic the behavior in the jvm frontend. The extensions have 2 chances to override the normal analysis:
             // * If any of the extensions returns a non-null result, it. Otherwise do the normal analysis.
@@ -216,7 +216,7 @@ class CommonResolverForModuleFactory(
 }
 
 interface CommonDependenciesContainer {
-    val moduleInfos: List<ModuleInfo>
+    konst moduleInfos: List<ModuleInfo>
 
     fun moduleDescriptorForModuleInfo(moduleInfo: ModuleInfo): ModuleDescriptor
 
@@ -226,8 +226,8 @@ interface CommonDependenciesContainer {
     )
 
     fun packageFragmentProviderForModuleInfo(moduleInfo: ModuleInfo): PackageFragmentProvider?
-    val friendModuleInfos: List<ModuleInfo>
-    val refinesModuleInfos: List<ModuleInfo>
+    konst friendModuleInfos: List<ModuleInfo>
+    konst refinesModuleInfos: List<ModuleInfo>
 }
 
 fun interface KlibMetadataPackageFragmentProviderFactory {
@@ -237,10 +237,10 @@ fun interface KlibMetadataPackageFragmentProviderFactory {
 }
 
 class PackageFragmentProviderCreationContext(
-    val moduleInfo: ModuleInfo,
-    val storageManager: StorageManager,
-    val languageVersionSettings: LanguageVersionSettings,
-    val moduleDescriptor: ModuleDescriptor,
+    konst moduleInfo: ModuleInfo,
+    konst storageManager: StorageManager,
+    konst languageVersionSettings: LanguageVersionSettings,
+    konst moduleDescriptor: ModuleDescriptor,
 )
 
 private fun createContainerToResolveCommonCode(
@@ -275,7 +275,7 @@ private fun createContainerToResolveCommonCode(
         configureCommonSpecificComponents()
         useInstance(metadataPartProvider)
 
-        val metadataFinderFactory = moduleContext.project.getService(
+        konst metadataFinderFactory = moduleContext.project.getService(
             MetadataFinderFactory::class.java
         )
             ?: error("No MetadataFinderFactory in project")

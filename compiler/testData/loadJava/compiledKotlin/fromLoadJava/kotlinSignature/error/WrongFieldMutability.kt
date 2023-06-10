@@ -5,5 +5,5 @@ import java.util.*
 
 public open class WrongFieldMutability {
     public var fooNotFinal : String? = { "" }()
-    public val fooFinal : String? = { "Test" }()
+    public konst fooFinal : String? = { "Test" }()
 }

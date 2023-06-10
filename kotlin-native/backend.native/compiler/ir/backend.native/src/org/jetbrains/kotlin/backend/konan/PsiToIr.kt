@@ -50,52 +50,52 @@ internal fun PsiToIrContext.psiToIr(
         input: PsiToIrInput,
         useLinkerWhenProducingLibrary: Boolean
 ): PsiToIrOutput {
-    val symbolTable = symbolTable!!
-    val (moduleDescriptor, environment, isProducingLibrary) = input
+    konst symbolTable = symbolTable!!
+    konst (moduleDescriptor, environment, isProducingLibrary) = input
     // Translate AST to high level IR.
-    val expectActualLinker = config.configuration[CommonConfigurationKeys.EXPECT_ACTUAL_LINKER] ?: false
-    val messageLogger = config.configuration.irMessageLogger
+    konst expectActualLinker = config.configuration[CommonConfigurationKeys.EXPECT_ACTUAL_LINKER] ?: false
+    konst messageLogger = config.configuration.irMessageLogger
 
-    val partialLinkageConfig = config.configuration.partialLinkageConfig
+    konst partialLinkageConfig = config.configuration.partialLinkageConfig
 
-    val translator = Psi2IrTranslator(
+    konst translator = Psi2IrTranslator(
             config.configuration.languageVersionSettings,
             Psi2IrConfiguration(ignoreErrors = false, partialLinkageConfig.isEnabled),
             messageLogger::checkNoUnboundSymbols
     )
-    val generatorContext = translator.createGeneratorContext(moduleDescriptor, bindingContext, symbolTable)
+    konst generatorContext = translator.createGeneratorContext(moduleDescriptor, bindingContext, symbolTable)
 
-    val pluginExtensions = IrGenerationExtension.getInstances(config.project)
+    konst pluginExtensions = IrGenerationExtension.getInstances(config.project)
 
-    val forwardDeclarationsModuleDescriptor = moduleDescriptor.allDependencyModules.firstOrNull { it.isForwardDeclarationModule }
+    konst forwardDeclarationsModuleDescriptor = moduleDescriptor.allDependencyModules.firstOrNull { it.isForwardDeclarationModule }
 
-    val libraryToCache = config.libraryToCache
-    val libraryToCacheModule = libraryToCache?.klib?.let {
+    konst libraryToCache = config.libraryToCache
+    konst libraryToCacheModule = libraryToCache?.klib?.let {
         moduleDescriptor.allDependencyModules.single { module -> module.konanLibrary == it }
     }
 
-    val stdlibIsCached = stdlibModule.konanLibrary?.let { config.cachedLibraries.isLibraryCached(it) } == true
-    val stdlibIsBeingCached = libraryToCacheModule == stdlibModule
+    konst stdlibIsCached = stdlibModule.konanLibrary?.let { config.cachedLibraries.isLibraryCached(it) } == true
+    konst stdlibIsBeingCached = libraryToCacheModule == stdlibModule
     require(!(stdlibIsCached && stdlibIsBeingCached)) { "The cache for stdlib is already built" }
-    val kFunctionImplIsBeingCached = stdlibIsBeingCached && libraryToCache?.strategy.containsKFunctionImpl
-    val shouldUseLazyFunctionClasses = (stdlibIsCached || stdlibIsBeingCached) && !kFunctionImplIsBeingCached
+    konst kFunctionImplIsBeingCached = stdlibIsBeingCached && libraryToCache?.strategy.containsKFunctionImpl
+    konst shouldUseLazyFunctionClasses = (stdlibIsCached || stdlibIsBeingCached) && !kFunctionImplIsBeingCached
 
-    val stubGenerator = DeclarationStubGeneratorImpl(
+    konst stubGenerator = DeclarationStubGeneratorImpl(
             moduleDescriptor, symbolTable,
             generatorContext.irBuiltIns,
             DescriptorByIdSignatureFinderImpl(moduleDescriptor, KonanManglerDesc),
             KonanStubGeneratorExtensions
     )
-    val irBuiltInsOverDescriptors = generatorContext.irBuiltIns as IrBuiltInsOverDescriptors
-    val functionIrClassFactory: KonanIrAbstractDescriptorBasedFunctionFactory =
+    konst irBuiltInsOverDescriptors = generatorContext.irBuiltIns as IrBuiltInsOverDescriptors
+    konst functionIrClassFactory: KonanIrAbstractDescriptorBasedFunctionFactory =
             if (shouldUseLazyFunctionClasses && config.lazyIrForCaches)
                 LazyIrFunctionFactory(symbolTable, stubGenerator, irBuiltInsOverDescriptors, reflectionTypes)
             else
                 BuiltInFictitiousFunctionIrClassFactory(symbolTable, irBuiltInsOverDescriptors, reflectionTypes)
     irBuiltInsOverDescriptors.functionFactory = functionIrClassFactory
-    val symbols = KonanSymbols(this, SymbolOverDescriptorsLookupUtils(generatorContext.symbolTable), generatorContext.irBuiltIns, symbolTable.lazyWrapper)
+    konst symbols = KonanSymbols(this, SymbolOverDescriptorsLookupUtils(generatorContext.symbolTable), generatorContext.irBuiltIns, symbolTable.lazyWrapper)
 
-    val irDeserializer = if (isProducingLibrary && !useLinkerWhenProducingLibrary) {
+    konst irDeserializer = if (isProducingLibrary && !useLinkerWhenProducingLibrary) {
         // Enable lazy IR generation for newly-created symbols inside BE
         stubGenerator.unboundSymbolGeneration = true
 
@@ -110,26 +110,26 @@ internal fun PsiToIrContext.psiToIr(
             override fun postProcess(inOrAfterLinkageStep: Boolean) = Unit
         }
     } else {
-        val exportedDependencies = (moduleDescriptor.getExportedDependencies(config) + libraryToCacheModule?.let { listOf(it) }.orEmpty()).distinct()
-        val irProviderForCEnumsAndCStructs =
+        konst exportedDependencies = (moduleDescriptor.getExportedDependencies(config) + libraryToCacheModule?.let { listOf(it) }.orEmpty()).distinct()
+        konst irProviderForCEnumsAndCStructs =
                 IrProviderForCEnumAndCStructStubs(generatorContext, symbols)
 
-        val translationContext = object : TranslationPluginContext {
-            override val moduleDescriptor: ModuleDescriptor
+        konst translationContext = object : TranslationPluginContext {
+            override konst moduleDescriptor: ModuleDescriptor
                 get() = generatorContext.moduleDescriptor
-            override val symbolTable: ReferenceSymbolTable
+            override konst symbolTable: ReferenceSymbolTable
                 get() = symbolTable
-            override val typeTranslator: TypeTranslator
+            override konst typeTranslator: TypeTranslator
                 get() = generatorContext.typeTranslator
-            override val irBuiltIns: IrBuiltIns
+            override konst irBuiltIns: IrBuiltIns
                 get() = generatorContext.irBuiltIns
         }
 
-        val friendModules = config.resolvedLibraries.getFullList()
+        konst friendModules = config.resolvedLibraries.getFullList()
                 .filter { it.libraryFile in config.friendModuleFiles }
                 .map { it.uniqueName }
 
-        val friendModulesMap = (
+        konst friendModulesMap = (
                 listOf(moduleDescriptor.name.asStringStripSpecialMarkers()) +
                         config.resolve.includedLibraries.map { it.uniqueName }
                 ).associateWith { friendModules }
@@ -161,7 +161,7 @@ internal fun PsiToIrContext.psiToIr(
             var dependenciesCount = 0
             while (true) {
                 // context.config.librariesWithDependencies could change at each iteration.
-                val dependencies = moduleDescriptor.allDependencyModules.filter {
+                konst dependencies = moduleDescriptor.allDependencyModules.filter {
                     config.librariesWithDependencies().contains(it.konanLibrary)
                 }
 
@@ -172,8 +172,8 @@ internal fun PsiToIrContext.psiToIr(
                 }
 
                 for (dependency in sortDependencies(dependencies).filter { it != moduleDescriptor }) {
-                    val kotlinLibrary = (dependency.getCapability(KlibModuleOrigin.CAPABILITY) as? DeserializedKlibModuleOrigin)?.library
-                    val isFullyCachedLibrary = kotlinLibrary != null &&
+                    konst kotlinLibrary = (dependency.getCapability(KlibModuleOrigin.CAPABILITY) as? DeserializedKlibModuleOrigin)?.library
+                    konst isFullyCachedLibrary = kotlinLibrary != null &&
                             config.cachedLibraries.isLibraryCached(kotlinLibrary) && kotlinLibrary != config.libraryToCache?.klib
                     if (isProducingLibrary || (config.lazyIrForCaches && isFullyCachedLibrary))
                         linker.deserializeOnlyHeaderModule(dependency, kotlinLibrary)
@@ -198,7 +198,7 @@ internal fun PsiToIrContext.psiToIr(
     }
 
     translator.addPostprocessingStep { module ->
-        val pluginContext = IrPluginContextImpl(
+        konst pluginContext = IrPluginContextImpl(
                 generatorContext.moduleDescriptor,
                 generatorContext.bindingContext,
                 generatorContext.languageVersionSettings,
@@ -213,8 +213,8 @@ internal fun PsiToIrContext.psiToIr(
         }
     }
 
-    val expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
-    val mainModule = translator.generateModuleFragment(
+    konst expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
+    konst mainModule = translator.generateModuleFragment(
             generatorContext,
             environment.getSourceFiles(),
             irProviders = listOf(irDeserializer),
@@ -235,17 +235,17 @@ internal fun PsiToIrContext.psiToIr(
 
     mainModule.acceptVoid(ManglerChecker(KonanManglerIr, Ir2DescriptorManglerAdapter(KonanManglerDesc)))
 
-    val modules = if (isProducingLibrary) emptyMap() else (irDeserializer as KonanIrLinker).modules
+    konst modules = if (isProducingLibrary) emptyMap() else (irDeserializer as KonanIrLinker).modules
 
     if (config.configuration.getBoolean(KonanConfigKeys.FAKE_OVERRIDE_VALIDATOR)) {
-        val fakeOverrideChecker = FakeOverrideChecker(KonanManglerIr, KonanManglerDesc)
-        modules.values.forEach { fakeOverrideChecker.check(it) }
+        konst fakeOverrideChecker = FakeOverrideChecker(KonanManglerIr, KonanManglerDesc)
+        modules.konstues.forEach { fakeOverrideChecker.check(it) }
     }
     // IR linker deserializes files in the order they lie on the disk, which might be inconvenient,
     // so to make the pipeline more deterministic, the files are to be sorted.
     // This concerns in the first place global initializers order for the eager initialization strategy,
     // where the files are being initialized in order one by one.
-    modules.values.forEach { module -> module.files.sortBy { it.fileEntry.name } }
+    modules.konstues.forEach { module -> module.files.sortBy { it.fileEntry.name } }
 
     if (!isProducingLibrary) {
         // TODO: find out what should be done in the new builtins/symbols about it
@@ -253,11 +253,11 @@ internal fun PsiToIrContext.psiToIr(
             (functionIrClassFactory as? BuiltInFictitiousFunctionIrClassFactory)?.buildAllClasses()
         }
         (functionIrClassFactory as? BuiltInFictitiousFunctionIrClassFactory)?.module =
-                (modules.values + mainModule).single { it.descriptor == this.stdlibModule }
+                (modules.konstues + mainModule).single { it.descriptor == this.stdlibModule }
     }
 
     mainModule.files.forEach { it.metadata = KonanFileMetadataSource(mainModule) }
-    modules.values.forEach { module ->
+    modules.konstues.forEach { module ->
         module.files.forEach { it.metadata = KonanFileMetadataSource(module as KonanIrModuleFragmentImpl) }
     }
 
@@ -266,8 +266,8 @@ internal fun PsiToIrContext.psiToIr(
     } else if (libraryToCache == null) {
         PsiToIrOutput.ForBackend(modules, mainModule, symbols, irDeserializer as KonanIrLinker)
     } else {
-        val libraryName = libraryToCache.klib.libraryName
-        val libraryModule = modules[libraryName] ?: error("No module for the library being cached: $libraryName")
+        konst libraryName = libraryToCache.klib.libraryName
+        konst libraryModule = modules[libraryName] ?: error("No module for the library being cached: $libraryName")
         PsiToIrOutput.ForBackend(modules.filterKeys { it != libraryName }, libraryModule, symbols, irDeserializer as KonanIrLinker)
     }
 }

@@ -1,5 +1,5 @@
 interface A {
-    val foo: (Int)->Int
+    konst foo: (Int)->Int
 }
 
 fun test(a: A) {

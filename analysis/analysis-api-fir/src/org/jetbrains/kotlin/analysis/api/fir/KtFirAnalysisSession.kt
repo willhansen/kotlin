@@ -42,91 +42,91 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 @Suppress("AnalysisApiMissingLifetimeCheck")
 internal class KtFirAnalysisSession
 private constructor(
-    val project: Project,
-    val firResolveSession: LLFirResolveSession,
+    konst project: Project,
+    konst firResolveSession: LLFirResolveSession,
     token: KtLifetimeToken,
-    private val mode: AnalysisSessionMode,
+    private konst mode: AnalysisSessionMode,
 ) : KtAnalysisSession(token) {
 
-    internal val firSymbolBuilder: KtSymbolByFirBuilder = KtSymbolByFirBuilder(project, this, token)
+    internal konst firSymbolBuilder: KtSymbolByFirBuilder = KtSymbolByFirBuilder(project, this, token)
 
     @Suppress("AnalysisApiMissingLifetimeCheck")
-    override val useSiteModule: KtModule get() = firResolveSession.useSiteKtModule
+    override konst useSiteModule: KtModule get() = firResolveSession.useSiteKtModule
 
     private enum class AnalysisSessionMode {
         REGULAR,
         DEPENDENT_COPY
     }
 
-    override val smartCastProviderImpl = KtFirSmartcastProvider(this, token)
+    override konst smartCastProviderImpl = KtFirSmartcastProvider(this, token)
 
-    override val expressionTypeProviderImpl = KtFirExpressionTypeProvider(this, token)
+    override konst expressionTypeProviderImpl = KtFirExpressionTypeProvider(this, token)
 
-    override val diagnosticProviderImpl = KtFirDiagnosticProvider(this, token)
+    override konst diagnosticProviderImpl = KtFirDiagnosticProvider(this, token)
 
-    override val containingDeclarationProviderImpl = KtFirSymbolContainingDeclarationProvider(this, token)
+    override konst containingDeclarationProviderImpl = KtFirSymbolContainingDeclarationProvider(this, token)
 
-    override val callResolverImpl = KtFirCallResolver(this, token)
+    override konst callResolverImpl = KtFirCallResolver(this, token)
 
-    override val samResolverImpl = KtFirSamResolver(this, token)
+    override konst samResolverImpl = KtFirSamResolver(this, token)
 
-    override val scopeProviderImpl = KtFirScopeProvider(this, firSymbolBuilder, firResolveSession)
+    override konst scopeProviderImpl = KtFirScopeProvider(this, firSymbolBuilder, firResolveSession)
 
-    override val symbolProviderImpl =
+    override konst symbolProviderImpl =
         KtFirSymbolProvider(this, firResolveSession.useSiteFirSession.symbolProvider)
 
-    override val completionCandidateCheckerImpl = KtFirCompletionCandidateChecker(this, token)
+    override konst completionCandidateCheckerImpl = KtFirCompletionCandidateChecker(this, token)
 
-    override val symbolDeclarationOverridesProviderImpl =
+    override konst symbolDeclarationOverridesProviderImpl =
         KtFirSymbolDeclarationOverridesProvider(this, token)
 
-    override val referenceShortenerImpl = KtFirReferenceShortener(this, token, firResolveSession)
+    override konst referenceShortenerImpl = KtFirReferenceShortener(this, token, firResolveSession)
 
-    override val importOptimizerImpl: KtImportOptimizer = KtFirImportOptimizer(token, firResolveSession)
+    override konst importOptimizerImpl: KtImportOptimizer = KtFirImportOptimizer(token, firResolveSession)
 
-    override val symbolDeclarationRendererProviderImpl: KtSymbolDeclarationRendererProvider = KtFirRendererProvider(this, token)
+    override konst symbolDeclarationRendererProviderImpl: KtSymbolDeclarationRendererProvider = KtFirRendererProvider(this, token)
 
-    override val expressionInfoProviderImpl = KtFirExpressionInfoProvider(this, token)
+    override konst expressionInfoProviderImpl = KtFirExpressionInfoProvider(this, token)
 
-    override val compileTimeConstantProviderImpl: KtCompileTimeConstantProvider = KtFirCompileTimeConstantProvider(this, token)
+    override konst compileTimeConstantProviderImpl: KtCompileTimeConstantProvider = KtFirCompileTimeConstantProvider(this, token)
 
-    override val overrideInfoProviderImpl = KtFirOverrideInfoProvider(this, token)
+    override konst overrideInfoProviderImpl = KtFirOverrideInfoProvider(this, token)
 
-    override val visibilityCheckerImpl: KtVisibilityChecker = KtFirVisibilityChecker(this, token)
+    override konst visibilityCheckerImpl: KtVisibilityChecker = KtFirVisibilityChecker(this, token)
 
-    override val psiTypeProviderImpl = KtFirPsiTypeProvider(this, token)
+    override konst psiTypeProviderImpl = KtFirPsiTypeProvider(this, token)
 
-    override val jvmTypeMapperImpl = KtFirJvmTypeMapper(this, token)
+    override konst jvmTypeMapperImpl = KtFirJvmTypeMapper(this, token)
 
-    override val typeProviderImpl = KtFirTypeProvider(this, token)
+    override konst typeProviderImpl = KtFirTypeProvider(this, token)
 
-    override val typeInfoProviderImpl = KtFirTypeInfoProvider(this, token)
+    override konst typeInfoProviderImpl = KtFirTypeInfoProvider(this, token)
 
-    override val subtypingComponentImpl = KtFirSubtypingComponent(this, token)
+    override konst subtypingComponentImpl = KtFirSubtypingComponent(this, token)
 
-    override val inheritorsProviderImpl: KtInheritorsProvider = KtFirInheritorsProvider(this, token)
+    override konst inheritorsProviderImpl: KtInheritorsProvider = KtFirInheritorsProvider(this, token)
 
-    override val multiplatformInfoProviderImpl: KtMultiplatformInfoProvider = KtFirMultiplatformInfoProvider(this, token)
+    override konst multiplatformInfoProviderImpl: KtMultiplatformInfoProvider = KtFirMultiplatformInfoProvider(this, token)
 
-    override val originalPsiProviderImpl: KtOriginalPsiProvider = KtFirOriginalPsiProvider(this, token)
+    override konst originalPsiProviderImpl: KtOriginalPsiProvider = KtFirOriginalPsiProvider(this, token)
 
-    override val symbolInfoProviderImpl: KtSymbolInfoProvider = KtFirSymbolInfoProvider(this, token)
+    override konst symbolInfoProviderImpl: KtSymbolInfoProvider = KtFirSymbolInfoProvider(this, token)
 
-    override val typesCreatorImpl: KtTypeCreator = KtFirTypeCreator(this, token)
+    override konst typesCreatorImpl: KtTypeCreator = KtFirTypeCreator(this, token)
 
-    override val analysisScopeProviderImpl: KtAnalysisScopeProvider
+    override konst analysisScopeProviderImpl: KtAnalysisScopeProvider
 
-    override val referenceResolveProviderImpl: KtReferenceResolveProvider = KtFirReferenceResolveProvider(this)
+    override konst referenceResolveProviderImpl: KtReferenceResolveProvider = KtFirReferenceResolveProvider(this)
 
-    override val signatureSubstitutorImpl: KtSignatureSubstitutor = KtFirSignatureSubstitutor(this)
+    override konst signatureSubstitutorImpl: KtSignatureSubstitutor = KtFirSignatureSubstitutor(this)
 
-    override val scopeSubstitutionImpl: KtScopeSubstitution = KtFirScopeSubstitution(this)
+    override konst scopeSubstitutionImpl: KtScopeSubstitution = KtFirScopeSubstitution(this)
 
-    override val substitutorFactoryImpl: KtSubstitutorFactory = KtFirSubstitutorFactory(this)
+    override konst substitutorFactoryImpl: KtSubstitutorFactory = KtFirSubstitutorFactory(this)
 
-    override val symbolProviderByJavaPsiImpl = KtFirSymbolProviderByJavaPsi(this)
+    override konst symbolProviderByJavaPsiImpl = KtFirSymbolProviderByJavaPsi(this)
 
-    override val resolveExtensionProviderImpl: KtSymbolFromResolveExtensionProvider = KtFirSymbolFromResolveExtensionProvider(this)
+    override konst resolveExtensionProviderImpl: KtSymbolFromResolveExtensionProvider = KtFirSymbolFromResolveExtensionProvider(this)
 
     @Suppress("AnalysisApiMissingLifetimeCheck")
     override fun createContextDependentCopy(originalKtFile: KtFile, elementToReanalyze: KtElement): KtAnalysisSession {
@@ -135,7 +135,7 @@ private constructor(
         }
         require(!elementToReanalyze.isPhysical) { "Depended context should be build only for non-physical elements" }
 
-        val contextFirResolveSession = LowLevelFirApiFacadeForResolveOnAir.getFirResolveSessionForDependentCopy(
+        konst contextFirResolveSession = LowLevelFirApiFacadeForResolveOnAir.getFirResolveSessionForDependentCopy(
             originalFirResolveSession = firResolveSession,
             originalKtFile = originalKtFile,
             elementToAnalyze = elementToReanalyze
@@ -149,16 +149,16 @@ private constructor(
         )
     }
 
-    internal val useSiteSession: FirSession get() = firResolveSession.useSiteFirSession
-    internal val firSymbolProvider: FirSymbolProvider get() = useSiteSession.symbolProvider
-    internal val targetPlatform: TargetPlatform get() = useSiteSession.moduleData.platform
+    internal konst useSiteSession: FirSession get() = firResolveSession.useSiteFirSession
+    internal konst firSymbolProvider: FirSymbolProvider get() = useSiteSession.symbolProvider
+    internal konst targetPlatform: TargetPlatform get() = useSiteSession.moduleData.platform
 
-    val extensionTools: List<LLFirResolveExtensionTool>
+    konst extensionTools: List<LLFirResolveExtensionTool>
 
-    val useSiteAnalysisScope: GlobalSearchScope
+    konst useSiteAnalysisScope: GlobalSearchScope
 
-    val useSiteScopeDeclarationProvider: KotlinDeclarationProvider
-    val useSitePackageProvider: KotlinPackageProvider
+    konst useSiteScopeDeclarationProvider: KotlinDeclarationProvider
+    konst useSitePackageProvider: KotlinPackageProvider
 
 
     init {
@@ -169,7 +169,7 @@ private constructor(
             }
         }
 
-        val shadowedScope = GlobalSearchScope.union(
+        konst shadowedScope = GlobalSearchScope.union(
             buildSet {
                 // Add an empty scope to the shadowed set to give GlobalSearchScope.union something
                 // to work with if there are no extension tools.
@@ -204,7 +204,7 @@ private constructor(
             firResolveSession: LLFirResolveSession,
             token: KtLifetimeToken,
         ): KtFirAnalysisSession {
-            val project = firResolveSession.project
+            konst project = firResolveSession.project
 
             return KtFirAnalysisSession(
                 project,

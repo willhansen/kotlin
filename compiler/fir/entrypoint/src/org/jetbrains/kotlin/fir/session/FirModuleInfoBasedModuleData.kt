@@ -11,27 +11,27 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 
-class FirModuleInfoBasedModuleData(val moduleInfo: ModuleInfo) : FirModuleData() {
-    override val name: Name
+class FirModuleInfoBasedModuleData(konst moduleInfo: ModuleInfo) : FirModuleData() {
+    override konst name: Name
         get() = moduleInfo.name
 
-    override val dependencies: List<FirModuleData> by lazy {
+    override konst dependencies: List<FirModuleData> by lazy {
         moduleInfo.dependencies()
             .filterNot { it == moduleInfo }
             .map { FirModuleInfoBasedModuleData(it) }
     }
 
-    override val dependsOnDependencies: List<FirModuleData> = moduleInfo.expectedBy
+    override konst dependsOnDependencies: List<FirModuleData> = moduleInfo.expectedBy
         .filterNot { it == moduleInfo }
         .map { FirModuleInfoBasedModuleData(it) }
 
-    override val friendDependencies: List<FirModuleData> = moduleInfo.modulesWhoseInternalsAreVisible()
+    override konst friendDependencies: List<FirModuleData> = moduleInfo.modulesWhoseInternalsAreVisible()
         .filterNot { it == moduleInfo }
         .map { FirModuleInfoBasedModuleData(it) }
-    override val platform: TargetPlatform
+    override konst platform: TargetPlatform
         get() = moduleInfo.platform
 
-    override val analyzerServices: PlatformDependentAnalyzerServices
+    override konst analyzerServices: PlatformDependentAnalyzerServices
         get() = moduleInfo.analyzerServices
 
     override fun equals(other: Any?): Boolean {

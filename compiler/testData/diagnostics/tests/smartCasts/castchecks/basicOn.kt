@@ -1,11 +1,11 @@
 // !LANGUAGE: +SafeCastCheckBoundSmartCasts
 
 interface SomeClass {
-    val data: Any?
+    konst data: Any?
 }
 
 interface SomeSubClass : SomeClass {
-    val foo: Any?
+    konst foo: Any?
 }
 
 fun g(a: SomeClass?) {
@@ -16,7 +16,7 @@ fun g(a: SomeClass?) {
         (a as? SomeSubClass)<!UNSAFE_CALL!>.<!>foo
         (a <!USELESS_CAST!>as SomeSubClass<!>).foo
     }
-    val b = (a as? SomeSubClass)?.foo
+    konst b = (a as? SomeSubClass)?.foo
     if (b != null) {
         // 'a' can be cast to SomeSubClass
         <!DEBUG_INFO_SMARTCAST!>a<!>.hashCode()
@@ -24,7 +24,7 @@ fun g(a: SomeClass?) {
         (a as? SomeSubClass)<!UNSAFE_CALL!>.<!>foo
         (a <!USELESS_CAST!>as SomeSubClass<!>).foo
     }
-    val c = a as? SomeSubClass
+    konst c = a as? SomeSubClass
     if (c != null) {
         // 'a' and 'c' can be cast to SomeSubClass
         <!DEBUG_INFO_SMARTCAST!>a<!>.hashCode()

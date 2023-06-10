@@ -22,14 +22,14 @@ annotation class CheckersComponentInternal
 
 @NoMutableState
 class CheckersComponent : FirSessionComponent {
-    val declarationCheckers: DeclarationCheckers get() = _declarationCheckers
-    private val _declarationCheckers = ComposedDeclarationCheckers()
+    konst declarationCheckers: DeclarationCheckers get() = _declarationCheckers
+    private konst _declarationCheckers = ComposedDeclarationCheckers()
 
-    val expressionCheckers: ExpressionCheckers get() = _expressionCheckers
-    private val _expressionCheckers = ComposedExpressionCheckers()
+    konst expressionCheckers: ExpressionCheckers get() = _expressionCheckers
+    private konst _expressionCheckers = ComposedExpressionCheckers()
 
-    val typeCheckers: TypeCheckers get() = _typeCheckers
-    private val _typeCheckers = ComposedTypeCheckers()
+    konst typeCheckers: TypeCheckers get() = _typeCheckers
+    private konst _typeCheckers = ComposedTypeCheckers()
 
     @SessionConfiguration
     @OptIn(CheckersComponentInternal::class)
@@ -57,4 +57,4 @@ class CheckersComponent : FirSessionComponent {
     }
 }
 
-val FirSession.checkersComponent: CheckersComponent by FirSession.sessionComponentAccessor()
+konst FirSession.checkersComponent: CheckersComponent by FirSession.sessionComponentAccessor()

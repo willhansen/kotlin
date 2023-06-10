@@ -11,7 +11,7 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 suspend fun callLocal(): String {
-    val local = suspend fun() = "OK"
+    konst local = suspend fun() = "OK"
     return local()
 }
 

@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider
 import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider.Companion.kotlinPropertiesProvider
 import org.jetbrains.kotlin.gradle.plugin.sources.KotlinDependencyScope
 import org.jetbrains.kotlin.gradle.plugin.sources.sourceSetDependencyConfigurationByScope
-import org.jetbrains.kotlin.gradle.plugin.whenEvaluated
+import org.jetbrains.kotlin.gradle.plugin.whenEkonstuated
 import org.jetbrains.kotlin.gradle.targets.metadata.isKotlinGranularMetadataEnabled
 import org.jetbrains.kotlin.gradle.tooling.buildKotlinToolingMetadataTask
 
@@ -43,7 +43,7 @@ internal fun configurePublishingWithMavenPublish(project: Project) = project.plu
  * The root publication that references the platform specific publications as its variants
  */
 private fun createRootPublication(project: Project, publishing: PublishingExtension) {
-    val kotlinSoftwareComponent = project.multiplatformExtension.rootSoftwareComponent
+    konst kotlinSoftwareComponent = project.multiplatformExtension.rootSoftwareComponent
 
     publishing.publications.create("kotlinMultiplatform", MavenPublication::class.java).apply {
         from(kotlinSoftwareComponent)
@@ -55,7 +55,7 @@ private fun createRootPublication(project: Project, publishing: PublishingExtens
 }
 
 private fun MavenPublication.addKotlinToolingMetadataArtifactIfNeeded(project: Project) {
-    val buildKotlinToolingMetadataTask = project.buildKotlinToolingMetadataTask ?: return
+    konst buildKotlinToolingMetadataTask = project.buildKotlinToolingMetadataTask ?: return
 
     artifact(buildKotlinToolingMetadataTask.map { it.outputFile }) { artifact ->
         artifact.classifier = "kotlin-tooling-metadata"
@@ -64,15 +64,15 @@ private fun MavenPublication.addKotlinToolingMetadataArtifactIfNeeded(project: P
 }
 
 private fun createTargetPublications(project: Project, publishing: PublishingExtension) {
-    val kotlin = project.multiplatformExtension
+    konst kotlin = project.multiplatformExtension
     // Enforce the order of creating the publications, since the metadata publication is used in the other publications:
     kotlin.targets
         .withType(InternalKotlinTarget::class.java)
         .matching { it.publishable }
         .all { kotlinTarget ->
             if (kotlinTarget is KotlinAndroidTarget)
-            // Android targets have their variants created in afterEvaluate; TODO handle this better?
-                project.whenEvaluated { kotlinTarget.createMavenPublications(publishing.publications) }
+            // Android targets have their variants created in afterEkonstuate; TODO handle this better?
+                project.whenEkonstuated { kotlinTarget.createMavenPublications(publishing.publications) }
             else
                 kotlinTarget.createMavenPublications(publishing.publications)
         }
@@ -83,16 +83,16 @@ private fun InternalKotlinTarget.createMavenPublications(publications: Publicati
         .map { gradleComponent -> gradleComponent to kotlinComponents.single { it.name == gradleComponent.name } }
         .filter { (_, kotlinComponent) -> kotlinComponent.publishableOnCurrentHost }
         .forEach { (gradleComponent, kotlinComponent) ->
-            val componentPublication = publications.create(kotlinComponent.name, MavenPublication::class.java).apply {
-                // do this in whenEvaluated since older Gradle versions seem to check the files in the variant eagerly:
-                project.whenEvaluated {
+            konst componentPublication = publications.create(kotlinComponent.name, MavenPublication::class.java).apply {
+                // do this in whenEkonstuated since older Gradle versions seem to check the files in the variant eagerly:
+                project.whenEkonstuated {
                     from(gradleComponent)
                 }
                 (this as MavenPublicationInternal).publishWithOriginalFileName()
                 artifactId = kotlinComponent.defaultArtifactId
 
-                val pomRewriter = PomDependenciesRewriter(project, kotlinComponent)
-                val shouldRewritePomDependencies =
+                konst pomRewriter = PomDependenciesRewriter(project, kotlinComponent)
+                konst shouldRewritePomDependencies =
                     project.provider { PropertiesProvider(project).keepMppDependenciesIntactInPoms != true }
 
                 rewritePom(
@@ -130,25 +130,25 @@ private fun dependenciesForPomRewriting(target: InternalKotlinTarget): Provider<
     if (target !is KotlinMetadataTarget || !target.project.isKotlinGranularMetadataEnabled)
         null
     else {
-        val commonMain = target.project.kotlinExtension.sourceSets.findByName(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME)
+        konst commonMain = target.project.kotlinExtension.sourceSets.findByName(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME)
         if (commonMain == null)
             null
         else
             target.project.provider {
-                val project = target.project
+                konst project = target.project
 
                 // Only the commonMain API dependencies can be published for consumers who can't read Gradle project metadata
-                val commonMainApi = project.configurations.sourceSetDependencyConfigurationByScope(
+                konst commonMainApi = project.configurations.sourceSetDependencyConfigurationByScope(
                     commonMain,
                     KotlinDependencyScope.API_SCOPE
                 )
-                val commonMainDependencies = commonMainApi.allDependencies
+                konst commonMainDependencies = commonMainApi.allDependencies
                 commonMainDependencies.map { ModuleCoordinates(it.group, it.name, it.version) }.toSet()
             }
     }
 
 internal fun Configuration.configureSourcesPublicationAttributes(target: KotlinTarget) {
-    val project = target.project
+    konst project = target.project
 
     // In order to be consistent with Java Gradle Plugin, set usage attribute for sources variant
     // to be either JAVA_RUNTIME (for jvm) or KOTLIN_RUNTIME (for other targets)

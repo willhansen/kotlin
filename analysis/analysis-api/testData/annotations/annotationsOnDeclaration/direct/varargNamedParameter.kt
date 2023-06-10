@@ -1,4 +1,4 @@
-annotation class A(vararg val strings: String)
+annotation class A(vararg konst strings: String)
 
 @A(strings = ["foo", "bar"])
 class F<caret>oo

@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.resolve.lazy.AbsentDescriptorHandler
 import org.jetbrains.kotlin.resolve.lazy.DelegationFilter
 import org.jetbrains.kotlin.types.DynamicTypesSettings
 
-private val DEFAULT_DECLARATION_CHECKERS = listOf(
+private konst DEFAULT_DECLARATION_CHECKERS = listOf(
     ExpectActualInTheSameModuleChecker,
     DataClassDeclarationChecker(),
     ConstModifierChecker,
@@ -60,7 +60,7 @@ private val DEFAULT_DECLARATION_CHECKERS = listOf(
     VolatileAnnotationChecker,
 )
 
-private val DEFAULT_CALL_CHECKERS = listOf(
+private konst DEFAULT_CALL_CHECKERS = listOf(
     CapturingInClosureChecker(), InlineCheckerWrapper(), SynchronizedByValueChecker(), SafeCallChecker(), TrailingCommaCallChecker,
     DeprecatedCallChecker, CallReturnsArrayOfNothingChecker(), InfixCallChecker(), OperatorCallChecker(),
     ConstructorHeaderCallChecker, ProtectedConstructorCallChecker, ApiVersionCallChecker,
@@ -78,14 +78,14 @@ private val DEFAULT_CALL_CHECKERS = listOf(
     BuilderInferenceAssignmentChecker, IncorrectCapturedApproximationCallChecker, CompanionIncorrectlyUnboundedWhenUsedAsLHSCallChecker,
     CustomEnumEntriesMigrationCallChecker, EnumEntriesUnsupportedChecker
 )
-private val DEFAULT_TYPE_CHECKERS = emptyList<AdditionalTypeChecker>()
-private val DEFAULT_CLASSIFIER_USAGE_CHECKERS = listOf(
+private konst DEFAULT_TYPE_CHECKERS = emptyList<AdditionalTypeChecker>()
+private konst DEFAULT_CLASSIFIER_USAGE_CHECKERS = listOf(
     DeprecatedClassifierUsageChecker(), ApiVersionClassifierUsageChecker, MissingDependencyClassChecker.ClassifierUsage,
     OptionalExpectationUsageChecker()
 )
-private val DEFAULT_ANNOTATION_CHECKERS = listOf<AdditionalAnnotationChecker>()
+private konst DEFAULT_ANNOTATION_CHECKERS = listOf<AdditionalAnnotationChecker>()
 
-private val DEFAULT_CLASH_RESOLVERS = listOf<PlatformExtensionsClashResolver<*>>(
+private konst DEFAULT_CLASH_RESOLVERS = listOf<PlatformExtensionsClashResolver<*>>(
     IdentifierCheckerClashesResolver(),
 
     /**
@@ -114,22 +114,22 @@ fun StorageComponentContainer.configureDefaultCheckers() {
 
 
 abstract class PlatformConfiguratorBase(
-    private val dynamicTypesSettings: DynamicTypesSettings? = null,
-    private val additionalDeclarationCheckers: List<DeclarationChecker> = emptyList(),
-    private val additionalCallCheckers: List<CallChecker> = emptyList(),
-    private val additionalAssignmentCheckers: List<AssignmentChecker> = emptyList(),
-    private val additionalTypeCheckers: List<AdditionalTypeChecker> = emptyList(),
-    private val additionalClassifierUsageCheckers: List<ClassifierUsageChecker> = emptyList(),
-    private val additionalAnnotationCheckers: List<AdditionalAnnotationChecker> = emptyList(),
-    private val additionalClashResolvers: List<PlatformExtensionsClashResolver<*>> = emptyList(),
-    private val identifierChecker: IdentifierChecker? = null,
-    private val overloadFilter: OverloadFilter? = null,
-    private val platformToKotlinClassMapper: PlatformToKotlinClassMapper? = null,
-    private val delegationFilter: DelegationFilter? = null,
-    private val overridesBackwardCompatibilityHelper: OverridesBackwardCompatibilityHelper? = null,
-    private val declarationReturnTypeSanitizer: DeclarationReturnTypeSanitizer? = null
+    private konst dynamicTypesSettings: DynamicTypesSettings? = null,
+    private konst additionalDeclarationCheckers: List<DeclarationChecker> = emptyList(),
+    private konst additionalCallCheckers: List<CallChecker> = emptyList(),
+    private konst additionalAssignmentCheckers: List<AssignmentChecker> = emptyList(),
+    private konst additionalTypeCheckers: List<AdditionalTypeChecker> = emptyList(),
+    private konst additionalClassifierUsageCheckers: List<ClassifierUsageChecker> = emptyList(),
+    private konst additionalAnnotationCheckers: List<AdditionalAnnotationChecker> = emptyList(),
+    private konst additionalClashResolvers: List<PlatformExtensionsClashResolver<*>> = emptyList(),
+    private konst identifierChecker: IdentifierChecker? = null,
+    private konst overloadFilter: OverloadFilter? = null,
+    private konst platformToKotlinClassMapper: PlatformToKotlinClassMapper? = null,
+    private konst delegationFilter: DelegationFilter? = null,
+    private konst overridesBackwardCompatibilityHelper: OverridesBackwardCompatibilityHelper? = null,
+    private konst declarationReturnTypeSanitizer: DeclarationReturnTypeSanitizer? = null
 ) : PlatformConfigurator {
-    override val platformSpecificContainer = composeContainer(this::class.java.simpleName) {
+    override konst platformSpecificContainer = composeContainer(this::class.java.simpleName) {
         configureDefaultCheckers()
         configureExtensionsAndCheckers(this)
     }

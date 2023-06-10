@@ -2,11 +2,11 @@
 // FULL_JDK
 // WITH_STDLIB
 
-val xsl = arrayListOf("a", "b", "c", "d")
-val xs = xsl.asSequence()
+konst xsl = arrayListOf("a", "b", "c", "d")
+konst xs = xsl.asSequence()
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
 
     var cmeThrown = false
     try {
@@ -20,6 +20,6 @@ fun box(): String {
 
     if (!cmeThrown) return "Fail: CME should be thrown"
 
-    val ss = s.toString()
+    konst ss = s.toString()
     return if (ss == "0:a;") "OK" else "fail: '$ss'"
 }

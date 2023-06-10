@@ -17,12 +17,12 @@
 package org.jetbrains.kotlin.cfg.pseudocode
 
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.InstructionWithValue
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.InstructionWithValue
 
 interface PseudoValue {
-    val debugName: String
-    val element: KtElement?
-    val createdAt: InstructionWithValue?
+    konst debugName: String
+    konst element: KtElement?
+    konst createdAt: InstructionWithValue?
 }
 
 interface PseudoValueFactory {

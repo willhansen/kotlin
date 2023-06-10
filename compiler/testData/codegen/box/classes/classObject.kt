@@ -5,7 +5,7 @@ class C() {
 }
 
 fun box(): String {
-  val c = C.create()
+  konst c = C.create()
   return if (c is C) "OK" else "fail"
 }
 

@@ -1,9 +1,9 @@
-data class A(val o: String, val k: String) {
+data class A(konst o: String, konst k: String) {
     constructor() : this("O", "k")
 }
 
 fun box(): String {
-    val a = A().copy(k = "K")
+    konst a = A().copy(k = "K")
     return a.o + a.k
 }
 

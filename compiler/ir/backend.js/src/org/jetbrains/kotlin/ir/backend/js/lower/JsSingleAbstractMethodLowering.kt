@@ -27,7 +27,7 @@ class JsSingleAbstractMethodLowering(context: CommonBackendContext) : SingleAbst
     override fun getWrapperVisibility(expression: IrTypeOperatorCall, scopes: List<ScopeWithIr>): DescriptorVisibility =
         DescriptorVisibilities.LOCAL
 
-    override val IrType.needEqualsHashCodeMethods get() = false
+    override konst IrType.needEqualsHashCodeMethods get() = false
 
     private var enclosingBodyContainer: IrDeclaration? = null
 
@@ -43,8 +43,8 @@ class JsSingleAbstractMethodLowering(context: CommonBackendContext) : SingleAbst
 
         irBody.transformChildrenVoid()
 
-        for (wrapper in cachedImplementations.values + inlineCachedImplementations.values) {
-            val parentClass = wrapper.parent as IrDeclarationContainer
+        for (wrapper in cachedImplementations.konstues + inlineCachedImplementations.konstues) {
+            konst parentClass = wrapper.parent as IrDeclarationContainer
             parentClass.declarations += wrapper
         }
     }

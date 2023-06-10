@@ -8,7 +8,7 @@ public class GetterTest {
     private int age;
 
     static void test() {
-        val obj = new GetterTest();
+        konst obj = new GetterTest();
         GetterTest ref = obj.name("some").age(34);
         obj.name();
         obj.age();
@@ -20,8 +20,8 @@ public class GetterTest {
 // FILE: test.kt
 
 fun box(): String {
-    val obj = GetterTest()
-    val ref: GetterTest = obj.name("some").age(34)
+    konst obj = GetterTest()
+    konst ref: GetterTest = obj.name("some").age(34)
     obj.name()
     obj.age()
    return "OK"

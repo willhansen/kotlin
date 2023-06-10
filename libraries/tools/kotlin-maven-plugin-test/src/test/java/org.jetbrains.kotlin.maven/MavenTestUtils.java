@@ -24,10 +24,10 @@ class MavenTestUtils {
 
     @NotNull
     static String getNotNullSystemProperty(@NotNull String propertyName) {
-        String value = System.getProperty(propertyName);
-        if (value == null) {
+        String konstue = System.getProperty(propertyName);
+        if (konstue == null) {
             throw new IllegalStateException("A system property '" + propertyName + "' is not set");
         }
-        return value;
+        return konstue;
     }
 }

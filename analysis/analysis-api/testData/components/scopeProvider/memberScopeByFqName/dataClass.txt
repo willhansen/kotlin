@@ -38,7 +38,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -49,7 +49,7 @@ KtKotlinPropertySymbol:
   hasBackingField: true
   hasGetter: true
   hasSetter: false
-  initializer: KtNonConstantInitializerValue(val firstProperty: Int)
+  initializer: KtNonConstantInitializerValue(konst firstProperty: Int)
   isConst: false
   isDelegatedProperty: false
   isExtension: false
@@ -121,7 +121,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Double
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -132,7 +132,7 @@ KtKotlinPropertySymbol:
   hasBackingField: true
   hasGetter: true
   hasSetter: false
-  initializer: KtNonConstantInitializerValue(val secondProperty: Double)
+  initializer: KtNonConstantInitializerValue(konst secondProperty: Double)
   isConst: false
   isDelegatedProperty: false
   isExtension: false
@@ -204,7 +204,7 @@ KtKotlinPropertySymbol:
       type: kotlin/String
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -215,7 +215,7 @@ KtKotlinPropertySymbol:
   hasBackingField: true
   hasGetter: true
   hasSetter: false
-  initializer: KtNonConstantInitializerValue(val thirdProperty: String)
+  initializer: KtNonConstantInitializerValue(konst thirdProperty: String)
   isConst: false
   isDelegatedProperty: false
   isExtension: false
@@ -272,7 +272,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -330,7 +330,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Long
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getContainingModule: KtSourceModule "Sources of main"
     deprecationStatus: null
@@ -403,7 +403,7 @@ KtFunctionSymbol:
     type: kotlin/Int
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -437,7 +437,7 @@ KtFunctionSymbol:
     type: kotlin/Double
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -471,7 +471,7 @@ KtFunctionSymbol:
     type: kotlin/String
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -505,7 +505,7 @@ KtFunctionSymbol:
     type: Abc
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -606,7 +606,7 @@ KtFunctionSymbol:
     type: kotlin/Boolean
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -663,7 +663,7 @@ KtFunctionSymbol:
     type: kotlin/Int
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -697,7 +697,7 @@ KtFunctionSymbol:
     type: kotlin/String
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -722,7 +722,7 @@ KtConstructorSymbol:
     type: Abc
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -767,7 +767,7 @@ KtConstructorSymbol:
             type: kotlin/Int
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -778,7 +778,7 @@ KtConstructorSymbol:
         hasBackingField: true
         hasGetter: true
         hasSetter: false
-        initializer: KtNonConstantInitializerValue(val firstProperty: Int)
+        initializer: KtNonConstantInitializerValue(konst firstProperty: Int)
         isConst: false
         isDelegatedProperty: false
         isExtension: false
@@ -870,7 +870,7 @@ KtConstructorSymbol:
             type: kotlin/Double
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -881,7 +881,7 @@ KtConstructorSymbol:
         hasBackingField: true
         hasGetter: true
         hasSetter: false
-        initializer: KtNonConstantInitializerValue(val secondProperty: Double)
+        initializer: KtNonConstantInitializerValue(konst secondProperty: Double)
         isConst: false
         isDelegatedProperty: false
         isExtension: false
@@ -973,7 +973,7 @@ KtConstructorSymbol:
             type: kotlin/String
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -984,7 +984,7 @@ KtConstructorSymbol:
         hasBackingField: true
         hasGetter: true
         hasSetter: false
-        initializer: KtNonConstantInitializerValue(val thirdProperty: String)
+        initializer: KtNonConstantInitializerValue(konst thirdProperty: String)
         isConst: false
         isDelegatedProperty: false
         isExtension: false

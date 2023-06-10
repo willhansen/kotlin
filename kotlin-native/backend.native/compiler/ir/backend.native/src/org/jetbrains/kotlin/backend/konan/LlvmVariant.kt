@@ -20,7 +20,7 @@ sealed class LlvmVariant {
 
     }
 
-    class Custom(val path: File) : LlvmVariant() {
+    class Custom(konst path: File) : LlvmVariant() {
         override fun getKonanPropertiesEntry(): Pair<String, String> =
                 konanPropertiesKey to path.canonicalPath
 
@@ -29,7 +29,7 @@ sealed class LlvmVariant {
     abstract fun getKonanPropertiesEntry(): Pair<String, String>
 
     companion object {
-        private val konanPropertiesKey: String by lazy {
+        private konst konanPropertiesKey: String by lazy {
             "llvmHome.${HostManager.hostName}"
         }
     }

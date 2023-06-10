@@ -1960,15 +1960,15 @@ public class FirStandaloneNormalAnalysisSourceModuleReferenceResolveTestGenerate
         }
 
         @Test
-        @TestMetadata("reified_valueParameter.kt")
-        public void testReified_valueParameter() throws Exception {
-            runTest("analysis/analysis-api/testData/referenceResolve/typeParameter/reified_valueParameter.kt");
+        @TestMetadata("reified_konstueParameter.kt")
+        public void testReified_konstueParameter() throws Exception {
+            runTest("analysis/analysis-api/testData/referenceResolve/typeParameter/reified_konstueParameter.kt");
         }
 
         @Test
-        @TestMetadata("reified_valueParameter_vararg.kt")
-        public void testReified_valueParameter_vararg() throws Exception {
-            runTest("analysis/analysis-api/testData/referenceResolve/typeParameter/reified_valueParameter_vararg.kt");
+        @TestMetadata("reified_konstueParameter_vararg.kt")
+        public void testReified_konstueParameter_vararg() throws Exception {
+            runTest("analysis/analysis-api/testData/referenceResolve/typeParameter/reified_konstueParameter_vararg.kt");
         }
 
         @Test

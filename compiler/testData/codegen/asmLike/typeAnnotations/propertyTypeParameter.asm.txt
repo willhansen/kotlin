@@ -9,7 +9,7 @@ public final class foo/Kotlin : java/lang/Object {
         @Lorg/jetbrains/annotations/NotNull;([]) // invisible, parameter 0
 
     <T::Lfoo/Simple;>(TT;TT;)V
-    public final void setZ(foo.Simple $this$z, foo.Simple value)
+    public final void setZ(foo.Simple $this$z, foo.Simple konstue)
       @Lfoo/TypeParameterAnn;([]) : METHOD_TYPE_PARAMETER 0, null
       @Lfoo/TypeAnn;([name="Simple"]) : METHOD_TYPE_PARAMETER_BOUND 0, 1, null
         @Lorg/jetbrains/annotations/NotNull;([]) // invisible, parameter 0

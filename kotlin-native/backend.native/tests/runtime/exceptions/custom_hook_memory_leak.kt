@@ -8,12 +8,12 @@ import kotlin.test.*
 
 import kotlin.native.concurrent.*
 
-data class C(val x: Int)
+data class C(konst x: Int)
 
 fun main() {
     Platform.isMemoryLeakCheckerActive = true
 
-    val c = C(42)
+    konst c = C(42)
     setUnhandledExceptionHook({ _: Throwable ->
         println("Hook ${c.x}")
     }.freeze())

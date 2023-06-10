@@ -15,12 +15,12 @@ data class KotlinParcelable(var data: Int): Parcelable {
 
     companion object {
         @JvmField
-        val CREATOR = Creator()
+        konst CREATOR = Creator()
     }
 
     class Creator : Parcelable.Creator<KotlinParcelable> {
         override fun createFromParcel(source: Parcel): KotlinParcelable {
-            val data = source.readInt()
+            konst data = source.readInt()
             return KotlinParcelable(data)
         }
 
@@ -37,4 +37,4 @@ import android.os.*
 import k.*
 
 @Parcelize
-class Foo(val kp: KotlinParcelable): Parcelable
+class Foo(konst kp: KotlinParcelable): Parcelable

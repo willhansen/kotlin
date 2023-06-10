@@ -25,35 +25,35 @@ import org.jetbrains.kotlin.cfg.pseudocode.instructions.special.SubroutineSinkIn
 import org.jetbrains.kotlin.psi.KtElement
 
 interface Pseudocode {
-    val correspondingElement: KtElement
+    konst correspondingElement: KtElement
 
-    val parent: Pseudocode?
+    konst parent: Pseudocode?
 
-    val localDeclarations: Set<LocalFunctionDeclarationInstruction>
+    konst localDeclarations: Set<LocalFunctionDeclarationInstruction>
 
-    val instructions: List<Instruction>
+    konst instructions: List<Instruction>
 
-    val reversedInstructions: List<Instruction>
+    konst reversedInstructions: List<Instruction>
 
-    val instructionsIncludingDeadCode: List<Instruction>
+    konst instructionsIncludingDeadCode: List<Instruction>
 
-    val exitInstruction: SubroutineExitInstruction
+    konst exitInstruction: SubroutineExitInstruction
 
-    val errorInstruction: SubroutineExitInstruction
+    konst errorInstruction: SubroutineExitInstruction
 
-    val sinkInstruction: SubroutineSinkInstruction
+    konst sinkInstruction: SubroutineSinkInstruction
 
-    val enterInstruction: SubroutineEnterInstruction
+    konst enterInstruction: SubroutineEnterInstruction
 
-    val isInlined: Boolean
-    val containsDoWhile: Boolean
-    val rootPseudocode: Pseudocode
+    konst isInlined: Boolean
+    konst containsDoWhile: Boolean
+    konst rootPseudocode: Pseudocode
 
     fun getElementValue(element: KtElement?): PseudoValue?
 
-    fun getValueElements(value: PseudoValue?): List<KtElement>
+    fun getValueElements(konstue: PseudoValue?): List<KtElement>
 
-    fun getUsages(value: PseudoValue?): List<Instruction>
+    fun getUsages(konstue: PseudoValue?): List<Instruction>
 
     fun isSideEffectFree(instruction: Instruction): Boolean
 

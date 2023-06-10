@@ -16,19 +16,19 @@ import org.jetbrains.kotlin.gradle.utils.newInstance
 
 interface WebpackRulesDsl {
     @get:Nested
-    val rules: KotlinWebpackRulesContainer
+    konst rules: KotlinWebpackRulesContainer
 
     fun rules(action: Action<KotlinWebpackRulesContainer>) {
         action.execute(rules)
     }
 
     fun cssSupport(action: Action<KotlinWebpackCssRule>) {
-        val rule = rules.maybeCreate("css", KotlinWebpackCssRule::class.java)
+        konst rule = rules.maybeCreate("css", KotlinWebpackCssRule::class.java)
         action.execute(rule)
     }
 
     fun scssSupport(action: Action<KotlinWebpackScssRule>) {
-        val rule = rules.maybeCreate("scss", KotlinWebpackScssRule::class.java)
+        konst rule = rules.maybeCreate("scss", KotlinWebpackScssRule::class.java)
         action.execute(rule)
     }
 
@@ -38,7 +38,7 @@ interface WebpackRulesDsl {
         ) = container.registerFactory(T::class.java) { newInstance<T>(it) }
 
         fun ObjectFactory.webpackRulesContainer(): KotlinWebpackRulesContainer {
-            val delegate = polymorphicDomainObjectContainer(KotlinWebpackRule::class.java).also {
+            konst delegate = polymorphicDomainObjectContainer(KotlinWebpackRule::class.java).also {
                 bindTo<KotlinWebpackCssRule>(it)
                 bindTo<KotlinWebpackScssRule>(it)
             }

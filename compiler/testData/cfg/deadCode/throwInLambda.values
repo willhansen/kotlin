@@ -14,7 +14,7 @@ f(this)   <v3>: {<: R}          NEW: call(f(this), invoke|<v1>, <v2>) -> <v3>
 =====================
 == foo ==
 fun foo(): String {
-    val x = fn()?.let { throw Exception() } ?: "unreachable?"
+    konst x = fn()?.let { throw Exception() } ?: "unreachable?"
     return x
 }
 ---------------------
@@ -26,7 +26,7 @@ fn()?.let { throw Exception() }                                          <v2>: A
 fn()?.let { throw Exception() } ?: "unreachable?"                        <v4>: String                     NEW: merge(fn()?.let { throw Exception() } ?: "unreachable?"|<v2>, <v3>) -> <v4>
 x                                                                        <v5>: String                     NEW: r(x) -> <v5>
 return x                                                                 !<v6>: *
-{ val x = fn()?.let { throw Exception() } ?: "unreachable?" return x }   !<v6>: *                         COPY
+{ konst x = fn()?.let { throw Exception() } ?: "unreachable?" return x }   !<v6>: *                         COPY
 =====================
 == anonymous_0 ==
 { throw Exception() }
@@ -37,8 +37,8 @@ throw Exception()   !<v1>: *               COPY
 =====================
 == bar ==
 fun bar(): String {
-    val x = fn() ?: return ""
-    val y = x?.let { throw Exception() } ?: "unreachable"
+    konst x = fn() ?: return ""
+    konst y = x?.let { throw Exception() } ?: "unreachable"
     return y
 }
 ---------------------
@@ -54,7 +54,7 @@ x?.let { throw Exception() }                                                    
 x?.let { throw Exception() } ?: "unreachable"                                                  <v8>: String                     NEW: merge(x?.let { throw Exception() } ?: "unreachable"|<v6>, <v7>) -> <v8>
 y                                                                                              <v9>: String                     NEW: r(y) -> <v9>
 return y                                                                                       !<v10>: *
-{ val x = fn() ?: return "" val y = x?.let { throw Exception() } ?: "unreachable" return y }   !<v10>: *                        COPY
+{ konst x = fn() ?: return "" konst y = x?.let { throw Exception() } ?: "unreachable" return y }   !<v10>: *                        COPY
 =====================
 == anonymous_1 ==
 { throw Exception() }

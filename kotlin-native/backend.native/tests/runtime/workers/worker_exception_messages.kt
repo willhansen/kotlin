@@ -9,8 +9,8 @@ import kotlin.native.concurrent.*
 fun checkArgumentTransferFailed(): Unit = withWorker {
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) return // Transfer is no-op in this case.
 
-    val argument = Any()
-    val exception = assertFailsWith<IllegalStateException> {
+    konst argument = Any()
+    konst exception = assertFailsWith<IllegalStateException> {
         execute(TransferMode.SAFE, { argument }) {
         }
     }
@@ -21,8 +21,8 @@ fun checkArgumentTransferFailed(): Unit = withWorker {
 fun checkDetachedObjectGraphTransferFailed() {
     if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) return // Transfer is no-op in this case.
 
-    val obj = Any()
-    val exception = assertFailsWith<IllegalStateException> {
+    konst obj = Any()
+    konst exception = assertFailsWith<IllegalStateException> {
         DetachedObjectGraph { obj }
     }
     assertEquals("Unable to transfer object: it is still owned elsewhere", exception.message)
@@ -30,7 +30,7 @@ fun checkDetachedObjectGraphTransferFailed() {
 
 @Test
 fun checkProcessQueueOnWrongThread(): Unit = withWorker {
-    val exception = assertFailsWith<IllegalStateException> {
+    konst exception = assertFailsWith<IllegalStateException> {
         processQueue()
     }
     assertEquals("Worker is not current or already terminated", exception.message)
@@ -38,7 +38,7 @@ fun checkProcessQueueOnWrongThread(): Unit = withWorker {
 
 @Test
 fun checkParkOnWrongThread(): Unit = withWorker {
-    val exception = assertFailsWith<IllegalStateException> {
+    konst exception = assertFailsWith<IllegalStateException> {
         park(1L)
     }
     assertEquals("Worker is not current or already terminated", exception.message)
@@ -46,23 +46,23 @@ fun checkParkOnWrongThread(): Unit = withWorker {
 
 @Test
 fun checkFutureConsumedTwice(): Unit = withWorker {
-    val future = execute(TransferMode.SAFE, {}) {
+    konst future = execute(TransferMode.SAFE, {}) {
         42
     }
     assertEquals(42, future.result)
-    val exception = assertFailsWith<IllegalStateException> {
+    konst exception = assertFailsWith<IllegalStateException> {
         future.result
     }
-    assertEquals("Future is in an invalid state", exception.message)
+    assertEquals("Future is in an inkonstid state", exception.message)
 }
 
 @Test
 fun checkTerminatedWorkerName() {
-    val worker = Worker.start(name = "WorkerName")
+    konst worker = Worker.start(name = "WorkerName")
     assertEquals("WorkerName", worker.name)
     worker.requestTermination().result
 
-    val exception = assertFailsWith<IllegalStateException> {
+    konst exception = assertFailsWith<IllegalStateException> {
         worker.name
     }
     assertEquals("Worker is already terminated", exception.message)
@@ -70,11 +70,11 @@ fun checkTerminatedWorkerName() {
 
 @Test
 fun checkTerminatedWorkerExecute() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
     worker.execute(TransferMode.SAFE, {}, {}).result
     worker.requestTermination().result
 
-    val exception = assertFailsWith<IllegalStateException> {
+    konst exception = assertFailsWith<IllegalStateException> {
         worker.execute(TransferMode.SAFE, {}, {}).result
     }
     assertEquals("Worker is already terminated", exception.message)
@@ -82,11 +82,11 @@ fun checkTerminatedWorkerExecute() {
 
 @Test
 fun checkTerminatedWorkerExecuteAfter() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
     worker.executeAfter(0L, {}.freeze())
     worker.requestTermination().result
 
-    val exception = assertFailsWith<IllegalStateException> {
+    konst exception = assertFailsWith<IllegalStateException> {
         worker.executeAfter(0L, {}.freeze())
     }
     assertEquals("Worker is already terminated", exception.message)
@@ -94,10 +94,10 @@ fun checkTerminatedWorkerExecuteAfter() {
 
 @Test
 fun checkTerminatedWorkerRequestTermination() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
     worker.requestTermination().result
 
-    val exception = assertFailsWith<IllegalStateException> {
+    konst exception = assertFailsWith<IllegalStateException> {
         worker.requestTermination()
     }
     assertEquals("Worker is already terminated", exception.message)

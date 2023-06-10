@@ -7,7 +7,7 @@ interface IQ {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X(val t: IQ): IQ {
+konstue class X(konst t: IQ): IQ {
     override fun ok(): String = t.ok()
 }
 
@@ -28,22 +28,22 @@ class Test : IFoo1, IFoo2 {
 }
 
 fun box(): String {
-    val t1: IFoo1 = Test()
-    val foo1 = t1.foo()
+    konst t1: IFoo1 = Test()
+    konst foo1 = t1.foo()
     if (foo1 !is X) {
         throw AssertionError("foo1 !is X: $foo1")
     }
-    val ok1 = foo1.ok()
+    konst ok1 = foo1.ok()
     if (ok1 != "OK") {
         throw AssertionError("ok1: $ok1")
     }
 
-    val t2: IFoo2 = Test()
-    val foo2 = t2.foo()
+    konst t2: IFoo2 = Test()
+    konst foo2 = t2.foo()
     if (foo2 !is IQ) {
         throw AssertionError("foo2 !is IQ: $foo2")
     }
-    val ok2 = foo2.ok()
+    konst ok2 = foo2.ok()
     if (ok2 != "OK") {
         throw AssertionError("ok2: $ok2")
     }

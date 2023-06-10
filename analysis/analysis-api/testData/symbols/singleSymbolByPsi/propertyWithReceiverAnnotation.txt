@@ -53,7 +53,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Boolean
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getContainingModule: KtSourceModule "Sources of main"
     deprecationStatus: null

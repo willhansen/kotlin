@@ -29,7 +29,7 @@ class Fir2IrLazySimpleFunction(
     startOffset: Int,
     endOffset: Int,
     origin: IrDeclarationOrigin,
-    override val fir: FirSimpleFunction,
+    override konst fir: FirSimpleFunction,
     firParent: FirRegularClass?,
     symbol: IrSimpleFunctionSymbol,
     isFakeOverride: Boolean
@@ -50,7 +50,7 @@ class Fir2IrLazySimpleFunction(
     }
 
     override var dispatchReceiverParameter: IrValueParameter? by lazyVar(lock) {
-        val containingClass = parent as? IrClass
+        konst containingClass = parent as? IrClass
         if (containingClass != null && shouldHaveDispatchReceiver(containingClass)) {
             createThisReceiverParameter(thisType = containingClass.thisReceiver?.type ?: error("No this receiver for containing class"))
         } else null
@@ -64,7 +64,7 @@ class Fir2IrLazySimpleFunction(
 
     override var contextReceiverParametersCount: Int = fir.contextReceiversForFunctionOrContainingProperty().size
 
-    override var valueParameters: List<IrValueParameter> by lazyVar(lock) {
+    override var konstueParameters: List<IrValueParameter> by lazyVar(lock) {
         declarationStorage.enterScope(this)
 
         buildList {
@@ -74,9 +74,9 @@ class Fir2IrLazySimpleFunction(
                 this@buildList,
             )
 
-            fir.valueParameters.mapIndexedTo(this) { index, valueParameter ->
+            fir.konstueParameters.mapIndexedTo(this) { index, konstueParameter ->
                 declarationStorage.createIrParameter(
-                    valueParameter, index + contextReceiverParametersCount, skipDefaultParameter = isFakeOverride
+                    konstueParameter, index + contextReceiverParametersCount, skipDefaultParameter = isFakeOverride
                 ).apply {
                     this.parent = this@Fir2IrLazySimpleFunction
                 }
@@ -88,7 +88,7 @@ class Fir2IrLazySimpleFunction(
 
     override var overriddenSymbols: List<IrSimpleFunctionSymbol> by lazyVar(lock) {
         if (firParent == null) return@lazyVar emptyList()
-        val parent = parent
+        konst parent = parent
         if (isFakeOverride && parent is Fir2IrLazyClass) {
             fakeOverrideGenerator.calcBaseSymbolsForFakeOverrideFunction(
                 firParent, this, fir.symbol
@@ -101,10 +101,10 @@ class Fir2IrLazySimpleFunction(
         fir.generateOverriddenFunctionSymbols(firParent)
     }
 
-    override val initialSignatureFunction: IrFunction? by lazy {
+    override konst initialSignatureFunction: IrFunction? by lazy {
         (fir.initialSignatureAttr as? FirFunction)?.symbol?.let { declarationStorage.getIrFunctionSymbol(it).owner }?.takeIf { it !== this }
     }
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = fir.containerSource
 }

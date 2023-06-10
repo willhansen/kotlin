@@ -30,16 +30,16 @@ import java.util.Map;
 
 public class AnnotationDescriptorImpl implements AnnotationDescriptor {
     private final KotlinType annotationType;
-    private final Map<Name, ConstantValue<?>> valueArguments;
+    private final Map<Name, ConstantValue<?>> konstueArguments;
     private final SourceElement source;
 
     public AnnotationDescriptorImpl(
             @NotNull KotlinType annotationType,
-            @NotNull Map<Name, ConstantValue<?>> valueArguments,
+            @NotNull Map<Name, ConstantValue<?>> konstueArguments,
             @NotNull SourceElement source
     ) {
         this.annotationType = annotationType;
-        this.valueArguments = valueArguments;
+        this.konstueArguments = konstueArguments;
         this.source = source;
     }
 
@@ -58,7 +58,7 @@ public class AnnotationDescriptorImpl implements AnnotationDescriptor {
     @NotNull
     @Override
     public Map<Name, ConstantValue<?>> getAllValueArguments() {
-        return valueArguments;
+        return konstueArguments;
     }
 
     @Override

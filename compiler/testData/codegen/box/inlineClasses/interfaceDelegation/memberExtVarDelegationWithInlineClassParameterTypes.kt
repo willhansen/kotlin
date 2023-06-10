@@ -5,7 +5,7 @@
 import kotlin.test.assertEquals
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val xs: Array<String>)
+konstue class S(konst xs: Array<String>)
 
 interface IFoo {
     var S.extVar: String
@@ -18,13 +18,13 @@ interface GFoo<T> {
 object FooImpl : IFoo {
     override var S.extVar: String
         get() = xs[0]
-        set(value) { xs[0] = value }
+        set(konstue) { xs[0] = konstue }
 }
 
 object GFooImpl : GFoo<S> {
     override var S.extVar: String
         get() = xs[0]
-        set(value) { xs[0] = value }
+        set(konstue) { xs[0] = konstue }
 }
 
 class TestFoo : IFoo by FooImpl
@@ -33,13 +33,13 @@ class TestGFoo : GFoo<S> by GFooImpl
 
 fun box(): String {
     with(TestFoo()) {
-        val s = S(arrayOf("Fail 1"))
+        konst s = S(arrayOf("Fail 1"))
         s.extVar = "OK"
         assertEquals("OK", s.extVar)
     }
 
     with(TestGFoo()) {
-        val s = S(arrayOf("Fail 2"))
+        konst s = S(arrayOf("Fail 2"))
         s.extVar = "OK"
         assertEquals("OK", s.extVar)
     }

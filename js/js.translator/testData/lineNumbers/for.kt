@@ -11,7 +11,7 @@ fun box() {
         println(x)
     }
 
-    val xs = listOf(1, 2, 3)
+    konst xs = listOf(1, 2, 3)
     for (x in xs.indices) {
         println(x)
     }

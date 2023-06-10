@@ -1,10 +1,10 @@
 package test.another;
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface Anno {
 
-    public abstract java.lang.String value();
+    public abstract java.lang.String konstue();
 }
 
 ////////////////////
@@ -39,30 +39,30 @@ public final class TopLevelKt {
         return null;
     }
 
-    public static final void extensionFunction(@Anno(value = "rec")
+    public static final void extensionFunction(@Anno(konstue = "rec")
     @org.jetbrains.annotations.NotNull()
-    java.lang.String $this$extensionFunction, @Anno(value = "1")
+    java.lang.String $this$extensionFunction, @Anno(konstue = "1")
     @org.jetbrains.annotations.NotNull()
-    java.lang.String a, @Anno(value = "2")
+    java.lang.String a, @Anno(konstue = "2")
     @org.jetbrains.annotations.NotNull()
     java.lang.String b) {
     }
 
-    @Anno(value = "extpr")
+    @Anno(konstue = "extpr")
     @java.lang.Deprecated()
     public static void getExtensionProperty$annotations(java.lang.Object p0) {
     }
 
     @org.jetbrains.annotations.NotNull()
-    public static final <T extends java.lang.Object>java.lang.String getExtensionProperty(@Anno(value = "propRec")
+    public static final <T extends java.lang.Object>java.lang.String getExtensionProperty(@Anno(konstue = "propRec")
     @org.jetbrains.annotations.NotNull()
     T $this$extensionProperty) {
         return null;
     }
 
-    public static final <T extends java.lang.Object>void setExtensionProperty(@Anno(value = "propRec")
+    public static final <T extends java.lang.Object>void setExtensionProperty(@Anno(konstue = "propRec")
     @org.jetbrains.annotations.NotNull()
-    T $this$extensionProperty, @Anno(value = "setparam")
+    T $this$extensionProperty, @Anno(konstue = "setparam")
     @org.jetbrains.annotations.NotNull()
     java.lang.String setParamName) {
     }

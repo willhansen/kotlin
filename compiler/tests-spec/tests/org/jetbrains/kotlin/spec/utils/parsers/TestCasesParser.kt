@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.spec.utils.models.SpecTestCaseInfoElementType
 import org.jetbrains.kotlin.spec.utils.models.SpecTestInfoElements
 import org.jetbrains.kotlin.spec.utils.parsers.TestCasePatterns.testCaseInfoPattern
 import org.jetbrains.kotlin.spec.utils.parsers.CommonParser.splitByComma
-import org.jetbrains.kotlin.spec.utils.validators.SpecTestValidationException
-import org.jetbrains.kotlin.spec.utils.validators.SpecTestValidationFailedReason
+import org.jetbrains.kotlin.spec.utils.konstidators.SpecTestValidationException
+import org.jetbrains.kotlin.spec.utils.konstidators.SpecTestValidationFailedReason
 import java.util.*
 
 private operator fun SpecTestCase.plusAssign(addTestCase: SpecTestCase) {
@@ -31,7 +31,7 @@ private fun SpecTestCase.save(
     testCasesByRangesOfFile: NavigableMap<Int, TestCasesByNumbers>,
     caseInfoElements: SpecTestInfoElements<SpecTestInfoElementType>
 ) {
-    val testCaseNumbers =
+    konst testCaseNumbers =
         caseInfoElements[SpecTestCaseInfoElementType.TESTCASE_NUMBER]!!.content.splitByComma().map {
             it.trim().toIntOrNull()
                 ?: throw SpecTestValidationException(
@@ -39,7 +39,7 @@ private fun SpecTestCase.save(
                     "impossible to parse number '${it.trim()}'"
                 )
         }
-    val startPosition = this.ranges[0].first
+    konst startPosition = this.ranges[0].first
 
     testCaseNumbers.forEach { testCaseNumber ->
         if (testCasesOfFile[testCaseNumber] != null) {
@@ -55,11 +55,11 @@ private fun SpecTestCase.save(
 }
 
 fun parseTestCases(testFiles: TestFiles): SpecTestCasesSet {
-    val testCasesSet = SpecTestCasesSet(mutableMapOf(), mutableMapOf(), mutableMapOf())
+    konst testCasesSet = SpecTestCasesSet(mutableMapOf(), mutableMapOf(), mutableMapOf())
     var rangeOffset = 0
 
     for ((filename, fileContent) in testFiles) {
-        val matcher = testCaseInfoPattern.matcher(fileContent)
+        konst matcher = testCaseInfoPattern.matcher(fileContent)
         var startFind = 0
 
         testCasesSet.byFiles.computeIfAbsent(filename) {
@@ -67,16 +67,16 @@ fun parseTestCases(testFiles: TestFiles): SpecTestCasesSet {
             mutableMapOf()
         }
 
-        val testCasesOfFile = testCasesSet.byFiles[filename]!!
-        val testCasesByRangesOfFile = testCasesSet.byRanges[filename]!!
+        konst testCasesOfFile = testCasesSet.byFiles[filename]!!
+        konst testCasesByRangesOfFile = testCasesSet.byRanges[filename]!!
 
         while (matcher.find(startFind)) {
-            val caseInfoElements = CommonParser.parseTestInfoElements(
-                arrayOf(*CommonInfoElementType.values(), *SpecTestCaseInfoElementType.values()),
+            konst caseInfoElements = CommonParser.parseTestInfoElements(
+                arrayOf(*CommonInfoElementType.konstues(), *SpecTestCaseInfoElementType.konstues()),
                 matcher.group("infoElementsSL") ?: matcher.group("infoElementsML")
             )
-            val nextDirective = matcher.group("nextDirectiveSL") ?: matcher.group("nextDirectiveML")
-            val range = matcher.start()..matcher.end() - nextDirective.length
+            konst nextDirective = matcher.group("nextDirectiveSL") ?: matcher.group("nextDirectiveML")
+            konst range = matcher.start()..matcher.end() - nextDirective.length
 
             SpecTestCase(
                 code = matcher.group("codeSL") ?: matcher.group("codeML"),

@@ -8,7 +8,7 @@ interface WithInvoke {
 }
 
 interface Test1 {
-    val test1: WithInvoke
+    konst test1: WithInvoke
 }
 
 fun Test1.<!EXTENSION_FUNCTION_SHADOWED_BY_MEMBER_PROPERTY_WITH_INVOKE!>test1<!>() {}

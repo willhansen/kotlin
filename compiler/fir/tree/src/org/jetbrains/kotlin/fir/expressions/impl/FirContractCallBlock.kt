@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.fir.visitors.transformInplace
 import org.jetbrains.kotlin.fir.visitors.transformSingle
 
 class FirContractCallBlock(var call: FirFunctionCall) : FirBlock() {
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = call.source?.fakeElement(KtFakeSourceElementKind.ContractBlock)
 
-    override val statements: List<FirStatement>
+    override konst statements: List<FirStatement>
         get() = listOf(call)
 
     override var annotations: MutableOrEmptyList<FirAnnotation> = MutableOrEmptyList.empty()

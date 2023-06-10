@@ -41,25 +41,25 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirSimpleFunctionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
     override var status: FirDeclarationStatus,
     override var returnTypeRef: FirTypeRef,
     override var receiverParameter: FirReceiverParameter?,
     override var deprecationsProvider: DeprecationsProvider,
-    override val containerSource: DeserializedContainerSource?,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst containerSource: DeserializedContainerSource?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
-    override val valueParameters: MutableList<FirValueParameter>,
+    override konst konstueParameters: MutableList<FirValueParameter>,
     override var body: FirBlock?,
     override var contractDescription: FirContractDescription,
-    override val name: Name,
-    override val symbol: FirNamedFunctionSymbol,
+    override konst name: Name,
+    override konst symbol: FirNamedFunctionSymbol,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val typeParameters: MutableList<FirTypeParameter>,
+    override konst typeParameters: MutableList<FirTypeParameter>,
 ) : FirSimpleFunction() {
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
 
@@ -75,7 +75,7 @@ internal class FirSimpleFunctionImpl(
         receiverParameter?.accept(visitor, data)
         contextReceivers.forEach { it.accept(visitor, data) }
         controlFlowGraphReference?.accept(visitor, data)
-        valueParameters.forEach { it.accept(visitor, data) }
+        konstueParameters.forEach { it.accept(visitor, data) }
         body?.accept(visitor, data)
         contractDescription.accept(visitor, data)
         annotations.forEach { it.accept(visitor, data) }
@@ -112,7 +112,7 @@ internal class FirSimpleFunctionImpl(
     }
 
     override fun <D> transformValueParameters(transformer: FirTransformer<D>, data: D): FirSimpleFunctionImpl {
-        valueParameters.transformInplace(transformer, data)
+        konstueParameters.transformInplace(transformer, data)
         return this
     }
 
@@ -161,8 +161,8 @@ internal class FirSimpleFunctionImpl(
     }
 
     override fun replaceValueParameters(newValueParameters: List<FirValueParameter>) {
-        valueParameters.clear()
-        valueParameters.addAll(newValueParameters)
+        konstueParameters.clear()
+        konstueParameters.addAll(newValueParameters)
     }
 
     override fun replaceBody(newBody: FirBlock?) {

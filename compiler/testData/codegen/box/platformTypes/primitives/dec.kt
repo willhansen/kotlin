@@ -1,6 +1,6 @@
 // KJS_WITH_FULL_RUNTIME
 fun box(): String {
-    val l = ArrayList<Int>()
+    konst l = ArrayList<Int>()
     l.add(1)
     var x = l[0]
     var y = l[0]

@@ -54,7 +54,7 @@ class RPPG3<P1 : I1, P2 : I2, P3 : I3>
 // FILE: main.kt
 
 fun box(): String {
-    val c = Change()
+    konst c = Change()
     c.qux(RPPG1())
     c.foo(RPPG1(), RPPG1())
     c.bar(RPPG2(), RPPG3())

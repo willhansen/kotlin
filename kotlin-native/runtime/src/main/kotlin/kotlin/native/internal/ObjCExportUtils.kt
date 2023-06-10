@@ -18,7 +18,7 @@ internal interface ObjCObjectWrapper
 
 internal class NSArrayAsKList : AbstractList<Any?>(), RandomAccess, ObjCObjectWrapper {
 
-    override val size: Int get() = getSize()
+    override konst size: Int get() = getSize()
 
     @GCUnsafeCall("Kotlin_NSArrayAsKList_getSize")
     private external fun getSize(): Int
@@ -29,7 +29,7 @@ internal class NSArrayAsKList : AbstractList<Any?>(), RandomAccess, ObjCObjectWr
 
 internal class NSMutableArrayAsKMutableList : AbstractMutableList<Any?>(), RandomAccess, ObjCObjectWrapper {
 
-    override val size: Int get() = getSize()
+    override konst size: Int get() = getSize()
 
     @GCUnsafeCall("Kotlin_NSArrayAsKList_getSize")
     private external fun getSize(): Int
@@ -49,7 +49,7 @@ internal class NSMutableArrayAsKMutableList : AbstractMutableList<Any?>(), Rando
 
 internal class NSSetAsKSet : AbstractSet<Any?>(), KonanSet<Any?>, ObjCObjectWrapper {
 
-    override val size: Int get() = getSize()
+    override konst size: Int get() = getSize()
 
     @GCUnsafeCall("Kotlin_NSSetAsKSet_getSize")
     private external fun getSize(): Int
@@ -71,7 +71,7 @@ internal class NSDictionaryAsKMap : Map<Any?, Any?>, ObjCObjectWrapper {
         if (other !is Map<*, *>) return false
         if (this.size != other.size) return false
 
-        return other.entries.all { this.containsEntry(it.key, it.value) }
+        return other.entries.all { this.containsEntry(it.key, it.konstue) }
     }
 
     override fun hashCode(): Int {
@@ -82,11 +82,11 @@ internal class NSDictionaryAsKMap : Map<Any?, Any?>, ObjCObjectWrapper {
         return result
     }
 
-    override fun toString(): String = entries.joinToString(", ", "{", "}") { toString(it.key) + "=" + toString(it.value) }
+    override fun toString(): String = entries.joinToString(", ", "{", "}") { toString(it.key) + "=" + toString(it.konstue) }
 
     private fun toString(o: Any?): String = if (o === this) "(this Map)" else o.toString()
 
-    override val size: Int get() = getSize()
+    override konst size: Int get() = getSize()
 
     @GCUnsafeCall("Kotlin_NSDictionaryAsKMap_getSize")
     private external fun getSize(): Int
@@ -97,7 +97,7 @@ internal class NSDictionaryAsKMap : Map<Any?, Any?>, ObjCObjectWrapper {
     override external fun containsKey(key: Any?): Boolean
 
     @GCUnsafeCall("Kotlin_NSDictionaryAsKMap_containsValue")
-    override external fun containsValue(value: Any?): Boolean
+    override external fun containsValue(konstue: Any?): Boolean
 
     @GCUnsafeCall("Kotlin_NSDictionaryAsKMap_get")
     external override operator fun get(key: Any?): Any?
@@ -106,70 +106,70 @@ internal class NSDictionaryAsKMap : Map<Any?, Any?>, ObjCObjectWrapper {
     private external fun getOrThrowConcurrentModification(key: Any?): Any?
 
     @GCUnsafeCall("Kotlin_NSDictionaryAsKMap_containsEntry")
-    private external fun containsEntry(key: Any?, value: Any?): Boolean
+    private external fun containsEntry(key: Any?, konstue: Any?): Boolean
 
     // Views
-    override val keys: Set<Any?> get() = this.Keys()
+    override konst keys: Set<Any?> get() = this.Keys()
 
-    override val values: Collection<Any?> get() = this.Values()
+    override konst konstues: Collection<Any?> get() = this.Values()
 
-    override val entries: Set<Map.Entry<Any?, Any?>> get() = this.Entries()
+    override konst entries: Set<Map.Entry<Any?, Any?>> get() = this.Entries()
 
     @GCUnsafeCall("Kotlin_NSDictionaryAsKMap_keyIterator")
     private external fun keyIterator(): Iterator<Any?>
 
     private inner class Keys : AbstractSet<Any?>() {
 
-        override val size: Int get() = this@NSDictionaryAsKMap.size
+        override konst size: Int get() = this@NSDictionaryAsKMap.size
 
         override fun iterator(): Iterator<Any?> = this@NSDictionaryAsKMap.keyIterator()
 
         override fun contains(element: Any?): Boolean = this@NSDictionaryAsKMap.containsKey(element)
     }
 
-    @GCUnsafeCall("Kotlin_NSDictionaryAsKMap_valueIterator")
-    private external fun valueIterator(): Iterator<Any?>
+    @GCUnsafeCall("Kotlin_NSDictionaryAsKMap_konstueIterator")
+    private external fun konstueIterator(): Iterator<Any?>
 
     private inner class Values : AbstractCollection<Any?>() {
         // TODO: what about equals and hashCode?
 
-        override val size: Int get() = this@NSDictionaryAsKMap.size
+        override konst size: Int get() = this@NSDictionaryAsKMap.size
 
-        override fun iterator(): Iterator<Any?> = this@NSDictionaryAsKMap.valueIterator()
+        override fun iterator(): Iterator<Any?> = this@NSDictionaryAsKMap.konstueIterator()
 
         override fun contains(element: Any?): Boolean = this@NSDictionaryAsKMap.containsValue(element)
     }
 
     private inner class Entries : AbstractSet<Map.Entry<Any?, Any?>>() {
 
-        override val size: Int get() = this@NSDictionaryAsKMap.size
+        override konst size: Int get() = this@NSDictionaryAsKMap.size
 
         override fun iterator(): Iterator<Map.Entry<Any?, Any?>> = this@NSDictionaryAsKMap.EntryIterator()
 
         override fun contains(element: Map.Entry<Any?, Any?>): Boolean {
-            return this@NSDictionaryAsKMap.containsEntry(element.key, element.value)
+            return this@NSDictionaryAsKMap.containsEntry(element.key, element.konstue)
         }
     }
 
-    private class Entry(override val key: Any?, override val value: Any?) : Map.Entry<Any?, Any?> {
+    private class Entry(override konst key: Any?, override konst konstue: Any?) : Map.Entry<Any?, Any?> {
         override fun equals(other: Any?): Boolean =
                 other is Map.Entry<*, *> &&
                         other.key == key &&
-                        other.value == value
+                        other.konstue == konstue
 
-        override fun hashCode(): Int = key.hashCode() xor value.hashCode()
+        override fun hashCode(): Int = key.hashCode() xor konstue.hashCode()
 
-        override fun toString(): String = "$key=$value"
+        override fun toString(): String = "$key=$konstue"
     }
 
     private inner class EntryIterator : Iterator<Map.Entry<Any?, Any?>> {
-        val keyIterator = this@NSDictionaryAsKMap.keyIterator()
+        konst keyIterator = this@NSDictionaryAsKMap.keyIterator()
 
         override fun hasNext(): Boolean = keyIterator.hasNext()
 
         override fun next(): Map.Entry<Any?, Any?> {
-            val nextKey = keyIterator.next()
-            val nextValue = this@NSDictionaryAsKMap.getOrThrowConcurrentModification(nextKey)
+            konst nextKey = keyIterator.next()
+            konst nextValue = this@NSDictionaryAsKMap.getOrThrowConcurrentModification(nextKey)
 
             return Entry(nextKey, nextValue)
         }
@@ -186,7 +186,7 @@ internal class NSEnumeratorAsKIterator : AbstractIterator<Any?>() {
     private fun Kotlin_NSEnumeratorAsKIterator_done() = this.done()
 
     @ExportForCppRuntime
-    private fun Kotlin_NSEnumeratorAsKIterator_setNext(value: Any?) = this.setNext(value)
+    private fun Kotlin_NSEnumeratorAsKIterator_setNext(konstue: Any?) = this.setNext(konstue)
 }
 
 @ExportForCppRuntime private fun Kotlin_Collection_getSize(collection: Collection<*>): Int = collection.size
@@ -245,8 +245,8 @@ internal class NSEnumeratorAsKIterator : AbstractIterator<Any?>() {
 @ExportForCppRuntime private fun Kotlin_MutableMap_createWithCapacity(capacity: Int): MutableMap<Any?, Any?> =
         HashMap<Any?, Any?>(capacity)
 
-@ExportForCppRuntime private fun Kotlin_MutableMap_set(map: MutableMap<Any?, Any?>, key: Any?, value: Any?) {
-    map.set(key, value)
+@ExportForCppRuntime private fun Kotlin_MutableMap_set(map: MutableMap<Any?, Any?>, key: Any?, konstue: Any?) {
+    map.set(key, konstue)
 }
 @ExportForCppRuntime private fun Kotlin_MutableMap_remove(map: MutableMap<Any?, Any?>, key: Any?) {
     map.remove(key)
@@ -273,7 +273,7 @@ internal class NSEnumeratorAsKIterator : AbstractIterator<Any?>() {
 
 class ObjCErrorException(
         message: String?,
-        internal val error: Any
+        internal konst error: Any
 ) : Exception(message) {
     override fun toString(): String = "NSError-based exception: $message"
 }

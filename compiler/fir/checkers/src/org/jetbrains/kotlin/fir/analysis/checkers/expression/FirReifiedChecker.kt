@@ -21,17 +21,17 @@ import org.jetbrains.kotlin.name.StandardClassIds
 
 object FirReifiedChecker : FirQualifiedAccessExpressionChecker() {
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
-        val calleeReference = expression.calleeReference
-        val typeArguments = expression.typeArguments
-        val typeParameters = calleeReference.toResolvedCallableSymbol()?.typeParameterSymbols ?: return
+        konst calleeReference = expression.calleeReference
+        konst typeArguments = expression.typeArguments
+        konst typeParameters = calleeReference.toResolvedCallableSymbol()?.typeParameterSymbols ?: return
 
-        val count = minOf(typeArguments.size, typeParameters.size)
+        konst count = minOf(typeArguments.size, typeParameters.size)
         for (index in 0 until count) {
-            val typeArgumentProjection = typeArguments.elementAt(index)
-            val source = typeArgumentProjection.source ?: calleeReference.source ?: continue
+            konst typeArgumentProjection = typeArguments.elementAt(index)
+            konst source = typeArgumentProjection.source ?: calleeReference.source ?: continue
 
-            val typeArgument = typeArgumentProjection.toConeTypeProjection().type ?: continue
-            val typeParameter = typeParameters[index]
+            konst typeArgument = typeArgumentProjection.toConeTypeProjection().type ?: continue
+            konst typeParameter = typeParameters[index]
 
             if (typeParameter.isReifiedTypeParameterOrFromKotlinArray()) {
                 checkArgumentAndReport(
@@ -47,7 +47,7 @@ object FirReifiedChecker : FirQualifiedAccessExpressionChecker() {
     }
 
     private fun FirTypeParameterSymbol.isReifiedTypeParameterOrFromKotlinArray(): Boolean {
-        val containingDeclaration = containingDeclarationSymbol
+        konst containingDeclaration = containingDeclarationSymbol
         return isReified ||
                 containingDeclaration is FirRegularClassSymbol && containingDeclaration.classId == StandardClassIds.Array
     }
@@ -61,13 +61,13 @@ object FirReifiedChecker : FirQualifiedAccessExpressionChecker() {
         reporter: DiagnosticReporter
     ) {
         if (typeArgument.classId == StandardClassIds.Array) {
-            val nestedTypeArgument = typeArgument.typeArguments[0].type ?: return
+            konst nestedTypeArgument = typeArgument.typeArguments[0].type ?: return
             checkArgumentAndReport(nestedTypeArgument, source, isExplicit, isArray = true, context, reporter)
             return
         }
 
         if (typeArgument is ConeTypeParameterType) {
-            val symbol = typeArgument.lookupTag.typeParameterSymbol
+            konst symbol = typeArgument.lookupTag.typeParameterSymbol
             if (!symbol.isReified) {
                 reporter.reportOn(
                     source,

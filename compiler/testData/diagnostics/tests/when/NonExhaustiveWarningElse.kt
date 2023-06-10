@@ -15,7 +15,7 @@
 enum class X { A, B, C, D }
 
 fun foo(arg: X): String {
-    val res: String
+    konst res: String
     when (arg) {
         X.A -> res = "A"
         X.B -> res = "B"

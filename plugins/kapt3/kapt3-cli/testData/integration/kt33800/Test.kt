@@ -5,8 +5,8 @@ import generated.Example as ExampleGenerated
 
 @Anno
 class Example() {
-    private val callback = object : Any() {
-        val obj = Object()
+    private konst callback = object : Any() {
+        konst obj = Object()
     }
 
     fun call() {

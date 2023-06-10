@@ -12,7 +12,7 @@ open class A {
     return 1
   }
 
-  internal open val bar: Int
+  internal open konst bar: Int
     field = 1
     internal open get
 

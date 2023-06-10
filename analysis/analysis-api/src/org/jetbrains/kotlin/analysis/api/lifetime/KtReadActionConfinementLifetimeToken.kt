@@ -16,20 +16,20 @@ import org.jetbrains.kotlin.analysis.providers.createProjectWideOutOfBlockModifi
 import kotlin.reflect.KClass
 
 public class KtReadActionConfinementLifetimeToken(project: Project) : KtLifetimeToken() {
-    private val modificationTracker = project.createProjectWideOutOfBlockModificationTracker()
-    private val onCreatedTimeStamp = modificationTracker.modificationCount
+    private konst modificationTracker = project.createProjectWideOutOfBlockModificationTracker()
+    private konst onCreatedTimeStamp = modificationTracker.modificationCount
 
     override fun isValid(): Boolean {
         return onCreatedTimeStamp == modificationTracker.modificationCount
     }
 
-    override fun getInvalidationReason(): String {
+    override fun getInkonstidationReason(): String {
         if (onCreatedTimeStamp != modificationTracker.modificationCount) return "PSI has changed since creation"
-        error("Getting invalidation reason for valid validity token")
+        error("Getting inkonstidation reason for konstid konstidity token")
     }
 
     override fun isAccessible(): Boolean {
-        val application = ApplicationManager.getApplication()
+        konst application = ApplicationManager.getApplication()
         if (application.isDispatchThread && !allowOnEdt.get()) return false
         if (KtAnalysisAllowanceManager.resolveIsForbiddenInActionWithName.get() != null) return false
         if (!application.isReadAccessAllowed) return false
@@ -39,7 +39,7 @@ public class KtReadActionConfinementLifetimeToken(project: Project) : KtLifetime
     }
 
     override fun getInaccessibilityReason(): String {
-        val application = ApplicationManager.getApplication()
+        konst application = ApplicationManager.getApplication()
         if (application.isDispatchThread && !allowOnEdt.get()) return "Called in EDT thread"
         if (!application.isReadAccessAllowed) return "Called outside read action"
         KtAnalysisAllowanceManager.resolveIsForbiddenInActionWithName.get()?.let { actionName ->
@@ -48,20 +48,20 @@ public class KtReadActionConfinementLifetimeToken(project: Project) : KtLifetime
         if (!KtReadActionConfinementLifetimeTokenFactory.isInsideAnalysisContext()) return "Called outside analyse method"
         if (KtReadActionConfinementLifetimeTokenFactory.currentToken() != this) return "Using KtLifetimeOwner from previous analysis"
 
-        error("Getting inaccessibility reason for validity token when it is accessible")
+        error("Getting inaccessibility reason for konstidity token when it is accessible")
     }
 
 
     public companion object {
         @KtAnalysisApiInternals
-        public val allowOnEdt: ThreadLocal<Boolean> = ThreadLocal.withInitial { false }
+        public konst allowOnEdt: ThreadLocal<Boolean> = ThreadLocal.withInitial { false }
     }
 
-    public override val factory: KtLifetimeTokenFactory = KtReadActionConfinementLifetimeTokenFactory
+    public override konst factory: KtLifetimeTokenFactory = KtReadActionConfinementLifetimeTokenFactory
 }
 
 public object KtReadActionConfinementLifetimeTokenFactory : KtLifetimeTokenFactory() {
-    override val identifier: KClass<out KtLifetimeToken> = KtReadActionConfinementLifetimeToken::class
+    override konst identifier: KClass<out KtLifetimeToken> = KtReadActionConfinementLifetimeToken::class
 
     override fun create(project: Project): KtLifetimeToken = KtReadActionConfinementLifetimeToken(project)
 
@@ -70,13 +70,13 @@ public object KtReadActionConfinementLifetimeTokenFactory : KtLifetimeTokenFacto
     }
 
     override fun afterLeavingAnalysisContext(token: KtLifetimeToken) {
-        val stack = lifetimeOwnersStack.get()
-        val last = stack.last()
+        konst stack = lifetimeOwnersStack.get()
+        konst last = stack.last()
         check(last == token)
         lifetimeOwnersStack.set(stack.removeAt(stack.lastIndex))
     }
 
-    private val lifetimeOwnersStack = ThreadLocal.withInitial<PersistentList<KtLifetimeToken>> { persistentListOf() }
+    private konst lifetimeOwnersStack = ThreadLocal.withInitial<PersistentList<KtLifetimeToken>> { persistentListOf() }
 
     internal fun isInsideAnalysisContext() = lifetimeOwnersStack.get().size > 0
 

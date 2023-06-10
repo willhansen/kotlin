@@ -29,7 +29,7 @@ import kotlin.reflect.KClass
  *
  * In case an extension visitor of an unrelated type is returned, the code using the visitor API must ignore that visitor.
  */
-class KmExtensionType(private val klass: KClass<out KmExtensionVisitor>) {
+class KmExtensionType(private konst klass: KClass<out KmExtensionVisitor>) {
     override fun equals(other: Any?): Boolean =
         other is KmExtensionType && klass == other.klass
 
@@ -48,7 +48,7 @@ interface KmExtensionVisitor {
     /**
      * Type of this extension visitor.
      */
-    val type: KmExtensionType
+    konst type: KmExtensionType
 }
 
 /**
@@ -106,7 +106,7 @@ interface KmTypeExtensionVisitor : KmExtensionVisitor
 interface KmTypeAliasExtensionVisitor : KmExtensionVisitor
 
 /**
- * A visitor to visit platform-specific extensions for a value parameter.
+ * A visitor to visit platform-specific extensions for a konstue parameter.
  */
 @Deprecated(VISITOR_API_MESSAGE)
 interface KmValueParameterExtensionVisitor : KmExtensionVisitor

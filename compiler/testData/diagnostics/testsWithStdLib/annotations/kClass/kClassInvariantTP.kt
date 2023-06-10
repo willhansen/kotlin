@@ -3,7 +3,7 @@ import kotlin.reflect.KClass
 open class A
 class B : A()
 
-annotation class Ann1(val arg: KClass<A>)
+annotation class Ann1(konst arg: KClass<A>)
 
 @Ann1(A::class)
 class MyClass1
@@ -14,7 +14,7 @@ class MyClass1a
 @Ann1(<!TYPE_MISMATCH!>B::class<!>)
 class MyClass2
 
-annotation class Ann2(val arg: KClass<B>)
+annotation class Ann2(konst arg: KClass<B>)
 
 @Ann2(<!TYPE_MISMATCH!>A::class<!>)
 class MyClass3

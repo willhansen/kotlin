@@ -17,7 +17,7 @@ inline fun<reified T : Any> foo(): A {
 }
 
 fun box(): String {
-    val y = foo<String>();
+    konst y = foo<String>();
     assertEquals("java.lang.String", y.f())
     return "OK"
 }

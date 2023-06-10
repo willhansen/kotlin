@@ -13,8 +13,8 @@ fun foo(a: () -> Unit, b: () -> Unit, c: () -> Unit, d: () -> Unit, e: () -> Uni
 
     class LocalClass {
 
-        val leakedVal = <!LEAKED_IN_PLACE_LAMBDA!>a<!>
-        val leaked: Any
+        konst leakedVal = <!LEAKED_IN_PLACE_LAMBDA!>a<!>
+        konst leaked: Any
 
         constructor() {
             <!LEAKED_IN_PLACE_LAMBDA!>b<!>()

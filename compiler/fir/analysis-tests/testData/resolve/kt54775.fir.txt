@@ -9,7 +9,7 @@ FILE: kt54775.kt
 
         private final field $$delegate_0: <ERROR TYPE REF: Symbol not found for B> = ERROR_EXPR(Should have delegate)
 
-        public final val prop: <ERROR TYPE REF: Should have initializer> = ERROR_EXPR(Should have initializer)
+        public final konst prop: <ERROR TYPE REF: Should have initializer> = ERROR_EXPR(Should have initializer)
             public get(): <ERROR TYPE REF: Should have initializer>
 
     }

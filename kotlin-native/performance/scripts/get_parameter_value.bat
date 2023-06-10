@@ -14,4 +14,4 @@ if not "%ALL_PARAMS%" == "" (
   SET "ALL_PARAMS=-PcompilerArgs=%ALL_PARAMS%"
 )
 
-echo "##teamcity[setParameter name='env.konanCompilerArgs' value='%ALL_PARAMS%']"
+echo "##teamcity[setParameter name='env.konanCompilerArgs' konstue='%ALL_PARAMS%']"

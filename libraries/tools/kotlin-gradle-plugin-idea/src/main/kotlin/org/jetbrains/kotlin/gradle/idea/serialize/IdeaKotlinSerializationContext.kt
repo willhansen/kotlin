@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.gradle.idea.serialize
 
 interface IdeaKotlinSerializationContext {
-    val logger: IdeaKotlinSerializationLogger
-    val extrasSerializationExtension: IdeaKotlinExtrasSerializationExtension
+    konst logger: IdeaKotlinSerializationLogger
+    konst extrasSerializationExtension: IdeaKotlinExtrasSerializationExtension
 }

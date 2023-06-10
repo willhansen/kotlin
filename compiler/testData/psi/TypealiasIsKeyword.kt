@@ -1,1 +1,1 @@
-val typealias = 0
+konst typealias = 0

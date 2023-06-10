@@ -14,5 +14,5 @@ import org.gradle.api.Project
  */
 interface KotlinBasePlugin : Plugin<Project> {
     /** Gets the current version of the Kotlin Gradle plugin. */
-    val pluginVersion: String
+    konst pluginVersion: String
 }

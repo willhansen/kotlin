@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.analysis.api.renderer.types.KtTypeRenderer
 import org.jetbrains.kotlin.analysis.utils.printer.PrettyPrinter
 
 public class KtContextReceiversRenderer(
-    public val contextReceiverListRenderer: KtContextReceiverListRenderer,
-    public val contextReceiverLabelRenderer: KtContextReceiverLabelRenderer,
+    public konst contextReceiverListRenderer: KtContextReceiverListRenderer,
+    public konst contextReceiverLabelRenderer: KtContextReceiverLabelRenderer,
 ) {
     context(KtAnalysisSession, KtTypeRenderer)
     public fun renderContextReceivers(owner: KtContextReceiversOwner, printer: PrettyPrinter) {
@@ -22,7 +22,7 @@ public class KtContextReceiversRenderer(
     }
 
     public inline fun with(action: Builder.() -> Unit): KtContextReceiversRenderer {
-        val renderer = this
+        konst renderer = this
         return KtContextReceiversRenderer {
             this.contextReceiverListRenderer = renderer.contextReceiverListRenderer
             this.contextReceiverLabelRenderer = renderer.contextReceiverLabelRenderer

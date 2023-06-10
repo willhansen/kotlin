@@ -7,7 +7,7 @@ import kotlin.reflect.jvm.javaType
 import kotlin.test.assertEquals
 
 open class A {
-    val property = "OK"
+    konst property = "OK"
 
     fun function() {}
 }
@@ -20,8 +20,8 @@ fun box(): String {
     assertEquals(B::class, B::function.instanceParameter!!.type.jvmErasure)
     assertEquals(B::class.java, B::function.instanceParameter!!.type.javaType)
 
-    val property = B::class.members.single { it.name == "property" }
-    val function = B::class.members.single { it.name == "function" }
+    konst property = B::class.members.single { it.name == "property" }
+    konst function = B::class.members.single { it.name == "function" }
     assertEquals(B::class, property.instanceParameter!!.type.jvmErasure)
     assertEquals(B::class.java, property.instanceParameter!!.type.javaType)
     assertEquals(B::class, function.instanceParameter!!.type.jvmErasure)

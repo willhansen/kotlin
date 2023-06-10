@@ -9,9 +9,9 @@
 public annotation class TestAnn
 
 fun box(): String {
-    val testAnnClass = TestAnn::class.java
-    val targetAnn = testAnnClass.getAnnotation(java.lang.annotation.Target::class.java)
-    val targets = targetAnn.value.toList()
+    konst testAnnClass = TestAnn::class.java
+    konst targetAnn = testAnnClass.getAnnotation(java.lang.annotation.Target::class.java)
+    konst targets = targetAnn.konstue.toList()
     if (targets != listOf(java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD)) {
         return targets.toString()
     }

@@ -8,7 +8,7 @@ class Derived : Base() {
     init {
         pf = "OK"
     }
-    val delegated by ::pf
+    konst delegated by ::pf
 }
 
 fun box(): String {

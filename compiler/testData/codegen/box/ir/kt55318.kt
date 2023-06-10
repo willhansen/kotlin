@@ -23,7 +23,7 @@ class Sub<SubTP>: Super<SubTP>() {
 package repro
 
 class User<UserTP> {
-    val sub = Sub<UserTP>()
+    konst sub = Sub<UserTP>()
     fun foo(i: I<UserTP>) = sub.foo(i)
 }
 

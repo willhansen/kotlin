@@ -8,8 +8,8 @@
 package a
 
 fun foo(): String = "OK"
-const val constOK: String = "OK"
-val valOK: String = "OK"
+const konst constOK: String = "OK"
+konst konstOK: String = "OK"
 var varOK: String = "Hmmm?"
 
 // MODULE: main(lib)
@@ -20,7 +20,7 @@ import a.*
 fun box(): String {
     if (foo() != "OK") return "Fail function"
     if (constOK != "OK") return "Fail const"
-    if (valOK != "OK") return "Fail val"
+    if (konstOK != "OK") return "Fail konst"
     varOK = "OK"
     if (varOK != "OK") return "Fail var"
     return varOK

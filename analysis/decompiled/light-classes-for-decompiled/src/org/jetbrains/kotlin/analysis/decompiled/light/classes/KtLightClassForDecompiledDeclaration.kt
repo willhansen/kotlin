@@ -37,10 +37,10 @@ internal inline fun <R : PsiElement, T> R.cachedValueWithLibraryTracker(
 open class KtLightClassForDecompiledDeclaration(
     clsDelegate: PsiClass,
     clsParent: PsiElement,
-    protected val file: KtClsFile,
+    protected konst file: KtClsFile,
     kotlinOrigin: KtClassOrObject?
 ) : KtLightClassForDecompiledDeclarationBase(clsDelegate, clsParent, kotlinOrigin) {
-    private val myInnersCache by lazyPub {
+    private konst myInnersCache by lazyPub {
         ClassInnerStuffCache(
             /* aClass = */ this,
             /* generateEnumMethods = */ true,
@@ -127,7 +127,7 @@ open class KtLightClassForDecompiledDeclaration(
     override fun getAllFields(): Array<PsiField> = PsiClassImplUtil.getAllFields(this)
 
     override fun getOwnMethods(): List<PsiMethod> = cachedValueWithLibraryTracker {
-        val isEnum = isEnum
+        konst isEnum = isEnum
         this.clsDelegate.methods.mapNotNull { psiMethod ->
             if (isSyntheticValuesOrValueOfMethod(psiMethod)) return@mapNotNull null
             if (isEnum && isGetEntriesMethod(psiMethod)) {
@@ -163,7 +163,7 @@ open class KtLightClassForDecompiledDeclaration(
 
     override fun getOwnInnerClasses(): List<PsiClass> = cachedValueWithLibraryTracker {
         this.clsDelegate.innerClasses.map { psiClass ->
-            val innerDeclaration = this.kotlinOrigin
+            konst innerDeclaration = this.kotlinOrigin
                 ?.declarations
                 ?.filterIsInstance<KtClassOrObject>()
                 ?.firstOrNull { cls -> cls.name == this.clsDelegate.name }
@@ -177,7 +177,7 @@ open class KtLightClassForDecompiledDeclaration(
         }
     }
 
-    override val originKind: LightClassOriginKind = LightClassOriginKind.BINARY
+    override konst originKind: LightClassOriginKind = LightClassOriginKind.BINARY
     override fun getNavigationElement() = kotlinOrigin?.navigationElement ?: file
 
     override fun equals(other: Any?): Boolean {

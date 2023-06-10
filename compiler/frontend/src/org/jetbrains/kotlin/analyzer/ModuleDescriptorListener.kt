@@ -9,11 +9,11 @@ import com.intellij.util.messages.Topic
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 
 interface ModuleDescriptorListener {
-    fun moduleDescriptorInvalidated(moduleDescriptor: ModuleDescriptor)
+    fun moduleDescriptorInkonstidated(moduleDescriptor: ModuleDescriptor)
 
     companion object {
         @JvmField
-        val TOPIC: Topic<ModuleDescriptorListener> =
+        konst TOPIC: Topic<ModuleDescriptorListener> =
             Topic.create("ModuleDescriptorListener", ModuleDescriptorListener::class.java)
     }
 }

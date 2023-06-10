@@ -13,7 +13,7 @@ import java.lang.IllegalArgumentException
 interface I
 
 @Serializable
-data class Box<T: I>(val boxed: T)
+data class Box<T: I>(konst boxed: T)
 
 inline fun <reified T: Any> getSer(): KSerializer<T> {
     return serializer<T>()

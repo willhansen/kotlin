@@ -51,9 +51,9 @@ fun String.isValidES5Identifier(): Boolean {
     return true
 }
 
-val SPECIAL_KEYWORDS: Set<String> = setOf("default")
+konst SPECIAL_KEYWORDS: Set<String> = setOf("default")
 
-val RESERVED_KEYWORDS: Set<String> = SPECIAL_KEYWORDS + setOf(
+konst RESERVED_KEYWORDS: Set<String> = SPECIAL_KEYWORDS + setOf(
     // keywords
     "await", "break", "case", "catch", "continue", "debugger", "delete", "do", "else", "finally", "for", "function", "if",
     "in", "instanceof", "new", "return", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with",
@@ -68,5 +68,5 @@ val RESERVED_KEYWORDS: Set<String> = SPECIAL_KEYWORDS + setOf(
     "null", "true", "false",
 
     // disallowed as variable names in strict mode
-    "eval", "arguments",
+    "ekonst", "arguments",
 )

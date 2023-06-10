@@ -12,15 +12,15 @@ fun CompilerPhase<*, *, *>.toPhaseMap(): MutableMap<String, AnyNamedPhase> =
         acc
     }
 
-class PhaseConfigBuilder(private val compoundPhase: CompilerPhase<*, *, *>) {
-    val enabled = mutableSetOf<AnyNamedPhase>()
-    val verbose = mutableSetOf<AnyNamedPhase>()
-    val toDumpStateBefore = mutableSetOf<AnyNamedPhase>()
-    val toDumpStateAfter = mutableSetOf<AnyNamedPhase>()
+class PhaseConfigBuilder(private konst compoundPhase: CompilerPhase<*, *, *>) {
+    konst enabled = mutableSetOf<AnyNamedPhase>()
+    konst verbose = mutableSetOf<AnyNamedPhase>()
+    konst toDumpStateBefore = mutableSetOf<AnyNamedPhase>()
+    konst toDumpStateAfter = mutableSetOf<AnyNamedPhase>()
     var dumpToDirectory: String? = null
     var dumpOnlyFqName: String? = null
-    val toValidateStateBefore = mutableSetOf<AnyNamedPhase>()
-    val toValidateStateAfter = mutableSetOf<AnyNamedPhase>()
+    konst toValidateStateBefore = mutableSetOf<AnyNamedPhase>()
+    konst toValidateStateAfter = mutableSetOf<AnyNamedPhase>()
     var needProfiling = false
     var checkConditions = false
     var checkStickyConditions = false
@@ -34,25 +34,25 @@ class PhaseConfigBuilder(private val compoundPhase: CompilerPhase<*, *, *>) {
 }
 
 class PhaseConfig(
-    private val compoundPhase: CompilerPhase<*, *, *>,
-    private val phases: Map<String, AnyNamedPhase> = compoundPhase.toPhaseMap(),
-    private val initiallyEnabled: Set<AnyNamedPhase> = phases.values.toSet(),
-    val verbose: Set<AnyNamedPhase> = emptySet(),
-    val toDumpStateBefore: Set<AnyNamedPhase> = emptySet(),
-    val toDumpStateAfter: Set<AnyNamedPhase> = emptySet(),
-    override val dumpToDirectory: String? = null,
-    override val dumpOnlyFqName: String? = null,
-    private val toValidateStateBefore: Set<AnyNamedPhase> = emptySet(),
-    private val toValidateStateAfter: Set<AnyNamedPhase> = emptySet(),
-    override val needProfiling: Boolean = false,
-    override val checkConditions: Boolean = false,
-    override val checkStickyConditions: Boolean = false
+    private konst compoundPhase: CompilerPhase<*, *, *>,
+    private konst phases: Map<String, AnyNamedPhase> = compoundPhase.toPhaseMap(),
+    private konst initiallyEnabled: Set<AnyNamedPhase> = phases.konstues.toSet(),
+    konst verbose: Set<AnyNamedPhase> = emptySet(),
+    konst toDumpStateBefore: Set<AnyNamedPhase> = emptySet(),
+    konst toDumpStateAfter: Set<AnyNamedPhase> = emptySet(),
+    override konst dumpToDirectory: String? = null,
+    override konst dumpOnlyFqName: String? = null,
+    private konst toValidateStateBefore: Set<AnyNamedPhase> = emptySet(),
+    private konst toValidateStateAfter: Set<AnyNamedPhase> = emptySet(),
+    override konst needProfiling: Boolean = false,
+    override konst checkConditions: Boolean = false,
+    override konst checkStickyConditions: Boolean = false
 ) : PhaseConfigurationService {
     @Deprecated("Provided for binary compatibility", level = DeprecationLevel.HIDDEN)
     constructor(
         compoundPhase: CompilerPhase<*, *, *>,
         phases: Map<String, AnyNamedPhase> = compoundPhase.toPhaseMap(),
-        initiallyEnabled: Set<AnyNamedPhase> = phases.values.toSet(),
+        initiallyEnabled: Set<AnyNamedPhase> = phases.konstues.toSet(),
         verbose: Set<AnyNamedPhase> = emptySet(),
         toDumpStateBefore: Set<AnyNamedPhase> = emptySet(),
         toDumpStateAfter: Set<AnyNamedPhase> = emptySet(),
@@ -101,9 +101,9 @@ class PhaseConfig(
     override fun shouldValidateStateAfter(phase: AnyNamedPhase): Boolean =
         phase in toValidateStateAfter
 
-    private val enabledMut = initiallyEnabled.toMutableSet()
+    private konst enabledMut = initiallyEnabled.toMutableSet()
 
-    val enabled: Set<AnyNamedPhase> get() = enabledMut
+    konst enabled: Set<AnyNamedPhase> get() = enabledMut
 
     fun known(name: String): String {
         if (phases[name] == null) {
@@ -114,8 +114,8 @@ class PhaseConfig(
 
     fun list() {
         compoundPhase.getNamedSubphases().forEach { (depth, phase) ->
-            val disabled = if (phase !in enabled) " (Disabled)" else ""
-            val verbose = if (phase in verbose) " (Verbose)" else ""
+            konst disabled = if (phase !in enabled) " (Disabled)" else ""
+            konst verbose = if (phase in verbose) " (Verbose)" else ""
 
             println(
                 "%1$-50s %2$-50s %3$-10s".format(

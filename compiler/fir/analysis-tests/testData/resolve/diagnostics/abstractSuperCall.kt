@@ -1,12 +1,12 @@
 open class C {
-    open val x: Int = 10
+    open konst x: Int = 10
     fun h() {}
 }
 
 abstract class A : C() {
-    override val x: Int = 20
+    override konst x: Int = 20
 
-    abstract val y: Int
+    abstract konst y: Int
 
     abstract fun f()
 

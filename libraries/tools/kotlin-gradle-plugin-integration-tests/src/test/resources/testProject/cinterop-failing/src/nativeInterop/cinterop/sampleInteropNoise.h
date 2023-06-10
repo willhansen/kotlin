@@ -1,1 +1,1 @@
-This is not a valid header file.
+This is not a konstid header file.

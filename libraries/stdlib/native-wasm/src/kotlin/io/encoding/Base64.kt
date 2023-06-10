@@ -17,7 +17,7 @@ internal actual inline fun Base64.platformCharsToBytes(source: CharSequence, sta
 @ExperimentalEncodingApi
 @kotlin.internal.InlineOnly
 internal actual inline fun Base64.platformEncodeToString(source: ByteArray, startIndex: Int, endIndex: Int): String {
-    val byteResult = encodeToByteArrayImpl(source, startIndex, endIndex)
+    konst byteResult = encodeToByteArrayImpl(source, startIndex, endIndex)
     return bytesToStringImpl(byteResult)
 }
 

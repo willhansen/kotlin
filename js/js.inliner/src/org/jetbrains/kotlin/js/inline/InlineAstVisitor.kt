@@ -21,13 +21,13 @@ import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
 // Visits AST, detects inline function declarations and invocations.
 class InlineAstVisitor(
-    private val jsInliner: JsInliner,
-    private val scope: InliningScope
+    private konst jsInliner: JsInliner,
+    private konst scope: InliningScope
 ) : JsVisitorWithContextImpl() {
     override fun visit(x: JsInvocation, ctx: JsContext<*>): Boolean {
         // Is it `defineInlineFunction('tag', ...)`?
         InlineMetadata.decompose(x)?.let {
-            jsInliner.process(InlineFunctionDefinition(it.function, it.tag.value), x, scope.fragment, scope)
+            jsInliner.process(InlineFunctionDefinition(it.function, it.tag.konstue), x, scope.fragment, scope)
             return false
         }
 
@@ -69,7 +69,7 @@ class InlineAstVisitor(
 
     override fun endVisit(call: JsInvocation, ctx: JsContext<JsNode>) {
         if (hasToBeInlined(call)) {
-            val (inlineableBody, resultExpression) = jsInliner.inline(scope, call, lastStatementLevelContext.currentNode)
+            konst (inlineableBody, resultExpression) = jsInliner.inline(scope, call, lastStatementLevelContext.currentNode)
 
             lastStatementLevelContext.addPrevious(JsAstUtils.flattenStatement(inlineableBody))
 
@@ -87,7 +87,7 @@ class InlineAstVisitor(
         var i = 0
 
         while (i < statements.size) {
-            val additionalStatements = ExpressionDecomposer.preserveEvaluationOrder(statements[i], ::hasToBeInlined)
+            konst additionalStatements = ExpressionDecomposer.preserveEkonstuationOrder(statements[i], ::hasToBeInlined)
             statements.addAll(i, additionalStatements)
             i += additionalStatements.size + 1
         }
@@ -123,7 +123,7 @@ class InlineAstVisitor(
 
     private fun tryCreatePropertyGetterInvocation(x: JsNameRef): JsInvocation? {
         if (x.isInline != null && x.descriptor is PropertyGetterDescriptor) {
-            val dummyInvocation = JsInvocation(x)
+            konst dummyInvocation = JsInvocation(x)
             copyInlineMetadata(x, dummyInvocation)
             return dummyInvocation
         }
@@ -132,9 +132,9 @@ class InlineAstVisitor(
 
     private fun tryCreatePropertySetterInvocation(x: JsBinaryOperation): JsInvocation? {
         if (!x.operator.isAssignment || x.arg1 !is JsNameRef) return null
-        val name = x.arg1 as JsNameRef
+        konst name = x.arg1 as JsNameRef
         if (name.isInline != null && name.descriptor is PropertySetterDescriptor) {
-            val dummyInvocation = JsInvocation(name, x.arg2)
+            konst dummyInvocation = JsInvocation(name, x.arg2)
             copyInlineMetadata(name, dummyInvocation)
             return dummyInvocation
         }

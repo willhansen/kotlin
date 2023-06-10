@@ -5,14 +5,14 @@
 
 fun foo() = B().bar()
 
-val life = 42
+konst life = 42
 
 interface A {
-    val x get() = life
+    konst x get() = life
 }
 
 class B : A {
     fun bar() = x
 }
 
-val rv = foo()
+konst rv = foo()

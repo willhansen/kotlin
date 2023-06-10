@@ -14,13 +14,13 @@ package kotlin.js
 public external interface Dynamic : JsAny
 
 /**
- * Reinterprets this value as a value of the Dynamic type.
+ * Reinterprets this konstue as a konstue of the Dynamic type.
  */
-@Deprecated("If value is a subtype of JsAny, use JsAny instead. Otherwise, use toJsReference", level = DeprecationLevel.ERROR)
+@Deprecated("If konstue is a subtype of JsAny, use JsAny instead. Otherwise, use toJsReference", level = DeprecationLevel.ERROR)
 fun Any.asDynamic(): JsAny = this.toJsReference()
 
 /**
- * Reinterprets this value as a value of the Dynamic type.
+ * Reinterprets this konstue as a konstue of the Dynamic type.
  */
 @Deprecated("Use toJsString instead", level = DeprecationLevel.ERROR, replaceWith = ReplaceWith("this.toJsString()"))
 @kotlin.internal.InlineOnly
@@ -43,11 +43,11 @@ private fun jsCatch(f: () -> Unit): JsAny? {
 }
 
 /**
- * For a Dynamic value caught in JS, returns the corresponding [Throwable]
+ * For a Dynamic konstue caught in JS, returns the corresponding [Throwable]
  * if it was thrown from Kotlin, or null otherwise.
  */
 public fun JsAny.toThrowableOrNull(): Throwable? {
-    val thisAny: Any = this
+    konst thisAny: Any = this
     if (thisAny is Throwable) return thisAny
     var result: Throwable? = null
     jsCatch {

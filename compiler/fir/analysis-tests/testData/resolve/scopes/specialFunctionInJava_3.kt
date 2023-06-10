@@ -18,9 +18,9 @@ public abstract class D extends B implements C {}
 // FILE: main.kt
 
 abstract class A {
-    open val x: Int
+    open konst x: Int
         get() = 1
-    open val y: Int
+    open konst y: Int
         get() = 2
 }
 

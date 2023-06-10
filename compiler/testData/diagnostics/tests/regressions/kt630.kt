@@ -3,5 +3,5 @@
 
 fun <T : Any> T?.sure() : T = this!!
 
-val x = "lala".sure()
-val s : String = x
+konst x = "lala".sure()
+konst s : String = x

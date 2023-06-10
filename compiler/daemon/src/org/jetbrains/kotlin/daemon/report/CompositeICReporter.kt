@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.build.report.RemoteICReporter
 import org.jetbrains.kotlin.cli.common.ExitCode
 import java.io.File
 
-internal class CompositeICReporter(private val reporters: Iterable<RemoteICReporter>) : RemoteICReporter {
+internal class CompositeICReporter(private konst reporters: Iterable<RemoteICReporter>) : RemoteICReporter {
     override fun report(message: () -> String, severity: ReportSeverity) {
         reporters.forEach { it.report(message, severity) }
     }

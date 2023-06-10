@@ -26,30 +26,30 @@ public abstract class KtCompletionCandidateChecker : KtAnalysisSessionComponent(
 
 public sealed class KtExtensionApplicabilityResult : KtLifetimeOwner {
     public sealed class Applicable : KtExtensionApplicabilityResult() {
-        public abstract val receiverCastRequired: Boolean
-        public abstract val substitutor: KtSubstitutor
+        public abstract konst receiverCastRequired: Boolean
+        public abstract konst substitutor: KtSubstitutor
     }
 
     public class ApplicableAsExtensionCallable(
-        private val _substitutor: KtSubstitutor,
-        private val _receiverCastRequired: Boolean,
-        override val token: KtLifetimeToken
+        private konst _substitutor: KtSubstitutor,
+        private konst _receiverCastRequired: Boolean,
+        override konst token: KtLifetimeToken
     ) : Applicable() {
-        override val substitutor: KtSubstitutor = withValidityAssertion { _substitutor }
-        override val receiverCastRequired: Boolean get() = withValidityAssertion { _receiverCastRequired }
+        override konst substitutor: KtSubstitutor = withValidityAssertion { _substitutor }
+        override konst receiverCastRequired: Boolean get() = withValidityAssertion { _receiverCastRequired }
     }
 
     public class ApplicableAsFunctionalVariableCall(
-        private val _substitutor: KtSubstitutor,
-        private val _receiverCastRequired: Boolean,
-        override val token: KtLifetimeToken
+        private konst _substitutor: KtSubstitutor,
+        private konst _receiverCastRequired: Boolean,
+        override konst token: KtLifetimeToken
     ) : Applicable() {
-        override val substitutor: KtSubstitutor get() = withValidityAssertion { _substitutor }
-        override val receiverCastRequired: Boolean get() = withValidityAssertion { _receiverCastRequired }
+        override konst substitutor: KtSubstitutor get() = withValidityAssertion { _substitutor }
+        override konst receiverCastRequired: Boolean get() = withValidityAssertion { _receiverCastRequired }
     }
 
     public class NonApplicable(
-        override val token: KtLifetimeToken
+        override konst token: KtLifetimeToken
     ) : KtExtensionApplicabilityResult()
 }
 

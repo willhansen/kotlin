@@ -4,20 +4,20 @@
 package a
 
 interface IrSymbol {
-    val owner: Any
+    konst owner: Any
 }
 
 interface IrFunction
 interface IrSimpleFunction : IrFunction {
-    val name: String
+    konst name: String
 }
 
 interface IrFunctionSymbol : IrSymbol {
-    override val owner: IrFunction
+    override konst owner: IrFunction
 }
 
 interface IrBindableSymbol<B : Any> : IrSymbol {
-    override val owner: B
+    override konst owner: B
 }
 
 interface IrSimpleFunctionSymbol : IrFunctionSymbol, IrBindableSymbol<IrSimpleFunction>
@@ -32,9 +32,9 @@ fun foo(x: IrSimpleFunctionSymbol): String {
 
 fun box(): String {
     return foo(object : IrSimpleFunctionSymbol {
-        override val owner: IrSimpleFunction
+        override konst owner: IrSimpleFunction
             get() = object : IrSimpleFunction {
-                override val name: String
+                override konst name: String
                     get() = "OK"
             }
     })

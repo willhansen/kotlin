@@ -1,14 +1,14 @@
 // Changed when traits were introduced. May not make sense any more
 
-open class X(val x : Int) {}
+open class X(konst x : Int) {}
 interface Y {
-    abstract val y : Int
+    abstract konst y : Int
 }
 
-class YImpl(override val y : Int) : Y {}
+class YImpl(override konst y : Int) : Y {}
 
 class Point(x : Int, yy : Int) : X(x) , Y {
-    override val y : Int = yy
+    override konst y : Int = yy
 }
 
 interface Abstract {}
@@ -22,19 +22,19 @@ fun box() : String {
     if (X(239).x != 239) return "FAIL #1"
     if (YImpl(239).y != 239) return "FAIL #2"
 
-    val p = Point(240, -1)
+    konst p = Point(240, -1)
     if (p.x + p.y != 239) return "FAIL #3"
 
-    val y = YImpl(-1)
-    val p1 = P1(240, y)
+    konst y = YImpl(-1)
+    konst p1 = P1(240, y)
     if (p1.x + p1.y != 239) return "FAIL #4"
-    val p2 = P2(240, y)
+    konst p2 = P2(240, y)
     if (p2.x + p2.y != 239) return "FAIL #5"
 
-    val p3 = P3(240, y)
+    konst p3 = P3(240, y)
     if (p3.x + p3.y != 239) return "FAIL #6"
 
-    val p4 = P4(240, y)
+    konst p4 = P4(240, y)
     if (p4.x + p4.y != 239) return "FAIL #7"
 
     return "OK"

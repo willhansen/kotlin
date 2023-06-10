@@ -10,7 +10,7 @@ import kotlinx.cinterop.staticCFunction
 import threadStates.*
 
 fun main() {
-    val hook = { throwable: Throwable ->
+    konst hook = { throwable: Throwable ->
         print("${throwable::class.simpleName}. Runnable state: ${Debugging.isThreadStateRunnable}")
     }
     if (Platform.memoryModel != MemoryModel.EXPERIMENTAL) {

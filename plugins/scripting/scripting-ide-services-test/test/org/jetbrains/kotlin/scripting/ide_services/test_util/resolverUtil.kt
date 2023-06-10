@@ -13,40 +13,40 @@ import kotlin.script.experimental.dependencies.*
 import kotlin.script.experimental.dependencies.maven.MavenDependenciesResolver
 import kotlin.script.experimental.jvm.withUpdatedClasspath
 
-// in case of flat or direct resolvers the value should be a direct path or file name of a jar respectively
+// in case of flat or direct resolvers the konstue should be a direct path or file name of a jar respectively
 // in case of maven resolver the maven coordinates string is accepted (resolved with com.jcabi.aether library)
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class DependsOn(val value: String = "")
+annotation class DependsOn(konst konstue: String = "")
 
 open class ScriptDependenciesResolver {
 
-    private val resolver = CompoundDependenciesResolver(FileSystemDependenciesResolver(), MavenDependenciesResolver())
-    private val addedClasspath = mutableListOf<File>()
+    private konst resolver = CompoundDependenciesResolver(FileSystemDependenciesResolver(), MavenDependenciesResolver())
+    private konst addedClasspath = mutableListOf<File>()
 
     fun resolveFromAnnotations(script: ScriptContents): ResultWithDiagnostics<List<File>> {
-        val scriptDiagnostics = mutableListOf<ScriptDiagnostic>()
-        val classpath = mutableListOf<File>()
+        konst scriptDiagnostics = mutableListOf<ScriptDiagnostic>()
+        konst classpath = mutableListOf<File>()
 
         script.annotations.forEach { annotation ->
             when (annotation) {
                 is DependsOn -> {
                     try {
-                        when (val result = runBlocking { resolver.resolve(annotation.value) }) {
+                        when (konst result = runBlocking { resolver.resolve(annotation.konstue) }) {
                             is ResultWithDiagnostics.Failure -> {
-                                val diagnostics = ScriptDiagnostic(
+                                konst diagnostics = ScriptDiagnostic(
                                     ScriptDiagnostic.unspecifiedError,
-                                    "Failed to resolve ${annotation.value}:\n" + result.reports.joinToString("\n") { it.message })
+                                    "Failed to resolve ${annotation.konstue}:\n" + result.reports.joinToString("\n") { it.message })
                                 scriptDiagnostics.add(diagnostics)
                             }
                             is ResultWithDiagnostics.Success -> {
-                                addedClasspath.addAll(result.value)
-                                classpath.addAll(result.value)
+                                addedClasspath.addAll(result.konstue)
+                                classpath.addAll(result.konstue)
                             }
                         }
                     } catch (e: Exception) {
-                        val diagnostic =
+                        konst diagnostic =
                             ScriptDiagnostic(ScriptDiagnostic.unspecifiedError, "Unhandled exception during resolve", exception = e)
                         scriptDiagnostics.add(diagnostic)
                     }
@@ -63,12 +63,12 @@ fun configureMavenDepsOnAnnotations(
     context: ScriptConfigurationRefinementContext,
     resolver: ScriptDependenciesResolver
 ): ResultWithDiagnostics<ScriptCompilationConfiguration> {
-    val annotations = context.collectedData?.get(ScriptCollectedData.foundAnnotations)?.takeIf { it.isNotEmpty() }
+    konst annotations = context.collectedData?.get(ScriptCollectedData.foundAnnotations)?.takeIf { it.isNotEmpty() }
         ?: return context.compilationConfiguration.asSuccess()
-    val scriptContents = object : ScriptContents {
-        override val annotations: Iterable<Annotation> = annotations
-        override val file: File? = null
-        override val text: CharSequence? = null
+    konst scriptContents = object : ScriptContents {
+        override konst annotations: Iterable<Annotation> = annotations
+        override konst file: File? = null
+        override konst text: CharSequence? = null
     }
     return try {
         resolver.resolveFromAnnotations(scriptContents)

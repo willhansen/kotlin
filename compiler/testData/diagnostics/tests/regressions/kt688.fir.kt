@@ -10,5 +10,5 @@ class C() {
     return x(x(y))
   }
 
-  val x: B = a({it.b()}, B())
+  konst x: B = a({it.b()}, B())
 }

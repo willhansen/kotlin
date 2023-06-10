@@ -3,7 +3,7 @@
  * that can be found in the LICENSE file.
  */
 
-open class Outer(val x: Int) {
+open class Outer(konst x: Int) {
     open inner class Inner1
     inner class Middle(x: Int) : Outer(x) {
         inner class Inner2 : Inner1() {

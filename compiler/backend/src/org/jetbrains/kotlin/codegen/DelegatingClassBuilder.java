@@ -36,9 +36,9 @@ public abstract class DelegatingClassBuilder implements ClassBuilder {
             @NotNull String name,
             @NotNull String desc,
             @Nullable String signature,
-            @Nullable Object value
+            @Nullable Object konstue
     ) {
-        return getDelegate().newField(origin, access, name, desc, signature, value);
+        return getDelegate().newField(origin, access, name, desc, signature, konstue);
     }
 
     @NotNull

@@ -6,7 +6,7 @@
 package foo
 
 @Target(AnnotationTarget.TYPE)
-annotation class TypeAnn(val name: String)
+annotation class TypeAnn(konst name: String)
 
 class FooClass {
 

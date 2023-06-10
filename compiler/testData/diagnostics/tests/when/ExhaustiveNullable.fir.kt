@@ -14,7 +14,7 @@ enum class MyEnum {
 }
 
 fun foo(x: MyEnum?): Int {
-    val y: Int
+    konst y: Int
     // See KT-6046: y is always initialized
     when (x) {
         MyEnum.A -> y = 1

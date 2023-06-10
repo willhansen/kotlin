@@ -1,7 +1,7 @@
 // KT-13612 related tests (reassignment in try-catch-finally)
 
 fun f1() {
-    val n: Int
+    konst n: Int
     try {
         <!UNUSED_VALUE!>n =<!> 1
         throw Exception()
@@ -14,7 +14,7 @@ fun f1() {
 }
 
 fun f2() {
-    val <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE!>n<!>: Int
+    konst <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE!>n<!>: Int
     try {
         <!UNUSED_VALUE!>n =<!> 1
         throw Exception()
@@ -26,7 +26,7 @@ fun f2() {
 }
 
 fun g1(flag: Boolean) {
-    val n: Int
+    konst n: Int
     try {
         if (flag) throw Exception()
         n = 1
@@ -39,7 +39,7 @@ fun g1(flag: Boolean) {
 }
 
 fun g2(flag: Boolean) {
-    val n: Int
+    konst n: Int
     try {
         if (flag) throw Exception()
         <!UNUSED_VALUE!>n =<!> 1
@@ -51,7 +51,7 @@ fun g2(flag: Boolean) {
 }
 
 fun h1(flag: Boolean) {
-    val n = try {
+    konst n = try {
         if (flag) throw Exception()
         1
     }
@@ -62,7 +62,7 @@ fun h1(flag: Boolean) {
 }
 
 fun h2(flag: Boolean) {
-    val n = try {
+    konst n = try {
         if (flag) throw Exception()
         1
     }
@@ -77,7 +77,7 @@ fun j(flag: Boolean) {
 }
 
 fun k1(flag: Boolean) {
-    val n: Int
+    konst n: Int
     try {
         n = 1
         j(flag)
@@ -90,7 +90,7 @@ fun k1(flag: Boolean) {
 }
 
 fun k2(flag: Boolean) {
-    val n: Int
+    konst n: Int
     try {
         <!UNUSED_VALUE!>n =<!> 1
         j(flag)

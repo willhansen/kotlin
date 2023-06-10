@@ -7,12 +7,12 @@ package org.jetbrains.kotlin.tooling
 
 
 data class KotlinToolingMetadata(
-    val schemaVersion: String,
+    konst schemaVersion: String,
     /**
      * Build System used (e.g. Gradle, Maven, ...)
      */
-    val buildSystem: String,
-    val buildSystemVersion: String,
+    konst buildSystem: String,
+    konst buildSystemVersion: String,
 
     /**
      * Plugin used to build (e.g.
@@ -21,54 +21,54 @@ data class KotlinToolingMetadata(
      *  - ...
      *  )
      */
-    val buildPlugin: String,
-    val buildPluginVersion: String,
+    konst buildPlugin: String,
+    konst buildPluginVersion: String,
 
-    val projectSettings: ProjectSettings,
-    val projectTargets: List<ProjectTargetMetadata>,
+    konst projectSettings: ProjectSettings,
+    konst projectTargets: List<ProjectTargetMetadata>,
 ) {
 
     data class ProjectSettings(
-        val isHmppEnabled: Boolean,
-        val isCompatibilityMetadataVariantEnabled: Boolean,
-        val isKPMEnabled: Boolean,
+        konst isHmppEnabled: Boolean,
+        konst isCompatibilityMetadataVariantEnabled: Boolean,
+        konst isKPMEnabled: Boolean,
     )
 
     data class ProjectTargetMetadata(
-        val target: String,
-        val platformType: String,
-        val extras: Extras
+        konst target: String,
+        konst platformType: String,
+        konst extras: Extras
     ) {
         data class Extras(
-            val jvm: JvmExtras? = null,
-            val android: AndroidExtras? = null,
-            val js: JsExtras? = null,
-            val native: NativeExtras? = null
+            konst jvm: JvmExtras? = null,
+            konst android: AndroidExtras? = null,
+            konst js: JsExtras? = null,
+            konst native: NativeExtras? = null
         )
 
         data class JvmExtras(
-            val jvmTarget: String?,
-            val withJavaEnabled: Boolean
+            konst jvmTarget: String?,
+            konst withJavaEnabled: Boolean
         )
 
         data class AndroidExtras(
-            val sourceCompatibility: String,
-            val targetCompatibility: String,
+            konst sourceCompatibility: String,
+            konst targetCompatibility: String,
         )
 
         data class JsExtras(
-            val isBrowserConfigured: Boolean,
-            val isNodejsConfigured: Boolean,
+            konst isBrowserConfigured: Boolean,
+            konst isNodejsConfigured: Boolean,
         )
 
         data class NativeExtras(
-            val konanTarget: String,
-            val konanVersion: String,
-            val konanAbiVersion: String
+            konst konanTarget: String,
+            konst konanVersion: String,
+            konst konanAbiVersion: String
         )
     }
 
     companion object {
-        const val currentSchemaVersion: String = "1.1.0"
+        const konst currentSchemaVersion: String = "1.1.0"
     }
 }

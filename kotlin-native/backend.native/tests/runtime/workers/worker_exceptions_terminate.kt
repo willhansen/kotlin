@@ -3,7 +3,7 @@
 import kotlin.native.concurrent.*
 
 fun main() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
     worker.executeAfter(0L, {
         throw Error("some error")
     }.freeze())

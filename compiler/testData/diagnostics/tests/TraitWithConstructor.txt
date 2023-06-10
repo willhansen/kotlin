@@ -2,7 +2,7 @@ package
 
 public final class C {
     public constructor C(/*0*/ a: kotlin.String)
-    public final val a: kotlin.String
+    public final konst a: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -10,7 +10,7 @@ public final class C {
 
 public interface T1 {
     public constructor T1(/*0*/ x: kotlin.String)
-    public final val x: kotlin.String
+    public final konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

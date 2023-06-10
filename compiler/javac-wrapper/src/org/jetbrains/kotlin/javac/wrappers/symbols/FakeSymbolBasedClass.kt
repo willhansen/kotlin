@@ -25,29 +25,29 @@ import javax.tools.JavaFileObject
 class FakeSymbolBasedClass(
     element: TypeElement,
     javac: JavacWrapper,
-    override val classId: ClassId?,
-    val file: JavaFileObject?
+    override konst classId: ClassId?,
+    konst file: JavaFileObject?
 ) : SymbolBasedClassifier<TypeElement>(element, javac), JavaClassWithClassId {
 
-    override val name: Name get() = Name.identifier(element.simpleName.toString())
+    override konst name: Name get() = Name.identifier(element.simpleName.toString())
 
-    override val isAbstract: Boolean get() = true
+    override konst isAbstract: Boolean get() = true
 
-    override val isStatic: Boolean get() = false
+    override konst isStatic: Boolean get() = false
 
-    override val isFinal: Boolean get() = false
+    override konst isFinal: Boolean get() = false
 
-    override val visibility: Visibility get() = Visibilities.Public
+    override konst visibility: Visibility get() = Visibilities.Public
 
-    override val typeParameters: List<JavaTypeParameter> get() = emptyList()
+    override konst typeParameters: List<JavaTypeParameter> get() = emptyList()
 
-    override val fqName: FqName get() = FqName(element.qualifiedName.toString())
+    override konst fqName: FqName get() = FqName(element.qualifiedName.toString())
 
-    override val supertypes: Collection<JavaClassifierType> get() = emptyList()
+    override konst supertypes: Collection<JavaClassifierType> get() = emptyList()
 
-    val innerClasses: Map<Name, JavaClass> get() = emptyMap()
+    konst innerClasses: Map<Name, JavaClass> get() = emptyMap()
 
-    override val outerClass: JavaClass?
+    override konst outerClass: JavaClass?
             by lazy {
                 element.enclosingElement?.let {
                     if (it.asType().kind != TypeKind.DECLARED) null else FakeSymbolBasedClass(
@@ -59,33 +59,33 @@ class FakeSymbolBasedClass(
                 }
             }
 
-    override val isInterface: Boolean get() = true
+    override konst isInterface: Boolean get() = true
 
-    override val isAnnotationType: Boolean get() = false
+    override konst isAnnotationType: Boolean get() = false
 
-    override val isEnum: Boolean get() = false
+    override konst isEnum: Boolean get() = false
 
-    override val isRecord: Boolean get() = false
+    override konst isRecord: Boolean get() = false
 
-    override val recordComponents: Collection<JavaRecordComponent> get() = emptyList()
+    override konst recordComponents: Collection<JavaRecordComponent> get() = emptyList()
 
-    override val isSealed: Boolean get() = false
+    override konst isSealed: Boolean get() = false
 
-    override val permittedTypes: Collection<JavaClassifierType> get() = emptyList()
+    override konst permittedTypes: Collection<JavaClassifierType> get() = emptyList()
 
-    override val lightClassOriginKind: LightClassOriginKind? get() = null
+    override konst lightClassOriginKind: LightClassOriginKind? get() = null
 
-    override val methods: Collection<JavaMethod> get() = emptyList()
+    override konst methods: Collection<JavaMethod> get() = emptyList()
 
-    override val fields: Collection<JavaField> get() = emptyList()
+    override konst fields: Collection<JavaField> get() = emptyList()
 
-    override val constructors: Collection<JavaConstructor> get() = emptyList()
+    override konst constructors: Collection<JavaConstructor> get() = emptyList()
 
     override fun hasDefaultConstructor() = false
 
-    override val innerClassNames: Collection<Name> get() = emptyList()
+    override konst innerClassNames: Collection<Name> get() = emptyList()
 
-    override val virtualFile: VirtualFile? by lazy {
+    override konst virtualFile: VirtualFile? by lazy {
         file?.let { javac.toVirtualFile(it) }
     }
 

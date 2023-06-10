@@ -9,15 +9,15 @@ as no stability/compatibility guarantees are given on
 compiler or generated code. Use it at your own risk!
 
 compiler/testData/compileKotlinAgainstCustomBinaries/sealedClassesAndInterfaces/main.kt:4:9: warning: variable 'x' is never used
-    val x = when (base) {
+    konst x = when (base) {
         ^
 compiler/testData/compileKotlinAgainstCustomBinaries/sealedClassesAndInterfaces/main.kt:13:9: warning: variable 'x' is never used
-    val x = when (base) {
+    konst x = when (base) {
         ^
 compiler/testData/compileKotlinAgainstCustomBinaries/sealedClassesAndInterfaces/main.kt:24:9: warning: variable 'x' is never used
-    val x = when (base) {
+    konst x = when (base) {
         ^
 compiler/testData/compileKotlinAgainstCustomBinaries/sealedClassesAndInterfaces/main.kt:31:9: warning: variable 'x' is never used
-    val x = when (base) {
+    konst x = when (base) {
         ^
 OK

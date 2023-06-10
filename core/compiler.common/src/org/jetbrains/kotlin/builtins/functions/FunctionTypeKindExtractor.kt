@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.name.FqName
 @RequiresOptIn
 annotation class AllowedToUsedOnlyInK1
 
-class FunctionTypeKindExtractor(private val kinds: List<FunctionTypeKind>) {
+class FunctionTypeKindExtractor(private konst kinds: List<FunctionTypeKind>) {
     companion object {
         /**
          * This instance should be used only in:
@@ -19,7 +19,7 @@ class FunctionTypeKindExtractor(private val kinds: List<FunctionTypeKind>) {
          */
         @JvmStatic
         @AllowedToUsedOnlyInK1
-        val Default = FunctionTypeKindExtractor(
+        konst Default = FunctionTypeKindExtractor(
             listOf(
                 FunctionTypeKind.Function,
                 FunctionTypeKind.SuspendFunction,
@@ -29,17 +29,17 @@ class FunctionTypeKindExtractor(private val kinds: List<FunctionTypeKind>) {
         )
     }
 
-    private val knownKindsByPackageFqName = kinds.groupBy { it.packageFqName }
+    private konst knownKindsByPackageFqName = kinds.groupBy { it.packageFqName }
 
     fun getFunctionalClassKind(packageFqName: FqName, className: String): FunctionTypeKind? {
         return getFunctionalClassKindWithArity(packageFqName, className)?.kind
     }
 
     fun getFunctionalClassKindWithArity(packageFqName: FqName, className: String): KindWithArity? {
-        val kinds = knownKindsByPackageFqName[packageFqName] ?: return null
+        konst kinds = knownKindsByPackageFqName[packageFqName] ?: return null
         for (kind in kinds) {
             if (!className.startsWith(kind.classNamePrefix)) continue
-            val arity = toInt(className.substring(kind.classNamePrefix.length)) ?: continue
+            konst arity = toInt(className.substring(kind.classNamePrefix.length)) ?: continue
             return KindWithArity(kind, arity)
         }
         return null
@@ -53,14 +53,14 @@ class FunctionTypeKindExtractor(private val kinds: List<FunctionTypeKind>) {
 
     fun hasExtensionKinds(): Boolean = kinds.any { !it.isBuiltin }
 
-    data class KindWithArity(val kind: FunctionTypeKind, val arity: Int)
+    data class KindWithArity(konst kind: FunctionTypeKind, konst arity: Int)
 
     private fun toInt(s: String): Int? {
         if (s.isEmpty()) return null
 
         var result = 0
         for (c in s) {
-            val d = c - '0'
+            konst d = c - '0'
             if (d !in 0..9) return null
             result = result * 10 + d
         }

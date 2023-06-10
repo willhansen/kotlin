@@ -7,7 +7,7 @@
 // FULL_JDK
 
 class Test : Map<String, String>, java.util.AbstractMap<String, String>() {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = throw Exception()
 }
 

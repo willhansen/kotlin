@@ -2,7 +2,7 @@ package library
 
 import kotlin.test.*
 
-val output = mutableListOf<String>()
+konst output = mutableListOf<String>()
 
 interface I1 {
     @Test

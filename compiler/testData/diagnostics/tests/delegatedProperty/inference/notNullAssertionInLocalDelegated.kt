@@ -5,12 +5,12 @@
 
 import kotlin.reflect.KProperty
 
-data class Ref<D>(val t: D)
+data class Ref<D>(konst t: D)
 
 operator fun <V> Ref<V>.getValue(hisRef: Any?, property: KProperty<*>): V = this.t
 
 fun <E> List<Ref<*>>.getElement(i: Int): Ref<E> = this[i] <!UNCHECKED_CAST!>as Ref<E><!>
 
 fun test(list: List<Ref<*>>) {
-    val data: String by list.getElement(0)<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>
+    konst data: String by list.getElement(0)<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>
 }

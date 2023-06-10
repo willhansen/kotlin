@@ -21,15 +21,15 @@ fun <T>T?.case_3() {
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(value_1: Boolean?): Boolean {
-    contract { <!ERROR_IN_CONTRACT_DESCRIPTION!>returns(true) implies (value_1 != null && !value_1)<!> }
-    return value_1 != null && !value_1
+fun case_4(konstue_1: Boolean?): Boolean {
+    contract { <!ERROR_IN_CONTRACT_DESCRIPTION!>returns(true) implies (konstue_1 != null && !konstue_1)<!> }
+    return konstue_1 != null && !konstue_1
 }
 
 // TESTCASE NUMBER: 5
-fun Boolean.case_5(value_1: Any?): Boolean? {
-    contract { <!ERROR_IN_CONTRACT_DESCRIPTION!>returnsNotNull() implies (value_1 is Boolean? && value_1 != null && value_1)<!> }
-    return if (value_1 is Boolean? && value_1 != null && value_1) true else null
+fun Boolean.case_5(konstue_1: Any?): Boolean? {
+    contract { <!ERROR_IN_CONTRACT_DESCRIPTION!>returnsNotNull() implies (konstue_1 is Boolean? && konstue_1 != null && konstue_1)<!> }
+    return if (konstue_1 is Boolean? && konstue_1 != null && konstue_1) true else null
 }
 
 // TESTCASE NUMBER: 6
@@ -39,7 +39,7 @@ fun Boolean?.case_6(): Boolean? {
 }
 
 // TESTCASE NUMBER: 7
-fun <T : Boolean?> T.case_7(value_1: Any?): Boolean? {
-    contract { <!ERROR_IN_CONTRACT_DESCRIPTION!>returnsNotNull() implies (value_1 is Boolean? && value_1 != null && value_1 && this@case_7 != null && this@case_7)<!> }
-    return if (value_1 is Boolean? && value_1 != null && value_1 && this@case_7 != null && this@case_7) true else null
+fun <T : Boolean?> T.case_7(konstue_1: Any?): Boolean? {
+    contract { <!ERROR_IN_CONTRACT_DESCRIPTION!>returnsNotNull() implies (konstue_1 is Boolean? && konstue_1 != null && konstue_1 && this@case_7 != null && this@case_7)<!> }
+    return if (konstue_1 is Boolean? && konstue_1 != null && konstue_1 && this@case_7 != null && this@case_7) true else null
 }

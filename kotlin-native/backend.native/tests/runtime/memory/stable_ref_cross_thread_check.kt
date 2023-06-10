@@ -11,23 +11,23 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 import kotlinx.cinterop.*
 
-class Holder(val value: Int)
+class Holder(konst konstue: Int)
 
 @Test
 fun runTest1() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
-    val future = worker.execute(TransferMode.SAFE, { }) {
+    konst future = worker.execute(TransferMode.SAFE, { }) {
         StableRef.create(Holder(42))
     }
-    val ref = future.result
+    konst ref = future.result
     if (kotlin.native.Platform.memoryModel == kotlin.native.MemoryModel.EXPERIMENTAL) {
-        val value = ref.get()
-        assertEquals(value.value, 42)
+        konst konstue = ref.get()
+        assertEquals(konstue.konstue, 42)
     } else {
         assertFailsWith<IncorrectDereferenceException> {
-            val value = ref.get()
-            println(value.value)
+            konst konstue = ref.get()
+            println(konstue.konstue)
         }
     }
 
@@ -36,21 +36,21 @@ fun runTest1() {
 
 @Test
 fun runTest2() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
-    val mainThreadRef = StableRef.create(Holder(42))
+    konst mainThreadRef = StableRef.create(Holder(42))
     // Simulate this going through interop as raw C pointer.
-    val pointerValue: Long = mainThreadRef.asCPointer().toLong()
-    val future = worker.execute(TransferMode.SAFE, { pointerValue }) {
-        val pointer: COpaquePointer = it.toCPointer()!!
+    konst pointerValue: Long = mainThreadRef.asCPointer().toLong()
+    konst future = worker.execute(TransferMode.SAFE, { pointerValue }) {
+        konst pointer: COpaquePointer = it.toCPointer()!!
         if (kotlin.native.Platform.memoryModel == kotlin.native.MemoryModel.EXPERIMENTAL) {
-            val otherThreadRef: StableRef<Holder> = pointer.asStableRef()
-            assertEquals(otherThreadRef.get().value, 42)
+            konst otherThreadRef: StableRef<Holder> = pointer.asStableRef()
+            assertEquals(otherThreadRef.get().konstue, 42)
         } else {
             assertFailsWith<IncorrectDereferenceException> {
                 // Even attempting to convert a pointer to StableRef should fail.
-                val otherThreadRef: StableRef<Holder> = pointer.asStableRef()
-                println(otherThreadRef.get().value)
+                konst otherThreadRef: StableRef<Holder> = pointer.asStableRef()
+                println(otherThreadRef.get().konstue)
             }
         }
         Unit

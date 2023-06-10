@@ -6,10 +6,10 @@ import kotlin.reflect.KProperty
 class A
 
 class D {
-    val c: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>IncorrectThis<A>()<!>
+    konst c: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>IncorrectThis<A>()<!>
 }
 
-val cTopLevel: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>IncorrectThis<A>()<!>
+konst cTopLevel: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>IncorrectThis<A>()<!>
 
 class IncorrectThis<T> {
     fun <R> get(t: Any?, p: KProperty<*>): Int {

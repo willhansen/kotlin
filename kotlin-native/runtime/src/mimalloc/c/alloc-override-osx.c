@@ -59,7 +59,7 @@ static void* zone_calloc(malloc_zone_t* zone, size_t count, size_t size) {
   return mi_calloc(count, size);
 }
 
-static void* zone_valloc(malloc_zone_t* zone, size_t size) {
+static void* zone_konstloc(malloc_zone_t* zone, size_t size) {
   UNUSED(zone);
   return mi_malloc_aligned(size, _mi_os_page_size());
 }
@@ -212,7 +212,7 @@ static malloc_zone_t mi_malloc_zone = {
   .introspect = &mi_introspect,
   .malloc = &zone_malloc,
   .calloc = &zone_calloc,
-  .valloc = &zone_valloc,
+  .konstloc = &zone_konstloc,
   .free = &zone_free,
   .realloc = &zone_realloc,
   .destroy = &zone_destroy,

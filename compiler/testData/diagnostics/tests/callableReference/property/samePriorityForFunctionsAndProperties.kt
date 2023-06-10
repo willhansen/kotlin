@@ -4,7 +4,7 @@
 import kotlin.reflect.KProperty1
 
 class C {
-    val baz: Int = 12
+    konst baz: Int = 12
 }
 
 fun Int.baz() {}

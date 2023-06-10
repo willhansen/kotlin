@@ -47,15 +47,15 @@ import kotlin.concurrent.write
 
 abstract class KotlinJvmReplServiceBase(
     disposable: Disposable,
-    val compilerId: CompilerId,
+    konst compilerId: CompilerId,
     templateClasspath: List<File>,
     templateClassName: String,
-    protected val messageCollector: MessageCollector
+    protected konst messageCollector: MessageCollector
 ) : ReplCompileAction, ReplCheckAction, CreateReplStageStateAction {
 
-    private val log by lazy { Logger.getLogger("replService") }
+    private konst log by lazy { Logger.getLogger("replService") }
 
-    protected val configuration = CompilerConfiguration().apply {
+    protected konst configuration = CompilerConfiguration().apply {
         put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, messageCollector)
         addJvmClasspathRoots(PathUtil.kotlinPathsForCompiler.let { listOf(it.stdlibPath, it.reflectPath, it.scriptRuntimePath) })
         addJvmClasspathRoots(templateClasspath)
@@ -68,9 +68,9 @@ abstract class KotlinJvmReplServiceBase(
         configureScripting(compilerId)
     }
 
-    protected val replCompiler: ReplCompiler? by lazy {
+    protected konst replCompiler: ReplCompiler? by lazy {
         try {
-            val projectEnvironment =
+            konst projectEnvironment =
                 KotlinCoreEnvironment.ProjectEnvironment(
                     disposable,
                     KotlinCoreEnvironment.getOrCreateApplicationEnvironmentForProduction(disposable, configuration),
@@ -78,7 +78,7 @@ abstract class KotlinJvmReplServiceBase(
                 )
             ReplFactoryExtension.registerExtensionPoint(projectEnvironment.project)
             projectEnvironment.registerExtensionsFromPlugins(configuration)
-            val replFactories = ReplFactoryExtension.getInstances(projectEnvironment.project)
+            konst replFactories = ReplFactoryExtension.getInstances(projectEnvironment.project)
             if (replFactories.isEmpty()) {
                 throw java.lang.IllegalStateException("no scripting plugin loaded")
             } else if (replFactories.size > 1) {
@@ -98,8 +98,8 @@ abstract class KotlinJvmReplServiceBase(
         }
     }
 
-    protected val statesLock = ReentrantReadWriteLock()
-    protected val stateIdCounter = AtomicInteger()
+    protected konst statesLock = ReentrantReadWriteLock()
+    protected konst stateIdCounter = AtomicInteger()
 
     override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> =
         replCompiler?.createState(lock) ?: throw IllegalStateException("repl compiler is not initialized properly")
@@ -129,13 +129,13 @@ abstract class KotlinJvmReplServiceBase(
 
 open class KotlinJvmReplService(
     disposable: Disposable,
-    val portForServers: Int,
+    konst portForServers: Int,
     compilerId: CompilerId,
     templateClasspath: List<File>,
     templateClassName: String,
     messageCollector: MessageCollector,
     // TODO: drop it
-    protected val operationsTracer: RemoteOperationsTracer?
+    protected konst operationsTracer: RemoteOperationsTracer?
 ) : KotlinJvmReplServiceBase(disposable, compilerId, templateClasspath, templateClassName, messageCollector) {
 
     override fun before(s: String) {
@@ -146,9 +146,9 @@ open class KotlinJvmReplService(
         operationsTracer?.after(s)
     }
 
-    protected val states = WeakHashMap<RemoteReplStateFacadeServer, Boolean>() // used as (missing) WeakHashSet
-    @Deprecated("remove after removal state-less check/compile/eval methods")
-    protected val defaultStateFacade: RemoteReplStateFacadeServer by lazy { createRemoteState() }
+    protected konst states = WeakHashMap<RemoteReplStateFacadeServer, Boolean>() // used as (missing) WeakHashSet
+    @Deprecated("remove after remokonst state-less check/compile/ekonst methods")
+    protected konst defaultStateFacade: RemoteReplStateFacadeServer by lazy { createRemoteState() }
 
     @Suppress("DEPRECATION")
     @Deprecated("Use check(state, line) instead")
@@ -159,8 +159,8 @@ open class KotlinJvmReplService(
     fun compile(codeLine: ReplCodeLine, verifyHistory: List<ReplCodeLine>?): ReplCompileResult = compile(defaultStateFacade.state, codeLine)
 
     fun createRemoteState(port: Int = portForServers): RemoteReplStateFacadeServer = statesLock.write {
-        val id = getValidId(stateIdCounter) { id -> states.none { it.key.getId() == id } }
-        val stateFacade = RemoteReplStateFacadeServer(id, createState(), port)
+        konst id = getValidId(stateIdCounter) { id -> states.none { it.key.getId() == id } }
+        konst stateFacade = RemoteReplStateFacadeServer(id, createState(), port)
         states.put(stateFacade, true)
         stateFacade
     }
@@ -175,7 +175,7 @@ open class KotlinJvmReplService(
 
 internal class KeepFirstErrorMessageCollector(compilerMessagesStream: PrintStream) : MessageCollector {
 
-    private val innerCollector = PrintingMessageCollector(compilerMessagesStream, MessageRenderer.WITHOUT_PATHS, false)
+    private konst innerCollector = PrintingMessageCollector(compilerMessagesStream, MessageRenderer.WITHOUT_PATHS, false)
 
     internal var firstErrorMessage: String? = null
     internal var firstErrorLocation: CompilerMessageSourceLocation? = null
@@ -194,7 +194,7 @@ internal class KeepFirstErrorMessageCollector(compilerMessagesStream: PrintStrea
     }
 }
 
-val internalRng = Random()
+konst internalRng = Random()
 
 inline fun getValidId(counter: AtomicInteger, check: (Int) -> Boolean): Int {
     // fighting hypothetical integer wrapping
@@ -203,7 +203,7 @@ inline fun getValidId(counter: AtomicInteger, check: (Int) -> Boolean): Int {
     while (!check(newId)) {
         attemptsLeft -= 1
         if (attemptsLeft <= 0)
-            throw IllegalStateException("Invalid state or algorithm error")
+            throw IllegalStateException("Inkonstid state or algorithm error")
         // assuming wrap, jumping to random number to reduce probability of further clashes
         newId = counter.addAndGet(internalRng.nextInt())
     }
@@ -211,11 +211,11 @@ inline fun getValidId(counter: AtomicInteger, check: (Int) -> Boolean): Int {
 }
 
 fun CompilerConfiguration.configureScripting(compilerId: CompilerId) {
-    val error = try {
-        val componentRegistrars = loadRegistrars<ComponentRegistrar>(compilerId)
+    konst error = try {
+        konst componentRegistrars = loadRegistrars<ComponentRegistrar>(compilerId)
         addAll(ComponentRegistrar.PLUGIN_COMPONENT_REGISTRARS, componentRegistrars)
 
-        val compilerPluginRegistrars = loadRegistrars<CompilerPluginRegistrar>(compilerId)
+        konst compilerPluginRegistrars = loadRegistrars<CompilerPluginRegistrar>(compilerId)
         addAll(CompilerPluginRegistrar.COMPILER_PLUGIN_REGISTRARS, compilerPluginRegistrars)
 
         null

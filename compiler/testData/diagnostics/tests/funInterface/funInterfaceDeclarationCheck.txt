@@ -82,14 +82,14 @@ public fun interface Foo4WithDefault : BaseWithSAM {
 }
 
 public fun interface Foo5 {
-    public abstract val prop: kotlin.Int
+    public abstract konst prop: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public fun interface Foo6 {
-    public abstract val prop: kotlin.Int
+    public abstract konst prop: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public abstract fun foo(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -97,7 +97,7 @@ public fun interface Foo6 {
 }
 
 public fun interface Foo7 : BaseWithSAM {
-    public abstract val prop: kotlin.Int
+    public abstract konst prop: kotlin.Int
     public abstract override /*1*/ /*fake_override*/ fun base(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -154,7 +154,7 @@ public fun interface GoodWithBase : BaseWithSAM {
 }
 
 public fun interface GoodWithPropAndBase : BaseWithSAM {
-    public open val prop: kotlin.Int
+    public open konst prop: kotlin.Int
     public abstract override /*1*/ /*fake_override*/ fun base(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -9,7 +9,7 @@ import java.lang.reflect.Field
 
 fun Field.getSafe(obj: Any?): Any? {
     return try {
-        val oldIsAccessible = isAccessible
+        konst oldIsAccessible = isAccessible
 
         try {
             isAccessible = true

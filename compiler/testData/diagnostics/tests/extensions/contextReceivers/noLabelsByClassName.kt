@@ -7,7 +7,7 @@ var Int.p: Int
         this<!UNRESOLVED_REFERENCE!>@Int<!>
         return<!UNRESOLVED_REFERENCE!>@p<!> 42
     }
-    set(value) {
+    set(konstue) {
         this<!UNRESOLVED_REFERENCE!>@Int<!>
     }
 
@@ -17,7 +17,7 @@ class X {
             this<!UNRESOLVED_REFERENCE!>@Int<!>
             return<!UNRESOLVED_REFERENCE!>@p<!> 42
         }
-        set(value) {
+        set(konstue) {
             this<!UNRESOLVED_REFERENCE!>@Int<!>
         }
 

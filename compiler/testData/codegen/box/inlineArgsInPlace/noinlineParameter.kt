@@ -9,7 +9,7 @@
 // -- 2 ASTORE 1
 // -- 13 ALOAD 1
 
-// NB 'b' is evaluated before 's'
+// NB 'b' is ekonstuated before 's'
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 @kotlin.internal.InlineOnly
 inline fun invokeNoInline(noinline b: (String) -> String, s: String) =

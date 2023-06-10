@@ -68,7 +68,7 @@ inline fun lParams(initParams: () -> String = {
     //A lot of blank lines [Don't delete]
     //A lot of blank lines [Don't delete]
 }): String {
-    val z = "body"
+    konst z = "body"
     return initParams()
 }
 

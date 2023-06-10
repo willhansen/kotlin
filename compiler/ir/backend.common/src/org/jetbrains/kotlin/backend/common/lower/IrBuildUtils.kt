@@ -27,9 +27,9 @@ abstract class SymbolWithIrBuilder<out S: IrSymbol, out D: IrDeclaration> {
 
     protected abstract fun buildIr(): D
 
-    val symbol by lazy { buildSymbol() }
+    konst symbol by lazy { buildSymbol() }
 
-    private val builtIr by lazy { buildIr() }
+    private konst builtIr by lazy { buildIr() }
     private var initialized: Boolean = false
 
     fun initialize() {
@@ -37,7 +37,7 @@ abstract class SymbolWithIrBuilder<out S: IrSymbol, out D: IrDeclaration> {
         initialized = true
     }
 
-    val ir: D
+    konst ir: D
         get() {
             if (!initialized)
                 throw Error("Access to IR before initialization")

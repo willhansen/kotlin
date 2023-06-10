@@ -11,8 +11,8 @@ interface IFooMutableList {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AL(val t: MutableList<String>) : MutableList<String> {
-    override val size: Int get() = t.size
+konstue class AL(konst t: MutableList<String>) : MutableList<String> {
+    override konst size: Int get() = t.size
     override fun get(index: Int): String = t.get(index)
     override fun set(index: Int, element: String): String = t.set(index, element)
     override fun contains(element: String): Boolean = t.contains(element)
@@ -36,17 +36,17 @@ value class AL(val t: MutableList<String>) : MutableList<String> {
 }
 
 class Test : IFooList, IFooMutableList {
-    val arr = arrayListOf<String>()
+    konst arr = arrayListOf<String>()
     override fun foo() = AL(arr)
 }
 
 fun box(): String {
-    val t1: IFooList = Test()
-    val list1 = t1.foo()
+    konst t1: IFooList = Test()
+    konst list1 = t1.foo()
     if (list1 !is AL) throw AssertionError("list1: $list1")
 
-    val t2: IFooMutableList = Test()
-    val list2 = t2.foo()
+    konst t2: IFooMutableList = Test()
+    konst list2 = t2.foo()
     if (list2 !is AL) throw AssertionError("list2: $list2")
 
     return "OK"

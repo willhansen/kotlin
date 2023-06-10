@@ -6,7 +6,7 @@
 import kotlin.math.abs
 
 @JvmInline
-value class MFVC(val x: Int, val y: Int) {
+konstue class MFVC(konst x: Int, konst y: Int) {
     override fun equals(other: Any?): Boolean {
         if (other !is MFVC) {
             return false
@@ -18,6 +18,6 @@ value class MFVC(val x: Int, val y: Int) {
 }
 
 fun box(): String {
-    val set = setOf(MFVC(1, 2), MFVC(2, 3), MFVC(5, 6))
+    konst set = setOf(MFVC(1, 2), MFVC(2, 3), MFVC(5, 6))
     return if (set.size == 2) "OK" else "Fail"
 }

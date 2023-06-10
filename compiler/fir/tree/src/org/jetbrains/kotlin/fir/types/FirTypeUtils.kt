@@ -27,32 +27,32 @@ inline fun <reified T : ConeKotlinType> FirTypeRef.coneTypeSafe(): T? {
     return (this as? FirResolvedTypeRef)?.type as? T
 }
 
-val FirTypeRef.coneType: ConeKotlinType
+konst FirTypeRef.coneType: ConeKotlinType
     get() = coneTypeSafe()
         ?: error("Expected FirResolvedTypeRef with ConeKotlinType but was ${this::class.simpleName} ${render()}")
 
-val FirTypeRef.coneTypeOrNull: ConeKotlinType?
+konst FirTypeRef.coneTypeOrNull: ConeKotlinType?
     get() = coneTypeSafe()
 
-val FirTypeRef.isAny: Boolean get() = isBuiltinType(StandardClassIds.Any, false)
-val FirTypeRef.isNullableAny: Boolean get() = isBuiltinType(StandardClassIds.Any, true)
-val FirTypeRef.isNothing: Boolean get() = isBuiltinType(StandardClassIds.Nothing, false)
-val FirTypeRef.isNullableNothing: Boolean get() = isBuiltinType(StandardClassIds.Nothing, true)
-val FirTypeRef.isUnit: Boolean get() = isBuiltinType(StandardClassIds.Unit, false)
-val FirTypeRef.isBoolean: Boolean get() = isBuiltinType(StandardClassIds.Boolean, false)
-val FirTypeRef.isInt: Boolean get() = isBuiltinType(StandardClassIds.Int, false)
-val FirTypeRef.isString: Boolean get() = isBuiltinType(StandardClassIds.String, false)
-val FirTypeRef.isEnum: Boolean get() = isBuiltinType(StandardClassIds.Enum, false)
-val FirTypeRef.isArrayType: Boolean
+konst FirTypeRef.isAny: Boolean get() = isBuiltinType(StandardClassIds.Any, false)
+konst FirTypeRef.isNullableAny: Boolean get() = isBuiltinType(StandardClassIds.Any, true)
+konst FirTypeRef.isNothing: Boolean get() = isBuiltinType(StandardClassIds.Nothing, false)
+konst FirTypeRef.isNullableNothing: Boolean get() = isBuiltinType(StandardClassIds.Nothing, true)
+konst FirTypeRef.isUnit: Boolean get() = isBuiltinType(StandardClassIds.Unit, false)
+konst FirTypeRef.isBoolean: Boolean get() = isBuiltinType(StandardClassIds.Boolean, false)
+konst FirTypeRef.isInt: Boolean get() = isBuiltinType(StandardClassIds.Int, false)
+konst FirTypeRef.isString: Boolean get() = isBuiltinType(StandardClassIds.String, false)
+konst FirTypeRef.isEnum: Boolean get() = isBuiltinType(StandardClassIds.Enum, false)
+konst FirTypeRef.isArrayType: Boolean
     get() =
         isBuiltinType(StandardClassIds.Array, false)
-                || StandardClassIds.primitiveArrayTypeByElementType.values.any { isBuiltinType(it, false) }
-                || StandardClassIds.unsignedArrayTypeByElementType.values.any { isBuiltinType(it, false) }
+                || StandardClassIds.primitiveArrayTypeByElementType.konstues.any { isBuiltinType(it, false) }
+                || StandardClassIds.unsignedArrayTypeByElementType.konstues.any { isBuiltinType(it, false) }
 
-val FirExpression.isNullLiteral: Boolean
+konst FirExpression.isNullLiteral: Boolean
     get() = this is FirConstExpression<*> &&
             this.kind == ConstantValueKind.Null &&
-            this.value == null &&
+            this.konstue == null &&
             this.source != null
 
 @OptIn(ExperimentalContracts::class)
@@ -63,7 +63,7 @@ fun FirExpression.isStableSmartcast(): Boolean {
     return this is FirSmartCastExpression && this.isStable
 }
 
-private val FirTypeRef.lookupTagBasedOrNull: ConeLookupTagBasedType?
+private konst FirTypeRef.lookupTagBasedOrNull: ConeLookupTagBasedType?
     get() = when (this) {
         is FirImplicitBuiltinTypeRef -> type
         is FirResolvedTypeRef -> type as? ConeLookupTagBasedType
@@ -71,21 +71,21 @@ private val FirTypeRef.lookupTagBasedOrNull: ConeLookupTagBasedType?
     }
 
 private fun FirTypeRef.isBuiltinType(classId: ClassId, isNullable: Boolean): Boolean {
-    val type = this.lookupTagBasedOrNull ?: return false
+    konst type = this.lookupTagBasedOrNull ?: return false
     return (type as? ConeClassLikeType)?.lookupTag?.classId == classId && type.isNullable == isNullable
 }
 
-val FirTypeRef.isMarkedNullable: Boolean?
+konst FirTypeRef.isMarkedNullable: Boolean?
     get() = if (this is FirTypeRefWithNullability) this.isMarkedNullable else lookupTagBasedOrNull?.isMarkedNullable
 
-val FirFunctionTypeRef.parametersCount: Int
+konst FirFunctionTypeRef.parametersCount: Int
     get() = if (receiverTypeRef != null)
         parameters.size + contextReceiverTypeRefs.size + 1
     else
         parameters.size + contextReceiverTypeRefs.size
 
-val EXTENSION_FUNCTION_ANNOTATION = ClassId.fromString("kotlin/ExtensionFunctionType")
-val INTRINSIC_CONST_EVALUATION_ANNOTATION = ClassId.fromString("kotlin/internal/IntrinsicConstEvaluation")
+konst EXTENSION_FUNCTION_ANNOTATION = ClassId.fromString("kotlin/ExtensionFunctionType")
+konst INTRINSIC_CONST_EVALUATION_ANNOTATION = ClassId.fromString("kotlin/internal/IntrinsicConstEkonstuation")
 
 private fun FirAnnotation.isOfType(classId: ClassId): Boolean {
     return (annotationTypeRef as? FirResolvedTypeRef)?.let { typeRef ->
@@ -95,7 +95,7 @@ private fun FirAnnotation.isOfType(classId: ClassId): Boolean {
     } == true
 }
 
-val FirAnnotation.isExtensionFunctionAnnotationCall: Boolean
+konst FirAnnotation.isExtensionFunctionAnnotationCall: Boolean
     get() = isOfType(EXTENSION_FUNCTION_ANNOTATION)
 
 fun List<FirAnnotation>.dropExtensionFunctionAnnotation(): List<FirAnnotation> {
@@ -119,7 +119,7 @@ fun FirTypeProjection.toConeTypeProjection(): ConeTypeProjection =
     when (this) {
         is FirStarProjection -> ConeStarProjection
         is FirTypeProjectionWithVariance -> {
-            val type = typeRef.coneType
+            konst type = typeRef.coneType
             type.toTypeProjection(this.variance)
         }
         else -> error("!")
@@ -127,7 +127,7 @@ fun FirTypeProjection.toConeTypeProjection(): ConeTypeProjection =
 
 private fun ConeTypeParameterType.hasNotNullUpperBound(): Boolean {
     return lookupTag.typeParameterSymbol.resolvedBounds.any {
-        val boundType = it.coneType
+        konst boundType = it.coneType
         if (boundType is ConeTypeParameterType) {
             boundType.hasNotNullUpperBound()
         } else {
@@ -136,10 +136,10 @@ private fun ConeTypeParameterType.hasNotNullUpperBound(): Boolean {
     }
 }
 
-val FirTypeRef.canBeNull: Boolean
+konst FirTypeRef.canBeNull: Boolean
     get() = coneType.canBeNull
 
-val ConeKotlinType.canBeNull: Boolean
+konst ConeKotlinType.canBeNull: Boolean
     get() {
         if (isMarkedNullable) {
             return true
@@ -153,7 +153,7 @@ val ConeKotlinType.canBeNull: Boolean
         }
     }
 
-val FirIntersectionTypeRef.isLeftValidForDefinitelyNotNullable
+konst FirIntersectionTypeRef.isLeftValidForDefinitelyNotNullable
     get() = leftType.coneType.let { it is ConeTypeParameterType && it.canBeNull && !it.isMarkedNullable }
 
-val FirIntersectionTypeRef.isRightValidForDefinitelyNotNullable get() = rightType.coneType.isAny
+konst FirIntersectionTypeRef.isRightValidForDefinitelyNotNullable get() = rightType.coneType.isAny

@@ -33,7 +33,7 @@ open class A()
 class boo() : A() {}
 
 fun box(): String {
-    val x: Any = boo()
+    konst x: Any = boo()
     if (x !is A && test.lib.MyClass.fooCompanionObj)
         return "OK"
     return "NOK"

@@ -18,12 +18,12 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinPm20ProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.containingVariants
 
-val isAndroidFragment = FragmentConstraint { fragment ->
+konst isAndroidFragment = FragmentConstraint { fragment ->
     fragment.containingVariants.all { variant -> variant.androidDsl != null }
 }
 
-val isAndroidAndJvmSharedFragment = FragmentConstraint constraint@{ fragment ->
-    val variants = fragment.containingVariants
+konst isAndroidAndJvmSharedFragment = FragmentConstraint constraint@{ fragment ->
+    konst variants = fragment.containingVariants
     if (variants.any { it.platformType != KotlinPlatformType.jvm }) return@constraint false
     variants.any { it.androidDsl != null } && variants.any { it.androidDsl == null }
 }

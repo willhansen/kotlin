@@ -13,7 +13,7 @@ class B(var result: String) : A() {
 }
 
 fun box(): String {
-    val a = B("Fail") as java.util.Iterator<String>
+    konst a = B("Fail") as java.util.Iterator<String>
     a.next()
     a.hasNext()
     a.remove()

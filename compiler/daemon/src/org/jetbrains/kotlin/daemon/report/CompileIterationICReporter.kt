@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.daemon.common.CompileIterationResult
 import java.io.File
 
 internal class CompileIterationICReporter(
-    private val compilationResults: CompilationResults
+    private konst compilationResults: CompilationResults
 ) : ICReporterBase(), RemoteICReporter {
     override fun reportCompileIteration(incremental: Boolean, sourceFiles: Collection<File>, exitCode: ExitCode) {
         compilationResults.add(

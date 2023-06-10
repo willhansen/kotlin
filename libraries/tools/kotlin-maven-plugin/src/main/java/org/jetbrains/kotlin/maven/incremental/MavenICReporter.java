@@ -55,7 +55,7 @@ public class MavenICReporter extends ICReporterBase {
 
         String userLogLevel = System.getProperty(IC_LOG_LEVEL_PROPERTY_NAME);
         if (userLogLevel != null) {
-            for (LogLevel enumEntry : LogLevel.values()) {
+            for (LogLevel enumEntry : LogLevel.konstues()) {
                 if (enumEntry.name().equalsIgnoreCase(userLogLevel)) {
                     logLevel = enumEntry;
                     break;
@@ -63,7 +63,7 @@ public class MavenICReporter extends ICReporterBase {
             }
 
             log.warn("Unknown incremental compilation log level '" + logLevel + "'," +
-                    "possible values: " + "'none', 'info', 'debug'");
+                    "possible konstues: " + "'none', 'info', 'debug'");
         }
 
         this.logLevel = logLevel;

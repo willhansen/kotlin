@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.expressions.*
 class ExpressionCheckersDiagnosticComponent(
     session: FirSession,
     reporter: DiagnosticReporter,
-    private val checkers: ExpressionCheckers = session.checkersComponent.expressionCheckers,
+    private konst checkers: ExpressionCheckers = session.checkersComponent.expressionCheckers,
 ) : AbstractDiagnosticCollectorComponent(session, reporter) {
     override fun visitElement(element: FirElement, data: CheckerContext) {
         if (element is FirExpression) {

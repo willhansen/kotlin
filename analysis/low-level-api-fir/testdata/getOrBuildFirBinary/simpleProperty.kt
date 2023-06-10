@@ -1,6 +1,6 @@
 // DECLARATION_TYPE: org.jetbrains.kotlin.psi.KtProperty
 class FooBar {
-    val p: String
+    konst p: String
 
     constructor(p: String) {
         this.p = p

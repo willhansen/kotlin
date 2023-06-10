@@ -25,27 +25,27 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi2ir.generators.GeneratorContext
 
-private val varTypeAnnotationFqName = FqName("kotlinx.cinterop.internal.CStruct.VarType")
+private konst varTypeAnnotationFqName = FqName("kotlinx.cinterop.internal.CStruct.VarType")
 
 internal class CStructVarCompanionGenerator(
         context: GeneratorContext,
-        private val symbols: KonanSymbols
+        private konst symbols: KonanSymbols
 ) : DescriptorToIrTranslationMixin {
 
-    override val irBuiltIns: IrBuiltIns = context.irBuiltIns
-    override val symbolTable: SymbolTable = context.symbolTable
-    override val typeTranslator: TypeTranslator = context.typeTranslator
-    override val postLinkageSteps: MutableList<() -> Unit> = mutableListOf()
+    override konst irBuiltIns: IrBuiltIns = context.irBuiltIns
+    override konst symbolTable: SymbolTable = context.symbolTable
+    override konst typeTranslator: TypeTranslator = context.typeTranslator
+    override konst postLinkageSteps: MutableList<() -> Unit> = mutableListOf()
 
     fun generate(structDescriptor: ClassDescriptor): IrClass =
             createClass(structDescriptor.companionObjectDescriptor!!) { companionIrClass ->
                 if (structDescriptor.annotations.hasAnnotation(RuntimeNames.managedType)) {
                     companionIrClass.addMember(createCompanionConstructor(companionIrClass.descriptor, 0L, 0))
                 } else {
-                    val annotation = companionIrClass.descriptor.annotations
+                    konst annotation = companionIrClass.descriptor.annotations
                             .findAnnotation(varTypeAnnotationFqName)!!
-                    val size = annotation.getArgumentValueOrNull<Long>("size")!!
-                    val align = annotation.getArgumentValueOrNull<Int>("align")!!
+                    konst size = annotation.getArgumentValueOrNull<Long>("size")!!
+                    konst align = annotation.getArgumentValueOrNull<Int>("align")!!
                     companionIrClass.addMember(createCompanionConstructor(companionIrClass.descriptor, size, align))
                 }
                 companionIrClass.descriptor.unsubstitutedMemberScope

@@ -11,13 +11,13 @@ FILE: DerivedEnum.kt
             R|/baz|(Q|BaseJava|.R|/BaseJava.y|)
         }
 
-        public final static fun values(): R|kotlin/Array<DerivedEnum>| {
+        public final static fun konstues(): R|kotlin/Array<DerivedEnum>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|DerivedEnum| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|DerivedEnum| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<DerivedEnum>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<DerivedEnum>|
             public get(): R|kotlin/enums/EnumEntries<DerivedEnum>|
 
     }

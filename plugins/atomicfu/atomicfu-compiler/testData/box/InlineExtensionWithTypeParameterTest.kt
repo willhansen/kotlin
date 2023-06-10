@@ -2,7 +2,7 @@ import kotlinx.atomicfu.*
 import kotlin.test.*
 
 class InlineExtensionWithTypeParameterTest {
-    abstract class Segment<S : Segment<S>>(val id: Int)
+    abstract class Segment<S : Segment<S>>(konst id: Int)
     class SemaphoreSegment(id: Int) : Segment<SemaphoreSegment>(id)
 
     private inline fun <S : Segment<S>> AtomicRef<S>.foo(
@@ -10,7 +10,7 @@ class InlineExtensionWithTypeParameterTest {
         startFrom: S
     ): Int {
         lazySet(startFrom)
-        return value.getSegmentId()
+        return konstue.getSegmentId()
     }
 
     private inline fun <S : Segment<S>> S.getSegmentId(): Int {
@@ -18,16 +18,16 @@ class InlineExtensionWithTypeParameterTest {
         return cur.id
     }
 
-    val sref = atomic(SemaphoreSegment(0))
+    konst sref = atomic(SemaphoreSegment(0))
 
     fun testInlineExtensionWithTypeParameter() {
-        val s = SemaphoreSegment(77)
+        konst s = SemaphoreSegment(77)
         assertEquals(77, sref.foo(0, s))
     }
 }
 
 fun box(): String {
-    val testClass = InlineExtensionWithTypeParameterTest()
+    konst testClass = InlineExtensionWithTypeParameterTest()
     testClass.testInlineExtensionWithTypeParameter()
     return "OK"
 }

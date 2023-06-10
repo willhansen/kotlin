@@ -34,13 +34,13 @@ import org.jetbrains.kotlin.name.NameUtils
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 class Fir2IrLazyProperty(
-    private val components: Fir2IrComponents,
-    override val startOffset: Int,
-    override val endOffset: Int,
+    private konst components: Fir2IrComponents,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val fir: FirProperty,
-    val containingClass: FirRegularClass?,
-    override val symbol: Fir2IrPropertySymbol,
+    override konst fir: FirProperty,
+    konst containingClass: FirRegularClass?,
+    override konst symbol: Fir2IrPropertySymbol,
     override var isFakeOverride: Boolean
 ) : IrProperty(), AbstractFir2IrLazyDeclaration<FirProperty>, Fir2IrComponents by components {
     init {
@@ -52,7 +52,7 @@ class Fir2IrLazyProperty(
     override lateinit var parent: IrDeclarationParent
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: PropertyDescriptor
+    override konst descriptor: PropertyDescriptor
         get() = symbol.descriptor
 
     override var isVar: Boolean
@@ -90,7 +90,7 @@ class Fir2IrLazyProperty(
         get() = fir.modality!!
         set(_) = mutationNotSupported()
 
-    private val type: IrType by lazy {
+    private konst type: IrType by lazy {
         with(typeConverter) { fir.returnTypeRef.toIrType() }
     }
 
@@ -98,7 +98,7 @@ class Fir2IrLazyProperty(
         // Annotations need full initializer information to instantiate them correctly
         return when {
             containingClass?.classKind?.isAnnotationClass == true -> {
-                when (val elem = initializer?.accept(Fir2IrVisitor(components, Fir2IrConversionScope()), null)) {
+                when (konst elem = initializer?.accept(Fir2IrVisitor(components, Fir2IrConversionScope()), null)) {
                     is IrExpressionBody -> elem
                     is IrExpression -> factory.createExpressionBody(elem)
                     else -> null
@@ -107,7 +107,7 @@ class Fir2IrLazyProperty(
             // Setting initializers to every other class causes some cryptic errors in lowerings
             initializer is FirConstExpression<*> -> {
                 // TODO: Normally we shouldn't have error type here
-                val constType = with(typeConverter) { initializer.typeRef.toIrType().takeIf { it !is IrErrorType } ?: type }
+                konst constType = with(typeConverter) { initializer.typeRef.toIrType().takeIf { it !is IrErrorType } ?: type }
                 factory.createExpressionBody(initializer.toIrConst(constType))
             }
             else -> null
@@ -116,18 +116,18 @@ class Fir2IrLazyProperty(
 
     override var backingField: IrField? by lazyVar(lock) {
         // TODO: this checks are very preliminary, FIR resolve should determine backing field presence itself
-        val parent = parent
+        konst parent = parent
         when {
             !fir.isConst && (fir.modality == Modality.ABSTRACT || parent is IrClass && parent.isInterface) -> {
                 null
             }
             fir.hasExplicitBackingField -> {
                 with(declarationStorage) {
-                    val backingFieldType = with(typeConverter) {
+                    konst backingFieldType = with(typeConverter) {
                         fir.backingField?.returnTypeRef?.toIrType()
                     }
-                    val initializer = fir.backingField?.initializer ?: fir.initializer
-                    val visibility = fir.backingField?.visibility ?: fir.visibility
+                    konst initializer = fir.backingField?.initializer ?: fir.initializer
+                    konst visibility = fir.backingField?.visibility ?: fir.visibility
                     createBackingField(
                         fir,
                         IrDeclarationOrigin.PROPERTY_BACKING_FIELD,
@@ -173,7 +173,7 @@ class Fir2IrLazyProperty(
     }
 
     override var getter: IrSimpleFunction? by lazyVar(lock) {
-        val signature = signatureComposer.composeAccessorSignature(
+        konst signature = signatureComposer.composeAccessorSignature(
             fir,
             isSetter = false,
             containingClass?.symbol?.toLookupTag(),
@@ -206,7 +206,7 @@ class Fir2IrLazyProperty(
     override var setter: IrSimpleFunction? by lazyVar(lock) {
         if (!fir.isVar) null
         else {
-            val signature = signatureComposer.composeAccessorSignature(
+            konst signature = signatureComposer.composeAccessorSignature(
                 fir,
                 isSetter = true,
                 containingClass?.symbol?.toLookupTag(),
@@ -246,7 +246,7 @@ class Fir2IrLazyProperty(
         get() = null
         set(_) = error("We should never need to store metadata of external declarations.")
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = fir.containerSource
 
     override var attributeOwnerId: IrAttributeContainer = this

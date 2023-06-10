@@ -54,7 +54,7 @@ public interface KtUsualClassTypeRenderer {
     public object AS_FULLY_EXPANDED_CLASS_TYPE_WITH_TYPE_ARGUMENTS : KtUsualClassTypeRenderer {
         context(KtAnalysisSession, KtTypeRenderer)
         override fun renderType(type: KtUsualClassType, printer: PrettyPrinter) {
-            val fullyExpandedType = type.fullyExpandedType
+            konst fullyExpandedType = type.fullyExpandedType
             if (fullyExpandedType is KtUsualClassType) {
                 AS_CLASS_TYPE_WITH_TYPE_ARGUMENTS.renderType(fullyExpandedType, printer)
             } else {

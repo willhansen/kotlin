@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
 object JavacWrapperRegistrar {
-    private const val JAVAC_CONTEXT_CLASS = "com.sun.tools.javac.util.Context"
+    private const konst JAVAC_CONTEXT_CLASS = "com.sun.tools.javac.util.Context"
 
     fun registerJavac(
         project: MockProject,
@@ -32,7 +32,7 @@ object JavacWrapperRegistrar {
         lightClassGenerationSupport: LightClassGenerationSupport,
         packagePartsProviders: List<JvmPackagePartProvider>
     ): Boolean {
-        val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
         try {
             Class.forName(JAVAC_CONTEXT_CLASS)
@@ -41,15 +41,15 @@ object JavacWrapperRegistrar {
             return false
         }
 
-        val context = Context()
+        konst context = Context()
         JavacLogger.preRegister(context, messageCollector)
 
-        val jvmClasspathRoots = configuration.jvmClasspathRoots
-        val outputDirectory = configuration.get(JVMConfigurationKeys.OUTPUT_DIRECTORY)
-        val compileJava = configuration.getBoolean(JVMConfigurationKeys.COMPILE_JAVA)
-        val kotlinSupertypesResolver = JavacWrapperKotlinResolverImpl(lightClassGenerationSupport)
+        konst jvmClasspathRoots = configuration.jvmClasspathRoots
+        konst outputDirectory = configuration.get(JVMConfigurationKeys.OUTPUT_DIRECTORY)
+        konst compileJava = configuration.getBoolean(JVMConfigurationKeys.COMPILE_JAVA)
+        konst kotlinSupertypesResolver = JavacWrapperKotlinResolverImpl(lightClassGenerationSupport)
 
-        val javacWrapper = JavacWrapper(
+        konst javacWrapper = JavacWrapper(
             javaFiles, kotlinFiles, arguments, jvmClasspathRoots, bootClasspath, sourcePath,
             kotlinSupertypesResolver, packagePartsProviders, compileJava, outputDirectory, context
         )

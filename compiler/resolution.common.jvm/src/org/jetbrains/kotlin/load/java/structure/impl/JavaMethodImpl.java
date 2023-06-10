@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.jetbrains.kotlin.load.java.structure.impl.JavaElementCollectionFromPsiArrayUtil.typeParameters;
-import static org.jetbrains.kotlin.load.java.structure.impl.JavaElementCollectionFromPsiArrayUtil.valueParameters;
+import static org.jetbrains.kotlin.load.java.structure.impl.JavaElementCollectionFromPsiArrayUtil.konstueParameters;
 
 public class JavaMethodImpl extends JavaMemberImpl<PsiMethod> implements JavaMethod {
     public JavaMethodImpl(@NotNull JavaElementPsiSource<PsiMethod> psiMethodSource) {
@@ -61,7 +61,7 @@ public class JavaMethodImpl extends JavaMemberImpl<PsiMethod> implements JavaMet
     @Override
     @NotNull
     public List<JavaValueParameter> getValueParameters() {
-        return valueParameters(getPsi().getParameterList().getParameters(), getSourceFactory());
+        return konstueParameters(getPsi().getParameterList().getParameters(), getSourceFactory());
     }
 
     @Override

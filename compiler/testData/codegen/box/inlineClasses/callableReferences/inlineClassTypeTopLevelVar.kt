@@ -3,12 +3,12 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int)
+konstue class Z(konst x: Int)
 
 var topLevel = Z(42)
 
 fun box(): String {
-    val ref = ::topLevel
+    konst ref = ::topLevel
 
     if (ref.get().x != 42) throw AssertionError()
 

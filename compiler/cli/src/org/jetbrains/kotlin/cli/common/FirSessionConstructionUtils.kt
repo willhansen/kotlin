@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.resolve.konan.platform.NativePlatformAnalyzerService
 import org.jetbrains.kotlin.resolve.multiplatform.hmppModuleName
 import org.jetbrains.kotlin.resolve.multiplatform.isCommonSource
 
-val isCommonSourceForPsi: (KtFile) -> Boolean = { it.isCommonSource == true }
-val fileBelongsToModuleForPsi: (KtFile, String) -> Boolean = { file, moduleName -> file.hmppModuleName == moduleName }
+konst isCommonSourceForPsi: (KtFile) -> Boolean = { it.isCommonSource == true }
+konst fileBelongsToModuleForPsi: (KtFile, String) -> Boolean = { file, moduleName -> file.hmppModuleName == moduleName }
 
-val GroupedKtSources.isCommonSourceForLt: (KtSourceFile) -> Boolean
+konst GroupedKtSources.isCommonSourceForLt: (KtSourceFile) -> Boolean
     get() = { it in commonSources }
 
-val GroupedKtSources.fileBelongsToModuleForLt: (KtSourceFile, String) -> Boolean
+konst GroupedKtSources.fileBelongsToModuleForLt: (KtSourceFile, String) -> Boolean
     get() = { file, moduleName -> sourcesByModuleName[moduleName].orEmpty().contains(file) }
 
 /**
@@ -61,7 +61,7 @@ fun <F> prepareJvmSessions(
     fileBelongsToModule: (F, String) -> Boolean,
     createProviderAndScopeForIncrementalCompilation: (List<F>) -> IncrementalCompilationContext?,
 ): List<SessionWithSources<F>> {
-    val javaSourcesScope = projectEnvironment.getSearchScopeForProjectJavaSources()
+    konst javaSourcesScope = projectEnvironment.getSearchScopeForProjectJavaSources()
 
     return prepareSessions(
         files, configuration, rootModuleName, JvmPlatforms.unspecifiedJvmPlatform,
@@ -255,15 +255,15 @@ private inline fun <F> prepareSessions(
     createLibrarySession: (FirProjectSessionProvider) -> FirSession,
     createSourceSession: FirSessionProducer<F>,
 ): List<SessionWithSources<F>> {
-    val languageVersionSettings = configuration.languageVersionSettings
+    konst languageVersionSettings = configuration.languageVersionSettings
 
-    val isMppEnabled = languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)
-    val hmppModuleStructure = configuration.get(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE)
-    val sessionProvider = FirProjectSessionProvider()
+    konst isMppEnabled = languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)
+    konst hmppModuleStructure = configuration.get(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE)
+    konst sessionProvider = FirProjectSessionProvider()
 
     createLibrarySession(sessionProvider)
-    val extendedAnalysisMode = configuration.getBoolean(CommonConfigurationKeys.USE_FIR_EXTENDED_CHECKERS)
-    val sessionConfigurator: FirSessionConfigurator.() -> Unit = {
+    konst extendedAnalysisMode = configuration.getBoolean(CommonConfigurationKeys.USE_FIR_EXTENDED_CHECKERS)
+    konst sessionConfigurator: FirSessionConfigurator.() -> Unit = {
         if (extendedAnalysisMode) {
             registerExtendedCommonCheckers()
         }
@@ -299,7 +299,7 @@ private inline fun <F> createSingleSession(
     noinline sessionConfigurator: FirSessionConfigurator.() -> Unit,
     createFirSession: FirSessionProducer<F>,
 ): SessionWithSources<F> {
-    val platformModuleData = FirModuleDataImpl(
+    konst platformModuleData = FirModuleDataImpl(
         rootModuleName,
         libraryList.regularDependencies,
         libraryList.dependsOnDependencies,
@@ -308,7 +308,7 @@ private inline fun <F> createSingleSession(
         analyzerServices
     )
 
-    val session = createFirSession(files, platformModuleData, sessionProvider, sessionConfigurator)
+    konst session = createFirSession(files, platformModuleData, sessionProvider, sessionConfigurator)
     return SessionWithSources(session, files)
 }
 
@@ -323,7 +323,7 @@ private inline fun <F> createSessionsForLegacyMppProject(
     isCommonSource: (F) -> Boolean,
     createFirSession: FirSessionProducer<F>,
 ): List<SessionWithSources<F>> {
-    val commonModuleData = FirModuleDataImpl(
+    konst commonModuleData = FirModuleDataImpl(
         Name.identifier("${rootModuleName.asString()}-common"),
         libraryList.regularDependencies,
         listOf(),
@@ -332,7 +332,7 @@ private inline fun <F> createSessionsForLegacyMppProject(
         analyzerServices
     )
 
-    val platformModuleData = FirModuleDataImpl(
+    konst platformModuleData = FirModuleDataImpl(
         rootModuleName,
         libraryList.regularDependencies,
         listOf(commonModuleData),
@@ -341,14 +341,14 @@ private inline fun <F> createSessionsForLegacyMppProject(
         analyzerServices
     )
 
-    val commonFiles = mutableListOf<F>()
-    val platformFiles = mutableListOf<F>()
+    konst commonFiles = mutableListOf<F>()
+    konst platformFiles = mutableListOf<F>()
     for (file in files) {
         (if (isCommonSource(file)) commonFiles else platformFiles).add(file)
     }
 
-    val commonSession = createFirSession(commonFiles, commonModuleData, sessionProvider, sessionConfigurator)
-    val platformSession = createFirSession(platformFiles, platformModuleData, sessionProvider, sessionConfigurator)
+    konst commonSession = createFirSession(commonFiles, commonModuleData, sessionProvider, sessionConfigurator)
+    konst platformSession = createFirSession(platformFiles, platformModuleData, sessionProvider, sessionConfigurator)
 
     return listOf(
         SessionWithSources(commonSession, commonFiles),
@@ -368,13 +368,13 @@ private inline fun <F> createSessionsForHmppProject(
     fileBelongsToModule: (F, String) -> Boolean,
     createFirSession: FirSessionProducer<F>,
 ): List<SessionWithSources<F>> {
-    val moduleDataForHmppModule = LinkedHashMap<HmppCliModule, FirModuleData>()
+    konst moduleDataForHmppModule = LinkedHashMap<HmppCliModule, FirModuleData>()
 
     for (module in hmppModuleStructure.modules) {
-        val dependencies = hmppModuleStructure.dependenciesMap[module]
+        konst dependencies = hmppModuleStructure.dependenciesMap[module]
             ?.map { moduleDataForHmppModule.getValue(it) }
             .orEmpty()
-        val moduleData = FirModuleDataImpl(
+        konst moduleData = FirModuleDataImpl(
             rootModuleName,
             libraryList.regularDependencies,
             dependsOnDependencies = dependencies,
@@ -386,11 +386,11 @@ private inline fun <F> createSessionsForHmppProject(
     }
 
     return hmppModuleStructure.modules.map { module ->
-        val moduleData = moduleDataForHmppModule.getValue(module)
-        val sources = files.filter { fileBelongsToModule(it, module.name) }
-        val session = createFirSession(sources, moduleData, sessionProvider, sessionConfigurator)
+        konst moduleData = moduleDataForHmppModule.getValue(module)
+        konst sources = files.filter { fileBelongsToModule(it, module.name) }
+        konst session = createFirSession(sources, moduleData, sessionProvider, sessionConfigurator)
         SessionWithSources(session, sources)
     }
 }
 
-data class SessionWithSources<F>(val session: FirSession, val files: List<F>)
+data class SessionWithSources<F>(konst session: FirSession, konst files: List<F>)

@@ -5,7 +5,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}stringArray
   //   Public signature: /Test1.stringArray|3224078221487065108[0]
-  val stringArray: Array<String>
+  konst stringArray: Array<String>
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-stringArray>(){}kotlin.Array<kotlin.String>
     //   Public signature: /Test1.stringArray.<get-stringArray>|3372814522015375360[0]
@@ -17,7 +17,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}charArray
   //   Public signature: /Test1.charArray|-5349931751208968301[0]
-  val charArray: CharArray
+  konst charArray: CharArray
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-charArray>(){}kotlin.CharArray
     //   Public signature: /Test1.charArray.<get-charArray>|-3365262090570994726[0]
@@ -29,7 +29,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}booleanArray
   //   Public signature: /Test1.booleanArray|7605527965651232515[0]
-  val booleanArray: BooleanArray
+  konst booleanArray: BooleanArray
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-booleanArray>(){}kotlin.BooleanArray
     //   Public signature: /Test1.booleanArray.<get-booleanArray>|-2975190751408552199[0]
@@ -41,7 +41,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}byteArray
   //   Public signature: /Test1.byteArray|-2314777124899298189[0]
-  val byteArray: ByteArray
+  konst byteArray: ByteArray
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-byteArray>(){}kotlin.ByteArray
     //   Public signature: /Test1.byteArray.<get-byteArray>|-4531821776506226927[0]
@@ -53,7 +53,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}shortArray
   //   Public signature: /Test1.shortArray|3516401755230006906[0]
-  val shortArray: ShortArray
+  konst shortArray: ShortArray
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-shortArray>(){}kotlin.ShortArray
     //   Public signature: /Test1.shortArray.<get-shortArray>|3616346085964569365[0]
@@ -65,7 +65,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}intArray
   //   Public signature: /Test1.intArray|-5845507301569286943[0]
-  val intArray: IntArray
+  konst intArray: IntArray
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-intArray>(){}kotlin.IntArray
     //   Public signature: /Test1.intArray.<get-intArray>|540017735713660266[0]
@@ -77,7 +77,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}longArray
   //   Public signature: /Test1.longArray|-261136028309834719[0]
-  val longArray: LongArray
+  konst longArray: LongArray
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-longArray>(){}kotlin.LongArray
     //   Public signature: /Test1.longArray.<get-longArray>|-1197859177727725361[0]
@@ -89,7 +89,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}floatArray
   //   Public signature: /Test1.floatArray|-863616440006860352[0]
-  val floatArray: FloatArray
+  konst floatArray: FloatArray
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-floatArray>(){}kotlin.FloatArray
     //   Public signature: /Test1.floatArray.<get-floatArray>|379636537041432797[0]
@@ -101,7 +101,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}doubleArray
   //   Public signature: /Test1.doubleArray|-3027997348205759511[0]
-  val doubleArray: DoubleArray
+  konst doubleArray: DoubleArray
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-doubleArray>(){}kotlin.DoubleArray
     //   Public signature: /Test1.doubleArray.<get-doubleArray>|5171225634314785003[0]
@@ -227,7 +227,7 @@ data class Test2<T : Any?> {
   // CHECK:
   //   Mangled name: Test2{}genericArray
   //   Public signature: /Test2.genericArray|-3006201342680303597[0]
-  val genericArray: Array<T>
+  konst genericArray: Array<T>
     // CHECK JVM_IR:
     //   Mangled name: Test2#<get-genericArray>(){}kotlin.Array<1:0>
     //   Public signature: /Test2.genericArray.<get-genericArray>|-887796497194881267[0]
@@ -289,7 +289,7 @@ data class Test3 {
   // CHECK:
   //   Mangled name: Test3{}anyArrayN
   //   Public signature: /Test3.anyArrayN|-3755548963031234944[0]
-  val anyArrayN: Array<Any>?
+  konst anyArrayN: Array<Any>?
     // CHECK JVM_IR:
     //   Mangled name: Test3#<get-anyArrayN>(){}kotlin.Array<kotlin.Any>?
     //   Public signature: /Test3.anyArrayN.<get-anyArrayN>|1018695805048889237[0]

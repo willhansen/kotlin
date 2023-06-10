@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.utils.Printer
 
 // TODO: eliminate Native specifics.
 class KlibResolvedModuleDescriptorsFactoryImpl(
-    override val moduleDescriptorFactory: KlibMetadataModuleDescriptorFactory
+    override konst moduleDescriptorFactory: KlibMetadataModuleDescriptorFactory
 ) : KlibResolvedModuleDescriptorsFactory {
 
     override fun createResolved(
@@ -46,21 +46,21 @@ class KlibResolvedModuleDescriptorsFactoryImpl(
         isForMetadataCompilation: Boolean,
     ): KotlinResolvedModuleDescriptors {
 
-        val moduleDescriptors = mutableListOf<ModuleDescriptorImpl>()
+        konst moduleDescriptors = mutableListOf<ModuleDescriptorImpl>()
 
         @Suppress("NAME_SHADOWING")
         var builtIns = builtIns
 
-        val friendModuleDescriptors = mutableSetOf<ModuleDescriptorImpl>()
-        val refinesModuleDescriptors = mutableSetOf<ModuleDescriptorImpl>()
-        val includedLibraryDescriptors = mutableSetOf<ModuleDescriptorImpl>()
+        konst friendModuleDescriptors = mutableSetOf<ModuleDescriptorImpl>()
+        konst refinesModuleDescriptors = mutableSetOf<ModuleDescriptorImpl>()
+        konst includedLibraryDescriptors = mutableSetOf<ModuleDescriptorImpl>()
 
         // Build module descriptors.
         resolvedLibraries.forEach { library, packageAccessHandler ->
             profile("Loading ${library.libraryName}") {
 
                 // MutableModuleContext needs ModuleDescriptorImpl, rather than ModuleDescriptor.
-                val moduleDescriptor = createDescriptorOptionalBuiltsIns(
+                konst moduleDescriptor = createDescriptorOptionalBuiltsIns(
                     library, languageVersionSettings, storageManager, builtIns, packageAccessHandler
                 )
                 builtIns = moduleDescriptor.builtIns
@@ -75,7 +75,7 @@ class KlibResolvedModuleDescriptorsFactoryImpl(
             }
         }
 
-        val forwardDeclarationsModule = createForwardDeclarationsModule(
+        konst forwardDeclarationsModule = createForwardDeclarationsModule(
             builtIns,
             storageManager,
             // If we are compiling metadata, make synthetic forward declarations `expect`,
@@ -92,7 +92,7 @@ class KlibResolvedModuleDescriptorsFactoryImpl(
 
         // Set inter-dependencies between module descriptors, add forwarding declarations module.
         for (module in moduleDescriptors) {
-            val friends = additionalDependencyModules.toMutableSet()
+            konst friends = additionalDependencyModules.toMutableSet()
             if (module in includedLibraryDescriptors) {
                 friends.addAll(friendModuleDescriptors)
                 friends.addAll(refinesModuleDescriptors)
@@ -119,7 +119,7 @@ class KlibResolvedModuleDescriptorsFactoryImpl(
         isExpect: Boolean
     ): ModuleDescriptorImpl {
 
-        val module = createDescriptorOptionalBuiltsIns(FORWARD_DECLARATIONS_MODULE_NAME, storageManager, builtIns, SyntheticModulesOrigin)
+        konst module = createDescriptorOptionalBuiltsIns(FORWARD_DECLARATIONS_MODULE_NAME, storageManager, builtIns, SyntheticModulesOrigin)
 
         fun createPackage(forwardDeclarationKind: ForwardDeclarationKind) =
             ForwardDeclarationsPackageFragmentDescriptor(
@@ -131,8 +131,8 @@ class KlibResolvedModuleDescriptorsFactoryImpl(
                 isExpect
             )
 
-        val packageFragmentProvider = PackageFragmentProviderImpl(
-            ForwardDeclarationKind.values().map { createPackage(it) }
+        konst packageFragmentProvider = PackageFragmentProviderImpl(
+            ForwardDeclarationKind.konstues().map { createPackage(it) }
         )
 
         module.initialize(packageFragmentProvider)
@@ -163,7 +163,7 @@ class KlibResolvedModuleDescriptorsFactoryImpl(
         moduleDescriptorFactory.createDescriptorAndNewBuiltIns(library, languageVersionSettings, storageManager, packageAccessHandler)
 
     companion object {
-        val FORWARD_DECLARATIONS_MODULE_NAME = Name.special("<forward declarations>")
+        konst FORWARD_DECLARATIONS_MODULE_NAME = Name.special("<forward declarations>")
     }
 }
 
@@ -179,12 +179,12 @@ class ForwardDeclarationsPackageFragmentDescriptor(
     isExpect: Boolean
 ) : PackageFragmentDescriptorImpl(module, fqName) {
 
-    private val memberScope = object : MemberScopeImpl() {
+    private konst memberScope = object : MemberScopeImpl() {
 
-        private val declarations = storageManager.createMemoizedFunction(this::createDeclaration)
+        private konst declarations = storageManager.createMemoizedFunction(this::createDeclaration)
 
-        private val supertype by storageManager.createLazyValue {
-            val descriptor = builtIns.builtInsModule.getPackage(ForwardDeclarationsFqNames.cInterop)
+        private konst supertype by storageManager.createLazyValue {
+            konst descriptor = builtIns.builtInsModule.getPackage(ForwardDeclarationsFqNames.cInterop)
                 .memberScope
                 .getContributedClassifier(supertypeName, NoLookupLocation.FROM_BACKEND) as ClassDescriptor
 
@@ -221,28 +221,28 @@ class ForwardDeclarationsPackageFragmentDescriptor(
 // TODO decouple and move interop-specific logic back to Kotlin/Native.
 object ForwardDeclarationsFqNames {
 
-    internal val cInterop = FqName("kotlinx.cinterop")
+    internal konst cInterop = FqName("kotlinx.cinterop")
 
-    private val cNames = FqName("cnames")
-    internal val cNamesStructs = cNames.child(Name.identifier("structs"))
+    private konst cNames = FqName("cnames")
+    internal konst cNamesStructs = cNames.child(Name.identifier("structs"))
 
-    private val objCNames = FqName("objcnames")
-    internal val objCNamesClasses = objCNames.child(Name.identifier("classes"))
-    internal val objCNamesProtocols = objCNames.child(Name.identifier("protocols"))
+    private konst objCNames = FqName("objcnames")
+    internal konst objCNamesClasses = objCNames.child(Name.identifier("classes"))
+    internal konst objCNamesProtocols = objCNames.child(Name.identifier("protocols"))
 
-    val syntheticPackages = setOf(cNames, objCNames)
+    konst syntheticPackages = setOf(cNames, objCNames)
 }
 
-enum class ForwardDeclarationKind(val packageFqName: FqName, val superClassName: String, val classKind: ClassKind) {
+enum class ForwardDeclarationKind(konst packageFqName: FqName, konst superClassName: String, konst classKind: ClassKind) {
     CNAMES_STRUCTS(ForwardDeclarationsFqNames.cNamesStructs, "COpaque", ClassKind.CLASS),
     OBJCNAMES_CLASSES(ForwardDeclarationsFqNames.objCNamesClasses, "ObjCObjectBase", ClassKind.CLASS),
     OBJCNAMES_PROTOCOLS(ForwardDeclarationsFqNames.objCNamesProtocols, "ObjCObject", ClassKind.INTERFACE)
 
     ;
 
-    val superClassId = ClassId.topLevel(ForwardDeclarationsFqNames.cInterop.child(Name.identifier(superClassName)))
+    konst superClassId = ClassId.topLevel(ForwardDeclarationsFqNames.cInterop.child(Name.identifier(superClassName)))
 
     companion object {
-        val packageFqNameToKind: Map<FqName, ForwardDeclarationKind> = ForwardDeclarationKind.values().associateBy { it.packageFqName }
+        konst packageFqNameToKind: Map<FqName, ForwardDeclarationKind> = ForwardDeclarationKind.konstues().associateBy { it.packageFqName }
     }
 }

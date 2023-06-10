@@ -27,24 +27,24 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.types.Variance
 
 // true if the class should be processed by the parcelize plugin
-val IrClass.isParcelize: Boolean
+konst IrClass.isParcelize: Boolean
     get() = kind in ParcelableExtensionBase.ALLOWED_CLASS_KINDS && hasAnnotation(PARCELIZE_CLASS_FQNAME)
 
 // Finds the getter for a pre-existing CREATOR field on the class companion, which is used for manual Parcelable implementations in Kotlin.
-val IrClass.creatorGetter: IrSimpleFunctionSymbol?
+konst IrClass.creatorGetter: IrSimpleFunctionSymbol?
     get() = companionObject()?.getPropertyGetter(CREATOR_NAME.asString())?.takeIf {
         it.owner.correspondingPropertySymbol?.owner?.backingField?.hasAnnotation(FqName("kotlin.jvm.JvmField")) == true
     }
 
 // true if the class has a static CREATOR field
-val IrClass.hasCreatorField: Boolean
+konst IrClass.hasCreatorField: Boolean
     get() = fields.any { field -> field.name == CREATOR_NAME } || creatorGetter != null
 
 // object P : Parceler<T> { fun T.write(parcel: Parcel, flags: Int) ...}
-fun IrBuilderWithScope.parcelerWrite(parceler: IrClass, parcel: IrValueDeclaration, flags: IrValueDeclaration, value: IrExpression) =
+fun IrBuilderWithScope.parcelerWrite(parceler: IrClass, parcel: IrValueDeclaration, flags: IrValueDeclaration, konstue: IrExpression) =
     irCall(parceler.parcelerSymbolByName("write")!!).apply {
         dispatchReceiver = irGetObject(parceler.symbol)
-        extensionReceiver = value
+        extensionReceiver = konstue
         putValueArgument(0, irGet(parcel))
         putValueArgument(1, irGet(flags))
     }
@@ -76,7 +76,7 @@ fun IrBuilderWithScope.parcelableWriteToParcel(
     parcel: IrExpression,
     flags: IrExpression
 ): IrExpression {
-    val writeToParcel = parcelableClass.functions.first { function ->
+    konst writeToParcel = parcelableClass.functions.first { function ->
         function.name.asString() == "writeToParcel" && function.overridesFunctionIn(ANDROID_PARCELABLE_CLASS_FQNAME)
     }
 
@@ -89,7 +89,7 @@ fun IrBuilderWithScope.parcelableWriteToParcel(
 
 // class C : Parcelable.Creator<T> { fun createFromParcel(parcel: Parcel): T ...}
 fun IrBuilderWithScope.parcelableCreatorCreateFromParcel(creator: IrExpression, parcel: IrExpression): IrExpression {
-    val createFromParcel = creator.type.getClass()!!.functions.first { function ->
+    konst createFromParcel = creator.type.getClass()!!.functions.first { function ->
         function.name.asString() == "createFromParcel" && function.overridesFunctionIn(ANDROID_PARCELABLE_CREATOR_CLASS_FQNAME)
     }
 
@@ -128,12 +128,12 @@ fun IrClass.isSubclassOfFqName(fqName: String): Boolean =
     fqNameWhenAvailable?.asString() == fqName || superTypes.any { it.erasedUpperBound.isSubclassOfFqName(fqName) }
 
 inline fun IrBlockBuilder.forUntil(upperBound: IrExpression, loopBody: IrBlockBuilder.(IrValueDeclaration) -> Unit) {
-    val indexTemporary = irTemporary(irInt(0), isMutable = true)
+    konst indexTemporary = irTemporary(irInt(0), isMutable = true)
     +irWhile().apply {
         condition = irNotEquals(irGet(indexTemporary), upperBound)
         body = irBlock {
             loopBody(indexTemporary)
-            val inc = context.irBuiltIns.intClass.getSimpleFunction("inc")!!
+            konst inc = context.irBuiltIns.intClass.getSimpleFunction("inc")!!
             +irSet(indexTemporary.symbol, irCall(inc).apply {
                 dispatchReceiver = irGet(indexTemporary)
             })
@@ -164,5 +164,5 @@ fun IrClass.getPropertyGetter(name: String): IrSimpleFunctionSymbol? =
 fun IrClass.getMethodWithoutArguments(name: String): IrSimpleFunction =
     functions.first { function ->
         function.name.asString() == name && function.dispatchReceiverParameter != null
-                && function.extensionReceiverParameter == null && function.valueParameters.isEmpty()
+                && function.extensionReceiverParameter == null && function.konstueParameters.isEmpty()
     }

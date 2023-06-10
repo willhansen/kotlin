@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.types.FlexibleType
 import org.jetbrains.kotlin.types.KotlinType
 
 abstract class SerializerExtension {
-    abstract val stringTable: DescriptorAwareStringTable
+    abstract konst stringTable: DescriptorAwareStringTable
 
-    abstract val metadataVersion: BinaryVersion
+    abstract konst metadataVersion: BinaryVersion
 
-    val annotationSerializer by lazy { createAnnotationSerializer() }
+    konst annotationSerializer by lazy { createAnnotationSerializer() }
 
     protected open fun createAnnotationSerializer(): AnnotationSerializer = AnnotationSerializer(stringTable)
 
@@ -29,7 +29,7 @@ abstract class SerializerExtension {
         fun getCallableMembers(classDescriptor: ClassDescriptor): Collection<CallableMemberDescriptor>
     }
 
-    open val customClassMembersProducer: ClassMembersProducer?
+    open konst customClassMembersProducer: ClassMembersProducer?
         get() = null
 
 

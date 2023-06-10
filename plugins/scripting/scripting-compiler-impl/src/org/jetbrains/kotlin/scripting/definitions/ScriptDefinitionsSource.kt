@@ -7,5 +7,5 @@ package org.jetbrains.kotlin.scripting.definitions
 
 interface ScriptDefinitionsSource {
 
-    val definitions: Sequence<ScriptDefinition>
+    konst definitions: Sequence<ScriptDefinition>
 }

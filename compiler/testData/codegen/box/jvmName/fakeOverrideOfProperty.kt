@@ -5,7 +5,7 @@ abstract class Base {
     protected abstract fun getChart(context: CharSequence): String
 
     @get:JvmName("getChartHelper")
-    public val CharSequence.chart get() = getChart(this)
+    public konst CharSequence.chart get() = getChart(this)
 }
 
 abstract class Derived1 : Base()

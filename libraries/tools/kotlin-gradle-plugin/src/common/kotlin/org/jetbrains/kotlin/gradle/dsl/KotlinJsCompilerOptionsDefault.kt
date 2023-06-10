@@ -9,46 +9,46 @@ internal abstract class KotlinJsCompilerOptionsDefault @javax.inject.Inject cons
     objectFactory: org.gradle.api.model.ObjectFactory
 ) : org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptionsDefault(objectFactory), org.jetbrains.kotlin.gradle.dsl.KotlinJsCompilerOptions {
 
-    override val friendModulesDisabled: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst friendModulesDisabled: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 
-    override val main: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JsMainFunctionExecutionMode> =
+    override konst main: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JsMainFunctionExecutionMode> =
         objectFactory.property(org.jetbrains.kotlin.gradle.dsl.JsMainFunctionExecutionMode::class.java).convention(org.jetbrains.kotlin.gradle.dsl.JsMainFunctionExecutionMode.CALL)
 
-    override val metaInfo: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst metaInfo: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(true)
 
-    override val moduleKind: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JsModuleKind> =
+    override konst moduleKind: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JsModuleKind> =
         objectFactory.property(org.jetbrains.kotlin.gradle.dsl.JsModuleKind::class.java).convention(org.jetbrains.kotlin.gradle.dsl.JsModuleKind.MODULE_PLAIN)
 
-    override val moduleName: org.gradle.api.provider.Property<kotlin.String> =
+    override konst moduleName: org.gradle.api.provider.Property<kotlin.String> =
         objectFactory.property(kotlin.String::class.java)
 
-    override val noStdlib: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst noStdlib: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(true)
 
     @Deprecated(message = "Only for legacy backend. For IR backend please use task.destinationDirectory and moduleName", level = DeprecationLevel.WARNING)
-    override val outputFile: org.gradle.api.provider.Property<kotlin.String> =
+    override konst outputFile: org.gradle.api.provider.Property<kotlin.String> =
         objectFactory.property(kotlin.String::class.java)
 
-    override val sourceMap: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst sourceMap: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 
-    override val sourceMapEmbedSources: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JsSourceMapEmbedMode> =
+    override konst sourceMapEmbedSources: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JsSourceMapEmbedMode> =
         objectFactory.property(org.jetbrains.kotlin.gradle.dsl.JsSourceMapEmbedMode::class.java)
 
-    override val sourceMapNamesPolicy: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JsSourceMapNamesPolicy> =
+    override konst sourceMapNamesPolicy: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JsSourceMapNamesPolicy> =
         objectFactory.property(org.jetbrains.kotlin.gradle.dsl.JsSourceMapNamesPolicy::class.java)
 
-    override val sourceMapPrefix: org.gradle.api.provider.Property<kotlin.String> =
+    override konst sourceMapPrefix: org.gradle.api.provider.Property<kotlin.String> =
         objectFactory.property(kotlin.String::class.java)
 
-    override val target: org.gradle.api.provider.Property<kotlin.String> =
+    override konst target: org.gradle.api.provider.Property<kotlin.String> =
         objectFactory.property(kotlin.String::class.java).convention("v5")
 
-    override val typedArrays: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst typedArrays: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(true)
 
-    override val useEsClasses: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst useEsClasses: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 }

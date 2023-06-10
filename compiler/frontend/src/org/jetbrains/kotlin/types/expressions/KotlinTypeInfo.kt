@@ -31,10 +31,10 @@ import org.jetbrains.kotlin.types.KotlinType
  * Both break and continue are counted as possible jump outside of a loop, but return is not.
  */
 class KotlinTypeInfo @JvmOverloads constructor(
-    val type: KotlinType?,
-    val dataFlowInfo: DataFlowInfo,
-    val jumpOutPossible: Boolean = false,
-    val jumpFlowInfo: DataFlowInfo = dataFlowInfo
+    konst type: KotlinType?,
+    konst dataFlowInfo: DataFlowInfo,
+    konst jumpOutPossible: Boolean = false,
+    konst jumpFlowInfo: DataFlowInfo = dataFlowInfo
 ) {
 
     fun clearType() = replaceType(null)

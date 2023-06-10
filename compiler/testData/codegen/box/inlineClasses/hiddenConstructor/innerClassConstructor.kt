@@ -3,11 +3,11 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
-class Outer(val s1: S) {
-    inner class Inner(val s2: S) {
-        val test = s1.string + s2.string
+class Outer(konst s1: S) {
+    inner class Inner(konst s2: S) {
+        konst test = s1.string + s2.string
     }
 }
 

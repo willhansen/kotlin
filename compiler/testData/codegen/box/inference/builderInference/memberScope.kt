@@ -17,7 +17,7 @@ fun Any.test() {}
 fun Any?.test2() {}
 
 fun box(): String {
-    val ret = build {
+    konst ret = build {
         emit(1)
         emit(null)
         // Error, resolved to extension on stub receiver
@@ -26,7 +26,7 @@ fun box(): String {
 //        get().test2()
         get()?.hashCode()
         get()?.equals(1)
-        val x = get()
+        konst x = get()
         x?.hashCode()
         x?.equals(1)
 

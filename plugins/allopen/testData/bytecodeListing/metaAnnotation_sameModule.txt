@@ -1,11 +1,11 @@
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class AllOpen {
     // source: 'metaAnnotation_sameModule.kt'
 }
 
 @OtherComponent
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class AnotherComponent {
     // source: 'metaAnnotation_sameModule.kt'
@@ -19,14 +19,14 @@ public final class ClassWithDocumented {
 }
 
 @java.lang.annotation.Documented
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class Documented {
     // source: 'metaAnnotation_sameModule.kt'
 }
 
 @AllOpen
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class MyComponent {
     // source: 'metaAnnotation_sameModule.kt'
@@ -61,7 +61,7 @@ public class MyComponentImpl_ShouldBeOpen {
 }
 
 @MyComponent
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class OtherComponent {
     // source: 'metaAnnotation_sameModule.kt'

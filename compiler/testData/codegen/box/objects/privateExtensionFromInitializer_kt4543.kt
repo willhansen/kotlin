@@ -1,14 +1,14 @@
-class A(val result: String)
+class A(konst result: String)
 
 fun a(body: A.() -> String): String {
-    val r = A("OK")
+    konst r = A("OK")
     return r.body()
 }
 
 object C {
     private fun A.f() = result
 
-    val g = a {
+    konst g = a {
         f()
     }
 }

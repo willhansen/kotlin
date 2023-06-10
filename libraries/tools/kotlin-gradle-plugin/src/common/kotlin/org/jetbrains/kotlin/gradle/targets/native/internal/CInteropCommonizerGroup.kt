@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.commonizer.SharedCommonizerTarget
 import org.jetbrains.kotlin.gradle.utils.appendLine
 
 internal data class CInteropCommonizerGroup(
-    @get:Input val targets: Set<SharedCommonizerTarget>,
-    @get:Input val interops: Set<CInteropIdentifier>
+    @get:Input konst targets: Set<SharedCommonizerTarget>,
+    @get:Input konst interops: Set<CInteropIdentifier>
 ) {
     override fun toString(): String {
         return buildString {

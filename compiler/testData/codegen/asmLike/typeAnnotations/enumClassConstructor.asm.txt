@@ -19,9 +19,9 @@ public class foo/Kotlin : java/lang/Enum {
 
     public void <init>(java.lang.String $enum$name, int $enum$ordinal, java.lang.String s, kotlin.jvm.internal.DefaultConstructorMarker $constructor_marker)
 
-    public static foo.Kotlin valueOf(java.lang.String p0)
+    public static foo.Kotlin konstueOf(java.lang.String p0)
 
-    public static foo.Kotlin[] values()
+    public static foo.Kotlin[] konstues()
 }
 
 public abstract interface foo/TypeAnn : java/lang/Object, java/lang/annotation/Annotation {

@@ -4,11 +4,11 @@
 // IGNORE_BACKEND: JVM
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC1<T>(val list: MutableList<T>) : MutableList<T> by list
+konstue class IC1<T>(konst list: MutableList<T>) : MutableList<T> by list
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC2<T>(val x: Int) : MutableCollection<T> {
-    override val size: Int
+konstue class IC2<T>(konst x: Int) : MutableCollection<T> {
+    override konst size: Int
         get() = TODO("Not yet implemented")
 
     override fun clear() = TODO()
@@ -24,15 +24,15 @@ value class IC2<T>(val x: Int) : MutableCollection<T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC3<T>(val map: MutableMap<T, T>) : MutableMap<T, T> by map
+konstue class IC3<T>(konst map: MutableMap<T, T>) : MutableMap<T, T> by map
 
 fun box(): String {
-    val inlineList = IC1(mutableListOf("a1")).also { it.addAll(0, listOf("a2", "a3")) }
+    konst inlineList = IC1(mutableListOf("a1")).also { it.addAll(0, listOf("a2", "a3")) }
     if (inlineList.list != listOf("a2", "a3", "a1")) return "Fail 1"
 
     if (!IC2<String>(1).addAll(setOf("b"))) return "Fail 2"
 
-    val inlineMap = IC3(mutableMapOf("a" to "b")).also { it.putAll(mapOf("b" to "c", "c" to "d")) }
+    konst inlineMap = IC3(mutableMapOf("a" to "b")).also { it.putAll(mapOf("b" to "c", "c" to "d")) }
     if (inlineMap.map != mapOf("a" to "b", "b" to "c", "c" to "d")) return "Fail 3"
 
     return "OK"

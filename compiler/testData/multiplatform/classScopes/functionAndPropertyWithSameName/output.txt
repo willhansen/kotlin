@@ -7,7 +7,7 @@ Exit code: COMPILATION_ERROR
 Output:
 compiler/testData/multiplatform/classScopes/functionAndPropertyWithSameName/jvm.kt:3:14: error: actual class 'Foo' has no corresponding members for expected class members:
 
-    public expect final val bar: String
+    public expect final konst bar: String
 
     The following declaration is incompatible because callable kinds are different (function vs property):
         public final actual fun bar(): String
@@ -16,7 +16,7 @@ actual class Foo {
              ^
 compiler/testData/multiplatform/classScopes/functionAndPropertyWithSameName/jvm.kt:4:12: error: actual function 'bar' has no corresponding expected declaration
 The following declaration is incompatible because callable kinds are different (function vs property):
-    public expect final val bar: String
+    public expect final konst bar: String
 
     actual fun bar(): String = ""
            ^

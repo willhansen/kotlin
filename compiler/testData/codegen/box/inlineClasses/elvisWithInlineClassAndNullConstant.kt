@@ -3,12 +3,12 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt(private val data: Int) {
+konstue class UInt(private konst data: Int) {
     fun result(): String = if (data == 1) "OK" else "fail"
 }
 
 fun f(): UInt {
-    val unull = UInt(1) ?: null
+    konst unull = UInt(1) ?: null
     return nonNull(unull)
 }
 

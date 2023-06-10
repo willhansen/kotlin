@@ -9,6 +9,6 @@ class SmartSet<T> : AbstractSet<T>() {
 }
 
 fun foo(x: Any) {
-    val s = SmartSet<Any>()
+    konst s = SmartSet<Any>()
     s.add(x)
 }

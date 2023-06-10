@@ -2,7 +2,7 @@
 package foo
 
 object Foo {
-    val self = this
+    konst self = this
 
     fun selfFun(): Foo = this
 

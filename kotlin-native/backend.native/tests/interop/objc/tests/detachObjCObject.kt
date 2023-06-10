@@ -18,12 +18,12 @@ class detachObjCObjectTests {
     }
 
     private fun checkThroughWeakRef(checkWeakRefBeforeReset: Boolean) {
-        val obj = NSObject()
-        val ref = WeakReference(obj)
+        konst obj = NSObject()
+        konst ref = WeakReference(obj)
 
         if (checkWeakRefBeforeReset) {
             repeat(2) {
-                val refValue = ref.value
+                konst refValue = ref.konstue
                 assertNotNull(refValue)
                 // refValue is actually a new wrapper, so we need to reset it as well:
                 detachObjCObject(refValue)
@@ -32,7 +32,7 @@ class detachObjCObjectTests {
         }
 
         detachObjCObject(obj)
-        val refValue = ref.value
+        konst refValue = ref.konstue
         assertNull(refValue)
     }
 
@@ -48,8 +48,8 @@ class detachObjCObjectTests {
 
     @Test
     fun checkThroughDeallocFlag() {
-        val obj = ObjectWithDeallocFlag()
-        val deallocFlagHolder = obj.deallocFlagHolder
+        konst obj = ObjectWithDeallocFlag()
+        konst deallocFlagHolder = obj.deallocFlagHolder
 
         assertFalse(deallocFlagHolder.deallocated)
         detachObjCObject(obj)
@@ -58,12 +58,12 @@ class detachObjCObjectTests {
 
     @Test
     fun checkThroughDeallocFlagWithMultipleWrappers() {
-        val obj = ObjectWithDeallocFlag()
-        val deallocFlagHolder = obj.deallocFlagHolder
+        konst obj = ObjectWithDeallocFlag()
+        konst deallocFlagHolder = obj.deallocFlagHolder
 
         assertFalse(deallocFlagHolder.deallocated)
 
-        val sameObj = obj.sameObject() // Same object, different wrapper
+        konst sameObj = obj.sameObject() // Same object, different wrapper
 
         detachObjCObject(obj)
         assertFalse(deallocFlagHolder.deallocated)

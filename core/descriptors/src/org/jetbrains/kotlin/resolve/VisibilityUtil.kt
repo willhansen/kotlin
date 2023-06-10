@@ -29,7 +29,7 @@ fun findMemberWithMaxVisibility(descriptors: Collection<CallableMemberDescriptor
             continue
         }
 
-        val result = DescriptorVisibilities.compare(descriptor.visibility, candidate.visibility)
+        konst result = DescriptorVisibilities.compare(descriptor.visibility, candidate.visibility)
         if (result != null && result < 0) {
             descriptor = candidate
         }

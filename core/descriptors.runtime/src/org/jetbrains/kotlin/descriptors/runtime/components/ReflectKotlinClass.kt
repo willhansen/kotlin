@@ -34,7 +34,7 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
-private val TYPES_ELIGIBLE_FOR_SIMPLE_VISIT = setOf<Class<*>>(
+private konst TYPES_ELIGIBLE_FOR_SIMPLE_VISIT = setOf<Class<*>>(
     // Primitives
     java.lang.Integer::class.java, java.lang.Character::class.java, java.lang.Byte::class.java, java.lang.Long::class.java,
     java.lang.Short::class.java, java.lang.Boolean::class.java, java.lang.Double::class.java, java.lang.Float::class.java,
@@ -46,22 +46,22 @@ private val TYPES_ELIGIBLE_FOR_SIMPLE_VISIT = setOf<Class<*>>(
 )
 
 class ReflectKotlinClass private constructor(
-    val klass: Class<*>,
-    override val classHeader: KotlinClassHeader
+    konst klass: Class<*>,
+    override konst classHeader: KotlinClassHeader
 ) : KotlinJvmBinaryClass {
 
     companion object Factory {
         fun create(klass: Class<*>): ReflectKotlinClass? {
-            val headerReader = ReadKotlinClassHeaderAnnotationVisitor()
+            konst headerReader = ReadKotlinClassHeaderAnnotationVisitor()
             ReflectClassStructure.loadClassAnnotations(klass, headerReader)
             return ReflectKotlinClass(klass, headerReader.createHeaderWithDefaultMetadataVersion() ?: return null)
         }
     }
 
-    override val location: String
+    override konst location: String
         get() = klass.name.replace('.', '/') + ".class"
 
-    override val classId: ClassId
+    override konst classId: ClassId
         get() = klass.classId
 
     override fun loadClassAnnotations(visitor: KotlinJvmBinaryClass.AnnotationVisitor, cachedContents: ByteArray?) {
@@ -95,7 +95,7 @@ private object ReflectClassStructure {
 
     private fun loadMethodAnnotations(klass: Class<*>, memberVisitor: KotlinJvmBinaryClass.MemberVisitor) {
         for (method in klass.declaredMethods) {
-            val visitor = memberVisitor.visitMethod(Name.identifier(method.name), SignatureSerializer.methodDesc(method)) ?: continue
+            konst visitor = memberVisitor.visitMethod(Name.identifier(method.name), SignatureSerializer.methodDesc(method)) ?: continue
 
             for (annotation in method.declaredAnnotations) {
                 processAnnotation(visitor, annotation)
@@ -103,7 +103,7 @@ private object ReflectClassStructure {
 
             for ((parameterIndex, annotations) in method.parameterAnnotations.withIndex()) {
                 for (annotation in annotations) {
-                    val annotationType = annotation.annotationClass.java
+                    konst annotationType = annotation.annotationClass.java
                     visitor.visitParameterAnnotation(parameterIndex, annotationType.classId, ReflectAnnotationSource(annotation))?.let {
                         processAnnotationArguments(it, annotation, annotationType)
                     }
@@ -116,25 +116,25 @@ private object ReflectClassStructure {
 
     private fun loadConstructorAnnotations(klass: Class<*>, memberVisitor: KotlinJvmBinaryClass.MemberVisitor) {
         for (constructor in klass.declaredConstructors) {
-            val visitor = memberVisitor.visitMethod(SpecialNames.INIT, SignatureSerializer.constructorDesc(constructor)) ?: continue
+            konst visitor = memberVisitor.visitMethod(SpecialNames.INIT, SignatureSerializer.constructorDesc(constructor)) ?: continue
 
             for (annotation in constructor.declaredAnnotations) {
                 processAnnotation(visitor, annotation)
             }
 
-            val parameterAnnotations = constructor.parameterAnnotations
+            konst parameterAnnotations = constructor.parameterAnnotations
             if (parameterAnnotations.isNotEmpty()) {
                 // Constructors of some classes have additional synthetic parameters:
                 // - inner classes have one parameter, instance of the outer class
                 // - enum classes have two parameters, String name and int ordinal
-                // - local/anonymous classes may have many parameters for captured values
+                // - local/anonymous classes may have many parameters for captured konstues
                 // At the moment this seems like a working heuristic for computing number of synthetic parameters for Kotlin classes,
                 // although this is wrong and likely to change, see KT-6886
-                val shift = constructor.parameterTypes.size - parameterAnnotations.size
+                konst shift = constructor.parameterTypes.size - parameterAnnotations.size
 
                 for ((parameterIndex, annotations) in parameterAnnotations.withIndex()) {
                     for (annotation in annotations) {
-                        val annotationType = annotation.annotationClass.java
+                        konst annotationType = annotation.annotationClass.java
                         visitor.visitParameterAnnotation(
                             parameterIndex + shift, annotationType.classId, ReflectAnnotationSource(annotation)
                         )?.let {
@@ -150,7 +150,7 @@ private object ReflectClassStructure {
 
     private fun loadFieldAnnotations(klass: Class<*>, memberVisitor: KotlinJvmBinaryClass.MemberVisitor) {
         for (field in klass.declaredFields) {
-            val visitor = memberVisitor.visitField(Name.identifier(field.name), SignatureSerializer.fieldDesc(field), null) ?: continue
+            konst visitor = memberVisitor.visitField(Name.identifier(field.name), SignatureSerializer.fieldDesc(field), null) ?: continue
 
             for (annotation in field.declaredAnnotations) {
                 processAnnotation(visitor, annotation)
@@ -161,7 +161,7 @@ private object ReflectClassStructure {
     }
 
     private fun processAnnotation(visitor: KotlinJvmBinaryClass.AnnotationVisitor, annotation: Annotation) {
-        val annotationType = annotation.annotationClass.java
+        konst annotationType = annotation.annotationClass.java
         visitor.visitAnnotation(annotationType.classId, ReflectAnnotationSource(annotation))?.let {
             processAnnotationArguments(it, annotation, annotationType)
         }
@@ -173,15 +173,15 @@ private object ReflectClassStructure {
         annotationType: Class<*>
     ) {
         for (method in annotationType.declaredMethods) {
-            val value = try {
+            konst konstue = try {
                 method(annotation)!!
             } catch (e: IllegalAccessException) {
-                // This is possible if the annotation class is package local. In this case, we can't read the value into descriptor.
+                // This is possible if the annotation class is package local. In this case, we can't read the konstue into descriptor.
                 // However, this might be OK, because we do not use any data from AnnotationDescriptor in KAnnotatedElement implementations
                 // anyway; we use the source element and the underlying physical Annotation object to implement the needed API
                 continue
             }
-            processAnnotationArgumentValue(visitor, Name.identifier(method.name), value)
+            processAnnotationArgumentValue(visitor, Name.identifier(method.name), konstue)
         }
         visitor.visitEnd()
     }
@@ -200,62 +200,62 @@ private object ReflectClassStructure {
                 return ClassLiteralValue(ClassId.topLevel(StandardNames.FqNames.unit.toSafe()), dimensions)
             }
 
-            val primitiveType = JvmPrimitiveType.get(currentClass.name).primitiveType
+            konst primitiveType = JvmPrimitiveType.get(currentClass.name).primitiveType
             if (dimensions > 0) {
                 return ClassLiteralValue(ClassId.topLevel(primitiveType.arrayTypeFqName), dimensions - 1)
             }
             return ClassLiteralValue(ClassId.topLevel(primitiveType.typeFqName), dimensions)
         }
 
-        val javaClassId = currentClass.classId
-        val kotlinClassId = JavaToKotlinClassMap.mapJavaToKotlin(javaClassId.asSingleFqName()) ?: javaClassId
+        konst javaClassId = currentClass.classId
+        konst kotlinClassId = JavaToKotlinClassMap.mapJavaToKotlin(javaClassId.asSingleFqName()) ?: javaClassId
         return ClassLiteralValue(kotlinClassId, dimensions)
     }
 
-    private fun processAnnotationArgumentValue(visitor: KotlinJvmBinaryClass.AnnotationArgumentVisitor, name: Name, value: Any) {
-        val clazz = value::class.java
+    private fun processAnnotationArgumentValue(visitor: KotlinJvmBinaryClass.AnnotationArgumentVisitor, name: Name, konstue: Any) {
+        konst clazz = konstue::class.java
         when {
             clazz == Class::class.java -> {
-                visitor.visitClassLiteral(name, (value as Class<*>).classLiteralValue())
+                visitor.visitClassLiteral(name, (konstue as Class<*>).classLiteralValue())
             }
             clazz in TYPES_ELIGIBLE_FOR_SIMPLE_VISIT -> {
-                visitor.visit(name, value)
+                visitor.visit(name, konstue)
             }
             clazz.isEnumClassOrSpecializedEnumEntryClass() -> {
                 // isEnum returns false for specialized enum constants (enum entries which are anonymous enum subclasses)
-                val classId = (if (clazz.isEnum) clazz else clazz.enclosingClass).classId
-                visitor.visitEnum(name, classId, Name.identifier((value as Enum<*>).name))
+                konst classId = (if (clazz.isEnum) clazz else clazz.enclosingClass).classId
+                visitor.visitEnum(name, classId, Name.identifier((konstue as Enum<*>).name))
             }
             Annotation::class.java.isAssignableFrom(clazz) -> {
-                val annotationClass = clazz.interfaces.single()
-                val v = visitor.visitAnnotation(name, annotationClass.classId) ?: return
-                processAnnotationArguments(v, value as Annotation, annotationClass)
+                konst annotationClass = clazz.interfaces.single()
+                konst v = visitor.visitAnnotation(name, annotationClass.classId) ?: return
+                processAnnotationArguments(v, konstue as Annotation, annotationClass)
             }
             clazz.isArray -> {
-                val v = visitor.visitArray(name) ?: return
-                val componentType = clazz.componentType
+                konst v = visitor.visitArray(name) ?: return
+                konst componentType = clazz.componentType
                 when {
                     componentType.isEnum -> {
-                        val enumClassId = componentType.classId
-                        for (element in value as Array<*>) {
+                        konst enumClassId = componentType.classId
+                        for (element in konstue as Array<*>) {
                             v.visitEnum(enumClassId, Name.identifier((element as Enum<*>).name))
                         }
                     }
-                    componentType == Class::class.java -> for (element in value as Array<*>) {
+                    componentType == Class::class.java -> for (element in konstue as Array<*>) {
                         v.visitClassLiteral((element as Class<*>).classLiteralValue())
                     }
-                    Annotation::class.java.isAssignableFrom(componentType) -> for (element in value as Array<*>) {
-                        val vv = v.visitAnnotation(componentType.classId) ?: continue
+                    Annotation::class.java.isAssignableFrom(componentType) -> for (element in konstue as Array<*>) {
+                        konst vv = v.visitAnnotation(componentType.classId) ?: continue
                         processAnnotationArguments(vv, element as Annotation, componentType)
                     }
-                    else -> for (element in value as Array<*>) {
+                    else -> for (element in konstue as Array<*>) {
                         v.visit(element)
                     }
                 }
                 v.visitEnd()
             }
             else -> {
-                throw UnsupportedOperationException("Unsupported annotation argument value ($clazz): $value")
+                throw UnsupportedOperationException("Unsupported annotation argument konstue ($clazz): $konstue")
             }
         }
     }
@@ -263,7 +263,7 @@ private object ReflectClassStructure {
 
 private object SignatureSerializer {
     fun methodDesc(method: Method): String {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         sb.append("(")
         for (parameterType in method.parameterTypes) {
             sb.append(parameterType.desc)
@@ -274,7 +274,7 @@ private object SignatureSerializer {
     }
 
     fun constructorDesc(constructor: Constructor<*>): String {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         sb.append("(")
         for (parameterType in constructor.parameterTypes) {
             sb.append(parameterType.desc)

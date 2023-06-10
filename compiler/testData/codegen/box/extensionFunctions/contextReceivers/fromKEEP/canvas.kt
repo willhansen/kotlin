@@ -2,7 +2,7 @@
 // TARGET_BACKEND: JVM_IR
 
 interface Canvas {
-    val suffix: String
+    konst suffix: String
 }
 
 interface Shape {
@@ -16,7 +16,7 @@ class Circle : Shape {
 }
 
 object MyCanvas : Canvas {
-    override val suffix = ""
+    override konst suffix = ""
 }
 
 fun box() = with(MyCanvas) { Circle().draw() }

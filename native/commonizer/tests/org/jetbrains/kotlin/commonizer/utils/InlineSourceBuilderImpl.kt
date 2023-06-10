@@ -39,18 +39,18 @@ import org.jetbrains.kotlin.test.KotlinTestUtils
 import org.jetbrains.kotlin.test.util.KtTestUtil
 import java.io.File
 
-class InlineSourceBuilderImpl(private val disposable: Disposable) : InlineSourceBuilder {
+class InlineSourceBuilderImpl(private konst disposable: Disposable) : InlineSourceBuilder {
     override fun createCirTree(module: InlineSourceBuilder.Module): CirTreeModule {
-        val moduleDescriptor = createModuleDescriptor(module)
-        val metadata = MockModulesProvider.SERIALIZER.serializeModule(moduleDescriptor)
+        konst moduleDescriptor = createModuleDescriptor(module)
+        konst metadata = MockModulesProvider.SERIALIZER.serializeModule(moduleDescriptor)
 
-        val classifiers = listOf(
+        konst classifiers = listOf(
             CirFictitiousFunctionClassifiers,
             CirProvidedClassifiers.by(MockModulesProvider.create(moduleDescriptor)),
             CirProvidedClassifiers.by(MockModulesProvider.create(DefaultBuiltIns.Instance.builtInsModule))
         ) + module.dependencies.map { CirProvidedClassifiers.by(MockModulesProvider.create(createModuleDescriptor(it))) }
 
-        val typeResolver = CirTypeResolver.create(
+        konst typeResolver = CirTypeResolver.create(
             CirProvidedClassifiers.of(*classifiers.toTypedArray())
         )
 
@@ -58,7 +58,7 @@ class InlineSourceBuilderImpl(private val disposable: Disposable) : InlineSource
     }
 
     override fun createModuleDescriptor(module: InlineSourceBuilder.Module): ModuleDescriptor {
-        val moduleRoot = FileUtil.createTempDirectory(module.name, null)
+        konst moduleRoot = FileUtil.createTempDirectory(module.name, null)
         module.sourceFiles.forEach { sourceFile ->
             moduleRoot.resolve(sourceFile.name).writeText(sourceFile.content)
         }
@@ -67,23 +67,23 @@ class InlineSourceBuilderImpl(private val disposable: Disposable) : InlineSource
 
     private fun createModuleDescriptor(moduleRoot: File, module: InlineSourceBuilder.Module): ModuleDescriptor {
         check(Name.isValidIdentifier(module.name))
-        val configuration = KotlinTestUtils.newConfiguration()
+        konst configuration = KotlinTestUtils.newConfiguration()
         configuration.put(CommonConfigurationKeys.MODULE_NAME, module.name)
 
-        val environment: KotlinCoreEnvironment = KotlinCoreEnvironment.createForTests(
+        konst environment: KotlinCoreEnvironment = KotlinCoreEnvironment.createForTests(
             parentDisposable = disposable,
             initialConfiguration = configuration,
             extensionConfigs = EnvironmentConfigFiles.METADATA_CONFIG_FILES
         )
 
-        val psiFactory = KtPsiFactory(environment.project)
+        konst psiFactory = KtPsiFactory(environment.project)
 
-        val psiFiles: List<KtFile> = moduleRoot.walkTopDown()
+        konst psiFiles: List<KtFile> = moduleRoot.walkTopDown()
             .filter { it.isFile }
             .map { psiFactory.createFile(it.name, KtTestUtil.doLoadFile(it)) }
             .toList()
 
-        val analysisResult = CommonResolverForModuleFactory.analyzeFiles(
+        konst analysisResult = CommonResolverForModuleFactory.analyzeFiles(
             files = psiFiles,
             moduleName = Name.special("<${module.name}>"),
             dependOnBuiltIns = true,
@@ -95,12 +95,12 @@ class InlineSourceBuilderImpl(private val disposable: Disposable) : InlineSource
             environment.createPackagePartProvider(content.moduleContentScope)
         }
 
-        val errorDiagnostics = analysisResult.bindingContext.diagnostics.noSuppression().filter { it.severity == Severity.ERROR }
+        konst errorDiagnostics = analysisResult.bindingContext.diagnostics.noSuppression().filter { it.severity == Severity.ERROR }
         check(errorDiagnostics.isEmpty()) {
-            val diagnosticInfos = errorDiagnostics.map { diagnostic ->
+            konst diagnosticInfos = errorDiagnostics.map { diagnostic ->
                 DiagnosticInfo(diagnostic.psiElement, diagnostic.factoryName)
             }
-            val diagnosticDescriptions = diagnosticInfos.joinToString(System.lineSeparator()) { info ->
+            konst diagnosticDescriptions = diagnosticInfos.joinToString(System.lineSeparator()) { info ->
                 "[${info.diagnosticFactoryName}] reported on '${info.psiElementText}' " +
                         "in file ${info.fileName} [${info.psiElementStartOffset}, ${info.psiElementEndOffset}]"
             }
@@ -113,19 +113,19 @@ class InlineSourceBuilderImpl(private val disposable: Disposable) : InlineSource
     }
 
     private class DiagnosticInfo(
-        val element: PsiElement,
-        val diagnosticFactoryName: String,
+        konst element: PsiElement,
+        konst diagnosticFactoryName: String,
     ) {
-        val psiElementText: String
+        konst psiElementText: String
             get() = element.text
 
-        val psiElementStartOffset: Int
+        konst psiElementStartOffset: Int
             get() = element.startOffset
 
-        val psiElementEndOffset: Int
+        konst psiElementEndOffset: Int
             get() = element.endOffset
 
-        val fileName: String
+        konst fileName: String
             get() = element.containingFile.name
     }
 
@@ -133,21 +133,21 @@ class InlineSourceBuilderImpl(private val disposable: Disposable) : InlineSource
         dependencies: List<InlineSourceBuilder.Module>
     ) : CommonDependenciesContainer {
 
-        private val dependenciesByModuleInfos = dependencies.associate { module ->
+        private konst dependenciesByModuleInfos = dependencies.associate { module ->
             ModuleInfoImpl(module) to createModuleDescriptor(module)
         }
 
         private inner class ModuleInfoImpl(module: InlineSourceBuilder.Module) : ModuleInfo {
-            private val dependencyModules = module.dependencies.associateBy { ModuleInfoImpl(it) }
-            override val name: Name = Name.special("<${module.name}>")
+            private konst dependencyModules = module.dependencies.associateBy { ModuleInfoImpl(it) }
+            override konst name: Name = Name.special("<${module.name}>")
             override fun dependencies(): List<ModuleInfo> = listOf(this) + dependencyModules.keys
-            override val platform: TargetPlatform get() = CommonPlatforms.defaultCommonPlatform
-            override val analyzerServices: PlatformDependentAnalyzerServices get() = CommonPlatformAnalyzerServices
+            override konst platform: TargetPlatform get() = CommonPlatforms.defaultCommonPlatform
+            override konst analyzerServices: PlatformDependentAnalyzerServices get() = CommonPlatformAnalyzerServices
         }
 
-        override val moduleInfos: List<ModuleInfo> get() = listOf(DefaultBuiltInsModuleInfo) + dependenciesByModuleInfos.keys
-        override val friendModuleInfos: List<ModuleInfo> get() = emptyList()
-        override val refinesModuleInfos: List<ModuleInfo> get() = emptyList()
+        override konst moduleInfos: List<ModuleInfo> get() = listOf(DefaultBuiltInsModuleInfo) + dependenciesByModuleInfos.keys
+        override konst friendModuleInfos: List<ModuleInfo> get() = emptyList()
+        override konst refinesModuleInfos: List<ModuleInfo> get() = emptyList()
         override fun registerDependencyForAllModules(moduleInfo: ModuleInfo, descriptorForModule: ModuleDescriptorImpl) = Unit
         override fun packageFragmentProviderForModuleInfo(moduleInfo: ModuleInfo): PackageFragmentProvider? = null
 
@@ -159,10 +159,10 @@ class InlineSourceBuilderImpl(private val disposable: Disposable) : InlineSource
     }
 
     private object DefaultBuiltInsModuleInfo : ModuleInfo {
-        override val name get() = DefaultBuiltIns.Instance.builtInsModule.name
+        override konst name get() = DefaultBuiltIns.Instance.builtInsModule.name
         override fun dependencies() = listOf(this)
         override fun dependencyOnBuiltIns() = ModuleInfo.DependencyOnBuiltIns.LAST
-        override val platform get() = CommonPlatforms.defaultCommonPlatform
-        override val analyzerServices get() = CommonPlatformAnalyzerServices
+        override konst platform get() = CommonPlatforms.defaultCommonPlatform
+        override konst analyzerServices get() = CommonPlatformAnalyzerServices
     }
 }

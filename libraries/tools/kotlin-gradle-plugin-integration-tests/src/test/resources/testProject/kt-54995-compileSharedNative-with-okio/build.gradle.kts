@@ -13,13 +13,13 @@ kotlin {
     mingwX64()
 
     sourceSets {
-        val commonMain = getByName("commonMain") {
+        konst commonMain = getByName("commonMain") {
             dependencies {
                 implementation("com.squareup.okio:okio:3.2.0")
             }
         }
 
-        val nativeMain = create("nativeMain") {
+        konst nativeMain = create("nativeMain") {
             dependsOn(commonMain)
         }
         getByName("linuxX64Main") {

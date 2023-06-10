@@ -2,11 +2,11 @@ RAW_FIR:
 FILE: [ResolvedTo(RAW_FIR)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -20,7 +20,7 @@ FILE: [ResolvedTo(RAW_FIR)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] val resolveMe: Stringby LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst resolveMe: Stringby LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Test] get(): <implicit> {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -31,11 +31,11 @@ IMPORTS:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -49,7 +49,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] val resolveMe: Stringby LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst resolveMe: Stringby LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Test] get(): <implicit> {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -60,11 +60,11 @@ COMPILER_REQUIRED_ANNOTATIONS:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -78,7 +78,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] val resolveMe: Stringby LAZY_EXPRESSION
+        public? final? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] konst resolveMe: Stringby LAZY_EXPRESSION
             public? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] [ContainingClassKey=Test] get(): <implicit> {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -89,11 +89,11 @@ COMPANION_GENERATION:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -107,7 +107,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(COMPANION_GENERATION)] val resolveMe: Stringby LAZY_EXPRESSION
+        public? final? [ResolvedTo(COMPANION_GENERATION)] konst resolveMe: Stringby LAZY_EXPRESSION
             public? [ResolvedTo(COMPANION_GENERATION)] [ContainingClassKey=Test] get(): <implicit> {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -118,11 +118,11 @@ SUPER_TYPES:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -136,7 +136,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(SUPER_TYPES)] val resolveMe: Stringby LAZY_EXPRESSION
+        public? final? [ResolvedTo(SUPER_TYPES)] konst resolveMe: Stringby LAZY_EXPRESSION
             public? [ResolvedTo(SUPER_TYPES)] [ContainingClassKey=Test] get(): <implicit> {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -147,11 +147,11 @@ TYPES:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -165,7 +165,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(TYPES)] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
+        public? final? [ResolvedTo(TYPES)] konst resolveMe: R|kotlin/String|by LAZY_EXPRESSION
             public? [ResolvedTo(TYPES)] [ContainingClassKey=Test] get(): R|kotlin/String| {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -176,11 +176,11 @@ STATUS:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -194,7 +194,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst resolveMe: R|kotlin/String|by LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=Test] get(): R|kotlin/String| {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -205,11 +205,11 @@ EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -223,7 +223,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] konst resolveMe: R|kotlin/String|by LAZY_EXPRESSION
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Test] get(): R|kotlin/String| {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -234,11 +234,11 @@ ARGUMENTS_OF_ANNOTATIONS:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -252,7 +252,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
+        public final [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] konst resolveMe: R|kotlin/String|by LAZY_EXPRESSION
             public [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] [ContainingClassKey=Test] get(): R|kotlin/String| {
                 ^ this@R|/Test|.D|/Test.resolveMe|.getValue#(this@R|/Test|, ::R|/Test.resolveMe|)
             }
@@ -263,11 +263,11 @@ CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] class LazyDelegate<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.value] value: T): R|LazyDelegate<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: T): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: T = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: T = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LazyDelegate] get(): T
 
         public? final? operator [ResolvedTo(RAW_FIR)] fun getValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>): T { LAZY_BLOCK }
@@ -281,7 +281,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(CONTRACTS)] val resolveMe: R|kotlin/String|by lazy#(<L> = [ResolvedTo(RAW_FIR)] lazy@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
+        public final [ResolvedTo(CONTRACTS)] konst resolveMe: R|kotlin/String|by lazy#(<L> = [ResolvedTo(RAW_FIR)] lazy@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
             materialize#()
         }
         )
@@ -295,15 +295,15 @@ IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(STATUS)] class LazyDelegate<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(STATUS)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/LazyDelegate.value] value: R|T|): R|LazyDelegate<T>| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(STATUS)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: R|T|): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val value: R|T| = R|<local>/value|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst konstue: R|T| = R|<local>/konstue|
             public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] get(): R|T|
 
         public final operator [ResolvedTo(CONTRACTS)] fun getValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|): R|T| {
-            ^getValue value#
+            ^getValue konstue#
         }
 
     }
@@ -319,7 +319,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] konst resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
             ^ R|/materialize|<R|kotlin/String|>()
         }
         )
@@ -333,15 +333,15 @@ ANNOTATIONS_ARGUMENTS_MAPPING:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(STATUS)] class LazyDelegate<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(STATUS)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/LazyDelegate.value] value: R|T|): R|LazyDelegate<T>| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(STATUS)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: R|T|): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val value: R|T| = R|<local>/value|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst konstue: R|T| = R|<local>/konstue|
             public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] get(): R|T|
 
         public final operator [ResolvedTo(CONTRACTS)] fun getValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|): R|T| {
-            ^getValue value#
+            ^getValue konstue#
         }
 
     }
@@ -357,7 +357,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] val resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+        public final [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] konst resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
             ^ R|/materialize|<R|kotlin/String|>()
         }
         )
@@ -371,15 +371,15 @@ BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(STATUS)] class LazyDelegate<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(STATUS)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/LazyDelegate.value] value: R|T|): R|LazyDelegate<T>| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(STATUS)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: R|T|): R|LazyDelegate<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val value: R|T| = R|<local>/value|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst konstue: R|T| = R|<local>/konstue|
             public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] get(): R|T|
 
         public final operator [ResolvedTo(CONTRACTS)] fun getValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|): R|T| {
-            ^getValue value#
+            ^getValue konstue#
         }
 
     }
@@ -395,7 +395,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+        public final [ResolvedTo(BODY_RESOLVE)] konst resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
             ^ R|/materialize|<R|kotlin/String|>()
         }
         )
@@ -409,15 +409,15 @@ FILE RAW TO BODY:
 FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(BODY_RESOLVE)] class LazyDelegate<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(BODY_RESOLVE)] T>([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/LazyDelegate.value] value: R|T|): R|LazyDelegate<T>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(BODY_RESOLVE)] T>([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/LazyDelegate.konstue] konstue: R|T|): R|LazyDelegate<T>| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val value: R|T| = R|<local>/value|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst konstue: R|T| = R|<local>/konstue|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LazyDelegate] get(): R|T|
 
         public final operator [ResolvedTo(BODY_RESOLVE)] fun getValue([ResolvedTo(BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|T| {
-            ^getValue this@R|/LazyDelegate|.R|/LazyDelegate.value|
+            ^getValue this@R|/LazyDelegate|.R|/LazyDelegate.konstue|
         }
 
     }
@@ -435,7 +435,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+        public final [ResolvedTo(BODY_RESOLVE)] konst resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
             ^ R|/materialize|<R|kotlin/String|>()
         }
         )

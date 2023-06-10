@@ -39,27 +39,27 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.types.typeUtil.replaceAnnotations
 
 abstract class LazyAnnotationsContext(
-    val annotationResolver: AnnotationResolver,
-    val storageManager: StorageManager,
-    val trace: BindingTrace
+    konst annotationResolver: AnnotationResolver,
+    konst storageManager: StorageManager,
+    konst trace: BindingTrace
 ) {
-    abstract val scope: LexicalScope
+    abstract konst scope: LexicalScope
 }
 
 class LazyAnnotationsContextImpl(
     annotationResolver: AnnotationResolver,
     storageManager: StorageManager,
     trace: BindingTrace,
-    override val scope: LexicalScope
+    override konst scope: LexicalScope
 ) : LazyAnnotationsContext(annotationResolver, storageManager, trace)
 
 class LazyAnnotations(
-    val c: LazyAnnotationsContext,
-    val annotationEntries: List<KtAnnotationEntry>
+    konst c: LazyAnnotationsContext,
+    konst annotationEntries: List<KtAnnotationEntry>
 ) : Annotations, LazyEntity {
     override fun isEmpty() = annotationEntries.isEmpty()
 
-    private val annotation = c.storageManager.createMemoizedFunction { entry: KtAnnotationEntry ->
+    private konst annotation = c.storageManager.createMemoizedFunction { entry: KtAnnotationEntry ->
         c.trace.get(BindingContext.ANNOTATION, entry) ?: LazyAnnotationDescriptor(c, entry)
     }
 
@@ -74,13 +74,13 @@ class LazyAnnotations(
 }
 
 class LazyAnnotationDescriptor(
-    val c: LazyAnnotationsContext,
-    val annotationEntry: KtAnnotationEntry
+    konst c: LazyAnnotationsContext,
+    konst annotationEntry: KtAnnotationEntry
 ) : AnnotationDescriptor, LazyEntity, ValidateableDescriptor {
 
-    override val type by c.storageManager.createLazyValue(
+    override konst type by c.storageManager.createLazyValue(
         computable = lazy@{
-            val annotationType = c.annotationResolver.resolveAnnotationType(scope, annotationEntry, c.trace)
+            konst annotationType = c.annotationResolver.resolveAnnotationType(scope, annotationEntry, c.trace)
             if (annotationType is AbbreviatedType) {
                 // This is needed to prevent recursion in cases like this: typealias S = @S Ann
                 if (annotationType.annotations.any { it == this }) {
@@ -97,28 +97,28 @@ class LazyAnnotationDescriptor(
         }
     )
 
-    override val source = annotationEntry.toSourceElement()
+    override konst source = annotationEntry.toSourceElement()
 
-    private val scope = (c.scope.ownerDescriptor as? PackageFragmentDescriptor)?.let {
+    private konst scope = (c.scope.ownerDescriptor as? PackageFragmentDescriptor)?.let {
         LexicalScope.Base(c.scope, FileDescriptorForVisibilityChecks(source, it))
     } ?: c.scope
 
-    private val valueArgumentsWithSourceInfo by c.storageManager.createLazyValue {
-        val resolutionResults = c.annotationResolver.resolveAnnotationCall(annotationEntry, scope, c.trace)
+    private konst konstueArgumentsWithSourceInfo by c.storageManager.createLazyValue {
+        konst resolutionResults = c.annotationResolver.resolveAnnotationCall(annotationEntry, scope, c.trace)
         AnnotationResolverImpl.checkAnnotationType(annotationEntry, c.trace, resolutionResults)
 
         if (!resolutionResults.isSingleResult) return@createLazyValue emptyMap()
 
-        resolutionResults.resultingCall.valueArguments.mapNotNull { (valueParameter, resolvedArgument) ->
+        resolutionResults.resultingCall.konstueArguments.mapNotNull { (konstueParameter, resolvedArgument) ->
             if (resolvedArgument == null) null
-            else c.annotationResolver.getAnnotationArgumentValue(c.trace, valueParameter, resolvedArgument)?.let { value ->
-                valueParameter.name to (value to resolvedArgument.arguments.firstOrNull()?.getArgumentExpression().toSourceElement())
+            else c.annotationResolver.getAnnotationArgumentValue(c.trace, konstueParameter, resolvedArgument)?.let { konstue ->
+                konstueParameter.name to (konstue to resolvedArgument.arguments.firstOrNull()?.getArgumentExpression().toSourceElement())
             }
         }.toMap()
     }
 
-    override val allValueArguments by c.storageManager.createLazyValue {
-        valueArgumentsWithSourceInfo.mapValues { it.value.first }
+    override konst allValueArguments by c.storageManager.createLazyValue {
+        konstueArgumentsWithSourceInfo.mapValues { it.konstue.first }
     }
 
     init {
@@ -126,10 +126,10 @@ class LazyAnnotationDescriptor(
     }
 
     fun getSourceForArgument(name: Name): SourceElement =
-        valueArgumentsWithSourceInfo[name]?.second ?: SourceElement.NO_SOURCE
+        konstueArgumentsWithSourceInfo[name]?.second ?: SourceElement.NO_SOURCE
 
 
-    override fun validate() {
+    override fun konstidate() {
         checkNotNull(scope) { "scope == null for $this" }
     }
 
@@ -139,10 +139,10 @@ class LazyAnnotationDescriptor(
     }
 
     private class FileDescriptorForVisibilityChecks(
-        private val source: SourceElement,
-        private val containingDeclaration: PackageFragmentDescriptor
+        private konst source: SourceElement,
+        private konst containingDeclaration: PackageFragmentDescriptor
     ) : DeclarationDescriptorWithSource, PackageFragmentDescriptor by containingDeclaration {
-        override val annotations: Annotations get() = Annotations.EMPTY
+        override konst annotations: Annotations get() = Annotations.EMPTY
         override fun getSource() = source
         override fun getOriginal() = this
         override fun getName() = Name.special("< file descriptor for annotation resolution >")

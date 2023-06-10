@@ -24,12 +24,12 @@ interface URL {
 [Constructor(optional (USVString or URLSearchParams) init = ""),
  Exposed=(Window,Worker)]
 interface URLSearchParams {
-  void append(USVString name, USVString value);
+  void append(USVString name, USVString konstue);
   void delete(USVString name);
   USVString? get(USVString name);
   sequence<USVString> getAll(USVString name);
   boolean has(USVString name);
-  void set(USVString name, USVString value);
+  void set(USVString name, USVString konstue);
   iterable<USVString, USVString>;
   stringifier;
 };
@@ -56,12 +56,12 @@ interface URL {
 [Constructor(optional (USVString or URLSearchParams) init = ""),
  Exposed=(Window,Worker)]
 interface URLSearchParams {
-  void append(USVString name, USVString value);
+  void append(USVString name, USVString konstue);
   void delete(USVString name);
   USVString? get(USVString name);
   sequence<USVString> getAll(USVString name);
   boolean has(USVString name);
-  void set(USVString name, USVString value);
+  void set(USVString name, USVString konstue);
   iterable<USVString, USVString>;
   stringifier;
 };

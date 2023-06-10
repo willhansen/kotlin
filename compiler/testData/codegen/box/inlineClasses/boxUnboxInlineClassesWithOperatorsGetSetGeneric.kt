@@ -3,16 +3,16 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt<T: Int>(private val value: T) {
-    fun asInt() = value
+konstue class UInt<T: Int>(private konst konstue: T) {
+    fun asInt() = konstue
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UIntArray(private val intArray: IntArray) {
+konstue class UIntArray(private konst intArray: IntArray) {
     operator fun get(index: Int): UInt<Int> = UInt<Int>(intArray[index])
 
-    operator fun set(index: Int, value: UInt<Int>) {
-        intArray[index] = value.asInt()
+    operator fun set(index: Int, konstue: UInt<Int>) {
+        intArray[index] = konstue.asInt()
     }
 }
 
@@ -23,7 +23,7 @@ fun UIntArray.swap(i: Int, j: Int) {
 fun uIntArrayOf(vararg elements: Int) = UIntArray(intArrayOf(*elements))
 
 fun box(): String {
-    val a = uIntArrayOf(1, 2, 3, 4)
+    konst a = uIntArrayOf(1, 2, 3, 4)
     a.swap(0, 3)
     a.swap(1, 2)
 

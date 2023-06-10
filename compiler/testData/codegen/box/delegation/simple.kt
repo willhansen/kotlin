@@ -17,7 +17,7 @@ class Fail : Base {
 }
 
 fun box(): String {
-    val z = object : Base by Fail() {
+    konst z = object : Base by Fail() {
         override fun getValue() = "OK"
     }
     return z.test()

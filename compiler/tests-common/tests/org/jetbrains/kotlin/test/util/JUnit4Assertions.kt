@@ -24,16 +24,16 @@ object JUnit4Assertions : Assertions() {
         Assert.assertNotEquals(message?.invoke(), expected, actual)
     }
 
-    override fun assertTrue(value: Boolean, message: (() -> String)?) {
-        Assert.assertTrue(message?.invoke(), value)
+    override fun assertTrue(konstue: Boolean, message: (() -> String)?) {
+        Assert.assertTrue(message?.invoke(), konstue)
     }
 
-    override fun assertFalse(value: Boolean, message: (() -> String)?) {
-        Assert.assertFalse(message?.invoke(), value)
+    override fun assertFalse(konstue: Boolean, message: (() -> String)?) {
+        Assert.assertFalse(message?.invoke(), konstue)
     }
 
-    override fun assertNotNull(value: Any?, message: (() -> String)?) {
-        Assert.assertNotNull(message?.invoke(), value)
+    override fun assertNotNull(konstue: Any?, message: (() -> String)?) {
+        Assert.assertNotNull(message?.invoke(), konstue)
     }
 
     override fun <T> assertSameElements(expected: Collection<T>, actual: Collection<T>, message: (() -> String)?) {

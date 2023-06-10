@@ -10,13 +10,13 @@ import kotlin.reflect.jvm.internal.calls.CallerImpl.Companion.dropFirst
 import java.lang.reflect.Method as ReflectMethod
 
 internal sealed class InternalUnderlyingValOfInlineClass(
-    private val unboxMethod: ReflectMethod,
-    final override val parameterTypes: List<Type>
+    private konst unboxMethod: ReflectMethod,
+    final override konst parameterTypes: List<Type>
 ) : Caller<ReflectMethod?> {
 
-    final override val member: ReflectMethod? get() = null
+    final override konst member: ReflectMethod? get() = null
 
-    final override val returnType: Type =
+    final override konst returnType: Type =
         unboxMethod.returnType
 
     protected fun callMethod(instance: Any?, args: Array<*>): Any? {
@@ -34,7 +34,7 @@ internal sealed class InternalUnderlyingValOfInlineClass(
 
     class Bound(
         unboxMethod: ReflectMethod,
-        private val boundReceiver: Any?
+        private konst boundReceiver: Any?
     ) : InternalUnderlyingValOfInlineClass(unboxMethod, emptyList()), BoundCaller {
         override fun call(args: Array<*>): Any? {
             checkArguments(args)

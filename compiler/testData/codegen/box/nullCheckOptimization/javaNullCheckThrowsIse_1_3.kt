@@ -13,7 +13,7 @@ public class A {
 
 fun box(): String {
     try {
-        val s: String = A.foo()
+        konst s: String = A.foo()
         return "Fail: ISE should have been thrown"
     } catch (e: Throwable) {
         if (e::class != IllegalStateException::class) return "Fail: exception class should be ISE: ${e::class}"

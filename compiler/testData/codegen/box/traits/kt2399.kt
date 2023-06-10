@@ -37,12 +37,12 @@ public abstract class ProjectInfoJsonParser(): JsonParser<ProjectInfo> {
 }
 
 class ProjectApiContext {
-    public val projectInfoJsonParser: ProjectInfoJsonParser = object : ProjectInfoJsonParser(){
+    public konst projectInfoJsonParser: ProjectInfoJsonParser = object : ProjectInfoJsonParser(){
     }
 }
 
 fun box(): String {
-    val context = ProjectApiContext()
-    val array = context.projectInfoJsonParser.parse(JsonArray())
+    konst context = ProjectApiContext()
+    konst array = context.projectInfoJsonParser.parse(JsonArray())
     return if (array != null) "OK" else "fail"
 }

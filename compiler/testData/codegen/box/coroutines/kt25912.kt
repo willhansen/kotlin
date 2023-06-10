@@ -5,7 +5,7 @@ import helpers.*
 import kotlin.coroutines.*
 
 fun box(): String {
-    val gg = object : Grouping<Int, String> {
+    konst gg = object : Grouping<Int, String> {
         override fun sourceIterator(): Iterator<Int> = listOf(1).iterator()
         override fun keyOf(element: Int): String = "OK"
     }
@@ -13,7 +13,7 @@ fun box(): String {
     var res = ""
     suspend {
         for (e in gg.sourceIterator()) {
-            val key = gg.keyOf(e)
+            konst key = gg.keyOf(e)
             res += key
         }
     }.startCoroutine(EmptyContinuation)

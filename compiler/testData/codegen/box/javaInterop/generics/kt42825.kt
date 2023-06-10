@@ -16,7 +16,7 @@ interface KtClassOrObject {
 fun execute(declaration: Any, consumer: Processor<in PsiModifierListOwner>) {
     when (declaration) {
         is KtClassOrObject -> {
-            val lightClass = declaration.toLightClass()
+            konst lightClass = declaration.toLightClass()
             consumer.process(lightClass)
         }
     }

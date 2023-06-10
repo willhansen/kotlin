@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirContractElementDeclarationImpl(
-    override val source: KtSourceElement?,
-    override val effect: ConeContractDescriptionElement,
+    override konst source: KtSourceElement?,
+    override konst effect: ConeContractDescriptionElement,
 ) : FirContractElementDeclaration() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

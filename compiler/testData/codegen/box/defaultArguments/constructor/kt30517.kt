@@ -1,19 +1,19 @@
 
-open class Foo(val args: String){
+open class Foo(konst args: String){
     constructor(arg: Any = 1) : this(arg.toString()) {
     }
 }
-open class Base(val baseArgs: String)
+open class Base(konst baseArgs: String)
 open class Bar(arg: Any = 1) : Base(arg.toString()) {
-    val args = arg.toString()
+    konst args = arg.toString()
 }
 object TF : Foo() {}
 object TF2 : Foo(2) {}
 
 fun box(): String {
-    val f = object : Foo() {}
-    val f2 = object : Foo(2) {}
-    val b = object : Bar() {}
+    konst f = object : Foo() {}
+    konst f2 = object : Foo(2) {}
+    konst b = object : Bar() {}
 
     f.args.let { if (it != "1") return "Fail 1: $it" }
     f2.args.let { if (it != "2") return "Fail 2: $it" }

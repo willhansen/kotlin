@@ -3,8 +3,8 @@ import lib1.*
 import lib2.*
 
 fun box() = abiTest {
-    val abstractClass: AbstractClass = AbstractClassImpl()
-    val _interface: Interface = InterfaceImpl()
+    konst abstractClass: AbstractClass = AbstractClassImpl()
+    konst _interface: Interface = InterfaceImpl()
 
     expectFailure(nonImplementedCallable("function 'foo'", "class 'AbstractClassImpl'")) { abstractClass.foo() }
     expectFailure(nonImplementedCallable("property accessor 'bar.<get-bar>'", "class 'AbstractClassImpl'")) { abstractClass.bar }

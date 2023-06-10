@@ -138,7 +138,7 @@ public actual fun <T> Array<out T>.asList(): List<T> {
  */
 public actual fun ByteArray.asList(): List<Byte> {
     return object : AbstractList<Byte>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Byte): Boolean = this@asList.contains(element)
         override fun get(index: Int): Byte = this@asList[index]
@@ -152,7 +152,7 @@ public actual fun ByteArray.asList(): List<Byte> {
  */
 public actual fun ShortArray.asList(): List<Short> {
     return object : AbstractList<Short>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Short): Boolean = this@asList.contains(element)
         override fun get(index: Int): Short = this@asList[index]
@@ -166,7 +166,7 @@ public actual fun ShortArray.asList(): List<Short> {
  */
 public actual fun IntArray.asList(): List<Int> {
     return object : AbstractList<Int>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Int): Boolean = this@asList.contains(element)
         override fun get(index: Int): Int = this@asList[index]
@@ -180,7 +180,7 @@ public actual fun IntArray.asList(): List<Int> {
  */
 public actual fun LongArray.asList(): List<Long> {
     return object : AbstractList<Long>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Long): Boolean = this@asList.contains(element)
         override fun get(index: Int): Long = this@asList[index]
@@ -194,7 +194,7 @@ public actual fun LongArray.asList(): List<Long> {
  */
 public actual fun FloatArray.asList(): List<Float> {
     return object : AbstractList<Float>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Float): Boolean = this@asList.any { it.toBits() == element.toBits() }
         override fun get(index: Int): Float = this@asList[index]
@@ -208,7 +208,7 @@ public actual fun FloatArray.asList(): List<Float> {
  */
 public actual fun DoubleArray.asList(): List<Double> {
     return object : AbstractList<Double>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Double): Boolean = this@asList.any { it.toBits() == element.toBits() }
         override fun get(index: Int): Double = this@asList[index]
@@ -222,7 +222,7 @@ public actual fun DoubleArray.asList(): List<Double> {
  */
 public actual fun BooleanArray.asList(): List<Boolean> {
     return object : AbstractList<Boolean>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Boolean): Boolean = this@asList.contains(element)
         override fun get(index: Int): Boolean = this@asList[index]
@@ -236,7 +236,7 @@ public actual fun BooleanArray.asList(): List<Boolean> {
  */
 public actual fun CharArray.asList(): List<Char> {
     return object : AbstractList<Char>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Char): Boolean = this@asList.contains(element)
         override fun get(index: Int): Char = this@asList[index]
@@ -1146,10 +1146,10 @@ public actual inline fun CharArray.copyOf(): CharArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1160,10 +1160,10 @@ public actual inline fun ByteArray.copyOf(newSize: Int): ByteArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1174,10 +1174,10 @@ public actual inline fun ShortArray.copyOf(newSize: Int): ShortArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1188,10 +1188,10 @@ public actual inline fun IntArray.copyOf(newSize: Int): IntArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1202,10 +1202,10 @@ public actual inline fun LongArray.copyOf(newSize: Int): LongArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1216,10 +1216,10 @@ public actual inline fun FloatArray.copyOf(newSize: Int): FloatArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1230,10 +1230,10 @@ public actual inline fun DoubleArray.copyOf(newSize: Int): DoubleArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with `false` values if necessary.
+ * The copy is either truncated or padded at the end with `false` konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `false` values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `false` konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1244,10 +1244,10 @@ public actual inline fun BooleanArray.copyOf(newSize: Int): BooleanArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with null char (`\u0000`) values if necessary.
+ * The copy is either truncated or padded at the end with null char (`\u0000`) konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with null char (`\u0000`) values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with null char (`\u0000`) konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1258,10 +1258,10 @@ public actual inline fun CharArray.copyOf(newSize: Int): CharArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with `null` values if necessary.
+ * The copy is either truncated or padded at the end with `null` konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `null` values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `null` konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizingCopyOf
  */
@@ -1523,7 +1523,7 @@ internal fun CharArray.copyOfRangeImpl(fromIndex: Int, toIndex: Int): CharArray 
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1537,7 +1537,7 @@ public actual fun <T> Array<T>.fill(element: T, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1551,7 +1551,7 @@ public actual fun ByteArray.fill(element: Byte, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1565,7 +1565,7 @@ public actual fun ShortArray.fill(element: Short, fromIndex: Int = 0, toIndex: I
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1579,7 +1579,7 @@ public actual fun IntArray.fill(element: Int, fromIndex: Int = 0, toIndex: Int =
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1593,7 +1593,7 @@ public actual fun LongArray.fill(element: Long, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1607,7 +1607,7 @@ public actual fun FloatArray.fill(element: Float, fromIndex: Int = 0, toIndex: I
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1621,7 +1621,7 @@ public actual fun DoubleArray.fill(element: Double, fromIndex: Int = 0, toIndex:
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1635,7 +1635,7 @@ public actual fun BooleanArray.fill(element: Boolean, fromIndex: Int = 0, toInde
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1652,8 +1652,8 @@ public actual fun CharArray.fill(element: Char, fromIndex: Int = 0, toIndex: Int
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun <T> Array<T>.plus(element: T): Array<T> {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1662,8 +1662,8 @@ public actual operator fun <T> Array<T>.plus(element: T): Array<T> {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun ByteArray.plus(element: Byte): ByteArray {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1672,8 +1672,8 @@ public actual operator fun ByteArray.plus(element: Byte): ByteArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun ShortArray.plus(element: Short): ShortArray {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1682,8 +1682,8 @@ public actual operator fun ShortArray.plus(element: Short): ShortArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun IntArray.plus(element: Int): IntArray {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1692,8 +1692,8 @@ public actual operator fun IntArray.plus(element: Int): IntArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun LongArray.plus(element: Long): LongArray {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1702,8 +1702,8 @@ public actual operator fun LongArray.plus(element: Long): LongArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun FloatArray.plus(element: Float): FloatArray {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1712,8 +1712,8 @@ public actual operator fun FloatArray.plus(element: Float): FloatArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun DoubleArray.plus(element: Double): DoubleArray {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1722,8 +1722,8 @@ public actual operator fun DoubleArray.plus(element: Double): DoubleArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun BooleanArray.plus(element: Boolean): BooleanArray {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1732,8 +1732,8 @@ public actual operator fun BooleanArray.plus(element: Boolean): BooleanArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun CharArray.plus(element: Char): CharArray {
-    val index = size
-    val result = java.util.Arrays.copyOf(this, index + 1)
+    konst index = size
+    konst result = java.util.Arrays.copyOf(this, index + 1)
     result[index] = element
     return result
 }
@@ -1743,7 +1743,7 @@ public actual operator fun CharArray.plus(element: Char): CharArray {
  */
 public actual operator fun <T> Array<T>.plus(elements: Collection<T>): Array<T> {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1753,7 +1753,7 @@ public actual operator fun <T> Array<T>.plus(elements: Collection<T>): Array<T> 
  */
 public actual operator fun ByteArray.plus(elements: Collection<Byte>): ByteArray {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1763,7 +1763,7 @@ public actual operator fun ByteArray.plus(elements: Collection<Byte>): ByteArray
  */
 public actual operator fun ShortArray.plus(elements: Collection<Short>): ShortArray {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1773,7 +1773,7 @@ public actual operator fun ShortArray.plus(elements: Collection<Short>): ShortAr
  */
 public actual operator fun IntArray.plus(elements: Collection<Int>): IntArray {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1783,7 +1783,7 @@ public actual operator fun IntArray.plus(elements: Collection<Int>): IntArray {
  */
 public actual operator fun LongArray.plus(elements: Collection<Long>): LongArray {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1793,7 +1793,7 @@ public actual operator fun LongArray.plus(elements: Collection<Long>): LongArray
  */
 public actual operator fun FloatArray.plus(elements: Collection<Float>): FloatArray {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1803,7 +1803,7 @@ public actual operator fun FloatArray.plus(elements: Collection<Float>): FloatAr
  */
 public actual operator fun DoubleArray.plus(elements: Collection<Double>): DoubleArray {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1813,7 +1813,7 @@ public actual operator fun DoubleArray.plus(elements: Collection<Double>): Doubl
  */
 public actual operator fun BooleanArray.plus(elements: Collection<Boolean>): BooleanArray {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1823,7 +1823,7 @@ public actual operator fun BooleanArray.plus(elements: Collection<Boolean>): Boo
  */
 public actual operator fun CharArray.plus(elements: Collection<Char>): CharArray {
     var index = size
-    val result = java.util.Arrays.copyOf(this, index + elements.size)
+    konst result = java.util.Arrays.copyOf(this, index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1832,9 +1832,9 @@ public actual operator fun CharArray.plus(elements: Collection<Char>): CharArray
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun <T> Array<T>.plus(elements: Array<out T>): Array<T> {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -1843,9 +1843,9 @@ public actual operator fun <T> Array<T>.plus(elements: Array<out T>): Array<T> {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun ByteArray.plus(elements: ByteArray): ByteArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -1854,9 +1854,9 @@ public actual operator fun ByteArray.plus(elements: ByteArray): ByteArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun ShortArray.plus(elements: ShortArray): ShortArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -1865,9 +1865,9 @@ public actual operator fun ShortArray.plus(elements: ShortArray): ShortArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun IntArray.plus(elements: IntArray): IntArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -1876,9 +1876,9 @@ public actual operator fun IntArray.plus(elements: IntArray): IntArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun LongArray.plus(elements: LongArray): LongArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -1887,9 +1887,9 @@ public actual operator fun LongArray.plus(elements: LongArray): LongArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun FloatArray.plus(elements: FloatArray): FloatArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -1898,9 +1898,9 @@ public actual operator fun FloatArray.plus(elements: FloatArray): FloatArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun DoubleArray.plus(elements: DoubleArray): DoubleArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -1909,9 +1909,9 @@ public actual operator fun DoubleArray.plus(elements: DoubleArray): DoubleArray 
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun BooleanArray.plus(elements: BooleanArray): BooleanArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -1920,9 +1920,9 @@ public actual operator fun BooleanArray.plus(elements: BooleanArray): BooleanArr
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun CharArray.plus(elements: CharArray): CharArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
     System.arraycopy(elements, 0, result, thisSize, arraySize)
     return result
 }
@@ -2199,7 +2199,7 @@ public actual fun <T> Array<out T>.sortWith(comparator: Comparator<in T>, fromIn
  * Returns a *typed* object array containing all of the elements of this primitive array.
  */
 public actual fun ByteArray.toTypedArray(): Array<Byte> {
-    val result = arrayOfNulls<Byte>(size)
+    konst result = arrayOfNulls<Byte>(size)
     for (index in indices)
         result[index] = this[index]
     @Suppress("UNCHECKED_CAST")
@@ -2210,7 +2210,7 @@ public actual fun ByteArray.toTypedArray(): Array<Byte> {
  * Returns a *typed* object array containing all of the elements of this primitive array.
  */
 public actual fun ShortArray.toTypedArray(): Array<Short> {
-    val result = arrayOfNulls<Short>(size)
+    konst result = arrayOfNulls<Short>(size)
     for (index in indices)
         result[index] = this[index]
     @Suppress("UNCHECKED_CAST")
@@ -2221,7 +2221,7 @@ public actual fun ShortArray.toTypedArray(): Array<Short> {
  * Returns a *typed* object array containing all of the elements of this primitive array.
  */
 public actual fun IntArray.toTypedArray(): Array<Int> {
-    val result = arrayOfNulls<Int>(size)
+    konst result = arrayOfNulls<Int>(size)
     for (index in indices)
         result[index] = this[index]
     @Suppress("UNCHECKED_CAST")
@@ -2232,7 +2232,7 @@ public actual fun IntArray.toTypedArray(): Array<Int> {
  * Returns a *typed* object array containing all of the elements of this primitive array.
  */
 public actual fun LongArray.toTypedArray(): Array<Long> {
-    val result = arrayOfNulls<Long>(size)
+    konst result = arrayOfNulls<Long>(size)
     for (index in indices)
         result[index] = this[index]
     @Suppress("UNCHECKED_CAST")
@@ -2243,7 +2243,7 @@ public actual fun LongArray.toTypedArray(): Array<Long> {
  * Returns a *typed* object array containing all of the elements of this primitive array.
  */
 public actual fun FloatArray.toTypedArray(): Array<Float> {
-    val result = arrayOfNulls<Float>(size)
+    konst result = arrayOfNulls<Float>(size)
     for (index in indices)
         result[index] = this[index]
     @Suppress("UNCHECKED_CAST")
@@ -2254,7 +2254,7 @@ public actual fun FloatArray.toTypedArray(): Array<Float> {
  * Returns a *typed* object array containing all of the elements of this primitive array.
  */
 public actual fun DoubleArray.toTypedArray(): Array<Double> {
-    val result = arrayOfNulls<Double>(size)
+    konst result = arrayOfNulls<Double>(size)
     for (index in indices)
         result[index] = this[index]
     @Suppress("UNCHECKED_CAST")
@@ -2265,7 +2265,7 @@ public actual fun DoubleArray.toTypedArray(): Array<Double> {
  * Returns a *typed* object array containing all of the elements of this primitive array.
  */
 public actual fun BooleanArray.toTypedArray(): Array<Boolean> {
-    val result = arrayOfNulls<Boolean>(size)
+    konst result = arrayOfNulls<Boolean>(size)
     for (index in indices)
         result[index] = this[index]
     @Suppress("UNCHECKED_CAST")
@@ -2276,7 +2276,7 @@ public actual fun BooleanArray.toTypedArray(): Array<Boolean> {
  * Returns a *typed* object array containing all of the elements of this primitive array.
  */
 public actual fun CharArray.toTypedArray(): Array<Char> {
-    val result = arrayOfNulls<Char>(size)
+    konst result = arrayOfNulls<Char>(size)
     for (index in indices)
         result[index] = this[index]
     @Suppress("UNCHECKED_CAST")
@@ -2752,7 +2752,7 @@ public fun CharArray.minWith(comparator: Comparator<in Char>): Char? {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2768,7 +2768,7 @@ public inline fun <T> Array<out T>.sumOf(selector: (T) -> java.math.BigDecimal):
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2784,7 +2784,7 @@ public inline fun ByteArray.sumOf(selector: (Byte) -> java.math.BigDecimal): jav
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2800,7 +2800,7 @@ public inline fun ShortArray.sumOf(selector: (Short) -> java.math.BigDecimal): j
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2816,7 +2816,7 @@ public inline fun IntArray.sumOf(selector: (Int) -> java.math.BigDecimal): java.
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2832,7 +2832,7 @@ public inline fun LongArray.sumOf(selector: (Long) -> java.math.BigDecimal): jav
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2848,7 +2848,7 @@ public inline fun FloatArray.sumOf(selector: (Float) -> java.math.BigDecimal): j
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2864,7 +2864,7 @@ public inline fun DoubleArray.sumOf(selector: (Double) -> java.math.BigDecimal):
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2880,7 +2880,7 @@ public inline fun BooleanArray.sumOf(selector: (Boolean) -> java.math.BigDecimal
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2896,7 +2896,7 @@ public inline fun CharArray.sumOf(selector: (Char) -> java.math.BigDecimal): jav
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2912,7 +2912,7 @@ public inline fun <T> Array<out T>.sumOf(selector: (T) -> java.math.BigInteger):
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2928,7 +2928,7 @@ public inline fun ByteArray.sumOf(selector: (Byte) -> java.math.BigInteger): jav
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2944,7 +2944,7 @@ public inline fun ShortArray.sumOf(selector: (Short) -> java.math.BigInteger): j
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2960,7 +2960,7 @@ public inline fun IntArray.sumOf(selector: (Int) -> java.math.BigInteger): java.
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2976,7 +2976,7 @@ public inline fun LongArray.sumOf(selector: (Long) -> java.math.BigInteger): jav
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -2992,7 +2992,7 @@ public inline fun FloatArray.sumOf(selector: (Float) -> java.math.BigInteger): j
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -3008,7 +3008,7 @@ public inline fun DoubleArray.sumOf(selector: (Double) -> java.math.BigInteger):
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -3024,7 +3024,7 @@ public inline fun BooleanArray.sumOf(selector: (Boolean) -> java.math.BigInteger
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)

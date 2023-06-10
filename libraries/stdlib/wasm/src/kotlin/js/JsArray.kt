@@ -8,14 +8,14 @@ package kotlin.js
 /** JavaScript Array */
 @JsName("Array")
 public external class JsArray<T : JsAny?> : JsAny {
-    val length: Int
+    konst length: Int
 }
 
 public operator fun <T : JsAny?> JsArray<T>.get(index: Int): T? =
     jsArrayGet(this, index)
 
-public operator fun <T : JsAny?> JsArray<T>.set(index: Int, value: T) {
-    jsArraySet(this, index, value)
+public operator fun <T : JsAny?> JsArray<T>.set(index: Int, konstue: T) {
+    jsArraySet(this, index, konstue)
 }
 
 @Suppress("RedundantNullableReturnType", "UNUSED_PARAMETER")
@@ -23,6 +23,6 @@ private fun <T : JsAny?> jsArrayGet(array: JsArray<T>, index: Int): T? =
     js("array[index]")
 
 @Suppress("UNUSED_PARAMETER")
-private fun <T : JsAny?> jsArraySet(array: JsArray<T>, index: Int, value: T) {
-    js("array[index] = value")
+private fun <T : JsAny?> jsArraySet(array: JsArray<T>, index: Int, konstue: T) {
+    js("array[index] = konstue")
 }

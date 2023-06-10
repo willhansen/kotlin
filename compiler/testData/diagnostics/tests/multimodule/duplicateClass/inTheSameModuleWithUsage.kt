@@ -6,7 +6,7 @@ package p
 
 public class A
 public class B {
-    public val a: A = A()
+    public konst a: A = A()
 }
 
 // MODULE: m2(m1)
@@ -19,6 +19,6 @@ class A {
 }
 
 fun test() {
-    val a: A = B().a
+    konst a: A = B().a
     a.foo()
 }

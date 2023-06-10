@@ -2,10 +2,10 @@
 
 class Outer {
     inner class Test1
-    inner class Test2(val x: Int)
-    inner class Test3(val x: Any)
-    inner class Test4<T>(val x: T)
-    inner class Test5(val x: Int) {
+    inner class Test2(konst x: Int)
+    inner class Test3(konst x: Any)
+    inner class Test4<T>(konst x: T)
+    inner class Test5(konst x: Int) {
         constructor() : this(0)
         private constructor(z: String) : this(z.length)
     }

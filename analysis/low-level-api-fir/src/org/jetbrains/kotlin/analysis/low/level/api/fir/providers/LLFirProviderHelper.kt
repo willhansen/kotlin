@@ -37,15 +37,15 @@ import org.jetbrains.kotlin.psi.KtFile
 
 internal class LLFirProviderHelper(
     firSession: LLFirSession,
-    private val firFileBuilder: LLFirFileBuilder,
+    private konst firFileBuilder: LLFirFileBuilder,
     canContainKotlinPackage: Boolean,
     declarationProviderFactory: (GlobalSearchScope) -> KotlinDeclarationProvider?
 ) {
-    private val extensionTool: LLFirResolveExtensionTool? = firSession.llResolveExtensionTool
+    private konst extensionTool: LLFirResolveExtensionTool? = firSession.llResolveExtensionTool
 
-    val searchScope: GlobalSearchScope =
+    konst searchScope: GlobalSearchScope =
         firSession.ktModule.contentScope.run {
-            val notShadowedScope = extensionTool?.shadowedSearchScope?.let { GlobalSearchScope.notScope(it) }
+            konst notShadowedScope = extensionTool?.shadowedSearchScope?.let { GlobalSearchScope.notScope(it) }
             if (notShadowedScope != null) {
                 this.intersectWith(notShadowedScope)
             } else {
@@ -53,45 +53,45 @@ internal class LLFirProviderHelper(
             }
         }
 
-    val declarationProvider = CompositeKotlinDeclarationProvider.create(
+    konst declarationProvider = CompositeKotlinDeclarationProvider.create(
         listOfNotNull(
             declarationProviderFactory(searchScope),
             extensionTool?.declarationProvider,
         )
     )
 
-    private val packageProvider = CompositeKotlinPackageProvider.create(
+    private konst packageProvider = CompositeKotlinPackageProvider.create(
         listOfNotNull(
             firSession.project.createPackageProvider(searchScope),
             extensionTool?.packageProvider,
         )
     )
 
-    private val allowKotlinPackage = canContainKotlinPackage ||
+    private konst allowKotlinPackage = canContainKotlinPackage ||
             firSession.languageVersionSettings.getFlag(AnalysisFlags.allowKotlinPackage)
 
-    private val classifierByClassId =
+    private konst classifierByClassId =
         firSession.firCachesFactory.createCache<ClassId, FirClassLikeDeclaration?, KtClassLikeDeclaration?> { classId, context ->
-            val ktClass = context ?: declarationProvider.getClassLikeDeclarationByClassId(classId) ?: return@createCache null
+            konst ktClass = context ?: declarationProvider.getClassLikeDeclarationByClassId(classId) ?: return@createCache null
 
             if (ktClass.getClassId() == null) return@createCache null
-            val firFile = firFileBuilder.buildRawFirFileWithCaching(ktClass.containingKtFile)
+            konst firFile = firFileBuilder.buildRawFirFileWithCaching(ktClass.containingKtFile)
             FirElementFinder.findClassifierWithClassId(firFile, classId)
                 ?: error("Classifier $classId was found in file ${ktClass.containingKtFile.virtualFilePath} but was not found in FirFile")
         }
 
-    private val callablesByCallableId =
+    private konst callablesByCallableId =
         firSession.firCachesFactory.createCache<CallableId, List<FirCallableSymbol<*>>, Collection<KtFile>?> { callableId, context ->
-            val files = context ?: declarationProvider.getTopLevelCallableFiles(callableId).ifEmpty { return@createCache emptyList() }
+            konst files = context ?: declarationProvider.getTopLevelCallableFiles(callableId).ifEmpty { return@createCache emptyList() }
             buildList {
                 files.forEach { ktFile ->
-                    val firFile = firFileBuilder.buildRawFirFileWithCaching(ktFile)
+                    konst firFile = firFileBuilder.buildRawFirFileWithCaching(ktFile)
                     firFile.collectCallableDeclarationsTo(this, callableId.callableName)
                 }
             }
         }
 
-    val symbolNameCache = FirCompositeCachedSymbolNamesProvider.create(
+    konst symbolNameCache = FirCompositeCachedSymbolNamesProvider.create(
         firSession,
         listOfNotNull(
             object : LLFirKotlinSymbolNamesProvider(declarationProvider) {
@@ -118,7 +118,7 @@ internal class LLFirProviderHelper(
 
     fun getTopLevelCallableSymbols(packageFqName: FqName, name: Name): List<FirCallableSymbol<*>> {
         if (!allowKotlinPackage && packageFqName.isKotlinPackage()) return emptyList()
-        val callableId = CallableId(packageFqName, name)
+        konst callableId = CallableId(packageFqName, name)
         return callablesByCallableId.getValue(callableId)
     }
 

@@ -14,9 +14,9 @@ class CKL1 : B<Any>, C<Any>
 class CTKL1 : A<B<Any>, C<Any>>, B<Any>, C<Any>
 
 inline fun <Q: Any, T: A<K, L>, K: B<Q>, L: C<Q>> test1(a: Any): String {
-    val s1 = (a as? T != null).toString()[1].toString()
-    val s2 = (a as? K != null).toString()[1].toString()
-    val s3 = (a as? L != null).toString()[1].toString()
+    konst s1 = (a as? T != null).toString()[1].toString()
+    konst s2 = (a as? K != null).toString()[1].toString()
+    konst s3 = (a as? L != null).toString()[1].toString()
     return s1 + s2 + s3
 }
 
@@ -31,9 +31,9 @@ class CKL2 : B<CKL2>, C<CKL2>
 class CTKL2 : A<B<CTKL2>, C<CTKL2>>, B<CTKL2>, C<CTKL2>
 
 inline fun <T: A<K, L>, K: B<T>, L: C<T>> test2(a: Any): String {
-    val s1 = (a as? T != null).toString()[2].toString()
-    val s2 = (a as? K != null).toString()[2].toString()
-    val s3 = (a as? L != null).toString()[2].toString()
+    konst s1 = (a as? T != null).toString()[2].toString()
+    konst s2 = (a as? K != null).toString()[2].toString()
+    konst s3 = (a as? L != null).toString()[2].toString()
     return s1 + s2 + s3
 }
 

@@ -21,7 +21,7 @@ fun foo(result: MutableList<in String>, collection: MutableCollection<String>, p
 }
 
 fun test(result: MutableList<in Any>, collection: MutableCollection<String>, prefix : String){
-    val c = collection.filterToMy(result, {it.startsWith(prefix)})
+    konst c = collection.filterToMy(result, {it.startsWith(prefix)})
     checkSubtype<MutableCollection<out String>>(c)
 }
 

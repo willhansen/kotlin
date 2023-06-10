@@ -4,7 +4,7 @@
 // MODULE: common
 // FILE: common.kt
 
-val LocalClass = object {
+konst LocalClass = object {
     override fun toString() = "OK"
 }
 

@@ -2,19 +2,19 @@
 
 // WITH_STDLIB
 
-data class B(val x: Int) {
+data class B(konst x: Int) {
   fun equals(other: B): Boolean = false
 }
 
-data class C(val x: Int) {
+data class C(konst x: Int) {
   fun equals(): Boolean = false
 }
 
-data class D(val x: Int) {
+data class D(konst x: Int) {
   fun equals(other: Any?, another: String): Boolean = false
 }
 
-data class E(val x: Int) {
+data class E(konst x: Int) {
   fun equals(x: E): Boolean = false
   override fun equals(x: Any?): Boolean = false
 }

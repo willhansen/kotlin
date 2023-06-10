@@ -27,9 +27,9 @@ import org.jetbrains.org.objectweb.asm.Type
 object GetJavaPrimitiveType : IntrinsicMethod() {
 
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue? {
-        val receiver = expression.extensionReceiver ?: return null
+        konst receiver = expression.extensionReceiver ?: return null
 
-        val argumentType =
+        konst argumentType =
             when (receiver) {
                 is IrGetClass -> receiver.argument.type
                 is IrClassReference -> receiver.classType
@@ -38,9 +38,9 @@ object GetJavaPrimitiveType : IntrinsicMethod() {
 
         if (argumentType.isTypeParameter()) return null
 
-        val argumentAsmType = codegen.typeMapper.mapTypeAsDeclaration(argumentType)
+        konst argumentAsmType = codegen.typeMapper.mapTypeAsDeclaration(argumentType)
 
-        val isPrimitiveTypeOrWrapper =
+        konst isPrimitiveTypeOrWrapper =
             argumentType.isPrimitiveType() ||
                     argumentType.isNullablePrimitiveType() ||
                     !argumentType.isInlineClassType() && argumentAsmType.isVoidOrPrimitiveWrapper()
@@ -49,7 +49,7 @@ object GetJavaPrimitiveType : IntrinsicMethod() {
             is IrGetClass -> {
                 if (!isPrimitiveTypeOrWrapper) return null
 
-                val argumentValue = receiver.argument.accept(codegen, data)
+                konst argumentValue = receiver.argument.accept(codegen, data)
                 argumentValue.materialize()
                 AsmUtil.pop(codegen.mv, argumentValue.type)
                 putPrimitiveType(codegen, argumentAsmType)

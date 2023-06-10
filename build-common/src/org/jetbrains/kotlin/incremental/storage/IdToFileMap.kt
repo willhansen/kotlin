@@ -27,7 +27,7 @@ internal class IdToFileMap(
 ) : NonAppendableBasicMap<Int, String>(file, ExternalIntegerKeyDescriptor(), EnumeratorStringDescriptor.INSTANCE, icContext) {
     override fun dumpKey(key: Int): String = key.toString()
 
-    override fun dumpValue(value: String): String = value
+    override fun dumpValue(konstue: String): String = konstue
 
     operator fun get(id: Int): File? = storage[id]?.let { pathConverter.toFile(it) }
 

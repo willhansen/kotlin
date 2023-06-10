@@ -14,7 +14,7 @@ package kotlin.collections
 public expect abstract class AbstractMutableCollection<E> : MutableCollection<E> {
     protected constructor()
 
-    abstract override val size: Int
+    abstract override konst size: Int
     abstract override fun iterator(): MutableIterator<E>
     abstract override fun add(element: E): Boolean
 

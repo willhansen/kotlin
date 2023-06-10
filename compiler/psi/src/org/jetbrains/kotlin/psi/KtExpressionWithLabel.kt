@@ -25,7 +25,7 @@ open class KtExpressionWithLabel(node: ASTNode) : KtExpressionImpl(node) {
     fun getTargetLabel(): KtSimpleNameExpression? =
         labelQualifier?.findChildByType(KtNodeTypes.LABEL) as? KtSimpleNameExpression
 
-    val labelQualifier: KtContainerNode?
+    konst labelQualifier: KtContainerNode?
         get() = findChildByType(KtNodeTypes.LABEL_QUALIFIER)
 
     fun getLabelName(): String? = getTargetLabel()?.getReferencedName()

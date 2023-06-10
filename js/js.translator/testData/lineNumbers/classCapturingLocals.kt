@@ -1,7 +1,7 @@
 class A
 
 fun A.foo() {
-    val x = baz()
+    konst x = baz()
     class B {
         fun bar() {
             println(this@foo)

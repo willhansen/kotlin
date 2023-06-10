@@ -1,7 +1,7 @@
-// KT-45676: annotations on backing fields are missing their attribute values
+// KT-45676: annotations on backing fields are missing their attribute konstues
 
 @Target(AnnotationTarget.FIELD)
-annotation class MyFieldAnnotation~MyFieldAnnotation(String)~(val value: String)
+annotation class MyFieldAnnotation~MyFieldAnnotation(String)~(konst konstue: String)
 
 @`MyFieldAnnotation(String)`MyFieldAnnotation("SomeStringValue"`:kotlin::String`)
 var myProperty = 0

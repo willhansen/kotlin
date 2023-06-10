@@ -9,9 +9,9 @@ import org.gradle.api.internal.StartParameterInternal
 import org.gradle.api.invocation.Gradle
 
 internal class ProjectIsolationStartParameterAccessorG74(
-    private val gradle: Gradle
+    private konst gradle: Gradle
 ) : ProjectIsolationStartParameterAccessor {
-    override val isProjectIsolationEnabled: Boolean by lazy {
+    override konst isProjectIsolationEnabled: Boolean by lazy {
         (gradle.startParameter as StartParameterInternal).isolatedProjects.get()
     }
 

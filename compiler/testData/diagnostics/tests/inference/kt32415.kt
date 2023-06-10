@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 
 abstract class TestType<V: Any> {
-    open inner class Inner(val item: V)
+    open inner class Inner(konst item: V)
 }
 
 class Derived: TestType<Long>() {

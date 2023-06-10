@@ -11,7 +11,7 @@ enum class COLOR {
 
 // CHECK-LABEL: "kfun:#main(){}"
 fun main() {
-    for (i in COLOR.values()) {
+    for (i in COLOR.konstues()) {
         // CHECK: = call i32 @"kfun:kotlin.Enum#<get-ordinal>(){}kotlin.Int"(
         // We inline .ordinal property access in case of opt build, so check direct field load instead.
         // CHECK-OPT: getelementptr inbounds %"kclassbody:kotlin.Enum#internal", %"kclassbody:kotlin.Enum#internal"* %{{[0-9a-z]*}}, i32 0, i32 2

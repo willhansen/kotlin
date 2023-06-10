@@ -1,5 +1,5 @@
 KtInapplicableCallCandidateInfo:
-  diagnostic = ERROR<NO_VALUE_FOR_PARAMETER: No value passed for parameter 'a'>
+  diagnostic = ERROR<NO_VALUE_FOR_PARAMETER: No konstue passed for parameter 'a'>
   candidate = KtSimpleFunctionCall:
     isImplicitInvoke = false
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
@@ -9,7 +9,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /function(t: T, a: kotlin.Char): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = t
             receiverType = null
@@ -38,7 +38,7 @@ KtInapplicableCallCandidateInfo:
   isInBestCandidates = true
 
 KtInapplicableCallCandidateInfo:
-  diagnostic = ERROR<NO_VALUE_FOR_PARAMETER: No value passed for parameter 'b'>
+  diagnostic = ERROR<NO_VALUE_FOR_PARAMETER: No konstue passed for parameter 'b'>
   candidate = KtSimpleFunctionCall:
     isImplicitInvoke = false
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
@@ -48,7 +48,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /function(u: U, b: kotlin.Boolean): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = u
             receiverType = null
@@ -77,7 +77,7 @@ KtInapplicableCallCandidateInfo:
   isInBestCandidates = true
 
 KtInapplicableCallCandidateInfo:
-  diagnostic = ERROR<NO_VALUE_FOR_PARAMETER: No value passed for parameter 'c'>
+  diagnostic = ERROR<NO_VALUE_FOR_PARAMETER: No konstue passed for parameter 'c'>
   candidate = KtSimpleFunctionCall:
     isImplicitInvoke = false
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
@@ -87,7 +87,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /function(v: V, c: kotlin.String): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = v
             receiverType = null

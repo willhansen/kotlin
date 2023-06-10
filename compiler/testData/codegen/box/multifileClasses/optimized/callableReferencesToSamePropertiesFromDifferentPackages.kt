@@ -19,7 +19,7 @@ package a
 
 import test.property
 
-val propRefA = ::property
+konst propRefA = ::property
 
 // FILE: b.kt
 
@@ -27,11 +27,11 @@ package b
 
 import test.property
 
-val propRefB = ::property
+konst propRefB = ::property
 
 // FILE: part.kt
 
 @file:[JvmName("MultifileClass") JvmMultifileClass]
 package test
 
-val property: String get() = ""
+konst property: String get() = ""

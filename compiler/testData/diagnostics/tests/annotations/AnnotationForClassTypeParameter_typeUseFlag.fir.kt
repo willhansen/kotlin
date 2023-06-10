@@ -1,13 +1,13 @@
 // !LANGUAGE: +ProperCheckAnnotationsTargetInTypeUsePositions -ClassTypeParameterAnnotations
 
 annotation class A1
-annotation class A2(val some: Int = 12)
+annotation class A2(konst some: Int = 12)
 
 @Target(AnnotationTarget.TYPE)
 annotation class TA1
 
 @Target(AnnotationTarget.TYPE_PARAMETER)
-annotation class TA2(val some: Int = 12)
+annotation class TA2(konst some: Int = 12)
 
 class TopLevelClass<<!WRONG_ANNOTATION_TARGET!>@A1<!> <!WRONG_ANNOTATION_TARGET!>@A2(3)<!> <!REPEATED_ANNOTATION, WRONG_ANNOTATION_TARGET!>@A2<!> <!REPEATED_ANNOTATION, WRONG_ANNOTATION_TARGET!>@A1(<!TOO_MANY_ARGUMENTS!>12<!>)<!> <!REPEATED_ANNOTATION, WRONG_ANNOTATION_TARGET!>@A2(<!ARGUMENT_TYPE_MISMATCH!>"Test"<!>)<!> T> {
     class InnerClass<<!WRONG_ANNOTATION_TARGET!>@A1<!> <!WRONG_ANNOTATION_TARGET!>@A2(3)<!> <!REPEATED_ANNOTATION, WRONG_ANNOTATION_TARGET!>@A2<!> <!REPEATED_ANNOTATION, WRONG_ANNOTATION_TARGET!>@A1(<!TOO_MANY_ARGUMENTS!>12<!>)<!> <!REPEATED_ANNOTATION, WRONG_ANNOTATION_TARGET!>@A2(<!ARGUMENT_TYPE_MISMATCH!>"Test"<!>)<!> T> {

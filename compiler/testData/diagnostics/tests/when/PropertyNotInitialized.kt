@@ -17,7 +17,7 @@ enum class E {
 }
 
 class Outer(e: E) {
-    private val prop: Int
+    private konst prop: Int
     init {
         <!DEBUG_INFO_IMPLICIT_EXHAUSTIVE!>when(e ) {
             // When is exhaustive, property is always initialized

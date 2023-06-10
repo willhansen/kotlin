@@ -1,5 +1,5 @@
 class A {
-  val a: kotlin.Int
+  konst a: kotlin.Int
 
   fun x(): kotlin.Int
 }

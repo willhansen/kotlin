@@ -22,7 +22,7 @@ abstract class ConeAttribute<out T : ConeAttribute<T>> : AnnotationMarker {
      * typealias B = @SomeAttribute(1) A
      * typealias C = @SomeAttribute(2) B
      *
-     * For determining attribute value of expanded type of C we should add @SomeAttribute(2) to @SomeAttribute(1)
+     * For determining attribute konstue of expanded type of C we should add @SomeAttribute(2) to @SomeAttribute(1)
      *
      * This function must be symmetrical: a.add(b) == b.add(a)
      */
@@ -31,7 +31,7 @@ abstract class ConeAttribute<out T : ConeAttribute<T>> : AnnotationMarker {
 
     abstract override fun toString(): String
 
-    abstract val key: KClass<out T>
+    abstract konst key: KClass<out T>
 }
 
 typealias ConeAttributeKey = KClass<out ConeAttribute<*>>
@@ -45,10 +45,10 @@ class ConeAttributes private constructor(attributes: List<ConeAttribute<*>>) : A
             return generateNullableAccessor<ConeAttribute<*>, T>(T::class) as ReadOnlyProperty<ConeAttributes, T?>
         }
 
-        val Empty: ConeAttributes = ConeAttributes(emptyList())
-        val WithExtensionFunctionType: ConeAttributes = ConeAttributes(listOf(CompilerConeAttributes.ExtensionFunctionType))
+        konst Empty: ConeAttributes = ConeAttributes(emptyList())
+        konst WithExtensionFunctionType: ConeAttributes = ConeAttributes(listOf(CompilerConeAttributes.ExtensionFunctionType))
 
-        private val predefinedAttributes: Map<ConeAttribute<*>, ConeAttributes> = mapOf(
+        private konst predefinedAttributes: Map<ConeAttribute<*>, ConeAttributes> = mapOf(
             CompilerConeAttributes.EnhancedNullability.predefined()
         )
 
@@ -88,14 +88,14 @@ class ConeAttributes private constructor(attributes: List<ConeAttribute<*>>) : A
     }
 
     operator fun contains(attributeKey: KClass<out ConeAttribute<*>>): Boolean {
-        val index = getId(attributeKey)
+        konst index = getId(attributeKey)
         return arrayMap[index] != null
     }
 
     operator fun plus(attribute: ConeAttribute<*>): ConeAttributes {
         if (attribute in this) return this
         if (isEmpty()) return predefinedAttributes[attribute] ?: ConeAttributes(attribute)
-        val newAttributes = buildList {
+        konst newAttributes = buildList {
             addAll(this)
             add(attribute)
         }
@@ -104,23 +104,23 @@ class ConeAttributes private constructor(attributes: List<ConeAttribute<*>>) : A
 
     fun remove(attribute: ConeAttribute<*>): ConeAttributes {
         if (isEmpty()) return this
-        val attributes = arrayMap.filter { it != attribute }
+        konst attributes = arrayMap.filter { it != attribute }
         if (attributes.size == arrayMap.size) return this
         return create(attributes)
     }
 
     private inline fun perform(other: ConeAttributes, op: ConeAttribute<*>.(ConeAttribute<*>?) -> ConeAttribute<*>?): ConeAttributes {
         if (this.isEmpty() && other.isEmpty()) return this
-        val attributes = mutableListOf<ConeAttribute<*>>()
+        konst attributes = mutableListOf<ConeAttribute<*>>()
         for (index in indices) {
-            val a = arrayMap[index]
-            val b = other.arrayMap[index]
-            val res = if (a == null) b?.op(a) else a.op(b)
+            konst a = arrayMap[index]
+            konst b = other.arrayMap[index]
+            konst res = if (a == null) b?.op(a) else a.op(b)
             attributes.addIfNotNull(res)
         }
         return create(attributes)
     }
 
-    override val typeRegistry: TypeRegistry<ConeAttribute<*>, ConeAttribute<*>>
+    override konst typeRegistry: TypeRegistry<ConeAttribute<*>, ConeAttribute<*>>
         get() = Companion
 }

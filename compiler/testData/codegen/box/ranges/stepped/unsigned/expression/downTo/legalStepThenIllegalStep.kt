@@ -4,13 +4,13 @@ import kotlin.test.*
 
 fun box(): String {
     assertFailsWith<IllegalArgumentException> {
-        val uintProgression = 7u downTo 1u
+        konst uintProgression = 7u downTo 1u
         for (i in uintProgression step 2 step 0) {
         }
     }
 
     assertFailsWith<IllegalArgumentException> {
-        val ulongProgression = 7uL downTo 1uL
+        konst ulongProgression = 7uL downTo 1uL
         for (i in ulongProgression step 2L step 0L) {
         }
     }

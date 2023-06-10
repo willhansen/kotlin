@@ -1,8 +1,8 @@
-const val A = 10
-private const val B = 20
+const konst A = 10
+private const konst B = 20
 
 object Constants {
-    const val C = 30
+    const konst C = 30
 }
 
 fun foo(state: Int) {

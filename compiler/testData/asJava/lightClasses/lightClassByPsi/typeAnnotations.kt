@@ -25,7 +25,7 @@ class klass {
         return ""
     }
 
-    val x: @A0 Int = 2
-    val y: List<@A0 Int>? = null
+    konst x: @A0 Int = 2
+    konst y: List<@A0 Int>? = null
 }
 // COMPILATION_ERRORS

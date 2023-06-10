@@ -57,7 +57,7 @@ class KMatrix {
 
     static func +=(lhs: inout KMatrix, rhs:KMatrix) {
         for entry in lhs.matrix {
-            lhs.put(entry.key, entry.value + rhs.get(entry.key))
+            lhs.put(entry.key, entry.konstue + rhs.get(entry.key))
         }
     }
 }

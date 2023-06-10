@@ -53,7 +53,7 @@ suspend fun C.baz() {
     bar()
 }
 
-val expectedString =
+konst expectedString =
         "before bar(A);foo(1:A);@;inside bar(A);foo(2:A);@;after bar(A);" +
         "between bar;" +
         "before bar(B);foo(1:B);@;inside bar(B);foo(2:B);@;after bar(B);"

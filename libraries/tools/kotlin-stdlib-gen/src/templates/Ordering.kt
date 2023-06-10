@@ -20,18 +20,18 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_reverse = fn("reverse()") {
+    konst f_reverse = fn("reverse()") {
         include(Lists, InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         doc { "Reverses ${f.element.pluralize()} in the ${f.collection} in-place." }
         returns("Unit")
         body {
             """
-            val midPoint = (size / 2) - 1
+            konst midPoint = (size / 2) - 1
             if (midPoint < 0) return
             var reverseIndex = lastIndex
             for (index in 0..midPoint) {
-                val tmp = this[index]
+                konst tmp = this[index]
                 this[index] = this[reverseIndex]
                 this[reverseIndex] = tmp
                 reverseIndex--
@@ -54,7 +54,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_reverse_range = fn("reverse(fromIndex: Int, toIndex: Int)") {
+    konst f_reverse_range = fn("reverse(fromIndex: Int, toIndex: Int)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.4")
@@ -69,11 +69,11 @@ object Ordering : TemplateGroupBase() {
         body {
             """
             AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-            val midPoint = (fromIndex + toIndex) / 2
+            konst midPoint = (fromIndex + toIndex) / 2
             if (fromIndex == midPoint) return
             var reverseIndex = toIndex - 1
             for (index in fromIndex until midPoint) {
-                val tmp = this[index]
+                konst tmp = this[index]
                 this[index] = this[reverseIndex]
                 this[reverseIndex] = tmp
                 reverseIndex--
@@ -86,7 +86,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_reversed = fn("reversed()") {
+    konst f_reversed = fn("reversed()") {
         include(Iterables, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned, CharSequences, Strings)
     } builder {
         doc { "Returns a list with elements in reversed order." }
@@ -94,7 +94,7 @@ object Ordering : TemplateGroupBase() {
         body {
             """
             if (this is Collection && size <= 1) return toList()
-            val list = toMutableList()
+            konst list = toMutableList()
             list.reverse()
             return list
             """
@@ -103,7 +103,7 @@ object Ordering : TemplateGroupBase() {
         body(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned) {
             """
             if (isEmpty()) return emptyList()
-            val list = toMutableList()
+            konst list = toMutableList()
             list.reverse()
             return list
             """
@@ -119,7 +119,7 @@ object Ordering : TemplateGroupBase() {
 
     }
 
-    val f_reversedArray = fn("reversedArray()") {
+    konst f_reversedArray = fn("reversedArray()") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         doc { "Returns an array with elements of this array in reversed order." }
@@ -127,8 +127,8 @@ object Ordering : TemplateGroupBase() {
         body(InvariantArraysOfObjects) {
             """
             if (isEmpty()) return this
-            val result = arrayOfNulls(this, size)
-            val lastIndex = lastIndex
+            konst result = arrayOfNulls(this, size)
+            konst lastIndex = lastIndex
             for (i in 0..lastIndex)
                 result[lastIndex - i] = this[i]
             return result
@@ -137,8 +137,8 @@ object Ordering : TemplateGroupBase() {
         body(ArraysOfPrimitives) {
             """
             if (isEmpty()) return this
-            val result = SELF(size)
-            val lastIndex = lastIndex
+            konst result = SELF(size)
+            konst lastIndex = lastIndex
             for (i in 0..lastIndex)
                 result[lastIndex - i] = this[i]
             return result
@@ -154,7 +154,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val stableSortNote =
+    konst stableSortNote =
         "The sort is _stable_. It means that equal elements preserve their order relative to each other after sorting."
 
     fun MemberBuilder.appendStableSortNote() {
@@ -163,7 +163,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sorted = fn("sorted()") {
+    konst f_sorted = fn("sorted()") {
         includeDefault()
         exclude(PrimitiveType.Boolean)
         include(ArraysOfUnsigned)
@@ -217,7 +217,7 @@ object Ordering : TemplateGroupBase() {
             """
             return object : Sequence<T> {
                 override fun iterator(): Iterator<T> {
-                    val sortedList = this@sorted.toMutableList()
+                    konst sortedList = this@sorted.toMutableList()
                     sortedList.sort()
                     return sortedList.iterator()
                 }
@@ -226,7 +226,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sortedArray = fn("sortedArray()") {
+    konst f_sortedArray = fn("sortedArray()") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
         exclude(PrimitiveType.Boolean)
     } builder {
@@ -246,7 +246,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sortDescending = fn("sortDescending()") {
+    konst f_sortDescending = fn("sortDescending()") {
         include(Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
         exclude(PrimitiveType.Boolean)
     } builder {
@@ -271,7 +271,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sortedDescending = fn("sortedDescending()") {
+    konst f_sortedDescending = fn("sortedDescending()") {
         includeDefault()
         exclude(PrimitiveType.Boolean)
         include(ArraysOfUnsigned)
@@ -308,7 +308,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sortedArrayDescending = fn("sortedArrayDescending()") {
+    konst f_sortedArrayDescending = fn("sortedArrayDescending()") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
         exclude(PrimitiveType.Boolean)
     } builder {
@@ -334,7 +334,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sortedWith = fn("sortedWith(comparator: Comparator<in T>)") {
+    konst f_sortedWith = fn("sortedWith(comparator: Comparator<in T>)") {
         includeDefault()
     } builder {
         returns("List<T>")
@@ -379,7 +379,7 @@ object Ordering : TemplateGroupBase() {
             """
             return object : Sequence<T> {
                 override fun iterator(): Iterator<T> {
-                    val sortedList = this@sortedWith.toMutableList()
+                    konst sortedList = this@sortedWith.toMutableList()
                     sortedList.sortWith(comparator)
                     return sortedList.iterator()
                 }
@@ -388,7 +388,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sortedArrayWith = fn("sortedArrayWith(comparator: Comparator<in T>)") {
+    konst f_sortedArrayWith = fn("sortedArrayWith(comparator: Comparator<in T>)") {
         include(ArraysOfObjects)
     } builder {
         doc {
@@ -404,11 +404,11 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sortBy = fn("sortBy(crossinline selector: (T) -> R?)") {
+    konst f_sortBy = fn("sortBy(crossinline selector: (T) -> R?)") {
         include(Lists, ArraysOfObjects)
     } builder {
         inline()
-        doc { """Sorts elements in the ${f.collection} in-place according to natural sort order of the value returned by specified [selector] function.""" }
+        doc { """Sorts elements in the ${f.collection} in-place according to natural sort order of the konstue returned by specified [selector] function.""" }
         appendStableSortNote()
         returns("Unit")
         typeParam("R : Comparable<R>")
@@ -417,7 +417,7 @@ object Ordering : TemplateGroupBase() {
         body { """if (size > 1) sortWith(compareBy(selector))""" }
     }
 
-    val f_sortedBy = fn("sortedBy(crossinline selector: (T) -> R?)") {
+    konst f_sortedBy = fn("sortedBy(crossinline selector: (T) -> R?)") {
         includeDefault()
     } builder {
         inline()
@@ -426,7 +426,7 @@ object Ordering : TemplateGroupBase() {
 
         doc {
             """
-            Returns a list of all elements sorted according to natural sort order of the value returned by specified [selector] function.
+            Returns a list of all elements sorted according to natural sort order of the konstue returned by specified [selector] function.
             """
         }
         if (f != ArraysOfPrimitives) {
@@ -435,7 +435,7 @@ object Ordering : TemplateGroupBase() {
         specialFor(Sequences) {
             returns("SELF")
             doc {
-                "Returns a sequence that yields elements of this sequence sorted according to natural sort order of the value returned by specified [selector] function."
+                "Returns a sequence that yields elements of this sequence sorted according to natural sort order of the konstue returned by specified [selector] function."
             }
             appendStableSortNote()
             sequenceClassification(intermediate, stateful)
@@ -447,11 +447,11 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_sortByDescending = fn("sortByDescending(crossinline selector: (T) -> R?)") {
+    konst f_sortByDescending = fn("sortByDescending(crossinline selector: (T) -> R?)") {
         include(Lists, ArraysOfObjects)
     } builder {
         inline()
-        doc { """Sorts elements in the ${f.collection} in-place descending according to natural sort order of the value returned by specified [selector] function.""" }
+        doc { """Sorts elements in the ${f.collection} in-place descending according to natural sort order of the konstue returned by specified [selector] function.""" }
         appendStableSortNote()
         returns("Unit")
         typeParam("R : Comparable<R>")
@@ -461,7 +461,7 @@ object Ordering : TemplateGroupBase() {
             """if (size > 1) sortWith(compareByDescending(selector))""" }
     }
 
-    val f_sortedByDescending = fn("sortedByDescending(crossinline selector: (T) -> R?)") {
+    konst f_sortedByDescending = fn("sortedByDescending(crossinline selector: (T) -> R?)") {
         includeDefault()
     } builder {
         inline()
@@ -470,7 +470,7 @@ object Ordering : TemplateGroupBase() {
 
         doc {
             """
-            Returns a list of all elements sorted descending according to natural sort order of the value returned by specified [selector] function.
+            Returns a list of all elements sorted descending according to natural sort order of the konstue returned by specified [selector] function.
             """
         }
         if (f != ArraysOfPrimitives) {
@@ -480,7 +480,7 @@ object Ordering : TemplateGroupBase() {
         specialFor(Sequences) {
             returns("SELF")
             doc {
-                "Returns a sequence that yields elements of this sequence sorted descending according to natural sort order of the value returned by specified [selector] function."
+                "Returns a sequence that yields elements of this sequence sorted descending according to natural sort order of the konstue returned by specified [selector] function."
             }
             appendStableSortNote()
             sequenceClassification(intermediate, stateful)
@@ -492,7 +492,7 @@ object Ordering : TemplateGroupBase() {
     }
 
 
-    val f_shuffle = fn("shuffle()") {
+    konst f_shuffle = fn("shuffle()") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.4")
@@ -507,7 +507,7 @@ object Ordering : TemplateGroupBase() {
         }
     }
 
-    val f_shuffleRandom = fn("shuffle(random: Random)") {
+    konst f_shuffleRandom = fn("shuffle(random: Random)") {
         include(Lists, InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.4")
@@ -526,8 +526,8 @@ object Ordering : TemplateGroupBase() {
         body {
             """
             for (i in lastIndex downTo 1) {
-                val j = random.nextInt(i + 1)
-                val copy = this[i]
+                konst j = random.nextInt(i + 1)
+                konst copy = this[i]
                 this[i] = this[j]
                 this[j] = copy
             }
@@ -537,7 +537,7 @@ object Ordering : TemplateGroupBase() {
             body {
                 """
                 for (i in lastIndex downTo 1) {
-                    val j = random.nextInt(i + 1)
+                    konst j = random.nextInt(i + 1)
                     this[j] = this.set(i, this[j])
                 }
                 """

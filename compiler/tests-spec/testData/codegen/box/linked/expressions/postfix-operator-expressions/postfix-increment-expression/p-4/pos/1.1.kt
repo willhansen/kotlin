@@ -11,10 +11,10 @@
  */
 
 fun box(): String {
-    val arr = arrayOf(A(), A(), A())
+    konst arr = arrayOf(A(), A(), A())
 
-    val a = arr[0]++
-    val b = (arr[2]++).i
+    konst a = arr[0]++
+    konst b = (arr[2]++).i
 
     return if (arr[0].i == 1 && a.i == 0 && arr[1].i == 0 && arr[2].i == 1 && b == 0)
         "OK"

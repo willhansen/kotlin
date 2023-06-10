@@ -1,4 +1,4 @@
-val a : Int? = 10
+konst a : Int? = 10
 
 fun foo() = a!!.toString()
 

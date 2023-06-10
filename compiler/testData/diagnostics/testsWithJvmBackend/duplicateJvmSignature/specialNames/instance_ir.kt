@@ -2,7 +2,7 @@
 // TARGET_BACKEND: JVM_IR
 
 object O {
-    val INSTANCE: O = null!!
+    konst INSTANCE: O = null!!
 }
 
 <!CONFLICTING_JVM_DECLARATIONS!>object O2<!> {

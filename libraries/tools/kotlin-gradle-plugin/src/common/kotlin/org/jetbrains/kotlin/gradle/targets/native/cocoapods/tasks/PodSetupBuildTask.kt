@@ -26,7 +26,7 @@ open class PodSetupBuildTask : CocoapodsTask() {
     lateinit var pod: Provider<CocoapodsDependency>
 
     @get:OutputFile
-    val buildSettingsFile: Provider<File> = project.provider {
+    konst buildSettingsFile: Provider<File> = project.provider {
         project.cocoapodsBuildDirs
             .buildSettings
             .resolve(getBuildSettingFileName(pod.get(), sdk.get()))
@@ -37,18 +37,18 @@ open class PodSetupBuildTask : CocoapodsTask() {
 
     @TaskAction
     fun setupBuild() {
-        val podsXcodeProjDir = podsXcodeProjDir.get()
+        konst podsXcodeProjDir = podsXcodeProjDir.get()
 
-        val buildSettingsReceivingCommand = listOf(
+        konst buildSettingsReceivingCommand = listOf(
             "xcodebuild", "-showBuildSettings",
             "-project", podsXcodeProjDir.name,
             "-scheme", pod.get().schemeName,
             "-sdk", sdk.get()
         )
 
-        val outputText = runCommand(buildSettingsReceivingCommand, project.logger) { directory(podsXcodeProjDir.parentFile) }
+        konst outputText = runCommand(buildSettingsReceivingCommand, project.logger) { directory(podsXcodeProjDir.parentFile) }
 
-        val buildSettingsProperties = PodBuildSettingsProperties.readSettingsFromReader(outputText.reader())
+        konst buildSettingsProperties = PodBuildSettingsProperties.readSettingsFromReader(outputText.reader())
         buildSettingsFile.get().let { bsf ->
             buildSettingsProperties.writeSettings(bsf)
         }

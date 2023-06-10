@@ -15,8 +15,8 @@ suspend fun named() {
 }
 
 class A {
-    val coroutineContextNew = kotlin.coroutines.<!ILLEGAL_SUSPEND_PROPERTY_ACCESS!>coroutineContext<!>
-    val context = <!ILLEGAL_SUSPEND_PROPERTY_ACCESS!>coroutineContext<!>
+    konst coroutineContextNew = kotlin.coroutines.<!ILLEGAL_SUSPEND_PROPERTY_ACCESS!>coroutineContext<!>
+    konst context = <!ILLEGAL_SUSPEND_PROPERTY_ACCESS!>coroutineContext<!>
 }
 
 class Controller {

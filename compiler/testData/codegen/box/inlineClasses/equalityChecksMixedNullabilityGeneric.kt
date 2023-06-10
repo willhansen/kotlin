@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: String>(val a: T)
+konstue class A<T: String>(konst a: T)
 
 fun <T: String> isEqualNA(x: A<T>?, y: A<T>) = x == y
 fun <T: String> isEqualAN(x: A<T>, y: A<T>?) = x == y

@@ -12,18 +12,18 @@ import org.jetbrains.kotlin.tooling.core.lazyProperty
 
 /* Sources (-sources.jar) */
 
-val sourcesClasspathKey = extrasKeyOf<IdeaKotlinClasspath>("sourcesClasspath")
+konst sourcesClasspathKey = extrasKeyOf<IdeaKotlinClasspath>("sourcesClasspath")
 
 /**
  * Contains all resolved -sources.jar artifacts associated with this dependency
  */
-val IdeaKotlinBinaryDependency.sourcesClasspath by sourcesClasspathKey.lazyProperty { IdeaKotlinClasspath() }
+konst IdeaKotlinBinaryDependency.sourcesClasspath by sourcesClasspathKey.lazyProperty { IdeaKotlinClasspath() }
 
 /* Documentation (-javadoc.jar) */
 
-val documentationClasspathKey = extrasKeyOf<IdeaKotlinClasspath>("documentationClasspath")
+konst documentationClasspathKey = extrasKeyOf<IdeaKotlinClasspath>("documentationClasspath")
 
 /**
  * Contains all resolved -javadoc.jar artifacts associated with this dependency
  */
-val IdeaKotlinBinaryDependency.documentationClasspath by documentationClasspathKey.lazyProperty { IdeaKotlinClasspath() }
+konst IdeaKotlinBinaryDependency.documentationClasspath by documentationClasspathKey.lazyProperty { IdeaKotlinClasspath() }

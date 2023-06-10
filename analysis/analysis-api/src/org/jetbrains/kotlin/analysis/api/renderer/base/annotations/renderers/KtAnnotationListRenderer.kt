@@ -20,7 +20,7 @@ public interface KtAnnotationListRenderer {
     public object FOR_SOURCE : KtAnnotationListRenderer {
         context(KtAnalysisSession, KtAnnotationRenderer)
         override fun renderAnnotations(owner: KtAnnotated, printer: PrettyPrinter) {
-            val annotations = owner.annotations.filter { annotationFilter.filter(it, owner) }.ifEmpty { return }
+            konst annotations = owner.annotations.filter { annotationFilter.filter(it, owner) }.ifEmpty { return }
             printer.printCollection(
                 annotations,
                 separator = when (owner) {

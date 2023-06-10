@@ -3,19 +3,19 @@
 // FILE: PointerEvent.kt
 
 expect class PointerEvent {
-    val keyboardModifiers: PointerKeyboardModifiers
+    konst keyboardModifiers: PointerKeyboardModifiers
 }
 
 expect class NativePointerKeyboardModifiers
 
 @kotlin.jvm.JvmInline
-value class PointerKeyboardModifiers(internal val packedValue: NativePointerKeyboardModifiers)
+konstue class PointerKeyboardModifiers(internal konst packedValue: NativePointerKeyboardModifiers)
 
 // MODULE: androidMain(commonMain)
 // FILE: PointerEvent.android.kt
 
 actual class PointerEvent {
-    actual val <caret>keyboardModifiers = PointerKeyboardModifiers(42)
+    actual konst <caret>keyboardModifiers = PointerKeyboardModifiers(42)
 }
 
 internal actual typealias NativePointerKeyboardModifiers = Int

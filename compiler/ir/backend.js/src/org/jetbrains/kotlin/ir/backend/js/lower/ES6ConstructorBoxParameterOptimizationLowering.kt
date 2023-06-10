@@ -25,19 +25,19 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.utils.filterIsInstanceAnd
 import org.jetbrains.kotlin.utils.memoryOptimizedFilterNot
 
-class ES6ConstructorBoxParameterOptimizationLowering(private val context: JsIrBackendContext) : BodyLoweringPass {
-    private val IrClass.needsOfBoxParameter by context.mapping.esClassWhichNeedBoxParameters
+class ES6ConstructorBoxParameterOptimizationLowering(private konst context: JsIrBackendContext) : BodyLoweringPass {
+    private konst IrClass.needsOfBoxParameter by context.mapping.esClassWhichNeedBoxParameters
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         if (!context.es6mode) return
 
-        val containerFunction = container as? IrFunction
+        konst containerFunction = container as? IrFunction
 
-        val shouldRemoveBoxRelatedDeclarationsAndStatements =
+        konst shouldRemoveBoxRelatedDeclarationsAndStatements =
             containerFunction?.isEs6ConstructorReplacement == true && !containerFunction.parentAsClass.requiredToHaveBoxParameter()
 
         if (containerFunction != null && shouldRemoveBoxRelatedDeclarationsAndStatements && irBody is IrBlockBody) {
-            containerFunction.valueParameters = containerFunction.valueParameters.memoryOptimizedFilterNot { it.isBoxParameter }
+            containerFunction.konstueParameters = containerFunction.konstueParameters.memoryOptimizedFilterNot { it.isBoxParameter }
         }
 
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
@@ -50,15 +50,15 @@ class ES6ConstructorBoxParameterOptimizationLowering(private val context: JsIrBa
             }
 
             override fun visitCall(expression: IrCall): IrExpression {
-                val callee = expression.symbol.owner
+                konst callee = expression.symbol.owner
 
                 return when {
                     shouldRemoveBoxRelatedDeclarationsAndStatements && (callee.symbol == context.intrinsics.jsCreateThisSymbol || callee.symbol == context.intrinsics.jsCreateExternalThisSymbol) -> {
-                        expression.putValueArgument(expression.valueArgumentsCount - 1, context.getVoid())
+                        expression.putValueArgument(expression.konstueArgumentsCount - 1, context.getVoid())
                         super.visitCall(expression)
                     }
                     callee.isEs6ConstructorReplacement && (!callee.parentAsClass.requiredToHaveBoxParameter() || shouldRemoveBoxRelatedDeclarationsAndStatements) -> {
-                        val newArgumentsSize = expression.valueArgumentsCount - 1
+                        konst newArgumentsSize = expression.konstueArgumentsCount - 1
                         super.visitCall(IrCallImpl(
                             expression.startOffset,
                             expression.endOffset,
@@ -90,13 +90,13 @@ class ES6ConstructorBoxParameterOptimizationLowering(private val context: JsIrBa
     }
 }
 
-class ES6CollectConstructorsWhichNeedBoxParameters(private val context: JsIrBackendContext) : DeclarationTransformer {
+class ES6CollectConstructorsWhichNeedBoxParameters(private konst context: JsIrBackendContext) : DeclarationTransformer {
     private var IrClass.needsOfBoxParameter by context.mapping.esClassWhichNeedBoxParameters
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (!context.es6mode || declaration !is IrClass) return null
 
-        val hasSuperClass = declaration.superClass != null
+        konst hasSuperClass = declaration.superClass != null
 
         if (hasSuperClass && declaration.isInner) {
             declaration.addToClassListWhichNeedBoxParameter()
@@ -115,11 +115,11 @@ class ES6CollectConstructorsWhichNeedBoxParameters(private val context: JsIrBack
             .filterIsInstanceAnd<IrFunction> { it.isEs6ConstructorReplacement }
             .forEach {
                 var meetCapturing = false
-                val boxParameter = it.boxParameter
+                konst boxParameter = it.boxParameter
 
                 it.body?.acceptChildrenVoid(object : IrElementVisitorVoid {
                     override fun visitSetField(expression: IrSetField) {
-                        val receiver = expression.receiver as? IrGetValue
+                        konst receiver = expression.receiver as? IrGetValue
                         if (receiver != null && receiver.symbol == boxParameter?.symbol) {
                             meetCapturing = true
                         }

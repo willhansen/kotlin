@@ -38,7 +38,7 @@ abstract class AbstractNativeLinkerOutputTest : AbstractNativeCInteropBaseTest()
         testCase: TestCase,
         dependencies: List<TestCompilationDependency<*>>
     ): TestCompilationResult<out TestCompilationArtifact.Executable> {
-        val compilation = ExecutableCompilation(
+        konst compilation = ExecutableCompilation(
             settings = testRunSettings,
             freeCompilerArgs = testCase.freeCompilerArgs,
             sourceModules = testCase.modules,

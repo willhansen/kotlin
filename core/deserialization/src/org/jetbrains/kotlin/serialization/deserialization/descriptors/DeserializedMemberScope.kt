@@ -39,20 +39,20 @@ import java.io.ByteArrayOutputStream
 import kotlin.collections.ArrayList
 
 abstract class DeserializedMemberScope protected constructor(
-    protected val c: DeserializationContext,
+    protected konst c: DeserializationContext,
     functionList: List<ProtoBuf.Function>,
     propertyList: List<ProtoBuf.Property>,
     typeAliasList: List<ProtoBuf.TypeAlias>,
     classNames: () -> Collection<Name>
 ) : MemberScopeImpl() {
 
-    private val impl: Implementation = createImplementation(functionList, propertyList, typeAliasList)
+    private konst impl: Implementation = createImplementation(functionList, propertyList, typeAliasList)
 
-    internal val classNames by c.storageManager.createLazyValue { classNames().toSet() }
+    internal konst classNames by c.storageManager.createLazyValue { classNames().toSet() }
 
 
-    private val classifierNamesLazy by c.storageManager.createNullableLazyValue {
-        val nonDeclaredNames = getNonDeclaredClassifierNames() ?: return@createNullableLazyValue null
+    private konst classifierNamesLazy by c.storageManager.createNullableLazyValue {
+        konst nonDeclaredNames = getNonDeclaredClassifierNames() ?: return@createNullableLazyValue null
         this.classNames + impl.typeAliasNames + nonDeclaredNames
     }
 
@@ -106,7 +106,7 @@ abstract class DeserializedMemberScope protected constructor(
     ): Collection<DeclarationDescriptor> {
         //NOTE: descriptors should be in the same order they were serialized in
         // see MemberComparator
-        val result = ArrayList<DeclarationDescriptor>(0)
+        konst result = ArrayList<DeclarationDescriptor>(0)
 
         if (kindFilter.acceptsKinds(DescriptorKindFilter.SINGLETON_CLASSIFIERS_MASK)) {
             addEnumEntryDescriptors(result, nameFilter)
@@ -199,9 +199,9 @@ abstract class DeserializedMemberScope protected constructor(
      * access to protected `getNonDeclared*` functions.
      */
     private interface Implementation {
-        val functionNames: Set<Name>
-        val variableNames: Set<Name>
-        val typeAliasNames: Set<Name>
+        konst functionNames: Set<Name>
+        konst variableNames: Set<Name>
+        konst typeAliasNames: Set<Name>
 
         fun getContributedFunctions(name: Name, location: LookupLocation): Collection<SimpleFunctionDescriptor>
         fun getContributedVariables(name: Name, location: LookupLocation): Collection<PropertyDescriptor>
@@ -230,11 +230,11 @@ abstract class DeserializedMemberScope protected constructor(
         propertyList: List<ProtoBuf.Property>,
         typeAliasList: List<ProtoBuf.TypeAlias>
     ) : Implementation {
-        private val functionProtosBytes = functionList.groupByName { it.name }.packToByteArray()
+        private konst functionProtosBytes = functionList.groupByName { it.name }.packToByteArray()
 
-        private val propertyProtosBytes = propertyList.groupByName { it.name }.packToByteArray()
+        private konst propertyProtosBytes = propertyList.groupByName { it.name }.packToByteArray()
 
-        private val typeAliasBytes =
+        private konst typeAliasBytes =
             if (c.components.configuration.typeAliasesAllowed)
                 typeAliasList.groupByName { it.name }.packToByteArray()
             else
@@ -242,27 +242,27 @@ abstract class DeserializedMemberScope protected constructor(
 
         private fun Map<Name, Collection<AbstractMessageLite>>.packToByteArray(): Map<Name, ByteArray> =
             mapValues { entry ->
-                val byteArrayOutputStream = ByteArrayOutputStream()
-                entry.value.map { proto -> proto.writeDelimitedTo(byteArrayOutputStream) }
+                konst byteArrayOutputStream = ByteArrayOutputStream()
+                entry.konstue.map { proto -> proto.writeDelimitedTo(byteArrayOutputStream) }
                 byteArrayOutputStream.toByteArray()
             }
 
-        private val functions =
+        private konst functions =
             c.storageManager.createMemoizedFunction<Name, Collection<SimpleFunctionDescriptor>> { computeFunctions(it) }
-        private val properties =
+        private konst properties =
             c.storageManager.createMemoizedFunction<Name, Collection<PropertyDescriptor>> { computeProperties(it) }
-        private val typeAliasByName =
+        private konst typeAliasByName =
             c.storageManager.createMemoizedFunctionWithNullableValues<Name, TypeAliasDescriptor> { createTypeAlias(it) }
 
-        override val functionNames by c.storageManager.createLazyValue {
+        override konst functionNames by c.storageManager.createLazyValue {
             functionProtosBytes.keys + getNonDeclaredFunctionNames()
         }
 
-        override val variableNames by c.storageManager.createLazyValue {
+        override konst variableNames by c.storageManager.createLazyValue {
             propertyProtosBytes.keys + getNonDeclaredVariableNames()
         }
 
-        override val typeAliasNames: Set<Name> get() = typeAliasBytes.keys
+        override konst typeAliasNames: Set<Name> get() = typeAliasBytes.keys
 
         private inline fun <M : MessageLite> Collection<M>.groupByName(
             getNameIndex: (M) -> Int
@@ -286,7 +286,7 @@ abstract class DeserializedMemberScope protected constructor(
         ): Collection<D> =
             computeDescriptors(
                 bytesByName[name]?.let {
-                    val inputStream = ByteArrayInputStream(it)
+                    konst inputStream = ByteArrayInputStream(it)
                     generateSequence {
                         parser.parseDelimitedFrom(inputStream, c.components.extensionRegistryLite)
                     }.toList()
@@ -300,7 +300,7 @@ abstract class DeserializedMemberScope protected constructor(
             factory: (M) -> D?,
             computeNonDeclared: (MutableList<D>) -> Unit
         ): Collection<D> {
-            val descriptors = protos.mapNotNullTo(ArrayList(protos.size), factory)
+            konst descriptors = protos.mapNotNullTo(ArrayList(protos.size), factory)
 
             computeNonDeclared(descriptors)
             return descriptors.compact()
@@ -316,8 +316,8 @@ abstract class DeserializedMemberScope protected constructor(
             )
 
         private fun createTypeAlias(name: Name): TypeAliasDescriptor? {
-            val byteArray = typeAliasBytes[name] ?: return null
-            val proto =
+            konst byteArray = typeAliasBytes[name] ?: return null
+            konst proto =
                 ProtoBuf.TypeAlias.parseDelimitedFrom(
                     ByteArrayInputStream(byteArray), c.components.extensionRegistryLite
                 ) ?: return null
@@ -367,7 +367,7 @@ abstract class DeserializedMemberScope protected constructor(
             result: MutableCollection<DeclarationDescriptor>,
             descriptorsByName: (Name) -> Collection<DeclarationDescriptor>
         ) {
-            val subResult = ArrayList<DeclarationDescriptor>()
+            konst subResult = ArrayList<DeclarationDescriptor>()
             for (name in names) {
                 if (nameFilter(name)) {
                     subResult.addAll(descriptorsByName(name))
@@ -386,46 +386,46 @@ abstract class DeserializedMemberScope protected constructor(
      * and the declared members will be added to decompiled text in the proper (i.e. original) order.
      */
     private inner class NoReorderImplementation(
-        private val functionList: List<ProtoBuf.Function>,
-        private val propertyList: List<ProtoBuf.Property>,
+        private konst functionList: List<ProtoBuf.Function>,
+        private konst propertyList: List<ProtoBuf.Property>,
         typeAliasList: List<ProtoBuf.TypeAlias>
     ) : Implementation {
 
-        private val typeAliasList = if (c.components.configuration.typeAliasesAllowed) typeAliasList else emptyList()
+        private konst typeAliasList = if (c.components.configuration.typeAliasesAllowed) typeAliasList else emptyList()
 
-        private val declaredFunctions: List<SimpleFunctionDescriptor>
+        private konst declaredFunctions: List<SimpleFunctionDescriptor>
                 by c.storageManager.createLazyValue { computeFunctions() }
 
-        private val declaredProperties: List<PropertyDescriptor>
+        private konst declaredProperties: List<PropertyDescriptor>
                 by c.storageManager.createLazyValue { computeProperties() }
 
-        private val allTypeAliases: List<TypeAliasDescriptor>
+        private konst allTypeAliases: List<TypeAliasDescriptor>
                 by c.storageManager.createLazyValue { computeTypeAliases() }
 
-        private val allFunctions: List<SimpleFunctionDescriptor>
+        private konst allFunctions: List<SimpleFunctionDescriptor>
                 by c.storageManager.createLazyValue { declaredFunctions + computeAllNonDeclaredFunctions() }
 
-        private val allProperties: List<PropertyDescriptor>
+        private konst allProperties: List<PropertyDescriptor>
                 by c.storageManager.createLazyValue { declaredProperties + computeAllNonDeclaredProperties() }
 
-        private val typeAliasesByName: Map<Name, TypeAliasDescriptor>
+        private konst typeAliasesByName: Map<Name, TypeAliasDescriptor>
                 by c.storageManager.createLazyValue { allTypeAliases.associateBy { it.name } }
 
-        private val functionsByName: Map<Name, Collection<SimpleFunctionDescriptor>>
+        private konst functionsByName: Map<Name, Collection<SimpleFunctionDescriptor>>
                 by c.storageManager.createLazyValue { allFunctions.groupBy { it.name } }
 
-        private val propertiesByName: Map<Name, Collection<PropertyDescriptor>>
+        private konst propertiesByName: Map<Name, Collection<PropertyDescriptor>>
                 by c.storageManager.createLazyValue { allProperties.groupBy { it.name } }
 
-        override val functionNames by c.storageManager.createLazyValue {
+        override konst functionNames by c.storageManager.createLazyValue {
             functionList.mapToNames { it.name } + getNonDeclaredFunctionNames()
         }
 
-        override val variableNames by c.storageManager.createLazyValue {
+        override konst variableNames by c.storageManager.createLazyValue {
             propertyList.mapToNames { it.name } + getNonDeclaredVariableNames()
         }
 
-        override val typeAliasNames: Set<Name>
+        override konst typeAliasNames: Set<Name>
             get() = typeAliasList.mapToNames { it.name }
 
         private fun computeFunctions(): List<SimpleFunctionDescriptor> =
@@ -489,8 +489,8 @@ abstract class DeserializedMemberScope protected constructor(
             declaredDescriptors: List<T>,
             computeNonDeclared: (Name, MutableList<T>) -> Unit
         ): List<T> {
-            val declaredDescriptorsWithSameName = declaredDescriptors.filterTo(mutableListOf()) { it.name == name }
-            val nonDeclaredPropertiesStartIndex = declaredDescriptorsWithSameName.size
+            konst declaredDescriptorsWithSameName = declaredDescriptors.filterTo(mutableListOf()) { it.name == name }
+            konst nonDeclaredPropertiesStartIndex = declaredDescriptorsWithSameName.size
 
             computeNonDeclared(name, declaredDescriptorsWithSameName)
 

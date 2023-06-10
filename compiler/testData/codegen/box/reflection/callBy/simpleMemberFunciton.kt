@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 // WITH_REFLECT
 
-class A(val result: String = "OK") {
+class A(konst result: String = "OK") {
     fun foo(x: Int = 42): String {
         assert(x == 42) { x }
         return result

@@ -7,8 +7,8 @@ repositories {
     mavenCentral()
 }
 
-val disambiguation1Attribute = Attribute.of("myDisambiguation1Attribute", String::class.java)
-val disambiguation2Attribute = Attribute.of("myDisambiguation2Attribute", String::class.java)
+konst disambiguation1Attribute = Attribute.of("myDisambiguation1Attribute", String::class.java)
+konst disambiguation2Attribute = Attribute.of("myDisambiguation2Attribute", String::class.java)
 
 kotlin {
     sourceSets["commonMain"].apply {

@@ -9,7 +9,7 @@ public class MyAnnoClass implements MyAnnotation {
 
 // FILE: main.kt
 
-val ann: MyAnnotation = MyAnnoClass()
+konst ann: MyAnnotation = MyAnnoClass()
 
 fun foo(x: MyAnnoClass) {
     bar(x)

@@ -9,7 +9,7 @@ fun test(z: Int, c: Char) {}
 open class <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>A<!> {
     open fun rest(s: String) {}
 
-    open val u = 20
+    open konst u = 20
 }
 
 class <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>A<!> {
@@ -23,18 +23,18 @@ class <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>B<!> : <!FINAL_SUPERTYPE, SUPERTYPE
 
     fun rest(l: Long) {}
 
-    <!NOTHING_TO_OVERRIDE!>override<!> val u = 310
+    <!NOTHING_TO_OVERRIDE!>override<!> konst u = 310
 }
 
 interface <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>B<!>
 
 enum class <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>B<!>
 
-val <!REDECLARATION!>u<!> = 10
-val <!REDECLARATION!>u<!> = 20
+konst <!REDECLARATION!>u<!> = 10
+konst <!REDECLARATION!>u<!> = 20
 
-val <!SYNTAX!>(a,b)<!> = 30 to 40
-val <!SYNTAX!>(c,d)<!> = 50 to 60
+konst <!SYNTAX!>(a,b)<!> = 30 to 40
+konst <!SYNTAX!>(c,d)<!> = 50 to 60
 
 typealias <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>TA<!> = A
 typealias <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>TA<!> = B
@@ -53,7 +53,7 @@ fun lol(a: Array<Boolean>) {}
 
 class M {
     companion <!REDECLARATION!>object<!> {}
-    val <!REDECLARATION!>Companion<!> = object : Any() {}
+    konst <!REDECLARATION!>Companion<!> = object : Any() {}
 }
 
 fun B.foo() {}

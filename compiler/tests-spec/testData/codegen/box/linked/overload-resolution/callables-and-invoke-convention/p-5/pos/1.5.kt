@@ -17,7 +17,7 @@ fun foo() { fooFun = true }
 
 //property-like (II prio)
 var isMarker = false
-val foo: Marker = object : Marker {}
+konst foo: Marker = object : Marker {}
 interface Marker {
     operator fun invoke() { isMarker = true }
 }

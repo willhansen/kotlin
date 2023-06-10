@@ -14,10 +14,10 @@ import java.io.File
 
 internal interface TaskWithLocalState : Task {
     @get:Internal
-    val localStateDirectories: ConfigurableFileCollection
+    konst localStateDirectories: ConfigurableFileCollection
 
     @get:Internal
-    val metrics: Property<BuildMetricsReporter>
+    konst metrics: Property<BuildMetricsReporter>
 }
 
 internal fun TaskWithLocalState.allOutputFiles(): List<File> =

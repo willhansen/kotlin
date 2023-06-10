@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.psi.KtNamedDeclaration
 
 
 object PsiPositioningStrategies {
-    val UNREACHABLE_CODE = object : PositioningStrategy<PsiElement>() {
+    konst UNREACHABLE_CODE = object : PositioningStrategy<PsiElement>() {
         override fun markDiagnostic(diagnostic: DiagnosticMarker): List<TextRange> {
             //todo it is better to implement arguments extraction in KtDiagnosticFactory, but kotlin struggle with checking types in it atm
             @Suppress("UNCHECKED_CAST")
-            val typed = diagnostic as KtDiagnosticWithParameters2<Set<KtSourceElement>, Set<KtSourceElement>>
-            val source = diagnostic.element as KtPsiSourceElement
+            konst typed = diagnostic as KtDiagnosticWithParameters2<Set<KtSourceElement>, Set<KtSourceElement>>
+            konst source = diagnostic.element as KtPsiSourceElement
             return UnreachableCode.getUnreachableTextRanges(
                 source.psi as KtElement,
                 typed.a.mapNotNull { it.psi as? KtElement }.toSet(),
@@ -30,10 +30,10 @@ object PsiPositioningStrategies {
         }
     }
 
-    val ACTUAL_DECLARATION_NAME = object : PositioningStrategy<PsiElement>() {
+    konst ACTUAL_DECLARATION_NAME = object : PositioningStrategy<PsiElement>() {
         override fun markDiagnostic(diagnostic: DiagnosticMarker): List<TextRange> {
             require(diagnostic is KtDiagnostic)
-            val element = diagnostic.element.psi ?: return emptyList()
+            konst element = diagnostic.element.psi ?: return emptyList()
             (element as? KtNamedDeclaration)?.nameIdentifier?.let { nameIdentifier ->
                 return mark(nameIdentifier)
             }

@@ -6,14 +6,14 @@ FILE: metaSerializable.kt
 
     }
     @R|kotlinx/serialization/MetaSerializable|() @R|kotlin/annotation/Target|(allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.CLASS|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY|)) public final annotation class MySerializableWithInfo : R|kotlin/Annotation| {
-        public constructor(value: R|kotlin/Int|, kclass: R|kotlin/reflect/KClass<*>|): R|MySerializableWithInfo| {
+        public constructor(konstue: R|kotlin/Int|, kclass: R|kotlin/reflect/KClass<*>|): R|MySerializableWithInfo| {
             super<R|kotlin/Any|>()
         }
 
-        public final val value: R|kotlin/Int| = R|<local>/value|
+        public final konst konstue: R|kotlin/Int| = R|<local>/konstue|
             public get(): R|kotlin/Int|
 
-        public final val kclass: R|kotlin/reflect/KClass<*>| = R|<local>/kclass|
+        public final konst kclass: R|kotlin/reflect/KClass<*>| = R|<local>/kclass|
             public get(): R|kotlin/reflect/KClass<*>|
 
     }
@@ -22,10 +22,10 @@ FILE: metaSerializable.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val name: R|kotlin/String| = R|<local>/name|
+        public final konst name: R|kotlin/String| = R|<local>/name|
             public get(): R|kotlin/String|
 
-        public final val language: R|kotlin/String| = R|<local>/language|
+        public final konst language: R|kotlin/String| = R|<local>/language|
             public get(): R|kotlin/String|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -38,11 +38,11 @@ FILE: metaSerializable.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<Project1>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Project1|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Project1|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Project1|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -54,15 +54,15 @@ FILE: metaSerializable.kt
         }
 
     }
-    @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class Project2 : R|kotlin/Any| {
+    @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class Project2 : R|kotlin/Any| {
         public constructor(name: R|kotlin/String|, language: R|kotlin/String|): R|Project2| {
             super<R|kotlin/Any|>()
         }
 
-        public final val name: R|kotlin/String| = R|<local>/name|
+        public final konst name: R|kotlin/String| = R|<local>/name|
             public get(): R|kotlin/String|
 
-        public final val language: R|kotlin/String| = R|<local>/language|
+        public final konst language: R|kotlin/String| = R|<local>/language|
             public get(): R|kotlin/String|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -75,11 +75,11 @@ FILE: metaSerializable.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<Project2>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Project2|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Project2|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Project2|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -96,7 +96,7 @@ FILE: metaSerializable.kt
             super<R|kotlin/Any|>()
         }
 
-        @R|MySerializableWithInfo|(value = Int(234), kclass = <getClass>(Q|kotlin/Int|)) public final val project: R|Project2| = R|<local>/project|
+        @R|MySerializableWithInfo|(konstue = Int(234), kclass = <getClass>(Q|kotlin/Int|)) public final konst project: R|Project2| = R|<local>/project|
             public get(): R|Project2|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -109,11 +109,11 @@ FILE: metaSerializable.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<Wrapper>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Wrapper|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Wrapper|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Wrapper|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -125,15 +125,15 @@ FILE: metaSerializable.kt
         }
 
     }
-    @R|kotlinx/serialization/Serializable|() @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class Project3 : R|kotlin/Any| {
+    @R|kotlinx/serialization/Serializable|() @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class Project3 : R|kotlin/Any| {
         public constructor(name: R|kotlin/String|, language: R|kotlin/String|): R|Project3| {
             super<R|kotlin/Any|>()
         }
 
-        public final val name: R|kotlin/String| = R|<local>/name|
+        public final konst name: R|kotlin/String| = R|<local>/name|
             public get(): R|kotlin/String|
 
-        public final val language: R|kotlin/String| = R|<local>/language|
+        public final konst language: R|kotlin/String| = R|<local>/language|
             public get(): R|kotlin/String|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -146,11 +146,11 @@ FILE: metaSerializable.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<Project3>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Project3|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Project3|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Project3|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -162,15 +162,15 @@ FILE: metaSerializable.kt
         }
 
     }
-    @R|kotlinx/serialization/Serializable|(with = <getClass>(Q|MySerializer|)) @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class Project4 : R|kotlin/Any| {
+    @R|kotlinx/serialization/Serializable|(with = <getClass>(Q|MySerializer|)) @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class Project4 : R|kotlin/Any| {
         public constructor(name: R|kotlin/String|, language: R|kotlin/String|): R|Project4| {
             super<R|kotlin/Any|>()
         }
 
-        public final val name: R|kotlin/String| = R|<local>/name|
+        public final konst name: R|kotlin/String| = R|<local>/name|
             public get(): R|kotlin/String|
 
-        public final val language: R|kotlin/String| = R|<local>/language|
+        public final konst language: R|kotlin/String| = R|<local>/language|
             public get(): R|kotlin/String|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -183,17 +183,17 @@ FILE: metaSerializable.kt
         }
 
     }
-    @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public sealed class TestSealed : R|kotlin/Any| {
+    @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public sealed class TestSealed : R|kotlin/Any| {
         protected constructor(): R|TestSealed| {
             super<R|kotlin/Any|>()
         }
 
-        @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class A : R|TestSealed| {
-            public constructor(value1: R|kotlin/String|): R|TestSealed.A| {
+        @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class A : R|TestSealed| {
+            public constructor(konstue1: R|kotlin/String|): R|TestSealed.A| {
                 super<R|TestSealed|>()
             }
 
-            public final val value1: R|kotlin/String| = R|<local>/value1|
+            public final konst konstue1: R|kotlin/String| = R|<local>/konstue1|
                 public get(): R|kotlin/String|
 
             public final companion object Companion : R|kotlin/Any| {
@@ -206,11 +206,11 @@ FILE: metaSerializable.kt
             }
 
             public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<TestSealed.A>| {
-                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|TestSealed.A|): R|kotlin/Unit|
+                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|TestSealed.A|): R|kotlin/Unit|
 
                 public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|TestSealed.A|
 
-                public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+                public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                     public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
                 public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -223,12 +223,12 @@ FILE: metaSerializable.kt
 
         }
 
-        @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class B : R|TestSealed| {
-            public constructor(value2: R|kotlin/String|): R|TestSealed.B| {
+        @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class B : R|TestSealed| {
+            public constructor(konstue2: R|kotlin/String|): R|TestSealed.B| {
                 super<R|TestSealed|>()
             }
 
-            public final val value2: R|kotlin/String| = R|<local>/value2|
+            public final konst konstue2: R|kotlin/String| = R|<local>/konstue2|
                 public get(): R|kotlin/String|
 
             public final companion object Companion : R|kotlin/Any| {
@@ -241,11 +241,11 @@ FILE: metaSerializable.kt
             }
 
             public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<TestSealed.B>| {
-                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|TestSealed.B|): R|kotlin/Unit|
+                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|TestSealed.B|): R|kotlin/Unit|
 
                 public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|TestSealed.B|
 
-                public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+                public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                     public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
                 public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -273,12 +273,12 @@ FILE: metaSerializable.kt
             super<R|kotlin/Any|>()
         }
 
-        @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class A : R|TestSealed| {
-            public constructor(value1: R|kotlin/String|): R|TestAbstract.A| {
+        @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class A : R|TestSealed| {
+            public constructor(konstue1: R|kotlin/String|): R|TestAbstract.A| {
                 super<R|TestSealed|>()
             }
 
-            public final val value1: R|kotlin/String| = R|<local>/value1|
+            public final konst konstue1: R|kotlin/String| = R|<local>/konstue1|
                 public get(): R|kotlin/String|
 
             public final companion object Companion : R|kotlin/Any| {
@@ -291,11 +291,11 @@ FILE: metaSerializable.kt
             }
 
             public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<TestAbstract.A>| {
-                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|TestAbstract.A|): R|kotlin/Unit|
+                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|TestAbstract.A|): R|kotlin/Unit|
 
                 public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|TestAbstract.A|
 
-                public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+                public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                     public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
                 public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -308,12 +308,12 @@ FILE: metaSerializable.kt
 
         }
 
-        @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class B : R|TestSealed| {
-            public constructor(value2: R|kotlin/String|): R|TestAbstract.B| {
+        @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final class B : R|TestSealed| {
+            public constructor(konstue2: R|kotlin/String|): R|TestAbstract.B| {
                 super<R|TestSealed|>()
             }
 
-            public final val value2: R|kotlin/String| = R|<local>/value2|
+            public final konst konstue2: R|kotlin/String| = R|<local>/konstue2|
                 public get(): R|kotlin/String|
 
             public final companion object Companion : R|kotlin/Any| {
@@ -326,11 +326,11 @@ FILE: metaSerializable.kt
             }
 
             public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<TestAbstract.B>| {
-                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|TestAbstract.B|): R|kotlin/Unit|
+                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|TestAbstract.B|): R|kotlin/Unit|
 
                 public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|TestAbstract.B|
 
-                public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+                public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                     public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
                 public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -353,20 +353,20 @@ FILE: metaSerializable.kt
         }
 
     }
-    @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final enum class TestEnum : R|kotlin/Enum<TestEnum>| {
+    @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final enum class TestEnum : R|kotlin/Enum<TestEnum>| {
         private constructor(): R|TestEnum| {
             super<R|kotlin/Enum<TestEnum>|>()
         }
 
         public final static enum entry Value1: R|TestEnum|
         public final static enum entry Value2: R|TestEnum|
-        public final static fun values(): R|kotlin/Array<TestEnum>| {
+        public final static fun konstues(): R|kotlin/Array<TestEnum>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|TestEnum| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|TestEnum| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<TestEnum>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<TestEnum>|
             public get(): R|kotlin/enums/EnumEntries<TestEnum>|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -379,11 +379,11 @@ FILE: metaSerializable.kt
         }
 
         public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<TestEnum>| {
-            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|TestEnum|): R|kotlin/Unit|
+            public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|TestEnum|): R|kotlin/Unit|
 
             public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|TestEnum|
 
-            public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+            public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                 public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
             public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -395,7 +395,7 @@ FILE: metaSerializable.kt
         }
 
     }
-    @R|MySerializableWithInfo|(value = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final object TestObject : R|kotlin/Any| {
+    @R|MySerializableWithInfo|(konstue = Int(123), kclass = <getClass>(Q|kotlin/String|)) public final object TestObject : R|kotlin/Any| {
         private constructor(): R|TestObject| {
             super<R|kotlin/Any|>()
         }
@@ -408,94 +408,94 @@ FILE: metaSerializable.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor| = R|kotlinx/serialization/descriptors/PrimitiveSerialDescriptor|(String(Project4), Q|kotlinx/serialization/descriptors/PrimitiveKind.STRING|)
+        public open override konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor| = R|kotlinx/serialization/descriptors/PrimitiveSerialDescriptor|(String(Project4), Q|kotlinx/serialization/descriptors/PrimitiveKind.STRING|)
             public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
-        public open override fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Project4|): R|kotlin/Unit| {
-            ^serialize R|<local>/encoder|.R|kotlinx/serialization/encoding/Encoder.encodeString|(<strcat>(R|<local>/value|.R|/Project4.name|, String(:), R|<local>/value|.R|/Project4.language|))
+        public open override fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Project4|): R|kotlin/Unit| {
+            ^serialize R|<local>/encoder|.R|kotlinx/serialization/encoding/Encoder.encodeString|(<strcat>(R|<local>/konstue|.R|/Project4.name|, String(:), R|<local>/konstue|.R|/Project4.language|))
         }
 
         public open override fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Project4| {
-            lval params: R|kotlin/collections/List<kotlin/String>| = R|<local>/decoder|.R|kotlinx/serialization/encoding/Decoder.decodeString|().R|kotlin/text/split|(vararg(Char(:)))
+            lkonst params: R|kotlin/collections/List<kotlin/String>| = R|<local>/decoder|.R|kotlinx/serialization/encoding/Decoder.decodeString|().R|kotlin/text/split|(vararg(Char(:)))
             ^deserialize R|/Project4.Project4|(R|<local>/params|.R|SubstitutionOverride<kotlin/collections/List.get: R|kotlin/String|>|(Int(0)), R|<local>/params|.R|SubstitutionOverride<kotlin/collections/List.get: R|kotlin/String|>|(Int(1)))
         }
 
     }
     public final fun testMetaSerializable(): R|kotlin/Unit| {
-        lval string: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Project1|>(Q|Project1|.R|/Project1.Companion.serializer|(), R|/Project1.Project1|(String(name), String(lang)))
+        lkonst string: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Project1|>(Q|Project1|.R|/Project1.Companion.serializer|(), R|/Project1.Project1|(String(name), String(lang)))
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String({"name":"name","language":"lang"}), R|<local>/string|)
-        lval reconstructed: R|Project1| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Project1|>(Q|Project1|.R|/Project1.Companion.serializer|(), R|<local>/string|)
+        lkonst reconstructed: R|Project1| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Project1|>(Q|Project1|.R|/Project1.Companion.serializer|(), R|<local>/string|)
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(name), R|<local>/reconstructed|.R|/Project1.name|)
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(lang), R|<local>/reconstructed|.R|/Project1.language|)
     }
     public final fun testMetaSerializableWithInfo(): R|kotlin/Unit| {
-        lval string: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Project2|>(Q|Project2|.R|/Project2.Companion.serializer|(), R|/Project2.Project2|(String(name), String(lang)))
+        lkonst string: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Project2|>(Q|Project2|.R|/Project2.Companion.serializer|(), R|/Project2.Project2|(String(name), String(lang)))
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String({"name":"name","language":"lang"}), R|<local>/string|)
-        lval reconstructed: R|Project2| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Project2|>(Q|Project2|.R|/Project2.Companion.serializer|(), R|<local>/string|)
+        lkonst reconstructed: R|Project2| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Project2|>(Q|Project2|.R|/Project2.Companion.serializer|(), R|<local>/string|)
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(name), R|<local>/reconstructed|.R|/Project2.name|)
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(lang), R|<local>/reconstructed|.R|/Project2.language|)
-        lval info: R|MySerializableWithInfo| = Q|Project2|.R|/Project2.Companion.serializer|().R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/info|.R|/MySerializableWithInfo.value|)
+        lkonst info: R|MySerializableWithInfo| = Q|Project2|.R|/Project2.Companion.serializer|().R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/info|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/String|), R|<local>/info|.R|/MySerializableWithInfo.kclass|)
     }
     public final fun testMetaSerializableOnProperty(): R|kotlin/Unit| {
-        lval info: R|MySerializableWithInfo| = Q|Wrapper|.R|/Wrapper.Companion.serializer|().R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.getElementAnnotations|(Int(0)).R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(234), R|<local>/info|.R|/MySerializableWithInfo.value|)
+        lkonst info: R|MySerializableWithInfo| = Q|Wrapper|.R|/Wrapper.Companion.serializer|().R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.getElementAnnotations|(Int(0)).R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(234), R|<local>/info|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/Int|), R|<local>/info|.R|/MySerializableWithInfo.kclass|)
     }
     public final fun testSerializableAndMetaAnnotation(): R|kotlin/Unit| {
-        lval string: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Project3|>(Q|Project3|.R|/Project3.Companion.serializer|(), R|/Project3.Project3|(String(name), String(lang)))
+        lkonst string: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Project3|>(Q|Project3|.R|/Project3.Companion.serializer|(), R|/Project3.Project3|(String(name), String(lang)))
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String({"name":"name","language":"lang"}), R|<local>/string|)
-        lval reconstructed: R|Project3| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Project3|>(Q|Project3|.R|/Project3.Companion.serializer|(), R|<local>/string|)
+        lkonst reconstructed: R|Project3| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Project3|>(Q|Project3|.R|/Project3.Companion.serializer|(), R|<local>/string|)
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(name), R|<local>/reconstructed|.R|/Project3.name|)
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(lang), R|<local>/reconstructed|.R|/Project3.language|)
-        lval info: R|MySerializableWithInfo| = Q|Project3|.R|/Project3.Companion.serializer|().R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/info|.R|/MySerializableWithInfo.value|)
+        lkonst info: R|MySerializableWithInfo| = Q|Project3|.R|/Project3.Companion.serializer|().R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/info|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/String|), R|<local>/info|.R|/MySerializableWithInfo.kclass|)
     }
     public final fun testCustomSerializerAndMetaAnnotation(): R|kotlin/Unit| {
-        lval string: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Project4|>(Q|Project4|.R|/Project4.Companion.serializer|(), R|/Project4.Project4|(String(name), String(lang)))
+        lkonst string: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|Project4|>(Q|Project4|.R|/Project4.Companion.serializer|(), R|/Project4.Project4|(String(name), String(lang)))
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(name:lang), R|<local>/string|)
-        lval reconstructed: R|Project4| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Project4|>(Q|Project4|.R|/Project4.Companion.serializer|(), R|<local>/string|)
+        lkonst reconstructed: R|Project4| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|Project4|>(Q|Project4|.R|/Project4.Companion.serializer|(), R|<local>/string|)
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(name), R|<local>/reconstructed|.R|/Project4.name|)
         R|kotlin/test/assertEquals|<R|kotlin/String|>(String(lang), R|<local>/reconstructed|.R|/Project4.language|)
     }
     public final fun testSealed(): R|kotlin/Unit| {
-        lval serializerA: R|kotlinx/serialization/KSerializer<TestSealed.A>| = Q|TestSealed.A|.R|/TestSealed.A.Companion.serializer|()
-        lval serializerB: R|kotlinx/serialization/KSerializer<TestSealed.B>| = Q|TestSealed.B|.R|/TestSealed.B.Companion.serializer|()
+        lkonst serializerA: R|kotlinx/serialization/KSerializer<TestSealed.A>| = Q|TestSealed.A|.R|/TestSealed.A.Companion.serializer|()
+        lkonst serializerB: R|kotlinx/serialization/KSerializer<TestSealed.B>| = Q|TestSealed.B|.R|/TestSealed.B.Companion.serializer|()
         R|kotlin/test/assertNotNull|<R|kotlinx/serialization/KSerializer<TestSealed.A>|>(R|<local>/serializerA|)
         R|kotlin/test/assertNotNull|<R|kotlinx/serialization/KSerializer<TestSealed.B>|>(R|<local>/serializerB|)
-        lval infoA: R|MySerializableWithInfo| = R|<local>/serializerA|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        lval infoB: R|MySerializableWithInfo| = R|<local>/serializerB|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/infoA|.R|/MySerializableWithInfo.value|)
+        lkonst infoA: R|MySerializableWithInfo| = R|<local>/serializerA|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        lkonst infoB: R|MySerializableWithInfo| = R|<local>/serializerB|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/infoA|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/String|), R|<local>/infoA|.R|/MySerializableWithInfo.kclass|)
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/infoB|.R|/MySerializableWithInfo.value|)
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/infoB|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/String|), R|<local>/infoB|.R|/MySerializableWithInfo.kclass|)
     }
     public final fun testAbstract(): R|kotlin/Unit| {
-        lval serializerA: R|kotlinx/serialization/KSerializer<TestAbstract.A>| = Q|TestAbstract.A|.R|/TestAbstract.A.Companion.serializer|()
-        lval serializerB: R|kotlinx/serialization/KSerializer<TestAbstract.B>| = Q|TestAbstract.B|.R|/TestAbstract.B.Companion.serializer|()
+        lkonst serializerA: R|kotlinx/serialization/KSerializer<TestAbstract.A>| = Q|TestAbstract.A|.R|/TestAbstract.A.Companion.serializer|()
+        lkonst serializerB: R|kotlinx/serialization/KSerializer<TestAbstract.B>| = Q|TestAbstract.B|.R|/TestAbstract.B.Companion.serializer|()
         R|kotlin/test/assertNotNull|<R|kotlinx/serialization/KSerializer<TestAbstract.A>|>(R|<local>/serializerA|)
         R|kotlin/test/assertNotNull|<R|kotlinx/serialization/KSerializer<TestAbstract.B>|>(R|<local>/serializerB|)
-        lval infoA: R|MySerializableWithInfo| = R|<local>/serializerA|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        lval infoB: R|MySerializableWithInfo| = R|<local>/serializerB|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/infoA|.R|/MySerializableWithInfo.value|)
+        lkonst infoA: R|MySerializableWithInfo| = R|<local>/serializerA|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        lkonst infoB: R|MySerializableWithInfo| = R|<local>/serializerB|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/infoA|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/String|), R|<local>/infoA|.R|/MySerializableWithInfo.kclass|)
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/infoB|.R|/MySerializableWithInfo.value|)
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/infoB|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/String|), R|<local>/infoB|.R|/MySerializableWithInfo.kclass|)
     }
     public final fun testEnum(): R|kotlin/Unit| {
-        lval serializer: R|kotlinx/serialization/KSerializer<TestEnum>| = Q|TestEnum|.R|/TestEnum.Companion.serializer|()
+        lkonst serializer: R|kotlinx/serialization/KSerializer<TestEnum>| = Q|TestEnum|.R|/TestEnum.Companion.serializer|()
         R|kotlin/test/assertNotNull|<R|kotlinx/serialization/KSerializer<TestEnum>|>(R|<local>/serializer|)
-        lval info: R|MySerializableWithInfo| = R|<local>/serializer|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/info|.R|/MySerializableWithInfo.value|)
+        lkonst info: R|MySerializableWithInfo| = R|<local>/serializer|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/info|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/String|), R|<local>/info|.R|/MySerializableWithInfo.kclass|)
     }
     public final fun testObject(): R|kotlin/Unit| {
-        lval serializer: R|kotlinx/serialization/KSerializer<TestObject>| = Q|TestObject|.R|/TestObject.serializer|()
+        lkonst serializer: R|kotlinx/serialization/KSerializer<TestObject>| = Q|TestObject|.R|/TestObject.serializer|()
         R|kotlin/test/assertNotNull|<R|kotlinx/serialization/KSerializer<TestObject>|>(R|<local>/serializer|)
-        lval info: R|MySerializableWithInfo| = R|<local>/serializer|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
-        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/info|.R|/MySerializableWithInfo.value|)
+        lkonst info: R|MySerializableWithInfo| = R|<local>/serializer|.R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlinx/serialization/descriptors/SerialDescriptor.annotations|.R|kotlin/collections/filterIsInstance|<R|MySerializableWithInfo|>().R|kotlin/collections/first|<R|MySerializableWithInfo|>()
+        R|kotlin/test/assertEquals|<R|kotlin/Int|>(Int(123), R|<local>/info|.R|/MySerializableWithInfo.konstue|)
         R|kotlin/test/assertEquals|<R|kotlin/reflect/KClass<out kotlin/Any>|>(<getClass>(Q|kotlin/String|), R|<local>/info|.R|/MySerializableWithInfo.kclass|)
     }
     public final fun box(): R|kotlin/String| {

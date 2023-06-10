@@ -233,7 +233,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
 
                 configurations.each { config ->
                 	config.dependencies.addAllLater(
-                        project.objects.listProperty(Dependency.class).value(
+                        project.objects.listProperty(Dependency.class).konstue(
                             project.provider {
                 		        throw new Throwable("Dependency resolved in ${'$'}{config.name}!")
                 	        }
@@ -269,7 +269,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
 
                 configurations.each { config ->
                 	config.dependencies.addAllLater(
-                        project.objects.listProperty(Dependency.class).value(
+                        project.objects.listProperty(Dependency.class).konstue(
                             project.provider {
                 		        throw new Throwable("Dependency resolved in ${'$'}{config.name}!")
                 	        }
@@ -442,7 +442,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
             buildGradle.appendText("""${'\n'}dependencies { "testImplementation"("$kotlinTestMultiplatformDependency") }""")
             buildGradle.appendText("\n(tasks.getByName(\"test\") as Test).${testFramework.first}")
 
-            val expectedModule = "kotlin-test-${testFramework.second}-"
+            konst expectedModule = "kotlin-test-${testFramework.second}-"
             checkTaskCompileClasspath(
                 "compileTestKotlin",
                 listOf(expectedModule),
@@ -465,7 +465,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
             buildGradleKts.appendText("""${'\n'}dependencies { "jvmAndJsTestImplementation"("$kotlinTestMultiplatformDependency") }""")
             buildGradleKts.appendText("\n(tasks.getByName(\"jvmTest\") as Test).${testFramework.first}")
 
-            val expectedModule = "kotlin-test-${testFramework.second}-"
+            konst expectedModule = "kotlin-test-${testFramework.second}-"
             checkTaskCompileClasspath(
                 "compileTestKotlinJvm",
                 listOf(expectedModule),
@@ -489,7 +489,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
             buildGradleKts.appendText("""${'\n'}dependencies { "commonTestImplementation"("$kotlinTestMultiplatformDependency") }""")
             buildGradleKts.appendText("\n(tasks.getByName(\"jvmTest\") as Test).${testFramework.first}")
 
-            val expectedModule = "kotlin-test-${testFramework.second}-"
+            konst expectedModule = "kotlin-test-${testFramework.second}-"
             checkTaskCompileClasspath(
                 "compileTestKotlinJvm",
                 listOf(expectedModule),
@@ -515,7 +515,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
             )
             checkTaskCompileClasspath("compileTestKotlin", checkModulesNotInClasspath = listOf("kotlin-test"))
 
-            // Add it back after removal:
+            // Add it back after remokonst:
             buildGradle.appendText(
                 """
                 
@@ -532,7 +532,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
     fun testCoreLibraryVersionsDsl(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
             removeDependencies(buildGradle)
-            val customVersion = TestVersions.Kotlin.STABLE_RELEASE
+            konst customVersion = TestVersions.Kotlin.STABLE_RELEASE
             buildGradle.appendText(
                 """
                 
@@ -586,7 +586,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
         filesExpectedByConfiguration: Map<String, List<String>> = emptyMap(),
         isBuildGradleKts: Boolean = false
     ) {
-        val buildFile = if (isBuildGradleKts) buildGradleKts else buildGradle
+        konst buildFile = if (isBuildGradleKts) buildGradleKts else buildGradle
         removeDependencies(buildFile)
         buildFile.appendText(
             configurationsToAddDependency.joinToString("\n", "\n") { configuration ->
@@ -594,7 +594,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
             }
         )
         classpathElementsExpectedByTask.forEach { (task, expected) ->
-            val (notInClasspath, inClasspath) = expected.partition { it.startsWith("!") }
+            konst (notInClasspath, inClasspath) = expected.partition { it.startsWith("!") }
             checkTaskCompileClasspath(
                 task,
                 inClasspath,
@@ -603,7 +603,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
             )
         }
         filesExpectedByConfiguration.forEach { (configuration, expected) ->
-            val (notInItems, inItems) = expected.partition { it.startsWith("!") }
+            konst (notInItems, inItems) = expected.partition { it.startsWith("!") }
             checkConfigurationContent(
                 configuration,
                 inItems,
@@ -619,7 +619,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
         checkModulesNotInResolutionResult: List<String> = emptyList(),
         isBuildGradleKts: Boolean
     ) {
-        val expression = """configurations["$configurationName"].toList()"""
+        konst expression = """configurations["$configurationName"].toList()"""
         checkPrintedItems(
             null,
             configurationName,
@@ -636,14 +636,14 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
         checkModulesNotInClasspath: List<String> = emptyList(),
         isBuildGradleKts: Boolean = false
     ) {
-        val subproject = taskPath.substringBeforeLast(":").takeIf { it.isNotEmpty() && it != taskPath }
-        val taskName = taskPath.removePrefix(subproject.orEmpty())
-        val taskClass = if (isBuildGradleKts) {
+        konst subproject = taskPath.substringBeforeLast(":").takeIf { it.isNotEmpty() && it != taskPath }
+        konst taskName = taskPath.removePrefix(subproject.orEmpty())
+        konst taskClass = if (isBuildGradleKts) {
             "org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool<*>"
         } else {
             "org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool<?>"
         }
-        val expression = """(tasks.getByName("$taskName") as $taskClass).libraries.toList()"""
+        konst expression = """(tasks.getByName("$taskName") as $taskClass).libraries.toList()"""
         checkPrintedItems(subproject, taskPath, expression, checkModulesInClasspath, checkModulesNotInClasspath, isBuildGradleKts)
     }
 
@@ -655,8 +655,8 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
         checkNoItemContains: List<String>,
         isBuildGradleKts: Boolean
     ) {
-        val printingTaskName = "printItems${UUID.randomUUID()}"
-        val buildFile = if (subproject != null) {
+        konst printingTaskName = "printItems${UUID.randomUUID()}"
+        konst buildFile = if (subproject != null) {
             subProject(subproject).run { if (isBuildGradleKts) buildGradleKts else buildGradle }
         } else {
             if (isBuildGradleKts) buildGradleKts else buildGradle
@@ -675,8 +675,8 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
         )
 
         build("${subproject?.prependIndent(":").orEmpty()}:$printingTaskName") {
-            val itemsLine = output.lines().single { "###$printingTaskName" in it }.substringAfter(printingTaskName)
-            val items = itemsLine.removeSurrounding("[", "]").split(", ").toSet()
+            konst itemsLine = output.lines().single { "###$printingTaskName" in it }.substringAfter(printingTaskName)
+            konst items = itemsLine.removeSurrounding("[", "]").split(", ").toSet()
             checkAnyItemsContains.forEach { pattern ->
                 assertTrue("Dependencies($dependencyOwner) does not contain $pattern") { items.any { pattern in it } }
             }
@@ -702,7 +702,7 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
         override fun provideArguments(
             context: ExtensionContext
         ): Stream<out Arguments> {
-            val gradleVersions = super.provideArguments(context).map { it.get().first() as GradleVersion }.toList()
+            konst gradleVersions = super.provideArguments(context).map { it.get().first() as GradleVersion }.toList()
             return testFrameworks
                 .flatMap { testFramework ->
                     gradleVersions.map { it to testFramework }
@@ -716,9 +716,9 @@ class KotlinSpecificDependenciesIT : KGPBaseTest() {
     }
 
     companion object {
-        private const val kotlinTestMultiplatformDependency = "org.jetbrains.kotlin:kotlin-test"
+        private const konst kotlinTestMultiplatformDependency = "org.jetbrains.kotlin:kotlin-test"
 
-        private val testFrameworks = listOf(
+        private konst testFrameworks = listOf(
             "useJUnit()" to "junit",
             "useTestNG()" to "testng",
             "useJUnitPlatform()" to "junit5"

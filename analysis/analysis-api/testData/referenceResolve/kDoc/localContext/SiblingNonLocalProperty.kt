@@ -4,5 +4,5 @@ class C {
      */
     fun aa(){}
 
-    val bb: Int = 10
+    konst bb: Int = 10
 }

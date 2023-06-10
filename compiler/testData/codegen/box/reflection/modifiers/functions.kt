@@ -14,12 +14,12 @@ operator fun Unit.invoke() {}
 infix fun Unit.infix(unit: Unit) {}
 class Suspend { suspend fun suspend() {} }
 
-val externalGetter = Unit
+konst externalGetter = Unit
     external get
 
 inline var inlineProperty: Unit
     get() = Unit
-    set(value) {}
+    set(konstue) {}
 
 fun box(): String {
     assertTrue(::inline.isInline)

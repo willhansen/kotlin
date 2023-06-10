@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.name.Name
 
 class IrLocalDelegatedPropertyImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrLocalDelegatedPropertySymbol,
+    override konst symbol: IrLocalDelegatedPropertySymbol,
     override var name: Name,
     override var type: IrType,
     override var isVar: Boolean,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrLocalDelegatedProperty() {
     init {
         symbol.bind(this)
@@ -31,7 +31,7 @@ class IrLocalDelegatedPropertyImpl(
     override var annotations: List<IrConstructorCall> = emptyList()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: VariableDescriptorWithAccessors
+    override konst descriptor: VariableDescriptorWithAccessors
         get() = symbol.descriptor
 
     override lateinit var delegate: IrVariable

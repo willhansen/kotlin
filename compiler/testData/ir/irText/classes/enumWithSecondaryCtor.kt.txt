@@ -5,7 +5,7 @@ enum class Test0 : Enum<Test0> {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -15,11 +15,11 @@ enum class Test0 : Enum<Test0> {
     this/*Test0*/(x = 0)
   }
 
-  fun values(): Array<Test0> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<Test0> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): Test0 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): Test0 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<Test0>
+  konst entries: EnumEntries<Test0>
     get(): EnumEntries<Test0> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -31,7 +31,7 @@ enum class Test1 : Enum<Test1> {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -43,11 +43,11 @@ enum class Test1 : Enum<Test1> {
     this/*Test1*/(x = 0)
   }
 
-  fun values(): Array<Test1> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<Test1> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): Test1 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): Test1 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<Test1>
+  konst entries: EnumEntries<Test1>
     get(): EnumEntries<Test1> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -59,7 +59,7 @@ abstract enum class Test2 : Enum<Test2> {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -97,11 +97,11 @@ abstract enum class Test2 : Enum<Test2> {
 
   abstract fun foo()
 
-  fun values(): Array<Test2> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<Test2> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): Test2 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): Test2 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<Test2>
+  konst entries: EnumEntries<Test2>
     get(): EnumEntries<Test2> /* Synthetic body for ENUM_ENTRIES */
 
 }

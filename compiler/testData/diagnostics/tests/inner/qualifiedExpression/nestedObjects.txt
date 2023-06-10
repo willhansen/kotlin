@@ -1,6 +1,6 @@
 package
 
-public val a: A.B.C
+public konst a: A.B.C
 
 public object A {
     private constructor A()

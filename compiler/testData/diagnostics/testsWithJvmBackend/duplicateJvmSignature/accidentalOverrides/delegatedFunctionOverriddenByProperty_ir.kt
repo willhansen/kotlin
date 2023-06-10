@@ -4,7 +4,7 @@ interface B {
 }
 
 interface D {
-    val x: Int
+    konst x: Int
 }
 
 class <!ACCIDENTAL_OVERRIDE!>C(d: D)<!> : D by d, B

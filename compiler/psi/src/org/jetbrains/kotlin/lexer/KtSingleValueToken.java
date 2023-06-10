@@ -23,14 +23,14 @@ public class KtSingleValueToken extends KtToken {
     private final String myValue;
 
     @Deprecated
-    public KtSingleValueToken(@NotNull @NonNls String debugName, @NotNull @NonNls String value) {
+    public KtSingleValueToken(@NotNull @NonNls String debugName, @NotNull @NonNls String konstue) {
         super(debugName);
-        myValue = value;
+        myValue = konstue;
     }
 
-    public KtSingleValueToken(@NotNull @NonNls String debugName, @NotNull @NonNls String value, int tokenId) {
+    public KtSingleValueToken(@NotNull @NonNls String debugName, @NotNull @NonNls String konstue, int tokenId) {
         super(debugName, tokenId);
-        myValue = value;
+        myValue = konstue;
     }
 
     @NotNull @NonNls

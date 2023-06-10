@@ -20,7 +20,7 @@ var JsName.descriptor: DeclarationDescriptor? by MetadataProperty(default = null
 
 var JsName.localAlias: LocalAlias? by MetadataProperty(default = null)
 
-data class LocalAlias(val name: JsName, val tag: String?)
+data class LocalAlias(konst name: JsName, konst tag: String?)
 
 var JsName.specialFunction: SpecialFunction? by MetadataProperty(default = null)
 
@@ -121,17 +121,17 @@ var JsExpression.kType: JsExpression? by MetadataProperty(default = null)
 var JsExpression.kTypeWithRecursion: Boolean by MetadataProperty(default = false)
 
 data class CoroutineMetadata(
-        val doResumeName: JsName,
-        val stateName: JsName,
-        val exceptionStateName: JsName,
-        val finallyPathName: JsName,
-        val resultName: JsName,
-        val exceptionName: JsName,
-        val baseClassRef: JsExpression,
-        val suspendObjectRef: JsExpression,
-        val hasController: Boolean,
-        val hasReceiver: Boolean,
-        val psiElement: PsiElement?
+        konst doResumeName: JsName,
+        konst stateName: JsName,
+        konst exceptionStateName: JsName,
+        konst finallyPathName: JsName,
+        konst resultName: JsName,
+        konst exceptionName: JsName,
+        konst baseClassRef: JsExpression,
+        konst suspendObjectRef: JsExpression,
+        konst hasController: Boolean,
+        konst hasReceiver: Boolean,
+        konst psiElement: PsiElement?
 )
 
 enum class TypeCheck {
@@ -147,7 +147,7 @@ enum class SideEffectKind {
     PURE
 }
 
-enum class SpecialFunction(val suggestedName: String) {
+enum class SpecialFunction(konst suggestedName: String) {
     DEFINE_INLINE_FUNCTION("defineInlineFunction"),
     WRAP_FUNCTION("wrapFunction"),
     TO_BOXED_CHAR("toBoxedChar"),

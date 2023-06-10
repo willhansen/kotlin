@@ -24,10 +24,10 @@ class Test {
 
 // FILE: main.kt
 
-val strList: List<String> = null!!
+konst strList: List<String> = null!!
 
 fun main() {
-    val rawA = Test.rawAField
+    konst rawA = Test.rawAField
     var rawInner = rawA.Inner<Double>("", "", strList)
     rawInner.foo("", "", strList)
     rawInner.bar().foo("")

@@ -5,12 +5,12 @@ CONTENT
       1 FUN name:empty visibility:public modality:FINAL <> () returnType:kotlin.Int 
       2 WHEN type=kotlin.Int origin=WHEN
 OUTGOING -> BB 1
-    CONST Boolean type=kotlin.Boolean value=true
+    CONST Boolean type=kotlin.Boolean konstue=true
 BB 1
 INCOMING <- BB 0
-    CONST Boolean type=kotlin.Boolean value=true
+    CONST Boolean type=kotlin.Boolean konstue=true
 CONTENT
-      1 CONST Int type=kotlin.Int value=42
+      1 CONST Int type=kotlin.Int konstue=42
 OUTGOING -> BB 2
     When exit: WHEN type=kotlin.Int origin=WHEN
 BB 2

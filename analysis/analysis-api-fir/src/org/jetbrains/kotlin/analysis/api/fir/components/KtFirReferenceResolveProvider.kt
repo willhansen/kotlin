@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 import org.jetbrains.kotlin.idea.references.KtReference
 
 internal class KtFirReferenceResolveProvider(
-    override val analysisSession: KtFirAnalysisSession
+    override konst analysisSession: KtFirAnalysisSession
 ) : KtReferenceResolveProvider(), KtFirAnalysisSessionComponent {
     override fun resolveToSymbols(reference: KtReference): Collection<KtSymbol> {
         check(reference is KtSymbolBasedReference) { "To get reference symbol the one should be KtSymbolBasedReference" }

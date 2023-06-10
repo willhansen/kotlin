@@ -5,11 +5,11 @@ import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 
 class A {
-    val readonly: String = ""
+    konst readonly: String = ""
     var mutable: String = ""
 }
 
-val readonly: String = ""
+konst readonly: String = ""
 var mutable: String = ""
 
 fun box(): String {

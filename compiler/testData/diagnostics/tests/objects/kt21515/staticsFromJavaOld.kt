@@ -34,11 +34,11 @@ class Derived : Base() {
         <!DEPRECATED_ACCESS_BY_SHORT_NAME!>syntheticSam { }<!>
 
         // Instance members shouldn't be affected, but we check them, just in case
-        val y = instanceSyntheticProperty
+        konst y = instanceSyntheticProperty
         instanceSyntheticProperty = 43
 
         // Note that statics actually aren't converted into synthetic property in Kotlin
-        val x = <!UNRESOLVED_REFERENCE!>syntheticProperty<!>
+        konst x = <!UNRESOLVED_REFERENCE!>syntheticProperty<!>
         <!UNRESOLVED_REFERENCE!>syntheticProperty<!> = 42
     }
 

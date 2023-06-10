@@ -3,7 +3,7 @@
 // IGNORE_BACKEND: JVM
 
 // FILE: Z.kt
-inline class Z(val x: Any)
+inline class Z(konst x: Any)
 
 // FILE: test.kt
 fun testZ(z: Z) = z.toString()
@@ -14,4 +14,4 @@ fun testNZT(z: Z?) = "$z"
 
 // @TestKt.class:
 // 5 INVOKESTATIC Z\.toString-impl \(Ljava/lang/Object;\)Ljava/lang/String;
-// 0 INVOKESTATIC java/lang/String.valueOf
+// 0 INVOKESTATIC java/lang/String.konstueOf

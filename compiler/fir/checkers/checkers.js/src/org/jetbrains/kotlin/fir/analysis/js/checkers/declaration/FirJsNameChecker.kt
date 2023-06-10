@@ -20,15 +20,15 @@ import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 object FirJsNameChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration is FirProperty) {
-            val accessors = listOfNotNull(declaration.getter?.symbol, declaration.setter?.symbol)
-            val namedAccessorCount = accessors.count { it.getJsName(context.session) != null }
+            konst accessors = listOfNotNull(declaration.getter?.symbol, declaration.setter?.symbol)
+            konst namedAccessorCount = accessors.count { it.getJsName(context.session) != null }
             if (namedAccessorCount > 0 && namedAccessorCount < accessors.size) {
                 reporter.reportOn(declaration.source, FirJsErrors.JS_NAME_IS_NOT_ON_ALL_ACCESSORS, context)
             }
         }
 
-        val jsName = declaration.getAnnotationByClassId(JsStandardClassIds.Annotations.JsName, context.session) ?: return
-        val jsNameSource = jsName.source ?: declaration.source
+        konst jsName = declaration.getAnnotationByClassId(JsStandardClassIds.Annotations.JsName, context.session) ?: return
+        konst jsNameSource = jsName.source ?: declaration.source
 
         if (declaration.symbol.getAnnotationStringParameter(JsStandardClassIds.Annotations.JsNative, context.session) != null) {
             reporter.reportOn(jsNameSource, FirJsErrors.JS_NAME_PROHIBITED_FOR_NAMED_NATIVE, context)
@@ -49,7 +49,7 @@ object FirJsNameChecker : FirBasicDeclarationChecker() {
             }
 
             is FirPropertyAccessor -> {
-                val property = declaration.propertySymbol
+                konst property = declaration.propertySymbol
                 if (property.getJsName(context.session) != null) {
                     reporter.reportOn(jsNameSource, FirJsErrors.JS_NAME_ON_ACCESSOR_AND_PROPERTY, context)
                 }

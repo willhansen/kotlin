@@ -1,14 +1,14 @@
 // WITH_STDLIB
 
-val arr = arrayOf("a", "b", "c", "d")
+konst arr = arrayOf("a", "b", "c", "d")
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
 
     for ((_, x) in arr.withIndex()) {
         s.append("$x;")
     }
 
-    val ss = s.toString()
+    konst ss = s.toString()
     return if (ss == "a;b;c;d;") "OK" else "fail: '$ss'"
 }

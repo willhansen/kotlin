@@ -35,8 +35,8 @@ import org.jetbrains.kotlin.types.typeUtil.isUnit
 fun LookupTracker.record(expression: KtExpression, type: KotlinType) {
     if (type.isError || type.isUnit()) return
 
-    val typeDescriptor = type.constructor.declarationDescriptor ?: return
-    val scopeDescriptor = typeDescriptor.containingDeclaration
+    konst typeDescriptor = type.constructor.declarationDescriptor ?: return
+    konst scopeDescriptor = typeDescriptor.containingDeclaration
 
     // Scope descriptor is function descriptor only when type is local
     // Lookups for local types are not needed since all usages are compiled with the type
@@ -60,11 +60,11 @@ fun EnumWhenTracker.record(subjectType: KotlinType?, subjectExpression: KtExpres
     if (elseEntry != null) return
     if (subjectExpression !is KtNameReferenceExpression) return
 
-    val declarationDescriptor = subjectType?.constructor?.declarationDescriptor ?: return
-    val containingPackage = declarationDescriptor.containingPackage()?.toString() ?: return
-    val fqName = declarationDescriptor.fqNameSafe.asString()
-    val filePath = subjectExpression.containingFile.virtualFile?.path ?: return
-    val owner = if (fqName.startsWith("$containingPackage.")) {
+    konst declarationDescriptor = subjectType?.constructor?.declarationDescriptor ?: return
+    konst containingPackage = declarationDescriptor.containingPackage()?.toString() ?: return
+    konst fqName = declarationDescriptor.fqNameSafe.asString()
+    konst filePath = subjectExpression.containingFile.virtualFile?.path ?: return
+    konst owner = if (fqName.startsWith("$containingPackage.")) {
         containingPackage + "." + fqName.substring(containingPackage.length + 1).replace(".", "$")
     } else {
         fqName.replace(".", "$")

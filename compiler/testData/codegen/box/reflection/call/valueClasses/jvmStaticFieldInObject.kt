@@ -8,8 +8,8 @@ import kotlin.reflect.jvm.isAccessible
 import kotlin.test.assertEquals
 
 @JvmInline
-value class Z(val value1: UInt, val value2: Int) {
-    operator fun plus(other: Z): Z = Z(this.value1 + other.value1, this.value2 + other.value2)
+konstue class Z(konst konstue1: UInt, konst konstue2: Int) {
+    operator fun plus(other: Z): Z = Z(this.konstue1 + other.konstue1, this.konstue2 + other.konstue2)
 }
 
 object C {
@@ -24,27 +24,27 @@ object C {
 }
 
 fun box(): String {
-    val one = Z(1U, 10)
-    val two = Z(2U, 20)
+    konst one = Z(1U, 10)
+    konst two = Z(2U, 20)
 
-    val nonNullUnboundRef = C::class.members.single { it.name == "p1" } as KMutableProperty1<C, Z>
+    konst nonNullUnboundRef = C::class.members.single { it.name == "p1" } as KMutableProperty1<C, Z>
     nonNullUnboundRef.isAccessible = true
     assertEquals(Unit, nonNullUnboundRef.setter.call(C, one))
     assertEquals(one, nonNullUnboundRef.call(C))
     assertEquals(one, nonNullUnboundRef.getter.call(C))
 
-    val nullableUnboundRef = C::class.members.single { it.name == "p2" } as KMutableProperty1<C, Z?>
+    konst nullableUnboundRef = C::class.members.single { it.name == "p2" } as KMutableProperty1<C, Z?>
     nullableUnboundRef.isAccessible = true
     assertEquals(Unit, nullableUnboundRef.setter.call(C, one))
     assertEquals(one, nullableUnboundRef.call(C))
     assertEquals(one, nullableUnboundRef.getter.call(C))
 
-    val nonNullBoundRef = C.nonNullBoundRef()
+    konst nonNullBoundRef = C.nonNullBoundRef()
     assertEquals(Unit, nonNullBoundRef.setter.call(two))
     assertEquals(two, nonNullBoundRef.call())
     assertEquals(two, nonNullBoundRef.getter.call())
 
-    val nullableBoundRef = C.nullableBoundRef()
+    konst nullableBoundRef = C.nullableBoundRef()
     assertEquals(Unit, nullableBoundRef.setter.call(two))
     assertEquals(two, nullableBoundRef.call())
     assertEquals(two, nullableBoundRef.getter.call())

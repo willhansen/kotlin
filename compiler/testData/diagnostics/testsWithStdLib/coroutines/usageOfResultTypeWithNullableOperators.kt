@@ -4,8 +4,8 @@
 
 fun <T> id(x: T): T = x
 
-private val asFun: () -> Result<Int>? = TODO()
-private val Int.intResult: Result<Int>?
+private konst asFun: () -> Result<Int>? = TODO()
+private konst Int.intResult: Result<Int>?
     get() = null
 
 fun returnInt(): Int? = 0

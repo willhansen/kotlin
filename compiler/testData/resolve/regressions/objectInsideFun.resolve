@@ -1,9 +1,9 @@
 interface A {
-    ~from-interface~val foo: Int
+    ~from-interface~konst foo: Int
 }
 
 fun test(~param~foo: Int) {
     object : A {
-        ~property~override val foo: Int = `param`foo
+        ~property~override konst foo: Int = `param`foo
     }
 }

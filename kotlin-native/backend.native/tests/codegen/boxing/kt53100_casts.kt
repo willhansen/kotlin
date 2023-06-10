@@ -8,10 +8,10 @@ package codegen.boxing.kt53100_casts
 import kotlin.test.*
 
 // Reproducer is copied from FloatingPointParser.unaryMinus()
-inline fun <reified T> unaryMinus(value: T): T {
-    return when (value) {
-        is Float -> -value as T
-        is Double -> -value as T
+inline fun <reified T> unaryMinus(konstue: T): T {
+    return when (konstue) {
+        is Float -> -konstue as T
+        is Double -> -konstue as T
         else -> throw NumberFormatException()
     }
 }

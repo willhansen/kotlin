@@ -17,29 +17,29 @@ class KotlinLightClassTest : KotlinAsJavaTestBase() {
         File("compiler/testData/asJava/lightClasses/lightClassByFqName/ideRegression/ImplementingMap.kt")
     )
 
-    private val key = Key.create<String>("testKey")
+    private konst key = Key.create<String>("testKey")
 
     fun testClassInterchangeability() {
-        val lightClass = finder.findClass("test.WithClassObject", GlobalSearchScope.allScope(project)) as KtLightClass
-        val kotlinOrigin = lightClass.kotlinOrigin ?: throw AssertionError("no kotlinOrigin")
-        val testValue = "some data"
+        konst lightClass = finder.findClass("test.WithClassObject", GlobalSearchScope.allScope(project)) as KtLightClass
+        konst kotlinOrigin = lightClass.kotlinOrigin ?: throw AssertionError("no kotlinOrigin")
+        konst testValue = "some data"
         lightClass.putUserData(key, testValue)
-        val anotherLightClass = kotlinOrigin.toLightClass() ?: throw AssertionError("cant get light class second time")
+        konst anotherLightClass = kotlinOrigin.toLightClass() ?: throw AssertionError("cant get light class second time")
         TestCase.assertEquals(testValue, anotherLightClass.getUserData(key))
         TestCase.assertEquals(lightClass, anotherLightClass)
     }
 
     fun testMethodInterchangeability() {
-        val lightClass = finder.findClass("p1.TypeHierarchyMap", GlobalSearchScope.allScope(project)) as KtLightClass
-        val kotlinOrigin = lightClass.kotlinOrigin ?: throw AssertionError("no kotlinOrigin")
+        konst lightClass = finder.findClass("p1.TypeHierarchyMap", GlobalSearchScope.allScope(project)) as KtLightClass
+        konst kotlinOrigin = lightClass.kotlinOrigin ?: throw AssertionError("no kotlinOrigin")
 
-        val anotherLightClass = kotlinOrigin.toLightClass() ?: throw AssertionError("cant get light class second time")
+        konst anotherLightClass = kotlinOrigin.toLightClass() ?: throw AssertionError("cant get light class second time")
 
-        val lightMethod1 = lightClass.methods.first { it.name == "containsKey" }
+        konst lightMethod1 = lightClass.methods.first { it.name == "containsKey" }
 
-        val testValue = "some data"
+        konst testValue = "some data"
         lightMethod1.putUserData(key, testValue)
-        val lightMethod2 = anotherLightClass.methods.first { it.name == "containsKey" }
+        konst lightMethod2 = anotherLightClass.methods.first { it.name == "containsKey" }
         TestCase.assertEquals(testValue, lightMethod2.getUserData(key))
         TestCase.assertEquals(lightMethod1, lightMethod2)
     }

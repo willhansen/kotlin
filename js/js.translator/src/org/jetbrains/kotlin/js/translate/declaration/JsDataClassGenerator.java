@@ -76,7 +76,7 @@ class JsDataClassGenerator extends JsEqualsHashcodeToStringGenerator {
             JsExpression parameterValue = new JsNameRef(paramName);
             if (!constructorParam.hasValOrVar()) {
                 assert !ArgumentsUtilsKt.hasDefaultValue(function.getValueParameters().get(i));
-                // Caller cannot rely on default value and pass undefined here.
+                // Caller cannot rely on default konstue and pass undefined here.
                 argumentValue = parameterValue;
             }
             else {

@@ -1,9 +1,9 @@
 package foo
 
 actual class PlatformTestA {
-    actual val valueA: PlatformClassA = PlatformClassA()
+    actual konst konstueA: PlatformClassA = PlatformClassA()
 }
 
 actual class PlatformTestB {
-    actual val valueB: PlatformClassB = PlatformClassB()
+    actual konst konstueB: PlatformClassB = PlatformClassB()
 }

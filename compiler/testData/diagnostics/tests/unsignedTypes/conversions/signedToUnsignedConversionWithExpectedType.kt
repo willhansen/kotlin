@@ -37,13 +37,13 @@ fun test() {
 
     takeUInt(<!TYPE_MISMATCH!>1.myPlus(2)<!>)
 
-    val localVariable = 42
+    konst localVariable = 42
     takeUInt(<!TYPE_MISMATCH!>localVariable<!>)
 
     var localMutableVariable = 42
     takeUInt(<!TYPE_MISMATCH!>localMutableVariable<!>)
 
-    val localNegativeVariable = -1
+    konst localNegativeVariable = -1
     takeUInt(<!TYPE_MISMATCH!>localNegativeVariable<!>)
 
     takeUInt(<!TYPE_MISMATCH!>globalVariable<!>)
@@ -53,12 +53,12 @@ fun test() {
     takeUInt(<!TYPE_MISMATCH!>globalVariableWithGetter<!>)
 }
 
-val globalVariable = 10
+konst globalVariable = 10
 
-const val constVal = 10
+const konst constVal = 10
 
-val globalVariableWithGetter: Int get() = 0
+konst globalVariableWithGetter: Int get() = 0
 
-val prop: UByte = <!CONSTANT_EXPECTED_TYPE_MISMATCH!>255<!>
+konst prop: UByte = <!CONSTANT_EXPECTED_TYPE_MISMATCH!>255<!>
 
 fun Int.myPlus(other: Int): Int = this + other

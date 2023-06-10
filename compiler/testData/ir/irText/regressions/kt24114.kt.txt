@@ -9,11 +9,11 @@ fun two(): Int {
 fun test1(): Int {
   while (true) { // BLOCK
     { // BLOCK
-      val tmp0_subject: Int = one()
+      konst tmp0_subject: Int = one()
       when {
         EQEQ(arg0 = tmp0_subject, arg1 = 1) -> { // BLOCK
           { // BLOCK
-            val tmp1_subject: Int = two()
+            konst tmp1_subject: Int = two()
             when {
               EQEQ(arg0 = tmp1_subject, arg1 = 2) -> return 2
             }
@@ -28,10 +28,10 @@ fun test1(): Int {
 fun test2(): Int {
   while (true) { // BLOCK
     { // BLOCK
-      val tmp0_subject: Int = one()
+      konst tmp0_subject: Int = one()
       when {
         EQEQ(arg0 = tmp0_subject, arg1 = 1) -> { // BLOCK
-          val tmp1_subject: Int = two()
+          konst tmp1_subject: Int = two()
           when {
             EQEQ(arg0 = tmp1_subject, arg1 = 2) -> return 2
           }

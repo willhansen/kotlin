@@ -17,17 +17,17 @@ import org.jetbrains.kotlin.psi.psiUtil.containingClassOrObject
 class SymbolBasedFakeLightClass(kotlinOrigin: KtClassOrObject) : KtFakeLightClass(kotlinOrigin) {
     override fun copy(): KtFakeLightClass = SymbolBasedFakeLightClass(kotlinOrigin)
 
-    private val _containingClass: KtFakeLightClass? by lazyPub {
+    private konst _containingClass: KtFakeLightClass? by lazyPub {
         kotlinOrigin.containingClassOrObject?.let { SymbolBasedFakeLightClass(it) }
     }
 
     override fun getContainingClass(): KtFakeLightClass? = _containingClass
 
     override fun isInheritor(baseClass: PsiClass, checkDeep: Boolean): Boolean {
-        if (manager.areElementsEquivalent(baseClass, this)) return false
+        if (manager.areElementsEquikonstent(baseClass, this)) return false
         LightClassInheritanceHelper.getService(project).isInheritor(this, baseClass, checkDeep).ifSure { return it }
 
-        val baseClassOrigin = (baseClass as? KtLightClass)?.kotlinOrigin ?: return false
+        konst baseClassOrigin = (baseClass as? KtLightClass)?.kotlinOrigin ?: return false
         return analyzeForLightClasses(kotlinOrigin) {
             kotlinOrigin.checkIsInheritor(baseClassOrigin, checkDeep)
         }

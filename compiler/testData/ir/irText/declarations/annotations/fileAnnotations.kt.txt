@@ -9,7 +9,7 @@ open annotation class A : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 

@@ -12,7 +12,7 @@ object A {
     }
 
     class Derived : Base() {
-        val a = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBaseCompanion<!>::foo
+        konst a = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBaseCompanion<!>::foo
     }
 }
 
@@ -30,7 +30,7 @@ object B {
     }
 
     class Derived : Base() {
-        val a = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBaseCompanion<!>::foo
+        konst a = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBaseCompanion<!>::foo
     }
 }
 
@@ -48,7 +48,7 @@ object C {
     }
 
     class Derived : Base() {
-        val a = <!INCORRECT_CALLABLE_REFERENCE_RESOLUTION_FOR_COMPANION_LHS!><!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBaseCompanion<!>::foo<!>
+        konst a = <!INCORRECT_CALLABLE_REFERENCE_RESOLUTION_FOR_COMPANION_LHS!><!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBaseCompanion<!>::foo<!>
     }
 }
 
@@ -64,6 +64,6 @@ object D {
     }
 
     class Derived : Base() {
-        val a = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBaseCompanion<!>::foo
+        konst a = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBaseCompanion<!>::foo
     }
 }

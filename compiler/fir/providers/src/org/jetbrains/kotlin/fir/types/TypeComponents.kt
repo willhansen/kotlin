@@ -9,19 +9,19 @@ import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.FirSessionComponent
 import org.jetbrains.kotlin.fir.languageVersionSettings
 
-class TypeComponents(val session: FirSession) : FirSessionComponent {
-    val typeContext: ConeInferenceContext = object : ConeInferenceContext {
-        override val session: FirSession
+class TypeComponents(konst session: FirSession) : FirSessionComponent {
+    konst typeContext: ConeInferenceContext = object : ConeInferenceContext {
+        override konst session: FirSession
             get() = this@TypeComponents.session
     }
 
-    val typeApproximator: ConeTypeApproximator = ConeTypeApproximator(typeContext, session.languageVersionSettings)
+    konst typeApproximator: ConeTypeApproximator = ConeTypeApproximator(typeContext, session.languageVersionSettings)
 }
 
-private val FirSession.typeComponents: TypeComponents by FirSession.sessionComponentAccessor()
+private konst FirSession.typeComponents: TypeComponents by FirSession.sessionComponentAccessor()
 
-val FirSession.typeContext: ConeInferenceContext
+konst FirSession.typeContext: ConeInferenceContext
     get() = typeComponents.typeContext
 
-val FirSession.typeApproximator: ConeTypeApproximator
+konst FirSession.typeApproximator: ConeTypeApproximator
     get() = typeComponents.typeApproximator

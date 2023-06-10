@@ -1,11 +1,11 @@
-// !LANGUAGE: +IntrinsicConstEvaluation
+// !LANGUAGE: +IntrinsicConstEkonstuation
 // TARGET_BACKEND: JVM_IR
 // WITH_STDLIB
 
 fun <T> T.id() = this
 
 class A {
-    val a = ""
+    konst a = ""
     fun b() = ""
 
     init {
@@ -13,21 +13,21 @@ class A {
     }
 
     fun test() {
-        val a = A::a.<!EVALUATED("a")!>name<!>
-        val b = A::b.<!EVALUATED("b")!>name<!>
+        konst a = A::a.<!EVALUATED("a")!>name<!>
+        konst b = A::b.<!EVALUATED("b")!>name<!>
 
-        val c = ::A.<!EVALUATED("<init>")!>name<!>
-        val d = this::a.<!EVALUATED("a")!>name<!>
+        konst c = ::A.<!EVALUATED("<init>")!>name<!>
+        konst d = this::a.<!EVALUATED("a")!>name<!>
 
-        val e = A()::b.<!EVALUATED("b")!>name<!>
-        val f = getA()::b.<!EVALUATED("b")!>name<!>
+        konst e = A()::b.<!EVALUATED("b")!>name<!>
+        konst f = getA()::b.<!EVALUATED("b")!>name<!>
 
-        val temp = A()
-        val g = temp::b.<!EVALUATED("b")!>name<!>
-        val insideStringConcat = "${temp::b.<!EVALUATED("b")!>name<!>}"
+        konst temp = A()
+        konst g = temp::b.<!EVALUATED("b")!>name<!>
+        konst insideStringConcat = "${temp::b.<!EVALUATED("b")!>name<!>}"
 
-        val complexExpression1 = A()::a.<!EVALUATED("a")!>name<!> + A()::b.<!EVALUATED("b")!>name<!>
-        val complexExpression2 = A::a.<!EVALUATED("a")!>name<!> <!EVALUATED("ab")!>+ A::b.<!EVALUATED("b")!>name<!><!>
+        konst complexExpression1 = A()::a.<!EVALUATED("a")!>name<!> + A()::b.<!EVALUATED("b")!>name<!>
+        konst complexExpression2 = A::a.<!EVALUATED("a")!>name<!> <!EVALUATED("ab")!>+ A::b.<!EVALUATED("b")!>name<!><!>
 
         var recursive = ::test.<!EVALUATED("test")!>name<!>
     }

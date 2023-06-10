@@ -13,23 +13,23 @@ FILE fqName:<root> fileName:/serializer.kt
     FUN name:aFunction visibility:public modality:FINAL <> ($this:<root>.FirstSerializer) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:<root>.FirstSerializer
       BLOCK_BODY
-    PROPERTY name:bProp visibility:public modality:FINAL [val]
+    PROPERTY name:bProp visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:bProp type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=1
+          CONST Int type=kotlin.Int konstue=1
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bProp> visibility:public modality:FINAL <> ($this:<root>.FirstSerializer) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:bProp visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:bProp visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.FirstSerializer
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-bProp> (): kotlin.Int declared in <root>.FirstSerializer'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bProp type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
               receiver: GET_VAR '<this>: <root>.FirstSerializer declared in <root>.FirstSerializer.<get-bProp>' type=<root>.FirstSerializer origin=null
-    PROPERTY name:aProp visibility:public modality:FINAL [val]
+    PROPERTY name:aProp visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:aProp type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=2
+          CONST Int type=kotlin.Int konstue=2
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-aProp> visibility:public modality:FINAL <> ($this:<root>.FirstSerializer) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:aProp visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:aProp visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.FirstSerializer
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-aProp> (): kotlin.Int declared in <root>.FirstSerializer'
@@ -218,4 +218,4 @@ FILE fqName:<root> fileName:/serializer.kt
       CALL 'public final fun testFirstSerializer (): kotlin.Unit declared in <root>' type=kotlin.Unit origin=null
       CALL 'public final fun testSecondSerializer (): kotlin.Unit declared in <root>' type=kotlin.Unit origin=null
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK"
+        CONST String type=kotlin.String konstue="OK"

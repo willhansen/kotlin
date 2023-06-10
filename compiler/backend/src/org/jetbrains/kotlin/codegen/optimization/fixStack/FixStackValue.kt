@@ -10,10 +10,10 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.tree.analysis.Value
 
 enum class FixStackValue(
-    private val _size: Int,
-    val loadOpcode: Int,
-    val storeOpcode: Int,
-    val popOpcode: Int
+    private konst _size: Int,
+    konst loadOpcode: Int,
+    konst storeOpcode: Int,
+    konst popOpcode: Int
 ) : Value {
     INT(1, Opcodes.ILOAD, Opcodes.ISTORE, Opcodes.POP),
     LONG(2, Opcodes.LLOAD, Opcodes.LSTORE, Opcodes.POP2),

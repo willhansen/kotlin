@@ -4,7 +4,7 @@ FILE: kt41917.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val s: R|V| = R|<local>/s|
+        public final konst s: R|V| = R|<local>/s|
             public get(): R|V|
 
         public final operator fun getValue(thisRef: R|kotlin/Any?|, property: R|kotlin/reflect/KProperty<*>|): R|V| {
@@ -23,22 +23,22 @@ FILE: kt41917.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val implicit: R|kotlin/String|by R|/DummyDelegate.DummyDelegate|<R|kotlin/String|>(String(hello))
+        public final konst implicit: R|kotlin/String|by R|/DummyDelegate.DummyDelegate|<R|kotlin/String|>(String(hello))
             public get(): R|kotlin/String| {
                 ^ this@R|/A|.D|/A.implicit|.R|SubstitutionOverride</DummyDelegate.getValue: R|Stub (chain inference): TypeVariable(_V)|>|(this@R|/A|, ::R|/A.implicit|)
             }
 
-        public final val explicit: R|kotlin/String|by R|/DummyDelegate.DummyDelegate|<R|kotlin/String|>(String(hello))
+        public final konst explicit: R|kotlin/String|by R|/DummyDelegate.DummyDelegate|<R|kotlin/String|>(String(hello))
             public get(): R|kotlin/String| {
                 ^ this@R|/A|.D|/A.explicit|.R|SubstitutionOverride</DummyDelegate.getValue: R|Stub (chain inference): TypeVariable(_V)|>|(this@R|/A|, ::R|/A.explicit|)
             }
 
     }
     public abstract interface B : R|kotlin/Any| {
-        public abstract val implicit: R|kotlin/String|
+        public abstract konst implicit: R|kotlin/String|
             public get(): R|kotlin/String|
 
-        public abstract val explicit: R|kotlin/String|
+        public abstract konst explicit: R|kotlin/String|
             public get(): R|kotlin/String|
 
     }

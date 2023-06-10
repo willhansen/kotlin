@@ -2,13 +2,13 @@
 /*
  * Issue: KT-4159 Kotlin to JS compiler crashes on code with ?: return
  *
- * Expression like "val s1 : String = s ?: return null" causes compiler to crash
+ * Expression like "konst s1 : String = s ?: return null" causes compiler to crash
  */
 
 package foo
 
 fun firstNotNullLen(s1 : String?, s2 : String?, s3 : String?) : Int {
-    val len = (s1?.length ?: s2?.length) ?:
+    konst len = (s1?.length ?: s2?.length) ?:
                 (s2?.length ?: s3?.length) ?:
                     return 0
     return len

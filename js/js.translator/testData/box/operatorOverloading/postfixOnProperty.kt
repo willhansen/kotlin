@@ -14,7 +14,7 @@ class MyInt() {
 
 
 fun box(): String {
-    val d = a++;
+    konst d = a++;
 
     if (a.b != 1) return "fail1: ${a.b}"
     if (d.b != 1) return "fail2: ${d.b}"

@@ -8,9 +8,9 @@ package org.jetbrains.kotlin.gradle.testing.internal
 import java.io.PrintStream
 import java.io.PrintWriter
 
-class MultiCauseException(message: String, val causes: List<Error>) : Error(message, causes.firstOrNull()) {
+class MultiCauseException(message: String, konst causes: List<Error>) : Error(message, causes.firstOrNull()) {
     override fun printStackTrace(printStream: PrintStream) {
-        val writer = PrintWriter(printStream)
+        konst writer = PrintWriter(printStream)
         this.printStackTrace(writer)
         writer.flush()
     }

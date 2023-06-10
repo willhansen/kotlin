@@ -2,7 +2,7 @@
 final class LockFreeStack$Node {
     // source: 'LockFreeStackTest.kt'
     private final @org.jetbrains.annotations.Nullable field next: LockFreeStack$Node
-    private final field value: java.lang.Object
+    private final field konstue: java.lang.Object
     public method <init>(p0: java.lang.Object, @org.jetbrains.annotations.Nullable p1: LockFreeStack$Node): void
     public final @org.jetbrains.annotations.Nullable method getNext(): LockFreeStack$Node
     public final method getValue(): java.lang.Object

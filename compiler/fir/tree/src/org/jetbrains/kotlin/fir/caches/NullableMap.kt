@@ -8,31 +8,31 @@ package org.jetbrains.kotlin.fir.caches
 import org.jetbrains.kotlin.fir.PrivateForInline
 
 /**
- * [Map] which allows store null values
+ * [Map] which allows store null konstues
  */
 @OptIn(PrivateForInline::class)
 @JvmInline
-value class NullableMap<K, V>(
+konstue class NullableMap<K, V>(
     @property:PrivateForInline
-    val map: MutableMap<K, Any> = HashMap()
+    konst map: MutableMap<K, Any> = HashMap()
 ) {
 
     /**
-     * Get value if it is present in map
+     * Get konstue if it is present in map
      * Execute [orElse] otherwise and return it result,
      * [orElse] can modify the map inside
      */
     @Suppress("UNCHECKED_CAST")
     inline fun getOrElse(key: K, orElse: () -> V): V =
-        when (val value = map[key]) {
+        when (konst konstue = map[key]) {
             null -> orElse()
             NullValue -> null
-            else -> value
+            else -> konstue
         } as V
 
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun set(key: K, value: V) {
-        map[key] = value ?: NullValue
+    inline operator fun set(key: K, konstue: V) {
+        map[key] = konstue ?: NullValue
     }
 
     @PrivateForInline

@@ -10,7 +10,7 @@
 
 fun 124gga() {}
 
-val 481gu: Boolean = true
+konst 481gu: Boolean = true
 
 var 981llj): Int = 42
 

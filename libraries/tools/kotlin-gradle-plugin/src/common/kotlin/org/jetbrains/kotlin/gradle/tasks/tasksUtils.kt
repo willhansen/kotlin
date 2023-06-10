@@ -23,7 +23,7 @@ fun throwExceptionIfCompilationFailed(
         ExitCode.INTERNAL_ERROR -> throw FailedCompilationException("Internal compiler error. See log for more details")
         ExitCode.SCRIPT_EXECUTION_ERROR -> throw FailedCompilationException("Script execution error. See log for more details")
         ExitCode.OOM_ERROR -> {
-            val exceptionMessage = when (executionStrategy) {
+            konst exceptionMessage = when (executionStrategy) {
                 KotlinCompilerExecutionStrategy.DAEMON -> kotlinDaemonOOMHelperMessage
                 KotlinCompilerExecutionStrategy.IN_PROCESS -> kotlinInProcessOOMHelperMessage
                 KotlinCompilerExecutionStrategy.OUT_OF_PROCESS -> kotlinOutOfProcessOOMHelperMessage
@@ -35,15 +35,15 @@ fun throwExceptionIfCompilationFailed(
     }
 }
 
-internal const val kotlinDaemonOOMHelperMessage = "Not enough memory to run compilation. " +
+internal const konst kotlinDaemonOOMHelperMessage = "Not enough memory to run compilation. " +
         "Try to increase it via 'gradle.properties':\nkotlin.daemon.jvmargs=-Xmx<size>"
 
-internal const val kotlinInProcessOOMHelperMessage = "Not enough memory to run compilation. " +
+internal const konst kotlinInProcessOOMHelperMessage = "Not enough memory to run compilation. " +
         " Try to increase it via 'gradle.properties':\norg.gradle.jvmargs=-Xmx<size>"
 
-internal const val kotlinOutOfProcessOOMHelperMessage = "Not enough memory to run compilation."
+internal const konst kotlinOutOfProcessOOMHelperMessage = "Not enough memory to run compilation."
 
-private const val kotlinDaemonCrashedMessage =
+private const konst kotlinDaemonCrashedMessage =
     "Connection to the Kotlin daemon has been unexpectedly lost. This might be caused by the daemon being killed by another process or the operating system, or by JVM crash."
 
 internal fun Throwable.hasOOMCause(): Boolean = when (cause) {
@@ -64,7 +64,7 @@ internal class OOMErrorException(message: String) : FailedCompilationException(m
 internal class DaemonCrashedException(cause: Throwable) : FailedCompilationException(kotlinDaemonCrashedMessage, cause)
 
 internal fun TaskWithLocalState.cleanOutputsAndLocalState(reason: String? = null) {
-    val log = GradleKotlinLogger(logger)
+    konst log = GradleKotlinLogger(logger)
     cleanOutputsAndLocalState(allOutputFiles(), log, metrics.get(), reason)
 }
 
@@ -75,7 +75,7 @@ internal fun cleanOutputsAndLocalState(
     reason: String? = null
 ) {
     log.kotlinDebug {
-        val suffix = reason?.let { " ($it)" }.orEmpty()
+        konst suffix = reason?.let { " ($it)" }.orEmpty()
         "Cleaning output$suffix:"
     }
 

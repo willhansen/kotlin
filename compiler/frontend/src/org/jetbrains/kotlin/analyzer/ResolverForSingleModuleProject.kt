@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.resolve.CliSealedClassInheritorsProvider
 class ResolverForSingleModuleProject<M : ModuleInfo>(
     debugName: String,
     projectContext: ProjectContext,
-    private val module: M,
-    private val resolverForModuleFactory: ResolverForModuleFactory,
-    private val searchScope: GlobalSearchScope,
-    private val builtIns: KotlinBuiltIns = DefaultBuiltIns.Instance,
-    private val languageVersionSettings: LanguageVersionSettings = LanguageVersionSettingsImpl.DEFAULT,
-    private val syntheticFiles: Collection<KtFile> = emptyList(),
-    private val sdkDependency: M? = null,
+    private konst module: M,
+    private konst resolverForModuleFactory: ResolverForModuleFactory,
+    private konst searchScope: GlobalSearchScope,
+    private konst builtIns: KotlinBuiltIns = DefaultBuiltIns.Instance,
+    private konst languageVersionSettings: LanguageVersionSettings = LanguageVersionSettingsImpl.DEFAULT,
+    private konst syntheticFiles: Collection<KtFile> = emptyList(),
+    private konst sdkDependency: M? = null,
     knownDependencyModuleDescriptors: Map<M, ModuleDescriptor> = emptyMap()
 ) : AbstractResolverForProject<M>(
     debugName,

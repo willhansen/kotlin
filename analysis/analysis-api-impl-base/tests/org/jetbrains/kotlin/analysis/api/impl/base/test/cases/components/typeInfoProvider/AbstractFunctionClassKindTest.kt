@@ -18,15 +18,15 @@ import org.jetbrains.kotlin.types.Variance
 abstract class AbstractFunctionClassKindTest  : AbstractAnalysisApiSingleFileTest() {
 
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val expressionAtCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret(ktFile) as KtExpression
+        konst expressionAtCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret(ktFile) as KtExpression
 
-        val (type, functionClassKind) = executeOnPooledThreadInReadAction {
+        konst (type, functionClassKind) = executeOnPooledThreadInReadAction {
             analyseForTest(expressionAtCaret) {
-                val functionType = expressionAtCaret.getExpectedType()
+                konst functionType = expressionAtCaret.getExpectedType()
                 functionType?.render(position = Variance.INVARIANT) to functionType?.functionTypeKind
             }
         }
-        val actual = buildString {
+        konst actual = buildString {
             appendLine("expression: ${expressionAtCaret.text}")
             appendLine("expected type: $type")
             appendLine("functionClassKind: $functionClassKind")

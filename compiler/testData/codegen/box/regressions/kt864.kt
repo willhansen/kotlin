@@ -16,8 +16,8 @@ fun box() : String {
 
   // TODO compiler error
   // both these expressions causes java.lang.NoClassDefFoundError: collections/CollectionPackage
-  val list1 = sample().useLines { it.toList() }
-  val list2 = sample().useLines<ArrayList<String>>{ it.toCollection(arrayListOf()) }
+  konst list1 = sample().useLines { it.toList() }
+  konst list2 = sample().useLines<ArrayList<String>>{ it.toCollection(arrayListOf()) }
 
   if(arrayListOf("Hello", "World") != list1) return "fail"
   if(arrayListOf("Hello", "World") != list2) return "fail"

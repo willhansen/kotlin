@@ -8,26 +8,26 @@ package kotlin.time
 import kotlin.js.json
 import kotlin.math.*
 
-internal actual inline val durationAssertionsEnabled: Boolean get() = true
+internal actual inline konst durationAssertionsEnabled: Boolean get() = true
 
-internal actual fun formatToExactDecimals(value: Double, decimals: Int): String {
-    val rounded = if (decimals == 0) {
-        value
+internal actual fun formatToExactDecimals(konstue: Double, decimals: Int): String {
+    konst rounded = if (decimals == 0) {
+        konstue
     } else {
-        val pow = 10.0.pow(decimals)
-        JsMath.round(abs(value) * pow) / pow * sign(value)
+        konst pow = 10.0.pow(decimals)
+        JsMath.round(abs(konstue) * pow) / pow * sign(konstue)
     }
     return if (abs(rounded) < 1e21) {
         // toFixed switches to scientific format after 1e21
         rounded.asDynamic().toFixed(decimals).unsafeCast<String>()
     } else {
         // toPrecision outputs the specified number of digits, but only for positive numbers
-        val positive = abs(rounded)
-        val positiveString = positive.asDynamic().toPrecision(ceil(log10(positive)) + decimals).unsafeCast<String>()
+        konst positive = abs(rounded)
+        konst positiveString = positive.asDynamic().toPrecision(ceil(log10(positive)) + decimals).unsafeCast<String>()
         if (rounded < 0) "-$positiveString" else positiveString
     }
 }
 
-internal actual fun formatUpToDecimals(value: Double, decimals: Int): String {
-    return value.asDynamic().toLocaleString("en-us", json("maximumFractionDigits" to decimals)).unsafeCast<String>()
+internal actual fun formatUpToDecimals(konstue: Double, decimals: Int): String {
+    return konstue.asDynamic().toLocaleString("en-us", json("maximumFractionDigits" to decimals)).unsafeCast<String>()
 }

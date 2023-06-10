@@ -6,15 +6,15 @@ package foo
 
 fun delete() {}
 
-val instanceof = 4
+konst instanceof = 4
 
-class eval
+class ekonst
 
 @JsName("await")
 fun foo() {}
 
 @JsName("this")
-val bar = 4
+konst bar = 4
 
 @JsName("super")
 class Baz
@@ -22,7 +22,7 @@ class Baz
 class Test {
     fun instanceof() {}
 
-    @JsName("eval")
+    @JsName("ekonst")
     fun test() {}
 }
 

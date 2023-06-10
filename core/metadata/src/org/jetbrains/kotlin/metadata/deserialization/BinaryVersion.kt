@@ -14,11 +14,11 @@ package org.jetbrains.kotlin.metadata.deserialization
  * - Patch version can be increased freely and is only supposed to be used for debugging. Increase the patch version when you
  *   make a change to binaries which is both forward- and backward compatible.
  */
-abstract class BinaryVersion(private vararg val numbers: Int) {
-    val major: Int = numbers.getOrNull(0) ?: UNKNOWN
-    val minor: Int = numbers.getOrNull(1) ?: UNKNOWN
-    val patch: Int = numbers.getOrNull(2) ?: UNKNOWN
-    val rest: List<Int> = if (numbers.size > 3) {
+abstract class BinaryVersion(private vararg konst numbers: Int) {
+    konst major: Int = numbers.getOrNull(0) ?: UNKNOWN
+    konst minor: Int = numbers.getOrNull(1) ?: UNKNOWN
+    konst patch: Int = numbers.getOrNull(2) ?: UNKNOWN
+    konst rest: List<Int> = if (numbers.size > 3) {
         if (numbers.size > MAX_LENGTH)
             throw IllegalArgumentException("BinaryVersion with length more than $MAX_LENGTH are not supported. Provided length ${numbers.size}.")
         else
@@ -70,7 +70,7 @@ abstract class BinaryVersion(private vararg val numbers: Int) {
     }
 
     override fun toString(): String {
-        val versions = toArray().takeWhile { it != UNKNOWN }
+        konst versions = toArray().takeWhile { it != UNKNOWN }
         return if (versions.isEmpty()) "unknown" else versions.joinToString(".")
     }
 
@@ -88,8 +88,8 @@ abstract class BinaryVersion(private vararg val numbers: Int) {
     }
 
     companion object {
-        const val MAX_LENGTH = 1024
-        private const val UNKNOWN = -1
+        const konst MAX_LENGTH = 1024
+        private const konst UNKNOWN = -1
 
         @JvmStatic
         fun parseVersionArray(string: String): IntArray? =

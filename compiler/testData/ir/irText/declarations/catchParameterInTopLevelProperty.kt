@@ -1,3 +1,3 @@
 // FIR_IDENTICAL
 
-val test = try { } catch (e : Throwable) { }
+konst test = try { } catch (e : Throwable) { }

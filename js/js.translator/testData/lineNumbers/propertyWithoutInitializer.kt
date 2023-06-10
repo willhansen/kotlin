@@ -1,7 +1,7 @@
 open class A {
-    val x: Int
+    konst x: Int
 
-    open val y: Int
+    open konst y: Int
 
     init {
         x = 23

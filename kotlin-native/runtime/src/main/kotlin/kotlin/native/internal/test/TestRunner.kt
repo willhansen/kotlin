@@ -13,9 +13,9 @@ import kotlin.time.measureTime
 
 @OptIn(kotlin.time.ExperimentalTime::class)
 @ExperimentalNativeApi
-internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
-    private val filters = mutableListOf<(TestCase) -> Boolean>()
-    private val listeners = mutableSetOf<TestListener>()
+internal class TestRunner(konst suites: List<TestSuite>, args: Array<String>) {
+    private konst filters = mutableListOf<(TestCase) -> Boolean>()
+    private konst listeners = mutableSetOf<TestListener>()
     private var logger: TestLogger = GTestLogger()
     private var runTests = true
     private var useExitCode = true
@@ -28,7 +28,7 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
         args.filter {
             it.startsWith("--gtest_") || it.startsWith("--ktest_") || it == "--help" || it == "-h"
         }.forEach {
-            val arg = it.split('=')
+            konst arg = it.split('=')
             when (arg.size) {
                 1 -> when (arg[0]) {
                     "--gtest_list_tests",
@@ -43,18 +43,18 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
                     else -> throw IllegalArgumentException("Unknown option: $it\n$help")
                 }
                 2 -> {
-                    val key = arg[0]
-                    val value = arg[1]
+                    konst key = arg[0]
+                    konst konstue = arg[1]
                     when (key) {
-                        "--ktest_logger" -> setLoggerFromArg(value)
+                        "--ktest_logger" -> setLoggerFromArg(konstue)
                         "--gtest_filter",
-                        "--ktest_filter" -> setGTestFilterFromArg(value)
-                        "--ktest_regex_filter" -> setRegexFilterFromArg(value, true)
-                        "--ktest_negative_regex_filter" -> setRegexFilterFromArg(value, false)
-                        "--ktest_gradle_filter" -> setGradleFilterFromArg(value, true)
-                        "--ktest_negative_gradle_filter" -> setGradleFilterFromArg(value, false)
+                        "--ktest_filter" -> setGTestFilterFromArg(konstue)
+                        "--ktest_regex_filter" -> setRegexFilterFromArg(konstue, true)
+                        "--ktest_negative_regex_filter" -> setRegexFilterFromArg(konstue, false)
+                        "--ktest_gradle_filter" -> setGradleFilterFromArg(konstue, true)
+                        "--ktest_negative_gradle_filter" -> setGradleFilterFromArg(konstue, false)
                         "--ktest_repeat",
-                        "--gtest_repeat" -> iterations = value.toIntOrNull() ?: throw IllegalArgumentException("Cannot parse number: $value")
+                        "--gtest_repeat" -> iterations = konstue.toIntOrNull() ?: throw IllegalArgumentException("Cannot parse number: $konstue")
                         else -> throw IllegalArgumentException("Unknown option: $it\n$help")
                     }
                 }
@@ -63,15 +63,15 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
         }
     }
 
-    inner class FilteredSuite(val innerSuite: TestSuite) : TestSuite by innerSuite {
+    inner class FilteredSuite(konst innerSuite: TestSuite) : TestSuite by innerSuite {
 
-        private val TestCase.matchFilters: Boolean
+        private konst TestCase.matchFilters: Boolean
             get() = filters.all { it(this) }
 
-        override val size: Int
+        override konst size: Int
             get() = testCases.size
 
-        override val testCases: Map<String, TestCase> = innerSuite.testCases.filter { it.value.matchFilters }
+        override konst testCases: Map<String, TestCase> = innerSuite.testCases.filter { it.konstue.matchFilters }
         override fun toString() = innerSuite.toString()
     }
 
@@ -112,7 +112,7 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
             this.substring(range).let { if (it.isNotEmpty()) Regex.escape(it) else "" }
 
     private fun String.toGTestPatterns() = splitToSequence(':').map { pattern ->
-        val result = StringBuilder()
+        konst result = StringBuilder()
         var prevIndex = 0
         pattern.forEachIndexed { index, c ->
             if (c == '*' || c == '?') {
@@ -129,13 +129,13 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
         if (filter.isEmpty()) {
             throw IllegalArgumentException("Empty filter")
         }
-        val filters = filter.split('-')
+        konst filters = filter.split('-')
         if (filters.size > 2) {
             throw IllegalArgumentException("Wrong pattern syntax: $filter.")
         }
 
-        val positivePatterns = filters[0].toGTestPatterns()
-        val negativePatterns = filters.getOrNull(1)?.toGTestPatterns() ?: emptyList()
+        konst positivePatterns = filters[0].toGTestPatterns()
+        konst negativePatterns = filters.getOrNull(1)?.toGTestPatterns() ?: emptyList()
 
         this.filters.add { testCase ->
             positivePatterns.any { testCase.prettyName.matches(it) } &&
@@ -147,7 +147,7 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
         if (filter.isEmpty()) {
             throw IllegalArgumentException("Empty filter")
         }
-        val pattern = filter.toRegex()
+        konst pattern = filter.toRegex()
         filters.add { testCase ->
             testCase.prettyName.matches(pattern) == positive
         }
@@ -158,7 +158,7 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
             throw IllegalArgumentException("Empty filter")
         }
 
-        val patterns = filter.split(',').map { pattern ->
+        konst patterns = filter.split(',').map { pattern ->
             pattern.split('*').joinToString(separator = ".*") { Regex.escape(it) }.toRegex()
         }
 
@@ -186,7 +186,7 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
         }
     }
 
-    private val help: String
+    private konst help: String
         get() = """
             |Available options:
             |--gtest_list_tests
@@ -229,8 +229,8 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
 
     private fun TestSuite.run() {
         // Do not run @BeforeClass/@AfterClass hooks if all test cases are ignored.
-        if (testCases.values.all { it.ignored }) {
-            testCases.values.forEach { testCase ->
+        if (testCases.konstues.all { it.ignored }) {
+            testCases.konstues.forEach { testCase ->
                 sendToListeners { ignore(testCase) }
             }
             return
@@ -238,11 +238,11 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
 
         // Normal path: run all hooks and execute test cases.
         doBeforeClass()
-        testCases.values.forEach { testCase ->
+        testCases.konstues.forEach { testCase ->
             if (testCase.ignored) {
                 sendToListeners { ignore(testCase) }
             } else {
-                val startTime = TimeSource.Monotonic.markNow()
+                konst startTime = TimeSource.Monotonic.markNow()
                 try {
                     sendToListeners { start(testCase) }
                     testCase.run()
@@ -259,9 +259,9 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
     }
 
     private fun runIteration(iteration: Int) {
-        val suitesFiltered = filterSuites()
+        konst suitesFiltered = filterSuites()
         sendToListeners { startIteration(this@TestRunner, iteration, suitesFiltered) }
-        val iterationTime = measureTime {
+        konst iterationTime = measureTime {
             suitesFiltered.forEach {
                 if (it.ignored) {
                     sendToListeners { ignoreSuite(it) }
@@ -271,7 +271,7 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
                         return@forEach
                     }
                     sendToListeners { startSuite(it) }
-                    val time = measureTime { it.run() }.inWholeMilliseconds
+                    konst time = measureTime { it.run() }.inWholeMilliseconds
                     sendToListeners { finishSuite(it, time) }
                 }
             }
@@ -283,7 +283,7 @@ internal class TestRunner(val suites: List<TestSuite>, args: Array<String>) {
         if (!runTests)
             return 0
         sendToListeners { startTesting(this@TestRunner) }
-        val totalTime = measureTime {
+        konst totalTime = measureTime {
             var i = 1
             while (i <= iterations || iterations < 0) {
                 runIteration(i)

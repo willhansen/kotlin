@@ -21,7 +21,7 @@ import java.nio.file.Files
 import java.rmi.registry.LocateRegistry
 
 
-internal val MAX_PORT_NUMBER = 0xffff
+internal konst MAX_PORT_NUMBER = 0xffff
 
 
 enum class DaemonReportCategory {
@@ -34,16 +34,16 @@ fun makeRunFilenameString(timestamp: String, digest: String, port: String, escap
 
 
 fun makePortFromRunFilenameExtractor(digest: String): (String) -> Int? {
-    val regex = makeRunFilenameString(timestamp = "[0-9TZ:\\.\\+-]+", digest = digest, port = "(\\d+)", escapeSequence = "\\").toRegex()
+    konst regex = makeRunFilenameString(timestamp = "[0-9TZ:\\.\\+-]+", digest = digest, port = "(\\d+)", escapeSequence = "\\").toRegex()
     return { regex.find(it)
              ?.groups?.get(1)
-             ?.value?.toInt()
+             ?.konstue?.toInt()
     }
 }
 
-private const val ORPHANED_RUN_FILE_AGE_THRESHOLD_MS = 1000000L
+private const konst ORPHANED_RUN_FILE_AGE_THRESHOLD_MS = 1000000L
 
-data class DaemonWithMetadata(val daemon: CompileService, val runFile: File, val jvmOptions: DaemonJVMOptions)
+data class DaemonWithMetadata(konst daemon: CompileService, konst runFile: File, konst jvmOptions: DaemonJVMOptions)
 
 // TODO: write metadata into discovery file to speed up selection
 // TODO: consider using compiler jar signature (checksum) as a CompilerID (plus java version, plus ???) instead of classpath checksum
@@ -55,16 +55,16 @@ fun walkDaemons(registryDir: File,
                 filter: (File, Int) -> Boolean = { _, _ -> true },
                 report: (DaemonReportCategory, String) -> Unit = { _, _ -> }
 ): Sequence<DaemonWithMetadata> {
-    val classPathDigest = compilerId.digest()
-    val portExtractor = makePortFromRunFilenameExtractor(classPathDigest)
+    konst classPathDigest = compilerId.digest()
+    konst portExtractor = makePortFromRunFilenameExtractor(classPathDigest)
     return registryDir.walk()
             .map { Pair(it, portExtractor(it.name)) }
             .filter { (file, port) -> port != null && filter(file, port) }
             .mapNotNull { (file, port) ->
                 assert(port!! in 1..(MAX_PORT_NUMBER - 1))
-                val relativeAge = fileToCompareTimestamp.lastModified() - file.lastModified()
+                konst relativeAge = fileToCompareTimestamp.lastModified() - file.lastModified()
                 report(DaemonReportCategory.DEBUG, "found daemon on port $port ($relativeAge ms old), trying to connect")
-                val daemon = tryConnectToDaemon(port, report)
+                konst daemon = tryConnectToDaemon(port, report)
                 // cleaning orphaned file; note: daemon should shut itself down if it detects that the run file is deleted
                 if (daemon == null) {
                     if (relativeAge - ORPHANED_RUN_FILE_AGE_THRESHOLD_MS <= 0) {
@@ -90,7 +90,7 @@ fun walkDaemons(registryDir: File,
 private inline fun tryConnectToDaemon(port: Int, report: (DaemonReportCategory, String) -> Unit): CompileService? {
 
     try {
-        val daemon = LocateRegistry.getRegistry(LoopbackNetworkInterface.loopbackInetAddressName, port, LoopbackNetworkInterface.clientLoopbackSocketFactory)
+        konst daemon = LocateRegistry.getRegistry(LoopbackNetworkInterface.loopbackInetAddressName, port, LoopbackNetworkInterface.clientLoopbackSocketFactory)
                 ?.lookup(COMPILER_SERVICE_RMI_NAME)
         when (daemon) {
             null -> report(DaemonReportCategory.INFO, "daemon not found")
@@ -104,11 +104,11 @@ private inline fun tryConnectToDaemon(port: Int, report: (DaemonReportCategory, 
     return null
 }
 
-private const val validFlagFileKeywordChars = "abcdefghijklmnopqrstuvwxyz0123456789-_"
+private const konst konstidFlagFileKeywordChars = "abcdefghijklmnopqrstuvwxyz0123456789-_"
 
 fun makeAutodeletingFlagFile(keyword: String = "compiler-client", baseDir: File? = null): File {
-    val prefix = "kotlin-${keyword.filter { validFlagFileKeywordChars.contains(it.lowercaseChar()) }}-"
-    val flagFile = if (baseDir?.isDirectory == true)
+    konst prefix = "kotlin-${keyword.filter { konstidFlagFileKeywordChars.contains(it.lowercaseChar()) }}-"
+    konst flagFile = if (baseDir?.isDirectory == true)
         Files.createTempFile(baseDir.toPath(), prefix, "-is-running").toFile()
     else
         Files.createTempFile(prefix, "-is-running").toFile()
@@ -120,8 +120,8 @@ fun makeAutodeletingFlagFile(keyword: String = "compiler-client", baseDir: File?
 // Comparator for reliable choice between daemons
 class FileAgeComparator : Comparator<File> {
     override fun compare(left: File, right: File): Int {
-        val leftTS = left.lastModified()
-        val rightTS = right.lastModified()
+        konst leftTS = left.lastModified()
+        konst rightTS = right.lastModified()
         return when {
             leftTS == 0L || rightTS == 0L -> 0 // cannot read any file timestamp, => undecidable
             leftTS > rightTS -> -1
@@ -131,4 +131,4 @@ class FileAgeComparator : Comparator<File> {
     }
 }
 
-const val LOG_PREFIX_ASSUMING_OTHER_DAEMONS_HAVE = "Assuming other daemons have"
+const konst LOG_PREFIX_ASSUMING_OTHER_DAEMONS_HAVE = "Assuming other daemons have"

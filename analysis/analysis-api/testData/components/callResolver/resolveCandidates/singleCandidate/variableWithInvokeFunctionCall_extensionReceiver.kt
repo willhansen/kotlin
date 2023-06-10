@@ -5,4 +5,4 @@ class A {
     }
 }
 
-val A.f: Int = 1
+konst A.f: Int = 1

@@ -5,6 +5,6 @@ object B {
     class <!REDECLARATION!>C<!>
     class <!REDECLARATION!>C<!>
 
-    val <!REDECLARATION!>a<!> : Int = 1
-    val <!REDECLARATION!>a<!> : Int = 1
+    konst <!REDECLARATION!>a<!> : Int = 1
+    konst <!REDECLARATION!>a<!> : Int = 1
 }

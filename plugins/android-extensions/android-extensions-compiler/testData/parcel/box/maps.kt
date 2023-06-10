@@ -9,17 +9,17 @@ import android.os.Parcelable
 
 @Parcelize
 data class Test(
-        val a: Map<String, String>,
-        val b: Map<String?, String>,
-        val c: Map<String, String?>,
-        val d: Map<String, Map<Int, String>>,
-        val e: Map<Int?, List<String>>,
-        val f: Map<Boolean, Boolean>,
-        val g: Map<String, Map<String, Map<String, String>>>
+        konst a: Map<String, String>,
+        konst b: Map<String?, String>,
+        konst c: Map<String, String?>,
+        konst d: Map<String, Map<Int, String>>,
+        konst e: Map<Int?, List<String>>,
+        konst f: Map<Boolean, Boolean>,
+        konst g: Map<String, Map<String, Map<String, String>>>
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = Test(
+    konst first = Test(
             a = mapOf("A" to "B", "C" to "D"),
             b = mapOf("A" to "B", null to "D", "E" to "F"),
             c = mapOf("A" to null, "C" to "D"),
@@ -31,11 +31,11 @@ fun box() = parcelTest { parcel ->
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val first2 = readFromParcel<Test>(parcel)
+    konst first2 = readFromParcel<Test>(parcel)
 
     assert(first == first2)
 }

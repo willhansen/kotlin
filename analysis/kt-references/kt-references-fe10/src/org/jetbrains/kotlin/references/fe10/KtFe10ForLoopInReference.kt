@@ -15,12 +15,12 @@ import org.jetbrains.kotlin.resolve.BindingContext
 class KtFe10ForLoopInReference(expression: KtForExpression) : KtForLoopInReference(expression), KtFe10Reference {
 
     override fun getTargetDescriptors(context: BindingContext): Collection<DeclarationDescriptor> {
-        val loopRange = expression.loopRange ?: return emptyList()
+        konst loopRange = expression.loopRange ?: return emptyList()
         return LOOP_RANGE_KEYS.mapNotNull { key -> context.get(key, loopRange)?.candidateDescriptor }
     }
 
     companion object {
-        private val LOOP_RANGE_KEYS = arrayOf(
+        private konst LOOP_RANGE_KEYS = arrayOf(
             BindingContext.LOOP_RANGE_ITERATOR_RESOLVED_CALL,
             BindingContext.LOOP_RANGE_NEXT_RESOLVED_CALL,
             BindingContext.LOOP_RANGE_HAS_NEXT_RESOLVED_CALL

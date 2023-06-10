@@ -1,5 +1,5 @@
 object A {
-  val x: Int = 610
+  konst x: Int = 610
 }
 
 fun box() : String {

@@ -15,5 +15,5 @@ fun test() {
     Array(1) { arrayOf("") }
 
     emptyArray<Array<String>>()
-    val x: Array<Array<String>> = emptyArray()
+    konst x: Array<Array<String>> = emptyArray()
 }

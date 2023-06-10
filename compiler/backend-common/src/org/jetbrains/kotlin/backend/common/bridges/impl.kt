@@ -51,8 +51,8 @@ fun <Signature> generateBridgesForFunctionDescriptor(
  * can generate a bridge near an implementation (of course, in case it has a super-declaration with a different signature). Ultimately this
  * eases the process of determining what bridges are already generated in our supertypes and need to be inherited, not regenerated.
  */
-open class DescriptorBasedFunctionHandle(val descriptor: FunctionDescriptor) : FunctionHandle {
-    private val _overridden by lazy(LazyThreadSafetyMode.NONE) {
+open class DescriptorBasedFunctionHandle(konst descriptor: FunctionDescriptor) : FunctionHandle {
+    private konst _overridden by lazy(LazyThreadSafetyMode.NONE) {
         descriptor.overriddenDescriptors.map {
             createHandleForOverridden(
                 it.original
@@ -62,12 +62,12 @@ open class DescriptorBasedFunctionHandle(val descriptor: FunctionDescriptor) : F
 
     protected open fun createHandleForOverridden(overridden: FunctionDescriptor) = DescriptorBasedFunctionHandle(overridden)
 
-    override val isDeclaration: Boolean = descriptor.kind.isReal || findInterfaceImplementation(descriptor) != null
+    override konst isDeclaration: Boolean = descriptor.kind.isReal || findInterfaceImplementation(descriptor) != null
 
-    override val isAbstract: Boolean =
+    override konst isAbstract: Boolean =
         descriptor.modality == Modality.ABSTRACT
 
-    override val mayBeUsedAsSuperImplementation: Boolean =
+    override konst mayBeUsedAsSuperImplementation: Boolean =
         !DescriptorUtils.isInterface(descriptor.containingDeclaration)
 
     override fun getOverridden() = _overridden

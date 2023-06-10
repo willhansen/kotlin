@@ -1,4 +1,4 @@
-val x = initRuntimeIfNeeded()
+konst x = initRuntimeIfNeeded()
 
 fun main() {
 }

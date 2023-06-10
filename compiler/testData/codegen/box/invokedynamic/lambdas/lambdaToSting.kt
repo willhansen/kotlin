@@ -14,7 +14,7 @@
 fun lambdaToString(fn: () -> Unit) = fn.toString()
 
 fun box(): String {
-    val str = lambdaToString {}
+    konst str = lambdaToString {}
     if (!str.startsWith("LambdaToStingKt"))
         return "Failed: indy lambda toString is inherited from java.lang.Object: $str"
     return "OK"

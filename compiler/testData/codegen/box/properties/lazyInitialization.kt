@@ -3,14 +3,14 @@
 
 // FILE: A.kt
 
-val o = "O"
+konst o = "O"
 
 // FILE: B.kt
-val ok = o + k
+konst ok = o + k
 
 // FILE: C.kt
 
-val k = "K"
+konst k = "K"
 
 // FILE: main.kt
 

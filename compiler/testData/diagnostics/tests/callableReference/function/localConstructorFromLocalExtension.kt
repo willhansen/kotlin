@@ -7,12 +7,12 @@ fun main() {
     class A
     
     fun A.foo() {
-        val x = ::A
+        konst x = ::A
         checkSubtype<KFunction0<A>>(x)
     }
     
     fun Int.foo() {
-        val x = ::A
+        konst x = ::A
         checkSubtype<KFunction0<A>>(x)
     }
 }

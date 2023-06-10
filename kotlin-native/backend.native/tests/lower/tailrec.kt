@@ -62,12 +62,12 @@ tailrec fun <T> List<T>.indexOf(x: T, startIndex: Int = 0): Int {
 
 }
 
-open class Integer(val value: Int) {
-    open tailrec fun isLessOrEqualThan(value: Int): Boolean {
-        if (this.value == value) {
+open class Integer(konst konstue: Int) {
+    open tailrec fun isLessOrEqualThan(konstue: Int): Boolean {
+        if (this.konstue == konstue) {
             return true
-        } else if (value > 0) {
-            return this.isLessOrEqualThan(value - 1)
+        } else if (konstue > 0) {
+            return this.isLessOrEqualThan(konstue - 1)
         } else {
             return false
         }
@@ -84,7 +84,7 @@ class DefaultArgGetter : DefaultArgHolder() {
     }
 }
 
-open class EitherDelegatedOrNot(val delegate: EitherDelegatedOrNot?) {
+open class EitherDelegatedOrNot(konst delegate: EitherDelegatedOrNot?) {
     open tailrec fun get42(): Int = if (delegate != null) {
         delegate.get42()
     } else {

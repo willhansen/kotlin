@@ -15,13 +15,13 @@ class Controller {
             Unit
         }
     }
-    suspend fun yieldString(value: String) = suspendCoroutineUninterceptedOrReturn<Int> {
+    suspend fun yieldString(konstue: String) = suspendCoroutineUninterceptedOrReturn<Int> {
         it.resume(1)
         it checkType { _<Continuation<Int>>() }
         it.resume(<!TYPE_MISMATCH!>""<!>)
 
         // We can return anything here, 'suspendCoroutineUninterceptedOrReturn' is not very type-safe
-        // Also we can call resume and then return the value too, but it's still just our problem
+        // Also we can call resume and then return the konstue too, but it's still just our problem
         "Not-int"
     }
 }

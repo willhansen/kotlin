@@ -2,7 +2,7 @@
 
 // FILE: kt49226.kt
 fun box(): String {
-    val x: Array<String> = Mapper("OK").map(::arrayOf)
+    konst x: Array<String> = Mapper("OK").map(::arrayOf)
     return x[0]
 }
 

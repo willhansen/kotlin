@@ -26,14 +26,14 @@ import org.jetbrains.kotlin.fir.types.coneTypeSafe
 import org.jetbrains.kotlin.fir.types.toRegularClassSymbol
 
 @NoMutableState
-class FirPredicateBasedProviderImpl(private val session: FirSession) : FirPredicateBasedProvider() {
-    private val registeredPluginAnnotations = session.registeredPluginAnnotations
-    private val cache = Cache()
+class FirPredicateBasedProviderImpl(private konst session: FirSession) : FirPredicateBasedProvider() {
+    private konst registeredPluginAnnotations = session.registeredPluginAnnotations
+    private konst cache = Cache()
 
     override fun getSymbolsByPredicate(predicate: LookupPredicate): List<FirBasedSymbol<*>> {
-        val annotations = predicate.annotations
+        konst annotations = predicate.annotations
         if (annotations.isEmpty()) return emptyList()
-        val declarations = annotations.flatMapTo(mutableSetOf()) {
+        konst declarations = annotations.flatMapTo(mutableSetOf()) {
             cache.declarationByAnnotation[it] + cache.declarationsUnderAnnotated[it]
         }
         return declarations.filter { matches(predicate, it) }.map { it.symbol }
@@ -49,7 +49,7 @@ class FirPredicateBasedProviderImpl(private val session: FirSession) : FirPredic
         registerOwnersDeclarations(declaration, owners)
 
         if (declaration.annotations.isEmpty()) return
-        val matchingAnnotations = declaration.annotations
+        konst matchingAnnotations = declaration.annotations
             .mapNotNull { it.fqName(session) }
             .filter { it in registeredPluginAnnotations.annotations }
             .takeIf { it.isNotEmpty() }
@@ -63,7 +63,7 @@ class FirPredicateBasedProviderImpl(private val session: FirSession) : FirPredic
         matchingAnnotations.forEach { cache.declarationByAnnotation.put(it, declaration) }
         cache.annotationsOfDeclaration.putAll(declaration, matchingAnnotations)
 
-        val file = owners.first() as FirFile
+        konst file = owners.first() as FirFile
         cache.filesWithPluginAnnotations += file
     }
 
@@ -72,14 +72,14 @@ class FirPredicateBasedProviderImpl(private val session: FirSession) : FirPredic
     }
 
     private fun registerOwnersDeclarations(declaration: FirDeclaration, owners: PersistentList<FirDeclaration>) {
-        val lastOwner = owners.lastOrNull() ?: return
-        val annotationsFromLastOwner = cache.annotationsOfDeclaration[lastOwner]
-        val annotationsFromPreviousOwners = cache.annotationsOfUnderAnnotated[lastOwner]
+        konst lastOwner = owners.lastOrNull() ?: return
+        konst annotationsFromLastOwner = cache.annotationsOfDeclaration[lastOwner]
+        konst annotationsFromPreviousOwners = cache.annotationsOfUnderAnnotated[lastOwner]
 
         annotationsFromLastOwner.forEach { cache.declarationsParentAnnotated.put(it, declaration) }
         cache.annotationsOfParentAnnotated.putAll(declaration, annotationsFromLastOwner)
 
-        val allParentDeclarations = annotationsFromLastOwner + annotationsFromPreviousOwners
+        konst allParentDeclarations = annotationsFromLastOwner + annotationsFromPreviousOwners
         allParentDeclarations.forEach { cache.declarationsUnderAnnotated.put(it, declaration) }
         cache.annotationsOfUnderAnnotated.putAll(declaration, allParentDeclarations)
     }
@@ -91,7 +91,7 @@ class FirPredicateBasedProviderImpl(private val session: FirSession) : FirPredic
          * If declaration came from the other source session we should delegate to provider from
          *   that session, because it stores all caches about its own declarations
          */
-        val declarationSession = declaration.moduleData.session
+        konst declarationSession = declaration.moduleData.session
         if (declarationSession.kind == FirSession.Kind.Source && declarationSession !== session) {
             return declarationSession.predicateBasedProvider.matches(predicate, declaration)
         }
@@ -101,8 +101,8 @@ class FirPredicateBasedProviderImpl(private val session: FirSession) : FirPredic
         }
     }
 
-    private val declarationPredicateMatcher = Matcher<DeclarationPredicate>()
-    private val lookupPredicateMatcher = Matcher<LookupPredicate>()
+    private konst declarationPredicateMatcher = Matcher<DeclarationPredicate>()
+    private konst lookupPredicateMatcher = Matcher<LookupPredicate>()
 
     private inner class Matcher<P : AbstractPredicate<P>> : PredicateVisitor<P, Boolean, FirDeclaration>() {
         override fun visitPredicate(predicate: AbstractPredicate<P>, data: FirDeclaration): Boolean {
@@ -181,21 +181,21 @@ class FirPredicateBasedProviderImpl(private val session: FirSession) : FirPredic
     // ---------------------------------- Cache ----------------------------------
 
     private class Cache {
-        val declarationByAnnotation: Multimap<AnnotationFqn, FirDeclaration> = LinkedHashMultimap.create()
-        val annotationsOfDeclaration: LinkedHashMultimap<FirDeclaration, AnnotationFqn> = LinkedHashMultimap.create()
+        konst declarationByAnnotation: Multimap<AnnotationFqn, FirDeclaration> = LinkedHashMultimap.create()
+        konst annotationsOfDeclaration: LinkedHashMultimap<FirDeclaration, AnnotationFqn> = LinkedHashMultimap.create()
 
-        val declarationsUnderAnnotated: Multimap<AnnotationFqn, FirDeclaration> = LinkedHashMultimap.create()
-        val annotationsOfUnderAnnotated: LinkedHashMultimap<FirDeclaration, AnnotationFqn> = LinkedHashMultimap.create()
+        konst declarationsUnderAnnotated: Multimap<AnnotationFqn, FirDeclaration> = LinkedHashMultimap.create()
+        konst annotationsOfUnderAnnotated: LinkedHashMultimap<FirDeclaration, AnnotationFqn> = LinkedHashMultimap.create()
 
-        val declarationsParentAnnotated: Multimap<AnnotationFqn, FirDeclaration> = LinkedHashMultimap.create()
-        val annotationsOfParentAnnotated: Multimap<FirDeclaration, AnnotationFqn> = LinkedHashMultimap.create()
+        konst declarationsParentAnnotated: Multimap<AnnotationFqn, FirDeclaration> = LinkedHashMultimap.create()
+        konst annotationsOfParentAnnotated: Multimap<FirDeclaration, AnnotationFqn> = LinkedHashMultimap.create()
 
-        val declarationsHasAnnotated: Multimap<AnnotationFqn, FirDeclaration> = LinkedHashMultimap.create()
-        val annotationsOfHasAnnotated: Multimap<FirDeclaration, AnnotationFqn> = LinkedHashMultimap.create()
+        konst declarationsHasAnnotated: Multimap<AnnotationFqn, FirDeclaration> = LinkedHashMultimap.create()
+        konst annotationsOfHasAnnotated: Multimap<FirDeclaration, AnnotationFqn> = LinkedHashMultimap.create()
 
-        val ownersForDeclaration: MutableMap<FirDeclaration, PersistentList<FirDeclaration>> = mutableMapOf()
+        konst ownersForDeclaration: MutableMap<FirDeclaration, PersistentList<FirDeclaration>> = mutableMapOf()
 
-        val filesWithPluginAnnotations: MutableSet<FirFile> = mutableSetOf()
+        konst filesWithPluginAnnotations: MutableSet<FirFile> = mutableSetOf()
     }
 }
 

@@ -14,7 +14,7 @@ import kotlinx.cinterop.*
 @Deprecated("Use ByteArray instead.")
 @DeprecatedSinceKotlin(warningSince = "1.9")
 public final class ImmutableBlob private constructor() {
-    public val size: Int
+    public konst size: Int
         get() = getArrayLength()
 
     // Data layout is the same as for ByteArray, so we can share native functions.
@@ -31,7 +31,7 @@ public final class ImmutableBlob private constructor() {
 }
 
 @Suppress("DEPRECATION")
-private class ImmutableBlobIteratorImpl(val blob: ImmutableBlob) : ByteIterator() {
+private class ImmutableBlobIteratorImpl(konst blob: ImmutableBlob) : ByteIterator() {
     var index : Int = 0
 
     public override fun nextByte(): Byte {
@@ -77,7 +77,7 @@ public external fun ImmutableBlob.toUByteArray(startIndex: Int = 0, endIndex: In
  * To get a stable C pointer to `ByteArray` data the array needs to be pinned first.
  * ```
  * byteArray.usePinned {
- *     val cpointer = it.addressOf(offset)
+ *     konst cpointer = it.addressOf(offset)
  *     // use the stable C pointer
  * }
  * ```
@@ -97,7 +97,7 @@ public fun ImmutableBlob.asCPointer(offset: Int = 0): CPointer<ByteVar> =
  * To get a stable C pointer to `ByteArray` data the array needs to be pinned first.
  * ```
  * byteArray.usePinned {
- *     val cpointer = it.addressOf(offset)
+ *     konst cpointer = it.addressOf(offset)
  *     // use the stable C pointer
  * }
  * ```
@@ -116,7 +116,7 @@ private external fun ImmutableBlob.asCPointerImpl(offset: Int): kotlin.native.in
 /**
  * Creates [ImmutableBlob] out of compile-time constant data.
  *
- * This method accepts values of [Short] type in range `0x00..0xff`, other values are prohibited.
+ * This method accepts konstues of [Short] type in range `0x00..0xff`, other konstues are prohibited.
  *
  * One element still represent one byte in the output data.
  * This is the only way to create ImmutableBlob for now.

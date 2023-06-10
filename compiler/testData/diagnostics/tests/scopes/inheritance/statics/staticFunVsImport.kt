@@ -41,7 +41,7 @@ import C.bar
 
 class Z: A() {
     init {
-        val a: Int = bar()
+        konst a: Int = bar()
     }
 }
 
@@ -50,6 +50,6 @@ import C.*
 
 class Q: A() {
     init {
-        val a: Int = bar()
+        konst a: Int = bar()
     }
 }

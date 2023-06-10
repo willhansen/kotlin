@@ -1,6 +1,6 @@
 //ALLOW_AST_ACCESS
 package test
 
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)
 
-class Constructor @Anno(value = "string") constructor()
+class Constructor @Anno(konstue = "string") constructor()

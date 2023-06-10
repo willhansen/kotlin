@@ -6,7 +6,7 @@ plugins {
     id("jps-compatible")
 }
 
-val kotlinxSerializationVersion = "0.14.0"
+konst kotlinxSerializationVersion = "0.14.0"
 
 dependencies {
     api(project(":compiler:frontend.java"))

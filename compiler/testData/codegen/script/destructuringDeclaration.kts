@@ -1,6 +1,6 @@
-val (abc, def) = A()
+konst (abc, def) = A()
 
-val rv = abc + def
+konst rv = abc + def
 
 class A {
     operator fun component1() = 123

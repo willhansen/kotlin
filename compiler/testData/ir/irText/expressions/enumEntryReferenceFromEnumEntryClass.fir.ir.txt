@@ -18,7 +18,7 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
         PROPERTY name:counter visibility:public modality:FINAL [var]
           FIELD PROPERTY_BACKING_FIELD name:counter type:kotlin.Int visibility:private
             EXPRESSION_BODY
-              CONST Int type=kotlin.Int value=0
+              CONST Int type=kotlin.Int konstue=0
           FUN DEFAULT_PROPERTY_ACCESSOR name:<get-counter> visibility:public modality:FINAL <> ($this:<root>.MyEnum.Z) returnType:kotlin.Int
             correspondingProperty: PROPERTY name:counter visibility:public modality:FINAL [var]
             $this: VALUE_PARAMETER name:<this> type:<root>.MyEnum.Z
@@ -33,7 +33,7 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
             BLOCK_BODY
               SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:counter type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
                 receiver: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z.<set-counter>' type=<root>.MyEnum.Z origin=null
-                value: GET_VAR '<set-?>: kotlin.Int declared in <root>.MyEnum.Z.<set-counter>' type=kotlin.Int origin=null
+                konstue: GET_VAR '<set-?>: kotlin.Int declared in <root>.MyEnum.Z.<set-counter>' type=kotlin.Int origin=null
         FUN name:foo visibility:public modality:FINAL <> ($this:<root>.MyEnum.Z) returnType:kotlin.Unit
           $this: VALUE_PARAMETER name:<this> type:<root>.MyEnum.Z
           BLOCK_BODY
@@ -42,10 +42,10 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
           BLOCK_BODY
             CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.MyEnum.Z' type=kotlin.Unit origin=EQ
               $this: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z.bar' type=<root>.MyEnum.Z origin=null
-              <set-?>: CONST Int type=kotlin.Int value=1
+              <set-?>: CONST Int type=kotlin.Int konstue=1
             CALL 'public final fun foo (): kotlin.Unit declared in <root>.MyEnum.Z' type=kotlin.Unit origin=null
               $this: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z.bar' type=<root>.MyEnum.Z origin=null
-        PROPERTY name:aLambda visibility:public modality:FINAL [val]
+        PROPERTY name:aLambda visibility:public modality:FINAL [konst]
           FIELD PROPERTY_BACKING_FIELD name:aLambda type:kotlin.Function0<kotlin.Unit> visibility:private [final]
             EXPRESSION_BODY
               FUN_EXPR type=kotlin.Function0<kotlin.Unit> origin=LAMBDA
@@ -53,17 +53,17 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
                   BLOCK_BODY
                     CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.MyEnum.Z' type=kotlin.Unit origin=EQ
                       $this: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z' type=<root>.MyEnum.Z origin=null
-                      <set-?>: CONST Int type=kotlin.Int value=1
+                      <set-?>: CONST Int type=kotlin.Int konstue=1
                     CALL 'public final fun foo (): kotlin.Unit declared in <root>.MyEnum.Z' type=kotlin.Unit origin=null
                       $this: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z' type=<root>.MyEnum.Z origin=null
           FUN DEFAULT_PROPERTY_ACCESSOR name:<get-aLambda> visibility:public modality:FINAL <> ($this:<root>.MyEnum.Z) returnType:kotlin.Function0<kotlin.Unit>
-            correspondingProperty: PROPERTY name:aLambda visibility:public modality:FINAL [val]
+            correspondingProperty: PROPERTY name:aLambda visibility:public modality:FINAL [konst]
             $this: VALUE_PARAMETER name:<this> type:<root>.MyEnum.Z
             BLOCK_BODY
               RETURN type=kotlin.Nothing from='public final fun <get-aLambda> (): kotlin.Function0<kotlin.Unit> declared in <root>.MyEnum.Z'
                 GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:aLambda type:kotlin.Function0<kotlin.Unit> visibility:private [final]' type=kotlin.Function0<kotlin.Unit> origin=null
                   receiver: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z.<get-aLambda>' type=<root>.MyEnum.Z origin=null
-        PROPERTY name:anObject visibility:public modality:FINAL [val]
+        PROPERTY name:anObject visibility:public modality:FINAL [konst]
           FIELD PROPERTY_BACKING_FIELD name:anObject type:<root>.MyEnum.Z.anObject.<no name provided> visibility:private [final]
             EXPRESSION_BODY
               BLOCK type=<root>.MyEnum.Z.anObject.<no name provided> origin=OBJECT_LITERAL
@@ -77,7 +77,7 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
                     BLOCK_BODY
                       CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.MyEnum.Z' type=kotlin.Unit origin=EQ
                         $this: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z' type=<root>.MyEnum.Z origin=null
-                        <set-?>: CONST Int type=kotlin.Int value=1
+                        <set-?>: CONST Int type=kotlin.Int konstue=1
                       CALL 'public final fun foo (): kotlin.Unit declared in <root>.MyEnum.Z' type=kotlin.Unit origin=null
                         $this: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z' type=<root>.MyEnum.Z origin=null
                   FUN name:test visibility:public modality:FINAL <> ($this:<root>.MyEnum.Z.anObject.<no name provided>) returnType:kotlin.Unit
@@ -85,7 +85,7 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
                     BLOCK_BODY
                       CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.MyEnum.Z' type=kotlin.Unit origin=EQ
                         $this: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z' type=<root>.MyEnum.Z origin=null
-                        <set-?>: CONST Int type=kotlin.Int value=1
+                        <set-?>: CONST Int type=kotlin.Int konstue=1
                       CALL 'public final fun foo (): kotlin.Unit declared in <root>.MyEnum.Z' type=kotlin.Unit origin=null
                         $this: GET_VAR '<this>: <root>.MyEnum.Z declared in <root>.MyEnum.Z' type=<root>.MyEnum.Z origin=null
                   FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
@@ -103,7 +103,7 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
                     $this: VALUE_PARAMETER name:<this> type:kotlin.Any
                 CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.MyEnum.Z.anObject.<no name provided>' type=<root>.MyEnum.Z.anObject.<no name provided> origin=OBJECT_LITERAL
           FUN DEFAULT_PROPERTY_ACCESSOR name:<get-anObject> visibility:public modality:FINAL <> ($this:<root>.MyEnum.Z) returnType:<root>.MyEnum.Z.anObject.<no name provided>
-            correspondingProperty: PROPERTY name:anObject visibility:public modality:FINAL [val]
+            correspondingProperty: PROPERTY name:anObject visibility:public modality:FINAL [konst]
             $this: VALUE_PARAMETER name:<this> type:<root>.MyEnum.Z
             BLOCK_BODY
               RETURN type=kotlin.Nothing from='public final fun <get-anObject> (): <root>.MyEnum.Z.anObject.<no name provided> declared in <root>.MyEnum.Z'
@@ -131,21 +131,21 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
           overridden:
             public open fun toString (): kotlin.String declared in <root>.MyEnum
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           annotations:
-            IntrinsicConstEvaluation
+            IntrinsicConstEkonstuation
           overridden:
             public final name: kotlin.String
           FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-name> (): kotlin.String declared in <root>.MyEnum
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final ordinal: kotlin.Int
           FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+            correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
             overridden:
               public final fun <get-ordinal> (): kotlin.Int declared in <root>.MyEnum
             $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
@@ -157,14 +157,14 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
           overridden:
             protected/*protected and package*/ final fun finalize (): kotlin.Unit declared in <root>.MyEnum
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.MyEnum>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.MyEnum>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.MyEnum
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.MyEnum
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.MyEnum>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
     FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Any [fake_override]
       overridden:
@@ -188,21 +188,21 @@ FILE fqName:<root> fileName:/enumEntryReferenceFromEnumEntryClass.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<E of kotlin.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<E of kotlin.Enum>

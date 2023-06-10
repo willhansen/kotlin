@@ -7,9 +7,9 @@ interface Some {
     fun toChar(): Char = '+'
 }
 
-class MyNumber(val value: Int) : Number(), Some {
+class MyNumber(konst konstue: Int) : Number(), Some {
     override fun toChar(): Char = super<Some>.toChar()
-    override fun toInt(): Int = value
+    override fun toInt(): Int = konstue
 
     override fun toByte(): Byte = toInt().toByte()
     override fun toDouble(): Double = toInt().toDouble()
@@ -19,6 +19,6 @@ class MyNumber(val value: Int) : Number(), Some {
 }
 
 fun box(): String {
-    val x = MyNumber('*'.code).toChar()
+    konst x = MyNumber('*'.code).toChar()
     return if (x == '+') "OK" else "Fail: $x"
 }

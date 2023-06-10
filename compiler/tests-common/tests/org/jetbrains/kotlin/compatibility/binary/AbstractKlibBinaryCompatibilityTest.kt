@@ -11,26 +11,26 @@ import org.jetbrains.kotlin.test.util.KtTestUtil
 import org.jetbrains.kotlin.utils.DFS
 import java.io.File
 
-class TestFile(val module: TestModule, fileName: String, text: String, directives: Directives)
+class TestFile(konst module: TestModule, fileName: String, text: String, directives: Directives)
     : KotlinBaseTest.TestFile(fileName, text, directives) {
     init {
         module.files.add(this)
     }
-    val version: Int? = directives["VERSION"]?.toInt()
+    konst version: Int? = directives["VERSION"]?.toInt()
 }
 
 class TestModule(name: String, dependenciesSymbols: List<String>, friends: List<String>)
     : KotlinBaseTest.TestModule(name, dependenciesSymbols, friends) {
 
-    val files = mutableListOf<TestFile>()
-    val hasVersions get() = files.any { it.version != null }
+    konst files = mutableListOf<TestFile>()
+    konst hasVersions get() = files.any { it.version != null }
     fun versionFiles(version: Int) = files.filter { it.version == null || it.version == version }
 }
 
 abstract class AbstractKlibBinaryCompatibilityTest : KotlinTestWithEnvironment() {
 
-    private val pathToRootOutputDir = System.getProperty("kotlin.js.test.root.out.dir") ?: error("'kotlin.js.test.root.out.dir' is not set")
-    private val testGroupSuffix = "binaryCompatibility/"
+    private konst pathToRootOutputDir = System.getProperty("kotlin.js.test.root.out.dir") ?: error("'kotlin.js.test.root.out.dir' is not set")
+    private konst testGroupSuffix = "binaryCompatibility/"
     protected lateinit var workingDir: File
 
     fun doTest(filePath: String) {
@@ -40,7 +40,7 @@ abstract class AbstractKlibBinaryCompatibilityTest : KotlinTestWithEnvironment()
     }
 
     fun doTestWithIgnoringByFailFile(filePath: String) {
-        val failFile = File("$filePath.fail")
+        konst failFile = File("$filePath.fail")
         try {
             doTest(filePath, "OK")
         } catch (e: Throwable) {
@@ -76,8 +76,8 @@ abstract class AbstractKlibBinaryCompatibilityTest : KotlinTestWithEnvironment()
     }
 
     companion object {
-        const val TEST_FUNCTION = "box"
-        const val DEFAULT_MODULE = "main"
+        const konst TEST_FUNCTION = "box"
+        const konst DEFAULT_MODULE = "main"
 
         @OptIn(ObsoleteTestInfrastructure::class)
         fun doTest(
@@ -86,10 +86,10 @@ abstract class AbstractKlibBinaryCompatibilityTest : KotlinTestWithEnvironment()
             produceKlib: (TestModule, Int) -> Unit,
             produceAndRunProgram: (TestModule, String) -> Unit,
         ) {
-            val file = File(filePath)
-            val fileContent = KtTestUtil.doLoadFile(file)
+            konst file = File(filePath)
+            konst fileContent = KtTestUtil.doLoadFile(file)
 
-            val inputFiles = TestFiles.createTestFiles(
+            konst inputFiles = TestFiles.createTestFiles(
                 file.name,
                 fileContent,
                 object : TestFiles.TestFileFactory<TestModule, TestFile> {
@@ -105,16 +105,16 @@ abstract class AbstractKlibBinaryCompatibilityTest : KotlinTestWithEnvironment()
                 true,
                 true
             )
-            val modules = inputFiles
+            konst modules = inputFiles
                 .map { it.module }.distinct()
                 .map { it.name to it }.toMap()
 
-            val orderedModules = DFS.topologicalOrder(modules.values) { module ->
+            konst orderedModules = DFS.topologicalOrder(modules.konstues) { module ->
                 module.dependenciesSymbols.mapNotNull { modules[it] }
             }
 
-            val mainModuleName = DEFAULT_MODULE
-            val mainModule = modules[mainModuleName] ?: error("No module with name \"$mainModuleName\"")
+            konst mainModuleName = DEFAULT_MODULE
+            konst mainModule = modules[mainModuleName] ?: error("No module with name \"$mainModuleName\"")
 
             orderedModules.reversed().filterNot { it === mainModule }.forEach {
                 produceKlib(it, 1)

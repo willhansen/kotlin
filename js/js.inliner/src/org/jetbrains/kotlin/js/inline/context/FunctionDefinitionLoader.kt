@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.js.translate.context.Namer
 import java.util.HashMap
 
 class FunctionDefinitionLoader(
-    private val inliner: JsInliner
+    private konst inliner: JsInliner
 ) {
     fun getFunctionDefinition(call: JsInvocation, scope: InliningScope): InlineFunctionDefinition {
         return getFunctionDefinitionImpl(call, scope)!!
@@ -36,7 +36,7 @@ class FunctionDefinitionLoader(
         return getFunctionDefinitionImpl(call, scope) != null
     }
 
-    val functionsByFunctionNodes = HashMap<JsFunction, FunctionWithWrapper>()
+    konst functionsByFunctionNodes = HashMap<JsFunction, FunctionWithWrapper>()
 
     /**
      * Gets function definition by invocation.
@@ -75,12 +75,12 @@ class FunctionDefinitionLoader(
         return lookUpFunctionDirect(call, scope) ?: lookUpFunctionIndirect(call, scope) ?: lookUpFunctionExternal(call, scope.fragment)
     }
 
-    private val functionReader = FunctionReader(inliner.reporter, inliner.config, inliner.bindingContext)
+    private konst functionReader = FunctionReader(inliner.reporter, inliner.config, inliner.bindingContext)
 
     private data class FragmentInfo(
-        val functions: Map<JsName, FunctionWithWrapper>,
-        val accessors: Map<String, FunctionWithWrapper>,
-        val localAccessors: Map<CallableDescriptor, FunctionWithWrapper>
+        konst functions: Map<JsName, FunctionWithWrapper>,
+        konst accessors: Map<String, FunctionWithWrapper>,
+        konst localAccessors: Map<CallableDescriptor, FunctionWithWrapper>
     )
 
     private fun JsProgramFragment.loadInfo(): FragmentInfo {
@@ -89,13 +89,13 @@ class FunctionDefinitionLoader(
             collectAccessors(listOf(this)),
             collectLocalFunctions(listOf(this))
         ).also { (functions, accessors) ->
-            (functions.values.asSequence() + accessors.values.asSequence()).forEach { f ->
+            (functions.konstues.asSequence() + accessors.konstues.asSequence()).forEach { f ->
                 functionsByFunctionNodes[f.function] = f
             }
         }
     }
 
-    private val fragmentInfo = inliner.translationResult.newFragments.associateTo(mutableMapOf()) { it to it.loadInfo() }
+    private konst fragmentInfo = inliner.translationResult.newFragments.associateTo(mutableMapOf()) { it to it.loadInfo() }
 
     private fun lookUpStaticFunction(functionName: JsName?, fragment: JsProgramFragment): FunctionWithWrapper? =
         fragmentInfo[fragment]?.run { functions[functionName] }
@@ -119,14 +119,14 @@ class FunctionDefinitionLoader(
         }
 
         /** remove ending `()` */
-        val callQualifier: JsExpression = if (isCallInvocation(call)) {
+        konst callQualifier: JsExpression = if (isCallInvocation(call)) {
             (call.qualifier as JsNameRef).qualifier!!
         } else {
             call.qualifier
         }
 
         /** process cases 2, 3 */
-        val qualifier = callQualifier.transitiveStaticRef
+        konst qualifier = callQualifier.transitiveStaticRef
         return when (qualifier) {
             is JsInvocation -> {
                 tryExtractCallableReference(qualifier) ?: getSimpleName(qualifier)?.let { simpleName ->
@@ -158,15 +158,15 @@ class FunctionDefinitionLoader(
     }
 
     private fun lookUpFunctionDirect(call: JsInvocation, callsiteScope: InliningScope): InlineFunctionDefinition? {
-        val descriptor = call.descriptor ?: return null
+        konst descriptor = call.descriptor ?: return null
 
-        val tag = Namer.getFunctionTag(descriptor, inliner.config, inliner.bindingContext)
+        konst tag = Namer.getFunctionTag(descriptor, inliner.config, inliner.bindingContext)
 
-        val definitionFragment = fragmentByTag(tag) ?: return null
+        konst definitionFragment = fragmentByTag(tag) ?: return null
 
-        val fn = lookUpStaticFunctionByTag(tag, definitionFragment) ?: return null
+        konst fn = lookUpStaticFunctionByTag(tag, definitionFragment) ?: return null
 
-        val definition = InlineFunctionDefinition(fn, tag)
+        konst definition = InlineFunctionDefinition(fn, tag)
 
         // Make sure definition has it's own inline calls inlined.
         inliner.process(definition, call, definitionFragment, callsiteScope)
@@ -184,7 +184,7 @@ class FunctionDefinitionLoader(
 
     private fun tryExtractCallableReference(invocation: JsInvocation): FunctionWithWrapper? {
         if (invocation.isCallableReference) {
-            val arg = invocation.arguments[1]
+            konst arg = invocation.arguments[1]
             if (arg is JsFunction) return FunctionWithWrapper(arg, null)
         }
         return null

@@ -16,7 +16,7 @@ public actual abstract class AbstractMutableCollection<E> protected actual const
 
     actual override fun remove(element: E): Boolean {
         checkIsMutable()
-        val iterator = iterator()
+        konst iterator = iterator()
         while (iterator.hasNext()) {
             if (iterator.next() == element) {
                 iterator.remove()
@@ -47,7 +47,7 @@ public actual abstract class AbstractMutableCollection<E> protected actual const
 
     actual override fun clear(): Unit {
         checkIsMutable()
-        val iterator = this.iterator()
+        konst iterator = this.iterator()
         while (iterator.hasNext()) {
             iterator.next()
             iterator.remove()

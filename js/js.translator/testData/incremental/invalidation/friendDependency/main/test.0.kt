@@ -1,4 +1,4 @@
 fun test(): Int {
-    val v = PublicClassHeir()
+    konst v = PublicClassHeir()
     return v.foo() + v.bar + v.baz() - 5
 }

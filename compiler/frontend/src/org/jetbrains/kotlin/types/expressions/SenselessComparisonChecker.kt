@@ -38,24 +38,24 @@ object SenselessComparisonChecker {
         getType: (KtExpression) -> KotlinType?,
         getNullability: (DataFlowValue) -> Nullability
     ) {
-        val expr =
+        konst expr =
             when {
                 KtPsiUtil.isNullConstant(left) -> right
                 KtPsiUtil.isNullConstant(right) -> left
                 else -> return
             }
 
-        val type = getType(expr)
+        konst type = getType(expr)
         if (type == null || type.isError) return
 
-        val operationSign = expression.operationReference
-        val value = context.dataFlowValueFactory.createDataFlowValue(expr, type, context)
+        konst operationSign = expression.operationReference
+        konst konstue = context.dataFlowValueFactory.createDataFlowValue(expr, type, context)
 
-        val equality =
+        konst equality =
             operationSign.getReferencedNameElementType() == KtTokens.EQEQ || operationSign.getReferencedNameElementType() == KtTokens.EQEQEQ
-        val nullability = getNullability(value)
+        konst nullability = getNullability(konstue)
 
-        val expressionIsAlways =
+        konst expressionIsAlways =
             when (nullability) {
                 Nullability.NULL -> equality
                 Nullability.NOT_NULL -> !equality

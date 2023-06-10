@@ -2,11 +2,11 @@
 // FILE: 1.kt
 package test
 
-class A(val value: String) {
+class A(konst konstue: String) {
 
     inline fun String.inlineFun(crossinline lambda: () -> String, crossinline dlambda: () -> String = { this }): String {
         return {
-            "$value ${this} ${lambda()} ${dlambda()}"
+            "$konstue ${this} ${lambda()} ${dlambda()}"
         }.let { it() }
     }
 }
@@ -20,6 +20,6 @@ import test.*
 fun String.test(): String = with(A("VALUE")) { "INLINE".inlineFun({ this@test }) }
 
 fun box(): String {
-    val result = "TEST".test()
+    konst result = "TEST".test()
     return if (result == "VALUE INLINE TEST INLINE") "OK" else "fail 1: $result"
 }

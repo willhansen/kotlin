@@ -24,7 +24,7 @@ sealed class SealedClass {
 
 class Modifiers {
     @Transient
-    val transientField: String = ""
+    konst transientField: String = ""
 
     @Volatile
     var volatileField: String = ""

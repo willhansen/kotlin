@@ -39,10 +39,10 @@ import kotlin.io.path.nameWithoutExtension
 import kotlin.test.fail
 
 // Same as LightProjectDescriptor.TEST_MODULE_NAME
-private const val TEST_MODULE_NAME = "light_idea_test_case"
+private const konst TEST_MODULE_NAME = "light_idea_test_case"
 
 abstract class AbstractSymbolLightClassesTestBase(
-    override val configurator: AnalysisApiTestConfigurator
+    override konst configurator: AnalysisApiTestConfigurator
 ) : AbstractAnalysisApiBasedSingleModuleTest() {
 
     override fun configureTest(builder: TestConfigurationBuilder) {
@@ -63,8 +63,8 @@ abstract class AbstractSymbolLightClassesTestBase(
             return
         }
 
-        val ktFile = ktFiles.first()
-        val project = ktFile.project
+        konst ktFile = ktFiles.first()
+        konst project = ktFile.project
 
         ignoreExceptionIfIgnoreDirectivePresent(module) {
             compareResults(module, testServices) {
@@ -74,14 +74,14 @@ abstract class AbstractSymbolLightClassesTestBase(
     }
 
     protected fun compareResults(module: TestModule, testServices: TestServices, computeActual: () -> String) {
-        val actual = computeActual().cleanup()
+        konst actual = computeActual().cleanup()
         compareResults(testServices, actual)
         removeIgnoreDirectives(module)
         removeDuplicatedFirJava(testServices)
     }
 
     private fun String.cleanup(): String {
-        val lines = this.lines().mapTo(mutableListOf()) { it.ifBlank { "" } }
+        konst lines = this.lines().mapTo(mutableListOf()) { it.ifBlank { "" } }
         if (lines.last().isNotBlank()) {
             lines += ""
         }
@@ -100,7 +100,7 @@ abstract class AbstractSymbolLightClassesTestBase(
         try {
             action()
         } catch (e: Throwable) {
-            val directives = module.directives
+            konst directives = module.directives
             if (Directives.IGNORE_FIR in directives || isTestAgainstCompiledCode && Directives.IGNORE_LIBRARY_EXCEPTIONS in directives) {
                 return
             }
@@ -113,12 +113,12 @@ abstract class AbstractSymbolLightClassesTestBase(
         testServices: TestServices,
         actual: String,
     ) {
-        val path: Path = currentResultPath().takeIf { it.exists() } ?: javaPath()
+        konst path: Path = currentResultPath().takeIf { it.exists() } ?: javaPath()
         testServices.assertions.assertEqualsToFile(path, actual)
     }
 
     private fun removeIgnoreDirectives(module: TestModule) {
-        val directives = module.directives
+        konst directives = module.directives
         if (Directives.IGNORE_FIR in directives) {
             throwTestIsPassingException(Directives.IGNORE_FIR)
         }
@@ -133,15 +133,15 @@ abstract class AbstractSymbolLightClassesTestBase(
     }
 
     protected fun findLightClass(fqname: String, project: Project): PsiClass? {
-        val searchScope = GlobalSearchScope.allScope(project)
+        konst searchScope = GlobalSearchScope.allScope(project)
         JavaElementFinder.getInstance(project).findClass(fqname, searchScope)?.let { return it }
 
-        val fqName = FqName(fqname)
-        val parentFqName = fqName.parent().takeUnless(FqName::isRoot) ?: return null
-        val enumClass = JavaElementFinder.getInstance(project).findClass(parentFqName.asString(), searchScope) ?: return null
-        val kotlinEnumClass = enumClass.unwrapped?.safeAs<KtClass>()?.takeIf(KtClass::isEnum) ?: return null
+        konst fqName = FqName(fqname)
+        konst parentFqName = fqName.parent().takeUnless(FqName::isRoot) ?: return null
+        konst enumClass = JavaElementFinder.getInstance(project).findClass(parentFqName.asString(), searchScope) ?: return null
+        konst kotlinEnumClass = enumClass.unwrapped?.safeAs<KtClass>()?.takeIf(KtClass::isEnum) ?: return null
 
-        val enumEntryName = fqName.shortName().asString()
+        konst enumEntryName = fqName.shortName().asString()
         enumClass.findInnerClassByName(enumEntryName, false)?.let { return it }
 
         return kotlinEnumClass.declarations.firstNotNullOfOrNull {
@@ -154,10 +154,10 @@ abstract class AbstractSymbolLightClassesTestBase(
     }
 
     private fun removeDuplicatedFirJava(testServices: TestServices) {
-        val java = javaPath()
-        val firJava = currentResultPath()
+        konst java = javaPath()
+        konst firJava = currentResultPath()
         if (!firJava.exists()) return
-        val identicalCheckerHelper = IdenticalCheckerHelper(testServices)
+        konst identicalCheckerHelper = IdenticalCheckerHelper(testServices)
         if (identicalCheckerHelper.contentsAreEquals(java.toFile(), firJava.toFile(), trimLines = true)) {
             identicalCheckerHelper.deleteFirFile(java.toFile())
             fail("$firJava is equals to $java. The redundant test data file removed")
@@ -181,22 +181,22 @@ abstract class AbstractSymbolLightClassesTestBase(
     private fun javaPath() = testDataPath.resolveSibling(testDataPath.nameWithoutExtension + EXTENSIONS.JAVA)
     private fun currentResultPath() = testDataPath.resolveSibling(testDataPath.nameWithoutExtension + currentExtension)
 
-    protected abstract val currentExtension: String
-    protected abstract val isTestAgainstCompiledCode: Boolean
+    protected abstract konst currentExtension: String
+    protected abstract konst isTestAgainstCompiledCode: Boolean
 
     object EXTENSIONS {
-        const val JAVA = ".java"
-        const val FIR_JAVA = ".fir.java"
-        const val LIB_JAVA = ".lib.java"
+        const konst JAVA = ".java"
+        const konst FIR_JAVA = ".fir.java"
+        const konst LIB_JAVA = ".lib.java"
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val IGNORE_FIR by directive(
+        konst IGNORE_FIR by directive(
             description = "Ignore the test for Symbol FIR-based implementation of LC",
             applicability = DirectiveApplicability.Global
         )
 
-        val IGNORE_LIBRARY_EXCEPTIONS by stringDirective(
+        konst IGNORE_LIBRARY_EXCEPTIONS by stringDirective(
             description = "Ignore the test for decompiled-based implementation of LC"
         )
     }

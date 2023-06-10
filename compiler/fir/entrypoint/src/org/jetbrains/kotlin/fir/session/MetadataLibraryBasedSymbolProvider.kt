@@ -41,14 +41,14 @@ abstract class MetadataLibraryBasedSymbolProvider<L : MetadataLibrary>(
 ) {
     protected abstract fun moduleData(library: L): FirModuleData?
 
-    protected abstract val fragmentNamesInLibraries: Map<String, List<L>>
+    protected abstract konst fragmentNamesInLibraries: Map<String, List<L>>
 
-    protected abstract val knownPackagesInLibraries: Set<FqName>
+    protected abstract konst knownPackagesInLibraries: Set<FqName>
 
-    private val annotationDeserializer = KlibBasedAnnotationDeserializer(session)
-    private val constDeserializer = FirConstDeserializer(session, KlibMetadataSerializerProtocol)
-    protected val deserializationConfiguration = CompilerDeserializationConfiguration(session.languageVersionSettings)
-    private val cachedFragments = mutableMapOf<L, MutableMap<Pair<String, String>, ProtoBuf.PackageFragment>>()
+    private konst annotationDeserializer = KlibBasedAnnotationDeserializer(session)
+    private konst constDeserializer = FirConstDeserializer(session, KlibMetadataSerializerProtocol)
+    protected konst deserializationConfiguration = CompilerDeserializationConfiguration(session.languageVersionSettings)
+    private konst cachedFragments = mutableMapOf<L, MutableMap<Pair<String, String>, ProtoBuf.PackageFragment>>()
 
     private fun getPackageFragment(
         resolvedLibrary: L, packageStringName: String, packageMetadataPart: String
@@ -61,18 +61,18 @@ abstract class MetadataLibraryBasedSymbolProvider<L : MetadataLibrary>(
     }
 
     override fun computePackagePartsInfos(packageFqName: FqName): List<PackagePartsCacheData> {
-        val packageStringName = if (packageFqName.isRoot) "" else packageFqName.asString()
+        konst packageStringName = if (packageFqName.isRoot) "" else packageFqName.asString()
 
-        val librariesWithFragment = fragmentNamesInLibraries[packageStringName] ?: return emptyList()
+        konst librariesWithFragment = fragmentNamesInLibraries[packageStringName] ?: return emptyList()
 
         return librariesWithFragment.flatMap { resolvedLibrary ->
             resolvedLibrary.packageMetadataParts(packageStringName).mapNotNull {
-                val fragment = getPackageFragment(resolvedLibrary, packageStringName, it)
+                konst fragment = getPackageFragment(resolvedLibrary, packageStringName, it)
 
-                val moduleData = moduleData(resolvedLibrary) ?: return@mapNotNull null
-                val packageProto = fragment.`package`
+                konst moduleData = moduleData(resolvedLibrary) ?: return@mapNotNull null
+                konst packageProto = fragment.`package`
 
-                val nameResolver = NameResolverImpl(
+                konst nameResolver = NameResolverImpl(
                     fragment.strings,
                     fragment.qualifiedNames,
                 )
@@ -104,13 +104,13 @@ abstract class MetadataLibraryBasedSymbolProvider<L : MetadataLibrary>(
     @OptIn(SymbolInternals::class)
     override fun extractClassMetadata(classId: ClassId, parentContext: FirDeserializationContext?): ClassMetadataFindResult? {
         forEachFragmentInPackage(classId.packageFqName) { resolvedLibrary, fragment, nameResolver ->
-            val finder = KlibMetadataClassDataFinder(fragment, nameResolver)
-            val classProto = finder.findClassData(classId)?.classProto ?: return@forEachFragmentInPackage
+            konst finder = KlibMetadataClassDataFinder(fragment, nameResolver)
+            konst classProto = finder.findClassData(classId)?.classProto ?: return@forEachFragmentInPackage
 
-            val moduleData = moduleData(resolvedLibrary) ?: return null
+            konst moduleData = moduleData(resolvedLibrary) ?: return null
 
             return ClassMetadataFindResult.NoMetadata { symbol ->
-                val source = createDeserializedContainerSource(
+                konst source = createDeserializedContainerSource(
                     resolvedLibrary,
                     classId.packageFqName
                 )
@@ -141,16 +141,16 @@ abstract class MetadataLibraryBasedSymbolProvider<L : MetadataLibrary>(
         packageFqName: FqName,
         f: (L, ProtoBuf.PackageFragment, NameResolver) -> Unit
     ) {
-        val packageStringName = packageFqName.asString()
+        konst packageStringName = packageFqName.asString()
 
-        val librariesWithFragment = fragmentNamesInLibraries[packageStringName] ?: return
+        konst librariesWithFragment = fragmentNamesInLibraries[packageStringName] ?: return
 
         for (resolvedLibrary in librariesWithFragment) {
             for (packageMetadataPart in resolvedLibrary.packageMetadataParts(packageStringName)) {
 
-                val fragment = getPackageFragment(resolvedLibrary, packageStringName, packageMetadataPart)
+                konst fragment = getPackageFragment(resolvedLibrary, packageStringName, packageMetadataPart)
 
-                val nameResolver = NameResolverImpl(
+                konst nameResolver = NameResolverImpl(
                     fragment.strings,
                     fragment.qualifiedNames,
                 )

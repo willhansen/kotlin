@@ -31,8 +31,8 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.callableIdForConstructor
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
-abstract class AbstractConstructorGeneratorPart<T : ConeLombokAnnotations.ConstructorAnnotation>(private val session: FirSession) {
-    protected val lombokService: LombokService
+abstract class AbstractConstructorGeneratorPart<T : ConeLombokAnnotations.ConstructorAnnotation>(private konst session: FirSession) {
+    protected konst lombokService: LombokService
         get() = session.lombokService
 
     protected abstract fun getConstructorInfo(classSymbol: FirClassSymbol<*>): T?
@@ -40,12 +40,12 @@ abstract class AbstractConstructorGeneratorPart<T : ConeLombokAnnotations.Constr
 
     @OptIn(SymbolInternals::class)
     fun createConstructor(classSymbol: FirClassSymbol<*>): FirFunction? {
-        val constructorInfo = getConstructorInfo(classSymbol) ?: return null
-        val staticName = constructorInfo.staticName?.let { Name.identifier(it) }
+        konst constructorInfo = getConstructorInfo(classSymbol) ?: return null
+        konst staticName = constructorInfo.staticName?.let { Name.identifier(it) }
 
-        val substitutor: JavaTypeSubstitutor
-        val constructorSymbol: FirFunctionSymbol<*>
-        val builder = if (staticName == null) {
+        konst substitutor: JavaTypeSubstitutor
+        konst constructorSymbol: FirFunctionSymbol<*>
+        konst builder = if (staticName == null) {
             FirJavaConstructorBuilder().apply {
                 symbol = FirConstructorSymbol(classSymbol.classId.callableIdForConstructor()).also { constructorSymbol = it }
                 classSymbol.fir.typeParameters.mapTo(typeParameters) {
@@ -63,10 +63,10 @@ abstract class AbstractConstructorGeneratorPart<T : ConeLombokAnnotations.Constr
         } else {
             FirJavaMethodBuilder().apply {
                 name = staticName
-                val methodSymbol = FirNamedFunctionSymbol(CallableId(classSymbol.classId, staticName)).also { constructorSymbol = it }
+                konst methodSymbol = FirNamedFunctionSymbol(CallableId(classSymbol.classId, staticName)).also { constructorSymbol = it }
                 symbol = methodSymbol
 
-                val classTypeParameterSymbols = classSymbol.fir.typeParameters.map { it.symbol }
+                konst classTypeParameterSymbols = classSymbol.fir.typeParameters.map { it.symbol }
                 classTypeParameterSymbols.mapTo(typeParameters) {
                     buildTypeParameterCopy(it.fir) {
                         this.symbol = FirTypeParameterSymbol()
@@ -74,20 +74,20 @@ abstract class AbstractConstructorGeneratorPart<T : ConeLombokAnnotations.Constr
                     }
                 }
 
-                val javaClass = classSymbol.fir as FirJavaClass
-                val javaTypeParametersFromClass = javaClass.javaTypeParameterStack
-                    .filter { it.value in classTypeParameterSymbols }
+                konst javaClass = classSymbol.fir as FirJavaClass
+                konst javaTypeParametersFromClass = javaClass.javaTypeParameterStack
+                    .filter { it.konstue in classTypeParameterSymbols }
                     .map { it.key }
 
-                val functionTypeParameterToJavaTypeParameter = typeParameters.zip(javaTypeParametersFromClass)
+                konst functionTypeParameterToJavaTypeParameter = typeParameters.zip(javaTypeParametersFromClass)
                     .associate { (parameter, javaParameter) -> parameter.symbol to JavaTypeParameterStub(javaParameter) }
 
                 for ((parameter, javaParameter) in functionTypeParameterToJavaTypeParameter) {
                     javaClass.javaTypeParameterStack.addParameter(javaParameter, parameter)
                 }
 
-                val javaTypeSubstitution: Map<JavaClassifier, JavaType> = javaTypeParametersFromClass
-                    .zip(functionTypeParameterToJavaTypeParameter.values)
+                konst javaTypeSubstitution: Map<JavaClassifier, JavaType> = javaTypeParametersFromClass
+                    .zip(functionTypeParameterToJavaTypeParameter.konstues)
                     .associate { (originalParameter, newParameter) ->
                         originalParameter to JavaTypeParameterTypeStub(newParameter)
                     }
@@ -115,11 +115,11 @@ abstract class AbstractConstructorGeneratorPart<T : ConeLombokAnnotations.Constr
                 }
             }
 
-            val fields = getFieldsForParameters(classSymbol)
-            fields.mapTo(valueParameters) { field ->
+            konst fields = getFieldsForParameters(classSymbol)
+            fields.mapTo(konstueParameters) { field ->
                 buildJavaValueParameter {
                     moduleData = field.moduleData
-                    returnTypeRef = when (val typeRef = field.returnTypeRef) {
+                    returnTypeRef = when (konst typeRef = field.returnTypeRef) {
                         is FirJavaTypeRef -> buildJavaTypeRef {
                             type = substitutor.substituteOrSelf(typeRef.type)
                             annotationBuilder = { emptyList() }
@@ -141,56 +141,56 @@ abstract class AbstractConstructorGeneratorPart<T : ConeLombokAnnotations.Constr
     }
 }
 
-private class JavaTypeParameterStub(val original: JavaTypeParameter) : JavaTypeParameter {
-    override val name: Name
+private class JavaTypeParameterStub(konst original: JavaTypeParameter) : JavaTypeParameter {
+    override konst name: Name
         get() = original.name
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = original.annotations
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = original.isDeprecatedInJavaDoc
 
     override fun findAnnotation(fqName: FqName): JavaAnnotation? {
         return original.findAnnotation(fqName)
     }
 
-    override val upperBounds: Collection<JavaClassifierType>
+    override konst upperBounds: Collection<JavaClassifierType>
         get() = original.upperBounds
 }
 
 private class JavaClassifierTypeStub(
-    val original: JavaClassifierType,
-    override val typeArguments: List<JavaType?>,
+    konst original: JavaClassifierType,
+    override konst typeArguments: List<JavaType?>,
 ) : JavaClassifierType {
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = original.annotations
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = original.isDeprecatedInJavaDoc
-    override val classifier: JavaClassifier?
+    override konst classifier: JavaClassifier?
         get() = original.classifier
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = original.isRaw
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = original.classifierQualifiedName
-    override val presentableText: String
+    override konst presentableText: String
         get() = original.presentableText
 }
 
 private class JavaTypeParameterTypeStub(
-    override val classifier: JavaTypeParameter
+    override konst classifier: JavaTypeParameter
 ) : JavaClassifierType {
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = emptyList()
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = false
-    override val typeArguments: List<JavaType?>
+    override konst typeArguments: List<JavaType?>
         get() = emptyList()
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = false
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = classifier.name.identifier
-    override val presentableText: String
+    override konst presentableText: String
         get() = classifierQualifiedName
 }
 
@@ -208,14 +208,14 @@ private sealed class JavaTypeSubstitutor {
     abstract fun substituteOrNull(type: JavaType): JavaType?
 }
 
-private class JavaTypeSubstitutorByMap(val map: Map<JavaClassifier, JavaType>) : JavaTypeSubstitutor() {
+private class JavaTypeSubstitutorByMap(konst map: Map<JavaClassifier, JavaType>) : JavaTypeSubstitutor() {
     override fun substituteOrNull(type: JavaType): JavaType? {
         if (type !is JavaClassifierType) return null
         map[type.classifier]?.let { return it }
         var hasNewArguments = false
-        val newArguments = type.typeArguments.map { argument ->
+        konst newArguments = type.typeArguments.map { argument ->
             if (argument == null) return@map null
-            val newArgument = substituteOrSelf(argument)
+            konst newArgument = substituteOrSelf(argument)
             if (newArgument !== argument) {
                 hasNewArguments = true
                 newArgument

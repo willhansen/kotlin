@@ -5,7 +5,7 @@ import nativeHelper.nativeHelper
 import unixHelper.unixHelper
 
 object IosMain {
-    val native = nativeHelper()
-    val unix = unixHelper()
-    val apple = appleHelper()
+    konst native = nativeHelper()
+    konst unix = unixHelper()
+    konst apple = appleHelper()
 }

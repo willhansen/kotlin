@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.gradle.utils.markResolvable
  * to resolve those binaries. See [IdeaKpmPlatformDependencyResolver.ArtifactResolution.PlatformFragment]
  */
 class IdeaKpmPlatformDependencyResolver(
-    private val binaryType: String = IdeaKpmDependency.CLASSPATH_BINARY_TYPE,
-    private val artifactResolution: ArtifactResolution = ArtifactResolution.Variant()
+    private konst binaryType: String = IdeaKpmDependency.CLASSPATH_BINARY_TYPE,
+    private konst artifactResolution: ArtifactResolution = ArtifactResolution.Variant()
 ) : IdeaKpmDependencyResolver {
 
     sealed class ArtifactResolution {
@@ -37,7 +37,7 @@ class IdeaKpmPlatformDependencyResolver(
          * @param artifactViewAttributes: Additional attributes that will be used to create an [ArtifactView] for resolving the dependencies.
          */
         data class Variant(
-            internal val artifactViewAttributes: GradleKpmConfigurationAttributesSetup<GradleKpmFragment> = GradleKpmConfigurationAttributesSetup.None
+            internal konst artifactViewAttributes: GradleKpmConfigurationAttributesSetup<GradleKpmFragment> = GradleKpmConfigurationAttributesSetup.None
         ) : ArtifactResolution()
 
         /**
@@ -48,18 +48,18 @@ class IdeaKpmPlatformDependencyResolver(
          * resolving the dependencies
          */
         data class PlatformFragment(
-            internal val platformResolutionAttributes: GradleKpmConfigurationAttributesSetup<GradleKpmFragment>,
-            internal val artifactViewAttributes: GradleKpmConfigurationAttributesSetup<GradleKpmFragment> = GradleKpmConfigurationAttributesSetup { },
+            internal konst platformResolutionAttributes: GradleKpmConfigurationAttributesSetup<GradleKpmFragment>,
+            internal konst artifactViewAttributes: GradleKpmConfigurationAttributesSetup<GradleKpmFragment> = GradleKpmConfigurationAttributesSetup { },
         ) : ArtifactResolution()
     }
 
     override fun resolve(fragment: GradleKpmFragment): Set<IdeaKpmBinaryDependency> {
-        val artifacts = artifactResolution.createArtifactView(fragment)?.artifacts ?: return emptySet()
+        konst artifacts = artifactResolution.createArtifactView(fragment)?.artifacts ?: return emptySet()
 
-        val unresolvedDependencies = artifacts.failures
+        konst unresolvedDependencies = artifacts.failures
             .onEach { reason -> fragment.project.logger.error("Failed to resolve dependency", reason) }
             .map { reason ->
-                val selector = (reason as? ModuleVersionResolveException)?.selector as? ModuleComponentSelector
+                konst selector = (reason as? ModuleVersionResolveException)?.selector as? ModuleComponentSelector
                 /* Can't figure out the dependency here :( */
                     ?: return@map IdeaKpmUnresolvedBinaryDependencyImpl(
                         coordinates = null, cause = reason.message?.takeIf { it.isNotBlank() }
@@ -71,7 +71,7 @@ class IdeaKpmPlatformDependencyResolver(
                 )
             }.toSet()
 
-        val resolvedDependencies = artifacts.artifacts.mapNotNull { artifact ->
+        konst resolvedDependencies = artifacts.artifacts.mapNotNull { artifact ->
             IdeaKpmResolvedBinaryDependencyImpl(
                 coordinates = artifact.variant.owner.ideaKotlinBinaryCoordinates,
                 binaryType = binaryType,
@@ -83,7 +83,7 @@ class IdeaKpmPlatformDependencyResolver(
     }
 }
 
-private val ComponentIdentifier.ideaKotlinBinaryCoordinates: IdeaKpmBinaryCoordinates?
+private konst ComponentIdentifier.ideaKotlinBinaryCoordinates: IdeaKpmBinaryCoordinates?
     get() = when (this) {
         is ModuleComponentIdentifier -> IdeaKpmBinaryCoordinatesImpl(group, module, version)
         else -> null
@@ -106,7 +106,7 @@ private fun ArtifactResolution.Variant.createVariantArtifactView(fragment: Gradl
 }
 
 private fun ArtifactResolution.PlatformFragment.createPlatformFragmentArtifactView(fragment: GradleKpmFragment): ArtifactView {
-    val fragmentCompileDependencies = fragment.project.configurations.detachedConfiguration().markResolvable()
+    konst fragmentCompileDependencies = fragment.project.configurations.detachedConfiguration().markResolvable()
 
     fragmentCompileDependencies.dependencies.addAll(
         fragment.transitiveApiConfiguration.allDependencies.matching { it !is ProjectDependency }
@@ -119,7 +119,7 @@ private fun ArtifactResolution.PlatformFragment.createPlatformFragmentArtifactVi
     fragmentCompileDependencies.attributes.apply(platformResolutionAttributes, fragment)
 
     /* Ensure consistent dependency resolution result within the whole module */
-    val allModuleCompileDependencies = fragment.project.configurations.getByName(
+    konst allModuleCompileDependencies = fragment.project.configurations.getByName(
         fragment.containingModule.resolvableMetadataConfigurationName
     )
     fragmentCompileDependencies.shouldResolveConsistentlyWith(allModuleCompileDependencies)

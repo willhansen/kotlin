@@ -9,13 +9,13 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
             }
         }
 
-        val commonTest by getting {
+        konst commonTest by getting {
             dependencies {
                 implementation(project(":libtests"))
                 implementation(kotlin("test-common"))
@@ -23,36 +23,36 @@ kotlin {
             }
         }
 
-        val jvmAndJsMain by creating {
+        konst jvmAndJsMain by creating {
             dependsOn(commonMain)
         }
 
-        val jvmAndJsTest by creating {
+        konst jvmAndJsTest by creating {
             dependsOn(commonTest)
         }
 
-        val jvmMain by getting {
+        konst jvmMain by getting {
             dependsOn(jvmAndJsMain)
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
             }
         }
 
-        val jvmTest by getting {
+        konst jvmTest by getting {
             dependsOn(jvmAndJsTest)
             dependencies {
                 implementation(kotlin("test-junit"))
             }
         }
 
-        val jsMain by getting {
+        konst jsMain by getting {
             dependsOn(jvmAndJsMain)
             dependencies {
                 implementation(kotlin("stdlib-js"))
             }
         }
 
-        val jsTest by getting {
+        konst jsTest by getting {
             dependsOn(jvmAndJsTest)
             dependencies {
                 implementation(kotlin("test-js"))

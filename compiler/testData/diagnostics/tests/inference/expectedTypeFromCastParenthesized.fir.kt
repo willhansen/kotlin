@@ -6,17 +6,17 @@ annotation class bar
 
 fun <T> foo(): T = TODO()
 
-fun <V> id(value: V) = value
+fun <V> id(konstue: V) = konstue
 
-val par1 = (foo()) as String
-val par2 = ((foo())) as String
+konst par1 = (foo()) as String
+konst par2 = ((foo())) as String
 
-val par3 = (dd@ (foo())) as String
+konst par3 = (dd@ (foo())) as String
 
-val par4 = ( @bar() (foo())) as String
+konst par4 = ( @bar() (foo())) as String
 
 object X {
     fun <T> foo(): T = TODO()
 }
 
-val par5 = ( @bar() X.foo()) as String
+konst par5 = ( @bar() X.foo()) as String

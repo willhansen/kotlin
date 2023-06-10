@@ -11,7 +11,7 @@ import helpers.*
 // Block is allowed to be called directly inside inline function
 
 suspend inline fun test1(noinline c: suspend () -> Unit)  {
-    val l : suspend () -> Unit = { c() }
+    konst l : suspend () -> Unit = { c() }
     builder { l() }
 }
 
@@ -33,7 +33,7 @@ interface SuspendRunnable {
 }
 
 suspend inline fun test4(noinline c: suspend () -> Unit) {
-    val sr = object: SuspendRunnable {
+    konst sr = object: SuspendRunnable {
         override suspend fun run() {
             c()
         }

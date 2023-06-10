@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.light.classes.symbol.parameters.SymbolLightParameter
 internal class SymbolLightNoArgConstructor(
     lightMemberOrigin: LightMemberOrigin?,
     containingClass: SymbolLightClassBase,
-    private val visibility: String,
+    private konst visibility: String,
     methodIndex: Int,
 ) : SymbolLightMethodBase(lightMemberOrigin, containingClass, methodIndex) {
     override fun getName(): String = containingClass.name ?: ""
@@ -32,7 +32,7 @@ internal class SymbolLightNoArgConstructor(
 
     override fun isDeprecated(): Boolean = false
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this,
             modifiersBox = InitializedModifiersBox(visibility),
@@ -41,7 +41,7 @@ internal class SymbolLightNoArgConstructor(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _parameterList: PsiParameterList by lazyPub {
+    private konst _parameterList: PsiParameterList by lazyPub {
         SymbolLightParameterList(parent = this)
     }
 

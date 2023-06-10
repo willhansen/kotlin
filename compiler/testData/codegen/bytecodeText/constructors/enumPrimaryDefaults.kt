@@ -1,4 +1,4 @@
-enum class Enum(val x: Int = 0) {
+enum class Enum(konst x: Int = 0) {
     A,
     B(0) { override fun f() {} };
     open fun f() {}

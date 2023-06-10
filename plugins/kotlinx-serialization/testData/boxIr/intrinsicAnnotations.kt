@@ -21,10 +21,10 @@ abstract class Abstract
 @JsonClassDiscriminator("object")
 object Object
 
-fun test(descriptor: SerialDescriptor, value: String, name: String = descriptor.serialName) {
-    val anno = descriptor.annotations.filterIsInstance<JsonClassDiscriminator>().singleOrNull()
-    requireNotNull(anno) { "Annotation value not found for $name" }
-    assertEquals(anno.discriminator, value, "Annotation value incorrect for $name")
+fun test(descriptor: SerialDescriptor, konstue: String, name: String = descriptor.serialName) {
+    konst anno = descriptor.annotations.filterIsInstance<JsonClassDiscriminator>().singleOrNull()
+    requireNotNull(anno) { "Annotation konstue not found for $name" }
+    assertEquals(anno.discriminator, konstue, "Annotation konstue incorrect for $name")
 }
 
 fun box(): String {

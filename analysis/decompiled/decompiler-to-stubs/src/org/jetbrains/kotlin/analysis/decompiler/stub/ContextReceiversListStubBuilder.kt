@@ -13,14 +13,14 @@ import org.jetbrains.kotlin.psi.stubs.impl.KotlinContextReceiverStubImpl
 import org.jetbrains.kotlin.psi.stubs.impl.KotlinPlaceHolderStubImpl
 
 internal class ContextReceiversListStubBuilder(c: ClsStubBuilderContext) {
-    private val typeStubBuilder = TypeClsStubBuilder(c)
+    private konst typeStubBuilder = TypeClsStubBuilder(c)
 
     fun createContextReceiverStubs(parent: StubElement<*>, contextReceiverTypes: List<ProtoBuf.Type>) {
         if (contextReceiverTypes.isEmpty()) return
-        val contextReceiverListStub =
+        konst contextReceiverListStub =
             KotlinPlaceHolderStubImpl<KtContextReceiverList>(parent, KtStubElementTypes.CONTEXT_RECEIVER_LIST)
         for (contextReceiverType in contextReceiverTypes) {
-            val contextReceiverStub =
+            konst contextReceiverStub =
                 KotlinContextReceiverStubImpl(contextReceiverListStub, KtStubElementTypes.CONTEXT_RECEIVER, label = null)
             typeStubBuilder.createTypeReferenceStub(contextReceiverStub, contextReceiverType)
         }

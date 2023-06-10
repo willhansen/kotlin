@@ -14,10 +14,10 @@ fun <S> generate(g: suspend Controller<S>.() -> Unit): S = TODO()
 
 class A
 
-val test1 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>generate<!> {
+konst test1 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>generate<!> {
     yield(<!NO_COMPANION_OBJECT!>A<!>)
 }
 
-val test2: Int = generate {
+konst test2: Int = generate {
     yield(<!TYPE_MISMATCH!>A()<!>)
 }

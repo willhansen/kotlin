@@ -12,7 +12,7 @@ digraph plusAssignWithLambdaInRhs_kt {
             2 [label="Const: Null(null)"];
             3 [label="Check not null: Null(null)!!" style="filled" fillcolor=yellow];
             4 [label="Stub" style="filled" fillcolor=gray];
-            5 [label="Variable declaration: lval list: R|kotlin/collections/MutableList<kotlin/Function1<kotlin/String, kotlin/String>>|" style="filled" fillcolor=gray];
+            5 [label="Variable declaration: lkonst list: R|kotlin/collections/MutableList<kotlin/Function1<kotlin/String, kotlin/String>>|" style="filled" fillcolor=gray];
             6 [label="Access variable R|<local>/list|" style="filled" fillcolor=gray];
             7 [label="Postponed enter to lambda" style="filled" fillcolor=gray];
             subgraph cluster_2 {
@@ -83,7 +83,7 @@ digraph plusAssignWithLambdaInRhs_kt {
             color=blue
             26 [label="Enter block"];
             27 [label="Function call: R|kotlin/collections/mutableListOf|<R|() -> kotlin/Unit|>()" style="filled" fillcolor=yellow];
-            28 [label="Variable declaration: lval queue: R|kotlin/collections/MutableList<kotlin/Function0<kotlin/Unit>>|"];
+            28 [label="Variable declaration: lkonst queue: R|kotlin/collections/MutableList<kotlin/Function0<kotlin/Unit>>|"];
             29 [label="Postponed enter to lambda"];
             subgraph cluster_9 {
                 color=blue

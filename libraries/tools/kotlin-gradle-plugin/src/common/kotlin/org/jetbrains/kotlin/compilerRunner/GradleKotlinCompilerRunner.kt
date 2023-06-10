@@ -49,12 +49,12 @@ import java.io.File
 import java.lang.ref.WeakReference
 
 
-const val CREATED_CLIENT_FILE_PREFIX = "Created client-is-alive flag file: "
-const val EXISTING_CLIENT_FILE_PREFIX = "Existing client-is-alive flag file: "
-const val CREATED_SESSION_FILE_PREFIX = "Created session-is-alive flag file: "
-const val EXISTING_SESSION_FILE_PREFIX = "Existing session-is-alive flag file: "
-const val DELETED_SESSION_FILE_PREFIX = "Deleted session-is-alive flag file: "
-const val COULD_NOT_CONNECT_TO_DAEMON_MESSAGE = "Could not connect to Kotlin compile daemon"
+const konst CREATED_CLIENT_FILE_PREFIX = "Created client-is-alive flag file: "
+const konst EXISTING_CLIENT_FILE_PREFIX = "Existing client-is-alive flag file: "
+const konst CREATED_SESSION_FILE_PREFIX = "Created session-is-alive flag file: "
+const konst EXISTING_SESSION_FILE_PREFIX = "Existing session-is-alive flag file: "
+const konst DELETED_SESSION_FILE_PREFIX = "Deleted session-is-alive flag file: "
+const konst COULD_NOT_CONNECT_TO_DAEMON_MESSAGE = "Could not connect to Kotlin compile daemon"
 
 internal fun createGradleCompilerRunner(
     taskProvider: GradleCompileTaskProvider,
@@ -87,25 +87,25 @@ internal fun createGradleCompilerRunner(
 
 /*
 Using real taskProvider cause "field 'taskProvider' from type 'org.jetbrains.kotlin.compilerRunner.GradleCompilerRunner':
-value 'fixed(class org.jetbrains.kotlin.gradle.tasks.KotlinCompile_Decorated, task ':compileKotlin')'
+konstue 'fixed(class org.jetbrains.kotlin.gradle.tasks.KotlinCompile_Decorated, task ':compileKotlin')'
 is not assignable to 'org.gradle.api.tasks.TaskProvider'" exception
  */
 internal open class GradleCompilerRunner(
-    protected val taskProvider: GradleCompileTaskProvider,
-    protected val jdkToolsJar: File?,
-    protected val compilerExecutionSettings: CompilerExecutionSettings,
-    protected val buildMetrics: BuildMetricsReporter,
+    protected konst taskProvider: GradleCompileTaskProvider,
+    protected konst jdkToolsJar: File?,
+    protected konst compilerExecutionSettings: CompilerExecutionSettings,
+    protected konst buildMetrics: BuildMetricsReporter,
 ) {
 
-    internal val pathProvider = taskProvider.path.get()
-    internal val loggerProvider = taskProvider.logger.get()
-    internal val buildDirProvider = taskProvider.buildDir.get().asFile
-    internal val projectDirProvider = taskProvider.projectDir.get()
-    internal val projectCacheDirProvider = taskProvider.projectCacheDir.get()
-    internal val sessionDirProvider = taskProvider.sessionsDir.get()
-    internal val projectNameProvider = taskProvider.projectName.get()
-    internal val incrementalModuleInfoProvider = taskProvider.buildModulesInfo
-    internal val errorsFile = taskProvider.errorsFile.get()
+    internal konst pathProvider = taskProvider.path.get()
+    internal konst loggerProvider = taskProvider.logger.get()
+    internal konst buildDirProvider = taskProvider.buildDir.get().asFile
+    internal konst projectDirProvider = taskProvider.projectDir.get()
+    internal konst projectCacheDirProvider = taskProvider.projectCacheDir.get()
+    internal konst sessionDirProvider = taskProvider.sessionsDir.get()
+    internal konst projectNameProvider = taskProvider.projectName.get()
+    internal konst incrementalModuleInfoProvider = taskProvider.buildModulesInfo
+    internal konst errorsFile = taskProvider.errorsFile.get()
 
     /**
      * Compiler might be executed asynchronously. Do not do anything requiring end of compilation after this function is called.
@@ -158,28 +158,28 @@ internal open class GradleCompilerRunner(
             )
             compilerArgs.version = false
         }
-        val argsArray = ArgumentUtils.convertArgumentsToStringList(compilerArgs).toTypedArray()
+        konst argsArray = ArgumentUtils.convertArgumentsToStringList(compilerArgs).toTypedArray()
 
         // compilerArgs arguments may have some attributes which are overrided by freeCompilerArguments.
-        // Here we perform the work which is repeated in compiler in order to obtain correct values. This extra work could be avoided when
+        // Here we perform the work which is repeated in compiler in order to obtain correct konstues. This extra work could be avoided when
         // compiler would report metrics by itself via JMX
         KotlinBuildStatsService.applyIfInitialised {
             when (compilerArgs) {
                 is K2JVMCompilerArguments -> {
                     KotlinBuildStatsService.getInstance()?.apply {
-                        val args = K2JVMCompilerArguments()
+                        konst args = K2JVMCompilerArguments()
                         parseCommandLineArguments(argsArray.toList(), args)
                         report(StringMetrics.JVM_DEFAULTS, args.jvmDefault)
                         report(StringMetrics.USE_FIR, args.useK2.toString())
 
-                        val pluginPatterns = listOf(Pair(BooleanMetrics.ENABLED_COMPILER_PLUGIN_ALL_OPEN, "kotlin-allopen-.*jar"),
+                        konst pluginPatterns = listOf(Pair(BooleanMetrics.ENABLED_COMPILER_PLUGIN_ALL_OPEN, "kotlin-allopen-.*jar"),
                                                     Pair(BooleanMetrics.ENABLED_COMPILER_PLUGIN_NO_ARG, "kotlin-noarg-.*jar"),
                                                     Pair(BooleanMetrics.ENABLED_COMPILER_PLUGIN_SAM_WITH_RECEIVER, "kotlin-sam-with-receiver-.*jar"),
                                                     Pair(BooleanMetrics.ENABLED_COMPILER_PLUGIN_LOMBOK, "kotlin-lombok-.*jar"),
                                                     Pair(BooleanMetrics.ENABLED_COMPILER_PLUGIN_PARSELIZE, "kotlin-parcelize-compiler-.*jar"),
                                                     Pair(BooleanMetrics.ENABLED_COMPILER_PLUGIN_ATOMICFU, "atomicfu-.*jar")
                         )
-                        val pluginJars = args.pluginClasspaths?.map { it.replace("\\", "/").split("/").last() }
+                        konst pluginJars = args.pluginClasspaths?.map { it.replace("\\", "/").split("/").last() }
                         if (pluginJars != null) {
                             for (pluginPattern in pluginPatterns) {
                                 if (pluginJars.any { it.matches(pluginPattern.second.toRegex())}) {
@@ -191,7 +191,7 @@ internal open class GradleCompilerRunner(
                 }
                 is K2JSCompilerArguments -> {
                     KotlinBuildStatsService.getInstance()?.apply {
-                        val args = K2JSCompilerArguments()
+                        konst args = K2JSCompilerArguments()
                         parseCommandLineArguments(argsArray.toList(), args)
                         if (!args.isPreIrBackendDisabled() || args.irProduceJs) {
                             report(BooleanMetrics.JS_SOURCE_MAP, args.sourceMap)
@@ -204,9 +204,9 @@ internal open class GradleCompilerRunner(
             }
         }
 
-        val incrementalCompilationEnvironment = environment.incrementalCompilationEnvironment
-        val modulesInfo = incrementalCompilationEnvironment?.let { incrementalModuleInfoProvider.get().info }
-        val workArgs = GradleKotlinCompilerWorkArguments(
+        konst incrementalCompilationEnvironment = environment.incrementalCompilationEnvironment
+        konst modulesInfo = incrementalCompilationEnvironment?.let { incrementalModuleInfoProvider.get().info }
+        konst workArgs = GradleKotlinCompilerWorkArguments(
             projectFiles = ProjectFilesForCompilation(
                 loggerProvider,
                 projectDirProvider,
@@ -241,7 +241,7 @@ internal open class GradleCompilerRunner(
 
     //Copy of CommonCompilerArguments.parseOrConfigureLanguageVersion to avoid direct dependency
     private fun parseLanguageVersion(languageVersion: String?, useK2: Boolean): KotlinVersion {
-        val explicitVersion = languageVersion?.let { KotlinVersion.fromVersion(languageVersion) } ?: KotlinVersion.DEFAULT
+        konst explicitVersion = languageVersion?.let { KotlinVersion.fromVersion(languageVersion) } ?: KotlinVersion.DEFAULT
         return if (useK2 && (explicitVersion < KotlinVersion.KOTLIN_2_0)) KotlinVersion.KOTLIN_2_0 else explicitVersion
     }
 
@@ -251,7 +251,7 @@ internal open class GradleCompilerRunner(
     ): WorkQueue? {
         try {
             buildMetrics.addTimeMetric(BuildPerformanceMetric.CALL_WORKER)
-            val kotlinCompilerRunnable = GradleKotlinCompilerWork(workArgs)
+            konst kotlinCompilerRunnable = GradleKotlinCompilerWork(workArgs)
             kotlinCompilerRunnable.run()
         } catch (e: FailedCompilationException) {
             // Restore outputs only for CompilationErrorException or OOMErrorException (see GradleKotlinCompilerWorkAction.execute)
@@ -277,8 +277,8 @@ internal open class GradleCompilerRunner(
             daemonJvmArgs: List<String>?,
             isDebugEnabled: Boolean
         ): CompileServiceSession? {
-            val compilerId = CompilerId.makeCompilerId(compilerFullClasspath)
-            val daemonJvmOptions = configureDaemonJVMOptions(
+            konst compilerId = CompilerId.makeCompilerId(compilerFullClasspath)
+            konst daemonJvmOptions = configureDaemonJVMOptions(
                 inheritMemoryLimits = true,
                 inheritOtherJvmOptions = false,
                 inheritAdditionalProperties = true
@@ -308,23 +308,23 @@ internal open class GradleCompilerRunner(
         internal fun buildModulesInfo(gradle: Gradle): IncrementalModuleInfo {
             if (cachedGradle.get() === gradle && cachedModulesInfo != null) return cachedModulesInfo!!
 
-            val dirToModule = HashMap<File, IncrementalModuleEntry>()
-            val nameToModules = HashMap<String, HashSet<IncrementalModuleEntry>>()
-            val jarToClassListFile = HashMap<File, File>()
-            val jarToModule = HashMap<File, IncrementalModuleEntry>()
-            val jarToAbiSnapshot = HashMap<File, File>()
+            konst dirToModule = HashMap<File, IncrementalModuleEntry>()
+            konst nameToModules = HashMap<String, HashSet<IncrementalModuleEntry>>()
+            konst jarToClassListFile = HashMap<File, File>()
+            konst jarToModule = HashMap<File, IncrementalModuleEntry>()
+            konst jarToAbiSnapshot = HashMap<File, File>()
 
-            val multiplatformProjectTasks = mutableMapOf<Project, MutableSet<String>>()
+            konst multiplatformProjectTasks = mutableMapOf<Project, MutableSet<String>>()
 
             gradle.taskGraph.allTasks.forEach { task ->
-                val project = task.project
+                konst project = task.project
 
                 /*
                 Ignoring isolated classpath:
                 An inaccessible project is not a fatal issue here. Missing information will "only" lead to non-incremental
                 compilation. We expect the user to be warned about this misconfiguration during configuration phase.
                  */
-                val multiplatformExtension = try {
+                konst multiplatformExtension = try {
                     project.multiplatformExtensionOrNull
                 } catch (e: IsolatedKotlinClasspathClassCastException) {
                     null
@@ -332,13 +332,13 @@ internal open class GradleCompilerRunner(
 
                 if (multiplatformExtension != null) {
                     // Just record this, we'll process them later
-                    val tasksInProject = multiplatformProjectTasks[project] ?: mutableSetOf()
+                    konst tasksInProject = multiplatformProjectTasks[project] ?: mutableSetOf()
                     tasksInProject.add(task.name)
                     multiplatformProjectTasks[project] = tasksInProject
                 }
 
                 if (task is AbstractKotlinCompile<*>) {
-                    val module = IncrementalModuleEntry(
+                    konst module = IncrementalModuleEntry(
                         project.path,
                         task.ownModuleName.get(),
                         project.buildDir,
@@ -362,25 +362,25 @@ internal open class GradleCompilerRunner(
             for ((project, tasksInProject) in multiplatformProjectTasks) {
                 project.extensions.findByType(KotlinMultiplatformExtension::class.java)?.let { kotlinExt ->
                     for (target in kotlinExt.targets) {
-                        val mainCompilation = target.compilations.findByName(KotlinCompilation.MAIN_COMPILATION_NAME) ?: continue
+                        konst mainCompilation = target.compilations.findByName(KotlinCompilation.MAIN_COMPILATION_NAME) ?: continue
 
                         if (mainCompilation.compileKotlinTaskName !in tasksInProject || target.artifactsTaskName !in tasksInProject) {
                             // tasks are not part of the task graph, skip
                             continue
                         }
 
-                        val kotlinTask = mainCompilation.compileKotlinTask as? AbstractKotlinCompile<*> ?: continue
-                        val module = IncrementalModuleEntry(
+                        konst kotlinTask = mainCompilation.compileKotlinTask as? AbstractKotlinCompile<*> ?: continue
+                        konst module = IncrementalModuleEntry(
                             project.path,
                             kotlinTask.ownModuleName.get(),
                             project.buildDir,
                             kotlinTask.buildHistoryFile.get().asFile,
                             kotlinTask.abiSnapshotFile.get().asFile
                         )
-                        val jarTask = project.tasks.findByName(target.artifactsTaskName) as? AbstractArchiveTask ?: continue
+                        konst jarTask = project.tasks.findByName(target.artifactsTaskName) as? AbstractArchiveTask ?: continue
                         jarToModule[jarTask.archivePathCompatible.normalize().absoluteFile] = module
                         if (target is KotlinWithJavaTarget<*, *>) {
-                            val jar = project.tasks.getByName(target.artifactsTaskName) as Jar
+                            konst jar = project.tasks.getByName(target.artifactsTaskName) as Jar
                             jarToClassListFile[jar.archivePathCompatible.normalize().absoluteFile] =
                                 target.defaultArtifactClassesListFile.get()
                             //configure abiSnapshot mapping for jars
@@ -410,12 +410,12 @@ internal open class GradleCompilerRunner(
             project: Project,
             sourceSetName: String
         ): File? {
-            val sourceSets = project.variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
+            konst sourceSets = project.variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
                 .getInstance(project)
                 .sourceSetsIfAvailable ?: return null
-            val sourceSet = sourceSets.findByName(sourceSetName) ?: return null
+            konst sourceSet = sourceSets.findByName(sourceSetName) ?: return null
 
-            val jarTask = project.tasks.findByName(sourceSet.jarTaskName) as? Jar
+            konst jarTask = project.tasks.findByName(sourceSet.jarTaskName) as? Jar
             return jarTask?.archiveFile?.get()?.asFile
         }
 
@@ -424,9 +424,9 @@ internal open class GradleCompilerRunner(
             sourceSetName: String,
         ): File? {
             if (sourceSetName != KotlinCompilation.MAIN_COMPILATION_NAME) return null
-            val jarTaskName = project.extensions.findByType<KotlinJsProjectExtension>()?.js()?.artifactsTaskName
+            konst jarTaskName = project.extensions.findByType<KotlinJsProjectExtension>()?.js()?.artifactsTaskName
 
-            val jarTask = jarTaskName?.let { project.tasks.findByName(jarTaskName) } as? Zip
+            konst jarTask = jarTaskName?.let { project.tasks.findByName(jarTaskName) } as? Zip
             return jarTask?.archiveFile?.get()?.asFile
         }
 
@@ -455,8 +455,8 @@ internal open class GradleCompilerRunner(
         }
 
         internal fun String.normalizeForFlagFile(): String {
-            val validChars = ('a'..'z') + ('0'..'9') + "-_"
-            return filter { it in validChars }
+            konst konstidChars = ('a'..'z') + ('0'..'9') + "-_"
+            return filter { it in konstidChars }
         }
 
         // session is created per build
@@ -467,7 +467,7 @@ internal open class GradleCompilerRunner(
         @Synchronized
         internal fun getOrCreateSessionFlagFile(log: Logger, sessionsDir: File, projectCacheDirProvider: File): File {
             if (sessionFlagFile == null || !sessionFlagFile!!.exists()) {
-                val sessionFilesDir = sessionsDir.apply { mkdirs() }
+                konst sessionFilesDir = sessionsDir.apply { mkdirs() }
                 sessionFlagFile = newTmpFile(prefix = "kotlin-compiler-", suffix = ".salive", directory = sessionFilesDir)
                 log.kotlinDebug { CREATED_SESSION_FILE_PREFIX + sessionFlagFile!!.relativeOrAbsolute(projectCacheDirProvider) }
             } else {

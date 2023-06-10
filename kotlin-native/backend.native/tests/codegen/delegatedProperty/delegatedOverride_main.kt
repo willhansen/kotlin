@@ -6,7 +6,7 @@
 import a.*
 
 open class C: B() {
-    override val x: Int = 156
+    override konst x: Int = 156
 
     fun foo() {
         println(x)
@@ -17,6 +17,6 @@ open class C: B() {
 }
 
 fun main(args: Array<String>) {
-    val c = C()
+    konst c = C()
     c.foo()
 }

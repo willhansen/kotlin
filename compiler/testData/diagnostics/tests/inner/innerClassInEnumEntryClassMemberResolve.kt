@@ -3,11 +3,11 @@
 
 enum class A {
     X {
-        val x = 1
+        konst x = 1
         fun foo() {}
 
         inner class Inner {
-            val y = x
+            konst y = x
             fun bar() = foo()
         }
     }

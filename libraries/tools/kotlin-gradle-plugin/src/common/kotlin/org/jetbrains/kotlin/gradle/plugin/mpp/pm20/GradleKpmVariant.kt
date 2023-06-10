@@ -13,49 +13,49 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.project.model.KpmVariant
 
 interface GradleKpmVariant : GradleKpmFragment, KpmVariant {
-    val platformType: KotlinPlatformType
+    konst platformType: KotlinPlatformType
 
     // TODO generalize with KotlinCompilation?
-    val compileDependenciesConfiguration: Configuration
+    konst compileDependenciesConfiguration: Configuration
 
     var compileDependencyFiles: FileCollection
 
     // TODO rewrite using our own artifacts API?
-    val compilationOutputs: KotlinCompilationOutput
+    konst compilationOutputs: KotlinCompilationOutput
 
     // TODO rewrite using our own artifacts API
-    val sourceArchiveTaskName: String
+    konst sourceArchiveTaskName: String
 
     // TODO generalize exposing outputs: what if a variant has more than one such configurations or none?
-    val apiElementsConfiguration: Configuration
+    konst apiElementsConfiguration: Configuration
 
-    val gradleVariantNames: Set<String>
+    konst gradleVariantNames: Set<String>
 }
 
 interface GradleKpmVariantWithRuntime : GradleKpmVariant {
     // TODO deduplicate with KotlinCompilation?
-    val runtimeDependenciesConfiguration: Configuration
+    konst runtimeDependenciesConfiguration: Configuration
 
     var runtimeDependencyFiles: FileCollection
 
-    val runtimeFiles: ConfigurableFileCollection
+    konst runtimeFiles: ConfigurableFileCollection
 
     // TODO generalize exposing outputs: what if a variant has more than one such configurations or none?
-    val runtimeElementsConfiguration: Configuration
+    konst runtimeElementsConfiguration: Configuration
 }
 
 interface GradleKpmNativeVariant : GradleKpmVariant {
-    override val platformType: KotlinPlatformType
+    override konst platformType: KotlinPlatformType
         get() = KotlinPlatformType.native
 
-    val hostSpecificMetadataElementsConfiguration: Configuration?
+    konst hostSpecificMetadataElementsConfiguration: Configuration?
 
     var enableEndorsedLibraries: Boolean
 }
 
 interface PublishedModuleCoordinatesProvider {
-    val group: String
-    val name: String
-    val version: String
-    val capabilities: Iterable<String>
+    konst group: String
+    konst name: String
+    konst version: String
+    konst capabilities: Iterable<String>
 }

@@ -11,7 +11,7 @@ class P {
         private set
 
     fun foo() {
-        val r = run {x = 5} // ERROR
+        konst r = run {x = 5} // ERROR
         checkSubtype<Unit>(r)
     }
 }

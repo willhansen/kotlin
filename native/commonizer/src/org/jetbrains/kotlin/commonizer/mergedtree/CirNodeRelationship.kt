@@ -9,11 +9,11 @@ package org.jetbrains.kotlin.commonizer.mergedtree
 
 internal sealed class CirNodeRelationship {
 
-    class PreferredNode(val node: CirNode<*, *>) : CirNodeRelationship()
+    class PreferredNode(konst node: CirNode<*, *>) : CirNodeRelationship()
 
-    class ParentNode(val node: CirNode<*, *>) : CirNodeRelationship()
+    class ParentNode(konst node: CirNode<*, *>) : CirNodeRelationship()
 
-    class Composite private constructor(val relationships: List<CirNodeRelationship>) : CirNodeRelationship() {
+    class Composite private constructor(konst relationships: List<CirNodeRelationship>) : CirNodeRelationship() {
         companion object {
             operator fun CirNodeRelationship.plus(other: CirNodeRelationship): Composite {
                 if (this is Composite) {

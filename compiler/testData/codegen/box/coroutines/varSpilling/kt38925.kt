@@ -6,7 +6,7 @@ import kotlin.coroutines.intrinsics.*
 
 fun foo() {
     bar {
-        val p = false
+        konst p = false
         baz(p, "".ifEmpty { "OK" })
     }
 }

@@ -23,7 +23,7 @@ import kotlin.wasm.internal.*
  * for more information on arrays.
  */
 public class Array<T> @PublishedApi internal constructor(size: Int) {
-    internal val storage: WasmAnyArray = WasmAnyArray(size)
+    internal konst storage: WasmAnyArray = WasmAnyArray(size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmAnyArray)
@@ -33,7 +33,7 @@ public class Array<T> @PublishedApi internal constructor(size: Int) {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> T)
 
@@ -41,7 +41,7 @@ public class Array<T> @PublishedApi internal constructor(size: Int) {
      * Returns the array element at the specified [index]. This method can be called using the
      * index operator.
      * ```
-     * value = arr[index]
+     * konstue = arr[index]
      * ```
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException] except in Kotlin/JS
@@ -54,24 +54,24 @@ public class Array<T> @PublishedApi internal constructor(size: Int) {
     }
 
     /**
-     * Sets the array element at the specified [index] to the specified [value]. This method can
+     * Sets the array element at the specified [index] to the specified [konstue]. This method can
      * be called using the index operator.
      * ```
-     * arr[index] = value
+     * arr[index] = konstue
      * ```
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException] except in Kotlin/JS
      * where the behavior is unspecified.
      */
-    public operator fun set(index: Int, value: T) {
+    public operator fun set(index: Int, konstue: T) {
         rangeCheck(index, storage.len())
-        storage.set(index, value)
+        storage.set(index, konstue)
     }
 
     /**
      * Returns the number of elements in the array.
      */
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
     /**
@@ -87,7 +87,7 @@ internal fun <T> arrayIterator(array: Array<T>) = object : Iterator<T> {
 }
 
 internal inline fun <reified T> createAnyArray(size: Int, init: (Int) -> T): Array<T> {
-    val result = WasmAnyArray(size)
+    konst result = WasmAnyArray(size)
     result.fill(size, init)
     return Array(result)
 }

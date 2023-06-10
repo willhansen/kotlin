@@ -4,7 +4,7 @@ KtFile: CommentsBindingInLambda.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('la1')
     PsiWhiteSpace(' ')
@@ -40,7 +40,7 @@ KtFile: CommentsBindingInLambda.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('la2')
     PsiWhiteSpace(' ')
@@ -56,7 +56,7 @@ KtFile: CommentsBindingInLambda.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('la3')
     PsiWhiteSpace(' ')
@@ -76,7 +76,7 @@ KtFile: CommentsBindingInLambda.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('la4')
     PsiWhiteSpace(' ')
@@ -100,7 +100,7 @@ KtFile: CommentsBindingInLambda.kt
                 PsiElement(KDOC_TEXT)(' Should be under property ')
               PsiElement(KDOC_END)('*/')
             PsiWhiteSpace('\n    ')
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('some')
             PsiWhiteSpace(' ')
@@ -112,7 +112,7 @@ KtFile: CommentsBindingInLambda.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('la5')
     PsiWhiteSpace(' ')
@@ -138,7 +138,7 @@ KtFile: CommentsBindingInLambda.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('la6')
     PsiWhiteSpace(' ')
@@ -165,7 +165,7 @@ KtFile: CommentsBindingInLambda.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('la7')
     PsiWhiteSpace(' ')

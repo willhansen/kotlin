@@ -1,11 +1,11 @@
 FILE: withSuppression.kt
-    public final const val x: R|kotlin/String| = String(123)
+    public final const konst x: R|kotlin/String| = String(123)
         @R|kotlin/Suppress|(names = vararg(String(CONST_VAL_WITH_GETTER))) public get(): R|kotlin/String| {
             ^ F|/x|
         }
-    public final val y: R|kotlin/String| = String(789)
+    public final konst y: R|kotlin/String| = String(789)
         public get(): R|kotlin/String|
-    public final const val z: R|kotlin/String| = @R|kotlin/Suppress|(names = vararg(String(CONST_VAL_WITH_NON_CONST_INITIALIZER))) R|/y|
+    public final const konst z: R|kotlin/String| = @R|kotlin/Suppress|(names = vararg(String(CONST_VAL_WITH_NON_CONST_INITIALIZER))) R|/y|
         public get(): R|kotlin/String|
     @R|kotlin/annotation/Target|(allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final annotation class Ann : R|kotlin/Annotation| {
         public constructor(): R|Ann| {
@@ -26,7 +26,7 @@ FILE: withSuppression.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Array<out kotlin/String>| = R|<local>/x|
+        public final konst x: R|kotlin/Array<out kotlin/String>| = R|<local>/x|
             public get(): R|kotlin/Array<out kotlin/String>|
 
         public final operator fun component1(): R|kotlin/String|

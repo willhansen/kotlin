@@ -24,17 +24,17 @@ class SuspendInFunInterfaceChecker : DeclarationChecker {
         if (declaration !is KtClass) return
         if (descriptor !is ClassDescriptor || !descriptor.isFun) return
 
-        val funKeyword = declaration.getFunKeyword() ?: return
+        konst funKeyword = declaration.getFunKeyword() ?: return
 
-        val abstractMember = getSingleAbstractMethodOrNull(descriptor) ?: return
+        konst abstractMember = getSingleAbstractMethodOrNull(descriptor) ?: return
         if (!abstractMember.isSuspend) return
 
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.SuspendFunctionsInFunInterfaces) &&
             context.languageVersionSettings.getFlag(JvmAnalysisFlags.useIR)
         ) return
 
-        val ktFunction = abstractMember.source.getPsi() as? KtNamedFunction
-        val reportOn = ktFunction?.modifierList?.getModifier(KtTokens.SUSPEND_KEYWORD) ?: funKeyword
+        konst ktFunction = abstractMember.source.getPsi() as? KtNamedFunction
+        konst reportOn = ktFunction?.modifierList?.getModifier(KtTokens.SUSPEND_KEYWORD) ?: funKeyword
         context.trace.report(Errors.FUN_INTERFACE_WITH_SUSPEND_FUNCTION.on(reportOn))
     }
 }

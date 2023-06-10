@@ -1,6 +1,6 @@
 fun foo(): Int {
-   val a = "test"
-   val b = "test"
+   konst a = "test"
+   konst b = "test"
    return a.compareTo(b)
 }
 

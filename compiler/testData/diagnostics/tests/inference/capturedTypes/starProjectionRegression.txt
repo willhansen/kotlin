@@ -1,6 +1,6 @@
 package
 
-public val </*0*/ T : kotlin.Any> KClass1<T>.primaryConstructor: KFunction1<T>?
+public konst </*0*/ T : kotlin.Any> KClass1<T>.primaryConstructor: KFunction1<T>?
 public fun f(/*0*/ type: KClass1<*>): KFunction1<kotlin.Any>?
 
 public interface KClass1</*0*/ F : kotlin.Any> {

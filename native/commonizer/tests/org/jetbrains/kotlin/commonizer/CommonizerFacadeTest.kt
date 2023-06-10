@@ -70,8 +70,8 @@ class CommonizerFacadeTest {
             manifestDataProvider: (CommonizerTarget) -> NativeManifestDataProvider = { MockNativeManifestDataProvider(it) },
             commonizerSettings: CommonizerSettings = DefaultCommonizerSettings,
         ): CommonizerParameters {
-            val targetDependentModuleNames = mapKeys { (targetName, _) -> LeafCommonizerTarget(targetName) }.toTargetDependent()
-            val sharedTarget = SharedCommonizerTarget(targetDependentModuleNames.targets.allLeaves())
+            konst targetDependentModuleNames = mapKeys { (targetName, _) -> LeafCommonizerTarget(targetName) }.toTargetDependent()
+            konst sharedTarget = SharedCommonizerTarget(targetDependentModuleNames.targets.allLeaves())
 
             return CommonizerParameters(
                 outputTargets = setOf(sharedTarget),
@@ -89,19 +89,19 @@ class CommonizerFacadeTest {
         }
 
         private fun doTestNothingToCommonize(originalModules: Map<String, List<String>>) {
-            val results = MockResultsConsumer()
+            konst results = MockResultsConsumer()
             runCommonization(originalModules.toCommonizerParameters(results))
             assertEquals(Status.NOTHING_TO_DO, results.status)
             assertTrue(results.modulesByTargets.isEmpty())
         }
 
         private fun doTestSuccessfulCommonization(originalModules: Map<String, List<String>>) {
-            val results = MockResultsConsumer()
+            konst results = MockResultsConsumer()
             runCommonization(originalModules.toCommonizerParameters(results))
             assertEquals(Status.DONE, results.status)
 
-            val expectedCommonModuleNames = mutableSetOf<String>()
-            originalModules.values.forEachIndexed { index, moduleNames ->
+            konst expectedCommonModuleNames = mutableSetOf<String>()
+            originalModules.konstues.forEachIndexed { index, moduleNames ->
                 if (index == 0)
                     expectedCommonModuleNames.addAll(moduleNames)
                 else
@@ -114,8 +114,8 @@ class CommonizerFacadeTest {
             )
 
             results.leafTargets.forEach { target ->
-                val allModuleNames = originalModules.getValue(target.name).toSet()
-                val expectedMissingModuleNames = allModuleNames - expectedCommonModuleNames
+                konst allModuleNames = originalModules.getValue(target.name).toSet()
+                konst expectedMissingModuleNames = allModuleNames - expectedCommonModuleNames
 
                 assertModulesMatch(
                     expectedCommonizedModuleNames = expectedCommonModuleNames,
@@ -131,8 +131,8 @@ class CommonizerFacadeTest {
             actualModuleResults: Collection<ModuleResult>
         ) {
 
-            val actualCommonizedModuleNames = mutableSetOf<String>()
-            val actualMissingModuleNames = mutableSetOf<String>()
+            konst actualCommonizedModuleNames = mutableSetOf<String>()
+            konst actualMissingModuleNames = mutableSetOf<String>()
 
             actualModuleResults.forEach { moduleResult ->
                 when (moduleResult) {

@@ -6,11 +6,11 @@ open class Case1_1 : InterfaceWithTypeParameter1<Case1_1>
 open class Case1_2 : InterfaceWithTypeParameter1<Case1_2>
 
 fun case_1() {
-    val a = select(Case1_1(), Case1_2(), null)
+    konst a = select(Case1_1(), Case1_2(), null)
 
     if (a != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("InterfaceWithTypeParameter1<*>? & InterfaceWithTypeParameter1<*>")!>a<!>
-        val b = <!DEBUG_INFO_EXPRESSION_TYPE("InterfaceWithTypeParameter1<*>? & InterfaceWithTypeParameter1<*>")!>a<!>.ip1test1()
+        konst b = <!DEBUG_INFO_EXPRESSION_TYPE("InterfaceWithTypeParameter1<*>? & InterfaceWithTypeParameter1<*>")!>a<!>.ip1test1()
         if (b != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any? & kotlin.Any")!>b<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any? & kotlin.Any")!>b<!>.equals(null)
@@ -31,7 +31,7 @@ class Case2_1 : Interface3, InterfaceWithTypeParameter1<Case2_1>
 class Case2_2 : Interface3, InterfaceWithTypeParameter1<Case2_2>
 
 fun case_2() {
-    val x = select(Case2_1(), Case2_2(), null)
+    konst x = select(Case2_1(), Case2_2(), null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Interface3? & InterfaceWithTypeParameter1<*>? & Interface3 & InterfaceWithTypeParameter1<*>")!>x<!>
@@ -44,7 +44,7 @@ class Case3_1 : Interface3, InterfaceWithTypeParameter1<Case3_1>, InterfaceWithT
 class Case3_2 : Interface3, InterfaceWithTypeParameter1<Case3_2>, InterfaceWithTypeParameter2<Case3_2>
 
 fun case_3() {
-    val x = select(Case3_1(), Case3_2(), null)
+    konst x = select(Case3_1(), Case3_2(), null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Interface3? & InterfaceWithTypeParameter1<*>? & InterfaceWithTypeParameter2<*>? & Interface3 & InterfaceWithTypeParameter1<*> & InterfaceWithTypeParameter2<*>")!>x<!>
@@ -58,7 +58,7 @@ class Case4_1 : InterfaceWithTypeParameter1<Case4_2>, InterfaceWithTypeParameter
 class Case4_2 : InterfaceWithTypeParameter1<Case4_1>, InterfaceWithTypeParameter2<Case4_2>
 
 fun case_4() {
-    val x = select(Case4_1(), Case4_2(), null)
+    konst x = select(Case4_1(), Case4_2(), null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("InterfaceWithTypeParameter1<*>? & InterfaceWithTypeParameter2<*>? & InterfaceWithTypeParameter1<*> & InterfaceWithTypeParameter2<*>")!>x<!>
@@ -72,7 +72,7 @@ class Case5_1 : InterfaceWithTypeParameter1<InterfaceWithTypeParameter1<Case5_2>
 class Case5_2 : InterfaceWithTypeParameter2<InterfaceWithTypeParameter1<Case5_1>>, InterfaceWithTypeParameter1<InterfaceWithTypeParameter1<Case5_2>>
 
 fun case_5() {
-    val x = select(Case5_1(), Case5_2(), null)
+    konst x = select(Case5_1(), Case5_2(), null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("InterfaceWithTypeParameter1<InterfaceWithTypeParameter1<Case5_2>>? & InterfaceWithTypeParameter2<InterfaceWithTypeParameter1<Case5_1>>? & InterfaceWithTypeParameter1<InterfaceWithTypeParameter1<Case5_2>> & InterfaceWithTypeParameter2<InterfaceWithTypeParameter1<Case5_1>>")!>x<!>
@@ -86,7 +86,7 @@ class Case6_1<T> : InterfaceWithTypeParameter1<InterfaceWithTypeParameter2<T>>, 
 class Case6_2<T> : InterfaceWithTypeParameter2<InterfaceWithTypeParameter2<Case6_2<T>>>, InterfaceWithTypeParameter1<InterfaceWithTypeParameter2<T>>
 
 fun case_6() {
-    val x = select(Case6_1<Int>(), Case6_2<Float>(), null)
+    konst x = select(Case6_1<Int>(), Case6_2<Float>(), null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("InterfaceWithTypeParameter1<out InterfaceWithTypeParameter2<out kotlin.Number & kotlin.Comparable<*>>>? & InterfaceWithTypeParameter2<out InterfaceWithTypeParameter2<out InterfaceWithTypeParameter1<out InterfaceWithTypeParameter2<*>> & InterfaceWithTypeParameter2<*>>>? & InterfaceWithTypeParameter1<out InterfaceWithTypeParameter2<out kotlin.Number & kotlin.Comparable<*>>> & InterfaceWithTypeParameter2<out InterfaceWithTypeParameter2<out InterfaceWithTypeParameter1<out InterfaceWithTypeParameter2<*>> & InterfaceWithTypeParameter2<*>>>")!>x<!>
@@ -100,7 +100,7 @@ open class Case7_1<T, K> : InterfaceWithTwoTypeParameters<Inv<T>, Inv<K>>
 open class Case7_2<T, K> : InterfaceWithTwoTypeParameters<Inv<K>, Inv<T>>
 
 fun case_7() {
-    val x = select(Case7_1<Int, Float>(), Case7_2<Char, String>(), null)
+    konst x = select(Case7_1<Int, Float>(), Case7_2<Char, String>(), null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("InterfaceWithTwoTypeParameters<out Inv<out kotlin.Comparable<*> & java.io.Serializable>, out Inv<out kotlin.Comparable<*> & java.io.Serializable>>? & InterfaceWithTwoTypeParameters<out Inv<out kotlin.Comparable<*> & java.io.Serializable>, out Inv<out kotlin.Comparable<*> & java.io.Serializable>>")!>x<!>
@@ -113,16 +113,16 @@ open class Case8_1<T, K> : ClassWithTwoTypeParameters<ClassWithTwoTypeParameters
 open class Case8_2<T, K> : ClassWithTwoTypeParameters<ClassWithTwoTypeParameters<K, T>, T>()
 
 fun case_8() {
-    val x = select(Case8_1<Int, Float>(), Case8_2<Char, String>(), null)
+    konst x = select(Case8_1<Int, Float>(), Case8_2<Char, String>(), null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<out ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>, out kotlin.Comparable<*> & java.io.Serializable>? & ClassWithTwoTypeParameters<out ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>, out kotlin.Comparable<*> & java.io.Serializable>")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<out ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>, out kotlin.Comparable<*> & java.io.Serializable>? & ClassWithTwoTypeParameters<out ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>, out kotlin.Comparable<*> & java.io.Serializable>")!>x<!>.test1()
-        val y = <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<out ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>, out kotlin.Comparable<*> & java.io.Serializable>? & ClassWithTwoTypeParameters<out ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>, out kotlin.Comparable<*> & java.io.Serializable>")!>x<!>.test2()
+        konst y = <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<out ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>, out kotlin.Comparable<*> & java.io.Serializable>? & ClassWithTwoTypeParameters<out ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>, out kotlin.Comparable<*> & java.io.Serializable>")!>x<!>.test2()
         if (y != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>? & ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>")!>y<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>? & ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>")!>y<!>.test1()
-            val z = <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>? & ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>")!>y<!>.test2()
+            konst z = <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>? & ClassWithTwoTypeParameters<out kotlin.Comparable<*> & java.io.Serializable, out kotlin.Comparable<*> & java.io.Serializable>")!>y<!>.test2()
             if (z != null) {
                 <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Comparable<*>? & java.io.Serializable? & kotlin.Comparable<*> & java.io.Serializable")!>z<!>
                 <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Comparable<*>? & java.io.Serializable? & kotlin.Comparable<*> & java.io.Serializable")!>z<!>.equals(null)
@@ -144,12 +144,12 @@ open class Case9_1<T, K> : ClassWithTwoTypeParameters<Case9_1<T, K>, Case9_2<K, 
 open class Case9_2<T, K> : ClassWithTwoTypeParameters<Case9_2<K, T>, Case9_1<T, K>>()
 
 fun case_9() {
-    val x = select(Case9_1<Int, String>(), Case9_2<Float, Char>(), null)
+    konst x = select(Case9_1<Int, String>(), Case9_2<Float, Char>(), null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<*, *>? & ClassWithTwoTypeParameters<*, *>")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("ClassWithTwoTypeParameters<*, *>? & ClassWithTwoTypeParameters<*, *>")!>x<!>.test1()
-        val y = x.test2()
+        konst y = x.test2()
         if (y != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any? & kotlin.Any")!>y<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any? & kotlin.Any")!>y<!>
@@ -171,7 +171,7 @@ open class Case10_1 : Interface3, InterfaceWithOutParameter<Case10_1>
 open class Case10_2 : Interface3, InterfaceWithOutParameter<Case10_2>
 
 fun case_10() = run {
-    val x = select(object : Case10_1() {}, object : Case10_2() {}, null)
+    konst x = select(object : Case10_1() {}, object : Case10_2() {}, null)
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Interface3? & InterfaceWithOutParameter<Interface3 & InterfaceWithOutParameter<*>>? & Interface3 & InterfaceWithOutParameter<Interface3 & InterfaceWithOutParameter<*>>")!>x<!>

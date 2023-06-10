@@ -49,17 +49,17 @@ import org.jetbrains.kotlin.utils.sure
 import java.io.File
 
 class KotlinKlibSerializerTest : TestCaseWithTmpdir() {
-    private val BASE_DIR = "compiler/testData/serialization"
+    private konst BASE_DIR = "compiler/testData/serialization"
 
     private fun doTest(fileName: String) {
-        val source = "$BASE_DIR/$fileName"
-        val klibName = File(source).nameWithoutExtension
-        val klibFile = File(tmpdir, "$klibName.klib")
+        konst source = "$BASE_DIR/$fileName"
+        konst klibName = File(source).nameWithoutExtension
+        konst klibFile = File(tmpdir, "$klibName.klib")
         KlibTestUtil.compileCommonSourcesToKlib(listOf(File(source)), klibName, klibFile)
 
-        val module = KlibTestUtil.deserializeKlibToCommonModule(klibFile)
+        konst module = KlibTestUtil.deserializeKlibToCommonModule(klibFile)
 
-        RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptorWithFile(
+        RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptorWithFile(
             module.getPackage(TEST_PACKAGE_FQNAME),
             RecursiveDescriptorComparator.DONT_INCLUDE_METHODS_OF_OBJECT,
             File(source.replace(".kt", ".txt"))

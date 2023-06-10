@@ -5,14 +5,14 @@ import org.jetbrains.kotlin.fir.plugin.NestedClassAndMaterializeMember
 class Foo {
     class MyNested
 
-    val result = "OK"
+    konst result = "OK"
 }
 
 class Bar
 
 fun test(foo: Foo): String {
-    val foo2: Foo = foo.materialize()
-    val nested = Foo.Nested()
+    konst foo2: Foo = foo.materialize()
+    konst nested = Foo.Nested()
     return foo2.result
 }
 

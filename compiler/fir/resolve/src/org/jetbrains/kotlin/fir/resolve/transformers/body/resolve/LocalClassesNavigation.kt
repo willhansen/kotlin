@@ -12,17 +12,17 @@ import org.jetbrains.kotlin.fir.visitors.FirDefaultVisitor
 import org.jetbrains.kotlin.utils.keysToMap
 
 class LocalClassesNavigationInfo(
-    val parentForClass: Map<FirClassLikeDeclaration, FirClassLikeDeclaration?>,
-    private val parentClassForFunction: Map<FirCallableDeclaration, FirClassLikeDeclaration>,
+    konst parentForClass: Map<FirClassLikeDeclaration, FirClassLikeDeclaration?>,
+    private konst parentClassForFunction: Map<FirCallableDeclaration, FirClassLikeDeclaration>,
 ) {
-    val designationMap: Map<FirCallableDeclaration, List<FirClassLikeDeclaration>> by lazy {
+    konst designationMap: Map<FirCallableDeclaration, List<FirClassLikeDeclaration>> by lazy {
         parentClassForFunction.keys.keysToMap {
             pathForCallable(it)
         }
     }
 
     private fun pathForCallable(callableMemberDeclaration: FirCallableDeclaration): List<FirClassLikeDeclaration> {
-        val result = mutableListOf<FirClassLikeDeclaration>()
+        konst result = mutableListOf<FirClassLikeDeclaration>()
         var current = parentClassForFunction[callableMemberDeclaration]
 
         while (current != null) {
@@ -42,9 +42,9 @@ fun FirClassLikeDeclaration.collectLocalClassesNavigationInfo(): LocalClassesNav
     }
 
 private class NavigationInfoVisitor : FirDefaultVisitor<Unit, Any?>() {
-    val resultingMap: MutableMap<FirCallableDeclaration, FirClassLikeDeclaration> = mutableMapOf()
-    val parentForClass: MutableMap<FirClassLikeDeclaration, FirClassLikeDeclaration?> = mutableMapOf()
-    private val currentPath: MutableList<FirClassLikeDeclaration> = mutableListOf()
+    konst resultingMap: MutableMap<FirCallableDeclaration, FirClassLikeDeclaration> = mutableMapOf()
+    konst parentForClass: MutableMap<FirClassLikeDeclaration, FirClassLikeDeclaration?> = mutableMapOf()
+    private konst currentPath: MutableList<FirClassLikeDeclaration> = mutableListOf()
 
     override fun visitElement(element: FirElement, data: Any?) {}
 

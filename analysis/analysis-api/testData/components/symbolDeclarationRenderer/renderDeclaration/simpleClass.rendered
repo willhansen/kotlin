@@ -1,7 +1,7 @@
 interface SomeInterface {
   fun foo(x: Int, y: String): String
 
-  val bar: Boolean
+  konst bar: Boolean
 }
 
 class SomeClass : SomeInterface {
@@ -11,9 +11,9 @@ class SomeClass : SomeInterface {
 
   override var bar: Boolean
     get()
-    set(value: Boolean)
+    set(konstue: Boolean)
 
-  private val baz: Int
+  private konst baz: Int
 }
 
 inline class InlineClass

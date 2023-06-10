@@ -1,9 +1,9 @@
 interface A {
-    val list: List<String>
+    konst list: List<String>
 }
 
 interface B {
-    val list: MutableList<String>
+    konst list: MutableList<String>
 }
 
 fun B.foo(a: A?) {

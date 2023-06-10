@@ -16,6 +16,6 @@ internal expect class SafeContinuation<in T> : Continuation<T> {
     @PublishedApi
     internal fun getOrThrow(): Any?
 
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
     override fun resumeWith(result: Result<T>): Unit
 }

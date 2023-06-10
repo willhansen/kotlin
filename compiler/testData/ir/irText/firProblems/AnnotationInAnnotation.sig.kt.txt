@@ -5,7 +5,7 @@ open annotation class State : Annotation {
   // CHECK:
   //   Mangled name: State{}name
   //   Public signature: /State.name|4231860309499509769[0]
-  val name: String
+  konst name: String
     // CHECK JVM_IR:
     //   Mangled name: State#<get-name>(){}kotlin.String
     //   Public signature: /State.name.<get-name>|-8006111524522882650[0]
@@ -14,7 +14,7 @@ open annotation class State : Annotation {
   // CHECK:
   //   Mangled name: State{}storages
   //   Public signature: /State.storages|6878252279913860320[0]
-  val storages: Array<Storage>
+  konst storages: Array<Storage>
     // CHECK JVM_IR:
     //   Mangled name: State#<get-storages>(){}kotlin.Array<Storage>
     //   Public signature: /State.storages.<get-storages>|3736036355422962101[0]
@@ -32,25 +32,25 @@ open annotation class State : Annotation {
 //   Public signature: /Storage|null[0]
 open annotation class Storage : Annotation {
   // CHECK:
-  //   Mangled name: Storage{}value
-  //   Public signature: /Storage.value|1987073854177347439[0]
-  val value: String
+  //   Mangled name: Storage{}konstue
+  //   Public signature: /Storage.konstue|1987073854177347439[0]
+  konst konstue: String
     // CHECK JVM_IR:
-    //   Mangled name: Storage#<get-value>(){}kotlin.String
-    //   Public signature: /Storage.value.<get-value>|-7202092821145242726[0]
+    //   Mangled name: Storage#<get-konstue>(){}kotlin.String
+    //   Public signature: /Storage.konstue.<get-konstue>|-7202092821145242726[0]
     get
 
   // CHECK:
   //   Mangled name: Storage#<init>(kotlin.String){}
   //   Public signature: /Storage.<init>|1280618353163213788[0]
-  constructor(value: String) /* primary */
+  constructor(konstue: String) /* primary */
 
 }
 
 // CHECK:
 //   Mangled name: Test
 //   Public signature: /Test|null[0]
-@State(name = "1", storages = [Storage(value = "HELLO")])
+@State(name = "1", storages = [Storage(konstue = "HELLO")])
 class Test {
   // CHECK:
   //   Mangled name: Test#<init>(){}

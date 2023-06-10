@@ -1,14 +1,14 @@
-class C(val value: String = "C") {
+class C(konst konstue: String = "C") {
 
-    inner class B(val s: String) {
-        val result = value + "_" + s
+    inner class B(konst s: String) {
+        konst result = konstue + "_" + s
     }
 
     fun classReceiver() = B("OK")
 
     fun newCReceiver() = C("newC").B("OK")
     fun cReceiver(): B {
-        val c = C("newC")
+        konst c = C("newC")
         return c.B("OK")
     }
 
@@ -17,7 +17,7 @@ class C(val value: String = "C") {
 }
 
 fun box(): String {
-    val receiver = C()
+    konst receiver = C()
     var result = receiver.classReceiver().result
     if (result != "C_OK") return "fail 1: $result"
 

@@ -6,7 +6,7 @@ FILE: accessInSetter.kt
 
         public final var isEnabled: R|kotlin/Boolean| = R|<local>/isEnabled|
             public get(): R|kotlin/Boolean|
-            public set(value: R|kotlin/Boolean|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Boolean|): R|kotlin/Unit|
 
     }
     public final class My : R|kotlin/Any| {
@@ -14,13 +14,13 @@ FILE: accessInSetter.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val drawableGrid: R|DrawableGrid| = this@R|/My|.R|/My.createDrawableGrid|()
+        private final konst drawableGrid: R|DrawableGrid| = this@R|/My|.R|/My.createDrawableGrid|()
             private get(): R|DrawableGrid|
 
         private final var useAll: R|kotlin/Boolean| = Boolean(false)
             private get(): R|kotlin/Boolean|
-            private set(value: R|kotlin/Boolean|): R|kotlin/Unit| {
-                this@R|/My|.R|/My.drawableGrid|.R|/DrawableGrid.isEnabled| = R|<local>/value|.R|kotlin/Boolean.not|()
+            private set(konstue: R|kotlin/Boolean|): R|kotlin/Unit| {
+                this@R|/My|.R|/My.drawableGrid|.R|/DrawableGrid.isEnabled| = R|<local>/konstue|.R|kotlin/Boolean.not|()
             }
 
         private final fun createDrawableGrid(): R|DrawableGrid| {
@@ -44,15 +44,15 @@ FILE: accessInSetter.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val drawableGrid: R|DrawableGrid| = this@R|/Your|.R|/Your.createDrawableGrid|()
+        private final konst drawableGrid: R|DrawableGrid| = this@R|/Your|.R|/Your.createDrawableGrid|()
             private get(): R|DrawableGrid|
 
         private final var useAll: R|kotlin/Boolean|
             private get(): R|kotlin/Boolean| {
                 ^ Boolean(false)
             }
-            private set(value: R|kotlin/Boolean|): R|kotlin/Unit| {
-                this@R|/Your|.R|/Your.drawableGrid|.R|/DrawableGrid.isEnabled| = R|<local>/value|.R|kotlin/Boolean.not|()
+            private set(konstue: R|kotlin/Boolean|): R|kotlin/Unit| {
+                this@R|/Your|.R|/Your.drawableGrid|.R|/DrawableGrid.isEnabled| = R|<local>/konstue|.R|kotlin/Boolean.not|()
             }
 
         private final fun createDrawableGrid(): R|DrawableGrid| {

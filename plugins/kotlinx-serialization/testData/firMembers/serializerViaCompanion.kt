@@ -10,49 +10,49 @@ import kotlinx.serialization.descriptors.*
 
 
 @Serializable(WithCompanion.Companion::class)
-data class WithCompanion(val i: Int) {
+data class WithCompanion(konst i: Int) {
     @Serializer(forClass = WithCompanion::class)
     companion object
 }
 
 @Serializable(WithNamedCompanion.Named::class)
-data class WithNamedCompanion(val i: Int) {
+data class WithNamedCompanion(konst i: Int) {
     @Serializer(forClass = WithNamedCompanion::class)
     companion object Named
 }
 
 @Serializable(WithExplicitType.Companion::class)
-data class WithExplicitType(val i: Int) {
+data class WithExplicitType(konst i: Int) {
     @Serializer(forClass = WithExplicitType::class)
     companion object : KSerializer<WithExplicitType>
 }
 
 @Serializable(PartiallyOverridden.Companion::class)
-data class PartiallyOverridden(val i: Int) {
+data class PartiallyOverridden(konst i: Int) {
     @Serializer(forClass = PartiallyOverridden::class)
     companion object : KSerializer<PartiallyOverridden> {
-        override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Partially-Overridden") {
+        override konst descriptor: SerialDescriptor = buildClassSerialDescriptor("Partially-Overridden") {
             element("i", PrimitiveSerialDescriptor("i", PrimitiveKind.INT))
         }
 
-        override fun serialize(encoder: Encoder, value: PartiallyOverridden) {
-            val compositeOutput = encoder.beginStructure(PartiallyOverridden.descriptor)
-            compositeOutput.encodeIntElement(PartiallyOverridden.descriptor, 0, value.i + 10)
+        override fun serialize(encoder: Encoder, konstue: PartiallyOverridden) {
+            konst compositeOutput = encoder.beginStructure(PartiallyOverridden.descriptor)
+            compositeOutput.encodeIntElement(PartiallyOverridden.descriptor, 0, konstue.i + 10)
             compositeOutput.endStructure(PartiallyOverridden.descriptor)
         }
     }
 }
 
 @Serializable(PartiallyWithoutType.Companion::class)
-data class PartiallyWithoutType(val i: Int) {
+data class PartiallyWithoutType(konst i: Int) {
     @Serializer(forClass = PartiallyWithoutType::class)
     companion object {
 
         override fun deserialize(decoder: Decoder): PartiallyWithoutType {
-            val dec: CompositeDecoder = decoder.beginStructure(descriptor)
+            konst dec: CompositeDecoder = decoder.beginStructure(descriptor)
             var iv: Int? = null
             loop@ while (true) {
-                when (val i = dec.decodeElementIndex(descriptor)) {
+                when (konst i = dec.decodeElementIndex(descriptor)) {
                     CompositeDecoder.DECODE_DONE -> break@loop
                     0 -> iv = dec.decodeIntElement(descriptor, i)
                     else -> throw SerializationException("Unknown index $i")
@@ -66,17 +66,17 @@ data class PartiallyWithoutType(val i: Int) {
 
 
 @Serializable(FullyOverridden.Companion::class)
-data class FullyOverridden(val i: Int) {
+data class FullyOverridden(konst i: Int) {
     companion object : KSerializer<FullyOverridden> {
 
-        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("FullyOverridden", PrimitiveKind.STRING)
+        override konst descriptor: SerialDescriptor = PrimitiveSerialDescriptor("FullyOverridden", PrimitiveKind.STRING)
 
-        override fun serialize(encoder: Encoder, value: FullyOverridden) {
-            encoder.encodeString("i=${value.i}")
+        override fun serialize(encoder: Encoder, konstue: FullyOverridden) {
+            encoder.encodeString("i=${konstue.i}")
         }
 
         override fun deserialize(decoder: Decoder): FullyOverridden {
-            val i = decoder.decodeString().substringAfter('=').toInt()
+            konst i = decoder.decodeString().substringAfter('=').toInt()
             return FullyOverridden(i)
         }
     }
@@ -102,11 +102,11 @@ fun box(): String {
 }
 
 
-private fun <T> encodeAndDecode(serializer: KSerializer<T>, value: T, expectedEncoded: String, expectedDecoded: T? = null): String? {
-    val encoded = Json.encodeToString(serializer, value)
+private fun <T> encodeAndDecode(serializer: KSerializer<T>, konstue: T, expectedEncoded: String, expectedDecoded: T? = null): String? {
+    konst encoded = Json.encodeToString(serializer, konstue)
     if (encoded != expectedEncoded) return encoded
 
-    val decoded = Json.decodeFromString(serializer, encoded)
-    if (decoded != (expectedDecoded ?: value)) return "DECODED=${decoded.toString()}"
+    konst decoded = Json.decodeFromString(serializer, encoded)
+    if (decoded != (expectedDecoded ?: konstue)) return "DECODED=${decoded.toString()}"
     return null
 }

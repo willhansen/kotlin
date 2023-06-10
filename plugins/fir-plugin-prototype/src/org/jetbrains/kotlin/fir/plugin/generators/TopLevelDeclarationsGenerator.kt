@@ -22,23 +22,23 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 /*
- * Generates `dummyClassName(value: ClassName): String` function for each class annotated with @DummyFunction
+ * Generates `dummyClassName(konstue: ClassName): String` function for each class annotated with @DummyFunction
  */
 class TopLevelDeclarationsGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
     companion object {
-        private val PREDICATE = LookupPredicate.create { annotated("DummyFunction".fqn()) }
+        private konst PREDICATE = LookupPredicate.create { annotated("DummyFunction".fqn()) }
     }
 
-    private val predicateBasedProvider = session.predicateBasedProvider
-    private val matchedClasses by lazy {
+    private konst predicateBasedProvider = session.predicateBasedProvider
+    private konst matchedClasses by lazy {
         predicateBasedProvider.getSymbolsByPredicate(PREDICATE).filterIsInstance<FirRegularClassSymbol>()
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
         if (context != null) return emptyList()
-        val matchedClassSymbol = findMatchedClassForFunction(callableId) ?: return emptyList()
-        val function = createTopLevelFunction(Key, callableId, session.builtinTypes.stringType.type) {
-            valueParameter(Name.identifier("value"), matchedClassSymbol.constructStarProjectedType())
+        konst matchedClassSymbol = findMatchedClassForFunction(callableId) ?: return emptyList()
+        konst function = createTopLevelFunction(Key, callableId, session.builtinTypes.stringType.type) {
+            konstueParameter(Name.identifier("konstue"), matchedClassSymbol.constructStarProjectedType())
         }
         return listOf(function.symbol)
     }
@@ -57,7 +57,7 @@ class TopLevelDeclarationsGenerator(session: FirSession) : FirDeclarationGenerat
 
     override fun getTopLevelCallableIds(): Set<CallableId> {
         return matchedClasses.mapTo(mutableSetOf()) {
-            val classId = it.classId
+            konst classId = it.classId
             CallableId(classId.packageFqName, Name.identifier(classId.toDummyCallableName()))
         }
     }

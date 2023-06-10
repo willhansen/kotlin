@@ -23,6 +23,6 @@ class C : I2 {
 
 @Test
 fun runTest() {
-    val c: I2 = C()
+    konst c: I2 = C()
     assertEquals(42, c.foo())
 }

@@ -27,7 +27,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Denotes that a parameter, field or method return value can be null.
+ * Denotes that a parameter, field or method return konstue can be null.
  * <b>Note</b>: this is the default assumption for most Java APIs and the
  * default assumption made by most static code checking tools, so usually you
  * don't need to use this annotation; its primary use is to override a default

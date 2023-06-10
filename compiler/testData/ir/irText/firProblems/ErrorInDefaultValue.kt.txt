@@ -23,7 +23,7 @@ class C : A {
 
   }
 
-  val x: A
+  konst x: A
     field = x
     get
 

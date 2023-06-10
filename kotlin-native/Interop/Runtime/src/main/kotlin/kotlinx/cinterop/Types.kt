@@ -21,9 +21,9 @@ public open class NativePointed internal constructor(rawPtr: NonNullNativePtr) {
         internal set
 }
 
-// `null` value of `NativePointed?` is mapped to `nativeNullPtr`.
+// `null` konstue of `NativePointed?` is mapped to `nativeNullPtr`.
 @ExperimentalForeignApi
-public val NativePointed?.rawPtr: NativePtr
+public konst NativePointed?.rawPtr: NativePtr
     get() = if (this != null) this.rawPtr else nativeNullPtr
 
 /**
@@ -55,14 +55,14 @@ public inline fun <reified T : NativePointed> NativePointed.reinterpret(): T = i
 public abstract class CPointed(rawPtr: NativePtr) : NativePointed(rawPtr.toNonNull())
 
 /**
- * Represents a reference to (possibly empty) sequence of C values.
- * It can be either a stable pointer [CPointer] or a sequence of immutable values [CValues].
+ * Represents a reference to (possibly empty) sequence of C konstues.
+ * It can be either a stable pointer [CPointer] or a sequence of immutable konstues [CValues].
  *
  * [CValuesRef] is designed to be used as Kotlin representation of pointer-typed parameters of C functions.
  * When passing [CPointer] as [CValuesRef] to the Kotlin binding method, the C function receives exactly this pointer.
- * Passing [CValues] has nearly the same semantics as passing by value: the C function receives
- * the pointer to the temporary copy of these values, and the caller can't observe the modifications to this copy.
- * The copy is valid until the C function returns.
+ * Passing [CValues] has nearly the same semantics as passing by konstue: the C function receives
+ * the pointer to the temporary copy of these konstues, and the caller can't observe the modifications to this copy.
+ * The copy is konstid until the C function returns.
  * There are other implementations of [CValuesRef] that provide temporary pointer,
  * e.g. Kotlin Native specific [refTo] functions to pass primitive arrays directly to native.
  */
@@ -70,19 +70,19 @@ public abstract class CPointed(rawPtr: NativePtr) : NativePointed(rawPtr.toNonNu
 public abstract class CValuesRef<T : CPointed> {
     /**
      * If this reference is [CPointer], returns this pointer, otherwise
-     * allocate storage value in the scope and return it.
+     * allocate storage konstue in the scope and return it.
      */
     public abstract fun getPointer(scope: AutofreeScope): CPointer<T>
 }
 
 /**
- * The (possibly empty) sequence of immutable C values.
+ * The (possibly empty) sequence of immutable C konstues.
  * It is self-contained and doesn't depend on native memory.
  */
 @ExperimentalForeignApi
 public abstract class CValues<T : CVariable> : CValuesRef<T>() {
     /**
-     * Copies the values to [placement] and returns the pointer to the copy.
+     * Copies the konstues to [placement] and returns the pointer to the copy.
      */
     public override fun getPointer(scope: AutofreeScope): CPointer<T> {
         return place(interpretCPointer(scope.alloc(size, align).rawPtr)!!)
@@ -93,8 +93,8 @@ public abstract class CValues<T : CVariable> : CValuesRef<T>() {
         if (this === other) return true
         if (other !is CValues<*>) return false
 
-        val thisBytes = this.getBytes()
-        val otherBytes = other.getBytes()
+        konst thisBytes = this.getBytes()
+        konst otherBytes = other.getBytes()
 
         if (thisBytes.size != otherBytes.size) {
             return false
@@ -117,12 +117,12 @@ public abstract class CValues<T : CVariable> : CValuesRef<T>() {
         return result
     }
 
-    public abstract val size: Int
+    public abstract konst size: Int
 
-    public abstract val align: Int
+    public abstract konst align: Int
 
     /**
-     * Copy the referenced values to [placement] and return placement pointer.
+     * Copy the referenced konstues to [placement] and return placement pointer.
      */
     public abstract fun place(placement: CPointer<T>): CPointer<T>
 }
@@ -131,7 +131,7 @@ public abstract class CValues<T : CVariable> : CValuesRef<T>() {
 public fun <T : CVariable> CValues<T>.placeTo(scope: AutofreeScope) = this.getPointer(scope)
 
 /**
- * The single immutable C value.
+ * The single immutable C konstue.
  * It is self-contained and doesn't depend on native memory.
  *
  * TODO: consider providing an adapter instead of subtyping [CValues].
@@ -143,11 +143,11 @@ public abstract class CValue<T : CVariable> : CValues<T>()
  * C pointer.
  */
 @ExperimentalForeignApi
-public class CPointer<T : CPointed> internal constructor(@PublishedApi internal val value: NonNullNativePtr) : CValuesRef<T>() {
+public class CPointer<T : CPointed> internal constructor(@PublishedApi internal konst konstue: NonNullNativePtr) : CValuesRef<T>() {
 
-    // TODO: replace by [value].
+    // TODO: replace by [konstue].
     @Suppress("NOTHING_TO_INLINE")
-    public inline val rawValue: NativePtr get() = value.toNativePtr()
+    public inline konst rawValue: NativePtr get() = konstue.toNativePtr()
 
     public override fun equals(other: Any?): Boolean {
         if (this === other) {
@@ -170,7 +170,7 @@ public class CPointer<T : CPointed> internal constructor(@PublishedApi internal 
  * Returns the pointer to this data or code.
  */
 @ExperimentalForeignApi
-public val <T : CPointed> T.ptr: CPointer<T>
+public konst <T : CPointed> T.ptr: CPointer<T>
     get() = interpretCPointer(this.rawPtr)!!
 
 /**
@@ -179,12 +179,12 @@ public val <T : CPointed> T.ptr: CPointer<T>
  * @param T must not be abstract
  */
 @ExperimentalForeignApi
-public inline val <reified T : CPointed> CPointer<T>.pointed: T
+public inline konst <reified T : CPointed> CPointer<T>.pointed: T
     get() = interpretPointed<T>(this.rawValue)
 
-// `null` value of `CPointer?` is mapped to `nativeNullPtr`
+// `null` konstue of `CPointer?` is mapped to `nativeNullPtr`
 @ExperimentalForeignApi
-public val CPointer<*>?.rawValue: NativePtr
+public konst CPointer<*>?.rawValue: NativePtr
     get() = if (this != null) this.rawValue else nativeNullPtr
 
 @ExperimentalForeignApi
@@ -238,7 +238,7 @@ public abstract class CVariable(rawPtr: NativePtr) : CPointed(rawPtr) {
      * It may be greater than actually required for simplicity.
      */
     @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
-    public open class Type(val size: Long, val align: Int) {
+    public open class Type(konst size: Long, konst align: Int) {
 
         init {
             require(size % align == 0L)
@@ -291,7 +291,7 @@ sealed class CPrimitiveVar(rawPtr: NativePtr) : CVariable(rawPtr) {
 
 @Deprecated("Will be removed.")
 public interface CEnum {
-    public val value: Any
+    public konst konstue: Any
 }
 
 @ExperimentalForeignApi
@@ -413,12 +413,12 @@ public typealias DoubleVar = DoubleVarOf<Double>
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : Boolean> BooleanVarOf<T>.value: T
+public var <T : Boolean> BooleanVarOf<T>.konstue: T
     get() {
-        val byte = nativeMemUtils.getByte(this)
+        konst byte = nativeMemUtils.getByte(this)
         return byte.toBoolean() as T
     }
-    set(value) = nativeMemUtils.putByte(this, value.toByte())
+    set(konstue) = nativeMemUtils.putByte(this, konstue.toByte())
 
 // TODO remove these boolean <-> byte declarations
 
@@ -432,65 +432,65 @@ public inline fun Byte.toBoolean() = (this.toInt() != 0)
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : Byte> ByteVarOf<T>.value: T
+public var <T : Byte> ByteVarOf<T>.konstue: T
     get() = nativeMemUtils.getByte(this) as T
-    set(value) = nativeMemUtils.putByte(this, value)
+    set(konstue) = nativeMemUtils.putByte(this, konstue)
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : Short> ShortVarOf<T>.value: T
+public var <T : Short> ShortVarOf<T>.konstue: T
     get() = nativeMemUtils.getShort(this) as T
-    set(value) = nativeMemUtils.putShort(this, value)
+    set(konstue) = nativeMemUtils.putShort(this, konstue)
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : Int> IntVarOf<T>.value: T
+public var <T : Int> IntVarOf<T>.konstue: T
     get() = nativeMemUtils.getInt(this) as T
-    set(value) = nativeMemUtils.putInt(this, value)
+    set(konstue) = nativeMemUtils.putInt(this, konstue)
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : Long> LongVarOf<T>.value: T
+public var <T : Long> LongVarOf<T>.konstue: T
     get() = nativeMemUtils.getLong(this) as T
-    set(value) = nativeMemUtils.putLong(this, value)
+    set(konstue) = nativeMemUtils.putLong(this, konstue)
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : UByte> UByteVarOf<T>.value: T
+public var <T : UByte> UByteVarOf<T>.konstue: T
     get() = nativeMemUtils.getByte(this).toUByte() as T
-    set(value) = nativeMemUtils.putByte(this, value.toByte())
+    set(konstue) = nativeMemUtils.putByte(this, konstue.toByte())
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : UShort> UShortVarOf<T>.value: T
+public var <T : UShort> UShortVarOf<T>.konstue: T
     get() = nativeMemUtils.getShort(this).toUShort() as T
-    set(value) = nativeMemUtils.putShort(this, value.toShort())
+    set(konstue) = nativeMemUtils.putShort(this, konstue.toShort())
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : UInt> UIntVarOf<T>.value: T
+public var <T : UInt> UIntVarOf<T>.konstue: T
     get() = nativeMemUtils.getInt(this).toUInt() as T
-    set(value) = nativeMemUtils.putInt(this, value.toInt())
+    set(konstue) = nativeMemUtils.putInt(this, konstue.toInt())
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : ULong> ULongVarOf<T>.value: T
+public var <T : ULong> ULongVarOf<T>.konstue: T
     get() = nativeMemUtils.getLong(this).toULong() as T
-    set(value) = nativeMemUtils.putLong(this, value.toLong())
+    set(konstue) = nativeMemUtils.putLong(this, konstue.toLong())
 
 // TODO: ensure native floats have the appropriate binary representation
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : Float> FloatVarOf<T>.value: T
+public var <T : Float> FloatVarOf<T>.konstue: T
     get() = nativeMemUtils.getFloat(this) as T
-    set(value) = nativeMemUtils.putFloat(this, value)
+    set(konstue) = nativeMemUtils.putFloat(this, konstue)
 
 @ExperimentalForeignApi
 @Suppress("FINAL_UPPER_BOUND", "UNCHECKED_CAST")
-public var <T : Double> DoubleVarOf<T>.value: T
+public var <T : Double> DoubleVarOf<T>.konstue: T
     get() = nativeMemUtils.getDouble(this) as T
-    set(value) = nativeMemUtils.putDouble(this, value)
+    set(konstue) = nativeMemUtils.putDouble(this, konstue)
 
 
 @ExperimentalForeignApi
@@ -507,29 +507,29 @@ public class CPointerVarOf<T : CPointer<*>>(rawPtr: NativePtr) : CVariable(rawPt
 public typealias CPointerVar<T> = CPointerVarOf<CPointer<T>>
 
 /**
- * The value of this variable.
+ * The konstue of this variable.
  */
 @ExperimentalForeignApi
 @Suppress("UNCHECKED_CAST")
-public inline var <P : CPointer<*>> CPointerVarOf<P>.value: P?
+public inline var <P : CPointer<*>> CPointerVarOf<P>.konstue: P?
     get() = interpretCPointer<CPointed>(nativeMemUtils.getNativePtr(this)) as P?
-    set(value) = nativeMemUtils.putNativePtr(this, value.rawValue)
+    set(konstue) = nativeMemUtils.putNativePtr(this, konstue.rawValue)
 
 /**
- * The code or data pointed by the value of this variable.
+ * The code or data pointed by the konstue of this variable.
  *
  * @param T must not be abstract
  */
 @ExperimentalForeignApi
 public inline var <reified T : CPointed, reified P : CPointer<T>> CPointerVarOf<P>.pointed: T?
-    get() = this.value?.pointed
-    set(value) {
-        this.value = value?.ptr as P?
+    get() = this.konstue?.pointed
+    set(konstue) {
+        this.konstue = konstue?.ptr as P?
     }
 
 @ExperimentalForeignApi
 public inline operator fun <reified T : CVariable> CPointer<T>.get(index: Long): T {
-    val offset = if (index == 0L) {
+    konst offset = if (index == 0L) {
         0L // optimization for JVM impl which uses reflection for now.
     } else {
         index * sizeOf<T>()
@@ -555,23 +555,23 @@ public inline operator fun <T : CPointerVarOf<*>> CPointer<T>?.plus(index: Int):
 @ExperimentalForeignApi
 @Suppress("NOTHING_TO_INLINE")
 public inline operator fun <T : CPointer<*>> CPointer<CPointerVarOf<T>>.get(index: Int): T? =
-        (this + index)!!.pointed.value
+        (this + index)!!.pointed.konstue
 
 @ExperimentalForeignApi
 @Suppress("NOTHING_TO_INLINE")
-public inline operator fun <T : CPointer<*>> CPointer<CPointerVarOf<T>>.set(index: Int, value: T?) {
-    (this + index)!!.pointed.value = value
+public inline operator fun <T : CPointer<*>> CPointer<CPointerVarOf<T>>.set(index: Int, konstue: T?) {
+    (this + index)!!.pointed.konstue = konstue
 }
 
 @ExperimentalForeignApi
 @Suppress("NOTHING_TO_INLINE")
 public inline operator fun <T : CPointer<*>> CPointer<CPointerVarOf<T>>.get(index: Long): T? =
-        (this + index)!!.pointed.value
+        (this + index)!!.pointed.konstue
 
 @ExperimentalForeignApi
 @Suppress("NOTHING_TO_INLINE")
-public inline operator fun <T : CPointer<*>> CPointer<CPointerVarOf<T>>.set(index: Long, value: T?) {
-    (this + index)!!.pointed.value = value
+public inline operator fun <T : CPointer<*>> CPointer<CPointerVarOf<T>>.set(index: Long, konstue: T?) {
+    (this + index)!!.pointed.konstue = konstue
 }
 
 @ExperimentalForeignApi

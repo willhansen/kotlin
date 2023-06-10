@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.project.model.utils.variantsContainingFragment
 import javax.inject.Inject
 
 abstract class GradleKpmModuleInternal(
-    final override val project: Project,
-    final override val moduleClassifier: String?
+    final override konst project: Project,
+    final override konst moduleClassifier: String?
 ) : GradleKpmModule {
 
     @Inject
@@ -27,18 +27,18 @@ abstract class GradleKpmModuleInternal(
         moduleName.takeIf { it != GradleKpmModule.MAIN_MODULE_NAME }?.toString()
     )
 
-    override val moduleIdentifier: KpmModuleIdentifier =
+    override konst moduleIdentifier: KpmModuleIdentifier =
         KpmLocalModuleIdentifier(project.currentBuildId().name, project.path, moduleClassifier)
 
-    override val fragments: ExtensiblePolymorphicDomainObjectContainer<GradleKpmFragment> =
+    override konst fragments: ExtensiblePolymorphicDomainObjectContainer<GradleKpmFragment> =
         project.objects.polymorphicDomainObjectContainer(GradleKpmFragment::class.java)
 
     // TODO DSL & build script model: find a way to create a flexible typed view on fragments?
-    override val variants: NamedDomainObjectSet<GradleKpmVariant> by lazy {
+    override konst variants: NamedDomainObjectSet<GradleKpmVariant> by lazy {
         fragments.withType(GradleKpmVariant::class.java)
     }
 
-    override val plugins: Set<KpmCompilerPlugin> by lazy {
+    override konst plugins: Set<KpmCompilerPlugin> by lazy {
         mutableSetOf<KpmCompilerPlugin>().also { set ->
             project
                 .plugins
@@ -64,17 +64,17 @@ abstract class GradleKpmModuleInternal(
     }
 
     companion object {
-        const val MAIN_MODULE_NAME = "main"
-        const val TEST_MODULE_NAME = "test"
+        const konst MAIN_MODULE_NAME = "main"
+        const konst TEST_MODULE_NAME = "test"
     }
 
     override fun toString(): String = "$moduleIdentifier (Gradle)"
 }
 
-internal val GradleKpmModule.resolvableMetadataConfigurationName: String
+internal konst GradleKpmModule.resolvableMetadataConfigurationName: String
     get() = lowerCamelCaseName(name, "DependenciesMetadata")
 
-internal val GradleKpmModule.isMain
+internal konst GradleKpmModule.isMain
     get() = moduleIdentifier.moduleClassifier == null
 
 internal fun GradleKpmModule.disambiguateName(simpleName: String) =

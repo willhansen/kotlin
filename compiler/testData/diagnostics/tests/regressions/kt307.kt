@@ -6,7 +6,7 @@ open class AL {
 }
 
 interface ALE<T> : <!INTERFACE_WITH_SUPERCLASS!>AL<!> {
-    fun getOrNull(index: Int, value: T) : T {
-        return get(index) <!UNCHECKED_CAST!>as? T<!> ?: value
+    fun getOrNull(index: Int, konstue: T) : T {
+        return get(index) <!UNCHECKED_CAST!>as? T<!> ?: konstue
     }
 }

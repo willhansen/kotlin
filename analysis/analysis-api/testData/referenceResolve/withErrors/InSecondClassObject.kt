@@ -4,11 +4,11 @@ class A
 
 class Many {
     companion object {
-        val x = A()
+        konst x = A()
     }
 
     companion object {
-        val y = <caret>A()
+        konst y = <caret>A()
     }
 }
 

@@ -30,16 +30,16 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        konst commonMain by getting
 
-        val linuxArm64Main by getting
-        val linuxX64Main by getting
+        konst linuxArm64Main by getting
+        konst linuxX64Main by getting
 
-        val upperMain by creating {
+        konst upperMain by creating {
             dependsOn(commonMain)
         }
 
-        val lowerMain by creating {
+        konst lowerMain by creating {
             dependsOn(upperMain)
             linuxArm64Main.dependsOn(this)
             linuxX64Main.dependsOn(this)

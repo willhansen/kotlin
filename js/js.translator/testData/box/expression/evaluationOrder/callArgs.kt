@@ -28,7 +28,7 @@ fun box(): String {
     assertEquals("AB:bar:", global)
 
     global = ""
-    val a = A()
+    konst a = A()
     a.memFun(try { "A" } finally {})
     assertEquals(":memFun:A", global)
 
@@ -41,7 +41,7 @@ fun box(): String {
     assertEquals("AB:memFun:C", global)
 
     global = ""
-    val b = B()
+    konst b = B()
     b.baz("S", a)
     assertEquals(":bExt:S", global)
 

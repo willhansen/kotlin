@@ -7,10 +7,10 @@ package foo
 fun delete() {}
 
 @JsExport
-val instanceof = 4
+konst instanceof = 4
 
 @JsExport
-class eval
+class ekonst
 
 @JsExport
 @JsName("await")
@@ -18,7 +18,7 @@ fun foo() {}
 
 @JsExport
 @JsName("this")
-val bar = 4
+konst bar = 4
 
 @JsExport
 @JsName("super")
@@ -32,7 +32,7 @@ class DefDef
 class Test {
     fun instanceof() {}
 
-    @JsName("eval")
+    @JsName("ekonst")
     fun test() {}
 }
 

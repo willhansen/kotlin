@@ -15,17 +15,17 @@ import org.jetbrains.kotlin.analysis.api.types.KtType
 import org.jetbrains.kotlin.name.CallableId
 
 public sealed class KtCallableSymbol : KtSymbolWithKind, KtPossibleMemberSymbol, KtDeclarationSymbol, KtContextReceiversOwner {
-    public abstract val callableIdIfNonLocal: CallableId?
-    public abstract val returnType: KtType
+    public abstract konst callableIdIfNonLocal: CallableId?
+    public abstract konst returnType: KtType
 
-    public abstract val receiverParameter: KtReceiverParameterSymbol?
-    public abstract val isExtension: Boolean
+    public abstract konst receiverParameter: KtReceiverParameterSymbol?
+    public abstract konst isExtension: Boolean
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtCallableSymbol>
 }
 
-public val KtCallableSymbol.receiverType: KtType?
+public konst KtCallableSymbol.receiverType: KtType?
     get() = receiverParameter?.type
 
 /**
@@ -33,13 +33,13 @@ public val KtCallableSymbol.receiverType: KtType?
  * `String` receiver parameter is such a symbol.
  */
 public abstract class KtReceiverParameterSymbol : KtAnnotatedSymbol, KtParameterSymbol {
-    public abstract val type: KtType
+    public abstract konst type: KtType
 
     /**
      * Link to the corresponding function or property.
      * In terms of the example above -- this is link to the function foo.
      */
-    public abstract val owningCallableSymbol: KtCallableSymbol
+    public abstract konst owningCallableSymbol: KtCallableSymbol
 
     context(KtAnalysisSession)
     abstract override fun createPointer(): KtSymbolPointer<KtReceiverParameterSymbol>

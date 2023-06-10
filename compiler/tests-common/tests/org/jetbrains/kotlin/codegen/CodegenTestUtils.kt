@@ -33,9 +33,9 @@ fun runBoxMethod(method: Method): String? {
     if (method.parameterTypes.isEmpty()) {
         return method.invoke(null) as? String
     }
-    val emptyContinuationClass = method.declaringClass.classLoader.loadClass("helpers.ResultContinuation")
-    val emptyContinuation = emptyContinuationClass.declaredConstructors.single().newInstance()
-    val result = method.invoke(null, emptyContinuation)
-    val resultAfterSuspend = emptyContinuationClass.getField("result").get(emptyContinuation)
+    konst emptyContinuationClass = method.declaringClass.classLoader.loadClass("helpers.ResultContinuation")
+    konst emptyContinuation = emptyContinuationClass.declaredConstructors.single().newInstance()
+    konst result = method.invoke(null, emptyContinuation)
+    konst resultAfterSuspend = emptyContinuationClass.getField("result").get(emptyContinuation)
     return (resultAfterSuspend ?: result) as? String
 }

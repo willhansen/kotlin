@@ -23,20 +23,20 @@ import org.jetbrains.kotlin.test.model.ResultingArtifact
 
 // IR backend (JVM, JS, Native)
 sealed class IrBackendInput : ResultingArtifact.BackendInput<IrBackendInput>() {
-    override val kind: BackendKinds.IrBackend
+    override konst kind: BackendKinds.IrBackend
         get() = BackendKinds.IrBackend
 
-    abstract val irModuleFragment: IrModuleFragment
+    abstract konst irModuleFragment: IrModuleFragment
 
     /**
      * It's actual only with MPP where every source module is separated
      */
-    abstract val dependentIrModuleFragments: List<IrModuleFragment>
+    abstract konst dependentIrModuleFragments: List<IrModuleFragment>
 
     /**
      * Here plugin context can be used as a service for inspecting resulting IR module
      */
-    abstract val irPluginContext: IrPluginContext
+    abstract konst irPluginContext: IrPluginContext
 
     /**
      * The mangler instance that was used to build declaration signatures from (possibly deserialized) K1 descriptors for this backend.
@@ -46,7 +46,7 @@ sealed class IrBackendInput : ResultingArtifact.BackendInput<IrBackendInput>() {
      * @see org.jetbrains.kotlin.backend.common.serialization.mangle.descriptor.DescriptorMangleComputer
      * @see org.jetbrains.kotlin.ir.util.IdSignature
      */
-    abstract val descriptorMangler: KotlinMangler.DescriptorMangler
+    abstract konst descriptorMangler: KotlinMangler.DescriptorMangler
 
     /**
      * The mangler instance that was used to build declaration signatures from IR declarations for this backend.
@@ -54,7 +54,7 @@ sealed class IrBackendInput : ResultingArtifact.BackendInput<IrBackendInput>() {
      * @see org.jetbrains.kotlin.backend.common.serialization.mangle.ir.IrMangleComputer
      * @see org.jetbrains.kotlin.ir.util.IdSignature
      */
-    abstract val irMangler: KotlinMangler.IrMangler
+    abstract konst irMangler: KotlinMangler.IrMangler
 
     /**
      * The mangler instance that was used to build declaration signatures from K2 (FIR) declarations for this backend, or `null` if
@@ -65,42 +65,42 @@ sealed class IrBackendInput : ResultingArtifact.BackendInput<IrBackendInput>() {
      * @see org.jetbrains.kotlin.fir.backend.FirMangleComputer
      * @see org.jetbrains.kotlin.ir.util.IdSignature
      */
-    abstract val firMangler: FirMangler?
+    abstract konst firMangler: FirMangler?
 
-    abstract val diagnosticReporter: BaseDiagnosticsCollector
+    abstract konst diagnosticReporter: BaseDiagnosticsCollector
 
     class JsIrBackendInput(
-        override val irModuleFragment: IrModuleFragment,
-        override val dependentIrModuleFragments: List<IrModuleFragment>,
-        override val irPluginContext: IrPluginContext,
-        val sourceFiles: List<KtSourceFile>,
-        val icData: List<KotlinFileSerializedData>,
-        val expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>, // TODO: abstract from descriptors
-        override val diagnosticReporter: BaseDiagnosticsCollector,
-        val hasErrors: Boolean,
-        override val descriptorMangler: KotlinMangler.DescriptorMangler,
-        override val irMangler: KotlinMangler.IrMangler,
-        override val firMangler: FirMangler?,
-        val serializeSingleFile: (KtSourceFile, IrActualizedResult?) -> ProtoBuf.PackageFragment,
+        override konst irModuleFragment: IrModuleFragment,
+        override konst dependentIrModuleFragments: List<IrModuleFragment>,
+        override konst irPluginContext: IrPluginContext,
+        konst sourceFiles: List<KtSourceFile>,
+        konst icData: List<KotlinFileSerializedData>,
+        konst expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>, // TODO: abstract from descriptors
+        override konst diagnosticReporter: BaseDiagnosticsCollector,
+        konst hasErrors: Boolean,
+        override konst descriptorMangler: KotlinMangler.DescriptorMangler,
+        override konst irMangler: KotlinMangler.IrMangler,
+        override konst firMangler: FirMangler?,
+        konst serializeSingleFile: (KtSourceFile, IrActualizedResult?) -> ProtoBuf.PackageFragment,
     ) : IrBackendInput()
 
     class JvmIrBackendInput(
-        val state: GenerationState,
-        val codegenFactory: JvmIrCodegenFactory,
-        val backendInput: JvmIrCodegenFactory.JvmIrBackendInput,
-        override val dependentIrModuleFragments: List<IrModuleFragment>,
-        val sourceFiles: List<KtSourceFile>,
-        override val descriptorMangler: KotlinMangler.DescriptorMangler,
-        override val irMangler: KotlinMangler.IrMangler,
-        override val firMangler: FirMangler?,
+        konst state: GenerationState,
+        konst codegenFactory: JvmIrCodegenFactory,
+        konst backendInput: JvmIrCodegenFactory.JvmIrBackendInput,
+        override konst dependentIrModuleFragments: List<IrModuleFragment>,
+        konst sourceFiles: List<KtSourceFile>,
+        override konst descriptorMangler: KotlinMangler.DescriptorMangler,
+        override konst irMangler: KotlinMangler.IrMangler,
+        override konst firMangler: FirMangler?,
     ) : IrBackendInput() {
-        override val irModuleFragment: IrModuleFragment
+        override konst irModuleFragment: IrModuleFragment
             get() = backendInput.irModuleFragment
 
-        override val irPluginContext: IrPluginContext
+        override konst irPluginContext: IrPluginContext
             get() = backendInput.pluginContext
 
-        override val diagnosticReporter: BaseDiagnosticsCollector
+        override konst diagnosticReporter: BaseDiagnosticsCollector
             get() = state.diagnosticReporter as BaseDiagnosticsCollector
     }
 }

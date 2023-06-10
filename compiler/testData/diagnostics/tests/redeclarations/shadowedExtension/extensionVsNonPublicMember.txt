@@ -1,9 +1,9 @@
 package
 
-public val Test.internalVal: kotlin.Int
-public val Test.privateVal: kotlin.Int
-public val Test.protectedVal: kotlin.Int
-public val Test.publicVal: kotlin.Int
+public konst Test.internalVal: kotlin.Int
+public konst Test.privateVal: kotlin.Int
+public konst Test.protectedVal: kotlin.Int
+public konst Test.publicVal: kotlin.Int
 public fun Test.internalFoo(): kotlin.Unit
 public fun Test.privateFoo(): kotlin.Unit
 public fun Test.protectedFoo(): kotlin.Unit
@@ -15,14 +15,14 @@ public fun Test.withPublicInvoke(): kotlin.Unit
 
 public final class Test {
     public constructor Test()
-    internal final val internalVal: kotlin.Int = 42
-    private final val privateVal: kotlin.Int = 42
-    protected final val protectedVal: kotlin.Int = 42
-    public final val publicVal: kotlin.Int = 42
-    public final val withInternalInvoke: WithInternalInvoke
-    public final val withPrivateInvoke: WithPrivateInvoke
-    public final val withProtectedInvoke: WithProtectedInvoke
-    public final val withPublicInvoke: WithPublicInvoke
+    internal final konst internalVal: kotlin.Int = 42
+    private final konst privateVal: kotlin.Int = 42
+    protected final konst protectedVal: kotlin.Int = 42
+    public final konst publicVal: kotlin.Int = 42
+    public final konst withInternalInvoke: WithInternalInvoke
+    public final konst withPrivateInvoke: WithPrivateInvoke
+    public final konst withProtectedInvoke: WithProtectedInvoke
+    public final konst withPublicInvoke: WithPublicInvoke
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     internal final fun internalFoo(): kotlin.Unit

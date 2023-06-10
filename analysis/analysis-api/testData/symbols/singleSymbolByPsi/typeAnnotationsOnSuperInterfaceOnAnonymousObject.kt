@@ -13,6 +13,6 @@ interface BaseInterface
 typealias FirstTypeAlias = @Anno1 BaseInterface
 typealias SecondTypeAlias = @Anno2 FirstTypeAlias
 
-val obj = obje<caret>ct : @Anno3 SecondTypeAlias {
+konst obj = obje<caret>ct : @Anno3 SecondTypeAlias {
 
 }

@@ -2,7 +2,7 @@
 // FILE: A.kt
 // VERSION: 1
 
-sealed class X(val name: String ="X")
+sealed class X(konst name: String ="X")
 
 class Y: X("Y")
 
@@ -13,7 +13,7 @@ fun last(): X = Z()
 // FILE: B.kt
 // VERSION: 2
 
-sealed class X(val name: String ="X")
+sealed class X(konst name: String ="X")
 
 class Y: X("Y")
 
@@ -27,7 +27,7 @@ fun last(): X = W()
 // FILE: mainLib.kt
 
 fun lib(): String {
-    val x = last()
+    konst x = last()
     return when(x) {
         is Y -> "fail 1"
         is Z -> "fail 2"

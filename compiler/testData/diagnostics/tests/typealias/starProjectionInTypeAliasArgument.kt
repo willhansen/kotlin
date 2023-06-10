@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-class NumCharSeq<N : Number, M : CharSequence>(val n: N, val m: M)
+class NumCharSeq<N : Number, M : CharSequence>(konst n: N, konst m: M)
 
 typealias Test<X, Y> = NumCharSeq<X, Y>
 

@@ -6,11 +6,11 @@ import kotlinx.android.synthetic.main.layout.*
 import kotlinx.android.synthetic.main.layout1.*
 
 class MyActivity: Activity() {
-    val button = this.login
+    konst button = this.login
 }
 
 class MyFragment: Fragment() {
-    val button1 = this.loginButton
+    konst button1 = this.loginButton
 }
 
 // 2 public _\$_findCachedViewById

@@ -5,7 +5,7 @@ class C {
   // CHECK:
   //   Mangled name: C{}test1
   //   Public signature: /C.test1|6005685442305498193[0]
-  val test1: Int
+  konst test1: Int
     // CHECK JVM_IR:
     //   Mangled name: C#<get-test1>(){}kotlin.Int
     //   Public signature: /C.test1.<get-test1>|3978508226793108919[0]

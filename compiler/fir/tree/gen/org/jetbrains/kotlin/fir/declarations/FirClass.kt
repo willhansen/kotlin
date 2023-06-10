@@ -24,20 +24,20 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 sealed class FirClass : FirClassLikeDeclaration(), FirStatement, FirTypeParameterRefsOwner, FirControlFlowGraphOwner {
-    abstract override val source: KtSourceElement?
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val typeParameters: List<FirTypeParameterRef>
-    abstract override val status: FirDeclarationStatus
-    abstract override val deprecationsProvider: DeprecationsProvider
-    abstract override val controlFlowGraphReference: FirControlFlowGraphReference?
-    abstract override val symbol: FirClassSymbol<out FirClass>
-    abstract val classKind: ClassKind
-    abstract val superTypeRefs: List<FirTypeRef>
-    abstract val declarations: List<FirDeclaration>
-    abstract override val annotations: List<FirAnnotation>
-    abstract val scopeProvider: FirScopeProvider
+    abstract override konst source: KtSourceElement?
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst typeParameters: List<FirTypeParameterRef>
+    abstract override konst status: FirDeclarationStatus
+    abstract override konst deprecationsProvider: DeprecationsProvider
+    abstract override konst controlFlowGraphReference: FirControlFlowGraphReference?
+    abstract override konst symbol: FirClassSymbol<out FirClass>
+    abstract konst classKind: ClassKind
+    abstract konst superTypeRefs: List<FirTypeRef>
+    abstract konst declarations: List<FirDeclaration>
+    abstract override konst annotations: List<FirAnnotation>
+    abstract konst scopeProvider: FirScopeProvider
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitClass(this, data)
 

@@ -242,7 +242,7 @@ public class PropertyCodegen {
             return !isDefaultAccessor;
         }
 
-        // Non-public API (private and internal) primary vals of inline classes don't have getter
+        // Non-public API (private and internal) primary konsts of inline classes don't have getter
         if (InlineClassesUtilsKt.isUnderlyingPropertyOfInlineClass(descriptor) && !descriptor.getVisibility().isPublicAPI()) {
             return false;
         }
@@ -301,7 +301,7 @@ public class PropertyCodegen {
             ConstantValue<?> constant = ExpressionCodegen.getCompileTimeConstant(
                     defaultValue, bindingContext, true, state.getShouldInlineConstVals());
             assert !state.getClassBuilderMode().generateBodies || constant != null
-                    : "Default value for annotation parameter should be compile time value: " + defaultValue.getText();
+                    : "Default konstue for annotation parameter should be compile time konstue: " + defaultValue.getText();
             if (constant != null) {
                 AnnotationCodegen annotationCodegen = AnnotationCodegen.forAnnotationDefaultValue(mv, memberCodegen, state);
                 annotationCodegen.generateAnnotationDefaultValue(constant, descriptor.getType());
@@ -316,8 +316,8 @@ public class PropertyCodegen {
             @NotNull PropertyDescriptor descriptor,
             @Nullable FunctionDescriptor expectedAnnotationConstructor
     ) {
-        KtExpression value = ktParameter.getDefaultValue();
-        if (value != null) return value;
+        KtExpression konstue = ktParameter.getDefaultValue();
+        if (konstue != null) return konstue;
 
         if (expectedAnnotationConstructor != null) {
             ValueParameterDescriptor expectedParameter = CollectionsKt.single(
@@ -571,9 +571,9 @@ public class PropertyCodegen {
                 v.areturn(type);
             }
             else if (propertyAccessorDescriptor instanceof PropertySetterDescriptor) {
-                List<ValueParameterDescriptor> valueParameters = propertyAccessorDescriptor.getValueParameters();
-                assert valueParameters.size() == 1 : "Property setter should have only one value parameter but has " + propertyAccessorDescriptor;
-                int parameterIndex = codegen.lookupLocalIndex(valueParameters.get(0));
+                List<ValueParameterDescriptor> konstueParameters = propertyAccessorDescriptor.getValueParameters();
+                assert konstueParameters.size() == 1 : "Property setter should have only one konstue parameter but has " + propertyAccessorDescriptor;
+                int parameterIndex = codegen.lookupLocalIndex(konstueParameters.get(0));
                 assert parameterIndex >= 0 : "Local index for setter parameter should be positive or zero: " + propertyAccessorDescriptor;
                 Type type = codegen.typeMapper.mapType(propertyDescriptor);
                 property.store(StackValue.local(parameterIndex, type), codegen.v);

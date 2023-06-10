@@ -9,19 +9,19 @@ import org.jetbrains.kotlin.incremental.IncrementalJsCache
 import org.jetbrains.kotlin.utils.JsMetadataVersion
 import java.io.File
 
-class IncrementalDataProviderFromCache(private val cache: IncrementalJsCache) : IncrementalDataProvider {
-    override val headerMetadata: ByteArray
+class IncrementalDataProviderFromCache(private konst cache: IncrementalJsCache) : IncrementalDataProvider {
+    override konst headerMetadata: ByteArray
         get() = cache.header
 
-    override val compiledPackageParts: Map<File, TranslationResultValue>
+    override konst compiledPackageParts: Map<File, TranslationResultValue>
         get() = cache.nonDirtyPackageParts()
 
-    override val metadataVersion: IntArray
+    override konst metadataVersion: IntArray
         get() = JsMetadataVersion.INSTANCE.toArray() // TODO: store and load correct metadata version
 
-    override val packageMetadata: Map<String, ByteArray>
+    override konst packageMetadata: Map<String, ByteArray>
         get() = cache.packageMetadata()
 
-    override val serializedIrFiles: Map<File, IrTranslationResultValue>
+    override konst serializedIrFiles: Map<File, IrTranslationResultValue>
         get() = cache.nonDirtyIrParts()
 }

@@ -19,14 +19,14 @@ public inline fun <R> myrun(block: () -> R): R {
 import test.*
 
 class A {
-    val x: String
+    konst x: String
 
     constructor() {
     }
 
     init {
-        val o: String
-        val k: String = "K"
+        konst o: String
+        konst k: String = "K"
         myrun { o = "O" }
         fun baz() = o + k
         x = baz()

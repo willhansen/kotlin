@@ -5,7 +5,7 @@
 
 package codegen.escapeAnalysis.test1
 
-class A(val s: String)
+class A(konst s: String)
 
 // ----- Agressive -----
 // PointsTo:

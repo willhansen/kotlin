@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.util.patchDeclarationParents
 
 internal class SaveInlineFunctionsBeforeInlining(context: JsIrBackendContext) : DeclarationTransformer {
-    private val inlineFunctionsBeforeInlining = context.mapping.inlineFunctionsBeforeInlining
+    private konst inlineFunctionsBeforeInlining = context.mapping.inlineFunctionsBeforeInlining
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration is IrFunction && declaration.isInline) {
@@ -29,12 +29,12 @@ internal class SaveInlineFunctionsBeforeInlining(context: JsIrBackendContext) : 
 }
 
 internal class JsInlineFunctionResolver(context: JsIrBackendContext) : DefaultInlineFunctionResolver(context) {
-    private val inlineFunctionsBeforeInlining = context.mapping.inlineFunctionsBeforeInlining
-    private val inlineFunctionsBeforeInliningSymbols = hashMapOf<IrFunction, IrFunctionSymbol>()
+    private konst inlineFunctionsBeforeInlining = context.mapping.inlineFunctionsBeforeInlining
+    private konst inlineFunctionsBeforeInliningSymbols = hashMapOf<IrFunction, IrFunctionSymbol>()
 
     override fun getFunctionDeclaration(symbol: IrFunctionSymbol): IrFunction {
-        val function = super.getFunctionDeclaration(symbol)
-        val functionBeforeInlining = inlineFunctionsBeforeInlining[function] ?: return function
+        konst function = super.getFunctionDeclaration(symbol)
+        konst functionBeforeInlining = inlineFunctionsBeforeInlining[function] ?: return function
         inlineFunctionsBeforeInliningSymbols[functionBeforeInlining] = function.symbol
         return functionBeforeInlining
     }

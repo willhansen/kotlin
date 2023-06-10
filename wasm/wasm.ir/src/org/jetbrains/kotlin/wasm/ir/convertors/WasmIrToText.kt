@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.wasm.ir.convertors
 import org.jetbrains.kotlin.wasm.ir.*
 
 open class SExpressionBuilder {
-    protected val stringBuilder = StringBuilder()
+    protected konst stringBuilder = StringBuilder()
     protected var indent = 0
 
     protected inline fun indented(body: () -> Unit) {
@@ -35,9 +35,9 @@ open class SExpressionBuilder {
         stringBuilder.append(")")
     }
 
-    protected fun appendElement(value: String) {
+    protected fun appendElement(konstue: String) {
         stringBuilder.append(" ")
-        stringBuilder.append(value)
+        stringBuilder.append(konstue)
     }
 
     override fun toString(): String =
@@ -46,28 +46,28 @@ open class SExpressionBuilder {
 
 
 class WasmIrToText : SExpressionBuilder() {
-    fun appendOffset(value: UInt) {
-        if (value != 0u)
-            appendElement("offset=$value")
+    fun appendOffset(konstue: UInt) {
+        if (konstue != 0u)
+            appendElement("offset=$konstue")
     }
 
-    fun appendAlign(value: UInt) {
+    fun appendAlign(konstue: UInt) {
         var alignEffective: Long = 1
-        repeat(value.toInt()) { alignEffective *= 2 }
+        repeat(konstue.toInt()) { alignEffective *= 2 }
         if (alignEffective != 0L)
             appendElement("align=$alignEffective")
     }
 
     private fun appendInstr(wasmInstr: WasmInstr) {
-        val op = wasmInstr.operator
+        konst op = wasmInstr.operator
 
         if (op.opcode == WASM_OP_PSEUDO_OPCODE) {
             fun commentText() =
-                (wasmInstr.immediates.single() as WasmImmediate.ConstString).value
+                (wasmInstr.immediates.single() as WasmImmediate.ConstString).konstue
 
             when (op) {
                 WasmOp.PSEUDO_COMMENT_PREVIOUS_INSTR -> {
-                    val text = commentText()
+                    konst text = commentText()
                     require(text.lineSequence().count() < 2) { "Comments for single instruction should be in one line" }
                     stringBuilder.append("  ;; ")
                     stringBuilder.append(text)
@@ -110,36 +110,36 @@ class WasmIrToText : SExpressionBuilder() {
 
     private fun appendImmediate(x: WasmImmediate) {
         when (x) {
-            is WasmImmediate.ConstI32 -> appendElement(x.value.toString().lowercase())
-            is WasmImmediate.ConstI64 -> appendElement(x.value.toString().lowercase())
+            is WasmImmediate.ConstI32 -> appendElement(x.konstue.toString().lowercase())
+            is WasmImmediate.ConstI64 -> appendElement(x.konstue.toString().lowercase())
             is WasmImmediate.ConstF32 -> appendElement(f32Str(x).lowercase())
             is WasmImmediate.ConstF64 -> appendElement(f64Str(x).lowercase())
-            is WasmImmediate.SymbolI32 -> appendElement(x.value.owner.toString())
+            is WasmImmediate.SymbolI32 -> appendElement(x.konstue.owner.toString())
             is WasmImmediate.MemArg -> {
                 appendOffset(x.offset)
                 appendAlign(x.align)
             }
             is WasmImmediate.BlockType -> appendBlockType(x)
-            is WasmImmediate.FuncIdx -> appendModuleFieldReference(x.value.owner)
-            is WasmImmediate.LocalIdx -> appendLocalReference(x.value.owner)
-            is WasmImmediate.GlobalIdx -> appendModuleFieldReference(x.value.owner)
-            is WasmImmediate.TypeIdx -> sameLineList("type") { appendModuleFieldReference(x.value.owner) }
-            is WasmImmediate.MemoryIdx -> appendIdxIfNotZero(x.value)
-            is WasmImmediate.DataIdx -> appendElement(x.value.toString())
-            is WasmImmediate.TableIdx -> appendElement(x.value.toString())
-            is WasmImmediate.LabelIdx -> appendElement(x.value.toString())
-            is WasmImmediate.TagIdx -> appendElement(x.value.toString())
+            is WasmImmediate.FuncIdx -> appendModuleFieldReference(x.konstue.owner)
+            is WasmImmediate.LocalIdx -> appendLocalReference(x.konstue.owner)
+            is WasmImmediate.GlobalIdx -> appendModuleFieldReference(x.konstue.owner)
+            is WasmImmediate.TypeIdx -> sameLineList("type") { appendModuleFieldReference(x.konstue.owner) }
+            is WasmImmediate.MemoryIdx -> appendIdxIfNotZero(x.konstue)
+            is WasmImmediate.DataIdx -> appendElement(x.konstue.toString())
+            is WasmImmediate.TableIdx -> appendElement(x.konstue.toString())
+            is WasmImmediate.LabelIdx -> appendElement(x.konstue.toString())
+            is WasmImmediate.TagIdx -> appendElement(x.konstue.toString())
             is WasmImmediate.LabelIdxVector ->
-                x.value.forEach { appendElement(it.toString()) }
+                x.konstue.forEach { appendElement(it.toString()) }
 
-            is WasmImmediate.ElemIdx -> appendElement(x.value.id!!.toString())
+            is WasmImmediate.ElemIdx -> appendElement(x.konstue.id!!.toString())
 
-            is WasmImmediate.ValTypeVector -> sameLineList("result") { x.value.forEach { appendType(it) } }
+            is WasmImmediate.ValTypeVector -> sameLineList("result") { x.konstue.forEach { appendType(it) } }
 
-            is WasmImmediate.GcType -> appendModuleFieldReference(x.value.owner)
-            is WasmImmediate.StructFieldIdx -> appendElement(x.value.owner.toString())
+            is WasmImmediate.GcType -> appendModuleFieldReference(x.konstue.owner)
+            is WasmImmediate.StructFieldIdx -> appendElement(x.konstue.owner.toString())
             is WasmImmediate.HeapType -> {
-                appendHeapType(x.value)
+                appendHeapType(x.konstue)
             }
 
             is WasmImmediate.ConstString -> error("Pseudo immediate")
@@ -148,16 +148,16 @@ class WasmIrToText : SExpressionBuilder() {
 
 
     private fun f32Str(x: WasmImmediate.ConstF32): String {
-        val bits = x.rawBits.toInt()
-        val v = Float.fromBits(bits)
+        konst bits = x.rawBits.toInt()
+        konst v = Float.fromBits(bits)
         return if (v.isNaN()) {
-            val sign = if ((bits and Int.MIN_VALUE) == 0) {
+            konst sign = if ((bits and Int.MIN_VALUE) == 0) {
                 ""
             } else {
                 "-"
             }
             if (bits != Float.NaN.toRawBits()) {
-                val customPayload = bits and 0x7fffff
+                konst customPayload = bits and 0x7fffff
                 "${sign}nan:0x${customPayload.toString(16)}"
             } else {
                 "${sign}nan"
@@ -173,17 +173,17 @@ class WasmIrToText : SExpressionBuilder() {
 
 
     private fun f64Str(x: WasmImmediate.ConstF64): String {
-        val bits = x.rawBits.toLong()
-        val v = Double.fromBits(bits)
+        konst bits = x.rawBits.toLong()
+        konst v = Double.fromBits(bits)
 
         return if (v.isNaN()) {
-            val sign = if ((bits and Long.MIN_VALUE) == 0L) {
+            konst sign = if ((bits and Long.MIN_VALUE) == 0L) {
                 ""
             } else {
                 "-"
             }
             if (bits != Double.NaN.toRawBits()) {
-                val customPayload = bits and 0xfffffffffffff
+                konst customPayload = bits and 0xfffffffffffff
                 "${sign}nan:0x${customPayload.toString(16)}"
             } else {
                 "${sign}nan"
@@ -205,8 +205,8 @@ class WasmIrToText : SExpressionBuilder() {
                 }
             }
             is WasmImmediate.BlockType.Function -> {
-                val parameters = type.type.parameterTypes
-                val results = type.type.resultTypes
+                konst parameters = type.type.parameterTypes
+                konst results = type.type.resultTypes
                 if (parameters.isNotEmpty()) {
                     sameLineList("param") { parameters.forEach { appendType(it) } }
                 }
@@ -390,7 +390,7 @@ class WasmIrToText : SExpressionBuilder() {
 
     private fun appendWasmElement(element: WasmElement) {
         newLineList("elem") {
-            when (val mode = element.mode) {
+            when (konst mode = element.mode) {
                 WasmElement.Mode.Passive -> {
                 }
                 is WasmElement.Mode.Active -> {
@@ -404,19 +404,19 @@ class WasmIrToText : SExpressionBuilder() {
                 }
             }
 
-            val allFunctions = element.values.all { it is WasmTable.Value.Function }
+            konst allFunctions = element.konstues.all { it is WasmTable.Value.Function }
             if (allFunctions) {
                 appendElement("func")
-                for (value in element.values) {
-                    require(value is WasmTable.Value.Function)
-                    appendModuleFieldReference(value.function.owner)
+                for (konstue in element.konstues) {
+                    require(konstue is WasmTable.Value.Function)
+                    appendModuleFieldReference(konstue.function.owner)
                 }
             } else {
                 appendType(element.type)
-                for (value in element.values) {
-                    require(value is WasmTable.Value.Expression)
+                for (konstue in element.konstues) {
+                    require(konstue is WasmTable.Value.Expression)
                     sameLineList("item") {
-                        appendInstr(value.expr.single())
+                        appendInstr(konstue.expr.single())
                     }
                 }
             }
@@ -431,7 +431,7 @@ class WasmIrToText : SExpressionBuilder() {
 
     private fun appendData(wasmData: WasmData) {
         newLineList("data") {
-            when (val mode = wasmData.mode) {
+            when (konst mode = wasmData.mode) {
                 is WasmDataMode.Active -> {
                     if (mode.memoryIdx != 0) {
                         sameLineList("memory") { appendElement(mode.memoryIdx.toString()) }
@@ -532,10 +532,10 @@ class WasmIrToText : SExpressionBuilder() {
     }
 
     fun appendModuleFieldReference(field: WasmNamedModuleField) {
-        val id = field.id
+        konst id = field.id
             ?: error("${field::class} ${field.name} ID is unlinked")
 
-        val indexSpaceKind = when (field) {
+        konst indexSpaceKind = when (field) {
             is WasmData -> "data"
             is WasmFunction -> "fun"
             is WasmMemory -> "mem"
@@ -572,7 +572,7 @@ fun sanitizeWatIdentifier(indent: String): String {
     return indent.map { if (isValidWatIdentifierChar(it)) it else "_" }.joinToString("")
 }
 
-// https://webassembly.github.io/spec/core/text/values.html#text-id
+// https://webassembly.github.io/spec/core/text/konstues.html#text-id
 fun isValidWatIdentifierChar(c: Char): Boolean =
     c in '0'..'9' || c in 'A'..'Z' || c in 'a'..'z'
             // TODO: SpiderMonkey js shell can't parse some of the

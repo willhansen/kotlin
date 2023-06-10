@@ -7,7 +7,7 @@ interface Operation {
     fun exec(input: Long): Long
 }
 
-class Add(private val addValue: Long) : Operation {
+class Add(private konst addValue: Long) : Operation {
     override fun exec(input: Long): Long {
         return input + addValue
     }
@@ -22,7 +22,7 @@ class Squared : Operation {
 fun test(op: String, x: Long): Long {
     var result = 0L
     listOf(1L).forEach {
-        val operation2 = when (op) {
+        konst operation2 = when (op) {
             "*" -> {
                 Squared()::exec
             }
@@ -39,6 +39,6 @@ fun test(op: String, x: Long): Long {
 }
 
 fun box(): String {
-    val result = test("+", 4L)
+    konst result = test("+", 4L)
     return if (result == 46L) "OK" else "Error: $result"
 }

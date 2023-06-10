@@ -11,13 +11,13 @@ inline operator fun Long.setValue(thisRef: IntArray, kProp: Any?, newValue: Int)
     thisRef[this.toInt()] = newValue
 }
 
-val magic1 by 42.0
+konst magic1 by 42.0
 
-val magic2 by 42L
+konst magic2 by 42L
 
 var IntArray.firstElement by 0L
 
-val Long.plus3 by 3L
+konst Long.plus3 by 3L
 
 class C {
     inline operator fun Long.getValue(thisRef: IntArray, kProp: Any?) = thisRef[this.toInt()] * 10
@@ -30,7 +30,7 @@ class C {
 
     var IntArray.secondElementX10 by 1L
     
-    val Long.appendDigit1 by 1L
+    konst Long.appendDigit1 by 1L
     
     fun test(intArray: IntArray) {
         if (intArray.secondElementX10 != 220) throw AssertionError()
@@ -45,7 +45,7 @@ fun box(): String {
     if (magic1 != 42) throw AssertionError()
     if (magic2 != 42) throw AssertionError()
     
-    val intArray = IntArray(9) { (it + 1) * 10 + it + 1 } // [ 11, 22, 33, ..., 99 ]
+    konst intArray = IntArray(9) { (it + 1) * 10 + it + 1 } // [ 11, 22, 33, ..., 99 ]
     
     if (10L.plus3 != 13) throw AssertionError()
     
@@ -53,7 +53,7 @@ fun box(): String {
     intArray.firstElement = 42
     if (intArray.firstElement != 42) throw AssertionError()
     
-    val x = C()
+    konst x = C()
     x.test(intArray)
     
     return "OK"

@@ -22,13 +22,13 @@ import org.jetbrains.org.objectweb.asm.TypePath
 
 
 class TypePathInfo<T>(
-    val path: TypePath?,
-    val annotations: List<T>
+    konst path: TypePath?,
+    konst annotations: List<T>
 )
 
-private class State<T>(val path: MutableList<String>) {
+private class State<T>(konst path: MutableList<String>) {
 
-    val results = arrayListOf<TypePathInfo<T>>()
+    konst results = arrayListOf<TypePathInfo<T>>()
 
 
     fun addStep(step: String) {
@@ -56,7 +56,7 @@ class PsiTypeAnnotationCollector : TypeAnnotationCollector<AnnotationDescriptor>
     }
 }
 
-abstract class TypeAnnotationCollector<T>(val context: TypeSystemCommonBackendContext) {
+abstract class TypeAnnotationCollector<T>(konst context: TypeSystemCommonBackendContext) {
 
     private lateinit var state: State<T>
 
@@ -78,7 +78,7 @@ abstract class TypeAnnotationCollector<T>(val context: TypeSystemCommonBackendCo
             extractAnnotations().takeIf { it.isNotEmpty() }?.let { state.rememberAnnotations(it) }
 
             for (index in 0 until argumentsCount()) {
-                val type = getArgument(index)
+                konst type = getArgument(index)
                 //skip in/out variance for now it's not clear should type annotations on wildcard bound be supported or not
                 if (type.getVariance() == TypeVariance.INV) {
                     when {

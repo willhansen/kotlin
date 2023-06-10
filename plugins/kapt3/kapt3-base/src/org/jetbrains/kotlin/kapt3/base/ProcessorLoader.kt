@@ -20,23 +20,23 @@ import java.util.zip.ZipFile
 import javax.annotation.processing.Processor
 import kotlin.collections.LinkedHashSet
 
-class LoadedProcessors(val processors: List<IncrementalProcessor>, val classLoader: ClassLoader)
+class LoadedProcessors(konst processors: List<IncrementalProcessor>, konst classLoader: ClassLoader)
 
-open class ProcessorLoader(private val options: KaptOptions, private val logger: KaptLogger) : Closeable {
+open class ProcessorLoader(private konst options: KaptOptions, private konst logger: KaptLogger) : Closeable {
     private var annotationProcessingClassLoader: URLClassLoader? = null
 
     fun loadProcessors(parentClassLoader: ClassLoader = ClassLoader.getSystemClassLoader()): LoadedProcessors {
-        val classpath = LinkedHashSet<File>().apply {
+        konst classpath = LinkedHashSet<File>().apply {
             addAll(options.processingClasspath)
             if (options[KaptFlag.INCLUDE_COMPILE_CLASSPATH]) {
                 addAll(options.compileClasspath)
             }
         }
 
-        val classLoader = URLClassLoader(classpath.map { it.toURI().toURL() }.toTypedArray(), parentClassLoader)
+        konst classLoader = URLClassLoader(classpath.map { it.toURI().toURL() }.toTypedArray(), parentClassLoader)
         this.annotationProcessingClassLoader = classLoader
 
-        val processors = if (options.processors.isNotEmpty()) {
+        konst processors = if (options.processors.isNotEmpty()) {
             logger.info("Annotation processor class names are set, skip AP discovery")
             options.processors.mapNotNull { tryLoadProcessor(it, classLoader) }
         } else {
@@ -58,13 +58,13 @@ open class ProcessorLoader(private val options: KaptOptions, private val logger:
             return processors.map { IncrementalProcessor(it, DeclaredProcType.NON_INCREMENTAL, logger) }
         }
 
-        val processorNames = processors.map {it.javaClass.name}.toSet()
+        konst processorNames = processors.map {it.javaClass.name}.toSet()
 
-        val processorsInfo: Map<String, DeclaredProcType> = getIncrementalProcessorsFromClasspath(processorNames, classpath)
+        konst processorsInfo: Map<String, DeclaredProcType> = getIncrementalProcessorsFromClasspath(processorNames, classpath)
 
-        val nonIncremental = processorNames.filter { !processorsInfo.containsKey(it) }
+        konst nonIncremental = processorNames.filter { !processorsInfo.containsKey(it) }
         return processors.map {
-            val procType = processorsInfo[it.javaClass.name]?.let {
+            konst procType = processorsInfo[it.javaClass.name]?.let {
                 if (nonIncremental.isEmpty()) {
                     it
                 } else {
@@ -76,12 +76,12 @@ open class ProcessorLoader(private val options: KaptOptions, private val logger:
     }
 
     open fun doLoadProcessors(classpath: LinkedHashSet<File>, classLoader: ClassLoader): List<Processor> {
-        val processorNames = mutableSetOf<String>()
+        konst processorNames = mutableSetOf<String>()
 
         fun processSingleInput(input: InputStream) {
-            val lines = input.bufferedReader().lineSequence()
+            konst lines = input.bufferedReader().lineSequence()
             lines.forEach { line ->
-                val processedLine = line.substringBefore("#").trim()
+                konst processedLine = line.substringBefore("#").trim()
                 if (processedLine.isNotEmpty()) {
                     processorNames.add(processedLine)
                 }
@@ -93,7 +93,7 @@ open class ProcessorLoader(private val options: KaptOptions, private val logger:
         // as JarFileFactory was shared between concurrent runs in the same class loader.
         // See https://youtrack.jetbrains.com/issue/KT-34604 for more details. Similar issue
         // is also https://youtrack.jetbrains.com/issue/KT-22513.
-        val serviceFile = "META-INF/services/javax.annotation.processing.Processor"
+        konst serviceFile = "META-INF/services/javax.annotation.processing.Processor"
         for (file in classpath) {
             when {
                 file.isDirectory -> {
@@ -120,8 +120,8 @@ open class ProcessorLoader(private val options: KaptOptions, private val logger:
     }
 
     private fun tryLoadProcessor(fqName: String, classLoader: ClassLoader): Processor? {
-        val providedClassloader = options.processingClassLoader?.takeIf { !options.separateClassloaderForProcessors.contains(fqName) }
-        val classLoaderToUse = if (providedClassloader != null) {
+        konst providedClassloader = options.processingClassLoader?.takeIf { !options.separateClassloaderForProcessors.contains(fqName) }
+        konst classLoaderToUse = if (providedClassloader != null) {
             logger.info { "Use provided ClassLoader for processor '$fqName'" }
             providedClassloader
         } else {
@@ -129,7 +129,7 @@ open class ProcessorLoader(private val options: KaptOptions, private val logger:
             classLoader
         }
 
-        val annotationProcessorClass = try {
+        konst annotationProcessorClass = try {
             Class.forName(fqName, true, classLoaderToUse)
         } catch (e: Throwable) {
             logger.warn("Can't find annotation processor class $fqName: ${e.message}")
@@ -137,7 +137,7 @@ open class ProcessorLoader(private val options: KaptOptions, private val logger:
         }
 
         try {
-            val annotationProcessorInstance = annotationProcessorClass.newInstance()
+            konst annotationProcessorInstance = annotationProcessorClass.newInstance()
             if (annotationProcessorInstance !is Processor) {
                 logger.warn("$fqName is not an instance of 'Processor'")
                 return null

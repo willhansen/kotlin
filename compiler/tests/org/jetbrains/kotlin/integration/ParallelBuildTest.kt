@@ -12,8 +12,8 @@ class ParallelBuildTest : KotlinIntegrationTestBase() {
     fun testParallelBuild() {
         fun rawString(text: String): String = "\"\"\"$text\"\"\""
 
-        val testDataDir = KtTestUtil.getTestDataPathBase() + "/integration/smoke/helloApp"
-        val program = ProgramWithDependencyOnCompiler(
+        konst testDataDir = KtTestUtil.getTestDataPathBase() + "/integration/smoke/helloApp"
+        konst program = ProgramWithDependencyOnCompiler(
             tmpdir, """
             import org.jetbrains.kotlin.cli.common.messages.MessageRenderer
             import org.jetbrains.kotlin.cli.common.ExitCode
@@ -22,17 +22,17 @@ class ParallelBuildTest : KotlinIntegrationTestBase() {
             import java.util.concurrent.TimeUnit
 
             // Increase `totalRuns` and change `threads` to `Runtime.getRuntime().availableProcessors()` to reproduce more reliably locally
-            val totalRuns = 100
-            val threads = 2
+            konst totalRuns = 100
+            konst threads = 2
 
             fun main() {
                 var errors = 0 
 
-                val pool = Executors.newFixedThreadPool(threads)
+                konst pool = Executors.newFixedThreadPool(threads)
                 repeat(totalRuns) {
                     pool.submit {
                         try {
-                            val code = K2JVMCompiler().exec(
+                            konst code = K2JVMCompiler().exec(
                                 System.err, MessageRenderer.PLAIN_RELATIVE_PATHS,
                                 ${rawString("$testDataDir/hello.kt")},
                                 "-d", ${rawString("${tmpdir.path}/output")}
@@ -57,7 +57,7 @@ class ParallelBuildTest : KotlinIntegrationTestBase() {
 
         program.compile()
 
-        val result = program.run(File(testDataDir))
+        konst result = program.run(File(testDataDir))
         assertEquals("0 errors", result)
     }
 }

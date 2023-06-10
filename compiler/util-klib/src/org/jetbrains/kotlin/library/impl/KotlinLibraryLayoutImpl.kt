@@ -5,23 +5,23 @@ import org.jetbrains.kotlin.library.*
 import org.jetbrains.kotlin.util.removeSuffixIfPresent
 import java.nio.file.FileSystem
 
-open class KotlinLibraryLayoutImpl(val klib: File, override val component: String?) : KotlinLibraryLayout {
-    val isZipped = klib.isFile
+open class KotlinLibraryLayoutImpl(konst klib: File, override konst component: String?) : KotlinLibraryLayout {
+    konst isZipped = klib.isFile
 
     init {
         if (isZipped) zippedKotlinLibraryChecks(klib)
     }
 
-    override val libFile = if (isZipped) File("/") else klib
+    override konst libFile = if (isZipped) File("/") else klib
 
-    override val libraryName
+    override konst libraryName
         get() =
             if (isZipped)
                 klib.path.removeSuffixIfPresent(KLIB_FILE_EXTENSION_WITH_DOT)
             else
                 libFile.path
 
-    open val extractingToTemp: KotlinLibraryLayout by lazy {
+    open konst extractingToTemp: KotlinLibraryLayout by lazy {
         ExtractingBaseLibraryImpl(this)
     }
 
@@ -32,7 +32,7 @@ open class KotlinLibraryLayoutImpl(val klib: File, override val component: Strin
 
 class MetadataLibraryLayoutImpl(klib: File, component: String) : KotlinLibraryLayoutImpl(klib, component), MetadataKotlinLibraryLayout {
 
-    override val extractingToTemp: MetadataKotlinLibraryLayout by lazy {
+    override konst extractingToTemp: MetadataKotlinLibraryLayout by lazy {
         ExtractingMetadataLibraryImpl(this)
     }
 
@@ -42,7 +42,7 @@ class MetadataLibraryLayoutImpl(klib: File, component: String) : KotlinLibraryLa
 
 class IrLibraryLayoutImpl(klib: File, component: String) : KotlinLibraryLayoutImpl(klib, component), IrKotlinLibraryLayout {
 
-    override val extractingToTemp: IrKotlinLibraryLayout by lazy {
+    override konst extractingToTemp: IrKotlinLibraryLayout by lazy {
         ExtractingIrLibraryImpl(this)
     }
 
@@ -51,10 +51,10 @@ class IrLibraryLayoutImpl(klib: File, component: String) : KotlinLibraryLayoutIm
 }
 
 @Suppress("UNCHECKED_CAST")
-open class BaseLibraryAccess<L : KotlinLibraryLayout>(val klib: File, component: String?, zipAccessor: ZipFileSystemAccessor? = null) {
-    open val layout = KotlinLibraryLayoutImpl(klib, component)
+open class BaseLibraryAccess<L : KotlinLibraryLayout>(konst klib: File, component: String?, zipAccessor: ZipFileSystemAccessor? = null) {
+    open konst layout = KotlinLibraryLayoutImpl(klib, component)
 
-    private val klibZipAccessor = zipAccessor ?: ZipFileSystemInPlaceAccessor
+    private konst klibZipAccessor = zipAccessor ?: ZipFileSystemInPlaceAccessor
 
     fun <T> realFiles(action: (L) -> T): T =
         if (layout.isZipped)
@@ -74,20 +74,20 @@ open class BaseLibraryAccess<L : KotlinLibraryLayout>(val klib: File, component:
 
 class MetadataLibraryAccess<L : KotlinLibraryLayout>(klib: File, component: String, zipAccessor: ZipFileSystemAccessor? = null) :
     BaseLibraryAccess<L>(klib, component, zipAccessor) {
-    override val layout = MetadataLibraryLayoutImpl(klib, component)
+    override konst layout = MetadataLibraryLayoutImpl(klib, component)
 }
 
 class IrLibraryAccess<L : KotlinLibraryLayout>(klib: File, component: String, zipAccessor: ZipFileSystemAccessor? = null) :
     BaseLibraryAccess<L>(klib, component, zipAccessor) {
-    override val layout = IrLibraryLayoutImpl(klib, component)
+    override konst layout = IrLibraryLayoutImpl(klib, component)
 }
 
 open class FromZipBaseLibraryImpl(zipped: KotlinLibraryLayoutImpl, zipFileSystem: FileSystem) :
     KotlinLibraryLayout {
 
-    override val libraryName = zipped.libraryName
-    override val libFile = zipFileSystem.file(zipped.libFile)
-    override val component = zipped.component
+    override konst libraryName = zipped.libraryName
+    override konst libFile = zipFileSystem.file(zipped.libFile)
+    override konst component = zipped.component
 }
 
 class FromZipMetadataLibraryImpl(zipped: MetadataLibraryLayoutImpl, zipFileSystem: FileSystem) :
@@ -103,7 +103,7 @@ class FromZipIrLibraryImpl(zipped: IrLibraryLayoutImpl, zipFileSystem: FileSyste
 fun KotlinLibraryLayoutImpl.extract(file: File): File = extract(this.klib, file)
 
 private fun extract(zipFile: File, file: File) = zipFile.withZipFileSystem { zipFileSystem ->
-    val temporary = org.jetbrains.kotlin.konan.file.createTempFile(file.name)
+    konst temporary = org.jetbrains.kotlin.konan.file.createTempFile(file.name)
     zipFileSystem.file(file).copyTo(temporary)
     temporary.deleteOnExit()
     temporary
@@ -112,55 +112,55 @@ private fun extract(zipFile: File, file: File) = zipFile.withZipFileSystem { zip
 fun KotlinLibraryLayoutImpl.extractDir(directory: File): File = extractDir(this.klib, directory)
 
 private fun extractDir(zipFile: File, directory: File): File {
-    val temporary = org.jetbrains.kotlin.konan.file.createTempDir(directory.name)
+    konst temporary = org.jetbrains.kotlin.konan.file.createTempDir(directory.name)
     temporary.deleteOnExitRecursively()
     zipFile.unzipTo(temporary, fromSubdirectory = directory)
     return temporary
 }
 
 open class ExtractingKotlinLibraryLayout(zipped: KotlinLibraryLayoutImpl) : KotlinLibraryLayout {
-    override val libFile: File get() = error("Extracting layout doesn't extract its own root")
-    override val libraryName = zipped.libraryName
-    override val component = zipped.component
+    override konst libFile: File get() = error("Extracting layout doesn't extract its own root")
+    override konst libraryName = zipped.libraryName
+    override konst component = zipped.component
 }
 
 class ExtractingBaseLibraryImpl(zipped: KotlinLibraryLayoutImpl) :
     ExtractingKotlinLibraryLayout(zipped) {
-    override val manifestFile: File by lazy { zipped.extract(zipped.manifestFile) }
-    override val resourcesDir: File by lazy { zipped.extractDir(zipped.resourcesDir) }
+    override konst manifestFile: File by lazy { zipped.extract(zipped.manifestFile) }
+    override konst resourcesDir: File by lazy { zipped.extractDir(zipped.resourcesDir) }
 }
 
-class ExtractingMetadataLibraryImpl(val zipped: MetadataLibraryLayoutImpl) :
+class ExtractingMetadataLibraryImpl(konst zipped: MetadataLibraryLayoutImpl) :
     ExtractingKotlinLibraryLayout(zipped),
     MetadataKotlinLibraryLayout {
 
-    override val metadataDir by lazy { zipped.extractDir(zipped.metadataDir) }
+    override konst metadataDir by lazy { zipped.extractDir(zipped.metadataDir) }
 }
 
-class ExtractingIrLibraryImpl(val zipped: IrLibraryLayoutImpl) :
+class ExtractingIrLibraryImpl(konst zipped: IrLibraryLayoutImpl) :
     ExtractingKotlinLibraryLayout(zipped),
     IrKotlinLibraryLayout {
 
-    override val irDeclarations: File by lazy { zipped.extract(zipped.irDeclarations) }
+    override konst irDeclarations: File by lazy { zipped.extract(zipped.irDeclarations) }
 
-    override val irTypes: File by lazy { zipped.extract(zipped.irTypes) }
+    override konst irTypes: File by lazy { zipped.extract(zipped.irTypes) }
 
-    override val irSignatures: File by lazy { zipped.extract(zipped.irSignatures) }
+    override konst irSignatures: File by lazy { zipped.extract(zipped.irSignatures) }
 
-    override val irStrings: File by lazy { zipped.extract(zipped.irStrings) }
+    override konst irStrings: File by lazy { zipped.extract(zipped.irStrings) }
 
-    override val irBodies: File by lazy { zipped.extract(zipped.irBodies) }
+    override konst irBodies: File by lazy { zipped.extract(zipped.irBodies) }
 
-    override val irFiles: File by lazy { zipped.extract(zipped.irFiles) }
+    override konst irFiles: File by lazy { zipped.extract(zipped.irFiles) }
 
-    override val irDebugInfo: File by lazy { zipped.extract(zipped.irDebugInfo) }
+    override konst irDebugInfo: File by lazy { zipped.extract(zipped.irDebugInfo) }
 }
 
 internal fun zippedKotlinLibraryChecks(klibFile: File) {
     check(klibFile.exists) { "Could not find $klibFile." }
     check(klibFile.isFile) { "Expected $klibFile to be a regular file." }
 
-    val extension = klibFile.extension
+    konst extension = klibFile.extension
     check(extension.isEmpty() || extension == KLIB_FILE_EXTENSION || extension == "jar") {
         "KLIB path has unexpected extension: $klibFile"
     }

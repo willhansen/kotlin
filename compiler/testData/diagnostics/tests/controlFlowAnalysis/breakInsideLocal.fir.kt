@@ -37,7 +37,7 @@ fun test2() {
 
 fun test3() {
     while (true) {
-        class LocalClass(val tag: Int) {
+        class LocalClass(konst tag: Int) {
             init {
                 when(tag) {
                     0 -> <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>continue<!>
@@ -79,7 +79,7 @@ fun test4(tag: Int) {
 
 fun test5() {
     while (true) {
-        class LocalClass(val s: String) {
+        class LocalClass(konst s: String) {
             constructor(tag: Int) : this("") {
                 when(tag) {
                     0 -> <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>break<!>
@@ -95,7 +95,7 @@ fun test5() {
 
 fun test6() {
     while (true) {
-        class LocalClass(val tag: Int) {
+        class LocalClass(konst tag: Int) {
             init {
                 when(tag) {
                     0 -> <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>break<!>
@@ -120,8 +120,8 @@ fun test6() {
 
 fun test7() {
     while (true) {
-        class LocalClass(val tag: Int) {
-            val x: Int = if (true) {
+        class LocalClass(konst tag: Int) {
+            konst x: Int = if (true) {
                 when(tag) {
                     0 -> <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>break<!>
                     1 -> foo { <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>break<!> }
@@ -147,7 +147,7 @@ fun test7() {
 
 fun test8() {
     while (true) {
-        class LocalClass(val x: Int) {
+        class LocalClass(konst x: Int) {
             constructor(tag: Int, unused: Boolean) : this(
                 when(tag) {
                     0 -> <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>break<!>

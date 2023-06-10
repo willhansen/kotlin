@@ -26,10 +26,10 @@ import io.realm.annotations.PrimaryKey
 // by default).
 open class Person(
         // You can put properties in the constructor as long as all of them are initialized with
-        // default values. This ensures that an empty constructor is generated.
+        // default konstues. This ensures that an empty constructor is generated.
         // All properties are by default persisted.
         // Properties can be annotated with PrimaryKey or Index.
-        // If you use non-nullable types, properties must be initialized with non-null values.
+        // If you use non-nullable types, properties must be initialized with non-null konstues.
         @PrimaryKey open var name: String = "",
 
         open var age: Int = 0,

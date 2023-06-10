@@ -1,7 +1,7 @@
 package
 
-public val test1: Pair<kotlin.Int, kotlin.Int>
-public val test2: Pair<kotlin.Int, kotlin.String>
+public konst test1: Pair<kotlin.Int, kotlin.Int>
+public konst test2: Pair<kotlin.Int, kotlin.String>
 public fun </*0*/ T, /*1*/ R> generate(/*0*/ g: suspend GenericController<T>.() -> R): Pair<T, R>
 public fun </*0*/ X> listOf(/*0*/ vararg x: X /*kotlin.Array<out X>*/): kotlin.collections.List<X>
 public fun </*0*/ X> setOf(/*0*/ vararg x: X /*kotlin.Array<out X>*/): kotlin.collections.Set<X>

@@ -30,7 +30,7 @@ package c
 import b.B
 
 class C {
-    val test = object : B() {
+    konst test = object : B() {
         override fun toString() = getO() + getK()
     }
 }

@@ -29,19 +29,19 @@ class ArgumentsToParametersMapper(
     languageVersionSettings: LanguageVersionSettings
 ) {
 
-    private val allowMixedNamedAndPositionArguments =
+    private konst allowMixedNamedAndPositionArguments =
         languageVersionSettings.supportsFeature(LanguageFeature.MixedNamedArgumentsInTheirOwnPosition)
 
     data class ArgumentMapping(
         // This map should be ordered by arguments as written, e.g.:
         //      fun foo(a: Int, b: Int) {}
         //      foo(b = bar(), a = qux())
-        // parameterToCallArgumentMap.values() should be [ 'bar()', 'foo()' ]
-        val parameterToCallArgumentMap: Map<ValueParameterDescriptor, ResolvedCallArgument>,
-        val diagnostics: List<KotlinCallDiagnostic>
+        // parameterToCallArgumentMap.konstues() should be [ 'bar()', 'foo()' ]
+        konst parameterToCallArgumentMap: Map<ValueParameterDescriptor, ResolvedCallArgument>,
+        konst diagnostics: List<KotlinCallDiagnostic>
     )
 
-    val EmptyArgumentMapping = ArgumentMapping(emptyMap(), emptyList())
+    konst EmptyArgumentMapping = ArgumentMapping(emptyMap(), emptyList())
 
     fun mapArguments(call: KotlinCall, descriptor: CallableDescriptor): ArgumentMapping =
         mapArguments(call.argumentsInParenthesis, call.externalArgument, descriptor)
@@ -52,10 +52,10 @@ class ArgumentsToParametersMapper(
         descriptor: CallableDescriptor
     ): ArgumentMapping {
         // optimization for case of variable
-        if (argumentsInParenthesis.isEmpty() && externalArgument == null && descriptor.valueParameters.isEmpty()) {
+        if (argumentsInParenthesis.isEmpty() && externalArgument == null && descriptor.konstueParameters.isEmpty()) {
             return EmptyArgumentMapping
         } else {
-            val processor = CallArgumentProcessor(descriptor, allowMixedNamedAndPositionArguments)
+            konst processor = CallArgumentProcessor(descriptor, allowMixedNamedAndPositionArguments)
             processor.processArgumentsInParenthesis(argumentsInParenthesis)
 
             if (externalArgument != null) {
@@ -68,13 +68,13 @@ class ArgumentsToParametersMapper(
     }
 
     private class CallArgumentProcessor(
-        val descriptor: CallableDescriptor,
-        val languageSettingsAllowMixedNamedAndPositionArguments: Boolean
+        konst descriptor: CallableDescriptor,
+        konst languageSettingsAllowMixedNamedAndPositionArguments: Boolean
     ) {
-        val result: MutableMap<ValueParameterDescriptor, ResolvedCallArgument> = LinkedHashMap()
+        konst result: MutableMap<ValueParameterDescriptor, ResolvedCallArgument> = LinkedHashMap()
         private var state = State.POSITION_ARGUMENTS
 
-        private val parameters: List<ValueParameterDescriptor> get() = descriptor.valueParameters
+        private konst parameters: List<ValueParameterDescriptor> get() = descriptor.konstueParameters
 
         private var diagnostics: MutableList<KotlinCallDiagnostic>? = null
         private var nameToParameter: Map<Name, ValueParameterDescriptor>? = null
@@ -113,7 +113,7 @@ class ArgumentsToParametersMapper(
 
         private fun completeVarargPositionArguments() {
             assert(state == State.VARARG_POSITION) { "Incorrect state: $state" }
-            val parameter = parameters[currentPositionedParameterIndex]
+            konst parameter = parameters[currentPositionedParameterIndex]
             result.put(parameter.original, ResolvedCallArgument.VarargArgument(varargArguments!!))
         }
 
@@ -124,7 +124,7 @@ class ArgumentsToParametersMapper(
                 return false
             }
 
-            val parameter = parameters.getOrNull(currentPositionedParameterIndex)
+            konst parameter = parameters.getOrNull(currentPositionedParameterIndex)
             if (parameter == null) {
                 addDiagnostic(TooManyArguments(argument, descriptor))
                 return false
@@ -148,10 +148,10 @@ class ArgumentsToParametersMapper(
                 addDiagnostic(NamedArgumentNotAllowed(argument, descriptor))
             }
 
-            val stateAllowsMixedNamedAndPositionArguments = state != State.NAMED_ONLY_ARGUMENTS
+            konst stateAllowsMixedNamedAndPositionArguments = state != State.NAMED_ONLY_ARGUMENTS
             state = State.NAMED_ONLY_ARGUMENTS
 
-            val parameter = findParameterByName(argument, name) ?: return
+            konst parameter = findParameterByName(argument, name) ?: return
 
             addDiagnostic(NamedArgumentReference(argument, parameter))
 
@@ -174,18 +174,18 @@ class ArgumentsToParametersMapper(
         }
 
         private fun findParameterByName(argument: KotlinCallArgument, name: Name): ValueParameterDescriptor? {
-            val parameter = getParameterByName(name)
+            konst parameter = getParameterByName(name)
 
             if (descriptor is CallableMemberDescriptor && descriptor.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
                 if (parameter == null) {
-                    for (valueParameter in descriptor.valueParameters) {
-                        val matchedParameter = valueParameter.overriddenDescriptors.firstOrNull {
+                    for (konstueParameter in descriptor.konstueParameters) {
+                        konst matchedParameter = konstueParameter.overriddenDescriptors.firstOrNull {
                             it.containingDeclaration.hasStableParameterNames() && it.name == name
                         }
                         if (matchedParameter != null) {
-                            addDiagnostic(NamedArgumentReference(argument, valueParameter))
-                            addDiagnostic(NameForAmbiguousParameter(argument, valueParameter, matchedParameter))
-                            return valueParameter
+                            addDiagnostic(NamedArgumentReference(argument, konstueParameter))
+                            addDiagnostic(NameForAmbiguousParameter(argument, konstueParameter, matchedParameter))
+                            return konstueParameter
                         }
                     }
                 } else {
@@ -203,7 +203,7 @@ class ArgumentsToParametersMapper(
 
         fun processArgumentsInParenthesis(arguments: List<KotlinCallArgument>) {
             for (argument in arguments) {
-                val argumentName = argument.argumentName
+                konst argumentName = argument.argumentName
 
                 // process position argument
                 if (argumentName == null) {
@@ -226,7 +226,7 @@ class ArgumentsToParametersMapper(
         }
 
         fun processExternalArgument(externalArgument: KotlinCallArgument) {
-            val lastParameter = parameters.lastOrNull()
+            konst lastParameter = parameters.lastOrNull()
             if (lastParameter == null) {
                 addDiagnostic(TooManyArguments(externalArgument, descriptor))
                 return
@@ -237,7 +237,7 @@ class ArgumentsToParametersMapper(
                 return
             }
 
-            val previousOccurrence = result[lastParameter.original]
+            konst previousOccurrence = result[lastParameter.original]
             if (previousOccurrence != null) {
                 addDiagnostic(TooManyArguments(externalArgument, descriptor))
                 return

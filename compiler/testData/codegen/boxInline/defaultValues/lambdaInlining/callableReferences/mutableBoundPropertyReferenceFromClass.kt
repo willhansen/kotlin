@@ -5,7 +5,7 @@ package test
 class A {
     var ok: String
         get() = "OK"
-        set(value) {}
+        set(konstue) {}
 }
 
 inline fun inlineFun(lambda: () -> String = A()::ok): String {

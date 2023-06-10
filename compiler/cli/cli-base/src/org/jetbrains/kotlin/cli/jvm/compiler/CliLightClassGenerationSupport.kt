@@ -39,34 +39,34 @@ import org.jetbrains.kotlin.types.KotlinType
  * To mitigate this, CliLightClassGenerationSupport hold a trace that is shared between the analyzer and JetLightClasses
  */
 class CliLightClassGenerationSupport(
-    val traceHolder: CliTraceHolder,
-    private val project: Project
+    konst traceHolder: CliTraceHolder,
+    private konst project: Project
 ) : LightClassGenerationSupport() {
 
     private class CliLightClassSupport(
-        private val project: Project,
-        override val languageVersionSettings: LanguageVersionSettings,
-        override val jvmTarget: JvmTarget
+        private konst project: Project,
+        override konst languageVersionSettings: LanguageVersionSettings,
+        override konst jvmTarget: JvmTarget
     ) : KtUltraLightSupport {
 
         // This is the way to untie CliLightClassSupport and CliLightClassGenerationSupport to prevent descriptors leak
-        private val traceHolder: CliTraceHolder
+        private konst traceHolder: CliTraceHolder
             get() = (getInstance(project) as CliLightClassGenerationSupport).traceHolder
 
         override fun possiblyHasAlias(file: KtFile, shortName: Name): Boolean = true
 
-        override val moduleDescriptor get() = traceHolder.module
+        override konst moduleDescriptor get() = traceHolder.module
 
-        override val moduleName: String get() = JvmCodegenUtil.getModuleName(moduleDescriptor)
+        override konst moduleName: String get() = JvmCodegenUtil.getModuleName(moduleDescriptor)
 
-        override val deprecationResolver: DeprecationResolver
+        override konst deprecationResolver: DeprecationResolver
             get() = DeprecationResolver(
                 LockBasedStorageManager.NO_LOCKS,
                 languageVersionSettings,
                 JavaDeprecationSettings
             )
 
-        override val typeMapper: KotlinTypeMapper by lazyPub {
+        override konst typeMapper: KotlinTypeMapper by lazyPub {
             KotlinTypeMapper(
                 BindingContext.EMPTY,
                 ClassBuilderMode.LIGHT_CLASSES,
@@ -80,7 +80,7 @@ class CliLightClassGenerationSupport(
         }
     }
 
-    private val ultraLightSupport: KtUltraLightSupport by lazyPub {
+    private konst ultraLightSupport: KtUltraLightSupport by lazyPub {
         CliLightClassSupport(project, traceHolder.languageVersionSettings, traceHolder.jvmTarget)
     }
 
@@ -89,7 +89,7 @@ class CliLightClassGenerationSupport(
         return ultraLightSupport
     }
 
-    val context: LightClassConstructionContext
+    konst context: LightClassConstructionContext
         get() = LightClassConstructionContext(
             traceHolder.bindingContext,
             traceHolder.module,

@@ -15,7 +15,7 @@ sealed class TestStepBuilder<I : ResultingArtifact<I>, O : ResultingArtifact<O>>
 
 
 class FacadeStepBuilder<I : ResultingArtifact<I>, O : ResultingArtifact<O>>(
-    val facade: Constructor<AbstractTestFacade<I, O>>
+    konst facade: Constructor<AbstractTestFacade<I, O>>
 ) : TestStepBuilder<I, O>() {
     @TestInfrastructureInternals
     override fun createTestStep(testServices: TestServices): TestStep.FacadeStep<I, O> {
@@ -23,8 +23,8 @@ class FacadeStepBuilder<I : ResultingArtifact<I>, O : ResultingArtifact<O>>(
     }
 }
 
-class HandlersStepBuilder<I : ResultingArtifact<I>>(val artifactKind: TestArtifactKind<I>) : TestStepBuilder<I, Nothing>() {
-    private val handlers: MutableList<Constructor<AnalysisHandler<I>>> = mutableListOf()
+class HandlersStepBuilder<I : ResultingArtifact<I>>(konst artifactKind: TestArtifactKind<I>) : TestStepBuilder<I, Nothing>() {
+    private konst handlers: MutableList<Constructor<AnalysisHandler<I>>> = mutableListOf()
 
     fun useHandlers(vararg constructor: Constructor<AnalysisHandler<I>>) {
         handlers += constructor

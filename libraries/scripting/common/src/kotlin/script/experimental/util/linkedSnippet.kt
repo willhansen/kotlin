@@ -6,14 +6,14 @@
 package kotlin.script.experimental.util
 
 interface LinkedSnippet<T> {
-    val previous: LinkedSnippet<T>?
+    konst previous: LinkedSnippet<T>?
     fun get(): T
 }
 
 fun <T> LinkedSnippet<T>?.toList(): List<T> = toList { it }
 
 fun <T, R> LinkedSnippet<T>?.toList(mapper: (T) -> R): List<R> {
-    val res = ArrayList<R>()
+    konst res = ArrayList<R>()
     var el = this
 
     while (el != null) {
@@ -27,8 +27,8 @@ fun <T, R> LinkedSnippet<T>?.toList(mapper: (T) -> R): List<R> {
 
 fun <T> LinkedSnippet<T>?.get(): T? = this?.get()
 
-class LinkedSnippetImpl<T>(private val _val: T, override val previous: LinkedSnippetImpl<T>?) : LinkedSnippet<T> {
-    override fun get(): T = _val
+class LinkedSnippetImpl<T>(private konst _konst: T, override konst previous: LinkedSnippetImpl<T>?) : LinkedSnippet<T> {
+    override fun get(): T = _konst
 }
 
-fun <T> LinkedSnippetImpl<T>?.add(value: T) = LinkedSnippetImpl(value, this)
+fun <T> LinkedSnippetImpl<T>?.add(konstue: T) = LinkedSnippetImpl(konstue, this)

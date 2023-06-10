@@ -15,4 +15,4 @@ typealias Typealias = String
 fun function() {}
 
 @RequireKotlin("1.1", "message", DeprecationLevel.WARNING, errorCode = 42)
-val property = ""
+konst property = ""

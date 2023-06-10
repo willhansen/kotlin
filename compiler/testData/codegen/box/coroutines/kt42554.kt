@@ -10,8 +10,8 @@ fun launch(block: suspend () -> String): String {
 
 enum class E { A }
 
-class C(val e: E) {
-    val result = launch {
+class C(konst e: E) {
+    konst result = launch {
         when (e) {
             E.A -> "OK"
         }

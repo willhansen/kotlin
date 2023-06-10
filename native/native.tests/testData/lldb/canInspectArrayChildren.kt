@@ -1,8 +1,8 @@
 // KIND: STANDALONE_LLDB
 // LLDB_TRACE: canInspectArrayChildren.txt
 fun main(args: Array<String>) {
-    val xs = intArrayOf(3, 5, 8)
+    konst xs = intArrayOf(3, 5, 8)
     return
 }
 
-data class Point(val x: Int, val y: Int)
+data class Point(konst x: Int, konst y: Int)

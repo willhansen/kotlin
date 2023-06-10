@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 
 abstract class AbstractKonanIrMangler(
-        private val withReturnType: Boolean,
-        private val allowOutOfScopeTypeParameters: Boolean = false
+        private konst withReturnType: Boolean,
+        private konst allowOutOfScopeTypeParameters: Boolean = false
 ) : IrBasedKotlinManglerImpl() {
     override fun getExportChecker(compatibleMode: Boolean): IrExportCheckerVisitor = KonanIrExportChecker(compatibleMode)
 
@@ -59,7 +59,7 @@ abstract class AbstractKonanIrMangler(
             builder: StringBuilder,
             mode: MangleMode,
             compatibleMode: Boolean,
-            private val withReturnType: Boolean,
+            private konst withReturnType: Boolean,
             allowOutOfScopeTypeParameters: Boolean,
     ) : IrMangleComputer(builder, mode, compatibleMode, allowOutOfScopeTypeParameters) {
         override fun copy(newMode: MangleMode): IrMangleComputer =
@@ -103,7 +103,7 @@ abstract class AbstractKonanIrMangler(
         }
 
         companion object {
-            val listOfSuspendFunctionMark = listOf(MangleConstant.SUSPEND_FUNCTION_MARK)
+            konst listOfSuspendFunctionMark = listOf(MangleConstant.SUSPEND_FUNCTION_MARK)
         }
     }
 }

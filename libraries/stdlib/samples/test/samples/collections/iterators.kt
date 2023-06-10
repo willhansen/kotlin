@@ -23,7 +23,7 @@ class Iterators {
 
     @Sample
     fun iteratorForEnumeration() {
-        val vector = Vector<String>().apply {
+        konst vector = Vector<String>().apply {
             add("RED")
             add("GREEN")
             add("BLUE")
@@ -37,8 +37,8 @@ class Iterators {
 
     @Sample
     fun iterator() {
-        val mutableList = mutableListOf(1, 2, 3)
-        val mutableIterator = mutableList.iterator()
+        konst mutableList = mutableListOf(1, 2, 3)
+        konst mutableIterator = mutableList.iterator()
 
         // iterator() extension is called here
         for (e in mutableIterator) {
@@ -54,16 +54,16 @@ class Iterators {
 
     @Sample
     fun withIndexIterator() {
-        val iterator = ('a'..'c').iterator()
+        konst iterator = ('a'..'c').iterator()
 
-        for ((index, value) in iterator.withIndex()) {
-            println("The element at $index is $value")
+        for ((index, konstue) in iterator.withIndex()) {
+            println("The element at $index is $konstue")
         }
     }
 
     @Sample
     fun forEachIterator() {
-        val iterator = (1..3).iterator()
+        konst iterator = (1..3).iterator()
         // skip an element
         if (iterator.hasNext()) {
             iterator.next()

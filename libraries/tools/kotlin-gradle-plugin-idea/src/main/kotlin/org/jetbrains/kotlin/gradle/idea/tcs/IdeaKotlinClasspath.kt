@@ -16,8 +16,8 @@ fun IdeaKotlinClasspath(vararg files: File): IdeaKotlinClasspath = IdeaKotlinCla
 fun IdeaKotlinClasspath(): IdeaKotlinClasspath = IdeaKotlinClasspath.empty()
 
 @IdeaKotlinModel
-class IdeaKotlinClasspath private constructor(private val files: MutableSet<File> = mutableSetOf()) : MutableSet<File>, Serializable {
-    override val size: Int
+class IdeaKotlinClasspath private constructor(private konst files: MutableSet<File> = mutableSetOf()) : MutableSet<File>, Serializable {
+    override konst size: Int
         get() = files.size
 
     override fun add(element: File): Boolean {
@@ -78,12 +78,12 @@ class IdeaKotlinClasspath private constructor(private val files: MutableSet<File
     }
 
     internal companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
 
-        private val interner = WeakInterner()
+        private konst interner = WeakInterner()
 
         fun normalise(file: File): File {
-            val normalized = file.absoluteFile.normalize()
+            konst normalized = file.absoluteFile.normalize()
             return interner.getOrPut(normalized)
         }
 

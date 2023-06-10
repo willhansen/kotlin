@@ -6,8 +6,8 @@ FILE: main.kt
 
     }
     public final fun test(): R|kotlin/Unit| {
-        lval b: R|MyMapEntry| = R|/MyMapEntry.MyMapEntry|()
-        lval key: R|kotlin/String!| = R|<local>/b|.R|/Test.MapEntryImpl.key|
-        lval value: R|kotlin/String!| = R|<local>/b|.R|/Test.MapEntryImpl.value|
+        lkonst b: R|MyMapEntry| = R|/MyMapEntry.MyMapEntry|()
+        lkonst key: R|kotlin/String!| = R|<local>/b|.R|/Test.MapEntryImpl.key|
+        lkonst konstue: R|kotlin/String!| = R|<local>/b|.R|/Test.MapEntryImpl.konstue|
         R|<local>/b|.R|/Test.MapEntryImpl.setValue|(Null(null))
     }

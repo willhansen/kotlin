@@ -1,39 +1,39 @@
-val testSimpleUIntLiteral: UInt
+konst testSimpleUIntLiteral: UInt
   field = 1
   get
 
-val testSimpleUIntLiteralWithOverflow: UInt
+konst testSimpleUIntLiteralWithOverflow: UInt
   field = -1
   get
 
-val testUByteWithExpectedType: UByte
+konst testUByteWithExpectedType: UByte
   field = 1B
   get
 
-val testUShortWithExpectedType: UShort
+konst testUShortWithExpectedType: UShort
   field = 1S
   get
 
-val testUIntWithExpectedType: UInt
+konst testUIntWithExpectedType: UInt
   field = 1
   get
 
-val testULongWithExpectedType: ULong
+konst testULongWithExpectedType: ULong
   field = 1L
   get
 
-val testToUByte: UByte
+konst testToUByte: UByte
   field = 1.toUByte()
   get
 
-val testToUShort: UShort
+konst testToUShort: UShort
   field = 1.toUShort()
   get
 
-val testToUInt: UInt
+konst testToUInt: UInt
   field = 1.toUInt()
   get
 
-val testToULong: ULong
+konst testToULong: ULong
   field = 1.toULong()
   get

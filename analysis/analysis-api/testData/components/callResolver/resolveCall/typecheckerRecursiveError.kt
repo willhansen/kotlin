@@ -1,1 +1,1 @@
-val function = <expr>function()</expr>
+konst function = <expr>function()</expr>

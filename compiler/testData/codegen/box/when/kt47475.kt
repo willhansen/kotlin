@@ -19,7 +19,7 @@ inline fun inlineEnumWhen(someEnum: SomeEnum) = when(someEnum) {
 
 fun box(): String {
     inlineEnumWhen(SomeEnum.A)
-    val mappings = Class.forName("CallerKt\$box\$\$inlined\$inlineEnumWhen\$1\$wm\$LibKt\$WhenMappings")
+    konst mappings = Class.forName("CallerKt\$box\$\$inlined\$inlineEnumWhen\$1\$wm\$LibKt\$WhenMappings")
     return if (mappings.enclosingClass == null) "OK" else "FAIL"
 }
 

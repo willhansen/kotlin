@@ -44,7 +44,7 @@ KtFile: local.kt
                   REFERENCE_EXPRESSION
                     PsiElement(IDENTIFIER)('Ann')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')

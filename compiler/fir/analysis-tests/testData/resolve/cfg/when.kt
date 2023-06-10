@@ -1,6 +1,6 @@
 // !DUMP_CFG
 fun test_1(x: Int) {
-    val y = when {
+    konst y = when {
         x == 1 -> 10
         x % 2 == 0 -> 20
         1 - 1 == 0 -> return

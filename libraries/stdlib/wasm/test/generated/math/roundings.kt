@@ -16,7 +16,7 @@ import kotlin.test.*
 
 
 class RoundingsTest {
-    private val arguments = arrayOf(
+    private konst arguments = arrayOf(
         0xfff0000000000000UL,     0x7ff0000000000000UL,     0x1UL,     0x7fefffffffffffffUL, 
         0x7ff8000000000000UL,     0x6a83b03385a2fc07UL,     0x3fd999999999999aUL,     0x3fd99999999c594aUL, 
         0x3fd999999996d9eaUL,     0x3fc999999999999aUL,     0x3fe999999999999aUL,     0x3fb999999999999aUL, 
@@ -38,7 +38,7 @@ class RoundingsTest {
     
     @Test
     fun testCeil() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xfff0000000000000UL,     0x7ff0000000000000UL,     0x3ff0000000000000UL,     0x7fefffffffffffffUL, 
             0x7ff8000000000000UL,     0x6a83b03385a2fc07UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL, 
             0x3ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL, 
@@ -63,7 +63,7 @@ class RoundingsTest {
     
     @Test
     fun testFloor() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xfff0000000000000UL,     0x7ff0000000000000UL,     0x0UL,     0x7fefffffffffffffUL, 
             0x7ff8000000000000UL,     0x6a83b03385a2fc07UL,     0x0UL,     0x0UL, 
             0x0UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -88,7 +88,7 @@ class RoundingsTest {
     
     @Test
     fun testTruncate() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xfff0000000000000UL,     0x7ff0000000000000UL,     0x0UL,     0x7fefffffffffffffUL, 
             0x7ff8000000000000UL,     0x6a83b03385a2fc07UL,     0x0UL,     0x0UL, 
             0x0UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -113,7 +113,7 @@ class RoundingsTest {
     
     @Test
     fun testRound() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xfff0000000000000UL,     0x7ff0000000000000UL,     0x0UL,     0x7fefffffffffffffUL, 
             0x7ff8000000000000UL,     0x6a83b03385a2fc07UL,     0x0UL,     0x0UL, 
             0x0UL,     0x0UL,     0x3ff0000000000000UL,     0x0UL, 

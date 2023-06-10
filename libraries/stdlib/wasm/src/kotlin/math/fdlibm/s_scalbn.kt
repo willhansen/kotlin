@@ -21,10 +21,10 @@ package kotlin.math.fdlibm
 
 import kotlin.wasm.internal.wasm_f64_copysign as copysign
 
-private const val two54 = 1.80143985094819840000e+16 /* 0x43500000, 0x00000000 */
-private const val twom54 = 5.55111512312578270212e-17 /* 0x3C900000, 0x00000000 */
-private const val huge = 1.0e+300
-private const val tiny = 1.0e-300
+private const konst two54 = 1.80143985094819840000e+16 /* 0x43500000, 0x00000000 */
+private const konst twom54 = 5.55111512312578270212e-17 /* 0x3C900000, 0x00000000 */
+private const konst huge = 1.0e+300
+private const konst tiny = 1.0e-300
 
 internal fun scalbn(_x: Double, n: Int): Double {
     var x: Double = _x

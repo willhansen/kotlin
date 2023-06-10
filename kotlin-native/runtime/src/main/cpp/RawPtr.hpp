@@ -14,7 +14,7 @@
 namespace kotlin {
 
 // raw_ptr<T> is T* but
-// * with default constructor setting value to null
+// * with default constructor setting konstue to null
 // * with destructive move
 // * with <, <=, >=, > guaranteeing total order.
 template <typename T>

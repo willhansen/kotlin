@@ -8,9 +8,9 @@
 import kotlin.reflect.KClass
 
 fun box(): String {
-    val ann1 = kotlin.SinceKotlin("1.6.0")
-    val expectedToString = "@kotlin.SinceKotlin(version=1.6.0)"
-    val actualToString = ann1.toString()
+    konst ann1 = kotlin.SinceKotlin("1.6.0")
+    konst expectedToString = "@kotlin.SinceKotlin(version=1.6.0)"
+    konst actualToString = ann1.toString()
     if (actualToString != expectedToString) return "Expected ann1.toString() equals to $expectedToString, but it's $actualToString"
     return "OK"
 }

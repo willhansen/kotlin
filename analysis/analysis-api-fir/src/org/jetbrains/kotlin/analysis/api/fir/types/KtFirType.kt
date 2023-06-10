@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.ConeNullability
 
 internal interface KtFirType : KtLifetimeOwner {
-    val coneType: ConeKotlinType
+    konst coneType: ConeKotlinType
 }
 
 internal fun KtFirType.typeEquals(other: Any?): Boolean {

@@ -16,7 +16,7 @@ fun builder(c: suspend () -> Unit) {
 
 fun box(): String {
     var res = 0L
-    val ref = 1L::longArgs
+    konst ref = 1L::longArgs
     builder {
         res = ref(1L, 1L, 1L)
     }

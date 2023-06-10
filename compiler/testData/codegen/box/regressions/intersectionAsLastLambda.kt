@@ -10,7 +10,7 @@ public class First<T> {
 
 // FILE: second.kt
 
-class Inv<T>(val key: T)
+class Inv<T>(konst key: T)
 
 fun <T, R> lastLambda(x: T, block: (T) -> R): R = block(x)
 

@@ -5,7 +5,7 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double) {
+konstue class DPoint(konst x: Double, konst y: Double) {
     init {
         require(x != 0.0 && y != 0.0)
     }

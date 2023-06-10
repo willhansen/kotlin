@@ -8,7 +8,7 @@
 
 // FILE: localFunction2.kt
 fun box(): String {
-    val t = "O"
+    konst t = "O"
     fun ok() = t + "K"
     return Sam(::ok).get()
 }

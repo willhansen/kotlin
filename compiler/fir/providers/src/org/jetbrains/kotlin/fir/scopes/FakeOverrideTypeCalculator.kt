@@ -26,18 +26,18 @@ abstract class FakeOverrideTypeCalculator {
 
     abstract class AbstractFakeOverrideTypeCalculator : FakeOverrideTypeCalculator() {
         override fun computeReturnType(declaration: FirCallableDeclaration): FirResolvedTypeRef? {
-            val fakeOverrideSubstitution = declaration.attributes.fakeOverrideSubstitution
+            konst fakeOverrideSubstitution = declaration.attributes.fakeOverrideSubstitution
                 ?: return declaration.getResolvedTypeRef()
             synchronized(fakeOverrideSubstitution) {
                 if (declaration.attributes.fakeOverrideSubstitution == null) {
                     return declaration.returnTypeRef as FirResolvedTypeRef
                 }
-                val (substitutor, baseSymbol) = fakeOverrideSubstitution
-                val baseDeclaration = baseSymbol.fir as FirCallableDeclaration
-                val baseReturnType = computeReturnType(baseDeclaration)?.type ?: return null
+                konst (substitutor, baseSymbol) = fakeOverrideSubstitution
+                konst baseDeclaration = baseSymbol.fir as FirCallableDeclaration
+                konst baseReturnType = computeReturnType(baseDeclaration)?.type ?: return null
                 declaration.attributes.fakeOverrideSubstitution = null
-                val coneType = substitutor.substituteOrSelf(baseReturnType)
-                val returnType = declaration.returnTypeRef.resolvedTypeFromPrototype(coneType)
+                konst coneType = substitutor.substituteOrSelf(baseReturnType)
+                konst returnType = declaration.returnTypeRef.resolvedTypeFromPrototype(coneType)
                 declaration.replaceReturnTypeRef(returnType)
                 return returnType
             }
@@ -63,6 +63,6 @@ var FirDeclarationAttributes.fakeOverrideSubstitution: FakeOverrideSubstitution?
 )
 
 data class FakeOverrideSubstitution(
-    val substitutor: ConeSubstitutor,
-    val baseSymbol: FirBasedSymbol<*>
+    konst substitutor: ConeSubstitutor,
+    konst baseSymbol: FirBasedSymbol<*>
 )

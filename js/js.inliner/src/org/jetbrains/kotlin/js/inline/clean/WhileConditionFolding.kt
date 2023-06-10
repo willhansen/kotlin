@@ -19,13 +19,13 @@ package org.jetbrains.kotlin.js.inline.clean
 import org.jetbrains.kotlin.js.backend.ast.*
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
-class WhileConditionFolding(val body: JsBlock) {
+class WhileConditionFolding(konst body: JsBlock) {
     private var changed = false
 
     fun apply(): Boolean {
         body.accept(object : RecursiveJsVisitor() {
             override fun visitLabel(x: JsLabel) {
-                val innerStatement = x.statement
+                konst innerStatement = x.statement
                 when (innerStatement) {
                     is JsWhile -> process(innerStatement, x.name)
                     is JsDoWhile -> process(innerStatement, x.name)
@@ -61,11 +61,11 @@ class WhileConditionFolding(val body: JsBlock) {
                 statement.body.accept(this)
                 do {
                     var optimized = false
-                    val first = find(statement.body)
-                    val condition = extractCondition(first, name)
+                    konst first = find(statement.body)
+                    konst condition = extractCondition(first, name)
                     if (condition != null) {
                         statement.body = remove(statement.body)
-                        val existingCondition = statement.condition
+                        konst existingCondition = statement.condition
                         statement.condition = when {
                             JsBooleanLiteral.isTrue(existingCondition) -> condition
                             else -> combine(existingCondition, condition)
@@ -104,7 +104,7 @@ class WhileConditionFolding(val body: JsBlock) {
                 //
                 // therefore for single `break` we should return `false`.
                 is JsBreak -> {
-                    val target = statement.label?.name
+                    konst target = statement.label?.name
                     if (label == target) JsBooleanLiteral(false) else null
                 }
 
@@ -135,10 +135,10 @@ class WhileConditionFolding(val body: JsBlock) {
                 // applying this rule repeatedly we get while (A && (B || C)), which is correct
 
                 is JsIf -> {
-                    val then = statement.thenStatement
+                    konst then = statement.thenStatement
                     if (statement.elseStatement == null) {
-                        val nextCondition = extractCondition(then, label)
-                        val result: JsExpression? = when {
+                        konst nextCondition = extractCondition(then, label)
+                        konst result: JsExpression? = when {
                             // Just a little optimization. When inner statement is a single `break`, `nextCondition` would be false.
                             // However, `A || false` can be rewritten as simply `A`
                             nextCondition == null -> null
@@ -166,7 +166,7 @@ class WhileConditionFolding(val body: JsBlock) {
 
             private fun removeFirst(statement: JsStatement) = when (statement) {
                 is JsBlock -> {
-                    val statements = statement.statements
+                    konst statements = statement.statements
                     if (statements.isNotEmpty()) {
                         statements.removeAt(0)
                     }
@@ -182,7 +182,7 @@ class WhileConditionFolding(val body: JsBlock) {
 
             private fun removeLast(statement: JsStatement) = when (statement) {
                 is JsBlock -> {
-                    val statements = statement.statements
+                    konst statements = statement.statements
                     if (statements.isNotEmpty()) {
                         statements.removeAt(statements.lastIndex)
                     }
@@ -203,7 +203,7 @@ class WhileConditionFolding(val body: JsBlock) {
             private var level = 0
 
             override fun visitContinue(x: JsContinue) {
-                val name = x.label?.name
+                konst name = x.label?.name
                 if (name == null) {
                     if (level == 0) {
                         found = true

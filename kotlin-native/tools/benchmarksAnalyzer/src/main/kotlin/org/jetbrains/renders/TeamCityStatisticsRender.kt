@@ -11,13 +11,13 @@ import org.jetbrains.report.MeanVarianceBenchmark
 
 // Report render to text format.
 class TeamCityStatisticsRender: Render() {
-    override val name: String
+    override konst name: String
         get() = "teamcity"
 
     private var content = StringBuilder()
 
     override fun render(report: SummaryBenchmarksReport, onlyChanges: Boolean): String {
-        val currentDurations = report.currentBenchmarksDuration
+        konst currentDurations = report.currentBenchmarksDuration
 
         content.append("##teamcity[testSuiteStarted name='Benchmarks']\n")
 
@@ -28,9 +28,9 @@ class TeamCityStatisticsRender: Render() {
         }
         content.append("##teamcity[testSuiteFinished name='Benchmarks']\n")
 
-        // Report geometric mean as build statistic value
+        // Report geometric mean as build statistic konstue
         report.detailedMetricReports.forEach { (metric, detailedReport) ->
-            renderGeometricMean(metric.value, detailedReport.geoMeanBenchmark.first!!)
+            renderGeometricMean(metric.konstue, detailedReport.geoMeanBenchmark.first!!)
         }
 
         return content.toString()
@@ -38,9 +38,9 @@ class TeamCityStatisticsRender: Render() {
 
     private fun renderSummaryBecnhmarkValue(benchmark: MeanVarianceBenchmark) {
         content.append("##teamcity[testMetadata testName='${benchmark.name}' name='Mean'" +
-                " type='number' value='${benchmark.score}']\n")
+                " type='number' konstue='${benchmark.score}']\n")
         content.append("##teamcity[testMetadata testName='${benchmark.name}' name='Variance'" +
-                " type='number' value='${benchmark.variance}']\n")
+                " type='number' konstue='${benchmark.variance}']\n")
     }
 
     // Produce benchmark as test in TeamCity
@@ -54,7 +54,7 @@ class TeamCityStatisticsRender: Render() {
     }
 
     private fun renderGeometricMean(metricName: String, geoMeanBenchmark: MeanVarianceBenchmark) {
-        content.append("##teamcity[buildStatisticValue key='$metricName Geometric mean' value='${geoMeanBenchmark.score}']\n")
-        content.append("##teamcity[buildStatisticValue key='$metricName Geometric mean variance' value='${geoMeanBenchmark.variance}']\n")
+        content.append("##teamcity[buildStatisticValue key='$metricName Geometric mean' konstue='${geoMeanBenchmark.score}']\n")
+        content.append("##teamcity[buildStatisticValue key='$metricName Geometric mean variance' konstue='${geoMeanBenchmark.variance}']\n")
     }
 }

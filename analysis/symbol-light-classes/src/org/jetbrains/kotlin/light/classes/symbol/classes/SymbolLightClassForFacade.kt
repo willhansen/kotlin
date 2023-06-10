@@ -37,8 +37,8 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtFile
 
 internal class SymbolLightClassForFacade(
-    override val facadeClassFqName: FqName,
-    override val files: Collection<KtFile>,
+    override konst facadeClassFqName: FqName,
+    override konst files: Collection<KtFile>,
     ktModule: KtModule,
 ) : SymbolLightClassBase(ktModule, files.first().manager), KtLightClassForFacade {
 
@@ -57,9 +57,9 @@ internal class SymbolLightClassForFacade(
             action(files.map { it.getFileSymbol() })
         }
 
-    private val firstFileInFacade: KtFile get() = files.first()
+    private konst firstFileInFacade: KtFile get() = files.first()
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightClassModifierList(
             containingDeclaration = this,
             modifiersBox = InitializedModifiersBox(PsiModifier.PUBLIC, PsiModifier.FINAL),
@@ -83,8 +83,8 @@ internal class SymbolLightClassForFacade(
 
     override fun getOwnMethods(): List<PsiMethod> = cachedValue {
         withFileSymbols { fileSymbols ->
-            val result = mutableListOf<KtLightMethod>()
-            val methodsAndProperties = sequence<KtCallableSymbol> {
+            konst result = mutableListOf<KtLightMethod>()
+            konst methodsAndProperties = sequence<KtCallableSymbol> {
                 for (fileSymbol in fileSymbols) {
                     for (callableSymbol in fileSymbol.getFileScope().getCallableSymbols()) {
                         if (callableSymbol !is KtFunctionSymbol && callableSymbol !is KtKotlinPropertySymbol) continue
@@ -102,7 +102,7 @@ internal class SymbolLightClassForFacade(
         }
     }
 
-    override val multiFileClass: Boolean get() = files.size > 1 || firstFileInFacade.isJvmMultifileClassFile
+    override konst multiFileClass: Boolean get() = files.size > 1 || firstFileInFacade.isJvmMultifileClassFile
 
     context(KtAnalysisSession)
     private fun loadFieldsFromFile(
@@ -129,8 +129,8 @@ internal class SymbolLightClassForFacade(
         this?.toPsiVisibilityForMember()?.let { it == PsiModifier.PUBLIC } != false
 
     override fun getOwnFields(): List<PsiField> = cachedValue {
-        val result = mutableListOf<KtLightField>()
-        val nameGenerator = SymbolLightField.FieldNameGenerator()
+        konst result = mutableListOf<KtLightField>()
+        konst nameGenerator = SymbolLightField.FieldNameGenerator()
         withFileSymbols { fileSymbols ->
             for (fileSymbol in fileSymbols) {
                 loadFieldsFromFile(fileSymbol.getFileScope(), nameGenerator, result)
@@ -142,14 +142,14 @@ internal class SymbolLightClassForFacade(
 
     override fun copy(): SymbolLightClassForFacade = SymbolLightClassForFacade(facadeClassFqName, files, ktModule)
 
-    private val packageClsFile = FakeFileForLightClass(
+    private konst packageClsFile = FakeFileForLightClass(
         firstFileInFacade,
         lightClass = this,
         packageFqName = facadeClassFqName.parent()
     )
 
     override fun getParent(): PsiElement = containingFile
-    override val kotlinOrigin: KtClassOrObject? get() = null
+    override konst kotlinOrigin: KtClassOrObject? get() = null
     override fun hasModifierProperty(@NonNls name: String) = name == PsiModifier.PUBLIC || name == PsiModifier.FINAL
     override fun getExtendsList(): PsiReferenceList? = null
     override fun isDeprecated() = false
@@ -184,7 +184,7 @@ internal class SymbolLightClassForFacade(
 
     override fun getNavigationElement() = firstFileInFacade
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean =
+    override fun isEquikonstentTo(another: PsiElement?): Boolean =
         equals(another) || another is SymbolLightClassForFacade && another.qualifiedName == qualifiedName
 
     override fun isInheritor(baseClass: PsiClass, checkDeep: Boolean): Boolean {
@@ -206,7 +206,7 @@ internal class SymbolLightClassForFacade(
 
     override fun hashCode() = facadeClassFqName.hashCode()
     override fun toString() = "${SymbolLightClassForFacade::class.java.simpleName}:$facadeClassFqName"
-    override val originKind: LightClassOriginKind get() = LightClassOriginKind.SOURCE
+    override konst originKind: LightClassOriginKind get() = LightClassOriginKind.SOURCE
     override fun getText() = firstFileInFacade.text ?: ""
     override fun getTextRange(): TextRange = firstFileInFacade.textRange ?: TextRange.EMPTY_RANGE
     override fun getTextOffset() = firstFileInFacade.textOffset

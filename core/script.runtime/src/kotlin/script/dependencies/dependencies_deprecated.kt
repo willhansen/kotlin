@@ -21,11 +21,11 @@ package kotlin.script.dependencies
 import java.io.File
 
 interface KotlinScriptExternalDependencies : Comparable<KotlinScriptExternalDependencies> {
-    val javaHome: String? get() = null
-    val classpath: Iterable<File> get() = emptyList()
-    val imports: Iterable<String> get() = emptyList()
-    val sources: Iterable<File> get() = emptyList()
-    val scripts: Iterable<File> get() = emptyList()
+    konst javaHome: String? get() = null
+    konst classpath: Iterable<File> get() = emptyList()
+    konst imports: Iterable<String> get() = emptyList()
+    konst sources: Iterable<File> get() = emptyList()
+    konst scripts: Iterable<File> get() = emptyList()
 
     override fun compareTo(other: KotlinScriptExternalDependencies): Int =
             compareValues(javaHome, other.javaHome)
@@ -46,13 +46,13 @@ private fun <T : Comparable<*>> compareValues(a: T?, b: T?): Int {
 }
 
 private fun <T : Comparable<T>> compareIterables(a: Iterable<T>, b: Iterable<T>): Int {
-    val ia = a.iterator()
-    val ib = b.iterator()
+    konst ia = a.iterator()
+    konst ib = b.iterator()
     while (true) {
         if (ia.hasNext() && !ib.hasNext()) return 1
         if (!ia.hasNext() && !ib.hasNext()) return 0
         if (!ia.hasNext()) return -1
-        val compRes = compareValues(ia.next(), ib.next())
+        konst compRes = compareValues(ia.next(), ib.next())
         if (compRes != 0) return compRes
     }
 }

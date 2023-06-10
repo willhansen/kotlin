@@ -2,11 +2,11 @@
 // PROPERTY_NOT_USED: PropertyMetadata
 import kotlin.reflect.KProperty
 
-class MyDelegate(val value: String) {
-    inline operator fun getValue(receiver: Any?, property: KProperty<*>): String = value
+class MyDelegate(konst konstue: String) {
+    inline operator fun getValue(receiver: Any?, property: KProperty<*>): String = konstue
 }
 
 fun box(): String {
-    val x by MyDelegate("OK")
+    konst x by MyDelegate("OK")
     return x
 }

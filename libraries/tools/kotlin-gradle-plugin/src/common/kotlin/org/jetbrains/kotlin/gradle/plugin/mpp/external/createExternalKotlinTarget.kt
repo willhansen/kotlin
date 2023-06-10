@@ -34,25 +34,25 @@ import org.jetbrains.kotlin.gradle.utils.named
 fun <T : DecoratedExternalKotlinTarget> KotlinMultiplatformExtension.createExternalKotlinTarget(
     descriptor: ExternalKotlinTargetDescriptor<T>
 ): T {
-    val apiElementsConfiguration = project.configurations.maybeCreate(lowerCamelCaseName(descriptor.targetName, "apiElements"))
-    val runtimeElementsConfiguration = project.configurations.maybeCreate(lowerCamelCaseName(descriptor.targetName, "runtimeElements"))
-    val sourcesElementsConfiguration = project.configurations.maybeCreate(lowerCamelCaseName(descriptor.targetName, "sourcesElements"))
+    konst apiElementsConfiguration = project.configurations.maybeCreate(lowerCamelCaseName(descriptor.targetName, "apiElements"))
+    konst runtimeElementsConfiguration = project.configurations.maybeCreate(lowerCamelCaseName(descriptor.targetName, "runtimeElements"))
+    konst sourcesElementsConfiguration = project.configurations.maybeCreate(lowerCamelCaseName(descriptor.targetName, "sourcesElements"))
 
-    val apiElementsPublishedConfiguration =
+    konst apiElementsPublishedConfiguration =
         project.configurations.maybeCreate(lowerCamelCaseName(descriptor.targetName, "apiElements-published"))
 
-    val runtimeElementsPublishedConfiguration =
+    konst runtimeElementsPublishedConfiguration =
         project.configurations.maybeCreate(lowerCamelCaseName(descriptor.targetName, "runtimeElements-published"))
 
-    val kotlinTargetComponent = ExternalKotlinTargetComponent(
+    konst kotlinTargetComponent = ExternalKotlinTargetComponent(
         ExternalKotlinTargetComponent.TargetProvider.byTargetName(this, descriptor.targetName)
     )
 
-    val artifactsTaskLocator = ExternalKotlinTargetImpl.ArtifactsTaskLocator { target ->
+    konst artifactsTaskLocator = ExternalKotlinTargetImpl.ArtifactsTaskLocator { target ->
         target.project.locateOrRegisterTask<Jar>(lowerCamelCaseName(descriptor.targetName, "jar"))
     }
 
-    val target = ExternalKotlinTargetImpl(
+    konst target = ExternalKotlinTargetImpl(
         project = project,
         targetName = descriptor.targetName,
         platformType = descriptor.platformType,
@@ -81,7 +81,7 @@ fun <T : DecoratedExternalKotlinTarget> KotlinMultiplatformExtension.createExter
     runtimeElementsPublishedConfiguration.isCanBeResolved = false
     runtimeElementsPublishedConfiguration.isCanBeConsumed = false
 
-    val decorated = descriptor.targetFactory.create(DecoratedExternalKotlinTarget.Delegate(target))
+    konst decorated = descriptor.targetFactory.create(DecoratedExternalKotlinTarget.Delegate(target))
     target.onCreated()
 
     descriptor.configure?.invoke(decorated)

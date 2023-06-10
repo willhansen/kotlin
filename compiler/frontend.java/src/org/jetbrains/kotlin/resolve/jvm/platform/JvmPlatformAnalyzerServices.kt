@@ -37,7 +37,7 @@ object JvmPlatformAnalyzerServices : PlatformDependentAnalyzerServices() {
         }
     }
 
-    override val defaultLowPriorityImports: List<ImportPath> = listOf(ImportPath.fromString("java.lang.*"))
+    override konst defaultLowPriorityImports: List<ImportPath> = listOf(ImportPath.fromString("java.lang.*"))
 
-    override val platformConfigurator: PlatformConfigurator = JvmPlatformConfigurator
+    override konst platformConfigurator: PlatformConfigurator = JvmPlatformConfigurator
 }

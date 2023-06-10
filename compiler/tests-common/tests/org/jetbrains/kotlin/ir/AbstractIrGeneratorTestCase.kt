@@ -60,9 +60,9 @@ abstract class AbstractIrGeneratorTestCase : CodegenTestCase() {
     }
 
     private fun setupEnvironment(files: List<TestFile>) {
-        val jdkKind = getTestJdkKind(files)
+        konst jdkKind = getTestJdkKind(files)
 
-        val javacOptions = ArrayList<String>(0)
+        konst javacOptions = ArrayList<String>(0)
         var addRuntime = false
         var addReflect = false
         for (file in files) {
@@ -76,13 +76,13 @@ abstract class AbstractIrGeneratorTestCase : CodegenTestCase() {
             javacOptions.addAll(InTextDirectivesUtils.findListWithPrefixes(file.content, "// JAVAC_OPTIONS:"))
         }
 
-        val configurationKind = when {
+        konst configurationKind = when {
             addReflect -> ConfigurationKind.ALL
             addRuntime -> ConfigurationKind.NO_KOTLIN_REFLECT
             else -> ConfigurationKind.JDK_ONLY
         }
 
-        val configuration = createConfiguration(
+        konst configuration = createConfiguration(
             configurationKind, jdkKind, backend,
             listOf<File>(getAnnotationsJar()),
             listOfNotNull(writeJavaFiles(files)),
@@ -97,7 +97,7 @@ abstract class AbstractIrGeneratorTestCase : CodegenTestCase() {
     protected open fun generateIrModule(ignoreErrors: Boolean = false): IrModuleFragment {
         assert(myFiles != null) { "myFiles not initialized" }
         assert(myEnvironment != null) { "myEnvironment not initialized" }
-        val psi2Ir = Psi2IrTranslator(
+        konst psi2Ir = Psi2IrTranslator(
             myEnvironment.configuration.languageVersionSettings,
             Psi2IrConfiguration(ignoreErrors),
             myEnvironment.configuration::checkNoUnboundSymbols
@@ -114,13 +114,13 @@ abstract class AbstractIrGeneratorTestCase : CodegenTestCase() {
         )
 
     protected fun generateIrFilesAsSingleModule(testFiles: List<TestFile>, ignoreErrors: Boolean = false): Map<TestFile, IrFile> {
-        val irModule = generateIrModule(ignoreErrors)
-        val ktFiles = testFiles.filter { it.name.endsWith(".kt") }
+        konst irModule = generateIrModule(ignoreErrors)
+        konst ktFiles = testFiles.filter { it.name.endsWith(".kt") }
         return ktFiles.zip(irModule.files).toMap()
     }
 
     companion object {
-        private val IGNORE_ERRORS_PATTERN = Regex("""// !IGNORE_ERRORS""")
+        private konst IGNORE_ERRORS_PATTERN = Regex("""// !IGNORE_ERRORS""")
 
         internal fun shouldIgnoreErrors(wholeFile: File): Boolean =
             IGNORE_ERRORS_PATTERN.containsMatchIn(wholeFile.readText())
@@ -161,19 +161,19 @@ abstract class AbstractIrGeneratorTestCase : CodegenTestCase() {
             generatorExtensions: GeneratorExtensions,
             createIdSignatureComposer: (BindingContext) -> IdSignatureComposer
         ): IrModuleFragment {
-            val (bindingContext, moduleDescriptor) = analysisResult
+            konst (bindingContext, moduleDescriptor) = analysisResult
             if (!psi2ir.configuration.ignoreErrors) {
                 analysisResult.throwIfError()
                 AnalyzingUtils.throwExceptionOnErrors(bindingContext)
             }
-            val context = psi2ir.createGeneratorContext(
+            konst context = psi2ir.createGeneratorContext(
                 moduleDescriptor,
                 bindingContext,
                 // SymbolTable(IdSignatureDescriptor(JsManglerDesc), IrFactoryImpl, NameProvider.DEFAULT),
                 SymbolTable(createIdSignatureComposer(bindingContext), IrFactoryImpl, NameProvider.DEFAULT),
                 generatorExtensions
             )
-            val irProviders = generateTypicalIrProviderList(
+            konst irProviders = generateTypicalIrProviderList(
                 moduleDescriptor, context.irBuiltIns, context.symbolTable,
                 DescriptorByIdSignatureFinderImpl(moduleDescriptor, JsManglerDesc),
                 extensions = generatorExtensions,

@@ -4,7 +4,7 @@ FILE: lambdaInUnresolvedCall.kt
     }
     public final fun test_1(): R|kotlin/Unit| {
         <Unresolved name: myRun>#(<L> = myRun@fun <anonymous>(): R|kotlin/Int| <inline=Unknown>  {
-            lval x: R|kotlin/Int| = Int(1)
+            lkonst x: R|kotlin/Int| = Int(1)
             ^ R|<local>/x|.R|kotlin/Int.times|(Int(2))
         }
         )

@@ -3,7 +3,7 @@
 // ^ the order of fake overrides is different on K2
 
 interface X {
-    val xs: MutableList<Any>
+    konst xs: MutableList<Any>
     fun f(): MutableList<Any>
 }
 

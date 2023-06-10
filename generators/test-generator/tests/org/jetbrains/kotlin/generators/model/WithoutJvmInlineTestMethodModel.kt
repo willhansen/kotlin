@@ -18,5 +18,5 @@ class WithoutJvmInlineTestMethodModel(
                 null -> "ReplaceOptionalJvmInlineAnnotationWithUniversal()"
             }
 ) {
-    override val name: String = source.name + if (withPostfix) "_valueClasses" else ""
+    override konst name: String = source.name + if (withPostfix) "_konstueClasses" else ""
 }

@@ -2,7 +2,7 @@
 
 // FILE: utils.kt
 
-inline class UInt(val u: Int) {
+inline class UInt(konst u: Int) {
     fun member() {}
 }
 

@@ -44,9 +44,9 @@ public interface ContractBuilder {
     @ContractsDsl public fun returns(): Returns
 
     /**
-     * Describes a situation when a function returns normally with the specified return [value].
+     * Describes a situation when a function returns normally with the specified return [konstue].
      *
-     * The possible values of [value] are limited to `true`, `false` or `null`.
+     * The possible konstues of [konstue] are limited to `true`, `false` or `null`.
      *
      * Use [SimpleEffect.implies] function to describe a conditional effect that happens in such case.
      *
@@ -54,10 +54,10 @@ public interface ContractBuilder {
     // @sample samples.contracts.returnsTrueContract
     // @sample samples.contracts.returnsFalseContract
     // @sample samples.contracts.returnsNullContract
-    @ContractsDsl public fun returns(value: Any?): Returns
+    @ContractsDsl public fun returns(konstue: Any?): Returns
 
     /**
-     * Describes a situation when a function returns normally with any value that is not `null`.
+     * Describes a situation when a function returns normally with any konstue that is not `null`.
      *
      * Use [SimpleEffect.implies] function to describe a conditional effect that happens in such case.
      *
@@ -72,7 +72,7 @@ public interface ContractBuilder {
      * 1. the function [lambda] can only be invoked during the call of the owner function,
      *  and it won't be invoked after that owner function call is completed;
      * 2. _(optionally)_ the function [lambda] is invoked the amount of times specified by the [kind] parameter,
-     *  see the [InvocationKind] enum for possible values.
+     *  see the [InvocationKind] enum for possible konstues.
      *
      * A function declaring the `callsInPlace` effect must be _inline_.
      *

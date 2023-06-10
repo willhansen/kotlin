@@ -10,10 +10,10 @@ import com.intellij.psi.tree.IElementType
 import org.jetbrains.kotlin.psi.psiUtil.allChildren
 
 class PsiElementFinderByType(
-    private val types: Collection<IElementType>,
+    private konst types: Collection<IElementType>,
     private var index: Int,
-    private val depth: Int,
-    private val reverse: Boolean,
+    private konst depth: Int,
+    private konst reverse: Boolean,
 ) {
     fun find(root: PsiElement): PsiElement? {
         return visitElement(root, 0)
@@ -31,9 +31,9 @@ class PsiElementFinderByType(
 
         if (currentDepth == depth) return null
 
-        val children = if (reverse) element.allChildren.toList().asReversed().iterator() else element.allChildren.iterator()
+        konst children = if (reverse) element.allChildren.toList().asReversed().iterator() else element.allChildren.iterator()
         for (child in children) {
-            val result = visitElement(child, currentDepth + 1)
+            konst result = visitElement(child, currentDepth + 1)
             if (result != null) return result
         }
 

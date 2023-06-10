@@ -26,7 +26,7 @@ public class SetterTest {
 // FILE: test.kt
 
 fun box(): String {
-    val obj = SetterTest()
+    konst obj = SetterTest()
     obj.fluent(12)
     assertEquals(obj.fluent(), 12)
     obj.setChained("zz").getChained()

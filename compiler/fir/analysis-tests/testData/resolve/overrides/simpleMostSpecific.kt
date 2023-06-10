@@ -1,6 +1,6 @@
 // !CHECK_TYPE
 interface A {
-    val x: CharSequence
+    konst x: CharSequence
 
     fun foo(): String?
 
@@ -16,7 +16,7 @@ interface B {
 }
 
 interface C {
-    val x: String
+    konst x: String
 }
 
 interface D1 : A, B

@@ -7,14 +7,14 @@ class C {
     fun foo() = B().bar()
 }
 
-val life = 42
+konst life = 42
 
 class A {
-    val x = life
+    konst x = life
 }
 
 class B {
     fun bar() = A().x
 }
 
-val rv = C().foo()
+konst rv = C().foo()

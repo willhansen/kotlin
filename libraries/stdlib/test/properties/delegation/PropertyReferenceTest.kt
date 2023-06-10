@@ -11,37 +11,37 @@ import kotlin.internal.*
 import kotlin.native.concurrent.ThreadLocal
 import kotlin.random.*
 
-open class Data(val stringVal: String, var intVar: Int, var builderVar: StringBuilder = StringBuilder("default"))
-val Data.formattedVal: String get() = "Hello $stringVal"
+open class Data(konst stringVal: String, var intVar: Int, var builderVar: StringBuilder = StringBuilder("default"))
+konst Data.formattedVal: String get() = "Hello $stringVal"
 var Data.displacedVar: Int
     get() = intVar + 2
-    set(value) { intVar = value - 2 }
+    set(konstue) { intVar = konstue - 2 }
 
 @ThreadLocal
-val data = Data("bound string", 42)
+konst data = Data("bound string", 42)
 
-val topVal: Double get() = 3.14
+konst topVal: Double get() = 3.14
 @ThreadLocal
 var topVar: ULong = 0xFFFFUL
 
 // top-level properties
 
-// val to bound val
+// konst to bound konst
 @ThreadLocal
-val tlValBoundVal by data::stringVal
-// val to bound var
+konst tlValBoundVal by data::stringVal
+// konst to bound var
 @ThreadLocal
-val tlValBoundVar by data::intVar
+konst tlValBoundVar by data::intVar
 // var to bound var
 @ThreadLocal
 var tlVarBoundVar by data::intVar
 
-// val to top-level val
+// konst to top-level konst
 @ThreadLocal
-val tlValTopLevelVal by ::topVal
-// val to top-level var
+konst tlValTopLevelVal by ::topVal
+// konst to top-level var
 @ThreadLocal
-val tlValTopLevelVar by ::topVar
+konst tlValTopLevelVar by ::topVar
 // var to top-level var
 @ThreadLocal
 var tlVarTopLevelVar by ::topVar
@@ -49,31 +49,31 @@ var tlVarTopLevelVar by ::topVar
 // member properties
 class DataExt : Data("member string", -1) {
 
-    // val to top-level val
-    val valTopLevelVal by ::topVal
+    // konst to top-level konst
+    konst konstTopLevelVal by ::topVal
 
-    // val to top-level var
-    val valTopLevelVar by ::topVar
+    // konst to top-level var
+    konst konstTopLevelVar by ::topVar
 
     // var to top-level var
     var varTopLevelVar by ::topVar
 
 
-    // val to bound val
-    val valBoundVal by this::stringVal
+    // konst to bound konst
+    konst konstBoundVal by this::stringVal
 
-    // val to bound var
-    val valBoundVar by data::intVar
+    // konst to bound var
+    konst konstBoundVar by data::intVar
 
     // var to bound var
     var varBoundVar by ::intVar
 
 
-    // val to extension val
-    val valExtVal by Data::formattedVal
+    // konst to extension konst
+    konst konstExtVal by Data::formattedVal
 
-    // val to extension var
-    val valExtVar by Data::displacedVar
+    // konst to extension var
+    konst konstExtVar by Data::displacedVar
 
     // var to extension var
     var varExtVar by Data::displacedVar
@@ -81,42 +81,42 @@ class DataExt : Data("member string", -1) {
 
 
 // extension properties
-// val to bound val
+// konst to bound konst
 @ThreadLocal
-val Data.extValBoundVal by data::stringVal
-// val to bound var
+konst Data.extValBoundVal by data::stringVal
+// konst to bound var
 @ThreadLocal
-val Data.extValBoundVar by data::intVar
+konst Data.extValBoundVar by data::intVar
 // var to bound var
 @ThreadLocal
 var Data.extVarBoundVar by data::intVar
 
-// val to top-level val
+// konst to top-level konst
 @ThreadLocal
-val Data.extValTopLevelVal by ::topVal
-// val to top-level var
+konst Data.extValTopLevelVal by ::topVal
+// konst to top-level var
 @ThreadLocal
-val Data.extValTopLevelVar by ::topVar
+konst Data.extValTopLevelVar by ::topVar
 // var to top-level var
 @ThreadLocal
 var Data.extVarTopLevelVar by ::topVar
 
-// val to member val
+// konst to member konst
 @ThreadLocal
-val Data.extValMemberVal by Data::stringVal
-// val to member var
+konst Data.extValMemberVal by Data::stringVal
+// konst to member var
 @ThreadLocal
-val Data.extValMemberVar by Data::intVar
+konst Data.extValMemberVar by Data::intVar
 // var to member var
 @ThreadLocal
 var Data.extVarMemberVar by Data::intVar
 
-// val to extension val
+// konst to extension konst
 @ThreadLocal
-val Data.extValExtVal by Data::formattedVal
-// val to extension var
+konst Data.extValExtVal by Data::formattedVal
+// konst to extension var
 @ThreadLocal
-val Data.extValExtVar by Data::displacedVar
+konst Data.extValExtVar by Data::displacedVar
 // var to extension var
 @ThreadLocal
 var Data.extVarExtVar by Data::displacedVar
@@ -124,9 +124,9 @@ var Data.extVarExtVar by Data::displacedVar
 
 // covariance
 @ThreadLocal
-val covariantVal: Number by ::topVal
+konst covariantVal: Number by ::topVal
 @ThreadLocal
-val Data.extCovariantVal: CharSequence by Data::builderVar
+konst Data.extCovariantVal: CharSequence by Data::builderVar
 
 
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
@@ -171,23 +171,23 @@ class PropertyReferenceTest {
 
     @Test
     fun memberProperties() {
-        val local = DataExt()
-        checkDelegate0(local::valBoundVal, local::stringVal)
-        checkDelegate1(local::valBoundVar, data::intVar, int())
+        konst local = DataExt()
+        checkDelegate0(local::konstBoundVal, local::stringVal)
+        checkDelegate1(local::konstBoundVar, data::intVar, int())
         checkDelegate2(local::varBoundVar, local::intVar, int(), int())
 
-        checkDelegate0(local::valTopLevelVal, ::topVal)
-        checkDelegate1(local::valTopLevelVar, ::topVar, ulong())
+        checkDelegate0(local::konstTopLevelVal, ::topVal)
+        checkDelegate1(local::konstTopLevelVar, ::topVar, ulong())
         checkDelegate2(local::varTopLevelVar, ::topVar, ulong(), ulong())
 
-        checkDelegate0(local::valExtVal, local::formattedVal)
-        checkDelegate1(local::valExtVar, local::displacedVar, int())
+        checkDelegate0(local::konstExtVal, local::formattedVal)
+        checkDelegate1(local::konstExtVar, local::displacedVar, int())
         checkDelegate2(local::varExtVar, local::displacedVar, int(), int())
     }
 
     @Test
     fun extensionProperties() {
-        val local = Data("ext", Int.MAX_VALUE)
+        konst local = Data("ext", Int.MAX_VALUE)
 
         checkDelegate0(local::extValBoundVal, data::stringVal)
         checkDelegate1(local::extValBoundVar, data::intVar, int())

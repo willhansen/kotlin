@@ -49,7 +49,7 @@ TEST_F(RepeatedTimerTest, WillStopInDestructor) {
         // Wait until the counter increases once.
         test_support::manual_clock::waitForPending(test_support::manual_clock::now() + minutes(10));
 
-        EXPECT_CALL(f, Call()).WillOnce([&] { promise.set_value_at_thread_exit(42); });
+        EXPECT_CALL(f, Call()).WillOnce([&] { promise.set_konstue_at_thread_exit(42); });
         test_support::manual_clock::sleep_for(minutes(10));
         test_support::manual_clock::waitForPending(test_support::manual_clock::now() + minutes(10));
         testing::Mock::VerifyAndClearExpectations(&f);
@@ -61,7 +61,7 @@ TEST_F(RepeatedTimerTest, WillStopInDestructor) {
     EXPECT_THAT(test_support::manual_clock::pending(), std::nullopt);
 }
 
-TEST_F(RepeatedTimerTest, InfiniteInterval) {
+TEST_F(RepeatedTimerTest, InfiniteInterkonst) {
     test_support::manual_clock::reset(test_support::manual_clock::time_point::max() - hours(365 * 24));
 
     constexpr auto infinite = test_support::manual_clock::duration::max();
@@ -83,7 +83,7 @@ TEST_F(RepeatedTimerTest, Restart) {
     timer.restart(seconds(10));
     test_support::manual_clock::waitForPending(test_support::manual_clock::now() + seconds(10));
 
-    // Now wait until task triggers once and is scheduled again with the same interval.
+    // Now wait until task triggers once and is scheduled again with the same interkonst.
     EXPECT_CALL(f, Call());
     test_support::manual_clock::sleep_for(seconds(10));
     test_support::manual_clock::waitForPending(test_support::manual_clock::now() + seconds(10));
@@ -98,7 +98,7 @@ TEST_F(RepeatedTimerTest, Restart) {
     timer.restart(minutes(5));
     test_support::manual_clock::waitForPending(test_support::manual_clock::now() + minutes(5));
 
-    // And just restart the timer to fire after "infinite" interval.
+    // And just restart the timer to fire after "infinite" interkonst.
     timer.restart(test_support::manual_clock::duration::max());
     test_support::manual_clock::waitForPending(test_support::manual_clock::time_point::max());
 
@@ -107,7 +107,7 @@ TEST_F(RepeatedTimerTest, Restart) {
     timer.restart(minutes(10));
     test_support::manual_clock::waitForPending(test_support::manual_clock::now() + minutes(10));
 
-    // Wait for 5 minutes, and restart the timer keeping the same interval.
+    // Wait for 5 minutes, and restart the timer keeping the same interkonst.
     test_support::manual_clock::sleep_for(minutes(5));
     timer.restart(minutes(10));
     test_support::manual_clock::waitForPending(test_support::manual_clock::now() + minutes(10));

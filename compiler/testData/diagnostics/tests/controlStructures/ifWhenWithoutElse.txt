@@ -1,32 +1,32 @@
 package
 
-public val fn1: () -> kotlin.Unit
-public val fn2: () -> kotlin.Unit
-public val fn3: () -> kotlin.Unit
-public val fn4: () -> kotlin.Int
-public val fn5: () -> kotlin.Boolean
-public val fn6: () -> kotlin.Unit
-public val mlist: MList
-public val ufn1: () -> kotlin.Unit
-public val ufn2: () -> kotlin.Unit
-public val ufn3: () -> kotlin.Unit
-public val ufn4: () -> kotlin.Unit
-public val ufn5: () -> kotlin.Unit
-public val ufn6: () -> kotlin.Unit
-public val wxx1: kotlin.Int
-public val wxx2: kotlin.Unit
-public val wxx3: kotlin.Any
-public val wxx4: kotlin.Int
-public val wxx5: kotlin.Unit
-public val wxx6: kotlin.Int
-public val wxx7: kotlin.String
-public val xx1: kotlin.Unit
-public val xx2: kotlin.Unit
-public val xx3: kotlin.Any
-public val xx4: kotlin.Unit
-public val xx5: kotlin.Unit
-public val xx6: kotlin.Unit
-public val xx7: kotlin.String
+public konst fn1: () -> kotlin.Unit
+public konst fn2: () -> kotlin.Unit
+public konst fn3: () -> kotlin.Unit
+public konst fn4: () -> kotlin.Int
+public konst fn5: () -> kotlin.Boolean
+public konst fn6: () -> kotlin.Unit
+public konst mlist: MList
+public konst ufn1: () -> kotlin.Unit
+public konst ufn2: () -> kotlin.Unit
+public konst ufn3: () -> kotlin.Unit
+public konst ufn4: () -> kotlin.Unit
+public konst ufn5: () -> kotlin.Unit
+public konst ufn6: () -> kotlin.Unit
+public konst wxx1: kotlin.Int
+public konst wxx2: kotlin.Unit
+public konst wxx3: kotlin.Any
+public konst wxx4: kotlin.Int
+public konst wxx5: kotlin.Unit
+public konst wxx6: kotlin.Int
+public konst wxx7: kotlin.String
+public konst xx1: kotlin.Unit
+public konst xx2: kotlin.Unit
+public konst xx3: kotlin.Any
+public konst xx4: kotlin.Unit
+public konst xx5: kotlin.Unit
+public konst xx6: kotlin.Unit
+public konst xx7: kotlin.String
 public fun f1(): kotlin.Unit
 public fun f2(): kotlin.Unit
 public fun f3(): kotlin.Unit

@@ -49,14 +49,14 @@ class PrimitiveNumberUntilRangeValue(rangeCall: ResolvedCall<out CallableDescrip
             ?: ForInSimpleProgressionLoopGenerator.fromBoundedValueWithStepMinus1(
                 codegen, forExpression, getBoundedValue(codegen),
                 getComparisonGeneratorForKotlinType(elementKotlinType),
-                inverseBoundsEvaluationOrder = true
+                inverseBoundsEkonstuationOrder = true
             )
 
     private fun createConstBoundedForInReversedUntilGenerator(
         codegen: ExpressionCodegen,
         forExpression: KtForExpression
     ): ForLoopGenerator? {
-        val endExpression = rangeCall.getReceiverExpression() ?: return null
+        konst endExpression = rangeCall.getReceiverExpression() ?: return null
         return createConstBoundedForLoopGeneratorOrNull(
             codegen, forExpression,
             codegen.generateCallSingleArgument(rangeCall),

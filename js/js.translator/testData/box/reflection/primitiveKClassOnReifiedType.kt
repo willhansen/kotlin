@@ -46,6 +46,6 @@ fun box(): String {
 }
 
 private fun check(nativeClass: dynamic, simpleName: String, c: KClass<*>) {
-    assertEquals(simpleName, c.simpleName, "Simple name of class has unexpected value")
+    assertEquals(simpleName, c.simpleName, "Simple name of class has unexpected konstue")
     assertEquals(nativeClass, c.js, "Kotlin class does not correspond native class ${nativeClass.name}")
 }

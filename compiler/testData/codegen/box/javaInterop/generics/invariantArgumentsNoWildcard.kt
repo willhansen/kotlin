@@ -10,9 +10,9 @@ public class JavaClass {
 
 // FILE: main.kt
 
-class Pair<out X, out Y>(val x: X, val y: Y)
+class Pair<out X, out Y>(konst x: X, konst y: Y)
 
-class Inv<T>(val x: T)
+class Inv<T>(konst x: T)
 
 fun foo(): Inv<Pair<CharSequence, CharSequence>> = Inv(Pair("O", "K"))
 

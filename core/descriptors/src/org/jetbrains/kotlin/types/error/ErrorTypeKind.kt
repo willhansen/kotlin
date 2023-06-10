@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.types.error
 
-enum class ErrorTypeKind(val debugMessage: String, val isUnresolved: Boolean = false) {
+enum class ErrorTypeKind(konst debugMessage: String, konst isUnresolved: Boolean = false) {
     /* Unresolved types */
     UNRESOLVED_TYPE("Unresolved type for %s", true),
     UNRESOLVED_TYPE_PARAMETER_TYPE("Unresolved type parameter type", true),
@@ -66,7 +66,7 @@ enum class ErrorTypeKind(val debugMessage: String, val isUnresolved: Boolean = f
     NO_TYPE_SPECIFIED("No type specified for %s"),
     NO_TYPE_FOR_LOOP_RANGE("Loop range has no type"),
     NO_TYPE_FOR_LOOP_PARAMETER("Loop parameter has no type"),
-    MISSED_TYPE_FOR_PARAMETER("Missed a type for a value parameter %s"),
+    MISSED_TYPE_FOR_PARAMETER("Missed a type for a konstue parameter %s"),
     MISSED_TYPE_ARGUMENT_FOR_TYPE_PARAMETER("Missed a type argument for a type parameter %s"),
 
     /* Illegal type usages */
@@ -86,7 +86,7 @@ enum class ErrorTypeKind(val debugMessage: String, val isUnresolved: Boolean = f
     /* Expressions related types */
     ERROR_EXPRESSION_TYPE("Error expression type"),
     ERROR_RECEIVER_TYPE("Error receiver type for %s"),
-    ERROR_CONSTANT_VALUE("Error constant value %s"),
+    ERROR_CONSTANT_VALUE("Error constant konstue %s"),
     EMPTY_CALLABLE_REFERENCE("Empty callable reference"),
     UNSUPPORTED_CALLABLE_REFERENCE_TYPE("Unsupported callable reference type %s"),
     TYPE_FOR_DELEGATION("Error delegation type for %s"),

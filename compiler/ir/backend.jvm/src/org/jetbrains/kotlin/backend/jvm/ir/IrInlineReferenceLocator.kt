@@ -16,15 +16,15 @@ import org.jetbrains.kotlin.ir.util.getPackageFragment
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 import org.jetbrains.kotlin.name.FqName
 
-abstract class IrInlineReferenceLocator(private val context: JvmBackendContext) : IrElementVisitor<Unit, IrDeclaration?> {
+abstract class IrInlineReferenceLocator(private konst context: JvmBackendContext) : IrElementVisitor<Unit, IrDeclaration?> {
     override fun visitElement(element: IrElement, data: IrDeclaration?) =
         element.acceptChildren(this, if (element is IrDeclaration && element !is IrVariable) element else data)
 
     override fun visitFunctionAccess(expression: IrFunctionAccessExpression, data: IrDeclaration?) {
-        val function = expression.symbol.owner
+        konst function = expression.symbol.owner
         if (function.isInlineFunctionCall(context)) {
-            for (parameter in function.valueParameters) {
-                val lambda = expression.getValueArgument(parameter.index)?.unwrapInlineLambda() ?: continue
+            for (parameter in function.konstueParameters) {
+                konst lambda = expression.getValueArgument(parameter.index)?.unwrapInlineLambda() ?: continue
                 visitInlineLambda(lambda, function, parameter, data!!)
             }
         }
@@ -35,10 +35,10 @@ abstract class IrInlineReferenceLocator(private val context: JvmBackendContext) 
 }
 
 class IrInlineScopeResolver(context: JvmBackendContext) : IrInlineReferenceLocator(context) {
-    private class CallSite(val parent: IrElement?, val approximateToPackage: Boolean)
+    private class CallSite(konst parent: IrElement?, konst approximateToPackage: Boolean)
 
-    private val inlineCallSites = mutableMapOf<IrFunction, CallSite>()
-    private val inlineFunctionCallSites = mutableMapOf<IrFunction, Set<IrElement>>()
+    private konst inlineCallSites = mutableMapOf<IrFunction, CallSite>()
+    private konst inlineFunctionCallSites = mutableMapOf<IrFunction, Set<IrElement>>()
 
     override fun visitInlineLambda(argument: IrFunctionReference, callee: IrFunction, parameter: IrValueParameter, scope: IrDeclaration) {
         // suspendCoroutine and suspendCoroutineUninterceptedOrReturn accept crossinline lambdas to disallow non-local returns,
@@ -54,7 +54,7 @@ class IrInlineScopeResolver(context: JvmBackendContext) : IrInlineReferenceLocat
     }
 
     override fun visitCall(expression: IrCall, data: IrDeclaration?) {
-        val callee = expression.symbol.owner
+        konst callee = expression.symbol.owner
         if (callee.isPrivateInline && data != null) {
             (inlineFunctionCallSites.getOrPut(callee) { mutableSetOf() } as MutableSet).add(data)
         }
@@ -63,7 +63,7 @@ class IrInlineScopeResolver(context: JvmBackendContext) : IrInlineReferenceLocat
 
     override fun visitBlock(expression: IrBlock, data: IrDeclaration?) {
         if (expression is IrInlinedFunctionBlock && expression.isFunctionInlining()) {
-            val callee = expression.inlineDeclaration
+            konst callee = expression.inlineDeclaration
             if (callee is IrSimpleFunction && callee.isPrivateInline && data != null) {
                 (inlineFunctionCallSites.getOrPut(callee) { mutableSetOf() } as MutableSet).add(data)
             }
@@ -72,7 +72,7 @@ class IrInlineScopeResolver(context: JvmBackendContext) : IrInlineReferenceLocat
         super.visitBlock(expression, data)
     }
 
-    private inline val IrSimpleFunction.isPrivateInline
+    private inline konst IrSimpleFunction.isPrivateInline
         get() = isInline && DescriptorVisibilities.isPrivate(visibility)
 
     private fun IrFunction.isCoroutineIntrinsic(): Boolean =
@@ -86,16 +86,16 @@ class IrInlineScopeResolver(context: JvmBackendContext) : IrInlineReferenceLocat
     // If the current scope is a crossinline lambda, this is not possible, as the lambda maybe inlined
     // into some other class; in that case, get at least the package.
     private tailrec fun findContainer(context: IrElement?, approximateToPackage: Boolean): IrDeclarationContainer? {
-        val callSite = inlineCallSites[context]
+        konst callSite = inlineCallSites[context]
         return when {
             // Crossinline lambdas can be inlined into some other class in the same package. However,
             // classes within crossinline lambdas should not be regenerated, so if we've already found
-            // a class *before* reaching this lambda, it's valid:
+            // a class *before* reaching this lambda, it's konstid:
             //     class C {
             //         fun f() {}
             //         fun g() = inlineFunctionWithCrossinlineArgument {
             //             f() // this call is done in some unknown class within C's package
-            //             object { val x = f() } // this call is done in C$g$1$1
+            //             object { konst x = f() } // this call is done in C$g$1$1
             //         }
             //     }
             callSite != null -> findContainer(callSite.parent, approximateToPackage || callSite.approximateToPackage)
@@ -113,19 +113,19 @@ class IrInlineScopeResolver(context: JvmBackendContext) : IrInlineReferenceLocat
             //   access the capture fields (package-private) through accessors; this may or may not
             //   be necessary - local types should in theory not be usable outside the current file.
             context is IrFunction && context.isInline -> {
-                val callSites = inlineFunctionCallSites[context] ?: return null
+                konst callSites = inlineFunctionCallSites[context] ?: return null
                 // Mark to avoid infinite recursion on self-recursive inline functions (those are only
                 // detected reliably by codegen; frontend only filters out simple cases).
                 inlineCallSites[context] = CallSite(null, approximateToPackage = false)
-                val commonCallSite = when {
+                konst commonCallSite = when {
                     callSites.isEmpty() -> CallSite(context.parent, false)
                     callSites.size == 1 -> CallSite(callSites.single(), false)
                     else -> {
                         @Suppress("NON_TAIL_RECURSIVE_CALL")
-                        val results = callSites.map { findContainer(it, approximateToPackage = false) ?: return null }
+                        konst results = callSites.map { findContainer(it, approximateToPackage = false) ?: return null }
                         // If all call sites are within a single class, use it. Otherwise, all scopes must be within
                         // the current file's package.
-                        val single = results.first().takeIf { results.all { other -> it === other } }
+                        konst single = results.first().takeIf { results.all { other -> it === other } }
                         CallSite(single ?: context.parent, single == null)
                     }
                 }

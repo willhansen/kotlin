@@ -16,9 +16,9 @@ import java.io.File
 import java.io.FileWriter
 
 internal class RangesGenerator private constructor(
-    private val outputFile: File,
-    private val rangesBuilder: RangesBuilder,
-    private val rangesWriter: RangesWriter,
+    private konst outputFile: File,
+    private konst rangesBuilder: RangesBuilder,
+    private konst rangesWriter: RangesWriter,
 ) {
 
     init {
@@ -30,7 +30,7 @@ internal class RangesGenerator private constructor(
     }
 
     fun generate() {
-        val (rangeStart, rangeEnd, rangeCategory) = rangesBuilder.build()
+        konst (rangeStart, rangeEnd, rangeCategory) = rangesBuilder.build()
 
         FileWriter(outputFile).use { writer ->
             writer.writeHeader(outputFile, "kotlin.text")
@@ -43,30 +43,30 @@ internal class RangesGenerator private constructor(
 
     companion object {
         fun forCharCategory(outputFile: File, target: KotlinTarget): RangesGenerator {
-            val rangesBuilder = CharCategoryRangesBuilder()
-            val rangesWriter = RangesWritingStrategy.of(target, "Category").let {
+            konst rangesBuilder = CharCategoryRangesBuilder()
+            konst rangesWriter = RangesWritingStrategy.of(target, "Category").let {
                 if (target.platform == Platform.JS) VarLenBase64CategoryRangesWriter(it) else CategoryRangesWriter(it)
             }
             return RangesGenerator(outputFile, rangesBuilder, rangesWriter)
         }
 
         fun forLetter(outputFile: File, target: KotlinTarget): RangesGenerator {
-            val rangesBuilder = LetterRangesBuilder()
-            val rangesWriter = RangesWritingStrategy.of(target, "Letter").let {
+            konst rangesBuilder = LetterRangesBuilder()
+            konst rangesWriter = RangesWritingStrategy.of(target, "Letter").let {
                 if (target.platform == Platform.JS) VarLenBase64LetterRangesWriter(it) else LetterRangesWriter(it)
             }
             return RangesGenerator(outputFile, rangesBuilder, rangesWriter)
         }
 
         fun forDigit(outputFile: File, target: KotlinTarget): RangesGenerator {
-            val rangesBuilder = DigitRangesBuilder()
-            val rangesWriter = DigitRangesWriter(RangesWritingStrategy.of(target, "Digit"))
+            konst rangesBuilder = DigitRangesBuilder()
+            konst rangesWriter = DigitRangesWriter(RangesWritingStrategy.of(target, "Digit"))
             return RangesGenerator(outputFile, rangesBuilder, rangesWriter)
         }
 
         fun forWhitespace(outputFile: File): RangesGenerator {
-            val rangesBuilder = WhitespaceRangesBuilder()
-            val rangesWriter = WhitespaceRangesWriter()
+            konst rangesBuilder = WhitespaceRangesBuilder()
+            konst rangesWriter = WhitespaceRangesWriter()
             return RangesGenerator(outputFile, rangesBuilder, rangesWriter)
         }
     }

@@ -13,31 +13,31 @@ abstract enum class X : Enum<X> {
 
     }
 
-    val value2: String
+    konst konstue2: String
       field = "OK"
       get
 
-    override val value: Function0<String>
+    override konst konstue: Function0<String>
       field = local fun <anonymous>(): String {
-        return <this>.<get-value2>()
+        return <this>.<get-konstue2>()
       }
 
       override get
 
   }
 
-  abstract val value: Function0<String>
+  abstract konst konstue: Function0<String>
     abstract get
 
-  fun values(): Array<X> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<X> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): X /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): X /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<X>
+  konst entries: EnumEntries<X>
     get(): EnumEntries<X> /* Synthetic body for ENUM_ENTRIES */
 
 }
 
 fun box(): String {
-  return X.B.<get-value>().invoke()
+  return X.B.<get-konstue>().invoke()
 }

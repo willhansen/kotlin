@@ -1,5 +1,5 @@
 // WITH_STDLIB
-data class Data(val x: String, val y: Int)
+data class Data(konst x: String, konst y: Int)
 
 suspend fun test() {
     foo(Data("A", 1)) { (x_param, y_param) ->

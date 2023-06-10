@@ -2,7 +2,7 @@
 
 import kotlin.test.assertEquals
 
-class C(val expected: Int) {
+class C(konst expected: Int) {
     fun memberVararg(i: Int, vararg s: String) {
         assertEquals(expected, i)
         assertEquals(0, s.size)

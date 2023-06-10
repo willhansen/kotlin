@@ -38,36 +38,36 @@ import kotlin.test.assertNull
 
 class KotlinJavacBasedClassFinderTest : KotlinTestWithEnvironmentManagement() {
     fun testAbsentClass() {
-        val tmpdir = KotlinTestUtils.tmpDirForTest(this)
+        konst tmpdir = KotlinTestUtils.tmpDirForTest(this)
 
-        val environment = createEnvironment(tmpdir)
-        val project = environment.project
+        konst environment = createEnvironment(tmpdir)
+        konst project = environment.project
 
-        val classFinder = createClassFinder(project)
+        konst classFinder = createClassFinder(project)
 
-        val className = "test.A.B.D"
+        konst className = "test.A.B.D"
 
-        val found = classFinder.findClass(ClassId.topLevel(FqName(className)))
+        konst found = classFinder.findClass(ClassId.topLevel(FqName(className)))
         assertNull(found, "Class is expected to be null, there should be no exceptions too.")
     }
 
     fun testNestedClass() {
-        val tmpdir = KotlinTestUtils.tmpDirForTest(this)
+        konst tmpdir = KotlinTestUtils.tmpDirForTest(this)
         KotlinTestUtils.compileKotlinWithJava(
                 listOf(), listOf(File("compiler/testData/kotlinClassFinder/nestedClass.kt")), tmpdir, testRootDisposable, null
         )
 
-        val environment = createEnvironment(tmpdir)
-        val project = environment.project
+        konst environment = createEnvironment(tmpdir)
+        konst project = environment.project
 
-        val classFinder = createClassFinder(project)
+        konst classFinder = createClassFinder(project)
 
-        val className = "test.A.B.C"
-        val classId = ClassId(FqName("test"), FqName("A.B.C"), false)
-        val found = classFinder.findClass(classId)
+        konst className = "test.A.B.C"
+        konst classId = ClassId(FqName("test"), FqName("A.B.C"), false)
+        konst found = classFinder.findClass(classId)
         assertNotNull(found, "Class not found for $className")
 
-        val binaryClass = VirtualFileFinder.SERVICE.getInstance(project).findKotlinClass(found, JvmMetadataVersion.INSTANCE)
+        konst binaryClass = VirtualFileFinder.SERVICE.getInstance(project).findKotlinClass(found, JvmMetadataVersion.INSTANCE)
         assertNotNull(binaryClass, "No binary class for $className")
 
         assertEquals("test/A.B.C", binaryClass.classId.toString())
@@ -80,11 +80,11 @@ class KotlinJavacBasedClassFinderTest : KotlinTestWithEnvironmentManagement() {
         }
         setScope(GlobalSearchScope.allScope(project))
 
-        val javacField = this::class.java.getDeclaredField("javac")
+        konst javacField = this::class.java.getDeclaredField("javac")
         javacField.isAccessible = true
         javacField.set(this, JavacWrapper.getInstance(project))
 
-        val javaSearchScopeField = this::class.java.superclass.getDeclaredField("javaSearchScope")
+        konst javaSearchScopeField = this::class.java.superclass.getDeclaredField("javaSearchScope")
         javaSearchScopeField.isAccessible = true
         javaSearchScopeField.set(this, GlobalSearchScope.allScope(project))
     }

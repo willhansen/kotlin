@@ -17,11 +17,11 @@ package a.b.c
 @annArray(kotlin.arrayOf("a"))
 fun test() = 1
 
-annotation class ann1(val p: Deprecated = kotlin.Deprecated("aaa"))
-annotation class ann2(val p: ann1 = a.b.c.ann1())
-annotation class ann3(val p: A.IAnn = A.IAnn(), val p2: A.IAnn = a.b.c.A.IAnn())
+annotation class ann1(konst p: Deprecated = kotlin.Deprecated("aaa"))
+annotation class ann2(konst p: ann1 = a.b.c.ann1())
+annotation class ann3(konst p: A.IAnn = A.IAnn(), konst p2: A.IAnn = a.b.c.A.IAnn())
 
-annotation class annArray(val p: Array<String> = kotlin.arrayOf("a"))
+annotation class annArray(konst p: Array<String> = kotlin.arrayOf("a"))
 
 class A {
     annotation class IAnn

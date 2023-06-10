@@ -1,6 +1,6 @@
 // LANGUAGE: +WarnAboutNonExhaustiveWhenOnAlgebraicTypes
 // See also: KT-11998
-data class My(val x: Boolean?)
+data class My(konst x: Boolean?)
 
 fun doIt() {}
 

@@ -33,14 +33,14 @@ import kotlin.system.measureTimeMillis
 //Switch back to proper BuildService as soon as this issue is fixed
 class BuildReportsService {
 
-    private val log = Logging.getLogger(this.javaClass)
-    private val loggerAdapter = GradleLoggerAdapter(log)
+    private konst log = Logging.getLogger(this.javaClass)
+    private konst loggerAdapter = GradleLoggerAdapter(log)
 
-    private val startTime = System.nanoTime()
-    private val buildUuid = UUID.randomUUID().toString()
-    private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
+    private konst startTime = System.nanoTime()
+    private konst buildUuid = UUID.randomUUID().toString()
+    private konst executorService: ExecutorService = Executors.newSingleThreadExecutor()
 
-    private val tags = LinkedHashSet<StatTag>()
+    private konst tags = LinkedHashSet<StatTag>()
     private var customValues = 0 // doesn't need to be thread-safe
 
     init {
@@ -52,13 +52,13 @@ class BuildReportsService {
         failureMessages: List<String>,
         parameters: BuildReportParameters
     ) {
-        val buildData = BuildExecutionData(
+        konst buildData = BuildExecutionData(
             startParameters = parameters.startParameters,
             failureMessages = failureMessages,
             buildOperationRecord = buildOperationRecords.sortedBy { it.startTimeMs }
         )
 
-        val reportingSettings = parameters.reportingSettings
+        konst reportingSettings = parameters.reportingSettings
 
         reportingSettings.httpReportSettings?.also {
             executorService.submit { reportBuildFinish(parameters) }
@@ -117,10 +117,10 @@ class BuildReportsService {
     }
 
     private fun reportBuildFinish(parameters: BuildReportParameters) {
-        val httpReportSettings = parameters.reportingSettings.httpReportSettings ?: return
+        konst httpReportSettings = parameters.reportingSettings.httpReportSettings ?: return
 
-        val branchName = if (httpReportSettings.includeGitBranchName) {
-            val process = ProcessBuilder("git", "rev-parse", "--abbrev-ref", "HEAD")
+        konst branchName = if (httpReportSettings.includeGitBranchName) {
+            konst process = ProcessBuilder("git", "rev-parse", "--abbrev-ref", "HEAD")
                 .directory(parameters.projectDir)
                 .start().also {
                     it.waitFor(5, TimeUnit.SECONDS)
@@ -128,7 +128,7 @@ class BuildReportsService {
             process.inputStream.reader().readText()
         } else "is not set"
 
-        val buildFinishData = BuildFinishStatisticsData(
+        konst buildFinishData = BuildFinishStatisticsData(
             projectName = parameters.projectName,
             startParameters = parameters.startParameters
                 .includeVerboseEnvironment(parameters.reportingSettings.httpReportSettings.verboseEnvironment),
@@ -164,7 +164,7 @@ class BuildReportsService {
         parameters: BuildReportParameters
     ) {
         parameters.httpService?.also { httpService ->
-            val data =
+            konst data =
                 prepareData(
                     event,
                     parameters.projectName,
@@ -190,9 +190,9 @@ class BuildReportsService {
         parameters: BuildReportParameters,
         buildScanExtension: BuildScanExtensionHolder
     ) {
-        val buildScanSettings = parameters.reportingSettings.buildScanReportSettings ?: return
+        konst buildScanSettings = parameters.reportingSettings.buildScanReportSettings ?: return
 
-        val (collectDataDuration, compileStatData) = measureTimeMillisWithResult {
+        konst (collectDataDuration, compileStatData) = measureTimeMillisWithResult {
             prepareData(
                 event,
                 parameters.projectName, buildUuid, parameters.label,
@@ -213,9 +213,9 @@ class BuildReportsService {
         parameters: BuildReportParameters,
         buildScanExtension: BuildScanExtensionHolder
     ) {
-        val buildScanSettings = parameters.reportingSettings.buildScanReportSettings ?: return
+        konst buildScanSettings = parameters.reportingSettings.buildScanReportSettings ?: return
 
-        val (collectDataDuration, compileStatData) = measureTimeMillisWithResult {
+        konst (collectDataDuration, compileStatData) = measureTimeMillisWithResult {
             transformOperationRecordsToCompileStatisticsData(
                 buildOperationRecords,
                 parameters,
@@ -231,7 +231,7 @@ class BuildReportsService {
     }
 
     private fun addBuildScanReport(data: CompileStatisticsData, customValuesLimit: Int, buildScan: BuildScanExtensionHolder) {
-        val elapsedTime = measureTimeMillis {
+        konst elapsedTime = measureTimeMillis {
             tags.addAll(data.tags)
             if (customValues < customValuesLimit) {
                 readableString(data).forEach {
@@ -239,13 +239,13 @@ class BuildReportsService {
                         addBuildScanValue(buildScan, data, it)
                     } else {
                         log.debug(
-                            "Can't add any more custom values into build scan." +
-                                    " Statistic data for ${data.taskName} was cut due to custom values limit."
+                            "Can't add any more custom konstues into build scan." +
+                                    " Statistic data for ${data.taskName} was cut due to custom konstues limit."
                         )
                     }
                 }
             } else {
-                log.debug("Can't add any more custom values into build scan.")
+                log.debug("Can't add any more custom konstues into build scan.")
             }
         }
 
@@ -257,14 +257,14 @@ class BuildReportsService {
         data: CompileStatisticsData,
         customValue: String
     ) {
-        buildScan.buildScan.value(data.taskName, customValue)
+        buildScan.buildScan.konstue(data.taskName, customValue)
         customValues++
     }
 
     private fun reportTryK2ToConsole(
         data: BuildExecutionData
     ) {
-        val tasksData = data.buildOperationRecord
+        konst tasksData = data.buildOperationRecord
             .filterIsInstance<TaskRecord>()
             .filter {
                 // Filtering by only KGP tasks and by those that actually do compilation
@@ -275,11 +275,11 @@ class BuildReportsService {
             log.warn("No Kotlin compilation tasks have been run")
             log.warn("#####")
         } else {
-            val tasksCountWithKotlin2 = tasksData.count {
+            konst tasksCountWithKotlin2 = tasksData.count {
                 it.kotlinLanguageVersion != null && it.kotlinLanguageVersion >= KotlinVersion.KOTLIN_2_0
             }
-            val taskWithK2Percent = (tasksCountWithKotlin2 * 100) / tasksData.count()
-            val statsData = tasksData.map { it.path to it.kotlinLanguageVersion?.version }
+            konst taskWithK2Percent = (tasksCountWithKotlin2 * 100) / tasksData.count()
+            konst statsData = tasksData.map { it.path to it.kotlinLanguageVersion?.version }
             statsData.forEach { record ->
                 log.warn("${record.first}: ${record.second} language version")
             }
@@ -290,7 +290,7 @@ class BuildReportsService {
     }
 
     private fun readableString(data: CompileStatisticsData): List<String> {
-        val readableString = StringBuilder()
+        konst readableString = StringBuilder()
         if (data.nonIncrementalAttributes.isEmpty()) {
             readableString.append("Incremental build; ")
             data.changes.joinTo(readableString, prefix = "Changes: [", postfix = "]; ") { it.substringAfterLast(File.separator) }
@@ -306,13 +306,13 @@ class BuildReportsService {
             readableString.append("Kotlin language version: $it; ")
         }
 
-        val timeData =
-            data.buildTimesMetrics.map { (key, value) -> "${key.readableString}: ${value}ms" } //sometimes it is better to have separate variable to be able debug
-        val perfData = data.performanceMetrics.map { (key, value) ->
+        konst timeData =
+            data.buildTimesMetrics.map { (key, konstue) -> "${key.readableString}: ${konstue}ms" } //sometimes it is better to have separate variable to be able debug
+        konst perfData = data.performanceMetrics.map { (key, konstue) ->
             when (key.type) {
-                ValueType.BYTES -> "${key.readableString}: ${formatSize(value)}"
-                ValueType.MILLISECONDS -> DATE_FORMATTER.format(value)
-                else -> "${key.readableString}: $value"
+                ValueType.BYTES -> "${key.readableString}: ${formatSize(konstue)}"
+                ValueType.MILLISECONDS -> DATE_FORMATTER.format(konstue)
+                else -> "${key.readableString}: $konstue"
             }
         }
         timeData.union(perfData).joinTo(readableString, ",", "Performance: [", "]")
@@ -321,10 +321,10 @@ class BuildReportsService {
     }
 
     private fun splitStringIfNeed(str: String, lengthLimit: Int): List<String> {
-        val splattedString = ArrayList<String>()
+        konst splattedString = ArrayList<String>()
         var tempStr = str
         while (tempStr.length > lengthLimit) {
-            val subSequence = tempStr.substring(lengthLimit)
+            konst subSequence = tempStr.substring(lengthLimit)
             var index = subSequence.lastIndexOf(';')
             if (index == -1) {
                 index = subSequence.lastIndexOf(',')
@@ -364,8 +364,8 @@ class BuildReportsService {
     }
 
     private fun replaceWithCombinedTag(firstTag: StatTag, secondTag: StatTag, combinedTag: StatTag) {
-        val containsFirstTag = tags.remove(firstTag)
-        val containsSecondTag = tags.remove(secondTag)
+        konst containsFirstTag = tags.remove(firstTag)
+        konst containsSecondTag = tags.remove(secondTag)
         when {
             containsFirstTag && containsSecondTag -> tags.add(combinedTag)
             containsFirstTag -> tags.add(firstTag)
@@ -375,20 +375,20 @@ class BuildReportsService {
 
     companion object {
 
-        const val CUSTOM_VALUE_LENGTH_LIMIT = 100_000
-        private val DATE_FORMATTER = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        const konst CUSTOM_VALUE_LENGTH_LIMIT = 100_000
+        private konst DATE_FORMATTER = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 
         fun getStartParameters(project: Project) = project.gradle.startParameter.let {
             BuildStartParameters(
                 tasks = it.taskRequests.flatMap { it.args },
                 excludedTasks = it.excludedTaskNames,
                 currentDir = it.currentDir.path,
-                projectProperties = it.projectProperties.map { (key, value) -> "$key: $value" },
-                systemProperties = it.systemPropertiesArgs.map { (key, value) -> "$key: $value" },
+                projectProperties = it.projectProperties.map { (key, konstue) -> "$key: $konstue" },
+                systemProperties = it.systemPropertiesArgs.map { (key, konstue) -> "$key: $konstue" },
             )
         }
 
-        val hostName: String? = try {
+        konst hostName: String? = try {
             InetAddress.getLocalHost().hostName
         } catch (_: Exception) {
             //do nothing
@@ -409,13 +409,13 @@ enum class TaskExecutionState {
 }
 
 data class BuildReportParameters(
-    val startParameters: BuildStartParameters,
-    val reportingSettings: ReportingSettings,
-    val httpService: HttpReportService?,
+    konst startParameters: BuildStartParameters,
+    konst reportingSettings: ReportingSettings,
+    konst httpService: HttpReportService?,
 
-    val projectDir: File,
-    val label: String?,
-    val projectName: String,
-    val kotlinVersion: String,
-    val additionalTags: Set<StatTag>
+    konst projectDir: File,
+    konst label: String?,
+    konst projectName: String,
+    konst kotlinVersion: String,
+    konst additionalTags: Set<StatTag>
 )

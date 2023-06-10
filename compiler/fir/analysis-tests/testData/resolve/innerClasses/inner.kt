@@ -6,7 +6,7 @@ class Owner {
     }
 
     fun bar() {
-        val i = Inner()
+        konst i = Inner()
         i.baz()
     }
 
@@ -19,7 +19,7 @@ class Owner {
         }
 
         fun gau() {
-            val o = Owner()
+            konst o = Owner()
             o.foo()
             foo()
             this@Owner.foo()
@@ -29,10 +29,10 @@ class Owner {
 }
 
 fun test() {
-    val o = Owner()
+    konst o = Owner()
     o.foo()
-    val err = Owner.<!RESOLUTION_TO_CLASSIFIER!>Inner<!>()
+    konst err = Owner.<!RESOLUTION_TO_CLASSIFIER!>Inner<!>()
     err.<!UNRESOLVED_REFERENCE!>baz<!>()
-    val i = o.Inner()
+    konst i = o.Inner()
     i.gau()
 }

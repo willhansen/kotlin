@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R(val x: Any)
+konstue class R(konst x: Any)
 
 fun useR(r: R) {
     if (r.x as String != "OK") throw AssertionError("$r")

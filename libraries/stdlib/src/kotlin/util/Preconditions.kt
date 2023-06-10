@@ -11,125 +11,125 @@ package kotlin
 import kotlin.contracts.contract
 
 /**
- * Throws an [IllegalArgumentException] if the [value] is false.
+ * Throws an [IllegalArgumentException] if the [konstue] is false.
  *
  * @sample samples.misc.Preconditions.failRequireWithLazyMessage
  */
 @kotlin.internal.InlineOnly
-public inline fun require(value: Boolean): Unit {
+public inline fun require(konstue: Boolean): Unit {
     contract {
-        returns() implies value
+        returns() implies konstue
     }
-    require(value) { "Failed requirement." }
+    require(konstue) { "Failed requirement." }
 }
 
 /**
- * Throws an [IllegalArgumentException] with the result of calling [lazyMessage] if the [value] is false.
+ * Throws an [IllegalArgumentException] with the result of calling [lazyMessage] if the [konstue] is false.
  *
  * @sample samples.misc.Preconditions.failRequireWithLazyMessage
  */
 @kotlin.internal.InlineOnly
-public inline fun require(value: Boolean, lazyMessage: () -> Any): Unit {
+public inline fun require(konstue: Boolean, lazyMessage: () -> Any): Unit {
     contract {
-        returns() implies value
+        returns() implies konstue
     }
-    if (!value) {
-        val message = lazyMessage()
+    if (!konstue) {
+        konst message = lazyMessage()
         throw IllegalArgumentException(message.toString())
     }
 }
 
 /**
- * Throws an [IllegalArgumentException] if the [value] is null. Otherwise returns the not null value.
+ * Throws an [IllegalArgumentException] if the [konstue] is null. Otherwise returns the not null konstue.
  */
 @kotlin.internal.InlineOnly
-public inline fun <T : Any> requireNotNull(value: T?): T {
+public inline fun <T : Any> requireNotNull(konstue: T?): T {
     contract {
-        returns() implies (value != null)
+        returns() implies (konstue != null)
     }
-    return requireNotNull(value) { "Required value was null." }
+    return requireNotNull(konstue) { "Required konstue was null." }
 }
 
 /**
- * Throws an [IllegalArgumentException] with the result of calling [lazyMessage] if the [value] is null. Otherwise
- * returns the not null value.
+ * Throws an [IllegalArgumentException] with the result of calling [lazyMessage] if the [konstue] is null. Otherwise
+ * returns the not null konstue.
  *
  * @sample samples.misc.Preconditions.failRequireNotNullWithLazyMessage
  */
 @kotlin.internal.InlineOnly
-public inline fun <T : Any> requireNotNull(value: T?, lazyMessage: () -> Any): T {
+public inline fun <T : Any> requireNotNull(konstue: T?, lazyMessage: () -> Any): T {
     contract {
-        returns() implies (value != null)
+        returns() implies (konstue != null)
     }
 
-    if (value == null) {
-        val message = lazyMessage()
+    if (konstue == null) {
+        konst message = lazyMessage()
         throw IllegalArgumentException(message.toString())
     } else {
-        return value
+        return konstue
     }
 }
 
 /**
- * Throws an [IllegalStateException] if the [value] is false.
+ * Throws an [IllegalStateException] if the [konstue] is false.
  *
  * @sample samples.misc.Preconditions.failCheckWithLazyMessage
  */
 @kotlin.internal.InlineOnly
-public inline fun check(value: Boolean): Unit {
+public inline fun check(konstue: Boolean): Unit {
     contract {
-        returns() implies value
+        returns() implies konstue
     }
-    check(value) { "Check failed." }
+    check(konstue) { "Check failed." }
 }
 
 /**
- * Throws an [IllegalStateException] with the result of calling [lazyMessage] if the [value] is false.
+ * Throws an [IllegalStateException] with the result of calling [lazyMessage] if the [konstue] is false.
  *
  * @sample samples.misc.Preconditions.failCheckWithLazyMessage
  */
 @kotlin.internal.InlineOnly
-public inline fun check(value: Boolean, lazyMessage: () -> Any): Unit {
+public inline fun check(konstue: Boolean, lazyMessage: () -> Any): Unit {
     contract {
-        returns() implies value
+        returns() implies konstue
     }
-    if (!value) {
-        val message = lazyMessage()
+    if (!konstue) {
+        konst message = lazyMessage()
         throw IllegalStateException(message.toString())
     }
 }
 
 /**
- * Throws an [IllegalStateException] if the [value] is null. Otherwise
- * returns the not null value.
+ * Throws an [IllegalStateException] if the [konstue] is null. Otherwise
+ * returns the not null konstue.
  *
  * @sample samples.misc.Preconditions.failCheckWithLazyMessage
  */
 @kotlin.internal.InlineOnly
-public inline fun <T : Any> checkNotNull(value: T?): T {
+public inline fun <T : Any> checkNotNull(konstue: T?): T {
     contract {
-        returns() implies (value != null)
+        returns() implies (konstue != null)
     }
-    return checkNotNull(value) { "Required value was null." }
+    return checkNotNull(konstue) { "Required konstue was null." }
 }
 
 /**
- * Throws an [IllegalStateException] with the result of calling [lazyMessage]  if the [value] is null. Otherwise
- * returns the not null value.
+ * Throws an [IllegalStateException] with the result of calling [lazyMessage]  if the [konstue] is null. Otherwise
+ * returns the not null konstue.
  *
  * @sample samples.misc.Preconditions.failCheckWithLazyMessage
  */
 @kotlin.internal.InlineOnly
-public inline fun <T : Any> checkNotNull(value: T?, lazyMessage: () -> Any): T {
+public inline fun <T : Any> checkNotNull(konstue: T?, lazyMessage: () -> Any): T {
     contract {
-        returns() implies (value != null)
+        returns() implies (konstue != null)
     }
 
-    if (value == null) {
-        val message = lazyMessage()
+    if (konstue == null) {
+        konst message = lazyMessage()
         throw IllegalStateException(message.toString())
     } else {
-        return value
+        return konstue
     }
 }
 

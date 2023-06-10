@@ -2,17 +2,17 @@
 class Outer1 {
     class Nested
 
-    class C1 { val b = Nested() }
-    class C2(val b: Any = Nested())
-    inner class C3 { val b = Nested() }
-    inner class C4(val b: Any = Nested())
+    class C1 { konst b = Nested() }
+    class C2(konst b: Any = Nested())
+    inner class C3 { konst b = Nested() }
+    inner class C4(konst b: Any = Nested())
 
     inner class Inner
 
-    class C5 { val b = <!RESOLUTION_TO_CLASSIFIER!>Inner<!>() }
-    class C6(val b: Any = <!RESOLUTION_TO_CLASSIFIER!>Inner<!>())
-    inner class C7 { val b = Inner() }
-    inner class C8(val b: Any = Inner())
+    class C5 { konst b = <!RESOLUTION_TO_CLASSIFIER!>Inner<!>() }
+    class C6(konst b: Any = <!RESOLUTION_TO_CLASSIFIER!>Inner<!>())
+    inner class C7 { konst b = Inner() }
+    inner class C8(konst b: Any = Inner())
 }
 
 

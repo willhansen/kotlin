@@ -6,8 +6,8 @@ class Host {
     abstract class B : A()
 
     abstract class A {
-        private val value = "OK"
-        fun f() = value
+        private konst konstue = "OK"
+        fun f() = konstue
     }
 }
 
@@ -25,7 +25,7 @@ class Host {
     abstract class B : A()
 
     abstract class A {
-        private val value = "OK"
-        fun f() = value
+        private konst konstue = "OK"
+        fun f() = konstue
     }
 }

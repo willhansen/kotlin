@@ -12,7 +12,7 @@
 
 /*
  * rint(x)
- * Return x rounded to integral value according to the prevailing
+ * Return x rounded to integral konstue according to the prevailing
  * rounding mode.
  * Method:
  *	Using floating addition.
@@ -22,7 +22,7 @@
 
 package kotlin.math.fdlibm
 
-private val TWO52 = doubleArrayOf(
+private konst TWO52 = doubleArrayOf(
     4.50359962737049600000e+15, /* 0x43300000, 0x00000000 */
     -4.50359962737049600000e+15, /* 0xC3300000, 0x00000000 */
 )

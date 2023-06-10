@@ -5,6 +5,6 @@
 
 fun foo(body: () -> String): String = body()
 
-val res = foo { stringVar1.drop(5) }
+konst res = foo { stringVar1.drop(5) }
 
 // expected: res=adabra

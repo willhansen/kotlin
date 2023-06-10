@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 class Fir2IrBuiltIns(
-    private val components: Fir2IrComponents,
-    private val provider: Fir2IrSpecialSymbolProvider
+    private konst components: Fir2IrComponents,
+    private konst provider: Fir2IrSpecialSymbolProvider
 ) : Fir2IrComponents by components {
     init {
         provider.initComponents(components)
@@ -28,28 +28,28 @@ class Fir2IrBuiltIns(
 
     // ---------------------- special annotations ----------------------
 
-    private val enhancedNullabilityAnnotationIrSymbol by lazy {
+    private konst enhancedNullabilityAnnotationIrSymbol by lazy {
         specialAnnotationIrSymbolById(StandardClassIds.Annotations.EnhancedNullability)
     }
 
     internal fun enhancedNullabilityAnnotationConstructorCall(): IrConstructorCall? =
         enhancedNullabilityAnnotationIrSymbol?.toConstructorCall()
 
-    private val flexibleNullabilityAnnotationSymbol by lazy {
+    private konst flexibleNullabilityAnnotationSymbol by lazy {
         specialAnnotationIrSymbolById(StandardClassIds.Annotations.FlexibleNullability)
     }
 
     internal fun flexibleNullabilityAnnotationConstructorCall(): IrConstructorCall? =
         flexibleNullabilityAnnotationSymbol?.toConstructorCall()
 
-    private val flexibleMutabilityAnnotationSymbol by lazy {
+    private konst flexibleMutabilityAnnotationSymbol by lazy {
         specialAnnotationIrSymbolById(StandardClassIds.Annotations.FlexibleMutability)
     }
 
     internal fun flexibleMutabilityAnnotationConstructorCall(): IrConstructorCall? =
         flexibleMutabilityAnnotationSymbol?.toConstructorCall()
 
-    private val rawTypeAnnotationSymbol by lazy {
+    private konst rawTypeAnnotationSymbol by lazy {
         specialAnnotationIrSymbolById(StandardClassIds.Annotations.RawTypeAnnotation)
     }
 
@@ -58,11 +58,11 @@ class Fir2IrBuiltIns(
 
     // ---------------------- regular annotations ----------------------
 
-    private val extensionFunctionTypeAnnotationFirSymbol by lazy {
+    private konst extensionFunctionTypeAnnotationFirSymbol by lazy {
         regularAnnotationFirSymbolById(StandardClassIds.Annotations.ExtensionFunctionType)
     }
 
-    private val extensionFunctionTypeAnnotationSymbol by lazy {
+    private konst extensionFunctionTypeAnnotationSymbol by lazy {
         extensionFunctionTypeAnnotationFirSymbol?.toSymbol(ConversionTypeContext.DEFAULT) as? IrClassSymbol
     }
 
@@ -80,10 +80,10 @@ class Fir2IrBuiltIns(
     }
 
     private fun IrClassSymbol.toConstructorCall(firSymbol: FirRegularClassSymbol? = null): IrConstructorCallImpl? {
-        val constructorSymbol = if (firSymbol == null) {
+        konst constructorSymbol = if (firSymbol == null) {
             owner.declarations.firstIsInstance<IrConstructor>().symbol
         } else {
-            val firConstructorSymbol = firSymbol.unsubstitutedScope(
+            konst firConstructorSymbol = firSymbol.unsubstitutedScope(
                 session,
                 scopeSession,
                 withForcedTypeCalculator = true,

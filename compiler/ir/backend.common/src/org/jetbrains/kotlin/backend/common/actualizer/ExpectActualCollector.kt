@@ -18,29 +18,29 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.name.FqName
 
 internal class ExpectActualCollector(
-    private val mainFragment: IrModuleFragment,
-    private val dependentFragments: List<IrModuleFragment>,
-    private val diagnosticsReporter: KtDiagnosticReporterWithImplicitIrBasedContext
+    private konst mainFragment: IrModuleFragment,
+    private konst dependentFragments: List<IrModuleFragment>,
+    private konst diagnosticsReporter: KtDiagnosticReporterWithImplicitIrBasedContext
 ) {
     fun collect(): MutableMap<IrSymbol, IrSymbol> {
-        val result = mutableMapOf<IrSymbol, IrSymbol>()
+        konst result = mutableMapOf<IrSymbol, IrSymbol>()
         // Collect and link classes at first to make it possible to expand type aliases on the members linking
-        val (actualMembers, expectActualTypeAliasMap) = result.appendExpectActualClassMap()
+        konst (actualMembers, expectActualTypeAliasMap) = result.appendExpectActualClassMap()
         result.appendExpectActualMemberMap(actualMembers, expectActualTypeAliasMap)
         return result
     }
 
     private fun MutableMap<IrSymbol, IrSymbol>.appendExpectActualClassMap(): Pair<List<IrDeclarationBase>, Map<FqName, FqName>> {
-        val actualClasses = mutableMapOf<String, IrClassSymbol>()
+        konst actualClasses = mutableMapOf<String, IrClassSymbol>()
         // There is no list for builtins declarations; that's why they are being collected from typealiases
-        val actualMembers = mutableListOf<IrDeclarationBase>()
-        val expectActualTypeAliasMap = mutableMapOf<FqName, FqName>() // It's used to link members from expect class that have typealias actual
+        konst actualMembers = mutableListOf<IrDeclarationBase>()
+        konst expectActualTypeAliasMap = mutableMapOf<FqName, FqName>() // It's used to link members from expect class that have typealias actual
 
-        val fragmentsWithActuals = dependentFragments.drop(1) + mainFragment
-        val actualClassesAndMembersCollector = ActualClassesAndMembersCollector(actualClasses, actualMembers, expectActualTypeAliasMap)
+        konst fragmentsWithActuals = dependentFragments.drop(1) + mainFragment
+        konst actualClassesAndMembersCollector = ActualClassesAndMembersCollector(actualClasses, actualMembers, expectActualTypeAliasMap)
         fragmentsWithActuals.forEach { actualClassesAndMembersCollector.collect(it) }
 
-        val linkCollector = ClassLinksCollector(this, actualClasses, expectActualTypeAliasMap, diagnosticsReporter)
+        konst linkCollector = ClassLinksCollector(this, actualClasses, expectActualTypeAliasMap, diagnosticsReporter)
         dependentFragments.forEach { linkCollector.visitModuleFragment(it) }
 
         return actualMembers to expectActualTypeAliasMap
@@ -50,22 +50,22 @@ internal class ExpectActualCollector(
         actualMembers: List<IrDeclarationBase>,
         expectActualTypeAliasMap: Map<FqName, FqName>
     ) {
-        val actualMembersMap = mutableMapOf<String, MutableList<IrDeclarationBase>>()
+        konst actualMembersMap = mutableMapOf<String, MutableList<IrDeclarationBase>>()
         for (actualMember in actualMembers) {
             actualMembersMap.getOrPut(generateIrElementFullNameFromExpect(actualMember, expectActualTypeAliasMap)) { mutableListOf() }
                 .add(actualMember)
         }
-        val collector = MemberLinksCollector(this, actualMembersMap, expectActualTypeAliasMap, diagnosticsReporter)
+        konst collector = MemberLinksCollector(this, actualMembersMap, expectActualTypeAliasMap, diagnosticsReporter)
         dependentFragments.forEach { collector.visitModuleFragment(it) }
     }
 }
 
 private class ActualClassesAndMembersCollector(
-    private val actualClasses: MutableMap<String, IrClassSymbol>,
-    private val actualMembers: MutableList<IrDeclarationBase>,
-    private val expectActualTypeAliasMap: MutableMap<FqName, FqName>
+    private konst actualClasses: MutableMap<String, IrClassSymbol>,
+    private konst actualMembers: MutableList<IrDeclarationBase>,
+    private konst expectActualTypeAliasMap: MutableMap<FqName, FqName>
 ) {
-    private val visitedActualClasses = mutableSetOf<IrClass>()
+    private konst visitedActualClasses = mutableSetOf<IrClass>()
 
     fun collect(element: IrElement) {
         when (element) {
@@ -77,7 +77,7 @@ private class ActualClassesAndMembersCollector(
             is IrTypeAlias -> {
                 if (!element.isActual) return
 
-                val expandedTypeSymbol = element.expandedType.classifierOrFail as IrClassSymbol
+                konst expandedTypeSymbol = element.expandedType.classifierOrFail as IrClassSymbol
                 addActualClass(element, expandedTypeSymbol)
                 collect(expandedTypeSymbol.owner)
 
@@ -116,15 +116,15 @@ private class ActualClassesAndMembersCollector(
 }
 
 private class ClassLinksCollector(
-    private val expectActualMap: MutableMap<IrSymbol, IrSymbol>,
-    private val actualClasses: Map<String, IrClassSymbol>,
-    private val expectActualTypeAliasMap: Map<FqName, FqName>,
-    private val diagnosticsReporter: KtDiagnosticReporterWithImplicitIrBasedContext
+    private konst expectActualMap: MutableMap<IrSymbol, IrSymbol>,
+    private konst actualClasses: Map<String, IrClassSymbol>,
+    private konst expectActualTypeAliasMap: Map<FqName, FqName>,
+    private konst diagnosticsReporter: KtDiagnosticReporterWithImplicitIrBasedContext
 ) : IrElementVisitorVoid {
     override fun visitClass(declaration: IrClass) {
         if (!declaration.isExpect) return
 
-        val actualClassSymbol = actualClasses[generateIrElementFullNameFromExpect(declaration, expectActualTypeAliasMap)]
+        konst actualClassSymbol = actualClasses[generateIrElementFullNameFromExpect(declaration, expectActualTypeAliasMap)]
         if (actualClassSymbol != null) {
             expectActualMap[declaration.symbol] = actualClassSymbol
             expectActualMap.appendTypeParametersMap(declaration, actualClassSymbol.owner)
@@ -141,10 +141,10 @@ private class ClassLinksCollector(
 }
 
 private class MemberLinksCollector(
-    private val expectActualMap: MutableMap<IrSymbol, IrSymbol>,
-    private val actualMembers: Map<String, List<IrDeclarationBase>>,
-    private val typeAliasMap: Map<FqName, FqName>,
-    private val diagnosticsReporter: KtDiagnosticReporterWithImplicitIrBasedContext
+    private konst expectActualMap: MutableMap<IrSymbol, IrSymbol>,
+    private konst actualMembers: Map<String, List<IrDeclarationBase>>,
+    private konst typeAliasMap: Map<FqName, FqName>,
+    private konst diagnosticsReporter: KtDiagnosticReporterWithImplicitIrBasedContext
 ) : IrElementVisitorVoid {
     override fun visitFunction(declaration: IrFunction) {
         if (declaration.isExpect) addLink(declaration)
@@ -159,7 +159,7 @@ private class MemberLinksCollector(
     }
 
     private fun addLink(expectDeclaration: IrDeclarationBase) {
-        val actualMemberMatches = actualMembers.getMatches(expectDeclaration, expectActualMap, typeAliasMap)
+        konst actualMemberMatches = actualMembers.getMatches(expectDeclaration, expectActualMap, typeAliasMap)
         when {
             actualMemberMatches.size == 1 -> {
                 expectActualMap.addLink(expectDeclaration, actualMemberMatches.single())

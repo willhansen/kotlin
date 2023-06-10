@@ -1,7 +1,7 @@
 open class A {
     companion object {
         fun foo() {}
-        val D = ""
+        konst D = ""
     }
 
     fun bar() {
@@ -12,7 +12,7 @@ open class A {
 class B {
     companion object : A() {
         fun baz() {}
-        val C = ""
+        konst C = ""
     }
 }
 
@@ -20,7 +20,7 @@ fun test() {
     A.foo()
     B.bar()
     B.baz()
-    val x = A.D
-    val y = B.C
-    val z = B.<!UNRESOLVED_REFERENCE!>D<!>
+    konst x = A.D
+    konst y = B.C
+    konst z = B.<!UNRESOLVED_REFERENCE!>D<!>
 }

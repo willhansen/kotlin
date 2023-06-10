@@ -43,25 +43,25 @@ class ModuleStructureExtractorImpl(
     testServices: TestServices,
     additionalSourceProviders: List<AdditionalSourceProvider>,
     moduleStructureTransformers: List<ModuleStructureTransformer>,
-    private val environmentConfigurators: List<AbstractEnvironmentConfigurator>
+    private konst environmentConfigurators: List<AbstractEnvironmentConfigurator>
 ) : ModuleStructureExtractor(testServices, additionalSourceProviders, moduleStructureTransformers) {
     companion object {
-        private val allowedExtensionsForFiles = listOf(".kt", ".kts", ".java", ".js", ".mjs", ".config")
+        private konst allowedExtensionsForFiles = listOf(".kt", ".kts", ".java", ".js", ".mjs", ".config")
 
         /*
          * ([^()\n]+) module name
          * \((.*?)\) module dependencies
          * (\((.*?)\)(\((.*?)\))?)? module friendDependencies and dependsOnDependencies
          */
-        private val moduleDirectiveRegex = """([^()\n]+)(\((.*?)\)(\((.*?)\)(\((.*?)\))?)?)?""".toRegex()
+        private konst moduleDirectiveRegex = """([^()\n]+)(\((.*?)\)(\((.*?)\)(\((.*?)\))?)?)?""".toRegex()
     }
 
     override fun splitTestDataByModules(
         testDataFileName: String,
         directivesContainer: DirectivesContainer,
     ): TestModuleStructure {
-        val testDataFile = File(testDataFileName)
-        val extractor = ModuleStructureExtractorWorker(listOf(testDataFile), directivesContainer)
+        konst testDataFile = File(testDataFileName)
+        konst extractor = ModuleStructureExtractorWorker(listOf(testDataFile), directivesContainer)
         var result = extractor.splitTestDataByModules()
         for (transformer in moduleStructureTransformers) {
             result = try {
@@ -74,18 +74,18 @@ class ModuleStructureExtractorImpl(
     }
 
     private inner class ModuleStructureExtractorWorker constructor(
-        private val testDataFiles: List<File>,
-        private val directivesContainer: DirectivesContainer,
+        private konst testDataFiles: List<File>,
+        private konst directivesContainer: DirectivesContainer,
     ) {
-        private val assertions: Assertions
+        private konst assertions: Assertions
             get() = testServices.assertions
 
-        private val defaultsProvider: DefaultsProvider
+        private konst defaultsProvider: DefaultsProvider
             get() = testServices.defaultsProvider
 
         private lateinit var currentTestDataFile: File
 
-        private val defaultFileName: String
+        private konst defaultFileName: String
             get() = currentTestDataFile.name
 
         private var currentModuleName: String? = null
@@ -109,16 +109,16 @@ class ModuleStructureExtractorImpl(
 
         private var globalDirectives: RegisteredDirectives? = null
 
-        private val modules = mutableListOf<TestModule>()
+        private konst modules = mutableListOf<TestModule>()
 
-        private val moduleStructureDirectiveBuilder = RegisteredDirectivesParser(ModuleStructureDirectives, assertions)
+        private konst moduleStructureDirectiveBuilder = RegisteredDirectivesParser(ModuleStructureDirectives, assertions)
 
         fun splitTestDataByModules(): TestModuleStructure {
             for (testDataFile in testDataFiles) {
                 currentTestDataFile = testDataFile
-                val lines = testDataFile.readLines()
+                konst lines = testDataFile.readLines()
                 lines.forEachIndexed { lineNumber, line ->
-                    val rawDirective = RegisteredDirectivesParser.parseDirective(line)
+                    konst rawDirective = RegisteredDirectivesParser.parseDirective(line)
                     if (tryParseStructureDirective(rawDirective, lineNumber + 1)) {
                         linesOfCurrentFile.add(line)
                         return@forEachIndexed
@@ -128,30 +128,30 @@ class ModuleStructureExtractorImpl(
                 }
             }
             finishModule(lineNumber = -1)
-            val sortedModules = sortModules(modules)
+            konst sortedModules = sortModules(modules)
             checkCycles(modules)
             return TestModuleStructureImpl(sortedModules, testDataFiles)
         }
 
         private fun sortModules(modules: List<TestModule>): List<TestModule> {
-            val moduleByName = modules.groupBy { it.name }.mapValues { (name, modules) ->
+            konst moduleByName = modules.groupBy { it.name }.mapValues { (name, modules) ->
                 modules.singleOrNull() ?: error("Duplicated modules with name $name")
             }
             return DFS.topologicalOrder(modules) { module ->
                 module.allDependencies.map {
-                    val moduleName = it.moduleName
+                    konst moduleName = it.moduleName
                     moduleByName[moduleName] ?: error("Module \"$moduleName\" not found while observing dependencies of \"${module.name}\"")
                 }
             }.asReversed()
         }
 
         private fun checkCycles(modules: List<TestModule>) {
-            val visited = mutableSetOf<String>()
+            konst visited = mutableSetOf<String>()
             for (module in modules) {
-                val moduleName = module.name
+                konst moduleName = module.name
                 visited.add(moduleName)
                 for (dependency in module.allDependencies) {
-                    val dependencyName = dependency.moduleName
+                    konst dependencyName = dependency.moduleName
                     if (dependencyName == moduleName) {
                         error("Module $moduleName has dependency to itself")
                     }
@@ -167,7 +167,7 @@ class ModuleStructureExtractorImpl(
          */
         private fun tryParseStructureDirective(rawDirective: RegisteredDirectivesParser.RawDirective?, lineNumber: Int): Boolean {
             if (rawDirective == null) return false
-            val (directive, values) = moduleStructureDirectiveBuilder.convertToRegisteredDirective(rawDirective) ?: return false
+            konst (directive, konstues) = moduleStructureDirectiveBuilder.convertToRegisteredDirective(rawDirective) ?: return false
             when (directive) {
                 ModuleStructureDirectives.MODULE -> {
                     /*
@@ -178,11 +178,11 @@ class ModuleStructureExtractorImpl(
                     } else {
                         finishGlobalDirectives()
                     }
-                    val (moduleName, dependencies, friends, dependsOn) = splitRawModuleStringToNameAndDependencies(
-                        values.joinToString(separator = " ")
+                    konst (moduleName, dependencies, friends, dependsOn) = splitRawModuleStringToNameAndDependencies(
+                        konstues.joinToString(separator = " ")
                     )
                     currentModuleName = moduleName
-                    val kind = defaultsProvider.defaultDependencyKind
+                    konst kind = defaultsProvider.defaultDependencyKind
                     dependencies.mapTo(dependenciesOfCurrentModule) { name ->
                         DependencyDescription(name, kind, DependencyRelation.RegularDependency)
                     }
@@ -195,9 +195,9 @@ class ModuleStructureExtractorImpl(
                 }
                 ModuleStructureDirectives.DEPENDENCY,
                 ModuleStructureDirectives.DEPENDS_ON -> {
-                    val name = values.first() as String
-                    val kind = values.getOrNull(1)?.let { valueOfOrNull(it as String) } ?: defaultsProvider.defaultDependencyKind
-                    val relation = when (directive) {
+                    konst name = konstues.first() as String
+                    konst kind = konstues.getOrNull(1)?.let { konstueOfOrNull(it as String) } ?: defaultsProvider.defaultDependencyKind
+                    konst relation = when (directive) {
                         ModuleStructureDirectives.DEPENDENCY -> DependencyRelation.RegularDependency
                         ModuleStructureDirectives.DEPENDS_ON -> DependencyRelation.DependsOnDependency
                         else -> error("Should not be here")
@@ -205,7 +205,7 @@ class ModuleStructureExtractorImpl(
                     dependenciesOfCurrentModule.add(DependencyDescription(name, kind, relation))
                 }
                 ModuleStructureDirectives.TARGET_FRONTEND -> {
-                    val name = values.singleOrNull() as? String? ?: assertions.fail {
+                    konst name = konstues.singleOrNull() as? String? ?: assertions.fail {
                         "Target frontend specified incorrectly\nUsage: ${directive.description}"
                     }
                     currentModuleFrontendKind = FrontendKinds.fromString(name) ?: assertions.fail {
@@ -213,7 +213,7 @@ class ModuleStructureExtractorImpl(
                     }
                 }
                 ModuleStructureDirectives.TARGET_BACKEND_KIND -> {
-                    currentModuleTargetBackend = values.single() as TargetBackend
+                    currentModuleTargetBackend = konstues.single() as TargetBackend
                 }
                 ModuleStructureDirectives.FILE -> {
                     if (currentFileName != null) {
@@ -221,7 +221,7 @@ class ModuleStructureExtractorImpl(
                     } else {
                         resetFileCaches()
                     }
-                    currentFileName = (values.first() as String).also(::validateFileName)
+                    currentFileName = (konstues.first() as String).also(::konstidateFileName)
                 }
                 ModuleStructureDirectives.ALLOW_FILES_WITH_SAME_NAMES -> {
                     allowFilesWithSameNames = true
@@ -230,12 +230,12 @@ class ModuleStructureExtractorImpl(
                     if (currentModuleTargetPlatform != null) {
                         assertions.fail { "Target platform already specified twice for module $currentModuleName" }
                     }
-                    val platforms = values.map { (it as TargetPlatformEnum).targetPlatform }
+                    konst platforms = konstues.map { (it as TargetPlatformEnum).targetPlatform }
                     currentModuleTargetPlatform = when (platforms.size) {
                         0 -> assertions.fail { "Target platform specified incorrectly\nUsage: ${directive.description}" }
                         1 -> platforms.single()
                         else -> {
-                            if (TargetPlatformEnum.Common in values) {
+                            if (TargetPlatformEnum.Common in konstues) {
                                 assertions.fail { "You can't specify `Common` platform in combination with others" }
                             }
                             TargetPlatform(platforms.flatMapTo(mutableSetOf()) { it.componentPlatforms })
@@ -247,15 +247,15 @@ class ModuleStructureExtractorImpl(
                     if (currentModuleTargetPlatform != null) {
                         assertions.fail { "Target platform already specified twice for module $currentModuleName" }
                     }
-                    currentModuleTargetPlatform = if (values.size != 1) {
+                    currentModuleTargetPlatform = if (konstues.size != 1) {
                         assertions.fail { "JVM target should be single" }
                     } else {
-                        when (values.single()) {
+                        when (konstues.single()) {
                             "1.6" -> JvmPlatforms.jvm6
                             "1.8" -> JvmPlatforms.jvm8
                             "11" -> JvmPlatforms.jvm11
                             "17" -> JvmPlatforms.jvm17
-                            else -> assertions.fail { "Incorrect value for JVM target" }
+                            else -> assertions.fail { "Incorrect konstue for JVM target" }
                         }
                     }
                     return false // Workaround for FE and FIR
@@ -267,9 +267,9 @@ class ModuleStructureExtractorImpl(
         }
 
         private fun splitRawModuleStringToNameAndDependencies(moduleDirectiveString: String): ModuleNameAndDependencies {
-            val matchResult = moduleDirectiveRegex.matchEntire(moduleDirectiveString)
+            konst matchResult = moduleDirectiveRegex.matchEntire(moduleDirectiveString)
                 ?: error("\"$moduleDirectiveString\" doesn't matches with pattern \"moduleName(dep1, dep2)\"")
-            val (name, _, dependencies, _, friends, _, dependsOn) = matchResult.destructured
+            konst (name, _, dependencies, _, friends, _, dependsOn) = matchResult.destructured
             var dependenciesNames = dependencies.takeIf { it.isNotBlank() }?.split(" ") ?: emptyList()
             globalDirectives?.let { directives ->
                 /*
@@ -281,17 +281,17 @@ class ModuleStructureExtractorImpl(
                     dependenciesNames = dependenciesNames.filter { it != "support" }
                 }
             }
-            val friendsNames = friends.takeIf { it.isNotBlank() }?.split(" ") ?: emptyList()
-            val dependsOnNames = dependsOn.takeIf { it.isNotBlank() }?.split(" ") ?: emptyList()
+            konst friendsNames = friends.takeIf { it.isNotBlank() }?.split(" ") ?: emptyList()
+            konst dependsOnNames = dependsOn.takeIf { it.isNotBlank() }?.split(" ") ?: emptyList()
 
-            val intersection = buildSet {
+            konst intersection = buildSet {
                 addAll(dependenciesNames intersect friendsNames)
                 addAll(dependenciesNames intersect dependsOnNames)
                 addAll(friendsNames intersect dependsOnNames)
             }
             require(intersection.isEmpty()) {
-                val m = if (intersection.size == 1) "module" else "modules"
-                val names = if (intersection.size == 1) "`${intersection.first()}`" else intersection.joinToArrayString()
+                konst m = if (intersection.size == 1) "module" else "modules"
+                konst names = if (intersection.size == 1) "`${intersection.first()}`" else intersection.joinToArrayString()
                 """Module `$name` depends on $m $names with different kinds simultaneously"""
             }
 
@@ -319,7 +319,7 @@ class ModuleStructureExtractorImpl(
                 applicability.forModule && contextIsModule -> return
                 applicability.forFile && contextIsFile -> return
             }
-            val context = buildList {
+            konst context = buildList {
                 if (contextIsGlobal) add("Global")
                 if (contextIsModule) add("Module")
                 if (contextIsFile) add("File")
@@ -329,21 +329,21 @@ class ModuleStructureExtractorImpl(
 
         private fun finishModule(lineNumber: Int) {
             finishFile(lineNumber)
-            val isImplicitModule = currentModuleName == null
-            val moduleDirectives = moduleDirectivesBuilder.build() + testServices.defaultDirectives + globalDirectives
+            konst isImplicitModule = currentModuleName == null
+            konst moduleDirectives = moduleDirectivesBuilder.build() + testServices.defaultDirectives + globalDirectives
             moduleDirectives.forEach { it.checkDirectiveApplicability(contextIsGlobal = isImplicitModule, contextIsModule = true) }
 
-            val targetBackend = currentModuleTargetBackend ?: defaultsProvider.defaultTargetBackend
-            val frontendKind = currentModuleFrontendKind ?: defaultsProvider.defaultFrontend
+            konst targetBackend = currentModuleTargetBackend ?: defaultsProvider.defaultTargetBackend
+            konst frontendKind = currentModuleFrontendKind ?: defaultsProvider.defaultFrontend
 
             currentModuleLanguageVersionSettingsBuilder.configureUsingDirectives(
                 moduleDirectives, environmentConfigurators, targetBackend, useK2 = frontendKind == FrontendKinds.FIR
             )
-            val moduleName = currentModuleName
+            konst moduleName = currentModuleName
                 ?: testServices.defaultDirectives[ModuleStructureDirectives.MODULE].firstOrNull()
                 ?: DEFAULT_MODULE_NAME
-            val targetPlatform = currentModuleTargetPlatform ?: parseModulePlatformByName(moduleName) ?: defaultsProvider.defaultPlatform
-            val testModule = TestModule(
+            konst targetPlatform = currentModuleTargetPlatform ?: parseModulePlatformByName(moduleName) ?: defaultsProvider.defaultPlatform
+            konst testModule = TestModule(
                 name = moduleName,
                 targetPlatform = targetPlatform,
                 targetBackend = targetBackend,
@@ -376,7 +376,7 @@ class ModuleStructureExtractorImpl(
         }
 
         private fun parseModulePlatformByName(moduleName: String): TargetPlatform? {
-            val nameSuffix = moduleName.substringAfterLast("-", "").uppercase()
+            konst nameSuffix = moduleName.substringAfterLast("-", "").uppercase()
             return when {
                 nameSuffix == "COMMON" -> CommonPlatforms.defaultCommonPlatform
                 nameSuffix == "JVM" -> JvmPlatforms.unspecifiedJvmPlatform // TODO(dsavvinov): determine JvmTarget precisely
@@ -388,17 +388,17 @@ class ModuleStructureExtractorImpl(
         }
 
         private fun finishFile(lineNumber: Int) {
-            val actualDefaultFileName = if (currentModuleName == null) {
+            konst actualDefaultFileName = if (currentModuleName == null) {
                 defaultFileName
             } else {
                 "module_${currentModuleName}_$defaultFileName"
             }
-            val filename = currentFileName ?: actualDefaultFileName
+            konst filename = currentFileName ?: actualDefaultFileName
             if (!allowFilesWithSameNames && filesOfCurrentModule.any { it.name == filename }) {
                 error("File with name \"$filename\" already defined in module ${currentModuleName ?: actualDefaultFileName}")
             }
-            val directives = fileDirectivesBuilder?.build()?.onEach { it.checkDirectiveApplicability(contextIsFile = true) }
-            val fileContent = buildString {
+            konst directives = fileDirectivesBuilder?.build()?.onEach { it.checkDirectiveApplicability(contextIsFile = true) }
+            konst fileContent = buildString {
                 for (i in 0 until endLineNumberOfLastFile) {
                     appendLine()
                 }
@@ -450,14 +450,14 @@ class ModuleStructureExtractorImpl(
 
         private fun tryParseRegularDirective(rawDirective: RegisteredDirectivesParser.RawDirective?) {
             if (rawDirective == null) return
-            val parsedDirective = directivesBuilder.convertToRegisteredDirective(rawDirective) ?: return
+            konst parsedDirective = directivesBuilder.convertToRegisteredDirective(rawDirective) ?: return
             directivesBuilder.addParsedDirective(parsedDirective)
         }
 
-        private fun validateFileName(fileName: String) {
+        private fun konstidateFileName(fileName: String) {
             if (!allowedExtensionsForFiles.any { fileName.endsWith(it) }) {
                 assertions.fail {
-                    "Filename $fileName is not valid. Allowed extensions: ${allowedExtensionsForFiles.joinToArrayString()}"
+                    "Filename $fileName is not konstid. Allowed extensions: ${allowedExtensionsForFiles.joinToArrayString()}"
                 }
             }
         }
@@ -468,10 +468,10 @@ class ModuleStructureExtractorImpl(
     }
 
     private data class ModuleNameAndDependencies(
-        val name: String,
-        val dependencies: List<String>,
-        val friends: List<String>,
-        val dependsOn: List<String>
+        konst name: String,
+        konst dependencies: List<String>,
+        konst friends: List<String>,
+        konst dependsOn: List<String>
     )
 }
 
@@ -484,9 +484,9 @@ private operator fun RegisteredDirectives.plus(other: RegisteredDirectives?): Re
     }
 }
 
-inline fun <reified T : Enum<T>> valueOfOrNull(value: String): T? {
+inline fun <reified T : Enum<T>> konstueOfOrNull(konstue: String): T? {
     for (enumValue in enumValues<T>()) {
-        if (enumValue.name == value) {
+        if (enumValue.name == konstue) {
             return enumValue
         }
     }

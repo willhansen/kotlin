@@ -37,20 +37,20 @@
  *	log10(10**N) = N  for N=0,1,...,22.
  *
  * Constants:
- * The hexadecimal values are the intended ones for the following constants.
- * The decimal values may be used, provided that the compiler will convert
- * from decimal to binary accurately enough to produce the hexadecimal values
+ * The hexadecimal konstues are the intended ones for the following constants.
+ * The decimal konstues may be used, provided that the compiler will convert
+ * from decimal to binary accurately enough to produce the hexadecimal konstues
  * shown.
  */
 
 package kotlin.math.fdlibm
 
-private const val two54 = 1.80143985094819840000e+16 /* 0x43500000, 0x00000000 */
-private const val ivln10 = 4.34294481903251816668e-01 /* 0x3FDBCB7B, 0x1526E50E */
-private const val log10_2hi = 3.01029995663611771306e-01 /* 0x3FD34413, 0x509F6000 */
-private const val log10_2lo = 3.69423907715893078616e-13 /* 0x3D59FEF3, 0x11F12B36 */
+private const konst two54 = 1.80143985094819840000e+16 /* 0x43500000, 0x00000000 */
+private const konst ivln10 = 4.34294481903251816668e-01 /* 0x3FDBCB7B, 0x1526E50E */
+private const konst log10_2hi = 3.01029995663611771306e-01 /* 0x3FD34413, 0x509F6000 */
+private const konst log10_2lo = 3.69423907715893078616e-13 /* 0x3D59FEF3, 0x11F12B36 */
 
-private const val zero = 0.0
+private const konst zero = 0.0
 
 internal fun __ieee754_log10(_x: Double): Double {
     var x: Double = _x

@@ -1,6 +1,6 @@
 fun test() {
     while (true) {
-        class LocalClass(val x: Int) {
+        class LocalClass(konst x: Int) {
             init {
                 break
             }

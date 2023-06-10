@@ -3,8 +3,8 @@ package foo
 
 class A() {
     fun f(): String {
-        val z = object {
-            val c = "OK"
+        konst z = object {
+            konst c = "OK"
         }
         return z.c
     }

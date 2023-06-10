@@ -1,7 +1,7 @@
 // FILE: AC.kt
 
 interface A {
-    val a: Int
+    konst a: Int
 }
 
 // FILE: B.java

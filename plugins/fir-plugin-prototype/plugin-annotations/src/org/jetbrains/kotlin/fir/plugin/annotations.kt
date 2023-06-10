@@ -19,7 +19,7 @@ annotation class CompanionWithFoo
 annotation class MySerializable
 annotation class CoreSerializer
 
-annotation class AllPublic(val visibility: Visibility)
+annotation class AllPublic(konst visibility: Visibility)
 
 @Target(AnnotationTarget.TYPE)
 annotation class Positive
@@ -31,7 +31,7 @@ enum class Visibility {
     Public, Internal, Private, Protected
 }
 
-annotation class SupertypeWithTypeArgument(val kClass: KClass<*>)
+annotation class SupertypeWithTypeArgument(konst kClass: KClass<*>)
 
 annotation class MetaSupertype
 

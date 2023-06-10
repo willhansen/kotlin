@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.test.services
 
 data class KotlinTestInfo(
-    val className: String,
-    val methodName: String,
-    val tags: Set<String>
+    konst className: String,
+    konst methodName: String,
+    konst tags: Set<String>
 ) : TestService
 
-val TestServices.testInfo: KotlinTestInfo by TestServices.testServiceAccessor()
+konst TestServices.testInfo: KotlinTestInfo by TestServices.testServiceAccessor()

@@ -21,41 +21,41 @@ import org.jetbrains.kotlin.resolve.constants.*;
 import org.jetbrains.kotlin.resolve.constants.StringValue;
 
 public interface AnnotationArgumentVisitor<R, D> {
-    R visitLongValue(@NotNull LongValue value, D data);
+    R visitLongValue(@NotNull LongValue konstue, D data);
 
-    R visitIntValue(IntValue value, D data);
+    R visitIntValue(IntValue konstue, D data);
 
-    R visitErrorValue(ErrorValue value, D data);
+    R visitErrorValue(ErrorValue konstue, D data);
 
-    R visitShortValue(ShortValue value, D data);
+    R visitShortValue(ShortValue konstue, D data);
 
-    R visitByteValue(ByteValue value, D data);
+    R visitByteValue(ByteValue konstue, D data);
 
-    R visitDoubleValue(DoubleValue value, D data);
+    R visitDoubleValue(DoubleValue konstue, D data);
 
-    R visitFloatValue(FloatValue value, D data);
+    R visitFloatValue(FloatValue konstue, D data);
 
-    R visitBooleanValue(BooleanValue value, D data);
+    R visitBooleanValue(BooleanValue konstue, D data);
 
-    R visitCharValue(CharValue value, D data);
+    R visitCharValue(CharValue konstue, D data);
 
-    R visitStringValue(StringValue value, D data);
+    R visitStringValue(StringValue konstue, D data);
 
-    R visitNullValue(NullValue value, D data);
+    R visitNullValue(NullValue konstue, D data);
     
-    R visitEnumValue(EnumValue value, D data);
+    R visitEnumValue(EnumValue konstue, D data);
     
-    R visitArrayValue(ArrayValue value, D data);
+    R visitArrayValue(ArrayValue konstue, D data);
 
-    R visitAnnotationValue(AnnotationValue value, D data);
+    R visitAnnotationValue(AnnotationValue konstue, D data);
 
-    R visitKClassValue(KClassValue value, D data);
+    R visitKClassValue(KClassValue konstue, D data);
 
-    R visitUByteValue(UByteValue value, D data);
+    R visitUByteValue(UByteValue konstue, D data);
 
-    R visitUShortValue(UShortValue value, D data);
+    R visitUShortValue(UShortValue konstue, D data);
 
-    R visitUIntValue(UIntValue value, D data);
+    R visitUIntValue(UIntValue konstue, D data);
 
-    R visitULongValue(ULongValue value, D data);
+    R visitULongValue(ULongValue konstue, D data);
 }

@@ -5,7 +5,7 @@ fun Any.test_1(): Int = when (this) {
     else -> 0
 }
 
-fun Any.test_2(): Int = when (val x = this) {
+fun Any.test_2(): Int = when (konst x = this) {
     is List<*> -> {
         x.size
         this.size

@@ -16,10 +16,10 @@ inline fun <T> call(lambda: () -> T): T {
 import test.*
 
 fun box(): String {
-    val x = "OK"
-    val result = call {
+    konst x = "OK"
+    konst result = call {
         object : A() {
-            val p = x
+            konst p = x
         }
     }
 

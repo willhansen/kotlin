@@ -1,18 +1,18 @@
 // !LANGUAGE: +InlineClasses, -JvmInlineValueClasses
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-inline class X(val x: Int)
-inline class Z(val x: Int)
+inline class X(konst x: Int)
+inline class Z(konst x: Int)
 
-class TestOk1(val a: Int, val b: Int) {
+class TestOk1(konst a: Int, konst b: Int) {
     constructor(x: X) : this(x.x, 1)
 }
 
-class TestErr1(val a: Int) {
+class TestErr1(konst a: Int) {
     constructor(x: X) : this(x.x)
 }
 
-class TestErr2(val a: Int, val b: Int) {
+class TestErr2(konst a: Int, konst b: Int) {
     constructor(x: X) : this(x.x, 1)
     constructor(z: Z) : this(z.x, 2)
 }

@@ -32,7 +32,7 @@ class FirAnnotationBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder
     var useSiteTarget: AnnotationUseSiteTarget? = null
     lateinit var annotationTypeRef: FirTypeRef
     lateinit var argumentMapping: FirAnnotationArgumentMapping
-    val typeArguments: MutableList<FirTypeProjection> = mutableListOf()
+    konst typeArguments: MutableList<FirTypeProjection> = mutableListOf()
 
     override fun build(): FirAnnotation {
         return FirAnnotationImpl(
@@ -53,7 +53,7 @@ class FirAnnotationBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder
         }
 
     @Deprecated("Modification of 'annotations' has no impact for FirAnnotationBuilder", level = DeprecationLevel.HIDDEN)
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 }
 
 @OptIn(ExperimentalContracts::class)

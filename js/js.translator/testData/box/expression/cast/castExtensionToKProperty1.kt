@@ -5,7 +5,7 @@ import kotlin.reflect.KProperty1
 
 class A
 
-val A.x: Int
+konst A.x: Int
     get() = 23
 
 fun box(): String {

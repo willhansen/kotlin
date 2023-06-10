@@ -25,5 +25,5 @@ fun testWithUtil(map: ConcurrentHashMap<Int, String>): Int {
 }
 
 fun test(list: java.util.ArrayList<String?>) {
-    val x = list.get(0)<!UNSAFE_CALL!>.<!>length
+    konst x = list.get(0)<!UNSAFE_CALL!>.<!>length
 }

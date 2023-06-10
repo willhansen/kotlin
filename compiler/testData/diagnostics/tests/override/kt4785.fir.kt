@@ -8,4 +8,4 @@ open class C {
 
 class E : C(), T
 
-val z: T = object : C(), T {}
+konst z: T = object : C(), T {}

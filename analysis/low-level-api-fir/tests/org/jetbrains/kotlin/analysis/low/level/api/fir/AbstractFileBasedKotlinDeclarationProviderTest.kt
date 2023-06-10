@@ -22,7 +22,7 @@ import kotlin.test.assertContains
 import kotlin.test.assertNotNull
 
 abstract class AbstractFileBasedKotlinDeclarationProviderTest : AbstractLowLevelApiSingleFileTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 
     override fun configureTest(builder: TestConfigurationBuilder) {
         super.configureTest(builder)
@@ -32,7 +32,7 @@ abstract class AbstractFileBasedKotlinDeclarationProviderTest : AbstractLowLevel
     }
 
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val provider = FileBasedKotlinDeclarationProvider(ktFile)
+        konst provider = FileBasedKotlinDeclarationProvider(ktFile)
         assertContains(provider.findFilesForFacadeByPackage(ktFile.packageFqName), ktFile)
 
         checkByDirectives(moduleStructure, provider)
@@ -41,24 +41,24 @@ abstract class AbstractFileBasedKotlinDeclarationProviderTest : AbstractLowLevel
 
     private fun checkByDirectives(moduleStructure: TestModuleStructure, provider: FileBasedKotlinDeclarationProvider) {
         for (directive in moduleStructure.allDirectives[Directives.CLASS]) {
-            val classId = ClassId.fromString(directive)
+            konst classId = ClassId.fromString(directive)
             assert(provider.getAllClassesByClassId(classId).isNotEmpty()) { "Class $classId not found" }
             assertNotNull(provider.getClassLikeDeclarationByClassId(classId)) { "Class-like declaration $classId not found" }
         }
 
         for (directive in moduleStructure.allDirectives[Directives.TYPE_ALIAS]) {
-            val classId = ClassId.fromString(directive)
+            konst classId = ClassId.fromString(directive)
             assert(provider.getAllTypeAliasesByClassId(classId).isNotEmpty()) { "Type alias $classId not found" }
             assertNotNull(provider.getClassLikeDeclarationByClassId(classId)) { "Class-like declaration $classId not found" }
         }
 
         for (directive in moduleStructure.allDirectives[Directives.FUNCTION]) {
-            val callableId = parseCallableId(directive)
+            konst callableId = parseCallableId(directive)
             assert(provider.getTopLevelFunctions(callableId).isNotEmpty()) { "Function $callableId not found" }
         }
 
         for (directive in moduleStructure.allDirectives[Directives.PROPERTY]) {
-            val callableId = parseCallableId(directive)
+            konst callableId = parseCallableId(directive)
             assert(provider.getTopLevelProperties(callableId).isNotEmpty()) { "Property $callableId not found" }
         }
     }
@@ -76,8 +76,8 @@ abstract class AbstractFileBasedKotlinDeclarationProviderTest : AbstractLowLevel
             }
 
             private fun processClassLikeDeclaration(declaration: KtClassLikeDeclaration) {
-                val classId = declaration.getClassId() ?: return
-                val shortName = classId.shortClassName
+                konst classId = declaration.getClassId() ?: return
+                konst shortName = classId.shortClassName
 
                 if (!classId.isNestedClass) {
                     assertContains(provider.getTopLevelKotlinClassLikeDeclarationNamesInPackage(classId.packageFqName), shortName)
@@ -100,7 +100,7 @@ abstract class AbstractFileBasedKotlinDeclarationProviderTest : AbstractLowLevel
             }
 
             private fun processCallableDeclaration(declaration: KtCallableDeclaration) {
-                val callableId = declaration.callableId ?: return
+                konst callableId = declaration.callableId ?: return
 
                 if (callableId.classId == null) {
                     assertContains(provider.getTopLevelCallableFiles(callableId), ktFile)
@@ -116,19 +116,19 @@ abstract class AbstractFileBasedKotlinDeclarationProviderTest : AbstractLowLevel
     }
 
     object Directives : SimpleDirectivesContainer() {
-        val CLASS by stringDirective("ClassId of a class or object to be checked for presence")
-        val TYPE_ALIAS by stringDirective("ClassId of a type alias to be checked for presence")
-        val FUNCTION by stringDirective("CallableId of a function to be checked for presence")
-        val PROPERTY by stringDirective("CallableId of a property to be checked for presence")
+        konst CLASS by stringDirective("ClassId of a class or object to be checked for presence")
+        konst TYPE_ALIAS by stringDirective("ClassId of a type alias to be checked for presence")
+        konst FUNCTION by stringDirective("CallableId of a function to be checked for presence")
+        konst PROPERTY by stringDirective("CallableId of a property to be checked for presence")
     }
 }
 
-private val KtCallableDeclaration.callableId: CallableId?
+private konst KtCallableDeclaration.callableId: CallableId?
     get() {
-        val callableName = this.nameAsName ?: return null
-        when (val owner = PsiTreeUtil.getParentOfType(this, KtDeclaration::class.java, KtFile::class.java)) {
+        konst callableName = this.nameAsName ?: return null
+        when (konst owner = PsiTreeUtil.getParentOfType(this, KtDeclaration::class.java, KtFile::class.java)) {
             is KtClassOrObject -> {
-                val classId = owner.getClassId() ?: return null
+                konst classId = owner.getClassId() ?: return null
                 return CallableId(classId, callableName)
             }
             is KtFile -> {
@@ -139,13 +139,13 @@ private val KtCallableDeclaration.callableId: CallableId?
     }
 
 private fun parseCallableId(rawString: String): CallableId {
-    val chunks = rawString.split('#')
-    assert(chunks.size == 2) { "Invalid CallableId string format: $rawString" }
+    konst chunks = rawString.split('#')
+    assert(chunks.size == 2) { "Inkonstid CallableId string format: $rawString" }
 
-    val rawQualifier = chunks[0]
-    val rawCallableName = chunks[1]
+    konst rawQualifier = chunks[0]
+    konst rawCallableName = chunks[1]
 
-    val callableName = Name.identifier(rawCallableName)
+    konst callableName = Name.identifier(rawCallableName)
 
     return when {
         rawQualifier.endsWith('/') -> CallableId(FqName(rawQualifier.dropLast(1).replace('/', '.')), callableName)

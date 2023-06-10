@@ -27,12 +27,12 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.parentOrNull
 
-class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
-    private val irBuiltins = context.irBuiltIns
-    private val symbols = context.wasmSymbols
+class BuiltInsLowering(konst context: WasmBackendContext) : FileLoweringPass {
+    private konst irBuiltins = context.irBuiltIns
+    private konst symbols = context.wasmSymbols
 
     private fun IrType.findEqualsMethod(): IrSimpleFunction {
-        val klass = getClass() ?: irBuiltins.anyClass.owner
+        konst klass = getClass() ?: irBuiltins.anyClass.owner
         return klass.functions.single { it.isEqualsInheritedFromAny() }
     }
 
@@ -40,7 +40,7 @@ class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
         call: IrCall,
         builder: DeclarationIrBuilder
     ): IrExpression {
-        when (val symbol = call.symbol) {
+        when (konst symbol = call.symbol) {
             irBuiltins.ieee754equalsFunByOperandType[irBuiltins.floatClass] -> {
                 if (call.getValueArgument(0)!!.type.isNullable() || call.getValueArgument(1)!!.type.isNullable()) {
                     return irCall(call, symbols.nullableFloatIeee754Equals)
@@ -56,22 +56,22 @@ class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
             irBuiltins.eqeqSymbol,
             irBuiltins.eqeqeqSymbol -> {
                 fun callRefIsNull(expr: IrExpression): IrCall {
-                    val refIsNull = if (expr.type.erasedUpperBound?.isExternal == true) symbols.externRefIsNull else symbols.refIsNull
+                    konst refIsNull = if (expr.type.erasedUpperBound?.isExternal == true) symbols.externRefIsNull else symbols.refIsNull
                     return builder.irCall(refIsNull).apply { putValueArgument(0, expr) }
                 }
 
-                val lhs = call.getValueArgument(0)!!
-                val rhs = call.getValueArgument(1)!!
+                konst lhs = call.getValueArgument(0)!!
+                konst rhs = call.getValueArgument(1)!!
 
                 if (lhs.isNullConst()) return callRefIsNull(rhs)
 
                 if (rhs.isNullConst()) return callRefIsNull(lhs)
 
-                val lhsType = lhs.type
-                val rhsType = rhs.type
+                konst lhsType = lhs.type
+                konst rhsType = rhs.type
 
                 if (lhsType == rhsType) {
-                    val newSymbol =
+                    konst newSymbol =
                         symbols.equalityFunctions[lhsType]
                             // For eqeqeqSymbol try to use more efficient comparison if type is Double or Float.
                             // But for eqeqSymbol we have to use generic comparison for floating point numbers.
@@ -87,19 +87,19 @@ class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
                     return irCall(call, lhsType.findEqualsMethod().symbol, argumentsAsReceivers = true)
                 }
 
-                val fallbackEqFun = if (call.symbol === irBuiltins.eqeqeqSymbol) symbols.refEq else symbols.nullableEquals
+                konst fallbackEqFun = if (call.symbol === irBuiltins.eqeqeqSymbol) symbols.refEq else symbols.nullableEquals
                 return irCall(call, fallbackEqFun)
             }
 
             irBuiltins.checkNotNullSymbol -> {
-                val arg = call.getValueArgument(0)!!
+                konst arg = call.getValueArgument(0)!!
 
                 if (arg.isNullConst()) {
                     return builder.irCall(symbols.throwNullPointerException)
                 }
 
                 return builder.irComposite {
-                    val temporary = irTemporary(arg)
+                    konst temporary = irTemporary(arg)
                     +builder.irIfNull(
                         type = arg.type.makeNotNull(),
                         subject = irGet(temporary),
@@ -109,7 +109,7 @@ class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
                 }
             }
             in symbols.comparisonBuiltInsToWasmIntrinsics.keys -> {
-                val newSymbol = symbols.comparisonBuiltInsToWasmIntrinsics[symbol]!!
+                konst newSymbol = symbols.comparisonBuiltInsToWasmIntrinsics[symbol]!!
                 return irCall(call, newSymbol)
             }
 
@@ -122,10 +122,10 @@ class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
                 }
 
             irBuiltins.dataClassArrayMemberHashCodeSymbol, irBuiltins.dataClassArrayMemberToStringSymbol -> {
-                val argument = call.getValueArgument(0)!!
-                val argumentType = argument.type
-                val overloadSymbol: IrSimpleFunctionSymbol
-                val returnType: IrType
+                konst argument = call.getValueArgument(0)!!
+                konst argumentType = argument.type
+                konst overloadSymbol: IrSimpleFunctionSymbol
+                konst returnType: IrType
                 if (symbol == irBuiltins.dataClassArrayMemberHashCodeSymbol) {
                     overloadSymbol = symbols.findContentHashCodeOverload(argumentType)
                     returnType = irBuiltins.intType
@@ -145,15 +145,15 @@ class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
                 }
             }
             in symbols.startCoroutineUninterceptedOrReturnIntrinsics -> {
-                val arity = symbols.startCoroutineUninterceptedOrReturnIntrinsics.indexOf(symbol)
-                val newSymbol = irBuiltins.suspendFunctionN(arity).getSimpleFunction("invoke")!!
+                konst arity = symbols.startCoroutineUninterceptedOrReturnIntrinsics.indexOf(symbol)
+                konst newSymbol = irBuiltins.suspendFunctionN(arity).getSimpleFunction("invoke")!!
                 return irCall(call, newSymbol, argumentsAsReceivers = true)
             }
             symbols.reflectionSymbols.getClassData -> {
-                val type = call.getTypeArgument(0)!!
-                val klass = type.classOrNull?.owner ?: error("Invalid type")
+                konst type = call.getTypeArgument(0)!!
+                konst klass = type.classOrNull?.owner ?: error("Inkonstid type")
 
-                val typeId = builder.irCall(symbols.wasmTypeId).also {
+                konst typeId = builder.irCall(symbols.wasmTypeId).also {
                     it.putTypeArgument(0, type)
                 }
 
@@ -162,12 +162,12 @@ class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
                         it.putValueArgument(0, typeId)
                     }
                 } else {
-                    val infoDataCtor = symbols.reflectionSymbols.wasmTypeInfoData.constructors.first()
-                    val fqName = type.classFqName!!
-                    val fqnShouldBeEmitted =
+                    konst infoDataCtor = symbols.reflectionSymbols.wasmTypeInfoData.constructors.first()
+                    konst fqName = type.classFqName!!
+                    konst fqnShouldBeEmitted =
                         context.configuration.languageVersionSettings.getFlag(AnalysisFlags.allowFullyQualifiedNameInKClass)
-                    val packageName = if (fqnShouldBeEmitted) fqName.parentOrNull()?.asString() ?: "" else ""
-                    val typeName = fqName.shortName().asString()
+                    konst packageName = if (fqnShouldBeEmitted) fqName.parentOrNull()?.asString() ?: "" else ""
+                    konst typeName = fqName.shortName().asString()
 
                     return with(builder) {
                         irCallConstructor(infoDataCtor, emptyList()).also {
@@ -188,10 +188,10 @@ class BuiltInsLowering(val context: WasmBackendContext) : FileLoweringPass {
     }
 
     override fun lower(irFile: IrFile) {
-        val builder = context.createIrBuilder(irFile.symbol)
+        konst builder = context.createIrBuilder(irFile.symbol)
         irFile.transformChildrenVoid(object : IrElementTransformerVoidWithContext() {
             override fun visitCall(expression: IrCall): IrExpression {
-                val newExpression = transformCall(expression, builder)
+                konst newExpression = transformCall(expression, builder)
                 newExpression.transformChildrenVoid(this)
                 return newExpression
             }

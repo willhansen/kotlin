@@ -22,7 +22,7 @@ internal fun interface KotlinCompilationAssociator {
 
 internal object DefaultKotlinCompilationAssociator : KotlinCompilationAssociator {
     override fun associate(target: KotlinTarget, auxiliary: InternalKotlinCompilation<*>, main: InternalKotlinCompilation<*>) {
-        val project = target.project
+        konst project = target.project
 
         /*
           we add dependencies to compileDependencyConfiguration ('compileClasspath' usually) and runtimeDependency
@@ -31,7 +31,7 @@ internal object DefaultKotlinCompilationAssociator : KotlinCompilationAssociator
           This is needed because api/implementation/compileOnly/runtimeOnly are used in IDE Import and will leak
           to dependencies of IDE modules. But they are not needed here, because IDE resolution works inherently
           transitively and symbols from associated compilation will be resolved from source sets of associated
-          compilation itself (moreover, direct dependencies are not equivalent to transitive ones because of
+          compilation itself (moreover, direct dependencies are not equikonstent to transitive ones because of
           resolution order - e.g. in case of FQNs clash, so it's even harmful)
         */
         project.dependencies.add(auxiliary.compileOnlyConfigurationName, project.files({ main.output.classesDirs }))

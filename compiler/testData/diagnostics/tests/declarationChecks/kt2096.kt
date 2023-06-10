@@ -4,5 +4,5 @@
 package c
 
 abstract class Foo{
-    <!PROPERTY_WITH_NO_TYPE_NO_INITIALIZER!>protected abstract val prop<!>
+    <!PROPERTY_WITH_NO_TYPE_NO_INITIALIZER!>protected abstract konst prop<!>
 }

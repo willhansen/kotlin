@@ -14,7 +14,7 @@ import java.util.zip.ZipOutputStream
 
 class IncrementalProcessorDiscoveryTest {
 
-    private val markerFileContent = """
+    private konst markerFileContent = """
                     Input1Processor1,AGGREGATING
                     Input1Processor2,ISOLATING
                     Input1Processor3,DYNAMIC
@@ -24,14 +24,14 @@ class IncrementalProcessorDiscoveryTest {
 
     @Test
     fun locateInJars(@TempDir tmp: File) {
-        val inputJar = tmp.resolve("inputJar.jar")
+        konst inputJar = tmp.resolve("inputJar.jar")
         ZipOutputStream(inputJar.outputStream()).use {
             it.putNextEntry(ZipEntry("META-INF/gradle/incremental.annotation.processors"))
             it.write(markerFileContent.toByteArray())
             it.closeEntry()
         }
 
-        val info = getIncrementalProcessorsFromClasspath(
+        konst info = getIncrementalProcessorsFromClasspath(
             setOf("Input1Processor4", "Input1Processor3", "Input1Processor2", "Input1Processor1"),
             listOf(inputJar)
         )
@@ -48,13 +48,13 @@ class IncrementalProcessorDiscoveryTest {
 
     @Test
     fun locateInDir(@TempDir tmp: File) {
-        val inputDir = tmp.resolve("inputDir")
+        konst inputDir = tmp.resolve("inputDir")
         inputDir.resolve("META-INF/gradle/incremental.annotation.processors").let {
             it.parentFile.mkdirs()
             it.writeText(markerFileContent)
         }
 
-        val info = getIncrementalProcessorsFromClasspath(
+        konst info = getIncrementalProcessorsFromClasspath(
             setOf("Input1Processor4", "Input1Processor3", "Input1Processor2", "Input1Processor1"),
             listOf(inputDir)
         )
@@ -71,20 +71,20 @@ class IncrementalProcessorDiscoveryTest {
 
     @Test
     fun locateInJarsAndDirs(@TempDir tmp: File) {
-        val inputJar = tmp.resolve("inputJar.jar")
+        konst inputJar = tmp.resolve("inputJar.jar")
         ZipOutputStream(inputJar.outputStream()).use {
             it.putNextEntry(ZipEntry("META-INF/gradle/incremental.annotation.processors"))
             it.write("InputJarProcessor,ISOLATING".toByteArray())
             it.closeEntry()
         }
 
-        val inputDir = tmp.resolve("inputDir")
+        konst inputDir = tmp.resolve("inputDir")
         inputDir.resolve("META-INF/gradle/incremental.annotation.processors").let {
             it.parentFile.mkdirs()
             it.writeText("InputDirProcessor,DYNAMIC")
         }
 
-        val info = getIncrementalProcessorsFromClasspath(
+        konst info = getIncrementalProcessorsFromClasspath(
             setOf("InputJarNonIncrementalProcessor", "InputJarProcessor", "InputDirNonIncrementalProcessor", "InputDirProcessor"),
             listOf(inputJar, inputDir)
         )

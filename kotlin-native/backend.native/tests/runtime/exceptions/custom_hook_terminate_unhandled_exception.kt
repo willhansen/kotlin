@@ -14,7 +14,7 @@ fun main() {
         terminateWithUnhandledException(t)
     }.freeze())
 
-    val exception = Error("some error")
+    konst exception = Error("some error")
     processUnhandledException(exception)
     println("Not going to happen")
 }

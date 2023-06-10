@@ -38,10 +38,10 @@ fun testReassignmentWithStaticCalls(d: dynamic) {
     (d as Any).<!UNRESOLVED_REFERENCE!>onDynamicVal<!> = 1
 }
 
-val Any.onAnyVal: Int get() = 1
-val Any?.onNullableAnyVal: Int get() = 1
-val String.onStringVal: Int get() = 1
-val <!DYNAMIC_RECEIVER_NOT_ALLOWED!>dynamic<!>.onDynamicVal: Int get() = 1
+konst Any.onAnyVal: Int get() = 1
+konst Any?.onNullableAnyVal: Int get() = 1
+konst String.onStringVal: Int get() = 1
+konst <!DYNAMIC_RECEIVER_NOT_ALLOWED!>dynamic<!>.onDynamicVal: Int get() = 1
 
 class C {
     fun test(d: dynamic) {
@@ -52,7 +52,7 @@ class C {
         d.<!DEBUG_INFO_DYNAMIC!>memberExtensionVal<!> = 1
     }
 
-    val memberVal = 1
-    val Any.memberExtensionVal: Int
+    konst memberVal = 1
+    konst Any.memberExtensionVal: Int
         get() = 1
 }

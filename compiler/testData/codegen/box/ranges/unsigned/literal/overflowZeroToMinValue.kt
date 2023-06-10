@@ -4,14 +4,14 @@
 // WITH_STDLIB
 
 
-val MinUI = UInt.MIN_VALUE
-val MinUB = UByte.MIN_VALUE
-val MinUS = UShort.MIN_VALUE
-val MinUL = ULong.MIN_VALUE
+konst MinUI = UInt.MIN_VALUE
+konst MinUB = UByte.MIN_VALUE
+konst MinUS = UShort.MIN_VALUE
+konst MinUL = ULong.MIN_VALUE
 
 @OptIn(ExperimentalStdlibApi::class)
 fun box(): String {
-    val list1 = ArrayList<UInt>()
+    konst list1 = ArrayList<UInt>()
     for (i in 1u.toUByte()..MinUB step 3) {
         list1.add(i)
         if (list1.size > 23) break
@@ -20,7 +20,7 @@ fun box(): String {
         return "Wrong elements for 1u.toUByte()..MinUB step 3: $list1"
     }
 
-    val list2 = ArrayList<UInt>()
+    konst list2 = ArrayList<UInt>()
     for (i in 1u.toUShort()..MinUS step 3) {
         list2.add(i)
         if (list2.size > 23) break
@@ -29,7 +29,7 @@ fun box(): String {
         return "Wrong elements for 1u.toUShort()..MinUS step 3: $list2"
     }
 
-    val list3 = ArrayList<UInt>()
+    konst list3 = ArrayList<UInt>()
     for (i in 1u..MinUI step 3) {
         list3.add(i)
         if (list3.size > 23) break
@@ -38,7 +38,7 @@ fun box(): String {
         return "Wrong elements for 1u..MinUI step 3: $list3"
     }
 
-    val list4 = ArrayList<ULong>()
+    konst list4 = ArrayList<ULong>()
     for (i in 1uL..MinUL step 3) {
         list4.add(i)
         if (list4.size > 23) break
@@ -47,7 +47,7 @@ fun box(): String {
         return "Wrong elements for 1uL..MinUL step 3: $list4"
     }
 
-    val list5 = ArrayList<UInt>()
+    konst list5 = ArrayList<UInt>()
     for (i in 1u.toUByte() until MinUB step 3) {
         list5.add(i)
         if (list5.size > 23) break
@@ -56,7 +56,7 @@ fun box(): String {
         return "Wrong elements for 1u.toUByte() until MinUB step 3: $list5"
     }
 
-    val list6 = ArrayList<UInt>()
+    konst list6 = ArrayList<UInt>()
     for (i in 1u.toUShort() until MinUS step 3) {
         list6.add(i)
         if (list6.size > 23) break
@@ -65,7 +65,7 @@ fun box(): String {
         return "Wrong elements for 1u.toUShort() until MinUS step 3: $list6"
     }
 
-    val list7 = ArrayList<UInt>()
+    konst list7 = ArrayList<UInt>()
     for (i in 1u until MinUI step 3) {
         list7.add(i)
         if (list7.size > 23) break
@@ -74,7 +74,7 @@ fun box(): String {
         return "Wrong elements for 1u until MinUI step 3: $list7"
     }
 
-    val list8 = ArrayList<ULong>()
+    konst list8 = ArrayList<ULong>()
     for (i in 1uL until MinUL step 3) {
         list8.add(i)
         if (list8.size > 23) break
@@ -83,7 +83,7 @@ fun box(): String {
         return "Wrong elements for 1uL until MinUL step 3: $list8"
     }
 
-    val list9 = ArrayList<UInt>()
+    konst list9 = ArrayList<UInt>()
     for (i in 1u.toUByte()..<MinUB step 3) {
         list9.add(i)
         if (list9.size > 23) break
@@ -92,7 +92,7 @@ fun box(): String {
         return "Wrong elements for 1u.toUByte()..<MinUB step 3: $list9"
     }
 
-    val list10 = ArrayList<UInt>()
+    konst list10 = ArrayList<UInt>()
     for (i in 1u.toUShort()..<MinUS step 3) {
         list10.add(i)
         if (list10.size > 23) break
@@ -101,7 +101,7 @@ fun box(): String {
         return "Wrong elements for 1u.toUShort()..<MinUS step 3: $list10"
     }
 
-    val list11 = ArrayList<UInt>()
+    konst list11 = ArrayList<UInt>()
     for (i in 1u..<MinUI step 3) {
         list11.add(i)
         if (list11.size > 23) break
@@ -110,7 +110,7 @@ fun box(): String {
         return "Wrong elements for 1u..<MinUI step 3: $list11"
     }
 
-    val list12 = ArrayList<ULong>()
+    konst list12 = ArrayList<ULong>()
     for (i in 1uL..<MinUL step 3) {
         list12.add(i)
         if (list12.size > 23) break

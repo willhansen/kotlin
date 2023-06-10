@@ -1,7 +1,7 @@
 package
 
-public val bar: kotlin.Int = 1
-public external val i: kotlin.Int = 0
+public konst bar: kotlin.Int = 1
+public external konst i: kotlin.Int = 0
 public const var x: kotlin.Int
 public fun foo(): kotlin.Int
 public fun test(): kotlin.Unit
@@ -23,19 +23,19 @@ public open class Baz {
 
 public final class Bzz {
     public constructor Bzz(/*0*/ q: kotlin.Int = ...)
-    public final val q: kotlin.Int
-    public final val x: kotlin.Int = 2
-    public final val y: kotlin.Int
-    public final val z: kotlin.Int
+    public final konst q: kotlin.Int
+    public final konst x: kotlin.Int = 2
+    public final konst y: kotlin.Int
+    public final konst z: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     public final class B {
         public constructor B(/*0*/ z: kotlin.Int = ...)
-        public final val x: kotlin.Int
-        public final val y: kotlin.Int = 2
-        public final val z: kotlin.Int
+        public final konst x: kotlin.Int
+        public final konst y: kotlin.Int = 2
+        public final konst z: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -43,7 +43,7 @@ public final class Bzz {
 
     public object C {
         private constructor C()
-        public final val y: kotlin.Int = 1
+        public final konst y: kotlin.Int = 1
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

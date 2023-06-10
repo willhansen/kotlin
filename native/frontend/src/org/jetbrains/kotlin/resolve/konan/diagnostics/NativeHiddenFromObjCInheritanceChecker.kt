@@ -30,7 +30,7 @@ object NativeHiddenFromObjCInheritanceChecker : DeclarationChecker {
         // No need to report anything on class that is hidden itself.
         if (checkClassIsHiddenFromObjC(descriptor)) return
 
-        val isSubtypeOfHiddenFromObjC = descriptor.getSuperInterfaces().any { checkClassIsHiddenFromObjC(it) } ||
+        konst isSubtypeOfHiddenFromObjC = descriptor.getSuperInterfaces().any { checkClassIsHiddenFromObjC(it) } ||
                 descriptor.getSuperClassNotAny()?.let { checkClassIsHiddenFromObjC(it) } == true
         if (isSubtypeOfHiddenFromObjC) {
             context.trace.report(ErrorsNative.SUBTYPE_OF_HIDDEN_FROM_OBJC.on(declaration))
@@ -50,7 +50,7 @@ private fun checkContainingClassIsHidden(currentClass: ClassDescriptor): Boolean
 
 private fun checkClassIsHiddenFromObjC(clazz: ClassDescriptor): Boolean {
     clazz.annotations.forEach { annotation ->
-        val objcExportMetaAnnotations = annotation.annotationClass?.findObjCExportMetaAnnotations()
+        konst objcExportMetaAnnotations = annotation.annotationClass?.findObjCExportMetaAnnotations()
             ?: return@forEach
         if (objcExportMetaAnnotations.hidesFromObjCAnnotation != null) {
             return true

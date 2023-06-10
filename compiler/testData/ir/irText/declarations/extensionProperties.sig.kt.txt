@@ -10,7 +10,7 @@ class Host {
   // CHECK:
   //   Mangled name: Host@kotlin.String{}test3
   //   Public signature: /Host.test3|6611475030333167314[0]
-  val String.test3: Int
+  konst String.test3: Int
     // CHECK JVM_IR:
     //   Mangled name: Host#<get-test3>@kotlin.String(){}kotlin.Int
     //   Public signature: /Host.test3.<get-test3>|-8733015989987681805[0]
@@ -33,14 +33,14 @@ class Host {
     // CHECK:
     //   Mangled name: Host#<set-test4>@kotlin.String(kotlin.Int){}
     //   Public signature: /Host.test4.<set-test4>|8811649911764795566[0]
-    set(value: Int): Unit
+    set(konstue: Int): Unit
 
 }
 
 // CHECK:
 //   Mangled name: @kotlin.String{}test1
 //   Public signature: /test1|-338155035617859525[0]
-val String.test1: Int
+konst String.test1: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>@kotlin.String(){}kotlin.Int
   //   Public signature: /test1.<get-test1>|-5900273555540008657[0]
@@ -63,5 +63,5 @@ var String.test2: Int
   // CHECK:
   //   Mangled name: #<set-test2>@kotlin.String(kotlin.Int){}
   //   Public signature: /test2.<set-test2>|3674864148848971521[0]
-  set(value: Int): Unit
+  set(konstue: Int): Unit
 

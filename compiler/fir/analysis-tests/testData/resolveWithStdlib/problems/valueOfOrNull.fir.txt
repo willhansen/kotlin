@@ -1,60 +1,60 @@
-FILE: valueOfOrNull.kt
+FILE: konstueOfOrNull.kt
     public final enum class SomeEnum : R|kotlin/Enum<SomeEnum>| {
         private constructor(): R|SomeEnum| {
             super<R|kotlin/Enum<SomeEnum>|>()
         }
 
         public final static enum entry ENTRY: R|SomeEnum|
-        public final static fun values(): R|kotlin/Array<SomeEnum>| {
+        public final static fun konstues(): R|kotlin/Array<SomeEnum>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|SomeEnum| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|SomeEnum| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<SomeEnum>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<SomeEnum>|
             public get(): R|kotlin/enums/EnumEntries<SomeEnum>|
 
     }
     public final fun foo(s: R|kotlin/String?|): R|kotlin/Unit| {
-        lval result: R|SomeEnum| = R|<local>/s|?.{ $subj$.R|kotlin/let|<R|kotlin/String|, R|SomeEnum?|>(<L> = let@fun <anonymous>(it: R|kotlin/String|): R|SomeEnum?| <inline=Inline, kind=EXACTLY_ONCE>  {
-            ^ R|/valueOfOrNull|<R|SomeEnum|>(R|<local>/it|)
+        lkonst result: R|SomeEnum| = R|<local>/s|?.{ $subj$.R|kotlin/let|<R|kotlin/String|, R|SomeEnum?|>(<L> = let@fun <anonymous>(it: R|kotlin/String|): R|SomeEnum?| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ R|/konstueOfOrNull|<R|SomeEnum|>(R|<local>/it|)
         }
         ) } ?: Q|SomeEnum|.R|/SomeEnum.ENTRY|
-        lval result2: R|SomeEnum| = R|<local>/s|?.{ $subj$.R|kotlin/let|<R|kotlin/String|, R|SomeEnum?|>(<L> = let@fun <anonymous>(it: R|kotlin/String|): R|SomeEnum?| <inline=Inline, kind=EXACTLY_ONCE>  {
-            ^ R|/valueOfOrNull|<R|SomeEnum|>(R|<local>/it|)
+        lkonst result2: R|SomeEnum| = R|<local>/s|?.{ $subj$.R|kotlin/let|<R|kotlin/String|, R|SomeEnum?|>(<L> = let@fun <anonymous>(it: R|kotlin/String|): R|SomeEnum?| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ R|/konstueOfOrNull|<R|SomeEnum|>(R|<local>/it|)
         }
         ) } ?: Q|SomeEnum|.R|/SomeEnum.ENTRY|
-        lval result3: R|SomeEnum?| = when () {
+        lkonst result3: R|SomeEnum?| = when () {
             ==(R|<local>/s|, Null(null)) ->  {
                 Q|SomeEnum|.R|/SomeEnum.ENTRY|
             }
             else ->  {
-                R|/valueOfOrNull|<R|SomeEnum|>(R|<local>/s|)
+                R|/konstueOfOrNull|<R|SomeEnum|>(R|<local>/s|)
             }
         }
 
-        lval result4: R|SomeEnum?| = when () {
+        lkonst result4: R|SomeEnum?| = when () {
             ==(R|<local>/s|, Null(null)) ->  {
                 Q|SomeEnum|.R|/SomeEnum.ENTRY|
             }
             else ->  {
                 R|<local>/s|.R|kotlin/let|<R|kotlin/String|, R|SomeEnum?|>(<L> = let@fun <anonymous>(it: R|kotlin/String|): R|SomeEnum?| <inline=Inline, kind=EXACTLY_ONCE>  {
-                    ^ R|/valueOfOrNull|<R|SomeEnum|>(R|<local>/it|)
+                    ^ R|/konstueOfOrNull|<R|SomeEnum|>(R|<local>/it|)
                 }
                 )
             }
         }
 
     }
-    public final inline fun <reified E : R|kotlin/Enum<E>|> valueOfOrNull(value: R|kotlin/String|): R|E?| {
+    public final inline fun <reified E : R|kotlin/Enum<E>|> konstueOfOrNull(konstue: R|kotlin/String|): R|E?| {
          {
-            lval <iterator>: R|kotlin/collections/Iterator<E>| = R|kotlin/enumValues|<R|E|>().R|SubstitutionOverride<kotlin/Array.iterator: R|kotlin/collections/Iterator<E>|>|()
+            lkonst <iterator>: R|kotlin/collections/Iterator<E>| = R|kotlin/enumValues|<R|E|>().R|SubstitutionOverride<kotlin/Array.iterator: R|kotlin/collections/Iterator<E>|>|()
             while(R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.hasNext: R|kotlin/Boolean|>|()) {
-                lval enumValue: R|E| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|E|>|()
+                lkonst enumValue: R|E| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|E|>|()
                  {
                     when () {
-                        ==(R|<local>/enumValue|.R|SubstitutionOverride<kotlin/Enum.name: R|kotlin/String|>|, R|<local>/value|) ->  {
-                            ^valueOfOrNull R|<local>/enumValue|
+                        ==(R|<local>/enumValue|.R|SubstitutionOverride<kotlin/Enum.name: R|kotlin/String|>|, R|<local>/konstue|) ->  {
+                            ^konstueOfOrNull R|<local>/enumValue|
                         }
                     }
 
@@ -64,5 +64,5 @@ FILE: valueOfOrNull.kt
 
         }
 
-        ^valueOfOrNull Null(null)
+        ^konstueOfOrNull Null(null)
     }

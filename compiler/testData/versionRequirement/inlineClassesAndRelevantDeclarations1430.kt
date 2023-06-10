@@ -1,6 +1,6 @@
 package test
 
-inline class IC(val x: String)
+inline class IC(konst x: String)
 
 typealias ICAlias = IC
 
@@ -9,7 +9,7 @@ class Ctor(ic: IC)
 fun simpleFun(f: IC) {}
 fun aliasedFun(f: ICAlias) {}
 
-val simpleProp: IC = IC("")
+konst simpleProp: IC = IC("")
 
 fun result(r: List<Result<Any>?>) {}
 

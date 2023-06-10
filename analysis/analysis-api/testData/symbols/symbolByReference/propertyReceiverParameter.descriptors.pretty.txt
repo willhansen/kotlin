@@ -1,2 +1,2 @@
-val @receiver:ReceiverAnnotation @ReceiverTypeAnnotation kotlin.Long.prop: kotlin.Boolean
+konst @receiver:ReceiverAnnotation @ReceiverTypeAnnotation kotlin.Long.prop: kotlin.Boolean
   get()

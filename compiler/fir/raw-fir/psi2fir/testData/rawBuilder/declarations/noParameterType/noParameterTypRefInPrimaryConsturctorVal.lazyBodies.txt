@@ -4,7 +4,7 @@ FILE: noParameterTypRefInPrimaryConsturctorVal.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val x: <ERROR TYPE REF: No type for parameter> = R|<local>/x|
+        public? final? konst x: <ERROR TYPE REF: No type for parameter> = R|<local>/x|
             public? get(): <ERROR TYPE REF: No type for parameter>
 
     }

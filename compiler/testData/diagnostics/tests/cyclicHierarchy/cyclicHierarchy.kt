@@ -10,14 +10,14 @@ interface F : <!CYCLIC_INHERITANCE_HIERARCHY!>D<!>, <!CYCLIC_INHERITANCE_HIERARC
 interface G : F {}
 interface H : F {}
 
-val a : A? = null
-val b : B? = null
-val c : C? = null
-val d : D? = null
-val e : E? = null
-val f : F? = null
-val g : G? = null
-val h : H? = null
+konst a : A? = null
+konst b : B? = null
+konst c : C? = null
+konst d : D? = null
+konst e : E? = null
+konst f : F? = null
+konst g : G? = null
+konst h : H? = null
 
 fun test() {
     a?.foo()

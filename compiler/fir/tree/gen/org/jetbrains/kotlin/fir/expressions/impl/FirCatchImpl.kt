@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirCatchImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var parameter: FirProperty,
     override var block: FirBlock,
 ) : FirCatch() {

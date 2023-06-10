@@ -5,7 +5,7 @@
 import kotlin.reflect.jvm.isAccessible
 
 fun box(): String {
-    val members = Observer::class.members
+    konst members = Observer::class.members
     for (member in members) {
         member.isAccessible = true
     }

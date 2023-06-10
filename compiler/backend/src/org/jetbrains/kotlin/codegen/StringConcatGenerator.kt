@@ -19,7 +19,7 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 import java.lang.StringBuilder
 
-class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapter) {
+class StringConcatGenerator(konst mode: JvmStringConcat, konst mv: InstructionAdapter) {
 
     enum class ItemType {
         PARAMETER,
@@ -27,21 +27,21 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
         INLINED_CONSTANT
     }
 
-    data class Item(val type: Type, var itemType: ItemType, val value: String) {
+    data class Item(konst type: Type, var itemType: ItemType, konst konstue: String) {
         companion object {
-            fun inlinedConstant(value: String) = Item(JAVA_STRING_TYPE, ItemType.INLINED_CONSTANT, value)
-            fun constant(value: String) = Item(JAVA_STRING_TYPE, ItemType.CONSTANT, value)
+            fun inlinedConstant(konstue: String) = Item(JAVA_STRING_TYPE, ItemType.INLINED_CONSTANT, konstue)
+            fun constant(konstue: String) = Item(JAVA_STRING_TYPE, ItemType.CONSTANT, konstue)
             fun parameter(type: Type) = Item(type, ItemType.PARAMETER, "\u0001")
         }
 
-        val encodedUTF8Size by lazy {
-            value.encodedUTF8Size()
+        konst encodedUTF8Size by lazy {
+            konstue.encodedUTF8Size()
         }
 
-        fun fitEncodingLimit() = if (value.isDefinitelyFitEncodingLimit()) true else encodedUTF8Size <= STRING_UTF8_ENCODING_BYTE_LIMIT
+        fun fitEncodingLimit() = if (konstue.isDefinitelyFitEncodingLimit()) true else encodedUTF8Size <= STRING_UTF8_ENCODING_BYTE_LIMIT
     }
 
-    private val items = arrayListOf<Item>()
+    private konst items = arrayListOf<Item>()
     private var paramSlots = 0
     private var justFlushed = false
 
@@ -62,13 +62,13 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
         if (mode == JvmStringConcat.INDY_WITH_CONSTANTS) {
             when (stackValue) {
                 is StackValue.Constant -> {
-                    val value = stackValue.value
-                    if (value is String && (value.contains("\u0001") || value.contains("\u0002"))) {
-                        items.add(Item.constant(value)) //strings with special symbols generated via bootstrap
-                    } else if (value is Char && (value == 1.toChar() || value == 2.toChar())) {
-                        items.add(Item.constant(value.toString())) //strings with special symbols generated via bootstrap
+                    konst konstue = stackValue.konstue
+                    if (konstue is String && (konstue.contains("\u0001") || konstue.contains("\u0002"))) {
+                        items.add(Item.constant(konstue)) //strings with special symbols generated via bootstrap
+                    } else if (konstue is Char && (konstue == 1.toChar() || konstue == 2.toChar())) {
+                        items.add(Item.constant(konstue.toString())) //strings with special symbols generated via bootstrap
                     } else {
-                        items.add(Item.inlinedConstant(value.toString()))
+                        items.add(Item.inlinedConstant(konstue.toString()))
                     }
                     return
                 }
@@ -86,8 +86,8 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
         invokeAppend(type)
     }
 
-    fun addStringConstant(value: String) {
-        putValueOrProcessConstant(StackValue.constant(value, JAVA_STRING_TYPE, null))
+    fun addStringConstant(konstue: String) {
+        putValueOrProcessConstant(StackValue.constant(konstue, JAVA_STRING_TYPE, null))
     }
 
     fun invokeAppend(type: Type) {
@@ -119,7 +119,7 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
             //if state was flushed in `invokeAppend` do nothing
             if (justFlushed) return
             if (mode == JvmStringConcat.INDY_WITH_CONSTANTS) {
-                val bootstrap = Handle(
+                konst bootstrap = Handle(
                     Opcodes.H_INVOKESTATIC,
                     "java/lang/invoke/StringConcatFactory",
                     "makeConcatWithConstants",
@@ -127,10 +127,10 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
                     false
                 )
 
-                val itemForGeneration = fitRestrictions(items)
-                val templateBuilder = buildRecipe(itemForGeneration)
+                konst itemForGeneration = fitRestrictions(items)
+                konst templateBuilder = buildRecipe(itemForGeneration)
 
-                val specialSymbolsInTemplate = itemForGeneration.filter { it.itemType == ItemType.CONSTANT }.map { it.value }
+                konst specialSymbolsInTemplate = itemForGeneration.filter { it.itemType == ItemType.CONSTANT }.map { it.konstue }
 
                 mv.invokedynamic(
                     "makeConcatWithConstants",
@@ -142,7 +142,7 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
                     arrayOf(templateBuilder.toString()) + specialSymbolsInTemplate
                 )
             } else {
-                val bootstrap = Handle(
+                konst bootstrap = Handle(
                     Opcodes.H_INVOKESTATIC,
                     "java/lang/invoke/StringConcatFactory",
                     "makeConcat",
@@ -173,7 +173,7 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
     }
 
     private fun buildRecipe(itemForGeneration: ArrayList<Item>): StringBuilder {
-        val templateBuilder = StringBuilder()
+        konst templateBuilder = StringBuilder()
         itemForGeneration.forEach {
             when (it.itemType) {
                 ItemType.PARAMETER ->
@@ -181,20 +181,20 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
                 ItemType.CONSTANT ->
                     templateBuilder.append("\u0002")
                 ItemType.INLINED_CONSTANT ->
-                    templateBuilder.append(it.value)
+                    templateBuilder.append(it.konstue)
             }
         }
         return templateBuilder
     }
 
     private fun fitRestrictions(items: List<Item>): ArrayList<Item> {
-        val result = arrayListOf<Item>()
+        konst result = arrayListOf<Item>()
         //Split long CONSTANT and INLINED_CONSTANT into smaller strings and convert them into CONSTANT
         items.forEach { item ->
             when (item.itemType) {
                 //split INLINED_CONSTANT becomes split CONSTANT
                 ItemType.CONSTANT, ItemType.INLINED_CONSTANT ->
-                    if (item.fitEncodingLimit()) result.add(item) else splitStringConstant(item.value).forEach { part ->
+                    if (item.fitEncodingLimit()) result.add(item) else splitStringConstant(item.konstue).forEach { part ->
                         result.add(
                             Item(
                                 item.type,
@@ -210,7 +210,7 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
         //Check restriction for recipe string
         var recipe = buildRecipe(result)
         while (recipe.toString().encodedUTF8Size() > STRING_UTF8_ENCODING_BYTE_LIMIT) {
-            val item = items.filter { it.itemType == ItemType.INLINED_CONSTANT }.maxByOrNull { it.encodedUTF8Size } ?: break
+            konst item = items.filter { it.itemType == ItemType.INLINED_CONSTANT }.maxByOrNull { it.encodedUTF8Size } ?: break
             //move largest INLINED_CONSTANT to CONSTANT
             item.itemType = ItemType.CONSTANT
             recipe = buildRecipe(result)
@@ -220,7 +220,7 @@ class StringConcatGenerator(val mode: JvmStringConcat, val mv: InstructionAdapte
     }
 
     companion object {
-        private val STRING_BUILDER_OBJECT_APPEND_ARG_TYPES: Set<Type> = Sets.newHashSet(
+        private konst STRING_BUILDER_OBJECT_APPEND_ARG_TYPES: Set<Type> = Sets.newHashSet(
             AsmTypes.getType(String::class.java),
             AsmTypes.getType(StringBuffer::class.java),
             AsmTypes.getType(CharSequence::class.java)

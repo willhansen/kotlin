@@ -2,8 +2,8 @@ package test
 
 import testing.*
 
-val testObjectProperty = TopLevelObject
+konst testObjectProperty = TopLevelObject
 
-val outer = Outer()
-val inn3r = Outer().Inner()
-val nested = Outer.Nested()
+konst outer = Outer()
+konst inn3r = Outer().Inner()
+konst nested = Outer.Nested()

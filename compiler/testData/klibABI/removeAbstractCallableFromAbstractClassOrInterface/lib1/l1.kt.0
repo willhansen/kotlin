@@ -2,10 +2,10 @@ package lib1
 
 abstract class AbstractClass {
     abstract fun foo(): Int
-    abstract val bar: Int
+    abstract konst bar: Int
 }
 
 interface Interface {
     fun foo(): Int
-    val bar: Int
+    konst bar: Int
 }

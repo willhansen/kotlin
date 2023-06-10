@@ -7,21 +7,21 @@ package kotlin.test.tests
 
 import kotlin.test.*
 
-private var value = 5
+private var konstue = 5
 private var tests: MutableSet<String>? = null
 
 class AnnotationsTest {
 
     @BeforeTest
     fun setup() {
-        value *= 2
+        konstue *= 2
         assertNull(tests)
         tests = mutableSetOf()
     }
 
     @AfterTest
     fun teardown() {
-        value /= 2
+        konstue /= 2
         assertNotNull(tests).let { tests ->
             assertNotEquals(emptySet<String>(), tests)
         }
@@ -37,20 +37,20 @@ class AnnotationsTest {
 
     @Test
     fun testValue() {
-        assertEquals(10, value)
+        assertEquals(10, konstue)
         logTestRun("testValue")
     }
 
     @Test
     fun testValueAgain() {
-        assertEquals(10, value)
+        assertEquals(10, konstue)
         logTestRun("testValueAgain")
     }
 
     @Ignore
     @Test
     fun testValueWrongIgnored() {
-        assertEquals(20, value)
+        assertEquals(20, konstue)
     }
 
 }

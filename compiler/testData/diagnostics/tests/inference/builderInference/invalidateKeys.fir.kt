@@ -1,11 +1,11 @@
 // WITH_STDLIB
 fun foo(libraryInfoCache: LibraryInfoCache<String, String>, outdated: List<String>) {
-    val droppedLibraryInfos = libraryInfoCache.invalidateKeys(outdated).<!UNRESOLVED_REFERENCE!>flatMapTo<!>(hashSetOf()) { <!UNRESOLVED_REFERENCE!>it<!> }
+    konst droppedLibraryInfos = libraryInfoCache.inkonstidateKeys(outdated).<!UNRESOLVED_REFERENCE!>flatMapTo<!>(hashSetOf()) { <!UNRESOLVED_REFERENCE!>it<!> }
 }
 
 class LibraryInfoCache<Key, Value> {
-    fun invalidateKeys(
+    fun inkonstidateKeys(
         keys: Collection<Key>,
-        validityCondition: ((Key, Value) -> Boolean)? = null
+        konstidityCondition: ((Key, Value) -> Boolean)? = null
     ) {}
 }

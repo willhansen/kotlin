@@ -41,19 +41,19 @@ import org.jetbrains.kotlin.resolve.source.getPsi
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedMemberDescriptor
 
 class JvmModuleAccessibilityChecker(project: Project) : CallChecker {
-    private val moduleResolver = JavaModuleResolver.getInstance(project)
+    private konst moduleResolver = JavaModuleResolver.getInstance(project)
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.resultingDescriptor
+        konst descriptor = resolvedCall.resultingDescriptor
 
         // Do not check constructors, because the containing class will be checked in [ClassifierUsage]
         if (descriptor is ClassConstructorDescriptor) return
 
         // javac seems to check only the containing class of the member being called. Note that it's fine to call, for example,
         // members with parameter types or return type from an unexported package
-        val targetDescriptor = DescriptorUtils.getParentOfType(descriptor, ClassOrPackageFragmentDescriptor::class.java) ?: return
+        konst targetDescriptor = DescriptorUtils.getParentOfType(descriptor, ClassOrPackageFragmentDescriptor::class.java) ?: return
 
-        val fileFromOurModule = DescriptorToSourceUtils.getContainingFile(context.scope.ownerDescriptor)?.virtualFile
+        konst fileFromOurModule = DescriptorToSourceUtils.getContainingFile(context.scope.ownerDescriptor)?.virtualFile
         diagnosticFor(targetDescriptor, descriptor, fileFromOurModule, reportOn)?.let(context.trace::report)
     }
 
@@ -63,12 +63,12 @@ class JvmModuleAccessibilityChecker(project: Project) : CallChecker {
             fileFromOurModule: VirtualFile?,
             reportOn: PsiElement
     ): Diagnostic? {
-        val referencedFile = findVirtualFile(targetClassOrPackage, originalDescriptor) ?: return null
+        konst referencedFile = findVirtualFile(targetClassOrPackage, originalDescriptor) ?: return null
 
-        val referencedPackageFqName =
+        konst referencedPackageFqName =
                 (originalDescriptor as? DeserializedMemberDescriptor)?.getImplClassNameForDeserialized()?.packageFqName
                 ?: DescriptorUtils.getParentOfType(targetClassOrPackage, PackageFragmentDescriptor::class.java, false)?.fqName
-        val diagnostic = moduleResolver.checkAccessibility(fileFromOurModule, referencedFile, referencedPackageFqName)
+        konst diagnostic = moduleResolver.checkAccessibility(fileFromOurModule, referencedFile, referencedPackageFqName)
 
         return when (diagnostic) {
             is ModuleDoesNotReadUnnamedModule ->
@@ -85,7 +85,7 @@ class JvmModuleAccessibilityChecker(project: Project) : CallChecker {
             descriptor: ClassOrPackageFragmentDescriptor,
             originalDescriptor: DeclarationDescriptorWithSource?
     ): VirtualFile? {
-        val source = descriptor.source
+        konst source = descriptor.source
         when (source) {
             is KotlinJvmBinarySourceElement -> (source.binaryClass as? VirtualFileKotlinClass)?.file?.let { return it }
             is JavaSourceElement -> (source.javaElement as? VirtualFileBoundJavaClass)?.virtualFile?.let { return it }
@@ -103,24 +103,24 @@ class JvmModuleAccessibilityChecker(project: Project) : CallChecker {
 
         getContainingVirtualFile(source)?.let { return it }
 
-        val originalSource = originalDescriptor?.source ?: return null
+        konst originalSource = originalDescriptor?.source ?: return null
         return getContainingVirtualFile(originalSource)
     }
 
     inner class ClassifierUsage : ClassifierUsageChecker {
         override fun check(targetDescriptor: ClassifierDescriptor, element: PsiElement, context: ClassifierUsageCheckerContext) {
-            val virtualFile = element.containingFile.virtualFile
+            konst virtualFile = element.containingFile.virtualFile
             when (targetDescriptor) {
                 is ClassDescriptor -> {
                     diagnosticFor(targetDescriptor, targetDescriptor, virtualFile, element)?.let(context.trace::report)
                 }
                 is TypeAliasDescriptor -> {
-                    val containingClassOrPackage = DescriptorUtils.getParentOfType(targetDescriptor, ClassOrPackageFragmentDescriptor::class.java)
+                    konst containingClassOrPackage = DescriptorUtils.getParentOfType(targetDescriptor, ClassOrPackageFragmentDescriptor::class.java)
                     if (containingClassOrPackage != null) {
                         diagnosticFor(containingClassOrPackage, targetDescriptor, virtualFile, element)?.let(context.trace::report)
                     }
 
-                    val expandedClass = targetDescriptor.expandedType.constructor.declarationDescriptor as? ClassDescriptor
+                    konst expandedClass = targetDescriptor.expandedType.constructor.declarationDescriptor as? ClassDescriptor
                     if (expandedClass != null) {
                         diagnosticFor(expandedClass, expandedClass, virtualFile, element)?.let(context.trace::report)
                     }

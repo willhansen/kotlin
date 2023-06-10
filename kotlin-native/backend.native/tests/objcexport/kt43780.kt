@@ -4,26 +4,26 @@
  */
 
 object KT43780TestObject {
-    val x = 5
-    val y = 6
-    val shared = "shared"
-    val Shared = "Shared"
+    konst x = 5
+    konst y = 6
+    konst shared = "shared"
+    konst Shared = "Shared"
 }
 
 class KT43780TestClassWithCompanion {
     companion object {
-        val z = 7
+        konst z = 7
     }
 }
 
 object Shared {
-    val x = 8
+    konst x = 8
 }
 
 class Companion {
-    val t = 10
+    konst t = 10
     companion object {
-        val x = 9
+        konst x = 9
     }
 }
 
@@ -32,24 +32,24 @@ enum class KT43780Enum {
     COMPANION;
 
     companion object {
-        val x = 11
+        konst x = 11
     }
 }
 
 class ClassWithInternalCompanion {
     internal companion object {
-        val x = 12
+        konst x = 12
     }
 
-    val y = 13
+    konst y = 13
 }
 
 class ClassWithPrivateCompanion {
     private companion object {
-        val x = 14
+        konst x = 14
     }
 
-    val y = 15
+    konst y = 15
 }
 
 // Shouldn't be exported at all:

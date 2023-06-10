@@ -3,19 +3,19 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val int: Int)
+konstue class Z(konst int: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L(val long: Long)
+konstue class L(konst long: Long)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str(val string: String)
+konstue class Str(konst string: String)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Obj(val obj: Any)
+konstue class Obj(konst obj: Any)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Host(val xx: Int) {
+konstue class Host(konst xx: Int) {
     inline fun <R> withDefaultZ(fn: (Z) -> R, x: Z = Z(xx)) = fn(x)
     inline fun <R> withDefaultL(fn: (L) -> R, x: L = L(xx.toLong())) = fn(x)
     inline fun <R> withDefaultL2(x: L = L(xx.toLong()), fn: (L) -> R) = fn(x)
@@ -32,7 +32,7 @@ value class Host(val xx: Int) {
 }
 
 fun box(): String {
-    val h = Host(42)
+    konst h = Host(42)
     if (h.testWithDefaultZ().int != 43) throw AssertionError()
     if (h.testWithDefaultL().long != 43L) throw AssertionError()
     if (h.testWithDefaultL2().long != 43L) throw AssertionError()

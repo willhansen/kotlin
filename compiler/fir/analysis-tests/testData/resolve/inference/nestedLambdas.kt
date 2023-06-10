@@ -2,15 +2,15 @@ fun <T> myRun(computable: () -> T): T = TODO()
 
 interface Inv<W>
 interface MyMap<K, V> {
-    val k: K
-    val v: V
+    konst k: K
+    konst v: V
 }
 
-val w: Inv<String> = TODO()
+konst w: Inv<String> = TODO()
 
 public fun <X, K> Inv<X>.associateBy1(keySelector: (X) -> K): MyMap<K, X> = TODO()
 
-val x = myRun {
+konst x = myRun {
     w.associateBy1 { f -> f.length }
 }
 

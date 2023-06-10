@@ -12,9 +12,9 @@ fun foo(b: Boolean): String {
 
         class LOuter<T1>(t1: T1) {
 
-            val stringOuter1: String = "A"
-            val genericOuter1: T1 = t1
-            private val test = object {
+            konst stringOuter1: String = "A"
+            konst genericOuter1: T1 = t1
+            private konst test = object {
                 fun bar(a: Any = object {}) = object {
                     fun qux(a: Any = object {}) = object {
                         fun biq(a: Any = object {}) = object {
@@ -25,25 +25,25 @@ fun foo(b: Boolean): String {
                 }.also { result += "a" }
             }.also { result += "!" }
 
-            private val ttt = test.bar()
+            private konst ttt = test.bar()
 
-            private val qqq = ttt.qux()
+            private konst qqq = ttt.qux()
 
-            val bbb = qqq.biq().also { it.caz() }
+            konst bbb = qqq.biq().also { it.caz() }
         }
 
 
-        val lo = LOuter("Z")
+        konst lo = LOuter("Z")
         result += lo.stringOuter1
         result += lo.genericOuter1
 
     } else {
         class LOuter<T1>(t1: T1) {
 
-            val stringOuter2: String = "Z"
-            val genericOuter2: T1 = t1
+            konst stringOuter2: String = "Z"
+            konst genericOuter2: T1 = t1
 
-            private val test = object {
+            private konst test = object {
                 fun bar() = object {
                     fun qux() = object {
                         fun biq() = object {
@@ -54,14 +54,14 @@ fun foo(b: Boolean): String {
                 }.also { result += "e" }
             }.also { result += "?" }
 
-            private val ttt = test.bar()
+            private konst ttt = test.bar()
 
-            private val qqq = ttt.qux()
+            private konst qqq = ttt.qux()
 
-            val bbb = qqq.biq().also { it.caz() }
+            konst bbb = qqq.biq().also { it.caz() }
         }
 
-        val lo = LOuter(1)
+        konst lo = LOuter(1)
         result += lo.stringOuter2
         result += lo.genericOuter2
     }
@@ -74,10 +74,10 @@ fun foo(b: Boolean): String {
 // FILE: m.kt
 
 fun box(): String {
-    val r1 = foo(true)
+    konst r1 = foo(true)
     if (r1 != "!abcdAZ") return "FAIL1: $r1"
 
-    val r2 = foo(false)
+    konst r2 = foo(false)
     if (r2 != "?efghZ1") return "FAIL2: $r2"
 
     return "OK"

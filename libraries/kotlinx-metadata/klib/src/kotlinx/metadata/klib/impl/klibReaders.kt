@@ -9,7 +9,7 @@ import kotlinx.metadata.internal.ReadContextExtension
 import kotlinx.metadata.klib.KlibSourceFile
 
 class SourceFileIndexReadExtension(
-    private val files: List<KlibSourceFile>
+    private konst files: List<KlibSourceFile>
 ) : ReadContextExtension {
     fun getSourceFile(index: Int): KlibSourceFile = files[index]
 }

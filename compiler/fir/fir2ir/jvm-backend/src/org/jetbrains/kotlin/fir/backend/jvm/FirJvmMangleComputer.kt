@@ -21,7 +21,7 @@ class FirJvmMangleComputer(
     builder: StringBuilder,
     mode: MangleMode,
 ) : FirMangleComputer(builder, mode) {
-    override val visitor: Visitor = JvmVisitor()
+    override konst visitor: Visitor = JvmVisitor()
 
     override fun FirFunction.platformSpecificSuffix(): String? =
         if (this is FirSimpleFunction && name.asString() == "main")

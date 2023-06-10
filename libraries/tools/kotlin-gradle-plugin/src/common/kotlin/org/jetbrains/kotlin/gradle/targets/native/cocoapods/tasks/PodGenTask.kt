@@ -30,40 +30,40 @@ abstract class PodGenTask : CocoapodsTask() {
     }
 
     @get:InputFile
-    internal abstract val podspec: Property<File>
+    internal abstract konst podspec: Property<File>
 
     @get:Input
-    internal abstract val podName: Property<String>
+    internal abstract konst podName: Property<String>
 
     @get:Input
-    internal abstract val useLibraries: Property<Boolean>
+    internal abstract konst useLibraries: Property<Boolean>
 
     @get:Input
-    internal abstract val family: Property<Family>
+    internal abstract konst family: Property<Family>
 
     @get:Nested
-    internal abstract val platformSettings: Property<PodspecPlatformSettings>
+    internal abstract konst platformSettings: Property<PodspecPlatformSettings>
 
     @get:Nested
-    internal abstract val specRepos: Property<SpecRepos>
+    internal abstract konst specRepos: Property<SpecRepos>
 
     @get:Nested
-    internal abstract val pods: ListProperty<CocoapodsDependency>
+    internal abstract konst pods: ListProperty<CocoapodsDependency>
 
     @get:Input
-    internal abstract val xcodeVersion: Property<XcodeVersion>
+    internal abstract konst xcodeVersion: Property<XcodeVersion>
 
     @get:OutputFile
-    val podfile: Provider<File> = family.map { project.cocoapodsBuildDirs.synthetic(it).resolve("Podfile") }
+    konst podfile: Provider<File> = family.map { project.cocoapodsBuildDirs.synthetic(it).resolve("Podfile") }
 
     @TaskAction
     fun generate() {
-        val specRepos = specRepos.get().getAll()
+        konst specRepos = specRepos.get().getAll()
 
-        val podfile = this.podfile.get()
+        konst podfile = this.podfile.get()
         podfile.createNewFile()
 
-        val podfileContent = getPodfileContent(specRepos, family.get())
+        konst podfileContent = getPodfileContent(specRepos, family.get())
         podfile.writeText(podfileContent)
     }
 
@@ -78,8 +78,8 @@ abstract class PodGenTask : CocoapodsTask() {
             if (useLibraries.get().not()) {
                 appendLine("\tuse_frameworks!")
             }
-            val settings = platformSettings.get()
-            val deploymentTarget = settings.deploymentTarget
+            konst settings = platformSettings.get()
+            konst deploymentTarget = settings.deploymentTarget
             if (deploymentTarget != null) {
                 appendLine("\tplatform :${settings.name}, '$deploymentTarget'")
             } else {
@@ -89,8 +89,8 @@ abstract class PodGenTask : CocoapodsTask() {
                 buildString {
                     append("pod '${it.name}'")
 
-                    val version = it.version
-                    val source = it.source
+                    konst version = it.version
+                    konst source = it.source
 
                     if (source != null) {
                         append(", ${source.getPodSourcePath()}")
@@ -125,9 +125,9 @@ abstract class PodGenTask : CocoapodsTask() {
             return ""
         }
 
-        class Spec(val property: String, val major: Int, val minor: Int)
+        class Spec(konst property: String, konst major: Int, konst minor: Int)
 
-        val minDeploymentTargetSpec = when (family) {
+        konst minDeploymentTargetSpec = when (family) {
             Family.IOS -> Spec("IPHONEOS_DEPLOYMENT_TARGET", 11, 0)
             Family.OSX -> Spec("MACOSX_DEPLOYMENT_TARGET", 10, 13)
             Family.TVOS -> Spec("TVOS_DEPLOYMENT_TARGET", 11, 0)

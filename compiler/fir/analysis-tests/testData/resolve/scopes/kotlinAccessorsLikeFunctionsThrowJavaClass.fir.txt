@@ -14,11 +14,11 @@ FILE: A.kt
 
         protected final var scope: R|kotlin/String?| = Null(null)
             protected get(): R|kotlin/String?|
-            protected set(value: R|kotlin/String?|): R|kotlin/Unit|
+            protected set(konstue: R|kotlin/String?|): R|kotlin/Unit|
 
     }
 FILE: main.kt
     public final fun test(b: R|B|): R|kotlin/Unit| {
-        lval s: R|kotlin/String?| = R|<local>/b|.R|/B.getScope|()
+        lkonst s: R|kotlin/String?| = R|<local>/b|.R|/B.getScope|()
         R|<local>/b|.R|/A.setScope|(R|<local>/s|)
     }

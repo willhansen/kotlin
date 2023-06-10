@@ -17,25 +17,25 @@ class ResultTest {
 
     @Test
     fun testRunCatchingSuccess() {
-        val ok = runCatching { "OK" }
+        konst ok = runCatching { "OK" }
         checkSuccess(ok, "OK", true)
     }
 
     @Test
     fun testRunCatchingFailure() {
-        val fail = runCatching { error("F") }
+        konst fail = runCatching { error("F") }
         checkFailure(fail, "F", true)
     }
 
     @Test
     fun testConstructedSuccess() {
-        val ok = Result.success("OK")
+        konst ok = Result.success("OK")
         checkSuccess(ok, "OK", true)
     }
 
     @Test
     fun testConstructedFailure() {
-        val fail = Result.failure<Unit>(CustomException("F"))
+        konst fail = Result.failure<Unit>(CustomException("F"))
         checkFailure(fail, "F", true)
     }
 

@@ -36,47 +36,47 @@ class TreeBasedClass(
         tree: JCTree.JCClassDecl,
         compilationUnit: CompilationUnitTree,
         javac: JavacWrapper,
-        override val classId: ClassId?,
-        override val outerClass: JavaClass?
+        override konst classId: ClassId?,
+        override konst outerClass: JavaClass?
 ) : TreeBasedElement<JCTree.JCClassDecl>(tree, compilationUnit, javac), JavaClassWithClassId {
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(tree.simpleName.toString())
 
-    override val annotations: Collection<JavaAnnotation> by lazy {
+    override konst annotations: Collection<JavaAnnotation> by lazy {
         tree.annotations().map { annotation -> TreeBasedAnnotation(annotation, compilationUnit, javac, this) }
     }
 
     override fun findAnnotation(fqName: FqName) =
             annotations.find { it.classId?.asSingleFqName() == fqName }
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = javac.isDeprecatedInJavaDoc(tree, compilationUnit)
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = tree.modifiers.isAbstract || ((isAnnotationType || isEnum) && methods.any { it.isAbstract })
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = isEnum || isInterface || (outerClass?.isInterface ?: false) || tree.modifiers.isStatic
 
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = isEnum || tree.modifiers.isFinal
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = if (outerClass?.isInterface == true) Visibilities.Public else tree.modifiers.visibility
 
-    override val typeParameters: List<JavaTypeParameter>
+    override konst typeParameters: List<JavaTypeParameter>
         get() = tree.typeParameters.map { parameter ->
             TreeBasedTypeParameter(parameter, compilationUnit, javac, this)
         }
 
-    override val fqName: FqName
+    override konst fqName: FqName
         get() = classId?.asSingleFqName() ?: throw UnsupportedOperationException("classId of $name is null")
 
-    override val supertypes: Collection<JavaClassifierType>
+    override konst supertypes: Collection<JavaClassifierType>
             by lazy {
                 arrayListOf<JavaClassifierType>().also { list ->
                     if (isEnum) {
@@ -101,62 +101,62 @@ class TreeBasedClass(
                 }
             }
 
-    val innerClasses: Map<Name, TreeBasedClass> by lazy {
+    konst innerClasses: Map<Name, TreeBasedClass> by lazy {
         tree.members
                 .filterIsInstance(JCTree.JCClassDecl::class.java)
                 .map { TreeBasedClass(it, compilationUnit, javac, classId?.createNestedClassId(Name.identifier(it.simpleName.toString())), this) }
                 .associateBy(JavaClass::name)
     }
 
-    override val isInterface: Boolean
+    override konst isInterface: Boolean
         get() = tree.modifiers.flags and Flags.INTERFACE.toLong() != 0L
 
-    override val isAnnotationType: Boolean
+    override konst isAnnotationType: Boolean
         get() = tree.modifiers.flags and Flags.ANNOTATION.toLong() != 0L
 
-    override val isEnum: Boolean
+    override konst isEnum: Boolean
         get() = tree.modifiers.flags and Flags.ENUM.toLong() != 0L
 
     // TODO: Support
-    override val isRecord: Boolean
+    override konst isRecord: Boolean
         get() = false
 
     // TODO
-    override val isSealed: Boolean
+    override konst isSealed: Boolean
         get() = false
 
-    override val permittedTypes: Collection<JavaClassifierType>
+    override konst permittedTypes: Collection<JavaClassifierType>
         get() = emptyList()
 
-    override val lightClassOriginKind: LightClassOriginKind?
+    override konst lightClassOriginKind: LightClassOriginKind?
         get() = null
 
-    override val methods: Collection<JavaMethod>
+    override konst methods: Collection<JavaMethod>
         get() = tree.members
                 .filter { it.kind == Tree.Kind.METHOD && !TreeInfo.isConstructor(it) }
                 .map { TreeBasedMethod(it as JCTree.JCMethodDecl, compilationUnit,this, javac) }
 
-    override val fields: Collection<JavaField>
+    override konst fields: Collection<JavaField>
         get() = tree.members
                 .filterIsInstance(JCTree.JCVariableDecl::class.java)
                 .map { TreeBasedField(it, compilationUnit, this, javac) }
 
-    override val constructors: Collection<JavaConstructor>
+    override konst constructors: Collection<JavaConstructor>
         get() = tree.members
                 .filter { member -> TreeInfo.isConstructor(member) }
                 .map { constructor ->
                     TreeBasedConstructor(constructor as JCTree.JCMethodDecl, compilationUnit, this, javac)
                 }
 
-    override val recordComponents: Collection<JavaRecordComponent>
+    override konst recordComponents: Collection<JavaRecordComponent>
         get() = emptyList()
 
     override fun hasDefaultConstructor() = !isInterface && constructors.isEmpty()
 
-    override val innerClassNames: Collection<Name>
+    override konst innerClassNames: Collection<Name>
         get() = innerClasses.keys
 
-    override val virtualFile: VirtualFile? by lazy {
+    override konst virtualFile: VirtualFile? by lazy {
         javac.toVirtualFile(compilationUnit.sourceFile)
     }
 
@@ -166,42 +166,42 @@ class TreeBasedClass(
 
 }
 
-private class EnumSupertype(private val javaClass: JavaClass,
-                            private val javac: JavacWrapper) : JavaClassifierType {
+private class EnumSupertype(private konst javaClass: JavaClass,
+                            private konst javac: JavacWrapper) : JavaClassifierType {
 
-    override val classifier: JavaClass?
+    override konst classifier: JavaClass?
         get() = javac.JAVA_LANG_ENUM
 
-    override val typeArguments: List<JavaType>
+    override konst typeArguments: List<JavaType>
         get() = listOf(TypeArgument())
 
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = false
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = emptyList()
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = classifier?.fqName?.asString() ?: ""
-    override val presentableText: String
+    override konst presentableText: String
         get() = classifierQualifiedName
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = false
 
     override fun findAnnotation(fqName: FqName) = null
 
     private inner class TypeArgument : JavaClassifierType {
-        override val classifier: JavaClassifier?
+        override konst classifier: JavaClassifier?
             get() = this@EnumSupertype.javaClass
-        override val typeArguments: List<JavaType>
+        override konst typeArguments: List<JavaType>
             get() = emptyList()
-        override val isRaw: Boolean
+        override konst isRaw: Boolean
             get() = false
-        override val annotations: Collection<JavaAnnotation>
+        override konst annotations: Collection<JavaAnnotation>
             get() = emptyList()
-        override val classifierQualifiedName: String
+        override konst classifierQualifiedName: String
             get() = this@EnumSupertype.javaClass.fqName!!.asString()
-        override val presentableText: String
+        override konst presentableText: String
             get() = classifierQualifiedName
-        override val isDeprecatedInJavaDoc: Boolean
+        override konst isDeprecatedInJavaDoc: Boolean
             get() = false
 
         override fun findAnnotation(fqName: FqName) = null

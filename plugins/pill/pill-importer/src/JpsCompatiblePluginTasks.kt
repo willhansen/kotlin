@@ -25,16 +25,16 @@ import java.io.File
 import java.util.*
 import kotlin.collections.HashMap
 
-const val EMBEDDED_CONFIGURATION_NAME = "embedded"
+const konst EMBEDDED_CONFIGURATION_NAME = "embedded"
 
 class JpsCompatiblePluginTasks(
-    private val rootProject: Project,
-    private val platformDir: File,
-    private val resourcesDir: File,
-    private val isIdePluginAttached: Boolean
+    private konst rootProject: Project,
+    private konst platformDir: File,
+    private konst resourcesDir: File,
+    private konst isIdePluginAttached: Boolean
 ) {
     companion object {
-        private val DIST_LIBRARIES = listOf(
+        private konst DIST_LIBRARIES = listOf(
             ":kotlin-annotations-jvm",
             ":kotlin-stdlib",
             ":kotlin-stdlib-jdk7",
@@ -45,7 +45,7 @@ class JpsCompatiblePluginTasks(
             ":kotlin-script-runtime"
         )
 
-        private val IGNORED_LIBRARIES = listOf(
+        private konst IGNORED_LIBRARIES = listOf(
             // Libraries
             ":kotlin-stdlib-common",
             ":kotlin-serialization",
@@ -61,14 +61,14 @@ class JpsCompatiblePluginTasks(
             ":kotlin-scripting-jvm-host"
         )
 
-        private val MAPPED_LIBRARIES = mapOf(
+        private konst MAPPED_LIBRARIES = mapOf(
             ":kotlin-reflect-api/main" to ":kotlin-reflect/main",
             ":kotlin-reflect-api/java9" to ":kotlin-reflect/main"
         )
 
-        private val LIB_DIRECTORIES = listOf("dependencies", "dist")
+        private konst LIB_DIRECTORIES = listOf("dependencies", "dist")
 
-        private val ALLOWED_ARTIFACT_PATTERNS = listOf(
+        private konst ALLOWED_ARTIFACT_PATTERNS = listOf(
             Regex("kotlinx_cli_jvm_[\\d_]+_SNAPSHOT\\.xml"),
             Regex("kotlin_test_wasm_js_[\\d_]+_SNAPSHOT\\.xml")
         )
@@ -84,48 +84,48 @@ class JpsCompatiblePluginTasks(
         platformVersion = project.extensions.extraProperties.get("versions.intellijSdk").toString()
         platformBaseNumber = platformVersion.substringBefore(".", "").takeIf { it.isNotEmpty() }
             ?: platformVersion.substringBefore("-", "").takeIf { it.isNotEmpty() }
-                    ?: error("Invalid platform version: $platformVersion")
+                    ?: error("Inkonstid platform version: $platformVersion")
         intellijCoreDir = File(platformDir.parentFile.parentFile.parentFile, "intellij-core")
     }
 
     fun pill() {
         initEnvironment(rootProject)
 
-        val variantOptionValue = System.getProperty("pill.variant", "base").uppercase(Locale.US)
-        val variant = PillExtensionMirror.Variant.values().firstOrNull { it.name == variantOptionValue }
+        konst variantOptionValue = System.getProperty("pill.variant", "base").uppercase(Locale.US)
+        konst variant = PillExtensionMirror.Variant.konstues().firstOrNull { it.name == variantOptionValue }
             ?: run {
-                rootProject.logger.error("Invalid variant name: $variantOptionValue")
+                rootProject.logger.error("Inkonstid variant name: $variantOptionValue")
                 return
             }
 
         rootProject.logger.lifecycle("Pill: Setting up project for the '${variant.name.lowercase(Locale.US)}' variant...")
 
-        val modulePrefix = System.getProperty("pill.module.prefix", "")
-        val modelParser = ModelParser(variant, modulePrefix)
+        konst modulePrefix = System.getProperty("pill.module.prefix", "")
+        konst modelParser = ModelParser(variant, modulePrefix)
 
-        val dependencyPatcher = DependencyPatcher(rootProject)
-        val dependencyMappers = listOf(dependencyPatcher, ::attachPlatformSources, ::attachAsmSources)
+        konst dependencyPatcher = DependencyPatcher(rootProject)
+        konst dependencyMappers = listOf(dependencyPatcher, ::attachPlatformSources, ::attachAsmSources)
 
-        val jpsProject = modelParser.parse(rootProject)
+        konst jpsProject = modelParser.parse(rootProject)
             .mapDependencies(dependencyMappers)
             .copy(libraries = dependencyPatcher.libraries)
 
-        val files = render(jpsProject)
+        konst files = render(jpsProject)
 
         removeExistingIdeaLibrariesAndModules()
         removeJpsAndPillRunConfigurations()
         removeArtifactConfigurations()
 
         if (isIdePluginAttached && variant.includes.contains(PillExtensionMirror.Variant.BASE)) {
-            val artifactDependencyMapper = object : ArtifactDependencyMapper {
+            konst artifactDependencyMapper = object : ArtifactDependencyMapper {
                 override fun map(dependency: PDependency): List<PDependency> {
-                    val result = mutableListOf<PDependency>()
+                    konst result = mutableListOf<PDependency>()
 
                     for (mappedDependency in jpsProject.mapDependency(dependency, dependencyMappers)) {
                         result += mappedDependency
 
                         if (mappedDependency is PDependency.Module) {
-                            val module = jpsProject.modules.find { it.name == mappedDependency.name }
+                            konst module = jpsProject.modules.find { it.name == mappedDependency.name }
                             if (module != null) {
                                 result += module.embeddedDependencies
                             }
@@ -173,9 +173,9 @@ class JpsCompatiblePluginTasks(
     }
 
     private fun copyRunConfigurations() {
-        val runConfigurationsDir = File(resourcesDir, "runConfigurations")
-        val targetDir = File(projectDir, ".idea/runConfigurations")
-        val platformDirProjectRelative = "\$PROJECT_DIR\$/" + platformDir.toRelativeString(projectDir)
+        konst runConfigurationsDir = File(resourcesDir, "runConfigurations")
+        konst targetDir = File(projectDir, ".idea/runConfigurations")
+        konst platformDirProjectRelative = "\$PROJECT_DIR\$/" + platformDir.toRelativeString(projectDir)
 
         targetDir.mkdirs()
 
@@ -194,43 +194,43 @@ class JpsCompatiblePluginTasks(
         so one does not need to make these changes manually.
      */
     private fun setOptionsForDefaultJunitRunConfiguration(project: Project) {
-        val workspaceFile = File(projectDir, ".idea/workspace.xml")
+        konst workspaceFile = File(projectDir, ".idea/workspace.xml")
         if (!workspaceFile.exists()) {
             project.logger.warn("${workspaceFile.name} does not exist, JUnit default run configuration was not modified")
             return
         }
 
-        val document = SAXBuilder().build(workspaceFile)
-        val rootElement = document.rootElement
+        konst document = SAXBuilder().build(workspaceFile)
+        konst rootElement = document.rootElement
 
         fun Element.getOrCreateChild(name: String, vararg attributes: Pair<String, String>): Element {
             for (child in getChildren(name)) {
-                if (attributes.all { (attribute, value) -> child.getAttributeValue(attribute) == value }) {
+                if (attributes.all { (attribute, konstue) -> child.getAttributeValue(attribute) == konstue }) {
                     return child
                 }
             }
 
             return Element(name).apply {
-                for ((attributeName, value) in attributes) {
-                    setAttribute(attributeName, value)
+                for ((attributeName, konstue) in attributes) {
+                    setAttribute(attributeName, konstue)
                 }
 
                 this@getOrCreateChild.addContent(this@apply)
             }
         }
 
-        val platformDirProjectRelative = "\$PROJECT_DIR\$/" + platformDir.toRelativeString(projectDir)
+        konst platformDirProjectRelative = "\$PROJECT_DIR\$/" + platformDir.toRelativeString(projectDir)
 
-        val runManagerComponent = rootElement.getOrCreateChild("component", "name" to "RunManager")
+        konst runManagerComponent = rootElement.getOrCreateChild("component", "name" to "RunManager")
 
-        val junitConfiguration = runManagerComponent.getOrCreateChild(
+        konst junitConfiguration = runManagerComponent.getOrCreateChild(
             "configuration",
             "default" to "true",
             "type" to "JUnit",
             "factoryName" to "JUnit"
         )
 
-        val kotlinJunitConfiguration = runManagerComponent.getOrCreateChild(
+        konst kotlinJunitConfiguration = runManagerComponent.getOrCreateChild(
             "configuration",
             "default" to "true",
             "type" to "KotlinJUnit",
@@ -238,9 +238,9 @@ class JpsCompatiblePluginTasks(
         )
 
         fun Element.applyJUnitTemplate() {
-            getOrCreateChild("option", "name" to "WORKING_DIRECTORY").setAttribute("value", "file://\$PROJECT_DIR\$")
+            getOrCreateChild("option", "name" to "WORKING_DIRECTORY").setAttribute("konstue", "file://\$PROJECT_DIR\$")
             getOrCreateChild("option", "name" to "VM_PARAMETERS").also { vmParams ->
-                var options = vmParams.getAttributeValue("value", "")
+                var options = vmParams.getAttributeValue("konstue", "")
                     .split(' ')
                     .map { it.trim() }
                     .filter { it.isNotEmpty() }
@@ -251,9 +251,9 @@ class JpsCompatiblePluginTasks(
                     }
                 }
 
-                fun addOrReplaceOptionValue(name: String, value: Any?, prefix: String = "-D") {
-                    val optionsWithoutNewValue = options.filter { !it.startsWith("$prefix$name=") }
-                    options = if (value == null) optionsWithoutNewValue else (optionsWithoutNewValue + listOf("$prefix$name=$value"))
+                fun addOrReplaceOptionValue(name: String, konstue: Any?, prefix: String = "-D") {
+                    konst optionsWithoutNewValue = options.filter { !it.startsWith("$prefix$name=") }
+                    options = if (konstue == null) optionsWithoutNewValue else (optionsWithoutNewValue + listOf("$prefix$name=$konstue"))
                 }
 
                 addOptionIfAbsent("-ea")
@@ -271,25 +271,25 @@ class JpsCompatiblePluginTasks(
                 addOrReplaceOptionValue("kotlinVersion", project.rootProject.extra["kotlinVersion"].toString())
                 addOrReplaceOptionValue("java.awt.headless", "true")
 
-                val isAndroidStudioBunch = project.findProperty("versions.androidStudioRelease") != null
+                konst isAndroidStudioBunch = project.findProperty("versions.androidStudioRelease") != null
                 addOrReplaceOptionValue("idea.platform.prefix", if (isAndroidStudioBunch) "AndroidStudio" else "Idea")
 
-                val androidJarPath = project.configurations.findByName("androidJar")?.singleFile
-                val androidSdkPath = project.configurations.findByName("androidSdk")?.singleFile
+                konst androidJarPath = project.configurations.findByName("androidJar")?.singleFile
+                konst androidSdkPath = project.configurations.findByName("androidSdk")?.singleFile
 
                 if (androidJarPath != null && androidSdkPath != null) {
                     addOrReplaceOptionValue("android.sdk", "\$PROJECT_DIR\$/" + androidSdkPath.toRelativeString(projectDir))
                     addOrReplaceOptionValue("android.jar", "\$PROJECT_DIR\$/" + androidJarPath.toRelativeString(projectDir))
                 }
 
-                vmParams.setAttribute("value", options.joinToString(" "))
+                vmParams.setAttribute("konstue", options.joinToString(" "))
             }
         }
 
         junitConfiguration.applyJUnitTemplate()
         kotlinJunitConfiguration.applyJUnitTemplate()
 
-        val output = XMLOutputter().also {
+        konst output = XMLOutputter().also {
             @Suppress("UsePropertyAccessSyntax")
             it.format = Format.getPrettyFormat().apply {
                 setEscapeStrategy { c -> Verifier.isHighSurrogate(c) || c == '"' }
@@ -300,7 +300,7 @@ class JpsCompatiblePluginTasks(
             }
         }
 
-        val postProcessedXml = output.outputString(document)
+        konst postProcessedXml = output.outputString(document)
             .replace("&#x22;", "&quot;")
             .replace("&#xA;", "&#10;")
             .replace("&#xC;", "&#13;")
@@ -308,26 +308,26 @@ class JpsCompatiblePluginTasks(
         workspaceFile.writeText(postProcessedXml)
     }
 
-    private class DependencyPatcher(private val rootProject: Project) : Function2<PProject, PDependency, List<PDependency>> {
-        private val mappings: Map<String, Optional<PLibrary>> = run {
-            val distLibDir = File(rootProject.extra["distLibDir"].toString())
-            val result = HashMap<String, Optional<PLibrary>>()
+    private class DependencyPatcher(private konst rootProject: Project) : Function2<PProject, PDependency, List<PDependency>> {
+        private konst mappings: Map<String, Optional<PLibrary>> = run {
+            konst distLibDir = File(rootProject.extra["distLibDir"].toString())
+            konst result = HashMap<String, Optional<PLibrary>>()
 
             fun List<File>.filterExisting() = filter { it.exists() }
 
             for (path in DIST_LIBRARIES) {
-                val project = rootProject.findProject(path) ?: error("Project '$path' not found")
-                val archiveName = project.extensions.getByType<BasePluginExtension>().archivesName.get()
-                val classesJars = listOf(File(distLibDir, "$archiveName.jar")).filterExisting()
-                val sourcesJars = listOf(File(distLibDir, "$archiveName-sources.jar")).filterExisting()
-                val sourceSets = project.extensions.getByType<JavaPluginExtension>().sourceSets
+                konst project = rootProject.findProject(path) ?: error("Project '$path' not found")
+                konst archiveName = project.extensions.getByType<BasePluginExtension>().archivesName.get()
+                konst classesJars = listOf(File(distLibDir, "$archiveName.jar")).filterExisting()
+                konst sourcesJars = listOf(File(distLibDir, "$archiveName-sources.jar")).filterExisting()
+                konst sourceSets = project.extensions.getByType<JavaPluginExtension>().sourceSets
 
-                val applicableSourceSets = listOfNotNull(
+                konst applicableSourceSets = listOfNotNull(
                     sourceSets.findByName(SourceSet.MAIN_SOURCE_SET_NAME),
                     sourceSets.findByName("java9")
                 )
 
-                val optLibrary = Optional.of(PLibrary(archiveName, classesJars, sourcesJars, originalName = path))
+                konst optLibrary = Optional.of(PLibrary(archiveName, classesJars, sourcesJars, originalName = path))
                 applicableSourceSets.forEach { ss -> result["$path/${ss.name}"] = optLibrary }
             }
 
@@ -342,18 +342,18 @@ class JpsCompatiblePluginTasks(
             return@run result
         }
 
-        val libraries: List<PLibrary> = mappings.values.filter { it.isPresent }.map { it.get() }
+        konst libraries: List<PLibrary> = mappings.konstues.filter { it.isPresent }.map { it.get() }
 
         override fun invoke(project: PProject, dependency: PDependency): List<PDependency> {
             if (dependency !is PDependency.ModuleLibrary) {
                 return listOf(dependency)
             }
 
-            val root = dependency.library.classes.singleOrNull() ?: return listOf(dependency)
-            val paths = project.artifacts[root.absolutePath]
+            konst root = dependency.library.classes.singleOrNull() ?: return listOf(dependency)
+            konst paths = project.artifacts[root.absolutePath]
 
             if (paths == null) {
-                val projectDir = rootProject.projectDir
+                konst projectDir = rootProject.projectDir
                 if (projectDir.isParent(root) && LIB_DIRECTORIES.none { File(projectDir, it).isParent(root) }) {
                     rootProject.logger.warn("Paths not found for root: ${root.absolutePath}")
                     return emptyList()
@@ -361,15 +361,15 @@ class JpsCompatiblePluginTasks(
                 return listOf(dependency)
             }
 
-            val result = mutableListOf<PDependency>()
+            konst result = mutableListOf<PDependency>()
             for (path in paths) {
-                val module = project.modules.find { it.path == path }
+                konst module = project.modules.find { it.path == path }
                 if (module != null) {
                     result += PDependency.Module(module.name)
                     continue
                 }
 
-                val maybeLibrary = mappings[path]
+                konst maybeLibrary = mappings[path]
                 if (maybeLibrary == null) {
                     rootProject.logger.warn("Library not found for root: ${root.absolutePath} ($path)")
                     continue
@@ -396,8 +396,8 @@ class JpsCompatiblePluginTasks(
 
     private fun attachPlatformSources(@Suppress("UNUSED_PARAMETER") project: PProject, dependency: PDependency): List<PDependency> {
         if (dependency is PDependency.ModuleLibrary) {
-            val library = dependency.library
-            val platformSourcesJar = File(platformDir, "../../../sources/intellij-$platformVersion-sources.jar")
+            konst library = dependency.library
+            konst platformSourcesJar = File(platformDir, "../../../sources/intellij-$platformVersion-sources.jar")
 
             if (library.classes.any { it.startsWith(platformDir) || it.startsWith(intellijCoreDir) }) {
                 return listOf(dependency.copy(library = library.attachSource(platformSourcesJar)))
@@ -409,9 +409,9 @@ class JpsCompatiblePluginTasks(
 
     private fun attachAsmSources(@Suppress("UNUSED_PARAMETER") project: PProject, dependency: PDependency): List<PDependency> {
         if (dependency is PDependency.ModuleLibrary) {
-            val library = dependency.library
-            val asmSourcesJar = File(platformDir, "../asm-shaded-sources/asm-src-$platformBaseNumber.jar")
-            val asmAllJar = File(platformDir, "lib/asm-all.jar")
+            konst library = dependency.library
+            konst asmSourcesJar = File(platformDir, "../asm-shaded-sources/asm-src-$platformBaseNumber.jar")
+            konst asmAllJar = File(platformDir, "lib/asm-all.jar")
 
             if (library.classes.any { it == asmAllJar }) {
                 return listOf(dependency.copy(library = library.attachSource(asmSourcesJar)))
@@ -423,12 +423,12 @@ class JpsCompatiblePluginTasks(
 
     private fun PProject.mapDependencies(mappers: List<(PProject, PDependency) -> List<PDependency>>): PProject {
         fun mapRoot(root: POrderRoot): List<POrderRoot> {
-            val dependencies = mapDependency(root.dependency, mappers)
+            konst dependencies = mapDependency(root.dependency, mappers)
             return dependencies.map { root.copy(dependency = it) }
         }
 
-        val modules = this.modules.map { module ->
-            val newOrderRoots = module.orderRoots.flatMap(::mapRoot).distinct()
+        konst modules = this.modules.map { module ->
+            konst newOrderRoots = module.orderRoots.flatMap(::mapRoot).distinct()
             module.copy(orderRoots = newOrderRoots)
         }
 
@@ -441,7 +441,7 @@ class JpsCompatiblePluginTasks(
     ): List<PDependency> {
         var dependencies = listOf(dependency)
         for (mapper in mappers) {
-            val newDependencies = mutableListOf<PDependency>()
+            konst newDependencies = mutableListOf<PDependency>()
             for (dep in dependencies) {
                 newDependencies += mapper(this, dep)
             }

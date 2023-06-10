@@ -29,9 +29,9 @@ object NativeObjCNameOverridesChecker : DeclarationChecker {
 
     fun check(declaration: KtDeclaration, descriptor: CallableMemberDescriptor, context: DeclarationCheckerContext) {
         if (descriptor.overriddenDescriptors.isEmpty()) return
-        val objCNames = descriptor.overriddenDescriptors.map { it.getFirstBaseDescriptor().getObjCNames() }
+        konst objCNames = descriptor.overriddenDescriptors.map { it.getFirstBaseDescriptor().getObjCNames() }
         if (!objCNames.allNamesEquals()) {
-            val containingDeclarations = descriptor.overriddenDescriptors.map { it.containingDeclaration }
+            konst containingDeclarations = descriptor.overriddenDescriptors.map { it.containingDeclaration }
             context.trace.report(ErrorsNative.INCOMPATIBLE_OBJC_NAME_OVERRIDE.on(declaration, descriptor, containingDeclarations))
         }
     }
@@ -40,7 +40,7 @@ object NativeObjCNameOverridesChecker : DeclarationChecker {
         if (overriddenDescriptors.isEmpty()) this else overriddenDescriptors.first().getFirstBaseDescriptor()
 
     private fun List<List<NativeObjCNameChecker.ObjCName?>>.allNamesEquals(): Boolean {
-        val first = this[0]
+        konst first = this[0]
         for (i in 1 until size) {
             if (first != this[i]) return false
         }

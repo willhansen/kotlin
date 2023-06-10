@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.analysis.api.renderer.base.contextReceivers.renderer
 import org.jetbrains.kotlin.analysis.api.renderer.base.contextReceivers.renderers.KtContextReceiverListRenderer
 
 public object KtContextReceiversRendererForSource {
-    public val WITH_LABELS: KtContextReceiversRenderer = KtContextReceiversRenderer {
+    public konst WITH_LABELS: KtContextReceiversRenderer = KtContextReceiversRenderer {
         contextReceiverListRenderer = KtContextReceiverListRenderer.AS_SOURCE
         contextReceiverLabelRenderer = KtContextReceiverLabelRenderer.WITH_LABEL
     }

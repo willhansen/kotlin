@@ -1,4 +1,4 @@
 // FIR_IDENTICAL
-annotation class TestAnn(val x: Int)
+annotation class TestAnn(konst x: Int)
 
 @TestAnn(42) fun testSimpleFunction() {}

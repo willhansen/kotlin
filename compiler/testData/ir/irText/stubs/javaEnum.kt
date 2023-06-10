@@ -8,4 +8,4 @@ public enum JEnum {
 
 // FILE: javaEnum.kt
 
-val test = JEnum.ONE
+konst test = JEnum.ONE

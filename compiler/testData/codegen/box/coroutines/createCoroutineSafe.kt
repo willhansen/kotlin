@@ -5,7 +5,7 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 fun builder(c: suspend () -> Unit) {
-    val x = c.createCoroutine(EmptyContinuation)
+    konst x = c.createCoroutine(EmptyContinuation)
 
     x.resume(Unit)
     x.resume(Unit)

@@ -5,7 +5,7 @@ operator fun KotlinSourceSet.invoke(builder: SourceSetHierarchyBuilder.() -> Uni
     return this
 }
 
-class SourceSetHierarchyBuilder(private val node: KotlinSourceSet) {
+class SourceSetHierarchyBuilder(private konst node: KotlinSourceSet) {
     operator fun KotlinSourceSet.unaryMinus() = this.dependsOn(node)
 }
 
@@ -27,25 +27,25 @@ kotlin {
     @Suppress("DEPRECATION_ERROR")
     mingwX86("windowsX86")
 
-    val commonMain by sourceSets.getting
-    val commonTest by sourceSets.getting
-    val jvmMain by sourceSets.getting
-    val nativeMain by sourceSets.creating
-    val nativeTest by sourceSets.creating
-    val appleAndLinuxMain by sourceSets.creating
-    val appleAndLinuxTest by sourceSets.creating
-    val windowsAndLinuxMain by sourceSets.creating
-    val windowsAndLinuxTest by sourceSets.creating
-    val linuxX64Main by sourceSets.getting
-    val linuxX64Test by sourceSets.getting
-    val iosMain by sourceSets.getting
-    val iosTest by sourceSets.getting
-    val windowsMain by sourceSets.creating
-    val windowsTest by sourceSets.creating
-    val windowsX64Main by sourceSets.getting
-    val windowsX64Test by sourceSets.getting
-    val windowsX86Main by sourceSets.getting
-    val windowsX86Test by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst commonTest by sourceSets.getting
+    konst jvmMain by sourceSets.getting
+    konst nativeMain by sourceSets.creating
+    konst nativeTest by sourceSets.creating
+    konst appleAndLinuxMain by sourceSets.creating
+    konst appleAndLinuxTest by sourceSets.creating
+    konst windowsAndLinuxMain by sourceSets.creating
+    konst windowsAndLinuxTest by sourceSets.creating
+    konst linuxX64Main by sourceSets.getting
+    konst linuxX64Test by sourceSets.getting
+    konst iosMain by sourceSets.getting
+    konst iosTest by sourceSets.getting
+    konst windowsMain by sourceSets.creating
+    konst windowsTest by sourceSets.creating
+    konst windowsX64Main by sourceSets.getting
+    konst windowsX64Test by sourceSets.getting
+    konst windowsX86Main by sourceSets.getting
+    konst windowsX86Test by sourceSets.getting
 
     commonMain {
         -jvmMain

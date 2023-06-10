@@ -17,7 +17,7 @@ namespace kotlin {
 // TODO: Consider an iterator/ranges based approaches for traversals.
 
 template <typename F>
-void traverseObjectFields(ObjHeader* object, F process) noexcept(noexcept(process(std::declval<ObjHeader**>()))) {
+void traverseObjectFields(ObjHeader* object, F process) noexcept(noexcept(process(std::declkonst<ObjHeader**>()))) {
     const TypeInfo* typeInfo = object->type_info();
     // Only consider arrays of objects, not arrays of primitives.
     if (typeInfo != theArrayTypeInfo) {
@@ -33,8 +33,8 @@ void traverseObjectFields(ObjHeader* object, F process) noexcept(noexcept(proces
 }
 
 template <typename F>
-void traverseReferredObjects(ObjHeader* object, F process) noexcept(noexcept(process(std::declval<ObjHeader*>()))) {
-    traverseObjectFields(object, [&process](ObjHeader** location) noexcept(noexcept(process(std::declval<ObjHeader*>()))) {
+void traverseReferredObjects(ObjHeader* object, F process) noexcept(noexcept(process(std::declkonst<ObjHeader*>()))) {
+    traverseObjectFields(object, [&process](ObjHeader** location) noexcept(noexcept(process(std::declkonst<ObjHeader*>()))) {
         if (ObjHeader* ref = *location) {
             process(ref);
         }

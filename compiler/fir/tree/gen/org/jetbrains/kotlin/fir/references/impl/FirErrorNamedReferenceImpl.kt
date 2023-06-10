@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirErrorNamedReferenceImpl(
-    override val source: KtSourceElement?,
-    override val diagnostic: ConeDiagnostic,
+    override konst source: KtSourceElement?,
+    override konst diagnostic: ConeDiagnostic,
 ) : FirErrorNamedReference() {
-    override val name: Name = Name.special("<${diagnostic.reason}>")
+    override konst name: Name = Name.special("<${diagnostic.reason}>")
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

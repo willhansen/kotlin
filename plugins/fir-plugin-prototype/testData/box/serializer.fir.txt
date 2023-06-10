@@ -10,10 +10,10 @@ FILE: serializer.kt
         public final fun aFunction(): R|kotlin/Unit| {
         }
 
-        public final val bProp: R|kotlin/Int| = Int(1)
+        public final konst bProp: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
 
-        public final val aProp: R|kotlin/Int| = Int(2)
+        public final konst aProp: R|kotlin/Int| = Int(2)
             public get(): R|kotlin/Int|
 
         public final fun serializeA(x: R|A|): R|kotlin/Unit| {

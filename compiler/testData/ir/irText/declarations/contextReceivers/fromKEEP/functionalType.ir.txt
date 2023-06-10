@@ -24,12 +24,12 @@ FILE fqName:<root> fileName:/functionalType.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:O modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:o visibility:public modality:FINAL [val]
+    PROPERTY name:o visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:o type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
-          CONST String type=kotlin.String value="O"
+          CONST String type=kotlin.String konstue="O"
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-o> visibility:public modality:FINAL <> ($this:<root>.O) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:o visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:o visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.O
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-o> (): kotlin.String declared in <root>.O'
@@ -54,12 +54,12 @@ FILE fqName:<root> fileName:/functionalType.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:K modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:k visibility:public modality:FINAL [val]
+    PROPERTY name:k visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:k type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
-          CONST String type=kotlin.String value="K"
+          CONST String type=kotlin.String konstue="K"
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-k> visibility:public modality:FINAL <> ($this:<root>.K) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:k visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:k visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.K
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-k> (): kotlin.String declared in <root>.K'

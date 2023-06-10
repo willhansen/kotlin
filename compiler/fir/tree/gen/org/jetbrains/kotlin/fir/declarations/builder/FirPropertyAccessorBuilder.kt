@@ -61,15 +61,15 @@ class FirPropertyAccessorBuilder : FirFunctionBuilder, FirAnnotationContainerBui
     override var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     override var containerSource: DeserializedContainerSource? = null
     override var dispatchReceiverType: ConeSimpleKotlinType? = null
-    override val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
-    override val valueParameters: MutableList<FirValueParameter> = mutableListOf()
+    override konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    override konst konstueParameters: MutableList<FirValueParameter> = mutableListOf()
     override var body: FirBlock? = null
     var contractDescription: FirContractDescription = FirEmptyContractDescription
     lateinit var symbol: FirPropertyAccessorSymbol
     lateinit var propertySymbol: FirPropertySymbol
     var isGetter: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    val typeParameters: MutableList<FirTypeParameter> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    konst typeParameters: MutableList<FirTypeParameter> = mutableListOf()
 
     @OptIn(FirImplementationDetail::class)
     override fun build(): FirPropertyAccessor {
@@ -85,7 +85,7 @@ class FirPropertyAccessorBuilder : FirFunctionBuilder, FirAnnotationContainerBui
             containerSource,
             dispatchReceiverType,
             contextReceivers.toMutableOrEmpty(),
-            valueParameters,
+            konstueParameters,
             body,
             contractDescription,
             symbol,
@@ -111,7 +111,7 @@ inline fun buildPropertyAccessorCopy(original: FirPropertyAccessor, init: FirPro
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirPropertyAccessorBuilder()
+    konst copyBuilder = FirPropertyAccessorBuilder()
     copyBuilder.source = original.source
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.moduleData = original.moduleData
@@ -123,7 +123,7 @@ inline fun buildPropertyAccessorCopy(original: FirPropertyAccessor, init: FirPro
     copyBuilder.containerSource = original.containerSource
     copyBuilder.dispatchReceiverType = original.dispatchReceiverType
     copyBuilder.contextReceivers.addAll(original.contextReceivers)
-    copyBuilder.valueParameters.addAll(original.valueParameters)
+    copyBuilder.konstueParameters.addAll(original.konstueParameters)
     copyBuilder.body = original.body
     copyBuilder.contractDescription = original.contractDescription
     copyBuilder.symbol = original.symbol

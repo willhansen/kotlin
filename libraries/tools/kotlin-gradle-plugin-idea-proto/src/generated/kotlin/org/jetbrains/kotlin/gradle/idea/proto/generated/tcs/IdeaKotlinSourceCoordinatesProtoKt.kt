@@ -10,7 +10,7 @@ object IdeaKotlinSourceCoordinatesProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKotlinSourceCoordinatesProtoKt {
       @JvmName("getProject")
       get() = _builder.getProject()
       @JvmName("setProject")
-      set(value) {
-        _builder.setProject(value)
+      set(konstue) {
+        _builder.setProject(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectCoordinatesProto project = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKotlinSourceCoordinatesProtoKt {
     fun hasProject(): kotlin.Boolean {
       return _builder.hasProject()
     }
-    val IdeaKotlinSourceCoordinatesProtoKt.Dsl.projectOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectCoordinatesProto?
+    konst IdeaKotlinSourceCoordinatesProtoKt.Dsl.projectOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectCoordinatesProto?
       get() = _builder.projectOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKotlinSourceCoordinatesProtoKt {
       @JvmName("getSourceSetName")
       get() = _builder.getSourceSetName()
       @JvmName("setSourceSetName")
-      set(value) {
-        _builder.setSourceSetName(value)
+      set(konstue) {
+        _builder.setSourceSetName(konstue)
       }
     /**
      * <code>optional string source_set_name = 2;</code>
@@ -77,6 +77,6 @@ object IdeaKotlinSourceCoordinatesProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProtoOrBuilder.projectOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectCoordinatesProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceCoordinatesProtoOrBuilder.projectOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectCoordinatesProto?
   get() = if (hasProject()) getProject() else null
 

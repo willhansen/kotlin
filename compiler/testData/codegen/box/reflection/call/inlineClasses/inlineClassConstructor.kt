@@ -4,40 +4,40 @@
 import kotlin.reflect.KCallable
 import kotlin.test.assertEquals
 
-inline class Z(val x: Int) {
+inline class Z(konst x: Int) {
     constructor(a: Int, b: Int) : this(a + b)
 }
 
-inline class L(val x: Long) {
+inline class L(konst x: Long) {
     constructor(a: Long, b: Long) : this(a + b)
 }
 
-inline class S1(val x: String) {
+inline class S1(konst x: String) {
     constructor(a: String, b: String) : this(a + b)
 }
 
-inline class S2(val x: String?) {
+inline class S2(konst x: String?) {
     constructor(a: String?, b: String?) : this(a!! + b!!)
 }
 
-inline class A(val x: Any) {
+inline class A(konst x: Any) {
     constructor(a: String, b: String) : this(a + b)
 }
 
-inline class Z2(val z: Z)
-inline class Z3(val z: Z?)
+inline class Z2(konst z: Z)
+inline class Z3(konst z: Z?)
 
 fun box(): String {
-    val ctorZ1_1: (Int) -> Z = ::Z
-    val ctorZ1_2: (Int, Int) -> Z = ::Z
-    val ctorL1: (Long) -> L = ::L
-    val ctorL2: (Long, Long) -> L = ::L
-    val ctorS1_1: (String) -> S1 = ::S1
-    val ctorS1_2: (String, String) -> S1 = ::S1
-    val ctorS2_1: (String) -> S2 = ::S2
-    val ctorS2_2: (String, String) -> S2 = ::S2
-    val ctorA1: (Any) -> A = ::A
-    val ctorA2: (String, String) -> A = ::A
+    konst ctorZ1_1: (Int) -> Z = ::Z
+    konst ctorZ1_2: (Int, Int) -> Z = ::Z
+    konst ctorL1: (Long) -> L = ::L
+    konst ctorL2: (Long, Long) -> L = ::L
+    konst ctorS1_1: (String) -> S1 = ::S1
+    konst ctorS1_2: (String, String) -> S1 = ::S1
+    konst ctorS2_1: (String) -> S2 = ::S2
+    konst ctorS2_2: (String, String) -> S2 = ::S2
+    konst ctorA1: (Any) -> A = ::A
+    konst ctorA2: (String, String) -> A = ::A
 
     assertEquals(Z(42), (ctorZ1_1 as KCallable<Z>).call(42))
     assertEquals(Z(123), (ctorZ1_2 as KCallable<Z>).call(100, 23))

@@ -1,5 +1,5 @@
-val c = Unit
-val d = c
+konst c = Unit
+konst d = c
 
 fun box(): String {
     c

@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
 
 internal class KtFe10TypeInfoProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtTypeInfoProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun isFunctionalInterfaceType(type: KtType): Boolean {
@@ -43,7 +43,7 @@ internal class KtFe10TypeInfoProvider(
 
     override fun isDenotable(type: KtType): Boolean {
         require(type is KtFe10Type)
-        val kotlinType = type.fe10Type
+        konst kotlinType = type.fe10Type
         return kotlinType.isDenotable()
     }
 
@@ -55,8 +55,8 @@ internal class KtFe10TypeInfoProvider(
     override fun isNestedArray(type: KtType): Boolean {
         if (!isArrayOrPrimitiveArray(type)) return false
         require(type is KtFe10Type)
-        val unwrappedType = type.fe10Type
-        val elementType = unwrappedType.constructor.builtIns.getArrayElementType(unwrappedType)
+        konst unwrappedType = type.fe10Type
+        konst elementType = unwrappedType.constructor.builtIns.getArrayElementType(unwrappedType)
         return KotlinBuiltIns.isArrayOrPrimitiveArray(elementType)
     }
 

@@ -28,10 +28,10 @@ import org.jetbrains.kotlin.test.services.assertions
 abstract class AbstractGetOrBuildFirTest : AbstractLowLevelApiSingleFileTest() {
 
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val module = moduleStructure.modules.single()
-        val selectedElement = testServices.expressionMarkerProvider.getSelectedElementOfTypeByDirective(ktFile, module) as KtElement
+        konst module = moduleStructure.modules.single()
+        konst selectedElement = testServices.expressionMarkerProvider.getSelectedElementOfTypeByDirective(ktFile, module) as KtElement
 
-        val actual = resolveWithClearCaches(ktFile) { session ->
+        konst actual = resolveWithClearCaches(ktFile) { session ->
             renderActualFir(selectedElement.getOrBuildFir(session), selectedElement)
         }
         testServices.assertions.assertEqualsToTestDataFileSibling(actual)
@@ -58,9 +58,9 @@ private fun render(firElement: FirElement?): String = when (firElement) {
 }
 
 abstract class AbstractSourceGetOrBuildFirTest : AbstractGetOrBuildFirTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 }
 
 abstract class AbstractOutOfContentRootGetOrBuildFirTest : AbstractGetOrBuildFirTest() {
-    override val configurator = AnalysisApiFirOutOfContentRootTestConfigurator
+    override konst configurator = AnalysisApiFirOutOfContentRootTestConfigurator
 }

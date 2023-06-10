@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
-const val MB = Byte.MIN_VALUE
-const val MS = Short.MIN_VALUE
-const val MI = Int.MIN_VALUE
-const val ML = Long.MIN_VALUE
-const val MC = Char.MIN_VALUE
+const konst MB = Byte.MIN_VALUE
+const konst MS = Short.MIN_VALUE
+const konst MI = Int.MIN_VALUE
+const konst ML = Long.MIN_VALUE
+const konst MC = Char.MIN_VALUE
 
 fun testByte() {
     var s = ""

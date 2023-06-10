@@ -15,7 +15,7 @@ interface Runnable {
 suspend inline fun inlineMe(c: suspend () -> Unit) {
     var a = ""
     var b = 0
-    val r = object: Runnable {
+    konst r = object: Runnable {
         override fun run() {
             b++
             a += "a"
@@ -30,7 +30,7 @@ suspend inline fun inlineMe(c: suspend () -> Unit) {
 suspend inline fun noinlineMe(noinline c: suspend () -> Unit) {
     var a = ""
     var b = 0
-    val r = object: Runnable {
+    konst r = object: Runnable {
         override fun run() {
             b += 2
             a += "b"
@@ -45,7 +45,7 @@ suspend inline fun noinlineMe(noinline c: suspend () -> Unit) {
 suspend inline fun crossinlineMe(crossinline c: suspend () -> Unit) {
     var a = ""
     var b = 0
-    val r = object: Runnable {
+    konst r = object: Runnable {
         override fun run() {
             b += 3
             a += "c"
@@ -67,29 +67,29 @@ fun builder(c: suspend () -> Unit) {
 }
 
 suspend fun dummy() {
-    val local0 = 0
-    val local1 = 0
-    val local2 = 0
-    val local3 = 0
-    val local4 = 0
-    val local5 = 0
-    val local6 = 0
-    val local7 = 0
-    val local8 = 0
-    val local9 = 0
-    val local10 = 0
-    val local11 = 0
-    val local12 = 0
-    val local13 = 0
-    val local14 = 0
-    val local15 = 0
-    val local16 = 0
-    val local17 = 0
-    val local18 = 0
-    val local19 = 0
-    val local20 = 0
-    val local21 = 0
-    val local22 = 0
+    konst local0 = 0
+    konst local1 = 0
+    konst local2 = 0
+    konst local3 = 0
+    konst local4 = 0
+    konst local5 = 0
+    konst local6 = 0
+    konst local7 = 0
+    konst local8 = 0
+    konst local9 = 0
+    konst local10 = 0
+    konst local11 = 0
+    konst local12 = 0
+    konst local13 = 0
+    konst local14 = 0
+    konst local15 = 0
+    konst local16 = 0
+    konst local17 = 0
+    konst local18 = 0
+    konst local19 = 0
+    konst local20 = 0
+    konst local21 = 0
+    konst local22 = 0
 }
 
 suspend fun inlineSite() {

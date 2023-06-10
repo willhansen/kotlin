@@ -65,8 +65,8 @@ object FirInapplicableLateinitChecker : FirPropertyChecker() {
         }
 
         if (declaration.returnTypeRef.coneType.isSingleFieldValueClass(context.session)) {
-            val declarationType = declaration.returnTypeRef.coneType
-            val variables = if (declaration.isLocal) "local variables" else "properties"
+            konst declarationType = declaration.returnTypeRef.coneType
+            konst variables = if (declaration.isLocal) "local variables" else "properties"
             when {
                 declarationType.isUnsignedType -> reporter.reportError(
                     declaration.source,
@@ -103,7 +103,7 @@ object FirInapplicableLateinitChecker : FirPropertyChecker() {
         return isForbiddenTypeForLateinit(type.getInlineClassUnderlyingType(session))
     }
 
-    private val ConeKotlinType.hasNullableUpperBound
+    private konst ConeKotlinType.hasNullableUpperBound
         get() = when (this) {
             is ConeTypeParameterType -> isNullable || lookupTag.typeParameterSymbol.resolvedBounds.any { it.coneType.isNullable }
             else -> isNullable

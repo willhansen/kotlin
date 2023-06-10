@@ -4,7 +4,7 @@
 
 fun box(): String {
     buildMap {
-        val replaced = put("key", "value")
+        konst replaced = put("key", "konstue")
         if (replaced != null) {
             return "Error: $replaced"
         }

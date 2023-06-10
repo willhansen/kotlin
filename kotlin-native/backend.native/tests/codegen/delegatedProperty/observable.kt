@@ -17,7 +17,7 @@ class User {
 }
 
 @Test fun runTest() {
-    val user = User()
+    konst user = User()
     user.name = "first"
     user.name = "second"
 }

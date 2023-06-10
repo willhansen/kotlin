@@ -20,5 +20,5 @@ import org.jetbrains.kotlin.load.java.structure.impl.VirtualFileBoundJavaClass
 import org.jetbrains.kotlin.name.ClassId
 
 interface JavaClassWithClassId : VirtualFileBoundJavaClass {
-    val classId: ClassId?
+    konst classId: ClassId?
 }

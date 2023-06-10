@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.ir.util.IdSignatureComposer
 import org.jetbrains.kotlin.ir.util.KotlinMangler
 import org.jetbrains.kotlin.renderer.DescriptorRenderer
 
-open class IdSignatureDescriptor(override val mangler: KotlinMangler.DescriptorMangler) : IdSignatureComposer {
+open class IdSignatureDescriptor(override konst mangler: KotlinMangler.DescriptorMangler) : IdSignatureComposer {
 
     protected open fun createSignatureBuilder(type: SpecialDeclarationType): DescriptorBasedSignatureBuilder = DescriptorBasedSignatureBuilder(type)
 
-    protected open inner class DescriptorBasedSignatureBuilder(private val type: SpecialDeclarationType) :
+    protected open inner class DescriptorBasedSignatureBuilder(private konst type: SpecialDeclarationType) :
         IdSignatureBuilder<DeclarationDescriptor>(),
         DeclarationDescriptorVisitor<Unit, Nothing?> {
 
@@ -50,10 +50,10 @@ open class IdSignatureDescriptor(override val mangler: KotlinMangler.DescriptorM
             classFqnSegments.add(descriptor.name.asString())
         }
 
-        private val DeclarationDescriptorWithVisibility.isPrivate: Boolean
+        private konst DeclarationDescriptorWithVisibility.isPrivate: Boolean
             get() = visibility == DescriptorVisibilities.PRIVATE
 
-        private val DeclarationDescriptorWithVisibility.isTopLevelPrivate: Boolean
+        private konst DeclarationDescriptorWithVisibility.isTopLevelPrivate: Boolean
             get() = isPrivate && mangler.run { !isPlatformSpecificExport() } && containingDeclaration is PackageFragmentDescriptor
 
         override fun visitPackageFragmentDescriptor(descriptor: PackageFragmentDescriptor, data: Nothing?) {
@@ -123,7 +123,7 @@ open class IdSignatureDescriptor(override val mangler: KotlinMangler.DescriptorM
             visitClassDescriptor(scriptDescriptor, data)
 
         override fun visitPropertyDescriptor(descriptor: PropertyDescriptor, data: Nothing?) {
-            val actualDeclaration = if (descriptor is IrPropertyDelegateDescriptor) {
+            konst actualDeclaration = if (descriptor is IrPropertyDelegateDescriptor) {
                 descriptor.correspondingProperty
             } else {
                 descriptor
@@ -167,7 +167,7 @@ open class IdSignatureDescriptor(override val mangler: KotlinMangler.DescriptorM
             reportUnexpectedDescriptor(descriptor)
         }
 
-        override val currentFileSignature: IdSignature.FileSignature? get() = null
+        override konst currentFileSignature: IdSignature.FileSignature? get() = null
     }
 
 

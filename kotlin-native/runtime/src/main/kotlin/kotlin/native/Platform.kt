@@ -29,7 +29,7 @@ public enum class OsFamily {
  * Central Processor Unit architecture.
  */
 @ExperimentalNativeApi
-public enum class CpuArchitecture(val bitness: Int) {
+public enum class CpuArchitecture(konst bitness: Int) {
     UNKNOWN(-1),
     ARM32(32),
     ARM64(64),
@@ -59,46 +59,46 @@ public object Platform {
     /**
      * Check if current architecture allows unaligned access to wider than byte locations.
      */
-    public val canAccessUnaligned: Boolean
+    public konst canAccessUnaligned: Boolean
         get() = Platform_canAccessUnaligned() != 0
 
     /**
      * Check if byte order of the current platform is least significant byte (LSB) first, aka little endian.
      */
-    public val isLittleEndian: Boolean
+    public konst isLittleEndian: Boolean
         get() = Platform_isLittleEndian() != 0
 
     /**
      * Operating system family program executes upon.
      */
-    public val osFamily: OsFamily
-        get() = OsFamily.values()[Platform_getOsFamily()]
+    public konst osFamily: OsFamily
+        get() = OsFamily.konstues()[Platform_getOsFamily()]
 
     /**
      * Architecture of the CPU program executes upon.
      */
-    public val cpuArchitecture: CpuArchitecture
-        get() = CpuArchitecture.values()[Platform_getCpuArchitecture()]
+    public konst cpuArchitecture: CpuArchitecture
+        get() = CpuArchitecture.konstues()[Platform_getCpuArchitecture()]
 
     /**
      * Memory model binary was compiled with.
      */
-    public val memoryModel: MemoryModel
-        get() = MemoryModel.values()[Platform_getMemoryModel()]
+    public konst memoryModel: MemoryModel
+        get() = MemoryModel.konstues()[Platform_getMemoryModel()]
 
     /**
      * If binary was compiled in debug mode.
      */
-    public val isDebugBinary: Boolean
+    public konst isDebugBinary: Boolean
         get() = Platform_isDebugBinary()
 
     /**
      * If freezing is enabled.
      *
-     * This value would be false, only if binary option `freezing` is equal to `disabled`. This is default when
+     * This konstue would be false, only if binary option `freezing` is equal to `disabled`. This is default when
      * [memoryModel] is equal to [MemoryModel.EXPERIMENTAL].
      */
-    public val isFreezingEnabled: Boolean
+    public konst isFreezingEnabled: Boolean
         get() = Platform_isFreezingEnabled()
 
     /**
@@ -111,11 +111,11 @@ public object Platform {
      */
     public var isMemoryLeakCheckerActive: Boolean
         get() = Platform_getMemoryLeakChecker()
-        set(value) = Platform_setMemoryLeakChecker(value)
+        set(konstue) = Platform_setMemoryLeakChecker(konstue)
 
     public var isCleanersLeakCheckerActive: Boolean
         get() = Platform_getCleanersLeakChecker()
-        set(value) = Platform_setCleanersLeakChecker(value)
+        set(konstue) = Platform_setCleanersLeakChecker(konstue)
 
     /**
      * The number of logical processors available.
@@ -123,15 +123,15 @@ public object Platform {
      * Can be not equal to the number of processors in the system if some restrictions on processor usage were successfully detected.
      * Some kinds of processor usage restrictions are not detected, for now, e.g., CPU quotas in containers.
      *
-     * The value is computed on each usage. It can change if some OS scheduler API restricts the process during runtime.
-     * Also, value can differ on different threads if some thread-specific scheduler API was used.
+     * The konstue is computed on each usage. It can change if some OS scheduler API restricts the process during runtime.
+     * Also, konstue can differ on different threads if some thread-specific scheduler API was used.
      *
-     * If one considers the value to be inaccurate and wants another one to be used, it can be overridden by
-     * `KOTLIN_NATIVE_AVAILABLE_PROCESSORS` environment variable. When the variable is set and contains a value that is not
+     * If one considers the konstue to be inaccurate and wants another one to be used, it can be overridden by
+     * `KOTLIN_NATIVE_AVAILABLE_PROCESSORS` environment variable. When the variable is set and contains a konstue that is not
      * positive [Int], [IllegalStateException] will be thrown.
      */
     public fun getAvailableProcessors() : Int {
-        val fromEnv = Platform_getAvailableProcessorsEnv()
+        konst fromEnv = Platform_getAvailableProcessorsEnv()
         if (fromEnv == null) {
             return Platform_getAvailableProcessors()
         }
@@ -165,13 +165,13 @@ private external fun Platform_isFreezingEnabled(): Boolean
 private external fun Platform_getMemoryLeakChecker(): Boolean
 
 @GCUnsafeCall("Konan_Platform_setMemoryLeakChecker")
-private external fun Platform_setMemoryLeakChecker(value: Boolean): Unit
+private external fun Platform_setMemoryLeakChecker(konstue: Boolean): Unit
 
 @GCUnsafeCall("Konan_Platform_getCleanersLeakChecker")
 private external fun Platform_getCleanersLeakChecker(): Boolean
 
 @GCUnsafeCall("Konan_Platform_setCleanersLeakChecker")
-private external fun Platform_setCleanersLeakChecker(value: Boolean): Unit
+private external fun Platform_setCleanersLeakChecker(konstue: Boolean): Unit
 
 @GCUnsafeCall("Konan_Platform_getAvailableProcessorsEnv")
 private external fun Platform_getAvailableProcessorsEnv(): String?

@@ -22,12 +22,12 @@ class A {
 }
 
 fun box(): String {
-    val a1 = A("abc")
+    konst a1 = A("abc")
     if (a1.prop != "abc") return "fail1: ${a1.prop}"
     if (sideEffects != "first#second#third") return "fail1-sideEffects: ${sideEffects}"
 
     sideEffects = ""
-    val a2 = A(123)
+    konst a2 = A(123)
     if (a2.prop != "123#int") return "fail2: ${a2.prop}"
     if (sideEffects != "first#second#fourth") return "fail2-sideEffects: ${sideEffects}"
 

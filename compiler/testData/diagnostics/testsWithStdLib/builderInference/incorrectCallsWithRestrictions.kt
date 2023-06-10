@@ -16,21 +16,21 @@ class GenericController<T> {
 
 fun <S> generate(g: suspend GenericController<S>.() -> Unit): List<S> = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     yield(3)
 }
 
-val test2 = generate {
+konst test2 = generate {
     yield(3)
     notYield(3)
 }
 
-val test3 = generate {
+konst test3 = generate {
     yield(3)
     yieldBarReturnType(3)
 }
 
-val test4 = generate {
+konst test4 = generate {
     yield(3)
     barReturnType()
 }

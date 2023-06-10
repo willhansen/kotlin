@@ -1,13 +1,13 @@
-open class Bar<T>(val prop: String)
+open class Bar<T>(konst prop: String)
 class Foo {
     companion object : Bar<Foo>("OK") {
-        val p = Foo.prop
-        val p2 = prop
-        val p3 = this.prop
+        konst p = Foo.prop
+        konst p2 = prop
+        konst p3 = this.prop
     }
 
-    val p4 = Foo.prop
-    val p5 = prop
+    konst p4 = Foo.prop
+    konst p5 = prop
 }
 
 fun box(): String = Foo.prop

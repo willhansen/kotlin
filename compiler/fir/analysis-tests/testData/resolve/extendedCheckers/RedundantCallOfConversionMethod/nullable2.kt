@@ -1,7 +1,7 @@
 // IS_APPLICABLE: false
 // WITH_STDLIB
-data class Foo(val name: String)
+data class Foo(konst name: String)
 
 fun nullable2(foo: Foo?) {
-    val <!UNUSED_VARIABLE!>s<!>: String = foo?.name.toString()
+    konst <!UNUSED_VARIABLE!>s<!>: String = foo?.name.toString()
 }

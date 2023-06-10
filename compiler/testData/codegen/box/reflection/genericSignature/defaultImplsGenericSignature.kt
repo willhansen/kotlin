@@ -18,7 +18,7 @@ public class J {
 
 // FILE: K.kt
 
-class B<T>(val value: T)
+class B<T>(konst konstue: T)
 
 interface A<T, Y : B<T>> {
 
@@ -32,15 +32,15 @@ interface A<T, Y : B<T>> {
 }
 
 
-class X<T, Y : B<T>>(val p1: T, val p2: Y) : A<T, Y> {
+class X<T, Y : B<T>>(konst p1: T, konst p2: Y) : A<T, Y> {
 
 }
 
 fun box(): String {
-    val test1 = J.test1()
+    konst test1 = J.test1()
     if (test1 != 1) return "fail 1: $test1 != 1"
 
-    val test2: X<String, B<String>> = J.test2() as X<String, B<String>>
+    konst test2: X<String, B<String>> = J.test2() as X<String, B<String>>
 
-    return test2.p1 + test2.p2.value
+    return test2.p1 + test2.p2.konstue
 }

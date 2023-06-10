@@ -61,12 +61,12 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     @NotNull
     private final List<Object> sourceInfoStack = new ArrayList<>();
 
-    public static CharSequence javaScriptString(String value) {
-        return javaScriptString(value, false);
+    public static CharSequence javaScriptString(String konstue) {
+        return javaScriptString(konstue, false);
     }
 
     /**
-     * Generate JavaScript code that evaluates to the supplied string. Adapted
+     * Generate JavaScript code that ekonstuates to the supplied string. Adapted
      * from {@link org.mozilla.javascript.ScriptRuntime#escapeString(String)}
      * . The difference is that we quote with either &quot; or &apos; depending on
      * which one is used less inside the string.
@@ -939,7 +939,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
         pushSourceInfo(x.getSource());
         printCommentsBeforeNode(x);
 
-        p.print(x.value);
+        p.print(x.konstue);
 
         printCommentsAfterNode(x);
         popSourceInfo();
@@ -950,7 +950,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
         pushSourceInfo(x.getSource());
         printCommentsBeforeNode(x);
 
-        p.print(x.value);
+        p.print(x.konstue);
 
         printCommentsAfterNode(x);
         popSourceInfo();
@@ -988,9 +988,9 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
             if (labelExpr instanceof JsStringLiteral) {
                 JsStringLiteral stringLiteral = (JsStringLiteral) labelExpr;
-                String value = stringLiteral.getValue();
-                if (IdentifierPolicyKt.isValidES5Identifier(value)) {
-                   labelExpr = new JsNameRef(value).withMetadataFrom(stringLiteral);
+                String konstue = stringLiteral.getValue();
+                if (IdentifierPolicyKt.isValidES5Identifier(konstue)) {
+                   labelExpr = new JsNameRef(konstue).withMetadataFrom(stringLiteral);
                 }
             }
             // labels can be either string, integral, or decimal literals
@@ -1002,9 +1002,9 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
             _colon();
             space();
-            JsExpression valueExpr = item.getValueExpr();
-            boolean wasEnclosed = parenPushIfCommaExpression(valueExpr);
-            accept(valueExpr);
+            JsExpression konstueExpr = item.getValueExpr();
+            boolean wasEnclosed = parenPushIfCommaExpression(konstueExpr);
+            accept(konstueExpr);
             if (wasEnclosed) {
                 rightParen();
             }
@@ -1294,14 +1294,14 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
             p.print('@');
             p.print(entry.getKey());
-            Object value = entry.getValue();
-            if (value != null) {
+            Object konstue = entry.getValue();
+            if (konstue != null) {
                 space();
-                if (value instanceof CharSequence) {
-                    p.print((CharSequence) value);
+                if (konstue instanceof CharSequence) {
+                    p.print((CharSequence) konstue);
                 }
                 else {
-                    visitNameRef((JsNameRef) value);
+                    visitNameRef((JsNameRef) konstue);
                 }
             }
 
@@ -1717,12 +1717,12 @@ public class JsToStringGenerationVisitor extends JsVisitor {
         }
         if (arg instanceof JsNumberLiteral && (op == JsBinaryOperator.SUB || op == JsUnaryOperator.NEG)) {
             if (arg instanceof JsIntLiteral) {
-                return ((JsIntLiteral) arg).value < 0;
+                return ((JsIntLiteral) arg).konstue < 0;
             }
             else {
                 assert arg instanceof JsDoubleLiteral;
                 //noinspection CastConflictsWithInstanceof
-                return ((JsDoubleLiteral) arg).value < 0;
+                return ((JsDoubleLiteral) arg).konstue < 0;
             }
         }
         return false;

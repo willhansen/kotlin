@@ -9,10 +9,10 @@ import kotlin.reflect.*
 
 internal object KVarianceMapper {
     // this constants are copypasted to ReflectionSupport.kt
-    const val VARIANCE_STAR = -1
-    const val VARIANCE_INVARIANT = 0
-    const val VARIANCE_IN = 1
-    const val VARIANCE_OUT = 2
+    const konst VARIANCE_STAR = -1
+    const konst VARIANCE_INVARIANT = 0
+    const konst VARIANCE_IN = 1
+    const konst VARIANCE_OUT = 2
 
     fun idByVariance(variance: KVariance) = when (variance) {
         KVariance.INVARIANT -> VARIANCE_INVARIANT
@@ -36,23 +36,23 @@ internal object KVarianceMapper {
  *
  * When this issue is resolved, this class can be replaced with just ArrayList
  */
-internal class KTypeProjectionList(val variance: IntArray, val type: Array<KType?>) : AbstractList<KTypeProjection>() {
-    override val size
+internal class KTypeProjectionList(konst variance: IntArray, konst type: Array<KType?>) : AbstractList<KTypeProjection>() {
+    override konst size
         get() = variance.size
 
 
     override fun get(index: Int) : KTypeProjection {
         AbstractList.checkElementIndex(index, size)
-        val kVariance = KVarianceMapper.varianceById(variance[index]) ?: return KTypeProjection.STAR
+        konst kVariance = KVarianceMapper.varianceById(variance[index]) ?: return KTypeProjection.STAR
         return KTypeProjection(kVariance, type[index])
     }
 
 }
 
 internal class KTypeImpl<T>(
-        override val classifier: KClassifier?,
-        override val arguments: List<KTypeProjection>,
-        override val isMarkedNullable: Boolean
+        override konst classifier: KClassifier?,
+        override konst arguments: List<KTypeProjection>,
+        override konst isMarkedNullable: Boolean
 ) : KType {
 
     @ExportForCompiler
@@ -71,7 +71,7 @@ internal class KTypeImpl<T>(
     }
 
     override fun toString(): String {
-        val classifierString = when (classifier) {
+        konst classifierString = when (classifier) {
             is KClass<*> -> classifier.qualifiedName ?: classifier.simpleName
             is KTypeParameter -> classifier.name
             else -> null
@@ -98,12 +98,12 @@ internal class KTypeImpl<T>(
 }
 
 internal class KTypeImplForTypeParametersWithRecursiveBounds : KType {
-    override val classifier: KClassifier?
+    override konst classifier: KClassifier?
         get() = error("Type parameters with recursive bounds are not yet supported in reflection")
 
-    override val arguments: List<KTypeProjection> get() = emptyList()
+    override konst arguments: List<KTypeProjection> get() = emptyList()
 
-    override val isMarkedNullable: Boolean
+    override konst isMarkedNullable: Boolean
         get() = error("Type parameters with recursive bounds are not yet supported in reflection")
 
     override fun equals(other: Any?) =

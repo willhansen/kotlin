@@ -68,14 +68,14 @@ fun test2() {
 
 fun test3() {
     var a: Any? = null
-    val b = a
-    val c = a
+    konst b = a
+    konst c = a
     if (a is String) {
         <!DEBUG_INFO_SMARTCAST!>a<!>.length // ok
         b.<!UNRESOLVED_REFERENCE!>length<!> // ok
         c.<!UNRESOLVED_REFERENCE!>length<!> // ok
     }
-    a = null // b and c are still aliases to the same old value
+    a = null // b and c are still aliases to the same old konstue
     if (b is String) {
         a.<!UNRESOLVED_REFERENCE!>length<!> // error
         <!DEBUG_INFO_SMARTCAST!>b<!>.length // ok

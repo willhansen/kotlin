@@ -22,10 +22,10 @@ abstract class AbstractAnalysisApiAnnotationsOnDeclarationsTest : AbstractAnalys
     open fun renderAnnotations(annotations: KtAnnotationsList): String = TestAnnotationRenderer.renderAnnotations(annotations)
 
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val ktDeclaration = testServices.expressionMarkerProvider
+        konst ktDeclaration = testServices.expressionMarkerProvider
             .getElementOfTypeAtCaret<KtDeclaration>(ktFile)
-        val actual = analyseForTest(ktDeclaration) {
-            val declarationSymbol = ktDeclaration.getSymbol() as KtAnnotatedSymbol
+        konst actual = analyseForTest(ktDeclaration) {
+            konst declarationSymbol = ktDeclaration.getSymbol() as KtAnnotatedSymbol
             buildString {
                 appendLine("KtDeclaration: ${ktDeclaration::class.simpleName} ${ktDeclaration.name}")
                 append(renderAnnotations(declarationSymbol.annotationsList))

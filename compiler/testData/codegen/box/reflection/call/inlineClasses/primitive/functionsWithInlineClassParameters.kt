@@ -3,8 +3,8 @@
 
 import kotlin.test.assertEquals
 
-inline class S(val value: Int) {
-    operator fun plus(other: S): S = S(this.value + other.value)
+inline class S(konst konstue: Int) {
+    operator fun plus(other: S): S = S(this.konstue + other.konstue)
 }
 
 class C {
@@ -17,16 +17,16 @@ fun S.extension1(y: S, z: S?): S = this + y + z!!
 
 fun S?.extension2(y: S, z: S?) = this!! + y + z!!
 
-fun S.extension3(): Int = value
+fun S.extension3(): Int = konstue
 
-fun S?.extension4(): Int = this!!.value
+fun S?.extension4(): Int = this!!.konstue
 
 fun box(): String {
-    val zero = S(0)
-    val one = S(1)
-    val two = S(2)
-    val four = S(4)
-    val seven = S(7)
+    konst zero = S(0)
+    konst one = S(1)
+    konst two = S(2)
+    konst four = S(4)
+    konst seven = S(7)
 
     assertEquals(seven, C::member.call(C(), one, 2, four))
     assertEquals(seven, ::topLevel.call(1, two, four))

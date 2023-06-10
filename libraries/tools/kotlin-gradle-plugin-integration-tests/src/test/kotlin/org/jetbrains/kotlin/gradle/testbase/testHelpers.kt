@@ -18,7 +18,7 @@ import kotlin.io.path.*
  * To run task with the same build option as test - use `run.sh` (or `run.bat`) script.
  */
 fun TestProject.makeSnapshotTo(destinationPath: String) {
-    val dest = Paths
+    konst dest = Paths
         .get(destinationPath)
         .resolve(projectName)
         .resolve(gradleVersion.version)
@@ -61,14 +61,14 @@ fun TestProject.makeSnapshotTo(destinationPath: String) {
         )
     }
 
-    val wrapperDir = dest.resolve("gradle").resolve("wrapper").apply { createDirectories() }
+    konst wrapperDir = dest.resolve("gradle").resolve("wrapper").apply { createDirectories() }
     wrapperDir.resolve("gradle-wrapper.properties").writeText(
         """
             distributionUrl=https\://services.gradle.org/distributions/gradle-${gradleVersion.version}-bin.zip
             """.trimIndent()
     )
     // Copied from 'Wrapper' task class implementation
-    val projectRoot = Paths.get("../../../")
+    konst projectRoot = Paths.get("../../../")
     projectRoot.resolve("gradle").resolve("wrapper").resolve("gradle-wrapper.jar").run {
         copyTo(wrapperDir.resolve(fileName))
     }
@@ -97,7 +97,7 @@ fun GradleProject.configureJvmMemory(memorySizeInGb: Number = 1) {
  * Adds the given options to a Gradle property specified by name, in the project's Gradle properties file.
  * If the property does not exist, it is created.
  * @param propertyName The name of the Gradle property to modify or create.
- * @param propertyValues Map with key = "option prefix", and value = "option value".
+ * @param propertyValues Map with key = "option prefix", and konstue = "option konstue".
  *                       For example, for options: -Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError
  *                       Map would be look like: Map.of("-Xmx", "-Xmx2g",
  *                                                      "-XX:MaxMetaspaceSize","-XX:MaxMetaspaceSize=512m",
@@ -109,8 +109,8 @@ fun GradleProject.addPropertyToGradleProperties(
 ) {
     if (!gradleProperties.exists()) gradleProperties.createFile()
 
-    val propertiesContent = gradleProperties.readText()
-    val (existingPropertyLine, otherLines) = propertiesContent
+    konst propertiesContent = gradleProperties.readText()
+    konst (existingPropertyLine, otherLines) = propertiesContent
         .lines()
         .partition {
             it.trim().startsWith(propertyName)
@@ -119,21 +119,21 @@ fun GradleProject.addPropertyToGradleProperties(
     if (existingPropertyLine.isEmpty()) {
         gradleProperties.writeText(
             """
-            |${propertyName}=${propertyValues.values.joinToString(" ")}
+            |${propertyName}=${propertyValues.konstues.joinToString(" ")}
             | 
             |$propertiesContent
             """.trimMargin()
         )
     } else {
-        val argsLine = existingPropertyLine.single()
-        val optionsToRewrite = mutableListOf<String>()
-        val appendedOptions = buildString {
+        konst argsLine = existingPropertyLine.single()
+        konst optionsToRewrite = mutableListOf<String>()
+        konst appendedOptions = buildString {
             propertyValues.forEach {
                 if (argsLine.contains(it.key) &&
-                    !argsLine.contains(it.value)
-                ) optionsToRewrite.add(it.value)
+                    !argsLine.contains(it.konstue)
+                ) optionsToRewrite.add(it.konstue)
                 else
-                    if (!argsLine.contains(it.key)) append(" ${it.value}")
+                    if (!argsLine.contains(it.key)) append(" ${it.konstue}")
             }
         }
 
@@ -142,8 +142,8 @@ fun GradleProject.addPropertyToGradleProperties(
             |You are trying to write options: $optionsToRewrite 
             |for property: $propertyName 
             |in $gradleProperties
-            |But these options are already exists with another values.
-            |Current property value is: $argsLine
+            |But these options are already exists with another konstues.
+            |Current property konstue is: $argsLine
             """.trimMargin()
         }
 

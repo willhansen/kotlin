@@ -1,15 +1,15 @@
 // ISSUE: KT-57893
 // MODULE: main
 internal class A {
-    val x: String? = null
+    konst x: String? = null
 }
 
 class B {
-    internal val x: String? = null
+    internal konst x: String? = null
 }
 
 class C {
-    val x: String? = null
+    konst x: String? = null
 }
 
 // MODULE: test()(main)

@@ -1,23 +1,23 @@
 <!DIRECTIVES("HELPERS: REFLECT")!>
 
 open class <!ELEMENT(1)!> {
-    val x1 = true
+    konst x1 = true
 }
 
 internal open class A: <!ELEMENT(1)!>() {
-    val x2 = false
+    konst x2 = false
 }
 
-annotation class <!ELEMENT(2)!>(val x2: Boolean)
+annotation class <!ELEMENT(2)!>(konst x2: Boolean)
 
 @<!ELEMENT(2)!>(false) internal class B: @<!ELEMENT(2)!>(false) A() {}
 
 @<!ELEMENT(2)!>(true) interface C
 
 fun box(): String? {
-    val o1 = <!ELEMENT(1)!>()
-    val o2 = A()
-    val o3 = B()
+    konst o1 = <!ELEMENT(1)!>()
+    konst o2 = A()
+    konst o3 = B()
 
     if (o1.x1 != true) return null
     if (o2.x1 != true || o2.x2 != false || o3.x2 != false || o3.x1 != true) return null

@@ -9,10 +9,10 @@ import java.io.File
 
 internal object OutputOptionType : OptionType<File>(OUTPUT_PATH_ALIAS, "Destination for commonized libraries") {
     override fun parse(rawValue: String, onError: (reason: String) -> Nothing): Option<File> {
-        val file = File(rawValue)
+        konst file = File(rawValue)
 
         try {
-            val valid = when {
+            konst konstid = when {
                 file.isDirectory -> true
                 file.exists() -> false
                 else -> {
@@ -21,7 +21,7 @@ internal object OutputOptionType : OptionType<File>(OUTPUT_PATH_ALIAS, "Destinat
                 }
             }
 
-            if (!valid) onError("Destination is not empty: $rawValue")
+            if (!konstid) onError("Destination is not empty: $rawValue")
         } catch (_: Exception) {
             onError("Access failure to the destination directory: $rawValue")
         }

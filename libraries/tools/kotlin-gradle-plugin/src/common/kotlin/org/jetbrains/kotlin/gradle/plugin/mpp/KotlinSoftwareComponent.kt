@@ -33,21 +33,21 @@ import org.jetbrains.kotlin.gradle.utils.setProperty
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
 abstract class KotlinSoftwareComponent(
-    private val project: Project,
-    private val name: String,
-    protected val kotlinTargets: Iterable<KotlinTarget>
+    private konst project: Project,
+    private konst name: String,
+    protected konst kotlinTargets: Iterable<KotlinTarget>
 ) : SoftwareComponentInternal, ComponentWithVariants {
 
     override fun getName(): String = name
 
-    private val metadataTarget get() = project.multiplatformExtension.metadata() as KotlinMetadataTarget
+    private konst metadataTarget get() = project.multiplatformExtension.metadata() as KotlinMetadataTarget
 
-    private val _variants = project.future {
+    private konst _variants = project.future {
         AfterFinaliseCompilations.await()
         kotlinTargets
             .filter { target -> target !is KotlinMetadataTarget }
             .flatMap { target ->
-                val targetPublishableComponentNames = target.internal.kotlinComponents
+                konst targetPublishableComponentNames = target.internal.kotlinComponents
                     .filter { component -> component.publishable }
                     .map { component -> component.name }
                     .toSet()
@@ -58,17 +58,17 @@ abstract class KotlinSoftwareComponent(
 
     override fun getVariants(): Set<SoftwareComponent> = _variants.getOrThrow()
 
-    private val _usages: Future<Set<DefaultKotlinUsageContext>> = project.future {
+    private konst _usages: Future<Set<DefaultKotlinUsageContext>> = project.future {
         metadataTarget.awaitMetadataCompilationsCreated()
 
         if (!project.isKotlinGranularMetadataEnabled) {
-            val metadataCompilation = metadataTarget.compilations.getByName(MAIN_COMPILATION_NAME)
+            konst metadataCompilation = metadataTarget.compilations.getByName(MAIN_COMPILATION_NAME)
             return@future metadataTarget.createUsageContexts(metadataCompilation)
         }
 
         mutableSetOf<DefaultKotlinUsageContext>().apply {
-            val allMetadataJar = project.tasks.named(KotlinMetadataTargetConfigurator.ALL_METADATA_JAR_NAME)
-            val allMetadataArtifact = project.artifacts.add(Dependency.ARCHIVES_CONFIGURATION, allMetadataJar) { allMetadataArtifact ->
+            konst allMetadataJar = project.tasks.named(KotlinMetadataTargetConfigurator.ALL_METADATA_JAR_NAME)
+            konst allMetadataArtifact = project.artifacts.add(Dependency.ARCHIVES_CONFIGURATION, allMetadataJar) { allMetadataArtifact ->
                 allMetadataArtifact.classifier = if (project.isCompatibilityMetadataVariantEnabled) "all" else ""
             }
 
@@ -92,7 +92,7 @@ abstract class KotlinSoftwareComponent(
                 }
             }
 
-            val sourcesElements = metadataTarget.sourcesElementsConfigurationName
+            konst sourcesElements = metadataTarget.sourcesElementsConfigurationName
             if (metadataTarget.isSourcesPublishable) {
                 addSourcesJarArtifactToConfiguration(sourcesElements)
                 this += DefaultKotlinUsageContext(
@@ -117,7 +117,7 @@ abstract class KotlinSoftwareComponent(
      * Registration (during object init) of [sourcesJarTask] is required for cases when
      * user build scripts want to have access to sourcesJar task to configure it
      */
-    private val sourcesJarTask: TaskProvider<Jar> = sourcesJarTaskNamed(
+    private konst sourcesJarTask: TaskProvider<Jar> = sourcesJarTaskNamed(
         "sourcesJar",
         name,
         project,
@@ -145,10 +145,10 @@ class KotlinSoftwareComponentWithCoordinatesAndPublication(project: Project, nam
 }
 
 interface KotlinUsageContext : UsageContext {
-    val compilation: KotlinCompilation<*>
-    val dependencyConfigurationName: String
-    val includeIntoProjectStructureMetadata: Boolean
-    val mavenScope: MavenScope?
+    konst compilation: KotlinCompilation<*>
+    konst dependencyConfigurationName: String
+    konst includeIntoProjectStructureMetadata: Boolean
+    konst mavenScope: MavenScope?
 
     enum class MavenScope {
         COMPILE, RUNTIME;
@@ -156,20 +156,20 @@ interface KotlinUsageContext : UsageContext {
 }
 
 class DefaultKotlinUsageContext(
-    override val compilation: KotlinCompilation<*>,
-    override val mavenScope: KotlinUsageContext.MavenScope? = null,
-    override val dependencyConfigurationName: String,
-    internal val overrideConfigurationArtifacts: SetProperty<PublishArtifact>? = null,
-    internal val overrideConfigurationAttributes: AttributeContainer? = null,
-    override val includeIntoProjectStructureMetadata: Boolean = true,
-    internal val publishOnlyIf: PublishOnlyIf = PublishOnlyIf { true },
+    override konst compilation: KotlinCompilation<*>,
+    override konst mavenScope: KotlinUsageContext.MavenScope? = null,
+    override konst dependencyConfigurationName: String,
+    internal konst overrideConfigurationArtifacts: SetProperty<PublishArtifact>? = null,
+    internal konst overrideConfigurationAttributes: AttributeContainer? = null,
+    override konst includeIntoProjectStructureMetadata: Boolean = true,
+    internal konst publishOnlyIf: PublishOnlyIf = PublishOnlyIf { true },
 ) : KotlinUsageContext {
     fun interface PublishOnlyIf {
         fun predicate(): Boolean
     }
 
-    private val kotlinTarget: KotlinTarget get() = compilation.target
-    private val project: Project get() = kotlinTarget.project
+    private konst kotlinTarget: KotlinTarget get() = compilation.target
+    private konst project: Project get() = kotlinTarget.project
 
     @Deprecated(
         message = "Usage is no longer supported. Use `usageScope`",
@@ -180,7 +180,7 @@ class DefaultKotlinUsageContext(
 
     override fun getName(): String = dependencyConfigurationName
 
-    private val configuration: Configuration
+    private konst configuration: Configuration
         get() = project.configurations.getByName(dependencyConfigurationName)
 
     override fun getDependencies(): MutableSet<out ModuleDependency> =
@@ -195,7 +195,7 @@ class DefaultKotlinUsageContext(
         configuration.artifacts
 
     override fun getAttributes(): AttributeContainer {
-        val configurationAttributes = overrideConfigurationAttributes ?: configuration.attributes
+        konst configurationAttributes = overrideConfigurationAttributes ?: configuration.attributes
 
         /** TODO Using attributes of a detached configuration is a small and 'conservative' fix for KT-29758, [HierarchyAttributeContainer]
          * being rejected by Gradle 5.2+; we may need to either not filter the attributes, which will lead to
@@ -203,7 +203,7 @@ class DefaultKotlinUsageContext(
          * attributes schema migration, or create proper, non-detached configurations for publishing that are separated from the
          * configurations used for project-to-project dependencies
          */
-        val result = project.configurations.detachedConfiguration().markResolvable().attributes
+        konst result = project.configurations.detachedConfiguration().markResolvable().attributes
 
         // Capture type parameter T:
         fun <T> copyAttribute(attribute: Attribute<T>, from: AttributeContainer, to: AttributeContainer) {

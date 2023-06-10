@@ -11,21 +11,21 @@ repositories {
     mavenCentral()
 }
 
-val baseProtobuf by configurations.creating
-val baseProtobufSources by configurations.creating
+konst baseProtobuf by configurations.creating
+konst baseProtobufSources by configurations.creating
 
-val protobufVersion: String by rootProject.extra
-val protobufJarPrefix = "protobuf-$protobufVersion"
+konst protobufVersion: String by rootProject.extra
+konst protobufJarPrefix = "protobuf-$protobufVersion"
 
-val renamedSources = "$buildDir/renamedSrc/"
-val outputJarsPath = "$buildDir/libs"
+konst renamedSources = "$buildDir/renamedSrc/"
+konst outputJarsPath = "$buildDir/libs"
 
 dependencies {
     baseProtobuf("com.google.protobuf:protobuf-java:$protobufVersion")
     baseProtobufSources("com.google.protobuf:protobuf-java:$protobufVersion:sources")
 }
 
-val prepare = tasks.register<ShadowJar>("prepare") {
+konst prepare = tasks.register<ShadowJar>("prepare") {
     destinationDirectory.set(File(outputJarsPath))
     archiveVersion.set(protobufVersion)
     archiveClassifier.set("")
@@ -42,7 +42,7 @@ val prepare = tasks.register<ShadowJar>("prepare") {
 
 artifacts.add("default", prepare)
 
-val relocateSources = task<Copy>("relocateSources") {
+konst relocateSources = task<Copy>("relocateSources") {
     from(
         provider {
             zipTree(baseProtobufSources.files.find { it.name.startsWith("protobuf-java") && it.name.endsWith("-sources.jar") }
@@ -55,7 +55,7 @@ val relocateSources = task<Copy>("relocateSources") {
     filter { it.replace("com.google.protobuf", "org.jetbrains.kotlin.protobuf") }
 }
 
-val prepareSources = task<Jar>("prepareSources") {
+konst prepareSources = task<Jar>("prepareSources") {
     destinationDirectory.set(File(outputJarsPath))
     archiveVersion.set(protobufVersion)
     archiveClassifier.set("sources")

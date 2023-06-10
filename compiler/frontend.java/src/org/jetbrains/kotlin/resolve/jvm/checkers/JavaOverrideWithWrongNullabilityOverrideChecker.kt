@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 object JavaOverrideWithWrongNullabilityOverrideChecker : DeclarationChecker {
-    private val typePreparatorUnwrappingEnhancement: KotlinTypePreparator = object : KotlinTypePreparator() {
+    private konst typePreparatorUnwrappingEnhancement: KotlinTypePreparator = object : KotlinTypePreparator() {
         override fun prepareType(type: KotlinTypeMarker): UnwrappedType =
             super.prepareType(type).let { it.getEnhancementDeeply() ?: it }.unwrap()
     }
@@ -31,17 +31,17 @@ object JavaOverrideWithWrongNullabilityOverrideChecker : DeclarationChecker {
         if (descriptor !is CallableMemberDescriptor) return
         if (descriptor.overriddenDescriptors.isEmpty()) return
 
-        val modifierList = declaration.modifierList
-        val hasOverrideNode = modifierList != null && modifierList.hasModifier(KtTokens.OVERRIDE_KEYWORD)
+        konst modifierList = declaration.modifierList
+        konst hasOverrideNode = modifierList != null && modifierList.hasModifier(KtTokens.OVERRIDE_KEYWORD)
         if (!hasOverrideNode) return
 
-        val containingClass = descriptor.containingDeclaration as? ClassDescriptor ?: return
+        konst containingClass = descriptor.containingDeclaration as? ClassDescriptor ?: return
 
         for (overriddenDescriptor in descriptor.overriddenDescriptors) {
             if (overriddenDescriptor !is JavaMethodDescriptor) continue
 
-            val relatedTypeParameters = mutableSetOf<TypeParameterDescriptor>()
-            val overridingUtilWithEnhancementUnwrapped =
+            konst relatedTypeParameters = mutableSetOf<TypeParameterDescriptor>()
+            konst overridingUtilWithEnhancementUnwrapped =
                 OverridingUtil
                     .createWithTypePreparatorAndCustomSubtype(typePreparatorUnwrappingEnhancement) { subtype, supertype ->
                         !JavaNullabilityChecker.isNullableTypeAgainstNotNullTypeParameter(subtype, supertype).also {
@@ -51,7 +51,7 @@ object JavaOverrideWithWrongNullabilityOverrideChecker : DeclarationChecker {
                         }
                     }
 
-            // Skip, if even with enhancement unwrapped, it's still a valid override
+            // Skip, if even with enhancement unwrapped, it's still a konstid override
             if (overridingUtilWithEnhancementUnwrapped
                     .isOverridableBy(
                         overriddenDescriptor, descriptor, containingClass, true
@@ -64,7 +64,7 @@ object JavaOverrideWithWrongNullabilityOverrideChecker : DeclarationChecker {
                     ).result != OverridingUtil.OverrideCompatibilityInfo.Result.OVERRIDABLE) continue
 
 
-            val unwrappedOverridden = overriddenDescriptor.substitute(TypeSubstitutor.create(object : TypeSubstitution() {
+            konst unwrappedOverridden = overriddenDescriptor.substitute(TypeSubstitutor.create(object : TypeSubstitution() {
                 override fun get(key: KotlinType): TypeProjection? = null
                 override fun prepareTopLevelType(topLevelType: KotlinType, position: Variance) =
                     topLevelType.getEnhancementDeeply() ?: topLevelType

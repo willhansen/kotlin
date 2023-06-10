@@ -29,10 +29,10 @@ import org.jetbrains.org.objectweb.asm.Label
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
-internal val PARCEL_TYPE = Type.getObjectType("android/os/Parcel")
-internal val PARCELER_TYPE = Type.getObjectType(Parceler::class.java.name.replace(".", "/"))
+internal konst PARCEL_TYPE = Type.getObjectType("android/os/Parcel")
+internal konst PARCELER_TYPE = Type.getObjectType(Parceler::class.java.name.replace(".", "/"))
 
-internal class GenericParcelSerializer(override val asmType: Type) : ParcelSerializer {
+internal class GenericParcelSerializer(override konst asmType: Type) : ParcelSerializer {
     override fun writeValue(v: InstructionAdapter) {
         v.invokevirtual(PARCEL_TYPE.internalName, "writeValue", "(Ljava/lang/Object;)V", false)
     }
@@ -46,21 +46,21 @@ internal class GenericParcelSerializer(override val asmType: Type) : ParcelSeria
 }
 
 internal class TypeParcelerParcelSerializer(
-        override val asmType: Type,
-        private val parcelerType: KotlinType,
-        private val typeMapper: KotlinTypeMapper
+        override konst asmType: Type,
+        private konst parcelerType: KotlinType,
+        private konst typeMapper: KotlinTypeMapper
 ) : ParcelSerializer {
-    private val parcelerAsmType = typeMapper.mapType(parcelerType)
+    private konst parcelerAsmType = typeMapper.mapType(parcelerType)
 
     override fun writeValue(v: InstructionAdapter) {
-        // -> parcel, value(?)
-        boxTypeIfNeeded(v) // -> parcel, (boxed)value
+        // -> parcel, konstue(?)
+        boxTypeIfNeeded(v) // -> parcel, (boxed)konstue
 
-        v.swap() // -> value, parcel
-        putObjectOrClassInstanceOnStack(parcelerType, parcelerAsmType, typeMapper, v) // -> value, parcel, parceler
-        v.dupX2() // -> parceler, value, parcel, parceler
-        v.pop() // -> parceler, value, parcel
-        v.load(2, Type.INT_TYPE) // -> parceler, value, parcel, flags
+        v.swap() // -> konstue, parcel
+        putObjectOrClassInstanceOnStack(parcelerType, parcelerAsmType, typeMapper, v) // -> konstue, parcel, parceler
+        v.dupX2() // -> parceler, konstue, parcel, parceler
+        v.pop() // -> parceler, konstue, parcel
+        v.load(2, Type.INT_TYPE) // -> parceler, konstue, parcel, flags
         v.invokeinterface(PARCELER_TYPE.internalName, "write", "(Ljava/lang/Object;Landroid/os/Parcel;I)V")
     }
 
@@ -90,19 +90,19 @@ internal class TypeParcelerParcelSerializer(
     }
 
     private fun boxTypeIfNeeded(v: InstructionAdapter) {
-        val boxedType = handleSpecialBoxingCases(v) ?: return
-        v.invokestatic(boxedType.internalName, "valueOf", "(${asmType.descriptor})${boxedType.descriptor}", false)
+        konst boxedType = handleSpecialBoxingCases(v) ?: return
+        v.invokestatic(boxedType.internalName, "konstueOf", "(${asmType.descriptor})${boxedType.descriptor}", false)
     }
 
     private fun unboxTypeIfNeeded(v: InstructionAdapter) {
-        val boxedType = handleSpecialBoxingCases(v) ?: return
-        val getValueMethodName = BOXED_VALUE_METHOD_NAMES.getValue(boxedType.internalName)
+        konst boxedType = handleSpecialBoxingCases(v) ?: return
+        konst getValueMethodName = BOXED_VALUE_METHOD_NAMES.getValue(boxedType.internalName)
         v.castIfNeeded(boxedType)
         v.invokevirtual(boxedType.internalName, getValueMethodName, "()${asmType.descriptor}", false)
     }
 }
 
-internal class ArrayParcelSerializer(override val asmType: Type, private val elementSerializer: ParcelSerializer) : ParcelSerializer {
+internal class ArrayParcelSerializer(override konst asmType: Type, private konst elementSerializer: ParcelSerializer) : ParcelSerializer {
     override fun writeValue(v: InstructionAdapter) {
         v.dupX1() // -> arr, parcel, arr
         v.arraylength() // -> arr, parcel, length
@@ -113,8 +113,8 @@ internal class ArrayParcelSerializer(override val asmType: Type, private val ele
         v.swap() // -> arr, length
         v.aconst(0) // -> arr, length, <index>
 
-        val nextLoopIteration = Label()
-        val loopIsOver = Label()
+        konst nextLoopIteration = Label()
+        konst loopIsOver = Label()
 
         v.visitLabel(nextLoopIteration)
 
@@ -152,8 +152,8 @@ internal class ArrayParcelSerializer(override val asmType: Type, private val ele
         v.swap() // -> arr, length
         v.aconst(0) // -> arr, length, index
 
-        val nextLoopIteration = Label()
-        val loopIsOver = Label()
+        konst nextLoopIteration = Label()
+        konst loopIsOver = Label()
 
         v.visitLabel(nextLoopIteration)
         v.dup2() // -> arr, length, index, length, index
@@ -218,7 +218,7 @@ internal class ListSetParcelSerializer(
 
 internal class MapParcelSerializer(
         asmType: Type,
-        private val keySerializer: ParcelSerializer,
+        private konst keySerializer: ParcelSerializer,
         elementSerializer: ParcelSerializer,
         frameMap: FrameMap
 ) : AbstractCollectionParcelSerializer(asmType, elementSerializer, frameMap) {
@@ -240,7 +240,7 @@ internal class MapParcelSerializer(
         v.castIfNeeded(keySerializer.asmType)
         keySerializer.writeValue(v) // -> parcel, obj
 
-        v.invokeinterface("java/util/Map\$Entry", "getValue", "()Ljava/lang/Object;") // -> parcel, value
+        v.invokeinterface("java/util/Map\$Entry", "getValue", "()Ljava/lang/Object;") // -> parcel, konstue
         v.castIfNeeded(elementSerializer.asmType)
         elementSerializer.writeValue(v)
     }
@@ -254,7 +254,7 @@ internal class MapParcelSerializer(
 
         v.swap() // -> map, key, parcel
 
-        elementSerializer.readValue(v) // -> map, key, value
+        elementSerializer.readValue(v) // -> map, key, konstue
         v.castIfNeeded(elementSerializer.asmType)
 
         v.invokeinterface("java/util/Map", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;") // -> obj
@@ -263,11 +263,11 @@ internal class MapParcelSerializer(
 }
 
 abstract internal class AbstractCollectionParcelSerializer(
-        final override val asmType: Type,
-        protected val elementSerializer: ParcelSerializer,
-        private val frameMap: FrameMap
+        final override konst asmType: Type,
+        protected konst elementSerializer: ParcelSerializer,
+        private konst frameMap: FrameMap
 ) : ParcelSerializer {
-    protected val collectionType: Type = Type.getObjectType(when (asmType.internalName) {
+    protected konst collectionType: Type = Type.getObjectType(when (asmType.internalName) {
         "java/util/List" -> "java/util/ArrayList"
         "java/util/Set" -> "java/util/LinkedHashSet"
         "java/util/SortedSet" -> "java/util/TreeSet"
@@ -308,8 +308,8 @@ abstract internal class AbstractCollectionParcelSerializer(
     protected abstract fun doReadValue(v: InstructionAdapter)
 
     override fun writeValue(v: InstructionAdapter) {
-        val labelIteratorLoop = Label()
-        val labelReturn = Label()
+        konst labelIteratorLoop = Label()
+        konst labelReturn = Label()
 
         v.dupX1() // -> collection, parcel, collection
         getSize(v) // -> collection, parcel, size
@@ -353,8 +353,8 @@ abstract internal class AbstractCollectionParcelSerializer(
             v.load(sizeVarIndex, Type.INT_TYPE) // -> list, size
         }
 
-        val nextLoopIteration = Label()
-        val loopIsOver = Label()
+        konst nextLoopIteration = Label()
+        konst loopIsOver = Label()
 
         v.visitLabel(nextLoopIteration)
         v.dupX1() // -> size, list, size
@@ -376,11 +376,11 @@ abstract internal class AbstractCollectionParcelSerializer(
 }
 
 internal class SparseArrayParcelSerializer(
-        override val asmType: Type,
-        private val valueSerializer: ParcelSerializer,
-        private val frameMap: FrameMap
+        override konst asmType: Type,
+        private konst konstueSerializer: ParcelSerializer,
+        private konst frameMap: FrameMap
 ) : ParcelSerializer {
-    private val valueType = (valueSerializer as? PrimitiveTypeParcelSerializer)?.asmType ?: Type.getObjectType("java/lang/Object")
+    private konst konstueType = (konstueSerializer as? PrimitiveTypeParcelSerializer)?.asmType ?: Type.getObjectType("java/lang/Object")
 
     override fun writeValue(v: InstructionAdapter) {
         v.dup() // -> parcel, arr, arr
@@ -392,8 +392,8 @@ internal class SparseArrayParcelSerializer(
 
         v.aconst(0) // -> arr, size, <index>
 
-        val nextLoopIteration = Label()
-        val loopIsOver = Label()
+        konst nextLoopIteration = Label()
+        konst loopIsOver = Label()
 
         v.visitLabel(nextLoopIteration)
         v.dup2() // -> arr, size, index, size, index
@@ -413,8 +413,8 @@ internal class SparseArrayParcelSerializer(
         v.dupX2() // -> size, parcel, arr, index, parcel
         v.pop() // -> size, parcel, arr, index
         v.dup2X1() // -> size, arr, index, parcel, arr, index
-        v.invokevirtual(asmType.internalName, "valueAt", "(I)${valueType.descriptor}", false) // -> size, arr, index, parcel, value
-        valueSerializer.writeValue(v) // -> size, arr, index
+        v.invokevirtual(asmType.internalName, "konstueAt", "(I)${konstueType.descriptor}", false) // -> size, arr, index, parcel, konstue
+        konstueSerializer.writeValue(v) // -> size, arr, index
 
         v.aconst(1) // -> size, arr, index, (1)
         v.add(Type.INT_TYPE) // -> size, arr, (index + 1)
@@ -441,8 +441,8 @@ internal class SparseArrayParcelSerializer(
             v.load(sizeVarIndex, Type.INT_TYPE) // -> arr, size
         }
 
-        val nextLoopIteration = Label()
-        val loopIsOver = Label()
+        konst nextLoopIteration = Label()
+        konst loopIsOver = Label()
 
         v.visitLabel(nextLoopIteration)
         v.dup() // -> arr, size, size
@@ -454,8 +454,8 @@ internal class SparseArrayParcelSerializer(
         v.dup() // -> arr, size, arr, parcel, parcel
         v.invokevirtual(PARCEL_TYPE.internalName, "readInt", "()I", false) // -> arr, size, arr, parcel, key
         v.swap() // -> arr, size, arr, key, parcel
-        valueSerializer.readValue(v) // -> arr, size, arr, key, value
-        v.invokevirtual(asmType.internalName, "put", "(I${valueType.descriptor})V", false) // -> arr, size
+        konstueSerializer.readValue(v) // -> arr, size, arr, key, konstue
+        v.invokevirtual(asmType.internalName, "put", "(I${konstueType.descriptor})V", false) // -> arr, size
         v.aconst(-1) // -> arr, size, (-1)
         v.add(Type.INT_TYPE) // -> arr, (size - 1)
         v.goTo(nextLoopIteration)
@@ -466,9 +466,9 @@ internal class SparseArrayParcelSerializer(
 }
 
 internal class ObjectParcelSerializer(
-        override val asmType: Type,
-        private val type: KotlinType,
-        private val typeMapper: KotlinTypeMapper
+        override konst asmType: Type,
+        private konst type: KotlinType,
+        private konst typeMapper: KotlinTypeMapper
 ) : ParcelSerializer {
     override fun writeValue(v: InstructionAdapter) {
         v.pop2()
@@ -481,10 +481,10 @@ internal class ObjectParcelSerializer(
 }
 
 internal class ZeroParameterClassSerializer(
-    override val asmType: Type,
+    override konst asmType: Type,
     type: KotlinType
 ) : ParcelSerializer {
-    val clazz = type.constructor.declarationDescriptor as ClassDescriptor
+    konst clazz = type.constructor.declarationDescriptor as ClassDescriptor
 
     init {
         assert(clazz.kind == ClassKind.CLASS)
@@ -497,8 +497,8 @@ internal class ZeroParameterClassSerializer(
     override fun readValue(v: InstructionAdapter) {
         v.pop()
 
-        val constructor = clazz.unsubstitutedPrimaryConstructor
-        assert(constructor == null || constructor.valueParameters.isEmpty())
+        konst constructor = clazz.unsubstitutedPrimaryConstructor
+        assert(constructor == null || constructor.konstueParameters.isEmpty())
         v.anew(asmType)
         v.dup()
         v.invokespecial(asmType.internalName, "<init>", "()V", false)
@@ -506,11 +506,11 @@ internal class ZeroParameterClassSerializer(
 }
 
 private fun putObjectOrClassInstanceOnStack(type: KotlinType, asmType: Type, typeMapper: KotlinTypeMapper, v: InstructionAdapter) {
-    val clazz = type.constructor.declarationDescriptor as? ClassDescriptor
+    konst clazz = type.constructor.declarationDescriptor as? ClassDescriptor
 
     if (clazz != null) {
         if (clazz.isCompanionObject) {
-            val outerClass = clazz.containingDeclaration as? ClassDescriptor
+            konst outerClass = clazz.containingDeclaration as? ClassDescriptor
             if (outerClass != null) {
                 v.getstatic(typeMapper.mapType(outerClass.defaultType).internalName, clazz.name.asString(), asmType.descriptor)
                 return
@@ -521,7 +521,7 @@ private fun putObjectOrClassInstanceOnStack(type: KotlinType, asmType: Type, typ
     v.getstatic(asmType.internalName, "INSTANCE", asmType.descriptor)
 }
 
-internal class EnumParcelSerializer(override val asmType: Type) : ParcelSerializer {
+internal class EnumParcelSerializer(override konst asmType: Type) : ParcelSerializer {
     override fun writeValue(v: InstructionAdapter) {
         v.invokevirtual("java/lang/Enum", "name", "()Ljava/lang/String;", false)
         v.invokevirtual(PARCEL_TYPE.internalName, "writeString", "(Ljava/lang/String;)V", false)
@@ -531,12 +531,12 @@ internal class EnumParcelSerializer(override val asmType: Type) : ParcelSerializ
         v.invokevirtual(PARCEL_TYPE.internalName, "readString", "()Ljava/lang/String;", false)
         v.aconst(asmType)
         v.swap()
-        v.invokestatic("java/lang/Enum", "valueOf", "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;", false)
+        v.invokestatic("java/lang/Enum", "konstueOf", "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;", false)
         v.castIfNeeded(asmType)
     }
 }
 
-internal class CharSequenceParcelSerializer(override val asmType: Type) : ParcelSerializer {
+internal class CharSequenceParcelSerializer(override konst asmType: Type) : ParcelSerializer {
     override fun writeValue(v: InstructionAdapter) {
         // -> parcel, seq
         v.swap() // -> seq, parcel
@@ -553,7 +553,7 @@ internal class CharSequenceParcelSerializer(override val asmType: Type) : Parcel
     }
 }
 
-internal class EfficientParcelableParcelSerializer(override val asmType: Type, private val creatorAsmType: Type) : ParcelSerializer {
+internal class EfficientParcelableParcelSerializer(override konst asmType: Type, private konst creatorAsmType: Type) : ParcelSerializer {
     override fun writeValue(v: InstructionAdapter) {
         // -> parcel, parcelable
         v.swap() // -> parcelable, parcel
@@ -570,7 +570,7 @@ internal class EfficientParcelableParcelSerializer(override val asmType: Type, p
     }
 }
 
-internal class GenericParcelableParcelSerializer(override val asmType: Type, val containerClassType: Type) : ParcelSerializer {
+internal class GenericParcelableParcelSerializer(override konst asmType: Type, konst containerClassType: Type) : ParcelSerializer {
     override fun writeValue(v: InstructionAdapter) {
         // -> parcel, parcelable
         v.load(2, Type.INT_TYPE) // -> parcel, parcelable, flags
@@ -586,8 +586,8 @@ internal class GenericParcelableParcelSerializer(override val asmType: Type, val
     }
 }
 
-internal class NullAwareParcelSerializerWrapper(val delegate: ParcelSerializer) : ParcelSerializer {
-    override val asmType: Type
+internal class NullAwareParcelSerializerWrapper(konst delegate: ParcelSerializer) : ParcelSerializer {
+    override konst asmType: Type
         get() = delegate.asmType
 
     override fun writeValue(v: InstructionAdapter) = writeValueNullAware(v) {
@@ -600,9 +600,9 @@ internal class NullAwareParcelSerializerWrapper(val delegate: ParcelSerializer) 
 }
 
 internal class PrimitiveArrayParcelSerializer(
-        override val asmType: Type
+        override konst asmType: Type
 ) : ParcelSerializer {
-    private val methodNameBase = when (asmType.elementType) {
+    private konst methodNameBase = when (asmType.elementType) {
         Type.INT_TYPE -> "Int"
         Type.BOOLEAN_TYPE -> "Boolean"
         Type.BYTE_TYPE -> "Byte"
@@ -613,8 +613,8 @@ internal class PrimitiveArrayParcelSerializer(
         else -> error("Unsupported type ${asmType.elementType.descriptor}")
     }
 
-    private val writeMethod = Method("write${methodNameBase}Array", "(${asmType.descriptor})V")
-    private val createArrayMethod = Method("create${methodNameBase}Array", "()${asmType.descriptor}")
+    private konst writeMethod = Method("write${methodNameBase}Array", "(${asmType.descriptor})V")
+    private konst createArrayMethod = Method("create${methodNameBase}Array", "()${asmType.descriptor}")
 
     override fun writeValue(v: InstructionAdapter) {
         v.invokevirtual(PARCEL_TYPE.internalName, writeMethod.name, writeMethod.signature, false)
@@ -625,14 +625,14 @@ internal class PrimitiveArrayParcelSerializer(
     }
 }
 
-/** write...() and get...() methods in Android should support passing `null` values. */
+/** write...() and get...() methods in Android should support passing `null` konstues. */
 internal class NullCompliantObjectParcelSerializer(
-        override val asmType: Type,
+        override konst asmType: Type,
         writeMethod: Method<String?>,
         readMethod: Method<String?>
 ) : ParcelSerializer {
-    private val writeMethod = Method(writeMethod.name, writeMethod.signature ?: "(${asmType.descriptor})V")
-    private val readMethod = Method(readMethod.name, readMethod.signature ?: "()${asmType.descriptor}")
+    private konst writeMethod = Method(writeMethod.name, writeMethod.signature ?: "(${asmType.descriptor})V")
+    private konst readMethod = Method(readMethod.name, readMethod.signature ?: "()${asmType.descriptor}")
 
     override fun writeValue(v: InstructionAdapter) {
         v.invokevirtual(PARCEL_TYPE.internalName, writeMethod.name, writeMethod.signature, false)
@@ -644,9 +644,9 @@ internal class NullCompliantObjectParcelSerializer(
     }
 }
 
-internal class BoxedPrimitiveTypeParcelSerializer private constructor(val unboxedType: Type) : ParcelSerializer {
+internal class BoxedPrimitiveTypeParcelSerializer private constructor(konst unboxedType: Type) : ParcelSerializer {
     companion object {
-        private val BOXED_TO_UNBOXED_TYPE_MAPPINGS = mapOf(
+        private konst BOXED_TO_UNBOXED_TYPE_MAPPINGS = mapOf(
                 "java/lang/Boolean" to Type.BOOLEAN_TYPE,
                 "java/lang/Character" to Type.CHAR_TYPE,
                 "java/lang/Byte" to Type.BYTE_TYPE,
@@ -656,9 +656,9 @@ internal class BoxedPrimitiveTypeParcelSerializer private constructor(val unboxe
                 "java/lang/Long" to Type.LONG_TYPE,
                 "java/lang/Double" to Type.DOUBLE_TYPE)
 
-        private val UNBOXED_TO_BOXED_TYPE_MAPPINGS = BOXED_TO_UNBOXED_TYPE_MAPPINGS.map { it.value to it.key }.toMap()
+        private konst UNBOXED_TO_BOXED_TYPE_MAPPINGS = BOXED_TO_UNBOXED_TYPE_MAPPINGS.map { it.konstue to it.key }.toMap()
 
-        internal val BOXED_VALUE_METHOD_NAMES = mapOf(
+        internal konst BOXED_VALUE_METHOD_NAMES = mapOf(
                 "java/lang/Boolean" to "booleanValue",
                 "java/lang/Character" to "charValue",
                 "java/lang/Byte" to "byteValue",
@@ -668,7 +668,7 @@ internal class BoxedPrimitiveTypeParcelSerializer private constructor(val unboxe
                 "java/lang/Long" to "longValue",
                 "java/lang/Double" to "doubleValue")
 
-        private val INSTANCES = BOXED_TO_UNBOXED_TYPE_MAPPINGS.values.map { type ->
+        private konst INSTANCES = BOXED_TO_UNBOXED_TYPE_MAPPINGS.konstues.map { type ->
             type to BoxedPrimitiveTypeParcelSerializer(type)
         }.toMap()
 
@@ -676,9 +676,9 @@ internal class BoxedPrimitiveTypeParcelSerializer private constructor(val unboxe
         fun forBoxedType(type: Type) = INSTANCES[BOXED_TO_UNBOXED_TYPE_MAPPINGS[type.internalName]] ?: error("Unsupported type $type")
     }
 
-    override val asmType: Type = Type.getObjectType(UNBOXED_TO_BOXED_TYPE_MAPPINGS[unboxedType] ?: error("Unsupported type $unboxedType"))
-    val unboxedSerializer = PrimitiveTypeParcelSerializer.getInstance(unboxedType)
-    val typeValueMethodName = BOXED_VALUE_METHOD_NAMES[asmType.internalName]!!
+    override konst asmType: Type = Type.getObjectType(UNBOXED_TO_BOXED_TYPE_MAPPINGS[unboxedType] ?: error("Unsupported type $unboxedType"))
+    konst unboxedSerializer = PrimitiveTypeParcelSerializer.getInstance(unboxedType)
+    konst typeValueMethodName = BOXED_VALUE_METHOD_NAMES[asmType.internalName]!!
 
     override fun writeValue(v: InstructionAdapter) {
         v.invokevirtual(asmType.internalName, typeValueMethodName, "()${unboxedType.descriptor}", false)
@@ -687,13 +687,13 @@ internal class BoxedPrimitiveTypeParcelSerializer private constructor(val unboxe
 
     override fun readValue(v: InstructionAdapter) {
         unboxedSerializer.readValue(v)
-        v.invokestatic(asmType.internalName, "valueOf", "(${unboxedType.descriptor})${asmType.descriptor}", false)
+        v.invokestatic(asmType.internalName, "konstueOf", "(${unboxedType.descriptor})${asmType.descriptor}", false)
     }
 }
 
-internal open class PrimitiveTypeParcelSerializer private constructor(final override val asmType: Type) : ParcelSerializer {
+internal open class PrimitiveTypeParcelSerializer private constructor(final override konst asmType: Type) : ParcelSerializer {
     companion object {
-        private val WRITE_METHOD_NAMES = mapOf(
+        private konst WRITE_METHOD_NAMES = mapOf(
                 Type.BOOLEAN_TYPE to Method("writeInt", "(I)V"),
                 Type.CHAR_TYPE to Method("writeInt", "(I)V"),
                 Type.BYTE_TYPE to Method("writeByte", "(B)V"),
@@ -703,7 +703,7 @@ internal open class PrimitiveTypeParcelSerializer private constructor(final over
                 Type.LONG_TYPE to Method("writeLong", "(J)V"),
                 Type.DOUBLE_TYPE to Method("writeDouble", "(D)V"))
 
-        private val READ_METHOD_NAMES = mapOf(
+        private konst READ_METHOD_NAMES = mapOf(
                 Type.BOOLEAN_TYPE to Method("readInt", "()I"),
                 Type.CHAR_TYPE to Method("readInt", "()I"),
                 Type.BYTE_TYPE to Method("readByte", "()B"),
@@ -713,7 +713,7 @@ internal open class PrimitiveTypeParcelSerializer private constructor(final over
                 Type.LONG_TYPE to Method("readLong", "()J"),
                 Type.DOUBLE_TYPE to Method("readDouble", "()D"))
 
-        private val INSTANCES = READ_METHOD_NAMES.keys.map {
+        private konst INSTANCES = READ_METHOD_NAMES.keys.map {
             it to when (it) {
                 Type.CHAR_TYPE -> CharParcelSerializer
                 Type.SHORT_TYPE -> ShortParcelSerializer
@@ -757,8 +757,8 @@ internal open class PrimitiveTypeParcelSerializer private constructor(final over
         override fun readValue(v: InstructionAdapter) {
             super.readValue(v)
 
-            val falseLabel = Label()
-            val conditionIsOver = Label()
+            konst falseLabel = Label()
+            konst conditionIsOver = Label()
 
             v.ifeq(falseLabel)
             v.iconst(1)
@@ -771,8 +771,8 @@ internal open class PrimitiveTypeParcelSerializer private constructor(final over
         }
     }
 
-    private val writeMethod = WRITE_METHOD_NAMES[asmType]!!
-    private val readMethod = READ_METHOD_NAMES[asmType]!!
+    private konst writeMethod = WRITE_METHOD_NAMES[asmType]!!
+    private konst readMethod = READ_METHOD_NAMES[asmType]!!
 
     override fun writeValue(v: InstructionAdapter) {
         v.invokevirtual(PARCEL_TYPE.internalName, writeMethod.name, writeMethod.signature, false)
@@ -784,8 +784,8 @@ internal open class PrimitiveTypeParcelSerializer private constructor(final over
 }
 
 private fun readValueNullAware(v: InstructionAdapter, block: () -> Unit) {
-    val labelNull = Label()
-    val labelReturn = Label()
+    konst labelNull = Label()
+    konst labelReturn = Label()
 
     v.invokevirtual(PARCEL_TYPE.internalName, "readInt", "()I", false)
     v.ifeq(labelNull)
@@ -794,7 +794,7 @@ private fun readValueNullAware(v: InstructionAdapter, block: () -> Unit) {
     block()
     v.goTo(labelReturn)
 
-    // Just push null on stack if the value is null
+    // Just push null on stack if the konstue is null
     v.visitLabel(labelNull)
     v.aconst(null)
 
@@ -802,8 +802,8 @@ private fun readValueNullAware(v: InstructionAdapter, block: () -> Unit) {
 }
 
 private fun writeValueNullAware(v: InstructionAdapter, block: () -> Unit) {
-    val labelReturn = Label()
-    val labelNull = Label()
+    konst labelReturn = Label()
+    konst labelNull = Label()
     v.dup()
     v.ifnull(labelNull)
 
@@ -824,7 +824,7 @@ private fun writeValueNullAware(v: InstructionAdapter, block: () -> Unit) {
     v.visitLabel(labelReturn)
 }
 
-internal class Method<out T : String?>(val name: String, val signature: T) {
+internal class Method<out T : String?>(konst name: String, konst signature: T) {
     companion object {
         operator fun invoke(name: String) = Method(name, null)
     }

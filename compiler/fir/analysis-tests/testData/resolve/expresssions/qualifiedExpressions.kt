@@ -19,15 +19,15 @@ enum class E {
 
 fun foo() {}
 
-val f = 10
+konst f = 10
 
 fun main() {
     a.b.foo()
     a.b.C.foo()
     a.b.C.D.foo()
-    val x = a.b.f
+    konst x = a.b.f
     C.foo()
     C().foo()
-    val e = a.b.E.entry
-    val e1 = E.entry
+    konst e = a.b.E.entry
+    konst e1 = E.entry
 }

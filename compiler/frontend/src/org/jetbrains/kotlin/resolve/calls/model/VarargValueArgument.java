@@ -49,8 +49,8 @@ public class VarargValueArgument implements ResolvedValueArgument {
     public String toString() {
         StringBuilder builder = new StringBuilder("vararg:{");
         for (Iterator<ValueArgument> iterator = arguments.iterator(); iterator.hasNext(); ) {
-            ValueArgument valueArgument = iterator.next();
-            KtExpression expression = valueArgument.getArgumentExpression();
+            ValueArgument konstueArgument = iterator.next();
+            KtExpression expression = konstueArgument.getArgumentExpression();
             builder.append(expression == null ? "no expression" : expression.getText());
             if (iterator.hasNext()) {
                 builder.append(", ");

@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.TypeVariableMarker
 
 interface NewConstraintSystem {
-    val hasContradiction: Boolean
-    val errors: List<ConstraintSystemError>
+    konst hasContradiction: Boolean
+    konst errors: List<ConstraintSystemError>
 
     fun getBuilder(): ConstraintSystemBuilder
 
@@ -33,7 +33,7 @@ interface NewConstraintSystem {
 /**
  * In some cases we're not only adding constraints linearly to the system, but sometimes we need to consider several variants of constraints
  *
- * For example, from smartcast we've got a value of a type A<Int, String> & A<E, F> that we'd like to pass as an argument to the parameter
+ * For example, from smartcast we've got a konstue of a type A<Int, String> & A<E, F> that we'd like to pass as an argument to the parameter
  * of type A<Xv, Yv> (where Xv and Yv are the type variables of the current call)
  *
  * So, we've got a subtyping constraint

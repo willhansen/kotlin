@@ -2,7 +2,7 @@ package
 
 public final class CBar : IBar {
     public constructor CBar()
-    public open override /*1*/ val bar: kotlin.Int
+    public open override /*1*/ konst bar: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -10,7 +10,7 @@ public final class CBar : IBar {
 
 public final class CBarT</*0*/ T> : IBarT<T> {
     public constructor CBarT</*0*/ T>()
-    public open override /*1*/ val bar: T
+    public open override /*1*/ konst bar: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -26,7 +26,7 @@ public final class CFoo : IFoo {
 
 public final class CQux : IQux {
     public constructor CQux()
-    public open override /*1*/ val qux: kotlin.Int
+    public open override /*1*/ konst qux: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -34,7 +34,7 @@ public final class CQux : IQux {
 
 public open class Derived : Final {
     public constructor Derived()
-    public final override /*1*/ /*fake_override*/ val bar: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst bar: kotlin.Int
     public final override /*1*/ /*fake_override*/ var qux: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
@@ -44,7 +44,7 @@ public open class Derived : Final {
 
 public open class Final {
     public constructor Final()
-    public final val bar: kotlin.Int = 0
+    public final konst bar: kotlin.Int = 0
     public final var qux: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(): kotlin.Unit
@@ -53,14 +53,14 @@ public open class Final {
 }
 
 public interface IBar {
-    public abstract val bar: kotlin.Int
+    public abstract konst bar: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public interface IBarT</*0*/ T> {
-    public abstract val bar: T
+    public abstract konst bar: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -74,7 +74,7 @@ public interface IFoo {
 }
 
 public interface IQux {
-    public abstract val qux: kotlin.Int
+    public abstract konst qux: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -82,7 +82,7 @@ public interface IQux {
 
 public final class Test1 : Final, IFoo {
     public constructor Test1()
-    public final override /*1*/ /*fake_override*/ val bar: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst bar: kotlin.Int
     public final override /*1*/ /*fake_override*/ var qux: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*delegation*/ fun foo(): kotlin.Unit
@@ -92,7 +92,7 @@ public final class Test1 : Final, IFoo {
 
 public final class Test2 : Final, IBar {
     public constructor Test2()
-    public open override /*2*/ /*delegation*/ val bar: kotlin.Int
+    public open override /*2*/ /*delegation*/ konst bar: kotlin.Int
     public final override /*1*/ /*fake_override*/ var qux: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
@@ -102,8 +102,8 @@ public final class Test2 : Final, IBar {
 
 public final class Test3 : Final, IQux {
     public constructor Test3()
-    public final override /*1*/ /*fake_override*/ val bar: kotlin.Int
-    public open override /*2*/ /*delegation*/ val qux: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst bar: kotlin.Int
+    public open override /*2*/ /*delegation*/ konst qux: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -112,7 +112,7 @@ public final class Test3 : Final, IQux {
 
 public final class Test4 : Derived, IFoo {
     public constructor Test4()
-    public final override /*1*/ /*fake_override*/ val bar: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst bar: kotlin.Int
     public final override /*1*/ /*fake_override*/ var qux: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*delegation*/ fun foo(): kotlin.Unit
@@ -122,7 +122,7 @@ public final class Test4 : Derived, IFoo {
 
 public final class Test5 : Derived, IBar {
     public constructor Test5()
-    public open override /*2*/ /*delegation*/ val bar: kotlin.Int
+    public open override /*2*/ /*delegation*/ konst bar: kotlin.Int
     public final override /*1*/ /*fake_override*/ var qux: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
@@ -132,8 +132,8 @@ public final class Test5 : Derived, IBar {
 
 public final class Test6 : Derived, IQux {
     public constructor Test6()
-    public final override /*1*/ /*fake_override*/ val bar: kotlin.Int
-    public open override /*2*/ /*delegation*/ val qux: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst bar: kotlin.Int
+    public open override /*2*/ /*delegation*/ konst qux: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -142,7 +142,7 @@ public final class Test6 : Derived, IQux {
 
 public final class Test7 : Final, IBarT<kotlin.Int> {
     public constructor Test7()
-    public open override /*2*/ /*delegation*/ val bar: kotlin.Int
+    public open override /*2*/ /*delegation*/ konst bar: kotlin.Int
     public final override /*1*/ /*fake_override*/ var qux: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
@@ -152,7 +152,7 @@ public final class Test7 : Final, IBarT<kotlin.Int> {
 
 public final class Test8 : Final, IBarT<kotlin.Int> {
     public constructor Test8()
-    public open override /*2*/ /*delegation*/ val bar: kotlin.Int
+    public open override /*2*/ /*delegation*/ konst bar: kotlin.Int
     public final override /*1*/ /*fake_override*/ var qux: kotlin.Int
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit

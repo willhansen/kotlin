@@ -2,33 +2,33 @@ package org.jetbrains.ring
 
 class ForLoopsBenchmark {
 
-    private val array: Array<Int> = Array(BENCHMARK_SIZE) {
+    private konst array: Array<Int> = Array(BENCHMARK_SIZE) {
         it
     }
 
-    private val intArray: IntArray = IntArray(BENCHMARK_SIZE) {
+    private konst intArray: IntArray = IntArray(BENCHMARK_SIZE) {
         it
     }
 
-    private val charArray: CharArray = CharArray(BENCHMARK_SIZE) {
+    private konst charArray: CharArray = CharArray(BENCHMARK_SIZE) {
         it.toChar()
     }
 
-    private val string: String = charArray.joinToString()
+    private konst string: String = charArray.joinToString()
 
-    private val floatArray: FloatArray = FloatArray(BENCHMARK_SIZE) {
+    private konst floatArray: FloatArray = FloatArray(BENCHMARK_SIZE) {
         it.toFloat()
     }
 
-    private val uIntArray = UIntArray(BENCHMARK_SIZE) {
+    private konst uIntArray = UIntArray(BENCHMARK_SIZE) {
         it.toUInt()
     }
 
-    private val uShortArray = UShortArray(BENCHMARK_SIZE) {
+    private konst uShortArray = UShortArray(BENCHMARK_SIZE) {
         it.toUShort()
     }
 
-    private val uLongArray = ULongArray(BENCHMARK_SIZE) {
+    private konst uLongArray = ULongArray(BENCHMARK_SIZE) {
         it.toULong()
     }
 

@@ -7,12 +7,12 @@ interface IFoo {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: String>(val x: T) : IFoo {
+konstue class IC<T: String>(konst x: T) : IFoo {
     private fun privateFun() = x
     override fun foo() = privateFun()
 }
 
 fun box(): String {
-    val x: IFoo = IC("OK")
+    konst x: IFoo = IC("OK")
     return x.foo()
 }

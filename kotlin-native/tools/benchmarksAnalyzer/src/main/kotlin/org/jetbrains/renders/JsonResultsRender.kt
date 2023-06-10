@@ -10,7 +10,7 @@ import org.jetbrains.report.*
 
 // Report render to text format.
 class JsonResultsRender: Render() {
-    override val name: String
+    override konst name: String
         get() = "json"
 
     override fun render(report: SummaryBenchmarksReport, onlyChanges: Boolean) =

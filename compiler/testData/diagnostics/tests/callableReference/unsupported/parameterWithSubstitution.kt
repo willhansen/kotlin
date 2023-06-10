@@ -7,8 +7,8 @@ class Foo {
 }
 
 fun main(x: Int) {
-    val f = Foo()
-    val a: Int
+    konst f = Foo()
+    konst a: Int
     <!UNRESOLVED_REFERENCE!>get<!>() = f.<!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>getValue<!>(null, ::<!UNSUPPORTED!>x<!>) // no exception after fix
     <!UNRESOLVED_REFERENCE!>print<!>(<!UNINITIALIZED_VARIABLE!>a<!>)
 }

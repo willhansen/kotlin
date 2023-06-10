@@ -48,8 +48,8 @@ public interface KtExpressionTypeProviderMixIn : KtAnalysisSessionMixIn {
      * Returns the functional type of the given [KtFunction].
      *
      * For a regular function, it would be kotlin.FunctionN<Ps, R> where
-     *   N is the number of value parameters in the function;
-     *   Ps are types of value parameters;
+     *   N is the number of konstue parameters in the function;
+     *   Ps are types of konstue parameters;
      *   R is the return type of the function.
      * Depending on the function's attributes, such as `suspend` or reflective access, different functional type,
      * such as `SuspendFunction`, `KFunction`, or `KSuspendFunction`, will be constructed.
@@ -58,7 +58,7 @@ public interface KtExpressionTypeProviderMixIn : KtAnalysisSessionMixIn {
         withValidityAssertion { analysisSession.expressionTypeProvider.getFunctionalTypeForKtFunction(this) }
 
     /**
-     * Returns the expected [KtType] of this [PsiElement] if it is an expression. The returned value should not be a
+     * Returns the expected [KtType] of this [PsiElement] if it is an expression. The returned konstue should not be a
      * [org.jetbrains.kotlin.analysis.api.types.KtErrorType].
      */
     public fun PsiElement.getExpectedType(): KtType? =

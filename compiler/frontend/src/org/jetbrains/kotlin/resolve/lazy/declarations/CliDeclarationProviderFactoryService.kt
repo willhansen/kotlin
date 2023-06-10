@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.utils.sure
 import java.util.ArrayList
 
-class CliDeclarationProviderFactoryService(private val sourceFiles: Collection<KtFile>) : DeclarationProviderFactoryService() {
+class CliDeclarationProviderFactoryService(private konst sourceFiles: Collection<KtFile>) : DeclarationProviderFactoryService() {
 
     override fun create(
         project: Project,
@@ -33,9 +33,9 @@ class CliDeclarationProviderFactoryService(private val sourceFiles: Collection<K
         filesScope: GlobalSearchScope,
         moduleInfo: ModuleInfo
     ): DeclarationProviderFactory {
-        val allFiles = ArrayList<KtFile>()
+        konst allFiles = ArrayList<KtFile>()
         sourceFiles.filterTo(allFiles) {
-            val vFile = it.virtualFile.sure { "Source files should be physical files" }
+            konst vFile = it.virtualFile.sure { "Source files should be physical files" }
             filesScope.contains(vFile)
         }
         allFiles.addAll(syntheticFiles)

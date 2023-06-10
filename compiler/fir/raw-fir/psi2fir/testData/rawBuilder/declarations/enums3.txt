@@ -10,10 +10,10 @@ FILE: enums3.kt
                     super<R|kotlin/Enum<C.Planet>|>()
                 }
 
-                public? final? [IsFromPrimaryConstructor=true] val m: Double = R|<local>/m|
+                public? final? [IsFromPrimaryConstructor=true] konst m: Double = R|<local>/m|
                     public? [ContainingClassKey=Planet] get(): Double
 
-                internal final? [IsFromPrimaryConstructor=true] val r: Double = R|<local>/r|
+                internal final? [IsFromPrimaryConstructor=true] konst r: Double = R|<local>/r|
                     internal [ContainingClassKey=Planet] get(): Double
 
                 public final static [ContainingClassKey=Planet] enum entry MERCURY: R|C.Planet| = object : R|C.Planet| {
@@ -49,7 +49,7 @@ FILE: enums3.kt
 
                 }
 
-                public? final? val g: Double = G#.times#(m#).div#(r#.times#(r#))
+                public? final? konst g: Double = G#.times#(m#).div#(r#.times#(r#))
                     public? [ContainingClassKey=Planet] get(): Double
 
                 public? abstract fun sayHello(): R|kotlin/Unit|
@@ -59,18 +59,18 @@ FILE: enums3.kt
                         super<R|kotlin/Any|>()
                     }
 
-                    public? final? const val G: <implicit> = Double(6.67E-11)
+                    public? final? const konst G: <implicit> = Double(6.67E-11)
                         public? [ContainingClassKey=Companion] get(): <implicit>
 
                 }
 
-                public final static [ContainingClassKey=Planet] fun values(): R|kotlin/Array<C.Planet>| {
+                public final static [ContainingClassKey=Planet] fun konstues(): R|kotlin/Array<C.Planet>| {
                 }
 
-                public final static [ContainingClassKey=Planet] fun valueOf(value: R|kotlin/String|): R|C.Planet| {
+                public final static [ContainingClassKey=Planet] fun konstueOf(konstue: R|kotlin/String|): R|C.Planet| {
                 }
 
-                public final static [ContainingClassKey=Planet] val entries: R|kotlin/enums/EnumEntries<C.Planet>|
+                public final static [ContainingClassKey=Planet] konst entries: R|kotlin/enums/EnumEntries<C.Planet>|
                     public get(): R|kotlin/enums/EnumEntries<C.Planet>|
 
             }

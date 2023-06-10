@@ -3,7 +3,7 @@ class A {
 }
 
 fun foo(): String? {
-    val t = A().v
+    konst t = A().v
 
     return t
 }

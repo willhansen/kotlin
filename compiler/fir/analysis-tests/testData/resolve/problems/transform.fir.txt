@@ -62,7 +62,7 @@ FILE: transform.kt
 
     }
     public final fun <F : R|FirClass<F>|> R|F|.runSupertypeResolvePhaseForLocalClass(): R|F| {
-        lval applySupertypesTransformer: R|FirApplySupertypesTransformer| = R|/FirApplySupertypesTransformer.FirApplySupertypesTransformer|()
+        lkonst applySupertypesTransformer: R|FirApplySupertypesTransformer| = R|/FirApplySupertypesTransformer.FirApplySupertypesTransformer|()
         ^runSupertypeResolvePhaseForLocalClass this@R|/runSupertypeResolvePhaseForLocalClass|.R|SubstitutionOverride</FirClass.transform: R|E|>|<R|F|, R|kotlin/Nothing?|>(R|<local>/applySupertypesTransformer|, Null(null))
     }
     public abstract class FirPureAbstractElement : R|FirElement| {
@@ -92,7 +92,7 @@ FILE: transform.kt
             super<R|kotlin/Any|>()
         }
 
-        public abstract val subjectVariable: R|FirVariable<*>?|
+        public abstract konst subjectVariable: R|FirVariable<*>?|
             public get(): R|FirVariable<*>?|
 
     }
@@ -102,7 +102,7 @@ FILE: transform.kt
         }
 
         public final fun foo(expression: R|FirWhenExpression|): R|kotlin/Unit| {
-            lval variable: R|FirVariable<*>?| = R|<local>/expression|.R|/FirWhenExpression.subjectVariable|
+            lkonst variable: R|FirVariable<*>?| = R|<local>/expression|.R|/FirWhenExpression.subjectVariable|
             when () {
                 !=(R|<local>/variable|, Null(null)) ->  {
                     R|<local>/variable|.R|/FirElement.accept|(this@R|/FirRenderer|)

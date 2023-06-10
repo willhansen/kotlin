@@ -8,7 +8,7 @@ repositories {
     mavenLocal()
 }
 
-val kotlinVersion = project.property("kotlin_version")
+konst kotlinVersion = project.property("kotlin_version")
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")

@@ -15,7 +15,7 @@ KtFile: multiDeclaration.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -56,7 +56,7 @@ KtFile: multiDeclaration.kt
           PsiElement(IDENTIFIER)('pair')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -94,7 +94,7 @@ KtFile: multiDeclaration.kt
                   REFERENCE_EXPRESSION
                     PsiElement(IDENTIFIER)('Volatile')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY
@@ -129,7 +129,7 @@ KtFile: multiDeclaration.kt
                   REFERENCE_EXPRESSION
                     PsiElement(IDENTIFIER)('Volatile')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION_ENTRY

@@ -15,7 +15,7 @@ KtFile: InFunction.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('foo')
         PsiWhiteSpace(' ')
@@ -37,7 +37,7 @@ KtFile: InFunction.kt
               PsiErrorElement:Expecting a class body
                 <empty list>
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('foo')
         PsiWhiteSpace(' ')
@@ -68,7 +68,7 @@ KtFile: InFunction.kt
               PsiErrorElement:Expecting a class body
                 <empty list>
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('foo')
         PsiWhiteSpace(' ')
@@ -115,7 +115,7 @@ KtFile: InFunction.kt
               PsiErrorElement:Expecting a class body
                 <empty list>
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('foo')
         PsiWhiteSpace(' ')

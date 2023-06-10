@@ -4,10 +4,10 @@ package test
 
 import java.lang.annotation.ElementType
 
-annotation class Anno(vararg val t: ElementType)
+annotation class Anno(vararg konst t: ElementType)
 
 @Anno(ElementType.METHOD, ElementType.FIELD) fun foo() {}
 
-@field:Anno(ElementType.PACKAGE) val bar = { 42 }()
+@field:Anno(ElementType.PACKAGE) konst bar = { 42 }()
 
 @Anno() fun baz() {}

@@ -18,13 +18,13 @@ interface FlowCollector<in T> {}
 @Suppress("OPT_IN_USAGE_ERROR")
 fun <L> flow(block: suspend FlowCollector<L>.() -> Unit) = Flow(block)
 
-class Flow<out R>(private val block: suspend FlowCollector<R>.() -> Unit)
+class Flow<out R>(private konst block: suspend FlowCollector<R>.() -> Unit)
 
 fun <R> select(vararg x: R) = x[0]
 
 fun poll01(): Flow<String> {
     return flow {
-        val inv = select(::bar2, ::foo2)
+        konst inv = select(::bar2, ::foo2)
         inv()
     }
 }
@@ -32,42 +32,42 @@ fun poll01(): Flow<String> {
 
 fun poll21(flag: Boolean): Flow<String> {
     return flow {
-        val inv = when (flag) { true -> ::bar2 else -> ::foo2 }
+        konst inv = when (flag) { true -> ::bar2 else -> ::foo2 }
         inv()
     }
 }
 
 fun poll31(flag: Boolean): Flow<String> {
     return flow {
-        val inv = when (flag) { true -> ::bar2 false -> ::foo2 }
+        konst inv = when (flag) { true -> ::bar2 false -> ::foo2 }
         inv()
     }
 }
 
 fun poll61(): Flow<String> {
     return flow {
-        val inv = ::bar2
+        konst inv = ::bar2
         inv
     }
 }
 
 fun poll71(): Flow<String> {
     return flow {
-        val inv = ::bar2!!
+        konst inv = ::bar2!!
         inv()
     }
 }
 
 fun poll81(): Flow<String> {
     return flow {
-        val inv = ::bar2 in setOf(::foo2)
+        konst inv = ::bar2 in setOf(::foo2)
         inv
     }
 }
 
 fun poll91(): Flow<String> {
     return flow {
-        val inv = ::foo2 in setOf(::foo2)
+        konst inv = ::foo2 in setOf(::foo2)
         inv
     }
 }

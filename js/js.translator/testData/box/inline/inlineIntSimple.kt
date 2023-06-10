@@ -38,7 +38,7 @@ internal fun doNothing3 (inline3: Inline): Int {
 }
 
 fun box(): String {
-    val inline = Inline()
+    konst inline = Inline()
     assertEquals(1, doNothing1(inline, 1))
     assertEquals(2, doNothing1(inline, 2))
     assertEquals(3, doNothing2(inline, 3))

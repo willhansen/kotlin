@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 internal fun IrType.erasure(): IrType {
     if (this !is IrSimpleType) return this
 
-    val upperBound = when (val classifier = classifier) {
+    konst upperBound = when (konst classifier = classifier) {
         is IrClassSymbol -> classifier.defaultType
         is IrTypeParameterSymbol -> {
             // Pick the (necessarily unique) non-interface upper bound if it exists
@@ -44,9 +44,9 @@ internal fun IrType.erasure(): IrType {
     return upperBound.mergeNullability(this)
 }
 
-internal val IrType.erasedUpperBound get() = this.erasure().getClass() ?: error(this.render())
+internal konst IrType.erasedUpperBound get() = this.erasure().getClass() ?: error(this.render())
 
-internal class TypeOperatorLowering(val context: CommonBackendContext) : FileLoweringPass, IrBuildingTransformer(context) {
+internal class TypeOperatorLowering(konst context: CommonBackendContext) : FileLoweringPass, IrBuildingTransformer(context) {
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildren(this, null)
@@ -54,7 +54,7 @@ internal class TypeOperatorLowering(val context: CommonBackendContext) : FileLow
 
     private fun lowerCast(expression: IrTypeOperatorCall): IrExpression {
         builder.at(expression)
-        val typeOperand = expression.typeOperand.erasure()
+        konst typeOperand = expression.typeOperand.erasure()
         return if (typeOperand == expression.typeOperand) {
             expression
         } else {
@@ -63,7 +63,7 @@ internal class TypeOperatorLowering(val context: CommonBackendContext) : FileLow
     }
 
     private fun lowerSafeCast(expression: IrTypeOperatorCall): IrExpression {
-        val typeOperand = expression.typeOperand.erasure()
+        konst typeOperand = expression.typeOperand.erasure()
 
         return builder.irBlock(expression) {
             +irLetS(expression.argument) { variable ->

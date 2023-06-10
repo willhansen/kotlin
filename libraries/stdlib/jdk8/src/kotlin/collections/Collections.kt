@@ -21,7 +21,7 @@
 package kotlin.collections
 
 /**
- * Returns the value to which the specified key is mapped, or
+ * Returns the konstue to which the specified key is mapped, or
  * [defaultValue] if this map contains no mapping for the key.
  */
 @SinceKotlin("1.2")
@@ -32,9 +32,9 @@ public inline fun <@kotlin.internal.OnlyInputTypes K, V> Map<out K, V>.getOrDefa
 
 /**
  * Removes the entry for the specified key only if it is currently
- * mapped to the specified value.
+ * mapped to the specified konstue.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
-public inline fun <@kotlin.internal.OnlyInputTypes K, @kotlin.internal.OnlyInputTypes V> MutableMap<out K, out V>.remove(key: K, value: V): Boolean =
-    (this as MutableMap<K, V>).remove(key, value)
+public inline fun <@kotlin.internal.OnlyInputTypes K, @kotlin.internal.OnlyInputTypes V> MutableMap<out K, out V>.remove(key: K, konstue: V): Boolean =
+    (this as MutableMap<K, V>).remove(key, konstue)

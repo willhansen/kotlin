@@ -13,7 +13,7 @@ public class Test {
 // FILE: simple.kt
 
 class C {
-    @JvmField public val foo: String = "OK"
+    @JvmField public konst foo: String = "OK"
 }
 
 fun box(): String {

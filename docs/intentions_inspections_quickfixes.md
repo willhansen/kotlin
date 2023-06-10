@@ -38,7 +38,7 @@ requires multiple resolve calls in a row.
 function when descriptor is absent. 
 
 - Any checks about code state and resolve that were made during reporting an inspection problem an registering a quick fix might be 
-invalidated by the moment of the actual quick fix execution. Avoid the code that can throw exceptions because of that. Re-checks with early 
+inkonstidated by the moment of the actual quick fix execution. Avoid the code that can throw exceptions because of that. Re-checks with early 
 exit from the quick fix can be used to workaround it. 
 
 - Intentions and quick fixes execution happens in the UI thread so do not call long operations such as usages search or resolve to avoid 
@@ -46,7 +46,7 @@ freezes. `PSI` elements obtained from resolve during the applicability check can
 modification in quick-fixes. All complex searches should be executed in a background thread under a progress indicator. Some tests 
 already assert that resolve operations are not called from UI thread while applying fixes.
 
-- There shouldn't be PSI elements stored in QuickFix classes (`val psi: PsiElement`) as such elements might be invalidated and can lead 
+- There shouldn't be PSI elements stored in QuickFix classes (`konst psi: PsiElement`) as such elements might be inkonstidated and can lead 
 to memory leaks. Smart pointer (check `SmartPsiElementPointer` class and `createSmartPointer()` function) can be used when such storage 
 is absolutely necessary. 
 

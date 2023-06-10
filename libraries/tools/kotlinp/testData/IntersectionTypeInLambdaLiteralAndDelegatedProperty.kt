@@ -13,11 +13,11 @@ fun <T> createDelegate(f: () -> T): Delegate<T> = Delegate()
 
 class Delegate<T> {
     operator fun getValue(thisRef: Any?, property: kotlin.reflect.KProperty<*>): T = TODO()
-    operator fun setValue(thisRef: Any?, property: kotlin.reflect.KProperty<*>, value: T) {}
+    operator fun setValue(thisRef: Any?, property: kotlin.reflect.KProperty<*>, konstue: T) {}
 }
 
 fun test(a: Inv<A>, b: Inv<B>) {
-    val intersectionType = intersection(a, b)
+    konst intersectionType = intersection(a, b)
 
     use(intersectionType) { intersectionType }
     useNested(intersectionType) { Inv(intersectionType) }

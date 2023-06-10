@@ -18,39 +18,39 @@ import org.jetbrains.kotlin.types.UnwrappedType
 
 
 interface ReceiverKotlinCallArgument : KotlinCallArgument {
-    val receiver: DetailedReceiver
-    val isSafeCall: Boolean
+    konst receiver: DetailedReceiver
+    konst isSafeCall: Boolean
 }
 
-class QualifierReceiverKotlinCallArgument(override val receiver: QualifierReceiver) : ReceiverKotlinCallArgument {
-    override val isSafeCall: Boolean
+class QualifierReceiverKotlinCallArgument(override konst receiver: QualifierReceiver) : ReceiverKotlinCallArgument {
+    override konst isSafeCall: Boolean
         get() = false // TODO: add warning
 
     override fun toString() = "$receiver"
 
-    override val isSpread get() = false
-    override val argumentName: Name? get() = null
+    override konst isSpread get() = false
+    override konst argumentName: Name? get() = null
 }
 
 interface KotlinCallArgument {
-    val isSpread: Boolean
-    val argumentName: Name?
+    konst isSpread: Boolean
+    konst argumentName: Name?
 }
 
 interface PostponableKotlinCallArgument : KotlinCallArgument, ResolutionAtom
 
 interface SimpleKotlinCallArgument : KotlinCallArgument, ReceiverKotlinCallArgument {
-    override val receiver: ReceiverValueWithSmartCastInfo
+    override konst receiver: ReceiverValueWithSmartCastInfo
 }
 
 interface ExpressionKotlinCallArgument : SimpleKotlinCallArgument, ResolutionAtom
 
 interface SubKotlinCallArgument : SimpleKotlinCallArgument, ResolutionAtom {
-    val callResult: PartialCallResolutionResult
+    konst callResult: PartialCallResolutionResult
 }
 
 interface LambdaKotlinCallArgument : PostponableKotlinCallArgument {
-    override val isSpread: Boolean
+    override konst isSpread: Boolean
         get() = false
 
     /*
@@ -69,19 +69,19 @@ interface LambdaKotlinCallArgument : PostponableKotlinCallArgument {
      * parametersTypes == null means, that there is no declared arguments
      * null inside array means that this type is not declared explicitly
      */
-    val parametersTypes: Array<UnwrappedType?>?
+    konst parametersTypes: Array<UnwrappedType?>?
 }
 
 interface FunctionExpression : LambdaKotlinCallArgument {
-    override val parametersTypes: Array<UnwrappedType?>
+    override konst parametersTypes: Array<UnwrappedType?>
 
     // null means that there function can not have receiver
-    val receiverType: UnwrappedType?
+    konst receiverType: UnwrappedType?
 
-    val contextReceiversTypes: Array<UnwrappedType?>
+    konst contextReceiversTypes: Array<UnwrappedType?>
 
     // null means that return type is not declared, for fun(){ ... } returnType == Unit
-    val returnType: UnwrappedType?
+    konst returnType: UnwrappedType?
 }
 
 /**
@@ -93,8 +93,8 @@ interface FunctionExpression : LambdaKotlinCallArgument {
  * D.E::foo <-> Expression
  */
 sealed class LHSResult {
-    class Type(val qualifier: QualifierReceiver?, resolvedType: UnwrappedType) : LHSResult() {
-        val unboundDetailedReceiver: ReceiverValueWithSmartCastInfo
+    class Type(konst qualifier: QualifierReceiver?, resolvedType: UnwrappedType) : LHSResult() {
+        konst unboundDetailedReceiver: ReceiverValueWithSmartCastInfo
 
         init {
             if (qualifier != null) {
@@ -103,23 +103,23 @@ sealed class LHSResult {
                 }
             }
 
-            val unboundReceiver = TransientReceiver(resolvedType)
+            konst unboundReceiver = TransientReceiver(resolvedType)
             unboundDetailedReceiver = ReceiverValueWithSmartCastInfo(unboundReceiver, emptySet(), isStable = true)
         }
     }
 
-    class Object(val qualifier: QualifierReceiver) : LHSResult() {
-        val objectValueReceiver: ReceiverValueWithSmartCastInfo
+    class Object(konst qualifier: QualifierReceiver) : LHSResult() {
+        konst objectValueReceiver: ReceiverValueWithSmartCastInfo
 
         init {
             assert(DescriptorUtils.isObject(qualifier.descriptor)) {
                 "Should be object descriptor: ${qualifier.descriptor}"
             }
-            objectValueReceiver = qualifier.classValueReceiverWithSmartCastInfo ?: error("class value should be not null for $qualifier")
+            objectValueReceiver = qualifier.classValueReceiverWithSmartCastInfo ?: error("class konstue should be not null for $qualifier")
         }
     }
 
-    class Expression(val lshCallArgument: SimpleKotlinCallArgument) : LHSResult()
+    class Expression(konst lshCallArgument: SimpleKotlinCallArgument) : LHSResult()
 
     // todo this case is forbid for now
     object Empty : LHSResult()
@@ -128,12 +128,12 @@ sealed class LHSResult {
 }
 
 interface CallableReferenceKotlinCallArgument : PostponableKotlinCallArgument, CallableReferenceResolutionAtom {
-    override val isSpread: Boolean
+    override konst isSpread: Boolean
         get() = false
 
-    override val lhsResult: LHSResult
+    override konst lhsResult: LHSResult
 
-    override val call: KotlinCall
+    override konst call: KotlinCall
 }
 
 interface CollectionLiteralKotlinCallArgument : PostponableKotlinCallArgument
@@ -144,5 +144,5 @@ interface TypeArgument
 object TypeArgumentPlaceholder : TypeArgument
 
 interface SimpleTypeArgument : TypeArgument {
-    val type: UnwrappedType
+    konst type: UnwrappedType
 }

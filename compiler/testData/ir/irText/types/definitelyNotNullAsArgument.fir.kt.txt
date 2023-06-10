@@ -24,7 +24,7 @@ class C<TT : Any?> : I<(TT & Any)> {
 
   }
 
-  val t: TT
+  konst t: TT
     field = t
     get
 

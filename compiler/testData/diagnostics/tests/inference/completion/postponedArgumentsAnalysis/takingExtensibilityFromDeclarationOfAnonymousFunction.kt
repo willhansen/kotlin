@@ -4,6 +4,6 @@
 fun <T> id(x: T) = x
 fun <T> select(vararg x: T) = x[0]
 
-val x1 = select(id { this }, fun Int.() = this)
-val x2 = select(id { this + it.inv() }, fun Int.(x: Int) = this)
-val x3 = select(id { this.length + it.inv() }, fun String.(x: Int) = length)
+konst x1 = select(id { this }, fun Int.() = this)
+konst x2 = select(id { this + it.inv() }, fun Int.(x: Int) = this)
+konst x3 = select(id { this.length + it.inv() }, fun String.(x: Int) = length)

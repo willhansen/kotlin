@@ -12,16 +12,16 @@ import org.jetbrains.kotlin.konan.target.Family
 import org.jetbrains.kotlin.konan.target.Xcode
 import kotlin.math.min
 
-internal val gson: Gson by lazy { GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()!! }
+internal konst gson: Gson by lazy { GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()!! }
 
 /**
  * Compares two strings assuming that both are representing numeric version strings.
  * Examples of numeric version strings: "12.4.1.2", "9", "0.5".
  */
 private fun compareStringsAsVersions(version1: String, version2: String): Int {
-    val splitVersion1 = version1.split('.').map { it.toInt() }
-    val splitVersion2 = version2.split('.').map { it.toInt() }
-    val minimalLength = min(splitVersion1.size, splitVersion2.size)
+    konst splitVersion1 = version1.split('.').map { it.toInt() }
+    konst splitVersion2 = version2.split('.').map { it.toInt() }
+    konst minimalLength = min(splitVersion1.size, splitVersion2.size)
     for (index in 0 until minimalLength) {
         if (splitVersion1[index] < splitVersion2[index]) return -1
         if (splitVersion1[index] > splitVersion2[index]) return 1
@@ -51,7 +51,7 @@ private fun getLatestSimulatorRuntimeFor(
         family: Family,
         osMinVersion: String
 ): SimulatorRuntimeDescriptor? {
-    val osName = simulatorOsName(family)
+    konst osName = simulatorOsName(family)
     return descriptors.firstOrNull {
         it.checkAvailability() && it.name.startsWith(osName) && compareStringsAsVersions(it.version, osMinVersion) >= 0
     }
@@ -62,7 +62,7 @@ private fun getSimulatorRuntimesFor(
         family: Family,
         osMinVersion: String
 ): List<SimulatorRuntimeDescriptor> {
-    val osName = simulatorOsName(family)
+    konst osName = simulatorOsName(family)
     return descriptors.filter {
         it.checkAvailability() && it.name.startsWith(osName) && compareStringsAsVersions(it.version, osMinVersion) >= 0
     }
@@ -82,19 +82,19 @@ fun getSimulatorRuntimesFor(json: String, family: Family, osMinVersion: String):
 
 // Result of `xcrun simctl list runtimes -j`.
 data class ListRuntimesReport(
-        @Expose val runtimes: List<SimulatorRuntimeDescriptor>
+        @Expose konst runtimes: List<SimulatorRuntimeDescriptor>
 )
 
 data class SimulatorRuntimeDescriptor(
-        @Expose val version: String,
+        @Expose konst version: String,
         // bundlePath field may not exist in the old Xcode (prior to 10.3).
-        @Expose val bundlePath: String? = null,
-        @Expose val isAvailable: Boolean? = null,
-        @Expose val availability: String? = null,
-        @Expose val name: String,
-        @Expose val identifier: String,
-        @Expose val buildversion: String,
-        @Expose val supportedDeviceTypes: List<DeviceType>
+        @Expose konst bundlePath: String? = null,
+        @Expose konst isAvailable: Boolean? = null,
+        @Expose konst availability: String? = null,
+        @Expose konst name: String,
+        @Expose konst identifier: String,
+        @Expose konst buildversion: String,
+        @Expose konst supportedDeviceTypes: List<DeviceType>
 ) {
     /**
      * Different Xcode/macOS combinations give different fields that checks
@@ -108,10 +108,10 @@ data class SimulatorRuntimeDescriptor(
 }
 
 data class DeviceType(
-        @Expose val bundlePath: String,
-        @Expose val name: String,
-        @Expose val identifier: String,
-        @Expose val productFamily: String
+        @Expose konst bundlePath: String,
+        @Expose konst name: String,
+        @Expose konst identifier: String,
+        @Expose konst productFamily: String
 )
 
 /**
@@ -122,17 +122,17 @@ fun getSimulatorDevices(json: String): Map<String, List<SimulatorDeviceDescripto
 
 // Result of `xcrun simctl list devices -j`
 data class ListDevicesReport(
-        @Expose val devices: Map<String, List<SimulatorDeviceDescriptor>>
+        @Expose konst devices: Map<String, List<SimulatorDeviceDescriptor>>
 )
 
 data class SimulatorDeviceDescriptor(
-        @Expose val lastBootedAt: String?,
-        @Expose val dataPath: String,
-        @Expose val dataPathSize: Long,
-        @Expose val logPath: String,
-        @Expose val udid: String,
-        @Expose val isAvailable: Boolean?,
-        @Expose val deviceTypeIdentifier: String,
-        @Expose val state: String,
-        @Expose val name: String
+        @Expose konst lastBootedAt: String?,
+        @Expose konst dataPath: String,
+        @Expose konst dataPathSize: Long,
+        @Expose konst logPath: String,
+        @Expose konst udid: String,
+        @Expose konst isAvailable: Boolean?,
+        @Expose konst deviceTypeIdentifier: String,
+        @Expose konst state: String,
+        @Expose konst name: String
 )

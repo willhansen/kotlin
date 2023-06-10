@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 
 public class D8Checker {
 
-    public static final boolean RUN_D8_CHECKER = !Boolean.valueOf(System.getProperty("kotlin.test.box.d8.disable"));
+    public static final boolean RUN_D8_CHECKER = !Boolean.konstueOf(System.getProperty("kotlin.test.box.d8.disable"));
 
     private D8Checker() {
     }

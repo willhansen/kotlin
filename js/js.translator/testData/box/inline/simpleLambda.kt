@@ -13,7 +13,7 @@ public inline fun <T, R> T.use(block: (T)-> R) : R {
 }
 
 public inline fun use2() : Int {
-    val s = 100
+    konst s = 100
     return s
 }
 
@@ -22,7 +22,7 @@ class Z {}
 // CHECK_BREAKS_COUNT: function=test1 count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1 name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1() : Int {
-    val input = Z()
+    konst input = Z()
     return input.use<Z, Int>{
         100
     }
@@ -31,7 +31,7 @@ fun test1() : Int {
 // CHECK_BREAKS_COUNT: function=test2 count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test2 name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test2() : Int {
-    val x = 1000
+    konst x = 1000
     return use2() + x
 }
 

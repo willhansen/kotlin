@@ -5,7 +5,7 @@ FILE: cascadeIf.kt
                 ^foo IntegerLiteral(4)
             }
             second# ->  {
-                lval x: <implicit> = IntegerLiteral(3)
+                lkonst x: <implicit> = IntegerLiteral(3)
                 ^foo x#.plus#(IntegerLiteral(2))
             }
             else ->  {
@@ -23,7 +23,7 @@ FILE: cascadeIf.kt
 
     }
     public? final? fun example(): R|kotlin/Unit| {
-        lval a: <implicit> = when () {
+        lkonst a: <implicit> = when () {
             Boolean(true) ->  {
                 Boolean(true)
             }
@@ -32,7 +32,7 @@ FILE: cascadeIf.kt
             }
         }
 
-        lval b: <implicit> = when () {
+        lkonst b: <implicit> = when () {
             Boolean(true) ->  {
             }
             else ->  {
@@ -40,19 +40,19 @@ FILE: cascadeIf.kt
             }
         }
 
-        lval c: <implicit> = when () {
+        lkonst c: <implicit> = when () {
             Boolean(true) ->  {
                 Boolean(true)
             }
         }
 
-        lval d: <implicit> = when () {
+        lkonst d: <implicit> = when () {
             Boolean(true) ->  {
                 Boolean(true)
             }
         }
 
-        lval e: <implicit> = when () {
+        lkonst e: <implicit> = when () {
             Boolean(true) ->  {
             }
             else ->  {
@@ -60,7 +60,7 @@ FILE: cascadeIf.kt
             }
         }
 
-        lval f: <implicit> = when () {
+        lkonst f: <implicit> = when () {
             Boolean(true) ->  {
                 Boolean(true)
             }

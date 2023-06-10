@@ -18,19 +18,19 @@ import java.io.File
  */
 abstract class AbstractNodeModulesCache : AutoCloseable, BuildService<AbstractNodeModulesCache.Parameters> {
     interface Parameters : BuildServiceParameters {
-        val rootProjectDir: DirectoryProperty
-        val cacheDir: DirectoryProperty
+        konst rootProjectDir: DirectoryProperty
+        konst cacheDir: DirectoryProperty
     }
 
     companion object {
-        const val STATE_FILE_NAME = ".visited"
+        const konst STATE_FILE_NAME = ".visited"
     }
 
-    abstract val type: String
+    abstract konst type: String
 
     lateinit var fileHasher: FileHasher
 
-    private val cache by lazy {
+    private konst cache by lazy {
         ProcessedFilesCache(
             fileHasher,
             parameters.rootProjectDir.get().asFile,
@@ -68,7 +68,7 @@ fun makeNodeModule(
     packageJson: PackageJson,
     files: (File) -> Unit
 ): File {
-    val dir = importedPackageDir(container, packageJson.name, packageJson.version)
+    konst dir = importedPackageDir(container, packageJson.name, packageJson.version)
 
     if (dir.exists()) dir.deleteRecursively()
 
@@ -76,7 +76,7 @@ fun makeNodeModule(
         "Cannot create directory: $dir"
     }
 
-    val gson = GsonBuilder()
+    konst gson = GsonBuilder()
         .setPrettyPrinting()
         .disableHtmlEscaping()
         .create()

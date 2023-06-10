@@ -3,8 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-value class C(val x: Any)
-val c = C(42)
+konstue class C(konst x: Any)
+konst c = C(42)
 
 fun main() {
     println(c.x)

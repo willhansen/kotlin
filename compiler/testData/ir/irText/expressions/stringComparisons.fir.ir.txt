@@ -8,7 +8,7 @@ FILE fqName:<root> fileName:/stringComparisons.kt
           arg0: CALL 'public open fun compareTo (other: kotlin.String): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=null
             $this: GET_VAR 'a: kotlin.String declared in <root>.test1' type=kotlin.String origin=null
             other: GET_VAR 'b: kotlin.String declared in <root>.test1' type=kotlin.String origin=null
-          arg1: CONST Int type=kotlin.Int value=0
+          arg1: CONST Int type=kotlin.Int konstue=0
   FUN name:test2 visibility:public modality:FINAL <> (a:kotlin.String, b:kotlin.String) returnType:kotlin.Boolean
     VALUE_PARAMETER name:a index:0 type:kotlin.String
     VALUE_PARAMETER name:b index:1 type:kotlin.String
@@ -18,7 +18,7 @@ FILE fqName:<root> fileName:/stringComparisons.kt
           arg0: CALL 'public open fun compareTo (other: kotlin.String): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=null
             $this: GET_VAR 'a: kotlin.String declared in <root>.test2' type=kotlin.String origin=null
             other: GET_VAR 'b: kotlin.String declared in <root>.test2' type=kotlin.String origin=null
-          arg1: CONST Int type=kotlin.Int value=0
+          arg1: CONST Int type=kotlin.Int konstue=0
   FUN name:test3 visibility:public modality:FINAL <> (a:kotlin.String, b:kotlin.String) returnType:kotlin.Boolean
     VALUE_PARAMETER name:a index:0 type:kotlin.String
     VALUE_PARAMETER name:b index:1 type:kotlin.String
@@ -28,7 +28,7 @@ FILE fqName:<root> fileName:/stringComparisons.kt
           arg0: CALL 'public open fun compareTo (other: kotlin.String): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=null
             $this: GET_VAR 'a: kotlin.String declared in <root>.test3' type=kotlin.String origin=null
             other: GET_VAR 'b: kotlin.String declared in <root>.test3' type=kotlin.String origin=null
-          arg1: CONST Int type=kotlin.Int value=0
+          arg1: CONST Int type=kotlin.Int konstue=0
   FUN name:test4 visibility:public modality:FINAL <> (a:kotlin.String, b:kotlin.String) returnType:kotlin.Boolean
     VALUE_PARAMETER name:a index:0 type:kotlin.String
     VALUE_PARAMETER name:b index:1 type:kotlin.String
@@ -38,4 +38,4 @@ FILE fqName:<root> fileName:/stringComparisons.kt
           arg0: CALL 'public open fun compareTo (other: kotlin.String): kotlin.Int declared in kotlin.String' type=kotlin.Int origin=null
             $this: GET_VAR 'a: kotlin.String declared in <root>.test4' type=kotlin.String origin=null
             other: GET_VAR 'b: kotlin.String declared in <root>.test4' type=kotlin.String origin=null
-          arg1: CONST Int type=kotlin.Int value=0
+          arg1: CONST Int type=kotlin.Int konstue=0

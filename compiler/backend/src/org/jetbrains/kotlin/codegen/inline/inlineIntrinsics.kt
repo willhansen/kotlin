@@ -61,15 +61,15 @@ internal fun generateInlineIntrinsic(
 }
 
 private fun isSpecialEnumMethod(descriptor: FunctionDescriptor): Boolean {
-    val containingDeclaration = descriptor.containingDeclaration as? PackageFragmentDescriptor ?: return false
+    konst containingDeclaration = descriptor.containingDeclaration as? PackageFragmentDescriptor ?: return false
     if (containingDeclaration.fqName != StandardNames.BUILT_INS_PACKAGE_FQ_NAME) {
         return false
     }
     if (descriptor.typeParameters.size != 1) {
         return false
     }
-    val name = descriptor.name.asString()
-    val parameters = descriptor.valueParameters
+    konst name = descriptor.name.asString()
+    konst parameters = descriptor.konstueParameters
     return name == "enumValues" && parameters.size == 0 ||
             (name == "enumValueOf" && parameters.size == 1 && KotlinBuiltIns.isString(parameters[0].type))
 }
@@ -77,9 +77,9 @@ private fun isSpecialEnumMethod(descriptor: FunctionDescriptor): Boolean {
 private fun createSpecialEnumMethodBody(
     name: String, typeParameter: TypeParameterMarker, typeSystem: TypeSystemCommonBackendContext
 ): MethodNode {
-    val isValueOf = "enumValueOf" == name
-    val desc = getSpecialEnumFunDescriptor(ENUM_TYPE, isValueOf)
-    val node = MethodNode(Opcodes.API_VERSION, Opcodes.ACC_STATIC, "fake", desc, null, null)
+    konst isValueOf = "enumValueOf" == name
+    konst desc = getSpecialEnumFunDescriptor(ENUM_TYPE, isValueOf)
+    konst node = MethodNode(Opcodes.API_VERSION, Opcodes.ACC_STATIC, "fake", desc, null, null)
     ReifiedTypeInliner.putReifiedOperationMarkerIfNeeded(
         typeParameter, false, ReifiedTypeInliner.OperationKind.ENUM_REIFIED, InstructionAdapter(node), typeSystem
     )
@@ -88,7 +88,7 @@ private fun createSpecialEnumMethodBody(
         node.visitVarInsn(Opcodes.ALOAD, 0)
 
         node.visitMethodInsn(
-            Opcodes.INVOKESTATIC, ENUM_TYPE.internalName, "valueOf",
+            Opcodes.INVOKESTATIC, ENUM_TYPE.internalName, "konstueOf",
             Type.getMethodDescriptor(ENUM_TYPE, JAVA_CLASS_TYPE, JAVA_STRING_TYPE), false
         )
         node.visitTypeInsn(Opcodes.CHECKCAST, ENUM_TYPE.internalName)

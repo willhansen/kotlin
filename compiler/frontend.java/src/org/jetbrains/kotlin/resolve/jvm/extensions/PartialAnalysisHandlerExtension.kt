@@ -33,10 +33,10 @@ import org.jetbrains.kotlin.resolve.scopes.LexicalScope
 import org.jetbrains.kotlin.resolve.scopes.utils.memberScopeAsImportingScope
 
 open class PartialAnalysisHandlerExtension : AnalysisHandlerExtension {
-    open val analyzePartially: Boolean
+    open konst analyzePartially: Boolean
         get() = true
 
-    open val analyzeDefaultParameterValues: Boolean
+    open konst analyzeDefaultParameterValues: Boolean
         get() = false
 
     override fun doAnalysis(
@@ -51,12 +51,12 @@ open class PartialAnalysisHandlerExtension : AnalysisHandlerExtension {
             return null
         }
 
-        val resolveSession = componentProvider.get<ResolveSession>()
-        val bodyResolver = componentProvider.get<BodyResolver>()
-        val declarationScopeProvider = componentProvider.get<DeclarationScopeProvider>()
-        val topDownAnalyzer = componentProvider.get<LazyTopDownAnalyzer>()
+        konst resolveSession = componentProvider.get<ResolveSession>()
+        konst bodyResolver = componentProvider.get<BodyResolver>()
+        konst declarationScopeProvider = componentProvider.get<DeclarationScopeProvider>()
+        konst topDownAnalyzer = componentProvider.get<LazyTopDownAnalyzer>()
 
-        val topDownAnalysisContext = TopDownAnalysisContext(
+        konst topDownAnalysisContext = TopDownAnalysisContext(
             TopDownAnalysisMode.TopLevelDeclarations, DataFlowInfo.EMPTY, declarationScopeProvider
         )
 
@@ -66,7 +66,7 @@ open class PartialAnalysisHandlerExtension : AnalysisHandlerExtension {
         }
 
         doForEachDeclaration(files) { declaration ->
-            val descriptor = resolveSession.resolveToDescriptor(declaration)
+            konst descriptor = resolveSession.resolveToDescriptor(declaration)
 
             when (descriptor) {
                 is ClassDescriptor -> {
@@ -86,14 +86,14 @@ open class PartialAnalysisHandlerExtension : AnalysisHandlerExtension {
                 is PropertyDescriptor -> {
                     if (declaration is KtProperty) {
                         /* TODO Now we analyse body with anonymous object initializers. Check if we can't avoid it
-                         * val a: Runnable = object : Runnable { ... } */
+                         * konst a: Runnable = object : Runnable { ... } */
                         bodyResolver.resolveProperty(topDownAnalysisContext, declaration, descriptor)
                     }
                 }
 
                 is FunctionDescriptor -> {
                     if (declaration is KtPrimaryConstructor && (analyzeDefaultParameterValues || descriptor.isAnnotationConstructor())) {
-                        val containingScope = descriptor.containingScope
+                        konst containingScope = descriptor.containingScope
                         if (containingScope != null) {
                             bodyResolver.resolveConstructorParameterDefaultValues(
                                 topDownAnalysisContext.outerDataFlowInfo, bindingTrace,
@@ -111,9 +111,9 @@ open class PartialAnalysisHandlerExtension : AnalysisHandlerExtension {
         return AnalysisResult.Companion.success(bindingTrace.bindingContext, module, true)
     }
 
-    private val DeclarationDescriptor.containingScope: LexicalScope?
+    private konst DeclarationDescriptor.containingScope: LexicalScope?
         get() {
-            val containingDescriptor = containingDeclaration ?: return null
+            konst containingDescriptor = containingDeclaration ?: return null
             return when (containingDescriptor) {
                 is ClassDescriptorWithResolutionScopes -> containingDescriptor.scopeForInitializerResolution
                 is PackageFragmentDescriptor -> LexicalScope.Base(containingDescriptor.getMemberScope().memberScopeAsImportingScope(), this)
@@ -127,7 +127,7 @@ open class PartialAnalysisHandlerExtension : AnalysisHandlerExtension {
         }
 
         if (declaration is KtClassOrObject) {
-            val primaryConstructor = declaration.primaryConstructor
+            konst primaryConstructor = declaration.primaryConstructor
             if (primaryConstructor != null) {
                 f(primaryConstructor)
             }

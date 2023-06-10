@@ -2,7 +2,7 @@ abstract class C {
     fun test(x: Int) {
         if (x == 0) return
         if (this is D) {
-            val d: D = this
+            konst d: D = this
             d.test(x - 1)
         }
     }

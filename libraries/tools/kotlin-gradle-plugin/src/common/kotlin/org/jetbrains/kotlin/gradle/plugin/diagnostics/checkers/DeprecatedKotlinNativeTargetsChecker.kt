@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 
 internal object DeprecatedKotlinNativeTargetsChecker : KotlinGradleProjectChecker {
     override suspend fun KotlinGradleProjectCheckerContext.runChecks(collector: KotlinToolingDiagnosticsCollector) {
-        val targets = multiplatformExtension?.awaitTargets() ?: return
-        val usedDeprecatedTargets = targets
+        konst targets = multiplatformExtension?.awaitTargets() ?: return
+        konst usedDeprecatedTargets = targets
             .filter { it is KotlinNativeTarget && it.konanTarget in KonanTarget.deprecatedTargets }
             .map { it.name }
         if (usedDeprecatedTargets.isEmpty()) return

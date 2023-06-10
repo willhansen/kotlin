@@ -10,7 +10,7 @@ fun box(): String {
         nil = 0,
         next = { this + 1 }
     ).run {
-        val fib = fibonacci(10)
+        konst fib = fibonacci(10)
         if (fib != 89)
             return "Failed: $fib"
     }
@@ -32,8 +32,8 @@ tailrec fun <T> Nat<T>.plus(l: T, r: T, acc: T = l, i: T = nil): T =
     if (i == r) acc else plus(l, r, acc.next(), i.next())
 
 interface Nat<T> {
-    val nil: T
-    val one: T get() = nil.next()
+    konst nil: T
+    konst one: T get() = nil.next()
 
     fun T.next(): T
     operator fun T.plus(t: T) = plus(this, t)
@@ -41,7 +41,7 @@ interface Nat<T> {
     companion object {
         operator fun <T> invoke(nil: T, next: T.() -> T): Nat<T> =
             object: Nat<T> {
-                override val nil: T = nil
+                override konst nil: T = nil
                 override fun T.next(): T = next()
             }
     }

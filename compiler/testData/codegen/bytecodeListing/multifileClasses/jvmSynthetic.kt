@@ -15,4 +15,4 @@ fun f() {}
 @file:JvmSynthetic
 package test
 
-val g = ""
+konst g = ""

@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.gradle.plugin.sources.android.KotlinAndroidSourceSet
 
 internal object MultiplatformLayoutV2AgpRequirementChecker : KotlinAndroidSourceSetLayoutChecker {
 
-    internal val minimumRequiredAgpVersion = AndroidGradlePluginVersion(7, 0, 0)
+    internal konst minimumRequiredAgpVersion = AndroidGradlePluginVersion(7, 0, 0)
 
     override fun checkBeforeLayoutApplied(
         diagnosticsCollector: KotlinToolingDiagnosticsCollector,

@@ -6,7 +6,7 @@ external object Test {
 }
 
 fun box(): String {
-    val result = test(23, 42)
+    konst result = test(23, 42)
     if (result != 65) return "fail: $result"
 
     return "OK"

@@ -33,13 +33,13 @@ kotlin {
 	mingwX86()
 
 	sourceSets {
-		val commonMain by getting {
+		konst commonMain by getting {
 			dependencies {
 				implementation(kotlin("stdlib-common"))
 			}
 		}
 
-		val linuxMain by creating {
+		konst linuxMain by creating {
 			dependsOn(commonMain)
 		}
 
@@ -48,25 +48,25 @@ kotlin {
 			compilations["main"].defaultSourceSet.dependsOn(linuxMain)
 		}
 
-		val jvmAndJsMain by creating {
+		konst jvmAndJsMain by creating {
 			dependsOn(commonMain)
 		}
 
-		val jvmMain by getting {
+		konst jvmMain by getting {
 			dependsOn(jvmAndJsMain) 
 			dependencies {
 				implementation(kotlin("stdlib-jdk8"))
 			}
 		}
 
-		val jsMain by getting {
+		konst jsMain by getting {
 			dependsOn(jvmAndJsMain) 
 			dependencies {
 				implementation(kotlin("stdlib-js"))
 			}
 		}
 
-		val embeddedMain by creating {
+		konst embeddedMain by creating {
 			dependsOn(commonMain)
 		}
 
@@ -75,7 +75,7 @@ kotlin {
 			compilations["main"].defaultSourceSet.dependsOn(embeddedMain)
 		}
 
-		val windowsMain by creating {
+		konst windowsMain by creating {
 			dependsOn(commonMain)
 		}
 
@@ -97,13 +97,13 @@ publishing {
 }
 
 tasks {
-	val skipCompilationOfTargets = kotlin.targets.matching { it.platformType.toString() == "native" }.names
+	konst skipCompilationOfTargets = kotlin.targets.matching { it.platformType.toString() == "native" }.names
 	all { 
-		val target = name.removePrefix("compileKotlin").decapitalize()
+		konst target = name.removePrefix("compileKotlin").decapitalize()
 		if (target in skipCompilationOfTargets) {
 			actions.clear()
 			doLast { 
-				val destinationFile = project.buildDir.resolve("classes/kotlin/$target/main/klib/${project.name}.klib")
+				konst destinationFile = project.buildDir.resolve("classes/kotlin/$target/main/klib/${project.name}.klib")
 				destinationFile.parentFile.mkdirs()
 				println("Writing a dummy klib to $destinationFile")
 				destinationFile.createNewFile()

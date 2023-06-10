@@ -17,34 +17,34 @@ import org.jetbrains.kotlin.scripting.compiler.plugin.ScriptingCommandLineProces
 import org.jetbrains.kotlin.scripting.compiler.plugin.ScriptingCompilerConfigurationComponentRegistrar
 import kotlin.script.experimental.jvm.util.forAllMatchingFiles
 
-private const val SCRIPT_COMPILATION_DISABLE_PLUGINS_PROPERTY = "script.compilation.disable.plugins"
-private const val SCRIPT_COMPILATION_DISABLE_COMMANDLINE_PROCESSORS_PROPERTY = "script.compilation.disable.commandline.processors"
+private const konst SCRIPT_COMPILATION_DISABLE_PLUGINS_PROPERTY = "script.compilation.disable.plugins"
+private const konst SCRIPT_COMPILATION_DISABLE_COMMANDLINE_PROCESSORS_PROPERTY = "script.compilation.disable.commandline.processors"
 
-private val scriptCompilationDisabledPlugins =
+private konst scriptCompilationDisabledPlugins =
     listOf(
         ScriptingCompilerConfigurationComponentRegistrar::class.java.name
     )
 
-private val scriptCompilationDisabledCommandlineProcessors =
+private konst scriptCompilationDisabledCommandlineProcessors =
     listOf(
         ScriptingCommandLineProcessor::class.java.name
     )
 
 internal fun CompilerConfiguration.loadPlugins(classLoader: ClassLoader = CompilerConfiguration::class.java.classLoader) {
-    val registrars =
+    konst registrars =
         classLoader.loadServices<ComponentRegistrar>(scriptCompilationDisabledPlugins, SCRIPT_COMPILATION_DISABLE_PLUGINS_PROPERTY)
     addAll(ComponentRegistrar.PLUGIN_COMPONENT_REGISTRARS, registrars)
-    val k2Registrars =
+    konst k2Registrars =
         classLoader.loadServices<CompilerPluginRegistrar>(scriptCompilationDisabledPlugins, SCRIPT_COMPILATION_DISABLE_PLUGINS_PROPERTY)
     addAll(CompilerPluginRegistrar.COMPILER_PLUGIN_REGISTRARS, k2Registrars)
 
 }
 
 internal fun CompilerConfiguration.processPluginsCommandLine(arguments: K2JVMCompilerArguments) {
-    val classLoader = CompilerConfiguration::class.java.classLoader
-    val pluginOptions = arguments.pluginOptions?.asIterable() ?: emptyList()
+    konst classLoader = CompilerConfiguration::class.java.classLoader
+    konst pluginOptions = arguments.pluginOptions?.asIterable() ?: emptyList()
 
-    val commandLineProcessors =
+    konst commandLineProcessors =
         classLoader.loadServices<CommandLineProcessor>(
             scriptCompilationDisabledCommandlineProcessors, SCRIPT_COMPILATION_DISABLE_COMMANDLINE_PROCESSORS_PROPERTY
         )
@@ -52,7 +52,7 @@ internal fun CompilerConfiguration.processPluginsCommandLine(arguments: K2JVMCom
 }
 
 private inline fun <reified Service : Any> ClassLoader.loadServices(disabled: List<String>, disablingProperty: String): List<Service> {
-    val disabledServiceNames = disabled.toHashSet()
+    konst disabledServiceNames = disabled.toHashSet()
     System.getProperty(disablingProperty)?.let {
         it.split(',', ';', ' ').forEach { name ->
             disabledServiceNames.add(name.trim())
@@ -63,11 +63,11 @@ private inline fun <reified Service : Any> ClassLoader.loadServices(disabled: Li
     }
 }
 
-private const val SERVICE_DIRECTORY_LOCATION = "META-INF/services/"
+private const konst SERVICE_DIRECTORY_LOCATION = "META-INF/services/"
 
 private inline fun <reified Service : Any> ClassLoader.loadServices(isEnabled: (String) -> Boolean): List<Service> {
-    val registrarsNames = HashSet<String>()
-    val serviceFileName = SERVICE_DIRECTORY_LOCATION + Service::class.java.name
+    konst registrarsNames = HashSet<String>()
+    konst serviceFileName = SERVICE_DIRECTORY_LOCATION + Service::class.java.name
 
     forAllMatchingFiles(serviceFileName, serviceFileName) { name, stream ->
         stream.reader().useLines {
@@ -79,11 +79,11 @@ private inline fun <reified Service : Any> ClassLoader.loadServices(isEnabled: (
 }
 
 private fun parseServiceFileLine(location: String, line: String): String? {
-    val actualLine = line.substringBefore('#').trim().takeIf { it.isNotEmpty() } ?: return null
+    konst actualLine = line.substringBefore('#').trim().takeIf { it.isNotEmpty() } ?: return null
     actualLine.forEachIndexed { index: Int, c: Char ->
-        val isValid = if (index == 0) Character.isJavaIdentifierStart(c) else Character.isJavaIdentifierPart(c) || c == '.'
+        konst isValid = if (index == 0) Character.isJavaIdentifierStart(c) else Character.isJavaIdentifierPart(c) || c == '.'
         if (!isValid) {
-            val errorText = "Invalid Java identifier: $line"
+            konst errorText = "Inkonstid Java identifier: $line"
             throw RuntimeException("Error loading services from $location : $errorText")
         }
     }

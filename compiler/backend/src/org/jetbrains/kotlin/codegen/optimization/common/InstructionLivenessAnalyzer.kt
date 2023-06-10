@@ -38,20 +38,20 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.tree.*
 
 class InstructionLivenessAnalyzer(
-    val method: MethodNode,
-    val visitExceptionHandlers: Boolean = true
+    konst method: MethodNode,
+    konst visitExceptionHandlers: Boolean = true
 ) {
-    private val instructions = method.instructions
-    private val nInsns = instructions.size()
+    private konst instructions = method.instructions
+    private konst nInsns = instructions.size()
 
-    private val isLive = BooleanArray(nInsns)
+    private konst isLive = BooleanArray(nInsns)
 
-    private val handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
-    private val queued = BooleanArray(nInsns)
-    private val queue = IntArray(nInsns)
+    private konst handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
+    private konst queued = BooleanArray(nInsns)
+    private konst queue = IntArray(nInsns)
     private var top = 0
 
-    private val AbstractInsnNode.indexOf get() = instructions.indexOf(this)
+    private konst AbstractInsnNode.indexOf get() = instructions.indexOf(this)
 
     fun analyze(): BooleanArray {
         if (nInsns == 0) return isLive
@@ -75,9 +75,9 @@ class InstructionLivenessAnalyzer(
 
     private fun traverseCfg() {
         while (top > 0) {
-            val insn = queue[--top]
-            val insnNode = method.instructions[insn]
-            val insnOpcode = insnNode.opcode
+            konst insn = queue[--top]
+            konst insnNode = method.instructions[insn]
+            konst insnOpcode = insnNode.opcode
 
             when (insnNode.type) {
                 AbstractInsnNode.LABEL, AbstractInsnNode.LINE, AbstractInsnNode.FRAME ->
@@ -147,7 +147,7 @@ class InstructionLivenessAnalyzer(
         if (insnOpcode != Opcodes.GOTO && insnOpcode != Opcodes.JSR) {
             visitControlFlowEdge(insn + 1)
         }
-        val jump = insnNode.label.indexOf
+        konst jump = insnNode.label.indexOf
         visitControlFlowEdge(jump)
     }
 
@@ -158,8 +158,8 @@ class InstructionLivenessAnalyzer(
     private fun computeExceptionHandlersForEachInsn(m: MethodNode) {
         if (!visitExceptionHandlers) return
         for (tcb in m.tryCatchBlocks) {
-            val begin = tcb.start.indexOf
-            val end = tcb.end.indexOf
+            konst begin = tcb.start.indexOf
+            konst end = tcb.end.indexOf
             for (j in begin until end) {
                 if (!instructions[j].isMeaningful) continue
                 var insnHandlers = handlers[j]
@@ -173,7 +173,7 @@ class InstructionLivenessAnalyzer(
     }
 
     private fun visitControlFlowEdge(insn: Int) {
-        val changes = !isLive[insn]
+        konst changes = !isLive[insn]
         isLive[insn] = true
         if (changes && !queued[insn]) {
             queued[insn] = true

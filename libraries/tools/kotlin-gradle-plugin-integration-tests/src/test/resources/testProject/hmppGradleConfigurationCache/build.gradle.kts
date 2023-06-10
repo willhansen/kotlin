@@ -16,7 +16,7 @@ kotlin {
         binaries { sharedLib() }
         compilations.getByName("main").apply {
             cinterops {
-                val foo by creating {
+                konst foo by creating {
                     defFile(project.file("foo.def"))
                 }
             }
@@ -24,7 +24,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation("test:lib:1.0")
             }

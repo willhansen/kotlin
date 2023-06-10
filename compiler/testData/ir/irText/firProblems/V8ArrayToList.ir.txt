@@ -20,13 +20,13 @@ FILE fqName:<root> fileName:/v8arrayToList.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
-      VAR name:array type:<root>.V8Array [val]
+      VAR name:array type:<root>.V8Array [konst]
         CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.V8Array' type=<root>.V8Array origin=null
-      VAR name:list type:kotlin.collections.List<kotlin.String> [val]
+      VAR name:list type:kotlin.collections.List<kotlin.String> [konst]
         TYPE_OP type=kotlin.collections.List<kotlin.String> origin=CAST typeOperand=kotlin.collections.List<kotlin.String>
           CALL 'public open fun toList (array: @[FlexibleNullability] <root>.V8Array?): @[FlexibleNullability] kotlin.collections.MutableList<in @[FlexibleNullability] kotlin.Any?>? declared in <root>.Utils' type=@[FlexibleNullability] kotlin.collections.MutableList<in @[FlexibleNullability] kotlin.Any?>? origin=null
-            array: GET_VAR 'val array: <root>.V8Array declared in <root>.box' type=<root>.V8Array origin=null
+            array: GET_VAR 'konst array: <root>.V8Array declared in <root>.box' type=<root>.V8Array origin=null
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
         CALL 'public abstract fun get (index: kotlin.Int): E of kotlin.collections.List declared in kotlin.collections.List' type=kotlin.String origin=GET_ARRAY_ELEMENT
-          $this: GET_VAR 'val list: kotlin.collections.List<kotlin.String> declared in <root>.box' type=kotlin.collections.List<kotlin.String> origin=null
-          index: CONST Int type=kotlin.Int value=0
+          $this: GET_VAR 'konst list: kotlin.collections.List<kotlin.String> declared in <root>.box' type=kotlin.collections.List<kotlin.String> origin=null
+          index: CONST Int type=kotlin.Int konstue=0

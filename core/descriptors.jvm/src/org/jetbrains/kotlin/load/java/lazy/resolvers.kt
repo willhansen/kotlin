@@ -32,14 +32,14 @@ interface TypeParameterResolver {
 }
 
 class LazyJavaTypeParameterResolver(
-    private val c: LazyJavaResolverContext,
-    private val containingDeclaration: DeclarationDescriptor,
+    private konst c: LazyJavaResolverContext,
+    private konst containingDeclaration: DeclarationDescriptor,
     typeParameterOwner: JavaTypeParameterListOwner,
-    private val typeParametersIndexOffset: Int
+    private konst typeParametersIndexOffset: Int
 ) : TypeParameterResolver {
-    private val typeParameters: Map<JavaTypeParameter, Int> = typeParameterOwner.typeParameters.mapToIndex()
+    private konst typeParameters: Map<JavaTypeParameter, Int> = typeParameterOwner.typeParameters.mapToIndex()
 
-    private val resolve = c.storageManager.createMemoizedFunctionWithNullableValues { typeParameter: JavaTypeParameter ->
+    private konst resolve = c.storageManager.createMemoizedFunctionWithNullableValues { typeParameter: JavaTypeParameter ->
         typeParameters[typeParameter]?.let { index ->
             LazyJavaTypeParameterDescriptor(
                 c.child(this).copyWithNewDefaultTypeQualifiers(containingDeclaration.annotations),

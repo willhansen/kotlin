@@ -8,9 +8,9 @@ package kotlin.text
 import kotlin.js.RegExp
 
 /**
- * Provides enumeration values to use to set regular expression options.
+ * Provides enumeration konstues to use to set regular expression options.
  */
-public actual enum class RegexOption(val value: String) {
+public actual enum class RegexOption(konst konstue: String) {
     /** Enables case-insensitive matching. */
     IGNORE_CASE("i"),
     /** Enables multiline mode.
@@ -20,15 +20,15 @@ public actual enum class RegexOption(val value: String) {
     MULTILINE("m")
 }
 
-private fun Iterable<RegexOption>.toFlags(prepend: String): String = joinToString("", prefix = prepend) { it.value }
+private fun Iterable<RegexOption>.toFlags(prepend: String): String = joinToString("", prefix = prepend) { it.konstue }
 
 
 /**
  * Represents the results from a single capturing group within a [MatchResult] of [Regex].
  *
- * @param value The value of captured group.
+ * @param konstue The konstue of captured group.
  */
-public actual data class MatchGroup(actual val value: String)
+public actual data class MatchGroup(actual konst konstue: String)
 
 
 /**
@@ -41,7 +41,7 @@ public actual data class MatchGroup(actual val value: String)
  */
 @SinceKotlin("1.7")
 public actual operator fun MatchGroupCollection.get(name: String): MatchGroup? {
-    val namedGroups = this as? MatchNamedGroupCollection
+    konst namedGroups = this as? MatchNamedGroupCollection
         ?: throw UnsupportedOperationException("Retrieving groups by name is not supported on this platform.")
 
     return namedGroups[name]
@@ -71,10 +71,10 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
 
 
     /** The pattern string of this regular expression. */
-    public actual val pattern: String = pattern
+    public actual konst pattern: String = pattern
     /** The set of options that were used to create this regular expression. */
-    public actual val options: Set<RegexOption> = options.toSet()
-    private val nativePattern: RegExp = RegExp(pattern, options.toFlags("gu"))
+    public actual konst options: Set<RegexOption> = options.toSet()
+    private konst nativePattern: RegExp = RegExp(pattern, options.toFlags("gu"))
     private var nativeStickyPattern: RegExp? = null
     private fun initStickyPattern(): RegExp =
         nativeStickyPattern ?: RegExp(pattern, options.toFlags("yu")).also { nativeStickyPattern = it }
@@ -92,7 +92,7 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
     /** Indicates whether the regular expression matches the entire [input]. */
     public actual infix fun matches(input: CharSequence): Boolean {
         nativePattern.reset()
-        val match = nativePattern.exec(input.toString())
+        konst match = nativePattern.exec(input.toString())
         return match != null && match.index == 0 && nativePattern.lastIndex == input.length
     }
 
@@ -108,7 +108,7 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
         if (index < 0 || index > input.length) {
             throw IndexOutOfBoundsException("index out of bounds: $index, input length: ${input.length}")
         }
-        val pattern = initStickyPattern()
+        konst pattern = initStickyPattern()
         pattern.lastIndex = index
         return pattern.test(input.toString())
     }
@@ -168,7 +168,7 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
      * The replacement string may contain references to the captured groups during a match. Occurrences of `${name}` or `$index`
      * in the replacement string will be substituted with the subsequences corresponding to the captured groups with the specified name or index.
      * In case of `$index`, the first digit after '$' is always treated as a part of group reference. Subsequent digits are incorporated
-     * into `index` only if they would form a valid group reference. Only the digits '0'..'9' are considered as potential components
+     * into `index` only if they would form a konstid group reference. Only the digits '0'..'9' are considered as potential components
      * of the group reference. Note that indexes of captured groups start from 1, and the group with index 0 is the whole match.
      * In case of `${name}`, the `name` can consist of latin letters 'a'..'z' and 'A'..'Z', or digits '0'..'9'. The first character must be
      * a letter.
@@ -178,7 +178,7 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
      *
      * @param input the char sequence to find matches of this regular expression in
      * @param replacement the expression to replace found matches with
-     * @return the result of replacing each occurrence of this regular expression in [input] with the result of evaluating the [replacement] expression
+     * @return the result of replacing each occurrence of this regular expression in [input] with the result of ekonstuating the [replacement] expression
      * @throws RuntimeException if [replacement] expression is malformed, or capturing group with specified `name` or `index` does not exist
      */
     public actual fun replace(input: CharSequence, replacement: String): String {
@@ -198,10 +198,10 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
         if (match == null) return input.toString()
 
         var lastStart = 0
-        val length = input.length
-        val sb = StringBuilder(length)
+        konst length = input.length
+        konst sb = StringBuilder(length)
         do {
-            val foundMatch = match!!
+            konst foundMatch = match!!
             sb.append(input, lastStart, foundMatch.range.start)
             sb.append(transform(foundMatch))
             lastStart = foundMatch.range.endInclusive + 1
@@ -221,7 +221,7 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
      * The replacement string may contain references to the captured groups during a match. Occurrences of `${name}` or `$index`
      * in the replacement string will be substituted with the subsequences corresponding to the captured groups with the specified name or index.
      * In case of `$index`, the first digit after '$' is always treated as a part of group reference. Subsequent digits are incorporated
-     * into `index` only if they would form a valid group reference. Only the digits '0'..'9' are considered as potential components
+     * into `index` only if they would form a konstid group reference. Only the digits '0'..'9' are considered as potential components
      * of the group reference. Note that indexes of captured groups start from 1, and the group with index 0 is the whole match.
      * In case of `${name}`, the `name` can consist of latin letters 'a'..'z' and 'A'..'Z', or digits '0'..'9'. The first character must be
      * a letter.
@@ -231,16 +231,16 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
      *
      * @param input the char sequence to find a match of this regular expression in
      * @param replacement the expression to replace the found match with
-     * @return the result of replacing the first occurrence of this regular expression in [input] with the result of evaluating the [replacement] expression
+     * @return the result of replacing the first occurrence of this regular expression in [input] with the result of ekonstuating the [replacement] expression
      * @throws RuntimeException if [replacement] expression is malformed, or capturing group with specified `name` or `index` does not exist
      */
     public actual fun replaceFirst(input: CharSequence, replacement: String): String {
         if (!replacement.contains('\\') && !replacement.contains('$')) {
-            val nonGlobalOptions = options.toFlags("u")
+            konst nonGlobalOptions = options.toFlags("u")
             return input.toString().nativeReplace(RegExp(pattern, nonGlobalOptions), replacement)
         }
 
-        val match = find(input) ?: return input.toString()
+        konst match = find(input) ?: return input.toString()
 
         return buildString {
             append(input.substring(0, match.range.first))
@@ -252,14 +252,14 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
     /**
      * Splits the [input] CharSequence to a list of strings around matches of this regular expression.
      *
-     * @param limit Non-negative value specifying the maximum number of substrings the string can be split to.
+     * @param limit Non-negative konstue specifying the maximum number of substrings the string can be split to.
      * Zero by default means no limit is set.
      */
     @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
     public actual fun split(input: CharSequence, limit: Int = 0): List<String> {
         requireNonNegativeLimit(limit)
-        val matches = findAll(input).let { if (limit == 0) it else it.take(limit - 1) }
-        val result = mutableListOf<String>()
+        konst matches = findAll(input).let { if (limit == 0) it else it.take(limit - 1) }
+        konst result = mutableListOf<String>()
         var lastStart = 0
 
         for (match in matches) {
@@ -273,7 +273,7 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
     /**
      * Splits the [input] CharSequence to a sequence of strings around matches of this regular expression.
      *
-     * @param limit Non-negative value specifying the maximum number of substrings the string can be split to.
+     * @param limit Non-negative konstue specifying the maximum number of substrings the string can be split to.
      * Zero by default means no limit is set.
      * @sample samples.text.Regexps.splitToSequence
      */
@@ -294,7 +294,7 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
             var splitCount = 0
 
             do {
-                val foundMatch = match!!
+                konst foundMatch = match!!
                 yield(input.substring(nextStart, foundMatch.range.first))
                 nextStart = foundMatch.range.endInclusive + 1
                 match = foundMatch.next()
@@ -332,11 +332,11 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
          */
         public actual fun escapeReplacement(literal: String): String = literal.nativeReplace(replacementEscape, "\\$&")
 
-        private val patternEscape = RegExp("""[\\^$*+?.()|[\]{}]""", "g")
-        private val replacementEscape = RegExp("""[\\$]""", "g")
+        private konst patternEscape = RegExp("""[\\^$*+?.()|[\]{}]""", "g")
+        private konst replacementEscape = RegExp("""[\\$]""", "g")
 
         internal fun nativeEscapeReplacement(literal: String): String = literal.nativeReplace(nativeReplacementEscape, "$$$$")
-        private val nativeReplacementEscape = RegExp("""\$""", "g")
+        private konst nativeReplacementEscape = RegExp("""\$""", "g")
     }
 }
 
@@ -344,33 +344,33 @@ public actual class Regex actual constructor(pattern: String, options: Set<Regex
 
 private fun RegExp.findNext(input: String, from: Int, nextPattern: RegExp): MatchResult? {
     this.lastIndex = from
-    val match = exec(input)
+    konst match = exec(input)
     if (match == null) return null
-    val range = match.index..lastIndex - 1
+    konst range = match.index..lastIndex - 1
 
     return object : MatchResult {
-        override val range: IntRange = range
-        override val value: String
+        override konst range: IntRange = range
+        override konst konstue: String
             get() = match[0]!!
 
-        override val groups: MatchGroupCollection = object : MatchNamedGroupCollection, AbstractCollection<MatchGroup?>() {
-            override val size: Int get() = match.length
+        override konst groups: MatchGroupCollection = object : MatchNamedGroupCollection, AbstractCollection<MatchGroup?>() {
+            override konst size: Int get() = match.length
             override fun iterator(): Iterator<MatchGroup?> = indices.asSequence().map { this[it] }.iterator()
             override fun get(index: Int): MatchGroup? = match[index]?.let { MatchGroup(it) }
 
             override fun get(name: String): MatchGroup? {
-                // An object of named capturing groups whose keys are the names and values are the capturing groups
+                // An object of named capturing groups whose keys are the names and konstues are the capturing groups
                 // or undefined if no named capturing groups were defined.
-                val groups = match.asDynamic().groups
+                konst groups = match.asDynamic().groups
                     ?: throw IllegalArgumentException("Capturing group with name {$name} does not exist. No named capturing group was defined in Regex")
 
                 // If the match was successful but the group specified failed to match any part of the input sequence,
-                // the associated value is 'undefined'. Value for a non-existent key is also 'undefined'. Thus, explicitly check if the key exists.
+                // the associated konstue is 'undefined'. Value for a non-existent key is also 'undefined'. Thus, explicitly check if the key exists.
                 if (!hasOwnPrototypeProperty(groups, name))
                     throw IllegalArgumentException("Capturing group with name {$name} does not exist")
 
-                val value = groups[name]
-                return if (value == undefined) null else MatchGroup(value as String)
+                konst konstue = groups[name]
+                return if (konstue == undefined) null else MatchGroup(konstue as String)
             }
         }
 
@@ -381,11 +381,11 @@ private fun RegExp.findNext(input: String, from: Int, nextPattern: RegExp): Matc
 
         private var groupValues_: List<String>? = null
 
-        override val groupValues: List<String>
+        override konst groupValues: List<String>
             get() {
                 if (groupValues_ == null) {
                     groupValues_ = object : AbstractList<String>() {
-                        override val size: Int get() = match.length
+                        override konst size: Int get() = match.length
                         override fun get(index: Int): String = match[index] ?: ""
                     }
                 }
@@ -397,9 +397,9 @@ private fun RegExp.findNext(input: String, from: Int, nextPattern: RegExp): Matc
 
         private fun advanceToNextCharacter(index: Int): Int {
             if (index < input.lastIndex) {
-                val code1 = input.asDynamic().charCodeAt(index).unsafeCast<Int>()
+                konst code1 = input.asDynamic().charCodeAt(index).unsafeCast<Int>()
                 if (code1 in 0xD800..0xDBFF) {
-                    val code2 = input.asDynamic().charCodeAt(index + 1).unsafeCast<Int>()
+                    konst code2 = input.asDynamic().charCodeAt(index + 1).unsafeCast<Int>()
                     if (code2 in 0xDC00..0xDFFF) {
                         return index + 2
                     }
@@ -413,10 +413,10 @@ private fun RegExp.findNext(input: String, from: Int, nextPattern: RegExp): Matc
 // The same code from K/N Regex.kt
 private fun substituteGroupRefs(match: MatchResult, replacement: String): String {
     var index = 0
-    val result = StringBuilder()
+    konst result = StringBuilder()
 
     while (index < replacement.length) {
-        val char = replacement[index++]
+        konst char = replacement[index++]
         if (char == '\\') {
             if (index == replacement.length)
                 throw IllegalArgumentException("The Char to be escaped is missing")
@@ -427,29 +427,29 @@ private fun substituteGroupRefs(match: MatchResult, replacement: String): String
                 throw IllegalArgumentException("Capturing group index is missing")
 
             if (replacement[index] == '{') {
-                val endIndex = replacement.readGroupName(++index)
+                konst endIndex = replacement.readGroupName(++index)
 
                 if (index == endIndex)
                     throw IllegalArgumentException("Named capturing group reference should have a non-empty name")
                 if (endIndex == replacement.length || replacement[endIndex] != '}')
                     throw IllegalArgumentException("Named capturing group reference is missing trailing '}'")
 
-                val groupName = replacement.substring(index, endIndex)
+                konst groupName = replacement.substring(index, endIndex)
 
-                result.append(match.groups[groupName]?.value ?: "")
+                result.append(match.groups[groupName]?.konstue ?: "")
                 index = endIndex + 1    // skip past '}'
             } else {
                 if (replacement[index] !in '0'..'9')
-                    throw IllegalArgumentException("Invalid capturing group reference")
+                    throw IllegalArgumentException("Inkonstid capturing group reference")
 
-                val groups = match.groups
-                val endIndex = replacement.readGroupIndex(index, groups.size)
-                val groupIndex = replacement.substring(index, endIndex).toInt()
+                konst groups = match.groups
+                konst endIndex = replacement.readGroupIndex(index, groups.size)
+                konst groupIndex = replacement.substring(index, endIndex).toInt()
 
                 if (groupIndex >= groups.size)
                     throw IndexOutOfBoundsException("Group with index $groupIndex does not exist")
 
-                result.append(groups[groupIndex]?.value ?: "")
+                result.append(groups[groupIndex]?.konstue ?: "")
                 index = endIndex
             }
         } else {
@@ -460,9 +460,9 @@ private fun substituteGroupRefs(match: MatchResult, replacement: String): String
 }
 
 // The name must be a legal JavaScript identifier. See https://262.ecma-international.org/5.1/#sec-7.6
-// Don't try to validate the referenced group name as it may be time-consuming.
-// If the name is invalid, it won't be found in `match.groups` anyway and will throw.
-// Group names in the target Regex are validated at creation time.
+// Don't try to konstidate the referenced group name as it may be time-consuming.
+// If the name is inkonstid, it won't be found in `match.groups` anyway and will throw.
+// Group names in the target Regex are konstidated at creation time.
 private fun String.readGroupName(startIndex: Int): Int {
     var index = startIndex
     while (index < length) {
@@ -480,9 +480,9 @@ private fun String.readGroupIndex(startIndex: Int, groupCount: Int): Int {
     var index = startIndex + 1
     var groupIndex = this[startIndex] - '0'
 
-    // capture the largest valid group index
+    // capture the largest konstid group index
     while (index < length && this[index] in '0'..'9') {
-        val newGroupIndex = (groupIndex * 10) + (this[index] - '0')
+        konst newGroupIndex = (groupIndex * 10) + (this[index] - '0')
         if (newGroupIndex in 0 until groupCount) {
             groupIndex = newGroupIndex
             index++

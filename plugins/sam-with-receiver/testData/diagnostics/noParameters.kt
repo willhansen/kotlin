@@ -15,7 +15,7 @@ fun test() {
     }
 
     Sam {
-        val a: String = <!NO_THIS!>this<!>
+        konst a: String = <!NO_THIS!>this<!>
         System.out.println(a)
     }
 }

@@ -24,7 +24,7 @@ abstract class FirBasedSymbol<E : FirDeclaration> : DeclarationSymbolMarker {
     private var _fir: E? = null
 
     @SymbolInternals
-    val fir: E
+    konst fir: E
         get() = _fir
             ?: error("Fir is not initialized for $this")
 
@@ -32,30 +32,30 @@ abstract class FirBasedSymbol<E : FirDeclaration> : DeclarationSymbolMarker {
         _fir = e
     }
 
-    val isBound get() = _fir != null
+    konst isBound get() = _fir != null
 
-    val origin: FirDeclarationOrigin
+    konst origin: FirDeclarationOrigin
         get() = fir.origin
 
-    val source: KtSourceElement?
+    konst source: KtSourceElement?
         get() = fir.source
 
-    val moduleData: FirModuleData
+    konst moduleData: FirModuleData
         get() = fir.moduleData
 
-    val annotations: List<FirAnnotation>
+    konst annotations: List<FirAnnotation>
         get() = fir.annotations
 
-    val resolvedAnnotationsWithArguments: List<FirAnnotation>
+    konst resolvedAnnotationsWithArguments: List<FirAnnotation>
         get() = fir.resolvedAnnotationsWithArguments(this)
 
-    val resolvedAnnotationsWithClassIds: List<FirAnnotation>
+    konst resolvedAnnotationsWithClassIds: List<FirAnnotation>
         get() = fir.resolvedAnnotationsWithClassIds(this)
 
-    val resolvedCompilerAnnotationsWithClassIds: List<FirAnnotation>
+    konst resolvedCompilerAnnotationsWithClassIds: List<FirAnnotation>
         get() = fir.resolvedCompilerRequiredAnnotations(this)
 
-    val resolvedAnnotationClassIds: List<ClassId>
+    konst resolvedAnnotationClassIds: List<ClassId>
         get() = fir.resolvedAnnotationClassIds(this)
 }
 
@@ -84,14 +84,14 @@ fun List<FirAnnotation>.resolveAnnotationsWithArguments(anchorElement: FirBasedS
      */
     var hasAnnotationCallWithArguments = false
     for (i in indices) {
-        val currentAnnotation = get(i)
+        konst currentAnnotation = get(i)
         if (currentAnnotation is FirAnnotationCall && currentAnnotation.arguments.isNotEmpty()) {
             hasAnnotationCallWithArguments = true
             break
         }
     }
 
-    val phase = if (hasAnnotationCallWithArguments) {
+    konst phase = if (hasAnnotationCallWithArguments) {
         FirResolvePhase.ANNOTATIONS_ARGUMENTS_MAPPING
     } else {
         FirResolvePhase.TYPES

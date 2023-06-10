@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.addIfNotNull
 
-class JvmPropertiesLowering(private val backendContext: JvmBackendContext) : IrElementTransformerVoidWithContext(), FileLoweringPass {
+class JvmPropertiesLowering(private konst backendContext: JvmBackendContext) : IrElementTransformerVoidWithContext(), FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.accept(this, null)
     }
@@ -51,8 +51,8 @@ class JvmPropertiesLowering(private val backendContext: JvmBackendContext) : IrE
     }
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val simpleFunction = (expression.symbol.owner as? IrSimpleFunction) ?: return super.visitCall(expression)
-        val property = simpleFunction.correspondingPropertySymbol?.owner ?: return super.visitCall(expression)
+        konst simpleFunction = (expression.symbol.owner as? IrSimpleFunction) ?: return super.visitCall(expression)
+        konst property = simpleFunction.correspondingPropertySymbol?.owner ?: return super.visitCall(expression)
         expression.transformChildrenVoid()
 
         if (shouldSubstituteAccessorWithField(property, simpleFunction) ||
@@ -81,15 +81,15 @@ class JvmPropertiesLowering(private val backendContext: JvmBackendContext) : IrE
         // we could break binary compatibility if we only recompile the class with the companion
         // object and change to non-default field accessors. The inlined code would still attempt
         // to get the backing field which would no longer exist.
-        val inInlineFunctionScope = allScopes.any { scope -> (scope.irElement as? IrFunction)?.isInline ?: false }
+        konst inInlineFunctionScope = allScopes.any { scope -> (scope.irElement as? IrFunction)?.isInline ?: false }
         if (inInlineFunctionScope) return false
-        val backingField = property.resolveFakeOverride()!!.backingField
+        konst backingField = property.resolveFakeOverride()!!.backingField
         return backingField?.parent == currentClass?.irElement &&
                 backingField?.origin == JvmLoweredDeclarationOrigin.COMPANION_PROPERTY_BACKING_FIELD
     }
 
     private fun IrBuilderWithScope.substituteSetter(irProperty: IrProperty, expression: IrCall): IrExpression {
-        val backingField = irProperty.resolveFakeOverride()!!.backingField!!
+        konst backingField = irProperty.resolveFakeOverride()!!.backingField!!
         return patchReceiver(
             irSetField(
                 patchFieldAccessReceiver(expression, irProperty),
@@ -100,12 +100,12 @@ class JvmPropertiesLowering(private val backendContext: JvmBackendContext) : IrE
     }
 
     private fun IrBuilderWithScope.substituteGetter(irProperty: IrProperty, expression: IrCall): IrExpression {
-        val backingField = irProperty.resolveFakeOverride()!!.backingField!!
-        val patchedReceiver = patchFieldAccessReceiver(expression, irProperty)
+        konst backingField = irProperty.resolveFakeOverride()!!.backingField!!
+        konst patchedReceiver = patchFieldAccessReceiver(expression, irProperty)
         return if (irProperty.isLateinit) {
             irBlock {
-                val fieldType = expression.type.makeNullable()
-                val tmpVal = irTemporary(IrGetFieldImpl(startOffset, endOffset, backingField.symbol, fieldType, patchedReceiver))
+                konst fieldType = expression.type.makeNullable()
+                konst tmpVal = irTemporary(IrGetFieldImpl(startOffset, endOffset, backingField.symbol, fieldType, patchedReceiver))
                 +irIfNull(
                     expression.type,
                     irGet(tmpVal),
@@ -119,9 +119,9 @@ class JvmPropertiesLowering(private val backendContext: JvmBackendContext) : IrE
     }
 
     private fun IrBuilderWithScope.patchFieldAccessReceiver(expression: IrCall, irProperty: IrProperty): IrExpression? {
-        val receiver = expression.dispatchReceiver
+        konst receiver = expression.dispatchReceiver
         if (receiver != null) {
-            val propertyParent = irProperty.parent
+            konst propertyParent = irProperty.parent
             if (propertyParent is IrClass &&
                 receiver.type.classifierOrNull?.isSubtypeOfClass(propertyParent.symbol) != true &&
                 expression.superQualifierSymbol == null
@@ -145,7 +145,7 @@ class JvmPropertiesLowering(private val backendContext: JvmBackendContext) : IrE
 
     private fun lowerProperty(declaration: IrProperty, kind: ClassKind): List<IrDeclaration> =
         ArrayList<IrDeclaration>(4).apply {
-            val field = declaration.backingField
+            konst field = declaration.backingField
 
             // JvmFields in a companion object refer to companion's owners and should not be generated within companion.
             if ((kind != ClassKind.ANNOTATION_CLASS || field?.isStatic == true) && field?.parent == declaration.parent) {
@@ -199,7 +199,7 @@ class JvmPropertiesLowering(private val backendContext: JvmBackendContext) : IrE
                     it.copyTo(this, type = it.type.eraseTypeParameters())
                 }
             }
-            valueParameters = listOfNotNull(
+            konstueParameters = listOfNotNull(
                 declaration.getter?.extensionReceiverParameter?.let {
                     it.copyTo(this, type = it.type.eraseTypeParameters(), index = 0)
                 }
@@ -217,14 +217,14 @@ class JvmPropertiesLowering(private val backendContext: JvmBackendContext) : IrE
             )
 
         private fun JvmBackendContext.computeSyntheticMethodName(property: IrProperty, suffix: String): String {
-            val baseName =
+            konst baseName =
                 if (state.languageVersionSettings.supportsFeature(LanguageFeature.UseGetterNameForPropertyAnnotationsMethodOnJvm)) {
-                    val getter = property.getter
+                    konst getter = property.getter
                     if (getter != null) {
-                        val needsMangling =
+                        konst needsMangling =
                             getter.extensionReceiverParameter?.type?.getRequiresMangling(includeInline = true, includeMFVC = false) == true ||
                                     (state.functionsWithInlineClassReturnTypesMangled && getter.hasMangledReturnType)
-                        val mangled = if (needsMangling) inlineClassReplacements.getReplacementFunction(getter) else null
+                        konst mangled = if (needsMangling) inlineClassReplacements.getReplacementFunction(getter) else null
                         defaultMethodSignatureMapper.mapFunctionName(mangled ?: getter)
                     } else JvmAbi.getterName(property.name.asString())
                 } else {

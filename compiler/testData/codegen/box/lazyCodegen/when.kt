@@ -1,6 +1,6 @@
-class A (val p: String) {
+class A (konst p: String) {
 
-    val _kind: String = when {
+    konst _kind: String = when {
         p == "test" -> "OK"
         else -> "fail"
     }

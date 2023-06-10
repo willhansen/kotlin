@@ -12,7 +12,7 @@ public interface B {
 @kotlin.Metadata
 public class C {
     // source: 'kt42137.kt'
-    private final @org.jetbrains.annotations.NotNull field value: java.lang.String
+    private final @org.jetbrains.annotations.NotNull field konstue: java.lang.String
     public method <init>(@org.jetbrains.annotations.NotNull p0: java.lang.String): void
     public synthetic bridge method getValue(): java.lang.Object
     public @org.jetbrains.annotations.NotNull method getValue(): java.lang.String

@@ -23,19 +23,19 @@ import org.jetbrains.kotlin.fir.declarations.FirTypeAlias
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirFileScope(
-    private val owner: KtFirFileSymbol,
-    private val builder: KtSymbolByFirBuilder
+    private konst owner: KtFirFileSymbol,
+    private konst builder: KtSymbolByFirBuilder
 ) : KtScope {
-    override val token: KtLifetimeToken get() = builder.token
+    override konst token: KtLifetimeToken get() = builder.token
 
-    private val allNamesCached by cached {
+    private konst allNamesCached by cached {
         _callableNames + _classifierNames
     }
 
     override fun getAllPossibleNames(): Set<Name> = withValidityAssertion { allNamesCached }
 
-    private val _callableNames: Set<Name> by cached {
-        val result = mutableSetOf<Name>()
+    private konst _callableNames: Set<Name> by cached {
+        konst result = mutableSetOf<Name>()
         owner.firSymbol.fir.declarations
             .mapNotNullTo(result) { firDeclaration ->
                 when (firDeclaration) {
@@ -50,8 +50,8 @@ internal class KtFirFileScope(
 
     override fun getPossibleCallableNames(): Set<Name> = withValidityAssertion { _callableNames }
 
-    private val _classifierNames: Set<Name> by cached {
-        val result = mutableSetOf<Name>()
+    private konst _classifierNames: Set<Name> by cached {
+        konst result = mutableSetOf<Name>()
         owner.firSymbol.fir.declarations
             .mapNotNullTo(result) { firDeclaration ->
                 (firDeclaration as? FirRegularClass)?.name
@@ -65,7 +65,7 @@ internal class KtFirFileScope(
     override fun getCallableSymbols(nameFilter: KtScopeNameFilter): Sequence<KtCallableSymbol> = withValidityAssertion {
         sequence {
             owner.firSymbol.fir.declarations.forEach { firDeclaration ->
-                val callableDeclaration = when (firDeclaration) {
+                konst callableDeclaration = when (firDeclaration) {
                     is FirSimpleFunction -> firDeclaration.takeIf { nameFilter(firDeclaration.name) }
                     is FirProperty -> firDeclaration.takeIf { nameFilter(firDeclaration.name) }
                     else -> null
@@ -80,14 +80,14 @@ internal class KtFirFileScope(
 
     override fun getCallableSymbols(names: Collection<Name>): Sequence<KtCallableSymbol> = withValidityAssertion {
         if (names.isEmpty()) return emptySequence()
-        val namesSet = names.toSet()
+        konst namesSet = names.toSet()
         return getCallableSymbols { it in namesSet }
     }
 
     override fun getClassifierSymbols(nameFilter: KtScopeNameFilter): Sequence<KtClassifierSymbol> = withValidityAssertion {
         sequence {
             owner.firSymbol.fir.declarations.forEach { firDeclaration ->
-                val classLikeDeclaration = when (firDeclaration) {
+                konst classLikeDeclaration = when (firDeclaration) {
                     is FirTypeAlias -> firDeclaration.takeIf { nameFilter(it.name) }
                     is FirRegularClass -> firDeclaration.takeIf { nameFilter(it.name) }
                     else -> null
@@ -101,7 +101,7 @@ internal class KtFirFileScope(
 
     override fun getClassifierSymbols(names: Collection<Name>): Sequence<KtClassifierSymbol> = withValidityAssertion {
         if (names.isEmpty()) return emptySequence()
-        val namesSet = names.toSet()
+        konst namesSet = names.toSet()
         return getClassifierSymbols { it in namesSet }
     }
 

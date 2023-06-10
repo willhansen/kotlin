@@ -20,23 +20,23 @@ import javax.inject.Inject
 
 open class KotlinWithJavaCompilation<KotlinOptionsType : KotlinCommonOptions, CO : KotlinCommonCompilerOptions> @Inject internal constructor(
     compilation: KotlinCompilationImpl,
-    val javaSourceSet: SourceSet,
+    konst javaSourceSet: SourceSet,
 ) : AbstractKotlinCompilationToRunnableFiles<KotlinOptionsType>(compilation),
     KotlinCompilationWithResources<KotlinOptionsType> {
 
     @Suppress("UNCHECKED_CAST")
-    override val compilerOptions: HasCompilerOptions<CO> =
+    override konst compilerOptions: HasCompilerOptions<CO> =
         compilation.compilerOptions as HasCompilerOptions<CO>
 
-    val compileJavaTaskProvider: TaskProvider<out JavaCompile>
+    konst compileJavaTaskProvider: TaskProvider<out JavaCompile>
         get() = target.project.tasks.withType(JavaCompile::class.java).named(javaSourceSet.compileJavaTaskName)
 
-    override val processResourcesTaskName: String
+    override konst processResourcesTaskName: String
         get() = compilation.processResourcesTaskName ?: error("Missing 'processResourcesTaskName'")
 
     fun source(javaSourceSet: SourceSet) {
         with(target.project) {
-            afterEvaluate {
+            afterEkonstuate {
                 tasks.named<AbstractKotlinCompile<*>>(compileKotlinTaskName).configure {
                     it.setSource(javaSourceSet.java)
                 }

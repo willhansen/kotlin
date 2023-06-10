@@ -45,39 +45,39 @@ package com.google.gwt.dev.js.rhino;
 public class JavaScriptException extends Exception {
 
     /**
-     * Create a JavaScript exception wrapping the given JavaScript value.
+     * Create a JavaScript exception wrapping the given JavaScript konstue.
      *
      * Instances of this class are thrown by the JavaScript 'throw' keyword.
      *
-     * @param value the JavaScript value thrown.
+     * @param konstue the JavaScript konstue thrown.
      */
-    public JavaScriptException(Object value) {
-        super(value.toString());
-        this.value = value;
+    public JavaScriptException(Object konstue) {
+        super(konstue.toString());
+        this.konstue = konstue;
     }
 
     /**
-     * Get the exception value originally thrown.  This may be a
-     * JavaScript value (null, undefined, Boolean, Number, String,
-     * Scriptable or Function) or a Java exception value thrown from a
+     * Get the exception konstue originally thrown.  This may be a
+     * JavaScript konstue (null, undefined, Boolean, Number, String,
+     * Scriptable or Function) or a Java exception konstue thrown from a
      * host object or from Java called through LiveConnect.
      *
-     * @return the value wrapped by this exception
+     * @return the konstue wrapped by this exception
      */
     public Object getValue() {
-        return value;
+        return konstue;
     }
 
     /**
-     * The JavaScript exception value.  This value is not
+     * The JavaScript exception konstue.  This konstue is not
      * intended for general use; if the JavaScriptException wraps a
      * Java exception, getScriptableValue may return a Scriptable
      * wrapping the original Java exception object.
      *
-     * We would prefer to go through a getter to encapsulate the value,
-     * however that causes the bizarre error "nanosecond timeout value
+     * We would prefer to go through a getter to encapsulate the konstue,
+     * however that causes the bizarre error "nanosecond timeout konstue
      * out of range" on the MS JVM.
      * @serial
      */
-    Object value;
+    Object konstue;
 }

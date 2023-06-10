@@ -1,13 +1,13 @@
 // EXPECTED_REACHABLE_NODES: 1276
 
-class A(@JsName("x") val x: Char)
+class A(@JsName("x") konst x: Char)
 
 fun typeOf(x: dynamic): String = js("typeof x")
 
-val expectedCharRepresentationInProperty = if (testUtils.isLegacyBackend()) "object" else "number"
+konst expectedCharRepresentationInProperty = if (testUtils.isLegacyBackend()) "object" else "number"
 
 fun box(): String {
-    val a = A('0')
+    konst a = A('0')
 
     var r = typeOf(a.asDynamic().x)
     if (r != expectedCharRepresentationInProperty) return "fail1: $r"

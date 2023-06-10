@@ -3,8 +3,8 @@
 interface Foo
 fun foo(): Foo? = null
 
-val foo: Foo = run {
-    val x = foo()
+konst foo: Foo = run {
+    konst x = foo()
     if (x == null) throw Exception()
     x
 }
@@ -14,7 +14,7 @@ val foo: Foo = run {
 fun <T> repeat(arg: T): T = arg
 
 fun bar(): Foo {
-    val x = foo()
+    konst x = foo()
     if (x == null) throw Exception()
     return repeat(x)
 }

@@ -14,12 +14,12 @@ sink:
 =====================
 == B ==
 object B {
-    val A.Companion.foo: X get() = X
+    konst A.Companion.foo: X get() = X
 }
 ---------------------
 L0:
   1 <START>
-    v(val A.Companion.foo: X get() = X)
+    v(konst A.Companion.foo: X get() = X)
 L1:
     <END>                                  NEXT:[<SINK>]
 error:

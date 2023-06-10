@@ -1,7 +1,7 @@
 // PLATFORM_DEPENDANT_METADATA
 package test
 
-annotation class A(val s: String)
+annotation class A(konst s: String)
 
 @A("1")
 @JvmName("bar")

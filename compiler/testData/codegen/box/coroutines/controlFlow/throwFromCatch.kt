@@ -8,9 +8,9 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendAndLog(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-        result += "suspend($value);"
-        c.resume(value)
+    suspend fun <T> suspendAndLog(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+        result += "suspend($konstue);"
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 
@@ -23,12 +23,12 @@ class Controller {
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, object : Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
 
         override fun resumeWith(data: Result<Unit>) {
-            val exception = data.exceptionOrNull() ?: return
+            konst exception = data.exceptionOrNull() ?: return
             controller.result += "caught(${exception.message});"
         }
     })
@@ -37,7 +37,7 @@ fun builder(c: suspend Controller.() -> Unit): String {
 }
 
 fun box(): String {
-    val value = builder {
+    konst konstue = builder {
         try {
             try {
                 suspendAndLog("1")
@@ -52,8 +52,8 @@ fun box(): String {
         }
         suspendAndLog("ignore")
     }
-    if (value != "suspend(1);throw(exception);suspend(caught);throw(fromCatch);suspend(finally);caught(fromCatch);") {
-        return "fail: $value"
+    if (konstue != "suspend(1);throw(exception);suspend(caught);throw(fromCatch);suspend(finally);caught(fromCatch);") {
+        return "fail: $konstue"
     }
 
     return "OK"

@@ -12,11 +12,11 @@
  * DESCRIPTION: A..B is exactly the same as A.rangeTo(B)
  */
 
-class A(val a: Int) {
+class A(konst a: Int) {
     var isRangeToCalled = false
     operator fun rangeTo(o: A): MutableList<Int> {
         isRangeToCalled = true
-        val x: MutableList<Int> = mutableListOf<Int>()
+        konst x: MutableList<Int> = mutableListOf<Int>()
         for (i in a..o.a)
             x.add(i)
         return x
@@ -24,9 +24,9 @@ class A(val a: Int) {
 }
 
 fun box(): String {
-    val a1 = A(0)
-    val a2 = A(5)
-    val x = a1..a2
+    konst a1 = A(0)
+    konst a2 = A(5)
+    konst x = a1..a2
     if (a1.isRangeToCalled && x is MutableList<Int>)
         return "OK"
     return "NOK"

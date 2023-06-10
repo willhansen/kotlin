@@ -24,8 +24,8 @@ class EmbeddableContentsTest {
         }.forEach(::checkJarForTrove)
     }
 
-    private val konanHomeJars: List<File> by lazy {
-        val home = System.getProperty("kotlin.native.home") ?: error("Property kotlin.native.home not specified")
+    private konst konanHomeJars: List<File> by lazy {
+        konst home = System.getProperty("kotlin.native.home") ?: error("Property kotlin.native.home not specified")
         File(home).resolve("konan/lib")
                 .listFiles { _, name -> name.endsWith("jar") }
                 ?.toList() ?: error("Unable to find JARs in the `$home/konan/lib` directory")

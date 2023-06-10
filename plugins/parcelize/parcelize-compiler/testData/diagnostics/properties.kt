@@ -6,14 +6,14 @@ import kotlinx.parcelize.*
 import android.os.Parcelable
 
 @Parcelize
-class A(val firstName: String) : Parcelable {
-    val <!PROPERTY_WONT_BE_SERIALIZED!>secondName<!>: String = ""
+class A(konst firstName: String) : Parcelable {
+    konst <!PROPERTY_WONT_BE_SERIALIZED!>secondName<!>: String = ""
 
-    val <!PROPERTY_WONT_BE_SERIALIZED!>delegated<!> by lazy { "" }
+    konst <!PROPERTY_WONT_BE_SERIALIZED!>delegated<!> by lazy { "" }
 
     lateinit var <!PROPERTY_WONT_BE_SERIALIZED!>lateinit<!>: String
 
-    val customGetter: String
+    konst customGetter: String
         get() = ""
 
     var customSetter: String
@@ -23,7 +23,7 @@ class A(val firstName: String) : Parcelable {
 
 @Parcelize
 @Suppress("WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET")
-class B(<!INAPPLICABLE_IGNORED_ON_PARCEL_CONSTRUCTOR_PROPERTY!>@IgnoredOnParcel<!> val firstName: String) : Parcelable {
+class B(<!INAPPLICABLE_IGNORED_ON_PARCEL_CONSTRUCTOR_PROPERTY!>@IgnoredOnParcel<!> konst firstName: String) : Parcelable {
     @IgnoredOnParcel
     var a: String = ""
 

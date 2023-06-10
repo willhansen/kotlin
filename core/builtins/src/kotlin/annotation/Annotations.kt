@@ -79,15 +79,15 @@ public enum class AnnotationRetention {
  */
 @Target(AnnotationTarget.ANNOTATION_CLASS)
 @MustBeDocumented
-public annotation class Target(vararg val allowedTargets: AnnotationTarget)
+public annotation class Target(vararg konst allowedTargets: AnnotationTarget)
 
 /**
  * This meta-annotation determines whether an annotation is stored in binary output and visible for reflection. By default, both are true.
  *
- * @property value necessary annotation retention (RUNTIME, BINARY or SOURCE)
+ * @property konstue necessary annotation retention (RUNTIME, BINARY or SOURCE)
  */
 @Target(AnnotationTarget.ANNOTATION_CLASS)
-public annotation class Retention(val value: AnnotationRetention = AnnotationRetention.RUNTIME)
+public annotation class Retention(konst konstue: AnnotationRetention = AnnotationRetention.RUNTIME)
 
 /**
  * This meta-annotation determines that an annotation is applicable twice or more on a single code element

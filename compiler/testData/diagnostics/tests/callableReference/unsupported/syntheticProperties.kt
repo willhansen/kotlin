@@ -19,4 +19,4 @@ public class Customer {
 }
 
 // FILE: test.kt
-val customerName = Customer::<!UNSUPPORTED_FEATURE!>name<!>
+konst customerName = Customer::<!UNSUPPORTED_FEATURE!>name<!>

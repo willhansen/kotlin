@@ -1,9 +1,9 @@
 interface  B<T> {
-    val bar: T
+    konst bar: T
 }
 
 fun String.foo() = object : B<String> {
-    override val bar: String = length.toString()
+    override konst bar: String = length.toString()
 }
 
 class C {
@@ -11,11 +11,11 @@ class C {
     fun String.extension() = this.length
 
     fun String.fooInClass() = object : B<String> {
-        override val bar: String = extension().toString()
+        override konst bar: String = extension().toString()
     }
 
     fun String.fooInClassNoReceiver() = object : B<String> {
-        override val bar: String = "123".extension().toString()
+        override konst bar: String = "123".extension().toString()
     }
 
     fun fooInClass(s: String) =  s.fooInClass().bar

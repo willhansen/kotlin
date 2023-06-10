@@ -4,17 +4,17 @@
 // LAMBDAS: INDY
 
 class Ctx {
-    val k = "__K__"
+    konst k = "__K__"
 }
 
 class Scope {
-    val o = "O"
+    konst o = "O"
 }
 
 fun accept(block: context(Ctx) Scope.(Int) -> String) = 1
 fun accept(ref: Any) = 1
 
-val foo: context(Ctx) Scope.(fooParam: Int) -> String = { fooArg -> o + k[fooArg] }
+konst foo: context(Ctx) Scope.(fooParam: Int) -> String = { fooArg -> o + k[fooArg] }
 
 fun box(): String {
     accept(foo)

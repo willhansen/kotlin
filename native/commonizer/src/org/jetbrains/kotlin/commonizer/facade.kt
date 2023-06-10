@@ -40,7 +40,7 @@ internal fun deserializeTarget(parameters: CommonizerParameters, target: TargetP
 }
 
 internal fun deserializeTarget(parameters: CommonizerParameters, target: CommonizerTarget): CirTreeRoot? {
-    val targetProvider = parameters.targetProviders[target] ?: return null
+    konst targetProvider = parameters.targetProviders[target] ?: return null
     return deserializeTarget(parameters, targetProvider)
 }
 
@@ -49,19 +49,19 @@ internal fun commonizeTarget(
     inputs: TargetDependent<CirTreeRoot?>,
     output: CommonizerTarget
 ): CirRootNode? {
-    val availableTrees = inputs.filterNonNull()
+    konst availableTrees = inputs.filterNonNull()
     /* Nothing to merge */
     if (availableTrees.size == 0) return null
 
     parameters.logger.progress(output, "Commonized declarations from ${inputs.targets}") {
-        val classifiers = CirKnownClassifiers(
+        konst classifiers = CirKnownClassifiers(
             classifierIndices = availableTrees.mapValue(::CirClassifierIndex),
             targetDependencies = availableTrees.mapValue(CirTreeRoot::dependencies),
             commonizedNodes = CirCommonizedClassifierNodes.default(allowedDuplicates = allowedDuplicates),
             commonDependencies = parameters.dependencyClassifiers(output)
         )
 
-        val mergedTree = mergeCirTree(parameters.storageManager, classifiers, availableTrees, parameters.settings)
+        konst mergedTree = mergeCirTree(parameters.storageManager, classifiers, availableTrees, parameters.settings)
 
         InlineTypeAliasCirNodeTransformer(parameters.storageManager, classifiers, parameters.settings).invoke(mergedTree)
 
@@ -87,11 +87,11 @@ internal fun serializeTarget(
     outputTarget: SharedCommonizerTarget
 ): Unit = parameters.logger.progress(outputTarget, "Serialized target") {
     CirTreeSerializer.serializeSingleTarget(commonized, commonized.indexOfCommon, parameters.statsCollector) { metadataModule ->
-        val libraryName = metadataModule.name
-        val serializedMetadata = with(metadataModule.write(ChunkedKlibModuleFragmentWriteStrategy())) {
+        konst libraryName = metadataModule.name
+        konst serializedMetadata = with(metadataModule.write(ChunkedKlibModuleFragmentWriteStrategy())) {
             SerializedMetadata(header, fragments, fragmentNames)
         }
-        val manifestData = parameters.manifestProvider[outputTarget].buildManifest(libraryName)
+        konst manifestData = parameters.manifestProvider[outputTarget].buildManifest(libraryName)
         parameters.resultsConsumer.consume(
             parameters, outputTarget,
             ResultsConsumer.ModuleResult.Commonized(libraryName, serializedMetadata, manifestData)
@@ -108,8 +108,8 @@ internal fun serializeTarget(
 // We workaround this problem by allowing some classifiers to clash in `CirCommonizedClassifierNodes`.
 // Fortunately (1), macOS SDK from Xcode 14.1 should have CFCGTypes.h, so this hack can be removed soon.
 // TODO: Remove hack after Xcode 14.1.
-private val allowedDuplicates = run {
-    val cfcgTypesClassifiers = setOf(
+private konst allowedDuplicates = run {
+    konst cfcgTypesClassifiers = setOf(
         "platform/CoreGraphics/CGAffineTransform",
         "platform/CoreGraphics/CGAffineTransform.Companion",
         "platform/CoreGraphics/CGFloat",

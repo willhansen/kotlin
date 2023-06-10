@@ -26,7 +26,7 @@ import kotlin.test.assertEquals
 @DisplayName("Kapt incremental tests with isolating apt")
 open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(
         incremental = true,
         kaptOptions = super.defaultBuildOptions.kaptOptions!!.copy(
             verbose = true,
@@ -68,7 +68,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
             }
 
             javaSourcesDir().resolve("bar/B.kt").modify { current ->
-                val lastBrace = current.lastIndexOf("}")
+                konst lastBrace = current.lastIndexOf("}")
                 current.substring(0, lastBrace) + "fun anotherFun() {}\n }"
             }
             build("assemble") {
@@ -111,7 +111,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
     @GradleTest
     fun testUnchangedAnnotationProcessorClasspathButContentChanged(gradleVersion: GradleVersion) {
         kaptProject(gradleVersion) {
-            val processorJar = projectPath.resolve("processor.jar").also {
+            konst processorJar = projectPath.resolve("processor.jar").also {
                 ZipOutputStream(it.outputStream()).use {
                     // create an empty jar
                 }
@@ -143,7 +143,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
     @GradleTest
     fun testNonIncrementalWithUnrecognizedInputs(gradleVersion: GradleVersion) {
         kaptProject(gradleVersion) {
-            val additionalInputs = projectPath.resolve("additionalInputs").also { it.createDirectories() }
+            konst additionalInputs = projectPath.resolve("additionalInputs").also { it.createDirectories() }
             buildGradle.appendText(
                 """
     
@@ -214,7 +214,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
 
             settingsGradle.append("\ninclude ':', ':lib'")
 
-            val classpathTypeSource = subProject("lib").run {
+            konst classpathTypeSource = subProject("lib").run {
                 projectPath.createDirectory()
                 buildGradle.writeText(
                     """
@@ -223,7 +223,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
                     }
                     """.trimIndent()
                 )
-                val source = javaSourcesDir()
+                konst source = javaSourcesDir()
                     .resolve(
                         IncrementalProcessorReferencingClasspath.CLASSPATH_TYPE
                             .replace(".", "/") + ".java"
@@ -248,7 +248,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
                 """.trimIndent()
             )
 
-            val annotatedKotlinStubs = listOf(
+            konst annotatedKotlinStubs = listOf(
                 "$KAPT3_STUBS_PATH/foo/A.java",
                 "$KAPT3_STUBS_PATH/bar/B.java",
                 "$KAPT3_STUBS_PATH/bar/UseBKt.java",
@@ -257,7 +257,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
                 "$KAPT3_STUBS_PATH/error/NonExistentClass.java"
             )
 
-            val allKotlinStubs = annotatedKotlinStubs + listOf(
+            konst allKotlinStubs = annotatedKotlinStubs + listOf(
                 "$KAPT3_STUBS_PATH/delegate/Delegate.java",
                 "$KAPT3_STUBS_PATH/delegate/Usage.java"
             )
@@ -336,7 +336,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
             )
 
             settingsGradle.append("\ninclude ':', ':lib'\n")
-            val classpathTypeSource = subProject("lib").run {
+            konst classpathTypeSource = subProject("lib").run {
                 projectPath.createDirectories()
 
                 buildGradle.writeText(
@@ -347,7 +347,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
                     
                     """.trimIndent()
                 )
-                val source = javaSourcesDir()
+                konst source = javaSourcesDir()
                     .resolve(
                         IncrementalAggregatingReferencingClasspathProcessor.CLASSPATH_TYPE
                             .replace(".", "/") + ".java"
@@ -387,7 +387,7 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
                 )
             }
 
-            val allKotlinStubs = setOf(
+            konst allKotlinStubs = setOf(
                 "build/tmp/kapt3/stubs/main/example/ExampleAnnotation.java",
                 "build/tmp/kapt3/stubs/main/example/A.java",
                 "build/tmp/kapt3/stubs/main/error/NonExistentClass.java"
@@ -431,21 +431,21 @@ open class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
 
 @DisplayName("Kapt incremental tests with isolating apt with precise compilation outputs backup")
 class KaptIncrementalWithIsolatingAptAndPreciseBackup : KaptIncrementalWithIsolatingApt() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }
 
-private const val patternApt = "Processing java sources with annotation processors:"
+private const konst patternApt = "Processing java sources with annotation processors:"
 fun getProcessedSources(output: String): Set<String> {
     return output.lines().filter { it.contains(patternApt) }.flatMapTo(HashSet()) { logging ->
-        val indexOf = logging.indexOf(patternApt) + patternApt.length
+        konst indexOf = logging.indexOf(patternApt) + patternApt.length
         logging.drop(indexOf).split(",").map { it.trim() }.filter { it.isNotEmpty() }.toSet()
     }
 }
 
-private const val patternClassesApt = "Processing types with annotation processors: "
+private const konst patternClassesApt = "Processing types with annotation processors: "
 fun getProcessedTypes(output: String): Set<String> {
     return output.lines().filter { it.contains(patternClassesApt) }.flatMapTo(HashSet()) { logging ->
-        val indexOf = logging.indexOf(patternClassesApt) + patternClassesApt.length
+        konst indexOf = logging.indexOf(patternClassesApt) + patternClassesApt.length
         logging.drop(indexOf).split(",").map { it.trim() }.filter { it.isNotEmpty() }.toSet()
     }
 }
@@ -463,10 +463,10 @@ fun TestProject.setupIncrementalAptProject(
     vararg processors: Pair<String, Class<*>>,
     buildFile: Path = buildGradle
 ) {
-    val content = buildFile.readText()
-    val processorPath = generateProcessor(*processors)
+    konst content = buildFile.readText()
+    konst processorPath = generateProcessor(*processors)
 
-    val updatedContent = content.replace(
+    konst updatedContent = content.replace(
         Regex("^\\s*kapt\\s\"org\\.jetbrains\\.kotlin.*$", RegexOption.MULTILINE),
         "    kapt files(\"${processorPath.invariantSeparatorsPath}\")"
     )
@@ -476,11 +476,11 @@ fun TestProject.setupIncrementalAptProject(
 fun TestProject.generateProcessor(
     vararg processors: Pair<String, Class<*>>
 ): File {
-    val processorPath = projectPath.resolve("incrementalProcessor.jar").toFile()
+    konst processorPath = projectPath.resolve("incrementalProcessor.jar").toFile()
 
     ZipOutputStream(processorPath.outputStream()).use {
         for ((_, procClass) in processors) {
-            val path = procClass.name.replace(".", "/") + ".class"
+            konst path = procClass.name.replace(".", "/") + ".class"
             procClass.classLoader.getResourceAsStream(path).use { inputStream ->
                 it.putNextEntry(ZipEntry(path))
                 it.write(inputStream!!.readBytes())

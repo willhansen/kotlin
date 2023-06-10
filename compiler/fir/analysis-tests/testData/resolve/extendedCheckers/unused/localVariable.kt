@@ -4,16 +4,16 @@ class Outer {
     fun foo() {
         class Local {
             fun bar() {
-                val <!UNUSED_VARIABLE!>x<!> = y
+                konst <!UNUSED_VARIABLE!>x<!> = y
             }
         }
     }
 
-    val y = ""
+    konst y = ""
 }
 
 fun f() {
-    val a = 1
+    konst a = 1
 
     fun g(): Int {
         return a
@@ -22,20 +22,20 @@ fun f() {
 
 
 fun foo(v: Int) {
-    val <!UNUSED_VARIABLE!>d<!>: Int by Delegate
-    val <!UNUSED_VARIABLE!>a<!>: Int
-    val <!UNUSED_VARIABLE!>b<!> = 1
-    val c = 2
+    konst <!UNUSED_VARIABLE!>d<!>: Int by Delegate
+    konst <!UNUSED_VARIABLE!>a<!>: Int
+    konst <!UNUSED_VARIABLE!>b<!> = 1
+    konst c = 2
 
     @Anno
-    val <!UNUSED_VARIABLE!>e<!>: Int
+    konst <!UNUSED_VARIABLE!>e<!>: Int
 
     foo(c)
 }
 
 object Delegate {
     operator fun getValue(instance: Any?, property: KProperty<*>) = 1
-    operator fun setValue(instance: Any?, property: KProperty<*>, value: String) {}
+    operator fun setValue(instance: Any?, property: KProperty<*>, konstue: String) {}
 }
 
 @Target(AnnotationTarget.LOCAL_VARIABLE)

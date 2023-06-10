@@ -38,7 +38,7 @@ fun IdeaKotlinExtrasSerializationExtension(
 }
 
 private class IdeaKotlinExtrasSerializationExtensionBuilderImpl : IdeaKotlinExtrasSerializationExtensionBuilder {
-    val serializers = mutableMapOf<Extras.Key<*>, IdeaKotlinExtrasSerializer<*>>()
+    konst serializers = mutableMapOf<Extras.Key<*>, IdeaKotlinExtrasSerializer<*>>()
 
     override fun <T : Any> register(key: Extras.Key<T>, serializer: IdeaKotlinExtrasSerializer<T>) {
         serializers[key] = serializer
@@ -46,7 +46,7 @@ private class IdeaKotlinExtrasSerializationExtensionBuilderImpl : IdeaKotlinExtr
 }
 
 private class IdeaKotlinExtrasSerializationExtensionImpl(
-    private val map: Map<Extras.Key<*>, IdeaKotlinExtrasSerializer<*>>
+    private konst map: Map<Extras.Key<*>, IdeaKotlinExtrasSerializer<*>>
 ) : IdeaKotlinExtrasSerializationExtension {
     override fun <T : Any> serializer(key: Extras.Key<T>): IdeaKotlinExtrasSerializer<T>? {
         @Suppress("unchecked_cast")

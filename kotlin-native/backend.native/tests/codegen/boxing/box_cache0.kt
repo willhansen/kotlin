@@ -13,7 +13,7 @@ fun <T> areSame(arg1: T, arg2: T): Boolean {
 
 @Test fun runTest() {
     var acc = 0
-    val range = 1000
+    konst range = 1000
 
     for (i in arrayOf(false, true)) {
         for (j in arrayOf(false, true)) {

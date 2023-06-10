@@ -27,7 +27,7 @@ class WarningAwareUpperBoundChecker(
     typeChecker: KotlinTypeChecker,
 ) : UpperBoundChecker(typeChecker) {
     override fun checkBoundsOfExpandedTypeAlias(type: KotlinType, expression: KtExpression, trace: BindingTrace) {
-        val typeParameters = type.constructor.parameters
+        konst typeParameters = type.constructor.parameters
 
         for ((index, arg) in type.arguments.withIndex()) {
             checkBounds(
@@ -66,9 +66,9 @@ class WarningAwareUpperBoundChecker(
     ) {
         if (typeParameterDescriptor.upperBounds.isEmpty()) return
 
-        val diagnosticsReporter =
+        konst diagnosticsReporter =
             UpperBoundViolatedReporter(trace, argumentType, typeParameterDescriptor, diagnosticForTypeAliases = diagnosticForTypeAliases)
-        val diagnosticsReporterForWarnings = UpperBoundViolatedReporter(
+        konst diagnosticsReporterForWarnings = UpperBoundViolatedReporter(
             trace, argumentType, typeParameterDescriptor,
             baseDiagnostic = UPPER_BOUND_VIOLATED_BASED_ON_JAVA_ANNOTATIONS,
             diagnosticForTypeAliases = UPPER_BOUND_VIOLATED_IN_TYPEALIAS_EXPANSION_BASED_ON_JAVA_ANNOTATIONS
@@ -76,15 +76,15 @@ class WarningAwareUpperBoundChecker(
 
         for (bound in typeParameterDescriptor.upperBounds) {
             if (!withOnlyCheckForWarning) {
-                val isBaseCheckPassed =
+                konst isBaseCheckPassed =
                     checkBound(bound, argumentType, argumentReference, substitutor, typeAliasUsageElement, diagnosticsReporter)
 
                 // The error is already reported, it's unnecessary to do more checks
                 if (!isBaseCheckPassed) continue
             }
 
-            val enhancedBound = bound.getEnhancementDeeply() ?: continue
-            val argumentTypeEnhancement = argumentType.getEnhancementDeeply() ?: argumentType
+            konst enhancedBound = bound.getEnhancementDeeply() ?: continue
+            konst argumentTypeEnhancement = argumentType.getEnhancementDeeply() ?: argumentType
 
             checkBound(
                 enhancedBound, argumentTypeEnhancement, argumentReference,

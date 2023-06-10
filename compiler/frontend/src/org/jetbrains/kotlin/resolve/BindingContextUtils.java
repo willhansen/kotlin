@@ -104,11 +104,11 @@ public class BindingContextUtils {
             @NotNull K key,
             @NotNull String messageIfNull
     ) {
-        V value = bindingContext.get(slice, key);
-        if (value == null) {
+        V konstue = bindingContext.get(slice, key);
+        if (konstue == null) {
             throw new IllegalStateException(messageIfNull);
         }
-        return value;
+        return konstue;
     }
 
     public static void reportAmbiguousLabel(
@@ -210,9 +210,9 @@ public class BindingContextUtils {
             @NotNull BindingTrace trace, @Nullable TraceEntryFilter filter, boolean commitDiagnostics,
             @NotNull MutableSlicedMap map, MutableDiagnosticsWithSuppression diagnostics
     ) {
-        map.forEach((slice, key, value) -> {
+        map.forEach((slice, key, konstue) -> {
             if (filter == null || filter.accept(slice, key)) {
-                trace.record(slice, key, value);
+                trace.record(slice, key, konstue);
             }
 
             return null;

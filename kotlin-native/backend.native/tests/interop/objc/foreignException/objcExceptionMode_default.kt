@@ -10,15 +10,15 @@ import kotlin.system.exitProcess
 
 @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER")
 @Test fun testKT35056() {
-    val name = "Some native exception"
-    val reason = "Illegal value"
+    konst name = "Some native exception"
+    konst reason = "Illegal konstue"
     var finallyBlockTest = "FAILED"
     var catchBlockTest = "FAILED"
     try {
         raiseExc(name, reason)
         assertNotEquals("FAILED", catchBlockTest)  // shall not get here anyway
     } catch (e: ForeignException) {
-        val ret = logExc(e.nativeException) // return NSException name
+        konst ret = logExc(e.nativeException) // return NSException name
         assertEquals(name, ret)
         assertEquals("$name:: $reason", e.message)
         println("OK: ForeignException")
@@ -39,7 +39,7 @@ fun abnormal_handler(x: Any?) : Unit {
 fun main() {
     // Depending on the `foreignxceptionMode` option (def file or cinterop cli) this test should ends
     // normally with `ForeignException` handled or abnormally with `abnormal_handler`.
-    // Test shall validate output (golden value) from `abnormal_handler`.
+    // Test shall konstidate output (golden konstue) from `abnormal_handler`.
 
     objc_setUncaughtExceptionHandler(staticCFunction(::abnormal_handler))
 

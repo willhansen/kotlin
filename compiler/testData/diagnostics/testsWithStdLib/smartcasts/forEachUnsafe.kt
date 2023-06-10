@@ -2,11 +2,11 @@
 
 fun indexOfMax(a: IntArray): Int? {
     var maxI: Int? = 0
-    a.forEachIndexed { i, value ->
-        if (value >= a[<!TYPE_MISMATCH!>maxI<!>]) {
+    a.forEachIndexed { i, konstue ->
+        if (konstue >= a[<!TYPE_MISMATCH!>maxI<!>]) {
             maxI = i
         }
-        else if (value < 0) {
+        else if (konstue < 0) {
             maxI = null
         }
     }

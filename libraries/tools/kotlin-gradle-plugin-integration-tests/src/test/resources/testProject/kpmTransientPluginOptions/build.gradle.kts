@@ -20,8 +20,8 @@ configure<KotlinPm20ProjectExtension> {
 }
 
 class KpmPluginWithTransientPluginOptions(
-    private val regularOptionValue: String,
-    private val transientOptionValue: String
+    private konst regularOptionValue: String,
+    private konst transientOptionValue: String
 ) : KpmCompilerPlugin {
     private fun pluginData() = PluginData(
         pluginId = "test-plugin",
@@ -45,7 +45,7 @@ class KpmGradlePluginWithTransientPluginOptions : GradleKpmCompilerPlugin {
         project = target
     }
 
-    override val kpmCompilerPlugin by lazy {
+    override konst kpmCompilerPlugin by lazy {
         KpmPluginWithTransientPluginOptions(
             regularOptionValue = project.property("test-plugin.regular") as String,
             transientOptionValue = project.property("test-plugin.transient") as String

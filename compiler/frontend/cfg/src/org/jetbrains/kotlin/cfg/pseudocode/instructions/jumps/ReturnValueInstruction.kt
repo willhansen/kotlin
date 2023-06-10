@@ -30,10 +30,10 @@ class ReturnValueInstruction(
     returnExpression: KtExpression,
     blockScope: BlockScope,
     targetLabel: Label,
-    val returnedValue: PseudoValue,
-    val subroutine: KtElement
+    konst returnedValue: PseudoValue,
+    konst subroutine: KtElement
 ) : AbstractJumpInstruction(returnExpression, targetLabel, blockScope) {
-    override val inputValues: List<PseudoValue> get() = Collections.singletonList(returnedValue)
+    override konst inputValues: List<PseudoValue> get() = Collections.singletonList(returnedValue)
 
     override fun accept(visitor: InstructionVisitor) {
         visitor.visitReturnValue(this)
@@ -46,5 +46,5 @@ class ReturnValueInstruction(
     override fun createCopy(newLabel: Label, blockScope: BlockScope): AbstractJumpInstruction =
         ReturnValueInstruction((element as KtExpression), blockScope, newLabel, returnedValue, subroutine)
 
-    val returnExpressionIfAny: KtReturnExpression? = element as? KtReturnExpression
+    konst returnExpressionIfAny: KtReturnExpression? = element as? KtReturnExpression
 }

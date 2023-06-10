@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.descriptors.DeclarationDescriptorWithSource
 import org.jetbrains.kotlin.resolve.source.getPsi
 
 fun DeclarationDescriptor.findPsi(): PsiElement? {
-    val psi = (this as? DeclarationDescriptorWithSource)?.source?.getPsi()
+    konst psi = (this as? DeclarationDescriptorWithSource)?.source?.getPsi()
     return if (psi == null && this is CallableMemberDescriptor && kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
         overriddenDescriptors.mapNotNull { it.findPsi() }.firstOrNull()
     }

@@ -88,11 +88,11 @@ public class CompileTimeConstantChecker {
     }
 
     private boolean checkIntegerValue(
-            @Nullable ConstantValue<?> value,
+            @Nullable ConstantValue<?> konstue,
             @NotNull KotlinType expectedType,
             @NotNull KtConstantExpression expression
     ) {
-        if (value == null) {
+        if (konstue == null) {
             return reportError(INT_LITERAL_OUT_OF_RANGE.on(expression));
         }
 
@@ -101,8 +101,8 @@ public class CompileTimeConstantChecker {
         }
 
         if (!noExpectedTypeOrError(expectedType)) {
-            KotlinType valueType = value.getType(module);
-            if (!KotlinTypeChecker.DEFAULT.isSubtypeOf(valueType, expectedType)) {
+            KotlinType konstueType = konstue.getType(module);
+            if (!KotlinTypeChecker.DEFAULT.isSubtypeOf(konstueType, expectedType)) {
                 return reportConstantExpectedTypeMismatch(expression, "integer", expectedType, null);
             }
         }
@@ -110,16 +110,16 @@ public class CompileTimeConstantChecker {
     }
 
     private boolean checkFloatValue(
-            @Nullable ConstantValue<?> value,
+            @Nullable ConstantValue<?> konstue,
             @NotNull KotlinType expectedType,
             @NotNull KtConstantExpression expression
     ) {
-        if (value == null) {
+        if (konstue == null) {
             return reportError(FLOAT_LITERAL_OUT_OF_RANGE.on(expression));
         }
         if (!noExpectedTypeOrError(expectedType)) {
-            KotlinType valueType = value.getType(module);
-            if (!KotlinTypeChecker.DEFAULT.isSubtypeOf(valueType, expectedType)) {
+            KotlinType konstueType = konstue.getType(module);
+            if (!KotlinTypeChecker.DEFAULT.isSubtypeOf(konstueType, expectedType)) {
                 return reportConstantExpectedTypeMismatch(expression, "floating-point", expectedType, null);
             }
         }
@@ -208,7 +208,7 @@ public class CompileTimeConstantChecker {
                 // unicode escape
                 if (escape.charAt(0) == 'u') {
                     try {
-                        Integer intValue = Integer.valueOf(escape.substring(1), 16);
+                        Integer intValue = Integer.konstueOf(escape.substring(1), 16);
                         return new CharacterWithDiagnostic((char) intValue.intValue());
                     } catch (NumberFormatException e) {
                         // Will be reported below
@@ -231,14 +231,14 @@ public class CompileTimeConstantChecker {
 
     public static class CharacterWithDiagnostic {
         private Diagnostic diagnostic;
-        private Character value;
+        private Character konstue;
 
         public CharacterWithDiagnostic(@NotNull Diagnostic diagnostic) {
             this.diagnostic = diagnostic;
         }
 
-        public CharacterWithDiagnostic(char value) {
-            this.value = value;
+        public CharacterWithDiagnostic(char konstue) {
+            this.konstue = konstue;
         }
 
         @Nullable
@@ -248,7 +248,7 @@ public class CompileTimeConstantChecker {
 
         @Nullable
         public Character getValue() {
-            return value;
+            return konstue;
         }
     }
 

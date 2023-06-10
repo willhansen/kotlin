@@ -26,7 +26,7 @@ fun bar(f: (P) -> Unit) {
     f(P("w", "e"))
 }
 
-class P(val a: String, val b: String)
+class P(konst a: String, konst b: String)
 
 inline operator fun P.component1() = a
 

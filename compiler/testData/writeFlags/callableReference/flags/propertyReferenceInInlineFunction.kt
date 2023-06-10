@@ -1,5 +1,5 @@
 class A {
-    val foo = ""
+    konst foo = ""
 
     inline fun bar() = A::foo
 }

@@ -31,11 +31,11 @@ open enum class Z : Enum<Z> {
 
   }
 
-  fun values(): Array<Z> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<Z> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): Z /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): Z /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<Z>
+  konst entries: EnumEntries<Z>
     get(): EnumEntries<Z> /* Synthetic body for ENUM_ENTRIES */
 
 }

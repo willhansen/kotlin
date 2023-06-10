@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 
 // FILE: Z.kt
-inline class Z(val value: Int)
+inline class Z(konst konstue: Int)
 
 // FILE: test.kt
 fun test1_1(z: Z) = "$z"

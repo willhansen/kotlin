@@ -25,32 +25,32 @@ import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.psi2ir.generators.GeneratorWithScope
 
 internal class SafeExtensionInvokeCallReceiver(
-    val generator: GeneratorWithScope,
-    val startOffset: Int,
-    val endOffset: Int,
-    private val callBuilder: CallBuilder,
-    private val functionReceiver: IntermediateValue,
-    private val extensionInvokeReceiver: IntermediateValue
+    konst generator: GeneratorWithScope,
+    konst startOffset: Int,
+    konst endOffset: Int,
+    private konst callBuilder: CallBuilder,
+    private konst functionReceiver: IntermediateValue,
+    private konst extensionInvokeReceiver: IntermediateValue
 ) : CallReceiver {
     override fun call(builder: CallExpressionBuilder): IrExpression {
         // extensionInvokeReceiver is actually a first argument:
         //      receiver?.extFun(p1, ..., pN)
         //      =>
-        //      val tmp = [receiver]
+        //      konst tmp = [receiver]
         //      if (tmp == null) null else extFun.invoke(tmp, p1, ..., pN)
 
-        val irTmp = generator.scope.createTemporaryVariable(extensionInvokeReceiver.load(), "safe_receiver")
+        konst irTmp = generator.scope.createTemporaryVariable(extensionInvokeReceiver.load(), "safe_receiver")
 
-        val safeReceiverValue = VariableLValue(generator.context, irTmp)
+        konst safeReceiverValue = VariableLValue(generator.context, irTmp)
 
         // Patch call and generate it
         assert(callBuilder.irValueArgumentsByIndex[0] == null) {
-            "Safe extension 'invoke' call should have null as its 1st value argument, got: ${callBuilder.irValueArgumentsByIndex[0]}"
+            "Safe extension 'invoke' call should have null as its 1st konstue argument, got: ${callBuilder.irValueArgumentsByIndex[0]}"
         }
         callBuilder.irValueArgumentsByIndex[0] = safeReceiverValue.load()
-        val irResult = builder.withReceivers(functionReceiver, null, emptyList())
+        konst irResult = builder.withReceivers(functionReceiver, null, emptyList())
 
-        val resultType = irResult.type.makeNullable()
+        konst resultType = irResult.type.makeNullable()
 
         return generator.irBlock(startOffset, endOffset, IrStatementOrigin.SAFE_CALL, resultType) {
             +irTmp

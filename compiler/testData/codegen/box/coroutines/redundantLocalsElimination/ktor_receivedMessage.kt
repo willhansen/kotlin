@@ -13,13 +13,13 @@ class ChatServer {
     suspend fun message(sender: String, message: String) { }
 }
 
-private val server = ChatServer()
+private konst server = ChatServer()
 
 private suspend fun receivedMessage(id: String, command: String) {
     when {
         command.startsWith("/who") -> server.who(id)
         command.startsWith("/user") -> {
-            val newName = command.removePrefix("/user").trim()
+            konst newName = command.removePrefix("/user").trim()
             when {
                 newName.isEmpty() -> server.sendTo(id, "server::help", "/user [newName]")
                 else -> server.message(id, newName)

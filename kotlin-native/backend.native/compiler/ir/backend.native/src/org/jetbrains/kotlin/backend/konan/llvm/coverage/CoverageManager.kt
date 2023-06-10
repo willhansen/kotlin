@@ -19,28 +19,28 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.module
 /**
  * "Umbrella" class of all the of the code coverage related logic.
  */
-internal class CoverageManager(val generationState: NativeGenerationState) {
-    private val context = generationState.context
-    private val config = generationState.config
+internal class CoverageManager(konst generationState: NativeGenerationState) {
+    private konst context = generationState.context
+    private konst config = generationState.config
 
-    private val shouldCoverSources: Boolean =
+    private konst shouldCoverSources: Boolean =
             config.shouldCoverSources
 
-    private val librariesToCover: Set<String> =
+    private konst librariesToCover: Set<String> =
             config.resolve.coveredLibraries.map { it.libraryName }.toSet()
 
-    private val llvmProfileFilenameGlobal = "__llvm_profile_filename"
+    private konst llvmProfileFilenameGlobal = "__llvm_profile_filename"
 
-    private val defaultOutputFilePath: String by lazy {
+    private konst defaultOutputFilePath: String by lazy {
         "${generationState.outputFile}.profraw"
     }
 
-    private val outputFileName: String =
+    private konst outputFileName: String =
             config.configuration.get(KonanConfigKeys.PROFRAW_PATH)
                     ?.let { File(it).absolutePath }
                     ?: defaultOutputFilePath
 
-    val enabled: Boolean =
+    konst enabled: Boolean =
             shouldCoverSources || librariesToCover.isNotEmpty()
 
     init {
@@ -50,24 +50,24 @@ internal class CoverageManager(val generationState: NativeGenerationState) {
     }
 
     private fun checkRestrictions(): Boolean  {
-        val isKindAllowed = config.produce.involvesBitcodeGeneration
-        val target = config.target
-        val isTargetAllowed = target.supportsCodeCoverage()
+        konst isKindAllowed = config.produce.involvesBitcodeGeneration
+        konst target = config.target
+        konst isTargetAllowed = target.supportsCodeCoverage()
         return isKindAllowed && isTargetAllowed
     }
 
-    private val filesRegionsInfo = mutableListOf<FileRegionInfo>()
+    private konst filesRegionsInfo = mutableListOf<FileRegionInfo>()
 
     private fun getFunctionRegions(irFunction: IrFunction) =
             filesRegionsInfo.flatMap { it.functions }.firstOrNull { it.function == irFunction }
 
-    private val coveredModules: Set<ModuleDescriptor> by lazy {
-        val coveredSources = if (shouldCoverSources) {
+    private konst coveredModules: Set<ModuleDescriptor> by lazy {
+        konst coveredSources = if (shouldCoverSources) {
             context.sourcesModules
         } else {
             emptySet()
         }
-        val coveredLibs = context.irModules.filter { it.key in librariesToCover }.values
+        konst coveredLibs = context.irModules.filter { it.key in librariesToCover }.konstues
                 .map { it.descriptor }.toSet()
         coveredLibs + coveredSources
     }
@@ -80,7 +80,7 @@ internal class CoverageManager(val generationState: NativeGenerationState) {
      */
     fun collectRegions(irModuleFragment: IrModuleFragment) {
         if (enabled) {
-            val regions = CoverageRegionCollector(this::fileCoverageFilter).collectFunctionRegions(irModuleFragment)
+            konst regions = CoverageRegionCollector(this::fileCoverageFilter).collectFunctionRegions(irModuleFragment)
             filesRegionsInfo += regions
         }
     }
@@ -128,7 +128,7 @@ internal class CoverageManager(val generationState: NativeGenerationState) {
 
 internal fun runCoveragePass(generationState: NativeGenerationState) {
     if (!generationState.coverage.enabled) return
-    val passManager = LLVMCreatePassManager()!!
+    konst passManager = LLVMCreatePassManager()!!
     LLVMKotlinAddTargetLibraryInfoWrapperPass(passManager, generationState.llvm.targetTriple)
     generationState.coverage.addLateLlvmPasses(passManager)
     LLVMRunPassManager(passManager, generationState.llvm.module)

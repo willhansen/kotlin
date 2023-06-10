@@ -14,8 +14,8 @@ typealias `true` = Boolean
 internal typealias `false`<`true`> = Map<`true`, List<`true`>?>
 
 fun box(): String? {
-    val x1: `false`<Boolean> = mapOf(true to listOf(false, false), false to null)
-    val x2: `true` = false
+    konst x1: `false`<Boolean> = mapOf(true to listOf(false, false), false to null)
+    konst x2: `true` = false
 
     if (!x1[true]!!.containsAll(listOf(false, false)) || x1[false] != null) return null
     if (x2) return null

@@ -1,28 +1,28 @@
 import kotlin.js.Promise
 import kotlin.test.*
 
-var value = 5
+var konstue = 5
 
 class SimpleTest {
 
     @BeforeTest
     fun beforeFun() {
-        value *= 2
+        konstue *= 2
     }
 
     @AfterTest
     fun afterFun() {
-        value /= 2
+        konstue /= 2
     }
 
     @Test
     fun testFoo() {
-        assertNotEquals(value, foo())
+        assertNotEquals(konstue, foo())
     }
 
     @Test
     fun testBar() {
-        assertEquals(value, foo())
+        assertEquals(konstue, foo())
     }
 
     @Ignore
@@ -67,11 +67,11 @@ class AsyncTest {
     fun checkAsyncOrder(): Promise<Unit> {
         log += 1
 
-        val p1 = promise(10)
+        konst p1 = promise(10)
 
         log += 2
 
-        val p2 = p1.then { result ->
+        konst p2 = p1.then { result ->
             assertEquals(log, "1ab23c")
         }
 

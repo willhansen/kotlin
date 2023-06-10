@@ -4,8 +4,8 @@ fun fill(dest : Array<in String>, v : String) {
 
 fun box() : String {
 //fun main(args : Array<String>) {
-    val s : String = "bar"
-    val any : Array<Any> = arrayOf(1, "foo", 1.234)
+    konst s : String = "bar"
+    konst any : Array<Any> = arrayOf(1, "foo", 1.234)
     fill(any, s)
     /* shouldn't throw
 ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.String;

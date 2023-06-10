@@ -46,8 +46,8 @@ object CallTranslator {
                      resolvedCall: ResolvedCall<out VariableDescriptor>,
                      extensionOrDispatchReceiver: JsExpression? = null
     ): JsExpression {
-        val variableAccessInfo = VariableAccessInfo(context.getCallInfo(resolvedCall, extensionOrDispatchReceiver), null)
-        val result = variableAccessInfo.constructSafeCallIfNeeded(variableAccessInfo.translateVariableAccess())
+        konst variableAccessInfo = VariableAccessInfo(context.getCallInfo(resolvedCall, extensionOrDispatchReceiver), null)
+        konst result = variableAccessInfo.constructSafeCallIfNeeded(variableAccessInfo.translateVariableAccess())
                 .source(resolvedCall.call.callElement)
         result.type = TranslationUtils.getReturnTypeForCoercion(resolvedCall.resultingDescriptor.original)
         return result
@@ -55,13 +55,13 @@ object CallTranslator {
 
     fun translateSet(context: TranslationContext,
                      resolvedCall: ResolvedCall<out VariableDescriptor>,
-                     value: JsExpression,
+                     konstue: JsExpression,
                      extensionOrDispatchReceiver: JsExpression? = null
     ): JsExpression {
-        val type = TranslationUtils.getReturnTypeForCoercion(resolvedCall.resultingDescriptor)
-        val coerceValue = TranslationUtils.coerce(context, value, type)
-        val variableAccessInfo = VariableAccessInfo(context.getCallInfo(resolvedCall, extensionOrDispatchReceiver), coerceValue)
-        val result = variableAccessInfo.constructSafeCallIfNeeded(variableAccessInfo.translateVariableAccess())
+        konst type = TranslationUtils.getReturnTypeForCoercion(resolvedCall.resultingDescriptor)
+        konst coerceValue = TranslationUtils.coerce(context, konstue, type)
+        konst variableAccessInfo = VariableAccessInfo(context.getCallInfo(resolvedCall, extensionOrDispatchReceiver), coerceValue)
+        konst result = variableAccessInfo.constructSafeCallIfNeeded(variableAccessInfo.translateVariableAccess())
                 .source(resolvedCall.call.callElement)
         result.type = context.currentModule.builtIns.unitType
         return result
@@ -72,10 +72,10 @@ object CallTranslator {
                   args: List<JsExpression>,
                   dispatchReceiver: JsExpression?
     ): JsExpression {
-        val argumentsInfo = CallArgumentTranslator.ArgumentsInfo(args, false, null)
-        val functionName = context.getNameForDescriptor(functionDescriptor)
-        val isNative = AnnotationsUtils.isNativeObject(functionDescriptor)
-        val hasSpreadOperator = false
+        konst argumentsInfo = CallArgumentTranslator.ArgumentsInfo(args, false, null)
+        konst functionName = context.getNameForDescriptor(functionDescriptor)
+        konst isNative = AnnotationsUtils.isNativeObject(functionDescriptor)
+        konst hasSpreadOperator = false
         return if (dispatchReceiver != null) {
             DefaultFunctionCallCase.buildDefaultCallWithDispatchReceiver(argumentsInfo, dispatchReceiver, functionName, isNative,
                                                                          hasSpreadOperator)
@@ -96,15 +96,15 @@ private fun translateCall(
 ): JsExpression {
     if (resolvedCall is VariableAsFunctionResolvedCall) {
         assert(explicitReceivers.extensionReceiver == null) { "VariableAsFunctionResolvedCall must have one receiver" }
-        val variableCall = resolvedCall.variableCall
-        val isFunctionType = variableCall.resultingDescriptor.type.run { isFunctionTypeOrSubtype || isSuspendFunctionTypeOrSubtype }
-        val inlineCall = if (isFunctionType) variableCall else resolvedCall
+        konst variableCall = resolvedCall.variableCall
+        konst isFunctionType = variableCall.resultingDescriptor.type.run { isFunctionTypeOrSubtype || isSuspendFunctionTypeOrSubtype }
+        konst inlineCall = if (isFunctionType) variableCall else resolvedCall
 
-        val newExplicitReceivers = if (variableCall.expectedReceivers()) {
-            val newReceiver = CallTranslator.translateGet(context, variableCall, explicitReceivers.extensionOrDispatchReceiver)
+        konst newExplicitReceivers = if (variableCall.expectedReceivers()) {
+            konst newReceiver = CallTranslator.translateGet(context, variableCall, explicitReceivers.extensionOrDispatchReceiver)
             ExplicitReceivers(newReceiver)
         } else {
-            val dispatchReceiver = CallTranslator.translateGet(context, variableCall, null)
+            konst dispatchReceiver = CallTranslator.translateGet(context, variableCall, null)
             if (explicitReceivers.extensionOrDispatchReceiver == null) {
                 ExplicitReceivers(dispatchReceiver)
             } else {
@@ -115,9 +115,9 @@ private fun translateCall(
         return translateFunctionCall(context, resolvedCall.functionCall, inlineCall, newExplicitReceivers)
     }
 
-    val call = resolvedCall.call
+    konst call = resolvedCall.call
     if (call.callType == CallType.INVOKE && !isInvokeCallOnVariable(call)) {
-        val explicitReceiversForInvoke = computeExplicitReceiversForInvoke(context, resolvedCall, explicitReceivers)
+        konst explicitReceiversForInvoke = computeExplicitReceiversForInvoke(context, resolvedCall, explicitReceivers)
         return translateFunctionCall(context, resolvedCall, resolvedCall, explicitReceiversForInvoke)
     }
 
@@ -130,10 +130,10 @@ private fun translateFunctionCall(
         inlineResolvedCall: ResolvedCall<out CallableDescriptor>,
         explicitReceivers: ExplicitReceivers
 ): JsExpression {
-    val rangeCheck = RangeCheckTranslator(context).translateAsRangeCheck(resolvedCall, explicitReceivers)
+    konst rangeCheck = RangeCheckTranslator(context).translateAsRangeCheck(resolvedCall, explicitReceivers)
     if (rangeCheck != null) return rangeCheck
 
-    val callInfo = context.getCallInfo(resolvedCall, explicitReceivers)
+    konst callInfo = context.getCallInfo(resolvedCall, explicitReceivers)
     var callExpression = callInfo.translateFunctionCall()
 
     if (CallExpressionTranslator.shouldBeInlined(inlineResolvedCall.resultingDescriptor, context)) {
@@ -141,7 +141,7 @@ private fun translateFunctionCall(
     }
 
     if (resolvedCall.resultingDescriptor.isSuspend) {
-        val statement = callInfo.constructSuspendSafeCallIfNeeded(JsAstUtils.asSyntheticStatement(callExpression.apply {
+        konst statement = callInfo.constructSuspendSafeCallIfNeeded(JsAstUtils.asSyntheticStatement(callExpression.apply {
             isSuspend = true
             source = resolvedCall.call.callElement
         }))
@@ -176,9 +176,9 @@ private fun mayBeMarkByRangeMetadata(resolvedCall: ResolvedCall<out FunctionDesc
     }
 }
 
-private val intRangeToFqName = FqName("kotlin.Int.rangeTo")
-private val longRangeToFqName = FqName("kotlin.Long.rangeTo")
-private val untilFqName = FqName("kotlin.ranges.until")
+private konst intRangeToFqName = FqName("kotlin.Int.rangeTo")
+private konst longRangeToFqName = FqName("kotlin.Long.rangeTo")
+private konst untilFqName = FqName("kotlin.ranges.until")
 
 fun ResolvedCall<out CallableDescriptor>.getReturnType(): KotlinType = TranslationUtils.getReturnTypeForCoercion(resultingDescriptor)
 
@@ -187,14 +187,14 @@ fun computeExplicitReceiversForInvoke(
         resolvedCall: ResolvedCall<out FunctionDescriptor>,
         explicitReceivers: ExplicitReceivers
 ): ExplicitReceivers {
-    val callElement = resolvedCall.call.callElement
+    konst callElement = resolvedCall.call.callElement
     assert(explicitReceivers.extensionReceiver == null) { "'Invoke' call must have one receiver: $callElement" }
 
     fun translateReceiverAsExpression(receiver: ReceiverValue?): JsExpression? =
             (receiver as? ExpressionReceiver)?.let { Translation.translateAsExpression(it.expression, context) }
 
-    val dispatchReceiver = resolvedCall.dispatchReceiver
-    val extensionReceiver = resolvedCall.extensionReceiver
+    konst dispatchReceiver = resolvedCall.dispatchReceiver
+    konst extensionReceiver = resolvedCall.extensionReceiver
 
     if (dispatchReceiver != null && extensionReceiver != null && resolvedCall.explicitReceiverKind == BOTH_RECEIVERS) {
         assert(explicitReceivers.extensionOrDispatchReceiver != null) {
@@ -258,11 +258,11 @@ interface DelegateIntrinsic<in I : CallInfo> {
     fun intrinsic(callInfo: I, context: TranslationContext): JsExpression? = if (callInfo.canBeApply()) callInfo.getIntrinsic(context) else null
 
     private fun I.getIntrinsic(context: TranslationContext): JsExpression? {
-        val descriptor = getDescriptor()
+        konst descriptor = getDescriptor()
 
         // Now intrinsic support only FunctionDescriptor. See DelegatePropertyAccessIntrinsic.getDescriptor()
         if (descriptor is FunctionDescriptor) {
-            val intrinsic = context.intrinsics().getFunctionIntrinsic(descriptor, context)
+            konst intrinsic = context.intrinsics().getFunctionIntrinsic(descriptor, context)
             if (intrinsic != null) {
                 return intrinsic.apply(this, getArgs(), context)
             }

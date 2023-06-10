@@ -6,55 +6,55 @@ import kotlin.reflect.KCallable
 import kotlin.test.assertEquals
 
 @JvmInline
-value class Z(val x1: UInt, val x2: Int) {
+konstue class Z(konst x1: UInt, konst x2: Int) {
     constructor(a: UInt, b: UInt, c: Int, d: Int) : this(a + b, c + d)
 }
 
 @JvmInline
-value class L(val x1: ULong, val x2: Long) {
+konstue class L(konst x1: ULong, konst x2: Long) {
     constructor(a: ULong, b: ULong, c: Long, d: Long) : this(a + b, c + d)
 }
 
 @JvmInline
-value class S1(val x1: String, val x2: String) {
+konstue class S1(konst x1: String, konst x2: String) {
     constructor(a: String, b: String, c: String, d: String) : this(a + b, c + d)
 }
 
 @JvmInline
-value class S2(val x1: String?, val x2: String?) {
+konstue class S2(konst x1: String?, konst x2: String?) {
     constructor(a: String?, b: String?, c: String?, d: String?) : this(a!! + b!!, c!! + d!!)
 }
 
 @JvmInline
-value class A(val x1: Any, val x2: Any) {
+konstue class A(konst x1: Any, konst x2: Any) {
     constructor(a: String, b: String, c: String, d: String) : this(a + b, c + d)
 }
 
 @JvmInline
-value class Z2(val z1: Z, val z2: Z) {
+konstue class Z2(konst z1: Z, konst z2: Z) {
     constructor(z1: Z, z2: Z, z3: Z, z4: Z) : this(Z(z1.x1 + z2.x1, z1.x2 + z2.x2), Z(z3.x1 + z4.x1, z3.x2 + z4.x2))
 }
 
 @JvmInline
-value class Z3(val z1: Z?, val z2: Z?) {
+konstue class Z3(konst z1: Z?, konst z2: Z?) {
     constructor(z1: Z?, z2: Z?, z3: Z?, z4: Z?) : this(Z(z1!!.x1 + z2!!.x1, z1!!.x2 + z2!!.x2), Z(z3!!.x1 + z4!!.x1, z3!!.x2 + z4!!.x2))
 }
 
 fun box(): String {
-    val ctorZ1_1: (UInt, Int) -> Z = ::Z
-    val ctorZ1_2: (UInt, UInt, Int, Int) -> Z = ::Z
-    val ctorL1: (ULong, Long) -> L = ::L
-    val ctorL2: (ULong, ULong, Long, Long) -> L = ::L
-    val ctorS1_1: (String, String) -> S1 = ::S1
-    val ctorS1_2: (String, String, String, String) -> S1 = ::S1
-    val ctorS2_1: (String, String) -> S2 = ::S2
-    val ctorS2_2: (String, String, String, String) -> S2 = ::S2
-    val ctorA1: (Any, Any) -> A = ::A
-    val ctorA2: (String, String, String, String) -> A = ::A
-    val ctorZ2_2: (Z, Z) -> Z2 = ::Z2
-    val ctorZ2_4: (Z, Z, Z, Z) -> Z2 = ::Z2
-    val ctorZ3_2: (Z, Z) -> Z3 = ::Z3
-    val ctorZ3_4: (Z, Z, Z, Z) -> Z3 = ::Z3
+    konst ctorZ1_1: (UInt, Int) -> Z = ::Z
+    konst ctorZ1_2: (UInt, UInt, Int, Int) -> Z = ::Z
+    konst ctorL1: (ULong, Long) -> L = ::L
+    konst ctorL2: (ULong, ULong, Long, Long) -> L = ::L
+    konst ctorS1_1: (String, String) -> S1 = ::S1
+    konst ctorS1_2: (String, String, String, String) -> S1 = ::S1
+    konst ctorS2_1: (String, String) -> S2 = ::S2
+    konst ctorS2_2: (String, String, String, String) -> S2 = ::S2
+    konst ctorA1: (Any, Any) -> A = ::A
+    konst ctorA2: (String, String, String, String) -> A = ::A
+    konst ctorZ2_2: (Z, Z) -> Z2 = ::Z2
+    konst ctorZ2_4: (Z, Z, Z, Z) -> Z2 = ::Z2
+    konst ctorZ3_2: (Z, Z) -> Z3 = ::Z3
+    konst ctorZ3_4: (Z, Z, Z, Z) -> Z3 = ::Z3
 
     assertEquals(Z(42U, 43), (ctorZ1_1 as KCallable<Z>).call(42U, 43))
     assertEquals(Z(123U, 224), (ctorZ1_2 as KCallable<Z>).call(100U, 23U, 200, 24))

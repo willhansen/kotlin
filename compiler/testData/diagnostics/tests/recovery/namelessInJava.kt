@@ -15,5 +15,5 @@ import p.*
 
 class K : Nameless() {
     <!FUNCTION_DECLARATION_WITH_NO_NAME!>fun ()<!> {}
-    val<!SYNTAX!><!> : Int = 1
+    konst<!SYNTAX!><!> : Int = 1
 }

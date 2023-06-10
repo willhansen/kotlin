@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.serialization.deserialization.AnnotationLoader
 import org.jetbrains.kotlin.serialization.deserialization.ProtoContainer
 
 abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryClassAnnotationLoader.AnnotationsContainer<A>>(
-    protected val kotlinClassFinder: KotlinClassFinder
+    protected konst kotlinClassFinder: KotlinClassFinder
 ) : AnnotationLoader<A> {
-    abstract val jvmMetadataVersion: JvmMetadataVersion
+    abstract konst jvmMetadataVersion: JvmMetadataVersion
 
     protected abstract fun getAnnotationsContainer(binaryClass: KotlinJvmBinaryClass): S
 
@@ -54,9 +54,9 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
     protected open fun getCachedFileContent(kotlinClass: KotlinJvmBinaryClass): ByteArray? = null
 
     override fun loadClassAnnotations(container: ProtoContainer.Class): List<A> {
-        val kotlinClass = container.toBinaryClass() ?: error("Class for loading annotations is not found: ${container.debugFqName()}")
+        konst kotlinClass = container.toBinaryClass() ?: error("Class for loading annotations is not found: ${container.debugFqName()}")
 
-        val result = ArrayList<A>(1)
+        konst result = ArrayList<A>(1)
 
         kotlinClass.loadClassAnnotations(object : KotlinJvmBinaryClass.AnnotationVisitor {
             override fun visitAnnotation(classId: ClassId, source: SourceElement): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {
@@ -75,7 +75,7 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
             return loadPropertyAnnotations(container, proto as ProtoBuf.Property, PropertyRelatedElement.PROPERTY)
         }
 
-        val signature = getCallableSignature(proto, container.nameResolver, container.typeTable, kind) ?: return emptyList()
+        konst signature = getCallableSignature(proto, container.nameResolver, container.typeTable, kind) ?: return emptyList()
         return findClassAndLoadMemberAnnotations(container, signature)
     }
 
@@ -92,10 +92,10 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
     }
 
     private fun loadPropertyAnnotations(container: ProtoContainer, proto: ProtoBuf.Property, element: PropertyRelatedElement): List<A> {
-        val isConst = Flags.IS_CONST.get(proto.flags)
-        val isMovedFromInterfaceCompanion = JvmProtoBufUtil.isMovedFromInterfaceCompanion(proto)
+        konst isConst = Flags.IS_CONST.get(proto.flags)
+        konst isMovedFromInterfaceCompanion = JvmProtoBufUtil.isMovedFromInterfaceCompanion(proto)
         if (element == PropertyRelatedElement.PROPERTY) {
-            val syntheticFunctionSignature =
+            konst syntheticFunctionSignature =
                 getPropertySignature(proto, container.nameResolver, container.typeTable, synthetic = true) ?: return emptyList()
             return findClassAndLoadMemberAnnotations(
                 container, syntheticFunctionSignature, property = true, isConst = isConst,
@@ -103,11 +103,11 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
             )
         }
 
-        val fieldSignature =
+        konst fieldSignature =
             getPropertySignature(proto, container.nameResolver, container.typeTable, field = true) ?: return emptyList()
 
         // TODO: check delegate presence in some other way
-        val isDelegated = JvmAbi.DELEGATED_PROPERTY_NAME_SUFFIX in fieldSignature.signature
+        konst isDelegated = JvmAbi.DELEGATED_PROPERTY_NAME_SUFFIX in fieldSignature.signature
         if (isDelegated != (element == PropertyRelatedElement.DELEGATE_FIELD)) return emptyList()
 
         return findClassAndLoadMemberAnnotations(
@@ -117,7 +117,7 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
     }
 
     override fun loadEnumEntryAnnotations(container: ProtoContainer, proto: ProtoBuf.EnumEntry): List<A> {
-        val signature = MemberSignature.fromFieldNameAndDesc(
+        konst signature = MemberSignature.fromFieldNameAndDesc(
             container.nameResolver.getString(proto.name),
             ClassMapperLite.mapClass((container as ProtoContainer.Class).classId.asString())
         )
@@ -132,7 +132,7 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
         isConst: Boolean? = null,
         isMovedFromInterfaceCompanion: Boolean = false
     ): List<A> {
-        val kotlinClass =
+        konst kotlinClass =
             findClassWithAnnotationsAndInitializers(
                 container,
                 getSpecialCaseContainerClass(
@@ -156,10 +156,10 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
         parameterIndex: Int,
         proto: ProtoBuf.ValueParameter
     ): List<A> {
-        val methodSignature = getCallableSignature(callableProto, container.nameResolver, container.typeTable, kind)
+        konst methodSignature = getCallableSignature(callableProto, container.nameResolver, container.typeTable, kind)
         if (methodSignature != null) {
-            val index = parameterIndex + computeJvmParameterIndexShift(container, callableProto)
-            val paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(methodSignature, index)
+            konst index = parameterIndex + computeJvmParameterIndexShift(container, callableProto)
+            konst paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(methodSignature, index)
             return findClassAndLoadMemberAnnotations(container, paramSignature)
         }
 
@@ -184,9 +184,9 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
         proto: MessageLite,
         kind: AnnotatedCallableKind
     ): List<A> {
-        val methodSignature = getCallableSignature(proto, container.nameResolver, container.typeTable, kind)
+        konst methodSignature = getCallableSignature(proto, container.nameResolver, container.typeTable, kind)
         if (methodSignature != null) {
-            val paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(methodSignature, 0)
+            konst paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(methodSignature, 0)
             return findClassAndLoadMemberAnnotations(container, paramSignature)
         }
 
@@ -228,7 +228,7 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
                 MemberSignature.fromJvmMemberSignature(JvmProtoBufUtil.getJvmMethodSignature(proto, nameResolver, typeTable) ?: return null)
             }
             is ProtoBuf.Property -> {
-                val signature = proto.getExtensionOrNull(propertySignature) ?: return null
+                konst signature = proto.getExtensionOrNull(propertySignature) ?: return null
                 when (kind) {
                     AnnotatedCallableKind.PROPERTY_GETTER ->
                         if (signature.hasGetter()) MemberSignature.fromMethod(nameResolver, signature.getter) else null
@@ -248,12 +248,12 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
             classId.shortClassName.asString() != JvmAbi.REPEATABLE_ANNOTATION_CONTAINER_NAME
         ) return false
 
-        val klass = kotlinClassFinder.findKotlinClass(classId, jvmMetadataVersion)
+        konst klass = kotlinClassFinder.findKotlinClass(classId, jvmMetadataVersion)
         return klass != null && SpecialJvmAnnotations.isAnnotatedWithContainerMetaAnnotation(klass)
     }
 
     abstract class AnnotationsContainer<out A> {
-        abstract val memberAnnotations: Map<MemberSignature, List<A>>
+        abstract konst memberAnnotations: Map<MemberSignature, List<A>>
     }
 
     companion object {
@@ -276,7 +276,7 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
                 }
                 if (isConst && container is ProtoContainer.Package) {
                     // Const properties in multifile classes are generated into the facade class
-                    val facadeClassName = (container.source as? JvmPackagePartSource)?.facadeClassName
+                    konst facadeClassName = (container.source as? JvmPackagePartSource)?.facadeClassName
                     if (facadeClassName != null) {
                         // Converting '/' to '.' is fine here because the facade class has a top level ClassId
                         return kotlinClassFinder.findKotlinClass(
@@ -287,7 +287,7 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
                 }
             }
             if (field && container is ProtoContainer.Class && container.kind == ProtoBuf.Class.Kind.COMPANION_OBJECT) {
-                val outerClass = container.outerClass
+                konst outerClass = container.outerClass
                 if (outerClass != null &&
                     (outerClass.kind == ProtoBuf.Class.Kind.CLASS || outerClass.kind == ProtoBuf.Class.Kind.ENUM_CLASS ||
                             (isMovedFromInterfaceCompanion &&
@@ -299,7 +299,7 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
                 }
             }
             if (container is ProtoContainer.Package && container.source is JvmPackagePartSource) {
-                val jvmPackagePartSource = container.source as JvmPackagePartSource
+                konst jvmPackagePartSource = container.source as JvmPackagePartSource
 
                 return jvmPackagePartSource.knownJvmBinaryClass
                     ?: kotlinClassFinder.findKotlinClass(jvmPackagePartSource.classId, jvmMetadataVersion)
@@ -310,9 +310,9 @@ abstract class AbstractBinaryClassAnnotationLoader<A : Any, S : AbstractBinaryCl
 }
 
 class AnnotationsContainerWithConstants<out A, out C>(
-    override val memberAnnotations: Map<MemberSignature, List<A>>,
-    val propertyConstants: Map<MemberSignature, C>,
-    val annotationParametersDefaultValues: Map<MemberSignature, C>
+    override konst memberAnnotations: Map<MemberSignature, List<A>>,
+    konst propertyConstants: Map<MemberSignature, C>,
+    konst annotationParametersDefaultValues: Map<MemberSignature, C>
 ) : AbstractBinaryClassAnnotationLoader.AnnotationsContainer<A>()
 
 fun getPropertySignature(
@@ -323,10 +323,10 @@ fun getPropertySignature(
     synthetic: Boolean = false,
     requireHasFieldFlagForField: Boolean = true
 ): MemberSignature? {
-    val signature = proto.getExtensionOrNull(propertySignature) ?: return null
+    konst signature = proto.getExtensionOrNull(propertySignature) ?: return null
 
     if (field) {
-        val fieldSignature =
+        konst fieldSignature =
             JvmProtoBufUtil.getJvmFieldSignature(proto, nameResolver, typeTable, requireHasFieldFlagForField) ?: return null
         return MemberSignature.fromJvmMemberSignature(fieldSignature)
     } else if (synthetic && signature.hasSyntheticMethod()) {

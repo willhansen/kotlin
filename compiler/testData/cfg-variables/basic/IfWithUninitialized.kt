@@ -1,5 +1,5 @@
 fun foo() {
-    val b: Boolean
+    konst b: Boolean
     if (1 < 2) {
         use(b)
     }

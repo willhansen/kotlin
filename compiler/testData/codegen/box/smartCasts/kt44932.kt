@@ -2,22 +2,22 @@
 // WITH_STDLIB
 
 abstract class PsiElement {
-    abstract val parent: PsiElement
+    abstract konst parent: PsiElement
 }
 
-class KtNameReferenceExpression(override val parent: PsiElement) : PsiElement()
+class KtNameReferenceExpression(override konst parent: PsiElement) : PsiElement()
 
-class OtherElement(override val parent: PsiElement) : PsiElement()
+class OtherElement(override konst parent: PsiElement) : PsiElement()
 
 class KtDotQualifiedExpression : PsiElement() {
-    override val parent: PsiElement
+    override konst parent: PsiElement
         get() = this
 
-    val psi: PsiElement = EndElement()
+    konst psi: PsiElement = EndElement()
 }
 
 class EndElement : PsiElement() {
-    override val parent: PsiElement
+    override konst parent: PsiElement
         get() = this
 }
 
@@ -35,6 +35,6 @@ fun mark(element: PsiElement): String {
 }
 
 fun box(): String {
-    val element = KtNameReferenceExpression(OtherElement(KtDotQualifiedExpression()))
+    konst element = KtNameReferenceExpression(OtherElement(KtDotQualifiedExpression()))
     return mark(element)
 }

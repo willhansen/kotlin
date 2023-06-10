@@ -30,13 +30,13 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedMemberDescriptor
 
 class IrExternalPackageFragmentImpl(
-    override val symbol: IrExternalPackageFragmentSymbol,
+    override konst symbol: IrExternalPackageFragmentSymbol,
     override var packageFqName: FqName
 ) : IrExternalPackageFragment() {
-    override val startOffset: Int
+    override konst startOffset: Int
         get() = UNDEFINED_OFFSET
 
-    override val endOffset: Int
+    override konst endOffset: Int
         get() = UNDEFINED_OFFSET
 
     init {
@@ -44,13 +44,13 @@ class IrExternalPackageFragmentImpl(
     }
 
     @ObsoleteDescriptorBasedAPI
-    override val packageFragmentDescriptor: PackageFragmentDescriptor
+    override konst packageFragmentDescriptor: PackageFragmentDescriptor
         get() = symbol.descriptor
 
-    override val declarations: MutableList<IrDeclaration> = ArrayList()
+    override konst declarations: MutableList<IrDeclaration> = ArrayList()
 
     @OptIn(ObsoleteDescriptorBasedAPI::class)
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = (symbol.descriptor as? DeserializedMemberDescriptor)?.containerSource
 
     companion object {

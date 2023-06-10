@@ -2,7 +2,7 @@ package
 
 public final class Val : Var, VarT {
     public constructor Val()
-    public open override /*2*/ val v: kotlin.Int = 1
+    public open override /*2*/ konst v: kotlin.Int = 1
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String

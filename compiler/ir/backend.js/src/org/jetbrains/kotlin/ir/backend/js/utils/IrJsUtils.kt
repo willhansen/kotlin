@@ -49,7 +49,7 @@ fun IrDeclaration?.isExportedInterface(context: JsIrBackendContext) =
     this is IrClass && kind.isInterface && isExported(context)
 
 fun IrReturn.isTheLastReturnStatementIn(target: IrReturnableBlockSymbol): Boolean {
-    val ownerFirstStatement = target.owner.statements.singleOrNull()
+    konst ownerFirstStatement = target.owner.statements.singleOrNull()
     if (ownerFirstStatement is IrInlinedFunctionBlock) {
         return ownerFirstStatement.statements.lastOrNull() === this
     }
@@ -57,8 +57,8 @@ fun IrReturn.isTheLastReturnStatementIn(target: IrReturnableBlockSymbol): Boolea
 }
 
 fun IrDeclarationWithName.getFqNameWithJsNameWhenAvailable(shouldIncludePackage: Boolean): FqName {
-    val name = getJsNameOrKotlinName()
-    return when (val parent = parent) {
+    konst name = getJsNameOrKotlinName()
+    return when (konst parent = parent) {
         is IrDeclarationWithName -> parent.getFqNameWithJsNameWhenAvailable(shouldIncludePackage).child(name)
         is IrPackageFragment -> getKotlinOrJsQualifier(parent, shouldIncludePackage)?.child(name) ?: FqName(name.identifier)
         else -> FqName(name.identifier)
@@ -66,7 +66,7 @@ fun IrDeclarationWithName.getFqNameWithJsNameWhenAvailable(shouldIncludePackage:
 }
 
 fun IrConstructor.hasStrictSignature(context: JsIrBackendContext): Boolean {
-    val primitives = with(context.irBuiltIns) { primitiveTypesToPrimitiveArrays.values + stringClass }
+    konst primitives = with(context.irBuiltIns) { primitiveTypesToPrimitiveArrays.konstues + stringClass }
     return with(parentAsClass) {
         isExternal || isExpect || isAnnotationClass || context.inlineClassesUtils.isClassInlineLike(this) || symbol in primitives
     }
@@ -76,16 +76,16 @@ private fun getKotlinOrJsQualifier(parent: IrPackageFragment, shouldIncludePacka
     return (parent as? IrFile)?.getJsQualifier()?.let { FqName(it) } ?: parent.packageFqName.takeIf { shouldIncludePackage }
 }
 
-val IrFunctionAccessExpression.typeArguments: List<IrType?>
+konst IrFunctionAccessExpression.typeArguments: List<IrType?>
     get() = List(typeArgumentsCount) { getTypeArgument(it) }
 
-val IrFunctionAccessExpression.valueArguments: List<IrExpression?>
-    get() = List(valueArgumentsCount) { getValueArgument(it) }
+konst IrFunctionAccessExpression.konstueArguments: List<IrExpression?>
+    get() = List(konstueArgumentsCount) { getValueArgument(it) }
 
-val IrClass.isInstantiableEnum: Boolean
+konst IrClass.isInstantiableEnum: Boolean
     get() = isEnumClass && !isExpect && !isEffectivelyExternal()
 
-val IrDeclaration.parentEnumClassOrNull: IrClass?
+konst IrDeclaration.parentEnumClassOrNull: IrClass?
     get() = parents.filterIsInstance<IrClass>().firstOrNull { it.isInstantiableEnum }
 
 fun IrFunctionSymbol.isUnitInstanceFunction(context: JsIrBackendContext): Boolean {

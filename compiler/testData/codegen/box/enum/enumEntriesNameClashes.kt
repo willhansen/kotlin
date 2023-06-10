@@ -4,15 +4,15 @@
 // WITH_STDLIB
 
 enum class EnumWithClash {
-    values,
+    konstues,
     entries,
-    valueOf;
+    konstueOf;
 }
 
 @OptIn(ExperimentalStdlibApi::class)
 fun box(): String {
-    val ref = EnumWithClash::entries
-    if (ref().toString() != "[values, entries, valueOf]") return "FAIL 1"
+    konst ref = EnumWithClash::entries
+    if (ref().toString() != "[konstues, entries, konstueOf]") return "FAIL 1"
     if (EnumWithClash.entries.toString() != "entries") return "FAIL 2"
     return "OK"
 }

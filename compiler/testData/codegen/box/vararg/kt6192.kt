@@ -33,20 +33,20 @@ fun concatParameters(vararg args: Int): String {
 
 fun box(): String {
 
-    val aB = ByteArray(3)
-    val aC = CharArray(3)
-    val aD = DoubleArray(3)
-    val aF = FloatArray(3)
-    val aI = IntArray(3)
+    konst aB = ByteArray(3)
+    konst aC = CharArray(3)
+    konst aD = DoubleArray(3)
+    konst aF = FloatArray(3)
+    konst aI = IntArray(3)
     aI[0] = 1
     aI[1] = 2
     aI[2] = 3
-    val bI = IntArray(2)
+    konst bI = IntArray(2)
     bI[0] = 4
     bI[1] = 5
-    val aJ = LongArray(3)
-    val aS = ShortArray(3)
-    val aZ = BooleanArray(3)
+    konst aJ = LongArray(3)
+    konst aS = ShortArray(3)
+    konst aZ = BooleanArray(3)
 
 
     if (barB(*aB, 23.toByte()).size != 4) return "fail: Byte"

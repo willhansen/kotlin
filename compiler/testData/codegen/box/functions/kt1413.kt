@@ -6,7 +6,7 @@ interface I{
 
 class Test{
     fun foo(){
-        val i : I = object : I {
+        konst i : I = object : I {
             override fun f() {
                 fun local(){
                     bar()

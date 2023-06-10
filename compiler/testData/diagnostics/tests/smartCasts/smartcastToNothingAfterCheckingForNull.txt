@@ -7,7 +7,7 @@ public fun g(/*0*/ x: B<kotlin.Int>): kotlin.Unit
 public fun g(/*0*/ i: kotlin.Int): kotlin.Unit
 
 public interface A</*0*/ T> {
-    public abstract val content: T
+    public abstract konst content: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -15,7 +15,7 @@ public interface A</*0*/ T> {
 
 public abstract class B</*0*/ T : kotlin.Any!> : A<T!> {
     public constructor B</*0*/ T : kotlin.Any!>()
-    public abstract override /*1*/ /*fake_override*/ val content: T!
+    public abstract override /*1*/ /*fake_override*/ konst content: T!
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

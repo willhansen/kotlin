@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.ir.linkage.partial.PartialLinkageUtils.File as PLFil
  * Additionally materialize continuation for `getContinuation` intrinsic calls.
  */
 abstract class AbstractAddContinuationToFunctionCallsLowering : BodyLoweringPass {
-    protected abstract val context: CommonBackendContext
+    protected abstract konst context: CommonBackendContext
 
     protected abstract fun IrSimpleFunction.isContinuationItself(): Boolean
 
@@ -34,14 +34,14 @@ abstract class AbstractAddContinuationToFunctionCallsLowering : BodyLoweringPass
     }
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val continuation: IrValueParameter? by lazy {
+        konst continuation: IrValueParameter? by lazy {
             (container as IrSimpleFunction).getContinuationParameter()
         }
 
-        val builder by lazy { context.createIrBuilder(container.symbol) }
+        konst builder by lazy { context.createIrBuilder(container.symbol) }
         fun getContinuation(): IrGetValue? = continuation?.let(builder::irGet)
 
-        val plFile: PLFile by lazy { PLFile.determineFileFor(container) }
+        konst plFile: PLFile by lazy { PLFile.determineFileFor(container) }
 
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitBody(body: IrBody): IrBody {
@@ -58,8 +58,8 @@ abstract class AbstractAddContinuationToFunctionCallsLowering : BodyLoweringPass
                     return expression
                 }
 
-                val oldFun = expression.symbol.owner
-                val newFun: IrSimpleFunction = oldFun.getOrCreateFunctionWithContinuationStub(context)
+                konst oldFun = expression.symbol.owner
+                konst newFun: IrSimpleFunction = oldFun.getOrCreateFunctionWithContinuationStub(context)
 
                 return irCall(
                     expression,
@@ -67,7 +67,7 @@ abstract class AbstractAddContinuationToFunctionCallsLowering : BodyLoweringPass
                     newReturnType = newFun.returnType,
                     newSuperQualifierSymbol = expression.superQualifierSymbol
                 ).also {
-                    it.putValueArgument(it.valueArgumentsCount - 1, getContinuation() ?: return expression.throwLinkageError(plFile))
+                    it.putValueArgument(it.konstueArgumentsCount - 1, getContinuation() ?: return expression.throwLinkageError(plFile))
                 }
             }
         })
@@ -78,7 +78,7 @@ abstract class AbstractAddContinuationToFunctionCallsLowering : BodyLoweringPass
         if (isContinuationItself())
             return dispatchReceiverParameter!!
         else {
-            val isLoweredSuspendFunction = origin == IrDeclarationOrigin.LOWERED_SUSPEND_FUNCTION
+            konst isLoweredSuspendFunction = origin == IrDeclarationOrigin.LOWERED_SUSPEND_FUNCTION
             if (!isLoweredSuspendFunction) {
                 return if (context.partialLinkageSupport.isEnabled)
                     null
@@ -86,7 +86,7 @@ abstract class AbstractAddContinuationToFunctionCallsLowering : BodyLoweringPass
                     throw IllegalArgumentException("Continuation parameter only exists in lowered suspend functions, but function origin is $origin")
             }
 
-            val continuation = valueParameters.lastOrNull()
+            konst continuation = konstueParameters.lastOrNull()
             require(continuation != null && continuation.origin == IrDeclarationOrigin.CONTINUATION) {
                 "Continuation parameter is expected to be the last one"
             }

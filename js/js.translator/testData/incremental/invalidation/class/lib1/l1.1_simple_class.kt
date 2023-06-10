@@ -1,2 +1,2 @@
-class Demo(val x: Int) {
+class Demo(konst x: Int) {
 }

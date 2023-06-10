@@ -11,7 +11,7 @@ package a
 annotation class A
 
 @A
-const val OK: String = "OK"
+const konst OK: String = "OK"
 
 // MODULE: main(lib)
 // FILE: B.kt
@@ -19,9 +19,9 @@ const val OK: String = "OK"
 import a.OK
 
 fun box(): String {
-    val okRef = ::OK
+    konst okRef = ::OK
 
-    val annotations = okRef.annotations
+    konst annotations = okRef.annotations
     if (annotations.size != 1) {
         throw AssertionError("Failed, annotations: $annotations")
     }

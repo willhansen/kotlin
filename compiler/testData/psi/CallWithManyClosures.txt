@@ -4,7 +4,7 @@ KtFile: CallWithManyClosures.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -42,7 +42,7 @@ KtFile: CallWithManyClosures.kt
             PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -77,7 +77,7 @@ KtFile: CallWithManyClosures.kt
             PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -96,7 +96,7 @@ KtFile: CallWithManyClosures.kt
             PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -118,7 +118,7 @@ KtFile: CallWithManyClosures.kt
             PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -156,7 +156,7 @@ KtFile: CallWithManyClosures.kt
             PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -197,7 +197,7 @@ KtFile: CallWithManyClosures.kt
             PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')

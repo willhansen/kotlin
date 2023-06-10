@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Int /* by */
+konst test1: Int /* by */
   field
     // CHECK JVM_IR:
     //   Mangled name (compatible mode: false): {}test1#<anonymous>#static(){}kotlin.Int

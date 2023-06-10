@@ -75,7 +75,7 @@ public class K2JSCompilerMojo extends KotlinCompileMojoBase<K2JSCompilerArgument
     private String sourceMapEmbedSources;
 
     /**
-     * Main invocation behaviour. Possible values are <b>call</b> and <b>noCall</b>.
+     * Main invocation behaviour. Possible konstues are <b>call</b> and <b>noCall</b>.
      */
     @Parameter
     private String main;
@@ -169,7 +169,7 @@ public class K2JSCompilerMojo extends KotlinCompileMojoBase<K2JSCompilerArgument
             }
         }
 
-        for (List<String> paths : getOutputDirectoriesCollector().values()) {
+        for (List<String> paths : getOutputDirectoriesCollector().konstues()) {
             for (String path : paths) {
                 File file = new File(path);
 

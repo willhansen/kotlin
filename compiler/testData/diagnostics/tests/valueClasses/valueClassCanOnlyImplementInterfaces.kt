@@ -14,10 +14,10 @@ open class OpenBaseClass
 interface BaseInterface
 
 @JvmInline
-value class TestExtendsAbstractClass(val x: Int) : <!VALUE_CLASS_CANNOT_EXTEND_CLASSES!>AbstractBaseClass<!>()
+konstue class TestExtendsAbstractClass(konst x: Int) : <!VALUE_CLASS_CANNOT_EXTEND_CLASSES!>AbstractBaseClass<!>()
 
 @JvmInline
-value class TestExtendsOpenClass(val x: Int) : <!VALUE_CLASS_CANNOT_EXTEND_CLASSES!>OpenBaseClass<!>()
+konstue class TestExtendsOpenClass(konst x: Int) : <!VALUE_CLASS_CANNOT_EXTEND_CLASSES!>OpenBaseClass<!>()
 
 @JvmInline
-value class TestImplementsInterface(val x: Int) : BaseInterface
+konstue class TestImplementsInterface(konst x: Int) : BaseInterface

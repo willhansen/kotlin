@@ -1,9 +1,9 @@
 // !LANGUAGE: +VariableDeclarationInWhenSubject
 
-val x = 1
+konst x = 1
 
 fun box() =
-    when (val y = x) {
+    when (konst y = x) {
         1 -> "OK"
         else -> "Fail: $y"
     }

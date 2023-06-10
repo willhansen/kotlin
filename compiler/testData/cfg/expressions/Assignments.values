@@ -12,10 +12,10 @@ fun assignments() : Unit {
 
     x = if (true) 1 else 2
 
-    val y = true && false
-    val z = false && true
+    konst y = true && false
+    konst z = false && true
 
-    val t = Test();
+    konst t = Test();
     t.x = 1
     t.x += 1
 }
@@ -43,5 +43,5 @@ x                                                                               
 t.x                                                                                                                              <v19>: Int       COPY                                                
 1                                                                                                                                <v20>: Int       NEW: r(1) -> <v20>                                  
 t.x += 1                                                                                                                         <v21>: Int       NEW: call(t.x += 1, plus|<v19>, <v20>) -> <v21>     
-{ var x = 1 x = 2 x += 2 x = if (true) 1 else 2 val y = true && false val z = false && true val t = Test(); t.x = 1 t.x += 1 }   <v21>: Int       COPY                                                
+{ var x = 1 x = 2 x += 2 x = if (true) 1 else 2 konst y = true && false konst z = false && true konst t = Test(); t.x = 1 t.x += 1 }   <v21>: Int       COPY                                                
 =====================

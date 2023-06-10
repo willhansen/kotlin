@@ -18,7 +18,7 @@ public interface KtJavaFieldSymbolRenderer {
     public object AS_SOURCE : KtJavaFieldSymbolRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderSymbol(symbol: KtJavaFieldSymbol, printer: PrettyPrinter): Unit = printer {
-            val mutabilityKeyword = if (symbol.isVal) KtTokens.VAL_KEYWORD else KtTokens.VAR_KEYWORD
+            konst mutabilityKeyword = if (symbol.isVal) KtTokens.VAL_KEYWORD else KtTokens.VAR_KEYWORD
             callableSignatureRenderer.renderCallableSignature(symbol, mutabilityKeyword, printer)
             variableInitializerRenderer.renderInitializer(symbol, printer)
         }

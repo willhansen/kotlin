@@ -23,8 +23,8 @@ enum JavaEnum {
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val z = JavaEnum.Val_3
-    val when1 = when (z) {
+    konst z = JavaEnum.Val_3
+    konst when1 = when (z) {
         JavaEnum.Val_1 -> { false }
         <!ELSE_MISPLACED_IN_WHEN!>else<!> -> {true}
         <!UNREACHABLE_CODE!>JavaEnum.Val_2 -> { false }<!>
@@ -34,8 +34,8 @@ fun case1() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val z = JavaEnum.Val_3
-    val when1 = when (z) {
+    konst z = JavaEnum.Val_3
+    konst when1 = when (z) {
         <!ELSE_MISPLACED_IN_WHEN!>else<!> -> {true}
         <!UNREACHABLE_CODE!>JavaEnum.Val_1 -> { false }<!>
         <!UNREACHABLE_CODE!>JavaEnum.Val_2 -> { false }<!>
@@ -43,8 +43,8 @@ fun case2() {
 }// TESTCASE NUMBER: 3
 
 fun case3() {
-    val z = JavaEnum.Val_3
-    val when1 = when (z) {
+    konst z = JavaEnum.Val_3
+    konst when1 = when (z) {
         <!ELSE_MISPLACED_IN_WHEN!>else<!> -> {true}
         <!UNREACHABLE_CODE!>JavaEnum.Val_1 -> { false }<!>
         <!UNREACHABLE_CODE!>JavaEnum.Val_2 -> { false }<!>

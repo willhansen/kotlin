@@ -1,5 +1,5 @@
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Anno(vararg val x: String, val y: String)
+annotation class Anno(vararg konst x: String, konst y: String)
 
 @Anno(x = [["a", "b"], ["a", "b"]], y = "a")
 fun foo1() {}
@@ -14,10 +14,10 @@ fun foo3() {}
 fun foo4() {}
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Anno1(val x: Array<in String>, val y: String)
+annotation class Anno1(konst x: Array<in String>, konst y: String)
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Anno2(vararg val x: String, val y: String)
+annotation class Anno2(vararg konst x: String, konst y: String)
 
 @Anno1(x = ["", Anno2(x = [""], y = "")], y = "")
 fun foo5() {}

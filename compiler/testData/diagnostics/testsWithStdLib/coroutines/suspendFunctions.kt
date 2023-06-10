@@ -6,7 +6,7 @@ class Controller {
     suspend fun noParams() {
 
     }
-    suspend fun yieldString(value: String) {}
+    suspend fun yieldString(konstue: String) {}
 
     suspend fun <V> await(f: () -> V): V = f()
 

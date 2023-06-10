@@ -214,16 +214,16 @@ static void injectToRuntime();
 
 extern "C" {
 
-OBJ_GETTER(Kotlin_boxByte, KByte value);
-OBJ_GETTER(Kotlin_boxShort, KShort value);
-OBJ_GETTER(Kotlin_boxInt, KInt value);
-OBJ_GETTER(Kotlin_boxLong, KLong value);
-OBJ_GETTER(Kotlin_boxUByte, KUByte value);
-OBJ_GETTER(Kotlin_boxUShort, KUShort value);
-OBJ_GETTER(Kotlin_boxUInt, KUInt value);
-OBJ_GETTER(Kotlin_boxULong, KULong value);
-OBJ_GETTER(Kotlin_boxFloat, KFloat value);
-OBJ_GETTER(Kotlin_boxDouble, KDouble value);
+OBJ_GETTER(Kotlin_boxByte, KByte konstue);
+OBJ_GETTER(Kotlin_boxShort, KShort konstue);
+OBJ_GETTER(Kotlin_boxInt, KInt konstue);
+OBJ_GETTER(Kotlin_boxLong, KLong konstue);
+OBJ_GETTER(Kotlin_boxUByte, KUByte konstue);
+OBJ_GETTER(Kotlin_boxUShort, KUShort konstue);
+OBJ_GETTER(Kotlin_boxUInt, KUInt konstue);
+OBJ_GETTER(Kotlin_boxULong, KULong konstue);
+OBJ_GETTER(Kotlin_boxFloat, KFloat konstue);
+OBJ_GETTER(Kotlin_boxDouble, KDouble konstue);
 
 }
 

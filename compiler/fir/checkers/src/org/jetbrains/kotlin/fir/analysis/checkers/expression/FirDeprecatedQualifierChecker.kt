@@ -17,7 +17,7 @@ object FirDeprecatedQualifierChecker : FirResolvedQualifierChecker() {
             FirDeprecationChecker.reportApiStatus(diagnostic.source, diagnostic.symbol, null, diagnostic.deprecationInfo, reporter, context)
         }
         if (expression.resolvedToCompanionObject) {
-            val companionSymbol = (expression.symbol as? FirRegularClassSymbol)?.companionObjectSymbol ?: return
+            konst companionSymbol = (expression.symbol as? FirRegularClassSymbol)?.companionObjectSymbol ?: return
             FirDeprecationChecker.reportApiStatusIfNeeded(expression.source, companionSymbol, context, reporter)
         }
     }

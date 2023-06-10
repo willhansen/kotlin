@@ -15,13 +15,13 @@ import kotlin.reflect.KClass
 
 abstract class FirStatusTransformerExtension(session: FirSession) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("StatusTransformer")
+        konst NAME = FirExtensionPointName("StatusTransformer")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension> = FirStatusTransformerExtension::class
+    final override konst extensionType: KClass<out FirExtension> = FirStatusTransformerExtension::class
 
     abstract fun needTransformStatus(declaration: FirDeclaration): Boolean
 
@@ -117,7 +117,7 @@ abstract class FirStatusTransformerExtension(session: FirSession) : FirExtension
     fun interface Factory : FirExtension.Factory<FirStatusTransformerExtension>
 }
 
-val FirExtensionService.statusTransformerExtensions: List<FirStatusTransformerExtension> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.statusTransformerExtensions: List<FirStatusTransformerExtension> by FirExtensionService.registeredExtensions()
 
 inline fun FirDeclarationStatus.transform(
     visibility: Visibility = this.visibility,

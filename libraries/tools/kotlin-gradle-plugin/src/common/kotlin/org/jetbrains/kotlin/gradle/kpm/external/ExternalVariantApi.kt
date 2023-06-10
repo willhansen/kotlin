@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.*
 annotation class ExternalVariantApi
 
 @ExternalVariantApi
-val KotlinTopLevelExtension.project: Project
+konst KotlinTopLevelExtension.project: Project
     get() = this.project
 
 @ExternalVariantApi
-val KotlinPm20ProjectExtension.ideaKpmProjectModelBuilder: IdeaKpmProjectModelBuilder
+konst KotlinPm20ProjectExtension.ideaKpmProjectModelBuilder: IdeaKpmProjectModelBuilder
     get() = this.ideaKpmProjectModelBuilder
 
 @ExternalVariantApi
@@ -26,11 +26,11 @@ fun GradleKpmModule.createExternalJvmVariant(
     name: String,
     config: GradleKpmJvmVariantConfig
 ): GradleKpmJvmVariant {
-    val variant = GradleKpmJvmVariantFactory(this, config).create(name)
+    konst variant = GradleKpmJvmVariantFactory(this, config).create(name)
     fragments.add(variant)
     return variant
 }
 
 @ExternalVariantApi
-val GradleKpmVariantInternal.compilationData
+konst GradleKpmVariantInternal.compilationData
     get() = this.compilationData

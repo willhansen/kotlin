@@ -23,18 +23,18 @@ import java.util.function.Predicate;
 
 public class DescriptorValidator {
 
-    public static void validate(@NotNull ValidationVisitor validationStrategy, DeclarationDescriptor descriptor) {
+    public static void konstidate(@NotNull ValidationVisitor konstidationStrategy, DeclarationDescriptor descriptor) {
         DiagnosticCollectorForTests collector = new DiagnosticCollectorForTests();
-        validate(validationStrategy, descriptor, collector);
+        konstidate(konstidationStrategy, descriptor, collector);
         collector.done();
     }
 
-    public static void validate(
-            @NotNull ValidationVisitor validator,
+    public static void konstidate(
+            @NotNull ValidationVisitor konstidator,
             @NotNull DeclarationDescriptor descriptor,
             @NotNull DiagnosticCollector collector
     ) {
-        RecursiveDescriptorProcessor.process(descriptor, collector, validator);
+        RecursiveDescriptorProcessor.process(descriptor, collector, konstidator);
     }
 
     private static void report(@NotNull DiagnosticCollector collector, @NotNull DeclarationDescriptor descriptor, @NotNull String message) {
@@ -72,7 +72,7 @@ public class DescriptorValidator {
             return this;
         }
 
-        protected void validateScope(DeclarationDescriptor scopeOwner, @NotNull MemberScope scope, @NotNull DiagnosticCollector collector) {
+        protected void konstidateScope(DeclarationDescriptor scopeOwner, @NotNull MemberScope scope, @NotNull DiagnosticCollector collector) {
             for (DeclarationDescriptor descriptor : DescriptorUtils.getAllDescriptors(scope)) {
                 if (recursiveFilter.test(descriptor)) {
                     descriptor.accept(new ScopeValidatorVisitor(collector), scope);
@@ -80,7 +80,7 @@ public class DescriptorValidator {
             }
         }
 
-        private void validateType(
+        private void konstidateType(
                 @NotNull DeclarationDescriptor descriptor,
                 @Nullable KotlinType type,
                 @NotNull DiagnosticCollector collector
@@ -95,14 +95,14 @@ public class DescriptorValidator {
                 return;
             }
 
-            validateScope(descriptor, type.getMemberScope(), collector);
+            konstidateScope(descriptor, type.getMemberScope(), collector);
         }
 
-        private void validateReturnType(CallableDescriptor descriptor, DiagnosticCollector collector) {
-            validateType(descriptor, descriptor.getReturnType(), collector);
+        private void konstidateReturnType(CallableDescriptor descriptor, DiagnosticCollector collector) {
+            konstidateType(descriptor, descriptor.getReturnType(), collector);
         }
 
-        private static void validateTypeParameters(DiagnosticCollector collector, List<TypeParameterDescriptor> parameters) {
+        private static void konstidateTypeParameters(DiagnosticCollector collector, List<TypeParameterDescriptor> parameters) {
             for (int i = 0; i < parameters.size(); i++) {
                 TypeParameterDescriptor typeParameterDescriptor = parameters.get(i);
                 if (typeParameterDescriptor.getIndex() != i) {
@@ -111,29 +111,29 @@ public class DescriptorValidator {
             }
         }
 
-        private static void validateValueParameters(DiagnosticCollector collector, List<ValueParameterDescriptor> parameters) {
+        private static void konstidateValueParameters(DiagnosticCollector collector, List<ValueParameterDescriptor> parameters) {
             for (int i = 0; i < parameters.size(); i++) {
-                ValueParameterDescriptor valueParameterDescriptor = parameters.get(i);
-                if (valueParameterDescriptor.getIndex() != i) {
-                    report(collector, valueParameterDescriptor, "Incorrect index: " + valueParameterDescriptor.getIndex() + " but must be " + i);
+                ValueParameterDescriptor konstueParameterDescriptor = parameters.get(i);
+                if (konstueParameterDescriptor.getIndex() != i) {
+                    report(collector, konstueParameterDescriptor, "Incorrect index: " + konstueParameterDescriptor.getIndex() + " but must be " + i);
                 }
             }
         }
 
-        private void validateTypes(
+        private void konstidateTypes(
                 DeclarationDescriptor descriptor,
                 DiagnosticCollector collector,
                 Collection<KotlinType> types
         ) {
             for (KotlinType type : types) {
-                validateType(descriptor, type, collector);
+                konstidateType(descriptor, type, collector);
             }
         }
 
-        private void validateCallable(CallableDescriptor descriptor, DiagnosticCollector collector) {
-            validateReturnType(descriptor, collector);
-            validateTypeParameters(collector, descriptor.getTypeParameters());
-            validateValueParameters(collector, descriptor.getValueParameters());
+        private void konstidateCallable(CallableDescriptor descriptor, DiagnosticCollector collector) {
+            konstidateReturnType(descriptor, collector);
+            konstidateTypeParameters(collector, descriptor.getTypeParameters());
+            konstidateValueParameters(collector, descriptor.getValueParameters());
         }
 
         private static <T> void assertEquals(
@@ -163,7 +163,7 @@ public class DescriptorValidator {
             }
         }
 
-        private static void validateAccessor(
+        private static void konstidateAccessor(
                 PropertyDescriptor descriptor,
                 DiagnosticCollector collector,
                 PropertyAccessorDescriptor accessor,
@@ -179,7 +179,7 @@ public class DescriptorValidator {
         public Boolean visitPackageFragmentDescriptor(
                 PackageFragmentDescriptor descriptor, DiagnosticCollector collector
         ) {
-            validateScope(descriptor, descriptor.getMemberScope(), collector);
+            konstidateScope(descriptor, descriptor.getMemberScope(), collector);
             return true;
         }
 
@@ -187,7 +187,7 @@ public class DescriptorValidator {
         public Boolean visitPackageViewDescriptor(PackageViewDescriptor descriptor, DiagnosticCollector collector) {
             if (!recursiveFilter.test(descriptor)) return false;
 
-            validateScope(descriptor, descriptor.getMemberScope(), collector);
+            konstidateScope(descriptor, descriptor.getMemberScope(), collector);
             return true;
         }
 
@@ -195,7 +195,7 @@ public class DescriptorValidator {
         public Boolean visitVariableDescriptor(
                 VariableDescriptor descriptor, DiagnosticCollector collector
         ) {
-            validateReturnType(descriptor, collector);
+            konstidateReturnType(descriptor, collector);
             return true;
         }
 
@@ -203,7 +203,7 @@ public class DescriptorValidator {
         public Boolean visitFunctionDescriptor(
                 FunctionDescriptor descriptor, DiagnosticCollector collector
         ) {
-            validateCallable(descriptor, collector);
+            konstidateCallable(descriptor, collector);
             return true;
         }
 
@@ -211,9 +211,9 @@ public class DescriptorValidator {
         public Boolean visitTypeParameterDescriptor(
                 TypeParameterDescriptor descriptor, DiagnosticCollector collector
         ) {
-            validateTypes(descriptor, collector, descriptor.getUpperBounds());
+            konstidateTypes(descriptor, collector, descriptor.getUpperBounds());
 
-            validateType(descriptor, descriptor.getDefaultType(), collector);
+            konstidateType(descriptor, descriptor.getDefaultType(), collector);
 
             return true;
         }
@@ -222,18 +222,18 @@ public class DescriptorValidator {
         public Boolean visitClassDescriptor(
                 ClassDescriptor descriptor, DiagnosticCollector collector
         ) {
-            validateTypeParameters(collector, descriptor.getDeclaredTypeParameters());
+            konstidateTypeParameters(collector, descriptor.getDeclaredTypeParameters());
 
             Collection<KotlinType> supertypes = descriptor.getTypeConstructor().getSupertypes();
             if (supertypes.isEmpty() && descriptor.getKind() != ClassKind.INTERFACE
                 && !KotlinBuiltIns.isSpecialClassWithNoSupertypes(descriptor)) {
                 report(collector, descriptor, "No supertypes for non-trait");
             }
-            validateTypes(descriptor, collector, supertypes);
+            konstidateTypes(descriptor, collector, supertypes);
 
-            validateType(descriptor, descriptor.getDefaultType(), collector);
+            konstidateType(descriptor, descriptor.getDefaultType(), collector);
 
-            validateScope(descriptor, descriptor.getUnsubstitutedInnerClassesScope(), collector);
+            konstidateScope(descriptor, descriptor.getUnsubstitutedInnerClassesScope(), collector);
 
             List<ConstructorDescriptor> primary = Lists.newArrayList();
             for (ConstructorDescriptor constructorDescriptor : descriptor.getConstructors()) {
@@ -301,12 +301,12 @@ public class DescriptorValidator {
         public Boolean visitPropertyDescriptor(
                 PropertyDescriptor descriptor, DiagnosticCollector collector
         ) {
-            validateCallable(descriptor, collector);
+            konstidateCallable(descriptor, collector);
 
             PropertyGetterDescriptor getter = descriptor.getGetter();
             if (getter != null) {
                 assertEqualTypes(getter, collector, "getter return type", descriptor.getType(), getter.getReturnType());
-                validateAccessor(descriptor, collector, getter, "getter");
+                konstidateAccessor(descriptor, collector, getter, "getter");
             }
 
             PropertySetterDescriptor setter = descriptor.getSetter();
@@ -344,7 +344,7 @@ public class DescriptorValidator {
         public Boolean visitReceiverParameterDescriptor(
                 ReceiverParameterDescriptor descriptor, DiagnosticCollector collector
         ) {
-            validateType(descriptor, descriptor.getType(), collector);
+            konstidateType(descriptor, descriptor.getType(), collector);
 
             return true;
         }
@@ -551,7 +551,7 @@ public class DescriptorValidator {
 
         public void done() {
             if (errorsFound) {
-                throw new AssertionError("Descriptor validation failed (see messages above)");
+                throw new AssertionError("Descriptor konstidation failed (see messages above)");
             }
         }
     }

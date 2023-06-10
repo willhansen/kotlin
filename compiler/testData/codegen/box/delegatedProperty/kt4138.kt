@@ -6,16 +6,16 @@ class Delegate<T>(var inner: T) {
 }
 
 
-class Foo (val f: Int) {
+class Foo (konst f: Int) {
     companion object {
-        val A: Foo by Delegate(Foo(11))
+        konst A: Foo by Delegate(Foo(11))
         var B: Foo by Delegate(Foo(11))
     }
 }
 
 interface FooTrait {
     companion object {
-        val A: Foo by Delegate(Foo(11))
+        konst A: Foo by Delegate(Foo(11))
         var B: Foo by Delegate(Foo(11))
     }
 }

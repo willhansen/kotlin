@@ -1,6 +1,6 @@
-annotation class Annotation(vararg val strings: String)
+annotation class Annotation(vararg konst strings: String)
 
-annotation class AnnotationInner(val value: Annotation)
+annotation class AnnotationInner(konst konstue: Annotation)
 
 @AnnotationInner(<expr>Annotation()</expr>)
 class C

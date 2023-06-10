@@ -20,7 +20,7 @@ fun box(): String {
     check("java.util.List<java.lang.String>", returnTypeOf { J.bothFlexible() })
 
     // Before 1.6, typeOf of a flexible type was represented as non-nullable type in stdlib implementation (without reflect).
-    val platform = returnTypeOf { J.nullabilityFlexible() }
+    konst platform = returnTypeOf { J.nullabilityFlexible() }
     if (platform == returnTypeOf { J.nullable() }) return "Fail: platform type should not be equal to nullable type"
     if (platform != returnTypeOf { J.notNull() }) return "Fail: platform type should be equal to non-nullable type"
 

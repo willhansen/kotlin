@@ -23,14 +23,14 @@ import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.JsStandardClassIds
 
-internal abstract class FirJsAbstractNativeAnnotationChecker(private val requiredAnnotation: ClassId) : FirSimpleFunctionChecker() {
+internal abstract class FirJsAbstractNativeAnnotationChecker(private konst requiredAnnotation: ClassId) : FirSimpleFunctionChecker() {
     protected fun FirFunction.hasRequiredAnnotation(context: CheckerContext) = hasAnnotation(requiredAnnotation, context.session)
 
     override fun check(declaration: FirSimpleFunction, context: CheckerContext, reporter: DiagnosticReporter) {
-        val annotation = declaration.getAnnotationByClassId(requiredAnnotation, context.session) ?: return
+        konst annotation = declaration.getAnnotationByClassId(requiredAnnotation, context.session) ?: return
 
-        val isMember = !context.isTopLevel && declaration.visibility != Visibilities.Local
-        val isExtension = declaration.isExtension
+        konst isMember = !context.isTopLevel && declaration.visibility != Visibilities.Local
+        konst isExtension = declaration.isExtension
 
         if (isMember && (isExtension || !declaration.symbol.isNativeObject(context)) || !isMember && !isExtension) {
             reporter.reportOn(
@@ -47,18 +47,18 @@ internal object FirJsNativeInvokeChecker : FirJsAbstractNativeAnnotationChecker(
 
 internal abstract class FirJsAbstractNativeIndexerChecker(
     requiredAnnotation: ClassId,
-    private val indexerKind: String,
-    private val requiredParametersCount: Int,
+    private konst indexerKind: String,
+    private konst requiredParametersCount: Int,
 ) : FirJsAbstractNativeAnnotationChecker(requiredAnnotation) {
     override fun check(declaration: FirSimpleFunction, context: CheckerContext, reporter: DiagnosticReporter) {
         super.check(declaration, context, reporter)
 
-        val parameters = declaration.valueParameters
-        val builtIns = context.session.builtinTypes
+        konst parameters = declaration.konstueParameters
+        konst builtIns = context.session.builtinTypes
 
         if (parameters.isNotEmpty()) {
-            val firstParameterDeclaration = parameters.first()
-            val firstParameter = firstParameterDeclaration.returnTypeRef.coneType
+            konst firstParameterDeclaration = parameters.first()
+            konst firstParameter = firstParameterDeclaration.returnTypeRef.coneType
 
             if (
                 firstParameter !is ConeErrorType &&
@@ -113,16 +113,16 @@ internal object FirJsNativeSetterChecker : FirJsAbstractNativeIndexerChecker(JsS
         if (!declaration.hasRequiredAnnotation(context)) return
         super.check(declaration, context, reporter)
 
-        val returnType = declaration.returnTypeRef.coneType
+        konst returnType = declaration.returnTypeRef.coneType
         if (returnType.isUnit) {
             return
         }
 
-        if (declaration.valueParameters.size < 2) {
+        if (declaration.konstueParameters.size < 2) {
             return
         }
 
-        val secondParameterType = declaration.valueParameters[1].returnTypeRef.coneType
+        konst secondParameterType = declaration.konstueParameters[1].returnTypeRef.coneType
         if (secondParameterType.isSubtypeOf(returnType, context.session)) {
             return
         }

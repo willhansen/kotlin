@@ -33,16 +33,16 @@ import org.jetbrains.kotlin.contracts.model.structure.ESVariable
  * This class manages conversion of [ContractDescription] to [Functor]
  */
 class ContractInterpretationDispatcher {
-    private val constantsInterpreter = ConstantValuesInterpreter()
-    private val conditionInterpreter = ConditionInterpreter(this)
-    private val conditionalEffectInterpreter = ConditionalEffectInterpreter(this)
-    private val effectsInterpreters: List<EffectDeclarationInterpreter> = listOf(
+    private konst constantsInterpreter = ConstantValuesInterpreter()
+    private konst conditionInterpreter = ConditionInterpreter(this)
+    private konst conditionalEffectInterpreter = ConditionalEffectInterpreter(this)
+    private konst effectsInterpreters: List<EffectDeclarationInterpreter> = listOf(
         ReturnsEffectInterpreter(this),
         CallsEffectInterpreter(this)
     )
 
     fun convertContractDescriptorToFunctor(contractDescription: ContractDescription): Functor? {
-        val resultingClauses = contractDescription.effects.map { effect ->
+        konst resultingClauses = contractDescription.effects.map { effect ->
             if (effect is ConditionalEffectDeclaration) {
                 conditionalEffectInterpreter.interpret(effect) ?: return null
             } else {
@@ -54,7 +54,7 @@ class ContractInterpretationDispatcher {
     }
 
     internal fun interpretEffect(effectDeclaration: EffectDeclaration): ESEffect? {
-        val convertedFunctors = effectsInterpreters.mapNotNull { it.tryInterpret(effectDeclaration) }
+        konst convertedFunctors = effectsInterpreters.mapNotNull { it.tryInterpret(effectDeclaration) }
         return convertedFunctors.singleOrNull()
     }
 

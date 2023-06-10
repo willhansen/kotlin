@@ -26,7 +26,7 @@ interface KotlinInterface : JavaInterface {
         }
     }
 
-    val propertyy: String
+    konst propertyy: String
         get() {
             super.test()
 
@@ -54,7 +54,7 @@ interface KotlinInterfaceIndirectInheritance : KotlinInterface {
         }
     }
 
-    val propertyyy: String
+    konst propertyyy: String
         get() {
             super.test()
 
@@ -79,7 +79,7 @@ open class KotlinClass : JavaInterface {
         }
     }
 
-    val property: String
+    konst property: String
         get() {
             super.test()
             super.testOverride()
@@ -105,7 +105,7 @@ class KotlinClassIndirectInheritance : KotlinClass() {
         }
     }
 
-    val property2: String
+    konst property2: String
         get() {
             super.test()
             super.testOverride()
@@ -131,7 +131,7 @@ class KotlinClassIndirectInheritance2 : KotlinInterfaceIndirectInheritance {
         }
     }
 
-    val property: String
+    konst property: String
         get() {
             super.test()
             super.testOverride()

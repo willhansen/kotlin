@@ -30,13 +30,13 @@ class SplittingModuleTransformerForBoxTests : ModuleStructureTransformer() {
             // The test is already multimodule, no need to split it into modules further.
             return moduleStructure
         }
-        val module = moduleStructure.modules.single()
-        val realFiles = module.files.filterNot { it.isAdditional }
+        konst module = moduleStructure.modules.single()
+        konst realFiles = module.files.filterNot { it.isAdditional }
         if (realFiles.size < 2) error("Test should contain at least two files")
-        val additionalFiles = module.files.filter { it.isAdditional }
-        val firstModuleFiles = realFiles.dropLast(1)
-        val secondModuleFile = realFiles.last()
-        val firstModule = TestModule(
+        konst additionalFiles = module.files.filter { it.isAdditional }
+        konst firstModuleFiles = realFiles.dropLast(1)
+        konst secondModuleFile = realFiles.last()
+        konst firstModule = TestModule(
             name = "lib",
             module.targetPlatform,
             module.targetBackend,
@@ -49,7 +49,7 @@ class SplittingModuleTransformerForBoxTests : ModuleStructureTransformer() {
             module.languageVersionSettings
         )
 
-        val secondModule = TestModule(
+        konst secondModule = TestModule(
             name = "main",
             module.targetPlatform,
             module.targetBackend,

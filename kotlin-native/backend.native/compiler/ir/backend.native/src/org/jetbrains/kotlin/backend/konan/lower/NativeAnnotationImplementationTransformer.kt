@@ -22,12 +22,12 @@ import org.jetbrains.kotlin.ir.expressions.putArgument
 internal class NativeAnnotationImplementationTransformer(context: Context, irFile: IrFile) :
         AnnotationImplementationTransformer(context, irFile) {
 
-    private val arrayContentEqualsMap = context.ir.symbols.arraysContentEquals
+    private konst arrayContentEqualsMap = context.ir.symbols.arraysContentEquals
 
     override fun getArrayContentEqualsSymbol(type: IrType) =
             when {
                 type.isPrimitiveArray() || type.isUnsignedArray() -> arrayContentEqualsMap[type]
-                else -> arrayContentEqualsMap.entries.singleOrNull { (k, _) -> k.isArray() }?.value
+                else -> arrayContentEqualsMap.entries.singleOrNull { (k, _) -> k.isArray() }?.konstue
             } ?: error("Can't find an Arrays.contentEquals method for array type ${type.render()}")
 
     override fun IrClass.platformSetup() {
@@ -36,26 +36,26 @@ internal class NativeAnnotationImplementationTransformer(context: Context, irFil
     }
 
     /**
-     * When annotation is defined in another module, default values can be not available
+     * When annotation is defined in another module, default konstues can be not available
      * during incremental compilation.
      *
-     * In that case we need to delegate evaluating defaults to original class constructor.
+     * In that case we need to delegate ekonstuating defaults to original class constructor.
      * The simplest way to do that - generate a constructor for each set of arguments used for
      * instantiating annotations, hope there shouldn't be too many of them in each module.
      */
     override fun chooseConstructor(implClass: IrClass, expression: IrConstructorCall) : IrConstructor {
-        val existingValueArguments = (0 until expression.valueArgumentsCount)
+        konst existingValueArguments = (0 until expression.konstueArgumentsCount)
                 .filter { expression.getValueArgument(it) != null }
-                .map { expression.symbol.owner.valueParameters[it].name }
+                .map { expression.symbol.owner.konstueParameters[it].name }
                 .toSet()
         return implClass.constructors.singleOrNull { cons ->
-            cons.valueParameters.map { it.name }.toSet() == existingValueArguments
+            cons.konstueParameters.map { it.name }.toSet() == existingValueArguments
         } ?: implClass.addConstructor {
             startOffset = SYNTHETIC_OFFSET
             endOffset = SYNTHETIC_OFFSET
             visibility = DescriptorVisibilities.PUBLIC
         }.apply {
-            expression.symbol.owner.valueParameters
+            expression.symbol.owner.konstueParameters
                     .filter { it.name in existingValueArguments }
                     .forEach { parameter -> addValueParameter(parameter.name.asString(), parameter.type) }
             createConstructorBody(this, expression.symbol.owner)
@@ -65,7 +65,7 @@ internal class NativeAnnotationImplementationTransformer(context: Context, irFil
 
     override fun implementAnnotationPropertiesAndConstructor(implClass: IrClass, annotationClass: IrClass, generatedConstructor: IrConstructor) {
         require(!annotationClass.isFinalClass) { "Annotation class ${annotationClass.kotlinFqName} shouldn't be final" }
-        val properties = annotationClass.getAnnotationProperties()
+        konst properties = annotationClass.getAnnotationProperties()
         properties.forEach { property ->
             generatedConstructor.addValueParameter(property.name.asString(), property.getter!!.returnType)
         }
@@ -74,17 +74,17 @@ internal class NativeAnnotationImplementationTransformer(context: Context, irFil
 
     private fun createConstructorBody(constructor: IrConstructor, delegate: IrConstructor) {
         /**
-         * We need to delegate to base constructor, instead of calling primary with default values
-         * as default values can be not available. {@see chooseConstructor} for details
+         * We need to delegate to base constructor, instead of calling primary with default konstues
+         * as default konstues can be not available. {@see chooseConstructor} for details
          */
         constructor.body = context.irFactory.createBlockBody(
                 SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, listOf(
                 IrDelegatingConstructorCallImpl(
                         SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, context.irBuiltIns.unitType, delegate.symbol,
-                        typeArgumentsCount = 0, valueArgumentsCount = delegate.valueParameters.size
+                        typeArgumentsCount = 0, konstueArgumentsCount = delegate.konstueParameters.size
                 ).apply {
-                    constructor.valueParameters.forEach { param ->
-                        putArgument(delegate.valueParameters.single { it.name == param.name },
+                    constructor.konstueParameters.forEach { param ->
+                        putArgument(delegate.konstueParameters.single { it.name == param.name },
                                 IrGetValueImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, param.symbol))
                     }
                 }
@@ -92,5 +92,5 @@ internal class NativeAnnotationImplementationTransformer(context: Context, irFil
 
     }
 
-    override val forbidDirectFieldAccessInMethods = true
+    override konst forbidDirectFieldAccessInMethods = true
 }

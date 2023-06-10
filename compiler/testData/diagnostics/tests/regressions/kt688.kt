@@ -10,5 +10,5 @@ class C() {
     return x(x(y))
   }
 
-  val x: B = <!DEBUG_INFO_LEAKING_THIS!>a<!>({it.b()}, B())
+  konst x: B = <!DEBUG_INFO_LEAKING_THIS!>a<!>({it.b()}, B())
 }

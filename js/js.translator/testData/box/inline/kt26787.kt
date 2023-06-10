@@ -5,12 +5,12 @@
 
 enum class Role { PRIMARY, EXTRA }
 
-class Location(val role: Role, val building: Int = 0)
+class Location(konst role: Role, konst building: Int = 0)
 
 fun box() : String {
-    val result = mutableListOf<Location>()
+    konst result = mutableListOf<Location>()
 
-    val props = arrayOf(
+    konst props = arrayOf(
         Location(Role.PRIMARY),
         Location(Role.EXTRA),
         Location(Role.PRIMARY)
@@ -20,7 +20,7 @@ fun box() : String {
     for (possiblyOutdated in props) {
         when (possiblyOutdated.role) {
             Role.PRIMARY -> {
-                val index = result.indexOfFirst { it.building == possiblyOutdated.building }
+                konst index = result.indexOfFirst { it.building == possiblyOutdated.building }
             }
             Role.EXTRA -> {
             }

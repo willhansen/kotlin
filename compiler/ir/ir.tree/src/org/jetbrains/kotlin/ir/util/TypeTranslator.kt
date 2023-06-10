@@ -28,23 +28,23 @@ import java.util.*
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 abstract class TypeTranslator(
-    protected val symbolTable: ReferenceSymbolTable,
-    val languageVersionSettings: LanguageVersionSettings,
+    protected konst symbolTable: ReferenceSymbolTable,
+    konst languageVersionSettings: LanguageVersionSettings,
     typeParametersResolverBuilder: () -> TypeParametersResolver = { ScopedTypeParametersResolver() },
-    private val enterTableScope: Boolean = false,
-    protected val extensions: StubGeneratorExtensions = StubGeneratorExtensions.EMPTY
+    private konst enterTableScope: Boolean = false,
+    protected konst extensions: StubGeneratorExtensions = StubGeneratorExtensions.EMPTY
 ) {
-    abstract val constantValueGenerator: ConstantValueGenerator
+    abstract konst constantValueGenerator: ConstantValueGenerator
 
     protected abstract fun approximateType(type: KotlinType): KotlinType
 
     protected abstract fun commonSupertype(types: Collection<KotlinType>): KotlinType
 
-    private val typeParametersResolver by threadLocal { typeParametersResolverBuilder() }
+    private konst typeParametersResolver by threadLocal { typeParametersResolverBuilder() }
 
-    private val erasureStack = Stack<PropertyDescriptor>()
+    private konst erasureStack = Stack<PropertyDescriptor>()
 
-    private val supportDefinitelyNotNullTypes: Boolean = languageVersionSettings.supportsFeature(LanguageFeature.DefinitelyNonNullableTypes)
+    private konst supportDefinitelyNotNullTypes: Boolean = languageVersionSettings.supportsFeature(LanguageFeature.DefinitelyNonNullableTypes)
 
     protected abstract fun isTypeAliasAccessibleHere(typeAliasDescriptor: TypeAliasDescriptor): Boolean
 
@@ -73,7 +73,7 @@ abstract class TypeTranslator(
 
     fun <T> buildWithScope(container: IrTypeParametersContainer, builder: () -> T): T {
         enterScope(container)
-        val result = builder()
+        konst result = builder()
         leaveScope(container)
         return result
     }
@@ -82,7 +82,7 @@ abstract class TypeTranslator(
         if (typeParameterDescriptor is IrBasedTypeParameterDescriptor) {
             return typeParameterDescriptor.owner.symbol
         }
-        val originalTypeParameter = typeParameterDescriptor.originalTypeParameter
+        konst originalTypeParameter = typeParameterDescriptor.originalTypeParameter
         return typeParametersResolver.resolveScopedTypeParameter(originalTypeParameter)
             ?: symbolTable.referenceTypeParameter(originalTypeParameter)
     }
@@ -92,7 +92,7 @@ abstract class TypeTranslator(
     }
 
     private fun translateType(kotlinType: KotlinType, variance: Variance): IrTypeProjection {
-        val approximatedType = approximate(kotlinType.unwrap())
+        konst approximatedType = approximate(kotlinType.unwrap())
 
         when {
             approximatedType.isError ->
@@ -108,8 +108,8 @@ abstract class TypeTranslator(
                 return makeTypeProjection(translateType(approximatedType.original).makeNotNull(), variance)
         }
 
-        val upperType = approximatedType.upperIfFlexible()
-        val upperTypeDescriptor = upperType.constructor.declarationDescriptor
+        konst upperType = approximatedType.upperIfFlexible()
+        konst upperTypeDescriptor = upperType.constructor.declarationDescriptor
             ?: throw AssertionError("No descriptor for type $upperType")
 
         if (erasureStack.isNotEmpty()) {
@@ -146,11 +146,11 @@ abstract class TypeTranslator(
                     // When generating generic signatures, JVM BE uses generic arguments of lower bound,
                     // thus producing 'java.util.Collection<? extends CharSequence>' from
                     // 'kotlin.collections.MutableCollection<out kotlin.CharSequence!>'.
-                    // Construct equivalent type here.
+                    // Construct equikonstent type here.
                     // NB the difference is observed only when lowerTypeDescriptor != upperTypeDescriptor,
                     // which corresponds to mutability-flexible types such as mentioned above.
-                    val lowerType = approximatedType.lowerIfFlexible()
-                    val lowerTypeDescriptor =
+                    konst lowerType = approximatedType.lowerIfFlexible()
+                    konst lowerTypeDescriptor =
                         lowerType.constructor.declarationDescriptor as? ClassDescriptor
                             ?: throw AssertionError("No class descriptor for lower type $lowerType of $approximatedType")
                     annotations = translateTypeAnnotations(upperType, approximatedType)
@@ -173,13 +173,13 @@ abstract class TypeTranslator(
     }
 
     private fun approximateUpperBounds(upperBounds: Collection<KotlinType>, variance: Variance): IrTypeProjection {
-        val commonSupertype = commonSupertype(upperBounds)
+        konst commonSupertype = commonSupertype(upperBounds)
         return translateType(approximate(commonSupertype.replaceArgumentsWithStarProjections()), variance)
     }
 
     private fun SimpleType.toIrTypeAbbreviation(): IrTypeAbbreviation? {
         // Abbreviated type's classifier might not be TypeAliasDescriptor in case it's MockClassDescriptor (not found in dependencies).
-        val typeAliasDescriptor = constructor.declarationDescriptor as? TypeAliasDescriptor ?: return null
+        konst typeAliasDescriptor = constructor.declarationDescriptor as? TypeAliasDescriptor ?: return null
 
         // There is possible situation when we have private top-level type alias visible outside its file which is illegal from klib POV.
         // In that specific case don't generate type abbreviation
@@ -194,13 +194,13 @@ abstract class TypeTranslator(
     }
 
     fun approximate(ktType: KotlinType): KotlinType {
-        val properlyApproximatedType = approximateByKotlinRules(ktType)
+        konst properlyApproximatedType = approximateByKotlinRules(ktType)
 
         // If there's an intersection type, take the most common supertype of its intermediate supertypes.
         // That's what old back-end effectively does.
-        val typeConstructor = properlyApproximatedType.constructor
+        konst typeConstructor = properlyApproximatedType.constructor
         if (typeConstructor is IntersectionTypeConstructor) {
-            val commonSupertype = commonSupertype(typeConstructor.supertypes)
+            konst commonSupertype = commonSupertype(typeConstructor.supertypes)
             return approximate(commonSupertype.replaceArgumentsWithStarProjections())
         }
 
@@ -223,8 +223,8 @@ abstract class TypeTranslator(
             return kotlinType
         if (kotlinType.arguments.none { it.type.constructor is IntersectionTypeConstructor })
             return kotlinType
-        val functionParameterTypes = kotlinType.arguments.subList(0, kotlinType.arguments.size - 1)
-        val functionReturnType = kotlinType.arguments.last()
+        konst functionParameterTypes = kotlinType.arguments.subList(0, kotlinType.arguments.size - 1)
+        konst functionReturnType = kotlinType.arguments.last()
         return kotlinType.replace(
             newArguments = functionParameterTypes.map { approximateFunctionReferenceParameterType(it) } + functionReturnType
         )
@@ -232,15 +232,15 @@ abstract class TypeTranslator(
 
     private fun approximateFunctionReferenceParameterType(typeProjection: TypeProjection): TypeProjection {
         if (typeProjection.isStarProjection) return typeProjection
-        val typeConstructor = typeProjection.type.constructor as? IntersectionTypeConstructor
+        konst typeConstructor = typeProjection.type.constructor as? IntersectionTypeConstructor
             ?: return typeProjection
         // 'mapType' takes common supertype for intersection type supertypes, regardless of variance.
-        val newType = typeConstructor.getAlternativeType()
+        konst newType = typeConstructor.getAlternativeType()
             ?: commonSupertype(typeConstructor.supertypes)
         return TypeProjectionImpl(typeProjection.projectionKind, newType)
     }
 
-    private val isWithNewInference = languageVersionSettings.supportsFeature(LanguageFeature.NewInference)
+    private konst isWithNewInference = languageVersionSettings.supportsFeature(LanguageFeature.NewInference)
 
     private fun approximateByKotlinRules(ktType: KotlinType): KotlinType =
         if (isWithNewInference) {
@@ -258,8 +258,8 @@ abstract class TypeTranslator(
         }
 
     private fun translateTypeAnnotations(kotlinType: KotlinType, flexibleType: KotlinType = kotlinType): List<IrConstructorCall> {
-        val annotations = kotlinType.annotations
-        val irAnnotations = ArrayList<IrConstructorCall>()
+        konst annotations = kotlinType.annotations
+        konst irAnnotations = ArrayList<IrConstructorCall>()
 
         annotations.mapNotNullTo(irAnnotations) {
             constantValueGenerator.generateAnnotationConstructorCall(it)
@@ -286,7 +286,7 @@ abstract class TypeTranslator(
     }
 
     private fun KotlinType.isMutabilityFlexible(): Boolean {
-        val flexibility = unwrap()
+        konst flexibility = unwrap()
         return flexibility is FlexibleType && flexibility.lowerBound.constructor != flexibility.upperBound.constructor &&
                 FlexibleTypeBoundsChecker.getBaseBoundFqNameByMutability(flexibility.lowerBound) ==
                 FlexibleTypeBoundsChecker.getBaseBoundFqNameByMutability(flexibility.upperBound)

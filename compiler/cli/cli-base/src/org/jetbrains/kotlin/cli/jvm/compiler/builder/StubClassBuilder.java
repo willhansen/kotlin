@@ -166,9 +166,9 @@ public class StubClassBuilder extends AbstractClassBuilder {
             @NotNull String name,
             @NotNull String desc,
             @Nullable String signature,
-            @Nullable Object value
+            @Nullable Object konstue
     ) {
-        FieldVisitor internalVisitor = super.newField(origin, access, name, desc, signature, value);
+        FieldVisitor internalVisitor = super.newField(origin, access, name, desc, signature, konstue);
 
         if (internalVisitor != EMPTY_FIELD_VISITOR) {
             // If stub for field generated

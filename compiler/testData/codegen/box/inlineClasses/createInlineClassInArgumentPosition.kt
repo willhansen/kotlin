@@ -3,16 +3,16 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsInt(val value: Int) {
+konstue class AsInt(konst konstue: Int) {
     override fun toString(): String {
-        return "asInt: ${value.toString()}"
+        return "asInt: ${konstue.toString()}"
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsAny(val value: Any) {
+konstue class AsAny(konst konstue: Any) {
     override fun toString(): String {
-        return "asAny: ${value.toString()}"
+        return "asAny: ${konstue.toString()}"
     }
 }
 

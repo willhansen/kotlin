@@ -1,3 +1,3 @@
-val rv = "O" + "K"
+konst rv = "O" + "K"
 
 // expected: rv: OK

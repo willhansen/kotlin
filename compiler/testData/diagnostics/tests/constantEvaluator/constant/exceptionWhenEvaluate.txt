@@ -1,5 +1,5 @@
 package
 
 package test {
-    public val prop1: kotlin.Char
+    public konst prop1: kotlin.Char
 }

@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.name.StandardClassIds.Annotations
 
 object FirJavaAnnotationsChecker : FirAnnotationChecker() {
 
-    private val javaToKotlinNameMap: Map<ClassId, ClassId> =
+    private konst javaToKotlinNameMap: Map<ClassId, ClassId> =
         mapOf(
             Annotations.Java.Target to Annotations.Target,
             Annotations.Java.Retention to Annotations.Retention,
@@ -34,19 +34,19 @@ object FirJavaAnnotationsChecker : FirAnnotationChecker() {
 
     override fun check(expression: FirAnnotation, context: CheckerContext, reporter: DiagnosticReporter) {
         if (context.containingDeclarations.lastOrNull()?.source?.kind != KtRealSourceElementKind) return
-        val callableSymbol = expression.annotationTypeRef.toRegularClassSymbol(context.session)
+        konst callableSymbol = expression.annotationTypeRef.toRegularClassSymbol(context.session)
         if (callableSymbol?.origin !is FirDeclarationOrigin.Java) return
 
-        val lookupTag = expression.annotationTypeRef.coneTypeSafe<ConeClassLikeType>()?.lookupTag ?: return
+        konst lookupTag = expression.annotationTypeRef.coneTypeSafe<ConeClassLikeType>()?.lookupTag ?: return
         javaToKotlinNameMap[lookupTag.classId]?.let { betterName ->
             reporter.reportOn(expression.source, FirJvmErrors.DEPRECATED_JAVA_ANNOTATION, betterName.asSingleFqName(), context)
         }
 
         if (expression is FirAnnotationCall) {
-            val argumentList = expression.argumentList
+            konst argumentList = expression.argumentList
             if (argumentList is FirResolvedArgumentList) {
-                for ((key, value) in argumentList.mapping) {
-                    if (value.name != Annotations.ParameterNames.value && key !is FirWrappedArgumentExpression) {
+                for ((key, konstue) in argumentList.mapping) {
+                    if (konstue.name != Annotations.ParameterNames.konstue && key !is FirWrappedArgumentExpression) {
                         reporter.reportOn(key.source, FirJvmErrors.POSITIONED_VALUE_ARGUMENT_FOR_JAVA_ANNOTATION, context)
                     }
                 }

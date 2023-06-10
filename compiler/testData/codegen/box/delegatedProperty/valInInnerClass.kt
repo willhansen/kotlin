@@ -6,7 +6,7 @@ class Delegate {
 
 class A {
   inner class B {
-      val prop: Int by Delegate()
+      konst prop: Int by Delegate()
   }
 }
 

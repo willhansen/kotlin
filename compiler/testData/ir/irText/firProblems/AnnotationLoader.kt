@@ -20,7 +20,7 @@ class AnnotationLoader {
             }
 
             override fun visitAnnotation(): Visitor? {
-                val visitor = loadAnnotation()!!
+                konst visitor = loadAnnotation()!!
                 return object : Visitor by visitor {
                     override fun visit() {}
                 }

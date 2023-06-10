@@ -32,11 +32,11 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.resolve.annotations.KOTLIN_THROWS_ANNOTATION_FQ_NAME
 
 object FirNativeThrowsChecker : FirBasicDeclarationChecker() {
-    private val throwsClassId = ClassId.topLevel(KOTLIN_THROWS_ANNOTATION_FQ_NAME)
+    private konst throwsClassId = ClassId.topLevel(KOTLIN_THROWS_ANNOTATION_FQ_NAME)
 
-    private val cancellationExceptionFqName = FqName("kotlin.coroutines.cancellation.CancellationException")
+    private konst cancellationExceptionFqName = FqName("kotlin.coroutines.cancellation.CancellationException")
 
-    private val cancellationExceptionAndSupersClassIds = setOf(
+    private konst cancellationExceptionAndSupersClassIds = setOf(
         ClassId.topLevel(StandardNames.FqNames.throwable),
         ClassId.topLevel(FqName("kotlin.Exception")),
         ClassId.topLevel(FqName("kotlin.RuntimeException")),
@@ -45,13 +45,13 @@ object FirNativeThrowsChecker : FirBasicDeclarationChecker() {
     )
 
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val throwsAnnotation = declaration.getAnnotationByClassId(throwsClassId, context.session) as? FirAnnotationCall
+        konst throwsAnnotation = declaration.getAnnotationByClassId(throwsClassId, context.session) as? FirAnnotationCall
 
         if (!checkInheritance(declaration, throwsAnnotation, context, reporter)) return
 
         if (throwsAnnotation.hasUnresolvedArgument()) return
 
-        val classTypes = throwsAnnotation?.getClassTypes(context.session) ?: return
+        konst classTypes = throwsAnnotation?.getClassTypes(context.session) ?: return
 
         if (classTypes.isEmpty()) {
             reporter.reportOn(throwsAnnotation.source, FirNativeErrors.THROWS_LIST_EMPTY, context)
@@ -76,7 +76,7 @@ object FirNativeThrowsChecker : FirBasicDeclarationChecker() {
     ): Boolean {
         if (declaration !is FirSimpleFunction) return true
 
-        val inherited = getInheritedThrows(declaration, throwsAnnotation, context).entries.distinctBy { it.value }
+        konst inherited = getInheritedThrows(declaration, throwsAnnotation, context).entries.distinctBy { it.konstue }
 
         if (inherited.size >= 2) {
             reporter.reportOn(
@@ -88,11 +88,11 @@ object FirNativeThrowsChecker : FirBasicDeclarationChecker() {
             return false
         }
 
-        val (overriddenMember, overriddenThrows) = inherited.firstOrNull()
+        konst (overriddenMember, overriddenThrows) = inherited.firstOrNull()
             ?: return true // Should not happen though.
 
         if (throwsAnnotation?.source != null && decodeThrowsFilter(throwsAnnotation, context.session) != overriddenThrows) {
-            val containingClassSymbol = overriddenMember.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
+            konst containingClassSymbol = overriddenMember.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
             if (containingClassSymbol != null) {
                 reporter.reportOn(throwsAnnotation.source, FirNativeErrors.INCOMPATIBLE_THROWS_OVERRIDE, containingClassSymbol, context)
             }
@@ -107,20 +107,20 @@ object FirNativeThrowsChecker : FirBasicDeclarationChecker() {
         throwsAnnotation: FirAnnotationCall?,
         context: CheckerContext
     ): Map<FirNamedFunctionSymbol, ThrowsFilter> {
-        val visited = mutableSetOf<FirNamedFunctionSymbol>()
-        val result = mutableMapOf<FirNamedFunctionSymbol, ThrowsFilter>()
+        konst visited = mutableSetOf<FirNamedFunctionSymbol>()
+        konst result = mutableMapOf<FirNamedFunctionSymbol, ThrowsFilter>()
 
         fun getInheritedThrows(localThrowsAnnotation: FirAnnotationCall?, localFunctionSymbol: FirNamedFunctionSymbol) {
             if (!visited.add(localFunctionSymbol)) return
-            val containingClassSymbol = localFunctionSymbol.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
+            konst containingClassSymbol = localFunctionSymbol.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
 
             if (containingClassSymbol != null) {
-                val unsubstitutedScope = containingClassSymbol.unsubstitutedScope(context)
+                konst unsubstitutedScope = containingClassSymbol.unsubstitutedScope(context)
                 unsubstitutedScope.processFunctionsByName(localFunctionSymbol.name) {}
-                val overriddenFunctions = unsubstitutedScope.getDirectOverriddenFunctions(localFunctionSymbol)
+                konst overriddenFunctions = unsubstitutedScope.getDirectOverriddenFunctions(localFunctionSymbol)
                 if (localFunctionSymbol == function.symbol || localThrowsAnnotation == null && overriddenFunctions.isNotEmpty()) {
                     for (overriddenFunction in overriddenFunctions) {
-                        val annotation = if (overriddenFunction.isSubstitutionOrIntersectionOverride) {
+                        konst annotation = if (overriddenFunction.isSubstitutionOrIntersectionOverride) {
                             null
                         } else {
                             overriddenFunction.getAnnotationByClassId(throwsClassId, context.session) as? FirAnnotationCall
@@ -171,7 +171,7 @@ object FirNativeThrowsChecker : FirBasicDeclarationChecker() {
     }
 
     private fun FirAnnotationCall.getClassTypes(session: FirSession): List<ConeKotlinType> {
-        val arguments = argumentList.arguments
+        konst arguments = argumentList.arguments
         return (arguments.firstOrNull() as? FirVarargArgumentsExpression)?.arguments
             ?.filterIsInstance<FirGetClassCall>()
             ?.map { it.arguments.first().typeRef }
@@ -180,5 +180,5 @@ object FirNativeThrowsChecker : FirBasicDeclarationChecker() {
             ?: emptyList()
     }
 
-    private data class ThrowsFilter(val classes: Set<ConeKotlinType>?)
+    private data class ThrowsFilter(konst classes: Set<ConeKotlinType>?)
 }

@@ -10,11 +10,11 @@ plugins {
     id("compile-benchmarking")
 }
 
-val dist = file(findProperty("kotlin.native.home") ?: "dist")
-val toolSuffix = if (System.getProperty("os.name").startsWith("Windows")) ".bat" else ""
-val binarySuffix = getNativeProgramExtension()
-val defaultCompilerOpts =  listOf("-g")
-val buildOpts = getCompileOnlyBenchmarksOpts(project, defaultCompilerOpts)
+konst dist = file(findProperty("kotlin.native.home") ?: "dist")
+konst toolSuffix = if (System.getProperty("os.name").startsWith("Windows")) ".bat" else ""
+konst binarySuffix = getNativeProgramExtension()
+konst defaultCompilerOpts =  listOf("-g")
+konst buildOpts = getCompileOnlyBenchmarksOpts(project, defaultCompilerOpts)
 
 compileBenchmark {
     applicationName = "HelloWorld"

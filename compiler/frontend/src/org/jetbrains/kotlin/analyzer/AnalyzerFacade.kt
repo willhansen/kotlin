@@ -39,8 +39,8 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.storage.getValue
 
 class ResolverForModule(
-    val packageFragmentProvider: PackageFragmentProvider,
-    val componentProvider: ComponentProvider
+    konst packageFragmentProvider: PackageFragmentProvider,
+    konst componentProvider: ComponentProvider
 )
 
 abstract class ResolverForProject<M : ModuleInfo> {
@@ -51,23 +51,23 @@ abstract class ResolverForProject<M : ModuleInfo> {
     abstract fun resolverForModuleDescriptor(descriptor: ModuleDescriptor): ResolverForModule
     abstract fun diagnoseUnknownModuleInfo(infos: List<ModuleInfo>): Nothing
 
-    abstract val name: String
-    abstract val allModules: Collection<M>
+    abstract konst name: String
+    abstract konst allModules: Collection<M>
 
     override fun toString() = name
 
     companion object {
-        const val resolverForSdkName = "sdk"
-        const val resolverForLibrariesName = "project libraries"
-        const val resolverForModulesName = "project source roots and libraries"
-        const val resolverForScriptDependenciesName = "dependencies of scripts"
+        const konst resolverForSdkName = "sdk"
+        const konst resolverForLibrariesName = "project libraries"
+        const konst resolverForModulesName = "project source roots and libraries"
+        const konst resolverForScriptDependenciesName = "dependencies of scripts"
 
-        const val resolverForSpecialInfoName = "completion/highlighting in "
+        const konst resolverForSpecialInfoName = "completion/highlighting in "
     }
 }
 
 class EmptyResolverForProject<M : ModuleInfo> : ResolverForProject<M>() {
-    override val name: String
+    override konst name: String
         get() = "Empty resolver"
 
     override fun tryGetResolverForModule(moduleInfo: M): ResolverForModule? = null
@@ -75,7 +75,7 @@ class EmptyResolverForProject<M : ModuleInfo> : ResolverForProject<M>() {
         throw IllegalStateException("$descriptor is not contained in this resolver")
 
     override fun descriptorForModule(moduleInfo: M) = diagnoseUnknownModuleInfo(listOf(moduleInfo))
-    override val allModules: Collection<M> = listOf()
+    override konst allModules: Collection<M> = listOf()
     override fun diagnoseUnknownModuleInfo(infos: List<ModuleInfo>) = throw IllegalStateException("Should not be called for $infos")
 
     override fun moduleInfoForModuleDescriptor(moduleDescriptor: ModuleDescriptor): M {
@@ -84,9 +84,9 @@ class EmptyResolverForProject<M : ModuleInfo> : ResolverForProject<M>() {
 }
 
 data class ModuleContent<out M : ModuleInfo>(
-    val moduleInfo: M,
-    val syntheticFiles: Collection<KtFile>,
-    val moduleContentScope: GlobalSearchScope
+    konst moduleInfo: M,
+    konst syntheticFiles: Collection<KtFile>,
+    konst moduleContentScope: GlobalSearchScope
 )
 
 interface PlatformAnalysisParameters {
@@ -94,8 +94,8 @@ interface PlatformAnalysisParameters {
 }
 
 interface CombinedModuleInfo : ModuleInfo {
-    val containedModules: List<ModuleInfo>
-    val platformModule: ModuleInfo
+    konst containedModules: List<ModuleInfo>
+    konst platformModule: ModuleInfo
 }
 
 /**
@@ -105,7 +105,7 @@ interface CombinedModuleInfo : ModuleInfo {
  * Resolvers should accept a derived module info, iff the [originalModule] is accepted.
  */
 interface DerivedModuleInfo : ModuleInfo {
-    val originalModule: ModuleInfo
+    konst originalModule: ModuleInfo
 }
 
 fun ModuleInfo.flatten(): List<ModuleInfo> = when (this) {
@@ -123,7 +123,7 @@ interface LibraryModuleSourceInfoBase : ModuleInfo
 interface NonSourceModuleInfoBase : ModuleInfo
 
 interface LibraryModuleInfo : ModuleInfo {
-    override val platform: TargetPlatform
+    override konst platform: TargetPlatform
 
     fun getLibraryRoots(): Collection<String>
 }
@@ -202,21 +202,21 @@ abstract class ResolverForModuleFactory {
 
 class LazyModuleDependencies<M : ModuleInfo>(
     storageManager: StorageManager,
-    private val module: M,
+    private konst module: M,
     firstDependency: M?,
-    private val resolverForProject: AbstractResolverForProject<M>
+    private konst resolverForProject: AbstractResolverForProject<M>
 ) : ModuleDependencies {
 
-    private val dependencies = storageManager.createLazyValue {
-        val moduleDescriptors = mutableSetOf<ModuleDescriptorImpl>()
+    private konst dependencies = storageManager.createLazyValue {
+        konst moduleDescriptors = mutableSetOf<ModuleDescriptorImpl>()
         firstDependency?.let {
             module.assertModuleDependencyIsCorrect(it)
             moduleDescriptors.add(resolverForProject.descriptorForModule(it))
         }
-        val moduleDescriptor = resolverForProject.descriptorForModule(module)
-        val dependencyOnBuiltIns = module.dependencyOnBuiltIns()
+        konst moduleDescriptor = resolverForProject.descriptorForModule(module)
+        konst dependencyOnBuiltIns = module.dependencyOnBuiltIns()
         if (dependencyOnBuiltIns == ModuleInfo.DependencyOnBuiltIns.AFTER_SDK) {
-            val builtInsModule = moduleDescriptor.builtIns.builtInsModule
+            konst builtInsModule = moduleDescriptor.builtIns.builtInsModule
             module.assertModuleDependencyIsCorrect(builtInsModule)
             moduleDescriptors.add(builtInsModule)
         }
@@ -228,16 +228,16 @@ class LazyModuleDependencies<M : ModuleInfo>(
             moduleDescriptors.add(resolverForProject.descriptorForModule(dependency as M))
         }
         if (dependencyOnBuiltIns == ModuleInfo.DependencyOnBuiltIns.LAST) {
-            val builtInsModule = moduleDescriptor.builtIns.builtInsModule
+            konst builtInsModule = moduleDescriptor.builtIns.builtInsModule
             module.assertModuleDependencyIsCorrect(builtInsModule)
             moduleDescriptors.add(builtInsModule)
         }
         moduleDescriptors.toList()
     }
 
-    override val allDependencies: List<ModuleDescriptorImpl> get() = dependencies()
+    override konst allDependencies: List<ModuleDescriptorImpl> get() = dependencies()
 
-    override val directExpectedByDependencies by storageManager.createLazyValue {
+    override konst directExpectedByDependencies by storageManager.createLazyValue {
         module.expectedBy.map {
             module.assertModuleDependencyIsCorrect(it)
             @Suppress("UNCHECKED_CAST")
@@ -245,7 +245,7 @@ class LazyModuleDependencies<M : ModuleInfo>(
         }
     }
 
-    override val allExpectedByDependencies: Set<ModuleDescriptorImpl> by storageManager.createLazyValue {
+    override konst allExpectedByDependencies: Set<ModuleDescriptorImpl> by storageManager.createLazyValue {
         collectAllExpectedByModules(module).mapTo(HashSet<ModuleDescriptorImpl>()) {
             module.assertModuleDependencyIsCorrect(it)
             @Suppress("UNCHECKED_CAST")
@@ -253,7 +253,7 @@ class LazyModuleDependencies<M : ModuleInfo>(
         }
     }
 
-    override val modulesWhoseInternalsAreVisible: Set<ModuleDescriptorImpl>
+    override konst modulesWhoseInternalsAreVisible: Set<ModuleDescriptorImpl>
         get() =
             module.modulesWhoseInternalsAreVisible().mapTo(LinkedHashSet()) {
                 module.assertModuleDependencyIsCorrect(it)

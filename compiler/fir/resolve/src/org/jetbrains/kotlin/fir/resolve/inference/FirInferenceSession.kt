@@ -22,11 +22,11 @@ import org.jetbrains.kotlin.types.model.TypeVariableMarker
 
 abstract class FirInferenceSession {
     companion object {
-        val DEFAULT: FirInferenceSession = object : FirStubInferenceSession() {}
+        konst DEFAULT: FirInferenceSession = object : FirStubInferenceSession() {}
     }
 
     abstract fun <T> shouldRunCompletion(call: T): Boolean where T : FirResolvable, T : FirStatement
-    abstract val currentConstraintStorage: ConstraintStorage
+    abstract konst currentConstraintStorage: ConstraintStorage
 
     abstract fun <T> addPartiallyResolvedCall(call: T) where T : FirResolvable, T : FirStatement
     abstract fun <T> addCompletedCall(call: T, candidate: Candidate) where T : FirResolvable, T : FirStatement
@@ -54,7 +54,7 @@ abstract class FirInferenceSession {
 abstract class FirStubInferenceSession : FirInferenceSession() {
     override fun <T> shouldRunCompletion(call: T): Boolean where T : FirResolvable, T : FirStatement = true
 
-    override val currentConstraintStorage: ConstraintStorage
+    override konst currentConstraintStorage: ConstraintStorage
         get() = ConstraintStorage.Empty
 
     override fun <T> addPartiallyResolvedCall(call: T) where T : FirResolvable, T : FirStatement {}

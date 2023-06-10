@@ -1,6 +1,6 @@
 package
 
-public val x: kotlin.String = "Owner"
+public konst x: kotlin.String = "Owner"
 
 public open class Owner {
     public constructor Owner()
@@ -9,5 +9,5 @@ public open class Owner {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public const final val name: kotlin.String = "Owner"
+    public const final konst name: kotlin.String = "Owner"
 }

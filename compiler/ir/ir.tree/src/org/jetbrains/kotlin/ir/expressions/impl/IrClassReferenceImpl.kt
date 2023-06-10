@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrClassReferenceImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrClassifierSymbol,
+    override konst symbol: IrClassifierSymbol,
     override var classType: IrType
 ) : IrClassReference()

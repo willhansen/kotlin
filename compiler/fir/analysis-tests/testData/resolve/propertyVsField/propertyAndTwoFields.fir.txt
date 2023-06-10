@@ -4,7 +4,7 @@ FILE: KotlinBase.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val abcd: R|kotlin/String| = String(abcd)
+        public final konst abcd: R|kotlin/String| = String(abcd)
             public get(): R|kotlin/String|
 
     }

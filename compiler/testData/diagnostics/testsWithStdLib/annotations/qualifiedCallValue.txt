@@ -23,7 +23,7 @@ package a {
 
             public final annotation class ann1 : kotlin.Annotation {
                 public constructor ann1(/*0*/ p: kotlin.Deprecated = ...)
-                public final val p: kotlin.Deprecated
+                public final konst p: kotlin.Deprecated
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
                 public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -31,7 +31,7 @@ package a {
 
             public final annotation class ann2 : kotlin.Annotation {
                 public constructor ann2(/*0*/ p: a.b.c.ann1 = ...)
-                public final val p: a.b.c.ann1
+                public final konst p: a.b.c.ann1
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
                 public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -39,8 +39,8 @@ package a {
 
             public final annotation class ann3 : kotlin.Annotation {
                 public constructor ann3(/*0*/ p: a.b.c.A.IAnn = ..., /*1*/ p2: a.b.c.A.IAnn = ...)
-                public final val p: a.b.c.A.IAnn
-                public final val p2: a.b.c.A.IAnn
+                public final konst p: a.b.c.A.IAnn
+                public final konst p2: a.b.c.A.IAnn
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
                 public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -48,7 +48,7 @@ package a {
 
             public final annotation class annArray : kotlin.Annotation {
                 public constructor annArray(/*0*/ p: kotlin.Array<kotlin.String> = ...)
-                public final val p: kotlin.Array<kotlin.String>
+                public final konst p: kotlin.Array<kotlin.String>
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
                 public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

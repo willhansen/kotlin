@@ -20,10 +20,10 @@ class CharSequenceWithIndexForLoopGenerator(
     forExpression: KtForExpression,
     loopParameter: KtDestructuringDeclaration,
     rangeCall: ResolvedCall<out CallableDescriptor>,
-    private val canCacheLength: Boolean
+    private konst canCacheLength: Boolean
 ) : AbstractWithIndexForLoopGenerator(codegen, forExpression, loopParameter, rangeCall) {
 
-    private val charSeqType = codegen.asmType(ExpressionCodegen.getExpectedReceiverType(rangeCall))
+    private konst charSeqType = codegen.asmType(ExpressionCodegen.getExpectedReceiverType(rangeCall))
     private var charSeqVar = -1
     private var lengthVar = -1
 
@@ -32,12 +32,12 @@ class CharSequenceWithIndexForLoopGenerator(
 
     override fun beforeLoop() {
         charSeqVar = createLoopTempVariable(charSeqType)
-        val charSeqValue = StackValue.local(charSeqVar, charSeqType)
+        konst charSeqValue = StackValue.local(charSeqVar, charSeqType)
         charSeqValue.store(codegen.generateCallReceiver(rangeCall), v)
 
         if (canCacheLength) {
             lengthVar = createLoopTempVariable(Type.INT_TYPE)
-            evalCharSeqLengthOnStack()
+            ekonstCharSeqLengthOnStack()
             v.store(lengthVar, Type.INT_TYPE)
         }
 
@@ -47,7 +47,7 @@ class CharSequenceWithIndexForLoopGenerator(
         StackValue.local(indexVar, indexType).store(StackValue.constant(0), v)
     }
 
-    private fun evalCharSeqLengthOnStack() {
+    private fun ekonstCharSeqLengthOnStack() {
         v.load(charSeqVar, charSeqType)
         v.invokeinterface("java/lang/CharSequence", "length", "()I")
     }
@@ -57,7 +57,7 @@ class CharSequenceWithIndexForLoopGenerator(
         if (canCacheLength) {
             v.load(lengthVar, Type.INT_TYPE)
         } else {
-            evalCharSeqLengthOnStack()
+            ekonstCharSeqLengthOnStack()
         }
         v.ificmpge(loopExit)
     }

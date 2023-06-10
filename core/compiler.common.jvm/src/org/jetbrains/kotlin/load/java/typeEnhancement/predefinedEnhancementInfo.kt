@@ -21,33 +21,33 @@ import org.jetbrains.kotlin.load.kotlin.signatures
 import org.jetbrains.kotlin.resolve.jvm.JvmPrimitiveType
 import org.jetbrains.kotlin.resolve.jvm.JvmPrimitiveType.BOOLEAN
 
-class TypeEnhancementInfo(val map: Map<Int, JavaTypeQualifiers>) {
+class TypeEnhancementInfo(konst map: Map<Int, JavaTypeQualifiers>) {
     constructor(vararg pairs: Pair<Int, JavaTypeQualifiers>) : this(mapOf(*pairs))
 }
 
 class PredefinedFunctionEnhancementInfo(
-    val returnTypeInfo: TypeEnhancementInfo? = null,
-    val parametersInfo: List<TypeEnhancementInfo?> = emptyList()
+    konst returnTypeInfo: TypeEnhancementInfo? = null,
+    konst parametersInfo: List<TypeEnhancementInfo?> = emptyList()
 )
 
 /** Type is always nullable: `T?` */
-private val NULLABLE = JavaTypeQualifiers(NullabilityQualifier.NULLABLE, null, definitelyNotNull = false)
+private konst NULLABLE = JavaTypeQualifiers(NullabilityQualifier.NULLABLE, null, definitelyNotNull = false)
 /** Nullability depends on substitution, but the type is not platform: `T` */
-private val NOT_PLATFORM = JavaTypeQualifiers(NullabilityQualifier.NOT_NULL, null, definitelyNotNull = false)
+private konst NOT_PLATFORM = JavaTypeQualifiers(NullabilityQualifier.NOT_NULL, null, definitelyNotNull = false)
 /** Type is always non-nullable: `T & Any` */
-private val NOT_NULLABLE = JavaTypeQualifiers(NullabilityQualifier.NOT_NULL, null, definitelyNotNull = true)
+private konst NOT_NULLABLE = JavaTypeQualifiers(NullabilityQualifier.NOT_NULL, null, definitelyNotNull = true)
 
 @Suppress("LocalVariableName")
-val PREDEFINED_FUNCTION_ENHANCEMENT_INFO_BY_SIGNATURE = signatures {
-    val JLObject = javaLang("Object")
-    val JFPredicate = javaFunction("Predicate")
-    val JFFunction = javaFunction("Function")
-    val JFConsumer = javaFunction("Consumer")
-    val JFBiFunction = javaFunction("BiFunction")
-    val JFBiConsumer = javaFunction("BiConsumer")
-    val JFUnaryOperator = javaFunction("UnaryOperator")
-    val JUStream = javaUtil("stream/Stream")
-    val JUOptional = javaUtil("Optional")
+konst PREDEFINED_FUNCTION_ENHANCEMENT_INFO_BY_SIGNATURE = signatures {
+    konst JLObject = javaLang("Object")
+    konst JFPredicate = javaFunction("Predicate")
+    konst JFFunction = javaFunction("Function")
+    konst JFConsumer = javaFunction("Consumer")
+    konst JFBiFunction = javaFunction("BiFunction")
+    konst JFBiConsumer = javaFunction("BiConsumer")
+    konst JFUnaryOperator = javaFunction("UnaryOperator")
+    konst JUStream = javaUtil("stream/Stream")
+    konst JUOptional = javaUtil("Optional")
 
     enhancement {
         forClass(javaUtil("Iterator")) {
@@ -106,7 +106,7 @@ val PREDEFINED_FUNCTION_ENHANCEMENT_INFO_BY_SIGNATURE = signatures {
                 parameter(JFBiFunction, NOT_PLATFORM, NOT_PLATFORM, NULLABLE, NULLABLE)
                 returns(JLObject, NULLABLE)
             }
-            // while it is possible to return nullable value from lambda in computeIfAbsent,
+            // while it is possible to return nullable konstue from lambda in computeIfAbsent,
             // we deliberately make it just NOT_PLATFORM V in order to have the return type V and not V?
             function("computeIfAbsent") {
                 parameter(JLObject, NOT_PLATFORM)
@@ -201,18 +201,18 @@ private inline fun enhancement(block: SignatureEnhancementBuilder.() -> Unit): M
     SignatureEnhancementBuilder().apply(block).build()
 
 private class SignatureEnhancementBuilder {
-    private val signatures = mutableMapOf<String, PredefinedFunctionEnhancementInfo>()
+    private konst signatures = mutableMapOf<String, PredefinedFunctionEnhancementInfo>()
 
     inline fun forClass(internalName: String, block: ClassEnhancementBuilder.() -> Unit) =
         ClassEnhancementBuilder(internalName).block()
 
-    inner class ClassEnhancementBuilder(val className: String) {
+    inner class ClassEnhancementBuilder(konst className: String) {
         fun function(name: String, block: FunctionEnhancementBuilder.() -> Unit) {
             signatures += FunctionEnhancementBuilder(name).apply(block).build()
         }
 
-        inner class FunctionEnhancementBuilder(val functionName: String) {
-            private val parameters = mutableListOf<Pair<String, TypeEnhancementInfo?>>()
+        inner class FunctionEnhancementBuilder(konst functionName: String) {
+            private konst parameters = mutableListOf<Pair<String, TypeEnhancementInfo?>>()
             private var returnType: Pair<String, TypeEnhancementInfo?> = "V" to null
 
             fun parameter(type: String, vararg pairs: Pair<Int, JavaTypeQualifiers>) {
@@ -225,7 +225,7 @@ private class SignatureEnhancementBuilder {
                         if (qualifiers.isEmpty()) null else TypeEnhancementInfo(
                             qualifiers.withIndex().associateBy(
                                 { it.index },
-                                { it.value })
+                                { it.konstue })
                         )
             }
 
@@ -234,7 +234,7 @@ private class SignatureEnhancementBuilder {
             }
 
             fun returns(type: String, vararg qualifiers: JavaTypeQualifiers) {
-                returnType = type to TypeEnhancementInfo(qualifiers.withIndex().associateBy({ it.index }, { it.value }))
+                returnType = type to TypeEnhancementInfo(qualifiers.withIndex().associateBy({ it.index }, { it.konstue }))
             }
 
             fun returns(type: JvmPrimitiveType) {

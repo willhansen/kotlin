@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.fir.types.toLookupTag
 
 fun FirEnumEntryDeserializedAccessExpression.toQualifiedPropertyAccessExpression(session: FirSession): FirPropertyAccessExpression =
     buildPropertyAccessExpression {
-        val entryPropertySymbol = session.symbolProvider.getClassDeclaredPropertySymbols(
+        konst entryPropertySymbol = session.symbolProvider.getClassDeclaredPropertySymbols(
             enumClassId, enumEntryName,
         ).firstOrNull { it.isStatic }
 
@@ -36,7 +36,7 @@ fun FirEnumEntryDeserializedAccessExpression.toQualifiedPropertyAccessExpression
             else -> {
                 buildErrorNamedReference {
                     diagnostic = ConeSimpleDiagnostic(
-                        "Strange deserialized enum value: $enumClassId.$enumEntryName",
+                        "Strange deserialized enum konstue: $enumClassId.$enumEntryName",
                         DiagnosticKind.Java,
                     )
                 }

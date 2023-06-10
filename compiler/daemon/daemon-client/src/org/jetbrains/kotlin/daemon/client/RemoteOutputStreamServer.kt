@@ -24,7 +24,7 @@ import java.io.OutputStream
 import java.rmi.server.UnicastRemoteObject
 
 
-class RemoteOutputStreamServer(val out: OutputStream, port: Int = SOCKET_ANY_FREE_PORT)
+class RemoteOutputStreamServer(konst out: OutputStream, port: Int = SOCKET_ANY_FREE_PORT)
 : RemoteOutputStream,
   UnicastRemoteObject(port, LoopbackNetworkInterface.clientLoopbackSocketFactory, LoopbackNetworkInterface.serverLoopbackSocketFactory)
 {

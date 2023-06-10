@@ -1,7 +1,7 @@
 package
 
-public val aImpl: A.Companion.Interface
-public val bImpl: B.Companion.Interface
+public konst aImpl: A.Companion.Interface
+public konst bImpl: B.Companion.Interface
 
 public interface A {
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

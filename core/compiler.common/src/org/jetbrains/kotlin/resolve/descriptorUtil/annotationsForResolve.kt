@@ -9,16 +9,16 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-val NO_INFER_ANNOTATION_FQ_NAME = FqName("kotlin.internal.NoInfer")
-val EXACT_ANNOTATION_FQ_NAME = FqName("kotlin.internal.Exact")
-val LOW_PRIORITY_IN_OVERLOAD_RESOLUTION_FQ_NAME = FqName("kotlin.internal.LowPriorityInOverloadResolution")
-val HIDES_MEMBERS_ANNOTATION_FQ_NAME = FqName("kotlin.internal.HidesMembers")
-val ONLY_INPUT_TYPES_FQ_NAME = FqName("kotlin.internal.OnlyInputTypes")
-val DYNAMIC_EXTENSION_FQ_NAME = FqName("kotlin.internal.DynamicExtension")
-val BUILDER_INFERENCE_ANNOTATION_FQ_NAME = FqName("kotlin.BuilderInference")
+konst NO_INFER_ANNOTATION_FQ_NAME = FqName("kotlin.internal.NoInfer")
+konst EXACT_ANNOTATION_FQ_NAME = FqName("kotlin.internal.Exact")
+konst LOW_PRIORITY_IN_OVERLOAD_RESOLUTION_FQ_NAME = FqName("kotlin.internal.LowPriorityInOverloadResolution")
+konst HIDES_MEMBERS_ANNOTATION_FQ_NAME = FqName("kotlin.internal.HidesMembers")
+konst ONLY_INPUT_TYPES_FQ_NAME = FqName("kotlin.internal.OnlyInputTypes")
+konst DYNAMIC_EXTENSION_FQ_NAME = FqName("kotlin.internal.DynamicExtension")
+konst BUILDER_INFERENCE_ANNOTATION_FQ_NAME = FqName("kotlin.BuilderInference")
 
-val OVERLOAD_RESOLUTION_BY_LAMBDA_ANNOTATION_CLASS_ID = ClassId(FqName("kotlin"), Name.identifier("OverloadResolutionByLambdaReturnType"))
-val OVERLOAD_RESOLUTION_BY_LAMBDA_ANNOTATION_FQ_NAME = OVERLOAD_RESOLUTION_BY_LAMBDA_ANNOTATION_CLASS_ID.asSingleFqName()
+konst OVERLOAD_RESOLUTION_BY_LAMBDA_ANNOTATION_CLASS_ID = ClassId(FqName("kotlin"), Name.identifier("OverloadResolutionByLambdaReturnType"))
+konst OVERLOAD_RESOLUTION_BY_LAMBDA_ANNOTATION_FQ_NAME = OVERLOAD_RESOLUTION_BY_LAMBDA_ANNOTATION_CLASS_ID.asSingleFqName()
 
 // @HidesMembers annotation only has effect for members with these names
-val HIDES_MEMBERS_NAME_LIST = setOf(Name.identifier("forEach"), Name.identifier("addSuppressed"))
+konst HIDES_MEMBERS_NAME_LIST = setOf(Name.identifier("forEach"), Name.identifier("addSuppressed"))

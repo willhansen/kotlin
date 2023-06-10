@@ -35,47 +35,47 @@ import org.jetbrains.kotlin.statistics.metrics.StringMetrics
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
-private const val KOTLIN_PROJECT_EXTENSION_NAME = "kotlin"
+private const konst KOTLIN_PROJECT_EXTENSION_NAME = "kotlin"
 
 internal fun Project.createKotlinExtension(extensionClass: KClass<out KotlinTopLevelExtension>): KotlinTopLevelExtension {
     return extensions.create(KOTLIN_PROJECT_EXTENSION_NAME, extensionClass.java, this)
 }
 
-internal val Project.topLevelExtension: KotlinTopLevelExtension
+internal konst Project.topLevelExtension: KotlinTopLevelExtension
     get() = extensions.getByName(KOTLIN_PROJECT_EXTENSION_NAME).castIsolatedKotlinPluginClassLoaderAware()
 
-internal val Project.topLevelExtensionOrNull: KotlinTopLevelExtension?
+internal konst Project.topLevelExtensionOrNull: KotlinTopLevelExtension?
     get() = extensions.findByName(KOTLIN_PROJECT_EXTENSION_NAME)?.castIsolatedKotlinPluginClassLoaderAware<KotlinTopLevelExtension>()
 
-internal val Project.kotlinExtensionOrNull: KotlinProjectExtension?
+internal konst Project.kotlinExtensionOrNull: KotlinProjectExtension?
     get() = extensions.findByName(KOTLIN_PROJECT_EXTENSION_NAME)?.castIsolatedKotlinPluginClassLoaderAware()
 
-val Project.kotlinExtension: KotlinProjectExtension
+konst Project.kotlinExtension: KotlinProjectExtension
     get() = extensions.getByName(KOTLIN_PROJECT_EXTENSION_NAME).castIsolatedKotlinPluginClassLoaderAware()
 
-internal val Project.kotlinJvmExtensionOrNull: KotlinJvmProjectExtension?
+internal konst Project.kotlinJvmExtensionOrNull: KotlinJvmProjectExtension?
     get() = extensions.findByName(KOTLIN_PROJECT_EXTENSION_NAME)?.castIsolatedKotlinPluginClassLoaderAware()
 
-internal val Project.kotlinJvmExtension: KotlinJvmProjectExtension
+internal konst Project.kotlinJvmExtension: KotlinJvmProjectExtension
     get() = extensions.getByName(KOTLIN_PROJECT_EXTENSION_NAME).castIsolatedKotlinPluginClassLoaderAware()
 
-internal val Project.multiplatformExtensionOrNull: KotlinMultiplatformExtension?
+internal konst Project.multiplatformExtensionOrNull: KotlinMultiplatformExtension?
     get() = extensions.findByName(KOTLIN_PROJECT_EXTENSION_NAME)?.castIsolatedKotlinPluginClassLoaderAware()
 
-internal val Project.multiplatformExtension: KotlinMultiplatformExtension
+internal konst Project.multiplatformExtension: KotlinMultiplatformExtension
     get() = extensions.getByName(KOTLIN_PROJECT_EXTENSION_NAME).castIsolatedKotlinPluginClassLoaderAware()
 
-internal val Project.pm20Extension: KotlinPm20ProjectExtension
+internal konst Project.pm20Extension: KotlinPm20ProjectExtension
     get() = extensions.getByName(KOTLIN_PROJECT_EXTENSION_NAME).castIsolatedKotlinPluginClassLoaderAware()
 
-internal val Project.pm20ExtensionOrNull: KotlinPm20ProjectExtension?
+internal konst Project.pm20ExtensionOrNull: KotlinPm20ProjectExtension?
     get() = extensions.findByName(KOTLIN_PROJECT_EXTENSION_NAME)?.castIsolatedKotlinPluginClassLoaderAware()
 
-abstract class KotlinTopLevelExtension(internal val project: Project) : KotlinTopLevelExtensionConfig {
+abstract class KotlinTopLevelExtension(internal konst project: Project) : KotlinTopLevelExtensionConfig {
 
     override lateinit var coreLibrariesVersion: String
 
-    private val toolchainSupport = ToolchainSupport.createToolchain(project, this)
+    private konst toolchainSupport = ToolchainSupport.createToolchain(project, this)
 
     /**
      * Configures [Java toolchain](https://docs.gradle.org/current/userguide/toolchains.html) both for Kotlin JVM and Java tasks.
@@ -106,12 +106,12 @@ abstract class KotlinTopLevelExtension(internal val project: Project) : KotlinTo
     var kotlinDaemonJvmArgs: List<String>
         @Deprecated("", level = DeprecationLevel.ERROR)
         get() = throw UnsupportedOperationException()
-        set(value) {
+        set(konstue) {
             project
                 .tasks
                 .withType<CompileUsingKotlinDaemon>()
                 .configureEach {
-                    it.kotlinDaemonJvmArguments.set(value)
+                    it.kotlinDaemonJvmArguments.set(konstue)
                 }
         }
 
@@ -127,11 +127,11 @@ abstract class KotlinTopLevelExtension(internal val project: Project) : KotlinTo
 
     /**
      * Can be used to configure objects that are not yet created, or will be created in
-     * 'afterEvaluate' (e.g. typically Android source sets containing flavors and buildTypes)
+     * 'afterEkonstuate' (e.g. typically Android source sets containing flavors and buildTypes)
      *
-     * Will fail project evaluation if the domain object is not created before 'afterEvaluate' listeners in the buildscript.
+     * Will fail project ekonstuation if the domain object is not created before 'afterEkonstuate' listeners in the buildscript.
      *
-     * @param configure: Called inline, if the value is already present. Called once the domain object is created.
+     * @param configure: Called inline, if the konstue is already present. Called once the domain object is created.
      */
     @ExperimentalKotlinGradlePluginApi
     fun <T : Named> NamedDomainObjectContainer<T>.invokeWhenCreated(name: String, configure: T.() -> Unit) {
@@ -163,7 +163,7 @@ internal fun ExplicitApiMode.toCompilerValue() = when (this) {
 }
 
 internal fun KotlinTopLevelExtension.explicitApiModeAsCompilerArg(): String? {
-    val cliOption = explicitApi?.toCompilerValue()
+    konst cliOption = explicitApi?.toCompilerValue()
 
     return cliOption?.let { "-Xexplicit-api=$it" }
 }
@@ -172,8 +172,8 @@ open class KotlinProjectExtension @Inject constructor(project: Project) : Kotlin
     override var sourceSets: NamedDomainObjectContainer<KotlinSourceSet>
         @Suppress("UNCHECKED_CAST")
         get() = DslObject(this).extensions.getByName("sourceSets") as NamedDomainObjectContainer<KotlinSourceSet>
-        internal set(value) {
-            DslObject(this).extensions.add("sourceSets", value)
+        internal set(konstue) {
+            DslObject(this).extensions.add("sourceSets", konstue)
         }
 
     internal suspend fun awaitSourceSets(): NamedDomainObjectContainer<KotlinSourceSet> {
@@ -183,7 +183,7 @@ open class KotlinProjectExtension @Inject constructor(project: Project) : Kotlin
 }
 
 abstract class KotlinSingleTargetExtension<TARGET : KotlinTarget>(project: Project) : KotlinProjectExtension(project) {
-    abstract val target: TARGET
+    abstract konst target: TARGET
 
     fun target(body: Action<TARGET>) = body.execute(target)
 }
@@ -196,7 +196,7 @@ abstract class KotlinJvmProjectExtension(project: Project) : KotlinSingleJavaTar
 
     open fun target(body: KotlinWithJavaTarget<KotlinJvmOptions, KotlinJvmCompilerOptions>.() -> Unit) = target.run(body)
 
-    val compilerOptions: KotlinJvmCompilerOptions = project.objects
+    konst compilerOptions: KotlinJvmCompilerOptions = project.objects
         .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
         .configureExperimentalTryK2(project)
 
@@ -212,7 +212,7 @@ abstract class KotlinJvmProjectExtension(project: Project) : KotlinSingleJavaTar
 abstract class Kotlin2JsProjectExtension(project: Project) : KotlinSingleJavaTargetExtension(project) {
     private lateinit var _target: KotlinWithJavaTarget<KotlinJsOptions, KotlinJsCompilerOptions>
 
-    override val target: KotlinWithJavaTarget<KotlinJsOptions, KotlinJsCompilerOptions>
+    override konst target: KotlinWithJavaTarget<KotlinJsOptions, KotlinJsCompilerOptions>
         get() {
             if (!::_target.isInitialized) throw IllegalStateException("Extension target is not initialized!")
 
@@ -233,16 +233,16 @@ abstract class KotlinJsProjectExtension(project: Project) :
 
     lateinit var legacyPreset: KotlinJsSingleTargetPreset
 
-    private val targetSetObservers = mutableListOf<(KotlinJsTargetDsl?) -> Unit>()
+    private konst targetSetObservers = mutableListOf<(KotlinJsTargetDsl?) -> Unit>()
 
     // target is public property
     // Users can write kotlin.target and it should work
     // So call of target should init default configuration
     @Deprecated("Use `target` instead", ReplaceWith("target"))
     var _target: KotlinJsTargetDsl? = null
-        private set(value) {
-            field = value
-            targetSetObservers.forEach { it(value) }
+        private set(konstue) {
+            field = konstue
+            targetSetObservers.forEach { it(konstue) }
         }
 
     fun registerTargetObserver(observer: (KotlinJsTargetDsl?) -> Unit) {
@@ -260,7 +260,7 @@ abstract class KotlinJsProjectExtension(project: Project) :
 
         internal fun warnAboutDeprecatedCompiler(project: Project, compilerType: KotlinJsCompilerType) {
             if (PropertiesProvider(project).jsCompilerNoWarn) return
-            val logger = project.logger
+            konst logger = project.logger
             when (compilerType) {
                 KotlinJsCompilerType.LEGACY -> logger.warn(LEGACY_DEPRECATED)
                 KotlinJsCompilerType.IR -> {}
@@ -268,7 +268,7 @@ abstract class KotlinJsProjectExtension(project: Project) :
             }
         }
 
-        private val LEGACY_DEPRECATED =
+        private konst LEGACY_DEPRECATED =
             """
                 |
                 |==========
@@ -279,7 +279,7 @@ abstract class KotlinJsProjectExtension(project: Project) :
                 |
             """.trimMargin()
 
-        private val BOTH_DEPRECATED =
+        private konst BOTH_DEPRECATED =
             """
                 |
                 |==========
@@ -294,7 +294,7 @@ abstract class KotlinJsProjectExtension(project: Project) :
 
     @Deprecated("Use js() instead", ReplaceWith("js()"))
     @Suppress("DEPRECATION")
-    override val target: KotlinJsTargetDsl
+    override konst target: KotlinJsTargetDsl
         get() {
             if (_target == null) {
                 js {}
@@ -302,7 +302,7 @@ abstract class KotlinJsProjectExtension(project: Project) :
             return _target!!
         }
 
-    override val compilerTypeFromProperties: KotlinJsCompilerType? = project.kotlinPropertiesProvider.jsCompiler
+    override konst compilerTypeFromProperties: KotlinJsCompilerType? = project.kotlinPropertiesProvider.jsCompiler
 
     @Suppress("DEPRECATION")
     private fun jsInternal(
@@ -310,18 +310,18 @@ abstract class KotlinJsProjectExtension(project: Project) :
         body: KotlinJsTargetDsl.() -> Unit
     ): KotlinJsTargetDsl {
         if (_target != null) {
-            val previousCompilerType = _target!!.calculateJsCompilerType()
+            konst previousCompilerType = _target!!.calculateJsCompilerType()
             check(compiler == null || previousCompilerType == compiler) {
                 "You already registered Kotlin/JS target with another compiler: ${previousCompilerType.lowerName}"
             }
         }
 
         if (_target == null) {
-            val compilerOrFromProperties = compiler ?: compilerTypeFromProperties
-            val compilerOrDefault = compilerOrFromProperties ?: defaultJsCompilerType
+            konst compilerOrFromProperties = compiler ?: compilerTypeFromProperties
+            konst compilerOrDefault = compilerOrFromProperties ?: defaultJsCompilerType
             reportJsCompilerMode(compilerOrDefault)
             warnAboutDeprecatedCompiler(project, compilerOrDefault)
-            val target: KotlinJsTargetDsl = when (compilerOrDefault) {
+            konst target: KotlinJsTargetDsl = when (compilerOrDefault) {
                 KotlinJsCompilerType.LEGACY -> legacyPreset
                     .also {
                         it.irPreset = null
@@ -420,7 +420,7 @@ abstract class KotlinAndroidProjectExtension(project: Project) : KotlinSingleTar
 
     open fun target(body: KotlinAndroidTarget.() -> Unit) = target.run(body)
 
-    val compilerOptions: KotlinJvmCompilerOptions = project.objects
+    konst compilerOptions: KotlinJvmCompilerOptions = project.objects
         .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
         .configureExperimentalTryK2(project)
 
@@ -433,14 +433,14 @@ abstract class KotlinAndroidProjectExtension(project: Project) : KotlinSingleTar
     }
 }
 
-enum class NativeCacheKind(val produce: String?, val outputKind: CompilerOutputKind?) {
+enum class NativeCacheKind(konst produce: String?, konst outputKind: CompilerOutputKind?) {
     NONE(null, null),
     DYNAMIC("dynamic_cache", CompilerOutputKind.DYNAMIC_CACHE),
     STATIC("static_cache", CompilerOutputKind.STATIC_CACHE);
 
     companion object {
         fun byCompilerArgument(argument: String): NativeCacheKind? =
-            NativeCacheKind.values().firstOrNull { it.name.equals(argument, ignoreCase = true) }
+            NativeCacheKind.konstues().firstOrNull { it.name.equals(argument, ignoreCase = true) }
     }
 }
 
@@ -451,6 +451,6 @@ enum class NativeCacheOrchestration {
 
     companion object {
         fun byCompilerArgument(argument: String): NativeCacheOrchestration? =
-            NativeCacheOrchestration.values().firstOrNull { it.name.equals(argument, ignoreCase = true) }
+            NativeCacheOrchestration.konstues().firstOrNull { it.name.equals(argument, ignoreCase = true) }
     }
 }

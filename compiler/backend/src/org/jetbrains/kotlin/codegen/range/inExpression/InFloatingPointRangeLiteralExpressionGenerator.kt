@@ -28,15 +28,15 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class InFloatingPointRangeLiteralExpressionGenerator(
     operatorReference: KtSimpleNameExpression,
-    private val rangeLiteral: BoundedValue,
-    private val comparisonGenerator: ComparisonGenerator,
-    private val frameMap: FrameMap
+    private konst rangeLiteral: BoundedValue,
+    private konst comparisonGenerator: ComparisonGenerator,
+    private konst frameMap: FrameMap
 ) : InExpressionGenerator {
     init {
         assert(rangeLiteral.isLowInclusive && rangeLiteral.isHighInclusive) { "Floating point range literal bounds should be inclusive" }
     }
 
-    private val isNotIn = operatorReference.getReferencedNameElementType() == KtTokens.NOT_IN
+    private konst isNotIn = operatorReference.getReferencedNameElementType() == KtTokens.NOT_IN
 
     override fun generate(argument: StackValue): BranchedValue =
         gen(argument).let { if (isNotIn) Invert(it) else it }
@@ -59,7 +59,7 @@ class InFloatingPointRangeLiteralExpressionGenerator(
                 //  exitLabel:
 
                 frameMap.useTmpVar(operandType) { _ ->
-                    val exitLabel = Label()
+                    konst exitLabel = Label()
                     genJumpIfFalse(v, exitLabel)
                     v.goTo(jumpLabel)
                     v.mark(exitLabel)
@@ -70,11 +70,11 @@ class InFloatingPointRangeLiteralExpressionGenerator(
                 // if (arg is NOT in range) goto jumpLabel
 
                 frameMap.useTmpVar(operandType) { argVar ->
-                    // Evaluate low and high bounds once (unless they have no side effects)
-                    val (lowValue, lowTmpType) = introduceTemporaryIfRequired(v, rangeLiteral.lowBound, operandType)
-                    val (highValue, highTmpType) = introduceTemporaryIfRequired(v, rangeLiteral.highBound, operandType)
+                    // Ekonstuate low and high bounds once (unless they have no side effects)
+                    konst (lowValue, lowTmpType) = introduceTemporaryIfRequired(v, rangeLiteral.lowBound, operandType)
+                    konst (highValue, highTmpType) = introduceTemporaryIfRequired(v, rangeLiteral.highBound, operandType)
 
-                    val argValue = StackValue.local(argVar, operandType)
+                    konst argValue = StackValue.local(argVar, operandType)
                     argValue.store(arg1, v)
 
                     // if (low bound is NOT satisfied) goto jumpLabel
@@ -95,18 +95,18 @@ class InFloatingPointRangeLiteralExpressionGenerator(
 
             }
 
-            // TODO evaluateOnce
-            private fun introduceTemporaryIfRequired(v: InstructionAdapter, value: StackValue, type: Type): Pair<StackValue, Type?> {
-                val resultValue: StackValue
-                val resultType: Type?
+            // TODO ekonstuateOnce
+            private fun introduceTemporaryIfRequired(v: InstructionAdapter, konstue: StackValue, type: Type): Pair<StackValue, Type?> {
+                konst resultValue: StackValue
+                konst resultType: Type?
 
-                if (value.canHaveSideEffects()) {
-                    val index = frameMap.enterTemp(type)
+                if (konstue.canHaveSideEffects()) {
+                    konst index = frameMap.enterTemp(type)
                     resultValue = StackValue.local(index, type)
                     resultType = type
-                    resultValue.store(value, v)
+                    resultValue.store(konstue, v)
                 } else {
-                    resultValue = value
+                    resultValue = konstue
                     resultType = null
                 }
 

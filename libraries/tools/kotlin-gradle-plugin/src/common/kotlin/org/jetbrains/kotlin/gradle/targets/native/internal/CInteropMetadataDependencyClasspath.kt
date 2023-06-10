@@ -31,11 +31,11 @@ internal fun Project.createCInteropMetadataDependencyClasspathForIde(sourceSet: 
  * as transformation output to ensure IDE still being able to resolve the dependencies even when the project is cleaned.
  */
 internal fun Project.createCInteropMetadataDependencyClasspath(sourceSet: DefaultKotlinSourceSet, forIde: Boolean): FileCollection {
-    val dependencyTransformationTask = if (forIde) locateOrRegisterCInteropMetadataDependencyTransformationTaskForIde(sourceSet)
+    konst dependencyTransformationTask = if (forIde) locateOrRegisterCInteropMetadataDependencyTransformationTaskForIde(sourceSet)
     else locateOrRegisterCInteropMetadataDependencyTransformationTask(sourceSet)
     if (dependencyTransformationTask == null) return project.files()
 
-    val dependencyTransformationTaskOutputs = project.files(dependencyTransformationTask.map { it.outputLibraryFiles })
+    konst dependencyTransformationTaskOutputs = project.files(dependencyTransformationTask.map { it.outputLibraryFiles })
     return if (forIde) {
         /*
             For IDE Import the classpath will be assembled by three independent parts:
@@ -69,7 +69,7 @@ private fun Project.createCInteropMetadataDependencyClasspathFromProjectDependen
             .filterIsInstance<ChooseVisibleSourceSets>()
             .mapNotNull { chooseVisibleSourceSets ->
                 /* We only want to access resolutions that provide metadata from dependency projects */
-                val projectMetadataProvider = when (chooseVisibleSourceSets.metadataProvider) {
+                konst projectMetadataProvider = when (chooseVisibleSourceSets.metadataProvider) {
                     is ProjectMetadataProvider -> chooseVisibleSourceSets.metadataProvider
                     is ArtifactMetadataProvider -> return@mapNotNull null
                 }
@@ -86,14 +86,14 @@ private fun Project.createCInteropMetadataDependencyClasspathFromAssociatedCompi
     forIde: Boolean
 ): FileCollection {
     return filesProvider files@{
-        val commonizerTarget = sourceSet.sharedCommonizerTarget.getOrThrow() ?: return@files emptySet<File>()
+        konst commonizerTarget = sourceSet.sharedCommonizerTarget.getOrThrow() ?: return@files emptySet<File>()
 
         /*
         We will find the 'most suitable' / 'closest matching' source set
         (like 'nativeTest' -> 'nativeMain', 'appleTest' -> 'appleMain', ...).
         If no source set is found that matches the commonizer target explicitly, the next "bigger" source set shall be chosen
          */
-        val (associatedSourceSet, _) = sourceSet.getAdditionalVisibleSourceSets()
+        konst (associatedSourceSet, _) = sourceSet.getAdditionalVisibleSourceSets()
             .filterIsInstance<DefaultKotlinSourceSet>()
             .mapNotNull { otherSourceSet -> otherSourceSet to (otherSourceSet.sharedCommonizerTarget.getOrThrow() ?: return@mapNotNull null) }
             .filter { (_, otherCommonizerTarget) -> otherCommonizerTarget.targets.containsAll(commonizerTarget.targets) }
@@ -107,13 +107,13 @@ private fun Project.createCInteropMetadataDependencyClasspathFromAssociatedCompi
  * Names of all source sets that may potentially provide necessary cinterops for this resolution.
  * This will select 'the most bottom' source sets in [ChooseVisibleSourceSets.allVisibleSourceSetNames]
  */
-internal val ChooseVisibleSourceSets.visibleSourceSetProvidingCInterops: String?
+internal konst ChooseVisibleSourceSets.visibleSourceSetProvidingCInterops: String?
     get() {
-        val dependsOnSourceSets = allVisibleSourceSetNames
+        konst dependsOnSourceSets = allVisibleSourceSetNames
             .flatMap { projectStructureMetadata.sourceSetsDependsOnRelation[it].orEmpty() }
             .toSet()
 
-        val bottomSourceSets = allVisibleSourceSetNames.filter { it !in dependsOnSourceSets }.toSet()
+        konst bottomSourceSets = allVisibleSourceSetNames.filter { it !in dependsOnSourceSets }.toSet()
 
         /* Select the source set participating in the least amount of variants (the most special one) */
         return bottomSourceSets.minByOrNull { sourceSetName ->

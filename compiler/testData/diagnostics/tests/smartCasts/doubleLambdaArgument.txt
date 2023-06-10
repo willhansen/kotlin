@@ -1,6 +1,6 @@
 package
 
-public val foo: Foo
+public konst foo: Foo
 public fun foo(): Foo?
 
 public interface Foo {

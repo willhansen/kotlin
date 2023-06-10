@@ -22,17 +22,17 @@ import org.jetbrains.kotlin.test.utils.withExtension
 
 class DynamicCallsDumpHandler(testServices: TestServices) : ClassicFrontendAnalysisHandler(testServices) {
     companion object {
-        private const val DYNAMIC_PREFIX = ".dynamic.txt"
+        private const konst DYNAMIC_PREFIX = ".dynamic.txt"
     }
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(DiagnosticsDirectives)
 
-    private val dumper: MultiModuleInfoDumper = MultiModuleInfoDumper(moduleHeaderTemplate = "// -- Module: <%s> --")
+    private konst dumper: MultiModuleInfoDumper = MultiModuleInfoDumper(moduleHeaderTemplate = "// -- Module: <%s> --")
 
     override fun processModule(module: TestModule, info: ClassicFrontendOutputArtifact) {
-        val dynamicCallDescriptors = mutableListOf<DeclarationDescriptor>()
-        for (ktFile in info.ktFiles.values) {
+        konst dynamicCallDescriptors = mutableListOf<DeclarationDescriptor>()
+        for (ktFile in info.ktFiles.konstues) {
             DebugInfoUtil.markDebugAnnotations(
                 ktFile,
                 info.analysisResult.bindingContext,
@@ -45,8 +45,8 @@ class DynamicCallsDumpHandler(testServices: TestServices) : ClassicFrontendAnaly
                 )
             )
         }
-        val serializer = RecursiveDescriptorComparator(RECURSIVE_ALL)
-        val builder = dumper.builderForModule(module)
+        konst serializer = RecursiveDescriptorComparator(RECURSIVE_ALL)
+        konst builder = dumper.builderForModule(module)
         for (descriptor in dynamicCallDescriptors) {
             builder.append(serializer.serializeRecursively(descriptor))
         }
@@ -54,9 +54,9 @@ class DynamicCallsDumpHandler(testServices: TestServices) : ClassicFrontendAnaly
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
-        val expectedFile = testServices.moduleStructure.originalTestDataFiles.first().withExtension(DYNAMIC_PREFIX)
+        konst expectedFile = testServices.moduleStructure.originalTestDataFiles.first().withExtension(DYNAMIC_PREFIX)
         if (expectedFile.exists()) {
-            val resultDump = dumper.generateResultingDump()
+            konst resultDump = dumper.generateResultingDump()
             assertions.assertEqualsToFile(expectedFile, resultDump)
         }
     }

@@ -4,7 +4,7 @@ FILE: abstractSuperCall.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val x: R|kotlin/Int| = Int(10)
+        public open konst x: R|kotlin/Int| = Int(10)
             public get(): R|kotlin/Int|
 
         public final fun h(): R|kotlin/Unit| {
@@ -16,10 +16,10 @@ FILE: abstractSuperCall.kt
             super<R|C|>()
         }
 
-        public open override val x: R|kotlin/Int| = Int(20)
+        public open override konst x: R|kotlin/Int| = Int(20)
             public get(): R|kotlin/Int|
 
-        public abstract val y: R|kotlin/Int|
+        public abstract konst y: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
         public abstract fun f(): R|kotlin/Unit|

@@ -12,14 +12,14 @@ import java.io.Serializable
  * Implementation of the [KotlinAndroidExtension] interface.
  */
 data class KotlinAndroidExtensionImpl(
-    override val name: String,
-    override val isExperimental: Boolean,
-    override val defaultCacheImplementation: String?
+    override konst name: String,
+    override konst isExperimental: Boolean,
+    override konst defaultCacheImplementation: String?
 ) : KotlinAndroidExtension, Serializable {
 
-    override val modelVersion = serialVersionUID
+    override konst modelVersion = serialVersionUID
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

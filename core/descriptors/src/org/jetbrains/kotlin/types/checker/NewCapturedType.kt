@@ -31,15 +31,15 @@ import org.jetbrains.kotlin.types.error.ErrorScopeKind
 import org.jetbrains.kotlin.types.typeUtil.asTypeProjection
 import org.jetbrains.kotlin.types.typeUtil.builtIns
 
-private class CapturedArguments(val capturedArguments: List<TypeProjection>, private val originalType: KotlinType) {
+private class CapturedArguments(konst capturedArguments: List<TypeProjection>, private konst originalType: KotlinType) {
     fun isSuitableForType(type: KotlinType): Boolean {
-        val areArgumentsMatched = type.arguments.withIndex().all { (i, typeArgumentsType) ->
+        konst areArgumentsMatched = type.arguments.withIndex().all { (i, typeArgumentsType) ->
             originalType.arguments.size > i && typeArgumentsType == originalType.arguments[i]
         }
 
         if (!areArgumentsMatched) return false
 
-        val areConstructorsMatched = originalType.constructor == type.constructor
+        konst areConstructorsMatched = originalType.constructor == type.constructor
                 || areTypesMayBeLowerAndUpperBoundsOfSameFlexibleTypeByMutability(originalType, type)
 
         if (!areConstructorsMatched) return false
@@ -54,7 +54,7 @@ fun prepareArgumentTypeRegardingCaptureTypes(argumentType: UnwrappedType): Unwra
 }
 
 fun captureFromExpression(type: UnwrappedType): UnwrappedType? {
-    val typeConstructor = type.constructor
+    konst typeConstructor = type.constructor
 
     if (typeConstructor !is IntersectionTypeConstructor) {
         return captureFromArguments(type, CaptureStatus.FROM_EXPRESSION)
@@ -70,7 +70,7 @@ fun captureFromExpression(type: UnwrappedType): UnwrappedType? {
      *        Example: MutableList<*>..List<*>? -> MutableList<Captured1(*)>..List<Captured2(*)>?, Captured1(*) and Captured2(*) are the same.
      *  2) Secondly, we replace type arguments with captured arguments by given a type constructor and type arguments.
      */
-    val capturedArgumentsByComponents = captureArgumentsForIntersectionType(type) ?: return null
+    konst capturedArgumentsByComponents = captureArgumentsForIntersectionType(type) ?: return null
 
     // We reuse `TypeToCapture` for some types, suitability to reuse defines by `isSuitableForType`
     fun findCorrespondingCapturedArgumentsForType(type: KotlinType) =
@@ -79,21 +79,21 @@ fun captureFromExpression(type: UnwrappedType): UnwrappedType? {
     fun replaceArgumentsWithCapturedArgumentsByIntersectionComponents(typeToReplace: UnwrappedType): List<SimpleType> {
         return if (typeToReplace.constructor is IntersectionTypeConstructor) {
             typeToReplace.constructor.supertypes.map { componentType ->
-                val capturedArguments = findCorrespondingCapturedArgumentsForType(componentType)
+                konst capturedArguments = findCorrespondingCapturedArgumentsForType(componentType)
                     ?: return@map componentType.asSimpleType()
                 componentType.unwrap().replaceArguments(capturedArguments)
             }
         } else {
-            val capturedArguments = findCorrespondingCapturedArgumentsForType(typeToReplace)
+            konst capturedArguments = findCorrespondingCapturedArgumentsForType(typeToReplace)
                 ?: return listOf(typeToReplace.asSimpleType())
             listOf(typeToReplace.unwrap().replaceArguments(capturedArguments))
         }
     }
 
     return if (type is FlexibleType) {
-        val lowerIntersectedType = intersectTypes(replaceArgumentsWithCapturedArgumentsByIntersectionComponents(type.lowerBound))
+        konst lowerIntersectedType = intersectTypes(replaceArgumentsWithCapturedArgumentsByIntersectionComponents(type.lowerBound))
             .makeNullableAsSpecified(type.lowerBound.isMarkedNullable)
-        val upperIntersectedType = intersectTypes(replaceArgumentsWithCapturedArgumentsByIntersectionComponents(type.upperBound))
+        konst upperIntersectedType = intersectTypes(replaceArgumentsWithCapturedArgumentsByIntersectionComponents(type.upperBound))
             .makeNullableAsSpecified(type.upperBound.isMarkedNullable)
 
         KotlinTypeFactory.flexibleType(lowerIntersectedType, upperIntersectedType)
@@ -111,16 +111,16 @@ private fun captureArgumentsForIntersectionType(type: KotlinType): List<Captured
     fun getTypesToCapture(type: KotlinType) =
         if (type.constructor is IntersectionTypeConstructor) type.constructor.supertypes else listOf(type)
 
-    val filteredTypesToCapture =
+    konst filteredTypesToCapture =
         if (type is FlexibleType) {
-            val typesToCapture = getTypesToCapture(type.lowerBound) + getTypesToCapture(type.upperBound)
+            konst typesToCapture = getTypesToCapture(type.lowerBound) + getTypesToCapture(type.upperBound)
             typesToCapture.distinctBy { (FlexibleTypeBoundsChecker.getBaseBoundFqNameByMutability(it) ?: it.constructor) to it.arguments }
         } else type.constructor.supertypes
 
     var changed = false
 
-    val capturedArgumentsByTypes = filteredTypesToCapture.mapNotNull { typeToCapture ->
-        val capturedArguments = captureArguments(typeToCapture.unwrap(), CaptureStatus.FROM_EXPRESSION)
+    konst capturedArgumentsByTypes = filteredTypesToCapture.mapNotNull { typeToCapture ->
+        konst capturedArguments = captureArguments(typeToCapture.unwrap(), CaptureStatus.FROM_EXPRESSION)
             ?: return@mapNotNull null
         changed = true
         CapturedArguments(capturedArguments, originalType = typeToCapture)
@@ -132,7 +132,7 @@ private fun captureArgumentsForIntersectionType(type: KotlinType): List<Captured
 }
 
 private fun captureFromArguments(type: UnwrappedType, status: CaptureStatus): UnwrappedType? {
-    val capturedArguments = captureArguments(type, status) ?: return null
+    konst capturedArguments = captureArguments(type, status) ?: return null
 
     return if (type is FlexibleType) {
         KotlinTypeFactory.flexibleType(
@@ -150,13 +150,13 @@ private fun UnwrappedType.replaceArguments(arguments: List<TypeProjection>) =
 private fun captureArguments(type: UnwrappedType, status: CaptureStatus): List<TypeProjection>? {
     if (type.arguments.size != type.constructor.parameters.size) return null
 
-    val arguments = type.arguments
+    konst arguments = type.arguments
     if (arguments.all { it.projectionKind == Variance.INVARIANT }) return null
 
-    val capturedArguments = arguments.zip(type.constructor.parameters).map { (projection, parameter) ->
+    konst capturedArguments = arguments.zip(type.constructor.parameters).map { (projection, parameter) ->
         if (projection.projectionKind == Variance.INVARIANT) return@map projection
 
-        val lowerType =
+        konst lowerType =
             if (!projection.isStarProjection && projection.projectionKind == Variance.IN_VARIANCE) {
                 projection.type.unwrap()
             } else {
@@ -166,14 +166,14 @@ private fun captureArguments(type: UnwrappedType, status: CaptureStatus): List<T
         NewCapturedType(status, lowerType, projection, parameter).asTypeProjection() // todo optimization: do not create type projection
     }
 
-    val substitutor = TypeConstructorSubstitution.create(type.constructor, capturedArguments).buildSubstitutor()
+    konst substitutor = TypeConstructorSubstitution.create(type.constructor, capturedArguments).buildSubstitutor()
 
     for (index in arguments.indices) {
-        val oldProjection = arguments[index]
-        val newProjection = capturedArguments[index]
+        konst oldProjection = arguments[index]
+        konst newProjection = capturedArguments[index]
 
         if (oldProjection.projectionKind == Variance.INVARIANT) continue
-        val capturedTypeSupertypes = type.constructor.parameters[index].upperBounds.mapTo(mutableListOf()) {
+        konst capturedTypeSupertypes = type.constructor.parameters[index].upperBounds.mapTo(mutableListOf()) {
             KotlinTypePreparator.Default.prepareType(substitutor.safeSubstitute(it, Variance.INVARIANT).unwrap())
         }
 
@@ -181,7 +181,7 @@ private fun captureArguments(type: UnwrappedType, status: CaptureStatus): List<T
             capturedTypeSupertypes += KotlinTypePreparator.Default.prepareType(oldProjection.type.unwrap())
         }
 
-        val capturedType = newProjection.type as NewCapturedType
+        konst capturedType = newProjection.type as NewCapturedType
         capturedType.constructor.initializeSupertypes(capturedTypeSupertypes)
     }
 
@@ -197,20 +197,20 @@ private fun captureArguments(type: UnwrappedType, status: CaptureStatus): List<T
  *
  */
 class NewCapturedType(
-    val captureStatus: CaptureStatus,
-    override val constructor: NewCapturedTypeConstructor,
-    val lowerType: UnwrappedType?, // todo check lower type for nullable captured types
-    override val attributes: TypeAttributes = TypeAttributes.Empty,
-    override val isMarkedNullable: Boolean = false,
-    val isProjectionNotNull: Boolean = false
+    konst captureStatus: CaptureStatus,
+    override konst constructor: NewCapturedTypeConstructor,
+    konst lowerType: UnwrappedType?, // todo check lower type for nullable captured types
+    override konst attributes: TypeAttributes = TypeAttributes.Empty,
+    override konst isMarkedNullable: Boolean = false,
+    konst isProjectionNotNull: Boolean = false
 ) : SimpleType(), CapturedTypeMarker {
     internal constructor(
         captureStatus: CaptureStatus, lowerType: UnwrappedType?, projection: TypeProjection, typeParameter: TypeParameterDescriptor
     ) : this(captureStatus, NewCapturedTypeConstructor(projection, typeParameter = typeParameter), lowerType)
 
-    override val arguments: List<TypeProjection> get() = listOf()
+    override konst arguments: List<TypeProjection> get() = listOf()
 
-    override val memberScope: MemberScope // todo what about foo().bar() where foo() return captured type?
+    override konst memberScope: MemberScope // todo what about foo().bar() where foo() return captured type?
         get() = ErrorUtils.createErrorScope(ErrorScopeKind.CAPTURED_TYPE_SCOPE, throwExceptions = true)
 
     override fun replaceAttributes(newAttributes: TypeAttributes): SimpleType =
@@ -231,10 +231,10 @@ class NewCapturedType(
 }
 
 class NewCapturedTypeConstructor(
-    override val projection: TypeProjection,
+    override konst projection: TypeProjection,
     private var supertypesComputation: (() -> List<UnwrappedType>)? = null,
-    private val original: NewCapturedTypeConstructor? = null,
-    val typeParameter: TypeParameterDescriptor? = null
+    private konst original: NewCapturedTypeConstructor? = null,
+    konst typeParameter: TypeParameterDescriptor? = null
 ) : CapturedTypeConstructor {
 
     constructor(
@@ -243,7 +243,7 @@ class NewCapturedTypeConstructor(
         original: NewCapturedTypeConstructor? = null
     ) : this(projection, { supertypes }, original)
 
-    private val _supertypes by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst _supertypes by lazy(LazyThreadSafetyMode.PUBLICATION) {
         supertypesComputation?.invoke()
     }
 

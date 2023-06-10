@@ -1,9 +1,9 @@
-class Generic<T : CharSequence?>(val value: T) {
-    fun foo(): T = value
+class Generic<T : CharSequence?>(konst konstue: T) {
+    fun foo(): T = konstue
 }
 
 fun test(arg: Generic<String>) {
-    val value = arg.value
-    val foo = arg.foo()
-    val length = foo.length + value.length
+    konst konstue = arg.konstue
+    konst foo = arg.foo()
+    konst length = foo.length + konstue.length
 }

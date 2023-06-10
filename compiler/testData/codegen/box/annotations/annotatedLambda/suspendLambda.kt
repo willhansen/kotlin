@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Ann(val x: String)
+annotation class Ann(konst x: String)
 
 fun foo0(block: suspend () -> Unit) = block.javaClass
 
@@ -30,10 +30,10 @@ fun testDoesNotHaveAnnotation(method: Method, name: String) {
 
 fun testClass(clazz: Class<*>, name: String) {
     // Check that non-bridge `invokeSuspend` contains the suspend lambda annotation.
-    val invokeSuspends = clazz.getDeclaredMethods().filter { !it.isBridge() && it.name == "invokeSuspend" }
+    konst invokeSuspends = clazz.getDeclaredMethods().filter { !it.isBridge() && it.name == "invokeSuspend" }
     invokeSuspends.forEach { testHasAnnotation(it, name) }
     // Check that non-bridge `invoke` does not contain the suspend lambda annotation.
-    val invokes = clazz.getDeclaredMethods().filter { !it.isBridge() && it.name == "invoke" }
+    konst invokes = clazz.getDeclaredMethods().filter { !it.isBridge() && it.name == "invoke" }
     invokes.forEach { testDoesNotHaveAnnotation(it, name) }
 
 }

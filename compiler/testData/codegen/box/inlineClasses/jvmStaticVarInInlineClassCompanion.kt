@@ -5,7 +5,7 @@
 // FILE: test.kt
 
 @JvmInline
-value class R(private val r: Int) {
+konstue class R(private konst r: Int) {
 
     companion object {
         private var ok_ = ""
@@ -13,7 +13,7 @@ value class R(private val r: Int) {
         @JvmStatic
         var ok
             get() = ok_
-            set(value) { ok_ = value }
+            set(konstue) { ok_ = konstue }
     }
 }
 

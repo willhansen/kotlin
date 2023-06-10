@@ -4,7 +4,7 @@ class Delegate {
   operator fun getValue(t: A, p: KProperty<*>): Int = 1
 }
 
-val A.prop: Int by Delegate()
+konst A.prop: Int by Delegate()
 
 class A {
 }

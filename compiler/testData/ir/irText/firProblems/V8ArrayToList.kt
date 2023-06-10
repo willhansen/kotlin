@@ -16,7 +16,7 @@ public class Utils {
 class V8Array
 
 fun box(): String {
-    val array = V8Array()
-    val list = Utils.toList(array) as List<String>
+    konst array = V8Array()
+    konst list = Utils.toList(array) as List<String>
     return list[0]
 }

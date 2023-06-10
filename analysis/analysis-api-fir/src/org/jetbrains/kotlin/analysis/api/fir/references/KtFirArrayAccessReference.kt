@@ -20,7 +20,7 @@ class KtFirArrayAccessReference(
 ) : KtArrayAccessReference(expression), KtFirReference {
     override fun KtAnalysisSession.resolveToSymbols(): Collection<KtSymbol> {
         check(this is KtFirAnalysisSession)
-        val fir = element.getOrBuildFir(firResolveSession) ?: return emptyList()
+        konst fir = element.getOrBuildFir(firResolveSession) ?: return emptyList()
         return when (fir) {
             is FirFunctionCall -> fir.getCandidateSymbols().map { it.fir.buildSymbol(firSymbolBuilder) }
             is FirResolvedNamedReference -> listOf(fir.resolvedSymbol.buildSymbol(firSymbolBuilder))

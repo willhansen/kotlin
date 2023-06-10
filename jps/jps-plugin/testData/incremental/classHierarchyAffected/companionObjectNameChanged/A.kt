@@ -1,5 +1,5 @@
 class A {
     companion object {
-        val x: String = ""
+        konst x: String = ""
     }
 }

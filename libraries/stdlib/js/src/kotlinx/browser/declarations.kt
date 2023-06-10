@@ -8,14 +8,14 @@ package kotlinx.browser
 import org.w3c.dom.*
 
 @SinceKotlin("1.4")
-public external val window: Window
+public external konst window: Window
 
 @SinceKotlin("1.4")
-public external val document: Document
+public external konst document: Document
 
 @SinceKotlin("1.4")
-public external val localStorage: Storage
+public external konst localStorage: Storage
 
 @SinceKotlin("1.4")
-public external val sessionStorage: Storage
+public external konst sessionStorage: Storage
 

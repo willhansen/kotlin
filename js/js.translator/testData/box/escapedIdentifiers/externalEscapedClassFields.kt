@@ -1,16 +1,16 @@
 // IGNORE_BACKEND: JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
 package foo
 
 external class A {
-    val `@invalid @ val@`: Int = definedExternally
-    var `--invalid-var`: String = definedExternally
+    konst `@inkonstid @ konst@`: Int = definedExternally
+    var `--inkonstid-var`: String = definedExternally
 
     fun `get something$weird`(): String = definedExternally
 
     companion object {
-        val `static val`: Int = definedExternally
+        konst `static konst`: Int = definedExternally
         var `static var`: String = definedExternally
 
         fun `get 🦄`(): String = definedExternally
@@ -18,16 +18,16 @@ external class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
 
-    assertEquals(23, a.`@invalid @ val@`)
-    assertEquals("A: before", a.`--invalid-var`)
+    assertEquals(23, a.`@inkonstid @ konst@`)
+    assertEquals("A: before", a.`--inkonstid-var`)
     assertEquals("something weird", a.`get something$weird`())
 
-    a.`--invalid-var` = "A: after"
-    assertEquals("A: after", a.`--invalid-var`)
+    a.`--inkonstid-var` = "A: after"
+    assertEquals("A: after", a.`--inkonstid-var`)
 
-    assertEquals(42, A.Companion.`static val`)
+    assertEquals(42, A.Companion.`static konst`)
     assertEquals("Companion: before", A.Companion.`static var`)
     assertEquals("\uD83E\uDD84", A.Companion.`get 🦄`())
 

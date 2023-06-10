@@ -8,13 +8,13 @@ import org.jetbrains.kotlin.backend.konan.llvm.*
 import org.jetbrains.kotlin.konan.target.*
 import java.io.Closeable
 
-enum class LlvmOptimizationLevel(val value: Int) {
+enum class LlvmOptimizationLevel(konst konstue: Int) {
     NONE(0),
     DEFAULT(1),
     AGGRESSIVE(3)
 }
 
-enum class LlvmSizeLevel(val value: Int) {
+enum class LlvmSizeLevel(konst konstue: Int) {
     NONE(0),
     DEFAULT(1),
     AGGRESSIVE(2)
@@ -24,25 +24,25 @@ enum class LlvmSizeLevel(val value: Int) {
  * Incorporates everything that is used to tune a [LlvmOptimizationPipeline].
  */
 data class LlvmPipelineConfig(
-        val targetTriple: String,
-        val cpuModel: String,
-        val cpuFeatures: String,
-        val optimizationLevel: LlvmOptimizationLevel,
-        val sizeLevel: LlvmSizeLevel,
-        val codegenOptimizationLevel: LLVMCodeGenOptLevel,
-        val relocMode: LLVMRelocMode,
-        val codeModel: LLVMCodeModel,
-        val globalDce: Boolean,
-        val internalize: Boolean,
-        val makeDeclarationsHidden: Boolean,
-        val objCPasses: Boolean,
-        val inlineThreshold: Int?,
-        val timePasses: Boolean = false,
+        konst targetTriple: String,
+        konst cpuModel: String,
+        konst cpuFeatures: String,
+        konst optimizationLevel: LlvmOptimizationLevel,
+        konst sizeLevel: LlvmSizeLevel,
+        konst codegenOptimizationLevel: LLVMCodeGenOptLevel,
+        konst relocMode: LLVMRelocMode,
+        konst codeModel: LLVMCodeModel,
+        konst globalDce: Boolean,
+        konst internalize: Boolean,
+        konst makeDeclarationsHidden: Boolean,
+        konst objCPasses: Boolean,
+        konst inlineThreshold: Int?,
+        konst timePasses: Boolean = false,
 )
 
 private fun getCpuModel(context: PhaseContext): String {
-    val target = context.config.target
-    val configurables: Configurables = context.config.platform.configurables
+    konst target = context.config.target
+    konst configurables: Configurables = context.config.platform.configurables
     return configurables.targetCpu ?: run {
         context.reportCompilationWarning("targetCpu for target $target was not set. Targeting `generic` cpu.")
         "generic"
@@ -53,11 +53,11 @@ private fun getCpuFeatures(context: PhaseContext): String =
         context.config.platform.configurables.targetCpuFeatures ?: ""
 
 private fun tryGetInlineThreshold(context: PhaseContext): Int? {
-    val configurables: Configurables = context.config.platform.configurables
+    konst configurables: Configurables = context.config.platform.configurables
     return configurables.llvmInlineThreshold?.let {
         it.toIntOrNull() ?: run {
             context.reportCompilationWarning(
-                    "`llvmInlineThreshold` should be an integer. Got `$it` instead. Using default value."
+                    "`llvmInlineThreshold` should be an integer. Got `$it` instead. Using default konstue."
             )
             null
         }
@@ -71,8 +71,8 @@ private fun tryGetInlineThreshold(context: PhaseContext): Int? {
  * even in debug compilation.
  */
 internal fun createLTOPipelineConfigForRuntime(generationState: NativeGenerationState): LlvmPipelineConfig {
-    val config = generationState.config
-    val configurables: Configurables = config.platform.configurables
+    konst config = generationState.config
+    konst configurables: Configurables = config.platform.configurables
     return LlvmPipelineConfig(
             generationState.llvm.targetTriple,
             getCpuModel(generationState),
@@ -104,17 +104,17 @@ internal fun createLTOFinalPipelineConfig(
         closedWorld: Boolean,
         timePasses: Boolean = false,
 ): LlvmPipelineConfig {
-    val config = context.config
-    val target = config.target
-    val configurables: Configurables = config.platform.configurables
-    val cpuModel = getCpuModel(context)
-    val cpuFeatures = getCpuFeatures(context)
-    val optimizationLevel: LlvmOptimizationLevel = when {
+    konst config = context.config
+    konst target = config.target
+    konst configurables: Configurables = config.platform.configurables
+    konst cpuModel = getCpuModel(context)
+    konst cpuFeatures = getCpuFeatures(context)
+    konst optimizationLevel: LlvmOptimizationLevel = when {
         context.shouldOptimize() -> LlvmOptimizationLevel.AGGRESSIVE
         context.shouldContainDebugInfo() -> LlvmOptimizationLevel.NONE
         else -> LlvmOptimizationLevel.DEFAULT
     }
-    val sizeLevel: LlvmSizeLevel = when {
+    konst sizeLevel: LlvmSizeLevel = when {
         // We try to optimize code as much as possible on embedded targets.
         target is KonanTarget.ZEPHYR ||
                 target == KonanTarget.WASM32 -> LlvmSizeLevel.AGGRESSIVE
@@ -122,28 +122,28 @@ internal fun createLTOFinalPipelineConfig(
         context.shouldContainDebugInfo() -> LlvmSizeLevel.NONE
         else -> LlvmSizeLevel.NONE
     }
-    val codegenOptimizationLevel: LLVMCodeGenOptLevel = when {
+    konst codegenOptimizationLevel: LLVMCodeGenOptLevel = when {
         context.shouldOptimize() -> LLVMCodeGenOptLevel.LLVMCodeGenLevelAggressive
         context.shouldContainDebugInfo() -> LLVMCodeGenOptLevel.LLVMCodeGenLevelNone
         else -> LLVMCodeGenOptLevel.LLVMCodeGenLevelDefault
     }
-    val relocMode: LLVMRelocMode = configurables.currentRelocationMode(context).translateToLlvmRelocMode()
-    val codeModel: LLVMCodeModel = LLVMCodeModel.LLVMCodeModelDefault
-    val globalDce = true
+    konst relocMode: LLVMRelocMode = configurables.currentRelocationMode(context).translateToLlvmRelocMode()
+    konst codeModel: LLVMCodeModel = LLVMCodeModel.LLVMCodeModelDefault
+    konst globalDce = true
     // Since we are in a "closed world" internalization can be safely used
     // to reduce size of a bitcode with global dce.
-    val internalize = closedWorld
+    konst internalize = closedWorld
     // Hidden visibility makes symbols internal when linking the binary.
     // When producing dynamic library, this enables stripping unused symbols from binary with -dead_strip flag,
     // similar to DCE enabled by internalize but later:
     //
     // Important for binary size, workarounds references to undefined symbols from interop libraries.
-    val makeDeclarationsHidden = config.produce == CompilerOutputKind.STATIC_CACHE
-    val objcPasses = configurables is AppleConfigurables
+    konst makeDeclarationsHidden = config.produce == CompilerOutputKind.STATIC_CACHE
+    konst objcPasses = configurables is AppleConfigurables
 
-    // Null value means that LLVM should use default inliner params
+    // Null konstue means that LLVM should use default inliner params
     // for the provided optimization and size level.
-    val inlineThreshold: Int? = when {
+    konst inlineThreshold: Int? = when {
         context.shouldOptimize() -> tryGetInlineThreshold(context)
         context.shouldContainDebugInfo() -> null
         else -> null
@@ -171,20 +171,20 @@ internal fun createLTOFinalPipelineConfig(
  * Prepares and executes LLVM pipeline on the given [llvmModule].
  */
 abstract class LlvmOptimizationPipeline(
-        private val config: LlvmPipelineConfig,
-        private val logger: LoggingContext? = null
+        private konst config: LlvmPipelineConfig,
+        private konst logger: LoggingContext? = null
 ) : Closeable {
     abstract fun configurePipeline(config: LlvmPipelineConfig, manager: LLVMPassManagerRef, builder: LLVMPassManagerBuilderRef)
     open fun executeCustomPreprocessing(config: LlvmPipelineConfig, module: LLVMModuleRef) {}
-    abstract val pipelineName: String
+    abstract konst pipelineName: String
 
-    private val arena = Arena()
-    private val targetMachineDelegate = lazy {
-        val target = arena.alloc<LLVMTargetRefVar>()
-        val foundLlvmTarget = LLVMGetTargetFromTriple(config.targetTriple, target.ptr, null) == 0
+    private konst arena = Arena()
+    private konst targetMachineDelegate = lazy {
+        konst target = arena.alloc<LLVMTargetRefVar>()
+        konst foundLlvmTarget = LLVMGetTargetFromTriple(config.targetTriple, target.ptr, null) == 0
         check(foundLlvmTarget) { "Cannot get target from triple ${config.targetTriple}." }
         LLVMCreateTargetMachine(
-                target.value,
+                target.konstue,
                 config.targetTriple,
                 config.cpuModel,
                 config.cpuFeatures,
@@ -193,16 +193,16 @@ abstract class LlvmOptimizationPipeline(
                 config.codeModel)!!
     }
 
-    private val targetMachine: LLVMTargetMachineRef by targetMachineDelegate
+    private konst targetMachine: LLVMTargetMachineRef by targetMachineDelegate
 
 
     fun execute(llvmModule: LLVMModuleRef) {
-        val passManager = LLVMCreatePassManager()!!
-        val passBuilder = LLVMPassManagerBuilderCreate()!!
+        konst passManager = LLVMCreatePassManager()!!
+        konst passBuilder = LLVMPassManagerBuilderCreate()!!
         try {
             initLLVMOnce()
-            LLVMPassManagerBuilderSetOptLevel(passBuilder, config.optimizationLevel.value)
-            LLVMPassManagerBuilderSetSizeLevel(passBuilder, config.sizeLevel.value)
+            LLVMPassManagerBuilderSetOptLevel(passBuilder, config.optimizationLevel.konstue)
+            LLVMPassManagerBuilderSetSizeLevel(passBuilder, config.sizeLevel.konstue)
             config.inlineThreshold?.let { threshold ->
                 LLVMPassManagerBuilderUseInlinerWithThreshold(passBuilder, threshold)
             }
@@ -222,8 +222,8 @@ abstract class LlvmOptimizationPipeline(
                     target_triple: ${config.targetTriple}
                     cpu_model: ${config.cpuModel}
                     cpu_features: ${config.cpuFeatures}
-                    optimization_level: ${config.optimizationLevel.value}
-                    size_level: ${config.sizeLevel.value}
+                    optimization_level: ${config.optimizationLevel.konstue}
+                    size_level: ${config.sizeLevel.konstue}
                     inline_threshold: ${config.inlineThreshold ?: "default"}
                 """.trimIndent()
             }
@@ -255,7 +255,7 @@ abstract class LlvmOptimizationPipeline(
         }
 
         private fun initializeLlvmGlobalPassRegistry() {
-            val passRegistry = LLVMGetGlobalPassRegistry()
+            konst passRegistry = LLVMGetGlobalPassRegistry()
 
             LLVMInitializeCore(passRegistry)
             LLVMInitializeTransformUtils(passRegistry)
@@ -285,7 +285,7 @@ abstract class LlvmOptimizationPipeline(
 class MandatoryOptimizationPipeline(config: LlvmPipelineConfig, logger: LoggingContext? = null) :
         LlvmOptimizationPipeline(config, logger) {
 
-    override val pipelineName = "Mandatory llvm optimizations"
+    override konst pipelineName = "Mandatory llvm optimizations"
 
     override fun configurePipeline(config: LlvmPipelineConfig, manager: LLVMPassManagerRef, builder: LLVMPassManagerBuilderRef) {
         if (config.objCPasses) {
@@ -314,7 +314,7 @@ class ModuleOptimizationPipeline(config: LlvmPipelineConfig, logger: LoggingCont
         LLVMPassManagerBuilderPopulateFunctionPassManager(builder, manager)
     }
 
-    override val pipelineName = "Module LLVM optimizations"
+    override konst pipelineName = "Module LLVM optimizations"
 }
 
 class LTOOptimizationPipeline(config: LlvmPipelineConfig, logger: LoggingContext? = null) :
@@ -332,7 +332,7 @@ class LTOOptimizationPipeline(config: LlvmPipelineConfig, logger: LoggingContext
         LLVMPassManagerBuilderPopulateLTOPassManager(builder, manager, Internalize = 0, RunInliner = 1)
     }
 
-    override val pipelineName = "LTO LLVM optimizations"
+    override konst pipelineName = "LTO LLVM optimizations"
 }
 
 class ThreadSanitizerPipeline(config: LlvmPipelineConfig, logger: LoggingContext? = null) :
@@ -347,7 +347,7 @@ class ThreadSanitizerPipeline(config: LlvmPipelineConfig, logger: LoggingContext
                 .forEach { addLlvmFunctionEnumAttribute(it, LlvmFunctionAttribute.SanitizeThread) }
     }
 
-    override val pipelineName = "Thread sanitizer instrumentation"
+    override konst pipelineName = "Thread sanitizer instrumentation"
 }
 
 

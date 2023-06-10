@@ -28,13 +28,13 @@ abstract class A {
 // FILE: libInline.kt
 
 suspend inline fun foo(): String {
-    val a = object : A() {
+    konst a = object : A() {
         override fun o(): String = "O"
     }
-    val k = "K"
+    konst k = "K"
 
     return suspendAndReturn(a.f()) + runSus {
-        val b = object : A() {
+        konst b = object : A() {
             override fun o(): String = k
         }
         runSus { suspendAndReturn(b.f()) }
@@ -49,7 +49,7 @@ import kotlin.coroutines.*
 fun box(): String {
     var testResult: String = "fail"
 
-    val continuation = Continuation<String>(EmptyCoroutineContext) { result ->
+    konst continuation = Continuation<String>(EmptyCoroutineContext) { result ->
         testResult = result.getOrThrow()
     }
 

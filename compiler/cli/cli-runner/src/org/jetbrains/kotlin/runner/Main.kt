@@ -23,10 +23,10 @@ import java.util.*
 import kotlin.system.exitProcess
 
 object Main {
-    private val KOTLIN_HOME: File
+    private konst KOTLIN_HOME: File
 
     init {
-        val home = System.getProperty("kotlin.home")
+        konst home = System.getProperty("kotlin.home")
         if (home == null) {
             System.err.println("error: no kotlin.home system property was passed")
             exitProcess(1)
@@ -34,7 +34,7 @@ object Main {
         KOTLIN_HOME = File(home)
     }
 
-    enum class HowToRun(val argName: String) {
+    enum class HowToRun(konst argName: String) {
         GUESS("guess"),
         CLASSFILE("classfile"),
         JAR("jar"),
@@ -42,19 +42,19 @@ object Main {
         // TODO: consider implementing REPL as well
 
         companion object {
-            val validValues = "${GUESS.argName} (default), ${CLASSFILE.argName}, ${JAR.argName}, ${SCRIPT.argName} (or .<script filename extension>)"
+            konst konstidValues = "${GUESS.argName} (default), ${CLASSFILE.argName}, ${JAR.argName}, ${SCRIPT.argName} (or .<script filename extension>)"
 
             fun fromArg(name: String): HowToRun? =
-                HowToRun.values().find { it.argName == name }
+                HowToRun.konstues().find { it.argName == name }
         }
     }
 
     private fun run(args: Array<String>) {
-        val classpath = arrayListOf<URL>()
-        val compilerClasspath = arrayListOf<URL>()
+        konst classpath = arrayListOf<URL>()
+        konst compilerClasspath = arrayListOf<URL>()
         var runner: Runner? = null
-        val arguments = arrayListOf<String>()
-        val compilerArguments = arrayListOf<String>()
+        konst arguments = arrayListOf<String>()
+        konst compilerArguments = arrayListOf<String>()
         var noStdLib = false
         var noReflect = false
         var howtorun = HowToRun.GUESS
@@ -69,7 +69,7 @@ object Main {
 
         var i = 0
         while (i < args.size) {
-            val arg = args[i]
+            konst arg = args[i]
 
             fun next(): String {
                 if (++i == args.size) {
@@ -102,18 +102,18 @@ object Main {
                 if (howtorun != HowToRun.GUESS) {
                     throw RunnerException("-howtorun is already set to ${howtorun.argName}")
                 }
-                val howToRunArg = next()
+                konst howToRunArg = next()
                 if (howToRunArg.startsWith(".")) {
                     howtorun = HowToRun.SCRIPT
                     compilerArguments.add("-Xdefault-script-extension=$howToRunArg")
                 } else {
                     howtorun = HowToRun.fromArg(howToRunArg)
-                        ?: throw RunnerException("invalid argument to the option -howtorun $howToRunArg, valid arguments are: ${HowToRun.validValues}")
+                        ?: throw RunnerException("inkonstid argument to the option -howtorun $howToRunArg, konstid arguments are: ${HowToRun.konstidValues}")
                 }
             }
             else if ("-expression" == arg || "-e" == arg) {
                 if (howtorun != HowToRun.GUESS && howtorun != HowToRun.SCRIPT) {
-                    throw RunnerException("expression evaluation is not compatible with -howtorun argument ${howtorun.argName}")
+                    throw RunnerException("expression ekonstuation is not compatible with -howtorun argument ${howtorun.argName}")
                 }
                 setRunner(ExpressionRunner(next()))
                 restAsArguments()
@@ -144,12 +144,12 @@ object Main {
                 break
             }
             else {
-                val workingDir = File(".")
-                val classFile = File(arg)
+                konst workingDir = File(".")
+                konst classFile = File(arg)
 
                 // Allow running class files with '.class' extension.
                 // In order to infer its fully qualified name, it should be located in the current working directory or a subdirectory of it
-                val className =
+                konst className =
                     if (arg.endsWith(".class") && classFile.exists() && classFile.canonicalPath.contains(workingDir.canonicalPath)) {
                         classFile.canonicalFile.toRelativeString(workingDir.canonicalFile)
                             .removeSuffix(".class")
@@ -208,16 +208,16 @@ object Main {
 
 Usage: kotlin <options> <command> [<arguments>]
 where possible options include:
-  -howtorun <value>          How to run the supplied command with arguments, 
-                             valid values: ${HowToRun.validValues}
+  -howtorun <konstue>          How to run the supplied command with arguments, 
+                             konstid konstues: ${HowToRun.konstidValues}
   -classpath (-cp) <path>    Paths where to find user class files
-  -Dname=value               Set a system JVM property
+  -Dname=konstue               Set a system JVM property
   -J<option>                 Pass an option directly to JVM
   -no-stdlib                 Don't include Kotlin standard library into classpath
   -no-reflect                Don't include Kotlin reflection implementation into classpath
   -compiler-path             Kotlin compiler classpath for compiling script or expression or running REPL 
                              If not specified, try to find the compiler in the environment
-  -X<flag>[=value]           Pass -X argument to the compiler
+  -X<flag>[=konstue]           Pass -X argument to the compiler
   -version                   Display Kotlin version
   -help (-h)                 Print a synopsis of options
 and command is interpreted according to the -howtorun option argument 
@@ -227,7 +227,7 @@ or, in case of guess, according to the following rules:
   app.jar                    Runs the given JAR file as 'java -jar' would do
                              (compiler arguments are ignored and no Kotlin stdlib is added to the classpath)
   script.kts                 Compiles and runs the given script, passing <arguments> to it
-  -expression (-e) '2+2'     Evaluates the expression and prints the result, passing <arguments> to it
+  -expression (-e) '2+2'     Ekonstuates the expression and prints the result, passing <arguments> to it
   <no command>               Runs Kotlin REPL
 arguments are passed to the main function when running class or jar file, and for standard script definitions
 as the 'args' parameter when running script or expression
@@ -236,7 +236,7 @@ as the 'args' parameter when running script or expression
     }
 
     private fun printVersionAndExit() {
-        val version = try {
+        konst version = try {
             Scanner(File(KOTLIN_HOME, "build.txt")).nextLine()
         }
         catch (e: FileNotFoundException) {

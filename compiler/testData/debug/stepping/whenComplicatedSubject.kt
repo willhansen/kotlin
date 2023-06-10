@@ -1,7 +1,7 @@
 // FILE: test.kt
 
 fun foo(x: Int) {
-   when (val y =
+   when (konst y =
            when {
              x == 0 -> 1
              x == 1 -> 2
@@ -19,7 +19,7 @@ fun box() {
 }
 
 // The JVM_IR backend optimizes the inner when to a switch and therefore goes directly to the
-// right case without stepping through evaluation of each condition.
+// right case without stepping through ekonstuation of each condition.
 
 // EXPECTATIONS JVM JVM_IR
 // test.kt:16 box

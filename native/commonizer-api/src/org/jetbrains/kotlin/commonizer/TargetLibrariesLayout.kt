@@ -10,27 +10,27 @@ import java.security.MessageDigest
 import java.util.*
 
 public object CommonizerOutputFileLayout {
-    internal const val maxFileNameLength = 150
+    internal const konst maxFileNameLength = 150
 
     public fun resolveCommonizedDirectory(root: File, target: CommonizerTarget): File {
         return root.resolve(target.fileName)
     }
 
-    public val CommonizerTarget.fileName: String
+    public konst CommonizerTarget.fileName: String
         get() = ensureMaxFileNameLength(identityString)
 
     public fun ensureMaxFileNameLength(fileName: String): String {
         return if (fileName.length <= maxFileNameLength) fileName
         else {
-            val hashSuffix = "[--${base64Hash(fileName)}]"
+            konst hashSuffix = "[--${base64Hash(fileName)}]"
             return fileName.take(maxFileNameLength - hashSuffix.length) + hashSuffix
         }
     }
 
-    public fun base64Hash(value: String): String {
-        val sha = MessageDigest.getInstance("SHA-1")
-        val base64 = Base64.getUrlEncoder()
-        return base64.encode(sha.digest(value.encodeToByteArray())).decodeToString()
+    public fun base64Hash(konstue: String): String {
+        konst sha = MessageDigest.getInstance("SHA-1")
+        konst base64 = Base64.getUrlEncoder()
+        return base64.encode(sha.digest(konstue.encodeToByteArray())).decodeToString()
     }
 }
 

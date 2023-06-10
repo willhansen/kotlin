@@ -13,12 +13,12 @@ import org.jetbrains.kotlin.backend.konan.DirectedGraphNode
 import org.jetbrains.kotlin.backend.konan.Context
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
-internal class CallGraphNode(val graph: CallGraph, val symbol: DataFlowIR.FunctionSymbol.Declared)
+internal class CallGraphNode(konst graph: CallGraph, konst symbol: DataFlowIR.FunctionSymbol.Declared)
     : DirectedGraphNode<DataFlowIR.FunctionSymbol.Declared> {
 
-    override val key get() = symbol
+    override konst key get() = symbol
 
-    override val directEdges: List<DataFlowIR.FunctionSymbol.Declared> by lazy {
+    override konst directEdges: List<DataFlowIR.FunctionSymbol.Declared> by lazy {
         graph.directEdges[symbol]!!.callSites
                 .filter { !it.isVirtual }
                 .map { it.actualCallee }
@@ -26,21 +26,21 @@ internal class CallGraphNode(val graph: CallGraph, val symbol: DataFlowIR.Functi
                 .filter { graph.directEdges.containsKey(it) }
     }
 
-    override val reversedEdges: List<DataFlowIR.FunctionSymbol.Declared> by lazy {
+    override konst reversedEdges: List<DataFlowIR.FunctionSymbol.Declared> by lazy {
         graph.reversedEdges[symbol]!!
     }
 
-    class CallSite(val call: DataFlowIR.Node.Call, val node: DataFlowIR.Node, val isVirtual: Boolean, val actualCallee: DataFlowIR.FunctionSymbol)
+    class CallSite(konst call: DataFlowIR.Node.Call, konst node: DataFlowIR.Node, konst isVirtual: Boolean, konst actualCallee: DataFlowIR.FunctionSymbol)
 
-    val callSites = mutableListOf<CallSite>()
+    konst callSites = mutableListOf<CallSite>()
 }
 
-internal class CallGraph(val directEdges: Map<DataFlowIR.FunctionSymbol.Declared, CallGraphNode>,
-                         val reversedEdges: Map<DataFlowIR.FunctionSymbol.Declared, MutableList<DataFlowIR.FunctionSymbol.Declared>>,
-                         val rootExternalFunctions: List<DataFlowIR.FunctionSymbol>)
+internal class CallGraph(konst directEdges: Map<DataFlowIR.FunctionSymbol.Declared, CallGraphNode>,
+                         konst reversedEdges: Map<DataFlowIR.FunctionSymbol.Declared, MutableList<DataFlowIR.FunctionSymbol.Declared>>,
+                         konst rootExternalFunctions: List<DataFlowIR.FunctionSymbol>)
     : DirectedGraph<DataFlowIR.FunctionSymbol.Declared, CallGraphNode> {
 
-    override val nodes get() = directEdges.values
+    override konst nodes get() = directEdges.konstues
 
     override fun get(key: DataFlowIR.FunctionSymbol.Declared) = directEdges[key]!!
 
@@ -54,15 +54,15 @@ internal class CallGraph(val directEdges: Map<DataFlowIR.FunctionSymbol.Declared
 }
 
 internal class CallGraphBuilder(
-        val context: Context,
-        val irModule: IrModuleFragment,
-        val moduleDFG: ModuleDFG,
-        val externalModulesDFG: ExternalModulesDFG,
-        val devirtualizationAnalysisResult: DevirtualizationAnalysis.AnalysisResult,
-        val nonDevirtualizedCallSitesUnfoldFactor: Int
+        konst context: Context,
+        konst irModule: IrModuleFragment,
+        konst moduleDFG: ModuleDFG,
+        konst externalModulesDFG: ExternalModulesDFG,
+        konst devirtualizationAnalysisResult: DevirtualizationAnalysis.AnalysisResult,
+        konst nonDevirtualizedCallSitesUnfoldFactor: Int
 ) {
 
-    private val devirtualizedCallSites = devirtualizationAnalysisResult.devirtualizedCallSites
+    private konst devirtualizedCallSites = devirtualizationAnalysisResult.devirtualizedCallSites
 
     private fun DataFlowIR.FunctionSymbol.resolved(): DataFlowIR.FunctionSymbol {
         if (this is DataFlowIR.FunctionSymbol.External)
@@ -70,19 +70,19 @@ internal class CallGraphBuilder(
         return this
     }
 
-    private val directEdges = mutableMapOf<DataFlowIR.FunctionSymbol.Declared, CallGraphNode>()
-    private val reversedEdges = mutableMapOf<DataFlowIR.FunctionSymbol.Declared, MutableList<DataFlowIR.FunctionSymbol.Declared>>()
-    private val externalRootFunctions = mutableListOf<DataFlowIR.FunctionSymbol>()
-    private val callGraph = CallGraph(directEdges, reversedEdges, externalRootFunctions)
+    private konst directEdges = mutableMapOf<DataFlowIR.FunctionSymbol.Declared, CallGraphNode>()
+    private konst reversedEdges = mutableMapOf<DataFlowIR.FunctionSymbol.Declared, MutableList<DataFlowIR.FunctionSymbol.Declared>>()
+    private konst externalRootFunctions = mutableListOf<DataFlowIR.FunctionSymbol>()
+    private konst callGraph = CallGraph(directEdges, reversedEdges, externalRootFunctions)
 
-    private data class HandleFunctionParams(val caller: DataFlowIR.FunctionSymbol.Declared?,
-                                            val calleeFunction: DataFlowIR.Function)
-    private val functionStack = mutableListOf<HandleFunctionParams>()
+    private data class HandleFunctionParams(konst caller: DataFlowIR.FunctionSymbol.Declared?,
+                                            konst calleeFunction: DataFlowIR.Function)
+    private konst functionStack = mutableListOf<HandleFunctionParams>()
 
     fun build(): CallGraph {
-        val rootSet = DevirtualizationAnalysis.computeRootSet(context, irModule, moduleDFG, externalModulesDFG)
+        konst rootSet = DevirtualizationAnalysis.computeRootSet(context, irModule, moduleDFG, externalModulesDFG)
         for (symbol in rootSet) {
-            val function = moduleDFG.functions[symbol]
+            konst function = moduleDFG.functions[symbol]
             if (function == null)
                 externalRootFunctions.add(symbol)
             else
@@ -90,9 +90,9 @@ internal class CallGraphBuilder(
         }
 
         while (functionStack.isNotEmpty()) {
-            val (caller, calleeFunction) = functionStack.pop()
-            val callee = calleeFunction.symbol as DataFlowIR.FunctionSymbol.Declared
-            val gotoCallee = !directEdges.containsKey(callee)
+            konst (caller, calleeFunction) = functionStack.pop()
+            konst callee = calleeFunction.symbol as DataFlowIR.FunctionSymbol.Declared
+            konst gotoCallee = !directEdges.containsKey(callee)
             if (gotoCallee)
                 addNode(callee)
             if (caller != null)
@@ -115,7 +115,7 @@ internal class CallGraphBuilder(
 
                     is DataFlowIR.Node.Singleton ->
                         node.constructor?.let { constructor ->
-                            val arguments = buildList {
+                            konst arguments = buildList {
                                 add(DataFlowIR.Edge(node, null)) // this.
                                 node.arguments?.let { addAll(it) }
                             }
@@ -134,7 +134,7 @@ internal class CallGraphBuilder(
                     is DataFlowIR.Node.ArrayWrite ->
                         block(DataFlowIR.Node.Call(
                                 callee = node.callee,
-                                arguments = listOf(node.array, node.index, node.value),
+                                arguments = listOf(node.array, node.index, node.konstue),
                                 returnType = moduleDFG.symbolTable.mapType(context.irBuiltIns.unitType),
                                 irCallSite = null),
                                 node
@@ -145,18 +145,18 @@ internal class CallGraphBuilder(
             }
 
     private fun staticCall(caller: DataFlowIR.FunctionSymbol.Declared, call: DataFlowIR.Node.Call, node: DataFlowIR.Node, callee: DataFlowIR.FunctionSymbol) {
-        val resolvedCallee = callee.resolved()
-        val callSite = CallGraphNode.CallSite(call, node, false, resolvedCallee)
-        val function = moduleDFG.functions[resolvedCallee]
+        konst resolvedCallee = callee.resolved()
+        konst callSite = CallGraphNode.CallSite(call, node, false, resolvedCallee)
+        konst function = moduleDFG.functions[resolvedCallee]
         callGraph.addEdge(caller, callSite)
         if (function != null)
             functionStack.push(HandleFunctionParams(caller, function))
     }
 
     private fun handleFunction(symbol: DataFlowIR.FunctionSymbol.Declared, function: DataFlowIR.Function) {
-        val body = function.body
+        konst body = function.body
         body.forEachCallSite { call, node ->
-            val devirtualizedCallSite = (call as? DataFlowIR.Node.VirtualCall)?.let { devirtualizedCallSites[it] }
+            konst devirtualizedCallSite = (call as? DataFlowIR.Node.VirtualCall)?.let { devirtualizedCallSites[it] }
             when {
                 call !is DataFlowIR.Node.VirtualCall -> staticCall(symbol, call, node, call.callee)
 
@@ -173,14 +173,14 @@ internal class CallGraphBuilder(
                 else -> {
                     // Callsite has not been devirtualized - conservatively assume the worst:
                     // any inheritor of the receiver type is possible here.
-                    val typeHierarchy = devirtualizationAnalysisResult.typeHierarchy
-                    val allPossibleCallees = mutableListOf<DataFlowIR.FunctionSymbol>()
+                    konst typeHierarchy = devirtualizationAnalysisResult.typeHierarchy
+                    konst allPossibleCallees = mutableListOf<DataFlowIR.FunctionSymbol>()
                     typeHierarchy.inheritorsOf(call.receiverType as DataFlowIR.Type.Declared).forEachBit {
-                        val receiverType = typeHierarchy.allTypes[it]
+                        konst receiverType = typeHierarchy.allTypes[it]
                         if (receiverType.isAbstract) return@forEachBit
                         // TODO: Unconservative way - when we can use it?
                         //.filter { devirtualizationAnalysisResult.instantiatingClasses.contains(it) }
-                        val actualCallee = when (call) {
+                        konst actualCallee = when (call) {
                             is DataFlowIR.Node.VtableCall ->
                                 receiverType.vtable[call.calleeVtableIndex]
 
@@ -194,11 +194,11 @@ internal class CallGraphBuilder(
                     if (allPossibleCallees.size <= nonDevirtualizedCallSitesUnfoldFactor)
                         allPossibleCallees.forEach { staticCall(symbol, call, node, it) }
                     else {
-                        val callSite = CallGraphNode.CallSite(call, node, true, call.callee)
+                        konst callSite = CallGraphNode.CallSite(call, node, true, call.callee)
                         callGraph.addEdge(symbol, callSite)
 
                         allPossibleCallees.forEach {
-                            val callee = moduleDFG.functions[it]
+                            konst callee = moduleDFG.functions[it]
                             if (callee != null)
                                 functionStack.push(HandleFunctionParams(null, callee))
                         }

@@ -8,7 +8,7 @@ class C : Iterable<String> {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     for ((i, x) in c.withIndex()) {
         if (i == 0) {
             return x

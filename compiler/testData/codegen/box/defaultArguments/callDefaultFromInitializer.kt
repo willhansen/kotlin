@@ -1,9 +1,9 @@
 fun foo(x: Int = 42) = x
 
 class C {
-    val s: String
+    konst s: String
     init {
-        val x = foo()
+        konst x = foo()
         if (x == 42)
             s = "OK"
         else

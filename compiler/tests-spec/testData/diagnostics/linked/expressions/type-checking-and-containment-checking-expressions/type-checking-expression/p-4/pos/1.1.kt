@@ -15,7 +15,7 @@
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val x = null is Nothing
+    konst x = null is Nothing
     x checkType { check<Boolean>() }
 }
 
@@ -26,13 +26,13 @@ fun case2() {
 
 // TESTCASE NUMBER: 3
 fun case3(n: Nothing) {
-    val x = n is Nothing
+    konst x = n is Nothing
     x checkType { check<Boolean>() }
 }
 
 // TESTCASE NUMBER: 4
 fun case4() {
-    val x = A() is Any?
+    konst x = A() is Any?
     x checkType { check<Boolean>() }
 }
 

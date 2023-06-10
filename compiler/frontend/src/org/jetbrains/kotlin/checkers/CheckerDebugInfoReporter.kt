@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtReferenceExpression
 
 class CheckerDebugInfoReporter(
-    private val dynamicCallDescriptors: MutableList<DeclarationDescriptor>,
-    private val markDynamicCalls: Boolean,
-    private val debugAnnotations: MutableList<ActualDiagnostic>,
-    private val withNewInference: Boolean,
-    private val platform: String?
+    private konst dynamicCallDescriptors: MutableList<DeclarationDescriptor>,
+    private konst markDynamicCalls: Boolean,
+    private konst debugAnnotations: MutableList<ActualDiagnostic>,
+    private konst withNewInference: Boolean,
+    private konst platform: String?
 ) : DebugInfoUtil.DebugInfoReporter() {
     override fun reportElementWithErrorType(expression: KtReferenceExpression) {
         newDiagnostic(

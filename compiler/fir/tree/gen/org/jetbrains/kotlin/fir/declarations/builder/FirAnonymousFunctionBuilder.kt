@@ -55,7 +55,7 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 class FirAnonymousFunctionBuilder : FirFunctionBuilder, FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
     override var resolvePhase: FirResolvePhase = FirResolvePhase.RAW_FIR
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     override lateinit var moduleData: FirModuleData
     override lateinit var origin: FirDeclarationOrigin
     override var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
@@ -65,9 +65,9 @@ class FirAnonymousFunctionBuilder : FirFunctionBuilder, FirAnnotationContainerBu
     override var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     override var containerSource: DeserializedContainerSource? = null
     override var dispatchReceiverType: ConeSimpleKotlinType? = null
-    override val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    override konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
     var controlFlowGraphReference: FirControlFlowGraphReference? = null
-    override val valueParameters: MutableList<FirValueParameter> = mutableListOf()
+    override konst konstueParameters: MutableList<FirValueParameter> = mutableListOf()
     override var body: FirBlock? = null
     var contractDescription: FirContractDescription = FirEmptyContractDescription
     lateinit var symbol: FirAnonymousFunctionSymbol
@@ -76,7 +76,7 @@ class FirAnonymousFunctionBuilder : FirFunctionBuilder, FirAnnotationContainerBu
     var inlineStatus: InlineStatus = InlineStatus.Unknown
     var isLambda: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
     var hasExplicitParameterList: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
-    val typeParameters: MutableList<FirTypeParameter> = mutableListOf()
+    konst typeParameters: MutableList<FirTypeParameter> = mutableListOf()
     var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
 
     override fun build(): FirAnonymousFunction {
@@ -95,7 +95,7 @@ class FirAnonymousFunctionBuilder : FirFunctionBuilder, FirAnnotationContainerBu
             dispatchReceiverType,
             contextReceivers.toMutableOrEmpty(),
             controlFlowGraphReference,
-            valueParameters,
+            konstueParameters,
             body,
             contractDescription,
             symbol,
@@ -124,7 +124,7 @@ inline fun buildAnonymousFunctionCopy(original: FirAnonymousFunction, init: FirA
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirAnonymousFunctionBuilder()
+    konst copyBuilder = FirAnonymousFunctionBuilder()
     copyBuilder.source = original.source
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.annotations.addAll(original.annotations)
@@ -139,7 +139,7 @@ inline fun buildAnonymousFunctionCopy(original: FirAnonymousFunction, init: FirA
     copyBuilder.dispatchReceiverType = original.dispatchReceiverType
     copyBuilder.contextReceivers.addAll(original.contextReceivers)
     copyBuilder.controlFlowGraphReference = original.controlFlowGraphReference
-    copyBuilder.valueParameters.addAll(original.valueParameters)
+    copyBuilder.konstueParameters.addAll(original.konstueParameters)
     copyBuilder.body = original.body
     copyBuilder.contractDescription = original.contractDescription
     copyBuilder.symbol = original.symbol

@@ -4,12 +4,12 @@
 
 interface A {
     fun foo(): String
-    val bar: String
+    konst bar: String
 }
 
-class X(val a: String, var b: String) {
+class X(konst a: String, var b: String) {
     fun foo(): String = "original class' method"
-    val bar: String = "original class' property"
+    konst bar: String = "original class' property"
 }
 
 // FILE: B.kt
@@ -17,19 +17,19 @@ class X(val a: String, var b: String) {
 
 interface A {
     fun foo(): String
-    val bar: String
+    konst bar: String
 }
 
-data class X(val a: String, var b: String) {
+data class X(konst a: String, var b: String) {
     fun foo(): String = a + b
-    val bar: String = b + a
+    konst bar: String = b + a
 }
 
 // MODULE: mainLib(lib)
 // FILE: mainLib.kt
 
 fun lib(): String {
-    val x = X("first", "second")
+    konst x = X("first", "second")
     return when {
         x.a != "first" -> "fail 1"
         x.b != "second" -> "fail 2"

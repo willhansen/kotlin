@@ -19,7 +19,7 @@ class ObjCNameC1 {
 class MyKotlinArray {
     // https://developer.apple.com/documentation/foundation/nsarray/1409982-count
     @ObjCName("count")
-    val size: Int = 0
+    konst size: Int = 0
     // https://developer.apple.com/documentation/foundation/nsarray/1417076-index
     @ObjCName(swiftName = "index")
     fun indexOf(@ObjCName("object", "of") element: Int): Int = element
@@ -27,7 +27,7 @@ class MyKotlinArray {
 
 interface ObjCNameI1 {
     @ObjCName("someOtherValue")
-    val someValue: Int
+    konst someValue: Int
     @ObjCName("someOtherFunction")
     fun @receiver:ObjCName("receiver") Int.someFunction(@ObjCName("otherParam") param: Int): Int
 }
@@ -83,4 +83,4 @@ enum class ObjCNameKotlinEnum {
     }
 }
 
-class ObjCAvoidPreprocessorName(@property:ObjCName("time") @ObjCName("time") val __TIME__: Int)
+class ObjCAvoidPreprocessorName(@property:ObjCName("time") @ObjCName("time") konst __TIME__: Int)

@@ -4,7 +4,7 @@
 fun box(): String {
     class Bean {
         @JvmField
-        val a: String = "OK"
+        konst a: String = "OK"
     }
 
     return Bean().a

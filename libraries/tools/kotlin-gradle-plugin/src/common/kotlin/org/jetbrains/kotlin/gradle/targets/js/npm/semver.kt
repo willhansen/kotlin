@@ -9,26 +9,26 @@ import com.github.gundy.semver4j.model.Version
 import java.math.BigInteger
 
 data class SemVer(
-    val major: BigInteger,
-    val minor: BigInteger,
-    val patch: BigInteger,
-    val preRelease: String? = null,
-    val build: String? = null
+    konst major: BigInteger,
+    konst minor: BigInteger,
+    konst patch: BigInteger,
+    konst preRelease: String? = null,
+    konst build: String? = null
 ) : Comparable<SemVer> {
     override fun compareTo(other: SemVer): Int {
-        val compareMajor = major.compareTo(other.major)
+        konst compareMajor = major.compareTo(other.major)
         if (compareMajor != 0) return compareMajor
 
-        val compareMinor = minor.compareTo(other.minor)
+        konst compareMinor = minor.compareTo(other.minor)
         if (compareMinor != 0) return compareMinor
 
-        val comparePatch = patch.compareTo(other.patch)
+        konst comparePatch = patch.compareTo(other.patch)
         if (comparePatch != 0) return comparePatch
 
-        val comparePreRelease = compareValues(preRelease, other.preRelease)
+        konst comparePreRelease = compareValues(preRelease, other.preRelease)
         if (comparePreRelease != 0) return comparePreRelease
 
-        val compareBuild = compareValues(build, other.build)
+        konst compareBuild = compareValues(build, other.build)
         if (compareBuild != 0) return compareBuild
 
         return 0
@@ -45,31 +45,31 @@ data class SemVer(
 
     companion object {
         fun from(string: String, loose: Boolean = false): SemVer {
-            val fixed = if (loose) fixSemver(string) else string
+            konst fixed = if (loose) fixSemver(string) else string
 
-            val minorStart = fixed.indexOf('.')
+            konst minorStart = fixed.indexOf('.')
             check(minorStart != -1) { "Bad semver: $string. Minor version missed." }
 
-            val patchStart = fixed.indexOf('.', minorStart + 1)
+            konst patchStart = fixed.indexOf('.', minorStart + 1)
             check(patchStart != -1) { "Bad semver: $string. Patch version missed." }
 
-            val preReleaseStart = fixed.indexOf('-', patchStart + 1)
-            val buildStart = fixed.indexOf('+', if (preReleaseStart == -1) patchStart + 1 else preReleaseStart + 1)
-            val preReleaseEnd = when {
+            konst preReleaseStart = fixed.indexOf('-', patchStart + 1)
+            konst buildStart = fixed.indexOf('+', if (preReleaseStart == -1) patchStart + 1 else preReleaseStart + 1)
+            konst preReleaseEnd = when {
                 buildStart != -1 -> buildStart
                 else -> fixed.length
             }
-            val patchEnd = when {
+            konst patchEnd = when {
                 preReleaseStart != -1 -> preReleaseStart
                 buildStart != -1 -> buildStart
                 else -> fixed.length
             }
 
-            val major = fixed.substring(0, minorStart)
-            val minor = fixed.substring(minorStart + 1, patchStart)
-            val patch = fixed.substring(patchStart + 1, patchEnd)
-            val preRelease = if (preReleaseStart != -1) fixed.substring(preReleaseStart + 1, preReleaseEnd) else ""
-            val build = if (buildStart != -1) fixed.substring(buildStart + 1) else ""
+            konst major = fixed.substring(0, minorStart)
+            konst minor = fixed.substring(minorStart + 1, patchStart)
+            konst patch = fixed.substring(patchStart + 1, patchEnd)
+            konst preRelease = if (preReleaseStart != -1) fixed.substring(preReleaseStart + 1, preReleaseEnd) else ""
+            konst build = if (buildStart != -1) fixed.substring(buildStart + 1) else ""
 
             check(major.isNotBlank()) { "Bad semver: $string. Major version missed." }
             check(minor.isNotBlank()) { "Bad semver: $string. Minor version missed." }
@@ -99,23 +99,23 @@ data class SemVer(
                     from(version.replaceFirst("+", Int.MAX_VALUE.toString()), loose = true)
                 version.matches(FINITE_RANGE) -> {
                     if (version.endsWith(CLOSE_INC)) {
-                        from(FINITE_RANGE.find(version)!!.groups[2]!!.value, loose = true)
+                        from(FINITE_RANGE.find(version)!!.groups[2]!!.konstue, loose = true)
                     } else {
-                        from(FINITE_RANGE.find(version)!!.groups[2]!!.value, loose = true).decrement()
+                        from(FINITE_RANGE.find(version)!!.groups[2]!!.konstue, loose = true).decrement()
                     }
                 }
                 version.matches(LOWER_INFINITE_RANGE) -> {
                     if (version.endsWith(CLOSE_INC)) {
-                        from(LOWER_INFINITE_RANGE.find(version)!!.groups[1]!!.value, loose = true)
+                        from(LOWER_INFINITE_RANGE.find(version)!!.groups[1]!!.konstue, loose = true)
                     } else {
-                        from(LOWER_INFINITE_RANGE.find(version)!!.groups[1]!!.value, loose = true).decrement()
+                        from(LOWER_INFINITE_RANGE.find(version)!!.groups[1]!!.konstue, loose = true).decrement()
                     }
                 }
                 version.matches(UPPER_INFINITE_RANGE) -> {
                     SemVer(Int.MAX_VALUE.toBigInteger(), Int.MAX_VALUE.toBigInteger(), Int.MAX_VALUE.toBigInteger())
                 }
                 version.matches(SINGLE_VALUE_RANGE) -> {
-                    from(SINGLE_VALUE_RANGE.find(version)!!.groups[1]!!.value, loose = true)
+                    from(SINGLE_VALUE_RANGE.find(version)!!.groups[1]!!.konstue, loose = true)
                 }
                 else -> from(version, loose = true)
             }
@@ -133,44 +133,44 @@ data class SemVer(
             }
         }
 
-        private val MAJOR_PREFIX_VERSION = "^[0-9]+\\.\\+$".toRegex()
-        private val MINOR_PREFIX_VERSION = "^[0-9]+\\.[0-9]+\\.\\+$".toRegex()
+        private konst MAJOR_PREFIX_VERSION = "^[0-9]+\\.\\+$".toRegex()
+        private konst MINOR_PREFIX_VERSION = "^[0-9]+\\.[0-9]+\\.\\+$".toRegex()
 
         // Following constants and logic around was peeked from
         // https://github.com/gradle/gradle/blob/master/subprojects/dependency-management/src/main/java/org/gradle/api/internal/artifacts/ivyservice/ivyresolve/strategy/VersionRangeSelector.java
-        private const val OPEN_INC = "["
-        private const val OPEN_EXC = "]"
-        private const val OPEN_EXC_MAVEN = "("
-        private const val CLOSE_INC = "]"
-        private const val CLOSE_EXC = "["
-        private const val CLOSE_EXC_MAVEN = ")"
-        private const val LOWER_INFINITE = "("
-        private const val UPPER_INFINITE = ")"
-        private const val SEPARATOR = ","
+        private const konst OPEN_INC = "["
+        private const konst OPEN_EXC = "]"
+        private const konst OPEN_EXC_MAVEN = "("
+        private const konst CLOSE_INC = "]"
+        private const konst CLOSE_EXC = "["
+        private const konst CLOSE_EXC_MAVEN = ")"
+        private const konst LOWER_INFINITE = "("
+        private const konst UPPER_INFINITE = ")"
+        private const konst SEPARATOR = ","
 
-        private const val OPEN_INC_PATTERN = "\\" + OPEN_INC
-        private const val OPEN_EXC_PATTERN = "\\" + OPEN_EXC + "\\" + OPEN_EXC_MAVEN
-        private const val CLOSE_INC_PATTERN = "\\" + CLOSE_INC
-        private const val CLOSE_EXC_PATTERN = "\\" + CLOSE_EXC + "\\" + CLOSE_EXC_MAVEN
-        private const val LI_PATTERN = "\\" + LOWER_INFINITE
-        private const val UI_PATTERN = "\\" + UPPER_INFINITE
-        private const val SEP_PATTERN = "\\s*\\$SEPARATOR\\s*"
-        private const val OPEN_PATTERN = "[$OPEN_INC_PATTERN$OPEN_EXC_PATTERN]"
-        private const val CLOSE_PATTERN = "[$CLOSE_INC_PATTERN$CLOSE_EXC_PATTERN]"
-        private const val ANY_NON_SPECIAL_PATTERN = ("[^\\s" + SEPARATOR + OPEN_INC_PATTERN
+        private const konst OPEN_INC_PATTERN = "\\" + OPEN_INC
+        private const konst OPEN_EXC_PATTERN = "\\" + OPEN_EXC + "\\" + OPEN_EXC_MAVEN
+        private const konst CLOSE_INC_PATTERN = "\\" + CLOSE_INC
+        private const konst CLOSE_EXC_PATTERN = "\\" + CLOSE_EXC + "\\" + CLOSE_EXC_MAVEN
+        private const konst LI_PATTERN = "\\" + LOWER_INFINITE
+        private const konst UI_PATTERN = "\\" + UPPER_INFINITE
+        private const konst SEP_PATTERN = "\\s*\\$SEPARATOR\\s*"
+        private const konst OPEN_PATTERN = "[$OPEN_INC_PATTERN$OPEN_EXC_PATTERN]"
+        private const konst CLOSE_PATTERN = "[$CLOSE_INC_PATTERN$CLOSE_EXC_PATTERN]"
+        private const konst ANY_NON_SPECIAL_PATTERN = ("[^\\s" + SEPARATOR + OPEN_INC_PATTERN
                 + OPEN_EXC_PATTERN + CLOSE_INC_PATTERN + CLOSE_EXC_PATTERN + LI_PATTERN + UI_PATTERN
                 + "]")
-        private const val FINITE_PATTERN = (OPEN_PATTERN + "\\s*(" + ANY_NON_SPECIAL_PATTERN
+        private const konst FINITE_PATTERN = (OPEN_PATTERN + "\\s*(" + ANY_NON_SPECIAL_PATTERN
                 + "+)" + SEP_PATTERN + "(" + ANY_NON_SPECIAL_PATTERN + "+)\\s*" + CLOSE_PATTERN)
-        private const val LOWER_INFINITE_PATTERN = (LI_PATTERN + SEP_PATTERN + "("
+        private const konst LOWER_INFINITE_PATTERN = (LI_PATTERN + SEP_PATTERN + "("
                 + ANY_NON_SPECIAL_PATTERN + "+)\\s*" + CLOSE_PATTERN)
-        private const val UPPER_INFINITE_PATTERN = (OPEN_PATTERN + "\\s*("
+        private const konst UPPER_INFINITE_PATTERN = (OPEN_PATTERN + "\\s*("
                 + ANY_NON_SPECIAL_PATTERN + "+)" + SEP_PATTERN + UI_PATTERN)
-        private const val SINGLE_VALUE_PATTERN = "$OPEN_INC_PATTERN\\s*($ANY_NON_SPECIAL_PATTERN+)$CLOSE_INC_PATTERN"
-        private val FINITE_RANGE = FINITE_PATTERN.toRegex()
-        private val LOWER_INFINITE_RANGE = LOWER_INFINITE_PATTERN.toRegex()
-        private val UPPER_INFINITE_RANGE = UPPER_INFINITE_PATTERN.toRegex()
-        private val SINGLE_VALUE_RANGE = SINGLE_VALUE_PATTERN.toRegex()
+        private const konst SINGLE_VALUE_PATTERN = "$OPEN_INC_PATTERN\\s*($ANY_NON_SPECIAL_PATTERN+)$CLOSE_INC_PATTERN"
+        private konst FINITE_RANGE = FINITE_PATTERN.toRegex()
+        private konst LOWER_INFINITE_RANGE = LOWER_INFINITE_PATTERN.toRegex()
+        private konst UPPER_INFINITE_RANGE = UPPER_INFINITE_PATTERN.toRegex()
+        private konst SINGLE_VALUE_RANGE = SINGLE_VALUE_PATTERN.toRegex()
     }
 }
 
@@ -180,11 +180,11 @@ internal fun fixSemver(version: String): String {
     var major = "0"
     var minor = "0"
     var patch = "0"
-    val rest = StringBuilder()
-    val digits = StringBuilder()
+    konst rest = StringBuilder()
+    konst digits = StringBuilder()
 
     fun setComponent() {
-        val digitsFiltered = digits.toString().trimStart { it == '0' }.takeIf { it.isNotEmpty() } ?: "0"
+        konst digitsFiltered = digits.toString().trimStart { it == '0' }.takeIf { it.isNotEmpty() } ?: "0"
         when (number) {
             0 -> major = digitsFiltered
             1 -> minor = digitsFiltered
@@ -194,7 +194,7 @@ internal fun fixSemver(version: String): String {
     }
 
     while (i < version.length) {
-        val c = version[i++]
+        konst c = version[i++]
         if (c.isDigit()) digits.append(c)
         else if (c == '-' || c == '+') {
             // examples:
@@ -218,7 +218,7 @@ internal fun fixSemver(version: String): String {
 
     rest.append(version.substring(i))
 
-    val restFiltered = rest.filter {
+    konst restFiltered = rest.filter {
         it in '0'..'9' ||
                 it in 'A'..'Z' ||
                 it in 'a'..'z' ||
@@ -226,14 +226,14 @@ internal fun fixSemver(version: String): String {
                 it == '-' ||
                 it == '+'
     }
-    val restComponents = restFiltered.split('+', limit = 2)
+    konst restComponents = restFiltered.split('+', limit = 2)
 
-    val preRelease = restComponents.getOrNull(0)
+    konst preRelease = restComponents.getOrNull(0)
         ?.foldDelimiters()
         ?.trim { it == '-' || it == '.' }
         ?.takeIf { it.isNotEmpty() }
 
-    val build = restComponents.getOrNull(1)
+    konst build = restComponents.getOrNull(1)
         ?.filter { it != '+' }
         ?.trim { it == '-' || it == '.' }
         ?.takeIf { it.isNotEmpty() }
@@ -244,10 +244,10 @@ internal fun fixSemver(version: String): String {
 }
 
 private fun String.foldDelimiters(): String {
-    val result = StringBuilder(length)
+    konst result = StringBuilder(length)
     var endsWithDelimiter = false
     for (i in 0 until length) {
-        val c = this[i]
+        konst c = this[i]
         if (c == '+' || c == '-' || c == '.') {
             if (!endsWithDelimiter) {
                 result.append(c)

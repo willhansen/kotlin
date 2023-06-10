@@ -11,9 +11,9 @@ public class J {
 
 // FILE: k.kt
 fun test() {
-    val platformNN = J.staticNN
-    val platformN = J.staticN
-    val platformJ = J.staticJ
+    konst platformNN = J.staticNN
+    konst platformN = J.staticN
+    konst platformJ = J.staticJ
 
     platformNN[0]
     <!RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>platformN<!>[0]

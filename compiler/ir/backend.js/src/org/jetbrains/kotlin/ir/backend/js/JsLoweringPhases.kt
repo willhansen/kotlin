@@ -71,42 +71,42 @@ private fun makeCustomJsModulePhase(
             return input
         }
     },
-    actions = setOf(defaultDumper.toMultiModuleAction(), validationAction.toMultiModuleAction()),
+    actions = setOf(defaultDumper.toMultiModuleAction(), konstidationAction.toMultiModuleAction()),
 )
 
-sealed class Lowering(val name: String) {
-    abstract val modulePhase: SameTypeNamedCompilerPhase<JsIrBackendContext, Iterable<IrModuleFragment>>
+sealed class Lowering(konst name: String) {
+    abstract konst modulePhase: SameTypeNamedCompilerPhase<JsIrBackendContext, Iterable<IrModuleFragment>>
 }
 
 class DeclarationLowering(
     name: String,
     description: String,
     prerequisite: Set<AbstractNamedCompilerPhase<JsIrBackendContext, *, *>> = emptySet(),
-    private val factory: (JsIrBackendContext) -> DeclarationTransformer
+    private konst factory: (JsIrBackendContext) -> DeclarationTransformer
 ) : Lowering(name) {
     fun declarationTransformer(context: JsIrBackendContext): DeclarationTransformer {
         return factory(context)
     }
 
-    override val modulePhase = makeJsModulePhase(factory, name, description, prerequisite)
+    override konst modulePhase = makeJsModulePhase(factory, name, description, prerequisite)
 }
 
 class BodyLowering(
     name: String,
     description: String,
     prerequisite: Set<AbstractNamedCompilerPhase<JsIrBackendContext, *, *>> = emptySet(),
-    private val factory: (JsIrBackendContext) -> BodyLoweringPass
+    private konst factory: (JsIrBackendContext) -> BodyLoweringPass
 ) : Lowering(name) {
     fun bodyLowering(context: JsIrBackendContext): BodyLoweringPass {
         return factory(context)
     }
 
-    override val modulePhase = makeJsModulePhase(factory, name, description, prerequisite)
+    override konst modulePhase = makeJsModulePhase(factory, name, description, prerequisite)
 }
 
 class ModuleLowering(
     name: String,
-    override val modulePhase: SameTypeNamedCompilerPhase<JsIrBackendContext, Iterable<IrModuleFragment>>
+    override konst modulePhase: SameTypeNamedCompilerPhase<JsIrBackendContext, Iterable<IrModuleFragment>>
 ) : Lowering(name)
 
 private fun makeDeclarationTransformerPhase(
@@ -125,150 +125,150 @@ private fun makeBodyLoweringPhase(
 
 fun SameTypeNamedCompilerPhase<JsIrBackendContext, Iterable<IrModuleFragment>>.toModuleLowering() = ModuleLowering(this.name, this)
 
-private val validateIrBeforeLowering = makeCustomJsModulePhase(
-    { context, module -> validationCallback(context, module) },
+private konst konstidateIrBeforeLowering = makeCustomJsModulePhase(
+    { context, module -> konstidationCallback(context, module) },
     name = "ValidateIrBeforeLowering",
     description = "Validate IR before lowering"
 ).toModuleLowering()
 
-private val validateIrAfterLowering = makeCustomJsModulePhase(
-    { context, module -> validationCallback(context, module) },
+private konst konstidateIrAfterLowering = makeCustomJsModulePhase(
+    { context, module -> konstidationCallback(context, module) },
     name = "ValidateIrAfterLowering",
     description = "Validate IR after lowering"
 ).toModuleLowering()
 
-private val preventExportOfSyntheticDeclarationsLowering = makeDeclarationTransformerPhase(
+private konst preventExportOfSyntheticDeclarationsLowering = makeDeclarationTransformerPhase(
     ::ExcludeSyntheticDeclarationsFromExportLowering,
     name = "ExcludeSyntheticDeclarationsFromExportLowering",
     description = "Exclude synthetic declarations which we don't want to export such as `Enum.entries` or `DataClass::componentN`",
 )
 
-val scriptRemoveReceiverLowering = makeJsModulePhase(
+konst scriptRemoveReceiverLowering = makeJsModulePhase(
     ::ScriptRemoveReceiverLowering,
     name = "ScriptRemoveReceiver",
     description = "Remove receivers for declarations in script"
 ).toModuleLowering()
 
-val createScriptFunctionsPhase = makeJsModulePhase(
+konst createScriptFunctionsPhase = makeJsModulePhase(
     ::CreateScriptFunctionsPhase,
     name = "CreateScriptFunctionsPhase",
-    description = "Create functions for initialize and evaluate script"
+    description = "Create functions for initialize and ekonstuate script"
 ).toModuleLowering()
 
-private val inventNamesForLocalClassesPhase = makeJsModulePhase(
+private konst inventNamesForLocalClassesPhase = makeJsModulePhase(
     ::JsInventNamesForLocalClasses,
     name = "InventNamesForLocalClasses",
     description = "Invent names for local classes and anonymous objects",
 ).toModuleLowering()
 
-private val annotationInstantiationLowering = makeDeclarationTransformerPhase(
+private konst annotationInstantiationLowering = makeDeclarationTransformerPhase(
     ::JsAnnotationImplementationTransformer,
     name = "AnnotationImplementation",
     description = "Create synthetic annotations implementations and use them in annotations constructor calls"
 )
 
-private val expectDeclarationsRemovingPhase = makeDeclarationTransformerPhase(
+private konst expectDeclarationsRemovingPhase = makeDeclarationTransformerPhase(
     ::ExpectDeclarationsRemoveLowering,
     name = "ExpectDeclarationsRemoving",
     description = "Remove expect declaration from module fragment"
 )
 
-private val stringConcatenationLoweringPhase = makeJsModulePhase(
+private konst stringConcatenationLoweringPhase = makeJsModulePhase(
     ::JsStringConcatenationLowering,
     name = "JsStringConcatenationLowering",
-    description = "Call toString() for values of some types when concatenating strings"
+    description = "Call toString() for konstues of some types when concatenating strings"
 ).toModuleLowering()
 
-private val lateinitNullableFieldsPhase = makeDeclarationTransformerPhase(
+private konst lateinitNullableFieldsPhase = makeDeclarationTransformerPhase(
     ::NullableFieldsForLateinitCreationLowering,
     name = "LateinitNullableFields",
     description = "Create nullable fields for lateinit properties"
 )
 
-private val lateinitDeclarationLoweringPhase = makeDeclarationTransformerPhase(
+private konst lateinitDeclarationLoweringPhase = makeDeclarationTransformerPhase(
     ::NullableFieldsDeclarationLowering,
     name = "LateinitDeclarations",
     description = "Reference nullable fields from properties and getters + insert checks"
 )
 
-private val lateinitUsageLoweringPhase = makeBodyLoweringPhase(
+private konst lateinitUsageLoweringPhase = makeBodyLoweringPhase(
     ::LateinitUsageLowering,
     name = "LateinitUsage",
     description = "Insert checks for lateinit field references"
 )
 
-private val kotlinNothingValueExceptionPhase = makeBodyLoweringPhase(
+private konst kotlinNothingValueExceptionPhase = makeBodyLoweringPhase(
     ::KotlinNothingValueExceptionLowering,
     name = "KotlinNothingValueException",
-    description = "Throw proper exception for calls returning value of type 'kotlin.Nothing'"
+    description = "Throw proper exception for calls returning konstue of type 'kotlin.Nothing'"
 )
 
-private val stripTypeAliasDeclarationsPhase = makeDeclarationTransformerPhase(
+private konst stripTypeAliasDeclarationsPhase = makeDeclarationTransformerPhase(
     { StripTypeAliasDeclarationsLowering() },
     name = "StripTypeAliasDeclarations",
     description = "Strip typealias declarations"
 )
 
-private val jsCodeOutliningPhase = makeBodyLoweringPhase(
+private konst jsCodeOutliningPhase = makeBodyLoweringPhase(
     ::JsCodeOutliningLowering,
     name = "JsCodeOutliningLowering",
     description = "Outline js() calls where JS code references Kotlin locals"
 )
 
-private val arrayConstructorReferencePhase = makeBodyLoweringPhase(
+private konst arrayConstructorReferencePhase = makeBodyLoweringPhase(
     ::ArrayConstructorReferenceLowering,
     name = "ArrayConstructorReference",
     description = "Transform `::Array` into a lambda"
 )
 
-private val arrayConstructorPhase = makeBodyLoweringPhase(
+private konst arrayConstructorPhase = makeBodyLoweringPhase(
     ::ArrayConstructorLowering,
     name = "ArrayConstructor",
-    description = "Transform `Array(size) { index -> value }` into a loop",
+    description = "Transform `Array(size) { index -> konstue }` into a loop",
     prerequisite = setOf(arrayConstructorReferencePhase)
 )
 
-private val sharedVariablesLoweringPhase = makeBodyLoweringPhase(
+private konst sharedVariablesLoweringPhase = makeBodyLoweringPhase(
     ::SharedVariablesLowering,
     name = "SharedVariablesLowering",
     description = "Box captured mutable variables",
     prerequisite = setOf(lateinitDeclarationLoweringPhase, lateinitUsageLoweringPhase)
 )
 
-private val localClassesInInlineLambdasPhase = makeBodyLoweringPhase(
+private konst localClassesInInlineLambdasPhase = makeBodyLoweringPhase(
     ::LocalClassesInInlineLambdasLowering,
     name = "LocalClassesInInlineLambdasPhase",
     description = "Extract local classes from inline lambdas",
     prerequisite = setOf(inventNamesForLocalClassesPhase)
 )
 
-private val localClassesInInlineFunctionsPhase = makeBodyLoweringPhase(
+private konst localClassesInInlineFunctionsPhase = makeBodyLoweringPhase(
     ::LocalClassesInInlineFunctionsLowering,
     name = "LocalClassesInInlineFunctionsPhase",
     description = "Extract local classes from inline functions",
     prerequisite = setOf(inventNamesForLocalClassesPhase)
 )
 
-private val localClassesExtractionFromInlineFunctionsPhase = makeBodyLoweringPhase(
+private konst localClassesExtractionFromInlineFunctionsPhase = makeBodyLoweringPhase(
     { context -> LocalClassesExtractionFromInlineFunctionsLowering(context) },
     name = "localClassesExtractionFromInlineFunctionsPhase",
     description = "Move local classes from inline functions into nearest declaration container",
     prerequisite = setOf(localClassesInInlineFunctionsPhase)
 )
 
-private val syntheticAccessorLoweringPhase = makeBodyLoweringPhase(
+private konst syntheticAccessorLoweringPhase = makeBodyLoweringPhase(
     ::SyntheticAccessorLowering,
     name = "syntheticAccessorLoweringPhase",
     description = "Wrap top level inline function to access through them from inline functions"
 )
 
-private val wrapInlineDeclarationsWithReifiedTypeParametersLowering = makeBodyLoweringPhase(
+private konst wrapInlineDeclarationsWithReifiedTypeParametersLowering = makeBodyLoweringPhase(
     ::WrapInlineDeclarationsWithReifiedTypeParametersLowering,
     name = "WrapInlineDeclarationsWithReifiedTypeParametersLowering",
     description = "Wrap inline declarations with reified type parameters"
 )
 
-private val saveInlineFunctionsBeforeInlining = makeDeclarationTransformerPhase(
+private konst saveInlineFunctionsBeforeInlining = makeDeclarationTransformerPhase(
     ::SaveInlineFunctionsBeforeInlining,
     name = "SaveInlineFunctionsBeforeInlining",
     description = "Save inline function before inlining",
@@ -279,37 +279,37 @@ private val saveInlineFunctionsBeforeInlining = makeDeclarationTransformerPhase(
     )
 )
 
-private val functionInliningPhase = makeBodyLoweringPhase(
+private konst functionInliningPhase = makeBodyLoweringPhase(
     { FunctionInlining(it, JsInlineFunctionResolver(it), it.innerClassesSupport, allowExternalInlining = true) },
     name = "FunctionInliningPhase",
     description = "Perform function inlining",
     prerequisite = setOf(saveInlineFunctionsBeforeInlining)
 )
 
-private val copyInlineFunctionBodyLoweringPhase = makeDeclarationTransformerPhase(
+private konst copyInlineFunctionBodyLoweringPhase = makeDeclarationTransformerPhase(
     ::CopyInlineFunctionBodyLowering,
     name = "CopyInlineFunctionBody",
     description = "Copy inline function body",
     prerequisite = setOf(functionInliningPhase)
 )
 
-private val removeInlineDeclarationsWithReifiedTypeParametersLoweringPhase = makeDeclarationTransformerPhase(
+private konst removeInlineDeclarationsWithReifiedTypeParametersLoweringPhase = makeDeclarationTransformerPhase(
     { RemoveInlineDeclarationsWithReifiedTypeParametersLowering() },
     name = "RemoveInlineFunctionsWithReifiedTypeParametersLowering",
     description = "Remove Inline functions with reified parameters from context",
     prerequisite = setOf(functionInliningPhase)
 )
 
-private val captureStackTraceInThrowablesPhase = makeBodyLoweringPhase(
+private konst captureStackTraceInThrowablesPhase = makeBodyLoweringPhase(
     ::CaptureStackTraceInThrowables,
     name = "CaptureStackTraceInThrowables",
     description = "Capture stack trace in Throwable constructors"
 )
 
-private val throwableSuccessorsLoweringPhase = makeBodyLoweringPhase(
+private konst throwableSuccessorsLoweringPhase = makeBodyLoweringPhase(
     { context ->
         context.run {
-            val extendThrowableSymbol =
+            konst extendThrowableSymbol =
                 if (es6mode) setPropertiesToThrowableInstanceSymbol else extendThrowableSymbol
 
             ThrowableLowering(this, extendThrowableSymbol)
@@ -320,56 +320,56 @@ private val throwableSuccessorsLoweringPhase = makeBodyLoweringPhase(
     prerequisite = setOf(captureStackTraceInThrowablesPhase)
 )
 
-private val tailrecLoweringPhase = makeBodyLoweringPhase(
+private konst tailrecLoweringPhase = makeBodyLoweringPhase(
     ::TailrecLowering,
     name = "TailrecLowering",
-    description = "Replace `tailrec` callsites with equivalent loop"
+    description = "Replace `tailrec` callsites with equikonstent loop"
 )
 
-private val enumClassConstructorLoweringPhase = makeDeclarationTransformerPhase(
+private konst enumClassConstructorLoweringPhase = makeDeclarationTransformerPhase(
     ::EnumClassConstructorLowering,
     name = "EnumClassConstructorLowering",
     description = "Transform Enum Class into regular Class"
 )
 
-private val enumClassConstructorBodyLoweringPhase = makeBodyLoweringPhase(
+private konst enumClassConstructorBodyLoweringPhase = makeBodyLoweringPhase(
     ::EnumClassConstructorBodyTransformer,
     name = "EnumClassConstructorBodyLowering",
     description = "Transform Enum Class into regular Class"
 )
 
-private val enumEntryInstancesLoweringPhase = makeDeclarationTransformerPhase(
+private konst enumEntryInstancesLoweringPhase = makeDeclarationTransformerPhase(
     ::EnumEntryInstancesLowering,
     name = "EnumEntryInstancesLowering",
     description = "Create instance variable for each enum entry initialized with `null`",
     prerequisite = setOf(enumClassConstructorLoweringPhase)
 )
 
-private val enumEntryInstancesBodyLoweringPhase = makeBodyLoweringPhase(
+private konst enumEntryInstancesBodyLoweringPhase = makeBodyLoweringPhase(
     ::EnumEntryInstancesBodyLowering,
     name = "EnumEntryInstancesBodyLowering",
     description = "Insert enum entry field initialization into correxposnding class constructors",
     prerequisite = setOf(enumEntryInstancesLoweringPhase)
 )
 
-private val enumClassCreateInitializerLoweringPhase = makeDeclarationTransformerPhase(
+private konst enumClassCreateInitializerLoweringPhase = makeDeclarationTransformerPhase(
     ::EnumClassCreateInitializerLowering,
     name = "EnumClassCreateInitializerLowering",
     description = "Create initializer for enum entries",
     prerequisite = setOf(enumClassConstructorLoweringPhase)
 )
 
-private val enumEntryCreateGetInstancesFunsLoweringPhase = makeDeclarationTransformerPhase(
+private konst enumEntryCreateGetInstancesFunsLoweringPhase = makeDeclarationTransformerPhase(
     ::EnumEntryCreateGetInstancesFunsLowering,
     name = "EnumEntryCreateGetInstancesFunsLowering",
     description = "Create enumEntry_getInstance functions",
     prerequisite = setOf(enumClassConstructorLoweringPhase)
 )
 
-private val enumSyntheticFunsLoweringPhase = makeDeclarationTransformerPhase(
+private konst enumSyntheticFunsLoweringPhase = makeDeclarationTransformerPhase(
     ::EnumSyntheticFunctionsAndPropertiesLowering,
     name = "EnumSyntheticFunctionsAndPropertiesLowering",
-    description = "Implement `valueOf, `values` and `entries`",
+    description = "Implement `konstueOf, `konstues` and `entries`",
     prerequisite = setOf(
         enumClassConstructorLoweringPhase,
         enumClassCreateInitializerLoweringPhase,
@@ -377,161 +377,161 @@ private val enumSyntheticFunsLoweringPhase = makeDeclarationTransformerPhase(
     )
 )
 
-private val enumUsageLoweringPhase = makeBodyLoweringPhase(
+private konst enumUsageLoweringPhase = makeBodyLoweringPhase(
     ::EnumUsageLowering,
     name = "EnumUsageLowering",
     description = "Replace enum access with invocation of corresponding function",
     prerequisite = setOf(enumEntryCreateGetInstancesFunsLoweringPhase)
 )
 
-private val externalEnumUsageLoweringPhase = makeBodyLoweringPhase(
+private konst externalEnumUsageLoweringPhase = makeBodyLoweringPhase(
     ::ExternalEnumUsagesLowering,
     name = "ExternalEnumUsagesLowering",
     description = "Replace external enum entry accesses with field accesses"
 )
 
-private val enumEntryRemovalLoweringPhase = makeDeclarationTransformerPhase(
+private konst enumEntryRemokonstLoweringPhase = makeDeclarationTransformerPhase(
     ::EnumClassRemoveEntriesLowering,
-    name = "EnumEntryRemovalLowering",
+    name = "EnumEntryRemokonstLowering",
     description = "Replace enum entry with corresponding class",
     prerequisite = setOf(enumUsageLoweringPhase)
 )
 
-private val callableReferenceLowering = makeBodyLoweringPhase(
+private konst callableReferenceLowering = makeBodyLoweringPhase(
     ::CallableReferenceLowering,
     name = "CallableReferenceLowering",
     description = "Build a lambda/callable reference class",
     prerequisite = setOf(functionInliningPhase, wrapInlineDeclarationsWithReifiedTypeParametersLowering)
 )
 
-private val returnableBlockLoweringPhase = makeBodyLoweringPhase(
+private konst returnableBlockLoweringPhase = makeBodyLoweringPhase(
     ::JsReturnableBlockLowering,
     name = "JsReturnableBlockLowering",
     description = "Introduce temporary variable for result and change returnable block's type to Unit",
     prerequisite = setOf(functionInliningPhase)
 )
 
-private val rangeContainsLoweringPhase = makeBodyLoweringPhase(
+private konst rangeContainsLoweringPhase = makeBodyLoweringPhase(
     ::RangeContainsLowering,
     name = "RangeContainsLowering",
     description = "[Optimization] Optimizes calls to contains() for ClosedRanges"
 )
 
-private val forLoopsLoweringPhase = makeBodyLoweringPhase(
+private konst forLoopsLoweringPhase = makeBodyLoweringPhase(
     ::ForLoopsLowering,
     name = "ForLoopsLowering",
     description = "[Optimization] For loops lowering"
 )
 
-private val enumWhenPhase = makeJsModulePhase(
+private konst enumWhenPhase = makeJsModulePhase(
     ::EnumWhenLowering,
     name = "EnumWhenLowering",
     description = "Replace `when` subjects of enum types with their ordinals"
 ).toModuleLowering()
 
-private val propertyLazyInitLoweringPhase = makeBodyLoweringPhase(
+private konst propertyLazyInitLoweringPhase = makeBodyLoweringPhase(
     ::PropertyLazyInitLowering,
     name = "PropertyLazyInitLowering",
     description = "Make property init as lazy"
 )
 
-private val removeInitializersForLazyProperties = makeDeclarationTransformerPhase(
+private konst removeInitializersForLazyProperties = makeDeclarationTransformerPhase(
     ::RemoveInitializersForLazyProperties,
     name = "RemoveInitializersForLazyProperties",
     description = "Remove property initializers if they was initialized lazily"
 )
 
-private val propertyAccessorInlinerLoweringPhase = makeBodyLoweringPhase(
+private konst propertyAccessorInlinerLoweringPhase = makeBodyLoweringPhase(
     ::JsPropertyAccessorInlineLowering,
     name = "PropertyAccessorInlineLowering",
     description = "[Optimization] Inline property accessors"
 )
 
-private val copyPropertyAccessorBodiesLoweringPass = makeDeclarationTransformerPhase(
+private konst copyPropertyAccessorBodiesLoweringPass = makeDeclarationTransformerPhase(
     ::CopyAccessorBodyLowerings,
     name = "CopyAccessorBodyLowering",
     description = "Copy accessor bodies so that ist can be safely read in PropertyAccessorInlineLowering",
     prerequisite = setOf(propertyAccessorInlinerLoweringPhase)
 )
 
-private val booleanPropertyInExternalLowering = makeBodyLoweringPhase(
+private konst booleanPropertyInExternalLowering = makeBodyLoweringPhase(
     ::BooleanPropertyInExternalLowering,
     name = "BooleanPropertyInExternalLowering",
     description = "Lowering which wrap boolean in external declarations with Boolean() call and add diagnostic for such cases"
 )
 
-private val foldConstantLoweringPhase = makeBodyLoweringPhase(
+private konst foldConstantLoweringPhase = makeBodyLoweringPhase(
     { FoldConstantLowering(it, true) },
     name = "FoldConstantLowering",
     description = "[Optimization] Constant Folding",
     prerequisite = setOf(propertyAccessorInlinerLoweringPhase)
 )
 
-private val computeStringTrimPhase = makeJsModulePhase(
+private konst computeStringTrimPhase = makeJsModulePhase(
     ::StringTrimLowering,
     name = "StringTrimLowering",
     description = "Compute trimIndent and trimMargin operations on constant strings"
 ).toModuleLowering()
 
-private val localDelegatedPropertiesLoweringPhase = makeBodyLoweringPhase(
+private konst localDelegatedPropertiesLoweringPhase = makeBodyLoweringPhase(
     { LocalDelegatedPropertiesLowering() },
     name = "LocalDelegatedPropertiesLowering",
     description = "Transform Local Delegated properties"
 )
 
-private val localDeclarationsLoweringPhase = makeBodyLoweringPhase(
+private konst localDeclarationsLoweringPhase = makeBodyLoweringPhase(
     { context -> LocalDeclarationsLowering(context, suggestUniqueNames = false) },
     name = "LocalDeclarationsLowering",
     description = "Move local declarations into nearest declaration container",
     prerequisite = setOf(sharedVariablesLoweringPhase, localDelegatedPropertiesLoweringPhase)
 )
 
-private val localClassExtractionPhase = makeBodyLoweringPhase(
+private konst localClassExtractionPhase = makeBodyLoweringPhase(
     { context -> LocalClassPopupLowering(context) },
     name = "LocalClassExtractionPhase",
     description = "Move local declarations into nearest declaration container",
     prerequisite = setOf(localDeclarationsLoweringPhase)
 )
 
-private val innerClassesLoweringPhase = makeDeclarationTransformerPhase(
+private konst innerClassesLoweringPhase = makeDeclarationTransformerPhase(
     { context -> InnerClassesLowering(context, context.innerClassesSupport) },
     name = "InnerClassesLowering",
     description = "Capture outer this reference to inner class"
 )
 
-private val innerClassesMemberBodyLoweringPhase = makeBodyLoweringPhase(
+private konst innerClassesMemberBodyLoweringPhase = makeBodyLoweringPhase(
     { context -> InnerClassesMemberBodyLowering(context, context.innerClassesSupport) },
     name = "InnerClassesMemberBody",
     description = "Replace `this` with 'outer this' field references",
     prerequisite = setOf(innerClassesLoweringPhase)
 )
 
-private val innerClassConstructorCallsLoweringPhase = makeBodyLoweringPhase(
+private konst innerClassConstructorCallsLoweringPhase = makeBodyLoweringPhase(
     { context -> InnerClassConstructorCallsLowering(context, context.innerClassesSupport) },
     name = "InnerClassConstructorCallsLowering",
     description = "Replace inner class constructor invocation"
 )
 
-private val suspendFunctionsLoweringPhase = makeBodyLoweringPhase(
+private konst suspendFunctionsLoweringPhase = makeBodyLoweringPhase(
     ::JsSuspendFunctionsLowering,
     name = "SuspendFunctionsLowering",
     description = "Transform suspend functions into CoroutineImpl instance and build state machine"
 )
 
-private val addContinuationToNonLocalSuspendFunctionsLoweringPhase = makeDeclarationTransformerPhase(
+private konst addContinuationToNonLocalSuspendFunctionsLoweringPhase = makeDeclarationTransformerPhase(
     ::AddContinuationToNonLocalSuspendFunctionsLowering,
     name = "AddContinuationToNonLocalSuspendFunctionsLowering",
     description = "Add explicit continuation as last parameter of non-local suspend functions"
 )
 
-private val addContinuationToLocalSuspendFunctionsLoweringPhase = makeBodyLoweringPhase(
+private konst addContinuationToLocalSuspendFunctionsLoweringPhase = makeBodyLoweringPhase(
     ::AddContinuationToLocalSuspendFunctionsLowering,
     name = "AddContinuationToLocalSuspendFunctionsLowering",
     description = "Add explicit continuation as last parameter of local suspend functions"
 )
 
 
-private val addContinuationToFunctionCallsLoweringPhase = makeBodyLoweringPhase(
+private konst addContinuationToFunctionCallsLoweringPhase = makeBodyLoweringPhase(
     ::AddContinuationToFunctionCallsLowering,
     name = "AddContinuationToFunctionCallsLowering",
     description = "Replace suspend function calls with calls with continuation",
@@ -541,25 +541,25 @@ private val addContinuationToFunctionCallsLoweringPhase = makeBodyLoweringPhase(
     )
 )
 
-private val privateMembersLoweringPhase = makeDeclarationTransformerPhase(
+private konst privateMembersLoweringPhase = makeDeclarationTransformerPhase(
     ::PrivateMembersLowering,
     name = "PrivateMembersLowering",
     description = "Extract private members from classes"
 )
 
-private val privateMemberUsagesLoweringPhase = makeBodyLoweringPhase(
+private konst privateMemberUsagesLoweringPhase = makeBodyLoweringPhase(
     ::PrivateMemberBodiesLowering,
     name = "PrivateMemberUsagesLowering",
     description = "Rewrite the private member usages"
 )
 
-private val propertyReferenceLoweringPhase = makeBodyLoweringPhase(
+private konst propertyReferenceLoweringPhase = makeBodyLoweringPhase(
     ::PropertyReferenceLowering,
     name = "PropertyReferenceLowering",
     description = "Transform property references",
 )
 
-private val interopCallableReferenceLoweringPhase = makeBodyLoweringPhase(
+private konst interopCallableReferenceLoweringPhase = makeBodyLoweringPhase(
     ::InteropCallableReferenceLowering,
     name = "InteropCallableReferenceLowering",
     description = "Interop layer for function references and lambdas",
@@ -571,66 +571,66 @@ private val interopCallableReferenceLoweringPhase = makeBodyLoweringPhase(
     )
 )
 
-private val defaultArgumentStubGeneratorPhase = makeDeclarationTransformerPhase(
+private konst defaultArgumentStubGeneratorPhase = makeDeclarationTransformerPhase(
     ::JsDefaultArgumentStubGenerator,
     name = "DefaultArgumentStubGenerator",
-    description = "Generate synthetic stubs for functions with default parameter values"
+    description = "Generate synthetic stubs for functions with default parameter konstues"
 )
 
-private val defaultArgumentPatchOverridesPhase = makeDeclarationTransformerPhase(
+private konst defaultArgumentPatchOverridesPhase = makeDeclarationTransformerPhase(
     ::DefaultParameterPatchOverridenSymbolsLowering,
     name = "DefaultArgumentsPatchOverrides",
     description = "Patch overrides for fake override dispatch functions",
     prerequisite = setOf(defaultArgumentStubGeneratorPhase)
 )
 
-private val defaultParameterInjectorPhase = makeBodyLoweringPhase(
+private konst defaultParameterInjectorPhase = makeBodyLoweringPhase(
     ::JsDefaultParameterInjector,
     name = "DefaultParameterInjector",
     description = "Replace callsite with default parameters with corresponding stub function",
     prerequisite = setOf(interopCallableReferenceLoweringPhase, innerClassesLoweringPhase)
 )
 
-private val defaultParameterCleanerPhase = makeDeclarationTransformerPhase(
+private konst defaultParameterCleanerPhase = makeDeclarationTransformerPhase(
     ::DefaultParameterCleaner,
     name = "DefaultParameterCleaner",
     description = "Clean default parameters up"
 )
 
-private val varargLoweringPhase = makeBodyLoweringPhase(
+private konst varargLoweringPhase = makeBodyLoweringPhase(
     ::VarargLowering,
     name = "VarargLowering",
     description = "Lower vararg arguments",
     prerequisite = setOf(interopCallableReferenceLoweringPhase)
 )
 
-private val propertiesLoweringPhase = makeDeclarationTransformerPhase(
+private konst propertiesLoweringPhase = makeDeclarationTransformerPhase(
     { PropertiesLowering() },
     name = "PropertiesLowering",
     description = "Move fields and accessors out from its property"
 )
 
-private val primaryConstructorLoweringPhase = makeDeclarationTransformerPhase(
+private konst primaryConstructorLoweringPhase = makeDeclarationTransformerPhase(
     ::PrimaryConstructorLowering,
     name = "PrimaryConstructorLowering",
     description = "Creates primary constructor if it doesn't exist",
     prerequisite = setOf(enumClassConstructorLoweringPhase)
 )
 
-private val delegateToPrimaryConstructorLoweringPhase = makeBodyLoweringPhase(
+private konst delegateToPrimaryConstructorLoweringPhase = makeBodyLoweringPhase(
     ::DelegateToSyntheticPrimaryConstructor,
     name = "DelegateToSyntheticPrimaryConstructor",
     description = "Delegates to synthetic primary constructor",
     prerequisite = setOf(primaryConstructorLoweringPhase)
 )
 
-private val annotationConstructorLowering = makeDeclarationTransformerPhase(
+private konst annotationConstructorLowering = makeDeclarationTransformerPhase(
     ::AnnotationConstructorLowering,
     name = "AnnotationConstructorLowering",
     description = "Generate annotation constructor body"
 )
 
-private val initializersLoweringPhase = makeBodyLoweringPhase(
+private konst initializersLoweringPhase = makeBodyLoweringPhase(
     ::InitializersLowering,
     name = "InitializersLowering",
     description = "Merge init block and field initializers into [primary] constructor",
@@ -639,46 +639,46 @@ private val initializersLoweringPhase = makeBodyLoweringPhase(
     )
 )
 
-private val initializersCleanupLoweringPhase = makeDeclarationTransformerPhase(
+private konst initializersCleanupLoweringPhase = makeDeclarationTransformerPhase(
     ::InitializersCleanupLowering,
     name = "InitializersCleanupLowering",
     description = "Remove non-static anonymous initializers and field init expressions",
     prerequisite = setOf(initializersLoweringPhase)
 )
 
-private val multipleCatchesLoweringPhase = makeBodyLoweringPhase(
+private konst multipleCatchesLoweringPhase = makeBodyLoweringPhase(
     ::MultipleCatchesLowering,
     name = "MultipleCatchesLowering",
     description = "Replace multiple catches with single one"
 )
 
-private val errorExpressionLoweringPhase = makeBodyLoweringPhase(
+private konst errorExpressionLoweringPhase = makeBodyLoweringPhase(
     ::JsErrorExpressionLowering,
     name = "errorExpressionLoweringPhase",
     description = "Transform error expressions into simple ir code",
     prerequisite = setOf(multipleCatchesLoweringPhase)
 )
 
-private val errorDeclarationLoweringPhase = makeDeclarationTransformerPhase(
+private konst errorDeclarationLoweringPhase = makeDeclarationTransformerPhase(
     ::JsErrorDeclarationLowering,
     name = "errorDeclarationLoweringPhase",
     description = "Transform error declarations into simple ir code"
 )
 
-private val bridgesConstructionPhase = makeDeclarationTransformerPhase(
+private konst bridgesConstructionPhase = makeDeclarationTransformerPhase(
     ::JsBridgesConstruction,
     name = "BridgesConstruction",
     description = "Generate bridges",
     prerequisite = setOf(suspendFunctionsLoweringPhase)
 )
 
-private val singleAbstractMethodPhase = makeBodyLoweringPhase(
+private konst singleAbstractMethodPhase = makeBodyLoweringPhase(
     ::JsSingleAbstractMethodLowering,
     name = "SingleAbstractMethod",
     description = "Replace SAM conversions with instances of interface-implementing classes"
 )
 
-private val typeOperatorLoweringPhase = makeBodyLoweringPhase(
+private konst typeOperatorLoweringPhase = makeBodyLoweringPhase(
     ::TypeOperatorLowering,
     name = "TypeOperatorLowering",
     description = "Lower IrTypeOperator with corresponding logic",
@@ -690,32 +690,32 @@ private val typeOperatorLoweringPhase = makeBodyLoweringPhase(
     )
 )
 
-private val secondaryConstructorLoweringPhase = makeDeclarationTransformerPhase(
+private konst secondaryConstructorLoweringPhase = makeDeclarationTransformerPhase(
     ::SecondaryConstructorLowering,
     name = "SecondaryConstructorLoweringPhase",
     description = "Generate static functions for each secondary constructor",
     prerequisite = setOf(innerClassesLoweringPhase)
 )
 
-private val secondaryFactoryInjectorLoweringPhase = makeBodyLoweringPhase(
+private konst secondaryFactoryInjectorLoweringPhase = makeBodyLoweringPhase(
     ::SecondaryFactoryInjectorLowering,
     name = "SecondaryFactoryInjectorLoweringPhase",
     description = "Replace usage of secondary constructor with corresponding static function",
     prerequisite = setOf(innerClassesLoweringPhase)
 )
 
-private val constLoweringPhase = makeBodyLoweringPhase(
+private konst constLoweringPhase = makeBodyLoweringPhase(
     ::ConstLowering,
     name = "ConstLowering",
     description = "Wrap Long and Char constants into constructor invocation"
 )
-private val inlineClassDeclarationLoweringPhase = makeDeclarationTransformerPhase(
+private konst inlineClassDeclarationLoweringPhase = makeDeclarationTransformerPhase(
     { InlineClassLowering(it).inlineClassDeclarationLowering },
     name = "InlineClassDeclarationLowering",
     description = "Handle inline class declarations"
 )
 
-private val inlineClassUsageLoweringPhase = makeBodyLoweringPhase(
+private konst inlineClassUsageLoweringPhase = makeBodyLoweringPhase(
     { InlineClassLowering(it).inlineClassUsageLowering },
     name = "InlineClassUsageLowering",
     description = "Handle inline class usages",
@@ -726,111 +726,111 @@ private val inlineClassUsageLoweringPhase = makeBodyLoweringPhase(
     )
 )
 
-private val autoboxingTransformerPhase = makeBodyLoweringPhase(
+private konst autoboxingTransformerPhase = makeBodyLoweringPhase(
     ::AutoboxingTransformer,
     name = "AutoboxingTransformer",
     description = "Insert box/unbox intrinsics"
 )
 
-private val blockDecomposerLoweringPhase = makeBodyLoweringPhase(
+private konst blockDecomposerLoweringPhase = makeBodyLoweringPhase(
     ::JsBlockDecomposerLowering,
     name = "BlockDecomposerLowering",
     description = "Transform statement-like-expression nodes into pure-statement to make it easily transform into JS",
     prerequisite = setOf(typeOperatorLoweringPhase, suspendFunctionsLoweringPhase)
 )
 
-private val jsClassUsageInReflectionPhase = makeBodyLoweringPhase(
+private konst jsClassUsageInReflectionPhase = makeBodyLoweringPhase(
     ::JsClassUsageInReflectionLowering,
     name = "JsClassUsageInReflectionLowering",
     description = "[Optimization] Eliminate ClassReference and GetClassExpression usages in a simple case of usage raw js constructor",
     prerequisite = setOf(functionInliningPhase)
 )
 
-private val classReferenceLoweringPhase = makeBodyLoweringPhase(
+private konst classReferenceLoweringPhase = makeBodyLoweringPhase(
     ::ClassReferenceLowering,
     name = "ClassReferenceLowering",
     description = "Handle class references",
     prerequisite = setOf(jsClassUsageInReflectionPhase)
 )
 
-private val primitiveCompanionLoweringPhase = makeBodyLoweringPhase(
+private konst primitiveCompanionLoweringPhase = makeBodyLoweringPhase(
     ::PrimitiveCompanionLowering,
     name = "PrimitiveCompanionLowering",
     description = "Replace common companion object access with platform one"
 )
 
-private val callsLoweringPhase = makeBodyLoweringPhase(
+private konst callsLoweringPhase = makeBodyLoweringPhase(
     ::CallsLowering,
     name = "CallsLowering",
     description = "Handle intrinsics"
 )
 
-private val staticMembersLoweringPhase = makeDeclarationTransformerPhase(
+private konst staticMembersLoweringPhase = makeDeclarationTransformerPhase(
     ::StaticMembersLowering,
     name = "StaticMembersLowering",
     description = "Move static member declarations to top-level"
 )
 
-private val objectDeclarationLoweringPhase = makeDeclarationTransformerPhase(
+private konst objectDeclarationLoweringPhase = makeDeclarationTransformerPhase(
     ::ObjectDeclarationLowering,
     name = "ObjectDeclarationLowering",
     description = "Create lazy object instance generator functions",
     prerequisite = setOf(enumClassCreateInitializerLoweringPhase)
 )
 
-private val invokeStaticInitializersPhase = makeBodyLoweringPhase(
+private konst invokeStaticInitializersPhase = makeBodyLoweringPhase(
     ::InvokeStaticInitializersLowering,
     name = "IntroduceStaticInitializersLowering",
     description = "Invoke companion object's initializers from companion object in object constructor",
     prerequisite = setOf(objectDeclarationLoweringPhase)
 )
 
-private val es6AddBoxParameterToConstructorsLowering = makeDeclarationTransformerPhase(
+private konst es6AddBoxParameterToConstructorsLowering = makeDeclarationTransformerPhase(
     ::ES6AddBoxParameterToConstructorsLowering,
     name = "ES6AddBoxParameterToConstructorsLowering",
     description = "Add box parameter to a constructor if needed",
 )
 
-private val es6ConstructorLowering = makeDeclarationTransformerPhase(
+private konst es6ConstructorLowering = makeDeclarationTransformerPhase(
     ::ES6ConstructorLowering,
     name = "ES6ConstructorLowering",
     description = "Lower constructors declarations to support ES classes",
     prerequisite = setOf(es6AddBoxParameterToConstructorsLowering)
 )
 
-private val es6ConstructorUsageLowering = makeBodyLoweringPhase(
+private konst es6ConstructorUsageLowering = makeBodyLoweringPhase(
     ::ES6ConstructorCallLowering,
     name = "ES6ConstructorCallLowering",
     description = "Lower constructor usages to support ES classes",
     prerequisite = setOf(es6ConstructorLowering)
 )
 
-private val objectUsageLoweringPhase = makeBodyLoweringPhase(
+private konst objectUsageLoweringPhase = makeBodyLoweringPhase(
     ::ObjectUsageLowering,
     name = "ObjectUsageLowering",
     description = "Transform IrGetObjectValue into instance generator call",
     prerequisite = setOf(primaryConstructorLoweringPhase)
 )
 
-private val escapedIdentifiersLowering = makeBodyLoweringPhase(
+private konst escapedIdentifiersLowering = makeBodyLoweringPhase(
     ::EscapedIdentifiersLowering,
     name = "EscapedIdentifiersLowering",
-    description = "Convert global variables with invalid names access to globalThis member expression"
+    description = "Convert global variables with inkonstid names access to globalThis member expression"
 )
 
-private val implicitlyExportedDeclarationsMarkingLowering = makeDeclarationTransformerPhase(
+private konst implicitlyExportedDeclarationsMarkingLowering = makeDeclarationTransformerPhase(
     ::ImplicitlyExportedDeclarationsMarkingLowering,
     name = "ImplicitlyExportedDeclarationsMarkingLowering",
     description = "Add @JsImplicitExport annotation to declarations which are not exported but are used inside other exported declarations as a type"
 )
 
-private val cleanupLoweringPhase = makeBodyLoweringPhase(
+private konst cleanupLoweringPhase = makeBodyLoweringPhase(
     { CleanupLowering() },
     name = "CleanupLowering",
     description = "Clean up IR before codegen"
 )
 
-private val moveOpenClassesToSeparatePlaceLowering = makeCustomJsModulePhase(
+private konst moveOpenClassesToSeparatePlaceLowering = makeCustomJsModulePhase(
     { context, module ->
         if (context.granularity == JsGenerationGranularity.PER_FILE)
             moveOpenClassesToSeparateFiles(module)
@@ -839,15 +839,15 @@ private val moveOpenClassesToSeparatePlaceLowering = makeCustomJsModulePhase(
     description = "Move open classes to separate files"
 ).toModuleLowering()
 
-private val jsSuspendArityStorePhase = makeDeclarationTransformerPhase(
+private konst jsSuspendArityStorePhase = makeDeclarationTransformerPhase(
     ::JsSuspendArityStoreLowering,
     name = "JsSuspendArityStoreLowering",
     description = "Store arity for suspend functions to not remove it during DCE"
 )
 
-val loweringList = listOf<Lowering>(
+konst loweringList = listOf<Lowering>(
     scriptRemoveReceiverLowering,
-    validateIrBeforeLowering,
+    konstidateIrBeforeLowering,
     preventExportOfSyntheticDeclarationsLowering,
     inventNamesForLocalClassesPhase,
     annotationInstantiationLowering,
@@ -899,7 +899,7 @@ val loweringList = listOf<Lowering>(
     enumSyntheticFunsLoweringPhase,
     enumUsageLoweringPhase,
     externalEnumUsageLoweringPhase,
-    enumEntryRemovalLoweringPhase,
+    enumEntryRemokonstLoweringPhase,
     suspendFunctionsLoweringPhase,
     propertyReferenceLoweringPhase,
     interopCallableReferenceLoweringPhase,
@@ -953,64 +953,64 @@ val loweringList = listOf<Lowering>(
     // Currently broken due to static members lowering making single-open-class
     // files non-recognizable as single-class files
     // moveOpenClassesToSeparatePlaceLowering,
-    validateIrAfterLowering,
+    konstidateIrAfterLowering,
 )
 
-val jsPhases = SameTypeNamedCompilerPhase(
+konst jsPhases = SameTypeNamedCompilerPhase(
     name = "IrModuleLowering",
     description = "IR module lowering",
     lower = loweringList.toCompilerPhase(),
-    actions = setOf(defaultDumper.toMultiModuleAction(), validationAction.toMultiModuleAction()),
+    actions = setOf(defaultDumper.toMultiModuleAction(), konstidationAction.toMultiModuleAction()),
     nlevels = 1
 )
 
-private val es6CollectConstructorsWhichNeedBoxParameterLowering = makeDeclarationTransformerPhase(
+private konst es6CollectConstructorsWhichNeedBoxParameterLowering = makeDeclarationTransformerPhase(
     ::ES6CollectConstructorsWhichNeedBoxParameters,
     name = "ES6CollectConstructorsWhichNeedBoxParameters",
     description = "[Optimization] Collect all of the constructors which requires box parameter",
 )
 
-private val es6BoxParameterOptimization = makeBodyLoweringPhase(
+private konst es6BoxParameterOptimization = makeBodyLoweringPhase(
     ::ES6ConstructorBoxParameterOptimizationLowering,
     name = "ES6ConstructorBoxParameterOptimizationLowering",
     description = "[Optimization] Remove box parameter from the constructors which don't require box parameter",
     prerequisite = setOf(es6CollectConstructorsWhichNeedBoxParameterLowering)
 )
 
-private val es6CollectPrimaryConstructorsWhichCouldBeOptimizedLowering = makeDeclarationTransformerPhase(
+private konst es6CollectPrimaryConstructorsWhichCouldBeOptimizedLowering = makeDeclarationTransformerPhase(
     ::ES6CollectPrimaryConstructorsWhichCouldBeOptimizedLowering,
     name = "ES6CollectPrimaryConstructorsWhichCouldBeOptimizedLowering",
     description = "[Optimization] Collect all of the constructors which could be translated into a regular constructor",
 )
 
-private val es6PrimaryConstructorOptimizationLowering = makeDeclarationTransformerPhase(
+private konst es6PrimaryConstructorOptimizationLowering = makeDeclarationTransformerPhase(
     ::ES6PrimaryConstructorOptimizationLowering,
     name = "ES6PrimaryConstructorOptimizationLowering",
     description = "[Optimization] Replace synthetically generated static fabric method with a plain old ES6 constructors whenever it's possible",
     prerequisite = setOf(es6CollectPrimaryConstructorsWhichCouldBeOptimizedLowering)
 )
 
-private val es6PrimaryConstructorUsageOptimizationLowering = makeBodyLoweringPhase(
+private konst es6PrimaryConstructorUsageOptimizationLowering = makeBodyLoweringPhase(
     ::ES6PrimaryConstructorUsageOptimizationLowering,
     name = "ES6PrimaryConstructorUsageOptimizationLowering",
     description = "[Optimization] Replace usage of synthetically generated static fabric method with a plain old ES6 constructors whenever it's possible",
     prerequisite = setOf(es6BoxParameterOptimization, es6PrimaryConstructorOptimizationLowering)
 )
 
-private val purifyObjectInstanceGetters = makeDeclarationTransformerPhase(
+private konst purifyObjectInstanceGetters = makeDeclarationTransformerPhase(
     ::PurifyObjectInstanceGettersLowering,
     name = "PurifyObjectInstanceGettersLowering",
     description = "[Optimization] Make object instance getter functions pure whenever it's possible",
 )
 
-private val inlineObjectsWithPureInitialization = makeBodyLoweringPhase(
+private konst inlineObjectsWithPureInitialization = makeBodyLoweringPhase(
     ::InlineObjectsWithPureInitializationLowering,
     name = "InlineObjectsWithPureInitializationLowering",
     description = "[Optimization] Inline object instance fields getters whenever it's possible",
     prerequisite = setOf(purifyObjectInstanceGetters)
 )
 
-val optimizationLoweringList = listOf<Lowering>(
+konst optimizationLoweringList = listOf<Lowering>(
     es6CollectConstructorsWhichNeedBoxParameterLowering,
     es6CollectPrimaryConstructorsWhichCouldBeOptimizedLowering,
     es6BoxParameterOptimization,
@@ -1020,10 +1020,10 @@ val optimizationLoweringList = listOf<Lowering>(
     inlineObjectsWithPureInitialization
 )
 
-val jsOptimizationPhases = SameTypeNamedCompilerPhase(
+konst jsOptimizationPhases = SameTypeNamedCompilerPhase(
     name = "IrModuleOptimizationLowering",
     description = "IR module optimization lowering",
     lower = optimizationLoweringList.toCompilerPhase(),
-    actions = setOf(defaultDumper.toMultiModuleAction(), validationAction.toMultiModuleAction()),
+    actions = setOf(defaultDumper.toMultiModuleAction(), konstidationAction.toMultiModuleAction()),
     nlevels = 1
 )

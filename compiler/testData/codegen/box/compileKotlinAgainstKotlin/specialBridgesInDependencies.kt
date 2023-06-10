@@ -15,7 +15,7 @@ import a.A
 class B : A()
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     b += "OK"
     return b.single()
 }

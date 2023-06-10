@@ -1,13 +1,13 @@
 package
 
-public val d: Derived
-public val ib: IBase /* = Base */
-public val io: IOther /* = Other */
-public val ms: MyString /* = kotlin.String */
-public val o: Other
-public val s: kotlin.String
-public val x: MyString /* = kotlin.String */ = ""
-public val y: kotlin.Any = ""
+public konst d: Derived
+public konst ib: IBase /* = Base */
+public konst io: IOther /* = Other */
+public konst ms: MyString /* = kotlin.String */
+public konst o: Other
+public konst s: kotlin.String
+public konst x: MyString /* = kotlin.String */ = ""
+public konst y: kotlin.Any = ""
 
 public interface Base {
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

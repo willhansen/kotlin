@@ -20,9 +20,9 @@ object FirContractNotFirstStatementChecker : FirFunctionCallChecker() {
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
         if (StandardClassIds.Callables.contract != expression.toResolvedCallableSymbol()?.callableId) return
 
-        val containingDeclaration = context.containingDeclarations.last()
+        konst containingDeclaration = context.containingDeclarations.last()
         if (!(containingDeclaration is FirFunction && expression.isCorrectlyPlacedIn(containingDeclaration))) {
-            val message = if (containingDeclaration is FirFunction && containingDeclaration.body is FirSingleExpressionBlock) {
+            konst message = if (containingDeclaration is FirFunction && containingDeclaration.body is FirSingleExpressionBlock) {
                 "Contracts are only allowed in function body blocks"
             } else {
                 "Contract should be the first statement"
@@ -33,7 +33,7 @@ object FirContractNotFirstStatementChecker : FirFunctionCallChecker() {
     }
 
     private fun FirFunctionCall.isCorrectlyPlacedIn(functionDeclaration: FirFunction): Boolean {
-        val firstStatement = functionDeclaration.body?.statements?.first()
+        konst firstStatement = functionDeclaration.body?.statements?.first()
         return firstStatement is FirContractCallBlock && firstStatement.call == this
     }
 }

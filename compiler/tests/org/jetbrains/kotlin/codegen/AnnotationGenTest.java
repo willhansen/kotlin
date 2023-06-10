@@ -137,7 +137,7 @@ public class AnnotationGenTest extends CodegenTestCase {
 
     public void testAnnotationWithParamForParamInFunction() throws Exception {
         loadText("import java.lang.annotation.*\n" +
-                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(val a: String)\n" +
+                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(konst a: String)\n" +
                  "fun x(@A(\"239\") i: Int) {}");
         Class<?> packageClass = generateFacadeClass();
         Method packageClassMethod = packageClass.getMethod("x", int.class);
@@ -199,15 +199,15 @@ public class AnnotationGenTest extends CodegenTestCase {
     public void testAnnotationClassWithStringProperty() throws ClassNotFoundException, IllegalAccessException, InvocationTargetException {
         loadText("import java.lang.annotation.*\n" +
                  "" +
-                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(val a: String)\n" +
+                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(konst a: String)\n" +
                  "" +
                  "@A(\"239\") class B()");
         @SuppressWarnings("unchecked")
         Class<? extends Annotation> aClass = (Class) generateClass("A");
 
         Retention annotation = aClass.getAnnotation(Retention.class);
-        RetentionPolicy value = annotation.value();
-        assertEquals(RetentionPolicy.RUNTIME, value);
+        RetentionPolicy konstue = annotation.konstue();
+        assertEquals(RetentionPolicy.RUNTIME, konstue);
 
         Method[] methods = aClass.getDeclaredMethods();
         assertEquals(1, methods.length);
@@ -227,16 +227,16 @@ public class AnnotationGenTest extends CodegenTestCase {
             throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {
         loadText("import java.lang.annotation.*\n" +
                  "" +
-                 "annotation class C(val c: String)\n" +
-                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(val a: C)\n" +
+                 "annotation class C(konst c: String)\n" +
+                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(konst a: C)\n" +
                  "" +
                  "@A(C(\"239\")) class B()");
         @SuppressWarnings("unchecked")
         Class<? extends Annotation> aClass = (Class) generateClass("A");
 
         Retention annotation = aClass.getAnnotation(Retention.class);
-        RetentionPolicy value = annotation.value();
-        assertEquals(RetentionPolicy.RUNTIME, value);
+        RetentionPolicy konstue = annotation.konstue();
+        assertEquals(RetentionPolicy.RUNTIME, konstue);
 
         Method[] methods = aClass.getDeclaredMethods();
         assertEquals(1, methods.length);
@@ -260,15 +260,15 @@ public class AnnotationGenTest extends CodegenTestCase {
             throws ClassNotFoundException, IllegalAccessException, InvocationTargetException {
         loadText("import java.lang.annotation.*\n" +
                  "" +
-                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(val a: Array<String>)\n" +
+                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(konst a: Array<String>)\n" +
                  "" +
                  "@A(arrayOf(\"239\",\"932\")) class B()");
         @SuppressWarnings("unchecked")
         Class<? extends Annotation> aClass = (Class) generateClass("A");
 
         Retention annotation = aClass.getAnnotation(Retention.class);
-        RetentionPolicy value = annotation.value();
-        assertEquals(RetentionPolicy.RUNTIME, value);
+        RetentionPolicy konstue = annotation.konstue();
+        assertEquals(RetentionPolicy.RUNTIME, konstue);
 
         Method[] methods = aClass.getDeclaredMethods();
         assertEquals(1, methods.length);
@@ -289,15 +289,15 @@ public class AnnotationGenTest extends CodegenTestCase {
     public void testAnnotationClassWithIntArrayProperty() throws ClassNotFoundException, IllegalAccessException, InvocationTargetException {
         loadText("import java.lang.annotation.*\n" +
                  "" +
-                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(val a: IntArray)\n" +
+                 "@java.lang.annotation.Retention(RetentionPolicy.RUNTIME) annotation class A(konst a: IntArray)\n" +
                  "" +
                  "@A(intArrayOf(239,932)) class B()");
         @SuppressWarnings("unchecked")
         Class<? extends Annotation> aClass = (Class) generateClass("A");
 
         Retention annotation = aClass.getAnnotation(Retention.class);
-        RetentionPolicy value = annotation.value();
-        assertEquals(RetentionPolicy.RUNTIME, value);
+        RetentionPolicy konstue = annotation.konstue();
+        assertEquals(RetentionPolicy.RUNTIME, konstue);
 
         Method[] methods = aClass.getDeclaredMethods();
         assertEquals(1, methods.length);
@@ -322,11 +322,11 @@ public class AnnotationGenTest extends CodegenTestCase {
         Class<?> aClass = generateClass("A");
 
         Target annotation = aClass.getAnnotation(Target.class);
-        ElementType[] value = annotation.value();
-        assertEquals(2, value.length);
+        ElementType[] konstue = annotation.konstue();
+        assertEquals(2, konstue.length);
 
-        assertEquals(ElementType.TYPE, value[0]);
-        assertEquals(ElementType.METHOD, value[1]);
+        assertEquals(ElementType.TYPE, konstue[0]);
+        assertEquals(ElementType.METHOD, konstue[1]);
     }
 
     public void testAnnotationClassWithAnnotationArrayProperty()
@@ -334,7 +334,7 @@ public class AnnotationGenTest extends CodegenTestCase {
         loadText("import java.lang.annotation.*\n" +
                  "import java.lang.annotation.Retention\n" +
                  "" +
-                 "@Retention(RetentionPolicy.RUNTIME) annotation class A(val a: Array<Retention>)\n" +
+                 "@Retention(RetentionPolicy.RUNTIME) annotation class A(konst a: Array<Retention>)\n" +
                  "" +
                  "@A(arrayOf(Retention(RetentionPolicy.RUNTIME),Retention(RetentionPolicy.SOURCE))) class B()");
         @SuppressWarnings("unchecked")
@@ -351,7 +351,7 @@ public class AnnotationGenTest extends CodegenTestCase {
         Object invoke = methods[0].invoke(bClassAnnotation);
         Retention[] invoke1 = (Retention[]) invoke;
         assertEquals(2, invoke1.length);
-        assertEquals(invoke1[0].value(), RetentionPolicy.RUNTIME);
-        assertEquals(invoke1[1].value(), RetentionPolicy.SOURCE);
+        assertEquals(invoke1[0].konstue(), RetentionPolicy.RUNTIME);
+        assertEquals(invoke1[1].konstue(), RetentionPolicy.SOURCE);
     }
 }

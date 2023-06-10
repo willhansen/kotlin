@@ -1,7 +1,7 @@
 // FILE: Ann.java
 
 public @interface Ann {
-    String[] value();
+    String[] konstue();
 }
 
 // FILE: main.kt

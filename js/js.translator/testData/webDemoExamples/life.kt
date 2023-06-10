@@ -9,13 +9,13 @@
  * A field where cells live. Effectively immutable
  */
 class Field(
-        val width: Int,
-        val height: Int,
+        konst width: Int,
+        konst height: Int,
         // This function tells the constructor which cells are alive
         // if init(i, j) is true, the cell (i, j) is alive
         init: (Int, Int) -> Boolean
 ) {
-    private val live: Array<Array<Boolean>> = Array(height) { i -> Array(width) { j -> init(i, j) } }
+    private konst live: Array<Array<Boolean>> = Array(height) { i -> Array(width) { j -> init(i, j) } }
 
     private fun liveCount(i: Int, j: Int)
             = if (i in 0..height - 1 &&
@@ -44,7 +44,7 @@ class Field(
  */
 fun next(field: Field): Field {
     return Field(field.width, field.height) { i, j ->
-        val n = field.liveNeighbors(i, j)
+        konst n = field.liveNeighbors(i, j)
         if (field[i, j])
         // (i, j) is alive
             n in 2..3 // It remains alive iff it has 2 or 3 neighbors
@@ -120,10 +120,10 @@ fun printField(s: String, steps: Int) {
 }
 
 fun makeField(s: String): Field {
-    val lines: List<String> = s.split("\n")
+    konst lines: List<String> = s.split("\n")
 
-    val w = lines.maxOf { it.length }
-    val data = Array(lines.size) { Array(w) { false } }
+    konst w = lines.maxOf { it.length }
+    konst data = Array(lines.size) { Array(w) { false } }
 
     // workaround
     for (i in data.indices) {
@@ -134,7 +134,7 @@ fun makeField(s: String): Field {
 
     for (line in lines.indices) {
         for (x in lines[line].indices) {
-            val c = lines[line][x]
+            konst c = lines[line][x]
             data[line][x] = c == '*'
         }
     }

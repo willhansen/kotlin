@@ -28,19 +28,19 @@ public abstract class MemoryAllocator {
  *
  * Frees all memory allocated with the provided allocator after running the [block].
  *
- * This function is intened to facilitate the exchange of values with outside world through linear memory.
+ * This function is intened to facilitate the exchange of konstues with outside world through linear memory.
  * For example:
  *
  * ```
- * val buffer_size = ...
+ * konst buffer_size = ...
  * withScopedMemoryAllocator { allocator ->
- *     val buffer_address = allocator.allocate(buffer_size)
+ *     konst buffer_address = allocator.allocate(buffer_size)
  *     importedWasmFunctionThatWritesToBuffer(buffer_address, buffer_size)
  *     return readDataFromBufferIntoManagedKotlinMemory(buffer_address, buffer_size)
  * }
  * ```
  *
- * WARNING! Addresses allocated inside the [block] function become invalid after exiting the function.
+ * WARNING! Addresses allocated inside the [block] function become inkonstid after exiting the function.
  *
  * WARNING! A nested call to [withScopedMemoryAllocator] will temporarily disable the allocator from the outer scope
  *   for the duration of the call. Calling [MemoryAllocator.allocate] on a disabled allocator
@@ -53,8 +53,8 @@ public inline fun <T> withScopedMemoryAllocator(
     block: (allocator: MemoryAllocator) -> T
 ): T {
     contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
-    val allocator = createAllocatorInTheNewScope()
-    val result = try {
+    konst allocator = createAllocatorInTheNewScope()
+    konst result = try {
         block(allocator)
     } finally {
         allocator.destroy()
@@ -66,7 +66,7 @@ public inline fun <T> withScopedMemoryAllocator(
 @PublishedApi
 @UnsafeWasmMemoryApi
 internal fun createAllocatorInTheNewScope(): ScopedMemoryAllocator {
-    val allocator = currentAllocator?.createChild() ?:
+    konst allocator = currentAllocator?.createChild() ?:
         ScopedMemoryAllocator(unsafeGetScratchRawMemory(), parent = null)
     currentAllocator = allocator
     return allocator
@@ -101,8 +101,8 @@ internal class ScopedMemoryAllocator(
 
         // Pad available address to align it to 8
         // 8 is a max alignment number currently needed for Wasm component model canonical ABI
-        val align = 8
-        val result = (availableAddress + align - 1) and (align - 1).inv()
+        konst align = 8
+        konst result = (availableAddress + align - 1) and (align - 1).inv()
         check(result > 0 && result % align == 0) { "result must be > 0 and 8-byte aligned" }
 
         if (Int.MAX_VALUE - availableAddress < size) {
@@ -111,10 +111,10 @@ internal class ScopedMemoryAllocator(
 
         availableAddress = result + size
 
-        val currentMaxSize = wasmMemorySize() * WASM_PAGE_SIZE_IN_BYTES
+        konst currentMaxSize = wasmMemorySize() * WASM_PAGE_SIZE_IN_BYTES
         if (availableAddress >= currentMaxSize) {
 
-            val numPagesToGrow =
+            konst numPagesToGrow =
                 (availableAddress - currentMaxSize) / WASM_PAGE_SIZE_IN_BYTES + 2
 
             if (wasmMemoryGrow(numPagesToGrow) == -1) {
@@ -129,7 +129,7 @@ internal class ScopedMemoryAllocator(
 
     @PublishedApi
     internal fun createChild(): ScopedMemoryAllocator {
-        val child = ScopedMemoryAllocator(availableAddress.toInt(), parent = this)
+        konst child = ScopedMemoryAllocator(availableAddress.toInt(), parent = this)
         suspended = true
         return child
     }
@@ -141,7 +141,7 @@ internal class ScopedMemoryAllocator(
     }
 }
 
-private const val WASM_PAGE_SIZE_IN_BYTES = 65_536  // 64 KiB
+private const konst WASM_PAGE_SIZE_IN_BYTES = 65_536  // 64 KiB
 
 /**
  * Current linear memory size in pages

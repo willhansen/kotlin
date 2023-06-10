@@ -23,17 +23,17 @@ import java.lang.ref.SoftReference
 
 open class KlibMetadataDeserializedPackageFragment(
     fqName: FqName,
-    private val library: KotlinLibrary,
-    private val packageAccessHandler: PackageAccessHandler?,
+    private konst library: KotlinLibrary,
+    private konst packageAccessHandler: PackageAccessHandler?,
     storageManager: StorageManager,
     module: ModuleDescriptor,
-    private val partName: String,
+    private konst partName: String,
     containerSource: DeserializedContainerSource
 ) : KlibMetadataPackageFragment(fqName, storageManager, module, containerSource) {
 
     // The proto field is lazy so that we can load only needed
     // packages from the library.
-    override val protoForNames: ProtoBuf.PackageFragment get() = ensureStorage()
+    override konst protoForNames: ProtoBuf.PackageFragment get() = ensureStorage()
 
     private var protoForNamesStorage: SoftReference<ProtoBuf.PackageFragment> = SoftReference(null)
 
@@ -46,7 +46,7 @@ open class KlibMetadataDeserializedPackageFragment(
         return tmp
     }
 
-    override val proto: ProtoBuf.PackageFragment
+    override konst proto: ProtoBuf.PackageFragment
         get() {
             packageAccessHandler?.markNeededForLink(library, fqName.asString())
             return protoForNames
@@ -64,7 +64,7 @@ class BuiltInKlibMetadataDeserializedPackageFragment(
 ) : KlibMetadataDeserializedPackageFragment(fqName, library, packageAccessHandler, storageManager, module, partName, containerSource),
     BuiltInsPackageFragment {
 
-    override val isFallback: Boolean
+    override konst isFallback: Boolean
         get() = false
 }
 
@@ -72,7 +72,7 @@ class KlibMetadataCachedPackageFragment(
     byteArray: ByteArray,
     storageManager: StorageManager,
     module: ModuleDescriptor,
-    override val protoForNames: ProtoBuf.PackageFragment = parsePackageFragment(byteArray),
+    override konst protoForNames: ProtoBuf.PackageFragment = parsePackageFragment(byteArray),
     fqName: FqName = FqName(protoForNames.getExtension(KlibMetadataProtoBuf.fqName))
 ) : KlibMetadataPackageFragment(fqName, storageManager, module, containerSource = null)
 
@@ -91,20 +91,20 @@ abstract class KlibMetadataPackageFragment(
 
     // The proto field is lazy so that we can load only needed
     // packages from the library.
-    abstract val protoForNames: ProtoBuf.PackageFragment
+    abstract konst protoForNames: ProtoBuf.PackageFragment
 
-    open val proto: ProtoBuf.PackageFragment
+    open konst proto: ProtoBuf.PackageFragment
         get() = protoForNames
 
-    private val nameResolver by lazy {
+    private konst nameResolver by lazy {
         NameResolverImpl(protoForNames.strings, protoForNames.qualifiedNames)
     }
 
-    override val classDataFinder by lazy {
+    override konst classDataFinder by lazy {
         KlibMetadataClassDataFinder(protoForNames, nameResolver, containerSource)
     }
 
-    private val _memberScope by lazy {
+    private konst _memberScope by lazy {
         /* TODO: we fake proto binary versioning for now. */
         DeserializedPackageMemberScope(
             this,
@@ -119,8 +119,8 @@ abstract class KlibMetadataPackageFragment(
 
     override fun getMemberScope(): DeserializedPackageMemberScope = _memberScope
 
-    private val classifierNames: Set<Name> by lazy {
-        val result = mutableSetOf<Name>()
+    private konst classifierNames: Set<Name> by lazy {
+        konst result = mutableSetOf<Name>()
         result.addAll(loadClassNames())
         protoForNames.getPackage().typeAliasList.mapTo(result) { nameResolver.getName(it.name) }
         result
@@ -130,11 +130,11 @@ abstract class KlibMetadataPackageFragment(
 
     private fun loadClassNames(): Collection<Name> {
 
-        val classNameList = protoForNames.getExtension(KlibMetadataProtoBuf.className).orEmpty()
+        konst classNameList = protoForNames.getExtension(KlibMetadataProtoBuf.className).orEmpty()
 
-        val names = classNameList.mapNotNull {
-            val classId = nameResolver.getClassId(it)
-            val shortName = classId.shortClassName
+        konst names = classNameList.mapNotNull {
+            konst classId = nameResolver.getClassId(it)
+            konst shortName = classId.shortClassName
             if (!classId.isNestedClass) shortName else null
         }
 

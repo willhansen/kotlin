@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.utils.Printer
 import java.io.File
 
 fun generateGradleCompilerTypes(withPrinterToFile: (targetFile: File, Printer.() -> Unit) -> Unit) {
-    val destDir = File("libraries/tools/kotlin-gradle-compiler-types/src/generated/kotlin")
+    konst destDir = File("libraries/tools/kotlin-gradle-compiler-types/src/generated/kotlin")
 
     // Common
     generateKotlinVersion(destDir, withPrinterToFile)

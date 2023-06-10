@@ -4,8 +4,8 @@ public/*package*/ open class AnnotatedParameterInInnerClassConstructor {
     public/*package*/ constructor AnnotatedParameterInInnerClassConstructor()
 
     @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.TYPE}) public final annotation class Anno : kotlin.Annotation {
-        public constructor Anno(/*0*/ value: kotlin.String)
-        public final val value: kotlin.String
+        public constructor Anno(/*0*/ konstue: kotlin.String)
+        public final konst konstue: kotlin.String
     }
 
     public/*package*/ open inner class Inner {

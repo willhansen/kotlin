@@ -147,7 +147,7 @@ digraph flow_kt {
                         63 [label="Const: Int(0)"];
                         64 [label="Function call: Int(0).R|kotlin/Int.rangeTo|(...)" style="filled" fillcolor=yellow];
                         65 [label="Function call: Int(0).R|kotlin/Int.rangeTo|(...).R|kotlin/ranges/IntProgression.iterator|()" style="filled" fillcolor=yellow];
-                        66 [label="Variable declaration: lval <iterator>: R|kotlin/collections/IntIterator|"];
+                        66 [label="Variable declaration: lkonst <iterator>: R|kotlin/collections/IntIterator|"];
                         subgraph cluster_20 {
                             color=blue
                             67 [label="Enter while loop"];
@@ -166,7 +166,7 @@ digraph flow_kt {
                                     73 [label="Enter block"];
                                     74 [label="Access variable R|<local>/<iterator>|"];
                                     75 [label="Function call: R|<local>/<iterator>|.R|kotlin/collections/IntIterator.next|()" style="filled" fillcolor=yellow];
-                                    76 [label="Variable declaration: lval i: R|kotlin/Int|"];
+                                    76 [label="Variable declaration: lkonst i: R|kotlin/Int|"];
                                     subgraph cluster_24 {
                                         color=blue
                                         77 [label="Enter block"];

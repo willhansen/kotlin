@@ -1,6 +1,6 @@
 == foo ==
 fun foo(): Int {
-    val t = x@ (1 + 2)
+    konst t = x@ (1 + 2)
     return t
 }
 ---------------------
@@ -11,5 +11,5 @@ fun foo(): Int {
 x@ (1 + 2)                        <v2>: Int   COPY
 t                                 <v3>: Int   NEW: r(t) -> <v3>
 return t                          !<v4>: *
-{ val t = x@ (1 + 2) return t }   !<v4>: *    COPY
+{ konst t = x@ (1 + 2) return t }   !<v4>: *    COPY
 =====================

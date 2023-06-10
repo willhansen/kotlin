@@ -12,7 +12,7 @@ internal open class JDK7PlatformImplementations : PlatformImplementations() {
 
     private object ReflectSdkVersion {
         @JvmField
-        public val sdkVersion: Int? = try {
+        public konst sdkVersion: Int? = try {
             Class.forName("android.os.Build\$VERSION").getField("SDK_INT").get(null) as? Int
         } catch (e: Throwable) {
             null

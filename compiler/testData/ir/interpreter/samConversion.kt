@@ -8,12 +8,12 @@ fun interface IntPredicate {
     fun defaultMethod() = 1
 }
 
-const val isEven = <!EVALUATED: `false, true, false, true, false`!>IntPredicate { it % 2 == 0 }
+const konst isEven = <!EVALUATED: `false, true, false, true, false`!>IntPredicate { it % 2 == 0 }
     .let { predicate -> listOf(1, 2, 3, 4, 5).map { predicate.accept(it) }.joinToString() }<!>
-const val isOdd = <!EVALUATED: `true, false, true, false, true`!>IntPredicate { it % 2 != 0 }
+const konst isOdd = <!EVALUATED: `true, false, true, false, true`!>IntPredicate { it % 2 != 0 }
     .let { predicate -> listOf(1, 2, 3, 4, 5).map { predicate.accept(it) }.joinToString() }<!>
-const val callToDefault = <!EVALUATED: `1`!>IntPredicate { false }.defaultMethod()<!>
-const val callToString = <!EVALUATED: `(kotlin.Int) -> kotlin.Boolean`!>IntPredicate { false }.toString()<!>
+const konst callToDefault = <!EVALUATED: `1`!>IntPredicate { false }.defaultMethod()<!>
+const konst callToString = <!EVALUATED: `(kotlin.Int) -> kotlin.Boolean`!>IntPredicate { false }.toString()<!>
 
 @CompileTimeCalculation
 fun interface KRunnable {
@@ -28,5 +28,5 @@ object OK : () -> String {
 @CompileTimeCalculation
 fun foo(k: KRunnable) = k.invoke()
 
-const val invokeFromObject = <!EVALUATED: `OK`!>foo(OK)<!>
-const val invokeFromFunInterface = <!EVALUATED: `OK`!>foo(KRunnable { "OK" })<!>
+const konst invokeFromObject = <!EVALUATED: `OK`!>foo(OK)<!>
+const konst invokeFromFunInterface = <!EVALUATED: `OK`!>foo(KRunnable { "OK" })<!>

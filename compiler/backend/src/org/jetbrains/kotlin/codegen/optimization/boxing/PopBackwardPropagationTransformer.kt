@@ -42,26 +42,26 @@ class PopBackwardPropagationTransformer : MethodTransformer() {
         }
     }
 
-    private class Transformer(val methodNode: MethodNode) {
-        private val REPLACE_WITH_NOP: Transformation = { insnList.set(it, InsnNode(Opcodes.NOP)) }
-        private val REPLACE_WITH_POP1: Transformation = { insnList.set(it, InsnNode(Opcodes.POP)) }
-        private val REPLACE_WITH_POP2: Transformation = { insnList.set(it, InsnNode(Opcodes.POP2)) }
-        private val INSERT_POP1_AFTER: Transformation = { insnList.insert(it, InsnNode(Opcodes.POP)) }
-        private val INSERT_POP2_AFTER: Transformation = { insnList.insert(it, InsnNode(Opcodes.POP2)) }
+    private class Transformer(konst methodNode: MethodNode) {
+        private konst REPLACE_WITH_NOP: Transformation = { insnList.set(it, InsnNode(Opcodes.NOP)) }
+        private konst REPLACE_WITH_POP1: Transformation = { insnList.set(it, InsnNode(Opcodes.POP)) }
+        private konst REPLACE_WITH_POP2: Transformation = { insnList.set(it, InsnNode(Opcodes.POP2)) }
+        private konst INSERT_POP1_AFTER: Transformation = { insnList.insert(it, InsnNode(Opcodes.POP)) }
+        private konst INSERT_POP2_AFTER: Transformation = { insnList.insert(it, InsnNode(Opcodes.POP2)) }
 
-        private val insnList = methodNode.instructions
-        private val insns = insnList.toArray()
+        private konst insnList = methodNode.instructions
+        private konst insns = insnList.toArray()
 
-        private val dontTouchInsnIndices = BitSet(insns.size)
+        private konst dontTouchInsnIndices = BitSet(insns.size)
 
         fun transform() {
-            val frames = FastMethodAnalyzer("fake", methodNode, HazardsTrackingInterpreter()).analyze()
+            konst frames = FastMethodAnalyzer("fake", methodNode, HazardsTrackingInterpreter()).analyze()
             for ((i, insn) in insns.withIndex()) {
-                val frame = frames[i] ?: continue
+                konst frame = frames[i] ?: continue
                 when (insn.opcode) {
                     Opcodes.POP ->
                         frame.top()?.let { input ->
-                            // If this POP won't be removed, other POPs that touch the same values have to stay as well.
+                            // If this POP won't be removed, other POPs that touch the same konstues have to stay as well.
                             if (input.insns.any { it.shouldKeep() } || input.longerWhenFusedWithPop()) {
                                 input.insns.markAsDontTouch()
                             }
@@ -74,11 +74,11 @@ class PopBackwardPropagationTransformer : MethodTransformer() {
                 }
             }
 
-            val transformations = hashMapOf<AbstractInsnNode, Transformation>()
+            konst transformations = hashMapOf<AbstractInsnNode, Transformation>()
             for ((i, insn) in insns.withIndex()) {
-                val frame = frames[i] ?: continue
+                konst frame = frames[i] ?: continue
                 if (insn.opcode == Opcodes.POP) {
-                    val input = frame.top() ?: continue
+                    konst input = frame.top() ?: continue
                     if (input.insns.none { it.shouldKeep() }) {
                         transformations[insn] = REPLACE_WITH_NOP
                         input.insns.forEach {
@@ -95,39 +95,39 @@ class PopBackwardPropagationTransformer : MethodTransformer() {
         }
 
         private inner class HazardsTrackingInterpreter : SourceInterpreter(Opcodes.API_VERSION) {
-            override fun naryOperation(insn: AbstractInsnNode, values: MutableList<out SourceValue>): SourceValue {
-                for (value in values) {
-                    value.insns.markAsDontTouch()
+            override fun naryOperation(insn: AbstractInsnNode, konstues: MutableList<out SourceValue>): SourceValue {
+                for (konstue in konstues) {
+                    konstue.insns.markAsDontTouch()
                 }
-                return super.naryOperation(insn, values)
+                return super.naryOperation(insn, konstues)
             }
 
-            override fun copyOperation(insn: AbstractInsnNode, value: SourceValue): SourceValue {
-                value.insns.markAsDontTouch()
-                return super.copyOperation(insn, value)
+            override fun copyOperation(insn: AbstractInsnNode, konstue: SourceValue): SourceValue {
+                konstue.insns.markAsDontTouch()
+                return super.copyOperation(insn, konstue)
             }
 
-            override fun unaryOperation(insn: AbstractInsnNode, value: SourceValue): SourceValue {
-                value.insns.markAsDontTouch()
-                return super.unaryOperation(insn, value)
+            override fun unaryOperation(insn: AbstractInsnNode, konstue: SourceValue): SourceValue {
+                konstue.insns.markAsDontTouch()
+                return super.unaryOperation(insn, konstue)
             }
 
-            override fun binaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue): SourceValue {
-                value1.insns.markAsDontTouch()
-                value2.insns.markAsDontTouch()
-                return super.binaryOperation(insn, value1, value2)
+            override fun binaryOperation(insn: AbstractInsnNode, konstue1: SourceValue, konstue2: SourceValue): SourceValue {
+                konstue1.insns.markAsDontTouch()
+                konstue2.insns.markAsDontTouch()
+                return super.binaryOperation(insn, konstue1, konstue2)
             }
 
             override fun ternaryOperation(
                 insn: AbstractInsnNode,
-                value1: SourceValue,
-                value2: SourceValue,
-                value3: SourceValue
+                konstue1: SourceValue,
+                konstue2: SourceValue,
+                konstue3: SourceValue
             ): SourceValue {
-                value1.insns.markAsDontTouch()
-                value2.insns.markAsDontTouch()
-                value3.insns.markAsDontTouch()
-                return super.ternaryOperation(insn, value1, value2, value3)
+                konstue1.insns.markAsDontTouch()
+                konstue2.insns.markAsDontTouch()
+                konstue3.insns.markAsDontTouch()
+                return super.ternaryOperation(insn, konstue1, konstue2, konstue3)
             }
         }
 
@@ -149,20 +149,20 @@ class PopBackwardPropagationTransformer : MethodTransformer() {
             when {
                 isPurePush() -> REPLACE_WITH_NOP
                 isPrimitiveBoxing() || isPrimitiveTypeConversion() -> {
-                    val index = insnList.indexOf(this)
-                    val frame = frames[index] ?: throw AssertionError("dead instruction #$index used by non-dead instruction")
-                    val input = frame.top() ?: throw AssertionError("coercion instruction at #$index has no input")
+                    konst index = insnList.indexOf(this)
+                    konst frame = frames[index] ?: throw AssertionError("dead instruction #$index used by non-dead instruction")
+                    konst input = frame.top() ?: throw AssertionError("coercion instruction at #$index has no input")
                     when (input.size) {
                         1 -> REPLACE_WITH_POP1
                         2 -> REPLACE_WITH_POP2
-                        else -> throw AssertionError("Unexpected pop value size: ${input.size}")
+                        else -> throw AssertionError("Unexpected pop konstue size: ${input.size}")
                     }
                 }
                 else ->
                     when (resultSize) {
                         1 -> INSERT_POP1_AFTER
                         2 -> INSERT_POP2_AFTER
-                        else -> throw AssertionError("Unexpected pop value size: $resultSize")
+                        else -> throw AssertionError("Unexpected pop konstue size: $resultSize")
                     }
             }
 

@@ -1,12 +1,12 @@
 class Foo() {
     companion object {
-        val bar = "OK";
+        konst bar = "OK";
         var boo = "FAIL";
     }
 
-    val a = bar
+    konst a = bar
     var b = Foo.bar
-    val c: String
+    konst c: String
     var d: String
 
     init {
@@ -18,7 +18,7 @@ class Foo() {
 }
 
 fun box(): String {
-    val foo = Foo()
+    konst foo = Foo()
 
     if (foo.a != "OK") return "foo.a != OK"
     if (foo.b != "OK") return "foo.b != OK"

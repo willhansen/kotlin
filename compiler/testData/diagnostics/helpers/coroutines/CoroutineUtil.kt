@@ -4,14 +4,14 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 
-val StateMachineChecker = StateMachineCheckerClass()
+konst StateMachineChecker = StateMachineCheckerClass()
 
 object CheckStateMachineContinuation: Continuation<Unit> {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
-    override fun resumeWith(value: Result<Unit>) {
-        value.getOrThrow()
+    override fun resumeWith(konstue: Result<Unit>) {
+        konstue.getOrThrow()
         StateMachineChecker.proceed = {
             StateMachineChecker.finished = true
         }

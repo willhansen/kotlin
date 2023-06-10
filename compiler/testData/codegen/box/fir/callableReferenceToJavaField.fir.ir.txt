@@ -6,12 +6,12 @@ FILE fqName:foo fileName:/main.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:A modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:s visibility:public modality:FINAL [val]
+    PROPERTY name:s visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 's: kotlin.String declared in foo.A.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-s> visibility:public modality:FINAL <> ($this:foo.A) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:s visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:s visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:foo.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-s> (): kotlin.String declared in foo.A'
@@ -50,7 +50,7 @@ FILE fqName:foo fileName:/main.kt
                 <2>: <none>
           p0: GET_VAR '<this>: foo.Derived declared in foo.Derived.foo' type=foo.Derived origin=null
           p1: CONSTRUCTOR_CALL 'public constructor <init> (s: kotlin.String) declared in foo.A' type=foo.A origin=null
-            s: CONST String type=kotlin.String value="OK"
+            s: CONST String type=kotlin.String konstue="OK"
     FUN name:box visibility:public modality:FINAL <> ($this:foo.Derived) returnType:kotlin.String
       $this: VALUE_PARAMETER name:<this> type:foo.Derived
       BLOCK_BODY

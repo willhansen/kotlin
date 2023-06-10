@@ -1,21 +1,21 @@
 enum class A {
     X {
-        val k = "K"
+        konst k = "K"
 
-        val anonObject = object {
+        konst anonObject = object {
             inner class Inner {
-                val x = "O" + k
+                konst x = "O" + k
             }
 
-            val innerX = Inner().x
+            konst innerX = Inner().x
 
             override fun toString() = innerX
         }
 
-        override val test = anonObject.toString()
+        override konst test = anonObject.toString()
     };
 
-    abstract val test: String
+    abstract konst test: String
 }
 
 fun box() = A.X.test

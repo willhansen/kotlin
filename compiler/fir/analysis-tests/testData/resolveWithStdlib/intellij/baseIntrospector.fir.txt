@@ -18,7 +18,7 @@ FILE: m1.kt
                 this@R|m1/BaseIntrospector|.super<R|m1/BaseIntrospector.AbstractRetriever<D, S>|>()
             }
 
-            protected final val database: R|D| = R|<local>/database|
+            protected final konst database: R|D| = R|<local>/database|
                 protected get(): R|D|
 
         }

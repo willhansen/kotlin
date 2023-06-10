@@ -10,28 +10,28 @@ package foo
 import test.*
 
 fun test1(): String {
-    val o = "O"
+    konst o = "O"
 
-    val result = doWork ({o}, {"K"}, "GOOD")
+    konst result = doWork ({o}, {"K"}, "GOOD")
 
     return result.getO() + result.getK() + result.getParam()
 }
 
 fun test2() : String {
     //same names as in object
-    val o1 = "O"
-    val k1 = "K"
+    konst o1 = "O"
+    konst k1 = "K"
 
-    val result = doWorkInConstructor ({o1}, {k1}, "GOOD")
+    konst result = doWorkInConstructor ({o1}, {k1}, "GOOD")
 
     return result.getO() + result.getK() + result.getParam()
 }
 
 fun box() : String {
-    val result1 = test1();
+    konst result1 = test1();
     if (result1 != "OKGOOD") return "fail1 $result1"
 
-    val result2 = test2();
+    konst result2 = test2();
     if (result2 != "OKGOOD") return "fail2 $result2"
 
     return "OK"
@@ -51,7 +51,7 @@ abstract class A<R> {
 }
 
 inline fun <R> doWork(crossinline jobO: ()-> R, crossinline jobK: ()-> R, param: R) : A<R> {
-    val s = object : A<R>() {
+    konst s = object : A<R>() {
 
         override fun getO(): R {
             return jobO()
@@ -68,13 +68,13 @@ inline fun <R> doWork(crossinline jobO: ()-> R, crossinline jobK: ()-> R, param:
 }
 
 inline fun <R> doWorkInConstructor(crossinline jobO: ()-> R, crossinline jobK: ()-> R, param: R) : A<R> {
-    val s = object : A<R>() {
+    konst s = object : A<R>() {
 
-        val p = param;
+        konst p = param;
 
-        val o1 = jobO()
+        konst o1 = jobO()
 
-        val k1 = jobK()
+        konst k1 = jobK()
 
         override fun getO(): R {
             return o1

@@ -13,7 +13,7 @@ fun foo(a: L<Int>) = "Int"
 fun foo(a: L<String>) = "String"
 
 private class TestClass {
-    private val data = mutableListOf<List<Any>>()
+    private konst data = mutableListOf<List<Any>>()
     fun withData(data: List<List<Any>>) = apply { this.data.addAll(data) }
     fun withData(row: List<Any>) = apply {
         data.add(row)
@@ -61,8 +61,8 @@ fun box(): String {
     }
     if (foo(L<Int>()) != "Int") return "fail3"
 
-    val b = TestClass()
-    val data = mutableListOf<List<Any>>()
+    konst b = TestClass()
+    konst data = mutableListOf<List<Any>>()
     data.add(listOf("a", "b", "c"))
     data.add(listOf("d", "e", "f"))
     b.withData(data)

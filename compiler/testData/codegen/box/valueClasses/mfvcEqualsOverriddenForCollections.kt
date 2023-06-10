@@ -6,7 +6,7 @@
 import kotlin.math.abs
 
 @JvmInline
-value class MFVC(val x: Double, val y: Int) {
+konstue class MFVC(konst x: Double, konst y: Int) {
     fun equals(other: MFVC): Boolean {
         return abs(x - other.x) < 0.1
     }
@@ -17,6 +17,6 @@ value class MFVC(val x: Double, val y: Int) {
 }
 
 fun box(): String {
-    val set = setOf(MFVC(1.0, 100), MFVC(1.5, 200), MFVC(1.501, 300))
+    konst set = setOf(MFVC(1.0, 100), MFVC(1.5, 200), MFVC(1.501, 300))
     return if (set.size == 2) "OK" else "Fail"
 }

@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}equals
 //   Public signature: /equals|-1340381053427629212[0]
-val equals: KFunction2<Z, Any?, Boolean>
+konst equals: KFunction2<Z, Any?, Boolean>
   // CHECK JVM_IR:
   //   Mangled name: #<get-equals>(){}kotlin.reflect.KFunction2<Z,kotlin.Any?,kotlin.Boolean>
   //   Public signature: /equals.<get-equals>|5606412553566840313[0]
@@ -14,11 +14,11 @@ val equals: KFunction2<Z, Any?, Boolean>
 //   Mangled name: Z
 //   Public signature: /Z|null[0]
 @JvmInline
-value class Z {
+konstue class Z {
   // CHECK:
   //   Mangled name: Z{}s
   //   Public signature: /Z.s|7217541905509134881[0]
-  val s: String
+  konst s: String
     // CHECK JVM_IR:
     //   Mangled name: Z#<get-s>(){}kotlin.String
     //   Public signature: /Z.s.<get-s>|4142379646177092803[0]

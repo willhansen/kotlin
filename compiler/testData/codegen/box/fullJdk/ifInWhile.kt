@@ -3,7 +3,7 @@
 // FULL_JDK
 
 fun box() : String {
-    val processors = Runtime.getRuntime()!!.availableProcessors()
+    konst processors = Runtime.getRuntime()!!.availableProcessors()
     var threadNum = 1
     while(threadNum <= 1024) {
         if(threadNum < 2 * processors)

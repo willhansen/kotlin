@@ -16,23 +16,23 @@ class IdeaKotlinBooleanExtrasSerializerTest {
 
     @Test
     fun `test - true`() {
-        val context = TestIdeaKotlinSerializationContext()
-        val data = IdeaKotlinBooleanExtrasSerializer.serialize(context, true)
+        konst context = TestIdeaKotlinSerializationContext()
+        konst data = IdeaKotlinBooleanExtrasSerializer.serialize(context, true)
         assertEquals(true, IdeaKotlinBooleanExtrasSerializer.deserialize(context, data))
         if (context.logger.reports.isNotEmpty()) fail("Unexpected reports: ${context.logger.reports}")
     }
 
     @Test
     fun `test - false`() {
-        val context = TestIdeaKotlinSerializationContext()
-        val data = IdeaKotlinBooleanExtrasSerializer.serialize(context, false)
+        konst context = TestIdeaKotlinSerializationContext()
+        konst data = IdeaKotlinBooleanExtrasSerializer.serialize(context, false)
         assertEquals(false, IdeaKotlinBooleanExtrasSerializer.deserialize(context, data))
         if (context.logger.reports.isNotEmpty()) fail("Unexpected reports: ${context.logger.reports}")
     }
 
     @Test
     fun `test - bad data`() {
-        val context = TestIdeaKotlinSerializationContext()
+        konst context = TestIdeaKotlinSerializationContext()
         assertNull(IdeaKotlinBooleanExtrasSerializer.deserialize(context, byteArrayOf()))
         if (context.logger.reports.size != 1) fail("Expected one report. Found: ${context.logger.reports}")
     }

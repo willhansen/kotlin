@@ -9,16 +9,16 @@ import android.os.Parcelable
 
 @Parcelize
 data class Test(
-        val a: List<String>,
-        val b: List<String?>,
-        val c: List<Int>,
-        val d: List<Int?>,
-        val e: List<List<String>?>,
-        val f: List<List<List<Int>>>
+        konst a: List<String>,
+        konst b: List<String?>,
+        konst c: List<Int>,
+        konst d: List<Int?>,
+        konst e: List<List<String>?>,
+        konst f: List<List<List<Int>>>
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = Test(
+    konst first = Test(
             a = listOf("A", "B"),
             b = listOf("A", null, "C"),
             c = listOf(1, 2, 3),
@@ -29,11 +29,11 @@ fun box() = parcelTest { parcel ->
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val first2 = readFromParcel<Test>(parcel)
+    konst first2 = readFromParcel<Test>(parcel)
 
     assert(first == first2)
 

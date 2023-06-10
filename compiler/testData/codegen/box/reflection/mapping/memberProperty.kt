@@ -5,15 +5,15 @@
 import kotlin.reflect.jvm.*
 import kotlin.test.*
 
-class K(var value: Long)
+class K(var konstue: Long)
 
 fun box(): String {
-    val p = K::value
+    konst p = K::konstue
 
     assertNotNull(p.javaField, "Fail p field")
 
-    val getter = p.javaGetter!!
-    val setter = p.javaSetter!!
+    konst getter = p.javaGetter!!
+    konst setter = p.javaSetter!!
 
     assertEquals(K::class.java.getMethod("getValue"), getter)
     assertEquals(K::class.java.getMethod("setValue", Long::class.java), setter)
@@ -21,7 +21,7 @@ fun box(): String {
     assertNull(p.getter.javaConstructor)
     assertNull(p.setter.javaConstructor)
 
-    val k = K(42L)
+    konst k = K(42L)
     assertEquals(42L, getter.invoke(k), "Fail k getter")
     setter.invoke(k, -239L)
     assertEquals(-239L, getter.invoke(k), "Fail k setter")

@@ -6,7 +6,7 @@ FILE: typesInLocalFunctions.kt
 
     }
     public final fun foo(): R|() -> kotlin/Boolean| {
-        lval s: R|Some| = R|/Some.Some|()
+        lkonst s: R|Some| = R|/Some.Some|()
         when () {
             Boolean(true) ->  {
                 ^foo fun <anonymous>(): R|kotlin/Boolean| <inline=Unknown>  {

@@ -3,7 +3,7 @@ package foo
 
 class A() {
     fun lold() = "OK"
-    val p: () -> String
+    konst p: () -> String
     init {
         p = { { lold() }() }
     }

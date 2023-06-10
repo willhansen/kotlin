@@ -45,8 +45,8 @@ class FirFileBuilder : FirAnnotationContainerBuilder {
     var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
     lateinit var annotationsContainer: FirFileAnnotationsContainer
     lateinit var packageDirective: FirPackageDirective
-    val imports: MutableList<FirImport> = mutableListOf()
-    val declarations: MutableList<FirDeclaration> = mutableListOf()
+    konst imports: MutableList<FirImport> = mutableListOf()
+    konst declarations: MutableList<FirDeclaration> = mutableListOf()
     lateinit var name: String
     var sourceFile: KtSourceFile? = null
     var sourceFileLinesMapping: KtSourceFileLinesMapping? = null
@@ -72,7 +72,7 @@ class FirFileBuilder : FirAnnotationContainerBuilder {
 
 
     @Deprecated("Modification of 'annotations' has no impact for FirFileBuilder", level = DeprecationLevel.HIDDEN)
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 }
 
 @OptIn(ExperimentalContracts::class)

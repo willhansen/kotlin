@@ -4,7 +4,7 @@ fun test1() {
     var c: Any? = "XXX"
     if (c !is String) return
 
-    val newC: String? = "YYY"
+    konst newC: String? = "YYY"
     if (newC != null) {
         c = newC
     }
@@ -15,7 +15,7 @@ fun test2() {
     var c: Any? = "XXX"
     if (c !is String) return
 
-    val newC: String? = "YYY"
+    konst newC: String? = "YYY"
     if (newC is String) {
         c = newC
     }
@@ -26,7 +26,7 @@ fun test3() {
     var c: Any? = "XXX"
     if (c !is String) return
 
-    val newC: String? = "YYY"
+    konst newC: String? = "YYY"
     if (newC == null) return
     c = newC
 

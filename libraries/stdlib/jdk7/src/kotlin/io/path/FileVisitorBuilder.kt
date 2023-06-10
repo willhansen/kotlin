@@ -100,10 +100,10 @@ internal class FileVisitorBuilderImpl : FileVisitorBuilder {
 
 
 private class FileVisitorImpl(
-    private val onPreVisitDirectory: ((Path, BasicFileAttributes) -> FileVisitResult)?,
-    private val onVisitFile: ((Path, BasicFileAttributes) -> FileVisitResult)?,
-    private val onVisitFileFailed: ((Path, IOException) -> FileVisitResult)?,
-    private val onPostVisitDirectory: ((Path, IOException?) -> FileVisitResult)?,
+    private konst onPreVisitDirectory: ((Path, BasicFileAttributes) -> FileVisitResult)?,
+    private konst onVisitFile: ((Path, BasicFileAttributes) -> FileVisitResult)?,
+    private konst onVisitFileFailed: ((Path, IOException) -> FileVisitResult)?,
+    private konst onPostVisitDirectory: ((Path, IOException?) -> FileVisitResult)?,
 ) : SimpleFileVisitor<Path>() {
     override fun preVisitDirectory(dir: Path, attrs: BasicFileAttributes): FileVisitResult =
         this.onPreVisitDirectory?.invoke(dir, attrs) ?: super.preVisitDirectory(dir, attrs)

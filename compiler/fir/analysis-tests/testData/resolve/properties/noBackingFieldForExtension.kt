@@ -3,9 +3,9 @@ interface B {
 }
 
 class A {
-    val String.x: Int get() {
+    konst String.x: Int get() {
         return field.foo()
     }
 
-    val String.field: B get() = TODO()
+    konst String.field: B get() = TODO()
 }

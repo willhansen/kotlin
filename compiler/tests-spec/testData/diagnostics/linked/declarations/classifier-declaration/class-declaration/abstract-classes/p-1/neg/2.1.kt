@@ -19,13 +19,13 @@ abstract class Base1() {
     abstract fun foo()
 }
 
-abstract class Base2(var b1: Any, val a1: Any) {
+abstract class Base2(var b1: Any, konst a1: Any) {
     abstract fun foo()
 }
 
 fun case1() {
-    val b0 = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>Base0()<!>
-    val b1 = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>Base1()<!>
-    val b2 = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>Base2(1, "1")<!>
+    konst b0 = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>Base0()<!>
+    konst b1 = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>Base1()<!>
+    konst b2 = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>Base2(1, "1")<!>
 }
 

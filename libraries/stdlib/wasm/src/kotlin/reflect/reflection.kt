@@ -45,7 +45,7 @@ internal fun createKType(classifier: KClassifier, arguments: Array<KTypeProjecti
     KTypeImpl(classifier, arguments.asList(), isMarkedNullable)
 
 internal fun createKTypeParameter(name: String, upperBounds: Array<KType>, variance: String): KTypeParameter {
-    val kVariance = when (variance) {
+    konst kVariance = when (variance) {
         "in" -> KVariance.IN
         "out" -> KVariance.OUT
         else -> KVariance.INVARIANT

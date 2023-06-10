@@ -1,4 +1,4 @@
-annotation class Ann(val arg: String = "abc")
+annotation class Ann(konst arg: String = "abc")
 
 @Ann class MyClass
 

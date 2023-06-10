@@ -2,12 +2,12 @@
 open class Base {
     open fun foo() {}
 
-    open val bar: String = ""
+    open konst bar: String = ""
 }
 
 interface BaseI {
     fun foo()
-    val bar: String
+    konst bar: String
 }
 
 class Derived : Base(), BaseI {
@@ -15,6 +15,6 @@ class Derived : Base(), BaseI {
         super.foo()
     }
 
-    override val bar: String
+    override konst bar: String
         get() = super.bar
 }

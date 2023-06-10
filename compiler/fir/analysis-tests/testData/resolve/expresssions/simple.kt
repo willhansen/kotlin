@@ -1,9 +1,9 @@
 fun foo() {
-    val x = 1
+    konst x = 1
 }
 
-val bar = ""
+konst bar = ""
 
-val n = null
+konst n = null
 
-val g: String? = null
+konst g: String? = null

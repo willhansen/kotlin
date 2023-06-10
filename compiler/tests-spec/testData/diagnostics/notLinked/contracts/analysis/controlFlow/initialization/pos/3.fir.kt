@@ -2,142 +2,142 @@
 // SKIP_TXT
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: EnumClass?) {
-    val value_2: Int
+fun case_1(konstue_1: EnumClass?) {
+    konst konstue_2: Int
 
-    when (value_1) {
-        EnumClass.NORTH -> funWithExactlyOnceCallsInPlace { value_2 = 1 }
-        EnumClass.SOUTH -> funWithExactlyOnceCallsInPlace { value_2 = 2 }
-        EnumClass.WEST -> funWithExactlyOnceCallsInPlace { value_2 = 3 }
-        EnumClass.EAST -> funWithExactlyOnceCallsInPlace { value_2 = 4 }
-        null -> funWithExactlyOnceCallsInPlace { value_2 = 5 }
+    when (konstue_1) {
+        EnumClass.NORTH -> funWithExactlyOnceCallsInPlace { konstue_2 = 1 }
+        EnumClass.SOUTH -> funWithExactlyOnceCallsInPlace { konstue_2 = 2 }
+        EnumClass.WEST -> funWithExactlyOnceCallsInPlace { konstue_2 = 3 }
+        EnumClass.EAST -> funWithExactlyOnceCallsInPlace { konstue_2 = 4 }
+        null -> funWithExactlyOnceCallsInPlace { konstue_2 = 5 }
     }
 
-    value_2.inc()
+    konstue_2.inc()
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Any?) {
-    val value_2: Int
+fun case_2(konstue_1: Any?) {
+    konst konstue_2: Int
 
     funWithAtMostOnceCallsInPlace {
-        if (value_1 is String) {
-            value_2 = 0
-        } else if (value_1 == null) {
-            value_2 = 1
+        if (konstue_1 is String) {
+            konstue_2 = 0
+        } else if (konstue_1 == null) {
+            konstue_2 = 1
         } else {
-            funWithExactlyOnceCallsInPlace { value_2 = 2 }
-            value_2.dec()
+            funWithExactlyOnceCallsInPlace { konstue_2 = 2 }
+            konstue_2.dec()
         }
-        value_2.dec()
+        konstue_2.dec()
     }
 }
 
 // TESTCASE NUMBER: 3
-class case_3(value_1: Any?) {
-    var value_2: Int
+class case_3(konstue_1: Any?) {
+    var konstue_2: Int
 
     init {
-        if (value_1 is String) {
-            funWithExactlyOnceCallsInPlace { value_2 = 0 }
-            value_2.div(10)
-        } else if (value_1 == null) {
-            funWithAtLeastOnceCallsInPlace { value_2 = 1 }
-            value_2.div(10)
+        if (konstue_1 is String) {
+            funWithExactlyOnceCallsInPlace { konstue_2 = 0 }
+            konstue_2.div(10)
+        } else if (konstue_1 == null) {
+            funWithAtLeastOnceCallsInPlace { konstue_2 = 1 }
+            konstue_2.div(10)
         } else {
-            value_2 = 2
+            konstue_2 = 2
         }
 
-        value_2.div(10)
+        konstue_2.div(10)
     }
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(value_1: EnumClassSingle?) {
-    var value_2: Int
+fun case_4(konstue_1: EnumClassSingle?) {
+    var konstue_2: Int
 
     funWithAtMostOnceCallsInPlace {
-        when (value_1) {
+        when (konstue_1) {
             EnumClassSingle.EVERYTHING -> {
-                funWithExactlyOnceCallsInPlace { value_2 = 1 }
-                ++value_2
+                funWithExactlyOnceCallsInPlace { konstue_2 = 1 }
+                ++konstue_2
             }
             null -> {
-                funWithAtLeastOnceCallsInPlace { value_2 = 2 }
-                --value_2
+                funWithAtLeastOnceCallsInPlace { konstue_2 = 2 }
+                --konstue_2
             }
         }
-        value_2.minus(5)
+        konstue_2.minus(5)
     }
 }
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    var value_2: Int
+    var konstue_2: Int
 
     try {
-        funWithAtLeastOnceCallsInPlace { value_2 = 10 }
+        funWithAtLeastOnceCallsInPlace { konstue_2 = 10 }
     } catch (e: Exception) {
-        funWithExactlyOnceCallsInPlace { value_2 = 1 }
+        funWithExactlyOnceCallsInPlace { konstue_2 = 1 }
     }
 
-    value_2++
+    konstue_2++
 }
 
 // TESTCASE NUMBER: 6
 fun case_6() {
-    var value_2: Int
+    var konstue_2: Int
 
     try {
-        funWithAtLeastOnceCallsInPlace { value_2 = 10 }
+        funWithAtLeastOnceCallsInPlace { konstue_2 = 10 }
     } catch (e: Exception) {
         throw Exception()
     } finally {
-        funWithAtLeastOnceCallsInPlace { value_2 = 10 }
+        funWithAtLeastOnceCallsInPlace { konstue_2 = 10 }
     }
 
-    value_2++
+    konstue_2++
 }
 
 // TESTCASE NUMBER: 7
 fun case_7() {
-    var value_1: Int
+    var konstue_1: Int
 
     try {
-        funWithAtLeastOnceCallsInPlace { value_1 = 10 }
+        funWithAtLeastOnceCallsInPlace { konstue_1 = 10 }
     } catch (e: Exception) {
         try {
-            funWithAtLeastOnceCallsInPlace { value_1 = 10 }
+            funWithAtLeastOnceCallsInPlace { konstue_1 = 10 }
         } catch (e: Exception) {
             throw Exception()
         }
     } finally {
-        funWithAtLeastOnceCallsInPlace { value_1 = 10 }
+        funWithAtLeastOnceCallsInPlace { konstue_1 = 10 }
     }
 
-    println(value_1.inc())
+    println(konstue_1.inc())
 }
 
 // TESTCASE NUMBER: 8
 fun case_8() {
-    var value_1: Int
+    var konstue_1: Int
 
     try {
-        funWithAtLeastOnceCallsInPlace { value_1 = 10 }
+        funWithAtLeastOnceCallsInPlace { konstue_1 = 10 }
     } catch (e: Exception) {
         try {
-            funWithAtLeastOnceCallsInPlace { value_1 = 10 }
+            funWithAtLeastOnceCallsInPlace { konstue_1 = 10 }
         } catch (e: Exception) {
-            funWithAtLeastOnceCallsInPlace { value_1 = 10 }
+            funWithAtLeastOnceCallsInPlace { konstue_1 = 10 }
         }
     }
 
-    println(value_1.inc())
+    println(konstue_1.inc())
 }
 
 // TESTCASE NUMBER: 9
 fun case_9() {
-    val x: Int
+    konst x: Int
     funWithExactlyOnceCallsInPlace outer@ {
         funWithAtMostOnceCallsInPlace {
             funWithUnknownCallsInPlace {
@@ -152,7 +152,7 @@ fun case_9() {
 
 // TESTCASE NUMBER: 10
 fun case_10() {
-    val x: Int
+    konst x: Int
     funWithExactlyOnceCallsInPlace outer@ {
         funWithAtLeastOnceCallsInPlace {
             x = 42

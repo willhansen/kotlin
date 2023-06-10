@@ -9,7 +9,7 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.ExtraPropertiesExtension
 
 internal class KotlinPluginInMultipleProjectsHolder(
-    private val trackPluginVersionsSeparately: Boolean
+    private konst trackPluginVersionsSeparately: Boolean
 ) {
     private var loadedInProjectPath: String? = null
 
@@ -20,14 +20,14 @@ internal class KotlinPluginInMultipleProjectsHolder(
     ) {
         require(trackPluginVersionsSeparately == (kotlinPluginVersion != null))
 
-        val projectPath = project.path
+        konst projectPath = project.path
 
-        val loadedInProjectsPropertyName = getPropertyName(kotlinPluginVersion)
+        konst loadedInProjectsPropertyName = getPropertyName(kotlinPluginVersion)
 
         if (loadedInProjectPath == null) {
             loadedInProjectPath = projectPath
 
-            val ext = project.rootProject.extensions.getByType(ExtraPropertiesExtension::class.java)
+            konst ext = project.rootProject.extensions.getByType(ExtraPropertiesExtension::class.java)
 
             if (!ext.has(loadedInProjectsPropertyName)) {
                 ext.set(loadedInProjectsPropertyName, projectPath)
@@ -54,9 +54,9 @@ internal class KotlinPluginInMultipleProjectsHolder(
     ): List<String>? {
         require(trackPluginVersionsSeparately == (kotlinPluginVersion != null))
 
-        val ext = getExt(project)
+        konst ext = getExt(project)
 
-        val propertyName = getPropertyName(kotlinPluginVersion)
+        konst propertyName = getPropertyName(kotlinPluginVersion)
 
         if (!ext.has(propertyName)) {
             return null
@@ -82,7 +82,7 @@ internal class KotlinPluginInMultipleProjectsHolder(
     }
 }
 
-const val MULTIPLE_KOTLIN_PLUGINS_LOADED_WARNING: String =
+const konst MULTIPLE_KOTLIN_PLUGINS_LOADED_WARNING: String =
     "The Kotlin Gradle plugin was loaded multiple times in different subprojects, which is not supported and may break the build. \n" +
 
             "This might happen in subprojects that apply the Kotlin plugins with the Gradle 'plugins { ... }' DSL if they specify " +
@@ -94,7 +94,7 @@ const val MULTIPLE_KOTLIN_PLUGINS_LOADED_WARNING: String =
 
             "See: https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl"
 
-const val MULTIPLE_KOTLIN_PLUGINS_SPECIFIC_PROJECTS_WARNING: String =
+const konst MULTIPLE_KOTLIN_PLUGINS_SPECIFIC_PROJECTS_WARNING: String =
     "The Kotlin plugin was loaded in the following projects: "
 
-const val MULTIPLE_KOTLIN_PLUGINS_SPECIFIC_PROJECTS_INFO: String = "The full list of projects that loaded the Kotlin plugin is: "
+const konst MULTIPLE_KOTLIN_PLUGINS_SPECIFIC_PROJECTS_INFO: String = "The full list of projects that loaded the Kotlin plugin is: "

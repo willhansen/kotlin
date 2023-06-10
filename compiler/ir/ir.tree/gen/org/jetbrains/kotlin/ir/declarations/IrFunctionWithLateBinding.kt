@@ -17,11 +17,11 @@ import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.functionWithLateBinding]
  */
 interface IrFunctionWithLateBinding : IrDeclaration {
-    override val symbol: IrSimpleFunctionSymbol
+    override konst symbol: IrSimpleFunctionSymbol
 
     var modality: Modality
 
-    val isBound: Boolean
+    konst isBound: Boolean
 
     fun acquireSymbol(symbol: IrSimpleFunctionSymbol): IrSimpleFunction
 }

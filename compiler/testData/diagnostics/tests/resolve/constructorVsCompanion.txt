@@ -1,10 +1,10 @@
 package 
 
-public val a: [Error type: Not found recorded type for A]
-public val b: B.Companion
-public val c: [Error type: Not found recorded type for C]
-public val d: D.Companion
-public val e: kotlin.Int
+public konst a: [Error type: Not found recorded type for A]
+public konst b: B.Companion
+public konst c: [Error type: Not found recorded type for C]
+public konst d: D.Companion
+public konst e: kotlin.Int
 
 public final class A {
     private constructor A()
@@ -29,7 +29,7 @@ public final class B {
 
 public final class C {
     public constructor C(/*0*/ x: kotlin.Int)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

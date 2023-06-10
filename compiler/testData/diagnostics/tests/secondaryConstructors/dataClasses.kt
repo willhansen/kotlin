@@ -1,9 +1,9 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
-data class A1(val x: String) {
+data class A1(konst x: String) {
     constructor(): this("")
 }
 
-data class A2(val y: String, val z: Int) {
+data class A2(konst y: String, konst z: Int) {
     constructor(x: String): this(x, 0)
 }
 

@@ -1,10 +1,10 @@
-data class Vector(val x: Int, val y: Int) {
+data class Vector(konst x: Int, konst y: Int) {
     fun plus(other: Vector): Vector = Vector(x + other.x, y + other.y)
 }
 
 fun main() {
-    val a = Vector(1, 2)
-    val b = Vector(-1, 10)
+    konst a = Vector(1, 2)
+    konst b = Vector(-1, 10)
 
     println("a = $a, b = ${b.toString()}")
     println("a + b = " + (a + b))

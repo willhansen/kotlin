@@ -6,35 +6,35 @@
 package org.jetbrains.kotlin.fir.resolve.dfa
 
 abstract class Stack<T> {
-    abstract val size: Int
+    abstract konst size: Int
     abstract fun top(): T
     abstract fun pop(): T
-    abstract fun push(value: T)
+    abstract fun push(konstue: T)
     abstract fun reset()
 
     /**
-     * returns all elements of the stack in order of retrieval
+     * returns all elements of the stack in order of retriekonst
      */
     abstract fun all(): List<T>
 }
 
-fun <T> stackOf(vararg values: T): Stack<T> = StackImpl(*values)
-val Stack<*>.isEmpty: Boolean get() = size == 0
-val Stack<*>.isNotEmpty: Boolean get() = size != 0
+fun <T> stackOf(vararg konstues: T): Stack<T> = StackImpl(*konstues)
+konst Stack<*>.isEmpty: Boolean get() = size == 0
+konst Stack<*>.isNotEmpty: Boolean get() = size != 0
 fun <T> Stack<T>.topOrNull(): T? = if (size == 0) null else top()
 fun <T> Stack<T>.popOrNull(): T? = if (size == 0) null else pop()
 
-private class StackImpl<T>(vararg values: T) : Stack<T>() {
-    private val stack = mutableListOf(*values)
+private class StackImpl<T>(vararg konstues: T) : Stack<T>() {
+    private konst stack = mutableListOf(*konstues)
 
     override fun top(): T = stack[stack.size - 1]
     override fun pop(): T = stack.removeAt(stack.size - 1)
 
-    override fun push(value: T) {
-        stack.add(value)
+    override fun push(konstue: T) {
+        stack.add(konstue)
     }
 
-    override val size: Int get() = stack.size
+    override konst size: Int get() = stack.size
     override fun reset() {
         stack.clear()
     }

@@ -18,7 +18,7 @@ public final class E {
 
 public final class MyWrapper : Wrapper<A> {
     public constructor MyWrapper(/*0*/ a: A)
-    protected final override /*1*/ /*fake_override*/ val t: A
+    protected final override /*1*/ /*fake_override*/ konst t: A
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -26,8 +26,8 @@ public final class MyWrapper : Wrapper<A> {
 
 public final data class Pair</*0*/ out T> {
     public constructor Pair</*0*/ out T>(/*0*/ a: T, /*1*/ b: T)
-    public final val a: T
-    public final val b: T
+    public final konst a: T
+    public final konst b: T
     public final operator /*synthesized*/ fun component1(): T
     public final operator /*synthesized*/ fun component2(): T
     public final /*synthesized*/ fun copy(/*0*/ a: T = ..., /*1*/ b: T = ...): Pair<T>
@@ -38,7 +38,7 @@ public final data class Pair</*0*/ out T> {
 
 public final class TheirWrapper : Wrapper<E> {
     public constructor TheirWrapper(/*0*/ e: E)
-    protected final override /*1*/ /*fake_override*/ val t: E
+    protected final override /*1*/ /*fake_override*/ konst t: E
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -46,7 +46,7 @@ public final class TheirWrapper : Wrapper<E> {
 
 public abstract class Wrapper</*0*/ T : A> {
     public constructor Wrapper</*0*/ T : A>(/*0*/ t: T)
-    protected final val t: T
+    protected final konst t: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

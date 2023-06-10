@@ -22,7 +22,7 @@ import kotlin.test.assertTrue
 class KotlinCompileApiTest {
 
     @get:Rule
-    val tmpDir = TemporaryFolder()
+    konst tmpDir = TemporaryFolder()
 
     private lateinit var project: ProjectInternal
     private lateinit var plugin: KotlinJvmFactory
@@ -30,7 +30,7 @@ class KotlinCompileApiTest {
     private lateinit var taskImpl: KotlinCompile
 
     companion object {
-        private const val TASK_NAME = "kotlinCompile"
+        private const konst TASK_NAME = "kotlinCompile"
     }
 
     @Before
@@ -50,13 +50,13 @@ class KotlinCompileApiTest {
 
     @Test
     fun testSources() {
-        val sourcePath = tmpDir.newFolder().resolve("foo.kt").also {
+        konst sourcePath = tmpDir.newFolder().resolve("foo.kt").also {
             it.createNewFile()
         }
         taskApi.setSource(sourcePath)
         assertEquals(setOf(sourcePath), taskImpl.sources.files)
 
-        val sourcesDir = tmpDir.newFolder().also {
+        konst sourcesDir = tmpDir.newFolder().also {
             it.resolve("a.kt").createNewFile()
             it.resolve("b.kt").createNewFile()
         }
@@ -69,24 +69,24 @@ class KotlinCompileApiTest {
 
     @Test
     fun testFriendPaths() {
-        val friendPath = tmpDir.newFolder()
+        konst friendPath = tmpDir.newFolder()
         taskApi.friendPaths.from(friendPath)
         assertEquals(setOf(friendPath), taskImpl.friendPaths.files)
     }
 
     @Test
     fun testLibraries() {
-        val classpathEntries = setOf(tmpDir.newFolder(), tmpDir.newFolder())
+        konst classpathEntries = setOf(tmpDir.newFolder(), tmpDir.newFolder())
         taskApi.libraries.from(classpathEntries)
         assertEquals(classpathEntries, taskImpl.libraries.files)
     }
 
     @Test
     fun testPluginClasspath() {
-        val pluginDependency = tmpDir.newFile()
+        konst pluginDependency = tmpDir.newFile()
         plugin.addCompilerPluginDependency(project.provider { project.files(pluginDependency) })
 
-        val anotherCompilerPlugin = tmpDir.newFile()
+        konst anotherCompilerPlugin = tmpDir.newFile()
         taskApi.pluginClasspath.from(plugin.getCompilerPlugins(), anotherCompilerPlugin)
         assertEquals(setOf(pluginDependency, anotherCompilerPlugin), taskImpl.pluginClasspath.files)
     }
@@ -106,14 +106,14 @@ class KotlinCompileApiTest {
 
     @Test
     fun testTaskBuildDirectory() {
-        val taskBuildDir = tmpDir.newFolder()
+        konst taskBuildDir = tmpDir.newFolder()
         taskApi.destinationDirectory.fileValue(taskBuildDir)
         assertEquals(taskBuildDir, taskImpl.destinationDirectory.get().asFile)
     }
 
     @Test
     fun testDestinationDirectory() {
-        val destinationDir = tmpDir.newFolder()
+        konst destinationDir = tmpDir.newFolder()
         taskApi.destinationDirectory.fileValue(destinationDir)
         assertEquals(destinationDir, taskImpl.destinationDirectory.get().asFile)
     }
@@ -139,7 +139,7 @@ class KotlinCompileApiTest {
     @Test
     fun testTopLevelExtension() {
         plugin.kotlinExtension.explicitApi = ExplicitApiMode.Strict
-        project.evaluate()
+        project.ekonstuate()
         assertEquals(ExplicitApiMode.Strict, taskImpl.explicitApiMode.orNull)
     }
 }

@@ -20,7 +20,7 @@ fun field(name: String, type: Type, nullable: Boolean = false, withReplace: Bool
 }
 
 fun field(name: String, typeWithArgs: Pair<Type, List<Importable>>, nullable: Boolean = false, withReplace: Boolean = false): Field {
-    val (type, args) = typeWithArgs
+    konst (type, args) = typeWithArgs
     return SimpleField(name, type.typeWithArguments, type.packageName, null, nullable, withReplace).apply {
         arguments += args
     }

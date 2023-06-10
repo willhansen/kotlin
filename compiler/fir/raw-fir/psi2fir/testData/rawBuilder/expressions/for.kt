@@ -20,7 +20,7 @@ fun bar(list: List<String>) {
     for (element in list.subList(10, 20)) println(element)
 }
 
-data class Some(val x: Int, val y: Int)
+data class Some(konst x: Int, konst y: Int)
 
 fun baz(set: Set<Some>) {
     for ((x, y) in set) {

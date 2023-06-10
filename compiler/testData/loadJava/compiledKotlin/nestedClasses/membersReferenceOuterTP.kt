@@ -6,7 +6,7 @@ class MembersReferenceOuterTP<P> {
         fun <Q : P> f() {}
         fun g(p: P): P = null!!
 
-        val v: P = null!!
-        val <Q : P> Q.w: Q get() = null!!
+        konst v: P = null!!
+        konst <Q : P> Q.w: Q get() = null!!
     }
 }

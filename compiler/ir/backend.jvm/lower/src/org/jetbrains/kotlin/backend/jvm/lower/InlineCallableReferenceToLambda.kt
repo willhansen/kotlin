@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 import org.jetbrains.kotlin.name.Name
 
-internal val inlineCallableReferenceToLambdaPhase = makeIrFilePhase(
+internal konst inlineCallableReferenceToLambdaPhase = makeIrFilePhase(
     ::InlineCallableReferenceToLambdaPhase,
     name = "InlineCallableReferenceToLambdaPhase",
     description = "Transform callable reference to inline lambdas, mark inline lambdas for later passes"
@@ -44,22 +44,22 @@ internal val inlineCallableReferenceToLambdaPhase = makeIrFilePhase(
 //
 //      foo(::smth) -> foo { a -> smth(a) }
 //
-internal class InlineCallableReferenceToLambdaPhase(val context: JvmBackendContext) : FileLoweringPass {
+internal class InlineCallableReferenceToLambdaPhase(konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) =
         irFile.accept(InlineCallableReferenceToLambdaVisitor(context), null)
 }
 
-const val STUB_FOR_INLINING = "stub_for_inlining"
+const konst STUB_FOR_INLINING = "stub_for_inlining"
 
-private class InlineCallableReferenceToLambdaVisitor(val context: JvmBackendContext) : IrElementVisitor<Unit, IrDeclaration?> {
+private class InlineCallableReferenceToLambdaVisitor(konst context: JvmBackendContext) : IrElementVisitor<Unit, IrDeclaration?> {
     override fun visitElement(element: IrElement, data: IrDeclaration?) =
         element.acceptChildren(this, element as? IrDeclaration ?: data)
 
     override fun visitFunctionAccess(expression: IrFunctionAccessExpression, data: IrDeclaration?) {
         expression.acceptChildren(this, data)
-        val function = expression.symbol.owner
+        konst function = expression.symbol.owner
         if (function.isInlineFunctionCall(context)) {
-            for (parameter in function.valueParameters) {
+            for (parameter in function.konstueParameters) {
                 if (parameter.isInlineParameter()) {
                     expression.putValueArgument(parameter.index, expression.getValueArgument(parameter.index)?.transform(data))
                 }
@@ -70,7 +70,7 @@ private class InlineCallableReferenceToLambdaVisitor(val context: JvmBackendCont
     private fun IrExpression.transform(scope: IrDeclaration?) = when {
         this is IrBlock && origin.isInlinable -> apply {
             // Already a lambda or similar, just mark it with an origin.
-            val reference = statements.last() as IrFunctionReference
+            konst reference = statements.last() as IrFunctionReference
             reference.symbol.owner.origin = JvmLoweredDeclarationOrigin.INLINE_LAMBDA
             statements[statements.lastIndex] = reference.replaceOrigin(JvmLoweredStatementOrigin.INLINE_LAMBDA)
         }
@@ -101,8 +101,8 @@ private class InlineCallableReferenceToLambdaVisitor(val context: JvmBackendCont
             returnType = field.type
         }.apply {
             body = context.createIrBuilder(symbol).run {
-                val boundReceiver = dispatchReceiver ?: extensionReceiver
-                val fieldReceiver = when {
+                konst boundReceiver = dispatchReceiver ?: extensionReceiver
+                konst fieldReceiver = when {
                     field.isStatic -> null
                     boundReceiver != null -> irGet(addExtensionReceiver(boundReceiver.type))
                     else -> irGet(addValueParameter("receiver", field.parentAsClass.defaultType))
@@ -122,9 +122,9 @@ private class InlineCallableReferenceToLambdaVisitor(val context: JvmBackendCont
         }.apply {
             body = context.createJvmIrBuilder(symbol, startOffset, endOffset).run {
                 // TODO: could there be a star projection here?
-                val argumentTypes = (type as IrSimpleType).arguments.dropLast(1).map { (it as IrTypeProjection).type }
-                val boundReceiver = dispatchReceiver ?: extensionReceiver
-                val boundReceiverParameter = when {
+                konst argumentTypes = (type as IrSimpleType).arguments.dropLast(1).map { (it as IrTypeProjection).type }
+                konst boundReceiver = dispatchReceiver ?: extensionReceiver
+                konst boundReceiverParameter = when {
                     dispatchReceiver != null -> referencedFunction.dispatchReceiverParameter
                     extensionReceiver != null -> referencedFunction.extensionReceiverParameter
                     else -> null
@@ -132,7 +132,7 @@ private class InlineCallableReferenceToLambdaVisitor(val context: JvmBackendCont
                 irExprBody(irCall(referencedFunction.symbol, returnType).apply {
                     copyTypeArgumentsFrom(this@wrapFunction)
                     for (parameter in referencedFunction.explicitParameters) {
-                        val next = valueParameters.size
+                        konst next = konstueParameters.size
                         when {
                             boundReceiverParameter == parameter ->
                                 irGet(addExtensionReceiver(boundReceiver!!.type))
@@ -168,11 +168,11 @@ private class InlineCallableReferenceToLambdaVisitor(val context: JvmBackendCont
         }
 }
 
-private val IrStatementOrigin?.isInlinable: Boolean
+private konst IrStatementOrigin?.isInlinable: Boolean
     get() = isLambda || this == IrStatementOrigin.ADAPTED_FUNCTION_REFERENCE || this == IrStatementOrigin.SUSPEND_CONVERSION
 
 private fun IrFunctionReference.replaceOrigin(origin: IrStatementOrigin): IrFunctionReference =
-    IrFunctionReferenceImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, valueArgumentsCount, reflectionTarget, origin).also {
+    IrFunctionReferenceImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, konstueArgumentsCount, reflectionTarget, origin).also {
         it.copyAttributes(this)
         it.copyTypeAndValueArgumentsFrom(this)
     }

@@ -38,7 +38,7 @@ open class NodeJsRootPlugin : Plugin<Project> {
             "NodeJsRootPlugin can be applied only to root project"
         }
 
-        val nodeJs = project.extensions.create(
+        konst nodeJs = project.extensions.create(
             NodeJsRootExtension.EXTENSION_NAME,
             NodeJsRootExtension::class.java,
             project
@@ -46,7 +46,7 @@ open class NodeJsRootPlugin : Plugin<Project> {
 
         addPlatform(project, nodeJs)
 
-        val setupTask = project.registerTask<NodeJsSetupTask>(NodeJsSetupTask.NAME) {
+        konst setupTask = project.registerTask<NodeJsSetupTask>(NodeJsSetupTask.NAME) {
             it.group = TASKS_GROUP_NAME
             it.description = "Download and install a local node/npm version"
             it.configuration = project.provider {
@@ -56,19 +56,19 @@ open class NodeJsRootPlugin : Plugin<Project> {
             }
         }
 
-        val gradleNodeModulesProvider: Provider<GradleNodeModulesCache> = GradleNodeModulesCache.registerIfAbsent(
+        konst gradleNodeModulesProvider: Provider<GradleNodeModulesCache> = GradleNodeModulesCache.registerIfAbsent(
             project,
             project.projectDir,
             nodeJs.nodeModulesGradleCacheDir
         )
 
-        val setupFileHasherTask = project.registerTask<KotlinNpmCachesSetup>(KotlinNpmCachesSetup.NAME) {
+        konst setupFileHasherTask = project.registerTask<KotlinNpmCachesSetup>(KotlinNpmCachesSetup.NAME) {
             it.description = "Setup file hasher for caches"
 
             it.gradleNodeModules.set(gradleNodeModulesProvider)
         }
 
-        val npmInstall = project.registerTask<KotlinNpmInstallTask>(KotlinNpmInstallTask.NAME) { npmInstall ->
+        konst npmInstall = project.registerTask<KotlinNpmInstallTask>(KotlinNpmInstallTask.NAME) { npmInstall ->
             npmInstall.dependsOn(setupTask)
             npmInstall.dependsOn(setupFileHasherTask)
             npmInstall.group = TASKS_GROUP_NAME
@@ -97,10 +97,10 @@ open class NodeJsRootPlugin : Plugin<Project> {
             nodeJs.rootProjectDir,
         )
 
-        val objectFactory = project.objects
+        konst objectFactory = project.objects
 
         // TODO: Could we use common approach with build services to KotlinNpmResolutionManager?
-        val npmResolutionManager = project.gradle.sharedServices.registerIfAbsent(
+        konst npmResolutionManager = project.gradle.sharedServices.registerIfAbsent(
             KotlinNpmResolutionManager::class.java.name,
             KotlinNpmResolutionManager::class.java
         ) {
@@ -122,7 +122,7 @@ open class NodeJsRootPlugin : Plugin<Project> {
         YarnPlugin.apply(project)
 
         npmInstall.configure {
-            it.npmResolutionManager.value(npmResolutionManager).disallowChanges()
+            it.npmResolutionManager.konstue(npmResolutionManager).disallowChanges()
         }
 
         project.tasks.register("node" + CleanDataTask.NAME_SUFFIX, CleanDataTask::class.java) {
@@ -134,11 +134,11 @@ open class NodeJsRootPlugin : Plugin<Project> {
 
     // from https://github.com/node-gradle/gradle-node-plugin
     private fun addPlatform(project: Project, extension: NodeJsRootExtension) {
-        val uname = project.variantImplementationFactory<UnameExecutor.UnameExecutorVariantFactory>()
+        konst uname = project.variantImplementationFactory<UnameExecutor.UnameExecutorVariantFactory>()
             .getInstance(project)
             .unameExecResult
 
-        extension.platform.value(
+        extension.platform.konstue(
             project.providers.systemProperty("os.name")
                 .usedAtConfigurationTime(project.configurationTimePropertiesAccessor)
                 .zip(
@@ -151,7 +151,7 @@ open class NodeJsRootPlugin : Plugin<Project> {
     }
 
     companion object {
-        const val TASKS_GROUP_NAME: String = "nodeJs"
+        const konst TASKS_GROUP_NAME: String = "nodeJs"
 
         fun apply(rootProject: Project): NodeJsRootExtension {
             check(rootProject == rootProject.rootProject)
@@ -159,19 +159,19 @@ open class NodeJsRootPlugin : Plugin<Project> {
             return rootProject.extensions.getByName(NodeJsRootExtension.EXTENSION_NAME) as NodeJsRootExtension
         }
 
-        val Project.kotlinNodeJsExtension: NodeJsRootExtension
+        konst Project.kotlinNodeJsExtension: NodeJsRootExtension
             get() = extensions.getByName(NodeJsRootExtension.EXTENSION_NAME).castIsolatedKotlinPluginClassLoaderAware()
 
-        private val Project.gradleNodeModules
+        private konst Project.gradleNodeModules
             get() = GradleNodeModulesCache.registerIfAbsent(
                 this,
                 null,
                 null
             )
 
-        val Project.kotlinNpmResolutionManager: Provider<KotlinNpmResolutionManager>
+        konst Project.kotlinNpmResolutionManager: Provider<KotlinNpmResolutionManager>
             get() {
-                val npmResolutionManager = project.gradle.sharedServices.registerIfAbsent(
+                konst npmResolutionManager = project.gradle.sharedServices.registerIfAbsent(
                     KotlinNpmResolutionManager::class.java.name,
                     KotlinNpmResolutionManager::class.java
                 ) {

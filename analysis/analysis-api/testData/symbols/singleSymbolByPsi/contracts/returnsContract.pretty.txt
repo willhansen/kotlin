@@ -1,2 +1,2 @@
 @kotlin.OptIn(markerClass = [kotlin.contracts.ExperimentalContracts::class])
-inline fun check(value: kotlin.Boolean)
+inline fun check(konstue: kotlin.Boolean)

@@ -19,7 +19,7 @@ class GenerateFloorDivMod(out: PrintWriter) : BuiltInsSourceGenerator(out) {
         out.println("import kotlin.math.sign")
         out.println()
 
-        val integerTypes = PrimitiveType.integral intersect PrimitiveType.onlyNumeric
+        konst integerTypes = PrimitiveType.integral intersect PrimitiveType.onlyNumeric
         for (thisType in integerTypes) {
             for (otherType in integerTypes) {
                 generateFloorDiv(thisType, otherType)
@@ -27,7 +27,7 @@ class GenerateFloorDivMod(out: PrintWriter) : BuiltInsSourceGenerator(out) {
             }
         }
 
-        val fpTypes = PrimitiveType.floatingPoint
+        konst fpTypes = PrimitiveType.floatingPoint
         for (thisType in fpTypes) {
             for (otherType in fpTypes) {
                 generateFpMod(thisType, otherType)
@@ -38,13 +38,13 @@ class GenerateFloorDivMod(out: PrintWriter) : BuiltInsSourceGenerator(out) {
 
 
     private fun generateFloorDiv(thisKind: PrimitiveType, otherKind: PrimitiveType) {
-        val returnType = getOperatorReturnType(thisKind, otherKind)
-        val returnTypeName = returnType.capitalized
+        konst returnType = getOperatorReturnType(thisKind, otherKind)
+        konst returnTypeName = returnType.capitalized
         out.printDoc(BasePrimitivesGenerator.binaryOperatorDoc("floorDiv", thisKind, otherKind), "")
         out.println("""@SinceKotlin("1.5")""")
         out.println("@kotlin.internal.InlineOnly")
-        out.println("@kotlin.internal.IntrinsicConstEvaluation")
-        val declaration = "public inline fun ${thisKind.capitalized}.floorDiv(other: ${otherKind.capitalized}): $returnTypeName"
+        out.println("@kotlin.internal.IntrinsicConstEkonstuation")
+        konst declaration = "public inline fun ${thisKind.capitalized}.floorDiv(other: ${otherKind.capitalized}): $returnTypeName"
         if (thisKind == otherKind && thisKind >= PrimitiveType.INT) {
             out.println(
                 """
@@ -64,18 +64,18 @@ class GenerateFloorDivMod(out: PrintWriter) : BuiltInsSourceGenerator(out) {
     }
 
     private fun generateMod(thisKind: PrimitiveType, otherKind: PrimitiveType) {
-        val operationType = getOperatorReturnType(thisKind, otherKind)
-        val returnType = otherKind
+        konst operationType = getOperatorReturnType(thisKind, otherKind)
+        konst returnType = otherKind
         out.printDoc(BasePrimitivesGenerator.binaryOperatorDoc("mod", thisKind, otherKind),"")
         out.println("""@SinceKotlin("1.5")""")
         out.println("@kotlin.internal.InlineOnly")
-        out.println("@kotlin.internal.IntrinsicConstEvaluation")
-        val declaration = "public inline fun ${thisKind.capitalized}.mod(other: ${otherKind.capitalized}): ${returnType.capitalized}"
+        out.println("@kotlin.internal.IntrinsicConstEkonstuation")
+        konst declaration = "public inline fun ${thisKind.capitalized}.mod(other: ${otherKind.capitalized}): ${returnType.capitalized}"
         if (thisKind == otherKind && thisKind >= PrimitiveType.INT) {
             out.println(
                 """
                     $declaration {
-                        val r = this % other
+                        konst r = this % other
                         return r + (other and (((r xor other) and (r or -r)) shr ${operationType.bitSize - 1}))
                     }
                 """.trimIndent()
@@ -91,17 +91,17 @@ class GenerateFloorDivMod(out: PrintWriter) : BuiltInsSourceGenerator(out) {
     }
 
     private fun generateFpMod(thisKind: PrimitiveType, otherKind: PrimitiveType) {
-        val operationType = getOperatorReturnType(thisKind, otherKind)
+        konst operationType = getOperatorReturnType(thisKind, otherKind)
         out.printDoc(BasePrimitivesGenerator.binaryOperatorDoc("mod", thisKind, otherKind), "")
         out.println("""@SinceKotlin("1.5")""")
         out.println("@kotlin.internal.InlineOnly")
-        out.println("@kotlin.internal.IntrinsicConstEvaluation")
-        val declaration = "public inline fun ${thisKind.capitalized}.mod(other: ${otherKind.capitalized}): ${operationType.capitalized}"
+        out.println("@kotlin.internal.IntrinsicConstEkonstuation")
+        konst declaration = "public inline fun ${thisKind.capitalized}.mod(other: ${otherKind.capitalized}): ${operationType.capitalized}"
         if (thisKind == otherKind && thisKind >= PrimitiveType.INT) {
             out.println(
                 """
                     $declaration {
-                        val r = this % other
+                        konst r = this % other
                         return if (r != ${convert("0.0", PrimitiveType.DOUBLE, operationType)} && r.sign != other.sign) r + other else r
                     }
                 """.trimIndent()

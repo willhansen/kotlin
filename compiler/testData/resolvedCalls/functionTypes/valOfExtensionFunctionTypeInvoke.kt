@@ -1,5 +1,5 @@
 interface A {
-    val foo: Int.()->Unit
+    konst foo: Int.()->Unit
 
     fun test() {
         1.foo<caret>()

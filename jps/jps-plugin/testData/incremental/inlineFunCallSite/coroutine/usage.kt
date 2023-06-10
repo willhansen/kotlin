@@ -4,7 +4,7 @@ import kotlin.coroutines.intrinsics.*
 
 fun async(x: suspend Controller.() -> Unit) {
     x.startCoroutine(Controller(), object : Continuation<Unit> {
-        override val context: CoroutineContext = null!!
+        override konst context: CoroutineContext = null!!
         override fun resumeWith(result: Result<Unit>) {}
     })
 }
@@ -17,7 +17,7 @@ class Controller {
 
 fun bar() {
     async {
-        val result = step(1)
+        konst result = step(1)
         inline.f(result)
     }
 }

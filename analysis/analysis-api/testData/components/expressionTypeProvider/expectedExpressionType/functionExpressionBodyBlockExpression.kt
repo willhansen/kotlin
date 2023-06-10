@@ -1,4 +1,4 @@
-val lam4 = fun(a: Int): String <caret>{
+konst lam4 = fun(a: Int): String <caret>{
     if (a < 5) return "5"
 
     if (a > 0)

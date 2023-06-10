@@ -1,14 +1,14 @@
-class A (val p: String, p1: String, p2: String) {
+class A (konst p: String, p1: String, p2: String) {
 
     var cond1 :String = ""
 
     var cond2 :String = ""
 
-    val prop: String = if (p == "test") p1 else p2
+    konst prop: String = if (p == "test") p1 else p2
 
-    val prop1 = if (cond1(p)) p1 else false
+    konst prop1 = if (cond1(p)) p1 else false
 
-    val prop2 = if (cond2(p)) true else false
+    konst prop2 = if (cond2(p)) true else false
 
     fun cond1(p: String): Boolean {
         cond1 = "cond1"
@@ -22,7 +22,7 @@ class A (val p: String, p1: String, p2: String) {
 }
 
 fun box(): String {
-    val a = A("test", "OK", "fail")
+    konst a = A("test", "OK", "fail")
 
     if (a.prop != "OK") return "fail 1"
 

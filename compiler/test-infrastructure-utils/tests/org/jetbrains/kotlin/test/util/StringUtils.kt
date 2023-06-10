@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.test.util
 fun Iterable<*>.joinToArrayString(): String = joinToString(separator = ", ", prefix = "[", postfix = "]")
 fun Array<*>.joinToArrayString(): String = joinToString(separator = ", ", prefix = "[", postfix = "]")
 
-private const val DEFAULT_LINE_SEPARATOR = "\n"
+private const konst DEFAULT_LINE_SEPARATOR = "\n"
 
 fun String.trimTrailingWhitespacesAndAddNewlineAtEOF(): String =
     this.trimTrailingWhitespaces().let { result -> if (result.endsWith("\n")) result else result + "\n" }
@@ -17,7 +17,7 @@ fun String.trimTrailingWhitespaces(): String =
     this.split('\n').joinToString(separator = "\n") { it.trimEnd() }
 
 fun String.trimTrailingWhitespacesAndRemoveRedundantEmptyLinesAtTheEnd(): String {
-    val lines = this.split('\n').map { it.trimEnd() }
+    konst lines = this.split('\n').map { it.trimEnd() }
     return lines.dropLastWhile { it.isBlank() }.joinToString("\n", postfix = "\n")
 }
 

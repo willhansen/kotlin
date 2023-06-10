@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
-val UB_MAX = UByte.MAX_VALUE
-val UB_START = (UB_MAX - 10u).toUByte()
+konst UB_MAX = UByte.MAX_VALUE
+konst UB_START = (UB_MAX - 10u).toUByte()
 
-val US_MAX = UShort.MAX_VALUE
-val US_START = (US_MAX - 10u).toUShort()
+konst US_MAX = UShort.MAX_VALUE
+konst US_START = (US_MAX - 10u).toUShort()
 
 fun testUByteLoopWithCoercion1() {
     for (x in UB_START..UB_MAX) {

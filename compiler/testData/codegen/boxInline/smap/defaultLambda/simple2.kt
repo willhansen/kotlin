@@ -31,7 +31,7 @@ package test
 inline fun lParams(initParams: () -> String = {
     "OK"
 }): String {
-    val z = "body"
+    konst z = "body"
     return initParams()
 }
 

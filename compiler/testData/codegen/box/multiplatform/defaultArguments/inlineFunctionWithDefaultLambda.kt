@@ -25,7 +25,7 @@ fun box(): String {
     assertEquals("OK,42,null", topLevel("OK", 42))
     assertEquals("OK,42,3.14", topLevel("OK", 42, { 3.14 }))
 
-    val foo = Foo()
+    konst foo = Foo()
     assertEquals("OK,0,null", foo.member("OK"))
     assertEquals("OK,42,null", foo.member("OK", 42))
     assertEquals("OK,42,3.14", foo.member("OK", 42, { 3.14 }))

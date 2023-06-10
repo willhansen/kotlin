@@ -1,17 +1,17 @@
 // WITH_STDLIB
 import kotlin.test.*
 
-class Value(val x: Int) : Comparable<Value> {
+class Value(konst x: Int) : Comparable<Value> {
     override fun compareTo(other: Value): Int {
         throw AssertionError("Should not be called")
     }
 }
 
-class ValueRange(override val start: Value,
-                 override val endInclusive: Value) : ClosedRange<Value> {
+class ValueRange(override konst start: Value,
+                 override konst endInclusive: Value) : ClosedRange<Value> {
 
-    override fun contains(value: Value): Boolean {
-        return value.x == 42
+    override fun contains(konstue: Value): Boolean {
+        return konstue.x == 42
     }
 }
 

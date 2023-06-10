@@ -1,4 +1,4 @@
-class C(x: Int, val y: Int) {
+class C(x: Int, konst y: Int) {
     fun initChild(x0: Int): Any {
         var x = x0
         return object {
@@ -9,10 +9,10 @@ class C(x: Int, val y: Int) {
         }
     }
 
-    val child = initChild(x)
+    konst child = initChild(x)
 }
 
 fun box(): String {
-    val c = C(10, 3)
+    konst c = C(10, 3)
     return if (c.child.toString() == "child13" && c.child.toString() == "child16" && c.child.toString() == "child19") "OK" else "fail"
 }

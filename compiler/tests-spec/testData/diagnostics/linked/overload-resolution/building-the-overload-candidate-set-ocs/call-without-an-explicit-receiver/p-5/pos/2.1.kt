@@ -64,7 +64,7 @@ import libPackageCase2Explicit.emptyArray
 class Case2(){
     fun <T> emptyArray(): Array<T> = TODO()
 
-    val emptyArray: A
+    konst emptyArray: A
         get() = A()
 
     fun case1() {
@@ -80,7 +80,7 @@ class A {
 package libPackageCase2
 import testsCase2.*
 
-val Case2.emptyArray: A
+konst Case2.emptyArray: A
     get() = A()
 public fun <T> emptyArray(): Array<T> = TODO()
 fun <T> Case2.emptyArray(): Array<T> = TODO()
@@ -89,7 +89,7 @@ fun <T> Case2.emptyArray(): Array<T> = TODO()
 package libPackageCase2Explicit
 import testsCase2.*
 
-val Case2.emptyArray: A
+konst Case2.emptyArray: A
     get() = A()
 fun <T> Case2.emptyArray(): Array<T> = TODO()
 
@@ -97,7 +97,7 @@ public fun <T> emptyArray(): Array<T> = TODO()
 
 // FILE: LibtestsPack2.kt
 package testsCase2
-val Case2.emptyArray: A
+konst Case2.emptyArray: A
     get() = A()
 
 fun <T> Case2.emptyArray(): Array<T> = TODO()
@@ -116,7 +116,7 @@ import libPackageCase3Explicit.emptyArray
 class Case3(){
     fun <T> Case3.emptyArray(): Array<T> = TODO()
 
-    val emptyArray: A
+    konst emptyArray: A
         get() = A()
 
     fun case1() {
@@ -134,7 +134,7 @@ class A {
 package libPackageCase3
 import testsCase3.*
 
-val Case3.emptyArray: A
+konst Case3.emptyArray: A
     get() = A()
 public fun <T> emptyArray(): Array<T> = TODO()
 fun <T> Case3.emptyArray(): Array<T> = TODO()
@@ -145,7 +145,7 @@ fun <T> Case3.emptyArray(): Array<T> = TODO()
 package libPackageCase3Explicit
 import testsCase3.*
 
-val Case3.emptyArray: A
+konst Case3.emptyArray: A
     get() = A()
 fun <T> Case3.emptyArray(): Array<T> = TODO()
 
@@ -155,7 +155,7 @@ public fun <T> emptyArray(): Array<T> = TODO()
 // TESTCASE NUMBER: 3
 
 package testsCase3
-val Case3.emptyArray: A
+konst Case3.emptyArray: A
     get() = A()
 
 fun <T> Case3.emptyArray(): Array<T> = TODO()

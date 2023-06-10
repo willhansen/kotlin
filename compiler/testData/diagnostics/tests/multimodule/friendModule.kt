@@ -6,13 +6,13 @@
 package p
 
 public class A {
-    internal val a = A()
+    internal konst a = A()
     internal var v = A()
     internal fun a() = A()
     internal inner class B
 }
 
-internal val a = A()
+internal konst a = A()
 internal var v = A()
 internal fun a() = A()
 internal class B
@@ -23,14 +23,14 @@ internal class B
 import p.*
 
 fun test() {
-    val _a = a
-    val _v = v
+    konst _a = a
+    konst _v = v
     a()
     B()
 
-    val inst = A()
-    val ia = inst.a
-    val iv = inst.v
+    konst inst = A()
+    konst ia = inst.a
+    konst iv = inst.v
     inst.a()
     inst.B()
 }

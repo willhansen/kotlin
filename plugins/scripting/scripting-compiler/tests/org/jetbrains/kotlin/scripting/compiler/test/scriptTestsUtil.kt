@@ -19,15 +19,15 @@ import java.io.PrintStream
 import kotlin.reflect.KClass
 import kotlin.script.experimental.api.SourceCode
 import kotlin.script.experimental.api.onSuccess
-import kotlin.script.experimental.api.valueOr
+import kotlin.script.experimental.api.konstueOr
 import kotlin.script.experimental.api.with
 import kotlin.script.experimental.jvm.baseClassLoader
 import kotlin.script.experimental.jvm.dependenciesFromCurrentContext
 import kotlin.script.experimental.jvm.jvm
 
-internal const val NUM_4_LINE = "num: 4"
+internal const konst NUM_4_LINE = "num: 4"
 
-internal const val FIB_SCRIPT_OUTPUT_TAIL =
+internal const konst FIB_SCRIPT_OUTPUT_TAIL =
     """
 fib(1)=1
 fib(0)=1
@@ -41,8 +41,8 @@ fib(4)=5
 """
 
 internal fun captureOut(body: () -> Unit): String {
-    val outStream = ByteArrayOutputStream()
-    val prevOut = System.out
+    konst outStream = ByteArrayOutputStream()
+    konst prevOut = System.out
     System.setOut(PrintStream(outStream))
     try {
         body()
@@ -65,24 +65,24 @@ internal fun compileScript(
     environment: KotlinCoreEnvironment,
     parentClassLoader: ClassLoader?
 ): Pair<KClass<*>?, ExitCode> {
-    val scriptCompiler = ScriptJvmCompilerFromEnvironment(environment)
-    val messageCollector = environment.configuration[CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY]!!
-    val scriptDefinition = ScriptDefinitionProvider.getInstance(environment.project)!!.findDefinition(script)!!
+    konst scriptCompiler = ScriptJvmCompilerFromEnvironment(environment)
+    konst messageCollector = environment.configuration[CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY]!!
+    konst scriptDefinition = ScriptDefinitionProvider.getInstance(environment.project)!!.findDefinition(script)!!
 
-    val scriptCompilationConfiguration = scriptDefinition.compilationConfiguration.with {
+    konst scriptCompilationConfiguration = scriptDefinition.compilationConfiguration.with {
         jvm {
             dependenciesFromCurrentContext(wholeClasspath = true)
         }
     }
-    val compiledScript = scriptCompiler.compile(script, scriptCompilationConfiguration).onSuccess {
+    konst compiledScript = scriptCompiler.compile(script, scriptCompilationConfiguration).onSuccess {
         runBlocking {
-            it.getClass(scriptDefinition.evaluationConfiguration.with {
+            it.getClass(scriptDefinition.ekonstuationConfiguration.with {
                 jvm {
                     baseClassLoader(parentClassLoader)
                 }
             })
         }
-    }.valueOr {
+    }.konstueOr {
         for (report in it.reports) {
             messageCollector.report(report.severity.toCompilerMessageSeverity(), report.render(withSeverity = false))
         }
@@ -98,7 +98,7 @@ internal fun compileAndExecuteScript(
     parentClassLoader: ClassLoader?,
     scriptArgs: List<String>
 ): ExitCode {
-    val (compiled, code) = compileScript(script, environment, parentClassLoader)
+    konst (compiled, code) = compileScript(script, environment, parentClassLoader)
 
     if (compiled == null || code != ExitCode.OK) return code
 

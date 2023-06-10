@@ -10,9 +10,9 @@ import java.lang.IllegalArgumentException
 
 abstract class DiagnosticFactory<D : UnboundDiagnostic> protected constructor(
     private var _name: String?,
-    open val severity: Severity
+    open konst severity: Severity
 ) {
-    open val name: String
+    open konst name: String
         get() = _name!!
 
     fun initializeName(name: String) {

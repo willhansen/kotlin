@@ -31,7 +31,7 @@ class A : K() {
 
 
 fun box(): String {
-    val b = A().B()
+    konst b = A().B()
     if (b.test1() != "A.bar") return "test1 ${b.test1()}"
     if (b.test2() != "B.bar") return "test2 ${b.test2()}"
     if (b.test3() != "B.bar") return "test3 ${b.test3()}"

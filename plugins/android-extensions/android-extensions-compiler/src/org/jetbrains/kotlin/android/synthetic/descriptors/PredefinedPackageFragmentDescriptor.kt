@@ -33,25 +33,25 @@ class PredefinedPackageFragmentDescriptor(
         fqName: FqName,
         module: ModuleDescriptor,
         storageManager: StorageManager,
-        val lazySubpackages: List<LazyAndroidExtensionsPackageFragmentDescriptor> = emptyList(),
-        private val functions: (PredefinedPackageFragmentDescriptor) -> Collection<SimpleFunctionDescriptor> = { emptyList() }
+        konst lazySubpackages: List<LazyAndroidExtensionsPackageFragmentDescriptor> = emptyList(),
+        private konst functions: (PredefinedPackageFragmentDescriptor) -> Collection<SimpleFunctionDescriptor> = { emptyList() }
 ) : PackageFragmentDescriptorImpl(module, fqName) {
     class LazyAndroidExtensionsPackageFragmentDescriptor(
-        val descriptor: () -> PackageFragmentDescriptor,
-        val isDeprecated: Boolean
+        konst descriptor: () -> PackageFragmentDescriptor,
+        konst isDeprecated: Boolean
     )
 
-    private val calculatedFunctions = storageManager.createLazyValue {
+    private konst calculatedFunctions = storageManager.createLazyValue {
         functions(this)
     }
 
     // Left for compatibility with Android Studio
     @Deprecated("Use lazySubpackages instead.", ReplaceWith("lazySubpackages"))
     @Suppress("unused")
-    val subpackages: List<PackageFragmentDescriptor>
+    konst subpackages: List<PackageFragmentDescriptor>
         get() = lazySubpackages.map { it.descriptor() }
 
-    private val scope = PredefinedScope()
+    private konst scope = PredefinedScope()
     
     override fun getMemberScope() = scope
 

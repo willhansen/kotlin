@@ -21,7 +21,7 @@ import java.io.File
 internal fun Project.transformMetadataLibrariesForIde(
     resolution: MetadataDependencyResolution.ChooseVisibleSourceSets
 ): Map<String /* visibleSourceSetName */, Iterable<File>> {
-    return when (val metadataProvider = resolution.metadataProvider) {
+    return when (konst metadataProvider = resolution.metadataProvider) {
         is ProjectMetadataProvider -> resolution.visibleSourceSetNamesExcludingDependsOn.associateWith { visibleSourceSetName ->
             metadataProvider.getSourceSetCompiledMetadata(visibleSourceSetName) ?: emptyList()
         }
@@ -63,9 +63,9 @@ private fun transformMetadataLibrariesForIde(
 ): Map<String /* visibleSourceSetName */, Iterable<File>> {
     return compositeMetadataArtifact.read { artifactContent ->
         resolution.visibleSourceSetNamesExcludingDependsOn.mapNotNull { visibleSourceSetName ->
-            val sourceSetContent = artifactContent.findSourceSet(visibleSourceSetName) ?: return@mapNotNull null
-            val sourceSetMetadataBinary = sourceSetContent.metadataBinary ?: return@mapNotNull null
-            val metadataLibraryOutputFile = baseOutputDirectory.resolve(sourceSetMetadataBinary.relativeFile)
+            konst sourceSetContent = artifactContent.findSourceSet(visibleSourceSetName) ?: return@mapNotNull null
+            konst sourceSetMetadataBinary = sourceSetContent.metadataBinary ?: return@mapNotNull null
+            konst metadataLibraryOutputFile = baseOutputDirectory.resolve(sourceSetMetadataBinary.relativeFile)
             metadataLibraryOutputFile.parentFile.mkdirs()
             if (!metadataLibraryOutputFile.exists()) {
                 sourceSetMetadataBinary.copyTo(metadataLibraryOutputFile)
@@ -95,9 +95,9 @@ private fun transformMetadataLibrariesForBuild(
 
     return compositeMetadataArtifact.read { artifactContent ->
         resolution.visibleSourceSetNamesExcludingDependsOn.mapNotNull { visibleSourceSetName ->
-            val sourceSetContent = artifactContent.findSourceSet(visibleSourceSetName) ?: return@mapNotNull null
-            val metadataBinary = sourceSetContent.metadataBinary ?: return@mapNotNull null
-            val metadataLibraryFile = outputDirectory.resolve(metadataBinary.relativeFile)
+            konst sourceSetContent = artifactContent.findSourceSet(visibleSourceSetName) ?: return@mapNotNull null
+            konst metadataBinary = sourceSetContent.metadataBinary ?: return@mapNotNull null
+            konst metadataLibraryFile = outputDirectory.resolve(metadataBinary.relativeFile)
             if (materializeFiles) {
                 metadataLibraryFile.parentFile?.mkdirs()
                 metadataBinary.copyTo(metadataLibraryFile)

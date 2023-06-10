@@ -18,7 +18,7 @@ fun box(): String {
     if (null.foo<A>() != true) return "fail 3"
     if (null.foo<A?>() != true) return "fail 4"
 
-    val a = A()
+    konst a = A()
 
     if (a.foo<Any>() != true) return "fail 5"
     if (a.foo<Any?>() != true) return "fail 6"
@@ -26,7 +26,7 @@ fun box(): String {
     if (a.foo<A>() != true) return "fail 7"
     if (a.foo<A?>() != true) return "fail 8"
 
-    val b = B()
+    konst b = B()
 
     if (b.foo<A>() != false) return "fail 9"
     if (b.foo<A?>() != false) return "fail 10"

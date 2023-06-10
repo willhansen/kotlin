@@ -16,12 +16,12 @@ fun interface FI: suspend () -> Unit {}
 
 @Suppress("INCOMPATIBLE_TYPES")
 fun box(): String {
-    val c = C()
+    konst c = C()
     if (c !is SuspendFunction0<*>) return "FAIL 1"
     if (c !is Function1<*, *>) return "FAIL 2"
     if (c is SuspendFunction1<*, *>) return "FAIL 3"
 
-    val i = object : I {
+    konst i = object : I {
         override suspend fun invoke() {
         }
     }
@@ -29,7 +29,7 @@ fun box(): String {
     if (i !is Function1<*, *>) return "FAIL 5"
     if (i is SuspendFunction1<*, *>) return "FAIL 6"
 
-    val fi = object : FI {
+    konst fi = object : FI {
         override suspend fun invoke() {
         }
     }
@@ -37,7 +37,7 @@ fun box(): String {
     if (fi !is Function1<*, *>) return "FAIL 8"
     if (fi is SuspendFunction1<*, *>) return "FAIL 9"
 
-    val o = object : suspend () -> Unit {
+    konst o = object : suspend () -> Unit {
         override suspend fun invoke() {
         }
     }

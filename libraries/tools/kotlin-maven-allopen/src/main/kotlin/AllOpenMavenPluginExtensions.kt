@@ -22,7 +22,7 @@ import org.codehaus.plexus.component.annotations.*
 import org.codehaus.plexus.logging.*
 import org.jetbrains.kotlin.maven.*
 
-val ALLOPEN_COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.allopen"
+konst ALLOPEN_COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.allopen"
 
 @Component(role = KotlinMavenPluginExtension::class, hint = "all-open")
 class KotlinAllOpenMavenPluginExtension : KotlinMavenPluginExtension {
@@ -42,7 +42,7 @@ class KotlinAllOpenMavenPluginExtension : KotlinMavenPluginExtension {
 @Component(role = KotlinMavenPluginExtension::class, hint = "spring")
 class KotlinSpringMavenPluginExtension : KotlinMavenPluginExtension {
     private companion object {
-        val PRESET_ARG_NAME = "preset"
+        konst PRESET_ARG_NAME = "preset"
     }
 
     override fun getCompilerPluginId() = ALLOPEN_COMPILER_PLUGIN_ID

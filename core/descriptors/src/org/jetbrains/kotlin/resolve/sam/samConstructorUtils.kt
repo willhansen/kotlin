@@ -23,9 +23,9 @@ fun createSamConstructorFunction(
 ): SamConstructorDescriptor {
     assert(getSingleAbstractMethodOrNull(samInterface) != null) { samInterface }
 
-    val result = SamConstructorDescriptorImpl(owner, samInterface)
-    val samTypeParameters = samInterface.typeConstructor.parameters
-    val unsubstitutedSamType = samInterface.defaultType
+    konst result = SamConstructorDescriptorImpl(owner, samInterface)
+    konst samTypeParameters = samInterface.typeConstructor.parameters
+    konst unsubstitutedSamType = samInterface.defaultType
 
     initializeSamConstructorDescriptor(
         samInterface,
@@ -45,10 +45,10 @@ fun createTypeAliasSamConstructorFunction(
     samResolver: SamConversionResolver,
     samConversionOracle: SamConversionOracle
 ): SamConstructorDescriptor? {
-    val result = SamTypeAliasConstructorDescriptorImpl(typeAliasDescriptor, underlyingSamConstructor)
-    val samInterface = underlyingSamConstructor.baseDescriptorForSynthetic
-    val samTypeParameters = typeAliasDescriptor.typeConstructor.parameters
-    val unsubstitutedSamType = typeAliasDescriptor.expandedType
+    konst result = SamTypeAliasConstructorDescriptorImpl(typeAliasDescriptor, underlyingSamConstructor)
+    konst samInterface = underlyingSamConstructor.baseDescriptorForSynthetic
+    konst samTypeParameters = typeAliasDescriptor.typeConstructor.parameters
+    konst unsubstitutedSamType = typeAliasDescriptor.expandedType
 
     initializeSamConstructorDescriptor(
         samInterface,
@@ -70,17 +70,17 @@ private fun initializeSamConstructorDescriptor(
     samResolver: SamConversionResolver,
     samConversionOracle: SamConversionOracle
 ) {
-    val typeParameters = recreateAndInitializeTypeParameters(samTypeParameters, samConstructor)
-    val parameterTypeUnsubstituted = getFunctionTypeForSamType(unsubstitutedSamType, samResolver, samConversionOracle)
+    konst typeParameters = recreateAndInitializeTypeParameters(samTypeParameters, samConstructor)
+    konst parameterTypeUnsubstituted = getFunctionTypeForSamType(unsubstitutedSamType, samResolver, samConversionOracle)
         ?: error("couldn't get function type for SAM type $unsubstitutedSamType")
 
-    val parameterType =
+    konst parameterType =
         typeParameters.substitutor.substitute(parameterTypeUnsubstituted, Variance.IN_VARIANCE) ?: error(
             "couldn't substitute type: " + parameterTypeUnsubstituted +
                     ", substitutor = " + typeParameters.substitutor
         )
 
-    val parameter = ValueParameterDescriptorImpl(
+    konst parameter = ValueParameterDescriptorImpl(
         samConstructor, null, 0, EMPTY, Name.identifier("function"),
         parameterType,
         declaresDefaultValue = false,
@@ -90,7 +90,7 @@ private fun initializeSamConstructorDescriptor(
         source = SourceElement.NO_SOURCE
     )
 
-    val returnType =
+    konst returnType =
         typeParameters.substitutor.substitute(unsubstitutedSamType, Variance.OUT_VARIANCE) ?: error(
             "couldn't substitute type: " + unsubstitutedSamType +
                     ", substitutor = " + typeParameters.substitutor
@@ -111,20 +111,20 @@ fun recreateAndInitializeTypeParameters(
     originalParameters: List<TypeParameterDescriptor>,
     newOwner: DeclarationDescriptor?
 ): SamConstructorTypeParameters {
-    val interfaceToFunTypeParameters = recreateTypeParametersAndReturnMapping(originalParameters, newOwner)
+    konst interfaceToFunTypeParameters = recreateTypeParametersAndReturnMapping(originalParameters, newOwner)
 
-    val typeParametersSubstitutor = createSubstitutorForTypeParameters(interfaceToFunTypeParameters)
+    konst typeParametersSubstitutor = createSubstitutorForTypeParameters(interfaceToFunTypeParameters)
 
     for ((interfaceTypeParameter, funTypeParameter) in interfaceToFunTypeParameters) {
         for (upperBound in interfaceTypeParameter.upperBounds) {
-            val upperBoundSubstituted =
+            konst upperBoundSubstituted =
                 typeParametersSubstitutor.substitute(upperBound, Variance.INVARIANT)
                     ?: error("couldn't substitute type: $upperBound, substitutor = $typeParametersSubstitutor")
             funTypeParameter.addUpperBound(upperBoundSubstituted)
         }
         funTypeParameter.setInitialized()
     }
-    return SamConstructorTypeParameters(interfaceToFunTypeParameters.values.toList(), typeParametersSubstitutor)
+    return SamConstructorTypeParameters(interfaceToFunTypeParameters.konstues.toList(), typeParametersSubstitutor)
 }
 
 fun recreateTypeParametersAndReturnMapping(
@@ -147,13 +147,13 @@ fun recreateTypeParametersAndReturnMapping(
 fun createSubstitutorForTypeParameters(
     originalToAltTypeParameters: Map<TypeParameterDescriptor, TypeParameterDescriptorImpl>
 ): TypeSubstitutor {
-    val typeSubstitutionContext =
+    konst typeSubstitutionContext =
         originalToAltTypeParameters
-            .map { (key, value) -> key.typeConstructor to value.defaultType.asTypeProjection() }
+            .map { (key, konstue) -> key.typeConstructor to konstue.defaultType.asTypeProjection() }
             .toMap()
 
     // TODO: Use IndexedParametersSubstitution here instead of map creation
     return TypeSubstitutor.create(typeSubstitutionContext)
 }
 
-class SamConstructorTypeParameters(val descriptors: List<TypeParameterDescriptor>, val substitutor: TypeSubstitutor)
+class SamConstructorTypeParameters(konst descriptors: List<TypeParameterDescriptor>, konst substitutor: TypeSubstitutor)

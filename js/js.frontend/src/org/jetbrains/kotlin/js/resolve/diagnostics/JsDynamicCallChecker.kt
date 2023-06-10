@@ -31,12 +31,12 @@ import org.jetbrains.kotlin.types.isDynamic
 
 object JsDynamicCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val callee = resolvedCall.resultingDescriptor
+        konst callee = resolvedCall.resultingDescriptor
         if (!callee.isDynamic()) {
             return checkSpreadOperator(resolvedCall, context)
         }
 
-        val element = resolvedCall.call.callElement
+        konst element = resolvedCall.call.callElement
         when (element) {
             is KtArrayAccessExpression -> {
                 if (element.indexExpressions.size > 1) {
@@ -49,14 +49,14 @@ object JsDynamicCallChecker : CallChecker {
             }
 
             is KtBinaryExpression -> {
-                val token = element.operationToken
+                konst token = element.operationToken
                 when (token) {
                     in OperatorConventions.IN_OPERATIONS -> {
                         reportInOperation(context, reportOn)
                     }
                     KtTokens.RANGE, KtTokens.RANGE_UNTIL -> {
                         token as KtSingleValueToken
-                        context.trace.report(ErrorsJs.WRONG_OPERATION_WITH_DYNAMIC.on(reportOn, "`${token.value}` operation"))
+                        context.trace.report(ErrorsJs.WRONG_OPERATION_WITH_DYNAMIC.on(reportOn, "`${token.konstue}` operation"))
                     }
                 }
             }
@@ -70,14 +70,14 @@ object JsDynamicCallChecker : CallChecker {
             is KtSimpleNameExpression -> checkIdentifier(element.getReferencedName(), element, context)
 
             is KtCallExpression -> {
-                val calleePsi = element.calleeExpression
+                konst calleePsi = element.calleeExpression
                 if (calleePsi is KtSimpleNameExpression) {
                     checkIdentifier(calleePsi.getReferencedName(), calleePsi, context)
                 }
             }
         }
 
-        for (argument in resolvedCall.call.valueArguments) {
+        for (argument in resolvedCall.call.konstueArguments) {
             argument.getSpreadElement()?.let {
                 context.trace.report(ErrorsJs.SPREAD_OPERATOR_IN_DYNAMIC_CALL.on(it))
             }
@@ -85,7 +85,7 @@ object JsDynamicCallChecker : CallChecker {
     }
 
     private fun checkIdentifier(name: String?, reportOn: PsiElement, context: CallCheckerContext) {
-        if (name == null || context.languageVersionSettings.supportsFeature(LanguageFeature.JsAllowInvalidCharsIdentifiersEscaping)) {
+        if (name == null || context.languageVersionSettings.supportsFeature(LanguageFeature.JsAllowInkonstidCharsIdentifiersEscaping)) {
             return
         }
         if (NameSuggestion.sanitizeName(name) != name) {
@@ -94,8 +94,8 @@ object JsDynamicCallChecker : CallChecker {
     }
 
     private fun checkSpreadOperator(resolvedCall: ResolvedCall<*>, context: CallCheckerContext) {
-        for (arg in resolvedCall.call.valueArguments) {
-            val argExpression = arg.getArgumentExpression() ?: continue
+        for (arg in resolvedCall.call.konstueArguments) {
+            konst argExpression = arg.getArgumentExpression() ?: continue
             if (context.trace.bindingContext.getType(argExpression)?.isDynamic() == true && arg.getSpreadElement() != null) {
                 context.trace.report(ErrorsJs.WRONG_OPERATION_WITH_DYNAMIC.on(arg.asElement(), "spread operator"))
             }

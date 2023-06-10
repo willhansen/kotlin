@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.name.FqNameUnsafe
 import org.jetbrains.kotlin.psi.KtElement
 
 class KtLightPsiArrayInitializerMemberValue(
-    override val kotlinOrigin: KtElement,
-    private val lightParent: PsiElement,
-    private val arguments: (KtLightPsiArrayInitializerMemberValue) -> List<PsiAnnotationMemberValue>
+    override konst kotlinOrigin: KtElement,
+    private konst lightParent: PsiElement,
+    private konst arguments: (KtLightPsiArrayInitializerMemberValue) -> List<PsiAnnotationMemberValue>
 ) : KtLightElementBase(lightParent), PsiArrayInitializerMemberValue {
     override fun getInitializers(): Array<PsiAnnotationMemberValue> = arguments(this).toTypedArray()
 
@@ -50,15 +50,15 @@ fun psiType(kotlinFqName: String, context: PsiElement, boxPrimitiveType: Boolean
         "kotlin.FloatArray" -> return PsiType.FLOAT.createArrayType()
     }
 
-    val javaFqName = JavaToKotlinClassMap.mapKotlinToJava(FqNameUnsafe(kotlinFqName))?.asSingleFqName()?.asString() ?: kotlinFqName
+    konst javaFqName = JavaToKotlinClassMap.mapKotlinToJava(FqNameUnsafe(kotlinFqName))?.asSingleFqName()?.asString() ?: kotlinFqName
     return PsiType.getTypeByName(javaFqName, context.project, context.resolveScope)
 }
 
 class KtLightPsiNameValuePair(
-    override val kotlinOrigin: KtElement,
-    private val name: String,
+    override konst kotlinOrigin: KtElement,
+    private konst name: String,
     lightParent: PsiElement,
-    private val argument: (KtLightPsiNameValuePair) -> PsiAnnotationMemberValue?
+    private konst argument: (KtLightPsiNameValuePair) -> PsiAnnotationMemberValue?
 ) : KtLightElementBase(lightParent),
     PsiNameValuePair {
 
@@ -68,10 +68,10 @@ class KtLightPsiNameValuePair(
 
     override fun getName(): String? = name
 
-    private val _value: PsiAnnotationMemberValue? by lazyPub { argument(this) }
+    private konst _konstue: PsiAnnotationMemberValue? by lazyPub { argument(this) }
 
-    override fun getValue(): PsiAnnotationMemberValue? = _value
+    override fun getValue(): PsiAnnotationMemberValue? = _konstue
 
-    override fun getLiteralValue(): String? = (value as? PsiLiteralExpression)?.value?.toString()
+    override fun getLiteralValue(): String? = (konstue as? PsiLiteralExpression)?.konstue?.toString()
 
 }

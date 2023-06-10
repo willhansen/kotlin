@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.name.Name
 
-internal val TEMP_CLASS_FOR_INTERPRETER = object : IrDeclarationOriginImpl("TEMP_CLASS_FOR_INTERPRETER") {}
-internal val TEMP_FUNCTION_FOR_INTERPRETER = object : IrDeclarationOriginImpl("TEMP_FUNCTION_FOR_INTERPRETER") {}
+internal konst TEMP_CLASS_FOR_INTERPRETER = object : IrDeclarationOriginImpl("TEMP_CLASS_FOR_INTERPRETER") {}
+internal konst TEMP_FUNCTION_FOR_INTERPRETER = object : IrDeclarationOriginImpl("TEMP_FUNCTION_FOR_INTERPRETER") {}
 
 private fun Any?.toIrConstOrNull(irType: IrType, startOffset: Int = SYNTHETIC_OFFSET, endOffset: Int = SYNTHETIC_OFFSET): IrConst<*>? {
     if (this == null) return IrConstImpl.constNull(startOffset, endOffset, irType)
 
-    val constType = irType.makeNotNull().removeAnnotations()
+    konst constType = irType.makeNotNull().removeAnnotations()
     return when (irType.getPrimitiveType()) {
         PrimitiveType.BOOLEAN -> IrConstImpl.boolean(startOffset, endOffset, constType, this as Boolean)
         PrimitiveType.CHAR -> IrConstImpl.char(startOffset, endOffset, constType, this as Char)
@@ -68,7 +68,7 @@ fun Any?.toIrConst(irType: IrType, startOffset: Int = SYNTHETIC_OFFSET, endOffse
 
 internal fun IrFunction.createCall(origin: IrStatementOrigin? = null): IrCall {
     this as IrSimpleFunction
-    return IrCallImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, returnType, symbol, typeParameters.size, valueParameters.size, origin)
+    return IrCallImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, returnType, symbol, typeParameters.size, konstueParameters.size, origin)
 }
 
 internal fun IrConstructor.createConstructorCall(irType: IrType = returnType): IrConstructorCall {
@@ -90,8 +90,8 @@ internal fun IrClass.createGetObject(): IrGetObjectValue {
     return IrGetObjectValueImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, this.defaultType, this.symbol)
 }
 
-internal fun IrFunction.createReturn(value: IrExpression): IrReturn {
-    return IrReturnImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, this.returnType, this.symbol, value)
+internal fun IrFunction.createReturn(konstue: IrExpression): IrReturn {
+    return IrReturnImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, this.returnType, this.symbol, konstue)
 }
 
 internal fun createTempFunction(
@@ -114,8 +114,8 @@ internal fun createTempClass(name: Name, origin: IrDeclarationOrigin = TEMP_CLAS
 }
 
 internal fun IrFunction.createGetField(): IrExpression {
-    val backingField = this.property!!.backingField!!
-    val receiver = dispatchReceiverParameter ?: extensionReceiverParameter
+    konst backingField = this.property!!.backingField!!
+    konst receiver = dispatchReceiverParameter ?: extensionReceiverParameter
     return backingField.createGetField(receiver)
 }
 
@@ -133,7 +133,7 @@ internal fun IrFunctionAccessExpression.shallowCopy(copyTypeArguments: Boolean =
         is IrConstructorCall -> symbol.owner.createConstructorCall()
         is IrDelegatingConstructorCall -> IrDelegatingConstructorCallImpl.fromSymbolOwner(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, type, symbol)
         is IrEnumConstructorCall ->
-            IrEnumConstructorCallImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, type, symbol, typeArgumentsCount, valueArgumentsCount)
+            IrEnumConstructorCallImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, type, symbol, typeArgumentsCount, konstueArgumentsCount)
         else -> TODO("Expression $this cannot be copied")
     }.apply {
         if (copyTypeArguments) {
@@ -145,7 +145,7 @@ internal fun IrFunctionAccessExpression.shallowCopy(copyTypeArguments: Boolean =
 internal fun IrBuiltIns.copyArgs(from: IrFunctionAccessExpression, into: IrFunctionAccessExpression) {
     into.dispatchReceiver = from.dispatchReceiver
     into.extensionReceiver = from.extensionReceiver
-    (0 until from.valueArgumentsCount)
+    (0 until from.konstueArgumentsCount)
         .map { from.getValueArgument(it) }
         .forEachIndexed { i, arg ->
             into.putValueArgument(i, arg ?: IrConstImpl.constNull(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, this.anyNType))
@@ -153,31 +153,31 @@ internal fun IrBuiltIns.copyArgs(from: IrFunctionAccessExpression, into: IrFunct
 }
 
 internal fun IrBuiltIns.irEquals(arg1: IrExpression, arg2: IrExpression): IrCall {
-    val equalsCall = this.eqeqSymbol.owner.createCall(IrStatementOrigin.EQEQ)
+    konst equalsCall = this.eqeqSymbol.owner.createCall(IrStatementOrigin.EQEQ)
     equalsCall.putValueArgument(0, arg1)
     equalsCall.putValueArgument(1, arg2)
     return equalsCall
 }
 
 internal fun IrBuiltIns.irIfNullThenElse(nullableArg: IrExpression, ifTrue: IrExpression, ifFalse: IrExpression): IrWhen {
-    val nullCondition = this.irEquals(nullableArg, IrConstImpl.constNull(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, this.anyNType))
-    val trueBranch = IrBranchImpl(nullCondition, ifTrue) // use default
-    val elseBranch = IrElseBranchImpl(IrConstImpl.constTrue(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, this.booleanType), ifFalse)
+    konst nullCondition = this.irEquals(nullableArg, IrConstImpl.constNull(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, this.anyNType))
+    konst trueBranch = IrBranchImpl(nullCondition, ifTrue) // use default
+    konst elseBranch = IrElseBranchImpl(IrConstImpl.constTrue(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, this.booleanType), ifFalse)
 
     return IrIfThenElseImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, ifTrue.type).apply { branches += listOf(trueBranch, elseBranch) }
 }
 
 internal fun IrBuiltIns.emptyArrayConstructor(arrayType: IrType): IrConstructorCall {
-    val arrayClass = arrayType.classOrNull!!.owner
-    val constructor = arrayClass.constructors.firstOrNull { it.valueParameters.size == 1 } ?: arrayClass.constructors.first()
-    val constructorCall = constructor.createConstructorCall(arrayType)
+    konst arrayClass = arrayType.classOrNull!!.owner
+    konst constructor = arrayClass.constructors.firstOrNull { it.konstueParameters.size == 1 } ?: arrayClass.constructors.first()
+    konst constructorCall = constructor.createConstructorCall(arrayType)
 
     constructorCall.putValueArgument(0, 0.toIrConst(this.intType))
-    if (constructor.valueParameters.size == 2) {
+    if (constructor.konstueParameters.size == 2) {
         // TODO find a way to avoid creation of empty lambda
-        val tempFunction = createTempFunction(Name.identifier("TempForVararg"), this.anyType)
+        konst tempFunction = createTempFunction(Name.identifier("TempForVararg"), this.anyType)
         tempFunction.parent = arrayClass // can be anything, will not be used in any case
-        val initLambda = IrFunctionExpressionImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, constructor.valueParameters[1].type, tempFunction, IrStatementOrigin.LAMBDA)
+        konst initLambda = IrFunctionExpressionImpl(SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, constructor.konstueParameters[1].type, tempFunction, IrStatementOrigin.LAMBDA)
         constructorCall.putValueArgument(1, initLambda)
         constructorCall.putTypeArgument(0, (arrayType as IrSimpleType).arguments.singleOrNull()?.typeOrNull)
     }
@@ -185,23 +185,23 @@ internal fun IrBuiltIns.emptyArrayConstructor(arrayType: IrType): IrConstructorC
 }
 
 internal fun IrConst<*>.toConstantValue(): ConstantValue<*> {
-    val constType = this.type.makeNotNull().removeAnnotations()
+    konst constType = this.type.makeNotNull().removeAnnotations()
     return when (this.type.getPrimitiveType()) {
-        PrimitiveType.BOOLEAN -> BooleanValue(this.value as Boolean)
-        PrimitiveType.CHAR -> CharValue(this.value as Char)
-        PrimitiveType.BYTE -> ByteValue((this.value as Number).toByte())
-        PrimitiveType.SHORT -> ShortValue((this.value as Number).toShort())
-        PrimitiveType.INT -> IntValue((this.value as Number).toInt())
-        PrimitiveType.FLOAT -> FloatValue((this.value as Number).toFloat())
-        PrimitiveType.LONG -> LongValue((this.value as Number).toLong())
-        PrimitiveType.DOUBLE -> DoubleValue((this.value as Number).toDouble())
+        PrimitiveType.BOOLEAN -> BooleanValue(this.konstue as Boolean)
+        PrimitiveType.CHAR -> CharValue(this.konstue as Char)
+        PrimitiveType.BYTE -> ByteValue((this.konstue as Number).toByte())
+        PrimitiveType.SHORT -> ShortValue((this.konstue as Number).toShort())
+        PrimitiveType.INT -> IntValue((this.konstue as Number).toInt())
+        PrimitiveType.FLOAT -> FloatValue((this.konstue as Number).toFloat())
+        PrimitiveType.LONG -> LongValue((this.konstue as Number).toLong())
+        PrimitiveType.DOUBLE -> DoubleValue((this.konstue as Number).toDouble())
         null -> when (constType.getUnsignedType()) {
-            UnsignedType.UBYTE -> UByteValue((this.value as Number).toByte())
-            UnsignedType.USHORT -> UShortValue((this.value as Number).toShort())
-            UnsignedType.UINT -> UIntValue((this.value as Number).toInt())
-            UnsignedType.ULONG -> ULongValue((this.value as Number).toLong())
+            UnsignedType.UBYTE -> UByteValue((this.konstue as Number).toByte())
+            UnsignedType.USHORT -> UShortValue((this.konstue as Number).toShort())
+            UnsignedType.UINT -> UIntValue((this.konstue as Number).toInt())
+            UnsignedType.ULONG -> ULongValue((this.konstue as Number).toLong())
             null -> when {
-                constType.isString() -> StringValue(this.value as String)
+                constType.isString() -> StringValue(this.konstue as String)
                 else -> error("Cannot convert IrConst ${this.render()} to ConstantValue")
             }
         }

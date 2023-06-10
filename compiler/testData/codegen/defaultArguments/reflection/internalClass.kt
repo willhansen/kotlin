@@ -1,4 +1,4 @@
-class Foo(val a: Int = 1) {}
+class Foo(konst a: Int = 1) {}
 
 // CLASS: Foo
 // HAS_DEFAULT_CONSTRUCTOR: true

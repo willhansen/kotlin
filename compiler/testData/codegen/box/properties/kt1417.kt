@@ -1,9 +1,9 @@
 package pack
 
-open class A(val value: String )
+open class A(konst konstue: String )
 
-class B(value: String) : A(value) {
-    override fun toString() = "B($value)";
+class B(konstue: String) : A(konstue) {
+    override fun toString() = "B($konstue)";
 }
 
 fun box() = if (B("4").toString() == "B(4)") "OK" else "fail"

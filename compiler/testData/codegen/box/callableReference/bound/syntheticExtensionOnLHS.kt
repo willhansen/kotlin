@@ -16,7 +16,7 @@ public class A {
 
 fun box(): String {
     with (A("OK")) {
-        val k = foo::toString
+        konst k = foo::toString
         return k()
     }
 }

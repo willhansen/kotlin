@@ -17,11 +17,11 @@ public class J {
 
 // FILE: k.kt
 fun test() {
-    val platformNN = J.staticNN
-    val platformN = J.staticN
-    val platformJ = J.staticJ
+    konst platformNN = J.staticNN
+    konst platformN = J.staticN
+    konst platformJ = J.staticJ
 
-    val (a1, b1) = platformNN
-    val (a2, b2) = platformN
-    val (a3, b3) = platformJ
+    konst (a1, b1) = platformNN
+    konst (a2, b2) = platformN
+    konst (a3, b3) = platformJ
 }

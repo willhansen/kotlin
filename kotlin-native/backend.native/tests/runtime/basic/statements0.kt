@@ -16,7 +16,7 @@ fun simple() {
 }
 
 class Foo() {
-    val j = 2
+    konst j = 2
     var i = 29
 
     fun more() {
@@ -29,7 +29,7 @@ class Foo() {
 }
 
 fun fields() {
-    val foo = Foo()
+    konst foo = Foo()
     foo.more()
     println(foo.i)
     foo.less()

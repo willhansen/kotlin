@@ -12,7 +12,7 @@ class KarmaStackTraceProcessorKtTest {
 
     @Test
     fun processKarmaStackTrace() {
-        val stackTrace = """AssertionError: Expected value to be true.
+        konst stackTrace = """AssertionError: Expected konstue to be true.
             at AssertionError_init_0 (/Users/user/repos/check-kotlin-js-test/build/js/packages_imported/kotlin/1.3.0-SNAPSHOT/kotlin/exceptions.kt:102:36 <- /Users/user/repos/check-kotlin-js-test/build/js/packages/check-kotlin-js-test-test/adapter.js:33390:22)
             at DefaultJsAsserter.failWithMessage_0 (/Users/user/repos/check-kotlin-js-test/build/js/packages_imported/kotlin-test/1.3.0-SNAPSHOT/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:80:18 <- /Users/user/repos/check-kotlin-js-test/build/js/packages/check-kotlin-js-test-test/adapter.js:1569:13)
             at DefaultJsAsserter.assertTrue_o10pc4${'$'} (/Users/user/repos/check-kotlin-js-test/build/js/packages_imported/kotlin-test/1.3.0-SNAPSHOT/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:60:12 <- /Users/user/repos/check-kotlin-js-test/build/js/packages/check-kotlin-js-test-test/adapter.js:1536:12)
@@ -22,7 +22,7 @@ class KarmaStackTraceProcessorKtTest {
             at MyTest../kotlin/check-kotlin-js-test-test.js.MyTest.foo (/Users/user/repos/check-kotlin-js-test/src/test/kotlin/MyTest.kt:7:8 <- /Users/user/repos/check-kotlin-js-test/build/js/packages/check-kotlin-js-test-test/adapter.js:53082:5)
             at Context.<anonymous> (/Users/user/repos/check-kotlin-js-test/build/js/packages/check-kotlin-js-test-test/adapter.js:53115:31)""".trimIndent()
 
-        val expected = """AssertionError: Expected value to be true.
+        konst expected = """AssertionError: Expected konstue to be true.
             at AssertionError_init_0 (/Users/user/repos/check-kotlin-js-test/build/js/packages_imported/kotlin/1.3.0-SNAPSHOT/kotlin/exceptions.kt:102:36)
             at DefaultJsAsserter.failWithMessage_0 (/Users/user/repos/check-kotlin-js-test/build/js/packages_imported/kotlin-test/1.3.0-SNAPSHOT/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:80:18)
             at DefaultJsAsserter.assertTrue_o10pc4${'$'} (/Users/user/repos/check-kotlin-js-test/build/js/packages_imported/kotlin-test/1.3.0-SNAPSHOT/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:60:12)
@@ -40,7 +40,7 @@ class KarmaStackTraceProcessorKtTest {
 
     @Test
     fun processWebpackName() {
-        val processedLine = processWebpackName(
+        konst processedLine = processWebpackName(
             "at MyTest../kotlin/check-js-test-test.js.MyTest.foo (/src/test/kotlin/MyTest.kt:7:8)"
         )
         assertEquals(
@@ -51,7 +51,7 @@ class KarmaStackTraceProcessorKtTest {
 
     @Test
     fun notProcessNotWebpackName() {
-        val line = "at DefaultJsAsserter.assertTrue(/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:67)"
+        konst line = "at DefaultJsAsserter.assertTrue(/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:67)"
         assertEquals(
             line,
             processWebpackName(line)
@@ -60,7 +60,7 @@ class KarmaStackTraceProcessorKtTest {
 
     @Test
     fun notProcessShortPah() {
-        val line = "at Foo.bar(../Foo.kt)"
+        konst line = "at Foo.bar(../Foo.kt)"
         assertEquals(
             line,
             processWebpackName(line)
@@ -69,7 +69,7 @@ class KarmaStackTraceProcessorKtTest {
 
     @Test
     fun notProcessMessage() {
-        val line = "AssertionError: Expected value to be true."
+        konst line = "AssertionError: Expected konstue to be true."
         assertEquals(
             line,
             processWebpackName(line)

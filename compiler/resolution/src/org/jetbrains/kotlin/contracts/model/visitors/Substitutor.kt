@@ -25,35 +25,35 @@ import org.jetbrains.kotlin.contracts.model.structure.*
  * of this [ESExpression] with effects of arguments taken into consideration.
  */
 class Substitutor(
-    private val substitutions: Map<ESVariable, Computation>,
-    private val typeSubstitution: ESTypeSubstitution,
-    private val reducer: Reducer
+    private konst substitutions: Map<ESVariable, Computation>,
+    private konst typeSubstitution: ESTypeSubstitution,
+    private konst reducer: Reducer
 ) : ESExpressionVisitor<Computation?> {
     override fun visitIs(isOperator: ESIs): Computation? {
-        val arg = isOperator.left.accept(this) ?: return null
+        konst arg = isOperator.left.accept(this) ?: return null
         return CallComputation(ESBooleanType, isOperator.functor.invokeWithArguments(arg, typeSubstitution))
     }
 
     override fun visitNot(not: ESNot): Computation? {
-        val arg = not.arg.accept(this) ?: return null
+        konst arg = not.arg.accept(this) ?: return null
         return CallComputation(ESBooleanType, not.functor.invokeWithArguments(arg))
     }
 
     override fun visitEqual(equal: ESEqual): Computation? {
-        val left = equal.left.accept(this) ?: return null
-        val right = equal.right.accept(this) ?: return null
+        konst left = equal.left.accept(this) ?: return null
+        konst right = equal.right.accept(this) ?: return null
         return CallComputation(ESBooleanType, equal.functor.invokeWithArguments(listOf(left, right), typeSubstitution, reducer))
     }
 
     override fun visitAnd(and: ESAnd): Computation? {
-        val left = and.left.accept(this) ?: return null
-        val right = and.right.accept(this) ?: return null
+        konst left = and.left.accept(this) ?: return null
+        konst right = and.right.accept(this) ?: return null
         return CallComputation(ESBooleanType, and.functor.invokeWithArguments(left, right))
     }
 
     override fun visitOr(or: ESOr): Computation? {
-        val left = or.left.accept(this) ?: return null
-        val right = or.right.accept(this) ?: return null
+        konst left = or.left.accept(this) ?: return null
+        konst right = or.right.accept(this) ?: return null
         return CallComputation(ESBooleanType, or.functor.invokeWithArguments(left, right))
     }
 

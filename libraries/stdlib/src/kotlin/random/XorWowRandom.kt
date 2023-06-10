@@ -30,19 +30,19 @@ internal class XorWowRandom internal constructor(
     init {
         require((x or y or z or w or v) != 0) { "Initial state must have at least one non-zero element." }
 
-        // some trivial seeds can produce several values with zeroes in upper bits, so we discard first 64
+        // some trivial seeds can produce several konstues with zeroes in upper bits, so we discard first 64
         repeat(64) { nextInt() }
     }
 
     override fun nextInt(): Int {
-        // Equivalent to the xorxow algorithm
+        // Equikonstent to the xorxow algorithm
         // From Marsaglia, G. 2003. Xorshift RNGs. J. Statis. Soft. 8, 14, p. 5
         var t = x
         t = t xor (t ushr 2)
         x = y
         y = z
         z = w
-        val v0 = v
+        konst v0 = v
         w = v0
         t = (t xor (t shl 1)) xor v0 xor (v0 shl 4)
         v = t
@@ -54,6 +54,6 @@ internal class XorWowRandom internal constructor(
         nextInt().takeUpperBits(bitCount)
 
     private companion object {
-        private const val serialVersionUID: Long = 0L
+        private const konst serialVersionUID: Long = 0L
     }
 }

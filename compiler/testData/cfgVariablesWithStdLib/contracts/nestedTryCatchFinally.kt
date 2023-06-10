@@ -16,7 +16,7 @@ fun outerComputation(): Int = 52
 fun log() = Unit
 
 fun outerFinallyInitializes() {
-    val x: Int
+    konst x: Int
 
     try {
         myRun {
@@ -44,7 +44,7 @@ fun outerFinallyInitializes() {
 }
 
 fun innerFinalltInitializes() {
-    val x: Int
+    konst x: Int
     try {
         myRun {
             try {

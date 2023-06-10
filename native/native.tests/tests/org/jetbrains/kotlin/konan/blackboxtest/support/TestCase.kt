@@ -21,8 +21,8 @@ import java.io.File
  * Represents a single file that will be supplied to the compiler.
  */
 internal class TestFile<M : TestModule> private constructor(
-    val location: File,
-    val module: M,
+    konst location: File,
+    konst module: M,
     private var state: State
 ) {
     private sealed interface State {
@@ -30,23 +30,23 @@ internal class TestFile<M : TestModule> private constructor(
         class Uncommitted(var text: String) : State
     }
 
-    private val uncommittedState: State.Uncommitted
-        get() = when (val state = state) {
+    private konst uncommittedState: State.Uncommitted
+        get() = when (konst state = state) {
             is State.Uncommitted -> state
             is State.Committed -> fail { "File $location is already committed." }
         }
 
-    val text: String
+    konst text: String
         get() = uncommittedState.text
 
     fun update(transformation: (String) -> String) {
-        val uncommittedState = uncommittedState
+        konst uncommittedState = uncommittedState
         uncommittedState.text = transformation(uncommittedState.text)
     }
 
     // An optimization to release the memory occupied by numerous file texts.
     fun commit() {
-        when (val state = state) {
+        when (konst state = state) {
             is State.Uncommitted -> {
                 location.parentFile.mkdirs()
                 location.writeText(state.text)
@@ -80,25 +80,25 @@ internal class TestFile<M : TestModule> private constructor(
  *                     Such module is compiled to KLIB
  */
 internal sealed class TestModule {
-    abstract val name: String
-    abstract val files: Set<TestFile<*>>
+    abstract konst name: String
+    abstract konst files: Set<TestFile<*>>
 
     data class Exclusive(
-        override val name: String,
-        val directDependencySymbols: Set<String>,
-        val directFriendSymbols: Set<String>,
-        val directDependsOnSymbols: Set<String>, // mimics the name from ModuleStructureExtractorImpl, thought later converted to `-Xfragment-refines` parameter
+        override konst name: String,
+        konst directDependencySymbols: Set<String>,
+        konst directFriendSymbols: Set<String>,
+        konst directDependsOnSymbols: Set<String>, // mimics the name from ModuleStructureExtractorImpl, thought later converted to `-Xfragment-refines` parameter
     ) : TestModule() {
-        override val files: FailOnDuplicatesSet<TestFile<Exclusive>> = FailOnDuplicatesSet()
+        override konst files: FailOnDuplicatesSet<TestFile<Exclusive>> = FailOnDuplicatesSet()
 
         lateinit var directDependencies: Set<TestModule>
         lateinit var directFriends: Set<TestModule>
         lateinit var directDependsOn: Set<TestModule>
 
         // N.B. The following two properties throw an exception on attempt to resolve cyclic dependencies.
-        val allDependencies: Set<TestModule> by SM.lazyNeighbors({ directDependencies }, { it.allDependencies })
-        val allFriends: Set<TestModule> by SM.lazyNeighbors({ directFriends }, { it.allFriends })
-        val allDependsOn: Set<TestModule> by SM.lazyNeighbors({ directDependsOn }, { it.allDependsOn })
+        konst allDependencies: Set<TestModule> by SM.lazyNeighbors({ directDependencies }, { it.allDependencies })
+        konst allFriends: Set<TestModule> by SM.lazyNeighbors({ directFriends }, { it.allFriends })
+        konst allDependsOn: Set<TestModule> by SM.lazyNeighbors({ directDependsOn }, { it.allDependsOn })
 
         lateinit var testCase: TestCase
 
@@ -112,13 +112,13 @@ internal sealed class TestModule {
                     other.directDependsOnSymbols == directDependsOnSymbols
     }
 
-    data class Shared(override val name: String) : TestModule() {
-        override val files: FailOnDuplicatesSet<TestFile<Shared>> = FailOnDuplicatesSet()
+    data class Shared(override konst name: String) : TestModule() {
+        override konst files: FailOnDuplicatesSet<TestFile<Shared>> = FailOnDuplicatesSet()
     }
 
-    data class Given(val klibFile: File) : TestModule() {
-        override val name: String get() = klibFile.name
-        override val files: Set<TestFile<*>> get() = emptySet()
+    data class Given(konst klibFile: File) : TestModule() {
+        override konst name: String get() = klibFile.name
+        override konst files: Set<TestFile<*>> get() = emptySet()
     }
 
     final override fun equals(other: Any?) =
@@ -130,25 +130,25 @@ internal sealed class TestModule {
     companion object {
         fun newDefaultModule() = Exclusive(DEFAULT_MODULE_NAME, emptySet(), emptySet(), emptySet())
 
-        val TestModule.allDependencies: Set<TestModule>
+        konst TestModule.allDependencies: Set<TestModule>
             get() = when (this) {
                 is Exclusive -> allDependencies
                 is Shared, is Given -> emptySet()
             }
 
-        val TestModule.allFriends: Set<TestModule>
+        konst TestModule.allFriends: Set<TestModule>
             get() = when (this) {
                 is Exclusive -> allFriends
                 is Shared, is Given -> emptySet()
             }
 
-        val TestModule.allDependsOn: Set<TestModule>
+        konst TestModule.allDependsOn: Set<TestModule>
             get() = when (this) {
                 is Exclusive -> allDependsOn
                 is Shared, is Given -> emptySet()
             }
 
-        private val SM = LockBasedStorageManager(TestModule::class.java.name)
+        private konst SM = LockBasedStorageManager(TestModule::class.java.name)
     }
 }
 
@@ -158,15 +158,15 @@ internal sealed class TestModule {
  * [testCaseGroupId] - a unique ID of [TestCaseGroup] this [TestCase] belongs to.
  */
 internal interface TestCaseId {
-    val testCaseGroupId: TestCaseGroupId
+    konst testCaseGroupId: TestCaseGroupId
 
-    data class TestDataFile(val file: File) : TestCaseId {
-        override val testCaseGroupId = TestCaseGroupId.TestDataDir(file.parentFile) // The directory, containing testData file.
+    data class TestDataFile(konst file: File) : TestCaseId {
+        override konst testCaseGroupId = TestCaseGroupId.TestDataDir(file.parentFile) // The directory, containing testData file.
         override fun toString(): String = file.path
     }
 
-    data class Named(val uniqueName: String) : TestCaseId {
-        override val testCaseGroupId = TestCaseGroupId.Named(uniqueName) // The single test case inside the test group.
+    data class Named(konst uniqueName: String) : TestCaseId {
+        override konst testCaseGroupId = TestCaseGroupId.Named(uniqueName) // The single test case inside the test group.
         override fun toString() = "[$uniqueName]"
     }
 }
@@ -182,17 +182,17 @@ internal interface TestCaseId {
  *                        Note: It depends on the concrete [TestKind] whether the package name will be enforced for the [TestFile]s or not.
  */
 internal class TestCase(
-    val id: TestCaseId,
-    val kind: TestKind,
-    val modules: Set<TestModule.Exclusive>,
-    val freeCompilerArgs: TestCompilerArgs,
-    val nominalPackageName: PackageName,
-    val checks: TestRunChecks,
-    val extras: Extras
+    konst id: TestCaseId,
+    konst kind: TestKind,
+    konst modules: Set<TestModule.Exclusive>,
+    konst freeCompilerArgs: TestCompilerArgs,
+    konst nominalPackageName: PackageName,
+    konst checks: TestRunChecks,
+    konst extras: Extras
 ) {
     sealed interface Extras
-    class NoTestRunnerExtras(val entryPoint: String, val inputDataFile: File? = null, val arguments: List<String> = emptyList()) : Extras
-    class WithTestRunnerExtras(val runnerType: TestRunnerType, val ignoredTests: Set<String> = emptySet()) : Extras
+    class NoTestRunnerExtras(konst entryPoint: String, konst inputDataFile: File? = null, konst arguments: List<String> = emptyList()) : Extras
+    class WithTestRunnerExtras(konst runnerType: TestRunnerType, konst ignoredTests: Set<String> = emptySet()) : Extras
 
     init {
         when (kind) {
@@ -205,15 +205,15 @@ internal class TestCase(
     inline fun <reified T : Extras> safeExtras(): T? = extras as? T
 
     // The set of modules that have no incoming dependency arcs.
-    val rootModules: Set<TestModule.Exclusive> by lazy {
-        val allModules = hashSetOf<TestModule>()
+    konst rootModules: Set<TestModule.Exclusive> by lazy {
+        konst allModules = hashSetOf<TestModule>()
         modules.forEach { module ->
             allModules += module
             allModules += module.allDependencies
             allModules += module.allDependsOn
         }
 
-        val rootModules = allModules.toHashSet()
+        konst rootModules = allModules.toHashSet()
         allModules.forEach { module ->
             rootModules -= module.allDependencies
             rootModules -= module.allDependsOn
@@ -221,7 +221,7 @@ internal class TestCase(
 
         assertTrue(rootModules.isNotEmpty()) { "$id: No root modules in test case." }
 
-        val nonExclusiveRootTestModules = rootModules.filter { module -> module !is TestModule.Exclusive }
+        konst nonExclusiveRootTestModules = rootModules.filter { module -> module !is TestModule.Exclusive }
         assertTrue(nonExclusiveRootTestModules.isEmpty()) {
             "$id: There are non-exclusive root test modules in test case. Modules: $nonExclusiveRootTestModules"
         }
@@ -231,7 +231,7 @@ internal class TestCase(
     }
 
     // All shared modules used in the current test case.
-    val sharedModules: Set<TestModule.Shared> by lazy {
+    konst sharedModules: Set<TestModule.Shared> by lazy {
         buildSet {
             modules.forEach { module ->
                 module.allDependencies.forEach { dependency ->
@@ -246,11 +246,11 @@ internal class TestCase(
         findSharedModule: ((moduleName: String) -> TestModule.Shared?)?
     ) {
         // Check that there are no duplicated files among different modules.
-        val duplicatedFiles = modules.flatMap { it.files }.groupingBy { it }.eachCount().filterValues { it > 1 }.keys
+        konst duplicatedFiles = modules.flatMap { it.files }.groupingBy { it }.eachCount().filterValues { it > 1 }.keys
         assertTrue(duplicatedFiles.isEmpty()) { "$id: Duplicated test files encountered: $duplicatedFiles" }
 
         // Check that there are modules with duplicated names.
-        val exclusiveModules: Map</* regular module name */ String, TestModule.Exclusive> = modules.toIdentitySet()
+        konst exclusiveModules: Map</* regular module name */ String, TestModule.Exclusive> = modules.toIdentitySet()
             .groupingBy { module -> module.name }
             .aggregate { moduleName, _: TestModule.Exclusive?, module, isFirst ->
                 assertTrue(isFirst) { "$id: Multiple test modules with the same name found: $moduleName" }
@@ -280,8 +280,8 @@ internal class TestCase(
  * A unique identified of [TestCaseGroup].
  */
 internal interface TestCaseGroupId {
-    data class TestDataDir(val dir: File) : TestCaseGroupId
-    data class Named(val uniqueName: String) : TestCaseGroupId
+    data class TestDataDir(konst dir: File) : TestCaseGroupId
+    data class Named(konst uniqueName: String) : TestCaseGroupId
 }
 
 /**
@@ -301,10 +301,10 @@ internal interface TestCaseGroup {
     ): Collection<TestCase>
 
     class Default(
-        private val disabledTestCaseIds: Set<TestCaseId>,
+        private konst disabledTestCaseIds: Set<TestCaseId>,
         testCases: Iterable<TestCase>
     ) : TestCaseGroup {
-        private val testCasesById = testCases.associateBy { it.id }
+        private konst testCasesById = testCases.associateBy { it.id }
 
         override fun isEnabled(testCaseId: TestCaseId) = testCaseId !in disabledTestCaseIds
         override fun getByName(testCaseId: TestCaseId) = testCasesById[testCaseId]
@@ -313,7 +313,7 @@ internal interface TestCaseGroup {
             freeCompilerArgs: TestCompilerArgs,
             sharedModules: Set<TestModule.Shared>,
             runnerType: TestRunnerType
-        ) = testCasesById.values.filter { testCase ->
+        ) = testCasesById.konstues.filter { testCase ->
             testCase.kind == TestKind.REGULAR
                     && testCase.freeCompilerArgs == freeCompilerArgs
                     && testCase.sharedModules == sharedModules
@@ -322,7 +322,7 @@ internal interface TestCaseGroup {
     }
 
     companion object {
-        val ALL_DISABLED = object : TestCaseGroup {
+        konst ALL_DISABLED = object : TestCaseGroup {
             override fun isEnabled(testCaseId: TestCaseId) = false
             override fun getByName(testCaseId: TestCaseId) = unsupported()
 

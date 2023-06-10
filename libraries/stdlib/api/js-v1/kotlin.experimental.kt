@@ -32,7 +32,7 @@ public inline infix fun kotlin.Short.xor(other: kotlin.Short): kotlin.Short
 
 @kotlin.RequiresOptIn
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.ANNOTATION_CLASS})
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.MustBeDocumented
 @kotlin.SinceKotlin(version = "1.8")
 public final annotation class ExperimentalObjCName : kotlin.Annotation {
@@ -41,7 +41,7 @@ public final annotation class ExperimentalObjCName : kotlin.Annotation {
 
 @kotlin.RequiresOptIn
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.ANNOTATION_CLASS})
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.MustBeDocumented
 @kotlin.SinceKotlin(version = "1.8")
 public final annotation class ExperimentalObjCRefinement : kotlin.Annotation {
@@ -50,7 +50,7 @@ public final annotation class ExperimentalObjCRefinement : kotlin.Annotation {
 
 @kotlin.RequiresOptIn(level = Level.ERROR)
 @kotlin.annotation.MustBeDocumented
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.ANNOTATION_CLASS})
 @kotlin.SinceKotlin(version = "1.3")
 public final annotation class ExperimentalTypeInference : kotlin.Annotation {

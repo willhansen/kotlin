@@ -39,7 +39,7 @@ Unit   <v1>: Unit   NEW: r(Unit) -> <v1>
 =====================
 == innerTryCatchFinally ==
 fun innerTryCatchFinally() {
-    val x: Int
+    konst x: Int
 
     myRun {
         try {
@@ -61,7 +61,7 @@ myRun { try { x = someComputation() report(x) } catch (e: java.lang.Exception) {
 x                                                                                                                                                <v2>: Int               NEW: r(x) -> <v2>
 inc()                                                                                                                                            <v3>: *                 NEW: call(inc(), inc|<v2>) -> <v3>
 x.inc()                                                                                                                                          <v3>: *                 COPY
-{ val x: Int myRun { try { x = someComputation() report(x) } catch (e: java.lang.Exception) { x = 42 report(x) } finally { x = 0 } } x.inc() }   <v3>: *                 COPY
+{ konst x: Int myRun { try { x = someComputation() report(x) } catch (e: java.lang.Exception) { x = 42 report(x) } finally { x = 0 } } x.inc() }   <v3>: *                 COPY
 =====================
 == inlined anonymous_1 ==
 {

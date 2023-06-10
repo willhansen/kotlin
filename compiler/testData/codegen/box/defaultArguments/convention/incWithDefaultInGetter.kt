@@ -17,7 +17,7 @@ operator fun String.inc(): String {
 
 fun box(): String {
     var x = X()
-    val res = ++x["a"]
+    konst res = ++x["a"]
     if (x.result != "aanone1") return "fail 1: ${x.result}"
 
     if (res != "aanone1none") return "fail 2: ${res}"

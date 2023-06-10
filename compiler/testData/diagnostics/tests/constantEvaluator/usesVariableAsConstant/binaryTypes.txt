@@ -1,14 +1,14 @@
 package
 
 package test {
-    public val prop1: kotlin.Boolean = false
-    public val prop2: kotlin.Int = 5
-    public val prop3: kotlin.Int = 3
-    public val prop4: kotlin.Boolean = true
-    public val prop5: kotlin.Boolean = true
-    public val prop6: kotlin.Boolean = true
-    public val prop7: kotlin.Boolean = true
-    public val prop8: kotlin.Int = 1
-    public val x: kotlin.Int = 1
-    public val y: kotlin.Boolean = true
+    public konst prop1: kotlin.Boolean = false
+    public konst prop2: kotlin.Int = 5
+    public konst prop3: kotlin.Int = 3
+    public konst prop4: kotlin.Boolean = true
+    public konst prop5: kotlin.Boolean = true
+    public konst prop6: kotlin.Boolean = true
+    public konst prop7: kotlin.Boolean = true
+    public konst prop8: kotlin.Int = 1
+    public konst x: kotlin.Int = 1
+    public konst y: kotlin.Boolean = true
 }

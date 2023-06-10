@@ -31,12 +31,12 @@ import java.io.File
 
 internal open class KaptConfig<TASK : KaptTask>(
     project: Project,
-    protected val ext: KaptExtension,
+    protected konst ext: KaptExtension,
 ) : TaskConfigAction<TASK>(project) {
 
     init {
         configureTaskProvider { taskProvider ->
-            val kaptClasspathSnapshot = getKaptClasspathSnapshot(taskProvider)
+            konst kaptClasspathSnapshot = getKaptClasspathSnapshot(taskProvider)
 
             taskProvider.configure { task ->
                 task.verbose.set(KaptTask.queryKaptVerboseProperty(project))
@@ -71,10 +71,10 @@ internal open class KaptConfig<TASK : KaptTask>(
                     { kaptGenerateStubsTask.get().javaOutputDir.takeIf { it.isPresent } }
                 )
                 .disallowChanges()
-            task.sourceSetName.value(kaptGenerateStubsTask.flatMap { it.sourceSetName }).disallowChanges()
+            task.sourceSetName.konstue(kaptGenerateStubsTask.flatMap { it.sourceSetName }).disallowChanges()
 
 
-            val kaptSources = objectFactory.fileCollection()
+            konst kaptSources = objectFactory.fileCollection()
                 .from(kaptGenerateStubsTask.map { it.javaSources }, task.stubsDir)
                 .asFileTree
                 .matching { it.include("**/*.java") }
@@ -91,7 +91,7 @@ internal open class KaptConfig<TASK : KaptTask>(
         return if (project.isIncrementalKapt()) {
             maybeRegisterTransform(project)
 
-            val classStructureConfiguration = project.configurations.detachedConfiguration().markResolvable()
+            konst classStructureConfiguration = project.configurations.detachedConfiguration().markResolvable()
 
             // Wrap the `kotlinCompile.classpath` into a file collection, so that, if the classpath is represented by a configuration,
             // the configuration is not extended (via extendsFrom, which normally happens when one configuration is _added_ into another)
@@ -106,7 +106,7 @@ internal open class KaptConfig<TASK : KaptTask>(
 
     private fun maybeRegisterTransform(project: Project) {
         if (!project.extensions.extraProperties.has("KaptStructureTransformAdded")) {
-            val transformActionClass =
+            konst transformActionClass =
                 if (GradleVersion.current() >= GradleVersion.version("5.4"))
                     StructureTransformAction::class.java
                 else
@@ -131,8 +131,8 @@ internal open class KaptConfig<TASK : KaptTask>(
                 if ("-source" in result || "--source" in result || "--release" in result) return@also
 
                 if (defaultJavaSourceCompatibility.isPresent) {
-                    val atLeast12Java = JavaVersion.current().compareTo(JavaVersion.compose(12, 0, 0, 0, false)) >= 0
-                    val sourceOptionKey = if (atLeast12Java) {
+                    konst atLeast12Java = JavaVersion.current().compareTo(JavaVersion.compose(12, 0, 0, 0, false)) >= 0
+                    konst sourceOptionKey = if (atLeast12Java) {
                         "--source"
                     } else {
                         "-source"
@@ -146,11 +146,11 @@ internal open class KaptConfig<TASK : KaptTask>(
 
 //Have to avoid using FileUtil because it is required system property reading that is not allowed for configuration cache
 private fun isAncestor(dir: File, file: File): Boolean {
-    val path = file.normalize().absolutePath
-    val prefix = dir.normalize().absolutePath
-    val pathLength = path.length
-    val prefixLength = prefix.length
-    val caseSensitive = true
+    konst path = file.normalize().absolutePath
+    konst prefix = dir.normalize().absolutePath
+    konst pathLength = path.length
+    konst prefixLength = prefix.length
+    konst caseSensitive = true
     return if (prefixLength == 0) {
         true
     } else if (prefixLength > pathLength) {
@@ -160,12 +160,12 @@ private fun isAncestor(dir: File, file: File): Boolean {
     } else if (pathLength == prefixLength) {
         return true
     } else {
-        val lastPrefixChar: Char = prefix.get(prefixLength - 1)
+        konst lastPrefixChar: Char = prefix.get(prefixLength - 1)
         var slashOrSeparatorIdx = prefixLength
         if (lastPrefixChar == '/' || lastPrefixChar == File.separatorChar) {
             slashOrSeparatorIdx = prefixLength - 1
         }
-        val next1 = path[slashOrSeparatorIdx]
+        konst next1 = path[slashOrSeparatorIdx]
         return !(next1 != '/' && next1 != File.separatorChar)
     }
 }
@@ -199,7 +199,7 @@ internal class KaptWithoutKotlincConfig : KaptConfig<KaptWithoutKotlincTask> {
         project.configurations.findByName(Kapt3GradleSubplugin.KAPT_WORKER_DEPENDENCIES_CONFIGURATION_NAME)
             ?: project.configurations.create(Kapt3GradleSubplugin.KAPT_WORKER_DEPENDENCIES_CONFIGURATION_NAME).apply {
                 dependencies.addAllLater(project.listProperty {
-                    val kaptDependency = "org.jetbrains.kotlin:kotlin-annotation-processing-gradle:${project.getKotlinPluginVersion()}"
+                    konst kaptDependency = "org.jetbrains.kotlin:kotlin-annotation-processing-gradle:${project.getKotlinPluginVersion()}"
                     listOf(
                         project.dependencies.create(kaptDependency),
                         project.dependencies.kotlinDependency(
@@ -222,11 +222,11 @@ internal class KaptWithoutKotlincConfig : KaptConfig<KaptWithoutKotlincTask> {
 
     constructor(project: Project, ext: KaptExtension) : super(project, ext) {
         configureTask { task ->
-            val kotlinSourceDir = objectFactory.fileCollection().from(task.kotlinSourcesDestinationDir)
-            val nonAndroidDslOptions = getNonAndroidDslApOptions(ext, project, kotlinSourceDir, null, null)
+            konst kotlinSourceDir = objectFactory.fileCollection().from(task.kotlinSourcesDestinationDir)
+            konst nonAndroidDslOptions = getNonAndroidDslApOptions(ext, project, kotlinSourceDir, null, null)
             task.kaptPluginOptions.add(nonAndroidDslOptions.toCompilerPluginOptions())
         }
     }
 }
 
-private val artifactType = Attribute.of("artifactType", String::class.java)
+private konst artifactType = Attribute.of("artifactType", String::class.java)

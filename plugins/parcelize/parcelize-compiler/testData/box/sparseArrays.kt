@@ -9,13 +9,13 @@ import android.os.Parcelable
 import android.util.*
 
 @Parcelize
-data class Data(val a: String, val b: String) : Parcelable
+data class Data(konst a: String, konst b: String) : Parcelable
 
 @Parcelize
-data class User(val a: SparseIntArray, val b: SparseLongArray, val c: SparseArray<Data>) : Parcelable
+data class User(konst a: SparseIntArray, konst b: SparseLongArray, konst c: SparseArray<Data>) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val user = User(
+    konst user = User(
             a = SparseIntArray().apply { put(1, 5); put(100, -1); put(1000, 0) },
             b = SparseLongArray().apply { put(3, 2); put(2, 3); put(10, 10) },
             c = SparseArray<Data>().apply { put(1, Data("A", "B")); put(10, Data("C", "D")); put(105, Data("E", "")) }
@@ -23,11 +23,11 @@ fun box() = parcelTest { parcel ->
 
     user.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val user2 = parcelableCreator<User>().createFromParcel(parcel)
+    konst user2 = parcelableCreator<User>().createFromParcel(parcel)
 
     assert(compareSparseIntArrays(user.a, user2.a))
     assert(compareSparseLongArrays(user.b, user2.b))
@@ -40,7 +40,7 @@ private fun compareSparseIntArrays(first: SparseIntArray, second: SparseIntArray
 
     for (i in 0 until first.size()) {
         if (first.keyAt(i) != second.keyAt(i)) return false
-        if (first.valueAt(i) != second.valueAt(i)) return false
+        if (first.konstueAt(i) != second.konstueAt(i)) return false
     }
 
     return true
@@ -52,7 +52,7 @@ private fun compareSparseLongArrays(first: SparseLongArray, second: SparseLongAr
 
     for (i in 0 until first.size()) {
         if (first.keyAt(i) != second.keyAt(i)) return false
-        if (first.valueAt(i) != second.valueAt(i)) return false
+        if (first.konstueAt(i) != second.konstueAt(i)) return false
     }
 
     return true
@@ -64,7 +64,7 @@ private fun compareSparseArrays(first: SparseArray<*>, second: SparseArray<*>): 
 
     for (i in 0 until first.size()) {
         if (first.keyAt(i) != second.keyAt(i)) return false
-        if (first.valueAt(i) != second.valueAt(i)) return false
+        if (first.konstueAt(i) != second.konstueAt(i)) return false
     }
 
     return true

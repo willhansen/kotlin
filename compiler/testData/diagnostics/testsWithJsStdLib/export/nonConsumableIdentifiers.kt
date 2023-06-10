@@ -7,10 +7,10 @@ package foo
 fun <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>delete<!>() {}
 
 @JsExport
-val <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>instanceof<!> = 4
+konst <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>instanceof<!> = 4
 
 @JsExport
-class <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>eval<!>
+class <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>ekonst<!>
 
 @JsExport
 @JsName(<!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>"await"<!>)
@@ -18,7 +18,7 @@ fun foo() {}
 
 @JsExport
 @JsName(<!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>"this"<!>)
-val bar = 4
+konst bar = 4
 
 @JsExport
 @JsName(<!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>"super"<!>)
@@ -32,7 +32,7 @@ class DefDef
 class Test {
     fun instanceof() {}
 
-    @JsName("eval")
+    @JsName("ekonst")
     fun test() {}
 }
 

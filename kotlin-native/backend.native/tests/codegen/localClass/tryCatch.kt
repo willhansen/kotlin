@@ -8,7 +8,7 @@ package codegen.localClass.tryCatch
 import kotlin.test.*
 
 private fun foo() {
-    val local =
+    konst local =
             object {
                 fun bar() {
                     try {

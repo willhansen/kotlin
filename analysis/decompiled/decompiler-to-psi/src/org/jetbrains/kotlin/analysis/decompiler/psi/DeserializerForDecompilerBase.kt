@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.storage.LockBasedStorageManager
 import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.types.SimpleType
 
-abstract class DeserializerForDecompilerBase(val directoryPackageFqName: FqName) : ResolverForDecompiler {
-    protected abstract val deserializationComponents: DeserializationComponents
+abstract class DeserializerForDecompilerBase(konst directoryPackageFqName: FqName) : ResolverForDecompiler {
+    protected abstract konst deserializationComponents: DeserializationComponents
 
-    protected abstract val builtIns: KotlinBuiltIns
+    protected abstract konst builtIns: KotlinBuiltIns
 
-    protected val storageManager: StorageManager = LockBasedStorageManager.NO_LOCKS
+    protected konst storageManager: StorageManager = LockBasedStorageManager.NO_LOCKS
 
-    protected val moduleDescriptor: ModuleDescriptorImpl = createDummyModule("module for building decompiled sources")
+    protected konst moduleDescriptor: ModuleDescriptorImpl = createDummyModule("module for building decompiled sources")
 
-    protected val packageFragmentProvider: PackageFragmentProvider = object : PackageFragmentProviderOptimized {
+    protected konst packageFragmentProvider: PackageFragmentProvider = object : PackageFragmentProviderOptimized {
         override fun collectPackageFragments(fqName: FqName, packageFragments: MutableCollection<PackageFragmentDescriptor>) {
             packageFragments.add(createDummyPackageFragment(fqName))
         }
@@ -45,7 +45,7 @@ abstract class DeserializerForDecompilerBase(val directoryPackageFqName: FqName)
         }
     }
 
-    protected val enumEntriesDeserializationSupport: EnumEntriesDeserializationSupport =
+    protected konst enumEntriesDeserializationSupport: EnumEntriesDeserializationSupport =
         EnumEntriesDeserializationSupportImpl(moduleDescriptor.platform)
 
     override fun resolveTopLevelClass(classId: ClassId) = deserializationComponents.deserializeClass(classId)
@@ -61,7 +61,7 @@ abstract class DeserializerForDecompilerBase(val directoryPackageFqName: FqName)
     }
 }
 
-class ResolveEverythingToKotlinAnyLocalClassifierResolver(private val builtIns: KotlinBuiltIns) : LocalClassifierTypeSettings {
-    override val replacementTypeForLocalClassifiers: SimpleType?
+class ResolveEverythingToKotlinAnyLocalClassifierResolver(private konst builtIns: KotlinBuiltIns) : LocalClassifierTypeSettings {
+    override konst replacementTypeForLocalClassifiers: SimpleType?
         get() = builtIns.anyType
 }

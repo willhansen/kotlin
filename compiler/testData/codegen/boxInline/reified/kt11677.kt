@@ -9,7 +9,7 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 open class TypeLiteral<T> {
-    val type: Type
+    konst type: Type
         get() = (javaClass.genericSuperclass as ParameterizedType).getActualTypeArguments()[0]
 }
 
@@ -24,10 +24,10 @@ inline fun <reified T> brokenTypeLiteral(): TypeLiteral<T> = "".run { typeLitera
 import test.*
 
 fun box(): String {
-    val type1 = typeLiteral<List<String>>().type.toString()
+    konst type1 = typeLiteral<List<String>>().type.toString()
     if (type1 != "java.util.List<? extends java.lang.String>") return "fail 1: $type1"
 
-    val type2 = brokenTypeLiteral<List<String>>().type.toString()
+    konst type2 = brokenTypeLiteral<List<String>>().type.toString()
     if (type2 != "java.util.List<? extends java.lang.String>") return "fail 2: $type2"
 
     return "OK"

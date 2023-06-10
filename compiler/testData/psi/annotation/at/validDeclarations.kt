@@ -1,5 +1,5 @@
 private @open @[Ann1(1)] @Ann2("1") @Ann3("2") class A(
-        @Volatile(1) private val x: @AnnType("3") @open Int,
+        @Volatile(1) private konst x: @AnnType("3") @open Int,
         @private var y: Int,
         @open z: Int
 ) {
@@ -21,7 +21,7 @@ private @open @[Ann1(1)] @Ann2("1") @Ann3("2") class A(
         foo(fun(@vararg @ann(1) x: Int) {})
     }
 
-    val x: Int
+    konst x: Int
         @inject @[inline] private @open get() = 1
 
     @open @ann init {}
@@ -37,7 +37,7 @@ private @open @[Ann1(1)] @Ann2("1") @Ann3("2") class A(
 
     fun <@ann("") @[ann] T : R> foo() {}
 }
-@private val x = 1
+@private konst x = 1
 
 @inline private fun bar() = 1
 

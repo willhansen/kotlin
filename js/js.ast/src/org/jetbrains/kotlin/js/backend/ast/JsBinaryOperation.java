@@ -50,7 +50,7 @@ public final class JsBinaryOperation extends JsExpression {
     @Override
     public void acceptChildren(JsVisitor visitor) {
         if (op.isAssignment()) {
-            visitor.acceptLvalue(arg1);
+            visitor.acceptLkonstue(arg1);
         }
         else {
             visitor.accept(arg1);
@@ -62,7 +62,7 @@ public final class JsBinaryOperation extends JsExpression {
     public void traverse(JsVisitorWithContext v, JsContext ctx) {
         if (v.visit(this, ctx)) {
             if (op.isAssignment()) {
-                arg1 = v.acceptLvalue(arg1);
+                arg1 = v.acceptLkonstue(arg1);
             } else {
                 arg1 = v.accept(arg1);
             }

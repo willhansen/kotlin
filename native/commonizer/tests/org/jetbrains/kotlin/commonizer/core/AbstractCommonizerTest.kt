@@ -27,13 +27,13 @@ abstract class AbstractCommonizerTest<T, R> {
     protected fun doTestSuccess(expected: R, vararg variants: T) {
         check(variants.isNotEmpty())
 
-        val commonized = createCommonizer().apply {
-            variants.forEachIndexed { index, value ->
-                assertTrue(commonizeWith(value), "Expected successful commonization, but failed at index $index ($value)")
+        konst commonized = createCommonizer().apply {
+            variants.forEachIndexed { index, konstue ->
+                assertTrue(commonizeWith(konstue), "Expected successful commonization, but failed at index $index ($konstue)")
             }
         }
 
-        val actual = commonized.result
+        konst actual = commonized.result
         if (!areEqual(expected, actual)) throw ObjectsNotEqual("Expected: $expected\nActual: $actual")
     }
 
@@ -43,11 +43,11 @@ abstract class AbstractCommonizerTest<T, R> {
     ) {
         check(variants.isNotEmpty())
 
-        val failureIndex = if (shouldFailOnFirstVariant) 0 else variants.size - 1
+        konst failureIndex = if (shouldFailOnFirstVariant) 0 else variants.size - 1
 
-        val commonized = createCommonizer().apply {
+        konst commonized = createCommonizer().apply {
             variants.forEachIndexed { index, variant ->
-                val result = commonizeWith(variant)
+                konst result = commonizeWith(variant)
                 if (index == variants.lastIndex) {
                     if (this.result == null) failInEmptyState()
                 }

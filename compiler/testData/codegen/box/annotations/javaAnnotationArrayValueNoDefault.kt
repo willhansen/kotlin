@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface JavaAnn {
-    String[] value();
+    String[] konstue();
 }
 
 // MODULE: main(lib)
@@ -21,18 +21,18 @@ import java.lang.annotation.RetentionPolicy;
 
 
 fun box(): String {
-    val value1 = MyClass1::class.java.getAnnotation(JavaAnn::class.java).value
-    if (value1.size != 0) return "fail1: ${value1.size}"
+    konst konstue1 = MyClass1::class.java.getAnnotation(JavaAnn::class.java).konstue
+    if (konstue1.size != 0) return "fail1: ${konstue1.size}"
 
-    val value2 = MyClass2::class.java.getAnnotation(JavaAnn::class.java).value
-    if (value2.size != 0) return "fail2: ${value2.size}"
+    konst konstue2 = MyClass2::class.java.getAnnotation(JavaAnn::class.java).konstue
+    if (konstue2.size != 0) return "fail2: ${konstue2.size}"
 
-    val value3 = MyClass3::class.java.getAnnotation(JavaAnn::class.java).value
-    if (value3.size != 1) return "fail3: ${value3.size}"
-    if (value3[0] != "asd") return "fail4: ${value3[0]}"
+    konst konstue3 = MyClass3::class.java.getAnnotation(JavaAnn::class.java).konstue
+    if (konstue3.size != 1) return "fail3: ${konstue3.size}"
+    if (konstue3[0] != "asd") return "fail4: ${konstue3[0]}"
 
-    val value4 = MyClass4::class.java.getAnnotation(JavaAnn::class.java).value
-    if (value4.size != 0) return "fail 5: ${value4.size}"
+    konst konstue4 = MyClass4::class.java.getAnnotation(JavaAnn::class.java).konstue
+    if (konstue4.size != 0) return "fail 5: ${konstue4.size}"
 
     return "OK"
 }

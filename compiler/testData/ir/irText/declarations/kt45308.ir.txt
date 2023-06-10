@@ -19,4 +19,4 @@ FILE fqName:<root> fileName:/c.kt
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String{ a.A }
               BLOCK_BODY
                 RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String{ a.A } declared in <root>.box'
-                  CONST String type=kotlin.String value="OK"
+                  CONST String type=kotlin.String konstue="OK"

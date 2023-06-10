@@ -1,11 +1,11 @@
 // FILE: a.kt
 object A {
-    val O = object : B() {
-        override val message = "expression expected"
+    konst O = object : B() {
+        override konst message = "expression expected"
     }
 }
 
 // FILE: b.kt
 abstract class B {
-    protected abstract val message: String
+    protected abstract konst message: String
 }

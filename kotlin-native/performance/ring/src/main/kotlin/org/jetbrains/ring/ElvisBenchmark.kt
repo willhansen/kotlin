@@ -21,7 +21,7 @@ import org.jetbrains.benchmarksLauncher.Random
 
 open class ElvisBenchmark {
 
-    class Value(var value: Int)
+    class Value(var konstue: Int)
 
     var array : Array<Value?> = arrayOf()
 
@@ -34,11 +34,11 @@ open class ElvisBenchmark {
     //Benchmark
     fun testElvis() {
         for (obj in array) {
-            Blackhole.consume(obj?.value ?: 0)
+            Blackhole.consume(obj?.konstue ?: 0)
         }
     }
 
-    class Composite(val x : Int, val y : Composite?)
+    class Composite(konst x : Int, konst y : Composite?)
 
     fun check(a : Composite?) : Int {
         return a?.y?.x ?: (a?.x ?: 3)

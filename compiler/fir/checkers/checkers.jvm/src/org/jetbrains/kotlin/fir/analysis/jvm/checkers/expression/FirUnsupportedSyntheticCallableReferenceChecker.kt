@@ -24,14 +24,14 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirSyntheticPropertySymbol
  */
 object FirUnsupportedSyntheticCallableReferenceChecker : FirExpressionChecker<FirCallableReferenceAccess>() {
     override fun check(expression: FirCallableReferenceAccess, context: CheckerContext, reporter: DiagnosticReporter) {
-        val parent = context.containingElements.let {
+        konst parent = context.containingElements.let {
             check(it.last() === expression)
             it[it.lastIndex - 1]
         }
         // We allow resolution of top-level callable references to synthetic Java extension properties in the delegate position. See KT-47299
         if (parent is FirProperty && parent.delegate === expression) return
 
-        val resolvedSymbol = expression.toResolvedCallableReference()?.resolvedSymbol
+        konst resolvedSymbol = expression.toResolvedCallableReference()?.resolvedSymbol
         if (!context.session.languageVersionSettings.supportsFeature(LanguageFeature.ReferencesToSyntheticJavaProperties) &&
             resolvedSymbol is FirSyntheticPropertySymbol &&
             // In K1 such properties were not considered synthetic and are called JavaPropertyDescriptor.

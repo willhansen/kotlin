@@ -60,9 +60,9 @@ internal interface FirLinkResolver {
 }
 
 
-private const val PACKAGE_INDEX = "package-index.html"
-private const val MODULE_INDEX = "module-index.html"
-private const val ROOT_INDEX = "root-index.html"
+private const konst PACKAGE_INDEX = "package-index.html"
+private const konst MODULE_INDEX = "module-index.html"
+private const konst ROOT_INDEX = "root-index.html"
 
 
 private fun HEAD.commonHead() {
@@ -75,33 +75,33 @@ private fun HEAD.commonHead() {
 }
 
 
-private class PackageInfo(val fqName: FqName, val moduleInfo: ModuleInfo) {
-    val contents = LinkedHashSet<String>()
-    val packageRoot = fqName.pathSegments().fold(moduleInfo.moduleRoot) { dir, segment -> dir.resolve(segment.asString()) }.also {
+private class PackageInfo(konst fqName: FqName, konst moduleInfo: ModuleInfo) {
+    konst contents = LinkedHashSet<String>()
+    konst packageRoot = fqName.pathSegments().fold(moduleInfo.moduleRoot) { dir, segment -> dir.resolve(segment.asString()) }.also {
         it.mkdirs()
     }
-    val errors = mutableMapOf<String, Int>().withDefault { 0 }
-    val implicits = mutableMapOf<String, Int>().withDefault { 0 }
-    val unresolved = mutableMapOf<String, Int>().withDefault { 0 }
+    konst errors = mutableMapOf<String, Int>().withDefault { 0 }
+    konst implicits = mutableMapOf<String, Int>().withDefault { 0 }
+    konst unresolved = mutableMapOf<String, Int>().withDefault { 0 }
 }
 
-private class ModuleInfo(val name: String, outputRoot: File) {
-    val packages = mutableMapOf<FqName, PackageInfo>()
-    val moduleRoot = outputRoot.resolve(name).also {
+private class ModuleInfo(konst name: String, outputRoot: File) {
+    konst packages = mutableMapOf<FqName, PackageInfo>()
+    konst moduleRoot = outputRoot.resolve(name).also {
         it.mkdirs()
     }
-    val errors: Map<FqName, Int> by lazy {
-        packages.mapValues { (_, packageInfo) -> packageInfo.errors.values.sum() }.withDefault { 0 }
+    konst errors: Map<FqName, Int> by lazy {
+        packages.mapValues { (_, packageInfo) -> packageInfo.errors.konstues.sum() }.withDefault { 0 }
     }
-    val implicits: Map<FqName, Int> by lazy {
-        packages.mapValues { (_, packageInfo) -> packageInfo.implicits.values.sum() }.withDefault { 0 }
+    konst implicits: Map<FqName, Int> by lazy {
+        packages.mapValues { (_, packageInfo) -> packageInfo.implicits.konstues.sum() }.withDefault { 0 }
     }
-    val unresolved: Map<FqName, Int> by lazy {
-        packages.mapValues { (_, packageInfo) -> packageInfo.unresolved.values.sum() }.withDefault { 0 }
+    konst unresolved: Map<FqName, Int> by lazy {
+        packages.mapValues { (_, packageInfo) -> packageInfo.unresolved.konstues.sum() }.withDefault { 0 }
     }
 }
 
-private class SupplementaryGenerator(val outputRoot: File) {
+private class SupplementaryGenerator(konst outputRoot: File) {
     fun generateIndex(moduleInfo: ModuleInfo, writer: Writer) {
         writer.appendHTML().html {
             head {
@@ -120,7 +120,7 @@ private class SupplementaryGenerator(val outputRoot: File) {
                 }
                 h2 { +moduleInfo.name }
                 ul {
-                    for (packageInfo in moduleInfo.packages.values) {
+                    for (packageInfo in moduleInfo.packages.konstues) {
                         li {
                             a(
                                 href = linkToIndex(packageInfo, moduleInfo.moduleRoot),
@@ -200,7 +200,7 @@ private class SupplementaryGenerator(val outputRoot: File) {
     }
 
     fun generateIndex(modules: List<ModuleInfo>, writer: Writer) {
-        val title = "Root dump index"
+        konst title = "Root dump index"
         writer.appendHTML().html {
             head {
                 title { +title }
@@ -215,9 +215,9 @@ private class SupplementaryGenerator(val outputRoot: File) {
                         li {
                             a(href = linkToIndex(module, outputRoot), classes = "container-ref") { +module.name }
                             addErrors(
-                                module.errors.values.sum(),
-                                module.implicits.values.sum(),
-                                module.unresolved.values.sum()
+                                module.errors.konstues.sum(),
+                                module.implicits.konstues.sum(),
+                                module.unresolved.konstues.sum()
                             )
                         }
                     }
@@ -238,13 +238,13 @@ private class SupplementaryGenerator(val outputRoot: File) {
 }
 
 
-private val jsFiles = listOf("logic.js")
-private val cssFiles = listOf("style.css", "colors.white.css", "colors.dark.css")
+private konst jsFiles = listOf("logic.js")
+private konst cssFiles = listOf("style.css", "colors.white.css", "colors.dark.css")
 
 
-class MultiModuleHtmlFirDump(private val outputRoot: File) {
+class MultiModuleHtmlFirDump(private konst outputRoot: File) {
 
-    private val modules = LinkedHashMap<String, ModuleInfo>()
+    private konst modules = LinkedHashMap<String, ModuleInfo>()
 
     private lateinit var currentModule: ModuleInfo
     private var inModule = false
@@ -263,28 +263,28 @@ class MultiModuleHtmlFirDump(private val outputRoot: File) {
         index = Index()
     }
 
-    private val supplementaryGenerator = SupplementaryGenerator(outputRoot)
+    private konst supplementaryGenerator = SupplementaryGenerator(outputRoot)
 
     fun finish() {
         require(!finished)
         finished = true
         outputRoot.resolve(ROOT_INDEX).writer().use {
-            supplementaryGenerator.generateIndex(modules.values.toList(), it)
+            supplementaryGenerator.generateIndex(modules.konstues.toList(), it)
         }
-        for (module in modules.values) {
+        for (module in modules.konstues) {
             module.moduleRoot.resolve(MODULE_INDEX).writer().use {
                 supplementaryGenerator.generateIndex(module, it)
             }
-            for (packageInfo in module.packages.values) {
+            for (packageInfo in module.packages.konstues) {
                 packageInfo.packageRoot.resolve(PACKAGE_INDEX).writer().use {
                     supplementaryGenerator.generateIndex(packageInfo, it)
                 }
             }
         }
-        val supplementaryFiles = jsFiles + cssFiles
+        konst supplementaryFiles = jsFiles + cssFiles
 
         for (file in supplementaryFiles) {
-            val stream = this::class.java.getResourceAsStream(file)
+            konst stream = this::class.java.getResourceAsStream(file)
             outputRoot.resolve(file).outputStream().use { outputStream ->
                 stream.copyTo(outputStream)
             }
@@ -301,14 +301,14 @@ class MultiModuleHtmlFirDump(private val outputRoot: File) {
     }
 
     private fun packageForFile(firFile: FirFile): PackageInfo {
-        val packageFqName = firFile.packageFqName
+        konst packageFqName = firFile.packageFqName
         return currentModule.packages.getOrPut(packageFqName) {
             PackageInfo(packageFqName, currentModule)
         }
     }
 
     fun indexFile(file: FirFile) {
-        val location = locationForFile(file)
+        konst location = locationForFile(file)
         index.files[file] = location
         file.accept(index.visitor(location))
     }
@@ -316,9 +316,9 @@ class MultiModuleHtmlFirDump(private val outputRoot: File) {
     fun generateFile(file: FirFile) {
         require(inModule)
 
-        val dumpOutput = index.files[file] ?: error("No location for ${file.name}")
-        val dumper = HtmlFirDump(LinkResolver(dumpOutput), file.moduleData.session)
-        val builder = StringBuilder()
+        konst dumpOutput = index.files[file] ?: error("No location for ${file.name}")
+        konst dumper = HtmlFirDump(LinkResolver(dumpOutput), file.moduleData.session)
+        konst builder = StringBuilder()
         dumper.generate(file, builder)
 
         dumpOutput.writeText(builder.toString())
@@ -337,33 +337,33 @@ class MultiModuleHtmlFirDump(private val outputRoot: File) {
         }
 
         override fun symbolSignature(symbol: FirBasedSymbol<*>): String {
-            val id = index.symbolIds[symbol] ?: error("Not found $symbol")
+            konst id = index.symbolIds[symbol] ?: error("Not found $symbol")
             return "id$id"
         }
 
-        private val originDir = origin.parentFile
+        private konst originDir = origin.parentFile
 
         override fun nearPackage(fqName: FqName): String? {
-            val packageInfo = currentModule.packages[fqName] ?: return null
+            konst packageInfo = currentModule.packages[fqName] ?: return null
             return packageInfo.packageRoot.resolve(PACKAGE_INDEX).relativeTo(originDir).path
         }
 
         override fun classLocation(classId: ClassId): String? {
-            val location = index.classes[classId] ?: return null
+            konst location = index.classes[classId] ?: return null
             return location.relativeTo(originDir).path + "#$classId"
         }
 
         override fun nearSymbolLocation(symbol: FirBasedSymbol<*>): String? {
-            val location = index.symbols[symbol] ?: return null
+            konst location = index.symbols[symbol] ?: return null
             return location.relativeTo(originDir).path + "#${symbolSignature(symbol)}"
         }
     }
 
     private inner class Index {
-        val files = mutableMapOf<FirFile, File>()
-        val classes = mutableMapOf<ClassId, File>()
-        val symbols = mutableMapOf<FirBasedSymbol<*>, File>()
-        val symbolIds = mutableMapOf<FirBasedSymbol<*>, Int>()
+        konst files = mutableMapOf<FirFile, File>()
+        konst classes = mutableMapOf<ClassId, File>()
+        konst symbols = mutableMapOf<FirBasedSymbol<*>, File>()
+        konst symbolIds = mutableMapOf<FirBasedSymbol<*>, Int>()
         private var symbolCounter = 0
 
         fun visitor(location: File): FirVisitorVoid {
@@ -387,9 +387,9 @@ class MultiModuleHtmlFirDump(private val outputRoot: File) {
                     visitElement(variable)
                 }
 
-                override fun visitValueParameter(valueParameter: FirValueParameter) {
-                    indexDeclaration(valueParameter)
-                    visitElement(valueParameter)
+                override fun visitValueParameter(konstueParameter: FirValueParameter) {
+                    indexDeclaration(konstueParameter)
+                    visitElement(konstueParameter)
                 }
 
                 override fun visitSimpleFunction(simpleFunction: FirSimpleFunction) {
@@ -417,7 +417,7 @@ class MultiModuleHtmlFirDump(private val outputRoot: File) {
     }
 }
 
-class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver, private val session: FirSession) {
+class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver, private konst session: FirSession) {
     var errors: Int = 0
         private set
 
@@ -484,12 +484,12 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
         line {
             keyword("package")
             ws
-            val link = linkResolver.nearPackage(fqName)!!
+            konst link = linkResolver.nearPackage(fqName)!!
             a(href = link, classes = "package-fqn") { +fqName.asString() }
         }
     }
 
-    private val FlowContent.ws get() = +" "
+    private konst FlowContent.ws get() = +" "
 
     private fun FlowContent.fqn(name: FqName) {
         +name.asString()
@@ -501,7 +501,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                 +"Unsupported: ${element::class}"
             }
             span("fold-region") {
-                val content = when (element) {
+                konst content = when (element) {
                     is FirElement -> element.render()
                     else -> element.toString()
                 }
@@ -660,7 +660,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
 
         +" = "
 
-        val type = typeAlias.expandedConeType
+        konst type = typeAlias.expandedConeType
         if (type != null) {
             generate(type as ConeKotlinType)
         } else {
@@ -696,7 +696,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
 
     private fun FlowContent.generate(type: ConeClassLikeType) {
         resolved {
-            when (val symbol = type.lookupTag.toSymbol(session)) {
+            when (konst symbol = type.lookupTag.toSymbol(session)) {
                 is FirTypeAliasSymbol -> {
                     symbolRef(symbol) {
                         simpleName(type.lookupTag.name)
@@ -706,7 +706,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                         +"?"
                     }
                     +" = "
-                    val directlyExpanded = type.directExpansionType(session)
+                    konst directlyExpanded = type.directExpansionType(session)
                     if (directlyExpanded != null) {
                         generate(directlyExpanded.fullyExpandedType(session))
                     } else {
@@ -748,79 +748,79 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
         }
     }
 
-    private fun FlowContent.stringLiteral(value: Any?) {
-        val text = StringEscapeUtils.escapeJava(value.toString())
+    private fun FlowContent.stringLiteral(konstue: Any?) {
+        konst text = StringEscapeUtils.escapeJava(konstue.toString())
         span("string-literal") {
-            when (value) {
+            when (konstue) {
                 is String -> +"\"$text\""
                 is Char -> +"'$text'"
-                else -> error("Unknown string literal: \"$value\" ${value?.let { it::class }}")
+                else -> error("Unknown string literal: \"$konstue\" ${konstue?.let { it::class }}")
             }
         }
     }
 
     private fun FlowContent.generate(expression: FirConstExpression<*>) {
-        val value = expression.value
-        if (value == null && expression.kind != ConstantValueKind.Null) {
+        konst konstue = expression.konstue
+        if (konstue == null && expression.kind != ConstantValueKind.Null) {
             return error {
-                +"null value"
+                +"null konstue"
             }
         }
 
         @OptIn(ExperimentalUnsignedTypes::class)
         when (expression.kind) {
             ConstantValueKind.Null -> keyword("null")
-            ConstantValueKind.Boolean -> keyword(value.toString())
+            ConstantValueKind.Boolean -> keyword(konstue.toString())
             ConstantValueKind.String, ConstantValueKind.Char ->
-                stringLiteral(value)
+                stringLiteral(konstue)
             ConstantValueKind.Byte -> {
-                +value.toString()
+                +konstue.toString()
                 keyword("B")
             }
             ConstantValueKind.Short -> {
-                +value.toString()
+                +konstue.toString()
                 keyword("S")
             }
             ConstantValueKind.Int -> {
-                +value.toString()
+                +konstue.toString()
                 keyword("I")
             }
             ConstantValueKind.Long -> {
-                +value.toString()
+                +konstue.toString()
                 keyword("L")
             }
             ConstantValueKind.UnsignedByte -> {
-                +(value as Long).toUByte().toString()
+                +(konstue as Long).toUByte().toString()
                 keyword("uB")
             }
             ConstantValueKind.UnsignedShort -> {
-                +(value as Long).toUShort().toString()
+                +(konstue as Long).toUShort().toString()
                 keyword("uS")
             }
             ConstantValueKind.UnsignedInt -> {
-                +(value as Long).toUInt().toString()
+                +(konstue as Long).toUInt().toString()
                 keyword("uI")
             }
             ConstantValueKind.UnsignedLong -> {
-                +(value as Long).toULong().toString()
+                +(konstue as Long).toULong().toString()
                 keyword("uL")
             }
             ConstantValueKind.Float -> {
-                +value.toString()
+                +konstue.toString()
                 keyword("F")
             }
             ConstantValueKind.Double -> {
-                +value.toString()
+                +konstue.toString()
                 keyword("D")
             }
             ConstantValueKind.IntegerLiteral -> {
                 +"IL<"
-                +value.toString()
+                +konstue.toString()
                 +">"
             }
             ConstantValueKind.UnsignedIntegerLiteral -> {
                 +"UIL<"
-                +value.toString()
+                +konstue.toString()
                 +">"
             }
             ConstantValueKind.Error -> {
@@ -985,7 +985,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                 keyword("set")
             }
             +"("
-            generateList(accessor.valueParameters) {
+            generateList(accessor.konstueParameters) {
                 generate(it)
             }
             +")"
@@ -998,7 +998,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
         iline {
             declarationStatus(property.status)
             if (property.isVal) {
-                keyword("val ")
+                keyword("konst ")
             } else {
                 keyword("var ")
             }
@@ -1011,13 +1011,13 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
             generate(property.returnTypeRef)
 
 
-            val initializer = property.initializer
+            konst initializer = property.initializer
             if (initializer != null) {
                 +" = "
                 generate(initializer)
             }
 
-            val delegate = property.delegate
+            konst delegate = property.delegate
             if (delegate != null) {
                 keyword(" by ")
                 generate(delegate)
@@ -1077,7 +1077,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
 
     private fun FlowContent.generate(variable: FirVariable) {
         if (variable.isVal) {
-            keyword("val ")
+            keyword("konst ")
         } else {
             keyword("var ")
         }
@@ -1085,7 +1085,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
         symbolAnchor(variable.symbol) { simpleName(variable.name) }
         +": "
         generate(variable.returnTypeRef)
-        val initializer = variable.initializer
+        konst initializer = variable.initializer
         if (initializer != null) {
             +" = "
             generate(initializer)
@@ -1127,7 +1127,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
             +symbol.callableId.toString()
         }
         +"("
-        generateList(fir.valueParameters) {
+        generateList(fir.konstueParameters) {
             generate(it.returnTypeRef)
         }
         +"): "
@@ -1155,7 +1155,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
     private fun FlowContent.describeVerbose(symbol: FirBasedSymbol<*>) {
         when (symbol) {
             is FirClassLikeSymbol<*> ->
-                when (val fir = symbol.fir) {
+                when (konst fir = symbol.fir) {
                     is FirRegularClass -> {
                         declarationStatus(fir.status)
                         classKind(fir.classKind)
@@ -1175,7 +1175,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                     else -> +symbol.describe()
                 }
             is FirCallableSymbol<*> -> {
-                when (val fir = symbol.fir) {
+                when (konst fir = symbol.fir) {
                     is FirSimpleFunction -> {
                         declarationStatus(fir.status)
                         keyword("fun ")
@@ -1194,7 +1194,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                     is FirProperty -> {
                         declarationStatus(fir.status)
                         if (fir.isVal)
-                            keyword("val ")
+                            keyword("konst ")
                         else if (fir.isVar)
                             keyword("var ")
                         describeVerbose(symbol, fir)
@@ -1213,7 +1213,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
     }
 
     private fun FlowContent.symbolRef(symbol: FirBasedSymbol<*>?, body: FlowContent.() -> Unit) {
-        val (link, classes) = when (symbol) {
+        konst (link, classes) = when (symbol) {
             null -> null to setOf()
             is FirClassLikeSymbol<*> -> linkResolver.classLocation(symbol.classId) to setOf("class-fqn")
             else -> linkResolver.nearSymbolLocation(symbol) to setOf("symbol")
@@ -1282,7 +1282,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
             is FirSuperReference -> keyword("super")
             is FirThisReference -> {
                 keyword("this")
-                val label = reference.labelName ?: ""
+                konst label = reference.labelName ?: ""
                 span("label") {
                     +"@"
                     +label
@@ -1324,7 +1324,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
     }
 
     private fun FlowContent.generateReceiver(access: FirQualifiedAccessExpression) {
-        val explicitReceiver = access.explicitReceiver
+        konst explicitReceiver = access.explicitReceiver
         if (explicitReceiver != null) {
             generate(explicitReceiver)
             +"."
@@ -1412,7 +1412,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                     +") "
                     generateBlockIfAny(catch.block)
                 }
-                val finallyBlock = tryExpression.finallyBlock
+                konst finallyBlock = tryExpression.finallyBlock
                 if (finallyBlock != null) {
                     keyword(" finally ")
                     generateBlockIfAny(finallyBlock)
@@ -1518,7 +1518,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
 
     private fun FlowContent.generate(resolvedQualifier: FirResolvedQualifier) {
         resolved {
-            val symbol = resolvedQualifier.symbol
+            konst symbol = resolvedQualifier.symbol
             if (symbol != null) {
                 symbolRef(symbol) {
                     fqn(resolvedQualifier.classId?.relativeClassName ?: FqName("<???>"))
@@ -1613,8 +1613,8 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
 
         +"?."
 
-        val selector = safeCallExpression.selector
-        if (selector is FirQualifiedAccessExpression && selector.explicitReceiver == safeCallExpression.checkedSubjectRef.value) {
+        konst selector = safeCallExpression.selector
+        if (selector is FirQualifiedAccessExpression && selector.explicitReceiver == safeCallExpression.checkedSubjectRef.konstue) {
             return when (selector) {
                 is FirFunctionCall -> generate(selector, skipReceiver = true)
                 else -> generate(selector, skipReceiver = true)
@@ -1629,7 +1629,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
     }
 
     private fun FlowContent.generate(resolvedReifiedParameterReference: FirResolvedReifiedParameterReference) {
-        val typeParameter = resolvedReifiedParameterReference.symbol.fir
+        konst typeParameter = resolvedReifiedParameterReference.symbol.fir
         +typeParameter.name.identifier
     }
 
@@ -1663,20 +1663,20 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
         }
     }
 
-    private fun FlowContent.generate(valueParameter: FirValueParameter) {
-        if (valueParameter.isVararg) {
+    private fun FlowContent.generate(konstueParameter: FirValueParameter) {
+        if (konstueParameter.isVararg) {
             keyword("vararg ")
         }
-        if (valueParameter.isCrossinline) {
+        if (konstueParameter.isCrossinline) {
             keyword("crossinline ")
         }
-        if (valueParameter.isNoinline) {
+        if (konstueParameter.isNoinline) {
             keyword("noinline ")
         }
-        symbolAnchor(valueParameter.symbol) { simpleName(valueParameter.name) }
+        symbolAnchor(konstueParameter.symbol) { simpleName(konstueParameter.name) }
         +": "
-        generate(valueParameter.returnTypeRef)
-        val defaultValue = valueParameter.defaultValue
+        generate(konstueParameter.returnTypeRef)
+        konst defaultValue = konstueParameter.defaultValue
         if (defaultValue != null) {
             +" = "
             generate(defaultValue)
@@ -1696,7 +1696,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
         generateMultiLineExpression(isStatement) {
             iline {
                 keyword("object ")
-                val superTypeRefs = anonymousObject.superTypeRefs
+                konst superTypeRefs = anonymousObject.superTypeRefs
                 if (superTypeRefs.isNotEmpty()) {
                     +": "
                     generateList(superTypeRefs) {
@@ -1736,7 +1736,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                     simpleName(function.name)
                 }
                 +"("
-                generateList(function.valueParameters) {
+                generateList(function.konstueParameters) {
                     generate(it)
                 }
                 +"): "
@@ -1754,14 +1754,14 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
             }
             generateTypeParameters(function)
             +"("
-            generateList(function.valueParameters) {
+            generateList(function.konstueParameters) {
                 generate(it)
             }
             +"): "
             generate(function.returnTypeRef)
 
-            val delegatedConstructorCall = function.delegatedConstructor
-            val body = function.body
+            konst delegatedConstructorCall = function.delegatedConstructor
+            konst body = function.body
             if (delegatedConstructorCall != null || body != null) {
                 +" {"
                 generateMultiLineExpression(isStatement = false) {
@@ -1783,7 +1783,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                 generateReceiver(anonymousFunction.receiverParameter)
 
                 +"("
-                generateList(anonymousFunction.valueParameters) {
+                generateList(anonymousFunction.konstueParameters) {
                     generate(it)
                 }
                 +"): "
@@ -1803,7 +1803,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
 
     private fun FlowContent.generate(import: FirImport) {
         fun simpleRender() {
-            val fqName = import.importedFqName
+            konst fqName = import.importedFqName
             if (fqName != null) {
                 fqn(fqName)
                 if (import.isAllUnder)
@@ -1819,9 +1819,9 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
             ws
             when (import) {
                 is FirResolvedImport -> {
-                    val classId = import.resolvedParentClassId
+                    konst classId = import.resolvedParentClassId
                     if (classId == null) {
-                        val importedFqName = import.importedFqName
+                        konst importedFqName = import.importedFqName
                         if (importedFqName != null) {
                             fqn(importedFqName)
                         } else {
@@ -1840,7 +1840,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                     }
                 }
             }
-            val alias = import.aliasName
+            konst alias = import.aliasName
             if (alias != null) {
                 ws
                 keyword("as")
@@ -1867,7 +1867,7 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
         body {
             h4 {
                 +"Source: "
-                val vFile = file.psi?.containingFile?.virtualFile
+                konst vFile = file.psi?.containingFile?.virtualFile
                 if (vFile != null) {
                     a(href = vFile.url, classes = "container-ref") {
                         +vFile.path

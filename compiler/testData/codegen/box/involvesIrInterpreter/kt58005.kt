@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ComponentScans {
-    ComponentScan[] value();
+    ComponentScan[] konstue();
 }
 
 // FILE: ComponentScan.java
@@ -30,7 +30,7 @@ public @interface ComponentScan {
 
 // FILE: main.kt
 @ComponentScans(
-    value = [
+    konstue = [
         ComponentScan(
             a = ["String" <!EVALUATED("StringA")!>+ "A"<!>],
             c = ["String" <!EVALUATED("StringC")!>+ "C"<!>],
@@ -41,17 +41,17 @@ public @interface ComponentScan {
 class JavaTest
 
 annotation class KtComponentScans(
-    val value: Array<KtComponentScan> = [],
+    konst konstue: Array<KtComponentScan> = [],
 )
 
 annotation class KtComponentScan(
-    val a: Array<String> = [],
-    val b: Array<String> = [],
-    val c: Array<String> = [],
+    konst a: Array<String> = [],
+    konst b: Array<String> = [],
+    konst c: Array<String> = [],
 )
 
 @ComponentScans(
-    value = [
+    konstue = [
         ComponentScan(
             a = ["String" <!EVALUATED("StringA")!>+ "A"<!>],
             c = ["String" <!EVALUATED("StringC")!>+ "C"<!>],

@@ -32,10 +32,10 @@ class DataClassDeclarationChecker : DeclarationChecker {
             if (descriptor.unsubstitutedPrimaryConstructor == null && descriptor.constructors.isNotEmpty()) {
                 declaration.nameIdentifier?.let { context.trace.report(Errors.PRIMARY_CONSTRUCTOR_REQUIRED_FOR_DATA_CLASS.on(it)) }
             }
-            val primaryConstructor = declaration.primaryConstructor
-            val parameters = primaryConstructor?.valueParameters ?: emptyList()
+            konst primaryConstructor = declaration.primaryConstructor
+            konst parameters = primaryConstructor?.konstueParameters ?: emptyList()
             if (parameters.isEmpty()) {
-                (primaryConstructor?.valueParameterList ?: declaration.nameIdentifier)?.let {
+                (primaryConstructor?.konstueParameterList ?: declaration.nameIdentifier)?.let {
                     context.trace.report(Errors.DATA_CLASS_WITHOUT_PARAMETERS.on(it))
                 }
             }

@@ -3,10 +3,10 @@
 
 package test
 
-inline class IC(val value: Any)
+inline class IC(konst konstue: Any)
 
 inline fun <reified T> f(a: IC): () -> T = {
-    a.value as T
+    a.konstue as T
 }
 
 // FILE: 2.kt

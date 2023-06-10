@@ -12,9 +12,9 @@ var global: Int = 0
         println("Get global = $field")
         return field
     }
-    set(value) {
-        println("Set global = $value")
-        field = value
+    set(konstue) {
+        println("Set global = $konstue")
+        field = konstue
     }
 
 class TestClass {
@@ -23,16 +23,16 @@ class TestClass {
             println("Get member = $field")
             return field
         }
-        set(value) {
-            println("Set member = $value")
-            field = value
+        set(konstue) {
+            println("Set member = $konstue")
+            field = konstue
         }
 }
 
 @Test fun runTest1() {
     global = 1
 
-    val test = TestClass()
+    konst test = TestClass()
     test.member = 42
 
     global = test.member
@@ -40,13 +40,13 @@ class TestClass {
 }
 
 @ThreadLocal
-val xInt = 42
+konst xInt = 42
 
 @ThreadLocal
-val xString = "42"
+konst xString = "42"
 
 @ThreadLocal
-val xAny = Any()
+konst xAny = Any()
 
 @Test fun runTest2() {
     assertEquals(42, xInt)

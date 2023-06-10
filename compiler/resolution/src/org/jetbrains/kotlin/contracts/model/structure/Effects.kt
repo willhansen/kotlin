@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.contracts.model.ESEffect
 import org.jetbrains.kotlin.contracts.model.ESValue
 import org.jetbrains.kotlin.contracts.model.SimpleEffect
 
-data class ESCalls(val callable: ESValue, val kind: EventOccurrencesRange) : SimpleEffect() {
+data class ESCalls(konst callable: ESValue, konst kind: EventOccurrencesRange) : SimpleEffect() {
     override fun isImplies(other: ESEffect): Boolean? {
         if (other !is ESCalls) return null
 
@@ -32,16 +32,16 @@ data class ESCalls(val callable: ESValue, val kind: EventOccurrencesRange) : Sim
 
 }
 
-data class ESReturns(val value: ESValue) : SimpleEffect() {
+data class ESReturns(konst konstue: ESValue) : SimpleEffect() {
     override fun isImplies(other: ESEffect): Boolean? {
         if (other !is ESReturns) return null
 
-        if (this.value !is ESConstant || other.value !is ESConstant) return this.value == other.value
+        if (this.konstue !is ESConstant || other.konstue !is ESConstant) return this.konstue == other.konstue
 
         // ESReturns(x) implies ESReturns(?) for any 'x'
-        if (other.value.isWildcard) return true
+        if (other.konstue.isWildcard) return true
 
-        return value == other.value
+        return konstue == other.konstue
     }
 }
 

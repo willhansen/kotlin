@@ -110,7 +110,7 @@ digraph whenSubjectExpression_kt {
                 color=blue
                 37 [label="Enter when"];
                 38 [label="Access variable R|<local>/x|"];
-                39 [label="Variable declaration: lval y: R|kotlin/Any|"];
+                39 [label="Variable declaration: lkonst y: R|kotlin/Any|"];
                 subgraph cluster_12 {
                     color=blue
                     40 [label="Enter when branch condition "];

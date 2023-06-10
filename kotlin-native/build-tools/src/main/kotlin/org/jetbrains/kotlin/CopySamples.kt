@@ -35,9 +35,9 @@ open class CopySamples : Copy() {
         from(samplesDir) {
             include("**/gradle.properties")
 
-            val kotlinVersion = project.property("bootstrapKotlinVersion") as? String
+            konst kotlinVersion = project.property("bootstrapKotlinVersion") as? String
                 ?: throw IllegalArgumentException("Property bootstrapKotlinVersion should be specified in the root project")
-            val kotlinCompilerRepo = project.property("bootstrapKotlinRepo") as? String
+            konst kotlinCompilerRepo = project.property("bootstrapKotlinRepo") as? String
                 ?: throw IllegalArgumentException("Property bootstrapKotlinRepo should be specified in the root project")
 
             filter { line ->
@@ -57,7 +57,7 @@ open class CopySamples : Copy() {
         return this
     }
 
-    private val replacements = listOf(
+    private konst replacements = listOf(
         "https://plugins.gradle.org/m2" to "https://cache-redirector.jetbrains.com/plugins.gradle.org/m2",
         "mavenCentral()" to "maven { setUrl(\"https://cache-redirector.jetbrains.com/maven-central\") }",
     )

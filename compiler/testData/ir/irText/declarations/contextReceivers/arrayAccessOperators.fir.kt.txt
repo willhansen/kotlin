@@ -25,7 +25,7 @@ data class MyContainer {
     when {
       other !is MyContainer -> return false
     }
-    val tmp0_other_with_cast: MyContainer = other as MyContainer
+    konst tmp0_other_with_cast: MyContainer = other as MyContainer
     when {
       EQEQ(arg0 = <this>.#s, arg1 = tmp0_other_with_cast.#s).not() -> return false
     }
@@ -52,22 +52,22 @@ operator fun MyContainer.get($context_receiver_0: Int, index: Int): String? {
   }
 }
 
-operator fun MyContainer.set($context_receiver_0: Int, index: Int, value: String) {
+operator fun MyContainer.set($context_receiver_0: Int, index: Int, konstue: String) {
   when {
     when {
       EQEQ(arg0 = index, arg1 = 0).not() -> true
       else -> EQEQ(arg0 = $context_receiver_0, arg1 = 42).not()
     } -> return Unit
   }
-  <this>.<set-s>(<set-?> = value)
+  <this>.<set-s>(<set-?> = konstue)
 }
 
 fun box(): String {
   return with<Int, String>(receiver = 42, block = local fun Int.<anonymous>(): String {
-    val myContainer: MyContainer = MyContainer(s = "fail")
-    myContainer.set($context_receiver_0 = $this$with, index = 0, value = "OK")
+    konst myContainer: MyContainer = MyContainer(s = "fail")
+    myContainer.set($context_receiver_0 = $this$with, index = 0, konstue = "OK")
     return { // BLOCK
-      val <elvis>: String? = myContainer.get($context_receiver_0 = $this$with, index = 0)
+      konst <elvis>: String? = myContainer.get($context_receiver_0 = $this$with, index = 0)
       when {
         EQEQ(arg0 = <elvis>, arg1 = null) -> "fail"
         else -> <elvis>

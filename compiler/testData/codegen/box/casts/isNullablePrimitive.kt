@@ -1,13 +1,13 @@
 fun box(): String {
-    val n: Any? = null
+    konst n: Any? = null
 
-    val intV: Any? = 23
-    val floatV: Any? = 23.4F
-    val doubleV: Any? = 23.45
-    val longV: Any? = 234L
-    val stringV: Any? = "foo"
-    val booleanV: Any? = true
-    val functionV: Any? = { x: Int -> x + 1 }
+    konst intV: Any? = 23
+    konst floatV: Any? = 23.4F
+    konst doubleV: Any? = 23.45
+    konst longV: Any? = 234L
+    konst stringV: Any? = "foo"
+    konst booleanV: Any? = true
+    konst functionV: Any? = { x: Int -> x + 1 }
 
     if (n !is Int?) return "fail: null !is Int?"
     if (n !is Float?) return "fail: null !is Float?"

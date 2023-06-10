@@ -8,7 +8,7 @@ object ForceOutOfOrder {
 
 object C {
     inline fun inlineFun() = {
-        val O by "K"
+        konst O by "K"
         O
     }.let { it() }
 }

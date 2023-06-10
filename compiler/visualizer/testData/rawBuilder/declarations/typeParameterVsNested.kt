@@ -8,19 +8,19 @@ abstract class My<T : Some> {
 
 //               T
 //               │
-    abstract val x: T
+    abstract konst x: T
 
     abstract fun foo(arg: T)
 
 //               [ERROR : T]
 //               │  [ERROR : T]
 //               │  │
-    abstract val y: My.T
+    abstract konst y: My.T
 
 //               [ERROR : T]
 //               │  [ERROR : T]
 //               │  │
-    abstract val z: test.My.T
+    abstract konst z: test.My.T
 
 //               [ERROR : T]
 //               │

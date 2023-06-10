@@ -4,18 +4,18 @@
 // WITH_STDLIB
 
 class A : MutableMap<String, String> {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = throw UnsupportedOperationException()
-    override val keys: MutableSet<String>
+    override konst keys: MutableSet<String>
         get() = throw UnsupportedOperationException()
-    override val values: MutableCollection<String>
+    override konst konstues: MutableCollection<String>
         get() = throw UnsupportedOperationException()
 
     override fun clear() {
         throw UnsupportedOperationException()
     }
 
-    override fun put(key: String, value: String): String? {
+    override fun put(key: String, konstue: String): String? {
         throw UnsupportedOperationException()
     }
 
@@ -27,14 +27,14 @@ class A : MutableMap<String, String> {
         throw UnsupportedOperationException()
     }
 
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun containsKey(key: String): Boolean {
         throw UnsupportedOperationException()
     }
 
-    override fun containsValue(value: String): Boolean {
+    override fun containsValue(konstue: String): Boolean {
         throw UnsupportedOperationException()
     }
 
@@ -53,11 +53,11 @@ class A : MutableMap<String, String> {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.getOrDefault("abc", "xyz") != "cde") return "fail 1"
     if (a.getOrDefault("56", "123") != "123") return "fail 2"
 
-    val mm = a as MutableMap<Any?, Any?>
+    konst mm = a as MutableMap<Any?, Any?>
     if (mm.getOrDefault("abc", "xyz") != "cde") return "fail 3"
     if (mm.getOrDefault("56", "123") != "123") return "fail 4"
     if (mm.getOrDefault(1, "456") != "456") return "fail 5"

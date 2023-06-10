@@ -4,9 +4,9 @@
 // expected: rv: <nofield>
 
 // KT-30616
-val foo = "hello"
+konst foo = "hello"
 
-enum class Bar(val s: String = foo) {
+enum class Bar(konst s: String = foo) {
 
     Eleven("0")
 }

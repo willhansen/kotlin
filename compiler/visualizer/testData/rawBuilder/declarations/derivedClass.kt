@@ -1,4 +1,4 @@
-open class Base<T>(val x: T)
+open class Base<T>(konst x: T)
 
 //                             constructor Base<T>(T)
 //                             │       Derived.<init>.x: T

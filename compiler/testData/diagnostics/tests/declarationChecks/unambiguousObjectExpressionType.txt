@@ -1,10 +1,10 @@
 package
 
-internal val packageInternalProperty: MyClass
-private val packagePrivateProperty: packagePrivateProperty.`<no name provided>`
-protected val packageProtectedProperty: MyClass
-public val packagePublic2Property: MyClass
-public val packagePublicProperty: MyClass
+internal konst packageInternalProperty: MyClass
+private konst packagePrivateProperty: packagePrivateProperty.`<no name provided>`
+protected konst packageProtectedProperty: MyClass
+public konst packagePublic2Property: MyClass
+public konst packagePublicProperty: MyClass
 public fun fooPackage(): kotlin.Unit
 internal fun internalFunction(): MyClass
 private fun privateFunction(): privateFunction.`<no name provided>`
@@ -16,12 +16,12 @@ public fun testProperties(): kotlin.Unit
 
 public final class Foo {
     public constructor Foo()
-    internal final val internalProperty: MyClass
-    private final val privateProperty: Foo.privateProperty.`<no name provided>`
-    protected final val protected2Property: MyClass
-    protected final val protectedProperty: MyClass
-    public final val public2Property: MyClass
-    public final val publicProperty: MyClass
+    internal final konst internalProperty: MyClass
+    private final konst privateProperty: Foo.privateProperty.`<no name provided>`
+    protected final konst protected2Property: MyClass
+    protected final konst protectedProperty: MyClass
+    public final konst public2Property: MyClass
+    public final konst publicProperty: MyClass
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -37,12 +37,12 @@ public final class Foo {
 
     public final class FooInner {
         public constructor FooInner()
-        internal final val internalProperty: MyClass
-        private final val privateProperty: Foo.FooInner.privateProperty.`<no name provided>`
-        protected final val protected2Property: MyClass
-        protected final val protectedProperty: MyClass
-        public final val public2Property: MyClass
-        public final val publicProperty: MyClass
+        internal final konst internalProperty: MyClass
+        private final konst privateProperty: Foo.FooInner.privateProperty.`<no name provided>`
+        protected final konst protected2Property: MyClass
+        protected final konst protectedProperty: MyClass
+        public final konst public2Property: MyClass
+        public final konst publicProperty: MyClass
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         internal final fun internalFunction(): MyClass

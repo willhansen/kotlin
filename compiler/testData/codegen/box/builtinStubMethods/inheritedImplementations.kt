@@ -7,7 +7,7 @@ open class SetStringImpl {
 }
 
 class S : Set<String>, SetStringImpl() {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(o: String): Boolean = false
     override fun iterator(): Iterator<String> = null!!
@@ -15,7 +15,7 @@ class S : Set<String>, SetStringImpl() {
 }
 
 fun box(): String {
-    val s = S() as java.util.Set<String>
+    konst s = S() as java.util.Set<String>
     s.add("")
     s.remove("")
     s.clear()

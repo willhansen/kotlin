@@ -9,7 +9,7 @@ KtErrorCallInfo:
           receiverType = null
           returnType = Sub
           symbol = <constructor>(i: kotlin.Int, j: kotlin.Int): Sub
-          valueParameters = [
+          konstueParameters = [
             KtVariableLikeSignature:
               name = i
               receiverType = null
@@ -48,7 +48,7 @@ KtErrorCallInfo:
           receiverType = null
           returnType = Sub
           symbol = <constructor>(p: kotlin.Int): Sub
-          valueParameters = [
+          konstueParameters = [
             KtVariableLikeSignature:
               name = p
               receiverType = null

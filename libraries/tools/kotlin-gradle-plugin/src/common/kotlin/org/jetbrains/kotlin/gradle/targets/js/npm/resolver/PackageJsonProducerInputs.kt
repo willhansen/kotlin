@@ -11,17 +11,17 @@ import java.io.File
 
 class PackageJsonProducerInputs(
     @get:Input
-    val internalDependencies: Collection<String>,
+    konst internalDependencies: Collection<String>,
 
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:InputFiles
-    val externalGradleDependencies: Collection<File>,
+    konst externalGradleDependencies: Collection<File>,
 
     @get:Input
-    val externalDependencies: Collection<String>,
+    konst externalDependencies: Collection<String>,
 
     @get:Input
-    val fileCollectionDependencies: Collection<File>
+    konst fileCollectionDependencies: Collection<File>
 )

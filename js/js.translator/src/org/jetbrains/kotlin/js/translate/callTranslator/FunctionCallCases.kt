@@ -39,10 +39,10 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 import java.util.*
 
 fun CallArgumentTranslator.ArgumentsInfo.argsWithReceiver(receiver: JsExpression): List<JsExpression> {
-    val allArguments = ArrayList<JsExpression>(1 + reifiedArguments.size + valueArguments.size)
+    konst allArguments = ArrayList<JsExpression>(1 + reifiedArguments.size + konstueArguments.size)
     allArguments.addAll(reifiedArguments)
     allArguments.add(receiver)
-    allArguments.addAll(valueArguments)
+    allArguments.addAll(konstueArguments)
     return allArguments
 }
 
@@ -53,8 +53,8 @@ object DefaultFunctionCallCase : FunctionCallCase() {
             argumentsInfo: CallArgumentTranslator.ArgumentsInfo,
             functionName: JsName
     ): JsExpression {
-        val cachedReceiver = argumentsInfo.cachedReceiver!!
-        val functionCallRef = Namer.getFunctionApplyRef(JsNameRef(functionName, cachedReceiver.assignmentExpression()))
+        konst cachedReceiver = argumentsInfo.cachedReceiver!!
+        konst functionCallRef = Namer.getFunctionApplyRef(JsNameRef(functionName, cachedReceiver.assignmentExpression()))
         return JsInvocation(functionCallRef, argumentsInfo.translateArguments)
     }
 
@@ -74,9 +74,9 @@ object DefaultFunctionCallCase : FunctionCallCase() {
                                         callableDescriptor: CallableDescriptor,
                                         isNative: Boolean,
                                         hasSpreadOperator: Boolean): JsExpression {
-        val functionRef = ReferenceTranslator.translateAsValueReference(callableDescriptor, context)
+        konst functionRef = ReferenceTranslator.translateAsValueReference(callableDescriptor, context)
         if (isNative && hasSpreadOperator) {
-            val functionCallRef = Namer.getFunctionApplyRef(functionRef)
+            konst functionCallRef = Namer.getFunctionApplyRef(functionRef)
             return JsInvocation(functionCallRef, argumentsInfo.translateArguments)
         }
 
@@ -99,14 +99,14 @@ object DefaultFunctionCallCase : FunctionCallCase() {
             return JsInvocation(JsNameRef(functionName, extensionReceiver), argumentsInfo.translateArguments)
         }
 
-        val functionRef = ReferenceTranslator.translateAsValueReference(callableDescriptor, context)
+        konst functionRef = ReferenceTranslator.translateAsValueReference(callableDescriptor, context)
 
         return JsInvocation(functionRef, argumentsInfo.argsWithReceiver(extensionReceiver!!))
     }
 
     override fun FunctionCallInfo.bothReceivers(): JsExpression {
         // TODO: think about crazy case: spreadOperator + native
-        val functionRef = JsAstUtils.pureFqn(functionName, dispatchReceiver!!)
+        konst functionRef = JsAstUtils.pureFqn(functionName, dispatchReceiver!!)
         return JsInvocation(functionRef, argumentsInfo.argsWithReceiver(extensionReceiver!!))
     }
 }
@@ -121,7 +121,7 @@ object DelegateFunctionIntrinsic : DelegateIntrinsic<FunctionCallInfo> {
     }
 }
 
-abstract class AnnotatedAsNativeXCallCase(val annotation: PredefinedAnnotation) : FunctionCallCase() {
+abstract class AnnotatedAsNativeXCallCase(konst annotation: PredefinedAnnotation) : FunctionCallCase() {
     abstract fun translateCall(receiver: JsExpression, argumentsInfo: CallArgumentTranslator.ArgumentsInfo): JsExpression
 
     fun canApply(callInfo: FunctionCallInfo): Boolean = AnnotationsUtils.hasAnnotation(callInfo.callableDescriptor, annotation)
@@ -142,21 +142,21 @@ object NativeGetterCallCase : AnnotatedAsNativeXCallCase(PredefinedAnnotation.NA
 
 object NativeSetterCallCase : AnnotatedAsNativeXCallCase(PredefinedAnnotation.NATIVE_SETTER) {
     override fun translateCall(receiver: JsExpression, argumentsInfo: CallArgumentTranslator.ArgumentsInfo): JsExpression {
-        val args = argumentsInfo.translateArguments
+        konst args = argumentsInfo.translateArguments
         return JsAstUtils.assignment(JsArrayAccess(receiver, args[0]), args[1])
     }
 }
 
 object InvokeIntrinsic : FunctionCallCase() {
     fun canApply(callInfo: FunctionCallInfo): Boolean {
-        val callableDescriptor = callInfo.callableDescriptor
+        konst callableDescriptor = callInfo.callableDescriptor
         if (callableDescriptor is FunctionInvokeDescriptor) return true
 
         // Otherwise, it can be extension lambda
         if (callableDescriptor.name != OperatorNameConventions.INVOKE || callableDescriptor.extensionReceiverParameter == null)
             return false
-        val parameterCount = callableDescriptor.valueParameters.size + 1
-        val funDeclaration = callableDescriptor.containingDeclaration
+        konst parameterCount = callableDescriptor.konstueParameters.size + 1
+        konst funDeclaration = callableDescriptor.containingDeclaration
 
         return funDeclaration == callableDescriptor.builtIns.getFunction(parameterCount)
     }
@@ -199,23 +199,23 @@ object ConstructorCallCase : FunctionCallCase() {
     ): JsExpression {
 
         (callableDescriptor as? SamConstructorDescriptor)?.baseDescriptorForSynthetic?.let { funInterface ->
-            val functionRef = ReferenceTranslator.translateAsTypeReference(funInterface, context)
+            konst functionRef = ReferenceTranslator.translateAsTypeReference(funInterface, context)
             return JsNew(functionRef, argumentsInfo.getArguments())
         }
 
-        val functionRef = ReferenceTranslator.translateAsValueReference(callableDescriptor, context)
+        konst functionRef = ReferenceTranslator.translateAsValueReference(callableDescriptor, context)
 
-        val invocationArguments = mutableListOf<JsExpression>()
+        konst invocationArguments = mutableListOf<JsExpression>()
 
-        val constructorDescriptor = callableDescriptor as ClassConstructorDescriptor
+        konst constructorDescriptor = callableDescriptor as ClassConstructorDescriptor
 
         if (!context.shouldBeDeferred(constructorDescriptor)) {
-            val closure = context.getClassOrConstructorClosure(constructorDescriptor)
+            konst closure = context.getClassOrConstructorClosure(constructorDescriptor)
             invocationArguments += closure?.map { context.getArgumentForClosureConstructor(it) }.orEmpty()
         }
 
         invocationArguments += argumentsInfo.getArguments()
-        val result = if (constructorDescriptor.isPrimary || AnnotationsUtils.isNativeObject(constructorDescriptor)) {
+        konst result = if (constructorDescriptor.isPrimary || AnnotationsUtils.isNativeObject(constructorDescriptor)) {
             JsNew(functionRef, invocationArguments)
         }
         else {
@@ -237,20 +237,20 @@ object SuperCallCase : FunctionCallCase() {
 
     override fun FunctionCallInfo.dispatchReceiver(): JsExpression {
         // TODO: spread operator
-        val prototypeClass = JsAstUtils.prototypeOf(calleeOwner)
-        val arguments = argumentsInfo.translateArguments.toMutableList()
+        konst prototypeClass = JsAstUtils.prototypeOf(calleeOwner)
+        konst arguments = argumentsInfo.translateArguments.toMutableList()
 
-        val descriptor = callableDescriptor.original
-        val shouldCallDefault = descriptor is FunctionDescriptor && TranslationUtils.isOverridableFunctionWithDefaultParameters(descriptor)
+        konst descriptor = callableDescriptor.original
+        konst shouldCallDefault = descriptor is FunctionDescriptor && TranslationUtils.isOverridableFunctionWithDefaultParameters(descriptor)
 
-        val functionRef = if (shouldCallDefault) {
-            val defaultArgumentCount = descriptor.valueParameters.size - argumentsInfo.valueArguments.size
+        konst functionRef = if (shouldCallDefault) {
+            konst defaultArgumentCount = descriptor.konstueParameters.size - argumentsInfo.konstueArguments.size
             repeat(defaultArgumentCount) {
                 arguments += Namer.getUndefinedExpression()
             }
-            val callbackName = context.getScopeForDescriptor(descriptor.containingDeclaration)
+            konst callbackName = context.getScopeForDescriptor(descriptor.containingDeclaration)
                     .declareName(functionName.ident + Namer.DEFAULT_PARAMETER_IMPLEMENTOR_SUFFIX)
-            val callbackRef = JsAstUtils.invokeBind(dispatchReceiver!!, JsNameRef(callbackName, prototypeClass))
+            konst callbackRef = JsAstUtils.invokeBind(dispatchReceiver!!, JsNameRef(callbackName, prototypeClass))
             arguments += callbackRef
 
             JsAstUtils.pureFqn(functionName, dispatchReceiver)
@@ -268,15 +268,15 @@ object DynamicInvokeAndBracketAccessCallCase : FunctionCallCase() {
     fun canApply(callInfo: FunctionCallInfo): Boolean {
         if (!callInfo.callableDescriptor.isDynamic())
             return false
-        val callType = callInfo.resolvedCall.call.callType
+        konst callType = callInfo.resolvedCall.call.callType
         return callType == Call.CallType.ARRAY_GET_METHOD
                 || callType == Call.CallType.ARRAY_SET_METHOD
                 || callType == Call.CallType.INVOKE
     }
 
     override fun FunctionCallInfo.dispatchReceiver(): JsExpression {
-        val arguments = argumentsInfo.translateArguments
-        val callType = resolvedCall.call.callType
+        konst arguments = argumentsInfo.translateArguments
+        konst callType = resolvedCall.call.callType
         return when (callType) {
             Call.CallType.INVOKE ->
                 JsInvocation(dispatchReceiver!!, arguments)
@@ -300,16 +300,16 @@ object DynamicOperatorCallCase : FunctionCallCase() {
             }
 
     override fun FunctionCallInfo.dispatchReceiver(): JsExpression {
-        val callElement = resolvedCall.call.callElement as KtOperationExpression
-        val operationToken = PsiUtils.getOperationToken(callElement)
+        konst callElement = resolvedCall.call.callElement as KtOperationExpression
+        konst operationToken = PsiUtils.getOperationToken(callElement)
 
-        val arguments = argumentsInfo.translateArguments
+        konst arguments = argumentsInfo.translateArguments
 
         return when (callElement) {
             is KtBinaryExpression -> {
                 // `!in` translated as `in` and will be wrapped by negation operation in BinaryOperationTranslator#translateAsOverloadedBinaryOperation by mayBeWrapWithNegation
-                val operationTokenToFind = if (operationToken == KtTokens.NOT_IN) KtTokens.IN_KEYWORD else operationToken
-                val binaryOperator = OperatorTable.getBinaryOperator(operationTokenToFind)
+                konst operationTokenToFind = if (operationToken == KtTokens.NOT_IN) KtTokens.IN_KEYWORD else operationToken
+                konst binaryOperator = OperatorTable.getBinaryOperator(operationTokenToFind)
 
                 if (operationTokenToFind == KtTokens.IN_KEYWORD)
                     JsBinaryOperation(binaryOperator, arguments[0], dispatchReceiver)
@@ -330,7 +330,7 @@ object DynamicOperatorCallCase : FunctionCallCase() {
 }
 
 fun FunctionCallInfo.translateFunctionCall(): JsExpression {
-    val intrinsic = DelegateFunctionIntrinsic.intrinsic(this, context)
+    konst intrinsic = DelegateFunctionIntrinsic.intrinsic(this, context)
 
     return when {
         intrinsic != null ->

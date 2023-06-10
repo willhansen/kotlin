@@ -9,10 +9,10 @@ open class Case1() {
         operator fun invoke() {}
     }
 
-    val propVal: Int = 1
-    val propVar: Int = 1
+    konst propVal: Int = 1
+    konst propVar: Int = 1
     fun function() {}
-    val markerObj = object : Marker {}
+    konst markerObj = object : Marker {}
 
     fun innerFun() {
         foo()

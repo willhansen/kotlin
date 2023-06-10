@@ -18,14 +18,14 @@ import org.jetbrains.kotlin.name.ClassId
 object PlatformClassMappedToKotlinImportsChecker : FirFileChecker() {
     override fun check(declaration: FirFile, context: CheckerContext, reporter: DiagnosticReporter) {
         declaration.imports.forEach { import ->
-            val importedFqName = import.importedFqName ?: return
+            konst importedFqName = import.importedFqName ?: return
             if (importedFqName.isRoot || importedFqName.shortName().asString().isEmpty()) return
-            val classId = (import as? FirResolvedImport)?.resolvedParentClassId ?: ClassId.topLevel(importedFqName)
+            konst classId = (import as? FirResolvedImport)?.resolvedParentClassId ?: ClassId.topLevel(importedFqName)
             if (classId.asSingleFqName() != importedFqName) {
                 return
             }
 
-            val kotlinClass = context.session.platformClassMapper.getCorrespondingKotlinClass(classId)
+            konst kotlinClass = context.session.platformClassMapper.getCorrespondingKotlinClass(classId)
             if (kotlinClass != null) {
                 reporter.reportOn(import.source, FirErrors.PLATFORM_CLASS_MAPPED_TO_KOTLIN, importedFqName, context)
             }

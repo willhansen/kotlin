@@ -47,18 +47,18 @@ import org.jetbrains.org.objectweb.asm.tree.analysis.Value
  */
 @Suppress("DuplicatedCode")
 internal open class FastStackAnalyzer<V : Value>(
-    private val owner: String,
-    val method: MethodNode,
-    protected val interpreter: Interpreter<V>
+    private konst owner: String,
+    konst method: MethodNode,
+    protected konst interpreter: Interpreter<V>
 ) {
-    protected val insnsArray: Array<AbstractInsnNode> = method.instructions.toArray()
-    private val nInsns = insnsArray.size
+    protected konst insnsArray: Array<AbstractInsnNode> = method.instructions.toArray()
+    private konst nInsns = insnsArray.size
 
-    private val frames: Array<Frame<V>?> = arrayOfNulls(nInsns)
+    private konst frames: Array<Frame<V>?> = arrayOfNulls(nInsns)
 
-    private val handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
-    private val queued = BooleanArray(nInsns)
-    private val queue = IntArray(nInsns)
+    private konst handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
+    private konst queued = BooleanArray(nInsns)
+    private konst queue = IntArray(nInsns)
     private var top = 0
 
     protected open fun newFrame(nLocals: Int, nStack: Int): Frame<V> = Frame(nLocals, nStack)
@@ -77,18 +77,18 @@ internal open class FastStackAnalyzer<V : Value>(
 
         computeExceptionEdges()
 
-        val current = newFrame(method.maxLocals, method.maxStack)
-        val handler = newFrame(method.maxLocals, method.maxStack)
+        konst current = newFrame(method.maxLocals, method.maxStack)
+        konst handler = newFrame(method.maxLocals, method.maxStack)
         initControlFlowAnalysis(current, method, owner)
 
         while (top > 0) {
-            val insn = queue[--top]
-            val f = frames[insn]!!
+            konst insn = queue[--top]
+            konst f = frames[insn]!!
             queued[insn] = false
 
-            val insnNode = method.instructions[insn]
-            val insnOpcode = insnNode.opcode
-            val insnType = insnNode.type
+            konst insnNode = method.instructions[insn]
+            konst insnOpcode = insnNode.opcode
+            konst insnType = insnNode.type
 
             try {
                 if (insnType == AbstractInsnNode.LABEL || insnType == AbstractInsnNode.LINE || insnType == AbstractInsnNode.FRAME) {
@@ -115,8 +115,8 @@ internal open class FastStackAnalyzer<V : Value>(
                 }
 
                 handlers[insn]?.forEach { tcb ->
-                    val exnType = Type.getObjectType(tcb.type ?: "java/lang/Throwable")
-                    val jump = tcb.handler.indexOf()
+                    konst exnType = Type.getObjectType(tcb.type ?: "java/lang/Throwable")
+                    konst jump = tcb.handler.indexOf()
                     if (visitControlFlowExceptionEdge(insn, tcb.handler.indexOf())) {
                         handler.init(f)
                         handler.clearStack()
@@ -177,7 +177,7 @@ internal open class FastStackAnalyzer<V : Value>(
         if (insnOpcode != Opcodes.GOTO) {
             processControlFlowEdge(current, insn, insn + 1)
         }
-        val jump = insnNode.label.indexOf()
+        konst jump = insnNode.label.indexOf()
         processControlFlowEdge(current, insn, jump)
     }
 
@@ -193,10 +193,10 @@ internal open class FastStackAnalyzer<V : Value>(
 
     private fun initControlFlowAnalysis(current: Frame<V>, m: MethodNode, owner: String) {
         current.setReturn(interpreter.newValue(Type.getReturnType(m.desc)))
-        val args = Type.getArgumentTypes(m.desc)
+        konst args = Type.getArgumentTypes(m.desc)
         var local = 0
         if ((m.access and Opcodes.ACC_STATIC) == 0) {
-            val ctype = Type.getObjectType(owner)
+            konst ctype = Type.getObjectType(owner)
             current.setLocal(local++, interpreter.newValue(ctype))
         }
         for (arg in args) {
@@ -214,7 +214,7 @@ internal open class FastStackAnalyzer<V : Value>(
     private fun computeExceptionEdges() {
         for (tcb in method.tryCatchBlocks) {
             // Don't have to visit same exception handler multiple times - we care only about stack state at TCB start.
-            val start = tcb.start.indexOf()
+            konst start = tcb.start.indexOf()
             var insnHandlers: MutableList<TryCatchBlockNode>? = handlers[start]
             if (insnHandlers == null) {
                 insnHandlers = ArrayList()
@@ -225,7 +225,7 @@ internal open class FastStackAnalyzer<V : Value>(
     }
 
     private fun mergeControlFlowEdge(dest: Int, frame: Frame<V>) {
-        val destFrame = frames[dest]
+        konst destFrame = frames[dest]
         if (destFrame == null) {
             // Don't have to visit same instruction multiple times - we care only about "initial" stack state.
             frames[dest] = newFrame(frame.locals, frame.maxStackSize).apply { init(frame) }

@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm")
     id("jps-compatible")
-    id("org.jetbrains.kotlinx.binary-compatibility-validator")
+    id("org.jetbrains.kotlinx.binary-compatibility-konstidator")
 }
 
 configureKotlinCompileTasksGradleCompatibility()
@@ -20,6 +20,6 @@ apiValidation {
 
 tasks {
     apiBuild {
-        inputJar.value(jar.flatMap { it.archiveFile })
+        inputJar.konstue(jar.flatMap { it.archiveFile })
     }
 }

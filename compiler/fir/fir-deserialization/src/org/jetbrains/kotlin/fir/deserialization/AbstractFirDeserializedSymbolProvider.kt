@@ -28,20 +28,20 @@ import org.jetbrains.kotlin.serialization.deserialization.getName
 import java.nio.file.Path
 
 class PackagePartsCacheData(
-    val proto: ProtoBuf.Package,
-    val context: FirDeserializationContext,
+    konst proto: ProtoBuf.Package,
+    konst context: FirDeserializationContext,
 ) {
-    val topLevelFunctionNameIndex by lazy {
+    konst topLevelFunctionNameIndex by lazy {
         proto.functionList.withIndex()
-            .groupBy({ context.nameResolver.getName(it.value.name) }) { (index) -> index }
+            .groupBy({ context.nameResolver.getName(it.konstue.name) }) { (index) -> index }
     }
-    val topLevelPropertyNameIndex by lazy {
+    konst topLevelPropertyNameIndex by lazy {
         proto.propertyList.withIndex()
-            .groupBy({ context.nameResolver.getName(it.value.name) }) { (index) -> index }
+            .groupBy({ context.nameResolver.getName(it.konstue.name) }) { (index) -> index }
     }
-    val typeAliasNameIndex by lazy {
+    konst typeAliasNameIndex by lazy {
         proto.typeAliasList.withIndex()
-            .groupBy({ context.nameResolver.getName(it.value.name) }) { (index) -> index }
+            .groupBy({ context.nameResolver.getName(it.konstue.name) }) { (index) -> index }
     }
 }
 
@@ -55,12 +55,12 @@ abstract class LibraryPathFilter {
     }
 
     class LibraryList(libs: Set<Path>) : LibraryPathFilter() {
-        val libs: Set<Path> = libs.mapTo(mutableSetOf()) { it.normalize() }
+        konst libs: Set<Path> = libs.mapTo(mutableSetOf()) { it.normalize() }
 
         override fun accepts(path: Path?): Boolean {
             if (path == null) return false
-            val isPathAbsolute = path.isAbsolute
-            val absolutePath by lazy(LazyThreadSafetyMode.NONE) { path.toAbsolutePath() }
+            konst isPathAbsolute = path.isAbsolute
+            konst absolutePath by lazy(LazyThreadSafetyMode.NONE) { path.toAbsolutePath() }
             return libs.any {
                 when {
                     it.isAbsolute && !isPathAbsolute -> absolutePath.startsWith(it)
@@ -78,10 +78,10 @@ typealias DeserializedTypeAliasPostProcessor = (FirTypeAliasSymbol) -> Unit
 
 abstract class AbstractFirDeserializedSymbolProvider(
     session: FirSession,
-    val moduleDataProvider: ModuleDataProvider,
-    val kotlinScopeProvider: FirKotlinScopeProvider,
-    val defaultDeserializationOrigin: FirDeclarationOrigin,
-    private val serializerExtensionProtocol: SerializerExtensionProtocol
+    konst moduleDataProvider: ModuleDataProvider,
+    konst kotlinScopeProvider: FirKotlinScopeProvider,
+    konst defaultDeserializationOrigin: FirDeclarationOrigin,
+    private konst serializerExtensionProtocol: SerializerExtensionProtocol
 ) : FirSymbolProvider(session) {
     // ------------------------ Caches ------------------------
 
@@ -89,17 +89,17 @@ abstract class AbstractFirDeserializedSymbolProvider(
      * [packageNamesForNonClassDeclarations] might contain names of packages containing type aliases, on top of packages containing
      * callables, so it's not the same as `symbolNamesProvider.getPackageNamesWithTopLevelCallables` and cannot be replaced by it.
      */
-    private val packageNamesForNonClassDeclarations: Set<String> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst packageNamesForNonClassDeclarations: Set<String> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         computePackageSetWithNonClassDeclarations()
     }
 
-    override val symbolNamesProvider: FirSymbolNamesProvider = object : FirCachedSymbolNamesProvider(session) {
+    override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirCachedSymbolNamesProvider(session) {
         override fun computeTopLevelClassifierNames(packageFqName: FqName): Set<String>? {
-            val classesInPackage = knownTopLevelClassesInPackage(packageFqName) ?: return null
+            konst classesInPackage = knownTopLevelClassesInPackage(packageFqName) ?: return null
 
             if (packageFqName.asString() !in packageNamesForNonClassDeclarations) return classesInPackage
 
-            val typeAliasNames = typeAliasesNamesByPackage.getValue(packageFqName)
+            konst typeAliasNames = typeAliasesNamesByPackage.getValue(packageFqName)
             if (typeAliasNames.isEmpty()) return classesInPackage
 
             return buildSet {
@@ -118,14 +118,14 @@ abstract class AbstractFirDeserializedSymbolProvider(
             }
     }
 
-    private val typeAliasesNamesByPackage: FirCache<FqName, Set<Name>, Nothing?> =
+    private konst typeAliasesNamesByPackage: FirCache<FqName, Set<Name>, Nothing?> =
         session.firCachesFactory.createCache { fqName: FqName ->
             getPackageParts(fqName).flatMapTo(mutableSetOf()) { it.typeAliasNameIndex.keys }
         }
 
-    private val packagePartsCache = session.firCachesFactory.createCache(::tryComputePackagePartInfos)
+    private konst packagePartsCache = session.firCachesFactory.createCache(::tryComputePackagePartInfos)
 
-    private val typeAliasCache: FirCache<ClassId, FirTypeAliasSymbol?, FirDeserializationContext?> =
+    private konst typeAliasCache: FirCache<ClassId, FirTypeAliasSymbol?, FirDeserializationContext?> =
         session.firCachesFactory.createCacheWithPostCompute(
             createValue = { classId, _ -> findAndDeserializeTypeAlias(classId) },
             postCompute = { _, symbol, postProcessor ->
@@ -135,7 +135,7 @@ abstract class AbstractFirDeserializedSymbolProvider(
             }
         )
 
-    private val classCache: FirCache<ClassId, FirRegularClassSymbol?, FirDeserializationContext?> =
+    private konst classCache: FirCache<ClassId, FirRegularClassSymbol?, FirDeserializationContext?> =
         session.firCachesFactory.createCacheWithPostCompute(
             createValue = { classId, context -> findAndDeserializeClass(classId, context) },
             postCompute = { _, symbol, postProcessor ->
@@ -145,8 +145,8 @@ abstract class AbstractFirDeserializedSymbolProvider(
             }
         )
 
-    private val functionCache = session.firCachesFactory.createCache(::loadFunctionsByCallableId)
-    private val propertyCache = session.firCachesFactory.createCache(::loadPropertiesByCallableId)
+    private konst functionCache = session.firCachesFactory.createCache(::loadFunctionsByCallableId)
+    private konst propertyCache = session.firCachesFactory.createCache(::loadPropertiesByCallableId)
 
     // ------------------------ Abstract members ------------------------
 
@@ -155,7 +155,7 @@ abstract class AbstractFirDeserializedSymbolProvider(
     // Return full package names that might be not empty (have some non-class declarations) in this provider
     // In JVM, it's expensive to compute all the packages that might contain a Java class among dependencies
     // But, as we have all the metadata, we may be sure about top-level callables and type aliases
-    // This method should only be used for sake of optimization to avoid having too many empty-list/null values in our caches
+    // This method should only be used for sake of optimization to avoid having too many empty-list/null konstues in our caches
     protected abstract fun computePackageSetWithNonClassDeclarations(): Set<String>
 
     protected abstract fun knownTopLevelClassesInPackage(packageFqName: FqName): Set<String>?
@@ -171,16 +171,16 @@ abstract class AbstractFirDeserializedSymbolProvider(
 
     sealed class ClassMetadataFindResult {
         data class NoMetadata(
-            val classPostProcessor: DeserializedClassPostProcessor
+            konst classPostProcessor: DeserializedClassPostProcessor
         ) : ClassMetadataFindResult()
 
         data class Metadata(
-            val nameResolver: NameResolver,
-            val classProto: ProtoBuf.Class,
-            val annotationDeserializer: AbstractAnnotationDeserializer?,
-            val moduleData: FirModuleData?,
-            val sourceElement: DeserializedContainerSource?,
-            val classPostProcessor: DeserializedClassPostProcessor?
+            konst nameResolver: NameResolver,
+            konst classProto: ProtoBuf.Class,
+            konst annotationDeserializer: AbstractAnnotationDeserializer?,
+            konst moduleData: FirModuleData?,
+            konst sourceElement: DeserializedContainerSource?,
+            konst classPostProcessor: DeserializedClassPostProcessor?
         ) : ClassMetadataFindResult()
     }
 
@@ -190,10 +190,10 @@ abstract class AbstractFirDeserializedSymbolProvider(
 
     private fun findAndDeserializeTypeAlias(classId: ClassId): Pair<FirTypeAliasSymbol?, DeserializedTypeAliasPostProcessor?> {
         return getPackageParts(classId.packageFqName).firstNotNullOfOrNull { part ->
-            val ids = part.typeAliasNameIndex[classId.shortClassName]
+            konst ids = part.typeAliasNameIndex[classId.shortClassName]
             if (ids == null || ids.isEmpty()) return@firstNotNullOfOrNull null
-            val aliasProto = part.proto.getTypeAlias(ids.single())
-            val postProcessor: DeserializedTypeAliasPostProcessor = { part.context.memberDeserializer.loadTypeAlias(aliasProto, it) }
+            konst aliasProto = part.proto.getTypeAlias(ids.single())
+            konst postProcessor: DeserializedTypeAliasPostProcessor = { part.context.memberDeserializer.loadTypeAlias(aliasProto, it) }
             FirTypeAliasSymbol(classId) to postProcessor
         } ?: (null to null)
     }
@@ -202,12 +202,12 @@ abstract class AbstractFirDeserializedSymbolProvider(
         classId: ClassId,
         parentContext: FirDeserializationContext? = null
     ): Pair<FirRegularClassSymbol?, DeserializedClassPostProcessor?> {
-        return when (val result = extractClassMetadata(classId, parentContext)) {
+        return when (konst result = extractClassMetadata(classId, parentContext)) {
             is ClassMetadataFindResult.NoMetadata -> FirRegularClassSymbol(classId) to result.classPostProcessor
             is ClassMetadataFindResult.Metadata -> {
-                val (nameResolver, classProto, annotationDeserializer, moduleData, sourceElement, postProcessor) = result
+                konst (nameResolver, classProto, annotationDeserializer, moduleData, sourceElement, postProcessor) = result
                 moduleData ?: return null to null
-                val symbol = FirRegularClassSymbol(classId)
+                konst symbol = FirRegularClassSymbol(classId)
                 deserializeClassToSymbol(
                     classId,
                     classProto,
@@ -232,7 +232,7 @@ abstract class AbstractFirDeserializedSymbolProvider(
 
     private fun loadFunctionsByCallableId(callableId: CallableId): List<FirNamedFunctionSymbol> {
         return getPackageParts(callableId.packageName).flatMap { part ->
-            val functionIds = part.topLevelFunctionNameIndex[callableId.callableName] ?: return@flatMap emptyList()
+            konst functionIds = part.topLevelFunctionNameIndex[callableId.callableName] ?: return@flatMap emptyList()
             functionIds.map {
                 part.context.memberDeserializer.loadFunction(
                     part.proto.getFunction(it),
@@ -244,7 +244,7 @@ abstract class AbstractFirDeserializedSymbolProvider(
 
     private fun loadPropertiesByCallableId(callableId: CallableId): List<FirPropertySymbol> {
         return getPackageParts(callableId.packageName).flatMap { part ->
-            val propertyIds = part.topLevelPropertyNameIndex[callableId.callableName] ?: return@flatMap emptyList()
+            konst propertyIds = part.topLevelPropertyNameIndex[callableId.callableName] ?: return@flatMap emptyList()
             propertyIds.map {
                 part.context.memberDeserializer.loadProperty(part.proto.getProperty(it)).symbol
             }
@@ -258,18 +258,18 @@ abstract class AbstractFirDeserializedSymbolProvider(
         classId: ClassId,
         parentContext: FirDeserializationContext? = null
     ): FirRegularClassSymbol? {
-        val parentClassId = classId.outerClassId
+        konst parentClassId = classId.outerClassId
 
         // Actually, the second "if" should be enough but the first one might work faster
         if (parentClassId == null && !symbolNamesProvider.mayHaveTopLevelClassifier(classId)) return null
         if (parentClassId != null && !symbolNamesProvider.mayHaveTopLevelClassifier(classId.outermostClassId)) return null
 
         if (parentContext == null && parentClassId != null) {
-            val alreadyLoaded = classCache.getValueIfComputed(classId)
+            konst alreadyLoaded = classCache.getValueIfComputed(classId)
             if (alreadyLoaded != null) return alreadyLoaded
             // Load parent first in case correct `parentContext` is needed to deserialize the metadata of this class.
             getClass(parentClassId, null)
-            // If that's the case, `classCache` should contain a value for `classId`.
+            // If that's the case, `classCache` should contain a konstue for `classId`.
         }
         return classCache.getValue(classId, parentContext)
     }
@@ -277,9 +277,9 @@ abstract class AbstractFirDeserializedSymbolProvider(
     private fun getTypeAlias(classId: ClassId): FirTypeAliasSymbol? {
         if (!classId.relativeClassName.isOneSegmentFQN()) return null
 
-        // Don't actually query FirCache when we're sure there are no relevant value
+        // Don't actually query FirCache when we're sure there are no relevant konstue
         // It helps to decrease the size of a cache thus leading to better query time
-        val packageFqName = classId.packageFqName
+        konst packageFqName = classId.packageFqName
         if (packageFqName.asString() !in packageNamesForNonClassDeclarations) return null
         if (classId.shortClassName !in typeAliasesNamesByPackage.getValue(packageFqName)) return null
 
@@ -290,13 +290,13 @@ abstract class AbstractFirDeserializedSymbolProvider(
 
     @FirSymbolProviderInternals
     override fun getTopLevelCallableSymbolsTo(destination: MutableList<FirCallableSymbol<*>>, packageFqName: FqName, name: Name) {
-        val callableId = CallableId(packageFqName, name)
+        konst callableId = CallableId(packageFqName, name)
         destination += functionCache.getCallables(callableId)
         destination += propertyCache.getCallables(callableId)
     }
 
     private fun <C : FirCallableSymbol<*>> FirCache<CallableId, List<C>, Nothing?>.getCallables(id: CallableId): List<C> {
-        // Don't actually query FirCache when we're sure there are no relevant value
+        // Don't actually query FirCache when we're sure there are no relevant konstue
         // It helps to decrease the size of a cache thus leading to better query time
         if (!symbolNamesProvider.mayHaveTopLevelCallable(id.packageName, id.callableName)) return emptyList()
         return getValue(id)

@@ -47,24 +47,24 @@ import org.jetbrains.kotlin.utils.sure
 import java.io.File
 
 class KotlinJavascriptSerializerTest : TestCaseWithTmpdir() {
-    private val BASE_DIR = "compiler/testData/serialization"
+    private konst BASE_DIR = "compiler/testData/serialization"
 
     private fun doTest(fileName: String, metaFileDir: File = tmpdir) {
-        val source = "$BASE_DIR/$fileName"
-        val metaFile = File(metaFileDir, "${FileUtil.getNameWithoutExtension(fileName)}.meta.js")
+        konst source = "$BASE_DIR/$fileName"
+        konst metaFile = File(metaFileDir, "${FileUtil.getNameWithoutExtension(fileName)}.meta.js")
 
-        val srcDirs = listOf(File(source))
+        konst srcDirs = listOf(File(source))
 
-        val configuration = KotlinTestUtils.newConfiguration()
+        konst configuration = KotlinTestUtils.newConfiguration()
         configuration.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
         configuration.put(JSConfigurationKeys.LIBRARIES, JsConfig.JS_STDLIB)
 
         configuration.addKotlinSourceRoots(srcDirs.map { it.path })
 
         serialize(configuration, metaFile)
-        val module = deserialize(metaFile)
+        konst module = deserialize(metaFile)
 
-        RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptorWithFile(
+        RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptorWithFile(
             module.getPackage(TEST_PACKAGE_FQNAME),
             RecursiveDescriptorComparator.DONT_INCLUDE_METHODS_OF_OBJECT,
             File(source.replace(".kt", ".txt"))
@@ -72,19 +72,19 @@ class KotlinJavascriptSerializerTest : TestCaseWithTmpdir() {
     }
 
     private fun serialize(configuration: CompilerConfiguration, metaFile: File) {
-        val rootDisposable = Disposer.newDisposable()
+        konst rootDisposable = Disposer.newDisposable()
         try {
-            val environment = KotlinCoreEnvironment.createForTests(rootDisposable, configuration, EnvironmentConfigFiles.JS_CONFIG_FILES)
-            val files = environment.getSourceFiles()
-            val config = JsConfig(environment.project, environment.configuration, CompilerEnvironment)
-            val analysisResult = TopDownAnalyzerFacadeForJS.analyzeFiles(files, config)
-            val description = JsModuleDescriptor(
+            konst environment = KotlinCoreEnvironment.createForTests(rootDisposable, configuration, EnvironmentConfigFiles.JS_CONFIG_FILES)
+            konst files = environment.getSourceFiles()
+            konst config = JsConfig(environment.project, environment.configuration, CompilerEnvironment)
+            konst analysisResult = TopDownAnalyzerFacadeForJS.analyzeFiles(files, config)
+            konst description = JsModuleDescriptor(
                     name = KotlinTestUtils.TEST_MODULE_NAME,
                     kind = ModuleKind.PLAIN,
                     imported = listOf(),
                     data = analysisResult.moduleDescriptor
             )
-            val serializedMetadata = KotlinJavascriptSerializationUtil.serializeMetadata(
+            konst serializedMetadata = KotlinJavascriptSerializationUtil.serializeMetadata(
                     analysisResult.bindingContext, description, configuration.languageVersionSettings,
                     configuration.get(CommonConfigurationKeys.METADATA_VERSION) as? JsMetadataVersion ?: JsMetadataVersion.INSTANCE,
                     config.project
@@ -97,11 +97,11 @@ class KotlinJavascriptSerializerTest : TestCaseWithTmpdir() {
     }
 
     private fun deserialize(metaFile: File): ModuleDescriptorImpl {
-        val module = KotlinTestUtils.createEmptyModule("<${KotlinTestUtils.TEST_MODULE_NAME}>", JsPlatformAnalyzerServices.builtIns)
-        val metadata = KotlinJavascriptMetadataUtils.loadMetadata(metaFile).single()
+        konst module = KotlinTestUtils.createEmptyModule("<${KotlinTestUtils.TEST_MODULE_NAME}>", JsPlatformAnalyzerServices.builtIns)
+        konst metadata = KotlinJavascriptMetadataUtils.loadMetadata(metaFile).single()
 
-        val (header, packageFragmentProtos) = readModuleAsProto(metadata.body, metadata.version)
-        val provider = createKotlinJavascriptPackageFragmentProvider(
+        konst (header, packageFragmentProtos) = readModuleAsProto(metadata.body, metadata.version)
+        konst provider = createKotlinJavascriptPackageFragmentProvider(
             LockBasedStorageManager("KotlinJavascriptrSerializerTest"), module, header, packageFragmentProtos, metadata.version,
             DeserializationConfiguration.Default, LookupTracker.DO_NOTHING
         ).sure { "No package fragment provider was created" }

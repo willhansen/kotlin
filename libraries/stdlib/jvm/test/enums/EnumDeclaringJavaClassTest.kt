@@ -39,7 +39,7 @@ class EnumDeclaringJavaClassTest {
 
     @Test
     fun testEnumSet() {
-        val set = EnumSet.noneOf(TestEnum.E.declaringJavaClass)
+        konst set = EnumSet.noneOf(TestEnum.E.declaringJavaClass)
         set.addAll(TestEnum.E.declaringJavaClass.enumConstants.toList())
         assertEquals(EnumSet.of(TestEnum.E), set)
     }

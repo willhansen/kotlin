@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
-enum class Test(val s: S) {
+enum class Test(konst s: S) {
     OK(S("OK"))
 }
 

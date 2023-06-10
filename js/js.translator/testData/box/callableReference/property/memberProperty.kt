@@ -16,13 +16,13 @@ fun box(): String {
     assertEquals("prop", refAProp.name)
     assertEquals("prop", refBProp.name)
 
-    val a = A("Test")
+    konst a = A("Test")
     assertEquals("initA", refAProp.get(a))
 
     refAProp.set(a, "newPropA")
     assertEquals("newPropA", a.prop)
 
-    val a1 = B()
+    konst a1 = B()
     assertEquals("initB", refAProp.get(a1))
 
     refAProp.set(a1, "newPropB")

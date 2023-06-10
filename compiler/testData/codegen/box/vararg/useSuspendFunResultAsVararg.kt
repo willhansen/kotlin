@@ -8,9 +8,9 @@ fun builder(c: suspend () -> Unit) {
     c.startCoroutine(EmptyContinuation)
 }
 
-class TodoItem(var value: String, var completed: Boolean) {
+class TodoItem(var konstue: String, var completed: Boolean) {
     override fun toString(): String {
-        return "TodoItem(value='$value', completed=$completed)"
+        return "TodoItem(konstue='$konstue', completed=$completed)"
     }
 }
 
@@ -29,7 +29,7 @@ fun box(): String {
         stringifiedResult = emulateLog("Result: " + getFromApi())
     }
 
-    if (stringifiedResult != "Result: TodoItem(value='Test', completed=false)") {
+    if (stringifiedResult != "Result: TodoItem(konstue='Test', completed=false)") {
         return "Failed: Unexpected result ($stringifiedResult)"
     }
     return "OK"

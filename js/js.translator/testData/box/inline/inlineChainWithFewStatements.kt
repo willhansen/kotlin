@@ -8,14 +8,14 @@ internal inline fun inline1(a: Int): Int {
 }
 
 internal inline fun inline2(a: Int): Int {
-    val a1 = inline1(a)
+    konst a1 = inline1(a)
     if (a1 == 0) return 0
     return a1 + inline1(a)
 }
 
 internal inline fun inline3(a: Int): Int {
-    val i = inline2(a)
-    val i1 = inline1(a) * i
+    konst i = inline2(a)
+    konst i1 = inline1(a) * i
     if (i == i1) return 0
     return i1
 }

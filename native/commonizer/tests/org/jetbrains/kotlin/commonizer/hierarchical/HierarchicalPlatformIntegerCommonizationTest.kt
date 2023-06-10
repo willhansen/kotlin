@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.konan.target.KonanTarget.*
 
 class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommonizationTest() {
     fun `test signed ints without optimistic commonization`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             setting(OptimisticNumberCommonizationEnabledKey, false)
@@ -39,7 +39,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test signed ints with optimistic commonization backup`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             setting(OptimisticNumberCommonizationEnabledKey, true)
@@ -66,7 +66,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test unsigned ints`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -92,7 +92,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test signed vars`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -131,7 +131,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test unsigned vars`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -170,7 +170,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test signed arrays`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -197,7 +197,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test unsigned arrays`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -224,7 +224,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test signed ranges`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -253,7 +253,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test unsigned ranges`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -282,7 +282,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test signed progressions`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -311,7 +311,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test unsigned progressions`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -340,7 +340,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test platform types in return positions`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -350,12 +350,12 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
                 import kotlinx.cinterop.*
                 
                 class C {
-                    val i: Int = null!!
+                    konst i: Int = null!!
                     fun v(): IntVarOf<Int> = null!!
                     fun r(): IntRange = null!!
                 }
                 
-                val a: IntArray = null!!
+                konst a: IntArray = null!!
                 fun p(): IntProgression = null!!
             """.trimIndent()
 
@@ -364,12 +364,12 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
                 import kotlinx.cinterop.*
                 
                 class C {
-                    val i: Long = null!!
+                    konst i: Long = null!!
                     fun v(): LongVarOf<Long> = null!!
                     fun r(): LongRange = null!!
                 }
                 
-                val a: LongArray = null!!
+                konst a: LongArray = null!!
                 fun p(): LongProgression = null!!
             """.trimIndent()
         }
@@ -380,19 +380,19 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
             import kotlinx.cinterop.*
             
             expect class C() {
-                val i: PlatformInt
+                konst i: PlatformInt
                 fun v(): PlatformIntVarOf<PlatformInt>
                 fun r(): PlatformIntRange
             }
 
-            expect val a: PlatformIntArray
+            expect konst a: PlatformIntArray
             expect fun p(): PlatformIntProgression
         """.trimIndent()
         )
     }
 
     fun `test platform types in signatures`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_ARM64.name}, ${LINUX_ARM32_HFP.name})")
@@ -437,14 +437,14 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test platform integers in multi-target commonization`() {
-        val intTarget1 = LINUX_ARM32_HFP.name
-        val intTarget2 = LINUX_MIPS32.name
-        val intTarget3 = LINUX_MIPSEL32.name
-        val longTarget1 = LINUX_X64.name
-        val longTarget2 = LINUX_ARM64.name
-        val longTarget3 = MACOS_X64.name
+        konst intTarget1 = LINUX_ARM32_HFP.name
+        konst intTarget2 = LINUX_MIPS32.name
+        konst intTarget3 = LINUX_MIPSEL32.name
+        konst longTarget1 = LINUX_X64.name
+        konst longTarget2 = LINUX_ARM64.name
+        konst longTarget3 = MACOS_X64.name
 
-        val outputCommonizerTargets = arrayOf(
+        konst outputCommonizerTargets = arrayOf(
             "($intTarget1, $intTarget2)", "($longTarget1, $longTarget2)", "($intTarget3, $longTarget3)",
             "($intTarget1, $intTarget2, $intTarget3)", "($longTarget1, $longTarget2, $longTarget3)",
             "($intTarget1, $intTarget2, $intTarget3, $longTarget1)",
@@ -453,7 +453,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
             "($intTarget1, $intTarget2, $intTarget3, $longTarget1, $longTarget2, $longTarget3)",
         )
 
-        val result = commonize {
+        konst result = commonize {
             setting(PlatformIntegerCommonizationEnabledKey, true)
             outputTarget(*outputCommonizerTargets)
             registerFakeStdlibIntegersDependency(*outputCommonizerTargets)
@@ -584,51 +584,51 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
     }
 
     fun `test platform types from known leaf targets are commonized`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${LINUX_X64.name}, ${IOS_ARM32.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${LINUX_X64.name}, ${IOS_ARM32.name})")
 
             LINUX_X64.name withSource """
-                val platformPropertyInOneLeafTarget: PlatformInt 
+                konst platformPropertyInOneLeafTarget: PlatformInt 
                     get() = null!!
-                val platformPropertyInBothLeafTargets: PlatformInt 
+                konst platformPropertyInBothLeafTargets: PlatformInt 
                     get() = null!!
             """.trimIndent()
 
             IOS_ARM32.name withSource """
-                val platformPropertyInOneLeafTarget: Int 
+                konst platformPropertyInOneLeafTarget: Int 
                     get() = 42
-                val platformPropertyInBothLeafTargets: PlatformInt 
+                konst platformPropertyInBothLeafTargets: PlatformInt 
                     get() = null!!
             """.trimIndent()
         }
 
         result.assertCommonized(
             "(${LINUX_X64.name}, ${IOS_ARM32.name})", """
-            expect val platformPropertyInOneLeafTarget: PlatformInt
-            expect val platformPropertyInBothLeafTargets: PlatformInt
+            expect konst platformPropertyInOneLeafTarget: PlatformInt
+            expect konst platformPropertyInBothLeafTargets: PlatformInt
         """.trimIndent()
         )
     }
 
     fun `test platform types from unknown targets are not commonized`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(unknown, ${IOS_ARM32.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(unknown, ${IOS_ARM32.name})")
 
             "unknown" withSource """
-                val platformPropertyInOneLeafTarget: PlatformInt 
+                konst platformPropertyInOneLeafTarget: PlatformInt 
                     get() = null!!
-                val platformPropertyInOtherLeafTarget: Int 
+                konst platformPropertyInOtherLeafTarget: Int 
                     get() = null!!
             """.trimIndent()
 
             IOS_ARM32.name withSource """
-                val platformPropertyInOneLeafTarget: Int 
+                konst platformPropertyInOneLeafTarget: Int 
                     get() = 42
-                val platformPropertyInOtherLeafTarget: PlatformInt 
+                konst platformPropertyInOtherLeafTarget: PlatformInt 
                     get() = null!!
             """.trimIndent()
         }
@@ -640,7 +640,7 @@ class HierarchicalPlatformIntegerCommonizationTest : AbstractInlineSourcesCommon
 
     // Issue: KT-51528
     fun `test multiple argument function with over the edge type alias available`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(${IOS_ARM32.name}, ${IOS_ARM64.name})")
             setting(PlatformIntegerCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(${IOS_ARM32.name}, ${IOS_ARM64.name})")

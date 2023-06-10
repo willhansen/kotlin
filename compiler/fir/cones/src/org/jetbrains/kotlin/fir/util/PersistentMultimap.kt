@@ -7,23 +7,23 @@ package org.jetbrains.kotlin.fir.util
 
 import kotlinx.collections.immutable.*
 
-class PersistentMultimap<K, V> private constructor(private val map: PersistentMap<K, PersistentList<V>>) {
+class PersistentMultimap<K, V> private constructor(private konst map: PersistentMap<K, PersistentList<V>>) {
 
     constructor() : this(persistentMapOf())
 
-    fun put(key: K, value: V): PersistentMultimap<K, V> {
-        val collection = map[key] ?: persistentListOf()
-        val newSet = collection.add(value)
+    fun put(key: K, konstue: V): PersistentMultimap<K, V> {
+        konst collection = map[key] ?: persistentListOf()
+        konst newSet = collection.add(konstue)
         if (newSet === collection) return this
-        val newMap = map.put(key, newSet)
+        konst newMap = map.put(key, newSet)
         return PersistentMultimap(newMap)
     }
 
-    fun remove(key: K, value: V): PersistentMultimap<K, V> {
-        val list = map.get(key) ?: return this
-        val newSet = list.remove(value)
+    fun remove(key: K, konstue: V): PersistentMultimap<K, V> {
+        konst list = map.get(key) ?: return this
+        konst newSet = list.remove(konstue)
         if (list === newSet) return this
-        val newMap = if (newSet.isEmpty()) {
+        konst newMap = if (newSet.isEmpty()) {
             map.remove(key)
         } else {
             map.put(key, newSet)
@@ -35,26 +35,26 @@ class PersistentMultimap<K, V> private constructor(private val map: PersistentMa
         return map[key] ?: emptyList()
     }
 
-    val keys: ImmutableSet<K> get() = map.keys
+    konst keys: ImmutableSet<K> get() = map.keys
 }
 
-class PersistentSetMultimap<K, V> private constructor(private val map: PersistentMap<K, PersistentSet<V>>) {
+class PersistentSetMultimap<K, V> private constructor(private konst map: PersistentMap<K, PersistentSet<V>>) {
 
     constructor() : this(persistentMapOf())
 
-    fun put(key: K, value: V): PersistentSetMultimap<K, V> {
-        val set = map[key] ?: persistentSetOf()
-        val newSet = set.add(value)
+    fun put(key: K, konstue: V): PersistentSetMultimap<K, V> {
+        konst set = map[key] ?: persistentSetOf()
+        konst newSet = set.add(konstue)
         if (newSet === set) return this
-        val newMap = map.put(key, newSet)
+        konst newMap = map.put(key, newSet)
         return PersistentSetMultimap(newMap)
     }
 
-    fun remove(key: K, value: V): PersistentSetMultimap<K, V> {
-        val set = map.get(key) ?: return this
-        val newSet = set.remove(value)
+    fun remove(key: K, konstue: V): PersistentSetMultimap<K, V> {
+        konst set = map.get(key) ?: return this
+        konst newSet = set.remove(konstue)
         if (set === newSet) return this
-        val newMap = if (newSet.isEmpty()) {
+        konst newMap = if (newSet.isEmpty()) {
             map.remove(key)
         } else {
             map.put(key, newSet)

@@ -23,6 +23,6 @@ class Outer4 {
     object Nested5 private constructor() : super() {}
 }
 
-object TopLevel constructor(val x: Int) {
+object TopLevel constructor(konst x: Int) {
     fun foo() {}
 }

@@ -1,8 +1,8 @@
 FILE: vararg.fir.kt
-    public final fun <A : R|kotlin/Comparable<A>|> arrayData(vararg values: R|kotlin/Array<out A>|): R|A| {
+    public final fun <A : R|kotlin/Comparable<A>|> arrayData(vararg konstues: R|kotlin/Array<out A>|): R|A| {
         ^arrayData Null(null)!!
     }
-    public final fun <A> arrayDataNoBound(vararg values: R|kotlin/Array<out A>|): R|A| {
+    public final fun <A> arrayDataNoBound(vararg konstues: R|kotlin/Array<out A>|): R|A| {
         ^arrayDataNoBound Null(null)!!
     }
     public final fun test(b: R|kotlin/Byte|): R|kotlin/Unit| {

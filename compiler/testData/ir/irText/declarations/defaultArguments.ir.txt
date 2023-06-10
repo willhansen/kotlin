@@ -3,10 +3,10 @@ FILE fqName:<root> fileName:/defaultArguments.kt
     VALUE_PARAMETER name:x index:0 type:kotlin.Int
     VALUE_PARAMETER name:y index:1 type:kotlin.Int
       EXPRESSION_BODY
-        CONST Int type=kotlin.Int value=0
+        CONST Int type=kotlin.Int konstue=0
     VALUE_PARAMETER name:z index:2 type:kotlin.String
       EXPRESSION_BODY
-        CONST String type=kotlin.String value="abc"
+        CONST String type=kotlin.String konstue="abc"
     BLOCK_BODY
       FUN LOCAL_FUNCTION name:local visibility:local modality:FINAL <> (xx:kotlin.Int, yy:kotlin.Int, zz:kotlin.String) returnType:kotlin.Unit
         VALUE_PARAMETER name:xx index:0 type:kotlin.Int

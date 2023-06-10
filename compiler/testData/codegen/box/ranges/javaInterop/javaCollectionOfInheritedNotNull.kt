@@ -6,7 +6,7 @@
 import kotlin.test.*
 
 fun box(): String {
-    val actualValues = mutableListOf<Int>()
+    konst actualValues = mutableListOf<Int>()
     for (i in JImpl().listOfNotNull()) {
         actualValues += i
     }

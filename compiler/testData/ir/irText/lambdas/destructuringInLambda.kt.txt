@@ -5,11 +5,11 @@ data class A {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
-  val y: Int
+  konst y: Int
     field = y
     get
 
@@ -42,7 +42,7 @@ data class A {
     when {
       other !is A -> return false
     }
-    val tmp0_other_with_cast: A = other as A
+    konst tmp0_other_with_cast: A = other as A
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }
@@ -56,7 +56,7 @@ data class A {
 
 var fn: Function1<A, Int>
   field = local fun <anonymous>(<name for destructuring parameter 0>: A): Int {
-    val y: Int = <name for destructuring parameter 0>.component2()
+    konst y: Int = <name for destructuring parameter 0>.component2()
     return 42.plus(other = y)
   }
 

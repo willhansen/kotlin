@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.asJava.elements.KtLightField
 import org.jetbrains.kotlin.asJava.elements.KtLightIdentifier
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.light.classes.symbol.SymbolLightMemberBase
-import org.jetbrains.kotlin.light.classes.symbol.basicIsEquivalentTo
+import org.jetbrains.kotlin.light.classes.symbol.basicIsEquikonstentTo
 import org.jetbrains.kotlin.light.classes.symbol.classes.SymbolLightClassBase
 import org.jetbrains.kotlin.psi.KtNamedDeclaration
 import javax.swing.Icon
@@ -29,8 +29,8 @@ internal abstract class SymbolLightField protected constructor(
 ) : SymbolLightMemberBase<PsiField>(lightMemberOrigin, containingClass), KtLightField {
     override fun setInitializer(initializer: PsiExpression?) = cannotModify()
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean =
-        basicIsEquivalentTo(this, another as? PsiField)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean =
+        basicIsEquikonstentTo(this, another as? PsiField)
 
     override fun getLanguage(): Language = KotlinLanguage.INSTANCE
 
@@ -58,7 +58,7 @@ internal abstract class SymbolLightField protected constructor(
     override fun isVisibilitySupported(): Boolean = true
 
     override fun getElementIcon(flags: Int): Icon? {
-        val baseIcon = IconManager.getInstance().createLayeredIcon(
+        konst baseIcon = IconManager.getInstance().createLayeredIcon(
             this,
             PlatformIcons.VARIABLE_ICON, ElementPresentationUtil.getFlags(
                 this,
@@ -81,13 +81,13 @@ internal abstract class SymbolLightField protected constructor(
     }
 
     internal class FieldNameGenerator {
-        private val usedNames: MutableSet<String> = mutableSetOf()
+        private konst usedNames: MutableSet<String> = mutableSetOf()
 
         fun generateUniqueFieldName(base: String): String {
             if (usedNames.add(base)) return base
             var i = 1
             while (true) {
-                val suggestion = "$base$$i"
+                konst suggestion = "$base$$i"
                 if (usedNames.add(suggestion)) return suggestion
                 i++
             }

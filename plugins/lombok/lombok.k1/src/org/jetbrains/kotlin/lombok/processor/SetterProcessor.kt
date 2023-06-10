@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.lombok.config.LombokAnnotations.Setter
 import org.jetbrains.kotlin.lombok.config.LombokAnnotations.Data
 import org.jetbrains.kotlin.resolve.descriptorUtil.builtIns
 
-class SetterProcessor(private val config: LombokConfig) : Processor {
+class SetterProcessor(private konst config: LombokConfig) : Processor {
 
     context(LazyJavaResolverContext)
     @Suppress("IncorrectFormatting") // KTIJ-22227
@@ -23,8 +23,8 @@ class SetterProcessor(private val config: LombokConfig) : Processor {
         //lombok doesn't generate setters for enums
         if (classDescriptor.kind == ClassKind.ENUM_CLASS) return
 
-        val globalAccessors = Accessors.get(classDescriptor, config)
-        val clSetter = Setter.getOrNull(classDescriptor) ?: Data.getOrNull(classDescriptor)?.asSetter()
+        konst globalAccessors = Accessors.get(classDescriptor, config)
+        konst clSetter = Setter.getOrNull(classDescriptor) ?: Data.getOrNull(classDescriptor)?.asSetter()
 
         classDescriptor
             .getJavaFields()
@@ -41,13 +41,13 @@ class SetterProcessor(private val config: LombokConfig) : Processor {
     ): SimpleFunctionDescriptor? {
         if (getter.visibility == AccessLevel.NONE) return null
 
-        val accessors = Accessors.getIfAnnotated(field, config) ?: globalAccessors
+        konst accessors = Accessors.getIfAnnotated(field, config) ?: globalAccessors
         return field.toAccessorBaseName(accessors)?.let { propertyName ->
-            val functionName =
+            konst functionName =
                 if (accessors.fluent) propertyName
                 else AccessorNames.SET + propertyName.capitalize()
 
-            val returnType = if (accessors.chain) classDescriptor.defaultType else classDescriptor.builtIns.unitType
+            konst returnType = if (accessors.chain) classDescriptor.defaultType else classDescriptor.builtIns.unitType
 
             classDescriptor.createFunction(
                 Name.identifier(functionName),

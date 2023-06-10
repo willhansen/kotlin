@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.fir.types.*
 
 object FirDelegateUsesExtensionPropertyTypeParameterChecker : FirPropertyChecker() {
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val delegate = declaration.delegate as? FirFunctionCall ?: return
-        val parameters = declaration.typeParameters.mapTo(hashSetOf()) { it.symbol }
+        konst delegate = declaration.delegate as? FirFunctionCall ?: return
+        konst parameters = declaration.typeParameters.mapTo(hashSetOf()) { it.symbol }
 
-        val usedTypeParameterSymbol = delegate.typeRef.coneType.findUsedTypeParameterSymbol(parameters, delegate, context, reporter)
+        konst usedTypeParameterSymbol = delegate.typeRef.coneType.findUsedTypeParameterSymbol(parameters, delegate, context, reporter)
             ?: return
 
         reporter.reportOn(declaration.source, FirErrors.DELEGATE_USES_EXTENSION_PROPERTY_TYPE_PARAMETER, usedTypeParameterSymbol, context)
@@ -36,14 +36,14 @@ object FirDelegateUsesExtensionPropertyTypeParameterChecker : FirPropertyChecker
         context: CheckerContext,
         reporter: DiagnosticReporter,
     ): FirTypeParameterSymbol? {
-        val expandedDelegateClassLikeType =
+        konst expandedDelegateClassLikeType =
             delegate.typeRef.coneType.lowerBoundIfFlexible().fullyExpandedType(context.session)
                 .unwrapDefinitelyNotNull() as? ConeClassLikeType ?: return null
-        val delegateClassSymbol = expandedDelegateClassLikeType.lookupTag.toSymbol(context.session) as? FirRegularClassSymbol ?: return null
-        val delegateClassScope by lazy { delegateClassSymbol.unsubstitutedScope(context) }
+        konst delegateClassSymbol = expandedDelegateClassLikeType.lookupTag.toSymbol(context.session) as? FirRegularClassSymbol ?: return null
+        konst delegateClassScope by lazy { delegateClassSymbol.unsubstitutedScope(context) }
         for (it in typeArguments) {
-            val theType = it.type ?: continue
-            val argumentAsTypeParameterSymbol = theType.toSymbol(context.session) as? FirTypeParameterSymbol
+            konst theType = it.type ?: continue
+            konst argumentAsTypeParameterSymbol = theType.toSymbol(context.session) as? FirTypeParameterSymbol
 
             if (argumentAsTypeParameterSymbol in typeParameterSymbols) {
                 var propertyWithTypeParameterTypeFound = false
@@ -56,7 +56,7 @@ object FirDelegateUsesExtensionPropertyTypeParameterChecker : FirPropertyChecker
                     return argumentAsTypeParameterSymbol
                 }
             }
-            val usedTypeParameterSymbol = theType.findUsedTypeParameterSymbol(typeParameterSymbols, delegate, context, reporter)
+            konst usedTypeParameterSymbol = theType.findUsedTypeParameterSymbol(typeParameterSymbols, delegate, context, reporter)
             if (usedTypeParameterSymbol != null) {
                 return usedTypeParameterSymbol
             }

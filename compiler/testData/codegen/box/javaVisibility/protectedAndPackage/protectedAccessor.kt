@@ -6,8 +6,8 @@ package protectedPack;
 public class A {
     protected final String field;
 
-    public A(String value) {
-        field = value;
+    public A(String konstue) {
+        field = konstue;
     }
 }
 
@@ -15,9 +15,9 @@ public class A {
 // FILE: B.kt
 import protectedPack.A
 
-class B(value: String) : A(value) {
+class B(konstue: String) : A(konstue) {
     inner class C : A(field) {
-        val result = field
+        konst result = field
     }
 }
 

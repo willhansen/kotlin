@@ -1,1 +1,1 @@
-public class A(public @param:Ann private @param:[Ann] val value: String)
+public class A(public @param:Ann private @param:[Ann] konst konstue: String)

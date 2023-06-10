@@ -6,7 +6,7 @@
 interface Test<T> {
     var test: T
         get() = null!!
-        set(value) {
+        set(konstue) {
             null!!
         }
 }
@@ -15,8 +15,8 @@ var result = "fail"
 interface Test2 : Test<String> {
     override var test: String
         get() = result
-        set(value) {
-            result = value
+        set(konstue) {
+            result = konstue
         }
 }
 

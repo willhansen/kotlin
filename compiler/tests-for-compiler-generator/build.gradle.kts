@@ -25,7 +25,7 @@ sourceSets {
     "test" { projectDefault() }
 }
 
-val generateTests by generator("org.jetbrains.kotlin.test.generators.GenerateCompilerTestsKt") {
+konst generateTests by generator("org.jetbrains.kotlin.test.generators.GenerateCompilerTestsKt") {
     dependsOn(":compiler:generateTestData")
 }
 

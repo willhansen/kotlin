@@ -1,4 +1,4 @@
 @file:JvmName("Utils")
 @file:JvmMultifileClass
 
-val aVal: Int get() = 0
+konst aVal: Int get() = 0

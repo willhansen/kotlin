@@ -1,10 +1,10 @@
-val noGeneric: test.Foo?
+konst noGeneric: test.Foo?
 
-val withOuterGeneric: test.Foo?
+konst withOuterGeneric: test.Foo?
 
-val <TT> TT.withOwnGeneric: TT?
+konst <TT> TT.withOwnGeneric: TT?
 
-val <TT> TT.withOuterAndOwnGeneric: test.Foo?
+konst <TT> TT.withOuterAndOwnGeneric: test.Foo?
 
 open operator fun equals(other: kotlin.Any?): kotlin.Boolean
 

@@ -24,56 +24,56 @@ abstract class TypeScriptValidationTask
 constructor(
     @Internal
     @Transient
-    override val compilation: KotlinJsCompilation
+    override konst compilation: KotlinJsCompilation
 ) : DefaultTask(), RequiresNpmDependencies {
-    private val npmProject = compilation.npmProject
+    private konst npmProject = compilation.npmProject
 
     @get:Internal
     @Transient
-    protected val nodeJs = project.rootProject.kotlinNodeJsExtension
+    protected konst nodeJs = project.rootProject.kotlinNodeJsExtension
 
-    private val versions = nodeJs.versions
+    private konst versions = nodeJs.versions
 
     @get:Internal
-    override val requiredNpmDependencies: Set<RequiredKotlinJsDependency>
+    override konst requiredNpmDependencies: Set<RequiredKotlinJsDependency>
         get() = setOf(versions.typescript)
 
     @get:SkipWhenEmpty
     @get:NormalizeLineEndings
     @get:InputDirectory
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    abstract val inputDir: DirectoryProperty
+    abstract konst inputDir: DirectoryProperty
 
     @get:Input
-    abstract val validationStrategy: Property<KotlinIrJsGeneratedTSValidationStrategy>
+    abstract konst konstidationStrategy: Property<KotlinIrJsGeneratedTSValidationStrategy>
 
-    private val generatedDts
+    private konst generatedDts
         get() = inputDir.asFileTree.matching { it.include("*.d.ts") }.files
 
     @TaskAction
     fun run() {
-        val validationStrategy = validationStrategy.get()
+        konst konstidationStrategy = konstidationStrategy.get()
 
-        if (validationStrategy == KotlinIrJsGeneratedTSValidationStrategy.IGNORE) return
+        if (konstidationStrategy == KotlinIrJsGeneratedTSValidationStrategy.IGNORE) return
 
-        val files = generatedDts.map { it.absolutePath }
+        konst files = generatedDts.map { it.absolutePath }
 
         if (files.isEmpty()) return
 
-        val result = services.execWithProgress("typescript") {
+        konst result = services.execWithProgress("typescript") {
             npmProject.useTool(it, "typescript/bin/tsc", listOf(), listOf("--noEmit"))
         }
 
         if (result.exitValue == 0) return
 
-        val message = "Oops, Kotlin/JS compiler generated invalid d.ts files."
+        konst message = "Oops, Kotlin/JS compiler generated inkonstid d.ts files."
 
-        if (validationStrategy == KotlinIrJsGeneratedTSValidationStrategy.ERROR) {
+        if (konstidationStrategy == KotlinIrJsGeneratedTSValidationStrategy.ERROR) {
             error(message)
         }
     }
 
     companion object {
-        const val NAME: String = "validateGeneratedByCompilerTypeScript"
+        const konst NAME: String = "konstidateGeneratedByCompilerTypeScript"
     }
 }

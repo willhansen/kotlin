@@ -7,9 +7,9 @@ public open class A<T> {
 class B : A<A<String>>()
 
 fun box(): String {
-    val x: A<String> = A()
-    val y: A<A<String>> = A()
-    val b = B()
+    konst x: A<String> = A()
+    konst y: A<A<String>> = A()
+    konst b = B()
 
     return b.foo(x) + b.foo(y)
 }

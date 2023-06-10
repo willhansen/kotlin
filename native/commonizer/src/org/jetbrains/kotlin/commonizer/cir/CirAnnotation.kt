@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.commonizer.utils.appendHashCode
 import org.jetbrains.kotlin.commonizer.utils.hashCode
 
 interface CirAnnotation {
-    val type: CirClassType
-    val constantValueArguments: Map<CirName, CirConstantValue>
-    val annotationValueArguments: Map<CirName, CirAnnotation>
+    konst type: CirClassType
+    konst constantValueArguments: Map<CirName, CirConstantValue>
+    konst annotationValueArguments: Map<CirName, CirAnnotation>
 
     companion object {
         fun createInterned(
@@ -27,14 +27,14 @@ interface CirAnnotation {
             )
         )
 
-        private val interner = Interner<CirAnnotationInternedImpl>()
+        private konst interner = Interner<CirAnnotationInternedImpl>()
     }
 }
 
 private data class CirAnnotationInternedImpl(
-    override val type: CirClassType,
-    override val constantValueArguments: Map<CirName, CirConstantValue>,
-    override val annotationValueArguments: Map<CirName, CirAnnotation>
+    override konst type: CirClassType,
+    override konst constantValueArguments: Map<CirName, CirConstantValue>,
+    override konst annotationValueArguments: Map<CirName, CirAnnotation>
 ) : CirAnnotation {
     private var hashCode = hashCode(type)
         .appendHashCode(constantValueArguments)

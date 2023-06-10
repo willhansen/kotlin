@@ -29,9 +29,9 @@ import org.jetbrains.kotlin.resolve.scopes.utils.parentsWithSelf
 object DslScopeViolationCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.DslMarkersSupport)) return
-        val callImplicitReceivers = resolvedCall.getImplicitReceivers()
+        konst callImplicitReceivers = resolvedCall.getImplicitReceivers()
 
-        val originalReceivers = if (context.languageVersionSettings.supportsFeature(LanguageFeature.NewInference))
+        konst originalReceivers = if (context.languageVersionSettings.supportsFeature(LanguageFeature.NewInference))
             callImplicitReceivers.map { it.original }
         else
             callImplicitReceivers
@@ -47,22 +47,22 @@ object DslScopeViolationCallChecker : CallChecker {
         reportOn: PsiElement,
         context: CallCheckerContext
     ) {
-        val isNewInferenceEnabled = context.languageVersionSettings.supportsFeature(LanguageFeature.NewInference)
-        val receiversUntilOneFromTheCall =
+        konst isNewInferenceEnabled = context.languageVersionSettings.supportsFeature(LanguageFeature.NewInference)
+        konst receiversUntilOneFromTheCall =
             context.scope.parentsWithSelf
                 .filterIsInstance<LexicalScope>()
                 .flatMap { listOfNotNull(it.implicitReceiver) + it.contextReceiversGroup }
-                .map { if (isNewInferenceEnabled) it.value.original else it.value }
+                .map { if (isNewInferenceEnabled) it.konstue.original else it.konstue }
                 .takeWhile { it != callImplicitReceiver }.toList()
 
         if (receiversUntilOneFromTheCall.isEmpty()) return
 
-        val (callDslMarkers, additionalCallDslMarkers) = extractDslMarkerFqNames(callImplicitReceiver)
+        konst (callDslMarkers, additionalCallDslMarkers) = extractDslMarkerFqNames(callImplicitReceiver)
         if (callDslMarkers.isEmpty() && additionalCallDslMarkers.isEmpty()) return
 
-        val dslMarkersFromOuterReceivers = receiversUntilOneFromTheCall.map(::extractDslMarkerFqNames)
+        konst dslMarkersFromOuterReceivers = receiversUntilOneFromTheCall.map(::extractDslMarkerFqNames)
 
-        val closestAnotherReceiverWithSameDslMarker =
+        konst closestAnotherReceiverWithSameDslMarker =
             dslMarkersFromOuterReceivers.firstOrNull { (dslMarkersFromReceiver, _) ->
                 dslMarkersFromReceiver.any(callDslMarkers::contains)
             }
@@ -73,16 +73,16 @@ object DslScopeViolationCallChecker : CallChecker {
             return
         }
 
-        val allDslMarkersFromCall = callDslMarkers + additionalCallDslMarkers
+        konst allDslMarkersFromCall = callDslMarkers + additionalCallDslMarkers
 
-        val closestAnotherReceiverWithSameDslMarkerWithDeprecation =
+        konst closestAnotherReceiverWithSameDslMarkerWithDeprecation =
             dslMarkersFromOuterReceivers.firstOrNull { (dslMarkersFromReceiver, additionalDslMarkersFromReceiver) ->
-                val allMarkersFromReceiver = dslMarkersFromReceiver + additionalDslMarkersFromReceiver
+                konst allMarkersFromReceiver = dslMarkersFromReceiver + additionalDslMarkersFromReceiver
                 allDslMarkersFromCall.any(allMarkersFromReceiver::contains)
             }
 
         if (closestAnotherReceiverWithSameDslMarkerWithDeprecation != null) {
-            val diagnostic =
+            konst diagnostic =
                 if (context.languageVersionSettings.supportsFeature(LanguageFeature.DslMarkerOnFunctionTypeReceiver))
                     Errors.DSL_SCOPE_VIOLATION
                 else

@@ -57,30 +57,30 @@ class NewOverloadingConflictResolver(
 
     companion object {
         private fun createFlatSignature(candidate: ResolutionCandidate): FlatSignature<ResolutionCandidate> {
-            val resolvedCall = candidate.resolvedCall
-            val isEliminationAmbiguitiesWithExternalTypeParametersEnabled =
+            konst resolvedCall = candidate.resolvedCall
+            konst isEliminationAmbiguitiesWithExternalTypeParametersEnabled =
                 candidate.callComponents.languageVersionSettings.supportsFeature(LanguageFeature.EliminateAmbiguitiesWithExternalTypeParameters)
-            val isEliminationAmbiguitiesOnInheritedSamInterfacesEnabled =
+            konst isEliminationAmbiguitiesOnInheritedSamInterfacesEnabled =
                 candidate.callComponents.languageVersionSettings.supportsFeature(LanguageFeature.EliminateAmbiguitiesOnInheritedSamInterfaces)
-            val descriptor = if (isEliminationAmbiguitiesWithExternalTypeParametersEnabled) {
+            konst descriptor = if (isEliminationAmbiguitiesWithExternalTypeParametersEnabled) {
                 resolvedCall.candidateDescriptor
             } else {
                 resolvedCall.candidateDescriptor.original
             }
-            val valueParameters = descriptor.valueParameters
+            konst konstueParameters = descriptor.konstueParameters
 
             var numDefaults = 0
-            val valueArgumentToParameterType = HashMap<KotlinCallArgument, TypeWithConversion>()
-            for ((valueParameter, resolvedValueArgument) in resolvedCall.argumentMappingByOriginal) {
+            konst konstueArgumentToParameterType = HashMap<KotlinCallArgument, TypeWithConversion>()
+            for ((konstueParameter, resolvedValueArgument) in resolvedCall.argumentMappingByOriginal) {
                 if (resolvedValueArgument is ResolvedCallArgument.DefaultArgument) {
                     numDefaults++
                 } else {
-                    val originalValueParameter = valueParameters[valueParameter.index]
-                    for (valueArgument in resolvedValueArgument.arguments) {
-                        val originalType = candidate.resolvedCall.argumentsWithConversion[valueArgument]?.originalParameterType
-                        val resultType = candidate.resolvedCall.argumentsWithConversion[valueArgument]?.convertedTypeByOriginParameter
-                            ?: valueArgument.getExpectedType(originalValueParameter, candidate.callComponents.languageVersionSettings)
-                        valueArgumentToParameterType[valueArgument] = TypeWithConversion(
+                    konst originalValueParameter = konstueParameters[konstueParameter.index]
+                    for (konstueArgument in resolvedValueArgument.arguments) {
+                        konst originalType = candidate.resolvedCall.argumentsWithConversion[konstueArgument]?.originalParameterType
+                        konst resultType = candidate.resolvedCall.argumentsWithConversion[konstueArgument]?.convertedTypeByOriginParameter
+                            ?: konstueArgument.getExpectedType(originalValueParameter, candidate.callComponents.languageVersionSettings)
+                        konstueArgumentToParameterType[konstueArgument] = TypeWithConversion(
                             resultType,
                             if (isEliminationAmbiguitiesOnInheritedSamInterfacesEnabled) originalType else null
                         )
@@ -92,8 +92,8 @@ class NewOverloadingConflictResolver(
                 candidate,
                 descriptor,
                 numDefaults,
-                parameterTypes = resolvedCall.atom.argumentsInParenthesis.map { valueArgumentToParameterType[it] } +
-                        listOfNotNull(resolvedCall.atom.externalArgument?.let { valueArgumentToParameterType[it] })
+                parameterTypes = resolvedCall.atom.argumentsInParenthesis.map { konstueArgumentToParameterType[it] } +
+                        listOfNotNull(resolvedCall.atom.externalArgument?.let { konstueArgumentToParameterType[it] })
             )
 
         }

@@ -2,11 +2,11 @@
 
 import kotlin.reflect.KClass
 
-annotation class Foo(val a: Array<KClass<*>> = [])
+annotation class Foo(konst a: Array<KClass<*>> = [])
 
 class Gen<T>
 
-annotation class Bar(val a: Array<KClass<*>> = [Int::class, Array<Int>::class, Gen::class])
+annotation class Bar(konst a: Array<KClass<*>> = [Int::class, Array<Int>::class, Gen::class])
 
 @Foo([])
 fun test1() {}

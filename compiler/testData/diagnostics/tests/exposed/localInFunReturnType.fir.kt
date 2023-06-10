@@ -1,60 +1,60 @@
-class My<T>(val value: T)
+class My<T>(konst konstue: T)
 
 open class Base
 
-fun <!EXPOSED_FUNCTION_RETURN_TYPE!>invalid1<!>() = run {
+fun <!EXPOSED_FUNCTION_RETURN_TYPE!>inkonstid1<!>() = run {
     class Local
     My(Local())
 }
 
-fun invalid2() = My(object {})
+fun inkonstid2() = My(object {})
 
-fun invalid3() = My(object : Base() {})
+fun inkonstid3() = My(object : Base() {})
 
-fun <!EXPOSED_FUNCTION_RETURN_TYPE!>invalid4<!>() = run {
+fun <!EXPOSED_FUNCTION_RETURN_TYPE!>inkonstid4<!>() = run {
     class Local
     My(My(Local()))
 }
 
-fun <!EXPOSED_FUNCTION_RETURN_TYPE!>invalid5<!>() = run {
-    fun invalid5a() = run {
+fun <!EXPOSED_FUNCTION_RETURN_TYPE!>inkonstid5<!>() = run {
+    fun inkonstid5a() = run {
         class Local
         Local()
     }
-    My(invalid5a())
+    My(inkonstid5a())
 }
 
 // Valid: effectively Any
-fun valid1() = object {}
+fun konstid1() = object {}
 
 // Valid: effectively Base
-fun valid2() = object : Base() {}
+fun konstid2() = object : Base() {}
 
 // Valid: explicit type argument
-fun valid3() = My<Base>(object : Base() {})
+fun konstid3() = My<Base>(object : Base() {})
 
 // Valid: explicit type specified
-fun valid4() : My<Base> = My(object : Base() {})
+fun konstid4() : My<Base> = My(object : Base() {})
 
 // Valid: local class denotable in local scope
-fun valid5() = run {
+fun konstid5() = run {
     class Local
-    fun valid5a() = My(Local())
-    My<Any>(valid5a())
+    fun konstid5a() = My(Local())
+    My<Any>(konstid5a())
 }
 
 // Valid: local class denotable in local scope
-fun valid6() = run {
+fun konstid6() = run {
     class Local
-    fun valid6a() = run {
-        fun valid6b() = My(Local())
-        valid6b()
+    fun konstid6a() = run {
+        fun konstid6b() = My(Local())
+        konstid6b()
     }
-    My<Any>(valid6a())
+    My<Any>(konstid6a())
 }
 
 // Valid: effectively My<Any>
-fun valid7() = run {
+fun konstid7() = run {
     class Local
     My<My<*>>(My(Local()))
 }

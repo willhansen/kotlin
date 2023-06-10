@@ -108,7 +108,7 @@ message ObjectLiteral {
 
 message ObjectLiteralEntry {
     required Expression key = 1;
-    required Expression value = 2;
+    required Expression konstue = 2;
 }
 
 message Function {
@@ -134,7 +134,7 @@ message Class {
 
 message Parameter {
     required int32 name_id = 1;
-    optional bool has_default_value = 2 [default = false];
+    optional bool has_default_konstue = 2 [default = false];
 }
 
 message DocComment {
@@ -143,8 +143,8 @@ message DocComment {
 
 message DocCommentTag {
     required int32 name_id = 1;
-    oneof value {
-        int32 value_string_id = 2;
+    oneof konstue {
+        int32 konstue_string_id = 2;
         Expression expression = 3;
     }
 }
@@ -287,7 +287,7 @@ message Statement {
 }
 
 message Return {
-    optional Expression value = 1;
+    optional Expression konstue = 1;
 }
 
 message Throw {
@@ -318,7 +318,7 @@ message Vars {
 
 message VarDeclaration {
     required int32 name_id = 1;
-    optional Expression initial_value = 2;
+    optional Expression initial_konstue = 2;
     optional int32 fileId = 3;
     optional Location location = 4;
 }
@@ -380,7 +380,7 @@ message EmptyInit {
 }
 
 message ForIn {
-    oneof value {
+    oneof konstue {
         int32 nameId = 1;
         Expression expression = 2;
     }

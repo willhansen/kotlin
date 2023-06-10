@@ -15,10 +15,10 @@ fun test1() {
 
 // KT-10567 Error: Rewrite at slice LEXICAL_SCOPE key: REFERENCE_EXPRESSION
 
-class Foo(val a: String, val b: String)
+class Foo(konst a: String, konst b: String)
 
 fun test2() {
-    val prop : Foo.() -> String = if (true) {
+    konst prop : Foo.() -> String = if (true) {
         Foo::a
     } else {
         Foo::b

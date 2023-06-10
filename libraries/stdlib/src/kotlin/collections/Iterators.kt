@@ -35,7 +35,7 @@ public inline fun <T> Iterator<T>.forEach(operation: (T) -> Unit): Unit {
 /**
  * Iterator transforming original `iterator` into iterator of [IndexedValue], counting index from zero.
  */
-internal class IndexingIterator<out T>(private val iterator: Iterator<T>) : Iterator<IndexedValue<T>> {
+internal class IndexingIterator<out T>(private konst iterator: Iterator<T>) : Iterator<IndexedValue<T>> {
     private var index = 0
     final override fun hasNext(): Boolean = iterator.hasNext()
     final override fun next(): IndexedValue<T> = IndexedValue(checkIndexOverflow(index++), iterator.next())

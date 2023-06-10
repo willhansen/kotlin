@@ -25,7 +25,7 @@ import test.lib.boo as foo
 
 var isFooCalled: Boolean = false
 
-val foo: (Int) -> Unit = { a: Int -> isFooCalled = true}
+konst foo: (Int) -> Unit = { a: Int -> isFooCalled = true}
 
 
 fun box(): String {

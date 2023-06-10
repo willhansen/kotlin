@@ -1,1 +1,1 @@
-val a = 1
+konst a = 1

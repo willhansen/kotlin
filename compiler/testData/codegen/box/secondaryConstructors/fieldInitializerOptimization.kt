@@ -9,7 +9,7 @@ open class Base {
     init { setup() }
 }
 
-val placeHolder = Any()
+konst placeHolder = Any()
 
 class Derived : Base {
     constructor() : super()
@@ -27,8 +27,8 @@ class Derived : Base {
 
     // Technically, this field initializer comes after the superclass
     // constructor is called. However, we optimize away field initializers
-    // which set fields to their default value, which is why x ends up with
-    // value 1 after the constructor call.
+    // which set fields to their default konstue, which is why x ends up with
+    // konstue 1 after the constructor call.
     var xBool = false
     var xByte = 0.toByte()
     var xChar = 0.toChar()
@@ -41,7 +41,7 @@ class Derived : Base {
 }
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     if (d.xBool != true) return "fail Bool"
     if (d.xByte != 1.toByte()) return "fail Byte"
     if (d.xChar != 2.toChar()) return "fail Char"

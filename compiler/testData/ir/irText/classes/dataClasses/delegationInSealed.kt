@@ -4,5 +4,5 @@
 // IGNORE_BACKEND_K1: JS_IR_ES6
 
 sealed class A : CharSequence {
-    data class B(val c: CharSequence) : A(), CharSequence by c
+    data class B(konst c: CharSequence) : A(), CharSequence by c
 }

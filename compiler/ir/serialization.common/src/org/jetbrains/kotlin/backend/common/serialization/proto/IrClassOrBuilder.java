@@ -85,11 +85,11 @@ public interface IrClassOrBuilder extends
   org.jetbrains.kotlin.backend.common.serialization.proto.IrInlineClassRepresentation getInlineClassRepresentation();
 
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
    */
   boolean hasMultiFieldValueClassRepresentation();
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrMultiFieldValueClassRepresentation getMultiFieldValueClassRepresentation();
 

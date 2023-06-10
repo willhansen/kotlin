@@ -1,8 +1,8 @@
 fun foo(): String {
-    val q1 = "O"
-    val q2 = "K"
-    val qq = q1 + q2
-    val b = js("\"$qq\"")
+    konst q1 = "O"
+    konst q2 = "K"
+    konst qq = q1 + q2
+    konst b = js("\"$qq\"")
     return b
 }
 

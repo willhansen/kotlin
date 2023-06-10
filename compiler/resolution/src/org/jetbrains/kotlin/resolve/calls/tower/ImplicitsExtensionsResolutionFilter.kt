@@ -24,6 +24,6 @@ interface ImplicitsExtensionsResolutionFilter {
 }
 
 class ScopeWithImplicitsExtensionsResolutionInfo(
-    val scope: HierarchicalScope,
-    val resolveExtensionsForImplicitReceiver: Boolean,
+    konst scope: HierarchicalScope,
+    konst resolveExtensionsForImplicitReceiver: Boolean,
 )

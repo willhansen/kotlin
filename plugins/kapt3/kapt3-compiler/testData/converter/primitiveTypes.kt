@@ -1,41 +1,41 @@
 object PrimitiveTypes {
-    const val booleanFalse: Boolean = false
-    const val booleanTrue: Boolean = true
+    const konst booleanFalse: Boolean = false
+    const konst booleanTrue: Boolean = true
 
-    const val int0: Int = 0
-    const val intMinus1000: Int = -1000
-    const val intMinValue: Int = Int.MIN_VALUE
-    const val intMaxValue: Int = Int.MAX_VALUE
-    const val intHex: Int = 0xffffffff.toInt()
+    const konst int0: Int = 0
+    const konst intMinus1000: Int = -1000
+    const konst intMinValue: Int = Int.MIN_VALUE
+    const konst intMaxValue: Int = Int.MAX_VALUE
+    const konst intHex: Int = 0xffffffff.toInt()
 
-    const val byte0: Byte = 0.toByte()
-    const val byte50: Byte = 50.toByte()
+    const konst byte0: Byte = 0.toByte()
+    const konst byte50: Byte = 50.toByte()
 
-    const val short5: Short = 5.toShort()
+    const konst short5: Short = 5.toShort()
 
-    const val charC: Char = 'C'
-    const val char0: Char = 0.toChar()
-    const val char10: Char = 10.toChar()
-    const val char13: Char = 13.toChar()
+    const konst charC: Char = 'C'
+    const konst char0: Char = 0.toChar()
+    const konst char10: Char = 10.toChar()
+    const konst char13: Char = 13.toChar()
 
-    const val long0: Long = 0L
-    const val longMaxValue: Long = Long.MAX_VALUE
-    const val longMinValue: Long = Long.MIN_VALUE
-    const val longHex: Long = 0xffffffff
+    const konst long0: Long = 0L
+    const konst longMaxValue: Long = Long.MAX_VALUE
+    const konst longMinValue: Long = Long.MIN_VALUE
+    const konst longHex: Long = 0xffffffff
 
-    const val float54 = 5.4f
-    val floatMaxValue = Float.MAX_VALUE
-    val floatNan = Float.NaN
-    val floatPositiveInfinity = Float.POSITIVE_INFINITY
-    val floatNegativeInfinity = Float.NEGATIVE_INFINITY
+    const konst float54 = 5.4f
+    konst floatMaxValue = Float.MAX_VALUE
+    konst floatNan = Float.NaN
+    konst floatPositiveInfinity = Float.POSITIVE_INFINITY
+    konst floatNegativeInfinity = Float.NEGATIVE_INFINITY
 
-    const val double54 = 5.4
-    val doubleMaxValue = Double.MAX_VALUE
-    val doubleNan = Double.NaN
-    val doublePositiveInfinity = Double.POSITIVE_INFINITY
-    val doubleNegativeInfinity = Double.NEGATIVE_INFINITY
+    const konst double54 = 5.4
+    konst doubleMaxValue = Double.MAX_VALUE
+    konst doubleNan = Double.NaN
+    konst doublePositiveInfinity = Double.POSITIVE_INFINITY
+    konst doubleNegativeInfinity = Double.NEGATIVE_INFINITY
 
-    const val stringHelloWorld: String = "Hello, world!"
-    const val stringQuotes: String = "quotes \" ''quotes"
-    const val stringRN: String = "\r\n"
+    const konst stringHelloWorld: String = "Hello, world!"
+    const konst stringQuotes: String = "quotes \" ''quotes"
+    const konst stringRN: String = "\r\n"
 }

@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.config
 import com.intellij.openapi.util.NlsSafe
 
 object CompilerRunnerConstants {
-    const val KOTLIN_COMPILER_NAME = "Kotlin"
+    const konst KOTLIN_COMPILER_NAME = "Kotlin"
     @NlsSafe
-    const val INTERNAL_ERROR_PREFIX = "[Internal Error] "
+    const konst INTERNAL_ERROR_PREFIX = "[Internal Error] "
 }

@@ -23,7 +23,7 @@ import kotlin.test.*
 
 @OptIn(ExperimentalStdlibApi::class)
 @RunWith(Parameterized::class)
-class IdeaKpmProjectObjectGraphTest(private val node: KClass<*>, @Suppress("unused_parameter") clazzName: String) {
+class IdeaKpmProjectObjectGraphTest(private konst node: KClass<*>, @Suppress("unused_parameter") clazzName: String) {
 
     @Test
     fun `test - node implements Serializable`() {
@@ -46,7 +46,7 @@ class IdeaKpmProjectObjectGraphTest(private val node: KClass<*>, @Suppress("unus
     @Test
     fun `test - node implementations contain serialVersionUID`() {
         if (!node.java.isInterface && !Modifier.isAbstract(node.java.modifiers)) {
-            val serialVersionUID = assertNotNull(
+            konst serialVersionUID = assertNotNull(
                 node.java.getDeclaredFieldOrNull("serialVersionUID"),
                 "Expected $node to declare 'serialVersionUID' field"
             )
@@ -87,8 +87,8 @@ class IdeaKpmProjectObjectGraphTest(private val node: KClass<*>, @Suppress("unus
     }
 
     companion object {
-        private val reflections = Reflections("org.jetbrains.kotlin")
-        private val ignoredNodes = setOf(
+        private konst reflections = Reflections("org.jetbrains.kotlin")
+        private konst ignoredNodes = setOf(
             /*
              Extras interface and AbstractExtras are okay for now:
              Let's check known implementations for correctness
@@ -99,14 +99,14 @@ class IdeaKpmProjectObjectGraphTest(private val node: KClass<*>, @Suppress("unus
         @JvmStatic
         @Parameterized.Parameters(name = "{1}")
         fun findNodes(): List<Array<Any>> {
-            val classes = mutableSetOf<KClass<*>>()
-            val resolveQueue = ArrayDeque<KClass<*>>(listOf(IdeaKpmProject::class))
+            konst classes = mutableSetOf<KClass<*>>()
+            konst resolveQueue = ArrayDeque<KClass<*>>(listOf(IdeaKpmProject::class))
 
             while (resolveQueue.isNotEmpty()) {
-                val next = resolveQueue.removeFirst()
+                konst next = resolveQueue.removeFirst()
 
                 /* Model gets replaced by other class */
-                val writeReplacedModelAnnotation = next.findAnnotation<WriteReplacedModel>()
+                konst writeReplacedModelAnnotation = next.findAnnotation<WriteReplacedModel>()
                 if (writeReplacedModelAnnotation != null) {
                     resolveQueue.add(writeReplacedModelAnnotation.replacedBy)
                     continue
@@ -116,7 +116,7 @@ class IdeaKpmProjectObjectGraphTest(private val node: KClass<*>, @Suppress("unus
                 next.resolveReachableClasses().forEach { child ->
                     resolveQueue.add(child)
                     if (child.java.isInterface || Modifier.isAbstract(child.java.modifiers)) {
-                        val subtypes = reflections.getSubTypesOf(child.java).map { it.kotlin }
+                        konst subtypes = reflections.getSubTypesOf(child.java).map { it.kotlin }
                         assertTrue(subtypes.isNotEmpty(), "Missing implementations for $child")
                         resolveQueue.addAll(subtypes)
                     }

@@ -1,6 +1,6 @@
 package
 
-public val top: kotlin.Int
+public konst top: kotlin.Int
 public fun bar(): kotlin.Unit
 public fun foo(): kotlin.Unit
 public fun gau(): kotlin.Unit
@@ -9,7 +9,7 @@ public fun init(): kotlin.Unit
 
 public open class Gau {
     public constructor Gau(/*0*/ s: kotlin.String)
-    public final val s: kotlin.String
+    public final konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -2,19 +2,19 @@
 // TARGET_BACKEND: JVM
 object Test {
     @JvmStatic
-    lateinit var value: String
+    lateinit var konstue: String
 
-    val isInitialized
-        get() = Test::value.isInitialized
+    konst isInitialized
+        get() = Test::konstue.isInitialized
 
-    val isInitializedThroughFn
-        get() = self()::value.isInitialized
+    konst isInitializedThroughFn
+        get() = self()::konstue.isInitialized
 
-    fun self() = Test.apply { value = "OK" }
+    fun self() = Test.apply { konstue = "OK" }
 }
 
 fun box(): String {
     if (Test.isInitialized) return "fail 1"
     if (!Test.isInitializedThroughFn) return "fail 2"
-    return Test.value
+    return Test.konstue
 }

@@ -5,6 +5,6 @@ fun applySomething(build: Build) = when (build) {
     Build.Release -> "fail"
 }
 
-val rv = applySomething(Build.Debug)
+konst rv = applySomething(Build.Debug)
 
 // expected: rv: OK

@@ -28,9 +28,9 @@ abstract class AbstractCollectDiagnosticsTest : AbstractAnalysisApiSingleFileTes
         }
 
         analyseForTest(ktFile) {
-            val diagnosticsInFile =
+            konst diagnosticsInFile =
                 ktFile.collectDiagnosticsForFile(KtDiagnosticCheckerFilter.EXTENDED_AND_COMMON_CHECKERS).map { it.getKey() }.sorted()
-            val diagnosticsFromElements = buildList {
+            konst diagnosticsFromElements = buildList {
                 ktFile.accept(object : KtTreeVisitorVoid() {
                     override fun visitKtElement(element: KtElement) {
                         for (diagnostic in element.getDiagnostics(KtDiagnosticCheckerFilter.EXTENDED_AND_COMMON_CHECKERS)) {
@@ -41,9 +41,9 @@ abstract class AbstractCollectDiagnosticsTest : AbstractAnalysisApiSingleFileTes
                 })
             }.sortedBy { (_, diagnostic) -> diagnostic }
 
-            val actual = buildString {
+            konst actual = buildString {
                 fun DiagnosticKey.print(indent: Int) {
-                    val indentString = " ".repeat(indent)
+                    konst indentString = " ".repeat(indent)
                     append(indentString + factoryName)
                     appendLine("$indentString  text ranges: $textRanges")
                     appendLine("$indentString  PSI: ${psi::class.simpleName} at ${psi.textRange.asLineColumnRange()}")
@@ -64,10 +64,10 @@ abstract class AbstractCollectDiagnosticsTest : AbstractAnalysisApiSingleFileTes
         }
     }
 
-    private data class DiagnosticKey(val factoryName: String?, val psi: PsiElement, val textRanges: Collection<TextRange>) :
+    private data class DiagnosticKey(konst factoryName: String?, konst psi: PsiElement, konst textRanges: Collection<TextRange>) :
         Comparable<DiagnosticKey> {
         override fun toString(): String {
-            val document = psi.containingFile.viewProvider.document
+            konst document = psi.containingFile.viewProvider.document
             return "$factoryName on ${psi::class.simpleName} at ${offsetToLineAndColumn(document, psi.startOffset)})"
         }
 

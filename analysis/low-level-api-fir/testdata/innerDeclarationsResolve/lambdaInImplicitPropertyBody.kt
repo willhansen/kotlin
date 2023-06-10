@@ -7,8 +7,8 @@ inline fun <T, R> T.let(block: (T) -> R): R {
 }
 
 class B {
-    val a: Int = 10
-    val x = with(a) {
+    konst a: Int = 10
+    konst x = with(a) {
         toString().let { it }
     }
 }

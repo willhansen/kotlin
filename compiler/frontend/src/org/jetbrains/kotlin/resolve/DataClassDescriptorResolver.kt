@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.builtIns
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 object DataClassDescriptorResolver {
-    val COPY_METHOD_NAME = Name.identifier("copy")
+    konst COPY_METHOD_NAME = Name.identifier("copy")
 
     fun createComponentName(index: Int): Name = DataClassResolver.createComponentName(index)
 
@@ -41,7 +41,7 @@ object DataClassDescriptorResolver {
         classDescriptor: ClassDescriptor,
         trace: BindingTrace
     ): SimpleFunctionDescriptor {
-        val functionDescriptor = SimpleFunctionDescriptorImpl.create(
+        konst functionDescriptor = SimpleFunctionDescriptorImpl.create(
             classDescriptor,
             Annotations.EMPTY,
             createComponentName(parameterIndex),
@@ -70,7 +70,7 @@ object DataClassDescriptorResolver {
         classDescriptor: ClassDescriptor,
         trace: BindingTrace
     ): SimpleFunctionDescriptor {
-        val functionDescriptor = SimpleFunctionDescriptorImpl.create(
+        konst functionDescriptor = SimpleFunctionDescriptorImpl.create(
             classDescriptor,
             Annotations.EMPTY,
             COPY_METHOD_NAME,
@@ -78,13 +78,13 @@ object DataClassDescriptorResolver {
             classDescriptor.source
         )
 
-        val parameterDescriptors = arrayListOf<ValueParameterDescriptor>()
+        konst parameterDescriptors = arrayListOf<ValueParameterDescriptor>()
 
         for (parameter in constructorParameters) {
-            val propertyDescriptor = trace.bindingContext.get(BindingContext.VALUE_PARAMETER_AS_PROPERTY, parameter)
-            // If a parameter doesn't have the corresponding property, it must not have a default value in the 'copy' function
-            val declaresDefaultValue = propertyDescriptor != null
-            val parameterDescriptor = ValueParameterDescriptorImpl(
+            konst propertyDescriptor = trace.bindingContext.get(BindingContext.VALUE_PARAMETER_AS_PROPERTY, parameter)
+            // If a parameter doesn't have the corresponding property, it must not have a default konstue in the 'copy' function
+            konst declaresDefaultValue = propertyDescriptor != null
+            konst parameterDescriptor = ValueParameterDescriptorImpl(
                 functionDescriptor, null, parameter.index, parameter.annotations, parameter.name, parameter.type, declaresDefaultValue,
                 parameter.isCrossinline, parameter.isNoinline, parameter.varargElementType, parameter.source
             )

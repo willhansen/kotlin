@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.resolve.calls.checkers.CallChecker;
 import org.jetbrains.kotlin.resolve.calls.checkers.RttiExpressionChecker;
 import org.jetbrains.kotlin.resolve.calls.model.KotlinCallComponents;
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowValueFactory;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver;
 import org.jetbrains.kotlin.extensions.internal.TypeResolutionInterceptor;
 import org.jetbrains.kotlin.types.WrappedTypeFactory;
@@ -47,9 +47,9 @@ public class ExpressionTypingComponents {
     public DescriptorResolver descriptorResolver;
     public TypeResolver typeResolver;
     public AnnotationResolver annotationResolver;
-    public ValueParameterResolver valueParameterResolver;
+    public ValueParameterResolver konstueParameterResolver;
     public DestructuringDeclarationResolver destructuringDeclarationResolver;
-    public ConstantExpressionEvaluator constantExpressionEvaluator;
+    public ConstantExpressionEkonstuator constantExpressionEkonstuator;
     public ModifiersChecker modifiersChecker;
     public DataFlowAnalyzer dataFlowAnalyzer;
     public Iterable<CallChecker> callCheckers;
@@ -156,8 +156,8 @@ public class ExpressionTypingComponents {
     }
 
     @Inject
-    public void setValueParameterResolver(ValueParameterResolver valueParameterResolver) {
-        this.valueParameterResolver = valueParameterResolver;
+    public void setValueParameterResolver(ValueParameterResolver konstueParameterResolver) {
+        this.konstueParameterResolver = konstueParameterResolver;
     }
 
     @Inject
@@ -166,8 +166,8 @@ public class ExpressionTypingComponents {
     }
 
     @Inject
-    public void setConstantExpressionEvaluator(@NotNull ConstantExpressionEvaluator constantExpressionEvaluator) {
-        this.constantExpressionEvaluator = constantExpressionEvaluator;
+    public void setConstantExpressionEkonstuator(@NotNull ConstantExpressionEkonstuator constantExpressionEkonstuator) {
+        this.constantExpressionEkonstuator = constantExpressionEkonstuator;
     }
 
     @Inject

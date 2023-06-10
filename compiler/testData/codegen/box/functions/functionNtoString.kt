@@ -9,7 +9,7 @@
 // WITH_REFLECT
 
 fun check(expected: String, obj: Any?) {
-    val actual = obj.toString()
+    konst actual = obj.toString()
     if (actual != expected)
         throw AssertionError("Expected: $expected, actual: $actual")
 }

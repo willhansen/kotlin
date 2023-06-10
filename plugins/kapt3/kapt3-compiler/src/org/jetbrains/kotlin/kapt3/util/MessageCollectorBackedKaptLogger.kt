@@ -17,21 +17,21 @@ import java.io.PrintWriter
 import java.io.StringWriter
 
 class MessageCollectorBackedKaptLogger(
-    override val isVerbose: Boolean,
+    override konst isVerbose: Boolean,
     isInfoAsWarnings: Boolean,
-    val messageCollector: MessageCollector = defaultMessageCollector(isVerbose)
+    konst messageCollector: MessageCollector = defaultMessageCollector(isVerbose)
 ) : KaptLogger {
     constructor(flags: KaptFlags, messageCollector: MessageCollector = defaultMessageCollector(flags[KaptFlag.VERBOSE]))
             : this(flags[KaptFlag.VERBOSE], flags[KaptFlag.INFO_AS_WARNINGS], messageCollector)
 
     private companion object {
-        const val PREFIX = "[kapt] "
+        const konst PREFIX = "[kapt] "
         fun defaultMessageCollector(isVerbose: Boolean) = PrintingMessageCollector(System.err, PLAIN_FULL_PATHS, isVerbose)
     }
 
-    override val errorWriter = makeWriter(ERROR)
-    override val warnWriter = makeWriter(STRONG_WARNING)
-    override val infoWriter = makeWriter(if (isInfoAsWarnings) WARNING else INFO)
+    override konst errorWriter = makeWriter(ERROR)
+    override konst warnWriter = makeWriter(STRONG_WARNING)
+    override konst infoWriter = makeWriter(if (isInfoAsWarnings) WARNING else INFO)
 
     override fun info(message: String) {
         if (isVerbose) {
@@ -48,8 +48,8 @@ class MessageCollectorBackedKaptLogger(
     }
 
     override fun exception(e: Throwable) {
-        val stacktrace = run {
-            val writer = StringWriter()
+        konst stacktrace = run {
+            konst writer = StringWriter()
             e.printStackTrace(PrintWriter(writer))
             writer.toString()
         }

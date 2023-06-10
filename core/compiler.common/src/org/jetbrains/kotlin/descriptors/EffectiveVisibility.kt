@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.types.TypeCheckerState
 import org.jetbrains.kotlin.types.model.TypeCheckerProviderContext
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 
-sealed class EffectiveVisibility(val name: String, val publicApi: Boolean = false, val privateApi: Boolean = false) {
+sealed class EffectiveVisibility(konst name: String, konst publicApi: Boolean = false, konst privateApi: Boolean = false) {
     override fun toString() = name
 
     //                    Public
@@ -91,7 +91,7 @@ sealed class EffectiveVisibility(val name: String, val publicApi: Boolean = fals
         override fun toVisibility(): Visibility = Visibilities.Private
     }
 
-    class Protected(val containerTypeConstructor: TypeConstructorMarker?) : EffectiveVisibility("protected", publicApi = true) {
+    class Protected(konst containerTypeConstructor: TypeConstructorMarker?) : EffectiveVisibility("protected", publicApi = true) {
 
         override fun equals(other: Any?) = (other is Protected && containerTypeConstructor == other.containerTypeConstructor)
 
@@ -157,7 +157,7 @@ sealed class EffectiveVisibility(val name: String, val publicApi: Boolean = fals
 
     // Lower bound for internal and protected(C)
     class InternalProtected(
-        val containerTypeConstructor: TypeConstructorMarker?
+        konst containerTypeConstructor: TypeConstructorMarker?
     ) : EffectiveVisibility("internal & protected", publicApi = false) {
 
         override fun equals(other: Any?) = (other is InternalProtected && containerTypeConstructor == other.containerTypeConstructor)
@@ -233,7 +233,7 @@ sealed class EffectiveVisibility(val name: String, val publicApi: Boolean = fals
         }
 }
 
-enum class RelationToType(val description: String) {
+enum class RelationToType(konst description: String) {
     CONSTRUCTOR(""),
     CONTAINER(" containing declaration"),
     ARGUMENT(" argument"),

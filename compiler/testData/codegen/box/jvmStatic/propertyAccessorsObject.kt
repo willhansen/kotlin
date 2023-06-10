@@ -5,10 +5,10 @@
 var result = "fail 2"
 object Foo {
     @JvmStatic
-    private val a = "OK"
+    private konst a = "OK"
 
-    val b = { a }
-    val c = Runnable { result = a }
+    konst b = { a }
+    konst c = Runnable { result = a }
 }
 
 fun box(): String {

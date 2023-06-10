@@ -65,27 +65,27 @@ import org.jetbrains.org.objectweb.asm.commons.Method
 import java.io.File
 
 class ClassCodegen private constructor(
-    val irClass: IrClass,
-    val context: JvmBackendContext,
-    private val parentFunction: IrFunction?,
+    konst irClass: IrClass,
+    konst context: JvmBackendContext,
+    private konst parentFunction: IrFunction?,
 ) {
     // We need to avoid recursive calls to getOrCreate() from within the constructor to prevent lockups
     // in ConcurrentHashMap context.classCodegens.
-    private val parentClassCodegen by lazy {
+    private konst parentClassCodegen by lazy {
         (parentFunction?.parentAsClass ?: irClass.parent as? IrClass)?.let { getOrCreate(it, context) }
     }
-    private val withinInline: Boolean by lazy { parentClassCodegen?.withinInline == true || parentFunction?.isInline == true }
-    private val metadataSerializer: MetadataSerializer by lazy {
+    private konst withinInline: Boolean by lazy { parentClassCodegen?.withinInline == true || parentFunction?.isInline == true }
+    private konst metadataSerializer: MetadataSerializer by lazy {
         context.backendExtension.createSerializer(
             context, irClass, type, visitor.serializationBindings, parentClassCodegen?.metadataSerializer
         )
     }
 
-    val smap = context.getSourceMapper(irClass)
-    private val state get() = context.state
+    konst smap = context.getSourceMapper(irClass)
+    private konst state get() = context.state
 
-    private val innerClasses = mutableSetOf<IrClass>()
-    val typeMapper =
+    private konst innerClasses = mutableSetOf<IrClass>()
+    konst typeMapper =
         if (context.state.oldInnerClassesLogic)
             context.defaultTypeMapper
         else object : IrTypeMapper(context) {
@@ -102,19 +102,19 @@ class ClassCodegen private constructor(
             }
         }
 
-    val methodSignatureMapper = MethodSignatureMapper(context, typeMapper)
+    konst methodSignatureMapper = MethodSignatureMapper(context, typeMapper)
 
-    val type: Type = typeMapper.mapClass(irClass)
+    konst type: Type = typeMapper.mapClass(irClass)
 
-    val reifiedTypeParametersUsages = ReifiedTypeParametersUsages()
+    konst reifiedTypeParametersUsages = ReifiedTypeParametersUsages()
 
-    private val jvmSignatureClashDetector = JvmSignatureClashDetector(this)
+    private konst jvmSignatureClashDetector = JvmSignatureClashDetector(this)
 
-    private val visitor = state.factory.newVisitor(irClass.descriptorOrigin, type, irClass.fileParent.loadSourceFilesInfo()).apply {
-        val signature = typeMapper.mapClassSignature(irClass, type, context.state.classBuilderMode.generateBodies)
-        // Ensure that the backend only produces class names that would be valid in the frontend for JVM.
-        if (context.state.classBuilderMode.generateBodies && signature.hasInvalidName()) {
-            throw IllegalStateException("Generating class with invalid name '${type.className}': ${irClass.dump()}")
+    private konst visitor = state.factory.newVisitor(irClass.descriptorOrigin, type, irClass.fileParent.loadSourceFilesInfo()).apply {
+        konst signature = typeMapper.mapClassSignature(irClass, type, context.state.classBuilderMode.generateBodies)
+        // Ensure that the backend only produces class names that would be konstid in the frontend for JVM.
+        if (context.state.classBuilderMode.generateBodies && signature.hasInkonstidName()) {
+            throw IllegalStateException("Generating class with inkonstid name '${type.className}': ${irClass.dump()}")
         }
         defineClass(
             irClass.psiElement,
@@ -128,10 +128,10 @@ class ClassCodegen private constructor(
     }
 
     // TODO: the names produced by generators in this map depend on the order in which methods are generated; see above.
-    private val regeneratedObjectNameGenerators = mutableMapOf<String, NameGenerator>()
+    private konst regeneratedObjectNameGenerators = mutableMapOf<String, NameGenerator>()
 
     fun getRegeneratedObjectNameGenerator(function: IrFunction): NameGenerator {
-        val name = if (function.name.isSpecial) SPECIAL_TRANSFORMATION_NAME else "\$${function.name.asString()}"
+        konst name = if (function.name.isSpecial) SPECIAL_TRANSFORMATION_NAME else "\$${function.name.asString()}"
         return regeneratedObjectNameGenerators.getOrPut(name) {
             NameGenerator("${type.internalName}$name$INLINE_CALL_TRANSFORMATION_SUFFIX")
         }
@@ -218,17 +218,17 @@ class ClassCodegen private constructor(
     }
 
     private fun shouldSkipCodeGenerationAccordingToGenerationFilter(): Boolean {
-        val filter = state.generateDeclaredClassFilter
-        val ktFile = irClass.descriptorOrigin.element as? KtFile
-        val ktClass = irClass.psiElement as? KtClassOrObject
+        konst filter = state.generateDeclaredClassFilter
+        konst ktFile = irClass.descriptorOrigin.element as? KtFile
+        konst ktClass = irClass.psiElement as? KtClassOrObject
         return (ktFile != null && !filter.shouldGeneratePackagePart(ktFile))
                 || (ktClass != null && !filter.shouldGenerateClass(ktClass))
     }
 
     private fun generatePermittedSubclasses() {
-        val sealedSubclasses = irClass.sealedSubclasses
+        konst sealedSubclasses = irClass.sealedSubclasses
         if (sealedSubclasses.isEmpty()) return
-        val classVisitor = visitor.visitor
+        konst classVisitor = visitor.visitor
         for (sealedSubclassSymbol in sealedSubclasses) {
             classVisitor.visitPermittedSubclass(typeMapper.mapClass(sealedSubclassSymbol.owner).internalName)
         }
@@ -237,11 +237,11 @@ class ClassCodegen private constructor(
     fun generateAssertFieldIfNeeded(generatingClInit: Boolean): IrExpression? {
         if (irClass.hasAssertionsDisabledField(context))
             return null
-        val topLevelClass = generateSequence(this) { it.parentClassCodegen }.last().irClass
-        val field = irClass.buildAssertionsDisabledField(context, topLevelClass)
+        konst topLevelClass = generateSequence(this) { it.parentClassCodegen }.last().irClass
+        konst field = irClass.buildAssertionsDisabledField(context, topLevelClass)
         irClass.declarations.add(0, field)
         // Normally, `InitializersLowering` would move the initializer to <clinit>, but it's obviously too late for that.
-        val init = with(field) {
+        konst init = with(field) {
             IrSetFieldImpl(startOffset, endOffset, symbol, null, initializer!!.expression, context.irBuiltIns.unitType)
         }
         if (generatingClInit) {
@@ -249,7 +249,7 @@ class ClassCodegen private constructor(
             // directly. At least we know that nothing before this point uses the field.
             return init
         }
-        val classInitializer = irClass.functions.singleOrNull { it.name.asString() == "<clinit>" } ?: irClass.addFunction {
+        konst classInitializer = irClass.functions.singleOrNull { it.name.asString() == "<clinit>" } ?: irClass.addFunction {
             name = Name.special("<clinit>")
             returnType = context.irBuiltIns.unitType
         }.apply {
@@ -261,10 +261,10 @@ class ClassCodegen private constructor(
     }
 
     private fun generateKotlinMetadataAnnotation() {
-        val facadeClassName = context.multifileFacadeForPart[irClass.attributeOwnerId]
-        val metadata = irClass.metadata
-        val entry = irClass.fileParent.fileEntry
-        val kind = when {
+        konst facadeClassName = context.multifileFacadeForPart[irClass.attributeOwnerId]
+        konst metadata = irClass.metadata
+        konst entry = irClass.fileParent.fileEntry
+        konst kind = when {
             facadeClassName != null -> KotlinClassHeader.Kind.MULTIFILE_CLASS_PART
             metadata is MetadataSource.Class -> KotlinClassHeader.Kind.CLASS
             metadata is MetadataSource.Script -> KotlinClassHeader.Kind.CLASS
@@ -273,13 +273,13 @@ class ClassCodegen private constructor(
             entry is MultifileFacadeFileEntry -> KotlinClassHeader.Kind.MULTIFILE_CLASS
             else -> KotlinClassHeader.Kind.SYNTHETIC_CLASS
         }
-        val serializedIr = when (metadata) {
+        konst serializedIr = when (metadata) {
             is MetadataSource.Class -> metadata.serializedIr
             is MetadataSource.File -> metadata.serializedIr
             else -> null
         }
 
-        val isMultifileClassOrPart = kind == KotlinClassHeader.Kind.MULTIFILE_CLASS || kind == KotlinClassHeader.Kind.MULTIFILE_CLASS_PART
+        konst isMultifileClassOrPart = kind == KotlinClassHeader.Kind.MULTIFILE_CLASS || kind == KotlinClassHeader.Kind.MULTIFILE_CLASS_PART
 
         var extraFlags = context.backendExtension.generateMetadataExtraFlags(state.abiStability)
         if (isMultifileClassOrPart && state.languageVersionSettings.getFlag(JvmAnalysisFlags.inheritMultifileParts)) {
@@ -299,7 +299,7 @@ class ClassCodegen private constructor(
         // 4) Annotation implementation classes used from public inline function. Similar to
         //    public WhenMapping classes, these are collected in `publicAbiSymbols` in
         //    `JvmAnnotationImplementationTransformer`.
-        val isPublicAbi = irClass.symbol in context.publicAbiSymbols || irClass.isInlineSamWrapper ||
+        konst isPublicAbi = irClass.symbol in context.publicAbiSymbols || irClass.isInlineSamWrapper ||
                 type.isAnonymousClass && irClass.isInPublicInlineScope
 
         writeKotlinMetadata(visitor, state, kind, isPublicAbi, extraFlags) { av ->
@@ -310,9 +310,9 @@ class ClassCodegen private constructor(
             }
 
             if (entry is MultifileFacadeFileEntry) {
-                val arv = av.visitArray(JvmAnnotationNames.METADATA_DATA_FIELD_NAME)
+                konst arv = av.visitArray(JvmAnnotationNames.METADATA_DATA_FIELD_NAME)
                 for (partFile in entry.partFiles) {
-                    val fileClass = partFile.declarations.singleOrNull { it.isFileClass } as IrClass?
+                    konst fileClass = partFile.declarations.singleOrNull { it.isFileClass } as IrClass?
                     if (fileClass != null) arv.visit(null, typeMapper.mapClass(fileClass).internalName)
                 }
                 arv.visitEnd()
@@ -323,7 +323,7 @@ class ClassCodegen private constructor(
             }
 
             if (irClass in context.classNameOverride) {
-                val isFileClass = isMultifileClassOrPart || kind == KotlinClassHeader.Kind.FILE_FACADE
+                konst isFileClass = isMultifileClassOrPart || kind == KotlinClassHeader.Kind.FILE_FACADE
                 assert(isFileClass) { "JvmPackageName is not supported for classes: ${irClass.render()}" }
                 av.visit(JvmAnnotationNames.METADATA_PACKAGE_NAME_FIELD_NAME, irClass.fqNameWhenAvailable!!.parent().asString())
             }
@@ -332,7 +332,7 @@ class ClassCodegen private constructor(
     }
 
     private fun IrFile.loadSourceFilesInfo(): List<File> {
-        val entry = fileEntry
+        konst entry = fileEntry
         if (entry is MultifileFacadeFileEntry) {
             return entry.partFiles.flatMap { it.loadSourceFilesInfo() }
         }
@@ -340,21 +340,21 @@ class ClassCodegen private constructor(
     }
 
     private fun generateField(field: IrField) {
-        val fieldType = typeMapper.mapType(field)
-        val fieldSignature =
+        konst fieldType = typeMapper.mapType(field)
+        konst fieldSignature =
             if (field.origin == IrDeclarationOrigin.PROPERTY_DELEGATE) null
             else methodSignatureMapper.mapFieldSignature(field)
-        val fieldName = field.name.asString()
-        val flags = field.computeFieldFlags(context, state.languageVersionSettings)
-        val fv = visitor.newField(
+        konst fieldName = field.name.asString()
+        konst flags = field.computeFieldFlags(context, state.languageVersionSettings)
+        konst fv = visitor.newField(
             field.descriptorOrigin, flags, fieldName, fieldType.descriptor,
-            fieldSignature, (field.initializer?.expression as? IrConst<*>)?.value
+            fieldSignature, (field.initializer?.expression as? IrConst<*>)?.konstue
         )
 
         jvmSignatureClashDetector.trackField(field, RawSignature(fieldName, fieldType.descriptor, MemberKind.FIELD))
 
         if (field.origin != JvmLoweredDeclarationOrigin.CONTINUATION_CLASS_RESULT_FIELD) {
-            val skipNullabilityAnnotations =
+            konst skipNullabilityAnnotations =
                 flags and (Opcodes.ACC_SYNTHETIC or Opcodes.ACC_ENUM) != 0 ||
                         (field.origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE && irClass.isSyntheticSingleton)
             object : AnnotationCodegen(this@ClassCodegen, skipNullabilityAnnotations) {
@@ -363,7 +363,7 @@ class ClassCodegen private constructor(
                 }
 
                 override fun visitTypeAnnotation(descr: String, path: TypePath?, visible: Boolean): AnnotationVisitor {
-                    return fv.visitTypeAnnotation(TypeReference.newTypeReference(TypeReference.FIELD).value, path, descr, visible)
+                    return fv.visitTypeAnnotation(TypeReference.newTypeReference(TypeReference.FIELD).konstue, path, descr, visible)
                 }
             }.genAnnotations(field, fieldType, field.type)
         }
@@ -378,7 +378,7 @@ class ClassCodegen private constructor(
         }
     }
 
-    private val generatedInlineMethods = mutableMapOf<IrFunction, SMAPAndMethodNode>()
+    private konst generatedInlineMethods = mutableMapOf<IrFunction, SMAPAndMethodNode>()
 
     fun generateMethodNode(method: IrFunction): SMAPAndMethodNode {
         if (!method.isInline && !method.isSuspendCapturingCrossinline()) {
@@ -391,7 +391,7 @@ class ClassCodegen private constructor(
         }
 
         // Only allow generation of one inline method at a time, to avoid deadlocks when files call inline methods of each other.
-        val (node, smap) =
+        konst (node, smap) =
             generatedInlineMethods[method] ?: synchronized(context.inlineMethodGenerationLock) {
                 generatedInlineMethods.getOrPut(method) { FunctionCodegen(method, this).generate() }
             }
@@ -404,25 +404,25 @@ class ClassCodegen private constructor(
             return
         }
 
-        val (node, smap) = generateMethodNode(method)
+        konst (node, smap) = generateMethodNode(method)
         node.preprocessSuspendMarkers(
             method.origin == JvmLoweredDeclarationOrigin.FOR_INLINE_STATE_MACHINE_TEMPLATE || method.isEffectivelyInlineOnly(),
             method.origin == JvmLoweredDeclarationOrigin.FOR_INLINE_STATE_MACHINE_TEMPLATE_CAPTURES_CROSSINLINE
         )
-        val mv = with(node) { visitor.newMethod(method.descriptorOrigin, access, name, desc, signature, exceptions.toTypedArray()) }
-        val smapCopier = SourceMapCopier(classSMAP, smap)
-        val smapCopyingVisitor = object : MethodVisitor(Opcodes.API_VERSION, mv) {
+        konst mv = with(node) { visitor.newMethod(method.descriptorOrigin, access, name, desc, signature, exceptions.toTypedArray()) }
+        konst smapCopier = SourceMapCopier(classSMAP, smap)
+        konst smapCopyingVisitor = object : MethodVisitor(Opcodes.API_VERSION, mv) {
             override fun visitLineNumber(line: Int, start: Label) =
                 super.visitLineNumber(smapCopier.mapLineNumber(line), start)
         }
         if (method.hasContinuation()) {
             // Generate a state machine within this method. The continuation class for it should be generated
             // lazily so that if tail call optimization kicks in, the unused class will not be written to the output.
-            val continuationClass = method.continuationClass() // null if `SuspendLambda.invokeSuspend` - `this` is continuation itself
-            val continuationClassCodegen = lazy { if (continuationClass != null) getOrCreate(continuationClass, context, method) else this }
+            konst continuationClass = method.continuationClass() // null if `SuspendLambda.invokeSuspend` - `this` is continuation itself
+            konst continuationClassCodegen = lazy { if (continuationClass != null) getOrCreate(continuationClass, context, method) else this }
 
             // For suspend lambdas continuation class is null, and we need to use containing class to put L$ fields
-            val attributeContainer = continuationClass?.attributeOwnerId ?: irClass.attributeOwnerId
+            konst attributeContainer = continuationClass?.attributeOwnerId ?: irClass.attributeOwnerId
 
             node.acceptWithStateMachine(
                 method,
@@ -430,18 +430,18 @@ class ClassCodegen private constructor(
                 smapCopyingVisitor,
                 context.continuationClassesVarsCountByType[attributeContainer] ?: emptyMap()
             ) {
-                continuationClassCodegen.value.visitor
+                continuationClassCodegen.konstue.visitor
             }
 
             if (continuationClass != null && (continuationClassCodegen.isInitialized() || method.isSuspendCapturingCrossinline())) {
-                continuationClassCodegen.value.generate()
+                continuationClassCodegen.konstue.generate()
             }
         } else {
             node.accept(smapCopyingVisitor)
         }
         jvmSignatureClashDetector.trackMethod(method, RawSignature(node.name, node.desc, MemberKind.METHOD))
 
-        when (val metadata = method.metadata) {
+        when (konst metadata = method.metadata) {
             is MetadataSource.Property -> metadataSerializer.bindPropertyMetadata(metadata, Method(node.name, node.desc), method.origin)
             is MetadataSource.Function -> metadataSerializer.bindMethodMetadata(metadata, Method(node.name, node.desc))
             null -> Unit
@@ -465,28 +465,28 @@ class ClassCodegen private constructor(
         // or constructor, the name and type of the function is recorded as well.
         if (parentClassCodegen != null) {
             // In case there's no primary constructor, it's unclear which constructor should be the enclosing one, so we select the first.
-            val enclosingFunction = if (irClass.attributeOwnerId in context.isEnclosedInConstructor) {
-                val containerClass = parentClassCodegen!!.irClass
+            konst enclosingFunction = if (irClass.attributeOwnerId in context.isEnclosedInConstructor) {
+                konst containerClass = parentClassCodegen!!.irClass
                 containerClass.primaryConstructor
                     ?: containerClass.declarations.firstIsInstanceOrNull<IrConstructor>()
                     ?: error("Class in a non-static initializer found, but container has no constructors: ${containerClass.render()}")
             } else parentFunction
             if (enclosingFunction != null || irClass.isAnonymousInnerClass) {
-                val method = enclosingFunction?.let(methodSignatureMapper::mapAsmMethod)?.takeIf { it.name != "<clinit>" }
+                konst method = enclosingFunction?.let(methodSignatureMapper::mapAsmMethod)?.takeIf { it.name != "<clinit>" }
                 visitor.visitOuterClass(parentClassCodegen!!.type.internalName, method?.name, method?.descriptor)
             }
         }
 
         for (klass in innerClasses.sortedBy { it.fqNameWhenAvailable?.asString() }) {
-            val innerJavaClassId = klass.mapToJava()
-            val innerClass = innerJavaClassId?.internalName ?: typeMapper.classInternalName(klass)
-            val outerClass =
+            konst innerJavaClassId = klass.mapToJava()
+            konst innerClass = innerJavaClassId?.internalName ?: typeMapper.classInternalName(klass)
+            konst outerClass =
                 if (klass.isSamWrapper || klass.isAnnotationImplementation || klass.attributeOwnerId in context.isEnclosedInConstructor)
                     null
                 else {
-                    when (val parent = klass.parent) {
+                    when (konst parent = klass.parent) {
                         is IrClass -> {
-                            val outerJavaClassId = parent.mapToJava()
+                            konst outerJavaClassId = parent.mapToJava()
                             if (innerJavaClassId?.packageFqName != outerJavaClassId?.packageFqName) {
                                 continue
                             }
@@ -496,24 +496,24 @@ class ClassCodegen private constructor(
                         else -> null
                     }
                 }
-            val innerName = if (klass.isAnonymousInnerClass) null else innerJavaClassId?.shortClassName?.asString() ?: klass.name.asString()
-            val accessFlags = klass.calculateInnerClassAccessFlags(context)
+            konst innerName = if (klass.isAnonymousInnerClass) null else innerJavaClassId?.shortClassName?.asString() ?: klass.name.asString()
+            konst accessFlags = klass.calculateInnerClassAccessFlags(context)
             visitor.visitInnerClass(innerClass, outerClass, innerName, accessFlags)
         }
     }
 
     private fun IrClass.mapToJava(): ClassId? = fqNameWhenAvailable?.toUnsafe()?.let(::mapKotlinToJava)
 
-    private val IrClass.isAnonymousInnerClass: Boolean
+    private konst IrClass.isAnonymousInnerClass: Boolean
         get() = isSamWrapper || name.isSpecial || isAnnotationImplementation // NB '<Continuation>' is treated as anonymous inner class here
 
-    private val IrClass.isInlineSamWrapper: Boolean
+    private konst IrClass.isInlineSamWrapper: Boolean
         get() = isSamWrapper && visibility == DescriptorVisibilities.PUBLIC
 
-    private val IrClass.isSamWrapper: Boolean
+    private konst IrClass.isSamWrapper: Boolean
         get() = origin == IrDeclarationOrigin.GENERATED_SAM_IMPLEMENTATION
 
-    private val IrClass.isAnnotationImplementation: Boolean
+    private konst IrClass.isAnnotationImplementation: Boolean
         get() = origin == ANNOTATION_IMPLEMENTATION
 
     fun addInnerClassInfo(innerClass: IrClass) {
@@ -524,9 +524,9 @@ class ClassCodegen private constructor(
     }
 
     private fun storeSerializedIr(serializedIr: ByteArray) {
-        val av = visitor.newAnnotation(JvmAnnotationNames.SERIALIZED_IR_DESC, true)
-        val partsVisitor = av.visitArray(JvmAnnotationNames.SERIALIZED_IR_BYTES_FIELD_NAME)
-        val serializedIrParts = BitEncoding.encodeBytes(serializedIr)
+        konst av = visitor.newAnnotation(JvmAnnotationNames.SERIALIZED_IR_DESC, true)
+        konst partsVisitor = av.visitArray(JvmAnnotationNames.SERIALIZED_IR_BYTES_FIELD_NAME)
+        konst serializedIrParts = BitEncoding.encodeBytes(serializedIr)
         for (part in serializedIrParts) {
             partsVisitor.visit(null, part)
         }
@@ -557,7 +557,7 @@ class ClassCodegen private constructor(
                 }
             }
 
-        private fun JvmClassSignature.hasInvalidName() =
+        private fun JvmClassSignature.hasInkonstidName() =
             name.splitToSequence('/').any { identifier -> identifier.any { it in JvmSimpleNameBacktickChecker.INVALID_CHARS } }
     }
 }
@@ -604,11 +604,11 @@ private fun IrField.isPrivateCompanionFieldInInterface(languageVersionSettings: 
             parentAsClass.isJvmInterface &&
             DescriptorVisibilities.isPrivate(parentAsClass.companionObject()!!.visibility)
 
-private val IrDeclarationOrigin.flags: Int
+private konst IrDeclarationOrigin.flags: Int
     get() = (if (isSynthetic) Opcodes.ACC_SYNTHETIC else 0) or
             (if (this == IrDeclarationOrigin.FIELD_FOR_ENUM_ENTRY) Opcodes.ACC_ENUM else 0)
 
-private val Modality.flags: Int
+private konst Modality.flags: Int
     get() = when (this) {
         Modality.ABSTRACT, Modality.SEALED -> Opcodes.ACC_ABSTRACT
         Modality.FINAL -> Opcodes.ACC_FINAL
@@ -616,9 +616,9 @@ private val Modality.flags: Int
         else -> throw AssertionError("Unsupported modality $this")
     }
 
-private val DescriptorVisibility.flags: Int
+private konst DescriptorVisibility.flags: Int
     get() = DescriptorAsmUtil.getVisibilityAccessFlag(this) ?: throw AssertionError("Unsupported visibility $this")
 
 // From `isAnonymousClass` in inlineCodegenUtils.kt
-private val Type.isAnonymousClass: Boolean
+private konst Type.isAnonymousClass: Boolean
     get() = internalName.substringAfterLast("$", "").toIntOrNull() != null

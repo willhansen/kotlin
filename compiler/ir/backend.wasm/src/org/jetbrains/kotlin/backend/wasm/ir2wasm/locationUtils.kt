@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.wasm.ir.source.location.SourceLocation
 fun IrElement.getSourceLocation(fileEntry: IrFileEntry?): SourceLocation {
     if (fileEntry == null) return SourceLocation.NoLocation("fileEntry is null")
 
-    val path = fileEntry.name
-    val startLine = fileEntry.getLineNumber(startOffset)
-    val startColumn = fileEntry.getColumnNumber(startOffset)
+    konst path = fileEntry.name
+    konst startLine = fileEntry.getLineNumber(startOffset)
+    konst startColumn = fileEntry.getColumnNumber(startOffset)
 
     if (startLine < 0 || startColumn < 0) return SourceLocation.NoLocation("startLine or startColumn < 0")
 

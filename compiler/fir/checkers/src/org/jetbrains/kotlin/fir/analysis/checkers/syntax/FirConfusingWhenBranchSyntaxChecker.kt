@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.util.getChildren
 
 object FirConfusingWhenBranchSyntaxChecker : FirExpressionSyntaxChecker<FirWhenExpression, PsiElement>() {
-    private val prohibitedTokens = TokenSet.create(
+    private konst prohibitedTokens = TokenSet.create(
         IN_KEYWORD, NOT_IN,
         LT, LTEQ, GT, GTEQ,
         EQEQ, EXCLEQ, EQEQEQ, EXCLEQEQEQ,
@@ -39,12 +39,12 @@ object FirConfusingWhenBranchSyntaxChecker : FirExpressionSyntaxChecker<FirWhenE
         reporter: DiagnosticReporter
     ) {
         if (element.subject == null && element.subjectVariable == null) return
-        val tree = source.treeStructure
-        val entries = source.lighterASTNode.getChildren(tree).filter { it.tokenType == WHEN_ENTRY }
-        val offset = source.startOffset - source.lighterASTNode.startOffset
+        konst tree = source.treeStructure
+        konst entries = source.lighterASTNode.getChildren(tree).filter { it.tokenType == WHEN_ENTRY }
+        konst offset = source.startOffset - source.lighterASTNode.startOffset
         for (entry in entries) {
             for (node in entry.getChildren(tree)) {
-                val expression = when (node.tokenType) {
+                konst expression = when (node.tokenType) {
                     WHEN_CONDITION_EXPRESSION -> node.getChildren(tree).firstOrNull { it.isExpression() }
                     WHEN_CONDITION_IN_RANGE -> node.getChildren(tree)
                         .firstOrNull { it.tokenType != OPERATION_REFERENCE && it.isExpression() }
@@ -62,17 +62,17 @@ object FirConfusingWhenBranchSyntaxChecker : FirExpressionSyntaxChecker<FirWhenE
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val shouldReport = when (expression.tokenType) {
+        konst shouldReport = when (expression.tokenType) {
             IS_EXPRESSION -> true
             BINARY_EXPRESSION -> {
-                val operationTokenName = expression.getChildren(tree).first { it.tokenType == OPERATION_REFERENCE }.toString()
-                val operationToken = operationTokenName.getOperationSymbol()
+                konst operationTokenName = expression.getChildren(tree).first { it.tokenType == OPERATION_REFERENCE }.toString()
+                konst operationToken = operationTokenName.getOperationSymbol()
                 operationToken in prohibitedTokens
             }
             else -> false
         }
         if (shouldReport) {
-            val source =
+            konst source =
                 KtLightSourceElement(expression, offset + expression.startOffset, offset + expression.endOffset, tree)
             reporter.reportOn(source, FirErrors.CONFUSING_BRANCH_CONDITION, context)
         }
@@ -86,7 +86,7 @@ object FirConfusingWhenBranchSyntaxChecker : FirExpressionSyntaxChecker<FirWhenE
         reporter: DiagnosticReporter
     ) {
         if (element.subject == null && element.subjectVariable == null) return
-        val whenExpression = psi as KtWhenExpression
+        konst whenExpression = psi as KtWhenExpression
         if (whenExpression.subjectExpression == null && whenExpression.subjectVariable == null) return
         for (entry in whenExpression.entries) {
             for (condition in entry.conditions) {
@@ -105,13 +105,13 @@ object FirConfusingWhenBranchSyntaxChecker : FirExpressionSyntaxChecker<FirWhenE
     private fun checkConditionExpression(rawExpression: KtExpression?, context: CheckerContext, reporter: DiagnosticReporter) {
         if (rawExpression == null) return
         if (rawExpression is KtParenthesizedExpression) return
-        val shouldReport = when (val expression = KtPsiUtil.safeDeparenthesize(rawExpression)) {
+        konst shouldReport = when (konst expression = KtPsiUtil.safeDeparenthesize(rawExpression)) {
             is KtIsExpression -> true
             is KtBinaryExpression -> expression.operationToken in prohibitedTokens
             else -> false
         }
         if (shouldReport) {
-            val source = KtRealPsiSourceElement(rawExpression)
+            konst source = KtRealPsiSourceElement(rawExpression)
             reporter.reportOn(source, FirErrors.CONFUSING_BRANCH_CONDITION, context)
         }
     }

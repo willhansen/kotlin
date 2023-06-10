@@ -24,14 +24,14 @@ import org.jetbrains.kotlin.incremental.components.LookupLocation
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.Printer
 
-class InnerClassesScopeWrapper(val workerScope: MemberScope) : MemberScopeImpl() {
+class InnerClassesScopeWrapper(konst workerScope: MemberScope) : MemberScopeImpl() {
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? =
             workerScope.getContributedClassifier(name, location)?.let {
                 it as? ClassDescriptor ?: it as? TypeAliasDescriptor
             }
 
     override fun getContributedDescriptors(kindFilter: DescriptorKindFilter, nameFilter: (Name) -> Boolean): List<ClassifierDescriptor> {
-        val restrictedFilter = kindFilter.restrictedToKindsOrNull(DescriptorKindFilter.CLASSIFIERS_MASK) ?: return listOf()
+        konst restrictedFilter = kindFilter.restrictedToKindsOrNull(DescriptorKindFilter.CLASSIFIERS_MASK) ?: return listOf()
         return workerScope.getContributedDescriptors(restrictedFilter, nameFilter).filterIsInstance<ClassifierDescriptorWithTypeParameters>()
     }
 

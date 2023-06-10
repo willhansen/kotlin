@@ -8,12 +8,12 @@ var testProp: Any
         System.out.println("testProp/get")
         return 42
     }
-    set(value) {
+    set(konstue) {
         System.out.println("testProp/set")
     }
 
 class TestClass {
-    val test = when {
+    konst test = when {
         else -> {
             System.out.println("TestClass/test")
             42

@@ -50,4 +50,4 @@ expect class FILE expect constructor(): kotlinx.cinterop.CStructVar
 typealias uuid_t = __darwin_uuid_t
 typealias __darwin_uuid_t = kotlinx.cinterop.CArrayPointer<kotlinx.cinterop.UByteVar>
 
-expect val uuid: uuid_t
+expect konst uuid: uuid_t

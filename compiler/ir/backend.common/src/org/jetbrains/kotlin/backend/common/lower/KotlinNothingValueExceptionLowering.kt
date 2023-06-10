@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 class KotlinNothingValueExceptionLowering(
-    val backendContext: CommonBackendContext, val skip: (IrDeclaration) -> Boolean = { false }
+    konst backendContext: CommonBackendContext, konst skip: (IrDeclaration) -> Boolean = { false }
 ) : BodyLoweringPass {
     override fun lower(irFile: IrFile) =
         runOnFilePostfix(irFile, withLocalDeclarations = true)
@@ -31,7 +31,7 @@ class KotlinNothingValueExceptionLowering(
         }
     }
 
-    private inner class Transformer(val parent: IrSymbol) : IrElementTransformerVoid() {
+    private inner class Transformer(konst parent: IrSymbol) : IrElementTransformerVoid() {
         override fun visitBody(body: IrBody): IrBody = body
 
         override fun visitCall(expression: IrCall): IrExpression =

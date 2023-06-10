@@ -5,7 +5,7 @@ interface Base {
     abstract fun String.foo(arg: String): String
 }
 
-open class BaseImpl(val s: String) : Base {
+open class BaseImpl(konst s: String) : Base {
     override fun String.foo(arg: String): String = "Int.foo ${s}:${this}:${arg}"
 }
 

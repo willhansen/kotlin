@@ -19,18 +19,18 @@ class Foo {
 }
 
 class A {
-    val x: A? = null
+    konst x: A? = null
 
     fun f1(a: A, b: B): A? = null
 
     interface B {
-        val y: B?
+        konst y: B?
 
         fun f2(a: A, b: B): A? = null
 
         class A {
-            val x: A? = null
-            val y: B? = null
+            konst x: A? = null
+            konst y: B? = null
 
             fun f3(a: A, b: B) {}
 

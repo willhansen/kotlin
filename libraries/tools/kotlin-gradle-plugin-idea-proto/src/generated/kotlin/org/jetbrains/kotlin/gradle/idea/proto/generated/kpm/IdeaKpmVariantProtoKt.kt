@@ -10,7 +10,7 @@ object IdeaKpmVariantProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmVariantProtoKt {
       @JvmName("getFragment")
       get() = _builder.getFragment()
       @JvmName("setFragment")
-      set(value) {
-        _builder.setFragment(value)
+      set(konstue) {
+        _builder.setFragment(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto fragment = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmVariantProtoKt {
     fun hasFragment(): kotlin.Boolean {
       return _builder.hasFragment()
     }
-    val IdeaKpmVariantProtoKt.Dsl.fragmentOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto?
+    konst IdeaKpmVariantProtoKt.Dsl.fragmentOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto?
       get() = _builder.fragmentOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKpmVariantProtoKt {
       @JvmName("getPlatform")
       get() = _builder.getPlatform()
       @JvmName("setPlatform")
-      set(value) {
-        _builder.setPlatform(value)
+      set(konstue) {
+        _builder.setPlatform(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platform = 2;</code>
@@ -71,7 +71,7 @@ object IdeaKpmVariantProtoKt {
     fun hasPlatform(): kotlin.Boolean {
       return _builder.hasPlatform()
     }
-    val IdeaKpmVariantProtoKt.Dsl.platformOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto?
+    konst IdeaKpmVariantProtoKt.Dsl.platformOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto?
       get() = _builder.platformOrNull
 
     /**
@@ -83,7 +83,7 @@ object IdeaKpmVariantProtoKt {
     /**
      * <code>map&lt;string, string&gt; variant_attributes = 3;</code>
      */
-     val variantAttributes: com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, VariantAttributesProxy>
+     konst variantAttributes: com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, VariantAttributesProxy>
       @kotlin.jvm.JvmSynthetic
       @JvmName("getVariantAttributesMap")
       get() = com.google.protobuf.kotlin.DslMap(
@@ -94,8 +94,8 @@ object IdeaKpmVariantProtoKt {
      */
     @JvmName("putVariantAttributes")
     fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, VariantAttributesProxy>
-      .put(key: kotlin.String, value: kotlin.String) {
-         _builder.putVariantAttributes(key, value)
+      .put(key: kotlin.String, konstue: kotlin.String) {
+         _builder.putVariantAttributes(key, konstue)
        }
     /**
      * <code>map&lt;string, string&gt; variant_attributes = 3;</code>
@@ -104,8 +104,8 @@ object IdeaKpmVariantProtoKt {
     @JvmName("setVariantAttributes")
     @Suppress("NOTHING_TO_INLINE")
     inline operator fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, VariantAttributesProxy>
-      .set(key: kotlin.String, value: kotlin.String) {
-         put(key, value)
+      .set(key: kotlin.String, konstue: kotlin.String) {
+         put(key, konstue)
        }
     /**
      * <code>map&lt;string, string&gt; variant_attributes = 3;</code>
@@ -142,8 +142,8 @@ object IdeaKpmVariantProtoKt {
       @JvmName("getCompilationOutput")
       get() = _builder.getCompilationOutput()
       @JvmName("setCompilationOutput")
-      set(value) {
-        _builder.setCompilationOutput(value)
+      set(konstue) {
+        _builder.setCompilationOutput(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto compilation_output = 4;</code>
@@ -158,7 +158,7 @@ object IdeaKpmVariantProtoKt {
     fun hasCompilationOutput(): kotlin.Boolean {
       return _builder.hasCompilationOutput()
     }
-    val IdeaKpmVariantProtoKt.Dsl.compilationOutputOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto?
+    konst IdeaKpmVariantProtoKt.Dsl.compilationOutputOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto?
       get() = _builder.compilationOutputOrNull
   }
 }
@@ -166,12 +166,12 @@ object IdeaKpmVariantProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProtoOrBuilder.fragmentOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProtoOrBuilder.fragmentOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto?
   get() = if (hasFragment()) getFragment() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProtoOrBuilder.platformOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProtoOrBuilder.platformOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto?
   get() = if (hasPlatform()) getPlatform() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProtoOrBuilder.compilationOutputOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProtoOrBuilder.compilationOutputOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto?
   get() = if (hasCompilationOutput()) getCompilationOutput() else null
 

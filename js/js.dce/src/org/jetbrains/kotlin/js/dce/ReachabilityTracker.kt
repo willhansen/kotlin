@@ -21,12 +21,12 @@ import org.jetbrains.kotlin.js.dce.Context.Node
 import org.jetbrains.kotlin.js.inline.util.collectLocalVariables
 
 class ReachabilityTracker(
-        private val context: Context,
-        private val analysisResult: AnalysisResult,
-        private val logConsumer: ((DCELogLevel, String) -> Unit)?
+        private konst context: Context,
+        private konst analysisResult: AnalysisResult,
+        private konst logConsumer: ((DCELogLevel, String) -> Unit)?
 ) : RecursiveJsVisitor() {
     companion object {
-        private val CALL_FUNCTIONS = setOf("call", "apply")
+        private konst CALL_FUNCTIONS = setOf("call", "apply")
     }
 
     init {
@@ -35,9 +35,9 @@ class ReachabilityTracker(
 
     private var currentNodeWithLocation: JsNode? = null
     private var depth = 0
-    private val reachableNodesImpl = mutableListOf<Node>()
+    private konst reachableNodesImpl = mutableListOf<Node>()
 
-    val reachableNodes: Iterable<Node> get() = reachableNodesImpl
+    konst reachableNodes: Iterable<Node> get() = reachableNodesImpl
 
     override fun visit(x: JsVars.JsVar) {
         if (shouldTraverse(x)) {
@@ -75,7 +75,7 @@ class ReachabilityTracker(
     private fun visitNameLikeNode(x: JsExpression): Boolean {
         if (x in analysisResult.astNodesToSkip) return false
 
-        val node = context.extractNode(x)
+        konst node = context.extractNode(x)
         if (node != null) {
             if (!node.reachable) {
                 reportAndNest("reach: referenced name $node", currentNodeWithLocation) {
@@ -91,7 +91,7 @@ class ReachabilityTracker(
     }
 
     override fun visitInvocation(invocation: JsInvocation) {
-        val function = invocation.qualifier
+        konst function = invocation.qualifier
         when {
             function is JsFunction && function in analysisResult.functionsToEnter -> {
                 accept(function.body)
@@ -101,9 +101,9 @@ class ReachabilityTracker(
             }
             invocation in analysisResult.invocationsToSkip -> {}
             else -> {
-                val node = context.extractNode(invocation.qualifier)
+                konst node = context.extractNode(invocation.qualifier)
                 if (node != null && node.memberName in CALL_FUNCTIONS) {
-                    val parent = node.parent!!
+                    konst parent = node.parent!!
                     reach(parent)
                     currentNodeWithLocation?.let { parent.addUsedByAstNode(it) }
                 }
@@ -128,7 +128,7 @@ class ReachabilityTracker(
     }
 
     private fun withErasedThis(action: () -> Unit) {
-        val oldThis = context.thisNode
+        konst oldThis = context.thisNode
         context.thisNode = null
         action()
         context.thisNode = oldThis
@@ -167,19 +167,19 @@ class ReachabilityTracker(
         }
 
         for (expr in node.expressions) {
-            reportAndNest("traverse: value", expr) {
+            reportAndNest("traverse: konstue", expr) {
                 expr.accept(this)
             }
         }
     }
 
     private fun reachDependencies(node: Node) {
-        val path = mutableListOf<String>()
+        konst path = mutableListOf<String>()
         var current = node
         while (true) {
             for (ancestorDependency in current.dependencies) {
                 if (current in generateSequence(ancestorDependency) { it.parent }) continue
-                val dependency = path.asReversed().fold(ancestorDependency) { n, memberName -> n.member(memberName) }
+                konst dependency = path.asReversed().fold(ancestorDependency) { n, memberName -> n.member(memberName) }
                 if (!dependency.reachable) {
                     reportAndNest("reach: dependency $dependency", null) { reach(dependency) }
                 }
@@ -208,7 +208,7 @@ class ReachabilityTracker(
             }
 
             for (expr in node.expressions) {
-                reportAndNest("traverse: value", expr) {
+                reportAndNest("traverse: konstue", expr) {
                     expr.accept(this)
                 }
             }
@@ -217,7 +217,7 @@ class ReachabilityTracker(
 
     override fun visitPrefixOperation(x: JsPrefixOperation) {
         if (x.operator == JsUnaryOperator.TYPEOF) {
-            val arg = x.arg
+            konst arg = x.arg
             context.extractNode(arg)?.let {
                 reachDeclaration(it)
                 return
@@ -228,8 +228,8 @@ class ReachabilityTracker(
 
     override fun visitElement(node: JsNode) {
         if (node in analysisResult.astNodesToSkip) return
-        val newLocation = node.extractLocation()
-        val old = currentNodeWithLocation
+        konst newLocation = node.extractLocation()
+        konst old = currentNodeWithLocation
         if (newLocation != null) {
             currentNodeWithLocation = node
         }
@@ -239,8 +239,8 @@ class ReachabilityTracker(
 
     private fun reportAndNest(message: String, dueTo: JsNode?, action: () -> Unit) {
         if (logConsumer != null) {
-            val indent = "  ".repeat(depth)
-            val fullMessage = when (val location = dueTo?.extractLocation()) {
+            konst indent = "  ".repeat(depth)
+            konst fullMessage = when (konst location = dueTo?.extractLocation()) {
                 null -> "$indent$message"
                 else -> "$indent$message (due to ${location.asString()})"
             }

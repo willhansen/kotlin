@@ -75,7 +75,7 @@ digraph complexPostponedCfg_kt {
             }
             38 [label="Postponed exit from lambda"];
             39 [label="Function call: R|kotlin/with|<R|FirFunctionCall|, R|kotlin/collections/List<FirFunctionCall>|>(...)" style="filled" fillcolor=yellow];
-            40 [label="Variable declaration: lval firstCalls: R|kotlin/collections/List<FirFunctionCall>|"];
+            40 [label="Variable declaration: lkonst firstCalls: R|kotlin/collections/List<FirFunctionCall>|"];
             41 [label="Access variable R|<local>/firstCalls|"];
             42 [label="Jump: ^foo R|<local>/firstCalls|"];
             43 [label="Stub" style="filled" fillcolor=gray];

@@ -8,17 +8,17 @@ package org.jetbrains.kotlin.backend.konan.objcexport
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 
-class ObjCExportTranslatorMobile internal constructor(private val delegate: ObjCExportTranslatorImpl) : ObjCExportTranslator by delegate {
+class ObjCExportTranslatorMobile internal constructor(private konst delegate: ObjCExportTranslatorImpl) : ObjCExportTranslator by delegate {
     companion object {
         fun create(namer: ObjCExportNamer, configuration: ObjCExportLazy.Configuration): ObjCExportTranslatorMobile {
-            val mapper = ObjCExportMapper(local = true, unitSuspendFunctionExport = configuration.unitSuspendFunctionExport)
+            konst mapper = ObjCExportMapper(local = true, unitSuspendFunctionExport = configuration.unitSuspendFunctionExport)
             return ObjCExportTranslatorMobile(ObjCExportTranslatorImpl(null, mapper, namer, ObjCExportProblemCollector.SILENT, configuration.objcGenerics))
         }
     }
 
     fun translateBaseFunction(descriptor: FunctionDescriptor): ObjCMethod {
-        val classDescriptor = descriptor.containingDeclaration as? ClassDescriptor
-        val scope = classDescriptor?.let { delegate.createGenericExportScope(it) } ?: ObjCRootExportScope
+        konst classDescriptor = descriptor.containingDeclaration as? ClassDescriptor
+        konst scope = classDescriptor?.let { delegate.createGenericExportScope(it) } ?: ObjCRootExportScope
         return delegate.buildMethod(descriptor, descriptor, scope)
     }
 }

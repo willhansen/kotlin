@@ -20,21 +20,21 @@ FILE fqName:<root> fileName:/annotationsOnDelegatedMembers.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
   CLASS INTERFACE name:IFoo modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.IFoo
-    PROPERTY name:testVal visibility:public modality:ABSTRACT [val]
+    PROPERTY name:testVal visibility:public modality:ABSTRACT [konst]
       annotations:
         Ann
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-testVal> visibility:public modality:ABSTRACT <> ($this:<root>.IFoo) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:testVal visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:testVal visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.IFoo
     FUN name:testFun visibility:public modality:ABSTRACT <> ($this:<root>.IFoo) returnType:kotlin.Unit
       annotations:
         Ann
       $this: VALUE_PARAMETER name:<this> type:<root>.IFoo
-    PROPERTY name:testExtVal visibility:public modality:ABSTRACT [val]
+    PROPERTY name:testExtVal visibility:public modality:ABSTRACT [konst]
       annotations:
         Ann
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-testExtVal> visibility:public modality:ABSTRACT <> ($this:<root>.IFoo, $receiver:kotlin.String) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:testExtVal visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:testExtVal visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.IFoo
         $receiver: VALUE_PARAMETER name:<this> type:kotlin.String
     FUN name:testExtFun visibility:public modality:ABSTRACT <> ($this:<root>.IFoo, $receiver:kotlin.String) returnType:kotlin.Unit
@@ -65,11 +65,11 @@ FILE fqName:<root> fileName:/annotationsOnDelegatedMembers.kt
     FIELD DELEGATE name:$$delegate_0 type:<root>.IFoo visibility:private [final]
       EXPRESSION_BODY
         GET_VAR 'd: <root>.IFoo declared in <root>.DFoo.<init>' type=<root>.IFoo origin=null
-    PROPERTY DELEGATED_MEMBER name:testVal visibility:public modality:OPEN [val]
+    PROPERTY DELEGATED_MEMBER name:testVal visibility:public modality:OPEN [konst]
       overridden:
         public abstract testVal: kotlin.String
       FUN DELEGATED_MEMBER name:<get-testVal> visibility:public modality:OPEN <> ($this:<root>.DFoo) returnType:kotlin.String
-        correspondingProperty: PROPERTY DELEGATED_MEMBER name:testVal visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY DELEGATED_MEMBER name:testVal visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-testVal> (): kotlin.String declared in <root>.IFoo
         $this: VALUE_PARAMETER name:<this> type:<root>.DFoo
@@ -78,11 +78,11 @@ FILE fqName:<root> fileName:/annotationsOnDelegatedMembers.kt
             CALL 'public abstract fun <get-testVal> (): kotlin.String declared in <root>.IFoo' type=kotlin.String origin=null
               $this: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:<root>.IFoo visibility:private [final]' type=<root>.IFoo origin=null
                 receiver: GET_VAR '<this>: <root>.DFoo declared in <root>.DFoo.<get-testVal>' type=<root>.DFoo origin=null
-    PROPERTY DELEGATED_MEMBER name:testExtVal visibility:public modality:OPEN [val]
+    PROPERTY DELEGATED_MEMBER name:testExtVal visibility:public modality:OPEN [konst]
       overridden:
         public abstract testExtVal: kotlin.String
       FUN DELEGATED_MEMBER name:<get-testExtVal> visibility:public modality:OPEN <> ($this:<root>.DFoo, $receiver:kotlin.String) returnType:kotlin.String
-        correspondingProperty: PROPERTY DELEGATED_MEMBER name:testExtVal visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY DELEGATED_MEMBER name:testExtVal visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-testExtVal> (): kotlin.String declared in <root>.IFoo
         $this: VALUE_PARAMETER name:<this> type:<root>.DFoo

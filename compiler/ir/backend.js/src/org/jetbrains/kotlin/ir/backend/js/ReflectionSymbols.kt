@@ -10,16 +10,16 @@ import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 interface ReflectionSymbols {
-    val getKClassFromExpression: IrSimpleFunctionSymbol
-    val getKClass: IrSimpleFunctionSymbol
-    val getClassData: IrSimpleFunctionSymbol
-    val createKType: IrSimpleFunctionSymbol?
-    val createDynamicKType: IrSimpleFunctionSymbol?
-    val createKTypeParameter: IrSimpleFunctionSymbol?
-    val getStarKTypeProjection: IrSimpleFunctionSymbol?
-    val createCovariantKTypeProjection: IrSimpleFunctionSymbol?
-    val createInvariantKTypeProjection: IrSimpleFunctionSymbol?
-    val createContravariantKTypeProjection: IrSimpleFunctionSymbol?
-    val primitiveClassesObject: IrClassSymbol
-    val kTypeClass: IrClassSymbol
+    konst getKClassFromExpression: IrSimpleFunctionSymbol
+    konst getKClass: IrSimpleFunctionSymbol
+    konst getClassData: IrSimpleFunctionSymbol
+    konst createKType: IrSimpleFunctionSymbol?
+    konst createDynamicKType: IrSimpleFunctionSymbol?
+    konst createKTypeParameter: IrSimpleFunctionSymbol?
+    konst getStarKTypeProjection: IrSimpleFunctionSymbol?
+    konst createCovariantKTypeProjection: IrSimpleFunctionSymbol?
+    konst createInvariantKTypeProjection: IrSimpleFunctionSymbol?
+    konst createContravariantKTypeProjection: IrSimpleFunctionSymbol?
+    konst primitiveClassesObject: IrClassSymbol
+    konst kTypeClass: IrClassSymbol
 }

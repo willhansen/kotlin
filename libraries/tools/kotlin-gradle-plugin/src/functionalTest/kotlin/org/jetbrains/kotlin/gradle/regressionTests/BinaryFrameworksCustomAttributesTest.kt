@@ -15,10 +15,10 @@ import kotlin.test.*
 class BinaryFrameworksCustomAttributesTest {
     @Test
     fun `test that outgoing configuration of binary frameworks should have user defined attributes`() {
-        val disambiguationAttribute1 = Attribute.of("myDisambiguation1Attribute", String::class.java)
-        val disambiguationAttribute2 = Attribute.of("myDisambiguation2Attribute", String::class.java)
+        konst disambiguationAttribute1 = Attribute.of("myDisambiguation1Attribute", String::class.java)
+        konst disambiguationAttribute2 = Attribute.of("myDisambiguation2Attribute", String::class.java)
 
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 iosArm64("ios") {
                     attributes.attribute(disambiguationAttribute1, "someValue")
@@ -36,16 +36,16 @@ class BinaryFrameworksCustomAttributesTest {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val customReleaseFrameworkIos = project.configurations.getByName("customReleaseFrameworkIos")
-        val attribute1Value = customReleaseFrameworkIos.attributes.getAttribute(disambiguationAttribute1)
+        konst customReleaseFrameworkIos = project.configurations.getByName("customReleaseFrameworkIos")
+        konst attribute1Value = customReleaseFrameworkIos.attributes.getAttribute(disambiguationAttribute1)
         if (attribute1Value != "someValue") {
-            fail("disambiguationAttribute1 has incorrect value. Expected: \"someValue\", actual: \"$attribute1Value\"")
+            fail("disambiguationAttribute1 has incorrect konstue. Expected: \"someValue\", actual: \"$attribute1Value\"")
         }
-        val attribute2Value = customReleaseFrameworkIos.attributes.getAttribute(disambiguationAttribute2)
+        konst attribute2Value = customReleaseFrameworkIos.attributes.getAttribute(disambiguationAttribute2)
         if (attribute2Value != "someValue2") {
-            fail("disambiguationAttribute2 has incorrect value. Expected: \"someValue2\", actual: \"$attribute2Value\"")
+            fail("disambiguationAttribute2 has incorrect konstue. Expected: \"someValue2\", actual: \"$attribute2Value\"")
         }
     }
 }

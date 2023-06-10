@@ -39,7 +39,7 @@ class DeclarationIrBuilder(
 )
 
 abstract class AbstractVariableRemapper : IrElementTransformerVoid() {
-    protected abstract fun remapVariable(value: IrValueDeclaration): IrValueDeclaration?
+    protected abstract fun remapVariable(konstue: IrValueDeclaration): IrValueDeclaration?
 
     override fun visitGetValue(expression: IrGetValue): IrExpression =
         remapVariable(expression.symbol.owner)?.let {
@@ -49,14 +49,14 @@ abstract class AbstractVariableRemapper : IrElementTransformerVoid() {
     override fun visitSetValue(expression: IrSetValue): IrExpression {
         expression.transformChildrenVoid()
         return remapVariable(expression.symbol.owner)?.let {
-            IrSetValueImpl(expression.startOffset, expression.endOffset, expression.type, it.symbol, expression.value, expression.origin)
+            IrSetValueImpl(expression.startOffset, expression.endOffset, expression.type, it.symbol, expression.konstue, expression.origin)
         } ?: expression
     }
 }
 
-open class VariableRemapper(val mapping: Map<IrValueParameter, IrValueDeclaration>) : AbstractVariableRemapper() {
-    override fun remapVariable(value: IrValueDeclaration): IrValueDeclaration? =
-        mapping[value]
+open class VariableRemapper(konst mapping: Map<IrValueParameter, IrValueDeclaration>) : AbstractVariableRemapper() {
+    override fun remapVariable(konstue: IrValueDeclaration): IrValueDeclaration? =
+        mapping[konstue]
 }
 
 fun IrBuiltIns.createIrBuilder(
@@ -117,14 +117,14 @@ fun IrBuilderWithScope.irImplicitCoercionToUnit(arg: IrExpression) =
         arg
     )
 
-open class IrBuildingTransformer(private val context: BackendContext) : IrElementTransformerVoid() {
+open class IrBuildingTransformer(private konst context: BackendContext) : IrElementTransformerVoid() {
     private var currentBuilder: IrBuilderWithScope? = null
 
-    protected val builder: IrBuilderWithScope
+    protected konst builder: IrBuilderWithScope
         get() = currentBuilder!!
 
     private inline fun <T> withBuilder(symbol: IrSymbol, block: () -> T): T {
-        val oldBuilder = currentBuilder
+        konst oldBuilder = currentBuilder
         currentBuilder = context.createIrBuilder(symbol)
         return try {
             block()
@@ -177,8 +177,8 @@ enum class ConstructorDelegationKind {
 }
 
 fun IrConstructor.delegationKind(irBuiltIns: IrBuiltIns): ConstructorDelegationKind {
-    val constructedClass = parent as IrClass
-    val superClass = constructedClass.superTypes
+    konst constructedClass = parent as IrClass
+    konst superClass = constructedClass.superTypes
         .mapNotNull { it as? IrSimpleType }
         .firstOrNull { (it.classifier.owner as IrClass).run { kind == ClassKind.CLASS || kind == ClassKind.ANNOTATION_CLASS || kind == ClassKind.ENUM_CLASS } }
         ?: irBuiltIns.anyType
@@ -196,7 +196,7 @@ fun IrConstructor.delegationKind(irBuiltIns: IrBuiltIns): ConstructorDelegationK
 
         override fun visitDelegatingConstructorCall(expression: IrDelegatingConstructorCall) {
             numberOfDelegatingCalls++
-            val delegatingClass = expression.symbol.owner.parent as IrClass
+            konst delegatingClass = expression.symbol.owner.parent as IrClass
             // TODO: figure out why Lazy IR multiplies Declarations for descriptors and fix it
             // It happens because of IrBuiltIns whose IrDeclarations are different for runtime and test
             if (delegatingClass.symbol == superClass.classifierOrFail)
@@ -214,7 +214,7 @@ fun IrConstructor.delegationKind(irBuiltIns: IrBuiltIns): ConstructorDelegationK
         }
     })
 
-    val delegationKind: ConstructorDelegationKind? = when (numberOfDelegatingCalls) {
+    konst delegationKind: ConstructorDelegationKind? = when (numberOfDelegatingCalls) {
         0 -> if (hasPartialLinkageError) ConstructorDelegationKind.PARTIAL_LINKAGE_ERROR else null
         1 -> if (callsSuper) ConstructorDelegationKind.CALLS_SUPER else ConstructorDelegationKind.CALLS_THIS
         else -> null
@@ -251,26 +251,26 @@ fun ParameterDescriptor.copyAsValueParameter(newOwner: CallableDescriptor, index
 }
 
 fun IrGetValue.actualize(classActualizer: (IrClass) -> IrClass, functionActualizer: (IrFunction) -> IrFunction): IrGetValue {
-    val symbol = symbol
+    konst symbol = symbol
     if (symbol !is IrValueParameterSymbol) {
         return this
     }
 
-    val parameter = symbol.owner
-    val newSymbol = when (val parent = parameter.parent) {
+    konst parameter = symbol.owner
+    konst newSymbol = when (konst parent = parameter.parent) {
         is IrClass -> {
             assert(parameter == parent.thisReceiver)
             classActualizer(parent).thisReceiver!!
         }
 
         is IrFunction -> {
-            val actualizedFunction = functionActualizer(parent)
+            konst actualizedFunction = functionActualizer(parent)
             when (parameter) {
                 parent.dispatchReceiverParameter -> actualizedFunction.dispatchReceiverParameter!!
                 parent.extensionReceiverParameter -> actualizedFunction.extensionReceiverParameter!!
                 else -> {
-                    assert(parent.valueParameters[parameter.index] == parameter)
-                    actualizedFunction.valueParameters[parameter.index]
+                    assert(parent.konstueParameters[parameter.index] == parameter)
+                    actualizedFunction.konstueParameters[parameter.index]
                 }
             }
         }

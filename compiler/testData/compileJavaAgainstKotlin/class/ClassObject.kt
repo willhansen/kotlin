@@ -4,8 +4,8 @@ class WithClassObject {
   companion object {
     fun foo() {}
 
-    val value: Int = 0
-    val valueWithGetter: Int
+    konst konstue: Int = 0
+    konst konstueWithGetter: Int
       get() = 1
 
     var variable: Int = 0
@@ -17,11 +17,11 @@ class WithClassObject {
 
   class MyInner {
     fun foo() {}
-    val value: Int = 0
+    konst konstue: Int = 0
   }
 }
 
 object PackageInner {
     fun foo() {}
-    val value: Int = 0
+    konst konstue: Int = 0
 }

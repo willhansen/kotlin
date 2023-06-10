@@ -4,7 +4,7 @@
 enum class A { V1 }
 
 fun testVariableAssignment_throws(a: A) {
-    val x: Int
+    konst x: Int
     when (a) {
         A.V1 -> x = 11
         // else -> throw

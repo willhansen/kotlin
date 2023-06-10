@@ -8,11 +8,11 @@ public interface PrimitiveValueInParam {
 
     public final annotation class Ann : kotlin.Annotation {
         public constructor Ann(/*0*/ i: kotlin.Int, /*1*/ l: kotlin.Long, /*2*/ d: kotlin.Double, /*3*/ f: kotlin.Float, /*4*/ bool: kotlin.Boolean, /*5*/ str: kotlin.String)
-        public final val bool: kotlin.Boolean
-        public final val d: kotlin.Double
-        public final val f: kotlin.Float
-        public final val i: kotlin.Int
-        public final val l: kotlin.Long
-        public final val str: kotlin.String
+        public final konst bool: kotlin.Boolean
+        public final konst d: kotlin.Double
+        public final konst f: kotlin.Float
+        public final konst i: kotlin.Int
+        public final konst l: kotlin.Long
+        public final konst str: kotlin.String
     }
 }

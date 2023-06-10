@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirResolvedErrorReferenceImpl(
-    override val source: KtSourceElement?,
-    override val name: Name,
-    override val resolvedSymbol: FirBasedSymbol<*>,
-    override val diagnostic: ConeDiagnostic,
+    override konst source: KtSourceElement?,
+    override konst name: Name,
+    override konst resolvedSymbol: FirBasedSymbol<*>,
+    override konst diagnostic: ConeDiagnostic,
 ) : FirResolvedErrorReference() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

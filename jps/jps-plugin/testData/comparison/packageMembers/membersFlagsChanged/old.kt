@@ -1,8 +1,8 @@
 package test
 
-val constFlagAddedVal = ""
-const val constFlagRemovedVal = ""
-const val constFlagUnchangedVal = ""
+konst constFlagAddedVal = ""
+const konst constFlagRemovedVal = ""
+const konst constFlagUnchangedVal = ""
 
 fun externalFlagAddedFun() {}
 external fun externalFlagRemovedFun()
@@ -18,9 +18,9 @@ fun inlineFlagAddedFun() {}
 inline fun inlineFlagRemovedFun() {}
 inline fun inlineFlagUnchangedFun() {}
 
-val internalFlagAddedVal = ""
-internal val internalFlagRemovedVal = ""
-internal val internalFlagUnchangedVal = ""
+konst internalFlagAddedVal = ""
+internal konst internalFlagRemovedVal = ""
+internal konst internalFlagUnchangedVal = ""
 fun internalFlagAddedFun() {}
 internal fun internalFlagRemovedFun() {}
 internal fun internalFlagUnchangedFun() {}
@@ -31,16 +31,16 @@ operator fun operatorFlagRemovedFun() {}
 @Suppress("INAPPLICABLE_OPERATOR_MODIFIER")
 operator fun operatorFlagUnchangedFun() {}
 
-val privateFlagAddedVal = ""
-private val privateFlagRemovedVal = ""
-private val privateFlagUnchangedVal = ""
+konst privateFlagAddedVal = ""
+private konst privateFlagRemovedVal = ""
+private konst privateFlagUnchangedVal = ""
 fun privateFlagAddedFun() {}
 private fun privateFlagRemovedFun() {}
 private fun privateFlagUnchangedFun() {}
 
-val publicFlagAddedVal = ""
-public val publicFlagRemovedVal = ""
-public val publicFlagUnchangedVal = ""
+konst publicFlagAddedVal = ""
+public konst publicFlagRemovedVal = ""
+public konst publicFlagUnchangedVal = ""
 fun publicFlagAddedFun() {}
 public fun publicFlagRemovedFun() {}
 public fun publicFlagUnchangedFun() {}
@@ -49,5 +49,5 @@ fun tailrecFlagAddedFun() {}
 tailrec fun tailrecFlagRemovedFun() {}
 tailrec fun tailrecFlagUnchangedFun() {}
 
-val noFlagsUnchangedVal = ""
+konst noFlagsUnchangedVal = ""
 fun noFlagsUnchangedFun() {}

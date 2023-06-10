@@ -40,8 +40,8 @@ class InfrastructureNamedEntitiesTest {
             "__launcher__Kt.bar" to Triple(PackageName.EMPTY, "__launcher__Kt", "bar"),
             "a.b.c.__launcher__Kt.bar" to Triple(PackageName("a.b.c"), "__launcher__Kt", "bar"),
         ).forEach { (fqn, triple) ->
-            val (packageName, packagePartClassName, functionName) = triple
-            val testName = TestName(fqn)
+            konst (packageName, packagePartClassName, functionName) = triple
+            konst testName = TestName(fqn)
             assertEquals(packageName, testName.packageName)
             assertEquals(packagePartClassName, testName.packagePartClassName)
             assertEquals(functionName, testName.functionName)

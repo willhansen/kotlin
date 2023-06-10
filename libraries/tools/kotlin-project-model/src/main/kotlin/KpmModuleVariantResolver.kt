@@ -28,8 +28,8 @@ interface KpmModuleVariantResolver {
  * usually done by some [KpmModuleVariantResolver].
  */
 sealed class KpmVariantResolution(
-    val requestingVariant: KpmVariant,
-    val dependencyModule: KpmModule
+    konst requestingVariant: KpmVariant,
+    konst dependencyModule: KpmModule
 ) {
     companion object {
         fun fromMatchingVariants(
@@ -57,7 +57,7 @@ sealed class KpmVariantResolution(
     class KpmVariantMatch(
         requestingVariant: KpmVariant,
         dependencyModule: KpmModule,
-        val chosenVariant: KpmVariant
+        konst chosenVariant: KpmVariant
     ) : KpmVariantResolution(requestingVariant, dependencyModule)
 
     // TODO: think about restricting calls with the type system to avoid partial functions in resolvers?
@@ -87,6 +87,6 @@ sealed class KpmVariantResolution(
     class KpmAmbiguousVariants(
         requestingVariant: KpmVariant,
         dependencyModule: KpmModule,
-        val matchingVariants: Iterable<KpmVariant>
+        konst matchingVariants: Iterable<KpmVariant>
     ) : KpmVariantResolution(requestingVariant, dependencyModule)
 }

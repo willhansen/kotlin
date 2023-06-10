@@ -49,11 +49,11 @@ internal fun loadCompilerVersion(compilerClasspath: Iterable<File>): String {
     fun checkVersion(bytes: ByteArray) {
         ClassReader(bytes).accept(
             object : ClassVisitor(Opcodes.API_VERSION) {
-                override fun visitField(access: Int, name: String, desc: String, signature: String?, value: Any?): FieldVisitor {
-                    if (name == KotlinCompilerVersion::VERSION.name && value is String) {
-                        result = value
+                override fun visitField(access: Int, name: String, desc: String, signature: String?, konstue: Any?): FieldVisitor {
+                    if (name == KotlinCompilerVersion::VERSION.name && konstue is String) {
+                        result = konstue
                     }
-                    return super.visitField(access, name, desc, signature, value)
+                    return super.visitField(access, name, desc, signature, konstue)
                 }
             },
             ClassReader.SKIP_CODE or ClassReader.SKIP_FRAMES or ClassReader.SKIP_DEBUG
@@ -61,20 +61,20 @@ internal fun loadCompilerVersion(compilerClasspath: Iterable<File>): String {
     }
 
     try {
-        val versionClassFileName = KotlinCompilerVersion::class.java.name.replace('.', '/') + ".class"
+        konst versionClassFileName = KotlinCompilerVersion::class.java.name.replace('.', '/') + ".class"
         for (cpFile in compilerClasspath) {
             if (cpFile.isFile && cpFile.extension.toLowerCaseAsciiOnly() == "jar") {
                 ZipFile(cpFile).use { jar ->
-                    val versionFileEntry = jar.getEntry(KotlinCompilerVersion.VERSION_FILE_PATH)
+                    konst versionFileEntry = jar.getEntry(KotlinCompilerVersion.VERSION_FILE_PATH)
                     if (versionFileEntry != null) {
                         result = jar.getInputStream(versionFileEntry).bufferedReader().use { it.readText() }
                     } else {
-                        val bytes = jar.getInputStream(jar.getEntry(versionClassFileName)).use { it.readBytes() }
+                        konst bytes = jar.getInputStream(jar.getEntry(versionClassFileName)).use { it.readBytes() }
                         checkVersion(bytes)
                     }
                 }
             } else if (cpFile.isDirectory) {
-                val versionFile = File(cpFile, KotlinCompilerVersion.VERSION_FILE_PATH)
+                konst versionFile = File(cpFile, KotlinCompilerVersion.VERSION_FILE_PATH)
                 if (versionFile.isFile) {
                     result = versionFile.readText()
                 } else {
@@ -99,12 +99,12 @@ internal fun runToolInSeparateProcess(
     buildDir: File,
     jvmArgs: List<String> = emptyList(),
 ): ExitCode {
-    val javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java"
-    val classpathString = classpath.joinToString(separator = File.pathSeparator) { it.absolutePath }
+    konst javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java"
+    konst classpathString = classpath.joinToString(separator = File.pathSeparator) { it.absolutePath }
 
-    val compilerOptions = writeArgumentsToFile(buildDir, argsArray)
+    konst compilerOptions = writeArgumentsToFile(buildDir, argsArray)
 
-    val builder = ProcessBuilder(
+    konst builder = ProcessBuilder(
         javaBin,
         *(jvmArgs.toTypedArray()),
         "-cp",
@@ -112,11 +112,11 @@ internal fun runToolInSeparateProcess(
         compilerClassName,
         "@${compilerOptions.absolutePath}"
     )
-    val messageCollector = GradleErrorMessageCollector(createLoggingMessageCollector(logger))
-    val process = launchProcessWithFallback(builder, DaemonReportingTargets(messageCollector = messageCollector))
+    konst messageCollector = GradleErrorMessageCollector(createLoggingMessageCollector(logger))
+    konst process = launchProcessWithFallback(builder, DaemonReportingTargets(messageCollector = messageCollector))
 
     // important to read inputStream, otherwise the process may hang on some systems
-    val readErrThread = thread {
+    konst readErrThread = thread {
         process.errorStream!!.bufferedReader().forEachLine {
             messageCollector.report(CompilerMessageSeverity.EXCEPTION, it)
         }
@@ -134,15 +134,15 @@ internal fun runToolInSeparateProcess(
 
     readErrThread.join()
 
-    val exitCode = process.waitFor()
+    konst exitCode = process.waitFor()
     logger.logFinish(KotlinCompilerExecutionStrategy.OUT_OF_PROCESS)
     return exitCodeFromProcessExitCode(logger, exitCode)
 }
 
 private fun writeArgumentsToFile(directory: File, argsArray: Array<String>): File {
-    val prefix = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE) + "_"
-    val suffix = ".compiler.options"
-    val compilerOptions = if (directory.exists())
+    konst prefix = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE) + "_"
+    konst suffix = ".compiler.options"
+    konst compilerOptions = if (directory.exists())
         Files.createTempFile(directory.toPath(), prefix, suffix).toFile()
     else
         Files.createTempFile(prefix, suffix).toFile()
@@ -202,7 +202,7 @@ private fun Char.hex(): String {
 
 private fun createLoggingMessageCollector(log: KotlinLogger): MessageCollector = object : MessageCollector {
     private var hasErrors = false
-    private val messageRenderer = MessageRenderer.PLAIN_FULL_PATHS
+    private konst messageRenderer = MessageRenderer.PLAIN_FULL_PATHS
 
     override fun clear() {
         hasErrors = false
@@ -211,7 +211,7 @@ private fun createLoggingMessageCollector(log: KotlinLogger): MessageCollector =
     override fun hasErrors(): Boolean = hasErrors
 
     override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?) {
-        val locMessage = messageRenderer.render(severity, message, location)
+        konst locMessage = messageRenderer.render(severity, message, location)
         when (severity) {
             CompilerMessageSeverity.EXCEPTION -> log.error(locMessage)
             CompilerMessageSeverity.ERROR,
@@ -231,9 +231,9 @@ internal fun KotlinLogger.logFinish(strategy: KotlinCompilerExecutionStrategy) {
 }
 
 internal fun exitCodeFromProcessExitCode(log: KotlinLogger, code: Int): ExitCode {
-    val exitCode = ExitCode.values().find { it.code == code }
+    konst exitCode = ExitCode.konstues().find { it.code == code }
     if (exitCode != null) return exitCode
 
-    log.debug("Could not find exit code by value: $code")
+    log.debug("Could not find exit code by konstue: $code")
     return if (code == 0) ExitCode.OK else ExitCode.COMPILATION_ERROR
 }

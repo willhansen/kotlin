@@ -10,7 +10,7 @@ import kotlin.test.*
 fun printInt(x: Int) = println(x)
 
 fun foo(arg: Any) {
-    val argAsInt = try {
+    konst argAsInt = try {
         arg as Int
     } catch (e: ClassCastException) {
         0
@@ -21,8 +21,8 @@ fun foo(arg: Any) {
 @Test fun runTest() {
     foo(1)
     foo("Hello")
-    val nonConstInt = 1
-    val nonConstString = "Hello"
+    konst nonConstInt = 1
+    konst nonConstString = "Hello"
     foo(nonConstInt)
     foo(nonConstString)
 }

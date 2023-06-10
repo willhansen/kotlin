@@ -10,10 +10,10 @@ repositories {
 }
 
 kotlin {
-    val linuxTarget1 = linuxArm64("target1")
-    val linuxTarget2 = linuxX64("target2")
+    konst linuxTarget1 = linuxArm64("target1")
+    konst linuxTarget2 = linuxX64("target2")
 
-    val targets = listOf(linuxTarget1, linuxTarget2)
+    konst targets = listOf(linuxTarget1, linuxTarget2)
 
     /* This test only makes sense if all targets ar 'officially supported' */
     targets.forEach { target ->
@@ -30,11 +30,11 @@ kotlin {
     }
 
     /* 'Disable' a cinterop on a certain target */
-    val disabledCInteropTarget = when (val propertyValue = properties["disableTargetNumber"]) {
-        null -> error("Test project expects property 'disableTargetNumber' with value '1' or '2'")
+    konst disabledCInteropTarget = when (konst propertyValue = properties["disableTargetNumber"]) {
+        null -> error("Test project expects property 'disableTargetNumber' with konstue '1' or '2'")
         "1" -> linuxTarget1
         "2" -> linuxTarget2
-        else -> error("Unexpected value for property 'disableTargetNumber' ($propertyValue) expected '1' or '2'")
+        else -> error("Unexpected konstue for property 'disableTargetNumber' ($propertyValue) expected '1' or '2'")
     }
 
     tasks.named(disabledCInteropTarget.compilations.getByName("main").cinterops.single().interopProcessingTaskName)

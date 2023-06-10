@@ -100,10 +100,10 @@ public enum IrTypeOperator
   public static final int REINTERPRET_CAST_VALUE = 11;
 
 
-  public final int getNumber() { return value; }
+  public final int getNumber() { return konstue; }
 
-  public static IrTypeOperator valueOf(int value) {
-    switch (value) {
+  public static IrTypeOperator konstueOf(int konstue) {
+    switch (konstue) {
       case 1: return CAST;
       case 2: return IMPLICIT_CAST;
       case 3: return IMPLICIT_NOTNULL;
@@ -127,14 +127,14 @@ public enum IrTypeOperator
       internalValueMap =
         new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<IrTypeOperator>() {
           public IrTypeOperator findValueByNumber(int number) {
-            return IrTypeOperator.valueOf(number);
+            return IrTypeOperator.konstueOf(number);
           }
         };
 
-  private final int value;
+  private final int konstue;
 
-  private IrTypeOperator(int index, int value) {
-    this.value = value;
+  private IrTypeOperator(int index, int konstue) {
+    this.konstue = konstue;
   }
 
   // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOperator)

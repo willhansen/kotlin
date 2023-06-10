@@ -5,14 +5,14 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses
 
-class Cell<T>(val x: T)
+class Cell<T>(konst x: T)
 
 interface IOk {
     fun ok(): String = "OK"
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineClass(val s: String) : IOk
+konstue class InlineClass(konst s: String) : IOk
 
 fun test(cell: Cell<InlineClass>): String = cell.x.ok()
 

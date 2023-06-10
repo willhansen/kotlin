@@ -8,7 +8,7 @@
 package kotlin.collections
 
 /**
- * Given an [iterator] function constructs an [Iterable] instance that returns values through the [Iterator]
+ * Given an [iterator] function constructs an [Iterable] instance that returns konstues through the [Iterator]
  * provided by that function.
  * @sample samples.collections.Iterables.Building.iterable
  */
@@ -21,7 +21,7 @@ public inline fun <T> Iterable(crossinline iterator: () -> Iterator<T>): Iterabl
  * A wrapper over another [Iterable] (or any other object that can produce an [Iterator]) that returns
  * an indexing iterator.
  */
-internal class IndexingIterable<out T>(private val iteratorFactory: () -> Iterator<T>) : Iterable<IndexedValue<T>> {
+internal class IndexingIterable<out T>(private konst iteratorFactory: () -> Iterator<T>) : Iterable<IndexedValue<T>> {
     override fun iterator(): Iterator<IndexedValue<T>> = IndexingIterator(iteratorFactory())
 }
 
@@ -33,7 +33,7 @@ internal class IndexingIterable<out T>(private val iteratorFactory: () -> Iterat
 internal fun <T> Iterable<T>.collectionSizeOrNull(): Int? = if (this is Collection<*>) this.size else null
 
 /**
- * Returns the size of this iterable if it is known, or the specified [default] value otherwise.
+ * Returns the size of this iterable if it is known, or the specified [default] konstue otherwise.
  */
 @PublishedApi
 internal fun <T> Iterable<T>.collectionSizeOrDefault(default: Int): Int = if (this is Collection<*>) this.size else default
@@ -44,7 +44,7 @@ internal fun <T> Iterable<T>.collectionSizeOrDefault(default: Int): Int = if (th
  * @sample samples.collections.Iterables.Operations.flattenIterable
  */
 public fun <T> Iterable<Iterable<T>>.flatten(): List<T> {
-    val result = ArrayList<T>()
+    konst result = ArrayList<T>()
     for (element in this) {
         result.addAll(element)
     }
@@ -53,14 +53,14 @@ public fun <T> Iterable<Iterable<T>>.flatten(): List<T> {
 
 /**
  * Returns a pair of lists, where
- * *first* list is built from the first values of each pair from this collection,
- * *second* list is built from the second values of each pair from this collection.
+ * *first* list is built from the first konstues of each pair from this collection,
+ * *second* list is built from the second konstues of each pair from this collection.
  * @sample samples.collections.Iterables.Operations.unzipIterable
  */
 public fun <T, R> Iterable<Pair<T, R>>.unzip(): Pair<List<T>, List<R>> {
-    val expectedSize = collectionSizeOrDefault(10)
-    val listT = ArrayList<T>(expectedSize)
-    val listR = ArrayList<R>(expectedSize)
+    konst expectedSize = collectionSizeOrDefault(10)
+    konst listT = ArrayList<T>(expectedSize)
+    konst listR = ArrayList<R>(expectedSize)
     for (pair in this) {
         listT.add(pair.first)
         listR.add(pair.second)

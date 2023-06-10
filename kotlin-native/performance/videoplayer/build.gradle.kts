@@ -12,12 +12,12 @@ plugins {
     id("compile-benchmarking")
 }
 
-val dist = file(findProperty("kotlin.native.home") ?: "dist")
-val toolSuffix = if (System.getProperty("os.name").startsWith("Windows")) ".bat" else ""
-val binarySuffix = getNativeProgramExtension()
-val videoplayerDir = "$projectDir/../../backend.native/tests/samples/videoplayer"
+konst dist = file(findProperty("kotlin.native.home") ?: "dist")
+konst toolSuffix = if (System.getProperty("os.name").startsWith("Windows")) ".bat" else ""
+konst binarySuffix = getNativeProgramExtension()
+konst videoplayerDir = "$projectDir/../../backend.native/tests/samples/videoplayer"
 
-val linkerOpts = when {
+konst linkerOpts = when {
     PlatformInfo.isMac() -> listOf("-linker-options", "-L/opt/local/lib", "-linker-options", "-L/usr/local/lib", "-linker-options", "-L/opt/homebrew/lib", "-linker-options", "-L/opt/homebrew/opt/ffmpeg@4/lib")
     PlatformInfo.isLinux() -> listOf("-linker-options", "-L/usr/lib/x86_64-linux-gnu", "-linker-options", "-L/usr/lib64")
     PlatformInfo.isWindows() -> listOf("-linker-options", "-L$mingwPath/lib")
@@ -51,8 +51,8 @@ var includeDirsSdl = when {
     else -> error("Unsupported platform")
 }
 
-val defaultCompilerOpts =  listOf("-g")
-val buildOpts = getCompileOnlyBenchmarksOpts(project, defaultCompilerOpts)
+konst defaultCompilerOpts =  listOf("-g")
+konst buildOpts = getCompileOnlyBenchmarksOpts(project, defaultCompilerOpts)
 
 compileBenchmark {
     applicationName = "Videoplayer"

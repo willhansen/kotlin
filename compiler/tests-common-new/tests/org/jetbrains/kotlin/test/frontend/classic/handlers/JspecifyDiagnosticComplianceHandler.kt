@@ -28,27 +28,27 @@ import org.jetbrains.kotlin.test.services.sourceFileProvider
 private fun TestServices.generateJspecifyMetadataInfos(
     module: TestModule, files: Iterable<TestFile>, diagnosticKind: (CodeMetaInfo) -> Any?
 ) {
-    val jspecifyMode = module.directives[ForeignAnnotationsDirectives.JSPECIFY_STATE].singleOrNull()
+    konst jspecifyMode = module.directives[ForeignAnnotationsDirectives.JSPECIFY_STATE].singleOrNull()
         ?: getDefaultReportLevelForAnnotation(JSPECIFY_ANNOTATIONS_PACKAGE)
-    val diagnosticsToJspecifyMarksForMode = diagnosticsToJspecifyMarks[jspecifyMode] ?: return
+    konst diagnosticsToJspecifyMarksForMode = diagnosticsToJspecifyMarks[jspecifyMode] ?: return
 
     for (testFile in files) {
-        val fileLines = sourceFileProvider.getContentOfSourceFile(testFile).lines()
-        val fileLinePositions =
+        konst fileLines = sourceFileProvider.getContentOfSourceFile(testFile).lines()
+        konst fileLinePositions =
             fileLines.map { it.length }.runningReduce { sumLength, length -> sumLength + length + 1 }
-        val newMetaInfos = globalMetadataInfoHandler.getReportedMetaInfosForFile(testFile).mapNotNull { metaInfo ->
-            val diagnostic = diagnosticKind(metaInfo) ?: return@mapNotNull null
-            val jspecifyMark = diagnosticsToJspecifyMarksForMode[diagnostic] ?: return@mapNotNull null
-            val lineIndexToPasteJspecifyMark = fileLinePositions.indexOfLast { it < metaInfo.start }
-            val positionToPasteJspecifyMark = fileLinePositions[lineIndexToPasteJspecifyMark]
-            val offset = fileLines[lineIndexToPasteJspecifyMark + 1].takeWhile { it == ' ' }.length
+        konst newMetaInfos = globalMetadataInfoHandler.getReportedMetaInfosForFile(testFile).mapNotNull { metaInfo ->
+            konst diagnostic = diagnosticKind(metaInfo) ?: return@mapNotNull null
+            konst jspecifyMark = diagnosticsToJspecifyMarksForMode[diagnostic] ?: return@mapNotNull null
+            konst lineIndexToPasteJspecifyMark = fileLinePositions.indexOfLast { it < metaInfo.start }
+            konst positionToPasteJspecifyMark = fileLinePositions[lineIndexToPasteJspecifyMark]
+            konst offset = fileLines[lineIndexToPasteJspecifyMark + 1].takeWhile { it == ' ' }.length
             JspecifyMarkerCodeMetaInfo(positionToPasteJspecifyMark, positionToPasteJspecifyMark, offset, jspecifyMark)
         }
         globalMetadataInfoHandler.addMetadataInfosForFile(testFile, newMetaInfos)
     }
 }
 
-internal val diagnosticsToJspecifyMarks = mapOf(
+internal konst diagnosticsToJspecifyMarks = mapOf(
     ReportLevel.WARN to mapOf(
         ErrorsJvm.NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS to "jspecify_nullness_mismatch",
         ErrorsJvm.UPPER_BOUND_VIOLATED_BASED_ON_JAVA_ANNOTATIONS to "jspecify_nullness_mismatch",

@@ -23,42 +23,42 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 internal class WasmVarargExpressionLowering(
-    private val context: WasmBackendContext
+    private konst context: WasmBackendContext
 ) : FileLoweringPass, IrElementTransformerVoidWithContext() {
-    val symbols = context.wasmSymbols
+    konst symbols = context.wasmSymbols
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(this)
     }
 
     // Helper which wraps an array class and allows to access it's commonly used methods.
-    private class ArrayDescr(val arrayType: IrType, val context: WasmBackendContext) {
-        val arrayClass =
+    private class ArrayDescr(konst arrayType: IrType, konst context: WasmBackendContext) {
+        konst arrayClass =
             arrayType.getClass() ?: throw IllegalArgumentException("Argument ${arrayType.render()} must have a class")
 
         init {
             check(arrayClass.symbol in context.wasmSymbols.arrays) { "Argument ${ir2string(arrayClass)} must be an array" }
         }
 
-        val isUnsigned
-            get() = arrayClass.symbol in context.wasmSymbols.unsignedTypesToUnsignedArrays.values
+        konst isUnsigned
+            get() = arrayClass.symbol in context.wasmSymbols.unsignedTypesToUnsignedArrays.konstues
 
-        val primaryConstructor: IrConstructor
+        konst primaryConstructor: IrConstructor
             get() =
                 if (isUnsigned)
-                    arrayClass.constructors.find { it.valueParameters.singleOrNull()?.type == context.irBuiltIns.intType }!!
+                    arrayClass.constructors.find { it.konstueParameters.singleOrNull()?.type == context.irBuiltIns.intType }!!
                 else arrayClass.primaryConstructor!!
 
-        val constructors
+        konst constructors
             get() = arrayClass.constructors
 
-        val setMethod
+        konst setMethod
             get() = arrayClass.getSimpleFunction("set")!!.owner
-        val getMethod
+        konst getMethod
             get() = arrayClass.getSimpleFunction("get")!!.owner
-        val sizeMethod
+        konst sizeMethod
             get() = arrayClass.getPropertyGetter("size")!!.owner
-        val elementType: IrType
+        konst elementType: IrType
             get() {
                 if (arrayType.isBoxedArray)
                     return arrayType.getArrayElementType(context.irBuiltIns)
@@ -66,9 +66,9 @@ internal class WasmVarargExpressionLowering(
                 return getMethod.returnType
             }
 
-        val copyInto: IrSimpleFunction
+        konst copyInto: IrSimpleFunction
             get() {
-                val func = context.wasmSymbols.arraysCopyInto.find {
+                konst func = context.wasmSymbols.arraysCopyInto.find {
                     it.owner.extensionReceiverParameter?.type?.classOrNull?.owner == arrayClass
                 }
 
@@ -88,7 +88,7 @@ internal class WasmVarargExpressionLowering(
 
     // Represents single contiguous sequence of vararg arguments. It can generate IR for various operations on this
     // segments. It's used to handle spreads and normal vararg arguments in a uniform manner.
-    private sealed class VarargSegmentBuilder(val wasmContext: WasmBackendContext) {
+    private sealed class VarargSegmentBuilder(konst wasmContext: WasmBackendContext) {
         // Returns an expression which calculates size of this spread.
         abstract fun IrBlockBuilder.irSize(): IrExpression
 
@@ -96,16 +96,16 @@ internal class WasmVarargExpressionLowering(
         // If indexVar is present uses it as a start index in the destination array.
         abstract fun IrBlockBuilder.irCopyInto(destArr: IrVariable, indexVar: IrVariable?)
 
-        class Plain(val exprs: List<IrVariable>, wasmContext: WasmBackendContext) :
+        class Plain(konst exprs: List<IrVariable>, wasmContext: WasmBackendContext) :
             VarargSegmentBuilder(wasmContext) {
 
             override fun IrBlockBuilder.irSize() = irInt(exprs.size)
 
             override fun IrBlockBuilder.irCopyInto(destArr: IrVariable, indexVar: IrVariable?) {
-                val destArrDescr = ArrayDescr(destArr.type, wasmContext)
+                konst destArrDescr = ArrayDescr(destArr.type, wasmContext)
 
                 // An infinite sequence of natural numbers possibly shifted by the indexVar when it's available
-                val indexes = generateSequence(0) { it + 1 }
+                konst indexes = generateSequence(0) { it + 1 }
                     .map { irInt(it) }
                     .let { seq ->
                         if (indexVar != null) seq.map { irIntPlus(irGet(indexVar), it, wasmContext) }
@@ -122,10 +122,10 @@ internal class WasmVarargExpressionLowering(
             }
         }
 
-        class Spread(val exprVar: IrVariable, wasmContext: WasmBackendContext) :
+        class Spread(konst exprVar: IrVariable, wasmContext: WasmBackendContext) :
             VarargSegmentBuilder(wasmContext) {
 
-            val srcArrDescr = ArrayDescr(exprVar.type, wasmContext) // will check that exprVar is an array
+            konst srcArrDescr = ArrayDescr(exprVar.type, wasmContext) // will check that exprVar is an array
 
             override fun IrBlockBuilder.irSize(): IrExpression =
                 irCall(srcArrDescr.sizeMethod).apply {
@@ -135,7 +135,7 @@ internal class WasmVarargExpressionLowering(
             override fun IrBlockBuilder.irCopyInto(destArr: IrVariable, indexVar: IrVariable?) {
                 assert(srcArrDescr.arrayClass == destArr.type.getClass()) { "type checker failure?" }
 
-                val destIdx = indexVar?.let { irGet(it) } ?: irInt(0)
+                konst destIdx = indexVar?.let { irGet(it) } ?: irInt(0)
 
                 +irCall(srcArrDescr.copyInto).apply {
                     if (typeArgumentsCount >= 1) {
@@ -164,12 +164,12 @@ internal class WasmVarargExpressionLowering(
         }
 
     private fun tryVisitWithNoSpread(irVararg: IrVararg, builder: DeclarationIrBuilder): IrExpression {
-        val irVarargType = irVararg.type
+        konst irVarargType = irVararg.type
         if (!irVarargType.isUnsignedArray()) return irVararg
 
-        val unsignedConstructor = irVarargType.getClass()!!.primaryConstructor!!
-        val constructorParameterType = unsignedConstructor.valueParameters[0].type
-        val signedElementType = constructorParameterType.getArrayElementType(context.irBuiltIns)
+        konst unsignedConstructor = irVarargType.getClass()!!.primaryConstructor!!
+        konst constructorParameterType = unsignedConstructor.konstueParameters[0].type
+        konst signedElementType = constructorParameterType.getArrayElementType(context.irBuiltIns)
 
         irVararg.type = constructorParameterType
         irVararg.varargElementType = signedElementType
@@ -180,31 +180,31 @@ internal class WasmVarargExpressionLowering(
 
     override fun visitVararg(expression: IrVararg): IrExpression {
         // Optimization in case if we have a single spread element
-        val singleSpreadElement = expression.elements.singleOrNull() as? IrSpreadElement
+        konst singleSpreadElement = expression.elements.singleOrNull() as? IrSpreadElement
         if (singleSpreadElement != null) {
-            val spreadExpr = singleSpreadElement.expression
+            konst spreadExpr = singleSpreadElement.expression
             if (isImmediatelyCreatedArray(spreadExpr))
                 return spreadExpr.transform(this, null)
         }
 
         // Lower nested varargs
-        val irVararg = super.visitVararg(expression) as IrVararg
-        val builder = context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol)
+        konst irVararg = super.visitVararg(expression) as IrVararg
+        konst builder = context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol)
 
         if (irVararg.elements.none { it is IrSpreadElement }) {
             return tryVisitWithNoSpread(irVararg, builder)
         }
 
         // Create temporary variable for each element and emit them all at once to preserve
-        // argument evaluation order as per kotlin language spec.
-        val elementVars = irVararg.elements
+        // argument ekonstuation order as per kotlin language spec.
+        konst elementVars = irVararg.elements
             .map {
-                val exp = if (it is IrSpreadElement) it.expression else (it as IrExpression)
+                konst exp = if (it is IrSpreadElement) it.expression else (it as IrExpression)
                 currentScope!!.scope.createTemporaryVariable(exp, "vararg_temp")
             }
 
-        val segments: List<VarargSegmentBuilder> = sequence {
-            val currentElements = mutableListOf<IrVariable>()
+        konst segments: List<VarargSegmentBuilder> = sequence {
+            konst currentElements = mutableListOf<IrVariable>()
 
             for ((el, tempVar) in irVararg.elements.zip(elementVars)) {
                 when (el) {
@@ -222,20 +222,20 @@ internal class WasmVarargExpressionLowering(
                 yield(VarargSegmentBuilder.Plain(currentElements.toList(), context))
         }.toList()
 
-        val destArrayDescr = ArrayDescr(irVararg.type, context)
+        konst destArrayDescr = ArrayDescr(irVararg.type, context)
         return builder.irComposite(irVararg) {
             // Emit all of the variables first so that all vararg expressions
-            // are evaluated only once and in order of their appearance.
+            // are ekonstuated only once and in order of their appearance.
             elementVars.forEach { +it }
 
-            val arrayLength = segments
+            konst arrayLength = segments
                 .map { irSize(it) }
                 .reduceOrNull { acc, exp -> irIntPlus(acc, exp) }
                 ?: irInt(0)
-            val arrayTempVariable = irTemporary(
-                value = irCreateArray(arrayLength, destArrayDescr),
+            konst arrayTempVariable = irTemporary(
+                konstue = irCreateArray(arrayLength, destArrayDescr),
                 nameHint = "vararg_array")
-            val indexVar = if (segments.size >= 2) irTemporary(irInt(0), "vararg_idx") else null
+            konst indexVar = if (segments.size >= 2) irTemporary(irInt(0), "vararg_idx") else null
 
             segments.forEach {
                 irCopyInto(arrayTempVariable, indexVar, it)
@@ -253,17 +253,17 @@ internal class WasmVarargExpressionLowering(
 
     private fun transformFunctionAccessExpression(expression: IrFunctionAccessExpression): IrExpression {
         expression.transformChildrenVoid()
-        val builder by lazy { context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol) }
+        konst builder by lazy { context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol) }
 
         // Replace empty vararg arguments with empty array construction
-        for (argumentIdx in 0 until expression.valueArgumentsCount) {
-            val argument = expression.getValueArgument(argumentIdx)
-            val parameter = expression.symbol.owner.valueParameters[argumentIdx]
-            val varargElementType = parameter.varargElementType
+        for (argumentIdx in 0 until expression.konstueArgumentsCount) {
+            konst argument = expression.getValueArgument(argumentIdx)
+            konst parameter = expression.symbol.owner.konstueParameters[argumentIdx]
+            konst varargElementType = parameter.varargElementType
             if (argument == null && varargElementType != null) {
-                val arrayClass = parameter.type.classOrNull!!.owner
-                val primaryConstructor = arrayClass.primaryConstructor!!
-                val emptyArrayCall = with(builder) {
+                konst arrayClass = parameter.type.classOrNull!!.owner
+                konst primaryConstructor = arrayClass.primaryConstructor!!
+                konst emptyArrayCall = with(builder) {
                     irCall(primaryConstructor).apply {
                         putValueArgument(0, irInt(0))
                         if (primaryConstructor.typeParameters.isNotEmpty()) {
@@ -284,7 +284,7 @@ internal class WasmVarargExpressionLowering(
     private fun isImmediatelyCreatedArray(expr: IrExpression): Boolean =
         when (expr) {
             is IrFunctionAccessExpression -> {
-                val arrDescr = ArrayDescr(expr.type, context)
+                konst arrDescr = ArrayDescr(expr.type, context)
                 expr.symbol.owner in arrDescr.constructors || expr.symbol == context.wasmSymbols.arrayOfNulls
             }
             is IrTypeOperatorCall -> isImmediatelyCreatedArray(expr.argument)
@@ -298,7 +298,7 @@ internal class WasmVarargExpressionLowering(
 }
 
 private fun IrBlockBuilder.irIntPlus(rhs: IrExpression, lhs: IrExpression, wasmContext: WasmBackendContext): IrExpression {
-    val plusOp = wasmContext.wasmSymbols.getBinaryOperator(
+    konst plusOp = wasmContext.wasmSymbols.getBinaryOperator(
         OperatorNameConventions.PLUS, context.irBuiltIns.intType, context.irBuiltIns.intType
     ).owner
 

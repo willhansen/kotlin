@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.analysis.utils.errors
 
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiInvalidElementAccessException
+import com.intellij.psi.PsiInkonstidElementAccessException
 import org.jetbrains.kotlin.analysis.project.structure.KtModule
 import org.jetbrains.kotlin.analysis.utils.printer.getElementTextInContext
 import org.jetbrains.kotlin.psi.KtElement
@@ -18,7 +18,7 @@ public fun ExceptionAttachmentBuilder.withPsiEntry(name: String, psi: PsiElement
 public fun ExceptionAttachmentBuilder.withPsiEntry(name: String, psi: PsiElement?, module: KtModule?) {
     withEntry(name, psi) { psiElement ->
         when {
-            !psiElement.isValid -> "INVALID PSI ${PsiInvalidElementAccessException.findOutInvalidationReason(psiElement)}"
+            !psiElement.isValid -> "INVALID PSI ${PsiInkonstidElementAccessException.findOutInkonstidationReason(psiElement)}"
             psiElement is KtElement -> psiElement.getElementTextInContext()
             else -> psiElement.text
         }

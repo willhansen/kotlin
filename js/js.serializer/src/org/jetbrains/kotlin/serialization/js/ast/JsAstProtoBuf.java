@@ -41,10 +41,10 @@ public final class JsAstProtoBuf {
     public static final int PURE_VALUE = 3;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() { return konstue; }
 
-    public static SideEffects valueOf(int value) {
-      switch (value) {
+    public static SideEffects konstueOf(int konstue) {
+      switch (konstue) {
         case 1: return AFFECTS_STATE;
         case 2: return DEPENDS_ON_STATE;
         case 3: return PURE;
@@ -60,14 +60,14 @@ public final class JsAstProtoBuf {
         internalValueMap =
           new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<SideEffects>() {
             public SideEffects findValueByNumber(int number) {
-              return SideEffects.valueOf(number);
+              return SideEffects.konstueOf(number);
             }
           };
 
-    private final int value;
+    private final int konstue;
 
-    private SideEffects(int index, int value) {
-      this.value = value;
+    private SideEffects(int index, int konstue) {
+      this.konstue = konstue;
     }
 
     // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.serialization.js.ast.SideEffects)
@@ -106,10 +106,10 @@ public final class JsAstProtoBuf {
     public static final int NOT_INLINE_VALUE = 2;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() { return konstue; }
 
-    public static InlineStrategy valueOf(int value) {
-      switch (value) {
+    public static InlineStrategy konstueOf(int konstue) {
+      switch (konstue) {
         case 0: return AS_FUNCTION;
         case 1: return IN_PLACE;
         case 2: return NOT_INLINE;
@@ -125,14 +125,14 @@ public final class JsAstProtoBuf {
         internalValueMap =
           new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<InlineStrategy>() {
             public InlineStrategy findValueByNumber(int number) {
-              return InlineStrategy.valueOf(number);
+              return InlineStrategy.konstueOf(number);
             }
           };
 
-    private final int value;
+    private final int konstue;
 
-    private InlineStrategy(int index, int value) {
-      this.value = value;
+    private InlineStrategy(int index, int konstue) {
+      this.konstue = konstue;
     }
 
     // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.serialization.js.ast.InlineStrategy)
@@ -235,10 +235,10 @@ public final class JsAstProtoBuf {
     public static final int GET_REIFIED_TYPE_PARAMETER_KTYPE_VALUE = 11;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() { return konstue; }
 
-    public static SpecialFunction valueOf(int value) {
-      switch (value) {
+    public static SpecialFunction konstueOf(int konstue) {
+      switch (konstue) {
         case 1: return DEFINE_INLINE_FUNCTION;
         case 2: return WRAP_FUNCTION;
         case 3: return TO_BOXED_CHAR;
@@ -262,14 +262,14 @@ public final class JsAstProtoBuf {
         internalValueMap =
           new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<SpecialFunction>() {
             public SpecialFunction findValueByNumber(int number) {
-              return SpecialFunction.valueOf(number);
+              return SpecialFunction.konstueOf(number);
             }
           };
 
-    private final int value;
+    private final int konstue;
 
-    private SpecialFunction(int index, int value) {
-      this.value = value;
+    private SpecialFunction(int index, int konstue) {
+      this.konstue = konstue;
     }
 
     // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.serialization.js.ast.SpecialFunction)
@@ -324,7 +324,7 @@ public final class JsAstProtoBuf {
     private Location(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -359,10 +359,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -380,7 +380,7 @@ public final class JsAstProtoBuf {
       public Location parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Location(input, extensionRegistry);
       }
     };
@@ -483,23 +483,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location parseFrom(java.io.InputStream input)
@@ -634,7 +634,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -662,9 +662,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 startLine = 1;</code>
        */
-      public Builder setStartLine(int value) {
+      public Builder setStartLine(int konstue) {
         bitField0_ |= 0x00000001;
-        startLine_ = value;
+        startLine_ = konstue;
         
         return this;
       }
@@ -694,9 +694,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 startChar = 2;</code>
        */
-      public Builder setStartChar(int value) {
+      public Builder setStartChar(int konstue) {
         bitField0_ |= 0x00000002;
-        startChar_ = value;
+        startChar_ = konstue;
         
         return this;
       }
@@ -779,7 +779,7 @@ public final class JsAstProtoBuf {
     private JsImportedModule(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -827,10 +827,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -848,7 +848,7 @@ public final class JsAstProtoBuf {
       public JsImportedModule parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new JsImportedModule(input, extensionRegistry);
       }
     };
@@ -980,23 +980,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule parseFrom(java.io.InputStream input)
@@ -1146,7 +1146,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -1174,9 +1174,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 external_name = 1;</code>
        */
-      public Builder setExternalName(int value) {
+      public Builder setExternalName(int konstue) {
         bitField0_ |= 0x00000001;
-        externalName_ = value;
+        externalName_ = konstue;
         
         return this;
       }
@@ -1206,9 +1206,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 internal_name = 2;</code>
        */
-      public Builder setInternalName(int value) {
+      public Builder setInternalName(int konstue) {
         bitField0_ |= 0x00000002;
-        internalName_ = value;
+        internalName_ = konstue;
         
         return this;
       }
@@ -1238,11 +1238,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression plain_reference = 3;</code>
        */
-      public Builder setPlainReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setPlainReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        plainReference_ = value;
+        plainReference_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -1260,13 +1260,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression plain_reference = 3;</code>
        */
-      public Builder mergePlainReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergePlainReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             plainReference_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           plainReference_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(plainReference_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(plainReference_).mergeFrom(konstue).buildPartial();
         } else {
-          plainReference_ = value;
+          plainReference_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -1604,7 +1604,7 @@ public final class JsAstProtoBuf {
     private Expression(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -1652,13 +1652,13 @@ public final class JsAstProtoBuf {
             }
             case 32: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SideEffects value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SideEffects.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SideEffects konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SideEffects.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFieldsCodedOutput.writeRawVarint32(tag);
                 unknownFieldsCodedOutput.writeRawVarint32(rawValue);
               } else {
                 bitField0_ |= 0x00000008;
-                sideEffects_ = value;
+                sideEffects_ = konstue;
               }
               break;
             }
@@ -1960,10 +1960,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
@@ -1987,7 +1987,7 @@ public final class JsAstProtoBuf {
       public Expression parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Expression(input, extensionRegistry);
       }
     };
@@ -2026,12 +2026,12 @@ public final class JsAstProtoBuf {
       SUPER_LITERAL(43),
       CLASS(44),
       EXPRESSION_NOT_SET(0);
-      private int value = 0;
-      private ExpressionCase(int value) {
-        this.value = value;
+      private int konstue = 0;
+      private ExpressionCase(int konstue) {
+        this.konstue = konstue;
       }
-      public static ExpressionCase valueOf(int value) {
-        switch (value) {
+      public static ExpressionCase konstueOf(int konstue) {
+        switch (konstue) {
           case 22: return SIMPLE_NAME_REFERENCE;
           case 23: return THIS_LITERAL;
           case 24: return NULL_LITERAL;
@@ -2061,13 +2061,13 @@ public final class JsAstProtoBuf {
         }
       }
       public int getNumber() {
-        return this.value;
+        return this.konstue;
       }
     };
 
     public ExpressionCase
     getExpressionCase() {
-      return ExpressionCase.valueOf(
+      return ExpressionCase.konstueOf(
           expressionCase_);
     }
 
@@ -2978,23 +2978,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression parseFrom(java.io.InputStream input)
@@ -3459,7 +3459,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -3473,7 +3473,7 @@ public final class JsAstProtoBuf {
       private java.lang.Object expression_;
       public ExpressionCase
           getExpressionCase() {
-        return ExpressionCase.valueOf(
+        return ExpressionCase.konstueOf(
             expressionCase_);
       }
 
@@ -3501,9 +3501,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 fileId = 1;</code>
        */
-      public Builder setFileId(int value) {
+      public Builder setFileId(int konstue) {
         bitField0_ |= 0x00000001;
-        fileId_ = value;
+        fileId_ = konstue;
         
         return this;
       }
@@ -3533,11 +3533,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Location location = 2;</code>
        */
-      public Builder setLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location value) {
-        if (value == null) {
+      public Builder setLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        location_ = value;
+        location_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -3555,13 +3555,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Location location = 2;</code>
        */
-      public Builder mergeLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location value) {
+      public Builder mergeLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             location_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.getDefaultInstance()) {
           location_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.newBuilder(location_).mergeFrom(konstue).buildPartial();
         } else {
-          location_ = value;
+          location_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -3593,9 +3593,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional bool synthetic = 3 [default = false];</code>
        */
-      public Builder setSynthetic(boolean value) {
+      public Builder setSynthetic(boolean konstue) {
         bitField0_ |= 0x00000004;
-        synthetic_ = value;
+        synthetic_ = konstue;
         
         return this;
       }
@@ -3625,12 +3625,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.SideEffects side_effects = 4 [default = AFFECTS_STATE];</code>
        */
-      public Builder setSideEffects(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SideEffects value) {
-        if (value == null) {
+      public Builder setSideEffects(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SideEffects konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000008;
-        sideEffects_ = value;
+        sideEffects_ = konstue;
         
         return this;
       }
@@ -3660,11 +3660,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.JsImportedModule local_alias = 5;</code>
        */
-      public Builder setLocalAlias(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule value) {
-        if (value == null) {
+      public Builder setLocalAlias(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        localAlias_ = value;
+        localAlias_ = konstue;
 
         bitField0_ |= 0x00000010;
         return this;
@@ -3682,13 +3682,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.JsImportedModule local_alias = 5;</code>
        */
-      public Builder mergeLocalAlias(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule value) {
+      public Builder mergeLocalAlias(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule konstue) {
         if (((bitField0_ & 0x00000010) == 0x00000010) &&
             localAlias_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule.getDefaultInstance()) {
           localAlias_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule.newBuilder(localAlias_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.JsImportedModule.newBuilder(localAlias_).mergeFrom(konstue).buildPartial();
         } else {
-          localAlias_ = value;
+          localAlias_ = konstue;
         }
 
         bitField0_ |= 0x00000010;
@@ -3735,12 +3735,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment before_comments = 6;</code>
        */
       public Builder setBeforeComments(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBeforeCommentsIsMutable();
-        beforeComments_.set(index, value);
+        beforeComments_.set(index, konstue);
 
         return this;
       }
@@ -3757,12 +3757,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment before_comments = 6;</code>
        */
-      public Builder addBeforeComments(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+      public Builder addBeforeComments(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBeforeCommentsIsMutable();
-        beforeComments_.add(value);
+        beforeComments_.add(konstue);
 
         return this;
       }
@@ -3770,12 +3770,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment before_comments = 6;</code>
        */
       public Builder addBeforeComments(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBeforeCommentsIsMutable();
-        beforeComments_.add(index, value);
+        beforeComments_.add(index, konstue);
 
         return this;
       }
@@ -3803,10 +3803,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment before_comments = 6;</code>
        */
       public Builder addAllBeforeComments(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment> konstues) {
         ensureBeforeCommentsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, beforeComments_);
+            konstues, beforeComments_);
 
         return this;
       }
@@ -3860,12 +3860,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment after_comments = 7;</code>
        */
       public Builder setAfterComments(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAfterCommentsIsMutable();
-        afterComments_.set(index, value);
+        afterComments_.set(index, konstue);
 
         return this;
       }
@@ -3882,12 +3882,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment after_comments = 7;</code>
        */
-      public Builder addAfterComments(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+      public Builder addAfterComments(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAfterCommentsIsMutable();
-        afterComments_.add(value);
+        afterComments_.add(konstue);
 
         return this;
       }
@@ -3895,12 +3895,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment after_comments = 7;</code>
        */
       public Builder addAfterComments(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAfterCommentsIsMutable();
-        afterComments_.add(index, value);
+        afterComments_.add(index, konstue);
 
         return this;
       }
@@ -3928,10 +3928,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment after_comments = 7;</code>
        */
       public Builder addAllAfterComments(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment> konstues) {
         ensureAfterCommentsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, afterComments_);
+            konstues, afterComments_);
 
         return this;
       }
@@ -3972,9 +3972,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 simple_name_reference = 22;</code>
        */
-      public Builder setSimpleNameReference(int value) {
+      public Builder setSimpleNameReference(int konstue) {
         expressionCase_ = 22;
-        expression_ = value;
+        expression_ = konstue;
         
         return this;
       }
@@ -4008,11 +4008,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ThisLiteral this_literal = 23;</code>
        */
-      public Builder setThisLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral value) {
-        if (value == null) {
+      public Builder setThisLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 23;
         return this;
@@ -4030,13 +4030,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ThisLiteral this_literal = 23;</code>
        */
-      public Builder mergeThisLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral value) {
+      public Builder mergeThisLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral konstue) {
         if (expressionCase_ == 23 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 23;
@@ -4072,11 +4072,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.NullLiteral null_literal = 24;</code>
        */
-      public Builder setNullLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral value) {
-        if (value == null) {
+      public Builder setNullLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 24;
         return this;
@@ -4094,13 +4094,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.NullLiteral null_literal = 24;</code>
        */
-      public Builder mergeNullLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral value) {
+      public Builder mergeNullLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral konstue) {
         if (expressionCase_ == 24 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 24;
@@ -4136,11 +4136,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.TrueLiteral true_literal = 25;</code>
        */
-      public Builder setTrueLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral value) {
-        if (value == null) {
+      public Builder setTrueLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 25;
         return this;
@@ -4158,13 +4158,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.TrueLiteral true_literal = 25;</code>
        */
-      public Builder mergeTrueLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral value) {
+      public Builder mergeTrueLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral konstue) {
         if (expressionCase_ == 25 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 25;
@@ -4200,11 +4200,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.FalseLiteral false_literal = 26;</code>
        */
-      public Builder setFalseLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral value) {
-        if (value == null) {
+      public Builder setFalseLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 26;
         return this;
@@ -4222,13 +4222,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.FalseLiteral false_literal = 26;</code>
        */
-      public Builder mergeFalseLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral value) {
+      public Builder mergeFalseLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral konstue) {
         if (expressionCase_ == 26 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 26;
@@ -4264,9 +4264,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 string_literal = 27;</code>
        */
-      public Builder setStringLiteral(int value) {
+      public Builder setStringLiteral(int konstue) {
         expressionCase_ = 27;
-        expression_ = value;
+        expression_ = konstue;
         
         return this;
       }
@@ -4300,11 +4300,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.RegExpLiteral reg_exp_literal = 28;</code>
        */
-      public Builder setRegExpLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral value) {
-        if (value == null) {
+      public Builder setRegExpLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 28;
         return this;
@@ -4322,13 +4322,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.RegExpLiteral reg_exp_literal = 28;</code>
        */
-      public Builder mergeRegExpLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral value) {
+      public Builder mergeRegExpLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral konstue) {
         if (expressionCase_ == 28 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 28;
@@ -4364,9 +4364,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 int_literal = 29;</code>
        */
-      public Builder setIntLiteral(int value) {
+      public Builder setIntLiteral(int konstue) {
         expressionCase_ = 29;
-        expression_ = value;
+        expression_ = konstue;
         
         return this;
       }
@@ -4400,9 +4400,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional double double_literal = 30;</code>
        */
-      public Builder setDoubleLiteral(double value) {
+      public Builder setDoubleLiteral(double konstue) {
         expressionCase_ = 30;
-        expression_ = value;
+        expression_ = konstue;
         
         return this;
       }
@@ -4436,11 +4436,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ArrayLiteral array_literal = 31;</code>
        */
-      public Builder setArrayLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral value) {
-        if (value == null) {
+      public Builder setArrayLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 31;
         return this;
@@ -4458,13 +4458,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ArrayLiteral array_literal = 31;</code>
        */
-      public Builder mergeArrayLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral value) {
+      public Builder mergeArrayLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral konstue) {
         if (expressionCase_ == 31 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 31;
@@ -4500,11 +4500,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ObjectLiteral object_literal = 32;</code>
        */
-      public Builder setObjectLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral value) {
-        if (value == null) {
+      public Builder setObjectLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 32;
         return this;
@@ -4522,13 +4522,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ObjectLiteral object_literal = 32;</code>
        */
-      public Builder mergeObjectLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral value) {
+      public Builder mergeObjectLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral konstue) {
         if (expressionCase_ == 32 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 32;
@@ -4564,11 +4564,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Function function = 33;</code>
        */
-      public Builder setFunction(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function value) {
-        if (value == null) {
+      public Builder setFunction(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 33;
         return this;
@@ -4586,13 +4586,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Function function = 33;</code>
        */
-      public Builder mergeFunction(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function value) {
+      public Builder mergeFunction(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function konstue) {
         if (expressionCase_ == 33 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 33;
@@ -4628,11 +4628,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.DocComment doc_comment = 34;</code>
        */
-      public Builder setDocComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment value) {
-        if (value == null) {
+      public Builder setDocComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 34;
         return this;
@@ -4650,13 +4650,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.DocComment doc_comment = 34;</code>
        */
-      public Builder mergeDocComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment value) {
+      public Builder mergeDocComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment konstue) {
         if (expressionCase_ == 34 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 34;
@@ -4692,11 +4692,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation binary = 35;</code>
        */
-      public Builder setBinary(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation value) {
-        if (value == null) {
+      public Builder setBinary(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 35;
         return this;
@@ -4714,13 +4714,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation binary = 35;</code>
        */
-      public Builder mergeBinary(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation value) {
+      public Builder mergeBinary(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation konstue) {
         if (expressionCase_ == 35 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 35;
@@ -4756,11 +4756,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation unary = 36;</code>
        */
-      public Builder setUnary(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation value) {
-        if (value == null) {
+      public Builder setUnary(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 36;
         return this;
@@ -4778,13 +4778,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation unary = 36;</code>
        */
-      public Builder mergeUnary(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation value) {
+      public Builder mergeUnary(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation konstue) {
         if (expressionCase_ == 36 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 36;
@@ -4820,11 +4820,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Conditional conditional = 37;</code>
        */
-      public Builder setConditional(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional value) {
-        if (value == null) {
+      public Builder setConditional(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 37;
         return this;
@@ -4842,13 +4842,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Conditional conditional = 37;</code>
        */
-      public Builder mergeConditional(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional value) {
+      public Builder mergeConditional(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional konstue) {
         if (expressionCase_ == 37 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 37;
@@ -4884,11 +4884,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ArrayAccess array_access = 38;</code>
        */
-      public Builder setArrayAccess(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess value) {
-        if (value == null) {
+      public Builder setArrayAccess(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 38;
         return this;
@@ -4906,13 +4906,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ArrayAccess array_access = 38;</code>
        */
-      public Builder mergeArrayAccess(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess value) {
+      public Builder mergeArrayAccess(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess konstue) {
         if (expressionCase_ == 38 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 38;
@@ -4948,11 +4948,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.NameReference name_reference = 39;</code>
        */
-      public Builder setNameReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference value) {
-        if (value == null) {
+      public Builder setNameReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 39;
         return this;
@@ -4970,13 +4970,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.NameReference name_reference = 39;</code>
        */
-      public Builder mergeNameReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference value) {
+      public Builder mergeNameReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference konstue) {
         if (expressionCase_ == 39 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 39;
@@ -5012,11 +5012,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.PropertyReference property_reference = 40;</code>
        */
-      public Builder setPropertyReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference value) {
-        if (value == null) {
+      public Builder setPropertyReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 40;
         return this;
@@ -5034,13 +5034,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.PropertyReference property_reference = 40;</code>
        */
-      public Builder mergePropertyReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference value) {
+      public Builder mergePropertyReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference konstue) {
         if (expressionCase_ == 40 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 40;
@@ -5076,11 +5076,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Invocation invocation = 41;</code>
        */
-      public Builder setInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation value) {
-        if (value == null) {
+      public Builder setInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 41;
         return this;
@@ -5098,13 +5098,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Invocation invocation = 41;</code>
        */
-      public Builder mergeInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation value) {
+      public Builder mergeInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation konstue) {
         if (expressionCase_ == 41 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 41;
@@ -5140,11 +5140,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Instantiation instantiation = 42;</code>
        */
-      public Builder setInstantiation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation value) {
-        if (value == null) {
+      public Builder setInstantiation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 42;
         return this;
@@ -5162,13 +5162,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Instantiation instantiation = 42;</code>
        */
-      public Builder mergeInstantiation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation value) {
+      public Builder mergeInstantiation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation konstue) {
         if (expressionCase_ == 42 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 42;
@@ -5204,11 +5204,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.SuperLiteral super_literal = 43;</code>
        */
-      public Builder setSuperLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral value) {
-        if (value == null) {
+      public Builder setSuperLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 43;
         return this;
@@ -5226,13 +5226,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.SuperLiteral super_literal = 43;</code>
        */
-      public Builder mergeSuperLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral value) {
+      public Builder mergeSuperLiteral(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral konstue) {
         if (expressionCase_ == 43 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 43;
@@ -5268,11 +5268,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Class class = 44;</code>
        */
-      public Builder setClass_(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class value) {
-        if (value == null) {
+      public Builder setClass_(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         expressionCase_ = 44;
         return this;
@@ -5290,13 +5290,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Class class = 44;</code>
        */
-      public Builder mergeClass_(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class value) {
+      public Builder mergeClass_(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class konstue) {
         if (expressionCase_ == 44 &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class.getDefaultInstance()) {
           expression_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class) expression_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         expressionCase_ = 44;
@@ -5356,7 +5356,7 @@ public final class JsAstProtoBuf {
     private ThisLiteral(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
           org.jetbrains.kotlin.protobuf.ByteString.newOutput();
@@ -5380,10 +5380,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -5401,7 +5401,7 @@ public final class JsAstProtoBuf {
       public ThisLiteral parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ThisLiteral(input, extensionRegistry);
       }
     };
@@ -5449,23 +5449,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral parseFrom(java.io.InputStream input)
@@ -5571,7 +5571,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ThisLiteral) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -5624,7 +5624,7 @@ public final class JsAstProtoBuf {
     private SuperLiteral(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
           org.jetbrains.kotlin.protobuf.ByteString.newOutput();
@@ -5648,10 +5648,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -5669,7 +5669,7 @@ public final class JsAstProtoBuf {
       public SuperLiteral parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new SuperLiteral(input, extensionRegistry);
       }
     };
@@ -5717,23 +5717,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral parseFrom(java.io.InputStream input)
@@ -5839,7 +5839,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SuperLiteral) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -5892,7 +5892,7 @@ public final class JsAstProtoBuf {
     private NullLiteral(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
           org.jetbrains.kotlin.protobuf.ByteString.newOutput();
@@ -5916,10 +5916,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -5937,7 +5937,7 @@ public final class JsAstProtoBuf {
       public NullLiteral parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new NullLiteral(input, extensionRegistry);
       }
     };
@@ -5985,23 +5985,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral parseFrom(java.io.InputStream input)
@@ -6107,7 +6107,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NullLiteral) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -6160,7 +6160,7 @@ public final class JsAstProtoBuf {
     private TrueLiteral(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
           org.jetbrains.kotlin.protobuf.ByteString.newOutput();
@@ -6184,10 +6184,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -6205,7 +6205,7 @@ public final class JsAstProtoBuf {
       public TrueLiteral parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new TrueLiteral(input, extensionRegistry);
       }
     };
@@ -6253,23 +6253,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral parseFrom(java.io.InputStream input)
@@ -6375,7 +6375,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.TrueLiteral) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -6428,7 +6428,7 @@ public final class JsAstProtoBuf {
     private FalseLiteral(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
           org.jetbrains.kotlin.protobuf.ByteString.newOutput();
@@ -6452,10 +6452,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -6473,7 +6473,7 @@ public final class JsAstProtoBuf {
       public FalseLiteral parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new FalseLiteral(input, extensionRegistry);
       }
     };
@@ -6521,23 +6521,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral parseFrom(java.io.InputStream input)
@@ -6643,7 +6643,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.FalseLiteral) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -6714,7 +6714,7 @@ public final class JsAstProtoBuf {
     private RegExpLiteral(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -6749,10 +6749,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -6770,7 +6770,7 @@ public final class JsAstProtoBuf {
       public RegExpLiteral parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new RegExpLiteral(input, extensionRegistry);
       }
     };
@@ -6869,23 +6869,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral parseFrom(java.io.InputStream input)
@@ -7016,7 +7016,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.RegExpLiteral) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -7044,9 +7044,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 pattern_string_id = 1;</code>
        */
-      public Builder setPatternStringId(int value) {
+      public Builder setPatternStringId(int konstue) {
         bitField0_ |= 0x00000001;
-        patternStringId_ = value;
+        patternStringId_ = konstue;
         
         return this;
       }
@@ -7076,9 +7076,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 flags_string_id = 2;</code>
        */
-      public Builder setFlagsStringId(int value) {
+      public Builder setFlagsStringId(int konstue) {
         bitField0_ |= 0x00000002;
-        flagsStringId_ = value;
+        flagsStringId_ = konstue;
         
         return this;
       }
@@ -7148,7 +7148,7 @@ public final class JsAstProtoBuf {
     private ArrayLiteral(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -7181,10 +7181,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -7205,7 +7205,7 @@ public final class JsAstProtoBuf {
       public ArrayLiteral parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ArrayLiteral(input, extensionRegistry);
       }
     };
@@ -7302,23 +7302,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral parseFrom(java.io.InputStream input)
@@ -7448,7 +7448,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayLiteral) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -7491,12 +7491,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression element = 1;</code>
        */
       public Builder setElement(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureElementIsMutable();
-        element_.set(index, value);
+        element_.set(index, konstue);
 
         return this;
       }
@@ -7513,12 +7513,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression element = 1;</code>
        */
-      public Builder addElement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder addElement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureElementIsMutable();
-        element_.add(value);
+        element_.add(konstue);
 
         return this;
       }
@@ -7526,12 +7526,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression element = 1;</code>
        */
       public Builder addElement(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureElementIsMutable();
-        element_.add(index, value);
+        element_.add(index, konstue);
 
         return this;
       }
@@ -7559,10 +7559,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression element = 1;</code>
        */
       public Builder addAllElement(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression> konstues) {
         ensureElementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, element_);
+            konstues, element_);
 
         return this;
       }
@@ -7650,7 +7650,7 @@ public final class JsAstProtoBuf {
     private ObjectLiteral(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -7688,10 +7688,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -7712,7 +7712,7 @@ public final class JsAstProtoBuf {
       public ObjectLiteral parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ObjectLiteral(input, extensionRegistry);
       }
     };
@@ -7833,23 +7833,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral parseFrom(java.io.InputStream input)
@@ -7990,7 +7990,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteral) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -8033,12 +8033,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ObjectLiteralEntry entry = 1;</code>
        */
       public Builder setEntry(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.set(index, value);
+        entry_.set(index, konstue);
 
         return this;
       }
@@ -8055,12 +8055,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ObjectLiteralEntry entry = 1;</code>
        */
-      public Builder addEntry(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry value) {
-        if (value == null) {
+      public Builder addEntry(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.add(value);
+        entry_.add(konstue);
 
         return this;
       }
@@ -8068,12 +8068,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ObjectLiteralEntry entry = 1;</code>
        */
       public Builder addEntry(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.add(index, value);
+        entry_.add(index, konstue);
 
         return this;
       }
@@ -8101,10 +8101,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ObjectLiteralEntry entry = 1;</code>
        */
       public Builder addAllEntry(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry> konstues) {
         ensureEntryIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, entry_);
+            konstues, entry_);
 
         return this;
       }
@@ -8143,9 +8143,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional bool multiline = 2 [default = true];</code>
        */
-      public Builder setMultiline(boolean value) {
+      public Builder setMultiline(boolean konstue) {
         bitField0_ |= 0x00000002;
-        multiline_ = value;
+        multiline_ = konstue;
         
         return this;
       }
@@ -8184,11 +8184,11 @@ public final class JsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getKey();
 
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
      */
     boolean hasValue();
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
      */
     org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getValue();
   }
@@ -8219,7 +8219,7 @@ public final class JsAstProtoBuf {
     private ObjectLiteralEntry(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -8258,22 +8258,22 @@ public final class JsAstProtoBuf {
             case 18: {
               org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder subBuilder = null;
               if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = value_.toBuilder();
+                subBuilder = konstue_.toBuilder();
               }
-              value_ = input.readMessage(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.PARSER, extensionRegistry);
+              konstue_ = input.readMessage(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(value_);
-                value_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(konstue_);
+                konstue_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000002;
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -8291,7 +8291,7 @@ public final class JsAstProtoBuf {
       public ObjectLiteralEntry parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ObjectLiteralEntry(input, extensionRegistry);
       }
     };
@@ -8318,23 +8318,23 @@ public final class JsAstProtoBuf {
     }
 
     public static final int VALUE_FIELD_NUMBER = 2;
-    private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value_;
+    private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue_;
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
      */
     public boolean hasValue() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
      */
     public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getValue() {
-      return value_;
+      return konstue_;
     }
 
     private void initFields() {
       key_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
-      value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
+      konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8369,7 +8369,7 @@ public final class JsAstProtoBuf {
         output.writeMessage(1, key_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, value_);
+        output.writeMessage(2, konstue_);
       }
       output.writeRawBytes(unknownFields);
     }
@@ -8386,7 +8386,7 @@ public final class JsAstProtoBuf {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeMessageSize(2, value_);
+          .computeMessageSize(2, konstue_);
       }
       size += unknownFields.size();
       memoizedSerializedSize = size;
@@ -8402,23 +8402,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry parseFrom(java.io.InputStream input)
@@ -8484,7 +8484,7 @@ public final class JsAstProtoBuf {
         super.clear();
         key_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000001);
-        value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
+        konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -8516,7 +8516,7 @@ public final class JsAstProtoBuf {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.value_ = value_;
+        result.konstue_ = konstue_;
         result.bitField0_ = to_bitField0_;
         return result;
       }
@@ -8561,7 +8561,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ObjectLiteralEntry) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -8589,11 +8589,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression key = 1;</code>
        */
-      public Builder setKey(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setKey(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        key_ = value;
+        key_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -8611,13 +8611,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression key = 1;</code>
        */
-      public Builder mergeKey(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeKey(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             key_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           key_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(key_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(key_).mergeFrom(konstue).buildPartial();
         } else {
-          key_ = value;
+          key_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -8633,61 +8633,61 @@ public final class JsAstProtoBuf {
         return this;
       }
 
-      private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
+      private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
        */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
        */
       public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getValue() {
-        return value_;
+        return konstue_;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
        */
-      public Builder setValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        value_ = value;
+        konstue_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
        */
       public Builder setValue(
           org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder builderForValue) {
-        value_ = builderForValue.build();
+        konstue_ = builderForValue.build();
 
         bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
        */
-      public Builder mergeValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
-            value_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
-          value_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(value_).mergeFrom(value).buildPartial();
+            konstue_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
+          konstue_ =
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(konstue_).mergeFrom(konstue).buildPartial();
         } else {
-          value_ = value;
+          konstue_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 2;</code>
        */
       public Builder clearValue() {
-        value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
+        konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
 
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
@@ -8789,7 +8789,7 @@ public final class JsAstProtoBuf {
     private Function(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -8845,8 +8845,8 @@ public final class JsAstProtoBuf {
             }
             case 40: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFieldsCodedOutput.writeRawVarint32(tag);
                 unknownFieldsCodedOutput.writeRawVarint32(rawValue);
                 } else {
@@ -8854,7 +8854,7 @@ public final class JsAstProtoBuf {
                   modifier_ = new java.util.ArrayList<org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier>();
                   mutable_bitField0_ |= 0x00000010;
                 }
-                modifier_.add(value);
+                modifier_.add(konstue);
               }
               break;
             }
@@ -8863,8 +8863,8 @@ public final class JsAstProtoBuf {
               int oldLimit = input.pushLimit(length);
               while(input.getBytesUntilLimit() > 0) {
                 int rawValue = input.readEnum();
-                org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier.valueOf(rawValue);
-                if (value == null) {
+                org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier.konstueOf(rawValue);
+                if (konstue == null) {
                   unknownFieldsCodedOutput.writeRawVarint32(tag);
                   unknownFieldsCodedOutput.writeRawVarint32(rawValue);
                   } else {
@@ -8872,7 +8872,7 @@ public final class JsAstProtoBuf {
                     modifier_ = new java.util.ArrayList<org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier>();
                     mutable_bitField0_ |= 0x00000010;
                   }
-                  modifier_.add(value);
+                  modifier_.add(konstue);
                 }
               }
               input.popLimit(oldLimit);
@@ -8880,10 +8880,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -8907,7 +8907,7 @@ public final class JsAstProtoBuf {
       public Function parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Function(input, extensionRegistry);
       }
     };
@@ -8950,10 +8950,10 @@ public final class JsAstProtoBuf {
       public static final int SET_VALUE = 3;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static Modifier valueOf(int value) {
-        switch (value) {
+      public static Modifier konstueOf(int konstue) {
+        switch (konstue) {
           case 1: return STATIC;
           case 2: return GET;
           case 3: return SET;
@@ -8969,14 +8969,14 @@ public final class JsAstProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Modifier>() {
               public Modifier findValueByNumber(int number) {
-                return Modifier.valueOf(number);
+                return Modifier.konstueOf(number);
               }
             };
 
-      private final int value;
+      private final int konstue;
 
-      private Modifier(int index, int value) {
-        this.value = value;
+      private Modifier(int index, int konstue) {
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.serialization.js.ast.Function.Modifier)
@@ -9181,23 +9181,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function parseFrom(java.io.InputStream input)
@@ -9381,7 +9381,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -9424,12 +9424,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Parameter parameter = 1;</code>
        */
       public Builder setParameter(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureParameterIsMutable();
-        parameter_.set(index, value);
+        parameter_.set(index, konstue);
 
         return this;
       }
@@ -9446,12 +9446,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Parameter parameter = 1;</code>
        */
-      public Builder addParameter(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter value) {
-        if (value == null) {
+      public Builder addParameter(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureParameterIsMutable();
-        parameter_.add(value);
+        parameter_.add(konstue);
 
         return this;
       }
@@ -9459,12 +9459,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Parameter parameter = 1;</code>
        */
       public Builder addParameter(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureParameterIsMutable();
-        parameter_.add(index, value);
+        parameter_.add(index, konstue);
 
         return this;
       }
@@ -9492,10 +9492,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Parameter parameter = 1;</code>
        */
       public Builder addAllParameter(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter> konstues) {
         ensureParameterIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, parameter_);
+            konstues, parameter_);
 
         return this;
       }
@@ -9534,9 +9534,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 name_id = 2;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000002;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -9566,11 +9566,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 3;</code>
        */
-      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        body_ = value;
+        body_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -9588,13 +9588,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 3;</code>
        */
-      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             body_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           body_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(konstue).buildPartial();
         } else {
-          body_ = value;
+          body_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -9626,9 +9626,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional bool local = 4 [default = false];</code>
        */
-      public Builder setLocal(boolean value) {
+      public Builder setLocal(boolean konstue) {
         bitField0_ |= 0x00000008;
-        local_ = value;
+        local_ = konstue;
         
         return this;
       }
@@ -9672,24 +9672,24 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Function.Modifier modifier = 5;</code>
        */
       public Builder setModifier(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureModifierIsMutable();
-        modifier_.set(index, value);
+        modifier_.set(index, konstue);
         
         return this;
       }
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Function.Modifier modifier = 5;</code>
        */
-      public Builder addModifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier value) {
-        if (value == null) {
+      public Builder addModifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureModifierIsMutable();
-        modifier_.add(value);
+        modifier_.add(konstue);
         
         return this;
       }
@@ -9697,10 +9697,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Function.Modifier modifier = 5;</code>
        */
       public Builder addAllModifier(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.Modifier> konstues) {
         ensureModifierIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, modifier_);
+            konstues, modifier_);
         
         return this;
       }
@@ -9797,7 +9797,7 @@ public final class JsAstProtoBuf {
     private Class(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -9861,10 +9861,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
@@ -9885,7 +9885,7 @@ public final class JsAstProtoBuf {
       public Class parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Class(input, extensionRegistry);
       }
     };
@@ -10064,23 +10064,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class parseFrom(java.io.InputStream input)
@@ -10251,7 +10251,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Class) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -10279,9 +10279,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 name_id = 1;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -10311,11 +10311,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression super_expression = 2;</code>
        */
-      public Builder setSuperExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setSuperExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        superExpression_ = value;
+        superExpression_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -10333,13 +10333,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression super_expression = 2;</code>
        */
-      public Builder mergeSuperExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeSuperExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             superExpression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           superExpression_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(superExpression_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(superExpression_).mergeFrom(konstue).buildPartial();
         } else {
-          superExpression_ = value;
+          superExpression_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -10371,11 +10371,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Function constructor = 3;</code>
        */
-      public Builder setConstructor(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function value) {
-        if (value == null) {
+      public Builder setConstructor(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        constructor_ = value;
+        constructor_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -10393,13 +10393,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Function constructor = 3;</code>
        */
-      public Builder mergeConstructor(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function value) {
+      public Builder mergeConstructor(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             constructor_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.getDefaultInstance()) {
           constructor_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.newBuilder(constructor_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function.newBuilder(constructor_).mergeFrom(konstue).buildPartial();
         } else {
-          constructor_ = value;
+          constructor_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -10446,12 +10446,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Function member = 4;</code>
        */
       public Builder setMember(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureMemberIsMutable();
-        member_.set(index, value);
+        member_.set(index, konstue);
 
         return this;
       }
@@ -10468,12 +10468,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Function member = 4;</code>
        */
-      public Builder addMember(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function value) {
-        if (value == null) {
+      public Builder addMember(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureMemberIsMutable();
-        member_.add(value);
+        member_.add(konstue);
 
         return this;
       }
@@ -10481,12 +10481,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Function member = 4;</code>
        */
       public Builder addMember(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureMemberIsMutable();
-        member_.add(index, value);
+        member_.add(index, konstue);
 
         return this;
       }
@@ -10514,10 +10514,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Function member = 4;</code>
        */
       public Builder addAllMember(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Function> konstues) {
         ensureMemberIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, member_);
+            konstues, member_);
 
         return this;
       }
@@ -10565,11 +10565,11 @@ public final class JsAstProtoBuf {
     int getNameId();
 
     /**
-     * <code>optional bool has_default_value = 2 [default = false];</code>
+     * <code>optional bool has_default_konstue = 2 [default = false];</code>
      */
     boolean hasHasDefaultValue();
     /**
-     * <code>optional bool has_default_value = 2 [default = false];</code>
+     * <code>optional bool has_default_konstue = 2 [default = false];</code>
      */
     boolean getHasDefaultValue();
   }
@@ -10600,7 +10600,7 @@ public final class JsAstProtoBuf {
     private Parameter(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -10635,10 +10635,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -10656,7 +10656,7 @@ public final class JsAstProtoBuf {
       public Parameter parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Parameter(input, extensionRegistry);
       }
     };
@@ -10685,13 +10685,13 @@ public final class JsAstProtoBuf {
     public static final int HAS_DEFAULT_VALUE_FIELD_NUMBER = 2;
     private boolean hasDefaultValue_;
     /**
-     * <code>optional bool has_default_value = 2 [default = false];</code>
+     * <code>optional bool has_default_konstue = 2 [default = false];</code>
      */
     public boolean hasHasDefaultValue() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional bool has_default_value = 2 [default = false];</code>
+     * <code>optional bool has_default_konstue = 2 [default = false];</code>
      */
     public boolean getHasDefaultValue() {
       return hasDefaultValue_;
@@ -10755,23 +10755,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter parseFrom(java.io.InputStream input)
@@ -10902,7 +10902,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -10930,9 +10930,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 name_id = 1;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -10948,28 +10948,28 @@ public final class JsAstProtoBuf {
 
       private boolean hasDefaultValue_ ;
       /**
-       * <code>optional bool has_default_value = 2 [default = false];</code>
+       * <code>optional bool has_default_konstue = 2 [default = false];</code>
        */
       public boolean hasHasDefaultValue() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional bool has_default_value = 2 [default = false];</code>
+       * <code>optional bool has_default_konstue = 2 [default = false];</code>
        */
       public boolean getHasDefaultValue() {
         return hasDefaultValue_;
       }
       /**
-       * <code>optional bool has_default_value = 2 [default = false];</code>
+       * <code>optional bool has_default_konstue = 2 [default = false];</code>
        */
-      public Builder setHasDefaultValue(boolean value) {
+      public Builder setHasDefaultValue(boolean konstue) {
         bitField0_ |= 0x00000002;
-        hasDefaultValue_ = value;
+        hasDefaultValue_ = konstue;
         
         return this;
       }
       /**
-       * <code>optional bool has_default_value = 2 [default = false];</code>
+       * <code>optional bool has_default_konstue = 2 [default = false];</code>
        */
       public Builder clearHasDefaultValue() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -11034,7 +11034,7 @@ public final class JsAstProtoBuf {
     private DocComment(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -11067,10 +11067,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -11091,7 +11091,7 @@ public final class JsAstProtoBuf {
       public DocComment parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new DocComment(input, extensionRegistry);
       }
     };
@@ -11188,23 +11188,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment parseFrom(java.io.InputStream input)
@@ -11334,7 +11334,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocComment) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -11377,12 +11377,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.DocCommentTag tag = 1;</code>
        */
       public Builder setTag(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureTagIsMutable();
-        tag_.set(index, value);
+        tag_.set(index, konstue);
 
         return this;
       }
@@ -11399,12 +11399,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.DocCommentTag tag = 1;</code>
        */
-      public Builder addTag(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag value) {
-        if (value == null) {
+      public Builder addTag(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureTagIsMutable();
-        tag_.add(value);
+        tag_.add(konstue);
 
         return this;
       }
@@ -11412,12 +11412,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.DocCommentTag tag = 1;</code>
        */
       public Builder addTag(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureTagIsMutable();
-        tag_.add(index, value);
+        tag_.add(index, konstue);
 
         return this;
       }
@@ -11445,10 +11445,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.DocCommentTag tag = 1;</code>
        */
       public Builder addAllTag(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag> konstues) {
         ensureTagIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, tag_);
+            konstues, tag_);
 
         return this;
       }
@@ -11496,11 +11496,11 @@ public final class JsAstProtoBuf {
     int getNameId();
 
     /**
-     * <code>optional int32 value_string_id = 2;</code>
+     * <code>optional int32 konstue_string_id = 2;</code>
      */
     boolean hasValueStringId();
     /**
-     * <code>optional int32 value_string_id = 2;</code>
+     * <code>optional int32 konstue_string_id = 2;</code>
      */
     int getValueStringId();
 
@@ -11540,7 +11540,7 @@ public final class JsAstProtoBuf {
     private DocCommentTag(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -11569,29 +11569,29 @@ public final class JsAstProtoBuf {
               break;
             }
             case 16: {
-              valueCase_ = 2;
-              value_ = input.readInt32();
+              konstueCase_ = 2;
+              konstue_ = input.readInt32();
               break;
             }
             case 26: {
               org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder subBuilder = null;
-              if (valueCase_ == 3) {
-                subBuilder = ((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_).toBuilder();
+              if (konstueCase_ == 3) {
+                subBuilder = ((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_).toBuilder();
               }
-              value_ = input.readMessage(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.PARSER, extensionRegistry);
+              konstue_ = input.readMessage(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_);
-                value_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_);
+                konstue_ = subBuilder.buildPartial();
               }
-              valueCase_ = 3;
+              konstueCase_ = 3;
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -11609,7 +11609,7 @@ public final class JsAstProtoBuf {
       public DocCommentTag parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new DocCommentTag(input, extensionRegistry);
       }
     };
@@ -11620,19 +11620,19 @@ public final class JsAstProtoBuf {
     }
 
     private int bitField0_;
-    private int valueCase_ = 0;
-    private java.lang.Object value_;
+    private int konstueCase_ = 0;
+    private java.lang.Object konstue_;
     public enum ValueCase
         implements org.jetbrains.kotlin.protobuf.Internal.EnumLite {
       VALUE_STRING_ID(2),
       EXPRESSION(3),
       VALUE_NOT_SET(0);
-      private int value = 0;
-      private ValueCase(int value) {
-        this.value = value;
+      private int konstue = 0;
+      private ValueCase(int konstue) {
+        this.konstue = konstue;
       }
-      public static ValueCase valueOf(int value) {
-        switch (value) {
+      public static ValueCase konstueOf(int konstue) {
+        switch (konstue) {
           case 2: return VALUE_STRING_ID;
           case 3: return EXPRESSION;
           case 0: return VALUE_NOT_SET;
@@ -11641,14 +11641,14 @@ public final class JsAstProtoBuf {
         }
       }
       public int getNumber() {
-        return this.value;
+        return this.konstue;
       }
     };
 
     public ValueCase
     getValueCase() {
-      return ValueCase.valueOf(
-          valueCase_);
+      return ValueCase.konstueOf(
+          konstueCase_);
     }
 
     public static final int NAME_ID_FIELD_NUMBER = 1;
@@ -11668,17 +11668,17 @@ public final class JsAstProtoBuf {
 
     public static final int VALUE_STRING_ID_FIELD_NUMBER = 2;
     /**
-     * <code>optional int32 value_string_id = 2;</code>
+     * <code>optional int32 konstue_string_id = 2;</code>
      */
     public boolean hasValueStringId() {
-      return valueCase_ == 2;
+      return konstueCase_ == 2;
     }
     /**
-     * <code>optional int32 value_string_id = 2;</code>
+     * <code>optional int32 konstue_string_id = 2;</code>
      */
     public int getValueStringId() {
-      if (valueCase_ == 2) {
-        return (java.lang.Integer) value_;
+      if (konstueCase_ == 2) {
+        return (java.lang.Integer) konstue_;
       }
       return 0;
     }
@@ -11688,14 +11688,14 @@ public final class JsAstProtoBuf {
      * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 3;</code>
      */
     public boolean hasExpression() {
-      return valueCase_ == 3;
+      return konstueCase_ == 3;
     }
     /**
      * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 3;</code>
      */
     public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getExpression() {
-      if (valueCase_ == 3) {
-         return (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_;
+      if (konstueCase_ == 3) {
+         return (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_;
       }
       return org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
     }
@@ -11729,12 +11729,12 @@ public final class JsAstProtoBuf {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, nameId_);
       }
-      if (valueCase_ == 2) {
+      if (konstueCase_ == 2) {
         output.writeInt32(
-            2, (int)((java.lang.Integer) value_));
+            2, (int)((java.lang.Integer) konstue_));
       }
-      if (valueCase_ == 3) {
-        output.writeMessage(3, (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_);
+      if (konstueCase_ == 3) {
+        output.writeMessage(3, (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_);
       }
       output.writeRawBytes(unknownFields);
     }
@@ -11749,14 +11749,14 @@ public final class JsAstProtoBuf {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
           .computeInt32Size(1, nameId_);
       }
-      if (valueCase_ == 2) {
+      if (konstueCase_ == 2) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
           .computeInt32Size(
-              2, (int)((java.lang.Integer) value_));
+              2, (int)((java.lang.Integer) konstue_));
       }
-      if (valueCase_ == 3) {
+      if (konstueCase_ == 3) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeMessageSize(3, (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_);
+          .computeMessageSize(3, (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_);
       }
       size += unknownFields.size();
       memoizedSerializedSize = size;
@@ -11772,23 +11772,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag parseFrom(java.io.InputStream input)
@@ -11854,8 +11854,8 @@ public final class JsAstProtoBuf {
         super.clear();
         nameId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        valueCase_ = 0;
-        value_ = null;
+        konstueCase_ = 0;
+        konstue_ = null;
         return this;
       }
 
@@ -11883,14 +11883,14 @@ public final class JsAstProtoBuf {
           to_bitField0_ |= 0x00000001;
         }
         result.nameId_ = nameId_;
-        if (valueCase_ == 2) {
-          result.value_ = value_;
+        if (konstueCase_ == 2) {
+          result.konstue_ = konstue_;
         }
-        if (valueCase_ == 3) {
-          result.value_ = value_;
+        if (konstueCase_ == 3) {
+          result.konstue_ = konstue_;
         }
         result.bitField0_ = to_bitField0_;
-        result.valueCase_ = valueCase_;
+        result.konstueCase_ = konstueCase_;
         return result;
       }
 
@@ -11938,7 +11938,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DocCommentTag) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -11948,17 +11948,17 @@ public final class JsAstProtoBuf {
         }
         return this;
       }
-      private int valueCase_ = 0;
-      private java.lang.Object value_;
+      private int konstueCase_ = 0;
+      private java.lang.Object konstue_;
       public ValueCase
           getValueCase() {
-        return ValueCase.valueOf(
-            valueCase_);
+        return ValueCase.konstueOf(
+            konstueCase_);
       }
 
       public Builder clearValue() {
-        valueCase_ = 0;
-        value_ = null;
+        konstueCase_ = 0;
+        konstue_ = null;
         return this;
       }
 
@@ -11980,9 +11980,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 name_id = 1;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -11997,36 +11997,36 @@ public final class JsAstProtoBuf {
       }
 
       /**
-       * <code>optional int32 value_string_id = 2;</code>
+       * <code>optional int32 konstue_string_id = 2;</code>
        */
       public boolean hasValueStringId() {
-        return valueCase_ == 2;
+        return konstueCase_ == 2;
       }
       /**
-       * <code>optional int32 value_string_id = 2;</code>
+       * <code>optional int32 konstue_string_id = 2;</code>
        */
       public int getValueStringId() {
-        if (valueCase_ == 2) {
-          return (java.lang.Integer) value_;
+        if (konstueCase_ == 2) {
+          return (java.lang.Integer) konstue_;
         }
         return 0;
       }
       /**
-       * <code>optional int32 value_string_id = 2;</code>
+       * <code>optional int32 konstue_string_id = 2;</code>
        */
-      public Builder setValueStringId(int value) {
-        valueCase_ = 2;
-        value_ = value;
+      public Builder setValueStringId(int konstue) {
+        konstueCase_ = 2;
+        konstue_ = konstue;
         
         return this;
       }
       /**
-       * <code>optional int32 value_string_id = 2;</code>
+       * <code>optional int32 konstue_string_id = 2;</code>
        */
       public Builder clearValueStringId() {
-        if (valueCase_ == 2) {
-          valueCase_ = 0;
-          value_ = null;
+        if (konstueCase_ == 2) {
+          konstueCase_ = 0;
+          konstue_ = null;
           
         }
         return this;
@@ -12036,27 +12036,27 @@ public final class JsAstProtoBuf {
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 3;</code>
        */
       public boolean hasExpression() {
-        return valueCase_ == 3;
+        return konstueCase_ == 3;
       }
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 3;</code>
        */
       public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getExpression() {
-        if (valueCase_ == 3) {
-          return (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_;
+        if (konstueCase_ == 3) {
+          return (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_;
         }
         return org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
       }
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 3;</code>
        */
-      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        value_ = value;
+        konstue_ = konstue;
 
-        valueCase_ = 3;
+        konstueCase_ = 3;
         return this;
       }
       /**
@@ -12064,33 +12064,33 @@ public final class JsAstProtoBuf {
        */
       public Builder setExpression(
           org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder builderForValue) {
-        value_ = builderForValue.build();
+        konstue_ = builderForValue.build();
 
-        valueCase_ = 3;
+        konstueCase_ = 3;
         return this;
       }
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 3;</code>
        */
-      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (valueCase_ == 3 &&
-            value_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
-          value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_)
-              .mergeFrom(value).buildPartial();
+      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstueCase_ == 3 &&
+            konstue_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
+          konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_)
+              .mergeFrom(konstue).buildPartial();
         } else {
-          value_ = value;
+          konstue_ = konstue;
         }
 
-        valueCase_ = 3;
+        konstueCase_ = 3;
         return this;
       }
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 3;</code>
        */
       public Builder clearExpression() {
-        if (valueCase_ == 3) {
-          valueCase_ = 0;
-          value_ = null;
+        if (konstueCase_ == 3) {
+          konstueCase_ = 0;
+          konstue_ = null;
           
         }
         return this;
@@ -12161,7 +12161,7 @@ public final class JsAstProtoBuf {
     private Comment(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -12197,10 +12197,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -12218,7 +12218,7 @@ public final class JsAstProtoBuf {
       public Comment parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Comment(input, extensionRegistry);
       }
     };
@@ -12348,23 +12348,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment parseFrom(java.io.InputStream input)
@@ -12501,7 +12501,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -12557,12 +12557,12 @@ public final class JsAstProtoBuf {
        * <code>required string text = 1;</code>
        */
       public Builder setText(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        text_ = value;
+        text_ = konstue;
         
         return this;
       }
@@ -12579,12 +12579,12 @@ public final class JsAstProtoBuf {
        * <code>required string text = 1;</code>
        */
       public Builder setTextBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        text_ = value;
+        text_ = konstue;
         
         return this;
       }
@@ -12605,9 +12605,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required bool multiline = 2;</code>
        */
-      public Builder setMultiline(boolean value) {
+      public Builder setMultiline(boolean konstue) {
         bitField0_ |= 0x00000002;
-        multiline_ = value;
+        multiline_ = konstue;
         
         return this;
       }
@@ -12690,7 +12690,7 @@ public final class JsAstProtoBuf {
     private BinaryOperation(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -12741,22 +12741,22 @@ public final class JsAstProtoBuf {
             }
             case 24: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation.Type value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation.Type.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation.Type konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation.Type.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFieldsCodedOutput.writeRawVarint32(tag);
                 unknownFieldsCodedOutput.writeRawVarint32(rawValue);
               } else {
                 bitField0_ |= 0x00000004;
-                type_ = value;
+                type_ = konstue;
               }
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -12774,7 +12774,7 @@ public final class JsAstProtoBuf {
       public BinaryOperation parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new BinaryOperation(input, extensionRegistry);
       }
     };
@@ -13081,10 +13081,10 @@ public final class JsAstProtoBuf {
       public static final int COMMA_VALUE = 36;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static Type valueOf(int value) {
-        switch (value) {
+      public static Type konstueOf(int konstue) {
+        switch (konstue) {
           case 1: return MUL;
           case 2: return DIV;
           case 3: return MOD;
@@ -13133,14 +13133,14 @@ public final class JsAstProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Type>() {
               public Type findValueByNumber(int number) {
-                return Type.valueOf(number);
+                return Type.konstueOf(number);
               }
             };
 
-      private final int value;
+      private final int konstue;
 
-      private Type(int index, int value) {
-        this.value = value;
+      private Type(int index, int konstue) {
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type)
@@ -13274,23 +13274,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation parseFrom(java.io.InputStream input)
@@ -13446,7 +13446,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -13474,11 +13474,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression left = 1;</code>
        */
-      public Builder setLeft(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setLeft(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        left_ = value;
+        left_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -13496,13 +13496,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression left = 1;</code>
        */
-      public Builder mergeLeft(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeLeft(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             left_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           left_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(left_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(left_).mergeFrom(konstue).buildPartial();
         } else {
-          left_ = value;
+          left_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -13534,11 +13534,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression right = 2;</code>
        */
-      public Builder setRight(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setRight(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        right_ = value;
+        right_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -13556,13 +13556,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression right = 2;</code>
        */
-      public Builder mergeRight(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeRight(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             right_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           right_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(right_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(right_).mergeFrom(konstue).buildPartial();
         } else {
-          right_ = value;
+          right_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -13594,12 +13594,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
        */
-      public Builder setType(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation.Type value) {
-        if (value == null) {
+      public Builder setType(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.BinaryOperation.Type konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000004;
-        type_ = value;
+        type_ = konstue;
         
         return this;
       }
@@ -13682,7 +13682,7 @@ public final class JsAstProtoBuf {
     private UnaryOperation(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -13720,13 +13720,13 @@ public final class JsAstProtoBuf {
             }
             case 16: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation.Type value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation.Type.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation.Type konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation.Type.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFieldsCodedOutput.writeRawVarint32(tag);
                 unknownFieldsCodedOutput.writeRawVarint32(rawValue);
               } else {
                 bitField0_ |= 0x00000002;
-                type_ = value;
+                type_ = konstue;
               }
               break;
             }
@@ -13737,10 +13737,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -13758,7 +13758,7 @@ public final class JsAstProtoBuf {
       public UnaryOperation parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new UnaryOperation(input, extensionRegistry);
       }
     };
@@ -13849,10 +13849,10 @@ public final class JsAstProtoBuf {
       public static final int VOID_VALUE = 9;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static Type valueOf(int value) {
-        switch (value) {
+      public static Type konstueOf(int konstue) {
+        switch (konstue) {
           case 1: return BIT_NOT;
           case 2: return DEC;
           case 3: return DELETE;
@@ -13874,14 +13874,14 @@ public final class JsAstProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Type>() {
               public Type findValueByNumber(int number) {
-                return Type.valueOf(number);
+                return Type.konstueOf(number);
               }
             };
 
-      private final int value;
+      private final int konstue;
 
-      private Type(int index, int value) {
-        this.value = value;
+      private Type(int index, int konstue) {
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type)
@@ -14011,23 +14011,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation parseFrom(java.io.InputStream input)
@@ -14179,7 +14179,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -14207,11 +14207,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression operand = 1;</code>
        */
-      public Builder setOperand(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setOperand(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        operand_ = value;
+        operand_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -14229,13 +14229,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression operand = 1;</code>
        */
-      public Builder mergeOperand(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeOperand(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             operand_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           operand_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(operand_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(operand_).mergeFrom(konstue).buildPartial();
         } else {
-          operand_ = value;
+          operand_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -14267,12 +14267,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
        */
-      public Builder setType(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation.Type value) {
-        if (value == null) {
+      public Builder setType(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.UnaryOperation.Type konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000002;
-        type_ = value;
+        type_ = konstue;
         
         return this;
       }
@@ -14302,9 +14302,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required bool postfix = 3;</code>
        */
-      public Builder setPostfix(boolean value) {
+      public Builder setPostfix(boolean konstue) {
         bitField0_ |= 0x00000004;
-        postfix_ = value;
+        postfix_ = konstue;
         
         return this;
       }
@@ -14387,7 +14387,7 @@ public final class JsAstProtoBuf {
     private Conditional(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -14451,10 +14451,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -14472,7 +14472,7 @@ public final class JsAstProtoBuf {
       public Conditional parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Conditional(input, extensionRegistry);
       }
     };
@@ -14614,23 +14614,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional parseFrom(java.io.InputStream input)
@@ -14790,7 +14790,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Conditional) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -14818,11 +14818,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression test_expression = 1;</code>
        */
-      public Builder setTestExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setTestExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        testExpression_ = value;
+        testExpression_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -14840,13 +14840,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression test_expression = 1;</code>
        */
-      public Builder mergeTestExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeTestExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             testExpression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           testExpression_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(testExpression_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(testExpression_).mergeFrom(konstue).buildPartial();
         } else {
-          testExpression_ = value;
+          testExpression_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -14878,11 +14878,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression then_expression = 2;</code>
        */
-      public Builder setThenExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setThenExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        thenExpression_ = value;
+        thenExpression_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -14900,13 +14900,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression then_expression = 2;</code>
        */
-      public Builder mergeThenExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeThenExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             thenExpression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           thenExpression_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(thenExpression_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(thenExpression_).mergeFrom(konstue).buildPartial();
         } else {
-          thenExpression_ = value;
+          thenExpression_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -14938,11 +14938,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression else_expression = 3;</code>
        */
-      public Builder setElseExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setElseExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        elseExpression_ = value;
+        elseExpression_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -14960,13 +14960,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression else_expression = 3;</code>
        */
-      public Builder mergeElseExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeElseExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             elseExpression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           elseExpression_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(elseExpression_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(elseExpression_).mergeFrom(konstue).buildPartial();
         } else {
-          elseExpression_ = value;
+          elseExpression_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -15042,7 +15042,7 @@ public final class JsAstProtoBuf {
     private ArrayAccess(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -15093,10 +15093,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -15114,7 +15114,7 @@ public final class JsAstProtoBuf {
       public ArrayAccess parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ArrayAccess(input, extensionRegistry);
       }
     };
@@ -15225,23 +15225,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess parseFrom(java.io.InputStream input)
@@ -15384,7 +15384,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ArrayAccess) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -15412,11 +15412,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression array = 1;</code>
        */
-      public Builder setArray(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setArray(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        array_ = value;
+        array_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -15434,13 +15434,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression array = 1;</code>
        */
-      public Builder mergeArray(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeArray(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             array_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           array_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(array_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(array_).mergeFrom(konstue).buildPartial();
         } else {
-          array_ = value;
+          array_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -15472,11 +15472,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression index = 2;</code>
        */
-      public Builder setIndex(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setIndex(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        index_ = value;
+        index_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -15494,13 +15494,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression index = 2;</code>
        */
-      public Builder mergeIndex(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeIndex(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             index_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           index_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(index_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(index_).mergeFrom(konstue).buildPartial();
         } else {
-          index_ = value;
+          index_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -15585,7 +15585,7 @@ public final class JsAstProtoBuf {
     private NameReference(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -15628,22 +15628,22 @@ public final class JsAstProtoBuf {
             }
             case 24: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFieldsCodedOutput.writeRawVarint32(tag);
                 unknownFieldsCodedOutput.writeRawVarint32(rawValue);
               } else {
                 bitField0_ |= 0x00000004;
-                inlineStrategy_ = value;
+                inlineStrategy_ = konstue;
               }
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -15661,7 +15661,7 @@ public final class JsAstProtoBuf {
       public NameReference parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new NameReference(input, extensionRegistry);
       }
     };
@@ -15789,23 +15789,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference parseFrom(java.io.InputStream input)
@@ -15951,7 +15951,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameReference) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -15979,9 +15979,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 name_id = 1;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -16011,11 +16011,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression qualifier = 2;</code>
        */
-      public Builder setQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        qualifier_ = value;
+        qualifier_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -16033,13 +16033,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression qualifier = 2;</code>
        */
-      public Builder mergeQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             qualifier_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           qualifier_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(qualifier_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(qualifier_).mergeFrom(konstue).buildPartial();
         } else {
-          qualifier_ = value;
+          qualifier_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -16071,12 +16071,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.InlineStrategy inline_strategy = 3 [default = NOT_INLINE];</code>
        */
-      public Builder setInlineStrategy(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy value) {
-        if (value == null) {
+      public Builder setInlineStrategy(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000004;
-        inlineStrategy_ = value;
+        inlineStrategy_ = konstue;
         
         return this;
       }
@@ -16159,7 +16159,7 @@ public final class JsAstProtoBuf {
     private PropertyReference(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -16202,22 +16202,22 @@ public final class JsAstProtoBuf {
             }
             case 24: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFieldsCodedOutput.writeRawVarint32(tag);
                 unknownFieldsCodedOutput.writeRawVarint32(rawValue);
               } else {
                 bitField0_ |= 0x00000004;
-                inlineStrategy_ = value;
+                inlineStrategy_ = konstue;
               }
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -16235,7 +16235,7 @@ public final class JsAstProtoBuf {
       public PropertyReference parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new PropertyReference(input, extensionRegistry);
       }
     };
@@ -16363,23 +16363,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference parseFrom(java.io.InputStream input)
@@ -16525,7 +16525,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.PropertyReference) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -16553,9 +16553,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 string_id = 1;</code>
        */
-      public Builder setStringId(int value) {
+      public Builder setStringId(int konstue) {
         bitField0_ |= 0x00000001;
-        stringId_ = value;
+        stringId_ = konstue;
         
         return this;
       }
@@ -16585,11 +16585,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression qualifier = 2;</code>
        */
-      public Builder setQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        qualifier_ = value;
+        qualifier_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -16607,13 +16607,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression qualifier = 2;</code>
        */
-      public Builder mergeQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             qualifier_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           qualifier_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(qualifier_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(qualifier_).mergeFrom(konstue).buildPartial();
         } else {
-          qualifier_ = value;
+          qualifier_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -16645,12 +16645,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.InlineStrategy inline_strategy = 3 [default = NOT_INLINE];</code>
        */
-      public Builder setInlineStrategy(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy value) {
-        if (value == null) {
+      public Builder setInlineStrategy(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000004;
-        inlineStrategy_ = value;
+        inlineStrategy_ = konstue;
         
         return this;
       }
@@ -16738,7 +16738,7 @@ public final class JsAstProtoBuf {
     private Invocation(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -16784,22 +16784,22 @@ public final class JsAstProtoBuf {
             }
             case 24: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFieldsCodedOutput.writeRawVarint32(tag);
                 unknownFieldsCodedOutput.writeRawVarint32(rawValue);
               } else {
                 bitField0_ |= 0x00000002;
-                inlineStrategy_ = value;
+                inlineStrategy_ = konstue;
               }
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -16820,7 +16820,7 @@ public final class JsAstProtoBuf {
       public Invocation parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Invocation(input, extensionRegistry);
       }
     };
@@ -16972,23 +16972,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation parseFrom(java.io.InputStream input)
@@ -17146,7 +17146,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Invocation) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -17174,11 +17174,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression qualifier = 1;</code>
        */
-      public Builder setQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        qualifier_ = value;
+        qualifier_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -17196,13 +17196,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression qualifier = 1;</code>
        */
-      public Builder mergeQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             qualifier_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           qualifier_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(qualifier_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(qualifier_).mergeFrom(konstue).buildPartial();
         } else {
-          qualifier_ = value;
+          qualifier_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -17249,12 +17249,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression argument = 2;</code>
        */
       public Builder setArgument(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureArgumentIsMutable();
-        argument_.set(index, value);
+        argument_.set(index, konstue);
 
         return this;
       }
@@ -17271,12 +17271,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression argument = 2;</code>
        */
-      public Builder addArgument(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder addArgument(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureArgumentIsMutable();
-        argument_.add(value);
+        argument_.add(konstue);
 
         return this;
       }
@@ -17284,12 +17284,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression argument = 2;</code>
        */
       public Builder addArgument(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureArgumentIsMutable();
-        argument_.add(index, value);
+        argument_.add(index, konstue);
 
         return this;
       }
@@ -17317,10 +17317,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression argument = 2;</code>
        */
       public Builder addAllArgument(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression> konstues) {
         ensureArgumentIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, argument_);
+            konstues, argument_);
 
         return this;
       }
@@ -17359,12 +17359,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.InlineStrategy inline_strategy = 3 [default = NOT_INLINE];</code>
        */
-      public Builder setInlineStrategy(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy value) {
-        if (value == null) {
+      public Builder setInlineStrategy(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineStrategy konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000004;
-        inlineStrategy_ = value;
+        inlineStrategy_ = konstue;
         
         return this;
       }
@@ -17443,7 +17443,7 @@ public final class JsAstProtoBuf {
     private Instantiation(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -17489,10 +17489,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -17513,7 +17513,7 @@ public final class JsAstProtoBuf {
       public Instantiation parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Instantiation(input, extensionRegistry);
       }
     };
@@ -17642,23 +17642,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation parseFrom(java.io.InputStream input)
@@ -17807,7 +17807,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Instantiation) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -17835,11 +17835,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression qualifier = 1;</code>
        */
-      public Builder setQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        qualifier_ = value;
+        qualifier_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -17857,13 +17857,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression qualifier = 1;</code>
        */
-      public Builder mergeQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeQualifier(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             qualifier_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           qualifier_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(qualifier_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(qualifier_).mergeFrom(konstue).buildPartial();
         } else {
-          qualifier_ = value;
+          qualifier_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -17910,12 +17910,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression argument = 2;</code>
        */
       public Builder setArgument(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureArgumentIsMutable();
-        argument_.set(index, value);
+        argument_.set(index, konstue);
 
         return this;
       }
@@ -17932,12 +17932,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression argument = 2;</code>
        */
-      public Builder addArgument(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder addArgument(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureArgumentIsMutable();
-        argument_.add(value);
+        argument_.add(konstue);
 
         return this;
       }
@@ -17945,12 +17945,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression argument = 2;</code>
        */
       public Builder addArgument(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureArgumentIsMutable();
-        argument_.add(index, value);
+        argument_.add(index, konstue);
 
         return this;
       }
@@ -17978,10 +17978,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression argument = 2;</code>
        */
       public Builder addAllArgument(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression> konstues) {
         ensureArgumentIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, argument_);
+            konstues, argument_);
 
         return this;
       }
@@ -18281,7 +18281,7 @@ public final class JsAstProtoBuf {
     private Statement(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -18605,10 +18605,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
@@ -18632,7 +18632,7 @@ public final class JsAstProtoBuf {
       public Statement parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Statement(input, extensionRegistry);
       }
     };
@@ -18668,12 +18668,12 @@ public final class JsAstProtoBuf {
       SINGLE_LINE_COMMENT(39),
       MULTI_LINE_COMMENT(40),
       STATEMENT_NOT_SET(0);
-      private int value = 0;
-      private StatementCase(int value) {
-        this.value = value;
+      private int konstue = 0;
+      private StatementCase(int konstue) {
+        this.konstue = konstue;
       }
-      public static StatementCase valueOf(int value) {
-        switch (value) {
+      public static StatementCase konstueOf(int konstue) {
+        switch (konstue) {
           case 21: return RETURN_STATEMENT;
           case 22: return THROW_STATEMENT;
           case 23: return BREAK_STATEMENT;
@@ -18700,13 +18700,13 @@ public final class JsAstProtoBuf {
         }
       }
       public int getNumber() {
-        return this.value;
+        return this.konstue;
       }
     };
 
     public StatementCase
     getStatementCase() {
-      return StatementCase.valueOf(
+      return StatementCase.konstueOf(
           statementCase_);
     }
 
@@ -19497,23 +19497,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement parseFrom(java.io.InputStream input)
@@ -19945,7 +19945,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -19959,7 +19959,7 @@ public final class JsAstProtoBuf {
       private java.lang.Object statement_;
       public StatementCase
           getStatementCase() {
-        return StatementCase.valueOf(
+        return StatementCase.konstueOf(
             statementCase_);
       }
 
@@ -19987,9 +19987,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 fileId = 1;</code>
        */
-      public Builder setFileId(int value) {
+      public Builder setFileId(int konstue) {
         bitField0_ |= 0x00000001;
-        fileId_ = value;
+        fileId_ = konstue;
         
         return this;
       }
@@ -20019,11 +20019,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Location location = 2;</code>
        */
-      public Builder setLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location value) {
-        if (value == null) {
+      public Builder setLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        location_ = value;
+        location_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -20041,13 +20041,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Location location = 2;</code>
        */
-      public Builder mergeLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location value) {
+      public Builder mergeLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             location_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.getDefaultInstance()) {
           location_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.newBuilder(location_).mergeFrom(konstue).buildPartial();
         } else {
-          location_ = value;
+          location_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -20079,9 +20079,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional bool synthetic = 3 [default = false];</code>
        */
-      public Builder setSynthetic(boolean value) {
+      public Builder setSynthetic(boolean konstue) {
         bitField0_ |= 0x00000004;
-        synthetic_ = value;
+        synthetic_ = konstue;
         
         return this;
       }
@@ -20126,12 +20126,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment before_comments = 4;</code>
        */
       public Builder setBeforeComments(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBeforeCommentsIsMutable();
-        beforeComments_.set(index, value);
+        beforeComments_.set(index, konstue);
 
         return this;
       }
@@ -20148,12 +20148,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment before_comments = 4;</code>
        */
-      public Builder addBeforeComments(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+      public Builder addBeforeComments(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBeforeCommentsIsMutable();
-        beforeComments_.add(value);
+        beforeComments_.add(konstue);
 
         return this;
       }
@@ -20161,12 +20161,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment before_comments = 4;</code>
        */
       public Builder addBeforeComments(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureBeforeCommentsIsMutable();
-        beforeComments_.add(index, value);
+        beforeComments_.add(index, konstue);
 
         return this;
       }
@@ -20194,10 +20194,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment before_comments = 4;</code>
        */
       public Builder addAllBeforeComments(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment> konstues) {
         ensureBeforeCommentsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, beforeComments_);
+            konstues, beforeComments_);
 
         return this;
       }
@@ -20251,12 +20251,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment after_comments = 5;</code>
        */
       public Builder setAfterComments(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAfterCommentsIsMutable();
-        afterComments_.set(index, value);
+        afterComments_.set(index, konstue);
 
         return this;
       }
@@ -20273,12 +20273,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment after_comments = 5;</code>
        */
-      public Builder addAfterComments(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+      public Builder addAfterComments(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAfterCommentsIsMutable();
-        afterComments_.add(value);
+        afterComments_.add(konstue);
 
         return this;
       }
@@ -20286,12 +20286,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment after_comments = 5;</code>
        */
       public Builder addAfterComments(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAfterCommentsIsMutable();
-        afterComments_.add(index, value);
+        afterComments_.add(index, konstue);
 
         return this;
       }
@@ -20319,10 +20319,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Comment after_comments = 5;</code>
        */
       public Builder addAllAfterComments(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Comment> konstues) {
         ensureAfterCommentsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, afterComments_);
+            konstues, afterComments_);
 
         return this;
       }
@@ -20363,11 +20363,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Return return_statement = 21;</code>
        */
-      public Builder setReturnStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return value) {
-        if (value == null) {
+      public Builder setReturnStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 21;
         return this;
@@ -20385,13 +20385,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Return return_statement = 21;</code>
        */
-      public Builder mergeReturnStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return value) {
+      public Builder mergeReturnStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return konstue) {
         if (statementCase_ == 21 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 21;
@@ -20427,11 +20427,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Throw throw_statement = 22;</code>
        */
-      public Builder setThrowStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw value) {
-        if (value == null) {
+      public Builder setThrowStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 22;
         return this;
@@ -20449,13 +20449,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Throw throw_statement = 22;</code>
        */
-      public Builder mergeThrowStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw value) {
+      public Builder mergeThrowStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw konstue) {
         if (statementCase_ == 22 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 22;
@@ -20491,11 +20491,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Break break_statement = 23;</code>
        */
-      public Builder setBreakStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break value) {
-        if (value == null) {
+      public Builder setBreakStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 23;
         return this;
@@ -20513,13 +20513,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Break break_statement = 23;</code>
        */
-      public Builder mergeBreakStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break value) {
+      public Builder mergeBreakStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break konstue) {
         if (statementCase_ == 23 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 23;
@@ -20555,11 +20555,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Continue continue_statement = 24;</code>
        */
-      public Builder setContinueStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue value) {
-        if (value == null) {
+      public Builder setContinueStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 24;
         return this;
@@ -20577,13 +20577,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Continue continue_statement = 24;</code>
        */
-      public Builder mergeContinueStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue value) {
+      public Builder mergeContinueStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue konstue) {
         if (statementCase_ == 24 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 24;
@@ -20619,11 +20619,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Debugger debugger = 25;</code>
        */
-      public Builder setDebugger(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger value) {
-        if (value == null) {
+      public Builder setDebugger(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 25;
         return this;
@@ -20641,13 +20641,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Debugger debugger = 25;</code>
        */
-      public Builder mergeDebugger(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger value) {
+      public Builder mergeDebugger(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger konstue) {
         if (statementCase_ == 25 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 25;
@@ -20683,11 +20683,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ExpressionStatement expression = 26;</code>
        */
-      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement value) {
-        if (value == null) {
+      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 26;
         return this;
@@ -20705,13 +20705,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ExpressionStatement expression = 26;</code>
        */
-      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement value) {
+      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement konstue) {
         if (statementCase_ == 26 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 26;
@@ -20747,11 +20747,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Vars vars = 27;</code>
        */
-      public Builder setVars(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars value) {
-        if (value == null) {
+      public Builder setVars(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 27;
         return this;
@@ -20769,13 +20769,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Vars vars = 27;</code>
        */
-      public Builder mergeVars(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars value) {
+      public Builder mergeVars(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars konstue) {
         if (statementCase_ == 27 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 27;
@@ -20811,11 +20811,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Block block = 28;</code>
        */
-      public Builder setBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block value) {
-        if (value == null) {
+      public Builder setBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 28;
         return this;
@@ -20833,13 +20833,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Block block = 28;</code>
        */
-      public Builder mergeBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block value) {
+      public Builder mergeBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block konstue) {
         if (statementCase_ == 28 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 28;
@@ -20875,11 +20875,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock composite_block = 29;</code>
        */
-      public Builder setCompositeBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setCompositeBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 29;
         return this;
@@ -20897,13 +20897,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock composite_block = 29;</code>
        */
-      public Builder mergeCompositeBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergeCompositeBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (statementCase_ == 29 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 29;
@@ -20939,11 +20939,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Label label = 30;</code>
        */
-      public Builder setLabel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label value) {
-        if (value == null) {
+      public Builder setLabel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 30;
         return this;
@@ -20961,13 +20961,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Label label = 30;</code>
        */
-      public Builder mergeLabel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label value) {
+      public Builder mergeLabel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label konstue) {
         if (statementCase_ == 30 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 30;
@@ -21003,11 +21003,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.If if_statement = 31;</code>
        */
-      public Builder setIfStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If value) {
-        if (value == null) {
+      public Builder setIfStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 31;
         return this;
@@ -21025,13 +21025,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.If if_statement = 31;</code>
        */
-      public Builder mergeIfStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If value) {
+      public Builder mergeIfStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If konstue) {
         if (statementCase_ == 31 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 31;
@@ -21067,11 +21067,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Switch switch_statement = 32;</code>
        */
-      public Builder setSwitchStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch value) {
-        if (value == null) {
+      public Builder setSwitchStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 32;
         return this;
@@ -21089,13 +21089,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Switch switch_statement = 32;</code>
        */
-      public Builder mergeSwitchStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch value) {
+      public Builder mergeSwitchStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch konstue) {
         if (statementCase_ == 32 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 32;
@@ -21131,11 +21131,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.While while_statement = 33;</code>
        */
-      public Builder setWhileStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While value) {
-        if (value == null) {
+      public Builder setWhileStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 33;
         return this;
@@ -21153,13 +21153,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.While while_statement = 33;</code>
        */
-      public Builder mergeWhileStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While value) {
+      public Builder mergeWhileStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While konstue) {
         if (statementCase_ == 33 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 33;
@@ -21195,11 +21195,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.DoWhile do_while_statement = 34;</code>
        */
-      public Builder setDoWhileStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile value) {
-        if (value == null) {
+      public Builder setDoWhileStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 34;
         return this;
@@ -21217,13 +21217,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.DoWhile do_while_statement = 34;</code>
        */
-      public Builder mergeDoWhileStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile value) {
+      public Builder mergeDoWhileStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile konstue) {
         if (statementCase_ == 34 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 34;
@@ -21259,11 +21259,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.For for_statement = 35;</code>
        */
-      public Builder setForStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For value) {
-        if (value == null) {
+      public Builder setForStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 35;
         return this;
@@ -21281,13 +21281,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.For for_statement = 35;</code>
        */
-      public Builder mergeForStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For value) {
+      public Builder mergeForStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For konstue) {
         if (statementCase_ == 35 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 35;
@@ -21323,11 +21323,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ForIn for_in_statement = 36;</code>
        */
-      public Builder setForInStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn value) {
-        if (value == null) {
+      public Builder setForInStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 36;
         return this;
@@ -21345,13 +21345,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.ForIn for_in_statement = 36;</code>
        */
-      public Builder mergeForInStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn value) {
+      public Builder mergeForInStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn konstue) {
         if (statementCase_ == 36 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 36;
@@ -21387,11 +21387,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Try try_statement = 37;</code>
        */
-      public Builder setTryStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try value) {
-        if (value == null) {
+      public Builder setTryStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 37;
         return this;
@@ -21409,13 +21409,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Try try_statement = 37;</code>
        */
-      public Builder mergeTryStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try value) {
+      public Builder mergeTryStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try konstue) {
         if (statementCase_ == 37 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 37;
@@ -21451,11 +21451,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Empty empty = 38;</code>
        */
-      public Builder setEmpty(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty value) {
-        if (value == null) {
+      public Builder setEmpty(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 38;
         return this;
@@ -21473,13 +21473,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Empty empty = 38;</code>
        */
-      public Builder mergeEmpty(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty value) {
+      public Builder mergeEmpty(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty konstue) {
         if (statementCase_ == 38 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 38;
@@ -21515,11 +21515,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.SingleLineComment single_line_comment = 39;</code>
        */
-      public Builder setSingleLineComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment value) {
-        if (value == null) {
+      public Builder setSingleLineComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 39;
         return this;
@@ -21537,13 +21537,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.SingleLineComment single_line_comment = 39;</code>
        */
-      public Builder mergeSingleLineComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment value) {
+      public Builder mergeSingleLineComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment konstue) {
         if (statementCase_ == 39 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 39;
@@ -21579,11 +21579,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.MultiLineComment multi_line_comment = 40;</code>
        */
-      public Builder setMultiLineComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment value) {
-        if (value == null) {
+      public Builder setMultiLineComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        statement_ = value;
+        statement_ = konstue;
 
         statementCase_ = 40;
         return this;
@@ -21601,13 +21601,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.MultiLineComment multi_line_comment = 40;</code>
        */
-      public Builder mergeMultiLineComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment value) {
+      public Builder mergeMultiLineComment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment konstue) {
         if (statementCase_ == 40 &&
             statement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment.getDefaultInstance()) {
           statement_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment) statement_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          statement_ = value;
+          statement_ = konstue;
         }
 
         statementCase_ = 40;
@@ -21641,11 +21641,11 @@ public final class JsAstProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
      */
     boolean hasValue();
     /**
-     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
      */
     org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getValue();
   }
@@ -21676,7 +21676,7 @@ public final class JsAstProtoBuf {
     private Return(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -21702,22 +21702,22 @@ public final class JsAstProtoBuf {
             case 10: {
               org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = value_.toBuilder();
+                subBuilder = konstue_.toBuilder();
               }
-              value_ = input.readMessage(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.PARSER, extensionRegistry);
+              konstue_ = input.readMessage(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(value_);
-                value_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(konstue_);
+                konstue_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000001;
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -21735,7 +21735,7 @@ public final class JsAstProtoBuf {
       public Return parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Return(input, extensionRegistry);
       }
     };
@@ -21747,22 +21747,22 @@ public final class JsAstProtoBuf {
 
     private int bitField0_;
     public static final int VALUE_FIELD_NUMBER = 1;
-    private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value_;
+    private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue_;
     /**
-     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
      */
     public boolean hasValue() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
      */
     public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getValue() {
-      return value_;
+      return konstue_;
     }
 
     private void initFields() {
-      value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
+      konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -21784,7 +21784,7 @@ public final class JsAstProtoBuf {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, value_);
+        output.writeMessage(1, konstue_);
       }
       output.writeRawBytes(unknownFields);
     }
@@ -21797,7 +21797,7 @@ public final class JsAstProtoBuf {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeMessageSize(1, value_);
+          .computeMessageSize(1, konstue_);
       }
       size += unknownFields.size();
       memoizedSerializedSize = size;
@@ -21813,23 +21813,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return parseFrom(java.io.InputStream input)
@@ -21893,7 +21893,7 @@ public final class JsAstProtoBuf {
 
       public Builder clear() {
         super.clear();
-        value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
+        konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -21921,7 +21921,7 @@ public final class JsAstProtoBuf {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.value_ = value_;
+        result.konstue_ = konstue_;
         result.bitField0_ = to_bitField0_;
         return result;
       }
@@ -21953,7 +21953,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Return) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -21965,61 +21965,61 @@ public final class JsAstProtoBuf {
       }
       private int bitField0_;
 
-      private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
+      private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
        */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
        */
       public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getValue() {
-        return value_;
+        return konstue_;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
        */
-      public Builder setValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        value_ = value;
+        konstue_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
        */
       public Builder setValue(
           org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder builderForValue) {
-        value_ = builderForValue.build();
+        konstue_ = builderForValue.build();
 
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
        */
-      public Builder mergeValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
-            value_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
-          value_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(value_).mergeFrom(value).buildPartial();
+            konstue_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
+          konstue_ =
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(konstue_).mergeFrom(konstue).buildPartial();
         } else {
-          value_ = value;
+          konstue_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression value = 1;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression konstue = 1;</code>
        */
       public Builder clearValue() {
-        value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
+        konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
 
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
@@ -22076,7 +22076,7 @@ public final class JsAstProtoBuf {
     private Throw(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -22114,10 +22114,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -22135,7 +22135,7 @@ public final class JsAstProtoBuf {
       public Throw parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Throw(input, extensionRegistry);
       }
     };
@@ -22215,23 +22215,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw parseFrom(java.io.InputStream input)
@@ -22357,7 +22357,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Throw) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -22385,11 +22385,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression exception = 1;</code>
        */
-      public Builder setException(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setException(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        exception_ = value;
+        exception_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -22407,13 +22407,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression exception = 1;</code>
        */
-      public Builder mergeException(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeException(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             exception_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           exception_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(exception_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(exception_).mergeFrom(konstue).buildPartial();
         } else {
-          exception_ = value;
+          exception_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -22480,7 +22480,7 @@ public final class JsAstProtoBuf {
     private Break(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -22510,10 +22510,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -22531,7 +22531,7 @@ public final class JsAstProtoBuf {
       public Break parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Break(input, extensionRegistry);
       }
     };
@@ -22603,23 +22603,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break parseFrom(java.io.InputStream input)
@@ -22737,7 +22737,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Break) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -22765,9 +22765,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 label_id = 1;</code>
        */
-      public Builder setLabelId(int value) {
+      public Builder setLabelId(int konstue) {
         bitField0_ |= 0x00000001;
-        labelId_ = value;
+        labelId_ = konstue;
         
         return this;
       }
@@ -22832,7 +22832,7 @@ public final class JsAstProtoBuf {
     private Continue(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -22862,10 +22862,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -22883,7 +22883,7 @@ public final class JsAstProtoBuf {
       public Continue parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Continue(input, extensionRegistry);
       }
     };
@@ -22955,23 +22955,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue parseFrom(java.io.InputStream input)
@@ -23089,7 +23089,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Continue) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -23117,9 +23117,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 label_id = 1;</code>
        */
-      public Builder setLabelId(int value) {
+      public Builder setLabelId(int konstue) {
         bitField0_ |= 0x00000001;
-        labelId_ = value;
+        labelId_ = konstue;
         
         return this;
       }
@@ -23175,7 +23175,7 @@ public final class JsAstProtoBuf {
     private Debugger(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
           org.jetbrains.kotlin.protobuf.ByteString.newOutput();
@@ -23199,10 +23199,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -23220,7 +23220,7 @@ public final class JsAstProtoBuf {
       public Debugger parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Debugger(input, extensionRegistry);
       }
     };
@@ -23268,23 +23268,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger parseFrom(java.io.InputStream input)
@@ -23390,7 +23390,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Debugger) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -23461,7 +23461,7 @@ public final class JsAstProtoBuf {
     private ExpressionStatement(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -23504,10 +23504,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -23525,7 +23525,7 @@ public final class JsAstProtoBuf {
       public ExpressionStatement parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ExpressionStatement(input, extensionRegistry);
       }
     };
@@ -23628,23 +23628,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement parseFrom(java.io.InputStream input)
@@ -23779,7 +23779,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ExpressionStatement) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -23807,11 +23807,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 1;</code>
        */
-      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -23829,13 +23829,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 1;</code>
        */
-      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           expression_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(expression_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(expression_).mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -23867,9 +23867,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 exported_tag_id = 2;</code>
        */
-      public Builder setExportedTagId(int value) {
+      public Builder setExportedTagId(int konstue) {
         bitField0_ |= 0x00000002;
-        exportedTagId_ = value;
+        exportedTagId_ = konstue;
         
         return this;
       }
@@ -23957,7 +23957,7 @@ public final class JsAstProtoBuf {
     private Vars(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -24000,10 +24000,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -24024,7 +24024,7 @@ public final class JsAstProtoBuf {
       public Vars parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Vars(input, extensionRegistry);
       }
     };
@@ -24168,23 +24168,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars parseFrom(java.io.InputStream input)
@@ -24334,7 +24334,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Vars) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -24377,12 +24377,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.VarDeclaration declaration = 1;</code>
        */
       public Builder setDeclaration(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDeclarationIsMutable();
-        declaration_.set(index, value);
+        declaration_.set(index, konstue);
 
         return this;
       }
@@ -24399,12 +24399,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.VarDeclaration declaration = 1;</code>
        */
-      public Builder addDeclaration(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration value) {
-        if (value == null) {
+      public Builder addDeclaration(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDeclarationIsMutable();
-        declaration_.add(value);
+        declaration_.add(konstue);
 
         return this;
       }
@@ -24412,12 +24412,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.VarDeclaration declaration = 1;</code>
        */
       public Builder addDeclaration(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureDeclarationIsMutable();
-        declaration_.add(index, value);
+        declaration_.add(index, konstue);
 
         return this;
       }
@@ -24445,10 +24445,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.VarDeclaration declaration = 1;</code>
        */
       public Builder addAllDeclaration(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration> konstues) {
         ensureDeclarationIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, declaration_);
+            konstues, declaration_);
 
         return this;
       }
@@ -24487,9 +24487,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional bool multiline = 2 [default = false];</code>
        */
-      public Builder setMultiline(boolean value) {
+      public Builder setMultiline(boolean konstue) {
         bitField0_ |= 0x00000002;
-        multiline_ = value;
+        multiline_ = konstue;
         
         return this;
       }
@@ -24519,9 +24519,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 exported_package_id = 3;</code>
        */
-      public Builder setExportedPackageId(int value) {
+      public Builder setExportedPackageId(int konstue) {
         bitField0_ |= 0x00000004;
-        exportedPackageId_ = value;
+        exportedPackageId_ = konstue;
         
         return this;
       }
@@ -24560,11 +24560,11 @@ public final class JsAstProtoBuf {
     int getNameId();
 
     /**
-     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
      */
     boolean hasInitialValue();
     /**
-     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
      */
     org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getInitialValue();
 
@@ -24613,7 +24613,7 @@ public final class JsAstProtoBuf {
     private VarDeclaration(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -24674,10 +24674,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -24695,7 +24695,7 @@ public final class JsAstProtoBuf {
       public VarDeclaration parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new VarDeclaration(input, extensionRegistry);
       }
     };
@@ -24724,13 +24724,13 @@ public final class JsAstProtoBuf {
     public static final int INITIAL_VALUE_FIELD_NUMBER = 2;
     private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression initialValue_;
     /**
-     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
      */
     public boolean hasInitialValue() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+     * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
      */
     public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getInitialValue() {
       return initialValue_;
@@ -24852,23 +24852,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration parseFrom(java.io.InputStream input)
@@ -25029,7 +25029,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.VarDeclaration) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -25057,9 +25057,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 name_id = 1;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -25075,31 +25075,31 @@ public final class JsAstProtoBuf {
 
       private org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression initialValue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
        */
       public boolean hasInitialValue() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
        */
       public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getInitialValue() {
         return initialValue_;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
        */
-      public Builder setInitialValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setInitialValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        initialValue_ = value;
+        initialValue_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
        */
       public Builder setInitialValue(
           org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder builderForValue) {
@@ -25109,22 +25109,22 @@ public final class JsAstProtoBuf {
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
        */
-      public Builder mergeInitialValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeInitialValue(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             initialValue_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           initialValue_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(initialValue_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(initialValue_).mergeFrom(konstue).buildPartial();
         } else {
-          initialValue_ = value;
+          initialValue_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_value = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression initial_konstue = 2;</code>
        */
       public Builder clearInitialValue() {
         initialValue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
@@ -25149,9 +25149,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 fileId = 3;</code>
        */
-      public Builder setFileId(int value) {
+      public Builder setFileId(int konstue) {
         bitField0_ |= 0x00000004;
-        fileId_ = value;
+        fileId_ = konstue;
         
         return this;
       }
@@ -25181,11 +25181,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Location location = 4;</code>
        */
-      public Builder setLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location value) {
-        if (value == null) {
+      public Builder setLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        location_ = value;
+        location_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -25203,13 +25203,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Location location = 4;</code>
        */
-      public Builder mergeLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location value) {
+      public Builder mergeLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             location_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.getDefaultInstance()) {
           location_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.newBuilder(location_).mergeFrom(konstue).buildPartial();
         } else {
-          location_ = value;
+          location_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -25281,7 +25281,7 @@ public final class JsAstProtoBuf {
     private Block(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -25314,10 +25314,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -25338,7 +25338,7 @@ public final class JsAstProtoBuf {
       public Block parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Block(input, extensionRegistry);
       }
     };
@@ -25435,23 +25435,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block parseFrom(java.io.InputStream input)
@@ -25581,7 +25581,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Block) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -25624,12 +25624,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 1;</code>
        */
       public Builder setStatement(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.set(index, value);
+        statement_.set(index, konstue);
 
         return this;
       }
@@ -25646,12 +25646,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 1;</code>
        */
-      public Builder addStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder addStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.add(value);
+        statement_.add(konstue);
 
         return this;
       }
@@ -25659,12 +25659,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 1;</code>
        */
       public Builder addStatement(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.add(index, value);
+        statement_.add(index, konstue);
 
         return this;
       }
@@ -25692,10 +25692,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 1;</code>
        */
       public Builder addAllStatement(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement> konstues) {
         ensureStatementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, statement_);
+            konstues, statement_);
 
         return this;
       }
@@ -25774,7 +25774,7 @@ public final class JsAstProtoBuf {
     private CompositeBlock(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -25807,10 +25807,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -25831,7 +25831,7 @@ public final class JsAstProtoBuf {
       public CompositeBlock parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new CompositeBlock(input, extensionRegistry);
       }
     };
@@ -25928,23 +25928,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock parseFrom(java.io.InputStream input)
@@ -26074,7 +26074,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -26117,12 +26117,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 1;</code>
        */
       public Builder setStatement(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.set(index, value);
+        statement_.set(index, konstue);
 
         return this;
       }
@@ -26139,12 +26139,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 1;</code>
        */
-      public Builder addStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder addStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.add(value);
+        statement_.add(konstue);
 
         return this;
       }
@@ -26152,12 +26152,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 1;</code>
        */
       public Builder addStatement(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.add(index, value);
+        statement_.add(index, konstue);
 
         return this;
       }
@@ -26185,10 +26185,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 1;</code>
        */
       public Builder addAllStatement(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement> konstues) {
         ensureStatementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, statement_);
+            konstues, statement_);
 
         return this;
       }
@@ -26271,7 +26271,7 @@ public final class JsAstProtoBuf {
     private Label(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -26314,10 +26314,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -26335,7 +26335,7 @@ public final class JsAstProtoBuf {
       public Label parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Label(input, extensionRegistry);
       }
     };
@@ -26442,23 +26442,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label parseFrom(java.io.InputStream input)
@@ -26597,7 +26597,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Label) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -26625,9 +26625,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 nameId = 1;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -26657,11 +26657,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement inner_statement = 2;</code>
        */
-      public Builder setInnerStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setInnerStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        innerStatement_ = value;
+        innerStatement_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -26679,13 +26679,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement inner_statement = 2;</code>
        */
-      public Builder mergeInnerStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeInnerStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             innerStatement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           innerStatement_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(innerStatement_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(innerStatement_).mergeFrom(konstue).buildPartial();
         } else {
-          innerStatement_ = value;
+          innerStatement_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -26770,7 +26770,7 @@ public final class JsAstProtoBuf {
     private If(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -26834,10 +26834,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -26855,7 +26855,7 @@ public final class JsAstProtoBuf {
       public If parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new If(input, extensionRegistry);
       }
     };
@@ -26995,23 +26995,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If parseFrom(java.io.InputStream input)
@@ -27169,7 +27169,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.If) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -27197,11 +27197,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression condition = 1;</code>
        */
-      public Builder setCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        condition_ = value;
+        condition_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -27219,13 +27219,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression condition = 1;</code>
        */
-      public Builder mergeCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             condition_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           condition_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(condition_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(condition_).mergeFrom(konstue).buildPartial();
         } else {
-          condition_ = value;
+          condition_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -27257,11 +27257,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement then_statement = 2;</code>
        */
-      public Builder setThenStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setThenStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        thenStatement_ = value;
+        thenStatement_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -27279,13 +27279,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement then_statement = 2;</code>
        */
-      public Builder mergeThenStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeThenStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             thenStatement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           thenStatement_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(thenStatement_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(thenStatement_).mergeFrom(konstue).buildPartial();
         } else {
-          thenStatement_ = value;
+          thenStatement_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -27317,11 +27317,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement else_statement = 3;</code>
        */
-      public Builder setElseStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setElseStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        elseStatement_ = value;
+        elseStatement_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -27339,13 +27339,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement else_statement = 3;</code>
        */
-      public Builder mergeElseStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeElseStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             elseStatement_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           elseStatement_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(elseStatement_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(elseStatement_).mergeFrom(konstue).buildPartial();
         } else {
-          elseStatement_ = value;
+          elseStatement_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -27426,7 +27426,7 @@ public final class JsAstProtoBuf {
     private Switch(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -27472,10 +27472,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -27496,7 +27496,7 @@ public final class JsAstProtoBuf {
       public Switch parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Switch(input, extensionRegistry);
       }
     };
@@ -27625,23 +27625,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch parseFrom(java.io.InputStream input)
@@ -27790,7 +27790,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Switch) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -27818,11 +27818,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 1;</code>
        */
-      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -27840,13 +27840,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 1;</code>
        */
-      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           expression_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(expression_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(expression_).mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -27893,12 +27893,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.SwitchEntry entry = 2;</code>
        */
       public Builder setEntry(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.set(index, value);
+        entry_.set(index, konstue);
 
         return this;
       }
@@ -27915,12 +27915,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.SwitchEntry entry = 2;</code>
        */
-      public Builder addEntry(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry value) {
-        if (value == null) {
+      public Builder addEntry(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.add(value);
+        entry_.add(konstue);
 
         return this;
       }
@@ -27928,12 +27928,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.SwitchEntry entry = 2;</code>
        */
       public Builder addEntry(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.add(index, value);
+        entry_.add(index, konstue);
 
         return this;
       }
@@ -27961,10 +27961,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.SwitchEntry entry = 2;</code>
        */
       public Builder addAllEntry(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry> konstues) {
         ensureEntryIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, entry_);
+            konstues, entry_);
 
         return this;
       }
@@ -28070,7 +28070,7 @@ public final class JsAstProtoBuf {
     private SwitchEntry(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -28134,10 +28134,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -28158,7 +28158,7 @@ public final class JsAstProtoBuf {
       public SwitchEntry parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new SwitchEntry(input, extensionRegistry);
       }
     };
@@ -28337,23 +28337,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry parseFrom(java.io.InputStream input)
@@ -28524,7 +28524,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SwitchEntry) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -28552,11 +28552,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression label = 1;</code>
        */
-      public Builder setLabel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setLabel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        label_ = value;
+        label_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -28574,13 +28574,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression label = 1;</code>
        */
-      public Builder mergeLabel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeLabel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             label_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           label_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(label_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(label_).mergeFrom(konstue).buildPartial();
         } else {
-          label_ = value;
+          label_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -28627,12 +28627,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 2;</code>
        */
       public Builder setStatement(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.set(index, value);
+        statement_.set(index, konstue);
 
         return this;
       }
@@ -28649,12 +28649,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 2;</code>
        */
-      public Builder addStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder addStatement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.add(value);
+        statement_.add(konstue);
 
         return this;
       }
@@ -28662,12 +28662,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 2;</code>
        */
       public Builder addStatement(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureStatementIsMutable();
-        statement_.add(index, value);
+        statement_.add(index, konstue);
 
         return this;
       }
@@ -28695,10 +28695,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Statement statement = 2;</code>
        */
       public Builder addAllStatement(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement> konstues) {
         ensureStatementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, statement_);
+            konstues, statement_);
 
         return this;
       }
@@ -28737,9 +28737,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 fileId = 3;</code>
        */
-      public Builder setFileId(int value) {
+      public Builder setFileId(int konstue) {
         bitField0_ |= 0x00000004;
-        fileId_ = value;
+        fileId_ = konstue;
         
         return this;
       }
@@ -28769,11 +28769,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Location location = 4;</code>
        */
-      public Builder setLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location value) {
-        if (value == null) {
+      public Builder setLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        location_ = value;
+        location_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -28791,13 +28791,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Location location = 4;</code>
        */
-      public Builder mergeLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location value) {
+      public Builder mergeLocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             location_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.getDefaultInstance()) {
           location_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Location.newBuilder(location_).mergeFrom(konstue).buildPartial();
         } else {
-          location_ = value;
+          location_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -28873,7 +28873,7 @@ public final class JsAstProtoBuf {
     private While(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -28924,10 +28924,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -28945,7 +28945,7 @@ public final class JsAstProtoBuf {
       public While parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new While(input, extensionRegistry);
       }
     };
@@ -29056,23 +29056,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While parseFrom(java.io.InputStream input)
@@ -29215,7 +29215,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.While) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -29243,11 +29243,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression condition = 1;</code>
        */
-      public Builder setCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        condition_ = value;
+        condition_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -29265,13 +29265,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression condition = 1;</code>
        */
-      public Builder mergeCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             condition_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           condition_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(condition_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(condition_).mergeFrom(konstue).buildPartial();
         } else {
-          condition_ = value;
+          condition_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -29303,11 +29303,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 2;</code>
        */
-      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        body_ = value;
+        body_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -29325,13 +29325,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 2;</code>
        */
-      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             body_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           body_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(konstue).buildPartial();
         } else {
-          body_ = value;
+          body_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -29407,7 +29407,7 @@ public final class JsAstProtoBuf {
     private DoWhile(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -29458,10 +29458,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -29479,7 +29479,7 @@ public final class JsAstProtoBuf {
       public DoWhile parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new DoWhile(input, extensionRegistry);
       }
     };
@@ -29590,23 +29590,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile parseFrom(java.io.InputStream input)
@@ -29749,7 +29749,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.DoWhile) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -29777,11 +29777,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression condition = 1;</code>
        */
-      public Builder setCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        condition_ = value;
+        condition_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -29799,13 +29799,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression condition = 1;</code>
        */
-      public Builder mergeCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             condition_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           condition_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(condition_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(condition_).mergeFrom(konstue).buildPartial();
         } else {
-          condition_ = value;
+          condition_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -29837,11 +29837,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 2;</code>
        */
-      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        body_ = value;
+        body_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -29859,13 +29859,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 2;</code>
        */
-      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             body_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           body_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(konstue).buildPartial();
         } else {
-          body_ = value;
+          body_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -29977,7 +29977,7 @@ public final class JsAstProtoBuf {
     private For(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -30080,10 +30080,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -30101,7 +30101,7 @@ public final class JsAstProtoBuf {
       public For parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new For(input, extensionRegistry);
       }
     };
@@ -30120,12 +30120,12 @@ public final class JsAstProtoBuf {
       EXPRESSION(2),
       EMPTY(3),
       INIT_NOT_SET(0);
-      private int value = 0;
-      private InitCase(int value) {
-        this.value = value;
+      private int konstue = 0;
+      private InitCase(int konstue) {
+        this.konstue = konstue;
       }
-      public static InitCase valueOf(int value) {
-        switch (value) {
+      public static InitCase konstueOf(int konstue) {
+        switch (konstue) {
           case 1: return VARIABLES;
           case 2: return EXPRESSION;
           case 3: return EMPTY;
@@ -30135,13 +30135,13 @@ public final class JsAstProtoBuf {
         }
       }
       public int getNumber() {
-        return this.value;
+        return this.konstue;
       }
     };
 
     public InitCase
     getInitCase() {
-      return InitCase.valueOf(
+      return InitCase.konstueOf(
           initCase_);
     }
 
@@ -30356,23 +30356,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For parseFrom(java.io.InputStream input)
@@ -30569,7 +30569,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.For) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -30583,7 +30583,7 @@ public final class JsAstProtoBuf {
       private java.lang.Object init_;
       public InitCase
           getInitCase() {
-        return InitCase.valueOf(
+        return InitCase.konstueOf(
             initCase_);
       }
 
@@ -30613,11 +30613,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement variables = 1;</code>
        */
-      public Builder setVariables(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setVariables(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        init_ = value;
+        init_ = konstue;
 
         initCase_ = 1;
         return this;
@@ -30635,13 +30635,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement variables = 1;</code>
        */
-      public Builder mergeVariables(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeVariables(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (initCase_ == 1 &&
             init_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           init_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement) init_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          init_ = value;
+          init_ = konstue;
         }
 
         initCase_ = 1;
@@ -30677,11 +30677,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
-      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        init_ = value;
+        init_ = konstue;
 
         initCase_ = 2;
         return this;
@@ -30699,13 +30699,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
-      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (initCase_ == 2 &&
             init_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           init_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) init_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          init_ = value;
+          init_ = konstue;
         }
 
         initCase_ = 2;
@@ -30741,11 +30741,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.EmptyInit empty = 3;</code>
        */
-      public Builder setEmpty(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit value) {
-        if (value == null) {
+      public Builder setEmpty(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        init_ = value;
+        init_ = konstue;
 
         initCase_ = 3;
         return this;
@@ -30763,13 +30763,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.EmptyInit empty = 3;</code>
        */
-      public Builder mergeEmpty(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit value) {
+      public Builder mergeEmpty(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit konstue) {
         if (initCase_ == 3 &&
             init_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit.getDefaultInstance()) {
           init_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit) init_)
-              .mergeFrom(value).buildPartial();
+              .mergeFrom(konstue).buildPartial();
         } else {
-          init_ = value;
+          init_ = konstue;
         }
 
         initCase_ = 3;
@@ -30803,11 +30803,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression condition = 4;</code>
        */
-      public Builder setCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        condition_ = value;
+        condition_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -30825,13 +30825,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression condition = 4;</code>
        */
-      public Builder mergeCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeCondition(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             condition_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           condition_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(condition_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(condition_).mergeFrom(konstue).buildPartial();
         } else {
-          condition_ = value;
+          condition_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -30863,11 +30863,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression increment = 5;</code>
        */
-      public Builder setIncrement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setIncrement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        increment_ = value;
+        increment_ = konstue;
 
         bitField0_ |= 0x00000010;
         return this;
@@ -30885,13 +30885,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression increment = 5;</code>
        */
-      public Builder mergeIncrement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeIncrement(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000010) == 0x00000010) &&
             increment_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           increment_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(increment_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(increment_).mergeFrom(konstue).buildPartial();
         } else {
-          increment_ = value;
+          increment_ = konstue;
         }
 
         bitField0_ |= 0x00000010;
@@ -30923,11 +30923,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 6;</code>
        */
-      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        body_ = value;
+        body_ = konstue;
 
         bitField0_ |= 0x00000020;
         return this;
@@ -30945,13 +30945,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 6;</code>
        */
-      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000020) == 0x00000020) &&
             body_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           body_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(konstue).buildPartial();
         } else {
-          body_ = value;
+          body_ = konstue;
         }
 
         bitField0_ |= 0x00000020;
@@ -31009,7 +31009,7 @@ public final class JsAstProtoBuf {
     private EmptyInit(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
           org.jetbrains.kotlin.protobuf.ByteString.newOutput();
@@ -31033,10 +31033,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -31054,7 +31054,7 @@ public final class JsAstProtoBuf {
       public EmptyInit parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new EmptyInit(input, extensionRegistry);
       }
     };
@@ -31102,23 +31102,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit parseFrom(java.io.InputStream input)
@@ -31224,7 +31224,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.EmptyInit) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -31313,7 +31313,7 @@ public final class JsAstProtoBuf {
     private ForIn(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -31337,21 +31337,21 @@ public final class JsAstProtoBuf {
               break;
             }
             case 8: {
-              valueCase_ = 1;
-              value_ = input.readInt32();
+              konstueCase_ = 1;
+              konstue_ = input.readInt32();
               break;
             }
             case 18: {
               org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder subBuilder = null;
-              if (valueCase_ == 2) {
-                subBuilder = ((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_).toBuilder();
+              if (konstueCase_ == 2) {
+                subBuilder = ((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_).toBuilder();
               }
-              value_ = input.readMessage(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.PARSER, extensionRegistry);
+              konstue_ = input.readMessage(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_);
-                value_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_);
+                konstue_ = subBuilder.buildPartial();
               }
-              valueCase_ = 2;
+              konstueCase_ = 2;
               break;
             }
             case 26: {
@@ -31382,10 +31382,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -31403,7 +31403,7 @@ public final class JsAstProtoBuf {
       public ForIn parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ForIn(input, extensionRegistry);
       }
     };
@@ -31414,19 +31414,19 @@ public final class JsAstProtoBuf {
     }
 
     private int bitField0_;
-    private int valueCase_ = 0;
-    private java.lang.Object value_;
+    private int konstueCase_ = 0;
+    private java.lang.Object konstue_;
     public enum ValueCase
         implements org.jetbrains.kotlin.protobuf.Internal.EnumLite {
       NAMEID(1),
       EXPRESSION(2),
       VALUE_NOT_SET(0);
-      private int value = 0;
-      private ValueCase(int value) {
-        this.value = value;
+      private int konstue = 0;
+      private ValueCase(int konstue) {
+        this.konstue = konstue;
       }
-      public static ValueCase valueOf(int value) {
-        switch (value) {
+      public static ValueCase konstueOf(int konstue) {
+        switch (konstue) {
           case 1: return NAMEID;
           case 2: return EXPRESSION;
           case 0: return VALUE_NOT_SET;
@@ -31435,14 +31435,14 @@ public final class JsAstProtoBuf {
         }
       }
       public int getNumber() {
-        return this.value;
+        return this.konstue;
       }
     };
 
     public ValueCase
     getValueCase() {
-      return ValueCase.valueOf(
-          valueCase_);
+      return ValueCase.konstueOf(
+          konstueCase_);
     }
 
     public static final int NAMEID_FIELD_NUMBER = 1;
@@ -31450,14 +31450,14 @@ public final class JsAstProtoBuf {
      * <code>optional int32 nameId = 1;</code>
      */
     public boolean hasNameId() {
-      return valueCase_ == 1;
+      return konstueCase_ == 1;
     }
     /**
      * <code>optional int32 nameId = 1;</code>
      */
     public int getNameId() {
-      if (valueCase_ == 1) {
-        return (java.lang.Integer) value_;
+      if (konstueCase_ == 1) {
+        return (java.lang.Integer) konstue_;
       }
       return 0;
     }
@@ -31467,14 +31467,14 @@ public final class JsAstProtoBuf {
      * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
      */
     public boolean hasExpression() {
-      return valueCase_ == 2;
+      return konstueCase_ == 2;
     }
     /**
      * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
      */
     public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getExpression() {
-      if (valueCase_ == 2) {
-         return (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_;
+      if (konstueCase_ == 2) {
+         return (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_;
       }
       return org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
     }
@@ -31548,12 +31548,12 @@ public final class JsAstProtoBuf {
     public void writeTo(org.jetbrains.kotlin.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (valueCase_ == 1) {
+      if (konstueCase_ == 1) {
         output.writeInt32(
-            1, (int)((java.lang.Integer) value_));
+            1, (int)((java.lang.Integer) konstue_));
       }
-      if (valueCase_ == 2) {
-        output.writeMessage(2, (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_);
+      if (konstueCase_ == 2) {
+        output.writeMessage(2, (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(3, iterable_);
@@ -31570,14 +31570,14 @@ public final class JsAstProtoBuf {
       if (size != -1) return size;
 
       size = 0;
-      if (valueCase_ == 1) {
+      if (konstueCase_ == 1) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
           .computeInt32Size(
-              1, (int)((java.lang.Integer) value_));
+              1, (int)((java.lang.Integer) konstue_));
       }
-      if (valueCase_ == 2) {
+      if (konstueCase_ == 2) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeMessageSize(2, (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_);
+          .computeMessageSize(2, (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
@@ -31601,23 +31601,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn parseFrom(java.io.InputStream input)
@@ -31685,8 +31685,8 @@ public final class JsAstProtoBuf {
         bitField0_ = (bitField0_ & ~0x00000004);
         body_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000008);
-        valueCase_ = 0;
-        value_ = null;
+        konstueCase_ = 0;
+        konstue_ = null;
         return this;
       }
 
@@ -31710,11 +31710,11 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn result = new org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (valueCase_ == 1) {
-          result.value_ = value_;
+        if (konstueCase_ == 1) {
+          result.konstue_ = konstue_;
         }
-        if (valueCase_ == 2) {
-          result.value_ = value_;
+        if (konstueCase_ == 2) {
+          result.konstue_ = konstue_;
         }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
@@ -31725,7 +31725,7 @@ public final class JsAstProtoBuf {
         }
         result.body_ = body_;
         result.bitField0_ = to_bitField0_;
-        result.valueCase_ = valueCase_;
+        result.konstueCase_ = konstueCase_;
         return result;
       }
 
@@ -31788,7 +31788,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ForIn) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -31798,17 +31798,17 @@ public final class JsAstProtoBuf {
         }
         return this;
       }
-      private int valueCase_ = 0;
-      private java.lang.Object value_;
+      private int konstueCase_ = 0;
+      private java.lang.Object konstue_;
       public ValueCase
           getValueCase() {
-        return ValueCase.valueOf(
-            valueCase_);
+        return ValueCase.konstueOf(
+            konstueCase_);
       }
 
       public Builder clearValue() {
-        valueCase_ = 0;
-        value_ = null;
+        konstueCase_ = 0;
+        konstue_ = null;
         return this;
       }
 
@@ -31818,23 +31818,23 @@ public final class JsAstProtoBuf {
        * <code>optional int32 nameId = 1;</code>
        */
       public boolean hasNameId() {
-        return valueCase_ == 1;
+        return konstueCase_ == 1;
       }
       /**
        * <code>optional int32 nameId = 1;</code>
        */
       public int getNameId() {
-        if (valueCase_ == 1) {
-          return (java.lang.Integer) value_;
+        if (konstueCase_ == 1) {
+          return (java.lang.Integer) konstue_;
         }
         return 0;
       }
       /**
        * <code>optional int32 nameId = 1;</code>
        */
-      public Builder setNameId(int value) {
-        valueCase_ = 1;
-        value_ = value;
+      public Builder setNameId(int konstue) {
+        konstueCase_ = 1;
+        konstue_ = konstue;
         
         return this;
       }
@@ -31842,9 +31842,9 @@ public final class JsAstProtoBuf {
        * <code>optional int32 nameId = 1;</code>
        */
       public Builder clearNameId() {
-        if (valueCase_ == 1) {
-          valueCase_ = 0;
-          value_ = null;
+        if (konstueCase_ == 1) {
+          konstueCase_ = 0;
+          konstue_ = null;
           
         }
         return this;
@@ -31854,27 +31854,27 @@ public final class JsAstProtoBuf {
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
       public boolean hasExpression() {
-        return valueCase_ == 2;
+        return konstueCase_ == 2;
       }
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
       public org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression getExpression() {
-        if (valueCase_ == 2) {
-          return (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_;
+        if (konstueCase_ == 2) {
+          return (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_;
         }
         return org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance();
       }
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
-      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        value_ = value;
+        konstue_ = konstue;
 
-        valueCase_ = 2;
+        konstueCase_ = 2;
         return this;
       }
       /**
@@ -31882,33 +31882,33 @@ public final class JsAstProtoBuf {
        */
       public Builder setExpression(
           org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.Builder builderForValue) {
-        value_ = builderForValue.build();
+        konstue_ = builderForValue.build();
 
-        valueCase_ = 2;
+        konstueCase_ = 2;
         return this;
       }
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
-      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (valueCase_ == 2 &&
-            value_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
-          value_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) value_)
-              .mergeFrom(value).buildPartial();
+      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstueCase_ == 2 &&
+            konstue_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
+          konstue_ = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder((org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression) konstue_)
+              .mergeFrom(konstue).buildPartial();
         } else {
-          value_ = value;
+          konstue_ = konstue;
         }
 
-        valueCase_ = 2;
+        konstueCase_ = 2;
         return this;
       }
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
       public Builder clearExpression() {
-        if (valueCase_ == 2) {
-          valueCase_ = 0;
-          value_ = null;
+        if (konstueCase_ == 2) {
+          konstueCase_ = 0;
+          konstue_ = null;
           
         }
         return this;
@@ -31930,11 +31930,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression iterable = 3;</code>
        */
-      public Builder setIterable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setIterable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        iterable_ = value;
+        iterable_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -31952,13 +31952,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression iterable = 3;</code>
        */
-      public Builder mergeIterable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeIterable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             iterable_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           iterable_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(iterable_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(iterable_).mergeFrom(konstue).buildPartial();
         } else {
-          iterable_ = value;
+          iterable_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -31990,11 +31990,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 4;</code>
        */
-      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        body_ = value;
+        body_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -32012,13 +32012,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 4;</code>
        */
-      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             body_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           body_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(konstue).buildPartial();
         } else {
-          body_ = value;
+          body_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -32103,7 +32103,7 @@ public final class JsAstProtoBuf {
     private Try(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -32167,10 +32167,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -32188,7 +32188,7 @@ public final class JsAstProtoBuf {
       public Try parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Try(input, extensionRegistry);
       }
     };
@@ -32326,23 +32326,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try parseFrom(java.io.InputStream input)
@@ -32498,7 +32498,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Try) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -32526,11 +32526,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement tryBlock = 1;</code>
        */
-      public Builder setTryBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setTryBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        tryBlock_ = value;
+        tryBlock_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -32548,13 +32548,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement tryBlock = 1;</code>
        */
-      public Builder mergeTryBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeTryBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             tryBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           tryBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(tryBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(tryBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          tryBlock_ = value;
+          tryBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -32586,11 +32586,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Catch catchBlock = 2;</code>
        */
-      public Builder setCatchBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch value) {
-        if (value == null) {
+      public Builder setCatchBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        catchBlock_ = value;
+        catchBlock_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -32608,13 +32608,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Catch catchBlock = 2;</code>
        */
-      public Builder mergeCatchBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch value) {
+      public Builder mergeCatchBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             catchBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch.getDefaultInstance()) {
           catchBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch.newBuilder(catchBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch.newBuilder(catchBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          catchBlock_ = value;
+          catchBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -32646,11 +32646,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement finallyBlock = 3;</code>
        */
-      public Builder setFinallyBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setFinallyBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        finallyBlock_ = value;
+        finallyBlock_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -32668,13 +32668,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement finallyBlock = 3;</code>
        */
-      public Builder mergeFinallyBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeFinallyBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             finallyBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           finallyBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(finallyBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(finallyBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          finallyBlock_ = value;
+          finallyBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -32750,7 +32750,7 @@ public final class JsAstProtoBuf {
     private Catch(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -32801,10 +32801,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -32822,7 +32822,7 @@ public final class JsAstProtoBuf {
       public Catch parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Catch(input, extensionRegistry);
       }
     };
@@ -32933,23 +32933,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch parseFrom(java.io.InputStream input)
@@ -33092,7 +33092,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Catch) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -33120,11 +33120,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Parameter parameter = 1;</code>
        */
-      public Builder setParameter(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter value) {
-        if (value == null) {
+      public Builder setParameter(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        parameter_ = value;
+        parameter_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -33142,13 +33142,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Parameter parameter = 1;</code>
        */
-      public Builder mergeParameter(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter value) {
+      public Builder mergeParameter(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             parameter_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter.getDefaultInstance()) {
           parameter_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter.newBuilder(parameter_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Parameter.newBuilder(parameter_).mergeFrom(konstue).buildPartial();
         } else {
-          parameter_ = value;
+          parameter_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -33180,11 +33180,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 2;</code>
        */
-      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        body_ = value;
+        body_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -33202,13 +33202,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Statement body = 2;</code>
        */
-      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeBody(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             body_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           body_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(body_).mergeFrom(konstue).buildPartial();
         } else {
-          body_ = value;
+          body_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -33266,7 +33266,7 @@ public final class JsAstProtoBuf {
     private Empty(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
           org.jetbrains.kotlin.protobuf.ByteString.newOutput();
@@ -33290,10 +33290,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -33311,7 +33311,7 @@ public final class JsAstProtoBuf {
       public Empty parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Empty(input, extensionRegistry);
       }
     };
@@ -33359,23 +33359,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty parseFrom(java.io.InputStream input)
@@ -33481,7 +33481,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Empty) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -33548,7 +33548,7 @@ public final class JsAstProtoBuf {
     private SingleLineComment(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -33579,10 +33579,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -33600,7 +33600,7 @@ public final class JsAstProtoBuf {
       public SingleLineComment parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new SingleLineComment(input, extensionRegistry);
       }
     };
@@ -33703,23 +33703,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment parseFrom(java.io.InputStream input)
@@ -33843,7 +33843,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SingleLineComment) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -33899,12 +33899,12 @@ public final class JsAstProtoBuf {
        * <code>required string message = 1;</code>
        */
       public Builder setMessage(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        message_ = value;
+        message_ = konstue;
         
         return this;
       }
@@ -33921,12 +33921,12 @@ public final class JsAstProtoBuf {
        * <code>required string message = 1;</code>
        */
       public Builder setMessageBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        message_ = value;
+        message_ = konstue;
         
         return this;
       }
@@ -33987,7 +33987,7 @@ public final class JsAstProtoBuf {
     private MultiLineComment(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -34018,10 +34018,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -34039,7 +34039,7 @@ public final class JsAstProtoBuf {
       public MultiLineComment parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new MultiLineComment(input, extensionRegistry);
       }
     };
@@ -34142,23 +34142,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment parseFrom(java.io.InputStream input)
@@ -34282,7 +34282,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.MultiLineComment) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -34338,12 +34338,12 @@ public final class JsAstProtoBuf {
        * <code>required string message = 1;</code>
        */
       public Builder setMessage(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        message_ = value;
+        message_ = konstue;
         
         return this;
       }
@@ -34360,12 +34360,12 @@ public final class JsAstProtoBuf {
        * <code>required string message = 1;</code>
        */
       public Builder setMessageBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        message_ = value;
+        message_ = konstue;
         
         return this;
       }
@@ -34641,7 +34641,7 @@ public final class JsAstProtoBuf {
     private Fragment(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -34867,10 +34867,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -34918,7 +34918,7 @@ public final class JsAstProtoBuf {
       public Fragment parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Fragment(input, extensionRegistry);
       }
     };
@@ -35726,23 +35726,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment parseFrom(java.io.InputStream input)
@@ -36190,7 +36190,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -36233,12 +36233,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ImportedModule imported_module = 1;</code>
        */
       public Builder setImportedModule(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureImportedModuleIsMutable();
-        importedModule_.set(index, value);
+        importedModule_.set(index, konstue);
 
         return this;
       }
@@ -36255,12 +36255,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ImportedModule imported_module = 1;</code>
        */
-      public Builder addImportedModule(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule value) {
-        if (value == null) {
+      public Builder addImportedModule(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureImportedModuleIsMutable();
-        importedModule_.add(value);
+        importedModule_.add(konstue);
 
         return this;
       }
@@ -36268,12 +36268,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ImportedModule imported_module = 1;</code>
        */
       public Builder addImportedModule(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureImportedModuleIsMutable();
-        importedModule_.add(index, value);
+        importedModule_.add(index, konstue);
 
         return this;
       }
@@ -36301,10 +36301,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ImportedModule imported_module = 1;</code>
        */
       public Builder addAllImportedModule(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule> konstues) {
         ensureImportedModuleIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, importedModule_);
+            konstues, importedModule_);
 
         return this;
       }
@@ -36358,12 +36358,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Import import_entry = 2;</code>
        */
       public Builder setImportEntry(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureImportEntryIsMutable();
-        importEntry_.set(index, value);
+        importEntry_.set(index, konstue);
 
         return this;
       }
@@ -36380,12 +36380,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Import import_entry = 2;</code>
        */
-      public Builder addImportEntry(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import value) {
-        if (value == null) {
+      public Builder addImportEntry(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureImportEntryIsMutable();
-        importEntry_.add(value);
+        importEntry_.add(konstue);
 
         return this;
       }
@@ -36393,12 +36393,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Import import_entry = 2;</code>
        */
       public Builder addImportEntry(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureImportEntryIsMutable();
-        importEntry_.add(index, value);
+        importEntry_.add(index, konstue);
 
         return this;
       }
@@ -36426,10 +36426,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Import import_entry = 2;</code>
        */
       public Builder addAllImportEntry(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import> konstues) {
         ensureImportEntryIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, importEntry_);
+            konstues, importEntry_);
 
         return this;
       }
@@ -36468,11 +36468,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock declaration_block = 3;</code>
        */
-      public Builder setDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        declarationBlock_ = value;
+        declarationBlock_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -36490,13 +36490,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock declaration_block = 3;</code>
        */
-      public Builder mergeDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergeDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             declarationBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           declarationBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(declarationBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(declarationBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          declarationBlock_ = value;
+          declarationBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -36528,11 +36528,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock export_block = 4;</code>
        */
-      public Builder setExportBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setExportBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        exportBlock_ = value;
+        exportBlock_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -36550,13 +36550,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock export_block = 4;</code>
        */
-      public Builder mergeExportBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergeExportBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             exportBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           exportBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(exportBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(exportBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          exportBlock_ = value;
+          exportBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -36588,11 +36588,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock initializer_block = 5;</code>
        */
-      public Builder setInitializerBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setInitializerBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        initializerBlock_ = value;
+        initializerBlock_ = konstue;
 
         bitField0_ |= 0x00000010;
         return this;
@@ -36610,13 +36610,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock initializer_block = 5;</code>
        */
-      public Builder mergeInitializerBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergeInitializerBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (((bitField0_ & 0x00000010) == 0x00000010) &&
             initializerBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           initializerBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(initializerBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(initializerBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          initializerBlock_ = value;
+          initializerBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000010;
@@ -36663,12 +36663,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.NameBinding name_binding = 6;</code>
        */
       public Builder setNameBinding(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureNameBindingIsMutable();
-        nameBinding_.set(index, value);
+        nameBinding_.set(index, konstue);
 
         return this;
       }
@@ -36685,12 +36685,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.NameBinding name_binding = 6;</code>
        */
-      public Builder addNameBinding(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding value) {
-        if (value == null) {
+      public Builder addNameBinding(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureNameBindingIsMutable();
-        nameBinding_.add(value);
+        nameBinding_.add(konstue);
 
         return this;
       }
@@ -36698,12 +36698,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.NameBinding name_binding = 6;</code>
        */
       public Builder addNameBinding(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureNameBindingIsMutable();
-        nameBinding_.add(index, value);
+        nameBinding_.add(index, konstue);
 
         return this;
       }
@@ -36731,10 +36731,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.NameBinding name_binding = 6;</code>
        */
       public Builder addAllNameBinding(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding> konstues) {
         ensureNameBindingIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, nameBinding_);
+            konstues, nameBinding_);
 
         return this;
       }
@@ -36788,12 +36788,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ClassModel class_model = 7;</code>
        */
       public Builder setClassModel(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureClassModelIsMutable();
-        classModel_.set(index, value);
+        classModel_.set(index, konstue);
 
         return this;
       }
@@ -36810,12 +36810,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ClassModel class_model = 7;</code>
        */
-      public Builder addClassModel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel value) {
-        if (value == null) {
+      public Builder addClassModel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureClassModelIsMutable();
-        classModel_.add(value);
+        classModel_.add(konstue);
 
         return this;
       }
@@ -36823,12 +36823,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ClassModel class_model = 7;</code>
        */
       public Builder addClassModel(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureClassModelIsMutable();
-        classModel_.add(index, value);
+        classModel_.add(index, konstue);
 
         return this;
       }
@@ -36856,10 +36856,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.ClassModel class_model = 7;</code>
        */
       public Builder addAllClassModel(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel> konstues) {
         ensureClassModelIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, classModel_);
+            konstues, classModel_);
 
         return this;
       }
@@ -36913,12 +36913,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression module_expression = 8;</code>
        */
       public Builder setModuleExpression(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureModuleExpressionIsMutable();
-        moduleExpression_.set(index, value);
+        moduleExpression_.set(index, konstue);
 
         return this;
       }
@@ -36935,12 +36935,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression module_expression = 8;</code>
        */
-      public Builder addModuleExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder addModuleExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureModuleExpressionIsMutable();
-        moduleExpression_.add(value);
+        moduleExpression_.add(konstue);
 
         return this;
       }
@@ -36948,12 +36948,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression module_expression = 8;</code>
        */
       public Builder addModuleExpression(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureModuleExpressionIsMutable();
-        moduleExpression_.add(index, value);
+        moduleExpression_.add(index, konstue);
 
         return this;
       }
@@ -36981,10 +36981,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Expression module_expression = 8;</code>
        */
       public Builder addAllModuleExpression(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression> konstues) {
         ensureModuleExpressionIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, moduleExpression_);
+            konstues, moduleExpression_);
 
         return this;
       }
@@ -37038,12 +37038,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.InlineModule inline_module = 9;</code>
        */
       public Builder setInlineModule(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureInlineModuleIsMutable();
-        inlineModule_.set(index, value);
+        inlineModule_.set(index, konstue);
 
         return this;
       }
@@ -37060,12 +37060,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.InlineModule inline_module = 9;</code>
        */
-      public Builder addInlineModule(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule value) {
-        if (value == null) {
+      public Builder addInlineModule(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureInlineModuleIsMutable();
-        inlineModule_.add(value);
+        inlineModule_.add(konstue);
 
         return this;
       }
@@ -37073,12 +37073,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.InlineModule inline_module = 9;</code>
        */
       public Builder addInlineModule(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureInlineModuleIsMutable();
-        inlineModule_.add(index, value);
+        inlineModule_.add(index, konstue);
 
         return this;
       }
@@ -37106,10 +37106,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.InlineModule inline_module = 9;</code>
        */
       public Builder addAllInlineModule(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule> konstues) {
         ensureInlineModuleIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, inlineModule_);
+            konstues, inlineModule_);
 
         return this;
       }
@@ -37176,12 +37176,12 @@ public final class JsAstProtoBuf {
        * <code>optional string package_fqn = 10;</code>
        */
       public Builder setPackageFqn(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000200;
-        packageFqn_ = value;
+        packageFqn_ = konstue;
         
         return this;
       }
@@ -37198,12 +37198,12 @@ public final class JsAstProtoBuf {
        * <code>optional string package_fqn = 10;</code>
        */
       public Builder setPackageFqnBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000200;
-        packageFqn_ = value;
+        packageFqn_ = konstue;
         
         return this;
       }
@@ -37224,11 +37224,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement tests_invocation = 11;</code>
        */
-      public Builder setTestsInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setTestsInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        testsInvocation_ = value;
+        testsInvocation_ = konstue;
 
         bitField0_ |= 0x00000400;
         return this;
@@ -37246,13 +37246,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement tests_invocation = 11;</code>
        */
-      public Builder mergeTestsInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeTestsInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000400) == 0x00000400) &&
             testsInvocation_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           testsInvocation_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(testsInvocation_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(testsInvocation_).mergeFrom(konstue).buildPartial();
         } else {
-          testsInvocation_ = value;
+          testsInvocation_ = konstue;
         }
 
         bitField0_ |= 0x00000400;
@@ -37284,11 +37284,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement main_invocation = 12;</code>
        */
-      public Builder setMainInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
-        if (value == null) {
+      public Builder setMainInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        mainInvocation_ = value;
+        mainInvocation_ = konstue;
 
         bitField0_ |= 0x00000800;
         return this;
@@ -37306,13 +37306,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Statement main_invocation = 12;</code>
        */
-      public Builder mergeMainInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement value) {
+      public Builder mergeMainInvocation(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement konstue) {
         if (((bitField0_ & 0x00000800) == 0x00000800) &&
             mainInvocation_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.getDefaultInstance()) {
           mainInvocation_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(mainInvocation_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Statement.newBuilder(mainInvocation_).mergeFrom(konstue).buildPartial();
         } else {
-          mainInvocation_ = value;
+          mainInvocation_ = konstue;
         }
 
         bitField0_ |= 0x00000800;
@@ -37359,12 +37359,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.InlinedLocalDeclarations inlined_local_declarations = 13;</code>
        */
       public Builder setInlinedLocalDeclarations(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureInlinedLocalDeclarationsIsMutable();
-        inlinedLocalDeclarations_.set(index, value);
+        inlinedLocalDeclarations_.set(index, konstue);
 
         return this;
       }
@@ -37381,12 +37381,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.InlinedLocalDeclarations inlined_local_declarations = 13;</code>
        */
-      public Builder addInlinedLocalDeclarations(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations value) {
-        if (value == null) {
+      public Builder addInlinedLocalDeclarations(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureInlinedLocalDeclarationsIsMutable();
-        inlinedLocalDeclarations_.add(value);
+        inlinedLocalDeclarations_.add(konstue);
 
         return this;
       }
@@ -37394,12 +37394,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.InlinedLocalDeclarations inlined_local_declarations = 13;</code>
        */
       public Builder addInlinedLocalDeclarations(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureInlinedLocalDeclarationsIsMutable();
-        inlinedLocalDeclarations_.add(index, value);
+        inlinedLocalDeclarations_.add(index, konstue);
 
         return this;
       }
@@ -37427,10 +37427,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.InlinedLocalDeclarations inlined_local_declarations = 13;</code>
        */
       public Builder addAllInlinedLocalDeclarations(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations> konstues) {
         ensureInlinedLocalDeclarationsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, inlinedLocalDeclarations_);
+            konstues, inlinedLocalDeclarations_);
 
         return this;
       }
@@ -37484,12 +37484,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.IrClassModel ir_class_model = 14;</code>
        */
       public Builder setIrClassModel(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureIrClassModelIsMutable();
-        irClassModel_.set(index, value);
+        irClassModel_.set(index, konstue);
 
         return this;
       }
@@ -37506,12 +37506,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.IrClassModel ir_class_model = 14;</code>
        */
-      public Builder addIrClassModel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel value) {
-        if (value == null) {
+      public Builder addIrClassModel(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureIrClassModelIsMutable();
-        irClassModel_.add(value);
+        irClassModel_.add(konstue);
 
         return this;
       }
@@ -37519,12 +37519,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.IrClassModel ir_class_model = 14;</code>
        */
       public Builder addIrClassModel(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureIrClassModelIsMutable();
-        irClassModel_.add(index, value);
+        irClassModel_.add(index, konstue);
 
         return this;
       }
@@ -37552,10 +37552,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.IrClassModel ir_class_model = 14;</code>
        */
       public Builder addAllIrClassModel(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel> konstues) {
         ensureIrClassModelIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, irClassModel_);
+            konstues, irClassModel_);
 
         return this;
       }
@@ -37622,12 +37622,12 @@ public final class JsAstProtoBuf {
        * <code>optional string dts = 15;</code>
        */
       public Builder setDts(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00004000;
-        dts_ = value;
+        dts_ = konstue;
         
         return this;
       }
@@ -37644,12 +37644,12 @@ public final class JsAstProtoBuf {
        * <code>optional string dts = 15;</code>
        */
       public Builder setDtsBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00004000;
-        dts_ = value;
+        dts_ = konstue;
         
         return this;
       }
@@ -37670,9 +37670,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 suite_function = 16;</code>
        */
-      public Builder setSuiteFunction(int value) {
+      public Builder setSuiteFunction(int konstue) {
         bitField0_ |= 0x00008000;
-        suiteFunction_ = value;
+        suiteFunction_ = konstue;
         
         return this;
       }
@@ -37716,18 +37716,18 @@ public final class JsAstProtoBuf {
        * <code>repeated int32 definitions = 17;</code>
        */
       public Builder setDefinitions(
-          int index, int value) {
+          int index, int konstue) {
         ensureDefinitionsIsMutable();
-        definitions_.set(index, value);
+        definitions_.set(index, konstue);
         
         return this;
       }
       /**
        * <code>repeated int32 definitions = 17;</code>
        */
-      public Builder addDefinitions(int value) {
+      public Builder addDefinitions(int konstue) {
         ensureDefinitionsIsMutable();
-        definitions_.add(value);
+        definitions_.add(konstue);
         
         return this;
       }
@@ -37735,10 +37735,10 @@ public final class JsAstProtoBuf {
        * <code>repeated int32 definitions = 17;</code>
        */
       public Builder addAllDefinitions(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureDefinitionsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, definitions_);
+            konstues, definitions_);
         
         return this;
       }
@@ -37768,11 +37768,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock polyfills = 18;</code>
        */
-      public Builder setPolyfills(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setPolyfills(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        polyfills_ = value;
+        polyfills_ = konstue;
 
         bitField0_ |= 0x00020000;
         return this;
@@ -37790,13 +37790,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock polyfills = 18;</code>
        */
-      public Builder mergePolyfills(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergePolyfills(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (((bitField0_ & 0x00020000) == 0x00020000) &&
             polyfills_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           polyfills_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(polyfills_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(polyfills_).mergeFrom(konstue).buildPartial();
         } else {
-          polyfills_ = value;
+          polyfills_ = konstue;
         }
 
         bitField0_ |= 0x00020000;
@@ -37842,18 +37842,18 @@ public final class JsAstProtoBuf {
        * <code>repeated int32 optionalCrossModuleImports = 19;</code>
        */
       public Builder setOptionalCrossModuleImports(
-          int index, int value) {
+          int index, int konstue) {
         ensureOptionalCrossModuleImportsIsMutable();
-        optionalCrossModuleImports_.set(index, value);
+        optionalCrossModuleImports_.set(index, konstue);
         
         return this;
       }
       /**
        * <code>repeated int32 optionalCrossModuleImports = 19;</code>
        */
-      public Builder addOptionalCrossModuleImports(int value) {
+      public Builder addOptionalCrossModuleImports(int konstue) {
         ensureOptionalCrossModuleImportsIsMutable();
-        optionalCrossModuleImports_.add(value);
+        optionalCrossModuleImports_.add(konstue);
         
         return this;
       }
@@ -37861,10 +37861,10 @@ public final class JsAstProtoBuf {
        * <code>repeated int32 optionalCrossModuleImports = 19;</code>
        */
       public Builder addAllOptionalCrossModuleImports(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureOptionalCrossModuleImportsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, optionalCrossModuleImports_);
+            konstues, optionalCrossModuleImports_);
         
         return this;
       }
@@ -37938,7 +37938,7 @@ public final class JsAstProtoBuf {
     private InlinedLocalDeclarations(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -37981,10 +37981,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -38002,7 +38002,7 @@ public final class JsAstProtoBuf {
       public InlinedLocalDeclarations parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new InlinedLocalDeclarations(input, extensionRegistry);
       }
     };
@@ -38109,23 +38109,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations parseFrom(java.io.InputStream input)
@@ -38264,7 +38264,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlinedLocalDeclarations) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -38292,9 +38292,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 tag = 1;</code>
        */
-      public Builder setTag(int value) {
+      public Builder setTag(int konstue) {
         bitField0_ |= 0x00000001;
-        tag_ = value;
+        tag_ = konstue;
         
         return this;
       }
@@ -38324,11 +38324,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock block = 2;</code>
        */
-      public Builder setBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        block_ = value;
+        block_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -38346,13 +38346,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock block = 2;</code>
        */
-      public Builder mergeBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergeBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             block_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           block_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(block_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(block_).mergeFrom(konstue).buildPartial();
         } else {
-          block_ = value;
+          block_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -38437,7 +38437,7 @@ public final class JsAstProtoBuf {
     private ImportedModule(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -38485,10 +38485,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -38506,7 +38506,7 @@ public final class JsAstProtoBuf {
       public ImportedModule parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ImportedModule(input, extensionRegistry);
       }
     };
@@ -38638,23 +38638,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule parseFrom(java.io.InputStream input)
@@ -38804,7 +38804,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ImportedModule) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -38832,9 +38832,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 external_name_id = 1;</code>
        */
-      public Builder setExternalNameId(int value) {
+      public Builder setExternalNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        externalNameId_ = value;
+        externalNameId_ = konstue;
         
         return this;
       }
@@ -38864,9 +38864,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 internal_name_id = 2;</code>
        */
-      public Builder setInternalNameId(int value) {
+      public Builder setInternalNameId(int konstue) {
         bitField0_ |= 0x00000002;
-        internalNameId_ = value;
+        internalNameId_ = konstue;
         
         return this;
       }
@@ -38896,11 +38896,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression plain_reference = 3;</code>
        */
-      public Builder setPlainReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setPlainReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        plainReference_ = value;
+        plainReference_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -38918,13 +38918,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.Expression plain_reference = 3;</code>
        */
-      public Builder mergePlainReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergePlainReference(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             plainReference_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           plainReference_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(plainReference_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(plainReference_).mergeFrom(konstue).buildPartial();
         } else {
-          plainReference_ = value;
+          plainReference_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -39000,7 +39000,7 @@ public final class JsAstProtoBuf {
     private Import(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -39043,10 +39043,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -39064,7 +39064,7 @@ public final class JsAstProtoBuf {
       public Import parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Import(input, extensionRegistry);
       }
     };
@@ -39171,23 +39171,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import parseFrom(java.io.InputStream input)
@@ -39326,7 +39326,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Import) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -39354,9 +39354,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 signature_id = 1;</code>
        */
-      public Builder setSignatureId(int value) {
+      public Builder setSignatureId(int konstue) {
         bitField0_ |= 0x00000001;
-        signatureId_ = value;
+        signatureId_ = konstue;
         
         return this;
       }
@@ -39386,11 +39386,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
-      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
-        if (value == null) {
+      public Builder setExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        expression_ = value;
+        expression_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -39408,13 +39408,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Expression expression = 2;</code>
        */
-      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression value) {
+      public Builder mergeExpression(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             expression_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.getDefaultInstance()) {
           expression_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(expression_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Expression.newBuilder(expression_).mergeFrom(konstue).buildPartial();
         } else {
-          expression_ = value;
+          expression_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -39490,7 +39490,7 @@ public final class JsAstProtoBuf {
     private NameBinding(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -39525,10 +39525,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -39546,7 +39546,7 @@ public final class JsAstProtoBuf {
       public NameBinding parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new NameBinding(input, extensionRegistry);
       }
     };
@@ -39649,23 +39649,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding parseFrom(java.io.InputStream input)
@@ -39800,7 +39800,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameBinding) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -39828,9 +39828,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 signature_id = 1;</code>
        */
-      public Builder setSignatureId(int value) {
+      public Builder setSignatureId(int konstue) {
         bitField0_ |= 0x00000001;
-        signatureId_ = value;
+        signatureId_ = konstue;
         
         return this;
       }
@@ -39860,9 +39860,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 nameId = 2;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000002;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -39958,7 +39958,7 @@ public final class JsAstProtoBuf {
     private ClassModel(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -40027,10 +40027,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
@@ -40051,7 +40051,7 @@ public final class JsAstProtoBuf {
       public ClassModel parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ClassModel(input, extensionRegistry);
       }
     };
@@ -40214,23 +40214,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel parseFrom(java.io.InputStream input)
@@ -40393,7 +40393,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.ClassModel) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -40421,9 +40421,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 name_id = 1;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -40453,9 +40453,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 super_name_id = 2;</code>
        */
-      public Builder setSuperNameId(int value) {
+      public Builder setSuperNameId(int konstue) {
         bitField0_ |= 0x00000002;
-        superNameId_ = value;
+        superNameId_ = konstue;
         
         return this;
       }
@@ -40499,18 +40499,18 @@ public final class JsAstProtoBuf {
        * <code>repeated int32 interface_name_id = 4;</code>
        */
       public Builder setInterfaceNameId(
-          int index, int value) {
+          int index, int konstue) {
         ensureInterfaceNameIdIsMutable();
-        interfaceNameId_.set(index, value);
+        interfaceNameId_.set(index, konstue);
         
         return this;
       }
       /**
        * <code>repeated int32 interface_name_id = 4;</code>
        */
-      public Builder addInterfaceNameId(int value) {
+      public Builder addInterfaceNameId(int konstue) {
         ensureInterfaceNameIdIsMutable();
-        interfaceNameId_.add(value);
+        interfaceNameId_.add(konstue);
         
         return this;
       }
@@ -40518,10 +40518,10 @@ public final class JsAstProtoBuf {
        * <code>repeated int32 interface_name_id = 4;</code>
        */
       public Builder addAllInterfaceNameId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureInterfaceNameIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, interfaceNameId_);
+            konstues, interfaceNameId_);
         
         return this;
       }
@@ -40551,11 +40551,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock post_declaration_block = 3;</code>
        */
-      public Builder setPostDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setPostDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        postDeclarationBlock_ = value;
+        postDeclarationBlock_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -40573,13 +40573,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock post_declaration_block = 3;</code>
        */
-      public Builder mergePostDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergePostDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             postDeclarationBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           postDeclarationBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(postDeclarationBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(postDeclarationBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          postDeclarationBlock_ = value;
+          postDeclarationBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -40677,7 +40677,7 @@ public final class JsAstProtoBuf {
     private IrClassModel(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -40754,10 +40754,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -40778,7 +40778,7 @@ public final class JsAstProtoBuf {
       public IrClassModel parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new IrClassModel(input, extensionRegistry);
       }
     };
@@ -40947,23 +40947,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel parseFrom(java.io.InputStream input)
@@ -41132,7 +41132,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.IrClassModel) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -41160,9 +41160,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 name_id = 1;</code>
        */
-      public Builder setNameId(int value) {
+      public Builder setNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        nameId_ = value;
+        nameId_ = konstue;
         
         return this;
       }
@@ -41206,18 +41206,18 @@ public final class JsAstProtoBuf {
        * <code>repeated int32 super_classes = 2;</code>
        */
       public Builder setSuperClasses(
-          int index, int value) {
+          int index, int konstue) {
         ensureSuperClassesIsMutable();
-        superClasses_.set(index, value);
+        superClasses_.set(index, konstue);
         
         return this;
       }
       /**
        * <code>repeated int32 super_classes = 2;</code>
        */
-      public Builder addSuperClasses(int value) {
+      public Builder addSuperClasses(int konstue) {
         ensureSuperClassesIsMutable();
-        superClasses_.add(value);
+        superClasses_.add(konstue);
         
         return this;
       }
@@ -41225,10 +41225,10 @@ public final class JsAstProtoBuf {
        * <code>repeated int32 super_classes = 2;</code>
        */
       public Builder addAllSuperClasses(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureSuperClassesIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, superClasses_);
+            konstues, superClasses_);
         
         return this;
       }
@@ -41258,11 +41258,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock pre_declaration_block = 3;</code>
        */
-      public Builder setPreDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setPreDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        preDeclarationBlock_ = value;
+        preDeclarationBlock_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -41280,13 +41280,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock pre_declaration_block = 3;</code>
        */
-      public Builder mergePreDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergePreDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             preDeclarationBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           preDeclarationBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(preDeclarationBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(preDeclarationBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          preDeclarationBlock_ = value;
+          preDeclarationBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -41318,11 +41318,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock post_declaration_block = 4;</code>
        */
-      public Builder setPostDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
-        if (value == null) {
+      public Builder setPostDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        postDeclarationBlock_ = value;
+        postDeclarationBlock_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -41340,13 +41340,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.CompositeBlock post_declaration_block = 4;</code>
        */
-      public Builder mergePostDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock value) {
+      public Builder mergePostDeclarationBlock(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             postDeclarationBlock_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.getDefaultInstance()) {
           postDeclarationBlock_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(postDeclarationBlock_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.CompositeBlock.newBuilder(postDeclarationBlock_).mergeFrom(konstue).buildPartial();
         } else {
-          postDeclarationBlock_ = value;
+          postDeclarationBlock_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -41422,7 +41422,7 @@ public final class JsAstProtoBuf {
     private InlineModule(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -41457,10 +41457,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -41478,7 +41478,7 @@ public final class JsAstProtoBuf {
       public InlineModule parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new InlineModule(input, extensionRegistry);
       }
     };
@@ -41581,23 +41581,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule parseFrom(java.io.InputStream input)
@@ -41732,7 +41732,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineModule) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -41760,9 +41760,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 signature_id = 1;</code>
        */
-      public Builder setSignatureId(int value) {
+      public Builder setSignatureId(int konstue) {
         bitField0_ |= 0x00000001;
-        signatureId_ = value;
+        signatureId_ = konstue;
         
         return this;
       }
@@ -41792,9 +41792,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 expression_id = 2;</code>
        */
-      public Builder setExpressionId(int value) {
+      public Builder setExpressionId(int konstue) {
         bitField0_ |= 0x00000002;
-        expressionId_ = value;
+        expressionId_ = konstue;
         
         return this;
       }
@@ -41869,7 +41869,7 @@ public final class JsAstProtoBuf {
     private StringTable(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -41903,10 +41903,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -41927,7 +41927,7 @@ public final class JsAstProtoBuf {
       public StringTable parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new StringTable(input, extensionRegistry);
       }
     };
@@ -42017,23 +42017,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable parseFrom(java.io.InputStream input)
@@ -42157,7 +42157,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -42206,12 +42206,12 @@ public final class JsAstProtoBuf {
        * <code>repeated string entry = 1;</code>
        */
       public Builder setEntry(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureEntryIsMutable();
-        entry_.set(index, value);
+        entry_.set(index, konstue);
         
         return this;
       }
@@ -42219,12 +42219,12 @@ public final class JsAstProtoBuf {
        * <code>repeated string entry = 1;</code>
        */
       public Builder addEntry(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureEntryIsMutable();
-        entry_.add(value);
+        entry_.add(konstue);
         
         return this;
       }
@@ -42232,10 +42232,10 @@ public final class JsAstProtoBuf {
        * <code>repeated string entry = 1;</code>
        */
       public Builder addAllEntry(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureEntryIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, entry_);
+            konstues, entry_);
         
         return this;
       }
@@ -42252,12 +42252,12 @@ public final class JsAstProtoBuf {
        * <code>repeated string entry = 1;</code>
        */
       public Builder addEntryBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureEntryIsMutable();
-        entry_.add(value);
+        entry_.add(konstue);
         
         return this;
       }
@@ -42318,7 +42318,7 @@ public final class JsAstProtoBuf {
     private NameTable(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -42351,10 +42351,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -42375,7 +42375,7 @@ public final class JsAstProtoBuf {
       public NameTable parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new NameTable(input, extensionRegistry);
       }
     };
@@ -42472,23 +42472,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable parseFrom(java.io.InputStream input)
@@ -42618,7 +42618,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -42661,12 +42661,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Name entry = 1;</code>
        */
       public Builder setEntry(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.set(index, value);
+        entry_.set(index, konstue);
 
         return this;
       }
@@ -42683,12 +42683,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Name entry = 1;</code>
        */
-      public Builder addEntry(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name value) {
-        if (value == null) {
+      public Builder addEntry(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.add(value);
+        entry_.add(konstue);
 
         return this;
       }
@@ -42696,12 +42696,12 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Name entry = 1;</code>
        */
       public Builder addEntry(
-          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureEntryIsMutable();
-        entry_.add(index, value);
+        entry_.add(index, konstue);
 
         return this;
       }
@@ -42729,10 +42729,10 @@ public final class JsAstProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.serialization.js.ast.Name entry = 1;</code>
        */
       public Builder addAllEntry(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name> konstues) {
         ensureEntryIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, entry_);
+            konstues, entry_);
 
         return this;
       }
@@ -42842,7 +42842,7 @@ public final class JsAstProtoBuf {
     private Name(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -42895,22 +42895,22 @@ public final class JsAstProtoBuf {
             }
             case 40: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SpecialFunction value = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SpecialFunction.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SpecialFunction konstue = org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SpecialFunction.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFieldsCodedOutput.writeRawVarint32(tag);
                 unknownFieldsCodedOutput.writeRawVarint32(rawValue);
               } else {
                 bitField0_ |= 0x00000010;
-                specialFunction_ = value;
+                specialFunction_ = konstue;
               }
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -42928,7 +42928,7 @@ public final class JsAstProtoBuf {
       public Name parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Name(input, extensionRegistry);
       }
     };
@@ -43102,23 +43102,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name parseFrom(java.io.InputStream input)
@@ -43282,7 +43282,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Name) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -43310,9 +43310,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required bool temporary = 1;</code>
        */
-      public Builder setTemporary(boolean value) {
+      public Builder setTemporary(boolean konstue) {
         bitField0_ |= 0x00000001;
-        temporary_ = value;
+        temporary_ = konstue;
         
         return this;
       }
@@ -43342,9 +43342,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 identifier = 2;</code>
        */
-      public Builder setIdentifier(int value) {
+      public Builder setIdentifier(int konstue) {
         bitField0_ |= 0x00000002;
-        identifier_ = value;
+        identifier_ = konstue;
         
         return this;
       }
@@ -43374,11 +43374,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.LocalAlias local_name_id = 3;</code>
        */
-      public Builder setLocalNameId(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias value) {
-        if (value == null) {
+      public Builder setLocalNameId(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        localNameId_ = value;
+        localNameId_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -43396,13 +43396,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.LocalAlias local_name_id = 3;</code>
        */
-      public Builder mergeLocalNameId(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias value) {
+      public Builder mergeLocalNameId(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             localNameId_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias.getDefaultInstance()) {
           localNameId_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias.newBuilder(localNameId_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias.newBuilder(localNameId_).mergeFrom(konstue).buildPartial();
         } else {
-          localNameId_ = value;
+          localNameId_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -43434,9 +43434,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional bool imported = 4 [default = false];</code>
        */
-      public Builder setImported(boolean value) {
+      public Builder setImported(boolean konstue) {
         bitField0_ |= 0x00000008;
-        imported_ = value;
+        imported_ = konstue;
         
         return this;
       }
@@ -43466,12 +43466,12 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.serialization.js.ast.SpecialFunction special_function = 5;</code>
        */
-      public Builder setSpecialFunction(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SpecialFunction value) {
-        if (value == null) {
+      public Builder setSpecialFunction(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.SpecialFunction konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000010;
-        specialFunction_ = value;
+        specialFunction_ = konstue;
         
         return this;
       }
@@ -43545,7 +43545,7 @@ public final class JsAstProtoBuf {
     private LocalAlias(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -43580,10 +43580,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -43601,7 +43601,7 @@ public final class JsAstProtoBuf {
       public LocalAlias parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new LocalAlias(input, extensionRegistry);
       }
     };
@@ -43700,23 +43700,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias parseFrom(java.io.InputStream input)
@@ -43847,7 +43847,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.LocalAlias) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -43875,9 +43875,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>required int32 local_name_id = 1;</code>
        */
-      public Builder setLocalNameId(int value) {
+      public Builder setLocalNameId(int konstue) {
         bitField0_ |= 0x00000001;
-        localNameId_ = value;
+        localNameId_ = konstue;
         
         return this;
       }
@@ -43907,9 +43907,9 @@ public final class JsAstProtoBuf {
       /**
        * <code>optional int32 tag = 2;</code>
        */
-      public Builder setTag(int value) {
+      public Builder setTag(int konstue) {
         bitField0_ |= 0x00000002;
-        tag_ = value;
+        tag_ = konstue;
         
         return this;
       }
@@ -43992,7 +43992,7 @@ public final class JsAstProtoBuf {
     private Chunk(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -44056,10 +44056,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -44077,7 +44077,7 @@ public final class JsAstProtoBuf {
       public Chunk parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Chunk(input, extensionRegistry);
       }
     };
@@ -44215,23 +44215,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Chunk parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Chunk parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Chunk parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Chunk parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Chunk parseFrom(java.io.InputStream input)
@@ -44387,7 +44387,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Chunk parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Chunk) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -44415,11 +44415,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.StringTable string_table = 1;</code>
        */
-      public Builder setStringTable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable value) {
-        if (value == null) {
+      public Builder setStringTable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        stringTable_ = value;
+        stringTable_ = konstue;
 
         bitField0_ |= 0x00000001;
         return this;
@@ -44437,13 +44437,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.StringTable string_table = 1;</code>
        */
-      public Builder mergeStringTable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable value) {
+      public Builder mergeStringTable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable konstue) {
         if (((bitField0_ & 0x00000001) == 0x00000001) &&
             stringTable_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable.getDefaultInstance()) {
           stringTable_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable.newBuilder(stringTable_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.StringTable.newBuilder(stringTable_).mergeFrom(konstue).buildPartial();
         } else {
-          stringTable_ = value;
+          stringTable_ = konstue;
         }
 
         bitField0_ |= 0x00000001;
@@ -44475,11 +44475,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.NameTable name_table = 2;</code>
        */
-      public Builder setNameTable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable value) {
-        if (value == null) {
+      public Builder setNameTable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        nameTable_ = value;
+        nameTable_ = konstue;
 
         bitField0_ |= 0x00000002;
         return this;
@@ -44497,13 +44497,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.NameTable name_table = 2;</code>
        */
-      public Builder mergeNameTable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable value) {
+      public Builder mergeNameTable(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable konstue) {
         if (((bitField0_ & 0x00000002) == 0x00000002) &&
             nameTable_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable.getDefaultInstance()) {
           nameTable_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable.newBuilder(nameTable_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.NameTable.newBuilder(nameTable_).mergeFrom(konstue).buildPartial();
         } else {
-          nameTable_ = value;
+          nameTable_ = konstue;
         }
 
         bitField0_ |= 0x00000002;
@@ -44535,11 +44535,11 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Fragment fragment = 3;</code>
        */
-      public Builder setFragment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment value) {
-        if (value == null) {
+      public Builder setFragment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        fragment_ = value;
+        fragment_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -44557,13 +44557,13 @@ public final class JsAstProtoBuf {
       /**
        * <code>required .org.jetbrains.kotlin.serialization.js.ast.Fragment fragment = 3;</code>
        */
-      public Builder mergeFragment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment value) {
+      public Builder mergeFragment(org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             fragment_ != org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment.getDefaultInstance()) {
           fragment_ =
-            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment.newBuilder(fragment_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.Fragment.newBuilder(fragment_).mergeFrom(konstue).buildPartial();
         } else {
-          fragment_ = value;
+          fragment_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -44640,7 +44640,7 @@ public final class JsAstProtoBuf {
     private InlineData(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -44674,10 +44674,10 @@ public final class JsAstProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -44698,7 +44698,7 @@ public final class JsAstProtoBuf {
       public InlineData parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new InlineData(input, extensionRegistry);
       }
     };
@@ -44788,23 +44788,23 @@ public final class JsAstProtoBuf {
 
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineData parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineData parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineData parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineData parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineData parseFrom(java.io.InputStream input)
@@ -44928,7 +44928,7 @@ public final class JsAstProtoBuf {
         org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineData parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf.InlineData) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -44977,12 +44977,12 @@ public final class JsAstProtoBuf {
        * <code>repeated string inline_function_tags = 1;</code>
        */
       public Builder setInlineFunctionTags(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureInlineFunctionTagsIsMutable();
-        inlineFunctionTags_.set(index, value);
+        inlineFunctionTags_.set(index, konstue);
         
         return this;
       }
@@ -44990,12 +44990,12 @@ public final class JsAstProtoBuf {
        * <code>repeated string inline_function_tags = 1;</code>
        */
       public Builder addInlineFunctionTags(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureInlineFunctionTagsIsMutable();
-        inlineFunctionTags_.add(value);
+        inlineFunctionTags_.add(konstue);
         
         return this;
       }
@@ -45003,10 +45003,10 @@ public final class JsAstProtoBuf {
        * <code>repeated string inline_function_tags = 1;</code>
        */
       public Builder addAllInlineFunctionTags(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureInlineFunctionTagsIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, inlineFunctionTags_);
+            konstues, inlineFunctionTags_);
         
         return this;
       }
@@ -45023,12 +45023,12 @@ public final class JsAstProtoBuf {
        * <code>repeated string inline_function_tags = 1;</code>
        */
       public Builder addInlineFunctionTagsBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureInlineFunctionTagsIsMutable();
-        inlineFunctionTags_.add(value);
+        inlineFunctionTags_.add(konstue);
         
         return this;
       }

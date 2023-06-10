@@ -28,7 +28,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
         strings.getStringIndex(file.name)
 
     override fun readClassExtensions(v: KmClassVisitor, proto: ProtoBuf.Class, c: ReadContext) {
-        val extension = v.visitExtensions(KlibClassExtensionVisitor.TYPE) as? KlibClassExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibClassExtensionVisitor.TYPE) as? KlibClassExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.classAnnotation).forEach { annotation ->
             extension.visitAnnotation(annotation.readAnnotation(c.strings))
@@ -40,25 +40,25 @@ internal class KlibMetadataExtensions : MetadataExtensions {
             extension.visitFile(c.getSourceFile(it))
         }
         proto.enumEntryList.forEach { entryProto ->
-            val ordinal = entryProto.getExtensionOrNull(KlibMetadataProtoBuf.enumEntryOrdinal)
-            val name = c[entryProto.name]
-            val uniqId = entryProto.getExtensionOrNull(KlibMetadataProtoBuf.enumEntryUniqId)?.readUniqId()
-            val annotations = entryProto.getExtension(KlibMetadataProtoBuf.enumEntryAnnotation).map { it.readAnnotation(c.strings) }
+            konst ordinal = entryProto.getExtensionOrNull(KlibMetadataProtoBuf.enumEntryOrdinal)
+            konst name = c[entryProto.name]
+            konst uniqId = entryProto.getExtensionOrNull(KlibMetadataProtoBuf.enumEntryUniqId)?.readUniqId()
+            konst annotations = entryProto.getExtension(KlibMetadataProtoBuf.enumEntryAnnotation).map { it.readAnnotation(c.strings) }
             extension.visitEnumEntry(KlibEnumEntry(name, uniqId, ordinal, annotations.toMutableList()))
         }
     }
 
     override fun readPackageExtensions(v: KmPackageVisitor, proto: ProtoBuf.Package, c: ReadContext) {
-        val extension = v.visitExtensions(KlibPackageExtensionVisitor.TYPE) as? KlibPackageExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibPackageExtensionVisitor.TYPE) as? KlibPackageExtensionVisitor ?: return
 
         proto.getExtensionOrNull(KlibMetadataProtoBuf.packageFqName)?.let {
-            val fqName = (c.strings as NameResolverImpl).getPackageFqName(it)
+            konst fqName = (c.strings as NameResolverImpl).getPackageFqName(it)
             extension.visitFqName(fqName)
         }
     }
 
     override fun readModuleFragmentExtensions(v: KmModuleFragmentVisitor, proto: ProtoBuf.PackageFragment, c: ReadContext) {
-        val extension = v.visitExtensions(KlibModuleFragmentExtensionVisitor.TYPE) as? KlibModuleFragmentExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibModuleFragmentExtensionVisitor.TYPE) as? KlibModuleFragmentExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.packageFragmentFiles)
             .map { c.getSourceFile(it) }
@@ -70,7 +70,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
     }
 
     override fun readFunctionExtensions(v: KmFunctionVisitor, proto: ProtoBuf.Function, c: ReadContext) {
-        val extension = v.visitExtensions(KlibFunctionExtensionVisitor.TYPE) as? KlibFunctionExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibFunctionExtensionVisitor.TYPE) as? KlibFunctionExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.functionAnnotation).forEach { annotation ->
             extension.visitAnnotation(annotation.readAnnotation(c.strings))
@@ -79,13 +79,13 @@ internal class KlibMetadataExtensions : MetadataExtensions {
             extension.visitUniqId(descriptorUniqId.readUniqId())
         }
         proto.getExtensionOrNull(KlibMetadataProtoBuf.functionFile)?.let {
-            val file = c.getSourceFile(it)
+            konst file = c.getSourceFile(it)
             extension.visitFile(file)
         }
     }
 
     override fun readPropertyExtensions(v: KmPropertyVisitor, proto: ProtoBuf.Property, c: ReadContext) {
-        val extension = v.visitExtensions(KlibPropertyExtensionVisitor.TYPE) as? KlibPropertyExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibPropertyExtensionVisitor.TYPE) as? KlibPropertyExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.propertyAnnotation).forEach { annotation ->
             extension.visitAnnotation(annotation.readAnnotation(c.strings))
@@ -100,13 +100,13 @@ internal class KlibMetadataExtensions : MetadataExtensions {
             extension.visitUniqId(descriptorUniqId.readUniqId())
         }
         proto.getExtensionOrNull(KlibMetadataProtoBuf.propertyFile)?.let(extension::visitFile)
-        proto.getExtensionOrNull(KlibMetadataProtoBuf.compileTimeValue)?.let { value ->
-            value.readAnnotationArgument(c.strings)?.let { extension.visitCompileTimeValue(it) }
+        proto.getExtensionOrNull(KlibMetadataProtoBuf.compileTimeValue)?.let { konstue ->
+            konstue.readAnnotationArgument(c.strings)?.let { extension.visitCompileTimeValue(it) }
         }
     }
 
     override fun readConstructorExtensions(v: KmConstructorVisitor, proto: ProtoBuf.Constructor, c: ReadContext) {
-        val extension = v.visitExtensions(KlibConstructorExtensionVisitor.TYPE) as? KlibConstructorExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibConstructorExtensionVisitor.TYPE) as? KlibConstructorExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.constructorAnnotation).forEach { annotation ->
             extension.visitAnnotation(annotation.readAnnotation(c.strings))
@@ -117,7 +117,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
     }
 
     override fun readTypeParameterExtensions(v: KmTypeParameterVisitor, proto: ProtoBuf.TypeParameter, c: ReadContext) {
-        val extension = v.visitExtensions(KlibTypeParameterExtensionVisitor.TYPE) as? KlibTypeParameterExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibTypeParameterExtensionVisitor.TYPE) as? KlibTypeParameterExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.typeParameterAnnotation).forEach { annotation ->
             extension.visitAnnotation(annotation.readAnnotation(c.strings))
@@ -128,7 +128,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
     }
 
     override fun readTypeExtensions(v: KmTypeVisitor, proto: ProtoBuf.Type, c: ReadContext) {
-        val extension = v.visitExtensions(KlibTypeExtensionVisitor.TYPE) as? KlibTypeExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibTypeExtensionVisitor.TYPE) as? KlibTypeExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.typeAnnotation).forEach { annotation ->
             extension.visitAnnotation(annotation.readAnnotation(c.strings))
@@ -136,7 +136,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
     }
 
     override fun readTypeAliasExtensions(v: KmTypeAliasVisitor, proto: ProtoBuf.TypeAlias, c: ReadContext) {
-        val extension = v.visitExtensions(KlibTypeAliasExtensionVisitor.TYPE) as? KlibTypeAliasExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibTypeAliasExtensionVisitor.TYPE) as? KlibTypeAliasExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.typeAliasUniqId).let { descriptorUniqId ->
             extension.visitUniqId(descriptorUniqId.readUniqId())
@@ -144,7 +144,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
     }
 
     override fun readValueParameterExtensions(v: KmValueParameterVisitor, proto: ProtoBuf.ValueParameter, c: ReadContext) {
-        val extension = v.visitExtensions(KlibValueParameterExtensionVisitor.TYPE) as? KlibValueParameterExtensionVisitor ?: return
+        konst extension = v.visitExtensions(KlibValueParameterExtensionVisitor.TYPE) as? KlibValueParameterExtensionVisitor ?: return
 
         proto.getExtension(KlibMetadataProtoBuf.parameterAnnotation).forEach { annotation ->
             extension.visitAnnotation(annotation.readAnnotation(c.strings))
@@ -169,14 +169,14 @@ internal class KlibMetadataExtensions : MetadataExtensions {
             }
 
             override fun visitFile(file: KlibSourceFile) {
-                val fileIdx = c.getIndexOf(file)
+                konst fileIdx = c.getIndexOf(file)
                 proto.setExtension(KlibMetadataProtoBuf.classFile, fileIdx)
             }
 
             override fun visitEnumEntry(entry: KlibEnumEntry) {
-                val entryIndex = proto.enumEntryList.indexOfFirst { it.name == c[entry.name] }
-                val entryAnnotationsProto = entry.annotations.map { it.writeAnnotation(c.strings).build() }
-                val entryProto = ProtoBuf.EnumEntry.newBuilder()
+                konst entryIndex = proto.enumEntryList.indexOfFirst { it.name == c[entry.name] }
+                konst entryAnnotationsProto = entry.annotations.map { it.writeAnnotation(c.strings).build() }
+                konst entryProto = ProtoBuf.EnumEntry.newBuilder()
                     .setName(c[entry.name])
                     .setExtension(KlibMetadataProtoBuf.enumEntryAnnotation, entryAnnotationsProto)
                 entry.uniqId?.let { uniqId ->
@@ -202,7 +202,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
         if (type != KlibPackageExtensionVisitor.TYPE) return null
         return object : KlibPackageExtensionVisitor() {
             override fun visitFqName(name: String) {
-                val nameIdx = (c.strings as StringTableImpl).getPackageFqNameIndex(FqName(name))
+                konst nameIdx = (c.strings as StringTableImpl).getPackageFqNameIndex(FqName(name))
                 proto.setExtension(KlibMetadataProtoBuf.packageFqName, nameIdx)
             }
         }
@@ -216,7 +216,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
         if (type != KlibModuleFragmentExtensionVisitor.TYPE) return null
         return object : KlibModuleFragmentExtensionVisitor() {
             override fun visitFile(file: KlibSourceFile) {
-                val fileIdx = c.getIndexOf(file)
+                konst fileIdx = c.getIndexOf(file)
                 proto.addExtension(KlibMetadataProtoBuf.packageFragmentFiles, fileIdx)
             }
 
@@ -225,7 +225,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
             }
 
             override fun visitClassName(className: ClassName) {
-                val classNameIdx = (c.strings as StringTableImpl).getQualifiedClassNameIndex(ClassId.fromString(className))
+                konst classNameIdx = (c.strings as StringTableImpl).getQualifiedClassNameIndex(ClassId.fromString(className))
                 proto.addExtension(KlibMetadataProtoBuf.className, classNameIdx)
             }
         }
@@ -253,7 +253,7 @@ internal class KlibMetadataExtensions : MetadataExtensions {
             }
 
             override fun visitFile(file: KlibSourceFile) {
-                val index = c.getIndexOf(file)
+                konst index = c.getIndexOf(file)
                 proto.setExtension(KlibMetadataProtoBuf.functionFile, index)
             }
         }
@@ -301,10 +301,10 @@ internal class KlibMetadataExtensions : MetadataExtensions {
                 )
             }
 
-            override fun visitCompileTimeValue(value: KmAnnotationArgument) {
+            override fun visitCompileTimeValue(konstue: KmAnnotationArgument) {
                 proto.setExtension(
                     KlibMetadataProtoBuf.compileTimeValue,
-                    value.writeAnnotationArgument(c.strings).build()
+                    konstue.writeAnnotationArgument(c.strings).build()
                 )
             }
         }

@@ -2,7 +2,7 @@ expect open class C1 {
   expect constructor() /* primary */
   expect fun f(): String
 
-  expect val p: Int
+  expect konst p: Int
     get
 
 }
@@ -27,7 +27,7 @@ open class C1 {
     return "O"
   }
 
-  val p: Int
+  konst p: Int
     field = 42
     get
 

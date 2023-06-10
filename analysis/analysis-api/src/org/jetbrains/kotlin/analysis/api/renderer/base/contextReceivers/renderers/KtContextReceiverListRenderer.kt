@@ -18,7 +18,7 @@ public interface KtContextReceiverListRenderer {
     public object AS_SOURCE : KtContextReceiverListRenderer {
         context(KtAnalysisSession, KtContextReceiversRenderer, KtTypeRenderer)
         override fun renderContextReceivers(owner: KtContextReceiversOwner, printer: PrettyPrinter) {
-            val contextReceivers = owner.contextReceivers
+            konst contextReceivers = owner.contextReceivers
             if (contextReceivers.isEmpty()) return
 
             printer {

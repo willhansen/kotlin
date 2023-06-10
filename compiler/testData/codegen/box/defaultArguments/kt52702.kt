@@ -3,11 +3,11 @@
 // after they are initialized.
 
 inline fun spray() {
-    val a = Any()
-    val b = Any()
-    val c = Any()
-    val d = Any()
-    val e = Any()
+    konst a = Any()
+    konst b = Any()
+    konst c = Any()
+    konst d = Any()
+    konst e = Any()
 }
 
 inline fun f(block: () -> String = { "OK" }): String = block()

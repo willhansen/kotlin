@@ -24,7 +24,7 @@ class MppTestsIT : KGPBaseTest() {
                 freeArgs = listOf("--continue"), // to ensure that all the tests are run
             )
         ) {
-            val nativeTarget = MPPNativeTargets.current
+            konst nativeTarget = MPPNativeTargets.current
 
             build(":allTests") {
                 assertTasksExecuted(

@@ -109,7 +109,7 @@ public class ClassPreloadingUtils {
     }
 
     /**
-     * @return a map of name to resources. Each value is either a ResourceData if there's only one instance (in the vast majority of cases)
+     * @return a map of name to resources. Each konstue is either a ResourceData if there's only one instance (in the vast majority of cases)
      * or a non-empty ArrayList of ResourceData if there's many
      */
     private static Map<String, Object> loadAllClassesFromJars(
@@ -181,9 +181,9 @@ public class ClassPreloadingUtils {
             }
         }
 
-        for (Object value : resources.values()) {
-            if (value instanceof ArrayList) {
-                ((ArrayList) value).trimToSize();
+        for (Object konstue : resources.konstues()) {
+            if (konstue instanceof ArrayList) {
+                ((ArrayList) konstue).trimToSize();
             }
         }
 

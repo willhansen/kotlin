@@ -32,12 +32,12 @@ import kotlin.experimental.ExperimentalNativeApi
 internal abstract class SpecialToken {
 
     /**
-     * Returns the type of the token, may return following values:
+     * Returns the type of the token, may return following konstues:
      * TOK_CHARCLASS  - token representing character class;
      * TOK_QUANTIFIER - token representing quantifier;
      * TOK_NAMED_GROUP - token representing named capturing group;
      */
-    abstract val type: Type
+    abstract konst type: Type
 
     enum class Type {
         CHARCLASS,
@@ -46,10 +46,10 @@ internal abstract class SpecialToken {
     }
 }
 
-internal class Lexer(val patternString: String, flags: Int) {
+internal class Lexer(konst patternString: String, flags: Int) {
 
     // The property is set in the init block after some transformations over the pattern string.
-    private val pattern: CharArray
+    private konst pattern: CharArray
 
     var flags = flags
         private set
@@ -71,9 +71,9 @@ internal class Lexer(val patternString: String, flags: Int) {
     /** When in [Mode.ESCAPE] mode, this field will save the previous one */
     private var savedMode = Mode.PATTERN
 
-    fun setModeWithReread(value: Mode) {
-        if(value == Mode.PATTERN || value == Mode.RANGE) {
-            mode = value
+    fun setModeWithReread(konstue: Mode) {
+        if(konstue == Mode.PATTERN || konstue == Mode.RANGE) {
+            mode = konstue
         }
         if (mode == Mode.PATTERN) {
             reread()
@@ -126,13 +126,13 @@ internal class Lexer(val patternString: String, flags: Int) {
 
     // Character checks ================================================================================================
     /** Returns true, if current token is special, i.e. quantifier, or other compound token. */
-    val isSpecial: Boolean      get() = curSpecialToken != null
-    val isQuantifier: Boolean   get() = isSpecial && curSpecialToken!!.type == SpecialToken.Type.QUANTIFIER
-    val isNextSpecial: Boolean  get() = lookAheadSpecialToken != null
+    konst isSpecial: Boolean      get() = curSpecialToken != null
+    konst isQuantifier: Boolean   get() = isSpecial && curSpecialToken!!.type == SpecialToken.Type.QUANTIFIER
+    konst isNextSpecial: Boolean  get() = lookAheadSpecialToken != null
 
     private fun Int.isSurrogatePair() : Boolean {
-        val high = (this ushr 16).toChar()
-        val low = this.toChar()
+        konst high = (this ushr 16).toChar()
+        konst low = this.toChar()
         return high.isHighSurrogate() && low.isLowSurrogate()
     }
 
@@ -180,7 +180,7 @@ internal class Lexer(val patternString: String, flags: Int) {
 
     /** Returns current special token and moves string index to the next one */
     fun nextSpecial(): SpecialToken? {
-        val res = curSpecialToken
+        konst res = curSpecialToken
         movePointer()
         return res
     }
@@ -201,7 +201,7 @@ internal class Lexer(val patternString: String, flags: Int) {
      * Returns the next character index to read and moves pointer to the next one.
      * If comments flag is on this method will skip comments and whitespaces.
      *
-     * The following actions are equivalent if comments flag is off:
+     * The following actions are equikonstent if comments flag is off:
      * currentChar = pattern[index++] == currentChar = pattern[nextIndex]
      */
     private fun nextIndex(): Int {
@@ -215,7 +215,7 @@ internal class Lexer(val patternString: String, flags: Int) {
 
     /** Skips comments and whitespaces */
     private fun skipComments(): Int {
-        val length = pattern.size - 2
+        konst length = pattern.size - 2
         do {
             while (index < length && pattern[index].isWhitespace()) {
                 index++
@@ -236,12 +236,12 @@ internal class Lexer(val patternString: String, flags: Int) {
      */
     @OptIn(ExperimentalNativeApi::class)
     private fun nextCodePoint(): Int {
-        val high = pattern[nextIndex()] // nextIndex skips comments and whitespaces if comments flag is on.
+        konst high = pattern[nextIndex()] // nextIndex skips comments and whitespaces if comments flag is on.
         if (high.isHighSurrogate()) {
             // Low and high chars may be delimited by spaces.
-            val lowExpectedIndex = prevNonWhitespaceIndex + 1
+            konst lowExpectedIndex = prevNonWhitespaceIndex + 1
             if (lowExpectedIndex < pattern.size) {
-                val low = pattern[lowExpectedIndex]
+                konst low = pattern[lowExpectedIndex]
                 if (low.isLowSurrogate()) {
                     nextIndex()
                     return Char.toCodePoint(high, low)
@@ -288,7 +288,7 @@ internal class Lexer(val patternString: String, flags: Int) {
     private fun processInEscapeMode(): Boolean {
         if (lookAhead == '\\'.toInt()) {
             // Need not care about supplementary code points here.
-            val lookAheadChar: Char = if (index < pattern.size) pattern[nextIndex()] else '\u0000'
+            konst lookAheadChar: Char = if (index < pattern.size) pattern[nextIndex()] else '\u0000'
             lookAhead = lookAheadChar.toInt()
 
             if (lookAheadChar == 'E') {
@@ -311,7 +311,7 @@ internal class Lexer(val patternString: String, flags: Int) {
         if (lookAhead.isSurrogatePair()) {
             return false
         }
-        val lookAheadChar = lookAhead.toChar()
+        konst lookAheadChar = lookAhead.toChar()
 
         if (lookAheadChar == '\\') {
             return processEscapedChar()
@@ -321,7 +321,7 @@ internal class Lexer(val patternString: String, flags: Int) {
         when (lookAheadChar) {
             // Quantifier (*, +, ?).
             '+', '*', '?' -> {
-                val mode = if (index < pattern.size) pattern[index] else '*'
+                konst mode = if (index < pattern.size) pattern[index] else '*'
                 // look at the next character to determine if the mode is greedy, reluctant or possessive.
                 when (mode) {
                     '+' -> { lookAhead = lookAhead or Lexer.QMOD_POSSESSIVE; nextIndex() }
@@ -369,7 +369,7 @@ internal class Lexer(val patternString: String, flags: Int) {
                                     lookAhead = CHAR_POS_LOOKBEHIND; nextIndex()
                                 }
                                 else -> {
-                                    val name = readGroupName()
+                                    konst name = readGroupName()
                                     lookAhead = CHAR_NAMED_GROUP
                                     lookAheadSpecialToken = NamedGroup(name)
                                 }
@@ -411,7 +411,7 @@ internal class Lexer(val patternString: String, flags: Int) {
         if (lookAhead.isSurrogatePair()) {
             return false
         }
-        val lookAheadChar = lookAhead.toChar()
+        konst lookAheadChar = lookAhead.toChar()
 
         when (lookAheadChar) {
             '\\' -> return processEscapedChar()
@@ -426,19 +426,19 @@ internal class Lexer(val patternString: String, flags: Int) {
 
     /** Processes an escaped (\x) character in any mode. Returns whether we need to reread the character or not */
     private fun processEscapedChar() : Boolean {
-        val escapedCharIndex = prevNonWhitespaceIndex + 1
+        konst escapedCharIndex = prevNonWhitespaceIndex + 1
         if (escapedCharIndex >= pattern.size - 2) {
             throw PatternSyntaxException("Trailing \\", patternString, curTokenIndex)
         }
         index = escapedCharIndex
-        val lookAheadChar = pattern[nextIndex()]
+        konst lookAheadChar = pattern[nextIndex()]
         lookAhead = lookAheadChar.toInt()
 
         when (lookAheadChar) {
             // Character class.
             'P', 'p' -> {
-                val cs = parseCharClassName()
-                val negative = lookAheadChar == 'P'
+                konst cs = parseCharClassName()
+                konst negative = lookAheadChar == 'P'
 
                 lookAheadSpecialToken = AbstractCharClass.getPredefinedClass(cs, negative)
                 lookAhead = 0
@@ -480,9 +480,9 @@ internal class Lexer(val patternString: String, flags: Int) {
             // \k<name>
             'k' -> {
                 if (pattern[nextIndex()] != '<') {
-                    throw PatternSyntaxException("Invalid syntax for named group back reference", patternString, curTokenIndex)
+                    throw PatternSyntaxException("Inkonstid syntax for named group back reference", patternString, curTokenIndex)
                 }
-                val name = readGroupName()
+                konst name = readGroupName()
                 lookAhead = CHAR_NAMED_GROUP_REF
                 lookAheadSpecialToken = NamedGroup(name)
             }
@@ -521,11 +521,11 @@ internal class Lexer(val patternString: String, flags: Int) {
     private fun processQuantifier(): Quantifier {
         @OptIn(ExperimentalNativeApi::class)
         assert(lookAhead == '{'.toInt())
-        val sb = StringBuilder(4)
+        konst sb = StringBuilder(4)
         var min = -1
         var max = -1
 
-        // Obtain a min value.
+        // Obtain a min konstue.
         var char: Char = if (index < pattern.size) {
             pattern[nextIndex()]
         } else {
@@ -535,7 +535,7 @@ internal class Lexer(val patternString: String, flags: Int) {
 
             if (char == ',' && min < 0) {
                 try {
-                    val minParsed = sb.toString().toInt()
+                    konst minParsed = sb.toString().toInt()
                     min = if (minParsed >= 0) minParsed else throw PatternSyntaxException("Incorrect Quantifier Syntax", patternString, curTokenIndex)
                     sb.setLength(0)
                 } catch (nfe: NumberFormatException) {
@@ -551,10 +551,10 @@ internal class Lexer(val patternString: String, flags: Int) {
             throw PatternSyntaxException("Incorrect Quantifier Syntax", patternString, curTokenIndex)
         }
 
-        // Obtain a max value, if it exists
+        // Obtain a max konstue, if it exists
         if (sb.isNotEmpty()) {
             try {
-                val maxParsed = sb.toString().toInt()
+                konst maxParsed = sb.toString().toInt()
                 max = if (maxParsed >= 0) maxParsed else throw PatternSyntaxException("Incorrect Quantifier Syntax", patternString, curTokenIndex)
                 if (min < 0) {
                     min = max
@@ -568,7 +568,7 @@ internal class Lexer(val patternString: String, flags: Int) {
             throw PatternSyntaxException("Incorrect Quantifier Syntax", patternString, curTokenIndex)
         }
 
-        val mod = if (index < pattern.size) pattern[index] else '*'
+        konst mod = if (index < pattern.size) pattern[index] else '*'
         when (mod) {
             '+' -> { lookAhead = Lexer.QUANT_COMP_P; nextIndex() }
             '?' -> { lookAhead = Lexer.QUANT_COMP_R; nextIndex() }
@@ -584,7 +584,7 @@ internal class Lexer(val patternString: String, flags: Int) {
         var result = flags
 
         while (index < pattern.size) {
-            val char = pattern[index]
+            konst char = pattern[index]
             when (char) {
                 '-' -> {
                     if (!positive) {
@@ -656,7 +656,7 @@ internal class Lexer(val patternString: String, flags: Int) {
 
     /** Parse character classes names and verifies correction of the syntax */
     private fun parseCharClassName(): String {
-        val sb = StringBuilder(10)
+        konst sb = StringBuilder(10)
         if (index < pattern.size - 2) {
             // one symbol family
             if (pattern[index] != '{') {
@@ -673,7 +673,7 @@ internal class Lexer(val patternString: String, flags: Int) {
         }
         if (sb.isEmpty()) throw PatternSyntaxException("Empty character family", patternString, curTokenIndex)
 
-        val res = sb.toString()
+        konst res = sb.toString()
         return when {
             res.length == 1 -> "Is$res"
             res.length > 3 && (res.startsWith("Is") || res.startsWith("In")) -> res.substring(2)
@@ -683,8 +683,8 @@ internal class Lexer(val patternString: String, flags: Int) {
 
     /** Process hexadecimal integer. */
     private fun readHex(radixName: String, max: Int): Int {
-        val builder = StringBuilder(max)
-        val length = pattern.size - 2
+        konst builder = StringBuilder(max)
+        konst length = pattern.size - 2
         var i = 0
         while (i < max && index < length) {
             builder.append(pattern[nextIndex()])
@@ -695,18 +695,18 @@ internal class Lexer(val patternString: String, flags: Int) {
                 return builder.toString().toInt(16)
             } catch (e: NumberFormatException) {}
         }
-        throw PatternSyntaxException("Invalid $radixName escape sequence", patternString, curTokenIndex)
+        throw PatternSyntaxException("Inkonstid $radixName escape sequence", patternString, curTokenIndex)
     }
 
     /** Process octal integer. */
     private fun readOctals(): Int {
-        val length = pattern.size - 2
+        konst length = pattern.size - 2
         var result = 0
         var digit = digitOf(pattern[index], 8)
         if (digit == -1) {
-            throw PatternSyntaxException("Invalid octal escape sequence", patternString, curTokenIndex)
+            throw PatternSyntaxException("Inkonstid octal escape sequence", patternString, curTokenIndex)
         }
-        val max = if (digit > 3) 2 else 3
+        konst max = if (digit > 3) 2 else 3
         var i = 0
         while (i < max && index < length && digit != -1) {
             result *= 8
@@ -724,77 +724,77 @@ internal class Lexer(val patternString: String, flags: Int) {
             throw PatternSyntaxException("Capturing group name should start with a letter", patternString, curTokenIndex)
         }
 
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         do {
             sb.append(char)
             char = pattern[nextIndex()]
         } while (char in 'a'..'z' || char in 'A'..'Z' || char in '0'..'9')
 
         if (char != '>') {
-            throw PatternSyntaxException("Invalid group name syntax", patternString, curTokenIndex)
+            throw PatternSyntaxException("Inkonstid group name syntax", patternString, curTokenIndex)
         }
         return sb.toString()
     }
 
     companion object {
         // Special characters.
-        val CHAR_DOLLAR               = 0xe0000000.toInt() or '$'.toInt()
-        val CHAR_RIGHT_PARENTHESIS    = 0xe0000000.toInt() or ')'.toInt()
-        val CHAR_LEFT_SQUARE_BRACKET  = 0xe0000000.toInt() or '['.toInt()
-        val CHAR_RIGHT_SQUARE_BRACKET = 0xe0000000.toInt() or ']'.toInt()
-        val CHAR_CARET                = 0xe0000000.toInt() or '^'.toInt()
-        val CHAR_VERTICAL_BAR         = 0xe0000000.toInt() or '|'.toInt()
-        val CHAR_AMPERSAND            = 0xe0000000.toInt() or '&'.toInt()
-        val CHAR_HYPHEN               = 0xe0000000.toInt() or '-'.toInt()
-        val CHAR_DOT                  = 0xe0000000.toInt() or '.'.toInt()
-        val CHAR_LEFT_PARENTHESIS     = 0x80000000.toInt() or '('.toInt()
-        val CHAR_NAMED_GROUP          = 0x90000000.toInt() or '('.toInt()
-        val CHAR_NONCAP_GROUP         = 0xc0000000.toInt() or '('.toInt()
-        val CHAR_POS_LOOKAHEAD        = 0xe0000000.toInt() or '('.toInt()
-        val CHAR_NEG_LOOKAHEAD        = 0xf0000000.toInt() or '('.toInt()
-        val CHAR_POS_LOOKBEHIND       = 0xf8000000.toInt() or '('.toInt()
-        val CHAR_NEG_LOOKBEHIND       = 0xfc000000.toInt() or '('.toInt()
-        val CHAR_ATOMIC_GROUP         = 0xfe000000.toInt() or '('.toInt()
-        val CHAR_FLAGS                = 0xff000000.toInt() or '('.toInt()
-        val CHAR_START_OF_INPUT       = 0x80000000.toInt() or 'A'.toInt()
-        val CHAR_WORD_BOUND           = 0x80000000.toInt() or 'b'.toInt()
-        val CHAR_NONWORD_BOUND        = 0x80000000.toInt() or 'B'.toInt()
-        val CHAR_PREVIOUS_MATCH       = 0x80000000.toInt() or 'G'.toInt()
-        val CHAR_NAMED_GROUP_REF      = 0x80000000.toInt() or 'k'.toInt()
-        val CHAR_END_OF_INPUT         = 0x80000000.toInt() or 'z'.toInt()
-        val CHAR_END_OF_LINE          = 0x80000000.toInt() or 'Z'.toInt()
-        val CHAR_LINEBREAK            = 0x80000000.toInt() or 'R'.toInt()
+        konst CHAR_DOLLAR               = 0xe0000000.toInt() or '$'.toInt()
+        konst CHAR_RIGHT_PARENTHESIS    = 0xe0000000.toInt() or ')'.toInt()
+        konst CHAR_LEFT_SQUARE_BRACKET  = 0xe0000000.toInt() or '['.toInt()
+        konst CHAR_RIGHT_SQUARE_BRACKET = 0xe0000000.toInt() or ']'.toInt()
+        konst CHAR_CARET                = 0xe0000000.toInt() or '^'.toInt()
+        konst CHAR_VERTICAL_BAR         = 0xe0000000.toInt() or '|'.toInt()
+        konst CHAR_AMPERSAND            = 0xe0000000.toInt() or '&'.toInt()
+        konst CHAR_HYPHEN               = 0xe0000000.toInt() or '-'.toInt()
+        konst CHAR_DOT                  = 0xe0000000.toInt() or '.'.toInt()
+        konst CHAR_LEFT_PARENTHESIS     = 0x80000000.toInt() or '('.toInt()
+        konst CHAR_NAMED_GROUP          = 0x90000000.toInt() or '('.toInt()
+        konst CHAR_NONCAP_GROUP         = 0xc0000000.toInt() or '('.toInt()
+        konst CHAR_POS_LOOKAHEAD        = 0xe0000000.toInt() or '('.toInt()
+        konst CHAR_NEG_LOOKAHEAD        = 0xf0000000.toInt() or '('.toInt()
+        konst CHAR_POS_LOOKBEHIND       = 0xf8000000.toInt() or '('.toInt()
+        konst CHAR_NEG_LOOKBEHIND       = 0xfc000000.toInt() or '('.toInt()
+        konst CHAR_ATOMIC_GROUP         = 0xfe000000.toInt() or '('.toInt()
+        konst CHAR_FLAGS                = 0xff000000.toInt() or '('.toInt()
+        konst CHAR_START_OF_INPUT       = 0x80000000.toInt() or 'A'.toInt()
+        konst CHAR_WORD_BOUND           = 0x80000000.toInt() or 'b'.toInt()
+        konst CHAR_NONWORD_BOUND        = 0x80000000.toInt() or 'B'.toInt()
+        konst CHAR_PREVIOUS_MATCH       = 0x80000000.toInt() or 'G'.toInt()
+        konst CHAR_NAMED_GROUP_REF      = 0x80000000.toInt() or 'k'.toInt()
+        konst CHAR_END_OF_INPUT         = 0x80000000.toInt() or 'z'.toInt()
+        konst CHAR_END_OF_LINE          = 0x80000000.toInt() or 'Z'.toInt()
+        konst CHAR_LINEBREAK            = 0x80000000.toInt() or 'R'.toInt()
 
         // Quantifier modes.
-        val QMOD_GREEDY     = 0xe0000000.toInt()
-        val QMOD_RELUCTANT  = 0xc0000000.toInt()
-        val QMOD_POSSESSIVE = 0x80000000.toInt()
+        konst QMOD_GREEDY     = 0xe0000000.toInt()
+        konst QMOD_RELUCTANT  = 0xc0000000.toInt()
+        konst QMOD_POSSESSIVE = 0x80000000.toInt()
 
         // Quantifiers.
-        val QUANT_STAR   = QMOD_GREEDY or '*'.toInt()
-        val QUANT_STAR_P = QMOD_POSSESSIVE or '*'.toInt()
-        val QUANT_STAR_R = QMOD_RELUCTANT or '*'.toInt()
-        val QUANT_PLUS   = QMOD_GREEDY or '+'.toInt()
-        val QUANT_PLUS_P = QMOD_POSSESSIVE or '+'.toInt()
-        val QUANT_PLUS_R = QMOD_RELUCTANT or '+'.toInt()
-        val QUANT_ALT    = QMOD_GREEDY or '?'.toInt()
-        val QUANT_ALT_P  = QMOD_POSSESSIVE or '?'.toInt()
-        val QUANT_ALT_R  = QMOD_RELUCTANT or '?'.toInt()
-        val QUANT_COMP   = QMOD_GREEDY or '{'.toInt()
-        val QUANT_COMP_P = QMOD_POSSESSIVE or '{'.toInt()
-        val QUANT_COMP_R = QMOD_RELUCTANT or '{'.toInt()
+        konst QUANT_STAR   = QMOD_GREEDY or '*'.toInt()
+        konst QUANT_STAR_P = QMOD_POSSESSIVE or '*'.toInt()
+        konst QUANT_STAR_R = QMOD_RELUCTANT or '*'.toInt()
+        konst QUANT_PLUS   = QMOD_GREEDY or '+'.toInt()
+        konst QUANT_PLUS_P = QMOD_POSSESSIVE or '+'.toInt()
+        konst QUANT_PLUS_R = QMOD_RELUCTANT or '+'.toInt()
+        konst QUANT_ALT    = QMOD_GREEDY or '?'.toInt()
+        konst QUANT_ALT_P  = QMOD_POSSESSIVE or '?'.toInt()
+        konst QUANT_ALT_R  = QMOD_RELUCTANT or '?'.toInt()
+        konst QUANT_COMP   = QMOD_GREEDY or '{'.toInt()
+        konst QUANT_COMP_P = QMOD_POSSESSIVE or '{'.toInt()
+        konst QUANT_COMP_R = QMOD_RELUCTANT or '{'.toInt()
 
         /** Returns true if [ch] is a plain token. */
         fun isLetter(ch: Int): Boolean {
-            // All supplementary codepoints have integer value that is >= 0.
+            // All supplementary codepoints have integer konstue that is >= 0.
             return ch >= 0
         }
 
         @OptIn(ExperimentalNativeApi::class)
         private fun String.codePointAt(index: Int): Int {
-            val high = this[index]
+            konst high = this[index]
             if (high.isHighSurrogate() && index + 1 < this.length) {
-                val low = this[index + 1]
+                konst low = this[index + 1]
                 if (low.isLowSurrogate()) {
                     return Char.toCodePoint(high, low)
                 }
@@ -804,9 +804,9 @@ internal class Lexer(val patternString: String, flags: Int) {
 
         // Decomposition ===============================================================================================
         // Maximum length of decomposition.
-        val MAX_DECOMPOSITION_LENGTH = 4
+        konst MAX_DECOMPOSITION_LENGTH = 4
         // Maximum length of Hangul decomposition. Note that MAX_HANGUL_DECOMPOSITION_LENGTH <= MAX_DECOMPOSITION_LENGTH.
-        val MAX_HANGUL_DECOMPOSITION_LENGTH = 3
+        konst MAX_HANGUL_DECOMPOSITION_LENGTH = 3
 
         /*
          * Following constants are needed for Hangul canonical decomposition.
@@ -814,15 +814,15 @@ internal class Lexer(val patternString: String, flags: Int) {
          * to description at http://www.unicode.org/versions/Unicode4.0.0/ch03.pdf
          * "3.12 Conjoining Jamo Behavior"
          */
-        const val SBase = 0xAC00
-        const val LBase = 0x1100
-        const val VBase = 0x1161
-        const val TBase = 0x11A7
-        const val SCount = 11172
-        const val LCount = 19
-        const val VCount = 21
-        const val TCount = 28
-        const val NCount = 588
+        const konst SBase = 0xAC00
+        const konst LBase = 0x1100
+        const konst VBase = 0x1161
+        const konst TBase = 0x11A7
+        const konst SCount = 11172
+        const konst LCount = 19
+        const konst VCount = 21
+        const konst TCount = 28
+        const konst NCount = 588
 
         // Access to the decomposition tables. =========================================================================
         /** Gets canonical class for given codepoint from decomposition mappings table. */
@@ -845,13 +845,13 @@ internal class Lexer(val patternString: String, flags: Int) {
          */
         @OptIn(ExperimentalNativeApi::class)
         fun normalize(input: String): String {
-            val inputChars = input.toCharArray()
-            val inputLength = inputChars.size
+            konst inputChars = input.toCharArray()
+            konst inputLength = inputChars.size
             var inputCodePointsIndex = 0
             var decompHangulIndex = 0
 
             //codePoints of input
-            val inputCodePoints = IntArray(inputLength)
+            konst inputCodePoints = IntArray(inputLength)
 
             //result of canonical decomposition of input
             var resCodePoints = IntArray(inputLength * MAX_DECOMPOSITION_LENGTH)
@@ -863,10 +863,10 @@ internal class Lexer(val patternString: String, flags: Int) {
             var decomp: IntArray?
 
             //result of canonical and Hangul decomposition of input
-            val decompHangul: IntArray
+            konst decompHangul: IntArray
 
             //result of canonical decomposition of input in UTF-16 encoding
-            val result = StringBuilder()
+            konst result = StringBuilder()
 
             var i = 0
             while (i < inputLength) {
@@ -887,7 +887,7 @@ internal class Lexer(val patternString: String, flags: Int) {
             decompHangul = IntArray(resCodePoints.size)
             @Suppress("NAME_SHADOWING")
             for (i in 0..resCodePointsIndex - 1) {
-                val curSymb = resCodePoints[i]
+                konst curSymb = resCodePoints[i]
 
                 decomp = getHangulDecomposition(curSymb)
                 if (decomp == null) {
@@ -915,7 +915,7 @@ internal class Lexer(val patternString: String, flags: Int) {
          * Rearrange codepoints in [inputInts] according to canonical order. Return an array with rearranged codepoints.
          */
         fun getCanonicalOrder(inputInts: IntArray, length: Int): IntArray {
-            val inputLength = if (length < inputInts.size)
+            konst inputLength = if (length < inputInts.size)
                 length
             else
                 inputInts.size
@@ -927,8 +927,8 @@ internal class Lexer(val patternString: String, flags: Int) {
              */
             for (i in 1..inputLength - 1) {
                 var j = i - 1
-                val iCanonicalClass = getCanonicalClass(inputInts[i])
-                val ch: Int
+                konst iCanonicalClass = getCanonicalClass(inputInts[i])
+                konst ch: Int
 
                 if (iCanonicalClass == 0) {
                     continue
@@ -958,15 +958,15 @@ internal class Lexer(val patternString: String, flags: Int) {
          * according to http://www.unicode.org/versions/Unicode4.0.0/ch03.pdf "3.12 Conjoining Jamo Behavior".
          */
         fun getHangulDecomposition(ch: Int): IntArray? {
-            val SIndex = ch - SBase
+            konst SIndex = ch - SBase
 
             if (SIndex < 0 || SIndex >= SCount) {
                 return null
             } else {
-                val L = LBase + SIndex / NCount
-                val V = VBase + SIndex % NCount / TCount
+                konst L = LBase + SIndex / NCount
+                konst V = VBase + SIndex % NCount / TCount
                 var T = SIndex % TCount
-                val decomp: IntArray
+                konst decomp: IntArray
 
                 if (T == 0) {
                     decomp = intArrayOf(L, V)

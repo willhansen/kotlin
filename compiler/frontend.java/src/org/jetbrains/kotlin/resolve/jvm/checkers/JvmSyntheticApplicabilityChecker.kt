@@ -27,9 +27,9 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 class JvmSyntheticApplicabilityChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val annotation = (descriptor as? PropertyDescriptor)?.delegateField?.annotations?.findAnnotation(JVM_SYNTHETIC_ANNOTATION_FQ_NAME)
+        konst annotation = (descriptor as? PropertyDescriptor)?.delegateField?.annotations?.findAnnotation(JVM_SYNTHETIC_ANNOTATION_FQ_NAME)
         if (annotation != null) {
-            val annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(annotation) ?: return
+            konst annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(annotation) ?: return
             context.trace.report(ErrorsJvm.JVM_SYNTHETIC_ON_DELEGATE.on(annotationEntry))
         }
     }

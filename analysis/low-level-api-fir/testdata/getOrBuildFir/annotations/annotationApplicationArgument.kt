@@ -1,4 +1,4 @@
-public annotation class Annotation(val name: String)
+public annotation class Annotation(konst name: String)
 
 @Annotation(<expr>"y"</expr>)
 fun x() {

@@ -31,7 +31,7 @@ inline fun <reified T : IrElement> T.deepCopyWithSymbols(
     createCopier: (SymbolRemapper, TypeRemapper) -> DeepCopyIrTreeWithSymbols = ::DeepCopyIrTreeWithSymbols
 ): T {
     acceptVoid(symbolRemapper)
-    val typeRemapper = DeepCopyTypeRemapper(symbolRemapper)
+    konst typeRemapper = DeepCopyTypeRemapper(symbolRemapper)
     return transform(createCopier(symbolRemapper, typeRemapper), null).patchDeclarationParents(initialParent) as T
 }
 
@@ -52,9 +52,9 @@ interface SymbolRenamer {
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 open class DeepCopyIrTreeWithSymbols(
-    private val symbolRemapper: SymbolRemapper,
-    private val typeRemapper: TypeRemapper,
-    private val symbolRenamer: SymbolRenamer
+    private konst symbolRemapper: SymbolRemapper,
+    private konst typeRemapper: TypeRemapper,
+    private konst symbolRenamer: SymbolRenamer
 ) : IrElementTransformerVoid() {
 
     private var transformedModule: IrModuleFragment? = null
@@ -89,7 +89,7 @@ open class DeepCopyIrTreeWithSymbols(
         throw IllegalArgumentException("Unsupported element type: $element")
 
     override fun visitModuleFragment(declaration: IrModuleFragment): IrModuleFragment {
-        val result = IrModuleFragmentImpl(
+        konst result = IrModuleFragmentImpl(
             declaration.descriptor,
             declaration.irBuiltins,
         )
@@ -165,7 +165,7 @@ open class DeepCopyIrTreeWithSymbols(
                 symbolRemapper.getReferencedClass(it)
             }
             thisReceiver = declaration.thisReceiver?.transform()
-            valueClassRepresentation = declaration.valueClassRepresentation?.mapUnderlyingType { it.remapType() as IrSimpleType }
+            konstueClassRepresentation = declaration.konstueClassRepresentation?.mapUnderlyingType { it.remapType() as IrSimpleType }
             declaration.transformDeclarationsTo(this)
         }.copyAttributes(declaration)
 
@@ -221,7 +221,7 @@ open class DeepCopyIrTreeWithSymbols(
                 dispatchReceiverParameter = declaration.dispatchReceiverParameter?.transform()
                 extensionReceiverParameter = declaration.extensionReceiverParameter?.transform()
                 returnType = typeRemapper.remapType(declaration.returnType)
-                valueParameters = declaration.valueParameters.transform()
+                konstueParameters = declaration.konstueParameters.transform()
                 body = declaration.body?.transform()
             }
         }
@@ -420,7 +420,7 @@ open class DeepCopyIrTreeWithSymbols(
         IrConstantObjectImpl(
             expression.startOffset, expression.endOffset,
             symbolRemapper.getReferencedConstructor(expression.constructor),
-            expression.valueArguments.transform(),
+            expression.konstueArguments.transform(),
             expression.typeArguments.memoryOptimizedMap { it.remapType() },
             expression.type.remapType()
         ).copyAttributes(expression)
@@ -428,7 +428,7 @@ open class DeepCopyIrTreeWithSymbols(
     override fun visitConstantPrimitive(expression: IrConstantPrimitive): IrConstantValue =
         IrConstantPrimitiveImpl(
             expression.startOffset, expression.endOffset,
-            expression.value.transform()
+            expression.konstue.transform()
         ).copyAttributes(expression)
 
     override fun visitConstantArray(expression: IrConstantArray): IrConstantValue =
@@ -518,7 +518,7 @@ open class DeepCopyIrTreeWithSymbols(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
             symbolRemapper.getReferencedValue(expression.symbol),
-            expression.value.transform(),
+            expression.konstue.transform(),
             mapStatementOrigin(expression.origin)
         ).copyAttributes(expression)
 
@@ -537,7 +537,7 @@ open class DeepCopyIrTreeWithSymbols(
             expression.startOffset, expression.endOffset,
             symbolRemapper.getReferencedField(expression.symbol),
             expression.receiver?.transform(),
-            expression.value.transform(),
+            expression.konstue.transform(),
             expression.type.remapType(),
             mapStatementOrigin(expression.origin),
             symbolRemapper.getReferencedClassOrNull(expression.superQualifierSymbol)
@@ -550,14 +550,14 @@ open class DeepCopyIrTreeWithSymbols(
         }
 
     override fun visitConstructorCall(expression: IrConstructorCall): IrConstructorCall {
-        val constructorSymbol = symbolRemapper.getReferencedConstructor(expression.symbol)
+        konst constructorSymbol = symbolRemapper.getReferencedConstructor(expression.symbol)
         return IrConstructorCallImpl(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
             constructorSymbol,
             expression.typeArgumentsCount,
             expression.constructorTypeArgumentsCount,
-            expression.valueArgumentsCount,
+            expression.konstueArgumentsCount,
             mapStatementOrigin(expression.origin)
         ).apply {
             copyRemappedTypeArgumentsFrom(expression)
@@ -575,13 +575,13 @@ open class DeepCopyIrTreeWithSymbols(
     }
 
     private fun shallowCopyCall(expression: IrCall): IrCall {
-        val newCallee = symbolRemapper.getReferencedSimpleFunction(expression.symbol)
+        konst newCallee = symbolRemapper.getReferencedSimpleFunction(expression.symbol)
         return IrCallImpl(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
             newCallee,
             expression.typeArgumentsCount,
-            expression.valueArgumentsCount,
+            expression.konstueArgumentsCount,
             mapStatementOrigin(expression.origin),
             symbolRemapper.getReferencedClassOrNull(expression.superQualifierSymbol)
         ).apply {
@@ -597,19 +597,19 @@ open class DeepCopyIrTreeWithSymbols(
 
     private fun <T : IrMemberAccessExpression<*>> T.transformValueArguments(original: T) {
         transformReceiverArguments(original)
-        for (i in 0 until original.valueArgumentsCount) {
+        for (i in 0 until original.konstueArgumentsCount) {
             putValueArgument(i, original.getValueArgument(i)?.transform())
         }
     }
 
     override fun visitDelegatingConstructorCall(expression: IrDelegatingConstructorCall): IrDelegatingConstructorCall {
-        val newConstructor = symbolRemapper.getReferencedConstructor(expression.symbol)
+        konst newConstructor = symbolRemapper.getReferencedConstructor(expression.symbol)
         return IrDelegatingConstructorCallImpl(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
             newConstructor,
             expression.typeArgumentsCount,
-            expression.valueArgumentsCount
+            expression.konstueArgumentsCount
         ).apply {
             copyRemappedTypeArgumentsFrom(expression)
             transformValueArguments(expression)
@@ -617,13 +617,13 @@ open class DeepCopyIrTreeWithSymbols(
     }
 
     override fun visitEnumConstructorCall(expression: IrEnumConstructorCall): IrEnumConstructorCall {
-        val newConstructor = symbolRemapper.getReferencedConstructor(expression.symbol)
+        konst newConstructor = symbolRemapper.getReferencedConstructor(expression.symbol)
         return IrEnumConstructorCallImpl(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
             newConstructor,
             expression.typeArgumentsCount,
-            expression.valueArgumentsCount
+            expression.konstueArgumentsCount
         ).apply {
             copyRemappedTypeArgumentsFrom(expression)
             transformValueArguments(expression)
@@ -638,14 +638,14 @@ open class DeepCopyIrTreeWithSymbols(
         ).copyAttributes(expression)
 
     override fun visitFunctionReference(expression: IrFunctionReference): IrFunctionReference {
-        val symbol = symbolRemapper.getReferencedFunction(expression.symbol)
-        val reflectionTarget = expression.reflectionTarget?.let { symbolRemapper.getReferencedFunction(it) }
+        konst symbol = symbolRemapper.getReferencedFunction(expression.symbol)
+        konst reflectionTarget = expression.reflectionTarget?.let { symbolRemapper.getReferencedFunction(it) }
         return IrFunctionReferenceImpl(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
             symbol,
             expression.typeArgumentsCount,
-            expression.valueArgumentsCount,
+            expression.konstueArgumentsCount,
             reflectionTarget,
             mapStatementOrigin(expression.origin)
         ).apply {
@@ -655,7 +655,7 @@ open class DeepCopyIrTreeWithSymbols(
     }
 
     override fun visitRawFunctionReference(expression: IrRawFunctionReference): IrRawFunctionReference {
-        val symbol = symbolRemapper.getReferencedFunction(expression.symbol)
+        konst symbol = symbolRemapper.getReferencedFunction(expression.symbol)
         return IrRawFunctionReferenceImpl(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
@@ -743,7 +743,7 @@ open class DeepCopyIrTreeWithSymbols(
             branch.result.transform()
         )
 
-    private val transformedLoops = HashMap<IrLoop, IrLoop>()
+    private konst transformedLoops = HashMap<IrLoop, IrLoop>()
 
     private fun getTransformedLoop(irLoop: IrLoop): IrLoop =
         transformedLoops.getOrDefault(irLoop, irLoop)
@@ -799,7 +799,7 @@ open class DeepCopyIrTreeWithSymbols(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
             symbolRemapper.getReferencedReturnTarget(expression.returnTargetSymbol),
-            expression.value.transform()
+            expression.konstue.transform()
         ).copyAttributes(expression)
 
     private fun SymbolRemapper.getReferencedReturnTarget(returnTarget: IrReturnTargetSymbol) =
@@ -812,7 +812,7 @@ open class DeepCopyIrTreeWithSymbols(
         IrThrowImpl(
             expression.startOffset, expression.endOffset,
             expression.type.remapType(),
-            expression.value.transform()
+            expression.konstue.transform()
         ).copyAttributes(expression)
 
     override fun visitDynamicOperatorExpression(expression: IrDynamicOperatorExpression): IrDynamicOperatorExpression =

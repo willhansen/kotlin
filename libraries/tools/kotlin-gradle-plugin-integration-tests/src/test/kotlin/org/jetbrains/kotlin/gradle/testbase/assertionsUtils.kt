@@ -35,7 +35,7 @@ exception will have FQN like org.jetbrains.kotlin.com.intellij... . This not onl
 but also rendered diff will be trimmed, making working with such failures extremely inconvenient
 */
 internal fun assertEqualsToFile(expectedFile: File, actualText: String) {
-    val textSanitized: String = actualText.trim().convertLineSeparators().trimTrailingWhitespacesAndAddNewlineAtEOF()
+    konst textSanitized: String = actualText.trim().convertLineSeparators().trimTrailingWhitespacesAndAddNewlineAtEOF()
 
     if (!expectedFile.exists()) {
         if (KtUsefulTestCase.IS_UNDER_TEAMCITY) {
@@ -45,7 +45,7 @@ internal fun assertEqualsToFile(expectedFile: File, actualText: String) {
             fail("Expected data file did not exist. Generating: $expectedFile")
         }
     }
-    val expected: String = expectedFile.readText().convertLineSeparators().trimTrailingWhitespacesAndAddNewlineAtEOF()
+    konst expected: String = expectedFile.readText().convertLineSeparators().trimTrailingWhitespacesAndAddNewlineAtEOF()
 
     assertEquals(expected, textSanitized, "Comparison failure")
 }

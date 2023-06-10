@@ -10,7 +10,7 @@
 // with compiler built from your changes if you are not sure.
 
 fun box(): String {
-    val a = ArrayList<String>()
+    konst a = ArrayList<String>()
     a.add("OK")
     for (i in a.indices) {
         return a[i]

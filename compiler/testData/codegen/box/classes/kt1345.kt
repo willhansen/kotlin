@@ -2,7 +2,7 @@ interface Creator<T> {
     fun create() : T
 }
 
-class Actor(val code: String = "OK")
+class Actor(konst code: String = "OK")
 
 interface Factory : Creator<Actor>
 

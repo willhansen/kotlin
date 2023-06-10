@@ -11,7 +11,7 @@ class Inline {
 // FILE: 2.kt
 
 fun test1(): Int {
-    val inlineX = Inline()
+    konst inlineX = Inline()
     var p = { l : Int -> l};
     return inlineX.calc(p, 25)
 }

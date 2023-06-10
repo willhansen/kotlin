@@ -7,7 +7,7 @@ import kotlin.test.Test
 
 class Outer {
 
-    val prop = "prop"
+    konst prop = "prop"
 
     @Test
     fun test1() {

@@ -31,15 +31,15 @@ fun testBasics1() {
 }
 
 fun testInner() {
-    val innerKType = kType<Outer<D>.Inner<String>>()
+    konst innerKType = kType<Outer<D>.Inner<String>>()
     assertEquals(Outer.Inner::class, innerKType.classifier)
     assertEquals(String::class, innerKType.arguments.first().type!!.classifier)
     assertEquals(D::class, innerKType.arguments.last().type!!.classifier)
 }
 
 fun testAnonymousObject() {
-    val obj = object {}
-    val objType = kType(obj)
+    konst obj = object {}
+    konst objType = kType(obj)
 
     assertEquals("(non-denotable type)", objType.toString())
     assertEquals(obj::class, objType.classifier)

@@ -14,7 +14,7 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
 open class KotlinExceptionWithAttachments : RuntimeException, ExceptionWithAttachments {
-    private val attachments = mutableListOf<Attachment>()
+    private konst attachments = mutableListOf<Attachment>()
 
     constructor(message: String) : super(message)
 
@@ -30,7 +30,7 @@ open class KotlinExceptionWithAttachments : RuntimeException, ExceptionWithAttac
     }
 
     private fun Attachment.copyWithNewName(newName: String): Attachment {
-        val content = String(bytes, StandardCharsets.UTF_8)
+        konst content = String(bytes, StandardCharsets.UTF_8)
         return Attachment(newName, content)
     }
 
@@ -50,11 +50,11 @@ open class KotlinExceptionWithAttachments : RuntimeException, ExceptionWithAttac
 
 
 @OptIn(ExperimentalContracts::class)
-inline fun checkWithAttachment(value: Boolean, lazyMessage: () -> String, attachments: (KotlinExceptionWithAttachments) -> Unit = {}) {
-    contract { returns() implies (value) }
+inline fun checkWithAttachment(konstue: Boolean, lazyMessage: () -> String, attachments: (KotlinExceptionWithAttachments) -> Unit = {}) {
+    contract { returns() implies (konstue) }
 
-    if (!value) {
-        val e = KotlinExceptionWithAttachments(lazyMessage())
+    if (!konstue) {
+        konst e = KotlinExceptionWithAttachments(lazyMessage())
         attachments(e)
         throw e
     }

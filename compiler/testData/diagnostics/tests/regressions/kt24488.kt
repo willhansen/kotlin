@@ -1,7 +1,7 @@
 // SKIP_TXT
 
 class Bar {
-    val a: Array<String>? = null
+    konst a: Array<String>? = null
 }
 
 fun foo(bar: Bar) = bar.a?.asIterable() ?: <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>emptyArray<!>()
@@ -9,6 +9,6 @@ fun foo(bar: Bar) = bar.a?.asIterable() ?: <!NEW_INFERENCE_NO_INFORMATION_FOR_PA
 fun <T> Array<out T>.asIterable(): Iterable<T> = TODO()
 
 fun testFrontend() {
-    val bar = Bar()
+    konst bar = Bar()
     foo(bar)
 }

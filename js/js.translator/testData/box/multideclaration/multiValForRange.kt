@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1393
 package foo
 
-class C(val i: Int) : Comparable<C>, A() {
+class C(konst i: Int) : Comparable<C>, A() {
     public override fun compareTo(other: C): Int {
         return if (other is C) other.i - i else 0
     }

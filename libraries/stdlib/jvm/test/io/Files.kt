@@ -13,30 +13,30 @@ import kotlin.test.*
 
 class FilesTest {
 
-    private val isCaseInsensitiveFileSystem = File("C:/") == File("c:/")
-    private val isBackslashSeparator = File.separatorChar == '\\'
+    private konst isCaseInsensitiveFileSystem = File("C:/") == File("c:/")
+    private konst isBackslashSeparator = File.separatorChar == '\\'
 
 
     @Suppress("DEPRECATION")
     @Test fun testPath() {
-        val fileSuf = System.currentTimeMillis().toString()
-        val file1 = createTempFile("temp", fileSuf)
+        konst fileSuf = System.currentTimeMillis().toString()
+        konst file1 = createTempFile("temp", fileSuf)
         assertTrue(file1.path.endsWith(fileSuf), file1.path)
     }
 
     @Suppress("DEPRECATION")
     @Test fun testCreateTempDir() {
-        val dirSuf = System.currentTimeMillis().toString()
-        val dir1 = createTempDir("temp", dirSuf)
+        konst dirSuf = System.currentTimeMillis().toString()
+        konst dir1 = createTempDir("temp", dirSuf)
         assertTrue(dir1.exists() && dir1.isDirectory && dir1.name.startsWith("temp") && dir1.name.endsWith(dirSuf))
         assertFailsWith(IllegalArgumentException::class) {
             createTempDir("a")
         }
 
-        val dir2 = createTempDir("temp")
+        konst dir2 = createTempDir("temp")
         assertTrue(dir2.exists() && dir2.isDirectory && dir2.name.startsWith("temp") && dir2.name.endsWith(".tmp"))
 
-        val dir3 = createTempDir()
+        konst dir3 = createTempDir()
         assertTrue(dir3.exists() && dir3.isDirectory && dir3.name.startsWith("tmp") && dir3.name.endsWith(".tmp"))
 
         dir1.delete()
@@ -46,17 +46,17 @@ class FilesTest {
 
     @Suppress("DEPRECATION")
     @Test fun testCreateTempFile() {
-        val fileSuf = System.currentTimeMillis().toString()
-        val file1 = createTempFile("temp", fileSuf)
+        konst fileSuf = System.currentTimeMillis().toString()
+        konst file1 = createTempFile("temp", fileSuf)
         assertTrue(file1.exists() && file1.name.startsWith("temp") && file1.name.endsWith(fileSuf))
         assertFailsWith(IllegalArgumentException::class) {
             createTempFile("a")
         }
 
-        val file2 = createTempFile("temp")
+        konst file2 = createTempFile("temp")
         assertTrue(file2.exists() && file2.name.startsWith("temp") && file2.name.endsWith(".tmp"))
 
-        val file3 = createTempFile()
+        konst file3 = createTempFile()
         assertTrue(file3.exists() && file3.name.startsWith("tmp") && file3.name.endsWith(".tmp"))
 
         file1.delete()
@@ -66,39 +66,39 @@ class FilesTest {
 
     @Suppress("DEPRECATION")
     @Test fun listFilesWithFilter() {
-        val dir = createTempDir("temp")
+        konst dir = createTempDir("temp")
 
         createTempFile("temp1", ".kt", dir)
         createTempFile("temp2", ".java", dir)
         createTempFile("temp3", ".kt", dir)
 
         // This line works only with Kotlin File.listFiles(filter)
-        val result = dir.listFiles { it -> it.name.endsWith(".kt") } // todo ambiguity on SAM
+        konst result = dir.listFiles { it -> it.name.endsWith(".kt") } // todo ambiguity on SAM
         assertEquals(2, result!!.size)
         // This line works both with Kotlin File.listFiles(filter) and the same Java function because of SAM
-        val result2 = dir.listFiles { it -> it.name.endsWith(".kt") }
+        konst result2 = dir.listFiles { it -> it.name.endsWith(".kt") }
         assertEquals(2, result2!!.size)
     }
 
     @Test fun relativeToRooted() {
-        val file1 = File("/foo/bar/baz")
-        val file2 = File("/foo/baa/ghoo")
+        konst file1 = File("/foo/bar/baz")
+        konst file2 = File("/foo/baa/ghoo")
 
         assertEquals("../../bar/baz", file1.relativeTo(file2).invariantSeparatorsPath)
 
-        val file3 = File("/foo/bar")
+        konst file3 = File("/foo/bar")
 
         assertEquals("baz", file1.toRelativeString(file3))
         assertEquals("..", file3.toRelativeString(file1))
 
-        val file4 = File("/foo/bar/")
+        konst file4 = File("/foo/bar/")
 
         assertEquals("baz", file1.toRelativeString(file4))
         assertEquals("..", file4.toRelativeString(file1))
         assertEquals("", file3.toRelativeString(file4))
         assertEquals("", file4.toRelativeString(file3))
 
-        val file5 = File("/foo/baran")
+        konst file5 = File("/foo/baran")
 
         assertEquals("../bar", file3.relativeTo(file5).invariantSeparatorsPath)
         assertEquals("../baran", file5.relativeTo(file3).invariantSeparatorsPath)
@@ -106,14 +106,14 @@ class FilesTest {
         assertEquals("../baran", file5.relativeTo(file4).invariantSeparatorsPath)
 
         if (isBackslashSeparator) {
-            val file6 = File("C:\\Users\\Me")
-            val file7 = File("C:\\Users\\Me\\Documents")
+            konst file6 = File("C:\\Users\\Me")
+            konst file7 = File("C:\\Users\\Me\\Documents")
 
             assertEquals("..", file6.toRelativeString(file7))
             assertEquals("Documents", file7.toRelativeString(file6))
 
-            val file8 = File("""\\my.host\home/user/documents/vip""")
-            val file9 = File("""\\my.host\home/other/images/nice""")
+            konst file8 = File("""\\my.host\home/user/documents/vip""")
+            konst file9 = File("""\\my.host\home/other/images/nice""")
 
             assertEquals("../../../user/documents/vip", file8.relativeTo(file9).invariantSeparatorsPath)
             assertEquals("../../../other/images/nice", file9.relativeTo(file8).invariantSeparatorsPath)
@@ -125,25 +125,25 @@ class FilesTest {
     }
 
     @Test fun relativeToRelative() {
-        val nested = File("foo/bar")
-        val base = File("foo")
+        konst nested = File("foo/bar")
+        konst base = File("foo")
 
         assertEquals("bar", nested.toRelativeString(base))
         assertEquals("..", base.toRelativeString(nested))
 
-        val empty = File("")
-        val current = File(".")
-        val parent = File("..")
-        val outOfRoot = File("../bar")
+        konst empty = File("")
+        konst current = File(".")
+        konst parent = File("..")
+        konst outOfRoot = File("../bar")
 
         assertEquals(File("../bar"), outOfRoot.relativeTo(empty))
         assertEquals(File("../../bar"), outOfRoot.relativeTo(base))
         assertEquals("bar", outOfRoot.toRelativeString(parent))
         assertEquals("..", parent.toRelativeString(outOfRoot))
 
-        val root = File("/root")
-        val files = listOf(nested, base, empty, outOfRoot, current, parent)
-        val bases = listOf(nested, base, empty, current)
+        konst root = File("/root")
+        konst files = listOf(nested, base, empty, outOfRoot, current, parent)
+        konst bases = listOf(nested, base, empty, current)
 
         for (file in files)
             assertEquals("", file.toRelativeString(file), "file should have empty path relative to itself: $file")
@@ -151,8 +151,8 @@ class FilesTest {
         for (file in files) {
             @Suppress("NAME_SHADOWING")
             for (base in bases) {
-                val rootedFile = root.resolve(file)
-                val rootedBase = root.resolve(base)
+                konst rootedFile = root.resolve(file)
+                konst rootedBase = root.resolve(base)
                 assertEquals(file.relativeTo(base), rootedFile.relativeTo(rootedBase), "nested: $file, base: $base")
                 assertEquals(file.toRelativeString(base), rootedFile.toRelativeString(rootedBase), "strings, nested: $file, base: $base")
             }
@@ -160,19 +160,19 @@ class FilesTest {
     }
 
     @Test fun relativeToFails() {
-        val absolute = File("/foo/bar/baz")
-        val relative = File("foo/bar")
-        val networkShare1 = File("""\\my.host\share1/folder""")
-        val networkShare2 = File("""\\my.host\share2\folder""")
+        konst absolute = File("/foo/bar/baz")
+        konst relative = File("foo/bar")
+        konst networkShare1 = File("""\\my.host\share1/folder""")
+        konst networkShare2 = File("""\\my.host\share2\folder""")
 
         fun assertFailsRelativeTo(file: File, base: File) {
-            val e = assertFailsWith<IllegalArgumentException>("file: $file, base: $base") { file.relativeTo(base) }
-            val message = assertNotNull(e.message)
+            konst e = assertFailsWith<IllegalArgumentException>("file: $file, base: $base") { file.relativeTo(base) }
+            konst message = assertNotNull(e.message)
             assert(file.toString() in message)
             assert(base.toString() in message)
         }
 
-        val allFiles = listOf(absolute, relative) + if (isBackslashSeparator) listOf(networkShare1, networkShare2) else emptyList()
+        konst allFiles = listOf(absolute, relative) + if (isBackslashSeparator) listOf(networkShare1, networkShare2) else emptyList()
         for (file in allFiles) {
             for (base in allFiles) {
                 if (file != base) assertFailsRelativeTo(file, base)
@@ -182,8 +182,8 @@ class FilesTest {
         assertFailsRelativeTo(File("y"), File("../x"))
 
         if (isBackslashSeparator) {
-            val fileOnC = File("C:/dir1")
-            val fileOnD = File("D:/dir2")
+            konst fileOnC = File("C:/dir1")
+            konst fileOnD = File("D:/dir2")
             assertFailsRelativeTo(fileOnC, fileOnD)
         }
     }
@@ -198,7 +198,7 @@ class FilesTest {
     @Suppress("INVISIBLE_MEMBER")
     private fun checkFilePathComponents(f: File, root: File, elements: List<String>) {
         assertEquals(root, f.root)
-        val components = f.toComponents()
+        konst components = f.toComponents()
         assertEquals(root, components.root)
         assertEquals(elements, components.segments.map { it.toString() })
     }
@@ -225,21 +225,21 @@ class FilesTest {
     }
 
     @Test fun fileRoot() {
-        val rooted = File("/foo/bar")
+        konst rooted = File("/foo/bar")
         assertTrue(rooted.isRooted)
 //        assertEquals("/", rooted.root.invariantSeparatorsPath)
 
         if (isBackslashSeparator) {
-            val diskRooted = File("""C:\foo\bar""")
+            konst diskRooted = File("""C:\foo\bar""")
             assertTrue(diskRooted.isRooted)
 //            assertEquals("""C:\""", diskRooted.rootName)
 
-            val networkRooted = File("""\\network\share\""")
+            konst networkRooted = File("""\\network\share\""")
             assertTrue(networkRooted.isRooted)
 //            assertEquals("""\\network\share""", networkRooted.rootName)
         }
 
-        val relative = File("foo/bar")
+        konst relative = File("foo/bar")
         assertFalse(relative.isRooted)
 //        assertEquals("", relative.rootName)
     }
@@ -365,27 +365,27 @@ class FilesTest {
         assertEquals("log", File("/my.dir/log").nameWithoutExtension)
     }
 
-    private class FixedLengthFile(path: String, private val length: Long) : File(path) {
+    private class FixedLengthFile(path: String, private konst length: Long) : File(path) {
         override fun length(): Long = length
     }
 
     @Test fun writeReadText() {
-        val file = @Suppress("DEPRECATION") createTempFile()
+        konst file = @Suppress("DEPRECATION") createTempFile()
         try {
-            val expected = String(CharArray(DEFAULT_BUFFER_SIZE * 2) { Random.nextInt(0, 1024).toChar() })
+            konst expected = String(CharArray(DEFAULT_BUFFER_SIZE * 2) { Random.nextInt(0, 1024).toChar() })
             file.writeText(expected)
             run {
-                val actual1 = file.readText()
+                konst actual1 = file.readText()
                 assertEquals(expected.length, actual1.length)
                 assertTrue(expected.equals(actual1), "Expected to read the same content back")
             }
 
-            val fileLength = file.length()
-            val testLengths = listOf(0L, *Array(3) { Random.nextLong(fileLength) })
+            konst fileLength = file.length()
+            konst testLengths = listOf(0L, *Array(3) { Random.nextLong(fileLength) })
 
             for (length in testLengths) {
-                val shorterFile = FixedLengthFile(file.path, length)
-                val actual2 = shorterFile.readText()
+                konst shorterFile = FixedLengthFile(file.path, length)
+                konst actual2 = shorterFile.readText()
                 assertEquals(expected.length, actual2.length)
                 assertTrue(expected.equals(actual2), "Expected to read the same content back")
             }
@@ -395,21 +395,21 @@ class FilesTest {
     }
 
     @Test fun writeReadBytes() {
-        val file = @Suppress("DEPRECATION") createTempFile()
+        konst file = @Suppress("DEPRECATION") createTempFile()
         try {
-            val expected = Random.nextBytes(DEFAULT_BUFFER_SIZE * 4)
+            konst expected = Random.nextBytes(DEFAULT_BUFFER_SIZE * 4)
             file.writeBytes(expected)
             run {
-                val actual1 = file.readBytes()
+                konst actual1 = file.readBytes()
                 assertArrayContentEquals(expected, actual1, "Expected to read the same content back")
             }
 
-            val fileLength = file.length()
-            val testLengths = listOf(0L, *Array(3) { Random.nextLong(fileLength) })
+            konst fileLength = file.length()
+            konst testLengths = listOf(0L, *Array(3) { Random.nextLong(fileLength) })
 
             for (length in testLengths) {
-                val shorterFile = FixedLengthFile(file.path, length)
-                val actual2 = shorterFile.readBytes()
+                konst shorterFile = FixedLengthFile(file.path, length)
+                konst actual2 = shorterFile.readBytes()
                 assertEquals(actual2.size, expected.size)
                 assertArrayContentEquals(expected, actual2, "Expected to read the same content back")
             }
@@ -419,20 +419,20 @@ class FilesTest {
     }
 
     @Test fun readVirtualFile() {
-        val virtualFile = File("/proc/self/cmdline")
+        konst virtualFile = File("/proc/self/cmdline")
         if (virtualFile.exists() && virtualFile.length() == 0L) {
-            val allBytes = virtualFile.readBytes()
+            konst allBytes = virtualFile.readBytes()
             assertNotEquals(0, allBytes.size)
 
-            val allText = virtualFile.readText()
+            konst allText = virtualFile.readText()
             assertNotEquals(0, allText.length)
             println(allText)
         }
     }
 
     @Test fun testCopyTo() {
-        val srcFile = @Suppress("DEPRECATION") createTempFile()
-        val dstFile = @Suppress("DEPRECATION") createTempFile()
+        konst srcFile = @Suppress("DEPRECATION") createTempFile()
+        konst dstFile = @Suppress("DEPRECATION") createTempFile()
         try {
             srcFile.writeText("Hello, World!")
             assertFailsWith(FileAlreadyExistsException::class, "copy do not overwrite existing file") {
@@ -449,7 +449,7 @@ class FilesTest {
 
             assertTrue(dstFile.delete())
             dstFile.mkdir()
-            val child = File(dstFile, "child")
+            konst child = File(dstFile, "child")
             child.createNewFile()
             assertFailsWith(FileAlreadyExistsException::class, "copy with overwrite do not overwrite non-empty dir") {
                 srcFile.copyTo(dstFile, overwrite = true)
@@ -496,14 +496,14 @@ class FilesTest {
     }
 
     @Test fun copyToNameWithoutParent() {
-        val currentDir = File("").absoluteFile!!
-        val srcFile = @Suppress("DEPRECATION") createTempFile()
-        val dstFile = @Suppress("DEPRECATION") createTempFile(directory = currentDir)
+        konst currentDir = File("").absoluteFile!!
+        konst srcFile = @Suppress("DEPRECATION") createTempFile()
+        konst dstFile = @Suppress("DEPRECATION") createTempFile(directory = currentDir)
         try {
             srcFile.writeText("Hello, World!", Charsets.UTF_8)
             dstFile.delete()
 
-            val dstRelative = File(dstFile.name)
+            konst dstRelative = File(dstFile.name)
 
             srcFile.copyTo(dstRelative)
 
@@ -516,10 +516,10 @@ class FilesTest {
     }
 
     @Test fun deleteRecursively() {
-        val dir = @Suppress("DEPRECATION") createTempDir()
+        konst dir = @Suppress("DEPRECATION") createTempDir()
         dir.delete()
         dir.mkdir()
-        val subDir = File(dir, "subdir");
+        konst subDir = File(dir, "subdir");
         subDir.mkdir()
         File(dir, "test1.txt").createNewFile()
         File(subDir, "test2.txt").createNewFile()
@@ -530,8 +530,8 @@ class FilesTest {
     }
 
     @Test fun deleteRecursivelyWithFail() {
-        val basedir = FileTreeWalkTest.createTestFiles()
-        val restricted = File(basedir, "1")
+        konst basedir = FileTreeWalkTest.createTestFiles()
+        konst restricted = File(basedir, "1")
         try {
             if (restricted.setReadable(false)) {
                 if (File(basedir, "7.txt").setReadable(false)) {
@@ -562,24 +562,24 @@ class FilesTest {
 
     fun compareDirectories(src: File, dst: File) {
         for (srcFile in src.walkTopDown()) {
-            val dstFile = dst.resolve(srcFile.relativeTo(src))
+            konst dstFile = dst.resolve(srcFile.relativeTo(src))
             compareFiles(srcFile, dstFile)
         }
     }
 
     @Suppress("DEPRECATION")
     @Test fun copyRecursively() {
-        val src = createTempDir()
-        val dst = createTempDir()
+        konst src = createTempDir()
+        konst dst = createTempDir()
         dst.delete()
         fun check() = compareDirectories(src, dst)
 
         try {
-            val subDir1 = createTempDir(prefix = "d1_", directory = src)
-            val subDir2 = createTempDir(prefix = "d2_", directory = src)
+            konst subDir1 = createTempDir(prefix = "d1_", directory = src)
+            konst subDir2 = createTempDir(prefix = "d2_", directory = src)
             createTempDir(prefix = "d1_", directory = subDir1)
-            val file1 = createTempFile(prefix = "f1_", directory = src)
-            val file2 = createTempFile(prefix = "f2_", directory = subDir1)
+            konst file1 = createTempFile(prefix = "f1_", directory = src)
+            konst file2 = createTempFile(prefix = "f2_", directory = subDir1)
             file1.writeText("hello")
             file2.writeText("wazzup")
             createTempDir(prefix = "d1_", directory = subDir2)
@@ -636,13 +636,13 @@ class FilesTest {
 
     @Suppress("DEPRECATION")
     @Test fun copyRecursivelyWithOverwrite() {
-        val src = createTempDir()
-        val dst = createTempDir()
+        konst src = createTempDir()
+        konst dst = createTempDir()
         fun check() = compareDirectories(src, dst)
 
         try {
-            val srcFile = src.resolve("test")
-            val dstFile = dst.resolve("test")
+            konst srcFile = src.resolve("test")
+            konst dstFile = dst.resolve("test")
             srcFile.writeText("text1")
 
             src.copyRecursively(dst)
@@ -670,25 +670,25 @@ class FilesTest {
     }
 
     @Test fun helpers1() {
-        val str = "123456789\n"
+        konst str = "123456789\n"
         System.setIn(str.byteInputStream())
-        val reader = System.`in`.bufferedReader()
+        konst reader = System.`in`.bufferedReader()
         assertEquals("123456789", reader.readLine())
-        val stringReader = str.reader()
+        konst stringReader = str.reader()
         assertEquals('1', stringReader.read().toChar())
         assertEquals('2', stringReader.read().toChar())
         assertEquals('3', stringReader.read().toChar())
     }
 
     @Test fun helpers2() {
-        val file = @Suppress("DEPRECATION") createTempFile()
-        val writer = file.printWriter()
-        val str1 = "Hello, world!"
-        val str2 = "Everything is wonderful!"
+        konst file = @Suppress("DEPRECATION") createTempFile()
+        konst writer = file.printWriter()
+        konst str1 = "Hello, world!"
+        konst str2 = "Everything is wonderful!"
         writer.println(str1)
         writer.println(str2)
         writer.close()
-        val reader = file.bufferedReader()
+        konst reader = file.bufferedReader()
         assertEquals(str1, reader.readLine())
         assertEquals(str2, reader.readLine())
     }

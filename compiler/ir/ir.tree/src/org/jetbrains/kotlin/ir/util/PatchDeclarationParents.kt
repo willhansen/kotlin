@@ -14,12 +14,12 @@ import java.util.*
 
 fun <T : IrElement> T.patchDeclarationParents(initialParent: IrDeclarationParent? = null) =
     apply {
-        val visitor = initialParent?.let { PatchDeclarationParentsVisitor(it) } ?: PatchDeclarationParentsVisitor()
+        konst visitor = initialParent?.let { PatchDeclarationParentsVisitor(it) } ?: PatchDeclarationParentsVisitor()
         acceptVoid(visitor)
     }
 
 abstract class DeclarationParentsVisitor : IrElementVisitorVoid {
-    protected val declarationParentsStack = ArrayDeque<IrDeclarationParent>()
+    protected konst declarationParentsStack = ArrayDeque<IrDeclarationParent>()
 
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)

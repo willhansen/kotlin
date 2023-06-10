@@ -4,7 +4,7 @@ FILE: unstableSmartCastOnSafeCallArgument.kt
             super<R|kotlin/Any|>()
         }
 
-        public abstract val bar: R|Bar?|
+        public abstract konst bar: R|Bar?|
             public get(): R|Bar?|
 
     }
@@ -13,7 +13,7 @@ FILE: unstableSmartCastOnSafeCallArgument.kt
             super<R|kotlin/Any|>()
         }
 
-        public abstract val buz: R|Buz?|
+        public abstract konst buz: R|Buz?|
             public get(): R|Buz?|
 
     }

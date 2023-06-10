@@ -18,7 +18,7 @@ class Case1
 
 fun case_1(x: Case1) {
     checkSubtype<Any>(x)
-    val z: Any = Case1()
+    konst z: Any = Case1()
     funWithAnyArg(Case1())
 }
 
@@ -32,8 +32,8 @@ fun case_2(x: Case2) {
 }
 
 // TESTCASE NUMBER: 3
-data class Case3(val x: Int)
-val case_3_1: Any = Case3(11)
+data class Case3(konst x: Int)
+konst case_3_1: Any = Case3(11)
 
 fun case_3(x: Case3) {
     checkSubtype<Any>(x)
@@ -56,8 +56,8 @@ annotation class Case5 {
 fun case_5(x: Case5, y: Case5.Case5) {
     checkSubtype<Any>(x)
     checkSubtype<Any>(y)
-    val z1: Any = x
-    val z2: Any = y
+    konst z1: Any = x
+    konst z2: Any = y
     funWithAnyArg(x)
     funWithAnyArg(Case5.Case5())
 }
@@ -66,7 +66,7 @@ fun case_5(x: Case5, y: Case5.Case5) {
 enum class Case6 {TEST;
     inner class Case6 {}
 }
-val case_6_1: Any = Case6.TEST.Case6()
+konst case_6_1: Any = Case6.TEST.Case6()
 
 fun case_6(x: Case6.Case6) {
     checkSubtype<Any>(x)
@@ -75,36 +75,36 @@ fun case_6(x: Case6.Case6) {
 
 // TESTCASE NUMBER: 7
 enum class Case7 {;
-    data class Case7(val x: Int) {}
+    data class Case7(konst x: Int) {}
 }
 
 fun case_7(x: Case7.Case7) {
     checkSubtype<Any>(x)
-    val z: Any = Case7.Case7(10)
+    konst z: Any = Case7.Case7(10)
     funWithAnyArg(Case7.Case7(10))
 }
 
 // TESTCASE NUMBER: 8
 enum class Case8 {;
-    data class Case8(val x: Int) {}
+    data class Case8(konst x: Int) {}
 }
 
 typealias Case8_1 = Case8.Case8
 
 fun case_8(x: Case8_1) {
     checkSubtype<Any>(x)
-    val z: Any = Case8_1(10)
+    konst z: Any = Case8_1(10)
     funWithAnyArg(Case8_1(10))
 }
 
 // TESTCASE NUMBER: 9
 interface Case9 {;
-    data class Case9(val x: Int) {
+    data class Case9(konst x: Int) {
         interface Case9
     }
 }
 
-val case_9_1: Any = object : Case9.Case9.Case9 {}
+konst case_9_1: Any = object : Case9.Case9.Case9 {}
 fun case_9(x: Case9.Case9.Case9) {
     checkSubtype<Any>(x)
     funWithAnyArg(object : Case9.Case9.Case9 {})

@@ -13,7 +13,7 @@ class A() {
 
 fun box(): String {
     var c = A()
-    val d = c;
+    konst d = c;
     c %= A();
     return if ((c != d) && (c.p == "yeah")) "OK" else "fail"
 }

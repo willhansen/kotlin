@@ -1,8 +1,8 @@
 class T4(
-  val c1: Boolean,
-  val c2: Boolean,
-  val c3: Boolean,
-  val c4: String
+  konst c1: Boolean,
+  konst c2: Boolean,
+  konst c3: Boolean,
+  konst c4: String
 ) {
   override fun equals(o: Any?): Boolean {
     if (o !is T4) return false;
@@ -24,7 +24,7 @@ fun reformat(
 
 
 fun box() : String {
-    val expected = T4(true, true, true, " ")
+    konst expected = T4(true, true, true, " ")
     if(reformat("", true, true, true, " ") != expected) return "fail"
     if(reformat("", true, true, true) != expected) return "fail"
     if(reformat("", true, true) != expected) return "fail"

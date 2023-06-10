@@ -10,10 +10,10 @@ import com.intellij.util.text.LiteralFormatUtil
 import org.jetbrains.kotlin.KtNodeTypes
 import org.jetbrains.kotlin.utils.extractRadix
 
-private val FP_LITERAL_PARTS = "([_\\d]*)\\.?([_\\d]*)e?[+-]?([_\\d]*)[f]?".toRegex()
+private konst FP_LITERAL_PARTS = "([_\\d]*)\\.?([_\\d]*)e?[+-]?([_\\d]*)[f]?".toRegex()
 
 fun hasIllegalUnderscore(text: String, elementType: IElementType): Boolean {
-    val parts: List<String?> = if (elementType === KtNodeTypes.INTEGER_CONSTANT) {
+    konst parts: List<String?> = if (elementType === KtNodeTypes.INTEGER_CONSTANT) {
         var start = 0
         var end: Int = text.length
         if (text.startsWith("0x", ignoreCase = true) || text.startsWith("0b", ignoreCase = true)) start += 2
@@ -33,7 +33,7 @@ fun hasUnsignedLongSuffix(text: String) =
             text.endsWith("Ul") || text.endsWith("UL")
 
 fun parseNumericLiteral(text: String, type: IElementType): Number? {
-    val canonicalText = LiteralFormatUtil.removeUnderscores(text)
+    konst canonicalText = LiteralFormatUtil.removeUnderscores(text)
     return when (type) {
         KtNodeTypes.INTEGER_CONSTANT -> parseLong(canonicalText)
         KtNodeTypes.FLOAT_CONSTANT -> parseFloatingLiteral(canonicalText)
@@ -45,8 +45,8 @@ private fun parseLong(text: String): Long? {
     fun String.removeSuffix(i: Int): String = this.substring(0, this.length - i)
 
     return try {
-        val isUnsigned: Boolean
-        val numberWithoutSuffix: String
+        konst isUnsigned: Boolean
+        konst numberWithoutSuffix: String
         when {
             hasUnsignedLongSuffix(text) -> {
                 isUnsigned = true
@@ -66,7 +66,7 @@ private fun parseLong(text: String): Long? {
             }
         }
 
-        val (number, radix) = extractRadix(numberWithoutSuffix)
+        konst (number, radix) = extractRadix(numberWithoutSuffix)
 
         if (isUnsigned) {
             java.lang.Long.parseUnsignedLong(number, radix)

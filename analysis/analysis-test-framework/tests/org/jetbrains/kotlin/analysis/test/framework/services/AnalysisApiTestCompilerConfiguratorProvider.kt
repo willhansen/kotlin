@@ -22,12 +22,12 @@ import org.jetbrains.kotlin.test.services.*
 
 class AnalysisApiTestCompilerConfiguratorProvider(
     testServices: TestServices,
-    override val testRootDisposable: Disposable,
-    override val configurators: List<AbstractEnvironmentConfigurator>
+    override konst testRootDisposable: Disposable,
+    override konst configurators: List<AbstractEnvironmentConfigurator>
 ) : CompilerConfigurationProvider(testServices) {
-    private val configurationCache: MutableMap<TestModule, CompilerConfiguration> = mutableMapOf()
+    private konst configurationCache: MutableMap<TestModule, CompilerConfiguration> = mutableMapOf()
 
-    private val allProjectBinaryRoots by lazy {
+    private konst allProjectBinaryRoots by lazy {
         StandaloneProjectFactory.getAllBinaryRoots(
             testServices.ktModuleProvider.getModuleStructure().allKtModules(),
             testServices.environmentManager.getProjectEnvironment()
@@ -45,7 +45,7 @@ class AnalysisApiTestCompilerConfiguratorProvider(
     }
 
     override fun getPackagePartProviderFactory(module: TestModule): (GlobalSearchScope) -> JvmPackagePartProvider {
-        val configuration = getCompilerConfiguration(module)
+        konst configuration = getCompilerConfiguration(module)
 
         return { scope ->
             JvmPackagePartProvider(configuration.languageVersionSettings, scope).apply {

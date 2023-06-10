@@ -5,25 +5,25 @@ import kotlin.test.*
 
 interface Test {
     companion object {
-        val x = "O"
+        konst x = "O"
 
-        val y1 = Test.x
+        konst y1 = Test.x
 
-        val y2 = 42.let { x }
+        konst y2 = 42.let { x }
 
-        val y3: String
+        konst y3: String
         init {
             fun localFun() = x
             y3 = localFun()
         }
 
         fun method() = x
-        val y4 = method()
+        konst y4 = method()
 
-        val anonObject = object {
+        konst anonObject = object {
             override fun toString() = x
         }
-        val y5 = anonObject.toString()
+        konst y5 = anonObject.toString()
 
         init {
             assertEquals(x, y1)
@@ -37,25 +37,25 @@ interface Test {
 
 annotation class Anno {
     companion object {
-        val x = "K"
+        konst x = "K"
 
-        val y1 = Anno.x
+        konst y1 = Anno.x
 
-        val y2 = 42.let { x }
+        konst y2 = 42.let { x }
 
-        val y3: String
+        konst y3: String
         init {
             fun localFun() = x
             y3 = localFun()
         }
 
         fun method() = x
-        val y4 = method()
+        konst y4 = method()
 
-        val anonObject = object {
+        konst anonObject = object {
             override fun toString() = x
         }
-        val y5 = anonObject.toString()
+        konst y5 = anonObject.toString()
 
         init {
             assertEquals(x, y1)

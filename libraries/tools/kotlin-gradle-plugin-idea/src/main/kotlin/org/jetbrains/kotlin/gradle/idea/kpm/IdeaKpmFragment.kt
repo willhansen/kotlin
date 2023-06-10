@@ -10,29 +10,29 @@ import org.jetbrains.kotlin.tooling.core.Extras
 import java.io.Serializable
 
 sealed interface IdeaKpmFragment : Serializable {
-    val coordinates: IdeaKpmFragmentCoordinates
-    val platforms: Set<IdeaKpmPlatform>
-    val languageSettings: IdeaKpmLanguageSettings
-    val dependencies: List<IdeaKpmDependency>
-    val contentRoots: List<IdeaKpmContentRoot>
-    val extras: Extras
+    konst coordinates: IdeaKpmFragmentCoordinates
+    konst platforms: Set<IdeaKpmPlatform>
+    konst languageSettings: IdeaKpmLanguageSettings
+    konst dependencies: List<IdeaKpmDependency>
+    konst contentRoots: List<IdeaKpmContentRoot>
+    konst extras: Extras
 }
 
-val IdeaKpmFragment.name get() = coordinates.fragmentName
+konst IdeaKpmFragment.name get() = coordinates.fragmentName
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmFragmentImpl(
-    override val coordinates: IdeaKpmFragmentCoordinates,
-    override val platforms: Set<IdeaKpmPlatform>,
-    override val languageSettings: IdeaKpmLanguageSettings,
-    override val dependencies: List<IdeaKpmDependency>,
-    override val contentRoots: List<IdeaKpmContentRoot>,
-    override val extras: Extras
+    override konst coordinates: IdeaKpmFragmentCoordinates,
+    override konst platforms: Set<IdeaKpmPlatform>,
+    override konst languageSettings: IdeaKpmLanguageSettings,
+    override konst dependencies: List<IdeaKpmDependency>,
+    override konst contentRoots: List<IdeaKpmContentRoot>,
+    override konst extras: Extras
 ) : IdeaKpmFragment {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }
 

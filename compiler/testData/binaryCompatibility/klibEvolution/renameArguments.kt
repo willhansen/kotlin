@@ -21,25 +21,25 @@ class X() {
 }
 
 class qux_a(a: String) {
-    val x = a
+    konst x = a
 }
 class qux_b(b: String = "foo_b default") {
-    val x = b
+    konst x = b
 }
 class qux_c(vararg c: String) {
-    val x = c.joinToString(", ")
+    konst x = c.joinToString(", ")
 }
 
 // swap order
 class qux_d(a: String, b: String) {
-    val x = a + b
+    konst x = a + b
 }
 
 class qux_e(a: String = "foo_e default a", b: String = "foo_e default b") {
-    val x = a + b
+    konst x = a + b
 }
 class qux_f(vararg a: String, b: String) {
-    val x= a.joinToString(", ") + b
+    konst x= a.joinToString(", ") + b
 }
 
 
@@ -66,31 +66,31 @@ class X() {
 }
 
 class qux_a(a1: String) {
-    val x = a1
+    konst x = a1
 }
 class qux_b(b1: String = "foo_b default") {
-    val x = b1
+    konst x = b1
 }
 class qux_c(vararg c1: String) {
-    val x = c1.joinToString(", ")
+    konst x = c1.joinToString(", ")
 }
 
 // swap order
 class qux_d(b: String, a: String) {
-    val x = b + a
+    konst x = b + a
 }
 
 class qux_e(b: String = "foo_e default a", a: String = "foo_e default b") {
-    val x = b + a
+    konst x = b + a
 }
 class qux_f(vararg b: String, a: String) {
-    val x= b.joinToString(", ") + a
+    konst x= b.joinToString(", ") + a
 }
 
 // MODULE: mainLib(lib)
 // FILE: mainLib.kt
 fun lib(): String {
-  val x = X()
+  konst x = X()
   return when {
     foo_a("first") != "first" -> "fail 1"
     foo_b() != "foo_b default" -> "fail 2"

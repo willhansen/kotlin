@@ -30,14 +30,14 @@ import kotlin.experimental.ExperimentalNativeApi
  * expression compilation phase character sequence w-o-r-d, will be represented
  * with single node for the entire word.
  */
-open internal class SequenceSet(substring: CharSequence, val ignoreCase: Boolean = false) : LeafSet() {
+open internal class SequenceSet(substring: CharSequence, konst ignoreCase: Boolean = false) : LeafSet() {
 
     /** Represents a character sequence used for matching/searching. */
-    protected val patternString: String = substring.toString()
+    protected konst patternString: String = substring.toString()
 
-    override val name: String= "sequence: " + patternString
+    override konst name: String= "sequence: " + patternString
 
-    override val charCount = substring.length
+    override konst charCount = substring.length
 
     // Overrides =======================================================================================================
 

@@ -1695,9 +1695,9 @@ public class FirLightTreeBlackBoxInlineCodegenWithBytecodeInlinerTestGenerated e
         }
 
         @Test
-        @TestMetadata("valInitializationAndUsageInNestedLambda.kt")
+        @TestMetadata("konstInitializationAndUsageInNestedLambda.kt")
         public void testValInitializationAndUsageInNestedLambda() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/contracts/valInitializationAndUsageInNestedLambda.kt");
+            runTest("compiler/testData/codegen/boxInline/contracts/konstInitializationAndUsageInNestedLambda.kt");
         }
     }
 
@@ -2407,69 +2407,69 @@ public class FirLightTreeBlackBoxInlineCodegenWithBytecodeInlinerTestGenerated e
         }
 
         @Test
-        @TestMetadata("valueOf.kt")
+        @TestMetadata("konstueOf.kt")
         public void testValueOf() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valueOf.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstueOf.kt");
         }
 
         @Test
-        @TestMetadata("valueOfCapturedType.kt")
+        @TestMetadata("konstueOfCapturedType.kt")
         public void testValueOfCapturedType() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valueOfCapturedType.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstueOfCapturedType.kt");
         }
 
         @Test
-        @TestMetadata("valueOfChain.kt")
+        @TestMetadata("konstueOfChain.kt")
         public void testValueOfChain() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valueOfChain.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstueOfChain.kt");
         }
 
         @Test
-        @TestMetadata("valueOfChainCapturedType.kt")
+        @TestMetadata("konstueOfChainCapturedType.kt")
         public void testValueOfChainCapturedType() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valueOfChainCapturedType.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstueOfChainCapturedType.kt");
         }
 
         @Test
-        @TestMetadata("valueOfNonReified.kt")
+        @TestMetadata("konstueOfNonReified.kt")
         public void testValueOfNonReified() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valueOfNonReified.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstueOfNonReified.kt");
         }
 
         @Test
-        @TestMetadata("values.kt")
+        @TestMetadata("konstues.kt")
         public void testValues() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/values.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstues.kt");
         }
 
         @Test
-        @TestMetadata("valuesAsArray.kt")
+        @TestMetadata("konstuesAsArray.kt")
         public void testValuesAsArray() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valuesAsArray.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstuesAsArray.kt");
         }
 
         @Test
-        @TestMetadata("valuesCapturedType.kt")
+        @TestMetadata("konstuesCapturedType.kt")
         public void testValuesCapturedType() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valuesCapturedType.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstuesCapturedType.kt");
         }
 
         @Test
-        @TestMetadata("valuesChain.kt")
+        @TestMetadata("konstuesChain.kt")
         public void testValuesChain() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valuesChain.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstuesChain.kt");
         }
 
         @Test
-        @TestMetadata("valuesChainCapturedType.kt")
+        @TestMetadata("konstuesChainCapturedType.kt")
         public void testValuesChainCapturedType() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valuesChainCapturedType.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstuesChainCapturedType.kt");
         }
 
         @Test
-        @TestMetadata("valuesNonReified.kt")
+        @TestMetadata("konstuesNonReified.kt")
         public void testValuesNonReified() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/enum/valuesNonReified.kt");
+            runTest("compiler/testData/codegen/boxInline/enum/konstuesNonReified.kt");
         }
     }
 
@@ -3417,9 +3417,9 @@ public class FirLightTreeBlackBoxInlineCodegenWithBytecodeInlinerTestGenerated e
                 }
 
                 @Test
-                @TestMetadata("wrongVarInterval.kt")
-                public void testWrongVarInterval() throws Exception {
-                    runTest("compiler/testData/codegen/boxInline/nonLocalReturns/tryFinally/callSite/wrongVarInterval.kt");
+                @TestMetadata("wrongVarInterkonst.kt")
+                public void testWrongVarInterkonst() throws Exception {
+                    runTest("compiler/testData/codegen/boxInline/nonLocalReturns/tryFinally/callSite/wrongVarInterkonst.kt");
                 }
             }
 
@@ -4021,15 +4021,15 @@ public class FirLightTreeBlackBoxInlineCodegenWithBytecodeInlinerTestGenerated e
         }
 
         @Test
-        @TestMetadata("kt35511_try_valueOf.kt")
-        public void testKt35511_try_valueOf() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/reified/kt35511_try_valueOf.kt");
+        @TestMetadata("kt35511_try_konstueOf.kt")
+        public void testKt35511_try_konstueOf() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/reified/kt35511_try_konstueOf.kt");
         }
 
         @Test
-        @TestMetadata("kt35511_try_values.kt")
-        public void testKt35511_try_values() throws Exception {
-            runTest("compiler/testData/codegen/boxInline/reified/kt35511_try_values.kt");
+        @TestMetadata("kt35511_try_konstues.kt")
+        public void testKt35511_try_konstues() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/reified/kt35511_try_konstues.kt");
         }
 
         @Test

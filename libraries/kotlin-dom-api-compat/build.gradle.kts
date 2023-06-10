@@ -6,12 +6,12 @@ plugins {
     kotlin("js")
 }
 
-val jsStdlibSources = "${projectDir}/../stdlib/js/src"
+konst jsStdlibSources = "${projectDir}/../stdlib/js/src"
 
 kotlin {
     js(IR) {
         sourceSets {
-            val main by getting {
+            konst main by getting {
                 if (!kotlinBuildProperties.isInIdeaSync) {
                     kotlin.srcDir("$jsStdlibSources/org.w3c")
                     kotlin.srcDir("$jsStdlibSources/kotlinx")
@@ -37,7 +37,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile>().configureEa
     compilerOptions.allWarningsAsErrors.set(true)
 }
 
-val emptyJavadocJar by tasks.creating(Jar::class) {
+konst emptyJavadocJar by tasks.creating(Jar::class) {
     archiveClassifier.set("javadoc")
 }
 

@@ -24,7 +24,7 @@ interface I {
     suspend fun bar()
 }
 
-class A(val v: String) : I {
+class A(konst v: String) : I {
     override inline suspend fun bar() {
         log += "before bar($v);"
         foo("1:$v")
@@ -48,16 +48,16 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 suspend fun baz() {
-    val a = A("A")
+    konst a = A("A")
     a.bar()
 
     log += "between bar;"
 
-    val b: I = A("B")
+    konst b: I = A("B")
     b.bar()
 }
 
-val expectedString =
+konst expectedString =
         "before bar(A);foo(1:A);@;inside bar(A);foo(2:A);@;after bar(A);" +
         "between bar;" +
         "before bar(B);foo(1:B);@;inside bar(B);foo(2:B);@;after bar(B);"

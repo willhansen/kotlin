@@ -9,21 +9,21 @@ import platform.CoreFoundation.__CFByteOrder
 import platform.darwin.NSObject
 
 class TheCallerIniOSMacos(p: NativePtr) {
-    val eVal: CBLAS_TRANSPOSE = AtlasConj
+    konst eVal: CBLAS_TRANSPOSE = AtlasConj
 
-    val eval2 = BNNSActivationFunctionAbs
+    konst ekonst2 = BNNSActivationFunctionAbs
 
     fun someWrapper() {
         CFAllocatorGetTypeID()
     }
 
-    val enumCall: kotlinx.cinterop.CEnum = __CFByteOrder.CFByteOrderLittleEndian
+    konst enumCall: kotlinx.cinterop.CEnum = __CFByteOrder.CFByteOrderLittleEndian
 }
 
  expect class WCommonizedCalls(pc: __CLPK_real) {
 
-    val eClass: NSObject // = ACAccount
-    val enumInteroped: kotlinx.cinterop.CEnum
+    konst eClass: NSObject // = ACAccount
+    konst enumInteroped: kotlinx.cinterop.CEnum
 }
 
 class CallMyFields {

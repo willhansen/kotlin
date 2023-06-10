@@ -16,18 +16,18 @@ import org.jetbrains.kotlin.fir.analysis.checkers.typeParameterSymbols
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirTypeParameterSymbolPointer(
-    private val ownerPointer: KtSymbolPointer<KtSymbolWithTypeParameters>,
-    private val name: Name,
-    private val index: Int,
+    private konst ownerPointer: KtSymbolPointer<KtSymbolWithTypeParameters>,
+    private konst name: Name,
+    private konst index: Int,
 ) : KtSymbolPointer<KtTypeParameterSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtTypeParameterSymbol? {
         require(analysisSession is KtFirAnalysisSession)
-        val ownerSymbol = with(analysisSession) {
+        konst ownerSymbol = with(analysisSession) {
             ownerPointer.restoreSymbol() ?: return null
         }
 
-        val firTypeParameterSymbol = ownerSymbol.firSymbol.typeParameterSymbols?.getOrNull(index)?.takeIf { it.name == name } ?: return null
+        konst firTypeParameterSymbol = ownerSymbol.firSymbol.typeParameterSymbols?.getOrNull(index)?.takeIf { it.name == name } ?: return null
         return analysisSession.firSymbolBuilder.classifierBuilder.buildTypeParameterSymbol(firTypeParameterSymbol)
     }
 

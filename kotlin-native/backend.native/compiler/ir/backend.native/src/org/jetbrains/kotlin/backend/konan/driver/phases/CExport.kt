@@ -13,23 +13,23 @@ import org.jetbrains.kotlin.backend.konan.cexport.CAdapterTypeTranslator
 import org.jetbrains.kotlin.backend.konan.driver.PhaseContext
 import java.io.File
 
-internal val BuildCExports = createSimpleNamedCompilerPhase<PsiToIrContext, FrontendPhaseOutput.Full, CAdapterExportedElements>(
+internal konst BuildCExports = createSimpleNamedCompilerPhase<PsiToIrContext, FrontendPhaseOutput.Full, CAdapterExportedElements>(
         "BuildCExports", "Build C exports",
         outputIfNotEnabled = { _, _, _, _ -> error("") }
 ) { context, input ->
-    val prefix = context.config.fullExportedNamePrefix.replace("-|\\.".toRegex(), "_")
-    val typeTranslator = CAdapterTypeTranslator(prefix, context.builtIns)
+    konst prefix = context.config.fullExportedNamePrefix.replace("-|\\.".toRegex(), "_")
+    konst typeTranslator = CAdapterTypeTranslator(prefix, context.builtIns)
     CAdapterGenerator(context, input.environment.configuration, typeTranslator).buildExports(input.moduleDescriptor)
 }
 
 internal data class CExportGenerateApiInput(
-        val elements: CAdapterExportedElements,
-        val headerFile: File,
-        val defFile: File?,
-        val cppAdapterFile: File,
+        konst elements: CAdapterExportedElements,
+        konst headerFile: File,
+        konst defFile: File?,
+        konst cppAdapterFile: File,
 )
 
-internal val CExportGenerateApiPhase = createSimpleNamedCompilerPhase<PhaseContext, CExportGenerateApiInput>(
+internal konst CExportGenerateApiPhase = createSimpleNamedCompilerPhase<PhaseContext, CExportGenerateApiInput>(
         name = "CExportGenerateApi",
         description = "Create C header for the exported API",
 ) { context, input ->
@@ -43,11 +43,11 @@ internal val CExportGenerateApiPhase = createSimpleNamedCompilerPhase<PhaseConte
 }
 
 internal class CExportCompileAdapterInput(
-        val cppAdapterFile: File,
-        val bitcodeAdapterFile: File,
+        konst cppAdapterFile: File,
+        konst bitcodeAdapterFile: File,
 )
 
-internal val CExportCompileAdapterPhase = createSimpleNamedCompilerPhase<PhaseContext, CExportCompileAdapterInput>(
+internal konst CExportCompileAdapterPhase = createSimpleNamedCompilerPhase<PhaseContext, CExportCompileAdapterInput>(
         name = "CExportCompileAdapter",
         description = "Compile C++ adapter to bitcode"
 ) { context, input ->

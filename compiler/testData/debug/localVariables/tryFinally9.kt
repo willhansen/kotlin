@@ -12,7 +12,7 @@ var x: String = ""
 fun compute(): String {
     try {
         try {
-            val y = 42
+            konst y = 42
             for (i in 0 until 1) {
                 return "NORMAL_RETURN"
             }
@@ -34,8 +34,8 @@ fun compute(): String {
 }
 
 fun box() {
-    val result = compute()
-    val localX = x
+    konst result = compute()
+    konst localX = x
 }
 
 // EXPECTATIONS JVM JVM_IR

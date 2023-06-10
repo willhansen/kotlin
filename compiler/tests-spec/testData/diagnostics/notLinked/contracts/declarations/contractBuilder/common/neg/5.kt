@@ -25,7 +25,7 @@ fun case_2(): Boolean {
 
 // TESTCASE NUMBER: 3
 fun case_3(): Boolean {
-    contract { returns(false) implies (<!ERROR_IN_CONTRACT_DESCRIPTION, TYPE_MISMATCH!>"..." + "$<!UNRESOLVED_REFERENCE!>value_1<!>"<!>) }
+    contract { returns(false) implies (<!ERROR_IN_CONTRACT_DESCRIPTION, TYPE_MISMATCH!>"..." + "$<!UNRESOLVED_REFERENCE!>konstue_1<!>"<!>) }
     return true
 }
 
@@ -45,8 +45,8 @@ fun case_5(): Boolean? {
 }
 
 // TESTCASE NUMBER: 6
-fun case_6(value_1: Boolean): Boolean? {
-    contract { returns(null) implies <!ERROR_IN_CONTRACT_DESCRIPTION, TYPE_MISMATCH!><!CONTRACT_NOT_ALLOWED, CONTRACT_NOT_ALLOWED!>contract<!> { returns(null) implies (!value_1) }<!> }
+fun case_6(konstue_1: Boolean): Boolean? {
+    contract { returns(null) implies <!ERROR_IN_CONTRACT_DESCRIPTION, TYPE_MISMATCH!><!CONTRACT_NOT_ALLOWED, CONTRACT_NOT_ALLOWED!>contract<!> { returns(null) implies (!konstue_1) }<!> }
     return null
 }
 

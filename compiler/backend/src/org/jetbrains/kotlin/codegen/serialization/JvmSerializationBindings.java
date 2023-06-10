@@ -55,8 +55,8 @@ public final class JvmSerializationBindings {
 
     private final MutableSlicedMap map = new SlicedMapImpl(false);
 
-    public <K, V> void put(@NotNull SerializationMappingSlice<K, V> slice, @NotNull K key, @NotNull V value) {
-        map.put(slice, key, value);
+    public <K, V> void put(@NotNull SerializationMappingSlice<K, V> slice, @NotNull K key, @NotNull V konstue) {
+        map.put(slice, key, konstue);
     }
 
     @Nullable

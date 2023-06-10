@@ -3,9 +3,9 @@ package foo
 
 var global: String = ""
 
-fun id(s: String, value: Boolean): Boolean {
+fun id(s: String, konstue: Boolean): Boolean {
     global += s
-    return value
+    return konstue
 }
 
 fun box(): String {

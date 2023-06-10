@@ -11,7 +11,7 @@ package kotlin.js
 [Int8Array, Int16Array, Uint16Array, Int32Array, Float32Array, Float64Array].forEach(function (TypedArray) {
     if (typeof TypedArray.prototype.sort === "undefined") {
         Object.defineProperty(TypedArray.prototype, 'sort', {
-            value: function(compareFunction) {
+            konstue: function(compareFunction) {
                 compareFunction = compareFunction || function (a, b) {
                     if (a < b) return -1;
                     if (a > b) return 1;

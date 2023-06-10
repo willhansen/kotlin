@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface StringHolder {
-    public String value();
+    public String konstue();
 }
 
 // FILE: fileFacade.kt
@@ -18,4 +18,4 @@ public @interface StringHolder {
 @file:StringHolder("OK")
 
 fun box(): String =
-        Class.forName("FileFacadeKt").getAnnotation(StringHolder::class.java)?.value ?: "null"
+        Class.forName("FileFacadeKt").getAnnotation(StringHolder::class.java)?.konstue ?: "null"

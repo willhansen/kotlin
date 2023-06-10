@@ -11,12 +11,12 @@ import kotlin.coroutines.intrinsics.*
 fun runCustomLambdaAsCoroutine(e: Throwable? = null, x: (Continuation<String>) -> Any?): String {
     var result = "fail"
     var wasIntercepted = false
-    val c = (x as suspend () -> String).createCoroutine(object: Continuation<String> {
-        override fun resumeWith(value: Result<String>) {
-            result = value.getOrThrow()
+    konst c = (x as suspend () -> String).createCoroutine(object: Continuation<String> {
+        override fun resumeWith(konstue: Result<String>) {
+            result = konstue.getOrThrow()
         }
 
-        override val context: CoroutineContext
+        override konst context: CoroutineContext
             get() = object: ContinuationInterceptor {
                 override fun <R> fold(initial: R, operation: (R, CoroutineContext.Element) -> R): R {
                     throw IllegalStateException()
@@ -30,12 +30,12 @@ fun runCustomLambdaAsCoroutine(e: Throwable? = null, x: (Continuation<String>) -
                 }
 
                 override fun <T> interceptContinuation(continuation: Continuation<T>) = object : Continuation<T> {
-                    override val context: CoroutineContext
+                    override konst context: CoroutineContext
                         get() = continuation.context
 
-                    override fun resumeWith(value: Result<T>) {
+                    override fun resumeWith(konstue: Result<T>) {
                         wasIntercepted = true
-                        continuation.resumeWith(value)
+                        continuation.resumeWith(konstue)
                     }
                 }
 
@@ -47,7 +47,7 @@ fun runCustomLambdaAsCoroutine(e: Throwable? = null, x: (Continuation<String>) -
                     throw IllegalStateException()
                 }
 
-                override val key: CoroutineContext.Key<*>
+                override konst key: CoroutineContext.Key<*>
                     get() = ContinuationInterceptor.Key
             }
     })
@@ -63,14 +63,14 @@ fun runCustomLambdaAsCoroutine(e: Throwable? = null, x: (Continuation<String>) -
 }
 
 fun box(): String {
-    val x = runCustomLambdaAsCoroutine {
+    konst x = runCustomLambdaAsCoroutine {
         it.resume("OK")
         COROUTINE_SUSPENDED
     }
 
     if (x != "OK") return "fail 1: $x"
 
-    val y = runCustomLambdaAsCoroutine {
+    konst y = runCustomLambdaAsCoroutine {
         "OK"
     }
 

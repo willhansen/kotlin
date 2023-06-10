@@ -11,7 +11,7 @@ class Sample {
 }
 
 class A {
-    val foo  = "hello"
+    konst foo  = "hello"
     fun foo(b: Boolean) = 1
 }
 

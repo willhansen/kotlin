@@ -20,18 +20,18 @@ fun <S> Builder<S>.extensionAdd(s: S) {}
 
 fun <S> Builder<S>.safeExtensionAdd(s: S) {}
 
-val member = build {
+konst member = build {
     add(42)
 }
 
-val memberWithoutAnn = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER{OI}!>wrongBuild<!> {
+konst memberWithoutAnn = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER{OI}!>wrongBuild<!> {
     add(42)
 }
 
-val extension = build {
+konst extension = build {
     extensionAdd("foo")
 }
 
-val safeExtension = build {
+konst safeExtension = build {
     safeExtensionAdd("foo")
 }

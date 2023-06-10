@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.utils.Printer
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class ExplicitImportsScope(private val descriptors: Collection<DeclarationDescriptor>) : BaseImportingScope(null) {
+class ExplicitImportsScope(private konst descriptors: Collection<DeclarationDescriptor>) : BaseImportingScope(null) {
     override fun getContributedClassifier(name: Name, location: LookupLocation) =
         descriptors.filter { it.name == name }.firstIsInstanceOrNull<ClassifierDescriptor>()
 

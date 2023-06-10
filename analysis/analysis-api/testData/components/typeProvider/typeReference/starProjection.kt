@@ -7,6 +7,6 @@ class StringSub : Base<String> {
 }
 
 fun test() {
-    val x : Base<<caret>*> = StringSub()
+    konst x : Base<<caret>*> = StringSub()
     x.foo("42")
 }

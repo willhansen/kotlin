@@ -20,21 +20,21 @@ import org.jetbrains.kotlin.load.java.structure.JavaPrimitiveType
 import org.jetbrains.kotlin.load.java.structure.JavaType
 
 class FirJavaTypeRef(
-    val type: JavaType,
+    konst type: JavaType,
     annotationBuilder: () -> List<FirAnnotation>
 ) : FirUserTypeRef() {
-    override val customRenderer: Boolean
+    override konst customRenderer: Boolean
         get() = true
 
-    override val isMarkedNullable: Boolean
+    override konst isMarkedNullable: Boolean
         get() = false
 
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = null
 
-    override val annotations: List<FirAnnotation> by lazy { annotationBuilder() }
+    override konst annotations: List<FirAnnotation> by lazy { annotationBuilder() }
 
-    override val qualifier: List<FirQualifierPart>
+    override konst qualifier: List<FirQualifierPart>
         get() = emptyList()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

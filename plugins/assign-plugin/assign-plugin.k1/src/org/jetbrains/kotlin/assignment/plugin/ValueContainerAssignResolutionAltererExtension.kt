@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.types.typeUtil.makeNotNullable
 import java.util.*
 
 class CliAssignPluginResolutionAltererExtension(
-    private val annotations: List<String>
+    private konst annotations: List<String>
 ) : AbstractAssignPluginResolutionAltererExtension() {
     override fun getAnnotationFqNames(modifierListOwner: KtModifierListOwner?): List<String> = annotations
 }
@@ -47,7 +47,7 @@ abstract class AbstractAssignPluginResolutionAltererExtension : AssignResolution
     }
 
     private fun KtBinaryExpression.isValPropertyAssignment(bindingContext: BindingContext): Boolean {
-        val descriptor: VariableDescriptor? = BindingContextUtils.extractVariableFromResolvedCall(bindingContext, this.left)
+        konst descriptor: VariableDescriptor? = BindingContextUtils.extractVariableFromResolvedCall(bindingContext, this.left)
         return descriptor is PropertyDescriptor && !descriptor.isVar
     }
 
@@ -68,14 +68,14 @@ abstract class AbstractAssignPluginResolutionAltererExtension : AssignResolution
         if (leftOperand is KtSafeQualifiedExpression) {
             leftType = leftType.makeNotNullable()
         }
-        val receiver = create(left, leftType, context.trace.bindingContext)
-        val operationSign: KtSimpleNameExpression = expression.operationReference
-        val temporaryForAssignmentOperation: TemporaryTraceAndCache =
+        konst receiver = create(left, leftType, context.trace.bindingContext)
+        konst operationSign: KtSimpleNameExpression = expression.operationReference
+        konst temporaryForAssignmentOperation: TemporaryTraceAndCache =
             TemporaryTraceAndCache.create(context, "trace to check assignment operation like '=' for", expression)
-        val temporaryContext = context.replaceTraceAndCache(temporaryForAssignmentOperation).replaceScope(scope)
-        val methodDescriptors: OverloadResolutionResults<FunctionDescriptor> =
+        konst temporaryContext = context.replaceTraceAndCache(temporaryForAssignmentOperation).replaceScope(scope)
+        konst methodDescriptors: OverloadResolutionResults<FunctionDescriptor> =
             components.callResolver.resolveMethodCall(temporaryContext, receiver, expression)
-        val methodReturnType: KotlinType? = OverloadResolutionResultsUtil.getResultingType(methodDescriptors, context)
+        konst methodReturnType: KotlinType? = OverloadResolutionResultsUtil.getResultingType(methodDescriptors, context)
 
         if (methodDescriptors.isSuccess && methodReturnType != null) {
             temporaryForAssignmentOperation.commit()
@@ -93,7 +93,7 @@ abstract class AbstractAssignPluginResolutionAltererExtension : AssignResolution
     private fun CallResolver.resolveMethodCall(
         context: ExpressionTypingContext, receiver: ExpressionReceiver, binaryExpression: KtBinaryExpression
     ): OverloadResolutionResults<FunctionDescriptor> {
-        val call = makeCallWithExpressions(
+        konst call = makeCallWithExpressions(
             binaryExpression, receiver, null, binaryExpression.operationReference, Collections.singletonList(binaryExpression.right)
         )
         return resolveCallWithGivenName(context, call, binaryExpression.operationReference, ASSIGN_METHOD)

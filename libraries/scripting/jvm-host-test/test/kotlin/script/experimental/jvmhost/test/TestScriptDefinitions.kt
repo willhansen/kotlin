@@ -16,11 +16,11 @@ import kotlin.script.experimental.jvmhost.createJvmCompilationConfigurationFromT
 @KotlinScript(fileExtension = "simplescript.kts")
 abstract class SimpleScript
 
-val simpleScriptCompilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScript> {
+konst simpleScriptCompilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScript> {
     updateClasspath(classpathFromClass<SimpleScript>())
 }
 
-val simpleScriptEvaluationConfiguration = ScriptEvaluationConfiguration()
+konst simpleScriptEkonstuationConfiguration = ScriptEkonstuationConfiguration()
 
 @KotlinScript(fileExtension = "withboth.kts", compilationConfiguration = ReceiverAndPropertiesConfiguration::class)
 abstract class ScriptWithBoth
@@ -57,14 +57,14 @@ object ImplicitReceiverConfiguration : ScriptCompilationConfiguration(
     }
 )
 
-class ImplicitReceiverClass(val receiverString: String)
+class ImplicitReceiverClass(konst receiverString: String)
 
-inline fun <reified T : Any> evalString(
+inline fun <reified T : Any> ekonstString(
     source: String,
-    noinline configure: ScriptEvaluationConfiguration.Builder.() -> Unit
-): ResultWithDiagnostics<EvaluationResult> {
-    val actualConfiguration = createJvmCompilationConfigurationFromTemplate<T>()
+    noinline configure: ScriptEkonstuationConfiguration.Builder.() -> Unit
+): ResultWithDiagnostics<EkonstuationResult> {
+    konst actualConfiguration = createJvmCompilationConfigurationFromTemplate<T>()
     return BasicJvmScriptingHost()
-        .eval(source.toScriptSource(), actualConfiguration, ScriptEvaluationConfiguration(configure))
+        .ekonst(source.toScriptSource(), actualConfiguration, ScriptEkonstuationConfiguration(configure))
 }
 

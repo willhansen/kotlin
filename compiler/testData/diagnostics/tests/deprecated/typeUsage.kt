@@ -20,12 +20,12 @@ class TypeParam : Generic<<!DEPRECATION!>Obsolete<!>>
 object Object : <!DEPRECATION!>Obsolete<!>()
 
 class Properties {
-    val x : <!DEPRECATION!>Obsolete<!> = <!DEPRECATION!>Obsolete<!>()
+    konst x : <!DEPRECATION!>Obsolete<!> = <!DEPRECATION!>Obsolete<!>()
     var y : <!DEPRECATION!>Obsolete<!> = <!DEPRECATION!>Obsolete<!>()
 
     var n : <!DEPRECATION!>Obsolete<!>
     get() = <!DEPRECATION!>Obsolete<!>()
-    set(value) {}
+    set(konstue) {}
 }
 
 fun param(param: <!DEPRECATION!>Obsolete<!>) { param.use() }

@@ -1,7 +1,7 @@
-class Outer(val value: String) {
+class Outer(konst konstue: String) {
 
     inner class Inner {
-        fun Outer.foo() = value
+        fun Outer.foo() = konstue
     }
 }
 

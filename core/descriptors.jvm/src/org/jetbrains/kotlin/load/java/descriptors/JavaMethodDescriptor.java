@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 public class JavaMethodDescriptor extends SimpleFunctionDescriptorImpl implements JavaCallableMemberDescriptor {
-    // TODO: It's only used to retrieve annotations from the original value parameter and can be removed when
+    // TODO: It's only used to retrieve annotations from the original konstue parameter and can be removed when
     // org.jetbrains.kotlin.descriptors.impl.FunctionDescriptorImpl.initialize accepts extension parameter descriptor
     // instead of type
     public static final UserDataKey<ValueParameterDescriptor> ORIGINAL_VALUE_PARAMETER_FOR_EXTENSION_RECEIVER =

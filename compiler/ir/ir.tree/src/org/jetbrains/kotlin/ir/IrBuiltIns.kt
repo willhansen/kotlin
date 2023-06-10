@@ -25,132 +25,132 @@ import org.jetbrains.kotlin.name.Name
  * (but specific to the frontend)
  */
 abstract class IrBuiltIns {
-    abstract val languageVersionSettings: LanguageVersionSettings
+    abstract konst languageVersionSettings: LanguageVersionSettings
 
-    abstract val irFactory: IrFactory
+    abstract konst irFactory: IrFactory
 
-    abstract val anyType: IrType
-    abstract val anyClass: IrClassSymbol
-    abstract val anyNType: IrType
-    abstract val booleanType: IrType
-    abstract val booleanClass: IrClassSymbol
-    abstract val charType: IrType
-    abstract val charClass: IrClassSymbol
-    abstract val numberType: IrType
-    abstract val numberClass: IrClassSymbol
-    abstract val byteType: IrType
-    abstract val byteClass: IrClassSymbol
-    abstract val shortType: IrType
-    abstract val shortClass: IrClassSymbol
-    abstract val intType: IrType
-    abstract val intClass: IrClassSymbol
-    abstract val longType: IrType
-    abstract val longClass: IrClassSymbol
-    abstract val floatType: IrType
-    abstract val floatClass: IrClassSymbol
-    abstract val doubleType: IrType
-    abstract val doubleClass: IrClassSymbol
-    abstract val nothingType: IrType
-    abstract val nothingClass: IrClassSymbol
-    abstract val nothingNType: IrType
-    abstract val unitType: IrType
-    abstract val unitClass: IrClassSymbol
-    abstract val stringType: IrType
-    abstract val stringClass: IrClassSymbol
-    abstract val charSequenceClass: IrClassSymbol
+    abstract konst anyType: IrType
+    abstract konst anyClass: IrClassSymbol
+    abstract konst anyNType: IrType
+    abstract konst booleanType: IrType
+    abstract konst booleanClass: IrClassSymbol
+    abstract konst charType: IrType
+    abstract konst charClass: IrClassSymbol
+    abstract konst numberType: IrType
+    abstract konst numberClass: IrClassSymbol
+    abstract konst byteType: IrType
+    abstract konst byteClass: IrClassSymbol
+    abstract konst shortType: IrType
+    abstract konst shortClass: IrClassSymbol
+    abstract konst intType: IrType
+    abstract konst intClass: IrClassSymbol
+    abstract konst longType: IrType
+    abstract konst longClass: IrClassSymbol
+    abstract konst floatType: IrType
+    abstract konst floatClass: IrClassSymbol
+    abstract konst doubleType: IrType
+    abstract konst doubleClass: IrClassSymbol
+    abstract konst nothingType: IrType
+    abstract konst nothingClass: IrClassSymbol
+    abstract konst nothingNType: IrType
+    abstract konst unitType: IrType
+    abstract konst unitClass: IrClassSymbol
+    abstract konst stringType: IrType
+    abstract konst stringClass: IrClassSymbol
+    abstract konst charSequenceClass: IrClassSymbol
 
-    abstract val collectionClass: IrClassSymbol
-    abstract val arrayClass: IrClassSymbol
-    abstract val setClass: IrClassSymbol
-    abstract val listClass: IrClassSymbol
-    abstract val mapClass: IrClassSymbol
-    abstract val mapEntryClass: IrClassSymbol
-    abstract val iterableClass: IrClassSymbol
-    abstract val iteratorClass: IrClassSymbol
-    abstract val listIteratorClass: IrClassSymbol
-    abstract val mutableCollectionClass: IrClassSymbol
-    abstract val mutableSetClass: IrClassSymbol
-    abstract val mutableListClass: IrClassSymbol
-    abstract val mutableMapClass: IrClassSymbol
-    abstract val mutableMapEntryClass: IrClassSymbol
-    abstract val mutableIterableClass: IrClassSymbol
-    abstract val mutableIteratorClass: IrClassSymbol
-    abstract val mutableListIteratorClass: IrClassSymbol
+    abstract konst collectionClass: IrClassSymbol
+    abstract konst arrayClass: IrClassSymbol
+    abstract konst setClass: IrClassSymbol
+    abstract konst listClass: IrClassSymbol
+    abstract konst mapClass: IrClassSymbol
+    abstract konst mapEntryClass: IrClassSymbol
+    abstract konst iterableClass: IrClassSymbol
+    abstract konst iteratorClass: IrClassSymbol
+    abstract konst listIteratorClass: IrClassSymbol
+    abstract konst mutableCollectionClass: IrClassSymbol
+    abstract konst mutableSetClass: IrClassSymbol
+    abstract konst mutableListClass: IrClassSymbol
+    abstract konst mutableMapClass: IrClassSymbol
+    abstract konst mutableMapEntryClass: IrClassSymbol
+    abstract konst mutableIterableClass: IrClassSymbol
+    abstract konst mutableIteratorClass: IrClassSymbol
+    abstract konst mutableListIteratorClass: IrClassSymbol
 
-    abstract val comparableClass: IrClassSymbol
-    abstract val throwableType: IrType
-    abstract val throwableClass: IrClassSymbol
-    abstract val kCallableClass: IrClassSymbol
-    abstract val kPropertyClass: IrClassSymbol
-    abstract val kClassClass: IrClassSymbol
-    abstract val kProperty0Class: IrClassSymbol
-    abstract val kProperty1Class: IrClassSymbol
-    abstract val kProperty2Class: IrClassSymbol
-    abstract val kMutableProperty0Class: IrClassSymbol
-    abstract val kMutableProperty1Class: IrClassSymbol
-    abstract val kMutableProperty2Class: IrClassSymbol
-    abstract val functionClass: IrClassSymbol
-    abstract val kFunctionClass: IrClassSymbol
-    abstract val annotationType: IrType
-    abstract val annotationClass: IrClassSymbol
+    abstract konst comparableClass: IrClassSymbol
+    abstract konst throwableType: IrType
+    abstract konst throwableClass: IrClassSymbol
+    abstract konst kCallableClass: IrClassSymbol
+    abstract konst kPropertyClass: IrClassSymbol
+    abstract konst kClassClass: IrClassSymbol
+    abstract konst kProperty0Class: IrClassSymbol
+    abstract konst kProperty1Class: IrClassSymbol
+    abstract konst kProperty2Class: IrClassSymbol
+    abstract konst kMutableProperty0Class: IrClassSymbol
+    abstract konst kMutableProperty1Class: IrClassSymbol
+    abstract konst kMutableProperty2Class: IrClassSymbol
+    abstract konst functionClass: IrClassSymbol
+    abstract konst kFunctionClass: IrClassSymbol
+    abstract konst annotationType: IrType
+    abstract konst annotationClass: IrClassSymbol
 
     // TODO: consider removing to get rid of descriptor-related dependencies
-    abstract val primitiveTypeToIrType: Map<PrimitiveType, IrType>
+    abstract konst primitiveTypeToIrType: Map<PrimitiveType, IrType>
 
-    abstract val primitiveIrTypes: List<IrType>
-    abstract val primitiveIrTypesWithComparisons: List<IrType>
-    abstract val primitiveFloatingPointIrTypes: List<IrType>
+    abstract konst primitiveIrTypes: List<IrType>
+    abstract konst primitiveIrTypesWithComparisons: List<IrType>
+    abstract konst primitiveFloatingPointIrTypes: List<IrType>
 
-    abstract val byteArray: IrClassSymbol
-    abstract val charArray: IrClassSymbol
-    abstract val shortArray: IrClassSymbol
-    abstract val intArray: IrClassSymbol
-    abstract val longArray: IrClassSymbol
-    abstract val floatArray: IrClassSymbol
-    abstract val doubleArray: IrClassSymbol
-    abstract val booleanArray: IrClassSymbol
+    abstract konst byteArray: IrClassSymbol
+    abstract konst charArray: IrClassSymbol
+    abstract konst shortArray: IrClassSymbol
+    abstract konst intArray: IrClassSymbol
+    abstract konst longArray: IrClassSymbol
+    abstract konst floatArray: IrClassSymbol
+    abstract konst doubleArray: IrClassSymbol
+    abstract konst booleanArray: IrClassSymbol
 
-    abstract val primitiveArraysToPrimitiveTypes: Map<IrClassSymbol, PrimitiveType>
-    abstract val primitiveTypesToPrimitiveArrays: Map<PrimitiveType, IrClassSymbol>
-    abstract val primitiveArrayElementTypes: Map<IrClassSymbol, IrType?>
-    abstract val primitiveArrayForType: Map<IrType?, IrClassSymbol>
+    abstract konst primitiveArraysToPrimitiveTypes: Map<IrClassSymbol, PrimitiveType>
+    abstract konst primitiveTypesToPrimitiveArrays: Map<PrimitiveType, IrClassSymbol>
+    abstract konst primitiveArrayElementTypes: Map<IrClassSymbol, IrType?>
+    abstract konst primitiveArrayForType: Map<IrType?, IrClassSymbol>
 
-    abstract val unsignedTypesToUnsignedArrays: Map<UnsignedType, IrClassSymbol>
-    abstract val unsignedArraysElementTypes: Map<IrClassSymbol, IrType?>
+    abstract konst unsignedTypesToUnsignedArrays: Map<UnsignedType, IrClassSymbol>
+    abstract konst unsignedArraysElementTypes: Map<IrClassSymbol, IrType?>
 
-    abstract val lessFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
-    abstract val lessOrEqualFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
-    abstract val greaterOrEqualFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
-    abstract val greaterFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
-    abstract val ieee754equalsFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
-    abstract val booleanNotSymbol: IrSimpleFunctionSymbol
-    abstract val eqeqeqSymbol: IrSimpleFunctionSymbol
-    abstract val eqeqSymbol: IrSimpleFunctionSymbol
-    abstract val throwCceSymbol: IrSimpleFunctionSymbol
-    abstract val throwIseSymbol: IrSimpleFunctionSymbol
-    abstract val andandSymbol: IrSimpleFunctionSymbol
-    abstract val ororSymbol: IrSimpleFunctionSymbol
-    abstract val noWhenBranchMatchedExceptionSymbol: IrSimpleFunctionSymbol
-    abstract val illegalArgumentExceptionSymbol: IrSimpleFunctionSymbol
-    abstract val checkNotNullSymbol: IrSimpleFunctionSymbol
-    abstract val dataClassArrayMemberHashCodeSymbol: IrSimpleFunctionSymbol
-    abstract val dataClassArrayMemberToStringSymbol: IrSimpleFunctionSymbol
-    abstract val enumClass: IrClassSymbol
+    abstract konst lessFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
+    abstract konst lessOrEqualFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
+    abstract konst greaterOrEqualFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
+    abstract konst greaterFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
+    abstract konst ieee754equalsFunByOperandType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>
+    abstract konst booleanNotSymbol: IrSimpleFunctionSymbol
+    abstract konst eqeqeqSymbol: IrSimpleFunctionSymbol
+    abstract konst eqeqSymbol: IrSimpleFunctionSymbol
+    abstract konst throwCceSymbol: IrSimpleFunctionSymbol
+    abstract konst throwIseSymbol: IrSimpleFunctionSymbol
+    abstract konst andandSymbol: IrSimpleFunctionSymbol
+    abstract konst ororSymbol: IrSimpleFunctionSymbol
+    abstract konst noWhenBranchMatchedExceptionSymbol: IrSimpleFunctionSymbol
+    abstract konst illegalArgumentExceptionSymbol: IrSimpleFunctionSymbol
+    abstract konst checkNotNullSymbol: IrSimpleFunctionSymbol
+    abstract konst dataClassArrayMemberHashCodeSymbol: IrSimpleFunctionSymbol
+    abstract konst dataClassArrayMemberToStringSymbol: IrSimpleFunctionSymbol
+    abstract konst enumClass: IrClassSymbol
 
-    abstract val intPlusSymbol: IrSimpleFunctionSymbol
-    abstract val intTimesSymbol: IrSimpleFunctionSymbol
-    abstract val intXorSymbol: IrSimpleFunctionSymbol
+    abstract konst intPlusSymbol: IrSimpleFunctionSymbol
+    abstract konst intTimesSymbol: IrSimpleFunctionSymbol
+    abstract konst intXorSymbol: IrSimpleFunctionSymbol
 
-    abstract val extensionToString: IrSimpleFunctionSymbol
-    abstract val memberToString: IrSimpleFunctionSymbol
+    abstract konst extensionToString: IrSimpleFunctionSymbol
+    abstract konst memberToString: IrSimpleFunctionSymbol
 
-    abstract val extensionStringPlus: IrSimpleFunctionSymbol
-    abstract val memberStringPlus: IrSimpleFunctionSymbol
+    abstract konst extensionStringPlus: IrSimpleFunctionSymbol
+    abstract konst memberStringPlus: IrSimpleFunctionSymbol
 
-    abstract val arrayOf: IrSimpleFunctionSymbol
-    abstract val arrayOfNulls: IrSimpleFunctionSymbol
+    abstract konst arrayOf: IrSimpleFunctionSymbol
+    abstract konst arrayOfNulls: IrSimpleFunctionSymbol
 
-    abstract val linkageErrorSymbol: IrSimpleFunctionSymbol
+    abstract konst linkageErrorSymbol: IrSimpleFunctionSymbol
 
     abstract fun functionN(arity: Int): IrClass
     abstract fun kFunctionN(arity: Int): IrClass
@@ -179,27 +179,27 @@ abstract class IrBuiltIns {
     abstract fun getBinaryOperator(name: Name, lhsType: IrType, rhsType: IrType): IrSimpleFunctionSymbol
     abstract fun getUnaryOperator(name: Name, receiverType: IrType): IrSimpleFunctionSymbol
 
-    abstract val operatorsPackageFragment: IrExternalPackageFragment
+    abstract konst operatorsPackageFragment: IrExternalPackageFragment
 
     companion object {
-        val KOTLIN_INTERNAL_IR_FQN = FqName("kotlin.internal.ir")
-        val BUILTIN_OPERATOR = object : IrDeclarationOriginImpl("OPERATOR") {}
+        konst KOTLIN_INTERNAL_IR_FQN = FqName("kotlin.internal.ir")
+        konst BUILTIN_OPERATOR = object : IrDeclarationOriginImpl("OPERATOR") {}
     }
 }
 
 object BuiltInOperatorNames {
-    const val LESS = "less"
-    const val LESS_OR_EQUAL = "lessOrEqual"
-    const val GREATER = "greater"
-    const val GREATER_OR_EQUAL = "greaterOrEqual"
-    const val EQEQ = "EQEQ"
-    const val EQEQEQ = "EQEQEQ"
-    const val IEEE754_EQUALS = "ieee754equals"
-    const val THROW_CCE = "THROW_CCE"
-    const val THROW_ISE = "THROW_ISE"
-    const val NO_WHEN_BRANCH_MATCHED_EXCEPTION = "noWhenBranchMatchedException"
-    const val ILLEGAL_ARGUMENT_EXCEPTION = "illegalArgumentException"
-    const val ANDAND = "ANDAND"
-    const val OROR = "OROR"
-    const val CHECK_NOT_NULL = "CHECK_NOT_NULL"
+    const konst LESS = "less"
+    const konst LESS_OR_EQUAL = "lessOrEqual"
+    const konst GREATER = "greater"
+    const konst GREATER_OR_EQUAL = "greaterOrEqual"
+    const konst EQEQ = "EQEQ"
+    const konst EQEQEQ = "EQEQEQ"
+    const konst IEEE754_EQUALS = "ieee754equals"
+    const konst THROW_CCE = "THROW_CCE"
+    const konst THROW_ISE = "THROW_ISE"
+    const konst NO_WHEN_BRANCH_MATCHED_EXCEPTION = "noWhenBranchMatchedException"
+    const konst ILLEGAL_ARGUMENT_EXCEPTION = "illegalArgumentException"
+    const konst ANDAND = "ANDAND"
+    const konst OROR = "OROR"
+    const konst CHECK_NOT_NULL = "CHECK_NOT_NULL"
 }

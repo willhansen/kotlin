@@ -15,7 +15,7 @@ public class Collections {
 fun bar(): List<String> = null!!
 
 fun test() {
-    val f = if (true) {
+    konst f = if (true) {
         Collections.emptyList()
     }
     else {

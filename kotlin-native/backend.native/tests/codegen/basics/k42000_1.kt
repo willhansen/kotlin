@@ -9,7 +9,7 @@ fun runTest() {
 
 // Based on https://youtrack.jetbrains.com/issue/KT-42000#focus=Comments-27-4404934.0-0
 
-val Int.isEven get() = this % 2 == 0
+konst Int.isEven get() = this % 2 == 0
 
 inline operator fun <reified T : Number> T.plus(other: T): T = when (T::class) {
     Double::class -> (this as Double) + (other as Double)
@@ -19,7 +19,7 @@ inline operator fun <reified T : Number> T.plus(other: T): T = when (T::class) {
 } as T
 
 inline fun <reified T : Number> Collection<T>.median(): Double {
-    val sorted = this.sortedBy {
+    konst sorted = this.sortedBy {
         it.toDouble()
     }
 

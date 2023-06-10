@@ -17,12 +17,12 @@ kotlin {
     // feel free to add more modules, variants and fragments
     mainAndTest {
         jvm
-        val linuxX64 by fragments.creating(GradleKpmLinuxX64Variant::class)
+        konst linuxX64 by fragments.creating(GradleKpmLinuxX64Variant::class)
     }
 
-    val secondaryModule by modules.creating {
+    konst secondaryModule by modules.creating {
         jvm
-        val linuxArm64 by fragments.creating(GradleKpmLinuxArm64Variant::class)
+        konst linuxArm64 by fragments.creating(GradleKpmLinuxArm64Variant::class)
 
         makePublic()
     }
@@ -32,9 +32,9 @@ kotlin {
         jvm.dependencies { implementation(kotlin("test-junit")) }
     }
 
-    val integrationTest by modules.creating {
+    konst integrationTest by modules.creating {
         jvm
-        val linuxX64 by fragments.creating(GradleKpmLinuxX64Variant::class)
+        konst linuxX64 by fragments.creating(GradleKpmLinuxX64Variant::class)
     }
 }
 

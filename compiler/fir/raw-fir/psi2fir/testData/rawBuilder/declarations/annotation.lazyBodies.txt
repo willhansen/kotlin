@@ -10,7 +10,7 @@ FILE: annotation.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @base() public? final? val x: Int = R|<local>/x|
+        @base() public? final? konst x: Int = R|<local>/x|
             public? get(): Int
 
         @base() public? constructor(): R|correct| {
@@ -25,27 +25,27 @@ FILE: annotation.kt
 
         @base() public final static enum entry FIRST: R|My| = LAZY_EXPRESSION
         @base() public final static enum entry SECOND: R|My| = LAZY_EXPRESSION
-        public final static fun values(): R|kotlin/Array<My>| {
+        public final static fun konstues(): R|kotlin/Array<My>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|My| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|My| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<My>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<My>|
             public get(): R|kotlin/enums/EnumEntries<My>|
 
     }
     @base() public? final? fun foo(@base() y: @base() Int): Int { LAZY_BLOCK }
-    @base() public? final? val z: <implicit> = LAZY_EXPRESSION
+    @base() public? final? konst z: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    @base() public? final? val x: Map<@base() Int, List<@base() Int>> = LAZY_EXPRESSION
+    @base() public? final? konst x: Map<@base() Int, List<@base() Int>> = LAZY_EXPRESSION
         public? get(): Map<@base() Int, List<@base() Int>>
     @Target(LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION) @base() public? final? annotation class derived : base, R|kotlin/Annotation| {
         public? constructor(x: Int): R|derived| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val x: Int = R|<local>/x|
+        public? final? konst x: Int = R|<local>/x|
             public? get(): Int
 
     }
@@ -54,7 +54,7 @@ FILE: annotation.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @derived(LAZY_EXPRESSION) public? final? val x: Int = R|<local>/x|
+        @derived(LAZY_EXPRESSION) public? final? konst x: Int = R|<local>/x|
             public? get(): Int
 
         @base() public? constructor(): R|correctDerived| {
@@ -69,18 +69,18 @@ FILE: annotation.kt
 
         @derived(LAZY_EXPRESSION) public final static enum entry FIRST: R|MyDerived| = LAZY_EXPRESSION
         @derived(LAZY_EXPRESSION) public final static enum entry SECOND: R|MyDerived| = LAZY_EXPRESSION
-        public final static fun values(): R|kotlin/Array<MyDerived>| {
+        public final static fun konstues(): R|kotlin/Array<MyDerived>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|MyDerived| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|MyDerived| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<MyDerived>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<MyDerived>|
             public get(): R|kotlin/enums/EnumEntries<MyDerived>|
 
     }
     @derived(LAZY_EXPRESSION) public? final? fun fooDerived(@derived(LAZY_EXPRESSION) y: @derived(LAZY_EXPRESSION) Int): Int { LAZY_BLOCK }
-    @derived(LAZY_EXPRESSION) public? final? val zDerived: <implicit> = LAZY_EXPRESSION
+    @derived(LAZY_EXPRESSION) public? final? konst zDerived: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    @derived(LAZY_EXPRESSION) public? final? val xDerived: Map<@derived(LAZY_EXPRESSION) Int, List<@derived(LAZY_EXPRESSION) Int>> = LAZY_EXPRESSION
+    @derived(LAZY_EXPRESSION) public? final? konst xDerived: Map<@derived(LAZY_EXPRESSION) Int, List<@derived(LAZY_EXPRESSION) Int>> = LAZY_EXPRESSION
         public? get(): Map<@derived(LAZY_EXPRESSION) Int, List<@derived(LAZY_EXPRESSION) Int>>

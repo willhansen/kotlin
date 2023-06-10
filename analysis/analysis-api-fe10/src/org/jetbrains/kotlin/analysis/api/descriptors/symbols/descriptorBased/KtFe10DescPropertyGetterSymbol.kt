@@ -24,34 +24,34 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.resolve.calls.inference.returnTypeOrNothing
 
 internal class KtFe10DescPropertyGetterSymbol(
-    override val descriptor: PropertyGetterDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: PropertyGetterDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtPropertyGetterSymbol(), KtFe10DescMemberSymbol<PropertyGetterDescriptor> {
-    override val isDefault: Boolean
+    override konst isDefault: Boolean
         get() = withValidityAssertion { descriptor.isDefault }
 
-    override val isInline: Boolean
+    override konst isInline: Boolean
         get() = withValidityAssertion { descriptor.isInline }
 
-    override val isOverride: Boolean
+    override konst isOverride: Boolean
         get() = withValidityAssertion { descriptor.isExplicitOverride }
 
-    override val hasBody: Boolean
+    override konst hasBody: Boolean
         get() = withValidityAssertion { descriptor.hasBody() }
 
-    override val valueParameters: List<KtValueParameterSymbol>
-        get() = withValidityAssertion { descriptor.valueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
+    override konst konstueParameters: List<KtValueParameterSymbol>
+        get() = withValidityAssertion { descriptor.konstueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { true }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { descriptor.correspondingProperty.getterCallableIdIfNotLocal }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.returnTypeOrNothing.toKtType(analysisContext) }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion { descriptor.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext) }
 
     context(KtAnalysisSession)

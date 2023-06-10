@@ -15,48 +15,48 @@ private inline fun <R> runInlined(block: () -> R): R = block() // a-la kotlin.ru
 
 fun memberOperatorsToNonOperators(vararg pairs: Pair<String, String>): String {
     check(pairs.isNotEmpty())
-    val instance = OperatorsToNonOperators(Cache())
-    pairs.forEach { (key, value) ->
-        instance[key] = value // set
+    konst instance = OperatorsToNonOperators(Cache())
+    pairs.forEach { (key, konstue) ->
+        instance[key] = konstue // set
     }
-    pairs.forEach { (key, value) ->
-        check(instance[key] == value) // get
+    pairs.forEach { (key, konstue) ->
+        check(instance[key] == konstue) // get
     }
     return "memberOperatorsToNonOperators: " + instance() // invoke
 }
 
 fun extensionOperatorsToNonOperators(vararg pairs: Pair<String, String>): String = with(OperatorsToNonOperators.Companion) {
     check(pairs.isNotEmpty())
-    val cache = Cache()
-    pairs.forEach { (key, value) ->
-        cache[key] = value // set
+    konst cache = Cache()
+    pairs.forEach { (key, konstue) ->
+        cache[key] = konstue // set
     }
-    pairs.forEach { (key, value) ->
-        check(cache[key] == value) // get
+    pairs.forEach { (key, konstue) ->
+        check(cache[key] == konstue) // get
     }
     return "extensionOperatorsToNonOperators: " + cache() // invoke
 }
 
 fun memberNonOperatorsToOperators(vararg pairs: Pair<String, String>): String {
     check(pairs.isNotEmpty())
-    val instance = NonOperatorsToOperators(Cache())
-    pairs.forEach { (key, value) ->
-        instance.set(key, value) // set
+    konst instance = NonOperatorsToOperators(Cache())
+    pairs.forEach { (key, konstue) ->
+        instance.set(key, konstue) // set
     }
-    pairs.forEach { (key, value) ->
-        check(instance.get(key) == value) // get
+    pairs.forEach { (key, konstue) ->
+        check(instance.get(key) == konstue) // get
     }
     return "memberNonOperatorsToOperators: " + instance.invoke() // invoke
 }
 
 fun extensionNonOperatorsToOperators(vararg pairs: Pair<String, String>): String = with(NonOperatorsToOperators.Companion) {
     check(pairs.isNotEmpty())
-    val cache = Cache()
-    pairs.forEach { (key, value) ->
-        cache.set(key, value) // set
+    konst cache = Cache()
+    pairs.forEach { (key, konstue) ->
+        cache.set(key, konstue) // set
     }
-    pairs.forEach { (key, value) ->
-        check(cache.get(key) == value) // get
+    pairs.forEach { (key, konstue) ->
+        check(cache.get(key) == konstue) // get
     }
     return "extensionNonOperatorsToOperators: " + cache.invoke() // invoke
 }
@@ -91,8 +91,8 @@ fun removedFirstDefaultValueInFunction(n: Int): Int = Functions.removedFirstDefa
 fun removedVarargFirstDefaultValueInFunction(n: Int): Int = Functions.removedVarargFirstDefaultValue(b = n)
 fun removedLastDefaultValueInFunction(n: Int): Int = Functions.removedLastDefaultValue(a = n)
 fun removedVarargLastDefaultValueInFunction(n: Int): Int = Functions.removedVarargLastDefaultValue(a = n)
-fun removedFirstDefaultValueInConstructor(n: Int): Int = RemovedFirstDefaultValueInConstructor(b = n).value
-fun removedLastDefaultValueInConstructor(n: Int): Int = RemovedLastDefaultValueInConstructor(a = n).value
+fun removedFirstDefaultValueInConstructor(n: Int): Int = RemovedFirstDefaultValueInConstructor(b = n).konstue
+fun removedLastDefaultValueInConstructor(n: Int): Int = RemovedLastDefaultValueInConstructor(a = n).konstue
 
 fun singleVarargArgument(vararg elements: Int): Int = elements.sum()
 fun singleVarargArgumentWithDefaultValue(vararg elements: Int = intArrayOf(-1, -2, -3)): Int = elements.sum()

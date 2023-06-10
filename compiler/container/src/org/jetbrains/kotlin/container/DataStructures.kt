@@ -20,9 +20,9 @@ import java.util.ArrayList
 import java.util.HashSet
 
 fun <T> topologicalSort(items: Iterable<T>, reverseOrder: Boolean = false, dependencies: (T) -> Iterable<T>): List<T> {
-    val itemsInProgress = HashSet<T>()
-    val completedItems = HashSet<T>()
-    val result = ArrayList<T>()
+    konst itemsInProgress = HashSet<T>()
+    konst completedItems = HashSet<T>()
+    konst result = ArrayList<T>()
 
     fun DfsVisit(item: T) {
         if (item in completedItems)

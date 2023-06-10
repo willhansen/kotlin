@@ -18,5 +18,5 @@ public object KtAnalysisAllowanceManager {
     }
 
     @KtAnalysisApiInternals
-    public val resolveIsForbiddenInActionWithName: ThreadLocal<String?> = ThreadLocal.withInitial { null }
+    public konst resolveIsForbiddenInActionWithName: ThreadLocal<String?> = ThreadLocal.withInitial { null }
 }

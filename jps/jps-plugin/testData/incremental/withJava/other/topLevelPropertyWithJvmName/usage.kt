@@ -1,3 +1,3 @@
 package usage
 
-val x = test.g
+konst x = test.g

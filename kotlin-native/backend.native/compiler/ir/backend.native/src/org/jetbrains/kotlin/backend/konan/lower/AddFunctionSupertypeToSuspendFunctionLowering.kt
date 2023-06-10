@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
  * At the current point, lowered suspend function signature is overriding its invoke method.
  *
  */
-internal class AddFunctionSupertypeToSuspendFunctionLowering(val context: Context) : FileLoweringPass {
+internal class AddFunctionSupertypeToSuspendFunctionLowering(konst context: Context) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.acceptChildrenVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
@@ -53,9 +53,9 @@ internal class AddFunctionSupertypeToSuspendFunctionLowering(val context: Contex
             }.getLowered()
 
             private fun addOverride(clazz: IrClass, alreadyOverridden: IrType, toOverride: IrType) {
-                val alreadyOverriddenFunction = alreadyOverridden.classOrNull!!.owner.getInvokeFunction()
-                val functionToOverride = toOverride.classOrNull!!.owner.getInvokeFunction()
-                val invokeFunction = clazz.simpleFunctions().single { it.overrides(alreadyOverriddenFunction) }
+                konst alreadyOverriddenFunction = alreadyOverridden.classOrNull!!.owner.getInvokeFunction()
+                konst functionToOverride = toOverride.classOrNull!!.owner.getInvokeFunction()
+                konst invokeFunction = clazz.simpleFunctions().single { it.overrides(alreadyOverriddenFunction) }
                 if (invokeFunction.modality == Modality.ABSTRACT) return
                 clazz.superTypes += toOverride
                 invokeFunction.overriddenSymbols += functionToOverride.symbol
@@ -63,25 +63,25 @@ internal class AddFunctionSupertypeToSuspendFunctionLowering(val context: Contex
 
 
             private fun addMissingSupertypes(clazz: IrClass) {
-                val suspendFunctionSuperTypes = getAllSubstitutedSupertypes(clazz).filter {
+                konst suspendFunctionSuperTypes = getAllSubstitutedSupertypes(clazz).filter {
                     // SuspendFunction class is some hack in old Kotlin/Native compiler versions.
                     // It's not used now, but is considered as SuspendFunction-like class in isSuspendFunction util,
                     // if found in old klib. We need just to ignore it.
                     it.isSuspendFunction() && it.classOrNull?.owner?.name?.toString() != "SuspendFunction"
                 }.toSet()
 
-                val continuationClassSymbol = context.ir.symbols.continuationClass
+                konst continuationClassSymbol = context.ir.symbols.continuationClass
 
                 fun IrSimpleType.getClassAt(index: Int) = (this.arguments.getOrNull(index) as? IrTypeProjection)?.type?.classOrNull
 
-                val functionWithContinuationSuperTypes = getAllSubstitutedSupertypes(clazz).filter {
+                konst functionWithContinuationSuperTypes = getAllSubstitutedSupertypes(clazz).filter {
                     it.isFunction() &&
                             it.getClassAt(it.arguments.size - 2) == continuationClassSymbol
                 }.toSet()
 
                 for (suspendFunctionType in suspendFunctionSuperTypes) {
-                    val functionClassTypeArguments = suspendFunctionType.arguments.mapIndexed { index, argument ->
-                        val type = (argument as IrTypeProjection).type
+                    konst functionClassTypeArguments = suspendFunctionType.arguments.mapIndexed { index, argument ->
+                        konst type = (argument as IrTypeProjection).type
                         if (index == suspendFunctionType.arguments.indices.last) {
                             continuationClassSymbol.typeWith(type)
                         } else {
@@ -89,17 +89,17 @@ internal class AddFunctionSupertypeToSuspendFunctionLowering(val context: Contex
                         }
                     } + context.irBuiltIns.anyNType
 
-                    val functionType = context.ir.symbols.functionN(functionClassTypeArguments.size - 1).typeWith(functionClassTypeArguments)
+                    konst functionType = context.ir.symbols.functionN(functionClassTypeArguments.size - 1).typeWith(functionClassTypeArguments)
 
                     addOverride(clazz, suspendFunctionType, functionType)
                 }
 
                 for (functionType in functionWithContinuationSuperTypes) {
-                    val suspendFunctionClassTypeArguments = functionType.arguments.dropLast(1).mapIndexed { index, argument ->
-                        val type = (argument as IrTypeProjection).type
+                    konst suspendFunctionClassTypeArguments = functionType.arguments.dropLast(1).mapIndexed { index, argument ->
+                        konst type = (argument as IrTypeProjection).type
                         if (index == functionType.arguments.indices.last - 1) {
                             require(type.classOrNull == continuationClassSymbol)
-                            when (val typeArgument = (type as IrSimpleType).arguments.single()) {
+                            when (konst typeArgument = (type as IrSimpleType).arguments.single()) {
                                 is IrTypeProjection -> typeArgument.type
                                 is IrStarProjection -> context.irBuiltIns.anyNType
                             }
@@ -108,7 +108,7 @@ internal class AddFunctionSupertypeToSuspendFunctionLowering(val context: Contex
                         }
                     }
 
-                    val suspendFunctionType = context.ir.symbols.suspendFunctionN(suspendFunctionClassTypeArguments.size - 1).typeWith(suspendFunctionClassTypeArguments)
+                    konst suspendFunctionType = context.ir.symbols.suspendFunctionN(suspendFunctionClassTypeArguments.size - 1).typeWith(suspendFunctionClassTypeArguments)
                     addOverride(clazz, functionType, suspendFunctionType)
                 }
             }

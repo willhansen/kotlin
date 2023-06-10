@@ -7,7 +7,7 @@ var testProp: Any
     super<System>.#out /*!! PrintStream */.println(p0 = "testProp/get")
     return 42
   }
-  set(value: Any) {
+  set(konstue: Any) {
     super<System>.#out /*!! PrintStream */.println(p0 = "testProp/set")
   }
 
@@ -18,7 +18,7 @@ class TestClass {
 
   }
 
-  val test: Int
+  konst test: Int
     field = when {
       else -> { // BLOCK
         super<System>.#out /*!! PrintStream */.println(p0 = "TestClass/test")

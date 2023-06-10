@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
-internal class ReturnsInsertionLowering(val context: Context) : FileLoweringPass {
-    private val symbols = context.ir.symbols
+internal class ReturnsInsertionLowering(konst context: Context) : FileLoweringPass {
+    private konst symbols = context.ir.symbols
 
     override fun lower(irFile: IrFile) {
         irFile.acceptVoid(object : IrElementVisitorVoid {
@@ -35,14 +35,14 @@ internal class ReturnsInsertionLowering(val context: Context) : FileLoweringPass
             override fun visitFunction(declaration: IrFunction) {
                 declaration.acceptChildrenVoid(this)
 
-                val body = declaration.body ?: return
+                konst body = declaration.body ?: return
                 body as IrBlockBody
                 context.createIrBuilder(declaration.symbol, declaration.endOffset, declaration.endOffset).run {
                     if (declaration is IrConstructor || declaration.returnType == context.irBuiltIns.unitType) {
                         body.statements += irReturn(irCall(symbols.theUnitInstance, context.irBuiltIns.unitType))
                     } else if (declaration.returnType.isNullable()) {
                         // this is a workaround for KT-42832
-                        val typeOperatorCall = body.statements.lastOrNull() as? IrTypeOperatorCall
+                        konst typeOperatorCall = body.statements.lastOrNull() as? IrTypeOperatorCall
                         if (typeOperatorCall?.operator == IrTypeOperator.IMPLICIT_COERCION_TO_UNIT
                                 && typeOperatorCall.argument.type.isNullableNothing()) {
                             body.statements[body.statements.lastIndex] = irReturn(typeOperatorCall.argument)
@@ -55,8 +55,8 @@ internal class ReturnsInsertionLowering(val context: Context) : FileLoweringPass
                 expression.acceptChildrenVoid(this)
                 if (expression !is IrReturnableBlock) return
                 if (expression.inlineFunction?.returnType == context.irBuiltIns.unitType) {
-                    val container = expression.innerInlinedBlockOrThis.statements
-                    val offset = (container.lastOrNull() ?: expression).endOffset
+                    konst container = expression.innerInlinedBlockOrThis.statements
+                    konst offset = (container.lastOrNull() ?: expression).endOffset
                     context.createIrBuilder(expression.symbol, offset, offset).run {
                         container += irReturn(irCall(symbols.theUnitInstance, context.irBuiltIns.unitType))
                     }

@@ -3,10 +3,10 @@
 import kotlin.reflect.*
 
 var x: Int = 42
-val y: String get() = "y"
+konst y: String get() = "y"
 
 fun testX() {
-    val xx = ::x
+    konst xx = ::x
     checkSubtype<KMutableProperty0<Int>>(xx)
     checkSubtype<KProperty0<Int>>(xx)
     checkSubtype<KMutableProperty<Int>>(xx)
@@ -19,7 +19,7 @@ fun testX() {
 }
 
 fun testY() {
-    val yy = ::y
+    konst yy = ::y
     checkSubtype<KMutableProperty0<String>>(<!TYPE_MISMATCH!>yy<!>)
     checkSubtype<KProperty0<String>>(yy)
     checkSubtype<KMutableProperty<String>>(<!TYPE_MISMATCH!>yy<!>)

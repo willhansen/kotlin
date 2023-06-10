@@ -5,7 +5,7 @@
 
 package codegen.escapeAnalysis.test4
 
-class A(val s: String)
+class A(konst s: String)
 class B {
     var f: A = A("qzz")
 }

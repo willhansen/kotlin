@@ -32,9 +32,9 @@ class ExternalFunChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is MemberDescriptor || !descriptor.isExternal) return
 
-        val trace = context.trace
+        konst trace = context.trace
         if (descriptor !is FunctionDescriptor) {
-            val target = when (descriptor) {
+            konst target = when (descriptor) {
                 is PropertyDescriptor -> "property"
                 is ClassDescriptor -> "class"
                 else -> "non-function declaration"

@@ -51,47 +51,47 @@ internal class FirMetadataSerializer(
     environment: KotlinCoreEnvironment
 ) : AbstractMetadataSerializer<List<ModuleCompilerAnalyzedOutput>>(configuration, environment) {
     override fun analyze(): List<ModuleCompilerAnalyzedOutput>? {
-        val performanceManager = environment.configuration.getNotNull(CLIConfigurationKeys.PERF_MANAGER)
+        konst performanceManager = environment.configuration.getNotNull(CLIConfigurationKeys.PERF_MANAGER)
         performanceManager.notifyAnalysisStarted()
 
-        val configuration = environment.configuration
-        val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
-        val rootModuleName = Name.special("<${configuration.getNotNull(CommonConfigurationKeys.MODULE_NAME)}>")
-        val isLightTree = configuration.getBoolean(CommonConfigurationKeys.USE_LIGHT_TREE)
+        konst configuration = environment.configuration
+        konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst rootModuleName = Name.special("<${configuration.getNotNull(CommonConfigurationKeys.MODULE_NAME)}>")
+        konst isLightTree = configuration.getBoolean(CommonConfigurationKeys.USE_LIGHT_TREE)
 
-        val binaryModuleData = BinaryModuleData.initialize(
+        konst binaryModuleData = BinaryModuleData.initialize(
             rootModuleName,
             CommonPlatforms.defaultCommonPlatform,
             CommonPlatformAnalyzerServices
         )
-        val libraryList = DependencyListForCliModule.build(binaryModuleData) {
-            val refinedPaths = configuration.get(K2MetadataConfigurationKeys.REFINES_PATHS)?.map { File(it) }.orEmpty()
+        konst libraryList = DependencyListForCliModule.build(binaryModuleData) {
+            konst refinedPaths = configuration.get(K2MetadataConfigurationKeys.REFINES_PATHS)?.map { File(it) }.orEmpty()
             dependencies(configuration.jvmClasspathRoots.filter { it !in refinedPaths }.map { it.toPath() })
             dependencies(configuration.jvmModularRoots.map { it.toPath() })
             friendDependencies(configuration[K2MetadataConfigurationKeys.FRIEND_PATHS] ?: emptyList())
             dependsOnDependencies(refinedPaths.map { it.toPath() })
         }
 
-        val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
+        konst diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
 
-        val klibFiles = configuration.get(CLIConfigurationKeys.CONTENT_ROOTS).orEmpty()
+        konst klibFiles = configuration.get(CLIConfigurationKeys.CONTENT_ROOTS).orEmpty()
             .filterIsInstance<JvmClasspathRoot>()
             .filter { it.file.isDirectory || it.file.extension == "klib" }
             .map { it.file.absolutePath }
-        val resolvedLibraries = CommonKLibResolver.resolve(klibFiles, DummyLogger).getFullResolvedList()
+        konst resolvedLibraries = CommonKLibResolver.resolve(klibFiles, DummyLogger).getFullResolvedList()
 
-        val outputs = if (isLightTree) {
-            val projectEnvironment = environment.toAbstractProjectEnvironment() as VfsBasedProjectEnvironment
+        konst outputs = if (isLightTree) {
+            konst projectEnvironment = environment.toAbstractProjectEnvironment() as VfsBasedProjectEnvironment
             var librariesScope = projectEnvironment.getSearchScopeForProjectLibraries()
-            val groupedSources = collectSources(configuration, projectEnvironment, messageCollector)
-            val extensionRegistrars = FirExtensionRegistrar.getInstances(projectEnvironment.project)
-            val ltFiles = groupedSources.let { it.commonSources + it.platformSources }.toList()
-            val incrementalCompilationScope = createIncrementalCompilationScope(
+            konst groupedSources = collectSources(configuration, projectEnvironment, messageCollector)
+            konst extensionRegistrars = FirExtensionRegistrar.getInstances(projectEnvironment.project)
+            konst ltFiles = groupedSources.let { it.commonSources + it.platformSources }.toList()
+            konst incrementalCompilationScope = createIncrementalCompilationScope(
                 configuration,
                 projectEnvironment,
                 incrementalExcludesScope = null
             )?.also { librariesScope -= it }
-            val sessionsWithSources = prepareCommonSessions(
+            konst sessionsWithSources = prepareCommonSessions(
                 ltFiles, configuration, projectEnvironment, rootModuleName, extensionRegistrars, librariesScope,
                 libraryList, resolvedLibraries, groupedSources.isCommonSourceForLt, groupedSources.fileBelongsToModuleForLt,
                 createProviderAndScopeForIncrementalCompilation = { files ->
@@ -105,20 +105,20 @@ internal class FirMetadataSerializer(
                 }
             )
             sessionsWithSources.map { (session, files) ->
-                val firFiles = session.buildFirViaLightTree(files, diagnosticsReporter, performanceManager::addSourcesStats)
+                konst firFiles = session.buildFirViaLightTree(files, diagnosticsReporter, performanceManager::addSourcesStats)
                 resolveAndCheckFir(session, firFiles, diagnosticsReporter)
             }
         } else {
-            val projectEnvironment = VfsBasedProjectEnvironment(
+            konst projectEnvironment = VfsBasedProjectEnvironment(
                 environment.project,
                 VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)
             ) { environment.createPackagePartProvider(it) }
             var librariesScope = projectEnvironment.getSearchScopeForProjectLibraries()
-            val extensionRegistrars = FirExtensionRegistrar.getInstances(projectEnvironment.project)
-            val psiFiles = environment.getSourceFiles()
-            val sourceScope =
+            konst extensionRegistrars = FirExtensionRegistrar.getInstances(projectEnvironment.project)
+            konst psiFiles = environment.getSourceFiles()
+            konst sourceScope =
                 projectEnvironment.getSearchScopeByPsiFiles(psiFiles) + projectEnvironment.getSearchScopeForProjectJavaSources()
-            val providerAndScopeForIncrementalCompilation = createContextForIncrementalCompilation(
+            konst providerAndScopeForIncrementalCompilation = createContextForIncrementalCompilation(
                 projectEnvironment,
                 configuration.get(JVMConfigurationKeys.INCREMENTAL_COMPILATION_COMPONENTS),
                 configuration,
@@ -128,21 +128,21 @@ internal class FirMetadataSerializer(
             providerAndScopeForIncrementalCompilation?.precompiledBinariesFileScope?.let {
                 librariesScope -= it
             }
-            val sessionsWithSources = prepareCommonSessions(
+            konst sessionsWithSources = prepareCommonSessions(
                 psiFiles, configuration, projectEnvironment, rootModuleName, extensionRegistrars,
                 librariesScope, libraryList, resolvedLibraries, isCommonSourceForPsi, fileBelongsToModuleForPsi,
                 createProviderAndScopeForIncrementalCompilation = { providerAndScopeForIncrementalCompilation }
             )
 
             sessionsWithSources.map { (session, files) ->
-                val firFiles = session.buildFirFromKtFiles(files)
+                konst firFiles = session.buildFirFromKtFiles(files)
                 resolveAndCheckFir(session, firFiles, diagnosticsReporter)
             }
         }
 
 
         return if (diagnosticsReporter.hasErrors) {
-            val renderDiagnosticNames = configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
+            konst renderDiagnosticNames = configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
             FirDiagnosticsCompilerResultsReporter.reportToMessageCollector(diagnosticsReporter, messageCollector, renderDiagnosticNames)
             null
         } else {
@@ -153,14 +153,14 @@ internal class FirMetadataSerializer(
     }
 
     override fun serialize(analysisResult: List<ModuleCompilerAnalyzedOutput>, destDir: File) {
-        val fragments = mutableMapOf<String, MutableList<ByteArray>>()
+        konst fragments = mutableMapOf<String, MutableList<ByteArray>>()
 
         for (output in analysisResult) {
-            val (session, scopeSession, fir) = output
+            konst (session, scopeSession, fir) = output
 
-            val languageVersionSettings = environment.configuration.languageVersionSettings
+            konst languageVersionSettings = environment.configuration.languageVersionSettings
             for (firFile in fir) {
-                val packageFragment = serializeSingleFirFile(
+                konst packageFragment = serializeSingleFirFile(
                     firFile,
                     session,
                     scopeSession,
@@ -175,15 +175,15 @@ internal class FirMetadataSerializer(
             }
         }
 
-        val header = KlibMetadataProtoBuf.Header.newBuilder()
+        konst header = KlibMetadataProtoBuf.Header.newBuilder()
         header.moduleName = analysisResult.last().session.moduleData.name.asString()
 
         if (configuration.languageVersionSettings.isPreRelease()) {
             header.flags = KlibMetadataHeaderFlags.PRE_RELEASE
         }
 
-        val fragmentNames = mutableListOf<String>()
-        val fragmentParts = mutableListOf<List<ByteArray>>()
+        konst fragmentNames = mutableListOf<String>()
+        konst fragmentParts = mutableListOf<List<ByteArray>>()
 
         for ((fqName, fragment) in fragments.entries.sortedBy { it.key }) {
             fragmentNames += fqName
@@ -191,9 +191,9 @@ internal class FirMetadataSerializer(
             header.addPackageFragmentName(fqName)
         }
 
-        val module = header.build().toByteArray()
+        konst module = header.build().toByteArray()
 
-        val serializedMetadata = SerializedMetadata(module, fragmentParts, fragmentNames)
+        konst serializedMetadata = SerializedMetadata(module, fragmentParts, fragmentNames)
 
         buildKotlinMetadataLibrary(configuration, serializedMetadata, destDir)
     }

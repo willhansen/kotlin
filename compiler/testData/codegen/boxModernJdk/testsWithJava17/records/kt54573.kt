@@ -3,7 +3,7 @@
 // WITH_STDLIB
 
 @JvmRecord
-data class A constructor(val x: Int, val s: String) {
+data class A constructor(konst x: Int, konst s: String) {
     constructor(s: String) : this(s.length, s)
 }
 

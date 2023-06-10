@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.incremental.components.LookupTracker
 import org.jetbrains.kotlin.load.java.*
 import org.jetbrains.kotlin.load.java.JavaModuleAnnotationsProvider
-import org.jetbrains.kotlin.load.java.components.JavaPropertyInitializerEvaluator
+import org.jetbrains.kotlin.load.java.components.JavaPropertyInitializerEkonstuator
 import org.jetbrains.kotlin.load.java.components.JavaResolverCache
 import org.jetbrains.kotlin.load.java.components.SignaturePropagator
 import org.jetbrains.kotlin.load.java.lazy.types.JavaTypeResolver
@@ -42,37 +42,37 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.types.checker.NewKotlinTypeChecker
 
 class JavaResolverComponents(
-    val storageManager: StorageManager,
-    val finder: JavaClassFinder,
-    val kotlinClassFinder: KotlinClassFinder,
-    val deserializedDescriptorResolver: DeserializedDescriptorResolver,
-    val signaturePropagator: SignaturePropagator,
-    val errorReporter: ErrorReporter,
-    val javaResolverCache: JavaResolverCache,
-    val javaPropertyInitializerEvaluator: JavaPropertyInitializerEvaluator,
-    val samConversionResolver: SamConversionResolver,
-    val sourceElementFactory: JavaSourceElementFactory,
-    val moduleClassResolver: ModuleClassResolver,
-    val packagePartProvider: PackagePartProvider,
-    val supertypeLoopChecker: SupertypeLoopChecker,
-    val lookupTracker: LookupTracker,
-    val module: ModuleDescriptor,
-    val reflectionTypes: ReflectionTypes,
-    val annotationTypeQualifierResolver: AnnotationTypeQualifierResolver,
-    val signatureEnhancement: SignatureEnhancement,
-    val javaClassesTracker: JavaClassesTracker,
-    val settings: JavaResolverSettings,
-    val kotlinTypeChecker: NewKotlinTypeChecker,
-    val javaTypeEnhancementState: JavaTypeEnhancementState,
-    val javaModuleResolver: JavaModuleAnnotationsProvider,
-    val syntheticPartsProvider: SyntheticJavaPartsProvider = SyntheticJavaPartsProvider.EMPTY
+    konst storageManager: StorageManager,
+    konst finder: JavaClassFinder,
+    konst kotlinClassFinder: KotlinClassFinder,
+    konst deserializedDescriptorResolver: DeserializedDescriptorResolver,
+    konst signaturePropagator: SignaturePropagator,
+    konst errorReporter: ErrorReporter,
+    konst javaResolverCache: JavaResolverCache,
+    konst javaPropertyInitializerEkonstuator: JavaPropertyInitializerEkonstuator,
+    konst samConversionResolver: SamConversionResolver,
+    konst sourceElementFactory: JavaSourceElementFactory,
+    konst moduleClassResolver: ModuleClassResolver,
+    konst packagePartProvider: PackagePartProvider,
+    konst supertypeLoopChecker: SupertypeLoopChecker,
+    konst lookupTracker: LookupTracker,
+    konst module: ModuleDescriptor,
+    konst reflectionTypes: ReflectionTypes,
+    konst annotationTypeQualifierResolver: AnnotationTypeQualifierResolver,
+    konst signatureEnhancement: SignatureEnhancement,
+    konst javaClassesTracker: JavaClassesTracker,
+    konst settings: JavaResolverSettings,
+    konst kotlinTypeChecker: NewKotlinTypeChecker,
+    konst javaTypeEnhancementState: JavaTypeEnhancementState,
+    konst javaModuleResolver: JavaModuleAnnotationsProvider,
+    konst syntheticPartsProvider: SyntheticJavaPartsProvider = SyntheticJavaPartsProvider.EMPTY
 ) {
     fun replace(
         javaResolverCache: JavaResolverCache = this.javaResolverCache
     ) = JavaResolverComponents(
         storageManager, finder, kotlinClassFinder, deserializedDescriptorResolver,
         signaturePropagator, errorReporter, javaResolverCache,
-        javaPropertyInitializerEvaluator, samConversionResolver, sourceElementFactory,
+        javaPropertyInitializerEkonstuator, samConversionResolver, sourceElementFactory,
         moduleClassResolver, packagePartProvider, supertypeLoopChecker, lookupTracker, module, reflectionTypes,
         annotationTypeQualifierResolver, signatureEnhancement, javaClassesTracker, settings,
         kotlinTypeChecker, javaTypeEnhancementState, javaModuleResolver
@@ -80,22 +80,22 @@ class JavaResolverComponents(
 }
 
 interface JavaResolverSettings {
-    val correctNullabilityForNotNullTypeParameter: Boolean
-    val typeEnhancementImprovementsInStrictMode: Boolean
-    val ignoreNullabilityForErasedValueParameters: Boolean
-    val enhancePrimitiveArrays: Boolean
+    konst correctNullabilityForNotNullTypeParameter: Boolean
+    konst typeEnhancementImprovementsInStrictMode: Boolean
+    konst ignoreNullabilityForErasedValueParameters: Boolean
+    konst enhancePrimitiveArrays: Boolean
 
     object Default : JavaResolverSettings {
-        override val correctNullabilityForNotNullTypeParameter: Boolean
+        override konst correctNullabilityForNotNullTypeParameter: Boolean
             get() = false
 
-        override val typeEnhancementImprovementsInStrictMode: Boolean
+        override konst typeEnhancementImprovementsInStrictMode: Boolean
             get() = false
 
-        override val ignoreNullabilityForErasedValueParameters: Boolean
+        override konst ignoreNullabilityForErasedValueParameters: Boolean
             get() = false
 
-        override val enhancePrimitiveArrays: Boolean
+        override konst enhancePrimitiveArrays: Boolean
             get() = false
     }
 
@@ -107,18 +107,18 @@ interface JavaResolverSettings {
             enhancePrimitiveArrays: Boolean,
         ): JavaResolverSettings =
             object : JavaResolverSettings {
-                override val correctNullabilityForNotNullTypeParameter get() = correctNullabilityForNotNullTypeParameter
-                override val typeEnhancementImprovementsInStrictMode get() = typeEnhancementImprovementsInStrictMode
-                override val ignoreNullabilityForErasedValueParameters get() = ignoreNullabilityForErasedValueParameters
-                override val enhancePrimitiveArrays get() = enhancePrimitiveArrays
+                override konst correctNullabilityForNotNullTypeParameter get() = correctNullabilityForNotNullTypeParameter
+                override konst typeEnhancementImprovementsInStrictMode get() = typeEnhancementImprovementsInStrictMode
+                override konst ignoreNullabilityForErasedValueParameters get() = ignoreNullabilityForErasedValueParameters
+                override konst enhancePrimitiveArrays get() = enhancePrimitiveArrays
             }
     }
 }
 
 class LazyJavaResolverContext internal constructor(
-    val components: JavaResolverComponents,
-    val typeParameterResolver: TypeParameterResolver,
-    internal val delegateForDefaultTypeQualifiers: Lazy<JavaTypeQualifiersByElementType?>
+    konst components: JavaResolverComponents,
+    konst typeParameterResolver: TypeParameterResolver,
+    internal konst delegateForDefaultTypeQualifiers: Lazy<JavaTypeQualifiersByElementType?>
 ) {
     constructor(
         components: JavaResolverComponents,
@@ -126,14 +126,14 @@ class LazyJavaResolverContext internal constructor(
         typeQualifiersComputation: () -> JavaTypeQualifiersByElementType?
     ) : this(components, typeParameterResolver, lazy(LazyThreadSafetyMode.NONE, typeQualifiersComputation))
 
-    val defaultTypeQualifiers: JavaTypeQualifiersByElementType? by delegateForDefaultTypeQualifiers
+    konst defaultTypeQualifiers: JavaTypeQualifiersByElementType? by delegateForDefaultTypeQualifiers
 
-    val typeResolver = JavaTypeResolver(this, typeParameterResolver)
+    konst typeResolver = JavaTypeResolver(this, typeParameterResolver)
 
-    val storageManager: StorageManager
+    konst storageManager: StorageManager
         get() = components.storageManager
 
-    val module: ModuleDescriptor get() = components.module
+    konst module: ModuleDescriptor get() = components.module
 }
 
 fun LazyJavaResolverContext.child(

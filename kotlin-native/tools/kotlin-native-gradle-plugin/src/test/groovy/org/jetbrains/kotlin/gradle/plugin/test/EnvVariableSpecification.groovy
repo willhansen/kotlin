@@ -75,7 +75,7 @@ class EnvVariableSpecification extends BaseKonanSpecification {
         def wrapper = (HostManager.host.family == Family.MINGW) ? "gradlew.bat" : "gradlew"
         def command = ["$project.projectDir.absolutePath/$wrapper".toString()]
         command.addAll(tasks)
-        command.addAll(properties.collect { "-P${it.key}=${it.value}".toString() })
+        command.addAll(properties.collect { "-P${it.key}=${it.konstue}".toString() })
         def projectBuilder = new ProcessBuilder()
                 .directory(project.projectDir)
                 .command(command)
@@ -139,7 +139,7 @@ class EnvVariableSpecification extends BaseKonanSpecification {
                     }
                 }
                 """.stripIndent())
-        def result = runWrapper(project,"assertEnableDebug", [(variable): value])
+        def result = runWrapper(project,"assertEnableDebug", [(variable): konstue])
                 .printStderr()
                 .getExitValue()
 
@@ -147,7 +147,7 @@ class EnvVariableSpecification extends BaseKonanSpecification {
         result == 0
 
         where:
-        action            |variable                     |value |assertion                 |message
+        action            |variable                     |konstue |assertion                 |message
         "enabling debug"  |"DEBUGGING_SYMBOLS"          |"YES" |"it.enableDebug"          |"Debug should be enabled"
         "disabling debug" |"DEBUGGING_SYMBOLS"          |"NO"  |"!it.enableDebug"         |"Debug should be disabled"
         "enabling opt"    |"KONAN_ENABLE_OPTIMIZATIONS" |"YES" |"it.enableOptimizations"  |"Opts should be enabled"
@@ -262,7 +262,7 @@ class EnvVariableSpecification extends BaseKonanSpecification {
                             }
                             
                             if (it.enableDebug) {
-                                throw new AssertionError("DEBUGGING_SYMBOLS overrides a default value " +
+                                throw new AssertionError("DEBUGGING_SYMBOLS overrides a default konstue " +
                                                          "when it shouldn't\\n" +
                                                          "Task: \${it.name}")
                             }

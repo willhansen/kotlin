@@ -28,13 +28,13 @@ abstract class BasicOptimizerTest(private var basePath: String) {
     var testName = TestName()
 
     protected fun box() {
-        val methodName = testName.methodName
-        val baseName = "${TEST_DATA_DIR_PATH}/js-optimizer/$basePath"
-        val unoptimizedName = "$baseName/$methodName.original.js"
-        val optimizedName = "$baseName/$methodName.optimized.js"
+        konst methodName = testName.methodName
+        konst baseName = "${TEST_DATA_DIR_PATH}/js-optimizer/$basePath"
+        konst unoptimizedName = "$baseName/$methodName.original.js"
+        konst optimizedName = "$baseName/$methodName.optimized.js"
 
-        val unoptimizedCode = FileUtil.loadFile(File(unoptimizedName))
-        val optimizedCode = FileUtil.loadFile(File(optimizedName))
+        konst unoptimizedCode = FileUtil.loadFile(File(unoptimizedName))
+        konst optimizedCode = FileUtil.loadFile(File(optimizedName))
 
         runScript(unoptimizedName, unoptimizedCode)
         runScript(optimizedName, optimizedCode)
@@ -42,8 +42,8 @@ abstract class BasicOptimizerTest(private var basePath: String) {
     }
 
     private fun checkOptimizer(unoptimizedCode: String, optimizedCode: String) {
-        val parserScope = JsFunctionScope(JsRootScope(JsProgram()), "<js fun>")
-        val unoptimizedAst = parse(unoptimizedCode, errorReporter, parserScope, "<unknown file>")!!
+        konst parserScope = JsFunctionScope(JsRootScope(JsProgram()), "<js fun>")
+        konst unoptimizedAst = parse(unoptimizedCode, errorReporter, parserScope, "<unknown file>")!!
 
         updateMetadata(unoptimizedCode, unoptimizedAst)
 
@@ -51,7 +51,7 @@ abstract class BasicOptimizerTest(private var basePath: String) {
             process(statement)
         }
 
-        val optimizedAst = parse(optimizedCode, errorReporter, parserScope, "<unknown file>")!!
+        konst optimizedAst = parse(optimizedCode, errorReporter, parserScope, "<unknown file>")!!
         Assert.assertEquals(astToString(optimizedAst), astToString(unoptimizedAst))
     }
 
@@ -65,7 +65,7 @@ abstract class BasicOptimizerTest(private var basePath: String) {
     }
 
     private fun updateMetadata(code: String, ast: List<JsStatement>) {
-        val comments = findSyntheticComments(code)
+        konst comments = findSyntheticComments(code)
 
         for (stmt in ast) {
             object : RecursiveJsVisitor() {
@@ -75,16 +75,16 @@ abstract class BasicOptimizerTest(private var basePath: String) {
                 }
 
                 override fun visitExpressionStatement(x: JsExpressionStatement) {
-                    val assignment = JsAstUtils.decomposeAssignmentToVariable(x.expression)
+                    konst assignment = JsAstUtils.decomposeAssignmentToVariable(x.expression)
                     if (assignment != null) {
-                        val name = assignment.first
+                        konst name = assignment.first
                         x.synthetic = isSyntheticId(name.ident)
                     }
                     super.visitExpressionStatement(x)
                 }
 
                 override fun visitIf(x: JsIf) {
-                    val line = (x.source as? JsLocation)?.startLine
+                    konst line = (x.source as? JsLocation)?.startLine
                     if (line != null && line in comments.indices && comments[line]) {
                         x.synthetic = true
                     }
@@ -100,15 +100,15 @@ abstract class BasicOptimizerTest(private var basePath: String) {
     }
 
     private fun findSyntheticComments(code: String): List<Boolean> {
-        val parts = code.lines()
+        konst parts = code.lines()
         return parts.map { it.contains("/*synthetic*/") }
     }
 
     private fun isSyntheticId(id: String) = id.startsWith("$")
 
     private fun astToString(ast: List<JsStatement>): String {
-        val output = TextOutputImpl()
-        val visitor = JsToStringGenerationVisitor(output)
+        konst output = TextOutputImpl()
+        konst visitor = JsToStringGenerationVisitor(output)
         for (stmt in ast) {
             stmt.accept(visitor)
         }
@@ -116,14 +116,14 @@ abstract class BasicOptimizerTest(private var basePath: String) {
     }
 
     private fun runScript(fileName: String, code: String) {
-        val engine = createScriptEngine()
-        engine.eval(code)
-        val result = engine.eval("box()")
+        konst engine = createScriptEngine()
+        engine.ekonst(code)
+        konst result = engine.ekonst("box()")
 
         Assert.assertEquals("$fileName: box() function must return 'OK'", "OK", result)
     }
 
-    private val errorReporter = object : ErrorReporter {
+    private konst errorReporter = object : ErrorReporter {
         override fun warning(message: String, startPosition: CodePosition, endPosition: CodePosition) { }
 
         override fun error(message: String, startPosition: CodePosition, endPosition: CodePosition) {

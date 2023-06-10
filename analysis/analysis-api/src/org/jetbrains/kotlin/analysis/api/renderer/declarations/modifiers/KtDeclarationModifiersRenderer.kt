@@ -12,13 +12,13 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtDeclarationSymbol
 import org.jetbrains.kotlin.analysis.utils.printer.PrettyPrinter
 
 public class KtDeclarationModifiersRenderer private constructor(
-    public val modifierListRenderer: KtModifierListRenderer,
-    public val modifierFilter: KtRendererModifierFilter,
-    public val modifiersSorter: KtModifiersSorter,
-    public val modalityProvider: KtRendererModalityModifierProvider,
-    public val visibilityProvider: KtRendererVisibilityModifierProvider,
-    public val otherModifiersProvider: KtRendererOtherModifiersProvider,
-    public val keywordRenderer: KtKeywordRenderer,
+    public konst modifierListRenderer: KtModifierListRenderer,
+    public konst modifierFilter: KtRendererModifierFilter,
+    public konst modifiersSorter: KtModifiersSorter,
+    public konst modalityProvider: KtRendererModalityModifierProvider,
+    public konst visibilityProvider: KtRendererVisibilityModifierProvider,
+    public konst otherModifiersProvider: KtRendererOtherModifiersProvider,
+    public konst keywordRenderer: KtKeywordRenderer,
 ) {
     context(KtAnalysisSession)
     public fun renderDeclarationModifiers(symbol: KtDeclarationSymbol, printer: PrettyPrinter) {
@@ -26,7 +26,7 @@ public class KtDeclarationModifiersRenderer private constructor(
     }
 
     public inline fun with(action: Builder.() -> Unit): KtDeclarationModifiersRenderer {
-        val renderer = this
+        konst renderer = this
         return KtDeclarationModifiersRenderer {
             this.modifierListRenderer = renderer.modifierListRenderer
             this.modifierFilter = renderer.modifierFilter

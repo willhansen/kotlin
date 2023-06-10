@@ -1,6 +1,6 @@
 class A(
-    val x: String,
-    val y: String,
+    konst x: String,
+    konst y: String,
 ) {
     constructor(
         x: Comparable<Comparable<Number>>,
@@ -9,19 +9,19 @@ class A(
 
     var x: Int
         get() = 10
-        set(value,) {
+        set(konstue,) {
 
         }
 
     var x: Int
         get() = 10
-        set(value,/*...*/) {
+        set(konstue,/*...*/) {
 
         }
 
     var x: Int
         get() = 10
-        set(value/*...*/,) {
+        set(konstue/*...*/,) {
 
         }
 }
@@ -32,12 +32,12 @@ fun foo(
     ,
 ) {}
 
-val foo: (Int, Int) -> Int = fun(x,
+konst foo: (Int, Int) -> Int = fun(x,
                                  y, ): Int {
     return x + y
 }
 
-val foo: (Int, Int, Int) -> Int =
+konst foo: (Int, Int, Int) -> Int =
     fun (x,
          y: Int, z,
          ): Int {
@@ -51,11 +51,11 @@ fun foo() = listOf(
     )
 
 fun foo() {
-    val x = x[
+    konst x = x[
             1,
             3
             , ]
-    val y = x[
+    konst y = x[
             1,
             3
             ,
@@ -63,18 +63,18 @@ fun foo() {
 }
 
 fun main() {
-    val x = {
+    konst x = {
             x: Comparable<Comparable<Number>>,
             y: Iterable<Iterable<Number>>
             ,->
         println("1")
     }
-    val y = {
+    konst y = {
             x: Comparable<Comparable<Number>>,
             y: Iterable<Iterable<Number>>,
         -> println("1")
     }
-    val z = {
+    konst z = {
             x: Comparable<Comparable<Number>>,
             y: Iterable<Iterable<Number>>
             ,
@@ -115,11 +115,11 @@ fun foo(x: Any) = when (x) {
 fun foo() {}
 
 fun main() {
-    val (
+    konst (
         y,
         z,
     ) = Pair(1, 2)
-    val (
+    konst (
         y,
         z
             , ) = Pair(1, 2)
@@ -142,12 +142,12 @@ fun main() {
 }
 
 fun main() {
-    val x: (
+    konst x: (
         y: Comparable<Comparable<Number>>,
         z: Iterable<Iterable<Number>>,
         ) -> Int = { 10 }
 
-    val y = foo(1,) {}
+    konst y = foo(1,) {}
 
     try {
         println(1)

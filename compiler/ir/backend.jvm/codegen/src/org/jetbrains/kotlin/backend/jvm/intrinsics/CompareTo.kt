@@ -55,11 +55,11 @@ object CompareTo : IntrinsicMethod() {
         signature: JvmMethodSignature,
         classCodegen: ClassCodegen
     ): IrIntrinsicFunction {
-        val callee = expression.symbol.owner
-        val calleeParameter = callee.dispatchReceiverParameter ?: callee.extensionReceiverParameter!!
-        val parameterType = comparisonOperandType(
+        konst callee = expression.symbol.owner
+        konst calleeParameter = callee.dispatchReceiverParameter ?: callee.extensionReceiverParameter!!
+        konst parameterType = comparisonOperandType(
             classCodegen.typeMapper.mapType(calleeParameter.type),
-            signature.valueParameters.single().asmType,
+            signature.konstueParameters.single().asmType,
         )
         return IrIntrinsicFunction.create(expression, signature, classCodegen, listOf(parameterType, parameterType)) {
             genInvoke(parameterType, it)
@@ -67,7 +67,7 @@ object CompareTo : IntrinsicMethod() {
     }
 }
 
-class IntegerZeroComparison(val op: IElementType, val a: MaterialValue) : BooleanValue(a.codegen) {
+class IntegerZeroComparison(konst op: IElementType, konst a: MaterialValue) : BooleanValue(a.codegen) {
     override fun jumpIfFalse(target: Label) {
         mv.visitJumpInsn(Opcodes.IFNE, target)
     }
@@ -81,10 +81,10 @@ class IntegerZeroComparison(val op: IElementType, val a: MaterialValue) : Boolea
     }
 }
 
-class BooleanComparison(val op: IElementType, val a: MaterialValue, val b: MaterialValue) : BooleanValue(a.codegen) {
+class BooleanComparison(konst op: IElementType, konst a: MaterialValue, konst b: MaterialValue) : BooleanValue(a.codegen) {
     override fun jumpIfFalse(target: Label) {
         // TODO 1. get rid of the dependency; 2. take `b.type` into account.
-        val opcode = if (a.type.sort == Type.OBJECT)
+        konst opcode = if (a.type.sort == Type.OBJECT)
             ObjectCompare.getObjectCompareOpcode(op)
         else
             NumberCompare.patchOpcode(NumberCompare.getNumberCompareOpcode(op), mv, op, a.type)
@@ -92,7 +92,7 @@ class BooleanComparison(val op: IElementType, val a: MaterialValue, val b: Mater
     }
 
     override fun jumpIfTrue(target: Label) {
-        val opcode = if (a.type.sort == Type.OBJECT)
+        konst opcode = if (a.type.sort == Type.OBJECT)
             BranchedValue.negatedOperations[ObjectCompare.getObjectCompareOpcode(op)]!!
         else
             NumberCompare.patchOpcode(BranchedValue.negatedOperations[NumberCompare.getNumberCompareOpcode(op)]!!, mv, op, a.type)
@@ -106,8 +106,8 @@ class BooleanComparison(val op: IElementType, val a: MaterialValue, val b: Mater
 }
 
 
-class NonIEEE754FloatComparison(op: IElementType, private val a: MaterialValue, private val b: MaterialValue) : BooleanValue(a.codegen) {
-    private val numberCompareOpcode = NumberCompare.getNumberCompareOpcode(op)
+class NonIEEE754FloatComparison(op: IElementType, private konst a: MaterialValue, private konst b: MaterialValue) : BooleanValue(a.codegen) {
+    private konst numberCompareOpcode = NumberCompare.getNumberCompareOpcode(op)
 
     private fun invokeStaticComparison(type: Type) {
         when (type) {
@@ -134,17 +134,17 @@ class NonIEEE754FloatComparison(op: IElementType, private val a: MaterialValue, 
 }
 
 class PrimitiveToObjectComparison(
-    private val op: IElementType,
-    private val leftIsPrimitive: Boolean,
-    private val left: MaterialValue,
-    private val right: MaterialValue
+    private konst op: IElementType,
+    private konst leftIsPrimitive: Boolean,
+    private konst left: MaterialValue,
+    private konst right: MaterialValue
 ) : BooleanValue(left.codegen) {
     private fun checkTypeAndCompare(onWrongType: Label): BooleanValue {
-        val compareLabel = Label()
-        // If it's the left value that needs unboxing, it should be moved to the top of the stack. `AsmUtil.swap`
+        konst compareLabel = Label()
+        // If it's the left konstue that needs unboxing, it should be moved to the top of the stack. `AsmUtil.swap`
         // is theoretically OK, but in practice breaks peephole optimization passes that unbox longs/doubles,
         // so just storing in a variable is safer.
-        val tmp = if (leftIsPrimitive) -1 else codegen.frameMap.enterTemp(right.type).also { mv.store(it, right.type) }
+        konst tmp = if (leftIsPrimitive) -1 else codegen.frameMap.enterTemp(right.type).also { mv.store(it, right.type) }
         mv.dup()
         if (AsmUtil.isBoxedPrimitiveType(if (leftIsPrimitive) right.type else left.type)) {
             mv.ifnonnull(compareLabel)
@@ -152,7 +152,7 @@ class PrimitiveToObjectComparison(
             mv.instanceOf(AsmUtil.boxType(if (leftIsPrimitive) left.type else right.type))
             mv.ifne(compareLabel)
         }
-        // Type checking of the object failed, values are irrelevant now:
+        // Type checking of the object failed, konstues are irrelevant now:
         if (leftIsPrimitive) right.discard() // else it's already popped by `mv.store`
         left.discard()
         mv.goTo(onWrongType)
@@ -161,7 +161,7 @@ class PrimitiveToObjectComparison(
         return if (leftIsPrimitive) {
             BooleanComparison(op, left, right.materializedAt(left.type, right.irType))
         } else {
-            val leftUnboxed = left.materializedAt(right.type, left.irType)
+            konst leftUnboxed = left.materializedAt(right.type, left.irType)
             mv.load(tmp, right.type)
             codegen.frameMap.leaveTemp(right.type)
             BooleanComparison(op, leftUnboxed, right)
@@ -173,7 +173,7 @@ class PrimitiveToObjectComparison(
     }
 
     override fun jumpIfTrue(target: Label) {
-        val wrongType = Label()
+        konst wrongType = Label()
         checkTypeAndCompare(wrongType).jumpIfTrue(target)
         mv.mark(wrongType)
     }
@@ -185,16 +185,16 @@ class PrimitiveToObjectComparison(
 }
 
 class PrimitiveComparison(
-    private val primitiveNumberType: PrimitiveType,
-    private val operatorToken: KtSingleValueToken
+    private konst primitiveNumberType: PrimitiveType,
+    private konst operatorToken: KtSingleValueToken
 ) : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue? {
-        val parameterType = Type.getType(JvmPrimitiveType.get(primitiveNumberType).desc)
-        val (left, right) = expression.receiverAndArgs()
-        val a = left.accept(codegen, data).materializedAt(parameterType, left.type)
-        val b = right.accept(codegen, data).materializedAt(parameterType, right.type)
+        konst parameterType = Type.getType(JvmPrimitiveType.get(primitiveNumberType).desc)
+        konst (left, right) = expression.receiverAndArgs()
+        konst a = left.accept(codegen, data).materializedAt(parameterType, left.type)
+        konst b = right.accept(codegen, data).materializedAt(parameterType, right.type)
 
-        val useNonIEEE754Comparison =
+        konst useNonIEEE754Comparison =
             !codegen.context.state.languageVersionSettings.supportsFeature(LanguageFeature.ProperIeee754Comparisons)
                     && (parameterType == Type.FLOAT_TYPE || parameterType == Type.DOUBLE_TYPE)
                     && (left.isSmartcastFromHigherThanNullable(codegen.context) || right.isSmartcastFromHigherThanNullable(codegen.context))

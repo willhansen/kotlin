@@ -5,7 +5,7 @@
 
 package org.jetbrains.ring
 
-private const val RUNS = 1_000_000
+private const konst RUNS = 1_000_000
 
 open class InheritanceBenchmark {
 
@@ -483,13 +483,13 @@ open class InheritanceBenchmark {
         open fun g15(): Int = 15
     }
 
-    val a = A()
-    val b = B()
-    val c = C()
-    val d = D()
-    val e = E()
-    val f = F()
-    val g = G()
+    konst a = A()
+    konst b = B()
+    konst c = C()
+    konst d = D()
+    konst e = E()
+    konst f = F()
+    konst g = G()
 
     fun baseCalls(): Int {
         var x = 0

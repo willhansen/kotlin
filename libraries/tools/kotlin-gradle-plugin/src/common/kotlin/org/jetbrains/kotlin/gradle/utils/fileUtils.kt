@@ -25,11 +25,11 @@ internal fun File.isKotlinFile(sourceFilesExtensions: List<String>): Boolean =
  */
 @OptIn(ExperimentalStdlibApi::class)
 internal fun String.fileExtensionCasePermutations(): List<String> {
-    val lowercaseInput = lowercase()
-    val length = lowercaseInput.length
+    konst lowercaseInput = lowercase()
+    konst length = lowercaseInput.length
     // number of permutations is 2^n
-    val max = 1 shl length
-    val result = mutableListOf<String>()
+    konst max = 1 shl length
+    konst result = mutableListOf<String>()
     var combination: CharArray
     for (i in 0 until max) {
         combination = lowercaseInput.toCharArray()
@@ -60,7 +60,7 @@ internal fun newTmpFile(prefix: String, suffix: String? = null, directory: File?
     return try {
         (if (directory == null) Files.createTempFile(prefix, suffix) else Files.createTempFile(directory.toPath(), prefix, suffix))
     } catch (e: NoSuchFileException) {
-        val parentDir = e.file.parentFile
+        konst parentDir = e.file.parentFile
 
         if (parentDir.isFile) throw IOException("Temp folder $parentDir is not a directory")
         if (!parentDir.isDirectory) {
@@ -72,8 +72,8 @@ internal fun newTmpFile(prefix: String, suffix: String? = null, directory: File?
 }
 
 internal fun File.isParentOf(childCandidate: File, strict: Boolean = false): Boolean {
-    val parentPath = Paths.get(this.absolutePath).normalize()
-    val childCandidatePath = Paths.get(childCandidate.absolutePath).normalize()
+    konst parentPath = Paths.get(this.absolutePath).normalize()
+    konst childCandidatePath = Paths.get(childCandidate.absolutePath).normalize()
 
     return if (strict) {
         childCandidatePath.startsWith(parentPath) && parentPath != childCandidate
@@ -88,7 +88,7 @@ internal fun File.absolutePathWithoutExtension(): String =
 internal fun File.listFilesOrEmpty() = (if (exists()) listFiles() else null).orEmpty()
 
 internal inline fun <T> withTemporaryDirectory(prefix: String, action: (directory: File) -> T): T {
-    val directory = Files.createTempDirectory(prefix).toFile()
+    konst directory = Files.createTempDirectory(prefix).toFile()
     return try {
         action(directory)
     } finally {
@@ -99,8 +99,8 @@ internal inline fun <T> withTemporaryDirectory(prefix: String, action: (director
 fun contentEquals(file1: File, file2: File): Boolean {
     file1.useLines { seq1 ->
         file2.useLines { seq2 ->
-            val iterator1 = seq1.iterator()
-            val iterator2 = seq2.iterator()
+            konst iterator1 = seq1.iterator()
+            konst iterator2 = seq2.iterator()
 
             while(iterator1.hasNext() == iterator2.hasNext()) {
 

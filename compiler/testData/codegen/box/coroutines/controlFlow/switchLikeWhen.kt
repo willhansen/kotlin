@@ -8,21 +8,21 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendWithResult(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+    suspend fun <T> suspendWithResult(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
         result += "["
-        c.resume(value)
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation)
     return controller.result
 }
 
 fun box(): String {
-    var value = builder {
+    var konstue = builder {
         for (v in listOf("A", "B", "C")) {
             when (v) {
                 "A" -> result += "A;"
@@ -31,7 +31,7 @@ fun box(): String {
             }
         }
     }
-    if (value != "A;B]C]!") return "fail: suspend as if condition: $value"
+    if (konstue != "A;B]C]!") return "fail: suspend as if condition: $konstue"
 
     return "OK"
 }

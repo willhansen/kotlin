@@ -8,21 +8,21 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-data class Test(val a: String?) : Parcelable
+data class Test(konst a: String?) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = Test("John")
-    val second = Test(null)
+    konst first = Test("John")
+    konst second = Test(null)
 
     first.writeToParcel(parcel, 0)
     second.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val first2 = readFromParcel<Test>(parcel)
-    val second2 = readFromParcel<Test>(parcel)
+    konst first2 = readFromParcel<Test>(parcel)
+    konst second2 = readFromParcel<Test>(parcel)
 
     assert(first == first2)
     assert(second == second2)

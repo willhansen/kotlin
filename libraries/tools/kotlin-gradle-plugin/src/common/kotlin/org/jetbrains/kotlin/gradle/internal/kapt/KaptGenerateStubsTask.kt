@@ -56,14 +56,14 @@ abstract class KaptGenerateStubsTask @Inject constructor(
     // Bug in Gradle - without this override Gradle complains @Internal is not
     // compatible with @Classpath and @Incremental annotations
     @get:Internal
-    abstract override val libraries: ConfigurableFileCollection
+    abstract override konst libraries: ConfigurableFileCollection
 
     /* Used as input as empty kapt classpath should not trigger stub generation, but a non-empty one should. */
     @Input
     fun getIfKaptClasspathIsPresent() = !kaptClasspath.isEmpty
 
     @get:Input
-    abstract val verbose: Property<Boolean>
+    abstract konst verbose: Property<Boolean>
 
     /**
      * Changes in this additional sources will trigger stubs regeneration,
@@ -74,7 +74,7 @@ abstract class KaptGenerateStubsTask @Inject constructor(
     @get:NormalizeLineEndings
     @get:PathSensitive(PathSensitivity.RELATIVE)
     @get:Incremental
-    abstract val additionalSources: ConfigurableFileCollection
+    abstract konst additionalSources: ConfigurableFileCollection
 
     override fun skipCondition(): Boolean = sources.isEmpty && javaSources.isEmpty
 
@@ -84,18 +84,18 @@ abstract class KaptGenerateStubsTask @Inject constructor(
     @get:InputFiles
     @get:IgnoreEmptyDirectories
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    override val sources: FileCollection = super.sources
+    override konst sources: FileCollection = super.sources
 
     @get:Internal
-    override val scriptSources: FileCollection = objectFactory.fileCollection()
+    override konst scriptSources: FileCollection = objectFactory.fileCollection()
 
     @get:Internal
-    override val androidLayoutResources: FileCollection = objectFactory.fileCollection()
+    override konst androidLayoutResources: FileCollection = objectFactory.fileCollection()
 
     @get:Internal
-    abstract val kotlinCompileDestinationDirectory: DirectoryProperty
+    abstract konst kotlinCompileDestinationDirectory: DirectoryProperty
 
-    override val incrementalProps: List<FileCollection>
+    override konst incrementalProps: List<FileCollection>
         get() = listOf(
             sources,
             javaSources,
@@ -118,7 +118,7 @@ abstract class KaptGenerateStubsTask @Inject constructor(
                 args.reportPerf = true
             }
 
-            val pluginOptionsWithKapt = pluginOptions.toSingleCompilerPluginOptions()
+            konst pluginOptionsWithKapt = pluginOptions.toSingleCompilerPluginOptions()
                 .withWrappedKaptOptions(withApClasspath = kaptClasspath)
 
             args.pluginOptions = (pluginOptionsWithKapt.arguments).toTypedArray()

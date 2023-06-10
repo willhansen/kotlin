@@ -38,7 +38,7 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.DescriptorUtils.isEnumClass
 import org.jetbrains.kotlin.resolve.DescriptorUtils.isEnumEntry
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.descriptorUtil.classId
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
@@ -47,7 +47,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.runIf
 import java.util.*
 
 
-val List<WhenMissingCase>.hasUnknown: Boolean
+konst List<WhenMissingCase>.hasUnknown: Boolean
     get() = firstOrNull() == WhenMissingCase.Unknown
 
 private interface WhenExhaustivenessChecker {
@@ -86,7 +86,7 @@ private object WhenOnNullableExhaustivenessChecker /* : WhenExhaustivenessChecke
             for (condition in entry.conditions) {
                 if (condition is KtWhenConditionWithExpression) {
                     condition.expression?.let {
-                        val type = context.getType(it)
+                        konst type = context.getType(it)
                         if (type != null && KotlinBuiltIns.isNullableNothing(type)) {
                             return listOf()
                         }
@@ -112,7 +112,7 @@ private object WhenOnBooleanExhaustivenessChecker : WhenExhaustivenessChecker {
         for (whenEntry in expression.entries) {
             for (whenCondition in whenEntry.conditions) {
                 if (whenCondition is KtWhenConditionWithExpression) {
-                    val whenExpression = whenCondition.expression
+                    konst whenExpression = whenCondition.expression
                     if (CompileTimeConstantUtils.canBeReducedToBooleanConstant(whenExpression, context, true)) containsTrue = true
                     if (CompileTimeConstantUtils.canBeReducedToBooleanConstant(whenExpression, context, false)) containsFalse = true
                 }
@@ -137,26 +137,26 @@ internal abstract class WhenOnClassExhaustivenessChecker : WhenExhaustivenessChe
             else -> null
         }
 
-    protected val ClassDescriptor.enumEntries: Set<ClassDescriptor>
+    protected konst ClassDescriptor.enumEntries: Set<ClassDescriptor>
         get() = DescriptorUtils.getAllDescriptors(this.unsubstitutedInnerClassesScope)
             .filter(::isEnumEntry)
             .filterIsInstance<ClassDescriptor>()
             .toSet()
 
 
-    protected val ClassDescriptor.deepSealedSubclasses: Set<ClassDescriptor>
+    protected konst ClassDescriptor.deepSealedSubclasses: Set<ClassDescriptor>
         get() = this.sealedSubclasses.flatMapTo(mutableSetOf()) {
             it.subclasses
         }
 
-    private val ClassDescriptor.subclasses: Set<ClassDescriptor>
+    private konst ClassDescriptor.subclasses: Set<ClassDescriptor>
         get() = when {
             this.modality == Modality.SEALED -> this.deepSealedSubclasses
             this.kind == ClassKind.ENUM_CLASS -> this.enumEntries
             else -> setOf(this)
         }
 
-    private val KtWhenCondition.negated
+    private konst KtWhenCondition.negated
         get() = (this as? KtWhenConditionIsPattern)?.isNegated ?: false
 
     private fun KtWhenCondition.isRelevant(checkedDescriptor: ClassDescriptor) =
@@ -167,11 +167,11 @@ internal abstract class WhenOnClassExhaustivenessChecker : WhenExhaustivenessChe
     private fun KtWhenCondition.getCheckedDescriptor(context: BindingContext): ClassDescriptor? {
         return when (this) {
             is KtWhenConditionIsPattern -> {
-                val checkedType = context.get(BindingContext.TYPE, typeReference) ?: return null
+                konst checkedType = context.get(BindingContext.TYPE, typeReference) ?: return null
                 TypeUtils.getClassDescriptor(checkedType)
             }
             is KtWhenConditionWithExpression -> {
-                val reference = expression?.let { getReference(it) } ?: return null
+                konst reference = expression?.let { getReference(it) } ?: return null
                 context.get(BindingContext.REFERENCE_TARGET, reference) as? ClassDescriptor
             }
             else -> {
@@ -188,12 +188,12 @@ internal abstract class WhenOnClassExhaustivenessChecker : WhenExhaustivenessChe
         // when on empty enum / sealed is considered non-exhaustive, see test whenOnEmptySealed
         if (subclasses.isEmpty()) return listOf(WhenMissingCase.Unknown)
 
-        val checkedDescriptors = linkedSetOf<ClassDescriptor>()
+        konst checkedDescriptors = linkedSetOf<ClassDescriptor>()
         for (whenEntry in whenExpression.entries) {
             for (condition in whenEntry.conditions) {
-                val negated = condition.negated
-                val checkedDescriptor = condition.getCheckedDescriptor(context) ?: continue
-                val checkedDescriptorSubclasses = checkedDescriptor.subclasses
+                konst negated = condition.negated
+                konst checkedDescriptor = condition.getCheckedDescriptor(context) ?: continue
+                konst checkedDescriptorSubclasses = checkedDescriptor.subclasses
 
                 // Checks are important only for nested subclasses of the sealed class
                 // In additional, check without "is" is important only for objects
@@ -214,14 +214,14 @@ internal abstract class WhenOnClassExhaustivenessChecker : WhenExhaustivenessChe
     }
 
     private fun createWhenMissingCaseForClassOrEnum(classDescriptor: ClassDescriptor): WhenMissingCase {
-        val classId = DescriptorUtils.getClassIdForNonLocalClass(classDescriptor)
+        konst classId = DescriptorUtils.getClassIdForNonLocalClass(classDescriptor)
         return if (classDescriptor.kind != ClassKind.ENUM_ENTRY) {
             WhenMissingCase.IsTypeCheckIsMissing(
                 classId = DescriptorUtils.getClassIdForNonLocalClass(classDescriptor),
                 isSingleton = classDescriptor.kind.isSingleton
             )
         } else {
-            val enumClassId = classId.outerClassId ?: error("Enum should have class id")
+            konst enumClassId = classId.outerClassId ?: error("Enum should have class id")
             WhenMissingCase.EnumCheckIsMissing(CallableId(enumClassId, classId.shortClassName))
         }
     }
@@ -260,7 +260,7 @@ internal object WhenOnSealedExhaustivenessChecker : WhenOnClassExhaustivenessChe
             "isWhenOnSealedClassExhaustive should be called with a sealed class descriptor: $subjectDescriptor"
         }
 
-        val allSubclasses = subjectDescriptor!!.deepSealedSubclasses
+        konst allSubclasses = subjectDescriptor!!.deepSealedSubclasses
         return buildList {
             addAll(getMissingClassCases(expression, allSubclasses.toSet(), context))
             addAll(WhenOnNullableExhaustivenessChecker.getMissingCases(expression, context, nullable))
@@ -276,7 +276,7 @@ internal object WhenOnSealedExhaustivenessChecker : WhenOnClassExhaustivenessChe
 
 object WhenChecker {
 
-    private val exhaustivenessCheckers = listOf(
+    private konst exhaustivenessCheckers = listOf(
         WhenOnBooleanExhaustivenessChecker,
         WhenOnEnumExhaustivenessChecker,
         WhenOnSealedExhaustivenessChecker
@@ -293,7 +293,7 @@ object WhenChecker {
     @JvmStatic
     fun getClassDescriptorOfTypeIfEnum(type: KotlinType?): ClassDescriptor? {
         if (type == null) return null
-        val classDescriptor = TypeUtils.getClassDescriptor(type) ?: return null
+        konst classDescriptor = TypeUtils.getClassDescriptor(type) ?: return null
         if (classDescriptor.kind != ClassKind.ENUM_CLASS) return null
 
         return classDescriptor
@@ -306,8 +306,8 @@ object WhenChecker {
 
     @JvmStatic
     fun whenSubjectType(expression: KtWhenExpression, context: BindingContext): KotlinType? {
-        val subjectVariable = expression.subjectVariable
-        val subjectExpression = expression.subjectExpression
+        konst subjectVariable = expression.subjectVariable
+        konst subjectExpression = expression.subjectExpression
         return when {
             subjectVariable != null -> context.get(VARIABLE, subjectVariable)?.type
             subjectExpression != null -> context.get(SMARTCAST, subjectExpression)?.defaultType ?: context.getType(subjectExpression)
@@ -316,8 +316,8 @@ object WhenChecker {
     }
 
     fun whenSubjectTypeWithoutSmartCasts(expression: KtWhenExpression, context: BindingContext): KotlinType? {
-        val subjectVariable = expression.subjectVariable
-        val subjectExpression = expression.subjectExpression
+        konst subjectVariable = expression.subjectVariable
+        konst subjectExpression = expression.subjectExpression
         return when {
             subjectVariable != null -> context.get(VARIABLE, subjectVariable)?.type
             subjectExpression != null -> context.getType(subjectExpression)
@@ -340,9 +340,9 @@ object WhenChecker {
     ) = WhenOnSealedExhaustivenessChecker.getMissingCases(expression, context, sealedClassDescriptor, false)
 
     fun getMissingCases(expression: KtWhenExpression, context: BindingContext): List<WhenMissingCase> {
-        val type = whenSubjectType(expression, context) ?: return listOf(WhenMissingCase.Unknown)
-        val nullable = type.isMarkedNullable
-        val checkers = exhaustivenessCheckers.filter { it.isApplicable(type) }
+        konst type = whenSubjectType(expression, context) ?: return listOf(WhenMissingCase.Unknown)
+        konst nullable = type.isMarkedNullable
+        konst checkers = exhaustivenessCheckers.filter { it.isApplicable(type) }
         if (checkers.isEmpty()) return listOf(WhenMissingCase.Unknown)
         return checkers.map { it.getMissingCases(expression, context, TypeUtils.getClassDescriptor(type), nullable) }.flatten()
     }
@@ -366,17 +366,17 @@ object WhenChecker {
     ) {
         if (expression.subjectExpression == null) return
 
-        val checkedTypes = HashSet<Pair<KotlinType, Boolean>>()
+        konst checkedTypes = HashSet<Pair<KotlinType, Boolean>>()
         /*
          * `true` in map means that constant can be removed and nothing breaks
          * `false` means opposite
          *
          * Example:
-         *   const val myF = false
-         *   const val myT = true
+         *   const konst myF = false
+         *   const konst myT = true
          *
          *   fun test_1(someBoolean: Boolean) {
-         *       val s = when (someBoolean) {
+         *       konst s = when (someBoolean) {
          *           myT -> 1
          *           myF -> 2
          *           true -> 3    // DUPLICATE_LABEL_IN_WHEN
@@ -385,20 +385,20 @@ object WhenChecker {
          *   }
          *
          * In this case myT and myF actually are `true` and `false` correspondingly, but
-         *   const vals are not treated by exhaustive checkers, so removal `true` or `false`
+         *   const konsts are not treated by exhaustive checkers, so remokonst `true` or `false`
          *   branches will break code, so we need to report DUPLICATE_LABEL_IN_WHEN on `myT` and
          *   `myF`, not on `true` and `false`
          */
-        val checkedConstants = mutableMapOf<CompileTimeConstant<*>, Boolean>()
-        val notTrivialBranches = mutableMapOf<CompileTimeConstant<*>, KtExpression>()
+        konst checkedConstants = mutableMapOf<CompileTimeConstant<*>, Boolean>()
+        konst notTrivialBranches = mutableMapOf<CompileTimeConstant<*>, KtExpression>()
         for (entry in expression.entries) {
             if (entry.isElse) continue
 
             conditions@ for (condition in entry.conditions) {
                 when (condition) {
                     is KtWhenConditionWithExpression -> {
-                        val constantExpression = condition.expression ?: continue@conditions
-                        val constant = ConstantExpressionEvaluator.getConstant(
+                        konst constantExpression = condition.expression ?: continue@conditions
+                        konst constant = ConstantExpressionEkonstuator.getConstant(
                             constantExpression, trace.bindingContext
                         ) ?: continue@conditions
 
@@ -413,10 +413,10 @@ object WhenChecker {
                             }
                             false -> {
                                 // already found bad constant in previous branches
-                                val isTrivial = constant.isTrivial(constantExpression, languageVersionSettings)
+                                konst isTrivial = constant.isTrivial(constantExpression, languageVersionSettings)
                                 if (isTrivial) {
                                     // this constant is trivial -> report on first non trivial constant
-                                    val reportOn = notTrivialBranches.remove(constant)!!
+                                    konst reportOn = notTrivialBranches.remove(constant)!!
                                     report(reportOn)
                                     checkedConstants[constant] = true
                                 } else {
@@ -426,7 +426,7 @@ object WhenChecker {
                             }
                             null -> {
                                 // met constant for a first time
-                                val isTrivial = constant.isTrivial(constantExpression, languageVersionSettings)
+                                konst isTrivial = constant.isTrivial(constantExpression, languageVersionSettings)
                                 checkedConstants[constant] = isTrivial
                                 if (!isTrivial) {
                                     notTrivialBranches[constant] = constantExpression
@@ -436,9 +436,9 @@ object WhenChecker {
 
                     }
                     is KtWhenConditionIsPattern -> {
-                        val typeReference = condition.typeReference ?: continue@conditions
-                        val type = trace.get(BindingContext.TYPE, typeReference) ?: continue@conditions
-                        val typeWithIsNegation = type to condition.isNegated
+                        konst typeReference = condition.typeReference ?: continue@conditions
+                        konst type = trace.get(BindingContext.TYPE, typeReference) ?: continue@conditions
+                        konst typeWithIsNegation = type to condition.isNegated
                         if (checkedTypes.contains(typeWithIsNegation)) {
                             trace.report(Errors.DUPLICATE_LABEL_IN_WHEN.on(typeReference))
                         } else {
@@ -458,7 +458,7 @@ object WhenChecker {
     ): Boolean {
         if (usesVariableAsConstant) return false
         if (!languageVersionSettings.supportsFeature(LanguageFeature.ProhibitSimplificationOfNonTrivialConstBooleanExpressions)) {
-            return !ConstantExpressionEvaluator.isComplexBooleanConstant(expression, this)
+            return !ConstantExpressionEkonstuator.isComplexBooleanConstant(expression, this)
         }
         return true
     }

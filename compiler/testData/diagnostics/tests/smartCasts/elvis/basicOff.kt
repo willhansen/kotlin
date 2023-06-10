@@ -1,7 +1,7 @@
 // !LANGUAGE: -BooleanElvisBoundSmartCasts
 
 interface Order {
-    val expired: Boolean?
+    konst expired: Boolean?
 
     fun notExpired(): Boolean
 
@@ -9,7 +9,7 @@ interface Order {
 }
 
 fun foo(o: Any) {
-    val order = o as? Order
+    konst order = o as? Order
     if (order?.expired ?: false) {
         order<!UNSAFE_CALL!>.<!>doSomething()
     }
@@ -22,7 +22,7 @@ fun foo(o: Any) {
 }
 
 fun bar(o: Any) {
-    val order = o as? Order
+    konst order = o as? Order
     if (order?.expired ?: true) {
 
     }

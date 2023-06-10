@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets
 
 
 class VersionFetcher : AutoCloseable {
-    private val client = HttpClient()
+    private konst client = HttpClient()
 
     suspend fun fetch(): List<PackageInformation> {
         return coroutineScope {
@@ -33,20 +33,20 @@ class VersionFetcher : AutoCloseable {
                         .filter { it.version == null }
                         .map {
                             async {
-                                val fetched = fetchPackageInformationAsync(it.name)
+                                konst fetched = fetchPackageInformationAsync(it.name)
                                 object {
-                                    val name = it.name
-                                    val displayName = it.displayName
-                                    val fetched = fetched
+                                    konst name = it.name
+                                    konst displayName = it.displayName
+                                    konst fetched = fetched
                                 }
                             }
                         }
                         .map { fetched ->
-                            val await = fetched.await()
-                            val name = await.name
-                            val displayName = await.displayName
-                            val awaitFetched = await.fetched
-                            val fetchedPackageInformation = Gson().fromJson(awaitFetched, FetchedPackageInformation::class.java)
+                            konst await = fetched.await()
+                            konst name = await.name
+                            konst displayName = await.displayName
+                            konst awaitFetched = await.fetched
+                            konst fetchedPackageInformation = Gson().fromJson(awaitFetched, FetchedPackageInformation::class.java)
                             RealPackageInformation(
                                 name,
                                 fetchedPackageInformation.versions.keys,
@@ -59,7 +59,7 @@ class VersionFetcher : AutoCloseable {
     private suspend fun fetchPackageInformationAsync(
         packageName: String,
     ): String {
-        val packagePath =
+        konst packagePath =
             if (packageName.startsWith("@"))
                 "@" + encodeURIComponent(packageName)
             else
@@ -74,7 +74,7 @@ class VersionFetcher : AutoCloseable {
 }
 
 private data class FetchedPackageInformation(
-    val versions: Map<String, Any>
+    konst versions: Map<String, Any>
 )
 
 fun encodeURIComponent(s: String): String {

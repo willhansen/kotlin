@@ -16,7 +16,7 @@ public open class A {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@kotlin.annotation.MustBeDocumented @javax.annotation.meta.TypeQualifierNickname @javax.annotation.Nonnull(when = When.MAYBE) @kotlin.annotation.Retention(value = AnnotationRetention.RUNTIME) public final annotation class MySuperNull : kotlin.Annotation {
+@kotlin.annotation.MustBeDocumented @javax.annotation.meta.TypeQualifierNickname @javax.annotation.Nonnull(when = When.MAYBE) @kotlin.annotation.Retention(konstue = AnnotationRetention.RUNTIME) public final annotation class MySuperNull : kotlin.Annotation {
     public constructor MySuperNull()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

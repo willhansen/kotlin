@@ -2,7 +2,7 @@
 
 // FILE: utils.kt
 
-inline class Foo(val x: Int) {
+inline class Foo(konst x: Int) {
     fun member() {}
 }
 
@@ -20,7 +20,7 @@ fun test(f: Foo?) {
     }
 
     if (f != null) {
-        val a = f
+        konst a = f
         a.member() // unbox
     }
 }
@@ -28,5 +28,5 @@ fun test(f: Foo?) {
 // @TestKt.class:
 // 0 INVOKESTATIC Foo\$Erased.box
 // 2 INVOKEVIRTUAL Foo.unbox
-// 0 valueOf
+// 0 konstueOf
 // 0 intValue

@@ -4,11 +4,11 @@
 import kotlin.contracts.*
 
 class A {
-    val value = arrayListOf("O")
+    konst konstue = arrayListOf("O")
 
     init {
         foo {
-            value += "K"
+            konstue += "K"
         }
     }
 }
@@ -21,6 +21,6 @@ fun foo(block: () -> Unit) {
 }
 
 fun box(): String {
-    val a = A()
-    return if (a.value == listOf("O", "K"))  "OK" else "FAIL"
+    konst a = A()
+    return if (a.konstue == listOf("O", "K"))  "OK" else "FAIL"
 }

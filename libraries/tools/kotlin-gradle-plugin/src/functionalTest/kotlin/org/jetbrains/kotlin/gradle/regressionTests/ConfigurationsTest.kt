@@ -37,7 +37,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
     @Test
     fun `source set dependencies dsl test`() {
-        val lib = buildProjectWithMPP(projectBuilder = { withName("lib"); withParent(project) }) {
+        konst lib = buildProjectWithMPP(projectBuilder = { withName("lib"); withParent(project) }) {
             kotlin {
                 jvm()
                 linuxX64()
@@ -62,16 +62,16 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             api(project(path = ":lib", configuration = "outputConfiguration"))
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMainApi = project.configurations.getByName("commonMainApi")
-        val commonMainImplementation = project.configurations.getByName("commonMainImplementation")
-        val commonMainCompileOnly = project.configurations.getByName("commonMainCompileOnly")
-        val commonMainRuntimeOnly = project.configurations.getByName("commonMainRuntimeOnly")
+        konst commonMainApi = project.configurations.getByName("commonMainApi")
+        konst commonMainImplementation = project.configurations.getByName("commonMainImplementation")
+        konst commonMainCompileOnly = project.configurations.getByName("commonMainCompileOnly")
+        konst commonMainRuntimeOnly = project.configurations.getByName("commonMainRuntimeOnly")
 
         fun Configuration.assertHasDependency(criterionName: String, criterion: Dependency.() -> Boolean) {
-            val allDependenciesString = allDependencies.joinToString("\n")
-            val message = "Configuration expected to have dependency: ${criterionName}.\n" +
+            konst allDependenciesString = allDependencies.joinToString("\n")
+            konst message = "Configuration expected to have dependency: ${criterionName}.\n" +
                     "But it has only dependencies: \n$allDependenciesString"
             assertTrue(message) { allDependencies.any(criterion) }
         }
@@ -135,21 +135,21 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
         kotlin.jvm()
         kotlin.js()
 
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
         kotlin.targets.withType(KotlinNativeTarget::class.java).all { target ->
             target.compilations.getByName("main").defaultSourceSet.dependsOn(nativeMain)
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.configurations
             .filter { configuration ->
                 configuration.attributes.contains(KotlinPlatformType.attribute) ||
-                        configuration.attributes.getAttribute(Usage.USAGE_ATTRIBUTE)?.name in KotlinUsages.values
+                        configuration.attributes.getAttribute(Usage.USAGE_ATTRIBUTE)?.name in KotlinUsages.konstues
             }
             .filterNot { configuration -> configuration.name.contains("SourcesElements") }
             .forEach { configuration ->
-                val category = configuration.attributes.getAttribute(Category.CATEGORY_ATTRIBUTE)
+                konst category = configuration.attributes.getAttribute(Category.CATEGORY_ATTRIBUTE)
                 assertNotNull(category, "Expected configuration ${configuration.name} to provide 'Category' attribute")
                 assertEquals(Category.LIBRARY, category.name, "Expected configuration $configuration to be 'LIBRARY' Category")
             }
@@ -158,20 +158,20 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
     @Test
     fun `don't publish wasm targets with KotlinJsCompilerAttribute attribute`() {
         with(kotlin) {
-            val jsAttribute = Attribute.of(String::class.java)
+            konst jsAttribute = Attribute.of(String::class.java)
             js("nodeJs", KotlinJsCompilerType.IR) { attributes { attribute(jsAttribute, "nodeJs") } }
             js("browser", KotlinJsCompilerType.IR) { attributes { attribute(jsAttribute, "browser") } }
             @OptIn(ExperimentalWasmDsl::class)
             wasm()
 
-            val allJs = sourceSets.create("allJs")
+            konst allJs = sourceSets.create("allJs")
             targets.getByName("nodeJs").compilations.getByName("main").defaultSourceSet.dependsOn(allJs)
             targets.getByName("browser").compilations.getByName("main").defaultSourceSet.dependsOn(allJs)
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val targetSpecificConfigurationsToCheck = listOf(
+        konst targetSpecificConfigurationsToCheck = listOf(
             "ApiElements",
             "RuntimeElements",
 
@@ -185,7 +185,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
         )
 
         // WASM
-        val actualWasmConfigurations = targetSpecificConfigurationsToCheck
+        konst actualWasmConfigurations = targetSpecificConfigurationsToCheck
             .map { project.configurations.getByName("wasm$it") }
             .filter { it.attributes.contains(KotlinJsCompilerAttribute.jsCompilerAttribute) }
 
@@ -195,17 +195,17 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             "All WASM configurations should not contain KotlinJsCompilerAttribute"
         )
 
-        val commonSourceSetsConfigurationsToCheck = listOf(
+        konst commonSourceSetsConfigurationsToCheck = listOf(
             "ApiDependenciesMetadata",
             "CompileOnlyDependenciesMetadata",
             "ImplementationDependenciesMetadata",
         )
 
         // allJs
-        val expectedAllJsConfigurations = commonSourceSetsConfigurationsToCheck
+        konst expectedAllJsConfigurations = commonSourceSetsConfigurationsToCheck
             .map { project.configurations.getByName("allJs$it") }
 
-        val actualAllJsConfigurations = expectedAllJsConfigurations
+        konst actualAllJsConfigurations = expectedAllJsConfigurations
             .filter { it.attributes.contains(KotlinJsCompilerAttribute.jsCompilerAttribute) }
 
         assertEquals(
@@ -216,7 +216,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
 
         // commonMain
-        val actualCommonMainConfigurations = commonSourceSetsConfigurationsToCheck
+        konst actualCommonMainConfigurations = commonSourceSetsConfigurationsToCheck
             .map { project.configurations.getByName("commonMain$it") }
             .filter { it.attributes.contains(KotlinJsCompilerAttribute.jsCompilerAttribute) }
 
@@ -230,7 +230,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
     @Test
     fun `test js IR compilation dependencies`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 @Suppress("DEPRECATION")
                 js(BOTH)
@@ -248,7 +248,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         with(project) {
             assertContainsDependencies("jsCompilationApi", "test:compilation-dependency", "test:source-set-dependency")
@@ -259,7 +259,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
     @Test
     fun `test compilation and source set configurations don't clash`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             androidLibrary {
                 compileSdk = 30
             }
@@ -273,13 +273,13 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         @Suppress("DEPRECATION")
         project.kotlinExtension.targets.flatMap { it.compilations }.forEach { compilation ->
-            val compilationSourceSets = compilation.allKotlinSourceSets
-            val compilationConfigurationNames = compilation.relatedConfigurationNames
-            val sourceSetConfigurationNames = compilationSourceSets.flatMapTo(mutableSetOf()) { it.relatedConfigurationNames }
+            konst compilationSourceSets = compilation.allKotlinSourceSets
+            konst compilationConfigurationNames = compilation.relatedConfigurationNames
+            konst sourceSetConfigurationNames = compilationSourceSets.flatMapTo(mutableSetOf()) { it.relatedConfigurationNames }
 
             assert(compilationConfigurationNames.none { it in sourceSetConfigurationNames }) {
                 """A name clash between source set and compilation configurations detected for the following configurations:
@@ -291,7 +291,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
     @Test
     fun `test scoped sourceSet's configurations don't extend other configurations`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm()
                 @Suppress("DEPRECATION")
@@ -300,10 +300,10 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         for (sourceSet in project.kotlinExtension.sourceSets) {
-            val configurationNames = listOf(
+            konst configurationNames = listOf(
                 sourceSet.implementationConfigurationName,
                 sourceSet.apiConfigurationName,
                 sourceSet.compileOnlyConfigurationName,
@@ -311,7 +311,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             )
 
             for (name in configurationNames) {
-                val extendsFrom = project.configurations.getByName(name).extendsFrom
+                konst extendsFrom = project.configurations.getByName(name).extendsFrom
                 assert(extendsFrom.isEmpty()) {
                     "Configuration $name is not expected to be extending anything, but it extends: ${
                         extendsFrom.joinToString(
@@ -325,9 +325,9 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
     }
 
     class TestDisambiguationAttributePropagation {
-        private val disambiguationAttribute = org.gradle.api.attributes.Attribute.of("disambiguationAttribute", String::class.java)
+        private konst disambiguationAttribute = org.gradle.api.attributes.Attribute.of("disambiguationAttribute", String::class.java)
 
-        private val mppProject
+        private konst mppProject
             get() = buildProjectWithMPP {
                 kotlin {
                     jvm("plainJvm") {
@@ -341,13 +341,13 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
                 }
             }
 
-        private val javaProject
+        private konst javaProject
             get() = buildProject {
                 project.plugins.apply("java-library")
             }
 
         //NB: There is no "api" configuration registered by Java Plugin
-        private val javaConfigurations = listOf(
+        private konst javaConfigurations = listOf(
             "compileClasspath",
             "runtimeClasspath",
             "implementation",
@@ -357,7 +357,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
         @Test
         fun `test that jvm target attributes are propagated to java configurations`() {
-            val kotlinJvmConfigurations = listOf(
+            konst kotlinJvmConfigurations = listOf(
                 "jvmWithJavaCompileClasspath",
                 "jvmWithJavaRuntimeClasspath",
                 "jvmWithJavaCompilationApi",
@@ -366,13 +366,13 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
                 "jvmWithJavaCompilationRuntimeOnly",
             )
 
-            val outgoingConfigurations = listOf(
+            konst outgoingConfigurations = listOf(
                 "jvmWithJavaApiElements",
                 "jvmWithJavaRuntimeElements",
                 "jvmWithJavaSourcesElements",
             )
 
-            val testJavaConfigurations = listOf(
+            konst testJavaConfigurations = listOf(
                 "testCompileClasspath",
                 "testCompileOnly",
                 "testImplementation",
@@ -380,7 +380,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
                 "testRuntimeOnly"
             )
 
-            val jvmWithJavaTestConfigurations = listOf(
+            konst jvmWithJavaTestConfigurations = listOf(
                 "jvmWithJavaTestCompileClasspath",
                 "jvmWithJavaTestRuntimeClasspath",
                 "jvmWithJavaTestCompilationApi",
@@ -389,14 +389,14 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
                 "jvmWithJavaTestCompilationRuntimeOnly"
             )
 
-            val expectedConfigurationsWithDisambiguationAttribute = javaConfigurations +
+            konst expectedConfigurationsWithDisambiguationAttribute = javaConfigurations +
                     kotlinJvmConfigurations +
                     outgoingConfigurations +
                     testJavaConfigurations +
                     jvmWithJavaTestConfigurations
 
-            with(mppProject.evaluate()) {
-                val actualConfigurationsWithDisambiguationAttribute = configurations
+            with(mppProject.ekonstuate()) {
+                konst actualConfigurationsWithDisambiguationAttribute = configurations
                     .filter { it.attributes.getAttribute(disambiguationAttribute) == "jvmWithJava" }
                     .map { it.name }
 
@@ -409,19 +409,19 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
         @Test
         fun `test that no new attributes are added to java configurations`() {
-            val evaluatedJavaProject = javaProject.evaluate()
-            val evaluatedMppProject = mppProject.evaluate()
+            konst ekonstuatedJavaProject = javaProject.ekonstuate()
+            konst ekonstuatedMppProject = mppProject.ekonstuate()
 
             fun AttributeContainer.toStringMap(): Map<String, String> =
                 keySet().associate { it.name to getAttribute(it).toString() }
 
             for (configurationName in javaConfigurations) {
-                val expectedAttributes = evaluatedJavaProject
+                konst expectedAttributes = ekonstuatedJavaProject
                     .configurations
                     .getByName(configurationName)
                     .attributes.toStringMap()
 
-                val actualAttributes = evaluatedMppProject
+                konst actualAttributes = ekonstuatedMppProject
                     .configurations
                     .getByName(configurationName)
                     .attributes.toStringMap()
@@ -436,7 +436,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
     @Test
     fun `test platform notation for BOM is consumable in dependencies`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm()
                 sourceSets.getByName("jvmMain").apply {
@@ -451,7 +451,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertContainsDependencies("jvmMainApi", project.dependencies.platform("test:platform-dependency:1.0.0"))
     }
@@ -459,7 +459,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
 
     @Test
     fun `test enforcedPlatform notation for BOM is consumable in dependencies`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 js("browser") {
                     browser {
@@ -478,7 +478,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         project.assertContainsDependencies(
             "browserMainImplementation",
@@ -495,7 +495,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
     @Test
     fun `gradle entities should have correct names when default locale is turkish`() {
         fun withLocale(locale: Locale, code: () -> Unit) {
-            val currentLocal = Locale.getDefault()
+            konst currentLocal = Locale.getDefault()
             try {
                 Locale.setDefault(locale)
                 code()
@@ -505,16 +505,16 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
         }
 
         withLocale(Locale("tr", "TR")) {
-            val project = buildProjectWithMPP {
+            konst project = buildProjectWithMPP {
                 kotlin {
                     jvm()
                     js().nodejs()
                     ios()
                 }
             }
-            project.evaluate()
+            project.ekonstuate()
 
-            val gradleEntityNames: List<String> = with(project) {
+            konst gradleEntityNames: List<String> = with(project) {
                 listOf(
                     tasks.names,
                     configurations.names,
@@ -526,7 +526,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
                 ).flatten()
             }
 
-            val entityNamesWithTurkishI = gradleEntityNames.filter { it.contains('İ') || it.contains('ı') }
+            konst entityNamesWithTurkishI = gradleEntityNames.filter { it.contains('İ') || it.contains('ı') }
             assertTrue(
                 entityNamesWithTurkishI.isEmpty(),
                 "Following entities should not have turkish 'İ' or 'ı' in their names:\n" +
@@ -538,7 +538,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
     // See KT-55697
     @Test
     fun testCompileOnlyDependenciesDontGetToAndroidTests() {
-        val project = buildProject {
+        konst project = buildProject {
             applyKotlinAndroidPlugin()
             androidLibrary {
                 compileSdk = 31
@@ -549,7 +549,7 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             add("compileOnly", "org:example:1.0")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         fun isTestDependencyPresent(configName: String): Boolean =
             project.configurations.getByName(configName).incoming.dependencies.any { it.name == "example" }
@@ -570,10 +570,10 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
     // See KT-55751
     @Test
     fun `consumable configurations should have unique attribute set`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             plugins.apply("maven-publish")
 
-            val distinguishingAttribute = Attribute.of(String::class.java)
+            konst distinguishingAttribute = Attribute.of(String::class.java)
             kotlin {
                 jvm { attributes { attribute(distinguishingAttribute, "jvm") } }
                 jvm("jvm2") { attributes { attribute(distinguishingAttribute, "jvm2") } }
@@ -603,18 +603,18 @@ class ConfigurationsTest : MultiplatformExtensionTest() {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val duplicatedConsumableConfigurations = project.configurations
+        konst duplicatedConsumableConfigurations = project.configurations
             .filter { it.isCanBeConsumed }
             .filterNot { it.attributes.isEmpty }
             .groupBy { it.attributes.toMap() }
-            .values
+            .konstues
             .filter { it.size > 1 }
 
         if (duplicatedConsumableConfigurations.isNotEmpty()) {
-            val msg = duplicatedConsumableConfigurations.joinToString(separator = "\n") { configs ->
-                val list = configs.joinToString { it.name }
+            konst msg = duplicatedConsumableConfigurations.joinToString(separator = "\n") { configs ->
+                konst list = configs.joinToString { it.name }
                 " * $list"
             }
             fail("Following configurations have the same attributes:\n$msg")

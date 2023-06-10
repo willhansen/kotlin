@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.fir.contracts.description.*
 import org.jetbrains.kotlin.fir.contracts.impl.FirEmptyContractDescription
 import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 
-val FirContractDescription?.isNullOrEmpty: Boolean
+konst FirContractDescription?.isNullOrEmpty: Boolean
     get() = (this == null) || (this is FirEmptyContractDescription)
 
 fun FirContractDescription.createContractDescriptionForSubstitutionOverride(substitutor: ConeSubstitutor?): FirContractDescription {
@@ -26,7 +26,7 @@ fun FirContractDescription.createContractDescriptionForSubstitutionOverride(subs
 private fun FirResolvedContractDescription.createContractDescriptionForSubstitutionOverride(
     substitutor: ConeSubstitutor
 ): FirResolvedContractDescription {
-    val original = this
+    konst original = this
     return buildResolvedContractDescription {
         source = original.source
         original.effects.mapTo(effects) { it.substitute(substitutor) }
@@ -35,7 +35,7 @@ private fun FirResolvedContractDescription.createContractDescriptionForSubstitut
 }
 
 private fun FirEffectDeclaration.substitute(substitutor: ConeSubstitutor): FirEffectDeclaration {
-    val original = this
+    konst original = this
     return buildEffectDeclaration {
         source = original.source
         effect = original.effect.substitute(substitutor)
@@ -57,7 +57,7 @@ private fun ConeEffectDeclaration.substitute(substitutor: ConeSubstitutor): Cone
 private fun ConeBooleanExpression.substitute(substitutor: ConeSubstitutor): ConeBooleanExpression {
     return when (this) {
         is ConeIsInstancePredicate -> {
-            val newType = substitutor.substituteOrNull(type) ?: return this
+            konst newType = substitutor.substituteOrNull(type) ?: return this
             ConeIsInstancePredicate(arg, newType, isNegated)
         }
         is ConeBinaryLogicExpression -> ConeBinaryLogicExpression(left.substitute(substitutor), right.substitute(substitutor), kind)

@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
 class PropertyReferenceCollector : RecursiveJsVisitor() {
 
-    private val identReadMap = hashMapOf<String, Int>()
-    private val identWriteMap = hashMapOf<String, Int>()
+    private konst identReadMap = hashMapOf<String, Int>()
+    private konst identWriteMap = hashMapOf<String, Int>()
 
     fun hasUnqualifiedReads(expectedIdent: String) = expectedIdent in identReadMap
     fun hasUnqualifiedWrites(expectedIdent: String) = expectedIdent in identWriteMap
@@ -56,7 +56,7 @@ class PropertyReferenceCollector : RecursiveJsVisitor() {
 
     companion object {
         fun collect(node: JsNode): PropertyReferenceCollector {
-            val visitor = PropertyReferenceCollector()
+            konst visitor = PropertyReferenceCollector()
             node.accept(visitor)
             return visitor
         }

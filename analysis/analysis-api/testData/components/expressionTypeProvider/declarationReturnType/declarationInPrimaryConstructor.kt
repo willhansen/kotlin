@@ -1,1 +1,1 @@
-class Foo<T>(val t: T, val i: Int)
+class Foo<T>(konst t: T, konst i: Int)

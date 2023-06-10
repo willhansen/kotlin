@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int)
+konstue class Z(konst x: Int)
 
 class A {
     fun foo() = Z(42)
@@ -12,7 +12,7 @@ class A {
 fun test(a: A?) = a?.foo()!!
 
 fun box(): String {
-    val t = test(A())
+    konst t = test(A())
     if (t.x != 42) throw AssertionError("$t")
     return "OK"
 }

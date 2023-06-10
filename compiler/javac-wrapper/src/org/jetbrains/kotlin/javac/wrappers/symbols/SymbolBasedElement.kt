@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.load.java.structure.JavaElement
 import javax.lang.model.element.Element
 
 open class SymbolBasedElement<out T : Element>(
-        val element: T,
-        val javac: JavacWrapper
+        konst element: T,
+        konst javac: JavacWrapper
 ) : JavaElement {
 
     override fun equals(other: Any?) = (other as? SymbolBasedElement<*>)?.element == element

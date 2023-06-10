@@ -1,3 +1,3 @@
 fun test_2(): String {
-    val x: String = 1
+    konst x: String = 1
 }

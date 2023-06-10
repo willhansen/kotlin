@@ -11,7 +11,7 @@ public class MyValue {
 
 // FILE: main.kt
 fun box(): String {
-    val x = MyValue("A", "B", "C")
-    val result = x.defaultValue + x.privateValue + x.publicValue;
+    konst x = MyValue("A", "B", "C")
+    konst result = x.defaultValue + x.privateValue + x.publicValue;
     return if (result == "ABC") "OK" else "Error: $x"
 }

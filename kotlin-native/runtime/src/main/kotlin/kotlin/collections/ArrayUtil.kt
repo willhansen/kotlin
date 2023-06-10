@@ -10,9 +10,9 @@ import kotlin.native.internal.ExportForCppRuntime
 import kotlin.native.internal.GCUnsafeCall
 
 /**
- * Returns an array of objects of the given type with the given [size], initialized with _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns an array of objects of the given type with the given [size], initialized with _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 @PublishedApi
 internal inline fun <E> arrayOfUninitializedElements(size: Int): Array<E> {
@@ -28,7 +28,7 @@ internal inline fun <E> arrayOfUninitializedElements(size: Int): Array<E> {
  * @return [array] with the elements copied from the collection.
  */
 internal fun <E, T> collectionToArray(collection: Collection<E>, array: Array<T>): Array<T> {
-    val toArray = if (collection.size > array.size) {
+    konst toArray = if (collection.size > array.size) {
         arrayOfUninitializedElements<T>(collection.size)
     } else {
         array
@@ -51,42 +51,42 @@ internal fun <E> collectionToArray(collection: Collection<E>): Array<E>
 
 
 /**
- * Resets an array element at a specified index to some implementation-specific _uninitialized_ value.
+ * Resets an array element at a specified index to some implementation-specific _uninitialized_ konstue.
  * In particular, references stored in this element are released and become available for garbage collection.
- * Attempts to read _uninitialized_ value work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Attempts to read _uninitialized_ konstue work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun <E> Array<E>.resetAt(index: Int) {
     (@Suppress("UNCHECKED_CAST")(this as Array<Any?>))[index] = null
 }
 
 @GCUnsafeCall("Kotlin_Array_fillImpl")
-@PointsTo(0x3000, 0x0000, 0x0000, 0x0000) // array.intestines -> value
-internal external fun <T> arrayFill(array: Array<T>, fromIndex: Int, toIndex: Int, value: T)
+@PointsTo(0x3000, 0x0000, 0x0000, 0x0000) // array.intestines -> konstue
+internal external fun <T> arrayFill(array: Array<T>, fromIndex: Int, toIndex: Int, konstue: T)
 
 @GCUnsafeCall("Kotlin_ByteArray_fillImpl")
-internal external fun arrayFill(array: ByteArray, fromIndex: Int, toIndex: Int, value: Byte)
+internal external fun arrayFill(array: ByteArray, fromIndex: Int, toIndex: Int, konstue: Byte)
 
 @GCUnsafeCall("Kotlin_ShortArray_fillImpl")
-internal external fun arrayFill(array: ShortArray, fromIndex: Int, toIndex: Int, value: Short)
+internal external fun arrayFill(array: ShortArray, fromIndex: Int, toIndex: Int, konstue: Short)
 
 @GCUnsafeCall("Kotlin_CharArray_fillImpl")
-internal external fun arrayFill(array: CharArray, fromIndex: Int, toIndex: Int, value: Char)
+internal external fun arrayFill(array: CharArray, fromIndex: Int, toIndex: Int, konstue: Char)
 
 @GCUnsafeCall("Kotlin_IntArray_fillImpl")
-internal external fun arrayFill(array: IntArray, fromIndex: Int, toIndex: Int, value: Int)
+internal external fun arrayFill(array: IntArray, fromIndex: Int, toIndex: Int, konstue: Int)
 
 @GCUnsafeCall("Kotlin_LongArray_fillImpl")
-internal external fun arrayFill(array: LongArray, fromIndex: Int, toIndex: Int, value: Long)
+internal external fun arrayFill(array: LongArray, fromIndex: Int, toIndex: Int, konstue: Long)
 
 @GCUnsafeCall("Kotlin_DoubleArray_fillImpl")
-internal external fun arrayFill(array: DoubleArray, fromIndex: Int, toIndex: Int, value: Double)
+internal external fun arrayFill(array: DoubleArray, fromIndex: Int, toIndex: Int, konstue: Double)
 
 @GCUnsafeCall("Kotlin_FloatArray_fillImpl")
-internal external fun arrayFill(array: FloatArray, fromIndex: Int, toIndex: Int, value: Float)
+internal external fun arrayFill(array: FloatArray, fromIndex: Int, toIndex: Int, konstue: Float)
 
 @GCUnsafeCall("Kotlin_BooleanArray_fillImpl")
-internal external fun arrayFill(array: BooleanArray, fromIndex: Int, toIndex: Int, value: Boolean)
+internal external fun arrayFill(array: BooleanArray, fromIndex: Int, toIndex: Int, konstue: Boolean)
 
 @ExportForCppRuntime
 internal fun checkRangeIndexes(fromIndex: Int, toIndex: Int, size: Int) {
@@ -100,10 +100,10 @@ internal fun checkRangeIndexes(fromIndex: Int, toIndex: Int, size: Int) {
 
 /**
  * Resets a range of array elements at a specified [fromIndex] (inclusive) to [toIndex] (exclusive) range of indices
- * to some implementation-specific _uninitialized_ value.
+ * to some implementation-specific _uninitialized_ konstue.
  * In particular, references stored in these elements are released and become available for garbage collection.
- * Attempts to read _uninitialized_ values work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Attempts to read _uninitialized_ konstues work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun <E> Array<E>.resetRange(fromIndex: Int, toIndex: Int) {
     arrayFill(@Suppress("UNCHECKED_CAST") (this as Array<Any?>), fromIndex, toIndex, null)
@@ -139,13 +139,13 @@ internal external fun arrayCopy(array: BooleanArray, fromIndex: Int, destination
 
 
 internal fun <E> Collection<E>.collectionToString(): String {
-    val sb = StringBuilder(2 + size * 3)
+    konst sb = StringBuilder(2 + size * 3)
     sb.append("[")
     var i = 0
-    val it = iterator()
+    konst it = iterator()
     while (it.hasNext()) {
         if (i > 0) sb.append(", ")
-        val next = it.next()
+        konst next = it.next()
         if (next == this) sb.append("(this Collection)") else sb.append(next)
         i++
     }

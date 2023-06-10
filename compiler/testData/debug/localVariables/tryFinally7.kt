@@ -11,12 +11,12 @@ var x: String = ""
 
 fun compute(): String {
     try {
-        val y = 42
+        konst y = 42
         for (i in 0 until 1) {
             throw RuntimeException("$y $i")
         }
     } catch (e: Exception) {
-        val y = 32
+        konst y = 32
         for (j in 0 until 1) {
             f {
                 return "NON_LOCAL_RETURN"
@@ -29,8 +29,8 @@ fun compute(): String {
 }
 
 fun box() {
-    val result = compute()
-    val localX = x
+    konst result = compute()
+    konst localX = x
 }
 
 // EXPECTATIONS JVM JVM_IR

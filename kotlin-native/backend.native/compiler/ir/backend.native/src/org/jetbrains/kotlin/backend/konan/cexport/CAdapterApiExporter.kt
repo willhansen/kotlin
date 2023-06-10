@@ -28,26 +28,26 @@ import java.io.File
  *  @param cppAdapterFile C++ source that will be populated with glue code between K/N runtime and exported API.
  */
 internal class CAdapterApiExporter(
-        private val elements: CAdapterExportedElements,
-        private val headerFile: File,
-        private val defFile: File?,
-        private val cppAdapterFile: File,
-        private val target: KonanTarget,
+        private konst elements: CAdapterExportedElements,
+        private konst headerFile: File,
+        private konst defFile: File?,
+        private konst cppAdapterFile: File,
+        private konst target: KonanTarget,
 ) {
-    private val typeTranslator = elements.typeTranslator
-    private val builtIns = elements.typeTranslator.builtIns
+    private konst typeTranslator = elements.typeTranslator
+    private konst builtIns = elements.typeTranslator.builtIns
 
-    private val prefix = elements.typeTranslator.prefix
+    private konst prefix = elements.typeTranslator.prefix
     private lateinit var outputStreamWriter: PrintWriter
 
     // Primitive built-ins and unsigned types
-    private val predefinedTypes = listOf(
+    private konst predefinedTypes = listOf(
             builtIns.byteType, builtIns.shortType,
             builtIns.intType, builtIns.longType,
             builtIns.floatType, builtIns.doubleType,
             builtIns.charType, builtIns.booleanType,
             builtIns.unitType
-    ) + UnsignedType.values().map {
+    ) + UnsignedType.konstues().map {
         // Unfortunately, `context.ir` and `context.irBuiltins` are not initialized, so `context.ir.symbols.ubyte`, etc, are unreachable.
         builtIns.builtInsModule.findClassAcrossModuleDependencies(it.classId)!!.defaultType
     }
@@ -62,7 +62,7 @@ internal class CAdapterApiExporter(
             DefinitionKind.C_HEADER_DECLARATION -> {
                 when {
                     element.isTopLevelFunction -> {
-                        val (name, declaration) = element.makeTopLevelFunctionString()
+                        konst (name, declaration) = element.makeTopLevelFunctionString()
                         exportedSymbols += name
                         output(declaration, 0)
                     }
@@ -80,7 +80,7 @@ internal class CAdapterApiExporter(
                         }
                     }
                     element.isEnumEntry -> {
-                        val enumClass = element.declaration.containingDeclaration as ClassDescriptor
+                        konst enumClass = element.declaration.containingDeclaration as ClassDescriptor
                         output("${typeTranslator.translateType(enumClass.defaultType)} (*get)(); /* enum entry for ${element.name}. */", indent)
                     }
                     // TODO: handle properties.
@@ -142,11 +142,11 @@ internal class CAdapterApiExporter(
     }
 
     private fun defineUsedTypes(scope: ExportedElementScope, indent: Int) {
-        val usedTypes = mutableSetOf<KotlinType>()
+        konst usedTypes = mutableSetOf<KotlinType>()
         defineUsedTypesImpl(scope, usedTypes)
-        val usedReferenceTypes = usedTypes.filter { typeTranslator.isMappedToReference(it) }
+        konst usedReferenceTypes = usedTypes.filter { typeTranslator.isMappedToReference(it) }
         // Add nullable primitives, which are used in prototypes of "(*createNullable<PRIMITIVE_TYPE_NAME>)"
-        val predefinedNullableTypes: List<KotlinType> = predefinedTypes.map { it.makeNullable() }
+        konst predefinedNullableTypes: List<KotlinType> = predefinedTypes.map { it.makeNullable() }
 
         (predefinedNullableTypes + usedReferenceTypes)
                 .map { typeTranslator.translateType(it) }
@@ -158,14 +158,14 @@ internal class CAdapterApiExporter(
                 }
     }
 
-    private val exportedSymbols = mutableListOf<String>()
+    private konst exportedSymbols = mutableListOf<String>()
 
     // TODO: Pass temp and output files explicitly and untie from `NativeGenerationState`.
     fun makeGlobalStruct() {
-        val top = elements.scopes.first()
+        konst top = elements.scopes.first()
         outputStreamWriter = headerFile.printWriter()
 
-        val exportedSymbol = "${prefix}_symbols"
+        konst exportedSymbol = "${prefix}_symbols"
         exportedSymbols += exportedSymbol
 
         output("#ifndef KONAN_${prefix.uppercase()}_H")
@@ -194,7 +194,7 @@ internal class CAdapterApiExporter(
         output("typedef float              ${prefix}_KFloat;")
         output("typedef double             ${prefix}_KDouble;")
 
-        val typedef_KVector128 = "typedef float __attribute__ ((__vector_size__ (16))) ${prefix}_KVector128;"
+        konst typedef_KVector128 = "typedef float __attribute__ ((__vector_size__ (16))) ${prefix}_KVector128;"
         if (target.family == Family.MINGW) {
             // Separate `output` for each line to ensure Windows EOL (LFCR), otherwise generated file will have inconsistent line ending.
             output("#ifndef _MSC_VER")
@@ -224,8 +224,8 @@ internal class CAdapterApiExporter(
         output("void (*DisposeString)(const char* string);", 1)
         output("${prefix}_KBoolean (*IsInstance)(${prefix}_KNativePtr ref, const ${prefix}_KType* type);", 1)
         predefinedTypes.forEach {
-            val nullableIt = it.makeNullable()
-            val argument = if (!it.isUnit()) typeTranslator.translateType(it) else "void"
+            konst nullableIt = it.makeNullable()
+            konst argument = if (!it.isUnit()) typeTranslator.translateType(it) else "void"
             output("${typeTranslator.translateType(nullableIt)} (*${it.createNullableNameForPredefinedType})($argument);", 1)
             if (!it.isUnit())
                 output("$argument (*${it.createGetNonNullValueOfPredefinedType})(${typeTranslator.translateType(nullableIt)});", 1)
@@ -343,11 +343,11 @@ internal class CAdapterApiExporter(
     """.trimMargin())
         predefinedTypes.forEach {
             assert(!it.isNothing())
-            val nullableIt = it.makeNullable()
-            val needArgument = !it.isUnit()
-            val (parameter, maybeComma) = if (needArgument)
-                ("${typeTranslator.translateType(it)} value" to ",") else ("" to "")
-            val argument = if (needArgument) "value, " else ""
+            konst nullableIt = it.makeNullable()
+            konst needArgument = !it.isUnit()
+            konst (parameter, maybeComma) = if (needArgument)
+                ("${typeTranslator.translateType(it)} konstue" to ",") else ("" to "")
+            konst argument = if (needArgument) "konstue, " else ""
             output("extern \"C\" KObjHeader* Kotlin_box${it.shortNameForPredefinedType}($parameter$maybeComma KObjHeader**);")
             output("static ${typeTranslator.translateType(nullableIt)} ${it.createNullableNameForPredefinedType}Impl($parameter) {")
             output("Kotlin_initRuntimeIfNeeded();", 1)
@@ -359,11 +359,11 @@ internal class CAdapterApiExporter(
 
             if (!it.isUnit()) {
                 output("extern \"C\" ${typeTranslator.translateType(it)} Kotlin_unbox${it.shortNameForPredefinedType}(KObjHeader*);")
-                output("static ${typeTranslator.translateType(it)} ${it.createGetNonNullValueOfPredefinedType}Impl(${typeTranslator.translateType(nullableIt)} value) {")
+                output("static ${typeTranslator.translateType(it)} ${it.createGetNonNullValueOfPredefinedType}Impl(${typeTranslator.translateType(nullableIt)} konstue) {")
                 output("Kotlin_initRuntimeIfNeeded();", 1)
                 output("ScopedRunnableState stateGuard;", 1)
-                output("KObjHolder value_holder;", 1)
-                output("return Kotlin_unbox${it.shortNameForPredefinedType}(DerefStablePointer(value.pinned, value_holder.slot()));", 1)
+                output("KObjHolder konstue_holder;", 1)
+                output("return Kotlin_unbox${it.shortNameForPredefinedType}(DerefStablePointer(konstue.pinned, konstue_holder.slot()));", 1)
                 output("}")
             }
         }
@@ -393,17 +393,17 @@ internal class CAdapterApiExporter(
     }
 }
 
-private val KotlinType.createNullableNameForPredefinedType
+private konst KotlinType.createNullableNameForPredefinedType
     get() = "createNullable${this.shortNameForPredefinedType}"
 
-private val KotlinType.createGetNonNullValueOfPredefinedType
+private konst KotlinType.createGetNonNullValueOfPredefinedType
     get() = "getNonNullValueOf${this.shortNameForPredefinedType}"
 
 private operator fun String.times(count: Int): String {
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
     repeat(count, { builder.append(this) })
     return builder.toString()
 }
 
-private val KotlinType.shortNameForPredefinedType
+private konst KotlinType.shortNameForPredefinedType
     get() = this.toString().split('.').last()

@@ -34,7 +34,7 @@ fun box(): String {
     var res: Any? = null
 
     builder {
-        val foo: Foo = Derived()
+        konst foo: Foo = Derived()
         res = foo.generic()
     }
 

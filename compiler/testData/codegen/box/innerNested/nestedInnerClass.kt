@@ -1,13 +1,13 @@
-class A(val x: String) {
-    fun value(): String {
+class A(konst x: String) {
+    fun konstue(): String {
         return object {
             inner class Y {
-                val y = x
+                konst y = x
             }
 
-            fun value() = Y().y
-        }.value()
+            fun konstue() = Y().y
+        }.konstue()
     }
 }
 
-fun box(): String = A("OK").value()
+fun box(): String = A("OK").konstue()

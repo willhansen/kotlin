@@ -3,7 +3,7 @@ enum class E {
 }
 
 fun box(): String {
-    val f = E::valueOf
-    val result = f("ENTRY")
+    konst f = E::konstueOf
+    konst result = f("ENTRY")
     return if (result == E.ENTRY) "OK" else "Fail $result"
 }

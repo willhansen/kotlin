@@ -6,7 +6,7 @@ private object NotEmptyList : MutableList<Any> {
     override fun lastIndexOf(element: Any): Int = 0
     override fun remove(element: Any): Boolean = true
 
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun containsAll(elements: Collection<Any>): Boolean = elements.isEmpty()
@@ -28,7 +28,7 @@ private object NotEmptyList : MutableList<Any> {
 }
 
 fun box(): String {
-    val n = NotEmptyList as MutableList<Any?>
+    konst n = NotEmptyList as MutableList<Any?>
 
     if (n.contains(null)) return "fail 1"
     if (n.indexOf(null) != -1) return "fail 2"

@@ -11,7 +11,7 @@ import org.gradle.api.tasks.Internal
 internal interface CompileUsingKotlinDaemonWithNormalization : CompileUsingKotlinDaemon {
 
     @get:Internal
-    val normalizedKotlinDaemonJvmArguments: Provider<List<String>>
+    konst normalizedKotlinDaemonJvmArguments: Provider<List<String>>
         get() = kotlinDaemonJvmArguments.map {
             it.map { arg -> arg.trim().removePrefix("-") }
         }

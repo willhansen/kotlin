@@ -79,7 +79,7 @@ class Case2() {
         }
     }
 
-    val Case2.listOf: A
+    konst Case2.listOf: A
         get() = A()
 
     fun <T> Case2.listOf(vararg elements1: T = TODO(), body: () -> T =
@@ -100,7 +100,7 @@ class A {
 package libPackageCase2
 import testsCase2.*
 
-val Case2.listOf: A
+konst Case2.listOf: A
     get() = A()
 
 public fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
@@ -148,7 +148,7 @@ class Case3() {
         }
     }
 
-    val Case3.listOf: A
+    konst Case3.listOf: A
         get() = A()
 
     //fun <T> Case3.listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
@@ -168,7 +168,7 @@ class A {
 package libPackageCase3
 import testsCase3.*
 
-val Case3.listOf: A
+konst Case3.listOf: A
     get() = A()
 
 public fun <T> listOf(vararg elements1: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()

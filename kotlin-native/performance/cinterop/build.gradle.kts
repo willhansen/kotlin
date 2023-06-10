@@ -19,7 +19,7 @@ benchmark {
     posixSrcDirs = listOf("src/main/kotlin-native", "../shared/src/main/kotlin-native/posix")
 }
 
-val native = kotlin.targets.getByName("native") as KotlinNativeTarget
+konst native = kotlin.targets.getByName("native") as KotlinNativeTarget
 native.compilations["main"].apply {
     cinterops {
         create("macros")

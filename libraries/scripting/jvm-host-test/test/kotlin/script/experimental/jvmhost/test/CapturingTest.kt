@@ -17,7 +17,7 @@ class CapturingTest {
         // Reproducing (a bit extended) scenario from KT-53947: without the fix, in the presence of the implicit receiver
         // of the same type as the receiver in the `apply` function body, the lowering was incorrectly substituting
         // the correct receiver with the accessor to the implicit one
-        val res = evalString<ScriptWithImplicitReceiver>(
+        konst res = ekonstString<ScriptWithImplicitReceiver>(
             """
                 class C {
                     fun foo() = receiverString + "."
@@ -30,7 +30,7 @@ class CapturingTest {
         }
 
         assertTrue(
-            res.safeAs<ResultWithDiagnostics.Success<EvaluationResult>>()?.value?.returnValue?.safeAs<ResultValue.Value>()?.value == "Ok.",
+            res.safeAs<ResultWithDiagnostics.Success<EkonstuationResult>>()?.konstue?.returnValue?.safeAs<ResultValue.Value>()?.konstue == "Ok.",
             "test failed:\n  ${res.render()}"
         )
     }
@@ -41,7 +41,7 @@ class CapturingTest {
         // of the same type as the receiver in the `C2.apply` function body, the lowering was incorrectly substituting
         // the correct receiver with the accessor to the implicit one
         // `C1.foo` tests the similar situation with extension receiver.
-        val res = evalString<ScriptWithImplicitReceiver>(
+        konst res = ekonstString<ScriptWithImplicitReceiver>(
             """
                 import kotlin.script.experimental.jvmhost.test.ImplicitReceiverClass
                 
@@ -67,7 +67,7 @@ class CapturingTest {
         }
 
         assertTrue(
-            res.safeAs<ResultWithDiagnostics.Success<EvaluationResult>>()?.value?.returnValue?.safeAs<ResultValue.Value>()?.value == "++--Ok",
+            res.safeAs<ResultWithDiagnostics.Success<EkonstuationResult>>()?.konstue?.returnValue?.safeAs<ResultValue.Value>()?.konstue == "++--Ok",
             "test failed:\n  ${res.render()}"
         )
     }

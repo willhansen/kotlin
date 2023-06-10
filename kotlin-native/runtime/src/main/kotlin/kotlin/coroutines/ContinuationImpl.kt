@@ -11,9 +11,9 @@ import kotlin.coroutines.intrinsics.*
 
 @SinceKotlin("1.3")
 internal abstract class BaseContinuationImpl(
-    // This is `public val` so that it is private on JVM and cannot be modified by untrusted code, yet
+    // This is `public konst` so that it is private on JVM and cannot be modified by untrusted code, yet
     // it has a public getter (since even untrusted code is allowed to inspect its call stack).
-    public val completion: Continuation<Any?>?
+    public konst completion: Continuation<Any?>?
 ) : Continuation<Any?>, Serializable {
     // This implementation is final. This fact is used to unroll resumeWith recursion.
     public final override fun resumeWith(result: Result<Any?>) {
@@ -24,10 +24,10 @@ internal abstract class BaseContinuationImpl(
         var param = result
         while (true) {
             with(current) {
-                val completion = completion!! // fail fast when trying to resume continuation without completion
-                val outcome: Result<Any?> =
+                konst completion = completion!! // fail fast when trying to resume continuation without completion
+                konst outcome: Result<Any?> =
                     try {
-                        val outcome = invokeSuspend(param)
+                        konst outcome = invokeSuspend(param)
                         if (outcome === COROUTINE_SUSPENDED) return
                         Result.success(outcome)
                     } catch (exception: Throwable) {
@@ -57,7 +57,7 @@ internal abstract class BaseContinuationImpl(
         throw UnsupportedOperationException("create(Continuation) has not been overridden")
     }
 
-    public open fun create(value: Any?, completion: Continuation<*>): Continuation<Unit> {
+    public open fun create(konstue: Any?, completion: Continuation<*>): Continuation<Unit> {
         throw UnsupportedOperationException("create(Any?;Continuation) has not been overridden")
     }
 
@@ -80,7 +80,7 @@ internal abstract class RestrictedContinuationImpl(
         }
     }
 
-    public override val context: CoroutineContext
+    public override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 }
 
@@ -88,11 +88,11 @@ internal abstract class RestrictedContinuationImpl(
 // State machines for named suspend functions extend from this class
 internal abstract class ContinuationImpl(
     completion: Continuation<Any?>?,
-    private val _context: CoroutineContext?
+    private konst _context: CoroutineContext?
 ) : BaseContinuationImpl(completion) {
     constructor(completion: Continuation<Any?>?) : this(completion, completion?.context)
 
-    public override val context: CoroutineContext
+    public override konst context: CoroutineContext
         get() = _context!! 
 
     private var intercepted: Continuation<Any?>? = null
@@ -103,7 +103,7 @@ internal abstract class ContinuationImpl(
                 .also { intercepted = it }
 
     protected override fun releaseIntercepted() {
-        val intercepted = intercepted
+        konst intercepted = intercepted
         if (intercepted != null && intercepted !== this) {
             context[ContinuationInterceptor]!!.releaseInterceptedContinuation(intercepted)
         }
@@ -112,7 +112,7 @@ internal abstract class ContinuationImpl(
 }
 
 internal object CompletedContinuation : Continuation<Any?> {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = error("This continuation is already complete")
 
     override fun resumeWith(result: Result<Any?>) {

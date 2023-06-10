@@ -5,7 +5,7 @@
 var result = "fail 1"
 object Foo {
     @JvmStatic
-    private val a = "OK"
+    private konst a = "OK"
 
     fun foo() = run { result = a }
 }

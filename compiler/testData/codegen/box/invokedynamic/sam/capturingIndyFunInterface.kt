@@ -17,7 +17,7 @@ fun runIt(r: KRunnable) {
 var test = "Failed"
 
 fun box(): String {
-    val ok = "OK"
+    konst ok = "OK"
     runIt { test = ok }
     return test
 }

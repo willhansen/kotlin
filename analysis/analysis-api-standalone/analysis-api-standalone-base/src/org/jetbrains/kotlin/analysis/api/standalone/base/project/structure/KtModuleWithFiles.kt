@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.analysis.project.structure.KtBinaryModule
 import org.jetbrains.kotlin.analysis.project.structure.KtModule
 
 data class KtModuleProjectStructure(
-    val mainModules: List<KtModuleWithFiles>,
-    val binaryModules: Iterable<KtBinaryModule>,
+    konst mainModules: List<KtModuleWithFiles>,
+    konst binaryModules: Iterable<KtBinaryModule>,
 ) {
     fun allKtModules(): List<KtModule> = buildList {
         mainModules.mapTo(this) { it.ktModule }
@@ -22,13 +22,13 @@ data class KtModuleProjectStructure(
     }
 
     fun allSourceFiles(): List<PsiFileSystemItem> = buildList {
-        val files = mainModules.flatMap { it.files }
+        konst files = mainModules.flatMap { it.files }
         addAll(files)
         addAll(findJvmRootsForJavaFiles(files.filterIsInstance<PsiJavaFile>()))
     }
 }
 
 data class KtModuleWithFiles(
-    val ktModule: KtModule,
-    val files: List<PsiFile>
+    konst ktModule: KtModule,
+    konst files: List<PsiFile>
 )

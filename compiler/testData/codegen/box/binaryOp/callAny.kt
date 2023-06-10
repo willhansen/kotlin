@@ -1,12 +1,12 @@
 fun box(): String {
-    val a1: Any = 1.toByte().plus(1)
-    val a2: Any = 1.toShort().plus(1)
-    val a3: Any = 1.plus(1)
-    val a4: Any = 1L.plus(1)
-    val a5: Any = 1.0.plus(1)
-    val a6: Any = 1f.plus(1)
-    val a7: Any = 'A'.plus(1)
-    val a8: Any = 'B'.minus('A')
+    konst a1: Any = 1.toByte().plus(1)
+    konst a2: Any = 1.toShort().plus(1)
+    konst a3: Any = 1.plus(1)
+    konst a4: Any = 1L.plus(1)
+    konst a5: Any = 1.0.plus(1)
+    konst a6: Any = 1f.plus(1)
+    konst a7: Any = 'A'.plus(1)
+    konst a8: Any = 'B'.minus('A')
 
     if (a1 !is Int || a1 != 2) return "fail 1"
     if (a2 !is Int || a2 != 2) return "fail 2"

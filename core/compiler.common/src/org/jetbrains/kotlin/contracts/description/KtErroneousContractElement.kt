@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.contracts.description
 
 class KtErroneousContractElement<Type, Diagnostic>(
-    val diagnostic: Diagnostic
+    konst diagnostic: Diagnostic
 ) : KtEffectDeclaration<Type, Diagnostic>(), KtBooleanExpression<Type, Diagnostic>, KtContractDescriptionValue<Type, Diagnostic> {
-    override val erroneous: Boolean
+    override konst erroneous: Boolean
         get() = true
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R {

@@ -6,12 +6,12 @@ class Foo {
 }
 
 fun test_1() {
-    val f = Foo()
+    konst f = Foo()
     f <!UNRESOLVED_REFERENCE!>+<!> f
 }
 
 fun test_2() {
-    val f = Foo()
+    konst f = Foo()
     f += f
 }
 

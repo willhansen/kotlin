@@ -10,7 +10,7 @@ class A {
 }
 
 fun box(): String {
-    val (x: Any, y) = A()
+    konst (x: Any, y) = A()
 
     if (x != Unit) return "fail1: $x"
     if (y != 23) return "fail2: $y"

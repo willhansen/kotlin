@@ -1,5 +1,5 @@
-abstract class Introspector<M : Model>(protected val model: Model) {
-    protected abstract inner class Retriever(protected val transaction: Any) {
+abstract class Introspector<M : Model>(protected konst model: Model) {
+    protected abstract inner class Retriever(protected konst transaction: Any) {
         protected var model: Model = this@Introspector.model
     }
 

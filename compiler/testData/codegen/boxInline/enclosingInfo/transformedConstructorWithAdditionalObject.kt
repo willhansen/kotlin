@@ -10,9 +10,9 @@ interface Z<T> {
 inline fun test(crossinline z: () -> String) =
         object : Z<Z<String>> {
 
-            val p: Z<String> = object : Z<String> {
+            konst p: Z<String> = object : Z<String> {
 
-                val p2 = z()
+                konst p2 = z()
 
                 override fun a() = p2
             }
@@ -26,24 +26,24 @@ import test.*
 
 fun box(): String {
     var z = "OK"
-    val res = test {
+    konst res = test {
         z
     }
 
 
-    val javaClass1 = res.javaClass
-    val enclosingMethod = javaClass1.enclosingMethod
+    konst javaClass1 = res.javaClass
+    konst enclosingMethod = javaClass1.enclosingMethod
     if (enclosingMethod?.name != "box") return "fail 1: ${enclosingMethod?.name}"
 
-    val enclosingClass = javaClass1.enclosingClass
+    konst enclosingClass = javaClass1.enclosingClass
     if (enclosingClass?.name != "_2Kt") return "fail 2: ${enclosingClass?.name}"
 
 
-    val res2 = res.a()
-    val enclosingConstructor = res2.javaClass.enclosingConstructor
+    konst res2 = res.a()
+    konst enclosingConstructor = res2.javaClass.enclosingConstructor
     if (enclosingConstructor?.name != javaClass1.name) return "fail 3: ${enclosingConstructor?.name} != ${javaClass1.name}"
 
-    val enclosingClass2 = res2.javaClass.enclosingClass
+    konst enclosingClass2 = res2.javaClass.enclosingClass
     if (enclosingClass2?.name != javaClass1.name) return "fail 4: ${enclosingClass2?.name} != ${javaClass1.name}"
 
 

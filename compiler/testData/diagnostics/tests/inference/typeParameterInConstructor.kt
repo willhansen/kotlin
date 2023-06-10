@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
 
-class B<O>(val obj: O) {
-    val v = B(obj)
+class B<O>(konst obj: O) {
+    konst v = B(obj)
 }

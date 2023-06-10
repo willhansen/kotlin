@@ -1,7 +1,7 @@
 // FULL_JDK
 // WITH_STDLIB
 
-val z = ArrayList<String>()
+konst z = ArrayList<String>()
 
 inline fun a(body: () -> Unit) {
     body()

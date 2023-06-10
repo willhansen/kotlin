@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.types.error.ErrorType
 import org.jetbrains.kotlin.types.error.ErrorTypeKind
 
 internal class KtFe10TypeErrorType(
-    override val fe10Type: ErrorType,
-    override val analysisContext: Fe10AnalysisContext
+    override konst fe10Type: ErrorType,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtTypeErrorType(), KtFe10Type {
     init {
         check(!fe10Type.kind.isUnresolved) {
@@ -35,9 +35,9 @@ internal class KtFe10TypeErrorType(
 
     override fun asStringForDebugging(): String = withValidityAssertion { fe10Type.asStringForDebugging(analysisContext) }
 
-    override val errorMessage: String
+    override konst errorMessage: String
         get() = withValidityAssertion { fe10Type.debugMessage }
 
-    override val nullability: KtTypeNullability
+    override konst nullability: KtTypeNullability
         get() = withValidityAssertion { fe10Type.ktNullability }
 }

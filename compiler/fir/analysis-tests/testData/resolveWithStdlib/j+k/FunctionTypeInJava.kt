@@ -14,7 +14,7 @@ fun main() {
 
     JavaClass.foo2 { (it + 2).toString() }
     JavaClass.foo2({ (it + 3).toString() })
-    val y = { x: Int -> x.toString() }
+    konst y = { x: Int -> x.toString() }
     JavaClass.foo2(y)
 
 

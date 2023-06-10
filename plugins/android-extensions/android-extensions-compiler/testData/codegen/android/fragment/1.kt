@@ -11,18 +11,18 @@ import kotlinx.android.synthetic.main.layout.*
 class R {
     class id {
         companion object {
-            const val login = 5
+            const konst login = 5
         }
     }
 }
 
 class BaseView(ctx: Context) : View(ctx) {
-    val buttonWidget = MyButton(ctx)
+    konst buttonWidget = MyButton(ctx)
 }
 
 class MyFragment(): Fragment() {
-    val baseActivity = Activity()
-    val baseView = BaseView(baseActivity)
+    konst baseActivity = Activity()
+    konst baseView = BaseView(baseActivity)
 
     override fun getView(): View = baseView
 }

@@ -21,10 +21,10 @@ abstract class KotlinNodeJsIr @Inject constructor(target: KotlinJsIrTarget) :
     KotlinJsIrSubTargetBase(target, "node"),
     KotlinJsNodeDsl {
 
-    private val nodeJs = project.rootProject.kotlinNodeJsExtension
-    private val nodeJsTaskProviders = project.rootProject.kotlinNodeJsExtension
+    private konst nodeJs = project.rootProject.kotlinNodeJsExtension
+    private konst nodeJsTaskProviders = project.rootProject.kotlinNodeJsExtension
 
-    override val testTaskDescription: String
+    override konst testTaskDescription: String
         get() = "Run all ${target.name} tests inside nodejs using the builtin test framework"
 
     override fun runTask(body: Action<NodeJsExec>) {
@@ -34,7 +34,7 @@ abstract class KotlinNodeJsIr @Inject constructor(target: KotlinJsIrTarget) :
     override fun locateOrRegisterRunTask(binary: JsIrBinary, name: String) {
         if (project.locateTask<NodeJsExec>(name) != null) return
 
-        val runTaskHolder = NodeJsExec.create(binary.compilation, name) {
+        konst runTaskHolder = NodeJsExec.create(binary.compilation, name) {
             group = taskGroupName
             dependsOn(binary.linkSyncTask)
             inputFileProperty.fileProvider(

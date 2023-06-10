@@ -13,11 +13,11 @@ import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 
 class OverridingUtilTypeSystemContext(
-    val matchingTypeConstructors: Map<TypeConstructor, TypeConstructor>?,
-    private val equalityAxioms: KotlinTypeChecker.TypeConstructorEquality,
-    private val kotlinTypeRefiner: KotlinTypeRefiner,
-    private val kotlinTypePreparator: KotlinTypePreparator,
-    private val customSubtype: ((KotlinType, KotlinType) -> Boolean)? = null,
+    konst matchingTypeConstructors: Map<TypeConstructor, TypeConstructor>?,
+    private konst equalityAxioms: KotlinTypeChecker.TypeConstructorEquality,
+    private konst kotlinTypeRefiner: KotlinTypeRefiner,
+    private konst kotlinTypePreparator: KotlinTypePreparator,
+    private konst customSubtype: ((KotlinType, KotlinType) -> Boolean)? = null,
 ) : ClassicTypeSystemContext {
 
     override fun areEqualTypeConstructors(c1: TypeConstructorMarker, c2: TypeConstructorMarker): Boolean {
@@ -56,8 +56,8 @@ class OverridingUtilTypeSystemContext(
     private fun areEqualTypeConstructorsByAxioms(a: TypeConstructor, b: TypeConstructor): Boolean {
         if (equalityAxioms.equals(a, b)) return true
         if (matchingTypeConstructors == null) return false
-        val img1 = matchingTypeConstructors[a]
-        val img2 = matchingTypeConstructors[b]
+        konst img1 = matchingTypeConstructors[a]
+        konst img2 = matchingTypeConstructors[b]
         return img1 != null && img1 == b || img2 != null && img2 == a
     }
 }

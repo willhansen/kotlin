@@ -16,58 +16,58 @@
 
 package org.jetbrains.ring
 
-fun load(value: Int, size: Int): Int {
+fun load(konstue: Int, size: Int): Int {
     var acc = 0
     for (i in 0..size) {
-        acc = acc xor value.hashCode()
+        acc = acc xor konstue.hashCode()
     }
     return acc
 }
 
-inline fun loadInline(value: Int, size: Int): Int {
+inline fun loadInline(konstue: Int, size: Int): Int {
     var acc = 0
     for (i in 0..size) {
-        acc = acc xor value.hashCode()
+        acc = acc xor konstue.hashCode()
     }
     return acc
 }
 
-fun <T: Any> loadGeneric(value: T, size: Int): Int {
+fun <T: Any> loadGeneric(konstue: T, size: Int): Int {
     var acc = 0
     for (i in 0..size) {
-        acc = acc xor value.hashCode()
+        acc = acc xor konstue.hashCode()
     }
     return acc
 }
 
-inline fun <T: Any> loadGenericInline(value: T, size: Int): Int {
+inline fun <T: Any> loadGenericInline(konstue: T, size: Int): Int {
     var acc = 0
     for (i in 0..size) {
-        acc = acc xor value.hashCode()
+        acc = acc xor konstue.hashCode()
     }
     return acc
 }
 
 open class InlineBenchmark {
-    private var value = 2138476523
+    private var konstue = 2138476523
 
     //Benchmark
     fun calculate(): Int {
-        return load(value, BENCHMARK_SIZE)
+        return load(konstue, BENCHMARK_SIZE)
     }
 
     //Benchmark
     fun calculateInline(): Int {
-        return loadInline(value, BENCHMARK_SIZE)
+        return loadInline(konstue, BENCHMARK_SIZE)
     }
 
     //Benchmark
     fun calculateGeneric(): Int {
-        return loadGeneric(value, BENCHMARK_SIZE)
+        return loadGeneric(konstue, BENCHMARK_SIZE)
     }
 
     //Benchmark
     fun calculateGenericInline(): Int {
-        return loadGenericInline(value, BENCHMARK_SIZE)
+        return loadGenericInline(konstue, BENCHMARK_SIZE)
     }
 }

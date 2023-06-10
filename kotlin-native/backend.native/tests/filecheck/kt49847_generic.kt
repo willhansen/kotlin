@@ -12,8 +12,8 @@ class C<T> {
 // CHECK-NOT: Int-unbox
 // CHECK: ret void
 fun main() {
-    val c = C<Int>()
-    val fooref = c::foo
+    konst c = C<Int>()
+    konst fooref = c::foo
     if( fooref(42) == 42)
         println("ok")
 }

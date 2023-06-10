@@ -1,10 +1,10 @@
-//KT-609 Analyze not only local variables, but function parameters as well in 'unused values' analysis
+//KT-609 Analyze not only local variables, but function parameters as well in 'unused konstues' analysis
 
 package kt609
 
 fun test(a: Int) {
     var aa = a
-    aa = 324 //should be an 'unused value' warning here
+    aa = 324 //should be an 'unused konstue' warning here
 }
 
 class C() {

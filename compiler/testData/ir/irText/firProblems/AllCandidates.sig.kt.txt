@@ -5,7 +5,7 @@ class MyCandidate {
   // CHECK:
   //   Mangled name: MyCandidate{}resolvedCall
   //   Public signature: /MyCandidate.resolvedCall|-2429780263902948392[0]
-  val resolvedCall: ResolvedCall<*>
+  konst resolvedCall: ResolvedCall<*>
     // CHECK JVM_IR:
     //   Mangled name: MyCandidate#<get-resolvedCall>(){}ResolvedCall<*>
     //   Public signature: /MyCandidate.resolvedCall.<get-resolvedCall>|2961495013206965605[0]

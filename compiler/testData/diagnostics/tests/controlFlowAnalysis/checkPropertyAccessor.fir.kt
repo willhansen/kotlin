@@ -1,13 +1,13 @@
 package d
 
-val a: Int
+konst a: Int
     get() {
-        val b: Int
-        val c: Int
+        konst b: Int
+        konst c: Int
         42
 
         fun bar(): Int {
-            val d: Int
+            konst d: Int
             42
             return <!UNINITIALIZED_VARIABLE!>d<!>
         }
@@ -16,20 +16,20 @@ val a: Int
     }
 
 class A {
-    val a: Int
+    konst a: Int
         get() {
-            val b: Int
-            val c: Int
+            konst b: Int
+            konst c: Int
             42
             return <!UNINITIALIZED_VARIABLE!>b<!>
         }
 
     fun foo() {
         class B {
-            val a: Int
+            konst a: Int
                 get() {
-                    val b: Int
-                    val c: Int
+                    konst b: Int
+                    konst c: Int
                     42
                     return <!UNINITIALIZED_VARIABLE!>b<!>
                 }

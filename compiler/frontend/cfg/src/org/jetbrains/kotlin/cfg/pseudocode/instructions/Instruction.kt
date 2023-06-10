@@ -22,16 +22,16 @@ import org.jetbrains.kotlin.cfg.pseudocode.PseudoValue
 interface Instruction {
     var owner: Pseudocode
 
-    val previousInstructions: Collection<Instruction>
-    val nextInstructions: Collection<Instruction>
+    konst previousInstructions: Collection<Instruction>
+    konst nextInstructions: Collection<Instruction>
 
-    val dead: Boolean
+    konst dead: Boolean
 
-    val blockScope: BlockScope
+    konst blockScope: BlockScope
 
-    val inputValues: List<PseudoValue>
+    konst inputValues: List<PseudoValue>
 
-    val copies: Collection<Instruction>
+    konst copies: Collection<Instruction>
 
     fun accept(visitor: InstructionVisitor)
     fun <R> accept(visitor: InstructionVisitorWithResult<R>): R

@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.js.backend.ast.metadata
 
 interface HasMetadata {
     fun <T> getData(key: String): T
-    fun <T> setData(key: String, value: T)
+    fun <T> setData(key: String, konstue: T)
     fun hasData(key: String): Boolean
     fun removeData(key: String)
     fun copyMetadataFrom(other: HasMetadata)
@@ -28,15 +28,15 @@ interface HasMetadata {
 open class HasMetadataImpl : HasMetadata {
     private var metadataImpl: MutableMap<String, Any?>? = null
 
-    private val metadata: MutableMap<String, Any?>
+    private konst metadata: MutableMap<String, Any?>
         get() = metadataImpl ?: hashMapOf<String, Any?>().also { metadataImpl = it }
 
     final override fun <T> getData(key: String): T {
         @Suppress("UNCHECKED_CAST") return metadata[key] as T
     }
 
-    final override fun <T> setData(key: String, value: T) {
-        metadata[key] = value
+    final override fun <T> setData(key: String, konstue: T) {
+        metadata[key] = konstue
     }
 
     final override fun hasData(key: String): Boolean {
@@ -48,7 +48,7 @@ open class HasMetadataImpl : HasMetadata {
     }
 
     final override fun copyMetadataFrom(other: HasMetadata) {
-        val otherRawMetadata = other.getRawMetadata()
+        konst otherRawMetadata = other.getRawMetadata()
         if (otherRawMetadata.isNotEmpty()) {
             metadata.putAll(otherRawMetadata)
         }

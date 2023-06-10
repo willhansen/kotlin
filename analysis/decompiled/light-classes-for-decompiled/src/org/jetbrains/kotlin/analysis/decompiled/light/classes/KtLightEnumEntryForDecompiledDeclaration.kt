@@ -7,10 +7,10 @@ import org.jetbrains.kotlin.analysis.decompiled.light.classes.origin.LightMember
 import org.jetbrains.kotlin.analysis.decompiler.psi.file.KtClsFile
 
 internal class KtLightEnumEntryForDecompiledDeclaration(
-    private val fldDelegate: PsiEnumConstant,
+    private konst fldDelegate: PsiEnumConstant,
     fldParent: KtLightClassForDecompiledDeclaration,
     lightMemberOrigin: LightMemberOriginForCompiledField,
-    private val file: KtClsFile,
+    private konst file: KtClsFile,
 ) : KtLightFieldForDecompiledDeclaration(
     fldDelegate,
     fldParent,

@@ -10,10 +10,10 @@ data class StringProperty(var v: String) {
 
 fun StringProperty.assign(v: Int) = this.assign("OK")
 
-data class Task(val input: StringProperty)
+data class Task(konst input: StringProperty)
 
 fun `should not work with assignment when there is no annotation on a type`() {
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     <!VAL_REASSIGNMENT!>task.input<!> = <!TYPE_MISMATCH!>"OK"<!>
     <!VAL_REASSIGNMENT!>task.input<!> = StringProperty("OK")
     task.apply {

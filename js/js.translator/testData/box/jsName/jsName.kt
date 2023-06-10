@@ -5,7 +5,7 @@ package foo
 external fun foo(): Int = definedExternally
 
 @JsName("baz")
-external val prop: Int get() = definedExternally
+external konst prop: Int get() = definedExternally
 
 @JsName("B")
 external class A {
@@ -13,14 +13,14 @@ external class A {
     fun f(): Int = definedExternally
 
     @JsName("q")
-    val p: Int get() = definedExternally
+    konst p: Int get() = definedExternally
 
     companion object {
         @JsName("g")
         fun f(): Int = definedExternally
 
         @JsName("q")
-        val p: Int get() = definedExternally
+        konst p: Int get() = definedExternally
     }
 }
 

@@ -10,7 +10,7 @@ import kotlin.test.*
 object O {
     var equalsCalled: Boolean = false
         get(): Boolean {
-            val result = field
+            konst result = field
             field = false
             return result
         }
@@ -24,7 +24,7 @@ object O {
     }
 }
 
-val A: Any = O
+konst A: Any = O
 
 fun <T: Double> testDouble(d: Double, v: T, vararg va: T) {
     assertFalse(d == d, "Double: d != d")
@@ -77,13 +77,13 @@ fun box(): String {
 
     // Double
 
-    val dn = Double.NaN
-    val adn: Any = dn
-    val dnq: Double? = dn
-    val adnq: Any? = dn
+    konst dn = Double.NaN
+    konst adn: Any = dn
+    konst dnq: Double? = dn
+    konst adnq: Any? = dn
 
     // see https://bugs.openjdk.java.net/browse/JDK-8141407
-    val nanBug = dnq == dnq
+    konst nanBug = dnq == dnq
 
     assertFalse(dn == dn, "Double: NaN == NaN")
     assertTrue(dn == adn, "Double: NaN != (Any)NaN")
@@ -155,10 +155,10 @@ fun box(): String {
 
     // Float
 
-    val fn = Float.NaN
-    val afn: Any = fn
-    val fnq: Float? = fn
-    val afnq: Any? = fn
+    konst fn = Float.NaN
+    konst afn: Any = fn
+    konst fnq: Float? = fn
+    konst afnq: Any? = fn
 
     assertFalse(fn == fn, "Float: NaN == NaN")
     assertTrue(fn == afn, "Float: NaN != (Any)NaN")

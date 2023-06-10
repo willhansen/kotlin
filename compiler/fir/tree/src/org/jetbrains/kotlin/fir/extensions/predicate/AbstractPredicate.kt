@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.fir.extensions.FirPredicateBasedProvider
  *   qualified names
  */
 sealed interface AbstractPredicate<P : AbstractPredicate<P>> {
-    val annotations: Set<AnnotationFqn>
-    val metaAnnotations: Set<AnnotationFqn>
+    konst annotations: Set<AnnotationFqn>
+    konst metaAnnotations: Set<AnnotationFqn>
 
     fun <R, D> accept(visitor: PredicateVisitor<P, R, D>, data: D): R
 
@@ -32,8 +32,8 @@ sealed interface AbstractPredicate<P : AbstractPredicate<P>> {
      *   [a] matches declaration or [b] matches declaration
      */
     sealed interface Or<P : AbstractPredicate<P>> : AbstractPredicate<P> {
-        val a: P
-        val b: P
+        konst a: P
+        konst b: P
 
         override fun <R, D> accept(visitor: PredicateVisitor<P, R, D>, data: D): R {
             return visitor.visitOr(this, data)
@@ -45,8 +45,8 @@ sealed interface AbstractPredicate<P : AbstractPredicate<P>> {
      *   [a] matches declaration and [b] matches declaration
      */
     sealed interface And<P : AbstractPredicate<P>> : AbstractPredicate<P> {
-        val a: P
-        val b: P
+        konst a: P
+        konst b: P
 
         override fun <R, D> accept(visitor: PredicateVisitor<P, R, D>, data: D): R {
             return visitor.visitAnd(this, data)
@@ -205,7 +205,7 @@ sealed interface AbstractPredicate<P : AbstractPredicate<P>> {
      *   and can not be used for global lookup
      */
     sealed interface MetaAnnotatedWith<P : AbstractPredicate<P>> : AbstractPredicate<P> {
-        val includeItself: Boolean
+        konst includeItself: Boolean
 
         override fun <R, D> accept(visitor: PredicateVisitor<P, R, D>, data: D): R {
             return visitor.visitMetaAnnotatedWith(this, data)

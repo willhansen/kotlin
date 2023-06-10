@@ -1,4 +1,4 @@
-annotation class AnnE(val i: String)
+annotation class AnnE(konst i: String)
 
 enum class MyEnum {
     A

@@ -1,24 +1,24 @@
 package test
 
-class outerClass<T>(val t: T) {
+class outerClass<T>(konst t: T) {
     inner class innerClass {
         fun getT() = t
     }
 }
 
 fun <T> outer(arg: T): T {
-    class localClass(val v: T) {
+    class localClass(konst v: T) {
         init {
             fun innerFunInLocalClass() = v
 
-            val vv = innerFunInLocalClass()
+            konst vv = innerFunInLocalClass()
         }
         fun member() = v
     }
 
     fun innerFun(): T {
         class localClassInLocalFunction {
-            val v = arg
+            konst v = arg
         }
 
         return localClass(arg).member()

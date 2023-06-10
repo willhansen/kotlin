@@ -63,7 +63,7 @@ Applicable to:
 Requirements:
 * must have exactly one argument
 * type of the argument must be `String` or subtype of `Number`
-* default values are prohibited
+* default konstues are prohibited
 * return type must be nullable
 
 Example:
@@ -125,7 +125,7 @@ Applicable to:
 Requirements:
 * must have exactly two arguments
 * type of the first argument must be `String` or subtype of `Number`
-* default values are prohibited
+* default konstues are prohibited
 * the return type is either `Unit` or a supertype of the second parameter's type
 
 Example:
@@ -150,7 +150,7 @@ fun B.bar(a: String, v: B?) {}
 
 fun test(a: A, b: B) {
 	a["foo"] = "text"
-	a.set("bar", "value")
+	a.set("bar", "konstue")
 	a.foo(1, A())
 	b["foo"] = B()
 	b.set("bar", b)
@@ -164,7 +164,7 @@ Function `test` will be translated to:
 ...
 test: function (a, b) {
 	a["foo"] = "text"
-	a["bar"] = "value"
+	a["bar"] = "konstue"
 	a[1] = A()
 	b["foo"] = B()
 	b["bar"] = b

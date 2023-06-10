@@ -24,11 +24,11 @@ import kotlin.reflect.full.primaryConstructor
 inline fun <reified T : Any> serializeToPlainText(instance: T): String = serializeToPlainText(instance, T::class)
 
 fun <T : Any> serializeToPlainText(instance: T, klass: KClass<T>): String {
-    val lines = ArrayList<String>()
+    konst lines = ArrayList<String>()
     for (property in klass.memberProperties) {
-        val value = property.get(instance)
-        if (value != null) {
-            lines.add("${property.name}=$value")
+        konst konstue = property.get(instance)
+        if (konstue != null) {
+            lines.add("${property.name}=$konstue")
         }
     }
     return lines.joinToString("\n")
@@ -37,16 +37,16 @@ fun <T : Any> serializeToPlainText(instance: T, klass: KClass<T>): String {
 inline fun <reified T : Any> deserializeFromPlainText(str: String): T? = deserializeFromPlainText(str, T::class)
 
 fun <T : Any> deserializeFromPlainText(str: String, klass: KClass<T>): T? {
-    val args = ArrayList<Any?>()
-    val properties = str
+    konst args = ArrayList<Any?>()
+    konst properties = str
         .split("\n")
         .filter(String::isNotBlank)
         .associate { it.substringBefore("=") to it.substringAfter("=") }
 
-    val primaryConstructor = klass.primaryConstructor
+    konst primaryConstructor = klass.primaryConstructor
         ?: throw IllegalStateException("${klass.java} does not have primary constructor")
     for (param in primaryConstructor.parameters.sortedBy { it.index }) {
-        val argumentString = properties[param.name]
+        konst argumentString = properties[param.name]
 
         if (argumentString == null) {
             if (param.type.isMarkedNullable) {
@@ -57,7 +57,7 @@ fun <T : Any> deserializeFromPlainText(str: String, klass: KClass<T>): T? {
             }
         }
 
-        val argument: Any? = when (param.type.classifier) {
+        konst argument: Any? = when (param.type.classifier) {
             Int::class -> argumentString.toInt()
             Boolean::class -> argumentString.toBoolean()
             String::class -> argumentString
@@ -76,9 +76,9 @@ fun <T : Any> transformClassToPropertiesMap(classToTransform: T, excludedPropert
         .filter { property -> property.name !in excludedProperties }
         .associateBy(
             keySelector = { property -> property.name },
-            valueTransform = { property ->
-                property.get(classToTransform).let { value ->
-                    if (value is Array<*>) {
+            konstueTransform = { property ->
+                property.get(classToTransform).let { konstue ->
+                    if (konstue is Array<*>) {
                         (property.get(classToTransform) as Array<*>).joinToString(",")
                     } else {
                         property.get(classToTransform).toString()

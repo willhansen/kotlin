@@ -14,7 +14,7 @@ interface KotlinMultiplatformCommonOptions  : KotlinCommonOptions
 abstract class AbstractKotlinCompilation<T : KotlinCommonOptions> : KotlinCompilation<T>
 
 fun main() {
-    val compilation = when {
+    konst compilation = when {
         true -> {
             KotlinSharedNativeCompilation()
         }

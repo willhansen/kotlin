@@ -28,20 +28,20 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.RequireKotlinConstants
 
 object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
-    private val versionArgumentName = Name.identifier("version")
-    private val deprecatedSinceKotlinFqName = FqName("kotlin.DeprecatedSinceKotlin")
-    private val sinceKotlinFqName = FqName("kotlin.SinceKotlin")
+    private konst versionArgumentName = Name.identifier("version")
+    private konst deprecatedSinceKotlinFqName = FqName("kotlin.DeprecatedSinceKotlin")
+    private konst sinceKotlinFqName = FqName("kotlin.SinceKotlin")
 
-    private val annotationFqNamesWithVersion = setOf(
+    private konst annotationFqNamesWithVersion = setOf(
         RequireKotlinConstants.FQ_NAME,
         sinceKotlinFqName,
     )
 
     override fun check(expression: FirAnnotationCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val argumentMapping = expression.argumentMapping.mapping
-        val fqName = expression.fqName(context.session)
-        for (arg in argumentMapping.values) {
-            val argExpression = (arg as? FirNamedArgumentExpression)?.expression ?: arg
+        konst argumentMapping = expression.argumentMapping.mapping
+        konst fqName = expression.fqName(context.session)
+        for (arg in argumentMapping.konstues) {
+            konst argExpression = (arg as? FirNamedArgumentExpression)?.expression ?: arg
             checkAnnotationArgumentWithSubElements(argExpression, context.session, reporter, context)
                 ?.let { reporter.reportOn(argExpression.source, it, context) }
         }
@@ -63,9 +63,9 @@ object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
             var usedNonConst = false
 
             for (arg in args.arguments) {
-                val sourceForReport = arg.source
+                konst sourceForReport = arg.source
 
-                when (val err = checkAnnotationArgumentWithSubElements(arg, session, reporter, context)) {
+                when (konst err = checkAnnotationArgumentWithSubElements(arg, session, reporter, context)) {
                     null -> {
                         //DO NOTHING
                     }
@@ -84,7 +84,7 @@ object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
             is FirArrayOfCall -> return checkArgumentList(expression.argumentList)
             is FirVarargArgumentsExpression -> {
                 for (arg in expression.arguments) {
-                    val unwrappedArg = arg.unwrapArgument()
+                    konst unwrappedArg = arg.unwrapArgument()
                     checkAnnotationArgumentWithSubElements(unwrappedArg, session, reporter, context)
                         ?.let { reporter.reportOn(unwrappedArg.source, it, context) }
                 }
@@ -98,7 +98,7 @@ object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
                     ConstantArgumentKind.NOT_CONST_VAL_IN_CONST_EXPRESSION -> FirErrors.NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION
                     null ->
                         //try to go deeper if we are not sure about this function call
-                        //to report non-constant val in not fully resolved calls
+                        //to report non-constant konst in not fully resolved calls
                         if (expression is FirFunctionCall) checkArgumentList(expression.argumentList)
                         else null
                 }
@@ -112,14 +112,14 @@ object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ): ApiVersion? {
-        val constantExpression = (expression as? FirConstExpression<*>)
+        konst constantExpression = (expression as? FirConstExpression<*>)
             ?: ((expression as? FirNamedArgumentExpression)?.expression as? FirConstExpression<*>) ?: return null
-        val stringValue = constantExpression.value as? String ?: return null
+        konst stringValue = constantExpression.konstue as? String ?: return null
         if (!stringValue.matches(RequireKotlinConstants.VERSION_REGEX)) {
             reporter.reportOn(expression.source, FirErrors.ILLEGAL_KOTLIN_VERSION_STRING_VALUE, context)
             return null
         }
-        val version = ApiVersion.parse(stringValue)
+        konst version = ApiVersion.parse(stringValue)
         if (version == null) {
             reporter.reportOn(expression.source, FirErrors.ILLEGAL_KOTLIN_VERSION_STRING_VALUE, context)
         }
@@ -133,10 +133,10 @@ object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
         reporter: DiagnosticReporter
     ) {
         if (!annotationFqNamesWithVersion.contains(fqName)) return
-        val versionExpression = annotation.findArgumentByName(versionArgumentName) ?: return
-        val version = parseVersionExpressionOrReport(versionExpression, context, reporter) ?: return
+        konst versionExpression = annotation.findArgumentByName(versionArgumentName) ?: return
+        konst version = parseVersionExpressionOrReport(versionExpression, context, reporter) ?: return
         if (fqName == sinceKotlinFqName) {
-            val specified = context.session.languageVersionSettings.apiVersion
+            konst specified = context.session.languageVersionSettings.apiVersion
             if (version > specified) {
                 reporter.reportOn(versionExpression.source, FirErrors.NEWER_VERSION_IN_SINCE_KOTLIN, specified.versionString, context)
             }
@@ -161,9 +161,9 @@ object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
         var errorSince: ApiVersion? = null
         var hiddenSince: ApiVersion? = null
         for ((name, argument) in argumentMapping) {
-            val identifier = name.identifier
+            konst identifier = name.identifier
             if (identifier == "warningSince" || identifier == "errorSince" || identifier == "hiddenSince") {
-                val version = parseVersionExpressionOrReport(argument, context, reporter)
+                konst version = parseVersionExpressionOrReport(argument, context, reporter)
                 if (version != null) {
                     when (identifier) {
                         "warningSince" -> warningSince = version
@@ -199,7 +199,7 @@ object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val args = expression.argumentList.arguments
+        konst args = expression.argumentList.arguments
         for (arg in args) {
             for (ann in arg.unwrapArgument().annotations) {
                 reporter.reportOn(ann.source, FirErrors.ANNOTATION_USED_AS_ANNOTATION_ARGUMENT, context)
@@ -212,7 +212,7 @@ object FirAnnotationExpressionChecker : FirAnnotationCallChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val annotationTypeRef = expression.annotationTypeRef
+        konst annotationTypeRef = expression.annotationTypeRef
         if (expression.calleeReference is FirErrorNamedReference &&
             annotationTypeRef !is FirErrorTypeRef &&
             annotationTypeRef.coneType !is ConeClassLikeType

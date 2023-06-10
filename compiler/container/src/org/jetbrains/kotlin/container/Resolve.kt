@@ -31,9 +31,9 @@ interface ValueResolveContext {
 }
 
 class ComponentResolveContext(
-    val container: StorageComponentContainer,
-    val requestingDescriptor: ValueDescriptor,
-    val parentContext: ValueResolveContext? = null
+    konst container: StorageComponentContainer,
+    konst requestingDescriptor: ValueDescriptor,
+    konst parentContext: ValueResolveContext? = null
 ) : ValueResolveContext {
     override fun resolve(registration: Type): ValueDescriptor? =
         container.resolve(registration, this) ?: parentContext?.resolve(registration)
@@ -41,11 +41,11 @@ class ComponentResolveContext(
     override fun toString(): String = "for $requestingDescriptor in $container"
 }
 
-class ConstructorBinding(val constructor: Constructor<*>, val argumentDescriptors: List<ValueDescriptor>)
+class ConstructorBinding(konst constructor: Constructor<*>, konst argumentDescriptors: List<ValueDescriptor>)
 
-class MethodBinding(val method: Method, private val argumentDescriptors: List<ValueDescriptor>) {
+class MethodBinding(konst method: Method, private konst argumentDescriptors: List<ValueDescriptor>) {
     fun invoke(instance: Any) {
-        val arguments = computeArguments(argumentDescriptors).toTypedArray()
+        konst arguments = computeArguments(argumentDescriptors).toTypedArray()
         runWithUnwrappingInvocationException { method.invoke(instance, *arguments) }
     }
 }
@@ -53,8 +53,8 @@ class MethodBinding(val method: Method, private val argumentDescriptors: List<Va
 fun computeArguments(argumentDescriptors: List<ValueDescriptor>): List<Any> = argumentDescriptors.map { it.getValue() }
 
 fun Class<*>.bindToConstructor(containerId: String, context: ValueResolveContext): ConstructorBinding {
-    val constructorInfo = getInfo().constructorInfo ?: error("No constructor for $this: ${getInfo()} in $containerId")
-    val candidate = constructorInfo.constructor
+    konst constructorInfo = getInfo().constructorInfo ?: error("No constructor for $this: ${getInfo()} in $containerId")
+    konst candidate = constructorInfo.constructor
     return ConstructorBinding(candidate, candidate.bindArguments(containerId, constructorInfo.parameters, context))
 }
 
@@ -67,11 +67,11 @@ private fun Member.bindArguments(
     parameters: List<Type>,
     context: ValueResolveContext
 ): List<ValueDescriptor> {
-    val bound = ArrayList<ValueDescriptor>(parameters.size)
+    konst bound = ArrayList<ValueDescriptor>(parameters.size)
     var unsatisfied: MutableList<Type>? = null
 
     for (parameter in parameters) {
-        val descriptor = context.resolve(parameter)
+        konst descriptor = context.resolve(parameter)
         if (descriptor == null) {
             if (unsatisfied == null)
                 unsatisfied = ArrayList<Type>()

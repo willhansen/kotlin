@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirLegacyRawContractDescriptionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var contractCall: FirFunctionCall,
 ) : FirLegacyRawContractDescription() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

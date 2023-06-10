@@ -1,5 +1,5 @@
 fun x() {
-    val x = object: Any() {
+    konst x = object: Any() {
         fun foo(){}
     }
 }

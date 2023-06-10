@@ -11,12 +11,12 @@ open class Base<T : Any?> {
   fun foo(y: String) {
   }
 
-  val T.bar: Int
+  konst T.bar: Int
     get(): Int {
       return 1
     }
 
-  val String.bar: Int
+  konst String.bar: Int
     get(): Int {
       return 2
     }
@@ -88,12 +88,12 @@ fun outerFun() {
     fun foo(y: String) {
     }
 
-    val T.bar: Int
+    konst T.bar: Int
       get(): Int {
         return 1
       }
 
-    val String.bar: Int
+    konst String.bar: Int
       get(): Int {
         return 2
       }

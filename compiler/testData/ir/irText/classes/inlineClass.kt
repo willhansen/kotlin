@@ -1,3 +1,3 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Test(val x: Int)
+inline class Test(konst x: Int)

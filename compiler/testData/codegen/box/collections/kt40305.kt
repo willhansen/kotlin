@@ -2,8 +2,8 @@
 // WITH_STDLIB
 // FILE: kt40305.kt
 
-class ListImpl<A>(private val list: List<A>): List<A> {
-    override val size: Int get() = list.size
+class ListImpl<A>(private konst list: List<A>): List<A> {
+    override konst size: Int get() = list.size
     override fun contains(element: A): Boolean = list.contains(element)
     override fun containsAll(elements: Collection<A>): Boolean = list.containsAll(elements)
     override fun get(index: Int): A = list.get(index)

@@ -28,22 +28,22 @@ import org.jetbrains.org.objectweb.asm.Type
 
 object HashCode : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo) = with(codegen) {
-        val receiver = expression.dispatchReceiver ?: error("No receiver for hashCode: ${expression.render()}")
-        val receiverIrType = receiver.type
-        val receiverJvmType = typeMapper.mapType(receiverIrType)
-        val receiverValue = receiver.accept(this, data).materialized()
-        val receiverType = receiverValue.type
-        val target = context.state.target
+        konst receiver = expression.dispatchReceiver ?: error("No receiver for hashCode: ${expression.render()}")
+        konst receiverIrType = receiver.type
+        konst receiverJvmType = typeMapper.mapType(receiverIrType)
+        konst receiverValue = receiver.accept(this, data).materialized()
+        konst receiverType = receiverValue.type
+        konst target = context.state.target
         when {
             irFunction.origin == JvmLoweredDeclarationOrigin.INLINE_CLASS_GENERATED_IMPL_METHOD ||
                     irFunction.origin == JvmLoweredDeclarationOrigin.MULTI_FIELD_VALUE_CLASS_GENERATED_IMPL_METHOD ||
                     irFunction.origin == IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER ||
                     irFunction.origin == IrDeclarationOrigin.GENERATED_MULTI_FIELD_VALUE_CLASS_MEMBER -> {
-                // TODO generate or lower IR for data class / value class 'hashCode'?
+                // TODO generate or lower IR for data class / konstue class 'hashCode'?
                 DescriptorAsmUtil.genHashCode(mv, mv, receiverType, target)
             }
             AsmUtil.isPrimitive(receiverJvmType) -> {
-                val boxedType = AsmUtil.boxPrimitiveType(receiverJvmType)
+                konst boxedType = AsmUtil.boxPrimitiveType(receiverJvmType)
                     ?: throw AssertionError("Primitive type expected: $receiverJvmType")
                 receiverValue.materializeAt(receiverJvmType, receiverIrType)
                 mv.visitMethodInsn(

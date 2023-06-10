@@ -20,15 +20,15 @@ import org.jetbrains.kotlin.ir.IrStatement
 
 interface BasicBlock : CfgNode {
 
-    val elements: List<IrStatement>
+    konst elements: List<IrStatement>
 
-    val incoming: BlockConnector?
+    konst incoming: BlockConnector?
 
-    val outgoing: BlockConnector?
+    konst outgoing: BlockConnector?
 
-    override val predecessors: List<CfgNode>
+    override konst predecessors: List<CfgNode>
         get() = listOfNotNull(incoming)
 
-    override val successors: List<CfgNode>
+    override konst successors: List<CfgNode>
         get() = listOfNotNull(outgoing)
 }

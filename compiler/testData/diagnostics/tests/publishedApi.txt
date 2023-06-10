@@ -40,10 +40,10 @@ public final class D {
 
 public final class E {
     public constructor E()
-    @kotlin.PublishedApi public final val ap: kotlin.Int = 1
-    @kotlin.PublishedApi internal final val bp: kotlin.Int = 1
-    @kotlin.PublishedApi protected final val c: kotlin.Int = 1
-    @kotlin.PublishedApi private final val d: kotlin.Int = 1
+    @kotlin.PublishedApi public final konst ap: kotlin.Int = 1
+    @kotlin.PublishedApi internal final konst bp: kotlin.Int = 1
+    @kotlin.PublishedApi protected final konst c: kotlin.Int = 1
+    @kotlin.PublishedApi private final konst d: kotlin.Int = 1
     @kotlin.PublishedApi public final fun a(): kotlin.Unit
     @kotlin.PublishedApi internal final fun b(): kotlin.Unit
     @kotlin.PublishedApi private final fun c(): kotlin.Unit
@@ -55,7 +55,7 @@ public final class E {
 
 public final class FalsePositiveInConstructor {
     public constructor FalsePositiveInConstructor(/*0*/ extensionPoint: kotlin.Any)
-    @kotlin.PublishedApi internal final val extensionPoint: kotlin.Any
+    @kotlin.PublishedApi internal final konst extensionPoint: kotlin.Any
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -63,7 +63,7 @@ public final class FalsePositiveInConstructor {
 
 public final class InConstructor {
     public constructor InConstructor(/*0*/ extensionPoint: kotlin.Any)
-    @kotlin.PublishedApi public final val extensionPoint: kotlin.Any
+    @kotlin.PublishedApi public final konst extensionPoint: kotlin.Any
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

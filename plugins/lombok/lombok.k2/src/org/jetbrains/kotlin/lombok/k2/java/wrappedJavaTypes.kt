@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
-abstract class WrappedJavaType<T : JavaType>(val original: T, private val ownAnnotations: Collection<JavaAnnotation>?) : JavaType {
-    override val annotations: Collection<JavaAnnotation>
+abstract class WrappedJavaType<T : JavaType>(konst original: T, private konst ownAnnotations: Collection<JavaAnnotation>?) : JavaType {
+    override konst annotations: Collection<JavaAnnotation>
         get() = ownAnnotations ?: original.annotations
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = original.isDeprecatedInJavaDoc
 }
 
@@ -26,7 +26,7 @@ class WrappedJavaArrayType(
     original: JavaArrayType,
     ownAnnotations: Collection<JavaAnnotation>?
 ) : WrappedJavaType<JavaArrayType>(original, ownAnnotations), JavaArrayType {
-    override val componentType: JavaType
+    override konst componentType: JavaType
         get() = original.componentType
 }
 
@@ -34,7 +34,7 @@ class WrappedJavaPrimitiveType(
     original: JavaPrimitiveType,
     ownAnnotations: Collection<JavaAnnotation>?
 ) : WrappedJavaType<JavaPrimitiveType>(original, ownAnnotations), JavaPrimitiveType {
-    override val type: PrimitiveType?
+    override konst type: PrimitiveType?
         get() = original.type
 }
 
@@ -42,9 +42,9 @@ class WrappedJavaWildcardType(
     original: JavaWildcardType,
     ownAnnotations: Collection<JavaAnnotation>?
 ) : WrappedJavaType<JavaWildcardType>(original, ownAnnotations), JavaWildcardType {
-    override val bound: JavaType?
+    override konst bound: JavaType?
         get() = original.bound
-    override val isExtends: Boolean
+    override konst isExtends: Boolean
         get() = original.isExtends
 }
 
@@ -52,15 +52,15 @@ class WrappedJavaClassifierType(
     original: JavaClassifierType,
     ownAnnotations: Collection<JavaAnnotation>?,
 ) : WrappedJavaType<JavaClassifierType>(original, ownAnnotations), JavaClassifierType {
-    override val classifier: JavaClassifier?
+    override konst classifier: JavaClassifier?
         get() = original.classifier
-    override val typeArguments: List<JavaType?>
+    override konst typeArguments: List<JavaType?>
         get() = original.typeArguments
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = original.isRaw
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = original.classifierQualifiedName
-    override val presentableText: String
+    override konst presentableText: String
         get() = original.presentableText
 }
 
@@ -72,8 +72,8 @@ fun JavaType.withAnnotations(annotations: Collection<JavaAnnotation>): JavaType 
     else -> this
 }
 
-abstract class NullabilityJavaAnnotation(override val classId: ClassId) : JavaAnnotation {
-    override val arguments: Collection<JavaAnnotationArgument>
+abstract class NullabilityJavaAnnotation(override konst classId: ClassId) : JavaAnnotation {
+    override konst arguments: Collection<JavaAnnotationArgument>
         get() = emptyList()
 
     override fun resolve(): JavaClass? = null
@@ -82,27 +82,27 @@ abstract class NullabilityJavaAnnotation(override val classId: ClassId) : JavaAn
     object Nullable : NullabilityJavaAnnotation(ClassId(ORG_JETBRAINS_ANNOTATIONS, Name.identifier("Nullable")))
 
     companion object {
-        private val ORG_JETBRAINS_ANNOTATIONS = FqName.fromSegments(listOf("org", "jetbrains", "annotations"))
+        private konst ORG_JETBRAINS_ANNOTATIONS = FqName.fromSegments(listOf("org", "jetbrains", "annotations"))
     }
 }
 
 class DummyJavaClassType(
-    override val classifier: JavaClass,
-    override val typeArguments: List<JavaType?>
+    override konst classifier: JavaClass,
+    override konst typeArguments: List<JavaType?>
 ) : JavaClassifierType {
     companion object {
-        val ObjectType = DummyJavaClassType(JavaClasses.Object, typeArguments = emptyList())
+        konst ObjectType = DummyJavaClassType(JavaClasses.Object, typeArguments = emptyList())
     }
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = emptyList()
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = false
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = false
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = classifier.fqName?.asString() ?: SpecialNames.NO_NAME_PROVIDED.asString()
-    override val presentableText: String
+    override konst presentableText: String
         get() = classifierQualifiedName
 }
 

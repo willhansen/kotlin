@@ -21,11 +21,11 @@ import kotlin.collections.*
 import java.io.File
 
 class KotlinPathsFromHomeDir(
-    override val homePath: File // kotlinc directory
+    override konst homePath: File // kotlinc directory
 ) : KotlinPathsFromBaseDirectory(File(homePath, "lib")) {
 
     // TODO: extend when needed
-    val libsWithSources: Set<KotlinPaths.Jar> by lazy { setOf(KotlinPaths.Jar.StdLib, KotlinPaths.Jar.JsStdLib) }
+    konst libsWithSources: Set<KotlinPaths.Jar> by lazy { setOf(KotlinPaths.Jar.StdLib, KotlinPaths.Jar.JsStdLib) }
 
     override fun sourcesJar(jar: KotlinPaths.Jar): File? = if (jar in libsWithSources) super.sourcesJar(jar) else null
 }

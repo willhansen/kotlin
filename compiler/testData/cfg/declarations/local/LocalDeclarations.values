@@ -1,9 +1,9 @@
 == C ==
 class C() {
-    val a: Int = 1
+    konst a: Int = 1
 
     companion object {
-        val x : Int
+        konst x : Int
 
         init {
             x = 1
@@ -11,7 +11,7 @@ class C() {
 
 
         fun foo() {
-            val b : Int = 1
+            konst b : Int = 1
             doSmth(b)
         }
     }
@@ -26,8 +26,8 @@ fun doSmth(i: Int) {}
 =====================
 == test1 ==
 fun test1() {
-    val a = object {
-        val x : Int
+    konst a = object {
+        konst x : Int
         init {
             x = 1
         }
@@ -38,11 +38,11 @@ fun test1() {
 1                                       <v1>: Int                    NEW: r(1) -> <v1>
 x = 1                                   !<v2>: *
 { x = 1 }                               !<v2>: *                     COPY
-object { val x : Int init { x = 1 } }   <v3>: `<no name provided>`   NEW: r(object { val x : Int init { x = 1 } }) -> <v3>
+object { konst x : Int init { x = 1 } }   <v3>: `<no name provided>`   NEW: r(object { konst x : Int init { x = 1 } }) -> <v3>
 =====================
 == O ==
 object O {
-    val x : Int
+    konst x : Int
     init {
         x = 1
     }
@@ -55,27 +55,27 @@ x = 1       !<v2>: *
 =====================
 == test2 ==
 fun test2() {
-    val b = 1
-    val a = object {
-        val x = b
+    konst b = 1
+    konst a = object {
+        konst x = b
     }
 }
 ---------------------
 1                      <v0>: Int                    NEW: r(1) -> <v0>
 b                      <v1>: Int                    NEW: r(b) -> <v1>
-object { val x = b }   <v2>: `<no name provided>`   NEW: r(object { val x = b }) -> <v2>
+object { konst x = b }   <v2>: `<no name provided>`   NEW: r(object { konst x = b }) -> <v2>
 =====================
 == test3 ==
 fun test3() {
-    val a = object {
-        val y : Int
+    konst a = object {
+        konst y : Int
         fun inner_bar() {
             y = 10
         }
     }
 }
 ---------------------
-object { val y : Int fun inner_bar() { y = 10 } }   <v0>: `<no name provided>`   NEW: r(object { val y : Int fun inner_bar() { y = 10 } }) -> <v0>
+object { konst y : Int fun inner_bar() { y = 10 } }   <v0>: `<no name provided>`   NEW: r(object { konst y : Int fun inner_bar() { y = 10 } }) -> <v0>
 =====================
 == inner_bar ==
 fun inner_bar() {
@@ -89,9 +89,9 @@ y = 10       !<v2>: *
 =====================
 == test4 ==
 fun test4() {
-    val a = object {
-        val x : Int
-        val y : Int
+    konst a = object {
+        konst x : Int
+        konst y : Int
         init {
             x = 1
         }
@@ -105,7 +105,7 @@ fun test4() {
 1                                                                        <v1>: Int                    NEW: r(1) -> <v1>
 x = 1                                                                    !<v2>: *
 { x = 1 }                                                                !<v2>: *                     COPY
-object { val x : Int val y : Int init { x = 1 } fun ggg() { y = 10 } }   <v3>: `<no name provided>`   NEW: r(object { val x : Int val y : Int init { x = 1 } fun ggg() { y = 10 } }) -> <v3>
+object { konst x : Int konst y : Int init { x = 1 } fun ggg() { y = 10 } }   <v3>: `<no name provided>`   NEW: r(object { konst x : Int konst y : Int init { x = 1 } fun ggg() { y = 10 } }) -> <v3>
 =====================
 == ggg ==
 fun ggg() {
@@ -119,7 +119,7 @@ y = 10       !<v2>: *
 =====================
 == test5 ==
 fun test5() {
-    val a = object {
+    konst a = object {
         var x = 1
         init {
             x = 2

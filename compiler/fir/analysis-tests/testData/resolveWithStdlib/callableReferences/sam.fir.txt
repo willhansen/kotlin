@@ -15,6 +15,6 @@ FILE: sam.kt
     public final fun foo(x: R|MySam|): R|kotlin/Unit| {
     }
     public final fun main(): R|kotlin/Unit| {
-        lval a: R|A| = R|/A.A|()
+        lkonst a: R|A| = R|/A.A|()
         R|/foo|(R|<local>/a|::R|/A.bar|)
     }

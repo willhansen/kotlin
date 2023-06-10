@@ -1,11 +1,11 @@
 package
 
-public val jb: AnnotatedWithJB
-public val jbNullable: AnnotatedWithJB? = null
-public val jsr: AnnotatedWithJsr
-public val jsrNullable: AnnotatedWithJsr? = null
-public val platform: PlainJava
-public val platformNullable: PlainJava? = null
+public konst jb: AnnotatedWithJB
+public konst jbNullable: AnnotatedWithJB? = null
+public konst jsr: AnnotatedWithJsr
+public konst jsrNullable: AnnotatedWithJsr? = null
+public konst platform: PlainJava
+public konst platformNullable: PlainJava? = null
 
 public open class AnnotatedWithJB {
     public constructor AnnotatedWithJB()
@@ -34,7 +34,7 @@ public object Elvis {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@kotlin.annotation.Target(allowedTargets = {AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER, AnnotationTarget.VALUE_PARAMETER}) @javax.annotation.Nonnull @javax.annotation.meta.TypeQualifierNickname @kotlin.annotation.Retention(value = AnnotationRetention.RUNTIME) public final annotation class MyNotNull : kotlin.Annotation {
+@kotlin.annotation.Target(allowedTargets = {AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER, AnnotationTarget.VALUE_PARAMETER}) @javax.annotation.Nonnull @javax.annotation.meta.TypeQualifierNickname @kotlin.annotation.Retention(konstue = AnnotationRetention.RUNTIME) public final annotation class MyNotNull : kotlin.Annotation {
     public constructor MyNotNull()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

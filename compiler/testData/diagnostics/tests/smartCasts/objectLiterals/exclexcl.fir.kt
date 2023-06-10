@@ -3,17 +3,17 @@ abstract class Runnable {
 }
 
 fun foo(): Int {
-    val c: Int? = null
-    val a: Int? = 1
+    konst c: Int? = null
+    konst a: Int? = 1
     if (c is Int) {
-        val k = object: Runnable() {
+        konst k = object: Runnable() {
             init {
                 a!!.toInt()
             }
             override fun run() = Unit
         }
         k.run()
-        val d: Int = c
+        konst d: Int = c
         // a is not null because of k constructor, but we do not know it
         return a + d
     }

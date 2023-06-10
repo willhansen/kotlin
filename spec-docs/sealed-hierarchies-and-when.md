@@ -13,9 +13,9 @@ Special `sealed` keyword is introduced to mark base classes for sealed hierarchi
 
 ``` kotlin
 sealed class Type () {
-    class Named(val name: String) : Type()
+    class Named(konst name: String) : Type()
     class Nested {
-        class Function(val param: Type, val result: Type): Type()
+        class Function(konst param: Type, konst result: Type): Type()
     }
     object Top: Type()
 }
@@ -43,8 +43,8 @@ Another option would be to make `when` understand hierarchies like this one:
 
 ``` kotlin
 abstract class Type private () {
-    class Named(val name: String) : Type()
-    class Function(val param: Type, val result: Type): Type()
+    class Named(konst name: String) : Type()
+    class Function(konst param: Type, konst result: Type): Type()
     object Top: Type()
 }
 ```

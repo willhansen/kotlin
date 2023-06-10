@@ -15,7 +15,7 @@ FILE: assignToStarProjectedType.kt
 
         public final var foo: R|Inv<T>?| = R|/invOf|<R|T|>()
             public get(): R|Inv<T>?|
-            public set(value: R|Inv<T>?|): R|kotlin/Unit|
+            public set(konstue: R|Inv<T>?|): R|kotlin/Unit|
 
     }
     public final class Bar : R|Base<kotlin/String>| {
@@ -25,7 +25,7 @@ FILE: assignToStarProjectedType.kt
 
     }
     public final fun test_1(): R|kotlin/Unit| {
-        lval x: R|Bar| = R|/Bar.Bar|()
+        lkonst x: R|Bar| = R|/Bar.Bar|()
         R|<local>/x|.R|SubstitutionOverride</Bar.foo: R|Inv<kotlin/String>?|>| = R|/invOf|<R|kotlin/String|>()
         R|<local>/x|.R|SubstitutionOverride</Bar.foo: R|Inv<kotlin/String>?|>| = Null(null)
     }

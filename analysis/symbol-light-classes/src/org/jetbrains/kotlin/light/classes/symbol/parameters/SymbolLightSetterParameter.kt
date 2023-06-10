@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.name.SpecialNames
 
 internal class SymbolLightSetterParameter(
     ktAnalysisSession: KtAnalysisSession,
-    private val containingPropertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
+    private konst containingPropertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
     parameterSymbol: KtValueParameterSymbol,
     containingMethod: SymbolLightMethodBase,
 ) : SymbolLightParameterCommon(ktAnalysisSession, parameterSymbol, containingMethod) {
@@ -32,7 +32,7 @@ internal class SymbolLightSetterParameter(
         return super.getName()
     }
 
-    private val isDefaultSetterParameter: Boolean by lazyPub {
+    private konst isDefaultSetterParameter: Boolean by lazyPub {
         containingPropertySymbolPointer.withSymbol(ktModule) {
             it.setter?.isDefault != false
         }
@@ -40,7 +40,7 @@ internal class SymbolLightSetterParameter(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightClassModifierList(
             containingDeclaration = this,
             annotationsBox = GranularAnnotationsBox(

@@ -18,16 +18,16 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
 class ClassWrapper(
-    private val className: Name,
-    private val modifiers: Modifier,
-    private val classKind: ClassKind,
-    val classBuilder: FirClassBuilder,
-    val hasPrimaryConstructor: Boolean,
-    val hasSecondaryConstructor: Boolean,
-    val hasDefaultConstructor: Boolean,
-    val delegatedSelfTypeRef: FirTypeRef,
-    val delegatedSuperTypeRef: FirTypeRef,
-    val delegatedSuperCalls: List<DelegatedConstructorWrapper>,
+    private konst className: Name,
+    private konst modifiers: Modifier,
+    private konst classKind: ClassKind,
+    konst classBuilder: FirClassBuilder,
+    konst hasPrimaryConstructor: Boolean,
+    konst hasSecondaryConstructor: Boolean,
+    konst hasDefaultConstructor: Boolean,
+    konst delegatedSelfTypeRef: FirTypeRef,
+    konst delegatedSuperTypeRef: FirTypeRef,
+    konst delegatedSuperCalls: List<DelegatedConstructorWrapper>,
 ) {
     fun isObjectLiteral(): Boolean {
         return className == SpecialNames.NO_NAME_PROVIDED && isObject()
@@ -72,7 +72,7 @@ class ClassWrapper(
 }
 
 data class DelegatedConstructorWrapper(
-    val delegatedSuperTypeRef: FirTypeRef,
-    val arguments: List<FirExpression>,
-    val source: KtLightSourceElement?,
+    konst delegatedSuperTypeRef: FirTypeRef,
+    konst arguments: List<FirExpression>,
+    konst source: KtLightSourceElement?,
 )

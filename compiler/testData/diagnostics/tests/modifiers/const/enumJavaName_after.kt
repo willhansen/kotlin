@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-// !LANGUAGE: +IntrinsicConstEvaluation
+// !LANGUAGE: +IntrinsicConstEkonstuation
 
 // FILE: CompressionType.java
 public enum CompressionType {
@@ -12,4 +12,4 @@ public enum CompressionType {
 }
 
 // FILE: main.kt
-const val name = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>CompressionType.OK.name<!>
+const konst name = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>CompressionType.OK.name<!>

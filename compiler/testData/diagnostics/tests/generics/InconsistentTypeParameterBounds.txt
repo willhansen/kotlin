@@ -13,7 +13,7 @@ public interface B : A {
 }
 
 public interface ListA : kotlin.collections.List<A> {
-    public abstract override /*1*/ /*fake_override*/ val size: kotlin.Int
+    public abstract override /*1*/ /*fake_override*/ konst size: kotlin.Int
     public abstract override /*1*/ /*fake_override*/ fun contains(/*0*/ element: A): kotlin.Boolean
     public abstract override /*1*/ /*fake_override*/ fun containsAll(/*0*/ elements: kotlin.collections.Collection<A>): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -30,7 +30,7 @@ public interface ListA : kotlin.collections.List<A> {
 }
 
 public interface ListB : kotlin.collections.List<B> {
-    public abstract override /*1*/ /*fake_override*/ val size: kotlin.Int
+    public abstract override /*1*/ /*fake_override*/ konst size: kotlin.Int
     public abstract override /*1*/ /*fake_override*/ fun contains(/*0*/ element: B): kotlin.Boolean
     public abstract override /*1*/ /*fake_override*/ fun containsAll(/*0*/ elements: kotlin.collections.Collection<B>): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

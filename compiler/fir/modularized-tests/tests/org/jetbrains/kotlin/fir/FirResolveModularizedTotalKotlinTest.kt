@@ -43,41 +43,41 @@ import java.lang.management.ManagementFactory
 import java.text.DecimalFormat
 
 
-private const val FAIL_FAST = true
+private const konst FAIL_FAST = true
 
-private const val FIR_DUMP_PATH = "tmp/firDump"
-private const val FIR_HTML_DUMP_PATH = "tmp/firDump-html"
-const val FIR_LOGS_PATH = "tmp/fir-logs"
-private const val FIR_MEMORY_DUMPS_PATH = "tmp/memory-dumps"
+private const konst FIR_DUMP_PATH = "tmp/firDump"
+private const konst FIR_HTML_DUMP_PATH = "tmp/firDump-html"
+const konst FIR_LOGS_PATH = "tmp/fir-logs"
+private const konst FIR_MEMORY_DUMPS_PATH = "tmp/memory-dumps"
 
-private val DUMP_FIR = System.getProperty("fir.bench.dump", "true").toBooleanLenient()!!
-internal val PASSES = System.getProperty("fir.bench.passes")?.toInt() ?: 3
-internal val SEPARATE_PASS_DUMP = System.getProperty("fir.bench.dump.separate_pass", "false").toBooleanLenient()!!
-private val APPEND_ERROR_REPORTS = System.getProperty("fir.bench.report.errors.append", "false").toBooleanLenient()!!
-private val RUN_CHECKERS = System.getProperty("fir.bench.run.checkers", "false").toBooleanLenient()!!
-private val USE_LIGHT_TREE = System.getProperty("fir.bench.use.light.tree", "true").toBooleanLenient()!!
-private val DUMP_MEMORY = System.getProperty("fir.bench.dump.memory", "false").toBooleanLenient()!!
+private konst DUMP_FIR = System.getProperty("fir.bench.dump", "true").toBooleanLenient()!!
+internal konst PASSES = System.getProperty("fir.bench.passes")?.toInt() ?: 3
+internal konst SEPARATE_PASS_DUMP = System.getProperty("fir.bench.dump.separate_pass", "false").toBooleanLenient()!!
+private konst APPEND_ERROR_REPORTS = System.getProperty("fir.bench.report.errors.append", "false").toBooleanLenient()!!
+private konst RUN_CHECKERS = System.getProperty("fir.bench.run.checkers", "false").toBooleanLenient()!!
+private konst USE_LIGHT_TREE = System.getProperty("fir.bench.use.light.tree", "true").toBooleanLenient()!!
+private konst DUMP_MEMORY = System.getProperty("fir.bench.dump.memory", "false").toBooleanLenient()!!
 
 private interface CLibrary : Library {
     fun getpid(): Int
     fun gettid(): Int
 
     companion object {
-        val INSTANCE = Native.load("c", CLibrary::class.java) as CLibrary
+        konst INSTANCE = Native.load("c", CLibrary::class.java) as CLibrary
     }
 }
 
 internal fun isolate() {
-    val isolatedList = System.getenv("DOCKER_ISOLATED_CPUSET")
-    val othersList = System.getenv("DOCKER_CPUSET")
+    konst isolatedList = System.getenv("DOCKER_ISOLATED_CPUSET")
+    konst othersList = System.getenv("DOCKER_CPUSET")
     println("Trying to set affinity, other: '$othersList', isolated: '$isolatedList'")
     if (othersList != null) {
         println("Will move others affinity to '$othersList'")
         ProcessBuilder().command("bash", "-c", "ps -ae -o pid= | xargs -n 1 taskset -cap $othersList ").inheritIO().start().waitFor()
     }
     if (isolatedList != null) {
-        val selfPid = CLibrary.INSTANCE.getpid()
-        val selfTid = CLibrary.INSTANCE.gettid()
+        konst selfPid = CLibrary.INSTANCE.getpid()
+        konst selfTid = CLibrary.INSTANCE.gettid()
         println("Will pin self affinity, my pid: $selfPid, my tid: $selfTid")
         ProcessBuilder().command("taskset", "-cp", isolatedList, "$selfTid").inheritIO().start().waitFor()
     }
@@ -93,28 +93,28 @@ class FirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
     private var bestStatistics: FirResolveBench.TotalStatistics? = null
     private var bestPass: Int = 0
 
-    private val asyncProfilerControl = AsyncProfilerControl()
+    private konst asyncProfilerControl = AsyncProfilerControl()
 
     @OptIn(ObsoleteTestInfrastructure::class)
     private fun runAnalysis(moduleData: ModuleData, environment: KotlinCoreEnvironment) {
 
-        val projectEnvironment = environment.toAbstractProjectEnvironment() as VfsBasedProjectEnvironment
-        val project = environment.project
+        konst projectEnvironment = environment.toAbstractProjectEnvironment() as VfsBasedProjectEnvironment
+        konst project = environment.project
 
-        val (sourceFiles: Collection<KtSourceFile>, scope) =
+        konst (sourceFiles: Collection<KtSourceFile>, scope) =
             if (USE_LIGHT_TREE) {
-                val (platformSources, _) = collectSources(environment.configuration, projectEnvironment, environment.messageCollector)
+                konst (platformSources, _) = collectSources(environment.configuration, projectEnvironment, environment.messageCollector)
                 platformSources to projectEnvironment.getSearchScopeForProjectJavaSources()
             } else {
-                val ktFiles = environment.getSourceFiles()
+                konst ktFiles = environment.getSourceFiles()
                 ktFiles.map { KtPsiSourceFile(it) } to
                         GlobalSearchScope.filesScope(project, ktFiles.map { it.virtualFile })
                             .uniteWith(TopDownAnalyzerFacadeForJVM.AllJavaSourcesInProjectScope(project))
                             .toAbstractProjectFileSearchScope()
             }
-        val librariesScope = ProjectScope.getLibrariesScope(project)
+        konst librariesScope = ProjectScope.getLibrariesScope(project)
 
-        val session =
+        konst session =
             FirTestSessionFactoryHelper.createSessionForTests(
                 projectEnvironment,
                 scope,
@@ -124,8 +124,8 @@ class FirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
                 environment.configuration.languageVersionSettings
             )
 
-        val scopeSession = ScopeSession()
-        val processors = createAllCompilerResolveProcessors(session, scopeSession).let {
+        konst scopeSession = ScopeSession()
+        konst processors = createAllCompilerResolveProcessors(session, scopeSession).let {
             if (RUN_CHECKERS) {
                 it + FirCheckersResolveProcessor(session, scopeSession)
             } else {
@@ -133,13 +133,13 @@ class FirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
             }
         }
 
-        val firProvider = session.firProvider as FirProviderImpl
+        konst firProvider = session.firProvider as FirProviderImpl
 
-        val firFiles = if (USE_LIGHT_TREE) {
-            val lightTree2Fir = LightTree2Fir(session, firProvider.kotlinScopeProvider, diagnosticsReporter = null)
+        konst firFiles = if (USE_LIGHT_TREE) {
+            konst lightTree2Fir = LightTree2Fir(session, firProvider.kotlinScopeProvider, diagnosticsReporter = null)
             bench.buildFiles(lightTree2Fir, sourceFiles)
         } else {
-            val builder = RawFirBuilder(session, firProvider.kotlinScopeProvider)
+            konst builder = RawFirBuilder(session, firProvider.kotlinScopeProvider)
             bench.buildFiles(builder, sourceFiles.map { it as KtPsiSourceFile })
         }
 
@@ -148,24 +148,24 @@ class FirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
 
         createMemoryDump(moduleData)
 
-        val disambiguatedName = moduleData.disambiguatedName()
+        konst disambiguatedName = moduleData.disambiguatedName()
         dumpFir(disambiguatedName, firFiles)
         dumpFirHtml(disambiguatedName, firFiles)
     }
 
     private fun dumpFir(disambiguatedName: String, firFiles: List<FirFile>) {
         if (!DUMP_FIR) return
-        val dumpRoot = File(FIR_DUMP_PATH).resolve(disambiguatedName)
+        konst dumpRoot = File(FIR_DUMP_PATH).resolve(disambiguatedName)
         firFiles.forEach {
-            val directory = it.packageFqName.pathSegments().fold(dumpRoot) { file, name -> file.resolve(name.asString()) }
+            konst directory = it.packageFqName.pathSegments().fold(dumpRoot) { file, name -> file.resolve(name.asString()) }
             directory.mkdirs()
             directory.resolve(it.name + ".fir").writeText(it.render())
         }
     }
 
-    private val dumpedModules = mutableSetOf<String>()
+    private konst dumpedModules = mutableSetOf<String>()
     private fun ModuleData.disambiguatedName(): String {
-        val baseName = qualifiedName
+        konst baseName = qualifiedName
         var disambiguatedName = baseName
         var counter = 1
         while (!dumpedModules.add(disambiguatedName)) {
@@ -183,10 +183,10 @@ class FirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
     }
 
     override fun processModule(moduleData: ModuleData): ProcessorAction {
-        val disposable = Disposer.newDisposable()
-        val configuration = createDefaultConfiguration(moduleData)
+        konst disposable = Disposer.newDisposable()
+        konst configuration = createDefaultConfiguration(moduleData)
         configureLanguageVersionSettings(configuration, moduleData, LanguageVersion.fromVersionString(LANGUAGE_VERSION_K2)!!)
-        val environment = KotlinCoreEnvironment.createForTests(disposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst environment = KotlinCoreEnvironment.createForTests(disposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
         PsiElementFinder.EP.getPoint(environment.project)
             .unregisterExtension(JavaElementFinder::class.java)
@@ -208,7 +208,7 @@ class FirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
 
         asyncProfilerControl.afterPass(pass, reportDateStr)
 
-        val statistics = bench.getTotalStatistics()
+        konst statistics = bench.getTotalStatistics()
         statistics.report(System.out, "Pass $pass")
 
         saveReport(pass, statistics)
@@ -225,7 +225,7 @@ class FirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
     }
 
     override fun afterAllPasses() {
-        val bestStatistics = bestStatistics ?: return
+        konst bestStatistics = bestStatistics ?: return
         printStatistics(bestStatistics, "Best pass: $bestPass")
         printErrors(bestStatistics)
     }
@@ -275,17 +275,17 @@ class FirResolveModularizedTotalKotlinTest : AbstractFrontendModularizedTest() {
 
     private fun createMemoryDump(moduleData: ModuleData) {
         if (!DUMP_MEMORY) return
-        val name = "module_${moduleData.name}.hprof"
-        val dir = File(FIR_MEMORY_DUMPS_PATH).also {
+        konst name = "module_${moduleData.name}.hprof"
+        konst dir = File(FIR_MEMORY_DUMPS_PATH).also {
             it.mkdirs()
         }
-        val filePath = dir.resolve(name).absolutePath
+        konst filePath = dir.resolve(name).absolutePath
         createMemoryDump(filePath)
     }
 
     private fun createMemoryDump(filePath: String) {
-        val server = ManagementFactory.getPlatformMBeanServer()
-        val mxBean = ManagementFactory.newPlatformMXBeanProxy(
+        konst server = ManagementFactory.getPlatformMBeanServer()
+        konst mxBean = ManagementFactory.newPlatformMXBeanProxy(
             server, "com.sun.management:type=HotSpotDiagnostic", HotSpotDiagnosticMXBean::class.java
         )
         mxBean.dumpHeap(filePath, true)
@@ -296,19 +296,19 @@ class FirCheckersResolveProcessor(
     session: FirSession,
     scopeSession: ScopeSession
 ) : FirTransformerBasedResolveProcessor(session, scopeSession, phase = null) {
-    val diagnosticCollector: AbstractDiagnosticCollector = FirDiagnosticsCollector.create(session, scopeSession)
+    konst diagnosticCollector: AbstractDiagnosticCollector = FirDiagnosticsCollector.create(session, scopeSession)
 
-    override val transformer: FirTransformer<Nothing?> = FirCheckersRunnerTransformer(diagnosticCollector)
+    override konst transformer: FirTransformer<Nothing?> = FirCheckersRunnerTransformer(diagnosticCollector)
 }
 
-class FirCheckersRunnerTransformer(private val diagnosticCollector: AbstractDiagnosticCollector) : FirTransformer<Nothing?>() {
+class FirCheckersRunnerTransformer(private konst diagnosticCollector: AbstractDiagnosticCollector) : FirTransformer<Nothing?>() {
     override fun <E : FirElement> transformElement(element: E, data: Nothing?): E {
         return element
     }
 
     override fun transformFile(file: FirFile, data: Nothing?): FirFile = file.also {
         withFileAnalysisExceptionWrapping(file) {
-            val reporter = DiagnosticReporterFactory.createPendingReporter()
+            konst reporter = DiagnosticReporterFactory.createPendingReporter()
             diagnosticCollector.collectDiagnostics(file, reporter)
         }
     }

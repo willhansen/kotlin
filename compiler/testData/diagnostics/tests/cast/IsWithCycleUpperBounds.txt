@@ -8,8 +8,8 @@ public interface Acceptor</*0*/ T> {
 
 public final class S</*0*/ T : Acceptor<U>, /*1*/ U : Visitor<T>> {
     public constructor S</*0*/ T : Acceptor<U>, /*1*/ U : Visitor<T>>(/*0*/ visitor: U, /*1*/ acceptor: T)
-    public final val acceptor: T
-    public final val visitor: U
+    public final konst acceptor: T
+    public final konst visitor: U
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun test(): kotlin.Unit

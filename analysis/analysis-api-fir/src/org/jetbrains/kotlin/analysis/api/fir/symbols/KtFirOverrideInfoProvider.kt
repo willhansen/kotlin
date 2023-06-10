@@ -27,16 +27,16 @@ import org.jetbrains.kotlin.fir.symbols.lazyResolveToPhase
 import org.jetbrains.kotlin.util.ImplementationStatus
 
 internal class KtFirOverrideInfoProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtOverrideInfoProvider(), KtFirAnalysisSessionComponent {
 
     override fun isVisible(memberSymbol: KtCallableSymbol, classSymbol: KtClassOrObjectSymbol): Boolean {
         require(memberSymbol is KtFirSymbol<*>)
         require(classSymbol is KtFirSymbol<*>)
 
-        val memberFir = memberSymbol.firSymbol.fir as? FirCallableDeclaration ?: return false
-        val parentClassFir = classSymbol.firSymbol.fir as? FirClass ?: return false
+        konst memberFir = memberSymbol.firSymbol.fir as? FirCallableDeclaration ?: return false
+        konst parentClassFir = classSymbol.firSymbol.fir as? FirClass ?: return false
 
         // Inspecting visibility requires resolving to status
         classSymbol.firSymbol.lazyResolveToPhase(FirResolvePhase.STATUS)
@@ -49,8 +49,8 @@ internal class KtFirOverrideInfoProvider(
         require(parentClassSymbol is KtFirSymbol<*>)
 
         // Inspecting implementation status requires resolving to status
-        val memberFir = memberSymbol.firSymbol.fir as? FirCallableDeclaration ?: return null
-        val parentClassFir = parentClassSymbol.firSymbol.fir as? FirClass ?: return null
+        konst memberFir = memberSymbol.firSymbol.fir as? FirCallableDeclaration ?: return null
+        konst parentClassFir = parentClassSymbol.firSymbol.fir as? FirClass ?: return null
         memberFir.lazyResolveToPhase(FirResolvePhase.STATUS)
 
         return memberFir.symbol.getImplementationStatus(
@@ -64,26 +64,26 @@ internal class KtFirOverrideInfoProvider(
 
     override fun getOriginalContainingClassForOverride(symbol: KtCallableSymbol): KtClassOrObjectSymbol? {
         require(symbol is KtFirSymbol<*>)
-        val firDeclaration = symbol.firSymbol.fir as FirCallableDeclaration
-        val containingClass =
+        konst firDeclaration = symbol.firSymbol.fir as FirCallableDeclaration
+        konst containingClass =
             unwrapFakeOverrides(firDeclaration).containingClassLookupTag()?.toSymbol(rootModuleSession) ?: return null
         return analysisSession.firSymbolBuilder.classifierBuilder.buildClassLikeSymbol(containingClass.fir.symbol) as? KtClassOrObjectSymbol
     }
 
     override fun unwrapFakeOverrides(symbol: KtCallableSymbol): KtCallableSymbol {
         require(symbol is KtFirSymbol<*>)
-        val firDeclaration = symbol.firSymbol.fir as FirCallableDeclaration
+        konst firDeclaration = symbol.firSymbol.fir as FirCallableDeclaration
         return unwrapFakeOverrides(firDeclaration).buildSymbol(analysisSession.firSymbolBuilder) as KtCallableSymbol
     }
 
     private fun unwrapFakeOverrides(member: FirCallableDeclaration): FirCallableDeclaration {
-        val originalForSubstitutionOverride = member.originalForSubstitutionOverride
+        konst originalForSubstitutionOverride = member.originalForSubstitutionOverride
         if (originalForSubstitutionOverride != null) return unwrapFakeOverrides(originalForSubstitutionOverride)
 
-        val originalForIntersectionOverrideAttr = member.originalForIntersectionOverrideAttr
+        konst originalForIntersectionOverrideAttr = member.originalForIntersectionOverrideAttr
         if (originalForIntersectionOverrideAttr != null) return unwrapFakeOverrides(originalForIntersectionOverrideAttr)
 
-        val delegatedWrapperData = member.delegatedWrapperData
+        konst delegatedWrapperData = member.delegatedWrapperData
         if (delegatedWrapperData != null) return unwrapFakeOverrides(delegatedWrapperData.wrapped)
 
         return member

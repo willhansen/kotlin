@@ -1,7 +1,7 @@
 // ISSUE: KT-6822
 
 fun test_1() {
-    val f = l@{ it: String? ->
+    konst f = l@{ it: String? ->
         if (it != null) return@l it
         ""
     }
@@ -10,7 +10,7 @@ fun test_1() {
 }
 
 fun test_2() {
-    val f = l@ { it: String? ->
+    konst f = l@ { it: String? ->
         if (it != null) it
         else ""
     }

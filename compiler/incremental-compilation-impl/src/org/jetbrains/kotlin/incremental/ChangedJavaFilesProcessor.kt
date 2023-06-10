@@ -26,28 +26,28 @@ import java.io.File
 import java.util.*
 
 internal class ChangedJavaFilesProcessor(
-    private val reporter: ICReporter,
-    private val psiFileFactory: (File) -> PsiFile?
+    private konst reporter: ICReporter,
+    private konst psiFileFactory: (File) -> PsiFile?
 ) {
-    private val allSymbols = HashSet<LookupSymbol>()
+    private konst allSymbols = HashSet<LookupSymbol>()
 
-    val allChangedSymbols: Collection<LookupSymbol>
+    konst allChangedSymbols: Collection<LookupSymbol>
         get() = allSymbols
 
     fun process(filesDiff: ChangedFiles.Known): ChangesEither {
-        val modifiedJava = filesDiff.modified.filter(File::isJavaFile)
-        val removedJava = filesDiff.removed.filter(File::isJavaFile)
+        konst modifiedJava = filesDiff.modified.filter(File::isJavaFile)
+        konst removedJava = filesDiff.removed.filter(File::isJavaFile)
 
         if (removedJava.any()) {
             reporter.info { "Some java files are removed: [${removedJava.joinToString()}]" }
             return ChangesEither.Unknown(BuildAttribute.JAVA_CHANGE_UNTRACKED_FILE_IS_REMOVED)
         }
 
-        val symbols = HashSet<LookupSymbol>()
+        konst symbols = HashSet<LookupSymbol>()
         for (javaFile in modifiedJava) {
             assert(javaFile.extension.equals("java", ignoreCase = true))
 
-            val psiFile = psiFileFactory(javaFile)
+            konst psiFile = psiFileFactory(javaFile)
             if (psiFile !is PsiJavaFile) {
                 reporter.info { "Expected PsiJavaFile, got ${psiFile?.javaClass}" }
                 return ChangesEither.Unknown(BuildAttribute.JAVA_CHANGE_UNEXPECTED_PSI)
@@ -60,7 +60,7 @@ internal class ChangedJavaFilesProcessor(
     }
 
     private fun PsiClass.addLookupSymbols(symbols: MutableSet<LookupSymbol>) {
-        val fqn = qualifiedName.orEmpty()
+        konst fqn = qualifiedName.orEmpty()
 
         symbols.add(LookupSymbol(name.orEmpty(), if (fqn == name) "" else fqn.removeSuffix("." + name!!)))
         methods.forEach { symbols.add(LookupSymbol(it.name, fqn)) }

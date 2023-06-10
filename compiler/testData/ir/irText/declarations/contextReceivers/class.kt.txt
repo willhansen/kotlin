@@ -5,14 +5,14 @@ class Outer {
 
   }
 
-  val x: Int
+  konst x: Int
     field = 1
     get
 
 }
 
 class Inner {
-  private /* final field */ val contextReceiverField0: Outer
+  private /* final field */ konst contextReceiverField0: Outer
   constructor($context_receiver_0: Outer, arg: Any) /* primary */ {
     super/*Any*/()
     <this>.#contextReceiverField0 = $context_receiver_0

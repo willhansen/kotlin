@@ -1,5 +1,5 @@
 private fun testClassA(): Int {
-    val a = ClassA()
+    konst a = ClassA()
     a.someVar = 0
     return a.someVar!!
 }

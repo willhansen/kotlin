@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinBinaryCoordinates
 import org.junit.Test
 
 class IdeaKotlinBinaryCoordinatesSerializationTest : AbstractSerializationTest<IdeaKotlinBinaryCoordinates>() {
-    override fun serialize(value: IdeaKotlinBinaryCoordinates): ByteArray = IdeaKotlinBinaryCoordinatesProto(value).toByteArray()
+    override fun serialize(konstue: IdeaKotlinBinaryCoordinates): ByteArray = IdeaKotlinBinaryCoordinatesProto(konstue).toByteArray()
 
     override fun deserialize(data: ByteArray): IdeaKotlinBinaryCoordinates =
         IdeaKotlinBinaryCoordinates(IdeaKotlinBinaryCoordinatesProto.parseFrom(data))

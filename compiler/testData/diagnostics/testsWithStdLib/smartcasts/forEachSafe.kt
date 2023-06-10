@@ -3,8 +3,8 @@
 
 fun indexOfMax(a: IntArray): Int? {
     var maxI: Int? = null
-    a.forEachIndexed { i, value ->
-        if (maxI == null || value >= a[<!SMARTCAST_IMPOSSIBLE!>maxI<!>]) {
+    a.forEachIndexed { i, konstue ->
+        if (maxI == null || konstue >= a[<!SMARTCAST_IMPOSSIBLE!>maxI<!>]) {
             maxI = i
         }
     }

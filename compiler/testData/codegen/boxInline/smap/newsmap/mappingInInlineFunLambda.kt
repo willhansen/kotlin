@@ -3,15 +3,15 @@
 package test
 
 inline fun myrun(s: () -> Unit) {
-    val z = "myrun"
+    konst z = "myrun"
     s()
 }
 
 inline fun test(crossinline s: () -> Unit) {
-    val lambda = {
-        val z = 1;
+    konst lambda = {
+        konst z = 1;
         myrun(s)
-        val x = 1;
+        konst x = 1;
     }; lambda()
 }
 

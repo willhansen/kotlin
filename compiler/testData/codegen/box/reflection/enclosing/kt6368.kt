@@ -8,7 +8,7 @@ interface R {
     fun result(): String
 }
 
-val a by lazy {
+konst a by lazy {
     with(HashMap<String, R>()) {
         put("result", object : R {
             override fun result(): String = "OK"
@@ -18,7 +18,7 @@ val a by lazy {
 }
 
 fun box(): String {
-    val r = a["result"]!!
+    konst r = a["result"]!!
 
     // Check that reflection won't fail
     r.javaClass.getEnclosingMethod().toString()

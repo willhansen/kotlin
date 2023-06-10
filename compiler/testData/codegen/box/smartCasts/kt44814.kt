@@ -7,40 +7,40 @@
 class FlyweightCapableTreeStructure
 
 sealed class FirSourceElement {
-    abstract val lighterASTNode: LighterASTNode
-    abstract val treeStructure: FlyweightCapableTreeStructure
+    abstract konst lighterASTNode: LighterASTNode
+    abstract konst treeStructure: FlyweightCapableTreeStructure
 }
 class FirPsiSourceElement(
-    val psi: PsiElement,
-    override val lighterASTNode: LighterASTNode,
-    override val treeStructure: FlyweightCapableTreeStructure
+    konst psi: PsiElement,
+    override konst lighterASTNode: LighterASTNode,
+    override konst treeStructure: FlyweightCapableTreeStructure
 ) : FirSourceElement()
 class FirLightSourceElement(
-    override val lighterASTNode: LighterASTNode,
-    override val treeStructure: FlyweightCapableTreeStructure
+    override konst lighterASTNode: LighterASTNode,
+    override konst treeStructure: FlyweightCapableTreeStructure
 ) : FirSourceElement()
 
 open class PsiElement
 class ASTNode
-class LighterASTNode(val _children: List<LighterASTNode?> = emptyList()) {
+class LighterASTNode(konst _children: List<LighterASTNode?> = emptyList()) {
     fun getChildren(treeStructure: FlyweightCapableTreeStructure): List<LighterASTNode?> = _children
 
-    val tokenType: TokenType = TokenType.MODIFIER_LIST
+    konst tokenType: TokenType = TokenType.MODIFIER_LIST
 }
 
 class TokenType {
     companion object {
-        val MODIFIER_LIST = TokenType()
+        konst MODIFIER_LIST = TokenType()
     }
 }
 
 class KtModifierKeywordToken
 class KtModifierList : PsiElement()
 class KtModifierListOwner : PsiElement() {
-    val modifierList: KtModifierList = KtModifierList()
+    konst modifierList: KtModifierList = KtModifierList()
 }
 
-internal sealed class FirModifier<Node : Any>(val node: Node, val token: KtModifierKeywordToken) {
+internal sealed class FirModifier<Node : Any>(konst node: Node, konst token: KtModifierKeywordToken) {
     class FirPsiModifier(
         node: ASTNode,
         token: KtModifierKeywordToken
@@ -49,16 +49,16 @@ internal sealed class FirModifier<Node : Any>(val node: Node, val token: KtModif
     class FirLightModifier(
         node: LighterASTNode,
         token: KtModifierKeywordToken,
-        val tree: FlyweightCapableTreeStructure
+        konst tree: FlyweightCapableTreeStructure
     ) : FirModifier<LighterASTNode>(node, token)
 }
 
 internal sealed class FirModifierList {
-    val modifiers: List<FirModifier<*>> = emptyList()
+    konst modifiers: List<FirModifier<*>> = emptyList()
 
-    class FirPsiModifierList(val modifierList: KtModifierList) : FirModifierList()
+    class FirPsiModifierList(konst modifierList: KtModifierList) : FirModifierList()
 
-    class FirLightModifierList(val modifierList: LighterASTNode, val tree: FlyweightCapableTreeStructure) : FirModifierList()
+    class FirLightModifierList(konst modifierList: LighterASTNode, konst tree: FlyweightCapableTreeStructure) : FirModifierList()
 
     companion object {
         fun FirSourceElement?.getModifierList(): FirModifierList? {
@@ -66,7 +66,7 @@ internal sealed class FirModifierList {
                 null -> null
                 is FirPsiSourceElement-> (psi as? KtModifierListOwner)?.modifierList?.let { FirPsiModifierList(it) }
                 is FirLightSourceElement -> {
-                    val modifierListNode = lighterASTNode.getChildren(treeStructure).find { it?.tokenType == TokenType.MODIFIER_LIST }
+                    konst modifierListNode = lighterASTNode.getChildren(treeStructure).find { it?.tokenType == TokenType.MODIFIER_LIST }
                         ?: return null // error is here
                     FirLightModifierList(modifierListNode, treeStructure)
                 }
@@ -74,8 +74,8 @@ internal sealed class FirModifierList {
         }
 
         fun boxImpl(): String {
-            val sourceElement: FirSourceElement? = FirLightSourceElement(LighterASTNode(listOf(LighterASTNode())), FlyweightCapableTreeStructure())
-            val result = sourceElement.getModifierList()
+            konst sourceElement: FirSourceElement? = FirLightSourceElement(LighterASTNode(listOf(LighterASTNode())), FlyweightCapableTreeStructure())
+            konst result = sourceElement.getModifierList()
             return if (result is FirLightModifierList) "OK" else "Fail"
         }
     }

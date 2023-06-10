@@ -16,7 +16,7 @@ FILE: main.kt
         public open fun baseImpl2Method_ShouldBeOpen(): R|kotlin/Unit| {
         }
 
-        public open val baseImpl2Property_ShouldBeOpen: R|kotlin/String| = String()
+        public open konst baseImpl2Property_ShouldBeOpen: R|kotlin/String| = String()
             public get(): R|kotlin/String|
 
     }

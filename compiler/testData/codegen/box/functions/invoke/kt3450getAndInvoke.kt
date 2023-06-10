@@ -1,6 +1,6 @@
 //KT-3450 get and invoke are not parsed in one expression
 
-public class A(val s: String) {
+public class A(konst s: String) {
 
     operator fun get(i: Int) : A = A("$s + $i")
 

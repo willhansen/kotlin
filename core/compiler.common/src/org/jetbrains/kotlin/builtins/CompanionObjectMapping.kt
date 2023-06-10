@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.builtins
 import org.jetbrains.kotlin.name.ClassId
 
 object CompanionObjectMapping {
-    val classIds: Set<ClassId> = (
+    konst classIds: Set<ClassId> = (
             PrimitiveType.NUMBER_TYPES.map(StandardNames::getPrimitiveFqName) +
                     StandardNames.FqNames.string.toSafe() +
                     StandardNames.FqNames._boolean.toSafe() +

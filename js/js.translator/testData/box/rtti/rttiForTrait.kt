@@ -10,10 +10,10 @@ class C : A(), B
 
 fun box(): String {
 
-    val a = A()
-    val b = object : B {
+    konst a = A()
+    konst b = object : B {
     }
-    val c = C()
+    konst c = C()
 
     if (a is B) return "a is B"
     if (b !is B) return "b !is B"

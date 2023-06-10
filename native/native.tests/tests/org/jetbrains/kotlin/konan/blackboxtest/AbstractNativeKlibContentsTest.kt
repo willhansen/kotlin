@@ -24,21 +24,21 @@ import java.io.File
 abstract class AbstractNativeKlibContentsTest : AbstractNativeSimpleTest() {
 
     protected fun runTest(@TestDataFile testPath: String) {
-        val testPathFull = getAbsoluteFile(testPath)
+        konst testPathFull = getAbsoluteFile(testPath)
         muteTestIfNecessary(testPathFull)
 
-        val testCase: TestCase = generateTestCaseWithSingleSource(testPathFull, listOf())
-        val testCompilationResult: TestCompilationResult.Success<out KLIB> = compileToLibrary(testCase)
+        konst testCase: TestCase = generateTestCaseWithSingleSource(testPathFull, listOf())
+        konst testCompilationResult: TestCompilationResult.Success<out KLIB> = compileToLibrary(testCase)
 
-        val kotlinNativeClassLoader = testRunSettings.get<KotlinNativeClassLoader>()
-        val klibContents = testCompilationResult.assertSuccess().resultingArtifact.getContents(kotlinNativeClassLoader.classLoader)
-        val klibContentsFiltered = filterContentsOutput(klibContents, linestoExclude = listOf("package test {", "}", ""))
+        konst kotlinNativeClassLoader = testRunSettings.get<KotlinNativeClassLoader>()
+        konst klibContents = testCompilationResult.assertSuccess().resultingArtifact.getContents(kotlinNativeClassLoader.classLoader)
+        konst klibContentsFiltered = filterContentsOutput(klibContents, linestoExclude = listOf("package test {", "}", ""))
         assertEqualsToFile(File("${testPathFull.canonicalPath.substringBeforeLast(".")}.txt"), StringUtilRt.convertLineSeparators(klibContentsFiltered))
     }
 
     private fun generateTestCaseWithSingleSource(source: File, extraArgs: List<String>): TestCase {
-        val moduleName: String = source.name
-        val module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
+        konst moduleName: String = source.name
+        konst module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
         module.files += TestFile.createCommitted(source, module)
 
         return TestCase(

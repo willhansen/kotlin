@@ -24,6 +24,6 @@ public inline infix fun <T> Array<out T>.contentEqualsMy(other: Array<out T>): B
 import kotlin.test.*
 
 fun box(): String {
-    val arr = arrayOf(1, 2, 3)
+    konst arr = arrayOf(1, 2, 3)
     return if (arr contentEqualsMy arr) "OK" else "fail"
 }

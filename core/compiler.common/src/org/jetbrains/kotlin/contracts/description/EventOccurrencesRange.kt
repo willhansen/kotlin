@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.contracts.description
 import kotlin.math.max
 import kotlin.math.min
 
-enum class EventOccurrencesRange(private val left: Int, private val right: Int) {
+enum class EventOccurrencesRange(private konst left: Int, private konst right: Int) {
     ZERO(0, 0),          // 0..0
     AT_MOST_ONCE(0, 1),  // 0..1
     EXACTLY_ONCE(1, 1),  // 1..1
@@ -52,5 +52,5 @@ fun EventOccurrencesRange.canBeVisited(): Boolean =
 fun EventOccurrencesRange.canBeRevisited(): Boolean =
     this == EventOccurrencesRange.UNKNOWN || this == EventOccurrencesRange.AT_LEAST_ONCE || this == EventOccurrencesRange.MORE_THAN_ONCE
 
-val EventOccurrencesRange?.isInPlace: Boolean
+konst EventOccurrencesRange?.isInPlace: Boolean
     get() = this != null

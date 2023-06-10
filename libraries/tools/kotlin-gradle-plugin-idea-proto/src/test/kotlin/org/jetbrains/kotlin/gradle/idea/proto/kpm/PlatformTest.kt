@@ -13,8 +13,8 @@ import kotlin.test.assertEquals
 
 class PlatformTest : AbstractSerializationTest<IdeaKpmPlatform>() {
 
-    override fun serialize(value: IdeaKpmPlatform): ByteArray {
-        return IdeaKpmPlatformProto(value).toByteArray()
+    override fun serialize(konstue: IdeaKpmPlatform): ByteArray {
+        return IdeaKpmPlatformProto(konstue).toByteArray()
     }
 
     override fun deserialize(data: ByteArray): IdeaKpmPlatform {
@@ -23,41 +23,41 @@ class PlatformTest : AbstractSerializationTest<IdeaKpmPlatform>() {
 
     @Test
     fun `serialize - deserialize - jvm`() {
-        val value = IdeaKpmJvmPlatformImpl("jvmTarget")
-        assertEquals(value, IdeaKpmJvmPlatform(value.toByteArray(this)))
-        assertEquals(value, IdeaKpmPlatform(IdeaKpmPlatformProto(value)))
-        testSerialization(value)
+        konst konstue = IdeaKpmJvmPlatformImpl("jvmTarget")
+        assertEquals(konstue, IdeaKpmJvmPlatform(konstue.toByteArray(this)))
+        assertEquals(konstue, IdeaKpmPlatform(IdeaKpmPlatformProto(konstue)))
+        testSerialization(konstue)
     }
 
     @Test
     fun `serialize - deserialize - native`() {
-        val value = IdeaKpmNativePlatformImpl("konanTarget")
-        assertEquals(value, IdeaKpmNativePlatform(value.toByteArray(this)))
-        assertEquals(value, IdeaKpmPlatform(IdeaKpmPlatformProto(value)))
-        testSerialization(value)
+        konst konstue = IdeaKpmNativePlatformImpl("konanTarget")
+        assertEquals(konstue, IdeaKpmNativePlatform(konstue.toByteArray(this)))
+        assertEquals(konstue, IdeaKpmPlatform(IdeaKpmPlatformProto(konstue)))
+        testSerialization(konstue)
     }
 
     @Test
     fun `serialize - deserialize - js`() {
-        val value = IdeaKpmJsPlatformImpl(true)
-        assertEquals(value, IdeaKpmJsPlatform(value.toByteArray(this)))
-        assertEquals(value, IdeaKpmPlatform(IdeaKpmPlatformProto(value)))
-        testSerialization(value)
+        konst konstue = IdeaKpmJsPlatformImpl(true)
+        assertEquals(konstue, IdeaKpmJsPlatform(konstue.toByteArray(this)))
+        assertEquals(konstue, IdeaKpmPlatform(IdeaKpmPlatformProto(konstue)))
+        testSerialization(konstue)
     }
 
     @Test
     fun `serialize - deserialize - wasm`() {
-        val value = IdeaKpmWasmPlatformImpl()
-        assertEquals(value, IdeaKpmWasmPlatform(value.toByteArray(this)))
-        assertEquals(value, IdeaKpmPlatform(IdeaKpmPlatformProto(value)))
-        testSerialization(value)
+        konst konstue = IdeaKpmWasmPlatformImpl()
+        assertEquals(konstue, IdeaKpmWasmPlatform(konstue.toByteArray(this)))
+        assertEquals(konstue, IdeaKpmPlatform(IdeaKpmPlatformProto(konstue)))
+        testSerialization(konstue)
     }
 
     @Test
     fun `serialize - deserialize - unknown`() {
-        val value = IdeaKpmUnknownPlatformImpl()
-        assertEquals(value, IdeaKpmUnknownPlatform(value.toByteArray(this)))
-        assertEquals(value, IdeaKpmPlatform(IdeaKpmPlatformProto(value)))
-        testSerialization(value)
+        konst konstue = IdeaKpmUnknownPlatformImpl()
+        assertEquals(konstue, IdeaKpmUnknownPlatform(konstue.toByteArray(this)))
+        assertEquals(konstue, IdeaKpmPlatform(IdeaKpmPlatformProto(konstue)))
+        testSerialization(konstue)
     }
 }

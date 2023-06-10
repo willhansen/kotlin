@@ -44,13 +44,13 @@ public interface KtExpressionInfoProviderMixIn : KtAnalysisSessionMixIn {
         withValidityAssertion { analysisSession.expressionInfoProvider.getWhenMissingCases(this) }
 
     /**
-     * Compute if the value of a given expression is possibly used. Or,
-     * conversely, compute whether the value of an expression is *not* safe to
+     * Compute if the konstue of a given expression is possibly used. Or,
+     * conversely, compute whether the konstue of an expression is *not* safe to
      * discard.
      *
      * E.g. `x` in the following examples *are* used (`x.isUsedAsExpression() == true`)
      *   - `if (x) { ... } else { ... }`
-     *   - `val a = x`
+     *   - `konst a = x`
      *   - `x + 8`
      *   - `when (x) { 1 -> ...; else -> ... }
      *
@@ -60,7 +60,7 @@ public interface KtExpressionInfoProviderMixIn : KtAnalysisSessionMixIn {
      *
      * **Note!** This is a conservative check, not a control-flow analysis.
      * E.g. `x` in the following example *is possibly used*, even though the
-     * value is never consumed at runtime.
+     * konstue is never consumed at runtime.
      *   - `x + try { throw Exception() } finally { return }`
      *
      */

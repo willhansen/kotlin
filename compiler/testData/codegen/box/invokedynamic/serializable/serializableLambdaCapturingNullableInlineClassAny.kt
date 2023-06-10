@@ -10,16 +10,16 @@
 // FILE: serializableLambdaCapturingNullableInlineClassAny.kt
 import java.io.*
 
-inline class IC(val x: Any) : Serializable
+inline class IC(konst x: Any) : Serializable
 
 fun box(): String {
-    val k: IC? = IC("K")
+    konst k: IC? = IC("K")
     return roundtrip(Sam { s -> s + k!!.x })
         .get("O")
 }
 
 fun <T> roundtrip(x: T): T {
-    val out1 = ByteArrayOutputStream()
+    konst out1 = ByteArrayOutputStream()
     ObjectOutputStream(out1).writeObject(x)
     return ObjectInputStream(ByteArrayInputStream(out1.toByteArray())).readObject() as T
 }

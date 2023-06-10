@@ -64,9 +64,9 @@ class KtUltraLightClassForInterfaceDefaultImpls(classOrObject: KtClassOrObject, 
     override fun getContainingClass(): KtLightClass? = classOrObject.toLightClass()
 
     override fun getOwnInnerClasses() = emptyList<PsiClass>()
-    override fun getOwnMethods(): List<KtLightMethod> = _ownMethods.value
+    override fun getOwnMethods(): List<KtLightMethod> = _ownMethods.konstue
 
-    private val membersBuilder by lazyPub {
+    private konst membersBuilder by lazyPub {
         UltraLightMembersCreator(
             this,
             false,
@@ -78,13 +78,13 @@ class KtUltraLightClassForInterfaceDefaultImpls(classOrObject: KtClassOrObject, 
 
 
     private fun ownMethods(): List<KtLightMethod> {
-        val interfaceType by lazy {
+        konst interfaceType by lazy {
             JavaPsiFacade.getElementFactory(project).createType(containingClass!!)
         }
 
-        val result = mutableListOf<KtLightMethod>()
+        konst result = mutableListOf<KtLightMethod>()
         fun processClass(psiClass: PsiClass) {
-            val declarations = psiClass.safeAs<KtUltraLightClass>()
+            konst declarations = psiClass.safeAs<KtUltraLightClass>()
                 ?.kotlinOrigin
                 ?.declarations
                 ?.filterNot { it.isHiddenByDeprecation(support) }
@@ -130,7 +130,7 @@ class KtUltraLightClassForInterfaceDefaultImpls(classOrObject: KtClassOrObject, 
         return result
     }
 
-    private val _ownMethods: CachedValue<List<KtLightMethod>> = CachedValuesManager.getManager(project).createCachedValue(
+    private konst _ownMethods: CachedValue<List<KtLightMethod>> = CachedValuesManager.getManager(project).createCachedValue(
         /* provider = */
         {
             CachedValueProvider.Result.create(
@@ -145,11 +145,11 @@ class KtUltraLightClassForInterfaceDefaultImpls(classOrObject: KtClassOrObject, 
 internal class KtUltraLightReceiverParameterForDefaultImpls(
     support: KtUltraLightSupport,
     method: KtUltraLightMethod,
-    private val typeGetter: () -> PsiType,
+    private konst typeGetter: () -> PsiType,
 ) : KtUltraLightParameter(AsmUtil.THIS_IN_DEFAULT_IMPLS, null, support, method) {
     override fun getType(): PsiType = typeGetter()
     override fun isVarArgs(): Boolean = false
-    override val qualifiedNameForNullabilityAnnotation: String = NotNull::class.java.name
+    override konst qualifiedNameForNullabilityAnnotation: String = NotNull::class.java.name
 }
 
-private val publicStaticFinal = setOf(PsiModifier.PUBLIC, PsiModifier.STATIC, PsiModifier.FINAL)
+private konst publicStaticFinal = setOf(PsiModifier.PUBLIC, PsiModifier.STATIC, PsiModifier.FINAL)

@@ -15,7 +15,7 @@ enum class Event {
 
 enum class State {
     ENQUEUED, RUNNING, SUCCEEDED, FAILED, BLOCKED, CANCELLED;
-    val isFinished: Boolean
+    konst isFinished: Boolean
         get() = this == SUCCEEDED || this == FAILED || this == CANCELLED
     fun isAtLeast(state: State): Boolean {
         return compareTo(state) >= 0

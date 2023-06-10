@@ -34,4 +34,4 @@ import kotlinx.android.parcel.*
 import android.os.Parcelable
 
 @Parcelize
-class Foo(val parcelable: Parcelable): Parcelable
+class Foo(konst parcelable: Parcelable): Parcelable

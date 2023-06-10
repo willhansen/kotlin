@@ -28,5 +28,5 @@ public interface KtImportOptimizerMixIn : KtAnalysisSessionMixIn {
 }
 
 public class KtImportOptimizerResult(
-    public val unusedImports: Set<KtImportDirective>,
+    public konst unusedImports: Set<KtImportDirective>,
 )

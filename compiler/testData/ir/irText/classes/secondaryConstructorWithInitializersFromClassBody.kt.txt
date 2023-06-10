@@ -8,7 +8,7 @@ open class Base {
 }
 
 class TestProperty : Base {
-  val x: Int
+  konst x: Int
     field = 0
     get
 
@@ -21,7 +21,7 @@ class TestProperty : Base {
 }
 
 class TestInitBlock : Base {
-  val x: Int
+  konst x: Int
     get
 
   init {

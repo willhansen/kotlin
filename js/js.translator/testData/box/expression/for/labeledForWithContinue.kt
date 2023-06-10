@@ -6,9 +6,9 @@ package foo
 
 var global: String = ""
 
-fun up(s: String, value: Int): Int {
+fun up(s: String, konstue: Int): Int {
     global += s
-    return value
+    return konstue
 }
 
 fun box(): String {

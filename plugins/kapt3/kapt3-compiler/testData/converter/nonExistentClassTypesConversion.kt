@@ -17,9 +17,9 @@ typealias Nested2 = Nested1
 @Anno(Blah::class, arrayOf(NoFoo1::class, NoBar1::class), [NoFoo2::class, String::class], Boolean::class, NoBar3::class)
 class Test<G> {
     lateinit var a: ABC
-    val b: ABC? = null
-    val c: List<ABC>? = null
-    val d: List<Map<BCD, ABC<List<BCD>>>>? = null
+    konst b: ABC? = null
+    konst c: List<ABC>? = null
+    konst d: List<Map<BCD, ABC<List<BCD>>>>? = null
     lateinit var e: List<out Map<out ABC, out BCD>?>
     lateinit var f: ABC<*>
     lateinit var g: List<*>
@@ -38,8 +38,8 @@ class Test<G> {
 
     lateinit var nested: Nested2
 
-    val m = ABC()
-    val n = "".toString()
+    konst m = ABC()
+    konst n = "".toString()
 
     lateinit var o11: List<List<List<List<List<List<List<List<List<List<ABC>>>>>>>>>>
     lateinit var o10: List<List<List<List<List<List<List<List<List<ABC>>>>>>>>>
@@ -63,4 +63,4 @@ class Test<G> {
 
 class MyType<T>
 
-annotation class Anno(val a: KClass<*>, val b: Array<KClass<*>>, val c: Array<KClass<*>>, vararg val d: KClass<*>)
+annotation class Anno(konst a: KClass<*>, konst b: Array<KClass<*>>, konst c: Array<KClass<*>>, vararg konst d: KClass<*>)

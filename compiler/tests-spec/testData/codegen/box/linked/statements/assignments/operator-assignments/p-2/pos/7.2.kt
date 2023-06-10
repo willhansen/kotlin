@@ -16,9 +16,9 @@
 class B(var a: Int) {
     var times = false
 
-    operator fun times(value: Int): B {
+    operator fun times(konstue: Int): B {
         times = true
-        a= a * value
+        a= a * konstue
         return this
     }
 

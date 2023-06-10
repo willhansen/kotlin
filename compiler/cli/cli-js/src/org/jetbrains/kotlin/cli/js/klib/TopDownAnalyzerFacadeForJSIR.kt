@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 
 // TODO: put it in separated module `frontend.js`
 object TopDownAnalyzerFacadeForJSIR : AbstractTopDownAnalyzerFacadeForWeb() {
-    override val analyzerServices: PlatformDependentAnalyzerServices = JsPlatformAnalyzerServices
-    override val platform: TargetPlatform = JsPlatforms.defaultJsPlatform
+    override konst analyzerServices: PlatformDependentAnalyzerServices = JsPlatformAnalyzerServices
+    override konst platform: TargetPlatform = JsPlatforms.defaultJsPlatform
 
     override fun loadIncrementalCacheMetadata(
         incrementalData: IncrementalDataProvider,
@@ -30,7 +30,7 @@ object TopDownAnalyzerFacadeForJSIR : AbstractTopDownAnalyzerFacadeForWeb() {
         languageVersionSettings: LanguageVersionSettings
     ): PackageFragmentProvider {
         return JsFactories.DefaultDeserializedDescriptorFactory.createCachedPackageFragmentProvider(
-            incrementalData.compiledPackageParts.values.map { it.metadata },
+            incrementalData.compiledPackageParts.konstues.map { it.metadata },
             moduleContext.storageManager,
             moduleContext.module,
             CompilerDeserializationConfiguration(languageVersionSettings),

@@ -33,13 +33,13 @@ fun BodyResolveComponents.findTypesForSuperCandidates(
     superTypeRefs: List<FirTypeRef>,
     containingCall: FirQualifiedAccessExpression,
 ): List<ConeKotlinType> {
-    val supertypes = superTypeRefs.map { (it as FirResolvedTypeRef).type }
-    val isMethodOfAny = containingCall is FirFunctionCall && isCallingMethodOfAny(containingCall)
+    konst supertypes = superTypeRefs.map { (it as FirResolvedTypeRef).type }
+    konst isMethodOfAny = containingCall is FirFunctionCall && isCallingMethodOfAny(containingCall)
     if (supertypes.size <= 1 && !isMethodOfAny) return supertypes
 
     return when (containingCall) {
         is FirFunctionCall -> {
-            val calleeName = containingCall.calleeReference.name
+            konst calleeName = containingCall.calleeReference.name
             if (isMethodOfAny) {
                 resolveSupertypesForMethodOfAny(supertypes, calleeName)
             } else {
@@ -55,7 +55,7 @@ fun BodyResolveComponents.findTypesForSuperCandidates(
     }
 }
 
-private val ARITY_OF_METHODS_OF_ANY = hashMapOf("hashCode" to 0, "equals" to 1, "toString" to 0)
+private konst ARITY_OF_METHODS_OF_ANY = hashMapOf("hashCode" to 0, "equals" to 1, "toString" to 0)
 
 private fun isCallingMethodOfAny(callExpression: FirFunctionCall): Boolean =
     ARITY_OF_METHODS_OF_ANY.getOrElse(callExpression.calleeReference.name.asString()) { -1 } == callExpression.argumentList.arguments.size
@@ -64,7 +64,7 @@ private fun BodyResolveComponents.resolveSupertypesForMethodOfAny(
     supertypes: Collection<ConeKotlinType>,
     calleeName: Name
 ): List<ConeKotlinType> {
-    val typesWithConcreteOverride = resolveSupertypesByMembers(supertypes, allowNonConcreteInterfaceMembers = false) {
+    konst typesWithConcreteOverride = resolveSupertypesByMembers(supertypes, allowNonConcreteInterfaceMembers = false) {
         getFunctionMembers(it, calleeName)
     }
     return typesWithConcreteOverride.ifEmpty {
@@ -94,11 +94,11 @@ private inline fun BodyResolveComponents.resolveSupertypesByMembers(
     allowNonConcreteInterfaceMembers: Boolean,
     getMembers: (ConeKotlinType) -> Collection<FirCallableDeclaration>
 ): List<ConeKotlinType> {
-    val typesWithConcreteMembers = SmartList<ConeKotlinType>()
-    val typesWithNonConcreteMembers = SmartList<ConeKotlinType>()
+    konst typesWithConcreteMembers = SmartList<ConeKotlinType>()
+    konst typesWithNonConcreteMembers = SmartList<ConeKotlinType>()
 
     for (supertype in supertypes) {
-        val members = getMembers(supertype)
+        konst members = getMembers(supertype)
         if (members.isNotEmpty()) {
             if (members.any { isConcreteMember(supertype, it) })
                 typesWithConcreteMembers.add(supertype)
@@ -155,7 +155,7 @@ private fun BodyResolveComponents.isConcreteMember(supertype: ConeKotlinType, me
     if (member.modality == Modality.ABSTRACT)
         return false
 
-    val classSymbol =
+    konst classSymbol =
         (supertype as? ConeClassLikeType)?.lookupTag?.toSymbol(session) as? FirRegularClassSymbol ?: return true
     if (classSymbol.fir.classKind != ClassKind.INTERFACE) return true
     return member.symbol.unwrapFakeOverrides().dispatchReceiverClassLookupTagOrNull()?.classId != StandardClassIds.Any

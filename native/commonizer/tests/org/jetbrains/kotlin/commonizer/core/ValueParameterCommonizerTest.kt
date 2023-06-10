@@ -152,7 +152,7 @@ class ValueParameterCommonizerTest : AbstractCommonizerTest<CirValueParameter, C
             isNoinline: Boolean = false,
             declaresDefaultValue: Boolean = false
         ): CirValueParameter {
-            val returnType = mockClassType(returnTypeClassId)
+            konst returnType = mockClassType(returnTypeClassId)
 
             return CirValueParameter.createInterned(
                 name = CirName.create(name),
@@ -177,8 +177,8 @@ fun areEqual(classifiers: CirKnownClassifiers, a: CirValueParameter, b: CirValue
         return false
     }
 
-    val aVarargElementType = a.varargElementType
-    val bVarargElementType = b.varargElementType
+    konst aVarargElementType = a.varargElementType
+    konst bVarargElementType = b.varargElementType
 
     return (aVarargElementType === bVarargElementType)
             || (aVarargElementType != null && bVarargElementType != null

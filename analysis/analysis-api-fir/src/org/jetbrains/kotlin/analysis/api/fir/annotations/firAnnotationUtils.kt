@@ -101,7 +101,7 @@ private fun FirAnnotation.asKtAnnotationApplicationForAnnotationWithEnumArgument
     annotationParameterName: Name,
     nameMapper: (String) -> String?,
 ): KtAnnotationApplicationWithArgumentsInfo {
-    val arguments = findFromRawArguments(
+    konst arguments = findFromRawArguments(
         expectedEnumClass = expectedEnumClassId,
         nameMapper,
     ).ifNotEmpty {
@@ -109,7 +109,7 @@ private fun FirAnnotation.asKtAnnotationApplicationForAnnotationWithEnumArgument
             KtNamedAnnotationValue(
                 name = annotationParameterName,
                 expression = KtArrayAnnotationValue(
-                    values = map {
+                    konstues = map {
                         KtEnumEntryAnnotationValue(
                             callableId = CallableId(
                                 classId = expectedEnumClassId,
@@ -135,7 +135,7 @@ private fun FirAnnotation.asKtAnnotationApplicationForTargetAnnotation(
     index = index,
     expectedEnumClassId = StandardClassIds.AnnotationTarget,
     annotationParameterName = StandardClassIds.Annotations.ParameterNames.targetAllowedTargets,
-    nameMapper = { KotlinTarget.valueOrNull(it)?.name },
+    nameMapper = { KotlinTarget.konstueOrNull(it)?.name },
 )
 
 private fun FirAnnotation.asKtAnnotationApplicationForJavaTargetAnnotation(
@@ -145,16 +145,16 @@ private fun FirAnnotation.asKtAnnotationApplicationForJavaTargetAnnotation(
     useSiteSession = useSiteSession,
     index = index,
     expectedEnumClassId = StandardClassIds.Annotations.Java.ElementType,
-    annotationParameterName = StandardClassIds.Annotations.ParameterNames.value,
-    nameMapper = { ElementType.values().firstOrNull { enumValue -> enumValue.name == it }?.name },
+    annotationParameterName = StandardClassIds.Annotations.ParameterNames.konstue,
+    nameMapper = { ElementType.konstues().firstOrNull { enumValue -> enumValue.name == it }?.name },
 )
 
 private fun <T> FirAnnotation.findFromRawArguments(expectedEnumClass: ClassId, transformer: (String) -> T?): Set<T> = buildSet {
     fun addIfMatching(arg: FirExpression) {
         if (arg !is FirQualifiedAccessExpression) return
-        val callableSymbol = arg.calleeReference.toResolvedCallableSymbol() ?: return
+        konst callableSymbol = arg.calleeReference.toResolvedCallableSymbol() ?: return
         if (callableSymbol.containingClassLookupTag()?.classId != expectedEnumClass) return
-        val identifier = callableSymbol.callableId.callableName.identifier
+        konst identifier = callableSymbol.callableId.callableName.identifier
         transformer(identifier)?.let(::add)
     }
 
@@ -199,9 +199,9 @@ internal fun hasAnnotation(
 ): Boolean {
     return if (firSymbol.isFromCompilerRequiredAnnotationsPhase(classId)) {
         // this loop by index is required to avoid possible ConcurrentModificationException
-        val annotations = annotationContainer.resolvedCompilerRequiredAnnotations(firSymbol)
+        konst annotations = annotationContainer.resolvedCompilerRequiredAnnotations(firSymbol)
         for (index in annotations.indices) {
-            val annotation = annotations[index]
+            konst annotation = annotations[index]
             if (useSiteTargetFilter.isAllowed(annotation.useSiteTarget) && annotation.toAnnotationClassIdSafe(useSiteSession) == classId) {
                 return true
             }

@@ -10,7 +10,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
 import com.intellij.util.IncorrectOperationException
 
-internal class SymbolLightPsiJavaCodeReferenceElementWithNoReference(private val ktElement: PsiElement) :
+internal class SymbolLightPsiJavaCodeReferenceElementWithNoReference(private konst ktElement: PsiElement) :
     SymbolLightPsiJavaCodeReferenceElementBase(ktElement),
     PsiReference {
 

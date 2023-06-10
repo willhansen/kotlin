@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.test.model.*
 import org.jetbrains.kotlin.test.runners.AbstractKotlinCompilerWithTargetBackendTest
 
 abstract class AbstractSteppingTestBase<R : ResultingArtifact.FrontendOutput<R>, I : ResultingArtifact.BackendInput<I>>(
-    val targetFrontend: FrontendKind<R>,
+    konst targetFrontend: FrontendKind<R>,
     targetBackend: TargetBackend
 ) : AbstractKotlinCompilerWithTargetBackendTest(targetBackend) {
-    abstract val frontendFacade: Constructor<FrontendFacade<R>>
-    abstract val frontendToBackendConverter: Constructor<Frontend2BackendConverter<R, I>>
-    abstract val backendFacade: Constructor<BackendFacade<I, BinaryArtifacts.Jvm>>
+    abstract konst frontendFacade: Constructor<FrontendFacade<R>>
+    abstract konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<R, I>>
+    abstract konst backendFacade: Constructor<BackendFacade<I, BinaryArtifacts.Jvm>>
 
     override fun TestConfigurationBuilder.configuration() {
         commonConfigurationForTest(targetFrontend, frontendFacade, frontendToBackendConverter, backendFacade) {

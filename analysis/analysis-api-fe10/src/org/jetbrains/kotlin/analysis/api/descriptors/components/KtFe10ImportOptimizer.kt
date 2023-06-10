@@ -16,26 +16,26 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 
 internal class KtFe10ImportOptimizer(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtImportOptimizer(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun analyseImports(file: KtFile): KtImportOptimizerResult = withValidityAssertion {
-        val (allUnderImports, otherImports) = file.importDirectives.partition { it.isAllUnder }
+        konst (allUnderImports, otherImports) = file.importDirectives.partition { it.isAllUnder }
 
-        val unusedImports = LinkedHashSet<KtImportDirective>()
-        val importedPackages = HashSet<FqName>()
+        konst unusedImports = LinkedHashSet<KtImportDirective>()
+        konst importedPackages = HashSet<FqName>()
 
         for (import in allUnderImports) {
-            val fqName = import.importedFqName ?: continue
+            konst fqName = import.importedFqName ?: continue
             if (!importedPackages.add(fqName)) {
                 unusedImports += import
             }
         }
 
         for (import in otherImports) {
-            val fqName = import.importedFqName ?: continue
+            konst fqName = import.importedFqName ?: continue
             if (import.alias == null && fqName.parent() in importedPackages) {
                 unusedImports += import
             }

@@ -9,7 +9,7 @@
 import org.docopt.Docopt
 
 // test the docopt dependency
-val docopt = Docopt("Usage: jl <command> [options] [<joblist_file>]")
+konst docopt = Docopt("Usage: jl <command> [options] [<joblist_file>]")
 
 // instantiate a logger to test the log4j dependency
 org.apache.log4j.Logger.getRootLogger()

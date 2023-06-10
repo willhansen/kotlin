@@ -6,12 +6,12 @@
  * SPEC VERSION: 0.1-218
  * MAIN LINK: expressions, conditional-expression -> paragraph 1 -> sentence 2
  * NUMBER: 7
- * DESCRIPTION: if-expression: check the correct branch is evaluating
+ * DESCRIPTION: if-expression: check the correct branch is ekonstuating
  */
 
 
 fun box(): String {
-    val x = if (get(null) ?: if (try {
+    konst x = if (get(null) ?: if (try {
                 TODO()
             } catch (e: NotImplementedError) {
                 get(false)!!

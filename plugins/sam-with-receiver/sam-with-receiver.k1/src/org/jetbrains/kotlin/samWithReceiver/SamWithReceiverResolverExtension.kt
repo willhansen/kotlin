@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.resolve.sam.SamWithReceiverResolver
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 class SamWithReceiverResolverExtension(
-    private val annotations: List<String>
+    private konst annotations: List<String>
 ) : SamWithReceiverResolver, AnnotationBasedExtension {
     override fun getAnnotationFqNames(modifierListOwner: KtModifierListOwner?) = annotations
 

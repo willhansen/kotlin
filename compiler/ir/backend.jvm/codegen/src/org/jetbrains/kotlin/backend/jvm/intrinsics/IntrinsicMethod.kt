@@ -21,8 +21,8 @@ abstract class IntrinsicMethod : IntrinsicMarker {
 
     open fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue? =
         with(codegen) {
-            val descriptor = methodSignatureMapper.mapSignatureSkipGeneric(expression.symbol.owner)
-            val stackValue = toCallable(expression, descriptor, codegen.classCodegen).invoke(mv, codegen, data, expression)
+            konst descriptor = methodSignatureMapper.mapSignatureSkipGeneric(expression.symbol.owner)
+            konst stackValue = toCallable(expression, descriptor, codegen.classCodegen).invoke(mv, codegen, data, expression)
             stackValue.put(mv)
             return MaterialValue(this, stackValue.type, expression.type)
         }
@@ -30,10 +30,10 @@ abstract class IntrinsicMethod : IntrinsicMarker {
 
     companion object {
         fun JvmMethodSignature.newReturnType(type: Type): JvmMethodSignature {
-            val newMethod = with(asmMethod) {
+            konst newMethod = with(asmMethod) {
                 Method(name, type, argumentTypes)
             }
-            return JvmMethodSignature(newMethod, valueParameters)
+            return JvmMethodSignature(newMethod, konstueParameters)
         }
     }
 }

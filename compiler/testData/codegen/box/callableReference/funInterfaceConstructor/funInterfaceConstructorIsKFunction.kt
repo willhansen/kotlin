@@ -14,7 +14,7 @@ fun interface KRunnable {
     fun run()
 }
 
-val kr = ::KRunnable // : KFunction1<() -> Unit, KRunnable>
+konst kr = ::KRunnable // : KFunction1<() -> Unit, KRunnable>
 
 fun box(): String {
     return if (kr is KFunction<*>)

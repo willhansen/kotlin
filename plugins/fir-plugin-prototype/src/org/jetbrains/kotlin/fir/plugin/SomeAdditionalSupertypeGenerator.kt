@@ -29,8 +29,8 @@ import org.jetbrains.kotlin.name.Name
  */
 class SomeAdditionalSupertypeGenerator(session: FirSession) : FirSupertypeGenerationExtension(session) {
     companion object {
-        private val myInterfaceClassId = ClassId(FqName("foo"), Name.identifier("MyInterface"))
-        private val PREDICATE = DeclarationPredicate.create {
+        private konst myInterfaceClassId = ClassId(FqName("foo"), Name.identifier("MyInterface"))
+        private konst PREDICATE = DeclarationPredicate.create {
             annotated("MyInterfaceSupertype".fqn()) or metaAnnotated("MetaSupertype".fqn(), includeItself = false)
         }
     }

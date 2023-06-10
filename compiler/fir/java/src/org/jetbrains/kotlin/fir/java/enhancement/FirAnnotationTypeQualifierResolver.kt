@@ -25,22 +25,22 @@ import org.jetbrains.kotlin.load.java.JvmAnnotationNames.DEFAULT_ANNOTATION_MEMB
 import org.jetbrains.kotlin.name.FqName
 
 class FirAnnotationTypeQualifierResolver(
-    private val session: FirSession,
+    private konst session: FirSession,
     javaTypeEnhancementState: JavaTypeEnhancementState,
-    private val javaModuleAnnotationsProvider: JavaModuleAnnotationsProvider,
+    private konst javaModuleAnnotationsProvider: JavaModuleAnnotationsProvider,
 ) : AbstractAnnotationTypeQualifierResolver<FirAnnotation>(javaTypeEnhancementState), FirSessionComponent {
 
-    override val FirAnnotation.metaAnnotations: Iterable<FirAnnotation>
+    override konst FirAnnotation.metaAnnotations: Iterable<FirAnnotation>
         get() = unexpandedConeClassLikeType?.lookupTag?.toSymbol(session)?.fir?.annotations.orEmpty()
 
-    override val FirAnnotation.key: Any
+    override konst FirAnnotation.key: Any
         get() = unexpandedConeClassLikeType!!.lookupTag
 
-    override val FirAnnotation.fqName: FqName?
+    override konst FirAnnotation.fqName: FqName?
         get() = unexpandedConeClassLikeType?.lookupTag?.classId?.asSingleFqName()
 
     override fun FirAnnotation.enumArguments(onlyValue: Boolean): Iterable<String> =
-        argumentMapping.mapping.values.flatMap { argument ->
+        argumentMapping.mapping.konstues.flatMap { argument ->
             if (!onlyValue || argument !is FirNamedArgumentExpression || argument.name == DEFAULT_ANNOTATION_MEMBER_NAME)
                 argument.toEnumNames()
             else
@@ -52,7 +52,7 @@ class FirAnnotationTypeQualifierResolver(
             is FirArrayOfCall -> arguments.flatMap { it.toEnumNames() }
             is FirVarargArgumentsExpression -> arguments.flatMap { it.toEnumNames() }
             else -> {
-                val name = when (val reference = toReference()) {
+                konst name = when (konst reference = toReference()) {
                     is FirResolvedNamedReference ->
                         (reference.resolvedSymbol as? FirCallableSymbol<*>)?.callableId?.callableName?.asString()
                     is FirFromMissingDependenciesNamedReference -> reference.name.asString()
@@ -64,15 +64,15 @@ class FirAnnotationTypeQualifierResolver(
         }
 
     fun extractDefaultQualifiers(firClass: FirRegularClass): JavaTypeQualifiersByElementType? {
-        val classId = firClass.symbol.classId
-        val outerClassId = classId.outerClassId
-        val parentQualifiers = if (outerClassId != null) {
+        konst classId = firClass.symbol.classId
+        konst outerClassId = classId.outerClassId
+        konst parentQualifiers = if (outerClassId != null) {
             (session.symbolProvider.getClassLikeSymbolByClassId(outerClassId)?.fir as? FirRegularClass)
                 ?.let { extractDefaultQualifiers(it) }
         } else {
-            val forModule = javaModuleAnnotationsProvider.getAnnotationsForModuleOwnerOfClass(classId)
+            konst forModule = javaModuleAnnotationsProvider.getAnnotationsForModuleOwnerOfClass(classId)
                 ?.let { extractAndMergeDefaultQualifiers(null, it.convertAnnotationsToFir(session, JavaTypeParameterStack.EMPTY)) }
-            val forPackage = (firClass as? FirJavaClass)?.javaPackage
+            konst forPackage = (firClass as? FirJavaClass)?.javaPackage
                 ?.let { extractAndMergeDefaultQualifiers(forModule, it.convertAnnotationsToFir(session, JavaTypeParameterStack.EMPTY)) }
             forPackage ?: forModule
         }
@@ -80,4 +80,4 @@ class FirAnnotationTypeQualifierResolver(
     }
 }
 
-val FirSession.javaAnnotationTypeQualifierResolver: FirAnnotationTypeQualifierResolver by FirSession.sessionComponentAccessor()
+konst FirSession.javaAnnotationTypeQualifierResolver: FirAnnotationTypeQualifierResolver by FirSession.sessionComponentAccessor()

@@ -32,7 +32,7 @@ external public actual fun Char.isLowSurrogate(): Boolean
 external public actual fun Char.isISOControl(): Boolean
 
 /**
- * Converts a surrogate pair to a unicode code point. Doesn't validate that the characters are a valid surrogate pair.
+ * Converts a surrogate pair to a unicode code point. Doesn't konstidate that the characters are a konstid surrogate pair.
  *
  * Note that this function is unstable.
  * In the future it could be deprecated in favour of an overload that would return a `CodePoint` type.
@@ -76,15 +76,15 @@ public fun Char.Companion.toChars(codePoint: Int): CharArray =
         when {
             codePoint in 0 until MIN_SUPPLEMENTARY_CODE_POINT -> charArrayOf(codePoint.toChar())
             codePoint in MIN_SUPPLEMENTARY_CODE_POINT..MAX_CODE_POINT -> {
-                val low = ((codePoint - 0x10000) and 0x3FF) + MIN_LOW_SURROGATE.toInt()
-                val high = (((codePoint - 0x10000) ushr 10) and 0x3FF) + MIN_HIGH_SURROGATE.toInt()
+                konst low = ((codePoint - 0x10000) and 0x3FF) + MIN_LOW_SURROGATE.toInt()
+                konst high = (((codePoint - 0x10000) ushr 10) and 0x3FF) + MIN_HIGH_SURROGATE.toInt()
                 charArrayOf(high.toChar(), low.toChar())
             }
             else -> throw IllegalArgumentException()
         }
 
 @SharedImmutable
-private val digits = intArrayOf(
+private konst digits = intArrayOf(
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
         -1, -1, -1, -1, -1, -1, -1,
         10, 11, 12, 13, 14, 15, 16, 17, 18, 19,

@@ -23,7 +23,7 @@ import java.net.URL
 abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServices) {
 
     companion object {
-        val BOX_MAIN_FILE_CLASS_NAME = BOX_MAIN_FILE_NAME.replace(".kt", "Kt")
+        konst BOX_MAIN_FILE_CLASS_NAME = BOX_MAIN_FILE_NAME.replace(".kt", "Kt")
     }
 
     private var wholeFile = File("")
@@ -44,7 +44,7 @@ abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServic
         wholeFile = module.files.single { it.name == "test.kt" }.originalFile
 
         // Setup the java process to suspend waiting for debugging connection on a free port.
-        val command = listOfNotNull(
+        konst command = listOfNotNull(
             javaExe.absolutePath,
             "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=127.0.0.1:0",
             "-ea",
@@ -52,17 +52,17 @@ abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServic
             classPath.joinToString(File.pathSeparator, transform = { File(it.toURI()).absolutePath }),
         ) + mainClassAndArguments
 
-        val process = ProcessBuilder(command).start()
+        konst process = ProcessBuilder(command).start()
 
         // Extract the chosen port from the output of the newly started java process.
         // The java process prints a line with the format:
         //
         //      Listening for transport dt_socket at address: <port number>
-        val port = process.inputStream.bufferedReader().readLine().split("address:").last().trim().toInt()
+        konst port = process.inputStream.bufferedReader().readLine().split("address:").last().trim().toInt()
 
         // Attach debugger to the separate java process, setup initial event requests,
         // and run the debugger loop to step through the program.
-        val virtualMachine = attachDebugger(port)
+        konst virtualMachine = attachDebugger(port)
         setupMethodEntryAndExitRequests(virtualMachine)
         runDebugEventLoop(virtualMachine)
 
@@ -71,12 +71,12 @@ abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServic
 
     // Debug event loop to step through a test program.
     private fun runDebugEventLoop(virtualMachine: VirtualMachine) {
-        val manager = virtualMachine.eventRequestManager()
-        val loggedItems = ArrayList<SteppingTestLoggedData>()
+        konst manager = virtualMachine.eventRequestManager()
+        konst loggedItems = ArrayList<SteppingTestLoggedData>()
         var inBoxMethod = false
         vmLoop@
         while (true) {
-            val eventSet = virtualMachine.eventQueue().remove(1000) ?: continue
+            konst eventSet = virtualMachine.eventQueue().remove(1000) ?: continue
             for (event in eventSet) {
                 when (event) {
                     is VMDeathEvent, is VMDisconnectEvent -> {
@@ -90,7 +90,7 @@ abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServic
                         if (!inBoxMethod && event.location().method().name() == "box") {
                             if (manager.stepRequests().isEmpty()) {
                                 // Create line stepping request to get all normal line steps starting now.
-                                val stepReq = manager.createStepRequest(event.thread(), StepRequest.STEP_LINE, StepRequest.STEP_INTO)
+                                konst stepReq = manager.createStepRequest(event.thread(), StepRequest.STEP_LINE, StepRequest.STEP_INTO)
                                 stepReq.setSuspendPolicy(SUSPEND_ALL)
                                 stepReq.addClassExclusionFilter("java.*")
                                 stepReq.addClassExclusionFilter("sun.*")
@@ -98,7 +98,7 @@ abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServic
                                 stepReq.addClassExclusionFilter("jdk.internal.*")
                                 // Create class prepare request to be able to set breakpoints on class initializer lines.
                                 // There are no line stepping events for class initializers, so we depend on breakpoints.
-                                val prepareReq = manager.createClassPrepareRequest()
+                                konst prepareReq = manager.createClassPrepareRequest()
                                 prepareReq.setSuspendPolicy(SUSPEND_ALL)
                                 prepareReq.addClassExclusionFilter("java.*")
                                 prepareReq.addClassExclusionFilter("sun.*")
@@ -135,7 +135,7 @@ abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServic
                     }
                     is ClassPrepareEvent -> {
                         if (inBoxMethod) {
-                            val initializer = event.referenceType().methods().find { it.isStaticInitializer }
+                            konst initializer = event.referenceType().methods().find { it.isStaticInitializer }
                             try {
                                 initializer?.allLineLocations()?.forEach {
                                     manager.createBreakpointRequest(it).enable()
@@ -165,22 +165,22 @@ abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServic
         formatAsSteppingTestExpectation(sourceName(), lineNumber(), method().name(), method().isSynthetic, visibleVars)
 
     fun setupMethodEntryAndExitRequests(virtualMachine: VirtualMachine) {
-        val manager = virtualMachine.eventRequestManager()
+        konst manager = virtualMachine.eventRequestManager()
 
-        val methodEntryReq = manager.createMethodEntryRequest()
+        konst methodEntryReq = manager.createMethodEntryRequest()
         methodEntryReq.addClassFilter("TestKt")
         methodEntryReq.setSuspendPolicy(SUSPEND_ALL)
         methodEntryReq.enable()
 
-        val methodExitReq = manager.createMethodExitRequest()
+        konst methodExitReq = manager.createMethodExitRequest()
         methodExitReq.addClassFilter("TestKt")
         methodExitReq.setSuspendPolicy(SUSPEND_ALL)
         methodExitReq.enable()
     }
 
     private fun attachDebugger(port: Int): VirtualMachine {
-        val connector = SocketAttachingConnector()
-        val virtualMachine = connector.attach(connector.defaultArguments().toMutableMap().apply {
+        konst connector = SocketAttachingConnector()
+        konst virtualMachine = connector.attach(connector.defaultArguments().toMutableMap().apply {
             getValue("port").setValue("$port")
             getValue("hostname").setValue("127.0.0.1")
         })
@@ -192,7 +192,7 @@ abstract class DebugRunner(testServices: TestServices) : JvmBoxRunner(testServic
 class SteppingDebugRunner(testServices: TestServices) : DebugRunner(testServices) {
     override fun storeStep(loggedItems: ArrayList<SteppingTestLoggedData>, event: Event) {
         assert(event is LocatableEvent)
-        val location = (event as LocatableEvent).location()
+        konst location = (event as LocatableEvent).location()
         loggedItems.add(
             SteppingTestLoggedData(
                 location.lineNumber(),
@@ -206,15 +206,15 @@ class SteppingDebugRunner(testServices: TestServices) : DebugRunner(testServices
 class LocalVariableDebugRunner(testServices: TestServices) : DebugRunner(testServices) {
 
     private fun toRecord(frame: StackFrame, variable: LocalVariable): LocalVariableRecord {
-        val value = frame.getValue(variable)
-        val valueRecord = if (value == null) {
+        konst konstue = frame.getValue(variable)
+        konst konstueRecord = if (konstue == null) {
             LocalNullValue
-        } else if (value is ObjectReference && value.referenceType().name() != "java.lang.String") {
-            LocalReference(value.uniqueID().toString(), value.referenceType().name())
+        } else if (konstue is ObjectReference && konstue.referenceType().name() != "java.lang.String") {
+            LocalReference(konstue.uniqueID().toString(), konstue.referenceType().name())
         } else {
-            LocalPrimitive(value.toString(), value.type().name())
+            LocalPrimitive(konstue.toString(), konstue.type().name())
         }
-        return LocalVariableRecord(variable.name(), variable.typeName(), valueRecord)
+        return LocalVariableRecord(variable.name(), variable.typeName(), konstueRecord)
     }
 
     private fun waitUntil(condition: () -> Boolean) {
@@ -224,13 +224,13 @@ class LocalVariableDebugRunner(testServices: TestServices) : DebugRunner(testSer
     }
 
     override fun storeStep(loggedItems: ArrayList<SteppingTestLoggedData>, event: Event) {
-        val locatableEvent = event as LocatableEvent
+        konst locatableEvent = event as LocatableEvent
         waitUntil { locatableEvent.thread().isSuspended }
-        val location = locatableEvent.location()
+        konst location = locatableEvent.location()
         if (location.method().isSynthetic) return
 
-        val frame = locatableEvent.thread().frame(0)
-        val visibleVars = try {
+        konst frame = locatableEvent.thread().frame(0)
+        konst visibleVars = try {
             frame.visibleVariables().map { variable -> toRecord(frame, variable) }
         } catch (e: AbsentInformationException) {
             // Local variable table completely absent - not distinguished from an empty table.

@@ -1,7 +1,7 @@
 operator fun Any.plusAssign(lambda: () -> Unit) {}
 
 operator fun Any.get(index: () -> Unit): Int = 42
-operator fun Any.set(index: () -> Unit, value: Int) {}
+operator fun Any.set(index: () -> Unit, konstue: Int) {}
 
 fun test1(a: Any) {
     a += {  }

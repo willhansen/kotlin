@@ -18,7 +18,7 @@ class B : A() {
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     b.boo()
     b.foo()
     b.bar()

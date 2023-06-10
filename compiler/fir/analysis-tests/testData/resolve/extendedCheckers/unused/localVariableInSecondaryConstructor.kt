@@ -1,8 +1,8 @@
 fun main() {
 
-    val localVariable = 0
+    konst localVariable = 0
 
-    class LocalClass(val arg: Int) {
+    class LocalClass(konst arg: Int) {
         constructor() : this(localVariable)
     }
 

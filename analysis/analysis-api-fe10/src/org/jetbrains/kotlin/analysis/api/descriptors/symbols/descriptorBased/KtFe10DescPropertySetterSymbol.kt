@@ -23,37 +23,37 @@ import org.jetbrains.kotlin.descriptors.hasBody
 import org.jetbrains.kotlin.name.CallableId
 
 internal class KtFe10DescPropertySetterSymbol(
-    override val descriptor: PropertySetterDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: PropertySetterDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtPropertySetterSymbol(), KtFe10DescMemberSymbol<PropertySetterDescriptor> {
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { analysisContext.builtIns.unitType.toKtType(analysisContext) }
 
-    override val isDefault: Boolean
+    override konst isDefault: Boolean
         get() = withValidityAssertion { descriptor.isDefault }
 
-    override val isInline: Boolean
+    override konst isInline: Boolean
         get() = withValidityAssertion { descriptor.isInline }
 
-    override val isOverride: Boolean
+    override konst isOverride: Boolean
         get() = withValidityAssertion { descriptor.isExplicitOverride }
 
-    override val hasBody: Boolean
+    override konst hasBody: Boolean
         get() = withValidityAssertion { descriptor.hasBody() }
 
-    override val valueParameters: List<KtValueParameterSymbol>
-        get() = withValidityAssertion { descriptor.valueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
+    override konst konstueParameters: List<KtValueParameterSymbol>
+        get() = withValidityAssertion { descriptor.konstueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { true }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { descriptor.correspondingProperty.setterCallableIdIfNotLocal }
 
-    override val parameter: KtValueParameterSymbol
-        get() = withValidityAssertion { KtFe10DescValueParameterSymbol(descriptor.valueParameters.single(), analysisContext) }
+    override konst parameter: KtValueParameterSymbol
+        get() = withValidityAssertion { KtFe10DescValueParameterSymbol(descriptor.konstueParameters.single(), analysisContext) }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion { descriptor.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext) }
 
     context(KtAnalysisSession)

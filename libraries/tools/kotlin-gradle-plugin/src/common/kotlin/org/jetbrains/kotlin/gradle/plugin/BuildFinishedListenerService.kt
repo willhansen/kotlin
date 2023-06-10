@@ -17,12 +17,12 @@ import org.jetbrains.kotlin.gradle.utils.SingleActionPerProject
 
 internal interface UsesBuildFinishedListenerService : Task {
     @get:Internal
-    val buildFinishedListenerService: Property<BuildFinishedListenerService>
+    konst buildFinishedListenerService: Property<BuildFinishedListenerService>
 }
 
 abstract class BuildFinishedListenerService : BuildService<BuildServiceParameters.None>, AutoCloseable {
-    private val actionsOnClose = mutableListOf<() -> Unit>()
-    private val keys = hashSetOf<String>()
+    private konst actionsOnClose = mutableListOf<() -> Unit>()
+    private konst keys = hashSetOf<String>()
 
     fun onClose(action: () -> Unit) {
         actionsOnClose.add(action)

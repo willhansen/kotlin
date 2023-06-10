@@ -2,8 +2,8 @@
 import kotlin.test.*
 
 fun box(): String {
-    val sb = StringBuilder("1234")
-    val result = StringBuilder()
+    konst sb = StringBuilder("1234")
+    konst result = StringBuilder()
     for (c in sb) {
         sb.clear()
         result.append(c)

@@ -5,7 +5,7 @@ import Outer.Nested
 
 class Param
 
-open class Base(val param: Param)
+open class Base(konst param: Param)
 
 class Outer(param: Param) : Base(param) {
     class Nested(param: Param) : Base(param)

@@ -7,7 +7,7 @@ class MyCollection<E> : Collection<E> {
         override fun next(): E = TODO()
     }
 
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: E): Boolean = TODO()
     override fun containsAll(elements: Collection<E>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()

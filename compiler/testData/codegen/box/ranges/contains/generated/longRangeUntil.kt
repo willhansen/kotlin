@@ -6,33 +6,33 @@
 
 
 
-val range0 = 1L..<3L
-val range1 = 3L..<1L
+konst range0 = 1L..<3L
+konst range1 = 3L..<1L
 
-val element0 = (-1).toByte()
-val element1 = (-1).toShort()
-val element2 = -1
-val element3 = -1L
-val element4 = 0.toByte()
-val element5 = 0.toShort()
-val element6 = 0
-val element7 = 0L
-val element8 = 1.toByte()
-val element9 = 1.toShort()
-val element10 = 1
-val element11 = 1L
-val element12 = 2.toByte()
-val element13 = 2.toShort()
-val element14 = 2
-val element15 = 2L
-val element16 = 3.toByte()
-val element17 = 3.toShort()
-val element18 = 3
-val element19 = 3L
-val element20 = 4.toByte()
-val element21 = 4.toShort()
-val element22 = 4
-val element23 = 4L
+konst element0 = (-1).toByte()
+konst element1 = (-1).toShort()
+konst element2 = -1
+konst element3 = -1L
+konst element4 = 0.toByte()
+konst element5 = 0.toShort()
+konst element6 = 0
+konst element7 = 0L
+konst element8 = 1.toByte()
+konst element9 = 1.toShort()
+konst element10 = 1
+konst element11 = 1L
+konst element12 = 2.toByte()
+konst element13 = 2.toShort()
+konst element14 = 2
+konst element15 = 2L
+konst element16 = 3.toByte()
+konst element17 = 3.toShort()
+konst element18 = 3
+konst element19 = 3L
+konst element20 = 4.toByte()
+konst element21 = 4.toShort()
+konst element22 = 4
+konst element23 = 4L
 
 fun box(): String {
     testR0xE0()

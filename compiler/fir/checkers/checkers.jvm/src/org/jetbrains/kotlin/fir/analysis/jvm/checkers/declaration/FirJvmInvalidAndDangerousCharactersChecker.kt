@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirBasicDeclaratio
 import org.jetbrains.kotlin.fir.analysis.jvm.FirJvmNamesChecker
 import org.jetbrains.kotlin.fir.declarations.*
 
-object FirJvmInvalidAndDangerousCharactersChecker : FirBasicDeclarationChecker() {
+object FirJvmInkonstidAndDangerousCharactersChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = declaration.source
+        konst source = declaration.source
         when (declaration) {
             is FirRegularClass -> FirJvmNamesChecker.checkNameAndReport(declaration.name, source, context, reporter)
             is FirSimpleFunction -> FirJvmNamesChecker.checkNameAndReport(declaration.name, source, context, reporter)

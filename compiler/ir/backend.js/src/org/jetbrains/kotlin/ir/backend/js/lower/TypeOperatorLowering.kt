@@ -25,48 +25,48 @@ import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
-class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
-    private val unit = context.irBuiltIns.unitType
-    private val unitValue get() = JsIrBuilder.buildGetObjectValue(unit, unit.classifierOrFail as IrClassSymbol)
+class TypeOperatorLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
+    private konst unit = context.irBuiltIns.unitType
+    private konst unitValue get() = JsIrBuilder.buildGetObjectValue(unit, unit.classifierOrFail as IrClassSymbol)
 
-    private val lit24 get() = JsIrBuilder.buildInt(context.irBuiltIns.intType, 24)
-    private val lit16 get() = JsIrBuilder.buildInt(context.irBuiltIns.intType, 16)
+    private konst lit24 get() = JsIrBuilder.buildInt(context.irBuiltIns.intType, 24)
+    private konst lit16 get() = JsIrBuilder.buildInt(context.irBuiltIns.intType, 16)
 
-    private val byteMask get() = JsIrBuilder.buildInt(context.irBuiltIns.intType, 0xFF)
-    private val shortMask get() = JsIrBuilder.buildInt(context.irBuiltIns.intType, 0xFFFF)
+    private konst byteMask get() = JsIrBuilder.buildInt(context.irBuiltIns.intType, 0xFF)
+    private konst shortMask get() = JsIrBuilder.buildInt(context.irBuiltIns.intType, 0xFFFF)
 
-    private val calculator = JsIrArithBuilder(context)
+    private konst calculator = JsIrArithBuilder(context)
 
-    private val devMode = context.devMode
+    private konst devMode = context.devMode
 
     //NOTE: Should we define JS-own functions similar to current implementation?
-    private val throwCCE = context.ir.symbols.throwTypeCastException
-    private val throwNPE = context.ir.symbols.throwNullPointerException
+    private konst throwCCE = context.ir.symbols.throwTypeCastException
+    private konst throwNPE = context.ir.symbols.throwNullPointerException
 
-    private val eqeq = context.irBuiltIns.eqeqSymbol
+    private konst eqeq = context.irBuiltIns.eqeqSymbol
 
-    private val isInterfaceSymbol get() = context.intrinsics.isInterfaceSymbol
-    private val isArraySymbol get() = context.intrinsics.isArraySymbol
-    private val isSuspendFunctionSymbol = context.intrinsics.isSuspendFunctionSymbol
+    private konst isInterfaceSymbol get() = context.intrinsics.isInterfaceSymbol
+    private konst isArraySymbol get() = context.intrinsics.isArraySymbol
+    private konst isSuspendFunctionSymbol = context.intrinsics.isSuspendFunctionSymbol
 
-    //    private val isCharSymbol get() = context.intrinsics.isCharSymbol
-    private val isObjectSymbol get() = context.intrinsics.isObjectSymbol
+    //    private konst isCharSymbol get() = context.intrinsics.isCharSymbol
+    private konst isObjectSymbol get() = context.intrinsics.isObjectSymbol
 
-    private val instanceOfIntrinsicSymbol = context.intrinsics.jsInstanceOf
-    private val isExternalObjectSymbol = context.intrinsics.isExternalObject
-    private val typeOfIntrinsicSymbol = context.intrinsics.jsTypeOf
-    private val jsClassIntrinsicSymbol = context.intrinsics.jsClass
+    private konst instanceOfIntrinsicSymbol = context.intrinsics.jsInstanceOf
+    private konst isExternalObjectSymbol = context.intrinsics.isExternalObject
+    private konst typeOfIntrinsicSymbol = context.intrinsics.jsTypeOf
+    private konst jsClassIntrinsicSymbol = context.intrinsics.jsClass
 
-    private val stringMarker get() = JsIrBuilder.buildString(context.irBuiltIns.stringType, "string")
-    private val booleanMarker get() = JsIrBuilder.buildString(context.irBuiltIns.stringType, "boolean")
-    private val functionMarker get() = JsIrBuilder.buildString(context.irBuiltIns.stringType, "function")
-    private val numberMarker get() = JsIrBuilder.buildString(context.irBuiltIns.stringType, "number")
+    private konst stringMarker get() = JsIrBuilder.buildString(context.irBuiltIns.stringType, "string")
+    private konst booleanMarker get() = JsIrBuilder.buildString(context.irBuiltIns.stringType, "boolean")
+    private konst functionMarker get() = JsIrBuilder.buildString(context.irBuiltIns.stringType, "function")
+    private konst numberMarker get() = JsIrBuilder.buildString(context.irBuiltIns.stringType, "number")
 
-    private val litTrue: IrExpression get() = JsIrBuilder.buildBoolean(context.irBuiltIns.booleanType, true)
-    private val litFalse: IrExpression get() = JsIrBuilder.buildBoolean(context.irBuiltIns.booleanType, false)
-    private val litNull: IrExpression get() = JsIrBuilder.buildNull(context.irBuiltIns.nothingNType)
+    private konst litTrue: IrExpression get() = JsIrBuilder.buildBoolean(context.irBuiltIns.booleanType, true)
+    private konst litFalse: IrExpression get() = JsIrBuilder.buildBoolean(context.irBuiltIns.booleanType, false)
+    private konst litNull: IrExpression get() = JsIrBuilder.buildNull(context.irBuiltIns.nothingNType)
 
-    private val icUtils = context.inlineClassesUtils
+    private konst icUtils = context.inlineClassesUtils
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildren(object : IrElementTransformer<IrDeclarationParent> {
@@ -95,10 +95,10 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
                 assert(expression.operator == IrTypeOperator.IMPLICIT_NOTNULL)
                 assert(expression.typeOperand.isNullable() xor expression.argument.type.isNullable())
 
-                val newStatements = mutableListOf<IrStatement>()
+                konst newStatements = mutableListOf<IrStatement>()
 
-                val argument = cacheValue(expression.argument, newStatements, declaration)
-                val irNullCheck = nullCheck(argument())
+                konst argument = cacheValue(expression.argument, newStatements, declaration)
+                konst irNullCheck = nullCheck(argument())
 
                 newStatements += JsIrBuilder.buildIfElse(expression.typeOperand, irNullCheck, JsIrBuilder.buildCall(throwNPE), argument())
 
@@ -122,18 +122,18 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
                 declaration: IrDeclarationParent,
                 isSafe: Boolean
             ): IrExpression {
-                val operator = expression.operator
+                konst operator = expression.operator
                 assert(operator == IrTypeOperator.CAST || operator == IrTypeOperator.SAFE_CAST || operator == IrTypeOperator.IMPLICIT_CAST || operator == IrTypeOperator.IMPLICIT_DYNAMIC_CAST)
                 assert((operator == IrTypeOperator.SAFE_CAST) == isSafe)
 
-                val toType = expression.typeOperand
-                val failResult = if (isSafe) litNull else JsIrBuilder.buildCall(throwCCE)
+                konst toType = expression.typeOperand
+                konst failResult = if (isSafe) litNull else JsIrBuilder.buildCall(throwCCE)
 
-                val newStatements = mutableListOf<IrStatement>()
+                konst newStatements = mutableListOf<IrStatement>()
 
-                val argument = cacheValue(expression.argument, newStatements, declaration)
-                val check = generateTypeCheck(argument, toType)
-                val castedValue = expression.wrapWithUnsafeCast(argument())
+                konst argument = cacheValue(expression.argument, newStatements, declaration)
+                konst check = generateTypeCheck(argument, toType)
+                konst castedValue = expression.wrapWithUnsafeCast(argument())
 
                 newStatements += JsIrBuilder.buildIfElse(expression.type, check, castedValue, failResult)
 
@@ -177,12 +177,12 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
                 assert(expression.operator == IrTypeOperator.INSTANCEOF || expression.operator == IrTypeOperator.NOT_INSTANCEOF)
                 assert((expression.operator == IrTypeOperator.NOT_INSTANCEOF) == inverted)
 
-                val toType = expression.typeOperand
-                val newStatements = mutableListOf<IrStatement>()
+                konst toType = expression.typeOperand
+                konst newStatements = mutableListOf<IrStatement>()
 
-                val argument = cacheValue(expression.argument, newStatements, declaration)
-                val check = generateTypeCheck(argument, toType)
-                val result = if (inverted) calculator.not(check) else check
+                konst argument = cacheValue(expression.argument, newStatements, declaration)
+                konst check = generateTypeCheck(argument, toType)
+                konst result = if (inverted) calculator.not(check) else check
                 newStatements += result
                 return IrCompositeImpl(
                     expression.startOffset,
@@ -193,20 +193,20 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
                 )
             }
 
-            private fun nullCheck(value: IrExpression) = JsIrBuilder.buildCall(eqeq).apply {
-                putValueArgument(0, value)
+            private fun nullCheck(konstue: IrExpression) = JsIrBuilder.buildCall(eqeq).apply {
+                putValueArgument(0, konstue)
                 putValueArgument(1, litNull)
             }
 
             private fun cacheValue(
-                value: IrExpression,
+                konstue: IrExpression,
                 newStatements: MutableList<IrStatement>,
                 declaration: IrDeclarationParent
             ): () -> IrExpression {
-                return if (value.isPure(anyVariable = true, checkFields = false)) {
-                    { value.deepCopyWithSymbols() }
+                return if (konstue.isPure(anyVariable = true, checkFields = false)) {
+                    { konstue.deepCopyWithSymbols() }
                 } else {
-                    val varDeclaration = JsIrBuilder.buildVar(value.type, declaration, initializer = value)
+                    konst varDeclaration = JsIrBuilder.buildVar(konstue.type, declaration, initializer = konstue)
                     newStatements += varDeclaration
                     { JsIrBuilder.buildGetValue(varDeclaration.symbol) }
                 }
@@ -230,12 +230,12 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
              * Note: advanced check is performed when casting to primitive types, array types, function types, or interfaces.
              */
             private fun generateTypeCheck(argument: () -> IrExpression, toType: IrType): IrExpression {
-                val toNotNullable = toType.makeNotNull()
-                val argumentInstance = argument()
-                val instanceCheck = generateTypeCheckNonNull(argumentInstance, toNotNullable)
-                val isFromNullable = argumentInstance.type.isNullable()
-                val isToNullable = toType.isNullable()
-                val isNativeCheck = !advancedCheckRequired(toNotNullable)
+                konst toNotNullable = toType.makeNotNull()
+                konst argumentInstance = argument()
+                konst instanceCheck = generateTypeCheckNonNull(argumentInstance, toNotNullable)
+                konst isFromNullable = argumentInstance.type.isNullable()
+                konst isToNullable = toType.isNullable()
+                konst isNativeCheck = !advancedCheckRequired(toNotNullable)
 
                 return when {
                     !isFromNullable -> instanceCheck // ! -> *
@@ -281,22 +281,22 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
             }
 
             private fun generateTypeCheckWithTypeParameter(argument: IrExpression, toType: IrType): IrExpression {
-                val typeParameterSymbol =
+                konst typeParameterSymbol =
                     (toType.classifierOrNull as? IrTypeParameterSymbol)
                         ?: compilationException(
                             "expected type parameter, but $toType",
                             argument
                         )
 
-                val typeParameter = typeParameterSymbol.owner
+                konst typeParameter = typeParameterSymbol.owner
 
                 // TODO either remove functions with reified type parameters or support this case
                 // assert(!typeParameter.isReified) { "reified parameters have to be lowered before" }
 
                 return typeParameter.superTypes.fold<IrType, IrExpression?>(null) { r, t ->
-                    val copy = argument.shallowCopyOrNull()
+                    konst copy = argument.shallowCopyOrNull()
                         ?: argument.deepCopyWithSymbols()
-                    val check = generateTypeCheckNonNull(copy, t.makeNotNull())
+                    konst check = generateTypeCheckNonNull(copy, t.makeNotNull())
 
                     if (r == null) {
                         check
@@ -310,9 +310,9 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
 //                JsIrBuilder.buildCall(isCharSymbol).apply { dispatchReceiver = argument }
 
             private fun generateSuspendFunctionCheck(argument: IrExpression, toType: IrType): IrExpression {
-                val arity = (toType.classifierOrFail.owner as IrClass).typeParameters.size - 1 // drop return type
+                konst arity = (toType.classifierOrFail.owner as IrClass).typeParameters.size - 1 // drop return type
 
-                val irBuiltIns = context.irBuiltIns
+                konst irBuiltIns = context.irBuiltIns
                 return JsIrBuilder.buildCall(isSuspendFunctionSymbol, irBuiltIns.booleanType).apply {
                     putValueArgument(0, argument)
                     putValueArgument(1, JsIrBuilder.buildInt(irBuiltIns.intType, arity))
@@ -320,14 +320,14 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
             }
 
             private fun generateTypeOfCheck(argument: IrExpression, toType: IrType): IrExpression {
-                val marker = when {
+                konst marker = when {
                     toType.isFunctionOrKFunction() -> functionMarker
                     toType.isBoolean() -> booleanMarker
                     toType.isString() -> stringMarker
                     else -> numberMarker
                 }
 
-                val typeOf = JsIrBuilder.buildCall(typeOfIntrinsicSymbol).apply { putValueArgument(0, argument) }
+                konst typeOf = JsIrBuilder.buildCall(typeOfIntrinsicSymbol).apply { putValueArgument(0, argument) }
                 return JsIrBuilder.buildCall(eqeq).apply {
                     putValueArgument(0, typeOf)
                     putValueArgument(1, marker)
@@ -350,12 +350,12 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
                 JsIrBuilder.buildCall(context.intrinsics.isCharSequenceSymbol).apply { putValueArgument(0, argument) }
 
             private fun generatePrimitiveArrayTypeCheck(argument: IrExpression, toType: IrType): IrExpression {
-                val f = context.intrinsics.isPrimitiveArray[toType.getPrimitiveArrayElementType()]!!
+                konst f = context.intrinsics.isPrimitiveArray[toType.getPrimitiveArrayElementType()]!!
                 return JsIrBuilder.buildCall(f).apply { putValueArgument(0, argument) }
             }
 
             private fun generateInterfaceCheck(argument: IrExpression, toType: IrType): IrExpression {
-                val irType = wrapTypeReference(toType)
+                konst irType = wrapTypeReference(toType)
                 return JsIrBuilder.buildCall(isInterfaceSymbol).apply {
                     putValueArgument(0, argument)
                     putValueArgument(1, irType)
@@ -363,7 +363,7 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
             }
 
             private fun generateIsExternalObject(argument: IrExpression, toType: IrType): IrExpression {
-                val irType = wrapTypeReference(toType)
+                konst irType = wrapTypeReference(toType)
                 return JsIrBuilder.buildCall(isExternalObjectSymbol).apply {
                     putValueArgument(0, argument)
                     putValueArgument(1, irType)
@@ -371,7 +371,7 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
             }
 
             private fun generateNativeInstanceOf(argument: IrExpression, toType: IrType): IrExpression {
-                val irType = wrapTypeReference(toType)
+                konst irType = wrapTypeReference(toType)
                 return JsIrBuilder.buildCall(instanceOfIntrinsicSymbol).apply {
                     putValueArgument(0, argument)
                     putValueArgument(1, irType)
@@ -387,17 +387,17 @@ class TypeOperatorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
                 assert(expression.operator === IrTypeOperator.IMPLICIT_INTEGER_COERCION)
                 assert(expression.argument.type.isInt())
 
-                val isNullable = expression.argument.type.isNullable()
-                val toType = expression.typeOperand
+                konst isNullable = expression.argument.type.isNullable()
+                konst toType = expression.typeOperand
 
                 fun maskOp(arg: IrExpression, mask: IrExpression, shift: IrConst<*>) = calculator.run {
                     shr(shl(and(arg, mask), shift), shift.shallowCopy())
                 }
 
-                val newStatements = mutableListOf<IrStatement>()
-                val argument = cacheValue(expression.argument, newStatements, declaration)
+                konst newStatements = mutableListOf<IrStatement>()
+                konst argument = cacheValue(expression.argument, newStatements, declaration)
 
-                val casted = when {
+                konst casted = when {
                     toType.isByte() -> maskOp(argument(), byteMask, lit24)
                     toType.isShort() -> maskOp(argument(), shortMask, lit16)
                     toType.isLong() -> JsIrBuilder.buildCall(context.intrinsics.jsToLong).apply {

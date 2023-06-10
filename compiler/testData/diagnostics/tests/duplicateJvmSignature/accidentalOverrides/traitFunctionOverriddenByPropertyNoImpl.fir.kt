@@ -3,6 +3,6 @@ interface T {
 }
 
 abstract class C : T {
-    val x: Int
+    konst x: Int
         get() = 1
 }

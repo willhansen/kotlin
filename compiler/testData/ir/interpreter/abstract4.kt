@@ -21,7 +21,7 @@ abstract class ComplexIterator(var complexStart: Int) : BaseIterator(complexStar
 }
 
 @CompileTimeCalculation
-class ImplementIterator constructor(val i: Int) : ComplexIterator(i) {
+class ImplementIterator constructor(konst i: Int) : ComplexIterator(i) {
     override fun complex(): Int {
         return complexStart
     }
@@ -34,4 +34,4 @@ class ImplementIterator constructor(val i: Int) : ComplexIterator(i) {
 @CompileTimeCalculation
 fun getIterator(i: Int): ComplexIterator = ImplementIterator(i)
 
-const val next = <!EVALUATED: `31`!>getIterator(10).complexNext()<!>
+const konst next = <!EVALUATED: `31`!>getIterator(10).complexNext()<!>

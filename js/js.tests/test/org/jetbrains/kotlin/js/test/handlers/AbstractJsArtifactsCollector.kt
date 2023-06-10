@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.configuration.JsEnvironmentConfigurator
 
 abstract class AbstractJsArtifactsCollector(testServices: TestServices) : JsBinaryArtifactHandler(testServices) {
-    val modulesToArtifact = mutableMapOf<TestModule, BinaryArtifacts.Js>()
+    konst modulesToArtifact = mutableMapOf<TestModule, BinaryArtifacts.Js>()
 
     override fun processModule(module: TestModule, info: BinaryArtifacts.Js) {
         if (module.name.endsWith(JsEnvironmentConfigurator.OLD_MODULE_SUFFIX)) return

@@ -27,12 +27,12 @@ import kotlin.collections.set
 
 // `doRemove` means should expect-declaration be removed from IR
 @OptIn(ObsoleteDescriptorBasedAPI::class)
-open class ExpectDeclarationRemover(val symbolTable: ReferenceSymbolTable, private val doRemove: Boolean)
+open class ExpectDeclarationRemover(konst symbolTable: ReferenceSymbolTable, private konst doRemove: Boolean)
     : ExpectSymbolTransformer(), FileLoweringPass {
 
     constructor(context: BackendContext) : this(context.ir.symbols.externalSymbolTable, true)
 
-    private val typeParameterSubstitutionMap = mutableMapOf<Pair<IrFunction, IrFunction>, Map<IrTypeParameter, IrTypeParameter>>()
+    private konst typeParameterSubstitutionMap = mutableMapOf<Pair<IrFunction, IrFunction>, Map<IrTypeParameter, IrTypeParameter>>()
 
     override fun lower(irFile: IrFile) {
         visitFile(irFile)
@@ -69,11 +69,11 @@ open class ExpectDeclarationRemover(val symbolTable: ReferenceSymbolTable, priva
     }
 
     override fun getActualProperty(descriptor: PropertyDescriptor): ActualPropertyResult? {
-        val newSymbol = symbolTable.referenceProperty(
+        konst newSymbol = symbolTable.referenceProperty(
             descriptor.findActualForExpect() as? PropertyDescriptor ?: return null
         )
-        val newGetter = newSymbol.descriptor.getter?.let { symbolTable.referenceSimpleFunction(it) }
-        val newSetter = newSymbol.descriptor.setter?.let { symbolTable.referenceSimpleFunction(it) }
+        konst newGetter = newSymbol.descriptor.getter?.let { symbolTable.referenceSimpleFunction(it) }
+        konst newSetter = newSymbol.descriptor.setter?.let { symbolTable.referenceSimpleFunction(it) }
         return ActualPropertyResult(newSymbol, newGetter, newSetter)
     }
 
@@ -110,13 +110,13 @@ open class ExpectDeclarationRemover(val symbolTable: ReferenceSymbolTable, priva
     }
 
     private fun tryCopyDefaultArguments(declaration: IrValueParameter) {
-        // Keep actual default value if present. They are generally not allowed but can be suppressed with
+        // Keep actual default konstue if present. They are generally not allowed but can be suppressed with
         // @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
         if (declaration.defaultValue != null) {
             return
         }
 
-        val function = declaration.parent as? IrFunction ?: return
+        konst function = declaration.parent as? IrFunction ?: return
 
         if (function is IrConstructor) {
             if (isOptionalAnnotationClass(function.constructedClass)) {
@@ -126,26 +126,26 @@ open class ExpectDeclarationRemover(val symbolTable: ReferenceSymbolTable, priva
 
         if (!function.descriptor.isActual) return
 
-        val index = declaration.index
+        konst index = declaration.index
 
         if (index < 0) return
 
-        assert(function.valueParameters[index] == declaration)
+        assert(function.konstueParameters[index] == declaration)
 
         // If the containing declaration is an `expect class` that matches an `actual typealias`,
         // the `actual fun` or `actual constructor` for this may be in a different module.
         // Nothing we can do with those.
         // TODO they may not actually have the defaults though -- may be a frontend bug.
-        val expectFunction =
+        konst expectFunction =
             (function.descriptor.findExpectForActual() as? FunctionDescriptor)?.let { symbolTable.referenceFunction(it).owner }
                 ?: return
 
-        val defaultValue = expectFunction.valueParameters[index].defaultValue ?: return
+        konst defaultValue = expectFunction.konstueParameters[index].defaultValue ?: return
 
-        val expectToActual = expectFunction to function
+        konst expectToActual = expectFunction to function
         if (expectToActual !in typeParameterSubstitutionMap) {
-            val functionTypeParameters = extractTypeParameters(function)
-            val expectFunctionTypeParameters = extractTypeParameters(expectFunction)
+            konst functionTypeParameters = extractTypeParameters(function)
+            konst expectFunctionTypeParameters = extractTypeParameters(expectFunction)
 
             expectFunctionTypeParameters.zip(functionTypeParameters).let { typeParametersMapping ->
                 typeParameterSubstitutionMap[expectToActual] = typeParametersMapping.toMap()

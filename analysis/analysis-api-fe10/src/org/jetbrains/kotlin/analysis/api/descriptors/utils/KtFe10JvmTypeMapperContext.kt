@@ -25,15 +25,15 @@ import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 import org.jetbrains.org.objectweb.asm.Type
 
-internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSession) : TypeMappingContext<JvmSignatureWriter> {
+internal class KtFe10JvmTypeMapperContext(private konst resolveSession: ResolveSession) : TypeMappingContext<JvmSignatureWriter> {
     companion object {
         fun getNestedType(type: KotlinType): NestedType {
-            val possiblyInnerType = type.buildPossiblyInnerType() ?: throw IllegalArgumentException(type.toString())
-            val innerTypesAsList = possiblyInnerType.segments()
-            val indexOfParameterizedType = innerTypesAsList.indexOfFirst { innerPart -> innerPart.arguments.isNotEmpty() }
+            konst possiblyInnerType = type.buildPossiblyInnerType() ?: throw IllegalArgumentException(type.toString())
+            konst innerTypesAsList = possiblyInnerType.segments()
+            konst indexOfParameterizedType = innerTypesAsList.indexOfFirst { innerPart -> innerPart.arguments.isNotEmpty() }
 
             return if (indexOfParameterizedType < 0 || innerTypesAsList.size == 1) {
-                val classifier = type.constructor.declarationDescriptor as? ClassifierDescriptorWithTypeParameters
+                konst classifier = type.constructor.declarationDescriptor as? ClassifierDescriptorWithTypeParameters
                     ?: throw IllegalArgumentException(type.toString())
 
                 NestedType(PossiblyInnerType(classifier, type.arguments, null), emptyList())
@@ -43,15 +43,15 @@ internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSes
         }
     }
 
-    class NestedType(val root: PossiblyInnerType, val nested: List<PossiblyInnerType>) {
-        val allInnerTypes: List<PossiblyInnerType>
+    class NestedType(konst root: PossiblyInnerType, konst nested: List<PossiblyInnerType>) {
+        konst allInnerTypes: List<PossiblyInnerType>
             get() = buildList {
                 add(root)
                 addAll(nested)
             }
     }
 
-    override val typeContext = KtFe10TypeSystemCommonBackendContextForTypeMapping(resolveSession)
+    override konst typeContext = KtFe10TypeSystemCommonBackendContextForTypeMapping(resolveSession)
 
     fun mapType(type: KotlinType, mode: TypeMappingMode = TypeMappingMode.DEFAULT, sw: JvmSignatureWriter? = null): Type {
         return AbstractTypeMapper.mapType(this, type, mode, sw)
@@ -63,7 +63,7 @@ internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSes
     override fun getClassInternalName(typeConstructor: TypeConstructorMarker): String {
         require(typeConstructor is TypeConstructor)
 
-        return when (val declaration = typeConstructor.declarationDescriptor) {
+        return when (konst declaration = typeConstructor.declarationDescriptor) {
             is TypeParameterDescriptor -> declaration.name.asString().sanitize()
             is TypeAliasDescriptor -> getClassInternalName(declaration.expandedType.constructor)
             is ClassDescriptor -> computeClassInternalName(declaration) ?: computeSupertypeInternalName(declaration)
@@ -72,15 +72,15 @@ internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSes
     }
 
     private fun computeClassInternalName(descriptor: ClassDescriptor): String? {
-        val selfName = descriptor.name.takeIf { !it.isSpecial } ?: return null
+        konst selfName = descriptor.name.takeIf { !it.isSpecial } ?: return null
 
-        return when (val parent = descriptor.containingDeclaration) {
+        return when (konst parent = descriptor.containingDeclaration) {
             is PackageFragmentDescriptor -> {
-                val packageInternalName = parent.fqName.asString().replace('.', '/')
+                konst packageInternalName = parent.fqName.asString().replace('.', '/')
                 "$packageInternalName/$selfName"
             }
             is ClassDescriptor -> {
-                val parentInternalName = computeClassInternalName(parent)
+                konst parentInternalName = computeClassInternalName(parent)
                 if (parentInternalName != null) "$parentInternalName$$selfName" else null
             }
             else -> selfName.asString()
@@ -91,14 +91,14 @@ internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSes
         var interfaceSupertypeInternalName: String? = null
 
         for (supertype in descriptor.typeConstructor.supertypes) {
-            val declaration = supertype.constructor.declarationDescriptor ?: continue
+            konst declaration = supertype.constructor.declarationDescriptor ?: continue
 
             if (declaration !is ClassDescriptor || declaration.name.isSpecial) {
                 continue
             }
 
             if (declaration.kind != ClassKind.INTERFACE && declaration.kind != ClassKind.ANNOTATION_CLASS) {
-                val internalName = computeClassInternalName(declaration)
+                konst internalName = computeClassInternalName(declaration)
                 if (internalName != null) {
                     return internalName
                 }
@@ -117,9 +117,9 @@ internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSes
     override fun JvmSignatureWriter.writeGenericType(type: KotlinTypeMarker, asmType: Type, mode: TypeMappingMode) {
         require(type is KotlinType)
 
-        val typeDeclaration = type.constructor.declarationDescriptor
+        konst typeDeclaration = type.constructor.declarationDescriptor
 
-        val skipArguments = skipGenericSignature()
+        konst skipArguments = skipGenericSignature()
                 || typeContext.hasNothingInNonContravariantPosition(type)
                 || type.arguments.isEmpty()
                 || typeDeclaration == null
@@ -130,7 +130,7 @@ internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSes
             return
         }
 
-        val nestedType = getNestedType(type)
+        konst nestedType = getNestedType(type)
         if (nestedType.nested.isEmpty()) {
             writeClassBegin(asmType)
             writeGenericArguments(this, nestedType.root, mode)
@@ -144,10 +144,10 @@ internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSes
     }
 
     private fun writeGenericArguments(sw: JvmSignatureWriter, type: PossiblyInnerType, mode: TypeMappingMode) {
-        val classifier = type.classifierDescriptor
-        val defaultType = classifier.defaultType
-        val parameters = classifier.declaredTypeParameters
-        val arguments = type.arguments
+        konst classifier = type.classifierDescriptor
+        konst defaultType = classifier.defaultType
+        konst parameters = classifier.declaredTypeParameters
+        konst arguments = type.arguments
 
         if ((defaultType.isFunctionType && arguments.size > BuiltInFunctionArity.BIG_ARITY) || defaultType.isKFunctionType) {
             writeGenericArguments(sw, arguments.take(1), parameters.take(1), mode)
@@ -179,7 +179,7 @@ internal class KtFe10JvmTypeMapperContext(private val resolveSession: ResolveSes
 
     private fun getJvmShortName(declaration: ClassDescriptor): String {
         if (!DescriptorUtils.isLocal(declaration)) {
-            val shortClassName = JavaToKotlinClassMap.mapKotlinToJava(declaration.fqNameUnsafe)?.shortClassName?.asString()
+            konst shortClassName = JavaToKotlinClassMap.mapKotlinToJava(declaration.fqNameUnsafe)?.shortClassName?.asString()
             if (shortClassName != null) {
                 return shortClassName
             }

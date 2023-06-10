@@ -4,7 +4,7 @@
 package a
 
 class Box() {
-    internal fun result(value: String = "OK"): String = value
+    internal fun result(konstue: String = "OK"): String = konstue
 }
 
 // MODULE: main()(lib)

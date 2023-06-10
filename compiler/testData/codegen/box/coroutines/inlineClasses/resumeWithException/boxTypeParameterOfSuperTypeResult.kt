@@ -23,8 +23,8 @@ fun builder(c: suspend () -> Unit) {
 
 fun box(): String {
     builder {
-        val impl = SuspendImpl()
-        val implResult = impl.execute()
+        konst impl = SuspendImpl()
+        konst implResult = impl.execute()
         implResult.getOrThrow()
     }
     c?.resumeWithException(IllegalStateException("OK"))
@@ -33,8 +33,8 @@ fun box(): String {
 
     res = "FAIL 2"
     builder {
-        val iface: SuspendInterface = SuspendImpl()
-        val result = iface.execute()
+        konst iface: SuspendInterface = SuspendImpl()
+        konst result = iface.execute()
         result.getOrThrow()
     }
     c?.resumeWithException(IllegalStateException("OK"))

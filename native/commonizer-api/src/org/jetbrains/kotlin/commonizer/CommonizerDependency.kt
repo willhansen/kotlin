@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.commonizer
 import java.io.File
 
 public sealed class CommonizerDependency {
-    public abstract val file: File
+    public abstract konst file: File
 
     final override fun toString(): String {
         return this.identityString
@@ -16,15 +16,15 @@ public sealed class CommonizerDependency {
 }
 
 public data class TargetedCommonizerDependency(
-    public val target: CommonizerTarget,
-    public override val file: File
+    public konst target: CommonizerTarget,
+    public override konst file: File
 ) : CommonizerDependency()
 
 public data class NonTargetedCommonizerDependency(
-    public override val file: File
+    public override konst file: File
 ) : CommonizerDependency()
 
-public val CommonizerDependency.identityString: String
+public konst CommonizerDependency.identityString: String
     get() = when (this) {
         is NonTargetedCommonizerDependency -> this.file.canonicalPath
         is TargetedCommonizerDependency -> "${target.identityString}::${file.canonicalPath}"
@@ -32,7 +32,7 @@ public val CommonizerDependency.identityString: String
 
 
 public fun parseCommonizerDependency(identityString: String): CommonizerDependency {
-    val split = identityString.split("::", limit = 2)
+    konst split = identityString.split("::", limit = 2)
     if (split.size == 2) {
         parseTargetedCommonizerDependencyOrNull(split[0], split[1])?.let { return it }
     }

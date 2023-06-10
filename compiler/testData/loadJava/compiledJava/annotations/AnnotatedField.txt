@@ -2,13 +2,13 @@ package test
 
 public open class AnnotatedField {
     public constructor AnnotatedField()
-    @test.AnnotatedField.Anno(value = "member") public final val y: kotlin.Int = 0
+    @test.AnnotatedField.Anno(konstue = "member") public final konst y: kotlin.Int = 0
 
     public final annotation class Anno : kotlin.Annotation {
-        public constructor Anno(/*0*/ value: kotlin.String)
-        public final val value: kotlin.String
+        public constructor Anno(/*0*/ konstue: kotlin.String)
+        public final konst konstue: kotlin.String
     }
 
     // Static members
-    @test.AnnotatedField.Anno(value = "static") public const final val x: kotlin.Int = 0
+    @test.AnnotatedField.Anno(konstue = "static") public const final konst x: kotlin.Int = 0
 }

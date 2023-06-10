@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.utils.ResolvedDependencyVersion
 
 class KonanUserVisibleIrModulesSupport(
         externalDependenciesLoader: ExternalDependenciesLoader,
-        private val konanKlibDir: File
+        private konst konanKlibDir: File
 ) : UserVisibleIrModulesSupport(externalDependenciesLoader) {
     override fun getUserVisibleModules(deserializers: Collection<IrModuleDeserializer>): Map<ResolvedDependencyId, ResolvedDependency> {
         return compressedModules(deserializers)
@@ -30,24 +30,24 @@ class KonanUserVisibleIrModulesSupport(
             deserializers: Collection<IrModuleDeserializer>,
             excludedModuleIds: Set<ResolvedDependencyId>
     ): Map<ResolvedDependencyId, ResolvedDependency> {
-        val moduleToCompilerVersion: MutableMap<ResolvedDependencyId, ResolvedDependencyVersion> = mutableMapOf()
-        val kotlinNativeBundledLibraries: MutableSet<ResolvedDependencyId> = mutableSetOf()
+        konst moduleToCompilerVersion: MutableMap<ResolvedDependencyId, ResolvedDependencyVersion> = mutableMapOf()
+        konst kotlinNativeBundledLibraries: MutableSet<ResolvedDependencyId> = mutableSetOf()
 
         // Transform deserializers to [ModuleWithUninitializedDependencies]s.
-        val modules: Map<ResolvedDependencyId, ModuleWithUninitializedDependencies> = deserializers.mapNotNull { deserializer ->
-            val library: KotlinLibrary = deserializer.asDeserializedKotlinLibrary ?: return@mapNotNull null
+        konst modules: Map<ResolvedDependencyId, ModuleWithUninitializedDependencies> = deserializers.mapNotNull { deserializer ->
+            konst library: KotlinLibrary = deserializer.asDeserializedKotlinLibrary ?: return@mapNotNull null
 
-            val moduleId = getUserVisibleModuleId(deserializer)
+            konst moduleId = getUserVisibleModuleId(deserializer)
             if (moduleId in excludedModuleIds) return@mapNotNull null
 
-            val compilerVersion: ResolvedDependencyVersion = library.compilerVersion
-            val isDefaultLibrary = library.isDefaultLibrary
+            konst compilerVersion: ResolvedDependencyVersion = library.compilerVersion
+            konst isDefaultLibrary = library.isDefaultLibrary
 
             // For default libraries the version is the same as the version of the compiler.
             // Note: Empty string means missing (unknown) version.
-            val libraryVersion: ResolvedDependencyVersion = if (isDefaultLibrary) compilerVersion else ResolvedDependencyVersion.EMPTY
+            konst libraryVersion: ResolvedDependencyVersion = if (isDefaultLibrary) compilerVersion else ResolvedDependencyVersion.EMPTY
 
-            val module = ResolvedDependency(
+            konst module = ResolvedDependency(
                     id = moduleId,
                     selectedVersion = libraryVersion,
                     requestedVersionsByIncomingDependencies = mutableMapOf(), // To be initialized in a separate pass below.
@@ -59,7 +59,7 @@ class KonanUserVisibleIrModulesSupport(
 
             // Don't rely on dependencies in IrModuleDeserializer. In Kotlin/Native each module depends on all other modules,
             // and this contradicts with the real module dependencies as written in KLIB manifest files.
-            val outgoingDependencyIds = library.unresolvedDependencies.mapNotNull { unresolvedDependency ->
+            konst outgoingDependencyIds = library.unresolvedDependencies.mapNotNull { unresolvedDependency ->
                 unresolvedDependency.moduleId.takeIf { it !in excludedModuleIds }
             }
 
@@ -68,9 +68,9 @@ class KonanUserVisibleIrModulesSupport(
 
         // Stamp dependencies.
         return modules.mapValues { (moduleId, moduleWithUninitializedDependencies) ->
-            val (module, outgoingDependencyIds) = moduleWithUninitializedDependencies
+            konst (module, outgoingDependencyIds) = moduleWithUninitializedDependencies
             outgoingDependencyIds.forEach { outgoingDependencyId ->
-                val outgoingDependencyModule = modules.getValue(outgoingDependencyId).module
+                konst outgoingDependencyModule = modules.getValue(outgoingDependencyId).module
                 if (outgoingDependencyId in kotlinNativeBundledLibraries) {
                     outgoingDependencyModule.requestedVersionsByIncomingDependencies[moduleId] = moduleToCompilerVersion.getValue(moduleId)
                 } else {
@@ -86,11 +86,11 @@ class KonanUserVisibleIrModulesSupport(
      * Instead, lets compress them into a single row and avoid excessive output.
      */
     private fun compressedModules(deserializers: Collection<IrModuleDeserializer>): Map<ResolvedDependencyId, ResolvedDependency> {
-        val compressedModules: MutableMap<ResolvedDependencyId, ResolvedDependency> = mergedModules(deserializers)
+        konst compressedModules: MutableMap<ResolvedDependencyId, ResolvedDependency> = mergedModules(deserializers)
 
         var platformLibrariesVersion: ResolvedDependencyVersion? = null // Must be the same version to succeed.
-        val platformLibraries: MutableList<ResolvedDependency> = mutableListOf() // All platform libraries to be patched.
-        val outgoingDependencyIds: MutableSet<ResolvedDependencyId> = mutableSetOf() // All outgoing dependencies from platform libraries.
+        konst platformLibraries: MutableList<ResolvedDependency> = mutableListOf() // All platform libraries to be patched.
+        konst outgoingDependencyIds: MutableSet<ResolvedDependencyId> = mutableSetOf() // All outgoing dependencies from platform libraries.
 
         for ((moduleId, module) in compressedModules) {
             if (moduleId.isKonanPlatformLibrary) {
@@ -119,8 +119,8 @@ class KonanUserVisibleIrModulesSupport(
         if (platformLibraries.isNotEmpty()) {
             platformLibraries.forEach { it.visibleAsFirstLevelDependency = false }
 
-            val compressedModuleId = ResolvedDependencyId("$KONAN_PLATFORM_LIBS_NAME_PREFIX* (${platformLibraries.size} libraries)")
-            val compressedModule = ResolvedDependency(
+            konst compressedModuleId = ResolvedDependencyId("$KONAN_PLATFORM_LIBS_NAME_PREFIX* (${platformLibraries.size} libraries)")
+            konst compressedModule = ResolvedDependency(
                     id = compressedModuleId,
                     selectedVersion = platformLibrariesVersion!!,
                     requestedVersionsByIncomingDependencies = mutableMapOf(sourceCodeModuleId to platformLibrariesVersion),
@@ -128,7 +128,7 @@ class KonanUserVisibleIrModulesSupport(
             )
 
             outgoingDependencyIds.forEach { outgoingDependencyId ->
-                val outgoingDependency = compressedModules.getValue(outgoingDependencyId)
+                konst outgoingDependency = compressedModules.getValue(outgoingDependencyId)
                 outgoingDependency.requestedVersionsByIncomingDependencies[compressedModuleId] = compressedModule.selectedVersion
             }
 
@@ -138,22 +138,22 @@ class KonanUserVisibleIrModulesSupport(
         return compressedModules
     }
 
-    private val KotlinLibrary.compilerVersion: ResolvedDependencyVersion
+    private konst KotlinLibrary.compilerVersion: ResolvedDependencyVersion
         get() = ResolvedDependencyVersion(versions.compilerVersion.orEmpty())
 
     // This is much safer check then KotlinLibrary.isDefault, which may return false even for "stdlib" when
     // Kotlin/Native compiler is running with "-nostdlib", "-no-endorsed-libs", "-no-default-libs" arguments.
-    private val KotlinLibrary.isDefaultLibrary: Boolean
+    private konst KotlinLibrary.isDefaultLibrary: Boolean
         get() = libraryFile.startsWith(konanKlibDir)
 
-    override val ResolvedDependencyId.isKotlinLibrary: Boolean
+    override konst ResolvedDependencyId.isKotlinLibrary: Boolean
         get() = uniqueNames.any { uniqueName -> uniqueName == KONAN_STDLIB_NAME || uniqueName.startsWith(KOTLIN_LIBRARY_PREFIX) }
 
     companion object {
-        private val RequiredUnresolvedLibrary.moduleId: ResolvedDependencyId
+        private konst RequiredUnresolvedLibrary.moduleId: ResolvedDependencyId
             get() = ResolvedDependencyId(path) // Yep, it's named "path" but in fact holds unique name of the library.
 
-        private val ResolvedDependencyId.isKonanPlatformLibrary: Boolean
+        private konst ResolvedDependencyId.isKonanPlatformLibrary: Boolean
             get() = uniqueNames.any { it.startsWith(KONAN_PLATFORM_LIBS_NAME_PREFIX) }
     }
 }

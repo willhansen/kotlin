@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.name.Name
 
 class IrValueParameterImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrValueParameterSymbol,
+    override konst symbol: IrValueParameterSymbol,
     override var name: Name,
     override var index: Int,
     override var type: IrType,
@@ -29,11 +29,11 @@ class IrValueParameterImpl(
     override var isCrossinline: Boolean,
     override var isNoinline: Boolean,
     override var isHidden: Boolean,
-    override val isAssignable: Boolean,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst isAssignable: Boolean,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrValueParameter() {
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ParameterDescriptor
+    override konst descriptor: ParameterDescriptor
         get() = symbol.descriptor
 
     init {

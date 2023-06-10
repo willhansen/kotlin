@@ -12,13 +12,13 @@ FILE: DeepCopyIrTree.kt
     public abstract interface IrTypeParametersContainer : R|IrDeclaration|, R|IrDeclarationParent| {
         public abstract var typeParameters: R|kotlin/collections/List<IrTypeParameter>|
             public get(): R|kotlin/collections/List<IrTypeParameter>|
-            public set(value: R|kotlin/collections/List<IrTypeParameter>|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/collections/List<IrTypeParameter>|): R|kotlin/Unit|
 
     }
     public abstract interface IrDeclaration : R|kotlin/Any| {
     }
     public abstract interface IrTypeParameter : R|IrDeclaration| {
-        public abstract val superTypes: R|kotlin/collections/MutableList<IrType>|
+        public abstract konst superTypes: R|kotlin/collections/MutableList<IrType>|
             public get(): R|kotlin/collections/MutableList<IrType>|
 
     }
@@ -29,7 +29,7 @@ FILE: DeepCopyIrTree.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val typeRemapper: R|TypeRemapper| = R|<local>/typeRemapper|
+        private final konst typeRemapper: R|TypeRemapper| = R|<local>/typeRemapper|
             private get(): R|TypeRemapper|
 
         private final fun copyTypeParameter(declaration: R|IrTypeParameter|): R|IrTypeParameter| {
@@ -43,11 +43,11 @@ FILE: DeepCopyIrTree.kt
             )
             this@R|/DeepCopyIrTreeWithSymbols|.R|/DeepCopyIrTreeWithSymbols.typeRemapper|.R|/withinScope|<R|kotlin/Unit|>(this@R|/DeepCopyIrTreeWithSymbols.copyTypeParametersFrom|, <L> = withinScope@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=UNKNOWN>  {
                  {
-                    lval <iterator>: R|kotlin/collections/Iterator<kotlin/Pair<IrTypeParameter, IrTypeParameter>>| = this@R|/DeepCopyIrTreeWithSymbols.copyTypeParametersFrom|.R|/IrTypeParametersContainer.typeParameters|.R|kotlin/collections/zip|<R|IrTypeParameter|, R|IrTypeParameter|>(R|<local>/other|.R|/IrTypeParametersContainer.typeParameters|).R|SubstitutionOverride<kotlin/collections/List.iterator: R|kotlin/collections/Iterator<kotlin/Pair<IrTypeParameter, IrTypeParameter>>|>|()
+                    lkonst <iterator>: R|kotlin/collections/Iterator<kotlin/Pair<IrTypeParameter, IrTypeParameter>>| = this@R|/DeepCopyIrTreeWithSymbols.copyTypeParametersFrom|.R|/IrTypeParametersContainer.typeParameters|.R|kotlin/collections/zip|<R|IrTypeParameter|, R|IrTypeParameter|>(R|<local>/other|.R|/IrTypeParametersContainer.typeParameters|).R|SubstitutionOverride<kotlin/collections/List.iterator: R|kotlin/collections/Iterator<kotlin/Pair<IrTypeParameter, IrTypeParameter>>|>|()
                     while(R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.hasNext: R|kotlin/Boolean|>|()) {
-                        lval <destruct>: R|kotlin/Pair<IrTypeParameter, IrTypeParameter>| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/Pair<IrTypeParameter, IrTypeParameter>|>|()
-                        lval thisTypeParameter: R|IrTypeParameter| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component1: R|IrTypeParameter|>|()
-                        lval otherTypeParameter: R|IrTypeParameter| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component2: R|IrTypeParameter|>|()
+                        lkonst <destruct>: R|kotlin/Pair<IrTypeParameter, IrTypeParameter>| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/Pair<IrTypeParameter, IrTypeParameter>|>|()
+                        lkonst thisTypeParameter: R|IrTypeParameter| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component1: R|IrTypeParameter|>|()
+                        lkonst otherTypeParameter: R|IrTypeParameter| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component2: R|IrTypeParameter|>|()
                          {
                             R|<local>/otherTypeParameter|.R|/IrTypeParameter.superTypes|.R|kotlin/collections/mapTo|<R|IrType|, R|IrType|, R|kotlin/collections/MutableList<IrType>|>(R|<local>/thisTypeParameter|.R|/IrTypeParameter.superTypes|, <L> = mapTo@fun <anonymous>(it: R|IrType|): R|IrType| <inline=Inline, kind=UNKNOWN>  {
                                 ^ this@R|/DeepCopyIrTreeWithSymbols|.R|/DeepCopyIrTreeWithSymbols.typeRemapper|.R|/TypeRemapper.remapType|(R|<local>/it|)
@@ -66,7 +66,7 @@ FILE: DeepCopyIrTree.kt
     }
     public final inline fun <T> R|TypeRemapper|.withinScope(irTypeParametersContainer: R|IrTypeParametersContainer|, fn: R|() -> T|): R|T| {
         this@R|/withinScope|.R|/TypeRemapper.enterScope|(R|<local>/irTypeParametersContainer|)
-        lval result: R|T| = R|<local>/fn|.R|SubstitutionOverride<kotlin/Function0.invoke: R|T|>|()
+        lkonst result: R|T| = R|<local>/fn|.R|SubstitutionOverride<kotlin/Function0.invoke: R|T|>|()
         this@R|/withinScope|.R|/TypeRemapper.leaveScope|()
         ^withinScope R|<local>/result|
     }

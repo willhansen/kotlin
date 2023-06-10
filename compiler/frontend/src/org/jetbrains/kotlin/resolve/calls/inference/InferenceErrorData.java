@@ -34,14 +34,14 @@ public class InferenceErrorData {
     @NotNull
     public final KotlinType expectedType;
     @NotNull
-    public final List<KotlinType> valueArgumentsTypes;
+    public final List<KotlinType> konstueArgumentsTypes;
     @NotNull
     public final Call call;
 
     private InferenceErrorData(
             @NotNull CallableDescriptor descriptor,
             @NotNull ConstraintSystem constraintSystem,
-            @NotNull List<KotlinType> valueArgumentsTypes,
+            @NotNull List<KotlinType> konstueArgumentsTypes,
             @Nullable KotlinType receiverArgumentType,
             @NotNull KotlinType expectedType,
             @NotNull Call call
@@ -49,7 +49,7 @@ public class InferenceErrorData {
         this.descriptor = descriptor;
         this.constraintSystem = constraintSystem;
         this.receiverArgumentType = receiverArgumentType;
-        this.valueArgumentsTypes = valueArgumentsTypes;
+        this.konstueArgumentsTypes = konstueArgumentsTypes;
         this.expectedType = expectedType;
         this.call = call;
     }
@@ -58,11 +58,11 @@ public class InferenceErrorData {
     public static InferenceErrorData create(
             @NotNull CallableDescriptor descriptor,
             @NotNull ConstraintSystem constraintSystem,
-            @NotNull List<KotlinType> valueArgumentsTypes,
+            @NotNull List<KotlinType> konstueArgumentsTypes,
             @Nullable KotlinType receiverArgumentType,
             @NotNull KotlinType expectedType,
             @NotNull Call call
     ) {
-        return new InferenceErrorData(descriptor, constraintSystem, valueArgumentsTypes, receiverArgumentType, expectedType, call);
+        return new InferenceErrorData(descriptor, constraintSystem, konstueArgumentsTypes, receiverArgumentType, expectedType, call);
     }
 }

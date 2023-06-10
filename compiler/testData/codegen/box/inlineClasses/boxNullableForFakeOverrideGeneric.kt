@@ -7,8 +7,8 @@ abstract class C<T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class V<T>(val value: T)
+konstue class V<T>(konst konstue: T)
 
 class D : C<V<String>>()
 
-fun box() = D().foo(V("OK")) { it.value } as String
+fun box() = D().foo(V("OK")) { it.konstue } as String

@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 class IrConstructorImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrConstructorSymbol,
+    override konst symbol: IrConstructorSymbol,
     override var name: Name,
     override var visibility: DescriptorVisibility,
     returnType: IrType,
@@ -31,7 +31,7 @@ class IrConstructorImpl(
     override var isPrimary: Boolean,
     override var isExpect: Boolean,
     override var containerSource: DeserializedContainerSource? = null,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrConstructor() {
     init {
         symbol.bind(this)
@@ -52,13 +52,13 @@ class IrConstructorImpl(
     override var dispatchReceiverParameter: IrValueParameter? = null
     override var extensionReceiverParameter: IrValueParameter? = null
     override var contextReceiverParametersCount: Int = 0
-    override var valueParameters: List<IrValueParameter> = emptyList()
+    override var konstueParameters: List<IrValueParameter> = emptyList()
 
     override var body: IrBody? = null
 
     override var metadata: MetadataSource? = null
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ClassConstructorDescriptor
+    override konst descriptor: ClassConstructorDescriptor
         get() = symbol.descriptor
 }

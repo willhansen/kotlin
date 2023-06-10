@@ -6,7 +6,7 @@ import bar.*
     /*c:foo.A.Companion(invoke) p:foo p:foo(invoke) p:kotlin(Int)*/A()./*c:foo.A*/a
     /*c:foo.A.Companion(invoke) p:foo p:foo(invoke) p:kotlin(String)*/A()./*c:foo.A*/b
     /*c:foo.A.Companion(invoke) p:foo p:foo(invoke) p:kotlin(String)*/A()./*c:foo.A*/c
-    /*c:foo.A.Companion(invoke) p:foo p:foo(invoke) p:kotlin(String)*/A()./*c:foo.A*/d = /*p:kotlin(String)*/"new value"
+    /*c:foo.A.Companion(invoke) p:foo p:foo(invoke) p:kotlin(String)*/A()./*c:foo.A*/d = /*p:kotlin(String)*/"new konstue"
     /*c:foo.A.Companion(invoke) p:foo p:foo(invoke)*/A()./*c:foo.A*/foo()
     /*p:foo p:kotlin(Int)*/A./*c:foo.A c:foo.A.B.CO(invoke) c:foo.A.Companion*/B()./*c:foo.A.B*/a
     /*p:foo*/A./*c:foo.A*/B./*c:foo.A.B c:foo.A.B.CO*/bar(1)
@@ -26,14 +26,14 @@ import bar.*
     /*p:foo(I) p:kotlin(Int)*/ii./*c:foo.I*/a
     /*p:foo(I)*/ii./*c:foo.I*/foo()
     /*p:foo p:kotlin(Int)*/Obj./*c:foo.Obj*/b
-    val iii = /*p:foo p:foo(I)*/Obj./*c:foo.Obj*/bar()
+    konst iii = /*p:foo p:foo(I)*/Obj./*c:foo.Obj*/bar()
     /*p:foo(I)*/iii./*c:foo.I*/foo()
 
     /*p:bar p:foo p:java.lang p:kotlin p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/E./*c:foo.E*/X
     /*p:bar p:foo p:java.lang p:kotlin p:kotlin(Int) p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/E./*c:foo.E*/X./*c:foo.E*/a
     /*p:bar p:foo p:java.lang p:kotlin p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/E./*c:foo.E*/Y./*c:foo.E*/foo()
-    /*p:bar p:foo p:java.lang p:kotlin p:kotlin(Array) p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/E./*c:foo.E*/values()
-    /*p:bar p:foo p:java.lang p:kotlin p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/E./*c:foo.E*/valueOf(/*p:kotlin(String)*/"")
+    /*p:bar p:foo p:java.lang p:kotlin p:kotlin(Array) p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/E./*c:foo.E*/konstues()
+    /*p:bar p:foo p:java.lang p:kotlin p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/E./*c:foo.E*/konstueOf(/*p:kotlin(String)*/"")
 }
 
 /*p:foo*/fun classifiers(

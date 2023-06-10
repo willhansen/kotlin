@@ -4,6 +4,6 @@ public open class Outer private constructor() {
 }
 
 fun box(): String {
-    val outer = Outer.Inner()
+    konst outer = Outer.Inner()
     return "OK"
 }

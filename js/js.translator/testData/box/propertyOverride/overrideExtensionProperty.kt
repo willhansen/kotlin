@@ -4,7 +4,7 @@ package foo
 class T
 
 open class A {
-    open val T.foo: Int
+    open konst T.foo: Int
         get() {
             return 34
         }
@@ -14,7 +14,7 @@ open class A {
 }
 
 class B : A() {
-    override val T.foo: Int get() = 5
+    override konst T.foo: Int get() = 5
 }
 
 

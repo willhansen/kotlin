@@ -19,20 +19,20 @@ kotlin.target.compilations {
         }
     }
 
-    val main by getting {
+    konst main by getting {
         defaultSourceSet.dependencies {
             api(kotlin("gradle-plugin-api"))
             implementation(kotlin("stdlib-jdk8"))
         }
     }
 
-    val test by getting {
+    konst test by getting {
         defaultSourceSet.dependencies {
             implementation(kotlin("test-junit"))
         }
     }
 
-    val benchmark by creating {
+    konst benchmark by creating {
         defaultSourceSet.dependencies {
             associateWith(main)
             implementation(kotlin("reflect"))
@@ -40,7 +40,7 @@ kotlin.target.compilations {
     }
 }
 
-val runBenchmark by tasks.registering(JavaExec::class) {
+konst runBenchmark by tasks.registering(JavaExec::class) {
     classpath = kotlin.target.compilations["benchmark"].run { runtimeDependencyFiles + output.allOutputs }
     mainClass.set("com.example.ABenchmarkKt")
 }

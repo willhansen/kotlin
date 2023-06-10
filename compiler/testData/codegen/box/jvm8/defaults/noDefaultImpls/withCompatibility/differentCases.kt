@@ -11,17 +11,17 @@ interface Test {
 
     private fun privateFun() = "O"
 
-    val prop: String
+    konst prop: String
         get() = "K"
 
     var varProp: String
         get() = "K"
-        set(value) {}
+        set(konstue) {}
 }
 
 class TestClass : Test
 
 fun box(): String {
-    val testClass = TestClass()
+    konst testClass = TestClass()
     return testClass.test() + testClass.varProp
 }

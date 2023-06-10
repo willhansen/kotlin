@@ -17,11 +17,11 @@
 package org.jetbrains.kotlin.library
 
 fun String.parseKotlinAbiVersion(): KotlinAbiVersion {
-    val values = this.split(".").map { it.toInt() }
+    konst konstues = this.split(".").map { it.toInt() }
 
-    return when (values.size) {
-        3 -> KotlinAbiVersion(values[0], values[1], values[2])
-        1 -> KotlinAbiVersion(values[0])
+    return when (konstues.size) {
+        3 -> KotlinAbiVersion(konstues[0], konstues[1], konstues[2])
+        1 -> KotlinAbiVersion(konstues[0])
         else -> error("Could not parse abi version: $this")
     }
 }
@@ -40,7 +40,7 @@ fun String.parseKotlinAbiVersion(): KotlinAbiVersion {
  *
  * The version bump must obey [org.jetbrains.kotlin.metadata.deserialization.BinaryVersion] rules (See `BinaryVersion` KDoc)
  */
-data class KotlinAbiVersion(val major: Int, val minor: Int, val patch: Int) {
+data class KotlinAbiVersion(konst major: Int, konst minor: Int, konst patch: Int) {
     // For 1.4 compiler we switched klib abi_version to a triple,
     // but we don't break if we still encounter a single digit from 1.3.
     constructor(single: Int) : this(0, single, 0)
@@ -75,6 +75,6 @@ data class KotlinAbiVersion(val major: Int, val minor: Int, val patch: Int) {
         /**
          * See: [KotlinAbiVersion bump history](compiler/util-klib/KotlinAbiVersionBumpHistory.md)
          */
-        val CURRENT = KotlinAbiVersion(1, 8, 0)
+        konst CURRENT = KotlinAbiVersion(1, 8, 0)
     }
 }

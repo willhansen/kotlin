@@ -52,7 +52,7 @@ fun test() {
     Protected.<!INVISIBLE_REFERENCE!>Nested<!>() // hidden
 }
 
-open class Generic<T>(val x: T) {
+open class Generic<T>(konst x: T) {
     protected open fun foo(): T = x
 }
 

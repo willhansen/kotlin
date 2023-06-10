@@ -8,9 +8,9 @@ package kotlinx.metadata.klib
 import kotlinx.metadata.KmAnnotation
 
 class KlibHeader(
-    val moduleName: String,
-    val file: List<KlibSourceFile>,
-    val packageFragmentName: List<String>,
-    val emptyPackage: List<String>,
-    val annotation: List<KmAnnotation>
+    konst moduleName: String,
+    konst file: List<KlibSourceFile>,
+    konst packageFragmentName: List<String>,
+    konst emptyPackage: List<String>,
+    konst annotation: List<KmAnnotation>
 )

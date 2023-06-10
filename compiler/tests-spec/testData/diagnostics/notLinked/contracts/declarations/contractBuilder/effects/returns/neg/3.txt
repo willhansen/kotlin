@@ -4,7 +4,7 @@ public fun case_1(/*0*/ x: kotlin.Any?): kotlin.Boolean
 
 public object DeepObject {
     private constructor DeepObject()
-    public final val prop_1: kotlin.Nothing? = null
+    public final konst prop_1: kotlin.Nothing? = null
     public final var prop_2: kotlin.Nothing?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -54,8 +54,8 @@ public object DeepObject {
 
                                 public object J {
                                     private constructor J()
-                                    public final val prop_1: kotlin.Int? = 10
-                                    public final val x: kotlin.Int? = 10
+                                    public final konst prop_1: kotlin.Int? = 10
+                                    public final konst x: kotlin.Int? = 10
                                     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                                     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
                                     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -78,8 +78,8 @@ public object EmptyObject {
 
 public object Object {
     private constructor Object()
-    public final val prop_1: kotlin.Number? = 1
-    public final val prop_2: kotlin.Number = 1
+    public final konst prop_1: kotlin.Number? = 1
+    public final konst prop_2: kotlin.Number = 1
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

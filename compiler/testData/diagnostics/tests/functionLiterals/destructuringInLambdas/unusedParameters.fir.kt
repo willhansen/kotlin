@@ -1,7 +1,7 @@
 // !CHECK_TYPE
 // !DIAGNOSTICS: -UNUSED_PARAMETER -UNUSED_ANONYMOUS_PARAMETER +UNUSED_DESTRUCTURED_PARAMETER_ENTRY
-data class A(val x: Int, val y: String)
-data class B(val u: Double, val w: Short)
+data class A(konst x: Int, konst y: String)
+data class B(konst u: Double, konst w: Short)
 
 fun foo(block: (A) -> Unit) { }
 fun foobar(block: (A, B) -> Unit) { }

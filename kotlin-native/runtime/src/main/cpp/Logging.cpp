@@ -21,7 +21,7 @@ namespace {
 
 template <typename T>
 struct ParseResult {
-    std::optional<T> value;
+    std::optional<T> konstue;
     std::string_view rest;
 };
 
@@ -59,7 +59,7 @@ std_support::map<std_support::string, logging::Level> ParseTagsFilter(std::strin
     while (!rest.empty()) {
         auto tag = ParseTag(rest);
         rest = tag.rest;
-        if (tag.value == std::nullopt) {
+        if (tag.konstue == std::nullopt) {
             konan::consoleErrorf("Failed to parse tag at: '");
             konan::consoleErrorUtf8(rest.data(), rest.size());
             konan::consoleErrorf("'. No logging will be performed\n");
@@ -67,14 +67,14 @@ std_support::map<std_support::string, logging::Level> ParseTagsFilter(std::strin
         }
         auto levelString = ParseLevelString(rest);
         rest = levelString.rest;
-        auto level = levelString.value ? ParseLevel(*levelString.value) : std::nullopt;
+        auto level = levelString.konstue ? ParseLevel(*levelString.konstue) : std::nullopt;
         if (level == std::nullopt) {
             konan::consoleErrorf("Failed to parse level at: '");
             konan::consoleErrorUtf8(rest.data(), rest.size());
             konan::consoleErrorf("'. No logging will be performed\n");
             return {};
         }
-        result.emplace(std_support::string(tag.value->data(), tag.value->size()), *level);
+        result.emplace(std_support::string(tag.konstue->data(), tag.konstue->size()), *level);
     }
     return result;
 }
@@ -133,7 +133,7 @@ std_support::span<char> FormatTags(std_support::span<char> buffer, std_support::
 }
 
 std_support::span<char> FormatTimestamp(std_support::span<char> buffer, kotlin::nanoseconds timestamp) noexcept {
-    auto s = static_cast<double>(timestamp.count().value) / 1'000'000'000;
+    auto s = static_cast<double>(timestamp.count().konstue) / 1'000'000'000;
     return FormatToSpan(buffer, "[%.3fs]", s);
 }
 

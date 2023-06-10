@@ -8,26 +8,26 @@ package org.jetbrains.kotlin.kapt.cli
 import org.jetbrains.kotlin.kapt.cli.CliToolOption.Format.*
 
 internal fun printHelp() {
-    class OptionToRender(nameArgs: String, val description: String) {
-        val nameArgs = nameArgs.trim()
+    class OptionToRender(nameArgs: String, konst description: String) {
+        konst nameArgs = nameArgs.trim()
         fun render(width: Int) = "  " + nameArgs + " ".repeat(width - nameArgs.length) + description
     }
 
-    val options = KaptCliOption.values()
+    konst options = KaptCliOption.konstues()
         .filter { it.cliToolOption != null }
         .map { OptionToRender(it.nameArgs(), it.description) }
 
-    val optionNameColumnWidth = options.maxOf { it.nameArgs.length } + 2
-    val renderedOptions = options.joinToString("\n|") { it.render(optionNameColumnWidth) }
+    konst optionNameColumnWidth = options.maxOf { it.nameArgs.length } + 2
+    konst renderedOptions = options.joinToString("\n|") { it.render(optionNameColumnWidth) }
 
-    val message = """
+    konst message = """
         |kapt: Run annotation processing over the specified Kotlin source files.
         |Usage: kapt <options> <source files>
 
         |Options related to annotation processing:
         |$renderedOptions
 
-        |You can also pass all valid Kotlin compiler options.
+        |You can also pass all konstid Kotlin compiler options.
         |Run 'kotlinc -help' to show them.
     """.trimMargin()
 
@@ -35,10 +35,10 @@ internal fun printHelp() {
 }
 
 private fun KaptCliOption.nameArgs(): String {
-    val cliToolOption = this.cliToolOption!!
+    konst cliToolOption = this.cliToolOption!!
     return when (cliToolOption.format) {
         FLAG -> cliToolOption.name + "=<true|false>"
-        VALUE -> cliToolOption.name + "=" + valueDescription
-        KEY_VALUE -> cliToolOption.name + valueDescription
+        VALUE -> cliToolOption.name + "=" + konstueDescription
+        KEY_VALUE -> cliToolOption.name + konstueDescription
     }
 }

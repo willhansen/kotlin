@@ -22,17 +22,17 @@ import org.jetbrains.kotlin.renderer.DescriptorRendererOptions
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
 interface TypeWithEnhancement {
-    val origin: UnwrappedType
-    val enhancement: KotlinType
+    konst origin: UnwrappedType
+    konst enhancement: KotlinType
 }
 
 class SimpleTypeWithEnhancement(
-    override val delegate: SimpleType,
-    override val enhancement: KotlinType
+    override konst delegate: SimpleType,
+    override konst enhancement: KotlinType
 ) : DelegatingSimpleType(),
     TypeWithEnhancement {
 
-    override val origin get() = delegate
+    override konst origin get() = delegate
 
     override fun replaceAttributes(newAttributes: TypeAttributes): SimpleType =
         origin.replaceAttributes(newAttributes).wrapEnhancement(enhancement) as SimpleType
@@ -56,8 +56,8 @@ class SimpleTypeWithEnhancement(
 }
 
 class FlexibleTypeWithEnhancement(
-    override val origin: FlexibleType,
-    override val enhancement: KotlinType
+    override konst origin: FlexibleType,
+    override konst enhancement: KotlinType
 ) : FlexibleType(origin.lowerBound, origin.upperBound),
     TypeWithEnhancement {
 
@@ -74,7 +74,7 @@ class FlexibleTypeWithEnhancement(
         return origin.render(renderer, options)
     }
 
-    override val delegate: SimpleType get() = origin.delegate
+    override konst delegate: SimpleType get() = origin.delegate
 
     @TypeRefinement
     @OptIn(TypeRefinement::class)
@@ -99,9 +99,9 @@ private fun List<TypeProjection>.enhanceTypeArguments() =
         if (argument.isStarProjection) {
             return@map argument
         }
-        val argumentType = argument.type
-        val enhancedArgumentType = if (argumentType is TypeWithEnhancement) argumentType.enhancement else argumentType
-        val enhancedDeeplyArgumentType = enhancedArgumentType.getEnhancementDeeplyInternal()
+        konst argumentType = argument.type
+        konst enhancedArgumentType = if (argumentType is TypeWithEnhancement) argumentType.enhancement else argumentType
+        konst enhancedDeeplyArgumentType = enhancedArgumentType.getEnhancementDeeplyInternal()
 
         if (argumentType === enhancedDeeplyArgumentType) return@map argument
 
@@ -112,7 +112,7 @@ private fun List<TypeProjection>.wereTypeArgumentsChanged(newArguments: List<Typ
     newArguments.size != this.size || !this.withIndex().all { (i, arg) -> newArguments[i] === arg }
 
 private fun KotlinType.wereTypeArgumentsChanged(newArguments: List<TypeProjection>, newArgumentsForUpperBound: List<TypeProjection>) =
-    when (val type = unwrap()) {
+    when (konst type = unwrap()) {
         is FlexibleType -> {
             type.lowerBound.arguments.wereTypeArgumentsChanged(newArguments) ||
                     type.upperBound.arguments.wereTypeArgumentsChanged(newArgumentsForUpperBound)
@@ -123,11 +123,11 @@ private fun KotlinType.wereTypeArgumentsChanged(newArguments: List<TypeProjectio
     }
 
 private fun KotlinType.getEnhancementDeeplyInternal(): KotlinType {
-    val arguments = if (this is TypeWithEnhancement) enhancement.arguments else arguments
-    val newArguments = arguments.enhanceTypeArguments()
-    val newArgumentsForUpperBound = if (this is FlexibleType) upperBound.arguments.enhanceTypeArguments() else newArguments
-    val enhancedType = if (this is TypeWithEnhancement) enhancement else this
-    val areArgumentsChanged = enhancedType.wereTypeArgumentsChanged(newArguments, newArgumentsForUpperBound)
+    konst arguments = if (this is TypeWithEnhancement) enhancement.arguments else arguments
+    konst newArguments = arguments.enhanceTypeArguments()
+    konst newArgumentsForUpperBound = if (this is FlexibleType) upperBound.arguments.enhanceTypeArguments() else newArguments
+    konst enhancedType = if (this is TypeWithEnhancement) enhancement else this
+    konst areArgumentsChanged = enhancedType.wereTypeArgumentsChanged(newArguments, newArgumentsForUpperBound)
 
     if (!areArgumentsChanged) return enhancedType
 
@@ -138,7 +138,7 @@ private fun KotlinType.getEnhancementDeeplyInternal(): KotlinType {
 }
 
 fun KotlinType.getEnhancementDeeply(): KotlinType? {
-    val enhancedTypeWithArguments = getEnhancementDeeplyInternal()
+    konst enhancedTypeWithArguments = getEnhancementDeeplyInternal()
 
     if (enhancedTypeWithArguments === this) return null
 

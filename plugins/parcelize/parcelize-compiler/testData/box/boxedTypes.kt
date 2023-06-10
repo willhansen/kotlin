@@ -10,18 +10,18 @@ import android.os.Parcelable
 
 @Parcelize
 data class BoxedTypes(
-        val boo: java.lang.Boolean,
-        val c: java.lang.Character,
-        val byt: java.lang.Byte,
-        val s: java.lang.Short,
-        val i: java.lang.Integer,
-        val f: java.lang.Float,
-        val l: java.lang.Long,
-        val d: java.lang.Double
+        konst boo: java.lang.Boolean,
+        konst c: java.lang.Character,
+        konst byt: java.lang.Byte,
+        konst s: java.lang.Short,
+        konst i: java.lang.Integer,
+        konst f: java.lang.Float,
+        konst l: java.lang.Long,
+        konst d: java.lang.Double
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = BoxedTypes(
+    konst first = BoxedTypes(
             true as java.lang.Boolean,
             '#' as java.lang.Character,
             3.toByte() as java.lang.Byte,
@@ -33,11 +33,11 @@ fun box() = parcelTest { parcel ->
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val first2 = parcelableCreator<BoxedTypes>().createFromParcel(parcel)
+    konst first2 = parcelableCreator<BoxedTypes>().createFromParcel(parcel)
 
     assert(first == first2)
 }

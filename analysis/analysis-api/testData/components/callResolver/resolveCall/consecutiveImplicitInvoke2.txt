@@ -11,7 +11,7 @@ KtSuccessCallInfo:
         receiverType = kotlin.Long
         returnType = kotlin.Double
         symbol = /invoke(<extension receiver>: kotlin.Long): kotlin.Double
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = /invoke
     typeArgumentsMapping = {}
     argumentMapping = {}

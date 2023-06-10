@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.io.File
 
-private val IrElement.elementName: String
+private konst IrElement.elementName: String
     get() = when (this) {
         is IrModuleFragment ->
             this.name.asString()
@@ -55,15 +55,15 @@ fun <Data, Context> makeVerifyAction(verifier: (Context, Data) -> Unit): Action<
     }
 
 fun dumpIrElement(actionState: ActionState, data: IrElement, @Suppress("UNUSED_PARAMETER") context: Any?): String {
-    val beforeOrAfterStr = actionState.beforeOrAfter.name.toLowerCaseAsciiOnly()
+    konst beforeOrAfterStr = actionState.beforeOrAfter.name.toLowerCaseAsciiOnly()
 
     var dumpText = ""
-    val elementName: String
+    konst elementName: String
 
-    val dumpStrategy = System.getProperty("org.jetbrains.kotlin.compiler.ir.dump.strategy")
-    val dump: IrElement.() -> String = if (dumpStrategy == "KotlinLike") IrElement::dumpKotlinLike else IrElement::dump
+    konst dumpStrategy = System.getProperty("org.jetbrains.kotlin.compiler.ir.dump.strategy")
+    konst dump: IrElement.() -> String = if (dumpStrategy == "KotlinLike") IrElement::dumpKotlinLike else IrElement::dump
 
-    val dumpOnlyFqName = actionState.config.dumpOnlyFqName
+    konst dumpOnlyFqName = actionState.config.dumpOnlyFqName
     if (dumpOnlyFqName != null) {
         elementName = dumpOnlyFqName
         data.acceptVoid(object : IrElementVisitorVoid {
@@ -84,7 +84,7 @@ fun dumpIrElement(actionState: ActionState, data: IrElement, @Suppress("UNUSED_P
         dumpText = data.dump()
     }
 
-    val title = "// --- IR for $elementName $beforeOrAfterStr ${actionState.phase.description}\n"
+    konst title = "// --- IR for $elementName $beforeOrAfterStr ${actionState.phase.description}\n"
     return title + dumpText
 }
 
@@ -95,12 +95,12 @@ fun <Data, Context> dumpToFile(
     dumper: Dumper<Data, Context>
 ): Action<Data, Context> =
     fun(actionState: ActionState, data: Data, context: Context) {
-        val directoryPath = actionState.config.dumpToDirectory ?: return
-        val dumpContent = dumper(actionState, data, context) ?: return
+        konst directoryPath = actionState.config.dumpToDirectory ?: return
+        konst dumpContent = dumper(actionState, data, context) ?: return
 
         // TODO in JVM BE most of lowerings run per file and "dump" is called per file,
         //  so each run of this function overwrites dump written for the previous one.
-        val directoryFile =
+        konst directoryFile =
             File(directoryPath +
                          ((data as? IrModuleFragment)?.let { "/" + it.name.asString().removeSurrounding("<", ">") } ?: ""))
         if (!directoryFile.isDirectory)
@@ -108,12 +108,12 @@ fun <Data, Context> dumpToFile(
                 error("Can't create directory for IR dumps at $directoryPath")
 
         // Make dump files in a directory sorted by ID
-        val phaseIdFormatted = "%02d".format(actionState.phaseCount)
+        konst phaseIdFormatted = "%02d".format(actionState.phaseCount)
 
-        val dumpStrategy = System.getProperty("org.jetbrains.kotlin.compiler.ir.dump.strategy")
-        val extPrefix = if (dumpStrategy == "KotlinLike") "kt." else ""
+        konst dumpStrategy = System.getProperty("org.jetbrains.kotlin.compiler.ir.dump.strategy")
+        konst extPrefix = if (dumpStrategy == "KotlinLike") "kt." else ""
 
-        val fileName = "${phaseIdFormatted}_${actionState.beforeOrAfter}.${actionState.phase.name}.$extPrefix$fileExtension"
+        konst fileName = "${phaseIdFormatted}_${actionState.beforeOrAfter}.${actionState.phase.name}.$extPrefix$fileExtension"
 
         File(directoryFile, fileName).writeText(dumpContent)
     }
@@ -123,24 +123,24 @@ fun <Data, Context> dumpToStdout(
 ): Action<Data, Context> =
     fun(actionState: ActionState, data: Data, context: Context) {
         if (actionState.config.dumpToDirectory != null) return
-        val dumpContent = dumper(actionState, data, context) ?: return
+        konst dumpContent = dumper(actionState, data, context) ?: return
         println("\n\n----------------------------------------------")
         println(dumpContent)
         println()
     }
 
-val defaultDumper = makeDumpAction(dumpToStdout(::dumpIrElement) + dumpToFile("ir", ::dumpIrElement))
+konst defaultDumper = makeDumpAction(dumpToStdout(::dumpIrElement) + dumpToFile("ir", ::dumpIrElement))
 
-fun validationCallback(context: CommonBackendContext, fragment: IrElement, checkProperties: Boolean = false) {
-    val validatorConfig = IrValidatorConfig(
+fun konstidationCallback(context: CommonBackendContext, fragment: IrElement, checkProperties: Boolean = false) {
+    konst konstidatorConfig = IrValidatorConfig(
         abortOnError = true,
         ensureAllNodesAreDifferent = true,
         checkTypes = false,
         checkDescriptors = false,
         checkProperties = checkProperties,
     )
-    fragment.accept(IrValidator(context, validatorConfig), null)
+    fragment.accept(IrValidator(context, konstidatorConfig), null)
     fragment.checkDeclarationParents()
 }
 
-val validationAction = makeVerifyAction(::validationCallback)
+konst konstidationAction = makeVerifyAction(::konstidationCallback)

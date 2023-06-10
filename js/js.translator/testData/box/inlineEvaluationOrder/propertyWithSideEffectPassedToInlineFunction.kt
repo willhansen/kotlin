@@ -3,17 +3,17 @@
 package foo
 
 inline fun foo(b: Any) {
-    val t = aa[0]
-    val a = b
+    konst t = aa[0]
+    konst a = b
 }
 
-val a: Array<String>
+konst a: Array<String>
     get() {
         log("a.get")
         return arrayOf("a")
     }
 
-val aa: Array<String>
+konst aa: Array<String>
     get() {
         log("aa.get")
         return arrayOf("aa")

@@ -21,12 +21,12 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-class ExternalEnumUsagesLowering(val context: JsIrBackendContext) : BodyLoweringPass {
+class ExternalEnumUsagesLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitGetEnumValue(expression: IrGetEnumValue): IrExpression {
-                val enumEntry = expression.symbol.owner
-                val klass = enumEntry.parent as IrClass
+                konst enumEntry = expression.symbol.owner
+                konst klass = enumEntry.parent as IrClass
                 return if (klass.isExternal) lowerExternalEnumEntry(enumEntry, klass) else expression
             }
         })
@@ -38,7 +38,7 @@ class ExternalEnumUsagesLowering(val context: JsIrBackendContext) : BodyLowering
         }
 
     private fun classAsReceiver(irClass: IrClass): IrExpression {
-        val intrinsic = context.intrinsics.jsClass
+        konst intrinsic = context.intrinsics.jsClass
         return JsIrBuilder.buildCall(intrinsic, context.irBuiltIns.anyType, listOf(irClass.defaultType))
     }
 

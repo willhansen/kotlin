@@ -15,32 +15,32 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtCallElement
 
 internal class SymbolLightLazyAnnotation(
-    val annotationsProvider: AnnotationsProvider,
-    private val annotationApplication: KtAnnotationApplication,
+    konst annotationsProvider: AnnotationsProvider,
+    private konst annotationApplication: KtAnnotationApplication,
     owner: PsiModifierList,
 ) : SymbolLightAbstractAnnotation(owner) {
     init {
         requireNotNull(annotationApplication.classId)
     }
 
-    private val classId: ClassId get() = annotationApplication.classId!!
+    private konst classId: ClassId get() = annotationApplication.classId!!
 
-    private val fqName: FqName = classId.asSingleFqName()
+    private konst fqName: FqName = classId.asSingleFqName()
 
-    val annotationApplicationWithArgumentsInfo: Lazy<KtAnnotationApplicationWithArgumentsInfo> =
+    konst annotationApplicationWithArgumentsInfo: Lazy<KtAnnotationApplicationWithArgumentsInfo> =
         (annotationApplication as? KtAnnotationApplicationWithArgumentsInfo)?.let(::lazyOf) ?: lazyPub {
-            val applications = annotationsProvider[classId]
+            konst applications = annotationsProvider[classId]
             applications.find { it.index == annotationApplication.index }
                 ?: error("expected application: ${annotationApplication}, actual indices: ${applications.map { it.index }}")
         }
 
-    override val kotlinOrigin: KtCallElement? get() = annotationApplicationWithArgumentsInfo.value.psi
+    override konst kotlinOrigin: KtCallElement? get() = annotationApplicationWithArgumentsInfo.konstue.psi
 
     override fun getQualifiedName(): String = fqName.asString()
 
-    private val _parameterList: PsiAnnotationParameterList by lazyPub {
+    private konst _parameterList: PsiAnnotationParameterList by lazyPub {
         if (annotationApplication.isCallWithArguments) {
-            symbolLightAnnotationParameterList { annotationApplicationWithArgumentsInfo.value.arguments }
+            symbolLightAnnotationParameterList { annotationApplicationWithArgumentsInfo.konstue.arguments }
         } else {
             symbolLightAnnotationParameterList()
         }

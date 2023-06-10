@@ -21,6 +21,6 @@ object A : Bar<AFoo>()
 enum class BFoo : Foo
 object B : Bar<BFoo>()
 
-val invs = invOf(A, B)
-val outs = outOf(A, B)
-val ins = inOf(A, B)
+konst invs = invOf(A, B)
+konst outs = outOf(A, B)
+konst ins = inOf(A, B)

@@ -2,7 +2,7 @@ package override
 
 interface T {
     fun foo()
-    val v : Int
+    konst v : Int
 }
 
 open <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>class Br<!>(t : T) : T {

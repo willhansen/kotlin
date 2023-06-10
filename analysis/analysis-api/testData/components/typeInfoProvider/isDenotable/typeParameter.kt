@@ -5,10 +5,10 @@ fun <T> test(t: T) {
     if (t != null) {
         (@Denotable("T & kotlin.Any") t).equals("")
     }
-    val outs = take(getOutProjection())
+    konst outs = take(getOutProjection())
     @Denotable("A") outs
 
-    val ins = take(getInProjection())
+    konst ins = take(getInProjection())
     @Denotable(kotlin.Any?) ins
 }
 

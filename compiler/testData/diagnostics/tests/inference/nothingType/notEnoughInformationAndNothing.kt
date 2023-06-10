@@ -7,7 +7,7 @@ fun <K> id(arg: K) = arg
 fun <S> select(vararg args: S): S = TODO()
 
 fun test1(b: Boolean?) {
-    val v = when(b) {
+    konst v = when(b) {
         true -> materialize()
         false -> null
         null -> materialize<String>()

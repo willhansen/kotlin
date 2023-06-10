@@ -29,25 +29,25 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.*
 import org.jetbrains.kotlinx.serialization.compiler.resolve.SerialEntityNames.MISSING_FIELD_EXC
 
 class SerializableJsTranslator(
-    val declaration: KtPureClassOrObject,
-    val descriptor: ClassDescriptor,
-    val context: TranslationContext
+    konst declaration: KtPureClassOrObject,
+    konst descriptor: ClassDescriptor,
+    konst context: TranslationContext
 ) : SerializableCodegen(descriptor, context.bindingContext()) {
 
-    private val initMap: Map<PropertyDescriptor, KtExpression?> = context.buildInitializersRemapping(declaration, descriptor.getSuperClassNotAny())
+    private konst initMap: Map<PropertyDescriptor, KtExpression?> = context.buildInitializersRemapping(declaration, descriptor.getSuperClassNotAny())
 
     override fun generateInternalConstructor(constructorDescriptor: ClassConstructorDescriptor) {
 
-        val missingExceptionClassRef = serializableDescriptor.getClassFromSerializationPackage(MISSING_FIELD_EXC)
-            .constructors.single { it.valueParameters.size == 1 }
+        konst missingExceptionClassRef = serializableDescriptor.getClassFromSerializationPackage(MISSING_FIELD_EXC)
+            .constructors.single { it.konstueParameters.size == 1 }
 
-        val f = context.buildFunction(constructorDescriptor) { jsFun, context ->
-            val thiz = jsFun.scope.declareName(Namer.ANOTHER_THIS_PARAMETER_NAME).makeRef()
+        konst f = context.buildFunction(constructorDescriptor) { jsFun, context ->
+            konst thiz = jsFun.scope.declareName(Namer.ANOTHER_THIS_PARAMETER_NAME).makeRef()
             @Suppress("NAME_SHADOWING")
-            val context = context.innerContextWithAliased(serializableDescriptor.thisAsReceiverParameter, thiz)
+            konst context = context.innerContextWithAliased(serializableDescriptor.thisAsReceiverParameter, thiz)
 
             // use serializationConstructorMarker for passing "this" from inheritors to base class
-            val markerAsThis = jsFun.parameters.last().name.makeRef()
+            konst markerAsThis = jsFun.parameters.last().name.makeRef()
 
             +JsVars(
                 JsVars.JsVar(
@@ -58,10 +58,10 @@ class SerializableJsTranslator(
                     )
                 )
             )
-            val serializableProperties = properties.serializableProperties
-            val seenVarsOffset = serializableProperties.bitMaskSlotCount()
-            val seenVars = (0 until seenVarsOffset).map { jsFun.parameters[it].name.makeRef() }
-            val superClass = serializableDescriptor.getSuperClassOrAny()
+            konst serializableProperties = properties.serializableProperties
+            konst seenVarsOffset = serializableProperties.bitMaskSlotCount()
+            konst seenVars = (0 until seenVarsOffset).map { jsFun.parameters[it].name.makeRef() }
+            konst superClass = serializableDescriptor.getSuperClassOrAny()
             var startPropOffset: Int = 0
             when {
                 KotlinBuiltIns.isAny(superClass) -> { /* no=op */ }
@@ -77,14 +77,14 @@ class SerializableJsTranslator(
             }
 
             for (index in startPropOffset until serializableProperties.size) {
-                val prop = serializableProperties[index]
-                val paramRef = jsFun.parameters[index + seenVarsOffset].name.makeRef()
+                konst prop = serializableProperties[index]
+                konst paramRef = jsFun.parameters[index + seenVarsOffset].name.makeRef()
                 // assign this.a = a in else branch
-                val assignParamStmt = TranslationUtils.assignmentToBackingField(context, prop.descriptor, paramRef).makeStmt()
+                konst assignParamStmt = TranslationUtils.assignmentToBackingField(context, prop.descriptor, paramRef).makeStmt()
 
-                val ifNotSeenStmt: JsStatement = if (prop.optional) {
-                    val initializer = initMap.getValue(prop.descriptor) ?: throw IllegalArgumentException("optional without an initializer")
-                    val initExpr = Translation.translateAsExpression(initializer, context)
+                konst ifNotSeenStmt: JsStatement = if (prop.optional) {
+                    konst initializer = initMap.getValue(prop.descriptor) ?: throw IllegalArgumentException("optional without an initializer")
+                    konst initExpr = Translation.translateAsExpression(initializer, context)
                     TranslationUtils.assignmentToBackingField(context, prop.descriptor, initExpr).makeStmt()
                 } else {
                     JsThrow(
@@ -102,15 +102,15 @@ class SerializableJsTranslator(
                     )
                 }
                 // (seen & 1 << i == 0) -- not seen
-                val notSeenTest = propNotSeenTest(seenVars[bitMaskSlotAt(index)], index)
+                konst notSeenTest = propNotSeenTest(seenVars[bitMaskSlotAt(index)], index)
                 +JsIf(notSeenTest, ifNotSeenStmt, assignParamStmt)
             }
 
             //transient initializers and init blocks
-            val serialDescs = serializableProperties.map { it.descriptor }
+            konst serialDescs = serializableProperties.map { it.descriptor }
             (initMap - serialDescs).forEach { (desc, expr) ->
-                val e = requireNotNull(expr) { "transient without an initializer" }
-                val initExpr = Translation.translateAsExpression(e, context)
+                konst e = requireNotNull(expr) { "transient without an initializer" }
+                konst initExpr = Translation.translateAsExpression(e, context)
                 +TranslationUtils.assignmentToBackingField(context, desc, initExpr).makeStmt()
             }
 
@@ -126,7 +126,7 @@ class SerializableJsTranslator(
     }
 
     private fun JsBlockBuilder.generateSuperNonSerializableCall(superClass: ClassDescriptor, thisParameter: JsExpression) {
-        val suitableCtor = superClass.constructors.singleOrNull { it.valueParameters.size == 0 }
+        konst suitableCtor = superClass.constructors.singleOrNull { it.konstueParameters.size == 0 }
             ?: throw IllegalArgumentException("Non-serializable parent of serializable $serializableDescriptor must have no arg constructor")
         if (suitableCtor.isPrimary) {
             +JsInvocation(Namer.getFunctionCallRef(context.getInnerReference(superClass)), thisParameter).makeStmt()
@@ -141,11 +141,11 @@ class SerializableJsTranslator(
         thisParameter: JsExpression,
         propertiesStart: Int
     ): Int {
-        val constrDesc = superClass.constructors.single(ClassConstructorDescriptor::isSerializationCtor)
-        val constrRef = context.getInnerNameForDescriptor(constrDesc).makeRef()
-        val superProperties = bindingContext!!.serializablePropertiesFor(superClass).serializableProperties
-        val superSlots = superProperties.bitMaskSlotCount()
-        val arguments = parameters.subList(0, superSlots) +
+        konst constrDesc = superClass.constructors.single(ClassConstructorDescriptor::isSerializationCtor)
+        konst constrRef = context.getInnerNameForDescriptor(constrDesc).makeRef()
+        konst superProperties = bindingContext!!.serializablePropertiesFor(superClass).serializableProperties
+        konst superSlots = superProperties.bitMaskSlotCount()
+        konst arguments = parameters.subList(0, superSlots) +
                 parameters.subList(propertiesStart, propertiesStart + superProperties.size) +
                 thisParameter // SerializationConstructorMarker
         +JsAstUtils.assignment(thisParameter, JsInvocation(constrRef, arguments)).makeStmt()

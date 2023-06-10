@@ -9,9 +9,9 @@ class Foo<T>(var x: T)
 fun <K> foo(x: MutableList<K>): Foo<K> = TODO()
 
 fun main() {
-    val x = buildList {
+    konst x = buildList {
         add("")
-        val foo = foo(this)
+        konst foo = foo(this)
         foo.x = ""
     }
 }

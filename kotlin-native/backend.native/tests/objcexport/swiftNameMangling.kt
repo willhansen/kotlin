@@ -3,7 +3,7 @@
 package swiftNameMangling
 
 interface SwiftNameManglingI1 {
-    val clashingProperty: Int
+    konst clashingProperty: Int
 
     fun clashingMethod(): Int
 
@@ -17,7 +17,7 @@ interface SwiftNameManglingI1 {
 }
 
 fun i1() = object : SwiftNameManglingI1 {
-    override val clashingProperty: Int
+    override konst clashingProperty: Int
         get() = 1
 
     override fun clashingMethod(): Int = 2
@@ -30,7 +30,7 @@ fun i1() = object : SwiftNameManglingI1 {
 }
 
 interface SwiftNameManglingI2 {
-    val clashingProperty: Any
+    konst clashingProperty: Any
 
     fun clashingMethod(): Any
 
@@ -44,7 +44,7 @@ interface SwiftNameManglingI2 {
 }
 
 fun i2() = object : SwiftNameManglingI2 {
-    override val clashingProperty: Any
+    override konst clashingProperty: Any
         get() = "one"
 
     override fun clashingMethod(): Any = "two"

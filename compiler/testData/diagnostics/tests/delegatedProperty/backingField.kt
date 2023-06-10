@@ -4,7 +4,7 @@
 import kotlin.reflect.KProperty
 
 class B {
-    val a: Int by Delegate()
+    konst a: Int by Delegate()
 
     fun foo() =<!SYNTAX!><!> <!SYNTAX!>$a<!>
 }

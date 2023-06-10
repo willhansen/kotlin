@@ -2,29 +2,29 @@
 //KT-1800 error/NonExistentClass generated on runtime
 package i
 
-public class User(val firstName: String,
-                  val lastName: String,
-                  val age: Int) {
+public class User(konst firstName: String,
+                  konst lastName: String,
+                  konst age: Int) {
     override fun toString() = "$firstName $lastName, age $age"
 }
 
 public fun <T: Comparable<T>> Collection<T>.testMin(): T? {
     var minValue: T? = null
-    for(value in this) {
-        if (minValue == null || value.compareTo(minValue!!) < 0) {
-            minValue = value
+    for(konstue in this) {
+        if (minValue == null || konstue.compareTo(minValue!!) < 0) {
+            minValue = konstue
         }
     }
     return minValue
 }
 
 fun box() : String {
-    val users = arrayListOf(
+    konst users = arrayListOf(
             User("John", "Doe", 30),
             User("Jane", "Doe", 27))
 
-    val ages = users.map { it.age }
+    konst ages = users.map { it.age }
 
-    val minAge = ages.testMin()
+    konst minAge = ages.testMin()
     return if (minAge == 27) "OK" else "fail"
 }

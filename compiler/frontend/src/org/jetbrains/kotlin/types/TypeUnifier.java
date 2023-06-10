@@ -156,11 +156,11 @@ public class TypeUnifier {
             return substitution;
         }
 
-        public void put(TypeConstructor key, TypeProjection value) {
+        public void put(TypeConstructor key, TypeProjection konstue) {
             if (failedVariables.contains(key)) return;
 
-            TypeProjection oldValue = substitution.put(key, value);
-            if (oldValue != null && !oldValue.equals(value)) {
+            TypeProjection oldValue = substitution.put(key, konstue);
+            if (oldValue != null && !oldValue.equals(konstue)) {
                 substitution.remove(key);
                 failedVariables.add(key);
                 fail();

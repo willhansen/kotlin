@@ -9,11 +9,11 @@
  * EXCEPTION: runtime
  */
 
-open class Bar(val x: Any)
+open class Bar(konst x: Any)
 
 open class Foo {
     companion object : Bar(Foo.prop) {
-         private val prop: Any = object {}
+         private konst prop: Any = object {}
     }
 }
 

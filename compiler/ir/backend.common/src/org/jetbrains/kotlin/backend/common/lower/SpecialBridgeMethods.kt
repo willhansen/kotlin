@@ -21,19 +21,19 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 data class SpecialMethodWithDefaultInfo(
-    val defaultValueGenerator: (IrSimpleFunction) -> IrExpression,
-    val argumentsToCheck: Int,
-    val needsGenericSignature: Boolean = false,
-    val needsUnsubstitutedBridge: Boolean = false
+    konst defaultValueGenerator: (IrSimpleFunction) -> IrExpression,
+    konst argumentsToCheck: Int,
+    konst needsGenericSignature: Boolean = false,
+    konst needsUnsubstitutedBridge: Boolean = false
 )
 
 class BuiltInWithDifferentJvmName(
-    val needsGenericSignature: Boolean = false,
-    val isOverriding: Boolean = true
+    konst needsGenericSignature: Boolean = false,
+    konst isOverriding: Boolean = true
 )
 
-class SpecialBridgeMethods(val context: CommonBackendContext) {
-    private data class SpecialMethodDescription(val kotlinFqClassName: FqName?, val name: Name, val arity: Int)
+class SpecialBridgeMethods(konst context: CommonBackendContext) {
+    private data class SpecialMethodDescription(konst kotlinFqClassName: FqName?, konst name: Name, konst arity: Int)
 
     private fun makeDescription(classFqName: FqName, funName: String, arity: Int = 0) =
         SpecialMethodDescription(
@@ -45,7 +45,7 @@ class SpecialBridgeMethods(val context: CommonBackendContext) {
     private fun IrSimpleFunction.toDescription() = SpecialMethodDescription(
         parentAsClass.fqNameWhenAvailable,
         name,
-        valueParameters.size
+        konstueParameters.size
     )
 
     @Suppress("UNUSED_PARAMETER")
@@ -61,9 +61,9 @@ class SpecialBridgeMethods(val context: CommonBackendContext) {
         IrConstImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, context.irBuiltIns.intType, IrConstKind.Int, -1)
 
     private fun getSecondArg(bridge: IrSimpleFunction) =
-        IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, bridge.valueParameters[1].symbol)
+        IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, bridge.konstueParameters[1].symbol)
 
-    private val specialMethodsWithDefaults = mapOf(
+    private konst specialMethodsWithDefaults = mapOf(
         makeDescription(StandardNames.FqNames.collection, "contains", 1) to
                 SpecialMethodWithDefaultInfo(::constFalse, 1),
         makeDescription(StandardNames.FqNames.mutableCollection, "remove", 1) to
@@ -86,16 +86,16 @@ class SpecialBridgeMethods(val context: CommonBackendContext) {
                 SpecialMethodWithDefaultInfo(::constNull, 1, needsGenericSignature = true, needsUnsubstitutedBridge = true)
     )
 
-    private val specialProperties = mapOf(
+    private konst specialProperties = mapOf(
         makeDescription(StandardNames.FqNames.collection, "size") to BuiltInWithDifferentJvmName(),
         makeDescription(StandardNames.FqNames.map, "size") to BuiltInWithDifferentJvmName(),
         makeDescription(StandardNames.FqNames.charSequence.toSafe(), "length") to BuiltInWithDifferentJvmName(),
         makeDescription(StandardNames.FqNames.map, "keys") to BuiltInWithDifferentJvmName(needsGenericSignature = true),
-        makeDescription(StandardNames.FqNames.map, "values") to BuiltInWithDifferentJvmName(needsGenericSignature = true),
+        makeDescription(StandardNames.FqNames.map, "konstues") to BuiltInWithDifferentJvmName(needsGenericSignature = true),
         makeDescription(StandardNames.FqNames.map, "entries") to BuiltInWithDifferentJvmName(needsGenericSignature = true)
     )
 
-    private val specialMethods = mapOf(
+    private konst specialMethods = mapOf(
         makeDescription(StandardNames.FqNames.number.toSafe(), "toByte") to BuiltInWithDifferentJvmName(),
         makeDescription(StandardNames.FqNames.number.toSafe(), "toShort") to BuiltInWithDifferentJvmName(),
         makeDescription(StandardNames.FqNames.number.toSafe(), "toInt") to BuiltInWithDifferentJvmName(),
@@ -107,8 +107,8 @@ class SpecialBridgeMethods(val context: CommonBackendContext) {
                 BuiltInWithDifferentJvmName(needsGenericSignature = true, isOverriding = false)
     )
 
-    val specialMethodNames = (specialMethodsWithDefaults + specialMethods).map { (description) -> description.name }.toHashSet()
-    val specialPropertyNames = specialProperties.map { (description) -> description.name }.toHashSet()
+    konst specialMethodNames = (specialMethodsWithDefaults + specialMethods).map { (description) -> description.name }.toHashSet()
+    konst specialPropertyNames = specialProperties.map { (description) -> description.name }.toHashSet()
 
     fun findSpecialWithOverride(
         irFunction: IrSimpleFunction,
@@ -118,7 +118,7 @@ class SpecialBridgeMethods(val context: CommonBackendContext) {
             return null
 
         for (overridden in irFunction.allOverridden(includeSelf)) {
-            val description = overridden.toDescription()
+            konst description = overridden.toDescription()
             specialMethodsWithDefaults[description]?.let {
                 return Pair(overridden, it)
             }
@@ -127,13 +127,13 @@ class SpecialBridgeMethods(val context: CommonBackendContext) {
     }
 
     fun getSpecialMethodInfo(irFunction: IrSimpleFunction): SpecialMethodWithDefaultInfo? {
-        val description = irFunction.toDescription()
+        konst description = irFunction.toDescription()
         return specialMethodsWithDefaults[description]
     }
 
     fun getBuiltInWithDifferentJvmName(irFunction: IrSimpleFunction): BuiltInWithDifferentJvmName? {
         irFunction.correspondingPropertySymbol?.let {
-            val classFqName = irFunction.parentAsClass.fqNameWhenAvailable
+            konst classFqName = irFunction.parentAsClass.fqNameWhenAvailable
                 ?: return null
 
             return specialProperties[makeDescription(classFqName, it.owner.name.asString())]

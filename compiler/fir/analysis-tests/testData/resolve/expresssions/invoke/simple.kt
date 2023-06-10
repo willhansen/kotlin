@@ -3,5 +3,5 @@ class Simple {
 }
 
 fun test(s: Simple) {
-    val result = s()
+    konst result = s()
 }

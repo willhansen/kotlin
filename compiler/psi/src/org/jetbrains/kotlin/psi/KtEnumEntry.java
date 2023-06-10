@@ -69,7 +69,7 @@ public class KtEnumEntry extends KtClass {
     }
 
     @Override
-    public boolean isEquivalentTo(@Nullable PsiElement another) {
+    public boolean isEquikonstentTo(@Nullable PsiElement another) {
         if (another instanceof PsiEnumConstant) {
             PsiEnumConstant enumConstant = (PsiEnumConstant) another;
             PsiClass containingClass = enumConstant.getContainingClass();
@@ -83,6 +83,6 @@ public class KtEnumEntry extends KtClass {
                 }
             }
         }
-        return super.isEquivalentTo(another);
+        return super.isEquikonstentTo(another);
     }
 }

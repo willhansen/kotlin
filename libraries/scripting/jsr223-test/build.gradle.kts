@@ -3,18 +3,18 @@ plugins {
     kotlin("jvm")
 }
 
-val embeddableTestRuntime by configurations.creating {
+konst embeddableTestRuntime by configurations.creating {
     attributes {
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
         attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.LIBRARY))
     }
 }
 
-val testJsr223Runtime by configurations.creating {
+konst testJsr223Runtime by configurations.creating {
     extendsFrom(configurations["testRuntimeClasspath"])
 }
 
-val testCompilationClasspath by configurations.creating
+konst testCompilationClasspath by configurations.creating
 
 dependencies {
     testApi(commonDependency("junit"))
@@ -48,8 +48,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>> {
 projectTest(parallel = true) {
     dependsOn(":dist")
     workingDir = rootDir
-    val testRuntimeProvider = project.provider { testJsr223Runtime.asPath }
-    val testCompilationClasspathProvider = project.provider { testCompilationClasspath.asPath }
+    konst testRuntimeProvider = project.provider { testJsr223Runtime.asPath }
+    konst testCompilationClasspathProvider = project.provider { testCompilationClasspath.asPath }
     doFirst {
         systemProperty("testJsr223RuntimeClasspath", testRuntimeProvider.get())
         systemProperty("testCompilationClasspath", testCompilationClasspathProvider.get())

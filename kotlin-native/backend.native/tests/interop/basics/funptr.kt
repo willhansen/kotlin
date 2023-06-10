@@ -14,12 +14,12 @@ typealias NotSoLongSignatureFunction = (
 ) -> Int
 
 fun main(args: Array<String>) {
-    val atoiPtr = getAtoiPtr()!!
+    konst atoiPtr = getAtoiPtr()!!
 
-    val getPrintIntPtrPtr = getGetPrintIntPtrPtr()!!
-    val printIntPtr = getPrintIntPtrPtr()!!.reinterpret<CFunction<(Int) -> Unit>>()
+    konst getPrintIntPtrPtr = getGetPrintIntPtrPtr()!!
+    konst printIntPtr = getPrintIntPtrPtr()!!.reinterpret<CFunction<(Int) -> Unit>>()
 
-    val fortyTwo = memScoped {
+    konst fortyTwo = memScoped {
         atoiPtr("42".cstr.getPointer(memScope))
     }
 
@@ -31,15 +31,15 @@ fun main(args: Array<String>) {
             )
     )
 
-    val isIntPositivePtr = getIsIntPositivePtr()!!
+    konst isIntPositivePtr = getIsIntPositivePtr()!!
 
     printIntPtr(isIntPositivePtr(42).ifThenOneElseZero())
     printIntPtr(isIntPositivePtr(-42).ifThenOneElseZero())
 
     assertEquals(getMaxUIntGetter()!!(), UInt.MAX_VALUE)
 
-    val longSignaturePtr: COpaquePointer? = getLongSignatureFunctionPtr()
-    val notSoLongSignaturePtr: CPointer<CFunction<NotSoLongSignatureFunction>>? = getNotSoLongSignatureFunctionPtr()
+    konst longSignaturePtr: COpaquePointer? = getLongSignatureFunctionPtr()
+    konst notSoLongSignaturePtr: CPointer<CFunction<NotSoLongSignatureFunction>>? = getNotSoLongSignatureFunctionPtr()
     printIntPtr(notSoLongSignaturePtr!!.invoke(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
     printIntPtr(notSoLongSignatureFunction(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
 }

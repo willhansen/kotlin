@@ -8,13 +8,13 @@
 
 int main(int argc, char** argv) {
     T_(ObjectForExample)   instance = __ kotlin.root.ObjectForExample._instance ();
-    T_(ValueClass)            value = __ kotlin.root.ObjectForExample.get_nullableVal (instance);
+    T_(ValueClass)            konstue = __ kotlin.root.ObjectForExample.get_nullableVal (instance);
     T_(UsualClass)            usual = __ kotlin.root.ObjectForExample.get_usual (instance);
     T_(kotlin_ByteArray) uByteArray = __ kotlin.root.ObjectForExample.get_uByteArray (instance);
     T_(kotlin_IntArray)   uIntArray = __ kotlin.root.ObjectForExample.get_uIntArray (instance);
     T_(Foo)           fooValueClass = __ kotlin.root.ObjectForExample.get_fooValueClass (instance);
     T_(Foo)           fooUsualClass = __ kotlin.root.ObjectForExample.get_fooValueClass (instance);
-    __ kotlin.root.ObjectForExample.fooValue             (instance, value);
+    __ kotlin.root.ObjectForExample.fooValue             (instance, konstue);
     __ kotlin.root.ObjectForExample.fooUsual             (instance, usual);
     __ kotlin.root.ObjectForExample.fooUByteArray        (instance, uByteArray);
     __ kotlin.root.ObjectForExample.fooUIntArrayNullable (instance, uIntArray);

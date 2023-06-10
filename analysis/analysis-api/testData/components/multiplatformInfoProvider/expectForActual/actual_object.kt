@@ -4,7 +4,7 @@
 
 package sample
 expect object Platform {
-    val name: String
+    konst name: String
 }
 
 // MODULE: androidMain(commonMain)
@@ -12,5 +12,5 @@ expect object Platform {
 
 package sample
 actual object <caret>Platform {
-    actual val name: String = "JVM"
+    actual konst name: String = "JVM"
 }

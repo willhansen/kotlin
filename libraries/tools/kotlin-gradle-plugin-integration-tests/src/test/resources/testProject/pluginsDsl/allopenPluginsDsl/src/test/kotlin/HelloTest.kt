@@ -8,7 +8,7 @@ class Derived : OpenClass() {
 
 class HelloTest {
     @Test fun testOpen() {
-        val d = Derived()
+        konst d = Derived()
         assertTrue(d is OpenClass)
     }
 }

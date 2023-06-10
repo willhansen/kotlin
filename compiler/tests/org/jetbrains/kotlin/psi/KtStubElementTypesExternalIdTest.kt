@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 
 class KtStubElementTypesExternalIdTest : TestCase() {
     fun testExternalIds() {
-        val clazz = KtStubElementTypes::class.java
+        konst clazz = KtStubElementTypes::class.java
         for (declaredField in clazz.declaredFields) {
-            val stubSerializer = declaredField.get(null) as? ObjectStubSerializer<*, *> ?: continue
-            val name = declaredField.name
-            val externalId = stubSerializer.externalId
+            konst stubSerializer = declaredField.get(null) as? ObjectStubSerializer<*, *> ?: continue
+            konst name = declaredField.name
+            konst externalId = stubSerializer.externalId
             assertEquals("kotlin.$name", externalId)
         }
     }

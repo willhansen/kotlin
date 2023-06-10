@@ -22,12 +22,12 @@ object Singleton : Base() {
 }
 
 fun box(): String {
-    val ref1 = Some::foo
-    val ref2 = Some::bar
-    val ref3 = Some.Companion::foo
-    val ref4 = Some.Companion::bar
-    val ref5 = Singleton::foo
-    val ref6 = Singleton::bar
-    val result = ref1() + ref2() + ref3() + ref4() + ref5() + ref6()
+    konst ref1 = Some::foo
+    konst ref2 = Some::bar
+    konst ref3 = Some.Companion::foo
+    konst ref4 = Some.Companion::bar
+    konst ref5 = Singleton::foo
+    konst ref6 = Singleton::bar
+    konst result = ref1() + ref2() + ref3() + ref4() + ref5() + ref6()
     return if (result == "ABABAC") "OK" else "Fail: $result"
 }

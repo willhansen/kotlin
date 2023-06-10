@@ -92,8 +92,8 @@ interface CSSStyleDeclaration {
   getter DOMString item(unsigned long index);
   DOMString getPropertyValue(DOMString property);
   DOMString getPropertyPriority(DOMString property);
-  [CEReactions] void setProperty(DOMString property, [TreatNullAs=EmptyString] DOMString value, [TreatNullAs=EmptyString] optional DOMString priority = "");
-  [CEReactions] void setPropertyValue(DOMString property, [TreatNullAs=EmptyString] DOMString value);
+  [CEReactions] void setProperty(DOMString property, [TreatNullAs=EmptyString] DOMString konstue, [TreatNullAs=EmptyString] optional DOMString priority = "");
+  [CEReactions] void setPropertyValue(DOMString property, [TreatNullAs=EmptyString] DOMString konstue);
   [CEReactions] void setPropertyPriority(DOMString property, [TreatNullAs=EmptyString] DOMString priority);
   [CEReactions] DOMString removeProperty(DOMString property);
   readonly attribute CSSRule? parentRule;
@@ -219,8 +219,8 @@ interface CSSStyleDeclaration {
   getter DOMString item(unsigned long index);
   DOMString getPropertyValue(DOMString property);
   DOMString getPropertyPriority(DOMString property);
-  [CEReactions] void setProperty(DOMString property, [TreatNullAs=EmptyString] DOMString value, [TreatNullAs=EmptyString] optional DOMString priority = "");
-  [CEReactions] void setPropertyValue(DOMString property, [TreatNullAs=EmptyString] DOMString value);
+  [CEReactions] void setProperty(DOMString property, [TreatNullAs=EmptyString] DOMString konstue, [TreatNullAs=EmptyString] optional DOMString priority = "");
+  [CEReactions] void setPropertyValue(DOMString property, [TreatNullAs=EmptyString] DOMString konstue);
   [CEReactions] void setPropertyPriority(DOMString property, [TreatNullAs=EmptyString] DOMString priority);
   [CEReactions] DOMString removeProperty(DOMString property);
   readonly attribute CSSRule? parentRule;

@@ -2,7 +2,7 @@ RAW_FIR:
 FILE: [ResolvedTo(RAW_FIR)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] interface OV : R|kotlin/Any| {
-        public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
+        public? final? [ResolvedTo(RAW_FIR)] konst originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
         public? final? [ResolvedTo(RAW_FIR)] class ResolveMe : OV {
@@ -10,7 +10,7 @@ FILE: [ResolvedTo(RAW_FIR)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -27,7 +27,7 @@ IMPORTS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] interface OV : R|kotlin/Any| {
-        public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
+        public? final? [ResolvedTo(RAW_FIR)] konst originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
         public? final? [ResolvedTo(RAW_FIR)] class ResolveMe : OV {
@@ -35,7 +35,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -52,7 +52,7 @@ COMPILER_REQUIRED_ANNOTATIONS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] interface OV : R|kotlin/Any| {
-        public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
+        public? final? [ResolvedTo(RAW_FIR)] konst originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
         public? final? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] class ResolveMe : OV {
@@ -60,7 +60,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -77,7 +77,7 @@ COMPANION_GENERATION:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] interface OV : R|kotlin/Any| {
-        public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
+        public? final? [ResolvedTo(RAW_FIR)] konst originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
         public? final? [ResolvedTo(COMPANION_GENERATION)] class ResolveMe : OV {
@@ -85,7 +85,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -102,7 +102,7 @@ SUPER_TYPES:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(SUPER_TYPES)] interface OV : R|kotlin/Any| {
-        public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
+        public? final? [ResolvedTo(RAW_FIR)] konst originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
         public? final? [ResolvedTo(SUPER_TYPES)] class ResolveMe : R|OV| {
@@ -110,7 +110,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -127,7 +127,7 @@ TYPES:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(TYPES)] interface OV : R|kotlin/Any| {
-        public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
+        public? final? [ResolvedTo(RAW_FIR)] konst originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
         public? final? [ResolvedTo(TYPES)] class ResolveMe : R|OV| {
@@ -135,7 +135,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -152,7 +152,7 @@ STATUS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
-        public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
+        public? final? [ResolvedTo(RAW_FIR)] konst originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
         public final [ResolvedTo(STATUS)] class ResolveMe : R|OV| {
@@ -160,7 +160,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -177,7 +177,7 @@ EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
-        public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
+        public? final? [ResolvedTo(RAW_FIR)] konst originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
         public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class ResolveMe : R|OV| {
@@ -185,7 +185,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -202,7 +202,7 @@ ARGUMENTS_OF_ANNOTATIONS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
-        public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
+        public abstract [ResolvedTo(STATUS)] konst originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
         public final [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] class ResolveMe : R|OV| {
@@ -210,7 +210,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -227,7 +227,7 @@ CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
-        public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
+        public abstract [ResolvedTo(STATUS)] konst originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
         public final [ResolvedTo(CONTRACTS)] class ResolveMe : R|OV| {
@@ -235,7 +235,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -252,7 +252,7 @@ IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
-        public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
+        public abstract [ResolvedTo(STATUS)] konst originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
         public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class ResolveMe : R|OV| {
@@ -260,7 +260,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -277,7 +277,7 @@ ANNOTATIONS_ARGUMENTS_MAPPING:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
-        public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
+        public abstract [ResolvedTo(STATUS)] konst originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
         public final [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] class ResolveMe : R|OV| {
@@ -285,7 +285,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 LAZY_super<<implicit>>
             }
 
-            public? open? override [ResolvedTo(RAW_FIR)] val originalExpressions: A
+            public? open? override [ResolvedTo(RAW_FIR)] konst originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] get(): A
 
         }
@@ -302,7 +302,7 @@ BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
-        public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
+        public abstract [ResolvedTo(STATUS)] konst originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
         public final [ResolvedTo(BODY_RESOLVE)] class ResolveMe : R|OV| {
@@ -310,7 +310,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open override [ResolvedTo(BODY_RESOLVE)] val originalExpressions: R|A|
+            public open override [ResolvedTo(BODY_RESOLVE)] konst originalExpressions: R|A|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe] get(): R|A|
 
         }
@@ -327,7 +327,7 @@ FILE RAW TO BODY:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public abstract [ResolvedTo(BODY_RESOLVE)] interface OV : R|kotlin/Any| {
-        public abstract [ResolvedTo(BODY_RESOLVE)] val originalExpressions: R|A|
+        public abstract [ResolvedTo(BODY_RESOLVE)] konst originalExpressions: R|A|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=OV] get(): R|A|
 
         public final [ResolvedTo(BODY_RESOLVE)] class ResolveMe : R|OV| {
@@ -335,7 +335,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open override [ResolvedTo(BODY_RESOLVE)] val originalExpressions: R|A|
+            public open override [ResolvedTo(BODY_RESOLVE)] konst originalExpressions: R|A|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe] get(): R|A|
 
         }

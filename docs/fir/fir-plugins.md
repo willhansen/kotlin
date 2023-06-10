@@ -51,9 +51,9 @@ class B {
 
 // my-super-plugin code
 ...
-val provider = session.predicateBasedProvider
-val myAnn = "my.super.plugin.MyAnnotation".toFqn()
-val myMeta = "my.super.plugin.MyMetaAnnotation".toFqn()
+konst provider = session.predicateBasedProvider
+konst myAnn = "my.super.plugin.MyAnnotation".toFqn()
+konst myMeta = "my.super.plugin.MyMetaAnnotation".toFqn()
 
 provider.getSymbolsByPredicate(has(myAnn)) // [test.A]
 provider.getSymbolsByPredicate(under(myAnn)) // [test.A.foo]
@@ -145,7 +145,7 @@ abstract class FirStatusTransformerExtension(session: FirSession) : FirExtension
 ```kotlin
 /*
  * transformStatus(function, status) {
- *   val newVisibility = if (status.visibility == Unknown) Public else status.visibility
+ *   konst newVisibility = if (status.visibility == Unknown) Public else status.visibility
  *   return status.withVisibility(newVisbility)
  * }
  */
@@ -215,9 +215,9 @@ abstract class FirDeclarationGenerationExtension(session: FirSession) : FirExten
 
 ```kotlin
 abstract class FirAdditionalCheckersExtension(session: FirSession) : FirExtension(session) {
-    open val declarationCheckers: DeclarationCheckers = DeclarationCheckers.EMPTY
-    open val expressionCheckers: ExpressionCheckers = ExpressionCheckers.EMPTY
-    open val typeCheckers: TypeCheckers = TypeCheckers.EMPTY
+    open konst declarationCheckers: DeclarationCheckers = DeclarationCheckers.EMPTY
+    open konst expressionCheckers: ExpressionCheckers = ExpressionCheckers.EMPTY
+    open konst typeCheckers: TypeCheckers = TypeCheckers.EMPTY
 }
 ```
 

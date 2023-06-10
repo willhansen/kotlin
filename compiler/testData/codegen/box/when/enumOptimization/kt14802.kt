@@ -4,22 +4,22 @@
 // CHECK_IF_COUNT: function=crash count=1 TARGET_BACKENDS=JS
 // CHECK_IF_COUNT: function=crash count=3 IGNORED_BACKENDS=JS
 
-class EncapsulatedEnum<T : Enum<T>>(val value: T)
+class EncapsulatedEnum<T : Enum<T>>(konst konstue: T)
 
-enum class MyEnum(val value: String) {
+enum class MyEnum(konst konstue: String) {
     VALUE_A("OK"),
     VALUE_B("fail"),
 }
 
 private fun crash(encapsulated: EncapsulatedEnum<*>) {
-    val myEnum = encapsulated.value
+    konst myEnum = encapsulated.konstue
     if (myEnum !is MyEnum) {
         return
     }
 
     when (myEnum) {
-        MyEnum.VALUE_A -> res = myEnum.value
-        MyEnum.VALUE_B -> res = myEnum.value
+        MyEnum.VALUE_A -> res = myEnum.konstue
+        MyEnum.VALUE_B -> res = myEnum.konstue
     }
 }
 

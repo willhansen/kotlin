@@ -16,12 +16,12 @@ import kotlin.script.experimental.jvm.util.classpathFromClass
 @KotlinScript(fileExtension = "simplescript.kts")
 abstract class SimpleScript
 
-val simpleScriptCompilationConfiguration =
+konst simpleScriptCompilationConfiguration =
     createJvmCompilationConfigurationFromTemplate<SimpleScript> {
         updateClasspath(classpathFromClass<SimpleScript>())
     }
 
-val simpleScriptEvaluationConfiguration = ScriptEvaluationConfiguration()
+konst simpleScriptEkonstuationConfiguration = ScriptEkonstuationConfiguration()
 
 @KotlinScript(fileExtension = "withboth.kts", compilationConfiguration = ReceiverAndPropertiesConfiguration::class)
 abstract class ScriptWithBoth
@@ -60,7 +60,7 @@ object ImplicitReceiverConfiguration : ScriptCompilationConfiguration(
 
 class ImplicitReceiverClass(
     @Suppress("unused")
-    val receiverString: String
+    konst receiverString: String
 )
 
 

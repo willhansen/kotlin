@@ -10,24 +10,24 @@ import java.io.File
 import java.io.Serializable
 
 sealed interface IdeaKpmProject : Serializable {
-    val gradlePluginVersion: String
-    val coreLibrariesVersion: String
-    val explicitApiModeCliOption: String?
-    val kotlinNativeHome: File
-    val modules: List<IdeaKpmModule>
+    konst gradlePluginVersion: String
+    konst coreLibrariesVersion: String
+    konst explicitApiModeCliOption: String?
+    konst kotlinNativeHome: File
+    konst modules: List<IdeaKpmModule>
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmProjectImpl(
-    override val gradlePluginVersion: String,
-    override val coreLibrariesVersion: String,
-    override val explicitApiModeCliOption: String?,
-    override val kotlinNativeHome: File,
-    override val modules: List<IdeaKpmModule>
+    override konst gradlePluginVersion: String,
+    override konst coreLibrariesVersion: String,
+    override konst explicitApiModeCliOption: String?,
+    override konst kotlinNativeHome: File,
+    override konst modules: List<IdeaKpmModule>
 ) : IdeaKpmProject {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

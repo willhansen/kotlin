@@ -15,6 +15,6 @@ open class Child : I<String> {
 }
 
 fun box(): String {
-    val child: I<String> = Child()
+    konst child: I<String> = Child()
     return child.foo("O", Outer.Inner())
 }

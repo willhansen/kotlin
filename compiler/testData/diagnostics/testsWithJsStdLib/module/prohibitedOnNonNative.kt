@@ -11,7 +11,7 @@ class <!JS_MODULE_PROHIBITED_ON_NON_NATIVE!>A<!>
 fun foo()<!> = 23
 
 <!JS_MODULE_PROHIBITED_ON_NON_NATIVE!>@JsModule("bar")
-val bar<!> = 42
+konst bar<!> = 42
 
 <!JS_MODULE_PROHIBITED_ON_NON_NATIVE!>@JsNonModule
-val baz<!> = 99
+konst baz<!> = 99

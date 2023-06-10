@@ -3,14 +3,14 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str(val string: String)
+konstue class Str(konst string: String)
 
 class C {
     var s = Str("")
 }
 
 fun box(): String {
-    val x = C()
+    konst x = C()
     x.s = Str("OK")
     return x.s.string
 }

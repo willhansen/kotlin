@@ -50,13 +50,13 @@ import org.jetbrains.kotlin.types.expressions.ExpressionTypingContext
 import org.jetbrains.kotlin.types.expressions.isWithoutValueArguments
 import org.jetbrains.kotlin.utils.CallOnceFunction
 
-class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSettings) {
+class QualifiedExpressionResolver(konst languageVersionSettings: LanguageVersionSettings) {
     fun resolvePackageHeader(
         packageDirective: KtPackageDirective,
         module: ModuleDescriptor,
         trace: BindingTrace
     ) {
-        val packageNames = packageDirective.packageNames
+        konst packageNames = packageDirective.packageNames
         for ((index, nameExpression) in packageNames.withIndex()) {
             storeResult(
                 trace, nameExpression, module.getPackage(packageDirective.getFqName(nameExpression)),
@@ -66,10 +66,10 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
     }
 
     data class TypeQualifierResolutionResult(
-        val qualifierParts: List<ExpressionQualifierPart>,
-        val classifierDescriptor: ClassifierDescriptor? = null
+        konst qualifierParts: List<ExpressionQualifierPart>,
+        konst classifierDescriptor: ClassifierDescriptor? = null
     ) {
-        val allProjections: List<KtTypeProjection>
+        konst allProjections: List<KtTypeProjection>
             get() = qualifierParts.flatMap { it.typeArguments?.arguments.orEmpty() }
     }
 
@@ -79,7 +79,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         reportOn: KtExpression?,
         trace: BindingTrace
     ): ClassifierDescriptor? {
-        val (classifier, isDeprecated) = findFirstClassifierWithDeprecationStatus(name, lookupLocation) ?: return null
+        konst (classifier, isDeprecated) = findFirstClassifierWithDeprecationStatus(name, lookupLocation) ?: return null
 
         if (isDeprecated && reportOn != null) {
             trace.record(BindingContext.DEPRECATED_SHORT_NAME_ACCESS, reportOn) // For IDE
@@ -100,10 +100,10 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         trace: BindingTrace,
         isDebuggerContext: Boolean
     ): TypeQualifierResolutionResult {
-        val ownerDescriptor = if (!isDebuggerContext) scope.ownerDescriptor else null
+        konst ownerDescriptor = if (!isDebuggerContext) scope.ownerDescriptor else null
         if (userType.qualifier == null) {
-            val descriptor = userType.referenceExpression?.let { expression ->
-                val classifier = scope.findClassifierAndReportDeprecationIfNeeded(
+            konst descriptor = userType.referenceExpression?.let { expression ->
+                konst classifier = scope.findClassifierAndReportDeprecationIfNeeded(
                     expression.getReferencedNameAsName(),
                     KotlinLookupLocation(expression),
                     expression,
@@ -118,9 +118,9 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
             return TypeQualifierResolutionResult(userType.asQualifierPartList().first, descriptor)
         }
 
-        val (qualifierPartList, hasError) = userType.asQualifierPartList()
+        konst (qualifierPartList, hasError) = userType.asQualifierPartList()
         if (hasError) {
-            val descriptor = resolveToPackageOrClass(
+            konst descriptor = resolveToPackageOrClass(
                 qualifierPartList, scope.ownerDescriptor.module, trace, ownerDescriptor, scope, position = QualifierPosition.TYPE
             ) as? ClassifierDescriptor
             return TypeQualifierResolutionResult(qualifierPartList, descriptor)
@@ -138,17 +138,17 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
     ): TypeQualifierResolutionResult {
         assert(qualifierPartList.isNotEmpty()) { "Qualifier list should not be empty" }
 
-        val qualifier = resolveToPackageOrClass(
+        konst qualifier = resolveToPackageOrClass(
             qualifierPartList.subList(0, qualifierPartList.size - 1),
             scope.ownerDescriptor.module, trace, ownerDescriptor, scope,
             position = QualifierPosition.TYPE
         ) ?: return TypeQualifierResolutionResult(qualifierPartList, null)
 
-        val lastPart = qualifierPartList.last()
-        val classifier = when (qualifier) {
+        konst lastPart = qualifierPartList.last()
+        konst classifier = when (qualifier) {
             is PackageViewDescriptor -> qualifier.memberScope.getContributedClassifier(lastPart.name, lastPart.location)
             is ClassDescriptor -> {
-                val descriptor = qualifier.unsubstitutedInnerClassesScope.getContributedClassifier(lastPart.name, lastPart.location)
+                konst descriptor = qualifier.unsubstitutedInnerClassesScope.getContributedClassifier(lastPart.name, lastPart.location)
                 checkNotEnumEntry(descriptor, trace, lastPart.expression)
                 descriptor
             }
@@ -161,7 +161,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
     private fun checkNotEnumEntry(descriptor: DeclarationDescriptor?, trace: BindingTrace, expression: KtSimpleNameExpression?) {
         expression ?: return
         if (descriptor != null && DescriptorUtils.isEnumEntry(descriptor)) {
-            val qualifiedParent = expression.getTopmostParentQualifiedExpressionForSelector()
+            konst qualifiedParent = expression.getTopmostParentQualifiedExpressionForSelector()
             if (qualifiedParent == null || qualifiedParent.parent !is KtDoubleColonExpression) {
                 trace.report(Errors.ENUM_ENTRY_AS_TYPE.on(expression))
             }
@@ -174,16 +174,16 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         trace: BindingTrace,
         isDebuggerContext: Boolean
     ): TypeQualifierResolutionResult {
-        val ownerDescriptor = if (!isDebuggerContext) scope.ownerDescriptor else null
+        konst ownerDescriptor = if (!isDebuggerContext) scope.ownerDescriptor else null
 
-        val qualifierPartList = expression.asQualifierPartList(doubleColonLHS = true)
+        konst qualifierPartList = expression.asQualifierPartList(doubleColonLHS = true)
         if (qualifierPartList.isEmpty()) {
             return TypeQualifierResolutionResult(qualifierPartList, null)
         }
 
         if (qualifierPartList.size == 1) {
-            val (name, simpleNameExpression) = qualifierPartList.single()
-            val descriptor = scope.findClassifierAndReportDeprecationIfNeeded(
+            konst (name, simpleNameExpression) = qualifierPartList.single()
+            konst descriptor = scope.findClassifierAndReportDeprecationIfNeeded(
                 name,
                 KotlinLookupLocation(simpleNameExpression),
                 simpleNameExpression,
@@ -198,10 +198,10 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
 
     private fun KtUserType.asQualifierPartList(): Pair<List<ExpressionQualifierPart>, Boolean> {
         var hasError = false
-        val result = SmartList<ExpressionQualifierPart>()
+        konst result = SmartList<ExpressionQualifierPart>()
         var userType: KtUserType? = this
         while (userType != null) {
-            val referenceExpression = userType.referenceExpression
+            konst referenceExpression = userType.referenceExpression
             if (referenceExpression != null) {
                 result.add(
                     ExpressionQualifierPart(
@@ -234,11 +234,11 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
                 packageFragmentForVisibilityCheck
             )
 
-        val primaryImportingScope = processReferenceInContextOf(moduleDescriptor)
+        konst primaryImportingScope = processReferenceInContextOf(moduleDescriptor)
         if (!languageVersionSettings.isLibraryToSourceAnalysisEnabled) return primaryImportingScope
 
-        val resolutionAnchor = moduleDescriptor.getResolutionAnchorIfAny() ?: return primaryImportingScope
-        val anchorImportingScope = processReferenceInContextOf(resolutionAnchor) ?: return primaryImportingScope
+        konst resolutionAnchor = moduleDescriptor.getResolutionAnchorIfAny() ?: return primaryImportingScope
+        konst anchorImportingScope = processReferenceInContextOf(resolutionAnchor) ?: return primaryImportingScope
         if (primaryImportingScope == null) return anchorImportingScope
         return CompositePrioritizedImportingScope(anchorImportingScope, primaryImportingScope)
     }
@@ -252,17 +252,17 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
     ): ImportingScope? { // null if some error happened
         ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
 
-        val importedReference = importDirective.importContent ?: return null
-        val path = importedReference.asQualifierPartList()
-        val lastPart = path.lastOrNull() ?: return null
-        val packageFragmentForCheck =
+        konst importedReference = importDirective.importContent ?: return null
+        konst path = importedReference.asQualifierPartList()
+        konst lastPart = path.lastOrNull() ?: return null
+        konst packageFragmentForCheck =
             if (importDirective is KtImportDirective)
                 computePackageFragmentToCheck(importDirective.containingKtFile, packageFragmentForVisibilityCheck)
             else
                 null
 
         if (importDirective.isAllUnder) {
-            val packageOrClassDescriptor = resolveToPackageOrClass(
+            konst packageOrClassDescriptor = resolveToPackageOrClass(
                 path, moduleDescriptor, trace, packageFragmentForCheck,
                 scopeForFirstPart = null, position = QualifierPosition.IMPORT
             ).classDescriptorFromTypeAlias() ?: return null
@@ -313,7 +313,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         lastPart: QualifierPart,
         packageFragmentForVisibilityCheck: PackageFragmentDescriptor?
     ): ImportingScope? {
-        val aliasName = importDirective.importedName
+        konst aliasName = importDirective.importedName
         if (aliasName == null) {
             // import kotlin.
             resolveToPackageOrClass(
@@ -327,12 +327,12 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
             return null
         }
 
-        val resolvedDescriptor = resolveToPackageOrClass(
+        konst resolvedDescriptor = resolveToPackageOrClass(
             path.subList(0, path.size - 1), moduleDescriptor, trace,
             packageFragmentForVisibilityCheck, scopeForFirstPart = null, position = QualifierPosition.IMPORT
         ) ?: return null
 
-        val packageOrClassDescriptor =
+        konst packageOrClassDescriptor =
             (resolvedDescriptor as? TypeAliasDescriptor)?.let { it.classDescriptor ?: return null } ?: resolvedDescriptor
 
         return LazyExplicitImportScope(
@@ -364,13 +364,13 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         packageOrClassDescriptor: DeclarationDescriptor,
         lastPart: QualifierPart
     ) {
-        val lastPartExpression = lastPart.expression ?: return
+        konst lastPartExpression = lastPart.expression ?: return
 
-        val descriptors = SmartList<DeclarationDescriptor>()
-        val lastName = lastPart.name
+        konst descriptors = SmartList<DeclarationDescriptor>()
+        konst lastName = lastPart.name
         when (packageOrClassDescriptor) {
             is PackageViewDescriptor -> {
-                val packageDescriptor = moduleDescriptor.getPackage(packageOrClassDescriptor.fqName.child(lastName))
+                konst packageDescriptor = moduleDescriptor.getPackage(packageOrClassDescriptor.fqName.child(lastName))
                 if (!packageDescriptor.isEmpty()) {
                     trace.report(Errors.PACKAGE_CANNOT_BE_IMPORTED.on(lastPartExpression))
                     descriptors.add(packageOrClassDescriptor)
@@ -378,7 +378,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
             }
 
             is ClassDescriptor -> {
-                val memberScope = packageOrClassDescriptor.unsubstitutedMemberScope
+                konst memberScope = packageOrClassDescriptor.unsubstitutedMemberScope
                 descriptors.addAll(memberScope.getContributedFunctions(lastName, lastPart.location))
                 descriptors.addAll(memberScope.getContributedVariables(lastName, lastPart.location))
                 if (descriptors.isNotEmpty()) {
@@ -405,7 +405,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         }
 
     private fun KtExpression.asQualifierPartList(doubleColonLHS: Boolean = false): List<ExpressionQualifierPart> {
-        val result = SmartList<ExpressionQualifierPart>()
+        konst result = SmartList<ExpressionQualifierPart>()
 
         fun addQualifierPart(expression: KtExpression?): Boolean {
             if (expression is KtSimpleNameExpression) {
@@ -413,7 +413,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
                 return true
             }
             if (doubleColonLHS && expression is KtCallExpression && expression.isWithoutValueArguments) {
-                val simpleName = expression.calleeExpression
+                konst simpleName = expression.calleeExpression
                 if (simpleName is KtSimpleNameExpression) {
                     result.add(ExpressionQualifierPart(simpleName.getReferencedNameAsName(), simpleName, expression.typeArgumentList))
                     return true
@@ -436,11 +436,11 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
     }
 
     open class QualifierPart(
-        val name: Name,
-        val typeArguments: KtTypeArgumentList? = null,
-        val location: LookupLocation = NoLookupLocation.FOR_DEFAULT_IMPORTS
+        konst name: Name,
+        konst typeArguments: KtTypeArgumentList? = null,
+        konst location: LookupLocation = NoLookupLocation.FOR_DEFAULT_IMPORTS
     ) {
-        open val expression: KtSimpleNameExpression? get() = null
+        open konst expression: KtSimpleNameExpression? get() = null
 
         operator fun component1() = name
         open operator fun component2() = expression
@@ -449,7 +449,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
 
     class ExpressionQualifierPart(
         name: Name,
-        override val expression: KtSimpleNameExpression,
+        override konst expression: KtSimpleNameExpression,
         typeArguments: KtTypeArgumentList? = null
     ) : QualifierPart(name, typeArguments, KotlinLookupLocation(expression)) {
         constructor(expression: KtSimpleNameExpression) : this(expression.getReferencedNameAsName(), expression)
@@ -465,7 +465,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         scopeForFirstPart: LexicalScope?,
         position: QualifierPosition
     ): DeclarationDescriptor? {
-        val (packageOrClassDescriptor, endIndex) =
+        konst (packageOrClassDescriptor, endIndex) =
             resolveToPackageOrClassPrefix(path, moduleDescriptor, trace, shouldBeVisibleFrom, scopeForFirstPart, position)
 
         if (endIndex != path.size) {
@@ -503,10 +503,10 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
             return Pair(moduleDescriptor.getPackage(FqName.ROOT), 0)
         }
 
-        val firstPart = path.first()
+        konst firstPart = path.first()
 
         if (position == QualifierPosition.EXPRESSION) {
-            // In expression position, value wins against classifier (and package).
+            // In expression position, konstue wins against classifier (and package).
             // If we see a function or variable (possibly ambiguous),
             // tell resolver we have no qualifier and let it perform the context-dependent resolution.
             if (scopeForFirstPart != null && isValue != null && firstPart.expression != null && isValue(firstPart.expression!!)) {
@@ -514,13 +514,13 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
             }
         }
 
-        val classifierDescriptor = scopeForFirstPart?.findClassifier(firstPart.name, firstPart.location)
+        konst classifierDescriptor = scopeForFirstPart?.findClassifier(firstPart.name, firstPart.location)
 
         if (classifierDescriptor != null) {
             storeResult(trace, firstPart.expression, classifierDescriptor, shouldBeVisibleFrom, position)
         }
 
-        val (prefixDescriptor, nextIndexAfterPrefix) =
+        konst (prefixDescriptor, nextIndexAfterPrefix) =
             if (classifierDescriptor != null)
                 Pair(classifierDescriptor, 1)
             else
@@ -528,16 +528,16 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
 
         var currentDescriptor: DeclarationDescriptor? = prefixDescriptor
         for (qualifierPartIndex in nextIndexAfterPrefix until path.size) {
-            val qualifierPart = path[qualifierPartIndex]
+            konst qualifierPart = path[qualifierPartIndex]
 
-            val nextPackageOrClassDescriptor =
+            konst nextPackageOrClassDescriptor =
                 when (currentDescriptor) {
                     is TypeAliasDescriptor -> // TODO type aliases as qualifiers? (would break some assumptions in TypeResolver)
                         null
                     is ClassDescriptor ->
                         currentDescriptor.getContributedClassifier(qualifierPart)
                     is PackageViewDescriptor -> {
-                        val packageView =
+                        konst packageView =
                             if (qualifierPart.typeArguments == null) {
                                 moduleDescriptor.getPackage(currentDescriptor.fqName.child(qualifierPart.name))
                             } else null
@@ -551,7 +551,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
                         null
                 }
 
-            // If we are in expression, this name can denote a value (not a package or class).
+            // If we are in expression, this name can denote a konstue (not a package or class).
             if (!(position == QualifierPosition.EXPRESSION && nextPackageOrClassDescriptor == null)) {
                 storeResult(trace, qualifierPart.expression, nextPackageOrClassDescriptor, shouldBeVisibleFrom, position)
             }
@@ -574,15 +574,15 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         receiver: Receiver?,
         context: ExpressionTypingContext
     ): Qualifier? {
-        val name = expression.getReferencedNameAsName()
+        konst name = expression.getReferencedNameAsName()
         if (!expression.isPhysical && !name.isSpecial && name.asString().endsWith(CompletionUtilCore.DUMMY_IDENTIFIER_TRIMMED)) {
             return null
         }
 
-        val location = KotlinLookupLocation(expression)
-        val qualifierDescriptor = when (receiver) {
+        konst location = KotlinLookupLocation(expression)
+        konst qualifierDescriptor = when (receiver) {
             is PackageQualifier -> {
-                val childPackageFQN = receiver.descriptor.fqName.child(name)
+                konst childPackageFQN = receiver.descriptor.fqName.child(name)
                 receiver.descriptor.module.getPackage(childPackageFQN).takeUnless { it.isEmpty() }
                     ?: receiver.descriptor.memberScope.getContributedClassifier(name, location)
             }
@@ -601,11 +601,11 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
     }
 
     data class QualifiedExpressionResolveResult(
-        val classOrPackage: DeclarationDescriptor?,
-        val memberName: Name?
+        konst classOrPackage: DeclarationDescriptor?,
+        konst memberName: Name?
     ) {
         companion object {
-            val UNRESOLVED = QualifiedExpressionResolveResult(null, null)
+            konst UNRESOLVED = QualifiedExpressionResolveResult(null, null)
         }
     }
 
@@ -614,11 +614,11 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         scope: LexicalScope,
         context: BindingContext
     ): QualifiedExpressionResolveResult {
-        val qualifiedExpressions = unrollToLeftMostQualifiedExpression(expression)
-        val path = mapToQualifierParts(qualifiedExpressions, 0)
-        val trace = DelegatingBindingTrace(context, "Temp trace for resolving qualified expression")
+        konst qualifiedExpressions = unrollToLeftMostQualifiedExpression(expression)
+        konst path = mapToQualifierParts(qualifiedExpressions, 0)
+        konst trace = DelegatingBindingTrace(context, "Temp trace for resolving qualified expression")
 
-        val (result, index) = resolveToPackageOrClassPrefix(
+        konst (result, index) = resolveToPackageOrClassPrefix(
             path = path,
             moduleDescriptor = scope.ownerDescriptor.module,
             trace = trace,
@@ -640,10 +640,10 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         context: ExpressionTypingContext,
         isValue: (KtSimpleNameExpression) -> Boolean
     ): List<CallExpressionElement> {
-        val qualifiedExpressions = unrollToLeftMostQualifiedExpression(expression)
-        val maxPossibleQualifierPrefix = mapToQualifierParts(qualifiedExpressions, 1)
+        konst qualifiedExpressions = unrollToLeftMostQualifiedExpression(expression)
+        konst maxPossibleQualifierPrefix = mapToQualifierParts(qualifiedExpressions, 1)
 
-        val nextIndexAfterPrefix = resolveToPackageOrClassPrefix(
+        konst nextIndexAfterPrefix = resolveToPackageOrClassPrefix(
             path = maxPossibleQualifierPrefix,
             moduleDescriptor = context.scope.ownerDescriptor.module,
             trace = context.trace,
@@ -653,7 +653,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
             isValue = isValue
         ).second
 
-        val nextExpressionIndexAfterQualifier =
+        konst nextExpressionIndexAfterQualifier =
             if (nextIndexAfterPrefix == 0) 0 else nextIndexAfterPrefix - 1
 
         return qualifiedExpressions
@@ -667,25 +667,25 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
     ): List<QualifierPart> {
         if (qualifiedExpressions.isEmpty()) return emptyList()
 
-        val first = qualifiedExpressions.first()
+        konst first = qualifiedExpressions.first()
         if (first !is KtDotQualifiedExpression) return emptyList()
-        val firstReceiver = first.receiverExpression
+        konst firstReceiver = first.receiverExpression
         if (firstReceiver !is KtSimpleNameExpression) return emptyList()
 
         // Qualifier parts are receiver name for the leftmost expression
         //  and selector names for all but the rightmost qualified expressions
-        //  (since rightmost selector should denote a value in expression position,
+        //  (since rightmost selector should denote a konstue in expression position,
         //  and thus can't be a qualifier part).
         // E.g.:
         //  qualified expression 'a.b': qualifier parts == ['a']
         //  qualified expression 'a.b.c.d': qualifier parts == ['a', 'b', 'c']
 
-        val qualifierParts = arrayListOf<QualifierPart>()
+        konst qualifierParts = arrayListOf<QualifierPart>()
         qualifierParts.add(ExpressionQualifierPart(firstReceiver))
 
         for (qualifiedExpression in qualifiedExpressions.dropLast(skipLast)) {
             if (qualifiedExpression !is KtDotQualifiedExpression) break
-            val selector = qualifiedExpression.selectorExpression
+            konst selector = qualifiedExpression.selectorExpression
             if (selector !is KtSimpleNameExpression) break
             qualifierParts.add(ExpressionQualifierPart(selector))
         }
@@ -698,12 +698,12 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         trace: BindingTrace,
         position: QualifierPosition
     ): Pair<PackageViewDescriptor, Int> {
-        val possiblePackagePrefixSize = path.indexOfFirst { it.typeArguments != null }.let { if (it == -1) path.size else it + 1 }
+        konst possiblePackagePrefixSize = path.indexOfFirst { it.typeArguments != null }.let { if (it == -1) path.size else it + 1 }
         var fqName = FqName.fromSegments(path.subList(0, possiblePackagePrefixSize).map { it.name.asString() })
 
         var prefixSize = possiblePackagePrefixSize
         while (!fqName.isRoot) {
-            val packageDescriptor = getPackage(fqName)
+            konst packageDescriptor = getPackage(fqName)
             if (!packageDescriptor.isEmpty()) {
                 recordPackageViews(path.subList(0, prefixSize), packageDescriptor, trace, position)
                 return Pair(packageDescriptor, prefixSize)
@@ -740,10 +740,10 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
     ) {
         referenceExpression ?: return
         if (descriptors.size > 1) {
-            val visibleDescriptors = descriptors.filter { isVisible(it, shouldBeVisibleFrom, position, languageVersionSettings) }
+            konst visibleDescriptors = descriptors.filter { isVisible(it, shouldBeVisibleFrom, position, languageVersionSettings) }
             when {
                 visibleDescriptors.isEmpty() -> {
-                    val descriptor = descriptors.first() as DeclarationDescriptorWithVisibility
+                    konst descriptor = descriptors.first() as DeclarationDescriptorWithVisibility
                     trace.report(Errors.INVISIBLE_REFERENCE.on(referenceExpression, descriptor, descriptor.visibility, descriptor))
                 }
                 visibleDescriptors.size > 1 -> {
@@ -777,7 +777,7 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         UnderscoreUsageChecker.checkSimpleNameUsage(descriptor, referenceExpression, trace)
 
         if (descriptor is DeclarationDescriptorWithVisibility) {
-            val fromToCheck =
+            konst fromToCheck =
                 if (shouldBeVisibleFrom is PackageFragmentDescriptor && shouldBeVisibleFrom.source == SourceElement.NO_SOURCE && referenceExpression.containingFile !is DummyHolder) {
                     PackageFragmentWithCustomSource(shouldBeVisibleFrom, KotlinSourceElement(referenceExpression.containingKtFile))
                 } else {
@@ -796,13 +796,13 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
         referenceExpression: KtSimpleNameExpression,
         descriptor: DeclarationDescriptor
     ): Qualifier? {
-        val qualifier =
+        konst qualifier =
             when (descriptor) {
                 is PackageViewDescriptor -> PackageQualifier(referenceExpression, descriptor)
                 is ClassDescriptor -> ClassQualifier(referenceExpression, descriptor)
                 is TypeParameterDescriptor -> TypeParameterQualifier(referenceExpression, descriptor)
                 is TypeAliasDescriptor -> {
-                    val classDescriptor = descriptor.classDescriptor ?: return null
+                    konst classDescriptor = descriptor.classDescriptor ?: return null
                     TypeAliasQualifier(referenceExpression, descriptor, classDescriptor)
                 }
                 else -> return null
@@ -824,13 +824,13 @@ class QualifiedExpressionResolver(val languageVersionSettings: LanguageVersionSe
          *  class A
          *
          *  fun test(a: Any) {
-         *      a.A() // invalid code -> incorrect import/completion/etc.
+         *      a.A() // inkonstid code -> incorrect import/completion/etc.
          *      _root_ide_package_.a.A() // OK
          *  }
          *  ---------
          */
-        const val ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE = "_root_ide_package_"
-        const val ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE_WITH_DOT = "$ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE."
+        const konst ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE = "_root_ide_package_"
+        const konst ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE_WITH_DOT = "$ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE."
     }
 }
 
@@ -842,7 +842,7 @@ internal fun isVisible(
 ): Boolean {
     if (descriptor !is DeclarationDescriptorWithVisibility || shouldBeVisibleFrom == null) return true
 
-    val visibility = descriptor.visibility
+    konst visibility = descriptor.visibility
     if (position == QualifierPosition.IMPORT) {
         if (DescriptorVisibilities.isPrivate(visibility)) return DescriptorVisibilities.inSameFile(descriptor, shouldBeVisibleFrom)
         if (!visibility.mustCheckInImports()) return true
@@ -858,7 +858,7 @@ internal enum class QualifierPosition {
     This purpose of this class is to pass information about source file for current package fragment in order for check visibilities between modules
     (see ModuleVisibilityHelperImpl.isInFriendModule).
  */
-private class PackageFragmentWithCustomSource(private val original: PackageFragmentDescriptor, private val source: SourceElement) :
+private class PackageFragmentWithCustomSource(private konst original: PackageFragmentDescriptor, private konst source: SourceElement) :
     PackageFragmentDescriptor by original {
     override fun getSource(): SourceElement = source
 }

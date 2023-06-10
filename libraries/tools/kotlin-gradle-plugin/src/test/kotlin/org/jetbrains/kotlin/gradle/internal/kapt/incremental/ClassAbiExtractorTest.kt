@@ -23,14 +23,14 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testDifferentClassName() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
                 }
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class B {
                 }
@@ -42,7 +42,7 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testAbiMethod() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
                   public void run() {}
@@ -51,7 +51,7 @@ class ClassAbiExtractorTest {
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
                   public void run() {}
@@ -65,7 +65,7 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testAbiMethodAnnotations() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
                   @Annotation1
@@ -75,7 +75,7 @@ class ClassAbiExtractorTest {
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
                   @Annotation2
@@ -90,7 +90,7 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testMethodBodiesIgnored() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
                   public void run() {
@@ -100,7 +100,7 @@ class ClassAbiExtractorTest {
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
                   public void run() {
@@ -115,7 +115,7 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testPrivateMethodIgnored() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
                   public void run() {}
@@ -124,7 +124,7 @@ class ClassAbiExtractorTest {
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
                   public void run() {}
@@ -138,19 +138,19 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testAbiField() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
-                  protected String value;
+                  protected String konstue;
                   public String data1;
                 }
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
-                  protected String value;
+                  protected String konstue;
                   public String data2;
                 }
         """.trimIndent()
@@ -161,21 +161,21 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testFieldAnnotation() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
                   @Annotation1
-                  protected String value;
+                  protected String konstue;
                 }
                 @interface Annotation1 {}
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
                   @Annotation2
-                  protected String value;
+                  protected String konstue;
                 }
                 @interface Annotation2 {}
         """.trimIndent()
@@ -186,18 +186,18 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testConstants() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
-                  static final String VALUE = "value_1";
+                  static final String VALUE = "konstue_1";
                 }
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
-                  static final String VALUE = "value_2";
+                  static final String VALUE = "konstue_2";
                 }
         """.trimIndent()
         )
@@ -207,18 +207,18 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testSameConstants() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
-                  static final String VALUE = "value_1";
+                  static final String VALUE = "konstue_1";
                 }
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
-                  static final String VALUE = "value_1";
+                  static final String VALUE = "konstue_1";
                 }
         """.trimIndent()
         )
@@ -228,19 +228,19 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testPrivateFieldsIgnored() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
-                  protected String value;
+                  protected String konstue;
                   private String data;
                 }
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
-                  protected String value;
+                  protected String konstue;
                   private int data;
                 }
         """.trimIndent()
@@ -251,7 +251,7 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testAbiInnerClass() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
                   class Inner1 {}
@@ -259,7 +259,7 @@ class ClassAbiExtractorTest {
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
                   class Inner2 {}
@@ -273,10 +273,10 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testPrivateInnerClassesIgnored() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 public class A {
-                  protected String value;
+                  protected String konstue;
                   private String data;
 
                   private static class Inner1 {}
@@ -284,10 +284,10 @@ class ClassAbiExtractorTest {
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 public class A {
-                  protected String value;
+                  protected String konstue;
                   private int data;
                   private static class Inner2 {}
                 }
@@ -299,7 +299,7 @@ class ClassAbiExtractorTest {
 
     @Test
     fun testKotlinMetadataIgnored() {
-        val firstHash = getHash(
+        konst firstHash = getHash(
             """
                 package kotlin;
 
@@ -310,7 +310,7 @@ class ClassAbiExtractorTest {
         """.trimIndent()
         )
 
-        val secondHash = getHash(
+        konst secondHash = getHash(
             """
                 package kotlin;
                 public class A {
@@ -328,17 +328,17 @@ class ClassAbiExtractorTest {
 
 
     private fun getHash(source: String, className: String = "A"): ByteArray {
-        val src = tmp.newFolder().resolve("$className.java")
+        konst src = tmp.newFolder().resolve("$className.java")
 
         src.writeText(source)
 
-        val output = tmp.newFolder()
+        konst output = tmp.newFolder()
         compileSources(listOf(src), output)
 
-        val classFile = output.walk().filter { it.name == "$className.class" }.single()
+        konst classFile = output.walk().filter { it.name == "$className.class" }.single()
 
         classFile.inputStream().use {
-            val extractor = ClassAbiExtractor(ClassWriter(0))
+            konst extractor = ClassAbiExtractor(ClassWriter(0))
             ClassReader(it.readBytes()).accept(extractor, ClassReader.SKIP_CODE or ClassReader.SKIP_FRAMES or ClassReader.SKIP_DEBUG)
             return extractor.getBytes()
         }

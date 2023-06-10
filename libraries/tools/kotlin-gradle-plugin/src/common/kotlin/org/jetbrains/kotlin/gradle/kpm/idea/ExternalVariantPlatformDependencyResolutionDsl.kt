@@ -27,13 +27,13 @@ fun KotlinPm20ProjectExtension.configureIdeaKpmSpecialPlatformDependencyResoluti
 
 @ExternalVariantPlatformDependencyResolutionDsl
 class IdeaKpmPlatformDependencyResolutionDslHandle internal constructor(
-    private val toolingModelBuilder: IdeaKpmProjectModelBuilder,
-    private val constraint: FragmentConstraint = FragmentConstraint.unconstrained,
-    private val parent: IdeaKpmPlatformDependencyResolutionDslHandle? = null
+    private konst toolingModelBuilder: IdeaKpmProjectModelBuilder,
+    private konst constraint: FragmentConstraint = FragmentConstraint.unconstrained,
+    private konst parent: IdeaKpmPlatformDependencyResolutionDslHandle? = null
 ) {
-    private val artifactViewDslHandles = mutableListOf<ArtifactViewDslHandle>()
-    private val children = mutableListOf<IdeaKpmPlatformDependencyResolutionDslHandle>()
-    private val additionalDependencies = mutableListOf<IdeaKpmDependencyResolver>()
+    private konst artifactViewDslHandles = mutableListOf<ArtifactViewDslHandle>()
+    private konst children = mutableListOf<IdeaKpmPlatformDependencyResolutionDslHandle>()
+    private konst additionalDependencies = mutableListOf<IdeaKpmDependencyResolver>()
 
     @ExternalVariantPlatformDependencyResolutionDsl
     var platformResolutionAttributes: GradleKpmConfigurationAttributesSetup<GradleKpmFragment>? = null
@@ -67,7 +67,7 @@ class IdeaKpmPlatformDependencyResolutionDslHandle internal constructor(
     fun withPlatformResolutionAttributes(
         setAttributes: GradleKpmConfigurationAttributesSetupContext<GradleKpmFragment>.() -> Unit
     ) {
-        val additionalAttributes = GradleKpmConfigurationAttributesSetup(setAttributes)
+        konst additionalAttributes = GradleKpmConfigurationAttributesSetup(setAttributes)
         this.platformResolutionAttributes = platformResolutionAttributes?.plus(additionalAttributes) ?: additionalAttributes
     }
 
@@ -84,8 +84,8 @@ class IdeaKpmPlatformDependencyResolutionDslHandle internal constructor(
     internal fun setup() {
         children.forEach { child -> child.setup() }
 
-        val constraint = buildConstraint()
-        val platformResolutionAttributes = buildPlatformResolutionAttributes()
+        konst constraint = buildConstraint()
+        konst platformResolutionAttributes = buildPlatformResolutionAttributes()
 
         /* Setup artifact views */
         artifactViewDslHandles.toList().forEach { artifactViewDslHandle ->
@@ -127,12 +127,12 @@ class IdeaKpmPlatformDependencyResolutionDslHandle internal constructor(
     }
 
     private fun buildConstraint(): FragmentConstraint {
-        val parentConstraint = parent?.buildConstraint() ?: return constraint
+        konst parentConstraint = parent?.buildConstraint() ?: return constraint
         return parentConstraint and this.constraint
     }
 
     private fun buildPlatformResolutionAttributes(): GradleKpmConfigurationAttributesSetup<GradleKpmFragment>? {
-        val parentAttributes = parent?.buildPlatformResolutionAttributes() ?: return this.platformResolutionAttributes
+        konst parentAttributes = parent?.buildPlatformResolutionAttributes() ?: return this.platformResolutionAttributes
         return parentAttributes + (this.platformResolutionAttributes ?: return parentAttributes)
     }
 }

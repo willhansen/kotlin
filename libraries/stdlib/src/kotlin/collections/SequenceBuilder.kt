@@ -14,7 +14,7 @@ import kotlin.coroutines.intrinsics.*
 import kotlin.experimental.ExperimentalTypeInference
 
 /**
- * Builds a [Sequence] lazily yielding values one by one.
+ * Builds a [Sequence] lazily yielding konstues one by one.
  *
  * @see kotlin.sequences.generateSequence
  *
@@ -26,7 +26,7 @@ import kotlin.experimental.ExperimentalTypeInference
 public fun <T> sequence(@BuilderInference block: suspend SequenceScope<T>.() -> Unit): Sequence<T> = Sequence { iterator(block) }
 
 /**
- * Builds an [Iterator] lazily yielding values one by one.
+ * Builds an [Iterator] lazily yielding konstues one by one.
  *
  * @sample samples.collections.Sequences.Building.buildIterator
  * @sample samples.collections.Iterables.Building.iterable
@@ -34,13 +34,13 @@ public fun <T> sequence(@BuilderInference block: suspend SequenceScope<T>.() -> 
 @SinceKotlin("1.3")
 @Suppress("DEPRECATION")
 public fun <T> iterator(@BuilderInference block: suspend SequenceScope<T>.() -> Unit): Iterator<T> {
-    val iterator = SequenceBuilderIterator<T>()
+    konst iterator = SequenceBuilderIterator<T>()
     iterator.nextStep = block.createCoroutineUnintercepted(receiver = iterator, completion = iterator)
     return iterator
 }
 
 /**
- * The scope for yielding values of a [Sequence] or an [Iterator], provides [yield] and [yieldAll] suspension functions.
+ * The scope for yielding konstues of a [Sequence] or an [Iterator], provides [yield] and [yieldAll] suspension functions.
  *
  * @see sequence
  * @see iterator
@@ -52,27 +52,27 @@ public fun <T> iterator(@BuilderInference block: suspend SequenceScope<T>.() -> 
 @SinceKotlin("1.3")
 public abstract class SequenceScope<in T> internal constructor() {
     /**
-     * Yields a value to the [Iterator] being built and suspends
-     * until the next value is requested.
+     * Yields a konstue to the [Iterator] being built and suspends
+     * until the next konstue is requested.
      *
      * @sample samples.collections.Sequences.Building.buildSequenceYieldAll
      * @sample samples.collections.Sequences.Building.buildFibonacciSequence
      */
-    public abstract suspend fun yield(value: T)
+    public abstract suspend fun yield(konstue: T)
 
     /**
-     * Yields all values from the `iterator` to the [Iterator] being built
-     * and suspends until all these values are iterated and the next one is requested.
+     * Yields all konstues from the `iterator` to the [Iterator] being built
+     * and suspends until all these konstues are iterated and the next one is requested.
      *
-     * The sequence of values returned by the given iterator can be potentially infinite.
+     * The sequence of konstues returned by the given iterator can be potentially infinite.
      *
      * @sample samples.collections.Sequences.Building.buildSequenceYieldAll
      */
     public abstract suspend fun yieldAll(iterator: Iterator<T>)
 
     /**
-     * Yields a collections of values to the [Iterator] being built
-     * and suspends until all these values are iterated and the next one is requested.
+     * Yields a collections of konstues to the [Iterator] being built
+     * and suspends until all these konstues are iterated and the next one is requested.
      *
      * @sample samples.collections.Sequences.Building.buildSequenceYieldAll
      */
@@ -82,8 +82,8 @@ public abstract class SequenceScope<in T> internal constructor() {
     }
 
     /**
-     * Yields potentially infinite sequence of values  to the [Iterator] being built
-     * and suspends until all these values are iterated and the next one is requested.
+     * Yields potentially infinite sequence of konstues  to the [Iterator] being built
+     * and suspends until all these konstues are iterated and the next one is requested.
      *
      * The sequence can be potentially infinite.
      *
@@ -94,12 +94,12 @@ public abstract class SequenceScope<in T> internal constructor() {
 
 private typealias State = Int
 
-private const val State_NotReady: State = 0
-private const val State_ManyNotReady: State = 1
-private const val State_ManyReady: State = 2
-private const val State_Ready: State = 3
-private const val State_Done: State = 4
-private const val State_Failed: State = 5
+private const konst State_NotReady: State = 0
+private const konst State_ManyNotReady: State = 1
+private const konst State_ManyReady: State = 2
+private const konst State_Ready: State = 3
+private const konst State_Done: State = 4
+private const konst State_Failed: State = 5
 
 private class SequenceBuilderIterator<T> : SequenceScope<T>(), Iterator<T>, Continuation<Unit> {
     private var state = State_NotReady
@@ -124,7 +124,7 @@ private class SequenceBuilderIterator<T> : SequenceScope<T>(), Iterator<T>, Cont
             }
 
             state = State_Failed
-            val step = nextStep!!
+            konst step = nextStep!!
             nextStep = null
             step.resume(Unit)
         }
@@ -140,7 +140,7 @@ private class SequenceBuilderIterator<T> : SequenceScope<T>(), Iterator<T>, Cont
             State_Ready -> {
                 state = State_NotReady
                 @Suppress("UNCHECKED_CAST")
-                val result = nextValue as T
+                konst result = nextValue as T
                 nextValue = null
                 return result
             }
@@ -159,8 +159,8 @@ private class SequenceBuilderIterator<T> : SequenceScope<T>(), Iterator<T>, Cont
     }
 
 
-    override suspend fun yield(value: T) {
-        nextValue = value
+    override suspend fun yield(konstue: T) {
+        nextValue = konstue
         state = State_Ready
         return suspendCoroutineUninterceptedOrReturn { c ->
             nextStep = c
@@ -184,6 +184,6 @@ private class SequenceBuilderIterator<T> : SequenceScope<T>(), Iterator<T>, Cont
         state = State_Done
     }
 
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 }

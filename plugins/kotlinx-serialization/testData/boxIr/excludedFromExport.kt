@@ -13,11 +13,11 @@ import kotlinx.serialization.descriptors.*
 
 @JsExport
 @Serializable
-class Basic(val name: String, val age: UInt)
+class Basic(konst name: String, konst age: UInt)
 
 @JsExport
 @Serializable
-class WithCompanion(val name: String, val age: UInt) {
+class WithCompanion(konst name: String, konst age: UInt) {
     companion object {
         fun foo() = "Test"
     }

@@ -1,8 +1,8 @@
-public class A(@:Ann val a: String, @:[Ann] public val b: Int)
+public class A(@:Ann konst a: String, @:[Ann] public konst b: Int)
 
-public class B(@param: val a: String)
+public class B(@param: konst a: String)
 
-public class C(@param:[] val a: String)
+public class C(@param:[] konst a: String)
 
 public class D(@fiield: a: Int)
 

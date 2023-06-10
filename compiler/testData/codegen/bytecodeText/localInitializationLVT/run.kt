@@ -1,5 +1,5 @@
 fun test(): Char {
-    val c: Char
+    konst c: Char
     run {
         c = ' '
         println(c)

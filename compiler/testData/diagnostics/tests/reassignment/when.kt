@@ -3,7 +3,7 @@
 // !DIAGNOSTICS: -UNUSED_VALUE
 
 fun foo(f: Boolean): Int {
-    val i: Int
+    konst i: Int
     <!NO_ELSE_IN_WHEN!>when<!> (f) {
         true -> i = 1
     }

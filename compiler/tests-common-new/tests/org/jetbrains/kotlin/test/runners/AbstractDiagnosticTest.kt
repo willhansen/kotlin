@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.test.services.sourceProviders.CoroutineHelpersSource
 
 abstract class AbstractDiagnosticTest : AbstractKotlinCompilerTest() {
     companion object {
-        val DISABLED_BY_DEFAULT_UNUSED_DIAGNOSTICS = listOf(
+        konst DISABLED_BY_DEFAULT_UNUSED_DIAGNOSTICS = listOf(
             "UNUSED_VARIABLE",
             "UNUSED_PARAMETER",
             "UNUSED_ANONYMOUS_PARAMETER",
@@ -134,20 +134,20 @@ abstract class AbstractDiagnosticTest : AbstractKotlinCompilerTest() {
             }
         }
 
-        // ----------------------- constant evaluation tests -----------------------
-        forTestsMatching("compiler/testData/diagnostics/tests/constantEvaluator/constant/*") {
+        // ----------------------- constant ekonstuation tests -----------------------
+        forTestsMatching("compiler/testData/diagnostics/tests/constantEkonstuator/constant/*") {
             defaultDirectives {
                 CHECK_COMPILE_TIME_VALUES with ConstantValuesHandler.Mode.Constant
             }
         }
 
-        forTestsMatching("compiler/testData/diagnostics/tests/constantEvaluator/isPure/*") {
+        forTestsMatching("compiler/testData/diagnostics/tests/constantEkonstuator/isPure/*") {
             defaultDirectives {
                 CHECK_COMPILE_TIME_VALUES with ConstantValuesHandler.Mode.IsPure
             }
         }
 
-        forTestsMatching("compiler/testData/diagnostics/tests/constantEvaluator/usesVariableAsConstant/*") {
+        forTestsMatching("compiler/testData/diagnostics/tests/constantEkonstuator/usesVariableAsConstant/*") {
             defaultDirectives {
                 CHECK_COMPILE_TIME_VALUES with ConstantValuesHandler.Mode.UsesVariableAsConstant
             }

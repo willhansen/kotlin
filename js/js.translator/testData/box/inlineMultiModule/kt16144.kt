@@ -4,8 +4,8 @@
 
 interface M3 {
     fun foo(): Int
-    val baz: Int
-    val baw: Int
+    konst baz: Int
+    konst baw: Int
 }
 
 // MODULE: m2
@@ -14,9 +14,9 @@ interface M3 {
 open class M2 {
     inline fun foo() = 1
     inline fun <reified T : Any> bar() = T::class
-    inline val baz: Int
+    inline konst baz: Int
         get() = foo() + 1
-    val baw: Int
+    konst baw: Int
         inline get() = foo() + 2
 }
 

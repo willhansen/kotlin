@@ -4,7 +4,7 @@
  *
  * SECTIONS: annotations, type-annotations
  * NUMBER: 11
- * DESCRIPTION: Type annotations with invalid target.
+ * DESCRIPTION: Type annotations with inkonstid target.
  * UNEXPECTED BEHAVIOUR
  * ISSUES: KT-28449
  */
@@ -12,7 +12,7 @@
 // TESTCASE NUMBER: 1, 2, 3, 4, 5
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.PROPERTY_GETTER)
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
 // TESTCASE NUMBER: 1
 abstract class Foo : <!WRONG_ANNOTATION_TARGET!>@Ann(10)<!> Any()
@@ -28,7 +28,7 @@ fun case_3(a: Any) {
 // TESTCASE NUMBER: 4
 open class TypeToken<T>
 
-val case_4 = object : TypeToken<<!WRONG_ANNOTATION_TARGET!>@Ann(10)<!> String>() {}
+konst case_4 = object : TypeToken<<!WRONG_ANNOTATION_TARGET!>@Ann(10)<!> String>() {}
 
 // TESTCASE NUMBER: 5
 fun case_5(a: Any) {

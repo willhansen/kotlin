@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.gradle.utils
 
 import org.gradle.api.Project
 
-internal val androidPluginIds = listOf(
+internal konst androidPluginIds = listOf(
     "com.android.application",
     "com.android.library",
     "com.android.dynamic-feature",

@@ -2,7 +2,7 @@
 // copied from JVM backend tests
 package foo
 
-open class X(private val n: String) {
+open class X(private konst n: String) {
 
     fun foo(): String {
         return object : X("inner") {

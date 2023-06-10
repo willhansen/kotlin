@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 fun test(d: dynamic) {
-    val a = arrayOf(1, 2, 3)
+    konst a = arrayOf(1, 2, 3)
 
     d.foo(<!SPREAD_OPERATOR_IN_DYNAMIC_CALL!>*<!>d)
     d.foo(<!SPREAD_OPERATOR_IN_DYNAMIC_CALL!>*<!>a)

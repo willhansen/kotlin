@@ -1,6 +1,6 @@
 // TARGET_BACKEND: JVM
 
-open class Super<T>(val v: T) {
+open class Super<T>(konst v: T) {
     public fun add(e: T): Boolean = true
     public fun remove(o: T): Boolean = true
     public fun addAll(c: Collection<T>): Boolean = true
@@ -14,7 +14,7 @@ open class Super<T>(val v: T) {
 }
 
 class MyList<T>(v: T): Super<T>(v), List<T> {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(o: T): Boolean = false
     override fun iterator(): Iterator<T> = throw Error()
@@ -30,7 +30,7 @@ class MyList<T>(v: T): Super<T>(v), List<T> {
 }
 
 fun box(): String {
-    val list = MyList<String>("") as java.util.List<String>
+    konst list = MyList<String>("") as java.util.List<String>
 
     list.add("")
     list.remove("")

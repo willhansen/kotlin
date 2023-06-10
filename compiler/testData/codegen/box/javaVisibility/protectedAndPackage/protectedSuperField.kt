@@ -4,10 +4,10 @@
 package test;
 
 public class Foo {
-    protected final String value;
+    protected final String konstue;
 
-    protected Foo(String value) {
-        this.value = value;
+    protected Foo(String konstue) {
+        this.konstue = konstue;
     }
 }
 
@@ -16,7 +16,7 @@ public class Foo {
 import test.Foo
 
 class Bar : Foo("OK") {
-    fun baz() = super.value
+    fun baz() = super.konstue
 }
 
 fun box(): String = Bar().baz()

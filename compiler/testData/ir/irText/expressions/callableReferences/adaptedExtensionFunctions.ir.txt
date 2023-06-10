@@ -31,14 +31,14 @@ FILE fqName:<root> fileName:/adaptedExtensionFunctions.kt
     VALUE_PARAMETER name:i index:0 type:kotlin.Int
     VALUE_PARAMETER name:s index:1 type:kotlin.String
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     BLOCK_BODY
   FUN name:extensionBoth visibility:public modality:FINAL <> ($receiver:<root>.C, i:kotlin.Int, s:kotlin.String, t:kotlin.Array<out kotlin.String>) returnType:kotlin.Unit
     $receiver: VALUE_PARAMETER name:<this> type:<root>.C
     VALUE_PARAMETER name:i index:0 type:kotlin.Int
     VALUE_PARAMETER name:s index:1 type:kotlin.String
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     VALUE_PARAMETER name:t index:2 type:kotlin.Array<out kotlin.String> varargElementType:kotlin.String [vararg]
     BLOCK_BODY
   FUN name:testExtensionVararg visibility:public modality:FINAL <> () returnType:kotlin.Unit

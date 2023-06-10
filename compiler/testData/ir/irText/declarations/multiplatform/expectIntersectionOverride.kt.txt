@@ -4,7 +4,7 @@
 interface I1 {
   abstract fun f(): String
 
-  abstract val p: Int
+  abstract konst p: Int
     abstract get
 
 }
@@ -12,7 +12,7 @@ interface I1 {
 interface I2 {
   abstract fun f(): String
 
-  abstract val p: Int
+  abstract konst p: Int
     abstract get
 
 }
@@ -36,7 +36,7 @@ class C : I1, I2 {
     return "OK"
   }
 
-  override val p: Int
+  override konst p: Int
     field = 42
     override get
 

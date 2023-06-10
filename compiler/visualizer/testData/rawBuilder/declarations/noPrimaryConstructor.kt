@@ -1,10 +1,10 @@
 class NoPrimary {
 //      String
 //      │
-    val x: String
+    konst x: String
 
     constructor(x: String) {
-//           val (NoPrimary).x: String
+//           konst (NoPrimary).x: String
 //           │   NoPrimary.<init>.x: String
 //           │   │
         this.x = x

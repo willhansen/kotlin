@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 
 /**
- * Boxes and unboxes values of value types when necessary.
+ * Boxes and unboxes konstues of konstue types when necessary.
  */
-internal class InlineClassPropertyAccessorsLowering(val context: Context) : FileLoweringPass {
+internal class InlineClassPropertyAccessorsLowering(konst context: Context) : FileLoweringPass {
 
-    private val transformer = InlineClassAccessorsTransformer(context)
+    private konst transformer = InlineClassAccessorsTransformer(context)
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(transformer)
@@ -32,14 +32,14 @@ internal class InlineClassPropertyAccessorsLowering(val context: Context) : File
 
 }
 
-private class InlineClassAccessorsTransformer(private val context: Context) : IrBuildingTransformer(context) {
+private class InlineClassAccessorsTransformer(private konst context: Context) : IrBuildingTransformer(context) {
 
-    private val symbols = context.ir.symbols
+    private konst symbols = context.ir.symbols
 
     override fun visitCall(expression: IrCall): IrExpression {
         expression.transformChildrenVoid(this)
 
-        val property = expression.symbol.owner.correspondingPropertySymbol?.owner ?: return expression
+        konst property = expression.symbol.owner.correspondingPropertySymbol?.owner ?: return expression
 
         property.parent.let {
             if (it is IrClass && it.isSingleFieldValueClass && property.backingField != null) {

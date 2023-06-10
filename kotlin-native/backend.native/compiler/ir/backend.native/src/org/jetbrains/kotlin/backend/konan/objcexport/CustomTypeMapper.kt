@@ -21,7 +21,7 @@ internal fun ClassDescriptor.isMappedFunctionClass() =
                 declaredTypeParameters.size - 1 < CustomTypeMappers.functionTypeMappersArityLimit
 
 internal interface CustomTypeMapper {
-    val mappedClassId: ClassId
+    konst mappedClassId: ClassId
     fun mapType(mappedSuperType: KotlinType, translator: ObjCExportTranslatorImpl, objCExportScope: ObjCExportScope): ObjCNonNullReferenceType
 }
 
@@ -31,8 +31,8 @@ internal object CustomTypeMappers {
      *
      * Don't forget to update [hiddenTypes] after adding new one.
      */
-    private val predefined: Map<ClassId, CustomTypeMapper> = with(StandardNames.FqNames) {
-        val result = mutableListOf<CustomTypeMapper>()
+    private konst predefined: Map<ClassId, CustomTypeMapper> = with(StandardNames.FqNames) {
+        konst result = mutableListOf<CustomTypeMapper>()
 
         result += Collection(list, "NSArray")
         result += Collection(mutableList, "NSMutableArray")
@@ -41,9 +41,9 @@ internal object CustomTypeMappers {
         result += Collection(map, "NSDictionary")
         result += Collection(mutableMap, { namer.mutableMapName.objCName })
 
-        NSNumberKind.values().forEach {
+        NSNumberKind.konstues().forEach {
             // TODO: NSNumber seem to have different equality semantics.
-            val classId = it.mappedKotlinClassId
+            konst classId = it.mappedKotlinClassId
             if (classId != null) {
                 result += Simple(classId, { namer.numberBoxName(classId).objCName })
             }
@@ -55,23 +55,23 @@ internal object CustomTypeMappers {
         result.associateBy { it.mappedClassId }
     }
 
-    internal val functionTypeMappersArityLimit = 33 // not including, i.e. [0..33)
+    internal konst functionTypeMappersArityLimit = 33 // not including, i.e. [0..33)
 
     fun hasMapper(descriptor: ClassDescriptor): Boolean {
-        // Should be equivalent to `getMapper(descriptor) != null`.
+        // Should be equikonstent to `getMapper(descriptor) != null`.
         if (descriptor.classId in predefined) return true
         if (descriptor.isMappedFunctionClass()) return true
         return false
     }
 
     fun getMapper(descriptor: ClassDescriptor): CustomTypeMapper? {
-        val classId = descriptor.classId
+        konst classId = descriptor.classId
 
         predefined[classId]?.let { return it }
 
         if (descriptor.isMappedFunctionClass()) {
             // TODO: somewhat hacky, consider using FunctionClassDescriptor.arity later.
-            val arity = descriptor.declaredTypeParameters.size - 1 // Type parameters include return type.
+            konst arity = descriptor.declaredTypeParameters.size - 1 // Type parameters include return type.
             assert(classId == StandardNames.getFunctionClassId(arity))
             return Function(arity)
         }
@@ -85,7 +85,7 @@ internal object CustomTypeMappers {
      * Currently contains super types of classes handled by custom type mappers.
      * Note: can be generated programmatically, but requires stdlib in this case.
      */
-    val hiddenTypes: Set<ClassId> = listOf(
+    konst hiddenTypes: Set<ClassId> = listOf(
             "kotlin.Any",
             "kotlin.CharSequence",
             "kotlin.Comparable",
@@ -98,8 +98,8 @@ internal object CustomTypeMappers {
     ).map { ClassId.topLevel(FqName(it)) }.toSet()
 
     private class Simple(
-            override val mappedClassId: ClassId,
-            private val getObjCClassName: ObjCExportTranslatorImpl.() -> String
+            override konst mappedClassId: ClassId,
+            private konst getObjCClassName: ObjCExportTranslatorImpl.() -> String
     ) : CustomTypeMapper {
 
         constructor(
@@ -113,7 +113,7 @@ internal object CustomTypeMappers {
 
     private class Collection(
             mappedClassFqName: FqName,
-            private val getObjCClassName: ObjCExportTranslatorImpl.() -> String
+            private konst getObjCClassName: ObjCExportTranslatorImpl.() -> String
     ) : CustomTypeMapper {
 
         constructor(
@@ -121,13 +121,13 @@ internal object CustomTypeMappers {
                 objCClassName: String
         ) : this(mappedClassFqName, { objCClassName })
 
-        override val mappedClassId = ClassId.topLevel(mappedClassFqName)
+        override konst mappedClassId = ClassId.topLevel(mappedClassFqName)
 
         override fun mapType(mappedSuperType: KotlinType, translator: ObjCExportTranslatorImpl, objCExportScope: ObjCExportScope): ObjCNonNullReferenceType {
-            val typeArguments = mappedSuperType.arguments.map {
-                val argument = it.type
+            konst typeArguments = mappedSuperType.arguments.map {
+                konst argument = it.type
                 if (TypeUtils.isNullableType(argument)) {
-                    // Kotlin `null` keys and values are represented as `NSNull` singleton.
+                    // Kotlin `null` keys and konstues are represented as `NSNull` singleton.
                     ObjCIdType
                 } else {
                     translator.mapReferenceTypeIgnoringNullability(argument, objCExportScope)
@@ -138,8 +138,8 @@ internal object CustomTypeMappers {
         }
     }
 
-    private class Function(private val parameterCount: Int) : CustomTypeMapper {
-        override val mappedClassId: ClassId
+    private class Function(private konst parameterCount: Int) : CustomTypeMapper {
+        override konst mappedClassId: ClassId
             get() = StandardNames.getFunctionClassId(parameterCount)
 
         override fun mapType(mappedSuperType: KotlinType, translator: ObjCExportTranslatorImpl, objCExportScope: ObjCExportScope): ObjCNonNullReferenceType {

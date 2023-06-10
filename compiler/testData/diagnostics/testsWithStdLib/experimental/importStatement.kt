@@ -18,7 +18,7 @@ object ImportedClass {
 fun importedFunction() {}
 
 @ImportedMarker
-val importedProperty = Unit
+konst importedProperty = Unit
 
 // FILE: usage.kt
 

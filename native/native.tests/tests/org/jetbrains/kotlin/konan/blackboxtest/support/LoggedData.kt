@@ -23,7 +23,7 @@ import kotlin.time.DurationUnit
  * Handles all the necessary formatting right inside of [computeText]. Caches the resulting text to avoid re-computation.
  */
 internal abstract class LoggedData {
-    private val text: String by lazy { computeText() }
+    private konst text: String by lazy { computeText() }
     protected abstract fun computeText(): String
     final override fun toString() = text
 
@@ -38,7 +38,7 @@ internal abstract class LoggedData {
     }
 
     class JVMEnvironment : LoggedData() {
-        private val properties = SafeProperties()
+        private konst properties = SafeProperties()
 
         override fun computeText() = buildString {
             appendLine("ENVIRONMENT VARIABLES:")
@@ -54,12 +54,12 @@ internal abstract class LoggedData {
     }
 
     class CompilerParameters(
-        private val home: KotlinNativeHome,
-        private val compilerArgs: Array<String>,
-        private val sourceModules: Collection<TestModule>,
-        private val environment: JVMEnvironment = JVMEnvironment() // Capture environment.
+        private konst home: KotlinNativeHome,
+        private konst compilerArgs: Array<String>,
+        private konst sourceModules: Collection<TestModule>,
+        private konst environment: JVMEnvironment = JVMEnvironment() // Capture environment.
     ) : LoggedData() {
-        private val testDataFiles: List<File>
+        private konst testDataFiles: List<File>
             get() = buildList {
                 sourceModules.forEach { module ->
                     if (module !is TestModule.Exclusive) return@forEach
@@ -73,7 +73,7 @@ internal abstract class LoggedData {
             appendLine()
             appendLine(environment)
 
-            val testDataFiles = testDataFiles
+            konst testDataFiles = testDataFiles
             if (testDataFiles.isNotEmpty()) {
                 appendLine()
                 appendList("TEST DATA FILES (COMPILED TOGETHER):", testDataFiles)
@@ -84,9 +84,9 @@ internal abstract class LoggedData {
     abstract class CompilerCall : LoggedData()
 
     class CInteropParameters(
-        private val extraArgs: Array<String>,
-        private val defFile: File,
-        private val environment: JVMEnvironment = JVMEnvironment() // Capture environment.
+        private konst extraArgs: Array<String>,
+        private konst defFile: File,
+        private konst environment: JVMEnvironment = JVMEnvironment() // Capture environment.
     ) : LoggedData() {
         override fun computeText() = buildString {
             appendArguments("CINTEROP INVOCATION EXTRA ARGUMENTS:", extraArgs.toList())
@@ -99,15 +99,15 @@ internal abstract class LoggedData {
     }
 
     class CompilationToolCall(
-        private val toolName: String,
-        private val parameters: LoggedData,
-        val exitCode: ExitCode,
-        val toolOutput: String,
-        private val toolOutputHasErrors: Boolean,
-        private val duration: Duration
+        private konst toolName: String,
+        private konst parameters: LoggedData,
+        konst exitCode: ExitCode,
+        konst toolOutput: String,
+        private konst toolOutputHasErrors: Boolean,
+        private konst duration: Duration
     ) : CompilerCall() {
         override fun computeText(): String {
-            val problems = listOfNotNull(
+            konst problems = listOfNotNull(
                 "- Non-zero exit code".takeIf { exitCode != ExitCode.OK },
                 "- Errors reported by the $toolName".takeIf { toolOutputHasErrors }
             )
@@ -130,17 +130,17 @@ internal abstract class LoggedData {
         }
     }
 
-    class NoopCompilerCall(val artifactFile: File) : CompilerCall() {
+    class NoopCompilerCall(konst artifactFile: File) : CompilerCall() {
         override fun computeText() = "No compiler call performed for external (given) artifact $artifactFile"
     }
 
     class CompilationToolCallUnexpectedFailure(parameters: LoggedData, throwable: Throwable) : UnexpectedFailure(parameters, throwable)
 
     class TestRunParameters(
-        private val compilationToolCall: CompilerCall,
-        private val testCaseId: TestCaseId?,
-        private val runArgs: Iterable<String>,
-        private val runParameters: List<TestRunParameter>?
+        private konst compilationToolCall: CompilerCall,
+        private konst testCaseId: TestCaseId?,
+        private konst runArgs: Iterable<String>,
+        private konst runParameters: List<TestRunParameter>?
     ) : LoggedData() {
         override fun computeText() = buildString {
             when {
@@ -172,8 +172,8 @@ internal abstract class LoggedData {
     }
 
     class TestRun(
-        private val parameters: TestRunParameters,
-        private val runResult: RunResult
+        private konst parameters: TestRunParameters,
+        private konst runResult: RunResult
     ) : LoggedData() {
         override fun computeText() = buildString {
             appendLine("TEST RUN:")
@@ -191,8 +191,8 @@ internal abstract class LoggedData {
     class TestRunUnexpectedFailure(parameters: TestRunParameters, throwable: Throwable) : UnexpectedFailure(parameters, throwable)
 
     abstract class UnexpectedFailure(
-        private val parameters: LoggedData,
-        private val throwable: Throwable
+        private konst parameters: LoggedData,
+        private konst throwable: Throwable
     ) : LoggedData() {
         override fun computeText() = buildString {
             appendLine("ERROR MESSAGE:")
@@ -219,8 +219,8 @@ internal abstract class LoggedData {
 
             var lastArgIsOptionWithoutEqualsSign = false
             args.forEachIndexed { index, arg ->
-                val isOption = arg[0] == '-'
-                val isSourceFile = !isOption && arg.substringAfterLast('.') == "kt"
+                konst isOption = arg[0] == '-'
+                konst isSourceFile = !isOption && arg.substringAfterLast('.') == "kt"
                 if (index > 0) {
                     if (isOption || isSourceFile || !lastArgIsOptionWithoutEqualsSign)
                         append(" \\\n")
@@ -257,6 +257,6 @@ internal abstract class LoggedData {
             appendLine("========== END: $subject ==========")
         }
 
-        private const val MAX_PRINTED_OUTPUT_LENGTH = 8 * 1024
+        private const konst MAX_PRINTED_OUTPUT_LENGTH = 8 * 1024
     }
 }

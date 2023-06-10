@@ -5,9 +5,9 @@ import kotlin.coroutines.*
 
 fun box(): String {
     async {
-        val a = foo(23)
+        konst a = foo(23)
         log(a)
-        val b = foo(42)
+        konst b = foo(42)
         log(b)
     }
     while (!finished) {
@@ -38,13 +38,13 @@ inline suspend fun foo(x: Int) = bar(x)
 
 fun async(a: suspend () -> Unit) {
     a.startCoroutine(object : Continuation<Unit> {
-        override fun resumeWith(value: Result<Unit>) {
+        override fun resumeWith(konstue: Result<Unit>) {
             proceed = {
                 log("done")
                 finished = true
             }
         }
 
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
     })
 }

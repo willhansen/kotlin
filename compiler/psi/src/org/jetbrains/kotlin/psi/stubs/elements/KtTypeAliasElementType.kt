@@ -34,18 +34,18 @@ class KtTypeAliasElementType(debugName: String) :
     KtStubElementType<KotlinTypeAliasStub, KtTypeAlias>(debugName, KtTypeAlias::class.java, KotlinTypeAliasStub::class.java) {
 
     override fun createStub(psi: KtTypeAlias, parentStub: StubElement<*>?): KotlinTypeAliasStub {
-        val name = StringRef.fromString(psi.name)
-        val fqName = StringRef.fromString(psi.safeFqNameForLazyResolve()?.asString())
-        val classId = parentStub?.let { createNestedClassId(it, psi) }
-        val isTopLevel = psi.isTopLevel()
+        konst name = StringRef.fromString(psi.name)
+        konst fqName = StringRef.fromString(psi.safeFqNameForLazyResolve()?.asString())
+        konst classId = parentStub?.let { createNestedClassId(it, psi) }
+        konst isTopLevel = psi.isTopLevel()
         return KotlinTypeAliasStubImpl(parentStub, name, fqName, classId, isTopLevel)
     }
 
     private fun createNestedClassId(parentStub: StubElement<*>, typeAlias: KtTypeAlias): ClassId? {
-        val typeAliasName = typeAlias.nameAsName ?: return null
+        konst typeAliasName = typeAlias.nameAsName ?: return null
         return when {
             parentStub.stubType == KtStubElementTypes.CLASS_BODY -> {
-                val parentClass = parentStub.parentStub as? KotlinClassStub
+                konst parentClass = parentStub.parentStub as? KotlinClassStub
                 parentClass?.getClassId()?.createNestedClassId(typeAliasName)
             }
             parentStub is KotlinFileStub -> ClassId(parentStub.getPackageFqName(), typeAliasName)
@@ -61,10 +61,10 @@ class KtTypeAliasElementType(debugName: String) :
     }
 
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): KotlinTypeAliasStub {
-        val name = dataStream.readName()
-        val fqName = dataStream.readName()
-        val classId = StubUtils.deserializeClassId(dataStream)
-        val isTopLevel = dataStream.readBoolean()
+        konst name = dataStream.readName()
+        konst fqName = dataStream.readName()
+        konst classId = StubUtils.deserializeClassId(dataStream)
+        konst isTopLevel = dataStream.readBoolean()
         return KotlinTypeAliasStubImpl(parentStub, name, fqName, classId, isTopLevel)
     }
 

@@ -3,7 +3,7 @@
 // FILE: kt1.kt
 package kt
 
-inline class Z(val value: Int)
+inline class Z(konst konstue: Int)
 
 interface IFoo<T> {
     fun foo(): T

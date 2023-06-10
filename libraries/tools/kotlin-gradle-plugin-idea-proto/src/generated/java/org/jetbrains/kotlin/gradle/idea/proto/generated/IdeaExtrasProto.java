@@ -44,7 +44,7 @@ private static final long serialVersionUID = 0L;
         return internalGetValues();
       default:
         throw new RuntimeException(
-            "Invalid map field number: " + number);
+            "Inkonstid map field number: " + number);
     }
   }
   @java.lang.Override
@@ -68,21 +68,21 @@ private static final long serialVersionUID = 0L;
                 com.google.protobuf.ByteString.EMPTY);
   }
   private com.google.protobuf.MapField<
-      java.lang.String, com.google.protobuf.ByteString> values_;
+      java.lang.String, com.google.protobuf.ByteString> konstues_;
   private com.google.protobuf.MapField<java.lang.String, com.google.protobuf.ByteString>
   internalGetValues() {
-    if (values_ == null) {
+    if (konstues_ == null) {
       return com.google.protobuf.MapField.emptyMapField(
           ValuesDefaultEntryHolder.defaultEntry);
     }
-    return values_;
+    return konstues_;
   }
 
   public int getValuesCount() {
     return internalGetValues().getMap().size();
   }
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
 
   @java.lang.Override
@@ -100,7 +100,7 @@ private static final long serialVersionUID = 0L;
     return getValuesMap();
   }
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
   @java.lang.Override
 
@@ -108,7 +108,7 @@ private static final long serialVersionUID = 0L;
     return internalGetValues().getMap();
   }
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
   @java.lang.Override
 
@@ -121,7 +121,7 @@ private static final long serialVersionUID = 0L;
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
-   * <code>map&lt;string, bytes&gt; values = 1;</code>
+   * <code>map&lt;string, bytes&gt; konstues = 1;</code>
    */
   @java.lang.Override
 
@@ -168,12 +168,12 @@ private static final long serialVersionUID = 0L;
     for (java.util.Map.Entry<java.lang.String, com.google.protobuf.ByteString> entry
          : internalGetValues().getMap().entrySet()) {
       com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.ByteString>
-      values__ = ValuesDefaultEntryHolder.defaultEntry.newBuilderForType()
+      konstues__ = ValuesDefaultEntryHolder.defaultEntry.newBuilderForType()
           .setKey(entry.getKey())
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, values__);
+          .computeMessageSize(1, konstues__);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -214,34 +214,34 @@ private static final long serialVersionUID = 0L;
 
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto parseFrom(
       java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto parseFrom(
       com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto parseFrom(java.io.InputStream input)
@@ -322,7 +322,7 @@ private static final long serialVersionUID = 0L;
           return internalGetValues();
         default:
           throw new RuntimeException(
-              "Invalid map field number: " + number);
+              "Inkonstid map field number: " + number);
       }
     }
     @SuppressWarnings({"rawtypes"})
@@ -333,7 +333,7 @@ private static final long serialVersionUID = 0L;
           return internalGetMutableValues();
         default:
           throw new RuntimeException(
-              "Invalid map field number: " + number);
+              "Inkonstid map field number: " + number);
       }
     }
     @java.lang.Override
@@ -385,8 +385,8 @@ private static final long serialVersionUID = 0L;
     public org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto buildPartial() {
       org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto result = new org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto(this);
       int from_bitField0_ = bitField0_;
-      result.values_ = internalGetValues();
-      result.values_.makeImmutable();
+      result.konstues_ = internalGetValues();
+      result.konstues_.makeImmutable();
       onBuilt();
       return result;
     }
@@ -398,8 +398,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.setField(field, value);
+        java.lang.Object konstue) {
+      return super.setField(field, konstue);
     }
     @java.lang.Override
     public Builder clearField(
@@ -414,14 +414,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return super.setRepeatedField(field, index, value);
+        int index, java.lang.Object konstue) {
+      return super.setRepeatedField(field, index, konstue);
     }
     @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.addRepeatedField(field, value);
+        java.lang.Object konstue) {
+      return super.addRepeatedField(field, konstue);
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -465,10 +465,10 @@ private static final long serialVersionUID = 0L;
               break;
             case 10: {
               com.google.protobuf.MapEntry<java.lang.String, com.google.protobuf.ByteString>
-              values__ = input.readMessage(
+              konstues__ = input.readMessage(
                   ValuesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               internalGetMutableValues().getMutableMap().put(
-                  values__.getKey(), values__.getValue());
+                  konstues__.getKey(), konstues__.getValue());
               break;
             } // case 10
             default: {
@@ -479,7 +479,7 @@ private static final long serialVersionUID = 0L;
             } // default:
           } // switch (tag)
         } // while (!done)
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.unwrapIOException();
       } finally {
         onChanged();
@@ -489,33 +489,33 @@ private static final long serialVersionUID = 0L;
     private int bitField0_;
 
     private com.google.protobuf.MapField<
-        java.lang.String, com.google.protobuf.ByteString> values_;
+        java.lang.String, com.google.protobuf.ByteString> konstues_;
     private com.google.protobuf.MapField<java.lang.String, com.google.protobuf.ByteString>
     internalGetValues() {
-      if (values_ == null) {
+      if (konstues_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
             ValuesDefaultEntryHolder.defaultEntry);
       }
-      return values_;
+      return konstues_;
     }
     private com.google.protobuf.MapField<java.lang.String, com.google.protobuf.ByteString>
     internalGetMutableValues() {
       onChanged();;
-      if (values_ == null) {
-        values_ = com.google.protobuf.MapField.newMapField(
+      if (konstues_ == null) {
+        konstues_ = com.google.protobuf.MapField.newMapField(
             ValuesDefaultEntryHolder.defaultEntry);
       }
-      if (!values_.isMutable()) {
-        values_ = values_.copy();
+      if (!konstues_.isMutable()) {
+        konstues_ = konstues_.copy();
       }
-      return values_;
+      return konstues_;
     }
 
     public int getValuesCount() {
       return internalGetValues().getMap().size();
     }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
 
     @java.lang.Override
@@ -533,7 +533,7 @@ private static final long serialVersionUID = 0L;
       return getValuesMap();
     }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     @java.lang.Override
 
@@ -541,7 +541,7 @@ private static final long serialVersionUID = 0L;
       return internalGetValues().getMap();
     }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     @java.lang.Override
 
@@ -554,7 +554,7 @@ private static final long serialVersionUID = 0L;
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     @java.lang.Override
 
@@ -575,7 +575,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
 
     public Builder removeValues(
@@ -594,28 +594,28 @@ private static final long serialVersionUID = 0L;
       return internalGetMutableValues().getMutableMap();
     }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     public Builder putValues(
         java.lang.String key,
-        com.google.protobuf.ByteString value) {
+        com.google.protobuf.ByteString konstue) {
       if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) {
-  throw new NullPointerException("map value");
+      if (konstue == null) {
+  throw new NullPointerException("map konstue");
 }
 
       internalGetMutableValues().getMutableMap()
-          .put(key, value);
+          .put(key, konstue);
       return this;
     }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
 
     public Builder putAllValues(
-        java.util.Map<java.lang.String, com.google.protobuf.ByteString> values) {
+        java.util.Map<java.lang.String, com.google.protobuf.ByteString> konstues) {
       internalGetMutableValues().getMutableMap()
-          .putAll(values);
+          .putAll(konstues);
       return this;
     }
     @java.lang.Override
@@ -650,16 +650,16 @@ private static final long serialVersionUID = 0L;
     public IdeaExtrasProto parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        throws com.google.protobuf.InkonstidProtocolBufferException {
       Builder builder = newBuilder();
       try {
         builder.mergeFrom(input, extensionRegistry);
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
       } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        throw e.asInkonstidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+        throw new com.google.protobuf.InkonstidProtocolBufferException(e)
             .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();

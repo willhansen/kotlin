@@ -24,7 +24,7 @@ interface Marker {
 class Case1() {
     fun foo() : Int =1
 
-    val foo = object : Marker {}
+    konst foo = object : Marker {}
 
     fun innerFun() {
         <!DEBUG_INFO_CALL("fqName: Case1.foo; typeCall: function")!>foo()<!>
@@ -32,7 +32,7 @@ class Case1() {
     }
 
     inner class InnerClass0 {
-        val foo = object : Marker {}
+        konst foo = object : Marker {}
 
         fun innerClassFun() {
             <!DEBUG_INFO_CALL("fqName: Marker.invoke; typeCall: variable&invoke")!>foo()<!>

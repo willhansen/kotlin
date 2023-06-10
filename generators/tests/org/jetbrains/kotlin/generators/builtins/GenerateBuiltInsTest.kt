@@ -16,13 +16,13 @@ import java.io.StringWriter
 class GenerateBuiltInsTest : TestCase() {
     fun testBuiltInsAreUpToDate() {
         generateBuiltIns { file, generator ->
-            val sw = StringWriter()
+            konst sw = StringWriter()
             PrintWriter(sw).use {
                 generator(it).generate()
             }
 
-            val expected = StringUtil.convertLineSeparators(sw.toString().trim())
-            val actual = StringUtil.convertLineSeparators(FileUtil.loadFile(file).trim())
+            konst expected = StringUtil.convertLineSeparators(sw.toString().trim())
+            konst actual = StringUtil.convertLineSeparators(FileUtil.loadFile(file).trim())
 
             Assert.assertEquals("To fix this problem you need to regenerate built-ins (run generateBuiltIns.kt)", expected, actual)
         }

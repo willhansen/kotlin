@@ -2,7 +2,7 @@ import kotlinx.atomicfu.locks.*
 import kotlin.test.*
 
 //class ReentrantLockTest {
-//    private val lock = reentrantLock()
+//    private konst lock = reentrantLock()
 //    private var state = 0
 //
 //    fun testLockField() {
@@ -14,7 +14,7 @@ import kotlin.test.*
 //}
 
 class ReentrantLockFieldTest {
-    private val lock = reentrantLock()
+    private konst lock = reentrantLock()
     private var state = 0
 
     fun testLock() {
@@ -28,7 +28,7 @@ class ReentrantLockFieldTest {
 }
 
 fun box(): String {
-    val testClass = ReentrantLockFieldTest()
+    konst testClass = ReentrantLockFieldTest()
     testClass.testLock()
     return "OK"
 }

@@ -23,10 +23,10 @@ class D: C() {
 }
 
 @Test fun runTest() {
-    val d = D()
-    val c: C = d
-    val b: B<Int> = d
-    val a: A<Int> = d
+    konst d = D()
+    konst c: C = d
+    konst b: B<Int> = d
+    konst a: A<Int> = d
     println(d.foo())
     println(c.foo())
     println(b.foo())

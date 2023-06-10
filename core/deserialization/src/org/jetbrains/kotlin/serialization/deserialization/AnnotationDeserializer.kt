@@ -33,18 +33,18 @@ import org.jetbrains.kotlin.resolve.constants.*
 import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.types.KotlinType
 
-class AnnotationDeserializer(private val module: ModuleDescriptor, private val notFoundClasses: NotFoundClasses) {
-    private val builtIns: KotlinBuiltIns
+class AnnotationDeserializer(private konst module: ModuleDescriptor, private konst notFoundClasses: NotFoundClasses) {
+    private konst builtIns: KotlinBuiltIns
         get() = module.builtIns
 
     fun deserializeAnnotation(proto: Annotation, nameResolver: NameResolver): AnnotationDescriptor {
-        val annotationClass = resolveClass(nameResolver.getClassId(proto.id))
+        konst annotationClass = resolveClass(nameResolver.getClassId(proto.id))
 
         var arguments = emptyMap<Name, ConstantValue<*>>()
         if (proto.argumentCount != 0 && !ErrorUtils.isError(annotationClass) && DescriptorUtils.isAnnotationClass(annotationClass)) {
-            val constructor = annotationClass.constructors.singleOrNull()
+            konst constructor = annotationClass.constructors.singleOrNull()
             if (constructor != null) {
-                val parameterByName = constructor.valueParameters.associateBy { it.name }
+                konst parameterByName = constructor.konstueParameters.associateBy { it.name }
                 arguments = proto.argumentList.mapNotNull { resolveArgument(it, parameterByName, nameResolver) }.toMap()
             }
         }
@@ -57,60 +57,60 @@ class AnnotationDeserializer(private val module: ModuleDescriptor, private val n
         parameterByName: Map<Name, ValueParameterDescriptor>,
         nameResolver: NameResolver
     ): Pair<Name, ConstantValue<*>>? {
-        val parameter = parameterByName[nameResolver.getName(proto.nameId)] ?: return null
-        return Pair(nameResolver.getName(proto.nameId), resolveValueAndCheckExpectedType(parameter.type, proto.value, nameResolver))
+        konst parameter = parameterByName[nameResolver.getName(proto.nameId)] ?: return null
+        return Pair(nameResolver.getName(proto.nameId), resolveValueAndCheckExpectedType(parameter.type, proto.konstue, nameResolver))
     }
 
-    private fun resolveValueAndCheckExpectedType(expectedType: KotlinType, value: Value, nameResolver: NameResolver): ConstantValue<*> {
-        return resolveValue(expectedType, value, nameResolver).takeIf {
-            doesValueConformToExpectedType(it, expectedType, value)
-        } ?: ErrorValue.create("Unexpected argument value: actual type ${value.type} != expected type $expectedType")
+    private fun resolveValueAndCheckExpectedType(expectedType: KotlinType, konstue: Value, nameResolver: NameResolver): ConstantValue<*> {
+        return resolveValue(expectedType, konstue, nameResolver).takeIf {
+            doesValueConformToExpectedType(it, expectedType, konstue)
+        } ?: ErrorValue.create("Unexpected argument konstue: actual type ${konstue.type} != expected type $expectedType")
     }
 
-    fun resolveValue(expectedType: KotlinType, value: Value, nameResolver: NameResolver): ConstantValue<*> {
-        val isUnsigned = Flags.IS_UNSIGNED.get(value.flags)
+    fun resolveValue(expectedType: KotlinType, konstue: Value, nameResolver: NameResolver): ConstantValue<*> {
+        konst isUnsigned = Flags.IS_UNSIGNED.get(konstue.flags)
 
-        return when (value.type) {
-            Type.BYTE -> value.intValue.toByte().letIf(isUnsigned, ::UByteValue, ::ByteValue)
-            Type.CHAR -> CharValue(value.intValue.toInt().toChar())
-            Type.SHORT -> value.intValue.toShort().letIf(isUnsigned, ::UShortValue, ::ShortValue)
-            Type.INT -> value.intValue.toInt().letIf(isUnsigned, ::UIntValue, ::IntValue)
-            Type.LONG -> value.intValue.letIf(isUnsigned, ::ULongValue, ::LongValue)
-            Type.FLOAT -> FloatValue(value.floatValue)
-            Type.DOUBLE -> DoubleValue(value.doubleValue)
-            Type.BOOLEAN -> BooleanValue(value.intValue != 0L)
-            Type.STRING -> StringValue(nameResolver.getString(value.stringValue))
-            Type.CLASS -> KClassValue(nameResolver.getClassId(value.classId), value.arrayDimensionCount)
-            Type.ENUM -> EnumValue(nameResolver.getClassId(value.classId), nameResolver.getName(value.enumValueId))
-            Type.ANNOTATION -> AnnotationValue(deserializeAnnotation(value.annotation, nameResolver))
+        return when (konstue.type) {
+            Type.BYTE -> konstue.intValue.toByte().letIf(isUnsigned, ::UByteValue, ::ByteValue)
+            Type.CHAR -> CharValue(konstue.intValue.toInt().toChar())
+            Type.SHORT -> konstue.intValue.toShort().letIf(isUnsigned, ::UShortValue, ::ShortValue)
+            Type.INT -> konstue.intValue.toInt().letIf(isUnsigned, ::UIntValue, ::IntValue)
+            Type.LONG -> konstue.intValue.letIf(isUnsigned, ::ULongValue, ::LongValue)
+            Type.FLOAT -> FloatValue(konstue.floatValue)
+            Type.DOUBLE -> DoubleValue(konstue.doubleValue)
+            Type.BOOLEAN -> BooleanValue(konstue.intValue != 0L)
+            Type.STRING -> StringValue(nameResolver.getString(konstue.stringValue))
+            Type.CLASS -> KClassValue(nameResolver.getClassId(konstue.classId), konstue.arrayDimensionCount)
+            Type.ENUM -> EnumValue(nameResolver.getClassId(konstue.classId), nameResolver.getName(konstue.enumValueId))
+            Type.ANNOTATION -> AnnotationValue(deserializeAnnotation(konstue.annotation, nameResolver))
             Type.ARRAY -> ConstantValueFactory.createArrayValue(
-                value.arrayElementList.map { resolveValue(builtIns.anyType, it, nameResolver) },
+                konstue.arrayElementList.map { resolveValue(builtIns.anyType, it, nameResolver) },
                 expectedType
             )
-            else -> error("Unsupported annotation argument type: ${value.type} (expected $expectedType)")
+            else -> error("Unsupported annotation argument type: ${konstue.type} (expected $expectedType)")
         }
     }
 
-    // This method returns false if the actual value loaded from an annotation argument does not conform to the expected type of the
+    // This method returns false if the actual konstue loaded from an annotation argument does not conform to the expected type of the
     // corresponding parameter in the annotation class. This usually means that the annotation class has been changed incompatibly
-    // without recompiling clients, in which case we prefer not to load the annotation argument value at all, to avoid constructing
+    // without recompiling clients, in which case we prefer not to load the annotation argument konstue at all, to avoid constructing
     // an incorrect model and breaking some assumptions in the compiler.
-    private fun doesValueConformToExpectedType(result: ConstantValue<*>, expectedType: KotlinType, value: Value): Boolean {
-        return when (value.type) {
+    private fun doesValueConformToExpectedType(result: ConstantValue<*>, expectedType: KotlinType, konstue: Value): Boolean {
+        return when (konstue.type) {
             Type.CLASS -> {
-                val expectedClass = expectedType.constructor.declarationDescriptor as? ClassDescriptor
-                // We could also check that the class value's type is a subtype of the expected type, but loading the definition of the
+                konst expectedClass = expectedType.constructor.declarationDescriptor as? ClassDescriptor
+                // We could also check that the class konstue's type is a subtype of the expected type, but loading the definition of the
                 // referenced class here is undesirable and may even be incorrect (because the module might be different at the
-                // destination where these constant values are read). This can lead to slightly incorrect model in some edge cases.
+                // destination where these constant konstues are read). This can lead to slightly incorrect model in some edge cases.
                 expectedClass == null || KotlinBuiltIns.isKClass(expectedClass)
             }
             Type.ARRAY -> {
-                check(result is ArrayValue && result.value.size == value.arrayElementList.size) {
-                    "Deserialized ArrayValue should have the same number of elements as the original array value: $result"
+                check(result is ArrayValue && result.konstue.size == konstue.arrayElementList.size) {
+                    "Deserialized ArrayValue should have the same number of elements as the original array konstue: $result"
                 }
-                val expectedElementType = builtIns.getArrayElementType(expectedType)
-                result.value.indices.all { i ->
-                    doesValueConformToExpectedType(result.value[i], expectedElementType, value.getArrayElement(i))
+                konst expectedElementType = builtIns.getArrayElementType(expectedType)
+                result.konstue.indices.all { i ->
+                    doesValueConformToExpectedType(result.konstue[i], expectedElementType, konstue.getArrayElement(i))
                 }
             }
             else -> result.getType(module) == expectedType

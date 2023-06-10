@@ -1,6 +1,6 @@
 fun foo(x: String) = x
 
 fun box(): String {
-    val x = ::foo
+    konst x = ::foo
     return x("OK")
 }

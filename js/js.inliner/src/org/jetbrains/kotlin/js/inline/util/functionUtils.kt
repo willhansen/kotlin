@@ -34,11 +34,11 @@ fun isFunctionCreator(outer: JsFunction): Boolean =
  * with closure is created
  */
 fun JsFunction.getInnerFunction(): JsFunction? {
-    val statements = body.statements
+    konst statements = body.statements
     if (statements.size != 1) return null
 
-    val statement = statements.get(0)
-    val returnExpr = (statement as? JsReturn)?.expression
+    konst statement = statements.get(0)
+    konst returnExpr = (statement as? JsReturn)?.expression
 
     return returnExpr as? JsFunction
 }

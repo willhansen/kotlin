@@ -3,13 +3,13 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val x: T = 1234 as T)
+konstue class Z<T: Int>(konst x: T = 1234 as T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L<T: Long>(val x: T = 1234L as T)
+konstue class L<T: Long>(konst x: T = 1234L as T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val x: T = "foobar" as T)
+konstue class S<T: String>(konst x: T = "foobar" as T)
 
 fun box(): String {
     if (Z<Int>().x != 1234) throw AssertionError()

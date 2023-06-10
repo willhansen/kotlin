@@ -4,10 +4,10 @@ fun foo() {
         foo()
     }
     catch (e: Exception) {
-        val a = e
+        konst a = e
     }
     finally {
-        val a = 1
+        konst a = 1
     }
     "after"
 }

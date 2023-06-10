@@ -41,7 +41,7 @@ open class KonanInteropLibrary(name: String,
     override fun generateTargetAliasTaskDescription(task: Task, targetName: String) =
             "Build the Kotlin/Native interop library '${task.name}' for '$targetName'"
 
-    override val defaultBaseDir: File
+    override konst defaultBaseDir: File
         get() = project.konanLibsBaseDir
 
     // DSL
@@ -58,25 +58,25 @@ open class KonanInteropLibrary(name: String,
         }
     }
 
-    val includeDirs = IncludeDirectoriesSpecImpl()
+    konst includeDirs = IncludeDirectoriesSpecImpl()
 
     override fun defFile(file: Any) = tasks().forEach { it.configure { defFile(file) } }
 
-    override fun packageName(value: String) = tasks().forEach { it.configure { packageName(value) } }
+    override fun packageName(konstue: String) = tasks().forEach { it.configure { packageName(konstue) } }
 
-    override fun compilerOpts(vararg values: String) = tasks().forEach { it.configure { compilerOpts(*values) } }
+    override fun compilerOpts(vararg konstues: String) = tasks().forEach { it.configure { compilerOpts(*konstues) } }
 
     override fun headers(vararg files: Any) = tasks().forEach { it.configure { headers(*files) } }
 
     override fun headers(files: FileCollection) = tasks().forEach { it.configure { headers(files) } }
 
-    override fun includeDirs(vararg values: Any) = tasks().forEach { it.configure { includeDirs(*values) } }
+    override fun includeDirs(vararg konstues: Any) = tasks().forEach { it.configure { includeDirs(*konstues) } }
     override fun includeDirs(closure: Closure<Unit>) = includeDirs { project.configure(this, closure) }
     override fun includeDirs(action: Action<IncludeDirectoriesSpec>) = includeDirs { action.execute(this) }
     override fun includeDirs(configure: IncludeDirectoriesSpec.() -> Unit) = includeDirs.configure()
 
-    override fun linkerOpts(values: List<String>) = tasks().forEach { it.configure { linkerOpts(values) } }
-    override fun linkerOpts(vararg values: String) = linkerOpts(values.toList())
+    override fun linkerOpts(konstues: List<String>) = tasks().forEach { it.configure { linkerOpts(konstues) } }
+    override fun linkerOpts(vararg konstues: String) = linkerOpts(konstues.toList())
 
     override fun link(vararg files: Any) = tasks().forEach { it.configure { link(*files) } }
     override fun link(files: FileCollection) = tasks().forEach { it.configure { link(files) } }

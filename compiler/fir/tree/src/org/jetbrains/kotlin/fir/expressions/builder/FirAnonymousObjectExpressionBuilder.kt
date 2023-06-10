@@ -24,7 +24,7 @@ class FirAnonymousObjectExpressionBuilder : FirAnnotationContainerBuilder, FirEx
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
     lateinit var anonymousObject: FirAnonymousObject
 
-    override val annotations: MutableList<FirAnnotation>
+    override konst annotations: MutableList<FirAnnotation>
         get() = shouldNotBeCalled()
 
     override fun build(): FirAnonymousObjectExpression {

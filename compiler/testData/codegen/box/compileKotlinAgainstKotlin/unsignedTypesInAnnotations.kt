@@ -7,9 +7,9 @@
 // FILE: A.kt
 
 @kotlin.annotation.Target(AnnotationTarget.TYPE, AnnotationTarget.FUNCTION)
-annotation class Anno(val u: UInt)
+annotation class Anno(konst u: UInt)
 
-const val ONE_UINT = 1u
+const konst ONE_UINT = 1u
 
 object ForTest {
     @Anno(0u)
@@ -23,10 +23,10 @@ object ForTest {
 // FILE: B.kt
 
 fun box(): String {
-    val fResult = (ForTest::f.annotations.first() as Anno).u // force annotation deserialization
+    konst fResult = (ForTest::f.annotations.first() as Anno).u // force annotation deserialization
     if (fResult != 0u) return "Fail"
 
-    val gResult = (ForTest::g.annotations.first() as Anno).u
+    konst gResult = (ForTest::g.annotations.first() as Anno).u
     if (gResult != 1u) return "Fail"
 
     if (ONE_UINT != 1u) return "Fail"

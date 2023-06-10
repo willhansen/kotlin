@@ -1,5 +1,5 @@
 object CommonMain {
     init {
-        ProducerNativeCommonMain.fromCInterop().value
+        ProducerNativeCommonMain.fromCInterop().konstue
     }
 }

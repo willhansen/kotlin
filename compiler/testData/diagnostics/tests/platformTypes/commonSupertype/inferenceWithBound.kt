@@ -34,7 +34,7 @@ public class Other {
 import p.*
 
 fun test() {
-    val col = if (1 < 2) Other.subs else Other.supers
+    konst col = if (1 < 2) Other.subs else Other.supers
     col.foo()
 }
 

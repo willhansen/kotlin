@@ -5,8 +5,8 @@ public fun fb(/*0*/ b: B): kotlin.Unit
 
 public final data class A {
     public constructor A(/*0*/ i: kotlin.Int, /*1*/ j: [Error type: Unresolved type for G])
-    public final val i: kotlin.Int
-    public final val j: [Error type: Unresolved type for G]
+    public final konst i: kotlin.Int
+    public final konst j: [Error type: Unresolved type for G]
     public final operator /*synthesized*/ fun component1(): kotlin.Int
     public final operator /*synthesized*/ fun component2(): [Error type: Unresolved type for G]
     public final /*synthesized*/ fun copy(/*0*/ i: kotlin.Int = ..., /*1*/ j: [Error type: Unresolved type for G] = ...): A
@@ -17,8 +17,8 @@ public final data class A {
 
 public final data class B {
     public constructor B(/*0*/ i: [Error type: Unresolved type for G], /*1*/ j: [Error type: Unresolved type for G])
-    public final val i: [Error type: Unresolved type for G]
-    public final val j: [Error type: Unresolved type for G]
+    public final konst i: [Error type: Unresolved type for G]
+    public final konst j: [Error type: Unresolved type for G]
     public final operator /*synthesized*/ fun component1(): [Error type: Unresolved type for G]
     public final operator /*synthesized*/ fun component2(): [Error type: Unresolved type for G]
     public final /*synthesized*/ fun copy(/*0*/ i: [Error type: Unresolved type for G] = ..., /*1*/ j: [Error type: Unresolved type for G] = ...): B

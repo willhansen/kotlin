@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Int
+konst test1: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Int
   //   Public signature: /test1.<get-test1>|3978508226793108919[0]
@@ -40,7 +40,7 @@ var test4: Int
   // CHECK:
   //   Mangled name: #<set-test4>(kotlin.Int){}
   //   Public signature: /test4.<set-test4>|8105340104867729538[0]
-  set(value: Int): Unit
+  set(konstue: Int): Unit
 
 // CHECK:
 //   Mangled name: {}test5
@@ -61,7 +61,7 @@ var test5: Int
 // CHECK:
 //   Mangled name: {}test6
 //   Public signature: /test6|-2606527149405855403[0]
-val test6: Int
+konst test6: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test6>(){}kotlin.Int
   //   Public signature: /test6.<get-test6>|-7378740493776144578[0]
@@ -73,7 +73,7 @@ val test6: Int
 // CHECK:
 //   Mangled name: {}test7
 //   Public signature: /test7|1362036650170262859[0]
-val test7: Int /* by */
+konst test7: Int /* by */
   // CHECK JVM_IR:
   //   Mangled name: #<get-test7>(){}kotlin.Int
   //   Public signature: /test7.<get-test7>|-7305979124924885797[0]
@@ -101,7 +101,7 @@ var test8: Int /* by */
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: Int
+konst test2: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test2>(){}kotlin.Int
   //   Public signature: /test2.<get-test2>|-8779933517717592707[0]

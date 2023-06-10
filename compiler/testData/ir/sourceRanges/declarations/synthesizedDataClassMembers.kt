@@ -1,5 +1,5 @@
 data class C(
-        val x: Int,
-        val y: String,
-        val z: Any
+        konst x: Int,
+        konst y: String,
+        konst z: Any
 )

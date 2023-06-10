@@ -17,7 +17,7 @@ fun builder(c: suspend () -> Int): Int {
 fun box(): String {
     var result = ""
 
-    val handledResult = builder {
+    konst handledResult = builder {
         result = "OK"
         56
     }

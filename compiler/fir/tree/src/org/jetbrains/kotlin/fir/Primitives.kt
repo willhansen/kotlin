@@ -15,17 +15,17 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.StandardClassIds
 
 object StandardTypes {
-    val Boolean: ConeClassLikeType = StandardClassIds.Boolean.createType()
-    val Char: ConeClassLikeType = StandardClassIds.Char.createType()
-    val Byte: ConeClassLikeType = StandardClassIds.Byte.createType()
-    val Short: ConeClassLikeType = StandardClassIds.Short.createType()
-    val Int: ConeClassLikeType = StandardClassIds.Int.createType()
-    val Long: ConeClassLikeType = StandardClassIds.Long.createType()
-    val Float: ConeClassLikeType = StandardClassIds.Float.createType()
-    val Double: ConeClassLikeType = StandardClassIds.Double.createType()
+    konst Boolean: ConeClassLikeType = StandardClassIds.Boolean.createType()
+    konst Char: ConeClassLikeType = StandardClassIds.Char.createType()
+    konst Byte: ConeClassLikeType = StandardClassIds.Byte.createType()
+    konst Short: ConeClassLikeType = StandardClassIds.Short.createType()
+    konst Int: ConeClassLikeType = StandardClassIds.Int.createType()
+    konst Long: ConeClassLikeType = StandardClassIds.Long.createType()
+    konst Float: ConeClassLikeType = StandardClassIds.Float.createType()
+    konst Double: ConeClassLikeType = StandardClassIds.Double.createType()
 
-    val Any: ConeClassLikeType = StandardClassIds.Any.createType()
-    val NullableAny: ConeClassLikeType = StandardClassIds.Any.createType(isNullable = true)
+    konst Any: ConeClassLikeType = StandardClassIds.Any.createType()
+    konst NullableAny: ConeClassLikeType = StandardClassIds.Any.createType(isNullable = true)
 }
 
 private fun ClassId.createType(isNullable: Boolean = false): ConeClassLikeType =
@@ -79,11 +79,11 @@ fun FirClassSymbol<*>.isPrimitiveNumberType(): Boolean = classId in PRIMITIVE_NU
 fun FirClassSymbol<*>.isPrimitiveUnsignedNumberType(): Boolean = classId in PRIMITIVE_UNSIGNED_NUMBER_CLASS_IDS
 fun FirClassSymbol<*>.isPrimitiveNumberOrUnsignedNumberType(): Boolean = isPrimitiveNumberType() || isPrimitiveUnsignedNumberType()
 
-private val PRIMITIVE_NUMBER_CLASS_IDS: Set<ClassId> = setOf(
+private konst PRIMITIVE_NUMBER_CLASS_IDS: Set<ClassId> = setOf(
     StandardClassIds.Double, StandardClassIds.Float, StandardClassIds.Long, StandardClassIds.Int,
     StandardClassIds.Short, StandardClassIds.Byte
 )
 
-private val PRIMITIVE_UNSIGNED_NUMBER_CLASS_IDS: Set<ClassId> = setOf(
+private konst PRIMITIVE_UNSIGNED_NUMBER_CLASS_IDS: Set<ClassId> = setOf(
     StandardClassIds.ULong, StandardClassIds.UInt, StandardClassIds.UShort, StandardClassIds.UByte
 )

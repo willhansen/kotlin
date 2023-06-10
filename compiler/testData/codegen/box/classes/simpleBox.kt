@@ -1,8 +1,8 @@
 class Box<T>(t: T) {
-    var value = t
+    var konstue = t
 }
 
 fun box(): String {
-    val box: Box<Int> = Box<Int>(1)
-    return if (box.value == 1) "OK" else "fail"
+    konst box: Box<Int> = Box<Int>(1)
+    return if (box.konstue == 1) "OK" else "fail"
 }

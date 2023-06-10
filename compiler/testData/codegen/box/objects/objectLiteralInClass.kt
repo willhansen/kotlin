@@ -1,8 +1,8 @@
 class C {
 
-    val s = "OK"
+    konst s = "OK"
 
-    private val localObject = object {
+    private konst localObject = object {
         fun getS(): String {
             return s
         }

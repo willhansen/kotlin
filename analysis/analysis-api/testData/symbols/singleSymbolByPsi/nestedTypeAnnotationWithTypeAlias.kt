@@ -2,7 +2,7 @@
 // PRETTY_RENDERER_OPTION: FULLY_EXPANDED_TYPES
 
 @Target(AnnotationTarget.TYPE)
-annotation class Anno1(val s: String)
+annotation class Anno1(konst s: String)
 @Target(AnnotationTarget.TYPE)
 annotation class Anno2
 @Target(AnnotationTarget.TYPE)

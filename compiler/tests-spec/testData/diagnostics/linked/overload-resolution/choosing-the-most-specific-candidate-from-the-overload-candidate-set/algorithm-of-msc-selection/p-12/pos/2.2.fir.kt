@@ -29,7 +29,7 @@ package testPackCase2
 import testPackCase2.Case2.Companion.boo
 
 class Case2 {
-    val boo: Int = 1
+    konst boo: Int = 1
 
     companion object {
         fun Int.boo(x: Int, y: Int): String = TODO() //(1.1)
@@ -73,7 +73,7 @@ package testPackCase3
 import testPackCase3.Case3.Companion.plus
 
 class Case3 {
-    val boo: Int = 1
+    konst boo: Int = 1
 
     companion object {
         operator fun Int.plus(x: String): String = TODO() //(1.1)

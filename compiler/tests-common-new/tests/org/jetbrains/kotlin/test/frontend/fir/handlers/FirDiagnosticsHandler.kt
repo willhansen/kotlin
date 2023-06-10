@@ -56,39 +56,39 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
 @OptIn(SymbolInternals::class)
 class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(testServices) {
-    private val globalMetadataInfoHandler: GlobalMetadataInfoHandler
+    private konst globalMetadataInfoHandler: GlobalMetadataInfoHandler
         get() = testServices.globalMetadataInfoHandler
 
-    private val diagnosticsService: DiagnosticsService
+    private konst diagnosticsService: DiagnosticsService
         get() = testServices.diagnosticsService
 
-    override val directiveContainers: List<DirectivesContainer> =
+    override konst directiveContainers: List<DirectivesContainer> =
         listOf(DiagnosticsDirectives)
 
-    override val additionalServices: List<ServiceRegistrationData> =
+    override konst additionalServices: List<ServiceRegistrationData> =
         listOf(service(::DiagnosticsService))
 
-    private val dumper: MultiModuleInfoDumper = MultiModuleInfoDumper(moduleHeaderTemplate = "// -- Module: <%s> --")
+    private konst dumper: MultiModuleInfoDumper = MultiModuleInfoDumper(moduleHeaderTemplate = "// -- Module: <%s> --")
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
-        val resultDump = dumper.generateResultingDump()
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val expectedFile = testDataFile.parentFile.resolve("${testDataFile.nameWithoutFirExtension}.fir.diag.txt")
+        konst resultDump = dumper.generateResultingDump()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst expectedFile = testDataFile.parentFile.resolve("${testDataFile.nameWithoutFirExtension}.fir.diag.txt")
         assertions.assertEqualsToFile(expectedFile, resultDump)
     }
 
     override fun processModule(module: TestModule, info: FirOutputArtifact) {
         for (part in info.partsForDependsOnModules) {
-            val diagnosticsPerFile = part.firAnalyzerFacade.runCheckers()
-            val currentModule = part.module
+            konst diagnosticsPerFile = part.firAnalyzerFacade.runCheckers()
+            konst currentModule = part.module
 
-            val lightTreeComparingModeEnabled = FirDiagnosticsDirectives.COMPARE_WITH_LIGHT_TREE in currentModule.directives
-            val lightTreeEnabled = currentModule.directives.singleValue(FirDiagnosticsDirectives.FIR_PARSER) == FirParser.LightTree
-            val forceRenderArguments = FirDiagnosticsDirectives.RENDER_DIAGNOSTICS_MESSAGES in currentModule.directives
+            konst lightTreeComparingModeEnabled = FirDiagnosticsDirectives.COMPARE_WITH_LIGHT_TREE in currentModule.directives
+            konst lightTreeEnabled = currentModule.directives.singleValue(FirDiagnosticsDirectives.FIR_PARSER) == FirParser.LightTree
+            konst forceRenderArguments = FirDiagnosticsDirectives.RENDER_DIAGNOSTICS_MESSAGES in currentModule.directives
 
             for (file in currentModule.files) {
-                val firFile = info.mainFirFiles[file] ?: continue
+                konst firFile = info.mainFirFiles[file] ?: continue
                 var diagnostics = diagnosticsPerFile[firFile] ?: continue
                 if (AdditionalFilesDirectives.CHECK_TYPE in currentModule.directives) {
                     diagnostics = diagnostics.filter { it.factory.name != FirErrors.UNDERSCORE_USAGE_WITHOUT_BACKTICKS.name }
@@ -96,7 +96,7 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
                 if (LanguageSettingsDirectives.API_VERSION in currentModule.directives) {
                     diagnostics = diagnostics.filter { it.factory.name != FirErrors.NEWER_VERSION_IN_SINCE_KOTLIN.name }
                 }
-                val diagnosticsMetadataInfos =
+                konst diagnosticsMetadataInfos =
                     diagnostics.diagnosticCodeMetaInfos(
                         currentModule, file,
                         diagnosticsService, globalMetadataInfoHandler,
@@ -120,7 +120,7 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
         lightTreeComparingModeEnabled: Boolean,
         forceRenderArguments: Boolean,
     ) {
-        val metaInfos = if (firFile.psi != null) {
+        konst metaInfos = if (firFile.psi != null) {
             AnalyzingUtils.getSyntaxErrorRanges(firFile.psi!!).flatMap {
                 FirSyntaxErrors.SYNTAX.on(KtRealPsiSourceElement(it), it.errorDescription, positioningStrategy = null)
                     .toMetaInfos(
@@ -159,14 +159,14 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
         lightTreeEnabled: Boolean,
         lightTreeComparingModeEnabled: Boolean
     ) {
-        val result = mutableListOf<KtDiagnostic>()
+        konst result = mutableListOf<KtDiagnostic>()
 
-        val diagnosedRangesToDiagnosticNames = globalMetadataInfoHandler.getExistingMetaInfosForFile(testFile)
-            .groupBy(keySelector = { it.start..it.end }, valueTransform = { it.tag })
-            .mapValues { (_, value) -> value.toSet() }
+        konst diagnosedRangesToDiagnosticNames = globalMetadataInfoHandler.getExistingMetaInfosForFile(testFile)
+            .groupBy(keySelector = { it.start..it.end }, konstueTransform = { it.tag })
+            .mapValues { (_, konstue) -> konstue.toSet() }
 
-        val consumer = DebugDiagnosticConsumer(result, diagnosedRangesToDiagnosticNames)
-        val shouldRenderDynamic = DiagnosticsDirectives.MARK_DYNAMIC_CALLS in module.directives
+        konst consumer = DebugDiagnosticConsumer(result, diagnosedRangesToDiagnosticNames)
+        konst shouldRenderDynamic = DiagnosticsDirectives.MARK_DYNAMIC_CALLS in module.directives
 
         object : FirDefaultVisitorVoid() {
             override fun visitElement(element: FirElement) {
@@ -184,8 +184,8 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
             }
 
             private fun reportDynamic(element: FirResolvable) {
-                val calleeDeclaration = element.calleeReference.toResolvedCallableSymbol() ?: return
-                val isInvokeCallWithDynamicReceiver = calleeDeclaration.name == OperatorNameConventions.INVOKE
+                konst calleeDeclaration = element.calleeReference.toResolvedCallableSymbol() ?: return
+                konst isInvokeCallWithDynamicReceiver = calleeDeclaration.name == OperatorNameConventions.INVOKE
                         && element is FirQualifiedAccessExpression
                         && element.dispatchReceiver.typeRef.isFunctionTypeWithDynamicReceiver(firFile.moduleData.session)
 
@@ -193,11 +193,11 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
                     return
                 }
 
-                val source = element.calleeReference.source
+                konst source = element.calleeReference.source
 
                 // Unfortunately I had to repeat positioning strategy logic here
                 // (we need to check diagnostic range before applying it)
-                val target = when (calleeDeclaration.name) {
+                konst target = when (calleeDeclaration.name) {
                     OperatorNameConventions.INVOKE -> when {
                         isInvokeCallWithDynamicReceiver -> source
                         else -> source?.parentAsSourceElement ?: source
@@ -217,7 +217,7 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
             }
 
             override fun visitFunctionCall(functionCall: FirFunctionCall) {
-                val reference = functionCall.calleeReference
+                konst reference = functionCall.calleeReference
                 consumer.reportCallDiagnostic(functionCall, reference)
                 consumer.reportContainingClassDiagnostic(functionCall, reference)
 
@@ -225,9 +225,9 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
             }
 
             override fun visitSafeCallExpression(safeCallExpression: FirSafeCallExpression) {
-                val selector = safeCallExpression.selector
+                konst selector = safeCallExpression.selector
                 if (selector is FirQualifiedAccessExpression) {
-                    val reference = selector.calleeReference as FirNamedReference
+                    konst reference = selector.calleeReference as FirNamedReference
                     consumer.reportCallDiagnostic(safeCallExpression, reference)
                     consumer.reportContainingClassDiagnostic(safeCallExpression, reference)
                 }
@@ -236,7 +236,7 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
             }
 
             override fun visitPropertyAccessExpression(propertyAccessExpression: FirPropertyAccessExpression) {
-                val reference = propertyAccessExpression.calleeReference
+                konst reference = propertyAccessExpression.calleeReference
                 if (reference is FirNamedReference) {
                     consumer.reportContainingClassDiagnostic(propertyAccessExpression, reference)
                 }
@@ -245,14 +245,14 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
             }
 
             override fun visitDelegatedConstructorCall(delegatedConstructorCall: FirDelegatedConstructorCall) {
-                val reference = delegatedConstructorCall.calleeReference as FirNamedReference
+                konst reference = delegatedConstructorCall.calleeReference as FirNamedReference
                 consumer.reportContainingClassDiagnostic(delegatedConstructorCall, reference)
 
                 super.visitDelegatedConstructorCall(delegatedConstructorCall)
             }
         }.let(firFile::accept)
 
-        val codeMetaInfos = result.flatMap { diagnostic ->
+        konst codeMetaInfos = result.flatMap { diagnostic ->
             diagnostic.toMetaInfos(
                 module,
                 testFile,
@@ -268,10 +268,10 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
 
     private fun DebugDiagnosticConsumer.reportExpressionTypeDiagnostic(element: FirExpression) {
         report(DebugInfoDiagnosticFactory1.EXPRESSION_TYPE, element) {
-            val originalTypeRef = (element as? FirSmartCastExpression)?.takeIf { it.isStable }?.originalExpression?.typeRef
+            konst originalTypeRef = (element as? FirSmartCastExpression)?.takeIf { it.isStable }?.originalExpression?.typeRef
 
-            val type = element.typeRef.coneTypeSafe<ConeKotlinType>()
-            val originalType = originalTypeRef?.coneTypeSafe<ConeKotlinType>()
+            konst type = element.typeRef.coneTypeSafe<ConeKotlinType>()
+            konst originalType = originalTypeRef?.coneTypeSafe<ConeKotlinType>()
 
             if (type != null && originalType != null) {
                 "${originalType.renderForDebugInfo()} & ${type.renderForDebugInfo()}"
@@ -283,16 +283,16 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
 
     private fun DebugDiagnosticConsumer.reportCallDiagnostic(element: FirElement, reference: FirNamedReference) {
         report(DebugInfoDiagnosticFactory1.CALL, element) {
-            val resolvedSymbol = (reference as? FirResolvedNamedReference)?.resolvedSymbol
-            val fqName = resolvedSymbol?.fqNameUnsafe()
+            konst resolvedSymbol = (reference as? FirResolvedNamedReference)?.resolvedSymbol
+            konst fqName = resolvedSymbol?.fqNameUnsafe()
             Renderers.renderCallInfo(fqName, getTypeOfCall(reference, resolvedSymbol))
         }
     }
 
     private fun DebugDiagnosticConsumer.reportContainingClassDiagnostic(element: FirElement, reference: FirNamedReference) {
         report(DebugInfoDiagnosticFactory1.CALLABLE_OWNER, element) {
-            val resolvedSymbol = (reference as? FirResolvedNamedReference)?.resolvedSymbol
-            val callable = resolvedSymbol?.fir as? FirCallableDeclaration ?: return@report ""
+            konst resolvedSymbol = (reference as? FirResolvedNamedReference)?.resolvedSymbol
+            konst callable = resolvedSymbol?.fir as? FirCallableDeclaration ?: return@report ""
             DebugInfoDiagnosticFactory1.renderCallableOwner(
                 callable.symbol.callableId,
                 callable.containingClassLookupTag()?.classId,
@@ -317,7 +317,7 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
             return TypeOfCall.VARIABLE_THROUGH_INVOKE.nameToRender
         }
 
-        return when (val fir = resolvedSymbol.fir) {
+        return when (konst fir = resolvedSymbol.fir) {
             is FirProperty -> {
                 TypeOfCall.PROPERTY_GETTER.nameToRender
             }
@@ -342,9 +342,9 @@ class FirDiagnosticsHandler(testServices: TestServices) : FirAnalysisHandler(tes
         if (DiagnosticsDirectives.RENDER_DIAGNOSTICS_FULL_TEXT !in module.directives) return
         if (diagnostics.isEmpty()) return
 
-        val reportedDiagnostics = diagnostics.map {
-            val severity = AnalyzerWithCompilerReport.convertSeverity(it.severity).toString().toLowerCaseAsciiOnly()
-            val message = RootDiagnosticRendererFactory(it).render(it)
+        konst reportedDiagnostics = diagnostics.map {
+            konst severity = AnalyzerWithCompilerReport.convertSeverity(it.severity).toString().toLowerCaseAsciiOnly()
+            konst message = RootDiagnosticRendererFactory(it).render(it)
             "/${file.name}:${it.textRanges.first()}: $severity: $message"
         }
 
@@ -382,12 +382,12 @@ private fun FirTypeRef.isFunctionTypeWithDynamicReceiver(session: FirSession) =
     coneTypeSafe<ConeKotlinType>()?.isFunctionTypeWithDynamicReceiver(session) == true
 
 private fun ConeKotlinType.isFunctionTypeWithDynamicReceiver(session: FirSession): Boolean {
-    val hasExplicitDynamicReceiver = receiverType(session) is ConeDynamicType
-    val hasImplicitDynamicReceiver = isExtensionFunctionType && this.typeArguments.firstOrNull()?.type is ConeDynamicType
+    konst hasExplicitDynamicReceiver = receiverType(session) is ConeDynamicType
+    konst hasImplicitDynamicReceiver = isExtensionFunctionType && this.typeArguments.firstOrNull()?.type is ConeDynamicType
     return hasExplicitDynamicReceiver || hasImplicitDynamicReceiver
 }
 
-private val KtSourceElement.parentAsSourceElement: KtSourceElement?
+private konst KtSourceElement.parentAsSourceElement: KtSourceElement?
     get() = when (elementType) {
         KtNodeTypes.REFERENCE_EXPRESSION -> when (this) {
             is KtPsiSourceElement -> psi.parent.toKtPsiSourceElement(kind)
@@ -397,7 +397,7 @@ private val KtSourceElement.parentAsSourceElement: KtSourceElement?
         else -> null
     }
 
-private val KtSourceElement.operatorSignIfBinary: KtSourceElement?
+private konst KtSourceElement.operatorSignIfBinary: KtSourceElement?
     get() = when (elementType) {
         KtNodeTypes.BINARY_EXPRESSION -> when (this) {
             is KtPsiSourceElement -> (psi as? KtBinaryExpression)?.operationReference?.toKtPsiSourceElement(kind)
@@ -410,11 +410,11 @@ private val KtSourceElement.operatorSignIfBinary: KtSourceElement?
     }
 
 private class DebugDiagnosticConsumer(
-    private val result: MutableList<KtDiagnostic>,
-    private val diagnosedRangesToDiagnosticNames: Map<IntRange, Set<String>>
+    private konst result: MutableList<KtDiagnostic>,
+    private konst diagnosedRangesToDiagnosticNames: Map<IntRange, Set<String>>
 ) {
     private companion object {
-        private val allowedKindsForDebugInfo = setOf(
+        private konst allowedKindsForDebugInfo = setOf(
             KtRealSourceElementKind,
             KtFakeSourceElementKind.DesugaredCompoundAssignment,
             KtFakeSourceElementKind.ReferenceInAtomicQualifiedAccess,
@@ -434,19 +434,19 @@ private class DebugDiagnosticConsumer(
         // Block expression is always (?) duplicated by single block expression
         if (sourceElement.elementType == KtNodeTypes.LAMBDA_ARGUMENT || sourceElement.elementType == KtNodeTypes.BLOCK) return
 
-        val availableDiagnostics = diagnosedRangesToDiagnosticNames[sourceElement.startOffset..sourceElement.endOffset]
+        konst availableDiagnostics = diagnosedRangesToDiagnosticNames[sourceElement.startOffset..sourceElement.endOffset]
         if (availableDiagnostics == null || debugFactory.name !in availableDiagnostics) {
             return
         }
 
-        val factory = KtDiagnosticFactory0(
+        konst factory = KtDiagnosticFactory0(
             name = debugFactory.name,
             severity = debugFactory.severity,
             defaultPositioningStrategy = AbstractSourceElementPositioningStrategy.DEFAULT,
             psiType = PsiElement::class
         )
 
-        val diagnostic = when (sourceElement) {
+        konst diagnostic = when (sourceElement) {
             is KtPsiSourceElement -> KtPsiSimpleDiagnostic(
                 sourceElement,
                 debugFactory.severity,
@@ -465,7 +465,7 @@ private class DebugDiagnosticConsumer(
     }
 
     fun report(debugFactory: DebugInfoDiagnosticFactory1, element: FirElement, argumentFactory: () -> String) {
-        val sourceElement = element.source?.takeIf { it.kind in allowedKindsForDebugInfo } ?: return
+        konst sourceElement = element.source?.takeIf { it.kind in allowedKindsForDebugInfo } ?: return
 
         // Lambda argument is always (?) duplicated by function literal
         // Block expression is always (?) duplicated by single block expression
@@ -473,21 +473,21 @@ private class DebugDiagnosticConsumer(
 
         // Unfortunately I had to repeat positioning strategy logic here
         // (we need to check diagnostic range before applying it)
-        val positionedElement = debugFactory.getPositionedElement(sourceElement)
+        konst positionedElement = debugFactory.getPositionedElement(sourceElement)
 
-        val availableDiagnostics = diagnosedRangesToDiagnosticNames[positionedElement.startOffset..positionedElement.endOffset]
+        konst availableDiagnostics = diagnosedRangesToDiagnosticNames[positionedElement.startOffset..positionedElement.endOffset]
         if (availableDiagnostics == null || debugFactory.name !in availableDiagnostics) {
             return
         }
 
-        val factory = KtDiagnosticFactory1<String>(
+        konst factory = KtDiagnosticFactory1<String>(
             name = debugFactory.name,
             severity = debugFactory.severity,
             defaultPositioningStrategy = AbstractSourceElementPositioningStrategy.DEFAULT,
             psiType = PsiElement::class
         )
 
-        val diagnostic = when (positionedElement) {
+        konst diagnostic = when (positionedElement) {
             is KtPsiSourceElement -> KtPsiDiagnosticWithParameters1(
                 positionedElement,
                 argumentFactory(),
@@ -508,21 +508,21 @@ private class DebugDiagnosticConsumer(
     }
 
     private fun DebugInfoDiagnosticFactory1.getPositionedElement(sourceElement: KtSourceElement): KtSourceElement {
-        val elementType = sourceElement.elementType
+        konst elementType = sourceElement.elementType
         return if (this === DebugInfoDiagnosticFactory1.CALL
             && (elementType == KtNodeTypes.DOT_QUALIFIED_EXPRESSION || elementType == KtNodeTypes.SAFE_ACCESS_EXPRESSION)
         ) {
             if (sourceElement is KtPsiSourceElement) {
-                val psi = (sourceElement.psi as KtQualifiedExpression).selectorExpression
+                konst psi = (sourceElement.psi as KtQualifiedExpression).selectorExpression
                 psi?.let { KtRealPsiSourceElement(it) } ?: sourceElement
             } else {
-                val tree = sourceElement.treeStructure
-                val selector = tree.selector(sourceElement.lighterASTNode)
+                konst tree = sourceElement.treeStructure
+                konst selector = tree.selector(sourceElement.lighterASTNode)
                 if (selector == null) {
                     sourceElement
                 } else {
-                    val startDelta = tree.getStartOffset(selector) - tree.getStartOffset(sourceElement.lighterASTNode)
-                    val endDelta = tree.getEndOffset(selector) - tree.getEndOffset(sourceElement.lighterASTNode)
+                    konst startDelta = tree.getStartOffset(selector) - tree.getStartOffset(sourceElement.lighterASTNode)
+                    konst endDelta = tree.getEndOffset(selector) - tree.getEndOffset(sourceElement.lighterASTNode)
                     KtLightSourceElement(
                         selector, sourceElement.startOffset + startDelta, sourceElement.endOffset + endDelta, tree
                     )
@@ -536,12 +536,12 @@ private class DebugDiagnosticConsumer(
 
 class PsiLightTreeMetaInfoProcessor(testServices: TestServices) : AbstractTwoAttributesMetaInfoProcessor(testServices) {
     companion object {
-        const val PSI = "PSI"
-        const val LT = "LT" // Light Tree
+        const konst PSI = "PSI"
+        const konst LT = "LT" // Light Tree
     }
 
-    override val firstAttribute: String get() = PSI
-    override val secondAttribute: String get() = LT
+    override konst firstAttribute: String get() = PSI
+    override konst secondAttribute: String get() = LT
 
     override fun processorEnabled(module: TestModule): Boolean {
         return FirDiagnosticsDirectives.COMPARE_WITH_LIGHT_TREE in module.directives
@@ -560,8 +560,8 @@ fun KtDiagnostic.toMetaInfos(
     lightTreeComparingModeEnabled: Boolean,
     forceRenderArguments: Boolean = false
 ): List<FirDiagnosticCodeMetaInfo> = textRanges.map { range ->
-    val metaInfo = FirDiagnosticCodeMetaInfo(this, FirMetaInfoUtils.renderDiagnosticNoArgs, range)
-    val shouldRenderArguments = forceRenderArguments || globalMetadataInfoHandler1.getExistingMetaInfosForActualMetadata(file, metaInfo)
+    konst metaInfo = FirDiagnosticCodeMetaInfo(this, FirMetaInfoUtils.renderDiagnosticNoArgs, range)
+    konst shouldRenderArguments = forceRenderArguments || globalMetadataInfoHandler1.getExistingMetaInfosForActualMetadata(file, metaInfo)
         .any { it.description != null }
     if (shouldRenderArguments) {
         metaInfo.replaceRenderConfiguration(FirMetaInfoUtils.renderDiagnosticWithArgs)
@@ -570,7 +570,7 @@ fun KtDiagnostic.toMetaInfos(
         metaInfo.attributes += if (lightTreeEnabled) PsiLightTreeMetaInfoProcessor.LT else PsiLightTreeMetaInfoProcessor.PSI
     }
     if (file !in module.files) {
-        val targetPlatform = module.targetPlatform
+        konst targetPlatform = module.targetPlatform
         metaInfo.attributes += when {
             targetPlatform.isJvm() -> "JVM"
             targetPlatform.isJs() -> "JS"

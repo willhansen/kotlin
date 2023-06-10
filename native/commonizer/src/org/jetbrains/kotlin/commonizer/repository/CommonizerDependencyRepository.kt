@@ -9,16 +9,16 @@ import org.jetbrains.kotlin.commonizer.*
 import org.jetbrains.kotlin.commonizer.konan.NativeLibrary
 
 internal class CommonizerDependencyRepository(
-    private val dependencies: Set<CommonizerDependency>,
-    private val libraryLoader: NativeLibraryLoader
+    private konst dependencies: Set<CommonizerDependency>,
+    private konst libraryLoader: NativeLibraryLoader
 ) : Repository {
 
-    private val nonTargetedDependencyRepository = FilesRepository(
+    private konst nonTargetedDependencyRepository = FilesRepository(
         libraryFiles = dependencies.filterIsInstance<NonTargetedCommonizerDependency>().map { it.file }.toSet(),
         libraryLoader = libraryLoader
     )
 
-    private val targetedDependencies: Map<CommonizerTarget, Lazy<Set<NativeLibrary>>> by lazy {
+    private konst targetedDependencies: Map<CommonizerTarget, Lazy<Set<NativeLibrary>>> by lazy {
         dependencies
             .filterIsInstance<TargetedCommonizerDependency>()
             .groupBy { it.target }
@@ -26,6 +26,6 @@ internal class CommonizerDependencyRepository(
     }
 
     override fun getLibraries(target: CommonizerTarget): Set<NativeLibrary> {
-        return targetedDependencies[target]?.value.orEmpty() + nonTargetedDependencyRepository.getLibraries(target)
+        return targetedDependencies[target]?.konstue.orEmpty() + nonTargetedDependencyRepository.getLibraries(target)
     }
 }

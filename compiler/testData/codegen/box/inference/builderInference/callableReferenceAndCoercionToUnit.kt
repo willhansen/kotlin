@@ -3,7 +3,7 @@
 
 @OptIn(ExperimentalStdlibApi::class)
 fun test(s: String?): Int {
-    val list = buildList {
+    konst list = buildList {
         s?.let(::add)
     }
     return list.size

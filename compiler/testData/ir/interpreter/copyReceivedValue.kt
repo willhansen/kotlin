@@ -1,8 +1,8 @@
 @CompileTimeCalculation
 fun Int.minusOne(): Int {
-    var value = this
-    value = value - 1
+    var konstue = this
+    konstue = konstue - 1
     return this
 }
 
-const val a = <!EVALUATED: `5`!>5.minusOne()<!>
+const konst a = <!EVALUATED: `5`!>5.minusOne()<!>

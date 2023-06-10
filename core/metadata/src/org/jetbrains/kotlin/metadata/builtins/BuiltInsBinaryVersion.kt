@@ -26,13 +26,13 @@ class BuiltInsBinaryVersion(vararg numbers: Int) : BinaryVersion(*numbers) {
 
     companion object {
         @JvmField
-        val INSTANCE = BuiltInsBinaryVersion(1, 0, 7)
+        konst INSTANCE = BuiltInsBinaryVersion(1, 0, 7)
 
         @JvmField
-        val INVALID_VERSION = BuiltInsBinaryVersion()
+        konst INVALID_VERSION = BuiltInsBinaryVersion()
 
         fun readFrom(stream: InputStream): BuiltInsBinaryVersion {
-            val dataInput = DataInputStream(stream)
+            konst dataInput = DataInputStream(stream)
             return BuiltInsBinaryVersion(*(1..dataInput.readInt()).map { dataInput.readInt() }.toIntArray())
         }
     }

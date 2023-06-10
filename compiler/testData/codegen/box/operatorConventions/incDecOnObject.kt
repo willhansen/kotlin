@@ -1,12 +1,12 @@
-class X(var value: Long)
+class X(var konstue: Long)
 
 operator fun X.inc(): X {
-    this.value++
+    this.konstue++
     return this
 }
 
 operator fun X.dec(): X {
-    this.value--
+    this.konstue--
     return this
 }
 
@@ -29,13 +29,13 @@ fun box(): String {
     z.prop++
 
     if (z.counter != 2) return "fail in postfix increment: ${z.counter} != 2"
-    if (z.prop.value != 1.toLong()) return "fail in postfix increment: ${z.prop.value} != 1"
+    if (z.prop.konstue != 1.toLong()) return "fail in postfix increment: ${z.prop.konstue} != 1"
 
     z = Z()
     z.prop--
 
     if (z.counter != 2) return "fail in postfix decrement: ${z.counter} != 2"
-    if (z.prop.value != -1.toLong()) return "fail in postfix decrement: ${z.prop.value} != -1"
+    if (z.prop.konstue != -1.toLong()) return "fail in postfix decrement: ${z.prop.konstue} != -1"
 
     return "OK"
 }

@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.commonizer.cir
 
 interface CirPackage : CirDeclaration {
-    val packageName: CirPackageName
+    konst packageName: CirPackageName
 
     companion object {
         @Suppress("NOTHING_TO_INLINE")
@@ -15,5 +15,5 @@ interface CirPackage : CirDeclaration {
 }
 
 data class CirPackageImpl(
-    override val packageName: CirPackageName
+    override konst packageName: CirPackageName
 ) : CirPackage

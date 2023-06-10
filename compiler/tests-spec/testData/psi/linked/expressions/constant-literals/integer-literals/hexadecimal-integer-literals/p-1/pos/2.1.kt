@@ -4,15 +4,15 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, constant-literals, integer-literals, hexadecimal-integer-literals -> paragraph 1 -> sentence 2
  * NUMBER: 1
- * DESCRIPTION: Hexadecimal integer literals with underscore symbols in valid places.
+ * DESCRIPTION: Hexadecimal integer literals with underscore symbols in konstid places.
  */
 
-val value = 0x1_234C67890
-val value = 0XF_______3456789
-val value = 0x3_4_5_6_7_8
-val value = 0X4_______5_______d_______7
-val value = 0X5__________________________________________________________________________________________________6
-val value = 0x0_______B
-val value = 0X0_0
-val value = 0xB_______________________________________________________________________________________________________________________________________________________0
-val value = 0x1_00000000000000000_1
+konst konstue = 0x1_234C67890
+konst konstue = 0XF_______3456789
+konst konstue = 0x3_4_5_6_7_8
+konst konstue = 0X4_______5_______d_______7
+konst konstue = 0X5__________________________________________________________________________________________________6
+konst konstue = 0x0_______B
+konst konstue = 0X0_0
+konst konstue = 0xB_______________________________________________________________________________________________________________________________________________________0
+konst konstue = 0x1_00000000000000000_1

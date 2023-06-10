@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 abstract class IrFunctionCommonImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
     override var name: Name,
     override var visibility: DescriptorVisibility,
@@ -52,7 +52,7 @@ abstract class IrFunctionCommonImpl(
 
     override var dispatchReceiverParameter: IrValueParameter? = null
     override var extensionReceiverParameter: IrValueParameter? = null
-    override var valueParameters: List<IrValueParameter> = emptyList()
+    override var konstueParameters: List<IrValueParameter> = emptyList()
 
     override var contextReceiverParametersCount: Int = 0
 
@@ -73,7 +73,7 @@ class IrFunctionImpl(
     startOffset: Int,
     endOffset: Int,
     origin: IrDeclarationOrigin,
-    override val symbol: IrSimpleFunctionSymbol,
+    override konst symbol: IrSimpleFunctionSymbol,
     name: Name,
     visibility: DescriptorVisibility,
     override var modality: Modality,
@@ -87,14 +87,14 @@ class IrFunctionImpl(
     isExpect: Boolean,
     override var isFakeOverride: Boolean = origin == IrDeclarationOrigin.FAKE_OVERRIDE,
     containerSource: DeserializedContainerSource? = null,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrFunctionCommonImpl(
     startOffset, endOffset, origin, name, visibility, returnType, isInline,
     isExternal, isTailrec, isSuspend, isOperator, isInfix, isExpect,
     containerSource,
 ) {
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: FunctionDescriptor
+    override konst descriptor: FunctionDescriptor
         get() = symbol.descriptor
 
     init {
@@ -118,7 +118,7 @@ class IrFunctionWithLateBindingImpl(
     isInfix: Boolean,
     isExpect: Boolean,
     override var isFakeOverride: Boolean = origin == IrDeclarationOrigin.FAKE_OVERRIDE,
-    override val factory: IrFactory = IrFactoryImpl
+    override konst factory: IrFactory = IrFactoryImpl
 ) : IrFunctionCommonImpl(
     startOffset, endOffset, origin, name, visibility, returnType, isInline,
     isExternal, isTailrec, isSuspend, isOperator, isInfix, isExpect,
@@ -126,11 +126,11 @@ class IrFunctionWithLateBindingImpl(
 ), IrFunctionWithLateBinding {
     private var _symbol: IrSimpleFunctionSymbol? = null
 
-    override val symbol: IrSimpleFunctionSymbol
+    override konst symbol: IrSimpleFunctionSymbol
         get() = _symbol ?: error("$this has not acquired a symbol yet")
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor
+    override konst descriptor
         get() = _symbol?.descriptor ?: this.toIrBasedDescriptor()
 
     override fun acquireSymbol(symbol: IrSimpleFunctionSymbol): IrSimpleFunction {
@@ -140,6 +140,6 @@ class IrFunctionWithLateBindingImpl(
         return this
     }
 
-    override val isBound: Boolean
+    override konst isBound: Boolean
         get() = _symbol != null
 }

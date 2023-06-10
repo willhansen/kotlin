@@ -1,8 +1,8 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class C {
     companion object {
-        private val s: String
+        private konst s: String
         private var s2: String
 
         init {
@@ -19,5 +19,5 @@ class C {
 }
 
 fun box(): String {
-    return C.foo() + eval { C.bar2(); C.foo2() }
+    return C.foo() + ekonst { C.bar2(); C.foo2() }
 }

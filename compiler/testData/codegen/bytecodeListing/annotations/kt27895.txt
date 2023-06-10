@@ -1,6 +1,6 @@
 @kotlin.annotation.Target(allowedTargets=[FIELD])
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Target(value=[FIELD])
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Target(konstue=[FIELD])
 @kotlin.Metadata
 public annotation class Anno {
     // source: 'kt27895.kt'

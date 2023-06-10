@@ -7,7 +7,7 @@ object O {
 // Interface
 interface Interface {
     // Questionable cuz compiler reports warning here in FE 1.0
-    <!REDUNDANT_MODALITY_MODIFIER!>open<!> val gav: Int
+    <!REDUNDANT_MODALITY_MODIFIER!>open<!> konst gav: Int
         get() = 42
     // Redundant
     <!REDUNDANT_MODALITY_MODIFIER!>abstract<!> fun foo()
@@ -32,7 +32,7 @@ expect abstract class AbstractClass : Foo {
 
     abstract fun bar()
 
-    abstract val baz: Int
+    abstract konst baz: Int
 }
 
 
@@ -43,21 +43,21 @@ abstract class Base {
     // Abstract
     abstract fun bar()
     // Open
-    open val gav = 42
+    open konst gav = 42
 }
 
 class FinalDerived : Base() {
     // Redundant final
     override <!REDUNDANT_MODALITY_MODIFIER!>final<!> fun bar() {}
     // Non-final member in final class
-    override <!NON_FINAL_MEMBER_IN_FINAL_CLASS!>open<!> val gav = 13
+    override <!NON_FINAL_MEMBER_IN_FINAL_CLASS!>open<!> konst gav = 13
 }
 // Open
 open class OpenDerived : Base() {
     // Final
     override final fun bar() {}
     // Redundant open
-    override <!REDUNDANT_MODALITY_MODIFIER!>open<!> val gav = 13
+    override <!REDUNDANT_MODALITY_MODIFIER!>open<!> konst gav = 13
 
     private <!REDUNDANT_MODALITY_MODIFIER!>final<!> fun fan() {}
 }
@@ -71,7 +71,7 @@ interface Derived : Interface {
     <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> class Nested
 }
 // Derived abstract class
-abstract class AbstractDerived1(override final val gav: Int) : Interface {
+abstract class AbstractDerived1(override final konst gav: Int) : Interface {
     // Redundant
     override <!REDUNDANT_MODALITY_MODIFIER!>open<!> fun foo() {}
 }
@@ -80,7 +80,7 @@ abstract class AbstractDerived2 : Interface {
     // Final
     override final fun foo() {}
     // Redundant
-    override <!REDUNDANT_MODALITY_MODIFIER!>open<!> val gav = 13
+    override <!REDUNDANT_MODALITY_MODIFIER!>open<!> konst gav = 13
 }
 // Redundant abstract interface
 <!REDUNDANT_MODALITY_MODIFIER!>abstract<!> interface AbstractInterface
@@ -89,6 +89,6 @@ abstract class AbstractDerived2 : Interface {
 // Open interface
 <!REDUNDANT_MODALITY_MODIFIER, REDUNDANT_MODIFIER_FOR_TARGET!>open<!> interface OpenInterface
 
-class FinalDerived2(override <!REDUNDANT_MODALITY_MODIFIER!>final<!> val gav: Int) : Base() {
+class FinalDerived2(override <!REDUNDANT_MODALITY_MODIFIER!>final<!> konst gav: Int) : Base() {
     override fun bar() {}
 }

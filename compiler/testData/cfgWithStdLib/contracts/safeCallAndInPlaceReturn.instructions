@@ -53,7 +53,7 @@ sink:
 =====================
 == test ==
 fun test(): String {
-    val x: String? = null
+    konst x: String? = null
 
     x?.myRun {
         return ""
@@ -62,8 +62,8 @@ fun test(): String {
 ---------------------
 L0:
   1 <START>
-  2 mark({ val x: String? = null x?.myRun { return "" } })
-    v(val x: String? = null)
+  2 mark({ konst x: String? = null x?.myRun { return "" } })
+    v(konst x: String? = null)
     r(null) -> <v0>
     w(x|<v0>)
     mark(x?.myRun { return "" })

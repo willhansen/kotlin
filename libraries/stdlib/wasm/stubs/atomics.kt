@@ -7,18 +7,18 @@ package kotlin.concurrent
 
 // Only for compatibility with shared K/N stdlib code
 
-internal class AtomicReference<T>(public var value: T) {
+internal class AtomicReference<T>(public var konstue: T) {
     public fun compareAndExchange(expected: T, new: T): T {
-        if (value == expected) {
-            val old = value
-            value = new
+        if (konstue == expected) {
+            konst old = konstue
+            konstue = new
             return old
         }
-        return value
+        return konstue
     }
     public fun compareAndSet(expected: T, new: T): Boolean {
-        if (value == expected) {
-            value = new
+        if (konstue == expected) {
+            konstue = new
             return true
         }
         return false

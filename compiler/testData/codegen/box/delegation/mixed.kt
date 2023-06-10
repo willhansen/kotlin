@@ -23,12 +23,12 @@ class Fail : Base {
 }
 
 fun box(): String {
-    val z1 = object : KBase by Fail() {
+    konst z1 = object : KBase by Fail() {
         override fun getValue() = "OK"
     }
     if (z1.test() != "Fail") return "fail 1"
 
-    val z2 = object : Base by Fail() {
+    konst z2 = object : Base by Fail() {
         override fun getValue() = "OK"
     }
     return z2.test()

@@ -17,16 +17,16 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractExpectedExpressionTypeTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val expressionAtCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret(ktFile) as KtExpression
+        konst expressionAtCaret = testServices.expressionMarkerProvider.getElementOfTypeAtCaret(ktFile) as KtExpression
 
-        val actualExpectedTypeText: String? = executeOnPooledThreadInReadAction {
+        konst actualExpectedTypeText: String? = executeOnPooledThreadInReadAction {
             analyseForTest(expressionAtCaret) {
-                val expectedType = expressionAtCaret.getExpectedType() ?: return@analyseForTest null
+                konst expectedType = expressionAtCaret.getExpectedType() ?: return@analyseForTest null
                 DebugSymbolRenderer().renderType(expectedType)
             }
         }
 
-        val actual = buildString {
+        konst actual = buildString {
             appendLine("expression: ${expressionAtCaret.text}")
             appendLine("expected type: $actualExpectedTypeText")
         }

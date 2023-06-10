@@ -21,7 +21,7 @@ import java.nio.charset.Charset
 class JsRecompiledArtifactsIdentityHandler(testServices: TestServices) : JsBinaryArtifactHandler(testServices) {
     override fun processModule(module: TestModule, info: Js) {
         if (info !is Js.IncrementalJsArtifact) return
-        val (originalArtifact, incrementalArtifact) = info
+        konst (originalArtifact, incrementalArtifact) = info
         when {
             originalArtifact is Js.OldJsArtifact && incrementalArtifact is Js.OldJsArtifact -> {
                 compareArtifacts(originalArtifact, incrementalArtifact)
@@ -38,15 +38,15 @@ class JsRecompiledArtifactsIdentityHandler(testServices: TestServices) : JsBinar
     }
 
     private fun compareArtifacts(originalArtifact: Js.OldJsArtifact, incrementalArtifact: Js.OldJsArtifact) {
-        val originalSourceMap = FileUtil.loadFile(File(originalArtifact.outputFile.parentFile, originalArtifact.outputFile.name + ".map"))
-        val recompiledSourceMap =
+        konst originalSourceMap = FileUtil.loadFile(File(originalArtifact.outputFile.parentFile, originalArtifact.outputFile.name + ".map"))
+        konst recompiledSourceMap =
             removeRecompiledSuffix(
                 FileUtil.loadFile(File(incrementalArtifact.outputFile.parentFile, incrementalArtifact.outputFile.name + ".map"))
             )
 
         if (originalSourceMap != recompiledSourceMap) {
-            val originalSourceMapParse = SourceMapParser.parse(originalSourceMap)
-            val recompiledSourceMapParse = SourceMapParser.parse(recompiledSourceMap)
+            konst originalSourceMapParse = SourceMapParser.parse(originalSourceMap)
+            konst recompiledSourceMapParse = SourceMapParser.parse(recompiledSourceMap)
             if (originalSourceMapParse is SourceMapSuccess && recompiledSourceMapParse is SourceMapSuccess) {
                 testServices.assertions.assertEquals(
                     originalSourceMapParse.toDebugString(),
@@ -58,8 +58,8 @@ class JsRecompiledArtifactsIdentityHandler(testServices: TestServices) : JsBinar
     }
 
     private fun SourceMapSuccess.toDebugString(): String {
-        val out = ByteArrayOutputStream()
-        PrintStream(out).use { value.debug(it) }
+        konst out = ByteArrayOutputStream()
+        PrintStream(out).use { konstue.debug(it) }
         return String(out.toByteArray(), Charset.forName("UTF-8"))
     }
 

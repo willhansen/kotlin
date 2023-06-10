@@ -27,18 +27,18 @@ interface ExternalKotlinTargetDescriptor<T : DecoratedExternalKotlinTarget> {
         fun create(target: DecoratedExternalKotlinTarget.Delegate): T
     }
 
-    val targetName: String
-    val platformType: KotlinPlatformType
-    val targetFactory: TargetFactory<T>
+    konst targetName: String
+    konst platformType: KotlinPlatformType
+    konst targetFactory: TargetFactory<T>
 
-    val apiElements: ExternalKotlinTargetConfigurationDescriptor<T>
-    val runtimeElements: ExternalKotlinTargetConfigurationDescriptor<T>
-    val sourcesElements: ExternalKotlinTargetConfigurationDescriptor<T>
-    val apiElementsPublished: ExternalKotlinTargetConfigurationDescriptor<T>
-    val runtimeElementsPublished: ExternalKotlinTargetConfigurationDescriptor<T>
+    konst apiElements: ExternalKotlinTargetConfigurationDescriptor<T>
+    konst runtimeElements: ExternalKotlinTargetConfigurationDescriptor<T>
+    konst sourcesElements: ExternalKotlinTargetConfigurationDescriptor<T>
+    konst apiElementsPublished: ExternalKotlinTargetConfigurationDescriptor<T>
+    konst runtimeElementsPublished: ExternalKotlinTargetConfigurationDescriptor<T>
 
-    val configure: ((T) -> Unit)?
-    val configureIdeImport: (IdeMultiplatformImport.() -> Unit)?
+    konst configure: ((T) -> Unit)?
+    konst configureIdeImport: (IdeMultiplatformImport.() -> Unit)?
 }
 
 /**
@@ -67,7 +67,7 @@ fun <T : DecoratedExternalKotlinTarget> ExternalKotlinTargetDescriptor(
  * - [platformType]
  * - [targetFactory]
  *
- * Properties added in future Kotlin Gradle Plugin releases will be added using a default value, but
+ * Properties added in future Kotlin Gradle Plugin releases will be added using a default konstue, but
  * a warning might be emitted if not specified.
  */
 @ExternalKotlinTargetApi
@@ -76,19 +76,19 @@ class ExternalKotlinTargetDescriptorBuilder<T : DecoratedExternalKotlinTarget> i
     var platformType: KotlinPlatformType by Delegates.notNull()
     var targetFactory: TargetFactory<T> by Delegates.notNull()
 
-    val apiElements: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
+    konst apiElements: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
         ExternalKotlinTargetConfigurationDescriptorBuilder()
 
-    val runtimeElements: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
+    konst runtimeElements: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
         ExternalKotlinTargetConfigurationDescriptorBuilder()
 
-    val sourcesElements: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
+    konst sourcesElements: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
         ExternalKotlinTargetConfigurationDescriptorBuilder()
 
-    val apiElementsPublished: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
+    konst apiElementsPublished: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
         ExternalKotlinTargetConfigurationDescriptorBuilder()
 
-    val runtimeElementsPublished: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
+    konst runtimeElementsPublished: ExternalKotlinTargetConfigurationDescriptorBuilder<T> =
         ExternalKotlinTargetConfigurationDescriptorBuilder()
 
     private var configure: ((T) -> Unit)? = null
@@ -99,7 +99,7 @@ class ExternalKotlinTargetDescriptorBuilder<T : DecoratedExternalKotlinTarget> i
      * publishing the target to all subscribers of `kotlin.targets.all {}`
      */
     fun configure(action: (T) -> Unit) {
-        val configure = this.configure
+        konst configure = this.configure
         if (configure == null) this.configure = action
         else this.configure = { configure(it); action(it) }
     }
@@ -114,7 +114,7 @@ class ExternalKotlinTargetDescriptorBuilder<T : DecoratedExternalKotlinTarget> i
      * The [IdeMultiplatformImport] instance shall not be retrieved any other way than using this function.
      */
     fun configureIdeImport(action: IdeMultiplatformImport.() -> Unit) {
-        val configureIdeImport = this.configureIdeImport
+        konst configureIdeImport = this.configureIdeImport
         if (configureIdeImport == null) this.configureIdeImport = action
         else this.configureIdeImport = { configureIdeImport(); action() }
     }
@@ -134,16 +134,16 @@ class ExternalKotlinTargetDescriptorBuilder<T : DecoratedExternalKotlinTarget> i
 }
 
 private data class ExternalKotlinTargetDescriptorImpl<T : DecoratedExternalKotlinTarget>(
-    override val targetName: String,
-    override val platformType: KotlinPlatformType,
-    override val targetFactory: TargetFactory<T>,
-    override val apiElements: ExternalKotlinTargetConfigurationDescriptor<T>,
-    override val runtimeElements: ExternalKotlinTargetConfigurationDescriptor<T>,
-    override val sourcesElements: ExternalKotlinTargetConfigurationDescriptor<T>,
-    override val apiElementsPublished: ExternalKotlinTargetConfigurationDescriptor<T>,
-    override val runtimeElementsPublished: ExternalKotlinTargetConfigurationDescriptor<T>,
-    override val configure: ((T) -> Unit)?,
-    override val configureIdeImport: (IdeMultiplatformImport.() -> Unit)?,
+    override konst targetName: String,
+    override konst platformType: KotlinPlatformType,
+    override konst targetFactory: TargetFactory<T>,
+    override konst apiElements: ExternalKotlinTargetConfigurationDescriptor<T>,
+    override konst runtimeElements: ExternalKotlinTargetConfigurationDescriptor<T>,
+    override konst sourcesElements: ExternalKotlinTargetConfigurationDescriptor<T>,
+    override konst apiElementsPublished: ExternalKotlinTargetConfigurationDescriptor<T>,
+    override konst runtimeElementsPublished: ExternalKotlinTargetConfigurationDescriptor<T>,
+    override konst configure: ((T) -> Unit)?,
+    override konst configureIdeImport: (IdeMultiplatformImport.() -> Unit)?,
 ) : ExternalKotlinTargetDescriptor<T>
 
 

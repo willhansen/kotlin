@@ -7,9 +7,9 @@ import sample.libb.getB
 import sample.libb.getAll
 
 fun main() {
-    val a: A = getA()
-    val b: B = getB()
-    val all = getAll()
+    konst a: A = getA()
+    konst b: B = getB()
+    konst all = getAll()
 
     println("a.hashCode(): ${a.hashCode()}")
     println("b.hashCode(): ${b.hashCode()}")

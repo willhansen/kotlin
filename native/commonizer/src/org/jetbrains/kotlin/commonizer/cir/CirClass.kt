@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.descriptors.Visibility
 
 interface CirClass : CirClassifier, CirContainingClass, AnyClass {
     var companion: CirName? // null means no companion object
-    val isCompanion: Boolean
-    val isValue: Boolean
-    val isInner: Boolean
-    val hasEnumEntries: Boolean
-    val supertypes: List<CirType>
+    konst isCompanion: Boolean
+    konst isValue: Boolean
+    konst isInner: Boolean
+    konst hasEnumEntries: Boolean
+    konst supertypes: List<CirType>
 
     companion object {
         @Suppress("NOTHING_TO_INLINE")
@@ -52,17 +52,17 @@ interface CirClass : CirClassifier, CirContainingClass, AnyClass {
 }
 
 data class CirClassImpl(
-    override val annotations: List<CirAnnotation>,
-    override val name: CirName,
-    override val typeParameters: List<CirTypeParameter>,
-    override val supertypes: List<CirType>,
-    override val visibility: Visibility,
-    override val modality: Modality,
-    override val kind: ClassKind,
+    override konst annotations: List<CirAnnotation>,
+    override konst name: CirName,
+    override konst typeParameters: List<CirTypeParameter>,
+    override konst supertypes: List<CirType>,
+    override konst visibility: Visibility,
+    override konst modality: Modality,
+    override konst kind: ClassKind,
     override var companion: CirName?,
-    override val isCompanion: Boolean,
-    override val isData: Boolean,
-    override val isValue: Boolean,
-    override val isInner: Boolean,
-    override val hasEnumEntries: Boolean
+    override konst isCompanion: Boolean,
+    override konst isData: Boolean,
+    override konst isValue: Boolean,
+    override konst isInner: Boolean,
+    override konst hasEnumEntries: Boolean
 ) : CirClass

@@ -3,13 +3,13 @@ package foo
 
 
 fun box(): String {
-    val oneTwo = Array(2) {
+    konst oneTwo = Array(2) {
         it + 1
     }
-    val a = ArrayList<() -> Int>()
+    konst a = ArrayList<() -> Int>()
     for (i in oneTwo) {
         for (l in 1..2) {
-            val j = l
+            konst j = l
             a.add({
                       var res = 0
                       for (t in 0..2) {

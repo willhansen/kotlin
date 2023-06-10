@@ -9,7 +9,7 @@ class Test1 : IBase {
   // CHECK:
   //   Mangled name: Test1.$$delegate_0
   //   Public signature: /Test1.$$delegate_0|-7286425919675154353[0]
-  private /* final field */ val $$delegate_0: BaseImpl
+  private /* final field */ konst $$delegate_0: BaseImpl
   // CHECK JVM_IR:
   //   Mangled name: Test1#bar(){}kotlin.Int
   //   Public signature: /Test1.bar|-6436649210114349217[0]
@@ -41,11 +41,11 @@ class Test2 : IBase, IOther {
   // CHECK:
   //   Mangled name: Test2.$$delegate_0
   //   Public signature: /Test2.$$delegate_0|-7286425919675154353[0]
-  private /* final field */ val $$delegate_0: BaseImpl
+  private /* final field */ konst $$delegate_0: BaseImpl
   // CHECK:
   //   Mangled name: Test2.$$delegate_1
   //   Public signature: /Test2.$$delegate_1|-7286425919675154353[0]
-  private /* final field */ val $$delegate_1: IOther
+  private /* final field */ konst $$delegate_1: IOther
   // CHECK JVM_IR:
   //   Mangled name: Test2#bar(){}kotlin.Int
   //   Public signature: /Test2.bar|-6436649210114349217[0]
@@ -67,7 +67,7 @@ class Test2 : IBase, IOther {
   // CHECK:
   //   Mangled name: Test2{}x
   //   Public signature: /Test2.x|-8060530855978347579[0]
-  override val x: String
+  override konst x: String
     // CHECK JVM_IR:
     //   Mangled name: Test2#<get-x>(){}kotlin.String
     //   Public signature: /Test2.x.<get-x>|316111172223894646[0]
@@ -95,7 +95,7 @@ class Test2 : IBase, IOther {
   // CHECK:
   //   Mangled name: Test2@kotlin.Byte{}z1
   //   Public signature: /Test2.z1|-5032678972511317603[0]
-  override val Byte.z1: Int
+  override konst Byte.z1: Int
     // CHECK JVM_IR:
     //   Mangled name: Test2#<get-z1>@kotlin.Byte(){}kotlin.Int
     //   Public signature: /Test2.z1.<get-z1>|202969018831811261[0]
@@ -155,7 +155,7 @@ interface IOther {
   // CHECK:
   //   Mangled name: IOther{}x
   //   Public signature: /IOther.x|-8060530855978347579[0]
-  abstract val x: String
+  abstract konst x: String
     // CHECK JVM_IR:
     //   Mangled name: IOther#<get-x>(){}kotlin.String
     //   Public signature: /IOther.x.<get-x>|316111172223894646[0]
@@ -183,7 +183,7 @@ interface IOther {
   // CHECK:
   //   Mangled name: IOther@kotlin.Byte{}z1
   //   Public signature: /IOther.z1|-5032678972511317603[0]
-  abstract val Byte.z1: Int
+  abstract konst Byte.z1: Int
     // CHECK JVM_IR:
     //   Mangled name: IOther#<get-z1>@kotlin.Byte(){}kotlin.Int
     //   Public signature: /IOther.z1.<get-z1>|202969018831811261[0]

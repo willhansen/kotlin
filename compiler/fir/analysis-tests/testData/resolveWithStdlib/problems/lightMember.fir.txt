@@ -8,7 +8,7 @@ FILE: lightMember.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val delegate: R|D|by R|kotlin/lazy|<R|D|>(R|<local>/computeRealDelegate|)
+        public open konst delegate: R|D|by R|kotlin/lazy|<R|D|>(R|<local>/computeRealDelegate|)
             public get(): R|D| {
                 ^ this@R|/LightMemberImpl|.D|/LightMemberImpl.delegate|.R|kotlin/getValue|<R|D|>(this@R|/LightMemberImpl|, ::R|/LightMemberImpl.delegate|)
             }
@@ -19,7 +19,7 @@ FILE: lightMember.kt
             super<R|LightMemberImpl<PsiField>|>(R|<local>/computeRealDelegate|)
         }
 
-        public open override val delegate: R|D|
+        public open override konst delegate: R|D|
             public get(): R|D| {
                 ^ this@R|/LightFieldImpl|.super<R|LightMemberImpl<PsiField>|>.R|SubstitutionOverride</LightMemberImpl.delegate: R|PsiField|>|
             }

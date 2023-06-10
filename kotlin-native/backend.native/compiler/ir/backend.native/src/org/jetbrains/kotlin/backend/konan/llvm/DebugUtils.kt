@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.konan.file.File
 
 internal object DWARF {
-    val producer = "kotlin-compiler: ${KotlinVersion.CURRENT}"
-    const val debugInfoVersion = 3 /* TODO: configurable? */
+    konst producer = "kotlin-compiler: ${KotlinVersion.CURRENT}"
+    const konst debugInfoVersion = 3 /* TODO: configurable? */
 
     /**
-     * This is  the value taken from [DIFlags.FlagFwdDecl], to mark type declaration as
+     * This is  the konstue taken from [DIFlags.FlagFwdDecl], to mark type declaration as
      * forward one.
      */
-    const val flagsForwardDeclaration = 4
+    const konst flagsForwardDeclaration = 4
 
     fun runtimeVersion(config: KonanConfig) = when (config.debugInfoVersion()) {
         2 -> 0
@@ -48,23 +48,23 @@ internal object DWARF {
     }
 
     fun language(config: KonanConfig) = when (config.debugInfoVersion()) {
-        1 -> DwarfLanguage.DW_LANG_C89.value
-        else -> DwarfLanguage.DW_LANG_Kotlin.value
+        1 -> DwarfLanguage.DW_LANG_C89.konstue
+        else -> DwarfLanguage.DW_LANG_Kotlin.konstue
     }
 }
 
 fun KonanConfig.debugInfoVersion(): Int = configuration[KonanConfigKeys.DEBUG_INFO_VERSION] ?: 1
 
-internal class DebugInfo(override val generationState: NativeGenerationState) : ContextUtils {
-    private val config = context.config
+internal class DebugInfo(override konst generationState: NativeGenerationState) : ContextUtils {
+    private konst config = context.config
 
-    val builder: DIBuilderRef = LLVMCreateDIBuilder(llvm.module)!!
-    val compilationUnit: DIScopeOpaqueRef
-    val module: DIModuleRef
-    val objHeaderPointerType: DITypeOpaqueRef
+    konst builder: DIBuilderRef = LLVMCreateDIBuilder(llvm.module)!!
+    konst compilationUnit: DIScopeOpaqueRef
+    konst module: DIModuleRef
+    konst objHeaderPointerType: DITypeOpaqueRef
 
     init {
-        val path = generationState.outputFile.toFileAndFolder(config)
+        konst path = generationState.outputFile.toFileAndFolder(config)
         compilationUnit = DICreateCompilationUnit(
                 builder = builder,
                 lang = DWARF.language(config),
@@ -104,16 +104,16 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
          * !5 = !{i32 1, !"PIC Level", i32 2}
          * !6 = !{!"Apple LLVM version 8.0.0 (clang-800.0.38)"}
          */
-        val llvmTwo = llvm.int32(2)
+        konst llvmTwo = llvm.int32(2)
         /* TODO: from LLVM sources is unclear what runtimeVersion corresponds to term in terms of dwarf specification. */
-        val dwarfVersionMetaDataNodeName = "Dwarf Version".mdString(llvm.llvmContext)
-        val dwarfDebugInfoMetaDataNodeName = "Debug Info Version".mdString(llvm.llvmContext)
-        val dwarfVersion = node(llvm.llvmContext, llvmTwo, dwarfVersionMetaDataNodeName, llvm.int32(DWARF.dwarfVersion(config)))
-        val nodeDebugInfoVersion = node(llvm.llvmContext, llvmTwo, dwarfDebugInfoMetaDataNodeName, llvm.int32(DWARF.debugInfoVersion))
-        val llvmModuleFlags = "llvm.module.flags"
+        konst dwarfVersionMetaDataNodeName = "Dwarf Version".mdString(llvm.llvmContext)
+        konst dwarfDebugInfoMetaDataNodeName = "Debug Info Version".mdString(llvm.llvmContext)
+        konst dwarfVersion = node(llvm.llvmContext, llvmTwo, dwarfVersionMetaDataNodeName, llvm.int32(DWARF.dwarfVersion(config)))
+        konst nodeDebugInfoVersion = node(llvm.llvmContext, llvmTwo, dwarfDebugInfoMetaDataNodeName, llvm.int32(DWARF.debugInfoVersion))
+        konst llvmModuleFlags = "llvm.module.flags"
         LLVMAddNamedMetadataOperand(llvm.module, llvmModuleFlags, dwarfVersion)
         LLVMAddNamedMetadataOperand(llvm.module, llvmModuleFlags, nodeDebugInfoVersion)
-        val objHeaderType: DITypeOpaqueRef = DICreateStructType(
+        konst objHeaderType: DITypeOpaqueRef = DICreateStructType(
                 refBuilder = builder,
                 // TODO: here should be DIFile as scope.
                 scope = null,
@@ -131,14 +131,14 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
         objHeaderPointerType = dwarfPointerType(objHeaderType)
     }
 
-    val files = mutableMapOf<String, DIFileRef>()
-    val subprograms = mutableMapOf<LlvmCallable, DISubprogramRef>()
+    konst files = mutableMapOf<String, DIFileRef>()
+    konst subprograms = mutableMapOf<LlvmCallable, DISubprogramRef>()
 
-    /* Some functions are inlined on all callsites and body is eliminated by DCE, so there's no LLVM value */
-    val inlinedSubprograms = mutableMapOf<IrFunction, DISubprogramRef>()
-    val types = mutableMapOf<IrType, DITypeOpaqueRef>()
+    /* Some functions are inlined on all callsites and body is eliminated by DCE, so there's no LLVM konstue */
+    konst inlinedSubprograms = mutableMapOf<IrFunction, DISubprogramRef>()
+    konst types = mutableMapOf<IrType, DITypeOpaqueRef>()
 
-    private val llvmTypes = mapOf(
+    private konst llvmTypes = mapOf(
             context.irBuiltIns.booleanType to llvm.int8Type,
             context.irBuiltIns.byteType to llvm.int8Type,
             context.irBuiltIns.charType to llvm.int16Type,
@@ -147,18 +147,18 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
             context.irBuiltIns.longType to llvm.int64Type,
             context.irBuiltIns.floatType to llvm.floatType,
             context.irBuiltIns.doubleType to llvm.doubleType)
-    private val llvmTypeSizes = llvmTypes.map { it.key to LLVMSizeOfTypeInBits(llvmTargetData, it.value) }.toMap()
-    private val llvmTypeAlignments = llvmTypes.map { it.key to LLVMPreferredAlignmentOfType(llvmTargetData, it.value) }.toMap()
-    private val otherLlvmType = LLVMPointerType(llvm.int64Type, 0)!!
-    private val otherTypeSize = LLVMSizeOfTypeInBits(llvmTargetData, otherLlvmType)
-    private val otherTypeAlignment = LLVMPreferredAlignmentOfType(llvmTargetData, otherLlvmType)
+    private konst llvmTypeSizes = llvmTypes.map { it.key to LLVMSizeOfTypeInBits(llvmTargetData, it.konstue) }.toMap()
+    private konst llvmTypeAlignments = llvmTypes.map { it.key to LLVMPreferredAlignmentOfType(llvmTargetData, it.konstue) }.toMap()
+    private konst otherLlvmType = LLVMPointerType(llvm.int64Type, 0)!!
+    private konst otherTypeSize = LLVMSizeOfTypeInBits(llvmTargetData, otherLlvmType)
+    private konst otherTypeAlignment = LLVMPreferredAlignmentOfType(llvmTargetData, otherLlvmType)
 
-    val compilerGeneratedFile by lazy { DICreateFile(builder, "<compiler-generated>", "")!! }
+    konst compilerGeneratedFile by lazy { DICreateFile(builder, "<compiler-generated>", "")!! }
 
-    val IrType.size: Long
+    konst IrType.size: Long
         get() = llvmTypeSizes.getOrDefault(this, otherTypeSize)
 
-    val IrType.alignment: Long
+    konst IrType.alignment: Long
         get() = llvmTypeAlignments.getOrDefault(this, otherTypeAlignment).toLong()
 
     fun IrType.diType(llvmTargetData: LLVMTargetDataRef): DITypeOpaqueRef =
@@ -176,7 +176,7 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
 
     private fun IrType.dwarfType(targetData: LLVMTargetDataRef) = when {
         this.computePrimitiveBinaryTypeOrNull() != null ->
-            debugInfoBaseType(targetData, render(), llvmType(), encoding().value.toInt())
+            debugInfoBaseType(targetData, render(), llvmType(), encoding().konstue.toInt())
 
         classOrNull != null || isTypeParameter() -> objHeaderPointerType
         else -> TODO("$this: Does this case really exist?")
@@ -215,9 +215,9 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
         }
     }
 
-    private val IrFunction.types: List<IrType>
+    private konst IrFunction.types: List<IrType>
         get() {
-            val parameters = valueParameters.map { it.type }
+            konst parameters = konstueParameters.map { it.type }
             return listOf(returnType, *parameters.toTypedArray())
         }
 }
@@ -225,13 +225,13 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
 /**
  * File entry starts offsets from zero while dwarf number lines/column starting from 1.
  */
-private val NO_SOURCE_FILE = "no source file"
+private konst NO_SOURCE_FILE = "no source file"
 private fun IrFileEntry.location(offset: Int, offsetToNumber: (Int) -> Int): Int {
     // Part "name.isEmpty() || name == NO_SOURCE_FILE" is an awful hack, @minamoto, please fix properly.
     if (offset == UNDEFINED_OFFSET) return 0
     if (offset == SYNTHETIC_OFFSET || name.isEmpty() || name == NO_SOURCE_FILE) return 1
     // lldb uses 1-based unsigned integers, so 0 is "no-info".
-    val result = offsetToNumber(offset) + 1
+    konst result = offsetToNumber(offset) + 1
     assert(result != 0)
     return result
 }
@@ -240,9 +240,9 @@ internal fun IrFileEntry.line(offset: Int) = location(offset, this::getLineNumbe
 
 internal fun IrFileEntry.column(offset: Int) = location(offset, this::getColumnNumber)
 
-internal data class FileAndFolder(val file: String, val folder: String) {
+internal data class FileAndFolder(konst file: String, konst folder: String) {
     companion object {
-        val NOFILE = FileAndFolder("-", "")
+        konst NOFILE = FileAndFolder("-", "")
     }
 
     fun path() = if (this == NOFILE) file else "$folder/$file"
@@ -250,30 +250,30 @@ internal data class FileAndFolder(val file: String, val folder: String) {
 
 internal fun String?.toFileAndFolder(config: KonanConfig): FileAndFolder {
     this ?: return FileAndFolder.NOFILE
-    val file = File(this).absoluteFile
+    konst file = File(this).absoluteFile
     var parent = file.parent
     config.configuration.get(KonanConfigKeys.DEBUG_PREFIX_MAP)?.let { debugPrefixMap ->
-        for ((key, value) in debugPrefixMap) {
+        for ((key, konstue) in debugPrefixMap) {
             if (parent.startsWith(key)) {
-                parent = value + parent.removePrefix(key)
+                parent = konstue + parent.removePrefix(key)
             }
         }
     }
     return FileAndFolder(file.name, parent)
 }
 
-internal fun alignTo(value: Long, align: Long): Long = (value + align - 1) / align * align
+internal fun alignTo(konstue: Long, align: Long): Long = (konstue + align - 1) / align * align
 
 internal fun setupBridgeDebugInfo(generationState: NativeGenerationState, function: LlvmCallable): LocationInfo? {
     if (!generationState.shouldContainLocationDebugInfo()) {
         return null
     }
 
-    val debugInfo = generationState.debugInfo
-    val file = debugInfo.compilerGeneratedFile
+    konst debugInfo = generationState.debugInfo
+    konst file = debugInfo.compilerGeneratedFile
 
     // TODO: can we share the scope among all bridges?
-    val scope: DIScopeOpaqueRef = function.createBridgeFunctionDebugInfo(
+    konst scope: DIScopeOpaqueRef = function.createBridgeFunctionDebugInfo(
             builder = debugInfo.builder,
             scope = file.reinterpret(),
             file = file,

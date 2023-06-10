@@ -9,7 +9,7 @@ KtErrorCallInfo:
           receiverType = null
           returnType = Base
           symbol = <constructor>(p1: kotlin.Int): Base
-          valueParameters = [
+          konstueParameters = [
             KtVariableLikeSignature:
               name = p1
               receiverType = null

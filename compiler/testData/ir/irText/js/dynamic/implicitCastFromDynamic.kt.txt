@@ -1,8 +1,8 @@
-val d: dynamic
+konst d: dynamic
   field = 1
   get
 
-val p: Int
+konst p: Int
   field = <get-d>() /*~> Int */
   get
 

@@ -9,7 +9,7 @@ public infix fun kotlin.String.to(/*0*/ dest: kotlin.String): kotlin.Unit
 
 public final class URI {
     public constructor URI(/*0*/ body: kotlin.Any)
-    public final val body: kotlin.Any
+    public final konst body: kotlin.Any
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final infix fun to(/*0*/ dest: kotlin.String): kotlin.Unit

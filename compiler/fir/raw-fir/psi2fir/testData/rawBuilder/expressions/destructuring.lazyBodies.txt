@@ -4,13 +4,13 @@ FILE: destructuring.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val first: Int = R|<local>/first|
+        public? final? konst first: Int = R|<local>/first|
             public? get(): Int
 
-        public? final? val second: Double = R|<local>/second|
+        public? final? konst second: Double = R|<local>/second|
             public? get(): Double
 
-        public? final? val third: String = R|<local>/third|
+        public? final? konst third: String = R|<local>/third|
             public? get(): String
 
         public? final operator fun component1(): Int

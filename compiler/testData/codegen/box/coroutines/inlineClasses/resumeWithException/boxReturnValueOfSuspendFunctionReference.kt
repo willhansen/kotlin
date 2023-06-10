@@ -4,7 +4,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-inline class R(val x: Any)
+inline class R(konst x: Any)
 
 var result: String = "fail"
 

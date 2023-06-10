@@ -643,7 +643,7 @@ interface WebGLRenderingContextBase
 
     void renderbufferStorage(GLenum target, GLenum internalformat,
                              GLsizei width, GLsizei height);
-    void sampleCoverage(GLclampf value, GLboolean invert);
+    void sampleCoverage(GLclampf konstue, GLboolean invert);
     void scissor(GLint x, GLint y, GLsizei width, GLsizei height);
 
     void shaderSource(WebGLShader? shader, DOMString source);
@@ -696,29 +696,29 @@ interface WebGLRenderingContextBase
     void uniform4iv(WebGLUniformLocation? location, sequence<long> v);
 
     void uniformMatrix2fv(WebGLUniformLocation? location, GLboolean transpose,
-                          Float32Array value);
+                          Float32Array konstue);
     void uniformMatrix2fv(WebGLUniformLocation? location, GLboolean transpose,
-                          sequence<GLfloat> value);
+                          sequence<GLfloat> konstue);
     void uniformMatrix3fv(WebGLUniformLocation? location, GLboolean transpose,
-                          Float32Array value);
+                          Float32Array konstue);
     void uniformMatrix3fv(WebGLUniformLocation? location, GLboolean transpose,
-                          sequence<GLfloat> value);
+                          sequence<GLfloat> konstue);
     void uniformMatrix4fv(WebGLUniformLocation? location, GLboolean transpose,
-                          Float32Array value);
+                          Float32Array konstue);
     void uniformMatrix4fv(WebGLUniformLocation? location, GLboolean transpose,
-                          sequence<GLfloat> value);
+                          sequence<GLfloat> konstue);
 
     void useProgram(WebGLProgram? program);
-    void validateProgram(WebGLProgram? program);
+    void konstidateProgram(WebGLProgram? program);
 
     void vertexAttrib1f(GLuint index, GLfloat x);
-    void vertexAttrib1fv(GLuint index, VertexAttribFVSource values);
+    void vertexAttrib1fv(GLuint index, VertexAttribFVSource konstues);
     void vertexAttrib2f(GLuint index, GLfloat x, GLfloat y);
-    void vertexAttrib2fv(GLuint index, VertexAttribFVSource values);
+    void vertexAttrib2fv(GLuint index, VertexAttribFVSource konstues);
     void vertexAttrib3f(GLuint index, GLfloat x, GLfloat y, GLfloat z);
-    void vertexAttrib3fv(GLuint index, VertexAttribFVSource values);
+    void vertexAttrib3fv(GLuint index, VertexAttribFVSource konstues);
     void vertexAttrib4f(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-    void vertexAttrib4fv(GLuint index, VertexAttribFVSource values);
+    void vertexAttrib4fv(GLuint index, VertexAttribFVSource konstues);
     void vertexAttribPointer(GLuint index, GLint size, GLenum type,
                              GLboolean normalized, GLsizei stride, GLintptr offset);
 
@@ -756,7 +756,7 @@ dictionary WebGLContextEventInit : EventInit {
 interface ArrayBuffer {
     readonly attribute unsigned long byteLength;
     ArrayBuffer slice(long begin, optional long end);
-    static boolean isView(any value);
+    static boolean isView(any konstue);
 };
 
 ArrayBuffer implements Transferable;
@@ -784,7 +784,7 @@ interface Int8Array {
     readonly attribute unsigned long length;
     
     getter byte get(unsigned long index);
-    setter void set(unsigned long index, byte value);
+    setter void set(unsigned long index, byte konstue);
     void set(Int8Array array, optional unsigned long offset);
     void set(byte[] array, optional unsigned long offset);
     Int8Array subarray(long start, long end);
@@ -793,7 +793,7 @@ Int8Array implements ArrayBufferView;
 
 
 // The 'unsigned byte' type does not currently exist in Web IDL, though
-// 'octet' is equivalent.
+// 'octet' is equikonstent.
 [
     Constructor(unsigned long length),
     Constructor(Uint8Array array),
@@ -807,7 +807,7 @@ interface Uint8Array {
     readonly attribute unsigned long length;
     
     getter octet get(unsigned long index);
-    setter void set(unsigned long index, octet value);
+    setter void set(unsigned long index, octet konstue);
     void set(Uint8Array array, optional unsigned long offset);
     void set(octet[] array, optional unsigned long offset);
     Uint8Array subarray(long start, long end);
@@ -828,7 +828,7 @@ interface Uint8ClampedArray {
     readonly attribute unsigned long length;
 
     getter octet get(unsigned long index);
-    setter void set(unsigned long index, [Clamp] octet value);
+    setter void set(unsigned long index, [Clamp] octet konstue);
     void set(Uint8ClampedArray array, optional unsigned long offset);
     void set(octet[] array, optional unsigned long offset);
     Uint8ClampedArray subarray(long start, long end);
@@ -849,7 +849,7 @@ interface Int16Array {
     readonly attribute unsigned long length;
     
     getter short get(unsigned long index);
-    setter void set(unsigned long index, short value);
+    setter void set(unsigned long index, short konstue);
     void set(Int16Array array, optional unsigned long offset);
     void set(short[] array, optional unsigned long offset);
     Int16Array subarray(long start, long end);
@@ -870,7 +870,7 @@ interface Uint16Array {
     readonly attribute unsigned long length;
     
     getter unsigned short get(unsigned long index);
-    setter void set(unsigned long index, unsigned short value);
+    setter void set(unsigned long index, unsigned short konstue);
     void set(Uint16Array array, optional unsigned long offset);
     void set(unsigned short[] array, optional unsigned long offset);
     Uint16Array subarray(long start, long end);
@@ -891,7 +891,7 @@ interface Int32Array {
     readonly attribute unsigned long length;
     
     getter long get(unsigned long index);
-    setter void set(unsigned long index, long value);
+    setter void set(unsigned long index, long konstue);
     void set(Int32Array array, optional unsigned long offset);
     void set(long[] array, optional unsigned long offset);
     Int32Array subarray(long start, long end);
@@ -912,7 +912,7 @@ interface Uint32Array {
     readonly attribute unsigned long length;
     
     getter unsigned long get(unsigned long index);
-    setter void set(unsigned long index, unsigned long value);
+    setter void set(unsigned long index, unsigned long konstue);
     void set(Uint32Array array, optional unsigned long offset);
     void set(unsigned long[] array, optional unsigned long offset);
     Uint32Array subarray(long start, long end);
@@ -933,7 +933,7 @@ interface Float32Array {
     readonly attribute unsigned long length;
     
     getter unrestricted float get(unsigned long index);
-    setter void set(unsigned long index, unrestricted float value);
+    setter void set(unsigned long index, unrestricted float konstue);
     void set(Float32Array array, optional unsigned long offset);
     void set(unrestricted float[] array, optional unsigned long offset);
     Float32Array subarray(long start, long end);
@@ -954,7 +954,7 @@ interface Float64Array {
     readonly attribute unsigned long length;
     
     getter unrestricted double get(unsigned long index);
-    setter void set(unsigned long index, unrestricted double value);
+    setter void set(unsigned long index, unrestricted double konstue);
     void set(Float64Array array, optional unsigned long offset);
     void set(unrestricted double[] array, optional unsigned long offset);
     Float64Array subarray(long start, long end);
@@ -968,13 +968,13 @@ Float64Array implements ArrayBufferView;
               optional unsigned long byteLength)
 ]
 interface DataView {
-    // Gets the value of the given type at the specified byte offset
+    // Gets the konstue of the given type at the specified byte offset
     // from the start of the view. There is no alignment constraint;
-    // multi-byte values may be fetched from any offset.
+    // multi-byte konstues may be fetched from any offset.
     //
-    // For multi-byte values, the optional littleEndian argument
-    // indicates whether a big-endian or little-endian value should be
-    // read. If false or undefined, a big-endian value is read.
+    // For multi-byte konstues, the optional littleEndian argument
+    // indicates whether a big-endian or little-endian konstue should be
+    // read. If false or undefined, a big-endian konstue is read.
     //
     // These methods raise an INDEX_SIZE_ERR exception if they would read
     // beyond the end of the view.
@@ -993,38 +993,38 @@ interface DataView {
     unrestricted double getFloat64(unsigned long byteOffset,
                                    optional boolean littleEndian);
 
-    // Stores a value of the given type at the specified byte offset
+    // Stores a konstue of the given type at the specified byte offset
     // from the start of the view. There is no alignment constraint;
-    // multi-byte values may be stored at any offset.
+    // multi-byte konstues may be stored at any offset.
     //
-    // For multi-byte values, the optional littleEndian argument
-    // indicates whether the value should be stored in big-endian or
-    // little-endian byte order. If false or undefined, the value is
+    // For multi-byte konstues, the optional littleEndian argument
+    // indicates whether the konstue should be stored in big-endian or
+    // little-endian byte order. If false or undefined, the konstue is
     // stored in big-endian byte order.
     //
     // These methods throw exceptions if they would write beyond the end
     // of the view.
     void setInt8(unsigned long byteOffset,
-                 byte value);
+                 byte konstue);
     void setUint8(unsigned long byteOffset,
-                  octet value);
+                  octet konstue);
     void setInt16(unsigned long byteOffset,
-                  short value,
+                  short konstue,
                   optional boolean littleEndian);
     void setUint16(unsigned long byteOffset,
-                   unsigned short value,
+                   unsigned short konstue,
                    optional boolean littleEndian);
     void setInt32(unsigned long byteOffset,
-                  long value,
+                  long konstue,
                   optional boolean littleEndian);
     void setUint32(unsigned long byteOffset,
-                   unsigned long value,
+                   unsigned long konstue,
                    optional boolean littleEndian);
     void setFloat32(unsigned long byteOffset,
-                    unrestricted float value,
+                    unrestricted float konstue,
                     optional boolean littleEndian);
     void setFloat64(unsigned long byteOffset,
-                    unrestricted double value,
+                    unrestricted double konstue,
                     optional boolean littleEndian);
 };
 DataView implements ArrayBufferView;

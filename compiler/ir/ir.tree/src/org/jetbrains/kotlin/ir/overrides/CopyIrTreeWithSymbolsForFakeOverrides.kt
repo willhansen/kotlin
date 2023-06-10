@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 // This is basically modelled after the inliner copier.
 class CopyIrTreeWithSymbolsForFakeOverrides(
-    private val overridableMember: IrOverridableMember,
+    private konst overridableMember: IrOverridableMember,
     typeArguments: Map<IrTypeParameterSymbol, IrType>,
-    private val parent: IrClass,
+    private konst parent: IrClass,
     unimplementedOverridesStrategy: IrUnimplementedOverridesStrategy
 ) {
     fun copy(): IrOverridableMember {
@@ -32,7 +32,7 @@ class CopyIrTreeWithSymbolsForFakeOverrides(
 
         // Make symbol remapper aware of the callsite's type arguments.
         // Copy IR.
-        val result = overridableMember.transform(
+        konst result = overridableMember.transform(
             if (parent.isEffectivelyExternal()) copierMakingExternal else copier,
             data = null
         ) as IrOverridableMember
@@ -43,8 +43,8 @@ class CopyIrTreeWithSymbolsForFakeOverrides(
     }
 
     private inner class FakeOverrideTypeRemapper(
-        val symbolRemapper: SymbolRemapper,
-        val typeArguments: Map<IrTypeParameterSymbol, IrType>
+        konst symbolRemapper: SymbolRemapper,
+        konst typeArguments: Map<IrTypeParameterSymbol, IrType>
     ) : TypeRemapper {
 
         override fun enterScope(irTypeParametersContainer: IrTypeParametersContainer) {}
@@ -60,7 +60,7 @@ class CopyIrTreeWithSymbolsForFakeOverrides(
         override fun remapType(type: IrType): IrType {
             if (type !is IrSimpleType) return type
 
-            return when (val substitutedType = typeArguments[type.classifier]) {
+            return when (konst substitutedType = typeArguments[type.classifier]) {
                 is IrDynamicType -> substitutedType
                 is IrSimpleType -> substitutedType.mergeNullability(type)
                 else -> type.buildSimpleType {
@@ -74,26 +74,26 @@ class CopyIrTreeWithSymbolsForFakeOverrides(
     }
 
     private class FakeOverrideSymbolRemapperImpl(
-        private val typeArguments: Map<IrTypeParameterSymbol, IrType>,
+        private konst typeArguments: Map<IrTypeParameterSymbol, IrType>,
         descriptorsRemapper: DescriptorsRemapper
     ) :
         DeepCopySymbolRemapper(descriptorsRemapper) {
 
         override fun getReferencedClassifier(symbol: IrClassifierSymbol): IrClassifierSymbol {
-            val result = super.getReferencedClassifier(symbol)
+            konst result = super.getReferencedClassifier(symbol)
             if (result !is IrTypeParameterSymbol)
                 return result
             return typeArguments[result]?.classifierOrNull ?: result
         }
     }
 
-    private val symbolRemapper =
+    private konst symbolRemapper =
         FakeOverrideSymbolRemapperImpl(
             typeArguments,
             NullDescriptorsRemapper
         )
 
-    private val copier = FakeOverrideCopier(
+    private konst copier = FakeOverrideCopier(
         symbolRemapper,
         FakeOverrideTypeRemapper(symbolRemapper, typeArguments),
         SymbolRenamer.DEFAULT,
@@ -102,7 +102,7 @@ class CopyIrTreeWithSymbolsForFakeOverrides(
         unimplementedOverridesStrategy
     )
 
-    private val copierMakingExternal = FakeOverrideCopier(
+    private konst copierMakingExternal = FakeOverrideCopier(
         symbolRemapper,
         FakeOverrideTypeRemapper(symbolRemapper, typeArguments),
         SymbolRenamer.DEFAULT,

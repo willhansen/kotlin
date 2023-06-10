@@ -1,17 +1,17 @@
 // WITH_SIGNATURES
 
 fun <T> test() {
-    val x = object {
+    konst x = object {
         fun <S1> foo() {}
 
         fun <S2> S2.ext() {}
 
-        val <S3> S3.extVal
+        konst <S3> S3.extVal
             get() = 1
 
         var <S4> S4.extVar
             get() = 1
-            set(value) {}
+            set(konstue) {}
     }
 
     x.foo<Any>()
@@ -20,17 +20,17 @@ fun <T> test() {
 
 class Test {
     fun <T> test() {
-        val x = object {
+        konst x = object {
             fun <S1> foo() {}
 
             fun <S2> S2.ext() {}
 
-            val <S3> S3.extVal
+            konst <S3> S3.extVal
                 get() = 1
 
             var <S4> S4.extVar
                 get() = 1
-                set(value) {}
+                set(konstue) {}
         }
 
         x.foo<Any>()

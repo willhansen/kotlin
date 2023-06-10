@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.utils.mapToIndex
 abstract class LLFirSelectingCombinedSymbolProvider<PROVIDER : FirSymbolProvider>(
     session: FirSession,
     project: Project,
-    protected val providers: List<PROVIDER>,
+    protected konst providers: List<PROVIDER>,
 ) : FirSymbolProvider(session) {
-    protected val providersByKtModule: Map<KtModule, PROVIDER> =
+    protected konst providersByKtModule: Map<KtModule, PROVIDER> =
         providers
             .groupingBy { it.session.llFirModuleData.ktModule }
             // `reduce` invokes the `error` operation if it encounters a second element.
@@ -35,14 +35,14 @@ abstract class LLFirSelectingCombinedSymbolProvider<PROVIDER : FirSymbolProvider
     /**
      * [KtModule] precedence must be checked in case of multiple candidates to preserve classpath order.
      */
-    private val modulePrecedenceMap: Map<KtModule, Int> = providers.map { it.session.llFirModuleData.ktModule }.mapToIndex()
+    private konst modulePrecedenceMap: Map<KtModule, Int> = providers.map { it.session.llFirModuleData.ktModule }.mapToIndex()
 
     /**
      * Cache [ProjectStructureProvider] to avoid service access when getting [KtModule]s.
      */
-    private val projectStructureProvider: ProjectStructureProvider = ProjectStructureProvider.getInstance(project)
+    private konst projectStructureProvider: ProjectStructureProvider = ProjectStructureProvider.getInstance(project)
 
-    private val contextualModule = session.llFirModuleData.ktModule
+    private konst contextualModule = session.llFirModuleData.ktModule
 
     protected fun getModule(element: PsiElement): KtModule {
         return projectStructureProvider.getModule(element, contextualModule)
@@ -65,13 +65,13 @@ abstract class LLFirSelectingCombinedSymbolProvider<PROVIDER : FirSymbolProvider
         var currentKtModule: KtModule? = null
 
         for (candidate in candidates) {
-            val element = getElement(candidate) ?: continue
-            val ktModule = getModule(element)
+            konst element = getElement(candidate) ?: continue
+            konst ktModule = getModule(element)
 
             // If `ktModule` cannot be found in the map, `candidate` cannot be processed by any of the available providers, because none of
             // them belong to the correct module. We can skip in that case, because iterating through all providers wouldn't lead to any
             // results for `candidate`.
-            val precedence = modulePrecedenceMap[ktModule] ?: continue
+            konst precedence = modulePrecedenceMap[ktModule] ?: continue
             if (precedence < currentPrecedence) {
                 currentCandidate = candidate
                 currentPrecedence = precedence
@@ -79,12 +79,12 @@ abstract class LLFirSelectingCombinedSymbolProvider<PROVIDER : FirSymbolProvider
             }
         }
 
-        val candidate = currentCandidate ?: return null
-        val ktModule = currentKtModule ?: error("`currentKtModule` must not be `null` when `currentCandidate` has been found.")
+        konst candidate = currentCandidate ?: return null
+        konst ktModule = currentKtModule ?: error("`currentKtModule` must not be `null` when `currentCandidate` has been found.")
 
         // The provider will always be found at this point, because `modulePrecedenceMap` contains the same keys as `providersByKtModule`
         // and a precedence for `currentKtModule` must have been found in the previous step.
-        val provider = providersByKtModule.getValue(ktModule)
+        konst provider = providersByKtModule.getValue(ktModule)
 
         return Pair(candidate, provider)
     }

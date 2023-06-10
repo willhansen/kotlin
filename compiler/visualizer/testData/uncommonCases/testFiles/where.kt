@@ -5,6 +5,6 @@ fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
 }
 
 fun main() {
-    val list = listOf("1", "2", "3")
-    val copy = copyWhenGreater(list, "2")
+    konst list = listOf("1", "2", "3")
+    konst copy = copyWhenGreater(list, "2")
 }

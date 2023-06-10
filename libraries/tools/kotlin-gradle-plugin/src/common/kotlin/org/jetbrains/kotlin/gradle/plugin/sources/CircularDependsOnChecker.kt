@@ -5,17 +5,17 @@
 
 package org.jetbrains.kotlin.gradle.plugin.sources
 
-import org.gradle.api.InvalidUserCodeException
+import org.gradle.api.InkonstidUserCodeException
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 internal fun KotlinSourceSet.checkForCircularDependsOnEdges(other: KotlinSourceSet): Nothing? {
-    val stack = mutableListOf(this)
-    val visited = hashSetOf<KotlinSourceSet>()
+    konst stack = mutableListOf(this)
+    konst visited = hashSetOf<KotlinSourceSet>()
 
     fun checkReachableRecursively(from: KotlinSourceSet) {
         if (!visited.add(from)) return
         stack += from
-        if (this == from) throw InvalidUserCodeException(
+        if (this == from) throw InkonstidUserCodeException(
             "Circular dependsOn hierarchy found in the Kotlin source sets: ${(stack.toList()).joinToString(" -> ") { it.name }}"
         )
         from.dependsOn.forEach { next -> checkReachableRecursively(next) }

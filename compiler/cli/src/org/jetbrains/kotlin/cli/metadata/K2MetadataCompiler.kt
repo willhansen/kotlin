@@ -39,7 +39,7 @@ import java.io.File
 
 class K2MetadataCompiler : CLICompiler<K2MetadataCompilerArguments>() {
 
-    override val defaultPerformanceManager: CommonCompilerPerformanceManager = K2MetadataCompilerPerformanceManager()
+    override konst defaultPerformanceManager: CommonCompilerPerformanceManager = K2MetadataCompilerPerformanceManager()
 
     override fun createArguments() = K2MetadataCompilerArguments()
 
@@ -57,14 +57,14 @@ class K2MetadataCompiler : CLICompiler<K2MetadataCompilerArguments>() {
         rootDisposable: Disposable,
         paths: KotlinPaths?
     ): ExitCode {
-        val collector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
-        val performanceManager = configuration.getNotNull(CLIConfigurationKeys.PERF_MANAGER)
+        konst collector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst performanceManager = configuration.getNotNull(CLIConfigurationKeys.PERF_MANAGER)
 
-        val pluginLoadResult = loadPlugins(paths, arguments, configuration)
+        konst pluginLoadResult = loadPlugins(paths, arguments, configuration)
         if (pluginLoadResult != ExitCode.OK) return pluginLoadResult
 
-        val commonSources = arguments.commonSources?.toSet() ?: emptySet()
-        val hmppCliModuleStructure = configuration.get(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE)
+        konst commonSources = arguments.commonSources?.toSet() ?: emptySet()
+        konst hmppCliModuleStructure = configuration.get(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE)
         if (hmppCliModuleStructure != null) {
             collector.report(ERROR, "HMPP module structure should not be passed during metadata compilation. Please remove `-Xfragments` and related flags")
             return ExitCode.COMPILATION_ERROR
@@ -76,7 +76,7 @@ class K2MetadataCompiler : CLICompiler<K2MetadataCompilerArguments>() {
             configuration.addJvmClasspathRoots(arguments.classpath!!.split(File.pathSeparatorChar).map(::File))
         }
 
-        val moduleName = arguments.moduleName ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME
+        konst moduleName = arguments.moduleName ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME
         configuration.put(CommonConfigurationKeys.MODULE_NAME, moduleName)
 
         configuration.put(CLIConfigurationKeys.ALLOW_KOTLIN_PACKAGE, arguments.allowKotlinPackage)
@@ -86,7 +86,7 @@ class K2MetadataCompiler : CLICompiler<K2MetadataCompilerArguments>() {
         configuration.putIfNotNull(K2MetadataConfigurationKeys.REFINES_PATHS, arguments.refinesPaths?.toList())
 
 
-        val destination = arguments.destination
+        konst destination = arguments.destination
         if (destination != null) {
             if (destination.endsWith(".jar")) {
                 // TODO: support .jar destination
@@ -98,12 +98,12 @@ class K2MetadataCompiler : CLICompiler<K2MetadataCompilerArguments>() {
             configuration.put(CLIConfigurationKeys.METADATA_DESTINATION_DIRECTORY, File(destination))
         }
 
-        val environment =
+        konst environment =
             KotlinCoreEnvironment.createForProduction(rootDisposable, configuration, EnvironmentConfigFiles.METADATA_CONFIG_FILES)
 
-        val mode = if(arguments.expectActualLinker) "KLib" else "metadata"
+        konst mode = if(arguments.expectActualLinker) "KLib" else "metadata"
 
-        val sourceFiles = environment.getSourceFiles()
+        konst sourceFiles = environment.getSourceFiles()
         performanceManager.notifyCompilerInitialized(sourceFiles.size, environment.countLinesOfCode(sourceFiles), "$mode mode for $moduleName module")
 
         if (environment.getSourceFiles().isEmpty()) {
@@ -117,8 +117,8 @@ class K2MetadataCompiler : CLICompiler<K2MetadataCompilerArguments>() {
         checkKotlinPackageUsageForPsi(environment.configuration, environment.getSourceFiles())
 
         try {
-            val useFir = configuration.getBoolean(CommonConfigurationKeys.USE_FIR)
-            val metadataSerializer = when {
+            konst useFir = configuration.getBoolean(CommonConfigurationKeys.USE_FIR)
+            konst metadataSerializer = when {
                 useFir -> FirMetadataSerializer(configuration, environment)
                 arguments.expectActualLinker -> K2MetadataKlibSerializer(configuration, environment)
                 else -> MetadataSerializer(configuration, environment, dependOnOldBuiltIns = true)

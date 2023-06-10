@@ -1,7 +1,7 @@
 open class A
     (init: A.() -> Unit)/* NonReanalyzableNonClassDeclarationStructureElement */
 {/* NonReanalyzableClassDeclarationStructureElement */
-    val prop: String = ""/* ReanalyzablePropertyStructureElement */
+    konst prop: String = ""/* ReanalyzablePropertyStructureElement */
 }
 
 class B()/* NonReanalyzableNonClassDeclarationStructureElement */ : A()/* NonReanalyzableClassDeclarationStructureElement */
@@ -14,7 +14,7 @@ object C : A(
 
 }
 
-val f = object : A(
+konst f = object : A(
     {
         fun bar() = B.prop.toString()
     }

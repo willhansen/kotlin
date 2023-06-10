@@ -18,42 +18,42 @@ class M : Map<String, String> by HashMap<String, String>()
 class MM : MutableMap<String, String> by HashMap<String, String>()
 
 class ME : Map.Entry<String, String> {
-    override val key: String get() = throw UnsupportedOperationException()
-    override val value: String get() = throw UnsupportedOperationException()
+    override konst key: String get() = throw UnsupportedOperationException()
+    override konst konstue: String get() = throw UnsupportedOperationException()
 }
 
 class MME : MutableMap.MutableEntry<String, String> {
-    override val key: String get() = throw UnsupportedOperationException()
-    override val value: String get() = throw UnsupportedOperationException()
-    override fun setValue(value: String): String = throw UnsupportedOperationException()
+    override konst key: String get() = throw UnsupportedOperationException()
+    override konst konstue: String get() = throw UnsupportedOperationException()
+    override fun setValue(konstue: String): String = throw UnsupportedOperationException()
 }
 
 fun assert(condition: Boolean, message: () -> String) { if (!condition) throw AssertionError(message())}
 
 fun box(): String {
-    val itr = Itr() as Any
-    val mitr = MItr()
+    konst itr = Itr() as Any
+    konst mitr = MItr()
 
     assert(itr !is MutableIterator<*>) { "Itr should satisfy '!is MutableIterator'" }
     assert(mitr is MutableIterator<*>) { "MItr should satisfy 'is MutableIterator'" }
 
-    val litr = LItr() as Any
-    val mlitr = MLItr()
+    konst litr = LItr() as Any
+    konst mlitr = MLItr()
 
     assert(litr !is MutableIterator<*>) { "LItr should satisfy '!is MutableIterator'" }
     assert(litr !is MutableListIterator<*>) { "LItr should satisfy '!is MutableListIterator'" }
     assert(mlitr is MutableListIterator<*>) { "MLItr should satisfy 'is MutableListIterator'" }
 
-    val it = It() as Any
-    val mit = MIt()
-    val arrayList = ArrayList<String>()
+    konst it = It() as Any
+    konst mit = MIt()
+    konst arrayList = ArrayList<String>()
 
     assert(it !is MutableIterable<*>) { "It should satisfy '!is MutableIterable'" }
     assert(mit is MutableIterable<*>) { "MIt should satisfy 'is MutableIterable'" }
     assert(arrayList is MutableIterable<*>) { "ArrayList should satisfy 'is MutableIterable'" }
 
-    val coll = C() as Any
-    val mcoll = MC()
+    konst coll = C() as Any
+    konst mcoll = MC()
 
     assert(coll !is MutableCollection<*>) { "C should satisfy '!is MutableCollection'" }
     assert(coll !is MutableIterable<*>) { "C should satisfy '!is MutableIterable'" }
@@ -61,8 +61,8 @@ fun box(): String {
     assert(mcoll is MutableIterable<*>) { "MC should satisfy 'is MutableIterable'" }
     assert(arrayList is MutableCollection<*>) { "ArrayList should satisfy 'is MutableCollection'" }
 
-    val list = L() as Any
-    val mlist = ML()
+    konst list = L() as Any
+    konst mlist = ML()
 
     assert(list !is MutableList<*>) { "L should satisfy '!is MutableList'" }
     assert(list !is MutableCollection<*>) { "L should satisfy '!is MutableCollection'" }
@@ -72,9 +72,9 @@ fun box(): String {
     assert(mlist is MutableIterable<*>) { "ML should satisfy 'is MutableIterable'" }
     assert(arrayList is MutableList<*>) { "ArrayList should satisfy 'is MutableList'" }
 
-    val set = S() as Any
-    val mset = MS()
-    val hashSet = HashSet<String>()
+    konst set = S() as Any
+    konst mset = MS()
+    konst hashSet = HashSet<String>()
 
     assert(set !is MutableSet<*>) { "S should satisfy '!is MutableSet'" }
     assert(set !is MutableCollection<*>) { "S should satisfy '!is MutableCollection'" }
@@ -86,19 +86,19 @@ fun box(): String {
     assert(hashSet is MutableCollection<*>) { "HashSet should satisfy 'is MutableCollection'" }
     assert(hashSet is MutableIterable<*>) { "HashSet should satisfy 'is MutableIterable'" }
 
-    val map = M() as Any
-    val mmap = MM()
-    val hashMap = HashMap<String, String>()
+    konst map = M() as Any
+    konst mmap = MM()
+    konst hashMap = HashMap<String, String>()
 
     assert(map !is MutableMap<*, *>) { "M should satisfy '!is MutableMap'" }
     assert(mmap is MutableMap<*, *>) { "MM should satisfy 'is MutableMap'"}
     assert(hashMap is MutableMap<*, *>) { "HashMap should satisfy 'is MutableMap'" }
 
-    val entry = ME() as Any
-    val mentry = MME()
+    konst entry = ME() as Any
+    konst mentry = MME()
 
     hashMap[""] = ""
-    val hashMapEntry = hashMap.entries.first()
+    konst hashMapEntry = hashMap.entries.first()
 
     assert(entry !is MutableMap.MutableEntry<*, *>) { "ME should satisfy '!is MutableMap.MutableEntry'"}
     assert(mentry is MutableMap.MutableEntry<*, *>) { "MME should satisfy 'is MutableMap.MutableEntry'"}

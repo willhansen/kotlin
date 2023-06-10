@@ -37,18 +37,18 @@ import java.io.PrintStream
 
 class JvmPackagePartProvider(
     languageVersionSettings: LanguageVersionSettings,
-    private val scope: GlobalSearchScope
+    private konst scope: GlobalSearchScope
 ) : JvmPackagePartProviderBase<VirtualFile>() {
-    override val deserializationConfiguration = JvmCompilerDeserializationConfiguration(languageVersionSettings)
+    override konst deserializationConfiguration = JvmCompilerDeserializationConfiguration(languageVersionSettings)
 
-    override val loadedModules: MutableList<ModuleMappingInfo<VirtualFile>> = SmartList()
+    override konst loadedModules: MutableList<ModuleMappingInfo<VirtualFile>> = SmartList()
 
     fun addRoots(roots: List<JavaRoot>, messageCollector: MessageCollector) {
         for ((root, type) in roots) {
             if (type != JavaRoot.RootType.BINARY) continue
             if (root !in scope) continue
 
-            val metaInf = root.findChild("META-INF") ?: continue
+            konst metaInf = root.findChild("META-INF") ?: continue
             for (moduleFile in metaInf.children) {
                 if (!moduleFile.name.endsWith(ModuleMapping.MAPPING_FILE_EXT)) continue
 

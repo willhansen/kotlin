@@ -6,8 +6,8 @@
 package org.jetbrains.kotlin.resolve.references
 
 enum class ReferenceAccess(
-    val isRead: Boolean,
-    val isWrite: Boolean
+    konst isRead: Boolean,
+    konst isWrite: Boolean
 ) {
     READ(true, false),
     WRITE(false, true),

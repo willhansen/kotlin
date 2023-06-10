@@ -65,35 +65,35 @@ class C : O.B() {
     }
 
     // VISIBLE: Classifiers from direct superclasses
-    val c: O.A.FromA? = null
-    val d: O.B.FromB? = null
+    konst c: O.A.FromA? = null
+    konst d: O.B.FromB? = null
 
     // VISIBLE: Classifiers from our own companion
-    val n: C.Companion.FromCompanionC? = null
+    konst n: C.Companion.FromCompanionC? = null
 
     // INVISIBLE: direct superclasses themselves.
-    val a: O.A? = null
-    val b: O.B? = null
+    konst a: O.A? = null
+    konst b: O.B? = null
 
     // DEPRECATED: Classifiers from companions of direct superclasses
-    val e: O.A.Companion.FromCompanionA? = null
-    val f: O.B.Companion.FromCompanionB? = null
+    konst e: O.A.Companion.FromCompanionA? = null
+    konst f: O.B.Companion.FromCompanionB? = null
 
     // INVISIBLE: "cousin" supertypes themselves
-    val g: O.Alpha? = null
-    val h: O.Beta? = null
-    val i: O.Gamma? = null
+    konst g: O.Alpha? = null
+    konst h: O.Beta? = null
+    konst i: O.Gamma? = null
 
     // DEPRECATED: classifiers from "cousin" superclasses
-    val k: O.Alpha.FromAlpha? = null
-    val l: O.Beta.FromBeta? = null
-    val m: O.Gamma.FromGamma? = null
+    konst k: O.Alpha.FromAlpha? = null
+    konst l: O.Beta.FromBeta? = null
+    konst m: O.Gamma.FromGamma? = null
 
     // INVISIBLE: We don't see classifiers from companions of "cousin" superclasses
-    val o: O.Alpha.Companion.FromCompanionAlpha? = null
-    val p: O.Beta.Companion.FromCompanionBeta? = null
-    val q: O.Gamma.Companion.FromCompanionGamma? = null
+    konst o: O.Alpha.Companion.FromCompanionAlpha? = null
+    konst p: O.Beta.Companion.FromCompanionBeta? = null
+    konst q: O.Gamma.Companion.FromCompanionGamma? = null
 
     // DEPRECATED: Classifiers from supertypes of our own companion
-    val r: Delta.FromDelta? = null
+    konst r: Delta.FromDelta? = null
 }

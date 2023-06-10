@@ -16,9 +16,9 @@ function box(): string {
 
     assert(consumer(nonExportedType) == 42)
 
-    a.value = producer(24)
+    a.konstue = producer(24)
     assert(consumer(b) == 43)
-    assert(consumer(a.value) == 24)
+    assert(consumer(a.konstue) == 24)
     assert(consumer(a.increment(nonExportedType)) == 43)
 
     return "OK";

@@ -8,7 +8,7 @@
  */
 
 // TESTCASE NUMBER: 1
-open class Foo(val prop: Int) {
+open class Foo(konst prop: Int) {
     companion object : Foo(<!SELF_CALL_IN_NESTED_OBJECT_CONSTRUCTOR_ERROR!>prop<!>)
 }
 

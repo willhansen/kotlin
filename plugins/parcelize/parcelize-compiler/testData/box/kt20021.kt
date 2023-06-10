@@ -22,7 +22,7 @@ enum class ParcelableEnum : Parcelable {
 
     companion object {
         @JvmField
-        val CREATOR: Parcelable.Creator<ParcelableEnum> = object : Parcelable.Creator<ParcelableEnum> {
+        konst CREATOR: Parcelable.Creator<ParcelableEnum> = object : Parcelable.Creator<ParcelableEnum> {
             override fun createFromParcel(parcel: Parcel) = ParcelableEnum.ONE
             override fun newArray(size: Int) = arrayOfNulls<ParcelableEnum>(size)
         }
@@ -30,18 +30,18 @@ enum class ParcelableEnum : Parcelable {
 }
 
 @Parcelize
-class Test(val parcelableEnum: ParcelableEnum): Parcelable
+class Test(konst parcelableEnum: ParcelableEnum): Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = Test(ParcelableEnum.THREE)
+    konst first = Test(ParcelableEnum.THREE)
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val first2 = parcelableCreator<Test>().createFromParcel(parcel)
+    konst first2 = parcelableCreator<Test>().createFromParcel(parcel)
 
     assert(first.parcelableEnum == ParcelableEnum.THREE)
     assert(first2.parcelableEnum == ParcelableEnum.ONE)

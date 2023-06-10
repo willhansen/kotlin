@@ -10,7 +10,7 @@ inline fun funA(flag: Boolean): String {
 
 // FILE: B.kt
 inline fun funB(flag: Boolean): String {
-    val f = ::funA
+    konst f = ::funA
     if (flag) {
         return f(false)
     }

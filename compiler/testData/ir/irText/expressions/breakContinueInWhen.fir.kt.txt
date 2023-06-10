@@ -1,13 +1,13 @@
 fun testBreakFor() {
-  val xs: IntArray = IntArray(size = 10, init = local fun <anonymous>(i: Int): Int {
+  konst xs: IntArray = IntArray(size = 10, init = local fun <anonymous>(i: Int): Int {
     return i
   }
 )
   var k: Int = 0
   { // BLOCK
-    val <iterator>: IntIterator = xs.iterator()
+    konst <iterator>: IntIterator = xs.iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val x: Int = <iterator>.next()
+      konst x: Int = <iterator>.next()
       when {
         greater(arg0 = k, arg1 = 2) -> break
       }
@@ -32,15 +32,15 @@ fun testBreakDoWhile() {
 }
 
 fun testContinueFor() {
-  val xs: IntArray = IntArray(size = 10, init = local fun <anonymous>(i: Int): Int {
+  konst xs: IntArray = IntArray(size = 10, init = local fun <anonymous>(i: Int): Int {
     return i
   }
 )
   var k: Int = 0
   { // BLOCK
-    val <iterator>: IntIterator = xs.iterator()
+    konst <iterator>: IntIterator = xs.iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val x: Int = <iterator>.next()
+      konst x: Int = <iterator>.next()
       when {
         greater(arg0 = k, arg1 = 2) -> continue
       }

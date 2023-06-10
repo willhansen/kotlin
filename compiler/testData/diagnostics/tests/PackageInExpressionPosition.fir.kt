@@ -3,15 +3,15 @@ package foo
 
 class X {}
 
-val s = <!EXPRESSION_EXPECTED_PACKAGE_FOUND!>java<!>
-val ss = <!NO_COMPANION_OBJECT!>System<!>
-val sss = <!NO_COMPANION_OBJECT!>X<!>
-val x = "${<!NO_COMPANION_OBJECT!>System<!>}"
-val xs = java.<!EXPRESSION_EXPECTED_PACKAGE_FOUND!>lang<!>
-val xss = java.lang.<!NO_COMPANION_OBJECT!>System<!>
-val xsss = foo.<!NO_COMPANION_OBJECT!>X<!>
-val xssss = <!EXPRESSION_EXPECTED_PACKAGE_FOUND!>foo<!>
-val f = { <!NO_COMPANION_OBJECT!>System<!> }
+konst s = <!EXPRESSION_EXPECTED_PACKAGE_FOUND!>java<!>
+konst ss = <!NO_COMPANION_OBJECT!>System<!>
+konst sss = <!NO_COMPANION_OBJECT!>X<!>
+konst x = "${<!NO_COMPANION_OBJECT!>System<!>}"
+konst xs = java.<!EXPRESSION_EXPECTED_PACKAGE_FOUND!>lang<!>
+konst xss = java.lang.<!NO_COMPANION_OBJECT!>System<!>
+konst xsss = foo.<!NO_COMPANION_OBJECT!>X<!>
+konst xssss = <!EXPRESSION_EXPECTED_PACKAGE_FOUND!>foo<!>
+konst f = { <!NO_COMPANION_OBJECT!>System<!> }
 
 fun main() {
     <!EXPRESSION_EXPECTED_PACKAGE_FOUND, VARIABLE_EXPECTED!>java<!> = <!NULL_FOR_NONNULL_TYPE!>null<!>

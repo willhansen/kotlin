@@ -1,8 +1,8 @@
 package test
 
 public interface JavaBeanAbstractGetter {
-    //final val red: Int
+    //final konst red: Int
     public abstract fun getRed(): Int
-    //final val blue: Int
+    //final konst blue: Int
     public abstract fun getBlue(): Int
 }

@@ -3,5 +3,5 @@
 
 package com.example
 
-val propertyInMultifileClass1 = 0
+konst propertyInMultifileClass1 = 0
 fun functionInMultifileClass1() = 0

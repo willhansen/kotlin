@@ -53,15 +53,15 @@ open class KaptExtension: KaptExtensionConfig {
 
     override var useBuildCache: Boolean = true
 
-    private val apOptionsActions =
+    private konst apOptionsActions =
         mutableListOf<(KaptArguments) -> Unit>()
 
-    private val javacOptionsActions =
+    private konst javacOptionsActions =
         mutableListOf<(KaptJavacOption) -> Unit>()
 
     @Suppress("DEPRECATION")
     override fun annotationProcessor(fqName: String) {
-        val oldProcessors = this.processors
+        konst oldProcessors = this.processors
         this.processors = if (oldProcessors.isEmpty()) fqName else "$oldProcessors,$fqName"
     }
 
@@ -90,21 +90,21 @@ open class KaptExtension: KaptExtensionConfig {
     }
 
     override fun getJavacOptions(): Map<String, String> {
-        val result = KaptJavacOptionsDelegate()
+        konst result = KaptJavacOptionsDelegate()
         javacOptionsActions.forEach { it(result) }
         return result.options
     }
 
     fun getAdditionalArguments(project: Project, variantData: Any?, androidExtension: Any?): Map<String, String> {
-        val result = KaptAnnotationProcessorOptions(project, variantData, androidExtension)
+        konst result = KaptAnnotationProcessorOptions(project, variantData, androidExtension)
         apOptionsActions.forEach { it(result) }
         return result.options
     }
 
     fun getAdditionalArgumentsForJavac(project: Project, variantData: Any?, androidExtension: Any?): List<String> {
-        val javacArgs = mutableListOf<String>()
-        for ((key, value) in getAdditionalArguments(project, variantData, androidExtension)) {
-            javacArgs += "-A" + key + (if (value.isNotEmpty()) "=$value" else "")
+        konst javacArgs = mutableListOf<String>()
+        for ((key, konstue) in getAdditionalArguments(project, variantData, androidExtension)) {
+            javacArgs += "-A" + key + (if (konstue.isNotEmpty()) "=$konstue" else "")
         }
         return javacArgs
     }
@@ -114,25 +114,25 @@ open class KaptExtension: KaptExtensionConfig {
  * [project], [variant] and [android] properties are intended to be used inside the closure.
  */
 open class KaptAnnotationProcessorOptions(
-    @Suppress("unused") open val project: Project,
-    @Suppress("unused") open val variant: Any?,
-    @Suppress("unused") open val android: Any?
+    @Suppress("unused") open konst project: Project,
+    @Suppress("unused") open konst variant: Any?,
+    @Suppress("unused") open konst android: Any?
 ): KaptArguments {
-    internal val options = LinkedHashMap<String, String>()
+    internal konst options = LinkedHashMap<String, String>()
 
     @Suppress("unused")
-    override fun arg(name: Any, vararg values: Any) {
-        options.put(name.toString(), values.joinToString(" "))
+    override fun arg(name: Any, vararg konstues: Any) {
+        options.put(name.toString(), konstues.joinToString(" "))
     }
 
     fun execute(closure: Closure<*>) = executeClosure(closure)
 }
 
 open class KaptJavacOptionsDelegate: KaptJavacOption {
-    internal val options = LinkedHashMap<String, String>()
+    internal konst options = LinkedHashMap<String, String>()
 
-    override fun option(name: Any, value: Any) {
-        options.put(name.toString(), value.toString())
+    override fun option(name: Any, konstue: Any) {
+        options.put(name.toString(), konstue.toString())
     }
 
     override fun option(name: Any) {

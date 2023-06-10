@@ -6,20 +6,20 @@
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-suspend fun foo(value: String): String {
+suspend fun foo(konstue: String): String {
     var x = "fail"
     suspendCoroutineUninterceptedOrReturn<Unit> {
-        x = value
+        x = konstue
         it.resume(Unit)
         COROUTINE_SUSPENDED
     }
     return x
 }
 
-suspend inline fun fooInline(value: String): String {
+suspend inline fun fooInline(konstue: String): String {
     var x = "fail"
     suspendCoroutineUninterceptedOrReturn<Unit> {
-        x = value
+        x = konstue
         it.resume(Unit)
         COROUTINE_SUSPENDED
     }

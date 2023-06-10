@@ -12,7 +12,7 @@ inline fun call(a: A) {
 
 inline var inlineVar: Int
     get() {
-        val a = A()
+        konst a = A()
         a.test()
         publishedTopLevel()
 
@@ -23,8 +23,8 @@ inline var inlineVar: Int
         publishedVarTopLevel = 1
         return 1
     }
-    set(value) {
-        val a = A()
+    set(konstue) {
+        konst a = A()
         a.test()
         publishedTopLevel()
 
@@ -88,7 +88,7 @@ internal class A {
             return 1
         }
 
-        set(value) {
+        set(konstue) {
             publicFun()
             internalFun()
             privateFun()
@@ -147,7 +147,7 @@ inline internal var publishedVarTopLevel: Int
         return 1
     }
 
-    set(value) {
+    set(konstue) {
         publicFun()
         internalFun()
         privateFun()

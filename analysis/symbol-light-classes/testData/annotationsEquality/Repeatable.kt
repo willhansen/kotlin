@@ -3,4 +3,4 @@
 // EXPECTED: kotlin.annotation.Repeatable
 
 @Repeatable
-annotation class <caret>One(val value: String)
+annotation class <caret>One(konst konstue: String)

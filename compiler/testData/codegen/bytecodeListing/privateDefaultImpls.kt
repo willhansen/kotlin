@@ -1,4 +1,4 @@
 interface A {
     private fun foo() {}
-    private val x get() = 1
+    private konst x get() = 1
 }

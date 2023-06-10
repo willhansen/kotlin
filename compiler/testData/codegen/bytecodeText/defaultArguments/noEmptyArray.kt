@@ -1,4 +1,4 @@
-// There is one ANEWARRAY instruction here, to generate the default parameter value.
+// There is one ANEWARRAY instruction here, to generate the default parameter konstue.
 fun default(vararg s: String = arrayOf("OK")) = s[0]
 
 // This call on the other hand shouldn't allocate anything.

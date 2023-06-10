@@ -35,11 +35,11 @@ object KClassWithIncorrectTypeArgumentChecker : DeclarationChecker {
         // prevent duplicate reporting
         if (descriptor is PropertyAccessorDescriptor) return
 
-        val returnType = descriptor.returnType ?: return
+        konst returnType = descriptor.returnType ?: return
 
         var typeParameterWithoutNotNullableUpperBound: TypeParameterDescriptor? = null
         returnType.contains { type ->
-            val kClassWithBadArgument = type.isKClassWithBadArgument()
+            konst kClassWithBadArgument = type.isKClassWithBadArgument()
             if (kClassWithBadArgument) {
                 type.arguments.singleOrNull()?.type?.constructor?.declarationDescriptor?.let {
                     if (it is TypeParameterDescriptor && it.containingDeclaration == descriptor) {
@@ -58,8 +58,8 @@ object KClassWithIncorrectTypeArgumentChecker : DeclarationChecker {
     }
 
     private fun UnwrappedType.isKClassWithBadArgument(): Boolean {
-        val argumentType = arguments.singleOrNull()?.let { if (it.isStarProjection) null else it.type.unwrap() } ?: return false
-        val klass = constructor.declarationDescriptor as? ClassDescriptor ?: return false
+        konst argumentType = arguments.singleOrNull()?.let { if (it.isStarProjection) null else it.type.unwrap() } ?: return false
+        konst klass = constructor.declarationDescriptor as? ClassDescriptor ?: return false
 
         return KotlinBuiltIns.isKClass(klass) && !argumentType.isSubtypeOf(argumentType.builtIns.anyType)
     }

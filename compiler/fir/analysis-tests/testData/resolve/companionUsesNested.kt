@@ -6,13 +6,13 @@ class Derived : Base() {
     class DerivedNested
 
     companion object {
-        val b: BaseNested = BaseNested()
+        konst b: BaseNested = BaseNested()
 
-        val d: DerivedNested = DerivedNested()
+        konst d: DerivedNested = DerivedNested()
 
         fun foo() {
-            val bb: BaseNested = BaseNested()
-            val dd: DerivedNested = DerivedNested()
+            konst bb: BaseNested = BaseNested()
+            konst dd: DerivedNested = DerivedNested()
         }
     }
 }

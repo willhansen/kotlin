@@ -9,7 +9,7 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-const val M = UInt.MAX_VALUE
+const konst M = UInt.MAX_VALUE
 
 fun f(a: UInt): Int {
     var n = 0

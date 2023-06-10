@@ -2,10 +2,10 @@
 // IGNORE_BACKEND: JS_IR
 // IGNORE_BACKEND: JS_IR_ES6
 
-val test1 by lazy { 42 }
+konst test1 by lazy { 42 }
 
-class C(val map: MutableMap<String, Any>) {
-    val test2 by lazy { 42 }
+class C(konst map: MutableMap<String, Any>) {
+    konst test2 by lazy { 42 }
     var test3 by map
 }
 

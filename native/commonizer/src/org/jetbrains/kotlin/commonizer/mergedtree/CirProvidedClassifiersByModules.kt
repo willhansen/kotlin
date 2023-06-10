@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.serialization.deserialization.ProtoEnumFlags
 import org.jetbrains.kotlin.types.Variance
 
 internal class CirProvidedClassifiersByModules internal constructor(
-    private val hasForwardDeclarations: Boolean,
-    private val classifiers: Map<CirEntityId, CirProvided.Classifier>,
+    private konst hasForwardDeclarations: Boolean,
+    private konst classifiers: Map<CirEntityId, CirProvided.Classifier>,
 ) : CirProvidedClassifiers {
 
-    private val typeAliasesByUnderlyingTypes = run {
+    private konst typeAliasesByUnderlyingTypes = run {
         THashMap<CirEntityId, MutableList<CirEntityId>>().also { map ->
             classifiers.forEach { (id, classifier) ->
                 if (classifier is CirProvided.TypeAlias) {
-                    val set = map.computeIfAbsent(classifier.underlyingType.classifierId) { ArrayList() }
+                    konst set = map.computeIfAbsent(classifier.underlyingType.classifierId) { ArrayList() }
                     set.add(id)
                 }
             }
@@ -55,10 +55,10 @@ internal class CirProvidedClassifiersByModules internal constructor(
 
     companion object {
         fun load(modulesProvider: ModulesProvider): CirProvidedClassifiers {
-            val classifiers = THashMap<CirEntityId, CirProvided.Classifier>()
+            konst classifiers = THashMap<CirEntityId, CirProvided.Classifier>()
 
             modulesProvider.moduleInfos.forEach { moduleInfo ->
-                val metadata = modulesProvider.loadModuleMetadata(moduleInfo.name)
+                konst metadata = modulesProvider.loadModuleMetadata(moduleInfo.name)
                 readModule(metadata, classifiers::set)
             }
 
@@ -73,7 +73,7 @@ internal class CirProvidedClassifiersByModules internal constructor(
          * Note: This builds a union *not an intersection* of forward declarations.
          */
         fun loadExportedForwardDeclarations(modulesProviders: List<ModulesProvider>): CirProvidedClassifiers {
-            val classifiers = THashMap<CirEntityId, CirProvided.Classifier>()
+            konst classifiers = THashMap<CirEntityId, CirProvided.Classifier>()
 
             modulesProviders.flatMap { moduleProvider -> moduleProvider.moduleInfos }
                 .mapNotNull { moduleInfo -> moduleInfo.cInteropAttributes }
@@ -90,20 +90,20 @@ private fun readExportedForwardDeclarations(
     cInteropAttributes: CInteropModuleAttributes,
     consumer: (CirEntityId, CirProvided.Classifier) -> Unit
 ) {
-    val exportedForwardDeclarations = cInteropAttributes.exportedForwardDeclarations
+    konst exportedForwardDeclarations = cInteropAttributes.exportedForwardDeclarations
     if (exportedForwardDeclarations.isEmpty()) return
 
-    val mainPackageName = CirPackageName.create(cInteropAttributes.mainPackage)
+    konst mainPackageName = CirPackageName.create(cInteropAttributes.mainPackage)
 
     exportedForwardDeclarations.forEach { classFqName ->
         // Class has synthetic package FQ name (cnames/objcnames). Need to transfer it to the main package.
-        val syntheticPackageName = CirPackageName.create(classFqName.substringBeforeLast('.', missingDelimiterValue = ""))
-        val className = CirName.create(classFqName.substringAfterLast('.'))
+        konst syntheticPackageName = CirPackageName.create(classFqName.substringBeforeLast('.', missingDelimiterValue = ""))
+        konst className = CirName.create(classFqName.substringAfterLast('.'))
 
-        val syntheticClassId = CirEntityId.create(syntheticPackageName, className)
-        val aliasedClassId = CirEntityId.create(mainPackageName, className)
+        konst syntheticClassId = CirEntityId.create(syntheticPackageName, className)
+        konst aliasedClassId = CirEntityId.create(mainPackageName, className)
 
-        val clazz = CirProvided.ExportedForwardDeclarationClass(syntheticClassId)
+        konst clazz = CirProvided.ExportedForwardDeclarationClass(syntheticClassId)
 
         consumer(syntheticClassId, clazz)
         consumer(aliasedClassId, clazz)
@@ -112,27 +112,27 @@ private fun readExportedForwardDeclarations(
 
 private fun readModule(metadata: SerializedMetadata, consumer: (CirEntityId, CirProvided.Classifier) -> Unit) {
     for (i in metadata.fragmentNames.indices) {
-        val packageFqName = metadata.fragmentNames[i]
-        val packageFragments = metadata.fragments[i]
+        konst packageFqName = metadata.fragmentNames[i]
+        konst packageFragments = metadata.fragments[i]
 
-        val classProtosToRead = ClassProtosToRead()
+        konst classProtosToRead = ClassProtosToRead()
 
         for (j in packageFragments.indices) {
-            val packageFragmentProto = parsePackageFragment(packageFragments[j])
+            konst packageFragmentProto = parsePackageFragment(packageFragments[j])
 
-            val classProtos: List<ProtoBuf.Class> = packageFragmentProto.class_List
-            val typeAliasProtos: List<ProtoBuf.TypeAlias> = packageFragmentProto.`package`?.typeAliasList.orEmpty()
+            konst classProtos: List<ProtoBuf.Class> = packageFragmentProto.class_List
+            konst typeAliasProtos: List<ProtoBuf.TypeAlias> = packageFragmentProto.`package`?.typeAliasList.orEmpty()
 
             if (classProtos.isEmpty() && typeAliasProtos.isEmpty())
                 continue
 
-            val packageName = CirPackageName.create(packageFqName)
-            val strings = NameResolverImpl(packageFragmentProto.strings, packageFragmentProto.qualifiedNames)
+            konst packageName = CirPackageName.create(packageFqName)
+            konst strings = NameResolverImpl(packageFragmentProto.strings, packageFragmentProto.qualifiedNames)
 
             classProtosToRead.addClasses(classProtos, strings)
 
             if (typeAliasProtos.isNotEmpty()) {
-                val types = TypeTable(packageFragmentProto.`package`.typeTable)
+                konst types = TypeTable(packageFragmentProto.`package`.typeTable)
                 for (typeAliasProto in typeAliasProtos) {
                     readTypeAlias(typeAliasProto, packageName, strings, types, consumer)
                 }
@@ -147,19 +147,19 @@ private fun readModule(metadata: SerializedMetadata, consumer: (CirEntityId, Cir
 
 private class ClassProtosToRead {
     data class ClassEntry(
-        val classId: CirEntityId, val proto: ProtoBuf.Class, val strings: NameResolver
+        konst classId: CirEntityId, konst proto: ProtoBuf.Class, konst strings: NameResolver
     )
 
     // key = parent class ID (or NON_EXISTING_CLASSIFIER_ID for top-level classes)
-    // value = class protos under this parent class (MutableList to preserve order of classes)
-    private val groupedByParentClassId = FactoryMap.create<CirEntityId, MutableList<ClassEntry>> { ArrayList() }
+    // konstue = class protos under this parent class (MutableList to preserve order of classes)
+    private konst groupedByParentClassId = FactoryMap.create<CirEntityId, MutableList<ClassEntry>> { ArrayList() }
 
     fun addClasses(classProtos: List<ProtoBuf.Class>, strings: NameResolver) {
         classProtos.forEach { classProto ->
             if (strings.isLocalClassName(classProto.fqName)) return@forEach
 
-            val classId = CirEntityId.create(strings.getQualifiedClassName(classProto.fqName))
-            val parentClassId: CirEntityId = classId.getParentEntityId() ?: NON_EXISTING_CLASSIFIER_ID
+            konst classId = CirEntityId.create(strings.getQualifiedClassName(classProto.fqName))
+            konst parentClassId: CirEntityId = classId.getParentEntityId() ?: NON_EXISTING_CLASSIFIER_ID
 
             groupedByParentClassId.getValue(parentClassId) += ClassEntry(classId, classProto, strings)
         }
@@ -176,25 +176,25 @@ private fun readClass(
     typeParameterIndexOffset: Int,
     consumer: (CirEntityId, CirProvided.Classifier) -> Unit
 ) {
-    val (classId, classProto) = classEntry
+    konst (classId, classProto) = classEntry
 
-    val typeParameterNameToIndex = HashMap<Int, Int>()
+    konst typeParameterNameToIndex = HashMap<Int, Int>()
 
-    val typeParameters = readTypeParameters(
+    konst typeParameters = readTypeParameters(
         typeParameterProtos = classProto.typeParameterList,
         typeParameterIndexOffset = typeParameterIndexOffset,
         nameToIndexMapper = typeParameterNameToIndex::set
     )
-    val typeReadContext = TypeReadContext(classEntry.strings, TypeTable(classProto.typeTable), typeParameterNameToIndex)
+    konst typeReadContext = TypeReadContext(classEntry.strings, TypeTable(classProto.typeTable), typeParameterNameToIndex)
 
-    val supertypes = (classProto.supertypeList.map { readType(it, typeReadContext) } +
+    konst supertypes = (classProto.supertypeList.map { readType(it, typeReadContext) } +
             classProto.supertypeIdList.map { readType(classProto.typeTable.getType(it), typeReadContext) })
         .filterNot { type -> type is CirProvided.ClassType && type.classifierId == ANY_CLASS_ID }
 
 
-    val visibility = ProtoEnumFlags.visibility(Flags.VISIBILITY.get(classProto.flags))
-    val kind = ProtoEnumFlags.classKind(Flags.CLASS_KIND.get(classProto.flags))
-    val clazz = CirProvided.RegularClass(typeParameters, supertypes, visibility, kind)
+    konst visibility = ProtoEnumFlags.visibility(Flags.VISIBILITY.get(classProto.flags))
+    konst kind = ProtoEnumFlags.classKind(Flags.CLASS_KIND.get(classProto.flags))
+    konst clazz = CirProvided.RegularClass(typeParameters, supertypes, visibility, kind)
 
     consumer(classId, clazz)
 
@@ -210,17 +210,17 @@ private inline fun readTypeAlias(
     types: TypeTable,
     consumer: (CirEntityId, CirProvided.Classifier) -> Unit
 ) {
-    val typeAliasId = CirEntityId.create(packageName, CirName.create(strings.getString(typeAliasProto.name)))
+    konst typeAliasId = CirEntityId.create(packageName, CirName.create(strings.getString(typeAliasProto.name)))
 
-    val typeParameterNameToIndex = HashMap<Int, Int>()
-    val typeParameters = readTypeParameters(
+    konst typeParameterNameToIndex = HashMap<Int, Int>()
+    konst typeParameters = readTypeParameters(
         typeParameterProtos = typeAliasProto.typeParameterList,
         typeParameterIndexOffset = 0,
         nameToIndexMapper = typeParameterNameToIndex::set
     )
 
-    val underlyingType = readType(typeAliasProto.underlyingType(types), TypeReadContext(strings, types, typeParameterNameToIndex))
-    val typeAlias = CirProvided.TypeAlias(typeParameters, underlyingType as CirProvided.ClassOrTypeAliasType)
+    konst underlyingType = readType(typeAliasProto.underlyingType(types), TypeReadContext(strings, types, typeParameterNameToIndex))
+    konst typeAlias = CirProvided.TypeAlias(typeParameters, underlyingType as CirProvided.ClassOrTypeAliasType)
 
     consumer(typeAliasId, typeAlias)
 }
@@ -231,8 +231,8 @@ private inline fun readTypeParameters(
     nameToIndexMapper: (name: Int, id: Int) -> Unit = { _, _ -> }
 ): List<CirProvided.TypeParameter> =
     typeParameterProtos.compactMapIndexed { localIndex, typeParameterProto ->
-        val index = localIndex + typeParameterIndexOffset
-        val typeParameter = CirProvided.TypeParameter(
+        konst index = localIndex + typeParameterIndexOffset
+        konst typeParameter = CirProvided.TypeParameter(
             index = index,
             variance = readVariance(typeParameterProto.variance)
         )
@@ -241,25 +241,25 @@ private inline fun readTypeParameters(
     }
 
 private class TypeReadContext(
-    val strings: NameResolver,
-    val types: TypeTable,
-    private val _typeParameterNameToIndex: Map<Int, Int>
+    konst strings: NameResolver,
+    konst types: TypeTable,
+    private konst _typeParameterNameToIndex: Map<Int, Int>
 ) {
-    val typeParameterNameToIndex: (Int) -> Int = { name ->
+    konst typeParameterNameToIndex: (Int) -> Int = { name ->
         _typeParameterNameToIndex[name] ?: error("No type parameter index for ${strings.getString(name)}")
     }
 
-    private val _typeParameterIdToIndex = HashMap<Int, Int>()
-    val typeParameterIdToIndex: (Int) -> Int = { id -> _typeParameterIdToIndex.getOrPut(id) { _typeParameterIdToIndex.size } }
+    private konst _typeParameterIdToIndex = HashMap<Int, Int>()
+    konst typeParameterIdToIndex: (Int) -> Int = { id -> _typeParameterIdToIndex.getOrPut(id) { _typeParameterIdToIndex.size } }
 }
 
 private fun readType(typeProto: ProtoBuf.Type, context: TypeReadContext): CirProvided.Type =
     with(typeProto.abbreviatedType(context.types) ?: typeProto) {
         when {
             hasClassName() -> {
-                val classId = CirEntityId.create(context.strings.getQualifiedClassName(className))
-                val outerType = typeProto.outerType(context.types)?.let { outerType ->
-                    val outerClassType = readType(outerType, context)
+                konst classId = CirEntityId.create(context.strings.getQualifiedClassName(className))
+                konst outerType = typeProto.outerType(context.types)?.let { outerType ->
+                    konst outerClassType = readType(outerType, context)
                     check(outerClassType is CirProvided.ClassType) { "Outer type of $classId is not a class: $outerClassType" }
                     outerClassType
                 }
@@ -290,8 +290,8 @@ private fun readType(typeProto: ProtoBuf.Type, context: TypeReadContext): CirPro
 
 private fun readTypeArguments(argumentProtos: List<ProtoBuf.Type.Argument>, context: TypeReadContext): List<CirProvided.TypeProjection> =
     argumentProtos.compactMap { argumentProto ->
-        val variance = readVariance(argumentProto.projection!!) ?: return@compactMap CirProvided.StarTypeProjection
-        val typeProto = argumentProto.type(context.types) ?: error("No type argument for non-STAR projection in Type")
+        konst variance = readVariance(argumentProto.projection!!) ?: return@compactMap CirProvided.StarTypeProjection
+        konst typeProto = argumentProto.type(context.types) ?: error("No type argument for non-STAR projection in Type")
 
         CirProvided.RegularTypeProjection(
             variance = variance,

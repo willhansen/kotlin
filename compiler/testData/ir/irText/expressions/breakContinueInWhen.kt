@@ -3,7 +3,7 @@
 // IGNORE_BACKEND: JS_IR_ES6
 
 fun testBreakFor() {
-    val xs = IntArray(10) { i -> i }
+    konst xs = IntArray(10) { i -> i }
     var k = 0
     for (x in xs) {
         when {
@@ -31,7 +31,7 @@ fun testBreakDoWhile() {
 }
 
 fun testContinueFor() {
-    val xs = IntArray(10) { i -> i }
+    konst xs = IntArray(10) { i -> i }
     var k = 0
     for (x in xs) {
         when {

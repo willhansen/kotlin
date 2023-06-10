@@ -28,17 +28,17 @@ import org.jetbrains.kotlin.test.model.BinaryArtifacts
 import org.jetbrains.kotlin.test.model.FrontendKinds
 
 object CompilerStepsNames {
-    const val FRONTEND_STEP_NAME = "frontend"
-    const val CLASSIC_FRONTEND_HANDLERS_STEP_NAME = "classic frontend handlers"
-    const val FIR_HANDLERS_STEP_NAME = "FIR frontend handlers"
+    const konst FRONTEND_STEP_NAME = "frontend"
+    const konst CLASSIC_FRONTEND_HANDLERS_STEP_NAME = "classic frontend handlers"
+    const konst FIR_HANDLERS_STEP_NAME = "FIR frontend handlers"
 
-    const val CONVERTER_STEP_NAME = "converter"
-    const val RAW_IR_HANDLERS_STEP_NAME = "raw IR handlers"
+    const konst CONVERTER_STEP_NAME = "converter"
+    const konst RAW_IR_HANDLERS_STEP_NAME = "raw IR handlers"
 
-    const val JVM_BACKEND_STEP_NAME = "jvm backend"
-    const val JVM_ARTIFACTS_HANDLERS_STEP_NAME = "jvm artifacts handlers"
-    const val JS_ARTIFACTS_HANDLERS_STEP_NAME = "js artifacts handlers"
-    const val KLIB_ARTIFACTS_HANDLERS_STEP_NAME = "klib artifacts handlers"
+    const konst JVM_BACKEND_STEP_NAME = "jvm backend"
+    const konst JVM_ARTIFACTS_HANDLERS_STEP_NAME = "jvm artifacts handlers"
+    const konst JS_ARTIFACTS_HANDLERS_STEP_NAME = "js artifacts handlers"
+    const konst KLIB_ARTIFACTS_HANDLERS_STEP_NAME = "klib artifacts handlers"
 
 }
 

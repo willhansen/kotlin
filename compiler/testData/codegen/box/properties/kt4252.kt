@@ -15,7 +15,7 @@ public class Foo
 
 fun box() : String {
 
-    val foo = Foo()
+    konst foo = Foo()
 
     if (foo.getBar() != 1) return "Fail";
 

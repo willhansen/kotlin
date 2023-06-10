@@ -1,5 +1,5 @@
 open class BaseEmptyList<T> : List<T> {
-    override val size: Int = 0
+    override konst size: Int = 0
     override fun contains(element: T): Boolean = false
     override fun containsAll(elements: Collection<T>): Boolean = false
     override fun get(index: Int): T = error("Do not call")

@@ -11,7 +11,7 @@ import kotlin.test.*
     var a = 0
     fun local() {
         class A {
-            val b = 0
+            konst b = 0
             fun f() {
                 a = b
             }

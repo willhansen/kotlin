@@ -27,8 +27,8 @@ object ExpectActualInTheSameModuleChecker : DeclarationChecker {
         if (!descriptor.isExpect) return
         // Only look for top level actual members; class members will be handled as a part of that expected class
         if (descriptor.containingDeclaration !is PackageFragmentDescriptor) return
-        val module = descriptor.module
-        val actuals = ExpectedActualResolver.findActualForExpected(descriptor, module)
+        konst module = descriptor.module
+        konst actuals = ExpectedActualResolver.findActualForExpected(descriptor, module)
             ?.filter { (compatibility, _) -> compatibility.isCompatibleOrWeakCompatible() }
             ?.flatMap { (_, members) -> members }
             ?.takeIf(List<MemberDescriptor>::isNotEmpty) ?: return
@@ -59,11 +59,11 @@ object ExpectActualInTheSameModuleChecker : DeclarationChecker {
 
         context.trace.report(Errors.EXPECT_AND_ACTUAL_IN_THE_SAME_MODULE.on(declaration, descriptor))
         for (actual in actuals) {
-            val actualSource = actual.declarationSource ?: continue
+            konst actualSource = actual.declarationSource ?: continue
             context.trace.report(Errors.EXPECT_AND_ACTUAL_IN_THE_SAME_MODULE.on(actualSource, descriptor))
         }
     }
 
-    private val MemberDescriptor.declarationSource: KtNamedDeclaration?
+    private konst MemberDescriptor.declarationSource: KtNamedDeclaration?
         get() = (this.source as? KotlinSourceElement)?.psi as? KtNamedDeclaration
 }

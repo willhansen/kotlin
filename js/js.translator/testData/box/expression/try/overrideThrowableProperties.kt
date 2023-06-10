@@ -3,23 +3,23 @@
 open class Ex0(msg: String, cs: Throwable): Throwable(msg, cs)
 
 open class Ex1: Ex0("A", Error("fail2")) {
-    override val cause = Error("B")
+    override konst cause = Error("B")
 }
 
 open class Ex2: Ex0("fail3", Error("C")) {
-    override val message = "D"
+    override konst message = "D"
 }
 
 open class Ex3: Ex0("fail", Error("fail")) {
-    override val message get() = "O"
+    override konst message get() = "O"
 
-    override val cause get() = Error("K")
+    override konst cause get() = Error("K")
 }
 
 open class Ex4: Ex3()
 
 class Ex5: Ex4() {
-    override val message: String
+    override konst message: String
         get() = "!"
 }
 
@@ -28,9 +28,9 @@ open class A : Throwable("AM", Error("AC"))
 
 @JsExport
 open class B : A() {
-    override val message = "BM"
+    override konst message = "BM"
 
-    override val cause = Error("BC")
+    override konst cause = Error("BC")
 }
 
 @JsExport

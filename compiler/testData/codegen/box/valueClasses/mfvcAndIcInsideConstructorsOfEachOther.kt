@@ -6,12 +6,12 @@
 // FIR_IDENTICAL
 
 @JvmInline
-value class IC(val x: Int) {
+konstue class IC(konst x: Int) {
     constructor(mfvc: MFVC) : this(mfvc.x + mfvc.y)
 }
 
 @JvmInline
-value class MFVC(val x: Int, val y: Int) {
+konstue class MFVC(konst x: Int, konst y: Int) {
     constructor(ic: IC) : this(ic.x, ic.x)
 }
 

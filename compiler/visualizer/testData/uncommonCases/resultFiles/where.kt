@@ -20,10 +20,10 @@ fun main() {
 //      collections/List<String>
 //      │      fun <T> collections/listOf<String>(vararg T): collections/List<T>
 //      │      │
-    val list = listOf("1", "2", "3")
+    konst list = listOf("1", "2", "3")
 //      collections/List<String>
 //      │      fun <T : CharSequence> copyWhenGreater<String>(collections/List<T>, T): collections/List<String> where T : Comparable<T>
-//      │      │               val main.list: collections/List<String>
+//      │      │               konst main.list: collections/List<String>
 //      │      │               │
-    val copy = copyWhenGreater(list, "2")
+    konst copy = copyWhenGreater(list, "2")
 }

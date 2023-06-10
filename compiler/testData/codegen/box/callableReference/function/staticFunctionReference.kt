@@ -5,7 +5,7 @@ var capturedRef: ((Int) -> Int)? = null
 fun ref(x: Int) = x
 
 fun updateCapturedRef(): Boolean {
-    val r = ::ref
+    konst r = ::ref
     if (capturedRef == null) {
         capturedRef = r
     } else if (capturedRef !== r) {

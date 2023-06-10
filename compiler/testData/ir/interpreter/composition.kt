@@ -16,8 +16,8 @@ open class A @CompileTimeCalculation constructor(@CompileTimeCalculation var a: 
     }
 }
 
-open class B @CompileTimeCalculation constructor(@CompileTimeCalculation val b: Int) {
-    @CompileTimeCalculation val aObj = A(b + 1)
+open class B @CompileTimeCalculation constructor(@CompileTimeCalculation konst b: Int) {
+    @CompileTimeCalculation konst aObj = A(b + 1)
 
     @CompileTimeCalculation
     fun getAFromB(): Int {
@@ -30,9 +30,9 @@ open class B @CompileTimeCalculation constructor(@CompileTimeCalculation val b: 
     }
 }
 
-open class C @CompileTimeCalculation constructor(@CompileTimeCalculation val c: Int) {
-    @CompileTimeCalculation val aObj = A(c + 2)
-    @CompileTimeCalculation val bObj = B(c + 1)
+open class C @CompileTimeCalculation constructor(@CompileTimeCalculation konst c: Int) {
+    @CompileTimeCalculation konst aObj = A(c + 2)
+    @CompileTimeCalculation konst bObj = B(c + 1)
 
     @CompileTimeCalculation
     fun getAFromC(): Int {
@@ -50,22 +50,22 @@ open class C @CompileTimeCalculation constructor(@CompileTimeCalculation val c: 
     }
 }
 
-const val a1 = <!EVALUATED: `1`!>A(1).get()<!>
-const val a2 = <!EVALUATED: `2`!>A(1).setA(2).get()<!>
-const val a3 = <!EVALUATED: `1`!>A(1).openGet()<!>
+const konst a1 = <!EVALUATED: `1`!>A(1).get()<!>
+const konst a2 = <!EVALUATED: `2`!>A(1).setA(2).get()<!>
+const konst a3 = <!EVALUATED: `1`!>A(1).openGet()<!>
 
-const val b1 = <!EVALUATED: `2`!>B(1).getAFromB()<!>
-const val b2 = <!EVALUATED: `2`!>B(1).getFromProperty()<!>
-const val b3 = <!EVALUATED: `2`!>B(1).aObj.get()<!>
-const val b4 = <!EVALUATED: `-1`!>B(1).aObj.setA(-1).get()<!>
-const val b5 = <!EVALUATED: `2`!>B(1).aObj.a<!>
+const konst b1 = <!EVALUATED: `2`!>B(1).getAFromB()<!>
+const konst b2 = <!EVALUATED: `2`!>B(1).getFromProperty()<!>
+const konst b3 = <!EVALUATED: `2`!>B(1).aObj.get()<!>
+const konst b4 = <!EVALUATED: `-1`!>B(1).aObj.setA(-1).get()<!>
+const konst b5 = <!EVALUATED: `2`!>B(1).aObj.a<!>
 
-const val c1 = <!EVALUATED: `3`!>C(1).getAFromC()<!>
-const val c2 = <!EVALUATED: `2`!>C(1).getBFromC()<!>
-const val c3 = <!EVALUATED: `3`!>C(1).aObj.get()<!>
-const val c4 = <!EVALUATED: `3`!>C(1).openGet()<!>
-const val c5 = <!EVALUATED: `3`!>C(1).bObj.getAFromB()<!>
-const val c6 = <!EVALUATED: `3`!>C(1).bObj.getFromProperty()<!>
-const val c7 = <!EVALUATED: `-2`!>C(1).bObj.aObj.setA(-2).get()<!>
-const val c8 = <!EVALUATED: `2`!>C(1).bObj.b<!>
-const val c9 = <!EVALUATED: `3`!>C(1).aObj.a<!>
+const konst c1 = <!EVALUATED: `3`!>C(1).getAFromC()<!>
+const konst c2 = <!EVALUATED: `2`!>C(1).getBFromC()<!>
+const konst c3 = <!EVALUATED: `3`!>C(1).aObj.get()<!>
+const konst c4 = <!EVALUATED: `3`!>C(1).openGet()<!>
+const konst c5 = <!EVALUATED: `3`!>C(1).bObj.getAFromB()<!>
+const konst c6 = <!EVALUATED: `3`!>C(1).bObj.getFromProperty()<!>
+const konst c7 = <!EVALUATED: `-2`!>C(1).bObj.aObj.setA(-2).get()<!>
+const konst c8 = <!EVALUATED: `2`!>C(1).bObj.b<!>
+const konst c9 = <!EVALUATED: `3`!>C(1).aObj.a<!>

@@ -16,5 +16,5 @@ import org.jetbrains.kotlin.ir.symbols.IrSymbol
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.declarationReference]
  */
 abstract class IrDeclarationReference : IrExpression() {
-    abstract val symbol: IrSymbol
+    abstract konst symbol: IrSymbol
 }

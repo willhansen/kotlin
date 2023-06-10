@@ -15,8 +15,8 @@ fun createFlexiblePhaseConfig(
 ): FlexiblePhaseConfig {
     fun Array<String>?.asNonNullSet(): Set<String> = this?.toSet() ?: emptySet()
 
-    val toDumpBoth = createPhaseSetFromArguments(arguments.phasesToDump)
-    val toValidateBoth = createPhaseSetFromArguments(arguments.phasesToValidate)
+    konst toDumpBoth = createPhaseSetFromArguments(arguments.phasesToDump)
+    konst toValidateBoth = createPhaseSetFromArguments(arguments.phasesToValidate)
 
     return FlexiblePhaseConfig(
         disabled = arguments.disablePhases.asNonNullSet(),

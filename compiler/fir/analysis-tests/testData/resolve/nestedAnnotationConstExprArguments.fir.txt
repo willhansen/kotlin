@@ -4,7 +4,7 @@ FILE: nestedAnnotationConstExprArguments.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val text: R|kotlin/String| = R|<local>/text|
+        public final konst text: R|kotlin/String| = R|<local>/text|
             public get(): R|kotlin/String|
 
     }
@@ -13,7 +13,7 @@ FILE: nestedAnnotationConstExprArguments.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val inner: R|InnerAnnotation| = R|<local>/inner|
+        public final konst inner: R|InnerAnnotation| = R|<local>/inner|
             public get(): R|InnerAnnotation|
 
     }

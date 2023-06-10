@@ -10,11 +10,11 @@ class J {
     }
 }
 
-val fsi = object : Fn<String, Int> {
+konst fsi = object : Fn<String, Int> {
     override fun run(s: String, i: Int, t: String): Int = 1
 }
 
-val fis = object : Fn<Int, String> {
+konst fis = object : Fn<Int, String> {
     override fun run(s: String, i: Int, t: Int): String = ""
 }
 

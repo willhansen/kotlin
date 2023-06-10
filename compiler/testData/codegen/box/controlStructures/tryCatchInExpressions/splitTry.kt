@@ -1,7 +1,7 @@
 
 inline fun test(s: () -> Int): Int =
         try {
-            val i = s()
+            konst i = s()
             i + 10
         }
         finally {
@@ -11,7 +11,7 @@ inline fun test(s: () -> Int): Int =
 fun box() : String {
     test {
         try {
-            val p = 1
+            konst p = 1
             return "OK"
         }
         catch(e: Exception) {

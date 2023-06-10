@@ -64,35 +64,35 @@ class C : O.B() {
     }
 
     // VISIBLE: Classifiers from direct superclasses
-    val c: FromA? = null
-    val d: FromB? = null
+    konst c: FromA? = null
+    konst d: FromB? = null
 
     // VISIBLE: Classifiers from our own companion
-    val n: FromCompanionC? = null
+    konst n: FromCompanionC? = null
 
     // INVISIBLE: direct superclasses themselves.
-    val a: <!UNRESOLVED_REFERENCE!>A<!>? = null
-    val b: <!UNRESOLVED_REFERENCE!>B<!>? = null
+    konst a: <!UNRESOLVED_REFERENCE!>A<!>? = null
+    konst b: <!UNRESOLVED_REFERENCE!>B<!>? = null
 
     // DEPRECATED: Classifiers from companions of direct superclasses
-    val e: <!UNRESOLVED_REFERENCE!>FromCompanionA<!>? = null
-    val f: <!UNRESOLVED_REFERENCE!>FromCompanionB<!>? = null
+    konst e: <!UNRESOLVED_REFERENCE!>FromCompanionA<!>? = null
+    konst f: <!UNRESOLVED_REFERENCE!>FromCompanionB<!>? = null
 
     // INVISIBLE: "cousin" supertypes themselves
-    val g: <!UNRESOLVED_REFERENCE!>Alpha<!>? = null
-    val h: <!UNRESOLVED_REFERENCE!>Beta<!>? = null
-    val i: <!UNRESOLVED_REFERENCE!>Gamma<!>? = null
+    konst g: <!UNRESOLVED_REFERENCE!>Alpha<!>? = null
+    konst h: <!UNRESOLVED_REFERENCE!>Beta<!>? = null
+    konst i: <!UNRESOLVED_REFERENCE!>Gamma<!>? = null
 
     // DEPRECATED: classifiers from "cousin" superclasses
-    val k: <!UNRESOLVED_REFERENCE!>FromAlpha<!>? = null
-    val l: <!UNRESOLVED_REFERENCE!>FromBeta<!>? = null
-    val m: <!UNRESOLVED_REFERENCE!>FromGamma<!>? = null
+    konst k: <!UNRESOLVED_REFERENCE!>FromAlpha<!>? = null
+    konst l: <!UNRESOLVED_REFERENCE!>FromBeta<!>? = null
+    konst m: <!UNRESOLVED_REFERENCE!>FromGamma<!>? = null
 
     // INVISIBLE: We don't see classifiers from companions of "cousin" superclasses
-    val o: <!UNRESOLVED_REFERENCE!>FromCompanionAlpha<!>? = null
-    val p: <!UNRESOLVED_REFERENCE!>FromCompanionBeta<!>? = null
-    val q: <!UNRESOLVED_REFERENCE!>FromCompanionGamma<!>? = null
+    konst o: <!UNRESOLVED_REFERENCE!>FromCompanionAlpha<!>? = null
+    konst p: <!UNRESOLVED_REFERENCE!>FromCompanionBeta<!>? = null
+    konst q: <!UNRESOLVED_REFERENCE!>FromCompanionGamma<!>? = null
 
     // DEPRECATED: Classifiers from supertypes of our own companion
-    val r: <!UNRESOLVED_REFERENCE!>FromDelta<!>? = null
+    konst r: <!UNRESOLVED_REFERENCE!>FromDelta<!>? = null
 }

@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.org.objectweb.asm.Type
 
 internal object KaptTypeMapper {
-    private val configuration = object : TypeMappingConfiguration<Type> {
+    private konst configuration = object : TypeMappingConfiguration<Type> {
         override fun commonSupertype(types: Collection<KotlinType>): KotlinType =
             CommonSupertypes.commonSupertype(types)
 

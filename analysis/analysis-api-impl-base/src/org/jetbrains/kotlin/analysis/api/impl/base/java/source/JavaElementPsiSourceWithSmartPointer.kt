@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementPsiSource
 import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementSourceFactory
 
 internal class JavaElementPsiSourceWithSmartPointer<PSI : PsiElement>(
-    val pointer: SmartPsiElementPointer<PSI>,
-    override val factory: JavaElementSourceFactory,
+    konst pointer: SmartPsiElementPointer<PSI>,
+    override konst factory: JavaElementSourceFactory,
 ) : JavaElementPsiSource<PSI>() {
 
-    override val psi: PSI
+    override konst psi: PSI
         get() {
             return pointer.element
                 ?: error("Cannot restore a PsiElement from $pointer")

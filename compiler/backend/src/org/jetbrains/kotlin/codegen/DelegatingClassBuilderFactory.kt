@@ -26,7 +26,7 @@ import org.jetbrains.org.objectweb.asm.FieldVisitor
 import org.jetbrains.org.objectweb.asm.MethodVisitor
 
 abstract class DelegatingClassBuilderFactory(
-        protected val delegate: ClassBuilderFactory
+        protected konst delegate: ClassBuilderFactory
 
 ) : ClassBuilderFactory by delegate {
 

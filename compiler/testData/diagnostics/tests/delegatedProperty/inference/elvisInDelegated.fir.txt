@@ -4,7 +4,7 @@ FILE: elvisInDelegated.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val t: R|D| = R|<local>/t|
+        public final konst t: R|D| = R|<local>/t|
             public get(): R|D|
 
         public final operator fun component1(): R|D|
@@ -19,5 +19,5 @@ FILE: elvisInDelegated.kt
         ^getElement (this@R|/getElement|.R|SubstitutionOverride<kotlin/collections/List.get: R|Ref<*>|>|(R|<local>/i|) as R|Ref<E>|)
     }
     public final fun test(list: R|kotlin/collections/List<Ref<*>>|): R|kotlin/Unit| {
-        lval data: R|kotlin/String|by R|<local>/list|.R|/getElement|<R|kotlin/String|>(Int(0)) ?: R|kotlin/error|(String())
+        lkonst data: R|kotlin/String|by R|<local>/list|.R|/getElement|<R|kotlin/String|>(Int(0)) ?: R|kotlin/error|(String())
     }

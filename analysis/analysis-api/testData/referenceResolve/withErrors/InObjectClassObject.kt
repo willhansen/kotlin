@@ -4,7 +4,7 @@ class A
 
 object b {
     class object {
-        val x = <caret>A()
+        konst x = <caret>A()
     }
 }
 

@@ -8,8 +8,8 @@
 public external interface I {
     companion object
 }
-public inline val I.Companion.O: I get() = "O".asDynamic().unsafeCast<I>()
-public inline val I.Companion.K: I get() = "K".asDynamic().unsafeCast<I>()
+public inline konst I.Companion.O: I get() = "O".asDynamic().unsafeCast<I>()
+public inline konst I.Companion.K: I get() = "K".asDynamic().unsafeCast<I>()
 
 fun box(): String {
     if (I.O != I.O) return "Fail 1"

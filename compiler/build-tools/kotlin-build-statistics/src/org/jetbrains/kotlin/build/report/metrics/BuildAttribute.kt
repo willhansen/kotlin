@@ -11,11 +11,11 @@ enum class BuildAttributeKind : Serializable {
     REBUILD_REASON;
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
-enum class BuildAttribute(val kind: BuildAttributeKind, val readableString: String) : Serializable {
+enum class BuildAttribute(konst kind: BuildAttributeKind, konst readableString: String) : Serializable {
     NO_BUILD_HISTORY(BuildAttributeKind.REBUILD_REASON, "Build history file not found"),
     NO_ABI_SNAPSHOT(BuildAttributeKind.REBUILD_REASON, "ABI snapshot not found"),
     NO_LAST_BUILD_INFO(BuildAttributeKind.REBUILD_REASON, "Last build info not found"),
@@ -39,6 +39,6 @@ enum class BuildAttribute(val kind: BuildAttributeKind, val readableString: Stri
     IC_IS_NOT_ENABLED(BuildAttributeKind.REBUILD_REASON, "Incremental compilation is not enabled");
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

@@ -7,7 +7,7 @@ package codegen.function.defaults5
 
 import kotlin.test.*
 
-class TestClass(val x: Int) {
+class TestClass(konst x: Int) {
     fun foo(y: Int = x) {
         println(y)
     }

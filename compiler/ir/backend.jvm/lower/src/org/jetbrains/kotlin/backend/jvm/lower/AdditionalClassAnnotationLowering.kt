@@ -30,16 +30,16 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.org.objectweb.asm.Type
 import java.lang.annotation.ElementType
 
-internal val additionalClassAnnotationPhase = makeIrFilePhase(
+internal konst additionalClassAnnotationPhase = makeIrFilePhase(
     ::AdditionalClassAnnotationLowering,
     name = "AdditionalClassAnnotation",
     description = "Add Documented, Retention, Target, Repeatable annotations to annotation classes",
     prerequisite = setOf(repeatedAnnotationPhase)
 )
 
-private class AdditionalClassAnnotationLowering(private val context: JvmBackendContext) : ClassLoweringPass {
-    private val symbols = context.ir.symbols.javaAnnotations
-    private val noNewJavaAnnotationTargets =
+private class AdditionalClassAnnotationLowering(private konst context: JvmBackendContext) : ClassLoweringPass {
+    private konst symbols = context.ir.symbols.javaAnnotations
+    private konst noNewJavaAnnotationTargets =
         context.state.noNewJavaAnnotationTargets || !context.isCompilingAgainstJdk8OrLater
 
     override fun lower(irClass: IrClass) {
@@ -64,8 +64,8 @@ private class AdditionalClassAnnotationLowering(private val context: JvmBackendC
 
     private fun generateRetentionAnnotation(irClass: IrClass) {
         if (irClass.hasAnnotation(JvmAnnotationNames.RETENTION_ANNOTATION)) return
-        val kotlinRetentionPolicy = irClass.getAnnotationRetention()
-        val javaRetentionPolicy = kotlinRetentionPolicy?.let { symbols.annotationRetentionMap[it] } ?: symbols.rpRuntime
+        konst kotlinRetentionPolicy = irClass.getAnnotationRetention()
+        konst javaRetentionPolicy = kotlinRetentionPolicy?.let { symbols.annotationRetentionMap[it] } ?: symbols.rpRuntime
 
         irClass.annotations +=
             IrConstructorCallImpl.fromSymbolOwner(
@@ -83,12 +83,12 @@ private class AdditionalClassAnnotationLowering(private val context: JvmBackendC
     private fun generateTargetAnnotation(irClass: IrClass) {
         if (irClass.hasAnnotation(JvmAnnotationNames.TARGET_ANNOTATION)) return
 
-        val targets = irClass.applicableTargetSet() ?: return
-        val javaTargets = targets.mapNotNullTo(HashSet(), ::mapTarget).sortedBy {
-            ElementType.valueOf(it.symbol.owner.name.asString())
+        konst targets = irClass.applicableTargetSet() ?: return
+        konst javaTargets = targets.mapNotNullTo(HashSet(), ::mapTarget).sortedBy {
+            ElementType.konstueOf(it.symbol.owner.name.asString())
         }
 
-        val vararg = IrVarargImpl(
+        konst vararg = IrVarargImpl(
             UNDEFINED_OFFSET, UNDEFINED_OFFSET,
             type = context.irBuiltIns.arrayClass.typeWith(symbols.elementTypeEnum.defaultType),
             varargElementType = symbols.elementTypeEnum.defaultType
@@ -121,11 +121,11 @@ private class AdditionalClassAnnotationLowering(private val context: JvmBackendC
             irClass.hasAnnotation(JvmAnnotationNames.REPEATABLE_ANNOTATION)
         ) return
 
-        val containerClass =
+        konst containerClass =
             irClass.declarations.singleOrNull {
                 it is IrClass && it.name.asString() == JvmAbi.REPEATABLE_ANNOTATION_CONTAINER_NAME
             } as IrClass? ?: error("Repeatable annotation class should have a container generated: ${irClass.render()}")
-        val containerReference = IrClassReferenceImpl(
+        konst containerReference = IrClassReferenceImpl(
             UNDEFINED_OFFSET, UNDEFINED_OFFSET, context.irBuiltIns.kClassClass.typeWith(containerClass.defaultType),
             containerClass.symbol, containerClass.defaultType
         )
@@ -138,20 +138,20 @@ private class AdditionalClassAnnotationLowering(private val context: JvmBackendC
     }
 
     private fun IrConstructorCall.getValueArgument(name: Name): IrExpression? {
-        val index = symbol.owner.valueParameters.find { it.name == name }?.index ?: return null
+        konst index = symbol.owner.konstueParameters.find { it.name == name }?.index ?: return null
         return getValueArgument(index)
     }
 
     private fun IrClass.applicableTargetSet(): Set<KotlinTarget>? {
-        val targetEntry = getAnnotation(StandardNames.FqNames.target) ?: return null
+        konst targetEntry = getAnnotation(StandardNames.FqNames.target) ?: return null
         return loadAnnotationTargets(targetEntry)
     }
 
     private fun loadAnnotationTargets(targetEntry: IrConstructorCall): Set<KotlinTarget>? {
-        val valueArgument = targetEntry.getValueArgument(Name.identifier(Target::allowedTargets.name))
+        konst konstueArgument = targetEntry.getValueArgument(Name.identifier(Target::allowedTargets.name))
                 as? IrVararg ?: return null
-        return valueArgument.elements.filterIsInstance<IrGetEnumValue>().mapNotNull {
-            KotlinTarget.valueOrNull(it.symbol.owner.name.asString())
+        return konstueArgument.elements.filterIsInstance<IrGetEnumValue>().mapNotNull {
+            KotlinTarget.konstueOrNull(it.symbol.owner.name.asString())
         }.toSet()
     }
 }

@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test two nullable functions`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget("a", "fun x(): Any? = Unit")
             simpleSingleSourceTarget("b", "fun x(): Any? = Unit")
@@ -21,7 +21,7 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
     }
 
     fun `test two non-nullable functions`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget("a", "fun x(): Any = Unit")
             simpleSingleSourceTarget("b", "fun x(): Any = Unit")
@@ -31,7 +31,7 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
     }
 
     fun `test nullable and non-nullable function`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget("a", "fun x(): Any? = null")
             simpleSingleSourceTarget("b", "fun x(): Any = null!!")
@@ -41,47 +41,47 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
     }
 
     fun `test two nullable properties`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
-            simpleSingleSourceTarget("a", "val x: Any? = Unit")
-            simpleSingleSourceTarget("b", "val x: Any? = Unit")
+            simpleSingleSourceTarget("a", "konst x: Any? = Unit")
+            simpleSingleSourceTarget("b", "konst x: Any? = Unit")
         }
 
-        result.assertCommonized("(a, b)", "expect val x: Any?")
+        result.assertCommonized("(a, b)", "expect konst x: Any?")
     }
 
     fun `test two non-nullable properties`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
-            simpleSingleSourceTarget("a", "val x: Any = Unit")
-            simpleSingleSourceTarget("b", "val x: Any = Unit")
+            simpleSingleSourceTarget("a", "konst x: Any = Unit")
+            simpleSingleSourceTarget("b", "konst x: Any = Unit")
         }
 
-        result.assertCommonized("(a, b)", "expect val x: Any")
+        result.assertCommonized("(a, b)", "expect konst x: Any")
     }
 
     fun `test nullable and non-nullable - property`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
-            simpleSingleSourceTarget("a", "val x: Any? = null")
-            simpleSingleSourceTarget("b", "val x: Any = Unit")
+            simpleSingleSourceTarget("a", "konst x: Any? = null")
+            simpleSingleSourceTarget("b", "konst x: Any = Unit")
         }
 
-        result.assertCommonized("(a, b)", "expect val x: Any?")
+        result.assertCommonized("(a, b)", "expect konst x: Any?")
     }
 
-    fun `test nullable and non-nullable - var - val property`() {
-        val result = commonize {
+    fun `test nullable and non-nullable - var - konst property`() {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget("a", "var x: Any? = null")
-            simpleSingleSourceTarget("b", "val x: Any = Unit")
+            simpleSingleSourceTarget("b", "konst x: Any = Unit")
         }
 
         result.assertCommonized("(a, b)", "")
     }
 
     fun `test nullable and non-nullable - var var property`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget("a", "var x: Any? = null")
             simpleSingleSourceTarget("b", "var x: Any = Unit")
@@ -91,7 +91,7 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
     }
     
     fun `test different nullability typealias  - function`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -117,7 +117,7 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
     }
 
     fun `test different nullability typealias chain - function`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -151,14 +151,14 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
     }
 
     fun `test different nullability typealias chain - property`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                     typealias Z = Any
                     typealias Y = Z?
                     typealias X = Y
-                    val x: X = Unit
+                    konst x: X = Unit
                 """.trimIndent()
             )
 
@@ -167,7 +167,7 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
                     typealias Z = Any
                     typealias Y = Z
                     typealias X = Y
-                    val x: X = Unit
+                    konst x: X = Unit
                 """.trimIndent()
             )
         }
@@ -178,24 +178,24 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
                 expect class Y
                 expect class X
                 // Still cary nullability mark here to be more safe!
-                expect val x: X?
+                expect konst x: X?
             """.trimIndent()
         )
     }
 
 
     fun `test property - hierarchically`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
-            "a" withSource "val x: Any? = null"
-            "b" withSource "val x: Any = Unit"
-            "c" withSource "val x: Any = Unit"
-            "d" withSource "val x: Any = Unit"
+            "a" withSource "konst x: Any? = null"
+            "b" withSource "konst x: Any = Unit"
+            "c" withSource "konst x: Any = Unit"
+            "d" withSource "konst x: Any = Unit"
         }
 
-        result.assertCommonized("(a, b)", "expect val x: Any?")
-        result.assertCommonized("(c, d)", "expect val x: Any")
-        result.assertCommonized("(a, b, c, d)", "expect val x: Any?")
+        result.assertCommonized("(a, b)", "expect konst x: Any?")
+        result.assertCommonized("(c, d)", "expect konst x: Any")
+        result.assertCommonized("(a, b, c, d)", "expect konst x: Any?")
     }
 
 
@@ -205,13 +205,13 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
      */
 
     fun `test member - property - hierarchically`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
 
             simpleSingleSourceTarget(
                 "a", """
                 class X {
-                    val x: Any? = Unit
+                    konst x: Any? = Unit
                 }
             """.trimIndent()
             )
@@ -219,7 +219,7 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
             simpleSingleSourceTarget(
                 "b", """
                 class X {
-                    val x: Any = Unit
+                    konst x: Any = Unit
                 }
             """.trimIndent()
             )
@@ -227,7 +227,7 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
             simpleSingleSourceTarget(
                 "c", """
                 class X {
-                    val x: Any = Unit
+                    konst x: Any = Unit
                 }
             """.trimIndent()
             )
@@ -235,19 +235,19 @@ class ReturnTypeNullabilityCommonizationTest : AbstractInlineSourcesCommonizatio
             simpleSingleSourceTarget(
                 "d", """
                 class X {
-                    val x: Any = Unit
+                    konst x: Any = Unit
                 }
             """.trimIndent()
             )
         }
 
         result.assertCommonized("(a, b)", """expect class X()""")
-        result.assertCommonized("(c, d)", """expect class X() { val x: Any }""")
+        result.assertCommonized("(c, d)", """expect class X() { konst x: Any }""")
         result.assertCommonized("(a, b, c, d)", """expect class X()""")
     }
 
     fun `test member - function - hierarchically`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
 
             simpleSingleSourceTarget(

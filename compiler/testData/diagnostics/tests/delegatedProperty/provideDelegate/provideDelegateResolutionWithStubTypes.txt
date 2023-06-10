@@ -1,6 +1,6 @@
 package
 
-public val test: kotlin.String
+public konst test: kotlin.String
 public fun </*0*/ T> materializeDelegate(): Delegate<T>
 public operator fun </*0*/ K> K.provideDelegate(/*0*/ receiver: kotlin.Any?, /*1*/ property: kotlin.reflect.KProperty<*>): K
 

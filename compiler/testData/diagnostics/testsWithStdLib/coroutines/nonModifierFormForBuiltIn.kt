@@ -28,7 +28,7 @@ fun bar() {
         println()
     }
 
-    val w: (suspend () -> Int) -> Any? = ::<!NON_MODIFIER_FORM_FOR_BUILT_IN_SUSPEND!>suspend<!>
+    konst w: (suspend () -> Int) -> Any? = ::<!NON_MODIFIER_FORM_FOR_BUILT_IN_SUSPEND!>suspend<!>
 }
 
 @Target(AnnotationTarget.EXPRESSION)

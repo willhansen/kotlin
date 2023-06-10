@@ -9,8 +9,8 @@ plugins {
     id("swift-benchmarking")
 }
 
-val toolsPath = "../../tools"
-val targetExtension = "Macos"
+konst toolsPath = "../../tools"
+konst targetExtension = "Macos"
 
 project.extra["platformManager"] = PlatformManager(projectDir.parentFile.parentFile.absolutePath, false)
 swiftBenchmark {

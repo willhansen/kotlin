@@ -6,7 +6,7 @@ KtFunctionLikeSignature:
   receiverType = null
   returnType = kotlin.collections.Map<kotlin.Int, kotlin.collections.Map<Y, kotlin.String>>
   symbol = /Outer.A.foo(<dispatch receiver>: Outer.A<X, O>, x: X, y: Y): kotlin.collections.Map<X, kotlin.collections.Map<Y, O>>
-  valueParameters = [
+  konstueParameters = [
     KtVariableLikeSignature:
       name = x
       receiverType = null
@@ -25,13 +25,13 @@ KtVariableLikeSignature:
   name = map
   receiverType = null
   returnType = kotlin.collections.Map<kotlin.Int, kotlin.String>
-  symbol = val map: kotlin.collections.Map<X, O>
+  symbol = konst map: kotlin.collections.Map<X, O>
   callableIdIfNonLocal = /Outer.A.map
 KtFunctionLikeSignature:
   receiverType = null
   returnType = kotlin.Boolean
   symbol = kotlin/Any.equals(<dispatch receiver>: kotlin.Any, other: kotlin.Any?): kotlin.Boolean
-  valueParameters = [
+  konstueParameters = [
     KtVariableLikeSignature:
       name = other
       receiverType = null
@@ -44,13 +44,13 @@ KtFunctionLikeSignature:
   receiverType = null
   returnType = kotlin.Int
   symbol = kotlin/Any.hashCode(<dispatch receiver>: kotlin.Any): kotlin.Int
-  valueParameters = []
+  konstueParameters = []
   callableIdIfNonLocal = kotlin/Any.hashCode
 KtFunctionLikeSignature:
   receiverType = null
   returnType = kotlin.String
   symbol = kotlin/Any.toString(<dispatch receiver>: kotlin.Any): kotlin.String
-  valueParameters = []
+  konstueParameters = []
   callableIdIfNonLocal = kotlin/Any.toString
 
 
@@ -97,7 +97,7 @@ KtFunctionSymbol:
   typeParameters: [
     KtTypeParameterSymbol(Y)
   ]
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -190,7 +190,7 @@ KtKotlinPropertySymbol:
       type: kotlin/collections/Map<X, O>
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
   hasBackingField: true
   hasGetter: true
@@ -248,7 +248,7 @@ KtFunctionSymbol:
     type: kotlin/Boolean
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -296,7 +296,7 @@ KtFunctionSymbol:
     type: kotlin/Int
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
 KtFunctionSymbol:
   annotationsList: []
@@ -323,6 +323,6 @@ KtFunctionSymbol:
     type: kotlin/String
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
 

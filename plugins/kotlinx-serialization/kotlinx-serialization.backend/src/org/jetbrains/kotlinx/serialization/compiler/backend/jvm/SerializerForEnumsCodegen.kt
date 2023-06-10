@@ -15,8 +15,8 @@ class SerializerForEnumsCodegen(
 ) : SerializerCodegenImpl(codegen, serializableClass, null) {
     override fun generateSave(function: FunctionDescriptor) = codegen.generateMethod(function) { _, _ ->
         // fun save(output: KOutput, obj : T)
-        val outputVar = 1
-        val objVar = 2
+        konst outputVar = 1
+        konst objVar = 2
         // output.encodeEnum(descriptor, ordinal)
         load(outputVar, encoderType)
         stackSerialClassDesc(null)
@@ -29,10 +29,10 @@ class SerializerForEnumsCodegen(
 
     override fun generateLoad(function: FunctionDescriptor) = codegen.generateMethod(function) { _, _ ->
         // fun load(input: KInput): T
-        val inputVar = 1
-        val serializableArrayType = Type.getType("[L${serializableAsmType.internalName};")
-        // T.values()
-        invokestatic(serializableAsmType.internalName, "values", "()${serializableArrayType.descriptor}", false)
+        konst inputVar = 1
+        konst serializableArrayType = Type.getType("[L${serializableAsmType.internalName};")
+        // T.konstues()
+        invokestatic(serializableAsmType.internalName, "konstues", "()${serializableArrayType.descriptor}", false)
         // input.decodeEnum(descriptor)
         load(inputVar, decoderType)
         stackSerialClassDesc(null)
@@ -52,11 +52,11 @@ class SerializerForEnumsCodegen(
     }
 
     override fun ExpressionCodegen.addElementsContentToDescriptor(descriptorVar: Int) = with(v) {
-        val enumEntries = serializableDescriptor.enumEntries()
+        konst enumEntries = serializableDescriptor.enumEntries()
         for (entry in enumEntries) {
             load(descriptorVar, descImplType)
             // regular .serialName() produces fqName here, which is kinda inconvenient for enum entry
-            val serialName = entry.annotations.serialNameValue ?: entry.name.toString()
+            konst serialName = entry.annotations.serialNameValue ?: entry.name.toString()
             aconst(serialName)
             iconst(0)
             invokevirtual(descImplType.internalName, CallingConventions.addElement, "(Ljava/lang/String;Z)V", false)

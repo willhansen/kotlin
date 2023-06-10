@@ -9,7 +9,7 @@ public final class Owner</*0*/ in T> {
 
     public final inner class Inner</*0*/ U : T> /*captured type parameters: /*1*/ in T*/ {
         public constructor Inner</*0*/ U : T>(/*0*/ u: U)
-        public final val u: U
+        public final konst u: U
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun getT(): U
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

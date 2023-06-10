@@ -20,7 +20,7 @@ interface I<P> {}
 
 // FILE: test.kt
 fun test() {
-    val t = X.E.t
+    konst t = X.E.t
     t
     t.id // should be OK
 }

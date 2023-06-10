@@ -5,7 +5,7 @@
 import kotlin.test.assertEquals
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val x: String)
+konstue class S(konst x: String)
 
 interface IFoo<T> {
     fun memberFun(s1: S, s2: String): String
@@ -28,7 +28,7 @@ object FooImpl : IFoo<S> {
 class Test : IFoo<S> by FooImpl
 
 fun box(): String {
-    val test = Test()
+    konst test = Test()
 
     assertEquals("OK", test.memberFun(S("O"), "K"))
     assertEquals("OK", test.memberFunT(S("O"), "K"))

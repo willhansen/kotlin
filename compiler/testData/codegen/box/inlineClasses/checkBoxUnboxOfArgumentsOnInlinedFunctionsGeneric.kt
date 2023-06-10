@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T: Int>(val value: T)
+konstue class Foo<T: Int>(konst konstue: T)
 
 fun <T> id(x: T): T = x
 inline fun <T> inlinedId(x: T): T = x
@@ -17,12 +17,12 @@ fun <T: Int> test(f: Foo<T>) {
 
     f.inlinedIdExtension() // box
 
-    val a = inlinedId(f).idExtension() // box unbox
-    val b = inlinedId(f).inlinedIdExtension() // box unbox
+    konst a = inlinedId(f).idExtension() // box unbox
+    konst b = inlinedId(f).inlinedIdExtension() // box unbox
 }
 
 fun box(): String {
-    val f = Foo(11)
+    konst f = Foo(11)
 
     id(inlinedId(f))
     inlinedId(id(f))
@@ -32,14 +32,14 @@ fun box(): String {
 
     f.inlinedIdExtension() // box
 
-    val a = inlinedId(f).idExtension() // box unbox
-    val b = inlinedId(f).inlinedIdExtension() // box unbox
+    konst a = inlinedId(f).idExtension() // box unbox
+    konst b = inlinedId(f).inlinedIdExtension() // box unbox
 
-    if (a.value != 11) return "fail 1"
-    if (b.value != 11) return "fail 2"
+    if (a.konstue != 11) return "fail 1"
+    if (b.konstue != 11) return "fail 2"
 
-    if (inlinedId(Foo(10)).value != 10) return "fail 3"
-    if (Foo(20).inlinedIdExtension().value != 20) return "fail 4"
+    if (inlinedId(Foo(10)).konstue != 10) return "fail 3"
+    if (Foo(20).inlinedIdExtension().konstue != 20) return "fail 4"
 
     return "OK"
 }

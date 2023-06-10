@@ -6,7 +6,7 @@ import yummy.sel
 import yummy.yummy
 
 fun nativeMain() {
-    val y = cValue<Y> {
+    konst y = cValue<Y> {
         n = 42
     }
     yummy(y)

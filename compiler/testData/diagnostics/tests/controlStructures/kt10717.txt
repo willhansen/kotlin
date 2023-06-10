@@ -1,6 +1,6 @@
 package
 
-public val foo: kotlin.Int
+public konst foo: kotlin.Int
 public fun test(): kotlin.Int
 public fun test1(): kotlin.Nothing
 public fun test2(): kotlin.Nothing

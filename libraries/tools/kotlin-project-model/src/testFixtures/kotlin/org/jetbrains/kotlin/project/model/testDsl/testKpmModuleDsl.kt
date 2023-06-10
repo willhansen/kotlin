@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.project.model.infra.TestKpmModule
 import org.jetbrains.kotlin.project.model.infra.TestKpmVariant
 
 fun TestKpmModule.fragment(name: String, applyDefaults: Boolean = true, configure: TestKpmFragment.() -> Unit = { }): TestKpmFragment {
-    val result = fragments.getOrPut(name) {
-        val fragment = TestKpmFragment(this, name)
+    konst result = fragments.getOrPut(name) {
+        konst fragment = TestKpmFragment(this, name)
         fragment
     }
     if (applyDefaults) result.applyDefaults()
@@ -29,8 +29,8 @@ fun TestKpmModule.variant(
     applyDefaults: Boolean = true,
     configure: TestKpmVariant.() -> Unit = { }
 ): TestKpmVariant {
-    val result = fragments.getOrPut(name) {
-        val variant = TestKpmVariant(this, name)
+    konst result = fragments.getOrPut(name) {
+        konst variant = TestKpmVariant(this, name)
         variant.variantAttributes[KotlinPlatformTypeAttribute] = platform
         variant
     } as TestKpmVariant
@@ -49,4 +49,4 @@ fun TestKpmModule.depends(otherProject: TestKpmModuleContainer): TestKpmModule {
     return this
 }
 
-val TestKpmModule.common: TestKpmFragment get() = fragmentNamed("common")
+konst TestKpmModule.common: TestKpmFragment get() = fragmentNamed("common")

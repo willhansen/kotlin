@@ -1,15 +1,15 @@
 package test
 
-const val CONST = "foo"
+const konst CONST = "foo"
 
 class Klass {
     companion object {
-        private val CHANGED = "old"
-        const public val UNCHANGED = 100
+        private konst CHANGED = "old"
+        const public konst UNCHANGED = 100
     }
 }
 
 object Obj : Any() {
-    private val CHANGED = "old:Obj"
-    public val UNCHANGED = 200
+    private konst CHANGED = "old:Obj"
+    public konst UNCHANGED = 200
 }

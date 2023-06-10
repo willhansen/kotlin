@@ -33,13 +33,13 @@ object CommonSMAPTestUtil {
                     if (descriptor != JvmAnnotationNames.SOURCE_DEBUG_EXTENSION_DESC) return super.visitAnnotation(descriptor, visible)
                     return object : AnnotationVisitor(Opcodes.API_VERSION) {
                         override fun visitArray(name: String): AnnotationVisitor? {
-                            if (name != "value") return super.visitArray(name)
+                            if (name != "konstue") return super.visitArray(name)
                             check(sdeAnnotationValue == null) { outputFile.relativePath }
                             return object : AnnotationVisitor(Opcodes.API_VERSION) {
-                                val result = mutableListOf<String>()
+                                konst result = mutableListOf<String>()
 
-                                override fun visit(name: String?, value: Any?) {
-                                    result.add(value as String)
+                                override fun visit(name: String?, konstue: Any?) {
+                                    result.add(konstue as String)
                                 }
 
                                 override fun visitEnd() {
@@ -67,7 +67,7 @@ object CommonSMAPTestUtil {
             error("Missing @SourceDebugExtension annotation for a class with SMAP: $relativePath")
         }
         error(
-            "SMAP and @SourceDebugExtension value differs for $relativePath.\n" +
+            "SMAP and @SourceDebugExtension konstue differs for $relativePath.\n" +
                     "SMAP:\n===\n$debugInfo\n===\n@SourceDebugExtension:\n===\n$sdeAnnotationValue\n"
         )
     }
@@ -76,22 +76,22 @@ object CommonSMAPTestUtil {
         if (compiledSmap == null) return
 
         compiledSmap.mapNotNull(SMAPAndFile::smap).forEach { smapString ->
-            val smap = SMAPParser.parseOrNull(smapString) ?: throw AssertionError("bad SMAP: $smapString")
-            val conflictingLines = smap.fileMappings.flatMap { fileMapping ->
+            konst smap = SMAPParser.parseOrNull(smapString) ?: throw AssertionError("bad SMAP: $smapString")
+            konst conflictingLines = smap.fileMappings.flatMap { fileMapping ->
                 fileMapping.lineMappings.flatMap { lineMapping: RangeMapping ->
                     lineMapping.toRange.keysToMap { lineMapping }.entries
                 }
-            }.groupBy { it.key }.entries.filter { it.value.size != 1 }
+            }.groupBy { it.key }.entries.filter { it.konstue.size != 1 }
 
             assertions.assertTrue(conflictingLines.isEmpty()) {
                 conflictingLines.joinToString(separator = "\n") {
-                    "Conflicting mapping for line ${it.key} in ${it.value.joinToString(transform = Any::toString)}"
+                    "Conflicting mapping for line ${it.key} in ${it.konstue.joinToString(transform = Any::toString)}"
                 }
             }
         }
     }
 
-    class SMAPAndFile(val smap: String?, val sourceFile: String, val outputFile: String) {
+    class SMAPAndFile(konst smap: String?, konst sourceFile: String, konst outputFile: String) {
         constructor(smap: String?, sourceFile: File, outputFile: String) : this(smap, getPath(sourceFile), outputFile)
 
         companion object {

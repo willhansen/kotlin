@@ -1,12 +1,12 @@
 @Retention(AnnotationRetention.RUNTIME)
 internal annotation class Ann(
-        val i: Int,
-        val s: Short,
-        val f: Float,
-        val d: Double,
-        val l: Long,
-        val b: Byte,
-        val bool: Boolean,
-        val c: Char,
-        val str: String
+        konst i: Int,
+        konst s: Short,
+        konst f: Float,
+        konst d: Double,
+        konst l: Long,
+        konst b: Byte,
+        konst bool: Boolean,
+        konst c: Char,
+        konst str: String
 )

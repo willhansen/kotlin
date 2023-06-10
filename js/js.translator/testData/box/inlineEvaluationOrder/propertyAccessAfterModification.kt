@@ -5,13 +5,13 @@ class A {
     var x = 23
 }
 
-inline fun bar(value: Int, a: A): Int {
+inline fun bar(konstue: Int, a: A): Int {
     a.x = 42
-    return value
+    return konstue
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     assertEquals(23, bar(a.x, a))
     return "OK"
 }

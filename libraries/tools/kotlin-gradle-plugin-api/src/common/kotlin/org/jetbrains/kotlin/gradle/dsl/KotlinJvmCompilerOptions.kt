@@ -9,31 +9,31 @@ interface KotlinJvmCompilerOptions : org.jetbrains.kotlin.gradle.dsl.KotlinCommo
 
     /**
      * Generate metadata for Java 1.8 reflection on method parameters
-     * Default value: false
+     * Default konstue: false
      */
     @get:org.gradle.api.tasks.Input
-    val javaParameters: org.gradle.api.provider.Property<kotlin.Boolean>
+    konst javaParameters: org.gradle.api.provider.Property<kotlin.Boolean>
 
     /**
      * Target version of the generated JVM bytecode (1.8, 9, 10, ..., 20), default is 1.8
-     * Possible values: "1.8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
-     * Default value: JvmTarget.DEFAULT
+     * Possible konstues: "1.8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
+     * Default konstue: JvmTarget.DEFAULT
      */
     @get:org.gradle.api.tasks.Input
-    val jvmTarget: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JvmTarget>
+    konst jvmTarget: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.JvmTarget>
 
     /**
      * Name of the generated .kotlin_module file
-     * Default value: null
+     * Default konstue: null
      */
     @get:org.gradle.api.tasks.Optional
     @get:org.gradle.api.tasks.Input
-    val moduleName: org.gradle.api.provider.Property<kotlin.String>
+    konst moduleName: org.gradle.api.provider.Property<kotlin.String>
 
     /**
      * Don't automatically include the Java runtime into the classpath
-     * Default value: false
+     * Default konstue: false
      */
     @get:org.gradle.api.tasks.Input
-    val noJdk: org.gradle.api.provider.Property<kotlin.Boolean>
+    konst noJdk: org.gradle.api.provider.Property<kotlin.Boolean>
 }

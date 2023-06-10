@@ -30,7 +30,7 @@ public final class IrType extends
   private IrType(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -120,10 +120,10 @@ public final class IrType extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -141,7 +141,7 @@ public final class IrType extends
     public IrType parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrType(input, extensionRegistry);
     }
   };
@@ -162,12 +162,12 @@ public final class IrType extends
     DNN(4),
     SIMPLE(5),
     KIND_NOT_SET(0);
-    private int value = 0;
-    private KindCase(int value) {
-      this.value = value;
+    private int konstue = 0;
+    private KindCase(int konstue) {
+      this.konstue = konstue;
     }
-    public static KindCase valueOf(int value) {
-      switch (value) {
+    public static KindCase konstueOf(int konstue) {
+      switch (konstue) {
         case 1: return LEGACYSIMPLE;
         case 2: return DYNAMIC;
         case 3: return ERROR;
@@ -179,13 +179,13 @@ public final class IrType extends
       }
     }
     public int getNumber() {
-      return this.value;
+      return this.konstue;
     }
   };
 
   public KindCase
   getKindCase() {
-    return KindCase.valueOf(
+    return KindCase.konstueOf(
         kindCase_);
   }
 
@@ -371,23 +371,23 @@ public final class IrType extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrType parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrType parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrType parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrType parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrType parseFrom(java.io.InputStream input)
@@ -563,7 +563,7 @@ public final class IrType extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrType parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrType) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -577,7 +577,7 @@ public final class IrType extends
     private java.lang.Object kind_;
     public KindCase
         getKindCase() {
-      return KindCase.valueOf(
+      return KindCase.konstueOf(
           kindCase_);
     }
 
@@ -607,11 +607,11 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy legacySimple = 1;</code>
      */
-    public Builder setLegacySimple(org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy value) {
-      if (value == null) {
+    public Builder setLegacySimple(org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      kind_ = value;
+      kind_ = konstue;
 
       kindCase_ = 1;
       return this;
@@ -629,13 +629,13 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy legacySimple = 1;</code>
      */
-    public Builder mergeLegacySimple(org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy value) {
+    public Builder mergeLegacySimple(org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy konstue) {
       if (kindCase_ == 1 &&
           kind_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy.getDefaultInstance()) {
         kind_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy) kind_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        kind_ = value;
+        kind_ = konstue;
       }
 
       kindCase_ = 1;
@@ -671,11 +671,11 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType dynamic = 2;</code>
      */
-    public Builder setDynamic(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType value) {
-      if (value == null) {
+    public Builder setDynamic(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      kind_ = value;
+      kind_ = konstue;
 
       kindCase_ = 2;
       return this;
@@ -693,13 +693,13 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType dynamic = 2;</code>
      */
-    public Builder mergeDynamic(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType value) {
+    public Builder mergeDynamic(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType konstue) {
       if (kindCase_ == 2 &&
           kind_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType.getDefaultInstance()) {
         kind_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicType) kind_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        kind_ = value;
+        kind_ = konstue;
       }
 
       kindCase_ = 2;
@@ -735,11 +735,11 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType error = 3;</code>
      */
-    public Builder setError(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType value) {
-      if (value == null) {
+    public Builder setError(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      kind_ = value;
+      kind_ = konstue;
 
       kindCase_ = 3;
       return this;
@@ -757,13 +757,13 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType error = 3;</code>
      */
-    public Builder mergeError(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType value) {
+    public Builder mergeError(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType konstue) {
       if (kindCase_ == 3 &&
           kind_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType.getDefaultInstance()) {
         kind_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType) kind_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        kind_ = value;
+        kind_ = konstue;
       }
 
       kindCase_ = 3;
@@ -799,11 +799,11 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType dnn = 4;</code>
      */
-    public Builder setDnn(org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType value) {
-      if (value == null) {
+    public Builder setDnn(org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      kind_ = value;
+      kind_ = konstue;
 
       kindCase_ = 4;
       return this;
@@ -821,13 +821,13 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType dnn = 4;</code>
      */
-    public Builder mergeDnn(org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType value) {
+    public Builder mergeDnn(org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType konstue) {
       if (kindCase_ == 4 &&
           kind_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType.getDefaultInstance()) {
         kind_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType) kind_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        kind_ = value;
+        kind_ = konstue;
       }
 
       kindCase_ = 4;
@@ -863,11 +863,11 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType simple = 5;</code>
      */
-    public Builder setSimple(org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType value) {
-      if (value == null) {
+    public Builder setSimple(org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      kind_ = value;
+      kind_ = konstue;
 
       kindCase_ = 5;
       return this;
@@ -885,13 +885,13 @@ public final class IrType extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType simple = 5;</code>
      */
-    public Builder mergeSimple(org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType value) {
+    public Builder mergeSimple(org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType konstue) {
       if (kindCase_ == 5 &&
           kind_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType.getDefaultInstance()) {
         kind_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleType) kind_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        kind_ = value;
+        kind_ = konstue;
       }
 
       kindCase_ = 5;

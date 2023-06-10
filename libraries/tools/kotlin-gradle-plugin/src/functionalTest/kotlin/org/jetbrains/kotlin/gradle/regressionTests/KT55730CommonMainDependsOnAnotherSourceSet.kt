@@ -18,19 +18,19 @@ import kotlin.test.assertEquals
 class KT55730CommonMainDependsOnAnotherSourceSet {
     @Test
     fun `legacy metadata compilation should have commonMain with its depends on closure`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableCompatibilityMetadataVariant()
             applyMultiplatformPlugin()
             kotlin {
-                val grandCommonMain = sourceSets.create("grandCommonMain")
-                val commonMain = sourceSets.getByName("commonMain")
+                konst grandCommonMain = sourceSets.create("grandCommonMain")
+                konst commonMain = sourceSets.getByName("commonMain")
                 commonMain.dependsOn(grandCommonMain)
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val actualSourceSets = project
+        konst actualSourceSets = project
             .multiplatformExtension
             .metadata()
             .compilations

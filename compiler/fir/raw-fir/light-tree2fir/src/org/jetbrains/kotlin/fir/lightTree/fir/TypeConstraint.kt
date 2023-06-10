@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.fir.expressions.FirAnnotation
 import org.jetbrains.kotlin.fir.types.FirTypeRef
 
 class TypeConstraint(
-    val annotations: List<FirAnnotation>,
-    val identifier: String,
-    val firTypeRef: FirTypeRef,
-    val source: KtSourceElement
+    konst annotations: List<FirAnnotation>,
+    konst identifier: String,
+    konst firTypeRef: FirTypeRef,
+    konst source: KtSourceElement
 )

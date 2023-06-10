@@ -78,7 +78,7 @@ public class Usage {
 
         int startLength = sb.length();
         sb.append("  ");
-        sb.append(argument.value());
+        sb.append(argument.konstue());
 
         if (!argument.shortName().isEmpty()) {
             sb.append(" (");
@@ -86,9 +86,9 @@ public class Usage {
             sb.append(")");
         }
 
-        if (!argument.valueDescription().isEmpty()) {
+        if (!argument.konstueDescription().isEmpty()) {
             sb.append(ParseCommandLineArgumentsKt.isAdvanced(argument) ? "=" : " ");
-            sb.append(argument.valueDescription());
+            sb.append(argument.konstueDescription());
         }
 
         int margin = startLength + OPTION_NAME_PADDING_WIDTH - 1;

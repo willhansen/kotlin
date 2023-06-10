@@ -1,7 +1,7 @@
 interface A {
-    public val c: Int
+    public konst c: Int
 }
 
 interface B: A {
-    override protected private val c: Int
+    override protected private konst c: Int
 }

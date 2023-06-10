@@ -29,7 +29,7 @@ FILE fqName:<root> fileName:/kt28456a.kt
       CALL 'public final fun set (vararg i: kotlin.Int, v: kotlin.Int): kotlin.Unit declared in <root>' type=kotlin.Unit origin=EQ
         $receiver: GET_VAR 'a: <root>.A declared in <root>.testSimpleAssignment' type=<root>.A origin=null
         i: VARARG type=kotlin.IntArray varargElementType=kotlin.Int
-          CONST Int type=kotlin.Int value=1
-          CONST Int type=kotlin.Int value=2
-          CONST Int type=kotlin.Int value=3
-        v: CONST Int type=kotlin.Int value=0
+          CONST Int type=kotlin.Int konstue=1
+          CONST Int type=kotlin.Int konstue=2
+          CONST Int type=kotlin.Int konstue=3
+        v: CONST Int type=kotlin.Int konstue=0

@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.fir.declarations.utils.isInterface
 
 object FirAnonymousInitializerInInterfaceChecker : FirAnonymousInitializerChecker() {
     override fun check(declaration: FirAnonymousInitializer, context: CheckerContext, reporter: DiagnosticReporter) {
-        val clazz = context.findClosestClassOrObject() ?: return
+        konst clazz = context.findClosestClassOrObject() ?: return
         if (clazz.isInterface) {
             reporter.reportOn(declaration.source, FirErrors.ANONYMOUS_INITIALIZER_IN_INTERFACE, context)
         }

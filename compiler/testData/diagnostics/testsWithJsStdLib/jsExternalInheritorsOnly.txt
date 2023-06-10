@@ -2,8 +2,8 @@ package
 
 public final class ClassXY : ExternalInterfaceX {
     public constructor ClassXY()
-    public open override /*1*/ val x: kotlin.String = "X"
-    public final val y: kotlin.String = "Y"
+    public open override /*1*/ konst x: kotlin.String = "X"
+    public final konst y: kotlin.String = "Y"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -11,8 +11,8 @@ public final class ClassXY : ExternalInterfaceX {
 
 public final class ClassXY2 : ExternalInterfaceX, ExternalOpenClassX {
     public constructor ClassXY2()
-    public final override /*2*/ /*fake_override*/ val x: kotlin.String
-    public final val y: kotlin.String = "Y"
+    public final override /*2*/ /*fake_override*/ konst x: kotlin.String
+    public final konst y: kotlin.String = "Y"
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
@@ -20,9 +20,9 @@ public final class ClassXY2 : ExternalInterfaceX, ExternalOpenClassX {
 
 public final class ClassXYZ : ExternalInterfaceXY {
     public constructor ClassXYZ()
-    public open override /*1*/ val x: kotlin.String = "X"
-    public open override /*1*/ val y: kotlin.String = "Y"
-    public final val z: kotlin.String = "Z"
+    public open override /*1*/ konst x: kotlin.String = "X"
+    public open override /*1*/ konst y: kotlin.String = "Y"
+    public final konst z: kotlin.String = "Z"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -30,8 +30,8 @@ public final class ClassXYZ : ExternalInterfaceXY {
 
 public final class ClassXZ : ExternalOpenClassX {
     public constructor ClassXZ()
-    public final override /*1*/ /*fake_override*/ val x: kotlin.String
-    public final val z: kotlin.String = "Z"
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public final konst z: kotlin.String = "Z"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -39,9 +39,9 @@ public final class ClassXZ : ExternalOpenClassX {
 
 public final class ClassXZY : ExternalOpenClassXZ {
     public constructor ClassXZY()
-    public final override /*1*/ /*fake_override*/ val x: kotlin.String
-    public final val y: kotlin.String = "Y"
-    public final override /*1*/ /*fake_override*/ val z: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public final konst y: kotlin.String = "Y"
+    public final override /*1*/ /*fake_override*/ konst z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -54,15 +54,15 @@ public final external class ExternalClassNameSpace {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     @kotlin.OptIn(markerClass = {kotlin.ExperimentalStdlibApi::class}) @kotlin.js.JsExternalInheritorsOnly public interface NestedInterfaceX {
-        public abstract val x: kotlin.String
+        public abstract konst x: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
     }
 
     public interface NestedInterfaceXY : ExternalClassNameSpace.NestedInterfaceX {
-        public abstract override /*1*/ /*fake_override*/ val x: kotlin.String
-        public abstract val y: kotlin.String
+        public abstract override /*1*/ /*fake_override*/ konst x: kotlin.String
+        public abstract konst y: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -71,8 +71,8 @@ public final external class ExternalClassNameSpace {
 
 public final external class ExternalClassXY : ExternalInterfaceX {
     public constructor ExternalClassXY()
-    public open override /*1*/ val x: kotlin.String
-    public final val y: kotlin.String
+    public open override /*1*/ konst x: kotlin.String
+    public final konst y: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -80,8 +80,8 @@ public final external class ExternalClassXY : ExternalInterfaceX {
 
 public final external class ExternalClassXY2 : ExternalInterfaceX, ExternalOpenClassX {
     public constructor ExternalClassXY2()
-    public final override /*2*/ /*fake_override*/ val x: kotlin.String
-    public final val y: kotlin.String
+    public final override /*2*/ /*fake_override*/ konst x: kotlin.String
+    public final konst y: kotlin.String
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
@@ -89,41 +89,41 @@ public final external class ExternalClassXY2 : ExternalInterfaceX, ExternalOpenC
 
 public final external class ExternalClassXYZ : ExternalInterfaceXY {
     public constructor ExternalClassXYZ()
-    public open override /*1*/ val x: kotlin.String
-    public open override /*1*/ val y: kotlin.String
-    public final val z: kotlin.String
+    public open override /*1*/ konst x: kotlin.String
+    public open override /*1*/ konst y: kotlin.String
+    public final konst z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 @kotlin.OptIn(markerClass = {kotlin.ExperimentalStdlibApi::class}) @kotlin.js.JsExternalInheritorsOnly public external interface ExternalInterfaceX {
-    public abstract val x: kotlin.String
+    public abstract konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public external interface ExternalInterfaceXY : ExternalInterfaceX {
-    public abstract override /*1*/ /*fake_override*/ val x: kotlin.String
-    public abstract val y: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public abstract konst y: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public external interface ExternalInterfaceXY2 : ExternalClassNameSpace.NestedInterfaceX {
-    public abstract override /*1*/ /*fake_override*/ val x: kotlin.String
-    public abstract val y: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public abstract konst y: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public external interface ExternalInterfaceXYZ2 : ExternalClassNameSpace.NestedInterfaceXY {
-    public abstract override /*1*/ /*fake_override*/ val x: kotlin.String
-    public abstract override /*1*/ /*fake_override*/ val y: kotlin.String
-    public abstract val z: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst y: kotlin.String
+    public abstract konst z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -131,8 +131,8 @@ public external interface ExternalInterfaceXYZ2 : ExternalClassNameSpace.NestedI
 
 public external object ExternalObjectXY : ExternalInterfaceX {
     private constructor ExternalObjectXY()
-    public open override /*1*/ val x: kotlin.String
-    public final val y: kotlin.String
+    public open override /*1*/ konst x: kotlin.String
+    public final konst y: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -140,9 +140,9 @@ public external object ExternalObjectXY : ExternalInterfaceX {
 
 public external object ExternalObjectXYZ : ExternalInterfaceXY {
     private constructor ExternalObjectXYZ()
-    public open override /*1*/ val x: kotlin.String
-    public open override /*1*/ val y: kotlin.String
-    public final val z: kotlin.String
+    public open override /*1*/ konst x: kotlin.String
+    public open override /*1*/ konst y: kotlin.String
+    public final konst z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -150,8 +150,8 @@ public external object ExternalObjectXYZ : ExternalInterfaceXY {
 
 public external object ExternalObjectXZ : ExternalOpenClassX {
     private constructor ExternalObjectXZ()
-    public final override /*1*/ /*fake_override*/ val x: kotlin.String
-    public final val z: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public final konst z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -159,7 +159,7 @@ public external object ExternalObjectXZ : ExternalOpenClassX {
 
 @kotlin.OptIn(markerClass = {kotlin.ExperimentalStdlibApi::class}) @kotlin.js.JsExternalInheritorsOnly public open external class ExternalOpenClassX {
     public constructor ExternalOpenClassX()
-    public final val x: kotlin.String
+    public final konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -167,42 +167,42 @@ public external object ExternalObjectXZ : ExternalOpenClassX {
 
 public open external class ExternalOpenClassXZ : ExternalOpenClassX {
     public constructor ExternalOpenClassXZ()
-    public final override /*1*/ /*fake_override*/ val x: kotlin.String
-    public final val z: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public final konst z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public interface InterfaceXY : ExternalInterfaceX {
-    public abstract override /*1*/ /*fake_override*/ val x: kotlin.String
-    public abstract val y: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public abstract konst y: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public interface InterfaceXY2 : ExternalClassNameSpace.NestedInterfaceX {
-    public abstract override /*1*/ /*fake_override*/ val x: kotlin.String
-    public abstract val y: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public abstract konst y: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public interface InterfaceXYZ : ExternalInterfaceXY {
-    public abstract override /*1*/ /*fake_override*/ val x: kotlin.String
-    public abstract override /*1*/ /*fake_override*/ val y: kotlin.String
-    public abstract val z: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst y: kotlin.String
+    public abstract konst z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public interface InterfaceXYZ2 : ExternalClassNameSpace.NestedInterfaceXY {
-    public abstract override /*1*/ /*fake_override*/ val x: kotlin.String
-    public abstract override /*1*/ /*fake_override*/ val y: kotlin.String
-    public abstract val z: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public abstract override /*1*/ /*fake_override*/ konst y: kotlin.String
+    public abstract konst z: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -210,8 +210,8 @@ public interface InterfaceXYZ2 : ExternalClassNameSpace.NestedInterfaceXY {
 
 public object ObjectXY : ExternalInterfaceX {
     private constructor ObjectXY()
-    public open override /*1*/ val x: kotlin.String = "X"
-    public final val y: kotlin.String = "Y"
+    public open override /*1*/ konst x: kotlin.String = "X"
+    public final konst y: kotlin.String = "Y"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -219,9 +219,9 @@ public object ObjectXY : ExternalInterfaceX {
 
 public object ObjectXYZ : ExternalInterfaceXY {
     private constructor ObjectXYZ()
-    public open override /*1*/ val x: kotlin.String = "X"
-    public open override /*1*/ val y: kotlin.String = "Y"
-    public final val z: kotlin.String = "Z"
+    public open override /*1*/ konst x: kotlin.String = "X"
+    public open override /*1*/ konst y: kotlin.String = "Y"
+    public final konst z: kotlin.String = "Z"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -229,8 +229,8 @@ public object ObjectXYZ : ExternalInterfaceXY {
 
 public object ObjectXZ : ExternalOpenClassX {
     private constructor ObjectXZ()
-    public final override /*1*/ /*fake_override*/ val x: kotlin.String
-    public final val z: kotlin.String = "Z"
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.String
+    public final konst z: kotlin.String = "Z"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

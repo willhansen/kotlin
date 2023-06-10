@@ -21,9 +21,9 @@ import other.A as AA
 import other.baz as bazbaz
 
 fun main() {
-    val x = ::foofoo
-    val y = AA::bar
-    val z = AA::bazbaz
+    konst x = ::foofoo
+    konst y = AA::bar
+    konst z = AA::bazbaz
 
     checkSubtype<KFunction0<Unit>>(x)
     checkSubtype<KFunction1<AA, Int>>(y)

@@ -6,10 +6,10 @@ plugins {
     id("jps-compatible")
 }
 
-val robolectricClasspath by configurations.creating
-val androidExtensionsRuntimeForTests by configurations.creating
-val layoutLib by configurations.creating
-val layoutLibApi by configurations.creating
+konst robolectricClasspath by configurations.creating
+konst androidExtensionsRuntimeForTests by configurations.creating
+konst layoutLib by configurations.creating
+konst layoutLibApi by configurations.creating
 
 dependencies {
     testApi(intellijCore())
@@ -71,16 +71,16 @@ projectTest {
     workingDir = rootDir
     useAndroidJar()
 
-    val androidExtensionsRuntimeProvider = project.provider {
+    konst androidExtensionsRuntimeProvider = project.provider {
         androidExtensionsRuntimeForTests.asPath
     }
 
-    val robolectricClasspathProvider = project.provider {
+    konst robolectricClasspathProvider = project.provider {
         robolectricClasspath.asPath
     }
 
-    val layoutLibConf: FileCollection = layoutLib
-    val layoutLibApiConf: FileCollection = layoutLibApi
+    konst layoutLibConf: FileCollection = layoutLib
+    konst layoutLibApiConf: FileCollection = layoutLibApi
 
     doFirst {
         systemProperty("androidExtensionsRuntime.classpath", androidExtensionsRuntimeProvider.get())

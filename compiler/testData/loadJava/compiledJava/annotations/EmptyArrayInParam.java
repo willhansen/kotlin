@@ -6,7 +6,7 @@ import java.lang.annotation.Target;
 public interface EmptyArrayInParam {
 
     public @interface MyAnnotation {
-        String[] value();
+        String[] konstue();
     }
 
     @MyAnnotation({})

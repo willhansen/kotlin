@@ -1,54 +1,54 @@
-val testVal: Int get() = 42
+konst testVal: Int get() = 42
 
-val testValSemiSameLine: Int; get() = 42
+konst testValSemiSameLine: Int; get() = 42
 
-val testValNoType get() = 42
+konst testValNoType get() = 42
 
-val String.testExtVal: Int get() = 42
+konst String.testExtVal: Int get() = 42
 
-val String.testExtValNoType get() = 42
+konst String.testExtValNoType get() = 42
 
-var testVar: Int get() = 42; set(value) {}
+var testVar: Int get() = 42; set(konstue) {}
 
-var String.testExtVar: Int get() = 42; set(value) {}
+var String.testExtVar: Int get() = 42; set(konstue) {}
 
-val testValLineBreak: Int
+konst testValLineBreak: Int
     get() = 42
 
-val testValLineBreakNoType
+konst testValLineBreakNoType
     get() = 42
 
-val testValLineBreakSemi: Int;
+konst testValLineBreakSemi: Int;
     get() = 42
 
-val testValLineBreakSemiComment1: Int; // this IS NOT an accessor:
+konst testValLineBreakSemiComment1: Int; // this IS NOT an accessor:
     get() = 42
 
-val testValLineBreakSemiComment2: Int; /*
+konst testValLineBreakSemiComment2: Int; /*
 this IS NOT an accessor either:
 */
     get() = 42
 
-val testValLineBreakSemiComment3: Int; /*
+konst testValLineBreakSemiComment3: Int; /*
 this IS an accessor!
 */ get() = 42
 
-val testValLineBreakSemiNoType;
+konst testValLineBreakSemiNoType;
     get() = 42
 
 var testVarLineBreak: Int
     get() = 42
-    set(value) {}
+    set(konstue) {}
 
 var String.testExtVarLineBreak: Int
     get() = 42
-    set(value) {}
+    set(konstue) {}
 
 var testVarLineBreakSemi: Int;
     get() = 42
-    set(value) {}
+    set(konstue) {}
 
 var String.testExtVarLineBreakSemi: Int;
     get() = 42
-    set(value) {}
+    set(konstue) {}
 

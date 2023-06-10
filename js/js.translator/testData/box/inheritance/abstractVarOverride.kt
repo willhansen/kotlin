@@ -11,7 +11,7 @@ class B() : A() {
 
 fun box(): String {
 
-    val a: A = B()
+    konst a: A = B()
     if (a.pos != 2) {
         return "fail1: ${a.pos}"
     }

@@ -8,28 +8,28 @@ package org.jetbrains.kotlin.diagnostics
 import com.intellij.psi.PsiElement
 
 interface DiagnosticMarker {
-    val psiElement: PsiElement
-    val factoryName: String
+    konst psiElement: PsiElement
+    konst factoryName: String
 }
 
 interface DiagnosticWithParameters1Marker<A> : DiagnosticMarker {
-    val a: A
+    konst a: A
 }
 
 interface DiagnosticWithParameters2Marker<A, B> : DiagnosticMarker {
-    val a: A
-    val b: B
+    konst a: A
+    konst b: B
 }
 
 interface DiagnosticWithParameters3Marker<A, B, C> : DiagnosticMarker {
-    val a: A
-    val b: B
-    val c: C
+    konst a: A
+    konst b: B
+    konst c: C
 }
 
 interface DiagnosticWithParameters4Marker<A, B, C, D> : DiagnosticMarker {
-    val a: A
-    val b: B
-    val c: C
-    val d: D
+    konst a: A
+    konst b: B
+    konst c: C
+    konst d: D
 }

@@ -1,8 +1,8 @@
-class Outer(val x: String) {
+class Outer(konst x: String) {
     abstract inner class InnerBase
 
-    inner class Inner(val y: String) : OIB() {
-        val z = x + y
+    inner class Inner(konst y: String) : OIB() {
+        konst z = x + y
     }
 }
 

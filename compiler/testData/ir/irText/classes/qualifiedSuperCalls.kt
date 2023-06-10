@@ -1,12 +1,12 @@
 // FIR_IDENTICAL
 interface ILeft {
     fun foo() {}
-    val bar: Int get() = 1
+    konst bar: Int get() = 1
 }
 
 interface IRight {
     fun foo() {}
-    val bar: Int get() = 2
+    konst bar: Int get() = 2
 }
 
 class CBoth : ILeft, IRight {
@@ -15,6 +15,6 @@ class CBoth : ILeft, IRight {
         super<IRight>.foo()
     }
 
-    override val bar: Int
+    override konst bar: Int
         get() = super<ILeft>.bar + super<IRight>.bar
 }

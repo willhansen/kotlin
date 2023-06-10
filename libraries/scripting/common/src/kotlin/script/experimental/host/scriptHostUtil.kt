@@ -12,19 +12,19 @@ import kotlin.script.experimental.api.*
 
 // helper function
 fun getMergedScriptText(script: SourceCode, configuration: ScriptCompilationConfiguration?): String {
-    val originalScriptText = script.text
-    val sourceFragments = configuration?.get(ScriptCompilationConfiguration.sourceFragments)
+    konst originalScriptText = script.text
+    konst sourceFragments = configuration?.get(ScriptCompilationConfiguration.sourceFragments)
     return if (sourceFragments == null || sourceFragments.isEmpty()) {
         originalScriptText
     } else {
-        val sb = StringBuilder(originalScriptText.length)
+        konst sb = StringBuilder(originalScriptText.length)
         var prevFragment: ScriptSourceNamedFragment? = null
         for (fragment in sourceFragments) {
-            val fragmentStartPos = fragment.range.start.absolutePos
-            val fragmentEndPos = fragment.range.end.absolutePos
+            konst fragmentStartPos = fragment.range.start.absolutePos
+            konst fragmentEndPos = fragment.range.end.absolutePos
             if (fragmentStartPos == null || fragmentEndPos == null)
                 throw RuntimeException("Script fragments require absolute positions (received: $fragment)")
-            val curPos = if (prevFragment == null) 0 else prevFragment.range.end.absolutePos!!
+            konst curPos = if (prevFragment == null) 0 else prevFragment.range.end.absolutePos!!
             if (prevFragment != null && prevFragment.range.end.absolutePos!! > fragmentStartPos) throw RuntimeException("Unsorted or overlapping fragments: previous: $prevFragment, current: $fragment")
             if (curPos < fragmentStartPos) {
                 originalScriptText
@@ -34,7 +34,7 @@ fun getMergedScriptText(script: SourceCode, configuration: ScriptCompilationConf
             sb.append(originalScriptText.subSequence(fragmentStartPos, fragmentEndPos))
             prevFragment = fragment
         }
-        val positionOfLastAppended = prevFragment?.range?.end?.absolutePos
+        konst positionOfLastAppended = prevFragment?.range?.end?.absolutePos
         if (positionOfLastAppended != null && positionOfLastAppended < originalScriptText.length) {
             originalScriptText
                 .cleanContentPreservingLinesLayout(positionOfLastAppended)
@@ -54,17 +54,17 @@ private fun String.cleanContentPreservingLinesLayout(
     .map { if (it == '\r' || it == '\n') it else ' ' }
 
 abstract class FileBasedScriptSource() : ExternalSourceCode {
-    abstract val file: File
+    abstract konst file: File
 }
 
 /**
  * The implementation of the SourceCode for a script located in a file
  */
-open class FileScriptSource(override val file: File, private val preloadedText: String? = null) : FileBasedScriptSource(), Serializable {
-    override val externalLocation: URL get() = file.toURI().toURL()
-    override val text: String by lazy { preloadedText ?: file.readTextSkipUtf8Bom() }
-    override val name: String? get() = file.name
-    override val locationId: String? get() = file.path
+open class FileScriptSource(override konst file: File, private konst preloadedText: String? = null) : FileBasedScriptSource(), Serializable {
+    override konst externalLocation: URL get() = file.toURI().toURL()
+    override konst text: String by lazy { preloadedText ?: file.readTextSkipUtf8Bom() }
+    override konst name: String? get() = file.name
+    override konst locationId: String? get() = file.path
 
     override fun equals(other: Any?): Boolean =
         this === other || (other as? FileScriptSource)?.let { file.absolutePath == it.file.absolutePath && textSafe == it.textSafe } == true
@@ -73,17 +73,17 @@ open class FileScriptSource(override val file: File, private val preloadedText: 
 
     companion object {
         @JvmStatic
-        private val serialVersionUID = 0L
+        private konst serialVersionUID = 0L
     }
 }
 
 /**
  * The implementation of the SourceCode for a script location pointed by the URL
  */
-open class UrlScriptSource(override val externalLocation: URL) : ExternalSourceCode, Serializable {
-    override val text: String by lazy { externalLocation.readTextSkipUtf8Bom() }
-    override val name: String? get() = externalLocation.file
-    override val locationId: String? get() = externalLocation.toString()
+open class UrlScriptSource(override konst externalLocation: URL) : ExternalSourceCode, Serializable {
+    override konst text: String by lazy { externalLocation.readTextSkipUtf8Bom() }
+    override konst name: String? get() = externalLocation.file
+    override konst locationId: String? get() = externalLocation.toString()
 
     override fun equals(other: Any?): Boolean =
         this === other || (other as? UrlScriptSource)?.let { externalLocation == it.externalLocation && textSafe == it.textSafe } == true
@@ -92,7 +92,7 @@ open class UrlScriptSource(override val externalLocation: URL) : ExternalSourceC
 
     companion object {
         @JvmStatic
-        private val serialVersionUID = 0L
+        private konst serialVersionUID = 0L
     }
 }
 
@@ -104,11 +104,11 @@ fun File.toScriptSource(): SourceCode = FileScriptSource(this)
 /**
  * The implementation of the ScriptSource for a script in a String
  */
-open class StringScriptSource(val source: String, override val name: String? = null) : SourceCode, Serializable {
+open class StringScriptSource(konst source: String, override konst name: String? = null) : SourceCode, Serializable {
 
-    override val text: String get() = source
+    override konst text: String get() = source
 
-    override val locationId: String? = null
+    override konst locationId: String? = null
 
     override fun equals(other: Any?): Boolean =
         this === other || (other as? StringScriptSource)?.let { text == it.text && name == it.name && locationId == it.locationId } == true
@@ -117,7 +117,7 @@ open class StringScriptSource(val source: String, override val name: String? = n
 
     companion object {
         @JvmStatic
-        private val serialVersionUID = 0L
+        private konst serialVersionUID = 0L
     }
 }
 
@@ -126,7 +126,7 @@ open class StringScriptSource(val source: String, override val name: String? = n
  */
 fun String.toScriptSource(name: String? = null): SourceCode = StringScriptSource(this, name)
 
-private val ExternalSourceCode.textSafe: String?
+private konst ExternalSourceCode.textSafe: String?
     get() =
         try {
             text
@@ -134,7 +134,7 @@ private val ExternalSourceCode.textSafe: String?
             null
         }
 
-private const val UTF8_BOM = 0xfeff.toChar().toString()
+private const konst UTF8_BOM = 0xfeff.toChar().toString()
 
 private fun File.readTextSkipUtf8Bom(): String = readText().removePrefix(UTF8_BOM)
 

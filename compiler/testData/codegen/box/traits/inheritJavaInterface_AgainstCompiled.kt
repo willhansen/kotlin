@@ -20,7 +20,7 @@ internal class D : C {
 }
 
 fun box(): String {
-    val d = D()
+    konst d = D()
     d.foo()
     d.bar()
     return "OK"

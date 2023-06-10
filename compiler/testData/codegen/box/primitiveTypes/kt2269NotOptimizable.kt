@@ -8,8 +8,8 @@ fun identity(x: Int): Int {
 
 fun box() : String {
     // Just hard enough that the test won't get optimized away at compile time.
-    val twoThirty = identity(230)
-    val nine = identity(9)
+    konst twoThirty = identity(230)
+    konst nine = identity(9)
     twoThirty?.toByte()?.hashCode()
     nine.hashCode()
 

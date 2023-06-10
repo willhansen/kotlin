@@ -7,7 +7,7 @@ fun test1(foo: Foo<in out Int>) = foo
 fun test2(): Foo<in in Int> = throw Exception()
 
 fun test3() {
-    val f: Foo<out out out out Int>
+    konst f: Foo<out out out out Int>
 
     class Bzz<in <!REPEATED_MODIFIER!>in<!> T>
 }

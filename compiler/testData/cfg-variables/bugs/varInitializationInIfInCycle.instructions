@@ -1,7 +1,7 @@
 == foo ==
 fun foo(numbers: Collection<Int>) {
     for (i in numbers) {
-        val b: Boolean
+        konst b: Boolean
         if (1 < 2) {
             b = false
         }
@@ -18,7 +18,7 @@ L0:
     v(numbers: Collection<Int>)                                                                                   INIT: in: {} out: {}
     magic[FAKE_INITIALIZER](numbers: Collection<Int>) -> <v0>                                                     INIT: in: {} out: {}
     w(numbers|<v0>)                                                                                               INIT: in: {} out: {}
-  2 mark({ for (i in numbers) { val b: Boolean if (1 < 2) { b = false } else { b = true } use(b) continue } })    INIT: in: {} out: {}
+  2 mark({ for (i in numbers) { konst b: Boolean if (1 < 2) { b = false } else { b = true } use(b) continue } })    INIT: in: {} out: {}
   3 r(numbers) -> <v1>
     mark(numbers)
     call(numbers, iterator|<v1>) -> <v2>
@@ -32,10 +32,10 @@ L6 [condition entry point]:
     call(numbers, next) -> <v4>
     magic[LOOP_RANGE_ITERATION](numbers|<v4>) -> <v5>
     w(i|<v5>)                                                                                                     INIT: in: {} out: {}
-    mark(for (i in numbers) { val b: Boolean if (1 < 2) { b = false } else { b = true } use(b) continue })        INIT: in: {} out: {}            USE: in: {} out: {}
+    mark(for (i in numbers) { konst b: Boolean if (1 < 2) { b = false } else { b = true } use(b) continue })        INIT: in: {} out: {}            USE: in: {} out: {}
 L4 [body entry point]:
-  4 mark({ val b: Boolean if (1 < 2) { b = false } else { b = true } use(b) continue })
-    v(val b: Boolean)                                                                                             INIT: in: {} out: {b=D}
+  4 mark({ konst b: Boolean if (1 < 2) { b = false } else { b = true } use(b) continue })
+    v(konst b: Boolean)                                                                                             INIT: in: {} out: {b=D}
     mark(if (1 < 2) { b = false } else { b = true })                                                              INIT: in: {b=D} out: {b=D}
     r(1) -> <v6>
     r(2) -> <v7>

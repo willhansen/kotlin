@@ -348,7 +348,7 @@ instead of provided one.
 ### Using different LLVM distributions as part of Kotlin/Native compilation pipeline.
 
 `-Xllvm-variant` compiler option allows to choose which LLVM distribution should be used during compilation.
-The following values are supported:
+The following konstues are supported:
 * `user` — The compiler downloads (if necessary) and uses small LLVM distribution that contains only necessary tools. This is what compiler does by default.
 * `dev` — The compiler downloads (if necessary) and uses large LLVM distribution that contains additional development tools like `llvm-nm`, `opt`, etc.
 * `<absolute path>` — Use local distribution of LLVM.
@@ -368,7 +368,7 @@ Note that disabling `LinkBitcodeDependencies` or `ObjectFiles` will break compil
 
 Compiler takes options for Clang from [konan.properties](konan/konan.properties) file
 by combining `clangFlags.<TARGET>` and `clang<Noopt/Opt/Debug>Flags.<TARGET>` properties. 
-Use `-Xoverride-konan-properties=<key_1=value_1; ...;key_n=value_n>` flag to override default values.
+Use `-Xoverride-konan-properties=<key_1=konstue_1; ...;key_n=konstue_n>` flag to override default konstues.
 
 Please note:
 1. Kotlin Native passes bitcode files to Clang instead of C or C++, so many flags won't work.

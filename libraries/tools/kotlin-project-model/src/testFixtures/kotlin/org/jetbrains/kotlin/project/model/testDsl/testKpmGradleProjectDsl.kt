@@ -16,13 +16,13 @@ fun TestKpmModuleContainer.allModules(action: TestKpmModule.() -> Unit) {
 }
 
 fun TestKpmModuleContainer.module(name: String, applyDefaults: Boolean = true, configure: TestKpmModule.() -> Unit = { }): TestKpmModule {
-    val module = modules.getOrPut(name) {
-        val id = KpmLocalModuleIdentifier(
+    konst module = modules.getOrPut(name) {
+        konst id = KpmLocalModuleIdentifier(
             buildId = "",
             projectId = this.name,
             moduleClassifier = name.takeIf { it != "main" }
         )
-        val module = TestKpmModule(this, id)
+        konst module = TestKpmModule(this, id)
         if (applyDefaults) module.applyDefaults()
 
         module
@@ -34,8 +34,8 @@ fun TestKpmModuleContainer.module(name: String, applyDefaults: Boolean = true, c
 fun TestKpmModuleContainer.moduleNamed(name: String): TestKpmModule =
     modules[name] ?: error("Module with name $name doesn't exist. Existing modules: ${modules.joinToString { it.name }}")
 
-val TestKpmModuleContainer.main get() = moduleNamed("main")
-val TestKpmModuleContainer.test get() = moduleNamed("test")
+konst TestKpmModuleContainer.main get() = moduleNamed("main")
+konst TestKpmModuleContainer.test get() = moduleNamed("test")
 
 fun TestKpmModuleContainer.depends(other: TestKpmModuleContainer): TestKpmModuleContainer {
     main.depends(other)

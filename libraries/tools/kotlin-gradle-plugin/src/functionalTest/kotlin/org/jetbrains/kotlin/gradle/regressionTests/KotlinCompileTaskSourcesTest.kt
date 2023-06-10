@@ -21,16 +21,16 @@ class KotlinCompileTaskSourcesTest {
 
     @Test
     fun `test - sources - shared native compile - KT-54995`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
 
         kotlin.linuxX64()
         kotlin.linuxArm64()
         kotlin.jvm()
 
-        val commonMainSourceFile = project.file("src/commonMain/kotlin/CommonMain.kt")
-        val linuxMainSourceFile = project.file("src/linuxMain/kotlin/LinuxMain.kt")
+        konst commonMainSourceFile = project.file("src/commonMain/kotlin/CommonMain.kt")
+        konst linuxMainSourceFile = project.file("src/linuxMain/kotlin/LinuxMain.kt")
 
         commonMainSourceFile.parentFile.mkdirs()
         linuxMainSourceFile.parentFile.mkdirs()
@@ -38,11 +38,11 @@ class KotlinCompileTaskSourcesTest {
         commonMainSourceFile.writeText("object CommonMain")
         linuxMainSourceFile.writeText("object LinuxMain")
 
-        project.evaluate()
+        project.ekonstuate()
 
         /* Check sources of linuxMain compilation */
-        val linuxMainCompilation = kotlin.metadata().compilations.getByName("linuxMain") as KotlinSharedNativeCompilation
-        val linuxMainCompileTask = linuxMainCompilation.compileTaskProvider.get()
+        konst linuxMainCompilation = kotlin.metadata().compilations.getByName("linuxMain") as KotlinSharedNativeCompilation
+        konst linuxMainCompileTask = linuxMainCompilation.compileTaskProvider.get()
 
         assertEquals(
             setOf(linuxMainSourceFile).relativeTo(project),
@@ -50,8 +50,8 @@ class KotlinCompileTaskSourcesTest {
         )
 
         /* Check sources of commonMain compilation */
-        val commonMainCompilation = kotlin.metadata().compilations.getByName("commonMain") as KotlinCommonCompilation
-        val commonMainCompileTask = commonMainCompilation.compileTaskProvider.get() as KotlinCompileCommon
+        konst commonMainCompilation = kotlin.metadata().compilations.getByName("commonMain") as KotlinCommonCompilation
+        konst commonMainCompileTask = commonMainCompilation.compileTaskProvider.get() as KotlinCompileCommon
 
         assertEquals(
             setOf(commonMainSourceFile).relativeTo(project),
@@ -61,8 +61,8 @@ class KotlinCompileTaskSourcesTest {
 
     @Test
     fun `test - sources - linux and jvm`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default {
             common {
                 group("jvmAndLinux") {
@@ -75,10 +75,10 @@ class KotlinCompileTaskSourcesTest {
         kotlin.linuxArm64()
         kotlin.jvm()
 
-        val commonMainSourceFile = project.file("src/commonMain/kotlin/Common.kt")
-        val jvmAndLinuxMainSourceFile = project.file("src/jvmAndLinuxMain/kotlin/JvmAndLinuxMain.kt")
-        val linuxArm64MainSourceFile = project.file("src/linuxArm64Main/kotlin/Linux.kt")
-        val jvmMainSourceFile = project.file("src/jvmMain/kotlin/Jvm.kt")
+        konst commonMainSourceFile = project.file("src/commonMain/kotlin/Common.kt")
+        konst jvmAndLinuxMainSourceFile = project.file("src/jvmAndLinuxMain/kotlin/JvmAndLinuxMain.kt")
+        konst linuxArm64MainSourceFile = project.file("src/linuxArm64Main/kotlin/Linux.kt")
+        konst jvmMainSourceFile = project.file("src/jvmMain/kotlin/Jvm.kt")
 
         commonMainSourceFile.parentFile.mkdirs()
         jvmAndLinuxMainSourceFile.parentFile.mkdirs()
@@ -90,10 +90,10 @@ class KotlinCompileTaskSourcesTest {
         linuxArm64MainSourceFile.writeText("object Linux")
         jvmMainSourceFile.writeText("object Jvm")
 
-        project.evaluate()
+        project.ekonstuate()
 
         /* Check sources of commonMain compile task */
-        val commonMainCompileTask = kotlin.metadata().compilations.getByName("commonMain")
+        konst commonMainCompileTask = kotlin.metadata().compilations.getByName("commonMain")
             .compileTaskProvider.get() as KotlinCompileCommon
 
         assertEquals(
@@ -102,7 +102,7 @@ class KotlinCompileTaskSourcesTest {
         )
 
         /* Check sources of jvmAndLinuxMain compile task */
-        val jvmAndLinuxMainCompileTask = kotlin.metadata().compilations.getByName("jvmAndLinuxMain")
+        konst jvmAndLinuxMainCompileTask = kotlin.metadata().compilations.getByName("jvmAndLinuxMain")
             .compileTaskProvider.get() as KotlinCompileCommon
 
         assertEquals(
@@ -111,7 +111,7 @@ class KotlinCompileTaskSourcesTest {
         )
 
         /* Check sources of jvm compile task */
-        val jvmMainCompileTask = kotlin.jvm().compilations.getByName("main")
+        konst jvmMainCompileTask = kotlin.jvm().compilations.getByName("main")
             .compileTaskProvider.get() as KotlinJvmCompile
 
         assertEquals(
@@ -120,7 +120,7 @@ class KotlinCompileTaskSourcesTest {
         )
 
         /* Check sources of linuxArm64 compile task */
-        val linuxArm64CompileTask = kotlin.linuxArm64().compilations.getByName("main")
+        konst linuxArm64CompileTask = kotlin.linuxArm64().compilations.getByName("main")
             .compileTaskProvider.get()
 
         assertEquals(

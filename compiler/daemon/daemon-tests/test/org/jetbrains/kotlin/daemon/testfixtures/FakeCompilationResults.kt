@@ -10,12 +10,12 @@ import java.io.Serializable
 
 class FakeCompilationResults : CompilationResults {
 
-    val results: List<Serializable>
+    konst results: List<Serializable>
         get() = resultList.toList()
 
-    private val resultList = mutableListOf<Serializable>()
+    private konst resultList = mutableListOf<Serializable>()
 
-    override fun add(compilationResultCategory: Int, value: Serializable) {
-        resultList.add(value)
+    override fun add(compilationResultCategory: Int, konstue: Serializable) {
+        resultList.add(konstue)
     }
 }

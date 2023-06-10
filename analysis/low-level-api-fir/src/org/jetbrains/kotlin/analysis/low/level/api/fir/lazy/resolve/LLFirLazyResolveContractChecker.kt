@@ -10,11 +10,11 @@ import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.symbols.FirLazyResolveContractViolationException
 
 internal class LLFirLazyResolveContractChecker {
-    private val currentTransformerPhase = ThreadLocal.withInitial<FirResolvePhase?> { null }
+    private konst currentTransformerPhase = ThreadLocal.withInitial<FirResolvePhase?> { null }
 
     inline fun lazyResolveToPhaseInside(phase: FirResolvePhase, isJumpingPhase: Boolean = false, resolve: () -> Unit) {
         checkIfCanLazyResolveToPhase(phase, isJumpingPhase)
-        val previousPhase = currentTransformerPhase.get()
+        konst previousPhase = currentTransformerPhase.get()
         currentTransformerPhase.set(phase)
         try {
             resolve()
@@ -24,10 +24,10 @@ internal class LLFirLazyResolveContractChecker {
     }
 
     private fun checkIfCanLazyResolveToPhase(requestedPhase: FirResolvePhase, isJumpingPhase: Boolean) {
-        val currentPhase = currentTransformerPhase.get() ?: return
+        konst currentPhase = currentTransformerPhase.get() ?: return
 
         if (requestedPhase > currentPhase || !isJumpingPhase && requestedPhase == currentPhase) {
-            val exception = FirLazyResolveContractViolationException(currentPhase = currentPhase, requestedPhase = requestedPhase)
+            konst exception = FirLazyResolveContractViolationException(currentPhase = currentPhase, requestedPhase = requestedPhase)
             if (System.getProperty("kotlin.suppress.lazy.resolve.contract.violation") != null) {
                 LoggerHolder.LOG.warn(exception)
             } else {
@@ -37,6 +37,6 @@ internal class LLFirLazyResolveContractChecker {
     }
 
     private object LoggerHolder {
-        val LOG = Logger.getInstance(LLFirLazyResolveContractChecker::class.java)
+        konst LOG = Logger.getInstance(LLFirLazyResolveContractChecker::class.java)
     }
 }

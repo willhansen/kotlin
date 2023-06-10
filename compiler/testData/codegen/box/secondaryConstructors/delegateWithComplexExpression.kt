@@ -1,6 +1,6 @@
 var log = ""
 
-open class Base(val s: String)
+open class Base(konst s: String)
 
 class A(s: String) : Base(s) {
     constructor(i: Int) : this("O" + if (i == 23) {

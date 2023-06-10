@@ -25,11 +25,11 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class IrLazyFunction(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrSimpleFunctionSymbol,
-    override val descriptor: FunctionDescriptor,
+    override konst symbol: IrSimpleFunctionSymbol,
+    override konst descriptor: FunctionDescriptor,
     override var name: Name,
     override var visibility: DescriptorVisibility,
     override var modality: Modality,
@@ -41,8 +41,8 @@ class IrLazyFunction(
     override var isFakeOverride: Boolean,
     override var isOperator: Boolean,
     override var isInfix: Boolean,
-    override val stubGenerator: DeclarationStubGenerator,
-    override val typeTranslator: TypeTranslator,
+    override konst stubGenerator: DeclarationStubGenerator,
+    override konst typeTranslator: TypeTranslator,
 ) : AbstractIrLazyFunction(), IrLazyFunctionBase {
     override var parent: IrDeclarationParent by createLazyParent()
 
@@ -56,7 +56,7 @@ class IrLazyFunction(
         if (tryLoadIr()) returnType else createReturnType()
     }
 
-    override val initialSignatureFunction: IrFunction? by createInitialSignatureFunction()
+    override konst initialSignatureFunction: IrFunction? by createInitialSignatureFunction()
 
     override var dispatchReceiverParameter: IrValueParameter? by lazyVar(stubGenerator.lock) {
         if (tryLoadIr()) dispatchReceiverParameter else createReceiverParameter(descriptor.dispatchReceiverParameter, true)
@@ -66,8 +66,8 @@ class IrLazyFunction(
         if (tryLoadIr()) extensionReceiverParameter else createReceiverParameter(descriptor.extensionReceiverParameter)
     }
 
-    override var valueParameters: List<IrValueParameter> by lazyVar(stubGenerator.lock) {
-        if (tryLoadIr()) valueParameters else createValueParameters()
+    override var konstueParameters: List<IrValueParameter> by lazyVar(stubGenerator.lock) {
+        if (tryLoadIr()) konstueParameters else createValueParameters()
     }
 
     override var contextReceiverParametersCount: Int = descriptor.contextReceiverParameters.size
@@ -80,7 +80,7 @@ class IrLazyFunction(
         if (tryLoadIr()) return@lazyVar typeParameters
         typeTranslator.buildWithScope(this) {
             stubGenerator.symbolTable.withScope(this) {
-                val propertyIfAccessor = descriptor.propertyIfAccessor
+                konst propertyIfAccessor = descriptor.propertyIfAccessor
                 propertyIfAccessor.typeParameters.mapTo(arrayListOf()) { typeParameterDescriptor ->
                     if (descriptor != propertyIfAccessor) {
                         stubGenerator.generateOrGetScopedTypeParameterStub(typeParameterDescriptor).also { irTypeParameter ->
@@ -110,10 +110,10 @@ class IrLazyFunction(
 
     override var correspondingPropertySymbol: IrPropertySymbol? = null
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = (descriptor as? DescriptorWithContainerSource)?.containerSource
 
-    override val isDeserializationEnabled: Boolean
+    override konst isDeserializationEnabled: Boolean
         get() = stubGenerator.extensions.irDeserializationEnabled
 
     init {

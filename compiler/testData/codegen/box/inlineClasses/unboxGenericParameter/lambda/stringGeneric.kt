@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 fun <T: String> underlying(a: IC<T>): T = bar(a) {
-    it.value
+    it.konstue
 }
 
 fun <T: String> extension(a: IC<T>): T = bar(a) {
@@ -18,17 +18,17 @@ fun <T: String> normal(a: IC<T>): T = bar(a) {
     normalValue(it)
 }
 
-fun <T, R> bar(value: T, f: (T) -> R): R {
-    return f(value)
+fun <T, R> bar(konstue: T, f: (T) -> R): R {
+    return f(konstue)
 }
 
-fun <T: String> IC<T>.extensionValue(): T = value
+fun <T: String> IC<T>.extensionValue(): T = konstue
 
-fun <T: String> normalValue(ic: IC<T>): T = ic.value
+fun <T: String> normalValue(ic: IC<T>): T = ic.konstue
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: String>(val value: T) {
-    fun dispatchValue(): T = value
+konstue class IC<T: String>(konst konstue: T) {
+    fun dispatchValue(): T = konstue
 }
 
 fun box(): String {

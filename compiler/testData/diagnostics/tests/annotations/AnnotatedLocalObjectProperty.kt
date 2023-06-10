@@ -2,8 +2,8 @@
 annotation class My
 
 fun foo(): Int {
-    val s = object {
-        @My val bar: Int = 0
+    konst s = object {
+        @My konst bar: Int = 0
     }
     return s.bar
 }

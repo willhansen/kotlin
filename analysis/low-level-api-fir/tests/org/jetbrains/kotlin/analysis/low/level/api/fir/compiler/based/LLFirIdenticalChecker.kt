@@ -22,14 +22,14 @@ class LLFirIdenticalChecker(testServices: TestServices) : AbstractFirIdenticalCh
     override fun checkTestDataFile(testDataFile: File) {
         if (!testDataFile.isLLFirTestData) return
 
-        val originalFile = helper.getClassicFileToCompare(testDataFile)
-        val baseFile = helper.getFirFileToCompare(originalFile).takeIf { it.exists() } ?: originalFile
+        konst originalFile = helper.getClassicFileToCompare(testDataFile)
+        konst baseFile = helper.getFirFileToCompare(originalFile).takeIf { it.exists() } ?: originalFile
 
         // `readContentIgnoringLlFirDivergenceDirective` trims whitespace after the `LL_FIR_DIVERGENCE` directive to allow blank lines
         // after the directive. Hence, the base content's starting whitespace needs to be trimmed as well, otherwise file contents might
         // differ in their starting whitespace.
-        val baseContent = helper.readContent(baseFile, trimLines = true).trimStart()
-        val llContent = helper.readContent(testDataFile, trimLines = false).removeLlFirDivergenceDirective(trimLines = true)
+        konst baseContent = helper.readContent(baseFile, trimLines = true).trimStart()
+        konst llContent = helper.readContent(testDataFile, trimLines = false).removeLlFirDivergenceDirective(trimLines = true)
         if (baseContent == llContent) {
             testServices.assertions.fail {
                 "`${testDataFile.name}` and `${baseFile.name}` are identical. Remove `$testDataFile`."

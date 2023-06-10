@@ -7,12 +7,12 @@ FILE fqName:<root> fileName:/thisWithCustomLabel.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:A modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:a visibility:public modality:FINAL [val]
+    PROPERTY name:a visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:a type:T of <root>.A visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'a: T of <root>.A declared in <root>.A.<init>' type=T of <root>.A origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> ($this:<root>.A<T of <root>.A>) returnType:T of <root>.A
-        correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A<T of <root>.A>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-a> (): T of <root>.A declared in <root>.A'
@@ -38,12 +38,12 @@ FILE fqName:<root> fileName:/thisWithCustomLabel.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:B modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:b visibility:public modality:FINAL [val]
+    PROPERTY name:b visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Any visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'b: kotlin.Any declared in <root>.B.<init>' type=kotlin.Any origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Any
-        correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.B
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.Any declared in <root>.B'
@@ -69,12 +69,12 @@ FILE fqName:<root> fileName:/thisWithCustomLabel.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:C modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:c visibility:public modality:FINAL [val]
+    PROPERTY name:c visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Any visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'c: kotlin.Any declared in <root>.C.<init>' type=kotlin.Any origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Any
-        correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.C
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.Any declared in <root>.C'
@@ -110,9 +110,9 @@ FILE fqName:<root> fileName:/thisWithCustomLabel.kt
       TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
         CALL 'public final fun <get-b> (): kotlin.Any declared in <root>.B' type=kotlin.Any origin=GET_PROPERTY
           $this: GET_VAR '$context_receiver_2: <root>.B declared in <root>.f' type=<root>.B origin=null
-  PROPERTY name:p visibility:public modality:FINAL [val]
+  PROPERTY name:p visibility:public modality:FINAL [konst]
     FUN name:<get-p> visibility:public modality:FINAL <> ($receiver:<root>.C, $context_receiver_0:<root>.A<kotlin.Int>, $context_receiver_1:<root>.A<kotlin.String>, $context_receiver_2:<root>.B) returnType:kotlin.Int
-      correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [konst]
       contextReceiverParametersCount: 3
       $receiver: VALUE_PARAMETER name:<this> type:<root>.C
       VALUE_PARAMETER name:$context_receiver_0 index:0 type:<root>.A<kotlin.Int>
@@ -140,4 +140,4 @@ FILE fqName:<root> fileName:/thisWithCustomLabel.kt
           CALL 'public final fun <get-c> (): kotlin.Any declared in <root>.C' type=kotlin.Any origin=GET_PROPERTY
             $this: GET_VAR '<this>: <root>.C declared in <root>.<get-p>' type=<root>.C origin=null
         RETURN type=kotlin.Nothing from='public final fun <get-p> ($context_receiver_0: <root>.A<kotlin.Int>, $context_receiver_1: <root>.A<kotlin.String>, $context_receiver_2: <root>.B): kotlin.Int declared in <root>'
-          CONST Int type=kotlin.Int value=1
+          CONST Int type=kotlin.Int konstue=1

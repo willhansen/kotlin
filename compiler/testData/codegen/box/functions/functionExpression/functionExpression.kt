@@ -1,8 +1,8 @@
-val foo1 = fun Any.(): String {
+konst foo1 = fun Any.(): String {
 return  "239" + this
 }
 
-val foo2 = fun Int.(i : Int) : Int = this + i
+konst foo2 = fun Int.(i : Int) : Int = this + i
 
 fun <T> fooT1() = fun (t : T) = t.toString()
 
@@ -18,14 +18,14 @@ fun box() : String {
     if(  1.(fun Int.(i: Int) = i + this)(1) != 2) return "test 6 failed";
     if(  (fooT1<String>()("mama")) != "mama")  return "test 7 failed";
 
-    val a = @A fun Int.() = this + 1
+    konst a = @A fun Int.() = this + 1
     if (1.a() != 2) return "test 8 failed"
-    val b = ( fun Int.() = this + 1)
+    konst b = ( fun Int.() = this + 1)
     if (1.b() != 2) return "test 9 failed"
-    val c = (c@ fun Int.() = this + 1)
+    konst c = (c@ fun Int.() = this + 1)
     if (1.c() != 2) return "test 10 failed"
 
-    val d = d@ fun (): Int { return@d 4}
+    konst d = d@ fun (): Int { return@d 4}
     if (d() != 4) return "test 11 failed"
 
     return "OK"

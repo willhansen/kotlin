@@ -18,8 +18,8 @@ package org.jetbrains.kotlin.js.inline.context
 
 import org.jetbrains.kotlin.js.backend.ast.JsStatement
 
-class InliningContext(val currentStatement: JsStatement?) {
-    val previousStatements = mutableListOf<JsStatement>()
+class InliningContext(konst currentStatement: JsStatement?) {
+    konst previousStatements = mutableListOf<JsStatement>()
 
     fun newNamingContext() = NamingContext(previousStatements)
 }

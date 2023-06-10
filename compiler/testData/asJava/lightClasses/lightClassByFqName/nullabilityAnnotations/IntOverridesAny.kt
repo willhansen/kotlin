@@ -2,10 +2,10 @@
 
 interface Tr {
     fun foo(): Any
-    val v: Any
+    konst v: Any
 }
 
 class C: Tr {
     override fun foo() = 1
-    override val v = { 1 }()
+    override konst v = { 1 }()
 }

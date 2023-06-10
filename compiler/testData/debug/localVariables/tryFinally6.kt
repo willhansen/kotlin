@@ -5,19 +5,19 @@
 
 inline fun h(block: () -> Unit) {
     try {
-        val hLocal = "hLocal"
+        konst hLocal = "hLocal"
         block()
     } finally {
-        val h = "h"
+        konst h = "h"
     }
 }
 
 inline fun g(block: () -> Unit) {
     try {
-        val gLocal = "gLocal"
+        konst gLocal = "gLocal"
         h(block)
     } finally {
-        val g = "g"
+        konst g = "g"
     }
 }
 
@@ -39,8 +39,8 @@ fun compute(): String {
 }
 
 fun box() {
-    val result = compute()
-    val localX = x
+    konst result = compute()
+    konst localX = x
 }
 
 // EXPECTATIONS JVM JVM_IR

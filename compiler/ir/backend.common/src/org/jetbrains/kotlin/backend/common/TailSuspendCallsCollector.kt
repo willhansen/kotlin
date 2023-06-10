@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
-data class TailSuspendCalls(val callSites: Set<IrCall>, val hasNotTailSuspendCalls: Boolean)
+data class TailSuspendCalls(konst callSites: Set<IrCall>, konst hasNotTailSuspendCalls: Boolean)
 
 /**
  * Collects calls to be treated as tail calls: "last" expressions which are either direct return statement with a call
@@ -22,16 +22,16 @@ data class TailSuspendCalls(val callSites: Set<IrCall>, val hasNotTailSuspendCal
  */
 fun collectTailSuspendCalls(context: CommonBackendContext, irFunction: IrSimpleFunction): TailSuspendCalls {
     require(irFunction.isSuspend) { "A suspend function expected: ${irFunction.render()}" }
-    val body = irFunction.body ?: return TailSuspendCalls(emptySet(), false)
+    konst body = irFunction.body ?: return TailSuspendCalls(emptySet(), false)
 
-    class VisitorState(val insideTryBlock: Boolean, val isTailExpression: Boolean)
+    class VisitorState(konst insideTryBlock: Boolean, konst isTailExpression: Boolean)
 
-    val isUnitReturn = irFunction.returnType.isUnit()
+    konst isUnitReturn = irFunction.returnType.isUnit()
     var hasNotTailSuspendCall = false
-    val tailSuspendCalls = mutableSetOf<IrCall>()
-    val tailReturnableBlocks = mutableSetOf<IrReturnableBlockSymbol>()
+    konst tailSuspendCalls = mutableSetOf<IrCall>()
+    konst tailReturnableBlocks = mutableSetOf<IrReturnableBlockSymbol>()
 
-    val visitor = object : IrElementVisitor<Unit, VisitorState> {
+    konst visitor = object : IrElementVisitor<Unit, VisitorState> {
         override fun visitElement(element: IrElement, data: VisitorState) {
             element.acceptChildren(this, VisitorState(data.insideTryBlock, isTailExpression = false))
         }
@@ -46,7 +46,7 @@ fun collectTailSuspendCalls(context: CommonBackendContext, irFunction: IrSimpleF
             expression.returnTargetSymbol == irFunction.symbol || expression.returnTargetSymbol in tailReturnableBlocks
 
         override fun visitReturn(expression: IrReturn, data: VisitorState) {
-            expression.value.accept(this, VisitorState(data.insideTryBlock, isTailReturn(expression)))
+            expression.konstue.accept(this, VisitorState(data.insideTryBlock, isTailReturn(expression)))
         }
 
         override fun visitExpressionBody(body: IrExpressionBody, data: VisitorState) =
@@ -63,7 +63,7 @@ fun collectTailSuspendCalls(context: CommonBackendContext, irFunction: IrSimpleF
 
         private fun visitStatementContainer(expression: IrStatementContainer, data: VisitorState) {
             expression.statements.forEachIndexed { index, irStatement ->
-                val isTailStatement = if (index == expression.statements.lastIndex) {
+                konst isTailStatement = if (index == expression.statements.lastIndex) {
                     // The last statement defines the result of the container expression, so it has the same kind.
                     // Note: this is even true for returnable blocks: if it is a Unit-returning block, this is exactly
                     // like a usual block; if it is a non-Unit block, then it must end with an explicit return statement.
@@ -71,7 +71,7 @@ fun collectTailSuspendCalls(context: CommonBackendContext, irFunction: IrSimpleF
                 } else {
                     // In a Unit-returning function, any statement directly followed by a `return` is a tail statement.
                     isUnitReturn && expression.statements[index + 1].let {
-                        it is IrReturn && isTailReturn(it) && it.value.isUnitRead()
+                        it is IrReturn && isTailReturn(it) && it.konstue.isUnitRead()
                     }
                 }
                 irStatement.accept(this, VisitorState(data.insideTryBlock, isTailStatement))
@@ -94,7 +94,7 @@ fun collectTailSuspendCalls(context: CommonBackendContext, irFunction: IrSimpleF
             }
 
             // For a tail call, [returnIfSuspended] can be optimized away.
-            val isTailExpression = data.isTailExpression && expression.isReturnIfSuspendedCall()
+            konst isTailExpression = data.isTailExpression && expression.isReturnIfSuspendedCall()
             expression.acceptChildren(this, VisitorState(data.insideTryBlock, isTailExpression))
         }
 

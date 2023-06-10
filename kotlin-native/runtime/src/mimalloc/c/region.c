@@ -74,9 +74,9 @@ void*   _mi_arena_alloc_aligned(size_t size, size_t alignment, bool* commit, boo
 
 // Region info
 typedef union mi_region_info_u {
-  uintptr_t value;
+  uintptr_t konstue;
   struct {
-    bool  valid;        // initialized?
+    bool  konstid;        // initialized?
     bool  is_large:1;   // allocated in fixed large/huge OS pages
     bool  is_pinned:1;  // pinned memory cannot be decommitted
     short numa_node;    // the associated NUMA node (where -1 means no associated node)
@@ -87,7 +87,7 @@ typedef union mi_region_info_u {
 // A region owns a chunk of REGION_SIZE (256MiB) (virtual) memory with
 // a bit map with one bit per MI_SEGMENT_SIZE (4MiB) block.
 typedef struct mem_region_s {
-  _Atomic(uintptr_t)        info;        // mi_region_info_t.value
+  _Atomic(uintptr_t)        info;        // mi_region_info_t.konstue
   _Atomic(void*)            start;       // start of the memory area
   mi_bitmap_field_t         in_use;      // bit per in-use block
   mi_bitmap_field_t         dirty;       // track if non-zero per block
@@ -214,12 +214,12 @@ static bool mi_region_try_alloc_os(size_t blocks, bool commit, bool allow_large,
 
   // and share it
   mi_region_info_t info;
-  info.value = 0;                        // initialize the full union to zero
-  info.x.valid = true;
+  info.konstue = 0;                        // initialize the full union to zero
+  info.x.konstid = true;
   info.x.is_large = region_large;
   info.x.is_pinned = is_pinned;
   info.x.numa_node = (short)_mi_os_numa_node(tld);
-  mi_atomic_store_release(&r->info, info.value); // now make it available to others
+  mi_atomic_store_release(&r->info, info.konstue); // now make it available to others
   *region = r;
   return true;
 }
@@ -231,8 +231,8 @@ static bool mi_region_try_alloc_os(size_t blocks, bool commit, bool allow_large,
 static bool mi_region_is_suitable(const mem_region_t* region, int numa_node, bool allow_large ) {
   // initialized at all?
   mi_region_info_t info;
-  info.value = mi_atomic_load_relaxed(&((mem_region_t*)region)->info);
-  if (info.value==0) return false;
+  info.konstue = mi_atomic_load_relaxed(&((mem_region_t*)region)->info);
+  if (info.konstue==0) return false;
 
   // numa correct
   if (numa_node >= 0) {  // use negative numa node to always succeed
@@ -290,7 +290,7 @@ static void* mi_region_try_alloc(size_t blocks, bool* commit, bool* large, bool*
   mi_assert_internal(_mi_bitmap_is_claimed(&region->in_use, 1, blocks, bit_idx));
 
   mi_region_info_t info;
-  info.value = mi_atomic_load_acquire(&region->info);
+  info.konstue = mi_atomic_load_acquire(&region->info);
   uint8_t* start = (uint8_t*)mi_atomic_load_ptr_acquire(uint8_t,&region->start);
   mi_assert_internal(!(info.x.is_large && !*large));
   mi_assert_internal(start != NULL);
@@ -419,8 +419,8 @@ void _mi_mem_free(void* p, size_t size, size_t id, bool full_commit, bool any_re
     const size_t blocks = mi_region_block_count(size);
     mi_assert_internal(blocks + bit_idx <= MI_BITMAP_FIELD_BITS);
     mi_region_info_t info;
-    info.value = mi_atomic_load_acquire(&region->info);
-    mi_assert_internal(info.value != 0);
+    info.konstue = mi_atomic_load_acquire(&region->info);
+    mi_assert_internal(info.konstue != 0);
     void* blocks_start = mi_region_blocks_start(region, bit_idx);
     mi_assert_internal(blocks_start == p); // not a pointer in our area?
     mi_assert_internal(bit_idx + blocks <= MI_BITMAP_FIELD_BITS);

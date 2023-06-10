@@ -7,39 +7,39 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Visibility modality:ABSTRACT visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:name visibility:public modality:FINAL [val]
+    PROPERTY name:name visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:name type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'name: kotlin.String declared in <root>.Visibility.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:name visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:name visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-name> (): kotlin.String declared in <root>.Visibility'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:name type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: <root>.Visibility declared in <root>.Visibility.<get-name>' type=<root>.Visibility origin=null
-    PROPERTY name:isPublicAPI visibility:public modality:FINAL [val]
+    PROPERTY name:isPublicAPI visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:isPublicAPI type:kotlin.Boolean visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'isPublicAPI: kotlin.Boolean declared in <root>.Visibility.<init>' type=kotlin.Boolean origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean
-        correspondingProperty: PROPERTY name:isPublicAPI visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:isPublicAPI visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:isPublicAPI type:kotlin.Boolean visibility:private [final]' type=kotlin.Boolean origin=null
               receiver: GET_VAR '<this>: <root>.Visibility declared in <root>.Visibility.<get-isPublicAPI>' type=<root>.Visibility origin=null
-    PROPERTY name:internalDisplayName visibility:public modality:OPEN [val]
+    PROPERTY name:internalDisplayName visibility:public modality:OPEN [konst]
       FUN name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:internalDisplayName visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY name:internalDisplayName visibility:public modality:OPEN [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility'
             CALL 'public final fun <get-name> (): kotlin.String declared in <root>.Visibility' type=kotlin.String origin=GET_PROPERTY
               $this: GET_VAR '<this>: <root>.Visibility declared in <root>.Visibility.<get-internalDisplayName>' type=<root>.Visibility origin=null
-    PROPERTY name:externalDisplayName visibility:public modality:OPEN [val]
+    PROPERTY name:externalDisplayName visibility:public modality:OPEN [konst]
       FUN name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:externalDisplayName visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY name:externalDisplayName visibility:public modality:OPEN [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility'
@@ -71,8 +71,8 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.Private [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="private"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=false
+            name: CONST String type=kotlin.String konstue="private"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=false
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Private modality:FINAL visibility:public superTypes:[<root>.Visibility]'
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.Private) returnType:kotlin.Boolean
         overridden:
@@ -80,36 +80,36 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.Private
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun mustCheckInImports (): kotlin.Boolean declared in <root>.Visibilities.Private'
-            CONST Boolean type=kotlin.Boolean value=true
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            CONST Boolean type=kotlin.Boolean konstue=true
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -131,48 +131,48 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.PrivateToThis [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="private_to_this"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=false
+            name: CONST String type=kotlin.String konstue="private_to_this"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=false
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:PrivateToThis modality:FINAL visibility:public superTypes:[<root>.Visibility]'
-      PROPERTY name:internalDisplayName visibility:public modality:OPEN [val]
+      PROPERTY name:internalDisplayName visibility:public modality:OPEN [konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibilities.PrivateToThis) returnType:kotlin.String
-          correspondingProperty: PROPERTY name:internalDisplayName visibility:public modality:OPEN [val]
+          correspondingProperty: PROPERTY name:internalDisplayName visibility:public modality:OPEN [konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.PrivateToThis
           BLOCK_BODY
             RETURN type=kotlin.Nothing from='public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibilities.PrivateToThis'
-              CONST String type=kotlin.String value="private/*private to this*/"
+              CONST String type=kotlin.String konstue="private/*private to this*/"
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.PrivateToThis) returnType:kotlin.Boolean
         overridden:
           public abstract fun mustCheckInImports (): kotlin.Boolean declared in <root>.Visibility
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.PrivateToThis
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun mustCheckInImports (): kotlin.Boolean declared in <root>.Visibilities.PrivateToThis'
-            CONST Boolean type=kotlin.Boolean value=true
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            CONST Boolean type=kotlin.Boolean konstue=true
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -194,8 +194,8 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.Protected [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="protected"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=true
+            name: CONST String type=kotlin.String konstue="protected"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=true
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Protected modality:FINAL visibility:public superTypes:[<root>.Visibility]'
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.Protected) returnType:kotlin.Boolean
         overridden:
@@ -203,36 +203,36 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.Protected
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun mustCheckInImports (): kotlin.Boolean declared in <root>.Visibilities.Protected'
-            CONST Boolean type=kotlin.Boolean value=false
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            CONST Boolean type=kotlin.Boolean konstue=false
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -254,8 +254,8 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.Internal [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="internal"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=false
+            name: CONST String type=kotlin.String konstue="internal"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=false
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Internal modality:FINAL visibility:public superTypes:[<root>.Visibility]'
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.Internal) returnType:kotlin.Boolean
         overridden:
@@ -263,36 +263,36 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.Internal
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun mustCheckInImports (): kotlin.Boolean declared in <root>.Visibilities.Internal'
-            CONST Boolean type=kotlin.Boolean value=true
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            CONST Boolean type=kotlin.Boolean konstue=true
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -314,8 +314,8 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.Public [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="public"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=true
+            name: CONST String type=kotlin.String konstue="public"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=true
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Public modality:FINAL visibility:public superTypes:[<root>.Visibility]'
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.Public) returnType:kotlin.Boolean
         overridden:
@@ -323,36 +323,36 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.Public
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun mustCheckInImports (): kotlin.Boolean declared in <root>.Visibilities.Public'
-            CONST Boolean type=kotlin.Boolean value=false
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            CONST Boolean type=kotlin.Boolean konstue=false
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -374,8 +374,8 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.Local [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="local"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=false
+            name: CONST String type=kotlin.String konstue="local"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=false
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Local modality:FINAL visibility:public superTypes:[<root>.Visibility]'
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.Local) returnType:kotlin.Boolean
         overridden:
@@ -383,36 +383,36 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.Local
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun mustCheckInImports (): kotlin.Boolean declared in <root>.Visibilities.Local'
-            CONST Boolean type=kotlin.Boolean value=true
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+            CONST Boolean type=kotlin.Boolean konstue=true
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -434,8 +434,8 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.Inherited [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="inherited"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=false
+            name: CONST String type=kotlin.String konstue="inherited"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=false
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Inherited modality:FINAL visibility:public superTypes:[<root>.Visibility]'
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.Inherited) returnType:kotlin.Boolean
         overridden:
@@ -444,36 +444,36 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         BLOCK_BODY
           THROW type=kotlin.Nothing
             CONSTRUCTOR_CALL 'public constructor <init> (p0: @[FlexibleNullability] kotlin.String?) declared in java.lang.IllegalStateException' type=java.lang.IllegalStateException origin=null
-              p0: CONST String type=kotlin.String value="This method shouldn't be invoked for INHERITED visibility"
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+              p0: CONST String type=kotlin.String konstue="This method shouldn't be invoked for INHERITED visibility"
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -495,8 +495,8 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.InvisibleFake [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="invisible_fake"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=false
+            name: CONST String type=kotlin.String konstue="invisible_fake"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=false
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:InvisibleFake modality:FINAL visibility:public superTypes:[<root>.Visibility]'
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.InvisibleFake) returnType:kotlin.Boolean
         overridden:
@@ -504,39 +504,39 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.InvisibleFake
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun mustCheckInImports (): kotlin.Boolean declared in <root>.Visibilities.InvisibleFake'
-            CONST Boolean type=kotlin.Boolean value=true
-      PROPERTY name:externalDisplayName visibility:public modality:OPEN [val]
+            CONST Boolean type=kotlin.Boolean konstue=true
+      PROPERTY name:externalDisplayName visibility:public modality:OPEN [konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibilities.InvisibleFake) returnType:kotlin.String
-          correspondingProperty: PROPERTY name:externalDisplayName visibility:public modality:OPEN [val]
+          correspondingProperty: PROPERTY name:externalDisplayName visibility:public modality:OPEN [konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities.InvisibleFake
           BLOCK_BODY
             RETURN type=kotlin.Nothing from='public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibilities.InvisibleFake'
-              CONST String type=kotlin.String value="invisible (private in a supertype)"
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+              CONST String type=kotlin.String konstue="invisible (private in a supertype)"
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -558,8 +558,8 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
       CONSTRUCTOR visibility:private <> () returnType:<root>.Visibilities.Unknown [primary]
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, isPublicAPI: kotlin.Boolean) declared in <root>.Visibility'
-            name: CONST String type=kotlin.String value="unknown"
-            isPublicAPI: CONST Boolean type=kotlin.Boolean value=false
+            name: CONST String type=kotlin.String konstue="unknown"
+            isPublicAPI: CONST Boolean type=kotlin.Boolean konstue=false
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:Unknown modality:FINAL visibility:public superTypes:[<root>.Visibility]'
       FUN name:mustCheckInImports visibility:public modality:OPEN <> ($this:<root>.Visibilities.Unknown) returnType:kotlin.Boolean
         overridden:
@@ -568,36 +568,36 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         BLOCK_BODY
           THROW type=kotlin.Nothing
             CONSTRUCTOR_CALL 'public constructor <init> (p0: @[FlexibleNullability] kotlin.String?) declared in java.lang.IllegalStateException' type=java.lang.IllegalStateException origin=null
-              p0: CONST String type=kotlin.String value="This method shouldn't be invoked for UNKNOWN visibility"
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+              p0: CONST String type=kotlin.String konstue="This method shouldn't be invoked for UNKNOWN visibility"
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final isPublicAPI: kotlin.Boolean
         FUN FAKE_OVERRIDE name:<get-isPublicAPI> visibility:public modality:FINAL <> ($this:<root>.Visibility) returnType:kotlin.Boolean [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:isPublicAPI visibility:public modality:FINAL [fake_override,konst]
           overridden:
             public final fun <get-isPublicAPI> (): kotlin.Boolean declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open internalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-internalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:internalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-internalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
-      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open externalDisplayName: kotlin.String
         FUN FAKE_OVERRIDE name:<get-externalDisplayName> visibility:public modality:OPEN <> ($this:<root>.Visibility) returnType:kotlin.String [fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:externalDisplayName visibility:public modality:OPEN [fake_override,konst]
           overridden:
             public open fun <get-externalDisplayName> (): kotlin.String declared in <root>.Visibility
           $this: VALUE_PARAMETER name:<this> type:<root>.Visibility
@@ -614,7 +614,7 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
         overridden:
           public open fun toString (): kotlin.String declared in <root>.Visibility
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-    PROPERTY name:ORDERED_VISIBILITIES visibility:private modality:FINAL [val]
+    PROPERTY name:ORDERED_VISIBILITIES visibility:private modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:ORDERED_VISIBILITIES type:kotlin.collections.Map<<root>.Visibility, kotlin.Int> visibility:private [final]
         EXPRESSION_BODY
           CALL 'public final fun buildMap <K, V> (builderAction: @[ExtensionFunctionType] kotlin.Function1<kotlin.collections.MutableMap<K of kotlin.collections.buildMap, V of kotlin.collections.buildMap>, kotlin.Unit>): kotlin.collections.Map<K of kotlin.collections.buildMap, V of kotlin.collections.buildMap> declared in kotlin.collections' type=kotlin.collections.Map<<root>.Visibility, kotlin.Int> origin=null
@@ -625,32 +625,32 @@ FILE fqName:<root> fileName:/typeVariableAfterBuildMap.kt
                 $receiver: VALUE_PARAMETER name:$this$buildMap type:kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int>
                 BLOCK_BODY
                   TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
-                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, value: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
+                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, konstue: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
                       $this: GET_VAR '$this$buildMap: kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> declared in <root>.Visibilities.ORDERED_VISIBILITIES.<anonymous>' type=kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> origin=null
                       key: GET_OBJECT 'CLASS OBJECT name:PrivateToThis modality:FINAL visibility:public superTypes:[<root>.Visibility]' type=<root>.Visibilities.PrivateToThis
-                      value: CONST Int type=kotlin.Int value=0
+                      konstue: CONST Int type=kotlin.Int konstue=0
                   TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
-                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, value: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
+                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, konstue: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
                       $this: GET_VAR '$this$buildMap: kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> declared in <root>.Visibilities.ORDERED_VISIBILITIES.<anonymous>' type=kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> origin=null
                       key: GET_OBJECT 'CLASS OBJECT name:Private modality:FINAL visibility:public superTypes:[<root>.Visibility]' type=<root>.Visibilities.Private
-                      value: CONST Int type=kotlin.Int value=0
+                      konstue: CONST Int type=kotlin.Int konstue=0
                   TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
-                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, value: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
+                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, konstue: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
                       $this: GET_VAR '$this$buildMap: kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> declared in <root>.Visibilities.ORDERED_VISIBILITIES.<anonymous>' type=kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> origin=null
                       key: GET_OBJECT 'CLASS OBJECT name:Internal modality:FINAL visibility:public superTypes:[<root>.Visibility]' type=<root>.Visibilities.Internal
-                      value: CONST Int type=kotlin.Int value=1
+                      konstue: CONST Int type=kotlin.Int konstue=1
                   TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
-                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, value: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
+                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, konstue: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
                       $this: GET_VAR '$this$buildMap: kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> declared in <root>.Visibilities.ORDERED_VISIBILITIES.<anonymous>' type=kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> origin=null
                       key: GET_OBJECT 'CLASS OBJECT name:Protected modality:FINAL visibility:public superTypes:[<root>.Visibility]' type=<root>.Visibilities.Protected
-                      value: CONST Int type=kotlin.Int value=1
+                      konstue: CONST Int type=kotlin.Int konstue=1
                   TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
-                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, value: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
+                    CALL 'public abstract fun put (key: K of kotlin.collections.MutableMap, konstue: V of kotlin.collections.MutableMap): V of kotlin.collections.MutableMap? declared in kotlin.collections.MutableMap' type=kotlin.Int? origin=null
                       $this: GET_VAR '$this$buildMap: kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> declared in <root>.Visibilities.ORDERED_VISIBILITIES.<anonymous>' type=kotlin.collections.MutableMap<<root>.Visibility, kotlin.Int> origin=null
                       key: GET_OBJECT 'CLASS OBJECT name:Public modality:FINAL visibility:public superTypes:[<root>.Visibility]' type=<root>.Visibilities.Public
-                      value: CONST Int type=kotlin.Int value=2
+                      konstue: CONST Int type=kotlin.Int konstue=2
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-ORDERED_VISIBILITIES> visibility:private modality:FINAL <> ($this:<root>.Visibilities) returnType:kotlin.collections.Map<<root>.Visibility, kotlin.Int>
-        correspondingProperty: PROPERTY name:ORDERED_VISIBILITIES visibility:private modality:FINAL [val]
+        correspondingProperty: PROPERTY name:ORDERED_VISIBILITIES visibility:private modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Visibilities
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='private final fun <get-ORDERED_VISIBILITIES> (): kotlin.collections.Map<<root>.Visibility, kotlin.Int> declared in <root>.Visibilities'

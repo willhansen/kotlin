@@ -36,12 +36,12 @@ import java.io.File
 
 class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryArtifactHandler(testServices) {
     companion object {
-        const val DUMP_EXTENSION = "asm.txt"
-        const val IR_DUMP_EXTENSION = "asm.ir.txt"
-        const val FIR_DUMP_EXTENSION = "asm.fir.txt"
-        const val LINE_SEPARATOR = "\n"
+        const konst DUMP_EXTENSION = "asm.txt"
+        const konst IR_DUMP_EXTENSION = "asm.ir.txt"
+        const konst FIR_DUMP_EXTENSION = "asm.fir.txt"
+        const konst LINE_SEPARATOR = "\n"
 
-        val IGNORED_CLASS_VISIBLE_ANNOTATIONS = setOf(
+        konst IGNORED_CLASS_VISIBLE_ANNOTATIONS = setOf(
             "Lkotlin/Metadata;",
             "Lkotlin/annotation/Target;",
             "Lkotlin/annotation/Retention;",
@@ -50,22 +50,22 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
         )
     }
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(AsmLikeInstructionListingDirectives)
 
-    private val baseDumper = MultiModuleInfoDumper()
+    private konst baseDumper = MultiModuleInfoDumper()
 
     override fun processModule(module: TestModule, info: BinaryArtifacts.Jvm) {
         if (CHECK_ASM_LIKE_INSTRUCTIONS !in module.directives) return
-        val builder = baseDumper.builderForModule(module)
-        val classes = info.classFileFactory
+        konst builder = baseDumper.builderForModule(module)
+        konst classes = info.classFileFactory
             .getClassFiles()
             .sortedBy { it.relativePath }
             .map { file -> ClassNode().also { ClassReader(file.asByteArray()).accept(it, ClassReader.EXPAND_FRAMES) } }
 
-        val printBytecodeForTheseMethods = module.directives[CURIOUS_ABOUT]
-        val showLocalVariables = LOCAL_VARIABLE_TABLE in module.directives
-        val renderAnnotations = RENDER_ANNOTATIONS in module.directives
+        konst printBytecodeForTheseMethods = module.directives[CURIOUS_ABOUT]
+        konst showLocalVariables = LOCAL_VARIABLE_TABLE in module.directives
+        konst renderAnnotations = RENDER_ANNOTATIONS in module.directives
 
         classes.forEachIndexed { index, classNode ->
             builder.renderClassNode(classNode, printBytecodeForTheseMethods, showLocalVariables, renderAnnotations)
@@ -82,10 +82,10 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
         showLocalVariables: Boolean,
         renderAnnotations: Boolean
     ) {
-        val fields = (clazz.fields ?: emptyList()).sortedBy { it.name }
-        val methods = (clazz.methods ?: emptyList()).sortedBy { it.name }
+        konst fields = (clazz.fields ?: emptyList()).sortedBy { it.name }
+        konst methods = (clazz.methods ?: emptyList()).sortedBy { it.name }
 
-        val superTypes = (listOf(clazz.superName) + clazz.interfaces).filterNotNull()
+        konst superTypes = (listOf(clazz.superName) + clazz.interfaces).filterNotNull()
 
         if (renderAnnotations) {
             clazz.signature?.let {
@@ -104,8 +104,8 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
         appendLine(" {")
 
         if (renderAnnotations) {
-            val textifier = Textifier()
-            val visitor = TraceMethodVisitor(textifier)
+            konst textifier = Textifier()
+            konst visitor = TraceMethodVisitor(textifier)
 
             clazz.visibleAnnotations?.forEach {
                 if (it.desc !in IGNORED_CLASS_VISIBLE_ANNOTATIONS) {
@@ -136,7 +136,7 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
         }
 
         methods.joinTo(this, LINE_SEPARATOR.repeat(2)) {
-            val showBytecode = showBytecodeForTheseMethods.contains(it.name)
+            konst showBytecode = showBytecodeForTheseMethods.contains(it.name)
             renderMethod(it, showBytecode, showLocalVariables, renderAnnotations).withMargin()
         }
 
@@ -155,8 +155,8 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
         append(field.name)
 
         if (renderAnnotations) {
-            val textifier = Textifier()
-            val visitor = TraceFieldVisitor(textifier)
+            konst textifier = Textifier()
+            konst visitor = TraceFieldVisitor(textifier)
 
             field.visibleAnnotations?.forEach {
                 it.accept(visitor.visitAnnotation(it.desc, true))
@@ -191,18 +191,18 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
 
         renderVisibilityModifiers(method.access)
         renderModalityModifiers(method.access)
-        val (returnType, parameterTypes) = with(Type.getMethodType(method.desc)) { returnType to argumentTypes }
+        konst (returnType, parameterTypes) = with(Type.getMethodType(method.desc)) { returnType to argumentTypes }
         append(returnType.className).append(' ')
         append(method.name)
 
         parameterTypes.mapIndexed { index, type ->
-            val name = getParameterName(index, method)
+            konst name = getParameterName(index, method)
             "${type.className} $name"
         }.joinTo(this, prefix = "(", postfix = ")")
 
         if (renderAnnotations) {
-            val textifier = Textifier()
-            val visitor = TraceMethodVisitor(textifier)
+            konst textifier = Textifier()
+            konst visitor = TraceMethodVisitor(textifier)
 
             method.visibleAnnotations?.forEach {
                 it.accept(visitor.visitAnnotation(it.desc, true))
@@ -245,14 +245,14 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
             }
         }
 
-        val actualShowBytecode = showBytecode && (method.access and Opcodes.ACC_ABSTRACT) == 0
-        val actualShowLocalVariables = showLocalVariables && method.localVariables?.takeIf { it.isNotEmpty() } != null
+        konst actualShowBytecode = showBytecode && (method.access and Opcodes.ACC_ABSTRACT) == 0
+        konst actualShowLocalVariables = showLocalVariables && method.localVariables?.takeIf { it.isNotEmpty() } != null
 
         if (actualShowBytecode || actualShowLocalVariables) {
             appendLine(" {")
 
             if (actualShowLocalVariables) {
-                val localVariableTable = buildLocalVariableTable(method)
+                konst localVariableTable = buildLocalVariableTable(method)
                 if (localVariableTable.isNotEmpty()) {
                     append(localVariableTable.withMargin())
                 }
@@ -272,21 +272,21 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
     }
 
     private fun getParameterName(index: Int, method: MethodNode): String {
-        val localVariableIndexOffset = when {
+        konst localVariableIndexOffset = when {
             (method.access and Opcodes.ACC_STATIC) != 0 -> 0
             method.isJvmOverloadsGenerated() -> 0
             else -> 1
         }
 
-        val actualIndex = index + localVariableIndexOffset
-        val localVariables = method.localVariables
+        konst actualIndex = index + localVariableIndexOffset
+        konst localVariables = method.localVariables
         return localVariables?.firstOrNull {
             it.index == actualIndex
         }?.name ?: "p$index"
     }
 
     private fun buildLocalVariableTable(method: MethodNode): String {
-        val localVariables = method.localVariables?.takeIf { it.isNotEmpty() } ?: return ""
+        konst localVariables = method.localVariables?.takeIf { it.isNotEmpty() } ?: return ""
         return buildString {
             append("Local variables:")
             for (variable in localVariables) {
@@ -296,7 +296,7 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
     }
 
     private fun renderBytecodeInstructions(instructions: InsnList) = buildString {
-        val labelMappings = LabelMappings()
+        konst labelMappings = LabelMappings()
 
         var currentInsn = instructions.first
         while (currentInsn != null) {
@@ -318,7 +318,7 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
 
         if (node is FrameNode) return
 
-        append("  ").append(Printer.OPCODES[node.opcode] ?: error("Invalid opcode ${node.opcode}"))
+        append("  ").append(Printer.OPCODES[node.opcode] ?: error("Inkonstid opcode ${node.opcode}"))
 
         when (node) {
             is FieldInsnNode -> append(" (${node.owner}, ${node.name}, ${node.desc})")
@@ -336,7 +336,7 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
         appendLine()
 
         if (node is TableSwitchInsnNode || node is LookupSwitchInsnNode) {
-            val (cases, default) = if (node is LookupSwitchInsnNode) {
+            konst (cases, default) = if (node is LookupSwitchInsnNode) {
                 node.keys.zip(node.labels) to node.dflt
             } else {
                 (node as TableSwitchInsnNode).min.rangeTo(node.max).zip(node.labels) to node.dflt
@@ -370,7 +370,7 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
         private var currentIndex = 0
 
         operator fun get(label: Label): Int {
-            val hashCode = System.identityHashCode(label)
+            konst hashCode = System.identityHashCode(label)
             return mappings.getOrPut(hashCode) { currentIndex++ }
         }
     }
@@ -386,25 +386,25 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (baseDumper.isEmpty()) return
 
-        val irDifference = IR_DIFFERENCE in testServices.moduleStructure.allDirectives
-        val firDifference = FIR_DIFFERENCE in testServices.moduleStructure.allDirectives
+        konst irDifference = IR_DIFFERENCE in testServices.moduleStructure.allDirectives
+        konst firDifference = FIR_DIFFERENCE in testServices.moduleStructure.allDirectives
 
-        val firstModule = testServices.moduleStructure.modules.first()
+        konst firstModule = testServices.moduleStructure.modules.first()
 
-        val extension = when {
+        konst extension = when {
             firDifference && firstModule.frontendKind == FrontendKinds.FIR -> FIR_DUMP_EXTENSION
             irDifference && firstModule.targetBackend?.isIR == true -> IR_DUMP_EXTENSION
             else -> DUMP_EXTENSION
         }
 
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val file = testDataFile.withExtension(extension)
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst file = testDataFile.withExtension(extension)
         assertions.assertEqualsToFile(file, baseDumper.generateResultingDump())
 
 
-        val noIrDump = testDataFile.withExtension(DUMP_EXTENSION)
-        val irDump = testDataFile.withExtension(IR_DUMP_EXTENSION)
-        val firDump = testDataFile.withExtension(FIR_DUMP_EXTENSION)
+        konst noIrDump = testDataFile.withExtension(DUMP_EXTENSION)
+        konst irDump = testDataFile.withExtension(IR_DUMP_EXTENSION)
+        konst firDump = testDataFile.withExtension(FIR_DUMP_EXTENSION)
         if (firDifference) {
             checkDifferenceDirectiveIsNotNeeded(irDump, firDump, FIR_DIFFERENCE)
         }

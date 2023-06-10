@@ -3,7 +3,7 @@ interface In<in T : Any?> {
 }
 
 interface Inv<T : Any?> {
-  abstract val t: T
+  abstract konst t: T
     abstract get
 
 }
@@ -26,7 +26,7 @@ interface IB {
 fun test(a: In<IA>, b: In<IB>, z: Z) {
   z.create<Any>(x = a, y = b).<get-t>() /*as IA */.foo()
   z.create<Any>(x = a, y = b).<get-t>() /*as IB */.bar()
-  val t: Any = z.create<Any>(x = a, y = b).<get-t>()
+  konst t: Any = z.create<Any>(x = a, y = b).<get-t>()
   t /*as IA */.foo()
   t /*as IB */.bar()
 }

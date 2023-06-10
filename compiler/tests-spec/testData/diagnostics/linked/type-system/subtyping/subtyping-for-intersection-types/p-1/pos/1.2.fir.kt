@@ -5,7 +5,7 @@
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val x = case1(object : A1, B1 {})
+    konst x = case1(object : A1, B1 {})
     checkSubtype<A1>(x)
     checkSubtype<B1>(x)
 }
@@ -25,7 +25,7 @@ fun <T> case1(case: T): T where T : A1, T : B1 = case
 fun case2() {
     fun <T> case2(case: T): T where T : A2, T : B2 = case
 
-    val x = case2(C2())
+    konst x = case2(C2())
     checkSubtype<A2>(x)
     checkSubtype<B2>(x)
 }
@@ -42,7 +42,7 @@ interface B2 {
 
 // TESTCASE NUMBER: 3
 fun case3() {
-    val x = case3(object : A3, B3 {})
+    konst x = case3(object : A3, B3 {})
     checkSubtype<A3>(x)
     checkSubtype<B3>(x)
 }
@@ -62,7 +62,7 @@ fun <T> case3(case: T): T where T : A3, T : B3 = case
 fun case4() {
     fun <T> case4(case: T): T where T : A4, T : B4 = case
 
-    val x = case4(C4())
+    konst x = case4(C4())
     checkSubtype<A4>(x)
     checkSubtype<B4>(x)
 }
@@ -81,7 +81,7 @@ interface B4 {
 
 // TESTCASE NUMBER: 5
 fun case5() {
-    val x =  "" case5 object : A5, B5 {}
+    konst x =  "" case5 object : A5, B5 {}
     checkSubtype<A5>(x)
     checkSubtype<B5>(x)
 }
@@ -101,7 +101,7 @@ infix fun <T> CharSequence.case5(case: T): T where T : A5, T : B5 = case
 fun case6() {
     infix fun <T> CharSequence.case6(case: T): T where T : A6, T : B6 = case
 
-    val x = "" case6 C6()
+    konst x = "" case6 C6()
     checkSubtype<A6>(x)
     checkSubtype<B6>(x)
 }
@@ -118,7 +118,7 @@ interface B6 {
 
 // TESTCASE NUMBER: 7
 fun case7() {
-    val x = case7(object : A7, B7 {})
+    konst x = case7(object : A7, B7 {})
     checkSubtype<A7>(x)
     checkSubtype<B7>(x)
 }
@@ -138,7 +138,7 @@ fun <T> case7(case: T): T where T : A7, T : B7 = case
 fun case8() {
     infix fun <T> CharSequence.case8(case: T): T where T : A8, T : B8 = case
 
-    val x = "" case8 C8()
+    konst x = "" case8 C8()
     checkSubtype<A8>(x)
     checkSubtype<B8>(x)
 }

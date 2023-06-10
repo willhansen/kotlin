@@ -7,10 +7,10 @@ FILE: [ResolvedTo(RAW_FIR)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -29,11 +29,11 @@ FILE: [ResolvedTo(RAW_FIR)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -46,10 +46,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -68,11 +68,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -85,10 +85,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -107,11 +107,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -124,10 +124,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -146,11 +146,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -163,10 +163,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -185,11 +185,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -202,10 +202,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -224,11 +224,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -241,10 +241,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -263,11 +263,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -280,10 +280,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -302,11 +302,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -319,10 +319,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -341,11 +341,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -353,9 +353,9 @@ CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(CONTRACTS)] fun expression([ResolvedTo(CONTRACTS)] expression: R|IrConst<*>|): R|kotlin/Unit| {
-        when ([ResolvedTo(RAW_FIR)] lval kind: <implicit> = expression#.kind#) {
+        when ([ResolvedTo(RAW_FIR)] lkonst kind: <implicit> = expression#.kind#) {
             ($subj$ is Kind.Null) ->  {
-                kind#.valueOf#(expression#)
+                kind#.konstueOf#(expression#)
             }
             else ->  {
             }
@@ -367,10 +367,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -389,11 +389,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -401,9 +401,9 @@ IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun expression([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
-        when ([ResolvedTo(RAW_FIR)] lval kind: <implicit> = expression#.kind#) {
+        when ([ResolvedTo(RAW_FIR)] lkonst kind: <implicit> = expression#.kind#) {
             ($subj$ is Kind.Null) ->  {
-                kind#.valueOf#(expression#)
+                kind#.konstueOf#(expression#)
             }
             else ->  {
             }
@@ -415,10 +415,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -437,11 +437,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -449,9 +449,9 @@ ANNOTATIONS_ARGUMENTS_MAPPING:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] fun expression([ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] expression: R|IrConst<*>|): R|kotlin/Unit| {
-        when ([ResolvedTo(RAW_FIR)] lval kind: <implicit> = expression#.kind#) {
+        when ([ResolvedTo(RAW_FIR)] lkonst kind: <implicit> = expression#.kind#) {
             ($subj$ is Kind.Null) ->  {
-                kind#.valueOf#(expression#)
+                kind#.konstueOf#(expression#)
             }
             else ->  {
             }
@@ -463,10 +463,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val asString: String = R|<local>/asString|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst asString: String = R|<local>/asString|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] get(): String
 
-        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun valueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
+        @Suppress[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] fun konstueOf([ResolvedTo(RAW_FIR)] aConst: IrConst<*>): <implicit> { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] object Null : Kind<Nothing?> {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
@@ -485,11 +485,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public? abstract [ResolvedTo(RAW_FIR)] var kind: Kind<T>
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): Kind<T>
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: Kind<T>): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: Kind<T>): R|kotlin/Unit|
 
-        public? abstract [ResolvedTo(RAW_FIR)] var value: T
+        public? abstract [ResolvedTo(RAW_FIR)] var konstue: T
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] get(): T
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] value: T): R|kotlin/Unit|
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=IrConst] set([ResolvedTo(RAW_FIR)] konstue: T): R|kotlin/Unit|
 
     }
 
@@ -497,9 +497,9 @@ BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(BODY_RESOLVE)] fun expression([ResolvedTo(BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
-        when ([ResolvedTo(BODY_RESOLVE)] lval kind: R|Kind<out kotlin/Any?>| = R|<local>/expression|.R|SubstitutionOverride</IrConst.kind: R|Kind<CapturedType(*)>|>|) {
+        when ([ResolvedTo(BODY_RESOLVE)] lkonst kind: R|Kind<out kotlin/Any?>| = R|<local>/expression|.R|SubstitutionOverride</IrConst.kind: R|Kind<CapturedType(*)>|>|) {
             ($subj$ is R|Kind.Null|) ->  {
-                R|<local>/kind|.R|SubstitutionOverride</Kind.Null.valueOf: R|kotlin/Nothing?|>|(R|<local>/expression|)
+                R|<local>/kind|.R|SubstitutionOverride</Kind.Null.konstueOf: R|kotlin/Nothing?|>|(R|<local>/expression|)
             }
             else ->  {
             }
@@ -511,11 +511,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val asString: R|kotlin/String| = R|<local>/asString|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst asString: R|kotlin/String| = R|<local>/asString|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Kind] get(): R|kotlin/String|
 
-        @R|kotlin/Suppress|[Types](names = vararg(String(UNCHECKED_CAST))) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun valueOf([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] aConst: R|IrConst<*>|): R|T| {
-            ^valueOf (R|<local>/aConst| as R|IrConst<T>|).R|SubstitutionOverride</IrConst.value: R|T|>|
+        @R|kotlin/Suppress|[Types](names = vararg(String(UNCHECKED_CAST))) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun konstueOf([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] aConst: R|IrConst<*>|): R|T| {
+            ^konstueOf (R|<local>/aConst| as R|IrConst<T>|).R|SubstitutionOverride</IrConst.konstue: R|T|>|
         }
 
         public final [ResolvedTo(STATUS)] object Null : R|Kind<kotlin/Nothing?>| {
@@ -535,11 +535,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public abstract [ResolvedTo(STATUS)] var kind: R|Kind<T>|
             public [ResolvedTo(STATUS)] [ContainingClassKey=IrConst] get(): R|Kind<T>|
-            public [ResolvedTo(STATUS)] [ContainingClassKey=IrConst] set([ResolvedTo(STATUS)] value: R|Kind<T>|): R|kotlin/Unit|
+            public [ResolvedTo(STATUS)] [ContainingClassKey=IrConst] set([ResolvedTo(STATUS)] konstue: R|Kind<T>|): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(STATUS)] var value: R|T|
+        public abstract [ResolvedTo(STATUS)] var konstue: R|T|
             public [ResolvedTo(STATUS)] [ContainingClassKey=IrConst] get(): R|T|
-            public [ResolvedTo(STATUS)] [ContainingClassKey=IrConst] set([ResolvedTo(STATUS)] value: R|T|): R|kotlin/Unit|
+            public [ResolvedTo(STATUS)] [ContainingClassKey=IrConst] set([ResolvedTo(STATUS)] konstue: R|T|): R|kotlin/Unit|
 
     }
 
@@ -547,9 +547,9 @@ FILE RAW TO BODY:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(BODY_RESOLVE)] fun expression([ResolvedTo(BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
-        when ([ResolvedTo(BODY_RESOLVE)] lval kind: R|Kind<out kotlin/Any?>| = R|<local>/expression|.R|SubstitutionOverride</IrConst.kind: R|Kind<CapturedType(*)>|>|) {
+        when ([ResolvedTo(BODY_RESOLVE)] lkonst kind: R|Kind<out kotlin/Any?>| = R|<local>/expression|.R|SubstitutionOverride</IrConst.kind: R|Kind<CapturedType(*)>|>|) {
             ($subj$ is R|Kind.Null|) ->  {
-                R|<local>/kind|.R|SubstitutionOverride</Kind.Null.valueOf: R|kotlin/Nothing?|>|(R|<local>/expression|)
+                R|<local>/kind|.R|SubstitutionOverride</Kind.Null.konstueOf: R|kotlin/Nothing?|>|(R|<local>/expression|)
             }
             else ->  {
             }
@@ -561,11 +561,11 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val asString: R|kotlin/String| = R|<local>/asString|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst asString: R|kotlin/String| = R|<local>/asString|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Kind] get(): R|kotlin/String|
 
-        @R|kotlin/Suppress|[Types](names = vararg(String(UNCHECKED_CAST))) public final [ResolvedTo(BODY_RESOLVE)] fun valueOf([ResolvedTo(BODY_RESOLVE)] aConst: R|IrConst<*>|): R|T| {
-            ^valueOf (R|<local>/aConst| as R|IrConst<T>|).R|SubstitutionOverride</IrConst.value: R|T|>|
+        @R|kotlin/Suppress|[Types](names = vararg(String(UNCHECKED_CAST))) public final [ResolvedTo(BODY_RESOLVE)] fun konstueOf([ResolvedTo(BODY_RESOLVE)] aConst: R|IrConst<*>|): R|T| {
+            ^konstueOf (R|<local>/aConst| as R|IrConst<T>|).R|SubstitutionOverride</IrConst.konstue: R|T|>|
         }
 
         public final [ResolvedTo(BODY_RESOLVE)] object Null : R|Kind<kotlin/Nothing?>| {
@@ -587,10 +587,10 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
         public abstract [ResolvedTo(BODY_RESOLVE)] var kind: R|Kind<T>|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] get(): R|Kind<T>|
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] set([ResolvedTo(BODY_RESOLVE)] value: R|Kind<T>|): R|kotlin/Unit|
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] set([ResolvedTo(BODY_RESOLVE)] konstue: R|Kind<T>|): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] var value: R|T|
+        public abstract [ResolvedTo(BODY_RESOLVE)] var konstue: R|T|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] get(): R|T|
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] set([ResolvedTo(BODY_RESOLVE)] value: R|T|): R|kotlin/Unit|
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] set([ResolvedTo(BODY_RESOLVE)] konstue: R|T|): R|kotlin/Unit|
 
     }

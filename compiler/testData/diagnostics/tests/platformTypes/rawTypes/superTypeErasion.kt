@@ -10,5 +10,5 @@ public class Test extends BaseOperation {}
 
 // FILE: main.kt
 fun main() {
-    val x = Test()
+    konst x = Test()
 }

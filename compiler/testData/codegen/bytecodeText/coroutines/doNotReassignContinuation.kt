@@ -7,8 +7,8 @@ suspend fun suspendHere(): String = suspendCoroutineUninterceptedOrReturn { x ->
 }
 
 suspend fun suspendThere(param: Int, param2: String, param3: Long): String {
-    val a = suspendHere()
-    val b = suspendHere()
+    konst a = suspendHere()
+    konst b = suspendHere()
     return a + b
 }
 

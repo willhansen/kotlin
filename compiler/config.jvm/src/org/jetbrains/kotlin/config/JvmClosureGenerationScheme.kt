@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.config
 
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
-enum class JvmClosureGenerationScheme(val description: String) {
+enum class JvmClosureGenerationScheme(konst description: String) {
     CLASS("class"),
     INDY("indy"),
     ;
@@ -15,8 +15,8 @@ enum class JvmClosureGenerationScheme(val description: String) {
     companion object {
         @JvmStatic
         fun fromString(string: String?): JvmClosureGenerationScheme? {
-            val lowerStr = string?.toLowerCaseAsciiOnly() ?: return null
-            return values().find { it.description == lowerStr }
+            konst lowerStr = string?.toLowerCaseAsciiOnly() ?: return null
+            return konstues().find { it.description == lowerStr }
         }
     }
 }

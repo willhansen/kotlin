@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-@DisplayName("'all-open' plugin model validity")
+@DisplayName("'all-open' plugin model konstidity")
 @OtherGradlePluginTests
 class AllOpenModelIT : KGPBaseTest() {
 

@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.commonizer.cir
 
 data class CirExtensionReceiver(
-    override val annotations: List<CirAnnotation>,
-    val type: CirType
+    override konst annotations: List<CirAnnotation>,
+    konst type: CirType
 ) : CirHasAnnotations

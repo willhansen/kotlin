@@ -9,4 +9,4 @@ fun Int.f() {
 }
 
 context(String)
-val p: String get() = this@String
+konst p: String get() = this@String

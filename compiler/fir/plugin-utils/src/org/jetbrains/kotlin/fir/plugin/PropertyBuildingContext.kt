@@ -29,10 +29,10 @@ public class PropertyBuildingContext(
     session: FirSession,
     key: GeneratedDeclarationKey,
     owner: FirClassSymbol<*>?,
-    private val callableId: CallableId,
-    private val returnTypeProvider: (List<FirTypeParameterRef>) -> ConeKotlinType,
-    private val isVal: Boolean,
-    private val hasBackingField: Boolean,
+    private konst callableId: CallableId,
+    private konst returnTypeProvider: (List<FirTypeParameterRef>) -> ConeKotlinType,
+    private konst isVal: Boolean,
+    private konst hasBackingField: Boolean,
 ) : DeclarationBuildingContext<FirProperty>(session, key, owner) {
     private var setterVisibility: Visibility? = null
     private var extensionReceiverTypeProvider: ((List<FirTypeParameter>) -> ConeKotlinType)? = null
@@ -71,7 +71,7 @@ public class PropertyBuildingContext(
             symbol = FirPropertySymbol(callableId)
             name = callableId.callableName
 
-            val resolvedStatus = generateStatus()
+            konst resolvedStatus = generateStatus()
             status = resolvedStatus
 
             dispatchReceiverType = owner?.defaultType()
@@ -155,7 +155,7 @@ public fun FirExtension.createMemberProperty(
     hasBackingField: Boolean = true,
     config: PropertyBuildingContext.() -> Unit = {}
 ): FirProperty {
-    val callableId = CallableId(owner.classId, name)
+    konst callableId = CallableId(owner.classId, name)
     return PropertyBuildingContext(session, key, owner, callableId, returnTypeProvider, isVal, hasBackingField).apply(config).build()
 }
 

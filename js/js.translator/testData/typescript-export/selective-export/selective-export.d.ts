@@ -9,7 +9,7 @@ declare namespace JS_TESTS {
         function exportedFun(): number;
         class ExportedClass {
             constructor();
-            get value(): number;
+            get konstue(): number;
         }
     }
     namespace foo {
@@ -21,7 +21,7 @@ declare namespace JS_TESTS {
         function fileLevelExportedFun(): number;
         class FileLevelExportedClass {
             constructor();
-            get value(): number;
+            get konstue(): number;
         }
     }
 }

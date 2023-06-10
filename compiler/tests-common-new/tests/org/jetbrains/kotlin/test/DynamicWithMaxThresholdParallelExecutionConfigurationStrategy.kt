@@ -12,17 +12,17 @@ import org.junit.platform.engine.support.hierarchical.ParallelExecutionConfigura
 class DynamicWithMaxThresholdParallelExecutionConfigurationStrategy : ParallelExecutionConfigurationStrategy {
     companion object {
         // Full property name is junit.jupiter.execution.parallel.config.fixed.threshold
-        private const val FIXED_THRESHOLD = "fixed.threshold"
-        private const val DEFAULT_VALUE = 16
+        private const konst FIXED_THRESHOLD = "fixed.threshold"
+        private const konst DEFAULT_VALUE = 16
 
         // Copied from org.junit.platform.engine.support.hierarchical.DefaultParallelExecutionConfigurationStrategy
-        private const val KEEP_ALIVE_SECONDS = 30
+        private const konst KEEP_ALIVE_SECONDS = 30
     }
 
     override fun createConfiguration(configurationParameters: ConfigurationParameters): ParallelExecutionConfiguration {
-        val threshold = configurationParameters[FIXED_THRESHOLD].map { it.toIntOrNull() }.orElse(null) ?: DEFAULT_VALUE
-        val cpuCores = Runtime.getRuntime().availableProcessors()
-        val parallelism = if (threshold > 0) minOf(cpuCores, threshold) else cpuCores
+        konst threshold = configurationParameters[FIXED_THRESHOLD].map { it.toIntOrNull() }.orElse(null) ?: DEFAULT_VALUE
+        konst cpuCores = Runtime.getRuntime().availableProcessors()
+        konst parallelism = if (threshold > 0) minOf(cpuCores, threshold) else cpuCores
         return object : ParallelExecutionConfiguration {
             override fun getParallelism(): Int = parallelism
             override fun getMinimumRunnable(): Int = parallelism

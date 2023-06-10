@@ -1,10 +1,10 @@
 // !LANGUAGE: +ContextReceivers
 // WITH_STDLIB
 class View {
-    val coefficient = 42
+    konst coefficient = 42
 }
 
-context(View) val Int.dp get() = coefficient * this
+context(View) konst Int.dp get() = coefficient * this
 
 fun box(): String {
     with(View()) {

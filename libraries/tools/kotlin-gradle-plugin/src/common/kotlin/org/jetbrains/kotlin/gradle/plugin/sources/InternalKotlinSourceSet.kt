@@ -13,16 +13,16 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinMetadataCompilation
 import org.jetbrains.kotlin.gradle.utils.MutableObservableSet
 import org.jetbrains.kotlin.gradle.utils.ObservableSet
 
-internal val KotlinSourceSet.internal: InternalKotlinSourceSet
+internal konst KotlinSourceSet.internal: InternalKotlinSourceSet
     get() = (this as? InternalKotlinSourceSet) ?: throw IllegalArgumentException(
         "KotlinSourceSet $name (${this::class}) does not implement ${InternalKotlinSourceSet::class.simpleName}"
     )
 
 internal interface InternalKotlinSourceSet : KotlinSourceSet {
-    override val dependsOn: ObservableSet<KotlinSourceSet>
-    val dependsOnClosure: ObservableSet<KotlinSourceSet>
-    val withDependsOnClosure: ObservableSet<KotlinSourceSet>
-    val compilations: MutableObservableSet<KotlinCompilation<*>>
+    override konst dependsOn: ObservableSet<KotlinSourceSet>
+    konst dependsOnClosure: ObservableSet<KotlinSourceSet>
+    konst withDependsOnClosure: ObservableSet<KotlinSourceSet>
+    konst compilations: MutableObservableSet<KotlinCompilation<*>>
 }
 
 internal suspend fun InternalKotlinSourceSet.awaitPlatformCompilations(): Set<KotlinCompilation<*>> {

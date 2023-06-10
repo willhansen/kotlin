@@ -1,4 +1,4 @@
-abstract class Base(val s: String)
+abstract class Base(konst s: String)
 
 class Outer {
     class Derived(s: String) : Base(s)

@@ -6,7 +6,7 @@ plugins {
 }
 
 repositories {
-	val thirdPartyRepo: String by project
+	konst thirdPartyRepo: String by project
 	maven(thirdPartyRepo)
 	mavenLocal()
     mavenCentral()
@@ -14,14 +14,14 @@ repositories {
 
 kotlin {
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation("com.example.thirdparty:third-party-lib:1.0")
                 implementation(kotlin("stdlib-common"))
             }
         }
 
-        val commonTest by getting {
+        konst commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))

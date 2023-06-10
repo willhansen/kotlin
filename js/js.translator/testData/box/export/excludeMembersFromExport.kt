@@ -4,12 +4,12 @@
 // MODULE: lib
 // FILE: lib.kt
 @JsExport
-class Bar(val value: String) {
+class Bar(konst konstue: String) {
     @JsExport.Ignore
     constructor(): this("SECONDARY")
 
     @JsExport.Ignore
-    val excludedValue: Int = 42
+    konst excludedValue: Int = 42
 
     fun foo(): String = "FOO"
 
@@ -36,7 +36,7 @@ function box() {
     var Bar = this.lib.Bar;
     var bar = new Bar("TEST");
 
-    if (bar.value !== "TEST") return "Error: exported property was not exported"
+    if (bar.konstue !== "TEST") return "Error: exported property was not exported"
     if (bar.excludedValue === 42) return "Error: not exported property was exported"
 
     if (bar.foo() !== "FOO") return "Error: exported function was not exported"

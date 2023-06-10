@@ -1,17 +1,17 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_VARIABLE
-data class A(val i: Int, val j: <!UNRESOLVED_REFERENCE!>G<!>)
-data class B(val i: <!UNRESOLVED_REFERENCE!>G<!>, val j: <!UNRESOLVED_REFERENCE!>G<!>)
+data class A(konst i: Int, konst j: <!UNRESOLVED_REFERENCE!>G<!>)
+data class B(konst i: <!UNRESOLVED_REFERENCE!>G<!>, konst j: <!UNRESOLVED_REFERENCE!>G<!>)
 
 
 fun fa(a: A) {
-    val (i, j) = a
-    val i2 = a.component1()
-    val j2 = a.component2()
+    konst (i, j) = a
+    konst i2 = a.component1()
+    konst j2 = a.component2()
 }
 
 fun fb(b: B) {
-    val (i, j) = b
-    val i2 = b.component1()
-    val j2 = b.component2()
+    konst (i, j) = b
+    konst i2 = b.component1()
+    konst j2 = b.component2()
 }

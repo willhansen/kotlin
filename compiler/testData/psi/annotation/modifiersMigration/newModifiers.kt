@@ -3,21 +3,21 @@ data annotation tailrec external noinline fun bar(data x: Int) {
 
     inline fun foo() {}
 
-    noinline val x1 = 1
+    noinline konst x1 = 1
 
     data();
 
-    val x2 = 2
+    konst x2 = 2
 
     data;
 
-    val x3 = 3
+    konst x3 = 3
 
     inline
 
 
     private
-    val x4 = 4
+    konst x4 = 4
 
     abstract
 
@@ -45,16 +45,16 @@ fun foo2() {
 
 
 public data inline class A {
-    val x: Int
+    konst x: Int
     inline data set
     noinline get
 
-    val y: String
+    konst y: String
     inline get() = 1
     data set(q: Int) = 2
 
-    val z: Double inline get noinline set
+    konst z: Double inline get noinline set
 
-    val z0: Double = 3.0
+    konst z0: Double = 3.0
     inline get noinline set
 }

@@ -5,7 +5,7 @@ package foo
 
 
 operator fun <K, V> Map<K, V>.iterator(): Iterator<Map.Entry<K, V>> {
-    val entrySet = this.entries
+    konst entrySet = this.entries
     return entrySet.iterator()
 }
 
@@ -14,13 +14,13 @@ operator fun <K, V> Map.Entry<K, V>.component1(): K {
     return key
 }
 
-/** Returns the value of the entry */
+/** Returns the konstue of the entry */
 operator fun <K, V> Map.Entry<K, V>.component2(): V {
-    return value
+    return konstue
 }
 
 fun box(): String {
-    val map = HashMap<Int, String>()
+    konst map = HashMap<Int, String>()
     map.put(1, "s1")
     map.put(2, "s2")
 

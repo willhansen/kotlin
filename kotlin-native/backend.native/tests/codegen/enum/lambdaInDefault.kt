@@ -7,7 +7,7 @@ package codegen.enum.lambdaInDefault
 
 import kotlin.test.*
 
-enum class Zzz(val value: String.() -> Int = {
+enum class Zzz(konst konstue: String.() -> Int = {
     length
 }) {
     Q()

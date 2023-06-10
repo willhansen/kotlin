@@ -19,42 +19,42 @@ fun GradleKpmJvmVariantFactory(
 )
 
 data class GradleKpmJvmVariantConfig(
-    val dependenciesConfigurationFactory: GradleKpmFragmentDependencyConfigurationsFactory
+    konst dependenciesConfigurationFactory: GradleKpmFragmentDependencyConfigurationsFactory
     = GradleKpmDefaultFragmentDependencyConfigurationsFactory,
 
-    val compileDependencies: GradleKpmConfigurationSetup<GradleKpmJvmVariant>
+    konst compileDependencies: GradleKpmConfigurationSetup<GradleKpmJvmVariant>
     = DefaultKotlinCompileDependenciesDefinition,
 
-    val runtimeDependencies: GradleKpmConfigurationSetup<GradleKpmJvmVariant>
+    konst runtimeDependencies: GradleKpmConfigurationSetup<GradleKpmJvmVariant>
     = DefaultKotlinRuntimeDependenciesDefinition,
 
-    val apiElements: GradleKpmConfigurationSetup<GradleKpmJvmVariant>
+    konst apiElements: GradleKpmConfigurationSetup<GradleKpmJvmVariant>
     = DefaultKotlinApiElementsDefinition + GradleKpmCompilationOutputsJarArtifact,
 
-    val runtimeElements: GradleKpmConfigurationSetup<GradleKpmJvmVariant>
+    konst runtimeElements: GradleKpmConfigurationSetup<GradleKpmJvmVariant>
     = DefaultKotlinRuntimeElementsDefinition,
 
-    val compileTaskConfigurator: GradleKpmCompileTaskConfigurator<GradleKpmJvmVariant>
+    konst compileTaskConfigurator: GradleKpmCompileTaskConfigurator<GradleKpmJvmVariant>
     = GradleKpmJvmCompileTaskConfigurator,
 
-    val sourceArchiveTaskConfigurator: GradleKpmSourceArchiveTaskConfigurator<GradleKpmJvmVariant>
+    konst sourceArchiveTaskConfigurator: GradleKpmSourceArchiveTaskConfigurator<GradleKpmJvmVariant>
     = GradleKpmDefaultKotlinSourceArchiveTaskConfigurator,
 
-    val sourceDirectoriesConfigurator: GradleKpmSourceDirectoriesConfigurator<GradleKpmJvmVariant>
+    konst sourceDirectoriesConfigurator: GradleKpmSourceDirectoriesConfigurator<GradleKpmJvmVariant>
     = GradleKpmDefaultSourceDirectoriesConfigurator,
 
-    val publicationConfigurator: GradleKpmPublicationConfigurator<GradleKpmJvmVariant>
+    konst publicationConfigurator: GradleKpmPublicationConfigurator<GradleKpmJvmVariant>
     = GradleKpmPublicationConfigurator.SingleVariantPublication
 )
 
 class GradleKpmJvmVariantInstantiator internal constructor(
-    private val module: GradleKpmModule,
-    private val config: GradleKpmJvmVariantConfig
+    private konst module: GradleKpmModule,
+    private konst config: GradleKpmJvmVariantConfig
 ) : GradleKpmFragmentFactory.FragmentInstantiator<GradleKpmJvmVariant> {
 
     override fun create(name: String): GradleKpmJvmVariant {
-        val names = FragmentNameDisambiguationOmittingMain(module, name)
-        val context = GradleKpmFragmentConfigureContextImpl(
+        konst names = FragmentNameDisambiguationOmittingMain(module, name)
+        konst context = GradleKpmFragmentConfigureContextImpl(
             module, config.dependenciesConfigurationFactory.create(module, names), names
         )
 
@@ -80,7 +80,7 @@ class GradleKpmJvmVariantInstantiator internal constructor(
 }
 
 class GradleKpmJvmVariantConfigurator internal constructor(
-    private val config: GradleKpmJvmVariantConfig
+    private konst config: GradleKpmJvmVariantConfig
 ) : GradleKpmFragmentFactory.FragmentConfigurator<GradleKpmJvmVariant> {
 
     override fun configure(fragment: GradleKpmJvmVariant) {

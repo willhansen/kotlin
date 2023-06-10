@@ -1,9 +1,9 @@
-operator fun String.get(vararg value: Any) : String {
-    return if (value[0] == 44 && value[1] == "example") "OK" else "fail"
+operator fun String.get(vararg konstue: Any) : String {
+    return if (konstue[0] == 44 && konstue[1] == "example") "OK" else "fail"
 }
 
-operator fun Int.get(vararg value: Any) : Int {
-    return if (value[0] == 44 && value[1] == "example") 1 else 0
+operator fun Int.get(vararg konstue: Any) : Int {
+    return if (konstue[0] == 44 && konstue[1] == "example") 1 else 0
 }
 
 fun box(): String {

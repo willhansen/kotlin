@@ -28,33 +28,33 @@ abstract class KotlinNpmInstallTask :
     // Only in configuration phase
     // Not part of configuration caching
 
-    private val nodeJs: NodeJsRootExtension
+    private konst nodeJs: NodeJsRootExtension
         get() = project.rootProject.kotlinNodeJsExtension
 
-    private val yarn
+    private konst yarn
         get() = project.rootProject.yarn
 
-    private val rootResolver: KotlinRootNpmResolver
+    private konst rootResolver: KotlinRootNpmResolver
         get() = nodeJs.resolver
 
     // -----
 
-    private val npmEnvironment by lazy {
+    private konst npmEnvironment by lazy {
         nodeJs.requireConfigured().asNpmEnvironment
     }
 
-    private val yarnEnv by lazy {
+    private konst yarnEnv by lazy {
         yarn.requireConfigured().asYarnEnvironment
     }
 
     @Input
-    val args: MutableList<String> = mutableListOf()
+    konst args: MutableList<String> = mutableListOf()
 
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:InputFiles
-    val preparedFiles: Collection<File> by lazy {
+    konst preparedFiles: Collection<File> by lazy {
         nodeJs.packageManager.preparedFiles(npmEnvironment)
     }
 
@@ -62,22 +62,22 @@ abstract class KotlinNpmInstallTask :
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:InputFiles
-    val packageJsonFiles: Collection<File> by lazy {
-        rootResolver.projectResolvers.values
+    konst packageJsonFiles: Collection<File> by lazy {
+        rootResolver.projectResolvers.konstues
             .flatMap { it.compilationResolvers }
             .map { it.compilationNpmResolution }
             .map { it.npmProjectPackageJsonFile }
     }
 
     @get:OutputFile
-    val yarnLock: File by lazy {
+    konst yarnLock: File by lazy {
         nodeJs.rootPackageDir.resolve("yarn.lock")
     }
 
     // node_modules as OutputDirectory is performance problematic
     // so input will only be existence of its directory
     @get:Internal
-    val nodeModules: File by lazy {
+    konst nodeModules: File by lazy {
         nodeJs.rootPackageDir.resolve("node_modules")
     }
 
@@ -94,6 +94,6 @@ abstract class KotlinNpmInstallTask :
     }
 
     companion object {
-        const val NAME = "kotlinNpmInstall"
+        const konst NAME = "kotlinNpmInstall"
     }
 }

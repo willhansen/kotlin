@@ -20,16 +20,16 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractResolveCandidatesTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val ktFile = ktFiles.first()
-        val expression = testServices.expressionMarkerProvider.getSelectedElement(ktFile)
+        konst ktFile = ktFiles.first()
+        konst expression = testServices.expressionMarkerProvider.getSelectedElement(ktFile)
 
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             analyseForTest(expression) {
-                val candidates = collectCallCandidates(expression)
+                konst candidates = collectCallCandidates(expression)
                 if (candidates.isEmpty()) {
                     "NO_CANDIDATES"
                 } else {
-                    val sortedCandidates = candidates.sortedWith { candidate1, candidate2 ->
+                    konst sortedCandidates = candidates.sortedWith { candidate1, candidate2 ->
                         compareCalls(candidate1.candidate, candidate2.candidate)
                     }
                     sortedCandidates.joinToString("\n\n") { stringRepresentation(it) }
@@ -42,12 +42,12 @@ abstract class AbstractResolveCandidatesTest : AbstractAnalysisApiBasedSingleMod
     private fun KtAnalysisSession.collectCallCandidates(element: PsiElement): List<KtCallCandidateInfo> = when (element) {
         is KtValueArgument -> this@collectCallCandidates.collectCallCandidates(element.getArgumentExpression()!!)
         is KtDeclarationModifierList -> {
-            val annotationEntry = element.annotationEntries.singleOrNull()
+            konst annotationEntry = element.annotationEntries.singleOrNull()
                 ?: error("Only single annotation entry is supported for now")
             annotationEntry.collectCallCandidates()
         }
         is KtFileAnnotationList -> {
-            val annotationEntry = element.annotationEntries.singleOrNull()
+            konst annotationEntry = element.annotationEntries.singleOrNull()
                 ?: error("Only single annotation entry is supported for now")
             annotationEntry.collectCallCandidates()
         }

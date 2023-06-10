@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.util.addValueFor
 import org.jetbrains.kotlin.diagnostics.*
 
 internal class LLFirDiagnosticReporter : DiagnosticReporter() {
-    private val pendingDiagnostics = mutableMapOf<PsiElement, MutableList<KtPsiDiagnostic>>()
-    val committedDiagnostics = mutableMapOf<PsiElement, MutableList<KtPsiDiagnostic>>()
+    private konst pendingDiagnostics = mutableMapOf<PsiElement, MutableList<KtPsiDiagnostic>>()
+    konst committedDiagnostics = mutableMapOf<PsiElement, MutableList<KtPsiDiagnostic>>()
 
     override fun report(diagnostic: KtDiagnostic?, context: DiagnosticContext) {
         if (diagnostic == null) return
@@ -24,7 +24,7 @@ internal class LLFirDiagnosticReporter : DiagnosticReporter() {
         // So as a temporary solution we filter out related diagnostics here.
         if (diagnostic.isAboutImplicitImport()) return
 
-        val psiDiagnostic = when (diagnostic) {
+        konst psiDiagnostic = when (diagnostic) {
             is KtPsiDiagnostic -> diagnostic
             is KtLightDiagnostic -> diagnostic.toPsiDiagnostic()
             else -> error("Unknown diagnostic type ${diagnostic::class.simpleName}")
@@ -33,12 +33,12 @@ internal class LLFirDiagnosticReporter : DiagnosticReporter() {
     }
 
     override fun checkAndCommitReportsOn(element: AbstractKtSourceElement, context: DiagnosticContext?) {
-        val commitEverything = context == null
+        konst commitEverything = context == null
         for ((diagnosticElement, pendingList) in pendingDiagnostics) {
-            val committedList = committedDiagnostics.getOrPut(diagnosticElement) { mutableListOf() }
-            val iterator = pendingList.iterator()
+            konst committedList = committedDiagnostics.getOrPut(diagnosticElement) { mutableListOf() }
+            konst iterator = pendingList.iterator()
             while (iterator.hasNext()) {
-                val diagnostic = iterator.next()
+                konst diagnostic = iterator.next()
                 when {
                     context?.isDiagnosticSuppressed(diagnostic as KtDiagnostic) == true -> {
                         if (diagnostic.element == element ||
@@ -62,7 +62,7 @@ private fun KtDiagnostic.isAboutImplicitImport() =
 
 
 private fun KtLightDiagnostic.toPsiDiagnostic(): KtPsiDiagnostic {
-    val psiSourceElement = element.unwrapToKtPsiSourceElement()
+    konst psiSourceElement = element.unwrapToKtPsiSourceElement()
         ?: error("Diagnostic should be created from PSI in IDE")
     @Suppress("UNCHECKED_CAST")
     return when (this) {

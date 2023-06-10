@@ -47,20 +47,20 @@ import org.jetbrains.kotlin.gradle.utils.toUri
 abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     @Transient
     @Internal
-    val testTasks = mutableListOf<AbstractTestTask>()
+    konst testTasks = mutableListOf<AbstractTestTask>()
 
     @Transient
     private var parent: KotlinTestReport? = null
-    private val parentPaths = project.provider {
+    private konst parentPaths = project.provider {
         computeAllParentTasksPaths()
     }
 
     @Internal
     @Transient
-    val children = mutableListOf<TaskProvider<KotlinTestReport>>()
+    konst children = mutableListOf<TaskProvider<KotlinTestReport>>()
 
     @get:Input
-    val overrideReporting: Boolean by lazy {
+    konst overrideReporting: Boolean by lazy {
         !PropertiesProvider(project).individualTaskReports
     }
 
@@ -70,17 +70,17 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     @Input
     var ignoreFailures: Boolean = false
 
-    private val testReportService
+    private konst testReportService
         get() = testReportServiceProvider.get()
 
-    private val hasFailedTests: Boolean
+    private konst hasFailedTests: Boolean
         get() = testReportService.hasFailedTests(path)
 
     @get:Internal
-    internal abstract val testReportCompatibilityHelper: Property<KotlinTestReportCompatibilityHelper>
+    internal abstract konst testReportCompatibilityHelper: Property<KotlinTestReportCompatibilityHelper>
 
     private fun computeAllParentTasksPaths(): List<String> {
-        val allParents = mutableListOf<String>()
+        konst allParents = mutableListOf<String>()
         var cur: KotlinTestReport? = this
         while (cur != null) {
             allParents.add(cur.path)
@@ -90,7 +90,7 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     }
 
     fun addChild(childProvider: TaskProvider<KotlinTestReport>) {
-        val child = childProvider.get()
+        konst child = childProvider.get()
 
         check(child.parent == null) { "$child already registers as child of ${child.parent}" }
         child.parent = this
@@ -100,7 +100,7 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     }
 
     private fun reportOnChildTasks(childProvider: TaskProvider<KotlinTestReport>) {
-        val child = childProvider.get()
+        konst child = childProvider.get()
 
         child.testTasks.forEach {
             reportOn(it)
@@ -115,7 +115,7 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
 
         task.addTestListener(FailedTestListener(task.path, parentPaths, testReportServiceProvider))
         if (task is KotlinTest) {
-            val listener = SuppressedTestRunningFailureListener(parentPaths, task.path, testReportServiceProvider)
+            konst listener = SuppressedTestRunningFailureListener(parentPaths, task.path, testReportServiceProvider)
             task.addRunListener(listener)
         }
         reportOn(task)
@@ -124,7 +124,7 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     }
 
     private fun addToParents(task: AbstractTestTask) {
-        val parent = parent
+        konst parent = parent
         if (parent != null) {
             parent.reportOn(task)
             parent.addToParents(task)
@@ -136,12 +136,12 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     }
 
     @get:Internal
-    abstract val htmlReportFile: RegularFileProperty
+    abstract konst htmlReportFile: RegularFileProperty
 
     @Suppress("unused")
     @Deprecated("Use `htmlReportFile` instead", ReplaceWith("htmlReportFile"))
     @get:Internal
-    open val htmlReportUrl: String?
+    open konst htmlReportUrl: String?
         get() = htmlReportFile.orNull?.toUri().toString()
 
     @TaskAction
@@ -159,7 +159,7 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     }
 
     private fun getFailingTestsMessage(): String {
-        val message = StringBuilder("There were failing tests.")
+        konst message = StringBuilder("There were failing tests.")
 
         if (htmlReportFile.isPresent) {
             message.append(" See the report at: ${htmlReportFile.get().toUri()}")
@@ -168,10 +168,10 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     }
 
     private fun checkSuppressedRunningFailures() {
-        val taskFailures = testReportService.getAggregatedTaskFailures(path)
+        konst taskFailures = testReportService.getAggregatedTaskFailures(path)
         if (taskFailures.isNotEmpty()) {
-            val allErrors = mutableListOf<Error>()
-            val msg = buildString {
+            konst allErrors = mutableListOf<Error>()
+            konst msg = buildString {
                 appendLine("Failed to execute all tests:")
                 taskFailures.groupBy { it.first }.forEach { (path, errors) ->
                     append(path)
@@ -185,7 +185,7 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
                 }
 
                 if (hasFailedTests) {
-                    val failedTestsMessage = getFailingTestsMessage()
+                    konst failedTestsMessage = getFailingTestsMessage()
                     if (ignoreFailures) {
                         logger.warn(getFailingTestsMessage())
                     } else {
@@ -237,9 +237,9 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     }
 
     private class SuppressedTestRunningFailureListener(
-        private val allListenedTaskParentsPaths: Provider<List<String>>,
-        private val failedTaskPath: String,
-        private val testReportServiceProvider: Provider<TestReportService>
+        private konst allListenedTaskParentsPaths: Provider<List<String>>,
+        private konst failedTaskPath: String,
+        private konst testReportServiceProvider: Provider<TestReportService>
     ) : KotlinTestRunnerListener {
         override fun runningFailure(failure: Error) {
             allListenedTaskParentsPaths.get().forEach {
@@ -249,9 +249,9 @@ abstract class KotlinTestReport : TestReport(), UsesTestReportService {
     }
 
     private class FailedTestListener(
-        private val testTaskPath: String,
-        private val allListenedTaskParentsPaths: Provider<List<String>>,
-        private val testReportServiceProvider: Provider<TestReportService>
+        private konst testTaskPath: String,
+        private konst allListenedTaskParentsPaths: Provider<List<String>>,
+        private konst testReportServiceProvider: Provider<TestReportService>
     ) : TestListener {
         override fun beforeTest(testDescriptor: TestDescriptor) {}
 

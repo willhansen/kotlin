@@ -6,56 +6,56 @@
 
 // MODULE: dependency
 @JvmInline
-value class MfvcDependency(val x: Int, val y: Int) {
-    val z: Int
+konstue class MfvcDependency(konst x: Int, konst y: Int) {
+    konst z: Int
         get() = 1
-    val t: MfvcDependency
+    konst t: MfvcDependency
         get() = MfvcDependency(10, 20)
     companion object {
         var x: Int = -100
-        val y: Int
+        konst y: Int
             get() = 1
         var z: MfvcDependency = MfvcDependency(10, 20)
-        val t: MfvcDependency
+        konst t: MfvcDependency
             get() = MfvcDependency(10, 20)
 
         @JvmStatic
         var xStatic: Int = -100
         @JvmStatic
-        val yStatic: Int
+        konst yStatic: Int
             get() = 1
         @JvmStatic
         var zStatic: MfvcDependency = MfvcDependency(10, 20)
         @JvmStatic
-        val tStatic: MfvcDependency
+        konst tStatic: MfvcDependency
             get() = MfvcDependency(10, 20)
     }
 }
 class RegularDependency {
     var x: Int = -100
-    val y: Int
+    konst y: Int
         get() = 1
     var z: MfvcDependency = MfvcDependency(10, 20)
-    val t: MfvcDependency
+    konst t: MfvcDependency
         get() = MfvcDependency(10, 20)
     
     companion object {
         var x: Int = -100
-        val y: Int
+        konst y: Int
             get() = 1
         var z: MfvcDependency = MfvcDependency(10, 20)
-        val t: MfvcDependency
+        konst t: MfvcDependency
             get() = MfvcDependency(10, 20)
         
         @JvmStatic
         var xStatic: Int = -100
         @JvmStatic
-        val yStatic: Int
+        konst yStatic: Int
             get() = 1
         @JvmStatic
         var zStatic: MfvcDependency = MfvcDependency(10, 20)
         @JvmStatic
-        val tStatic: MfvcDependency
+        konst tStatic: MfvcDependency
             get() = MfvcDependency(10, 20)
     }
 }
@@ -63,63 +63,63 @@ class RegularDependency {
 // MODULE: main(dependency)
 
 @JvmInline
-value class Public(val x: Int, val y: Int) {
+konstue class Public(konst x: Int, konst y: Int) {
     companion object {
         var x: Int = -100
-        val y: Int
+        konst y: Int
             get() = 1
         var z: Public = Public(10, 20)
-        val t: Public
+        konst t: Public
             get() = Public(10, 20)
     }
 }
 
 @JvmInline
-value class Internal(internal val x: Int, internal val y: Int) {
+konstue class Internal(internal konst x: Int, internal konst y: Int) {
     companion object {
         @JvmStatic
         var x: Int = -100
 
         @JvmStatic
-        val y: Int
+        konst y: Int
             get() = 1
         var z: Internal = Internal(10, 20)
 
         @JvmStatic
-        val t: Internal
+        konst t: Internal
             get() = Internal(10, 20)
     }
 }
 
 @JvmInline
-value class Private(private val x: Int, private val y: Int)
+konstue class Private(private konst x: Int, private konst y: Int)
 
 @JvmInline
-value class PublicPublic(val value: Public)
+konstue class PublicPublic(konst konstue: Public)
 
 @JvmInline
-value class InternalPublic(internal val value: Public)
+konstue class InternalPublic(internal konst konstue: Public)
 
 @JvmInline
-value class PrivatePublic(private val value: Public)
+konstue class PrivatePublic(private konst konstue: Public)
 
 @JvmInline
-value class PublicInternal(val value: Internal)
+konstue class PublicInternal(konst konstue: Internal)
 
 @JvmInline
-value class InternalInternal(internal val value: Internal)
+konstue class InternalInternal(internal konst konstue: Internal)
 
 @JvmInline
-value class PrivateInternal(private val value: Internal)
+konstue class PrivateInternal(private konst konstue: Internal)
 
 @JvmInline
-value class PublicPrivate(val value: Private)
+konstue class PublicPrivate(konst konstue: Private)
 
 @JvmInline
-value class InternalPrivate(internal val value: Private)
+konstue class InternalPrivate(internal konst konstue: Private)
 
 @JvmInline
-value class PrivatePrivate(private val value: Private)
+konstue class PrivatePrivate(private konst konstue: Private)
 
 class Regular {
     var x1: Public = Public(1, 2)
@@ -308,7 +308,7 @@ class Regular {
 }
 
 fun box(): String {
-    val r = Regular()
+    konst r = Regular()
     r.apply {
         callAll()
 

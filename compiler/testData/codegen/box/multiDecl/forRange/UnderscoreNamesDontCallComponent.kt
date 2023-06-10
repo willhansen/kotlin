@@ -5,7 +5,7 @@ class A {
 }
 
 fun box(): String {
-    val aA = Array(1) { A() }
+    konst aA = Array(1) { A() }
 
     for ((x, _, z) in aA) {
         return x + z

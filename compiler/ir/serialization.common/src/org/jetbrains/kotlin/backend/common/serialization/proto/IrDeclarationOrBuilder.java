@@ -89,11 +89,11 @@ public interface IrDeclarationOrBuilder extends
   org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable getIrVariable();
 
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
    */
   boolean hasIrValueParameter();
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter getIrValueParameter();
 

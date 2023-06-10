@@ -65,27 +65,27 @@ public fun File.readBytes(): ByteArray = inputStream().use { input ->
     var remaining = this.length().also { length ->
         if (length > Int.MAX_VALUE) throw OutOfMemoryError("File $this is too big ($length bytes) to fit in memory.")
     }.toInt()
-    val result = ByteArray(remaining)
+    konst result = ByteArray(remaining)
     while (remaining > 0) {
-        val read = input.read(result, offset, remaining)
+        konst read = input.read(result, offset, remaining)
         if (read < 0) break
         remaining -= read
         offset += read
     }
     if (remaining > 0) return@use result.copyOf(offset)
 
-    val extraByte = input.read()
+    konst extraByte = input.read()
     if (extraByte == -1) return@use result
 
     // allocation estimate: (RS + DBS + max(ES, DBS + 1)) + (RS + ES),
     // where RS = result.size, ES = extra.size, DBS = DEFAULT_BUFFER_SIZE
     // when RS = 0, ES >> DBS   => DBS + DBS + 1 + ES + ES = 2DBS + 2ES
     // when RS >> ES, ES << DBS => RS + DBS + DBS+1 + RS + ES = 2RS + 2DBS + ES
-    val extra = ExposingBufferByteArrayOutputStream(DEFAULT_BUFFER_SIZE + 1)
+    konst extra = ExposingBufferByteArrayOutputStream(DEFAULT_BUFFER_SIZE + 1)
     extra.write(extraByte)
     input.copyTo(extra)
 
-    val resultingSize = result.size + extra.size()
+    konst resultingSize = result.size + extra.size()
     if (resultingSize < 0) throw OutOfMemoryError("File $this is too big to fit in memory.")
 
     return@use extra.buffer.copyInto(
@@ -96,7 +96,7 @@ public fun File.readBytes(): ByteArray = inputStream().use { input ->
 }
 
 private class ExposingBufferByteArrayOutputStream(size: Int) : ByteArrayOutputStream(size) {
-    val buffer: ByteArray get() = buf
+    konst buffer: ByteArray get() = buf
 }
 
 /**
@@ -162,11 +162,11 @@ public fun File.forEachBlock(action: (buffer: ByteArray, bytesRead: Int) -> Unit
  * @param blockSize size of a block, replaced by 512 if it's less, 4096 by default.
  */
 public fun File.forEachBlock(blockSize: Int, action: (buffer: ByteArray, bytesRead: Int) -> Unit): Unit {
-    val arr = ByteArray(blockSize.coerceAtLeast(MINIMUM_BLOCK_SIZE))
+    konst arr = ByteArray(blockSize.coerceAtLeast(MINIMUM_BLOCK_SIZE))
 
     inputStream().use { input ->
         do {
-            val size = input.read(arr)
+            konst size = input.read(arr)
             if (size <= 0) {
                 break
             } else {
@@ -215,7 +215,7 @@ public inline fun File.outputStream(): FileOutputStream {
  * @return list of file lines.
  */
 public fun File.readLines(charset: Charset = Charsets.UTF_8): List<String> {
-    val result = ArrayList<String>()
+    konst result = ArrayList<String>()
     forEachLine(charset) { result.add(it); }
     return result
 }
@@ -225,7 +225,7 @@ public fun File.readLines(charset: Charset = Charsets.UTF_8): List<String> {
  * the processing is complete.
 
  * @param charset character set to use. By default uses UTF-8 charset.
- * @return the value returned by [block].
+ * @return the konstue returned by [block].
  */
 public inline fun <T> File.useLines(charset: Charset = Charsets.UTF_8, block: (Sequence<String>) -> T): T =
     bufferedReader(charset).use { block(it.lineSequence()) }

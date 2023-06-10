@@ -3,6 +3,6 @@ fun box(): String {
         fun invoke(t: T) = t
     }
 
-    val ref = Id<String>::invoke
+    konst ref = Id<String>::invoke
     return ref(Id<String>(), "OK")
 }

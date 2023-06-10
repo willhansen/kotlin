@@ -14,17 +14,17 @@
 
 @JsExport
 class ClassWithDefaultCtor {
-    val x = "ClassWithDefaultCtor::x"
+    konst x = "ClassWithDefaultCtor::x"
 }
 
 @JsExport
 class ClassWithPrimaryCtor(
-    val x: String
+    konst x: String
 )
 
 @JsExport
 class ClassWithSecondaryCtor {
-    val x: String
+    konst x: String
     @JsName("create")
     constructor(y: String) {
         x = y
@@ -33,7 +33,7 @@ class ClassWithSecondaryCtor {
 
 @JsExport
 class ClassWithMultipleSecondaryCtors {
-    val x: String
+    konst x: String
 
     @JsName("createFromString")
     constructor(y: String) {
@@ -47,7 +47,7 @@ class ClassWithMultipleSecondaryCtors {
 }
 
 @JsExport
-open class OpenClassWithMixedConstructors(val x: String) {
+open class OpenClassWithMixedConstructors(konst x: String) {
     @JsName("createFromStrings")
     constructor(y: String, z: String) : this("fromStrings:$y:$z")
 
@@ -67,4 +67,4 @@ class DerivedClassWithSecondaryCtor : OpenClassWithMixedConstructors {
 // FILE: f2.kt
 
 @JsExport
-class KotlinGreeter(val greeting: String = "helau")
+class KotlinGreeter(konst greeting: String = "helau")

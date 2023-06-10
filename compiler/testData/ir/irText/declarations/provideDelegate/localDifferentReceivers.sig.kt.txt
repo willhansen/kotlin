@@ -3,22 +3,22 @@
 //   Public signature: /MyClass|null[0]
 class MyClass {
   // CHECK:
-  //   Mangled name: MyClass{}value
-  //   Public signature: /MyClass.value|1987073854177347439[0]
-  val value: String
+  //   Mangled name: MyClass{}konstue
+  //   Public signature: /MyClass.konstue|1987073854177347439[0]
+  konst konstue: String
     field
     // CHECK JVM_IR:
-    //   Mangled name: MyClass#<get-value>(){}kotlin.String
-    //   Public signature: /MyClass.value.<get-value>|-7202092821145242726[0]
+    //   Mangled name: MyClass#<get-konstue>(){}kotlin.String
+    //   Public signature: /MyClass.konstue.<get-konstue>|-7202092821145242726[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: MyClass#<get-value>(){}
-    //   Public signature: /MyClass.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: MyClass#<get-konstue>(){}
+    //   Public signature: /MyClass.konstue.<get-konstue>|3260093555963109437[0]
     get
 
   // CHECK:
   //   Mangled name: MyClass#<init>(kotlin.String){}
   //   Public signature: /MyClass.<init>|1280618353163213788[0]
-  constructor(value: String) /* primary */
+  constructor(konstue: String) /* primary */
 
 }
 

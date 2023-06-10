@@ -3,7 +3,7 @@
 
 import kotlin.reflect.*
 
-val properties = HashSet<KProperty<*>>()
+konst properties = HashSet<KProperty<*>>()
 
 object Delegate {
     operator fun getValue(t: Any?, p: KProperty<*>): String {

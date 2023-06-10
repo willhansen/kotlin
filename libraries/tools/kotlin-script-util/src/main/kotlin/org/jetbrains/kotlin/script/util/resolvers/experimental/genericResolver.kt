@@ -17,15 +17,15 @@ import java.net.URL
 
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies")
 interface GenericArtifactCoordinates {
-    val string: String
+    konst string: String
 }
 
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies")
 interface GenericRepositoryCoordinates {
-    val string: String
-    val name: String? get() = null
-    val url: URL? get() = string.toRepositoryUrlOrNull()
-    val file: File? get() = (url?.takeIf { it.protocol == "file" }?.path ?: string).toRepositoryFileOrNull()
+    konst string: String
+    konst name: String? get() = null
+    konst url: URL? get() = string.toRepositoryUrlOrNull()
+    konst file: File? get() = (url?.takeIf { it.protocol == "file" }?.path ?: string).toRepositoryFileOrNull()
 }
 
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies")
@@ -40,24 +40,24 @@ interface GenericResolver {
 }
 
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies")
-open class BasicArtifactCoordinates(override val string: String) : GenericArtifactCoordinates
+open class BasicArtifactCoordinates(override konst string: String) : GenericArtifactCoordinates
 
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies")
-open class BasicRepositoryCoordinates(override val string: String, override val name: String? = null) : GenericRepositoryCoordinates
+open class BasicRepositoryCoordinates(override konst string: String, override konst name: String? = null) : GenericRepositoryCoordinates
 
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies")
 interface GenericRepositoryWithBridge : GenericResolver, Resolver {
     override fun tryResolve(dependsOn: DependsOn): Iterable<File>? =
         tryResolve(
             with(dependsOn) {
-                MavenArtifactCoordinates(value, groupId, artifactId, version)
+                MavenArtifactCoordinates(konstue, groupId, artifactId, version)
             }
         )
 
     override fun tryAddRepo(annotation: Repository): Boolean =
         with(annotation) {
             tryAddRepository(
-                value.takeIf { it.isNotBlank() } ?: url,
+                konstue.takeIf { it.isNotBlank() } ?: url,
                 id.takeIf { it.isNotBlank() }
             )
         }
@@ -65,12 +65,12 @@ interface GenericRepositoryWithBridge : GenericResolver, Resolver {
 
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies")
 open class MavenArtifactCoordinates(
-    val value: String?,
-    val groupId: String?,
-    val artifactId: String?,
-    val version: String?
+    konst konstue: String?,
+    konst groupId: String?,
+    konst artifactId: String?,
+    konst version: String?
 ) : GenericArtifactCoordinates {
-    override val string: String
-        get() = value.takeIf { it?.isNotBlank() ?: false }
+    override konst string: String
+        get() = konstue.takeIf { it?.isNotBlank() ?: false }
             ?: listOf(groupId, artifactId, version).filter { it?.isNotBlank() ?: false }.joinToString(":")
 }

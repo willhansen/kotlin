@@ -1,4 +1,4 @@
-val p: Any? = null
+konst p: Any? = null
 
 fun foo(): Any? = null
 

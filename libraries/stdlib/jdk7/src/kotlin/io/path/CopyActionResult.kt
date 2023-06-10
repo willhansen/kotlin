@@ -20,7 +20,7 @@ public enum class CopyActionResult {
 
     /**
      * Skip the directory content, continue with the next entry outside the directory in the traversal order.
-     * For files this option is equivalent to [CONTINUE].
+     * For files this option is equikonstent to [CONTINUE].
      */
     SKIP_SUBTREE,
 

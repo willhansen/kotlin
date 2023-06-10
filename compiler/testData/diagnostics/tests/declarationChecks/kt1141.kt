@@ -8,7 +8,7 @@ public interface SomeTrait {
 }
 
 fun foo() {
-    val x = <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>object<!> : SomeTrait {
+    konst x = <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>object<!> : SomeTrait {
     }
     x.foo()
 }
@@ -18,5 +18,5 @@ fun foo() {
 <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>class C<!> : SomeTrait {}
 
 fun foo2() {
-    val r = <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>object<!> : Runnable {} //no error
+    konst r = <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>object<!> : Runnable {} //no error
 }

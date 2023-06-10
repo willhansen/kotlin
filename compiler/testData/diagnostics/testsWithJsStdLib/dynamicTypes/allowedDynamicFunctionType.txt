@@ -1,6 +1,6 @@
 package
 
-public val dynamicProperty: dynamic.() -> kotlin.Unit
+public konst dynamicProperty: dynamic.() -> kotlin.Unit
 public fun test(): kotlin.Unit
 public fun test(/*0*/ d: dynamic, /*1*/ dynamicParameter: dynamic.() -> kotlin.Unit): kotlin.Unit
 public fun test2(): kotlin.Unit

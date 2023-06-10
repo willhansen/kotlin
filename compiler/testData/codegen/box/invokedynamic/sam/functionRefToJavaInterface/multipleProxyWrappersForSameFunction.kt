@@ -17,7 +17,7 @@ fun box(): String {
     Sam(::ok).get("2")
     Sam(::ok).get("3")
 
-    val r = Sam(::ok).get("OK")
+    konst r = Sam(::ok).get("OK")
     if (r != Unit) {
         return "Failed: $r"
     }

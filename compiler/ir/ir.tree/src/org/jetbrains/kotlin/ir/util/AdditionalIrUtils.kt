@@ -23,16 +23,16 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.utils.filterIsInstanceAnd
 import java.io.File
 
-val IrConstructor.constructedClass get() = this.parent as IrClass
+konst IrConstructor.constructedClass get() = this.parent as IrClass
 
 fun IrClassifierSymbol?.isArrayOrPrimitiveArray(builtins: IrBuiltIns): Boolean =
     this == builtins.arrayClass || this in builtins.primitiveArraysToPrimitiveTypes
 
 // Constructors can't be marked as inline in metadata, hence this check.
 fun IrFunction.isInlineArrayConstructor(builtIns: IrBuiltIns): Boolean =
-    this is IrConstructor && valueParameters.size == 2 && constructedClass.symbol.isArrayOrPrimitiveArray(builtIns)
+    this is IrConstructor && konstueParameters.size == 2 && constructedClass.symbol.isArrayOrPrimitiveArray(builtIns)
 
-val IrDeclarationParent.fqNameForIrSerialization: FqName
+konst IrDeclarationParent.fqNameForIrSerialization: FqName
     get() = when (this) {
         is IrPackageFragment -> this.packageFqName
         is IrDeclarationWithName -> this.parent.fqNameForIrSerialization.child(this.name)
@@ -42,7 +42,7 @@ val IrDeclarationParent.fqNameForIrSerialization: FqName
 /**
  * Skips synthetic FILE_CLASS to make top-level functions look as in kotlin source
  */
-val IrDeclarationParent.kotlinFqName: FqName
+konst IrDeclarationParent.kotlinFqName: FqName
     get() = when (this) {
         is IrPackageFragment -> this.packageFqName
         is IrClass -> {
@@ -56,8 +56,8 @@ val IrDeclarationParent.kotlinFqName: FqName
         else -> error(this)
     }
 
-val IrClass.classId: ClassId?
-    get() = when (val parent = this.parent) {
+konst IrClass.classId: ClassId?
+    get() = when (konst parent = this.parent) {
         is IrClass -> parent.classId?.createNestedClassId(this.name)
         is IrPackageFragment -> ClassId.topLevel(parent.packageFqName.child(this.name))
         else -> null
@@ -70,7 +70,7 @@ val IrClass.classId: ClassId?
     ReplaceWith("(this as? IrDeclarationWithName)?.name", "org.jetbrains.kotlin.ir.declarations.IrDeclarationWithName"),
     DeprecationLevel.ERROR
 )
-val IrDeclaration.nameForIrSerialization: Name
+konst IrDeclaration.nameForIrSerialization: Name
     get() = when (this) {
         is IrDeclarationWithName -> this.name
         is IrConstructor -> SpecialNames.INIT
@@ -80,11 +80,11 @@ val IrDeclaration.nameForIrSerialization: Name
 fun IrDeclaration.getNameWithAssert(): Name =
     if (this is IrDeclarationWithName) name else error(this)
 
-val IrValueParameter.isVararg get() = this.varargElementType != null
+konst IrValueParameter.isVararg get() = this.varargElementType != null
 
-val IrFunction.isSuspend get() = this is IrSimpleFunction && this.isSuspend
+konst IrFunction.isSuspend get() = this is IrSimpleFunction && this.isSuspend
 
-val IrFunction.isReal get() = !(this is IrSimpleFunction && isFakeOverride)
+konst IrFunction.isReal get() = !(this is IrSimpleFunction && isFakeOverride)
 
 fun <S : IrSymbol> IrOverridableDeclaration<S>.overrides(other: IrOverridableDeclaration<S>): Boolean {
     if (this == other) return true
@@ -99,17 +99,17 @@ fun <S : IrSymbol> IrOverridableDeclaration<S>.overrides(other: IrOverridableDec
     return false
 }
 
-private val IrConstructorCall.annotationClass
+private konst IrConstructorCall.annotationClass
     get() = this.symbol.owner.constructedClass
 
 fun IrConstructorCall.isAnnotationWithEqualFqName(fqName: FqName): Boolean =
     annotationClass.hasEqualFqName(fqName)
 
-val IrClass.packageFqName: FqName?
+konst IrClass.packageFqName: FqName?
     get() = symbol.signature?.packageFqName() ?: parent.getPackageFragment()?.packageFqName
 
 fun IrDeclarationWithName.hasEqualFqName(fqName: FqName): Boolean =
-    symbol.hasEqualFqName(fqName) || name == fqName.shortName() && when (val parent = parent) {
+    symbol.hasEqualFqName(fqName) || name == fqName.shortName() && when (konst parent = parent) {
         is IrPackageFragment -> parent.packageFqName == fqName.parent()
         is IrDeclarationWithName -> parent.hasEqualFqName(fqName.parent())
         else -> false
@@ -127,7 +127,7 @@ fun List<IrConstructorCall>.hasAnnotation(fqName: FqName): Boolean =
 fun List<IrConstructorCall>.findAnnotation(fqName: FqName): IrConstructorCall? =
     firstOrNull { it.annotationClass.hasEqualFqName(fqName) }
 
-val IrDeclaration.fileEntry: IrFileEntry
+konst IrDeclaration.fileEntry: IrFileEntry
     get() = parent.let {
         when (it) {
             is IrFile -> it.fileEntry
@@ -140,29 +140,29 @@ val IrDeclaration.fileEntry: IrFileEntry
 fun IrClass.companionObject(): IrClass? =
     this.declarations.singleOrNull { it is IrClass && it.isCompanion } as IrClass?
 
-val IrDeclaration.isGetter get() = this is IrSimpleFunction && this == this.correspondingPropertySymbol?.owner?.getter
+konst IrDeclaration.isGetter get() = this is IrSimpleFunction && this == this.correspondingPropertySymbol?.owner?.getter
 
-val IrDeclaration.isSetter get() = this is IrSimpleFunction && this == this.correspondingPropertySymbol?.owner?.setter
+konst IrDeclaration.isSetter get() = this is IrSimpleFunction && this == this.correspondingPropertySymbol?.owner?.setter
 
-val IrDeclaration.isAccessor get() = this.isGetter || this.isSetter
+konst IrDeclaration.isAccessor get() = this.isGetter || this.isSetter
 
-val IrDeclaration.isPropertyAccessor get() =
+konst IrDeclaration.isPropertyAccessor get() =
     this is IrSimpleFunction && this.correspondingPropertySymbol != null
 
-val IrDeclaration.isPropertyField get() =
+konst IrDeclaration.isPropertyField get() =
     this is IrField && this.correspondingPropertySymbol != null
 
-val IrDeclaration.isJvmInlineClassConstructor get() =
+konst IrDeclaration.isJvmInlineClassConstructor get() =
     this is IrSimpleFunction && name.asString() == "constructor-impl"
 
-val IrDeclaration.isTopLevelDeclaration get() =
+konst IrDeclaration.isTopLevelDeclaration get() =
     parent !is IrDeclaration && !this.isPropertyAccessor && !this.isPropertyField
 
-val IrDeclaration.isAnonymousObject get() = this is IrClass && name == SpecialNames.NO_NAME_PROVIDED
+konst IrDeclaration.isAnonymousObject get() = this is IrClass && name == SpecialNames.NO_NAME_PROVIDED
 
-val IrDeclaration.isAnonymousFunction get() = this is IrSimpleFunction && name == SpecialNames.NO_NAME_PROVIDED
+konst IrDeclaration.isAnonymousFunction get() = this is IrSimpleFunction && name == SpecialNames.NO_NAME_PROVIDED
 
-val IrDeclaration.isLocal: Boolean
+konst IrDeclaration.isLocal: Boolean
     get() {
         var current: IrElement = this
         while (current !is IrPackageFragment) {
@@ -182,19 +182,19 @@ val IrDeclaration.isLocal: Boolean
     }
 
 @ObsoleteDescriptorBasedAPI
-val IrDeclaration.module get() = this.descriptor.module
+konst IrDeclaration.module get() = this.descriptor.module
 
-const val SYNTHETIC_OFFSET = -2
+const konst SYNTHETIC_OFFSET = -2
 
-val File.lineStartOffsets: IntArray
+konst File.lineStartOffsets: IntArray
     get() {
         // TODO: could be incorrect, if file is not in system's line terminator format.
         // Maybe use (0..document.lineCount - 1)
         //                .map { document.getLineStartOffset(it) }
         //                .toIntArray()
         // as in PSI.
-        val separatorLength = System.lineSeparator().length
-        val buffer = mutableListOf<Int>()
+        konst separatorLength = System.lineSeparator().length
+        konst buffer = mutableListOf<Int>()
         var currentOffset = 0
         this.forEachLine { line ->
             buffer.add(currentOffset)
@@ -204,35 +204,35 @@ val File.lineStartOffsets: IntArray
         return buffer.toIntArray()
     }
 
-val IrFileEntry.lineStartOffsets: IntArray
+konst IrFileEntry.lineStartOffsets: IntArray
     get() = when (this) {
         is PsiIrFileEntry -> this.getLineOffsets()
         else -> File(name).let { if (it.exists() && it.isFile) it.lineStartOffsets else IntArray(0) }
     }
 
 class NaiveSourceBasedFileEntryImpl(
-    override val name: String,
-    private val lineStartOffsets: IntArray = intArrayOf(),
-    override val maxOffset: Int = UNDEFINED_OFFSET
+    override konst name: String,
+    private konst lineStartOffsets: IntArray = intArrayOf(),
+    override konst maxOffset: Int = UNDEFINED_OFFSET
 ) : IrFileEntry {
-    val lineStartOffsetsAreEmpty: Boolean
+    konst lineStartOffsetsAreEmpty: Boolean
         get() = lineStartOffsets.isEmpty()
 
-    private val MAX_SAVED_LINE_NUMBERS = 50
+    private konst MAX_SAVED_LINE_NUMBERS = 50
 
     // Map with several last calculated line numbers.
     // Calculating for same offset is made many times during code and debug info generation.
     // In the worst case at least getting column recalculates line because it is usually called after getting line.
-    private val calculatedBeforeLineNumbers = object : SLRUCache<Int, Int>(
+    private konst calculatedBeforeLineNumbers = object : SLRUCache<Int, Int>(
         MAX_SAVED_LINE_NUMBERS / 2, MAX_SAVED_LINE_NUMBERS / 2
     ) {
         override fun createValue(key: Int): Int {
-            val index = lineStartOffsets.binarySearch(key)
+            konst index = lineStartOffsets.binarySearch(key)
             return if (index >= 0) index else -index - 2
         }
     }
 
-    private val lineNumberLock = Any()
+    private konst lineNumberLock = Any()
 
     override fun getLineNumber(offset: Int): Int {
         if (offset == SYNTHETIC_OFFSET) return 0
@@ -243,7 +243,7 @@ class NaiveSourceBasedFileEntryImpl(
     override fun getColumnNumber(offset: Int): Int {
         if (offset == SYNTHETIC_OFFSET) return 0
         if (offset < 0) return UNDEFINED_COLUMN_NUMBER
-        val lineNumber = getLineNumber(offset)
+        konst lineNumber = getLineNumber(offset)
         return if (lineNumber < 0) UNDEFINED_COLUMN_NUMBER else offset - lineStartOffsets[lineNumber]
     }
 
@@ -260,7 +260,7 @@ class NaiveSourceBasedFileEntryImpl(
 }
 
 private fun IrClass.getPropertyDeclaration(name: String): IrProperty? {
-    val properties = declarations.filterIsInstanceAnd<IrProperty> { it.name.asString() == name }
+    konst properties = declarations.filterIsInstanceAnd<IrProperty> { it.name.asString() == name }
     if (properties.size > 1) {
         error(
             "More than one property with name $name in class $fqNameWhenAvailable:\n" +

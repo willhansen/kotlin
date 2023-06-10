@@ -3,11 +3,11 @@ fun box() = Class().printSome()
 public abstract class AbstractClass<T> {
     public fun printSome() : T = some
 
-    public abstract val some: T
+    public abstract konst some: T
 }
 
 public class Class: AbstractClass<String>() {
-    public override val some: String
+    public override konst some: String
         get() = "OK"
 
 }

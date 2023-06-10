@@ -3,15 +3,15 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class WithPrimitive(val a: Int)
+konstue class WithPrimitive(konst a: Int)
 fun takeWithPrimitive(a: WithPrimitive) {}
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class WithReference(val a: Any)
+konstue class WithReference(konst a: Any)
 fun takeWithReference(a: WithReference) {}
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class WithNullableReference(val a: Any?)
+konstue class WithNullableReference(konst a: Any?)
 fun takeWithNullableReference(a: WithNullableReference) {}
 
 fun foo(a: WithPrimitive?, b: WithPrimitive) {
@@ -34,17 +34,17 @@ fun baz(a: WithNullableReference?, b: WithNullableReference) {
 }
 
 fun box(): String {
-    val a1 = WithPrimitive(1)
-    val b1 = WithPrimitive(2)
+    konst a1 = WithPrimitive(1)
+    konst b1 = WithPrimitive(2)
 
     foo(a1, b1)
 
-    val a2 = WithReference("")
+    konst a2 = WithReference("")
 
     bar(a2, a2)
 
-    val a3 = WithNullableReference("test")
-    val a4 = WithNullableReference(123)
+    konst a3 = WithNullableReference("test")
+    konst a4 = WithNullableReference(123)
 
     baz(a3, a4)
 

@@ -38,7 +38,7 @@ class AppleFrameworkIT : KGPBaseTest() {
                 androidVersion = agpVersion
             ),
         ) {
-            val environmentVariables = EnvironmentalVariables(
+            konst environmentVariables = EnvironmentalVariables(
                 mapOf(
                     "CONFIGURATION" to "debug",
                     "SDK_NAME" to "iphoneos123",
@@ -86,7 +86,7 @@ class AppleFrameworkIT : KGPBaseTest() {
                 androidVersion = agpVersion
             )
         ) {
-            val environmentVariables = mapOf(
+            konst environmentVariables = mapOf(
                 "CONFIGURATION" to "Release",
                 "SDK_NAME" to "iphonesimulator",
                 "ARCHS" to "arm64 x86_64",
@@ -122,7 +122,7 @@ class AppleFrameworkIT : KGPBaseTest() {
                 androidVersion = agpVersion
             )
         ) {
-            val environmentVariables = mapOf(
+            konst environmentVariables = mapOf(
                 "CONFIGURATION" to "debug",
                 "SDK_NAME" to "macosx",
                 "ARCHS" to "x86_64",
@@ -157,7 +157,7 @@ class AppleFrameworkIT : KGPBaseTest() {
                 androidVersion = agpVersion
             )
         ) {
-            val environmentVariables = mapOf(
+            konst environmentVariables = mapOf(
                 "CONFIGURATION" to "debug",
                 "SDK_NAME" to "iphoneos",
                 "ARCHS" to "arm64",
@@ -198,7 +198,7 @@ class AppleFrameworkIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk,
     ) {
-        val buildOptions = defaultBuildOptions.copy(
+        konst buildOptions = defaultBuildOptions.copy(
             androidVersion = agpVersion
         )
         nativeProject(
@@ -207,7 +207,7 @@ class AppleFrameworkIT : KGPBaseTest() {
             buildJdk = jdkProvider.location,
             buildOptions = buildOptions
         ) {
-            val environmentVariables = mapOf(
+            konst environmentVariables = mapOf(
                 "CONFIGURATION" to "Debug",
                 "SDK_NAME" to "iphoneos",
                 "ARCHS" to "arm64",
@@ -243,7 +243,7 @@ class AppleFrameworkIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk,
     ) {
-        val buildOptions = defaultBuildOptions.copy(
+        konst buildOptions = defaultBuildOptions.copy(
             androidVersion = agpVersion
         )
         nativeProject(
@@ -252,7 +252,7 @@ class AppleFrameworkIT : KGPBaseTest() {
             buildJdk = jdkProvider.location,
             buildOptions = buildOptions
         ) {
-            val environmentVariables = EnvironmentalVariables(
+            konst environmentVariables = EnvironmentalVariables(
                 mapOf(
                     "CONFIGURATION" to "Debug",
                     "SDK_NAME" to "iphoneos",
@@ -304,7 +304,7 @@ class AppleFrameworkIT : KGPBaseTest() {
                 androidVersion = agpVersion
             )
         ) {
-            val environmentVariables = EnvironmentalVariables(
+            konst environmentVariables = EnvironmentalVariables(
                 mapOf(
                     "CONFIGURATION" to "debug",
                     "SDK_NAME" to "iphoneos123",
@@ -340,7 +340,7 @@ class AppleFrameworkIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk,
     ) {
-        val buildOptions = defaultBuildOptions.copy(
+        konst buildOptions = defaultBuildOptions.copy(
             androidVersion = agpVersion
         )
         nativeProject(
@@ -349,7 +349,7 @@ class AppleFrameworkIT : KGPBaseTest() {
             buildJdk = jdkProvider.location,
             buildOptions = buildOptions
         ) {
-            val environmentVariables = EnvironmentalVariables(
+            konst environmentVariables = EnvironmentalVariables(
                 mapOf(
                     "CONFIGURATION" to "debug",
                     "SDK_NAME" to "iphoneos123",
@@ -385,7 +385,7 @@ class AppleFrameworkIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk,
     ) {
-        val buildOptions = defaultBuildOptions.copy(
+        konst buildOptions = defaultBuildOptions.copy(
             androidVersion = agpVersion
         )
         nativeProject(
@@ -394,7 +394,7 @@ class AppleFrameworkIT : KGPBaseTest() {
             buildOptions = buildOptions,
             buildJdk = jdkProvider.location
         ) {
-            val environmentVariables = EnvironmentalVariables(
+            konst environmentVariables = EnvironmentalVariables(
                 mapOf(
                     "CONFIGURATION" to "debug",
                     "SDK_NAME" to "iphoneos123",
@@ -424,7 +424,7 @@ class AppleFrameworkIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk,
     ) {
-        val buildOptions = defaultBuildOptions.copy(
+        konst buildOptions = defaultBuildOptions.copy(
             androidVersion = agpVersion
         )
         nativeProject(
@@ -433,7 +433,7 @@ class AppleFrameworkIT : KGPBaseTest() {
             buildOptions = buildOptions,
             buildJdk = jdkProvider.location
         ) {
-            val environmentVariables = EnvironmentalVariables(
+            konst environmentVariables = EnvironmentalVariables(
                 mapOf(
                     "CONFIGURATION" to "debug",
                     "SDK_NAME" to "iphoneos123",
@@ -463,7 +463,7 @@ class AppleFrameworkIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk,
     ) {
-        val buildOptions = defaultBuildOptions.copy(
+        konst buildOptions = defaultBuildOptions.copy(
             androidVersion = agpVersion
         )
         nativeProject(
@@ -472,7 +472,7 @@ class AppleFrameworkIT : KGPBaseTest() {
             buildOptions = buildOptions,
             buildJdk = jdkProvider.location
         ) {
-            val environmentVariables = EnvironmentalVariables(
+            konst environmentVariables = EnvironmentalVariables(
                 mapOf(
                     "CONFIGURATION" to "debug",
                     "SDK_NAME" to "iphoneos123",
@@ -506,7 +506,7 @@ class AppleFrameworkIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk,
     ) {
-        val buildOptions = defaultBuildOptions.copy(
+        konst buildOptions = defaultBuildOptions.copy(
             androidVersion = agpVersion
         )
         nativeProject(
@@ -515,7 +515,7 @@ class AppleFrameworkIT : KGPBaseTest() {
             buildOptions = buildOptions,
             buildJdk = jdkProvider.location
         ) {
-            val environmentVariables = EnvironmentalVariables(
+            konst environmentVariables = EnvironmentalVariables(
                 mapOf(
                     "CONFIGURATION" to "debug",
                     "SDK_NAME" to "iphoneos123",

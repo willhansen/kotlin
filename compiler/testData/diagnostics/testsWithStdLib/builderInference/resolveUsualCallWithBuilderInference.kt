@@ -21,18 +21,18 @@ fun <S> Builder<S>.extensionAdd(s: S) {}
 
 fun <S> Builder<S>.safeExtensionAdd(s: S) {}
 
-val member = build {
+konst member = build {
     add(42)
 }
 
-val memberWithoutAnn = wrongBuild {
+konst memberWithoutAnn = wrongBuild {
     add(42)
 }
 
-val extension = build {
+konst extension = build {
     extensionAdd("foo")
 }
 
-val safeExtension = build {
+konst safeExtension = build {
     safeExtensionAdd("foo")
 }

@@ -6,5 +6,5 @@ object Obsolete {
 
 fun useObject() {
     <!DEPRECATION!>Obsolete<!>.use()
-    val x = <!DEPRECATION!>Obsolete<!>
+    konst x = <!DEPRECATION!>Obsolete<!>
 }

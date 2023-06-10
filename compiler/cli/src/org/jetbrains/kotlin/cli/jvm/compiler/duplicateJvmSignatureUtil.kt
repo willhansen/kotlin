@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind.*
 
 fun getJvmSignatureDiagnostics(element: PsiElement, otherDiagnostics: Diagnostics): Diagnostics? {
     fun getDiagnosticsForClass(ktClassOrObject: KtClassOrObject): Diagnostics {
-        val outermostClass = getOutermostClassOrObject(ktClassOrObject)
+        konst outermostClass = getOutermostClassOrObject(ktClassOrObject)
         return CliExtraDiagnosticsProvider.forClassOrObject(outermostClass)
     }
 
@@ -32,7 +32,7 @@ fun getJvmSignatureDiagnostics(element: PsiElement, otherDiagnostics: Diagnostic
         }
         if (element is KtParameter && element.hasValOrVar()) {
             // property declared in constructor
-            val parentClass = (parent?.parent?.parent as? KtClass)
+            konst parentClass = (parent?.parent?.parent as? KtClass)
             if (parentClass != null) {
                 return getDiagnosticsForClass(parentClass)
             }
@@ -47,7 +47,7 @@ fun getJvmSignatureDiagnostics(element: PsiElement, otherDiagnostics: Diagnostic
             }
 
             is KtClassBody -> {
-                val parentsParent = parent.getParent()
+                konst parentsParent = parent.getParent()
 
                 if (parentsParent is KtClassOrObject) {
                     return getDiagnosticsForClass(parentsParent)
@@ -57,17 +57,17 @@ fun getJvmSignatureDiagnostics(element: PsiElement, otherDiagnostics: Diagnostic
         return null
     }
 
-    val result = doGetDiagnostics() ?: return null
+    konst result = doGetDiagnostics() ?: return null
 
     return FilteredJvmDiagnostics(result, otherDiagnostics)
 }
 
-class FilteredJvmDiagnostics(val jvmDiagnostics: Diagnostics, val otherDiagnostics: Diagnostics) : Diagnostics by jvmDiagnostics {
+class FilteredJvmDiagnostics(konst jvmDiagnostics: Diagnostics, konst otherDiagnostics: Diagnostics) : Diagnostics by jvmDiagnostics {
     companion object {
-        private val higherPriorityDiagnosticFactories =
+        private konst higherPriorityDiagnosticFactories =
             setOf(CONFLICTING_OVERLOADS, REDECLARATION, NOTHING_TO_OVERRIDE, MANY_IMPL_MEMBER_NOT_IMPLEMENTED)
 
-        private val jvmDiagnosticFactories =
+        private konst jvmDiagnosticFactories =
             setOf(CONFLICTING_JVM_DECLARATIONS, ACCIDENTAL_OVERRIDE, CONFLICTING_INHERITED_JVM_DECLARATIONS)
     }
 
@@ -78,17 +78,17 @@ class FilteredJvmDiagnostics(val jvmDiagnostics: Diagnostics, val otherDiagnosti
 
     override fun forElement(psiElement: PsiElement): Collection<Diagnostic> {
         fun Diagnostic.data() = DiagnosticFactory.cast(this, jvmDiagnosticFactories).a
-        val (conflicting, other) = jvmDiagnostics.forElement(psiElement).partition { it.factory in jvmDiagnosticFactories }
+        konst (conflicting, other) = jvmDiagnostics.forElement(psiElement).partition { it.factory in jvmDiagnosticFactories }
         if (alreadyReported(psiElement)) {
             // CONFLICTING_OVERLOADS already reported, no need to duplicate it
             return other
         }
 
-        val filtered = arrayListOf<Diagnostic>()
+        konst filtered = arrayListOf<Diagnostic>()
         conflicting.groupBy {
             it.data().signature.name
         }.forEach {
-            val diagnostics = it.value
+            konst diagnostics = it.konstue
             if (diagnostics.size <= 1) {
                 filtered.addAll(diagnostics)
             } else {

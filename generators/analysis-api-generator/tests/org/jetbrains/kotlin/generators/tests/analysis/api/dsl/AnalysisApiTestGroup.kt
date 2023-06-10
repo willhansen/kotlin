@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
 import kotlin.reflect.KClass
 
 internal class AnalysisApiTestGroup(
-    private val generator: AnalysisApiTestGenerator,
-    private val groupFilter: TestFilter,
-    private val directory: String?,
+    private konst generator: AnalysisApiTestGenerator,
+    private konst groupFilter: TestFilter,
+    private konst directory: String?,
 ) {
     fun group(directory: String? = null, filter: TestFilter = { true }, init: AnalysisApiTestGroup.() -> Unit) {
         AnalysisApiTestGroup(
@@ -37,7 +37,7 @@ internal class AnalysisApiTestGroup(
         init: TestGroup.TestClass.(data: AnalysisApiTestConfiguratorFactoryData) -> Unit,
     ) {
         with(generator.suite) {
-            val fullTestPath = "analysis/analysis-api/testData" + directory?.let { "/$it" }.orEmpty()
+            konst fullTestPath = "analysis/analysis-api/testData" + directory?.let { "/$it" }.orEmpty()
 
             AnalysisApiConfiguratorFactoryProvider.allPossibleFactoryDataList.filter(groupFilter).filter(filter)
                 .groupBy { AnalysisApiConfiguratorFactoryProvider.getTestPath(it) }
@@ -58,11 +58,11 @@ private fun TestGroup.analysisApiTestClass(
     testClass: KClass<*>,
     init: TestGroup.TestClass.(data: AnalysisApiTestConfiguratorFactoryData) -> Unit
 ) {
-    val factory = AnalysisApiConfiguratorFactoryProvider.getFactory(data) ?: return
+    konst factory = AnalysisApiConfiguratorFactoryProvider.getFactory(data) ?: return
 
-    val fullPackage = getPackageName(data, testClass)
+    konst fullPackage = getPackageName(data, testClass)
 
-    val suiteTestClassName = buildString {
+    konst suiteTestClassName = buildString {
         append(fullPackage)
         append(getTestNameSuffix(data))
         append(getDefaultSuiteTestClassName(testClass.java.simpleName))
@@ -91,7 +91,7 @@ private fun getTestNameSuffix(data: AnalysisApiTestConfiguratorFactoryData): Str
 }
 
 private fun getPackageName(data: AnalysisApiTestConfiguratorFactoryData, testClass: KClass<*>): String {
-    val basePrefix = buildString {
+    konst basePrefix = buildString {
         append("org.jetbrains.kotlin.analysis.api.")
         if (data.analysisApiMode == AnalysisApiMode.Standalone) {
             append("standalone.")
@@ -99,7 +99,7 @@ private fun getPackageName(data: AnalysisApiTestConfiguratorFactoryData, testCla
         append(data.frontend.suffix.lowercase())
         append(".test.cases.generated")
     }
-    val packagePrefix = "cases." + testClass.java.name
+    konst packagePrefix = "cases." + testClass.java.name
         .substringAfter("test.cases.")
         .substringBeforeLast('.', "")
 

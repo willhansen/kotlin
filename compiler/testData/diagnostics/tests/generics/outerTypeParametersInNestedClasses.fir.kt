@@ -27,7 +27,7 @@ class Foo<T> {
         fun foo(arg: <!UNRESOLVED_REFERENCE!>T<!>) {}
     }
 
-    val obj = object {
+    konst obj = object {
         fun foo(arg: T) {}
     }
 

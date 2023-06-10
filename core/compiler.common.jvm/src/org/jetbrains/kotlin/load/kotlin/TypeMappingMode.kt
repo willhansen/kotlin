@@ -12,51 +12,51 @@ annotation class TypeMappingModeInternals
 
 @OptIn(TypeMappingModeInternals::class)
 class TypeMappingMode @TypeMappingModeInternals constructor(
-    val needPrimitiveBoxing: Boolean = true,
-    val needInlineClassWrapping: Boolean = true,
-    val isForAnnotationParameter: Boolean = false,
+    konst needPrimitiveBoxing: Boolean = true,
+    konst needInlineClassWrapping: Boolean = true,
+    konst isForAnnotationParameter: Boolean = false,
     // Here DeclarationSiteWildcards means wildcard generated because of declaration-site variance
-    val skipDeclarationSiteWildcards: Boolean = false,
-    val skipDeclarationSiteWildcardsIfPossible: Boolean = false,
-    private val genericArgumentMode: TypeMappingMode? = null,
-    val kotlinCollectionsToJavaCollections: Boolean = true,
-    private val genericContravariantArgumentMode: TypeMappingMode? = genericArgumentMode,
-    private val genericInvariantArgumentMode: TypeMappingMode? = genericArgumentMode,
-    val mapTypeAliases: Boolean = false
+    konst skipDeclarationSiteWildcards: Boolean = false,
+    konst skipDeclarationSiteWildcardsIfPossible: Boolean = false,
+    private konst genericArgumentMode: TypeMappingMode? = null,
+    konst kotlinCollectionsToJavaCollections: Boolean = true,
+    private konst genericContravariantArgumentMode: TypeMappingMode? = genericArgumentMode,
+    private konst genericInvariantArgumentMode: TypeMappingMode? = genericArgumentMode,
+    konst mapTypeAliases: Boolean = false
 ) {
     companion object {
         /**
          * kotlin.Int is mapped to Ljava/lang/Integer;
          */
         @JvmField
-        val GENERIC_ARGUMENT = TypeMappingMode()
+        konst GENERIC_ARGUMENT = TypeMappingMode()
 
         /**
          * kotlin.Int is mapped to Ljava/lang/Integer;
          * Type aliases are mapped to their expanded form
          */
         @JvmField
-        val GENERIC_ARGUMENT_UAST = TypeMappingMode(mapTypeAliases = true)
+        konst GENERIC_ARGUMENT_UAST = TypeMappingMode(mapTypeAliases = true)
 
         /**
          * see KotlinTypeMapper.forceBoxedReturnType()
          * This configuration should be called only for method return type
          */
         @JvmField
-        val RETURN_TYPE_BOXED = TypeMappingMode(needInlineClassWrapping = true)
+        konst RETURN_TYPE_BOXED = TypeMappingMode(needInlineClassWrapping = true)
 
         /**
          * kotlin.Int is mapped to I
          */
         @JvmField
-        val DEFAULT = TypeMappingMode(genericArgumentMode = GENERIC_ARGUMENT, needPrimitiveBoxing = false, needInlineClassWrapping = false)
+        konst DEFAULT = TypeMappingMode(genericArgumentMode = GENERIC_ARGUMENT, needPrimitiveBoxing = false, needInlineClassWrapping = false)
 
         /**
          * kotlin.Int is mapped to I
          * Type aliases are mapped to their expanded form
          */
         @JvmField
-        val DEFAULT_UAST = TypeMappingMode(
+        konst DEFAULT_UAST = TypeMappingMode(
             genericArgumentMode = GENERIC_ARGUMENT_UAST,
             needPrimitiveBoxing = false,
             needInlineClassWrapping = false,
@@ -65,11 +65,11 @@ class TypeMappingMode @TypeMappingModeInternals constructor(
 
         /**
          * kotlin.Int is mapped to I
-         * inline class Foo(val x: Int) is mapped to LFoo;
+         * inline class Foo(konst x: Int) is mapped to LFoo;
          * but in signature fun bar(f: Foo), Foo is mapped to I
          */
         @JvmField
-        val CLASS_DECLARATION = TypeMappingMode(
+        konst CLASS_DECLARATION = TypeMappingMode(
             genericArgumentMode = GENERIC_ARGUMENT,
             needPrimitiveBoxing = false,
             needInlineClassWrapping = true
@@ -80,10 +80,10 @@ class TypeMappingMode @TypeMappingModeInternals constructor(
          * No projections allowed in immediate arguments
          */
         @JvmField
-        val SUPER_TYPE = TypeMappingMode(skipDeclarationSiteWildcards = true, genericArgumentMode = GENERIC_ARGUMENT)
+        konst SUPER_TYPE = TypeMappingMode(skipDeclarationSiteWildcards = true, genericArgumentMode = GENERIC_ARGUMENT)
 
         @JvmField
-        val SUPER_TYPE_KOTLIN_COLLECTIONS_AS_IS = TypeMappingMode(
+        konst SUPER_TYPE_KOTLIN_COLLECTIONS_AS_IS = TypeMappingMode(
             skipDeclarationSiteWildcards = true,
             genericArgumentMode = GENERIC_ARGUMENT,
             kotlinCollectionsToJavaCollections = false
@@ -95,7 +95,7 @@ class TypeMappingMode @TypeMappingModeInternals constructor(
          * Other types mapped as DEFAULT
          */
         @JvmField
-        val VALUE_FOR_ANNOTATION = TypeMappingMode(
+        konst VALUE_FOR_ANNOTATION = TypeMappingMode(
             isForAnnotationParameter = true,
             needPrimitiveBoxing = false,
             needInlineClassWrapping = false,

@@ -1,6 +1,6 @@
 // WITH_SIGNATURES
 
-class A<T>(val result: T) {
+class A<T>(konst result: T) {
     inner class B {
         inner class C {
             fun f() {

@@ -7,7 +7,7 @@ context(Monoid<T>) public fun </*0*/ T> kotlin.collections.List<T>.sum(): T
 
 public object IntMonoid : Monoid<kotlin.Int> {
     private constructor IntMonoid()
-    public open override /*1*/ val unit: kotlin.Int = 0
+    public open override /*1*/ konst unit: kotlin.Int = 0
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -15,7 +15,7 @@ public object IntMonoid : Monoid<kotlin.Int> {
 }
 
 public interface Monoid</*0*/ T> : Semigroup<T> {
-    public abstract val unit: T
+    public abstract konst unit: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -31,7 +31,7 @@ public interface Semigroup</*0*/ T> {
 
 public object StringMonoid : Monoid<kotlin.String> {
     private constructor StringMonoid()
-    public open override /*1*/ val unit: kotlin.String = ""
+    public open override /*1*/ konst unit: kotlin.String = ""
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

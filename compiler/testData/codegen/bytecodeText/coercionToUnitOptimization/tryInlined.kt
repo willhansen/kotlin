@@ -1,5 +1,5 @@
 fun test(list: List<String>) {
-    val result = mutableListOf<String>()
+    konst result = mutableListOf<String>()
     use1 { list.forEach { result.add(it) } }
 }
 

@@ -22,13 +22,13 @@ interface ReadWriteAccessChecker {
     ): Pair<ReferenceAccess, KtExpression> {
         var expression = targetExpression.getQualifiedExpressionForSelectorOrThis()
         loop@ while (true) {
-            when (val parent = expression.parent) {
+            when (konst parent = expression.parent) {
                 is KtParenthesizedExpression, is KtAnnotatedExpression, is KtLabeledExpression -> expression = parent as KtExpression
                 else -> break@loop
             }
         }
 
-        val assignment = expression.getAssignmentByLHS()
+        konst assignment = expression.getAssignmentByLHS()
         if (assignment != null) {
             return when (assignment.operationToken) {
                 KtTokens.EQ -> ReferenceAccess.WRITE to assignment
@@ -40,7 +40,7 @@ interface ReadWriteAccessChecker {
             }
         }
 
-        val unaryExpression = expression.parent as? KtUnaryExpression
+        konst unaryExpression = expression.parent as? KtUnaryExpression
         return if (unaryExpression != null && unaryExpression.operationToken in constant { setOf(KtTokens.PLUSPLUS, KtTokens.MINUSMINUS) })
             ReferenceAccess.READ_WRITE to unaryExpression
         else

@@ -21,12 +21,12 @@ class JsNameCharsChecker(suggestion: JsNameSuggestion) : AbstractNameCharsChecke
 
 class WasmNameCharsChecker(suggestion: WasmNameSuggestion) : AbstractNameCharsChecker(suggestion)
 
-abstract class AbstractNameCharsChecker(private val suggestion: NameSuggestion) : DeclarationChecker {
+abstract class AbstractNameCharsChecker(private konst suggestion: NameSuggestion) : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        if (context.languageVersionSettings.supportsFeature(LanguageFeature.JsAllowInvalidCharsIdentifiersEscaping)) {
+        if (context.languageVersionSettings.supportsFeature(LanguageFeature.JsAllowInkonstidCharsIdentifiersEscaping)) {
             return
         }
-        val bindingContext = context.trace.bindingContext
+        konst bindingContext = context.trace.bindingContext
 
         if (descriptor is PropertyAccessorDescriptor && AnnotationsUtils.getJsName(descriptor) == null) return
 
@@ -37,7 +37,7 @@ abstract class AbstractNameCharsChecker(private val suggestion: NameSuggestion) 
             AnnotationsUtils.isExportedObject(descriptor, bindingContext)
         ) return
 
-        val suggestedName = suggestion.suggest(descriptor, bindingContext) ?: return
+        konst suggestedName = suggestion.suggest(descriptor, bindingContext) ?: return
         if (suggestedName.stable && suggestedName.names.any { NameSuggestion.sanitizeName(it) != it }) {
             context.trace.report(ErrorsJs.NAME_CONTAINS_ILLEGAL_CHARS.on(declaration))
         }

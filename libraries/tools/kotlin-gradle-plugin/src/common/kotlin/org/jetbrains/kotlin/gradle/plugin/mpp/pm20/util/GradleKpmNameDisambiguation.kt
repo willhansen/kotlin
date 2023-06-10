@@ -45,8 +45,8 @@ internal fun FragmentNameDisambiguationOmittingMain(module: KpmModule, fragmentN
 }
 
 private class GradleKpmDefaultFragmentNameDisambiguation(
-    private val module: KpmModule,
-    private val fragmentName: String
+    private konst module: KpmModule,
+    private konst fragmentName: String
 ) : GradleKpmNameDisambiguation {
     override fun disambiguateName(simpleName: String): String {
         return KpmFragment.disambiguateName(module, fragmentName, simpleName)
@@ -54,8 +54,8 @@ private class GradleKpmDefaultFragmentNameDisambiguation(
 }
 
 private class GradleKpmDefaultFragmentNameDisambiguationOmittingMain(
-    private val module: KpmModule,
-    private val fragmentName: String
+    private konst module: KpmModule,
+    private konst fragmentName: String
 ) : GradleKpmNameDisambiguation {
     override fun disambiguateName(simpleName: String): String {
         return KpmFragment.disambiguateNameOmittingMain(module, fragmentName, simpleName)
@@ -65,7 +65,7 @@ private class GradleKpmDefaultFragmentNameDisambiguationOmittingMain(
 internal fun KpmFragment.disambiguateName(simpleName: String) =
     KpmFragment.disambiguateName(containingModule, fragmentName, simpleName)
 
-internal val KpmFragment.unambiguousNameInProject
+internal konst KpmFragment.unambiguousNameInProject
     get() = disambiguateName("")
 
 internal fun KpmFragment.Companion.disambiguateName(module: KpmModule, fragmentName: String, simpleName: String) =

@@ -30,7 +30,7 @@ package a {
 package
 
 package test {
-    public val x: [Error type: Not found recorded type for a.b()]
+    public konst x: [Error type: Not found recorded type for a.b()]
 
     public final class a {
         public constructor a()

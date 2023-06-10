@@ -3,5 +3,5 @@ class C {
 }
 
 fun call(c: C) {
-    val res = <expr>c[1, "foo"]</expr>
+    konst res = <expr>c[1, "foo"]</expr>
 }

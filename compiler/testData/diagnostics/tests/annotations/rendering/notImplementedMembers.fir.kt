@@ -20,7 +20,7 @@ interface B {
 @An
 abstract class D {
     @An
-    abstract val d: @An Int
+    abstract konst d: @An Int
 }
 
 <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED("Class E; d")!>class E<!> : D(), A
@@ -44,5 +44,5 @@ interface GI : G {
     override fun a(@An arg: @An Int) {}
 }
 
-<!MANY_IMPL_MEMBER_NOT_IMPLEMENTED("Class AG1; a")!>class AG1<!>(val a: A, val g: G) : A by a, G by g
+<!MANY_IMPL_MEMBER_NOT_IMPLEMENTED("Class AG1; a")!>class AG1<!>(konst a: A, konst g: G) : A by a, G by g
 <!MANY_INTERFACES_MEMBER_NOT_IMPLEMENTED("Class AG2; a")!>class AG2<!>() : AI, GI

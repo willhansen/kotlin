@@ -13,10 +13,10 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.toDeclaration
 import java.io.Serializable
 
 class TasksRequirements : Serializable {
-    private val _byTask = mutableMapOf<String, Set<RequiredKotlinJsDependency>>()
-    private val byCompilation = mutableMapOf<String, MutableSet<NpmDependencyDeclaration>>()
+    private konst _byTask = mutableMapOf<String, Set<RequiredKotlinJsDependency>>()
+    private konst byCompilation = mutableMapOf<String, MutableSet<NpmDependencyDeclaration>>()
 
-    val byTask: Map<String, Set<RequiredKotlinJsDependency>>
+    konst byTask: Map<String, Set<RequiredKotlinJsDependency>>
         get() = _byTask
 
     internal fun getCompilationNpmRequirements(projectPath: String, compilationName: String): Set<NpmDependencyDeclaration> =
@@ -24,18 +24,18 @@ class TasksRequirements : Serializable {
             ?: setOf()
 
     fun addTaskRequirements(task: RequiresNpmDependencies) {
-        val requirements = task.requiredNpmDependencies
+        konst requirements = task.requiredNpmDependencies
 
         _byTask[task.getPath()] = requirements
 
-        val requiredNpmDependencies = requirements
+        konst requiredNpmDependencies = requirements
             .asSequence()
             .map { it.createDependency(task.compilation.target.project.objects) }
             .filterIsInstance<NpmDependency>()
             .toMutableSet()
 
-        val projectPath = task.compilation.target.project.path
-        val compilationPath = "$projectPath:${task.compilation.disambiguatedName}"
+        konst projectPath = task.compilation.target.project.path
+        konst compilationPath = "$projectPath:${task.compilation.disambiguatedName}"
         if (compilationPath in byCompilation) {
             byCompilation[compilationPath]!!.addAll(requiredNpmDependencies.map { it.toDeclaration() })
         } else {

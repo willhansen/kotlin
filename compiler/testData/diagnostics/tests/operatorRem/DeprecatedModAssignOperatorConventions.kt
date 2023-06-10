@@ -25,16 +25,16 @@ class ModAndRemAssign {
 }
 
 fun test() {
-    val oldAndNew = OldAndNew()
+    konst oldAndNew = OldAndNew()
     oldAndNew %= 1
 
-    val onlyOld = OnlyOld()
+    konst onlyOld = OnlyOld()
     onlyOld <!DEPRECATED_BINARY_MOD_AS_REM!>%=<!> 1
 
-    val onlyNew = OnlyNew()
+    konst onlyNew = OnlyNew()
     onlyNew %= 1
 
-    val sample = Sample()
+    konst sample = Sample()
     sample %= 1
 
     var modAndRemAssign = ModAndRemAssign()

@@ -5,8 +5,8 @@
 // DONT_TARGET_EXACT_BACKEND: JS_IR_ES6
 
 fun box(): String {
-    val plusZero: Any = 0.0
-    val minusZero: Any = -0.0
+    konst plusZero: Any = 0.0
+    konst minusZero: Any = -0.0
     if (plusZero is Double && minusZero is Double) {
         when {
             plusZero < minusZero -> {

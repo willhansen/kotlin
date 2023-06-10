@@ -1,13 +1,13 @@
 package transitiveStory.midActual.commonSource
 
-val moduleName = "bottom-mpp"
-expect val sourceSetName: String
+konst moduleName = "bottom-mpp"
+expect konst sourceSetName: String
 
 expect open class SomeMPPInTheCommon() {
-    val simpleVal: Int
+    konst simpleVal: Int
 
     companion object Compainon {
-        val inTheCompanionOfBottomActualDeclarations: String
+        konst inTheCompanionOfBottomActualDeclarations: String
     }
 }
 

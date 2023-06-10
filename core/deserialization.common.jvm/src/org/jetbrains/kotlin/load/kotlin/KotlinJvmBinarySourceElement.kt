@@ -23,12 +23,12 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 class KotlinJvmBinarySourceElement(
-    val binaryClass: KotlinJvmBinaryClass,
-    override val incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>? = null,
-    override val isPreReleaseInvisible: Boolean = false,
-    override val abiStability: DeserializedContainerAbiStability = DeserializedContainerAbiStability.STABLE,
+    konst binaryClass: KotlinJvmBinaryClass,
+    override konst incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>? = null,
+    override konst isPreReleaseInvisible: Boolean = false,
+    override konst abiStability: DeserializedContainerAbiStability = DeserializedContainerAbiStability.STABLE,
 ) : DeserializedContainerSource {
-    override val presentableString: String
+    override konst presentableString: String
         get() = "Class '${binaryClass.classId.asSingleFqName().asString()}'"
 
     override fun getContainingFile(): SourceFile = SourceFile.NO_SOURCE_FILE

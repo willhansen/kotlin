@@ -24,10 +24,10 @@ public abstract class A</*0*/ T> {
 
 public final class FieldTest {
     public constructor FieldTest()
-    private final val qqq: FieldTest.test.`<no name provided>`.bar.`<no name provided>`.qux.`<no name provided>`
+    private final konst qqq: FieldTest.test.`<no name provided>`.bar.`<no name provided>`.qux.`<no name provided>`
     public final var result: kotlin.String
-    private final val test: FieldTest.test.`<no name provided>`
-    private final val ttt: FieldTest.test.`<no name provided>`.bar.`<no name provided>`
+    private final konst test: FieldTest.test.`<no name provided>`
+    private final konst ttt: FieldTest.test.`<no name provided>`.bar.`<no name provided>`
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

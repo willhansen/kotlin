@@ -22,12 +22,12 @@ import org.jetbrains.typesBenchmarks.*
 import kotlinx.cli.*
 
 class CinteropLauncher : Launcher() {
-    override val baseBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry> = mutableMapOf(
+    override konst baseBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry> = mutableMapOf(
             "stringToC" to BenchmarkEntryWithInit.create(::StringBenchmark, { stringToCBenchmark() }),
             "stringToKotlin" to BenchmarkEntryWithInit.create(::StringBenchmark, { stringToKotlinBenchmark() }),
             "intMatrix" to BenchmarkEntryWithInit.create(::IntMatrixBenchmark, { intMatrixBenchmark() })
     )
-    override val extendedBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry> = mutableMapOf(
+    override konst extendedBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry> = mutableMapOf(
             "macros" to BenchmarkEntry(::macrosBenchmark),
             "struct" to BenchmarkEntry(::structBenchmark),
             "union" to BenchmarkEntry(::unionBenchmark),
@@ -39,7 +39,7 @@ class CinteropLauncher : Launcher() {
 }
 
 fun main(args: Array<String>) {
-    val launcher = CinteropLauncher()
+    konst launcher = CinteropLauncher()
     BenchmarksRunner.runBenchmarks(args, { arguments: BenchmarkArguments ->
         if (arguments is BaseBenchmarkArguments) {
             launcher.launch(arguments.warmup, arguments.repeat, arguments.prefix,

@@ -12,21 +12,21 @@ import org.jetbrains.kotlin.commonizer.metadata.CirTypeResolver
 import org.jetbrains.kotlin.commonizer.tree.CirTreeClass
 
 internal class CirTreeClassDeserializer(
-    private val propertyDeserializer: CirTreePropertyDeserializer,
-    private val functionDeserializer: CirTreeFunctionDeserializer,
-    private val constructorDeserializer: CirTreeClassConstructorDeserializer,
+    private konst propertyDeserializer: CirTreePropertyDeserializer,
+    private konst functionDeserializer: CirTreeFunctionDeserializer,
+    private konst constructorDeserializer: CirTreeClassConstructorDeserializer,
 ) {
     operator fun invoke(
         classEntry: ClassesToProcess.ClassEntry, classesToProcess: ClassesToProcess, typeResolver: CirTypeResolver
     ): CirTreeClass {
-        val classTypeResolver = typeResolver.create(classEntry)
-        val classId = classEntry.classId
-        val className = classId.relativeNameSegments.last()
+        konst classTypeResolver = typeResolver.create(classEntry)
+        konst classId = classEntry.classId
+        konst className = classId.relativeNameSegments.last()
 
-        val clazz: KmClass?
-        val isEnumEntry: Boolean
+        konst clazz: KmClass?
+        konst isEnumEntry: Boolean
 
-        val cirClass = when (classEntry) {
+        konst cirClass = when (classEntry) {
             is ClassesToProcess.ClassEntry.RegularClassEntry -> {
                 clazz = classEntry.clazz
                 isEnumEntry = Flag.Class.IS_ENUM_ENTRY(clazz.flags)
@@ -46,16 +46,16 @@ internal class CirTreeClassDeserializer(
             }
         }
 
-        val constructors = clazz?.constructors
+        konst constructors = clazz?.constructors
             ?.takeIf { !isEnumEntry }
             ?.map { constructor -> constructorDeserializer(constructor, cirClass, classTypeResolver) }
             .orEmpty()
 
-        val properties = clazz?.properties?.mapNotNull { property -> propertyDeserializer(property, cirClass, classTypeResolver) }
+        konst properties = clazz?.properties?.mapNotNull { property -> propertyDeserializer(property, cirClass, classTypeResolver) }
 
-        val functions = clazz?.functions?.mapNotNull { function -> functionDeserializer(function, cirClass, classTypeResolver) }
+        konst functions = clazz?.functions?.mapNotNull { function -> functionDeserializer(function, cirClass, classTypeResolver) }
 
-        val classes = classesToProcess.classesInScope(classId).map { nestedClassEntry ->
+        konst classes = classesToProcess.classesInScope(classId).map { nestedClassEntry ->
             this(nestedClassEntry, classesToProcess, classTypeResolver)
         }
 

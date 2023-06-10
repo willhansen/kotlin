@@ -2,13 +2,13 @@ package lib;
 
 @ValueContainer
 public class Property<T> {
-    private T value;
+    private T konstue;
 
     public T get() {
-        return value;
+        return konstue;
     }
 
-    public void set(T value) {
-        this.value = value;
+    public void set(T konstue) {
+        this.konstue = konstue;
     }
 }

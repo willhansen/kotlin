@@ -4,5 +4,5 @@ FILE fqName:<root> fileName:/whenElse.kt
       RETURN type=kotlin.Nothing from='public final fun test (): kotlin.Int declared in <root>'
         WHEN type=kotlin.Int origin=WHEN
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Int type=kotlin.Int value=42
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Int type=kotlin.Int konstue=42

@@ -62,7 +62,7 @@ import java.lang.Deprecated
 import java.util.*
 
 @JvmField
-internal val JAVA_LANG_DEPRECATED = Type.getType(Deprecated::class.java).descriptor
+internal konst JAVA_LANG_DEPRECATED = Type.getType(Deprecated::class.java).descriptor
 
 fun generateIsCheck(
     v: InstructionAdapter,
@@ -70,8 +70,8 @@ fun generateIsCheck(
     asmType: Type
 ) {
     if (TypeUtils.isNullableType(kotlinType)) {
-        val nope = Label()
-        val end = Label()
+        konst nope = Label()
+        konst end = Label()
 
         with(v) {
             dup()
@@ -108,7 +108,7 @@ fun generateAsCast(
         with(v) {
             dup()
             TypeIntrinsics.instanceOf(v, kotlinType, asmType)
-            val ok = Label()
+            konst ok = Label()
             ifne(ok)
             pop()
             aconst(null)
@@ -126,9 +126,9 @@ private fun generateNullCheckForNonSafeAs(
 ) {
     with(v) {
         dup()
-        val nonnull = Label()
+        konst nonnull = Label()
         ifnonnull(nonnull)
-        val exceptionClass = if (unifiedNullChecks) "java/lang/NullPointerException" else "kotlin/TypeCastException"
+        konst exceptionClass = if (unifiedNullChecks) "java/lang/NullPointerException" else "kotlin/TypeCastException"
         AsmUtil.genThrow(
             v,
             exceptionClass,
@@ -139,14 +139,14 @@ private fun generateNullCheckForNonSafeAs(
 }
 
 fun SpecialSignatureInfo.replaceValueParametersIn(sourceSignature: String?): String? =
-    valueParametersSignature?.let { sourceSignature?.replace("^\\(.*\\)".toRegex(), "($it)") }
+    konstueParametersSignature?.let { sourceSignature?.replace("^\\(.*\\)".toRegex(), "($it)") }
 
 fun populateCompanionBackingFieldNamesToOuterContextIfNeeded(
     companion: KtObjectDeclaration,
     outerContext: FieldOwnerContext<*>,
     state: GenerationState
 ) {
-    val descriptor = state.bindingContext.get(BindingContext.CLASS, companion)
+    konst descriptor = state.bindingContext.get(BindingContext.CLASS, companion)
 
     if (descriptor == null || ErrorUtils.isError(descriptor)) {
         return
@@ -155,10 +155,10 @@ fun populateCompanionBackingFieldNamesToOuterContextIfNeeded(
     if (!DescriptorsJvmAbiUtil.isClassCompanionObjectWithBackingFieldsInOuter(descriptor)) {
         return
     }
-    val properties = companion.declarations.filterIsInstance<KtProperty>()
+    konst properties = companion.declarations.filterIsInstance<KtProperty>()
 
     properties.forEach {
-        val variableDescriptor = state.bindingContext.get(BindingContext.VARIABLE, it)
+        konst variableDescriptor = state.bindingContext.get(BindingContext.VARIABLE, it)
         if (variableDescriptor is PropertyDescriptor) {
             outerContext.getFieldName(variableDescriptor, it.hasDelegate())
         }
@@ -189,10 +189,10 @@ fun sortTopLevelClassesAndPrepareContextForSealedClasses(
         }
     }
 
-    val result = ArrayList<KtClassOrObject>(classOrObjects.size)
-    val descriptorToPsi = LinkedHashMap<ClassDescriptor, KtClassOrObject>()
+    konst result = ArrayList<KtClassOrObject>(classOrObjects.size)
+    konst descriptorToPsi = LinkedHashMap<ClassDescriptor, KtClassOrObject>()
     for (classOrObject in classOrObjects) {
-        val descriptor = state.bindingContext.get(BindingContext.CLASS, classOrObject)
+        konst descriptor = state.bindingContext.get(BindingContext.CLASS, classOrObject)
         if (descriptor == null) {
             result.add(classOrObject)
         } else {
@@ -202,7 +202,7 @@ fun sortTopLevelClassesAndPrepareContextForSealedClasses(
     }
 
     // topologicalOrder(listOf(1, 2, 3)) { emptyList() } = listOf(3, 2, 1). Because of this used keys.reversed().
-    val sortedDescriptors = DFS.topologicalOrder(descriptorToPsi.keys.reversed()) { descriptor ->
+    konst sortedDescriptors = DFS.topologicalOrder(descriptorToPsi.keys.reversed()) { descriptor ->
         descriptor.typeConstructor.supertypes
             .map { it.constructor.declarationDescriptor as? ClassDescriptor }
             .filter { it in descriptorToPsi.keys }
@@ -224,10 +224,10 @@ fun ClassBuilder.generateMethod(
     state: GenerationState,
     generate: InstructionAdapter.() -> Unit
 ) {
-    val mv = this.newMethod(origin, access, method.name, method.descriptor, null, null)
+    konst mv = this.newMethod(origin, access, method.name, method.descriptor, null, null)
 
     if (state.classBuilderMode.generateBodies) {
-        val iv = InstructionAdapter(mv)
+        konst iv = InstructionAdapter(mv)
         iv.visitCode()
         iv.generate()
         iv.areturn(method.returnType)
@@ -252,7 +252,7 @@ fun CallableDescriptor.isJvmStaticInInlineClass(): Boolean =
 private fun CallableDescriptor.isJvmStaticIn(predicate: (DeclarationDescriptor) -> Boolean): Boolean =
     when (this) {
         is PropertyAccessorDescriptor -> {
-            val propertyDescriptor = correspondingProperty
+            konst propertyDescriptor = correspondingProperty
             predicate(propertyDescriptor.containingDeclaration) &&
                     (hasJvmStaticAnnotation() || propertyDescriptor.hasJvmStaticAnnotation())
         }
@@ -261,7 +261,7 @@ private fun CallableDescriptor.isJvmStaticIn(predicate: (DeclarationDescriptor) 
 
 fun Collection<VariableDescriptor>.filterOutDescriptorsWithSpecialNames() = filterNot { it.name.isSpecial }
 
-class JvmKotlinType(val type: Type, val kotlinType: KotlinType? = null)
+class JvmKotlinType(konst type: Type, konst kotlinType: KotlinType? = null)
 
 fun KotlinType.asmType(typeMapper: KotlinTypeMapper) = typeMapper.mapType(this)
 
@@ -280,59 +280,59 @@ fun Collection<Type>.withVariableIndices(): List<Pair<Int, Type>> = mutableListO
 
 fun FunctionDescriptor.isGenericToArray(): Boolean {
     if (name.asString() != "toArray") return false
-    if (valueParameters.size != 1 || typeParameters.size != 1) return false
+    if (konstueParameters.size != 1 || typeParameters.size != 1) return false
 
-    val returnType = returnType ?: throw AssertionError(toString())
-    val paramType = valueParameters[0].type
+    konst returnType = returnType ?: throw AssertionError(toString())
+    konst paramType = konstueParameters[0].type
 
     if (!KotlinBuiltIns.isArray(returnType) || !KotlinBuiltIns.isArray(paramType)) return false
 
-    val elementType = typeParameters[0].defaultType
+    konst elementType = typeParameters[0].defaultType
     return KotlinTypeChecker.DEFAULT.equalTypes(elementType, builtIns.getArrayElementType(returnType)) &&
             KotlinTypeChecker.DEFAULT.equalTypes(elementType, builtIns.getArrayElementType(paramType))
 }
 
 fun FunctionDescriptor.isNonGenericToArray(): Boolean {
     if (name.asString() != "toArray") return false
-    if (valueParameters.isNotEmpty() || typeParameters.isNotEmpty()) return false
+    if (konstueParameters.isNotEmpty() || typeParameters.isNotEmpty()) return false
 
-    val returnType = returnType
+    konst returnType = returnType
     return returnType != null && KotlinBuiltIns.isArray(returnType)
 }
 
 fun MemberDescriptor.isToArrayFromCollection(): Boolean {
     if (this !is FunctionDescriptor) return false
 
-    val containingClassDescriptor = containingDeclaration as? ClassDescriptor ?: return false
+    konst containingClassDescriptor = containingDeclaration as? ClassDescriptor ?: return false
     if (containingClassDescriptor.source == SourceElement.NO_SOURCE) return false
 
-    val collectionClass = builtIns.collection
+    konst collectionClass = builtIns.collection
     if (!isSubclass(containingClassDescriptor, collectionClass)) return false
 
     return isGenericToArray() || isNonGenericToArray()
 }
 
-val CallableDescriptor.arity: Int
-    get() = valueParameters.size +
+konst CallableDescriptor.arity: Int
+    get() = konstueParameters.size +
             (if (extensionReceiverParameter != null) 1 else 0) +
             (if (dispatchReceiverParameter != null) 1 else 0)
 
 fun FqName.topLevelClassInternalName() = JvmClassName.byClassId(ClassId(parent(), shortName())).internalName
 fun FqName.topLevelClassAsmType(): Type = Type.getObjectType(topLevelClassInternalName())
 
-fun initializeVariablesForDestructuredLambdaParameters(codegen: ExpressionCodegen, valueParameters: List<ValueParameterDescriptor>, endLabel: Label?) {
+fun initializeVariablesForDestructuredLambdaParameters(codegen: ExpressionCodegen, konstueParameters: List<ValueParameterDescriptor>, endLabel: Label?) {
     // Do not write line numbers until destructuring happens
     // (otherwise destructuring variables will be uninitialized in the beginning of lambda)
     codegen.runWithShouldMarkLineNumbers(false) {
-        for (parameterDescriptor in valueParameters) {
+        for (parameterDescriptor in konstueParameters) {
             if (parameterDescriptor !is ValueParameterDescriptorImpl.WithDestructuringDeclaration) continue
 
-            val variables = parameterDescriptor.destructuringVariables.filterOutDescriptorsWithSpecialNames()
-            val indices = variables.map {
+            konst variables = parameterDescriptor.destructuringVariables.filterOutDescriptorsWithSpecialNames()
+            konst indices = variables.map {
                 codegen.myFrameMap.enter(it, codegen.typeMapper.mapType(it.type))
             }
 
-            val destructuringDeclaration =
+            konst destructuringDeclaration =
                 (DescriptorToSourceUtils.descriptorToDeclaration(parameterDescriptor) as? KtParameter)?.destructuringDeclaration
                     ?: error("Destructuring declaration for descriptor $parameterDescriptor not found")
 
@@ -343,7 +343,7 @@ fun initializeVariablesForDestructuredLambdaParameters(codegen: ExpressionCodege
             )
 
             if (endLabel != null) {
-                val label = Label()
+                konst label = Label()
                 codegen.v.mark(label)
                 for ((index, entry) in indices.zip(variables)) {
                     codegen.v.visitLocalVariable(
@@ -363,7 +363,7 @@ fun initializeVariablesForDestructuredLambdaParameters(codegen: ExpressionCodege
 fun <D : CallableDescriptor> D.unwrapFrontendVersion() = unwrapInitialDescriptorForSuspendFunction()
 
 inline fun FrameMap.useTmpVar(type: Type, block: (index: Int) -> Unit) {
-    val index = enterTemp(type)
+    konst index = enterTemp(type)
     block(index)
     leaveTemp(type)
 }
@@ -384,16 +384,16 @@ fun InstructionAdapter.generateNewInstanceDupAndPlaceBeforeStackTop(
 fun TypeSystemCommonBackendContext.extractReificationArgument(initialType: KotlinTypeMarker): Pair<TypeParameterMarker, ReificationArgument>? {
     var type = initialType
     var arrayDepth = 0
-    val isNullable = type.isMarkedNullable()
+    konst isNullable = type.isMarkedNullable()
     while (type.isArrayOrNullableArray()) {
         arrayDepth++
         // TODO: warn that nullability info on argument will be lost?
-        val argument = type.getArgument(0)
+        konst argument = type.getArgument(0)
         if (argument.isStarProjection()) return null
         type = argument.getType()
     }
 
-    val typeParameter = type.typeConstructor().getTypeParameterClassifier() ?: return null
+    konst typeParameter = type.typeConstructor().getTypeParameterClassifier() ?: return null
     if (!typeParameter.isReified()) return null
     return Pair(typeParameter, ReificationArgument(typeParameter.getName().asString(), isNullable, arrayDepth))
 }
@@ -401,7 +401,7 @@ fun TypeSystemCommonBackendContext.extractReificationArgument(initialType: Kotli
 fun TypeSystemCommonBackendContext.extractUsedReifiedParameters(type: KotlinTypeMarker): ReifiedTypeParametersUsages =
     ReifiedTypeParametersUsages().apply {
         fun KotlinTypeMarker.visit() {
-            val typeParameter = typeConstructor().getTypeParameterClassifier()
+            konst typeParameter = typeConstructor().getTypeParameterClassifier()
             if (typeParameter == null) {
                 for (argument in getArguments()) {
                     if (!argument.isStarProjection()) {
@@ -429,21 +429,21 @@ fun ClassDescriptor.isPossiblyUninitializedSingleton() =
     DescriptorUtils.isEnumEntry(this) ||
             DescriptorUtils.isCompanionObject(this) && JvmCodegenUtil.isJvmInterface(this.containingDeclaration)
 
-inline fun FrameMap.evaluateOnce(
-    value: StackValue,
+inline fun FrameMap.ekonstuateOnce(
+    konstue: StackValue,
     asType: Type,
     v: InstructionAdapter,
     body: (StackValue) -> Unit
 ) {
-    val valueOrTmp: StackValue =
-        if (value.canHaveSideEffects())
-            StackValue.local(enterTemp(asType), asType).apply { store(value, v) }
+    konst konstueOrTmp: StackValue =
+        if (konstue.canHaveSideEffects())
+            StackValue.local(enterTemp(asType), asType).apply { store(konstue, v) }
         else
-            value
+            konstue
 
-    body(valueOrTmp)
+    body(konstueOrTmp)
 
-    if (valueOrTmp != value) {
+    if (konstueOrTmp != konstue) {
         leaveTemp(asType)
     }
 }
@@ -459,36 +459,36 @@ fun KotlinType.isInlineClassTypeWithPrimitiveEquality(): Boolean {
 }
 
 fun recordCallLabelForLambdaArgument(declaration: KtFunctionLiteral, bindingTrace: BindingTrace) {
-    val labelName = getCallLabelForLambdaArgument(declaration, bindingTrace.bindingContext) ?: return
-    val functionDescriptor = bindingTrace[BindingContext.FUNCTION, declaration] ?: return
+    konst labelName = getCallLabelForLambdaArgument(declaration, bindingTrace.bindingContext) ?: return
+    konst functionDescriptor = bindingTrace[BindingContext.FUNCTION, declaration] ?: return
     bindingTrace.record(CodegenBinding.CALL_LABEL_FOR_LAMBDA_ARGUMENT, functionDescriptor, labelName)
 }
 
 fun getCallLabelForLambdaArgument(declaration: KtFunctionLiteral, bindingContext: BindingContext): String? {
-    val lambdaExpression = declaration.parent as? KtLambdaExpression ?: return null
-    val lambdaExpressionParent = lambdaExpression.parent
+    konst lambdaExpression = declaration.parent as? KtLambdaExpression ?: return null
+    konst lambdaExpressionParent = lambdaExpression.parent
 
     if (lambdaExpressionParent is KtLabeledExpression) {
         lambdaExpressionParent.name?.let { return it }
     }
 
-    val callExpression = when (val argument = lambdaExpression.parent) {
+    konst callExpression = when (konst argument = lambdaExpression.parent) {
         is KtLambdaArgument -> {
             argument.parent as? KtCallExpression ?: return null
         }
         is KtValueArgument -> {
-            val valueArgumentList = argument.parent as? KtValueArgumentList ?: return null
-            valueArgumentList.parent as? KtCallExpression ?: return null
+            konst konstueArgumentList = argument.parent as? KtValueArgumentList ?: return null
+            konstueArgumentList.parent as? KtCallExpression ?: return null
         }
         else -> return null
     }
 
-    val call = callExpression.getResolvedCall(bindingContext) ?: return null
+    konst call = callExpression.getResolvedCall(bindingContext) ?: return null
     return call.resultingDescriptor.name.asString()
 }
 
-private val ARRAY_OF_STRINGS_TYPE = Type.getType("[Ljava/lang/String;")
-private val METHOD_DESCRIPTOR_FOR_MAIN = Type.getMethodDescriptor(Type.VOID_TYPE, ARRAY_OF_STRINGS_TYPE)
+private konst ARRAY_OF_STRINGS_TYPE = Type.getType("[Ljava/lang/String;")
+private konst METHOD_DESCRIPTOR_FOR_MAIN = Type.getMethodDescriptor(Type.VOID_TYPE, ARRAY_OF_STRINGS_TYPE)
 
 fun generateBridgeForMainFunctionIfNecessary(
     state: GenerationState,
@@ -498,17 +498,17 @@ fun generateBridgeForMainFunctionIfNecessary(
     origin: JvmDeclarationOrigin,
     parentContext: CodegenContext<*>
 ) {
-    val originElement = origin.element ?: return
+    konst originElement = origin.element ?: return
     if (functionDescriptor.name.asString() != "main" || !DescriptorUtils.isTopLevelDeclaration(functionDescriptor)) return
 
-    val unwrappedFunctionDescriptor = functionDescriptor.unwrapInitialDescriptorForSuspendFunction()
-    val isParameterless =
-        unwrappedFunctionDescriptor.extensionReceiverParameter == null && unwrappedFunctionDescriptor.valueParameters.isEmpty()
+    konst unwrappedFunctionDescriptor = functionDescriptor.unwrapInitialDescriptorForSuspendFunction()
+    konst isParameterless =
+        unwrappedFunctionDescriptor.extensionReceiverParameter == null && unwrappedFunctionDescriptor.konstueParameters.isEmpty()
 
     if (!functionDescriptor.isSuspend && !isParameterless) return
     if (!state.mainFunctionDetector.isMain(unwrappedFunctionDescriptor, checkJvmStaticAnnotation = false, checkReturnType = true)) return
 
-    val bridgeMethodVisitor = packagePartClassBuilder.newMethod(
+    konst bridgeMethodVisitor = packagePartClassBuilder.newMethod(
         Synthetic(originElement, functionDescriptor),
         ACC_PUBLIC or ACC_STATIC or ACC_SYNTHETIC,
         "main",
@@ -526,7 +526,7 @@ fun generateBridgeForMainFunctionIfNecessary(
         return
     }
 
-    val lambdaInternalName =
+    konst lambdaInternalName =
         if (functionDescriptor.isSuspend)
             generateLambdaForRunSuspend(
                 state,
@@ -585,8 +585,8 @@ private fun generateLambdaForRunSuspend(
     signatureOfRealDeclaration: JvmMethodGenericSignature,
     parameterless: Boolean
 ): String {
-    val internalName = "$packagePartClassInternalName$$\$main"
-    val lambdaBuilder = state.factory.newVisitor(
+    konst internalName = "$packagePartClassInternalName$$\$main"
+    konst lambdaBuilder = state.factory.newVisitor(
         JvmDeclarationOrigin.NO_ORIGIN,
         Type.getObjectType(internalName),
         originElement.containingFile
@@ -657,7 +657,7 @@ private fun generateLambdaForRunSuspend(
         }
 
         visitVarInsn(ALOAD, 1)
-        val continuationInternalName = CONTINUATION_ASM_TYPE.internalName
+        konst continuationInternalName = CONTINUATION_ASM_TYPE.internalName
 
         visitTypeInsn(
             CHECKCAST,
@@ -700,39 +700,39 @@ internal fun LabelNode.linkWithLabel(): LabelNode {
 fun linkedLabel(): Label = LabelNode().linkWithLabel().label
 
 // Strings in constant pool contain at most 2^16-1 = 65535 bytes.
-const val STRING_UTF8_ENCODING_BYTE_LIMIT: Int = 65535
+const konst STRING_UTF8_ENCODING_BYTE_LIMIT: Int = 65535
 
 //Each CHAR could be encoded maximum in 3 bytes
 fun String.isDefinitelyFitEncodingLimit() = length <= STRING_UTF8_ENCODING_BYTE_LIMIT / 3
 
-fun splitStringConstant(value: String): List<String> {
-    return if (value.isDefinitelyFitEncodingLimit()) {
-        listOf(value)
+fun splitStringConstant(konstue: String): List<String> {
+    return if (konstue.isDefinitelyFitEncodingLimit()) {
+        listOf(konstue)
     } else {
-        val result = arrayListOf<String>()
+        konst result = arrayListOf<String>()
 
         // Split strings into parts, each of which satisfies JVM class file constant pool constraints.
         // Note that even if we split surrogate pairs between parts, they will be joined on concatenation.
         var accumulatedSize = 0
         var charOffsetInString = 0
         var lastStringBeginning = 0
-        val length = value.length
+        konst length = konstue.length
         while (charOffsetInString < length) {
-            val charCode = value[charOffsetInString].code
-            val encodedCharSize = when {
+            konst charCode = konstue[charOffsetInString].code
+            konst encodedCharSize = when {
                 charCode in 1..127 -> 1
                 charCode <= 2047 -> 2
                 else -> 3
             }
             if (accumulatedSize + encodedCharSize > STRING_UTF8_ENCODING_BYTE_LIMIT) {
-                result.add(value.substring(lastStringBeginning, charOffsetInString))
+                result.add(konstue.substring(lastStringBeginning, charOffsetInString))
                 lastStringBeginning = charOffsetInString
                 accumulatedSize = 0
             }
             accumulatedSize += encodedCharSize
             ++charOffsetInString
         }
-        result.add(value.substring(lastStringBeginning, charOffsetInString))
+        result.add(konstue.substring(lastStringBeginning, charOffsetInString))
 
         result
     }
@@ -741,7 +741,7 @@ fun splitStringConstant(value: String): List<String> {
 fun String.encodedUTF8Size(): Int {
     var result = 0
     for (char in this) {
-        val charCode = char.code
+        konst charCode = char.code
         when {
             charCode in 1..127 -> result++
             charCode <= 2047 -> result += 2

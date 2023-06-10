@@ -1,7 +1,7 @@
 package
 
 @An public interface A {
-    @An public abstract val p1: @An kotlin.String
+    @An public abstract konst p1: @An kotlin.String
     @An public abstract var p2: @An kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -17,8 +17,8 @@ package
 }
 
 @An public interface B : A {
-    public abstract override /*1*/ val p1: kotlin.Int
-    @An public abstract override /*1*/ val p2: @An kotlin.String
+    public abstract override /*1*/ konst p1: kotlin.Int
+    @An public abstract override /*1*/ konst p2: @An kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public abstract override /*1*/ fun test(/*0*/ arg: kotlin.String): kotlin.Int
@@ -26,7 +26,7 @@ package
 }
 
 public interface C : A {
-    @An public abstract override /*1*/ /*fake_override*/ val p1: @An kotlin.String
+    @An public abstract override /*1*/ /*fake_override*/ konst p1: @An kotlin.String
     public abstract override /*1*/ var p2: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

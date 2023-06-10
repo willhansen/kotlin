@@ -10,8 +10,8 @@ interface IFace<T, R> {
     fun call(ic: T?): R?
 }
 
-fun <T, R> bar(value: T?, f: IFace<T, R>): R? {
-    return f.call(value)
+fun <T, R> bar(konstue: T?, f: IFace<T, R>): R? {
+    return f.call(konstue)
 }
 
 fun box(): String {

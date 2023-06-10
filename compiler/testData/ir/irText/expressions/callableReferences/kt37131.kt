@@ -1,6 +1,6 @@
 fun foo(x: String = ""): String = x
 
-class C(val x: String = "")
+class C(konst x: String = "")
 
 fun use(fn: () -> Any) = fn()
 

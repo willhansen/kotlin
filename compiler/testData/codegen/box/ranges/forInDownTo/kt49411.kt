@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 // WITH_STDLIB
 
-abstract class Foo<T>(@JvmField val foo: T)
+abstract class Foo<T>(@JvmField konst foo: T)
 
 class Bar(foo: Int) : Foo<Int>(foo)
 

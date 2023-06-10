@@ -14,7 +14,7 @@ var topLevelProperty = 1
 fun String.topLevelExtensionFun(){}
 
 @Deprecated("hidden", level = DeprecationLevel.HIDDEN)
-val String.topLevelExtensionProperty: Int get() = 1
+konst String.topLevelExtensionProperty: Int get() = 1
 
 open class A {
     constructor(p: Int) : this(<!TYPE_MISMATCH!>""<!>) {}
@@ -29,13 +29,13 @@ open class A {
     private fun privateFun(){}
 
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN)
-    val memberProperty = 1
+    konst memberProperty = 1
 
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN)
     fun String.memberExtensionFun(){}
 
     @Deprecated("hidden", level = DeprecationLevel.HIDDEN)
-    val String.memberExtensionProperty: Int get() = 1
+    konst String.memberExtensionProperty: Int get() = 1
 
     fun foo() {
         <!UNRESOLVED_REFERENCE!>topLevelFun<!>()

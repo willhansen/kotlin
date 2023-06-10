@@ -23,19 +23,19 @@ open class KotlinJsTargetConfigurator :
     KotlinOnlyTargetConfigurator<KotlinJsCompilation, KotlinJsTarget>(true),
     KotlinTargetWithTestsConfigurator<KotlinJsReportAggregatingTestRun, KotlinJsTarget> {
 
-    override val testRunClass: Class<KotlinJsReportAggregatingTestRun> get() = KotlinJsReportAggregatingTestRun::class.java
+    override konst testRunClass: Class<KotlinJsReportAggregatingTestRun> get() = KotlinJsReportAggregatingTestRun::class.java
 
     override fun createTestRun(
         name: String,
         target: KotlinJsTarget
     ): KotlinJsReportAggregatingTestRun {
-        val result = target.project.objects.newInstance(
+        konst result = target.project.objects.newInstance(
             KotlinJsReportAggregatingTestRun::class.java,
             name,
             target
         )
 
-        val testTask = target.project.kotlinTestRegistry.getOrCreateAggregatedTestTask(
+        konst testTask = target.project.kotlinTestRegistry.getOrCreateAggregatedTestTask(
             name = result.testTaskName,
             description = "Run JS tests for all platforms"
         )
@@ -53,12 +53,12 @@ open class KotlinJsTargetConfigurator :
     }
 
     override fun buildCompilationProcessor(compilation: KotlinJsCompilation): KotlinSourceSetProcessor<*> {
-        val tasksProvider = KotlinTasksProvider()
+        konst tasksProvider = KotlinTasksProvider()
         return Kotlin2JsSourceSetProcessor(tasksProvider, KotlinCompilationInfo(compilation))
     }
 
     override fun configureCompilationDefaults(target: KotlinJsTarget) {
-        val project = target.project
+        konst project = target.project
 
         target.compilations.all { compilation ->
             @Suppress("DEPRECATION")
@@ -75,11 +75,11 @@ open class KotlinJsTargetConfigurator :
     }
 
     private fun createLifecycleTaskInternal(compilation: KotlinJsCompilation) {
-        val project = compilation.target.project
+        konst project = compilation.target.project
 
         compilation.output.classesDirs.from(project.files().builtBy(compilation.compileAllTaskName))
 
-        val compileAllTask = project.locateTask<Task>(compilation.compileAllTaskName)
+        konst compileAllTask = project.locateTask<Task>(compilation.compileAllTaskName)
         if (compileAllTask != null) {
             compileAllTask.configure {
                 it.dependsOn(compilation.compileKotlinTaskName)

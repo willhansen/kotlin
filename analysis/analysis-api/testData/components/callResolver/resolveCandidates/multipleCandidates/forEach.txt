@@ -11,7 +11,7 @@ KtApplicableCallCandidateInfo:
         receiverType = kotlin.collections.Iterable<kotlin.Int>
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.collections.Iterable<T>, action: kotlin.Function1<T, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -47,7 +47,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.collections.List<kotlin.Int>
         returnType = kotlin.Unit
         symbol = /forEach(<extension receiver>: kotlin.collections.List<kotlin.Int>, action: kotlin.Function1<kotlin.Int, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null

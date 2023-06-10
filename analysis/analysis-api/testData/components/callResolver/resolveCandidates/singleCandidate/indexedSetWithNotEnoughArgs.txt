@@ -1,5 +1,5 @@
 KtInapplicableCallCandidateInfo:
-  diagnostic = ERROR<NO_VALUE_FOR_PARAMETER: No value passed for parameter 'b'>
+  diagnostic = ERROR<NO_VALUE_FOR_PARAMETER: No konstue passed for parameter 'b'>
   candidate = KtSimpleFunctionCall:
     isImplicitInvoke = false
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
@@ -11,8 +11,8 @@ KtInapplicableCallCandidateInfo:
       signature = KtFunctionLikeSignature:
         receiverType = null
         returnType = kotlin.Unit
-        symbol = /C.set(<dispatch receiver>: C, a: kotlin.Int, b: kotlin.String, value: kotlin.Boolean): kotlin.Unit
-        valueParameters = [
+        symbol = /C.set(<dispatch receiver>: C, a: kotlin.Int, b: kotlin.String, konstue: kotlin.Boolean): kotlin.Unit
+        konstueParameters = [
           KtVariableLikeSignature:
             name = a
             receiverType = null
@@ -26,10 +26,10 @@ KtInapplicableCallCandidateInfo:
             symbol = b: kotlin.String
             callableIdIfNonLocal = null,
           KtVariableLikeSignature:
-            name = value
+            name = konstue
             receiverType = null
             returnType = kotlin.Boolean
-            symbol = value: kotlin.Boolean
+            symbol = konstue: kotlin.Boolean
             callableIdIfNonLocal = null
         ]
         callableIdIfNonLocal = /C.set
@@ -42,10 +42,10 @@ KtInapplicableCallCandidateInfo:
         symbol = a: kotlin.Int
         callableIdIfNonLocal = null),
       false -> (KtVariableLikeSignature:
-        name = value
+        name = konstue
         receiverType = null
         returnType = kotlin.Boolean
-        symbol = value: kotlin.Boolean
+        symbol = konstue: kotlin.Boolean
         callableIdIfNonLocal = null)
     }
   isInBestCandidates = true

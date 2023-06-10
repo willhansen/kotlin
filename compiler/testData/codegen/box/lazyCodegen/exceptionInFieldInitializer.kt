@@ -1,10 +1,10 @@
 
-class A(val p: String) {
-    val prop: String = throw RuntimeException()
+class A(konst p: String) {
+    konst prop: String = throw RuntimeException()
 }
 
-class B(val p: String) {
-    val prop: String = if (p == "test") "OK" else throw RuntimeException()
+class B(konst p: String) {
+    konst prop: String = if (p == "test") "OK" else throw RuntimeException()
 }
 
 fun box(): String {

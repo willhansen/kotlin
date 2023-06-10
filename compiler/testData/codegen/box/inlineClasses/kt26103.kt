@@ -3,16 +3,16 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Bar(val y: Int)
+konstue class Bar(konst y: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T>(val x: Int)
+konstue class Foo<T>(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo2<T>(val x: Foo<T>)
+konstue class Foo2<T>(konst x: Foo<T>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo3<T>(val x: Bar)
+konstue class Foo3<T>(konst x: Bar)
 
 fun testValueParameter(z: Foo<Any>) = z.x
 fun testValueParameter2(z: Foo2<Any>) = z.x.x

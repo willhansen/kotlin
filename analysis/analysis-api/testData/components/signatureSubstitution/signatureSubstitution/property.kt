@@ -1,3 +1,3 @@
 // SUBSTITUTOR: T-> kotlin.collections.List<S>, S -> kotlin.Long
 
-val <T, S> Map<T, S>.val<caret>ue: List<S>
+konst <T, S> Map<T, S>.konst<caret>ue: List<S>

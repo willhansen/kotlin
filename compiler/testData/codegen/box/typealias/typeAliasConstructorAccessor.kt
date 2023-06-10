@@ -1,4 +1,4 @@
-class Outer private constructor(public val x: String) {
+class Outer private constructor(public konst x: String) {
     class Nested {
         fun foo() = OuterAlias("OK")
     }

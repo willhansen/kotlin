@@ -22,17 +22,17 @@ import kotlin.native.concurrent.FreezableAtomicReference as KAtomicRef
 import kotlin.native.concurrent.isFrozen
 import kotlin.native.concurrent.freeze
 
-public actual class AtomicRef<T> constructor(@PublishedApi internal val a: KAtomicRef<T>) {
-    public actual inline var value: T
-        get() = a.value
-        set(value) {
-            if (a.isFrozen) value.freeze()
-            a.value = value
+public actual class AtomicRef<T> constructor(@PublishedApi internal konst a: KAtomicRef<T>) {
+    public actual inline var konstue: T
+        get() = a.konstue
+        set(konstue) {
+            if (a.isFrozen) konstue.freeze()
+            a.konstue = konstue
         }
 
-    public actual inline fun lazySet(value: T) {
-        if (a.isFrozen) value.freeze()
-        a.value = value
+    public actual inline fun lazySet(konstue: T) {
+        if (a.isFrozen) konstue.freeze()
+        a.konstue = konstue
     }
 
     public actual inline fun compareAndSet(expect: T, update: T): Boolean {
@@ -40,16 +40,16 @@ public actual class AtomicRef<T> constructor(@PublishedApi internal val a: KAtom
         return a.compareAndSet(expect, update)
     }
 
-    public actual fun getAndSet(value: T): T {
-        if (a.isFrozen) value.freeze()
+    public actual fun getAndSet(konstue: T): T {
+        if (a.isFrozen) konstue.freeze()
         while (true) {
-            val cur = a.value
-            if (cur === value) return cur
-            if (a.compareAndSwap(cur, value) === cur) return cur
+            konst cur = a.konstue
+            if (cur === konstue) return cur
+            if (a.compareAndSwap(cur, konstue) === cur) return cur
         }
     }
 
-    override fun toString(): String = value.toString()
+    override fun toString(): String = konstue.toString()
 }
 
 public actual fun <T> atomic(initial: T): AtomicRef<T> = AtomicRef<T>(KAtomicRef(initial))

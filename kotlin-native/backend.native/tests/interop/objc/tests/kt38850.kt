@@ -2,7 +2,7 @@ import kotlinx.cinterop.*
 import kotlin.test.*
 import objcTests.*
 
-enum class ColorRef(val color: KT38850Color){
+enum class ColorRef(konst color: KT38850Color){
     Black(KT38850Color.blackColor()),
 }
 

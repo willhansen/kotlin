@@ -13,23 +13,23 @@
 
 var flag1 = false
 var flag2 = false
-val valToSet = 5
+konst konstToSet = 5
 
 class C() {
     var counter = 0
-        set(value) {
+        set(konstue) {
             flag1 = true
-            if (value == valToSet)
+            if (konstue == konstToSet)
                 flag2 = true
-            field = value
+            field = konstue
         }
 }
 
 fun box(): String {
-    val c : C? = C()
+    konst c : C? = C()
     assert(!flag1)
     assert(!flag2)
-    c?.counter = valToSet
-    if ( flag1 && flag2 && c?.counter == valToSet) return "OK"
+    c?.counter = konstToSet
+    if ( flag1 && flag2 && c?.counter == konstToSet) return "OK"
     return "NOK"
 }

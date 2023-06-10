@@ -27,7 +27,7 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var res = "FAIL"
     builder {
-        val adapted = makeSuspend(::callMe)
+        konst adapted = makeSuspend(::callMe)
         res = if (adapted.isSuspend()) adapted.callSuspend() else "!isSuspend"
     }
     return res

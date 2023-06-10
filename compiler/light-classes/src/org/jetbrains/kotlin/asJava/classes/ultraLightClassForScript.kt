@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.psi.KtScript
 
 class KtUltraLightClassForScript(
     script: KtScript,
-    private val support: KtUltraLightSupport,
+    private konst support: KtUltraLightSupport,
 ) : KtLightClassForScript(script) {
-    private val membersBuilder by lazyPub {
+    private konst membersBuilder by lazyPub {
         UltraLightMembersCreator(
             containingClass = this,
             containingClassIsNamedObject = false,
@@ -48,16 +48,16 @@ class KtUltraLightClassForScript(
 
         override fun isVarArgs(): Boolean = false
 
-        override val qualifiedNameForNullabilityAnnotation: String? = null
+        override konst qualifiedNameForNullabilityAnnotation: String? = null
     }
 
     private fun MutableList<KtLightMethod>.addScriptDefaultMethods() {
 
-        val defaultConstructorDelegate = LightMethodBuilder(manager, language, name)
+        konst defaultConstructorDelegate = LightMethodBuilder(manager, language, name)
             .setConstructor(true)
             .addModifier(PsiModifier.PUBLIC)
 
-        val defaultConstructor = KtUltraLightMethodForSourceDeclaration(
+        konst defaultConstructor = KtUltraLightMethodForSourceDeclaration(
             delegate = defaultConstructorDelegate,
             declaration = script,
             support = support,
@@ -67,13 +67,13 @@ class KtUltraLightClassForScript(
         defaultConstructorDelegate.addParameter(KtUltraLightScriptMainParameter(defaultConstructor))
         add(defaultConstructor)
 
-        val methodBuilder = LightMethodBuilder(manager, language, "main").apply {
+        konst methodBuilder = LightMethodBuilder(manager, language, "main").apply {
             isConstructor = false
             addModifiers(PsiModifier.PUBLIC, PsiModifier.STATIC, PsiModifier.FINAL)
             setMethodReturnType(PsiType.VOID)
         }
 
-        val mainMethod = KtUltraLightMethodForSourceDeclaration(
+        konst mainMethod = KtUltraLightMethodForSourceDeclaration(
             delegate = methodBuilder,
             declaration = script,
             support = support,
@@ -87,7 +87,7 @@ class KtUltraLightClassForScript(
     }
 
     private fun ownMethods(): List<KtLightMethod> {
-        val result = mutableListOf<KtLightMethod>()
+        konst result = mutableListOf<KtLightMethod>()
 
         result.addScriptDefaultMethods()
 
@@ -102,7 +102,7 @@ class KtUltraLightClassForScript(
         return result
     }
 
-    private val _ownMethods: CachedValue<List<KtLightMethod>> = CachedValuesManager.getManager(project).createCachedValue(
+    private konst _ownMethods: CachedValue<List<KtLightMethod>> = CachedValuesManager.getManager(project).createCachedValue(
         {
             CachedValueProvider.Result.create(
                 ownMethods(),
@@ -112,12 +112,12 @@ class KtUltraLightClassForScript(
         false,
     )
 
-    override fun getOwnMethods(): List<KtLightMethod> = _ownMethods.value
+    override fun getOwnMethods(): List<KtLightMethod> = _ownMethods.konstue
 
-    private val _ownFields: List<KtLightField> by lazyPub {
+    private konst _ownFields: List<KtLightField> by lazyPub {
 
-        val result = arrayListOf<KtLightField>()
-        val usedNames = hashSetOf<String>()
+        konst result = arrayListOf<KtLightField>()
+        konst usedNames = hashSetOf<String>()
 
         for (property in script.declarations.filterIsInstance<KtProperty>()) {
             membersBuilder

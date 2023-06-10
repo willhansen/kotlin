@@ -11,19 +11,19 @@ import org.junit.Assert
 import org.junit.Test
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.toScriptSource
-import kotlin.script.experimental.jvm.BasicJvmScriptEvaluator
+import kotlin.script.experimental.jvm.BasicJvmScriptEkonstuator
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 import kotlin.script.experimental.jvm.updateClasspath
 import kotlin.script.experimental.jvm.util.classpathFromClass
 import kotlin.script.experimental.jvmhost.JvmScriptCompiler
 import kotlin.script.experimental.jvmhost.createJvmCompilationConfigurationFromTemplate
-import kotlin.script.experimental.jvmhost.createJvmEvaluationConfigurationFromTemplate
+import kotlin.script.experimental.jvmhost.createJvmEkonstuationConfigurationFromTemplate
 
 class ConfigurationDslTest : TestCase() {
 
     @Test
     fun testComposableRefinementHandlers() {
-        val baseConfig = createJvmCompilationConfigurationFromTemplate<SimpleScript> {
+        konst baseConfig = createJvmCompilationConfigurationFromTemplate<SimpleScript> {
             updateClasspath(classpathFromClass<SimpleScript>())
             defaultImports(MyTestAnnotation1::class, MyTestAnnotation2::class)
             refineConfiguration {
@@ -64,12 +64,12 @@ class ConfigurationDslTest : TestCase() {
         Assert.assertNull(baseConfig[ScriptCompilationConfiguration.providedProperties])
         Assert.assertNull(baseConfig[ScriptCompilationConfiguration.compilerOptions])
 
-        val script = "@file:MyTestAnnotation1\nann1+ann12".toScriptSource()
+        konst script = "@file:MyTestAnnotation1\nann1+ann12".toScriptSource()
 
-        val compiledScript = runBlocking {
-            JvmScriptCompiler(defaultJvmScriptingHostConfiguration).invoke(script, baseConfig).valueOrThrow()
+        konst compiledScript = runBlocking {
+            JvmScriptCompiler(defaultJvmScriptingHostConfiguration).invoke(script, baseConfig).konstueOrThrow()
         }
-        val finalConfig = compiledScript.compilationConfiguration
+        konst finalConfig = compiledScript.compilationConfiguration
 
         Assert.assertEquals(
             listOf(KotlinType(Int::class), KotlinType(Float::class)),
@@ -84,19 +84,19 @@ class ConfigurationDslTest : TestCase() {
             finalConfig[ScriptCompilationConfiguration.compilerOptions]
         )
 
-        val implicitReceiver1 = 10
-        val implicitReceiver2 = 2.0f
-        val propAnn1 = "a1"
-        val propAnn12 = 12
+        konst implicitReceiver1 = 10
+        konst implicitReceiver2 = 2.0f
+        konst propAnn1 = "a1"
+        konst propAnn12 = 12
 
-        val baseEvalConfig = createJvmEvaluationConfigurationFromTemplate<SimpleScript> {
-            refineConfigurationBeforeEvaluate { (_, config, _) ->
+        konst baseEkonstConfig = createJvmEkonstuationConfigurationFromTemplate<SimpleScript> {
+            refineConfigurationBeforeEkonstuate { (_, config, _) ->
                 config.with {
                     implicitReceivers(implicitReceiver1)
                     providedProperties("ann1" to propAnn1)
                 }.asSuccess()
             }
-            refineConfigurationBeforeEvaluate { (_, config, _) ->
+            refineConfigurationBeforeEkonstuate { (_, config, _) ->
                 config.with {
                     implicitReceivers(implicitReceiver2)
                     providedProperties("ann12" to propAnn12)
@@ -104,49 +104,49 @@ class ConfigurationDslTest : TestCase() {
             }
         }
 
-        Assert.assertNull(baseEvalConfig[ScriptCompilationConfiguration.implicitReceivers])
-        Assert.assertNull(baseEvalConfig[ScriptCompilationConfiguration.providedProperties])
+        Assert.assertNull(baseEkonstConfig[ScriptCompilationConfiguration.implicitReceivers])
+        Assert.assertNull(baseEkonstConfig[ScriptCompilationConfiguration.providedProperties])
 
-        val evalRes = runBlocking {
-            BasicJvmScriptEvaluator().invoke(compiledScript, baseEvalConfig).valueOrThrow()
+        konst ekonstRes = runBlocking {
+            BasicJvmScriptEkonstuator().invoke(compiledScript, baseEkonstConfig).konstueOrThrow()
         }
-        val finalEvalConfig = evalRes.configuration!!
+        konst finalEkonstConfig = ekonstRes.configuration!!
 
         Assert.assertEquals(
             listOf<Any>(implicitReceiver1, implicitReceiver2),
-            finalEvalConfig[ScriptEvaluationConfiguration.implicitReceivers]
+            finalEkonstConfig[ScriptEkonstuationConfiguration.implicitReceivers]
         )
         Assert.assertEquals(
             mapOf("ann1" to propAnn1, "ann12" to propAnn12),
-            finalEvalConfig[ScriptEvaluationConfiguration.providedProperties]
+            finalEkonstConfig[ScriptEkonstuationConfiguration.providedProperties]
         )
 
-        Assert.assertEquals(propAnn1 + propAnn12, (evalRes.returnValue as ResultValue.Value).value)
+        Assert.assertEquals(propAnn1 + propAnn12, (ekonstRes.returnValue as ResultValue.Value).konstue)
     }
 
     @Test
     fun testDefaultConfiguration() {
-        val script = "val x = 1".toScriptSource()
+        konst script = "konst x = 1".toScriptSource()
 
-        val evalRes = runBlocking {
+        konst ekonstRes = runBlocking {
             JvmScriptCompiler(defaultJvmScriptingHostConfiguration).invoke(script, ScriptCompilationConfiguration()).onSuccess {
-                BasicJvmScriptEvaluator().invoke(it, ScriptEvaluationConfiguration())
-            }.valueOrThrow()
+                BasicJvmScriptEkonstuator().invoke(it, ScriptEkonstuationConfiguration())
+            }.konstueOrThrow()
         }
 
-        val scriptObj = evalRes.returnValue.scriptInstance!!
+        konst scriptObj = ekonstRes.returnValue.scriptInstance!!
 
         Assert.assertEquals(Any::class.java, scriptObj::class.java.superclass)
     }
 
     @Test
     fun testReplaceOnlyDefault() {
-        val conf = ScriptCompilationConfiguration {
+        konst conf = ScriptCompilationConfiguration {
             displayName("1")
             baseClass(KotlinType(Any::class))
         }
 
-        val conf2 = conf.with {
+        konst conf2 = conf.with {
             displayName.replaceOnlyDefault("2")
             baseClass.replaceOnlyDefault(KotlinType(Int::class))
             fileExtension.replaceOnlyDefault("ktx")

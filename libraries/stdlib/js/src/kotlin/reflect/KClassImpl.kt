@@ -8,10 +8,10 @@ package kotlin.reflect.js.internal
 import kotlin.reflect.*
 
 internal abstract class KClassImpl<T : Any>(
-    internal open val jClass: JsClass<T>
+    internal open konst jClass: JsClass<T>
 ) : KClass<T> {
 
-    override val qualifiedName: String?
+    override konst qualifiedName: String?
         get() = TODO()
 
     override fun equals(other: Any?): Boolean {
@@ -28,36 +28,36 @@ internal abstract class KClassImpl<T : Any>(
 }
 
 internal class SimpleKClassImpl<T : Any>(jClass: JsClass<T>) : KClassImpl<T>(jClass) {
-    override val simpleName: String? = jClass.asDynamic().`$metadata$`?.simpleName.unsafeCast<String?>()
+    override konst simpleName: String? = jClass.asDynamic().`$metadata$`?.simpleName.unsafeCast<String?>()
 
-    override fun isInstance(value: Any?): Boolean {
-        return jsIsType(value, jClass)
+    override fun isInstance(konstue: Any?): Boolean {
+        return jsIsType(konstue, jClass)
     }
 }
 
 internal class PrimitiveKClassImpl<T : Any>(
     jClass: JsClass<T>,
-    private val givenSimpleName: String,
-    private val isInstanceFunction: (Any?) -> Boolean
+    private konst givenSimpleName: String,
+    private konst isInstanceFunction: (Any?) -> Boolean
 ) : KClassImpl<T>(jClass) {
     override fun equals(other: Any?): Boolean {
         if (other !is PrimitiveKClassImpl<*>) return false
         return super.equals(other) && givenSimpleName == other.givenSimpleName
     }
 
-    override val simpleName: String? get() = givenSimpleName
+    override konst simpleName: String? get() = givenSimpleName
 
-    override fun isInstance(value: Any?): Boolean {
-        return isInstanceFunction(value)
+    override fun isInstance(konstue: Any?): Boolean {
+        return isInstanceFunction(konstue)
     }
 }
 
 internal object NothingKClassImpl : KClassImpl<Nothing>(js("Object")) {
-    override val simpleName: String = "Nothing"
+    override konst simpleName: String = "Nothing"
 
-    override fun isInstance(value: Any?): Boolean = false
+    override fun isInstance(konstue: Any?): Boolean = false
 
-    override val jClass: JsClass<Nothing>
+    override konst jClass: JsClass<Nothing>
         get() = throw UnsupportedOperationException("There's no native JS class for Nothing type")
 
     override fun equals(other: Any?): Boolean = other === this
@@ -66,10 +66,10 @@ internal object NothingKClassImpl : KClassImpl<Nothing>(js("Object")) {
 }
 
 internal class ErrorKClass : KClass<Nothing> {
-    override val simpleName: String? get() = error("Unknown simpleName for ErrorKClass")
-    override val qualifiedName: String? get() = error("Unknown qualifiedName for ErrorKClass")
+    override konst simpleName: String? get() = error("Unknown simpleName for ErrorKClass")
+    override konst qualifiedName: String? get() = error("Unknown qualifiedName for ErrorKClass")
 
-    override fun isInstance(value: Any?): Boolean = error("Can's check isInstance on ErrorKClass")
+    override fun isInstance(konstue: Any?): Boolean = error("Can's check isInstance on ErrorKClass")
 
     override fun equals(other: Any?): Boolean = other === this
 

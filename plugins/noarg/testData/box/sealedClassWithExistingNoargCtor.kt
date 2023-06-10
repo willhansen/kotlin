@@ -6,7 +6,7 @@ annotation class NoArg
 sealed class MappedSuperClass
 
 @NoArg
-class ConcreteClass(val x: String) : MappedSuperClass()
+class ConcreteClass(konst x: String) : MappedSuperClass()
 
 fun box(): String {
     ConcreteClass::class.java.getConstructor().newInstance()

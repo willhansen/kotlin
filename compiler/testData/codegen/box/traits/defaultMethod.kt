@@ -20,6 +20,6 @@ class B : A
 open class C(a : A) : I, A by a
 
 fun box(): String {
-    val a = B()
+    konst a = B()
     return C(a).message
 }

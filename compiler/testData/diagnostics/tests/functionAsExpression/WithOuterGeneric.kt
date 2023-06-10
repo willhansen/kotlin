@@ -5,7 +5,7 @@ fun <T> parameter() = fun (t: T) = t
 fun <T> receiver() = fun T.() = this
 fun <T> returnType() = fun (): T = null!!
 
-val <T> T.fromVal: () -> T get() = fun (): T = this@fromVal
+konst <T> T.fromVal: () -> T get() = fun (): T = this@fromVal
 
 fun devNull(a: Any?){}
 

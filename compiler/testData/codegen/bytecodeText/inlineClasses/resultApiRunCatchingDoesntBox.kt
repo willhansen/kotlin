@@ -3,10 +3,10 @@
 // WITH_STDLIB
 // FILE: test.kt
 fun test() {
-    val ans1 = runCatching { 42 }
+    konst ans1 = runCatching { 42 }
     println(ans1)
 
-    val ans2 = 42.runCatching { this }
+    konst ans2 = 42.runCatching { this }
     println(ans2)
 }
 

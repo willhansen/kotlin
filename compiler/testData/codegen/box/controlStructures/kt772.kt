@@ -13,7 +13,7 @@ fun test(i : Int) {
             print(5)
         }
        else -> {
-            monthString = "Invalid month"
+            monthString = "Inkonstid month"
         }
     }
     print(monthString)

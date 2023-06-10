@@ -1,4 +1,4 @@
-internal const val constKey = "foo"
+internal const konst constKey = "foo"
 
-internal const val constVal = "2"
+internal const konst constVal = "2"
 

@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.name.FqName
 interface FirAbstractResolvedQualifierBuilder {
     abstract var source: KtSourceElement?
     abstract var typeRef: FirTypeRef
-    abstract val annotations: MutableList<FirAnnotation>
+    abstract konst annotations: MutableList<FirAnnotation>
     abstract var packageFqName: FqName
     abstract var relativeClassFqName: FqName?
     abstract var classId: ClassId?
@@ -36,8 +36,8 @@ interface FirAbstractResolvedQualifierBuilder {
     abstract var isNullableLHSForCallableReference: Boolean
     abstract var resolvedToCompanionObject: Boolean
     abstract var isFullyQualified: Boolean
-    abstract val nonFatalDiagnostics: MutableList<ConeDiagnostic>
-    abstract val typeArguments: MutableList<FirTypeProjection>
+    abstract konst nonFatalDiagnostics: MutableList<ConeDiagnostic>
+    abstract konst typeArguments: MutableList<FirTypeProjection>
 
     fun build(): FirResolvedQualifier
 }

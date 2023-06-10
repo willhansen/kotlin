@@ -8,7 +8,7 @@ import kotlin.js.*
 external object A {
     fun f(): Int
 
-    val g: Int
+    konst g: Int
 }
 
 @JsNonModule

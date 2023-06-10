@@ -16,18 +16,18 @@ import kotlin.reflect.KProperty
 
 abstract class AbstractFirTreeBuilder {
     companion object {
-        val baseFirElement = Element(
+        konst baseFirElement = Element(
             "Element",
             Element.Kind.Other
         )
 
-        const val string = "String"
-        const val boolean = "Boolean"
-        const val int = "Int"
+        const konst string = "String"
+        const konst boolean = "Boolean"
+        const konst int = "Int"
     }
 
-    val elements = mutableListOf(baseFirElement)
-    val intermediateBuilders = mutableListOf<IntermediateBuilder>()
+    konst elements = mutableListOf(baseFirElement)
+    konst intermediateBuilders = mutableListOf<IntermediateBuilder>()
 
     protected fun element(kind: Element.Kind, vararg dependencies: Element): ElementDelegateProvider {
         return ElementDelegateProvider(kind, dependencies, isSealed = false, predefinedName = null)
@@ -64,7 +64,7 @@ abstract class AbstractFirTreeBuilder {
         }
     }
 
-    val configurations: MutableMap<Element, () -> Unit> = mutableMapOf()
+    konst configurations: MutableMap<Element, () -> Unit> = mutableMapOf()
 
     fun applyConfigurations() {
         for (element in elements) {
@@ -73,17 +73,17 @@ abstract class AbstractFirTreeBuilder {
     }
 
     inner class ElementDelegateProvider(
-        private val kind: Element.Kind,
-        private val dependencies: Array<out Element>,
-        private val isSealed: Boolean,
-        private val predefinedName: String?
+        private konst kind: Element.Kind,
+        private konst dependencies: Array<out Element>,
+        private konst isSealed: Boolean,
+        private konst predefinedName: String?
     ) {
         operator fun provideDelegate(
             thisRef: AbstractFirTreeBuilder,
             prop: KProperty<*>
         ): ReadOnlyProperty<Any?, Element> {
-            val name = predefinedName ?: prop.name.replaceFirstChar { it.uppercaseChar() }
-            val element = if (isSealed) {
+            konst name = predefinedName ?: prop.name.replaceFirstChar { it.uppercaseChar() }
+            konst element = if (isSealed) {
                 createSealedElement(name, kind, *dependencies)
             } else {
                 createElement(name, kind, *dependencies)
@@ -96,19 +96,19 @@ abstract class AbstractFirTreeBuilder {
 fun generatedType(type: String, firType: Boolean = false): Type = generatedType("", type, firType)
 
 fun generatedType(packageName: String, type: String, firType: Boolean = false): Type {
-    val realPackage = BASE_PACKAGE + if (packageName.isNotBlank()) ".$packageName" else ""
+    konst realPackage = BASE_PACKAGE + if (packageName.isNotBlank()) ".$packageName" else ""
     return type(realPackage, type, exactPackage = true, firType)
 }
 
 fun type(packageName: String?, type: String, exactPackage: Boolean = false, firType: Boolean = false): Type {
-    val realPackage = if (exactPackage) packageName else packageName?.let { "org.jetbrains.kotlin.$it" }
+    konst realPackage = if (exactPackage) packageName else packageName?.let { "org.jetbrains.kotlin.$it" }
     return Type(realPackage, type, firType)
 }
 
 fun type(type: String): Type = type(null, type)
 
 fun type(klass: KClass<*>): Type {
-    val fqn = klass.qualifiedName!!
-    val name = klass.simpleName!!
+    konst fqn = klass.qualifiedName!!
+    konst name = klass.simpleName!!
     return type(fqn.dropLast(name.length + 1), name, exactPackage = true)
 }

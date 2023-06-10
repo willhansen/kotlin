@@ -5,16 +5,16 @@ enum class A(
     FOO("foo", 4),
     BAR("bar", 5);
 
-    val testName = name
-    val testOrdinal = ordinal
+    konst testName = name
+    konst testOrdinal = ordinal
 }
 
 fun box(): String {
-    val fooName =  A.FOO.testName == "foo"
-    val fooOrdinal = A.FOO.testOrdinal == 4
+    konst fooName =  A.FOO.testName == "foo"
+    konst fooOrdinal = A.FOO.testOrdinal == 4
 
-    val barName = A.BAR.testName == "bar"
-    val barOrdinal = A.BAR.testOrdinal == 5
+    konst barName = A.BAR.testName == "bar"
+    konst barOrdinal = A.BAR.testOrdinal == 5
 
     return if (fooName && fooOrdinal && barName && barOrdinal) "OK" else "fail"
 }

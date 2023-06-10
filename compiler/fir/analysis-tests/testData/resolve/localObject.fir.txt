@@ -8,7 +8,7 @@ FILE: localObject.kt
     }
     public final fun tesLambda(x: R|kotlin/Int|): R|kotlin/Int| {
         ^tesLambda R|/run|<R|kotlin/Int|>(<L> = run@fun <anonymous>(): R|kotlin/Int| <inline=NoInline>  {
-            lval obj: R|<anonymous>| = object : R|Foo| {
+            lkonst obj: R|<anonymous>| = object : R|Foo| {
                 private constructor(): R|<anonymous>| {
                     super<R|kotlin/Any|>()
                 }
@@ -28,13 +28,13 @@ FILE: localObject.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val intConst: R|kotlin/Int| = Int(1)
+        public final konst intConst: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
 
         public final var x: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit| {
-                lval obj: R|<anonymous>| = object : R|Foo| {
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+                lkonst obj: R|<anonymous>| = object : R|Foo| {
                     private constructor(): R|<anonymous>| {
                         super<R|kotlin/Any|>()
                     }
@@ -45,12 +45,12 @@ FILE: localObject.kt
 
                 }
 
-                this@R|/TestProperty|.F|/TestProperty.x| = R|<local>/value|
+                this@R|/TestProperty|.F|/TestProperty.x| = R|<local>/konstue|
             }
 
-        public final val y: R|kotlin/Int|
+        public final konst y: R|kotlin/Int|
             public get(): R|kotlin/Int| {
-                lval obj: R|<anonymous>| = object : R|Foo| {
+                lkonst obj: R|<anonymous>| = object : R|Foo| {
                     private constructor(): R|<anonymous>| {
                         super<R|kotlin/Any|>()
                     }
@@ -64,8 +64,8 @@ FILE: localObject.kt
                 ^ Int(1)
             }
 
-        public final val z: R|kotlin/Int| = this@R|/TestProperty|.R|kotlin/run|<R|TestProperty|, R|kotlin/Int|>(<L> = run@fun R|TestProperty|.<anonymous>(): R|kotlin/Int| <inline=Inline, kind=EXACTLY_ONCE>  {
-            lval obj: R|<anonymous>| = object : R|Foo| {
+        public final konst z: R|kotlin/Int| = this@R|/TestProperty|.R|kotlin/run|<R|TestProperty|, R|kotlin/Int|>(<L> = run@fun R|TestProperty|.<anonymous>(): R|kotlin/Int| <inline=Inline, kind=EXACTLY_ONCE>  {
+            lkonst obj: R|<anonymous>| = object : R|Foo| {
                 private constructor(): R|<anonymous>| {
                     super<R|kotlin/Any|>()
                 }

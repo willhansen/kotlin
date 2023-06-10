@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.konan.blackboxtest.support.util
 
 internal class ArgsBuilder {
-    private val args = mutableListOf<String>()
+    private konst args = mutableListOf<String>()
 
     fun add(vararg args: String) {
         this.args += args

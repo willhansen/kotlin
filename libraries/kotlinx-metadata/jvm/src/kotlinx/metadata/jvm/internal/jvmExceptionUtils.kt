@@ -18,7 +18,7 @@ internal inline fun <T> wrapIntoMetadataExceptionWhenNeeded(block: () -> T): T {
         throw when (e) {
             is IllegalArgumentException -> e // rethrow IAE as it is already correct exception type
             is VirtualMachineError, is ThreadDeath -> e // rethrow VM errors
-            // other exceptions, like IOOBE or InvalidProtocolBufferException from proto parser
+            // other exceptions, like IOOBE or InkonstidProtocolBufferException from proto parser
             else -> InconsistentKotlinMetadataException("Exception occurred when reading Kotlin metadata", e)
         }
     }

@@ -38,19 +38,19 @@ fun compileAndPrintAllFiles(
         return
     }
 
-    val main = StringBuilder()
-    val afterVisitors = StringBuilder()
-    val afterNodes = StringBuilder()
+    konst main = StringBuilder()
+    konst afterVisitors = StringBuilder()
+    konst afterNodes = StringBuilder()
 
-    val kotlinp = Kotlinp(KotlinpSettings(isVerbose = true, sortDeclarations = true))
+    konst kotlinp = Kotlinp(KotlinpSettings(isVerbose = true, sortDeclarations = true))
 
     @OptIn(UnstableMetadataApi::class)
     compile(file, disposable, tmpdir, useK2) { outputFile ->
         when (outputFile.extension) {
             "kotlin_module" -> {
-                val moduleFile = kotlinp.readModuleFile(outputFile)!!
-                val transformedWithVisitors = transformModuleFileWithReadWriteVisitors(moduleFile)
-                val transformedWithNodes = transformModuleFileWithNodes(moduleFile)
+                konst moduleFile = kotlinp.readModuleFile(outputFile)!!
+                konst transformedWithVisitors = transformModuleFileWithReadWriteVisitors(moduleFile)
+                konst transformedWithNodes = transformModuleFileWithNodes(moduleFile)
 
                 for ((sb, moduleFileToRender) in listOf(
                     main to moduleFile, afterVisitors to transformedWithVisitors, afterNodes to transformedWithNodes
@@ -60,9 +60,9 @@ fun compileAndPrintAllFiles(
                 }
             }
             "class" -> {
-                val classFile = kotlinp.readClassFile(outputFile)!!
-                val classFile2 = transformClassFileWithReadWriteVisitors(classFile)
-                val classFile3 = transformClassFileWithNodes(classFile)
+                konst classFile = kotlinp.readClassFile(outputFile)!!
+                konst classFile2 = transformClassFileWithReadWriteVisitors(classFile)
+                konst classFile3 = transformClassFileWithNodes(classFile)
 
                 for ((sb, classFileToRender) in listOf(
                     main to classFile, afterVisitors to classFile2, afterNodes to classFile3
@@ -86,14 +86,14 @@ fun compileAndPrintAllFiles(
 }
 
 private fun compile(file: File, disposable: Disposable, tmpdir: File, useK2: Boolean, forEachOutputFile: (File) -> Unit) {
-    val content = file.readText()
-    val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.MOCK_JDK)
+    konst content = file.readText()
+    konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.MOCK_JDK)
     configuration.put(JVMConfigurationKeys.IR, true)
     configuration.put(CommonConfigurationKeys.USE_FIR, useK2)
     AbstractLoadJavaTest.updateConfigurationWithDirectives(content, configuration)
-    val environment = KotlinCoreEnvironment.createForTests(disposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+    konst environment = KotlinCoreEnvironment.createForTests(disposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
     setupLanguageVersionSettingsForCompilerTests(content, environment)
-    val ktFile = KtTestUtil.createFile(file.name, content, environment.project)
+    konst ktFile = KtTestUtil.createFile(file.name, content, environment.project)
     GenerationUtils.compileFileTo(ktFile, environment, tmpdir)
 
     for (outputFile in tmpdir.walkTopDown().sortedBy { it.nameWithoutExtension }) {
@@ -117,7 +117,7 @@ private fun transformClassFileWithReadWriteVisitors(classFile: KotlinClassMetada
         is KotlinClassMetadata.Class -> KotlinClassMetadata.Class.Writer().apply(classFile::accept).write()
         is KotlinClassMetadata.FileFacade -> KotlinClassMetadata.FileFacade.Writer().apply(classFile::accept).write()
         is KotlinClassMetadata.SyntheticClass -> {
-            val writer = KotlinClassMetadata.SyntheticClass.Writer()
+            konst writer = KotlinClassMetadata.SyntheticClass.Writer()
             if (classFile.isLambda) {
                 classFile.accept(writer)
             }

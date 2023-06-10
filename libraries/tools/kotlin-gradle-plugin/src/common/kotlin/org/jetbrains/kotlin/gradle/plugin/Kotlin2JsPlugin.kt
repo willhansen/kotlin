@@ -21,7 +21,7 @@ internal open class Kotlin2JsPlugin(
 ) : AbstractKotlinPlugin(KotlinTasksProvider(), registry) {
 
     companion object {
-        private const val targetName = "2Js"
+        private const konst targetName = "2Js"
     }
 
     override fun buildSourceSetProcessor(
@@ -32,21 +32,21 @@ internal open class Kotlin2JsPlugin(
 
     override fun apply(project: Project) {
         @Suppress("UNCHECKED_CAST")
-        val target = project.objects.newInstance(
+        konst target = project.objects.newInstance(
             KotlinWithJavaTarget::class.java,
             project,
             KotlinPlatformType.js,
             targetName,
             {
                 object : HasCompilerOptions<KotlinJsCompilerOptions> {
-                    override val options: KotlinJsCompilerOptions = project.objects
+                    override konst options: KotlinJsCompilerOptions = project.objects
                         .newInstance(KotlinJsCompilerOptionsDefault::class.java)
                         .configureExperimentalTryK2(project)
                 }
             },
             { compilerOptions: KotlinJsCompilerOptions ->
                 object : KotlinJsOptions {
-                    override val options: KotlinJsCompilerOptions
+                    override konst options: KotlinJsCompilerOptions
                         get() = compilerOptions
                 }
             }

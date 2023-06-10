@@ -20,12 +20,12 @@ object UnitConversionCallChecker : CallChecker {
 
         // lambdas are working since 1.0, callable references are handled as part of reference adaptation
         // => here we're checking only simple argument
-        val argumentsWithUnitConversion = resolvedCall.resolvedCallAtom.argumentsWithUnitConversion
+        konst argumentsWithUnitConversion = resolvedCall.resolvedCallAtom.argumentsWithUnitConversion
 
         for (argumentWithUnitConversion in argumentsWithUnitConversion.keys) {
             context.trace.report(
                 Errors.UNSUPPORTED_FEATURE.on(
-                    argumentWithUnitConversion.psiCallArgument.valueArgument.asElement(),
+                    argumentWithUnitConversion.psiCallArgument.konstueArgument.asElement(),
                     LanguageFeature.UnitConversionsOnArbitraryExpressions to context.languageVersionSettings
                 )
             )

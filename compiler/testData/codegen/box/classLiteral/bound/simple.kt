@@ -1,6 +1,6 @@
 
 fun box(): String {
-    val x: CharSequence = ""
-    val klass = x::class
+    konst x: CharSequence = ""
+    konst klass = x::class
     return if (klass == String::class) "OK" else "Fail: $klass"
 }

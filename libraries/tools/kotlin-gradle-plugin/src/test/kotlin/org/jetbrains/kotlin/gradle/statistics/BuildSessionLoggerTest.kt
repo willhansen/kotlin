@@ -37,8 +37,8 @@ class BuildSessionLoggerTest {
 
     @Test
     fun createSeveralTrackingFiles() {
-        val logger1 = BuildSessionLogger(rootFolder)
-        val logger2 = BuildSessionLogger(rootFolder)
+        konst logger1 = BuildSessionLogger(rootFolder)
+        konst logger2 = BuildSessionLogger(rootFolder)
 
         //check that starting session creates a new log file
         assertEquals(false, logger1.isBuildSessionStarted())
@@ -66,14 +66,14 @@ class BuildSessionLoggerTest {
 
     @Test
     fun testSizeLimitation() {
-        val maxFileSize = 10_000
-        val logger = BuildSessionLogger(rootFolder, 100, maxFileSize.toLong())
+        konst maxFileSize = 10_000
+        konst logger = BuildSessionLogger(rootFolder, 100, maxFileSize.toLong())
         logger.startBuildSession(0, null)
         logger.finishBuildSession("", false)
 
         assertEquals(1, statFilesCount())
 
-        val file2edit = rootFolder.listFiles()?.first()?.listFiles()?.first() ?: fail("Could not find single stat file")
+        konst file2edit = rootFolder.listFiles()?.first()?.listFiles()?.first() ?: fail("Could not find single stat file")
 
         logger.startBuildSession(0, 0)
         logger.finishBuildSession("", false)
@@ -91,18 +91,18 @@ class BuildSessionLoggerTest {
 
     @Test
     fun testDeleteExtraFiles() {
-        val maxFiles = 100
-        val logger = BuildSessionLogger(rootFolder, maxFiles)
+        konst maxFiles = 100
+        konst logger = BuildSessionLogger(rootFolder, maxFiles)
         logger.startBuildSession(0, null)
         logger.finishBuildSession("", false)
         assertEquals(1, statFilesCount())
 
-        val statsFolder = rootFolder.listFiles()?.single() ?: fail("${rootFolder.absolutePath} was not created")
-        val singleStatFile = statsFolder.listFiles()?.single() ?: fail("stat file was not created")
+        konst statsFolder = rootFolder.listFiles()?.single() ?: fail("${rootFolder.absolutePath} was not created")
+        konst singleStatFile = statsFolder.listFiles()?.single() ?: fail("stat file was not created")
 
         for (i in 1..200) {
             File(statsFolder, "$i").createNewFile()
-            val formattedIndex = "%04d".format(i)
+            konst formattedIndex = "%04d".format(i)
             File(statsFolder, "$formattedIndex-12-30-12-59-59-123.profile").createNewFile()
         }
 
@@ -134,15 +134,15 @@ class BuildSessionLoggerTest {
 
     @Test
     fun testReadWriteMetrics() {
-        val logger = BuildSessionLogger(rootFolder)
+        konst logger = BuildSessionLogger(rootFolder)
         logger.report(StringMetrics.KOTLIN_COMPILER_VERSION, "1.2.3.4-snapshot")
 
-        val startTime = System.currentTimeMillis() - 1001
+        konst startTime = System.currentTimeMillis() - 1001
         logger.startBuildSession(1, startTime)
         logger.finishBuildSession("Build", false)
         assertEquals(1, statFilesCount())
 
-        val statFile = rootFolder.listFiles()?.single()?.listFiles()?.single() ?: fail("Could not find stat file")
+        konst statFile = rootFolder.listFiles()?.single()?.listFiles()?.single() ?: fail("Could not find stat file")
         statFile.appendBytes("break format of the file".toByteArray())
 
         logger.startBuildSession(1, startTime)
@@ -160,12 +160,12 @@ class BuildSessionLoggerTest {
 
         logger.finishBuildSession("", false)
 
-        val metrics = ArrayList<MetricsContainer>()
+        konst metrics = ArrayList<MetricsContainer>()
         MetricsContainer.readFromFile(statFile) {
             metrics.add(it)
         }
 
-        assertEquals(2, metrics.size, "Invalid number of MerticContainers was read")
+        assertEquals(2, metrics.size, "Inkonstid number of MerticContainers was read")
         assertEquals(
             "1.2.3",
             metrics[0].getMetric(StringMetrics.KOTLIN_COMPILER_VERSION)?.getValue()
@@ -176,34 +176,34 @@ class BuildSessionLoggerTest {
             metrics[1].getMetric(StringMetrics.KOTLIN_COMPILER_VERSION)?.getValue()
         )
 
-        val buildDuration = metrics[0].getMetric(NumericalMetrics.GRADLE_BUILD_DURATION)?.getValue() ?: 0L
+        konst buildDuration = metrics[0].getMetric(NumericalMetrics.GRADLE_BUILD_DURATION)?.getValue() ?: 0L
         assertTrue(buildDuration > 1000, "It was expected that build duration is > 1000, but got $buildDuration")
     }
 
     @Test
     fun testSaveAndReadAllMetrics() {
-        val logger = BuildSessionLogger(rootFolder)
+        konst logger = BuildSessionLogger(rootFolder)
         logger.startBuildSession(1, 1)
-        for (metric in StringMetrics.values()) {
-            logger.report(metric, "value")
+        for (metric in StringMetrics.konstues()) {
+            logger.report(metric, "konstue")
             logger.report(metric, metric.name)
         }
-        for (metric in BooleanMetrics.values()) {
+        for (metric in BooleanMetrics.konstues()) {
             logger.report(metric, true)
         }
-        for (metric in NumericalMetrics.values()) {
+        for (metric in NumericalMetrics.konstues()) {
             logger.report(metric, System.currentTimeMillis())
         }
         logger.finishBuildSession("Build", false)
 
         MetricsContainer.readFromFile(rootFolder.listFiles()?.single()?.listFiles()?.single() ?: fail("Could not find stat file")) {
-            for (metric in StringMetrics.values()) {
+            for (metric in StringMetrics.konstues()) {
                 assertNotNull(it.getMetric(metric), "Could not find metric ${metric.name}")
             }
-            for (metric in BooleanMetrics.values()) {
+            for (metric in BooleanMetrics.konstues()) {
                 assertTrue(it.getMetric(metric)?.getValue() != null, "Could not find metric ${metric.name}")
             }
-            for (metric in NumericalMetrics.values()) {
+            for (metric in NumericalMetrics.konstues()) {
                 assertNotNull(it.getMetric(metric), "Could not find metric ${metric.name}")
             }
         }
@@ -211,7 +211,7 @@ class BuildSessionLoggerTest {
 
     @Test
     fun testWeight() {
-        val logger = BuildSessionLogger(rootFolder)
+        konst logger = BuildSessionLogger(rootFolder)
         logger.startBuildSession(1, 1)
 
         logger.report(NumericalMetrics.ANALYSIS_LINES_PER_SECOND, 10, null, 9)

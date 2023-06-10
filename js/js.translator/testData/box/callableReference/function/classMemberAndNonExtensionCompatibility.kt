@@ -6,7 +6,7 @@ fun run(a: A, arg: String, funRef:(A, String) -> String): String {
 }
 
 class A {
-    val s = "sA"
+    konst s = "sA"
     fun memBar(other: String): String = s +":memBar:" + other
 }
 
@@ -15,7 +15,7 @@ fun A.extBar(other: String):String = s + ":extBar:" + other
 fun box():String {
     fun A.locExtBar(other: String):String = s + ":locExtBar:" + other
 
-    val a = A()
+    konst a = A()
 
     var r = run(a, "!!", A::memBar)
     if (r != "sA:memBar:!!") return r

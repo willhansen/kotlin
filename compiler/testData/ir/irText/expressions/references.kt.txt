@@ -1,12 +1,12 @@
-val ok: String
+konst ok: String
   field = "OK"
   get
 
-val ok2: String
+konst ok2: String
   field = <get-ok>()
   get
 
-val ok3: String
+konst ok3: String
   get(): String {
     return "OK"
   }
@@ -20,7 +20,7 @@ fun test2(x: String): String {
 }
 
 fun test3(): String {
-  val x: String = "OK"
+  konst x: String = "OK"
   return x
 }
 
@@ -28,7 +28,7 @@ fun test4(): String {
   return <get-ok3>()
 }
 
-val String.okext: String
+konst String.okext: String
   get(): String {
     return "OK"
   }

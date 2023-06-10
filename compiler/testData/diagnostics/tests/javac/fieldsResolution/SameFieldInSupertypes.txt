@@ -9,8 +9,8 @@ package a {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val I: kotlin.Int
-        public const final val I2: kotlin.Int = 168
+        public const final konst I: kotlin.Int
+        public const final konst I2: kotlin.Int = 168
     }
 
     public open class x {
@@ -20,7 +20,7 @@ package a {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val I: kotlin.Int = 42
+        public const final konst I: kotlin.Int = 42
     }
 
     public interface y {
@@ -29,7 +29,7 @@ package a {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val I: kotlin.Int = 84
+        public const final konst I: kotlin.Int = 84
     }
 
     public open class y2 : a.y {
@@ -39,7 +39,7 @@ package a {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val I: kotlin.Int = 168
+        public const final konst I: kotlin.Int = 168
     }
 
     public open class z : a.x, a.y {
@@ -49,8 +49,8 @@ package a {
         public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final override /*1*/ /*fake_override*/ val I: kotlin.Int = 42
-        public const final override /*1*/ /*fake_override*/ val I: kotlin.Int = 84
+        public const final override /*1*/ /*fake_override*/ konst I: kotlin.Int = 42
+        public const final override /*1*/ /*fake_override*/ konst I: kotlin.Int = 84
     }
 
     public open class z1 : a.y2, a.y {
@@ -60,7 +60,7 @@ package a {
         public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final override /*1*/ /*fake_override*/ val I: kotlin.Int = 168
-        public const final override /*1*/ /*fake_override*/ val I: kotlin.Int = 84
+        public const final override /*1*/ /*fake_override*/ konst I: kotlin.Int = 168
+        public const final override /*1*/ /*fake_override*/ konst I: kotlin.Int = 84
     }
 }

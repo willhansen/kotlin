@@ -100,7 +100,7 @@ fun FirSession.registerCliCompilerOnlyComponents() {
 
 @OptIn(SessionConfiguration::class)
 fun FirSession.registerCommonJavaComponents(javaModuleResolver: JavaModuleResolver) {
-    val jsr305State = languageVersionSettings.getFlag(JvmAnalysisFlags.javaTypeEnhancementState)
+    konst jsr305State = languageVersionSettings.getFlag(JvmAnalysisFlags.javaTypeEnhancementState)
     register(FirAnnotationTypeQualifierResolver::class, FirAnnotationTypeQualifierResolver(this, jsr305State, javaModuleResolver))
     register(FirEnhancedSymbolsStorage::class, FirEnhancedSymbolsStorage(this))
     register(FirSyntheticPropertiesStorage::class, FirSyntheticPropertiesStorage(this))
@@ -129,7 +129,7 @@ fun FirSession.registerResolveComponents(lookupTracker: LookupTracker? = null, e
     register(FirModuleVisibilityChecker::class, FirModuleVisibilityChecker.Standard(this))
     register(SourcesToPathsMapper::class, SourcesToPathsMapper())
     if (lookupTracker != null) {
-        val firFileToPath: (KtSourceElement) -> String? = {
+        konst firFileToPath: (KtSourceElement) -> String? = {
             sourcesToPathsMapper.getSourceFilePath(it)
         }
         register(

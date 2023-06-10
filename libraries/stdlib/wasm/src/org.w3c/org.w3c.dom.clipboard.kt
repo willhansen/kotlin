@@ -16,7 +16,7 @@ import org.w3c.dom.events.*
 public external interface ClipboardEventInit : EventInit, JsAny {
     var clipboardData: DataTransfer? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -26,13 +26,13 @@ public fun ClipboardEventInit(clipboardData: DataTransfer? = null, bubbles: Bool
  * Exposes the JavaScript [ClipboardEvent](https://developer.mozilla.org/en/docs/Web/API/ClipboardEvent) to Kotlin
  */
 public external open class ClipboardEvent(type: String, eventInitDict: ClipboardEventInit = definedExternally) : Event, JsAny {
-    open val clipboardData: DataTransfer?
+    open konst clipboardData: DataTransfer?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -49,7 +49,7 @@ public external abstract class Clipboard : EventTarget, JsAny {
 public external interface ClipboardPermissionDescriptor : JsAny {
     var allowWithoutGesture: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")

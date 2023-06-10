@@ -1,22 +1,22 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val aByte = arrayListOf<Byte>(1)
+    konst aByte = arrayListOf<Byte>(1)
     var bByte: Byte = 1
     
-    val aShort = arrayListOf<Short>(1)
+    konst aShort = arrayListOf<Short>(1)
     var bShort: Short = 1
     
-    val aInt = arrayListOf<Int>(1)
+    konst aInt = arrayListOf<Int>(1)
     var bInt: Int = 1
     
-    val aLong = arrayListOf<Long>(1)
+    konst aLong = arrayListOf<Long>(1)
     var bLong: Long = 1
 
-    val aFloat = arrayListOf<Float>(1.0f)
+    konst aFloat = arrayListOf<Float>(1.0f)
     var bFloat: Float = 1.0f
     
-    val aDouble = arrayListOf<Double>(1.0)
+    konst aDouble = arrayListOf<Double>(1.0)
     var bDouble: Double = 1.0
 
     aByte[0]--

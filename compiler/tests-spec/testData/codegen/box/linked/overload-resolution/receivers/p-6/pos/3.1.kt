@@ -21,13 +21,13 @@ fun box(): String {
 enum class Case1 {
     A1, A2;
 
-    companion object values {
+    companion object konstues {
         operator fun invoke() {
             flag = true
         }
     }
 
     fun foo() {
-        values()
+        konstues()
     }
 }

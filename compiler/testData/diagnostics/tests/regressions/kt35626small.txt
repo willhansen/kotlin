@@ -12,10 +12,10 @@ public final class Result</*0*/ T> {
 
 public final class TupleX</*0*/ T1, /*1*/ T2, /*2*/ T3, /*3*/ T4> {
     public constructor TupleX</*0*/ T1, /*1*/ T2, /*2*/ T3, /*3*/ T4>(/*0*/ _1: T1, /*1*/ _2: T2, /*2*/ _3: T3, /*3*/ _4: T4)
-    public final val _1: T1
-    public final val _2: T2
-    public final val _3: T3
-    public final val _4: T4
+    public final konst _1: T1
+    public final konst _2: T2
+    public final konst _3: T3
+    public final konst _4: T4
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -5,6 +5,6 @@ public enum JavaEnum {
 
 // FILE: main.kt
 fun foo() {
-    JavaEnum.values()
-    JavaEnum.valueOf("")
+    JavaEnum.konstues()
+    JavaEnum.konstueOf("")
 }

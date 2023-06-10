@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // !LANGUAGE: +InlineClasses, -JvmInlineValueClasses
 
-inline class Foo(val x: Int)
+inline class Foo(konst x: Int)
 
 <!WRONG_MODIFIER_TARGET!>inline<!> interface InlineInterface
 <!WRONG_MODIFIER_TARGET!>inline<!> annotation class InlineAnn

@@ -10,14 +10,14 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AnalysisHandler<A : ResultingArtifact<A>>(
-    val testServices: TestServices,
-    val failureDisablesNextSteps: Boolean,
-    val doNotRunIfThereWerePreviousFailures: Boolean
+    konst testServices: TestServices,
+    konst failureDisablesNextSteps: Boolean,
+    konst doNotRunIfThereWerePreviousFailures: Boolean
 ) : ServicesAndDirectivesContainer {
-    protected val assertions: Assertions
+    protected konst assertions: Assertions
         get() = testServices.assertions
 
-    abstract val artifactKind: TestArtifactKind<A>
+    abstract konst artifactKind: TestArtifactKind<A>
 
     abstract fun processModule(module: TestModule, info: A)
 
@@ -26,21 +26,21 @@ abstract class AnalysisHandler<A : ResultingArtifact<A>>(
 
 abstract class FrontendOutputHandler<R : ResultingArtifact.FrontendOutput<R>>(
     testServices: TestServices,
-    override val artifactKind: FrontendKind<R>,
+    override konst artifactKind: FrontendKind<R>,
     failureDisablesNextSteps: Boolean,
     doNotRunIfThereWerePreviousFailures: Boolean
 ) : AnalysisHandler<R>(testServices, failureDisablesNextSteps, doNotRunIfThereWerePreviousFailures)
 
 abstract class BackendInputHandler<I : ResultingArtifact.BackendInput<I>>(
     testServices: TestServices,
-    override val artifactKind: BackendKind<I>,
+    override konst artifactKind: BackendKind<I>,
     failureDisablesNextSteps: Boolean,
     doNotRunIfThereWerePreviousFailures: Boolean
 ) : AnalysisHandler<I>(testServices, failureDisablesNextSteps, doNotRunIfThereWerePreviousFailures)
 
 abstract class BinaryArtifactHandler<A : ResultingArtifact.Binary<A>>(
     testServices: TestServices,
-    override val artifactKind: BinaryKind<A>,
+    override konst artifactKind: BinaryKind<A>,
     failureDisablesNextSteps: Boolean,
     doNotRunIfThereWerePreviousFailures: Boolean
 ) : AnalysisHandler<A>(testServices, failureDisablesNextSteps, doNotRunIfThereWerePreviousFailures)

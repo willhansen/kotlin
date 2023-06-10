@@ -4,22 +4,22 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 fun resolve<caret>Me() {
-    receive(valueWithExplicitType)
-    receive(valueWithImplicitType)
+    receive(konstueWithExplicitType)
+    receive(konstueWithImplicitType)
 
     variableWithExplicitType = 10
     variableWithImplicitType = 10
 }
 
-fun receive(value: Int){}
+fun receive(konstue: Int){}
 
-val delegate = object: ReadWriteProperty<Any?, Int> {
+konst delegate = object: ReadWriteProperty<Any?, Int> {
     override fun getValue(thisRef: Any?, property: KProperty<*>): Int = 1
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {}
+    override fun setValue(thisRef: Any?, property: KProperty<*>, konstue: Int) {}
 }
 
-val valueWithExplicitType: Int by delegate
-val valueWithImplicitType by delegate
+konst konstueWithExplicitType: Int by delegate
+konst konstueWithImplicitType by delegate
 
 var variableWithExplicitType: Int by delegate
 var variableWithImplicitType by delegate

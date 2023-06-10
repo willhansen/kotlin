@@ -28,7 +28,7 @@ internal class Kotlin2JvmSourceSetProcessor(
     tasksProvider, "Compiles the $kotlinCompilation.", kotlinCompilation
 ) {
     override fun doRegisterTask(project: Project, taskName: String): TaskProvider<out KotlinCompile> {
-        val configAction = KotlinCompileConfig(compilationInfo)
+        konst configAction = KotlinCompileConfig(compilationInfo)
         applyStandardTaskConfiguration(configAction)
         return tasksProvider.registerKotlinJVMTask(
             project,
@@ -52,15 +52,15 @@ internal class Kotlin2JvmSourceSetProcessor(
 
         ScriptingGradleSubplugin.configureForSourceSet(project, compilationInfo.compilationName)
 
-        project.whenEvaluated {
-            val subpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
+        project.whenEkonstuated {
+            konst subpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
             /* Not supported in KPM yet */
             compilationInfo.tcsOrNull?.compilation?.let { compilation ->
                 subpluginEnvironment.addSubpluginOptions(project, compilation)
             }
 
             javaSourceSet?.let { java ->
-                val javaTask = project.tasks.withType<AbstractCompile>().named(java.compileJavaTaskName)
+                konst javaTask = project.tasks.withType<AbstractCompile>().named(java.compileJavaTaskName)
                 javaTask.configure { javaCompile ->
                     javaCompile.classpath += project.files(kotlinTask.flatMap { it.destinationDirectory })
                 }
@@ -84,7 +84,7 @@ internal class Kotlin2JvmSourceSetProcessor(
     }
 
     private fun registerKotlinOutputForJavaLibrary(outputDir: Provider<Directory>) {
-        val configuration = project.configurations.getByName("apiElements")
+        konst configuration = project.configurations.getByName("apiElements")
         configuration.outgoing.variants.getByName("classes").artifact(outputDir) {
             it.type = "java-classes-directory"
         }

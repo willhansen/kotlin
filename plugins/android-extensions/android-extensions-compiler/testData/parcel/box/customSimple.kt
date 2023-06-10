@@ -11,7 +11,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-data class User(val firstName: String, val secondName: String, val age: Int) : Parcelable {
+data class User(konst firstName: String, konst secondName: String, konst age: Int) : Parcelable {
     private companion object : Parceler<User> {
         override fun User.write(parcel: Parcel, flags: Int) {
             parcel.writeString(firstName)
@@ -23,14 +23,14 @@ data class User(val firstName: String, val secondName: String, val age: Int) : P
 }
 
 fun box() = parcelTest { parcel ->
-    val user = User("John", "Smith", 20)
+    konst user = User("John", "Smith", 20)
     user.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val user2 = readFromParcel<User>(parcel)
+    konst user2 = readFromParcel<User>(parcel)
 
     assert(user.firstName == user2.firstName)
     assert(user.secondName == user2.secondName)

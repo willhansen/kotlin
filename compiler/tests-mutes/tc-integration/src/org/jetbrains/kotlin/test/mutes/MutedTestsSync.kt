@@ -17,8 +17,8 @@ fun main() {
  * Purpose: possibility to run flaky tests on teamcity that will not affect on build status
  */
 fun syncMutedTestsOnTeamCityWithDatabase() {
-    val remotelyMutedTests = RemotelyMutedTests()
-    val locallyMutedTests = LocallyMutedTests()
+    konst remotelyMutedTests = RemotelyMutedTests()
+    konst locallyMutedTests = LocallyMutedTests()
 
     syncMutedTests(remotelyMutedTests.projectTests, locallyMutedTests.projectTests)
 }
@@ -27,8 +27,8 @@ private fun syncMutedTests(
     remotelyMutedTests: Map<String, MuteTestJson>,
     locallyMutedTests: Map<String, MuteTestJson>
 ) {
-    val deleteList = remotelyMutedTests - locallyMutedTests.keys
-    val uploadList = locallyMutedTests - remotelyMutedTests.keys
+    konst deleteList = remotelyMutedTests - locallyMutedTests.keys
+    konst uploadList = locallyMutedTests - remotelyMutedTests.keys
     deleteMutedTests(deleteList)
     uploadMutedTests(uploadList)
 }
@@ -36,23 +36,23 @@ private fun syncMutedTests(
 internal fun getMandatoryProperty(propertyName: String) =
     System.getProperty(propertyName) ?: throw Exception("Property $propertyName must be set")
 
-private const val MUTES_PACKAGE_NAME = "org.jetbrains.kotlin.test.mutes"
-internal val projectId = getMandatoryProperty("$MUTES_PACKAGE_NAME.tests.project.id")
+private const konst MUTES_PACKAGE_NAME = "org.jetbrains.kotlin.test.mutes"
+internal konst projectId = getMandatoryProperty("$MUTES_PACKAGE_NAME.tests.project.id")
 
 class RemotelyMutedTests {
-    private val tests = getMutedTestsOnTeamcityForRootProject(projectId)
-    val projectTests = getTestsJson(projectId)
+    private konst tests = getMutedTestsOnTeamcityForRootProject(projectId)
+    konst projectTests = getTestsJson(projectId)
     private fun getTestsJson(scopeId: String): Map<String, MuteTestJson> {
         return filterMutedTestsByScope(tests, scopeId)
     }
 }
 
 class LocallyMutedTests {
-    val projectTests = transformMutedTestsToJson(getCommonMuteTests(), projectId)
+    konst projectTests = transformMutedTestsToJson(getCommonMuteTests(), projectId)
 
     private fun getCommonMuteTests(): List<MutedTest> {
-        val databaseDir = "../../../tests"
-        val commonDatabaseFile = File(databaseDir, "mute-common.csv")
+        konst databaseDir = "../../../tests"
+        konst commonDatabaseFile = File(databaseDir, "mute-common.csv")
         return flakyTests(commonDatabaseFile)
     }
 }

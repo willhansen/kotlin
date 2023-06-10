@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile
  *
  * [androidTarget] should always be null for none Android plugins.
  */
-class KotlinModelBuilder(private val kotlinPluginVersion: String, private val androidTarget: KotlinAndroidTarget?) : ToolingModelBuilder {
+class KotlinModelBuilder(private konst kotlinPluginVersion: String, private konst androidTarget: KotlinAndroidTarget?) : ToolingModelBuilder {
 
     override fun canBuild(modelName: String): Boolean {
         return modelName == KotlinProject::class.java.name
@@ -35,8 +35,8 @@ class KotlinModelBuilder(private val kotlinPluginVersion: String, private val an
 
     override fun buildAll(modelName: String, project: Project): Any {
         require(canBuild(modelName)) { "buildAll(\"$modelName\") has been called while canBeBuild is false" }
-        val kotlinCompileTasks = project.tasks.withType(AbstractKotlinCompile::class.java).toList()
-        val projectType = getProjectType(project)
+        konst kotlinCompileTasks = project.tasks.withType(AbstractKotlinCompile::class.java).toList()
+        konst projectType = getProjectType(project)
         return KotlinProjectImpl(
             project.name,
             kotlinPluginVersion,
@@ -76,12 +76,12 @@ class KotlinModelBuilder(private val kotlinPluginVersion: String, private val an
         private fun Project.pathOrName() = if (path == ":") name else path
 
         private fun AbstractKotlinCompile<*>.createSourceSet(project: Project, projectType: KotlinProject.ProjectType): SourceSet? {
-            val javaSourceSet = project
+            konst javaSourceSet = project
                 .variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
                 .getInstance(project)
                 .sourceSetsIfAvailable
                 ?.find { it.name == sourceSetName.get() }
-            @Suppress("DEPRECATION") val kotlinSourceSet: SourceDirectorySet? = javaSourceSet
+            @Suppress("DEPRECATION") konst kotlinSourceSet: SourceDirectorySet? = javaSourceSet
                 ?.getExtension(if (projectType == KotlinProject.ProjectType.PLATFORM_JS) KOTLIN_JS_DSL_NAME else KOTLIN_DSL_NAME)
             return if (kotlinSourceSet != null) {
                 SourceSetImpl(
@@ -101,13 +101,13 @@ class KotlinModelBuilder(private val kotlinPluginVersion: String, private val an
          * Constructs the Android [SourceSet] that should be returned to the IDE for each compile task/variant.
          */
         private fun AbstractKotlinCompile<*>.createAndroidSourceSet(androidTarget: KotlinAndroidTarget): SourceSet {
-            val variantName = sourceSetName.get()
-            val compilation = androidTarget.compilations.getByName(variantName)
+            konst variantName = sourceSetName.get()
+            konst compilation = androidTarget.compilations.getByName(variantName)
             // Merge all sources and resource dirs from the different Source Sets that make up this variant.
-            val sources = compilation.allKotlinSourceSets.flatMap {
+            konst sources = compilation.allKotlinSourceSets.flatMap {
                 it.kotlin.srcDirs
             }.distinctBy { it.absolutePath }
-            val resources = compilation.allKotlinSourceSets.flatMap {
+            konst resources = compilation.allKotlinSourceSets.flatMap {
                 it.resources.srcDirs
             }.distinctBy { it.absolutePath }
             return SourceSetImpl(

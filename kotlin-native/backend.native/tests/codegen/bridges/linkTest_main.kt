@@ -8,10 +8,10 @@ import a.*
 class B: C()
 
 fun main(args: Array<String>) {
-    val b = B()
+    konst b = B()
     println(b.foo())
-    val c: C = b
+    konst c: C = b
     println(c.foo())
-    val a: A<Int> = b
+    konst a: A<Int> = b
     println(a.foo())
 }

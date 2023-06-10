@@ -22,18 +22,18 @@ import kotlin.test.assertNotNull
 
 @Suppress("DEPRECATION")
 class SourceSetVisibilityInferenceTest {
-    private val project = buildProjectWithMPP()
-    private val kotlin = project.multiplatformExtension.apply {
+    private konst project = buildProjectWithMPP()
+    private konst kotlin = project.multiplatformExtension.apply {
         targetHierarchy.default()
     }
 
     @Test
     fun testBasicSuccessful() {
         kotlin.jvm()
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
 
         commonTest.requiresVisibilityOf(commonMain)
         jvmTest.requiresVisibilityOf(jvmMain)
@@ -44,18 +44,18 @@ class SourceSetVisibilityInferenceTest {
 
     @Test
     fun testFailureWithNoAssociation() {
-        val jvm = kotlin.jvm()
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmSpecialTest = kotlin.sourceSets.create("jvmSpecialTest")
+        konst jvm = kotlin.jvm()
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmSpecialTest = kotlin.sourceSets.create("jvmSpecialTest")
 
         commonTest.requiresVisibilityOf(commonMain)
         jvmSpecialTest.requiresVisibilityOf(jvmMain)
         jvmSpecialTest.dependsOn(commonTest)
 
-        val jvmTestCompilation = jvm.compilations.getByName("test")
-        val jvmSpecialTestCompilation = jvm.compilations.create("specialTest") // note: No association with jvmMain!
+        konst jvmTestCompilation = jvm.compilations.getByName("test")
+        konst jvmSpecialTestCompilation = jvm.compilations.create("specialTest") // note: No association with jvmMain!
         assertEquals(jvmSpecialTest, jvmSpecialTestCompilation.defaultSourceSet)
 
         jvmSpecialTest.checkInferredSourceSetsVisibility(*arrayOf())
@@ -86,12 +86,12 @@ class SourceSetVisibilityInferenceTest {
         kotlin.linuxX64("linux")
 
         listOf("Main", "Test").forEach { suffix ->
-            val common = kotlin.sourceSets.getByName("common$suffix")
-            val jvmAndJs = kotlin.sourceSets.create("jvmAndJs$suffix")
-            val linuxAndJs = kotlin.sourceSets.create("linuxAndJs$suffix")
-            val jvm = kotlin.sourceSets.getByName("jvm$suffix")
-            val linux = kotlin.sourceSets.getByName("linux$suffix")
-            val js = kotlin.sourceSets.getByName("js$suffix")
+            konst common = kotlin.sourceSets.getByName("common$suffix")
+            konst jvmAndJs = kotlin.sourceSets.create("jvmAndJs$suffix")
+            konst linuxAndJs = kotlin.sourceSets.create("linuxAndJs$suffix")
+            konst jvm = kotlin.sourceSets.getByName("jvm$suffix")
+            konst linux = kotlin.sourceSets.getByName("linux$suffix")
+            konst js = kotlin.sourceSets.getByName("js$suffix")
 
             if (suffix == "Test") {
                 jvmAndJs.requiresVisibilityOf(kotlin.sourceSets.getByName("jvmAndJsMain"))
@@ -128,9 +128,9 @@ class SourceSetVisibilityInferenceTest {
         kotlin.js()
 
         listOf(null, "Main", "Test", "IntegrationTest").zipWithNext().forEach { (previousSuffix, suffix) ->
-            val common = kotlin.sourceSets.maybeCreate("common$suffix")
-            val jvm = kotlin.sourceSets.maybeCreate("jvm$suffix")
-            val js = kotlin.sourceSets.maybeCreate("js$suffix")
+            konst common = kotlin.sourceSets.maybeCreate("common$suffix")
+            konst jvm = kotlin.sourceSets.maybeCreate("jvm$suffix")
+            konst js = kotlin.sourceSets.maybeCreate("js$suffix")
 
             if (previousSuffix != null) {
                 assertNotNull(suffix)
@@ -140,13 +140,13 @@ class SourceSetVisibilityInferenceTest {
                 jvm.dependsOn(common)
                 js.dependsOn(common)
 
-                val previousJvmCompilation = kotlin.jvm().compilations.maybeCreate(previousSuffix.decapitalizeAsciiOnly())
-                val jvmCompilation = kotlin.jvm().compilations.maybeCreate(suffix.decapitalizeAsciiOnly())
+                konst previousJvmCompilation = kotlin.jvm().compilations.maybeCreate(previousSuffix.decapitalizeAsciiOnly())
+                konst jvmCompilation = kotlin.jvm().compilations.maybeCreate(suffix.decapitalizeAsciiOnly())
                 assertEquals(jvm, jvmCompilation.defaultSourceSet)
                 jvmCompilation.associateWith(previousJvmCompilation)
 
-                val previousJsCompilation = kotlin.js().compilations.maybeCreate(previousSuffix.decapitalizeAsciiOnly())
-                val jsCompilation = kotlin.js().compilations.maybeCreate(suffix.decapitalizeAsciiOnly())
+                konst previousJsCompilation = kotlin.js().compilations.maybeCreate(previousSuffix.decapitalizeAsciiOnly())
+                konst jsCompilation = kotlin.js().compilations.maybeCreate(suffix.decapitalizeAsciiOnly())
                 assertEquals(js, jsCompilation.defaultSourceSet)
                 jsCompilation.associateWith(previousJsCompilation)
             }
@@ -163,9 +163,9 @@ class SourceSetVisibilityInferenceTest {
         kotlin.js()
 
         listOf(null, "Main", "Test", "IntegrationTest").zipWithNext().forEach { (previousSuffix, suffix) ->
-            val common = kotlin.sourceSets.maybeCreate("common$suffix")
-            val jvm = kotlin.sourceSets.maybeCreate("jvm$suffix")
-            val js = kotlin.sourceSets.maybeCreate("js$suffix")
+            konst common = kotlin.sourceSets.maybeCreate("common$suffix")
+            konst jvm = kotlin.sourceSets.maybeCreate("jvm$suffix")
+            konst js = kotlin.sourceSets.maybeCreate("js$suffix")
 
             if (previousSuffix != null) {
                 assertNotNull(suffix)
@@ -175,15 +175,15 @@ class SourceSetVisibilityInferenceTest {
                 jvm.dependsOn(common)
                 js.dependsOn(common)
 
-                val jvmCompilation = kotlin.jvm().compilations.maybeCreate(suffix.decapitalizeAsciiOnly())
+                konst jvmCompilation = kotlin.jvm().compilations.maybeCreate(suffix.decapitalizeAsciiOnly())
                 assertEquals(jvm, jvmCompilation.defaultSourceSet)
 
-                val jsCompilation = kotlin.js().compilations.maybeCreate(suffix.decapitalizeAsciiOnly())
+                konst jsCompilation = kotlin.js().compilations.maybeCreate(suffix.decapitalizeAsciiOnly())
                 assertEquals(js, jsCompilation.defaultSourceSet)
             }
         }
 
-        val commonIntegrationTest = kotlin.sourceSets.getByName("commonIntegrationTest")
+        konst commonIntegrationTest = kotlin.sourceSets.getByName("commonIntegrationTest")
         commonIntegrationTest.requiresVisibilityOf(kotlin.sourceSets.getByName("commonMain"))
 
         assertFailsWith<UnsatisfiedSourceSetVisibilityException> {

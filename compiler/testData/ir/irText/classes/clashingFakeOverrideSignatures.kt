@@ -9,8 +9,8 @@ open class Base<T> {
     fun foo(x: T) {}
     fun foo(y: String) {}
 
-    val T.bar get() = 1
-    val String.bar get() = 2
+    konst T.bar get() = 1
+    konst String.bar get() = 2
 }
 
 open class Derived : Base<String>()
@@ -40,8 +40,8 @@ fun outerFun() {
         fun foo(x: T) {}
         fun foo(y: String) {}
 
-        val T.bar get() = 1
-        val String.bar get() = 2
+        konst T.bar get() = 1
+        konst String.bar get() = 2
     }
 
     open class LocalDerived : LocalBase<String>()

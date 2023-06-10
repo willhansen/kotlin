@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.jps.build.fixtures
 import org.jetbrains.kotlin.config.IncrementalCompilation
 
 class EnableICFixture(
-    private val enableJvmIC: Boolean = true,
-    private val enableJsIC: Boolean = true
+    private konst enableJvmIC: Boolean = true,
+    private konst enableJsIC: Boolean = true
 ) {
     private var isICEnabledBackup: Boolean = false
     private var isICEnabledForJsBackup: Boolean = false

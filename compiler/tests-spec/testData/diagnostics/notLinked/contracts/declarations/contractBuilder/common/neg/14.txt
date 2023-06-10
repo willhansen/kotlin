@@ -14,7 +14,7 @@ public fun </*0*/ K> expandInvWithRemoveNullable(/*0*/ vararg x: [Error type: Un
 public fun </*0*/ K> expandOut(/*0*/ vararg x: [Error type: Unresolved type for Out<K>]<K> /*kotlin.Array<out [Error type: Unresolved type for Out<K>]<K>>*/): K
 public fun </*0*/ K> expandOutWithRemoveNullable(/*0*/ vararg x: [Error type: Unresolved type for Out<K?>]<K?> /*kotlin.Array<out [Error type: Unresolved type for Out<K?>]<K?>>*/): K
 public fun funNothingQuest(): kotlin.Nothing?
-public fun funWithAnyArg(/*0*/ value_1: kotlin.Any): kotlin.Int
+public fun funWithAnyArg(/*0*/ konstue_1: kotlin.Any): kotlin.Int
 public fun funWithoutArgs(): kotlin.Int
 public fun </*0*/ K> removeNullable(/*0*/ vararg x: K? /*kotlin.Array<out K?>*/): K
 public fun </*0*/ K> select(/*0*/ vararg x: K /*kotlin.Array<out K>*/): K

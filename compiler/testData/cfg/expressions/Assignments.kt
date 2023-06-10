@@ -9,10 +9,10 @@ fun assignments() : Unit {
 
     x = if (true) 1 else 2
 
-    val y = true && false
-    val z = false && true
+    konst y = true && false
+    konst z = false && true
 
-    val t = Test();
+    konst t = Test();
     t.x = 1
     t.x += 1
 }

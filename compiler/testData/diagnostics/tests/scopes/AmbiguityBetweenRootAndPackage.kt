@@ -10,4 +10,4 @@ fun testFun() = 12
 // FILE: using.kt
 import test.*
 
-val t: String = testFun()
+konst t: String = testFun()

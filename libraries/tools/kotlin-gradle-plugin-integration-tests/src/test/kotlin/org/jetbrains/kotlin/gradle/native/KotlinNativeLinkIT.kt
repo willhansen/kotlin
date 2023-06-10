@@ -14,7 +14,7 @@ import kotlin.io.path.appendText
 @NativeGradlePluginTests
 internal class KotlinNativeLinkIT : KGPBaseTest() {
 
-    @DisplayName("KT-54113: afterEvaluate to sync languageSettings should run out of configuration methods scope")
+    @DisplayName("KT-54113: afterEkonstuate to sync languageSettings should run out of configuration methods scope")
     @GradleTest
     fun shouldSyncLanguageSettingsSafely(gradleVersion: GradleVersion) {
         nativeProject("native-link-simple", gradleVersion) {
@@ -44,14 +44,14 @@ internal class KotlinNativeLinkIT : KGPBaseTest() {
             )
 
             build("linkReleaseExecutableHost") {
-                val linkTaskOutput = output
+                konst linkTaskOutput = output
                     .substringAfter("Task :linkReleaseExecutableHost")
                     .substringBefore("Task :linkHost")
                 assert(linkTaskOutput.isNotEmpty()) {
                     "Could not get :linkReleaseExecutableHost task output!"
                 }
 
-                val args = linkTaskOutput
+                konst args = linkTaskOutput
                     .substringAfterLast("Transformed arguments = [")
                     .substringBefore("]")
                     .lines()

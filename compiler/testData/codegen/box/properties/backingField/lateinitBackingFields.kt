@@ -4,8 +4,8 @@
 var that: Int
     lateinit field: String
     get() = field.length
-    set(value) {
-        field = value.toString()
+    set(konstue) {
+        field = konstue.toString()
     }
 
 fun box(): String {

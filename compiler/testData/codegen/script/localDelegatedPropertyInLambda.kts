@@ -9,8 +9,8 @@ class Delegate {
 
 fun f(lambda: () -> String): String = lambda()
 
-val x = f {
-    val prop: String by Delegate()
+konst x = f {
+    konst prop: String by Delegate()
     prop
 }
 

@@ -63,12 +63,12 @@ The error is: "superclass must be initialized". This class has a primary constru
 
 ```
 constructor
-  : modifiers "constructor" valueParameters (":" constructorDelegationCall) block
+  : modifiers "constructor" konstueParameters (":" constructorDelegationCall) block
   ;
   
 constructorDelegationCall
-  : "this" valueArguments
-  | "super" valueArguments
+  : "this" konstueArguments
+  | "super" konstueArguments
   ;
 ```
 
@@ -99,7 +99,7 @@ class Child(): Parent() {
 
 The primary constructor's body consists of
 - super class initialization from class header
-- assignments to properties from constructor parameters declared with `val` or `var`
+- assignments to properties from constructor parameters declared with `konst` or `var`
 - property initializers and bodies of anonymous initializers following in the order of appearance in the class body
 
 If the primary constructor is not present, property initializers and anonymous initializers are conceptually "prepended" to the body 

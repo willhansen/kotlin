@@ -29,14 +29,14 @@ class Case6 {
 
 // TESTCASE NUMBER: 7
 class Case7 {
-    val x: Int get() = <!NULL_FOR_NONNULL_TYPE!>null<!>
+    konst x: Int get() = <!NULL_FOR_NONNULL_TYPE!>null<!>
 }
 
 // TESTCASE NUMBER: 8
 class Case8 {
     var x: Any = 0
         get() = 0
-        set(value) {
+        set(konstue) {
             field = <!NULL_FOR_NONNULL_TYPE!>null<!>
         }
 }
@@ -52,7 +52,7 @@ fun case_11(x: Int, y: Boolean): Any = <!RETURN_TYPE_MISMATCH!>if (y) x else nul
 
 // TESTCASE NUMBER: 12
 class Case12 {
-    val x: Any
+    konst x: Any
     var y: Any
     var z: Any
     init {
@@ -65,20 +65,20 @@ class Case12 {
 
 // TESTCASE NUMBER: 13
 open class Case13_1 {
-    open val x: Int = 10
+    open konst x: Int = 10
 }
 
 class Case13: Case13_1() {
-    override val <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE!>x<!> = null
+    override konst <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE!>x<!> = null
 }
 
 // TESTCASE NUMBER: 14
 abstract class Case14_1 {
-    abstract val x: Int
+    abstract konst x: Int
 }
 
 class Case14: Case14_1() {
-    override val <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE!>x<!> = null
+    override konst <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE!>x<!> = null
 }
 
 // TESTCASE NUMBER: 15

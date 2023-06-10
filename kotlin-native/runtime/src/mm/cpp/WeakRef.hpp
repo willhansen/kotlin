@@ -13,7 +13,7 @@
 namespace kotlin::mm {
 
 // Weak reference to a Kotlin object.
-// GC automatically invalidates the reference when the Kotlin object is collected.
+// GC automatically inkonstidates the reference when the Kotlin object is collected.
 // Use `create` and `dispose` to create and destroy the weak reference.
 class WeakRef : private MoveOnly {
 public:

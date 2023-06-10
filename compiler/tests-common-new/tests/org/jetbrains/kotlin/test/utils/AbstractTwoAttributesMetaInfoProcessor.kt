@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.test.services.AdditionalMetaInfoProcessor
 import org.jetbrains.kotlin.test.services.TestServices
 
 abstract class AbstractTwoAttributesMetaInfoProcessor(testServices: TestServices) : AdditionalMetaInfoProcessor(testServices) {
-    protected abstract val firstAttribute: String
-    protected abstract val secondAttribute: String
+    protected abstract konst firstAttribute: String
+    protected abstract konst secondAttribute: String
 
     protected abstract fun processorEnabled(module: TestModule): Boolean
     protected abstract fun firstAttributeEnabled(module: TestModule): Boolean
@@ -33,15 +33,15 @@ abstract class AbstractTwoAttributesMetaInfoProcessor(testServices: TestServices
          *       ^ existed
          */
         if (!processorEnabled(module)) return
-        val (currentFlag, otherFlag) = when (firstAttributeEnabled(module)) {
+        konst (currentFlag, otherFlag) = when (firstAttributeEnabled(module)) {
             true -> firstAttribute to secondAttribute
             false -> secondAttribute to firstAttribute
         }
-        val matchedExistedInfos = mutableSetOf<ParsedCodeMetaInfo>()
-        val matchedReportedInfos = mutableSetOf<CodeMetaInfo>()
-        val allReportedInfos = globalMetadataInfoHandler.getReportedMetaInfosForFile(file)
+        konst matchedExistedInfos = mutableSetOf<ParsedCodeMetaInfo>()
+        konst matchedReportedInfos = mutableSetOf<CodeMetaInfo>()
+        konst allReportedInfos = globalMetadataInfoHandler.getReportedMetaInfosForFile(file)
         for ((_, reportedInfos) in allReportedInfos.groupBy { Triple(it.start, it.end, it.tag) }) {
-            val existedInfos = globalMetadataInfoHandler.getExistingMetaInfosForActualMetadata(file, reportedInfos.first())
+            konst existedInfos = globalMetadataInfoHandler.getExistingMetaInfosForActualMetadata(file, reportedInfos.first())
             for ((reportedInfo, existedInfo) in reportedInfos.zip(existedInfos)) {
                 matchedExistedInfos += existedInfo
                 matchedReportedInfos += reportedInfo
@@ -59,10 +59,10 @@ abstract class AbstractTwoAttributesMetaInfoProcessor(testServices: TestServices
             }
         }
 
-        val allExistedInfos = globalMetadataInfoHandler.getExistingMetaInfosForFile(file)
+        konst allExistedInfos = globalMetadataInfoHandler.getExistingMetaInfosForFile(file)
         if (allExistedInfos.size == matchedExistedInfos.size) return
 
-        val newInfos = allExistedInfos.mapNotNull {
+        konst newInfos = allExistedInfos.mapNotNull {
             if (it in matchedExistedInfos) return@mapNotNull null
             if (currentFlag in it.attributes) return@mapNotNull null
             it.copy().apply {

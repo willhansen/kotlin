@@ -26,12 +26,12 @@ interface Imports {
 }
 
 
-class PackageInfo(val name: String, val library: KonanLibrary)
+class PackageInfo(konst name: String, konst library: KonanLibrary)
 
-class ImportsImpl(internal val headerIdToPackage: Map<HeaderId, PackageInfo>) : Imports {
+class ImportsImpl(internal konst headerIdToPackage: Map<HeaderId, PackageInfo>) : Imports {
 
     override fun getPackage(location: Location): String? {
-        val packageInfo = headerIdToPackage[location.headerId]
+        konst packageInfo = headerIdToPackage[location.headerId]
                 ?: return null
         accessedLibraries += packageInfo.library
         return packageInfo.name
@@ -40,15 +40,15 @@ class ImportsImpl(internal val headerIdToPackage: Map<HeaderId, PackageInfo>) : 
     override fun isImported(headerId: HeaderId) =
             headerId in headerIdToPackage
 
-    private val accessedLibraries = mutableSetOf<KonanLibrary>()
+    private konst accessedLibraries = mutableSetOf<KonanLibrary>()
 
-    val requiredLibraries: Set<KonanLibrary>
+    konst requiredLibraries: Set<KonanLibrary>
         get() = accessedLibraries.toSet()
 }
 
 class HeaderInclusionPolicyImpl(
-        private val nameGlobs: List<String>,
-        private val excludeGlobs: List<String>,
+        private konst nameGlobs: List<String>,
+        private konst excludeGlobs: List<String>,
 ) : HeaderInclusionPolicy {
 
     override fun excludeUnused(headerName: String?): Boolean {
@@ -68,7 +68,7 @@ class HeaderInclusionPolicyImpl(
 }
 
 class HeaderExclusionPolicyImpl(
-        private val imports: Imports
+        private konst imports: Imports
 ) : HeaderExclusionPolicy {
 
     override fun excludeAll(headerId: HeaderId): Boolean {

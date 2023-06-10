@@ -15,7 +15,7 @@
 
 class Marker {
     fun foo() = println("non-extension member toplevel Marker.foo()")
-    val foo: String = "non-extension member toplevel Marker.foo"
+    konst foo: String = "non-extension member toplevel Marker.foo"
 }
 
 // TESTCASE NUMBER: 1

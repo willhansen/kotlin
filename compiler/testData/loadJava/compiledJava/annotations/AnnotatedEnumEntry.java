@@ -12,7 +12,7 @@ public enum AnnotatedEnumEntry {
     E3;
 
     public static @interface Anno {
-        String value();
+        String konstue();
     }
 
     public static @interface Anno2 {

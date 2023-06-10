@@ -1,8 +1,8 @@
 class Del<T>(var x: T) {
     operator fun getValue(thisRef: Any?, kProp: Any) = x
 
-    operator fun setValue(thisRef: Any?, kProp: Any, value: T) {
-        x = value
+    operator fun setValue(thisRef: Any?, kProp: Any, konstue: T) {
+        x = konstue
     }
 }
 

@@ -6,7 +6,7 @@ import objcTests.*
     assertFalse(TestInitWithCustomSelector().custom)
     assertTrue(TestInitWithCustomSelector(custom = Unit).custom)
 
-    val customSubclass: TestInitWithCustomSelector = TestInitWithCustomSelectorSubclass.createCustom()
+    konst customSubclass: TestInitWithCustomSelector = TestInitWithCustomSelectorSubclass.createCustom()
     assertTrue(customSubclass is TestInitWithCustomSelectorSubclass)
     assertTrue(customSubclass.custom)
 

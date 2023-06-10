@@ -107,7 +107,7 @@ public final class DebugJvmProtoBuf {
     private StringTableTypes(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -158,10 +158,10 @@ public final class DebugJvmProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -191,7 +191,7 @@ public final class DebugJvmProtoBuf {
       public StringTableTypes parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new StringTableTypes(input, extensionRegistry);
       }
     };
@@ -373,7 +373,7 @@ public final class DebugJvmProtoBuf {
       private Record(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         initFields();
         int mutable_bitField0_ = 0;
         org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -405,12 +405,12 @@ public final class DebugJvmProtoBuf {
               }
               case 24: {
                 int rawValue = input.readEnum();
-                org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record.Operation value = org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record.Operation.valueOf(rawValue);
-                if (value == null) {
+                org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record.Operation konstue = org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record.Operation.konstueOf(rawValue);
+                if (konstue == null) {
                   unknownFields.mergeVarintField(3, rawValue);
                 } else {
                   bitField0_ |= 0x00000008;
-                  operation_ = value;
+                  operation_ = konstue;
                 }
                 break;
               }
@@ -464,10 +464,10 @@ public final class DebugJvmProtoBuf {
               }
             }
           }
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           throw e.setUnfinishedMessage(this);
         } catch (java.io.IOException e) {
-          throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+          throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
               e.getMessage()).setUnfinishedMessage(this);
         } finally {
           if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
@@ -497,7 +497,7 @@ public final class DebugJvmProtoBuf {
         public Record parsePartialFrom(
             org.jetbrains.kotlin.protobuf.CodedInputStream input,
             org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           return new Record(input, extensionRegistry);
         }
       };
@@ -560,10 +560,10 @@ public final class DebugJvmProtoBuf {
         public static final int DESC_TO_CLASS_ID_VALUE = 2;
 
 
-        public final int getNumber() { return value; }
+        public final int getNumber() { return konstue; }
 
-        public static Operation valueOf(int value) {
-          switch (value) {
+        public static Operation konstueOf(int konstue) {
+          switch (konstue) {
             case 0: return NONE;
             case 1: return INTERNAL_TO_CLASS_ID;
             case 2: return DESC_TO_CLASS_ID;
@@ -579,7 +579,7 @@ public final class DebugJvmProtoBuf {
             internalValueMap =
               new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Operation>() {
                 public Operation findValueByNumber(int number) {
-                  return Operation.valueOf(number);
+                  return Operation.konstueOf(number);
                 }
               };
 
@@ -596,9 +596,9 @@ public final class DebugJvmProtoBuf {
           return org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record.getDescriptor().getEnumTypes().get(0);
         }
 
-        private static final Operation[] VALUES = values();
+        private static final Operation[] VALUES = konstues();
 
-        public static Operation valueOf(
+        public static Operation konstueOf(
             org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
           if (desc.getType() != getDescriptor()) {
             throw new java.lang.IllegalArgumentException(
@@ -608,11 +608,11 @@ public final class DebugJvmProtoBuf {
         }
 
         private final int index;
-        private final int value;
+        private final int konstue;
 
-        private Operation(int index, int value) {
+        private Operation(int index, int konstue) {
           this.index = index;
-          this.value = value;
+          this.konstue = konstue;
         }
 
         // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record.Operation)
@@ -935,23 +935,23 @@ public final class DebugJvmProtoBuf {
 
       public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record parseFrom(
           org.jetbrains.kotlin.protobuf.ByteString data)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
       public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record parseFrom(
           org.jetbrains.kotlin.protobuf.ByteString data,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
       public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record parseFrom(byte[] data)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
       public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record parseFrom(
           byte[] data,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
       public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record parseFrom(java.io.InputStream input)
@@ -1169,7 +1169,7 @@ public final class DebugJvmProtoBuf {
           org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+          } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
             parsedMessage = (org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record) e.getUnfinishedMessage();
             throw e;
           } finally {
@@ -1209,9 +1209,9 @@ public final class DebugJvmProtoBuf {
          * The number of times this record should be repeated; this is used to collapse identical subsequent records in the list
          * </pre>
          */
-        public Builder setRange(int value) {
+        public Builder setRange(int konstue) {
           bitField0_ |= 0x00000001;
-          range_ = value;
+          range_ = konstue;
           onChanged();
           return this;
         }
@@ -1257,9 +1257,9 @@ public final class DebugJvmProtoBuf {
          * Index of the predefined constant. If this field is present, the associated string is ignored
          * </pre>
          */
-        public Builder setPredefinedIndex(int value) {
+        public Builder setPredefinedIndex(int konstue) {
           bitField0_ |= 0x00000002;
-          predefinedIndex_ = value;
+          predefinedIndex_ = konstue;
           onChanged();
           return this;
         }
@@ -1337,12 +1337,12 @@ public final class DebugJvmProtoBuf {
          * </pre>
          */
         public Builder setString(
-            java.lang.String value) {
-          if (value == null) {
+            java.lang.String konstue) {
+          if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000004;
-          string_ = value;
+          string_ = konstue;
           onChanged();
           return this;
         }
@@ -1367,12 +1367,12 @@ public final class DebugJvmProtoBuf {
          * </pre>
          */
         public Builder setStringBytes(
-            org.jetbrains.kotlin.protobuf.ByteString value) {
-          if (value == null) {
+            org.jetbrains.kotlin.protobuf.ByteString konstue) {
+          if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000004;
-          string_ = value;
+          string_ = konstue;
           onChanged();
           return this;
         }
@@ -1405,12 +1405,12 @@ public final class DebugJvmProtoBuf {
          * Perform a described operation on the string
          * </pre>
          */
-        public Builder setOperation(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record.Operation value) {
-          if (value == null) {
+        public Builder setOperation(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record.Operation konstue) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           bitField0_ |= 0x00000008;
-          operation_ = value;
+          operation_ = konstue;
           onChanged();
           return this;
         }
@@ -1482,9 +1482,9 @@ public final class DebugJvmProtoBuf {
          * </pre>
          */
         public Builder setSubstringIndex(
-            int index, int value) {
+            int index, int konstue) {
           ensureSubstringIndexIsMutable();
-          substringIndex_.set(index, value);
+          substringIndex_.set(index, konstue);
           onChanged();
           return this;
         }
@@ -1497,9 +1497,9 @@ public final class DebugJvmProtoBuf {
          * If an operation is not NONE, it's applied _after_ this substring operation
          * </pre>
          */
-        public Builder addSubstringIndex(int value) {
+        public Builder addSubstringIndex(int konstue) {
           ensureSubstringIndexIsMutable();
-          substringIndex_.add(value);
+          substringIndex_.add(konstue);
           onChanged();
           return this;
         }
@@ -1513,10 +1513,10 @@ public final class DebugJvmProtoBuf {
          * </pre>
          */
         public Builder addAllSubstringIndex(
-            java.lang.Iterable<? extends java.lang.Integer> values) {
+            java.lang.Iterable<? extends java.lang.Integer> konstues) {
           ensureSubstringIndexIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, substringIndex_);
+              konstues, substringIndex_);
           onChanged();
           return this;
         }
@@ -1586,9 +1586,9 @@ public final class DebugJvmProtoBuf {
          * </pre>
          */
         public Builder setReplaceChar(
-            int index, int value) {
+            int index, int konstue) {
           ensureReplaceCharIsMutable();
-          replaceChar_.set(index, value);
+          replaceChar_.set(index, konstue);
           onChanged();
           return this;
         }
@@ -1600,9 +1600,9 @@ public final class DebugJvmProtoBuf {
          * of the character to replace, and the second element as the code point of the replacement character
          * </pre>
          */
-        public Builder addReplaceChar(int value) {
+        public Builder addReplaceChar(int konstue) {
           ensureReplaceCharIsMutable();
-          replaceChar_.add(value);
+          replaceChar_.add(konstue);
           onChanged();
           return this;
         }
@@ -1615,10 +1615,10 @@ public final class DebugJvmProtoBuf {
          * </pre>
          */
         public Builder addAllReplaceChar(
-            java.lang.Iterable<? extends java.lang.Integer> values) {
+            java.lang.Iterable<? extends java.lang.Integer> konstues) {
           ensureReplaceCharIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, replaceChar_);
+              konstues, replaceChar_);
           onChanged();
           return this;
         }
@@ -1786,23 +1786,23 @@ public final class DebugJvmProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes parseFrom(java.io.InputStream input)
@@ -2005,7 +2005,7 @@ public final class DebugJvmProtoBuf {
         org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -2063,16 +2063,16 @@ public final class DebugJvmProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record record = 1;</code>
        */
       public Builder setRecord(
-          int index, org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record value) {
+          int index, org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record konstue) {
         if (recordBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureRecordIsMutable();
-          record_.set(index, value);
+          record_.set(index, konstue);
           onChanged();
         } else {
-          recordBuilder_.setMessage(index, value);
+          recordBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -2093,16 +2093,16 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record record = 1;</code>
        */
-      public Builder addRecord(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record value) {
+      public Builder addRecord(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record konstue) {
         if (recordBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureRecordIsMutable();
-          record_.add(value);
+          record_.add(konstue);
           onChanged();
         } else {
-          recordBuilder_.addMessage(value);
+          recordBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -2110,16 +2110,16 @@ public final class DebugJvmProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record record = 1;</code>
        */
       public Builder addRecord(
-          int index, org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record value) {
+          int index, org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record konstue) {
         if (recordBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureRecordIsMutable();
-          record_.add(index, value);
+          record_.add(index, konstue);
           onChanged();
         } else {
-          recordBuilder_.addMessage(index, value);
+          recordBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -2155,14 +2155,14 @@ public final class DebugJvmProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record record = 1;</code>
        */
       public Builder addAllRecord(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.StringTableTypes.Record> konstues) {
         if (recordBuilder_ == null) {
           ensureRecordIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, record_);
+              konstues, record_);
           onChanged();
         } else {
-          recordBuilder_.addAllMessages(values);
+          recordBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -2303,9 +2303,9 @@ public final class DebugJvmProtoBuf {
        * </pre>
        */
       public Builder setLocalName(
-          int index, int value) {
+          int index, int konstue) {
         ensureLocalNameIsMutable();
-        localName_.set(index, value);
+        localName_.set(index, konstue);
         onChanged();
         return this;
       }
@@ -2316,9 +2316,9 @@ public final class DebugJvmProtoBuf {
        * Indices of strings which are names of local classes or anonymous objects
        * </pre>
        */
-      public Builder addLocalName(int value) {
+      public Builder addLocalName(int konstue) {
         ensureLocalNameIsMutable();
-        localName_.add(value);
+        localName_.add(konstue);
         onChanged();
         return this;
       }
@@ -2330,10 +2330,10 @@ public final class DebugJvmProtoBuf {
        * </pre>
        */
       public Builder addAllLocalName(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureLocalNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, localName_);
+            konstues, localName_);
         onChanged();
         return this;
       }
@@ -2424,7 +2424,7 @@ public final class DebugJvmProtoBuf {
     private JvmMethodSignature(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -2456,10 +2456,10 @@ public final class DebugJvmProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
@@ -2483,7 +2483,7 @@ public final class DebugJvmProtoBuf {
       public JvmMethodSignature parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new JvmMethodSignature(input, extensionRegistry);
       }
     };
@@ -2586,23 +2586,23 @@ public final class DebugJvmProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature parseFrom(java.io.InputStream input)
@@ -2766,7 +2766,7 @@ public final class DebugJvmProtoBuf {
         org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -2794,9 +2794,9 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>optional int32 name = 1;</code>
        */
-      public Builder setName(int value) {
+      public Builder setName(int konstue) {
         bitField0_ |= 0x00000001;
-        name_ = value;
+        name_ = konstue;
         onChanged();
         return this;
       }
@@ -2838,9 +2838,9 @@ public final class DebugJvmProtoBuf {
        * JVM descriptor of the method, e.g. '(Ljava/util/List;)[Ljava/lang/Object;'
        * </pre>
        */
-      public Builder setDesc(int value) {
+      public Builder setDesc(int konstue) {
         bitField0_ |= 0x00000002;
-        desc_ = value;
+        desc_ = konstue;
         onChanged();
         return this;
       }
@@ -2931,7 +2931,7 @@ public final class DebugJvmProtoBuf {
     private JvmFieldSignature(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -2963,10 +2963,10 @@ public final class DebugJvmProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
@@ -2990,7 +2990,7 @@ public final class DebugJvmProtoBuf {
       public JvmFieldSignature parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new JvmFieldSignature(input, extensionRegistry);
       }
     };
@@ -3093,23 +3093,23 @@ public final class DebugJvmProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature parseFrom(java.io.InputStream input)
@@ -3273,7 +3273,7 @@ public final class DebugJvmProtoBuf {
         org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -3301,9 +3301,9 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>optional int32 name = 1;</code>
        */
-      public Builder setName(int value) {
+      public Builder setName(int konstue) {
         bitField0_ |= 0x00000001;
-        name_ = value;
+        name_ = konstue;
         onChanged();
         return this;
       }
@@ -3345,9 +3345,9 @@ public final class DebugJvmProtoBuf {
        * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
        * </pre>
        */
-      public Builder setDesc(int value) {
+      public Builder setDesc(int konstue) {
         bitField0_ |= 0x00000002;
-        desc_ = value;
+        desc_ = konstue;
         onChanged();
         return this;
       }
@@ -3504,7 +3504,7 @@ public final class DebugJvmProtoBuf {
     private JvmPropertySignature(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -3591,10 +3591,10 @@ public final class DebugJvmProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
@@ -3618,7 +3618,7 @@ public final class DebugJvmProtoBuf {
       public JvmPropertySignature parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new JvmPropertySignature(input, extensionRegistry);
       }
     };
@@ -3839,23 +3839,23 @@ public final class DebugJvmProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmPropertySignature parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmPropertySignature parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmPropertySignature parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmPropertySignature parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmPropertySignature parseFrom(java.io.InputStream input)
@@ -4091,7 +4091,7 @@ public final class DebugJvmProtoBuf {
         org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmPropertySignature parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmPropertySignature) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -4125,15 +4125,15 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.jvm.JvmFieldSignature field = 1;</code>
        */
-      public Builder setField(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature value) {
+      public Builder setField(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature konstue) {
         if (fieldBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          field_ = value;
+          field_ = konstue;
           onChanged();
         } else {
-          fieldBuilder_.setMessage(value);
+          fieldBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000001;
         return this;
@@ -4155,18 +4155,18 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.jvm.JvmFieldSignature field = 1;</code>
        */
-      public Builder mergeField(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature value) {
+      public Builder mergeField(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature konstue) {
         if (fieldBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
               field_ != org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature.getDefaultInstance()) {
             field_ =
-              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature.newBuilder(field_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmFieldSignature.newBuilder(field_).mergeFrom(konstue).buildPartial();
           } else {
-            field_ = value;
+            field_ = konstue;
           }
           onChanged();
         } else {
-          fieldBuilder_.mergeFrom(value);
+          fieldBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000001;
         return this;
@@ -4253,15 +4253,15 @@ public final class DebugJvmProtoBuf {
        * Annotations on properties are written on a synthetic method with this signature
        * </pre>
        */
-      public Builder setSyntheticMethod(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature value) {
+      public Builder setSyntheticMethod(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature konstue) {
         if (syntheticMethodBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          syntheticMethod_ = value;
+          syntheticMethod_ = konstue;
           onChanged();
         } else {
-          syntheticMethodBuilder_.setMessage(value);
+          syntheticMethodBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000002;
         return this;
@@ -4291,18 +4291,18 @@ public final class DebugJvmProtoBuf {
        * Annotations on properties are written on a synthetic method with this signature
        * </pre>
        */
-      public Builder mergeSyntheticMethod(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature value) {
+      public Builder mergeSyntheticMethod(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature konstue) {
         if (syntheticMethodBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
               syntheticMethod_ != org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.getDefaultInstance()) {
             syntheticMethod_ =
-              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.newBuilder(syntheticMethod_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.newBuilder(syntheticMethod_).mergeFrom(konstue).buildPartial();
           } else {
-            syntheticMethod_ = value;
+            syntheticMethod_ = konstue;
           }
           onChanged();
         } else {
-          syntheticMethodBuilder_.mergeFrom(value);
+          syntheticMethodBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000002;
         return this;
@@ -4393,15 +4393,15 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.jvm.JvmMethodSignature getter = 3;</code>
        */
-      public Builder setGetter(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature value) {
+      public Builder setGetter(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature konstue) {
         if (getterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          getter_ = value;
+          getter_ = konstue;
           onChanged();
         } else {
-          getterBuilder_.setMessage(value);
+          getterBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000004;
         return this;
@@ -4423,18 +4423,18 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.jvm.JvmMethodSignature getter = 3;</code>
        */
-      public Builder mergeGetter(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature value) {
+      public Builder mergeGetter(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature konstue) {
         if (getterBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
               getter_ != org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.getDefaultInstance()) {
             getter_ =
-              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.newBuilder(getter_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.newBuilder(getter_).mergeFrom(konstue).buildPartial();
           } else {
-            getter_ = value;
+            getter_ = konstue;
           }
           onChanged();
         } else {
-          getterBuilder_.mergeFrom(value);
+          getterBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000004;
         return this;
@@ -4509,15 +4509,15 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.jvm.JvmMethodSignature setter = 4;</code>
        */
-      public Builder setSetter(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature value) {
+      public Builder setSetter(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature konstue) {
         if (setterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          setter_ = value;
+          setter_ = konstue;
           onChanged();
         } else {
-          setterBuilder_.setMessage(value);
+          setterBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -4539,18 +4539,18 @@ public final class DebugJvmProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.jvm.JvmMethodSignature setter = 4;</code>
        */
-      public Builder mergeSetter(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature value) {
+      public Builder mergeSetter(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature konstue) {
         if (setterBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
               setter_ != org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.getDefaultInstance()) {
             setter_ =
-              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.newBuilder(setter_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.newBuilder(setter_).mergeFrom(konstue).buildPartial();
           } else {
-            setter_ = value;
+            setter_ = konstue;
           }
           onChanged();
         } else {
-          setterBuilder_.mergeFrom(value);
+          setterBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -4640,15 +4640,15 @@ public final class DebugJvmProtoBuf {
        * then call this method instead
        * </pre>
        */
-      public Builder setDelegateMethod(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature value) {
+      public Builder setDelegateMethod(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature konstue) {
         if (delegateMethodBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          delegateMethod_ = value;
+          delegateMethod_ = konstue;
           onChanged();
         } else {
-          delegateMethodBuilder_.setMessage(value);
+          delegateMethodBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000010;
         return this;
@@ -4680,18 +4680,18 @@ public final class DebugJvmProtoBuf {
        * then call this method instead
        * </pre>
        */
-      public Builder mergeDelegateMethod(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature value) {
+      public Builder mergeDelegateMethod(org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature konstue) {
         if (delegateMethodBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010) &&
               delegateMethod_ != org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.getDefaultInstance()) {
             delegateMethod_ =
-              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.newBuilder(delegateMethod_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignature.newBuilder(delegateMethod_).mergeFrom(konstue).buildPartial();
           } else {
-            delegateMethod_ = value;
+            delegateMethod_ = konstue;
           }
           onChanged();
         } else {
-          delegateMethodBuilder_.mergeFrom(value);
+          delegateMethodBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000010;
         return this;

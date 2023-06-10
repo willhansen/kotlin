@@ -1,68 +1,68 @@
-class AByte(var value: Byte) {
-    operator fun get(i: Int) = value
+class AByte(var konstue: Byte) {
+    operator fun get(i: Int) = konstue
 
     operator fun set(i: Int, newValue: Byte) {
-        value = newValue
+        konstue = newValue
     }
 }
 
-class AShort(var value: Short) {
-    operator fun get(i: Int) = value
+class AShort(var konstue: Short) {
+    operator fun get(i: Int) = konstue
 
     operator fun set(i: Int, newValue: Short) {
-        value = newValue
+        konstue = newValue
     }
 }
 
-class AInt(var value: Int) {
-    operator fun get(i: Int) = value
+class AInt(var konstue: Int) {
+    operator fun get(i: Int) = konstue
 
     operator fun set(i: Int, newValue: Int) {
-        value = newValue
+        konstue = newValue
     }
 }
 
-class ALong(var value: Long) {
-    operator fun get(i: Int) = value
+class ALong(var konstue: Long) {
+    operator fun get(i: Int) = konstue
 
     operator fun set(i: Int, newValue: Long) {
-        value = newValue
+        konstue = newValue
     }
 }
 
-class AFloat(var value: Float) {
-    operator fun get(i: Int) = value
+class AFloat(var konstue: Float) {
+    operator fun get(i: Int) = konstue
 
     operator fun set(i: Int, newValue: Float) {
-        value = newValue
+        konstue = newValue
     }
 }
 
-class ADouble(var value: Double) {
-    operator fun get(i: Int) = value
+class ADouble(var konstue: Double) {
+    operator fun get(i: Int) = konstue
 
     operator fun set(i: Int, newValue: Double) {
-        value = newValue
+        konstue = newValue
     }
 }
 
 fun box(): String {
-    val aByte = AByte(1)
+    konst aByte = AByte(1)
     var bByte: Byte = 1
 
-    val aShort = AShort(1)
+    konst aShort = AShort(1)
     var bShort: Short = 1
 
-    val aInt = AInt(1)
+    konst aInt = AInt(1)
     var bInt: Int = 1
 
-    val aLong = ALong(1)
+    konst aLong = ALong(1)
     var bLong: Long = 1
 
-    val aFloat = AFloat(1.0f)
+    konst aFloat = AFloat(1.0f)
     var bFloat: Float = 1.0f
 
-    val aDouble = ADouble(1.0)
+    konst aDouble = ADouble(1.0)
     var bDouble: Double = 1.0
     
     aByte[0]++

@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.serialization.js.ModuleKind
 import java.io.File
 import java.nio.file.Files
 
-val ModuleKind.extension: String
+konst ModuleKind.extension: String
     get() = when (this) {
         ModuleKind.ES -> ESM_EXTENSION
         else -> REGULAR_EXTENSION
@@ -23,19 +23,19 @@ val ModuleKind.extension: String
 abstract class CompilationOutputs {
     var dependencies: Collection<Pair<String, CompilationOutputs>> = emptyList()
 
-    abstract val tsDefinitions: TypeScriptFragment?
+    abstract konst tsDefinitions: TypeScriptFragment?
 
-    abstract val jsProgram: JsProgram?
+    abstract konst jsProgram: JsProgram?
 
     abstract fun writeJsCode(outputJsFile: File, outputJsMapFile: File)
 
     fun writeAll(outputDir: File, outputName: String, genDTS: Boolean, moduleName: String, moduleKind: ModuleKind): Collection<File> {
-        val writtenFiles = LinkedHashSet<File>(2 * (dependencies.size + 1) + 1)
+        konst writtenFiles = LinkedHashSet<File>(2 * (dependencies.size + 1) + 1)
 
         fun File.writeAsJsFile(out: CompilationOutputs) {
             parentFile.mkdirs()
-            val jsMapFile = mapForJsFile
-            val jsFile = normalizedAbsoluteFile
+            konst jsMapFile = mapForJsFile
+            konst jsFile = normalizedAbsoluteFile
             out.writeJsCode(jsFile, jsMapFile)
 
             writtenFiles += jsFile
@@ -46,11 +46,11 @@ abstract class CompilationOutputs {
             outputDir.resolve("$name${moduleKind.extension}").writeAsJsFile(content)
         }
 
-        val outputJsFile = outputDir.resolve("$outputName${moduleKind.extension}")
+        konst outputJsFile = outputDir.resolve("$outputName${moduleKind.extension}")
         outputJsFile.writeAsJsFile(this)
 
         if (genDTS) {
-            val dtsFile = outputJsFile.dtsForJsFile
+            konst dtsFile = outputJsFile.dtsForJsFile
             dtsFile.writeText(getFullTsDefinition(moduleName, moduleKind))
             writtenFiles += dtsFile
         }
@@ -61,22 +61,22 @@ abstract class CompilationOutputs {
     }
 
     fun getFullTsDefinition(moduleName: String, moduleKind: ModuleKind): String {
-        val allTsDefinitions = dependencies.mapNotNull { it.second.tsDefinitions } + listOfNotNull(tsDefinitions)
+        konst allTsDefinitions = dependencies.mapNotNull { it.second.tsDefinitions } + listOfNotNull(tsDefinitions)
         return allTsDefinitions.toTypeScript(moduleName, moduleKind)
     }
 
-    private val File.normalizedAbsoluteFile
+    private konst File.normalizedAbsoluteFile
         get() = absoluteFile.normalize()
 
-    private val File.mapForJsFile
+    private konst File.mapForJsFile
         get() = resolveSibling("$name.map").normalizedAbsoluteFile
 
-    private val File.dtsForJsFile
+    private konst File.dtsForJsFile
         get() = resolveSibling("$nameWithoutExtension.d.ts").normalizedAbsoluteFile
 }
 
 private fun File.copyModificationTimeFrom(from: File) {
-    val mtime = from.lastModified()
+    konst mtime = from.lastModified()
     if (mtime > 0) {
         setLastModified(mtime)
     }
@@ -87,13 +87,13 @@ private fun File.asSourceMappingUrl(): String {
 }
 
 class CompilationOutputsBuilt(
-    private val rawJsCode: String,
-    private val sourceMap: String?,
-    override val tsDefinitions: TypeScriptFragment?,
-    override val jsProgram: JsProgram?,
+    private konst rawJsCode: String,
+    private konst sourceMap: String?,
+    override konst tsDefinitions: TypeScriptFragment?,
+    override konst jsProgram: JsProgram?,
 ) : CompilationOutputs() {
     override fun writeJsCode(outputJsFile: File, outputJsMapFile: File) {
-        val sourceMappingUrl = sourceMap?.let {
+        konst sourceMappingUrl = sourceMap?.let {
             outputJsMapFile.writeText(it)
             outputJsMapFile.asSourceMappingUrl()
         } ?: ""
@@ -108,18 +108,18 @@ class CompilationOutputsBuilt(
 }
 
 class CompilationOutputsCached(
-    private val jsCodeFile: File,
-    private val sourceMapFile: File?,
-    private val tsDefinitionsFile: File?
+    private konst jsCodeFile: File,
+    private konst sourceMapFile: File?,
+    private konst tsDefinitionsFile: File?
 ) : CompilationOutputs() {
-    override val tsDefinitions: TypeScriptFragment?
+    override konst tsDefinitions: TypeScriptFragment?
         get() = tsDefinitionsFile?.let { TypeScriptFragment(it.readText()) }
 
-    override val jsProgram: JsProgram?
+    override konst jsProgram: JsProgram?
         get() = null
 
     override fun writeJsCode(outputJsFile: File, outputJsMapFile: File) {
-        val sourceMappingUrl = sourceMapFile?.let {
+        konst sourceMappingUrl = sourceMapFile?.let {
             if (it.isUpdateRequired(outputJsMapFile)) {
                 it.copyTo(outputJsMapFile, true)
                 it.copyModificationTimeFrom(outputJsMapFile)
@@ -134,26 +134,26 @@ class CompilationOutputsCached(
     }
 
     private fun File.isUpdateRequired(target: File): Boolean {
-        val thisMtime = lastModified()
-        val targetMtime = target.lastModified()
+        konst thisMtime = lastModified()
+        konst targetMtime = target.lastModified()
         return thisMtime <= 0 || targetMtime <= 0 || targetMtime > thisMtime
     }
 }
 
 class CompilationOutputsBuiltForCache(
-    private val jsCodeFile: File,
-    private val sourceMapFile: File,
-    private val outputBuilt: CompilationOutputsBuilt
+    private konst jsCodeFile: File,
+    private konst sourceMapFile: File,
+    private konst outputBuilt: CompilationOutputsBuilt
 ) : CompilationOutputs() {
 
     init {
         dependencies = outputBuilt.dependencies
     }
 
-    override val tsDefinitions: TypeScriptFragment?
+    override konst tsDefinitions: TypeScriptFragment?
         get() = outputBuilt.tsDefinitions
 
-    override val jsProgram: JsProgram?
+    override konst jsProgram: JsProgram?
         get() = outputBuilt.jsProgram
 
     override fun writeJsCode(outputJsFile: File, outputJsMapFile: File) {

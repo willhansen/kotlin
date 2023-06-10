@@ -11,11 +11,11 @@ declare namespace JS_TESTS {
         }
         class AnotherClass {
             /** @deprecated message 4 */
-            constructor(value: string);
-            get value(): string;
+            constructor(konstue: string);
+            get konstue(): string;
             /** @deprecated message 5 */
             static fromNothing(): foo.AnotherClass;
-            static fromInt(value: number): foo.AnotherClass;
+            static fromInt(konstue: number): foo.AnotherClass;
             /** @deprecated message 6 */
             foo(): void;
             baz(): void;

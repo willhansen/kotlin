@@ -30,23 +30,23 @@ class InternalKotlinSourceSetTest {
 
     @Test
     fun `test - compilations - sample - 0`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
 
-        val jvm = kotlin.jvm()
-        val linux = kotlin.linuxX64()
-        val macos = kotlin.macosX64()
+        konst jvm = kotlin.jvm()
+        konst linux = kotlin.linuxX64()
+        konst macos = kotlin.macosX64()
 
-        val metadataCompilation = kotlin.metadata().compilations.getByName("main")
-        val jvmCompilation = jvm.compilations.getByName("main")
-        val linuxCompilation = linux.compilations.getByName("main")
-        val macosCompilation = macos.compilations.getByName("main")
+        konst metadataCompilation = kotlin.metadata().compilations.getByName("main")
+        konst jvmCompilation = jvm.compilations.getByName("main")
+        konst linuxCompilation = linux.compilations.getByName("main")
+        konst macosCompilation = macos.compilations.getByName("main")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val linuxX4Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val macosX64Main = kotlin.sourceSets.getByName("macosX64Main")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst linuxX4Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst macosX64Main = kotlin.sourceSets.getByName("macosX64Main")
 
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
         nativeMain.dependsOn(commonMain)
 
         assertEquals<Set<KotlinCompilation<*>>>(
@@ -83,20 +83,20 @@ class InternalKotlinSourceSetTest {
             )
         }
 
-        project.evaluate()
+        project.ekonstuate()
     }
 
     @Test
     fun `test - withDependsOnClosure - sample - 0`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
 
         kotlin.linuxX64()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val linuxMain = kotlin.sourceSets.create("linuxMain")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst linuxMain = kotlin.sourceSets.create("linuxMain")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
         linuxX64Main.dependsOn(commonMain)
 
         assertEquals(
@@ -125,7 +125,7 @@ class InternalKotlinSourceSetTest {
 
     @Test
     fun `test getHostSpecificMainSharedSourceSets`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm()
                 linuxX64()
@@ -134,23 +134,23 @@ class InternalKotlinSourceSetTest {
             }
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         with(kotlin.sourceSets) {
-            val commonMain = getByName("commonMain")
-            val commonTest = getByName("commonTest")
-            val iosMain = getByName("iosMain")
-            val iosTest = getByName("iosTest")
+            konst commonMain = getByName("commonMain")
+            konst commonTest = getByName("commonTest")
+            konst iosMain = getByName("iosMain")
+            konst iosTest = getByName("iosTest")
 
-            val iosX64Main = getByName("iosX64Main")
-            val iosArm64Main = getByName("iosArm64Main")
-            val iosX64Test = getByName("iosX64Test")
-            val iosArm64Test = getByName("iosArm64Test")
+            konst iosX64Main = getByName("iosX64Main")
+            konst iosArm64Main = getByName("iosArm64Main")
+            konst iosX64Test = getByName("iosX64Test")
+            konst iosArm64Test = getByName("iosArm64Test")
 
-            val linuxX64Main = getByName("linuxX64Main")
-            val linuxArm64Main = getByName("linuxArm64Main")
-            val linuxX64Test = getByName("linuxX64Test")
-            val linuxArm64Test = getByName("linuxArm64Test")
+            konst linuxX64Main = getByName("linuxX64Main")
+            konst linuxArm64Main = getByName("linuxArm64Main")
+            konst linuxX64Test = getByName("linuxX64Test")
+            konst linuxArm64Test = getByName("linuxArm64Test")
 
             // common -> ios2 -> ios
             create("ios2Main") { it.dependsOn(commonMain); iosMain.dependsOn(it) }
@@ -175,10 +175,10 @@ class InternalKotlinSourceSetTest {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val expected = listOf("iosMain", "ios2Main").sorted()
-        val actual = project.future { getHostSpecificMainSharedSourceSets(project).map { it.name }.sorted() }.getOrThrow()
+        konst expected = listOf("iosMain", "ios2Main").sorted()
+        konst actual = project.future { getHostSpecificMainSharedSourceSets(project).map { it.name }.sorted() }.getOrThrow()
 
         assertEquals(expected, actual)
     }

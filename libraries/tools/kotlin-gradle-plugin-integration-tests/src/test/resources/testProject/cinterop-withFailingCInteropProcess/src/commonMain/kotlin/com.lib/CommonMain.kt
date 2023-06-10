@@ -7,6 +7,6 @@ package com.lib
 
 import dummy.dummyCFunction
 
-val helloFromLib = "Hello from Lib"
+konst helloFromLib = "Hello from Lib"
 
-val helloFromCInterop = dummyCFunction()
+konst helloFromCInterop = dummyCFunction()

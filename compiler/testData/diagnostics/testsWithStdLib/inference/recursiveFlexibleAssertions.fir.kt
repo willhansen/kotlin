@@ -68,7 +68,7 @@ public class Assertions {
 
 // FILE: test.kt
 fun test() {
-    val assertion = when {
+    konst assertion = when {
         true -> Assertions.assertThat(listOf("foo")).isNotEmpty
         else -> Assertions.assertThat("bar").isEqualTo("bar")
     }

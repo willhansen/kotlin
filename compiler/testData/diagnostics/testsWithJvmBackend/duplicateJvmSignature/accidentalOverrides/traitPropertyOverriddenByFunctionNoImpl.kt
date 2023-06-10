@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 interface T {
-    val x: Int
+    konst x: Int
 }
 
 abstract class C : T {

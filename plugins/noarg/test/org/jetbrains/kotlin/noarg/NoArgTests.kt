@@ -89,10 +89,10 @@ private fun TestConfigurationBuilder.enableNoArg() {
 
 class NoArgEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
     companion object {
-        private val NOARG_ANNOTATIONS = listOf("NoArg", "NoArg2", "test.NoArg")
+        private konst NOARG_ANNOTATIONS = listOf("NoArg", "NoArg2", "test.NoArg")
     }
 
-    override val directiveContainers: List<DirectivesContainer> = listOf(NoArgDirectives)
+    override konst directiveContainers: List<DirectivesContainer> = listOf(NoArgDirectives)
 
     override fun CompilerPluginRegistrar.ExtensionStorage.registerCompilerExtensions(
         module: TestModule,
@@ -108,5 +108,5 @@ class NoArgEnvironmentConfigurator(testServices: TestServices) : EnvironmentConf
 }
 
 object NoArgDirectives : SimpleDirectivesContainer() {
-    val INVOKE_INITIALIZERS by directive("Enable 'Invoke initializers' mode")
+    konst INVOKE_INITIALIZERS by directive("Enable 'Invoke initializers' mode")
 }

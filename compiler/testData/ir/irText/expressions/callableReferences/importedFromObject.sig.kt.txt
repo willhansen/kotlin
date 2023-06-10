@@ -3,7 +3,7 @@ package test
 // CHECK:
 //   Mangled name: test{}test1
 //   Public signature: test/test1|6005685442305498193[0]
-val test1: KProperty0<String>
+konst test1: KProperty0<String>
   // CHECK JVM_IR:
   //   Mangled name: test#<get-test1>(){}kotlin.reflect.KProperty0<kotlin.String>
   //   Public signature: test/test1.<get-test1>|-8479602068466013638[0]
@@ -15,7 +15,7 @@ val test1: KProperty0<String>
 // CHECK:
 //   Mangled name: test{}test1a
 //   Public signature: test/test1a|-8868958804106173806[0]
-val test1a: KProperty0<String>
+konst test1a: KProperty0<String>
   // CHECK JVM_IR:
   //   Mangled name: test#<get-test1a>(){}kotlin.reflect.KProperty0<kotlin.String>
   //   Public signature: test/test1a.<get-test1a>|-8261804722444217546[0]
@@ -27,7 +27,7 @@ val test1a: KProperty0<String>
 // CHECK:
 //   Mangled name: test{}test2
 //   Public signature: test/test2|2517758057000911509[0]
-val test2: KFunction0<String>
+konst test2: KFunction0<String>
   // CHECK JVM_IR:
   //   Mangled name: test#<get-test2>(){}kotlin.reflect.KFunction0<kotlin.String>
   //   Public signature: test/test2.<get-test2>|1526537700116765606[0]
@@ -39,7 +39,7 @@ val test2: KFunction0<String>
 // CHECK:
 //   Mangled name: test{}test2a
 //   Public signature: test/test2a|-1407081977148194425[0]
-val test2a: KFunction0<String>
+konst test2a: KFunction0<String>
   // CHECK JVM_IR:
   //   Mangled name: test#<get-test2a>(){}kotlin.reflect.KFunction0<kotlin.String>
   //   Public signature: test/test2a.<get-test2a>|-1352924861862764837[0]
@@ -55,7 +55,7 @@ object Foo {
   // CHECK:
   //   Mangled name: test.Foo{}a
   //   Public signature: test/Foo.a|-1200697420457237799[0]
-  val a: String
+  konst a: String
     // CHECK JVM_IR:
     //   Mangled name: test.Foo#<get-a>(){}kotlin.String
     //   Public signature: test/Foo.a.<get-a>|-6318309956076983327[0]

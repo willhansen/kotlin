@@ -14,16 +14,16 @@ expect class OuterClass {
         class DeepNested {
             class Another {
                 fun f(s: String)
-                val p: Int
-                val c: Int = <!EXPECTED_PROPERTY_INITIALIZER, EXPECTED_PROPERTY_INITIALIZER{JVM}!>1<!>
-                val a: Int <!EXPECTED_DELEGATED_PROPERTY, EXPECTED_DELEGATED_PROPERTY{JVM}!>by lazy { 1 }<!>
+                konst p: Int
+                konst c: Int = <!EXPECTED_PROPERTY_INITIALIZER, EXPECTED_PROPERTY_INITIALIZER{JVM}!>1<!>
+                konst a: Int <!EXPECTED_DELEGATED_PROPERTY, EXPECTED_DELEGATED_PROPERTY{JVM}!>by lazy { 1 }<!>
             }
         }
     }
 
     inner class InnerClass {
         fun f(x: Int)
-        val p: String
+        konst p: String
     }
 
     companion object
@@ -47,16 +47,16 @@ actual class OuterClass {
         actual class DeepNested {
             actual class Another {
                 actual fun f(s: String) {}
-                actual val p: Int = 42
-                actual val c: Int = 2
-                actual val a: Int = 3
+                actual konst p: Int = 42
+                actual konst c: Int = 2
+                actual konst a: Int = 3
             }
         }
     }
 
     actual inner class InnerClass {
         actual fun f(x: Int) {}
-        actual val p: String = ""
+        actual konst p: String = ""
     }
 
     actual companion object

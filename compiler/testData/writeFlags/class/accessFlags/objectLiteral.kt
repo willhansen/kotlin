@@ -1,5 +1,5 @@
 class Foo {
-    val x = object { }
+    konst x = object { }
 }
 
 // TESTED_OBJECT_KIND: class

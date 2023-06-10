@@ -25,7 +25,7 @@ fun <F : FirClassLikeDeclaration> F.runAllPhasesForLocalClass(
         components.context.storeClassIfNotNested(this, components.session)
     }
     this.transformAnnotations(transformer, ResolutionMode.ContextIndependent)
-    val localClassesNavigationInfo = collectLocalClassesNavigationInfo()
+    konst localClassesNavigationInfo = collectLocalClassesNavigationInfo()
 
     for ((nested, outer) in localClassesNavigationInfo.parentForClass) {
         if (outer == null) continue

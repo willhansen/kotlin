@@ -33,7 +33,7 @@ public actual abstract class AbstractMutableCollection<E> protected actual const
      * @return `true` if the element has been successfully removed; `false` if it was not present in the collection.
      */
     actual override fun remove(element: E): Boolean {
-        val it = iterator()
+        konst it = iterator()
         while (it.hasNext()) {
             if (it.next() == element) {
                 it.remove()
@@ -61,7 +61,7 @@ public actual abstract class AbstractMutableCollection<E> protected actual const
      * Removes all elements from this collection.
      */
     actual override fun clear(): Unit {
-        val it = iterator()
+        konst it = iterator()
         while (it.hasNext()) {
             it.next()
             it.remove()

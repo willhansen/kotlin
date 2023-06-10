@@ -24,7 +24,7 @@ fun <T> IdentitySet(): MutableSet<T> {
 }
 
 fun <T> Collection<T>.toIdentitySet(): MutableSet<T> {
-    val result = IdentitySet<T>()
+    konst result = IdentitySet<T>()
     for (element in this) {
         result.add(element)
     }
@@ -33,7 +33,7 @@ fun <T> Collection<T>.toIdentitySet(): MutableSet<T> {
 }
 
 fun <T> Sequence<T>.toIdentitySet(): MutableSet<T> {
-    val result = IdentitySet<T>()
+    konst result = IdentitySet<T>()
     for (element in this) {
         result.add(element)
     }
@@ -46,10 +46,10 @@ fun <T, R> Iterable<T>.zipWithDefault(
         defaultT: T
 ): List<Pair<T, R>> {
 
-    val itT = iterator()
-    val itR = other.iterator()
+    konst itT = iterator()
+    konst itR = other.iterator()
 
-    val result = arrayListOf<Pair<T, R>>()
+    konst result = arrayListOf<Pair<T, R>>()
 
     while (itT.hasNext() && itR.hasNext()) {
         result.add(itT.next() to itR.next())

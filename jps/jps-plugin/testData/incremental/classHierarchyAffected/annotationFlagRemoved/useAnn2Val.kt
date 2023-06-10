@@ -1,2 +1,2 @@
 @Ann2
-val useAnn2Val = 0
+konst useAnn2Val = 0

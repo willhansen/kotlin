@@ -13,7 +13,7 @@ public class User {
 
 // FILE: test.kt
 fun test() {
-    val userBuilder: User.SpecialUserBuilder = User.builder()
+    konst userBuilder: User.SpecialUserBuilder = User.builder()
 }
 
 // FILE: lombok.config

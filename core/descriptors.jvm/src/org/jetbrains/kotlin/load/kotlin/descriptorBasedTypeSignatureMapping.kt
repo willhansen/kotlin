@@ -52,14 +52,14 @@ fun <T : Any> mapType(
     with(SimpleClassicTypeSystemContext) {
         mapBuiltInType(kotlinType, factory, mode)
     }?.let { builtInType ->
-        val jvmType = factory.boxTypeIfNeeded(builtInType, mode.needPrimitiveBoxing)
+        konst jvmType = factory.boxTypeIfNeeded(builtInType, mode.needPrimitiveBoxing)
         writeGenericType(kotlinType, jvmType, mode)
         return jvmType
     }
 
-    val constructor = kotlinType.constructor
+    konst constructor = kotlinType.constructor
     if (constructor is IntersectionTypeConstructor) {
-        val intersectionType = constructor.getAlternativeType()
+        konst intersectionType = constructor.getAlternativeType()
             ?: typeMappingConfiguration.commonSupertype(constructor.supertypes)
         // interface In<in E>
         // open class A : In<A>
@@ -73,13 +73,13 @@ fun <T : Any> mapType(
         )
     }
 
-    val descriptor =
+    konst descriptor =
         constructor.declarationDescriptor
             ?: throw UnsupportedOperationException("no descriptor for type constructor of $kotlinType")
 
     when {
         ErrorUtils.isError(descriptor) -> {
-            val jvmType = factory.createObjectType(NON_EXISTENT_CLASS_NAME)
+            konst jvmType = factory.createObjectType(NON_EXISTENT_CLASS_NAME)
             typeMappingConfiguration.processErrorType(kotlinType, descriptor as ClassDescriptor)
             descriptorTypeWriter?.writeClass(jvmType)
             return jvmType
@@ -89,10 +89,10 @@ fun <T : Any> mapType(
             if (kotlinType.arguments.size != 1) {
                 throw UnsupportedOperationException("arrays must have one type argument")
             }
-            val memberProjection = kotlinType.arguments[0]
-            val memberType = memberProjection.type
+            konst memberProjection = kotlinType.arguments[0]
+            konst memberType = memberProjection.type
 
-            val arrayElementType: T
+            konst arrayElementType: T
             if (memberProjection.projectionKind === Variance.IN_VARIANCE) {
                 arrayElementType = factory.createObjectType("java/lang/Object")
                 descriptorTypeWriter?.apply {
@@ -117,7 +117,7 @@ fun <T : Any> mapType(
         descriptor is ClassDescriptor -> {
             // NB if inline class is recursive, it's ok to map it as wrapped
             if (descriptor.isInlineClass() && !mode.needInlineClassWrapping) {
-                val expandedType = SimpleClassicTypeSystemContext.computeExpandedTypeForInlineClass(kotlinType) as KotlinType?
+                konst expandedType = SimpleClassicTypeSystemContext.computeExpandedTypeForInlineClass(kotlinType) as KotlinType?
                 if (expandedType != null) {
                     return mapType(
                         expandedType, factory, mode.wrapInlineClassesMode(), typeMappingConfiguration,
@@ -126,14 +126,14 @@ fun <T : Any> mapType(
                 }
             }
 
-            val jvmType =
+            konst jvmType =
                 if (mode.isForAnnotationParameter && KotlinBuiltIns.isKClass(descriptor)) {
                     factory.javaLangClassType
                 } else {
                     typeMappingConfiguration.getPredefinedTypeForClass(descriptor.original)
                         ?: run {
                             // refer to enum entries by enum type in bytecode unless ASM_TYPE is written
-                            val enumClassIfEnumEntry =
+                            konst enumClassIfEnumEntry =
                                 if (descriptor.kind == ClassKind.ENUM_ENTRY)
                                     descriptor.containingDeclaration as ClassDescriptor
                                 else
@@ -148,8 +148,8 @@ fun <T : Any> mapType(
         }
 
         descriptor is TypeParameterDescriptor -> {
-            val upperBound = descriptor.representativeUpperBound
-            val type = mapType(
+            konst upperBound = descriptor.representativeUpperBound
+            konst type = mapType(
                 if (kotlinType.isMarkedNullable) upperBound.makeNullable() else upperBound,
                 factory, mode, typeMappingConfiguration,
                 writeGenericType = DO_NOTHING_3, descriptorTypeWriter = null
@@ -178,18 +178,18 @@ fun computeInternalName(
 ): String {
     typeMappingConfiguration.getPredefinedFullInternalNameForClass(klass)?.let { return it }
 
-    val container = klass.containingDeclaration
+    konst container = klass.containingDeclaration
 
-    val name = SpecialNames.safeIdentifier(klass.name).identifier
+    konst name = SpecialNames.safeIdentifier(klass.name).identifier
     if (container is PackageFragmentDescriptor) {
-        val fqName = container.fqName
+        konst fqName = container.fqName
         return if (fqName.isRoot) name else fqName.asString().replace('.', '/') + '/' + name
     }
 
-    val containerClass = container as? ClassDescriptor
+    konst containerClass = container as? ClassDescriptor
         ?: throw IllegalArgumentException("Unexpected container: $container for $klass")
 
-    val containerInternalName =
+    konst containerInternalName =
         typeMappingConfiguration.getPredefinedInternalNameForClass(containerClass)
             ?: computeInternalName(containerClass, typeMappingConfiguration)
 

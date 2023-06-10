@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.fir.expressions.FirExpression
 import org.jetbrains.kotlin.name.Name
 
 abstract class AbstractCallInfo {
-    abstract val callSite: FirElement
-    abstract val name: Name
-    abstract val containingFile: FirFile
-    abstract val isImplicitInvoke: Boolean
-    abstract val explicitReceiver: FirExpression?
-    abstract val argumentList: FirArgumentList
+    abstract konst callSite: FirElement
+    abstract konst name: Name
+    abstract konst containingFile: FirFile
+    abstract konst isImplicitInvoke: Boolean
+    abstract konst explicitReceiver: FirExpression?
+    abstract konst argumentList: FirArgumentList
 }

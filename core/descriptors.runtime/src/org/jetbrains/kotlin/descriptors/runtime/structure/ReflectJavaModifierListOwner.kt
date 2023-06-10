@@ -23,18 +23,18 @@ import org.jetbrains.kotlin.load.java.structure.JavaModifierListOwner
 import java.lang.reflect.Modifier
 
 interface ReflectJavaModifierListOwner : JavaModifierListOwner {
-    val modifiers: Int
+    konst modifiers: Int
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = Modifier.isAbstract(modifiers)
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = Modifier.isStatic(modifiers)
 
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = Modifier.isFinal(modifiers)
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = modifiers.let { modifiers ->
             when {
                 Modifier.isPublic(modifiers) -> Visibilities.Public

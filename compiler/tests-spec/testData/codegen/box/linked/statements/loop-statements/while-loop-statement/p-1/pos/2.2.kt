@@ -7,7 +7,7 @@
  * MAIN LINK: statements, loop-statements, while-loop-statement -> paragraph 1 -> sentence 2
  * PRIMARY LINKS: statements, loop-statements, while-loop-statement -> paragraph 2 -> sentence 1
  * NUMBER: 2
- * DESCRIPTION: while-loop-statement evaluates the loop condition expression before evaluating the loop body.
+ * DESCRIPTION: while-loop-statement ekonstuates the loop condition expression before ekonstuating the loop body.
  */
 
 fun box(): String {

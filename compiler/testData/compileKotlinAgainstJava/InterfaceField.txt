@@ -8,5 +8,5 @@ public interface InterfaceField {
     public abstract fun func(): kotlin.String!
 
     // Static members
-    public const final val STRING: kotlin.String
+    public const final konst STRING: kotlin.String
 }

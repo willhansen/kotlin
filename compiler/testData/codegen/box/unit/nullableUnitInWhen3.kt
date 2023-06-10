@@ -1,7 +1,7 @@
 fun foo() {}
 
 fun box(): String {
-    val x = when ("A") {
+    konst x = when ("A") {
         "B" -> foo()
         else -> null
     }

@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.backend.common.serialization.encodings
 
 @JvmInline
-value class BinaryNameAndType(private val decoded: BinaryLattice) {
-    val nameIndex: Int get() = decoded.first
-    val typeIndex: Int get() = decoded.second
+konstue class BinaryNameAndType(private konst decoded: BinaryLattice) {
+    konst nameIndex: Int get() = decoded.first
+    konst typeIndex: Int get() = decoded.second
 
     companion object {
         fun encode(nameIndex: Int, typeIndex: Int): Long = BinaryLattice.encode(nameIndex, typeIndex)

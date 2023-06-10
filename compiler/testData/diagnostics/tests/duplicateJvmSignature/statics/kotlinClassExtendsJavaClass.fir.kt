@@ -11,7 +11,7 @@ public class A {
 // FILE: K.kt
 
 open class K : A() {
-    val a = 1
+    konst a = 1
     fun foo() {}
     fun foo(i: Int) {}
     fun baz(i: Int) {}

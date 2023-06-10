@@ -5,7 +5,7 @@ interface T {
 open class A : T {
     override var result: String
         get() = ""
-        set(value) {}
+        set(konstue) {}
 }
 
 class B : A(), T

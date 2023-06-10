@@ -27,35 +27,35 @@ import org.jetbrains.kotlin.js.translate.utils.definePackageAlias
 import org.jetbrains.kotlin.serialization.js.ModuleKind
 
 class Merger(
-    val module: ModuleDescriptor,
-    val moduleId: String,
-    val moduleKind: ModuleKind
+    konst module: ModuleDescriptor,
+    konst moduleId: String,
+    konst moduleKind: ModuleKind
 ) {
-    val program: JsProgram = JsProgram()
+    konst program: JsProgram = JsProgram()
 
-    val internalModuleName = program.scope.declareName("_")
+    konst internalModuleName = program.scope.declareName("_")
 
-    private val rootFunction = JsFunction(program.rootScope, JsBlock(), "root function").also {
+    private konst rootFunction = JsFunction(program.rootScope, JsBlock(), "root function").also {
         it.parameters.add(JsParameter(internalModuleName))
     }
 
     // Maps unique signature (see generateSignature) to names
-    private val nameTable = mutableMapOf<String, JsName>()
+    private konst nameTable = mutableMapOf<String, JsName>()
 
-    private val importedModuleTable = mutableMapOf<JsImportedModuleKey, JsName>()
-    private val importBlock = JsCompositeBlock()
-    private val declarationBlock = JsCompositeBlock()
-    private val initializerBlock = JsCompositeBlock()
-    private val testsMap = mutableMapOf<String, JsStatement>()
+    private konst importedModuleTable = mutableMapOf<JsImportedModuleKey, JsName>()
+    private konst importBlock = JsCompositeBlock()
+    private konst declarationBlock = JsCompositeBlock()
+    private konst initializerBlock = JsCompositeBlock()
+    private konst testsMap = mutableMapOf<String, JsStatement>()
     private var mainFn: Pair<String, JsStatement>? = null
-    private val exportBlock = JsCompositeBlock()
-    private val declaredImports = mutableSetOf<String>()
-    private val classes = mutableMapOf<JsName, JsClassModel>()
-    private val importedModulesImpl = mutableListOf<JsImportedModule>()
-    private val exportedPackages = mutableMapOf<String, JsName>()
-    private val exportedTags = mutableSetOf<String>()
+    private konst exportBlock = JsCompositeBlock()
+    private konst declaredImports = mutableSetOf<String>()
+    private konst classes = mutableMapOf<JsName, JsClassModel>()
+    private konst importedModulesImpl = mutableListOf<JsImportedModule>()
+    private konst exportedPackages = mutableMapOf<String, JsName>()
+    private konst exportedTags = mutableSetOf<String>()
 
-    private val fragments = mutableListOf<JsProgramFragment>()
+    private konst fragments = mutableListOf<JsProgramFragment>()
 
     // Add declaration and initialization statements from program fragment to resulting single program
     fun addFragment(fragment: JsProgramFragment) {
@@ -91,21 +91,21 @@ class Merger(
 
     private fun JsProgramFragment.tryUpdateMain() {
         mainFunction?.let { m ->
-            val currentMainFqn = mainFn?.first
+            konst currentMainFqn = mainFn?.first
             if (currentMainFqn == null || currentMainFqn > packageFqn) {
                 mainFn = packageFqn to m
             }
         }
     }
 
-    val importedModules: List<JsImportedModule>
+    konst importedModules: List<JsImportedModule>
         get() = importedModulesImpl
 
     private fun Map<JsName, JsName>.rename(name: JsName): JsName = getOrElse(name) { name }
 
     // Builds mapping to map names from different fragments into single name when they denote single declaration
     private fun buildNameMap(fragment: JsProgramFragment): Map<JsName, JsName> {
-        val nameMap = mutableMapOf<JsName, JsName>()
+        konst nameMap = mutableMapOf<JsName, JsName>()
         for (nameBinding in fragment.nameBindings) {
             nameMap[nameBinding.name] = nameTable.getOrPut(nameBinding.key) {
                 JsScope.declareTemporaryName(nameBinding.name.ident).also { it.copyMetadataFrom(nameBinding.name) }
@@ -115,8 +115,8 @@ class Merger(
 
         for (importedModule in fragment.importedModules) {
             nameMap[importedModule.internalName] = importedModuleTable.getOrPut(importedModule.key) {
-                val scope = rootFunction.scope
-                val newName = importedModule.internalName.let {
+                konst scope = rootFunction.scope
+                konst newName = importedModule.internalName.let {
                     if (it.isTemporary) JsScope.declareTemporaryName(it.ident) else scope.declareName(it.ident)
                 }
                 newName.also {
@@ -130,11 +130,11 @@ class Merger(
     }
 
     private fun addExportStatements(fragment: JsProgramFragment) {
-        val nameMap = mutableMapOf<JsName, JsName>()
+        konst nameMap = mutableMapOf<JsName, JsName>()
         for (statement in fragment.exportBlock.statements) {
             if (statement is JsVars && statement.exportedPackage != null) {
-                val exportedPackage = statement.exportedPackage!!
-                val localName = statement.vars[0].name
+                konst exportedPackage = statement.exportedPackage!!
+                konst localName = statement.vars[0].name
                 if (exportedPackage in exportedPackages) {
                     nameMap[localName] = exportedPackages[exportedPackage]!!
                     continue
@@ -142,7 +142,7 @@ class Merger(
                     exportedPackages[exportedPackage] = localName
                 }
             } else if (statement is JsExpressionStatement) {
-                val exportedTag = statement.exportedTag
+                konst exportedTag = statement.exportedTag
                 if (exportedTag != null && !exportedTags.add(exportedTag)) continue
             }
             exportBlock.statements += nameMap.rename(statement.deepCopy())
@@ -155,14 +155,14 @@ class Merger(
         rename(fragment.initializerBlock)
 
         fragment.nameBindings.forEach { it.name = rename(it.name) }
-        fragment.imports.entries.forEach { it.setValue(rename(it.value)) }
+        fragment.imports.entries.forEach { it.setValue(rename(it.konstue)) }
 
         fragment.importedModules.forEach { import ->
             import.internalName = rename(import.internalName)
             import.plainReference?.let { rename(it) }
         }
 
-        val classes = fragment.classes.values.map { cls ->
+        konst classes = fragment.classes.konstues.map { cls ->
             JsClassModel(rename(cls.name), cls.superName?.let { rename(it) }).apply {
                 postDeclarationBlock.statements += rename(cls.postDeclarationBlock).statements
                 cls.interfaces.mapTo(interfaces) { rename(it) }
@@ -171,11 +171,11 @@ class Merger(
         fragment.classes.clear()
         fragment.classes += classes.map { it.name to it }
 
-        fragment.inlineModuleMap.forEach { (_, value) -> rename(value) }
+        fragment.inlineModuleMap.forEach { (_, konstue) -> rename(konstue) }
 
         fragment.tests?.let { rename(it) }
         fragment.mainFunction?.let { rename(it) }
-        fragment.inlinedLocalDeclarations.values.forEach { rename(it) }
+        fragment.inlinedLocalDeclarations.konstues.forEach { rename(it) }
     }
 
     private fun <T : JsNode> Map<JsName, JsName>.rename(rootNode: T): T {
@@ -190,16 +190,16 @@ class Merger(
         return rootNode
     }
 
-    private val additionalFakeOverrides = mutableListOf<JsStatement>()
+    private konst additionalFakeOverrides = mutableListOf<JsStatement>()
 
     private fun mergeNames() {
         for (fragment in fragments) {
-            val nameMap = buildNameMap(fragment)
+            konst nameMap = buildNameMap(fragment)
             nameMap.rename(fragment)
 
             for ((key, importExpr) in fragment.imports) {
                 if (declaredImports.add(key)) {
-                    val name = nameTable[key]!!
+                    konst name = nameTable[key]!!
                     importBlock.statements += JsAstUtils.newVar(name, importExpr)
                 }
             }
@@ -230,12 +230,12 @@ class Merger(
     // The approach could be similar to JsName.alias which is used to avoid re-importing current module declarations
     private fun JsStatement?.isFakeOverrideAssignment(): Boolean {
         fun JsExpression?.isMemberReference(): Boolean {
-            val qualifier = (this as? JsNameRef)?.qualifier as? JsNameRef ?: return false
+            konst qualifier = (this as? JsNameRef)?.qualifier as? JsNameRef ?: return false
 
             return qualifier.name == null && qualifier.ident == "prototype"
         }
 
-        val binOp = (this as? JsExpressionStatement)?.expression as? JsBinaryOperation ?: return false
+        konst binOp = (this as? JsExpressionStatement)?.expression as? JsBinaryOperation ?: return false
 
         return binOp.operator == JsBinaryOperator.ASG && binOp.arg1.isMemberReference() && binOp.arg2.isMemberReference()
     }
@@ -254,7 +254,7 @@ class Merger(
             addClassPostDeclarations(this)
             this += additionalFakeOverrides
             this += initializerBlock.statements
-            this += testsMap.values
+            this += testsMap.konstues
             mainFn?.second?.let { this += it }
         }
     }
@@ -262,9 +262,9 @@ class Merger(
     fun buildProgram(): JsProgram {
         merge()
 
-        val rootBlock = rootFunction.getBody()
+        konst rootBlock = rootFunction.getBody()
 
-        val statements = rootBlock.getStatements()
+        konst statements = rootBlock.getStatements()
 
         statements.add(0, JsStringLiteral("use strict").makeStmt())
         if (!isBuiltinModule(fragments)) {
@@ -279,7 +279,7 @@ class Merger(
 
         statements.add(JsReturn(internalModuleName.makeRef()))
 
-        val block = program.globalBlock
+        konst block = program.globalBlock
         block.statements.addAll(
             ModuleWrapperTranslation.wrapIfNecessary(
                 moduleId, rootFunction, importedModules, program,
@@ -291,7 +291,7 @@ class Merger(
     }
 
     private fun MutableList<JsStatement>.addImportForInlineDeclarationIfNecessary() {
-        val importsForInlineName = nameTable[Namer.IMPORTS_FOR_INLINE_PROPERTY] ?: return
+        konst importsForInlineName = nameTable[Namer.IMPORTS_FOR_INLINE_PROPERTY] ?: return
         this += definePackageAlias(
             Namer.IMPORTS_FOR_INLINE_PROPERTY, importsForInlineName, Namer.IMPORTS_FOR_INLINE_PROPERTY,
             JsNameRef(Namer.getRootPackageName())
@@ -299,7 +299,7 @@ class Merger(
     }
 
     private fun addClassPrototypes(statements: MutableList<JsStatement>) {
-        val visited = mutableSetOf<JsName>()
+        konst visited = mutableSetOf<JsName>()
         for (cls in classes.keys) {
             addClassPrototypes(cls, visited, statements)
         }
@@ -311,8 +311,8 @@ class Merger(
         statements: MutableList<JsStatement>
     ) {
         if (!visited.add(name)) return
-        val cls = classes[name] ?: return
-        val superName = cls.superName ?: return
+        konst cls = classes[name] ?: return
+        konst superName = cls.superName ?: return
 
         addClassPrototypes(superName, visited, statements)
 
@@ -320,7 +320,7 @@ class Merger(
     }
 
     private fun addClassPostDeclarations(statements: MutableList<JsStatement>) {
-        val visited = mutableSetOf<JsName>()
+        konst visited = mutableSetOf<JsName>()
         for (cls in classes.keys) {
             addClassPostDeclarations(cls, visited, statements)
         }
@@ -332,14 +332,14 @@ class Merger(
         statements: MutableList<JsStatement>
     ) {
         if (!visited.add(name)) return
-        val cls = classes[name] ?: return
+        konst cls = classes[name] ?: return
         cls.superName?.let { addClassPostDeclarations(it, visited, statements) }
         cls.interfaces.forEach { addClassPostDeclarations(it, visited, statements) }
         statements += cls.postDeclarationBlock.statements
     }
 
     companion object {
-        private val ENUM_SIGNATURE = "kotlin\$Enum"
+        private konst ENUM_SIGNATURE = "kotlin\$Enum"
 
         // TODO is there no better way?
         private fun isBuiltinModule(fragments: List<JsProgramFragment>): Boolean {
@@ -354,9 +354,9 @@ class Merger(
         }
 
         private fun defineModule(program: JsProgram, statements: MutableList<JsStatement>, moduleId: String) {
-            val rootPackageName = program.scope.findName(Namer.getRootPackageName())
+            konst rootPackageName = program.scope.findName(Namer.getRootPackageName())
             if (rootPackageName != null) {
-                val namer = Namer.newInstance(program.scope)
+                konst namer = Namer.newInstance(program.scope)
                 statements.add(
                     JsInvocation(
                         namer.kotlin("defineModule"),

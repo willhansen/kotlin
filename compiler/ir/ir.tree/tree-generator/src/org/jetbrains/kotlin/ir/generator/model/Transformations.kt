@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.utils.addToStdlib.partitionIsInstance
 
 private object InferredOverriddenType : TypeRef
 
-data class Model(val elements: List<Element>, val rootElement: Element)
+data class Model(konst elements: List<Element>, konst rootElement: Element)
 
 fun config2model(config: Config): Model {
-    val ec2el = mutableMapOf<ElementConfig, Element>()
+    konst ec2el = mutableMapOf<ElementConfig, Element>()
 
-    val elements = config.elements.map { ec ->
-        val fields = ec.fields.mapTo(mutableListOf()) { fc ->
-            val field = when (fc) {
+    konst elements = config.elements.map { ec ->
+        konst fields = ec.fields.mapTo(mutableListOf()) { fc ->
+            konst field = when (fc) {
                 is SimpleFieldConfig -> SingleField(
                     fc,
                     fc.name,
@@ -33,7 +33,7 @@ fun config2model(config: Config): Model {
                     fc.baseGetter
                 )
                 is ListFieldConfig -> {
-                    val listType = when (fc.mutability) {
+                    konst listType = when (fc.mutability) {
                         ListFieldConfig.Mutability.List -> type(
                             "kotlin.collections",
                             "MutableList"
@@ -61,7 +61,7 @@ fun config2model(config: Config): Model {
             field
         }
 
-        val element = Element(
+        konst element = Element(
             ec,
             ec.name,
             ec.category.packageName,
@@ -72,7 +72,7 @@ fun config2model(config: Config): Model {
         element
     }
 
-    val rootElement = replaceElementRefs(config, ec2el)
+    konst rootElement = replaceElementRefs(config, ec2el)
     configureInterfacesAndAbstractClasses(elements)
     addAbstractElement(elements)
     markLeaves(elements)
@@ -85,7 +85,7 @@ fun config2model(config: Config): Model {
 
 @OptIn(UnsafeCastFunction::class)
 private fun replaceElementRefs(config: Config, mapping: Map<ElementConfig, Element>): Element {
-    val visited = mutableMapOf<TypeRef, TypeRef>()
+    konst visited = mutableMapOf<TypeRef, TypeRef>()
 
     fun transform(type: TypeRef): TypeRef {
         visited[type]?.let {
@@ -94,26 +94,26 @@ private fun replaceElementRefs(config: Config, mapping: Map<ElementConfig, Eleme
 
         return when (type) {
             is ElementConfigOrRef -> {
-                val args = type.args.mapValues { transform(it.value) }
-                val el = mapping.getValue(type.element)
+                konst args = type.args.mapValues { transform(it.konstue) }
+                konst el = mapping.getValue(type.element)
                 ElementRef(el, args, type.nullable)
             }
             is ClassRef<*> -> {
                 @Suppress("UNCHECKED_CAST") // this is the upper bound, compiler could know that, right?
                 type as ClassRef<TypeParameterRef>
 
-                val args = type.args.mapValues { transform(it.value) }
+                konst args = type.args.mapValues { transform(it.konstue) }
                 type.copy(args = args)
             }
             else -> type
         }.also { visited[type] = it }
     }
 
-    val rootEl = transform(config.rootElement) as ElementRef
+    konst rootEl = transform(config.rootElement) as ElementRef
 
     for (ec in config.elements) {
-        val el = mapping[ec.element]!!
-        val (elParents, otherParents) = ec.parents
+        konst el = mapping[ec.element]!!
+        konst (elParents, otherParents) = ec.parents
             .map { transform(it) }
             .partitionIsInstance<TypeRef, ElementRef>()
         el.elementParents = elParents.takeIf { it.isNotEmpty() || el == rootEl.element } ?: listOf(rootEl)
@@ -137,7 +137,7 @@ private fun replaceElementRefs(config: Config, mapping: Map<ElementConfig, Eleme
 }
 
 private fun markLeaves(elements: List<Element>) {
-    val leaves = elements.toMutableSet()
+    konst leaves = elements.toMutableSet()
 
     for (el in elements) {
         for (parent in el.elementParents) {
@@ -164,7 +164,7 @@ private fun addAbstractElement(elements: List<Element>) {
 private fun configureDescriptorApiAnnotation(elements: List<Element>) {
     for (el in elements) {
         for (field in el.fields) {
-            val type = field.type
+            konst type = field.type
             if (type is ClassRef<*> && type.packageName.startsWith("org.jetbrains.kotlin.descriptors") &&
                 type.simpleName.endsWith("Descriptor") && type.simpleName != "ModuleDescriptor"
             ) {
@@ -179,7 +179,7 @@ private fun processFieldOverrides(elements: List<Element>) {
         for (field in element.fields) {
             fun visitParents(visited: Element) {
                 for (parent in visited.elementParents) {
-                    val overriddenField = parent.element.fields.singleOrNull { it.name == field.name }
+                    konst overriddenField = parent.element.fields.singleOrNull { it.name == field.name }
                     if (overriddenField != null) {
                         field.isOverride = true
                         field.needsDescriptorApiAnnotation =
@@ -210,7 +210,7 @@ private fun processFieldOverrides(elements: List<Element>) {
 
 private fun addWalkableChildren(elements: List<Element>) {
     for (element in elements) {
-        val walkableChildren = mutableMapOf<String, Field>()
+        konst walkableChildren = mutableMapOf<String, Field>()
 
         fun visitParents(visited: Element) {
             for (parent in visited.elementParents) {
@@ -230,22 +230,22 @@ private fun addWalkableChildren(elements: List<Element>) {
 
         element.fields.filter { it.isChild }.associateByTo(walkableChildren) { it.name }
 
-        element.walkableChildren = reorderIfNecessary(walkableChildren.values.toList(), element.childrenOrderOverride)
+        element.walkableChildren = reorderIfNecessary(walkableChildren.konstues.toList(), element.childrenOrderOverride)
     }
 }
 
 private fun reorderIfNecessary(fields: List<Field>, order: List<String>?): List<Field> =
     if (order == null) fields else fields.sortedBy {
-        val position = order.indexOf(it.name)
+        konst position = order.indexOf(it.name)
         if (position < 0) order.size else position
     }
 
 private fun iterateElementsParentFirst(elements: List<Element>) = sequence {
-    val pending = elements.sortedBy { it.elementParents.size }.toMutableSet()
+    konst pending = elements.sortedBy { it.elementParents.size }.toMutableSet()
     pendingLoop@ while (pending.isNotEmpty()) {
-        val iter = pending.iterator()
+        konst iter = pending.iterator()
         while (iter.hasNext()) {
-            val element = iter.next()
+            konst element = iter.next()
             if (element.elementParents.none { it.element in pending }) {
                 yield(element)
                 iter.remove()

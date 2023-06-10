@@ -598,7 +598,7 @@ public abstract class MemberCodegen<T extends KtPureElement/* TODO: & KtDeclarat
 
         ConstantValue<?> initializerValue =
                 initializer != null ? ExpressionCodegen.getCompileTimeConstant(initializer, bindingContext, state.getShouldInlineConstVals()) : null;
-        // we must write constant values for fields in light classes,
+        // we must write constant konstues for fields in light classes,
         // because Java's completion for annotation arguments uses this information
         if (initializerValue == null) return state.getClassBuilderMode().generateBodies;
 
@@ -619,37 +619,37 @@ public abstract class MemberCodegen<T extends KtPureElement/* TODO: & KtDeclarat
         return descriptor.getType();
     }
 
-    private static boolean skipDefaultValue(@NotNull PropertyDescriptor propertyDescriptor, Object value, @NotNull Type type) {
+    private static boolean skipDefaultValue(@NotNull PropertyDescriptor propertyDescriptor, Object konstue, @NotNull Type type) {
         if (isPrimitive(type)) {
-            if (!propertyDescriptor.getType().isMarkedNullable() && value instanceof Number) {
-                if (type == Type.INT_TYPE && ((Number) value).intValue() == 0) {
+            if (!propertyDescriptor.getType().isMarkedNullable() && konstue instanceof Number) {
+                if (type == Type.INT_TYPE && ((Number) konstue).intValue() == 0) {
                     return true;
                 }
-                if (type == Type.BYTE_TYPE && ((Number) value).byteValue() == 0) {
+                if (type == Type.BYTE_TYPE && ((Number) konstue).byteValue() == 0) {
                     return true;
                 }
-                if (type == Type.LONG_TYPE && ((Number) value).longValue() == 0L) {
+                if (type == Type.LONG_TYPE && ((Number) konstue).longValue() == 0L) {
                     return true;
                 }
-                if (type == Type.SHORT_TYPE && ((Number) value).shortValue() == 0) {
+                if (type == Type.SHORT_TYPE && ((Number) konstue).shortValue() == 0) {
                     return true;
                 }
-                if (type == Type.DOUBLE_TYPE && value.equals(0.0)) {
+                if (type == Type.DOUBLE_TYPE && konstue.equals(0.0)) {
                     return true;
                 }
-                if (type == Type.FLOAT_TYPE && value.equals(0.0f)) {
+                if (type == Type.FLOAT_TYPE && konstue.equals(0.0f)) {
                     return true;
                 }
             }
-            if (type == Type.BOOLEAN_TYPE && value instanceof Boolean && !((Boolean) value)) {
+            if (type == Type.BOOLEAN_TYPE && konstue instanceof Boolean && !((Boolean) konstue)) {
                 return true;
             }
-            if (type == Type.CHAR_TYPE && value instanceof Character && ((Character) value) == 0) {
+            if (type == Type.CHAR_TYPE && konstue instanceof Character && ((Character) konstue) == 0) {
                 return true;
             }
         }
         else {
-            if (value == null) {
+            if (konstue == null) {
                 return true;
             }
         }

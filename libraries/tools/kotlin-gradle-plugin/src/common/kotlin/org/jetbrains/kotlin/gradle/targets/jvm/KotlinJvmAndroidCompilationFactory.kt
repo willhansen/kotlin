@@ -19,14 +19,14 @@ import org.jetbrains.kotlin.gradle.plugin.sources.android.AndroidVariantType
 import org.jetbrains.kotlin.gradle.plugin.sources.android.type
 
 class KotlinJvmAndroidCompilationFactory internal constructor(
-    override val target: KotlinAndroidTarget,
-    private val variant: BaseVariant,
+    override konst target: KotlinAndroidTarget,
+    private konst variant: BaseVariant,
 ) : KotlinCompilationFactory<KotlinJvmAndroidCompilation> {
 
-    override val itemClass: Class<KotlinJvmAndroidCompilation>
+    override konst itemClass: Class<KotlinJvmAndroidCompilation>
         get() = KotlinJvmAndroidCompilation::class.java
 
-    private val compilationImplFactory: KotlinCompilationImplFactory = KotlinCompilationImplFactory(
+    private konst compilationImplFactory: KotlinCompilationImplFactory = KotlinCompilationImplFactory(
         compilerOptionsFactory = KotlinJvmCompilerOptionsFactory,
         compilationFriendPathsResolver = DefaultKotlinCompilationFriendPathsResolver(
             friendArtifactResolver = DefaultKotlinCompilationFriendPathsResolver.FriendArtifactResolver.composite(

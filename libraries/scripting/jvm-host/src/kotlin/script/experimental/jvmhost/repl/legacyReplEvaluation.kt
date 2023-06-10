@@ -6,47 +6,47 @@
 package kotlin.script.experimental.jvmhost.repl
 
 import org.jetbrains.kotlin.cli.common.repl.*
-import org.jetbrains.kotlin.cli.common.repl.ReplEvaluator
+import org.jetbrains.kotlin.cli.common.repl.ReplEkonstuator
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.write
 import kotlin.reflect.KClass
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.impl.internalScriptingRunSuspend
-import kotlin.script.experimental.jvm.BasicJvmScriptEvaluator
+import kotlin.script.experimental.jvm.BasicJvmScriptEkonstuator
 import kotlin.script.experimental.jvm.baseClassLoader
 import kotlin.script.experimental.jvm.impl.KJvmCompiledScript
 import kotlin.script.experimental.jvm.jvm
 import kotlin.script.experimental.util.LinkedSnippetImpl
 
 /**
- * REPL Evaluation wrapper for "legacy" REPL APIs defined in the org.jetbrains.kotlin.cli.common.repl package
+ * REPL Ekonstuation wrapper for "legacy" REPL APIs defined in the org.jetbrains.kotlin.cli.common.repl package
  */
-class JvmReplEvaluator(
-    val baseScriptEvaluationConfiguration: ScriptEvaluationConfiguration,
-    val scriptEvaluator: ScriptEvaluator = BasicJvmScriptEvaluator()
-) : ReplEvaluator {
+class JvmReplEkonstuator(
+    konst baseScriptEkonstuationConfiguration: ScriptEkonstuationConfiguration,
+    konst scriptEkonstuator: ScriptEkonstuator = BasicJvmScriptEkonstuator()
+) : ReplEkonstuator {
 
     override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> =
-        JvmReplEvaluatorState(baseScriptEvaluationConfiguration, lock)
+        JvmReplEkonstuatorState(baseScriptEkonstuationConfiguration, lock)
 
-    override fun eval(
+    override fun ekonst(
         state: IReplStageState<*>,
         compileResult: ReplCompileResult.CompiledClasses,
         scriptArgs: ScriptArgsWithTypes?,
         invokeWrapper: InvokeWrapper?
-    ): ReplEvalResult = state.lock.write {
-        val evalState = state.asState(JvmReplEvaluatorState::class.java)
-        val history = evalState.history as ReplStageHistoryWithReplace
-        val compiledScriptList = (compileResult.data as? LinkedSnippetImpl<*>)
-            ?: return ReplEvalResult.Error.CompileTime("Unable to access compiled list script: ${compileResult.data}")
+    ): ReplEkonstResult = state.lock.write {
+        konst ekonstState = state.asState(JvmReplEkonstuatorState::class.java)
+        konst history = ekonstState.history as ReplStageHistoryWithReplace
+        konst compiledScriptList = (compileResult.data as? LinkedSnippetImpl<*>)
+            ?: return ReplEkonstResult.Error.CompileTime("Unable to access compiled list script: ${compileResult.data}")
 
-        val compiledScript = (compiledScriptList.get() as? KJvmCompiledScript)
-            ?: return ReplEvalResult.Error.CompileTime("Unable to access compiled script: ${compiledScriptList.get()}")
+        konst compiledScript = (compiledScriptList.get() as? KJvmCompiledScript)
+            ?: return ReplEkonstResult.Error.CompileTime("Unable to access compiled script: ${compiledScriptList.get()}")
 
 
-        val lastSnippetClass = history.peek()?.item?.first
-        val historyBeforeSnippet = history.previousItems(compileResult.lineId).map { it.second }.toList()
-        val currentConfiguration = ScriptEvaluationConfiguration(baseScriptEvaluationConfiguration) {
+        konst lastSnippetClass = history.peek()?.item?.first
+        konst historyBeforeSnippet = history.previousItems(compileResult.lineId).map { it.second }.toList()
+        konst currentConfiguration = ScriptEkonstuationConfiguration(baseScriptEkonstuationConfiguration) {
             previousSnippets.put(historyBeforeSnippet)
             if (lastSnippetClass != null) {
                 jvm {
@@ -59,31 +59,31 @@ class JvmReplEvaluator(
         }
 
         @Suppress("DEPRECATION_ERROR")
-        val res = internalScriptingRunSuspend { scriptEvaluator(compiledScript, currentConfiguration) }
+        konst res = internalScriptingRunSuspend { scriptEkonstuator(compiledScript, currentConfiguration) }
 
         when (res) {
             is ResultWithDiagnostics.Success -> {
-                when (val retVal = res.value.returnValue) {
+                when (konst retVal = res.konstue.returnValue) {
                     is ResultValue.Error -> {
                         history.replaceOrPush(compileResult.lineId, retVal.scriptClass to null)
-                        ReplEvalResult.Error.Runtime(
+                        ReplEkonstResult.Error.Runtime(
                             retVal.error.message ?: "unknown error",
                             (retVal.error as? Exception) ?: (retVal.wrappingException as? Exception)
                         )
                     }
                     is ResultValue.Value -> {
                         history.replaceOrPush(compileResult.lineId, retVal.scriptClass to retVal.scriptInstance)
-                        ReplEvalResult.ValueResult(retVal.name, retVal.value, retVal.type)
+                        ReplEkonstResult.ValueResult(retVal.name, retVal.konstue, retVal.type)
                     }
                     is ResultValue.Unit -> {
                         history.replaceOrPush(compileResult.lineId, retVal.scriptClass to retVal.scriptInstance)
-                        ReplEvalResult.UnitResult()
+                        ReplEkonstResult.UnitResult()
                     }
-                    else -> throw IllegalStateException("Unexpected snippet result value $retVal")
+                    else -> throw IllegalStateException("Unexpected snippet result konstue $retVal")
                 }
             }
             else ->
-                ReplEvalResult.Error.Runtime(
+                ReplEkonstResult.Error.Runtime(
                     res.reports.joinToString("\n") { it.message + (it.exception?.let { e -> ": $e" } ?: "") },
                     res.reports.find { it.exception != null }?.exception as? Exception
                 )
@@ -91,13 +91,13 @@ class JvmReplEvaluator(
     }
 }
 
-open class JvmReplEvaluatorState(
-    @Suppress("UNUSED_PARAMETER") scriptEvaluationConfiguration: ScriptEvaluationConfiguration,
-    override val lock: ReentrantReadWriteLock = ReentrantReadWriteLock()
+open class JvmReplEkonstuatorState(
+    @Suppress("UNUSED_PARAMETER") scriptEkonstuationConfiguration: ScriptEkonstuationConfiguration,
+    override konst lock: ReentrantReadWriteLock = ReentrantReadWriteLock()
 ) : IReplStageState<Pair<KClass<*>?, Any?>> {
-    override val history: IReplStageHistory<Pair<KClass<*>?, Any?>> = ReplStageHistoryWithReplace(lock)
+    override konst history: IReplStageHistory<Pair<KClass<*>?, Any?>> = ReplStageHistoryWithReplace(lock)
 
-    override val currentGeneration: Int get() = (history as BasicReplStageHistory<*>).currentGeneration.get()
+    override konst currentGeneration: Int get() = (history as BasicReplStageHistory<*>).currentGeneration.get()
 }
 
 open class ReplStageHistoryWithReplace<T>(lock: ReentrantReadWriteLock = ReentrantReadWriteLock()) : BasicReplStageHistory<T>(lock) {

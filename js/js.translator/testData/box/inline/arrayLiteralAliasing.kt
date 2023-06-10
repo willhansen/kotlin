@@ -34,12 +34,12 @@ inline fun Array<Int>.push(element: Int): Unit = asDynamic().push(element)
 
 inline fun Array<Int>.splice(index: Int, howMany: Int): Unit = asDynamic().splice(index, howMany)
 
-data class PairArray<T, R>(val fst: Array<T>, val snd: Array<R>)
+data class PairArray<T, R>(konst fst: Array<T>, konst snd: Array<R>)
 
 inline fun moveTo(source: Array<Int>, sink: Array<Int>): PairArray<Int, Int> {
-    val size = source.size
+    konst size = source.size
     for (i in 1..size) {
-        val element = source[0]
+        konst element = source[0]
         source.splice(0, 1)
         sink.push(element)
     }
@@ -50,7 +50,7 @@ inline fun moveTo(source: Array<Int>, sink: Array<Int>): PairArray<Int, Int> {
 // CHECK_BREAKS_COUNT: function=box count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=box name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun box(): String {
-    val expected = PairArray<Int, Int>(arrayOf(), arrayOf(1,2,3,4))
+    konst expected = PairArray<Int, Int>(arrayOf(), arrayOf(1,2,3,4))
     assertTrue(expected.deepEquals(moveTo(arrayOf(3, 4),  arrayOf(1, 2))))
 
     return "OK"

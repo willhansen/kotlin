@@ -18,6 +18,6 @@ fun bar(set : MutableSet<Int>) : Set<Int> =
 
 fun box() : String {
     if (foo() != 2) return "fail 1"
-    val s = bar(HashSet<Int>())
+    konst s = bar(HashSet<Int>())
     return if (s.contains(42)) "OK" else "fail 2"
 }

@@ -8,7 +8,7 @@
 package org.jetbrains.kotlin.gradle.idea.proto
 
 import com.google.protobuf.ByteString
-import com.google.protobuf.InvalidProtocolBufferException
+import com.google.protobuf.InkonstidProtocolBufferException
 import org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto
 import org.jetbrains.kotlin.gradle.idea.proto.generated.ideaExtrasProto
 import org.jetbrains.kotlin.gradle.idea.serialize.IdeaKotlinExtrasSerializer
@@ -21,10 +21,10 @@ fun Extras.toByteArray(context: IdeaKotlinSerializationContext): ByteArray {
 
 fun IdeaKotlinSerializationContext.Extras(data: ByteArray): MutableExtras? {
     return try {
-        val proto = IdeaExtrasProto.parseFrom(data)
+        konst proto = IdeaExtrasProto.parseFrom(data)
         Extras(proto)
 
-    } catch (e: InvalidProtocolBufferException) {
+    } catch (e: InkonstidProtocolBufferException) {
         logger.error("Failed to deserialize Extras", e)
         null
     }
@@ -32,29 +32,29 @@ fun IdeaKotlinSerializationContext.Extras(data: ByteArray): MutableExtras? {
 
 @Suppress("unchecked_cast")
 internal fun IdeaKotlinSerializationContext.IdeaExtrasProto(extras: Extras): IdeaExtrasProto {
-    val context = this
+    konst context = this
     return ideaExtrasProto {
-        extras.entries.forEach { (key, value) ->
-            val serializer = context.extrasSerializationExtension.serializer(key) ?: return@forEach
+        extras.entries.forEach { (key, konstue) ->
+            konst serializer = context.extrasSerializationExtension.serializer(key) ?: return@forEach
             serializer as IdeaKotlinExtrasSerializer<Any>
-            val serialized = runCatching { serializer.serialize(context, value) ?: return@forEach }.getOrElse { exception ->
+            konst serialized = runCatching { serializer.serialize(context, konstue) ?: return@forEach }.getOrElse { exception ->
                 logger.error("Failed to serialize $key, using ${serializer.javaClass.simpleName}", exception)
                 return@forEach
             }
 
-            values.put(key.stableString, ByteString.copyFrom(serialized))
+            konstues.put(key.stableString, ByteString.copyFrom(serialized))
         }
     }
 }
 
 @Suppress("unchecked_cast")
 internal fun IdeaKotlinSerializationContext.Extras(proto: IdeaExtrasProto): MutableExtras {
-    return proto.valuesMap.entries.mapNotNull { (keyString, value) ->
-        val key = Extras.Key.fromString(keyString) as Extras.Key<Any>
-        val serializer = extrasSerializationExtension.serializer(key) ?: return@mapNotNull null
+    return proto.konstuesMap.entries.mapNotNull { (keyString, konstue) ->
+        konst key = Extras.Key.fromString(keyString) as Extras.Key<Any>
+        konst serializer = extrasSerializationExtension.serializer(key) ?: return@mapNotNull null
 
-        val deserialized = runCatching {
-            serializer.deserialize(this, value.toByteArray()) ?: return@mapNotNull null
+        konst deserialized = runCatching {
+            serializer.deserialize(this, konstue.toByteArray()) ?: return@mapNotNull null
         }.getOrElse { exception ->
             logger.error("Failed to deserialize $keyString, using ${serializer.javaClass.simpleName}", exception)
             return@mapNotNull null

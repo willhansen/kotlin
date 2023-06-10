@@ -13,7 +13,7 @@ class ComboBox<T>: Component() {
 }
 
 fun box(): String {
-    val comboBox = ComboBox<Int>()
+    konst comboBox = ComboBox<Int>()
     comboBox.preferredSize = Any()
     return comboBox.preferredSize as String
 }

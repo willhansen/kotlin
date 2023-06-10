@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.io.File
 import java.io.Serializable
 
-val KotlinJsCompilation.npmProject: NpmProject
+konst KotlinJsCompilation.npmProject: NpmProject
     get() = NpmProject(this)
 
 /**
@@ -28,56 +28,56 @@ val KotlinJsCompilation.npmProject: NpmProject
  *
  * More info can be obtained from [KotlinCompilationNpmResolution], which is available after project resolution (after [KotlinNpmInstallTask] execution).
  */
-open class NpmProject(@Transient val compilation: KotlinJsCompilation) : Serializable {
-    val compilationName = compilation.disambiguatedName
+open class NpmProject(@Transient konst compilation: KotlinJsCompilation) : Serializable {
+    konst compilationName = compilation.disambiguatedName
 
-    private val extension = if (compilation.platformType == KotlinPlatformType.wasm) ".mjs" else ".js"
+    private konst extension = if (compilation.platformType == KotlinPlatformType.wasm) ".mjs" else ".js"
 
-    val name: String by lazy {
+    konst name: String by lazy {
         buildNpmProjectName()
     }
 
     @Transient
-    val nodeJs = project.rootProject.kotlinNodeJsExtension
+    konst nodeJs = project.rootProject.kotlinNodeJsExtension
 
-    val dir: File by lazy {
+    konst dir: File by lazy {
         nodeJs.projectPackagesDir.resolve(name)
     }
 
-    val target: KotlinJsTargetDsl
+    konst target: KotlinJsTargetDsl
         get() = compilation.target as KotlinJsTargetDsl
 
-    val project: Project
+    konst project: Project
         get() = target.project
 
-    val nodeModulesDir
+    konst nodeModulesDir
         get() = dir.resolve(NODE_MODULES)
 
-    val packageJsonFile: File
+    konst packageJsonFile: File
         get() = dir.resolve(PACKAGE_JSON)
 
-    val packageJsonTaskName: String
+    konst packageJsonTaskName: String
         get() = compilation.disambiguateName("packageJson")
 
-    val packageJsonTask: KotlinPackageJsonTask
+    konst packageJsonTask: KotlinPackageJsonTask
         get() = project.tasks.getByName(packageJsonTaskName) as KotlinPackageJsonTask
 
-    val packageJsonTaskPath by lazy {
+    konst packageJsonTaskPath by lazy {
         packageJsonTask.path
     }
 
-    val dist: File
+    konst dist: File
         get() = dir.resolve(DIST_FOLDER)
 
-    val main: String
+    konst main: String
         get() = "$DIST_FOLDER${File.separator}$name$extension"
 
-    val publicPackageJsonTaskName: String
+    konst publicPackageJsonTaskName: String
         get() = compilation.disambiguateName(PublicPackageJsonTask.NAME)
 
-    internal val modules = NpmProjectModules(dir)
+    internal konst modules = NpmProjectModules(dir)
 
-    private val nodeExecutable by lazy {
+    private konst nodeExecutable by lazy {
         nodeJs.requireConfigured().nodeExecutable
     }
 
@@ -111,11 +111,11 @@ open class NpmProject(@Transient val compilation: KotlinJsCompilation) : Seriali
             return it
         }
 
-        val project = target.project
+        konst project = target.project
 
-        val moduleName = target.moduleName
+        konst moduleName = target.moduleName
 
-        val compilationName = if (compilation.name != KotlinCompilation.MAIN_COMPILATION_NAME) {
+        konst compilationName = if (compilation.name != KotlinCompilation.MAIN_COMPILATION_NAME) {
             compilation.name
         } else null
 
@@ -125,13 +125,13 @@ open class NpmProject(@Transient val compilation: KotlinJsCompilation) : Seriali
                 .joinToString("-")
         }
 
-        val rootProjectName = project.rootProject.name
+        konst rootProjectName = project.rootProject.name
 
-        val localName = if (project != project.rootProject) {
+        konst localName = if (project != project.rootProject) {
             (rootProjectName + project.path).replace(":", "-")
         } else rootProjectName
 
-        val targetName = if (target.name.isNotEmpty() && target.name.toLowerCaseAsciiOnly() != "js") {
+        konst targetName = if (target.name.isNotEmpty() && target.name.toLowerCaseAsciiOnly() != "js") {
             target.name
                 .replace(DECAMELIZE_REGEX) {
                     it.groupValues
@@ -153,10 +153,10 @@ open class NpmProject(@Transient val compilation: KotlinJsCompilation) : Seriali
     override fun toString() = "NpmProject($name)"
 
     companion object {
-        const val PACKAGE_JSON = "package.json"
-        const val NODE_MODULES = "node_modules"
-        const val DIST_FOLDER = "kotlin"
+        const konst PACKAGE_JSON = "package.json"
+        const konst NODE_MODULES = "node_modules"
+        const konst DIST_FOLDER = "kotlin"
 
-        private val DECAMELIZE_REGEX = "([A-Z])".toRegex()
+        private konst DECAMELIZE_REGEX = "([A-Z])".toRegex()
     }
 }

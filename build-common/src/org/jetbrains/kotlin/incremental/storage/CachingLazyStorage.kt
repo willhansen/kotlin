@@ -31,9 +31,9 @@ import java.io.IOException
  * It's lazy in a sense that PersistentHashMap is created only on write
  */
 class CachingLazyStorage<K, V>(
-    private val storageFile: File,
-    private val keyDescriptor: KeyDescriptor<K>,
-    private val valueExternalizer: DataExternalizer<V>
+    private konst storageFile: File,
+    private konst keyDescriptor: KeyDescriptor<K>,
+    private konst konstueExternalizer: DataExternalizer<V>
 ) : AppendableLazyStorage<K, V> {
     private var storage: PersistentHashMap<K, V>? = null
     private var isStorageFileExist = true
@@ -59,7 +59,7 @@ class CachingLazyStorage<K, V>(
         return storage!!
     }
 
-    override val keys: Collection<K>
+    override konst keys: Collection<K>
         @Synchronized
         get() = buildList {
             getStorageIfExists()?.processKeysWithExistingMapping(CommonProcessors.CollectProcessor(this))
@@ -74,8 +74,8 @@ class CachingLazyStorage<K, V>(
         getStorageIfExists()?.get(key)
 
     @Synchronized
-    override operator fun set(key: K, value: V) {
-        getStorageOrCreateNew().put(key, value)
+    override operator fun set(key: K, konstue: V) {
+        getStorageOrCreateNew().put(key, konstue)
     }
 
     @Synchronized
@@ -84,11 +84,11 @@ class CachingLazyStorage<K, V>(
     }
 
     @Synchronized
-    override fun append(key: K, value: V) {
-        check(valueExternalizer is AppendableDataExternalizer<*>) {
-            "`valueExternalizer` should implement the `AppendableDataExternalizer` interface to be able to call `append`"
+    override fun append(key: K, konstue: V) {
+        check(konstueExternalizer is AppendableDataExternalizer<*>) {
+            "`konstueExternalizer` should implement the `AppendableDataExternalizer` interface to be able to call `append`"
         }
-        getStorageOrCreateNew().appendData(key, AppendablePersistentMap.ValueDataAppender { valueExternalizer.save(it, value) })
+        getStorageOrCreateNew().appendData(key, AppendablePersistentMap.ValueDataAppender { konstueExternalizer.save(it, konstue) })
     }
 
     @Synchronized
@@ -105,7 +105,7 @@ class CachingLazyStorage<K, V>(
 
     @Synchronized
     override fun flush(memoryCachesOnly: Boolean) {
-        val existingStorage = storage ?: return
+        konst existingStorage = storage ?: return
 
         if (memoryCachesOnly) {
             if (existingStorage.isDirty) {
@@ -125,17 +125,17 @@ class CachingLazyStorage<K, V>(
         }
     }
 
-    private fun createMap(): PersistentHashMap<K, V> = PersistentHashMap(storageFile, keyDescriptor, valueExternalizer)
+    private fun createMap(): PersistentHashMap<K, V> = PersistentHashMap(storageFile, keyDescriptor, konstueExternalizer)
 }
 
 private fun <K, V> createLazyStorageImpl(
     storageFile: File,
     keyDescriptor: KeyDescriptor<K>,
-    valueExternalizer: DataExternalizer<V>,
+    konstueExternalizer: DataExternalizer<V>,
     icContext: IncrementalCompilationContext,
-) = CachingLazyStorage(storageFile, keyDescriptor, valueExternalizer).let {
+) = CachingLazyStorage(storageFile, keyDescriptor, konstueExternalizer).let {
     if (icContext.keepIncrementalCompilationCachesInMemory) {
-        DefaultInMemoryStorageWrapper(it, valueExternalizer).also { wrapper ->
+        DefaultInMemoryStorageWrapper(it, konstueExternalizer).also { wrapper ->
             icContext.transaction.registerInMemoryStorageWrapper(wrapper)
         }
     } else {
@@ -146,13 +146,13 @@ private fun <K, V> createLazyStorageImpl(
 fun <K, V> createLazyStorage(
     storageFile: File,
     keyDescriptor: KeyDescriptor<K>,
-    valueExternalizer: DataExternalizer<V>,
+    konstueExternalizer: DataExternalizer<V>,
     icContext: IncrementalCompilationContext,
-): LazyStorage<K, V> = createLazyStorageImpl(storageFile, keyDescriptor, valueExternalizer, icContext)
+): LazyStorage<K, V> = createLazyStorageImpl(storageFile, keyDescriptor, konstueExternalizer, icContext)
 
 fun <K, V> createLazyStorage(
     storageFile: File,
     keyDescriptor: KeyDescriptor<K>,
-    valueExternalizer: AppendableDataExternalizer<V>,
+    konstueExternalizer: AppendableDataExternalizer<V>,
     icContext: IncrementalCompilationContext,
-): AppendableLazyStorage<K, V> = createLazyStorageImpl(storageFile, keyDescriptor, valueExternalizer, icContext)
+): AppendableLazyStorage<K, V> = createLazyStorageImpl(storageFile, keyDescriptor, konstueExternalizer, icContext)

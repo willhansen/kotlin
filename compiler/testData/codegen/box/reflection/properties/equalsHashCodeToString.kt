@@ -23,7 +23,7 @@ package test
 import kotlin.test.*
 
 fun box(): String {
-    assertEquals("val test.J.b: kotlin.Boolean", (J::b).toString())
+    assertEquals("konst test.J.b: kotlin.Boolean", (J::b).toString())
     assertEquals("var test.J.c: kotlin.Char", (J::c).toString())
 
     assertTrue(J::b == J::b)

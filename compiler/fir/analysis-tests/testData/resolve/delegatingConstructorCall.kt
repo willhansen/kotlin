@@ -1,9 +1,9 @@
 fun <K> materialize(): K = null!!
 
-open class A1(val x: String)
+open class A1(konst x: String)
 class B1 : A1(materialize())
 
-open class A2(val x: Int)
+open class A2(konst x: Int)
 class B2 : A2(1 + 1)
 
 open class A3(x: String, y: String = "") {
@@ -15,7 +15,7 @@ class B3_2 : A3("", "asas")
 class B3_3 : A3("", true)
 class B3_4 : <!NONE_APPLICABLE!>A3<!>("", Unit)
 
-open class A4(val x: Byte)
+open class A4(konst x: Byte)
 class B4 : A4( <!ARGUMENT_TYPE_MISMATCH!>1 + 1<!>)
 
 open class A5 {

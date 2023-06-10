@@ -2,7 +2,7 @@ package test;
 
 public class ClassObjectArrayInParam {
     public @interface Anno {
-        Class<?>[] value();
+        Class<?>[] konstue();
     }
 
     @Anno({

@@ -7,7 +7,7 @@
 
 }
 
-val<!SYNTAX!><!> : Int = 1
+konst<!SYNTAX!><!> : Int = 1
 
 class<!SYNTAX!><!> {
 
@@ -34,7 +34,7 @@ class Outer {
 
     }
 
-    val<!SYNTAX!><!> : Int = 1
+    konst<!SYNTAX!><!> : Int = 1
 
     class<!SYNTAX!><!> {
 

@@ -9,16 +9,16 @@ interface KotlinJsDceCompilerToolOptions : org.jetbrains.kotlin.gradle.dsl.Kotli
 
     /**
      * Development mode: don't strip out any code, just copy dependencies
-     * Default value: false
+     * Default konstue: false
      */
     @get:org.gradle.api.tasks.Input
-    val devMode: org.gradle.api.provider.Property<kotlin.Boolean>
+    konst devMode: org.gradle.api.provider.Property<kotlin.Boolean>
 
     /**
      * Output directory
-     * Default value: null
+     * Default konstue: null
      */
     @Deprecated(message = "Use task 'destinationDirectory' to configure output directory", level = DeprecationLevel.WARNING)
     @get:org.gradle.api.tasks.Internal
-    val outputDirectory: org.gradle.api.provider.Property<kotlin.String>
+    konst outputDirectory: org.gradle.api.provider.Property<kotlin.String>
 }

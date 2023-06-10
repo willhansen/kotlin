@@ -2,13 +2,13 @@
 
 // WITH_STDLIB
 
-@JvmField public val publicField = "1";
-@JvmField internal val internalField = "23";
+@JvmField public konst publicField = "1";
+@JvmField internal konst internalField = "23";
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 fun test(): String {
-    return eval {
+    return ekonst {
         publicField + internalField
     }
 }

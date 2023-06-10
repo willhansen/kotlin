@@ -11,7 +11,7 @@ open class BaseImpl : Base_ShouldBeOpen() {
 
 class BaseImpl2_ShouldBeOpen : BaseImpl() {
     fun baseImpl2Method_ShouldBeOpen() {}
-    val baseImpl2Property_ShouldBeOpen = ""
+    konst baseImpl2Property_ShouldBeOpen = ""
 }
 
 @AllOpen

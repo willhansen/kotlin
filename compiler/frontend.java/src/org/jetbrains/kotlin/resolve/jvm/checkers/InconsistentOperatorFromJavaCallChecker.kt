@@ -26,16 +26,16 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
  * leading to an unexpected result. See KT-18053
  */
 object InconsistentOperatorFromJavaCallChecker : CallChecker {
-    private val CONCURRENT_HASH_MAP_FQ_NAME = FqName("java.util.concurrent.ConcurrentHashMap")
+    private konst CONCURRENT_HASH_MAP_FQ_NAME = FqName("java.util.concurrent.ConcurrentHashMap")
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val candidateDescriptor = resolvedCall.candidateDescriptor
+        konst candidateDescriptor = resolvedCall.candidateDescriptor
         if (candidateDescriptor.name != OperatorNameConventions.CONTAINS) return
-        if (candidateDescriptor.valueParameters.singleOrNull()?.type?.isAnyOrNullableAny() != true) return
+        if (candidateDescriptor.konstueParameters.singleOrNull()?.type?.isAnyOrNullableAny() != true) return
         if (resolvedCall.call.callElement !is KtBinaryExpression || !resolvedCall.status.possibleTransformToSuccess()) return
 
         for (callableDescriptor in candidateDescriptor.overriddenTreeUniqueAsSequence(useOriginal = false)) {
-            val containingClass = callableDescriptor.containingDeclaration as? ClassDescriptor ?: continue
+            konst containingClass = callableDescriptor.containingDeclaration as? ClassDescriptor ?: continue
             if (containingClass.fqNameOrNull() != CONCURRENT_HASH_MAP_FQ_NAME) continue
 
             context.trace.report(ErrorsJvm.CONCURRENT_HASH_MAP_CONTAINS_OPERATOR.on(context.languageVersionSettings, reportOn))

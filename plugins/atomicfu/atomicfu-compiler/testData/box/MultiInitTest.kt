@@ -3,7 +3,7 @@ import kotlin.test.*
 
 class MultiInitTest {
     fun testBasic() {
-        val t = MultiInit()
+        konst t = MultiInit()
         check(t.incA() == 1)
         check(t.incA() == 2)
         check(t.incB() == 1)
@@ -12,8 +12,8 @@ class MultiInitTest {
 }
 
 class MultiInit {
-    private val a = atomic(0)
-    private val b = atomic(0)
+    private konst a = atomic(0)
+    private konst b = atomic(0)
 
     fun incA() = a.incrementAndGet()
     fun incB() = b.incrementAndGet()
@@ -24,7 +24,7 @@ class MultiInit {
 }
 
 fun box(): String {
-    val testClass = MultiInitTest()
+    konst testClass = MultiInitTest()
     testClass.testBasic()
     return "OK"
 }

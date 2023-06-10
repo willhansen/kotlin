@@ -1,6 +1,6 @@
 FILE: callsInPlace.kt
     public final fun test(): R|kotlin/Unit| {
-        lval x: R|kotlin/Int|
+        lkonst x: R|kotlin/Int|
         R|kotlin/run|<R|kotlin/Unit|>(<L> = run@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
             R|<local>/x| = Int(1)
         }

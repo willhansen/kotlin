@@ -2,9 +2,9 @@
 package foo
 
 fun box(): String {
-    val a = arrayOf(1, 2, 3)
-    val b = arrayOf(1, 2, 3)
-    val c = a
+    konst a = arrayOf(1, 2, 3)
+    konst b = arrayOf(1, 2, 3)
+    konst c = a
 
     if (a == b) return "fail1"
     if (a != c) return "fail2"

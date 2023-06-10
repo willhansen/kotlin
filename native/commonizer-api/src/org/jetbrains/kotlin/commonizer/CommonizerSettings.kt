@@ -11,21 +11,21 @@ import org.jetbrains.kotlin.commonizer.cli.PLATFORM_INTEGER_COMMONIZATION_ENABLE
 public interface CommonizerSettings {
 
     public sealed class Key<T : Any> {
-        public abstract val defaultValue: T
-        public abstract val alias: String
+        public abstract konst defaultValue: T
+        public abstract konst alias: String
     }
 
     public fun <T : Any> getSetting(key: Key<T>): T
 }
 
 public object OptimisticNumberCommonizationEnabledKey : CommonizerSettings.Key<Boolean>() {
-    override val defaultValue: Boolean = true
-    override val alias: String
+    override konst defaultValue: Boolean = true
+    override konst alias: String
         get() = OPTIMISTIC_NUMBER_COMMONIZATION_ENABLED_ALIAS
 }
 
 public object PlatformIntegerCommonizationEnabledKey : CommonizerSettings.Key<Boolean>() {
-    override val defaultValue: Boolean = false
-    override val alias: String
+    override konst defaultValue: Boolean = false
+    override konst alias: String
         get() = PLATFORM_INTEGER_COMMONIZATION_ENABLED_ALIAS
 }

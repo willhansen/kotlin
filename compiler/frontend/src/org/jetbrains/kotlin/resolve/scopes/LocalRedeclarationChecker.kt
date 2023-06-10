@@ -29,22 +29,22 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.OverloadChecker
 
 
-abstract class AbstractLocalRedeclarationChecker(val overloadChecker: OverloadChecker) : LocalRedeclarationChecker {
+abstract class AbstractLocalRedeclarationChecker(konst overloadChecker: OverloadChecker) : LocalRedeclarationChecker {
     override fun checkBeforeAddingToScope(scope: LexicalScope, newDescriptor: DeclarationDescriptor) {
-        val name = newDescriptor.name
-        val location = NoLookupLocation.WHEN_CHECK_DECLARATION_CONFLICTS
+        konst name = newDescriptor.name
+        konst location = NoLookupLocation.WHEN_CHECK_DECLARATION_CONFLICTS
         when (newDescriptor) {
             is ClassifierDescriptor, is VariableDescriptor -> {
-                val otherDescriptor = scope.getContributedClassifier(name, location)
+                konst otherDescriptor = scope.getContributedClassifier(name, location)
                         ?: scope.getContributedVariables(name, location).firstOrNull()
                 if (otherDescriptor != null) {
                     handleRedeclaration(otherDescriptor, newDescriptor)
                 }
             }
             is FunctionDescriptor -> {
-                val otherFunctions = scope.getContributedFunctions(name, location)
-                val otherClass = scope.getContributedClassifier(name, location)
-                val potentiallyConflictingOverloads =
+                konst otherFunctions = scope.getContributedFunctions(name, location)
+                konst otherClass = scope.getContributedClassifier(name, location)
+                konst potentiallyConflictingOverloads =
                     if (otherClass is ClassDescriptor)
                         otherFunctions + otherClass.constructors
                     else
@@ -87,7 +87,7 @@ class ThrowingLocalRedeclarationChecker(overloadChecker: OverloadChecker) : Abst
     }
 }
 
-class TraceBasedLocalRedeclarationChecker(val trace: BindingTrace, overloadChecker: OverloadChecker) :
+class TraceBasedLocalRedeclarationChecker(konst trace: BindingTrace, overloadChecker: OverloadChecker) :
     AbstractLocalRedeclarationChecker(overloadChecker) {
     override fun handleRedeclaration(first: DeclarationDescriptor, second: DeclarationDescriptor) {
         reportOnDeclarationOrFail(trace, first) { Errors.REDECLARATION.on(it, listOf(first, second)) }

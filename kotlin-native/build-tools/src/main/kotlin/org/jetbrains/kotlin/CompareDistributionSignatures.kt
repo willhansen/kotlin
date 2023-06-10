@@ -12,14 +12,14 @@ import java.nio.file.Paths
 
 /**
  * Compares SignatureIds of the current distribution and the given older one.
- * Can be used to validate that there are no unexpected breaking ABI changes.
+ * Can be used to konstidate that there are no unexpected breaking ABI changes.
  */
 open class CompareDistributionSignatures : DefaultTask() {
 
     @Input
     lateinit var oldDistribution: String
 
-    private val newDistribution: String =
+    private konst newDistribution: String =
             project.kotlinNativeDist.absolutePath
 
     enum class OnMismatchMode {
@@ -33,13 +33,13 @@ open class CompareDistributionSignatures : DefaultTask() {
     sealed class Libraries {
         object Standard : Libraries()
 
-        class Platform(val target: String) : Libraries()
+        class Platform(konst target: String) : Libraries()
     }
 
     @Input
     lateinit var libraries: Libraries
 
-    private fun computeDiff(): KlibDiff = when (val libraries = libraries) {
+    private fun computeDiff(): KlibDiff = when (konst libraries = libraries) {
         Libraries.Standard -> KlibDiff(
                 emptyList(),
                 emptyList(),
@@ -47,10 +47,10 @@ open class CompareDistributionSignatures : DefaultTask() {
         )
 
         is Libraries.Platform -> {
-            val oldPlatformLibs = oldDistribution.platformLibs(libraries.target)
-            val oldPlatformLibsNames = oldPlatformLibs.list().toSet()
-            val newPlatformLibs = newDistribution.platformLibs(libraries.target)
-            val newPlatformLibsNames = newPlatformLibs.list().toSet()
+            konst oldPlatformLibs = oldDistribution.platformLibs(libraries.target)
+            konst oldPlatformLibsNames = oldPlatformLibs.list().toSet()
+            konst newPlatformLibs = newDistribution.platformLibs(libraries.target)
+            konst newPlatformLibsNames = newPlatformLibs.list().toSet()
             KlibDiff(
                     (newPlatformLibsNames - oldPlatformLibsNames).map(newPlatformLibs::resolve),
                     (oldPlatformLibsNames - newPlatformLibsNames).map(oldPlatformLibs::resolve),
@@ -69,37 +69,37 @@ open class CompareDistributionSignatures : DefaultTask() {
             Make sure to provide an absolute path to it.
             """.trimIndent()
         }
-        val platformLibsDiff = computeDiff()
+        konst platformLibsDiff = computeDiff()
         report("libraries diff")
-        val librariesMismatch = platformLibsDiff.missingLibs.isNotEmpty() || platformLibsDiff.newLibs.isNotEmpty()
+        konst librariesMismatch = platformLibsDiff.missingLibs.isNotEmpty() || platformLibsDiff.newLibs.isNotEmpty()
         platformLibsDiff.missingLibs.forEach { report("-: $it") }
         platformLibsDiff.newLibs.forEach { report("+: $it") }
-        val signaturesMismatch = cumulativeSignaturesComparison(platformLibsDiff)
+        konst signaturesMismatch = cumulativeSignaturesComparison(platformLibsDiff)
         if ((librariesMismatch || signaturesMismatch) && onMismatchMode == OnMismatchMode.FAIL) {
             error("Mismatch found, see stdout for details.")
         }
     }
 
     private data class Mark(var presentInOld: Boolean = false, var presentInNew: Boolean = false) {
-        val newOnly: Boolean
+        konst newOnly: Boolean
             get() = presentInNew && !presentInOld
 
-        val oldOnly: Boolean
+        konst oldOnly: Boolean
             get() = presentInOld && !presentInNew
     }
 
     private fun cumulativeSignaturesComparison(klibDiff: KlibDiff): Boolean {
         report("signatures diff")
-        // Boolean value signifies if value is present in new platform libraries.
-        val signaturesMap = mutableMapOf<String, Mark>()
-        val oldLibs = klibDiff.missingLibs + klibDiff.remainingLibs.map { it.old }
+        // Boolean konstue signifies if konstue is present in new platform libraries.
+        konst signaturesMap = mutableMapOf<String, Mark>()
+        konst oldLibs = klibDiff.missingLibs + klibDiff.remainingLibs.map { it.old }
         oldLibs.flatMap { getKlibSignatures(it) }.forEach { sig ->
             signaturesMap.getOrPut(sig, ::Mark).presentInOld = true
         }
-        val duplicates = mutableListOf<String>()
-        val newLibs = klibDiff.newLibs + klibDiff.remainingLibs.map { it.new }
+        konst duplicates = mutableListOf<String>()
+        konst newLibs = klibDiff.newLibs + klibDiff.remainingLibs.map { it.new }
         newLibs.flatMap { getKlibSignatures(it) }.forEach { sig ->
-            val mark = signaturesMap.getOrPut(sig, ::Mark)
+            konst mark = signaturesMap.getOrPut(sig, ::Mark)
             if (mark.presentInNew) {
                 duplicates += sig
             } else {
@@ -107,10 +107,10 @@ open class CompareDistributionSignatures : DefaultTask() {
             }
         }
         duplicates.forEach { report("dup: $it") }
-        val oldSigs = signaturesMap.filterValues { it.oldOnly }.keys
+        konst oldSigs = signaturesMap.filterValues { it.oldOnly }.keys
                 .sorted()
                 .onEach { report("-: $it") }
-        val newSigs = signaturesMap.filterValues { it.newOnly }.keys
+        konst newSigs = signaturesMap.filterValues { it.newOnly }.keys
                 .sorted()
                 .onEach { report("+: $it") }
         return oldSigs.isNotEmpty() || newSigs.isNotEmpty()
@@ -120,12 +120,12 @@ open class CompareDistributionSignatures : DefaultTask() {
         println(message)
     }
 
-    private data class RemainingLibrary(val new: File, val old: File)
+    private data class RemainingLibrary(konst new: File, konst old: File)
 
     private class KlibDiff(
-            val newLibs: Collection<File>,
-            val missingLibs: Collection<File>,
-            val remainingLibs: Collection<RemainingLibrary>
+            konst newLibs: Collection<File>,
+            konst missingLibs: Collection<File>,
+            konst remainingLibs: Collection<RemainingLibrary>
     )
 
     private fun String.stdlib(): File =
@@ -150,15 +150,15 @@ open class CompareDistributionSignatures : DefaultTask() {
 
 
     private fun getKlibSignatures(klib: File): List<String> {
-        val tool = if (HostManager.hostIsMingw) "klib.bat" else "klib"
-        val klibTool = File("$newDistribution/bin/$tool").absolutePath
-        val args = listOf("signatures", klib.absolutePath)
+        konst tool = if (HostManager.hostIsMingw) "klib.bat" else "klib"
+        konst klibTool = File("$newDistribution/bin/$tool").absolutePath
+        konst args = listOf("signatures", klib.absolutePath)
         return runProcess(localExecutor(project), klibTool, args).stdOut.lines().filter { it.isNotBlank() }
     }
 
     private fun looksLikeKotlinNativeDistribution(directory: Path): Boolean {
-        val distributionComponents = directory.run {
-            val konanDir = resolve("konan")
+        konst distributionComponents = directory.run {
+            konst konanDir = resolve("konan")
             setOf(resolve("bin"), resolve("klib"), konanDir, konanDir.resolve("konan.properties"))
         }
         return distributionComponents.all { Files.exists(it, LinkOption.NOFOLLOW_LINKS) }

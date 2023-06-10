@@ -2,11 +2,11 @@ fun foo(f: (Int) -> Int) = f(0)
 
 class Outer {
     class Nested {
-        val y = foo { a -> a }
+        konst y = foo { a -> a }
     }
 
     fun bar(): String {
-        val a = Nested()
+        konst a = Nested()
         return "OK"
     }
 }

@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.types.SimpleType
 import org.jetbrains.kotlin.types.TypeUsage
 
 data class JavaTypeAttributes(
-    override val howThisTypeIsUsed: TypeUsage,
-    val flexibility: JavaTypeFlexibility = JavaTypeFlexibility.INFLEXIBLE,
-    val isRaw: Boolean = false,
-    val isForAnnotationParameter: Boolean = false,
+    override konst howThisTypeIsUsed: TypeUsage,
+    konst flexibility: JavaTypeFlexibility = JavaTypeFlexibility.INFLEXIBLE,
+    konst isRaw: Boolean = false,
+    konst isForAnnotationParameter: Boolean = false,
     // we use it to prevent happening a recursion while compute type parameter's upper bounds
-    override val visitedTypeParameters: Set<TypeParameterDescriptor>? = null,
-    override val defaultType: SimpleType? = null
+    override konst visitedTypeParameters: Set<TypeParameterDescriptor>? = null,
+    override konst defaultType: SimpleType? = null
 ) : ErasureTypeAttributes(howThisTypeIsUsed, visitedTypeParameters, defaultType) {
     fun withFlexibility(flexibility: JavaTypeFlexibility) = copy(flexibility = flexibility)
     fun markIsRaw(isRaw: Boolean) = copy(isRaw = isRaw)

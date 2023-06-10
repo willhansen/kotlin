@@ -1,5 +1,5 @@
 fun xxx() {
-    val x = 3
+    konst x = 3
     /*PLACE*/fun lcl() = ""
 }
 

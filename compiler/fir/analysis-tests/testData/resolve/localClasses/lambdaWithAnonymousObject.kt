@@ -5,11 +5,11 @@ fun <R> myRun(block: () -> R): R {
 }
 
 interface Bar {
-    val action: () -> Unit
+    konst action: () -> Unit
 }
 
-val cardModel = myRun {
+konst cardModel = myRun {
     object : Bar {
-        override val action = {}
+        override konst action = {}
     }
 }

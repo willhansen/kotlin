@@ -20,7 +20,7 @@ inline fun <reified K : Any?> In<K>.ofType(y: Any?): Boolean {
 }
 
 fun test() {
-  val a1: Array<In<Int>> = arrayOf<In<Int>>(elements = [In<Int>()])
-  val a2: Array<In<String>> = arrayOf<In<String>>(elements = [In<String>()])
+  konst a1: Array<In<Int>> = arrayOf<In<Int>>(elements = [In<Int>()])
+  konst a2: Array<In<String>> = arrayOf<In<String>>(elements = [In<String>()])
   foo<Int>(a = a1, b = a2) /*~> Unit */
 }

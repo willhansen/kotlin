@@ -1,12 +1,12 @@
 @JvmInline
-value class Some(val value: String)
+konstue class Some(konst konstue: String)
 
 class RegularClass {
     var classProp: Some = Some("1")
     var classPropImplicit = Some("1")
     var Some.classPropInExtension: Int
         get() = 1
-        set(value) {}
+        set(konstue) {}
 
     fun classFunInReturn(): Some = Some("1")
     fun classFunInImplicitReturn() = Some("1")

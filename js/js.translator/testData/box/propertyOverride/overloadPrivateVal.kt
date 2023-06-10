@@ -2,9 +2,9 @@
 package foo
 
 open class A {
-    private val a = 1
+    private konst a = 1
 
-    private val b = 2
+    private konst b = 2
         get() {
             return field + 10 + 100 * a
         }
@@ -14,13 +14,13 @@ open class A {
 }
 
 class B : A() {
-    val a = 13
-    val b = 42
+    konst a = 13
+    konst b = 42
 }
 
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     if (b.getBInA() != 112) return "b.getBInA() != 112, it: ${b.getBInA()}"
 
     if (b.a != 13) return "b.a != 13, it: ${b.a}"

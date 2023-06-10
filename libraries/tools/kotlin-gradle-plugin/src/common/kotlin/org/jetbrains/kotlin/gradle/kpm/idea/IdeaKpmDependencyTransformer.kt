@@ -52,7 +52,7 @@ operator fun IdeaKpmDependencyTransformer.plus(other: IdeaKpmDependencyTransform
 }
 
 private class IdeaKpmCompositeDependencyTransformer(
-    val transformers: List<IdeaKpmDependencyTransformer>
+    konst transformers: List<IdeaKpmDependencyTransformer>
 ) : IdeaKpmDependencyTransformer {
     override fun transform(
         fragment: GradleKpmFragment, dependencies: Set<IdeaKpmDependency>

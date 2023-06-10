@@ -35,7 +35,7 @@ fun baz(): Int {
 fun box(): String {
     foo()
     bar()
-    val result = baz()
+    konst result = baz()
 
     if (result != 6) return "fail1: $result"
 

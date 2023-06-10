@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.js.naming.WasmNameSuggestion
 import org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.resolve.BindingContext
-import org.jetbrains.kotlin.resolve.DescriptorEquivalenceForOverrides
+import org.jetbrains.kotlin.resolve.DescriptorEquikonstenceForOverrides
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
@@ -57,20 +57,20 @@ class WasmNameClashChecker(
 )
 
 abstract class AbstractNameClashChecker(
-    private val nameSuggestion: NameSuggestion,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val kotlinTypeRefiner: KotlinTypeRefiner,
+    private konst nameSuggestion: NameSuggestion,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst kotlinTypeRefiner: KotlinTypeRefiner,
 ) : DeclarationChecker {
     companion object {
-        private val COMMON_DIAGNOSTICS = setOf(
+        private konst COMMON_DIAGNOSTICS = setOf(
                 Errors.REDECLARATION,
                 Errors.CONFLICTING_OVERLOADS,
                 Errors.PACKAGE_OR_CLASSIFIER_REDECLARATION)
     }
 
-    private val scopes = mutableMapOf<DeclarationDescriptor, MutableMap<String, DeclarationDescriptor>>()
-    private val clashedFakeOverrides = mutableMapOf<DeclarationDescriptor, Pair<DeclarationDescriptor, DeclarationDescriptor>>()
-    private val clashedDescriptors = mutableSetOf<Pair<DeclarationDescriptor, String>>()
+    private konst scopes = mutableMapOf<DeclarationDescriptor, MutableMap<String, DeclarationDescriptor>>()
+    private konst clashedFakeOverrides = mutableMapOf<DeclarationDescriptor, Pair<DeclarationDescriptor, DeclarationDescriptor>>()
+    private konst clashedDescriptors = mutableSetOf<Pair<DeclarationDescriptor, String>>()
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         // We don't generate JS properties for extension properties, we generate methods instead, so in this case
@@ -88,9 +88,9 @@ abstract class AbstractNameClashChecker(
 
         for (suggested in nameSuggestion.suggestAllPossibleNames(descriptor, bindingContext)) {
             if (suggested.stable && suggested.scope is ClassOrPackageFragmentDescriptor && presentsInGeneratedCode(suggested.descriptor)) {
-                val scope = getScope(suggested.scope, bindingContext)
-                val name = suggested.names.last()
-                val existing = scope[name]
+                konst scope = getScope(suggested.scope, bindingContext)
+                konst name = suggested.names.last()
+                konst existing = scope[name]
                 if (existing != null &&
                     existing != descriptor &&
                     existing.isActual == descriptor.isActual &&
@@ -98,7 +98,7 @@ abstract class AbstractNameClashChecker(
                     !bindingContext.isCommonDiagnosticReported(declaration)
                 ) {
                     diagnosticHolder.report(ErrorsJs.JS_NAME_CLASH.on(declaration, name, existing))
-                    val existingDeclaration = existing.findPsi()
+                    konst existingDeclaration = existing.findPsi()
                     if (clashedDescriptors.add(existing to name) && existingDeclaration is KtDeclaration &&
                         existingDeclaration != declaration) {
                         diagnosticHolder.report(ErrorsJs.JS_NAME_CLASH.on(existingDeclaration, name, descriptor))
@@ -108,27 +108,27 @@ abstract class AbstractNameClashChecker(
         }
 
         if (descriptor is ClassDescriptor) {
-            val fakeOverrides = descriptor.unsubstitutedMemberScope.getContributedDescriptors().asSequence()
+            konst fakeOverrides = descriptor.unsubstitutedMemberScope.getContributedDescriptors().asSequence()
                     .mapNotNull { it as? CallableMemberDescriptor }
                     .filter { it.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE }
             for (override in fakeOverrides) {
-                val overrideFqn = nameSuggestion.suggest(override, bindingContext)!!
-                val scope = getScope(overrideFqn.scope, bindingContext)
-                val name = overrideFqn.names.last()
-                val existing = scope[name] as? CallableMemberDescriptor
-                val overrideDescriptor = overrideFqn.descriptor as? CallableMemberDescriptor
+                konst overrideFqn = nameSuggestion.suggest(override, bindingContext)!!
+                konst scope = getScope(overrideFqn.scope, bindingContext)
+                konst name = overrideFqn.names.last()
+                konst existing = scope[name] as? CallableMemberDescriptor
+                konst overrideDescriptor = overrideFqn.descriptor as? CallableMemberDescriptor
                 if (existing != null &&
                     overrideDescriptor != null &&
-                    !areDescriptorsEquivalent(existing, overrideDescriptor) &&
+                    !areDescriptorsEquikonstent(existing, overrideDescriptor) &&
                     !isFakeOverridingNative(existing)
                 ) {
                     diagnosticHolder.report(ErrorsJs.JS_FAKE_NAME_CLASH.on(declaration, name, override, existing))
                     break
                 }
 
-                val clashedOverrides = clashedFakeOverrides[override]
+                konst clashedOverrides = clashedFakeOverrides[override]
                 if (clashedOverrides != null) {
-                    val (firstExample, secondExample) = clashedOverrides
+                    konst (firstExample, secondExample) = clashedOverrides
                     diagnosticHolder.report(ErrorsJs.JS_FAKE_NAME_CLASH.on(declaration, name, firstExample, secondExample))
                     break
                 }
@@ -136,7 +136,7 @@ abstract class AbstractNameClashChecker(
         }
     }
 
-    private fun areDescriptorsEquivalent(
+    private fun areDescriptorsEquikonstent(
         existing: CallableMemberDescriptor,
         overrideDescriptor: CallableMemberDescriptor
     ): Boolean {
@@ -146,7 +146,7 @@ abstract class AbstractNameClashChecker(
         } else {
             // If refinement is enabled, we can get duplicate descriptors for one and the same members (as refinement re-creates
             // descriptors), so, in this case, we have to compare descriptors structurally
-            DescriptorEquivalenceForOverrides.areCallableDescriptorsEquivalent(
+            DescriptorEquikonstenceForOverrides.areCallableDescriptorsEquikonstent(
                 existing, overrideDescriptor, allowCopiesFromTheSameDeclaration = true, kotlinTypeRefiner = kotlinTypeRefiner
             )
         }
@@ -154,9 +154,9 @@ abstract class AbstractNameClashChecker(
 
     private fun NameSuggestion.suggestAllPossibleNames(descriptor: DeclarationDescriptor, bindingContext: BindingContext): Collection<SuggestedName> =
             if (descriptor is CallableMemberDescriptor) {
-                val primary = suggest(descriptor, bindingContext)
+                konst primary = suggest(descriptor, bindingContext)
                 if (primary != null) {
-                    val overriddenNames = descriptor.overriddenDescriptors.flatMap {
+                    konst overriddenNames = descriptor.overriddenDescriptors.flatMap {
                         suggestAllPossibleNames(it, bindingContext).map { overridden ->
                             SuggestedName(overridden.names, overridden.stable, primary.descriptor, primary.scope)
                         }
@@ -175,10 +175,10 @@ abstract class AbstractNameClashChecker(
         return diagnostics.forElement(declaration).any { it.factory in COMMON_DIAGNOSTICS }
     }
 
-    private val DeclarationDescriptor.isActual: Boolean
+    private konst DeclarationDescriptor.isActual: Boolean
         get() = this is MemberDescriptor && this.isActual || this is PropertyAccessorDescriptor && this.correspondingProperty.isActual
 
-    private val DeclarationDescriptor.isExpect: Boolean
+    private konst DeclarationDescriptor.isExpect: Boolean
         get() = this is MemberDescriptor && this.isExpect || this is PropertyAccessorDescriptor && this.correspondingProperty.isExpect
 
     private fun isFakeOverridingNative(descriptor: CallableMemberDescriptor): Boolean {
@@ -187,11 +187,11 @@ abstract class AbstractNameClashChecker(
     }
 
     private fun getScope(descriptor: DeclarationDescriptor, bindingContext: BindingContext) = scopes.getOrPut(descriptor) {
-        val scope = mutableMapOf<String, DeclarationDescriptor>()
+        konst scope = mutableMapOf<String, DeclarationDescriptor>()
         when (descriptor) {
             is PackageFragmentDescriptor -> {
                 collect(descriptor.getMemberScope(), scope, bindingContext)
-                val module = DescriptorUtils.getContainingModule(descriptor)
+                konst module = DescriptorUtils.getContainingModule(descriptor)
                 module.getSubPackagesOf(descriptor.fqName) { true }
                         .flatMap { module.getPackage(it).fragments }
                         .forEach { collect(it, scope, bindingContext)  }
@@ -225,9 +225,9 @@ abstract class AbstractNameClashChecker(
 
     private fun checkOverrideClashes(descriptor: CallableMemberDescriptor, target: MutableMap<String, DeclarationDescriptor>, bindingContext: BindingContext) {
         for (overriddenDescriptor in DescriptorUtils.getAllOverriddenDeclarations(descriptor)) {
-            val overriddenFqn = nameSuggestion.suggest(overriddenDescriptor, bindingContext)!!
+            konst overriddenFqn = nameSuggestion.suggest(overriddenDescriptor, bindingContext)!!
             if (overriddenFqn.stable) {
-                val existing = target[overriddenFqn.names.last()]
+                konst existing = target[overriddenFqn.names.last()]
                 if (existing != null) {
                     if (existing != descriptor && descriptor.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
                         clashedFakeOverrides[descriptor] = Pair(existing, overriddenDescriptor)

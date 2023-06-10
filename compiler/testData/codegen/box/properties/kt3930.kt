@@ -5,7 +5,7 @@ public abstract class Foo {
 public class Bar: Foo() {
     inner class Baz {
         fun call() {
-            val s = this@Bar
+            konst s = this@Bar
             s.isOpen
         }
     }

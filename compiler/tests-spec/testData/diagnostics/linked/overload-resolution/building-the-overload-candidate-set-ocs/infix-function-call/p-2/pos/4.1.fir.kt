@@ -26,7 +26,7 @@ class Case1() {
     infix fun A.foo(x: Int) = "local extension fun foo"
 
     fun case1() {
-        val a = A()
+        konst a = A()
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>a foo 1<!>
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>A() foo 1<!>
     }
@@ -41,7 +41,7 @@ interface Case2 {
     infix fun A.foo(x: Int) = "local extension fun foo"
 
     fun case2() {
-        val a = A()
+        konst a = A()
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>a foo 1<!>
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>A() foo 1<!>
     }
@@ -58,7 +58,7 @@ infix fun A.foo(x: Int) = "my package scope top level contains"
 fun case3() {
     infix fun A.foo(x: Int) = "my local scope contains"
 
-    val a = A()
+    konst a = A()
     <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>a foo 1<!>
     <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>A() foo 1<!>
 }
@@ -77,7 +77,7 @@ fun case4() {
 
     fun subfun() {
         infix fun A.foo(x: Int) = "my local contains"
-        val a = A()
+        konst a = A()
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>a foo 1<!>
         <!DEBUG_INFO_CALL("fqName: libPackage.A.foo; typeCall: infix function")!>A() foo 1<!>
     }

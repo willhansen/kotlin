@@ -4,18 +4,18 @@ package test
 import kotlinx.parcelize.*
 import android.os.*
 
-class Box(val value: String)
+class Box(konst konstue: String)
 
 @Parcelize
-class Foo(val box: Box): Parcelable {
+class Foo(konst box: Box): Parcelable {
     companion object : Parceler<Foo> {
         override fun create(parcel: Parcel) = Foo(Box(parcel.readString()))
 
         override fun Foo.write(parcel: Parcel, flags: Int) {
-            parcel.writeString(box.value)
+            parcel.writeString(box.konstue)
         }
     }
 }
 
 @Parcelize
-class Foo2(val box: <!PARCELABLE_TYPE_NOT_SUPPORTED!>Box<!>): Parcelable
+class Foo2(konst box: <!PARCELABLE_TYPE_NOT_SUPPORTED!>Box<!>): Parcelable

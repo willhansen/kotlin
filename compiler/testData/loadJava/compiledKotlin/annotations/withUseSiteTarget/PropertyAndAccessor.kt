@@ -1,8 +1,8 @@
 // PLATFORM_DEPENDANT_METADATA
 package test
 
-annotation class A(val value: String)
-annotation class B(val value: Array<String>)
+annotation class A(konst konstue: String)
+annotation class B(konst konstue: Array<String>)
 
 interface I {
     @A("property")

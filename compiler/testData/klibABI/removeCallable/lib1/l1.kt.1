@@ -1,23 +1,23 @@
 fun function(): String = "OK"
 //fun removedFunction(): String = "FAIL: removedFunction"
-val property: String get() = "OK"
-//val removedProperty: String get() = "FAIL: removedProperty"
+konst property: String get() = "OK"
+//konst removedProperty: String get() = "FAIL: removedProperty"
 
 class A {
     fun function(): String = "OK"
     //fun removedFunction(): String = "FAIL: A.removedFunction"
-    val property1: String get() = "OK"
-    //val removedProperty1: String get() = "FAIL: removedProperty1"
-    val property2: String = "OK"
-    //val removedProperty2: String = "FAIL: removedProperty2"
+    konst property1: String get() = "OK"
+    //konst removedProperty1: String get() = "FAIL: removedProperty1"
+    konst property2: String = "OK"
+    //konst removedProperty2: String = "FAIL: removedProperty2"
 }
 
 open class C {
     //open fun removedOpenFunction(): String = "FAIL: C.removedOpenFunction"
-    //open val removedOpenProperty: String get() = "FAIL: C.removedOpenProperty"
+    //open konst removedOpenProperty: String get() = "FAIL: C.removedOpenProperty"
 }
 
 interface I {
     //fun removedOpenFunction(): String = "FAIL: I.removedOpenFunction"
-    //val removedOpenProperty: String get() = "FAIL: I.removedOpenProperty"
+    //konst removedOpenProperty: String get() = "FAIL: I.removedOpenProperty"
 }

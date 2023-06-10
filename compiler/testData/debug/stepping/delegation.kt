@@ -13,7 +13,7 @@ object O : I {
 class C : I by O
 
 fun box() {
-    val c = C()
+    konst c = C()
     c.f()
 }
 

@@ -17,7 +17,7 @@ fun bar(arg: Any?, block: () -> Int): Boolean contract <!UNSUPPORTED!>[
     returns(true) implies (arg != null),
     callsInPlace(block, InvocationKind.EXACTLY_ONCE)
 ]<!> {
-    val num = block()
+    konst num = block()
     if (arg != null) {
         return true
     }

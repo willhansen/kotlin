@@ -25,15 +25,15 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.*
 
-class ClassReferenceLowering(val context: JsCommonBackendContext) : BodyLoweringPass {
+class ClassReferenceLowering(konst context: JsCommonBackendContext) : BodyLoweringPass {
 
-    private val reflectionSymbols get() = context.reflectionSymbols
+    private konst reflectionSymbols get() = context.reflectionSymbols
 
-    private val primitiveClassProperties by lazy(LazyThreadSafetyMode.NONE) {
+    private konst primitiveClassProperties by lazy(LazyThreadSafetyMode.NONE) {
         reflectionSymbols.primitiveClassesObject.owner.declarations.filterIsInstance<IrProperty>()
     }
 
-    private val primitiveClassFunctionClass by lazy(LazyThreadSafetyMode.NONE) {
+    private konst primitiveClassFunctionClass by lazy(LazyThreadSafetyMode.NONE) {
         reflectionSymbols.primitiveClassesObject.owner.declarations
             .findIsInstanceAnd<IrSimpleFunction> { it.name == Name.identifier("functionClass") }!!
     }
@@ -44,7 +44,7 @@ class ClassReferenceLowering(val context: JsCommonBackendContext) : BodyLowering
                 .filterIsInstance<IrSimpleFunction>()
                 .single { it.name == Name.special("<get-$name>") }
 
-    private val finalPrimitiveClasses by lazy(LazyThreadSafetyMode.NONE) {
+    private konst finalPrimitiveClasses by lazy(LazyThreadSafetyMode.NONE) {
         mapOf(
             IrType::isBoolean to "booleanClass",
             IrType::isByte to "byteClass",
@@ -63,23 +63,23 @@ class ClassReferenceLowering(val context: JsCommonBackendContext) : BodyLowering
             IrType::isFloatArray to "floatArrayClass",
             IrType::isDoubleArray to "doubleArrayClass"
         ).mapValues {
-            primitiveClassProperty(it.value)
+            primitiveClassProperty(it.konstue)
         }
     }
 
-    private val openPrimitiveClasses by lazy(LazyThreadSafetyMode.NONE) {
+    private konst openPrimitiveClasses by lazy(LazyThreadSafetyMode.NONE) {
         mapOf(
             IrType::isAny to "anyClass",
             IrType::isNumber to "numberClass",
             IrType::isThrowable to "throwableClass",
             IrType::isNothing to "nothingClass"
         ).mapValues {
-            primitiveClassProperty(it.value)
+            primitiveClassProperty(it.konstue)
         }
     }
 
     private fun callGetKClassFromExpression(returnType: IrType, typeArgument: IrType, argument: IrExpression): IrExpression {
-        val primitiveKClass = getFinalPrimitiveKClass(returnType, typeArgument)
+        konst primitiveKClass = getFinalPrimitiveKClass(returnType, typeArgument)
         if (primitiveKClass != null)
             return JsIrBuilder.buildBlock(returnType, listOf(argument, primitiveKClass))
 
@@ -113,8 +113,8 @@ class ClassReferenceLowering(val context: JsCommonBackendContext) : BodyLowering
         }
 
         if (typeArgument.isFunction()) {
-            val functionInterface = typeArgument.getClass()!!
-            val arity = functionInterface.typeParameters.size - 1
+            konst functionInterface = typeArgument.getClass()!!
+            konst arity = functionInterface.typeParameters.size - 1
             return getPrimitiveClass(primitiveClassFunctionClass, returnType).apply {
                 putValueArgument(0, JsIrBuilder.buildInt(context.irBuiltIns.intType, arity))
             }
@@ -127,7 +127,7 @@ class ClassReferenceLowering(val context: JsCommonBackendContext) : BodyLowering
         returnType: IrType = reflectionSymbols.getKClass.owner.returnType,
         typeArgument: IrType
     ): IrCall {
-        val primitiveKClass =
+        konst primitiveKClass =
             getFinalPrimitiveKClass(returnType, typeArgument) ?: getOpenPrimitiveKClass(returnType, typeArgument)
 
         if (primitiveKClass != null)
@@ -167,22 +167,22 @@ class ClassReferenceLowering(val context: JsCommonBackendContext) : BodyLowering
     }
 
     private fun createSimpleKType(type: IrSimpleType, visitedTypeParams: MutableSet<IrTypeParameter>): IrExpression {
-        val classifier: IrClassifierSymbol = type.classifier
+        konst classifier: IrClassifierSymbol = type.classifier
 
         // TODO: Check why do we have un-substituted reified parameters
         // if (classifier is IrTypeParameterSymbol && classifier.owner.isReified) {
         //     error("Fail")
         // }
 
-        val kClassifier = createKClassifier(classifier, visitedTypeParams)
-        val arguments = context.createArrayOfExpression(
+        konst kClassifier = createKClassifier(classifier, visitedTypeParams)
+        konst arguments = context.createArrayOfExpression(
             startOffset = UNDEFINED_OFFSET,
             endOffset = UNDEFINED_OFFSET,
             arrayElementType = context.reflectionSymbols.kTypeClass.defaultType,
             arrayElements = type.arguments.memoryOptimizedMap { createKTypeProjection(it, visitedTypeParams) }
         )
 
-        val isMarkedNullable = JsIrBuilder.buildBoolean(context.irBuiltIns.booleanType, type.isMarkedNullable())
+        konst isMarkedNullable = JsIrBuilder.buildBoolean(context.irBuiltIns.booleanType, type.isMarkedNullable())
         return buildCall(
             reflectionSymbols.createKType!!,
             kClassifier,
@@ -196,13 +196,13 @@ class ClassReferenceLowering(val context: JsCommonBackendContext) : BodyLowering
             return buildCall(reflectionSymbols.getStarKTypeProjection!!)
         }
 
-        val factoryName = when (tp.variance) {
+        konst factoryName = when (tp.variance) {
             Variance.INVARIANT -> reflectionSymbols.createInvariantKTypeProjection!!
             Variance.IN_VARIANCE -> reflectionSymbols.createContravariantKTypeProjection!!
             Variance.OUT_VARIANCE -> reflectionSymbols.createCovariantKTypeProjection!!
         }
 
-        val kType = createKType(tp.type, visitedTypeParams)
+        konst kType = createKType(tp.type, visitedTypeParams)
         return buildCall(factoryName, kType)
 
     }
@@ -219,16 +219,16 @@ class ClassReferenceLowering(val context: JsCommonBackendContext) : BodyLowering
 
         visitedTypeParams.add(typeParameter)
 
-        val name = JsIrBuilder.buildString(context.irBuiltIns.stringType, typeParameter.name.asString())
+        konst name = JsIrBuilder.buildString(context.irBuiltIns.stringType, typeParameter.name.asString())
 
-        val upperBounds = context.createArrayOfExpression(
+        konst upperBounds = context.createArrayOfExpression(
             startOffset = UNDEFINED_OFFSET,
             endOffset = UNDEFINED_OFFSET,
             arrayElementType = context.reflectionSymbols.kTypeClass.defaultType,
             arrayElements = typeParameter.superTypes.memoryOptimizedMap { createKType(it, visitedTypeParams) }
         )
 
-        val variance = when (typeParameter.variance) {
+        konst variance = when (typeParameter.variance) {
             Variance.INVARIANT -> JsIrBuilder.buildString(context.irBuiltIns.stringType, "invariant")
             Variance.IN_VARIANCE -> JsIrBuilder.buildString(context.irBuiltIns.stringType, "in")
             Variance.OUT_VARIANCE -> JsIrBuilder.buildString(context.irBuiltIns.stringType, "out")

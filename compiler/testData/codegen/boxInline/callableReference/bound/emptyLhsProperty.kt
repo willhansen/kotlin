@@ -2,7 +2,7 @@
 package test
 
 class X {
-    val result: String
+    konst result: String
         get() = "OK"
 
     fun x(): String {

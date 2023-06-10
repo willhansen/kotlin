@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.types.model.AnnotationMarker
 
 interface Annotated {
-    val annotations: Annotations
+    konst annotations: Annotations
 }
 
 interface Annotations : Iterable<AnnotationDescriptor> {
@@ -35,7 +35,7 @@ interface Annotations : Iterable<AnnotationDescriptor> {
     fun getUseSiteTargetedAnnotations(): List<AnnotationWithTarget> = emptyList()
 
     companion object {
-        val EMPTY: Annotations = object : Annotations {
+        konst EMPTY: Annotations = object : Annotations {
             override fun isEmpty() = true
 
             override fun findAnnotation(fqName: FqName) = null
@@ -51,9 +51,9 @@ interface Annotations : Iterable<AnnotationDescriptor> {
 }
 
 class FilteredAnnotations(
-    private val delegate: Annotations,
-    private val isDefinitelyNewInference: Boolean,
-    private val fqNameFilter: (FqName) -> Boolean
+    private konst delegate: Annotations,
+    private konst isDefinitelyNewInference: Boolean,
+    private konst fqNameFilter: (FqName) -> Boolean
 ) : Annotations {
 
     constructor(delegate: Annotations, fqNameFilter: (FqName) -> Boolean) : this(delegate, false, fqNameFilter)
@@ -69,7 +69,7 @@ class FilteredAnnotations(
     override fun iterator() = delegate.filter(this::shouldBeReturned).iterator()
 
     override fun isEmpty(): Boolean {
-        val condition = delegate.any(this::shouldBeReturned)
+        konst condition = delegate.any(this::shouldBeReturned)
         // fixing KT-32189 && KT-32138 for the new inference only
         return if (isDefinitelyNewInference) !condition else condition
     }
@@ -81,8 +81,8 @@ class FilteredAnnotations(
 }
 
 class FilteredByPredicateAnnotations(
-    private val delegate: Annotations,
-    private val filter: (AnnotationDescriptor) -> Boolean
+    private konst delegate: Annotations,
+    private konst filter: (AnnotationDescriptor) -> Boolean
 ) : Annotations {
     override fun isEmpty(): Boolean {
         return !iterator().hasNext()
@@ -98,7 +98,7 @@ class FilteredByPredicateAnnotations(
 }
 
 class CompositeAnnotations(
-    private val delegates: List<Annotations>
+    private konst delegates: List<Annotations>
 ) : Annotations {
     constructor(vararg delegates: Annotations) : this(delegates.toList())
 

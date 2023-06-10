@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
-class Keeper(private val keep: Set<String>) : IrElementVisitor<Unit, Keeper.KeepData> {
-    private val keptDeclarations: MutableSet<IrDeclaration> = mutableSetOf()
+class Keeper(private konst keep: Set<String>) : IrElementVisitor<Unit, Keeper.KeepData> {
+    private konst keptDeclarations: MutableSet<IrDeclaration> = mutableSetOf()
 
     fun shouldKeep(declaration: IrDeclaration): Boolean {
         return declaration in keptDeclarations
@@ -30,10 +30,10 @@ class Keeper(private val keep: Set<String>) : IrElementVisitor<Unit, Keeper.Keep
      * [KeepData.classShouldBeKept] responsible to bubble "keep" from members to class level direction
      */
     override fun visitClass(declaration: IrClass, data: KeepData) {
-        val prevShouldBeKept = data.classShouldBeKept
-        val prevClassInKeep = data.classInKeep
+        konst prevShouldBeKept = data.classShouldBeKept
+        konst prevClassInKeep = data.classInKeep
         data.classShouldBeKept = false
-        val keptClass = data.classInKeep || isInKeep(declaration)
+        konst keptClass = data.classInKeep || isInKeep(declaration)
         if (keptClass) {
             keptDeclarations.add(declaration)
         }

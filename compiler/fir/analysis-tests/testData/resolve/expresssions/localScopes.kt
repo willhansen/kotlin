@@ -7,11 +7,11 @@ fun test() {
         fun baz() {}
     }
 
-    val base = BaseLocal()
+    konst base = BaseLocal()
     base.baz()
     base.foo()
 
-    val anonymous = object : Bar() {
+    konst anonymous = object : Bar() {
         fun baz() {}
     }
     anonymous.baz()
@@ -21,7 +21,7 @@ fun test() {
         fun gau() {}
     }
 
-    val derived = DerivedLocal()
+    konst derived = DerivedLocal()
     derived.gau()
     derived.baz()
     derived.foo()

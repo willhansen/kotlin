@@ -22,8 +22,8 @@ object FirFunctionalTypeParameterNameChecker : FirTypeRefChecker() {
     }
 
     private fun check(typeRef: FirFunctionTypeParameter, context: CheckerContext, reporter: DiagnosticReporter) {
-        val name = typeRef.name ?: return
-        val typeRefSource = typeRef.source ?: return
+        konst name = typeRef.name ?: return
+        konst typeRefSource = typeRef.source ?: return
         FirJvmNamesChecker.checkNameAndReport(name, typeRefSource, context, reporter)
     }
 }

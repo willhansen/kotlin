@@ -13,7 +13,7 @@ internal fun <T> Array<out T>?.contentDeepHashCodeImpl(): Int {
     if (this == null) return 0
     var result = 1
     for (element in this) {
-        val elementHash = when {
+        konst elementHash = when {
             element == null -> 0
             isArrayish(element) -> (element.unsafeCast<Array<*>>()).contentDeepHashCodeImpl()
 

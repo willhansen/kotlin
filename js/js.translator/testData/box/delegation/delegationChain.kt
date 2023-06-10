@@ -6,17 +6,17 @@ interface Base {
     var prop: String
 }
 
-class BaseImpl(val s: String) : Base {
+class BaseImpl(konst s: String) : Base {
     override fun foo(x: String) = "BaseImpl.foo: ${s}:${x}"
     override var prop: String = "init"
-        set(value) {
-            field = "prop:${value}"
+        set(konstue) {
+            field = "prop:${konstue}"
         }
 }
 
-class Base2Impl(val s: String) : Base by BaseImpl("${s} by BaseImpl")
+class Base2Impl(konst s: String) : Base by BaseImpl("${s} by BaseImpl")
 
-class Derived(val s: String) : Base by Base2Impl("${s} by Base2Impl")
+class Derived(konst s: String) : Base by Base2Impl("${s} by Base2Impl")
 
 fun box(): String {
     assertEquals("BaseImpl.foo: Derived by Base2Impl by BaseImpl:!!", Derived("Derived").foo("!!"))

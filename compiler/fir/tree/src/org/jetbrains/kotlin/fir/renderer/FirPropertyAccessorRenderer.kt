@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.fir.declarations.utils.hasExplicitBackingField
 class FirPropertyAccessorRenderer {
 
     internal lateinit var components: FirRendererComponents
-    private val printer get() = components.printer
-    private val visitor get() = components.visitor
+    private konst printer get() = components.printer
+    private konst visitor get() = components.visitor
 
     fun render(property: FirProperty) {
         printer.println()

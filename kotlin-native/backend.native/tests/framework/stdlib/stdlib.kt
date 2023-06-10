@@ -19,19 +19,19 @@ fun <K, V> toMutableMap(map: HashMap<K, V>) = map.toMutableMap()
 
 fun <E> getFirstElement(collection: Collection<E>) = collection.first()
 
-class GenericExtensionClass<K, out V, out T : Map<K, V>> (private val holder: T?) {
+class GenericExtensionClass<K, out V, out T : Map<K, V>> (private konst holder: T?) {
     fun getFirstKey(): K? = holder?.entries?.first()?.key
 
     fun getFirstValue() : V? {
-        holder?.entries?.forEach { e -> println("KEY: ${e.key}  VALUE: ${e.value}") }
-        return holder?.entries?.first()?.value
+        holder?.entries?.forEach { e -> println("KEY: ${e.key}  VALUE: ${e.konstue}") }
+        return holder?.entries?.first()?.konstue
     }
 }
 
 fun <K, V> createPair():
         Pair<LinkedHashMap<K, V>, GenericExtensionClass<K, V, Map<K, V>>> {
-    val l = createLinkedMap<K, V>()
-    val g = GenericExtensionClass(l)
+    konst l = createLinkedMap<K, V>()
+    konst g = GenericExtensionClass(l)
     return Pair(l, g)
 }
 
@@ -40,8 +40,8 @@ fun <K, V> createLinkedMap() = linkedMapOf<K, V>()
 fun createTypedMutableMap() = linkedMapOf<Int, String>()
 
 fun addSomeElementsToMap(map: MutableMap<String, Int>) {
-    map.put(key = "XYZ", value = 321)
-    map.put(key = "TMP", value = 451)
+    map.put(key = "XYZ", konstue = 321)
+    map.put(key = "TMP", konstue = 451)
 }
 
 fun list(vararg elements: Any?): Any = listOf(*elements)
@@ -56,7 +56,7 @@ fun emptyMutableList(): Any = mutableListOf<Any?>()
 fun emptyMutableSet(): Any = mutableSetOf<Any?>()
 fun emptyMutableMap(): Any = mutableMapOf<Any?, Any?>()
 
-data class TripleVals<T>(val first: T, val second: T, val third: T)
+data class TripleVals<T>(konst first: T, konst second: T, konst third: T)
 
 data class TripleVars<T>(var first: T, var second: T, var third: T) {
     override fun toString(): String {
@@ -72,7 +72,7 @@ fun gc() = kotlin.native.runtime.GC.collect()
 @Throws(Throwable::class)
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 fun testSet(set: Set<String>) {
-    val setAny: Set<Any?> = set
+    konst setAny: Set<Any?> = set
 
     assertTrue(set.contains("a"))
     assertTrue(set.contains("c"))
@@ -90,9 +90,9 @@ fun testSet(set: Set<String>) {
 // More tests are absolutely needed.
 @Throws(Throwable::class)
 fun testMap(map: Map<String, Int>) {
-    val mapAny: Map<String, Any?> = map
-    val mapKeysAny: Set<Any?> = map.keys
-    val mapEntriesAny: Set<Map.Entry<Any?, Any?>> = map.entries
+    konst mapAny: Map<String, Any?> = map
+    konst mapKeysAny: Set<Any?> = map.keys
+    konst mapEntriesAny: Set<Map.Entry<Any?, Any?>> = map.entries
 
     assertTrue(map.containsKey("a"))
     assertTrue(map.keys.contains("b"))
@@ -101,7 +101,7 @@ fun testMap(map: Map<String, Int>) {
     assertFalse(mapKeysAny.contains(1))
 
     assertTrue(map.containsValue(1))
-    assertTrue(map.values.contains(2))
+    assertTrue(map.konstues.contains(2))
     assertTrue(map.containsValue(7))
     assertFalse(map.containsValue(8))
     assertFalse(mapAny.containsValue("8"))
@@ -110,12 +110,12 @@ fun testMap(map: Map<String, Int>) {
     assertEquals(4, map.get("d"))
     assertNull(map.get("h"))
 
-    val referenceMap = (0 until 7).map { ('a' + it).toString() to (it + 1) }.toMap()
+    konst referenceMap = (0 until 7).map { ('a' + it).toString() to (it + 1) }.toMap()
     assertEquals(referenceMap.hashCode(), map.hashCode())
     assertEquals(referenceMap, map)
     assertEquals(map, referenceMap)
 
-    assertEquals(28, map.entries.sumBy { it.value })
+    assertEquals(28, map.entries.sumBy { it.konstue })
 
     assertTrue(map.entries.contains(createMapEntry("e", 5)))
     assertTrue(map.entries.contains(createMapEntry("g", 7)))
@@ -126,4 +126,4 @@ fun testMap(map: Map<String, Int>) {
     assertFalse(mapEntriesAny.contains(createMapEntry(5, "e")))
 }
 
-private fun <K, V> createMapEntry(key: K, value: V) = mapOf(key to value).entries.single()
+private fun <K, V> createMapEntry(key: K, konstue: V) = mapOf(key to konstue).entries.single()

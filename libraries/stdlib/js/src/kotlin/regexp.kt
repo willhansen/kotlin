@@ -22,9 +22,9 @@ public external class RegExp(pattern: String, flags: String? = definedExternally
      */
     public var lastIndex: Int
 
-    public val global: Boolean
-    public val ignoreCase: Boolean
-    public val multiline: Boolean
+    public konst global: Boolean
+    public konst ignoreCase: Boolean
+    public konst multiline: Boolean
 }
 
 /**
@@ -36,13 +36,13 @@ public fun RegExp.reset() {
 
 // TODO: Inherit from array or introduce asArray() extension
 /**
- * Represents the return value of [RegExp.exec].
+ * Represents the return konstue of [RegExp.exec].
  */
 @Suppress("NOT_DOCUMENTED")
 public external interface RegExpMatch {
-    public val index: Int
-    public val input: String
-    public val length: Int
+    public konst index: Int
+    public konst input: String
+    public konst length: Int
 }
 
 /**

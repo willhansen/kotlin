@@ -10,4 +10,4 @@ package org.jetbrains.kotlin.tooling.core
  * This annotation is intended for usage outside this module
  */
 @RequiresOptIn(level = RequiresOptIn.Level.ERROR, message = "Use safe API counterpart")
-annotation class UnsafeApi(val message: String = "")
+annotation class UnsafeApi(konst message: String = "")

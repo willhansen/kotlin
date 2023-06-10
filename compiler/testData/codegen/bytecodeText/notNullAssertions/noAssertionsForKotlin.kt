@@ -2,12 +2,12 @@
 // FILE: noAssertionsForKotlin.kt
 
 class A {
-    val x: Int = 42
+    konst x: Int = 42
 
     fun foo(): String = ""
 
     companion object {
-        val y: Any? = 239
+        konst y: Any? = 239
 
         fun bar(): String = ""
     }
@@ -18,11 +18,11 @@ fun baz(): String = ""
 // FILE: noAssertionsForKotlinMain.kt
 
 fun bar() {
-    val x = A().x
-    val foo = A().foo()
-    val y = A.y
-    val bar = A.bar()
-    val baz = baz()
+    konst x = A().x
+    konst foo = A().foo()
+    konst y = A.y
+    konst bar = A.bar()
+    konst baz = baz()
 }
 
 // @A.class:

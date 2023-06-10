@@ -13,7 +13,7 @@ internal fun <T> Array<out T>?.contentDeepHashCodeInternal(): Int {
     if (this == null) return 0
     var result = 1
     for (element in this) {
-        val elementHash = when {
+        konst elementHash = when {
             element == null -> 0
             isArrayish(element) -> (element.unsafeCast<Array<*>>()).contentDeepHashCodeInternal()
 
@@ -31,8 +31,8 @@ internal fun <T> Array<out T>?.contentDeepHashCodeInternal(): Int {
 }
 
 internal fun <T> T.contentEqualsInternal(other: T): Boolean {
-    val a = this.asDynamic()
-    val b = other.asDynamic()
+    konst a = this.asDynamic()
+    konst b = other.asDynamic()
 
     if (a === b) return true
 
@@ -47,7 +47,7 @@ internal fun <T> T.contentEqualsInternal(other: T): Boolean {
 }
 
 internal fun <T> T.contentHashCodeInternal(): Int {
-    val a = this.asDynamic()
+    konst a = this.asDynamic()
     if (a == null) return 0
 
     var result = 1

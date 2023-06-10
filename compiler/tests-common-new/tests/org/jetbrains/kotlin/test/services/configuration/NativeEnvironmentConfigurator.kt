@@ -14,12 +14,12 @@ import java.io.File
 
 class NativeEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
     companion object {
-        private val nativeHome
+        private konst nativeHome
             get() = System.getProperty("kotlin.internal.native.test.nativeHome")
                 ?: error("No nativeHome provided. Are you sure the test are executed within :native:native.tests?")
 
         fun getRuntimePathsForModule(module: TestModule, testServices: TestServices): List<String> {
-            val result = mutableListOf<String>()
+            konst result = mutableListOf<String>()
 
             if (ConfigurationDirectives.WITH_STDLIB in module.directives) {
                 result += File("$nativeHome/klib/common/stdlib").absolutePath

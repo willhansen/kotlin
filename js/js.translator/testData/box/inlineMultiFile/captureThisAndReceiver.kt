@@ -8,23 +8,23 @@
 package foo
 
 fun test1() : Int {
-    val inlineX = My(111)
+    konst inlineX = My(111)
 
     return inlineX.perform<My, Int>{
 
-        val outX = My(1111111)
+        konst outX = My(1111111)
         outX.perform<My, Int>(
-                {inlineX.value}
+                {inlineX.konstue}
         )
     }
 }
 
 inline fun My.execute(): Int {
-    return perform { this.value }
+    return perform { this.konstue }
 }
 
 fun test2(): Int {
-    val inlineX = My(11)
+    konst inlineX = My(11)
 
     return inlineX.execute()
 }
@@ -40,7 +40,7 @@ fun box(): String {
 // FILE: bar.kt
 package foo
 
-class My(val value: Int)
+class My(konst konstue: Int)
 
 inline fun <T, R> T.perform(job: (T)-> R) : R {
     return job(this)

@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.test.testFramework.resetApplicationToNull
 
 object MockComponentManagerCreationTracer {
 
-    private val creationTraceMap = ContainerUtil.createConcurrentWeakMap<MockComponentManager, Throwable>()
+    private konst creationTraceMap = ContainerUtil.createConcurrentWeakMap<MockComponentManager, Throwable>()
 
     @JvmStatic
     fun onCreate(manager: MockComponentManager) {
@@ -33,7 +33,7 @@ object MockComponentManagerCreationTracer {
     @JvmStatic
     fun onGetComponentInstance(manager: MockComponentManager) {
         if (manager.isDisposed) {
-            val trace = creationTraceMap[manager] ?: return
+            konst trace = creationTraceMap[manager] ?: return
             trace.printStackTrace(System.err)
         }
     }

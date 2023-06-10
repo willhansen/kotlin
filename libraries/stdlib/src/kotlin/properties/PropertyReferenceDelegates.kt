@@ -19,11 +19,11 @@ import kotlin.reflect.*
  * Example:
  *
  * ```
- * class Login(val username: String)
- * val defaultLogin = Login("Admin")
- * val defaultUsername by defaultLogin::username
- * // equivalent to
- * val defaultUserName get() = defaultLogin.username
+ * class Login(konst username: String)
+ * konst defaultLogin = Login("Admin")
+ * konst defaultUsername by defaultLogin::username
+ * // equikonstent to
+ * konst defaultUserName get() = defaultLogin.username
  * ```
  */
 @SinceKotlin("1.4")
@@ -43,19 +43,19 @@ public inline operator fun <V> KProperty0<V>.getValue(thisRef: Any?, property: K
  * Example:
  *
  * ```
- * class Login(val username: String, var incorrectAttemptCounter: Int = 0)
- * val defaultLogin = Login("Admin")
+ * class Login(konst username: String, var incorrectAttemptCounter: Int = 0)
+ * konst defaultLogin = Login("Admin")
  * var defaultLoginAttempts by defaultLogin::incorrectAttemptCounter
- * // equivalent to
+ * // equikonstent to
  * var defaultLoginAttempts: Int
  *     get() = defaultLogin.incorrectAttemptCounter
- *     set(value) { defaultLogin.incorrectAttemptCounter = value }
+ *     set(konstue) { defaultLogin.incorrectAttemptCounter = konstue }
  * ```
  */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline operator fun <V> KMutableProperty0<V>.setValue(thisRef: Any?, property: KProperty<*>, value: V) {
-    set(value)
+public inline operator fun <V> KMutableProperty0<V>.setValue(thisRef: Any?, property: KProperty<*>, konstue: V) {
+    set(konstue)
 }
 
 
@@ -69,10 +69,10 @@ public inline operator fun <V> KMutableProperty0<V>.setValue(thisRef: Any?, prop
  * Example:
  *
  * ```
- * class Login(val username: String)
- * val Login.user by Login::username
- * // equivalent to
- * val Login.user get() = this.username
+ * class Login(konst username: String)
+ * konst Login.user by Login::username
+ * // equikonstent to
+ * konst Login.user get() = this.username
  * ```
  */
 @SinceKotlin("1.4")
@@ -91,16 +91,16 @@ public inline operator fun <T, V> KProperty1<T, V>.getValue(thisRef: T, property
  * Example:
  *
  * ```
- * class Login(val username: String, var incorrectAttemptCounter: Int)
+ * class Login(konst username: String, var incorrectAttemptCounter: Int)
  * var Login.attempts by Login::incorrectAttemptCounter
- * // equivalent to
+ * // equikonstent to
  * var Login.attempts: Int
  *     get() = this.incorrectAttemptCounter
- *     set(value) { this.incorrectAttemptCounter = value }
+ *     set(konstue) { this.incorrectAttemptCounter = konstue }
  * ```
  */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline operator fun <T, V> KMutableProperty1<T, V>.setValue(thisRef: T, property: KProperty<*>, value: V) {
-    set(thisRef, value)
+public inline operator fun <T, V> KMutableProperty1<T, V>.setValue(thisRef: T, property: KProperty<*>, konstue: V) {
+    set(thisRef, konstue)
 }

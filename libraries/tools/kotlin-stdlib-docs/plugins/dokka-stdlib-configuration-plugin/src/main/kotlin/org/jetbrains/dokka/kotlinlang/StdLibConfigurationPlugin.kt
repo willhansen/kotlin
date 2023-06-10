@@ -14,12 +14,12 @@ import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 import org.jetbrains.dokka.plugability.configuration
 
 class StdLibConfigurationPlugin : DokkaPlugin() {
-    private val dokkaBase by lazy { plugin<DokkaBase>() }
+    private konst dokkaBase by lazy { plugin<DokkaBase>() }
 
     @Suppress("unused")
-    val stdLibKotlinAnalysis by extending {
+    konst stdLibKotlinAnalysis by extending {
         dokkaBase.kotlinAnalysis providing { ctx ->
-            val ignoreCommonBuiltIns = configuration<StdLibConfigurationPlugin, StdLibAnalysisConfiguration>(ctx)?.ignoreCommonBuiltIns ?: false
+            konst ignoreCommonBuiltIns = configuration<StdLibConfigurationPlugin, StdLibAnalysisConfiguration>(ctx)?.ignoreCommonBuiltIns ?: false
             ProjectKotlinAnalysis(
                 sourceSets = ctx.configuration.sourceSets,
                 logger = ctx.logger,

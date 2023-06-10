@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}testGlobalVal
 //   Public signature: /testGlobalVal|-7890151294500331033[0]
-val testGlobalVal: String
+konst testGlobalVal: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-testGlobalVal>(){}kotlin.String
   //   Public signature: /testGlobalVal.<get-testGlobalVal>|-3066052240315060283[0]
@@ -40,7 +40,7 @@ fun use(s: String): Unit
 // CHECK:
 //   Mangled name: {}testGlobalValGetter
 //   Public signature: /testGlobalValGetter|4373373755408489194[0]
-val testGlobalValGetter: String
+konst testGlobalValGetter: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-testGlobalValGetter>(){}kotlin.String
   //   Public signature: /testGlobalValGetter.<get-testGlobalValGetter>|4232922191754925744[0]

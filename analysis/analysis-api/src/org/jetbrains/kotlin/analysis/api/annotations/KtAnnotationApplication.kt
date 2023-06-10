@@ -24,21 +24,21 @@ public sealed interface KtAnnotationApplication {
     /**
      * The [ClassId] of applied annotation. [ClassId] is a fully qualified name on annotation class.
      */
-    public val classId: ClassId?
+    public konst classId: ClassId?
 
     /**
      * [com.intellij.psi.PsiElement] which was used to apply annotation to declaration/type.
      *
      * Present only for declarations from sources. For declarations from other places (libraries, stdlib) it's `null`
      */
-    public val psi: KtCallElement?
+    public konst psi: KtCallElement?
 
     /**
      * [AnnotationUseSiteTarget] to which annotation was applied. May be not-null only for annotation applications for declarations.
      *
      * See more details in [Kotlin Documentation](https://kotlinlang.org/docs/annotations.html#annotation-use-site-targets) for more information about annotation targets.
      */
-    public val useSiteTarget: AnnotationUseSiteTarget?
+    public konst useSiteTarget: AnnotationUseSiteTarget?
 
     /**
      * This property can be used to optimize some argument processing logic.
@@ -46,10 +46,10 @@ public sealed interface KtAnnotationApplication {
      * then you can avoid [KtAnnotated.annotationsByClassId] call,
      * because effectively you already have all necessary information in [KtAnnotationApplicationInfo]
      */
-    public val isCallWithArguments: Boolean
+    public konst isCallWithArguments: Boolean
 
     /**
      * An index of the annotation in an owner. `null` when annotation is used as an argument of other annotations
      */
-    public val index: Int?
+    public konst index: Int?
 }

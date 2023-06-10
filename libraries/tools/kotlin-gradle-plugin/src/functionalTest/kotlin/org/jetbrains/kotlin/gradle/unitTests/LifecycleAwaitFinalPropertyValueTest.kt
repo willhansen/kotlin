@@ -23,11 +23,11 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 class LifecycleAwaitFinalPropertyValueTest {
-    private val project = buildProjectWithMPP()
+    private konst project = buildProjectWithMPP()
 
     @Test
     fun `test - awaitFinalValue`() = project.runLifecycleAwareTest {
-        val property = project.newProperty<Int>()
+        konst property = project.newProperty<Int>()
 
         launchInStage(FinaliseDsl.previousOrThrow.previousOrThrow) {
             property.set(1)
@@ -38,14 +38,14 @@ class LifecycleAwaitFinalPropertyValueTest {
             property.set(2)
         }
 
-        assertEquals(EvaluateBuildscript, currentKotlinPluginLifecycle().stage)
+        assertEquals(EkonstuateBuildscript, currentKotlinPluginLifecycle().stage)
         assertEquals(2, property.awaitFinalValue())
         assertEquals(AfterFinaliseDsl, currentKotlinPluginLifecycle().stage)
     }
 
     @Test
-    fun `test - changing value after finalized`() = project.runLifecycleAwareTest {
-        val property = project.newProperty<Int>()
+    fun `test - changing konstue after finalized`() = project.runLifecycleAwareTest {
+        konst property = project.newProperty<Int>()
         property.set(1)
 
         launch {
@@ -60,7 +60,7 @@ class LifecycleAwaitFinalPropertyValueTest {
     @Test
     fun `test - creating a property - after finaliseDsl stage already passed`() = project.runLifecycleAwareTest {
         launchInStage(KotlinPluginLifecycle.Stage.last) {
-            val property = project.newProperty<String>()
+            konst property = project.newProperty<String>()
             assertNull(property.awaitFinalValue())
             assertFails { property.set("") }
         }
@@ -69,7 +69,7 @@ class LifecycleAwaitFinalPropertyValueTest {
     @Test
     fun `test - creating a property - in finaliseIn stage`() = project.runLifecycleAwareTest {
         launchInStage(KotlinPluginLifecycle.Stage.FinaliseDsl) {
-            val property = project.newProperty<String>()
+            konst property = project.newProperty<String>()
             assertNull(property.awaitFinalValue())
             assertFails { property.set("") }
         }

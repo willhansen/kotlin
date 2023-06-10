@@ -1,54 +1,54 @@
 // FIR_IDENTICAL
 // WITH_STDLIB
 
-const val byte: Byte = 1
-const val short: Short = 2
-const val int: Int = 3
-const val long: Long = 4L
-const val float: Float = 5f
-const val double: Double = 6.0
+const konst byte: Byte = 1
+const konst short: Short = 2
+const konst int: Int = 3
+const konst long: Long = 4L
+const konst float: Float = 5f
+const konst double: Double = 6.0
 
-val byteFloorByte = byte.floorDiv(byte)
-val byteFloorShort = byte.floorDiv(short)
-val byteFloorInt = byte.floorDiv(int)
-val byteFloorLong = byte.floorDiv(long)
+konst byteFloorByte = byte.floorDiv(byte)
+konst byteFloorShort = byte.floorDiv(short)
+konst byteFloorInt = byte.floorDiv(int)
+konst byteFloorLong = byte.floorDiv(long)
 
-val shortFloorByte = byte.floorDiv(byte)
-val shortFloorShort = byte.floorDiv(short)
-val shortFloorInt = byte.floorDiv(int)
-val shortFloorLong = byte.floorDiv(long)
+konst shortFloorByte = byte.floorDiv(byte)
+konst shortFloorShort = byte.floorDiv(short)
+konst shortFloorInt = byte.floorDiv(int)
+konst shortFloorLong = byte.floorDiv(long)
 
-val intFloorByte = byte.floorDiv(byte)
-val intFloorShort = byte.floorDiv(short)
-val intFloorInt = byte.floorDiv(int)
-val intFloorLong = byte.floorDiv(long)
+konst intFloorByte = byte.floorDiv(byte)
+konst intFloorShort = byte.floorDiv(short)
+konst intFloorInt = byte.floorDiv(int)
+konst intFloorLong = byte.floorDiv(long)
 
-val longFloorByte = byte.floorDiv(byte)
-val longFloorShort = byte.floorDiv(short)
-val longFloorInt = byte.floorDiv(int)
-val longFloorLong = byte.floorDiv(long)
+konst longFloorByte = byte.floorDiv(byte)
+konst longFloorShort = byte.floorDiv(short)
+konst longFloorInt = byte.floorDiv(int)
+konst longFloorLong = byte.floorDiv(long)
 
-val byteModByte = byte.mod(byte)
-val byteModShort = byte.mod(short)
-val byteModInt = byte.mod(int)
-val byteModLong = byte.mod(long)
+konst byteModByte = byte.mod(byte)
+konst byteModShort = byte.mod(short)
+konst byteModInt = byte.mod(int)
+konst byteModLong = byte.mod(long)
 
-val shortModByte = byte.mod(byte)
-val shortModShort = byte.mod(short)
-val shortModInt = byte.mod(int)
-val shortModLong = byte.mod(long)
+konst shortModByte = byte.mod(byte)
+konst shortModShort = byte.mod(short)
+konst shortModInt = byte.mod(int)
+konst shortModLong = byte.mod(long)
 
-val intModByte = byte.mod(byte)
-val intModShort = byte.mod(short)
-val intModInt = byte.mod(int)
-val intModLong = byte.mod(long)
+konst intModByte = byte.mod(byte)
+konst intModShort = byte.mod(short)
+konst intModInt = byte.mod(int)
+konst intModLong = byte.mod(long)
 
-val longModByte = byte.mod(byte)
-val longModShort = byte.mod(short)
-val longModInt = byte.mod(int)
-val longModLong = byte.mod(long)
+konst longModByte = byte.mod(byte)
+konst longModShort = byte.mod(short)
+konst longModInt = byte.mod(int)
+konst longModLong = byte.mod(long)
 
-val floatModFloat = float.mod(float)
-val floatModDouble = float.mod(double)
-val doubleModFloat = double.mod(float)
-val doubleModDouble = double.mod(double)
+konst floatModFloat = float.mod(float)
+konst floatModDouble = float.mod(double)
+konst doubleModFloat = double.mod(float)
+konst doubleModDouble = double.mod(double)

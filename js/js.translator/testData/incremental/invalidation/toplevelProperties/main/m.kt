@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val r = testToplevelProperties()
+    konst r = testToplevelProperties()
     if (r != stepId) {
         return "Fail, got $r"
     }

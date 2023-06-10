@@ -3,7 +3,7 @@
 // ENABLE_JVM_PREVIEW
 
 @JvmRecord
-data class MyRec(override val size: Int) : Collection<String> {
+data class MyRec(override konst size: Int) : Collection<String> {
     override fun contains(element: String): Boolean {
         TODO("Not yet implemented")
     }
@@ -22,13 +22,13 @@ data class MyRec(override val size: Int) : Collection<String> {
 }
 
 fun box(m: MyRec, c: Collection<*>): String {
-    val c: Collection<*> = m
+    konst c: Collection<*> = m
     if (m.size != 56) return "fail 1"
     if (c.size != 56) return "fail 2"
     return "OK"
 }
 
 fun box(): String {
-    val m = MyRec(56)
+    konst m = MyRec(56)
     return box(m, m)
 }

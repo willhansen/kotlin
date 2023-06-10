@@ -38,11 +38,11 @@ interface PlatformSpecificExtension<S : PlatformSpecificExtension<S>>
  * platform.
  *
  */
-abstract class PlatformExtensionsClashResolver<E : PlatformSpecificExtension<E>>(val applicableTo: Class<E>) {
+abstract class PlatformExtensionsClashResolver<E : PlatformSpecificExtension<E>>(konst applicableTo: Class<E>) {
     abstract fun resolveExtensionsClash(extensions: List<E>): E
 
     class FallbackToDefault<E : PlatformSpecificExtension<E>>(
-        private val defaultValue: E,
+        private konst defaultValue: E,
         applicableTo: Class<E>
     ) : PlatformExtensionsClashResolver<E>(applicableTo) {
 

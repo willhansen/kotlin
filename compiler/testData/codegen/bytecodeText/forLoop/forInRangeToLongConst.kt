@@ -7,7 +7,7 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-const val N = 42L
+const konst N = 42L
 
 fun test(): Long {
     var sum = 0L

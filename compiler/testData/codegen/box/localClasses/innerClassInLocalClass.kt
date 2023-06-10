@@ -1,10 +1,10 @@
 class A {
-    val a = 1
+    konst a = 1
     fun calc () : Int {
         class B() {
-            val b = 2
+            konst b = 2
             inner class C {
-                val c = 3
+                konst c = 3
                 fun calc() = this@A.a + this@B.b + this.c
             }
         }

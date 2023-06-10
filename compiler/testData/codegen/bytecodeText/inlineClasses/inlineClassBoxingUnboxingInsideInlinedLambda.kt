@@ -2,7 +2,7 @@
 
 // FILE: utils.kt
 
-inline class UInt(val value: Int)
+inline class UInt(konst konstue: Int)
 
 // FILE: test.kt
 
@@ -33,4 +33,4 @@ inline fun <T> T.myLet(f: (T) -> Unit) = f(this)
 // 5 INVOKEVIRTUAL UInt.unbox
 
 // 0 intValue
-// 0 valueOf
+// 0 konstueOf

@@ -13,8 +13,8 @@ import java.util.Locale
 /**
  * Returns the Unicode general category of this character.
  */
-public actual val Char.category: CharCategory
-    get() = CharCategory.valueOf(Character.getType(this))
+public actual konst Char.category: CharCategory
+    get() = CharCategory.konstueOf(Character.getType(this))
 
 /**
  * Returns `true` if this character (Unicode code point) is defined in Unicode.
@@ -132,7 +132,7 @@ public actual inline fun Char.toUpperCase(): Char = uppercaseChar()
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [uppercase] function.
- * If this character has no mapping equivalent, the character itself is returned.
+ * If this character has no mapping equikonstent, the character itself is returned.
  *
  * @sample samples.text.Chars.uppercase
  */
@@ -183,7 +183,7 @@ public actual inline fun Char.toLowerCase(): Char = lowercaseChar()
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [lowercase] function.
- * If this character has no mapping equivalent, the character itself is returned.
+ * If this character has no mapping equikonstent, the character itself is returned.
  *
  * @sample samples.text.Chars.lowercase
  */
@@ -246,7 +246,7 @@ public inline fun Char.toTitleCase(): Char = titlecaseChar()
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [titlecase] function.
- * If this character has no mapping equivalent, the result of calling [uppercaseChar] is returned.
+ * If this character has no mapping equikonstent, the result of calling [uppercaseChar] is returned.
  *
  * @sample samples.text.Chars.titlecase
  */
@@ -268,7 +268,7 @@ public actual inline fun Char.titlecaseChar(): Char = Character.toTitleCase(this
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalStdlibApi::class)
 public fun Char.titlecase(locale: Locale): String {
-    val localizedUppercase = uppercase(locale)
+    konst localizedUppercase = uppercase(locale)
     if (localizedUppercase.length > 1) {
         return if (this == '\u0149') localizedUppercase else localizedUppercase[0] + localizedUppercase.substring(1).lowercase()
     }
@@ -281,7 +281,7 @@ public fun Char.titlecase(locale: Locale): String {
 /**
  * Returns the Unicode directionality property for the given character.
  */
-public val Char.directionality: CharDirectionality get() = CharDirectionality.valueOf(Character.getDirectionality(this).toInt())
+public konst Char.directionality: CharDirectionality get() = CharDirectionality.konstueOf(Character.getDirectionality(this).toInt())
 
 /**
  * Returns `true` if this character is a Unicode high-surrogate code unit (also known as leading-surrogate code unit).
@@ -306,12 +306,12 @@ public actual inline fun Char.isLowSurrogate(): Boolean = Character.isLowSurroga
 internal actual fun digitOf(char: Char, radix: Int): Int = Character.digit(char.code, radix)
 
 /**
- * Checks whether the given [radix] is valid radix for string to number and number to string conversion.
+ * Checks whether the given [radix] is konstid radix for string to number and number to string conversion.
  */
 @PublishedApi
 internal actual fun checkRadix(radix: Int): Int {
     if (radix !in Character.MIN_RADIX..Character.MAX_RADIX) {
-        throw IllegalArgumentException("radix $radix was not in valid range ${Character.MIN_RADIX..Character.MAX_RADIX}")
+        throw IllegalArgumentException("radix $radix was not in konstid range ${Character.MIN_RADIX..Character.MAX_RADIX}")
     }
     return radix
 }

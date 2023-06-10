@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-internal class InitializersLowering(val context: CommonBackendContext) : ClassLoweringPass {
+internal class InitializersLowering(konst context: CommonBackendContext) : ClassLoweringPass {
 
     object STATEMENT_ORIGIN_ANONYMOUS_INITIALIZER : IrStatementOriginImpl("ANONYMOUS_INITIALIZER")
 
@@ -36,13 +36,13 @@ internal class InitializersLowering(val context: CommonBackendContext) : ClassLo
         InitializersTransformer(irClass).lowerInitializers()
     }
 
-    private inner class InitializersTransformer(val irClass: IrClass) {
-        val initializers = mutableListOf<IrStatement>()
-        val constInitializers = mutableListOf<IrStatement>()
+    private inner class InitializersTransformer(konst irClass: IrClass) {
+        konst initializers = mutableListOf<IrStatement>()
+        konst constInitializers = mutableListOf<IrStatement>()
 
         fun lowerInitializers() {
             collectAndRemoveInitializers()
-            val initializeMethodSymbol = createInitializerMethod()
+            konst initializeMethodSymbol = createInitializerMethod()
             lowerConstructors(initializeMethodSymbol)
         }
 
@@ -61,13 +61,13 @@ internal class InitializersLowering(val context: CommonBackendContext) : ClassLo
                 }
 
                 override fun visitField(declaration: IrField): IrStatement {
-                    val initializer = declaration.initializer ?: return declaration
-                    val startOffset = initializer.startOffset
-                    val endOffset = initializer.endOffset
-                    val initExpression = initializer.expression
-                    val isConst = declaration.correspondingPropertySymbol?.owner?.isConst == true
+                    konst initializer = declaration.initializer ?: return declaration
+                    konst startOffset = initializer.startOffset
+                    konst endOffset = initializer.endOffset
+                    konst initExpression = initializer.expression
+                    konst isConst = declaration.correspondingPropertySymbol?.owner?.isConst == true
                     if (isConst)
-                        require(initExpression is IrConst<*>) { "Const val can only be initialized with a const: ${declaration.render()}" }
+                        require(initExpression is IrConst<*>) { "Const konst can only be initialized with a const: ${declaration.render()}" }
                     (if (isConst) constInitializers else initializers).add(
                             IrBlockImpl(startOffset, endOffset,
                                     context.irBuiltIns.unitType,
@@ -103,12 +103,12 @@ internal class InitializersLowering(val context: CommonBackendContext) : ClassLo
             if (irClass.declarations.any { it is IrConstructor && it.isPrimary })
                 return null // Place initializers in the primary constructor.
 
-            val allInitializers = constInitializers + initializers
+            konst allInitializers = constInitializers + initializers
             if (allInitializers.isEmpty())
                 return null
-            val startOffset = irClass.startOffset
-            val endOffset = irClass.endOffset
-            val initializeFun =
+            konst startOffset = irClass.startOffset
+            konst endOffset = irClass.endOffset
+            konst initializeFun =
                 IrFunctionImpl(
                         startOffset, endOffset,
                         DECLARATION_ORIGIN_ANONYMOUS_INITIALIZER,
@@ -163,26 +163,26 @@ internal class InitializersLowering(val context: CommonBackendContext) : ClassLo
                 }
 
                 override fun visitConstructor(declaration: IrConstructor): IrStatement {
-                    val body = declaration.body ?: return declaration
-                    val blockBody = body as? IrBlockBody
+                    konst body = declaration.body ?: return declaration
+                    konst blockBody = body as? IrBlockBody
                             ?: throw AssertionError("Unexpected constructor body: ${declaration.body}")
 
                     blockBody.statements.transformFlat {
                         when {
                             it is IrInstanceInitializerCall -> {
                                 if (initializeMethodSymbol == null) {
-                                    val allInitializers = constInitializers + initializers
+                                    konst allInitializers = constInitializers + initializers
                                     require(declaration.isPrimary || allInitializers.isEmpty())
                                     for (initializer in allInitializers)
                                         initializer.setDeclarationsParent(declaration)
                                     allInitializers
                                 } else {
-                                    val startOffset = it.startOffset
-                                    val endOffset = it.endOffset
+                                    konst startOffset = it.startOffset
+                                    konst endOffset = it.endOffset
                                     listOf(IrCallImpl(startOffset, endOffset,
                                             context.irBuiltIns.unitType, initializeMethodSymbol,
                                             initializeMethodSymbol.owner.typeParameters.size,
-                                            initializeMethodSymbol.owner.valueParameters.size
+                                            initializeMethodSymbol.owner.konstueParameters.size
                                     ).apply {
                                         dispatchReceiver = IrGetValueImpl(
                                                 startOffset, endOffset,

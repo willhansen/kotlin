@@ -1,9 +1,9 @@
 interface FooTrait {
-        val propertyTest: String
+        konst propertyTest: String
 }
 
 class FooDelegate: FooTrait {
-        override val propertyTest: String = "OK"
+        override konst propertyTest: String = "OK"
 }
 
 class DelegateTest(): FooTrait by FooDelegate() {

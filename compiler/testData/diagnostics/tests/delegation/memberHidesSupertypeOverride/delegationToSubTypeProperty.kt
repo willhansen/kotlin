@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 public interface Base {
-    val test: String
+    konst test: String
             get() = "OK"
 }
 

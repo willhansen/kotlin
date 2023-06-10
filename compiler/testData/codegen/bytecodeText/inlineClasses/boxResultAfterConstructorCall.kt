@@ -2,8 +2,8 @@
 
 // FILE: utils.kt
 
-inline class AsInt(val value: Int)
-inline class AsAny(val value: Any)
+inline class AsInt(konst konstue: Int)
+inline class AsAny(konst konstue: Any)
 
 // FILE: test.kt
 
@@ -21,5 +21,5 @@ fun test() {
 // 1 INVOKESTATIC AsAny\.box
 // 0 INVOKEVIRTUAL AsAny.unbox
 
-// 1 valueOf
+// 1 konstueOf
 // 0 intValue

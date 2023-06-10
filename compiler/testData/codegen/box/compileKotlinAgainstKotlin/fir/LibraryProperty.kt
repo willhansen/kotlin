@@ -5,10 +5,10 @@
 
 package first.second
 
-class FqName(val s: String)
+class FqName(konst s: String)
 
 @JvmField
-val VOLATILE_ANNOTATION_FQ_NAME = FqName("volatile")
+konst VOLATILE_ANNOTATION_FQ_NAME = FqName("volatile")
 
 // MODULE: main(lib)
 // WITH_STDLIB

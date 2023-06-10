@@ -4,10 +4,10 @@ FILE: smartcastToStarProjectedType.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val description: R|kotlin/String| = R|<local>/description|
+        public final konst description: R|kotlin/String| = R|<local>/description|
             public get(): R|kotlin/String|
 
-        public final val propertyRef: R|NodePropertyRef<TNode, TProperty, TPropertyVal>| = R|<local>/propertyRef|
+        public final konst propertyRef: R|NodePropertyRef<TNode, TProperty, TPropertyVal>| = R|<local>/propertyRef|
             public get(): R|NodePropertyRef<TNode, TProperty, TPropertyVal>|
 
         public final fun test_1(other: R|kotlin/Any?|): R|kotlin/Boolean| {

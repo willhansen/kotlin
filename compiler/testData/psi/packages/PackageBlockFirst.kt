@@ -1,4 +1,4 @@
 package foobar {
-  val a = 1
-  val b = foobar.a
+  konst a = 1
+  konst b = foobar.a
 }

@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC1(val value: Int)
+konstue class IC1(konst konstue: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC2(val value: Int)
+konstue class IC2(konst konstue: Int)
 
 fun foo(x: IC1, y: IC2) = (x as Any) == y
 

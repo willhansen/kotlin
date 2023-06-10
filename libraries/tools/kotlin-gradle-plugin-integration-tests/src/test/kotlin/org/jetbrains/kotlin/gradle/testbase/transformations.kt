@@ -16,7 +16,7 @@ import java.nio.file.Path
 fun Path.modify(transform: (currentContent: String) -> String) {
     assert(Files.isRegularFile(this)) { "$this is not a regular file!" }
 
-    val file = toFile()
+    konst file = toFile()
     file.writeText(transform(file.readText()))
 }
 

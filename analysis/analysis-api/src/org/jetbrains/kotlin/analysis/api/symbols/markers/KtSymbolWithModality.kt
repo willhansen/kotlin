@@ -9,5 +9,5 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 
 public interface KtSymbolWithModality : KtSymbol {
-    public val modality: Modality
+    public konst modality: Modality
 }

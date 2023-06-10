@@ -10,10 +10,10 @@ import org.jetbrains.kotlin.diagnostics.DiagnosticFactory
 import org.jetbrains.kotlin.diagnostics.Severity
 
 class SyntaxErrorDiagnosticFactory private constructor() : DiagnosticFactory<SyntaxErrorDiagnostic>(Severity.ERROR) {
-    override val name: String
+    override konst name: String
         get() = "SYNTAX"
 
     companion object {
-        val INSTANCE = SyntaxErrorDiagnosticFactory()
+        konst INSTANCE = SyntaxErrorDiagnosticFactory()
     }
 }

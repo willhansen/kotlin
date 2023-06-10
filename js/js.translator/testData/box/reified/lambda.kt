@@ -5,19 +5,19 @@ package foo
 // CHECK_CALLED: doFilter
 // CHECK_NOT_CALLED: filterIsInstance
 
-data class A(val x: Int)
+data class A(konst x: Int)
 
-data class B(val x: Int)
+data class B(konst x: Int)
 
 // filter from stdlib is not used, because it's important,
 // that filter function is not inline. When lambda is
 // not inlined and captures some local variable,
 // the test crashes on runtime (it's expected behaviour).
 fun <T> Array<T>.doFilter(fn: (T)->Boolean): List<T> {
-    val filtered = arrayListOf<T>()
+    konst filtered = arrayListOf<T>()
 
     for (i in 0..lastIndex) {
-        val element = this[i]
+        konst element = this[i]
 
         if (fn(element)) {
             filtered.add(element)
@@ -32,7 +32,7 @@ inline fun <reified T> filterIsInstance(arrayOfAnys: Array<Any>): List<T> {
 }
 
 fun box(): String {
-    val src: Array<Any> = arrayOf(A(1), B(2), A(3), B(4))
+    konst src: Array<Any> = arrayOf(A(1), B(2), A(3), B(4))
 
     assertEquals(listOf(A(1), A(3)), filterIsInstance<A>(src))
     assertEquals(listOf(B(2), B(4)), filterIsInstance<B>(src))

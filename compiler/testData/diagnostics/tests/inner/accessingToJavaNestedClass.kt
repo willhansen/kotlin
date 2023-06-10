@@ -40,25 +40,25 @@ class K : D()
 // FILE: test.kt
 
 fun test() {
-    val ac: A.NC = A.NC()
-    val aic: A.IC = A().IC()
-    val ai: A.NI? = null
+    konst ac: A.NC = A.NC()
+    konst aic: A.IC = A().IC()
+    konst ai: A.NI? = null
 
-    val ic: I.NC = I.NC()
-    val ii: I.NI? = null
+    konst ic: I.NC = I.NC()
+    konst ii: I.NI? = null
 
-    val bc: B.<!UNRESOLVED_REFERENCE!>NC<!> = B.<!UNRESOLVED_REFERENCE!>NC<!>()
-    val bic: B.<!UNRESOLVED_REFERENCE!>IC<!> = B().IC()
-    val bi: B.<!UNRESOLVED_REFERENCE!>NI<!>? = null
+    konst bc: B.<!UNRESOLVED_REFERENCE!>NC<!> = B.<!UNRESOLVED_REFERENCE!>NC<!>()
+    konst bic: B.<!UNRESOLVED_REFERENCE!>IC<!> = B().IC()
+    konst bi: B.<!UNRESOLVED_REFERENCE!>NI<!>? = null
 
-    val cc: C.<!UNRESOLVED_REFERENCE!>NC<!> = C.<!UNRESOLVED_REFERENCE!>NC<!>()
-    val ci: C.<!UNRESOLVED_REFERENCE!>NI<!>? = null
+    konst cc: C.<!UNRESOLVED_REFERENCE!>NC<!> = C.<!UNRESOLVED_REFERENCE!>NC<!>()
+    konst ci: C.<!UNRESOLVED_REFERENCE!>NI<!>? = null
 
-    val dc: D.<!UNRESOLVED_REFERENCE!>NC<!> = D.<!UNRESOLVED_REFERENCE!>NC<!>()
-    val dic: D.<!UNRESOLVED_REFERENCE!>IC<!> = D().IC()
-    val di: D.<!UNRESOLVED_REFERENCE!>NI<!>? = null
+    konst dc: D.<!UNRESOLVED_REFERENCE!>NC<!> = D.<!UNRESOLVED_REFERENCE!>NC<!>()
+    konst dic: D.<!UNRESOLVED_REFERENCE!>IC<!> = D().IC()
+    konst di: D.<!UNRESOLVED_REFERENCE!>NI<!>? = null
 
-    val kc: K.<!UNRESOLVED_REFERENCE!>NC<!> = K.<!UNRESOLVED_REFERENCE!>NC<!>()
-    val kic: K.<!UNRESOLVED_REFERENCE!>IC<!> = K().IC()
-    val ki: K.<!UNRESOLVED_REFERENCE!>NI<!>? = null
+    konst kc: K.<!UNRESOLVED_REFERENCE!>NC<!> = K.<!UNRESOLVED_REFERENCE!>NC<!>()
+    konst kic: K.<!UNRESOLVED_REFERENCE!>IC<!> = K().IC()
+    konst ki: K.<!UNRESOLVED_REFERENCE!>NI<!>? = null
 }

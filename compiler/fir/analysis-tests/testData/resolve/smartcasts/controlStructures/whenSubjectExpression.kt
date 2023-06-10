@@ -10,7 +10,7 @@ fun whenWithSubjectExpression(x: Any) {
 }
 
 fun whenWithSubjectVariable(x: Any) {
-    when (val y = x) {
+    when (konst y = x) {
         !is Double -> -1
         0.0 -> 0 // `subj` in `subj == 0.0` must have type 'double'
         else -> y.toInt()

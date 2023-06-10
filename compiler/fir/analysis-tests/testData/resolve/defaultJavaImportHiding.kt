@@ -33,21 +33,21 @@ import util.HashSet
 class LinkedHashMap<K, V> : java.util.LinkedHashMap<K, V>()
 
 fun test_1() {
-    val map = HashMap<Int, Int>() // <- should be util.HashMap
+    konst map = HashMap<Int, Int>() // <- should be util.HashMap
 }
 
 fun test_2() {
-    val set = HashSet<Int>() // <- should be util.HashSet
+    konst set = HashSet<Int>() // <- should be util.HashSet
 }
 
 fun test_3() {
-    val list = ArrayList<Int>() // <- should be foo.ArrayList
+    konst list = ArrayList<Int>() // <- should be foo.ArrayList
 }
 
 fun test_4() {
-    val list = LinkedList<Int>() // <- should be foo.LinkedList
+    konst list = LinkedList<Int>() // <- should be foo.LinkedList
 }
 
 fun test_5() {
-    val map = LinkedHashMap<Int, Int>() // should be foo.LinkedHashMap
+    konst map = LinkedHashMap<Int, Int>() // should be foo.LinkedHashMap
 }

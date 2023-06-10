@@ -8,7 +8,7 @@ fun box() {
 }
 
 inline fun lookAtMe(f: () -> Int) {
-    val a = 21
+    konst a = 21
     a + f()
 }
 

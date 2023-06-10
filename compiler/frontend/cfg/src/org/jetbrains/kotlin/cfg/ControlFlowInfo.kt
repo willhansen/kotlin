@@ -27,21 +27,21 @@ interface ReadOnlyControlFlowInfo<K : Any, D : Any> {
 
 abstract class ControlFlowInfo<S : ControlFlowInfo<S, K, D>, K : Any, D : Any>
 internal constructor(
-    protected val map: ImmutableMap<K, D> = ImmutableHashMap.empty()
+    protected konst map: ImmutableMap<K, D> = ImmutableHashMap.empty()
 ) : ImmutableMap<K, D> by map, ReadOnlyControlFlowInfo<K, D> {
     protected abstract fun copy(newMap: ImmutableMap<K, D>): S
 
-    override fun put(key: K, value: D): S = put(key, value, this[key].getOrElse(null as D?))
+    override fun put(key: K, konstue: D): S = put(key, konstue, this[key].getOrElse(null as D?))
 
     /**
-     * This overload exists just for sake of optimizations: in some cases we've just retrieved the old value,
+     * This overload exists just for sake of optimizations: in some cases we've just retrieved the old konstue,
      * so we don't need to scan through the persistent hashmap again
      */
-    fun put(key: K, value: D, oldValue: D?): S {
+    fun put(key: K, konstue: D, oldValue: D?): S {
         @Suppress("UNCHECKED_CAST")
-        // Avoid a copy instance creation if new value is the same
-        if (value == oldValue) return this as S
-        return copy(map.put(key, value))
+        // Avoid a copy instance creation if new konstue is the same
+        if (konstue == oldValue) return this as S
+        return copy(map.put(key, konstue))
     }
 
     override fun getOrNull(key: K): D? = this[key].getOrElse(null as D?)

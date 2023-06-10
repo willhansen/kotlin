@@ -24,16 +24,16 @@ import kotlin.test.Test
 import kotlin.test.assertTrue
 
 open class CompatibilityTests {
-    val tmpFolder = TemporaryFolder()
+    konst tmpFolder = TemporaryFolder()
         @Rule get
 
-    val projectDirectory: File
+    konst projectDirectory: File
         get() = tmpFolder.root
 
     @Test
     fun `Plugin should fail if running with Gradle prior to the required one`() {
-        val project = KonanProject.createEmpty(projectDirectory)
-        val result = project
+        konst project = KonanProject.createEmpty(projectDirectory)
+        konst result = project
                 .createRunner()
                 .withGradleDistribution(URI.create(
                     "https://cache-redirector.jetbrains.com/services.gradle.org/distributions/gradle-4.5-bin.zip"

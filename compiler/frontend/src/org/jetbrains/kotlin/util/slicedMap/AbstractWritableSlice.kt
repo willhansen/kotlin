@@ -17,7 +17,7 @@
 package org.jetbrains.kotlin.util.slicedMap
 
 abstract class AbstractWritableSlice<K, V>(debugName: String) : KeyWithSlice<K, V, WritableSlice<K, V>>(debugName), WritableSlice<K, V> {
-    override val slice: WritableSlice<K, V>
+    override konst slice: WritableSlice<K, V>
         get() = this
 
     override fun getKey(): AbstractWritableSlice<K, V> = this

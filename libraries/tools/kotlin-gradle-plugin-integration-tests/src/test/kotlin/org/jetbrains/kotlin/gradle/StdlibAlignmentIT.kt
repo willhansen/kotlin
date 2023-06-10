@@ -245,7 +245,7 @@ class StdlibAlignmentIT : KGPBaseTest() {
             subProject("list").javaSourcesDir()
                 .resolve("module-info.java")
                 .modify {
-                    val lines = it.lines()
+                    konst lines = it.lines()
                     """
                     |${lines.first()}
                     |    requires transitive kotlin.stdlib.jdk8;

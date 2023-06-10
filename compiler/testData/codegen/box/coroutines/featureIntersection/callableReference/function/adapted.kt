@@ -6,7 +6,7 @@ import kotlin.coroutines.*
 
 var result = "Fail"
 
-class Wrapper(val action: suspend () -> Unit) {
+class Wrapper(konst action: suspend () -> Unit) {
     init {
         action.startCoroutine(Continuation(EmptyCoroutineContext) { it.getOrThrow() })
     }

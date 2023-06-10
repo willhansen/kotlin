@@ -7,7 +7,7 @@
 // FILE: Provider.java
 
 public class Provider {
-    public <T> String samCall(java.util.concurrent.Callable<? extends T> value) {
+    public <T> String samCall(java.util.concurrent.Callable<? extends T> konstue) {
         return "fail";
     }
 }
@@ -29,16 +29,16 @@ private fun getFirstArgumentType(types: Array<Type>, klass: KClass<*>): String {
 }
 
 class KtProvider : Provider() {
-    override fun <T : Any> samCall(value: Callable<out T>): String =
-        getFirstArgumentType(value.javaClass.genericInterfaces, Callable::class)
+    override fun <T : Any> samCall(konstue: Callable<out T>): String =
+        getFirstArgumentType(konstue.javaClass.genericInterfaces, Callable::class)
 }
 
 fun interface KtCallable<T> {
     fun invoke(): T
 }
 
-fun <T : Any> samCallViaFunInterface(value: KtCallable<out T>): String {
-    return getFirstArgumentType(value.javaClass.genericInterfaces, KtCallable::class)
+fun <T : Any> samCallViaFunInterface(konstue: KtCallable<out T>): String {
+    return getFirstArgumentType(konstue.javaClass.genericInterfaces, KtCallable::class)
 }
 
 fun testCallViaJava(p: Provider): String {
@@ -81,9 +81,9 @@ fun wrapNoInline(f: () -> Unit) {
 }
 
 fun box(): String {
-    val inferredTypeInSamLambda1 = testCallViaJava(KtProvider())
-    val inferredTypeInSamLambda2 = testCallViaKotlin(KtProvider())
-    val inferredTypeInSamLambda3 = testCallViaFunInterface()
+    konst inferredTypeInSamLambda1 = testCallViaJava(KtProvider())
+    konst inferredTypeInSamLambda2 = testCallViaKotlin(KtProvider())
+    konst inferredTypeInSamLambda3 = testCallViaFunInterface()
 
     assertEquals(inferredTypeInSamLambda1, inferredTypeInSamLambda2)
     assertEquals(inferredTypeInSamLambda2, inferredTypeInSamLambda3)

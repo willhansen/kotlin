@@ -18,14 +18,14 @@ class B(var a: Int) {
     var times = false
     var timesAssign = false
 
-    operator fun times(value: Int): B {
+    operator fun times(konstue: Int): B {
         times = true
-        return B(a * value)
+        return B(a * konstue)
     }
 
 }
 
 fun box() {
-    val b = B(1)
+    konst b = B(1)
     b *= 1 //error
 }

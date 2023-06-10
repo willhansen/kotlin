@@ -9,12 +9,12 @@ fun bar(): Int {
     return 42
 }
 
-data class A(val x: Int) {
+data class A(konst x: Int) {
     operator fun plus(other: A) = A(x + other.x)
 }
 
 fun box(): String {
-    val array = arrayOf(0, 1)
+    konst array = arrayOf(0, 1)
     array[foo()] += bar()
 
     if (array[0] != 0) return "fail1a: ${array[0]}"
@@ -22,7 +22,7 @@ fun box(): String {
 
     log += "!;"
 
-    val objArray = arrayOf(A(0), A(1))
+    konst objArray = arrayOf(A(0), A(1))
     objArray[foo()] += A(bar())
     if (objArray[0] != A(0)) return "fail2a: ${array[0]}"
     if (objArray[1] != A(43)) return "fail2b: ${array[0]}"

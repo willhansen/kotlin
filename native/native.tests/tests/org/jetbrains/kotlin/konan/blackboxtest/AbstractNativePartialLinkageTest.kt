@@ -30,12 +30,12 @@ import java.io.File
 @UsePartialLinkage(UsePartialLinkage.Mode.ENABLED_WITH_WARNING)
 abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
     private inner class NativeTestConfiguration(testPath: String) : PartialLinkageTestUtils.TestConfiguration {
-        override val testDir = getAbsoluteFile(testPath)
-        override val buildDir get() = this@AbstractNativePartialLinkageTest.buildDir
-        override val stdlibFile get() = this@AbstractNativePartialLinkageTest.stdlibFile
+        override konst testDir = getAbsoluteFile(testPath)
+        override konst buildDir get() = this@AbstractNativePartialLinkageTest.buildDir
+        override konst stdlibFile get() = this@AbstractNativePartialLinkageTest.stdlibFile
 
-        override val testModeName = with(testRunSettings.get<CacheMode>()) {
-            val cacheModeAlias = when {
+        override konst testModeName = with(testRunSettings.get<CacheMode>()) {
+            konst cacheModeAlias = when {
                 !useStaticCacheForDistributionLibraries -> CacheMode.Alias.NO
                 !useStaticCacheForUserLibraries -> CacheMode.Alias.STATIC_ONLY_DIST
                 else -> CacheMode.Alias.STATIC_EVERYWHERE
@@ -67,16 +67,16 @@ abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
         override fun onIgnoredTest() = throw TestAbortedException()
     }
 
-    private class ProducedKlib(val moduleName: String, val klibArtifact: KLIB, val dependencies: Dependencies) {
+    private class ProducedKlib(konst moduleName: String, konst klibArtifact: KLIB, konst dependencies: Dependencies) {
         override fun equals(other: Any?) = (other as? ProducedKlib)?.moduleName == moduleName
         override fun hashCode() = moduleName.hashCode()
     }
 
-    private val producedKlibs = linkedSetOf<ProducedKlib>() // IMPORTANT: The order makes sense!
+    private konst producedKlibs = linkedSetOf<ProducedKlib>() // IMPORTANT: The order makes sense!
 
-    private val executableArtifact: Executable by lazy {
-        val (_, outputDir) = PartialLinkageTestUtils.createModuleDirs(buildDir, LAUNCHER_MODULE_NAME)
-        val executableFile = outputDir.resolve("app." + testRunSettings.get<KotlinNativeTargets>().testTarget.family.exeSuffix)
+    private konst executableArtifact: Executable by lazy {
+        konst (_, outputDir) = PartialLinkageTestUtils.createModuleDirs(buildDir, LAUNCHER_MODULE_NAME)
+        konst executableFile = outputDir.resolve("app." + testRunSettings.get<KotlinNativeTargets>().testTarget.family.exeSuffix)
         Executable(executableFile)
     }
 
@@ -89,11 +89,11 @@ abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
     }
 
     private fun buildKlib(moduleName: String, moduleSourceDir: File, dependencies: Dependencies, klibFile: File) {
-        val klibArtifact = KLIB(klibFile)
+        konst klibArtifact = KLIB(klibFile)
 
-        val testCase = createTestCase(moduleName, moduleSourceDir, COMPILER_ARGS)
+        konst testCase = createTestCase(moduleName, moduleSourceDir, COMPILER_ARGS)
 
-        val compilation = LibraryCompilation(
+        konst compilation = LibraryCompilation(
             settings = testRunSettings,
             freeCompilerArgs = testCase.freeCompilerArgs,
             sourceModules = testCase.modules,
@@ -107,7 +107,7 @@ abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
     }
 
     private fun buildBinaryAndRun(allDependencies: Dependencies) {
-        val cacheDependencies = if (useStaticCacheForUserLibraries) {
+        konst cacheDependencies = if (useStaticCacheForUserLibraries) {
             producedKlibs.map { producedKlib ->
                 buildCacheForKlib(producedKlib)
                 producedKlib.klibArtifact.toStaticCacheArtifact().toDependency()
@@ -115,13 +115,13 @@ abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
         } else
             emptyList()
 
-        val testCase = createTestCase(
+        konst testCase = createTestCase(
             moduleName = LAUNCHER_MODULE_NAME,
             moduleSourceDir = null, // No sources.
             compilerArgs = COMPILER_ARGS
         )
 
-        val compilation = ExecutableCompilation(
+        konst compilation = ExecutableCompilation(
             settings = testRunSettings,
             freeCompilerArgs = testCase.freeCompilerArgs,
             sourceModules = testCase.modules,
@@ -130,14 +130,14 @@ abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
             expectedArtifact = executableArtifact
         )
 
-        val compilationResult = compilation.result.assertSuccess() // <-- trigger compilation
-        val executable = TestExecutable.fromCompilationResult(testCase, compilationResult)
+        konst compilationResult = compilation.result.assertSuccess() // <-- trigger compilation
+        konst executable = TestExecutable.fromCompilationResult(testCase, compilationResult)
 
         runExecutableAndVerify(testCase, executable) // <-- run executable and verify
     }
 
     private fun buildCacheForKlib(producedKlib: ProducedKlib) {
-        val compilation = StaticCacheCompilation(
+        konst compilation = StaticCacheCompilation(
             settings = testRunSettings,
             freeCompilerArgs = COMPILER_ARGS,
             options = if (producedKlib.moduleName == MAIN_MODULE_NAME)
@@ -154,7 +154,7 @@ abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
 
     private fun createTestCase(moduleName: String, moduleSourceDir: File?, compilerArgs: TestCompilerArgs): TestCase {
         // Note: Don't generate a module if there are no actual sources to compile.
-        val module: TestModule.Exclusive? = moduleSourceDir?.let {
+        konst module: TestModule.Exclusive? = moduleSourceDir?.let {
             TestModule.Exclusive(
                 name = moduleName,
                 directDependencySymbols = emptySet(), /* Don't need to pass any dependency symbols here.
@@ -186,7 +186,7 @@ abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
         forExecutable: Boolean
     ): Iterable<TestCompilationDependency<KLIB>> =
         dependencies.regularDependencies.map { dependency ->
-            val klib = KLIB(dependency.libraryFile)
+            konst klib = KLIB(dependency.libraryFile)
             if (forExecutable && dependency.moduleName == MAIN_MODULE_NAME) klib.toIncludedDependency() else klib.toDependency()
         } + dependencies.friendDependencies.map { KLIB(it.libraryFile).toFriendDependency() }
 
@@ -206,26 +206,26 @@ abstract class AbstractNativePartialLinkageTest : AbstractNativeSimpleTest() {
         klib = this
     )
 
-    private val buildDir: File get() = testRunSettings.get<Binaries>().testBinariesDir
-    private val stdlibFile: File get() = testRunSettings.get<KotlinNativeHome>().stdlibFile
-    private val useStaticCacheForUserLibraries: Boolean get() = testRunSettings.get<CacheMode>().useStaticCacheForUserLibraries
+    private konst buildDir: File get() = testRunSettings.get<Binaries>().testBinariesDir
+    private konst stdlibFile: File get() = testRunSettings.get<KotlinNativeHome>().stdlibFile
+    private konst useStaticCacheForUserLibraries: Boolean get() = testRunSettings.get<CacheMode>().useStaticCacheForUserLibraries
 
     companion object {
-        private val COMPILER_ARGS = TestCompilerArgs(
+        private konst COMPILER_ARGS = TestCompilerArgs(
             listOf("-nostdlib") // stdlib is passed explicitly.
         )
 
-        private val DEFAULT_EXTRAS = WithTestRunnerExtras(TestRunnerType.DEFAULT)
+        private konst DEFAULT_EXTRAS = WithTestRunnerExtras(TestRunnerType.DEFAULT)
 
-        private const val BACKED_UP_DIRECTORY_PREFIX = "__backup-"
+        private const konst BACKED_UP_DIRECTORY_PREFIX = "__backup-"
 
         private fun backupDirectoryContents(directory: File) {
-            val filesToBackup = directory.listFiles()?.mapNotNull { file ->
+            konst filesToBackup = directory.listFiles()?.mapNotNull { file ->
                 if (file.isDirectory && file.name.startsWith(BACKED_UP_DIRECTORY_PREFIX)) null else file
             }
 
             if (!filesToBackup.isNullOrEmpty()) {
-                val backupDirectory = directory.resolve("$BACKED_UP_DIRECTORY_PREFIX${System.currentTimeMillis()}__")
+                konst backupDirectory = directory.resolve("$BACKED_UP_DIRECTORY_PREFIX${System.currentTimeMillis()}__")
                 backupDirectory.mkdirs()
 
                 filesToBackup.forEach { file -> file.renameTo(backupDirectory.resolve(file.name)) }

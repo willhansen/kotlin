@@ -16,19 +16,19 @@ class SomeClass {
     constructor()
 
     <!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_DELEGATE!>@delegate:Field<!> <!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_DELEGATE, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@delegate:Prop<!>
-    protected val simpleProperty: String = "text"
+    protected konst simpleProperty: String = "text"
 
     @delegate:Field <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@delegate:Prop<!>
-    protected val delegatedProperty: String by CustomDelegate()
+    protected konst delegatedProperty: String by CustomDelegate()
 
     <!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_DELEGATE, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@delegate:Field<!> <!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_DELEGATE, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@delegate:Prop<!>
-    val propertyWithCustomGetter: Int
+    konst propertyWithCustomGetter: Int
         get() = 5
 
 }
 
-class WithPrimaryConstructor(<!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_DELEGATE!>@delegate:Field<!> <!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_DELEGATE, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@delegate:Prop<!> val a: String,
-                             <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@param:Field<!> <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@param:Prop<!> val b: String)
+class WithPrimaryConstructor(<!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_DELEGATE!>@delegate:Field<!> <!INAPPLICABLE_TARGET_PROPERTY_HAS_NO_DELEGATE, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@delegate:Prop<!> konst a: String,
+                             <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@param:Field<!> <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@param:Prop<!> konst b: String)
 
 fun foo(<!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@delegate:Field<!> <!WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@delegate:Prop<!> x: Int) = x
 

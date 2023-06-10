@@ -6,13 +6,13 @@
  * SPEC VERSION: 0.1-435
  * MAIN LINK: expressions, when-expression -> paragraph 6 -> sentence 6
  * NUMBER: 1
- * DESCRIPTION: 'When' with bound value and not allowed break and continue expression (without labels) in 'when condition'.
+ * DESCRIPTION: 'When' with bound konstue and not allowed break and continue expression (without labels) in 'when condition'.
  */
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Int): String {
+fun case_1(konstue_1: Int): String {
     while (true) {
-        when (value_1) {
+        when (konstue_1) {
             break<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
         }
     }
@@ -21,9 +21,9 @@ fun case_1(value_1: Int): String {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Int): String {
+fun case_2(konstue_1: Int): String {
     while (true) {
-        when (value_1) {
+        when (konstue_1) {
             continue<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
         }
     }

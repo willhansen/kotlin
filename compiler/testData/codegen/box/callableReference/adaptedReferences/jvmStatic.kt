@@ -2,13 +2,13 @@
 // TARGET_BACKEND: JVM
 object Test {
     @JvmStatic
-    fun foo(x: String, y: String = "") = x + value
+    fun foo(x: String, y: String = "") = x + konstue
 
-    var value = ""
+    var konstue = ""
 }
 
-fun callFoo(f: (String) -> String, value: String) = f(value)
+fun callFoo(f: (String) -> String, konstue: String) = f(konstue)
 
-fun test() = Test.apply { value = "K" }
+fun test() = Test.apply { konstue = "K" }
 
 fun box() = callFoo(Test::foo, "O") + callFoo(test()::foo, "")

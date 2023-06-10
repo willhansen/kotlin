@@ -2,15 +2,15 @@
 // DONT_TARGET_EXACT_BACKEND: WASM
 // WASM_MUTE_REASON: UNSUPPORTED_JS_INTEROP
 
-// This test file verifies the boxing rules for value classes when instances of those classes are passed
+// This test file verifies the boxing rules for konstue classes when instances of those classes are passed
 // through language boundaries in external declarations.
 
 package foo
 
-data class Foo(val s: String)
+data class Foo(konst s: String)
 
 external class NativeFoo(s: String) {
-    val s: String
+    konst s: String
 
     override fun toString(): String
 }
@@ -19,12 +19,12 @@ external fun describeValueOfProperty(o: dynamic, name: String): String
 external fun nullifyTestProperties(o: dynamic): Unit
 
 /* Value classes under test */
-value class IntWrapper(val value: Int)
-value class IntNWrapper(val value: Int?)
-value class FooWrapper(val foo: Foo)
-value class FooNWrapper(val fooN: Foo?)
-value class NativeFooWrapper(val nativeFoo: NativeFoo)
-value class NativeFooNWrapper(val nativeFooN: NativeFoo?)
+konstue class IntWrapper(konst konstue: Int)
+konstue class IntNWrapper(konst konstue: Int?)
+konstue class FooWrapper(konst foo: Foo)
+konstue class FooNWrapper(konst fooN: Foo?)
+konstue class NativeFooWrapper(konst nativeFoo: NativeFoo)
+konstue class NativeFooNWrapper(konst nativeFooN: NativeFoo?)
 
 external fun describeIntWrapper(x: IntWrapper): String
 external fun describeIntWrapperN(x: IntWrapper?): String
@@ -46,8 +46,8 @@ fun testFreeFunctionsWithValueClassesInArgs() {
 
     assertEquals("42 (number)", describeIntNWrapper(IntNWrapper(42)))
     assertEquals("null (object)", describeIntNWrapper(IntNWrapper(null)))
-    assertEquals("IntNWrapper(value=100) (object)", describeIntNWrapperN(IntNWrapper(100)))
-    assertEquals("IntNWrapper(value=null) (object)", describeIntNWrapperN(IntNWrapper(null)))
+    assertEquals("IntNWrapper(konstue=100) (object)", describeIntNWrapperN(IntNWrapper(100)))
+    assertEquals("IntNWrapper(konstue=null) (object)", describeIntNWrapperN(IntNWrapper(null)))
     assertEquals("null (object)", describeIntNWrapperN(null))
 
     assertEquals("Foo(s=hello) (object)", describeFooWrapper(FooWrapper(Foo("hello"))))
@@ -88,34 +88,34 @@ fun testWritableGlobalProperties() {
     assertEquals("null (object)", describeValueOfProperty(null, "intWrapper"))
     intWrapper = IntWrapper(42)
     assertEquals("42 (number)", describeValueOfProperty(null, "intWrapper"))
-    assertEquals(42, intWrapper.value)
+    assertEquals(42, intWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(null, "intWrapperN"))
     intWrapperN = IntWrapper(100)
     assertEquals("100 (number)", describeValueOfProperty(null, "intWrapperN"))
-    assertEquals(100, intWrapperN?.value)
+    assertEquals(100, intWrapperN?.konstue)
     intWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(null, "intWrapperN"))
-    assertEquals(null, intWrapperN?.value)
+    assertEquals(null, intWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(null, "intNWrapper"))
     intNWrapper = IntNWrapper(23)
     assertEquals("23 (number)", describeValueOfProperty(null, "intNWrapper"))
-    assertEquals(23, intNWrapper.value)
+    assertEquals(23, intNWrapper.konstue)
     intNWrapper = IntNWrapper(null)
     assertEquals("null (object)", describeValueOfProperty(null, "intNWrapper"))
-    assertEquals(null, intNWrapper.value)
+    assertEquals(null, intNWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(null, "intNWrapperN"))
     intNWrapperN = IntNWrapper(65)
-    assertEquals("IntNWrapper(value=65) (object)", describeValueOfProperty(null, "intNWrapperN"))
-    assertEquals(65, intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=65) (object)", describeValueOfProperty(null, "intNWrapperN"))
+    assertEquals(65, intNWrapperN?.konstue)
     intNWrapperN = IntNWrapper(null)
-    assertEquals("IntNWrapper(value=null) (object)", describeValueOfProperty(null, "intNWrapperN"))
-    assertEquals(null, intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=null) (object)", describeValueOfProperty(null, "intNWrapperN"))
+    assertEquals(null, intNWrapperN?.konstue)
     intNWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(null, "intNWrapperN"))
-    assertEquals(null, intNWrapperN?.value)
+    assertEquals(null, intNWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(null, "fooWrapper"))
     fooWrapper = FooWrapper(Foo("cat"))
@@ -184,37 +184,37 @@ fun testWritableGlobalProperties() {
     nullifyTestProperties(null)
 }
 
-external val readOnlyIntWrapper: IntWrapper
-external val readOnlyIntWrapperN: IntWrapper?
-external val readOnlyIntNWrapper: IntNWrapper
-external val readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
-external val readOnlyFooWrapper: FooWrapper
-external val readOnlyFooWrapperN: FooWrapper?
-external val readOnlyFooNWrapper: FooNWrapper
-external val readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
-external val readOnlyNativeFooWrapper: NativeFooWrapper
-external val readOnlyNativeFooWrapperN: NativeFooWrapper?
-external val readOnlyNativeFooNWrapper: NativeFooNWrapper
-external val readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
+external konst readOnlyIntWrapper: IntWrapper
+external konst readOnlyIntWrapperN: IntWrapper?
+external konst readOnlyIntNWrapper: IntNWrapper
+external konst readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
+external konst readOnlyFooWrapper: FooWrapper
+external konst readOnlyFooWrapperN: FooWrapper?
+external konst readOnlyFooNWrapper: FooNWrapper
+external konst readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
+external konst readOnlyNativeFooWrapper: NativeFooWrapper
+external konst readOnlyNativeFooWrapperN: NativeFooWrapper?
+external konst readOnlyNativeFooNWrapper: NativeFooNWrapper
+external konst readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
 fun testReadOnlyGlobalProperties() {
     intWrapper = IntWrapper(42)
-    assertEquals(42, readOnlyIntWrapper.value)
+    assertEquals(42, readOnlyIntWrapper.konstue)
 
-    assertEquals(null, readOnlyIntWrapperN?.value)
+    assertEquals(null, readOnlyIntWrapperN?.konstue)
     intWrapperN = IntWrapper(100)
-    assertEquals(100, readOnlyIntWrapperN?.value)
+    assertEquals(100, readOnlyIntWrapperN?.konstue)
 
     intNWrapper = IntNWrapper(23)
-    assertEquals(23, readOnlyIntNWrapper.value)
+    assertEquals(23, readOnlyIntNWrapper.konstue)
     intNWrapper = IntNWrapper(null)
-    assertEquals(null, readOnlyIntNWrapper.value)
+    assertEquals(null, readOnlyIntNWrapper.konstue)
 
-    assertEquals(null, readOnlyIntNWrapperN?.value)
+    assertEquals(null, readOnlyIntNWrapperN?.konstue)
     intNWrapperN = IntNWrapper(65)
-    assertEquals(65, readOnlyIntNWrapperN?.value)
+    assertEquals(65, readOnlyIntNWrapperN?.konstue)
     intNWrapperN = IntNWrapper(null)
-    assertEquals(null, readOnlyIntNWrapperN?.value)
+    assertEquals(null, readOnlyIntNWrapperN?.konstue)
 
     fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", readOnlyFooWrapper.foo.s)
@@ -270,22 +270,22 @@ external fun getNativeFooNWrapperN(): /*boxed*/ NativeFooNWrapper?
 
 fun testFreeFunctionsWithValueClassInReturnType() {
     intWrapper = IntWrapper(42)
-    assertEquals(42, getIntWrapper().value)
+    assertEquals(42, getIntWrapper().konstue)
 
-    assertEquals(null, getIntWrapperN()?.value)
+    assertEquals(null, getIntWrapperN()?.konstue)
     intWrapperN = IntWrapper(100)
-    assertEquals(100, getIntWrapperN()?.value)
+    assertEquals(100, getIntWrapperN()?.konstue)
 
     intNWrapper = IntNWrapper(23)
-    assertEquals(23, getIntNWrapper().value)
+    assertEquals(23, getIntNWrapper().konstue)
     intNWrapper = IntNWrapper(null)
-    assertEquals(null, getIntNWrapper().value)
+    assertEquals(null, getIntNWrapper().konstue)
 
-    assertEquals(null, getIntNWrapperN()?.value)
+    assertEquals(null, getIntNWrapperN()?.konstue)
     intNWrapperN = IntNWrapper(65)
-    assertEquals(65, getIntNWrapperN()?.value)
+    assertEquals(65, getIntNWrapperN()?.konstue)
     intNWrapperN = IntNWrapper(null)
-    assertEquals(null, getIntNWrapperN()?.value)
+    assertEquals(null, getIntNWrapperN()?.konstue)
 
     fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", getFooWrapper().foo.s)
@@ -366,18 +366,18 @@ external class TestClass(
     var nativeFooNWrapper: NativeFooNWrapper
     var nativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
-    val readOnlyIntWrapper: IntWrapper
-    val readOnlyIntWrapperN: IntWrapper?
-    val readOnlyIntNWrapper: IntNWrapper
-    val readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
-    val readOnlyFooWrapper: FooWrapper
-    val readOnlyFooWrapperN: FooWrapper?
-    val readOnlyFooNWrapper: FooNWrapper
-    val readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
-    val readOnlyNativeFooWrapper: NativeFooWrapper
-    val readOnlyNativeFooWrapperN: NativeFooWrapper?
-    val readOnlyNativeFooNWrapper: NativeFooNWrapper
-    val readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
+    konst readOnlyIntWrapper: IntWrapper
+    konst readOnlyIntWrapperN: IntWrapper?
+    konst readOnlyIntNWrapper: IntNWrapper
+    konst readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
+    konst readOnlyFooWrapper: FooWrapper
+    konst readOnlyFooWrapperN: FooWrapper?
+    konst readOnlyFooNWrapper: FooNWrapper
+    konst readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
+    konst readOnlyNativeFooWrapper: NativeFooWrapper
+    konst readOnlyNativeFooWrapperN: NativeFooWrapper?
+    konst readOnlyNativeFooNWrapper: NativeFooNWrapper
+    konst readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
     fun getIntWrapper(): IntWrapper
     fun getIntWrapperN(): IntWrapper?
@@ -419,18 +419,18 @@ external class TestClass(
         var nativeFooNWrapper: NativeFooNWrapper
         var nativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
-        val readOnlyIntWrapper: IntWrapper
-        val readOnlyIntWrapperN: IntWrapper?
-        val readOnlyIntNWrapper: IntNWrapper
-        val readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
-        val readOnlyFooWrapper: FooWrapper
-        val readOnlyFooWrapperN: FooWrapper?
-        val readOnlyFooNWrapper: FooNWrapper
-        val readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
-        val readOnlyNativeFooWrapper: NativeFooWrapper
-        val readOnlyNativeFooWrapperN: NativeFooWrapper?
-        val readOnlyNativeFooNWrapper: NativeFooNWrapper
-        val readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
+        konst readOnlyIntWrapper: IntWrapper
+        konst readOnlyIntWrapperN: IntWrapper?
+        konst readOnlyIntNWrapper: IntNWrapper
+        konst readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
+        konst readOnlyFooWrapper: FooWrapper
+        konst readOnlyFooWrapperN: FooWrapper?
+        konst readOnlyFooNWrapper: FooNWrapper
+        konst readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
+        konst readOnlyNativeFooWrapper: NativeFooWrapper
+        konst readOnlyNativeFooWrapperN: NativeFooWrapper?
+        konst readOnlyNativeFooNWrapper: NativeFooNWrapper
+        konst readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
         fun getIntWrapper(): IntWrapper
         fun getIntWrapperN(): IntWrapper?
@@ -452,7 +452,7 @@ external fun makeEmptyTestClassInstance(): TestClass
 external fun makeTestInterfaceInstance(): TestInterface
 
 fun testClassConstructor() {
-    val allNonNull = TestClass(
+    konst allNonNull = TestClass(
         IntWrapper(42),
         IntWrapper(100),
         IntNWrapper(23),
@@ -470,7 +470,7 @@ fun testClassConstructor() {
     assertEquals("42 (number)", describeValueOfProperty(allNonNull, "intWrapper"))
     assertEquals("100 (number)", describeValueOfProperty(allNonNull, "intWrapperN"))
     assertEquals("23 (number)", describeValueOfProperty(allNonNull, "intNWrapper"))
-    assertEquals("IntNWrapper(value=65) (object)", describeValueOfProperty(allNonNull, "intNWrapperN"))
+    assertEquals("IntNWrapper(konstue=65) (object)", describeValueOfProperty(allNonNull, "intNWrapperN"))
     assertEquals("Foo(s=cat) (object)", describeValueOfProperty(allNonNull, "fooWrapper"))
     assertEquals("Foo(s=dog) (object)", describeValueOfProperty(allNonNull, "fooWrapperN"))
     assertEquals("Foo(s=mouse) (object)", describeValueOfProperty(allNonNull, "fooNWrapper"))
@@ -480,7 +480,7 @@ fun testClassConstructor() {
     assertEquals("NativeFoo('Saint-Petersburg') (object)", describeValueOfProperty(allNonNull, "nativeFooNWrapper"))
     assertEquals("NativeFooNWrapper(nativeFooN=NativeFoo('Boston')) (object)", describeValueOfProperty(allNonNull, "nativeFooNWrapperN"))
 
-    val topLevelNull = TestClass(
+    konst topLevelNull = TestClass(
         IntWrapper(42),
         null,
         IntNWrapper(23),
@@ -502,7 +502,7 @@ fun testClassConstructor() {
     assertEquals("null (object)", describeValueOfProperty(topLevelNull, "nativeFooWrapperN"))
     assertEquals("null (object)", describeValueOfProperty(topLevelNull, "nativeFooNWrapperN"))
 
-    val wrappingNull = TestClass(
+    konst wrappingNull = TestClass(
         IntWrapper(42),
         null,
         IntNWrapper(null),
@@ -518,7 +518,7 @@ fun testClassConstructor() {
     )
 
     assertEquals("null (object)", describeValueOfProperty(wrappingNull, "intNWrapper"))
-    assertEquals("IntNWrapper(value=null) (object)", describeValueOfProperty(wrappingNull, "intNWrapperN"))
+    assertEquals("IntNWrapper(konstue=null) (object)", describeValueOfProperty(wrappingNull, "intNWrapperN"))
     assertEquals("null (object)", describeValueOfProperty(wrappingNull, "fooNWrapper"))
     assertEquals("FooNWrapper(fooN=null) (object)", describeValueOfProperty(wrappingNull, "fooNWrapperN"))
     assertEquals("null (object)", describeValueOfProperty(wrappingNull, "nativeFooNWrapper"))
@@ -526,7 +526,7 @@ fun testClassConstructor() {
 }
 
 fun testClassMethodsWithValueClassesInArgs() {
-    val o = makeEmptyTestClassInstance()
+    konst o = makeEmptyTestClassInstance()
 
     assertEquals("42 (number)", o.describeIntWrapper(IntWrapper(42)))
     assertEquals("100 (number)", o.describeIntWrapperN(IntWrapper(100)))
@@ -534,8 +534,8 @@ fun testClassMethodsWithValueClassesInArgs() {
 
     assertEquals("42 (number)", o.describeIntNWrapper(IntNWrapper(42)))
     assertEquals("null (object)", o.describeIntNWrapper(IntNWrapper(null)))
-    assertEquals("IntNWrapper(value=100) (object)", o.describeIntNWrapperN(IntNWrapper(100)))
-    assertEquals("IntNWrapper(value=null) (object)", o.describeIntNWrapperN(IntNWrapper(null)))
+    assertEquals("IntNWrapper(konstue=100) (object)", o.describeIntNWrapperN(IntNWrapper(100)))
+    assertEquals("IntNWrapper(konstue=null) (object)", o.describeIntNWrapperN(IntNWrapper(null)))
     assertEquals("null (object)", o.describeIntNWrapperN(null))
 
     assertEquals("Foo(s=hello) (object)", o.describeFooWrapper(FooWrapper(Foo("hello"))))
@@ -560,39 +560,39 @@ fun testClassMethodsWithValueClassesInArgs() {
 }
 
 fun testWritableClassProperties() {
-    val o = makeEmptyTestClassInstance()
+    konst o = makeEmptyTestClassInstance()
 
     assertEquals("null (object)", describeValueOfProperty(o, "intWrapper"))
     o.intWrapper = IntWrapper(42)
     assertEquals("42 (number)", describeValueOfProperty(o, "intWrapper"))
-    assertEquals(42, o.intWrapper.value)
+    assertEquals(42, o.intWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(o, "intWrapperN"))
     o.intWrapperN = IntWrapper(100)
     assertEquals("100 (number)", describeValueOfProperty(o, "intWrapperN"))
-    assertEquals(100, o.intWrapperN?.value)
+    assertEquals(100, o.intWrapperN?.konstue)
     o.intWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(o, "intWrapperN"))
-    assertEquals(null, o.intWrapperN?.value)
+    assertEquals(null, o.intWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(o, "intNWrapper"))
     o.intNWrapper = IntNWrapper(23)
     assertEquals("23 (number)", describeValueOfProperty(o, "intNWrapper"))
-    assertEquals(23, o.intNWrapper.value)
+    assertEquals(23, o.intNWrapper.konstue)
     o.intNWrapper = IntNWrapper(null)
     assertEquals("null (object)", describeValueOfProperty(o, "intNWrapper"))
-    assertEquals(null, o.intNWrapper.value)
+    assertEquals(null, o.intNWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(o, "intNWrapperN"))
     o.intNWrapperN = IntNWrapper(65)
-    assertEquals("IntNWrapper(value=65) (object)", describeValueOfProperty(o, "intNWrapperN"))
-    assertEquals(65, o.intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=65) (object)", describeValueOfProperty(o, "intNWrapperN"))
+    assertEquals(65, o.intNWrapperN?.konstue)
     o.intNWrapperN = IntNWrapper(null)
-    assertEquals("IntNWrapper(value=null) (object)", describeValueOfProperty(o, "intNWrapperN"))
-    assertEquals(null, o.intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=null) (object)", describeValueOfProperty(o, "intNWrapperN"))
+    assertEquals(null, o.intNWrapperN?.konstue)
     o.intNWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(o, "intNWrapperN"))
-    assertEquals(null, o.intNWrapperN?.value)
+    assertEquals(null, o.intNWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(o, "fooWrapper"))
     o.fooWrapper = FooWrapper(Foo("cat"))
@@ -660,25 +660,25 @@ fun testWritableClassProperties() {
 }
 
 fun testReadOnlyClassProperties() {
-    val o = makeEmptyTestClassInstance()
+    konst o = makeEmptyTestClassInstance()
 
     o.intWrapper = IntWrapper(42)
-    assertEquals(42, o.readOnlyIntWrapper.value)
+    assertEquals(42, o.readOnlyIntWrapper.konstue)
 
-    assertEquals(null, o.readOnlyIntWrapperN?.value)
+    assertEquals(null, o.readOnlyIntWrapperN?.konstue)
     o.intWrapperN = IntWrapper(100)
-    assertEquals(100, o.readOnlyIntWrapperN?.value)
+    assertEquals(100, o.readOnlyIntWrapperN?.konstue)
 
     o.intNWrapper = IntNWrapper(23)
-    assertEquals(23, o.readOnlyIntNWrapper.value)
+    assertEquals(23, o.readOnlyIntNWrapper.konstue)
     o.intNWrapper = IntNWrapper(null)
-    assertEquals(null, o.readOnlyIntNWrapper.value)
+    assertEquals(null, o.readOnlyIntNWrapper.konstue)
 
-    assertEquals(null, o.readOnlyIntNWrapperN?.value)
+    assertEquals(null, o.readOnlyIntNWrapperN?.konstue)
     o.intNWrapperN = IntNWrapper(65)
-    assertEquals(65, o.readOnlyIntNWrapperN?.value)
+    assertEquals(65, o.readOnlyIntNWrapperN?.konstue)
     o.intNWrapperN = IntNWrapper(null)
-    assertEquals(null, o.readOnlyIntNWrapperN?.value)
+    assertEquals(null, o.readOnlyIntNWrapperN?.konstue)
 
     o.fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", o.readOnlyFooWrapper.foo.s)
@@ -718,25 +718,25 @@ fun testReadOnlyClassProperties() {
 }
 
 fun testClassMethodsWithValueClassInReturnType() {
-    val o = makeEmptyTestClassInstance()
+    konst o = makeEmptyTestClassInstance()
 
     o.intWrapper = IntWrapper(42)
-    assertEquals(42, o.getIntWrapper().value)
+    assertEquals(42, o.getIntWrapper().konstue)
 
-    assertEquals(null, o.getIntWrapperN()?.value)
+    assertEquals(null, o.getIntWrapperN()?.konstue)
     o.intWrapperN = IntWrapper(100)
-    assertEquals(100, o.getIntWrapperN()?.value)
+    assertEquals(100, o.getIntWrapperN()?.konstue)
 
     o.intNWrapper = IntNWrapper(23)
-    assertEquals(23, o.getIntNWrapper().value)
+    assertEquals(23, o.getIntNWrapper().konstue)
     o.intNWrapper = IntNWrapper(null)
-    assertEquals(null, o.getIntNWrapper().value)
+    assertEquals(null, o.getIntNWrapper().konstue)
 
-    assertEquals(null, o.getIntNWrapperN()?.value)
+    assertEquals(null, o.getIntNWrapperN()?.konstue)
     o.intNWrapperN = IntNWrapper(65)
-    assertEquals(65, o.getIntNWrapperN()?.value)
+    assertEquals(65, o.getIntNWrapperN()?.konstue)
     o.intNWrapperN = IntNWrapper(null)
-    assertEquals(null, o.getIntNWrapperN()?.value)
+    assertEquals(null, o.getIntNWrapperN()?.konstue)
 
     o.fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", o.getFooWrapper().foo.s)
@@ -782,8 +782,8 @@ fun testCompanionObjectMethodsWithValueClassesInArgs() {
 
     assertEquals("42 (number)", TestClass.describeIntNWrapper(IntNWrapper(42)))
     assertEquals("null (object)", TestClass.describeIntNWrapper(IntNWrapper(null)))
-    assertEquals("IntNWrapper(value=100) (object)", TestClass.describeIntNWrapperN(IntNWrapper(100)))
-    assertEquals("IntNWrapper(value=null) (object)", TestClass.describeIntNWrapperN(IntNWrapper(null)))
+    assertEquals("IntNWrapper(konstue=100) (object)", TestClass.describeIntNWrapperN(IntNWrapper(100)))
+    assertEquals("IntNWrapper(konstue=null) (object)", TestClass.describeIntNWrapperN(IntNWrapper(null)))
     assertEquals("null (object)", TestClass.describeIntNWrapperN(null))
 
     assertEquals("Foo(s=hello) (object)", TestClass.describeFooWrapper(FooWrapper(Foo("hello"))))
@@ -811,34 +811,34 @@ fun testWritableCompanionObjectProperties() {
     assertEquals("null (object)", describeValueOfProperty(TestClass, "intWrapper"))
     TestClass.intWrapper = IntWrapper(42)
     assertEquals("42 (number)", describeValueOfProperty(TestClass, "intWrapper"))
-    assertEquals(42, TestClass.intWrapper.value)
+    assertEquals(42, TestClass.intWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(TestClass, "intWrapperN"))
     TestClass.intWrapperN = IntWrapper(100)
     assertEquals("100 (number)", describeValueOfProperty(TestClass, "intWrapperN"))
-    assertEquals(100, TestClass.intWrapperN?.value)
+    assertEquals(100, TestClass.intWrapperN?.konstue)
     TestClass.intWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(TestClass, "intWrapperN"))
-    assertEquals(null, TestClass.intWrapperN?.value)
+    assertEquals(null, TestClass.intWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(TestClass, "intNWrapper"))
     TestClass.intNWrapper = IntNWrapper(23)
     assertEquals("23 (number)", describeValueOfProperty(TestClass, "intNWrapper"))
-    assertEquals(23, TestClass.intNWrapper.value)
+    assertEquals(23, TestClass.intNWrapper.konstue)
     TestClass.intNWrapper = IntNWrapper(null)
     assertEquals("null (object)", describeValueOfProperty(TestClass, "intNWrapper"))
-    assertEquals(null, TestClass.intNWrapper.value)
+    assertEquals(null, TestClass.intNWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(TestClass, "intNWrapperN"))
     TestClass.intNWrapperN = IntNWrapper(65)
-    assertEquals("IntNWrapper(value=65) (object)", describeValueOfProperty(TestClass, "intNWrapperN"))
-    assertEquals(65, TestClass.intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=65) (object)", describeValueOfProperty(TestClass, "intNWrapperN"))
+    assertEquals(65, TestClass.intNWrapperN?.konstue)
     TestClass.intNWrapperN = IntNWrapper(null)
-    assertEquals("IntNWrapper(value=null) (object)", describeValueOfProperty(TestClass, "intNWrapperN"))
-    assertEquals(null, TestClass.intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=null) (object)", describeValueOfProperty(TestClass, "intNWrapperN"))
+    assertEquals(null, TestClass.intNWrapperN?.konstue)
     TestClass.intNWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(TestClass, "intNWrapperN"))
-    assertEquals(null, TestClass.intNWrapperN?.value)
+    assertEquals(null, TestClass.intNWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(TestClass, "fooWrapper"))
     TestClass.fooWrapper = FooWrapper(Foo("cat"))
@@ -909,22 +909,22 @@ fun testWritableCompanionObjectProperties() {
 
 fun testReadOnlyCompanionObjectProperties() {
     TestClass.intWrapper = IntWrapper(42)
-    assertEquals(42, TestClass.readOnlyIntWrapper.value)
+    assertEquals(42, TestClass.readOnlyIntWrapper.konstue)
 
-    assertEquals(null, TestClass.readOnlyIntWrapperN?.value)
+    assertEquals(null, TestClass.readOnlyIntWrapperN?.konstue)
     TestClass.intWrapperN = IntWrapper(100)
-    assertEquals(100, TestClass.readOnlyIntWrapperN?.value)
+    assertEquals(100, TestClass.readOnlyIntWrapperN?.konstue)
 
     TestClass.intNWrapper = IntNWrapper(23)
-    assertEquals(23, TestClass.readOnlyIntNWrapper.value)
+    assertEquals(23, TestClass.readOnlyIntNWrapper.konstue)
     TestClass.intNWrapper = IntNWrapper(null)
-    assertEquals(null, TestClass.readOnlyIntNWrapper.value)
+    assertEquals(null, TestClass.readOnlyIntNWrapper.konstue)
 
-    assertEquals(null, TestClass.readOnlyIntNWrapperN?.value)
+    assertEquals(null, TestClass.readOnlyIntNWrapperN?.konstue)
     TestClass.intNWrapperN = IntNWrapper(65)
-    assertEquals(65, TestClass.readOnlyIntNWrapperN?.value)
+    assertEquals(65, TestClass.readOnlyIntNWrapperN?.konstue)
     TestClass.intNWrapperN = IntNWrapper(null)
-    assertEquals(null, TestClass.readOnlyIntNWrapperN?.value)
+    assertEquals(null, TestClass.readOnlyIntNWrapperN?.konstue)
 
     TestClass.fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", TestClass.readOnlyFooWrapper.foo.s)
@@ -967,22 +967,22 @@ fun testReadOnlyCompanionObjectProperties() {
 
 fun testCompanionObjectMethodsWithValueClassinReturnType() {
     TestClass.intWrapper = IntWrapper(42)
-    assertEquals(42, TestClass.getIntWrapper().value)
+    assertEquals(42, TestClass.getIntWrapper().konstue)
 
-    assertEquals(null, TestClass.getIntWrapperN()?.value)
+    assertEquals(null, TestClass.getIntWrapperN()?.konstue)
     TestClass.intWrapperN = IntWrapper(100)
-    assertEquals(100, TestClass.getIntWrapperN()?.value)
+    assertEquals(100, TestClass.getIntWrapperN()?.konstue)
 
     TestClass.intNWrapper = IntNWrapper(23)
-    assertEquals(23, TestClass.getIntNWrapper().value)
+    assertEquals(23, TestClass.getIntNWrapper().konstue)
     TestClass.intNWrapper = IntNWrapper(null)
-    assertEquals(null, TestClass.getIntNWrapper().value)
+    assertEquals(null, TestClass.getIntNWrapper().konstue)
 
-    assertEquals(null, TestClass.getIntNWrapperN()?.value)
+    assertEquals(null, TestClass.getIntNWrapperN()?.konstue)
     TestClass.intNWrapperN = IntNWrapper(65)
-    assertEquals(65, TestClass.getIntNWrapperN()?.value)
+    assertEquals(65, TestClass.getIntNWrapperN()?.konstue)
     TestClass.intNWrapperN = IntNWrapper(null)
-    assertEquals(null, TestClass.getIntNWrapperN()?.value)
+    assertEquals(null, TestClass.getIntNWrapperN()?.konstue)
 
     TestClass.fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", TestClass.getFooWrapper().foo.s)
@@ -1050,18 +1050,18 @@ external interface TestInterface {
     var nativeFooNWrapper: NativeFooNWrapper
     var nativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
-    val readOnlyIntWrapper: IntWrapper
-    val readOnlyIntWrapperN: IntWrapper?
-    val readOnlyIntNWrapper: IntNWrapper
-    val readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
-    val readOnlyFooWrapper: FooWrapper
-    val readOnlyFooWrapperN: FooWrapper?
-    val readOnlyFooNWrapper: FooNWrapper
-    val readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
-    val readOnlyNativeFooWrapper: NativeFooWrapper
-    val readOnlyNativeFooWrapperN: NativeFooWrapper?
-    val readOnlyNativeFooNWrapper: NativeFooNWrapper
-    val readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
+    konst readOnlyIntWrapper: IntWrapper
+    konst readOnlyIntWrapperN: IntWrapper?
+    konst readOnlyIntNWrapper: IntNWrapper
+    konst readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
+    konst readOnlyFooWrapper: FooWrapper
+    konst readOnlyFooWrapperN: FooWrapper?
+    konst readOnlyFooNWrapper: FooNWrapper
+    konst readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
+    konst readOnlyNativeFooWrapper: NativeFooWrapper
+    konst readOnlyNativeFooWrapperN: NativeFooWrapper?
+    konst readOnlyNativeFooNWrapper: NativeFooNWrapper
+    konst readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
     fun getIntWrapper(): IntWrapper
     fun getIntWrapperN(): IntWrapper?
@@ -1078,7 +1078,7 @@ external interface TestInterface {
 }
 
 fun testInterfaceMethodsWithValueClassesInArgs() {
-    val o = makeTestInterfaceInstance()
+    konst o = makeTestInterfaceInstance()
 
     assertEquals("42 (number)", o.describeIntWrapper(IntWrapper(42)))
     assertEquals("100 (number)", o.describeIntWrapperN(IntWrapper(100)))
@@ -1086,8 +1086,8 @@ fun testInterfaceMethodsWithValueClassesInArgs() {
 
     assertEquals("42 (number)", o.describeIntNWrapper(IntNWrapper(42)))
     assertEquals("null (object)", o.describeIntNWrapper(IntNWrapper(null)))
-    assertEquals("IntNWrapper(value=100) (object)", o.describeIntNWrapperN(IntNWrapper(100)))
-    assertEquals("IntNWrapper(value=null) (object)", o.describeIntNWrapperN(IntNWrapper(null)))
+    assertEquals("IntNWrapper(konstue=100) (object)", o.describeIntNWrapperN(IntNWrapper(100)))
+    assertEquals("IntNWrapper(konstue=null) (object)", o.describeIntNWrapperN(IntNWrapper(null)))
     assertEquals("null (object)", o.describeIntNWrapperN(null))
 
     assertEquals("Foo(s=hello) (object)", o.describeFooWrapper(FooWrapper(Foo("hello"))))
@@ -1112,39 +1112,39 @@ fun testInterfaceMethodsWithValueClassesInArgs() {
 }
 
 fun testWritableInterfaceProperties() {
-    val o = makeTestInterfaceInstance()
+    konst o = makeTestInterfaceInstance()
 
     assertEquals("null (object)", describeValueOfProperty(o, "intWrapper"))
     o.intWrapper = IntWrapper(42)
     assertEquals("42 (number)", describeValueOfProperty(o, "intWrapper"))
-    assertEquals(42, o.intWrapper.value)
+    assertEquals(42, o.intWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(o, "intWrapperN"))
     o.intWrapperN = IntWrapper(100)
     assertEquals("100 (number)", describeValueOfProperty(o, "intWrapperN"))
-    assertEquals(100, o.intWrapperN?.value)
+    assertEquals(100, o.intWrapperN?.konstue)
     o.intWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(o, "intWrapperN"))
-    assertEquals(null, o.intWrapperN?.value)
+    assertEquals(null, o.intWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(o, "intNWrapper"))
     o.intNWrapper = IntNWrapper(23)
     assertEquals("23 (number)", describeValueOfProperty(o, "intNWrapper"))
-    assertEquals(23, o.intNWrapper.value)
+    assertEquals(23, o.intNWrapper.konstue)
     o.intNWrapper = IntNWrapper(null)
     assertEquals("null (object)", describeValueOfProperty(o, "intNWrapper"))
-    assertEquals(null, o.intNWrapper.value)
+    assertEquals(null, o.intNWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(o, "intNWrapperN"))
     o.intNWrapperN = IntNWrapper(65)
-    assertEquals("IntNWrapper(value=65) (object)", describeValueOfProperty(o, "intNWrapperN"))
-    assertEquals(65, o.intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=65) (object)", describeValueOfProperty(o, "intNWrapperN"))
+    assertEquals(65, o.intNWrapperN?.konstue)
     o.intNWrapperN = IntNWrapper(null)
-    assertEquals("IntNWrapper(value=null) (object)", describeValueOfProperty(o, "intNWrapperN"))
-    assertEquals(null, o.intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=null) (object)", describeValueOfProperty(o, "intNWrapperN"))
+    assertEquals(null, o.intNWrapperN?.konstue)
     o.intNWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(o, "intNWrapperN"))
-    assertEquals(null, o.intNWrapperN?.value)
+    assertEquals(null, o.intNWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(o, "fooWrapper"))
     o.fooWrapper = FooWrapper(Foo("cat"))
@@ -1212,25 +1212,25 @@ fun testWritableInterfaceProperties() {
 }
 
 fun testReadOnlyInterfaceProperties() {
-    val o = makeTestInterfaceInstance()
+    konst o = makeTestInterfaceInstance()
 
     o.intWrapper = IntWrapper(42)
-    assertEquals(42, o.readOnlyIntWrapper.value)
+    assertEquals(42, o.readOnlyIntWrapper.konstue)
 
-    assertEquals(null, o.readOnlyIntWrapperN?.value)
+    assertEquals(null, o.readOnlyIntWrapperN?.konstue)
     o.intWrapperN = IntWrapper(100)
-    assertEquals(100, o.readOnlyIntWrapperN?.value)
+    assertEquals(100, o.readOnlyIntWrapperN?.konstue)
 
     o.intNWrapper = IntNWrapper(23)
-    assertEquals(23, o.readOnlyIntNWrapper.value)
+    assertEquals(23, o.readOnlyIntNWrapper.konstue)
     o.intNWrapper = IntNWrapper(null)
-    assertEquals(null, o.readOnlyIntNWrapper.value)
+    assertEquals(null, o.readOnlyIntNWrapper.konstue)
 
-    assertEquals(null, o.readOnlyIntNWrapperN?.value)
+    assertEquals(null, o.readOnlyIntNWrapperN?.konstue)
     o.intNWrapperN = IntNWrapper(65)
-    assertEquals(65, o.readOnlyIntNWrapperN?.value)
+    assertEquals(65, o.readOnlyIntNWrapperN?.konstue)
     o.intNWrapperN = IntNWrapper(null)
-    assertEquals(null, o.readOnlyIntNWrapperN?.value)
+    assertEquals(null, o.readOnlyIntNWrapperN?.konstue)
 
     o.fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", o.readOnlyFooWrapper.foo.s)
@@ -1270,25 +1270,25 @@ fun testReadOnlyInterfaceProperties() {
 }
 
 fun testInterfaceMethodsWithValueClassInReturnType() {
-    val o = makeTestInterfaceInstance()
+    konst o = makeTestInterfaceInstance()
 
     o.intWrapper = IntWrapper(42)
-    assertEquals(42, o.getIntWrapper().value)
+    assertEquals(42, o.getIntWrapper().konstue)
 
-    assertEquals(null, o.getIntWrapperN()?.value)
+    assertEquals(null, o.getIntWrapperN()?.konstue)
     o.intWrapperN = IntWrapper(100)
-    assertEquals(100, o.getIntWrapperN()?.value)
+    assertEquals(100, o.getIntWrapperN()?.konstue)
 
     o.intNWrapper = IntNWrapper(23)
-    assertEquals(23, o.getIntNWrapper().value)
+    assertEquals(23, o.getIntNWrapper().konstue)
     o.intNWrapper = IntNWrapper(null)
-    assertEquals(null, o.getIntNWrapper().value)
+    assertEquals(null, o.getIntNWrapper().konstue)
 
-    assertEquals(null, o.getIntNWrapperN()?.value)
+    assertEquals(null, o.getIntNWrapperN()?.konstue)
     o.intNWrapperN = IntNWrapper(65)
-    assertEquals(65, o.getIntNWrapperN()?.value)
+    assertEquals(65, o.getIntNWrapperN()?.konstue)
     o.intNWrapperN = IntNWrapper(null)
-    assertEquals(null, o.getIntNWrapperN()?.value)
+    assertEquals(null, o.getIntNWrapperN()?.konstue)
 
     o.fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", o.getFooWrapper().foo.s)
@@ -1354,18 +1354,18 @@ external object TestObject {
     var nativeFooNWrapper: NativeFooNWrapper
     var nativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
-    val readOnlyIntWrapper: IntWrapper
-    val readOnlyIntWrapperN: IntWrapper?
-    val readOnlyIntNWrapper: IntNWrapper
-    val readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
-    val readOnlyFooWrapper: FooWrapper
-    val readOnlyFooWrapperN: FooWrapper?
-    val readOnlyFooNWrapper: FooNWrapper
-    val readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
-    val readOnlyNativeFooWrapper: NativeFooWrapper
-    val readOnlyNativeFooWrapperN: NativeFooWrapper?
-    val readOnlyNativeFooNWrapper: NativeFooNWrapper
-    val readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
+    konst readOnlyIntWrapper: IntWrapper
+    konst readOnlyIntWrapperN: IntWrapper?
+    konst readOnlyIntNWrapper: IntNWrapper
+    konst readOnlyIntNWrapperN: /*boxed*/ IntNWrapper?
+    konst readOnlyFooWrapper: FooWrapper
+    konst readOnlyFooWrapperN: FooWrapper?
+    konst readOnlyFooNWrapper: FooNWrapper
+    konst readOnlyFooNWrapperN: /*boxed*/ FooNWrapper?
+    konst readOnlyNativeFooWrapper: NativeFooWrapper
+    konst readOnlyNativeFooWrapperN: NativeFooWrapper?
+    konst readOnlyNativeFooNWrapper: NativeFooNWrapper
+    konst readOnlyNativeFooNWrapperN: /*boxed*/ NativeFooNWrapper?
 
     fun getIntWrapper(): IntWrapper
     fun getIntWrapperN(): IntWrapper?
@@ -1388,8 +1388,8 @@ fun testObjectMethodsWithValueClassesInArgs() {
 
     assertEquals("42 (number)", TestObject.describeIntNWrapper(IntNWrapper(42)))
     assertEquals("null (object)", TestObject.describeIntNWrapper(IntNWrapper(null)))
-    assertEquals("IntNWrapper(value=100) (object)", TestObject.describeIntNWrapperN(IntNWrapper(100)))
-    assertEquals("IntNWrapper(value=null) (object)", TestObject.describeIntNWrapperN(IntNWrapper(null)))
+    assertEquals("IntNWrapper(konstue=100) (object)", TestObject.describeIntNWrapperN(IntNWrapper(100)))
+    assertEquals("IntNWrapper(konstue=null) (object)", TestObject.describeIntNWrapperN(IntNWrapper(null)))
     assertEquals("null (object)", TestObject.describeIntNWrapperN(null))
 
     assertEquals("Foo(s=hello) (object)", TestObject.describeFooWrapper(FooWrapper(Foo("hello"))))
@@ -1417,34 +1417,34 @@ fun testWritableObjectProperties() {
     assertEquals("null (object)", describeValueOfProperty(TestObject, "intWrapper"))
     TestObject.intWrapper = IntWrapper(42)
     assertEquals("42 (number)", describeValueOfProperty(TestObject, "intWrapper"))
-    assertEquals(42, TestObject.intWrapper.value)
+    assertEquals(42, TestObject.intWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(TestObject, "intWrapperN"))
     TestObject.intWrapperN = IntWrapper(100)
     assertEquals("100 (number)", describeValueOfProperty(TestObject, "intWrapperN"))
-    assertEquals(100, TestObject.intWrapperN?.value)
+    assertEquals(100, TestObject.intWrapperN?.konstue)
     TestObject.intWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(TestObject, "intWrapperN"))
-    assertEquals(null, TestObject.intWrapperN?.value)
+    assertEquals(null, TestObject.intWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(TestObject, "intNWrapper"))
     TestObject.intNWrapper = IntNWrapper(23)
     assertEquals("23 (number)", describeValueOfProperty(TestObject, "intNWrapper"))
-    assertEquals(23, TestObject.intNWrapper.value)
+    assertEquals(23, TestObject.intNWrapper.konstue)
     TestObject.intNWrapper = IntNWrapper(null)
     assertEquals("null (object)", describeValueOfProperty(TestObject, "intNWrapper"))
-    assertEquals(null, TestObject.intNWrapper.value)
+    assertEquals(null, TestObject.intNWrapper.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(TestObject, "intNWrapperN"))
     TestObject.intNWrapperN = IntNWrapper(65)
-    assertEquals("IntNWrapper(value=65) (object)", describeValueOfProperty(TestObject, "intNWrapperN"))
-    assertEquals(65, TestObject.intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=65) (object)", describeValueOfProperty(TestObject, "intNWrapperN"))
+    assertEquals(65, TestObject.intNWrapperN?.konstue)
     TestObject.intNWrapperN = IntNWrapper(null)
-    assertEquals("IntNWrapper(value=null) (object)", describeValueOfProperty(TestObject, "intNWrapperN"))
-    assertEquals(null, TestObject.intNWrapperN?.value)
+    assertEquals("IntNWrapper(konstue=null) (object)", describeValueOfProperty(TestObject, "intNWrapperN"))
+    assertEquals(null, TestObject.intNWrapperN?.konstue)
     TestObject.intNWrapperN = null
     assertEquals("null (object)", describeValueOfProperty(TestObject, "intNWrapperN"))
-    assertEquals(null, TestObject.intNWrapperN?.value)
+    assertEquals(null, TestObject.intNWrapperN?.konstue)
 
     assertEquals("null (object)", describeValueOfProperty(TestObject, "fooWrapper"))
     TestObject.fooWrapper = FooWrapper(Foo("cat"))
@@ -1515,22 +1515,22 @@ fun testWritableObjectProperties() {
 
 fun testReadOnlyObjectProperties() {
     TestObject.intWrapper = IntWrapper(42)
-    assertEquals(42, TestObject.readOnlyIntWrapper.value)
+    assertEquals(42, TestObject.readOnlyIntWrapper.konstue)
 
-    assertEquals(null, TestObject.readOnlyIntWrapperN?.value)
+    assertEquals(null, TestObject.readOnlyIntWrapperN?.konstue)
     TestObject.intWrapperN = IntWrapper(100)
-    assertEquals(100, TestObject.readOnlyIntWrapperN?.value)
+    assertEquals(100, TestObject.readOnlyIntWrapperN?.konstue)
 
     TestObject.intNWrapper = IntNWrapper(23)
-    assertEquals(23, TestObject.readOnlyIntNWrapper.value)
+    assertEquals(23, TestObject.readOnlyIntNWrapper.konstue)
     TestObject.intNWrapper = IntNWrapper(null)
-    assertEquals(null, TestObject.readOnlyIntNWrapper.value)
+    assertEquals(null, TestObject.readOnlyIntNWrapper.konstue)
 
-    assertEquals(null, TestObject.readOnlyIntNWrapperN?.value)
+    assertEquals(null, TestObject.readOnlyIntNWrapperN?.konstue)
     TestObject.intNWrapperN = IntNWrapper(65)
-    assertEquals(65, TestObject.readOnlyIntNWrapperN?.value)
+    assertEquals(65, TestObject.readOnlyIntNWrapperN?.konstue)
     TestObject.intNWrapperN = IntNWrapper(null)
-    assertEquals(null, TestObject.readOnlyIntNWrapperN?.value)
+    assertEquals(null, TestObject.readOnlyIntNWrapperN?.konstue)
 
     TestObject.fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", TestObject.readOnlyFooWrapper.foo.s)
@@ -1573,22 +1573,22 @@ fun testReadOnlyObjectProperties() {
 
 fun testObjectMethodsWithValueClassinReturnType() {
     TestObject.intWrapper = IntWrapper(42)
-    assertEquals(42, TestObject.getIntWrapper().value)
+    assertEquals(42, TestObject.getIntWrapper().konstue)
 
-    assertEquals(null, TestObject.getIntWrapperN()?.value)
+    assertEquals(null, TestObject.getIntWrapperN()?.konstue)
     TestObject.intWrapperN = IntWrapper(100)
-    assertEquals(100, TestObject.getIntWrapperN()?.value)
+    assertEquals(100, TestObject.getIntWrapperN()?.konstue)
 
     TestObject.intNWrapper = IntNWrapper(23)
-    assertEquals(23, TestObject.getIntNWrapper().value)
+    assertEquals(23, TestObject.getIntNWrapper().konstue)
     TestObject.intNWrapper = IntNWrapper(null)
-    assertEquals(null, TestObject.getIntNWrapper().value)
+    assertEquals(null, TestObject.getIntNWrapper().konstue)
 
-    assertEquals(null, TestObject.getIntNWrapperN()?.value)
+    assertEquals(null, TestObject.getIntNWrapperN()?.konstue)
     TestObject.intNWrapperN = IntNWrapper(65)
-    assertEquals(65, TestObject.getIntNWrapperN()?.value)
+    assertEquals(65, TestObject.getIntNWrapperN()?.konstue)
     TestObject.intNWrapperN = IntNWrapper(null)
-    assertEquals(null, TestObject.getIntNWrapperN()?.value)
+    assertEquals(null, TestObject.getIntNWrapperN()?.konstue)
 
     TestObject.fooWrapper = FooWrapper(Foo("cat"))
     assertEquals("cat", TestObject.getFooWrapper().foo.s)

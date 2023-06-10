@@ -20,6 +20,6 @@ class Foo(foo: Boolean) {
 }
 
 fun box(): String {
-    val foo = Foo(true)
+    konst foo = Foo(true)
     return foo.res
 }

@@ -1,1 +1,1 @@
-const val TAG = <expr>"Analysis API".toString()</expr>
+const konst TAG = <expr>"Analysis API".toString()</expr>

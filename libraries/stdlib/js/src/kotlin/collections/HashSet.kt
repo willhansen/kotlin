@@ -16,7 +16,7 @@ package kotlin.collections
 // have to make sure mutating methods check `checkIsMutable`.
 public actual open class HashSet<E> : AbstractMutableSet<E>, MutableSet<E> {
 
-    internal val map: HashMap<E, Any>
+    internal konst map: HashMap<E, Any>
 
     /**
      * Creates a new empty [HashSet].
@@ -76,7 +76,7 @@ public actual open class HashSet<E> : AbstractMutableSet<E>, MutableSet<E> {
     }
 
     actual override fun add(element: E): Boolean {
-        val old = map.put(element, this)
+        konst old = map.put(element, this)
         return old == null
     }
 
@@ -96,7 +96,7 @@ public actual open class HashSet<E> : AbstractMutableSet<E>, MutableSet<E> {
 
     actual override fun remove(element: E): Boolean = map.remove(element) != null
 
-    actual override val size: Int get() = map.size
+    actual override konst size: Int get() = map.size
 
 }
 

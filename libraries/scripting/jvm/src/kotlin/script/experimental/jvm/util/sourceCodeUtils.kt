@@ -8,7 +8,7 @@ package kotlin.script.experimental.jvm.util
 import java.io.Serializable
 import kotlin.script.experimental.api.SourceCode
 
-data class AbsSourceCodePosition(val line: Int, val col: Int, val absolutePos: Int) : Serializable
+data class AbsSourceCodePosition(konst line: Int, konst col: Int, konst absolutePos: Int) : Serializable
 
 internal fun String.findNth(s: String, n: Int, start: Int = 0): Int {
     if (n < 1) return -1
@@ -25,10 +25,10 @@ internal fun String.findNth(s: String, n: Int, start: Int = 0): Int {
 }
 
 fun Int.toSourceCodePosition(code: SourceCode): SourceCode.Position {
-    val substr = code.text.substring(0, this)
-    val line = 1 + substr.count { it == '\n' }
-    val sep = code.text.determineSep()
-    val col = 1 + substr.length - substr.lastIndexOf(sep) - sep.length
+    konst substr = code.text.substring(0, this)
+    konst line = 1 + substr.count { it == '\n' }
+    konst sep = code.text.determineSep()
+    konst col = 1 + substr.length - substr.lastIndexOf(sep) - sep.length
     return SourceCode.Position(line, col, this)
 }
 
@@ -41,6 +41,6 @@ fun SourceCode.Position.calcAbsolute(code: SourceCode): Int {
     if (line == 1)
         return col - 1
 
-    val sep = code.text.determineSep()
+    konst sep = code.text.determineSep()
     return code.text.findNth(sep, line - 1) + sep.length + col - 1
 }

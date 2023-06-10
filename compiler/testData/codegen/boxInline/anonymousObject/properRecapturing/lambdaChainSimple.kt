@@ -13,7 +13,7 @@ inline fun <T> inlineFun(arg: T, crossinline f: (T) -> Unit) {
 import test.*
 
 fun box(): String {
-    val param = "start"
+    konst param = "start"
     var result = "fail"
 
     inlineFun("2") { a ->

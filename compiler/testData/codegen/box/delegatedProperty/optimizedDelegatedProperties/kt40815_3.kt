@@ -4,7 +4,7 @@ inline operator fun String.getValue(thiz: Any?, property: KProperty<*>): String 
 
 fun box(): String {
     class Local {
-        val OK by ""
+        konst OK by ""
     }
     return Local().OK
 }

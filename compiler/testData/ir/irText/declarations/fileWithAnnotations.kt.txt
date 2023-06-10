@@ -3,6 +3,6 @@
 fun foo() {
 }
 
-val bar: Int
+konst bar: Int
   field = 42
   get

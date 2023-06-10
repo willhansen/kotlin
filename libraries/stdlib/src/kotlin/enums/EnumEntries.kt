@@ -11,7 +11,7 @@ package kotlin.enums
  * A specialized immutable implementation of [List] interface that
  * contains all enum entries of the specified enum type [E].
  * [EnumEntries] contains all enum entries in the order they are declared in the source code,
- * consistently with the corresponding [Enum.ordinal] values.
+ * consistently with the corresponding [Enum.ordinal] konstues.
  *
  * An instance of this interface can only be obtained from `EnumClass.entries` property.
  *
@@ -32,13 +32,13 @@ internal fun <E : Enum<E>> enumEntries(entriesProvider: () -> Array<E>): EnumEnt
 internal fun <E : Enum<E>> enumEntries(entries: Array<E>): EnumEntries<E> = EnumEntriesList(entries)
 
 @SinceKotlin("1.8")
-private class EnumEntriesList<T : Enum<T>>(private val entries: Array<T>) : EnumEntries<T>, AbstractList<T>(), Serializable {
+private class EnumEntriesList<T : Enum<T>>(private konst entries: Array<T>) : EnumEntries<T>, AbstractList<T>(), Serializable {
 // WA for JS IR bug:
 //  class type parameter name MUST be different from E (AbstractList<E> type parameter),
 //  otherwise the bridge names for contains() and indexOf() will be clashed with the original method names,
 //  and produced JS code will not contain type checks and will not work correctly.
 
-    override val size: Int
+    override konst size: Int
         get() = entries.size
 
     override fun get(index: Int): T {
@@ -53,7 +53,7 @@ private class EnumEntriesList<T : Enum<T>>(private val entries: Array<T>) : Enum
         @Suppress("SENSELESS_COMPARISON")
         if (element === null) return false // WA for JS IR bug
         // Check identity due to UnsafeVariance
-        val target = entries.getOrNull(element.ordinal)
+        konst target = entries.getOrNull(element.ordinal)
         return target === element
     }
 
@@ -61,8 +61,8 @@ private class EnumEntriesList<T : Enum<T>>(private val entries: Array<T>) : Enum
         @Suppress("SENSELESS_COMPARISON")
         if (element === null) return -1 // WA for JS IR bug
         // Check identity due to UnsafeVariance
-        val ordinal = element.ordinal
-        val target = entries.getOrNull(ordinal)
+        konst ordinal = element.ordinal
+        konst target = entries.getOrNull(ordinal)
         return if (target === element) ordinal else -1
     }
 

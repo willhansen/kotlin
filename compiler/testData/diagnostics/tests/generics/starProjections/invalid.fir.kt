@@ -1,13 +1,13 @@
 // !CHECK_TYPE
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 // FILE: main.kt
-class Inv<T>(val x: T)
+class Inv<T>(konst x: T)
 
 class A<T : Inv<in T>> {
     fun foo(): T = null!!
 }
 
-class Inv2<T : Inv2<in T>>(val x: T)
+class Inv2<T : Inv2<in T>>(konst x: T)
 
 fun main(a: A<*>, j: JavaClass<*>, i2: Inv2<*>) {
     // Probably it's too restrictive to suppose star projection type here as Any?,

@@ -1,7 +1,7 @@
 class A {
-    val lambda: () -> Unit = TODO()
-    val memberInvoke: B = TODO()
-    val extensionInvoke: C = TODO()
+    konst lambda: () -> Unit = TODO()
+    konst memberInvoke: B = TODO()
+    konst extensionInvoke: C = TODO()
 }
 
 class B {

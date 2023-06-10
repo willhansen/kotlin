@@ -24,7 +24,7 @@ interface CoroutineScope
 suspend fun delay(i: Int) {}
 
 suspend fun test() {
-    val tickerChannel = ticker(delayMillis = 100, initialDelayMillis = 0) // create ticker channel
+    konst tickerChannel = ticker(delayMillis = 100, initialDelayMillis = 0) // create ticker channel
     var nextElement = withTimeoutOrNull(1) { tickerChannel.receive() }
     println("Initial element is available immediately: $nextElement") // no initial delay
 

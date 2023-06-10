@@ -12,7 +12,7 @@ fun exactlyOnce(f: () -> Unit) {
 fun test() {
     var s: String? = ""
     if (s != null) {
-        val block: () -> Unit
+        konst block: () -> Unit
         exactlyOnce {
             block = { s = null }
         }

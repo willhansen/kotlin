@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.ir.util.collectRealOverrides
 import org.jetbrains.kotlin.ir.util.isInterface
 
 internal class ImplementAsErrorThrowingStubs(
-    private val partialLinkageSupport: PartialLinkageSupportForLinker
+    private konst partialLinkageSupport: PartialLinkageSupportForLinker
 ) : IrUnimplementedOverridesStrategy {
     override fun <S : IrSymbol, T : IrOverridableDeclaration<S>> computeCustomization(overridableMember: T, parent: IrClass) =
         if (overridableMember.isAbstract
@@ -59,7 +59,7 @@ internal class ImplementAsErrorThrowingStubs(
      * This is done to mimic jvm behaviour.
      */
     private fun <S : IrSymbol, T : IrOverridableDeclaration<S>> T.isAmbiguous(): Boolean {
-        val candidates = collectRealOverrides().filter { !it.isAbstract }
+        konst candidates = collectRealOverrides().filter { !it.isAbstract }
         if (candidates.any { ((it.symbol.owner as IrDeclaration).parent as? IrClass)?.isInterface == false }) {
             return false
         }
@@ -69,12 +69,12 @@ internal class ImplementAsErrorThrowingStubs(
     private fun IrClass.isEligibleForPartialLinkage() = !isExternal && !partialLinkageSupport.shouldBeSkipped(this)
 
 
-    private val IrOverridableMember.isAbstract: Boolean
+    private konst IrOverridableMember.isAbstract: Boolean
         get() = modality == Modality.ABSTRACT
 
-    private val IrClass.isConcrete: Boolean
+    private konst IrClass.isConcrete: Boolean
         get() = modality != Modality.ABSTRACT && modality != Modality.SEALED
 
-    private val IrClass.delegatesToNothing: Boolean
+    private konst IrClass.delegatesToNothing: Boolean
         get() = declarations.any { it is IrField && it.origin == IrDeclarationOrigin.DELEGATE && it.type.isNothing() }
 }

@@ -28,7 +28,7 @@
  *	other words,
  *		        2      4      6      8      10      12      14
  *	    R(z) ~ Lg1*s +Lg2*s +Lg3*s +Lg4*s +Lg5*s  +Lg6*s  +Lg7*s
- *  	(the values of Lg1 to Lg7 are listed in the program)
+ *  	(the konstues of Lg1 to Lg7 are listed in the program)
  *	and
  *	    |      2          14          |     -58.45
  *	    | Lg1*s +...+Lg7*s    -  R(z) | <= 2 
@@ -55,27 +55,27 @@
  *	1 ulp (unit in the last place).
  *
  * Constants:
- * The hexadecimal values are the intended ones for the following 
- * constants. The decimal values may be used, provided that the 
+ * The hexadecimal konstues are the intended ones for the following 
+ * constants. The decimal konstues may be used, provided that the 
  * compiler will convert from decimal to binary accurately enough 
- * to produce the hexadecimal values shown.
+ * to produce the hexadecimal konstues shown.
  */
 
 package kotlin.math.fdlibm
 
 
-private const val ln2_hi = 6.93147180369123816490e-01    /* 3fe62e42 fee00000 */
-private const val ln2_lo = 1.90821492927058770002e-10    /* 3dea39ef 35793c76 */
-private const val two54 = 1.80143985094819840000e+16  /* 43500000 00000000 */
-private const val Lg1 = 6.666666666666735130e-01  /* 3FE55555 55555593 */
-private const val Lg2 = 3.999999999940941908e-01  /* 3FD99999 9997FA04 */
-private const val Lg3 = 2.857142874366239149e-01  /* 3FD24924 94229359 */
-private const val Lg4 = 2.222219843214978396e-01  /* 3FCC71C5 1D8E78AF */
-private const val Lg5 = 1.818357216161805012e-01  /* 3FC74664 96CB03DE */
-private const val Lg6 = 1.531383769920937332e-01  /* 3FC39A09 D078C69F */
-private const val Lg7 = 1.479819860511658591e-01  /* 3FC2F112 DF3E5244 */
+private const konst ln2_hi = 6.93147180369123816490e-01    /* 3fe62e42 fee00000 */
+private const konst ln2_lo = 1.90821492927058770002e-10    /* 3dea39ef 35793c76 */
+private const konst two54 = 1.80143985094819840000e+16  /* 43500000 00000000 */
+private const konst Lg1 = 6.666666666666735130e-01  /* 3FE55555 55555593 */
+private const konst Lg2 = 3.999999999940941908e-01  /* 3FD99999 9997FA04 */
+private const konst Lg3 = 2.857142874366239149e-01  /* 3FD24924 94229359 */
+private const konst Lg4 = 2.222219843214978396e-01  /* 3FCC71C5 1D8E78AF */
+private const konst Lg5 = 1.818357216161805012e-01  /* 3FC74664 96CB03DE */
+private const konst Lg6 = 1.531383769920937332e-01  /* 3FC39A09 D078C69F */
+private const konst Lg7 = 1.479819860511658591e-01  /* 3FC2F112 DF3E5244 */
 
-private const val zero = 0.0
+private const konst zero = 0.0
 
 internal fun __ieee754_log(_x: Double): Double {
     var x: Double = _x

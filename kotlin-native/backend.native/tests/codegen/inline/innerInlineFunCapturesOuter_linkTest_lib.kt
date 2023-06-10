@@ -1,6 +1,6 @@
 package a
 
-class E(val x: String) {
+class E(konst x: String) {
     inner class Inner {
         inline fun foo(y: String) = x + y
     }

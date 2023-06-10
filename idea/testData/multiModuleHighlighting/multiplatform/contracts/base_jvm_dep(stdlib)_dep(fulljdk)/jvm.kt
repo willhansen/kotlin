@@ -1,7 +1,7 @@
 package test.jvm
 
 fun test(x: List<Int>?) {
-    // If the function returns false, the value is definitely not null:
+    // If the function returns false, the konstue is definitely not null:
     if (!x.isNullOrEmpty()) {
         println(x.size) // Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type List<Int>?
     }

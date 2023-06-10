@@ -20,7 +20,7 @@ class KotlinUnsupportedModuleBuildTarget(
     kotlinContext: KotlinCompileContext,
     jpsModuleBuildTarget: ModuleBuildTarget
 ) : KotlinModuleBuildTarget<BuildMetaInfo>(kotlinContext, jpsModuleBuildTarget) {
-    val kind = module.platform?.idePlatformKind?.name
+    konst kind = module.platform?.idePlatformKind?.name
 
     private fun shouldNotBeCalled(): Nothing = error("Should not be called")
 
@@ -28,13 +28,13 @@ class KotlinUnsupportedModuleBuildTarget(
         return false
     }
 
-    override val isIncrementalCompilationEnabled: Boolean
+    override konst isIncrementalCompilationEnabled: Boolean
         get() = false
 
-    override val hasCaches: Boolean
+    override konst hasCaches: Boolean
         get() = false
 
-    override val globalLookupCacheId: String
+    override konst globalLookupCacheId: String
         get() = shouldNotBeCalled()
 
     override fun compileModuleChunk(
@@ -49,9 +49,9 @@ class KotlinUnsupportedModuleBuildTarget(
         shouldNotBeCalled()
     }
 
-    override val compilerArgumentsFileName: String
+    override konst compilerArgumentsFileName: String
         get() = shouldNotBeCalled()
 
-    override val buildMetaInfo: BuildMetaInfo
+    override konst buildMetaInfo: BuildMetaInfo
         get() = shouldNotBeCalled()
 }

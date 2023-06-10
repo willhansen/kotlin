@@ -20,11 +20,11 @@ package n
 import a.JC
 
 fun foo(c: JC<Int>, iterator: Iterator<Int>, iterable: Iterable<Int>) {
-    val mutableIterator: MutableIterator<Int>? = c.getIterator()
+    konst mutableIterator: MutableIterator<Int>? = c.getIterator()
     c.setIterator(mutableIterator)
     c.setIterator(iterator)
 
-    val mutableIterable: MutableIterable<Int>? = c.getIterable()
+    konst mutableIterable: MutableIterable<Int>? = c.getIterable()
     c.setIterable(mutableIterable)
     c.setIterable(iterable)
 }

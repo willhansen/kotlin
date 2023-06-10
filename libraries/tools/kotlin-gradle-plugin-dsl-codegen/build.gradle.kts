@@ -8,9 +8,9 @@ dependencies {
     api(project(":native:kotlin-native-utils"))
 }
 
-val generateGroupName = "Generate"
+konst generateGroupName = "Generate"
 
-val generateMppTargetContainerWithPresets by generator(
+konst generateMppTargetContainerWithPresets by generator(
     "org.jetbrains.kotlin.generators.gradle.dsl.MppPresetFunctionsCodegenKt",
     sourceSets["main"]
 ) {
@@ -18,7 +18,7 @@ val generateMppTargetContainerWithPresets by generator(
     setOutputSourceRoot()
 }
 
-val generateAbstractBinaryContainer by generator(
+konst generateAbstractBinaryContainer by generator(
     "org.jetbrains.kotlin.generators.gradle.dsl.MppNativeBinaryDSLCodegenKt",
     sourceSets["main"]
 ) {
@@ -26,7 +26,7 @@ val generateAbstractBinaryContainer by generator(
     setOutputSourceRoot()
 }
 
-val generateAbstractKotlinArtifactsExtensionImplementation by generator(
+konst generateAbstractKotlinArtifactsExtensionImplementation by generator(
     "org.jetbrains.kotlin.generators.gradle.dsl.KotlinArtifactsDSLCodegenKt",
     sourceSets["main"]
 ) {
@@ -34,7 +34,7 @@ val generateAbstractKotlinArtifactsExtensionImplementation by generator(
     setOutputSourceRoot()
 }
 
-val generateKpmNativeVariants by generator(
+konst generateKpmNativeVariants by generator(
     "org.jetbrains.kotlin.generators.gradle.dsl.KpmNativeVariantCodegenKt",
     sourceSets["main"]
 ) {

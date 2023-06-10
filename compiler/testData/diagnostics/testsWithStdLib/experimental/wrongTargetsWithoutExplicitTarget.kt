@@ -11,16 +11,16 @@ annotation class OtherOptInMarker
 class IntWrapper(
     <!OPT_IN_MARKER_ON_WRONG_TARGET!>@SomeOptInMarker<!>
     <!OPT_IN_MARKER_ON_WRONG_TARGET!>@OtherOptInMarker<!>
-    val value: Int
+    konst konstue: Int
 ) {
-    val isEven: Boolean
+    konst isEven: Boolean
         <!OPT_IN_MARKER_ON_WRONG_TARGET!>@SomeOptInMarker<!>
         <!OPT_IN_MARKER_ON_WRONG_TARGET!>@OtherOptInMarker<!>
-        get() = (value % 2) == 0
+        get() = (konstue % 2) == 0
 }
 
 fun foo() {
     <!OPT_IN_MARKER_ON_WRONG_TARGET!>@SomeOptInMarker<!>
     <!OPT_IN_MARKER_ON_WRONG_TARGET!>@OtherOptInMarker<!>
-    val value = 2
+    konst konstue = 2
 }

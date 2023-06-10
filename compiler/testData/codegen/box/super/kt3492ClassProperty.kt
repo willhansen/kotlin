@@ -1,5 +1,5 @@
 open class A {
-    open val foo: String = "OK"
+    open konst foo: String = "OK"
 }
 
 open class B : A() {
@@ -8,7 +8,7 @@ open class B : A() {
 
 class C : B() {
     inner class D {
-        val foo: String = super<B>@C.foo
+        konst foo: String = super<B>@C.foo
     }
 }
 

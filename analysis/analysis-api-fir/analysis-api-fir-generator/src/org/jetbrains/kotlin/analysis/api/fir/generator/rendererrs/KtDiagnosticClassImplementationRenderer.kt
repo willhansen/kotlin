@@ -46,7 +46,7 @@ object KtDiagnosticClassImplementationRenderer : AbstractDiagnosticsDataClassRen
     }
 
     private fun SmartPrinter.printParameter(parameter: HLDiagnosticParameter, diagnosticList: HLDiagnosticList) {
-        print("override val ${parameter.name}: ")
+        print("override konst ${parameter.name}: ")
         printTypeWithShortNames(parameter.type) {
             diagnosticList.containsClashingBySimpleNameType(it)
         }
@@ -57,7 +57,7 @@ object KtDiagnosticClassImplementationRenderer : AbstractDiagnosticsDataClassRen
         diagnosticParameter.type.collectClassNamesTo(this)
     }
 
-    override val defaultImports = listOf(
+    override konst defaultImports = listOf(
         "org.jetbrains.kotlin.diagnostics.KtPsiDiagnostic",
         "org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken",
     )

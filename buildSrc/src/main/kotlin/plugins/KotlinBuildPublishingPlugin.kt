@@ -22,12 +22,12 @@ import java.util.*
 import javax.inject.Inject
 
 class KotlinBuildPublishingPlugin @Inject constructor(
-    private val componentFactory: SoftwareComponentFactory
+    private konst componentFactory: SoftwareComponentFactory
 ) : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         apply<MavenPublishPlugin>()
 
-        val publishedRuntime = configurations.maybeCreate(RUNTIME_CONFIGURATION).apply {
+        konst publishedRuntime = configurations.maybeCreate(RUNTIME_CONFIGURATION).apply {
             isCanBeConsumed = false
             isCanBeResolved = false
             attributes {
@@ -35,7 +35,7 @@ class KotlinBuildPublishingPlugin @Inject constructor(
             }
         }
 
-        val publishedCompile = configurations.maybeCreate(COMPILE_CONFIGURATION).apply {
+        konst publishedCompile = configurations.maybeCreate(COMPILE_CONFIGURATION).apply {
             isCanBeConsumed = false
             isCanBeResolved = false
             attributes {
@@ -43,14 +43,14 @@ class KotlinBuildPublishingPlugin @Inject constructor(
             }
         }
 
-        val kotlinLibraryComponent = componentFactory.adhoc(ADHOC_COMPONENT_NAME)
+        konst kotlinLibraryComponent = componentFactory.adhoc(ADHOC_COMPONENT_NAME)
         components.add(kotlinLibraryComponent)
         kotlinLibraryComponent.addVariantsFromConfiguration(publishedCompile) { mapToMavenScope("compile") }
         kotlinLibraryComponent.addVariantsFromConfiguration(publishedRuntime) { mapToMavenScope("runtime") }
 
         pluginManager.withPlugin("java-base") {
-            val runtimeElements by configurations
-            val apiElements by configurations
+            konst runtimeElements by configurations
+            konst apiElements by configurations
 
             publishedRuntime.extendsFrom(runtimeElements)
             publishedCompile.extendsFrom(apiElements)
@@ -77,13 +77,13 @@ class KotlinBuildPublishingPlugin @Inject constructor(
     }
 
     companion object {
-        const val DEFAULT_MAIN_PUBLICATION_NAME = "Main"
-        const val MAIN_PUBLICATION_NAME_PROPERTY = "MainPublicationName"
-        const val REPOSITORY_NAME = "Maven"
-        const val ADHOC_COMPONENT_NAME = "kotlinLibrary"
+        const konst DEFAULT_MAIN_PUBLICATION_NAME = "Main"
+        const konst MAIN_PUBLICATION_NAME_PROPERTY = "MainPublicationName"
+        const konst REPOSITORY_NAME = "Maven"
+        const konst ADHOC_COMPONENT_NAME = "kotlinLibrary"
 
-        const val COMPILE_CONFIGURATION = "publishedCompile"
-        const val RUNTIME_CONFIGURATION = "publishedRuntime"
+        const konst COMPILE_CONFIGURATION = "publishedCompile"
+        const konst RUNTIME_CONFIGURATION = "publishedRuntime"
     }
 }
 
@@ -93,8 +93,8 @@ var Project.mainPublicationName: String
             project.extra.get(KotlinBuildPublishingPlugin.MAIN_PUBLICATION_NAME_PROPERTY) as String
         else KotlinBuildPublishingPlugin.DEFAULT_MAIN_PUBLICATION_NAME
     }
-    set(value) {
-        project.extra.set(KotlinBuildPublishingPlugin.MAIN_PUBLICATION_NAME_PROPERTY, value)
+    set(konstue) {
+        project.extra.set(KotlinBuildPublishingPlugin.MAIN_PUBLICATION_NAME_PROPERTY, konstue)
     }
 
 @OptIn(ExperimentalStdlibApi::class)
@@ -102,7 +102,7 @@ private fun humanReadableName(name: String) =
     name.split("-").joinToString(separator = " ") { it.capitalize(Locale.ROOT) }
 
 fun MavenPublication.configureKotlinPomAttributes(project: Project, explicitDescription: String? = null, packaging: String = "jar") {
-    val publication = this
+    konst publication = this
     pom {
         this.packaging = packaging
         name.set(humanReadableName(publication.artifactId))
@@ -129,7 +129,7 @@ fun MavenPublication.configureKotlinPomAttributes(project: Project, explicitDesc
     }
 }
 
-val Project.signLibraryPublication: Boolean
+konst Project.signLibraryPublication: Boolean
     get() = project.providers.gradleProperty("signingRequired").orNull?.toBoolean()
         ?: project.providers.gradleProperty("isSonatypeRelease").orNull?.toBoolean()
         ?: false
@@ -168,10 +168,10 @@ private fun Project.configureSigning() {
     configure<SigningExtension> {
         sign(extensions.getByType<PublishingExtension>().publications) // all publications
 
-        val signKeyId = project.getSensitiveProperty("signKeyId")
+        konst signKeyId = project.getSensitiveProperty("signKeyId")
         if (!signKeyId.isNullOrBlank()) {
-            val signKeyPrivate = project.getSensitiveProperty("signKeyPrivate") ?: error("Parameter `signKeyPrivate` not found")
-            val signKeyPassphrase = project.getSensitiveProperty("signKeyPassphrase") ?: error("Parameter `signKeyPassphrase` not found")
+            konst signKeyPrivate = project.getSensitiveProperty("signKeyPrivate") ?: error("Parameter `signKeyPrivate` not found")
+            konst signKeyPassphrase = project.getSensitiveProperty("signKeyPassphrase") ?: error("Parameter `signKeyPassphrase` not found")
             useInMemoryPgpKeys(signKeyId, signKeyPrivate, signKeyPassphrase)
         } else {
             useGpgCmd()
@@ -185,10 +185,10 @@ fun TaskProvider<PublishToMavenRepository>.configureRepository() =
 private fun PublishToMavenRepository.configureRepository() {
     dependsOn(project.rootProject.tasks.named("preparePublication"))
     doFirst {
-        val preparePublication = project.rootProject.tasks.named("preparePublication").get()
-        val username: String? by preparePublication.extra
-        val password: String? by preparePublication.extra
-        val repoUrl: String by preparePublication.extra
+        konst preparePublication = project.rootProject.tasks.named("preparePublication").get()
+        konst username: String? by preparePublication.extra
+        konst password: String? by preparePublication.extra
+        konst repoUrl: String by preparePublication.extra
 
         repository.apply {
             url = project.uri(repoUrl)

@@ -70,7 +70,7 @@ fun BuildResult.assertOutputDoesNotContain(
         printBuildOutput()
 
         // In case if notExpectedSubString is multiline string
-        val occurrences = mutableListOf<Pair<Int, Int>>()
+        konst occurrences = mutableListOf<Pair<Int, Int>>()
         var startIndex = output.indexOf(notExpectedSubString)
         var endIndex = startIndex + notExpectedSubString.length
         do {
@@ -79,7 +79,7 @@ fun BuildResult.assertOutputDoesNotContain(
             endIndex = startIndex + notExpectedSubString.length
         } while (startIndex != -1)
 
-        val linesContainingSubString = occurrences.map { (startIndex, endIndex) ->
+        konst linesContainingSubString = occurrences.map { (startIndex, endIndex) ->
             output.subSequence(
                 (startIndex - wrappingCharsCount).coerceAtLeast(0),
                 (endIndex + wrappingCharsCount).coerceAtMost(output.length)
@@ -120,9 +120,9 @@ fun BuildResult.assertOutputDoesNotContain(
     assert(!output.contains(regexToCheck)) {
         printBuildOutput()
 
-        val matchedStrings = regexToCheck
+        konst matchedStrings = regexToCheck
             .findAll(output)
-            .map { it.value }
+            .map { it.konstue }
             .joinToString(prefix = "  ", separator = "\n  ")
         "Build output contains following regex '$regexToCheck' matches:\n$matchedStrings"
     }
@@ -142,7 +142,7 @@ fun BuildResult.assertOutputContainsExactlyTimes(
     expected: Regex,
     expectedCount: Int = 1,
 ) {
-    val occurrenceCount = expected.findAll(output).count()
+    konst occurrenceCount = expected.findAll(output).count()
     assert(occurrenceCount == expectedCount) {
         printBuildOutput()
 
@@ -156,10 +156,10 @@ fun BuildResult.assertOutputContainsExactlyTimes(
 fun BuildResult.assertNoBuildWarnings(
     expectedWarnings: Set<String> = emptySet(),
 ) {
-    val cleanedOutput = expectedWarnings.fold(output) { acc, s ->
+    konst cleanedOutput = expectedWarnings.fold(output) { acc, s ->
         acc.replace(s, "")
     }
-    val warnings = cleanedOutput
+    konst warnings = cleanedOutput
         .lineSequence()
         .filter { it.trim().startsWith("w:") }
         .toList()
@@ -177,15 +177,15 @@ fun BuildResult.assertNoBuildWarnings(
 fun BuildResult.assertKotlinDaemonJvmOptions(
     expectedJvmArgs: List<String>,
 ) {
-    val jvmArgsCommonMessage = "Kotlin compile daemon JVM options: "
+    konst jvmArgsCommonMessage = "Kotlin compile daemon JVM options: "
     assertOutputContains(jvmArgsCommonMessage)
-    val argsRegex = "\\[.+?]".toRegex()
-    val argsStrings = output.lineSequence()
+    konst argsRegex = "\\[.+?]".toRegex()
+    konst argsStrings = output.lineSequence()
         .filter { it.contains(jvmArgsCommonMessage) }
         .map {
-            argsRegex.findAll(it).last().value.removePrefix("[").removeSuffix("]").split(", ")
+            argsRegex.findAll(it).last().konstue.removePrefix("[").removeSuffix("]").split(", ")
         }
-    val containsArgs = argsStrings.any {
+    konst containsArgs = argsStrings.any {
         it.containsAll(expectedJvmArgs)
     }
 
@@ -200,7 +200,7 @@ fun BuildResult.assertBuildReportPathIsPrinted() {
     assertOutputContains("Kotlin build report is written to file://")
 }
 
-val NO_GRADLE_WARNINGS_DETECTOR_PLUGIN_ERROR_MESSAGE =
+konst NO_GRADLE_WARNINGS_DETECTOR_PLUGIN_ERROR_MESSAGE =
     """
     The build uses warning mode other than `${WarningMode.Fail}` and uses a non-default project settings file.
     Please apply the `org.jetbrains.kotlin.test.gradle-warnings-detector` plugin to the settings.
@@ -224,25 +224,25 @@ fun BuildResult.assertDeprecationWarningsArePresent(warningMode: WarningMode) {
 }
 
 /**
- * This function searches for a given parameter in a multi-line output string and returns its value.
+ * This function searches for a given parameter in a multi-line output string and returns its konstue.
  *
- * The output string is assumed to be in the form of key-value pairs separated by an equal sign (‘=’) on each line.
+ * The output string is assumed to be in the form of key-konstue pairs separated by an equal sign (‘=’) on each line.
  *
- * If the specified parameter name is found at the end of a key, the corresponding value is returned.
+ * If the specified parameter name is found at the end of a key, the corresponding konstue is returned.
  * If the parameter is not found, the function returns null.
  */
 fun findParameterInOutput(name: String, output: String): String? =
     output.lineSequence().mapNotNull { line ->
-        val (key, value) = line.split('=', limit = 2).takeIf { it.size == 2 } ?: return@mapNotNull null
-        if (key.endsWith(name)) value else null
+        konst (key, konstue) = line.split('=', limit = 2).takeIf { it.size == 2 } ?: return@mapNotNull null
+        if (key.endsWith(name)) konstue else null
     }.firstOrNull()
 
 fun BuildResult.assertCompilerArgument(
     taskPath: String,
     expectedArgument: String,
 ) {
-    val taskOutput = getOutputForTask(taskPath)
-    val compilerArguments = taskOutput.lines().first {
+    konst taskOutput = getOutputForTask(taskPath)
+    konst compilerArguments = taskOutput.lines().first {
         it.contains("Kotlin compiler args:")
     }.substringAfter("Kotlin compiler args:")
 
@@ -257,12 +257,12 @@ fun BuildResult.assertCompilerArguments(
     taskPath: String,
     vararg expectedArguments: String,
 ) {
-    val taskOutput = getOutputForTask(taskPath)
-    val compilerArguments = taskOutput.lines().first {
+    konst taskOutput = getOutputForTask(taskPath)
+    konst compilerArguments = taskOutput.lines().first {
         it.contains("Kotlin compiler args:")
     }.substringAfter("Kotlin compiler args:")
 
-    val nonExistingArguments = expectedArguments
+    konst nonExistingArguments = expectedArguments
         .filter {
             !compilerArguments.contains(it)
         }
@@ -278,8 +278,8 @@ fun BuildResult.assertNoCompilerArgument(
     taskPath: String,
     notExpectedArgument: String,
 ) {
-    val taskOutput = getOutputForTask(taskPath)
-    val compilerArguments = taskOutput.lines().first {
+    konst taskOutput = getOutputForTask(taskPath)
+    konst compilerArguments = taskOutput.lines().first {
         it.contains("Kotlin compiler args:")
     }.substringAfter("Kotlin compiler args:")
 

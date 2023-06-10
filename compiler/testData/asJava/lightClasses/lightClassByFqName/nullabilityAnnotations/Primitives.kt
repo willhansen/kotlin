@@ -3,23 +3,23 @@
 interface Primitives {
     fun int(i: Int): Int
 
-    val nullableBool: Boolean?
-    val nullableByte: Byte?
-    val nullableShort: Short?
-    val nullableChar: Char?
-    val nullableInt: Int?
-    val nullableLong: Long?
-    val nullableFloat: Float?
-    val nullableDouble: Double?
+    konst nullableBool: Boolean?
+    konst nullableByte: Byte?
+    konst nullableShort: Short?
+    konst nullableChar: Char?
+    konst nullableInt: Int?
+    konst nullableLong: Long?
+    konst nullableFloat: Float?
+    konst nullableDouble: Double?
 
-    val bool: Boolean
-    val byte: Byte
-    val short: Short
-    val char: Char
-    val int: Int
-    val long: Long
-    val float: Float
-    val double: Double
+    konst bool: Boolean
+    konst byte: Byte
+    konst short: Short
+    konst char: Char
+    konst int: Int
+    konst long: Long
+    konst float: Float
+    konst double: Double
 }
 
 // FIR_COMPARISON

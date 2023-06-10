@@ -10,9 +10,9 @@
  */
 
 fun box(): String {
-    val b : Nothing?= null
+    konst b : Nothing?= null
     try {
-        val a: Int = b!!
+        konst a: Int = b!!
     } catch (e: NullPointerException) {
         return "OK"
     }

@@ -4,9 +4,9 @@ package test {
 
     public final annotation class Ann : kotlin.Annotation {
         public constructor Ann(/*0*/ b1: kotlin.Boolean, /*1*/ b2: kotlin.Boolean, /*2*/ b3: kotlin.Boolean)
-        public final val b1: kotlin.Boolean
-        public final val b2: kotlin.Boolean
-        public final val b3: kotlin.Boolean
+        public final konst b1: kotlin.Boolean
+        public final konst b2: kotlin.Boolean
+        public final konst b3: kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

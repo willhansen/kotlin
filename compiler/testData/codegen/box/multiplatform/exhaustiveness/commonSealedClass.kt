@@ -10,7 +10,7 @@ class A : Base()
 object B : Base()
 
 fun testCommon(base: Base) {
-    val x = when (base) { // must be Ok
+    konst x = when (base) { // must be Ok
         is A -> 1
         B -> 2
     }
@@ -20,7 +20,7 @@ fun testCommon(base: Base) {
 // FILE: main.kt
 
 fun testPlatform(base: Base) {
-    val x = when (base) { // must be OK
+    konst x = when (base) { // must be OK
         is A -> 1
         B -> 2
     }

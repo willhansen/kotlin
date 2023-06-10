@@ -13,12 +13,12 @@ enum class A {
     A, B
 }
 
-data class Foo(val kind: A)
+data class Foo(konst kind: A)
 
 // Enums are shared between threads so identity should be kept.
 @Test
 fun runTest() {
-    val result = Worker.start().execute(TransferMode.SAFE, { Foo(A.B) }, { input ->
+    konst result = Worker.start().execute(TransferMode.SAFE, { Foo(A.B) }, { input ->
         input.kind == A.B
     }).result
     println(result)

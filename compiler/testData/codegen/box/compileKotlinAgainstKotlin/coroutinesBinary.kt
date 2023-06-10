@@ -17,10 +17,10 @@ class Controller {
 }
 
 fun builder(c: suspend Controller.() -> Unit) {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, object : Continuation<Unit> {
-        override val context: CoroutineContext = EmptyCoroutineContext
-        override fun resumeWith(value: Result<Unit>) {}
+        override konst context: CoroutineContext = EmptyCoroutineContext
+        override fun resumeWith(konstue: Result<Unit>) {}
     })
 
     controller.callback()

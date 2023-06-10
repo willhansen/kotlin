@@ -1,1 +1,1 @@
-val x = 6; println(x * 7)
+konst x = 6; println(x * 7)

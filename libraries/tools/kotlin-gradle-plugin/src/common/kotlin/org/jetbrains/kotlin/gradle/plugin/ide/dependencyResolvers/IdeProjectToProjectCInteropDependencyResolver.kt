@@ -21,13 +21,13 @@ internal object IdeProjectToProjectCInteropDependencyResolver : IdeDependencyRes
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
         if (sourceSet !is DefaultKotlinSourceSet) return emptySet()
 
-        val compilation = sourceSet.internal.compilations.singleOrNull { it.platformType != KotlinPlatformType.common }
+        konst compilation = sourceSet.internal.compilations.singleOrNull { it.platformType != KotlinPlatformType.common }
             ?.safeAs<KotlinNativeCompilation>() ?: return emptySet()
 
-        val project = sourceSet.project
-        val configuration = project.locateOrCreateCInteropDependencyConfiguration(compilation)
+        konst project = sourceSet.project
+        konst configuration = project.locateOrCreateCInteropDependencyConfiguration(compilation)
 
-        val cinteropFiles = configuration.incoming.artifactView {
+        konst cinteropFiles = configuration.incoming.artifactView {
             it.isLenient = true
             it.componentFilter { identifier -> identifier is ProjectComponentIdentifier }
         }.files

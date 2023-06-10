@@ -6,7 +6,7 @@ open class X {
     private fun foo() = "private in super"
     fun bar() = foo()
 
-    private val zeg = "private in super"
+    private konst zeg = "private in super"
     fun lim() = zeg
 }
 
@@ -17,7 +17,7 @@ open class X {
     public fun foo() = "public in super"
     fun bar() = foo()
 
-    private val zeg = "public in super"
+    private konst zeg = "public in super"
     fun lim() = zeg
 }
 
@@ -28,7 +28,7 @@ class Y: X() {
     private fun foo() = "private in derived"
     fun qux() = foo()
 
-    private val zeg = "private in derived"
+    private konst zeg = "private in derived"
     fun tes() = zeg
 }
 

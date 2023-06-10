@@ -1,5 +1,5 @@
 fun test(b: Boolean) {
-    val a = when(b) {
+    konst a = when(b) {
         true -> {
             <expr>5</expr>
             45

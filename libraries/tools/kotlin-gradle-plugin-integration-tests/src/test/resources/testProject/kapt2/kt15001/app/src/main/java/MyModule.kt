@@ -6,7 +6,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class MyModule(private val context: Context) {
+class MyModule(private konst context: Context) {
   @Provides @Singleton fun provideContext() = context
 
   override fun hashCode(): Int {

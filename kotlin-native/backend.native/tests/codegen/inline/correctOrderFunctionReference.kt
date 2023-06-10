@@ -7,7 +7,7 @@ package codegen.inline.correctOrderFunctionReference
 
 import kotlin.test.*
 
-class Foo(val a: String) {
+class Foo(konst a: String) {
 
     fun test() = a
 }
@@ -29,7 +29,7 @@ fun create2(a: String, f: () -> String): Foo {
 }
 
 fun box(): String {
-    val result = test(create("A").a, create("B")::a, create("C")::test, create2("E", create("D")::test)::test, create("F").a)
+    konst result = test(create("A").a, create("B")::a, create("C")::test, create2("E", create("D")::test)::test, create("F").a)
     if (effects != "ABCDEF") return "fail 1: $effects"
 
     return if (result == "ABCEF") "OK" else "fail 2: $result"

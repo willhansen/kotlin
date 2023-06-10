@@ -4,7 +4,7 @@
 
 class Container {
     annotation class ExampleMapKey(
-        val stringValue: String,
+        konst stringValue: String,
     )
 }
 

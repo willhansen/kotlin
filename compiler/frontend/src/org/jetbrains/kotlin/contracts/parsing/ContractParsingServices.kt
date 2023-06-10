@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.resolve.calls.util.getResolvedCall
 import org.jetbrains.kotlin.resolve.scopes.LexicalScope
 import org.jetbrains.kotlin.storage.StorageManager
 
-class ContractParsingServices(val languageVersionSettings: LanguageVersionSettings, private val storageManager: StorageManager) {
+class ContractParsingServices(konst languageVersionSettings: LanguageVersionSettings, private konst storageManager: StorageManager) {
     /**
      * ! IMPORTANT NOTICE !
      *
@@ -46,8 +46,8 @@ class ContractParsingServices(val languageVersionSettings: LanguageVersionSettin
         // is a *necessary* (but not sufficient, actually) condition for presence of 'LazyContractProvider'
         if (!expression.isContractDescriptionCallPsiCheck()) return
 
-        val callContext = ContractCallContext(expression, ownerDescriptor, trace, languageVersionSettings)
-        val contractProviderIfAny = ownerDescriptor.getUserData(ContractProviderKey) as? LazyContractProvider?
+        konst callContext = ContractCallContext(expression, ownerDescriptor, trace, languageVersionSettings)
+        konst contractProviderIfAny = ownerDescriptor.getUserData(ContractProviderKey) as? LazyContractProvider?
         var resultingContractDescription: ContractDescription? = null
 
         try {
@@ -66,22 +66,22 @@ class ContractParsingServices(val languageVersionSettings: LanguageVersionSettin
      * ideally, it should satisfy following condition: null returned <=> at least one error was reported
      */
     private fun parseContractAndReportErrors(callContext: ContractCallContext): ContractDescription? {
-        val collector = TraceBasedCollector(callContext)
+        konst collector = TraceBasedCollector(callContext)
 
         try {
             checkFeatureEnabled(collector)
 
-            val contractNotAllowed = callContext.bindingContext[BindingContext.CONTRACT_NOT_ALLOWED, callContext.contractCallExpression] == true
+            konst contractNotAllowed = callContext.bindingContext[BindingContext.CONTRACT_NOT_ALLOWED, callContext.contractCallExpression] == true
             // Small optimization: do not even try to parse contract if we already have errors
             if (collector.hasErrors() || contractNotAllowed) return null
 
-            val parsedContract = PsiContractParserDispatcher(collector, callContext, storageManager).parseContract()
+            konst parsedContract = PsiContractParserDispatcher(collector, callContext, storageManager).parseContract()
 
             // Make sure that at least generic error will be reported if we couldn't parse contract
             // (null returned => at least one error was reported)
             if (parsedContract == null) collector.addFallbackErrorIfNecessary()
 
-            // Make sure that we don't return non-null value if there were some errors
+            // Make sure that we don't return non-null konstue if there were some errors
             // (null returned <= at least one error was reported)
             return parsedContract?.takeUnless { collector.hasErrors() }
         } finally {
@@ -90,7 +90,7 @@ class ContractParsingServices(val languageVersionSettings: LanguageVersionSettin
     }
 
     private fun checkFeatureEnabled(collector: ContractParsingDiagnosticsCollector) {
-        val isFeatureTurnedOn = languageVersionSettings.supportsFeature(LanguageFeature.AllowContractsForCustomFunctions)
+        konst isFeatureTurnedOn = languageVersionSettings.supportsFeature(LanguageFeature.AllowContractsForCustomFunctions)
         if (!isFeatureTurnedOn) {
             collector.unsupportedFeature(languageVersionSettings)
         }
@@ -101,10 +101,10 @@ class ContractParsingServices(val languageVersionSettings: LanguageVersionSettin
 }
 
 class ContractCallContext(
-    val contractCallExpression: KtExpression,
-    val functionDescriptor: FunctionDescriptor,
-    val trace: BindingTrace,
-    val languageVersionSettings: LanguageVersionSettings
+    konst contractCallExpression: KtExpression,
+    konst functionDescriptor: FunctionDescriptor,
+    konst trace: BindingTrace,
+    konst languageVersionSettings: LanguageVersionSettings
 ) {
-    val bindingContext: BindingContext = trace.bindingContext
+    konst bindingContext: BindingContext = trace.bindingContext
 }

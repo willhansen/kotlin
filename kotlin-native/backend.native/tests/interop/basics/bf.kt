@@ -7,9 +7,9 @@
 import bitfields.*
 import kotlinx.cinterop.*
 
-fun assertEquals(value1: Any?, value2: Any?) {
-    if (value1 != value2)
-        throw AssertionError("Expected $value1, got $value2")
+fun assertEquals(konstue1: Any?, konstue2: Any?) {
+    if (konstue1 != konstue2)
+        throw AssertionError("Expected $konstue1, got $konstue2")
 }
 
 fun check(s: S, x1: Long, x2: B2, x3: UShort, x4: UInt, x5: Int, x6: Long, x7: E, x8: Boolean, x9: Int) {
@@ -83,14 +83,14 @@ fun test(s: S, x1: Long, x2: B2, x3: UShort, x4: UInt, x5: Int, x6: Long, x7: E,
 
 fun main(args: Array<String>) {
     memScoped {
-        val s = alloc<S>()
+        konst s = alloc<S>()
         for (x1 in -1L..0L)
-            for (x2 in B2.values())
+            for (x2 in B2.konstues())
                 for (x3 in 0..7)
                     for (x4 in uintArrayOf(0u, 6u, 15u))
                         for (x5 in intArrayOf(-16, -2, -1, 0, 5, 15))
                             for (x6 in longArrayOf(Long.MIN_VALUE/2, -1L shl 36, -325L, 0, 1L shl 48, Long.MAX_VALUE/2))
-                                for (x7 in E.values())
+                                for (x7 in E.konstues())
                                     for (x8 in arrayOf(false, true))
                                         for (x9 in intArrayOf(-8, -2, -1, 0, 5, 7)) // 4 bits width
                                             test(s, x1, x2, x3.toUShort(), x4, x5, x6, x7, x8, x9)

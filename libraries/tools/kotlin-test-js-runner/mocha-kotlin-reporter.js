@@ -32,8 +32,8 @@ Base = require('mocha').reporters.Base;
 log = console.log;
 logError = console.error;
 
-function isNil(value) {
-    return value == null; 	// eslint-disable-line
+function isNil(konstue) {
+    return konstue == null; 	// eslint-disable-line
 }
 
 /**

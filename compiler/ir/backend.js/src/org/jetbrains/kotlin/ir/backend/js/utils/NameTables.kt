@@ -52,13 +52,13 @@ abstract class NameScope {
 }
 
 class NameTable<T>(
-    val parent: NameScope = EmptyScope,
-    val reserved: MutableSet<String> = mutableSetOf(),
-    val mappedNames: MutableMap<String, String>? = null,
+    konst parent: NameScope = EmptyScope,
+    konst reserved: MutableSet<String> = mutableSetOf(),
+    konst mappedNames: MutableMap<String, String>? = null,
 ) : NameScope() {
-    val names = mutableMapOf<T, String>()
+    konst names = mutableMapOf<T, String>()
 
-    private val suggestedNameLastIdx = mutableMapOf<String, Int>()
+    private konst suggestedNameLastIdx = mutableMapOf<String, Int>()
 
     override fun isReserved(name: String): Boolean {
         return parent.isReserved(name) || name in reserved
@@ -71,7 +71,7 @@ class NameTable<T>(
     }
 
     fun declareFreshName(declaration: T, suggestedName: String): String {
-        val freshName = findFreshName(sanitizeName(suggestedName))
+        konst freshName = findFreshName(sanitizeName(suggestedName))
         declareStableName(declaration, freshName)
         return freshName
     }
@@ -97,17 +97,17 @@ class NameTable<T>(
 
 fun NameTable<IrDeclaration>.dump(): String =
     "Names: \n" + names.toList().joinToString("\n") { (declaration, name) ->
-        val decl: FqName? = (declaration as IrDeclarationWithName).fqNameWhenAvailable
-        val declRef = decl ?: declaration
+        konst decl: FqName? = (declaration as IrDeclarationWithName).fqNameWhenAvailable
+        konst declRef = decl ?: declaration
         "---  $declRef => $name"
     }
 
 
-private const val RESERVED_MEMBER_NAME_SUFFIX = "_k$"
+private const konst RESERVED_MEMBER_NAME_SUFFIX = "_k$"
 
 fun Int.toJsIdentifier(): String {
-    val first = ('a'.code + (this % 26)).toChar().toString()
-    val other = this / 26
+    konst first = ('a'.code + (this % 26)).toChar().toString()
+    konst other = this / 26
     return if (other == 0) {
         first
     } else {
@@ -116,12 +116,12 @@ fun Int.toJsIdentifier(): String {
 }
 
 fun calculateJsFunctionSignature(declaration: IrFunction, context: JsIrBackendContext): String {
-    val declarationName = declaration.nameIfPropertyAccessor() ?: declaration.getJsNameOrKotlinName().asString()
+    konst declarationName = declaration.nameIfPropertyAccessor() ?: declaration.getJsNameOrKotlinName().asString()
 
-    val nameBuilder = StringBuilder()
+    konst nameBuilder = StringBuilder()
     nameBuilder.append(declarationName)
 
-    // TODO should we skip type parameters and use upper bound of type parameter when print type of value parameters?
+    // TODO should we skip type parameters and use upper bound of type parameter when print type of konstue parameters?
     declaration.typeParameters.ifNotEmpty {
         nameBuilder.append("_\$t")
         forEach { typeParam ->
@@ -135,9 +135,9 @@ fun calculateJsFunctionSignature(declaration: IrFunction, context: JsIrBackendCo
     declaration.extensionReceiverParameter?.let {
         nameBuilder.append("_r$${it.type.asString()}")
     }
-    declaration.valueParameters.ifNotEmpty {
+    declaration.konstueParameters.ifNotEmpty {
         joinTo(nameBuilder, "") {
-            val defaultValueSign = if (it.origin == JsLoweredDeclarationOrigin.JS_SHADOWED_DEFAULT_PARAMETER) "?" else ""
+            konst defaultValueSign = if (it.origin == JsLoweredDeclarationOrigin.JS_SHADOWED_DEFAULT_PARAMETER) "?" else ""
             "_${it.type.asString()}$defaultValueSign"
         }
     }
@@ -149,10 +149,10 @@ fun calculateJsFunctionSignature(declaration: IrFunction, context: JsIrBackendCo
         }
     }
 
-    val signature = abs(nameBuilder.toString().hashCode()).toString(Character.MAX_RADIX)
+    konst signature = abs(nameBuilder.toString().hashCode()).toString(Character.MAX_RADIX)
 
     // TODO: Use better hashCode
-    val sanitizedName = sanitizeName(declarationName, withHash = false)
+    konst sanitizedName = sanitizeName(declarationName, withHash = false)
     return context.globalInternationService.string("${sanitizedName}_$signature$RESERVED_MEMBER_NAME_SUFFIX")
 }
 
@@ -161,7 +161,7 @@ fun jsFunctionSignature(declaration: IrFunction, context: JsIrBackendContext): S
     require(declaration.dispatchReceiverParameter != null)
 
     if (declaration.hasStableJsName(context)) {
-        val declarationName = declaration.getJsNameOrKotlinName().asString()
+        konst declarationName = declaration.getJsNameOrKotlinName().asString()
         // TODO: Handle reserved suffix in FE
         require(!declarationName.endsWith(RESERVED_MEMBER_NAME_SUFFIX)) {
             "Function ${declaration.fqNameWhenAvailable} uses reserved name suffix \"$RESERVED_MEMBER_NAME_SUFFIX\""
@@ -169,15 +169,15 @@ fun jsFunctionSignature(declaration: IrFunction, context: JsIrBackendContext): S
         return declarationName
     }
 
-    val declarationSignature = (declaration as? IrSimpleFunction)?.resolveFakeOverride() ?: declaration
+    konst declarationSignature = (declaration as? IrSimpleFunction)?.resolveFakeOverride() ?: declaration
     return calculateJsFunctionSignature(declarationSignature, context)
 }
 
-class LocalNameGenerator(val variableNames: NameTable<IrDeclaration>) : IrElementVisitorVoid {
-    val localLoopNames = NameTable<IrLoop>()
-    val localReturnableBlockNames = NameTable<IrReturnableBlock>()
+class LocalNameGenerator(konst variableNames: NameTable<IrDeclaration>) : IrElementVisitorVoid {
+    konst localLoopNames = NameTable<IrLoop>()
+    konst localReturnableBlockNames = NameTable<IrReturnableBlock>()
 
-    private val jumpableDeque: Deque<IrExpression> = LinkedList()
+    private konst jumpableDeque: Deque<IrExpression> = LinkedList()
 
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -191,7 +191,7 @@ class LocalNameGenerator(val variableNames: NameTable<IrDeclaration>) : IrElemen
     }
 
     override fun visitBreak(jump: IrBreak) {
-        val loop = jump.loop
+        konst loop = jump.loop
         if (loop.label == null && loop != jumpableDeque.firstOrNull()) {
             persistLoopName(SYNTHETIC_LOOP_LABEL, loop)
         }
@@ -200,7 +200,7 @@ class LocalNameGenerator(val variableNames: NameTable<IrDeclaration>) : IrElemen
     }
 
     override fun visitContinue(jump: IrContinue) {
-        val loop = jump.loop
+        konst loop = jump.loop
         if (loop.label == null && loop != jumpableDeque.firstOrNull()) {
             persistLoopName(SYNTHETIC_LOOP_LABEL, loop)
         }
@@ -209,7 +209,7 @@ class LocalNameGenerator(val variableNames: NameTable<IrDeclaration>) : IrElemen
     }
 
     override fun visitReturn(expression: IrReturn) {
-        val targetSymbol = expression.returnTargetSymbol
+        konst targetSymbol = expression.returnTargetSymbol
         if (targetSymbol is IrReturnableBlockSymbol && !expression.isTheLastReturnStatementIn(targetSymbol)) {
             persistReturnableBlockName(SYNTHETIC_BLOCK_LABEL, targetSymbol.owner)
         }
@@ -232,7 +232,7 @@ class LocalNameGenerator(val variableNames: NameTable<IrDeclaration>) : IrElemen
 
         jumpableDeque.pop()
 
-        val label = loop.label
+        konst label = loop.label
 
         if (label != null) {
             persistLoopName(label, loop)
@@ -253,14 +253,14 @@ fun sanitizeName(name: String, withHash: Boolean = true): String {
     if (name.isEmpty()) return "_"
 
     // 7 = _ + MAX_INT.toString(Character.MAX_RADIX)
-    val builder = StringBuilder(name.length + if (withHash) 7 else 0)
+    konst builder = StringBuilder(name.length + if (withHash) 7 else 0)
 
-    val first = name.first()
+    konst first = name.first()
 
     builder.append(first.mangleIfNot(Char::isES5IdentifierStart))
 
     for (idx in 1..name.lastIndex) {
-        val c = name[idx]
+        konst c = name[idx]
         builder.append(c.mangleIfNot(Char::isES5IdentifierPart))
     }
 
@@ -275,9 +275,9 @@ fun IrDeclarationWithName.nameIfPropertyAccessor(): String? {
     if (this is IrSimpleFunction) {
         return when {
             this.correspondingPropertySymbol != null -> {
-                val property = this.correspondingPropertySymbol!!.owner
-                val name = property.getJsNameOrKotlinName().asString()
-                val prefix = when (this) {
+                konst property = this.correspondingPropertySymbol!!.owner
+                konst name = property.getJsNameOrKotlinName().asString()
+                konst prefix = when (this) {
                     property.getter -> "get_"
                     property.setter -> "set_"
                     else -> error("")
@@ -300,5 +300,5 @@ fun IrDeclarationWithName.nameIfPropertyAccessor(): String? {
 private inline fun Char.mangleIfNot(predicate: Char.() -> Boolean) =
     if (predicate()) this else '_'
 
-private const val SYNTHETIC_LOOP_LABEL = "\$l\$loop"
-private const val SYNTHETIC_BLOCK_LABEL = "\$l\$block"
+private const konst SYNTHETIC_LOOP_LABEL = "\$l\$loop"
+private const konst SYNTHETIC_BLOCK_LABEL = "\$l\$block"

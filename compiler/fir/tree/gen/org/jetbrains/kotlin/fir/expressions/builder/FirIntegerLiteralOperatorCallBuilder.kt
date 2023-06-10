@@ -37,9 +37,9 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 open class FirIntegerLiteralOperatorCallBuilder : FirAbstractFunctionCallBuilder, FirAnnotationContainerBuilder, FirExpressionBuilder {
     override lateinit var typeRef: FirTypeRef
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    override val contextReceiverArguments: MutableList<FirExpression> = mutableListOf()
-    override val typeArguments: MutableList<FirTypeProjection> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst contextReceiverArguments: MutableList<FirExpression> = mutableListOf()
+    override konst typeArguments: MutableList<FirTypeProjection> = mutableListOf()
     override var explicitReceiver: FirExpression? = null
     override var source: KtSourceElement? = null
     override var argumentList: FirArgumentList = FirEmptyArgumentList

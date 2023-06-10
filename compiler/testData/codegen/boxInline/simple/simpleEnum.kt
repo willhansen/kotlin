@@ -20,7 +20,7 @@ fun test1(): String {
 }
 
 fun box(): String {
-    val result = test1()
+    konst result = test1()
     if (result != "OK") return "fail1: ${result}"
 
     return "OK"

@@ -70,13 +70,13 @@ fun FirSymbolProvider.getSymbolByLookupTag(lookupTag: ConeClassLikeLookupTag): F
 }
 
 fun ConeKotlinType.withParameterNameAnnotation(parameter: FirFunctionTypeParameter, session: FirSession): ConeKotlinType {
-    val name = parameter.name
+    konst name = parameter.name
     if (name == null || name == SpecialNames.NO_NAME_PROVIDED || name == SpecialNames.UNDERSCORE_FOR_UNUSED_VAR) return this
     // Existing @ParameterName annotation takes precedence
     if (attributes.customAnnotations.getAnnotationsByClassId(StandardNames.FqNames.parameterNameClassId, session).isNotEmpty()) return this
 
-    val fakeSource = parameter.source?.fakeElement(KtFakeSourceElementKind.ParameterNameAnnotationCall)
-    val parameterNameAnnotationCall = buildAnnotation {
+    konst fakeSource = parameter.source?.fakeElement(KtFakeSourceElementKind.ParameterNameAnnotationCall)
+    konst parameterNameAnnotationCall = buildAnnotation {
         source = fakeSource
         annotationTypeRef =
             buildResolvedTypeRef {
@@ -92,7 +92,7 @@ fun ConeKotlinType.withParameterNameAnnotation(parameter: FirFunctionTypeParamet
                 buildConstExpression(fakeSource, ConstantValueKind.String, name.asString(), setType = true)
         }
     }
-    val attributesWithParameterNameAnnotation =
+    konst attributesWithParameterNameAnnotation =
         ConeAttributes.create(listOf(CustomAnnotationTypeAttribute(listOf(parameterNameAnnotationCall))))
     return withCombinedAttributesFrom(attributesWithParameterNameAnnotation)
 }
@@ -102,7 +102,7 @@ fun ConeKotlinType.withCombinedAttributesFrom(other: ConeKotlinType): ConeKotlin
 
 private fun ConeKotlinType.withCombinedAttributesFrom(other: ConeAttributes): ConeKotlinType {
     if (other.isEmpty()) return this
-    val combinedConeAttributes = attributes.add(other)
+    konst combinedConeAttributes = attributes.add(other)
     return withAttributes(combinedConeAttributes)
 }
 

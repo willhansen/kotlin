@@ -20,8 +20,8 @@ public final class None</*0*/ T> : Maybe<T> {
 }
 
 public final class Some</*0*/ T> : Maybe<T> {
-    public constructor Some</*0*/ T>(/*0*/ value: T)
-    public final val value: T
+    public constructor Some</*0*/ T>(/*0*/ konstue: T)
+    public final konst konstue: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -1,2 +1,2 @@
-val x = this
-val y = this // EOL AFTER THIS LINE!
+konst x = this
+konst y = this // EOL AFTER THIS LINE!

@@ -30,7 +30,7 @@ public final class IrDefinitelyNotNullType extends
   private IrDefinitelyNotNullType(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -76,10 +76,10 @@ public final class IrDefinitelyNotNullType extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -100,7 +100,7 @@ public final class IrDefinitelyNotNullType extends
     public IrDefinitelyNotNullType parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrDefinitelyNotNullType(input, extensionRegistry);
     }
   };
@@ -205,23 +205,23 @@ public final class IrDefinitelyNotNullType extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType parseFrom(java.io.InputStream input)
@@ -345,7 +345,7 @@ public final class IrDefinitelyNotNullType extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrDefinitelyNotNullType) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -403,9 +403,9 @@ public final class IrDefinitelyNotNullType extends
      * </pre>
      */
     public Builder setTypes(
-        int index, int value) {
+        int index, int konstue) {
       ensureTypesIsMutable();
-      types_.set(index, value);
+      types_.set(index, konstue);
       
       return this;
     }
@@ -416,9 +416,9 @@ public final class IrDefinitelyNotNullType extends
      * In fact that is an `IntersectionType` so let represent it as it. In future it could be easy to support general case
      * </pre>
      */
-    public Builder addTypes(int value) {
+    public Builder addTypes(int konstue) {
       ensureTypesIsMutable();
-      types_.add(value);
+      types_.add(konstue);
       
       return this;
     }
@@ -430,10 +430,10 @@ public final class IrDefinitelyNotNullType extends
      * </pre>
      */
     public Builder addAllTypes(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensureTypesIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, types_);
+          konstues, types_);
       
       return this;
     }

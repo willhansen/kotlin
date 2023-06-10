@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.KtSourceFile
 import org.jetbrains.kotlin.KtSourceFileLinesMapping
 
 data class LightTreeFile(
-    val lightTree: FlyweightCapableTreeStructure<LighterASTNode>,
-    val sourceFile: KtSourceFile,
-    val linesMapping: KtSourceFileLinesMapping
+    konst lightTree: FlyweightCapableTreeStructure<LighterASTNode>,
+    konst sourceFile: KtSourceFile,
+    konst linesMapping: KtSourceFileLinesMapping
 )

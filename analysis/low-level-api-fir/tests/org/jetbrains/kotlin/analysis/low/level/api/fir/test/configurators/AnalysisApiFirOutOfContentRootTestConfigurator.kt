@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.TestServices
 
 object AnalysisApiFirOutOfContentRootTestConfigurator : AnalysisApiFirSourceLikeTestConfigurator(false) {
-    override val testPrefix: String
+    override konst testPrefix: String
         get() = "out_of_src_roots"
 
     override fun configureTest(builder: TestConfigurationBuilder, disposable: Disposable) {
@@ -48,7 +48,7 @@ object AnalysisApiFirOutOfContentRootTestConfigurator : AnalysisApiFirSourceLike
     }
 
     object Directives : SimpleDirectivesContainer() {
-        val SKIP_WHEN_OUT_OF_CONTENT_ROOT by directive(
+        konst SKIP_WHEN_OUT_OF_CONTENT_ROOT by directive(
             description = "Skip the test in out-of-content-root mode",
             applicability = DirectiveApplicability.Global
         )
@@ -59,40 +59,40 @@ private class SkipWhenOutOfContentRootException : SkipTestException()
 
 private class KtOutOfContentRootModuleFactory : KtModuleFactory {
     override fun createModule(testModule: TestModule, testServices: TestServices, project: Project): KtModuleWithFiles {
-        val psiFiles = TestModuleStructureFactory.createSourcePsiFiles(testModule, testServices, project)
-        val platform = testModule.targetPlatform
-        val module = KtNotUnderContentRootModuleForTest(testModule.name, psiFiles.first(), platform)
+        konst psiFiles = TestModuleStructureFactory.createSourcePsiFiles(testModule, testServices, project)
+        konst platform = testModule.targetPlatform
+        konst module = KtNotUnderContentRootModuleForTest(testModule.name, psiFiles.first(), platform)
         return KtModuleWithFiles(module, psiFiles)
     }
 }
 
 private class KtNotUnderContentRootModuleForTest(
-    override val name: String,
-    override val file: PsiFile,
-    override val platform: TargetPlatform
+    override konst name: String,
+    override konst file: PsiFile,
+    override konst platform: TargetPlatform
 ) : KtNotUnderContentRootModule {
-    override val directRegularDependencies: List<KtModule> by lazy {
+    override konst directRegularDependencies: List<KtModule> by lazy {
         listOf(LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsModule(platform))
     }
 
-    override val directDependsOnDependencies: List<KtModule>
+    override konst directDependsOnDependencies: List<KtModule>
         get() = emptyList()
 
-    override val transitiveDependsOnDependencies: List<KtModule>
+    override konst transitiveDependsOnDependencies: List<KtModule>
         get() = emptyList()
 
-    override val directFriendDependencies: List<KtModule>
+    override konst directFriendDependencies: List<KtModule>
         get() = emptyList()
 
-    override val contentScope: GlobalSearchScope
+    override konst contentScope: GlobalSearchScope
         get() = GlobalSearchScope.fileScope(file)
 
-    override val analyzerServices: PlatformDependentAnalyzerServices
+    override konst analyzerServices: PlatformDependentAnalyzerServices
         get() = platform.getAnalyzerServices()
 
-    override val project: Project
+    override konst project: Project
         get() = file.project
 
-    override val moduleDescription: String
+    override konst moduleDescription: String
         get() = "Not under content root \"${name}\" for ${file.virtualFile.path}"
 }

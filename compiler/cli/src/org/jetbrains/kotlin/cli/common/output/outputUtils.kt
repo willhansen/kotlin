@@ -26,8 +26,8 @@ import java.io.FileNotFoundException
 
 fun OutputFileCollection.writeAll(outputDir: File, report: ((sources: List<File>, output: File) -> Unit)?) {
     for (file in asList()) {
-        val sources = file.sourceFiles
-        val output = File(outputDir, file.relativePath)
+        konst sources = file.sourceFiles
+        konst output = File(outputDir, file.relativePath)
         report?.invoke(sources, output)
         try {
             FileUtil.writeToFile(output, file.asByteArray())

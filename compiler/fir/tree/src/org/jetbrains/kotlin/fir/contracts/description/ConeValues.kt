@@ -10,11 +10,11 @@ import org.jetbrains.kotlin.fir.diagnostics.ConeDiagnostic
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
 
 object ConeContractConstantValues {
-    val NULL = KtConstantReference<ConeKotlinType, ConeDiagnostic>("NULL")
-    val WILDCARD = KtConstantReference<ConeKotlinType, ConeDiagnostic>("WILDCARD")
-    val NOT_NULL = KtConstantReference<ConeKotlinType, ConeDiagnostic>("NOT_NULL")
-    val TRUE = KtBooleanConstantReference<ConeKotlinType, ConeDiagnostic>("TRUE")
-    val FALSE = KtBooleanConstantReference<ConeKotlinType, ConeDiagnostic>("FALSE")
+    konst NULL = KtConstantReference<ConeKotlinType, ConeDiagnostic>("NULL")
+    konst WILDCARD = KtConstantReference<ConeKotlinType, ConeDiagnostic>("WILDCARD")
+    konst NOT_NULL = KtConstantReference<ConeKotlinType, ConeDiagnostic>("NOT_NULL")
+    konst TRUE = KtBooleanConstantReference<ConeKotlinType, ConeDiagnostic>("TRUE")
+    konst FALSE = KtBooleanConstantReference<ConeKotlinType, ConeDiagnostic>("FALSE")
 }
 
 typealias ConeEffectDeclaration = KtEffectDeclaration<ConeKotlinType, ConeDiagnostic>

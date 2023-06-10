@@ -36,17 +36,17 @@ public final class AccessTranslationUtils {
 
     @NotNull
     public static AccessTranslator getAccessTranslator(@NotNull KtExpression referenceExpression,
-            @NotNull TranslationContext context, boolean forceOrderOfEvaluation) {
+            @NotNull TranslationContext context, boolean forceOrderOfEkonstuation) {
         referenceExpression = KtPsiUtil.deparenthesize(referenceExpression);
         assert referenceExpression != null;
         if (referenceExpression instanceof KtQualifiedExpression) {
-            return QualifiedExpressionTranslator.getAccessTranslator((KtQualifiedExpression) referenceExpression, context, forceOrderOfEvaluation);
+            return QualifiedExpressionTranslator.getAccessTranslator((KtQualifiedExpression) referenceExpression, context, forceOrderOfEkonstuation);
         }
         if (referenceExpression instanceof KtSimpleNameExpression) {
             return ReferenceTranslator.getAccessTranslator((KtSimpleNameExpression) referenceExpression, context);
         }
         if (referenceExpression instanceof KtArrayAccessExpression) {
-            return getArrayAccessTranslator((KtArrayAccessExpression) referenceExpression, context, forceOrderOfEvaluation);
+            return getArrayAccessTranslator((KtArrayAccessExpression) referenceExpression, context, forceOrderOfEkonstuation);
         }
         return new DefaultAccessTranslator(referenceExpression, context);
     }
@@ -55,10 +55,10 @@ public final class AccessTranslationUtils {
     private static AccessTranslator getArrayAccessTranslator(
             @NotNull KtArrayAccessExpression expression,
             @NotNull TranslationContext context,
-            boolean forceOrderOfEvaluation
+            boolean forceOrderOfEkonstuation
     ) {
         TranslationContext accessArrayContext;
-        if (forceOrderOfEvaluation) {
+        if (forceOrderOfEkonstuation) {
             Map<KtExpression, JsExpression> indexesMap = new LinkedHashMap<>();
             for(KtExpression indexExpression : expression.getIndexExpressions()) {
                 JsExpression jsIndexExpression = context.cacheExpressionIfNeeded(

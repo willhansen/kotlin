@@ -32,7 +32,7 @@ fun <S> materialize(): S = null as S
 
 interface Foo<T> : I
 
-class Bar<T>(val x: Foo<T>) : Foo<T>
+class Bar<T>(konst x: Foo<T>) : Foo<T>
 
 fun main2() {
     select(
@@ -48,7 +48,7 @@ fun main2() {
 interface Foo1<Y> : I
 interface Foo2<Y> : Foo1<Y>
 
-class Bar1<P>(val x: Foo2<P>) : Foo2<P>
+class Bar1<P>(konst x: Foo2<P>) : Foo2<P>
 
 fun main1() {
     select(

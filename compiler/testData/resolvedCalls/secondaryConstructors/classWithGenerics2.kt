@@ -2,4 +2,4 @@ class A<T, R> {
     constructor(x: T) {}
 }
 
-val y = <caret>A<Int, String>(1)
+konst y = <caret>A<Int, String>(1)

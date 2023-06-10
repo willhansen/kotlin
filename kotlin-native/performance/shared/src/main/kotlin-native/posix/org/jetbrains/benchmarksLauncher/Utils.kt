@@ -22,11 +22,11 @@ import kotlinx.cinterop.*
 
 actual fun currentTime() =
         memScoped {
-            val timeVal = alloc<timeval>()
+            konst timeVal = alloc<timekonst>()
             gettimeofday(timeVal.ptr, null)
-            val sec = alloc<LongVar>()
-            sec.value = timeVal.tv_sec
-            val nowtm = localtime(sec.ptr)
+            konst sec = alloc<LongVar>()
+            sec.konstue = timeVal.tv_sec
+            konst nowtm = localtime(sec.ptr)
             var timeBuffer = ByteArray(1024)
             strftime(timeBuffer.refTo(0), timeBuffer.size.toULong(), "%H:%M:%S", nowtm)
 

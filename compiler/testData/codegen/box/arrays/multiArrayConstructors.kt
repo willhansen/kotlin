@@ -11,7 +11,7 @@ fun stringNullableMultiArray(): Array<Array<String?>> = Array(3) {
 }
 
 fun box(): String {
-    val matrix = stringMultiArray()
+    konst matrix = stringMultiArray()
 
     for (i in 0..2) {
         for (j in 0..2) {
@@ -19,7 +19,7 @@ fun box(): String {
         }
     }
 
-    val matrixNullable = stringNullableMultiArray()
+    konst matrixNullable = stringNullableMultiArray()
 
     for (j in 0..2) {
         assertEquals(null, matrixNullable[0][j], "nullable")

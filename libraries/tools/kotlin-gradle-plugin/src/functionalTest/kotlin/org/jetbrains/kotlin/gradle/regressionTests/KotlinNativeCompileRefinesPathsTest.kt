@@ -19,19 +19,19 @@ import kotlin.test.assertEquals
 class KotlinNativeCompileRefinesPathsTest {
     @Test
     fun `test - shared linux - refinesPaths`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
 
         kotlin.linuxX64()
         kotlin.linuxArm64()
 
-        project.evaluate()
+        project.ekonstuate()
 
         /* Check linuxMain metadata compilation */
         run {
-            val compilation = kotlin.metadata().compilations.getByName("linuxMain") as KotlinSharedNativeCompilation
-            val compileTask = compilation.compileTaskProvider.get()
+            konst compilation = kotlin.metadata().compilations.getByName("linuxMain") as KotlinSharedNativeCompilation
+            konst compileTask = compilation.compileTaskProvider.get()
 
             assertEquals(
                 project.files(
@@ -49,8 +49,8 @@ class KotlinNativeCompileRefinesPathsTest {
 
         /* Check linuxX64Main platform compilation */
         run {
-            val compilation = kotlin.linuxX64().compilations.main
-            val compileTask = compilation.compileTaskProvider.get() as KotlinNativeCompile
+            konst compilation = kotlin.linuxX64().compilations.main
+            konst compileTask = compilation.compileTaskProvider.get() as KotlinNativeCompile
 
             /* Platform compilation will compile all sources together, no refinesModules has to be set */
             assertEquals(

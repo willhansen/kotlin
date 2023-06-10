@@ -17,36 +17,36 @@ import org.jetbrains.kotlin.commonizer.utils.NON_EXISTING_CLASSIFIER_ID
 
 internal class ClassesToProcess {
     sealed class ClassEntry {
-        abstract val classId: CirEntityId
+        abstract konst classId: CirEntityId
 
         data class RegularClassEntry(
-            override val classId: CirEntityId,
-            val clazz: KmClass
+            override konst classId: CirEntityId,
+            konst clazz: KmClass
         ) : ClassEntry()
 
         data class EnumEntry(
-            override val classId: CirEntityId,
-            val annotations: List<KmAnnotation>,
-            val enumClassId: CirEntityId,
-            val enumClass: KmClass
+            override konst classId: CirEntityId,
+            konst annotations: List<KmAnnotation>,
+            konst enumClassId: CirEntityId,
+            konst enumClass: KmClass
         ) : ClassEntry()
     }
 
     // key = parent class ID (or NON_EXISTING_CLASSIFIER_ID for top-level classes)
-    // value = classes under this parent class (MutableList to preserve order of classes)
-    private val groupedByParentClassId = FactoryMap.create<CirEntityId, MutableList<ClassEntry>> { ArrayList() }
+    // konstue = classes under this parent class (MutableList to preserve order of classes)
+    private konst groupedByParentClassId = FactoryMap.create<CirEntityId, MutableList<ClassEntry>> { ArrayList() }
 
     fun addClassesFromFragment(fragment: KmModuleFragment) {
-        val klibEnumEntries = LinkedHashMap<CirEntityId, ClassEntry.EnumEntry>() // linked hash map to preserve order
-        val regularClassIds = HashSet<CirEntityId>()
+        konst klibEnumEntries = LinkedHashMap<CirEntityId, ClassEntry.EnumEntry>() // linked hash map to preserve order
+        konst regularClassIds = HashSet<CirEntityId>()
 
         fragment.classes.forEach { clazz ->
-            val classId: CirEntityId = CirEntityId.create(clazz.name)
-            val parentClassId: CirEntityId = classId.getParentEntityId() ?: NON_EXISTING_CLASSIFIER_ID
+            konst classId: CirEntityId = CirEntityId.create(clazz.name)
+            konst parentClassId: CirEntityId = classId.getParentEntityId() ?: NON_EXISTING_CLASSIFIER_ID
 
             if (Flag.Class.IS_ENUM_CLASS(clazz.flags)) {
                 clazz.klibEnumEntries.forEach { entry ->
-                    val enumEntryId = classId.createNestedEntityId(CirName.create(entry.name))
+                    konst enumEntryId = classId.createNestedEntityId(CirName.create(entry.name))
                     klibEnumEntries[enumEntryId] = ClassEntry.EnumEntry(enumEntryId, entry.annotations, classId, clazz)
                 }
             }

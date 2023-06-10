@@ -18,14 +18,14 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameUnsafe
 import org.jetbrains.kotlin.types.TypeUtils
 
 object StringPlusCharFIF : FunctionIntrinsicFactory {
-    private class StringPlusAnyIntrinsic(private val leftTypeNullable: Boolean) : FunctionIntrinsic() {
+    private class StringPlusAnyIntrinsic(private konst leftTypeNullable: Boolean) : FunctionIntrinsic() {
         override fun apply(callInfo: CallInfo, arguments: List<JsExpression>, context: TranslationContext): JsExpression {
-            val receiver = callInfo.dispatchReceiver ?: callInfo.extensionReceiver!!
-            val rightType = context.bindingContext().getType(callInfo.resolvedCall.call.valueArguments[0].getArgumentExpression()!!)
-                            ?: callInfo.resolvedCall.resultingDescriptor.valueParameters[0].type
-            val rightTypeNullable = TypeUtils.isNullableType(rightType)
-            val hasNonNullArg = !leftTypeNullable || !rightTypeNullable
-            val rightExpr = when {
+            konst receiver = callInfo.dispatchReceiver ?: callInfo.extensionReceiver!!
+            konst rightType = context.bindingContext().getType(callInfo.resolvedCall.call.konstueArguments[0].getArgumentExpression()!!)
+                            ?: callInfo.resolvedCall.resultingDescriptor.konstueParameters[0].type
+            konst rightTypeNullable = TypeUtils.isNullableType(rightType)
+            konst hasNonNullArg = !leftTypeNullable || !rightTypeNullable
+            konst rightExpr = when {
                 KotlinBuiltIns.isChar(rightType) -> {
                     JsAstUtils.charToString(arguments[0])
                 }
@@ -42,10 +42,10 @@ object StringPlusCharFIF : FunctionIntrinsicFactory {
     }
 
     override fun getIntrinsic(descriptor: FunctionDescriptor, context: TranslationContext): FunctionIntrinsic? {
-        val fqName = descriptor.fqNameUnsafe.asString()
+        konst fqName = descriptor.fqNameUnsafe.asString()
         if (fqName != "kotlin.String.plus" && fqName != "kotlin.plus") return null
 
-        val leftType = (descriptor.dispatchReceiverParameter ?: descriptor.extensionReceiverParameter ?: return null).type
+        konst leftType = (descriptor.dispatchReceiverParameter ?: descriptor.extensionReceiverParameter ?: return null).type
 
         return if (KotlinBuiltIns.isStringOrNullableString(leftType)) {
             StringPlusAnyIntrinsic(TypeUtils.isNullableType(leftType))

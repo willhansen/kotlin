@@ -49,10 +49,10 @@ abstract class SupertypeSupplier {
 }
 
 fun collectSymbolsForType(type: ConeKotlinType, useSiteSession: FirSession): List<FirClassSymbol<*>> {
-    val lookupTags = mutableListOf<ConeClassLikeLookupTag>()
+    konst lookupTags = mutableListOf<ConeClassLikeLookupTag>()
 
     fun ConeKotlinType.collectClassIds() {
-        when (val unwrappedType = lowerBoundIfFlexible().fullyExpandedType(useSiteSession)) {
+        when (konst unwrappedType = lowerBoundIfFlexible().fullyExpandedType(useSiteSession)) {
             is ConeClassLikeType -> lookupTags.addIfNotNull(unwrappedType.lookupTag)
             is ConeIntersectionType -> unwrappedType.intersectedTypes.forEach { it.collectClassIds() }
             else -> {}
@@ -72,7 +72,7 @@ fun lookupSuperTypes(
     supertypeSupplier: SupertypeSupplier = SupertypeSupplier.Default,
 ): List<ConeClassLikeType> {
     return SmartList<ConeClassLikeType>().also {
-        val visitedSymbols = SmartSet.create<FirClassifierSymbol<*>>()
+        konst visitedSymbols = SmartSet.create<FirClassifierSymbol<*>>()
         for (symbol in symbols) {
             symbol.collectSuperTypes(it, visitedSymbols, deep, lookupInterfaces, substituteTypes, useSiteSession, supertypeSupplier)
         }
@@ -127,8 +127,8 @@ fun FirClass.isSubclassOf(
 }
 
 fun FirClass.isThereLoopInSupertypes(session: FirSession): Boolean {
-    val visitedSymbols: MutableSet<FirClassifierSymbol<*>> = SmartSet.create()
-    val inProcess: MutableSet<FirClassifierSymbol<*>> = mutableSetOf()
+    konst visitedSymbols: MutableSet<FirClassifierSymbol<*>> = SmartSet.create()
+    konst inProcess: MutableSet<FirClassifierSymbol<*>> = mutableSetOf()
 
     var isThereLoop = false
 
@@ -139,7 +139,7 @@ fun FirClass.isThereLoopInSupertypes(session: FirSession): Boolean {
             return
         }
 
-        when (val fir = current.fir) {
+        when (konst fir = current.fir) {
             is FirClass -> {
                 fir.superConeTypes.forEach {
                     it.lookupTag.toSymbol(session)?.let(::dfs)
@@ -176,7 +176,7 @@ inline fun <reified ID : Any, reified FS : FirScope> scopeSessionKey(): ScopeSes
     return object : ScopeSessionKey<ID, FS>() {}
 }
 
-val USE_SITE = scopeSessionKey<FirClassSymbol<*>, FirTypeScope>()
+konst USE_SITE = scopeSessionKey<FirClassSymbol<*>, FirTypeScope>()
 
 /* TODO REMOVE */
 fun createSubstitutionForScope(
@@ -184,18 +184,18 @@ fun createSubstitutionForScope(
     type: ConeClassLikeType,
     session: FirSession
 ): Map<FirTypeParameterSymbol, ConeKotlinType> {
-    val capturedOrType = session.typeContext.captureFromArguments(type, CaptureStatus.FROM_EXPRESSION) ?: type
-    val capturedTypeArguments = (capturedOrType as ConeClassLikeType).typeArguments
+    konst capturedOrType = session.typeContext.captureFromArguments(type, CaptureStatus.FROM_EXPRESSION) ?: type
+    konst capturedTypeArguments = (capturedOrType as ConeClassLikeType).typeArguments
 
     return typeParameters.withIndex().mapNotNull { (index, typeParameter) ->
-        val capturedTypeArgument = capturedTypeArguments.getOrNull(index) ?: return@mapNotNull null
+        konst capturedTypeArgument = capturedTypeArguments.getOrNull(index) ?: return@mapNotNull null
         require(capturedTypeArgument is ConeKotlinType) {
             "There should left no projections after capture conversion, but $capturedTypeArgument found at $index"
         }
-        val originalTypeArgument = type.typeArguments.getOrNull(index) ?: return@mapNotNull null
+        konst originalTypeArgument = type.typeArguments.getOrNull(index) ?: return@mapNotNull null
 
-        val typeParameterSymbol = typeParameter.symbol
-        val resultingArgument =
+        konst typeParameterSymbol = typeParameter.symbol
+        konst resultingArgument =
             computeNonTrivialTypeArgumentForScopeSubstitutor(typeParameterSymbol, originalTypeArgument, session, capturedTypeArgument)
                 ?: capturedTypeArgument
 
@@ -244,7 +244,7 @@ private fun FirClassifierSymbol<*>.collectSuperTypes(
     if (!visitedSymbols.add(this)) return
     when (this) {
         is FirClassSymbol<*> -> {
-            val superClassTypes =
+            konst superClassTypes =
                 supertypeSupplier.forClass(fir, useSiteSession).mapNotNull {
                     it.computePartialExpansion(useSiteSession, supertypeSupplier)
                         .takeIf { type -> lookupInterfaces || type.isClassBasedType(useSiteSession) }
@@ -254,7 +254,7 @@ private fun FirClassifierSymbol<*>.collectSuperTypes(
                 superClassTypes.forEach {
                     if (it !is ConeErrorType) {
                         if (substituteSuperTypes) {
-                            val substitutedTypes = SmartList<ConeClassLikeType>()
+                            konst substitutedTypes = SmartList<ConeClassLikeType>()
                             it.lookupTag.toSymbol(useSiteSession)?.collectSuperTypes(
                                 substitutedTypes,
                                 visitedSymbols,
@@ -264,7 +264,7 @@ private fun FirClassifierSymbol<*>.collectSuperTypes(
                                 useSiteSession,
                                 supertypeSupplier
                             )
-                            val substitutor = createSubstitutionForSupertype(it, useSiteSession)
+                            konst substitutor = createSubstitutionForSupertype(it, useSiteSession)
                             substitutedTypes.mapTo(list) { superType -> substitutor.substituteOrSelf(superType) as ConeClassLikeType }
                         } else {
                             it.lookupTag.toSymbol(useSiteSession)?.collectSuperTypes(
@@ -281,7 +281,7 @@ private fun FirClassifierSymbol<*>.collectSuperTypes(
                 }
         }
         is FirTypeAliasSymbol -> {
-            val expansion = supertypeSupplier
+            konst expansion = supertypeSupplier
                 .expansionForTypeAlias(fir, useSiteSession)
                 ?.computePartialExpansion(useSiteSession, supertypeSupplier)
                 ?: return
@@ -296,7 +296,7 @@ private fun ConeClassLikeType?.isClassBasedType(
     useSiteSession: FirSession
 ): Boolean {
     if (this is ConeErrorType) return false
-    val symbol = this?.lookupTag?.toSymbol(useSiteSession) as? FirClassSymbol ?: return false
+    konst symbol = this?.lookupTag?.toSymbol(useSiteSession) as? FirClassSymbol ?: return false
     return when (symbol) {
         is FirAnonymousObjectSymbol -> true
         is FirRegularClassSymbol -> symbol.fir.classKind == ClassKind.CLASS
@@ -304,10 +304,10 @@ private fun ConeClassLikeType?.isClassBasedType(
 }
 
 fun createSubstitutionForSupertype(superType: ConeLookupTagBasedType, session: FirSession): ConeSubstitutor {
-    val klass = superType.lookupTag.toSymbol(session)?.fir as? FirRegularClass ?: return ConeSubstitutor.Empty
-    val arguments = superType.typeArguments.map {
+    konst klass = superType.lookupTag.toSymbol(session)?.fir as? FirRegularClass ?: return ConeSubstitutor.Empty
+    konst arguments = superType.typeArguments.map {
         it as? ConeKotlinType ?: ConeErrorType(ConeSimpleDiagnostic("illegal projection usage", DiagnosticKind.IllegalProjectionUsage))
     }
-    val mapping = klass.typeParameters.map { it.symbol }.zip(arguments).toMap()
+    konst mapping = klass.typeParameters.map { it.symbol }.zip(arguments).toMap()
     return ConeSubstitutorByMap(mapping, session)
 }

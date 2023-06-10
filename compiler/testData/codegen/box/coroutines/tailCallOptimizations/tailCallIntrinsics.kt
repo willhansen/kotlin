@@ -9,7 +9,7 @@ import kotlin.coroutines.intrinsics.*
 
 var p: Int = 5846814
 private suspend fun withoutInline() {
-    val c = { c: Continuation<Unit> ->
+    konst c = { c: Continuation<Unit> ->
         TailCallOptimizationChecker.saveStackTrace(c)
         if (p > 52158) Unit else COROUTINE_SUSPENDED
     }

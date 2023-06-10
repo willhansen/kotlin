@@ -5,7 +5,7 @@
 // FILE: a.kt
 
 @JvmInline
-value class IC(val v: Int) {
+konstue class IC(konst v: Int) {
     fun <T> getT(): T? = null
 }
 

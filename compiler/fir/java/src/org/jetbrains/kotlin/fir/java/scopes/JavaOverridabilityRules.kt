@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.fir.scopes.PlatformSpecificOverridabilityRules
 import org.jetbrains.kotlin.fir.unwrapFakeOverrides
 
 class JavaOverridabilityRules(session: FirSession) : PlatformSpecificOverridabilityRules {
-    private val javaOverrideChecker =
+    private konst javaOverrideChecker =
         JavaOverrideChecker(session, JavaTypeParameterStack.EMPTY, baseScopes = null, considerReturnTypeKinds = true)
 
     override fun isOverriddenFunction(overrideCandidate: FirSimpleFunction, baseDeclaration: FirSimpleFunction): Boolean? {

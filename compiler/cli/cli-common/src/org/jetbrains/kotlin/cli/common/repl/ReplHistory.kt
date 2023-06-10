@@ -32,13 +32,13 @@ typealias SourceList = List<ReplCodeLine>
    WARNING: Not thread safe, the caller is assumed to lock access.
  */
 class ReplHistory<T>(startingHistory: CompiledHistoryList<T> = emptyList()) : Serializable {
-    private val history: CompiledHistoryStorage<T> = ArrayDeque(startingHistory)
+    private konst history: CompiledHistoryStorage<T> = ArrayDeque(startingHistory)
 
     fun isEmpty(): Boolean = history.isEmpty()
     fun isNotEmpty(): Boolean = history.isNotEmpty()
 
-    fun add(line: CompiledReplCodeLine, value: T) {
-        history.add(line to value)
+    fun add(line: CompiledReplCodeLine, konstue: T) {
+        history.add(line to konstue)
     }
 
     /* remove last line only if it is the line we think it is */
@@ -54,14 +54,14 @@ class ReplHistory<T>(startingHistory: CompiledHistoryList<T> = emptyList()) : Se
 
     /* resets back complete history and returns the lines removed */
     fun reset(): SourceHistoryList<T> {
-        val removed = history.map { Pair(it.first.source, it.second) }
+        konst removed = history.map { Pair(it.first.source, it.second) }
         history.clear()
         return removed
     }
 
     /* resets back to a previous line number and returns the lines removed */
     fun resetToLine(lineNumber: Int): SourceHistoryList<T> {
-        val removed = arrayListOf<SourceHistoryItem<T>>()
+        konst removed = arrayListOf<SourceHistoryItem<T>>()
         while ((history.peekLast()?.first?.source?.no ?: -1) > lineNumber) {
             removed.add(history.removeLast().let { Pair(it.first.source, it.second) })
         }
@@ -71,7 +71,7 @@ class ReplHistory<T>(startingHistory: CompiledHistoryList<T> = emptyList()) : Se
     fun resetToLine(line: ReplCodeLine): SourceHistoryList<T> = resetToLine(line.no)
 
     fun resetToLine(line: CompiledReplCodeLine): CompiledHistoryList<T> {
-        val removed = arrayListOf<CompiledHistoryItem<T>>()
+        konst removed = arrayListOf<CompiledHistoryItem<T>>()
         while ((history.peekLast()?.first?.source?.no ?: -1) > line.source.no) {
             removed.add(history.removeLast())
         }
@@ -102,6 +102,6 @@ class ReplHistory<T>(startingHistory: CompiledHistoryList<T> = emptyList()) : Se
     fun copyAll(): CompiledHistoryList<T> = history.toList()
 
     companion object {
-        private val serialVersionUID: Long = 8328353000L
+        private konst serialVersionUID: Long = 8328353000L
     }
 }

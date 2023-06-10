@@ -9,7 +9,7 @@ import org.gradle.api.Action
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
 
 interface HasCompilerOptions<out CO : KotlinCommonCompilerOptions> {
-    val options: CO
+    konst options: CO
 
     fun configure(configuration: CO.() -> Unit) {
         configuration(options)

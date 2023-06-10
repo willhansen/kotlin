@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-class Out<out T>(val o: T)
+class Out<out T>(konst o: T)
 
 interface Base
 class Inv<K> : Base

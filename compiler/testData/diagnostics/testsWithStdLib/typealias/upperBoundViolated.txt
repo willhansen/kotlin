@@ -1,7 +1,7 @@
 package
 
-public val falseUpperBoundViolation: AliasOfNumList<kotlin.Int> /* = NumColl<kotlin.collections.List<kotlin.Int>> */
-public val missedUpperBoundViolation: NumList<kotlin.Any> /* = NumColl<kotlin.collections.List<kotlin.Any>> */
+public konst falseUpperBoundViolation: AliasOfNumList<kotlin.Int> /* = NumColl<kotlin.collections.List<kotlin.Int>> */
+public konst missedUpperBoundViolation: NumList<kotlin.Any> /* = NumColl<kotlin.collections.List<kotlin.Any>> */
 
 public final class NumColl</*0*/ T : kotlin.collections.Collection<kotlin.Number>> {
     public constructor NumColl</*0*/ T : kotlin.collections.Collection<kotlin.Number>>()

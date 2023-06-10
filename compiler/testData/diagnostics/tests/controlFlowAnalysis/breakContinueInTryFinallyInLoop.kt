@@ -3,7 +3,7 @@
 
 fun testBreak(b: Boolean, s: String?) {
     while (b) {
-        val x: String?
+        konst x: String?
         try {
             x = s ?: break
         } finally {
@@ -14,7 +14,7 @@ fun testBreak(b: Boolean, s: String?) {
 
 fun testContinue(b: Boolean, s: String?) {
     while (b) {
-        val x: String?
+        konst x: String?
         try {
             x = s ?: continue
         } finally {

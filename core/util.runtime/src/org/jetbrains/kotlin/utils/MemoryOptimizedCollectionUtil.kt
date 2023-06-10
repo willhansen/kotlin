@@ -69,7 +69,7 @@ inline fun <reified T> Collection<*>.memoryOptimizedFilterIsInstance(): List<T> 
  * @see Iterable.plus
  */
 infix fun <T> List<T>.memoryOptimizedPlus(elements: List<T>): List<T> =
-    when (val resultSize = size + elements.size) {
+    when (konst resultSize = size + elements.size) {
         0 -> emptyList()
         1 -> Collections.singletonList(if (isEmpty()) elements.first() else first())
         else -> ArrayList<T>(resultSize).also {
@@ -112,11 +112,11 @@ infix fun <T, R> Collection<T>.memoryOptimizedZip(other: Collection<R>): List<Pa
  * @see org.jetbrains.kotlin.backend.common.atMostOne
  */
 fun <T> Sequence<T>.atMostOne(): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
 
     if (!iterator.hasNext()) return null
 
-    val single = iterator.next()
+    konst single = iterator.next()
 
     if (iterator.hasNext()) {
         throw IllegalArgumentException("Sequence has more than one element.")

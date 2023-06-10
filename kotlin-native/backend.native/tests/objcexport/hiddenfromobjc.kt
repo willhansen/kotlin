@@ -9,7 +9,7 @@ import kotlin.experimental.ExperimentalObjCRefinement
 
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
-data class ClassNotAvailableInSwift(val param: String)
+data class ClassNotAvailableInSwift(konst param: String)
 
 // KT-58839
 fun ClassNotAvailableInSwift.doSomethingMeaningless(another: ClassNotAvailableInSwift): ClassNotAvailableInSwift {
@@ -84,7 +84,7 @@ fun useOfNullableUnavailableEnum(param: UnavailableEnum?): String {
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
 object UnavailableObject {
-    val field: String = "objectField"
+    konst field: String = "objectField"
 }
 
 fun getUnavailableObject(): UnavailableObject {
@@ -129,4 +129,4 @@ fun <T : InterfaceNotAvailableInSwift> useUnavailable(a : T): String {
     return a.f()
 }
 
-class WrapperOverUnavailable<T: InterfaceNotAvailableInSwift>(val arg: T)
+class WrapperOverUnavailable<T: InterfaceNotAvailableInSwift>(konst arg: T)

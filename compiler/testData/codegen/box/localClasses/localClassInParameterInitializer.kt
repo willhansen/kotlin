@@ -1,12 +1,12 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class A(
-        val a: String = eval {
+        konst a: String = ekonst {
             open class B() {
                 open fun s() : String = "O"
             }
 
-            val o = object : B() {
+            konst o = object : B() {
                 override fun s(): String = "K"
             }
 

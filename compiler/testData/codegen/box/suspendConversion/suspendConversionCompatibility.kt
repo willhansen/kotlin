@@ -23,8 +23,8 @@ object Test2 {
         fun bar(): String = ""
 
         fun test() {
-            val result = foo(::bar)
-            val result2 = foo2(::bar)
+            konst result = foo(::bar)
+            konst result2 = foo2(::bar)
         }
     }
 }
@@ -39,8 +39,8 @@ object Test3 {
         fun bar(x: Int = 42): String = ""
 
         fun test() {
-            val result = foo(::bar)
-            val result2 = foo2(::bar)
+            konst result = foo(::bar)
+            konst result2 = foo2(::bar)
         }
     }
 }

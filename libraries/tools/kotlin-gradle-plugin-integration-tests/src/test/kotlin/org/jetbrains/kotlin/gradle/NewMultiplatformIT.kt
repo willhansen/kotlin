@@ -37,41 +37,41 @@ import java.util.zip.ZipFile
 import kotlin.test.*
 
 open class NewMultiplatformIT : BaseGradleIT() {
-    private val gradleVersion = GradleVersionRequired.FOR_MPP_SUPPORT
+    private konst gradleVersion = GradleVersionRequired.FOR_MPP_SUPPORT
 
-    private val nativeHostTargetName = MPPNativeTargets.current
-    private val unsupportedNativeTargets = MPPNativeTargets.unsupported
+    private konst nativeHostTargetName = MPPNativeTargets.current
+    private konst unsupportedNativeTargets = MPPNativeTargets.unsupported
 
     private fun Project.targetClassesDir(targetName: String, sourceSetName: String = "main") =
         classesDir(sourceSet = "$targetName/$sourceSetName")
 
     private data class HmppFlags(
-        val hmppSupport: Boolean,
-        val enableCompatibilityMetadataArtifact: Boolean,
-        val name: String
+        konst hmppSupport: Boolean,
+        konst enableCompatibilityMetadataArtifact: Boolean,
+        konst name: String
     ) {
         override fun toString() = name
     }
 
-    private val noHMPP = HmppFlags(
+    private konst noHMPP = HmppFlags(
         name = "No HMPP",
         hmppSupport = false,
         enableCompatibilityMetadataArtifact = false
     )
 
-    private val hmppWoCompatibilityMetadataArtifact = HmppFlags(
+    private konst hmppWoCompatibilityMetadataArtifact = HmppFlags(
         name = "HMPP without Compatibility Metadata Artifact",
         hmppSupport = true,
         enableCompatibilityMetadataArtifact = false
     )
 
-    private val hmppWithCompatibilityMetadataArtifact = HmppFlags(
+    private konst hmppWithCompatibilityMetadataArtifact = HmppFlags(
         name = "HMPP with Compatibility Metadata Artifact",
         hmppSupport = true,
         enableCompatibilityMetadataArtifact = true
     )
 
-    private val HmppFlags.buildOptions
+    private konst HmppFlags.buildOptions
         get() = defaultBuildOptions().copy(
             hierarchicalMPPStructureSupport = hmppSupport,
             enableCompatibilityMetadataVariant = enableCompatibilityMetadataArtifact,
@@ -110,12 +110,12 @@ open class NewMultiplatformIT : BaseGradleIT() {
         appProjectName: String,
         hmppFlags: HmppFlags,
     ) {
-        val libProject = transformNativeTestProjectWithPluginDsl(libProjectName, directoryPrefix = "new-mpp-lib-and-app")
-        val appProject = transformNativeTestProjectWithPluginDsl(appProjectName, directoryPrefix = "new-mpp-lib-and-app")
-        val oldStyleAppProject = Project("sample-old-style-app", directoryPrefix = "new-mpp-lib-and-app")
+        konst libProject = transformNativeTestProjectWithPluginDsl(libProjectName, directoryPrefix = "new-mpp-lib-and-app")
+        konst appProject = transformNativeTestProjectWithPluginDsl(appProjectName, directoryPrefix = "new-mpp-lib-and-app")
+        konst oldStyleAppProject = Project("sample-old-style-app", directoryPrefix = "new-mpp-lib-and-app")
 
-        val buildOptions = hmppFlags.buildOptions
-        val compileTasksNames =
+        konst buildOptions = hmppFlags.buildOptions
+        konst compileTasksNames =
             listOf("Jvm6", "NodeJs", "Linux64").map { ":compileKotlin$it" }
 
         with(libProject) {
@@ -130,22 +130,22 @@ open class NewMultiplatformIT : BaseGradleIT() {
                     assertTasksExecuted(":compileKotlinMetadata", ":metadataJar")
                 }
 
-                val groupDir = projectDir.resolve("repo/com/example")
-                val jvmJarName = "sample-lib-jvm6/1.0/sample-lib-jvm6-1.0.jar"
-                val jsExtension = "klib"
-                val jsKlibName = "sample-lib-nodejs/1.0/sample-lib-nodejs-1.0.$jsExtension"
-                val metadataJarName = "sample-lib/1.0/sample-lib-1.0.jar"
-                val nativeKlibName = "sample-lib-linux64/1.0/sample-lib-linux64-1.0.klib"
+                konst groupDir = projectDir.resolve("repo/com/example")
+                konst jvmJarName = "sample-lib-jvm6/1.0/sample-lib-jvm6-1.0.jar"
+                konst jsExtension = "klib"
+                konst jsKlibName = "sample-lib-nodejs/1.0/sample-lib-nodejs-1.0.$jsExtension"
+                konst metadataJarName = "sample-lib/1.0/sample-lib-1.0.jar"
+                konst nativeKlibName = "sample-lib-linux64/1.0/sample-lib-linux64-1.0.klib"
 
                 listOf(jvmJarName, jsKlibName, metadataJarName, "sample-lib/1.0/sample-lib-1.0.module").forEach {
                     Assert.assertTrue("$it should exist", groupDir.resolve(it).exists())
                 }
 
-                val gradleMetadata = groupDir.resolve("sample-lib/1.0/sample-lib-1.0.module").readText()
+                konst gradleMetadata = groupDir.resolve("sample-lib/1.0/sample-lib-1.0.module").readText()
                 assertFalse(gradleMetadata.contains(ProjectLocalConfigurations.ATTRIBUTE.name))
 
                 listOf(jvmJarName, jsKlibName, nativeKlibName).forEach {
-                    val pom = groupDir.resolve(it.replaceAfterLast('.', "pom"))
+                    konst pom = groupDir.resolve(it.replaceAfterLast('.', "pom"))
                     Assert.assertTrue(
                         "$pom should contain a name section.",
                         pom.readText().contains("<name>Sample MPP library</name>")
@@ -156,21 +156,21 @@ open class NewMultiplatformIT : BaseGradleIT() {
                     )
                 }
 
-                val jvmJarEntries = ZipFile(groupDir.resolve(jvmJarName)).entries().asSequence().map { it.name }.toSet()
+                konst jvmJarEntries = ZipFile(groupDir.resolve(jvmJarName)).entries().asSequence().map { it.name }.toSet()
                 Assert.assertTrue("com/example/lib/CommonKt.class" in jvmJarEntries)
                 Assert.assertTrue("com/example/lib/MainKt.class" in jvmJarEntries)
 
                 Assert.assertTrue(groupDir.resolve(jsKlibName).exists())
 
-                val metadataJarEntries = ZipFile(groupDir.resolve(metadataJarName)).entries().asSequence().map { it.name }.toSet()
-                val metadataFileFound = "com/example/lib/CommonKt.kotlin_metadata" in metadataJarEntries
+                konst metadataJarEntries = ZipFile(groupDir.resolve(metadataJarName)).entries().asSequence().map { it.name }.toSet()
+                konst metadataFileFound = "com/example/lib/CommonKt.kotlin_metadata" in metadataJarEntries
                 Assert.assertEquals(hmppFlags.enableCompatibilityMetadataArtifact, metadataFileFound)
 
                 Assert.assertTrue(groupDir.resolve(nativeKlibName).exists())
             }
         }
 
-        val libLocalRepoUri = libProject.projectDir.resolve("repo").toURI()
+        konst libLocalRepoUri = libProject.projectDir.resolve("repo").toURI()
 
         with(appProject) {
             setupWorkingDir(false)
@@ -199,12 +199,12 @@ open class NewMultiplatformIT : BaseGradleIT() {
                     }
                 }
 
-                val nativeExeName = if (isWindows) "main.exe" else "main.kexe"
+                konst nativeExeName = if (isWindows) "main.exe" else "main.kexe"
                 assertFileExists("build/bin/linux64/mainDebugExecutable/$nativeExeName")
 
                 // Check that linker options were correctly passed to the K/N compiler.
                 withNativeCommandLineArguments(":linkMainDebugExecutableLinux64") { arguments ->
-                    val parsedArguments = parseCommandLineArguments<K2NativeCompilerArguments>(arguments)
+                    konst parsedArguments = parseCommandLineArguments<K2NativeCompilerArguments>(arguments)
                     assertEquals(listOf("-L."), parsedArguments.singleLinkerArguments?.toList())
                     assertTrue(arguments.containsSequentially("-linker-option", "-L."))
                 }
@@ -249,10 +249,10 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
                     assertFileExists(kotlinClassesDir("app-common") + "com/example/app/CommonAppKt.kotlin_metadata")
 
-                    val jvmClassFile = projectDir.resolve(kotlinClassesDir("app-jvm") + "com/example/app/JvmAppKt.class")
+                    konst jvmClassFile = projectDir.resolve(kotlinClassesDir("app-jvm") + "com/example/app/JvmAppKt.class")
                     checkBytecodeContains(jvmClassFile, "CommonKt.id", "MainKt.expectedFun")
 
-//                    val jsCompiledFilePath = kotlinClassesDir("app-js") + "app-js.js"
+//                    konst jsCompiledFilePath = kotlinClassesDir("app-js") + "app-js.js"
 //                    assertFileContains(jsCompiledFilePath, "lib.expectedFun", "lib.id")
                 }
             }
@@ -310,11 +310,11 @@ open class NewMultiplatformIT : BaseGradleIT() {
         appProjectName: String,
         jsCompilerType: KotlinJsCompilerType
     ) {
-        val libProject = transformProjectWithPluginsDsl(libProjectName, directoryPrefix = "both-js-lib-and-app")
-        val appProject = transformProjectWithPluginsDsl(appProjectName, directoryPrefix = "both-js-lib-and-app")
+        konst libProject = transformProjectWithPluginsDsl(libProjectName, directoryPrefix = "both-js-lib-and-app")
+        konst appProject = transformProjectWithPluginsDsl(appProjectName, directoryPrefix = "both-js-lib-and-app")
 
         @Suppress("DEPRECATION")
-        val compileTasksNames =
+        konst compileTasksNames =
             listOf(
                 *(if (jsCompilerType != KotlinJsCompilerType.BOTH) {
                     arrayOf("NodeJs")
@@ -341,22 +341,22 @@ open class NewMultiplatformIT : BaseGradleIT() {
                 assertTasksNotExecuted(":compileCommonMainKotlinMetadata")
                 assertTasksExecuted(*compileTasksNames.toTypedArray(), ":allMetadataJar")
 
-                val groupDir = projectDir.resolve("repo/com/example")
+                konst groupDir = projectDir.resolve("repo/com/example")
 
                 @Suppress("DEPRECATION")
-                val jsExtension = if (jsCompilerType == KotlinJsCompilerType.LEGACY) "jar" else "klib"
-                val jsJarName = "sample-lib-nodejs/1.0/sample-lib-nodejs-1.0.$jsExtension"
-                val metadataJarName = "sample-lib/1.0/sample-lib-1.0.jar"
+                konst jsExtension = if (jsCompilerType == KotlinJsCompilerType.LEGACY) "jar" else "klib"
+                konst jsJarName = "sample-lib-nodejs/1.0/sample-lib-nodejs-1.0.$jsExtension"
+                konst metadataJarName = "sample-lib/1.0/sample-lib-1.0.jar"
 
                 listOf(jsJarName, metadataJarName, "sample-lib/1.0/sample-lib-1.0.module").forEach {
                     Assert.assertTrue("$it should exist", groupDir.resolve(it).exists())
                 }
 
-                val gradleMetadata = groupDir.resolve("sample-lib/1.0/sample-lib-1.0.module").readText()
+                konst gradleMetadata = groupDir.resolve("sample-lib/1.0/sample-lib-1.0.module").readText()
                 assertFalse(gradleMetadata.contains(ProjectLocalConfigurations.ATTRIBUTE.name))
 
                 jsJarName.let {
-                    val pom = groupDir.resolve(it.replaceAfterLast('.', "pom"))
+                    konst pom = groupDir.resolve(it.replaceAfterLast('.', "pom"))
                     Assert.assertTrue(
                         "$pom should contain a name section.",
                         pom.readText().contains("<name>Sample MPP library</name>")
@@ -370,8 +370,8 @@ open class NewMultiplatformIT : BaseGradleIT() {
                 @Suppress("DEPRECATION")
                 when (jsCompilerType) {
                     KotlinJsCompilerType.LEGACY -> {
-                        val jsJar = ZipFile(groupDir.resolve(jsJarName))
-                        val compiledJs = jsJar.getInputStream(jsJar.getEntry("sample-lib.js")).reader().readText()
+                        konst jsJar = ZipFile(groupDir.resolve(jsJarName))
+                        konst compiledJs = jsJar.getInputStream(jsJar.getEntry("sample-lib.js")).reader().readText()
                         Assert.assertTrue("function id(" in compiledJs)
                         Assert.assertTrue("function idUsage(" in compiledJs)
                         Assert.assertTrue("function expectedFun(" in compiledJs)
@@ -385,7 +385,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             }
         }
 
-        val libLocalRepoUri = libProject.projectDir.resolve("repo").toURI()
+        konst libLocalRepoUri = libProject.projectDir.resolve("repo").toURI()
 
         with(appProject) {
             setupWorkingDir()
@@ -402,7 +402,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
             fun CompiledProject.checkAppBuild(compilerType: KotlinJsCompilerType) {
                 assertSuccessful()
-                val compileTaskNames = if (jsCompilerType == compilerType) {
+                konst compileTaskNames = if (jsCompilerType == compilerType) {
                     compileTasksNames.toTypedArray()
                 } else {
                     arrayOf(":compileKotlinNodeJs")
@@ -474,8 +474,8 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testResourceProcessing() = with(Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")) {
-        val targetsWithResources = listOf("jvm6", "nodeJs", "linux64")
-        val processResourcesTasks =
+        konst targetsWithResources = listOf("jvm6", "nodeJs", "linux64")
+        konst processResourcesTasks =
             targetsWithResources.map { ":${it}ProcessResources" }
 
         build(*processResourcesTasks.toTypedArray()) {
@@ -489,7 +489,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
         }
     }
 
-    override val defaultGradleVersion: GradleVersionRequired
+    override konst defaultGradleVersion: GradleVersionRequired
         get() = gradleVersion
 
     @Test
@@ -513,14 +513,14 @@ open class NewMultiplatformIT : BaseGradleIT() {
     }
 
     @Test
-    fun testJvmWithJavaEquivalence() = doTestJvmWithJava(testJavaSupportInJvmTargets = false)
+    fun testJvmWithJavaEquikonstence() = doTestJvmWithJava(testJavaSupportInJvmTargets = false)
 
     @Test
     fun testJavaSupportInJvmTargets() = doTestJvmWithJava(testJavaSupportInJvmTargets = true)
 
     private fun doTestJvmWithJava(testJavaSupportInJvmTargets: Boolean) =
         with(Project("sample-lib", directoryPrefix = "new-mpp-lib-and-app")) {
-            val embeddedProject = Project("sample-lib-gradle-kotlin-dsl", directoryPrefix = "new-mpp-lib-and-app")
+            konst embeddedProject = Project("sample-lib-gradle-kotlin-dsl", directoryPrefix = "new-mpp-lib-and-app")
             embedProject(embeddedProject)
             gradleProperties().apply {
                 configureJvmMemory()
@@ -529,12 +529,12 @@ open class NewMultiplatformIT : BaseGradleIT() {
             lateinit var classesWithoutJava: Set<String>
 
             fun getFilePathsSet(inDirectory: String): Set<String> {
-                val dir = projectDir.resolve(inDirectory)
+                konst dir = projectDir.resolve(inDirectory)
                 return dir.walk().filter { it.isFile }.map { it.relativeTo(dir).invariantSeparatorsPath }.toSet()
             }
 
             gradleBuildScript(embeddedProject.projectName).modify {
-                it.replace("val shouldBeJs = true", "val shouldBeJs = false")
+                it.replace("konst shouldBeJs = true", "konst shouldBeJs = false")
             }
 
             gradleBuildScript().modify {
@@ -600,8 +600,8 @@ open class NewMultiplatformIT : BaseGradleIT() {
             fun javaSourceRootForCompilation(compilationName: String) =
                 if (testJavaSupportInJvmTargets) "src/jvm6${compilationName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}/java" else "src/$compilationName/java"
 
-            val javaMainSrcDir = javaSourceRootForCompilation("main")
-            val javaTestSrcDir = javaSourceRootForCompilation("test")
+            konst javaMainSrcDir = javaSourceRootForCompilation("main")
+            konst javaTestSrcDir = javaSourceRootForCompilation("test")
 
             projectDir.resolve(javaMainSrcDir).apply {
                 mkdirs()
@@ -646,7 +646,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
             build("clean", "build", "run", "shadowJar") {
                 assertSuccessful()
-                val expectedMainClasses =
+                konst expectedMainClasses =
                     classesWithoutJava + setOf(
                         // classes for Kapt test:
                         "java/main/com/example/lib/Module_ProvideHeaterFactory.class",
@@ -658,10 +658,10 @@ open class NewMultiplatformIT : BaseGradleIT() {
                         "java/main/com/example/lib/JavaClassInJava.class",
                         "java/test/com/example/lib/JavaTest.class"
                     )
-                val actualClasses = getFilePathsSet("build/classes")
+                konst actualClasses = getFilePathsSet("build/classes")
                 Assert.assertEquals(expectedMainClasses, actualClasses)
 
-                val jvmTestTaskName = if (testJavaSupportInJvmTargets) "jvm6Test" else "test"
+                konst jvmTestTaskName = if (testJavaSupportInJvmTargets) "jvm6Test" else "test"
                 assertTasksExecuted(":$jvmTestTaskName")
 
                 if (testJavaSupportInJvmTargets) {
@@ -678,7 +678,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
                 assertContains(">>> Common.kt >>> main()")
 
                 assertTasksExecuted(":shadowJar")
-                val entries = ZipFile(projectDir.resolve("build/libs/sample-lib-1.0-all.jar")).use { zip ->
+                konst entries = ZipFile(projectDir.resolve("build/libs/sample-lib-1.0-all.jar")).use { zip ->
                     zip.entries().asSequence().map { it.name }.toSet()
                 }
                 assertTrue { "kotlin/Pair.class" in entries }
@@ -719,7 +719,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
                 ":test"
             )
 
-            val expectedKotlinOutputFiles = listOf(
+            konst expectedKotlinOutputFiles = listOf(
                 *kotlinClassesDir(sourceSet = "jvmWithJava/main").let {
                     arrayOf(
                         it + "com/example/lib/JavaClassUsageKt.class",
@@ -756,8 +756,8 @@ open class NewMultiplatformIT : BaseGradleIT() {
             // Gradle 6.6+ slightly changed format of xml test results
             // If, in the test project, preset name was updated,
             // update accordingly test result output for Gradle 6.6+
-            val testGradleVersion = chooseWrapperVersionOrFinishTest()
-            val expectedTestResults = if (GradleVersion.version(testGradleVersion) < GradleVersion.version("6.6")) {
+            konst testGradleVersion = chooseWrapperVersionOrFinishTest()
+            konst expectedTestResults = if (GradleVersion.version(testGradleVersion) < GradleVersion.version("6.6")) {
                 "testProject/new-mpp-lib-with-tests/TEST-all-pre6.6.xml"
             } else {
                 "testProject/new-mpp-lib-with-tests/TEST-all.xml"
@@ -832,7 +832,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             build(task) {
                 assertSuccessful()
                 assertTasksExecuted(":$task")
-                val arguments = parseCompilerArguments<K2NativeCompilerArguments>()
+                konst arguments = parseCompilerArguments<K2NativeCompilerArguments>()
                 assertTrue(arguments.progressiveMode, "Expected progressiveMode")
                 assertTrue(arguments.noInline, "Expected no-inline")
                 assertEquals(
@@ -939,17 +939,17 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testResolveMppLibDependencyToMetadata() {
-        val libProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val appProject = Project("sample-app", gradleVersion, "new-mpp-lib-and-app")
+        konst libProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst appProject = Project("sample-app", gradleVersion, "new-mpp-lib-and-app")
 
         libProject.build("publish") { assertSuccessful() }
-        val localRepo = libProject.projectDir.resolve("repo")
-        val localRepoUri = localRepo.toURI()
+        konst localRepo = libProject.projectDir.resolve("repo")
+        konst localRepoUri = localRepo.toURI()
 
         with(appProject) {
             setupWorkingDir()
 
-            val pathPrefix = "metadataDependency: "
+            konst pathPrefix = "metadataDependency: "
 
             gradleBuildScript().appendText(
                 "\n" + """
@@ -973,14 +973,14 @@ open class NewMultiplatformIT : BaseGradleIT() {
                     }
                 """.trimIndent()
             )
-            val metadataDependencyRegex = "$pathPrefix(.*?)->(.*)".toRegex()
+            konst metadataDependencyRegex = "$pathPrefix(.*?)->(.*)".toRegex()
 
             build("printMetadataFiles") {
                 assertSuccessful()
 
-                val expectedFileName = "sample-lib-${KotlinMultiplatformPlugin.METADATA_TARGET_NAME}-1.0.jar"
+                konst expectedFileName = "sample-lib-${KotlinMultiplatformPlugin.METADATA_TARGET_NAME}-1.0.jar"
 
-                val paths = metadataDependencyRegex
+                konst paths = metadataDependencyRegex
                     .findAll(output).map { it.groupValues[1] to it.groupValues[2] }
                     .filter { (_, f) -> "sample-lib" in f }
                     .toSet()
@@ -1007,10 +1007,10 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
 
     private fun testResolveJsPartOfMppLibDependencyToMetadata(hmppFlags: HmppFlags) {
-        val libProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val appProject = Project("sample-app", gradleVersion, "new-mpp-lib-and-app")
+        konst libProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst appProject = Project("sample-app", gradleVersion, "new-mpp-lib-and-app")
 
-        val buildOptions = hmppFlags.buildOptions
+        konst buildOptions = hmppFlags.buildOptions
         libProject.setupWorkingDir()
         libProject.gradleProperties().appendText(
             """
@@ -1025,8 +1025,8 @@ open class NewMultiplatformIT : BaseGradleIT() {
         ) {
             assertSuccessful()
         }
-        val localRepo = libProject.projectDir.resolve("repo")
-        val localRepoUri = localRepo.toURI()
+        konst localRepo = libProject.projectDir.resolve("repo")
+        konst localRepoUri = localRepo.toURI()
 
         with(appProject) {
             setupWorkingDir()
@@ -1038,7 +1038,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
                 """.trimIndent()
             )
 
-            val pathPrefix = "metadataDependency: "
+            konst pathPrefix = "metadataDependency: "
 
             gradleBuildScript().appendText(
                 "\n" + """
@@ -1087,10 +1087,10 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testResolveMppProjectDependencyToMetadata() {
-        val libProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
-        val appProject = Project("sample-app", gradleVersion, "new-mpp-lib-and-app")
+        konst libProject = Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst appProject = Project("sample-app", gradleVersion, "new-mpp-lib-and-app")
 
-        val pathPrefix = "metadataDependency: "
+        konst pathPrefix = "metadataDependency: "
 
         with(appProject) {
             setupWorkingDir()
@@ -1119,8 +1119,8 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testPublishingOnlySupportedNativeTargets() = with(transformNativeTestProject("sample-lib", gradleVersion, "new-mpp-lib-and-app")) {
-        val publishedVariant = nativeHostTargetName
-        val nonPublishedVariant = unsupportedNativeTargets[0]
+        konst publishedVariant = nativeHostTargetName
+        konst nonPublishedVariant = unsupportedNativeTargets[0]
 
         build("publish") {
             assertSuccessful()
@@ -1129,7 +1129,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             assertNoSuchFile("repo/com/example/sample-lib-$nonPublishedVariant") // check that no artifacts are published for that variant
 
             // but check that the module metadata contains all variants:
-            val gradleModuleMetadata = projectDir.resolve("repo/com/example/sample-lib/1.0/sample-lib-1.0.module").readText()
+            konst gradleModuleMetadata = projectDir.resolve("repo/com/example/sample-lib/1.0/sample-lib-1.0.module").readText()
             assertTrue(""""name": "linux64ApiElements-published"""" in gradleModuleMetadata)
             assertTrue(""""name": "mingw64ApiElements-published"""" in gradleModuleMetadata)
             assertTrue(""""name": "macos64ApiElements-published"""" in gradleModuleMetadata)
@@ -1138,7 +1138,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testNonMppConsumersOfLibraryPublishedWithNoMetadataOptIn() {
-        val repoDir = with(transformNativeTestProject("sample-lib", gradleVersion, "new-mpp-lib-and-app")) {
+        konst repoDir = with(transformNativeTestProject("sample-lib", gradleVersion, "new-mpp-lib-and-app")) {
             build(
                 "publish",
                 options = hmppWithCompatibilityMetadataArtifact.buildOptions
@@ -1193,7 +1193,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             """
             @file:Suppress("OPT_IN_USAGE_ERROR", "EXPERIMENTAL_API_USAGE_ERROR")
             @OptionalExpectation
-            expect annotation class Optional(val value: String)
+            expect annotation class Optional(konst konstue: String)
 
             @Optional("optionalAnnotationValue")
             class OptionalCommonUsage
@@ -1202,12 +1202,12 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
         build("compileCommonMainKotlinMetadata") {
             assertSuccessful()
-            val compilerArgsLine = output.lines().singleOrNull { ":compileCommonMainKotlinMetadata Kotlin compiler args" in it }
+            konst compilerArgsLine = output.lines().singleOrNull { ":compileCommonMainKotlinMetadata Kotlin compiler args" in it }
             assertNotNull(compilerArgsLine, "The debug log should contain the compiler args for the task :compileCommonMainKotlinMetadata")
-            val args = compilerArgsLine.split(" ")
-            val xCommonSourcesArg = args.singleOrNull { it.startsWith("-Xcommon-sources=") }
+            konst args = compilerArgsLine.split(" ")
+            konst xCommonSourcesArg = args.singleOrNull { it.startsWith("-Xcommon-sources=") }
             assertNotNull(xCommonSourcesArg, "The compiler args for K2Metadata should contain the -Xcommon-sources argument")
-            val xCommonSourcesFiles = xCommonSourcesArg.substringAfter("-Xcommon-sources=").split(",")
+            konst xCommonSourcesFiles = xCommonSourcesArg.substringAfter("-Xcommon-sources=").split(",")
             assertTrue { xCommonSourcesFiles.any { it.endsWith("Optional.kt") } }
         }
 
@@ -1216,7 +1216,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             assertFileExists(targetClassesDir("jvmWithoutJava") + "OptionalCommonUsage.class")
         }
 
-        val optionalImplText = "\n" + """
+        konst optionalImplText = "\n" + """
             @Optional("should fail, see KT-25196")
             class OptionalPlatformUsage
         """.trimIndent()
@@ -1246,14 +1246,14 @@ open class NewMultiplatformIT : BaseGradleIT() {
         build("publish") {
             assertSuccessful()
 
-            val groupDir = projectDir.resolve("repo/com/example/")
-            val targetArtifactIdAppendices = listOf(null, "jvm6", "nodejs", "linux64")
+            konst groupDir = projectDir.resolve("repo/com/example/")
+            konst targetArtifactIdAppendices = listOf(null, "jvm6", "nodejs", "linux64")
 
-            val sourceJarSourceRoots = targetArtifactIdAppendices.associateWith { artifact ->
-                val sourcesJarPath = if (artifact != null) "sample-lib-$artifact/1.0/sample-lib-$artifact-1.0-sources.jar"
+            konst sourceJarSourceRoots = targetArtifactIdAppendices.associateWith { artifact ->
+                konst sourcesJarPath = if (artifact != null) "sample-lib-$artifact/1.0/sample-lib-$artifact-1.0-sources.jar"
                 else "sample-lib/1.0/sample-lib-1.0-sources.jar"
-                val sourcesJar = JarFile(groupDir.resolve(sourcesJarPath))
-                val sourcesDirs = sourcesJar.entries().asSequence().map { it.name.substringBefore("/") }.toSet() - "META-INF"
+                konst sourcesJar = JarFile(groupDir.resolve(sourcesJarPath))
+                konst sourcesDirs = sourcesJar.entries().asSequence().map { it.name.substringBefore("/") }.toSet() - "META-INF"
                 sourcesDirs
             }
 
@@ -1269,7 +1269,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testConsumeMppLibraryFromNonKotlinProject() {
-        val libRepo = with(transformNativeTestProject("sample-lib", gradleVersion, "new-mpp-lib-and-app")) {
+        konst libRepo = with(transformNativeTestProject("sample-lib", gradleVersion, "new-mpp-lib-and-app")) {
             build("publish") { assertSuccessful() }
             projectDir.resolve("repo")
         }
@@ -1288,7 +1288,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testPublishMultimoduleProjectWithMetadata() {
-        val libProject = transformNativeTestProject("sample-lib", gradleVersion, "new-mpp-lib-and-app")
+        konst libProject = transformNativeTestProject("sample-lib", gradleVersion, "new-mpp-lib-and-app")
         libProject.setupWorkingDir()
 
         transformNativeTestProject("sample-external-lib", gradleVersion, "new-mpp-lib-and-app").apply {
@@ -1308,7 +1308,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             }
         }
 
-        val appProject = transformNativeTestProject("sample-app", gradleVersion, "new-mpp-lib-and-app")
+        konst appProject = transformNativeTestProject("sample-app", gradleVersion, "new-mpp-lib-and-app")
 
         with(libProject) {
             setupWorkingDir()
@@ -1391,7 +1391,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
                 )
 
                 // Check that, despite the rewritten POM, the module metadata contains the original dependency:
-                val moduleMetadata = projectDir.resolve("repo/com/exampleapp/sample-app-jvm8/1.0/sample-app-jvm8-1.0.module").readText()
+                konst moduleMetadata = projectDir.resolve("repo/com/exampleapp/sample-app-jvm8/1.0/sample-app-jvm8-1.0.module").readText()
                     .replace("\\s+".toRegex(), "").replace("\n", "")
                 assertTrue { "\"group\":\"com.example\",\"module\":\"sample-lib-multiplatform\"" in moduleMetadata }
                 assertTrue { "\"group\":\"com.external.dependency\",\"module\":\"external\"" in moduleMetadata }
@@ -1424,11 +1424,11 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testMppBuildWithCompilerPlugins() = with(transformNativeTestProject("sample-lib", gradleVersion, "new-mpp-lib-and-app")) {
-        val printOptionsTaskName = "printCompilerPluginOptions"
-        val argsMarker = "=args=>"
-        val classpathMarker = "=cp=>"
-        val compilerPluginArgsRegex = "(\\w+)${Regex.escape(argsMarker)}(.*)".toRegex()
-        val compilerPluginClasspathRegex = "(\\w+)${Regex.escape(classpathMarker)}(.*)".toRegex()
+        konst printOptionsTaskName = "printCompilerPluginOptions"
+        konst argsMarker = "=args=>"
+        konst classpathMarker = "=cp=>"
+        konst compilerPluginArgsRegex = "(\\w+)${Regex.escape(argsMarker)}(.*)".toRegex()
+        konst compilerPluginClasspathRegex = "(\\w+)${Regex.escape(classpathMarker)}(.*)".toRegex()
 
         gradleBuildScript().appendText(
             "\n" + """
@@ -1445,7 +1445,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             noArg { annotation 'com.example.Annotation' }
 
             task $printOptionsTaskName {
-                // if the tasks are not configured during evaluation phase, configuring them during execution
+                // if the tasks are not configured during ekonstuation phase, configuring them during execution
                 // leads to new dependencies unsuccessfully added to the resolved compilerPluginsClasspath configuration
                 kotlin.targets.all { compilations.all { /*force to configure the*/ compileKotlinTask } }
                 doFirst {
@@ -1495,7 +1495,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             assertFileExists("build/classes/kotlin/jvm6/main/com/example/Annotated.class")
             assertFileExists("build/classes/kotlin/jvm6/main/com/example/Override.class")
 
-            val (compilerPluginArgsBySourceSet, compilerPluginClasspathBySourceSet) =
+            konst (compilerPluginArgsBySourceSet, compilerPluginClasspathBySourceSet) =
                 listOf(compilerPluginArgsRegex, compilerPluginClasspathRegex)
                     .map { marker ->
                         marker.findAll(output).associate { it.groupValues[1] to it.groupValues[2] }
@@ -1503,7 +1503,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
             // TODO once Kotlin/Native properly supports compiler plugins, expand this to all source sets:
             listOf("commonMain", "commonTest", "jvm6Main", "jvm6Test", "nodeJsMain", "nodeJsTest").forEach {
-                val expectedArgs = "[plugin:org.jetbrains.kotlin.allopen:annotation=com.example.Annotation, " +
+                konst expectedArgs = "[plugin:org.jetbrains.kotlin.allopen:annotation=com.example.Annotation, " +
                         "plugin:org.jetbrains.kotlin.noarg:annotation=com.example.Annotation]"
 
                 assertEquals(expectedArgs, compilerPluginArgsBySourceSet[it], "Expected $expectedArgs as plugin args for $it")
@@ -1531,7 +1531,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             assertSuccessful()
             assertTasksExecuted(":mainProject:processDceBrowserKotlinJs")
 
-            val pathPrefix = "mainProject/build/kotlin-js-min/"
+            konst pathPrefix = "mainProject/build/kotlin-js-min/"
             assertFileExists("$pathPrefix/exampleapp.js.map")
             assertFileExists("$pathPrefix/examplelib.js.map")
             assertFileContains("$pathPrefix/exampleapp.js.map", "\"../../src/browserMain/kotlin/exampleapp/main.kt\"")
@@ -1545,8 +1545,8 @@ open class NewMultiplatformIT : BaseGradleIT() {
     fun testDefaultSourceSetsDsl() = with(Project("sample-lib", gradleVersion, "new-mpp-lib-and-app")) {
         setupWorkingDir()
 
-        val testOutputPrefix = "# default source set "
-        val testOutputRegex = Regex("${Regex.escape(testOutputPrefix)} (.*?) (.*?) (.*)")
+        konst testOutputPrefix = "# default source set "
+        konst testOutputRegex = Regex("${Regex.escape(testOutputPrefix)} (.*?) (.*?) (.*)")
 
         gradleBuildScript().appendText(
             "\n" + """
@@ -1561,11 +1561,11 @@ open class NewMultiplatformIT : BaseGradleIT() {
         build {
             assertSuccessful()
 
-            val actualDefaultSourceSets = testOutputRegex.findAll(output).mapTo(mutableSetOf()) {
+            konst actualDefaultSourceSets = testOutputRegex.findAll(output).mapTo(mutableSetOf()) {
                 it.groupValues.let { (_, target, compilation, sourceSet) -> Triple(target, compilation, sourceSet) }
             }
 
-            val expectedDefaultSourceSets = listOf(
+            konst expectedDefaultSourceSets = listOf(
                 "jvm6", "nodeJs", "mingw64", "mingw86", "linux64", "macos64", "linuxMipsel32", "wasm"
             ).flatMapTo(mutableSetOf()) { target ->
                 listOf("main", "test").map { compilation ->
@@ -1631,34 +1631,34 @@ open class NewMultiplatformIT : BaseGradleIT() {
             assertSuccessful()
         }
 
-        val libCommonClassKt = projectDir.getFileByName("LibCommonClass.kt")
-        val libCommonClassJsKt = projectDir.getFileByName("LibCommonClassJs.kt")
+        konst libCommonClassKt = projectDir.getFileByName("LibCommonClass.kt")
+        konst libCommonClassJsKt = projectDir.getFileByName("LibCommonClassJs.kt")
         libCommonClassJsKt.modify { it.checkedReplace("platform = \"js\"", "platform = \"Kotlin/JS\"") }
 
-        val libCommonClassJvmKt = projectDir.getFileByName("LibCommonClassJvm.kt")
+        konst libCommonClassJvmKt = projectDir.getFileByName("LibCommonClassJvm.kt")
         libCommonClassJvmKt.modify { it.checkedReplace("platform = \"jvm\"", "platform = \"Kotlin/JVM\"") }
         build("build") {
             assertSuccessful()
             assertCompiledKotlinSources(project.relativize(libCommonClassKt, libCommonClassJsKt, libCommonClassJvmKt))
         }
 
-        val libJvmPlatformUtilKt = projectDir.getFileByName("libJvmPlatformUtil.kt")
+        konst libJvmPlatformUtilKt = projectDir.getFileByName("libJvmPlatformUtil.kt")
         libJvmPlatformUtilKt.modify {
             it.checkedReplace("fun libJvmPlatformUtil", "inline fun libJvmPlatformUtil")
         }
         build("build") {
             assertSuccessful()
-            val useLibJvmPlatformUtilKt = projectDir.getFileByName("useLibJvmPlatformUtil.kt")
+            konst useLibJvmPlatformUtilKt = projectDir.getFileByName("useLibJvmPlatformUtil.kt")
             assertCompiledKotlinSources(project.relativize(libJvmPlatformUtilKt, useLibJvmPlatformUtilKt))
         }
 
-        val libJsPlatformUtilKt = projectDir.getFileByName("libJsPlatformUtil.kt")
+        konst libJsPlatformUtilKt = projectDir.getFileByName("libJsPlatformUtil.kt")
         libJsPlatformUtilKt.modify {
             it.checkedReplace("fun libJsPlatformUtil", "inline fun libJsPlatformUtil")
         }
         build("build") {
             assertSuccessful()
-            val useLibJsPlatformUtilKt = projectDir.getFileByName("useLibJsPlatformUtil.kt")
+            konst useLibJsPlatformUtilKt = projectDir.getFileByName("useLibJsPlatformUtil.kt")
             assertCompiledKotlinSources(project.relativize(libJsPlatformUtilKt, useLibJsPlatformUtilKt))
         }
     }
@@ -1675,7 +1675,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
                 """.trimIndent()
         )
 
-        val groupDir = "build/repo/com/example/"
+        konst groupDir = "build/repo/com/example/"
 
         build(":mpp-lib:publish") {
             assertSuccessful()
@@ -1685,7 +1685,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
         fun doTestPomRewriting(mppProjectDependency: Boolean, keepPomIntact: Boolean? = null) {
 
-            val params = mutableListOf("clean", ":jvm-app:publish", ":js-app:publish").apply {
+            konst params = mutableListOf("clean", ":jvm-app:publish", ":js-app:publish").apply {
                 if (mppProjectDependency)
                     add("-PmppProjectDependency=true")
                 if (keepPomIntact == true)
@@ -1697,10 +1697,10 @@ open class NewMultiplatformIT : BaseGradleIT() {
                 assertTasksExecuted(":jvm-app:publishMainPublicationToMavenRepository")
                 assertTasksExecuted(":js-app:publishMavenPublicationToMavenRepository")
 
-                val jvmModuleDir = groupDir + "jvm-app/1.0/"
-                val jsModuleDir = groupDir + "js-app/1.0/"
-                val jvmPom = fileInWorkingDir(jvmModuleDir + "jvm-app-1.0.pom").readText().replace("\\s+".toRegex(), "")
-                val jsPom = fileInWorkingDir(jsModuleDir + "js-app-1.0.pom").readText().replace("\\s+".toRegex(), "")
+                konst jvmModuleDir = groupDir + "jvm-app/1.0/"
+                konst jsModuleDir = groupDir + "js-app/1.0/"
+                konst jvmPom = fileInWorkingDir(jvmModuleDir + "jvm-app-1.0.pom").readText().replace("\\s+".toRegex(), "")
+                konst jsPom = fileInWorkingDir(jsModuleDir + "js-app-1.0.pom").readText().replace("\\s+".toRegex(), "")
 
                 if (keepPomIntact != true) {
                     assertTrue("The JVM POM should contain the dependency on 'mpp-lib' rewritten as 'mpp-lib-myjvm'") {
@@ -1743,7 +1743,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             setupWorkingDir()
             gradleBuildScript().modify(::transformBuildScriptWithPluginsDsl)
 
-            val tasks = listOf("jvm", "js", "linux64").map {
+            konst tasks = listOf("jvm", "js", "linux64").map {
                 ":compileIntegrationTestKotlin${
                     it.replaceFirstChar {
                         if (it.isLowerCase()) it.titlecase(
@@ -1792,8 +1792,8 @@ open class NewMultiplatformIT : BaseGradleIT() {
         gradleBuildScript().modify(::transformBuildScriptWithPluginsDsl)
 
         // TOOD: add Kotlin/JS tests once they can be tested without much performance overhead
-        val targetsToTest = listOf("jvm", nativeHostTargetName) + listOf("ios").takeIf { HostManager.hostIsMac }.orEmpty()
-        val testTasks = targetsToTest.flatMap { listOf(":${it}Test", ":${it}IntegrationTest") }.toTypedArray()
+        konst targetsToTest = listOf("jvm", nativeHostTargetName) + listOf("ios").takeIf { HostManager.hostIsMac }.orEmpty()
+        konst testTasks = targetsToTest.flatMap { listOf(":${it}Test", ":${it}IntegrationTest") }.toTypedArray()
 
         build(*testTasks) {
             assertSuccessful()
@@ -1805,7 +1805,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             )
 
             fun checkUnitTestOutput(targetName: String) {
-                val classReportHtml = projectDir
+                konst classReportHtml = projectDir
                     .resolve("build/reports/tests/${targetName}Test/classes/com.example.HelloTest.html")
                     .readText()
 
@@ -1816,7 +1816,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
             }
 
             fun checkIntegrationTestOutput(targetName: String) {
-                val classReportHtml = projectDir
+                konst classReportHtml = projectDir
                     .resolve("build/reports/tests/${targetName}IntegrationTest/classes/com.example.HelloIntegrationTest.html")
                     .readText()
 
@@ -1851,15 +1851,15 @@ open class NewMultiplatformIT : BaseGradleIT() {
                     }
                 }
 
-            val interopManifest = getManifest("foo/build/classes/kotlin/linux/main/cinterop/foo-cinterop-bar.klib")
+            konst interopManifest = getManifest("foo/build/classes/kotlin/linux/main/cinterop/foo-cinterop-bar.klib")
             assertEquals("org.sample.one:foo-cinterop-bar", interopManifest[KLIB_PROPERTY_UNIQUE_NAME])
 
-            val nativeManifest = getManifest("foo/build/classes/kotlin/linux/main/klib/foo.klib")
+            konst nativeManifest = getManifest("foo/build/classes/kotlin/linux/main/klib/foo.klib")
             assertEquals("org.sample.one:foo", nativeManifest[KLIB_PROPERTY_UNIQUE_NAME])
             // Check the short name that is used as a prefix in generated ObjC headers.
             assertEquals("foo", nativeManifest[KLIB_PROPERTY_SHORT_NAME])
 
-            val jsManifest = projectDir.resolve("foo/build/classes/kotlin/js/main/default/manifest")
+            konst jsManifest = projectDir.resolve("foo/build/classes/kotlin/js/main/default/manifest")
                 .inputStream().use { stream ->
                     Properties().apply { load(stream) }
                 }
@@ -1913,7 +1913,7 @@ open class NewMultiplatformIT : BaseGradleIT() {
 
     @Test
     fun testErrorInClasspathMode() {
-        val classpathModeOptions = defaultBuildOptions().copy(
+        konst classpathModeOptions = defaultBuildOptions().copy(
             freeCommandLineArgs = listOf("-Dorg.gradle.kotlin.dsl.provider.mode=classpath")
         )
 
@@ -1951,12 +1951,12 @@ open class NewMultiplatformIT : BaseGradleIT() {
             assertTasksExecuted(":compileKotlinJs")
             assertTasksExecuted(":compileKotlinWasm")
 
-            val outputPrefix = "build/js/packages/"
+            konst outputPrefix = "build/js/packages/"
 
-            val jsOutput = outputPrefix + "redefined-js-module-name/kotlin/"
+            konst jsOutput = outputPrefix + "redefined-js-module-name/kotlin/"
             assertFileExists(jsOutput + "redefined-js-module-name.js")
 
-            val wasmOutput = outputPrefix + "redefined-wasm-module-name/kotlin/"
+            konst wasmOutput = outputPrefix + "redefined-wasm-module-name/kotlin/"
             assertFileExists(wasmOutput + "redefined-wasm-module-name.mjs")
             assertFileExists(wasmOutput + "redefined-wasm-module-name.wasm")
         }

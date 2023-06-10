@@ -28,7 +28,7 @@ sealed class CirType {
     internal abstract fun appendDescriptionTo(builder: StringBuilder)
 }
 
-data class CirFlexibleType(val lowerBound: CirSimpleType, val upperBound: CirSimpleType) : CirType() {
+data class CirFlexibleType(konst lowerBound: CirSimpleType, konst upperBound: CirSimpleType) : CirType() {
     override fun appendDescriptionTo(builder: StringBuilder) {
         builder.append("lower = ")
         lowerBound.appendDescriptionTo(builder)
@@ -41,7 +41,7 @@ data class CirFlexibleType(val lowerBound: CirSimpleType, val upperBound: CirSim
  * Note: Annotations at simple types are not preserved. After commonization all annotations assigned to types will be lost.
  */
 sealed class CirSimpleType : CirType(), AnyType {
-    abstract override val isMarkedNullable: Boolean
+    abstract override konst isMarkedNullable: Boolean
 
     override fun appendDescriptionTo(builder: StringBuilder) {
         if (isMarkedNullable) builder.append('?')
@@ -49,7 +49,7 @@ sealed class CirSimpleType : CirType(), AnyType {
 }
 
 abstract class CirTypeParameterType : CirSimpleType() {
-    abstract val index: Int
+    abstract konst index: Int
 
     override fun appendDescriptionTo(builder: StringBuilder) {
         builder.append('#').append(index)
@@ -67,13 +67,13 @@ abstract class CirTypeParameterType : CirSimpleType() {
             )
         )
 
-        private val interner = Interner<CirTypeParameterTypeInternedImpl>()
+        private konst interner = Interner<CirTypeParameterTypeInternedImpl>()
     }
 }
 
 sealed class CirClassOrTypeAliasType : CirSimpleType(), AnyClassOrTypeAliasType {
-    abstract override val classifierId: CirEntityId
-    abstract val arguments: List<CirTypeProjection>
+    abstract override konst classifierId: CirEntityId
+    abstract konst arguments: List<CirTypeProjection>
 
     override fun appendDescriptionTo(builder: StringBuilder) = appendDescriptionTo(builder, shortNameOnly = false)
 
@@ -87,13 +87,13 @@ sealed class CirClassOrTypeAliasType : CirSimpleType(), AnyClassOrTypeAliasType 
 }
 
 abstract class CirClassType : CirClassOrTypeAliasType() {
-    abstract val outerType: CirClassType?
-    abstract val attachments: List<CirTypeAttachment>
+    abstract konst outerType: CirClassType?
+    abstract konst attachments: List<CirTypeAttachment>
 
     inline fun <reified T : CirTypeAttachment> getAttachment(): T? = attachments.firstIsInstanceOrNull()
 
     override fun appendDescriptionTo(builder: StringBuilder, shortNameOnly: Boolean) {
-        val outerType = outerType
+        konst outerType = outerType
         if (outerType != null) {
             outerType.appendDescriptionTo(builder)
             builder.append('.')
@@ -139,7 +139,7 @@ abstract class CirClassType : CirClassOrTypeAliasType() {
             )
         }
 
-        private val interner = Interner<CirClassTypeInternedImpl>()
+        private konst interner = Interner<CirClassTypeInternedImpl>()
     }
 }
 
@@ -150,7 +150,7 @@ abstract class CirClassType : CirClassOrTypeAliasType() {
  * expanded type represents right-hand side declaration that should be processed separately.
  */
 abstract class CirTypeAliasType : CirClassOrTypeAliasType() {
-    abstract val underlyingType: CirClassOrTypeAliasType
+    abstract konst underlyingType: CirClassOrTypeAliasType
 
     override fun appendDescriptionTo(builder: StringBuilder) {
         super.appendDescriptionTo(builder)
@@ -197,7 +197,7 @@ abstract class CirTypeAliasType : CirClassOrTypeAliasType() {
             )
         }
 
-        private val interner = Interner<CirTypeAliasTypeInternedImpl>()
+        private konst interner = Interner<CirTypeAliasTypeInternedImpl>()
     }
 }
 
@@ -207,7 +207,7 @@ object CirStarTypeProjection : CirTypeProjection() {
     override fun toString() = "*"
 }
 
-data class CirRegularTypeProjection(val projectionKind: Variance, val type: CirType) : CirTypeProjection() {
+data class CirRegularTypeProjection(konst projectionKind: Variance, konst type: CirType) : CirTypeProjection() {
     override fun toString() = buildString {
         append(projectionKind)
         if (isNotEmpty()) append(' ')
@@ -216,19 +216,19 @@ data class CirRegularTypeProjection(val projectionKind: Variance, val type: CirT
 }
 
 private data class CirTypeParameterTypeInternedImpl(
-    override val index: Int,
-    override val isMarkedNullable: Boolean
+    override konst index: Int,
+    override konst isMarkedNullable: Boolean
 ) : CirTypeParameterType()
 
 private class CirClassTypeInternedImpl(
-    override val classifierId: CirEntityId,
-    override val outerType: CirClassType?,
-    override val arguments: List<CirTypeProjection>,
-    override val isMarkedNullable: Boolean,
-    override val attachments: List<CirTypeAttachment> = emptyList(),
+    override konst classifierId: CirEntityId,
+    override konst outerType: CirClassType?,
+    override konst arguments: List<CirTypeProjection>,
+    override konst isMarkedNullable: Boolean,
+    override konst attachments: List<CirTypeAttachment> = emptyList(),
 ) : CirClassType() {
 
-    private val hashCode = hashCode(classifierId)
+    private konst hashCode = hashCode(classifierId)
         .appendHashCode(outerType)
         .appendHashCode(arguments)
         .appendHashCode(isMarkedNullable)
@@ -248,13 +248,13 @@ private class CirClassTypeInternedImpl(
 }
 
 private class CirTypeAliasTypeInternedImpl(
-    override val classifierId: CirEntityId,
-    override val underlyingType: CirClassOrTypeAliasType,
-    override val arguments: List<CirTypeProjection>,
-    override val isMarkedNullable: Boolean
+    override konst classifierId: CirEntityId,
+    override konst underlyingType: CirClassOrTypeAliasType,
+    override konst arguments: List<CirTypeProjection>,
+    override konst isMarkedNullable: Boolean
 ) : CirTypeAliasType() {
     // See also org.jetbrains.kotlin.types.KotlinType.cachedHashCode
-    private val hashCode = hashCode(classifierId)
+    private konst hashCode = hashCode(classifierId)
         .appendHashCode(underlyingType)
         .appendHashCode(arguments)
         .appendHashCode(isMarkedNullable)

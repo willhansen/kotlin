@@ -4,7 +4,7 @@ interface IterableIterator : Iterator<Int> {
     operator fun iterator(): Iterator<Int> = this
 }
 
-val iterator = object : IterableIterator {
+konst iterator = object : IterableIterator {
     override fun hasNext() = index < 5
     override fun next() = index++
 }

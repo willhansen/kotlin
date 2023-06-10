@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.KotlinComp
 import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.KotlinJsCompilerOptionsFactory
 
 class KotlinJsCompilationFactory internal constructor(
-    override val target: KotlinOnlyTarget<KotlinJsCompilation>
+    override konst target: KotlinOnlyTarget<KotlinJsCompilation>
 ) : KotlinCompilationFactory<KotlinJsCompilation> {
-    override val itemClass: Class<KotlinJsCompilation>
+    override konst itemClass: Class<KotlinJsCompilation>
         get() = KotlinJsCompilation::class.java
 
-    private val compilationImplFactory: KotlinCompilationImplFactory = KotlinCompilationImplFactory(
+    private konst compilationImplFactory: KotlinCompilationImplFactory = KotlinCompilationImplFactory(
         compilerOptionsFactory = KotlinJsCompilerOptionsFactory,
         compilationSourceSetsContainerFactory = JsCompilationSourceSetsContainerFactory,
         compilationDependencyConfigurationsFactory = JsKotlinCompilationDependencyConfigurationsFactory

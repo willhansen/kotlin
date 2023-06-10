@@ -4,4 +4,4 @@
 // DUMP_EXTERNAL_CLASS: kotlin/collections/IntIterator
 // TARGET_BACKEND: JVM_IR
 
-val test = IntArray(1).iterator()
+konst test = IntArray(1).iterator()

@@ -1,4 +1,4 @@
-open class C(val s: String) {
+open class C(konst s: String) {
     fun test(): String {
         return s
     }
@@ -14,7 +14,7 @@ class B {
 
 
 fun box() : String {
-    val b = B()
-    val result = b.foo()
+    konst b = B()
+    konst result = b.foo()
     return result
 }

@@ -1,8 +1,8 @@
 package a
 
 interface A {
-    val b: B
-    val nb: B?
+    konst b: B
+    konst nb: B?
 }
 
 interface B {

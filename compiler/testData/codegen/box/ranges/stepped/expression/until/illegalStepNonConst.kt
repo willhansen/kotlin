@@ -6,19 +6,19 @@ fun zero() = 0
 
 fun box(): String {
     assertFailsWith<IllegalArgumentException> {
-        val intProgression = 1 until 7
+        konst intProgression = 1 until 7
         for (i in intProgression step zero()) {
         }
     }
 
     assertFailsWith<IllegalArgumentException> {
-        val longProgression = 1L until 7L
+        konst longProgression = 1L until 7L
         for (i in longProgression step zero().toLong()) {
         }
     }
 
     assertFailsWith<IllegalArgumentException> {
-        val charProgression = 'a' until 'g'
+        konst charProgression = 'a' until 'g'
         for (i in charProgression step zero()) {
         }
     }

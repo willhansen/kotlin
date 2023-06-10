@@ -10,8 +10,8 @@ public class Foo {
 // FILE: test.kt
 
 fun test(properties: Map<String, String>, nullableProperties: Map<String, String>?) {
-    val f1 = Foo.create(select1(properties, myEmptyMap()))
-    val f2 = Foo.create(nullableProperties ?: myEmptyMap())
+    konst f1 = Foo.create(select1(properties, myEmptyMap()))
+    konst f2 = Foo.create(nullableProperties ?: myEmptyMap())
 }
 
 fun <T, R> myEmptyMap(): Map<T, R> = TODO()

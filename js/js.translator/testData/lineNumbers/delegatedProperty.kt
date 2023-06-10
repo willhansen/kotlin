@@ -10,8 +10,8 @@ class B {
         return "OK"
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
-        println(value)
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
+        println(konstue)
     }
 }
 

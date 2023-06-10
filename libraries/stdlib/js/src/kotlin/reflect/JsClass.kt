@@ -16,17 +16,17 @@ external interface JsClass<T : Any> {
     /**
      * Returns the unqualified name of the class represented by this instance.
      */
-    val name: String
+    konst name: String
 }
 
 /**
  * Obtains a constructor reference for the given `KClass`.
  */
-val <T : Any> KClass<T>.js: JsClass<T>
+konst <T : Any> KClass<T>.js: JsClass<T>
     get() = (this as KClassImpl<T>).jClass
 
 /**
  * Obtains a `KClass` instance for the given constructor reference.
  */
-val <T : Any> JsClass<T>.kotlin: KClass<T>
+konst <T : Any> JsClass<T>.kotlin: KClass<T>
     get() = getKClass(this)

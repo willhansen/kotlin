@@ -52,7 +52,7 @@ inline fun buildContextReceiverCopy(original: FirContextReceiver, init: FirConte
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirContextReceiverBuilder()
+    konst copyBuilder = FirContextReceiverBuilder()
     copyBuilder.source = original.source
     copyBuilder.typeRef = original.typeRef
     copyBuilder.customLabelName = original.customLabelName

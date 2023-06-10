@@ -10,10 +10,10 @@ inline fun <R> map(transform: () -> R): R {
 
 import test.*
 
-val Int.myInc
+konst Int.myInc
     get() = this + 1
 
 fun box(): String {
-    val result = map(2::myInc)
+    konst result = map(2::myInc)
     return if (result == 3) "OK" else "fail $result"
 }

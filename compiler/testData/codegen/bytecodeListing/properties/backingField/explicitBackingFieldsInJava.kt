@@ -5,12 +5,12 @@
 // FILE: AI.kt
 
 public interface AI {
-    val number: Number
+    konst number: Number
 }
 
 // FILE: AC.kt
 
 public class AC : AI {
-    final override val number: Number
+    final override konst number: Number
         field = 4
 }

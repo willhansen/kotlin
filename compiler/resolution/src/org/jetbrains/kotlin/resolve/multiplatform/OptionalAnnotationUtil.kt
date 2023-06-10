@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 
 object OptionalAnnotationUtil {
-    val OPTIONAL_EXPECTATION_FQ_NAME = FqName("kotlin.OptionalExpectation")
+    konst OPTIONAL_EXPECTATION_FQ_NAME = FqName("kotlin.OptionalExpectation")
 
     @JvmStatic
     fun shouldGenerateExpectClass(descriptor: ClassDescriptor): Boolean {

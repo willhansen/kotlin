@@ -21,17 +21,17 @@ import org.jetbrains.kotlin.serialization.deserialization.getName
 import org.jetbrains.kotlinx.serialization.compiler.diagnostic.SERIALIZABLE_PROPERTIES
 import org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationDescriptorSerializerPlugin
 
-class SerializableProperties(private val serializableClass: ClassDescriptor, val bindingContext: BindingContext) :
+class SerializableProperties(private konst serializableClass: ClassDescriptor, konst bindingContext: BindingContext) :
     ISerializableProperties<SerializableProperty> {
-    private val primaryConstructorParameters: List<ValueParameterDescriptor> =
-        serializableClass.unsubstitutedPrimaryConstructor?.valueParameters ?: emptyList()
+    private konst primaryConstructorParameters: List<ValueParameterDescriptor> =
+        serializableClass.unsubstitutedPrimaryConstructor?.konstueParameters ?: emptyList()
 
-    override val serializableProperties: List<SerializableProperty>
-    override val isExternallySerializable: Boolean
-    private val primaryConstructorProperties: Map<PropertyDescriptor, Boolean>
+    override konst serializableProperties: List<SerializableProperty>
+    override konst isExternallySerializable: Boolean
+    private konst primaryConstructorProperties: Map<PropertyDescriptor, Boolean>
 
     init {
-        val descriptorsSequence = serializableClass.unsubstitutedMemberScope.getContributedDescriptors(DescriptorKindFilter.VARIABLES)
+        konst descriptorsSequence = serializableClass.unsubstitutedMemberScope.getContributedDescriptors(DescriptorKindFilter.VARIABLES)
             .asSequence()
         // call to any BindingContext.get should be only AFTER MemberScope.getContributedDescriptors
         primaryConstructorProperties =
@@ -50,12 +50,12 @@ class SerializableProperties(private val serializableClass: ClassDescriptor, val
             .filter { it.kind == CallableMemberDescriptor.Kind.DECLARATION }
             .filter(::isPropSerializable)
             .map { prop ->
-                val declaresDefaultValue = prop.declaresDefaultValue()
+                konst declaresDefaultValue = prop.declaresDefaultValue()
                 SerializableProperty(
                     prop,
                     primaryConstructorProperties[prop] ?: false,
                     prop.hasBackingField(bindingContext) || (prop is DeserializedPropertyDescriptor && prop.backingField != null) // workaround for TODO in .hasBackingField
-                            // workaround for overridden getter (val) and getter+setter (var) - in this case hasBackingField returning false
+                            // workaround for overridden getter (konst) and getter+setter (var) - in this case hasBackingField returning false
                             // but initializer presents only for property with backing field
                             || declaresDefaultValue,
                     declaresDefaultValue
@@ -64,7 +64,7 @@ class SerializableProperties(private val serializableClass: ClassDescriptor, val
             .filterNot { it.transient }
             .partition { primaryConstructorProperties.contains(it.descriptor) }
             .run {
-                val supers = serializableClass.getSuperClassNotAny()
+                konst supers = serializableClass.getSuperClassNotAny()
                 if (supers == null || !supers.isInternalSerializable)
                     first + second
                 else
@@ -77,34 +77,34 @@ class SerializableProperties(private val serializableClass: ClassDescriptor, val
 
     }
 
-    override val serializableConstructorProperties: List<SerializableProperty> =
+    override konst serializableConstructorProperties: List<SerializableProperty> =
         serializableProperties.asSequence()
             .filter { primaryConstructorProperties.contains(it.descriptor) }
             .toList()
 
-    override val serializableStandaloneProperties: List<SerializableProperty> =
+    override konst serializableStandaloneProperties: List<SerializableProperty> =
         serializableProperties.minus(serializableConstructorProperties)
 
-    val size = serializableProperties.size
+    konst size = serializableProperties.size
     operator fun get(index: Int) = serializableProperties[index]
     operator fun iterator() = serializableProperties.iterator()
 
-    val primaryConstructorWithDefaults = serializableClass.unsubstitutedPrimaryConstructor
-        ?.original?.valueParameters?.any { it.declaresDefaultValue() } ?: false
+    konst primaryConstructorWithDefaults = serializableClass.unsubstitutedPrimaryConstructor
+        ?.original?.konstueParameters?.any { it.declaresDefaultValue() } ?: false
 }
 
 fun PropertyDescriptor.declaresDefaultValue(): Boolean {
-    when (val declaration = this.source.getPsi()) {
+    when (konst declaration = this.source.getPsi()) {
         is KtDeclarationWithInitializer -> return declaration.initializer != null
         is KtParameter -> return declaration.defaultValue != null
         is Any -> return false // Not-null check
     }
     // PSI is null, property is from another module
     if (this !is DeserializedPropertyDescriptor) return false
-    val myClassCtor = (this.containingDeclaration as? ClassDescriptor)?.unsubstitutedPrimaryConstructor ?: return false
-    // If property is a constructor parameter, check parameter default value
+    konst myClassCtor = (this.containingDeclaration as? ClassDescriptor)?.unsubstitutedPrimaryConstructor ?: return false
+    // If property is a constructor parameter, check parameter default konstue
     // (serializable classes always have parameters-as-properties, so no name clash here)
-    if (myClassCtor.valueParameters.find { it.name == this.name }?.declaresDefaultValue() == true) return true
+    if (myClassCtor.konstueParameters.find { it.name == this.name }?.declaresDefaultValue() == true) return true
     // If it is a body property, then it is likely to have initializer when getter is not specified
     // note this approach is not working well if we have smth like `get() = field`, but such cases on cross-module boundaries
     // should be very marginal. If we want to solve them, we need to add protobuf metadata extension.
@@ -116,15 +116,15 @@ fun BindingContext.serializablePropertiesFor(
     classDescriptor: ClassDescriptor,
     serializationDescriptorSerializer: SerializationDescriptorSerializerPlugin? = null
 ): SerializableProperties {
-    val props = this.get(SERIALIZABLE_PROPERTIES, classDescriptor) ?: SerializableProperties(classDescriptor, this)
+    konst props = this.get(SERIALIZABLE_PROPERTIES, classDescriptor) ?: SerializableProperties(classDescriptor, this)
     serializationDescriptorSerializer?.putIfNeeded(classDescriptor, props)
     return props
 }
 
 fun <P : ISerializableProperty> restoreCorrectOrderFromClassProtoExtension(descriptor: ClassDescriptor, props: List<P>): List<P> {
     if (descriptor !is DeserializedClassDescriptor) return props
-    val correctOrder: List<Name> = descriptor.classProto.getExtension(SerializationPluginMetadataExtensions.propertiesNamesInProgramOrder)
+    konst correctOrder: List<Name> = descriptor.classProto.getExtension(SerializationPluginMetadataExtensions.propertiesNamesInProgramOrder)
         .map { descriptor.c.nameResolver.getName(it) }
-    val propsMap = props.associateBy { it.originalDescriptorName }
+    konst propsMap = props.associateBy { it.originalDescriptorName }
     return correctOrder.map { propsMap.getValue(it) }
 }

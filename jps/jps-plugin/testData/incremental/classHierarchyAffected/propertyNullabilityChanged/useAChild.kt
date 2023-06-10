@@ -1,5 +1,5 @@
 package foo
 
 fun useAChild(a: AChild) {
-    val o: Any = a.x
+    konst o: Any = a.x
 }

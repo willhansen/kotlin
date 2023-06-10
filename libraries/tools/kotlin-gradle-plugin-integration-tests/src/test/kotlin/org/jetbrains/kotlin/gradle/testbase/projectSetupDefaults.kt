@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.testbase
 import org.intellij.lang.annotations.Language
 
 @Language("Groovy")
-internal val DEFAULT_GROOVY_SETTINGS_FILE =
+internal konst DEFAULT_GROOVY_SETTINGS_FILE =
     """
     pluginManagement {
         repositories {
@@ -66,7 +66,7 @@ internal val DEFAULT_GROOVY_SETTINGS_FILE =
     """.trimIndent()
 
 @Language("kts")
-internal val DEFAULT_KOTLIN_SETTINGS_FILE =
+internal konst DEFAULT_KOTLIN_SETTINGS_FILE =
     """
     pluginManagement {
         repositories {
@@ -76,9 +76,9 @@ internal val DEFAULT_KOTLIN_SETTINGS_FILE =
             gradlePluginPortal()
         }
 
-        val kotlin_version: String by settings
-        val android_tools_version: String by settings
-        val test_fixes_version: String by settings
+        konst kotlin_version: String by settings
+        konst android_tools_version: String by settings
+        konst test_fixes_version: String by settings
         plugins {
             id("org.jetbrains.kotlin.jvm") version kotlin_version
             id("org.jetbrains.kotlin.kapt") version kotlin_version

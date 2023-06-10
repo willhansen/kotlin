@@ -27,12 +27,12 @@ namespace with_replacement {
 constexpr uint32_t default_replacement = 0xfffd;
 
 /*
- * Returns the next codepoint replacing any invalid sequence with the replacement codepoint.
+ * Returns the next codepoint replacing any inkonstid sequence with the replacement codepoint.
  */
 template<typename octet_iterator>
 uint32_t next(octet_iterator &it, const octet_iterator end, uint32_t replacement) {
     uint32_t cp = 0;
-    internal::utf_error err_code = utf8::internal::validate_next(it, end, cp);
+    internal::utf_error err_code = utf8::internal::konstidate_next(it, end, cp);
     switch (err_code) {
         case internal::UTF8_OK :
             return cp;
@@ -53,9 +53,9 @@ uint32_t next(octet_iterator &it, const octet_iterator end, uint32_t replacement
 
 /**
  * Calculates a count of characters needed to represent the string from first to last in UTF-16
- * taking into account surrogate symbols and invalid sequences.
- * Assumes that all invalid sequences in the input will be replaced with `replacement`
- * so each invalid sequence increases the result by 1 or 2 depending on `replacement`.
+ * taking into account surrogate symbols and inkonstid sequences.
+ * Assumes that all inkonstid sequences in the input will be replaced with `replacement`
+ * so each inkonstid sequence increases the result by 1 or 2 depending on `replacement`.
  */
 template<typename octet_iterator>
 uint32_t utf16_length(octet_iterator first,
@@ -97,13 +97,13 @@ octet_iterator utf16to8(u16bit_iterator start,
                     cp = (cp << 10) + trail_surrogate + internal::SURROGATE_OFFSET;
                     start++;
                 } else {
-                    cp = replacement; // Invalid input: lone lead surrogate.
+                    cp = replacement; // Inkonstid input: lone lead surrogate.
                 }
             } else {
-                cp = replacement; // Invalid input: lone lead surrogate at the end of input.
+                cp = replacement; // Inkonstid input: lone lead surrogate at the end of input.
             }
         } else if (utf8::internal::is_trail_surrogate(cp)) {
-            cp = replacement; // Invalid input: lone trail surrogate
+            cp = replacement; // Inkonstid input: lone trail surrogate
         }
         result = utf8::unchecked::append(cp, result);
     }
@@ -123,7 +123,7 @@ u16bit_iterator utf8to16(octet_iterator start,
                          u16bit_iterator result,
                          const uint32_t replacement) {
     while (start != end) {
-        // The `next` method takes care about replacing invalid sequences.
+        // The `next` method takes care about replacing inkonstid sequences.
         uint32_t cp = next(start, end, replacement);
         if (cp > 0xffff) { //make a surrogate pair
             *result++ = static_cast<uint16_t>((cp >> 10) + internal::LEAD_OFFSET);

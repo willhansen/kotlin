@@ -5,7 +5,7 @@ open annotation class A : Annotation {
 
   }
 
-  val klass: KClass<*>
+  konst klass: KClass<*>
     field = klass
     get
 

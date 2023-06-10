@@ -41,14 +41,14 @@ internal class JvmInlineClassLowering(
     context: JvmBackendContext,
     scopeStack: MutableList<ScopeWithIr>,
 ) : JvmValueClassAbstractLowering(context, scopeStack) {
-    override val replacements: MemoizedValueClassAbstractReplacements
+    override konst replacements: MemoizedValueClassAbstractReplacements
         get() = context.inlineClassReplacements
 
-    private val valueMap = mutableMapOf<IrValueSymbol, IrValueDeclaration>()
+    private konst konstueMap = mutableMapOf<IrValueSymbol, IrValueDeclaration>()
 
     override fun addBindingsFor(original: IrFunction, replacement: IrFunction) {
         for ((param, newParam) in original.explicitParameters.zip(replacement.explicitParameters)) {
-            valueMap[param.symbol] = newParam
+            konstueMap[param.symbol] = newParam
         }
     }
 
@@ -69,7 +69,7 @@ internal class JvmInlineClassLowering(
 
     override fun IrClass.isSpecificLoweringLogicApplicable(): Boolean = isSingleFieldValueClass
 
-    override val specificMangle: SpecificMangle
+    override konst specificMangle: SpecificMangle
         get() = SpecificMangle.Inline
     override fun visitClassNewDeclarationsWhenParallel(declaration: IrDeclaration) = Unit
 
@@ -99,7 +99,7 @@ internal class JvmInlineClassLowering(
     }
 
     override fun handleSpecificNewClass(declaration: IrClass) {
-        val irConstructor = declaration.primaryConstructor!!
+        konst irConstructor = declaration.primaryConstructor!!
         // The field getter is used by reflection and cannot be removed here unless it is internal.
         declaration.declarations.removeIf {
             it == irConstructor || (it is IrFunction && it.isInlineClassFieldGetter && !it.visibility.isPublicAPI)
@@ -111,10 +111,10 @@ internal class JvmInlineClassLowering(
         addJvmInlineAnnotation(declaration)
     }
 
-    private fun addJvmInlineAnnotation(valueClass: IrClass) {
-        if (valueClass.hasAnnotation(JVM_INLINE_ANNOTATION_FQ_NAME)) return
-        val constructor = context.ir.symbols.jvmInlineAnnotation.constructors.first()
-        valueClass.annotations = valueClass.annotations + IrConstructorCallImpl.fromSymbolOwner(
+    private fun addJvmInlineAnnotation(konstueClass: IrClass) {
+        if (konstueClass.hasAnnotation(JVM_INLINE_ANNOTATION_FQ_NAME)) return
+        konst constructor = context.ir.symbols.jvmInlineAnnotation.constructors.first()
+        konstueClass.annotations = konstueClass.annotations + IrConstructorCallImpl.fromSymbolOwner(
             constructor.owner.returnType,
             constructor
         )
@@ -135,12 +135,12 @@ internal class JvmInlineClassLowering(
     // unboxed arguments. We remove the original constructor.
     // Primary constructors' case is handled at the start of transformFunctionFlat
     override fun transformSecondaryConstructorFlat(constructor: IrConstructor, replacement: IrSimpleFunction): List<IrDeclaration> {
-        replacement.valueParameters.forEach { it.transformChildrenVoid() }
+        replacement.konstueParameters.forEach { it.transformChildrenVoid() }
         replacement.body = context.createIrBuilder(replacement.symbol, replacement.startOffset, replacement.endOffset).irBlockBody(
             replacement
         ) {
-            val thisVar = irTemporary(irType = replacement.returnType, nameHint = "\$this")
-            valueMap[constructor.constructedClass.thisReceiver!!.symbol] = thisVar
+            konst thisVar = irTemporary(irType = replacement.returnType, nameHint = "\$this")
+            konstueMap[constructor.constructedClass.thisReceiver!!.symbol] = thisVar
 
             constructor.body?.statements?.forEach { statement ->
                 +statement
@@ -160,11 +160,11 @@ internal class JvmInlineClassLowering(
                         }
 
                         // A constructor body has type unit and may contain explicit return statements.
-                        // These early returns may have side-effects however, so we still have to evaluate
+                        // These early returns may have side-effects however, so we still have to ekonstuate
                         // the return expression. Afterwards we return "thisVar".
-                        // For example, the following is a valid inline class declaration.
+                        // For example, the following is a konstid inline class declaration.
                         //
-                        //     inline class Foo(val x: String) {
+                        //     inline class Foo(konst x: String) {
                         //       constructor(y: Int) : this(y.toString()) {
                         //         if (y == 0) return throw java.lang.IllegalArgumentException()
                         //         if (y == 1) return
@@ -177,7 +177,7 @@ internal class JvmInlineClassLowering(
                                 return expression
 
                             return irReturn(irBlock(expression.startOffset, expression.endOffset) {
-                                +expression.value
+                                +expression.konstue
                                 +irGet(thisVar)
                             })
                         }
@@ -198,10 +198,10 @@ internal class JvmInlineClassLowering(
         replacement: IrSimpleFunction
     ) {
         copyTypeArgumentsFrom(original)
-        val valueParameterMap = originalFunction.explicitParameters.zip(replacement.explicitParameters).toMap()
+        konst konstueParameterMap = originalFunction.explicitParameters.zip(replacement.explicitParameters).toMap()
         for ((parameter, argument) in typedArgumentList(originalFunction, original)) {
             if (argument == null) continue
-            val newParameter = valueParameterMap.getValue(parameter)
+            konst newParameter = konstueParameterMap.getValue(parameter)
             putArgument(replacement, newParameter, argument.transform(this@JvmInlineClassLowering, null))
         }
     }
@@ -210,8 +210,8 @@ internal class JvmInlineClassLowering(
         if (expression.origin == InlineClassAbi.UNMANGLED_FUNCTION_REFERENCE)
             return super.visitFunctionReference(expression)
 
-        val function = expression.symbol.owner
-        val replacement = context.inlineClassReplacements.getReplacementFunction(function)
+        konst function = expression.symbol.owner
+        konst replacement = context.inlineClassReplacements.getReplacementFunction(function)
             ?: return super.visitFunctionReference(expression)
 
         // In case of callable reference to inline class constructor,
@@ -220,20 +220,20 @@ internal class JvmInlineClassLowering(
         return IrFunctionReferenceImpl(
             expression.startOffset, expression.endOffset, expression.type,
             replacement.symbol, function.typeParameters.size,
-            replacement.valueParameters.size, expression.reflectionTarget, expression.origin
+            replacement.konstueParameters.size, expression.reflectionTarget, expression.origin
         ).apply {
             buildReplacement(function, expression, replacement)
         }.copyAttributes(expression)
     }
 
     override fun visitFunctionAccess(expression: IrFunctionAccessExpression): IrExpression {
-        val function = expression.symbol.owner
-        val replacement = context.inlineClassReplacements.getReplacementFunction(function)
+        konst function = expression.symbol.owner
+        konst replacement = context.inlineClassReplacements.getReplacementFunction(function)
             ?: return super.visitFunctionAccess(expression)
 
         return IrCallImpl(
             expression.startOffset, expression.endOffset, function.returnType.substitute(expression.typeSubstitutionMap),
-            replacement.symbol, replacement.typeParameters.size, replacement.valueParameters.size,
+            replacement.symbol, replacement.typeParameters.size, replacement.konstueParameters.size,
             expression.origin, (expression as? IrCall)?.superQualifierSymbol
         ).apply {
             buildReplacement(function, expression, replacement)
@@ -242,7 +242,7 @@ internal class JvmInlineClassLowering(
 
     private fun coerceInlineClasses(argument: IrExpression, from: IrType, to: IrType, skipCast: Boolean = false): IrExpression {
         return IrCallImpl.fromSymbolOwner(UNDEFINED_OFFSET, UNDEFINED_OFFSET, to, context.ir.symbols.unsafeCoerceIntrinsic).apply {
-            val underlyingType = from.erasedUpperBound.inlineClassRepresentation?.underlyingType
+            konst underlyingType = from.erasedUpperBound.inlineClassRepresentation?.underlyingType
             if (underlyingType?.isTypeParameter() == true && !skipCast) {
                 putTypeArgument(0, from)
                 putTypeArgument(1, underlyingType)
@@ -269,8 +269,8 @@ internal class JvmInlineClassLowering(
             return null
 
         // We don't specialize calls when both arguments are boxed.
-        val leftIsUnboxed = left.type.unboxInlineClass() != left.type
-        val rightIsUnboxed = right.type.unboxInlineClass() != right.type
+        konst leftIsUnboxed = left.type.unboxInlineClass() != left.type
+        konst rightIsUnboxed = right.type.unboxInlineClass() != right.type
         if (!leftIsUnboxed && !rightIsUnboxed)
             return null
 
@@ -280,11 +280,11 @@ internal class JvmInlineClassLowering(
             if (left.type.isUnsigned() && right.type.isUnsigned() && rightIsUnboxed)
                 return irEquals(left.coerceToUnboxed(), right.coerceToUnboxed())
 
-            val leftOperandClass = left.type.classOrNull!!.owner
-            val equalsMethod = if (rightIsUnboxed && leftOperandClass == right.type.classOrNull!!.owner) {
+            konst leftOperandClass = left.type.classOrNull!!.owner
+            konst equalsMethod = if (rightIsUnboxed && leftOperandClass == right.type.classOrNull!!.owner) {
                 this@JvmInlineClassLowering.context.inlineClassReplacements.getSpecializedEqualsMethod(leftOperandClass, context.irBuiltIns)
             } else {
-                val equals = leftOperandClass.functions.single { it.name.asString() == "equals" && it.overriddenSymbols.isNotEmpty() }
+                konst equals = leftOperandClass.functions.single { it.name.asString() == "equals" && it.overriddenSymbols.isNotEmpty() }
                 this@JvmInlineClassLowering.context.inlineClassReplacements.getReplacementFunction(equals)!!
             }
 
@@ -294,19 +294,19 @@ internal class JvmInlineClassLowering(
             }
         }
 
-        val leftNullCheck = left.type.isNullable()
-        val rightNullCheck = rightIsUnboxed && right.type.isNullable() // equals-impl has a nullable second argument
+        konst leftNullCheck = left.type.isNullable()
+        konst rightNullCheck = rightIsUnboxed && right.type.isNullable() // equals-impl has a nullable second argument
         return if (leftNullCheck || rightNullCheck) {
             irBlock {
-                val leftVal = if (left is IrGetValue) left.symbol.owner else irTemporary(left)
-                val rightVal = if (right is IrGetValue) right.symbol.owner else irTemporary(right)
+                konst leftVal = if (left is IrGetValue) left.symbol.owner else irTemporary(left)
+                konst rightVal = if (right is IrGetValue) right.symbol.owner else irTemporary(right)
 
-                val equalsCall = equals(
+                konst equalsCall = equals(
                     if (leftNullCheck) irImplicitCast(irGet(leftVal), left.type.makeNotNull()) else irGet(leftVal),
                     if (rightNullCheck) irImplicitCast(irGet(rightVal), right.type.makeNotNull()) else irGet(rightVal)
                 )
 
-                val equalsRight = if (rightNullCheck) {
+                konst equalsRight = if (rightNullCheck) {
                     irIfNull(context.irBuiltIns.booleanType, irGet(rightVal), irFalse(), equalsCall)
                 } else {
                     equalsCall
@@ -328,14 +328,14 @@ internal class JvmInlineClassLowering(
             // Getting the underlying field of an inline class merely changes the IR type,
             // since the underlying representations are the same.
             expression.symbol.owner.isInlineClassFieldGetter -> {
-                val arg = expression.dispatchReceiver!!.transform(this, null)
+                konst arg = expression.dispatchReceiver!!.transform(this, null)
                 coerceInlineClasses(arg, expression.symbol.owner.dispatchReceiverParameter!!.type, expression.type)
             }
-            // Specialize calls to equals when the left argument is a value of inline class type.
+            // Specialize calls to equals when the left argument is a konstue of inline class type.
             expression.isEqEqCallOnInlineClass || expression.isEqualsMethodCallOnInlineClass -> {
                 expression.transformChildrenVoid()
-                val leftOp: IrExpression
-                val rightOp: IrExpression
+                konst leftOp: IrExpression
+                konst rightOp: IrExpression
                 if (expression.isEqEqCallOnInlineClass) {
                     leftOp = expression.getValueArgument(0)!!
                     rightOp = expression.getValueArgument(1)!!
@@ -351,23 +351,23 @@ internal class JvmInlineClassLowering(
                 super.visitCall(expression)
         }
 
-    private val IrCall.isEqualsMethodCallOnInlineClass: Boolean
+    private konst IrCall.isEqualsMethodCallOnInlineClass: Boolean
         get() {
             if (!symbol.owner.isEquals()) return false
-            val receiverClass = dispatchReceiver?.type?.classOrNull?.owner
+            konst receiverClass = dispatchReceiver?.type?.classOrNull?.owner
             return receiverClass?.canUseSpecializedEqMethod ?: false
         }
 
-    private val IrCall.isEqEqCallOnInlineClass: Boolean
+    private konst IrCall.isEqEqCallOnInlineClass: Boolean
         get() {
-            // Note that reference equality (x === y) is not allowed on values of inline class type,
+            // Note that reference equality (x === y) is not allowed on konstues of inline class type,
             // so it is enough to check for eqeq.
             if (symbol != context.irBuiltIns.eqeqSymbol) return false
-            val leftOperandClass = getValueArgument(0)?.type?.classOrNull?.owner
+            konst leftOperandClass = getValueArgument(0)?.type?.classOrNull?.owner
             return leftOperandClass?.canUseSpecializedEqMethod ?: false
         }
 
-    private val IrClass.canUseSpecializedEqMethod: Boolean
+    private konst IrClass.canUseSpecializedEqMethod: Boolean
         get() {
             if (!isSingleFieldValueClass) return false
             // Before version 1.4, we cannot rely on the Result.equals-impl0 method
@@ -376,14 +376,14 @@ internal class JvmInlineClassLowering(
         }
 
     override fun visitGetField(expression: IrGetField): IrExpression {
-        val field = expression.symbol.owner
-        val parent = field.parent
+        konst field = expression.symbol.owner
+        konst parent = field.parent
         if (field.origin == IrDeclarationOrigin.PROPERTY_BACKING_FIELD &&
             parent is IrClass &&
             parent.isSingleFieldValueClass &&
             field.name == parent.inlineClassFieldName
         ) {
-            val receiver = expression.receiver!!.transform(this, null)
+            konst receiver = expression.receiver!!.transform(this, null)
             // If we get the field of nullable variable, we can be sure, that type is not null,
             // since we first generate null check.
             return coerceInlineClasses(receiver, receiver.type.makeNotNull(), field.type)
@@ -392,7 +392,7 @@ internal class JvmInlineClassLowering(
     }
 
     override fun visitGetValue(expression: IrGetValue): IrExpression {
-        valueMap[expression.symbol]?.let {
+        konstueMap[expression.symbol]?.let {
             return IrGetValueImpl(
                 expression.startOffset, expression.endOffset,
                 it.type, it.symbol, expression.origin
@@ -402,51 +402,51 @@ internal class JvmInlineClassLowering(
     }
 
     override fun visitSetValue(expression: IrSetValue): IrExpression {
-        valueMap[expression.symbol]?.let {
+        konstueMap[expression.symbol]?.let {
             return IrSetValueImpl(
                 expression.startOffset, expression.endOffset,
                 it.type, it.symbol,
-                expression.value.transform(this@JvmInlineClassLowering, null),
+                expression.konstue.transform(this@JvmInlineClassLowering, null),
                 expression.origin
             )
         }
         return super.visitSetValue(expression)
     }
 
-    private fun buildPrimaryInlineClassConstructor(valueClass: IrClass, irConstructor: IrConstructor) {
+    private fun buildPrimaryInlineClassConstructor(konstueClass: IrClass, irConstructor: IrConstructor) {
         // Add the default primary constructor
-        valueClass.addConstructor {
+        konstueClass.addConstructor {
             updateFrom(irConstructor)
             visibility = DescriptorVisibilities.PRIVATE
             origin = JvmLoweredDeclarationOrigin.SYNTHETIC_INLINE_CLASS_MEMBER
             returnType = irConstructor.returnType
         }.apply {
             // Don't create a default argument stub for the primary constructor
-            irConstructor.valueParameters.forEach { it.defaultValue = null }
+            irConstructor.konstueParameters.forEach { it.defaultValue = null }
             copyParameterDeclarationsFrom(irConstructor)
             annotations = irConstructor.annotations
             body = context.createIrBuilder(this.symbol).irBlockBody(this) {
                 +irDelegatingConstructorCall(context.irBuiltIns.anyClass.owner.constructors.single())
                 +irSetField(
-                    irGet(valueClass.thisReceiver!!),
-                    getInlineClassBackingField(valueClass),
-                    irGet(this@apply.valueParameters[0])
+                    irGet(konstueClass.thisReceiver!!),
+                    getInlineClassBackingField(konstueClass),
+                    irGet(this@apply.konstueParameters[0])
                 )
             }
         }
 
         // Add a static bridge method to the primary constructor. This contains
         // null-checks, default arguments, and anonymous initializers.
-        val function = context.inlineClassReplacements.getReplacementFunction(irConstructor)!!
+        konst function = context.inlineClassReplacements.getReplacementFunction(irConstructor)!!
 
-        val initBlocks = valueClass.declarations.filterIsInstance<IrAnonymousInitializer>()
+        konst initBlocks = konstueClass.declarations.filterIsInstance<IrAnonymousInitializer>()
             .filterNot { it.isStatic }
 
-        function.valueParameters.forEach { it.transformChildrenVoid() }
+        function.konstueParameters.forEach { it.transformChildrenVoid() }
         function.body = context.createIrBuilder(function.symbol).irBlockBody {
-            val argument = function.valueParameters[0]
-            val thisValue = irTemporary(coerceInlineClasses(irGet(argument), argument.type, function.returnType, skipCast = true))
-            valueMap[valueClass.thisReceiver!!.symbol] = thisValue
+            konst argument = function.konstueParameters[0]
+            konst thisValue = irTemporary(coerceInlineClasses(irGet(argument), argument.type, function.returnType, skipCast = true))
+            konstueMap[konstueClass.thisReceiver!!.symbol] = thisValue
             for (initBlock in initBlocks) {
                 for (stmt in initBlock.body.statements) {
                     +stmt.transformStatement(this@JvmInlineClassLowering).patchDeclarationParents(function)
@@ -455,51 +455,51 @@ internal class JvmInlineClassLowering(
             +irReturn(irGet(thisValue))
         }
 
-        valueClass.declarations.removeAll(initBlocks)
-        valueClass.declarations += function
+        konstueClass.declarations.removeAll(initBlocks)
+        konstueClass.declarations += function
     }
 
-    private fun buildBoxFunction(valueClass: IrClass) {
-        val function = context.inlineClassReplacements.getBoxFunction(valueClass)
+    private fun buildBoxFunction(konstueClass: IrClass) {
+        konst function = context.inlineClassReplacements.getBoxFunction(konstueClass)
         with(context.createIrBuilder(function.symbol)) {
             function.body = irExprBody(
-                irCall(valueClass.primaryConstructor!!.symbol).apply {
+                irCall(konstueClass.primaryConstructor!!.symbol).apply {
                     passTypeArgumentsFrom(function)
-                    putValueArgument(0, irGet(function.valueParameters[0]))
+                    putValueArgument(0, irGet(function.konstueParameters[0]))
                 }
             )
         }
-        valueClass.declarations += function
+        konstueClass.declarations += function
     }
 
     private fun buildUnboxFunction(irClass: IrClass) {
-        val function = context.inlineClassReplacements.getUnboxFunction(irClass)
-        val field = getInlineClassBackingField(irClass)
+        konst function = context.inlineClassReplacements.getUnboxFunction(irClass)
+        konst field = getInlineClassBackingField(irClass)
 
         function.body = context.createIrBuilder(function.symbol).irBlockBody {
-            val thisVal = irGet(function.dispatchReceiverParameter!!)
+            konst thisVal = irGet(function.dispatchReceiverParameter!!)
             +irReturn(irGetField(thisVal, field))
         }
 
         irClass.declarations += function
     }
 
-    private fun buildSpecializedEqualsMethodIfNeeded(valueClass: IrClass) {
-        val function = context.inlineClassReplacements.getSpecializedEqualsMethod(valueClass, context.irBuiltIns)
+    private fun buildSpecializedEqualsMethodIfNeeded(konstueClass: IrClass) {
+        konst function = context.inlineClassReplacements.getSpecializedEqualsMethod(konstueClass, context.irBuiltIns)
         // Return if we have already built specialized equals as static replacement of typed equals
         if (function.body != null) return
-        val left = function.valueParameters[0]
-        val right = function.valueParameters[1]
-        val type = left.type.unboxInlineClass()
+        konst left = function.konstueParameters[0]
+        konst right = function.konstueParameters[1]
+        konst type = left.type.unboxInlineClass()
 
-        val untypedEquals = valueClass.functions.single { it.isEquals() }
+        konst untypedEquals = konstueClass.functions.single { it.isEquals() }
 
-        function.body = context.createIrBuilder(valueClass.symbol).run {
-            val context = this@JvmInlineClassLowering.context
-            val underlyingType = getInlineClassUnderlyingType(valueClass)
+        function.body = context.createIrBuilder(konstueClass.symbol).run {
+            konst context = this@JvmInlineClassLowering.context
+            konst underlyingType = getInlineClassUnderlyingType(konstueClass)
             irExprBody(
                 if (untypedEquals.origin == IrDeclarationOrigin.DEFINED) {
-                    val boxFunction = context.inlineClassReplacements.getBoxFunction(valueClass)
+                    konst boxFunction = context.inlineClassReplacements.getBoxFunction(konstueClass)
 
                     fun irBox(expr: IrExpression) = irCall(boxFunction).apply { putValueArgument(0, expr) }
 
@@ -508,10 +508,10 @@ internal class JvmInlineClassLowering(
                         putValueArgument(0, irBox(coerceInlineClasses(irGet(right), right.type, underlyingType)))
                     }
                 } else {
-                    val underlyingClass = underlyingType.getClass()
-                    // We can't directly compare unboxed values of underlying inline class as this class can have custom equals
+                    konst underlyingClass = underlyingType.getClass()
+                    // We can't directly compare unboxed konstues of underlying inline class as this class can have custom equals
                     if (underlyingClass?.isSingleFieldValueClass == true && !underlyingType.isNullable()) {
-                        val underlyingClassEq =
+                        konst underlyingClassEq =
                             context.inlineClassReplacements.getSpecializedEqualsMethod(underlyingClass, context.irBuiltIns)
                         irCall(underlyingClassEq).apply {
                             putValueArgument(0, coerceInlineClasses(irGet(left), left.type, underlyingType))
@@ -524,7 +524,7 @@ internal class JvmInlineClassLowering(
             )
         }
 
-        valueClass.declarations += function
+        konstueClass.declarations += function
     }
 
 }

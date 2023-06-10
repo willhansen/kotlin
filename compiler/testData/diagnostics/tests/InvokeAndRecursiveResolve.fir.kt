@@ -5,14 +5,14 @@ fun test() = 3
 fun <T> proxy(t: T) = t
 
 class A {
-    val test = test()
+    konst test = test()
 }
 
 class B {
-    val test = proxy(test())
+    konst test = proxy(test())
 }
 
 class C {
-    val bar = test()
-    val test = <!UNRESOLVED_REFERENCE!>bar<!>()
+    konst bar = test()
+    konst test = <!UNRESOLVED_REFERENCE!>bar<!>()
 }

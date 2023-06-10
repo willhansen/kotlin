@@ -17,27 +17,27 @@ import org.jetbrains.kotlin.renderer.DescriptorRenderer
 import org.jetbrains.kotlin.resolve.source.getPsi
 
 internal class ObjCExportHeaderGeneratorImpl(
-        val context: PhaseContext,
+        konst context: PhaseContext,
         moduleDescriptors: List<ModuleDescriptor>,
         mapper: ObjCExportMapper,
         namer: ObjCExportNamer,
         objcGenerics: Boolean
 ) : ObjCExportHeaderGenerator(moduleDescriptors, mapper, namer, objcGenerics, ProblemCollector(context)) {
 
-    override val shouldExportKDoc = context.shouldExportKDoc()
+    override konst shouldExportKDoc = context.shouldExportKDoc()
 
-    private class ProblemCollector(val context: PhaseContext) : ObjCExportProblemCollector {
+    private class ProblemCollector(konst context: PhaseContext) : ObjCExportProblemCollector {
         override fun reportWarning(text: String) {
             context.reportCompilationWarning(text)
         }
 
         override fun reportWarning(method: FunctionDescriptor, text: String) {
-            val psi = (method as? DeclarationDescriptorWithSource)?.source?.getPsi()
+            konst psi = (method as? DeclarationDescriptorWithSource)?.source?.getPsi()
                     ?: return reportWarning(
                             "$text\n    (at ${DescriptorRenderer.COMPACT_WITH_SHORT_TYPES.render(method)})"
                     )
 
-            val location = MessageUtil.psiElementToMessageLocation(psi)
+            konst location = MessageUtil.psiElementToMessageLocation(psi)
 
             context.messageCollector.report(CompilerMessageSeverity.WARNING, text, location)
         }

@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.fir.visitors.transformSingle
 
 abstract class FirResolvedArgumentList : FirAbstractArgumentList() {
-    abstract override val source: KtSourceElement?
-    abstract val mapping: LinkedHashMap<FirExpression, FirValueParameter>
+    abstract override konst source: KtSourceElement?
+    abstract konst mapping: LinkedHashMap<FirExpression, FirValueParameter>
 
-    override val arguments: List<FirExpression>
+    override konst arguments: List<FirExpression>
         get() = mapping.keys.toList()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
@@ -38,7 +38,7 @@ abstract class FirResolvedArgumentList : FirAbstractArgumentList() {
 
 
 internal class FirResolvedArgumentListImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     mapping: LinkedHashMap<FirExpression, FirValueParameter>
 ) : FirResolvedArgumentList() {
 
@@ -64,7 +64,7 @@ internal class FirResolvedArgumentListForErrorCall(
         return _mapping.filterValues { it != null } as LinkedHashMap<FirExpression, FirValueParameter>
     }
 
-    override val arguments: List<FirExpression>
+    override konst arguments: List<FirExpression>
         get() = _mapping.keys.toList()
 
     override fun <D> transformArguments(transformer: FirTransformer<D>, data: D): FirResolvedArgumentListForErrorCall {

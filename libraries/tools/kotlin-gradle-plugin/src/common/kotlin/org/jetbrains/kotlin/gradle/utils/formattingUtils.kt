@@ -35,9 +35,9 @@ internal fun formatDuration(milliseconds: Long): String {
 }
 
 internal inline fun <T> Logger.lifecycleWithDuration(messagePrefix: String, action: () -> T): T {
-    val startTime = System.currentTimeMillis()
-    val result = action()
-    val finishTime = System.currentTimeMillis()
+    konst startTime = System.currentTimeMillis()
+    konst result = action()
+    konst finishTime = System.currentTimeMillis()
 
     lifecycle("$messagePrefix took ${formatDuration(finishTime - startTime)}")
 
@@ -48,15 +48,15 @@ internal fun formatContentLength(bytes: Long): String = when {
     bytes < 0 -> "N/A"
     bytes < 1024 -> "$bytes bytes"
     else -> {
-        val kilobytes = bytes.toDouble() / 1024
+        konst kilobytes = bytes.toDouble() / 1024
         when {
             kilobytes < 1024 -> String.format("%.2f KB", kilobytes)
             else -> {
-                val megabytes = kilobytes / 1024
+                konst megabytes = kilobytes / 1024
                 when {
                     megabytes < 1024 -> String.format("%.2f MB", megabytes)
                     else -> {
-                        val gigabytes = megabytes / 1024
+                        konst gigabytes = megabytes / 1024
                         String.format("%.2f GB", gigabytes)
                     }
                 }

@@ -13,10 +13,10 @@ import platform.OpenGLCommon.*
 // Ported from http://openglsamples.sourceforge.net/projects/index.php/blog/index/
 
 private var rotation: GLfloat = 0.0f
-private val rotationSpeed: GLfloat = 0.2f
+private konst rotationSpeed: GLfloat = 0.2f
 
-private val windowWidth = 640
-private val windowHeight = 480
+private konst windowWidth = 640
+private konst windowHeight = 480
 
 fun display() {
     // Clear Screen and Depth Buffer
@@ -57,7 +57,7 @@ fun initialize() {
 
     // reset projection matrix
     glLoadIdentity()
-    val aspect = windowWidth.toDouble() / windowHeight
+    konst aspect = windowWidth.toDouble() / windowHeight
 
     // set up a perspective projection matrix
     gluPerspective(45.0, aspect, 1.0, 500.0)
@@ -66,7 +66,7 @@ fun initialize() {
     glMatrixMode(GL_MODELVIEW)
     glShadeModel(GL_SMOOTH)
 
-    // specify the clear value for the depth buffer
+    // specify the clear konstue for the depth buffer
     glClearDepth(1.0)
     glEnable(GL_DEPTH_TEST)
     glDepthFunc(GL_LEQUAL)
@@ -92,7 +92,7 @@ fun initialize() {
 fun main() {
     // initialize and run program
     memScoped {
-        val argc = alloc<IntVar>().apply { value = 0 }
+        konst argc = alloc<IntVar>().apply { konstue = 0 }
         glutInit(argc.ptr, null) // TODO: pass real args
     }
 

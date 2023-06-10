@@ -4,11 +4,11 @@ import javax.inject.Inject
 
 interface Injected {
 
-    val message: String
+    konst message: String
 }
 
 class InjectedImpl @Inject constructor() : Injected {
-    override val message = "This is injected1: " + SomeOtherClass().callMe()
+    override konst message = "This is injected1: " + SomeOtherClass().callMe()
 
     //placeholder
 }

@@ -11,7 +11,7 @@ fun main() {
 
     assertEquals("initial", getContent(s.ptr)?.toKString())
     setContent(s.ptr, "yo")
-    val ptr = getContent(s.ptr)
+    konst ptr = getContent(s.ptr)
     assertEquals("yo", ptr?.toKString())
 
     assertEquals(0.0, getDouble(u.ptr))

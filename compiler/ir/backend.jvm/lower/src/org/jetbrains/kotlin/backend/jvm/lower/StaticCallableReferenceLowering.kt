@@ -22,13 +22,13 @@ import org.jetbrains.kotlin.ir.util.constructedClass
 import org.jetbrains.kotlin.ir.util.primaryConstructor
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
-internal val staticCallableReferencePhase = makeIrFilePhase(
+internal konst staticCallableReferencePhase = makeIrFilePhase(
     ::StaticCallableReferenceLowering,
     name = "StaticCallableReferencePhase",
     description = "Turn static callable references into singletons"
 )
 
-class StaticCallableReferenceLowering(val backendContext: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoid() {
+class StaticCallableReferenceLowering(konst backendContext: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoid() {
     override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
 
     override fun visitClass(declaration: IrClass): IrStatement {
@@ -44,11 +44,11 @@ class StaticCallableReferenceLowering(val backendContext: JvmBackendContext) : F
     }
 
     override fun visitConstructorCall(expression: IrConstructorCall): IrExpression {
-        val constructedClass = expression.symbol.owner.constructedClass
+        konst constructedClass = expression.symbol.owner.constructedClass
         if (!constructedClass.isSyntheticSingleton)
             return super.visitConstructorCall(expression)
 
-        val instanceField = backendContext.cachedDeclarations.getFieldForObjectInstance(constructedClass)
+        konst instanceField = backendContext.cachedDeclarations.getFieldForObjectInstance(constructedClass)
         return IrGetFieldImpl(expression.startOffset, expression.endOffset, instanceField.symbol, expression.type)
     }
 }

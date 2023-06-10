@@ -3,19 +3,19 @@
 // FILE: lib.kt
 enum class A {
     X {
-        val x = "OK"
+        konst x = "OK"
 
         inner class Inner {
-            val y = x
+            konst y = x
         }
 
-        val z = Inner()
+        konst z = Inner()
 
-        override val test: String
+        override konst test: String
             get() = z.y
     };
 
-    abstract val test: String
+    abstract konst test: String
 }
 
 // MODULE: main(lib)

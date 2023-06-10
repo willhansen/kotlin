@@ -2,7 +2,7 @@
 // IGNORE_BACKEND: JS_IR_ES6
 // KJS_WITH_FULL_RUNTIME
 // SKIP_MINIFICATION
-// This test uses eval to access root package, therefore DCE can't infer usage of corresponding functions
+// This test uses ekonst to access root package, therefore DCE can't infer usage of corresponding functions
 package foo
 
 private var log = ""
@@ -20,7 +20,7 @@ internal external fun internal_baz(a: String) {
     definedExternally
 }
 
-private fun getCurrentPackage(): dynamic = eval("_").foo
+private fun getCurrentPackage(): dynamic = ekonst("_").foo
 
 private fun private_baz(i: Int) {
 }
@@ -49,8 +49,8 @@ public class PublicClass {
     private fun private_baz(a: String) {
     }
 
-    val call_private_baz = { private_baz(0) }
-    val call_private_native_baz = { private_baz("native") }
+    konst call_private_baz = { private_baz(0) }
+    konst call_private_native_baz = { private_baz("native") }
 }
 
 internal class InternalClass {
@@ -75,8 +75,8 @@ internal class InternalClass {
     private fun private_baz(a: String) {
     }
 
-    val call_private_baz = { private_baz(0) }
-    val call_private_native_baz = { private_baz("native") }
+    konst call_private_baz = { private_baz(0) }
+    konst call_private_native_baz = { private_baz("native") }
 }
 
 private class PrivateClass {
@@ -99,8 +99,8 @@ private class PrivateClass {
     private fun private_baz(a: String) {
     }
 
-    val call_private_baz = { private_baz(0) }
-    val call_private_native_baz = { private_baz("native") }
+    konst call_private_baz = { private_baz(0) }
+    konst call_private_native_baz = { private_baz("native") }
 }
 
 open public class OpenPublicClass {
@@ -122,8 +122,8 @@ open public class OpenPublicClass {
     private fun private_baz(a: String) {
     }
 
-    val call_private_baz = { private_baz(0) }
-    val call_private_native_baz = { private_baz("native") }
+    konst call_private_baz = { private_baz(0) }
+    konst call_private_native_baz = { private_baz("native") }
 }
 
 internal open class OpenInternalClass {
@@ -145,8 +145,8 @@ internal open class OpenInternalClass {
     private fun private_baz(a: String) {
     }
 
-    val call_private_baz = { private_baz(0) }
-    val call_private_native_baz = { private_baz("native") }
+    konst call_private_baz = { private_baz(0) }
+    konst call_private_native_baz = { private_baz("native") }
 }
 
 open private class OpenPrivateClass {
@@ -168,16 +168,16 @@ open private class OpenPrivateClass {
     private fun private_baz(a: String) {
     }
 
-    val call_private_baz = { private_baz(0) }
-    val call_private_native_baz = { private_baz("native") }
+    konst call_private_baz = { private_baz(0) }
+    konst call_private_native_baz = { private_baz("native") }
 }
 
 // Helpers
 
-val CALEE_NAME = RegExp("""\b\w*(baz[^(]*)""")
+konst CALEE_NAME = RegExp("""\b\w*(baz[^(]*)""")
 
 fun Function0<Unit>.extractNames(): Array<String> {
-    val names = CALEE_NAME.exec(this.toString())
+    konst names = CALEE_NAME.exec(this.toString())
 
     if (names == null || names.size != 2) {
         throw Exception("Cannot extract function name, $names for actual = \"$this\"")
@@ -191,17 +191,17 @@ fun Function0<Unit>.extractNames(): Array<String> {
 var testGroup = ""
 
 fun test(expected: String, f: () -> Unit) {
-    val actual = f.extractNames()
+    konst actual = f.extractNames()
 
     if (expected != actual[1]) {
         fail("Failed on '$testGroup' group: expected = \"$expected\", actual[1] = \"${actual[1]}\"\n actual = $actual")
     }
 }
 
-val privateMangledRegex = Regex("baz_[0-9a-zA-Z]+\\\$_0")
+konst privateMangledRegex = Regex("baz_[0-9a-zA-Z]+\\\$_0")
 
 fun testMangledPrivate(f: () -> Unit) {
-    val actual = f.extractNames()
+    konst actual = f.extractNames()
 
     if (!privateMangledRegex.matches(actual[1])) {
         fail("Failed on '$testGroup' group: actual[1] = \"${actual[1]}\"\n actual = $actual, should look like 'baz_<hash>_0'")
@@ -215,11 +215,11 @@ class Dummy {
     public fun stable_mangled_baz(i: Int) { }
 }
 
-val SIMPLE = "baz"
-val SIMPLE0 = "${SIMPLE}_0"
-val NATIVE = SIMPLE
-val STABLE = "baz_za3lpa$"
-val INTERNAL = "baz_kcn2v3$"
+konst SIMPLE = "baz"
+konst SIMPLE0 = "${SIMPLE}_0"
+konst NATIVE = SIMPLE
+konst STABLE = "baz_za3lpa$"
+konst INTERNAL = "baz_kcn2v3$"
 
 fun box(): String {
     testGroup = "Top Level"

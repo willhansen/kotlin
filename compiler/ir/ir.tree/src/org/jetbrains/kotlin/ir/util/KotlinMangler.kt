@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 
 interface KotlinMangler<D : Any> {
 
-    val String.hashMangle: Long
+    konst String.hashMangle: Long
 
     fun D.isExported(compatibleMode: Boolean): Boolean
     fun D.mangleString(compatibleMode: Boolean): String
@@ -25,10 +25,10 @@ interface KotlinMangler<D : Any> {
 
     fun D.isPlatformSpecificExport(): Boolean = false
 
-    val manglerName: String
+    konst manglerName: String
 
     interface DescriptorMangler : KotlinMangler<DeclarationDescriptor> {
-        override val manglerName: String
+        override konst manglerName: String
             get() = "Descriptor"
 
         fun ClassDescriptor.mangleEnumEntryString(compatibleMode: Boolean): String
@@ -37,7 +37,7 @@ interface KotlinMangler<D : Any> {
     }
 
     interface IrMangler : KotlinMangler<IrDeclaration> {
-        override val manglerName: String
+        override konst manglerName: String
             get() = "Ir"
     }
 }

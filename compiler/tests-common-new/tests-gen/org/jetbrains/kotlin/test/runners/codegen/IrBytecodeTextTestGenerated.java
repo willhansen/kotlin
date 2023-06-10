@@ -110,9 +110,9 @@ public class IrBytecodeTextTestGenerated extends AbstractIrBytecodeTextTest {
     }
 
     @Test
-    @TestMetadata("componentEvaluatesOnlyOnce.kt")
-    public void testComponentEvaluatesOnlyOnce() throws Exception {
-        runTest("compiler/testData/codegen/bytecodeText/componentEvaluatesOnlyOnce.kt");
+    @TestMetadata("componentEkonstuatesOnlyOnce.kt")
+    public void testComponentEkonstuatesOnlyOnce() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeText/componentEkonstuatesOnlyOnce.kt");
     }
 
     @Test
@@ -452,9 +452,9 @@ public class IrBytecodeTextTestGenerated extends AbstractIrBytecodeTextTest {
     }
 
     @Test
-    @TestMetadata("preEvaluateInlineJavaStaticFields.kt")
-    public void testPreEvaluateInlineJavaStaticFields() throws Exception {
-        runTest("compiler/testData/codegen/bytecodeText/preEvaluateInlineJavaStaticFields.kt");
+    @TestMetadata("preEkonstuateInlineJavaStaticFields.kt")
+    public void testPreEkonstuateInlineJavaStaticFields() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeText/preEkonstuateInlineJavaStaticFields.kt");
     }
 
     @Test
@@ -2495,9 +2495,9 @@ public class IrBytecodeTextTestGenerated extends AbstractIrBytecodeTextTest {
         }
 
         @Test
-        @TestMetadata("loopVarInterval.kt")
-        public void testLoopVarInterval() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/forLoop/loopVarInterval.kt");
+        @TestMetadata("loopVarInterkonst.kt")
+        public void testLoopVarInterkonst() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/forLoop/loopVarInterkonst.kt");
         }
 
         @Test
@@ -5858,54 +5858,54 @@ public class IrBytecodeTextTestGenerated extends AbstractIrBytecodeTextTest {
     }
 
     @Nested
-    @TestMetadata("compiler/testData/codegen/bytecodeText/valueClasses")
+    @TestMetadata("compiler/testData/codegen/bytecodeText/konstueClasses")
     @TestDataPath("$PROJECT_ROOT")
     public class ValueClasses {
         @Test
         public void testAllFilesPresentInValueClasses() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeText/valueClasses"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeText/konstueClasses"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
         }
 
         @Test
         @TestMetadata("conditionalExpressions.kt")
         public void testConditionalExpressions() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/valueClasses/conditionalExpressions.kt");
+            runTest("compiler/testData/codegen/bytecodeText/konstueClasses/conditionalExpressions.kt");
         }
 
         @Test
         @TestMetadata("equalsBoxTest.kt")
         public void testEqualsBoxTest() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/valueClasses/equalsBoxTest.kt");
+            runTest("compiler/testData/codegen/bytecodeText/konstueClasses/equalsBoxTest.kt");
         }
 
         @Test
         @TestMetadata("mfvcDeclaration.kt")
         public void testMfvcDeclaration() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/valueClasses/mfvcDeclaration.kt");
+            runTest("compiler/testData/codegen/bytecodeText/konstueClasses/mfvcDeclaration.kt");
         }
 
         @Test
         @TestMetadata("mfvcReassignments.kt")
         public void testMfvcReassignments() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/valueClasses/mfvcReassignments.kt");
+            runTest("compiler/testData/codegen/bytecodeText/konstueClasses/mfvcReassignments.kt");
         }
 
         @Test
         @TestMetadata("passingMFVC2Functions.kt")
         public void testPassingMFVC2Functions() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/valueClasses/passingMFVC2Functions.kt");
+            runTest("compiler/testData/codegen/bytecodeText/konstueClasses/passingMFVC2Functions.kt");
         }
 
         @Test
         @TestMetadata("regularClassWithMFVC.kt")
         public void testRegularClassWithMFVC() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/valueClasses/regularClassWithMFVC.kt");
+            runTest("compiler/testData/codegen/bytecodeText/konstueClasses/regularClassWithMFVC.kt");
         }
 
         @Test
         @TestMetadata("tryExpressions.kt")
         public void testTryExpressions() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/valueClasses/tryExpressions.kt");
+            runTest("compiler/testData/codegen/bytecodeText/konstueClasses/tryExpressions.kt");
         }
     }
 

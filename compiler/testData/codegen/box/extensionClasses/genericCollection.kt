@@ -4,7 +4,7 @@
 // WITH_STDLIB
 
 context(Collection<P>) class A<P> {
-    val result = if (!isEmpty()) "OK" else "fail"
+    konst result = if (!isEmpty()) "OK" else "fail"
 }
 
 fun box(): String {

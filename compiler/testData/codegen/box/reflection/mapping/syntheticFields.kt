@@ -10,7 +10,7 @@ enum class A {
 
 fun box(): String {
     for (field in A::class.java.getDeclaredFields()) {
-        val prop = field.kotlinProperty
+        konst prop = field.kotlinProperty
         if (prop != null) return "Fail, property found: $prop"
     }
 

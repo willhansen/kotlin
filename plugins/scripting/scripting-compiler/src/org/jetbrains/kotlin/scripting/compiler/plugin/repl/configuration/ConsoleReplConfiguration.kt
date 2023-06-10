@@ -11,17 +11,17 @@ import org.jetbrains.kotlin.scripting.compiler.plugin.repl.reader.ConsoleReplCom
 import org.jetbrains.kotlin.scripting.compiler.plugin.repl.writer.ConsoleReplWriter
 
 class ConsoleReplConfiguration : ReplConfiguration {
-    override val writer = ConsoleReplWriter()
+    override konst writer = ConsoleReplWriter()
 
-    override val exceptionReporter
+    override konst exceptionReporter
         get() = ReplExceptionReporter
 
-    override val commandReader = ConsoleReplCommandReader()
+    override konst commandReader = ConsoleReplCommandReader()
 
-    override val allowIncompleteLines: Boolean
+    override konst allowIncompleteLines: Boolean
         get() = true
 
-    override val executionInterceptor
+    override konst executionInterceptor
         get() = SnippetExecutionInterceptor
 
     override fun createDiagnosticHolder() = ConsoleDiagnosticMessageHolder()

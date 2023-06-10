@@ -1,8 +1,8 @@
 interface A<D : A<D>> {
     fun foo(): Any
 
-    val cond: Boolean
-    val field: Any
+    konst cond: Boolean
+    konst field: Any
 }
 
 interface B<F : B<F>> : A<F> {

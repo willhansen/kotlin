@@ -3,4 +3,4 @@
 @file:[JvmMultifileClass JvmName("MultiFile")]
 package test
 
-val foo = 42
+konst foo = 42

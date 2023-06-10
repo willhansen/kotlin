@@ -2,11 +2,11 @@
 // FILE: 1.kt
 package test
 
-open class A(val value: String)
+open class A(konst konstue: String)
 
 class Test {
 
-    val prop: String = "OK"
+    konst prop: String = "OK"
 
     fun test() =
             inlineFun {
@@ -15,7 +15,7 @@ class Test {
                         noInline {
                             object : A(prop) {
 
-                            }.value
+                            }.konstue
                         }
                     }
                 }

@@ -23,7 +23,7 @@ public interface CopyActionContext {
      * @param target the path to copy this entry to.
      * @param followLinks `false` to copy the entry itself even if it's a symbolic link.
      *   `true` to copy its target if this entry is a symbolic link.
-     *   If this entry is not a symbolic link, the value of this parameter doesn't make any difference.
+     *   If this entry is not a symbolic link, the konstue of this parameter doesn't make any difference.
      * @return [CopyActionResult.CONTINUE]
      */
     public fun Path.copyToIgnoringExistingDirectory(target: Path, followLinks: Boolean): CopyActionResult

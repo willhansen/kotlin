@@ -29,13 +29,13 @@ import org.jetbrains.kotlin.utils.newLinkedHashSetWithExpectedSize
 import org.jetbrains.kotlin.utils.sure
 import java.util.*
 
-class SubstitutingScope(private val workerScope: MemberScope, givenSubstitutor: TypeSubstitutor) : MemberScope {
-    val substitutor by lazy { givenSubstitutor.substitution.buildSubstitutor() }
+class SubstitutingScope(private konst workerScope: MemberScope, givenSubstitutor: TypeSubstitutor) : MemberScope {
+    konst substitutor by lazy { givenSubstitutor.substitution.buildSubstitutor() }
 
-    private val capturingSubstitutor = givenSubstitutor.substitution.wrapWithCapturingSubstitution().buildSubstitutor()
+    private konst capturingSubstitutor = givenSubstitutor.substitution.wrapWithCapturingSubstitution().buildSubstitutor()
     private var substitutedDescriptors: MutableMap<DeclarationDescriptor, DeclarationDescriptor>? = null
 
-    private val _allDescriptors by lazy { substitute(workerScope.getContributedDescriptors()) }
+    private konst _allDescriptors by lazy { substitute(workerScope.getContributedDescriptors()) }
 
     fun substitute(type: KotlinType): KotlinType {
         if (capturingSubstitutor.isEmpty) return type
@@ -49,7 +49,7 @@ class SubstitutingScope(private val workerScope: MemberScope, givenSubstitutor: 
             substitutedDescriptors = HashMap<DeclarationDescriptor, DeclarationDescriptor>()
         }
 
-        val substituted = substitutedDescriptors!!.getOrPut(descriptor) {
+        konst substituted = substitutedDescriptors!!.getOrPut(descriptor) {
             when (descriptor) {
                 is Substitutable<*> -> descriptor.substitute(capturingSubstitutor).sure {
                     "We expect that no conflict should happen while substitution is guaranteed to generate invariant projection, " +
@@ -67,9 +67,9 @@ class SubstitutingScope(private val workerScope: MemberScope, givenSubstitutor: 
         if (capturingSubstitutor.isEmpty) return descriptors
         if (descriptors.isEmpty()) return descriptors
 
-        val result = newLinkedHashSetWithExpectedSize<D>(descriptors.size)
+        konst result = newLinkedHashSetWithExpectedSize<D>(descriptors.size)
         for (descriptor in descriptors) {
-            val substitute = substitute(descriptor)
+            konst substitute = substitute(descriptor)
             result.add(substitute)
         }
 

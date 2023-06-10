@@ -50,7 +50,7 @@ import org.jetbrains.kotlin.renderer.DescriptorRenderer
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.calls.inference.CapturedType
 import org.jetbrains.kotlin.resolve.constants.*
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.descriptorUtil.annotationClass
 import org.jetbrains.kotlin.resolve.descriptorUtil.builtIns
 import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor
@@ -66,7 +66,7 @@ import org.jetbrains.kotlin.types.error.ErrorType
 import org.jetbrains.kotlin.types.error.ErrorTypeKind
 import org.jetbrains.kotlin.types.error.ErrorUtils
 
-internal val MemberDescriptor.ktSymbolKind: KtSymbolKind
+internal konst MemberDescriptor.ktSymbolKind: KtSymbolKind
     get() {
         return when (this) {
             is PropertyAccessorDescriptor -> KtSymbolKind.ACCESSOR
@@ -79,14 +79,14 @@ internal val MemberDescriptor.ktSymbolKind: KtSymbolKind
         }
     }
 
-internal val CallableMemberDescriptor.isExplicitOverride: Boolean
+internal konst CallableMemberDescriptor.isExplicitOverride: Boolean
     get() {
         return (this !is PropertyAccessorDescriptor
                 && kind != CallableMemberDescriptor.Kind.FAKE_OVERRIDE
                 && overriddenDescriptors.isNotEmpty())
     }
 
-internal val ClassDescriptor.isInterfaceLike: Boolean
+internal konst ClassDescriptor.isInterfaceLike: Boolean
     get() = when (kind) {
         ClassKind.CLASS, ClassKind.ENUM_CLASS, ClassKind.OBJECT, ClassKind.ENUM_ENTRY -> false
         else -> true
@@ -158,7 +158,7 @@ internal fun ConstructorDescriptor.toKtConstructorSymbol(analysisContext: Fe10An
     return KtFe10DescConstructorSymbol(this, analysisContext)
 }
 
-internal val CallableMemberDescriptor.ktHasStableParameterNames: Boolean
+internal konst CallableMemberDescriptor.ktHasStableParameterNames: Boolean
     get() = when {
         this is ConstructorDescriptor && isPrimary && constructedClass.kind == ClassKind.ANNOTATION_CLASS -> true
         isExpect -> false
@@ -169,7 +169,7 @@ internal val CallableMemberDescriptor.ktHasStableParameterNames: Boolean
     }
 
 internal fun CallableDescriptor.toKtCallableSymbol(analysisContext: Fe10AnalysisContext): KtCallableSymbol? {
-    return when (val unwrapped = unwrapFakeOverrideIfNeeded()) {
+    return when (konst unwrapped = unwrapFakeOverrideIfNeeded()) {
         is PropertyGetterDescriptor -> KtFe10DescPropertyGetterSymbol(unwrapped, analysisContext)
         is PropertySetterDescriptor -> KtFe10DescPropertySetterSymbol(unwrapped, analysisContext)
         is SamConstructorDescriptor -> KtFe10DescSamConstructorSymbol(unwrapped, analysisContext)
@@ -193,15 +193,15 @@ internal fun CallableDescriptor.toKtCallableSymbol(analysisContext: Fe10Analysis
 }
 
 /**
- * This logic should be equivalent to
+ * This logic should be equikonstent to
  * [org.jetbrains.kotlin.analysis.api.fir.KtSymbolByFirBuilder.unwrapSubstitutionOverrideIfNeeded]. But this method unwrap all fake
  * overrides that do not change the signature.
  */
 internal fun CallableDescriptor.unwrapFakeOverrideIfNeeded(): CallableDescriptor {
-    val useSiteUnwrapped = unwrapUseSiteSubstitutionOverride()
+    konst useSiteUnwrapped = unwrapUseSiteSubstitutionOverride()
     if (useSiteUnwrapped !is CallableMemberDescriptor) return useSiteUnwrapped
     if (useSiteUnwrapped.kind.isReal) return useSiteUnwrapped
-    val overriddenDescriptor = useSiteUnwrapped.overriddenDescriptors.singleOrNull()?.unwrapUseSiteSubstitutionOverride()
+    konst overriddenDescriptor = useSiteUnwrapped.overriddenDescriptors.singleOrNull()?.unwrapUseSiteSubstitutionOverride()
         ?: return useSiteUnwrapped
     if (hasTypeReferenceAffectingSignature(useSiteUnwrapped, overriddenDescriptor)) {
         return useSiteUnwrapped
@@ -213,17 +213,17 @@ private fun hasTypeReferenceAffectingSignature(
     descriptor: CallableMemberDescriptor,
     overriddenDescriptor: CallableMemberDescriptor
 ): Boolean {
-    val containingClass = (descriptor.containingDeclaration as? ClassifierDescriptorWithTypeParameters)
-    val typeParametersFromOuterClass = buildList { containingClass?.let { collectTypeParameters(it) } }
-    val allowedTypeParameters = (overriddenDescriptor.typeParameters + typeParametersFromOuterClass).toSet()
+    konst containingClass = (descriptor.containingDeclaration as? ClassifierDescriptorWithTypeParameters)
+    konst typeParametersFromOuterClass = buildList { containingClass?.let { collectTypeParameters(it) } }
+    konst allowedTypeParameters = (overriddenDescriptor.typeParameters + typeParametersFromOuterClass).toSet()
     return overriddenDescriptor.returnType?.hasReferenceOtherThan(allowedTypeParameters) == true ||
             overriddenDescriptor.extensionReceiverParameter?.type?.hasReferenceOtherThan(allowedTypeParameters) == true ||
-            overriddenDescriptor.valueParameters.any { it.type.hasReferenceOtherThan(allowedTypeParameters) }
+            overriddenDescriptor.konstueParameters.any { it.type.hasReferenceOtherThan(allowedTypeParameters) }
 }
 
 private fun MutableList<TypeParameterDescriptor>.collectTypeParameters(innerClass: ClassifierDescriptorWithTypeParameters) {
     if (!innerClass.isInner) return
-    val outerClass = innerClass.containingDeclaration as? ClassifierDescriptorWithTypeParameters ?: return
+    konst outerClass = innerClass.containingDeclaration as? ClassifierDescriptorWithTypeParameters ?: return
     addAll(outerClass.declaredTypeParameters)
     collectTypeParameters(outerClass)
 }
@@ -231,7 +231,7 @@ private fun MutableList<TypeParameterDescriptor>.collectTypeParameters(innerClas
 private fun KotlinType.hasReferenceOtherThan(allowedTypeParameterDescriptors: Set<TypeParameterDescriptor>): Boolean {
     return when (this) {
         is SimpleType -> {
-            val declarationDescriptor = constructor.declarationDescriptor
+            konst declarationDescriptor = constructor.declarationDescriptor
             if (declarationDescriptor !is AbstractTypeParameterDescriptor) return false
             declarationDescriptor !in allowedTypeParameterDescriptors ||
                     declarationDescriptor.upperBounds.any { it.hasReferenceOtherThan(allowedTypeParameterDescriptors) }
@@ -259,7 +259,7 @@ private fun <T : CallableDescriptor> T.unwrapUseSiteSubstitutionOverride(): T {
 }
 
 internal fun KotlinType.toKtType(analysisContext: Fe10AnalysisContext): KtType {
-    return when (val unwrappedType = unwrap()) {
+    return when (konst unwrappedType = unwrap()) {
         is DynamicType -> KtFe10DynamicType(unwrappedType, analysisContext)
         is FlexibleType -> KtFe10FlexibleType(unwrappedType, analysisContext)
         is DefinitelyNotNullType -> KtFe10DefinitelyNotNullType(unwrappedType, analysisContext)
@@ -272,15 +272,15 @@ internal fun KotlinType.toKtType(analysisContext: Fe10AnalysisContext): KtType {
         is CapturedType -> KtFe10CapturedType(unwrappedType, analysisContext)
         is NewCapturedType -> KtFe10NewCapturedType(unwrappedType, analysisContext)
         is SimpleType -> {
-            val typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(unwrappedType)
+            konst typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(unwrappedType)
             if (typeParameterDescriptor != null) {
                 return KtFe10TypeParameterType(unwrappedType, typeParameterDescriptor, analysisContext)
             }
 
-            val typeConstructor = unwrappedType.constructor
+            konst typeConstructor = unwrappedType.constructor
 
             if (typeConstructor is NewTypeVariableConstructor) {
-                val newTypeParameterDescriptor = typeConstructor.originalTypeParameter
+                konst newTypeParameterDescriptor = typeConstructor.originalTypeParameter
                 return if (newTypeParameterDescriptor != null) {
                     KtFe10TypeParameterType(unwrappedType, newTypeParameterDescriptor, analysisContext)
                 } else {
@@ -292,11 +292,11 @@ internal fun KotlinType.toKtType(analysisContext: Fe10AnalysisContext): KtType {
                 return KtFe10IntersectionType(unwrappedType, typeConstructor.supertypes, analysisContext)
             }
 
-            return when (val typeDeclaration = typeConstructor.declarationDescriptor) {
+            return when (konst typeDeclaration = typeConstructor.declarationDescriptor) {
                 is FunctionClassDescriptor -> KtFe10FunctionalType(unwrappedType, typeDeclaration, analysisContext)
                 is ClassDescriptor -> KtFe10UsualClassType(unwrappedType, typeDeclaration, analysisContext)
                 else -> {
-                    val errorType =
+                    konst errorType =
                         ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_CLASS_TYPE, typeConstructor, typeDeclaration.toString())
                     KtFe10ClassErrorType(errorType, analysisContext)
                 }
@@ -334,18 +334,18 @@ internal fun DeclarationDescriptor.getSymbolOrigin(analysisContext: Fe10Analysis
         }
     }
 
-    val sourceElement = this.toSourceElement
+    konst sourceElement = this.toSourceElement
     if (sourceElement is JavaSourceElement) {
         return KtSymbolOrigin.JAVA
     }
 
-    val psi = sourceElement.getPsi()
+    konst psi = sourceElement.getPsi()
     if (psi != null) {
         if (psi.language != KotlinLanguage.INSTANCE) {
             return KtSymbolOrigin.JAVA
         }
 
-        val virtualFile = psi.containingFile.virtualFile
+        konst virtualFile = psi.containingFile.virtualFile
         return analysisContext.getOrigin(virtualFile)
     } else { // psi == null
         // Implicit lambda parameter
@@ -357,14 +357,14 @@ internal fun DeclarationDescriptor.getSymbolOrigin(analysisContext: Fe10Analysis
     return KtSymbolOrigin.SOURCE
 }
 
-internal val KotlinType.ktNullability: KtTypeNullability
+internal konst KotlinType.ktNullability: KtTypeNullability
     get() = when {
         this.isNullabilityFlexible() -> KtTypeNullability.UNKNOWN
         this.isMarkedNullable -> KtTypeNullability.NULLABLE
         else -> KtTypeNullability.NON_NULLABLE
     }
 
-internal val DeclarationDescriptorWithVisibility.ktVisibility: Visibility
+internal konst DeclarationDescriptorWithVisibility.ktVisibility: Visibility
     get() = when (visibility) {
         DescriptorVisibilities.PUBLIC -> Visibilities.Public
         DescriptorVisibilities.PROTECTED -> Visibilities.Protected
@@ -377,12 +377,12 @@ internal val DeclarationDescriptorWithVisibility.ktVisibility: Visibility
         else -> Visibilities.Unknown
     }
 
-internal val MemberDescriptor.ktModality: Modality
+internal konst MemberDescriptor.ktModality: Modality
     get() {
-        val selfModality = this.modality
+        konst selfModality = this.modality
 
         if (selfModality == Modality.OPEN) {
-            val containingDeclaration = this.containingDeclaration
+            konst containingDeclaration = this.containingDeclaration
             if (containingDeclaration is ClassDescriptor && containingDeclaration.modality == Modality.FINAL) {
                 if (this !is CallableMemberDescriptor || dispatchReceiverParameter != null) {
                     // Non-static open callables in final class are counted as final (to match FIR)
@@ -397,27 +397,27 @@ internal val MemberDescriptor.ktModality: Modality
 internal fun ConstantValue<*>.toKtConstantValue(): KtConstantValue {
     return when (this) {
         is ErrorValue.ErrorValueWithMessage -> KtConstantValue.KtErrorConstantValue(message, sourcePsi = null)
-        is BooleanValue -> KtConstantValue.KtBooleanConstantValue(value, sourcePsi = null)
-        is DoubleValue -> KtConstantValue.KtDoubleConstantValue(value, sourcePsi = null)
-        is FloatValue -> KtConstantValue.KtFloatConstantValue(value, sourcePsi = null)
+        is BooleanValue -> KtConstantValue.KtBooleanConstantValue(konstue, sourcePsi = null)
+        is DoubleValue -> KtConstantValue.KtDoubleConstantValue(konstue, sourcePsi = null)
+        is FloatValue -> KtConstantValue.KtFloatConstantValue(konstue, sourcePsi = null)
         is NullValue -> KtConstantValue.KtNullConstantValue(sourcePsi = null)
-        is StringValue -> KtConstantValue.KtStringConstantValue(value, sourcePsi = null)
-        is ByteValue -> KtConstantValue.KtByteConstantValue(value, sourcePsi = null)
-        is CharValue -> KtConstantValue.KtCharConstantValue(value, sourcePsi = null)
-        is IntValue -> KtConstantValue.KtIntConstantValue(value, sourcePsi = null)
-        is LongValue -> KtConstantValue.KtLongConstantValue(value, sourcePsi = null)
-        is ShortValue -> KtConstantValue.KtShortConstantValue(value, sourcePsi = null)
-        is UByteValue -> KtConstantValue.KtUnsignedByteConstantValue(value.toUByte(), sourcePsi = null)
-        is UIntValue -> KtConstantValue.KtUnsignedIntConstantValue(value.toUInt(), sourcePsi = null)
-        is ULongValue -> KtConstantValue.KtUnsignedLongConstantValue(value.toULong(), sourcePsi = null)
-        is UShortValue -> KtConstantValue.KtUnsignedShortConstantValue(value.toUShort(), sourcePsi = null)
-        else -> error("Unexpected constant value $value")
+        is StringValue -> KtConstantValue.KtStringConstantValue(konstue, sourcePsi = null)
+        is ByteValue -> KtConstantValue.KtByteConstantValue(konstue, sourcePsi = null)
+        is CharValue -> KtConstantValue.KtCharConstantValue(konstue, sourcePsi = null)
+        is IntValue -> KtConstantValue.KtIntConstantValue(konstue, sourcePsi = null)
+        is LongValue -> KtConstantValue.KtLongConstantValue(konstue, sourcePsi = null)
+        is ShortValue -> KtConstantValue.KtShortConstantValue(konstue, sourcePsi = null)
+        is UByteValue -> KtConstantValue.KtUnsignedByteConstantValue(konstue.toUByte(), sourcePsi = null)
+        is UIntValue -> KtConstantValue.KtUnsignedIntConstantValue(konstue.toUInt(), sourcePsi = null)
+        is ULongValue -> KtConstantValue.KtUnsignedLongConstantValue(konstue.toULong(), sourcePsi = null)
+        is UShortValue -> KtConstantValue.KtUnsignedShortConstantValue(konstue.toUShort(), sourcePsi = null)
+        else -> error("Unexpected constant konstue $konstue")
     }
 }
 
 internal tailrec fun KotlinBuiltIns.areSameArrayTypeIgnoringProjections(left: KotlinType, right: KotlinType): Boolean {
-    val leftIsArray = KotlinBuiltIns.isArrayOrPrimitiveArray(left)
-    val rightIsArray = KotlinBuiltIns.isArrayOrPrimitiveArray(right)
+    konst leftIsArray = KotlinBuiltIns.isArrayOrPrimitiveArray(left)
+    konst rightIsArray = KotlinBuiltIns.isArrayOrPrimitiveArray(right)
 
     return when {
         leftIsArray && rightIsArray -> areSameArrayTypeIgnoringProjections(getArrayElementType(left), getArrayElementType(right))
@@ -431,11 +431,11 @@ internal fun List<ConstantValue<*>>.expandArrayAnnotationValue(
     containingArrayType: KotlinType,
     analysisContext: Fe10AnalysisContext,
 ): List<KtAnnotationValue> = flatMap { constantValue: ConstantValue<*> ->
-    val constantType = constantValue.getType(analysisContext.resolveSession.moduleDescriptor)
+    konst constantType = constantValue.getType(analysisContext.resolveSession.moduleDescriptor)
     if (analysisContext.builtIns.areSameArrayTypeIgnoringProjections(containingArrayType, constantType)) {
         // If an element in the array has the same type as the containing array, it's a spread component that needs
         // to be expanded here. (It should have the array element type instead.)
-        (constantValue as ArrayValue).value.expandArrayAnnotationValue(containingArrayType, analysisContext)
+        (constantValue as ArrayValue).konstue.expandArrayAnnotationValue(containingArrayType, analysisContext)
     } else {
         listOf(constantValue.toKtAnnotationValue(analysisContext))
     }
@@ -444,25 +444,25 @@ internal fun List<ConstantValue<*>>.expandArrayAnnotationValue(
 internal fun ConstantValue<*>.toKtAnnotationValue(analysisContext: Fe10AnalysisContext): KtAnnotationValue {
     return when (this) {
         is ArrayValue -> {
-            val arrayType = getType(analysisContext.resolveSession.moduleDescriptor)
-            KtArrayAnnotationValue(value.expandArrayAnnotationValue(arrayType, analysisContext), sourcePsi = null)
+            konst arrayType = getType(analysisContext.resolveSession.moduleDescriptor)
+            KtArrayAnnotationValue(konstue.expandArrayAnnotationValue(arrayType, analysisContext), sourcePsi = null)
         }
         is EnumValue -> KtEnumEntryAnnotationValue(CallableId(enumClassId, enumEntryName), sourcePsi = null)
-        is KClassValue -> when (val value = value) {
+        is KClassValue -> when (konst konstue = konstue) {
             is KClassValue.Value.LocalClass -> {
-                val descriptor = value.type.constructor.declarationDescriptor as ClassDescriptor
+                konst descriptor = konstue.type.constructor.declarationDescriptor as ClassDescriptor
                 KtKClassAnnotationValue.KtLocalKClassAnnotationValue(descriptor.source.getPsi() as KtClassOrObject, sourcePsi = null)
             }
-            is KClassValue.Value.NormalClass -> KtKClassAnnotationValue.KtNonLocalKClassAnnotationValue(value.classId, sourcePsi = null)
+            is KClassValue.Value.NormalClass -> KtKClassAnnotationValue.KtNonLocalKClassAnnotationValue(konstue.classId, sourcePsi = null)
         }
 
         is AnnotationValue -> {
             KtAnnotationApplicationValue(
                 KtAnnotationApplicationWithArgumentsInfo(
-                    value.annotationClass?.classId,
+                    konstue.annotationClass?.classId,
                     psi = null,
                     useSiteTarget = null,
-                    arguments = value.getKtNamedAnnotationArguments(analysisContext),
+                    arguments = konstue.getKtNamedAnnotationArguments(analysisContext),
                     index = null,
                 )
             )
@@ -473,7 +473,7 @@ internal fun ConstantValue<*>.toKtAnnotationValue(analysisContext: Fe10AnalysisC
     }
 }
 
-internal val CallableMemberDescriptor.callableIdIfNotLocal: CallableId?
+internal konst CallableMemberDescriptor.callableIdIfNotLocal: CallableId?
     get() = calculateCallableId(allowLocal = false)
 
 internal fun CallableMemberDescriptor.calculateCallableId(allowLocal: Boolean): CallableId? {
@@ -482,8 +482,8 @@ internal fun CallableMemberDescriptor.calculateCallableId(allowLocal: Boolean): 
     }
     var current: DeclarationDescriptor = containingDeclaration
 
-    val localName = mutableListOf<String>()
-    val className = mutableListOf<String>()
+    konst localName = mutableListOf<String>()
+    konst className = mutableListOf<String>()
 
     while (true) {
         when (current) {
@@ -528,7 +528,7 @@ internal fun CallableMemberDescriptor.calculateCallableId(allowLocal: Boolean): 
     }
 }
 
-internal val PropertyDescriptor.getterCallableIdIfNotLocal: CallableId?
+internal konst PropertyDescriptor.getterCallableIdIfNotLocal: CallableId?
     get() {
         if (this is SyntheticPropertyDescriptor) {
             return getMethod.callableIdIfNotLocal
@@ -537,10 +537,10 @@ internal val PropertyDescriptor.getterCallableIdIfNotLocal: CallableId?
         return null
     }
 
-internal val PropertyDescriptor.setterCallableIdIfNotLocal: CallableId?
+internal konst PropertyDescriptor.setterCallableIdIfNotLocal: CallableId?
     get() {
         if (this is SyntheticPropertyDescriptor) {
-            val setMethod = this.setMethod
+            konst setMethod = this.setMethod
             if (setMethod != null) {
                 return setMethod.callableIdIfNotLocal
             }
@@ -558,23 +558,23 @@ internal fun getSymbolDescriptor(symbol: KtSymbol): DeclarationDescriptor? {
     }
 }
 
-internal val ClassifierDescriptor.classId: ClassId?
-    get() = when (val owner = containingDeclaration) {
+internal konst ClassifierDescriptor.classId: ClassId?
+    get() = when (konst owner = containingDeclaration) {
         is PackageFragmentDescriptor -> ClassId(owner.fqName, name)
         is ClassifierDescriptorWithTypeParameters -> owner.classId?.createNestedClassId(name)
         else -> null
     }
 
-internal val ClassifierDescriptor.maybeLocalClassId: ClassId
+internal konst ClassifierDescriptor.maybeLocalClassId: ClassId
     get() = classId ?: ClassId(containingPackage() ?: FqName.ROOT, FqName.topLevel(this.name), true)
 
 internal fun ClassDescriptor.getSupertypesWithAny(): Collection<KotlinType> {
-    val supertypes = typeConstructor.supertypes
+    konst supertypes = typeConstructor.supertypes
     if (isInterfaceLike) {
         return supertypes
     }
 
-    val hasClassSupertype = supertypes.any { (it.constructor.declarationDescriptor as? ClassDescriptor)?.kind == ClassKind.CLASS }
+    konst hasClassSupertype = supertypes.any { (it.constructor.declarationDescriptor as? ClassDescriptor)?.kind == ClassKind.CLASS }
     return if (hasClassSupertype) supertypes else listOf(builtIns.anyType) + supertypes
 }
 
@@ -592,18 +592,18 @@ internal fun createKtInitializerValue(
     if (ktProperty?.initializer == null && propertyDescriptor?.compileTimeInitializer == null) {
         return null
     }
-    val initializer = ktProperty?.initializer
+    konst initializer = ktProperty?.initializer
 
-    val compileTimeInitializer = propertyDescriptor?.compileTimeInitializer
+    konst compileTimeInitializer = propertyDescriptor?.compileTimeInitializer
     if (compileTimeInitializer != null) {
         return KtConstantInitializerValue(compileTimeInitializer.toKtConstantValue(), initializer)
     }
     if (initializer != null) {
-        val bindingContext = analysisContext.analyze(initializer)
-        val constantValue = ConstantExpressionEvaluator.getConstant(initializer, bindingContext)
+        konst bindingContext = analysisContext.analyze(initializer)
+        konst constantValue = ConstantExpressionEkonstuator.getConstant(initializer, bindingContext)
         if (constantValue != null) {
-            val evaluated = constantValue.toConstantValue(propertyDescriptor?.type ?: TypeUtils.NO_EXPECTED_TYPE).toKtConstantValue()
-            return KtConstantInitializerValue(evaluated, initializer)
+            konst ekonstuated = constantValue.toConstantValue(propertyDescriptor?.type ?: TypeUtils.NO_EXPECTED_TYPE).toKtConstantValue()
+            return KtConstantInitializerValue(ekonstuated, initializer)
         }
     }
 
@@ -629,14 +629,14 @@ internal fun AnnotationDescriptor.toKtAnnotationInfo(index: Int): KtAnnotationAp
     index = index,
 )
 
-private val AnnotationDescriptor.psi: KtCallElement? get() = (source as? PsiSourceElement)?.psi as? KtCallElement
-internal val AnnotationDescriptor.classIdForAnnotation: ClassId? get() = annotationClass?.maybeLocalClassId
-internal val AnnotationDescriptor.useSiteTarget: AnnotationUseSiteTarget?
+private konst AnnotationDescriptor.psi: KtCallElement? get() = (source as? PsiSourceElement)?.psi as? KtCallElement
+internal konst AnnotationDescriptor.classIdForAnnotation: ClassId? get() = annotationClass?.maybeLocalClassId
+internal konst AnnotationDescriptor.useSiteTarget: AnnotationUseSiteTarget?
     get() = (this as? LazyAnnotationDescriptor)?.annotationEntry?.useSiteTarget?.getAnnotationUseSiteTarget()
 
 internal fun AnnotationDescriptor.getKtNamedAnnotationArguments(analysisContext: Fe10AnalysisContext): List<KtNamedAnnotationValue> =
-    allValueArguments.map { (name, value) ->
-        KtNamedAnnotationValue(name, value.toKtAnnotationValue(analysisContext))
+    allValueArguments.map { (name, konstue) ->
+        KtNamedAnnotationValue(name, konstue.toKtAnnotationValue(analysisContext))
     }
 
 internal fun CallableDescriptor.createContextReceivers(
@@ -656,8 +656,8 @@ private fun createContextReceiver(
     analysisContext: Fe10AnalysisContext
 ): KtContextReceiverImpl {
     return KtContextReceiverImpl(
-        contextReceiver.value.type.toKtType(analysisContext),
-        (contextReceiver.value as ImplicitContextReceiver).customLabelName,
+        contextReceiver.konstue.type.toKtType(analysisContext),
+        (contextReceiver.konstue as ImplicitContextReceiver).customLabelName,
         analysisContext.token
     )
 }

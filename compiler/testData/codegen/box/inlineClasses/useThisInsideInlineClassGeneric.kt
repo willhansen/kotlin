@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt<T: Int>(val a: T) {
+konstue class UInt<T: Int>(konst a: T) {
     fun test() {
         takeNullable(this)
         takeAnyInside(this)
@@ -17,7 +17,7 @@ value class UInt<T: Int>(val a: T) {
 fun <T: Int> takeNullable(a: UInt<T>?) {}
 
 fun box(): String {
-    val a = UInt(0)
+    konst a = UInt(0)
     a.test()
 
     return "OK"

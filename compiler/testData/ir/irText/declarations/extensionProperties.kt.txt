@@ -1,4 +1,4 @@
-val String.test1: Int
+konst String.test1: Int
   get(): Int {
     return 42
   }
@@ -7,7 +7,7 @@ var String.test2: Int
   get(): Int {
     return 42
   }
-  set(value: Int) {
+  set(konstue: Int) {
   }
 
 class Host {
@@ -17,7 +17,7 @@ class Host {
 
   }
 
-  val String.test3: Int
+  konst String.test3: Int
     get(): Int {
       return 42
     }
@@ -26,7 +26,7 @@ class Host {
     get(): Int {
       return 42
     }
-    set(value: Int) {
+    set(konstue: Int) {
     }
 
 }

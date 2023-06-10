@@ -1,9 +1,9 @@
 // EXPECTED_REACHABLE_NODES: 1324
 package foo
 
-enum class B(open val bar: Int) {
+enum class B(open konst bar: Int) {
     a(0) {
-        override val bar = 3
+        override konst bar = 3
         init {
             y = 0
         }
@@ -11,18 +11,18 @@ enum class B(open val bar: Int) {
     b(4) {
     },
     c(5);
-    val x = 1
+    konst x = 1
     var y = 12;
 }
 
 interface X {
-    val foo: Int
+    konst foo: Int
     fun bar(): Int {
         return foo;
     }
 }
 
-enum class Y(override val foo: Int) : X {
+enum class Y(override konst foo: Int) : X {
     m(3),
     n(6)
 }

@@ -19,7 +19,7 @@ open class ConeTypeRenderer {
         functionClassKindExtractor: (ConeKotlinType) -> FunctionTypeKind?,
         renderType: ConeTypeProjection.() -> Unit = { render() }
     ) {
-        val kind = functionClassKindExtractor(type)
+        konst kind = functionClassKindExtractor(type)
         if (kind?.isReflectType != false) {
             type.renderType()
             return
@@ -34,15 +34,15 @@ open class ConeTypeRenderer {
             builder.append(it)
             builder.append(" ")
         }
-        val typeArguments = type.typeArguments
-        val isExtension = type.isExtensionFunctionType
-        val (receiver, otherTypeArguments) = if (isExtension && typeArguments.first() != ConeStarProjection) {
+        konst typeArguments = type.typeArguments
+        konst isExtension = type.isExtensionFunctionType
+        konst (receiver, otherTypeArguments) = if (isExtension && typeArguments.first() != ConeStarProjection) {
             typeArguments.first() to typeArguments.drop(1)
         } else {
             null to typeArguments.toList()
         }
-        val arguments = otherTypeArguments.subList(0, otherTypeArguments.size - 1)
-        val returnType = otherTypeArguments.last()
+        konst arguments = otherTypeArguments.subList(0, otherTypeArguments.size - 1)
+        konst returnType = otherTypeArguments.last()
         if (receiver != null) {
             receiver.render()
             builder.append(".")
@@ -183,7 +183,7 @@ open class ConeTypeRenderer {
     }
 
     private fun ConeKotlinType.renderNonCompilerAttributes() {
-        val compilerAttributes = CompilerConeAttributes.classIdByCompilerAttributeKey
+        konst compilerAttributes = CompilerConeAttributes.classIdByCompilerAttributeKey
         if (attributes.any { it.key !in compilerAttributes }) {
             builder.append(attributeRenderer.render(attributes))
         }
@@ -219,7 +219,7 @@ open class ConeTypeRenderer {
     protected open fun render(type: ConeIntegerLiteralType) {
         when (type) {
             is ConeIntegerLiteralConstantType -> {
-                builder.append("ILT: ${type.value}")
+                builder.append("ILT: ${type.konstue}")
             }
 
             is ConeIntegerConstantOperatorType -> {

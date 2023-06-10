@@ -14,13 +14,13 @@ internal open class PlatformImplementations {
 
     private object ReflectThrowable {
         @JvmField
-        public val addSuppressed: Method?
+        public konst addSuppressed: Method?
         @JvmField
-        public val getSuppressed: Method?
+        public konst getSuppressed: Method?
 
         init {
-            val throwableClass = Throwable::class.java
-            val throwableMethods = throwableClass.methods
+            konst throwableClass = Throwable::class.java
+            konst throwableMethods = throwableClass.methods
             addSuppressed = throwableMethods.find {
                 it.name == "addSuppressed" && it.parameterTypes.singleOrNull() == throwableClass
             }
@@ -47,7 +47,7 @@ internal open class PlatformImplementations {
 
 
 @JvmField
-internal val IMPLEMENTATIONS: PlatformImplementations =
+internal konst IMPLEMENTATIONS: PlatformImplementations =
     castToBaseType<PlatformImplementations>(kotlin.internal.jdk8.JDK8PlatformImplementations())
 
 @kotlin.internal.InlineOnly
@@ -55,8 +55,8 @@ private inline fun <reified T : Any> castToBaseType(instance: Any): T {
     try {
         return instance as T
     } catch (e: ClassCastException) {
-        val instanceCL = instance.javaClass.classLoader
-        val baseTypeCL = T::class.java.classLoader
+        konst instanceCL = instance.javaClass.classLoader
+        konst baseTypeCL = T::class.java.classLoader
         if (instanceCL != baseTypeCL) {
             throw ClassNotFoundException("Instance class was loaded from a different classloader: $instanceCL, base type classloader: $baseTypeCL", e)
         }
@@ -67,10 +67,10 @@ private inline fun <reified T : Any> castToBaseType(instance: Any): T {
 /**
  * Constant check of api version used during compilation
  *
- * This function is evaluated at compile time to a constant value,
+ * This function is ekonstuated at compile time to a constant konstue,
  * so there should be no references to it in other modules.
  *
- * The function usages are validated to have literal argument values.
+ * The function usages are konstidated to have literal argument konstues.
  */
 @PublishedApi
 @SinceKotlin("1.2")

@@ -1,9 +1,9 @@
 FILE: Parameters.kt
-    public final val bar: R|(kotlin/Int) -> kotlin/Unit| = fun <anonymous>(p: R|kotlin/Int| = Int(3)): R|kotlin/Unit| <inline=Unknown>  {
+    public final konst bar: R|(kotlin/Int) -> kotlin/Unit| = fun <anonymous>(p: R|kotlin/Int| = Int(3)): R|kotlin/Unit| <inline=Unknown>  {
     }
 
         public get(): R|(kotlin/Int) -> kotlin/Unit|
-    public final val bas: R|(kotlin/Int) -> kotlin/Unit| = fun <anonymous>(vararg p: R|kotlin/Int|): R|kotlin/Unit| <inline=Unknown>  {
+    public final konst bas: R|(kotlin/Int) -> kotlin/Unit| = fun <anonymous>(vararg p: R|kotlin/Int|): R|kotlin/Unit| <inline=Unknown>  {
     }
 
         public get(): R|(kotlin/Int) -> kotlin/Unit|
@@ -18,10 +18,10 @@ FILE: Parameters.kt
 
     }
     public final fun outer(b: R|kotlin/Any?|): R|kotlin/Unit| {
-        lval bar: R|(kotlin/Int) -> kotlin/Unit| = fun <anonymous>(p: R|kotlin/Int| = Int(3)): R|kotlin/Unit| <inline=Unknown>  {
+        lkonst bar: R|(kotlin/Int) -> kotlin/Unit| = fun <anonymous>(p: R|kotlin/Int| = Int(3)): R|kotlin/Unit| <inline=Unknown>  {
         }
 
-        lval bas: R|(kotlin/Int) -> kotlin/Unit| = fun <anonymous>(vararg p: R|kotlin/Int|): R|kotlin/Unit| <inline=Unknown>  {
+        lkonst bas: R|(kotlin/Int) -> kotlin/Unit| = fun <anonymous>(vararg p: R|kotlin/Int|): R|kotlin/Unit| <inline=Unknown>  {
         }
 
         local final fun gar(): R|(kotlin/Int) -> kotlin/Unit| {

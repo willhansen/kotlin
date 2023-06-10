@@ -7,9 +7,9 @@
 
 public object RefreshQueue {
 
-    private val any = Any()
+    private konst any = Any()
 
-    private val workerThread: Thread = Thread(object : Runnable {
+    private konst workerThread: Thread = Thread(object : Runnable {
         override fun run() {
             any.hashCode()
         }

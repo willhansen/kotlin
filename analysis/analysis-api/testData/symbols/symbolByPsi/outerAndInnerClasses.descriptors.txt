@@ -440,7 +440,7 @@ KtFunctionSymbol:
   typeParameters: [
     KtTypeParameterSymbol(T3)
   ]
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -538,7 +538,7 @@ KtFunctionSymbol:
   typeParameters: [
     KtTypeParameterSymbol(T3)
   ]
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []

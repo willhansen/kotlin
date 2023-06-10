@@ -29,14 +29,14 @@ import org.jetbrains.kotlin.js.translate.utils.jsAstUtils.toShort
 import java.util.function.Predicate
 
 object NumberAndCharConversionFIF : CompositeFIF() {
-    val USE_AS_IS: Predicate<FunctionDescriptor> = pattern("Int.toInt|toFloat|toDouble")
+    konst USE_AS_IS: Predicate<FunctionDescriptor> = pattern("Int.toInt|toFloat|toDouble")
             .or(pattern("Short.toShort|toInt|toFloat|toDouble"))
             .or(pattern("Byte.toByte|toShort|toInt|toFloat|toDouble"))
             .or(pattern("Float|Double.toFloat|toDouble"))
             .or(pattern("Long.toLong"))
             .or(pattern("Char.toChar"))
 
-    private val convertOperations: Map<String, FunctionIntrinsicWithReceiverComputed> =
+    private konst convertOperations: Map<String, FunctionIntrinsicWithReceiverComputed> =
             mapOf(
                     "Float|Double.toInt" to ConversionUnaryIntrinsic { invokeKotlinFunction("numberToInt", it) },
                     "Float|Double.toShort" to ConversionUnaryIntrinsic { toShort(invokeKotlinFunction("numberToInt", it)) },
@@ -70,7 +70,7 @@ object NumberAndCharConversionFIF : CompositeFIF() {
 
             )
 
-    class ConversionUnaryIntrinsic(val applyFun: TranslationContext.(receiver: JsExpression) -> JsExpression) : FunctionIntrinsicWithReceiverComputed() {
+    class ConversionUnaryIntrinsic(konst applyFun: TranslationContext.(receiver: JsExpression) -> JsExpression) : FunctionIntrinsicWithReceiverComputed() {
         override fun apply(receiver: JsExpression?, arguments: List<JsExpression>, context: TranslationContext): JsExpression {
             assert(receiver != null)
             assert(arguments.isEmpty())

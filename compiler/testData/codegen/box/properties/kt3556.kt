@@ -1,6 +1,6 @@
 class Test {
-    val a : String = "1"
-    private val b : String get() = a
+    konst a : String = "1"
+    private konst b : String get() = a
 
     fun outer() : Int {
         return b.length

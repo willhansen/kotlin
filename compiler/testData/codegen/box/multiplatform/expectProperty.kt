@@ -6,9 +6,9 @@
 
 package test
 
-expect val v: String
+expect konst v: String
 
-expect val Char.extensionVal: String
+expect konst Char.extensionVal: String
 
 expect var String.extensionVar: Char
 
@@ -16,14 +16,14 @@ expect var String.extensionVar: Char
 
 package test
 
-actual val v: String = ""
+actual konst v: String = ""
 
-actual val Char.extensionVal: String
+actual konst Char.extensionVal: String
     get() = toString()
 
 actual var String.extensionVar: Char
     get() = this[0]
-    set(value) {}
+    set(konstue) {}
 
 fun box(): String =
     v + 'O'.extensionVal + "K".extensionVar

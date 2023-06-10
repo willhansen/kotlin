@@ -3,7 +3,7 @@ package foo
 
 import kotlin.reflect.KProperty0
 
-val x = 23
+konst x = 23
 
 fun box(): String {
     assertEquals(true, (::x as Any) is KProperty0<*>)

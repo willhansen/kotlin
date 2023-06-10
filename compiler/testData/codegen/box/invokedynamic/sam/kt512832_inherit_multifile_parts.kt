@@ -26,7 +26,7 @@ fun doFoo(s: String): String = s.toUpperCase()
 
 package org.example.bar
 
-const val unused = 1
+const konst unused = 1
 
 // FILE: Baz.kt
 
@@ -36,6 +36,6 @@ import org.example.foo.Foo
 import org.example.bar.doFoo
 
 fun box(): String {
-    val foo = Foo(::doFoo)
+    konst foo = Foo(::doFoo)
     return foo.foo("ok")
 }

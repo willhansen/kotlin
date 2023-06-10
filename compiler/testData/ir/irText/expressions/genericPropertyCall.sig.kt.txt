@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test
 //   Public signature: /test|-5712650070209114719[0]
-val test: String
+konst test: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-test>(){}kotlin.String
   //   Public signature: /test.<get-test>|-8411936358597690329[0]
@@ -13,7 +13,7 @@ val test: String
 // CHECK:
 //   Mangled name: @0:0{0§<kotlin.Any?>}id
 //   Public signature: /id|6409895071901545951[0]
-val <T : Any?> T.id: T
+konst <T : Any?> T.id: T
   // CHECK JVM_IR:
   //   Mangled name: #<get-id>@0:0(){0§<kotlin.Any?>}0:0
   //   Public signature: /id.<get-id>|4983271234253098452[0]

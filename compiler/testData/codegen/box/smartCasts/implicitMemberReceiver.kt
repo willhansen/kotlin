@@ -1,9 +1,9 @@
 open class A {
-    open val a = "OK"
+    open konst a = "OK"
 }
 
 class B : A() {
-    override val a = "FAIL"
+    override konst a = "FAIL"
     fun foo() = "CRUSH"
 }
 

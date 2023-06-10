@@ -34,18 +34,18 @@ import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
 
 object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
     override fun check(expression: FirEqualityOperatorCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val arguments = expression.argumentList.arguments
+        konst arguments = expression.argumentList.arguments
         require(arguments.size == 2) { "Equality operator call with non-2 arguments" }
 
-        val l = arguments[0].toArgumentInfo(context)
-        val r = arguments[1].toArgumentInfo(context)
+        konst l = arguments[0].toArgumentInfo(context)
+        konst r = arguments[1].toArgumentInfo(context)
 
         checkSenselessness(l.smartCastType, r.smartCastType, context, expression, reporter)
 
-        val checkApplicability = when (expression.operation) {
+        konst checkApplicability = when (expression.operation) {
             FirOperation.EQ, FirOperation.NOT_EQ -> ::checkEqualityApplicability
             FirOperation.IDENTITY, FirOperation.NOT_IDENTITY -> ::checkIdentityApplicability
-            else -> error("Invalid operator of FirEqualityOperatorCall")
+            else -> error("Inkonstid operator of FirEqualityOperatorCall")
         }
 
         checkApplicability(l.originalTypeInfo, r.originalTypeInfo, context).ifInapplicable {
@@ -53,10 +53,10 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
             // sees a non-empty intersection and none of the
             // types is an enum, but intersections in K1
             // work differently from intersections in K2.
-            val isCaseMissedByK1 = it != Applicability.INAPPLICABLE_AS_ENUMS
+            konst isCaseMissedByK1 = it != Applicability.INAPPLICABLE_AS_ENUMS
                     && l.originalTypeInfo.isLiterallyTypeParameter
                     && r.originalTypeInfo.isLiterallyTypeParameter
-            val replicateK1Behavior = !context.languageVersionSettings.supportsFeature(LanguageFeature.ReportErrorsForComparisonOperators)
+            konst replicateK1Behavior = !context.languageVersionSettings.supportsFeature(LanguageFeature.ReportErrorsForComparisonOperators)
 
             return reporter.reportInapplicabilityDiagnostic(
                 expression, it, expression.operation, forceWarning = isCaseMissedByK1 && replicateK1Behavior,
@@ -79,8 +79,8 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
     }
 
     private fun checkEqualityApplicability(l: TypeInfo, r: TypeInfo, context: CheckerContext): Applicability {
-        val oneIsBuiltin = l.isBuiltin || r.isBuiltin
-        val oneIsIdentityLess = l.isIdentityLess || r.isIdentityLess
+        konst oneIsBuiltin = l.isBuiltin || r.isBuiltin
+        konst oneIsIdentityLess = l.isIdentityLess || r.isIdentityLess
 
         // The compiler should only check comparisons
         // when builtins are involved.
@@ -97,8 +97,8 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
         // The compiler should only check comparisons
         // when identity-less types or builtins are involved.
 
-        val oneIsBuiltin = l.isBuiltin || r.isBuiltin
-        val oneIsNotNull = !l.type.isNullable || !r.type.isNullable
+        konst oneIsBuiltin = l.isBuiltin || r.isBuiltin
+        konst oneIsNotNull = !l.type.isNullable || !r.type.isNullable
 
         return when {
             l.isIdentityLess || r.isIdentityLess -> Applicability.INAPPLICABLE_AS_IDENTITY_LESS
@@ -108,8 +108,8 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
     }
 
     private fun getInapplicabilityFor(l: TypeInfo, r: TypeInfo): Applicability {
-        val isIntersectionEmpty = l.enforcesEmptyIntersection || r.enforcesEmptyIntersection
-        val isOneEnum = l.isEnumClass || r.isEnumClass
+        konst isIntersectionEmpty = l.enforcesEmptyIntersection || r.enforcesEmptyIntersection
+        konst isOneEnum = l.isEnumClass || r.isEnumClass
 
         return when {
             !isIntersectionEmpty && isOneEnum -> Applicability.INAPPLICABLE_AS_ENUMS
@@ -154,12 +154,12 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
         forceWarning: Boolean,
         context: CheckerContext,
     ): KtDiagnosticFactory2<ConeKotlinType, ConeKotlinType> {
-        val areBothPrimitives = l.isNotNullPrimitive && r.isNotNullPrimitive
-        val areSameTypes = l.type.classId == r.type.classId
-        val shouldProperlyReportError = context.languageVersionSettings.supportsFeature(LanguageFeature.ReportErrorsForComparisonOperators)
+        konst areBothPrimitives = l.isNotNullPrimitive && r.isNotNullPrimitive
+        konst areSameTypes = l.type.classId == r.type.classId
+        konst shouldProperlyReportError = context.languageVersionSettings.supportsFeature(LanguageFeature.ReportErrorsForComparisonOperators)
 
         // In this case K1 reports nothing
-        val shouldRelaxDiagnostic = (l.isPrimitive || r.isPrimitive) && (l.isSubtypeOf(r, context) || r.isSubtypeOf(l, context))
+        konst shouldRelaxDiagnostic = (l.isPrimitive || r.isPrimitive) && (l.isSubtypeOf(r, context) || r.isSubtypeOf(l, context))
                 && !shouldProperlyReportError
 
         return when {
@@ -192,21 +192,21 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
         // Preserving the behavior on the old test data
         // simplifies detecting fir-differences,
         // which is crucial for this checker
-        val isOldTestData = !context.languageVersionSettings.supportsFeature(
+        konst isOldTestData = !context.languageVersionSettings.supportsFeature(
             LanguageFeature.ProhibitComparisonOfIncompatibleEnums,
         )
 
         // In this corner case K1 reports nothing
-        val bothNullableEnums = l.isNullableEnum && r.isNullableEnum
+        konst bothNullableEnums = l.isNullableEnum && r.isNullableEnum
         // When comparing enums, for type parameters K1
         // tries to pick the "representative" superclass
         // instead of the proper intersection.
         // We can't guarantee that in such cases
         // K2 reports the same as K1
-        val areIntersectionsInvolved = l.type is ConeIntersectionType || r.type is ConeIntersectionType
+        konst areIntersectionsInvolved = l.type is ConeIntersectionType || r.type is ConeIntersectionType
 
-        val shouldProperlyReportError = context.languageVersionSettings.supportsFeature(LanguageFeature.ReportErrorsForComparisonOperators)
-        val shouldRelaxDiagnostic = (bothNullableEnums || areIntersectionsInvolved) && !shouldProperlyReportError
+        konst shouldProperlyReportError = context.languageVersionSettings.supportsFeature(LanguageFeature.ReportErrorsForComparisonOperators)
+        konst shouldRelaxDiagnostic = (bothNullableEnums || areIntersectionsInvolved) && !shouldProperlyReportError
 
         return when {
             forceWarning || isOldTestData || shouldRelaxDiagnostic -> FirErrors.INCOMPATIBLE_ENUM_COMPARISON
@@ -252,14 +252,14 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
         expression: FirEqualityOperatorCall,
         reporter: DiagnosticReporter
     ) {
-        val type = when {
+        konst type = when {
             rType.isNullableNothing -> lType
             lType.isNullableNothing -> rType
             else -> return
         }
         if (type is ConeErrorType) return
-        val isPositiveCompare = expression.operation == FirOperation.EQ || expression.operation == FirOperation.IDENTITY
-        val compareResult = with(context.session.typeContext) {
+        konst isPositiveCompare = expression.operation == FirOperation.EQ || expression.operation == FirOperation.IDENTITY
+        konst compareResult = with(context.session.typeContext) {
             when {
                 // `null` literal has type `Nothing?`
                 type.isNullableNothing -> isPositiveCompare
@@ -269,7 +269,7 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
         }
         // We only report `SENSELESS_NULL_IN_WHEN` if `lType = type` because `lType` is the type of the when subject. This diagnostic is
         // only intended for cases where the branch condition contains a null. Also, the error message for SENSELESS_NULL_IN_WHEN
-        // says the value is *never* equal to null, so we can't report it if the value is *always* equal to null.
+        // says the konstue is *never* equal to null, so we can't report it if the konstue is *always* equal to null.
         if (expression.source?.elementType != KtNodeTypes.BINARY_EXPRESSION && type === lType && !compareResult) {
             reporter.reportOn(expression.source, FirErrors.SENSELESS_NULL_IN_WHEN, context)
         } else {
@@ -279,41 +279,41 @@ object FirEqualityCompatibilityChecker : FirEqualityOperatorCallChecker() {
 }
 
 private class TypeInfo(
-    val type: ConeKotlinType,
-    val notNullType: ConeKotlinType,
-    val isFinalClass: Boolean,
-    val isEnumClass: Boolean,
-    val isPrimitive: Boolean,
-    val isBuiltin: Boolean,
-    val isValueClass: Boolean,
-    val isLiterallyTypeParameter: Boolean,
+    konst type: ConeKotlinType,
+    konst notNullType: ConeKotlinType,
+    konst isFinalClass: Boolean,
+    konst isEnumClass: Boolean,
+    konst isPrimitive: Boolean,
+    konst isBuiltin: Boolean,
+    konst isValueClass: Boolean,
+    konst isLiterallyTypeParameter: Boolean,
 ) {
     override fun toString() = "$type"
 }
 
-private val FirClassSymbol<*>.isBuiltin get() = isPrimitiveType() || classId == StandardClassIds.String || isEnumClass
+private konst FirClassSymbol<*>.isBuiltin get() = isPrimitiveType() || classId == StandardClassIds.String || isEnumClass
 
 // This property is used to replicate K1 behavior, and it
 // tries to predict empty intersections from the K1 point-of-view.
 // Enum classes are final, but enum entries are their subclasses.
-private val TypeInfo.enforcesEmptyIntersection get() = isFinalClass && !isEnumClass
+private konst TypeInfo.enforcesEmptyIntersection get() = isFinalClass && !isEnumClass
 
-private val TypeInfo.isNullableEnum get() = isEnumClass && type.isNullable
+private konst TypeInfo.isNullableEnum get() = isEnumClass && type.isNullable
 
-private val TypeInfo.isIdentityLess get() = isPrimitive || isValueClass
+private konst TypeInfo.isIdentityLess get() = isPrimitive || isValueClass
 
-private val TypeInfo.isNotNullPrimitive get() = isPrimitive && !type.isNullable
+private konst TypeInfo.isNotNullPrimitive get() = isPrimitive && !type.isNullable
 
-private val FirClassSymbol<*>.isFinalClass get() = isClass && isFinal
+private konst FirClassSymbol<*>.isFinalClass get() = isClass && isFinal
 
 // NB: This is what RULES1 means then it says "class".
-private val FirClassSymbol<*>.isClass get() = !isInterface
+private konst FirClassSymbol<*>.isClass get() = !isInterface
 
 private fun ConeKotlinType.toTypeInfo(session: FirSession): TypeInfo {
-    val bounds = collectUpperBounds().map { type -> toKotlinType(type).replaceArgumentsWithStarProjections() }
-    val type = bounds.ifNotEmpty { ConeTypeIntersector.intersectTypes(session.typeContext, this) }
+    konst bounds = collectUpperBounds().map { type -> toKotlinType(type).replaceArgumentsWithStarProjections() }
+    konst type = bounds.ifNotEmpty { ConeTypeIntersector.intersectTypes(session.typeContext, this) }
         ?: session.builtinTypes.nullableAnyType.type
-    val notNullType = type.withNullability(ConeNullability.NOT_NULL, session.typeContext)
+    konst notNullType = type.withNullability(ConeNullability.NOT_NULL, session.typeContext)
 
     return TypeInfo(
         type, notNullType,
@@ -332,24 +332,24 @@ private fun toKotlinType(type: ConeClassLikeType): ConeClassLikeType {
 }
 
 private class ArgumentInfo(
-    val argument: FirExpression,
-    val userType: ConeKotlinType,
-    val originalType: ConeKotlinType,
-    val session: FirSession,
+    konst argument: FirExpression,
+    konst userType: ConeKotlinType,
+    konst originalType: ConeKotlinType,
+    konst session: FirSession,
 ) {
-    val smartCastType: ConeKotlinType by lazy {
+    konst smartCastType: ConeKotlinType by lazy {
         if (argument !is FirSmartCastExpression) originalType else userType.fullyExpandedType(session)
     }
 
-    val originalTypeInfo get() = originalType.toTypeInfo(session)
+    konst originalTypeInfo get() = originalType.toTypeInfo(session)
 
-    val smartCastTypeInfo get() = smartCastType.toTypeInfo(session)
+    konst smartCastTypeInfo get() = smartCastType.toTypeInfo(session)
 
     override fun toString() = "${argument.source?.text} :: $userType"
 }
 
 @Suppress("RecursivePropertyAccessor")
-private val FirExpression.mostOriginalTypeIfSmartCast: ConeKotlinType
+private konst FirExpression.mostOriginalTypeIfSmartCast: ConeKotlinType
     get() = when (this) {
         is FirSmartCastExpression -> originalExpression.mostOriginalTypeIfSmartCast
         else -> typeRef.coneType

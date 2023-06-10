@@ -29,11 +29,11 @@ declare namespace JS_TESTS {
             abstract component1(): string;
         }
         class Test2 extends foo.WithComponent1 {
-            constructor(value1: string, value2: string);
-            get value1(): string;
-            get value2(): string;
+            constructor(konstue1: string, konstue2: string);
+            get konstue1(): string;
+            get konstue2(): string;
             component1(): string;
-            copy(value1?: string, value2?: string): foo.Test2;
+            copy(konstue1?: string, konstue2?: string): foo.Test2;
             toString(): string;
             hashCode(): number;
             equals(other: Nullable<any>): boolean;

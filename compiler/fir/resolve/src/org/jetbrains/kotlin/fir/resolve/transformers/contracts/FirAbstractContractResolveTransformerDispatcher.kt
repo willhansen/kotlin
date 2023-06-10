@@ -45,14 +45,14 @@ abstract class FirAbstractContractResolveTransformerDispatcher(
     scopeSession,
     outerBodyResolveContext = outerBodyResolveContext
 ) {
-    final override val expressionsTransformer: FirExpressionsResolveTransformer =
+    final override konst expressionsTransformer: FirExpressionsResolveTransformer =
         FirExpressionsResolveTransformer(this)
 
-    final override val declarationsTransformer: FirDeclarationsResolveTransformer
+    final override konst declarationsTransformer: FirDeclarationsResolveTransformer
         get() = if (contractMode) contractDeclarationsTransformer else regularDeclarationsTransformer
 
-    protected abstract val contractDeclarationsTransformer: FirDeclarationsContractResolveTransformer
-    private val regularDeclarationsTransformer = FirDeclarationsResolveTransformer(this)
+    protected abstract konst contractDeclarationsTransformer: FirDeclarationsContractResolveTransformer
+    private konst regularDeclarationsTransformer = FirDeclarationsResolveTransformer(this)
 
     private var contractMode = true
 
@@ -129,7 +129,7 @@ abstract class FirAbstractContractResolveTransformerDispatcher(
         private fun <T : FirContractDescriptionOwner> transformContractDescriptionOwner(owner: T): T {
             dataFlowAnalyzer.enterContractDescription()
 
-            return when (val contractDescription = owner.contractDescription) {
+            return when (konst contractDescription = owner.contractDescription) {
                 is FirLegacyRawContractDescription ->
                     transformLegacyRawContractDescriptionOwner(owner, contractDescription, hasBodyContract = true)
                 is FirRawContractDescription ->
@@ -144,12 +144,12 @@ abstract class FirAbstractContractResolveTransformerDispatcher(
             contractDescription: FirLegacyRawContractDescription,
             hasBodyContract: Boolean
         ): T {
-            val valueParameters = owner.valueParameters
-            for (valueParameter in valueParameters) {
-                context.storeVariable(valueParameter, session)
+            konst konstueParameters = owner.konstueParameters
+            for (konstueParameter in konstueParameters) {
+                context.storeVariable(konstueParameter, session)
             }
 
-            val resolvedContractCall = withContractModeDisabled {
+            konst resolvedContractCall = withContractModeDisabled {
                 contractDescription.contractCall
                     .transformSingle(transformer, ResolutionMode.ContextIndependent)
                     .apply { replaceTypeRef(session.builtinTypes.unitType) }
@@ -170,17 +170,17 @@ abstract class FirAbstractContractResolveTransformerDispatcher(
                 owner.body.replaceFirstStatement<FirContractCallBlock> { FirContractCallBlock(resolvedContractCall) }
             }
 
-            val argument = resolvedContractCall.arguments.singleOrNull() as? FirLambdaArgumentExpression
+            konst argument = resolvedContractCall.arguments.singleOrNull() as? FirLambdaArgumentExpression
                 ?: return transformOwnerOfErrorContract(owner)
 
-            val lambdaBody = (argument.expression as FirAnonymousFunctionExpression).anonymousFunction.body
+            konst lambdaBody = (argument.expression as FirAnonymousFunctionExpression).anonymousFunction.body
                 ?: return transformOwnerOfErrorContract(owner)
 
-            val resolvedContractDescription = buildResolvedContractDescription {
-                val effectExtractor = ConeEffectExtractor(session, owner, valueParameters)
+            konst resolvedContractDescription = buildResolvedContractDescription {
+                konst effectExtractor = ConeEffectExtractor(session, owner, konstueParameters)
                 for (statement in lambdaBody.statements) {
                     if (statement.source?.kind is KtFakeSourceElementKind.ImplicitReturn) continue
-                    when (val effect = statement.accept(effectExtractor, null)) {
+                    when (konst effect = statement.accept(effectExtractor, null)) {
                         is ConeEffectDeclaration -> when (effect.erroneous) {
                             false -> effects += effect.toFirElement(statement.source)
                             true -> unresolvedEffects += effect.toFirElement(statement.source)
@@ -208,7 +208,7 @@ abstract class FirAbstractContractResolveTransformerDispatcher(
             owner: T,
             contractDescription: FirRawContractDescription
         ): T {
-            val effectsBlock = buildAnonymousFunction {
+            konst effectsBlock = buildAnonymousFunction {
                 moduleData = session.moduleData
                 origin = FirDeclarationOrigin.Source
                 returnTypeRef = FirImplicitTypeRefImplWithoutSource
@@ -226,13 +226,13 @@ abstract class FirAbstractContractResolveTransformerDispatcher(
                 }
             }
 
-            val lambdaArgument = buildLambdaArgumentExpression {
+            konst lambdaArgument = buildLambdaArgumentExpression {
                 expression = buildAnonymousFunctionExpression {
                     anonymousFunction = effectsBlock
                 }
             }
 
-            val contractCall = buildFunctionCall {
+            konst contractCall = buildFunctionCall {
                 calleeReference = buildSimpleNamedReference {
                     name = Name.identifier("contract")
                 }
@@ -241,7 +241,7 @@ abstract class FirAbstractContractResolveTransformerDispatcher(
                 }
             }
 
-            val legacyRawContractDescription = buildLegacyRawContractDescription {
+            konst legacyRawContractDescription = buildLegacyRawContractDescription {
                 this.contractCall = contractCall
                 this.source = contractDescription.source
             }
@@ -306,18 +306,18 @@ abstract class FirAbstractContractResolveTransformerDispatcher(
             return owner
         }
 
-        private val FirContractDescriptionOwner.hasContractToResolve: Boolean
+        private konst FirContractDescriptionOwner.hasContractToResolve: Boolean
             get() = contractDescription is FirLegacyRawContractDescription || contractDescription is FirRawContractDescription
     }
 }
 
-private val FirContractDescriptionOwner.valueParameters: List<FirValueParameter>
+private konst FirContractDescriptionOwner.konstueParameters: List<FirValueParameter>
     get() = when (this) {
-        is FirFunction -> valueParameters
+        is FirFunction -> konstueParameters
         else -> error()
     }
 
-private val FirContractDescriptionOwner.body: FirBlock
+private konst FirContractDescriptionOwner.body: FirBlock
     get() = when (this) {
         is FirFunction -> body!!
         else -> error()

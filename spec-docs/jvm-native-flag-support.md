@@ -55,7 +55,7 @@ In this case the generated code is the same as for a native function defined in 
 
 Example:
 ``` kotlin
-val foo: Int
+konst foo: Int
   [native] get
 ```
 

@@ -4,7 +4,7 @@ annotation class NoArg
 annotation class AllOpen
 
 @AllOpen
-class Base(val s: String)
+class Base(konst s: String)
 
 @NoArg
 class Derived(s: String) : Base(s)

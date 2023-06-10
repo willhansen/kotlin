@@ -4,7 +4,7 @@ fun box(): String {
     var s: Any? = null
     for (t in arrayOf("1", "2", "3")) {
         class C() {
-            val y = t
+            konst y = t
 
             inner class D() {
                 fun foo() = "($y;$t)"

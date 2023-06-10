@@ -6,5 +6,5 @@
 package kotlin.jvm.internal
 
 interface FunctionBase<out R> : Function<R> {
-    val arity: Int
+    konst arity: Int
 }

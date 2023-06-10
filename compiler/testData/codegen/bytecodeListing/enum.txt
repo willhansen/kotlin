@@ -1,4 +1,4 @@
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class Ann {
     // source: 'enum.kt'
@@ -13,8 +13,8 @@ public final enum class SimpleEnum {
     public final enum static field C: SimpleEnum
     static method <clinit>(): void
     private method <init>(p0: java.lang.String, p1: int): void
-    public static method valueOf(p0: java.lang.String): SimpleEnum
-    public static method values(): SimpleEnum[]
+    public static method konstueOf(p0: java.lang.String): SimpleEnum
+    public static method konstues(): SimpleEnum[]
 }
 
 @kotlin.Metadata
@@ -25,8 +25,8 @@ public final enum class WithAnnotations {
     public final enum static @Ann field B: WithAnnotations
     static method <clinit>(): void
     private method <init>(p0: java.lang.String, p1: int): void
-    public static method valueOf(p0: java.lang.String): WithAnnotations
-    public static method values(): WithAnnotations[]
+    public static method konstueOf(p0: java.lang.String): WithAnnotations
+    public static method konstues(): WithAnnotations[]
 }
 
 @kotlin.Metadata
@@ -40,8 +40,8 @@ public final enum class WithConstructor {
     static method <clinit>(): void
     private method <init>(p0: java.lang.String, p1: int, p2: java.lang.String): void
     public final @org.jetbrains.annotations.NotNull method getX(): java.lang.String
-    public static method valueOf(p0: java.lang.String): WithConstructor
-    public static method values(): WithConstructor[]
+    public static method konstueOf(p0: java.lang.String): WithConstructor
+    public static method konstues(): WithConstructor[]
 }
 
 @kotlin.Metadata
@@ -62,6 +62,6 @@ public abstract enum class WithEntryClass {
     private method <init>(p0: java.lang.String, p1: int): void
     public synthetic method <init>(p0: java.lang.String, p1: int, p2: kotlin.jvm.internal.DefaultConstructorMarker): void
     public abstract method foo(): void
-    public static method valueOf(p0: java.lang.String): WithEntryClass
-    public static method values(): WithEntryClass[]
+    public static method konstueOf(p0: java.lang.String): WithEntryClass
+    public static method konstues(): WithEntryClass[]
 }

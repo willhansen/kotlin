@@ -51,15 +51,15 @@ public class WrappedValues {
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <V> V unescapeNull(@NotNull Object value) {
-        if (value == NULL_VALUE) return null;
-        return (V) value;
+    public static <V> V unescapeNull(@NotNull Object konstue) {
+        if (konstue == NULL_VALUE) return null;
+        return (V) konstue;
     }
 
     @NotNull
-    public static <V> Object escapeNull(@Nullable V value) {
-        if (value == null) return NULL_VALUE;
-        return value;
+    public static <V> Object escapeNull(@Nullable V konstue) {
+        if (konstue == null) return NULL_VALUE;
+        return konstue;
     }
 
     @NotNull
@@ -68,15 +68,15 @@ public class WrappedValues {
     }
 
     @Nullable
-    public static <V> V unescapeExceptionOrNull(@NotNull Object value) {
-        return unescapeNull(unescapeThrowable(value));
+    public static <V> V unescapeExceptionOrNull(@NotNull Object konstue) {
+        return unescapeNull(unescapeThrowable(konstue));
     }
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <V> V unescapeThrowable(@Nullable Object value) {
-        if (value instanceof ThrowableWrapper) {
-            Throwable originThrowable = ((ThrowableWrapper) value).getThrowable();
+    public static <V> V unescapeThrowable(@Nullable Object konstue) {
+        if (konstue instanceof ThrowableWrapper) {
+            Throwable originThrowable = ((ThrowableWrapper) konstue).getThrowable();
 
             if (throwWrappedProcessCanceledException && ExceptionUtilsKt.isProcessCanceledException(originThrowable)) {
                 throw new WrappedProcessCanceledException(originThrowable);
@@ -85,7 +85,7 @@ public class WrappedValues {
             throw ExceptionUtilsKt.rethrow(originThrowable);
         }
 
-        return (V) value;
+        return (V) konstue;
     }
 
     public static class WrappedProcessCanceledException extends RuntimeException {

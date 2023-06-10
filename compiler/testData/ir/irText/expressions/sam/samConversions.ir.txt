@@ -50,5 +50,5 @@ FILE fqName:<root> fileName:/samConversions.kt
               if: GET_VAR 'flag: kotlin.Boolean declared in <root>.test4' type=kotlin.Boolean origin=null
               then: GET_VAR 'a: kotlin.Function0<kotlin.Unit> declared in <root>.test4' type=kotlin.Function0<kotlin.Unit> origin=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
+              if: CONST Boolean type=kotlin.Boolean konstue=true
               then: GET_VAR 'b: kotlin.Function0<kotlin.Unit> declared in <root>.test4' type=kotlin.Function0<kotlin.Unit> origin=null

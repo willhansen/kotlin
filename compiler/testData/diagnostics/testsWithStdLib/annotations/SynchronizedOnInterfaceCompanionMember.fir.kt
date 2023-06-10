@@ -10,14 +10,14 @@ interface I {
 
         var syncProp: String
             @Synchronized get() = ""
-            @Synchronized set(value) {}
+            @Synchronized set(konstue) {}
 
         @JvmStatic var syncPropJvmStatic: String
             @Synchronized get() = ""
-            @Synchronized set(value) {}
+            @Synchronized set(konstue) {}
 
         var syncPropJvmStaticAccessors: String
             @Synchronized @JvmStatic get() = ""
-            @Synchronized @JvmStatic set(value) {}
+            @Synchronized @JvmStatic set(konstue) {}
     }
 }

@@ -31,13 +31,13 @@ func testDataClass() throws {
     let t = "3" as NSString
 
     let tripleVal = TripleVals<NSString>(first: f, second: s, third: t)
-    try assertEquals(actual: tripleVal.first, expected: f, "Data class' value")
-    try assertEquals(actual: tripleVal.first, expected: "1", "Data class' value literal")
+    try assertEquals(actual: tripleVal.first, expected: f, "Data class' konstue")
+    try assertEquals(actual: tripleVal.first, expected: "1", "Data class' konstue literal")
     print(tripleVal)
     try assertEquals(actual: String(describing: tripleVal), expected: "TripleVals(first=\(f), second=\(s), third=\(t))")
 
     let tripleVar = TripleVars<NSString>(first: f, second: s, third: t)
-    try assertEquals(actual: tripleVar.first, expected: f, "Data class' value")
+    try assertEquals(actual: tripleVar.first, expected: f, "Data class' konstue")
     print(tripleVar)
     try assertEquals(actual: String(describing: tripleVar), expected: "[\(f), \(s), \(t)]")
 
@@ -124,14 +124,14 @@ func testGenericVariance() throws {
     let variInAny : GenVarIn<BaseData> = variIn as! GenVarIn<BaseData>
     let variInOther : GenVarIn<SomeOtherData> = variIn as! GenVarIn<SomeOtherData>
 
-    let varInCheck = "variIn: \(variIn.valString()), variInAny: \(variInAny.valString()), variInOther: \(variInOther.valString())"
+    let varInCheck = "variIn: \(variIn.konstString()), variInAny: \(variInAny.konstString()), variInOther: \(variInOther.konstString())"
     try assertEquals(actual: varInCheck, expected: "variIn: SomeData(num=22), variInAny: SomeData(num=22), variInOther: SomeData(num=22)")
 
     let variCoType:GenVarOut<BaseData> = Values_genericsKt.variCoType()
     try assertEquals(actual: "890", expected: variCoType.arg.asString())
 
     let variContraType:GenVarIn<SomeData> = Values_genericsKt.variContraType()
-    try assertEquals(actual: "SomeData(num=1890)", expected: variContraType.valString())
+    try assertEquals(actual: "SomeData(num=1890)", expected: variContraType.konstString())
 }
 
 // Swift should completely ignore this, as should objc. Really verifying that the header generator
@@ -221,8 +221,8 @@ func testGenericInnerClass() throws {
 
     let inarg = GenOuterDeepGenShallowInner<SomeOtherData>(GenOuterDeep<SomeOtherData>(oarg: SomeOtherData(str: "fff")))
     let godeep : GenOuterDeepGenShallowInnerGenDeepInner<SomeOtherData> = GenOuterDeepGenShallowInnerGenDeepInner<SomeOtherData>(inarg)
-    let deepval : SomeOtherData = godeep.o()!
-    try assertEquals(actual: deepval.str, expected: "fff")
+    let deepkonst : SomeOtherData = godeep.o()!
+    try assertEquals(actual: deepkonst.str, expected: "fff")
 
     let deep2 = GenOuterDeep2()
     let deep2Before = GenOuterDeep2.Before(deep2)

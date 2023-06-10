@@ -7,7 +7,7 @@ public/*package*/ abstract class ListImpl : java.util.ArrayList<kotlin.String!> 
     invisible_fake final /*fake_override*/ var elementData: kotlin.Array<(out) kotlin.Any!>!
     protected/*protected and package*/ final /*fake_override*/ var modCount: kotlin.Int
     invisible_fake final /*fake_override*/ var size: kotlin.Int
-    public open /*fake_override*/ val size: kotlin.Int
+    public open /*fake_override*/ konst size: kotlin.Int
     public open /*fake_override*/ fun add(/*0*/ kotlin.Int, /*1*/ kotlin.String!): kotlin.Unit
     public open /*fake_override*/ fun add(/*0*/ kotlin.String!): kotlin.Boolean
     public open /*fake_override*/ fun addAll(/*0*/ kotlin.Int, /*1*/ kotlin.collections.Collection<kotlin.String!>): kotlin.Boolean
@@ -48,10 +48,10 @@ public/*package*/ abstract class ListImpl : java.util.ArrayList<kotlin.String!> 
     invisible_fake open /*fake_override*/ fun writeObject(/*0*/ java.io.ObjectOutputStream!): kotlin.Unit
 
     // Static members
-    invisible_fake const final /*fake_override*/ val DEFAULT_CAPACITY: kotlin.Int
-    invisible_fake final /*fake_override*/ val EMPTY_ELEMENTDATA: kotlin.Array<(out) kotlin.Any!>!
-    invisible_fake const final /*fake_override*/ val MAX_ARRAY_SIZE: kotlin.Int
-    invisible_fake const final /*fake_override*/ val serialVersionUID: kotlin.Long
+    invisible_fake const final /*fake_override*/ konst DEFAULT_CAPACITY: kotlin.Int
+    invisible_fake final /*fake_override*/ konst EMPTY_ELEMENTDATA: kotlin.Array<(out) kotlin.Any!>!
+    invisible_fake const final /*fake_override*/ konst MAX_ARRAY_SIZE: kotlin.Int
+    invisible_fake const final /*fake_override*/ konst serialVersionUID: kotlin.Long
     invisible_fake open /*fake_override*/ fun </*0*/ T : kotlin.Any!> finishToArray(/*0*/ kotlin.Array<(out) T!>!, /*1*/ kotlin.collections.(Mutable)Iterator<*>!): kotlin.Array<(out) T!>!
     invisible_fake open /*fake_override*/ fun hugeCapacity(/*0*/ kotlin.Int): kotlin.Int
     invisible_fake open /*fake_override*/ fun subListRangeCheck(/*0*/ kotlin.Int, /*1*/ kotlin.Int, /*2*/ kotlin.Int): kotlin.Unit

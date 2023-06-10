@@ -12,7 +12,7 @@
 
 fun box(): String {
     var res = BIncrement(1 )
-    val res1: Any = res++
+    konst res1: Any = res++
     return if (res1 is BIncrement && res.i == 1 && res.j == 2 && res1.i == 0 && res1.j == 1) {
         "OK"
     } else

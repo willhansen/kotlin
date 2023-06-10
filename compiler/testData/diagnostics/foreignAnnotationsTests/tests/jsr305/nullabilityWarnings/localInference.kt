@@ -51,46 +51,46 @@ public class PlainJava {
 
 
 // FILE: main.kt
-val jsr: AnnotatedWithJsr = AnnotatedWithJsr()
-val jsrNullable: AnnotatedWithJsr? = null
+konst jsr: AnnotatedWithJsr = AnnotatedWithJsr()
+konst jsrNullable: AnnotatedWithJsr? = null
 
-val jb: AnnotatedWithJB = AnnotatedWithJB()
-val jbNullable: AnnotatedWithJB? = null
+konst jb: AnnotatedWithJB = AnnotatedWithJB()
+konst jbNullable: AnnotatedWithJB? = null
 
-val platform: PlainJava = PlainJava()
-val platformNullable: PlainJava? = null
+konst platform: PlainJava = PlainJava()
+konst platformNullable: PlainJava? = null
 
-val a = jsr.string
-val b = jsrNullable?.string
-val c = jb.string
-val d = jbNullable?.string
-val e = platform.string
-val f = platformNullable?.string
+konst a = jsr.string
+konst b = jsrNullable?.string
+konst c = jb.string
+konst d = jbNullable?.string
+konst e = platform.string
+konst f = platformNullable?.string
 
 fun evlis() {
     // JSR
-    val r1 = a ?: ""
-    val r2 = b ?: ""
+    konst r1 = a ?: ""
+    konst r2 = b ?: ""
 
     // JB
-    val r3 = c <!USELESS_ELVIS!>?: ""<!>
-    val r4 = d ?: ""
+    konst r3 = c <!USELESS_ELVIS!>?: ""<!>
+    konst r4 = d ?: ""
 
     // Platform
-    val r5 = e ?: ""
-    val r6 = f ?: ""
+    konst r5 = e ?: ""
+    konst r6 = f ?: ""
 }
 
 fun ifChecksAndSmartCasts() {
     // JSR
-    val r1 = if (<!SENSELESS_COMPARISON, SENSELESS_COMPARISON!>a == null<!>) 42 else a.length
-    val r2 = if (b == null) 42 else <!DEBUG_INFO_SMARTCAST!>b<!>.length
+    konst r1 = if (<!SENSELESS_COMPARISON, SENSELESS_COMPARISON!>a == null<!>) 42 else a.length
+    konst r2 = if (b == null) 42 else <!DEBUG_INFO_SMARTCAST!>b<!>.length
 
     // JB
-    val r3 = if (<!SENSELESS_COMPARISON!>c == null<!>) 42 else c.length
-    val r4 = if (d == null) 42 else <!DEBUG_INFO_SMARTCAST!>d<!>.length
+    konst r3 = if (<!SENSELESS_COMPARISON!>c == null<!>) 42 else c.length
+    konst r4 = if (d == null) 42 else <!DEBUG_INFO_SMARTCAST!>d<!>.length
 
     // Platform
-    val r5 = if (e == null) 42 else e.length
-    val r6 = if (f == null) 42 else <!DEBUG_INFO_SMARTCAST!>f<!>.length
+    konst r5 = if (e == null) 42 else e.length
+    konst r6 = if (f == null) 42 else <!DEBUG_INFO_SMARTCAST!>f<!>.length
 }

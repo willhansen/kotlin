@@ -1,9 +1,9 @@
-class SimpleClass(val s: String) {
+class SimpleClass(konst s: String) {
     fun foo() = s
 }
 
 typealias Test = SimpleClass
 
-val rv = Test("OK").foo()
+konst rv = Test("OK").foo()
 
 // expected: rv: OK

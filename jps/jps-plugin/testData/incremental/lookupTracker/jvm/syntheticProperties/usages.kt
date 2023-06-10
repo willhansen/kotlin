@@ -4,8 +4,8 @@ package foo.bar
 /*p:foo(KotlinClass)*/import foo.KotlinClass
 
 /*p:foo.bar*/fun test() {
-    val j = /*p:<root>*/JavaClass()
-    val k = /*p:foo*/KotlinClass()
+    konst j = /*p:<root>*/JavaClass()
+    konst k = /*p:foo*/KotlinClass()
 
     /*p:<root>(JavaClass) p:kotlin(Int)*/j./*c:JavaClass*/getFoo()
     /*p:<root>(JavaClass)*/j./*c:JavaClass c:JavaClass(getSETFoo) c:JavaClass(getSetFoo) p:foo.bar p:java.lang p:kotlin p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/setFoo(2)

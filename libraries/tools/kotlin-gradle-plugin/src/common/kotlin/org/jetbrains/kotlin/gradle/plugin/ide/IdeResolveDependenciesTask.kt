@@ -36,31 +36,31 @@ internal open class IdeResolveDependenciesTask : DefaultTask() {
 
     @TaskAction
     fun resolveDependencies() {
-        val outputDirectory = project.buildDir.resolve("ide/dependencies")
+        konst outputDirectory = project.buildDir.resolve("ide/dependencies")
         outputDirectory.deleteRecursively()
-        val gson = GsonBuilder().setLenient().setPrettyPrinting()
+        konst gson = GsonBuilder().setLenient().setPrettyPrinting()
             .registerTypeHierarchyAdapter(IdeDependencyResolver::class.java, IdeDependencyResolverAdapter)
             .registerTypeHierarchyAdapter(Extras::class.java, ExtrasAdapter)
             .registerTypeHierarchyAdapter(IdeaKotlinDependencyCoordinates::class.java, IdeaKotlinDependencyCoordinatesAdapter)
             .registerTypeAdapter(File::class.java, FileAdapter(project))
             .create()
 
-        val extension = project.kotlinExtension
+        konst extension = project.kotlinExtension
         extension.sourceSets.forEach { sourceSet ->
-            val dependencies = project.kotlinIdeMultiplatformImport.resolveDependencies(sourceSet)
-            val jsonOutput = outputDirectory.resolve("json/${sourceSet.name}.json")
+            konst dependencies = project.kotlinIdeMultiplatformImport.resolveDependencies(sourceSet)
+            konst jsonOutput = outputDirectory.resolve("json/${sourceSet.name}.json")
             jsonOutput.parentFile.mkdirs()
             jsonOutput.writeText(gson.toJson(dependencies))
 
             project.kotlinIdeMultiplatformImport.serialize(dependencies).forEachIndexed { index, proto ->
-                val protoOutput = outputDirectory.resolve("proto/${sourceSet.name}/$index.bin")
+                konst protoOutput = outputDirectory.resolve("proto/${sourceSet.name}/$index.bin")
                 protoOutput.parentFile.mkdirs()
                 protoOutput.writeBytes(proto)
             }
         }
 
         project.kotlinIdeMultiplatformImportStatistics.let { statistics ->
-            val timeStatisticsFile = outputDirectory.resolve("times.txt")
+            konst timeStatisticsFile = outputDirectory.resolve("times.txt")
             timeStatisticsFile.writeText(buildString {
                 statistics.getExecutionTimes().forEach { (clazz, time) ->
                     appendLine("${clazz.name} $time.ms")
@@ -85,14 +85,14 @@ internal open class IdeResolveDependenciesTask : DefaultTask() {
         override fun serialize(src: Extras, typeOfSrc: Type, context: JsonSerializationContext): JsonElement {
             return JsonObject().apply {
                 src.entries.forEach { entry ->
-                    val valueElement = runCatching { context.serialize(entry.value) }.getOrElse { JsonPrimitive(entry.value.toString()) }
-                    add(entry.key.stableString, valueElement)
+                    konst konstueElement = runCatching { context.serialize(entry.konstue) }.getOrElse { JsonPrimitive(entry.konstue.toString()) }
+                    add(entry.key.stableString, konstueElement)
                 }
             }
         }
     }
 
-    private class FileAdapter(private val project: Project) : JsonSerializer<File> {
+    private class FileAdapter(private konst project: Project) : JsonSerializer<File> {
         override fun serialize(src: File, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
             return if (src.startsWith(project.projectDir)) {
                 JsonPrimitive(src.relativeTo(project.projectDir).path)

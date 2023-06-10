@@ -1,13 +1,13 @@
 // TARGET_BACKEND: JVM_IR
 // WITH_STDLIB
 
-data class Parent(val child: Parent.Child?) {
-    val result =
+data class Parent(konst child: Parent.Child?) {
+    konst result =
         if (this.child == null) foo(this.child)
         else "Fail"
 
     @JvmInline
-    value class Child(val value: String)
+    konstue class Child(konst konstue: String)
 }
 
 fun foo(x: String?): String =

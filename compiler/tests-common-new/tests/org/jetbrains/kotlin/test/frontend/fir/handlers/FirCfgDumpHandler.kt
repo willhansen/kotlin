@@ -16,24 +16,24 @@ import org.jetbrains.kotlin.test.services.moduleStructure
 
 // TODO: adapt to multifile and multimodule tests
 class FirCfgDumpHandler(testServices: TestServices) : FirAnalysisHandler(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(FirDiagnosticsDirectives)
 
-    private val builder = StringBuilder()
+    private konst builder = StringBuilder()
     private var alreadyDumped: Boolean = false
 
     override fun processModule(module: TestModule, info: FirOutputArtifact) {
         if (alreadyDumped || FirDiagnosticsDirectives.DUMP_CFG !in module.directives) return
-        val file = info.mainFirFiles.values.first()
-        val renderLevels = RENDERER_CFG_LEVELS in module.directives
+        konst file = info.mainFirFiles.konstues.first()
+        konst renderLevels = RENDERER_CFG_LEVELS in module.directives
         file.accept(FirControlFlowGraphRenderVisitor(builder, renderLevels))
         alreadyDumped = true
     }
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (!alreadyDumped) return
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val expectedFile = testDataFile.parentFile.resolve("${testDataFile.nameWithoutFirExtension}.dot")
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst expectedFile = testDataFile.parentFile.resolve("${testDataFile.nameWithoutFirExtension}.dot")
         assertions.assertEqualsToFile(expectedFile, builder.toString())
     }
 }

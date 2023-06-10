@@ -1,6 +1,6 @@
 fun Any.with(operation :  Any.() -> Any) = operation().toString()
 
-val f = { a : Int -> }
+konst f = { a : Int -> }
 
 fun box() : String {
     return if(20.with {

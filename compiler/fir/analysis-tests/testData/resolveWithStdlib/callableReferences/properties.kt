@@ -1,10 +1,10 @@
 class A {
-    val bar: Int = 1
+    konst bar: Int = 1
 }
 
-val bar = 1
+konst bar = 1
 
-val A.baz: Int get() = 1
+konst A.baz: Int get() = 1
 
 fun foo1(x: () -> Int) {}
 fun foo2(x: (A) -> Int) {}

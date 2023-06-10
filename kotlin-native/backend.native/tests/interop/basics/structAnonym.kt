@@ -18,7 +18,7 @@ fun test_GLKVector3() {
         assertEquals(v[1], g)
         assertEquals(v[2], b)
 
-        val ret = hash_GLKVector3(this.readValue())
+        konst ret = hash_GLKVector3(this.readValue())
         assertEquals(s + 2f * t + 4f * p , ret)
     }
 }

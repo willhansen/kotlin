@@ -47,8 +47,8 @@ fun Type.wasmReturnArg(): String =
         is idlInterfaceRef -> "ArenaManager.currentArena"
         else -> error("Unexpected type")
     }
-val Operation.wasmReturnArg: String get() = returnType.wasmReturnArg()
-val Attribute.wasmReturnArg: String get() = type.wasmReturnArg()
+konst Operation.wasmReturnArg: String get() = returnType.wasmReturnArg()
+konst Attribute.wasmReturnArg: String get() = type.wasmReturnArg()
 
 fun Arg.wasmArgNames(): List<String> = when (type) {
     is idlVoid -> error("An arg can not be idlVoid")
@@ -62,15 +62,15 @@ fun Arg.wasmArgNames(): List<String> = when (type) {
     else -> error("Unexpected type")
 }
 
-fun Type.wasmReturnMapping(value: String): String = when (this) {
+fun Type.wasmReturnMapping(konstue: String): String = when (this) {
     is idlVoid -> ""
-    is idlInt -> value
-    is idlFloat -> value
-    is idlDouble -> value
+    is idlInt -> konstue
+    is idlFloat -> konstue
+    is idlDouble -> konstue
     is idlString -> "TODO(\"Implement me\")"
-    is idlObject -> "JsValue(ArenaManager.currentArena, $value)"
+    is idlObject -> "JsValue(ArenaManager.currentArena, $konstue)"
     is idlFunction -> "TODO(\"Implement me\")"
-    is idlInterfaceRef -> "$name(ArenaManager.currentArena, $value)"
+    is idlInterfaceRef -> "$name(ArenaManager.currentArena, $konstue)"
     else -> error("Unexpected type")
 }
 
@@ -83,13 +83,13 @@ fun wasmSetterName(propertyName: String, interfaceName: String)
 fun wasmGetterName(propertyName: String, interfaceName: String)
     = "knjs_get__${interfaceName}_$propertyName"
 
-val Operation.kotlinTypeParameters: String get() {
-    val lambdaRetTypes = args.filter { it.type is idlFunction }
+konst Operation.kotlinTypeParameters: String get() {
+    konst lambdaRetTypes = args.filter { it.type is idlFunction }
         .map { "R${it.name}" }. joinToString(", ")
     return if (lambdaRetTypes == "") "" else "<$lambdaRetTypes>"
 }
 
-val Interface.wasmReceiverArgs get() =
+konst Interface.wasmReceiverArgs get() =
     if (isGlobal) emptyList()
     else listOf("this.arena", "this.index")
 
@@ -104,9 +104,9 @@ fun Type.generateKotlinCallWithReturn(name: String, wasmArgList: String) =
     when(this) {
         is idlVoid ->   "    ${generateKotlinCall(name, wasmArgList)}\n"
         is idlDouble -> "    ${generateKotlinCall(name, wasmArgList)}\n" +
-                        "    val wasmRetVal = ReturnSlot_getDouble()\n"
+                        "    konst wasmRetVal = ReturnSlot_getDouble()\n"
 
-        else ->         "    val wasmRetVal = ${generateKotlinCall(name, wasmArgList)}\n"
+        else ->         "    konst wasmRetVal = ${generateKotlinCall(name, wasmArgList)}\n"
     }
 
 fun Operation.generateKotlinCallWithReturn(parent_name: String, wasmArgList: String) =
@@ -120,11 +120,11 @@ fun Attribute.generateKotlinGetterCallWithReturn(parent_name: String, wasmArgLis
         wasmArgList)
 
 fun Operation.generateKotlin(parent: Interface): String {
-    val argList = args.map {
+    konst argList = args.map {
         "${it.name}: ${it.type.toKotlinType(it.name)}"
     }.joinToString(", ")
 
-    val wasmArgList = (wasmReceiverArgs(parent) + args.map(Arg::wasmMapping) + wasmReturnArg).joinToString(", ")
+    konst wasmArgList = (wasmReceiverArgs(parent) + args.map(Arg::wasmMapping) + wasmReturnArg).joinToString(", ")
 
     // TODO: there can be multiple Rs.
     return "  fun $kotlinTypeParameters $name(" + 
@@ -136,16 +136,16 @@ fun Operation.generateKotlin(parent: Interface): String {
 }
 
 fun Attribute.generateKotlinSetter(parent: Interface): String {
-    val kotlinType = type.toKotlinType(name)
-    return "    set(value: $kotlinType) {\n" +
+    konst kotlinType = type.toKotlinType(name)
+    return "    set(konstue: $kotlinType) {\n" +
     "      ${wasmSetterName(name, parent.name)}(" +
-        (wasmReceiverArgs(parent) + Arg("value", type).wasmMapping()).joinToString(", ") +
+        (wasmReceiverArgs(parent) + Arg("konstue", type).wasmMapping()).joinToString(", ") +
         ")\n" + 
     "    }\n\n"
 }
 
 fun Attribute.generateKotlinGetter(parent: Interface): String {
-    val wasmArgList = (wasmReceiverArgs(parent) + wasmReturnArg).joinToString(", ")
+    konst wasmArgList = (wasmReceiverArgs(parent) + wasmReturnArg).joinToString(", ")
     return "    get() {\n" +
         generateKotlinGetterCallWithReturn(parent.name, wasmArgList) +
     "      return ${type.wasmReturnMapping("wasmRetVal")}\n"+
@@ -153,14 +153,14 @@ fun Attribute.generateKotlinGetter(parent: Interface): String {
 }
 
 fun Attribute.generateKotlin(parent: Interface): String {
-    val kotlinType = type.toKotlinType(name)
-    val varOrVal = if (readOnly) "val" else "var"
+    konst kotlinType = type.toKotlinType(name)
+    konst varOrVal = if (readOnly) "konst" else "var"
     return "  $varOrVal $name: $kotlinType\n" +
     generateKotlinGetter(parent) +
     if (!readOnly) generateKotlinSetter(parent) else ""
 }
 
-val Interface.wasmTypedReceiverArgs get() =
+konst Interface.wasmTypedReceiverArgs get() =
     if (isGlobal) emptyList()
     else listOf("arena: Int", "index: Int")
 
@@ -168,20 +168,20 @@ fun Member.wasmTypedReceiverArgs(parent: Interface) =
     if (isStatic) emptyList() else parent.wasmTypedReceiverArgs
 
 fun Operation.generateWasmStub(parent: Interface): String {
-    val wasmName = wasmFunctionName(this.name, parent.name)
-    val allArgs = (wasmTypedReceiverArgs(parent) + args.toList().wasmTypedMapping() + wasmTypedReturnMapping).joinToString(", ")
+    konst wasmName = wasmFunctionName(this.name, parent.name)
+    konst allArgs = (wasmTypedReceiverArgs(parent) + args.toList().wasmTypedMapping() + wasmTypedReturnMapping).joinToString(", ")
     return "@SymbolName(\"$wasmName\")\n" +
     "external public fun $wasmName($allArgs): ${returnType.wasmReturnTypeMapping()}\n\n"
 }
 fun Attribute.generateWasmSetterStub(parent: Interface): String {
-    val wasmSetter = wasmSetterName(this.name, parent.name)
-    val allArgs = (wasmTypedReceiverArgs(parent) + Arg("value", this.type).wasmTypedMapping()).joinToString(", ")
+    konst wasmSetter = wasmSetterName(this.name, parent.name)
+    konst allArgs = (wasmTypedReceiverArgs(parent) + Arg("konstue", this.type).wasmTypedMapping()).joinToString(", ")
     return "@SymbolName(\"$wasmSetter\")\n" +
     "external public fun $wasmSetter($allArgs): Unit\n\n"
 }
 fun Attribute.generateWasmGetterStub(parent: Interface): String {
-    val wasmGetter = wasmGetterName(this.name, parent.name)
-    val allArgs = (wasmTypedReceiverArgs(parent) + wasmTypedReturnMapping).joinToString(", ")
+    konst wasmGetter = wasmGetterName(this.name, parent.name)
+    konst allArgs = (wasmTypedReceiverArgs(parent) + wasmTypedReturnMapping).joinToString(", ")
     return "@SymbolName(\"$wasmGetter\")\n" +
     "external public fun $wasmGetter($allArgs): Int\n\n"
 }
@@ -211,9 +211,9 @@ fun Arg.wasmTypedMapping()
 // TODO: Optimize for simple types.
 fun Type.wasmTypedReturnMapping(): String = "resultArena: Int"
 
-val Operation.wasmTypedReturnMapping get() = returnType.wasmTypedReturnMapping()
+konst Operation.wasmTypedReturnMapping get() = returnType.wasmTypedReturnMapping()
 
-val Attribute.wasmTypedReturnMapping get() = type.wasmTypedReturnMapping()
+konst Attribute.wasmTypedReturnMapping get() = type.wasmTypedReturnMapping()
 
 fun List<Arg>.wasmTypedMapping():List<String>
     = this.map(Arg::wasmTypedMapping)
@@ -248,14 +248,14 @@ fun Interface.generateKotlinClassFooter() =
     "}\n"
 
 fun Interface.generateKotlinClassConverter() =
-    "val JsValue.as$name: $name\n" +
+    "konst JsValue.as$name: $name\n" +
     "  get() {\n" +
     "    return $name(this.arena, this.index)\n"+
     "  }\n"
 
 fun Interface.generateKotlin(): String {
-    fun unlessGlobal(value: () -> String): String {
-        return if (this.isGlobal) "" else value()
+    fun unlessGlobal(konstue: () -> String): String {
+        return if (this.isGlobal) "" else konstue()
     }
 
     return generateMemberWasmStubs() + 
@@ -274,7 +274,7 @@ fun generateKotlin(pkg: String, interfaces: List<Interface>) =
         it.generateKotlin()
     }.joinToString("\n") +
     if (pkg == "kotlinx.interop.wasm.dom")  // TODO: make it a general solution.
-        "fun <R> setInterval(interval: Int, lambda: KtFunction<R>) = setInterval(lambda, interval)\n"
+        "fun <R> setInterkonst(interkonst: Int, lambda: KtFunction<R>) = setInterkonst(lambda, interkonst)\n"
     else ""
 
 /////////////////////////////////////////////////////////
@@ -295,25 +295,25 @@ fun Arg.composeWasmArgs(): String = when (type) {
     else -> error("Unexpected type")
 }
 
-val Interface.receiver get() =
+konst Interface.receiver get() =
     if (isGlobal) "" else  "kotlinObject(arena, obj)."
 
 fun Member.receiver(parent: Interface) =
     if (isStatic) "${parent.name}." else parent.receiver
 
-val Interface.wasmReceiverArgName get() =
+konst Interface.wasmReceiverArgName get() =
     if (isGlobal) emptyList() else listOf("arena", "obj")
 
 fun Member.wasmReceiverArgName(parent: Interface) =
     if (isStatic) emptyList() else parent.wasmReceiverArgName
 
-val Operation.wasmReturnArgName get() =
+konst Operation.wasmReturnArgName get() =
     returnType.wasmReturnArgName
 
-val Attribute.wasmReturnArgName get() =
+konst Attribute.wasmReturnArgName get() =
     type.wasmReturnArgName
 
-val Type.wasmReturnArgName get() =
+konst Type.wasmReturnArgName get() =
     when (this) {
         is idlVoid -> emptyList()
         is idlInt -> emptyList()
@@ -325,7 +325,7 @@ val Type.wasmReturnArgName get() =
         else -> error("Unexpected type: $this")
     }
 
-val Type.wasmReturnExpression get() =
+konst Type.wasmReturnExpression get() =
     when(this) {
         is idlVoid -> ""
         is idlInt -> "result"
@@ -338,10 +338,10 @@ val Type.wasmReturnExpression get() =
     }
 
 fun Operation.generateJs(parent: Interface): String {
-    val allArgs = wasmReceiverArgName(parent) + args.map { it.wasmArgNames() }.flatten() + wasmReturnArgName
-    val wasmMapping = allArgs.joinToString(", ")
-    val argList = args.map { it.name }. joinToString(", ")
-    val composedArgsList = args.map { it.composeWasmArgs() }. joinToString("")
+    konst allArgs = wasmReceiverArgName(parent) + args.map { it.wasmArgNames() }.flatten() + wasmReturnArgName
+    konst wasmMapping = allArgs.joinToString(", ")
+    konst argList = args.map { it.name }. joinToString(", ")
+    konst composedArgsList = args.map { it.composeWasmArgs() }. joinToString("")
 
     return "\n  ${wasmFunctionName(this.name, parent.name)}: function($wasmMapping) {\n" +
         composedArgsList +
@@ -351,18 +351,18 @@ fun Operation.generateJs(parent: Interface): String {
 }
 
 fun Attribute.generateJsSetter(parent: Interface): String {
-    val valueArg = Arg("value", type)
-    val allArgs = wasmReceiverArgName(parent) + valueArg.wasmArgNames()
-    val wasmMapping = allArgs.joinToString(", ")
+    konst konstueArg = Arg("konstue", type)
+    konst allArgs = wasmReceiverArgName(parent) + konstueArg.wasmArgNames()
+    konst wasmMapping = allArgs.joinToString(", ")
     return "\n  ${wasmSetterName(name, parent.name)}: function($wasmMapping) {\n" +
-        valueArg.composeWasmArgs() +
-        "    ${receiver(parent)}$name = value;\n" +
+        konstueArg.composeWasmArgs() +
+        "    ${receiver(parent)}$name = konstue;\n" +
     "  }"
 }
 
 fun Attribute.generateJsGetter(parent: Interface): String {
-    val allArgs = wasmReceiverArgName(parent) + wasmReturnArgName
-    val wasmMapping = allArgs.joinToString(", ")
+    konst allArgs = wasmReceiverArgName(parent) + wasmReturnArgName
+    konst wasmMapping = allArgs.joinToString(", ")
     return "\n  ${wasmGetterName(name, parent.name)}: function($wasmMapping) {\n" +
         "    var result = ${receiver(parent)}$name;\n" +
         "    return ${type.wasmReturnExpression};\n" +
@@ -388,17 +388,17 @@ fun generateJs(interfaces: List<Interface>): String =
     }.flatten() .joinToString(",\n") + 
     "\n})\n"
 
-const val idlMathPackage = "kotlinx.interop.wasm.math"
-const val idlDomPackage = "kotlinx.interop.wasm.dom"
+const konst idlMathPackage = "kotlinx.interop.wasm.math"
+const konst idlDomPackage = "kotlinx.interop.wasm.dom"
 
 fun processIdlLib(args: Array<String>, additionalArgs: InternalInteropOptions): Array<String> {
-    val jsInteropArguments = JSInteropArguments()
+    konst jsInteropArguments = JSInteropArguments()
     jsInteropArguments.argParser.parse(args)
     // TODO: Refactor me.
-    val ktGenRoot = File(additionalArgs.generated).mkdirs()
-    val nativeLibsDir = File(additionalArgs.natives).mkdirs()
+    konst ktGenRoot = File(additionalArgs.generated).mkdirs()
+    konst nativeLibsDir = File(additionalArgs.natives).mkdirs()
 
-    val idl = when (jsInteropArguments.pkg) {
+    konst idl = when (jsInteropArguments.pkg) {
         idlMathPackage -> idlMath
         idlDomPackage -> idlDom
         else -> throw IllegalArgumentException("Please choose either $idlMathPackage or $idlDomPackage for -pkg argument")

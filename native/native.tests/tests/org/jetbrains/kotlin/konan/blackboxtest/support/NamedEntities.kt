@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.konan.blackboxtest.support
 /**
  * Represents a package name.
  */
-internal class PackageName private constructor(private val fqn: String, val segments: List<String>): Comparable<PackageName> {
+internal class PackageName private constructor(private konst fqn: String, konst segments: List<String>): Comparable<PackageName> {
     constructor(segments: List<String>) : this(segments.joinToString("."), segments)
     constructor(fqn: String) : this(fqn, if (fqn.isNotEmpty()) fqn.split('.') else emptyList())
 
@@ -21,7 +21,7 @@ internal class PackageName private constructor(private val fqn: String, val segm
     override fun compareTo(other: PackageName) = fqn.compareTo(other.fqn)
 
     companion object {
-        val EMPTY = PackageName("", emptyList())
+        konst EMPTY = PackageName("", emptyList())
     }
 }
 
@@ -34,16 +34,16 @@ internal class PackageName private constructor(private val fqn: String, val segm
  * [functionName] - name of test function
  */
 internal class TestName: Comparable<TestName> {
-    private val fqn: String
+    private konst fqn: String
 
-    val packageName: PackageName
-    val packagePartClassName: String?
-    val functionName: String
+    konst packageName: PackageName
+    konst packagePartClassName: String?
+    konst functionName: String
 
     constructor(purePackageSegments: List<String>, classNames: List<String>, functionName: String) {
         this.functionName = functionName
 
-        val segments = purePackageSegments.toMutableList()
+        konst segments = purePackageSegments.toMutableList()
         if (classNames.lastOrNull().isPackagePartClassName()) {
             packagePartClassName = classNames.last()
             segments += classNames.dropLast(1)
@@ -63,7 +63,7 @@ internal class TestName: Comparable<TestName> {
     constructor(fqn: String) {
         this.fqn = fqn
 
-        val segments = fqn.split('.').toMutableList()
+        konst segments = fqn.split('.').toMutableList()
         functionName = segments.removeLast()
         packagePartClassName = if (segments.lastOrNull().isPackagePartClassName()) segments.removeLast() else null
         packageName = PackageName(segments)

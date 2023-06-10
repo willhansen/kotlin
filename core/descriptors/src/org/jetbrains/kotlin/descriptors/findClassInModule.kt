@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.resolve.getResolutionAnchorIfAny
 
 fun ModuleDescriptor.findClassifierAcrossModuleDependencies(classId: ClassId): ClassifierDescriptor? = withResolutionAnchor {
-    val packageViewDescriptor = getPackage(classId.packageFqName)
-    val segments = classId.relativeClassName.pathSegments()
-    val topLevelClass = packageViewDescriptor.memberScope.getContributedClassifier(
+    konst packageViewDescriptor = getPackage(classId.packageFqName)
+    konst segments = classId.relativeClassName.pathSegments()
+    konst topLevelClass = packageViewDescriptor.memberScope.getContributedClassifier(
         segments.first(),
         NoLookupLocation.FROM_DESERIALIZATION
     ) ?: return@withResolutionAnchor null
@@ -40,7 +40,7 @@ fun ModuleDescriptor.findClassifierAcrossModuleDependencies(classId: ClassId): C
 private inline fun ModuleDescriptor.withResolutionAnchor(
     crossinline doSearch: ModuleDescriptor.() -> ClassifierDescriptor?
 ): ClassifierDescriptor? {
-    val anchor = getResolutionAnchorIfAny()
+    konst anchor = getResolutionAnchorIfAny()
     return if (anchor == null) doSearch() else anchor.doSearch() ?: doSearch()
 }
 
@@ -50,11 +50,11 @@ fun ModuleDescriptor.findClassAcrossModuleDependencies(classId: ClassId): ClassD
 // Returns a mock class descriptor if no existing class is found.
 // NB: the returned class has no type parameters and thus cannot be given arguments in types
 fun ModuleDescriptor.findNonGenericClassAcrossDependencies(classId: ClassId, notFoundClasses: NotFoundClasses): ClassDescriptor {
-    val existingClass = findClassAcrossModuleDependencies(classId)
+    konst existingClass = findClassAcrossModuleDependencies(classId)
     if (existingClass != null) return existingClass
 
     // Take a list of N zeros, where N is the number of class names in the given ClassId
-    val typeParametersCount = generateSequence(classId, ClassId::getOuterClassId).map { 0 }.toList()
+    konst typeParametersCount = generateSequence(classId, ClassId::getOuterClassId).map { 0 }.toList()
 
     return notFoundClasses.getClass(classId, typeParametersCount)
 }

@@ -8,7 +8,7 @@ interface Derived : Base {
 }
 
 abstract class A<T : Base> {
-    protected val a: T = null!!
+    protected konst a: T = null!!
 
     fun fest_1(other: A<*>) {
         other.a.baseFun() // OK

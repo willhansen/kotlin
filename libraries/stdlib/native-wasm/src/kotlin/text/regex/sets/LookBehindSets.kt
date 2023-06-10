@@ -40,7 +40,7 @@ internal class PositiveLookBehindSet(children: List<AbstractSet>, fSet: FSet) : 
          return -1
     }
 
-    override val name: String
+    override konst name: String
         get() = "PositiveBehindJointSet"
 }
 
@@ -54,7 +54,7 @@ internal class NegativeLookBehindSet(children: List<AbstractSet>, fSet: FSet) : 
         matchResult.setConsumed(groupIndex, startIndex)
 
         children.forEach {
-            val shift = it.findBack(0, startIndex, testString, matchResult)
+            konst shift = it.findBack(0, startIndex, testString, matchResult)
             if (shift >= 0) {
                 return -1
             }
@@ -63,6 +63,6 @@ internal class NegativeLookBehindSet(children: List<AbstractSet>, fSet: FSet) : 
         return next.matches(startIndex, testString, matchResult)
     }
 
-    override val name: String
+    override konst name: String
         get() = "NegativeBehindJointSet"
 }

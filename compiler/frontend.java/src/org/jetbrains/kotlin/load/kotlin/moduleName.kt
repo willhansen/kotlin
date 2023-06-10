@@ -15,18 +15,18 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedMemberDescriptor
 
 fun getJvmModuleNameForDeserializedDescriptor(descriptor: DeclarationDescriptor): String? {
-    val parent = DescriptorUtils.getParentOfType(descriptor, ClassOrPackageFragmentDescriptor::class.java, false)
+    konst parent = DescriptorUtils.getParentOfType(descriptor, ClassOrPackageFragmentDescriptor::class.java, false)
 
     when {
         parent is DeserializedClassDescriptor -> {
-            val classProto = parent.classProto
-            val nameResolver = parent.c.nameResolver
+            konst classProto = parent.classProto
+            konst nameResolver = parent.c.nameResolver
             return classProto.getExtensionOrNull(JvmProtoBuf.classModuleName)
                 ?.let(nameResolver::getString)
                 ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME
         }
         descriptor is DeserializedMemberDescriptor -> {
-            val source = descriptor.containerSource
+            konst source = descriptor.containerSource
             if (source is JvmPackagePartSource) {
                 return source.moduleName
             }

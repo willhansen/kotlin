@@ -3,16 +3,16 @@
 
 import kotlin.test.assertEquals
 
-inline class Z(internal val x: Int)
-inline class Z2(internal val x: Z)
+inline class Z(internal konst x: Int)
+inline class Z2(internal konst x: Z)
 
-inline class L(internal val x: Long)
-inline class L2(internal val x: L)
+inline class L(internal konst x: Long)
+inline class L2(internal konst x: L)
 
-inline class A1(internal val x: Any?)
-inline class A1_2(internal val x: A1)
-inline class A2(internal val x: Any)
-inline class A2_2(internal val x: A2)
+inline class A1(internal konst x: Any?)
+inline class A1_2(internal konst x: A1)
+inline class A2(internal konst x: Any)
+inline class A2_2(internal konst x: A2)
 
 fun box(): String {
     assertEquals(42, Z::x.call(Z(42)))

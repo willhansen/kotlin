@@ -11,14 +11,14 @@ fun foo() {
     open class LocalOpenKlassA: <!OPT_IN_USAGE_ERROR!>Interface<!>
     abstract class LocalAbstractKlassA: <!OPT_IN_USAGE_ERROR!>Interface<!>
     class LocalKlassA: <!OPT_IN_USAGE_ERROR!>Interface<!>
-    data class LocalDataKlassA(val arg: Int): <!OPT_IN_USAGE_ERROR!>Interface<!>
+    data class LocalDataKlassA(konst arg: Int): <!OPT_IN_USAGE_ERROR!>Interface<!>
     object: <!OPT_IN_USAGE_ERROR!>Interface<!> {}
 
     // opt-in is present, no errors
     @OptIn(ApiMarker::class) open class LocalOpenKlassB: Interface
     @OptIn(ApiMarker::class) abstract class LocalAbstractKlassB: Interface
     @OptIn(ApiMarker::class) class LocalKlassB: Interface
-    @OptIn(ApiMarker::class) data class LocalDataKlassB(val arg: Int): Interface
+    @OptIn(ApiMarker::class) data class LocalDataKlassB(konst arg: Int): Interface
     @OptIn(ApiMarker::class) object: Interface {}
 
     // requiring to opt-in into local classifiers works as well
@@ -26,6 +26,6 @@ fun foo() {
     @ApiMarker open class LocalOpenKlassC: Interface
     @ApiMarker abstract class LocalAbstractKlassC: Interface
     @ApiMarker class LocalKlassC: Interface
-    @ApiMarker data class LocalDataKlassC(val arg: Int): Interface
+    @ApiMarker data class LocalDataKlassC(konst arg: Int): Interface
     @ApiMarker object: Interface {}
 }

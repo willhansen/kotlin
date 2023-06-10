@@ -1,5 +1,5 @@
 class Introspector {
-    inner class SchemaRetriever(val transaction: String) {
+    inner class SchemaRetriever(konst transaction: String) {
         inline fun inSchema(crossinline modifier: (String) -> Unit) =
                 { modifier(transaction) }.let { it() }
 

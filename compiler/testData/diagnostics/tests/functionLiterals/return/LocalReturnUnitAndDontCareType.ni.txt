@@ -1,6 +1,6 @@
 package
 
-public val a: kotlin.Unit
-public val b: kotlin.Unit
-public val c: kotlin.Any
-public val flag: kotlin.Boolean = true
+public konst a: kotlin.Unit
+public konst b: kotlin.Unit
+public konst c: kotlin.Any
+public konst flag: kotlin.Boolean = true

@@ -1,5 +1,5 @@
 abstract class Base(s: String) {
-  val s: String
+  konst s: String
 }
 
 class Outer {

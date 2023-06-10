@@ -36,7 +36,7 @@ abstract class KotlinMultiFileTestWithJava<M : KotlinBaseTest.TestModule, F : Ko
         }
     }
 
-    inner class ModuleAndDependencies internal constructor(val module: M?, val dependencies: List<String>, val friends: List<String>)
+    inner class ModuleAndDependencies internal constructor(konst module: M?, konst dependencies: List<String>, konst friends: List<String>)
 
     override fun createTestFilesFromFile(file: File, expectedText: String): List<F> {
         return createTestFiles(file, expectedText, HashMap())
@@ -49,8 +49,8 @@ abstract class KotlinMultiFileTestWithJava<M : KotlinBaseTest.TestModule, F : Ko
         usePsiClassFilesReading: Boolean = true,
         excludeNonTypeUseJetbrainsAnnotations: Boolean = false
     ): KotlinCoreEnvironment {
-        val defaultClasspath = getClasspath(file, excludeNonTypeUseJetbrainsAnnotations)
-        val configuration = createConfiguration(
+        konst defaultClasspath = getClasspath(file, excludeNonTypeUseJetbrainsAnnotations)
+        konst configuration = createConfiguration(
             extractConfigurationKind(files),
             getTestJdkKind(files),
             backend,
@@ -84,12 +84,12 @@ abstract class KotlinMultiFileTestWithJava<M : KotlinBaseTest.TestModule, F : Ko
     }
 
     private fun getClasspath(file: File, excludeNonTypeUseJetbrainsAnnotations: Boolean): List<File> {
-        val result: MutableList<File> = ArrayList()
+        konst result: MutableList<File> = ArrayList()
         if (!excludeNonTypeUseJetbrainsAnnotations) {
             result.add(KtTestUtil.getAnnotationsJar())
         }
         result.addAll(getExtraClasspath())
-        val fileText = file.readText(Charsets.UTF_8)
+        konst fileText = file.readText(Charsets.UTF_8)
         if (InTextDirectivesUtils.isDirectiveDefined(fileText, "STDLIB_JDK8")) {
             result.add(ForTestCompileRuntime.runtimeJarForTestsWithJdk8())
         }
@@ -108,8 +108,8 @@ abstract class KotlinMultiFileTestWithJava<M : KotlinBaseTest.TestModule, F : Ko
 
     @Throws(Exception::class)
     public override fun doTest(filePath: String) {
-        val file = createTestFileFromPath(filePath)
-        val expectedText = KtTestUtil.doLoadFile(file)
+        konst file = createTestFileFromPath(filePath)
+        konst expectedText = KtTestUtil.doLoadFile(file)
         //TODO: move to proper tests
         if (InTextDirectivesUtils.isDirectiveDefined(expectedText, "// SKIP_JAVAC")) return
         super.doTest(file.path)
@@ -142,14 +142,14 @@ abstract class KotlinMultiFileTestWithJava<M : KotlinBaseTest.TestModule, F : Ko
             }
 
             override fun createModule(name: String, dependencies: List<String>, friends: List<String>, dependsOn: List<String>): M? {
-                val module = createTestModule(name, dependencies, friends)
-                val oldValue = modules.put(name, ModuleAndDependencies(module, dependencies, friends))
+                konst module = createTestModule(name, dependencies, friends)
+                konst oldValue = modules.put(name, ModuleAndDependencies(module, dependencies, friends))
                 assert(oldValue == null) { "Module $name declared more than once" }
                 return module
             }
 
             private fun writeSourceFile(fileName: String, content: String, targetDir: File) {
-                val tmpFile = File(targetDir, fileName)
+                konst tmpFile = File(targetDir, fileName)
                 KtTestUtil.mkdirs(tmpFile.parentFile)
                 tmpFile.writeText(content, Charsets.UTF_8)
             }

@@ -26,10 +26,10 @@ import org.jetbrains.kotlin.name.Name
 
 abstract class FirAbstractImportingScope(
     session: FirSession,
-    protected val scopeSession: ScopeSession,
+    protected konst scopeSession: ScopeSession,
     lookupInFir: Boolean
 ) : FirAbstractProviderBasedScope(session, lookupInFir) {
-    private val FirClassLikeSymbol<*>.fullyExpandedSymbol: FirClassSymbol<*>?
+    private konst FirClassLikeSymbol<*>.fullyExpandedSymbol: FirClassSymbol<*>?
         get() = when (this) {
             is FirTypeAliasSymbol -> fir.expandedConeType?.lookupTag?.toSymbol(session)?.fullyExpandedSymbol
             is FirClassSymbol<*> -> this
@@ -53,11 +53,11 @@ abstract class FirAbstractImportingScope(
         processor: (FirClassLikeSymbol<*>) -> Unit
     ) {
         for (import in imports) {
-            val importedName = name ?: import.importedName ?: continue
+            konst importedName = name ?: import.importedName ?: continue
             if (isExcluded(import, importedName)) continue
-            val classId = import.resolvedParentClassId?.createNestedClassId(importedName)
+            konst classId = import.resolvedParentClassId?.createNestedClassId(importedName)
                 ?: ClassId.topLevel(import.packageFqName.child(importedName))
-            val symbol = provider.getClassLikeSymbolByClassId(classId) ?: continue
+            konst symbol = provider.getClassLikeSymbolByClassId(classId) ?: continue
             processor(symbol)
         }
     }
@@ -71,12 +71,12 @@ abstract class FirAbstractImportingScope(
         getTopLevelCallableSymbols: (FqName, Name) -> List<S>
     ) {
         for (import in imports) {
-            val importedName = name ?: import.importedName ?: continue
+            konst importedName = name ?: import.importedName ?: continue
             if (isExcluded(import, importedName)) continue
-            val parentClassId = import.resolvedParentClassId
+            konst parentClassId = import.resolvedParentClassId
             if (parentClassId != null) {
-                val staticsScopeOwnerSymbol = provider.getClassLikeSymbolByClassId(parentClassId)?.fullyExpandedSymbol
-                val staticsScope = staticsScopeOwnerSymbol?.getStaticsScope()
+                konst staticsScopeOwnerSymbol = provider.getClassLikeSymbolByClassId(parentClassId)?.fullyExpandedSymbol
+                konst staticsScope = staticsScopeOwnerSymbol?.getStaticsScope()
                 if (staticsScope != null) {
                     staticsScope.processCallablesByName(importedName) {
                         if (it.isStatic || staticsScopeOwnerSymbol.classKind == ClassKind.OBJECT) {
@@ -149,8 +149,8 @@ internal fun FirProperty.buildImportedCopy(importedClassId: ClassId): FirPropert
 private object ImportedFromObjectOrStaticClassIdKey : FirDeclarationDataKey()
 
 class ImportedFromObjectOrStaticData<D : FirCallableDeclaration>(
-    val objectClassId: ClassId,
-    val original: D,
+    konst objectClassId: ClassId,
+    konst original: D,
 )
 
 var <D : FirCallableDeclaration> D.importedFromObjectOrStaticData: ImportedFromObjectOrStaticData<D>?

@@ -4,17 +4,17 @@ import com.google.gson.annotations.*
 
 
 data class LlvmCovReportFunction(
-        @Expose val name: String,
-        @Expose val count: Int,
-        @Expose val regions: List<List<Int>>,
-        @Expose val filenames: List<String>
+        @Expose konst name: String,
+        @Expose konst count: Int,
+        @Expose konst regions: List<List<Int>>,
+        @Expose konst filenames: List<String>
 )
 
 data class LlvmCovReportSummary(
-        @Expose val lines: LlvmCovReportStatistics,
-        @Expose val functions: LlvmCovReportStatistics,
-        @Expose val instantiations: LlvmCovReportStatistics,
-        @Expose val regions: LlvmCovReportStatistics
+        @Expose konst lines: LlvmCovReportStatistics,
+        @Expose konst functions: LlvmCovReportStatistics,
+        @Expose konst instantiations: LlvmCovReportStatistics,
+        @Expose konst regions: LlvmCovReportStatistics
 
 )
 
@@ -24,30 +24,30 @@ data class LlvmCovReportSummary(
  *  is encoded not as dictionary, but as array of ints and bools.
  */
 data class LlvmCovReportFile(
-        @Expose val filename: String,
-        @Expose val summary: LlvmCovReportSummary
+        @Expose konst filename: String,
+        @Expose konst summary: LlvmCovReportSummary
 )
 
 data class LlvmCovReportStatistics(
-    @Expose val count: Int,
-    @Expose val covered: Int,
-    @Expose val percent: Double
+    @Expose konst count: Int,
+    @Expose konst covered: Int,
+    @Expose konst percent: Double
 )
 
 data class LlvmCovReportData(
-        @Expose val files: List<LlvmCovReportFile>,
-        @Expose val functions: List<LlvmCovReportFunction>,
-        @Expose val totals: LlvmCovReportSummary
+        @Expose konst files: List<LlvmCovReportFile>,
+        @Expose konst functions: List<LlvmCovReportFunction>,
+        @Expose konst totals: LlvmCovReportSummary
 )
 
 data class LlvmCovReport(
-        @Expose val version: String,
-        @Expose val type: String,
-        @Expose val data: List<LlvmCovReportData>
+        @Expose konst version: String,
+        @Expose konst type: String,
+        @Expose konst data: List<LlvmCovReportData>
 )
 
 fun parseLlvmCovReport(llvmCovReport: String): LlvmCovReport = gson.fromJson(llvmCovReport, LlvmCovReport::class.java)
 
-val LlvmCovReport.isValid
+konst LlvmCovReport.isValid
     get() = type == "llvm.coverage.json.export"
 

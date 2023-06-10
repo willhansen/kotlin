@@ -48,29 +48,29 @@ object KotlinToJVMBytecodeCompiler {
     ): Boolean {
         ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
 
-        val repeats = environment.configuration[CLIConfigurationKeys.REPEAT_COMPILE_MODULES]
+        konst repeats = environment.configuration[CLIConfigurationKeys.REPEAT_COMPILE_MODULES]
         if (repeats != null && !repeat) {
-            val performanceManager = environment.configuration[CLIConfigurationKeys.PERF_MANAGER]
+            konst performanceManager = environment.configuration[CLIConfigurationKeys.PERF_MANAGER]
             return (0 until repeats).map {
-                val result = compileModules(environment, buildFile, chunk, repeat = true)
+                konst result = compileModules(environment, buildFile, chunk, repeat = true)
                 performanceManager?.notifyRepeat(repeats, it)
                 result
             }.last()
         }
 
-        val moduleVisibilityManager = ModuleVisibilityManager.SERVICE.getInstance(environment.project)
+        konst moduleVisibilityManager = ModuleVisibilityManager.SERVICE.getInstance(environment.project)
         for (module in chunk) {
             moduleVisibilityManager.addModule(module)
         }
 
-        val friendPaths = environment.configuration.getList(JVMConfigurationKeys.FRIEND_PATHS)
+        konst friendPaths = environment.configuration.getList(JVMConfigurationKeys.FRIEND_PATHS)
         for (path in friendPaths) {
             moduleVisibilityManager.addFriendPath(path)
         }
 
-        val projectConfiguration = environment.configuration
+        konst projectConfiguration = environment.configuration
         if (projectConfiguration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
-            val projectEnvironment =
+            konst projectEnvironment =
                 VfsBasedProjectEnvironment(
                     environment.project,
                     VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)
@@ -84,39 +84,39 @@ object KotlinToJVMBytecodeCompiler {
             )
         }
 
-        val result = repeatAnalysisIfNeeded(analyze(environment), environment)
+        konst result = repeatAnalysisIfNeeded(analyze(environment), environment)
         if (result == null || !result.shouldGenerateCode) return false
 
         ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
 
         result.throwIfError()
 
-        val mainClassFqName =
+        konst mainClassFqName =
             if (chunk.size == 1 && projectConfiguration.get(JVMConfigurationKeys.OUTPUT_JAR) != null)
                 findMainClass(result.bindingContext, projectConfiguration.languageVersionSettings, environment.getSourceFiles())
             else null
 
-        val localFileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)
+        konst localFileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL)
 
-        val (codegenFactory, wholeBackendInput) = convertToIr(environment, result)
-        val diagnosticsReporter = DiagnosticReporterFactory.createReporter()
+        konst (codegenFactory, wholeBackendInput) = convertToIr(environment, result)
+        konst diagnosticsReporter = DiagnosticReporterFactory.createReporter()
 
-        val codegenInputs = ArrayList<CodegenFactory.CodegenInput>(chunk.size)
+        konst codegenInputs = ArrayList<CodegenFactory.CodegenInput>(chunk.size)
 
         for (module in chunk) {
             ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
 
-            val ktFiles = module.getSourceFiles(environment.getSourceFiles(), localFileSystem, chunk.size > 1, buildFile)
+            konst ktFiles = module.getSourceFiles(environment.getSourceFiles(), localFileSystem, chunk.size > 1, buildFile)
             if (!checkKotlinPackageUsageForPsi(environment.configuration, ktFiles)) return false
-            val moduleConfiguration = projectConfiguration.applyModuleProperties(module, buildFile)
+            konst moduleConfiguration = projectConfiguration.applyModuleProperties(module, buildFile)
 
-            val backendInput = codegenFactory.getModuleChunkBackendInput(wholeBackendInput, ktFiles)
+            konst backendInput = codegenFactory.getModuleChunkBackendInput(wholeBackendInput, ktFiles)
             codegenInputs += runLowerings(
                 environment, moduleConfiguration, result, ktFiles, module, codegenFactory, backendInput, diagnosticsReporter
             )
         }
 
-        val outputs = ArrayList<GenerationState>(chunk.size)
+        konst outputs = ArrayList<GenerationState>(chunk.size)
 
         for (input in codegenInputs) {
             outputs += runCodegen(input, input.state, codegenFactory, result.bindingContext, diagnosticsReporter, environment.configuration)
@@ -126,16 +126,16 @@ object KotlinToJVMBytecodeCompiler {
     }
 
     fun compileBunchOfSources(environment: KotlinCoreEnvironment): Boolean {
-        val moduleVisibilityManager = ModuleVisibilityManager.SERVICE.getInstance(environment.project)
+        konst moduleVisibilityManager = ModuleVisibilityManager.SERVICE.getInstance(environment.project)
 
-        val friendPaths = environment.configuration.getList(JVMConfigurationKeys.FRIEND_PATHS)
+        konst friendPaths = environment.configuration.getList(JVMConfigurationKeys.FRIEND_PATHS)
         for (path in friendPaths) {
             moduleVisibilityManager.addFriendPath(path)
         }
 
         if (!checkKotlinPackageUsageForPsi(environment.configuration, environment.getSourceFiles())) return false
 
-        val generationState = analyzeAndGenerate(environment) ?: return false
+        konst generationState = analyzeAndGenerate(environment) ?: return false
 
         try {
             writeOutput(environment.configuration, generationState.factory, null)
@@ -147,9 +147,9 @@ object KotlinToJVMBytecodeCompiler {
 
     private fun repeatAnalysisIfNeeded(result: AnalysisResult?, environment: KotlinCoreEnvironment): AnalysisResult? {
         if (result is AnalysisResult.RetryWithAdditionalRoots) {
-            val configuration = environment.configuration
+            konst configuration = environment.configuration
 
-            val oldReadOnlyValue = configuration.isReadOnly
+            konst oldReadOnlyValue = configuration.isReadOnly
             configuration.isReadOnly = false
             configuration.addJavaSourceRoots(result.additionalJavaRoots)
             configuration.isReadOnly = oldReadOnlyValue
@@ -168,10 +168,10 @@ object KotlinToJVMBytecodeCompiler {
 
             KotlinJavaPsiFacade.getInstance(environment.project).clearPackageCaches()
 
-            val javaClassesTracker = configuration[JAVA_CLASSES_TRACKER]
+            konst javaClassesTracker = configuration[JAVA_CLASSES_TRACKER]
             javaClassesTracker?.clear()
 
-            val lookupTracker = configuration[LOOKUP_TRACKER]
+            konst lookupTracker = configuration[LOOKUP_TRACKER]
             lookupTracker?.clear()
 
             // Clear all diagnostic messages
@@ -186,15 +186,15 @@ object KotlinToJVMBytecodeCompiler {
 
     @Suppress("MemberVisibilityCanBePrivate") // Used in ExecuteKotlinScriptMojo
     fun analyzeAndGenerate(environment: KotlinCoreEnvironment): GenerationState? {
-        val result = repeatAnalysisIfNeeded(analyze(environment), environment) ?: return null
+        konst result = repeatAnalysisIfNeeded(analyze(environment), environment) ?: return null
 
         if (!result.shouldGenerateCode) return null
 
         result.throwIfError()
 
-        val (codegenFactory, backendInput) = convertToIr(environment, result)
-        val diagnosticsReporter = DiagnosticReporterFactory.createReporter()
-        val input = runLowerings(
+        konst (codegenFactory, backendInput) = convertToIr(environment, result)
+        konst diagnosticsReporter = DiagnosticReporterFactory.createReporter()
+        konst input = runLowerings(
             environment, environment.configuration, result, environment.getSourceFiles(), null, codegenFactory, backendInput,
             diagnosticsReporter
         )
@@ -202,13 +202,13 @@ object KotlinToJVMBytecodeCompiler {
     }
 
     private fun convertToIr(environment: KotlinCoreEnvironment, result: AnalysisResult): Pair<CodegenFactory, CodegenFactory.BackendInput> {
-        val configuration = environment.configuration
-        val codegenFactory =
+        konst configuration = environment.configuration
+        konst codegenFactory =
             if (configuration.getBoolean(JVMConfigurationKeys.IR)) JvmIrCodegenFactory(
                 configuration, configuration.get(CLIConfigurationKeys.PHASE_CONFIG)
             ) else DefaultCodegenFactory
 
-        val input = CodegenFactory.IrConversionInput(
+        konst input = CodegenFactory.IrConversionInput(
             environment.project,
             environment.getSourceFiles(),
             configuration,
@@ -219,40 +219,40 @@ object KotlinToJVMBytecodeCompiler {
             skipBodies = false,
         )
 
-        val performanceManager = environment.configuration[CLIConfigurationKeys.PERF_MANAGER]
+        konst performanceManager = environment.configuration[CLIConfigurationKeys.PERF_MANAGER]
         performanceManager?.notifyIRTranslationStarted()
-        val backendInput = codegenFactory.convertToIr(input)
+        konst backendInput = codegenFactory.convertToIr(input)
         performanceManager?.notifyIRTranslationFinished()
 
         return Pair(codegenFactory, backendInput)
     }
 
     fun analyze(environment: KotlinCoreEnvironment): AnalysisResult? {
-        val collector = environment.messageCollector
-        val sourceFiles = environment.getSourceFiles()
+        konst collector = environment.messageCollector
+        konst sourceFiles = environment.getSourceFiles()
 
         // Can be null for Scripts/REPL
-        val performanceManager = environment.configuration.get(CLIConfigurationKeys.PERF_MANAGER)
+        konst performanceManager = environment.configuration.get(CLIConfigurationKeys.PERF_MANAGER)
         performanceManager?.notifyAnalysisStarted()
 
-        val resolvedKlibs = environment.configuration.get(JVMConfigurationKeys.KLIB_PATHS)?.let { klibPaths ->
+        konst resolvedKlibs = environment.configuration.get(JVMConfigurationKeys.KLIB_PATHS)?.let { klibPaths ->
             jvmResolveLibraries(klibPaths, collector.toLogger())
         }?.getFullList() ?: emptyList()
 
-        val analyzerWithCompilerReport = AnalyzerWithCompilerReport(
+        konst analyzerWithCompilerReport = AnalyzerWithCompilerReport(
             collector,
             environment.configuration.languageVersionSettings,
             environment.configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
         )
         analyzerWithCompilerReport.analyzeAndReport(sourceFiles) {
-            val project = environment.project
-            val moduleOutputs = environment.configuration.get(JVMConfigurationKeys.MODULES)?.mapNotNullTo(hashSetOf()) { module ->
+            konst project = environment.project
+            konst moduleOutputs = environment.configuration.get(JVMConfigurationKeys.MODULES)?.mapNotNullTo(hashSetOf()) { module ->
                 environment.findLocalFile(module.getOutputDirectory())
             }.orEmpty()
-            val sourcesOnly = TopDownAnalyzerFacadeForJVM.newModuleSearchScope(project, sourceFiles)
+            konst sourcesOnly = TopDownAnalyzerFacadeForJVM.newModuleSearchScope(project, sourceFiles)
             // To support partial and incremental compilation, we add the scope which contains binaries from output directories
             // of the compiled modules (.class) to the list of scopes of the source module
-            val scope = if (moduleOutputs.isEmpty()) sourcesOnly else sourcesOnly.uniteWith(DirectoriesScope(project, moduleOutputs))
+            konst scope = if (moduleOutputs.isEmpty()) sourcesOnly else sourcesOnly.uniteWith(DirectoriesScope(project, moduleOutputs))
             TopDownAnalyzerFacadeForJVM.analyzeFilesWithJavaIntegration(
                 project,
                 sourceFiles,
@@ -266,7 +266,7 @@ object KotlinToJVMBytecodeCompiler {
 
         performanceManager?.notifyAnalysisFinished()
 
-        val analysisResult = analyzerWithCompilerReport.analysisResult
+        konst analysisResult = analyzerWithCompilerReport.analysisResult
 
         return if (!analyzerWithCompilerReport.hasErrors() || analysisResult is AnalysisResult.RetryWithAdditionalRoots)
             analysisResult
@@ -276,9 +276,9 @@ object KotlinToJVMBytecodeCompiler {
 
     class DirectoriesScope(
         project: Project,
-        private val directories: Set<VirtualFile>
+        private konst directories: Set<VirtualFile>
     ) : DelegatingGlobalSearchScope(GlobalSearchScope.allScope(project)) {
-        private val fileSystems = directories.mapTo(hashSetOf(), VirtualFile::getFileSystem)
+        private konst fileSystems = directories.mapTo(hashSetOf(), VirtualFile::getFileSystem)
 
         override fun contains(file: VirtualFile): Boolean {
             if (file.fileSystem !in fileSystems) return false
@@ -303,9 +303,9 @@ object KotlinToJVMBytecodeCompiler {
         backendInput: CodegenFactory.BackendInput,
         diagnosticsReporter: BaseDiagnosticsCollector,
     ): CodegenFactory.CodegenInput {
-        val performanceManager = environment.configuration[CLIConfigurationKeys.PERF_MANAGER]
+        konst performanceManager = environment.configuration[CLIConfigurationKeys.PERF_MANAGER]
 
-        val state = GenerationState.Builder(
+        konst state = GenerationState.Builder(
             environment.project,
             ClassBuilderFactories.BINARIES,
             result.moduleDescriptor,
@@ -341,7 +341,7 @@ object KotlinToJVMBytecodeCompiler {
     ): GenerationState {
         ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
 
-        val performanceManager = configuration[CLIConfigurationKeys.PERF_MANAGER]
+        konst performanceManager = configuration[CLIConfigurationKeys.PERF_MANAGER]
 
         performanceManager?.notifyIRGenerationStarted()
         codegenFactory.invokeCodegen(codegenInput)
@@ -354,7 +354,7 @@ object KotlinToJVMBytecodeCompiler {
 
         ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
 
-        val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
         AnalyzerWithCompilerReport.reportDiagnostics(
             FilteredJvmDiagnostics(
                 state.collectedExtraJvmDiagnostics,
@@ -375,9 +375,9 @@ object KotlinToJVMBytecodeCompiler {
 }
 
 fun CompilerConfiguration.configureSourceRoots(chunk: List<Module>, buildFile: File? = null) {
-    val hmppCliModuleStructure = get(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE)
+    konst hmppCliModuleStructure = get(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE)
     for (module in chunk) {
-        val commonSources = getBuildFilePaths(buildFile, module.getCommonSourceFiles()).toSet()
+        konst commonSources = getBuildFilePaths(buildFile, module.getCommonSourceFiles()).toSet()
 
         for (path in getBuildFilePaths(buildFile, module.getSourceFiles())) {
             addKotlinSourceRoot(path, isCommon = path in commonSources, hmppCliModuleStructure?.getModuleNameForSource(path))
@@ -390,9 +390,9 @@ fun CompilerConfiguration.configureSourceRoots(chunk: List<Module>, buildFile: F
         }
     }
 
-    val isJava9Module = chunk.any { module ->
+    konst isJava9Module = chunk.any { module ->
         module.getJavaSourceRoots().any { (path, packagePrefix) ->
-            val file = File(path)
+            konst file = File(path)
             packagePrefix == null &&
                     (file.name == PsiJavaModule.MODULE_INFO_FILE ||
                             (file.isDirectory && file.listFiles()!!.any { it.name == PsiJavaModule.MODULE_INFO_FILE }))
@@ -409,7 +409,7 @@ fun CompilerConfiguration.configureSourceRoots(chunk: List<Module>, buildFile: F
     }
 
     for (module in chunk) {
-        val modularJdkRoot = module.modularJdkRoot
+        konst modularJdkRoot = module.modularJdkRoot
         if (modularJdkRoot != null) {
             // We use the SDK of the first module in the chunk, which is not always correct because some other module in the chunk
             // might depend on a different SDK

@@ -20,7 +20,7 @@ public class KeywordStringsGenerated {
         "class",
         "this",
         "super",
-        "val",
+        "konst",
         "var",
         "fun",
         "for",

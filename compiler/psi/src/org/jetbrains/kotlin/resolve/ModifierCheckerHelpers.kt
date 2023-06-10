@@ -35,7 +35,7 @@ enum class Compatibility {
     COMPATIBLE_FOR_CLASSES_ONLY
 }
 
-val compatibilityTypeMap = hashMapOf<Pair<KtKeywordToken, KtKeywordToken>, Compatibility>()
+konst compatibilityTypeMap = hashMapOf<Pair<KtKeywordToken, KtKeywordToken>, Compatibility>()
 
 fun compatibility(first: KtKeywordToken, second: KtKeywordToken): Compatibility {
     return if (first == second) {
@@ -46,17 +46,17 @@ fun compatibility(first: KtKeywordToken, second: KtKeywordToken): Compatibility 
 }
 
 // First modifier in pair should be also first in declaration
-private val mutualCompatibility = buildCompatibilityMap()
+private konst mutualCompatibility = buildCompatibilityMap()
 
 private fun buildCompatibilityMap(): Map<Pair<KtKeywordToken, KtKeywordToken>, Compatibility> {
-    val result = hashMapOf<Pair<KtKeywordToken, KtKeywordToken>, Compatibility>()
+    konst result = hashMapOf<Pair<KtKeywordToken, KtKeywordToken>, Compatibility>()
     // Variance: in + out are incompatible
     result += incompatibilityRegister(IN_KEYWORD, OUT_KEYWORD)
     // Visibilities: incompatible
     result += incompatibilityRegister(PRIVATE_KEYWORD, PROTECTED_KEYWORD, PUBLIC_KEYWORD, INTERNAL_KEYWORD)
     // Abstract + open + final + sealed: incompatible
     result += incompatibilityRegister(ABSTRACT_KEYWORD, OPEN_KEYWORD, FINAL_KEYWORD, SEALED_KEYWORD)
-    // data + open, data + inner, data + abstract, data + sealed, data + inline, data + value
+    // data + open, data + inner, data + abstract, data + sealed, data + inline, data + konstue
     result += incompatibilityRegister(DATA_KEYWORD, OPEN_KEYWORD)
     result += incompatibilityRegister(DATA_KEYWORD, INNER_KEYWORD)
     result += incompatibilityRegister(DATA_KEYWORD, ABSTRACT_KEYWORD)
@@ -114,7 +114,7 @@ private fun compatibilityForClassesRegister(vararg list: KtKeywordToken) =
 private fun compatibilityRegister(
     compatibility: Compatibility, vararg list: KtKeywordToken
 ): Map<Pair<KtKeywordToken, KtKeywordToken>, Compatibility> {
-    val result = hashMapOf<Pair<KtKeywordToken, KtKeywordToken>, Compatibility>()
+    konst result = hashMapOf<Pair<KtKeywordToken, KtKeywordToken>, Compatibility>()
     for (first in list) {
         for (second in list) {
             if (first != second) {
@@ -125,7 +125,7 @@ private fun compatibilityRegister(
     return result
 }
 
-val featureDependencies = mapOf(
+konst featureDependencies = mapOf(
     SUSPEND_KEYWORD to listOf(LanguageFeature.Coroutines),
     INLINE_KEYWORD to listOf(LanguageFeature.InlineProperties, LanguageFeature.InlineClasses),
     HEADER_KEYWORD to listOf(LanguageFeature.MultiPlatformProjects),
@@ -137,7 +137,7 @@ val featureDependencies = mapOf(
     DATA_KEYWORD to listOf(LanguageFeature.DataObjects)
 )
 
-val featureDependenciesTargets = mapOf(
+konst featureDependenciesTargets = mapOf(
     LanguageFeature.InlineProperties to setOf(KotlinTarget.PROPERTY, KotlinTarget.PROPERTY_GETTER, KotlinTarget.PROPERTY_SETTER),
     LanguageFeature.LateinitLocalVariables to setOf(KotlinTarget.LOCAL_VARIABLE),
     LanguageFeature.LateinitTopLevelProperties to setOf(KotlinTarget.TOP_LEVEL_PROPERTY),
@@ -147,13 +147,13 @@ val featureDependenciesTargets = mapOf(
     LanguageFeature.DataObjects to setOf(KotlinTarget.STANDALONE_OBJECT)
 )
 
-val defaultVisibilityTargets: EnumSet<KotlinTarget> = EnumSet.of(
+konst defaultVisibilityTargets: EnumSet<KotlinTarget> = EnumSet.of(
     KotlinTarget.CLASS_ONLY, KotlinTarget.OBJECT, KotlinTarget.INTERFACE, KotlinTarget.ENUM_CLASS, KotlinTarget.ANNOTATION_CLASS,
     KotlinTarget.MEMBER_FUNCTION, KotlinTarget.TOP_LEVEL_FUNCTION, KotlinTarget.PROPERTY_GETTER, KotlinTarget.PROPERTY_SETTER,
     KotlinTarget.MEMBER_PROPERTY, KotlinTarget.TOP_LEVEL_PROPERTY, KotlinTarget.CONSTRUCTOR, KotlinTarget.TYPEALIAS,
 )
 
-val possibleTargetMap = mapOf(
+konst possibleTargetMap = mapOf(
     ENUM_KEYWORD to EnumSet.of(KotlinTarget.ENUM_CLASS),
     ABSTRACT_KEYWORD to EnumSet.of(
         KotlinTarget.CLASS_ONLY,
@@ -284,17 +284,17 @@ val possibleTargetMap = mapOf(
 )
 
 // NOTE: deprecated targets must be possible!
-val deprecatedTargetMap = mapOf<KtKeywordToken, Set<KotlinTarget>>()
+konst deprecatedTargetMap = mapOf<KtKeywordToken, Set<KotlinTarget>>()
 
-val deprecatedParentTargetMap = mapOf<KtKeywordToken, Set<KotlinTarget>>()
+konst deprecatedParentTargetMap = mapOf<KtKeywordToken, Set<KotlinTarget>>()
 
-val deprecatedModifierMap = mapOf(
+konst deprecatedModifierMap = mapOf(
     HEADER_KEYWORD to EXPECT_KEYWORD,
     IMPL_KEYWORD to ACTUAL_KEYWORD
 )
 
 // NOTE: redundant targets must be possible!
-val redundantTargetMap = mapOf<KtKeywordToken, Set<KotlinTarget>>(
+konst redundantTargetMap = mapOf<KtKeywordToken, Set<KotlinTarget>>(
     OPEN_KEYWORD to EnumSet.of(KotlinTarget.INTERFACE)
 )
 
@@ -303,7 +303,7 @@ interface TargetAllowedPredicate {
 }
 
 fun always(target: KotlinTarget, vararg targets: KotlinTarget) = object : TargetAllowedPredicate {
-    private val targetSet = EnumSet.of(target, *targets)
+    private konst targetSet = EnumSet.of(target, *targets)
 
     override fun isAllowed(target: KotlinTarget, languageVersionSettings: LanguageVersionSettings) =
         target in targetSet
@@ -311,7 +311,7 @@ fun always(target: KotlinTarget, vararg targets: KotlinTarget) = object : Target
 
 fun ifSupported(languageFeature: LanguageFeature, target: KotlinTarget, vararg targets: KotlinTarget) =
     object : TargetAllowedPredicate {
-        private val targetSet = EnumSet.of(target, *targets)
+        private konst targetSet = EnumSet.of(target, *targets)
 
         override fun isAllowed(target: KotlinTarget, languageVersionSettings: LanguageVersionSettings) =
             languageVersionSettings.supportsFeature(languageFeature) && target in targetSet
@@ -323,7 +323,7 @@ fun or(p1: TargetAllowedPredicate, p2: TargetAllowedPredicate) = object : Target
                 p2.isAllowed(target, languageVersionSettings)
 }
 
-val possibleParentTargetPredicateMap = mapOf(
+konst possibleParentTargetPredicateMap = mapOf(
     INNER_KEYWORD to or(
         always(KotlinTarget.CLASS_ONLY, KotlinTarget.LOCAL_CLASS, KotlinTarget.ENUM_CLASS),
         ifSupported(LanguageFeature.InnerClassInEnumEntryClass, KotlinTarget.ENUM_ENTRY)

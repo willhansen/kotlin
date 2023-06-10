@@ -9,13 +9,13 @@ import kotlinx.android.synthetic.main.layout.*
 class R {
     class id {
         companion object {
-            const val login = 5
+            const konst login = 5
         }
     }
 }
 
 class MyActivity(): Activity() {
-    val buttonWidget = MyButton(this)
+    konst buttonWidget = MyButton(this)
 
     override fun <T : View> findViewById(id: Int): T? {
         return when (id) {

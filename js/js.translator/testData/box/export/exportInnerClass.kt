@@ -7,31 +7,31 @@
 // FILE: lib.kt
 
 @JsExport
-class RegularParent(val value: String) {
-    inner class RegularInner(val message: String, val anotherValue: Int) {
-        fun getResult() = value + message
+class RegularParent(konst konstue: String) {
+    inner class RegularInner(konst message: String, konst anotherValue: Int) {
+        fun getResult() = konstue + message
     }
 }
 
 
 @JsExport
 class ParentForSecondary {
-    inner class InnerWithSecondaryConstructor(val value: String) {
+    inner class InnerWithSecondaryConstructor(konst konstue: String) {
         @JsName("innerSuccess")
         constructor(): this("OK")
     }
 }
 
 @JsExport
-class ParentWithSecondary(val value: String) {
+class ParentWithSecondary(konst konstue: String) {
     @JsName("createO")
     constructor(): this("O")
 
-    inner class InnerWithSecondaryConstructor(val anotherValue: String) {
+    inner class InnerWithSecondaryConstructor(konst anotherValue: String) {
         @JsName("createK")
         constructor(): this("K")
 
-        fun getResult() = value + anotherValue
+        fun getResult() = konstue + anotherValue
     }
 }
 
@@ -50,11 +50,11 @@ function box() {
     var parentForSecondary = new pckg.ParentForSecondary()
     var innerWithSecondary = new parentForSecondary.InnerWithSecondaryConstructor("OK")
 
-    if (innerWithSecondary.value !== "OK") return "Fail: something is going wrong with primary constructor when a secondary one exists"
+    if (innerWithSecondary.konstue !== "OK") return "Fail: something is going wrong with primary constructor when a secondary one exists"
 
     var fromSecondary = parentForSecondary.InnerWithSecondaryConstructor.innerSuccess()
 
-    if (fromSecondary.value !== "OK") return "Fail: something is going wrong with secondary constructor inside the inner class"
+    if (fromSecondary.konstue !== "OK") return "Fail: something is going wrong with secondary constructor inside the inner class"
 
     var parentFromSecondary = pckg.ParentWithSecondary.createO()
     var innerFromSecondary = parentFromSecondary.InnerWithSecondaryConstructor.createK()

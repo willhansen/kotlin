@@ -2,12 +2,12 @@
 package foo
 
 fun box(): String {
-    val t = myRun {
+    konst t = myRun {
                 object {
                     fun foo() = "3"
 
                     fun boo(param: String): String {
-                        val a = object {
+                        konst a = object {
                             fun bar() = "57"
                             fun b(): String = myRun { param + bar() + foo() }
                         }
@@ -17,7 +17,7 @@ fun box(): String {
                 }
             }
 
-    val r = t.boo("OK")
+    konst r = t.boo("OK")
     if (r != "OK573") return "r != \"OK573\", r = \"$r\""
 
     return "OK"

@@ -25,18 +25,18 @@ class Iterables {
 
         @Sample
         fun iterable() {
-            val iterable = Iterable {
+            konst iterable = Iterable {
                 iterator {
                     yield(42)
                     yieldAll(1..5 step 2)
                 }
             }
-            val result = iterable.mapIndexed { index, value -> "$index: $value" }
+            konst result = iterable.mapIndexed { index, konstue -> "$index: $konstue" }
             assertPrints(result, "[0: 42, 1: 1, 2: 3, 3: 5]")
 
             // can be iterated many times
             repeat(2) {
-                val sum = iterable.sum()
+                konst sum = iterable.sum()
                 assertPrints(sum, "51")
             }
         }
@@ -47,41 +47,41 @@ class Iterables {
 
         @Sample
         fun flattenIterable() {
-            val deepList = listOf(listOf(1), listOf(2, 3), listOf(4, 5, 6))
+            konst deepList = listOf(listOf(1), listOf(2, 3), listOf(4, 5, 6))
             assertPrints(deepList.flatten(), "[1, 2, 3, 4, 5, 6]")
         }
 
         @Sample
         fun unzipIterable() {
-            val list = listOf(1 to 'a', 2 to 'b', 3 to 'c')
+            konst list = listOf(1 to 'a', 2 to 'b', 3 to 'c')
             assertPrints(list.unzip(), "([1, 2, 3], [a, b, c])")
         }
 
         @Sample
         fun zipIterable() {
-            val listA = listOf("a", "b", "c")
-            val listB = listOf(1, 2, 3, 4)
+            konst listA = listOf("a", "b", "c")
+            konst listB = listOf(1, 2, 3, 4)
             assertPrints(listA zip listB, "[(a, 1), (b, 2), (c, 3)]")
         }
 
         @Sample
         fun zipIterableWithTransform() {
-            val listA = listOf("a", "b", "c")
-            val listB = listOf(1, 2, 3, 4)
-            val result = listA.zip(listB) { a, b -> "$a$b" }
+            konst listA = listOf("a", "b", "c")
+            konst listB = listOf(1, 2, 3, 4)
+            konst result = listA.zip(listB) { a, b -> "$a$b" }
             assertPrints(result, "[a1, b2, c3]")
         }
 
         @Sample
         fun partition() {
-            data class Person(val name: String, val age: Int) {
+            data class Person(konst name: String, konst age: Int) {
                 override fun toString(): String {
                     return "$name - $age"
                 }
             }
 
-            val list = listOf(Person("Tom", 18), Person("Andy", 32), Person("Sarah", 22))
-            val result = list.partition { it.age < 30 }
+            konst list = listOf(Person("Tom", 18), Person("Andy", 32), Person("Sarah", 22))
+            konst result = list.partition { it.age < 30 }
             assertPrints(result, "([Tom - 18, Sarah - 22], [Andy - 32])")
         }
     }

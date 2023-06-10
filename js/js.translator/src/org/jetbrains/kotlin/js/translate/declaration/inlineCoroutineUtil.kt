@@ -24,16 +24,16 @@ import org.jetbrains.kotlin.js.translate.utils.JsAstUtils.pureFqn
 import org.jetbrains.kotlin.js.translate.utils.name
 
 fun <T : JsNode> transformCoroutineMetadataToSpecialFunctions(node: T): T {
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun endVisit(x: JsNameRef, ctx: JsContext<in JsExpression>) {
-            val specialFunction = when {
+            konst specialFunction = when {
                 x.coroutineController -> SpecialFunction.COROUTINE_CONTROLLER
                 x.coroutineReceiver -> SpecialFunction.COROUTINE_RECEIVER
                 x.coroutineResult -> SpecialFunction.COROUTINE_RESULT
                 else -> null
             }
             if (specialFunction != null) {
-                val arguments = listOfNotNull(x.qualifier).toTypedArray()
+                konst arguments = listOfNotNull(x.qualifier).toTypedArray()
                 ctx.replaceMe(JsInvocation(specialFunction.ref(), *arguments).apply {
                     synthetic = x.synthetic
                     sideEffects = x.sideEffects
@@ -53,9 +53,9 @@ fun <T : JsNode> transformCoroutineMetadataToSpecialFunctions(node: T): T {
         }
 
         override fun visit(x: JsBinaryOperation, ctx: JsContext<in JsExpression>): Boolean {
-            val lhs = x.arg1
+            konst lhs = x.arg1
             if (lhs is JsNameRef && lhs.coroutineResult) {
-                val arguments = listOf(accept(x.arg2)) + listOfNotNull(lhs.qualifier?.let { accept(it) })
+                konst arguments = listOf(accept(x.arg2)) + listOfNotNull(lhs.qualifier?.let { accept(it) })
                 ctx.replaceMe(JsInvocation(SpecialFunction.SET_COROUTINE_RESULT.ref(), arguments).apply {
                     synthetic = x.synthetic
                     sideEffects = x.sideEffects
@@ -72,10 +72,10 @@ fun <T : JsNode> transformCoroutineMetadataToSpecialFunctions(node: T): T {
 private fun SpecialFunction.ref() = pureFqn(JsDynamicScope.declareName(suggestedName).also { it.specialFunction = this }, Namer.kotlinObject())
 
 fun <T : JsNode> transformSpecialFunctionsToCoroutineMetadata(node: T): T {
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun endVisit(x: JsInvocation, ctx: JsContext<in JsExpression>) {
             x.qualifier.name?.specialFunction?.let { specialFunction ->
-                val replacement = when (specialFunction) {
+                konst replacement = when (specialFunction) {
                     SpecialFunction.COROUTINE_CONTROLLER -> {
                         JsNameRef("\$\$controller\$\$", x.arguments.getOrNull(0)).apply {
                             coroutineController = true
@@ -97,7 +97,7 @@ fun <T : JsNode> transformSpecialFunctionsToCoroutineMetadata(node: T): T {
                         }
                     }
                     SpecialFunction.SET_COROUTINE_RESULT -> {
-                        val lhs = JsNameRef("\$result\$", x.arguments.getOrNull(1)).apply {
+                        konst lhs = JsNameRef("\$result\$", x.arguments.getOrNull(1)).apply {
                             coroutineResult = true
                         }
                         assignment(lhs, x.arguments[0])

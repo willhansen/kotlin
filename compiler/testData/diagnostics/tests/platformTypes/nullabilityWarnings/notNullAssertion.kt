@@ -17,11 +17,11 @@ public class J {
 
 fun test() {
     // @NotNull platform type
-    val platformNN = J.staticNN
+    konst platformNN = J.staticNN
     // @Nullable platform type
-    val platformN = J.staticN
+    konst platformN = J.staticN
     // platform type with no annotation
-    val platformJ = J.staticJ
+    konst platformJ = J.staticJ
 
     if (platformNN != null) {
         platformNN<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>

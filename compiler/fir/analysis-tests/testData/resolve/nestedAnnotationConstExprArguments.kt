@@ -1,5 +1,5 @@
-annotation class InnerAnnotation(val text: String)
-annotation class OuterAnnotation(val inner: InnerAnnotation)
+annotation class InnerAnnotation(konst text: String)
+annotation class OuterAnnotation(konst inner: InnerAnnotation)
 
 @OuterAnnotation(InnerAnnotation(text = "x" + "x"))
 class Payload

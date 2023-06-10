@@ -7,19 +7,19 @@
 
 // FILE: A.kt
 
-inline class A(val i: Int) {
+inline class A(konst i: Int) {
     fun f() = i
 }
 
 fun A.extension() = this.i
 
 fun box(): String {
-    val method = Class.forName("A").declaredMethods.single { it.name == "f-impl" }
-    val parameters = method.getParameters()
+    konst method = Class.forName("A").declaredMethods.single { it.name == "f-impl" }
+    konst parameters = method.getParameters()
     if (!parameters[0].isSynthetic()) return "wrong modifier on receiver parameter: ${parameters[0].modifiers}"
 
-    val extensionMethod = Class.forName("AKt").declaredMethods.single { it.name.contains("extension") }
-    val extensionMethodParameters = extensionMethod.getParameters()
+    konst extensionMethod = Class.forName("AKt").declaredMethods.single { it.name.contains("extension") }
+    konst extensionMethodParameters = extensionMethod.getParameters()
     if (extensionMethodParameters[0].isSynthetic() || extensionMethodParameters[0].isImplicit())
         return "wrong modifier on extension receiver parameter: ${extensionMethodParameters[0].modifiers}"
 

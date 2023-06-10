@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}fsi
 //   Public signature: /fsi|5902301571547257746[0]
-val fsi: Fn<String, Int>
+konst fsi: Fn<String, Int>
   // CHECK JVM_IR:
   //   Mangled name: #<get-fsi>(){}Fn<kotlin.String,kotlin.Int>
   //   Public signature: /fsi.<get-fsi>|-2546794996796226350[0]
@@ -13,7 +13,7 @@ val fsi: Fn<String, Int>
 // CHECK:
 //   Mangled name: {}fis
 //   Public signature: /fis|4743015834142814854[0]
-val fis: Fn<Int, String>
+konst fis: Fn<Int, String>
   // CHECK JVM_IR:
   //   Mangled name: #<get-fis>(){}Fn<kotlin.Int,kotlin.String>
   //   Public signature: /fis.<get-fis>|5252092316637653538[0]

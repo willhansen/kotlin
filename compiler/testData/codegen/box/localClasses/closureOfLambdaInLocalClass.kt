@@ -20,7 +20,7 @@ fun box(): String {
     log = ""
     for (t in arrayOf("1", "2", "3")) {
         class B() {
-            val y = t
+            konst y = t
 
             fun foo() = { y }
         }

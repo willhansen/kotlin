@@ -6,6 +6,6 @@ object Scope {
     fun bar(x: Int = 0): String = ""
 
     fun test() {
-        val r1 = foo(::bar)
+        konst r1 = foo(::bar)
     }
 }

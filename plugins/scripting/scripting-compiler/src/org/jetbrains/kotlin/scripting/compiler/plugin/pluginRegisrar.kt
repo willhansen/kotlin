@@ -10,7 +10,7 @@ package org.jetbrains.kotlin.scripting.compiler.plugin
 import com.intellij.mock.MockProject
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
 import org.jetbrains.kotlin.cli.common.extensions.ReplFactoryExtension
-import org.jetbrains.kotlin.cli.common.extensions.ScriptEvaluationExtension
+import org.jetbrains.kotlin.cli.common.extensions.ScriptEkonstuationExtension
 import org.jetbrains.kotlin.cli.common.extensions.ShellExtension
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
@@ -50,19 +50,19 @@ private fun <T : Any> ProjectExtensionDescriptor<T>.registerExtensionIfRequired(
 class ScriptingCompilerConfigurationComponentRegistrar : ComponentRegistrar {
     // Actually this plugin don't support K2, but it automatically registered in some cases,
     //   so for now this flag is just a stub
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 
     override fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration) {
-        val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
-        val hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
+        konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
             // TODO: add jdk path and other params if needed
         }
         withClassloadingProblemsReporting(messageCollector) {
             CompilerConfigurationExtension.registerExtension(project, ScriptingCompilerConfigurationExtension(project, hostConfiguration))
             CollectAdditionalSourcesExtension.registerExtension(project, ScriptingCollectAdditionalSourcesExtension(project))
             ProcessSourcesBeforeCompilingExtension.registerExtension(project, ScriptingProcessSourcesBeforeCompilingExtension(project))
-            ScriptEvaluationExtension.registerExtensionIfRequired(project, JvmCliScriptEvaluationExtension())
+            ScriptEkonstuationExtension.registerExtensionIfRequired(project, JvmCliScriptEkonstuationExtension())
             ShellExtension.registerExtensionIfRequired(project, JvmCliReplShellExtension())
             ReplFactoryExtension.registerExtensionIfRequired(project, JvmStandardReplFactoryExtension())
 
@@ -83,7 +83,7 @@ class ScriptingCompilerConfigurationComponentRegistrar : ComponentRegistrar {
 class ScriptingK2CompilerPluginRegistrar : CompilerPluginRegistrar() {
     companion object {
         fun registerComponents(extensionStorage: ExtensionStorage, compilerConfiguration: CompilerConfiguration) = with(extensionStorage) {
-            val hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
+            konst hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
                 // TODO: add jdk path and other params if needed
             }
             FirExtensionRegistrarAdapter.registerExtension(FirScriptingCompilerExtensionRegistrar(hostConfiguration, compilerConfiguration))
@@ -95,7 +95,7 @@ class ScriptingK2CompilerPluginRegistrar : CompilerPluginRegistrar() {
         registerComponents(this, configuration)
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 }
 
@@ -108,8 +108,8 @@ private inline fun withClassloadingProblemsReporting(messageCollector: MessageCo
     } catch (e: NoClassDefFoundError) {
         e
     }?.also { e ->
-        val classpath = (ScriptingCompilerConfigurationComponentRegistrar::class.java.classLoader as? URLClassLoader)?.urLs?.map { it.path }
-        val msg = "Error registering scripting services: $e\n  current classpath:\n    ${classpath?.joinToString("\n    ")}"
+        konst classpath = (ScriptingCompilerConfigurationComponentRegistrar::class.java.classLoader as? URLClassLoader)?.urLs?.map { it.path }
+        konst msg = "Error registering scripting services: $e\n  current classpath:\n    ${classpath?.joinToString("\n    ")}"
         if (messageCollector != null) {
             messageCollector.report(CompilerMessageSeverity.STRONG_WARNING, msg)
         } else {

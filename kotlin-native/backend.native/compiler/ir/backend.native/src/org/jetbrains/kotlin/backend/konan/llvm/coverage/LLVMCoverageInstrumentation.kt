@@ -19,17 +19,17 @@ import org.jetbrains.kotlin.ir.declarations.IrFunction
  * region in [functionRegions].
  */
 internal class LLVMCoverageInstrumentation(
-        override val generationState: NativeGenerationState,
-        private val functionRegions: FunctionRegions,
-        private val callSitePlacer: (function: LlvmCallable, args: List<LLVMValueRef>) -> Unit
+        override konst generationState: NativeGenerationState,
+        private konst functionRegions: FunctionRegions,
+        private konst callSitePlacer: (function: LlvmCallable, args: List<LLVMValueRef>) -> Unit
 ) : ContextUtils {
 
-    private val functionNameGlobal = createFunctionNameGlobal(functionRegions.function)
+    private konst functionNameGlobal = createFunctionNameGlobal(functionRegions.function)
 
-    private val functionHash = llvm.int64(functionRegions.structuralHash)
+    private konst functionHash = llvm.int64(functionRegions.structuralHash)
 
-    private val instrProfIncrement by lazy {
-        val incrementFun = LLVMInstrProfIncrement(llvm.module)!!
+    private konst instrProfIncrement by lazy {
+        konst incrementFun = LLVMInstrProfIncrement(llvm.module)!!
         LlvmCallable(
                 incrementFun,
                 LlvmFunctionAttributeProvider.copyFromExternal(incrementFun)
@@ -47,15 +47,15 @@ internal class LLVMCoverageInstrumentation(
      * See https://llvm.org/docs/LangRef.html#llvm-instrprof-increment-intrinsic
      */
     private fun placeRegionIncrement(region: Region) {
-        val numberOfRegions = llvm.int32(functionRegions.regions.size)
-        val regionNumber = llvm.int32(functionRegions.regionEnumeration.getValue(region))
-        val args = listOf(functionNameGlobal, functionHash, numberOfRegions, regionNumber)
+        konst numberOfRegions = llvm.int32(functionRegions.regions.size)
+        konst regionNumber = llvm.int32(functionRegions.regionEnumeration.getValue(region))
+        konst args = listOf(functionNameGlobal, functionHash, numberOfRegions, regionNumber)
         callSitePlacer(instrProfIncrement, args)
     }
 
     // Each profiled function should have a global with its name in a specific format.
     private fun createFunctionNameGlobal(function: IrFunction): LLVMValueRef {
-        val pgoFunctionName = function.llvmFunction.pgoFunctionNameVar
+        konst pgoFunctionName = function.llvmFunction.pgoFunctionNameVar
         return LLVMConstBitCast(pgoFunctionName, llvm.int8PtrType)!!
     }
 }

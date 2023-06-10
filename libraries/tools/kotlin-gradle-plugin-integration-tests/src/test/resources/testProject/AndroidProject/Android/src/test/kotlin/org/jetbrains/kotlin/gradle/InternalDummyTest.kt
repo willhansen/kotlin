@@ -6,7 +6,7 @@ import org.junit.Test
 class InternalDummyTest {
     @Test
     fun testInternalDummy() {
-        val dummy = InternalDummy("World")
+        konst dummy = InternalDummy("World")
         Assert.assertEquals("Hello World!", dummy.greeting)
     }
 }

@@ -9,10 +9,10 @@ import java.io.File
 import java.net.URL
 
 fun findCompilerJar(classFromJarInTheSameLocation: Class<*>, kotlinHome: File): List<File> {
-    val baseDir = (tryGetResourcePathForClass(classFromJarInTheSameLocation)?.takeUnless { it.isDirectory }?.parentFile
+    konst baseDir = (tryGetResourcePathForClass(classFromJarInTheSameLocation)?.takeUnless { it.isDirectory }?.parentFile
         ?: kotlinHome).takeIf { it.isDirectory }
         ?: return emptyList()
-    val compilerJars = baseDir.listFiles { f: File ->
+    konst compilerJars = baseDir.listFiles { f: File ->
         COMPILER_JARS.any { expected ->
             f.matchMaybeVersionedFile(expected) && f.extension == "jar"
         }
@@ -20,14 +20,14 @@ fun findCompilerJar(classFromJarInTheSameLocation: Class<*>, kotlinHome: File): 
     return compilerJars ?: emptyList()
 }
 
-private val COMPILER_JARS = listOf("kotlin-compiler", "kotlin-stdlib", "kotlin-reflect")
+private konst COMPILER_JARS = listOf("kotlin-compiler", "kotlin-stdlib", "kotlin-reflect")
 
 // below is a copy from kotlin.script.experimental.jvm.impl, but we do not want to introduce dependency to that implementation, and
 // there is no other good place for sharing this functionality yet
 // TODO: find a good place and put the shared code into it
 
 internal fun tryGetResourcePathForClass(aClass: Class<*>): File? {
-    val path = "/" + aClass.name.replace('.', '/') + ".class"
+    konst path = "/" + aClass.name.replace('.', '/') + ".class"
     return getResourceRoot(aClass, path)?.let {
         File(it).absoluteFile
     }
@@ -41,25 +41,25 @@ private fun getResourceRoot(context: Class<*>, path: String): String? {
     return if (url != null) extractRoot(url, path) else null
 }
 
-private const val JAR_PROTOCOL = "jar"
-private const val FILE_PROTOCOL = "file"
-private const val JAR_SEPARATOR = "!/"
-private const val SCHEME_SEPARATOR = "://"
+private const konst JAR_PROTOCOL = "jar"
+private const konst FILE_PROTOCOL = "file"
+private const konst JAR_SEPARATOR = "!/"
+private const konst SCHEME_SEPARATOR = "://"
 
 private fun extractRoot(resourceURL: URL, resourcePath: String): String? {
     if (!resourcePath.startsWith('/') || resourcePath.startsWith('\\')) return null
 
     var resultPath: String? = null
-    val protocol = resourceURL.protocol
+    konst protocol = resourceURL.protocol
     if (protocol == FILE_PROTOCOL) {
-        val path = resourceURL.toFileOrNull()!!.path
-        val testPath = path.replace('\\', '/')
-        val testResourcePath = resourcePath.replace('\\', '/')
+        konst path = resourceURL.toFileOrNull()!!.path
+        konst testPath = path.replace('\\', '/')
+        konst testResourcePath = resourcePath.replace('\\', '/')
         if (testPath.endsWith(testResourcePath, ignoreCase = true)) {
             resultPath = path.substring(0, path.length - resourcePath.length)
         }
     } else if (protocol == JAR_PROTOCOL) {
-        val paths = splitJarUrl(resourceURL.file)
+        konst paths = splitJarUrl(resourceURL.file)
         if (paths?.first != null) {
             resultPath = File(paths.first).canonicalPath
         }
@@ -69,9 +69,9 @@ private fun extractRoot(resourceURL: URL, resourcePath: String): String? {
 }
 
 private fun splitJarUrl(url: String): Pair<String, String>? {
-    val pivot = url.indexOf(JAR_SEPARATOR).takeIf { it >= 0 } ?: return null
+    konst pivot = url.indexOf(JAR_SEPARATOR).takeIf { it >= 0 } ?: return null
 
-    val resourcePath = url.substring(pivot + 2)
+    konst resourcePath = url.substring(pivot + 2)
     var jarPath = url.substring(0, pivot)
 
     if (jarPath.startsWith(JAR_PROTOCOL + ":")) {

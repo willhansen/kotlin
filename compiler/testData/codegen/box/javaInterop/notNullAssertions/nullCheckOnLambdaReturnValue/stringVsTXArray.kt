@@ -7,7 +7,7 @@ fun checkNull(x: Any?) {
 }
 
 fun box(): String {
-    val xs = Array(1) { "" }
+    konst xs = Array(1) { "" }
     checkNull(useTX(xs) { J.string() })
     return "OK"
 }

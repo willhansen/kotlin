@@ -6,7 +6,7 @@ var globalA: A = A(-1)
     }
 
 
-class A(val p: Int) {
+class A(konst p: Int) {
 
     var prop = this
 
@@ -24,7 +24,7 @@ fun box(): String {
 
     globalA = A(1)
     ++(globalA.prop)
-    val holderValue = holder;
+    konst holderValue = holder;
     if (globalA.p != 1 || globalA.prop.p != 2 || holderValue != "getA") return "fail 2: ${a.p} ${a.prop.p} ${holderValue}"
 
     return "OK"

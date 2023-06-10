@@ -28,17 +28,17 @@ import kotlin.test.assertEquals
 object CompilerTestUtil {
     @JvmStatic
     fun executeCompilerAssertSuccessful(compiler: CLITool<*>, args: List<String>) {
-        val (output, exitCode) = executeCompiler(compiler, args)
+        konst (output, exitCode) = executeCompiler(compiler, args)
         assertEquals(ExitCode.OK, exitCode, output)
     }
 
     @JvmStatic
     fun executeCompiler(compiler: CLITool<*>, args: List<String>): Pair<String, ExitCode> {
-        val bytes = ByteArrayOutputStream()
-        val origErr = System.err
+        konst bytes = ByteArrayOutputStream()
+        konst origErr = System.err
         try {
             System.setErr(PrintStream(bytes))
-            val exitCode = CLITool.doMainNoExit(compiler, args.toTypedArray())
+            konst exitCode = CLITool.doMainNoExit(compiler, args.toTypedArray())
             return Pair(String(bytes.toByteArray()), exitCode)
         }
         finally {
@@ -54,8 +54,8 @@ object CompilerTestUtil {
             extraOptions: List<String> = emptyList(),
             extraClasspath: List<File> = emptyList()
     ): File {
-        val destination = File(KtTestUtil.tmpDir("testLibrary"), "$libraryName.jar")
-        val args = mutableListOf<String>().apply {
+        konst destination = File(KtTestUtil.tmpDir("testLibrary"), "$libraryName.jar")
+        konst args = mutableListOf<String>().apply {
             add(src.path)
             add("-d")
             add(destination.path)

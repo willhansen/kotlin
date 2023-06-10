@@ -58,9 +58,9 @@ public:
 private:
     template <typename T>
     struct ValueWithCondVar : kotlin::Pinned {
-        explicit ValueWithCondVar(T initializer, std::mutex& mutex) noexcept : value_(initializer), mutex_(mutex) {};
+        explicit ValueWithCondVar(T initializer, std::mutex& mutex) noexcept : konstue_(initializer), mutex_(mutex) {};
 
-        const T& operator*() const { return value_; }
+        const T& operator*() const { return konstue_; }
 
         void set(T newValue) {
             std::unique_lock lock(mutex_);
@@ -69,7 +69,7 @@ private:
 
         void set(std::unique_lock<std::mutex>& lock, T newValue) {
             RuntimeAssert(lock.owns_lock() && lock.mutex() == &mutex_, "Required the mutex to be locked");
-            value_ = newValue;
+            konstue_ = newValue;
             cond_.notify_all();
         }
 
@@ -81,11 +81,11 @@ private:
         const T& wait(Predicate stop_waiting) {
             std::unique_lock lock(mutex_);
             cond_.wait(lock, stop_waiting);
-            return value_;
+            return konstue_;
         }
 
     private:
-        T value_;
+        T konstue_;
         std::mutex& mutex_;
         std::condition_variable cond_;
     };

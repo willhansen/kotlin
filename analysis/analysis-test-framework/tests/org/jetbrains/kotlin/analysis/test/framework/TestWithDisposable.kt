@@ -13,7 +13,7 @@ import org.junit.jupiter.api.TestInfo
 
 abstract class TestWithDisposable {
     private var _disposable: Disposable? = null
-    protected val disposable: Disposable get() = _disposable!!
+    protected konst disposable: Disposable get() = _disposable!!
 
     @BeforeEach
     fun initDisposable(testInfo: TestInfo) {

@@ -16,24 +16,24 @@ public sealed class CommonizerTarget : Serializable {
     final override fun toString(): String = identityString
 }
 
-public data class LeafCommonizerTarget public constructor(val name: String) : CommonizerTarget() {
+public data class LeafCommonizerTarget public constructor(konst name: String) : CommonizerTarget() {
     public constructor(konanTarget: KonanTarget) : this(konanTarget.name)
 
-    public val konanTargetOrNull: KonanTarget? = KonanTarget.predefinedTargets[name]
+    public konst konanTargetOrNull: KonanTarget? = KonanTarget.predefinedTargets[name]
 
-    public val konanTarget: KonanTarget get() = konanTargetOrNull ?: error("Unknown KonanTarget: $name")
+    public konst konanTarget: KonanTarget get() = konanTargetOrNull ?: error("Unknown KonanTarget: $name")
 }
 
-public data class SharedCommonizerTarget(val targets: Set<LeafCommonizerTarget>) : CommonizerTarget() {
+public data class SharedCommonizerTarget(konst targets: Set<LeafCommonizerTarget>) : CommonizerTarget() {
     public constructor(vararg targets: LeafCommonizerTarget) : this(targets.toSet())
     public constructor(vararg targets: KonanTarget) : this(targets.toSet())
     public constructor(targets: Iterable<KonanTarget>) : this(targets.map(::LeafCommonizerTarget).toSet())
 }
 
 public fun CommonizerTarget(konanTargets: Iterable<KonanTarget>): CommonizerTarget {
-    val konanTargetsSet = konanTargets.toSet()
+    konst konanTargetsSet = konanTargets.toSet()
     require(konanTargetsSet.isNotEmpty()) { "Empty set of of konanTargets" }
-    val leafTargets = konanTargetsSet.map(::LeafCommonizerTarget)
+    konst leafTargets = konanTargetsSet.map(::LeafCommonizerTarget)
     return leafTargets.singleOrNull() ?: SharedCommonizerTarget(leafTargets.toSet())
 }
 
@@ -42,7 +42,7 @@ public fun CommonizerTarget(konanTarget: KonanTarget): LeafCommonizerTarget {
 }
 
 public fun CommonizerTarget(konanTarget: KonanTarget, vararg konanTargets: KonanTarget): SharedCommonizerTarget {
-    val targets = ArrayList<KonanTarget>(konanTargets.size + 1).apply {
+    konst targets = ArrayList<KonanTarget>(konanTargets.size + 1).apply {
         add(konanTarget)
         addAll(konanTargets)
     }
@@ -53,28 +53,28 @@ public fun CommonizerTarget(
     commonizerTarget: LeafCommonizerTarget,
     vararg commonizerTargets: LeafCommonizerTarget
 ): SharedCommonizerTarget {
-    val targets = mutableListOf<LeafCommonizerTarget>().apply {
+    konst targets = mutableListOf<LeafCommonizerTarget>().apply {
         add(commonizerTarget)
         addAll(commonizerTargets)
     }
     return SharedCommonizerTarget(targets.toSet())
 }
 
-public val CommonizerTarget.identityString: String
+public konst CommonizerTarget.identityString: String
     get() = when (this) {
         is LeafCommonizerTarget -> name
         is SharedCommonizerTarget -> identityString
     }
 
-private val SharedCommonizerTarget.identityString: String
+private konst SharedCommonizerTarget.identityString: String
     get() {
-        val segments = targets.map(CommonizerTarget::identityString).sorted()
+        konst segments = targets.map(CommonizerTarget::identityString).sorted()
         return segments.joinToString(
             separator = ", ", prefix = "(", postfix = ")"
         )
     }
 
-public val CommonizerTarget.konanTargets: Set<KonanTarget>
+public konst CommonizerTarget.konanTargets: Set<KonanTarget>
     get() {
         return when (this) {
             is LeafCommonizerTarget -> setOf(konanTarget)
@@ -82,10 +82,10 @@ public val CommonizerTarget.konanTargets: Set<KonanTarget>
         }
     }
 
-public val Iterable<CommonizerTarget>.konanTargets: Set<KonanTarget> get() = flatMapTo(mutableSetOf()) { it.konanTargets }
+public konst Iterable<CommonizerTarget>.konanTargets: Set<KonanTarget> get() = flatMapTo(mutableSetOf()) { it.konanTargets }
 
 // REMOVE
-public val CommonizerTarget.level: Int
+public konst CommonizerTarget.level: Int
     get() {
         return when (this) {
             is LeafCommonizerTarget -> return 0

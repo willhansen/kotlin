@@ -3,10 +3,10 @@
 package test
 
 inline fun myRun( x: () -> String): Lazy<String> {
-    val value2 = x()
+    konst konstue2 = x()
     return object : Lazy<String> {
-        override val value: String
-            get() = value2
+        override konst konstue: String
+            get() = konstue2
 
         override fun isInitialized(): Boolean = true
     }
@@ -17,9 +17,9 @@ inline fun myRun( x: () -> String): Lazy<String> {
 import test.*
 
 class C {
-    val x: String
+    konst x: String
     init {
-        val y by myRun { { "OK" }.let { it() } }
+        konst y by myRun { { "OK" }.let { it() } }
         x = y
     }
 

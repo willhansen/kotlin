@@ -1,6 +1,6 @@
 package test
 
-fun <T : Any?> eval(f: Function0<T>): T {
+fun <T : Any?> ekonst(f: Function0<T>): T {
   return f.invoke()
 }
 
@@ -12,14 +12,14 @@ class C : B {
   }
 
   fun f(): @FlexibleNullability String? {
-    return eval<@FlexibleNullability String?>(f = local fun <anonymous>(): @FlexibleNullability String? {
+    return ekonst<@FlexibleNullability String?>(f = local fun <anonymous>(): @FlexibleNullability String? {
       return <this>.#x
     }
 )
   }
 
   fun g(): @FlexibleNullability String? {
-    return eval<@FlexibleNullability String?>(f = local fun <anonymous>(): @FlexibleNullability String? {
+    return ekonst<@FlexibleNullability String?>(f = local fun <anonymous>(): @FlexibleNullability String? {
       return <this>.#y
     }
 )

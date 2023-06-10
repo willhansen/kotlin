@@ -29,32 +29,32 @@ import org.jetbrains.kotlin.resolve.BindingContext
  * It's still possible to use them in IR plugins with old frontend.
  */
 @RequiresOptIn("This API is deprecated. It will be removed after the release of K2 compiler")
-annotation class FirIncompatiblePluginAPI(val hint: String = "")
+annotation class FirIncompatiblePluginAPI(konst hint: String = "")
 
 interface IrPluginContext : IrGeneratorContext {
-    val languageVersionSettings: LanguageVersionSettings
+    konst languageVersionSettings: LanguageVersionSettings
 
     /**
      * Indicates that the plugin works after FIR. Effectively it means that all descriptor-based API may contain incorrect and/or incomplete information, and declarations marked with `@FirIncompatibleApi` will throw runtime exceptions.
      */
-    val afterK2: Boolean
+    konst afterK2: Boolean
 
     @ObsoleteDescriptorBasedAPI
-    val moduleDescriptor: ModuleDescriptor
-
-    @ObsoleteDescriptorBasedAPI
-    @FirIncompatiblePluginAPI
-    val bindingContext: BindingContext
-
-    val symbolTable: ReferenceSymbolTable
+    konst moduleDescriptor: ModuleDescriptor
 
     @ObsoleteDescriptorBasedAPI
     @FirIncompatiblePluginAPI
-    val typeTranslator: TypeTranslator
+    konst bindingContext: BindingContext
 
-    val symbols: BuiltinSymbolsBase
+    konst symbolTable: ReferenceSymbolTable
 
-    val platform: TargetPlatform?
+    @ObsoleteDescriptorBasedAPI
+    @FirIncompatiblePluginAPI
+    konst typeTranslator: TypeTranslator
+
+    konst symbols: BuiltinSymbolsBase
+
+    konst platform: TargetPlatform?
 
     /**
      * Returns a logger instance to post diagnostic messages from plugin

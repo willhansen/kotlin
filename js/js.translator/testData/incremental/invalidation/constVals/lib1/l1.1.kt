@@ -1,1 +1,1 @@
-const val FOO = "BAR"
+const konst FOO = "BAR"

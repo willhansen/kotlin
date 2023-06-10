@@ -39,29 +39,29 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 import org.jetbrains.kotlin.resolve.calls.util.getSuperCallExpression
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm.INTERFACE_CANT_CALL_DEFAULT_METHOD_VIA_SUPER
 
-class InterfaceDefaultMethodCallChecker(val jvmTarget: JvmTarget, project: Project) : CallChecker {
-    private val ideService = LanguageVersionSettingsProvider.getInstance(project)
+class InterfaceDefaultMethodCallChecker(konst jvmTarget: JvmTarget, project: Project) : CallChecker {
+    private konst ideService = LanguageVersionSettingsProvider.getInstance(project)
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.resultingDescriptor as? CallableMemberDescriptor ?: return
+        konst descriptor = resolvedCall.resultingDescriptor as? CallableMemberDescriptor ?: return
         if (descriptor is JavaPropertyDescriptor) return
 
-        val superCallExpression = getSuperCallExpression(resolvedCall.call) ?: return
+        konst superCallExpression = getSuperCallExpression(resolvedCall.call) ?: return
 
         if (!isInterface(descriptor.original.containingDeclaration)) return
 
-        val realDescriptor = unwrapFakeOverride(descriptor)
-        val realDescriptorOwner = realDescriptor.containingDeclaration as? ClassDescriptor ?: return
+        konst realDescriptor = unwrapFakeOverride(descriptor)
+        konst realDescriptorOwner = realDescriptor.containingDeclaration as? ClassDescriptor ?: return
 
-        val jvmDefaultMode = context.languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
+        konst jvmDefaultMode = context.languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
         if (isInterface(realDescriptorOwner) && (realDescriptor is JavaCallableMemberDescriptor ||
                     realDescriptor.isCompiledToJvmDefaultWithProperMode(ideService, jvmDefaultMode))
         ) {
-            val bindingContext = context.trace.bindingContext
-            val thisForSuperCall = getSuperCallLabelTarget(bindingContext, superCallExpression)
+            konst bindingContext = context.trace.bindingContext
+            konst thisForSuperCall = getSuperCallLabelTarget(bindingContext, superCallExpression)
 
             if (thisForSuperCall != null && isInterface(thisForSuperCall)) {
-                val declarationWithCall = findInterfaceMember(thisForSuperCall, superCallExpression, bindingContext)
+                konst declarationWithCall = findInterfaceMember(thisForSuperCall, superCallExpression, bindingContext)
                 if (declarationWithCall?.isCompiledToJvmDefaultWithProperMode(ideService, jvmDefaultMode) == false) {
                     context.trace.report(INTERFACE_CANT_CALL_DEFAULT_METHOD_VIA_SUPER.on(reportOn))
                     return
@@ -75,7 +75,7 @@ class InterfaceDefaultMethodCallChecker(val jvmTarget: JvmTarget, project: Proje
         startExpression: KtSuperExpression,
         bindingContext: BindingContext
     ): CallableMemberDescriptor? {
-        val parents = generateSequence({ startExpression.parent }) { it.parent }
+        konst parents = generateSequence({ startExpression.parent }) { it.parent }
         parents.fold<PsiElement, PsiElement>(startExpression) { child, parent ->
             if (parent is KtClassBody &&
                 descriptorToSearch == bindingContext.get(BindingContext.CLASS, parent.parent)
@@ -96,8 +96,8 @@ class InterfaceDefaultMethodCallChecker(val jvmTarget: JvmTarget, project: Proje
         bindingContext: BindingContext,
         expression: KtSuperExpression
     ): ClassDescriptor? {
-        val thisTypeForSuperCall = bindingContext.get(BindingContext.THIS_TYPE_FOR_SUPER_EXPRESSION, expression) ?: return null
-        val descriptor = thisTypeForSuperCall.constructor.declarationDescriptor
+        konst thisTypeForSuperCall = bindingContext.get(BindingContext.THIS_TYPE_FOR_SUPER_EXPRESSION, expression) ?: return null
+        konst descriptor = thisTypeForSuperCall.constructor.declarationDescriptor
         return descriptor as? ClassDescriptor
     }
 

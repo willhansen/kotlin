@@ -3,7 +3,7 @@ interface B {
 }
 
 interface D {
-    val x: Int
+    konst x: Int
 }
 
 class <!CONFLICTING_JVM_DECLARATIONS!>C(d: D)<!> : D by d, B {

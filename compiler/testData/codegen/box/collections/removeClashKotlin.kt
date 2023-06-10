@@ -11,7 +11,7 @@ open class RemoveStringNImpl {
 }
 
 class S1 : Set<String>, RemoveStringNImpl() {
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: String): Boolean = TODO()
     override fun containsAll(elements: Collection<String>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()
@@ -19,7 +19,7 @@ class S1 : Set<String>, RemoveStringNImpl() {
 }
 
 class S2 : Set<String> {
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: String): Boolean = TODO()
     override fun containsAll(elements: Collection<String>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()
@@ -32,7 +32,7 @@ class S2 : Set<String> {
 }
 
 class S3 : Set<String> {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun contains(element: String): Boolean = false
     override fun containsAll(elements: Collection<String>): Boolean = false
     override fun isEmpty(): Boolean = true

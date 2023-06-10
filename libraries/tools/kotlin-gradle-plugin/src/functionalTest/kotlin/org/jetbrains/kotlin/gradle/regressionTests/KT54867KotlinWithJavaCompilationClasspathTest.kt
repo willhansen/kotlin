@@ -19,13 +19,13 @@ class KT54867KotlinWithJavaCompilationClasspathTest {
 
     @Test
     fun `test - jvm project - kotlin with java compilation - setting classpath on javaSourceSet`() {
-        val project = buildProjectWithJvm {
+        konst project = buildProjectWithJvm {
             enableDefaultStdlibDependency(false)
         }
 
-        val customJavaSourceSet = project.javaSourceSets.create("custom")
-        val customKotlinSourceSet = project.kotlinJvmExtension.sourceSets.getByName("custom")
-        val customKotlinCompilation = project.kotlinJvmExtension.target.compilations.getByName("custom")
+        konst customJavaSourceSet = project.javaSourceSets.create("custom")
+        konst customKotlinSourceSet = project.kotlinJvmExtension.sourceSets.getByName("custom")
+        konst customKotlinCompilation = project.kotlinJvmExtension.target.compilations.getByName("custom")
 
         assertSame(customKotlinSourceSet, customKotlinCompilation.defaultSourceSet)
         assertSame(customJavaSourceSet, customKotlinCompilation.javaSourceSet)

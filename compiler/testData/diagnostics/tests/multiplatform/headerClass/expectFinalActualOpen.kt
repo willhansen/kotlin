@@ -4,7 +4,7 @@
 
 expect class Foo {
     fun f()
-    val v: String
+    konst v: String
 }
 
 expect class Bar {
@@ -14,7 +14,7 @@ expect class Bar {
 // MODULE: m2-jvm()()(m1-common)
 // FILE: jvm.kt
 
-actual open class Foo(actual open val v: String) {
+actual open class Foo(actual open konst v: String) {
     actual open fun f() {}
 }
 

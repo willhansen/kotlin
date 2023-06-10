@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.tooling.core.HasMutableExtras
 
 internal interface InternalKotlinTarget : KotlinTarget, HasMutableExtras {
     var isSourcesPublishable: Boolean
-    val kotlinComponents: Set<KotlinTargetComponent>
+    konst kotlinComponents: Set<KotlinTargetComponent>
     fun onPublicationCreated(publication: MavenPublication)
 }
 
-internal val KotlinTarget.internal: InternalKotlinTarget
+internal konst KotlinTarget.internal: InternalKotlinTarget
     get() = (this as? InternalKotlinTarget) ?: throw IllegalArgumentException(
         "KotlinTarget($name) ${this::class} does not implement ${InternalKotlinTarget::class}"
     )

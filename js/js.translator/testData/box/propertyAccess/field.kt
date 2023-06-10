@@ -10,7 +10,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.a = 1
     if (a.a != 2) return "A().a != 2, it: ${a.a}"
     return "OK"

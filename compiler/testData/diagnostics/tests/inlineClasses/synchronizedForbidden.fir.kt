@@ -4,9 +4,9 @@
 // KT-49339
 
 @JvmInline
-value class A(val a: Int) {
+konstue class A(konst a: Int) {
     @get:Synchronized
-    val f0
+    konst f0
         get() = Unit
 
     @Synchronized
@@ -16,25 +16,25 @@ value class A(val a: Int) {
     fun String.f2() = Unit
 
     @get:Synchronized
-    val String.f3
+    konst String.f3
         get() = Unit
 
     @get:Synchronized
-    val A.f4
+    konst A.f4
         get() = Unit
 
     @Synchronized
     fun A.f5() = Unit
 
-    val f6
+    konst f6
         @Synchronized
         get() = Unit
 
-    val A.f7
+    konst A.f7
         @Synchronized
         get() = Unit
 
-    val String.f8
+    konst String.f8
         @Synchronized
         get() = Unit
 }
@@ -42,13 +42,13 @@ value class A(val a: Int) {
 class Usual {
 
     @get:Synchronized
-    val A.f9
+    konst A.f9
         get() = Unit
 
     @Synchronized
     fun A.f10() = Unit
 
-    val A.f11
+    konst A.f11
         @Synchronized
         get() = Unit
 }
@@ -57,15 +57,15 @@ class Usual {
 fun A.f12() = Unit
 
 @get:Synchronized
-val A.f13
+konst A.f13
     get() = Unit
 
-val A.f14
+konst A.f14
     @Synchronized
     get() = Unit
 
 fun main() {
-    val a = A(2)
+    konst a = A(2)
     synchronized(a) {}
     synchronized(2) {}
     synchronized(0x2) {}

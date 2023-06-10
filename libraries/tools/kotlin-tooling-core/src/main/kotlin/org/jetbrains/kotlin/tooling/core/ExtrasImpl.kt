@@ -14,26 +14,26 @@ internal class MutableExtrasImpl(
     initialEntries: Iterable<Entry<*>> = emptyList()
 ) : MutableExtras, AbstractExtras(), Serializable {
 
-    private val extras: MutableMap<Key<*>, Entry<*>> =
+    private konst extras: MutableMap<Key<*>, Entry<*>> =
         initialEntries.associateByTo(mutableMapOf()) { it.key }
 
-    override val keys: Set<Key<*>>
+    override konst keys: Set<Key<*>>
         get() = extras.keys.toSet()
 
-    override val entries: Set<Entry<*>>
-        get() = extras.values.toSet()
+    override konst entries: Set<Entry<*>>
+        get() = extras.konstues.toSet()
 
-    override val size: Int
+    override konst size: Int
         get() = extras.size
 
     override fun isEmpty(): Boolean = extras.isEmpty()
 
-    override fun <T : Any> set(key: Key<T>, value: T): T? {
-        return put(Entry(key, value))
+    override fun <T : Any> set(key: Key<T>, konstue: T): T? {
+        return put(Entry(key, konstue))
     }
 
     override fun <T : Any> put(entry: Entry<T>): T? {
-        return extras.put(entry.key, entry)?.let { it.value as T }
+        return extras.put(entry.key, entry)?.let { it.konstue as T }
     }
 
     override fun putAll(from: Iterable<Entry<*>>) {
@@ -41,11 +41,11 @@ internal class MutableExtrasImpl(
     }
 
     override fun <T : Any> get(key: Key<T>): T? {
-        return extras[key]?.let { it.value as T }
+        return extras[key]?.let { it.konstue as T }
     }
 
     override fun <T : Any> remove(key: Key<T>): T? {
-        return extras.remove(key)?.let { it.value as T }
+        return extras.remove(key)?.let { it.konstue as T }
     }
 
     override fun clear() {
@@ -53,49 +53,49 @@ internal class MutableExtrasImpl(
     }
 
     internal companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }
 
 @Suppress("unchecked_cast")
 internal class ImmutableExtrasImpl private constructor(
-    private val extras: Map<Key<*>, Entry<*>>
+    private konst extras: Map<Key<*>, Entry<*>>
 ) : AbstractExtras(), Serializable {
     constructor(extras: Iterable<Entry<*>>) : this(extras.associateBy { it.key })
 
     constructor(extras: Array<out Entry<*>>) : this(extras.associateBy { it.key })
 
-    override val keys: Set<Key<*>> = extras.keys
+    override konst keys: Set<Key<*>> = extras.keys
 
     override fun isEmpty(): Boolean = extras.isEmpty()
 
-    override val size: Int = extras.size
+    override konst size: Int = extras.size
 
-    override val entries: Set<Entry<*>> = extras.values.toSet()
+    override konst entries: Set<Entry<*>> = extras.konstues.toSet()
 
     override fun <T : Any> get(key: Key<T>): T? {
-        return extras[key]?.let { it.value as T }
+        return extras[key]?.let { it.konstue as T }
     }
 
     internal companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 
     /* Replace during serialization */
     private fun writeReplace(): Any = Surrogate(entries)
 
-    private class Surrogate(private val entries: Set<Entry<*>>) : Serializable {
+    private class Surrogate(private konst entries: Set<Entry<*>>) : Serializable {
         fun readResolve(): Any = ImmutableExtrasImpl(entries)
 
         private companion object {
-            private const val serialVersionUID = 0L
+            private const konst serialVersionUID = 0L
         }
     }
 }
 
 abstract class AbstractExtras : Extras {
 
-    override val size: Int get() = keys.size
+    override konst size: Int get() = keys.size
 
     override fun isEmpty(): Boolean = keys.isEmpty()
 
@@ -127,11 +127,11 @@ abstract class AbstractExtras : Extras {
 
 internal object EmptyExtras : AbstractExtras(), Serializable {
 
-    override val size: Int = 0
+    override konst size: Int = 0
 
-    override val keys: Set<Key<*>> = emptySet()
+    override konst keys: Set<Key<*>> = emptySet()
 
-    override val entries: Set<Entry<*>> = emptySet()
+    override konst entries: Set<Entry<*>> = emptySet()
 
     override fun isEmpty(): Boolean = true
 
@@ -142,7 +142,7 @@ internal object EmptyExtras : AbstractExtras(), Serializable {
     override fun contains(element: Entry<out Any>): Boolean = false
 
     @Suppress("unused") // Necessary for java.io.Serializable stability
-    private const val serialVersionUID = 0L
+    private const konst serialVersionUID = 0L
 
     /* Ensure single instance, even after deserialization */
     private fun readResolve(): Any = EmptyExtras

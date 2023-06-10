@@ -13,5 +13,5 @@ fun foo(f: File, c: Customer) {
     c.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>name1<!> // name1 should be unresolved here
 }
 
-val File.name1: String
+konst File.name1: String
     get() = getName()

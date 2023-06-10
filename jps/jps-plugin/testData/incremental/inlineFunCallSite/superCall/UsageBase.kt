@@ -1,3 +1,3 @@
 package usage
 
-abstract class UsageBase(val x: Int)
+abstract class UsageBase(konst x: Int)

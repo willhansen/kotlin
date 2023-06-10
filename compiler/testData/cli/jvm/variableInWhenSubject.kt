@@ -1,5 +1,5 @@
 fun test(s: String?) =
-    when (val v = s) {
+    when (konst v = s) {
         null -> ""
         else -> v
     }

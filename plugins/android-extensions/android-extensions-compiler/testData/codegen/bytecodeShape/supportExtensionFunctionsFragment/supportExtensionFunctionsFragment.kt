@@ -14,8 +14,8 @@ open class Fragment {
 public class MyFragment : Fragment()
 
 fun MyFragment.b() {
-    val x = login
-    val y = this.login
+    konst x = login
+    konst y = this.login
 }
 
 // 2 public _\$_findCachedViewById

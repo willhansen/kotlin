@@ -17,17 +17,17 @@ import com.intellij.util.containers.ContainerUtil
 import java.io.IOException
 
 class ClsJavaStubByVirtualFileCache {
-    private class CachedJavaStub(val modificationStamp: Long, val javaFileStub: PsiJavaFileStubImpl)
+    private class CachedJavaStub(konst modificationStamp: Long, konst javaFileStub: PsiJavaFileStubImpl)
 
-    private val cache = ContainerUtil.createConcurrentWeakKeySoftValueMap<VirtualFile, CachedJavaStub>()
+    private konst cache = ContainerUtil.createConcurrentWeakKeySoftValueMap<VirtualFile, CachedJavaStub>()
 
     fun get(classFile: VirtualFile): PsiJavaFileStubImpl? {
-        val cached = cache[classFile]
-        val fileModificationStamp = classFile.modificationStamp
+        konst cached = cache[classFile]
+        konst fileModificationStamp = classFile.modificationStamp
         if (cached != null && cached.modificationStamp == fileModificationStamp) {
             return cached.javaFileStub
         }
-        val stub = createStub(classFile) as PsiJavaFileStubImpl? ?: return null
+        konst stub = createStub(classFile) as PsiJavaFileStubImpl? ?: return null
         cache[classFile] = CachedJavaStub(fileModificationStamp, stub)
         return stub
     }
@@ -47,7 +47,7 @@ class ClsJavaStubByVirtualFileCache {
     }
 
     companion object {
-        private val LOG = Logger.getInstance(ClsJavaStubByVirtualFileCache::class.java)
+        private konst LOG = Logger.getInstance(ClsJavaStubByVirtualFileCache::class.java)
 
         fun getInstance(project: Project): ClsJavaStubByVirtualFileCache =
             project.getService(ClsJavaStubByVirtualFileCache::class.java)

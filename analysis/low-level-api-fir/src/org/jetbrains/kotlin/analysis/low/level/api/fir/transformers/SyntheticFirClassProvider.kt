@@ -33,8 +33,8 @@ internal fun withOnAirDesignation(designation: FirDesignationWithFile, block: ()
 
     try {
         // Make additional classes available only inside a given `block`.
-        // The provider is stored inside a `ThreadLocal` value to avoid parallel analysis modification.
-        val provider = OnAirSyntheticFirClassProvider.create(designation)
+        // The provider is stored inside a `ThreadLocal` konstue to avoid parallel analysis modification.
+        konst provider = OnAirSyntheticFirClassProvider.create(designation)
         onAirProviderForThread.set(provider)
         block()
     } finally {
@@ -43,10 +43,10 @@ internal fun withOnAirDesignation(designation: FirDesignationWithFile, block: ()
 }
 
 private class OnAirSyntheticFirClassProvider private constructor(
-    private val firFile: FirFile,
-    private val classes: Map<ClassId, FirClassLikeDeclaration>
+    private konst firFile: FirFile,
+    private konst classes: Map<ClassId, FirClassLikeDeclaration>
 ) : SyntheticFirClassProvider {
-    val session: FirSession
+    konst session: FirSession
         get() = firFile.moduleData.session
 
     override fun getFirClassifierContainerFileIfAny(classId: ClassId): FirFile? {
@@ -59,11 +59,11 @@ private class OnAirSyntheticFirClassProvider private constructor(
 
     companion object {
         fun create(designation: FirDesignationWithFile): OnAirSyntheticFirClassProvider {
-            val firFile = designation.firFile
-            val firElement = designation.target
+            konst firFile = designation.firFile
+            konst firElement = designation.target
 
-            val nodeInfoCollector = object : FirVisitorVoid() {
-                val classes = mutableMapOf<ClassId, FirClassLikeDeclaration>()
+            konst nodeInfoCollector = object : FirVisitorVoid() {
+                konst classes = mutableMapOf<ClassId, FirClassLikeDeclaration>()
                 override fun visitElement(element: FirElement) {
                     if (element is FirClassLikeDeclaration) {
                         classes[element.symbol.classId] = element
@@ -83,4 +83,4 @@ private object EmptySyntheticFirClassProvider : SyntheticFirClassProvider {
     override fun getFirClassifierByFqName(classId: ClassId) = null
 }
 
-private val onAirProviderForThread: ThreadLocal<OnAirSyntheticFirClassProvider?> = ThreadLocal()
+private konst onAirProviderForThread: ThreadLocal<OnAirSyntheticFirClassProvider?> = ThreadLocal()

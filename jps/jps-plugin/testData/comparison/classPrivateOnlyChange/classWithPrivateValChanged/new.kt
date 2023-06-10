@@ -1,7 +1,7 @@
 package test
 
 class ClassWithPrivateValAdded {
-    private val x: Int = 100
+    private konst x: Int = 100
     public fun unchangedFun() {}
 }
 
@@ -10,12 +10,12 @@ class ClassWithPrivateValRemoved {
 }
 
 class ClassWithPrivateValSignatureChanged {
-    private val x: String = "X"
+    private konst x: String = "X"
     public fun unchangedFun() {}
 }
 
 class ClassWithGetterForPrivateValChanged {
-    private val x: Int
+    private konst x: Int
         get() = 200
     public fun unchangedFun() {}
 }

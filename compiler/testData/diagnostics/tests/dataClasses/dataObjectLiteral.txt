@@ -1,6 +1,6 @@
 package
 
-public val o: [Error type: Not found recorded type for data]
+public konst o: [Error type: Not found recorded type for data]
 
 public object `<no name provided>` : I {
     private constructor `<no name provided>`()

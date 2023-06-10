@@ -17,7 +17,7 @@ fun test() {
     // Proxy function for arrayOf fun should be non-synthetic
     use(Sam3(::intArrayOf))
 
-    // Proxy function for generic fun should have valid generic signature
+    // Proxy function for generic fun should have konstid generic signature
     use4<Map<String, String>>(::mutableMapOf)
 }
 

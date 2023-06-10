@@ -7,5 +7,5 @@ fun foo(javaClass: JavaClass<String>) {
 // FILE: JavaClass.java
 public class JavaClass<T> {
     public T getSomething() { return null; }
-    public void setSomething(T value) { }
+    public void setSomething(T konstue) { }
 }

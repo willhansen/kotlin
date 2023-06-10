@@ -7,7 +7,7 @@ import kotlin.test.*
 inline fun <reified T> foo(x: Any) = arrayOf<T>(x as T)
 
 fun box(): String {
-    val a: Array<String> = arrayOf("")
+    konst a: Array<String> = arrayOf("")
 
     assertFailsWith<ArrayStoreException> {
         (a as Array<Any>)[0] = Any()

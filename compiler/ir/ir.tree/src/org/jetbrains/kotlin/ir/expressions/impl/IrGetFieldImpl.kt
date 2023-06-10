@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.ir.symbols.IrFieldSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrGetFieldImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
-    override val symbol: IrFieldSymbol,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
+    override konst symbol: IrFieldSymbol,
     override var type: IrType,
     override var origin: IrStatementOrigin? = null,
     override var superQualifierSymbol: IrClassSymbol? = null,

@@ -13,4 +13,4 @@ open class BaseClass
 typealias FirstTypeAlias = @Anno1 BaseClass
 typealias SecondTypeAlias = @Anno2 FirstTypeAlias
 
-val obj = ob<caret>ject : @Anno3 SecondTypeAlias()
+konst obj = ob<caret>ject : @Anno3 SecondTypeAlias()

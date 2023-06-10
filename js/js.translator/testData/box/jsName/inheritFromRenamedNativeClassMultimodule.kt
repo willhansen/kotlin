@@ -6,7 +6,7 @@ package foo
 
 @JsName("A")
 external open class B(foo: String) {
-    val foo: String
+    konst foo: String
 }
 
 // MODULE: main(module1)

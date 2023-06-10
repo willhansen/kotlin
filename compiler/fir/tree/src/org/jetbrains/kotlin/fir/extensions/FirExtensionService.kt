@@ -18,7 +18,7 @@ import kotlin.reflect.KClass
 annotation class PluginServicesInitialization
 
 @NoMutableState
-class FirExtensionService(val session: FirSession) : ComponentArrayOwner<FirExtension, List<FirExtension>>(), FirSessionComponent {
+class FirExtensionService(konst session: FirSession) : ComponentArrayOwner<FirExtension, List<FirExtension>>(), FirSessionComponent {
     companion object : ConeTypeRegistry<FirExtension, List<FirExtension>>() {
         inline fun <reified P : FirExtension, V : List<P>> registeredExtensions(): ArrayMapAccessor<FirExtension, List<FirExtension>, V> {
             @Suppress("UNCHECKED_CAST")
@@ -31,7 +31,7 @@ class FirExtensionService(val session: FirSession) : ComponentArrayOwner<FirExte
         }
     }
 
-    override val typeRegistry: TypeRegistry<FirExtension, List<FirExtension>>
+    override konst typeRegistry: TypeRegistry<FirExtension, List<FirExtension>>
         get() = Companion
 
     var registeredExtensionsSize: Int = 0
@@ -40,7 +40,7 @@ class FirExtensionService(val session: FirSession) : ComponentArrayOwner<FirExte
     @PluginServicesInitialization
     fun registerExtensions(extensionClass: KClass<out FirExtension>, extensionFactories: List<FirExtension.Factory<*>>) {
         registeredExtensionsSize += extensionFactories.size
-        val extensions = extensionFactories.map { it.create(session) }
+        konst extensions = extensionFactories.map { it.create(session) }
         registerComponent(
             extensionClass,
             extensions
@@ -53,7 +53,7 @@ class FirExtensionService(val session: FirSession) : ComponentArrayOwner<FirExte
     }
 }
 
-val FirSession.extensionService: FirExtensionService by FirSession.sessionComponentAccessor()
+konst FirSession.extensionService: FirExtensionService by FirSession.sessionComponentAccessor()
 
-val FirExtensionService.hasExtensions: Boolean
+konst FirExtensionService.hasExtensions: Boolean
     get() = registeredExtensionsSize > 0

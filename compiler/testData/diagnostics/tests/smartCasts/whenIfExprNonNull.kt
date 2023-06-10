@@ -1,5 +1,5 @@
 fun baz(s: String?, u: String?): String {
-    val t = when(s) {
+    konst t = when(s) {
         is String -> {
             if (u == null) return <!DEBUG_INFO_SMARTCAST!>s<!>
             <!DEBUG_INFO_SMARTCAST!>u<!>

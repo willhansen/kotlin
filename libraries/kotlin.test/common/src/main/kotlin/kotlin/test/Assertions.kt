@@ -23,7 +23,7 @@ import kotlin.reflect.typeOf
 /**
  * Current adapter providing assertion implementations
  */
-val asserter: Asserter
+konst asserter: Asserter
     get() = _asserter ?: lookupAsserter()
 
 /** Used to override current asserter internally */
@@ -41,7 +41,7 @@ inline fun assertTrue(message: String? = null, block: () -> Boolean) {
 /** Asserts that the expression is `true` with an optional [message]. */
 fun assertTrue(actual: Boolean, message: String? = null) {
     contract { returns() implies actual }
-    return asserter.assertTrue(message ?: "Expected value to be true.", actual)
+    return asserter.assertTrue(message ?: "Expected konstue to be true.", actual)
 }
 
 /** Asserts that the given [block] returns `false`. */
@@ -55,10 +55,10 @@ inline fun assertFalse(message: String? = null, block: () -> Boolean) {
 /** Asserts that the expression is `false` with an optional [message]. */
 fun assertFalse(actual: Boolean, message: String? = null) {
     contract { returns() implies (!actual) }
-    return asserter.assertTrue(message ?: "Expected value to be false.", !actual)
+    return asserter.assertTrue(message ?: "Expected konstue to be false.", !actual)
 }
 
-/** Asserts that the [expected] value is equal to the [actual] value, with an optional [message]. */
+/** Asserts that the [expected] konstue is equal to the [actual] konstue, with an optional [message]. */
 fun <@OnlyInputTypes T> assertEquals(expected: T, actual: T, message: String? = null) {
     asserter.assertEquals(message, expected, actual)
 }
@@ -75,7 +75,7 @@ fun assertEquals(expected: Float, actual: Float, absoluteTolerance: Float, messa
     checkFloatsAreEqual(expected, actual, absoluteTolerance, message)
 }
 
-/** Asserts that the [actual] value is not equal to the illegal value, with an optional [message]. */
+/** Asserts that the [actual] konstue is not equal to the illegal konstue, with an optional [message]. */
 fun <@OnlyInputTypes T> assertNotEquals(illegal: T, actual: T, message: String? = null) {
     asserter.assertNotEquals(message, illegal, actual)
 }
@@ -103,50 +103,50 @@ fun <@OnlyInputTypes T> assertNotSame(illegal: T, actual: T, message: String? = 
 }
 
 /**
- * Asserts that [value] is of type [T], with an optional [message].
+ * Asserts that [konstue] is of type [T], with an optional [message].
  *
- * Note that due to type erasure the type check may be partial (e.g. `assertIs<List<String>>(value)`
+ * Note that due to type erasure the type check may be partial (e.g. `assertIs<List<String>>(konstue)`
  * only checks for the class being [List] and not the type of its elements because it's erased).
  */
 @SinceKotlin("1.5")
 @InlineOnly
 @OptIn(ExperimentalStdlibApi::class)
-inline fun <reified T> assertIs(value: Any?, message: String? = null): T {
-    contract { returns() implies (value is T) }
-    assertIsOfType(value, typeOf<T>(), value is T, message)
-    return value as T
+inline fun <reified T> assertIs(konstue: Any?, message: String? = null): T {
+    contract { returns() implies (konstue is T) }
+    assertIsOfType(konstue, typeOf<T>(), konstue is T, message)
+    return konstue as T
 }
 
 @PublishedApi
-internal fun assertIsOfType(value: Any?, type: KType, result: Boolean, message: String?) {
-    asserter.assertTrue({ messagePrefix(message) + "Expected value to be of type <$type>, actual <${value?.let { it::class }}>." }, result)
+internal fun assertIsOfType(konstue: Any?, type: KType, result: Boolean, message: String?) {
+    asserter.assertTrue({ messagePrefix(message) + "Expected konstue to be of type <$type>, actual <${konstue?.let { it::class }}>." }, result)
 }
 
 /**
- * Asserts that [value] is not of type [T], with an optional [message].
+ * Asserts that [konstue] is not of type [T], with an optional [message].
  *
- * Note that due to type erasure the type check may be partial (e.g. `assertIsNot<List<String>>(value)`
+ * Note that due to type erasure the type check may be partial (e.g. `assertIsNot<List<String>>(konstue)`
  * only checks for the class being [List] and not the type of its elements because it's erased).
  */
 @SinceKotlin("1.5")
 @InlineOnly
-inline fun <reified T> assertIsNot(value: Any?, message: String? = null) {
-    assertIsNotOfType(value, typeOf<T>(), value !is T, message)
+inline fun <reified T> assertIsNot(konstue: Any?, message: String? = null) {
+    assertIsNotOfType(konstue, typeOf<T>(), konstue !is T, message)
 }
 
 @PublishedApi
-internal fun assertIsNotOfType(@Suppress("UNUSED_PARAMETER") value: Any?, type: KType, result: Boolean, message: String?) {
-    asserter.assertTrue({ messagePrefix(message) + "Expected value to not be of type <$type>." }, result)
+internal fun assertIsNotOfType(@Suppress("UNUSED_PARAMETER") konstue: Any?, type: KType, result: Boolean, message: String?) {
+    asserter.assertTrue({ messagePrefix(message) + "Expected konstue to not be of type <$type>." }, result)
 }
 
-/** Asserts that the [actual] value is not `null`, with an optional [message]. */
+/** Asserts that the [actual] konstue is not `null`, with an optional [message]. */
 fun <T : Any> assertNotNull(actual: T?, message: String? = null): T {
     contract { returns() implies (actual != null) }
     asserter.assertNotNull(message, actual)
     return actual!!
 }
 
-/** Asserts that the [actual] value is not `null`, with an optional [message] and a function [block] to process the not-null value. */
+/** Asserts that the [actual] konstue is not `null`, with an optional [message] and a function [block] to process the not-null konstue. */
 @JvmName("assertNotNullInline")
 @InlineOnly
 inline fun <T : Any, R> assertNotNull(actual: T?, message: String? = null, block: (T) -> R) {
@@ -154,7 +154,7 @@ inline fun <T : Any, R> assertNotNull(actual: T?, message: String? = null, block
     block(assertNotNull(actual, message))
 }
 
-/** Asserts that the [actual] value is `null`, with an optional [message]. */
+/** Asserts that the [actual] konstue is `null`, with an optional [message]. */
 fun assertNull(actual: Any?, message: String? = null) {
     asserter.assertNull(message, actual)
 }
@@ -261,54 +261,54 @@ private inline fun <@OnlyInputTypes A, E> assertArrayContains(
     )
 }
 
-/** Asserts that the [range] contains the specified [value], with an optional [message]. */
+/** Asserts that the [range] contains the specified [konstue], with an optional [message]. */
 @SinceKotlin("1.5")
-fun assertContains(range: IntRange, value: Int, message: String? = null) {
-    assertRangeContains(range, value, message, IntRange::contains)
+fun assertContains(range: IntRange, konstue: Int, message: String? = null) {
+    assertRangeContains(range, konstue, message, IntRange::contains)
 }
 
-/** Asserts that the [range] contains the specified [value], with an optional [message]. */
+/** Asserts that the [range] contains the specified [konstue], with an optional [message]. */
 @SinceKotlin("1.5")
-fun assertContains(range: LongRange, value: Long, message: String? = null) {
-    assertRangeContains(range, value, message, LongRange::contains)
+fun assertContains(range: LongRange, konstue: Long, message: String? = null) {
+    assertRangeContains(range, konstue, message, LongRange::contains)
 }
 
-/** Asserts that the [range] contains the specified [value], with an optional [message]. */
+/** Asserts that the [range] contains the specified [konstue], with an optional [message]. */
 @SinceKotlin("1.5")
-fun <T : Comparable<T>> assertContains(range: ClosedRange<T>, value: T, message: String? = null) {
-    assertRangeContains(range, value, message, ClosedRange<T>::contains)
+fun <T : Comparable<T>> assertContains(range: ClosedRange<T>, konstue: T, message: String? = null) {
+    assertRangeContains(range, konstue, message, ClosedRange<T>::contains)
 }
 
-/** Asserts that the [range] contains the specified [value], with an optional [message]. */
+/** Asserts that the [range] contains the specified [konstue], with an optional [message]. */
 @SinceKotlin("1.7")
 @ExperimentalStdlibApi
-fun <T : Comparable<T>> assertContains(range: OpenEndRange<T>, value: T, message: String? = null) {
-    assertRangeContains(range, value, message, OpenEndRange<T>::contains)
+fun <T : Comparable<T>> assertContains(range: OpenEndRange<T>, konstue: T, message: String? = null) {
+    assertRangeContains(range, konstue, message, OpenEndRange<T>::contains)
 }
 
-/** Asserts that the [range] contains the specified [value], with an optional [message]. */
+/** Asserts that the [range] contains the specified [konstue], with an optional [message]. */
 @SinceKotlin("1.5")
-fun assertContains(range: CharRange, value: Char, message: String? = null) {
-    assertRangeContains(range, value, message, CharRange::contains)
+fun assertContains(range: CharRange, konstue: Char, message: String? = null) {
+    assertRangeContains(range, konstue, message, CharRange::contains)
 }
 
-/** Asserts that the [range] contains the specified [value], with an optional [message]. */
+/** Asserts that the [range] contains the specified [konstue], with an optional [message]. */
 @SinceKotlin("1.5")
-fun assertContains(range: UIntRange, value: UInt, message: String? = null) {
-    assertRangeContains(range, value, message, UIntRange::contains)
+fun assertContains(range: UIntRange, konstue: UInt, message: String? = null) {
+    assertRangeContains(range, konstue, message, UIntRange::contains)
 }
 
-/** Asserts that the [range] contains the specified [value], with an optional [message]. */
+/** Asserts that the [range] contains the specified [konstue], with an optional [message]. */
 @SinceKotlin("1.5")
-fun assertContains(range: ULongRange, value: ULong, message: String? = null) {
-    assertRangeContains(range, value, message, ULongRange::contains)
+fun assertContains(range: ULongRange, konstue: ULong, message: String? = null) {
+    assertRangeContains(range, konstue, message, ULongRange::contains)
 }
 
 @kotlin.internal.InlineOnly
-private inline fun <R, V> assertRangeContains(range: R, value: V, message: String? = null, contains: R.(V) -> Boolean) {
+private inline fun <R, V> assertRangeContains(range: R, konstue: V, message: String? = null, contains: R.(V) -> Boolean) {
     asserter.assertTrue(
-        { messagePrefix(message) + "Expected the range <$range> to contain the value <${value.toString()}>." }, // Explicitly call toString(): KT-45684
-        range.contains(value)
+        { messagePrefix(message) + "Expected the range <$range> to contain the konstue <${konstue.toString()}>." }, // Explicitly call toString(): KT-45684
+        range.contains(konstue)
     )
 }
 
@@ -531,7 +531,7 @@ fun fail(message: String? = null, cause: Throwable? = null): Nothing {
     asserter.fail(message, cause)
 }
 
-/** Asserts that given function [block] returns the given [expected] value. */
+/** Asserts that given function [block] returns the given [expected] konstue. */
 @JvmName("expectInline")
 @InlineOnly
 inline fun <@OnlyInputTypes T> expect(expected: T, block: () -> T) {
@@ -539,7 +539,7 @@ inline fun <@OnlyInputTypes T> expect(expected: T, block: () -> T) {
     assertEquals(expected, block())
 }
 
-/** Asserts that given function [block] returns the given [expected] value and use the given [message] if it fails. */
+/** Asserts that given function [block] returns the given [expected] konstue and use the given [message] if it fails. */
 @JvmName("expectInline")
 @InlineOnly
 inline fun <@OnlyInputTypes T> expect(expected: T, message: String?, block: () -> T) {
@@ -551,7 +551,7 @@ inline fun <@OnlyInputTypes T> expect(expected: T, message: String?, block: () -
  * Asserts that given function [block] fails by throwing an exception.
  *
  * @return An exception that was expected to be thrown and was successfully caught.
- * The returned exception can be inspected further, for example by asserting its property values.
+ * The returned exception can be inspected further, for example by asserting its property konstues.
  */
 @InlineOnly
 @JvmName("assertFailsInline")
@@ -564,7 +564,7 @@ inline fun assertFails(block: () -> Unit): Throwable =
  * If the assertion fails, the specified [message] is used unless it is null as a prefix for the failure message.
  *
  * @return An exception that was expected to be thrown and was successfully caught.
- * The returned exception can be inspected further, for example by asserting its property values.
+ * The returned exception can be inspected further, for example by asserting its property konstues.
  */
 @SinceKotlin("1.1")
 @InlineOnly
@@ -589,7 +589,7 @@ internal fun checkResultIsFailure(message: String?, blockResult: Result<Unit>): 
  * If the assertion fails, the specified [message] is used unless it is null as a prefix for the failure message.
  *
  * @return An exception of the expected exception type [T] that successfully caught.
- * The returned exception can be inspected further, for example by asserting its property values.
+ * The returned exception can be inspected further, for example by asserting its property konstues.
  */
 @InlineOnly
 inline fun <reified T : Throwable> assertFailsWith(message: String? = null, block: () -> Unit): T =
@@ -599,7 +599,7 @@ inline fun <reified T : Throwable> assertFailsWith(message: String? = null, bloc
  * Asserts that a [block] fails with a specific exception of type [exceptionClass] being thrown.
  *
  * @return An exception of the expected exception type [T] that successfully caught.
- * The returned exception can be inspected further, for example by asserting its property values.
+ * The returned exception can be inspected further, for example by asserting its property konstues.
  */
 @InlineOnly
 @JvmName("assertFailsWithInline")
@@ -611,7 +611,7 @@ inline fun <T : Throwable> assertFailsWith(exceptionClass: KClass<T>, block: () 
  * If the assertion fails, the specified [message] is used unless it is null as a prefix for the failure message.
  *
  * @return An exception of the expected exception type [T] that successfully caught.
- * The returned exception can be inspected further, for example by asserting its property values.
+ * The returned exception can be inspected further, for example by asserting its property konstues.
  */
 @InlineOnly
 @JvmName("assertFailsWithInline")
@@ -643,7 +643,7 @@ interface Asserter {
     fun fail(message: String?, cause: Throwable?): Nothing
 
     /**
-     * Asserts that the specified value is `true`.
+     * Asserts that the specified konstue is `true`.
      *
      * @param lazyMessage the function to return a message to report if the assertion fails.
      */
@@ -654,7 +654,7 @@ interface Asserter {
     }
 
     /**
-     * Asserts that the specified value is `true`.
+     * Asserts that the specified konstue is `true`.
      *
      * @param message the message to report if the assertion fails.
      */
@@ -663,7 +663,7 @@ interface Asserter {
     }
 
     /**
-     * Asserts that the specified values are equal.
+     * Asserts that the specified konstues are equal.
      *
      * @param message the message to report if the assertion fails.
      */
@@ -672,16 +672,16 @@ interface Asserter {
     }
 
     /**
-     * Asserts that the specified values are not equal.
+     * Asserts that the specified konstues are not equal.
      *
      * @param message the message to report if the assertion fails.
      */
     fun assertNotEquals(message: String?, illegal: Any?, actual: Any?): Unit {
-        assertTrue({ messagePrefix(message) + "Illegal value: <$actual>." }, actual != illegal)
+        assertTrue({ messagePrefix(message) + "Illegal konstue: <$actual>." }, actual != illegal)
     }
 
     /**
-     * Asserts that the specified values are the same instance.
+     * Asserts that the specified konstues are the same instance.
      *
      * @param message the message to report if the assertion fails.
      */
@@ -690,7 +690,7 @@ interface Asserter {
     }
 
     /**
-     * Asserts that the specified values are not the same instance.
+     * Asserts that the specified konstues are not the same instance.
      *
      * @param message the message to report if the assertion fails.
      */
@@ -699,21 +699,21 @@ interface Asserter {
     }
 
     /**
-     * Asserts that the specified value is `null`.
+     * Asserts that the specified konstue is `null`.
      *
      * @param message the message to report if the assertion fails.
      */
     fun assertNull(message: String?, actual: Any?): Unit {
-        assertTrue({ messagePrefix(message) + "Expected value to be null, but was: <$actual>." }, actual == null)
+        assertTrue({ messagePrefix(message) + "Expected konstue to be null, but was: <$actual>." }, actual == null)
     }
 
     /**
-     * Asserts that the specified value is not `null`.
+     * Asserts that the specified konstue is not `null`.
      *
      * @param message the message to report if the assertion fails.
      */
     fun assertNotNull(message: String?, actual: Any?): Unit {
-        assertTrue({ messagePrefix(message) + "Expected value to be not null." }, actual != null)
+        assertTrue({ messagePrefix(message) + "Expected konstue to be not null." }, actual != null)
     }
 
 }

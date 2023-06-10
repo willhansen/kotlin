@@ -18,11 +18,11 @@ fun box(): String {
     var s2 = ""
     test {
         {
-            val p = object {}
-            // Check that Java reflection doesn't crash. Actual values are tested in bytecodeListing/inline/enclosingInfo/.
+            konst p = object {}
+            // Check that Java reflection doesn't crash. Actual konstues are tested in bytecodeListing/inline/enclosingInfo/.
             s1 = p.javaClass.enclosingMethod.declaringClass.toString();
             {
-                val q = object {}
+                konst q = object {}
                 s2 = q.javaClass.enclosingMethod.declaringClass.toString()
             }.let { it() }
         }.let { it() }

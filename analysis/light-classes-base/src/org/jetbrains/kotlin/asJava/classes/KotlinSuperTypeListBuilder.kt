@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.KtSuperTypeList
 import org.jetbrains.kotlin.psi.psiUtil.getElementTextWithContext
 
 class KotlinSuperTypeListBuilder(
-    private val parent: PsiClass,
+    private konst parent: PsiClass,
     kotlinOrigin: KtSuperTypeList?,
     manager: PsiManager,
     language: Language,
@@ -25,24 +25,24 @@ class KotlinSuperTypeListBuilder(
 ) {
     override fun getParent(): PsiElement = parent
 
-    private val myKotlinOrigin: KtSuperTypeList? = kotlinOrigin
+    private konst myKotlinOrigin: KtSuperTypeList? = kotlinOrigin
 
-    inner class KotlinSuperTypeReference(private val element: PsiJavaCodeReferenceElement) : PsiJavaCodeReferenceElement by element {
+    inner class KotlinSuperTypeReference(private konst element: PsiJavaCodeReferenceElement) : PsiJavaCodeReferenceElement by element {
 
         override fun getParent() = this@KotlinSuperTypeListBuilder
 
-        val kotlinOrigin by lazyPub {
+        konst kotlinOrigin by lazyPub {
             element.nameFromSource?.let { this@KotlinSuperTypeListBuilder.myKotlinOrigin?.findEntry(it) }
         }
 
         override fun delete() {
-            val superTypeList = this@KotlinSuperTypeListBuilder.myKotlinOrigin ?: return
-            val entry = kotlinOrigin ?: return
+            konst superTypeList = this@KotlinSuperTypeListBuilder.myKotlinOrigin ?: return
+            konst entry = kotlinOrigin ?: return
             superTypeList.removeEntry(entry)
         }
     }
 
-    private val referenceElementsCache by lazyPub {
+    private konst referenceElementsCache by lazyPub {
         super.getReferenceElements().map { KotlinSuperTypeReference(it) }.toTypedArray()
     }
 
@@ -52,8 +52,8 @@ class KotlinSuperTypeListBuilder(
 
         if (element !is KotlinSuperTypeReference) throw UnsupportedOperationException("Unexpected element: ${element.getElementTextWithContext()}")
 
-        val superTypeList = myKotlinOrigin ?: return element
-        val entry = element.kotlinOrigin ?: return element
+        konst superTypeList = myKotlinOrigin ?: return element
+        konst entry = element.kotlinOrigin ?: return element
 
         this.addSuperTypeEntry(superTypeList, entry, element)
 
@@ -82,8 +82,8 @@ class KotlinSuperTypeListBuilder(
     }
 }
 
-private val PsiQualifiedReference.nameFromSource: String?
+private konst PsiQualifiedReference.nameFromSource: String?
     get() {
-        val name = referenceName ?: return null
+        konst name = referenceName ?: return null
         return (qualifier as? PsiQualifiedReference)?.let { "${it.nameFromSource}.$name" } ?: name
     }

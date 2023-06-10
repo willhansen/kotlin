@@ -1,5 +1,5 @@
 class ExplicitAccessorForAnnotation {
-    val tt: String? = "good"
+    konst tt: String? = "good"
         get
 
     fun foo(): String {

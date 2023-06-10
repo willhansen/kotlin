@@ -23,7 +23,7 @@ class C : B, A {
 
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     if (c.foo(3) != 5) return "Interface super call fail. c.foo(3) is ${c.foo(3)}"
     if (c.bar() != 5) return "Interface super call fail. c.bar() is ${c.bar()}"
     return "OK"

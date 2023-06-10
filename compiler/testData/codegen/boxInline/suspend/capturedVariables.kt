@@ -10,7 +10,7 @@ suspend inline fun test1(c: suspend () -> Unit) {
 }
 
 suspend inline fun test2(crossinline c: suspend () -> Unit) {
-    val l: suspend () -> Unit = { c() }
+    konst l: suspend () -> Unit = { c() }
     l()
 }
 
@@ -31,17 +31,17 @@ suspend fun calculate() = suspendCoroutineUninterceptedOrReturn<String> {
 fun box() : String {
     var res = "FAIL 1"
     builder {
-        val a = 1
+        konst a = 1
         test2 {
-            val b = 2
+            konst b = 2
             test1 {
-                val c = a + b // 3
+                konst c = a + b // 3
                 run {
-                    val a = c + 1 // 4
+                    konst a = c + 1 // 4
                     test1 {
-                        val b = c + c // 6
+                        konst b = c + c // 6
                         test2 {
-                            val c = b - a // 2
+                            konst c = b - a // 2
                             res = "${calculate()} $a$b$c"
                         }
                     }

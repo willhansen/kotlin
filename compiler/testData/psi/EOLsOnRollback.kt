@@ -9,5 +9,5 @@ fun foo() {
     @a var foo = 4
 
     1
-    @a val f
+    @a konst f
 }

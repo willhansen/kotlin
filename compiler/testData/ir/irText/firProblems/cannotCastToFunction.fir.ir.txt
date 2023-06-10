@@ -22,31 +22,31 @@ FILE fqName:<root> fileName:/cannotCastToFunction.kt
     $receiver: VALUE_PARAMETER name:<this> type:<root>.IrElement
     VALUE_PARAMETER name:options index:0 type:kotlin.String
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun dumpKotlinLike (options: kotlin.String): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="O"
+        CONST String type=kotlin.String konstue="O"
   FUN name:dump visibility:public modality:FINAL <> ($receiver:<root>.IrElement, normalizeNames:kotlin.Boolean, stableOrder:kotlin.Boolean) returnType:kotlin.String
     $receiver: VALUE_PARAMETER name:<this> type:<root>.IrElement
     VALUE_PARAMETER name:normalizeNames index:0 type:kotlin.Boolean
       EXPRESSION_BODY
-        CONST Boolean type=kotlin.Boolean value=false
+        CONST Boolean type=kotlin.Boolean konstue=false
     VALUE_PARAMETER name:stableOrder index:1 type:kotlin.Boolean
       EXPRESSION_BODY
-        CONST Boolean type=kotlin.Boolean value=false
+        CONST Boolean type=kotlin.Boolean konstue=false
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun dump (normalizeNames: kotlin.Boolean, stableOrder: kotlin.Boolean): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="K"
+        CONST String type=kotlin.String konstue="K"
   FUN name:dump visibility:public modality:FINAL <> (data:<root>.IrElement, dumpStrategy:kotlin.String) returnType:kotlin.String
     VALUE_PARAMETER name:data index:0 type:<root>.IrElement
     VALUE_PARAMETER name:dumpStrategy index:1 type:kotlin.String
     BLOCK_BODY
-      VAR name:dump type:@[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> [val]
+      VAR name:dump type:@[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> [konst]
         WHEN type=@[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> origin=IF
           BRANCH
             if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
               arg0: GET_VAR 'dumpStrategy: kotlin.String declared in <root>.dump' type=kotlin.String origin=null
-              arg1: CONST String type=kotlin.String value="KotlinLike"
+              arg1: CONST String type=kotlin.String konstue="KotlinLike"
             then: FUN_EXPR type=@[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> origin=ADAPTED_FUNCTION_REFERENCE
               FUN ADAPTER_FOR_CALLABLE_REFERENCE name:dumpKotlinLike visibility:local modality:FINAL <> (p0:<root>.IrElement) returnType:kotlin.String
                 VALUE_PARAMETER ADAPTER_PARAMETER_FOR_CALLABLE_REFERENCE name:p0 index:0 type:<root>.IrElement
@@ -55,7 +55,7 @@ FILE fqName:<root> fileName:/cannotCastToFunction.kt
                     CALL 'public final fun dumpKotlinLike (options: kotlin.String): kotlin.String declared in <root>' type=kotlin.String origin=null
                       $receiver: GET_VAR 'p0: <root>.IrElement declared in <root>.dump.dumpKotlinLike' type=<root>.IrElement origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
+            if: CONST Boolean type=kotlin.Boolean konstue=true
             then: FUN_EXPR type=@[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> origin=ADAPTED_FUNCTION_REFERENCE
               FUN ADAPTER_FOR_CALLABLE_REFERENCE name:dump visibility:local modality:FINAL <> (p0:<root>.IrElement) returnType:kotlin.String
                 VALUE_PARAMETER ADAPTER_PARAMETER_FOR_CALLABLE_REFERENCE name:p0 index:0 type:<root>.IrElement
@@ -65,5 +65,5 @@ FILE fqName:<root> fileName:/cannotCastToFunction.kt
                       $receiver: GET_VAR 'p0: <root>.IrElement declared in <root>.dump.dump' type=<root>.IrElement origin=null
       RETURN type=kotlin.Nothing from='public final fun dump (data: <root>.IrElement, dumpStrategy: kotlin.String): kotlin.String declared in <root>'
         CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=kotlin.String origin=INVOKE
-          $this: GET_VAR 'val dump: @[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> declared in <root>.dump' type=@[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> origin=VARIABLE_AS_FUNCTION
+          $this: GET_VAR 'konst dump: @[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> declared in <root>.dump' type=@[ExtensionFunctionType] kotlin.Function1<<root>.IrElement, kotlin.String> origin=VARIABLE_AS_FUNCTION
           p1: GET_VAR 'data: <root>.IrElement declared in <root>.dump' type=<root>.IrElement origin=null

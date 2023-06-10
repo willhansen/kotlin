@@ -13,9 +13,9 @@ fun <T> runBlocking(c: suspend () -> T): T {
     return res!!
 }
 
-class Owner<C>(val c: C) {
+class Owner<C>(konst c: C) {
     class Builder<B>(
-        private val action: suspend () -> B,
+        private konst action: suspend () -> B,
     ) {
         fun foo() = runBlocking {
             action.invoke()

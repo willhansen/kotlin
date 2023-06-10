@@ -22,7 +22,7 @@ internal object DefaultKotlinCompilationTaskNamesContainerFactory :
 }
 
 
-internal class JvmWithJavaCompilationTaskNamesContainerFactory(private val javaSourceSet: SourceSet) :
+internal class JvmWithJavaCompilationTaskNamesContainerFactory(private konst javaSourceSet: SourceSet) :
     KotlinCompilationImplFactory.KotlinCompilationTaskNamesContainerFactory {
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationTaskNamesContainer =
         DefaultKotlinCompilationTaskNamesContainerFactory.create(target, compilationName)

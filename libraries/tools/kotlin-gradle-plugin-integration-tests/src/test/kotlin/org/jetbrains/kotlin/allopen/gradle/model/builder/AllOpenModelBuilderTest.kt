@@ -20,7 +20,7 @@ class AllOpenModelBuilderTest : KGPBaseTest() {
     @DisplayName("can build")
     @Test
     fun testCanBuild() {
-        val modelBuilder = AllOpenModelBuilder()
+        konst modelBuilder = AllOpenModelBuilder()
         assertTrue(modelBuilder.canBuild(AllOpen::class.java.name))
         assertFalse(modelBuilder.canBuild("wrongModel"))
     }

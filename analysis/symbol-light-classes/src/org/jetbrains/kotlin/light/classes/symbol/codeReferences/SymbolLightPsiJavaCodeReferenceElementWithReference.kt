@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.light.classes.symbol.codeReferences
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
 
-internal class SymbolLightPsiJavaCodeReferenceElementWithReference(private val ktElement: PsiElement, reference: PsiReference) :
+internal class SymbolLightPsiJavaCodeReferenceElementWithReference(private konst ktElement: PsiElement, reference: PsiReference) :
     SymbolLightPsiJavaCodeReferenceElementBase(ktElement),
     PsiReference by reference {
 

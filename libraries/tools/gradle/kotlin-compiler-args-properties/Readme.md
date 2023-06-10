@@ -5,9 +5,9 @@ or via `-P` command line flag.
 
 ### Available properties
 
-- `kotlin.test.languageVersion` - sets `-language-version` to the given value
-- `kotlin.test.apiVersion` - sets '-api-version' to the given value
-- `kotlin.test.overrideUserValue` - make the best effort to override values set explicitly by the user in the build script
+- `kotlin.test.languageVersion` - sets `-language-version` to the given konstue
+- `kotlin.test.apiVersion` - sets '-api-version' to the given konstue
+- `kotlin.test.overrideUserValue` - make the best effort to override konstues set explicitly by the user in the build script
 
 ### Plugin usage in the external projects
 
@@ -46,4 +46,4 @@ allprojects {
 This plugin should be also added similar way into any included build.
 
 **NOTE**: Build logic (for example `buildSrc`) and projects building Gradle plugins written in Kotlin should not apply this plugin,
-as Gradle Kotlin runtime most probably will not be compatible with values under-the-test (for example language version '2.0').
+as Gradle Kotlin runtime most probably will not be compatible with konstues under-the-test (for example language version '2.0').

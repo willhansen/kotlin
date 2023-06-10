@@ -60,7 +60,7 @@ inline fun syntaxTestInline() {
 
     --result
 
-    val nullable: String? = null
+    konst nullable: String? = null
 }
 
 fun syntaxTest() {

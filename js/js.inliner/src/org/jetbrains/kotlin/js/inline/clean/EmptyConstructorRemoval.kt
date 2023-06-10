@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.js.inline.clean
 
 import org.jetbrains.kotlin.js.backend.ast.JsClass
 
-class EmptyConstructorRemoval(private val klass: JsClass) {
+class EmptyConstructorRemokonst(private konst klass: JsClass) {
     fun apply(): Boolean {
         if (klass.constructor?.body?.statements?.isEmpty() != true) return false
         klass.constructor = null

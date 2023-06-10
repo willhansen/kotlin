@@ -28,7 +28,7 @@ dependencies {
     testRuntimeOnly(commonDependency("org.jetbrains.intellij.deps.fastutil:intellij-deps-fastutil"))
 }
 
-val generationRoot = projectDir.resolve("tests-gen")
+konst generationRoot = projectDir.resolve("tests-gen")
 
 sourceSets {
     "main" { none() }
@@ -46,26 +46,26 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
 }
 
 // Tasks that run different sorts of tests. Most frequent use case: running specific tests at TeamCity.
-val infrastructureTest = nativeTest("infrastructureTest", "infrastructure")
-val codegenBoxTest = nativeTest("codegenBoxTest", "codegen & !frontend-fir")
-val codegenBoxK2Test = nativeTest("codegenBoxK2Test", "codegen & frontend-fir")
-val stdlibTest = nativeTest("stdlibTest", "stdlib & !frontend-fir")
-val stdlibK2Test = nativeTest("stdlibK2Test", "stdlib & frontend-fir")
-val kotlinTestLibraryTest = nativeTest("kotlinTestLibraryTest", "kotlin-test & !frontend-fir")
-val kotlinTestLibraryK2Test = nativeTest("kotlinTestLibraryK2Test", "kotlin-test & frontend-fir")
-val partialLinkageTest = nativeTest("partialLinkageTest", "partial-linkage")
-val cinteropTest = nativeTest("cinteropTest", "cinterop")
-val debuggerTest = nativeTest("debuggerTest", "debugger")
-val cachesTest = nativeTest("cachesTest", "caches")
-val klibContentsTest = nativeTest("klibContentsTest", "klib-contents & !frontend-fir")
-val klibContentsK2Test = nativeTest("klibContentsK2Test", "klib-contents & frontend-fir")
+konst infrastructureTest = nativeTest("infrastructureTest", "infrastructure")
+konst codegenBoxTest = nativeTest("codegenBoxTest", "codegen & !frontend-fir")
+konst codegenBoxK2Test = nativeTest("codegenBoxK2Test", "codegen & frontend-fir")
+konst stdlibTest = nativeTest("stdlibTest", "stdlib & !frontend-fir")
+konst stdlibK2Test = nativeTest("stdlibK2Test", "stdlib & frontend-fir")
+konst kotlinTestLibraryTest = nativeTest("kotlinTestLibraryTest", "kotlin-test & !frontend-fir")
+konst kotlinTestLibraryK2Test = nativeTest("kotlinTestLibraryK2Test", "kotlin-test & frontend-fir")
+konst partialLinkageTest = nativeTest("partialLinkageTest", "partial-linkage")
+konst cinteropTest = nativeTest("cinteropTest", "cinterop")
+konst debuggerTest = nativeTest("debuggerTest", "debugger")
+konst cachesTest = nativeTest("cachesTest", "caches")
+konst klibContentsTest = nativeTest("klibContentsTest", "klib-contents & !frontend-fir")
+konst klibContentsK2Test = nativeTest("klibContentsK2Test", "klib-contents & frontend-fir")
 
-val testTags = findProperty("kotlin.native.tests.tags")?.toString()
+konst testTags = findProperty("kotlin.native.tests.tags")?.toString()
 // Note: arbitrary JUnit tag expressions can be used in this property.
 // See https://junit.org/junit5/docs/current/user-guide/#running-tests-tag-expressions
-val test by nativeTest("test", testTags)
+konst test by nativeTest("test", testTags)
 
-val generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateNativeTestsKt") {
+konst generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateNativeTestsKt") {
     javaLauncher.set(project.getToolchainLauncherFor(JdkMajorVersion.JDK_11_0))
     dependsOn(":compiler:generateTestData")
 }

@@ -13,13 +13,13 @@ import java.lang.reflect.Field as ReflectField
 import java.lang.reflect.Method as ReflectMethod
 
 internal sealed class CallerImpl<out M : Member>(
-    final override val member: M,
-    final override val returnType: Type,
-    val instanceClass: Class<*>?,
-    valueParameterTypes: Array<Type>
+    final override konst member: M,
+    final override konst returnType: Type,
+    konst instanceClass: Class<*>?,
+    konstueParameterTypes: Array<Type>
 ) : Caller<M> {
-    override val parameterTypes: List<Type> =
-        instanceClass?.let { listOf(it, *valueParameterTypes) } ?: valueParameterTypes.toList()
+    override konst parameterTypes: List<Type> =
+        instanceClass?.let { listOf(it, *konstueParameterTypes) } ?: konstueParameterTypes.toList()
 
     protected fun checkObjectInstance(obj: Any?) {
         if (obj == null || !member.declaringClass.isInstance(obj)) {
@@ -31,7 +31,7 @@ internal sealed class CallerImpl<out M : Member>(
         constructor,
         constructor.declaringClass,
         constructor.declaringClass.let { klass ->
-            val outerClass = klass.declaringClass
+            konst outerClass = klass.declaringClass
             if (outerClass != null && !Modifier.isStatic(klass.modifiers)) outerClass else null
         },
         constructor.genericParameterTypes
@@ -44,7 +44,7 @@ internal sealed class CallerImpl<out M : Member>(
 
     // TODO fix 'callBy' for bound (and non-bound) inner class constructor references
     // See https://youtrack.jetbrains.com/issue/KT-14990
-    class BoundConstructor(constructor: ReflectConstructor<*>, private val boundReceiver: Any?) : BoundCaller,
+    class BoundConstructor(constructor: ReflectConstructor<*>, private konst boundReceiver: Any?) : BoundCaller,
         CallerImpl<ReflectConstructor<*>>(
             constructor, constructor.declaringClass, null,
             constructor.genericParameterTypes
@@ -69,7 +69,7 @@ internal sealed class CallerImpl<out M : Member>(
 
     class AccessorForHiddenBoundConstructor(
         constructor: ReflectConstructor<*>,
-        private val boundReceiver: Any?
+        private konst boundReceiver: Any?
     ) : CallerImpl<ReflectConstructor<*>>(
         constructor, constructor.declaringClass,
         null,
@@ -91,10 +91,10 @@ internal sealed class CallerImpl<out M : Member>(
         if (requiresInstance) method.declaringClass else null,
         parameterTypes
     ) {
-        private val isVoidMethod = returnType == Void.TYPE
+        private konst isVoidMethod = returnType == Void.TYPE
 
         protected fun callMethod(instance: Any?, args: Array<*>): Any? {
-            val result = member.invoke(instance, *args)
+            konst result = member.invoke(instance, *args)
 
             // If this is a Unit function, the method returns void, Method#invoke returns null, while we should return Unit
             return if (isVoidMethod) Unit else result
@@ -122,7 +122,7 @@ internal sealed class CallerImpl<out M : Member>(
             }
         }
 
-        class BoundStatic(method: ReflectMethod, internal val boundReceiver: Any?) : BoundCaller, Method(
+        class BoundStatic(method: ReflectMethod, internal konst boundReceiver: Any?) : BoundCaller, Method(
             method, requiresInstance = false, parameterTypes = method.genericParameterTypes.dropFirst()
         ) {
             override fun call(args: Array<*>): Any? {
@@ -132,7 +132,7 @@ internal sealed class CallerImpl<out M : Member>(
         }
 
         class BoundStaticMultiFieldValueClass(
-            method: ReflectMethod, internal val boundReceiverComponents: Array<Any?>
+            method: ReflectMethod, internal konst boundReceiverComponents: Array<Any?>
         ) : BoundCaller, Method(
             method = method,
             requiresInstance = false,
@@ -143,10 +143,10 @@ internal sealed class CallerImpl<out M : Member>(
                 return callMethod(null, arrayOf(*boundReceiverComponents, *args))
             }
 
-            val receiverComponentsCount: Int get() = boundReceiverComponents.size
+            konst receiverComponentsCount: Int get() = boundReceiverComponents.size
         }
 
-        class BoundInstance(method: ReflectMethod, private val boundReceiver: Any?) : BoundCaller,
+        class BoundInstance(method: ReflectMethod, private konst boundReceiver: Any?) : BoundCaller,
             Method(method, requiresInstance = false) {
             override fun call(args: Array<*>): Any? {
                 checkArguments(args)
@@ -187,7 +187,7 @@ internal sealed class CallerImpl<out M : Member>(
             }
         }
 
-        class BoundInstance(field: ReflectField, private val boundReceiver: Any?) : BoundCaller,
+        class BoundInstance(field: ReflectField, private konst boundReceiver: Any?) : BoundCaller,
             FieldGetter(field, requiresInstance = false) {
             override fun call(args: Array<*>): Any? {
                 checkArguments(args)
@@ -200,7 +200,7 @@ internal sealed class CallerImpl<out M : Member>(
 
     sealed class FieldSetter(
         field: ReflectField,
-        private val notNull: Boolean,
+        private konst notNull: Boolean,
         requiresInstance: Boolean
     ) : CallerImpl<ReflectField>(
         field,
@@ -211,7 +211,7 @@ internal sealed class CallerImpl<out M : Member>(
         override fun checkArguments(args: Array<*>) {
             super.checkArguments(args)
             if (notNull && args.last() == null) {
-                throw IllegalArgumentException("null is not allowed as a value for this property.")
+                throw IllegalArgumentException("null is not allowed as a konstue for this property.")
             }
         }
 
@@ -231,7 +231,7 @@ internal sealed class CallerImpl<out M : Member>(
             }
         }
 
-        class BoundInstance(field: ReflectField, notNull: Boolean, private val boundReceiver: Any?) : BoundCaller,
+        class BoundInstance(field: ReflectField, notNull: Boolean, private konst boundReceiver: Any?) : BoundCaller,
             FieldSetter(field, notNull, requiresInstance = false) {
             override fun call(args: Array<*>): Any {
                 checkArguments(args)

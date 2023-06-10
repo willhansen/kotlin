@@ -16,18 +16,18 @@ import kotlin.script.experimental.api.ScriptDiagnostic
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.templates.ScriptTemplateDefinition
 
-const val SCRIPT_DEFINITION_MARKERS_PATH = "META-INF/kotlin/script/templates/"
-const val SCRIPT_DEFINITION_MARKERS_EXTENSION_WITH_DOT = ".classname"
+const konst SCRIPT_DEFINITION_MARKERS_PATH = "META-INF/kotlin/script/templates/"
+const konst SCRIPT_DEFINITION_MARKERS_EXTENSION_WITH_DOT = ".classname"
 
 typealias MessageReporter = (ScriptDiagnostic.Severity, String) -> Unit
 
 class ScriptDefinitionsFromClasspathDiscoverySource(
-    private val classpath: List<File>,
-    private val hostConfiguration: ScriptingHostConfiguration,
-    private val messageReporter: MessageReporter
+    private konst classpath: List<File>,
+    private konst hostConfiguration: ScriptingHostConfiguration,
+    private konst messageReporter: MessageReporter
 ) : ScriptDefinitionsSource {
 
-    override val definitions: Sequence<ScriptDefinition> = run {
+    override konst definitions: Sequence<ScriptDefinition> = run {
         discoverScriptTemplatesInClasspath(
             classpath,
             this::class.java.classLoader,
@@ -37,7 +37,7 @@ class ScriptDefinitionsFromClasspathDiscoverySource(
     }
 }
 
-private const val MANIFEST_RESOURCE_NAME = "/META-INF/MANIFEST.MF"
+private const konst MANIFEST_RESOURCE_NAME = "/META-INF/MANIFEST.MF"
 
 @Suppress("unused") // TODO: remove if really unused
 fun discoverScriptTemplatesInClassLoader(
@@ -45,14 +45,14 @@ fun discoverScriptTemplatesInClassLoader(
     hostConfiguration: ScriptingHostConfiguration,
     messageReporter: MessageReporter
 ): Sequence<ScriptDefinition> {
-    val classpath = classLoader.getResources(MANIFEST_RESOURCE_NAME).asSequence().mapNotNull {
+    konst classpath = classLoader.getResources(MANIFEST_RESOURCE_NAME).asSequence().mapNotNull {
         try {
             File(it.toURI()).takeIf(File::exists)
         } catch (_: IllegalArgumentException) {
             null
         }
     }
-    val classpathWithLoader = SimpleClasspathWithClassLoader(classpath.toList(), classLoader)
+    konst classpathWithLoader = SimpleClasspathWithClassLoader(classpath.toList(), classLoader)
     return scriptTemplatesDiscoverySequence(classpathWithLoader, hostConfiguration, messageReporter)
 }
 
@@ -63,7 +63,7 @@ fun discoverScriptTemplatesInClasspath(
     messageReporter: MessageReporter
 ): Sequence<ScriptDefinition> {
     // TODO: try to find a way to reduce classpath (and classloader) to minimal one needed to load script definition and its dependencies
-    val classpathWithLoader = LazyClasspathWithClassLoader(baseClassLoader) { classpath }
+    konst classpathWithLoader = LazyClasspathWithClassLoader(baseClassLoader) { classpath }
 
     return scriptTemplatesDiscoverySequence(classpathWithLoader, hostConfiguration, messageReporter)
 }
@@ -76,21 +76,21 @@ private fun scriptTemplatesDiscoverySequence(
     return sequence<ScriptDefinition> {
         // for jar files the definition class is expected in the same jar as the discovery file
         // in case of directories, the class output may come separate from the resources, so some candidates should be deffered and processed later
-        val defferedDirDependencies = ArrayList<File>()
-        val defferedDefinitionCandidates = ArrayList<String>()
+        konst defferedDirDependencies = ArrayList<File>()
+        konst defferedDefinitionCandidates = ArrayList<String>()
         for (dep in classpathWithLoader.classpath) {
             try {
                 when {
                     dep.isFile && dep.extension == "jar" -> { // checking for extension is the compiler current behaviour, so the same logic is implemented here
                         JarFile(dep).use { jar ->
                             if (jar.getJarEntry(SCRIPT_DEFINITION_MARKERS_PATH) != null) {
-                                val definitionNames = jar.entries().asSequence().mapNotNull {
+                                konst definitionNames = jar.entries().asSequence().mapNotNull {
                                     if (it.isDirectory || !it.name.startsWith(SCRIPT_DEFINITION_MARKERS_PATH)) null
                                     else it.name.removePrefix(SCRIPT_DEFINITION_MARKERS_PATH).removeSuffix(
                                         SCRIPT_DEFINITION_MARKERS_EXTENSION_WITH_DOT
                                     )
                                 }.toList()
-                                val (loadedDefinitions, notFoundClasses) =
+                                konst (loadedDefinitions, notFoundClasses) =
                                     definitionNames.partitionLoadJarDefinitions(
                                         jar,
                                         classpathWithLoader,
@@ -111,9 +111,9 @@ private fun scriptTemplatesDiscoverySequence(
                     }
                     dep.isDirectory -> {
                         defferedDirDependencies.add(dep) // there is no way to know that the dependency is fully "used" so we add it to the list anyway
-                        val discoveryMarkers = File(dep, SCRIPT_DEFINITION_MARKERS_PATH).listFiles()
+                        konst discoveryMarkers = File(dep, SCRIPT_DEFINITION_MARKERS_PATH).listFiles()
                         if (discoveryMarkers?.isEmpty() == false) {
-                            val (foundDefinitionClasses, notFoundDefinitions) = discoveryMarkers.map {
+                            konst (foundDefinitionClasses, notFoundDefinitions) = discoveryMarkers.map {
                                 it.name.removeSuffix(
                                     SCRIPT_DEFINITION_MARKERS_EXTENSION_WITH_DOT
                                 )
@@ -125,7 +125,7 @@ private fun scriptTemplatesDiscoverySequence(
                         }
                     }
                     else -> {
-                        // assuming that invalid classpath entries will be reported elsewhere anyway, so do not spam user with additional warnings here
+                        // assuming that inkonstid classpath entries will be reported elsewhere anyway, so do not spam user with additional warnings here
                         messageReporter(ScriptDiagnostic.Severity.DEBUG, "Configure scripting: Unknown classpath entry $dep")
                     }
                 }
@@ -139,7 +139,7 @@ private fun scriptTemplatesDiscoverySequence(
         for (dep in defferedDirDependencies) {
             if (remainingDefinitionCandidates.isEmpty()) break
             try {
-                val (foundDefinitionClasses, notFoundDefinitions) =
+                konst (foundDefinitionClasses, notFoundDefinitions) =
                     remainingDefinitionCandidates.partitionLoadDirDefinitions(dep, classpathWithLoader, hostConfiguration, messageReporter)
                 foundDefinitionClasses.forEach {
                     yield(it)
@@ -171,7 +171,7 @@ fun loadScriptTemplatesFromClasspath(
     if (scriptTemplates.isEmpty()) emptySequence()
     else sequence<ScriptDefinition> {
         // trying the direct classloading from baseClassloader first, since this is the most performant variant
-        val (initialLoadedDefinitions, initialNotFoundTemplates) = scriptTemplates.partitionMapNotNull {
+        konst (initialLoadedDefinitions, initialNotFoundTemplates) = scriptTemplates.partitionMapNotNull {
             loadScriptDefinition(
                 baseClassLoader,
                 it,
@@ -185,13 +185,13 @@ fun loadScriptTemplatesFromClasspath(
         // then searching the remaining templates in the supplied classpath
 
         var remainingTemplates = initialNotFoundTemplates
-        val classpathWithLoader =
+        konst classpathWithLoader =
             LazyClasspathWithClassLoader(baseClassLoader) { classpath + dependenciesClasspath }
         for (dep in classpath) {
             if (remainingTemplates.isEmpty()) break
 
             try {
-                val (loadedDefinitions, notFoundTemplates) = when {
+                konst (loadedDefinitions, notFoundTemplates) = when {
                     dep.isFile && dep.extension == "jar" -> { // checking for extension is the compiler current behaviour, so the same logic is implemented here
                         JarFile(dep).use { jar ->
                             remainingTemplates.partitionLoadJarDefinitions(jar, classpathWithLoader, hostConfiguration, messageReporter)
@@ -201,7 +201,7 @@ fun loadScriptTemplatesFromClasspath(
                         remainingTemplates.partitionLoadDirDefinitions(dep, classpathWithLoader, hostConfiguration, messageReporter)
                     }
                     else -> {
-                        // assuming that invalid classpath entries will be reported elsewhere anyway, so do not spam user with additional warnings here
+                        // assuming that inkonstid classpath entries will be reported elsewhere anyway, so do not spam user with additional warnings here
                         messageReporter(ScriptDiagnostic.Severity.DEBUG, "Configure scripting: Unknown classpath entry $dep")
                         DefinitionsLoadPartitionResult(
                             listOf(),
@@ -232,8 +232,8 @@ fun loadScriptTemplatesFromClasspath(
     }
 
 private data class DefinitionsLoadPartitionResult(
-    val loaded: List<ScriptDefinition>,
-    val notFound: List<String>
+    konst loaded: List<ScriptDefinition>,
+    konst notFound: List<String>
 )
 
 private inline fun List<String>.partitionLoadDefinitions(
@@ -242,11 +242,11 @@ private inline fun List<String>.partitionLoadDefinitions(
     noinline messageReporter: MessageReporter,
     getBytes: (String) -> ByteArray?
 ): DefinitionsLoadPartitionResult {
-    val loaded = ArrayList<ScriptDefinition>()
-    val notFound = ArrayList<String>()
+    konst loaded = ArrayList<ScriptDefinition>()
+    konst notFound = ArrayList<String>()
     for (definitionName in this) {
-        val classBytes = getBytes(definitionName)
-        val definition = classBytes?.let {
+        konst classBytes = getBytes(definitionName)
+        konst definition = classBytes?.let {
             loadScriptDefinition(
                 it,
                 definitionName,
@@ -290,7 +290,7 @@ private fun loadScriptDefinition(
     hostConfiguration: ScriptingHostConfiguration,
     messageReporter: MessageReporter
 ): ScriptDefinition? {
-    val anns = loadAnnotationsFromClass(templateClassBytes)
+    konst anns = loadAnnotationsFromClass(templateClassBytes)
     for (ann in anns) {
         var def: ScriptDefinition? = null
         if (ann.name == KotlinScript::class.java.simpleName) {
@@ -302,7 +302,7 @@ private fun loadScriptDefinition(
                 messageReporter
             )
         } else if (ann.name == ScriptTemplateDefinition::class.java.simpleName) {
-            val templateClass = classpathWithLoader.classLoader.loadClass(templateClassName).kotlin
+            konst templateClass = classpathWithLoader.classLoader.loadClass(templateClassName).kotlin
             def = ScriptDefinition.FromLegacy(
                 hostConfiguration,
                 KotlinScriptDefinitionFromAnnotatedTemplate(
@@ -334,8 +334,8 @@ private fun loadScriptDefinition(
     messageReporter: MessageReporter
 ): ScriptDefinition? {
     try {
-        val cls = classLoader.loadClass(template)
-        val def =
+        konst cls = classLoader.loadClass(template)
+        konst def =
             if (cls.annotations.firstIsInstanceOrNull<KotlinScript>() != null) {
                 ScriptDefinition.FromTemplate(hostConfiguration, cls.kotlin, ScriptDefinition::class)
             } else {
@@ -359,25 +359,25 @@ private fun loadScriptDefinition(
 }
 
 private interface ClasspathWithClassLoader {
-    val classpath: List<File>
-    val classLoader: ClassLoader
+    konst classpath: List<File>
+    konst classLoader: ClassLoader
 }
 
 private class SimpleClasspathWithClassLoader(
-    override val classpath: List<File>,
-    override val classLoader: ClassLoader
+    override konst classpath: List<File>,
+    override konst classLoader: ClassLoader
 ) : ClasspathWithClassLoader
 
 private class LazyClasspathWithClassLoader(baseClassLoader: ClassLoader?, getClasspath: () -> List<File>) : ClasspathWithClassLoader {
-    override val classpath by lazy { getClasspath() }
-    override val classLoader by lazy { URLClassLoader(classpath.map { it.toURI().toURL() }.toTypedArray(), baseClassLoader) }
+    override konst classpath by lazy { getClasspath() }
+    override konst classLoader by lazy { URLClassLoader(classpath.map { it.toURI().toURL() }.toTypedArray(), baseClassLoader) }
 }
 
 private inline fun <T, R> Iterable<T>.partitionMapNotNull(fn: (T) -> R?): Pair<List<R>, List<T>> {
-    val mapped = ArrayList<R>()
-    val failed = ArrayList<T>()
+    konst mapped = ArrayList<R>()
+    konst failed = ArrayList<T>()
     for (v in this) {
-        val r = fn(v)
+        konst r = fn(v)
         if (r != null) {
             mapped.add(r)
         } else {

@@ -25,10 +25,10 @@ package kotlin.text.regex
 /**
  * Represents node accepting single character.
  */
-open internal class CharSet(char: Char, val ignoreCase: Boolean = false) : LeafSet() {
+open internal class CharSet(char: Char, konst ignoreCase: Boolean = false) : LeafSet() {
 
     // We use only low case characters when working in case insensitive mode.
-    val char: Char = if (ignoreCase) char.lowercaseChar() else char
+    konst char: Char = if (ignoreCase) char.lowercaseChar() else char
 
     // Overrides =======================================================================================================
 
@@ -70,7 +70,7 @@ open internal class CharSet(char: Char, val ignoreCase: Boolean = false) : LeafS
         return -1
     }
 
-    override val name: String
+    override konst name: String
             get()= char.toString()
 
     override fun first(set: AbstractSet): Boolean {

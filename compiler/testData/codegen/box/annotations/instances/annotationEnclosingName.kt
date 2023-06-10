@@ -33,7 +33,7 @@ class G {
 fun outsideClass(): A2 = A2()
 
 fun test(instance: Any, parent: String, fqa: String) {
-    val clz = instance.javaClass
+    konst clz = instance.javaClass
     assert(clz.getName().startsWith(parent))
     assert(clz.getName().contains(fqa))
     assert(clz.getEnclosingMethod() == null)

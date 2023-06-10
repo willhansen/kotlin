@@ -1,3 +1,3 @@
 fun main() {
-    val y = Int.MAX_VALUE
+    konst y = Int.MAX_VALUE
 }

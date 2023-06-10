@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.light.classes.symbol.annotations.computeThrowsList
 import org.jetbrains.kotlin.light.classes.symbol.annotations.hasDeprecatedAnnotation
 import org.jetbrains.kotlin.light.classes.symbol.classes.SymbolLightClassBase
 import org.jetbrains.kotlin.light.classes.symbol.compareSymbolPointers
-import org.jetbrains.kotlin.light.classes.symbol.isOriginEquivalentTo
+import org.jetbrains.kotlin.light.classes.symbol.isOriginEquikonstentTo
 import org.jetbrains.kotlin.light.classes.symbol.isValid
 import org.jetbrains.kotlin.light.classes.symbol.parameters.SymbolLightParameter
 import org.jetbrains.kotlin.light.classes.symbol.parameters.SymbolLightParameterList
@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import java.util.*
 
 internal abstract class SymbolLightMethod<FType : KtFunctionLikeSymbol> private constructor(
-    protected val functionSymbolPointer: KtSymbolPointer<FType>,
+    protected konst functionSymbolPointer: KtSymbolPointer<FType>,
     lightMemberOrigin: LightMemberOrigin?,
     containingClass: SymbolLightClassBase,
     methodIndex: Int,
-    private val argumentsSkipMask: BitSet?,
-    protected val functionDeclaration: KtCallableDeclaration?,
-    override val kotlinOrigin: KtDeclaration?,
+    private konst argumentsSkipMask: BitSet?,
+    protected konst functionDeclaration: KtCallableDeclaration?,
+    override konst kotlinOrigin: KtDeclaration?,
 ) : SymbolLightMethodBase(
     lightMemberOrigin,
     containingClass,
@@ -68,22 +68,22 @@ internal abstract class SymbolLightMethod<FType : KtFunctionLikeSymbol> private 
     protected inline fun <T> withFunctionSymbol(crossinline action: KtAnalysisSession.(FType) -> T): T =
         functionSymbolPointer.withSymbol(ktModule, action)
 
-    private val _isVarArgs: Boolean by lazyPub {
-        functionDeclaration?.valueParameters?.any { it.isVarArg } ?: withFunctionSymbol { functionSymbol ->
-            functionSymbol.valueParameters.any { it.isVararg }
+    private konst _isVarArgs: Boolean by lazyPub {
+        functionDeclaration?.konstueParameters?.any { it.isVarArg } ?: withFunctionSymbol { functionSymbol ->
+            functionSymbol.konstueParameters.any { it.isVararg }
         }
     }
 
     override fun isVarArgs(): Boolean = _isVarArgs
 
-    private val _parametersList by lazyPub {
+    private konst _parametersList by lazyPub {
         SymbolLightParameterList(
             parent = this@SymbolLightMethod,
             callableWithReceiverSymbolPointer = functionSymbolPointer,
         ) { builder ->
             withFunctionSymbol { functionSymbol ->
-                functionSymbol.valueParameters.mapIndexed { index, parameter ->
-                    val needToSkip = argumentsSkipMask?.get(index) == true
+                functionSymbol.konstueParameters.mapIndexed { index, parameter ->
+                    konst needToSkip = argumentsSkipMask?.get(index) == true
                     if (!needToSkip) {
                         builder.addParameter(
                             SymbolLightParameter(
@@ -108,7 +108,7 @@ internal abstract class SymbolLightMethod<FType : KtFunctionLikeSymbol> private 
         }
     }
 
-    private val _isDeprecated: Boolean by lazyPub {
+    private konst _isDeprecated: Boolean by lazyPub {
         withFunctionSymbol { functionSymbol ->
             functionSymbol.hasDeprecatedAnnotation()
         }
@@ -132,8 +132,8 @@ internal abstract class SymbolLightMethod<FType : KtFunctionLikeSymbol> private 
 
     override fun isValid(): Boolean = super.isValid() && functionDeclaration?.isValid ?: functionSymbolPointer.isValid(ktModule)
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
-        return super.isEquivalentTo(another) || isOriginEquivalentTo(another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
+        return super.isEquikonstentTo(another) || isOriginEquikonstentTo(another)
     }
 
     override fun equals(other: Any?): Boolean {

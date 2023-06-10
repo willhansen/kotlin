@@ -8,24 +8,24 @@ package org.jetbrains.kotlin.fir.util
 interface Multimap<K, out V, out C : Collection<V>> {
     operator fun get(key: K): C
     operator fun contains(key: K): Boolean
-    val keys: Set<K>
-    val values: Collection<V>
+    konst keys: Set<K>
+    konst konstues: Collection<V>
 }
 
 interface MutableMultimap<K, V, C : Collection<V>> : Multimap<K, V, C> {
-    fun put(key: K, value: V)
-    fun putAll(key: K, values: Collection<V>) {
-        values.forEach { put(key, it) }
+    fun put(key: K, konstue: V)
+    fun putAll(key: K, konstues: Collection<V>) {
+        konstues.forEach { put(key, it) }
     }
 
-    fun remove(key: K, value: V)
+    fun remove(key: K, konstue: V)
     fun removeKey(key: K): C
 
     fun clear()
 }
 
 abstract class BaseMultimap<K, V, C : Collection<V>, MC : MutableCollection<V>> : MutableMultimap<K, V, C> {
-    private val map: MutableMap<K, MC> = mutableMapOf()
+    private konst map: MutableMap<K, MC> = mutableMapOf()
     protected abstract fun createContainer(): MC
     protected abstract fun createEmptyContainer(): C
 
@@ -38,27 +38,27 @@ abstract class BaseMultimap<K, V, C : Collection<V>, MC : MutableCollection<V>> 
         return key in map
     }
 
-    override val keys: Set<K>
+    override konst keys: Set<K>
         get() = map.keys
 
-    override val values: Collection<V>
+    override konst konstues: Collection<V>
         get() = object : AbstractCollection<V>() {
-            override val size: Int
-                get() = map.values.sumOf { it.size }
+            override konst size: Int
+                get() = map.konstues.sumOf { it.size }
 
             override fun iterator(): Iterator<V> {
-                return ChainedIterator(map.values.map { it.iterator() })
+                return ChainedIterator(map.konstues.map { it.iterator() })
             }
         }
 
-    override fun put(key: K, value: V) {
-        val container = map.getOrPut(key) { createContainer() }
-        container.add(value)
+    override fun put(key: K, konstue: V) {
+        konst container = map.getOrPut(key) { createContainer() }
+        container.add(konstue)
     }
 
-    override fun remove(key: K, value: V) {
-        val collection = map[key] ?: return
-        collection.remove(value)
+    override fun remove(key: K, konstue: V) {
+        konst collection = map[key] ?: return
+        collection.remove(konstue)
         if (collection.isEmpty()) {
             map.remove(key)
         }

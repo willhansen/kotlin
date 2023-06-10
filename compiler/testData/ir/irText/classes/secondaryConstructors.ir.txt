@@ -4,7 +4,7 @@ FILE fqName:<root> fileName:/secondaryConstructors.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.C
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (x: kotlin.Int) declared in <root>.C'
-          x: CONST Int type=kotlin.Int value=0
+          x: CONST Int type=kotlin.Int konstue=0
     CONSTRUCTOR visibility:public <> (x:kotlin.Int) returnType:<root>.C
       VALUE_PARAMETER name:x index:0 type:kotlin.Int
       BLOCK_BODY

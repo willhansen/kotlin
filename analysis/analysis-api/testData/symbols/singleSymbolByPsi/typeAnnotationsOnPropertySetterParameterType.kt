@@ -14,6 +14,6 @@ typealias FirstTypeAlias = @Anno1 BaseInterface
 typealias SecondTypeAlias = @Anno2 FirstTypeAlias
 
 var foo: @Anno3 SecondTypeAlias = TODO()
-    s<caret>et(value) {
-        field = value
+    s<caret>et(konstue) {
+        field = konstue
     }

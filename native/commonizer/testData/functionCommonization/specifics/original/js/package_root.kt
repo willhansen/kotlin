@@ -4,7 +4,7 @@ suspend fun suspendFunction2() = 1
 class Qux
 
 operator fun Qux.get(index: Int) = "$index"
-operator fun Qux.set(index: Int, value: String) = Unit
+operator fun Qux.set(index: Int, konstue: String) = Unit
 
 infix fun Qux.infixFunction1(another: Qux) {}
 infix fun Qux.infixFunction2(another: Qux) {}

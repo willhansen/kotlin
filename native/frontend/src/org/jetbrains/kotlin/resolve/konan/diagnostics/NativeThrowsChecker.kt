@@ -31,12 +31,12 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.firstArgument
 import org.jetbrains.kotlin.utils.DFS
 
 object NativeThrowsChecker : DeclarationChecker {
-    private val throwsFqName = KOTLIN_THROWS_ANNOTATION_FQ_NAME
+    private konst throwsFqName = KOTLIN_THROWS_ANNOTATION_FQ_NAME
 
-    private val cancellationExceptionFqName = FqName("kotlin.coroutines.cancellation.CancellationException")
+    private konst cancellationExceptionFqName = FqName("kotlin.coroutines.cancellation.CancellationException")
 
     // Note: can't use subtyping, because CancellationException can be missing (e.g. for common code).
-    private val cancellationExceptionAndSupersClassIds = sequenceOf(
+    private konst cancellationExceptionAndSupersClassIds = sequenceOf(
         StandardNames.FqNames.throwable,
         FqName("kotlin.Exception"),
         FqName("kotlin.RuntimeException"),
@@ -45,18 +45,18 @@ object NativeThrowsChecker : DeclarationChecker {
     ).map { ClassId.topLevel(it) }.toSet()
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val throwsAnnotation = descriptor.annotations.findAnnotation(throwsFqName)
-        val throwsAnnotationEntry = throwsAnnotation?.let { DescriptorToSourceUtils.getSourceFromAnnotation(it) }
-        val reportLocation = throwsAnnotationEntry ?: declaration
+        konst throwsAnnotation = descriptor.annotations.findAnnotation(throwsFqName)
+        konst throwsAnnotationEntry = throwsAnnotation?.let { DescriptorToSourceUtils.getSourceFromAnnotation(it) }
+        konst reportLocation = throwsAnnotationEntry ?: declaration
 
         if (!checkInheritance(declaration, descriptor, context, throwsAnnotation, reportLocation)) return
 
         if (throwsAnnotation == null) return
 
-        val bindingContext = context.trace.bindingContext
+        konst bindingContext = context.trace.bindingContext
         if (throwsAnnotationEntry?.getCall(bindingContext)?.hasUnresolvedArgumentsRecursive(bindingContext) == true) return
 
-        val classes = throwsAnnotation.getVariadicArguments()
+        konst classes = throwsAnnotation.getVariadicArguments()
         if (classes.isEmpty()) {
             context.trace.report(ErrorsNative.THROWS_LIST_EMPTY.on(reportLocation))
             return
@@ -81,7 +81,7 @@ object NativeThrowsChecker : DeclarationChecker {
     ): Boolean {
         if (descriptor !is CallableMemberDescriptor || descriptor.overriddenDescriptors.isEmpty()) return true
 
-        val inherited = findInheritedThrows(descriptor).entries.distinctBy { it.value }
+        konst inherited = findInheritedThrows(descriptor).entries.distinctBy { it.konstue }
 
         if (inherited.size >= 2) {
             context.trace.report(ErrorsNative.INCOMPATIBLE_THROWS_INHERITED.on(declaration, inherited.map { it.key.containingDeclaration }))
@@ -90,7 +90,7 @@ object NativeThrowsChecker : DeclarationChecker {
 
         if (throwsAnnotation == null) return true
 
-        val (overriddenMember, overriddenThrows) = inherited.firstOrNull()
+        konst (overriddenMember, overriddenThrows) = inherited.firstOrNull()
             ?: return true // Should not happen though.
 
         if (decodeThrowsFilter(throwsAnnotation) != overriddenThrows) {
@@ -102,14 +102,14 @@ object NativeThrowsChecker : DeclarationChecker {
     }
 
     private fun findInheritedThrows(descriptor: CallableMemberDescriptor): Map<CallableMemberDescriptor, ThrowsFilter> {
-        val result = mutableMapOf<CallableMemberDescriptor, ThrowsFilter>()
+        konst result = mutableMapOf<CallableMemberDescriptor, ThrowsFilter>()
 
         DFS.dfs(
             descriptor.overriddenDescriptors,
             { current -> current.overriddenDescriptors },
             object : DFS.AbstractNodeHandler<CallableMemberDescriptor, Unit>() {
                 override fun beforeChildren(current: CallableMemberDescriptor): Boolean {
-                    val throwsAnnotation = current.annotations.findAnnotation(throwsFqName).takeIf { current.kind.isReal }
+                    konst throwsAnnotation = current.annotations.findAnnotation(throwsFqName).takeIf { current.kind.isReal }
                     return if (throwsAnnotation == null && current.overriddenDescriptors.isNotEmpty()) {
                         // Visit overridden members:
                         true
@@ -127,18 +127,18 @@ object NativeThrowsChecker : DeclarationChecker {
     }
 
     private fun AnnotationDescriptor.getVariadicArguments(): List<ConstantValue<*>> {
-        val argument = this.firstArgument() as? ArrayValue ?: return emptyList()
-        return argument.value
+        konst argument = this.firstArgument() as? ArrayValue ?: return emptyList()
+        return argument.konstue
     }
 
     private fun decodeThrowsFilter(throwsAnnotation: AnnotationDescriptor?) =
         ThrowsFilter(throwsAnnotation?.getVariadicArguments()?.toSet())
 
-    private data class ThrowsFilter(val classes: Set<ConstantValue<*>>?)
+    private data class ThrowsFilter(konst classes: Set<ConstantValue<*>>?)
 
     private fun ConstantValue<*>.isGlobalClassWithId(classIds: Set<ClassId>): Boolean =
-        this is KClassValue && when (val value = this.value) {
-            is KClassValue.Value.NormalClass -> value.classId in classIds
+        this is KClassValue && when (konst konstue = this.konstue) {
+            is KClassValue.Value.NormalClass -> konstue.classId in classIds
             is KClassValue.Value.LocalClass -> false
         }
 
@@ -146,5 +146,5 @@ object NativeThrowsChecker : DeclarationChecker {
 
 private fun Call.hasUnresolvedArgumentsRecursive(context: BindingContext): Boolean {
     return this.hasUnresolvedArguments(context, StatementFilter.NONE) ||
-            valueArguments.any { it.getArgumentExpression()?.getCall(context)?.hasUnresolvedArgumentsRecursive(context) == true }
+            konstueArguments.any { it.getArgumentExpression()?.getCall(context)?.hasUnresolvedArgumentsRecursive(context) == true }
 }

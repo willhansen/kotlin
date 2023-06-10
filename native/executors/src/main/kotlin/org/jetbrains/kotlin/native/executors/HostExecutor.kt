@@ -20,24 +20,24 @@ import kotlin.time.*
  * [Executor] that runs the process on the host system.
  */
 class HostExecutor : Executor {
-    private val logger = Logger.getLogger(HostExecutor::class.java.name)
+    private konst logger = Logger.getLogger(HostExecutor::class.java.name)
 
     override fun execute(request: ExecuteRequest): ExecuteResponse {
         return runBlocking(Dispatchers.IO) {
-            val workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
-            val commandLine = "${request.executableAbsolutePath}${request.args.joinToString(separator = " ", prefix = " ")}"
+            konst workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
+            konst commandLine = "${request.executableAbsolutePath}${request.args.joinToString(separator = " ", prefix = " ")}"
             logger.info("""
                 |Starting command: $commandLine
                 |In working directory: ${workingDirectory.absolutePath}
-                |With additional environment: ${request.environment.entries.joinToString(prefix = "{", postfix = "}") { "\"${it.key}\": \"${it.value}\"" }}
+                |With additional environment: ${request.environment.entries.joinToString(prefix = "{", postfix = "}") { "\"${it.key}\": \"${it.konstue}\"" }}
                 |And timeout: ${request.timeout}
                 """.trimMargin())
-            val exitCodeWithTime = measureTimedValue {
-                val process = ProcessBuilder(listOf(request.executableAbsolutePath) + request.args).apply {
+            konst exitCodeWithTime = measureTimedValue {
+                konst process = ProcessBuilder(listOf(request.executableAbsolutePath) + request.args).apply {
                     directory(workingDirectory)
                     environment().putAll(request.environment)
                 }.start()
-                val jobs: MutableList<Job> = mutableListOf()
+                konst jobs: MutableList<Job> = mutableListOf()
                 jobs.add(launch {
                     request.stdin.apply {
                         copyTo(process.outputStream)
@@ -76,7 +76,7 @@ class HostExecutor : Executor {
                     process.exitValue()
                 }
             }
-            ExecuteResponse(exitCodeWithTime.value, exitCodeWithTime.duration)
+            ExecuteResponse(exitCodeWithTime.konstue, exitCodeWithTime.duration)
         }
     }
 }

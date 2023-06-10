@@ -25,18 +25,18 @@ import kotlin.text.format
 
 fun Case1() {
 
-    val x2  = "".<!DEBUG_INFO_CALL("fqName: kotlin.text.format; typeCall: inline extension function")!>format("")<!>
+    konst x2  = "".<!DEBUG_INFO_CALL("fqName: kotlin.text.format; typeCall: inline extension function")!>format("")<!>
 
-    val y2  = String.<!DEBUG_INFO_CALL("fqName: kotlin.text.format; typeCall: inline extension function")!>format("")<!>
+    konst y2  = String.<!DEBUG_INFO_CALL("fqName: kotlin.text.format; typeCall: inline extension function")!>format("")<!>
 }
 
 fun String.invoke(format: String, vararg args: Any?): String = "" //(2)
 
-val String.format: String
+konst String.format: String
     get() = "1"
 
 
-val String.Companion.format: String
+konst String.Companion.format: String
     get() = "1"
 
 
@@ -44,11 +44,11 @@ val String.Companion.format: String
 package libCase1
 
 
-val String.Companion.format: String
+konst String.Companion.format: String
     get() = "1"
 
 fun String.invoke(format: String, vararg args: Any?): String = ""
 
 
-val String.format: String
+konst String.format: String
     get() = "1"

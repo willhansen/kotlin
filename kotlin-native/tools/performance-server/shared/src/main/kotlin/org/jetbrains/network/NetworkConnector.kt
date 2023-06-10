@@ -18,8 +18,8 @@ enum class RequestMethod {
 // Abstract class for working with network.
 abstract class NetworkConnector {
     fun getAuth(user: String, password: String): String {
-        val buffer = js("Buffer").from(user + ":" + password)
-        val based64String = buffer.toString("base64")
+        konst buffer = js("Buffer").from(user + ":" + password)
+        konst based64String = buffer.toString("base64")
         return "Basic " + based64String
     }
 

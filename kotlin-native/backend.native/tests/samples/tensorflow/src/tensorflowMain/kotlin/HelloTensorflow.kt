@@ -13,10 +13,10 @@ typealias Status = CPointer<TF_Status>
 typealias Operation = CPointer<TF_Operation>
 typealias Tensor = CPointer<TF_Tensor>
 
-val Status.isOk: Boolean get() = TF_GetCode(this) == TF_OK
-val Status.errorMessage: String get() = TF_Message(this)!!.toKString()
+konst Status.isOk: Boolean get() = TF_GetCode(this) == TF_OK
+konst Status.errorMessage: String get() = TF_Message(this)!!.toKString()
 fun Status.delete() = TF_DeleteStatus(this)
-fun Status.validate() {
+fun Status.konstidate() {
     try {
         if (!isOk) {
             throw Error("Status is not ok: $errorMessage")
@@ -27,15 +27,15 @@ fun Status.validate() {
 }
 
 inline fun <T> statusValidated(block: (Status) -> T): T {
-    val status = TF_NewStatus()!!
-    val result = block(status)
-    status.validate()
+    konst status = TF_NewStatus()!!
+    konst result = block(status)
+    status.konstidate()
     return result
 }
 
-fun scalarTensor(value: Int): Tensor {
-    val data = nativeHeap.allocArray<IntVar>(1)
-    data[0] = value
+fun scalarTensor(konstue: Int): Tensor {
+    konst data = nativeHeap.allocArray<IntVar>(1)
+    data[0] = konstue
 
     return TF_NewTensor(
             TF_INT32,
@@ -48,7 +48,7 @@ fun scalarTensor(value: Int): Tensor {
     )!!
 }
 
-val Tensor.scalarIntValue: Int get() {
+konst Tensor.scalarIntValue: Int get() {
     if (TF_INT32 != TF_TensorType(this) || IntVar.size.convert<size_t>() != TF_TensorByteSize(this)) {
         throw Error("Tensor is not of type int.")
     }
@@ -56,21 +56,21 @@ val Tensor.scalarIntValue: Int get() {
         throw Error("Tensor is not scalar.")
     }
 
-    return TF_TensorData(this)!!.reinterpret<IntVar>().pointed.value
+    return TF_TensorData(this)!!.reinterpret<IntVar>().pointed.konstue
 }
 
 
 class Graph {
-    val tensorflowGraph = TF_NewGraph()!!
+    konst tensorflowGraph = TF_NewGraph()!!
 
     inline fun operation(type: String, name: String, initDescription: (CPointer<TF_OperationDescription>) -> Unit): Operation {
-        val description = TF_NewOperation(tensorflowGraph, type, name)!!
+        konst description = TF_NewOperation(tensorflowGraph, type, name)!!
         initDescription(description)
         return statusValidated { TF_FinishOperation(description, it)!! }
     }
 
-    fun constant(value: Int, name: String = "scalarIntConstant") = operation("Const", name) { description ->
-        statusValidated { TF_SetAttrTensor(description, "value", scalarTensor(value), it) }
+    fun constant(konstue: Int, name: String = "scalarIntConstant") = operation("Const", name) { description ->
+        statusValidated { TF_SetAttrTensor(description, "konstue", scalarTensor(konstue), it) }
         TF_SetAttrType(description, "dtype", TF_INT32)
     }
 
@@ -79,7 +79,7 @@ class Graph {
     }
 
     fun add(left: Operation, right: Operation, name: String = "add") = memScoped {
-        val inputs = allocArray<TF_Output>(2)
+        konst inputs = allocArray<TF_Output>(2)
         inputs[0].apply { oper = left; index = 0 }
         inputs[1].apply { oper = right; index = 0 }
 
@@ -92,7 +92,7 @@ class Graph {
     operator fun Operation.plus(right: Operation) = add(this, right)
 
     inline fun <T> withSession(block: Session.() -> T): T {
-        val session = Session(this)
+        konst session = Session(this)
         try {
             return session.block()
         } finally {
@@ -101,16 +101,16 @@ class Graph {
     }
 }
 
-class Session(val graph: Graph) {
-    private val inputs = mutableListOf<TF_Output>()
-    private val inputValues = mutableListOf<Tensor>()
+class Session(konst graph: Graph) {
+    private konst inputs = mutableListOf<TF_Output>()
+    private konst inputValues = mutableListOf<Tensor>()
     private var outputs = mutableListOf<TF_Output>()
-    private val outputValues = mutableListOf<Tensor?>()
-    private val targets = listOf<Operation>()
+    private konst outputValues = mutableListOf<Tensor?>()
+    private konst targets = listOf<Operation>()
 
     private fun createNewSession(): CPointer<TF_Session> {
-        val options = TF_NewSessionOptions()
-        val session = statusValidated { TF_NewSession(graph.tensorflowGraph, options, it)!! }
+        konst options = TF_NewSessionOptions()
+        konst session = statusValidated { TF_NewSession(graph.tensorflowGraph, options, it)!! }
         TF_DeleteSessionOptions(options)
         return session
     }
@@ -187,7 +187,7 @@ class Session(val graph: Graph) {
         }
         clearOutputValues()
 
-        val inputsCArray = if (inputs.any()) nativeHeap.allocArray<TF_Output>(inputs.size) else null
+        konst inputsCArray = if (inputs.any()) nativeHeap.allocArray<TF_Output>(inputs.size) else null
 
         inputs.forEachIndexed { i, input ->
             inputsCArray!![i].apply {
@@ -196,7 +196,7 @@ class Session(val graph: Graph) {
             }
         }
 
-        val outputsCArray = if (outputs.any()) nativeHeap.allocArray<TF_Output>(outputs.size) else null
+        konst outputsCArray = if (outputs.any()) nativeHeap.allocArray<TF_Output>(outputs.size) else null
 
         outputs.forEachIndexed { i, output ->
             outputsCArray!![i].apply {
@@ -206,7 +206,7 @@ class Session(val graph: Graph) {
         }
 
         memScoped {
-            val outputValuesCArray = allocArrayOfPointersTo<TF_Tensor>(outputs.map { null })
+            konst outputValuesCArray = allocArrayOfPointersTo<TF_Tensor>(outputs.map { null })
 
             statusValidated {
                 TF_SessionRun(tensorflowSession, null,
@@ -230,8 +230,8 @@ class Session(val graph: Graph) {
 fun main() {
     println("Hello, TensorFlow ${TF_Version()!!.toKString()}!")
 
-    val result = Graph().run {
-        val input = intInput()
+    konst result = Graph().run {
+        konst input = intInput()
 
         withSession { invoke(input + constant(2), inputsWithValues = listOf(input to scalarTensor(3))).scalarIntValue }
     }

@@ -42,7 +42,7 @@ class Host<T : Any?> {
   // CHECK:
   //   Mangled name: Host@0:0{0§<kotlin.Any?>}castGenericMemberExtVal
   //   Public signature: /Host.castGenericMemberExtVal|-3234774000451781478[0]
-  val <TV : Any?> TV.castGenericMemberExtVal: TV
+  konst <TV : Any?> TV.castGenericMemberExtVal: TV
     // CHECK JVM_IR:
     //   Mangled name: Host#<get-castGenericMemberExtVal>@0:0(){0§<kotlin.Any?>}0:0
     //   Public signature: /Host.castGenericMemberExtVal.<get-castGenericMemberExtVal>|7589356697377818796[0]
@@ -54,7 +54,7 @@ class Host<T : Any?> {
   // CHECK:
   //   Mangled name: Host@kotlin.Any{}castMemberExtVal
   //   Public signature: /Host.castMemberExtVal|-3747833166603208627[0]
-  val Any.castMemberExtVal: T
+  konst Any.castMemberExtVal: T
     // CHECK JVM_IR:
     //   Mangled name: Host#<get-castMemberExtVal>@kotlin.Any(){}1:0
     //   Public signature: /Host.castMemberExtVal.<get-castMemberExtVal>|2557829452396081481[0]
@@ -84,7 +84,7 @@ fun <T : Any?> castFun(x: Any): T
 // CHECK:
 //   Mangled name: @0:0{0§<kotlin.Any?>}castExtVal
 //   Public signature: /castExtVal|-2827941227832238214[0]
-val <T : Any?> T.castExtVal: T
+konst <T : Any?> T.castExtVal: T
   // CHECK JVM_IR:
   //   Mangled name: #<get-castExtVal>@0:0(){0§<kotlin.Any?>}0:0
   //   Public signature: /castExtVal.<get-castExtVal>|-7034055135715887678[0]

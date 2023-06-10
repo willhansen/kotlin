@@ -62,12 +62,12 @@ import org.jetbrains.kotlin.utils.addToStdlib.runUnless
 
 class DeclarationsConverter(
     session: FirSession,
-    internal val baseScopeProvider: FirScopeProvider,
+    internal konst baseScopeProvider: FirScopeProvider,
     tree: FlyweightCapableTreeStructure<LighterASTNode>,
     context: Context<LighterASTNode> = Context(),
 ) : BaseConverter(session, tree, context) {
 
-    private val expressionConverter = ExpressionsConverter(session, tree, this, context)
+    private konst expressionConverter = ExpressionsConverter(session, tree, this, context)
 
     /**
      * [org.jetbrains.kotlin.parsing.KotlinParsing.parseFile]
@@ -79,11 +79,11 @@ class DeclarationsConverter(
             throw Exception()
         }
 
-        val fileSymbol = FirFileSymbol()
+        konst fileSymbol = FirFileSymbol()
         var fileAnnotationContainer: FirFileAnnotationsContainer? = null
-        val importList = mutableListOf<FirImport>()
-        val firDeclarationList = mutableListOf<FirDeclaration>()
-        val modifierList = mutableListOf<LighterASTNode>()
+        konst importList = mutableListOf<FirImport>()
+        konst firDeclarationList = mutableListOf<FirDeclaration>()
+        konst modifierList = mutableListOf<LighterASTNode>()
         context.packageFqName = FqName.ROOT
         var packageDirective: FirPackageDirective? = null
         file.forEachChildren { child ->
@@ -139,7 +139,7 @@ class DeclarationsConverter(
     }
 
     fun convertBlockExpressionWithoutBuilding(block: LighterASTNode): FirBlockBuilder {
-        val firStatements = block.forEachChildrenReturnList<FirStatement> { node, container ->
+        konst firStatements = block.forEachChildrenReturnList<FirStatement> { node, container ->
             @Suppress("RemoveRedundantQualifierName")
             when (node.tokenType) {
                 CLASS, OBJECT_DECLARATION -> container += convertClass(node) as FirStatement
@@ -154,7 +154,7 @@ class DeclarationsConverter(
         return FirBlockBuilder().apply {
             source = block.toFirSourceElement()
             firStatements.forEach { firStatement ->
-                val isForLoopBlock = firStatement is FirBlock && firStatement.source?.kind == KtFakeSourceElementKind.DesugaredForLoop
+                konst isForLoopBlock = firStatement is FirBlock && firStatement.source?.kind == KtFakeSourceElementKind.DesugaredForLoop
                 if (firStatement !is FirBlock || isForLoopBlock || firStatement.annotations.isNotEmpty()) {
                     statements += firStatement
                 } else {
@@ -210,7 +210,7 @@ class DeclarationsConverter(
                 }
                 MUL -> isAllUnder = true
                 IMPORT_ALIAS -> {
-                    val importAlias = convertImportAlias(it)
+                    konst importAlias = convertImportAlias(it)
                     if (importAlias != null) {
                         aliasName = importAlias.first
                         aliasSource = importAlias.second
@@ -256,7 +256,7 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseModifierList
      */
     private fun convertModifierList(modifiers: LighterASTNode, isInClass: Boolean = false): Modifier {
-        val modifier = Modifier()
+        konst modifier = Modifier()
         modifiers.forEachChildren {
             when (it.tokenType) {
                 ANNOTATION -> modifier.annotations += convertAnnotation(it)
@@ -271,7 +271,7 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseTypeModifierList
      */
     private fun convertTypeModifierList(modifiers: LighterASTNode): TypeModifier {
-        val typeModifier = TypeModifier()
+        konst typeModifier = TypeModifier()
         modifiers.forEachChildren {
             when (it.tokenType) {
                 ANNOTATION -> typeModifier.annotations += convertAnnotation(it)
@@ -286,7 +286,7 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseTypeArgumentModifierList
      */
     private fun convertTypeArgumentModifierList(modifiers: LighterASTNode): TypeProjectionModifier {
-        val typeArgumentModifier = TypeProjectionModifier()
+        konst typeArgumentModifier = TypeProjectionModifier()
         modifiers.forEachChildren {
             when (it.tokenType) {
                 ANNOTATION -> typeArgumentModifier.annotations += convertAnnotation(it)
@@ -301,7 +301,7 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseTypeArgumentModifierList
      */
     private fun convertTypeParameterModifiers(modifiers: LighterASTNode): TypeParameterModifier {
-        val modifier = TypeParameterModifier()
+        konst modifier = TypeParameterModifier()
         modifiers.forEachChildren {
             when (it.tokenType) {
                 ANNOTATION -> modifier.annotations += convertAnnotation(it)
@@ -389,9 +389,9 @@ class DeclarationsConverter(
                 CONSTRUCTOR_CALLEE -> constructorCalleePair = convertConstructorInvocation(unescapedAnnotation)
             }
         }
-        val qualifier = (constructorCalleePair.first as? FirUserTypeRef)?.qualifier?.last()
-        val name = qualifier?.name ?: Name.special("<no-annotation-name>")
-        val theCalleeReference = buildSimpleNamedReference {
+        konst qualifier = (constructorCalleePair.first as? FirUserTypeRef)?.qualifier?.last()
+        konst name = qualifier?.name ?: Name.special("<no-annotation-name>")
+        konst theCalleeReference = buildSimpleNamedReference {
             source = unescapedAnnotation
                 .getChildNodeByType(CONSTRUCTOR_CALLEE)
                 ?.getChildNodeByType(TYPE_REFERENCE)
@@ -436,9 +436,9 @@ class DeclarationsConverter(
         var modifiers = Modifier()
         var classKind: ClassKind = ClassKind.CLASS //TODO
         var identifier: String? = null
-        val firTypeParameters = mutableListOf<FirTypeParameter>()
+        konst firTypeParameters = mutableListOf<FirTypeParameter>()
         var primaryConstructor: LighterASTNode? = null
-        val typeConstraints = mutableListOf<TypeConstraint>()
+        konst typeConstraints = mutableListOf<TypeConstraint>()
         var classBody: LighterASTNode? = null
         var superTypeList: LighterASTNode? = null
         var typeParameterList: LighterASTNode? = null
@@ -466,12 +466,12 @@ class DeclarationsConverter(
             }
         }
 
-        val className = identifier.nameAsSafeName(if (modifiers.isCompanion()) "Companion" else "")
-        val isLocal = isClassLocal(classNode) { getParent() }
-        val classIsExpect = modifiers.hasExpect() || context.containerIsExpect
+        konst className = identifier.nameAsSafeName(if (modifiers.isCompanion()) "Companion" else "")
+        konst isLocal = isClassLocal(classNode) { getParent() }
+        konst classIsExpect = modifiers.hasExpect() || context.containerIsExpect
 
         return withChildClassName(className, isExpect = classIsExpect, isLocal) {
-            val status = FirDeclarationStatusImpl(
+            konst status = FirDeclarationStatusImpl(
                 if (isLocal) Visibilities.Local else modifiers.getVisibility(),
                 modifiers.getModality(isClassOrObject = true)
             ).apply {
@@ -485,7 +485,7 @@ class DeclarationsConverter(
                 isExternal = modifiers.hasExternal()
             }
 
-            val classSymbol = FirRegularClassSymbol(context.currentClassId)
+            konst classSymbol = FirRegularClassSymbol(context.currentClassId)
 
             typeParameterList?.let { firTypeParameters += convertTypeParameters(it, typeConstraints, classSymbol) }
 
@@ -505,14 +505,14 @@ class DeclarationsConverter(
 
                     context.appendOuterTypeParameters(ignoreLastLevel = true, typeParameters)
 
-                    val selfType = classNode.toDelegatedSelfType(this)
+                    konst selfType = classNode.toDelegatedSelfType(this)
                     registerSelfType(selfType)
 
-                    val delegationSpecifiers = superTypeList?.let { convertDelegationSpecifiers(it) }
+                    konst delegationSpecifiers = superTypeList?.let { convertDelegationSpecifiers(it) }
                     var delegatedSuperTypeRef: FirTypeRef? = delegationSpecifiers?.superTypeCalls?.lastOrNull()?.delegatedSuperTypeRef
-                    val delegatedConstructorSource: KtLightSourceElement? = delegationSpecifiers?.superTypeCalls?.lastOrNull()?.source
+                    konst delegatedConstructorSource: KtLightSourceElement? = delegationSpecifiers?.superTypeCalls?.lastOrNull()?.source
 
-                    val superTypeRefs = mutableListOf<FirTypeRef>()
+                    konst superTypeRefs = mutableListOf<FirTypeRef>()
 
                     delegationSpecifiers?.let { superTypeRefs += it.superTypesRef }
 
@@ -540,8 +540,8 @@ class DeclarationsConverter(
 
                     this.superTypeRefs += superTypeRefs
 
-                    val secondaryConstructors = classBody.getChildNodesByType(SECONDARY_CONSTRUCTOR)
-                    val classWrapper = ClassWrapper(
+                    konst secondaryConstructors = classBody.getChildNodesByType(SECONDARY_CONSTRUCTOR)
+                    konst classWrapper = ClassWrapper(
                         className, modifiers, classKind, this,
                         hasPrimaryConstructor = primaryConstructor != null,
                         hasSecondaryConstructor = secondaryConstructors.isNotEmpty(),
@@ -552,7 +552,7 @@ class DeclarationsConverter(
                         delegatedSuperCalls = delegationSpecifiers?.superTypeCalls ?: emptyList()
                     )
                     //parse primary constructor
-                    val primaryConstructorWrapper = convertPrimaryConstructor(
+                    konst primaryConstructorWrapper = convertPrimaryConstructor(
                         classNode,
                         primaryConstructor,
                         selfType.source,
@@ -560,15 +560,15 @@ class DeclarationsConverter(
                         delegatedConstructorSource,
                         containingClassIsExpectClass = status.isExpect
                     )
-                    val firPrimaryConstructor = primaryConstructorWrapper?.firConstructor
+                    konst firPrimaryConstructor = primaryConstructorWrapper?.firConstructor
                     firPrimaryConstructor?.let { declarations += it }
-                    delegationSpecifiers?.delegateFieldsMap?.values?.mapTo(declarations) { it.fir }
+                    delegationSpecifiers?.delegateFieldsMap?.konstues?.mapTo(declarations) { it.fir }
                     delegatedFieldsMap = delegationSpecifiers?.delegateFieldsMap?.takeIf { it.isNotEmpty() }
 
-                    val properties = mutableListOf<FirProperty>()
+                    konst properties = mutableListOf<FirProperty>()
                     if (primaryConstructor != null && firPrimaryConstructor != null) {
                         //parse properties
-                        properties += primaryConstructorWrapper.valueParameters
+                        properties += primaryConstructorWrapper.konstueParameters
                             .filter { it.hasValOrVar() }
                             .map {
                                 it.toFirPropertyFromPrimaryConstructor(
@@ -589,7 +589,7 @@ class DeclarationsConverter(
 
                     //parse data class
                     if (modifiers.isDataClass() && firPrimaryConstructor != null) {
-                        val zippedParameters = properties.map { it.source!!.lighterASTNode to it }
+                        konst zippedParameters = properties.map { it.source!!.lighterASTNode to it }
                         DataClassMembersGenerator(
                             classNode,
                             this,
@@ -598,8 +598,8 @@ class DeclarationsConverter(
                             context.className,
                             createClassTypeRefWithSourceKind = { firPrimaryConstructor.returnTypeRef },
                             createParameterTypeRefWithSourceKind = { property, _ -> property.returnTypeRef },
-                            addValueParameterAnnotations = { valueParam ->
-                                valueParam.forEachChildren {
+                            addValueParameterAnnotations = { konstueParam ->
+                                konstueParam.forEachChildren {
                                     if (it.tokenType == MODIFIER_LIST) convertModifierList(it).annotations.filterTo(annotations) {
                                         it.useSiteTarget.appliesToPrimaryConstructorParameter()
                                     }
@@ -653,7 +653,7 @@ class DeclarationsConverter(
             buildAnonymousObjectExpression {
                 source = objectLiteral.toFirSourceElement()
                 anonymousObject = buildAnonymousObject {
-                    val objectDeclaration = objectLiteral.getChildNodesByType(OBJECT_DECLARATION).first()
+                    konst objectDeclaration = objectLiteral.getChildNodesByType(OBJECT_DECLARATION).first()
                     source = objectDeclaration.toFirSourceElement()
                     origin = FirDeclarationOrigin.Source
                     moduleData = baseModuleData
@@ -662,12 +662,12 @@ class DeclarationsConverter(
                     symbol = FirAnonymousObjectSymbol()
                     status = FirDeclarationStatusImpl(Visibilities.Local, Modality.FINAL)
                     context.appendOuterTypeParameters(ignoreLastLevel = false, typeParameters)
-                    val delegatedSelfType = objectLiteral.toDelegatedSelfType(this)
+                    konst delegatedSelfType = objectLiteral.toDelegatedSelfType(this)
                     registerSelfType(delegatedSelfType)
 
                     var modifiers = Modifier()
                     var primaryConstructor: LighterASTNode? = null
-                    val superTypeRefs = mutableListOf<FirTypeRef>()
+                    konst superTypeRefs = mutableListOf<FirTypeRef>()
                     var delegatedSuperTypeRef: FirTypeRef? = null
                     var classBody: LighterASTNode? = null
                     var delegatedConstructorSource: KtLightSourceElement? = null
@@ -682,7 +682,7 @@ class DeclarationsConverter(
                                 delegatedSuperTypeRef = specifiers.superTypeCalls.lastOrNull()?.delegatedSuperTypeRef
                                 superTypeRefs += specifiers.superTypesRef
                                 delegatedConstructorSource = specifiers.superTypeCalls.lastOrNull()?.source
-                                delegateFields = specifiers.delegateFieldsMap.values.map { it.fir }
+                                delegateFields = specifiers.delegateFieldsMap.konstues.map { it.fir }
                                 delegatedFieldsMap = specifiers.delegateFieldsMap.takeIf { it.isNotEmpty() }
                                 delegatedSuperCalls = specifiers.superTypeCalls
                             }
@@ -694,12 +694,12 @@ class DeclarationsConverter(
                         superTypeRefs += implicitAnyType
                         delegatedSuperTypeRef = implicitAnyType
                     }
-                    val delegatedSuperType = delegatedSuperTypeRef ?: FirImplicitTypeRefImplWithoutSource
+                    konst delegatedSuperType = delegatedSuperTypeRef ?: FirImplicitTypeRefImplWithoutSource
 
                     annotations += modifiers.annotations
                     this.superTypeRefs += superTypeRefs
 
-                    val classWrapper = ClassWrapper(
+                    konst classWrapper = ClassWrapper(
                         SpecialNames.NO_NAME_PROVIDED, modifiers, ClassKind.OBJECT, this,
                         hasPrimaryConstructor = false,
                         hasSecondaryConstructor = classBody.getChildNodesByType(SECONDARY_CONSTRUCTOR).isNotEmpty(),
@@ -736,7 +736,7 @@ class DeclarationsConverter(
     private fun convertEnumEntry(enumEntry: LighterASTNode, classWrapper: ClassWrapper): FirEnumEntry {
         var modifiers = Modifier()
         lateinit var identifier: String
-        val enumSuperTypeCallEntry = mutableListOf<FirExpression>()
+        konst enumSuperTypeCallEntry = mutableListOf<FirExpression>()
         var classBodyNode: LighterASTNode? = null
         var superTypeCallEntry: LighterASTNode? = null
         enumEntry.forEachChildren {
@@ -753,8 +753,8 @@ class DeclarationsConverter(
             }
         }
 
-        val enumEntryName = identifier.nameAsSafeName()
-        val containingClassIsExpectClass = classWrapper.hasExpect() || context.containerIsExpect
+        konst enumEntryName = identifier.nameAsSafeName()
+        konst containingClassIsExpectClass = classWrapper.hasExpect() || context.containerIsExpect
         return buildEnumEntry {
             source = enumEntry.toFirSourceElement()
             moduleData = baseModuleData
@@ -774,7 +774,7 @@ class DeclarationsConverter(
             annotations += modifiers.annotations
             initializer = withChildClassName(enumEntryName, isExpect = false) {
                 buildAnonymousObjectExpression {
-                    val entrySource = enumEntry.toFirSourceElement(KtFakeSourceElementKind.EnumInitializer)
+                    konst entrySource = enumEntry.toFirSourceElement(KtFakeSourceElementKind.EnumInitializer)
                     source = entrySource
                     anonymousObject = buildAnonymousObject {
                         source = entrySource
@@ -784,7 +784,7 @@ class DeclarationsConverter(
                         scopeProvider = baseScopeProvider
                         symbol = FirAnonymousObjectSymbol()
                         status = FirDeclarationStatusImpl(Visibilities.Local, Modality.FINAL)
-                        val enumClassWrapper = ClassWrapper(
+                        konst enumClassWrapper = ClassWrapper(
                             enumEntryName, modifiers, ClassKind.ENUM_ENTRY, this,
                             hasPrimaryConstructor = true,
                             hasSecondaryConstructor = classBodyNode.getChildNodesByType(SECONDARY_CONSTRUCTOR).isNotEmpty(),
@@ -831,7 +831,7 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseEnumEntry
      */
     private fun convertInitializerList(initializerList: LighterASTNode): List<FirExpression> {
-        val firValueArguments = mutableListOf<FirExpression>()
+        konst firValueArguments = mutableListOf<FirExpression>()
         initializerList.forEachChildren {
             when (it.tokenType) {
                 SUPER_TYPE_CALL_ENTRY -> convertConstructorInvocation(it).apply {
@@ -848,7 +848,7 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseEnumClassBody
      */
     private fun convertClassBody(classBody: LighterASTNode, classWrapper: ClassWrapper): List<FirDeclaration> {
-        val modifierLists = mutableListOf<LighterASTNode>()
+        konst modifierLists = mutableListOf<LighterASTNode>()
         var firDeclarations = classBody.forEachChildrenReturnList { node, container ->
             @Suppress("RemoveRedundantQualifierName")
             when (node.tokenType) {
@@ -893,24 +893,24 @@ class DeclarationsConverter(
         containingClassIsExpectClass: Boolean
     ): PrimaryConstructor? {
         if (primaryConstructor == null && !classWrapper.isEnumEntry() && classWrapper.hasSecondaryConstructor) return null
-        val classKind = classWrapper.classBuilder.classKind
+        konst classKind = classWrapper.classBuilder.classKind
         if (primaryConstructor == null &&
             (containingClassIsExpectClass && classKind != ClassKind.ENUM_CLASS && classKind != ClassKind.ENUM_ENTRY)
         ) return null
         if (primaryConstructor == null && classWrapper.isInterface()) return null
 
-        val constructorSymbol = FirConstructorSymbol(callableIdForClassConstructor())
+        konst constructorSymbol = FirConstructorSymbol(callableIdForClassConstructor())
         var modifiers = Modifier()
-        val valueParameters = mutableListOf<ValueParameter>()
+        konst konstueParameters = mutableListOf<ValueParameter>()
         primaryConstructor?.forEachChildren {
             when (it.tokenType) {
                 MODIFIER_LIST -> modifiers = convertModifierList(it)
-                VALUE_PARAMETER_LIST -> valueParameters += convertValueParameters(it, constructorSymbol, ValueParameterDeclaration.PRIMARY_CONSTRUCTOR)
+                VALUE_PARAMETER_LIST -> konstueParameters += convertValueParameters(it, constructorSymbol, ValueParameterDeclaration.PRIMARY_CONSTRUCTOR)
             }
         }
 
-        val defaultVisibility = classWrapper.defaultConstructorVisibility()
-        val firDelegatedCall = runUnless(containingClassIsExpectClass) {
+        konst defaultVisibility = classWrapper.defaultConstructorVisibility()
+        konst firDelegatedCall = runUnless(containingClassIsExpectClass) {
             fun createDelegatedConstructorCall(
                 delegatedConstructorSource: KtLightSourceElement?,
                 delegatedSuperTypeRef: FirTypeRef,
@@ -953,10 +953,10 @@ class DeclarationsConverter(
             }
         }
 
-        val explicitVisibility = runIf(primaryConstructor != null) {
+        konst explicitVisibility = runIf(primaryConstructor != null) {
             modifiers.getVisibility().takeUnless { it == Visibilities.Unknown }
         }
-        val status = FirDeclarationStatusImpl(explicitVisibility ?: defaultVisibility, Modality.FINAL).apply {
+        konst status = FirDeclarationStatusImpl(explicitVisibility ?: defaultVisibility, Modality.FINAL).apply {
             isExpect = modifiers.hasExpect() || context.containerIsExpect
             isActual = modifiers.hasActual()
             isInner = classWrapper.isInner()
@@ -976,13 +976,13 @@ class DeclarationsConverter(
                 symbol = constructorSymbol
                 annotations += modifiers.annotations
                 typeParameters += constructorTypeParametersFromConstructedClass(classWrapper.classBuilder.typeParameters)
-                this.valueParameters += valueParameters.map { it.firValueParameter }
+                this.konstueParameters += konstueParameters.map { it.firValueParameter }
                 delegatedConstructor = firDelegatedCall
                 this.body = null
                 this.contextReceivers.addAll(convertContextReceivers(classNode))
             }.apply {
                 containingClassForStaticMemberAttr = currentDispatchReceiverType()!!.lookupTag
-            }, valueParameters
+            }, konstueParameters
         )
     }
 
@@ -1012,11 +1012,11 @@ class DeclarationsConverter(
      */
     private fun convertSecondaryConstructor(secondaryConstructor: LighterASTNode, classWrapper: ClassWrapper): FirConstructor {
         var modifiers = Modifier()
-        val firValueParameters = mutableListOf<ValueParameter>()
+        konst firValueParameters = mutableListOf<ValueParameter>()
         var constructorDelegationCall: FirDelegatedConstructorCall? = null
         var block: LighterASTNode? = null
 
-        val constructorSymbol = FirConstructorSymbol(callableIdForClassConstructor())
+        konst constructorSymbol = FirConstructorSymbol(callableIdForClassConstructor())
         secondaryConstructor.forEachChildren {
             when (it.tokenType) {
                 MODIFIER_LIST -> modifiers = convertModifierList(it)
@@ -1026,10 +1026,10 @@ class DeclarationsConverter(
             }
         }
 
-        val delegatedSelfTypeRef = classWrapper.delegatedSelfTypeRef
+        konst delegatedSelfTypeRef = classWrapper.delegatedSelfTypeRef
 
-        val explicitVisibility = modifiers.getVisibility()
-        val status = FirDeclarationStatusImpl(explicitVisibility, Modality.FINAL).apply {
+        konst explicitVisibility = modifiers.getVisibility()
+        konst status = FirDeclarationStatusImpl(explicitVisibility, Modality.FINAL).apply {
             isExpect = modifiers.hasExpect() || context.containerIsExpect
             isActual = modifiers.hasActual()
             isInner = classWrapper.isInner()
@@ -1037,7 +1037,7 @@ class DeclarationsConverter(
             isFromEnumClass = classWrapper.isEnum()
         }
 
-        val target = FirFunctionTarget(labelName = null, isLambda = false)
+        konst target = FirFunctionTarget(labelName = null, isLambda = false)
         return buildConstructor {
             source = secondaryConstructor.toFirSourceElement()
             moduleData = baseModuleData
@@ -1051,8 +1051,8 @@ class DeclarationsConverter(
             context.firFunctionTargets += target
             annotations += modifiers.annotations
             typeParameters += constructorTypeParametersFromConstructedClass(classWrapper.classBuilder.typeParameters)
-            valueParameters += firValueParameters.map { it.firValueParameter }
-            val (body, contractDescription) = convertFunctionBody(block, null, allowLegacyContractDescription = true)
+            konstueParameters += firValueParameters.map { it.firValueParameter }
+            konst (body, contractDescription) = convertFunctionBody(block, null, allowLegacyContractDescription = true)
             this.body = body
             contractDescription?.let { this.contractDescription = it }
             context.firFunctionTargets.removeLast()
@@ -1075,7 +1075,7 @@ class DeclarationsConverter(
         classWrapper: ClassWrapper
     ): FirDelegatedConstructorCall {
         var thisKeywordPresent = false
-        val firValueArguments = mutableListOf<FirExpression>()
+        konst firValueArguments = mutableListOf<FirExpression>()
         constructorDelegationCall.forEachChildren {
             when (it.tokenType) {
                 CONSTRUCTOR_DELEGATION_REFERENCE -> if (it.asText == "this") thisKeywordPresent = true
@@ -1083,9 +1083,9 @@ class DeclarationsConverter(
             }
         }
 
-        val isImplicit = constructorDelegationCall.textLength == 0
-        val isThis = thisKeywordPresent //|| (isImplicit && classWrapper.hasPrimaryConstructor)
-        val delegatedType =
+        konst isImplicit = constructorDelegationCall.textLength == 0
+        konst isThis = thisKeywordPresent //|| (isImplicit && classWrapper.hasPrimaryConstructor)
+        konst delegatedType =
             when {
                 isThis -> classWrapper.delegatedSelfTypeRef
                 else -> classWrapper.delegatedSuperTypeRef
@@ -1099,9 +1099,9 @@ class DeclarationsConverter(
             }
             constructedTypeRef = delegatedType.copyWithNewSourceKind(KtFakeSourceElementKind.ImplicitTypeRef)
             this.isThis = isThis
-            val calleeKind =
+            konst calleeKind =
                 if (isImplicit) KtFakeSourceElementKind.ImplicitConstructor else KtFakeSourceElementKind.DelegatingConstructorCall
-            val calleeSource = constructorDelegationCall.getChildNodeByType(CONSTRUCTOR_DELEGATION_REFERENCE)
+            konst calleeSource = constructorDelegationCall.getChildNodeByType(CONSTRUCTOR_DELEGATION_REFERENCE)
                 ?.toFirSourceElement(calleeKind)
                 ?: this@buildDelegatedConstructorCall.source?.fakeElement(calleeKind)
             calleeReference = if (isThis) {
@@ -1134,12 +1134,12 @@ class DeclarationsConverter(
             }
         }
 
-        val typeAliasName = identifier.nameAsSafeName()
-        val typeAliasIsExpect = modifiers.hasExpect() || context.containerIsExpect
+        konst typeAliasName = identifier.nameAsSafeName()
+        konst typeAliasIsExpect = modifiers.hasExpect() || context.containerIsExpect
         return withChildClassName(typeAliasName, isExpect = typeAliasIsExpect) {
-            val classSymbol = FirTypeAliasSymbol(context.currentClassId)
+            konst classSymbol = FirTypeAliasSymbol(context.currentClassId)
 
-            val firTypeParameters = mutableListOf<FirTypeParameter>()
+            konst firTypeParameters = mutableListOf<FirTypeParameter>()
             typeAlias.forEachChildren {
                 if (it.tokenType == TYPE_PARAMETER_LIST) {
                     firTypeParameters += convertTypeParameters(it, emptyList(), classSymbol)
@@ -1168,14 +1168,14 @@ class DeclarationsConverter(
     fun convertPropertyDeclaration(property: LighterASTNode, classWrapper: ClassWrapper? = null): FirDeclaration {
         var modifiers = Modifier()
         var identifier: String? = null
-        val firTypeParameters = mutableListOf<FirTypeParameter>()
+        konst firTypeParameters = mutableListOf<FirTypeParameter>()
         var isReturnType = false
         var delegateExpression: LighterASTNode? = null
         var isVar = false
         var receiverType: FirTypeRef? = null
         var returnType: FirTypeRef = implicitType
-        val typeConstraints = mutableListOf<TypeConstraint>()
-        val accessors = mutableListOf<LighterASTNode>()
+        konst typeConstraints = mutableListOf<TypeConstraint>()
+        konst accessors = mutableListOf<LighterASTNode>()
         var propertyInitializer: FirExpression? = null
         var typeParameterList: LighterASTNode? = null
         var fieldDeclaration: LighterASTNode? = null
@@ -1201,11 +1201,11 @@ class DeclarationsConverter(
             }
         }
 
-        val propertyName = identifier.nameAsSafeName()
+        konst propertyName = identifier.nameAsSafeName()
 
-        val parentNode = property.getParent()
-        val isLocal = !(parentNode?.tokenType == KT_FILE || parentNode?.tokenType == CLASS_BODY)
-        val propertySource = property.toFirSourceElement()
+        konst parentNode = property.getParent()
+        konst isLocal = !(parentNode?.tokenType == KT_FILE || parentNode?.tokenType == CLASS_BODY)
+        konst propertySource = property.toFirSourceElement()
 
         return buildProperty {
             source = propertySource
@@ -1219,7 +1219,7 @@ class DeclarationsConverter(
             initializer = propertyInitializer
 
             //probably can do this for delegateExpression itself
-            val delegateSource = delegateExpression?.let {
+            konst delegateSource = delegateExpression?.let {
                 (it.getExpressionInParentheses() ?: it).toFirSourceElement()
             }
 
@@ -1237,7 +1237,7 @@ class DeclarationsConverter(
 
             if (isLocal) {
                 this.isLocal = true
-                val delegateBuilder = delegateExpression?.let {
+                konst delegateBuilder = delegateExpression?.let {
                     FirWrappedDelegateExpressionBuilder().apply {
                         source = delegateSource
                         expression = expressionConverter.getAsFirExpression(it, "Incorrect delegate expression")
@@ -1262,14 +1262,14 @@ class DeclarationsConverter(
                 withCapturedTypeParameters(true, propertySource, firTypeParameters) {
                     typeParameters += firTypeParameters
 
-                    val delegateBuilder = delegateExpression?.let {
+                    konst delegateBuilder = delegateExpression?.let {
                         FirWrappedDelegateExpressionBuilder().apply {
                             source = delegateSource
                             expression = expressionConverter.getAsFirExpression(it, "Should have delegate")
                         }
                     }
 
-                    val propertyVisibility = modifiers.getVisibility()
+                    konst propertyVisibility = modifiers.getVisibility()
 
                     fun defaultAccessorStatus() =
                         // Downward propagation of `inline` and `external` modifiers (from property to its accessors)
@@ -1278,7 +1278,7 @@ class DeclarationsConverter(
                             isExternal = modifiers.hasExternal()
                         }
 
-                    val convertedAccessors = accessors.map {
+                    konst convertedAccessors = accessors.map {
                         convertGetterOrSetter(it, returnType, propertyVisibility, symbol, modifiers)
                     }
                     this.getter = convertedAccessors.find { it.isGetter }
@@ -1294,7 +1294,7 @@ class DeclarationsConverter(
                             it.replaceAnnotations(modifiers.annotations.filterUseSiteTarget(PROPERTY_GETTER))
                             it.initContainingClassAttr()
                         }
-                    // NOTE: We still need the setter even for a val property so we can report errors (e.g., VAL_WITH_SETTER).
+                    // NOTE: We still need the setter even for a konst property so we can report errors (e.g., VAL_WITH_SETTER).
                     this.setter = convertedAccessors.find { it.isSetter }
                         ?: if (isVar) {
                             FirDefaultPropertySetter(
@@ -1347,8 +1347,8 @@ class DeclarationsConverter(
     internal fun convertDestructingDeclaration(destructingDeclaration: LighterASTNode): DestructuringDeclaration {
         var modifiers = Modifier()
         var isVar = false
-        val entries = mutableListOf<FirVariable?>()
-        val source = destructingDeclaration.toFirSourceElement()
+        konst entries = mutableListOf<FirVariable?>()
+        konst source = destructingDeclaration.toFirSourceElement()
         var firExpression: FirExpression? = null
         destructingDeclaration.forEachChildren {
             when (it.tokenType) {
@@ -1388,7 +1388,7 @@ class DeclarationsConverter(
         }
 
         if (identifier == "_") return null
-        val name = identifier.nameAsSafeName()
+        konst name = identifier.nameAsSafeName()
         return buildProperty {
             source = entry.toFirSourceElement()
             moduleData = baseModuleData
@@ -1416,8 +1416,8 @@ class DeclarationsConverter(
         var modifiers = Modifier()
         var isGetter = true
         var returnType: FirTypeRef? = null
-        val propertyTypeRefToUse = propertyTypeRef.copyWithNewSourceKind(KtFakeSourceElementKind.ImplicitTypeRef)
-        val accessorSymbol = FirPropertyAccessorSymbol()
+        konst propertyTypeRefToUse = propertyTypeRef.copyWithNewSourceKind(KtFakeSourceElementKind.ImplicitTypeRef)
+        konst accessorSymbol = FirPropertyAccessorSymbol()
         var firValueParameters: FirValueParameter = buildDefaultSetterValueParameter {
             moduleData = baseModuleData
             containingFunctionSymbol = accessorSymbol
@@ -1449,14 +1449,14 @@ class DeclarationsConverter(
         if (accessorVisibility == Visibilities.Unknown) {
             accessorVisibility = propertyVisibility
         }
-        val status =
+        konst status =
             // Downward propagation of `inline` and `external` modifiers (from property to its accessors)
             FirDeclarationStatusImpl(accessorVisibility, modifiers.getModality(isClassOrObject = false)).apply {
                 isInline = propertyModifiers.hasInline() || modifiers.hasInline()
                 isExternal = propertyModifiers.hasExternal() || modifiers.hasExternal()
             }
-        val sourceElement = getterOrSetter.toFirSourceElement()
-        val accessorAdditionalAnnotations = propertyModifiers.annotations.filterUseSiteTarget(
+        konst sourceElement = getterOrSetter.toFirSourceElement()
+        konst accessorAdditionalAnnotations = propertyModifiers.annotations.filterUseSiteTarget(
             if (isGetter) PROPERTY_GETTER
             else PROPERTY_SETTER
         )
@@ -1477,7 +1477,7 @@ class DeclarationsConverter(
                     accessor.initContainingClassAttr()
                 }
         }
-        val target = FirFunctionTarget(labelName = null, isLambda = false)
+        konst target = FirFunctionTarget(labelName = null, isLambda = false)
         return buildPropertyAccessor {
             source = sourceElement
             moduleData = baseModuleData
@@ -1491,12 +1491,12 @@ class DeclarationsConverter(
             annotations += modifiers.annotations
 
             if (!isGetter) {
-                valueParameters += firValueParameters
+                konstueParameters += firValueParameters
             }
-            val allowLegacyContractDescription = outerContractDescription == null
-            val bodyWithContractDescription = convertFunctionBody(block, expression, allowLegacyContractDescription)
+            konst allowLegacyContractDescription = outerContractDescription == null
+            konst bodyWithContractDescription = convertFunctionBody(block, expression, allowLegacyContractDescription)
             this.body = bodyWithContractDescription.first
-            val contractDescription = outerContractDescription ?: bodyWithContractDescription.second
+            konst contractDescription = outerContractDescription ?: bodyWithContractDescription.second
             contractDescription?.let {
                 this.contractDescription = it
             }
@@ -1535,8 +1535,8 @@ class DeclarationsConverter(
         if (componentVisibility == Visibilities.Unknown) {
             componentVisibility = Visibilities.Private
         }
-        val status = obtainPropertyComponentStatus(componentVisibility, modifiers, propertyModifiers)
-        val sourceElement = this?.toFirSourceElement()
+        konst status = obtainPropertyComponentStatus(componentVisibility, modifiers, propertyModifiers)
+        konst sourceElement = this?.toFirSourceElement()
         return if (this != null) {
             buildBackingField {
                 source = sourceElement
@@ -1588,16 +1588,16 @@ class DeclarationsConverter(
 
     private fun extractRawEffects(rawContractDescription: LighterASTNode, destination: MutableList<FirExpression>) {
         rawContractDescription.forEachChildren {
-            val errorReason = "The contract effect is not an expression"
+            konst errorReason = "The contract effect is not an expression"
             when (it.tokenType) {
                 CONTRACT_EFFECT -> {
-                    val effect = it.getFirstChild()
+                    konst effect = it.getFirstChild()
                     if (effect == null) {
-                        val errorExpression =
+                        konst errorExpression =
                             buildErrorExpression(null, ConeSimpleDiagnostic(errorReason, DiagnosticKind.ExpressionExpected))
                         destination.add(errorExpression)
                     } else {
-                        val expression = expressionConverter.convertExpression(effect, errorReason)
+                        konst expression = expressionConverter.convertExpression(effect, errorReason)
                         destination.add(expression as FirExpression)
                     }
                 }
@@ -1650,11 +1650,11 @@ class DeclarationsConverter(
     fun convertFunctionDeclaration(functionDeclaration: LighterASTNode): FirStatement {
         var modifiers = Modifier()
         var identifier: String? = null
-        var valueParametersList: LighterASTNode? = null
+        var konstueParametersList: LighterASTNode? = null
         var isReturnType = false
         var receiverType: FirTypeRef? = null
         var returnType: FirTypeRef? = null
-        val typeConstraints = mutableListOf<TypeConstraint>()
+        konst typeConstraints = mutableListOf<TypeConstraint>()
         var block: LighterASTNode? = null
         var expression: LighterASTNode? = null
         var hasEqToken = false
@@ -1665,7 +1665,7 @@ class DeclarationsConverter(
                 MODIFIER_LIST -> modifiers = convertModifierList(it)
                 IDENTIFIER -> identifier = it.asText
                 TYPE_PARAMETER_LIST -> typeParameterList = it
-                VALUE_PARAMETER_LIST -> valueParametersList = it //must convert later, because it can contains "return"
+                VALUE_PARAMETER_LIST -> konstueParametersList = it //must convert later, because it can contains "return"
                 COLON -> isReturnType = true
                 TYPE_REFERENCE -> if (isReturnType) returnType = convertType(it) else receiverType = convertType(it)
                 TYPE_CONSTRAINT_LIST -> typeConstraints += convertTypeConstraints(it)
@@ -1682,13 +1682,13 @@ class DeclarationsConverter(
                 else implicitType
         }
 
-        val parentNode = functionDeclaration.getParent()
-        val isLocal = !(parentNode?.tokenType == KT_FILE || parentNode?.tokenType == CLASS_BODY)
-        val target: FirFunctionTarget
-        val functionSource = functionDeclaration.toFirSourceElement()
-        val functionSymbol: FirFunctionSymbol<*>
-        val isAnonymousFunction = identifier == null && isLocal
-        val functionBuilder = if (isAnonymousFunction) {
+        konst parentNode = functionDeclaration.getParent()
+        konst isLocal = !(parentNode?.tokenType == KT_FILE || parentNode?.tokenType == CLASS_BODY)
+        konst target: FirFunctionTarget
+        konst functionSource = functionDeclaration.toFirSourceElement()
+        konst functionSymbol: FirFunctionSymbol<*>
+        konst isAnonymousFunction = identifier == null && isLocal
+        konst functionBuilder = if (isAnonymousFunction) {
             functionSymbol = FirAnonymousFunctionSymbol()
             FirAnonymousFunctionBuilder().apply {
                 source = functionSource
@@ -1697,15 +1697,15 @@ class DeclarationsConverter(
                 isLambda = false
                 hasExplicitParameterList = true
                 label = context.getLastLabel(functionDeclaration)
-                val labelName = label?.name ?: context.calleeNamesForLambda.lastOrNull()?.identifier
+                konst labelName = label?.name ?: context.calleeNamesForLambda.lastOrNull()?.identifier
                 target = FirFunctionTarget(labelName = labelName, isLambda = false)
                 if (modifiers.hasSuspend()) {
                     status = FirResolvedDeclarationStatusImpl.DEFAULT_STATUS_FOR_SUSPEND_FUNCTION_EXPRESSION
                 }
             }
         } else {
-            val functionName = identifier.nameAsSafeName()
-            val labelName = context.getLastLabel(functionDeclaration)?.name ?: runIf(!functionName.isSpecial) { functionName.identifier }
+            konst functionName = identifier.nameAsSafeName()
+            konst labelName = context.getLastLabel(functionDeclaration)?.name ?: runIf(!functionName.isSpecial) { functionName.identifier }
             target = FirFunctionTarget(labelName, isLambda = false)
             functionSymbol = FirNamedFunctionSymbol(callableIdForName(functionName))
             FirSimpleFunctionBuilder().apply {
@@ -1733,10 +1733,10 @@ class DeclarationsConverter(
             }
         }
 
-        val firTypeParameters = mutableListOf<FirTypeParameter>()
+        konst firTypeParameters = mutableListOf<FirTypeParameter>()
         typeParameterList?.let { firTypeParameters += convertTypeParameters(it, typeConstraints, functionSymbol) }
 
-        val function = functionBuilder.apply {
+        konst function = functionBuilder.apply {
             moduleData = baseModuleData
             origin = FirDeclarationOrigin.Source
             returnTypeRef = returnType!!
@@ -1744,7 +1744,7 @@ class DeclarationsConverter(
             context.firFunctionTargets += target
             annotations += modifiers.annotations
 
-            val actualTypeParameters = if (this is FirSimpleFunctionBuilder) {
+            konst actualTypeParameters = if (this is FirSimpleFunctionBuilder) {
                 typeParameters += firTypeParameters
                 typeParameters
             } else {
@@ -1752,18 +1752,18 @@ class DeclarationsConverter(
             }
 
             withCapturedTypeParameters(true, functionSource, actualTypeParameters) {
-                valueParametersList?.let { list ->
-                    valueParameters += convertValueParameters(
+                konstueParametersList?.let { list ->
+                    konstueParameters += convertValueParameters(
                         list,
                         functionSymbol,
                         if (isAnonymousFunction) ValueParameterDeclaration.LAMBDA else ValueParameterDeclaration.FUNCTION
                     ).map { it.firValueParameter }
                 }
 
-                val allowLegacyContractDescription = outerContractDescription == null
-                val bodyWithContractDescription = convertFunctionBody(block, expression, allowLegacyContractDescription)
+                konst allowLegacyContractDescription = outerContractDescription == null
+                konst bodyWithContractDescription = convertFunctionBody(block, expression, allowLegacyContractDescription)
                 this.body = bodyWithContractDescription.first
-                val contractDescription = outerContractDescription ?: bodyWithContractDescription.second
+                konst contractDescription = outerContractDescription ?: bodyWithContractDescription.second
                 contractDescription?.let {
                     if (this is FirSimpleFunctionBuilder) {
                         this.contractDescription = it
@@ -1800,8 +1800,8 @@ class DeclarationsConverter(
     ): Pair<FirBlock?, FirContractDescription?> {
         return when {
             blockNode != null -> {
-                val block = convertBlock(blockNode)
-                val contractDescription = runIf(allowLegacyContractDescription) { processLegacyContractDescription(block) }
+                konst block = convertBlock(blockNode)
+                konst contractDescription = runIf(allowLegacyContractDescription) { processLegacyContractDescription(block) }
                 block to contractDescription
             }
             expression != null -> FirSingleExpressionBlock(
@@ -1835,15 +1835,15 @@ class DeclarationsConverter(
      */
     //TODO make wrapper for result?
     private data class DelegationSpecifiers(
-        val superTypeCalls: List<DelegatedConstructorWrapper>,
-        val superTypesRef: List<FirTypeRef>,
-        val delegateFieldsMap: Map<Int, FirFieldSymbol>,
+        konst superTypeCalls: List<DelegatedConstructorWrapper>,
+        konst superTypesRef: List<FirTypeRef>,
+        konst delegateFieldsMap: Map<Int, FirFieldSymbol>,
     )
 
     private fun convertDelegationSpecifiers(delegationSpecifiers: LighterASTNode): DelegationSpecifiers {
-        val superTypeRefs = mutableListOf<FirTypeRef>()
-        val superTypeCalls = mutableListOf<DelegatedConstructorWrapper>()
-        val delegateFieldsMap = mutableMapOf<Int, FirFieldSymbol>()
+        konst superTypeRefs = mutableListOf<FirTypeRef>()
+        konst superTypeCalls = mutableListOf<DelegatedConstructorWrapper>()
+        konst delegateFieldsMap = mutableMapOf<Int, FirFieldSymbol>()
         var index = 0
         delegationSpecifiers.forEachChildren {
             when (it.tokenType) {
@@ -1869,12 +1869,12 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseDelegationSpecifier
      *
      * constructorInvocation
-     *   : userType valueArguments
+     *   : userType konstueArguments
      *   ;
      */
     private fun convertConstructorInvocation(constructorInvocation: LighterASTNode): Pair<FirTypeRef, List<FirExpression>> {
         var firTypeRef: FirTypeRef = implicitType
-        val firValueArguments = mutableListOf<FirExpression>()
+        konst firValueArguments = mutableListOf<FirExpression>()
         constructorInvocation.forEachChildren {
             when (it.tokenType) {
                 CONSTRUCTOR_CALLEE -> firTypeRef = convertType(it)
@@ -1905,7 +1905,7 @@ class DeclarationsConverter(
             }
         }
 
-        val calculatedFirExpression = firExpression ?: buildErrorExpression(
+        konst calculatedFirExpression = firExpression ?: buildErrorExpression(
             explicitDelegation.toFirSourceElement(), ConeSyntaxDiagnostic("Should have delegate")
         )
 
@@ -1962,11 +1962,11 @@ class DeclarationsConverter(
         lateinit var firType: FirTypeRef
         lateinit var referenceExpression: LighterASTNode
 
-        val diagnostic = ConeSimpleDiagnostic(
+        konst diagnostic = ConeSimpleDiagnostic(
             "Type parameter annotations are not allowed inside where clauses", DiagnosticKind.AnnotationNotAllowed,
         )
 
-        val annotations = mutableListOf<FirAnnotation>()
+        konst annotations = mutableListOf<FirAnnotation>()
         typeConstraint.forEachChildren {
             when (it.tokenType) {
                 ANNOTATION_ENTRY -> annotations += convertAnnotationEntry(it, diagnostic = diagnostic)
@@ -2025,7 +2025,7 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseTypeRef
      */
     fun convertType(type: LighterASTNode): FirTypeRef {
-        val typeRefSource = type.toFirSourceElement()
+        konst typeRefSource = type.toFirSourceElement()
 
         // There can be MODIFIER_LIST children on the TYPE_REFERENCE node AND the descendant NULLABLE_TYPE nodes.
         // We aggregate them to get modifiers and annotations. Not only that, there could be multiple modifier lists on each. Examples:
@@ -2041,7 +2041,7 @@ class DeclarationsConverter(
         // 2. `(suspend @A () -> Int)?` is a nullable suspend function type but the modifier list is on the child NULLABLE_TYPE
         //
         // TODO: Report MODIFIER_LIST_NOT_ALLOWED error when there are multiple modifier lists. How do we report on each of them?
-        val allTypeModifiers = mutableListOf<TypeModifier>()
+        konst allTypeModifiers = mutableListOf<TypeModifier>()
 
         var firType: FirTypeRef? = null
         type.forEachChildren {
@@ -2064,7 +2064,7 @@ class DeclarationsConverter(
             }
         }
 
-        val calculatedFirType = firType ?: buildErrorTypeRef {
+        konst calculatedFirType = firType ?: buildErrorTypeRef {
             source = typeRefSource
             diagnostic = ConeSyntaxDiagnostic("Incomplete code")
         }
@@ -2078,7 +2078,7 @@ class DeclarationsConverter(
     private fun Collection<TypeModifier>.hasSuspend() = any { it.hasSuspend() }
 
     private fun convertIntersectionType(typeRefSource: KtSourceElement, intersectionType: LighterASTNode, isNullable: Boolean): FirTypeRef {
-        val children = arrayListOf<FirTypeRef>()
+        konst children = arrayListOf<FirTypeRef>()
         intersectionType.forEachChildren {
             if (it.tokenType != AND) { //skip in forEachChildren?
                 children.add(convertType(it))
@@ -2152,7 +2152,7 @@ class DeclarationsConverter(
         var simpleFirUserType: FirUserTypeRef? = null
         var identifier: String? = null
         var identifierSource: KtSourceElement? = null
-        val firTypeArguments = mutableListOf<FirTypeProjection>()
+        konst firTypeArguments = mutableListOf<FirTypeProjection>()
         var typeArgumentsSource: KtSourceElement? = null
         userType.forEachChildren {
             when (it.tokenType) {
@@ -2184,7 +2184,7 @@ class DeclarationsConverter(
             }
         }
 
-        val qualifierPart = FirQualifierPartImpl(
+        konst qualifierPart = FirQualifierPartImpl(
             identifierSource!!,
             identifier.nameAsSafeName(),
             FirTypeArgumentListImpl(typeArgumentsSource ?: typeRefSource).apply {
@@ -2251,7 +2251,7 @@ class DeclarationsConverter(
     ): FirTypeRef {
         var receiverTypeReference: FirTypeRef? = null
         lateinit var returnTypeReference: FirTypeRef
-        val parameters = mutableListOf<FirFunctionTypeParameter>()
+        konst parameters = mutableListOf<FirFunctionTypeParameter>()
         functionType.forEachChildren {
             when (it.tokenType) {
                 FUNCTION_TYPE_RECEIVER -> receiverTypeReference = convertReceiverType(it)
@@ -2303,14 +2303,14 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseValueParameterList
      */
     fun convertValueParameters(
-        valueParameters: LighterASTNode,
+        konstueParameters: LighterASTNode,
         functionSymbol: FirFunctionSymbol<*>,
-        valueParameterDeclaration: ValueParameterDeclaration,
+        konstueParameterDeclaration: ValueParameterDeclaration,
         additionalAnnotations: List<FirAnnotation> = emptyList()
     ): List<ValueParameter> {
-        return valueParameters.forEachChildrenReturnList { node, container ->
+        return konstueParameters.forEachChildrenReturnList { node, container ->
             when (node.tokenType) {
-                VALUE_PARAMETER -> container += convertValueParameter(node, functionSymbol, valueParameterDeclaration, additionalAnnotations)
+                VALUE_PARAMETER -> container += convertValueParameter(node, functionSymbol, konstueParameterDeclaration, additionalAnnotations)
             }
         }
     }
@@ -2319,9 +2319,9 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseValueParameter
      */
     fun convertValueParameter(
-        valueParameter: LighterASTNode,
+        konstueParameter: LighterASTNode,
         functionSymbol: FirFunctionSymbol<*>?,
-        valueParameterDeclaration: ValueParameterDeclaration,
+        konstueParameterDeclaration: ValueParameterDeclaration,
         additionalAnnotations: List<FirAnnotation> = emptyList()
     ): ValueParameter {
         var modifiers = Modifier()
@@ -2331,7 +2331,7 @@ class DeclarationsConverter(
         var firType: FirTypeRef? = null
         var firExpression: FirExpression? = null
         var destructuringDeclaration: DestructuringDeclaration? = null
-        valueParameter.forEachChildren {
+        konstueParameter.forEachChildren {
             when (it.tokenType) {
                 MODIFIER_LIST -> modifiers = convertModifierList(it)
                 VAL_KEYWORD -> isVal = true
@@ -2339,28 +2339,28 @@ class DeclarationsConverter(
                 IDENTIFIER -> identifier = it.asText
                 TYPE_REFERENCE -> firType = convertType(it)
                 DESTRUCTURING_DECLARATION -> destructuringDeclaration = convertDestructingDeclaration(it)
-                else -> if (it.isExpression()) firExpression = expressionConverter.getAsFirExpression(it, "Should have default value")
+                else -> if (it.isExpression()) firExpression = expressionConverter.getAsFirExpression(it, "Should have default konstue")
             }
         }
 
-        val name = convertValueParameterName(identifier.nameAsSafeName(), valueParameterDeclaration) { identifier }
+        konst name = convertValueParameterName(identifier.nameAsSafeName(), konstueParameterDeclaration) { identifier }
 
-        val valueParameterSource = valueParameter.toFirSourceElement()
+        konst konstueParameterSource = konstueParameter.toFirSourceElement()
         return ValueParameter(
             isVal = isVal,
             isVar = isVar,
             modifiers = modifiers,
             returnTypeRef = firType
                 ?: when {
-                    valueParameterDeclaration == ValueParameterDeclaration.LAMBDA -> buildImplicitTypeRef {
-                        source = valueParameterSource.fakeElement(KtFakeSourceElementKind.ImplicitReturnTypeOfLambdaValueParameter)
+                    konstueParameterDeclaration == ValueParameterDeclaration.LAMBDA -> buildImplicitTypeRef {
+                        source = konstueParameterSource.fakeElement(KtFakeSourceElementKind.ImplicitReturnTypeOfLambdaValueParameter)
                     }
-                    valueParameterDeclaration.shouldExplicitParameterTypeBePresent -> createNoTypeForParameterTypeRef()
+                    konstueParameterDeclaration.shouldExplicitParameterTypeBePresent -> createNoTypeForParameterTypeRef()
                     else -> implicitType
                 },
-            source = valueParameterSource,
+            source = konstueParameterSource,
             moduleData = baseModuleData,
-            isFromPrimaryConstructor = valueParameterDeclaration == ValueParameterDeclaration.PRIMARY_CONSTRUCTOR,
+            isFromPrimaryConstructor = konstueParameterDeclaration == ValueParameterDeclaration.PRIMARY_CONSTRUCTOR,
             additionalAnnotations = additionalAnnotations,
             name = name,
             defaultValue = firExpression,
@@ -2374,9 +2374,9 @@ class DeclarationsConverter(
         typeConstraints: List<TypeConstraint>,
         to: T
     ) where T : FirDeclaration, T : FirTypeParameterRefsOwner {
-        val typeParamNames = typeParameters.map { it.name }.toSet()
-        val result = typeConstraints.mapNotNull { constraint ->
-            val name = constraint.identifier.nameAsSafeName()
+        konst typeParamNames = typeParameters.map { it.name }.toSet()
+        konst result = typeConstraints.mapNotNull { constraint ->
+            konst name = constraint.identifier.nameAsSafeName()
             if (!typeParamNames.contains(name)) {
                 DanglingTypeConstraint(name, constraint.source)
             } else {
@@ -2390,7 +2390,7 @@ class DeclarationsConverter(
     }
 
     private fun convertContextReceivers(container: LighterASTNode): List<FirContextReceiver> {
-        val receivers = container.getChildNodeByType(CONTEXT_RECEIVER_LIST)?.getChildNodesByType(CONTEXT_RECEIVER) ?: emptyList()
+        konst receivers = container.getChildNodeByType(CONTEXT_RECEIVER_LIST)?.getChildNodesByType(CONTEXT_RECEIVER) ?: emptyList()
         return receivers.map { contextReceiverElement ->
             buildContextReceiver {
                 this.source = contextReceiverElement.toFirSourceElement()
@@ -2401,7 +2401,7 @@ class DeclarationsConverter(
                         ?.getChildNodeByType(IDENTIFIER)
                         ?.getReferencedNameAsName()
 
-                val typeReference = contextReceiverElement.getChildNodeByType(TYPE_REFERENCE)
+                konst typeReference = contextReceiverElement.getChildNodeByType(TYPE_REFERENCE)
 
                 this.labelNameFromTypeRef = typeReference?.getChildNodeByType(USER_TYPE)
                     ?.getChildNodeByType(REFERENCE_EXPRESSION)

@@ -19,18 +19,18 @@ package custom.pkg
 annotation class A
 
 class Foo {
-    val simple = 0
+    konst simple = 0
 
-    private val privateSimple = 0
+    private konst privateSimple = 0
 
-    protected val protectedSimple = 0
+    protected konst protectedSimple = 0
 
     var privateSetter = 0
         private set
 
-    @A val annotated = 0
+    @A konst annotated = 0
 
-    val annotatedGetter = 0
+    konst annotatedGetter = 0
         @A get
 
     var annotatedSetter = 0

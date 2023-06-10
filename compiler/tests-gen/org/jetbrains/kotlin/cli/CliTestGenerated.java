@@ -215,9 +215,9 @@ public class CliTestGenerated extends AbstractCliTest {
             runTest("compiler/testData/cli/jvm/apiVersionGreaterThanLanguage.args");
         }
 
-        @TestMetadata("apiVersionInvalid.args")
-        public void testApiVersionInvalid() throws Exception {
-            runTest("compiler/testData/cli/jvm/apiVersionInvalid.args");
+        @TestMetadata("apiVersionInkonstid.args")
+        public void testApiVersionInkonstid() throws Exception {
+            runTest("compiler/testData/cli/jvm/apiVersionInkonstid.args");
         }
 
         @TestMetadata("apiVersionLessThanLanguage.args")
@@ -685,9 +685,9 @@ public class CliTestGenerated extends AbstractCliTest {
             runTest("compiler/testData/cli/jvm/internalArgumentOverrideExtraArgument.args");
         }
 
-        @TestMetadata("invalidMetadataVersion.args")
-        public void testInvalidMetadataVersion() throws Exception {
-            runTest("compiler/testData/cli/jvm/invalidMetadataVersion.args");
+        @TestMetadata("inkonstidMetadataVersion.args")
+        public void testInkonstidMetadataVersion() throws Exception {
+            runTest("compiler/testData/cli/jvm/inkonstidMetadataVersion.args");
         }
 
         @TestMetadata("javaSealedClass.args")
@@ -910,9 +910,9 @@ public class CliTestGenerated extends AbstractCliTest {
             runTest("compiler/testData/cli/jvm/languageVersion.args");
         }
 
-        @TestMetadata("languageVersionInvalid.args")
-        public void testLanguageVersionInvalid() throws Exception {
-            runTest("compiler/testData/cli/jvm/languageVersionInvalid.args");
+        @TestMetadata("languageVersionInkonstid.args")
+        public void testLanguageVersionInkonstid() throws Exception {
+            runTest("compiler/testData/cli/jvm/languageVersionInkonstid.args");
         }
 
         @TestMetadata("languageVersionUnsupported.args")
@@ -1521,9 +1521,9 @@ public class CliTestGenerated extends AbstractCliTest {
             runTest("compiler/testData/cli/js-dce/includeDeclarations.args");
         }
 
-        @TestMetadata("invalidFilename.args")
-        public void testInvalidFilename() throws Exception {
-            runTest("compiler/testData/cli/js-dce/invalidFilename.args");
+        @TestMetadata("inkonstidFilename.args")
+        public void testInkonstidFilename() throws Exception {
+            runTest("compiler/testData/cli/js-dce/inkonstidFilename.args");
         }
 
         @TestMetadata("nonExistingSourcePath.args")

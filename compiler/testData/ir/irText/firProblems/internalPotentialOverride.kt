@@ -6,7 +6,7 @@
 open class A {
     internal open fun foo() : Int = 1
 
-    internal open val bar: Int = 1
+    internal open konst bar: Int = 1
 }
 
 // MODULE: m2(m1)
@@ -15,5 +15,5 @@ open class A {
 class B : A() {
     fun foo() : String = "OK"
 
-    val bar: Int = 2
+    konst bar: Int = 2
 }

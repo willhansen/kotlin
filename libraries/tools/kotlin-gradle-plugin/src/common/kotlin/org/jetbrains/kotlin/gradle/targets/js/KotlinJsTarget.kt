@@ -51,14 +51,14 @@ constructor(
         internal set
 
     override var moduleName: String? = null
-        set(value) {
+        set(konstue) {
             check(!isBrowserConfigured && !isNodejsConfigured) {
                 "Please set moduleName before initialize browser() or nodejs()"
             }
-            field = value
+            field = konstue
         }
 
-    internal val commonFakeApiElementsConfigurationName: String
+    internal konst commonFakeApiElementsConfigurationName: String
         get() = lowerCamelCaseName(
             irTarget?.let {
                 this.disambiguationClassifierInPlatform
@@ -66,23 +66,23 @@ constructor(
             "commonFakeApiElements"
         )
 
-    val disambiguationClassifierInPlatform: String?
+    konst disambiguationClassifierInPlatform: String?
         get() = if (irTarget != null) {
             disambiguationClassifier?.removeJsCompilerSuffix(LEGACY)
         } else {
             disambiguationClassifier
         }
 
-    override val kotlinComponents: Set<KotlinTargetComponent> by lazy {
+    override konst kotlinComponents: Set<KotlinTargetComponent> by lazy {
         if (irTarget == null)
             super.kotlinComponents
         else {
-            val mainCompilation = compilations.getByName(MAIN_COMPILATION_NAME)
-            val usageContexts = createUsageContexts(mainCompilation).toMutableSet()
+            konst mainCompilation = compilations.getByName(MAIN_COMPILATION_NAME)
+            konst usageContexts = createUsageContexts(mainCompilation).toMutableSet()
 
             usageContexts += irTarget!!.createUsageContexts(irTarget!!.compilations.getByName(MAIN_COMPILATION_NAME))
 
-            val componentName =
+            konst componentName =
                 if (project.kotlinExtension is KotlinMultiplatformExtension)
                     irTarget?.let { targetName.removeJsCompilerSuffix(LEGACY) } ?: targetName
                 else PRIMARY_SINGLE_COMPONENT_NAME
@@ -96,14 +96,14 @@ constructor(
                 )
             )
 
-            val result = createKotlinVariant(componentName, mainCompilation, usageContexts)
+            konst result = createKotlinVariant(componentName, mainCompilation, usageContexts)
 
             setOf(result)
         }
     }
 
     override fun createUsageContexts(producingCompilation: KotlinCompilation<*>): Set<DefaultKotlinUsageContext> {
-        val usageContexts = super.createUsageContexts(producingCompilation)
+        konst usageContexts = super.createUsageContexts(producingCompilation)
 
         if (isMpp!!) return usageContexts
 
@@ -128,7 +128,7 @@ constructor(
         }
     }
 
-    override val binaries: KotlinJsBinaryContainer
+    override konst binaries: KotlinJsBinaryContainer
         get() = compilations.withType(KotlinJsCompilation::class.java)
             .named(MAIN_COMPILATION_NAME)
             .map { it.binaries }
@@ -140,24 +140,24 @@ constructor(
     open var isMpp: Boolean? = null
         internal set
 
-    val testTaskName get() = testRuns.getByName(KotlinTargetWithTests.DEFAULT_TEST_RUN_NAME).testTaskName
-    val testTask: TaskProvider<KotlinTestReport>
+    konst testTaskName get() = testRuns.getByName(KotlinTargetWithTests.DEFAULT_TEST_RUN_NAME).testTaskName
+    konst testTask: TaskProvider<KotlinTestReport>
         get() = checkNotNull(project.locateTask(testTaskName))
 
-    val runTaskName get() = lowerCamelCaseName(disambiguationClassifier, runTaskNameSuffix)
-    val runTask: TaskProvider<Task>
+    konst runTaskName get() = lowerCamelCaseName(disambiguationClassifier, runTaskNameSuffix)
+    konst runTask: TaskProvider<Task>
         get() = project.locateOrRegisterTask(runTaskName) {
             it.description = "Run js on all configured platforms"
         }
 
-    private val propertiesProvider = PropertiesProvider(project)
+    private konst propertiesProvider = PropertiesProvider(project)
 
-    private val commonLazy by lazy {
+    private konst commonLazy by lazy {
         NpmResolverPlugin.apply(project)
     }
 
     //Browser
-    private val browserLazyDelegate = lazy {
+    private konst browserLazyDelegate = lazy {
         commonLazy
         project.objects.newInstance(KotlinBrowserJs::class.java, this).also {
             it.configure()
@@ -173,11 +173,11 @@ constructor(
         }
     }
 
-    private val browserConfiguredHandlers = mutableListOf<KotlinJsBrowserDsl.() -> Unit>()
+    private konst browserConfiguredHandlers = mutableListOf<KotlinJsBrowserDsl.() -> Unit>()
 
-    override val browser by browserLazyDelegate
+    override konst browser by browserLazyDelegate
 
-    override val isBrowserConfigured: Boolean
+    override konst isBrowserConfigured: Boolean
         get() = browserLazyDelegate.isInitialized()
 
     override fun browser(body: KotlinJsBrowserDsl.() -> Unit) {
@@ -186,7 +186,7 @@ constructor(
     }
 
     //node.js
-    private val nodejsLazyDelegate = lazy {
+    private konst nodejsLazyDelegate = lazy {
         commonLazy
         project.objects.newInstance(KotlinNodeJs::class.java, this).also {
             it.configure()
@@ -203,11 +203,11 @@ constructor(
         }
     }
 
-    private val nodejsConfiguredHandlers = mutableListOf<KotlinJsNodeDsl.() -> Unit>()
+    private konst nodejsConfiguredHandlers = mutableListOf<KotlinJsNodeDsl.() -> Unit>()
 
-    override val nodejs by nodejsLazyDelegate
+    override konst nodejs by nodejsLazyDelegate
 
-    override val isNodejsConfigured: Boolean
+    override konst isNodejsConfigured: Boolean
         get() = nodejsLazyDelegate.isInitialized()
 
     override fun nodejs(body: KotlinJsNodeDsl.() -> Unit) {

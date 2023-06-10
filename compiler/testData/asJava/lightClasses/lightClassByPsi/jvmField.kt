@@ -1,12 +1,12 @@
 class A {
     @JvmField
-    val a: Collection<*> = emptyList()
+    konst a: Collection<*> = emptyList()
     @JvmField
     var b: Int = 1
 
     companion object {
         @JvmField
-        val c: Collection<*> = emptyList()
+        konst c: Collection<*> = emptyList()
         @JvmField
         var d: Int = 1
     }
@@ -15,13 +15,13 @@ class A {
 interface B {
     companion object {
         @JvmField
-        val a: Collection<*> = emptyList()
+        konst a: Collection<*> = emptyList()
     }
 }
 
 class C(
     @JvmField
-    val a: Collection<*> = emptyList(),
+    konst a: Collection<*> = emptyList(),
     @JvmField
     var b: Int = 1
 )

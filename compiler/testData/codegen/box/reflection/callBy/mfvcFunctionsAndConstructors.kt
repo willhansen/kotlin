@@ -6,8 +6,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 @JvmInline
-value class S(val value1: UInt, val value2: String) {
-    operator fun plus(other: S): S = S(this.value1 * 10U + other.value1, this.value2 + other.value2)
+konstue class S(konst konstue1: UInt, konst konstue2: String) {
+    operator fun plus(other: S): S = S(this.konstue1 * 10U + other.konstue1, this.konstue2 + other.konstue2)
 }
 
 class C {
@@ -17,7 +17,7 @@ class C {
 fun topLevel(c: S, d: S = S(1U, "d2")): S = c + d
 
 class D(e: S, f: S = S(1U, "f2")) {
-    val result = e + f
+    konst result = e + f
 }
 
 fun S.extension(h: S = S(1U, "h2")): S = this + h
@@ -37,16 +37,16 @@ fun box(): String {
     assertEquals(S(11U, "g2h2"), S(1U, "g2").extension())
     assertEquals(S(11U, "g2h2"), S::extension.callBy(S::extension.parameters.filter { it.name != "h" }.associateWith { S(1U, "g2") }))
 
-    val boundMember = C()::member
+    konst boundMember = C()::member
     assertEquals(S(11U, "a2b2"), boundMember.callBy(boundMember.parameters.associateWith { S(1U, it.name!! + "2") }))
 
-    val boundExtension = S(1U, "g2")::extension
+    konst boundExtension = S(1U, "g2")::extension
     assertEquals(S(11U, "g2h2"), boundExtension.callBy(boundExtension.parameters.associateWith { S(1U, it.name!! + "2") }))
 
-    val mfvcConstructor = ::S
-    val exception = runCatching { mfvcConstructor.callBy(mapOf(mfvcConstructor.parameters.first() to 1U)) }.exceptionOrNull()!!
+    konst mfvcConstructor = ::S
+    konst exception = runCatching { mfvcConstructor.callBy(mapOf(mfvcConstructor.parameters.first() to 1U)) }.exceptionOrNull()!!
     assertTrue(exception is IllegalArgumentException)
-    assertTrue(exception.message!!.startsWith("No argument provided for a required parameter: parameter #1 value2 of fun `<init>`(kotlin.UInt, kotlin.String): "), exception.message)
+    assertTrue(exception.message!!.startsWith("No argument provided for a required parameter: parameter #1 konstue2 of fun `<init>`(kotlin.UInt, kotlin.String): "), exception.message)
     assertTrue(exception.message!!.endsWith("S"), exception.message)
     
     return "OK"

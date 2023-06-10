@@ -2,7 +2,7 @@
 // FILE: propertyReferences.kt
 object Delegate {
     operator fun getValue(thisRef: Any?, kProp: Any) = 1
-    operator fun setValue(thisRef: Any?, kProp: Any, value: Int) {}
+    operator fun setValue(thisRef: Any?, kProp: Any, konstue: Int) {}
 }
 
 open class C {
@@ -12,48 +12,48 @@ open class C {
         protected set
 }
 
-val valWithBackingField = 1
+konst konstWithBackingField = 1
 
-val test_valWithBackingField = ::valWithBackingField
+konst test_konstWithBackingField = ::konstWithBackingField
 
 var varWithBackingField = 1
 
-val test_varWithBackingField = ::varWithBackingField
+konst test_varWithBackingField = ::varWithBackingField
 
 var varWithBackingFieldAndAccessors = 1
     get() = field
-    set(value) { field = value }
+    set(konstue) { field = konstue }
 
-val test_varWithBackingFieldAndAccessors = ::varWithBackingFieldAndAccessors
+konst test_varWithBackingFieldAndAccessors = ::varWithBackingFieldAndAccessors
 
-val valWithAccessors
+konst konstWithAccessors
     get() = 1
 
-val test_valWithAccessors = ::valWithAccessors
+konst test_konstWithAccessors = ::konstWithAccessors
 
 var varWithAccessors
     get() = 1
-    set(value) {}
+    set(konstue) {}
 
-val test_varWithAccessors = ::varWithAccessors
+konst test_varWithAccessors = ::varWithAccessors
 
-val delegatedVal by Delegate
+konst delegatedVal by Delegate
 
-val test_delegatedVal = ::delegatedVal
+konst test_delegatedVal = ::delegatedVal
 
 var delegatedVar by Delegate
 
-val test_delegatedVar = ::delegatedVar
+konst test_delegatedVar = ::delegatedVar
 
-val constVal = 1
+konst constVal = 1
 
-val test_constVal = ::constVal
+konst test_constVal = ::constVal
 
-val test_J_CONST = J::CONST
-val test_J_nonConst = J::nonConst
+konst test_J_CONST = J::CONST
+konst test_J_nonConst = J::nonConst
 
-val test_varWithPrivateSet = C::varWithPrivateSet
-val test_varWithProtectedSet = C::varWithProtectedSet
+konst test_varWithPrivateSet = C::varWithPrivateSet
+konst test_varWithProtectedSet = C::varWithProtectedSet
 
 // FILE: J.java
 public class J {

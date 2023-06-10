@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.psi.KtForExpression
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 import org.jetbrains.org.objectweb.asm.Type
 
-class CharSequenceRangeValue(private val canCacheLength: Boolean, private val charSequenceClassType: Type?) : RangeValue {
+class CharSequenceRangeValue(private konst canCacheLength: Boolean, private konst charSequenceClassType: Type?) : RangeValue {
     override fun createForLoopGenerator(codegen: ExpressionCodegen, forExpression: KtForExpression) =
         ForInCharSequenceLoopGenerator(codegen, forExpression, canCacheLength, charSequenceClassType)
 

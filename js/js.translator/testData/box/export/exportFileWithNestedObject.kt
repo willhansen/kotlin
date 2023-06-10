@@ -15,7 +15,7 @@ class Abc {
     companion object AbcCompanion {
         fun xyz(): String = "Companion object method OK"
 
-        val prop: String
+        konst prop: String
             get() = "Companion object property OK"
     }
 }
@@ -24,12 +24,12 @@ class Foo {
     companion object {
         fun xyz(): String = "Companion object method OK"
 
-        val prop: String
+        konst prop: String
             get() = "Companion object property OK"
     }
 }
 
-sealed class MyEnum(val name: String) {
+sealed class MyEnum(konst name: String) {
     object A: MyEnum("A")
     object B: MyEnum("B")
     object C: MyEnum("C")
@@ -37,13 +37,13 @@ sealed class MyEnum(val name: String) {
 
 object MyObject {
     object A {
-        fun valueA() = "OK"
+        fun konstueA() = "OK"
     }
     object B {
-        fun valueB() = "OK"
+        fun konstueB() = "OK"
     }
     object C {
-        fun valueC() = "OK"
+        fun konstueC() = "OK"
     }
 }
 
@@ -64,9 +64,9 @@ function box() {
     if (nestedObjectExport.MyEnum.B.name != 'B') return 'MyEnum.B failure';
     if (nestedObjectExport.MyEnum.C.name != 'C') return 'MyEnum.C failure';
 
-    if (nestedObjectExport.MyObject.A.valueA() != "OK") return 'MyObject.A failure';
-    if (nestedObjectExport.MyObject.B.valueB() != "OK") return 'MyObject.B failure';
-    if (nestedObjectExport.MyObject.C.valueC() != "OK") return 'MyObject.C failure';
+    if (nestedObjectExport.MyObject.A.konstueA() != "OK") return 'MyObject.A failure';
+    if (nestedObjectExport.MyObject.B.konstueB() != "OK") return 'MyObject.B failure';
+    if (nestedObjectExport.MyObject.C.konstueC() != "OK") return 'MyObject.C failure';
 
     return 'OK';
 }

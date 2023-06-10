@@ -23,16 +23,16 @@ import org.jetbrains.kotlin.analysis.api.types.KtType
 import org.jetbrains.kotlin.fir.symbols.impl.FirAnonymousObjectSymbol
 
 internal class KtFirAnonymousObjectSymbol(
-    override val firSymbol: FirAnonymousObjectSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirAnonymousObjectSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtAnonymousObjectSymbol(), KtFirSymbol<FirAnonymousObjectSymbol> {
-    override val psi: PsiElement? = withValidityAssertion { firSymbol.fir.getAllowedPsi() }
+    override konst psi: PsiElement? = withValidityAssertion { firSymbol.fir.getAllowedPsi() }
 
-    override val annotationsList by cached {
+    override konst annotationsList by cached {
         KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
     }
 
-    override val superTypes: List<KtType> by cached { firSymbol.superTypesList(builder) }
+    override konst superTypes: List<KtType> by cached { firSymbol.superTypesList(builder) }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtAnonymousObjectSymbol> = withValidityAssertion {

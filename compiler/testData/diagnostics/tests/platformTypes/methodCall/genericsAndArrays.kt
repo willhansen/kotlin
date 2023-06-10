@@ -20,6 +20,6 @@ public class Ref<T> {
 import p.*
 
 fun main(j: J<String>) {
-    val r = Ref.create<Array<String>>()
+    konst r = Ref.create<Array<String>>()
     j.foo(r)
 }

@@ -26,7 +26,7 @@ import java.io.File
  * Used for assertions in tests.
  */
 interface TestingBuildLogger {
-    fun invalidOrUnusedCache(chunk: KotlinChunk?, target: KotlinModuleBuildTarget<*>?, attributesDiff: CacheAttributesDiff<*>) = Unit
+    fun inkonstidOrUnusedCache(chunk: KotlinChunk?, target: KotlinModuleBuildTarget<*>?, attributesDiff: CacheAttributesDiff<*>) = Unit
     fun chunkBuildStarted(context: CompileContext, chunk: org.jetbrains.jps.ModuleChunk) = Unit
     fun afterChunkBuildStarted(context: CompileContext, chunk: org.jetbrains.jps.ModuleChunk) = Unit
     fun markedAsComplementaryFiles(files: Collection<File>) = Unit

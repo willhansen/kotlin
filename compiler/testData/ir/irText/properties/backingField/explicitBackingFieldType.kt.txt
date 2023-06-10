@@ -5,11 +5,11 @@ class A {
 
   }
 
-  val a: Int
+  konst a: Int
     field = 20
     get
 
-  val it: Int
+  konst it: Int
     field = 4
     get
 
@@ -23,7 +23,7 @@ class A {
     }
     set
 
-  val p: Int
+  konst p: Int
     field = 5
     get(): Int {
       return <this>.#p

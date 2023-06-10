@@ -6,7 +6,7 @@ interface KtLifetimeToken {
 }
 
 interface KtLifetimeTokenOwner {
-    val token: KtLifetimeToken
+    konst token: KtLifetimeToken
 }
 
 <!NOTHING_TO_INLINE!>inline<!> fun KtLifetimeTokenOwner.assertIsValid() {
@@ -19,15 +19,15 @@ inline fun <R> KtLifetimeTokenOwner.withValidityAssertion(action: () -> R): R {
 }
 
 class ValidityAwareCachedValue<T>(
-    private val token: KtLifetimeToken,
+    private konst token: KtLifetimeToken,
     init: () -> T
 ) : ReadOnlyProperty<Any, T> {
-    private val lazyValue = lazy(LazyThreadSafetyMode.PUBLICATION, init)
+    private konst lazyValue = lazy(LazyThreadSafetyMode.PUBLICATION, init)
 
     @Suppress("UNCHECKED_CAST")
     override fun getValue(thisRef: Any, property: KProperty<*>): T {
         token.assertIsValid()
-        return lazyValue.value
+        return lazyValue.konstue
     }
 }
 
@@ -36,11 +36,11 @@ internal fun <T> KtLifetimeTokenOwner.cached(init: () -> T) = ValidityAwareCache
 public typealias KtScopeNameFilter = (String) -> Boolean
 
 abstract class KtFirNonStarImportingScope(
-    private val firScope: FirScope,
-    private val builder: KtSymbolByFirBuilder,
-    override val token: KtLifetimeToken,
+    private konst firScope: FirScope,
+    private konst builder: KtSymbolByFirBuilder,
+    override konst token: KtLifetimeToken,
 ) : KtLifetimeTokenOwner {
-    private val imports: List<String> by cached {
+    private konst imports: List<String> by cached {
         buildList {
             getCallableNames().forEach {
                 add(it)

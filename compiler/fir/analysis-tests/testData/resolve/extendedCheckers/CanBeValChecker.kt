@@ -8,11 +8,11 @@ fun testDelegator() {
     var <!UNUSED_VARIABLE!>y<!> by LocalFreezableVar("")
 }
 
-class LocalFreezableVar<T>(private var value: T)  {
-    operator fun getValue(thisRef: Nothing?, property: KProperty<*>): T  = value
+class LocalFreezableVar<T>(private var konstue: T)  {
+    operator fun getValue(thisRef: Nothing?, property: KProperty<*>): T  = konstue
 
-    operator fun setValue(thisRef: Nothing?, property: KProperty<*>, value: T) {
-        this.value = value
+    operator fun setValue(thisRef: Nothing?, property: KProperty<*>, konstue: T) {
+        this.konstue = konstue
     }
 }
 
@@ -21,7 +21,7 @@ operator fun C.plus(a: Any): C = this
 operator fun C.plusAssign(a: Any) {}
 
 fun testOperatorAssignment() {
-    val c = C()
+    konst c = C()
     c += ""
     <!CAN_BE_VAL!>var<!> c1 = C()
     c1 <!ASSIGN_OPERATOR_AMBIGUITY!>+=<!> ""
@@ -47,7 +47,7 @@ fun destructuringDeclaration() {
     <!ASSIGNED_VALUE_IS_NEVER_READ!>v7<!> = 2
     <!ASSIGNED_VALUE_IS_NEVER_READ!>v8<!> = "42"
 
-    val (<!UNUSED_VARIABLE!>a<!>, <!UNUSED_VARIABLE!>b<!>, <!UNUSED_VARIABLE!>c<!>) = Triple(1, 1, 1)
+    konst (<!UNUSED_VARIABLE!>a<!>, <!UNUSED_VARIABLE!>b<!>, <!UNUSED_VARIABLE!>c<!>) = Triple(1, 1, 1)
 
     <!CAN_BE_VAL!>var<!> (<!UNUSED_VARIABLE!>x<!>, <!UNUSED_VARIABLE!>y<!>, <!UNUSED_VARIABLE!>z<!>) = Triple(1, 1, 1)
 }
@@ -77,7 +77,7 @@ fun withAnnotation(p: List<Any>) {
 }
 
 fun withReadonlyDeligate() {
-    val s: String by lazy { "Hello!" }
+    konst s: String by lazy { "Hello!" }
     s.hashCode()
 }
 
@@ -103,9 +103,9 @@ fun test() {
 
 fun foo() {
     <!CAN_BE_VAL!>var<!> <!VARIABLE_NEVER_READ!>a<!>: Int
-    val bool = true
+    konst bool = true
     if (bool) <!ASSIGNED_VALUE_IS_NEVER_READ!>a<!> = 4 else <!ASSIGNED_VALUE_IS_NEVER_READ!>a<!> = 42
-    val <!VARIABLE_NEVER_READ!>b<!>: String
+    konst <!VARIABLE_NEVER_READ!>b<!>: String
 
     <!ASSIGNED_VALUE_IS_NEVER_READ!>b<!> = <!ASSIGNMENT_TYPE_MISMATCH!>false<!>
 }
@@ -131,7 +131,7 @@ fun assignedTwice(p: Int) {
 
 fun main(args: Array<String?>) {
     <!CAN_BE_VAL!>var<!> a: String?
-    val <!UNUSED_VARIABLE!>unused<!> = 0
+    konst <!UNUSED_VARIABLE!>unused<!> = 0
 
     if (args.size == 1) {
         <!ASSIGNED_VALUE_IS_NEVER_READ!>a<!> = args[0]

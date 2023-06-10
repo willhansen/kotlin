@@ -7,7 +7,7 @@ inline fun foo(i: Int) = i.toFloat()
 import test.*
 
 fun box(): String {
-    val captured = 1.0f
-    val result = 1.let { captured + foo(it) }
+    konst captured = 1.0f
+    konst result = 1.let { captured + foo(it) }
     return if (result == 2.0f) "OK" else "Fail: $result"
 }

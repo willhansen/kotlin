@@ -33,7 +33,7 @@
         var TypedArray = arrays[i];
         if (typeof TypedArray.prototype.slice === "undefined") {
             Object.defineProperty(TypedArray.prototype, 'slice', {
-                value: typedArraySlice
+                konstue: typedArraySlice
             });
         }
     }

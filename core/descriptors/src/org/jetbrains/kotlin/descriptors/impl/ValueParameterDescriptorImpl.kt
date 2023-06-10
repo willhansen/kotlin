@@ -26,21 +26,21 @@ import org.jetbrains.kotlin.utils.join
 open class ValueParameterDescriptorImpl(
         containingDeclaration: CallableDescriptor,
         original: ValueParameterDescriptor?,
-        override val index: Int,
+        override konst index: Int,
         annotations: Annotations,
         name: Name,
         outType: KotlinType,
-        private val declaresDefaultValue: Boolean,
-        override val isCrossinline: Boolean,
-        override val isNoinline: Boolean,
-        override val varargElementType: KotlinType?,
+        private konst declaresDefaultValue: Boolean,
+        override konst isCrossinline: Boolean,
+        override konst isNoinline: Boolean,
+        override konst varargElementType: KotlinType?,
         source: SourceElement
 ) : VariableDescriptorImpl(containingDeclaration, annotations, name, outType, source), ValueParameterDescriptor {
 
     companion object {
         @JvmStatic
-        fun getDestructuringVariablesOrNull(valueParameterDescriptor: ValueParameterDescriptor) =
-                (valueParameterDescriptor as? ValueParameterDescriptorImpl.WithDestructuringDeclaration)?.destructuringVariables
+        fun getDestructuringVariablesOrNull(konstueParameterDescriptor: ValueParameterDescriptor) =
+                (konstueParameterDescriptor as? ValueParameterDescriptorImpl.WithDestructuringDeclaration)?.destructuringVariables
 
         @JvmStatic
         fun createWithDestructuringDeclarations(containingDeclaration: CallableDescriptor,
@@ -79,9 +79,9 @@ open class ValueParameterDescriptorImpl(
             isCrossinline, isNoinline,
             varargElementType, source) {
         // It's forced to be lazy because its resolution depends on receiver of relevant lambda, that is being created at the same moment
-        // as value parameters.
+        // as konstue parameters.
         // Must be forced via ForceResolveUtil.forceResolveAllContents()
-        val destructuringVariables by lazy(destructuringVariables)
+        konst destructuringVariables by lazy(destructuringVariables)
 
         override fun copy(newOwner: CallableDescriptor, newName: Name, newIndex: Int): ValueParameterDescriptor {
             return WithDestructuringDeclaration(
@@ -91,7 +91,7 @@ open class ValueParameterDescriptorImpl(
         }
     }
 
-    private val original: ValueParameterDescriptor = original ?: this
+    private konst original: ValueParameterDescriptor = original ?: this
 
     override fun getContainingDeclaration() = super.getContainingDeclaration() as CallableDescriptor
 
@@ -127,7 +127,7 @@ open class ValueParameterDescriptorImpl(
 
     override fun getOverriddenDescriptors(): Collection<ValueParameterDescriptor> {
         return containingDeclaration.overriddenDescriptors.map {
-            it.valueParameters[index]
+            it.konstueParameters[index]
         }
     }
 }

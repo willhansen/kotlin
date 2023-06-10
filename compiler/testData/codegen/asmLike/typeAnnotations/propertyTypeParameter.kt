@@ -5,7 +5,7 @@
 package foo
 
 @Target(AnnotationTarget.TYPE)
-annotation class TypeAnn(val name: String)
+annotation class TypeAnn(konst name: String)
 
 @Target( AnnotationTarget.TYPE_PARAMETER)
 annotation class TypeParameterAnn()
@@ -16,5 +16,5 @@ class Kotlin {
 
     var <@TypeParameterAnn T: @TypeAnn("Simple") Simple> T.z: T?
         get() = null
-        set(value) {}
+        set(konstue) {}
 }

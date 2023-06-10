@@ -11,9 +11,9 @@ fun test() {
 
 fun test2() {
     var width = 1L
-    val newValue = 1;
-    val newValue2 = "123";
-    val newValue3 = 2.0;
+    konst newValue = 1;
+    konst newValue2 = "123";
+    konst newValue3 = 2.0;
     inlineCall {
         width += width
     }

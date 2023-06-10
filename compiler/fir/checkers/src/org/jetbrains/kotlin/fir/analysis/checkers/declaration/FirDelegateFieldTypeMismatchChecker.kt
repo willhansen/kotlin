@@ -22,10 +22,10 @@ object FirDelegateFieldTypeMismatchChecker : FirRegularClassChecker() {
     @SymbolInternals
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
         for (it in declaration.superTypeRefs.indices) {
-            val supertype = declaration.superTypeRefs[it]
-            val field = declaration.delegateFieldsMap?.get(it)?.fir ?: continue
-            val initializer = field.initializer ?: continue
-            val isReportedByErrorNodeDiagnosticCollector = initializer is FirCall && initializer.calleeReference?.isError() == true
+            konst supertype = declaration.superTypeRefs[it]
+            konst field = declaration.delegateFieldsMap?.get(it)?.fir ?: continue
+            konst initializer = field.initializer ?: continue
+            konst isReportedByErrorNodeDiagnosticCollector = initializer is FirCall && initializer.calleeReference?.isError() == true
 
             if (
                 !isReportedByErrorNodeDiagnosticCollector &&

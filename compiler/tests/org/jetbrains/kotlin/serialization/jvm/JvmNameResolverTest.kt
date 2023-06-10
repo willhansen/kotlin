@@ -29,8 +29,8 @@ import java.util.*
 
 class JvmNameResolverTest : KtUsefulTestCase() {
     private class Context {
-        val types = JvmProtoBuf.StringTableTypes.newBuilder()
-        val strings = ArrayList<String>()
+        konst types = JvmProtoBuf.StringTableTypes.newBuilder()
+        konst strings = ArrayList<String>()
 
         fun string(
                 string: String?,
@@ -97,12 +97,12 @@ class JvmNameResolverTest : KtUsefulTestCase() {
     }
 
     fun testSubstring() {
-        val n = create {
+        konst n = create {
             string("kotlin", substringIndex = listOf(0, 6))
             string("kotlin", substringIndex = listOf(1, 4))
             string("kotlin", substringIndex = listOf(6, 6))
 
-            // Invalid operations
+            // Inkonstid operations
             string("kotlin", substringIndex = listOf(7, 5))
             string("kotlin", substringIndex = listOf(0, -2))
             string("kotlin", substringIndex = listOf(3, 1))
@@ -112,7 +112,7 @@ class JvmNameResolverTest : KtUsefulTestCase() {
         assertEquals("otl", n.getString(1))
         assertEquals("", n.getString(2))
 
-        // All invalid operations should be ignored
+        // All inkonstid operations should be ignored
         (3..5).forEach { assertEquals("kotlin", n.getString(it)) }
     }
 
@@ -123,11 +123,11 @@ class JvmNameResolverTest : KtUsefulTestCase() {
     }
 
     fun testReplaceAll() {
-        val n = create {
+        konst n = create {
             string("kotlin", replaceChar = listOf('k', 'm'))
             string("java", replaceChar = listOf('a', 'o', 'a', 'b', 'c', 'd')) // All chars after the first two are ignored
 
-            // Invalid operations
+            // Inkonstid operations
             string("kotlin", replaceChar = listOf())
             string("kotlin", replaceChar = listOf('k'))
         }
@@ -135,12 +135,12 @@ class JvmNameResolverTest : KtUsefulTestCase() {
         assertEquals("motlin", n.getString(0))
         assertEquals("jovo", n.getString(1))
 
-        // All invalid operations should be ignored
+        // All inkonstid operations should be ignored
         (2..3).forEach { assertEquals("kotlin", n.getString(it)) }
     }
 
     fun testRange() {
-        val n = create {
+        konst n = create {
             string("a\$b\$c", operation = INTERNAL_TO_CLASS_ID, range = 2)
             string("d\$e\$f", operation = NONE, range = 2)
             string("abc")
@@ -152,7 +152,7 @@ class JvmNameResolverTest : KtUsefulTestCase() {
     }
 
     fun testRangeWithDifferentOperations() {
-        val n = create {
+        konst n = create {
             string("a\$b\$c", operation = INTERNAL_TO_CLASS_ID, range = 2)
             string("d\$e\$f", operation = NONE, substringIndex = listOf(2, 5))
         }
@@ -162,7 +162,7 @@ class JvmNameResolverTest : KtUsefulTestCase() {
     }
 
     fun testString() {
-        val n = create {
+        konst n = create {
             string("java", internalString = "kotlin", range = 5)
         }
 

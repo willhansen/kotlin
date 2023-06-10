@@ -27,14 +27,14 @@ object BaseImpl : IBase {
 }
 
 interface IOther {
-  abstract val x: String
+  abstract konst x: String
     abstract get
 
   abstract var y: Int
     abstract get
     abstract set
 
-  abstract val Byte.z1: Int
+  abstract konst Byte.z1: Int
     abstract get
 
   abstract var Byte.z2: Int
@@ -52,7 +52,7 @@ fun otherImpl(x0: String, y0: Int): IOther {
 
       }
 
-      override val x: String
+      override konst x: String
         field = x0
         override get
 
@@ -61,7 +61,7 @@ fun otherImpl(x0: String, y0: Int): IOther {
         override get
         override set
 
-      override val Byte.z1: Int
+      override konst Byte.z1: Int
         override get(): Int {
           return 1
         }
@@ -70,7 +70,7 @@ fun otherImpl(x0: String, y0: Int): IOther {
         override get(): Int {
           return 2
         }
-        override set(value: Int) {
+        override set(konstue: Int) {
         }
 
     }
@@ -86,7 +86,7 @@ class Test1 : IBase {
 
   }
 
-  private /* final field */ val $$delegate_0: BaseImpl = BaseImpl
+  private /* final field */ konst $$delegate_0: BaseImpl = BaseImpl
   override fun bar(): Int {
     return <this>.#$$delegate_0.bar()
   }
@@ -108,7 +108,7 @@ class Test2 : IBase, IOther {
 
   }
 
-  private /* final field */ val $$delegate_0: BaseImpl = BaseImpl
+  private /* final field */ konst $$delegate_0: BaseImpl = BaseImpl
   override fun bar(): Int {
     return <this>.#$$delegate_0.bar()
   }
@@ -121,8 +121,8 @@ class Test2 : IBase, IOther {
     (<this>.#$$delegate_0, <this>).qux()
   }
 
-  private /* final field */ val $$delegate_1: IOther = otherImpl(x0 = "", y0 = 42)
-  override val x: String
+  private /* final field */ konst $$delegate_1: IOther = otherImpl(x0 = "", y0 = 42)
+  override konst x: String
     override get(): String {
       return <this>.#$$delegate_1.<get-x>()
     }
@@ -135,7 +135,7 @@ class Test2 : IBase, IOther {
       <this>.#$$delegate_1.<set-y>(<set-?> = <set-?>)
     }
 
-  override val Byte.z1: Int
+  override konst Byte.z1: Int
     override get(): Int {
       return (<this>.#$$delegate_1, <this>).<get-z1>()
     }

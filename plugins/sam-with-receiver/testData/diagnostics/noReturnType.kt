@@ -13,7 +13,7 @@ fun test() {
     }<!>
 
     Sam { b ->
-        val a: String = this
+        konst a: String = this
         System.out.println(a)
     }
 }

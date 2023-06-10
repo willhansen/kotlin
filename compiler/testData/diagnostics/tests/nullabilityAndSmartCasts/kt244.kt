@@ -13,14 +13,14 @@ fun f(s: String?) {
 
 // more tests
 class A(a: String?) {
-    val b = if (a != null) <!DEBUG_INFO_SMARTCAST!>a<!>.length else 1
+    konst b = if (a != null) <!DEBUG_INFO_SMARTCAST!>a<!>.length else 1
     init {
         if (a != null) {
-            val c = <!DEBUG_INFO_SMARTCAST!>a<!>.length
+            konst c = <!DEBUG_INFO_SMARTCAST!>a<!>.length
         }
     }
 
-    val i : Int
+    konst i : Int
 
     init {
         if (a is String) {

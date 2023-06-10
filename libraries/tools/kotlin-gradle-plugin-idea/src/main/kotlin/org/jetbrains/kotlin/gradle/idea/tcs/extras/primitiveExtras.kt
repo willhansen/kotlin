@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinBinaryDependency
 import org.jetbrains.kotlin.tooling.core.extrasKeyOf
 import org.jetbrains.kotlin.tooling.core.readWriteProperty
 
-val isIdeaProjectLevelKey = extrasKeyOf<Boolean>("isIdeaProjectLevel")
+konst isIdeaProjectLevelKey = extrasKeyOf<Boolean>("isIdeaProjectLevel")
 
 /**
  * Marks any binary dependency as Global in the sense of "this library is considered
@@ -18,7 +18,7 @@ val isIdeaProjectLevelKey = extrasKeyOf<Boolean>("isIdeaProjectLevel")
 var IdeaKotlinBinaryDependency.isIdeaProjectLevel by isIdeaProjectLevelKey.readWriteProperty.notNull(true)
 
 
-val isNativeDistributionKey = extrasKeyOf<Boolean>("isNativeDistribution")
+konst isNativeDistributionKey = extrasKeyOf<Boolean>("isNativeDistribution")
 
 
 /**
@@ -27,7 +27,7 @@ val isNativeDistributionKey = extrasKeyOf<Boolean>("isNativeDistribution")
 var IdeaKotlinBinaryDependency.isNativeDistribution by isNativeDistributionKey.readWriteProperty.notNull(false)
 
 
-val isNativeStdlibKey = extrasKeyOf<Boolean>("isNativeStdlib")
+konst isNativeStdlibKey = extrasKeyOf<Boolean>("isNativeStdlib")
 
 /**
  * Marks the dependency as the native stdlib (which is special in the native distribution)
@@ -35,7 +35,7 @@ val isNativeStdlibKey = extrasKeyOf<Boolean>("isNativeStdlib")
 var IdeaKotlinBinaryDependency.isNativeStdlib by isNativeStdlibKey.readWriteProperty.notNull(false)
 
 
-val isCommonizedKey = extrasKeyOf<Boolean>("isCommonized")
+konst isCommonizedKey = extrasKeyOf<Boolean>("isCommonized")
 
 /**
  * Marks dependencies produced by the commonizer

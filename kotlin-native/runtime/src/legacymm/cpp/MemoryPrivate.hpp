@@ -32,7 +32,7 @@ typedef enum {
   CONTAINER_TAG_SHARED = 3 | 1,  // shareable
   // Shift to get actual counter.
   CONTAINER_TAG_SHIFT = 2,
-  // Actual value to increment/decrement container by. Tag is in lower bits.
+  // Actual konstue to increment/decrement container by. Tag is in lower bits.
   CONTAINER_TAG_INCREMENT = 1 << CONTAINER_TAG_SHIFT,
   // Mask for container type.
   CONTAINER_TAG_MASK = CONTAINER_TAG_INCREMENT - 1,
@@ -153,22 +153,22 @@ struct ContainerHeader {
   template <bool Atomic>
   inline int decRefCount() {
 #ifdef KONAN_NO_THREADS
-    int value = refCount_ -= CONTAINER_TAG_INCREMENT;
+    int konstue = refCount_ -= CONTAINER_TAG_INCREMENT;
 #else
-    int value = Atomic ?
+    int konstue = Atomic ?
        __sync_sub_and_fetch(&refCount_, CONTAINER_TAG_INCREMENT) : refCount_ -= CONTAINER_TAG_INCREMENT;
 #endif
-    return value >> CONTAINER_TAG_SHIFT;
+    return konstue >> CONTAINER_TAG_SHIFT;
   }
 
   inline int decRefCount() {
   #ifdef KONAN_NO_THREADS
-      int value = refCount_ -= CONTAINER_TAG_INCREMENT;
+      int konstue = refCount_ -= CONTAINER_TAG_INCREMENT;
   #else
-      int value = shareable() ?
+      int konstue = shareable() ?
          __sync_sub_and_fetch(&refCount_, CONTAINER_TAG_INCREMENT) : refCount_ -= CONTAINER_TAG_INCREMENT;
   #endif
-      return value >> CONTAINER_TAG_SHIFT;
+      return konstue >> CONTAINER_TAG_SHIFT;
   }
 
   inline unsigned tag() const {

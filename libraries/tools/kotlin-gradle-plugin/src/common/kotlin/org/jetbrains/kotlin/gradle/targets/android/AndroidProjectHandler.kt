@@ -9,7 +9,7 @@ package org.jetbrains.kotlin.gradle.plugin
 import com.android.build.api.attributes.BuildTypeAttr
 import com.android.build.gradle.*
 import com.android.build.gradle.api.*
-import org.gradle.api.InvalidUserCodeException
+import org.gradle.api.InkonstidUserCodeException
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ArtifactCollection
@@ -19,7 +19,7 @@ import org.gradle.api.attributes.Category
 import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.logging.Logging
-import org.gradle.api.plugins.InvalidPluginException
+import org.gradle.api.plugins.InkonstidPluginException
 import org.gradle.api.specs.Spec
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.bundling.AbstractArchiveTask
@@ -49,30 +49,30 @@ import java.io.ObjectOutputStream
 import java.io.Serializable
 
 internal class AndroidProjectHandler(
-    private val kotlinTasksProvider: KotlinTasksProvider
+    private konst kotlinTasksProvider: KotlinTasksProvider
 ) {
-    private val logger = Logging.getLogger(this.javaClass)
+    private konst logger = Logging.getLogger(this.javaClass)
 
     fun configureTarget(kotlinAndroidTarget: KotlinAndroidTarget) {
-        val project = kotlinAndroidTarget.project
-        val ext = project.extensions.getByName("android") as BaseExtension
+        konst project = kotlinAndroidTarget.project
+        konst ext = project.extensions.getByName("android") as BaseExtension
 
         applyKotlinAndroidSourceSetLayout(kotlinAndroidTarget)
 
-        val plugin = androidPluginIds
+        konst plugin = androidPluginIds
             .asSequence()
             .mapNotNull { project.plugins.findPlugin(it) as? BasePlugin }
             .firstOrNull()
-            ?: throw InvalidPluginException("'kotlin-android' expects one of the Android Gradle " +
+            ?: throw InkonstidPluginException("'kotlin-android' expects one of the Android Gradle " +
                                                     "plugins to be applied to the project:\n\t" +
                                                     androidPluginIds.joinToString("\n\t") { "* $it" })
 
         project.forAllAndroidVariants { variant ->
-            val compilationFactory = KotlinJvmAndroidCompilationFactory(kotlinAndroidTarget, variant)
-            val variantName = getVariantName(variant)
+            konst compilationFactory = KotlinJvmAndroidCompilationFactory(kotlinAndroidTarget, variant)
+            konst variantName = getVariantName(variant)
 
             // Create the compilation and configure it first, then add to the compilations container. As this code is executed
-            // in afterEvaluate, a user's build script might have already attached item handlers to the compilations container, and those
+            // in afterEkonstuate, a user's build script might have already attached item handlers to the compilations container, and those
             // handlers might break when fired on a compilation that is not yet properly configured (e.g. KT-29964):
             compilationFactory.create(variantName).let { compilation ->
                 setUpDependencyResolution(variant, compilation)
@@ -84,12 +84,12 @@ internal class AndroidProjectHandler(
 
         }
 
-        project.whenEvaluated {
+        project.whenEkonstuated {
             forAllAndroidVariants { variant ->
-                val compilation = kotlinAndroidTarget.compilations.getByName(getVariantName(variant))
+                konst compilation = kotlinAndroidTarget.compilations.getByName(getVariantName(variant))
                 postprocessVariant(variant, compilation, project, ext, plugin)
 
-                val subpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
+                konst subpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
                 subpluginEnvironment.addSubpluginOptions(project, compilation)
             }
             checkAndroidAnnotationProcessorDependencyUsage(project)
@@ -121,7 +121,7 @@ internal class AndroidProjectHandler(
             } else {
                 // If any dependency is added to this configuration, report an error:
                 project.configurations.getByName(apiConfigurationName).dependencies.all {
-                    throw InvalidUserCodeException(
+                    throw InkonstidUserCodeException(
                         "API dependencies are not allowed for Android source set ${androidSourceSet.name}. " +
                                 "Please use an implementation dependency instead."
                     )
@@ -149,10 +149,10 @@ internal class AndroidProjectHandler(
     }
 
     private fun addAndroidUnitTestTasksAsDependenciesToAllTest(project: Project) {
-        val allTestTaskName = project.kotlinTestRegistry.allTestsTaskName
+        konst allTestTaskName = project.kotlinTestRegistry.allTestsTaskName
         project.tasks.matching { it.name == allTestTaskName }.configureEach { task ->
             task.dependsOn(project.provider {
-                val androidUnitTestTasks = mutableListOf<Any>()
+                konst androidUnitTestTasks = mutableListOf<Any>()
                 project.forAllAndroidVariants { variant ->
                     if (variant is UnitTestVariant) {
                         // There's no API for getting the Android unit test tasks from the variant, so match them by name:
@@ -174,32 +174,32 @@ internal class AndroidProjectHandler(
     ) {
         // This function is called before the variantData is completely filled by the Android plugin.
         // The fine details of variantData, such as AP options or Java sources, should not be trusted here.
-        val variantDataName = getVariantName(variantData)
+        konst variantDataName = getVariantName(variantData)
         logger.kotlinDebug("Process variant [$variantDataName]")
 
-        val defaultSourceSet = project.kotlinExtension.sourceSets.maybeCreate(compilation.defaultSourceSetName)
+        konst defaultSourceSet = project.kotlinExtension.sourceSets.maybeCreate(compilation.defaultSourceSetName)
 
-        val configAction = KotlinCompileConfig(KotlinCompilationInfo(compilation))
+        konst configAction = KotlinCompileConfig(KotlinCompilationInfo(compilation))
         configAction.configureTask { task ->
-            task.useModuleDetection.value(true).disallowChanges()
+            task.useModuleDetection.konstue(true).disallowChanges()
             // store kotlin classes in separate directory. They will serve as class-path to java compiler
             task.destinationDirectory.set(project.layout.buildDirectory.dir("tmp/kotlin-classes/$variantDataName"))
             task.description = "Compiles the $variantDataName kotlin."
         }
-        val kotlinTask = tasksProvider.registerKotlinJVMTask(
+        konst kotlinTask = tasksProvider.registerKotlinJVMTask(
             project,
             compilation.compileKotlinTaskName,
             compilation.compilerOptions.options as KotlinJvmCompilerOptions,
             configAction
         )
 
-        // Need to move it into afterEvaluate, so it will be executed after KaptGenerateStubsConfig config actions
-        // Otherwise build will fail within AbstractKotlinCompileConfig trying to modify value with 'disallowChanges()' state
-        project.afterEvaluate {
+        // Need to move it into afterEkonstuate, so it will be executed after KaptGenerateStubsConfig config actions
+        // Otherwise build will fail within AbstractKotlinCompileConfig trying to modify konstue with 'disallowChanges()' state
+        project.afterEkonstuate {
             KaptGenerateStubsConfig.configureUseModuleDetection(
                 project,
                 kotlinTask
-            ) { value(true).disallowChanges() }
+            ) { konstue(true).disallowChanges() }
         }
 
         // Register the source only after the task is created, because the task is required for that:
@@ -221,13 +221,13 @@ internal class AndroidProjectHandler(
     ) {
 
         getTestedVariantData(variantData)?.let { testedVariant ->
-            val testedVariantName = getVariantName(testedVariant)
-            val testedCompilation = compilation.target.compilations.getByName(testedVariantName)
+            konst testedVariantName = getVariantName(testedVariant)
+            konst testedCompilation = compilation.target.compilations.getByName(testedVariantName)
             compilation.associateWith(testedCompilation)
         }
 
-        val javaTask = variantData.getJavaTaskProvider()
-        val kotlinTask = compilation.compileKotlinTaskProvider
+        konst javaTask = variantData.getJavaTaskProvider()
+        konst kotlinTask = compilation.compileKotlinTaskProvider
         compilation.androidVariant.forEachJavaSourceDir { sources ->
             kotlinTask.configure {
                 it.setSource(sources.dir)
@@ -246,18 +246,18 @@ internal class AndroidProjectHandler(
         javaTask: TaskProvider<out AbstractCompile>,
         kotlinTask: TaskProvider<out KotlinCompile>
     ) {
-        val preJavaKotlinOutput = project.files(project.provider {
+        konst preJavaKotlinOutput = project.files(project.provider {
             mutableListOf<File>().apply {
                 add(kotlinTask.get().destinationDirectory.get().asFile)
                 if (Kapt3GradleSubplugin.isEnabled(project)) {
                     // Add Kapt3 output as well, since there's no SyncOutputTask with the new API
-                    val kaptClasssesDir = Kapt3GradleSubplugin.getKaptGeneratedClassesDir(project, getVariantName(variantData))
+                    konst kaptClasssesDir = Kapt3GradleSubplugin.getKaptGeneratedClassesDir(project, getVariantName(variantData))
                     add(kaptClasssesDir)
                 }
             }
         }).builtBy(kotlinTask)
 
-        val preJavaClasspathKey = variantData.registerPreJavacGeneratedBytecode(preJavaKotlinOutput)
+        konst preJavaClasspathKey = variantData.registerPreJavacGeneratedBytecode(preJavaKotlinOutput)
         kotlinTask.configure { kotlinTaskInstance ->
             kotlinTaskInstance.libraries
                 .from(variantData.getCompileClasspath(preJavaClasspathKey))
@@ -279,9 +279,9 @@ internal class AndroidProjectHandler(
         )
 
         // Find the classpath entries that come from the tested variant and register them as the friend paths, lazily
-        val originalArtifactCollection = variantData.getCompileClasspathArtifacts(preJavaClasspathKey)
-        val testedVariantDataIsNotNull = getTestedVariantData(variantData) != null
-        val projectPath = project.path
+        konst originalArtifactCollection = variantData.getCompileClasspathArtifacts(preJavaClasspathKey)
+        konst testedVariantDataIsNotNull = getTestedVariantData(variantData) != null
+        konst projectPath = project.path
         compilation.testedVariantArtifacts.set(
             originalArtifactCollection.artifactFiles.filter(
                 AndroidTestedVariantArtifactsFilter(
@@ -305,7 +305,7 @@ internal class AndroidProjectHandler(
     // TODO the return type is actually `AbstractArchiveTask | TaskProvider<out AbstractArchiveTask>`;
     //      change the signature once the Android Gradle plugin versions that don't support task providers are dropped
     fun getLibraryOutputTask(variant: BaseVariant): Any? {
-        val getPackageLibraryProvider = variant.javaClass.methods
+        konst getPackageLibraryProvider = variant.javaClass.methods
             .find { it.name == "getPackageLibraryProvider" && it.parameterCount == 0 }
 
         return if (getPackageLibraryProvider != null) {
@@ -317,7 +317,7 @@ internal class AndroidProjectHandler(
     }
 
     fun setUpDependencyResolution(variant: BaseVariant, compilation: KotlinJvmAndroidCompilation) {
-        val project = compilation.target.project
+        konst project = compilation.target.project
 
         compilation.compileDependencyFiles = variant.compileConfiguration.apply {
             usesPlatformOf(compilation.target)
@@ -329,15 +329,15 @@ internal class AndroidProjectHandler(
             project.addExtendsFromRelation(name, compilation.runtimeDependencyConfigurationName)
         }
 
-        val buildTypeAttrValue = project.objects.named<BuildTypeAttr>(variant.buildType.name)
+        konst buildTypeAttrValue = project.objects.named<BuildTypeAttr>(variant.buildType.name)
         listOf(compilation.compileDependencyConfigurationName, compilation.runtimeDependencyConfigurationName).forEach {
             project.configurations.findByName(it)?.attributes?.attribute(Attribute.of(BuildTypeAttr::class.java), buildTypeAttrValue)
         }
 
         // TODO this code depends on the convention that is present in the Android plugin as there's no public API
         // We should request such API in the Android plugin
-        val apiElementsConfigurationName = "${variant.name}ApiElements"
-        val runtimeElementsConfigurationName = "${variant.name}RuntimeElements"
+        konst apiElementsConfigurationName = "${variant.name}ApiElements"
+        konst runtimeElementsConfigurationName = "${variant.name}RuntimeElements"
 
         // KT-29476, the Android *Elements configurations need Kotlin MPP dependencies:
         if (project.configurations.findByName(apiElementsConfigurationName) != null) {
@@ -373,9 +373,9 @@ internal fun BaseVariant.getJavaTaskProvider(): TaskProvider<out JavaCompile> =
 
 /** Filter for the AGP test variant classpath artifacts. */
 class AndroidTestedVariantArtifactsFilter(
-    private val artifactCollection: ArtifactCollection,
-    private val testedVariantDataIsNotNull: Boolean,
-    private val projectPath: String
+    private konst artifactCollection: ArtifactCollection,
+    private konst testedVariantDataIsNotNull: Boolean,
+    private konst projectPath: String
 ) : Serializable, Spec<File> {
 
     /** Make transient as it should be derived from the [artifactCollection] property which may change in configuration cached runs. */
@@ -406,7 +406,7 @@ class AndroidTestedVariantArtifactsFilter(
     }
 
     override fun isSatisfiedBy(element: File): Boolean {
-        return element in filteredFiles.value
+        return element in filteredFiles.konstue
     }
 }
 

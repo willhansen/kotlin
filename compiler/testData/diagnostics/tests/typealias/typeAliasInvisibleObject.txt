@@ -1,7 +1,7 @@
 package
 
-public val test1: C.Companion
-public val test1a: C.Companion
+public konst test1: C.Companion
+public konst test1a: C.Companion
 
 public final class C {
     public constructor C()

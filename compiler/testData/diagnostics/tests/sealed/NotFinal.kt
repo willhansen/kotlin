@@ -7,5 +7,5 @@ sealed class Foo {
 }
 
 // The following warning seems incorrect here
-// "Foo is a final type, and thus a value of the type parameter is predetermined"
+// "Foo is a final type, and thus a konstue of the type parameter is predetermined"
 fun <T : Foo> doit(arg: T): T = arg

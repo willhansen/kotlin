@@ -2,8 +2,8 @@ package
 
 public final annotation class A : kotlin.Annotation {
     public constructor A(/*0*/ arg: kotlin.reflect.KClass<*>, /*1*/ x: kotlin.Int = ...)
-    public final val arg: kotlin.reflect.KClass<*>
-    public final val x: kotlin.Int
+    public final konst arg: kotlin.reflect.KClass<*>
+    public final konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

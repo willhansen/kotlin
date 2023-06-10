@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.backend.konan.llvm
  * $ clang -xc -E -Idist/dependencies/clang-llvm-3.9.0-darwin-macos/include/ llvmDebugInfoC/src/dwarf/include/dwarf_util.kt.pp -Wp,-P -Wp,-CC -o - | sed -e '/^$/d' -e '/^\ *\/\/.*$/d' > backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/llvm/Dwarf.kt
  *
  */
-internal enum class DwarfTag(val value:Int) {
+internal enum class DwarfTag(konst konstue:Int) {
   DW_TAG_array_type(0x0001),
   DW_TAG_class_type(0x0002),
   DW_TAG_entry_point(0x0003),
@@ -50,7 +50,7 @@ internal enum class DwarfTag(val value:Int) {
   DW_TAG_packed_type(0x002d),
   DW_TAG_subprogram(0x002e),
   DW_TAG_template_type_parameter(0x002f),
-  DW_TAG_template_value_parameter(0x0030),
+  DW_TAG_template_konstue_parameter(0x0030),
   DW_TAG_thrown_type(0x0031),
   DW_TAG_try_block(0x0032),
   DW_TAG_variant_part(0x0033),
@@ -67,7 +67,7 @@ internal enum class DwarfTag(val value:Int) {
   DW_TAG_condition(0x003f),
   DW_TAG_shared_type(0x0040),
   DW_TAG_type_unit(0x0041),
-  DW_TAG_rvalue_reference_type(0x0042),
+  DW_TAG_rkonstue_reference_type(0x0042),
   DW_TAG_template_alias(0x0043),
   DW_TAG_coarray_type(0x0044),
   DW_TAG_generic_subrange(0x0045),
@@ -87,7 +87,7 @@ internal enum class DwarfTag(val value:Int) {
   DW_TAG_BORLAND_Delphi_variant(0xb004),
 }
 
-internal enum class DwarfTypeKind(val value:Byte) {
+internal enum class DwarfTypeKind(konst konstue:Byte) {
   DW_ATE_address(0x01),
   DW_ATE_boolean(0x02),
   DW_ATE_complex_float(0x03),
@@ -106,7 +106,7 @@ internal enum class DwarfTypeKind(val value:Byte) {
   DW_ATE_UTF(0x10),
 }
 
-internal enum class DwarfOp(val value:Long) {
+internal enum class DwarfOp(konst konstue:Long) {
   DW_OP_addr(0x03),
   DW_OP_deref(0x06),
   DW_OP_const1u(0x08),
@@ -259,14 +259,14 @@ internal enum class DwarfOp(val value:Long) {
   DW_OP_form_tls_address(0x9b),
   DW_OP_call_frame_cfa(0x9c),
   DW_OP_bit_piece(0x9d),
-  DW_OP_implicit_value(0x9e),
-  DW_OP_stack_value(0x9f),
+  DW_OP_implicit_konstue(0x9e),
+  DW_OP_stack_konstue(0x9f),
   DW_OP_GNU_push_tls_address(0xe0),
   DW_OP_GNU_addr_index(0xfb),
   DW_OP_GNU_const_index(0xfc),
 }
 
-internal enum class DwarfLanguage(val value:Int) {
+internal enum class DwarfLanguage(konst konstue:Int) {
   DW_LANG_C89(0x0001),
   DW_LANG_C(0x0002),
   DW_LANG_Ada83(0x0003),

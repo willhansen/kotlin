@@ -6,7 +6,7 @@ import testing.TestClass
 
 class ~same-file~TestClass
 
-val a1: `testing`TestClass? = null
+konst a1: `testing`TestClass? = null
 
 
 //FILE:testing.kt

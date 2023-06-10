@@ -22,29 +22,29 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 // ---
 
 data class ModuleCompilerInput(
-    val targetId: TargetId,
-    val groupedSources: GroupedKtSources,
-    val commonPlatform: TargetPlatform,
-    val platform: TargetPlatform,
-    val configuration: CompilerConfiguration,
-    val friendFirModules: Collection<FirModuleData> = emptyList()
+    konst targetId: TargetId,
+    konst groupedSources: GroupedKtSources,
+    konst commonPlatform: TargetPlatform,
+    konst platform: TargetPlatform,
+    konst configuration: CompilerConfiguration,
+    konst friendFirModules: Collection<FirModuleData> = emptyList()
 )
 
 data class ModuleCompilerEnvironment(
-    val projectEnvironment: AbstractProjectEnvironment,
-    val diagnosticsReporter: BaseDiagnosticsCollector
+    konst projectEnvironment: AbstractProjectEnvironment,
+    konst diagnosticsReporter: BaseDiagnosticsCollector
 )
 
 data class ModuleCompilerOutput(
-    val generationState: GenerationState
+    konst generationState: GenerationState
 )
 
 data class ModuleCompilerIrBackendInput(
-    val targetId: TargetId,
-    val configuration: CompilerConfiguration,
-    val extensions: JvmFir2IrExtensions,
-    val irModuleFragment: IrModuleFragment,
-    val components: Fir2IrComponents,
-    val pluginContext: Fir2IrPluginContext,
-    val irActualizedResult: IrActualizedResult?
+    konst targetId: TargetId,
+    konst configuration: CompilerConfiguration,
+    konst extensions: JvmFir2IrExtensions,
+    konst irModuleFragment: IrModuleFragment,
+    konst components: Fir2IrComponents,
+    konst pluginContext: Fir2IrPluginContext,
+    konst irActualizedResult: IrActualizedResult?
 )

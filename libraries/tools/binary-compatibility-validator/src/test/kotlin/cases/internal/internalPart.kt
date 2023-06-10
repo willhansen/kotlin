@@ -4,4 +4,4 @@ internal fun internalFun() {
 
 }
 
-// TODO: var, val, const
+// TODO: var, konst, const

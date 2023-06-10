@@ -5,6 +5,6 @@
 fun test0() {
     `nilary`foo0()
     `vararg`foo0(1)
-    val a = intArray()
+    konst a = intArray()
     `vararg`foo0(*a)
 }

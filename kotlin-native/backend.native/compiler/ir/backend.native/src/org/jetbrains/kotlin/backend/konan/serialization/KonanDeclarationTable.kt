@@ -19,7 +19,7 @@ class KonanDeclarationTable(
         globalDeclarationTable: GlobalDeclarationTable
 ) : DeclarationTable(globalDeclarationTable) {
 
-    private val signatureIdComposer = DescToIrIdSignatureComputer(KonanIdSignaturer(KonanManglerDesc))
+    private konst signatureIdComposer = DescToIrIdSignatureComputer(KonanIdSignaturer(KonanManglerDesc))
 
     // TODO: We should get rid of this extension point in favor of proper support in IR-based mangler.
     override fun tryComputeBackendSpecificSignature(declaration: IrDeclaration): IdSignature? =

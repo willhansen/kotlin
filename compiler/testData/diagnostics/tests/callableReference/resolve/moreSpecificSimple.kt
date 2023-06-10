@@ -8,6 +8,6 @@ fun IA.extFun() {}
 fun IB.extFun() {}
 
 fun test() {
-    val extFun = IB::extFun
+    konst extFun = IB::extFun
     checkSubtype<IB.() -> Unit>(extFun)
 }

@@ -1,1 +1,1 @@
-actual val bar = "Hello"
+actual konst bar = "Hello"

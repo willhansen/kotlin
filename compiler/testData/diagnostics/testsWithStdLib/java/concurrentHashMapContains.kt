@@ -6,19 +6,19 @@ class A : java.util.concurrent.ConcurrentHashMap<String, Int>() {
     operator fun contains(x: Char): Boolean = true
 }
 class B : java.util.concurrent.ConcurrentHashMap<String, Int>() {
-    override fun contains(value: Any?): Boolean {
-        return super.contains(value)
+    override fun contains(konstue: Any?): Boolean {
+        return super.contains(konstue)
     }
 }
 
 class C : java.util.concurrent.ConcurrentHashMap<String, Int>() {
-    operator override fun contains(value: Any?): Boolean {
-        return super.contains(value)
+    operator override fun contains(konstue: Any?): Boolean {
+        return super.contains(konstue)
     }
 }
 
 fun main() {
-    val hm = java.util.concurrent.ConcurrentHashMap<String, Int>()
+    konst hm = java.util.concurrent.ConcurrentHashMap<String, Int>()
     "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>in<!> hm
     "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>!in<!> hm
     1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>!in<!> hm
@@ -32,7 +32,7 @@ fun main() {
     1 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>in<!> (hm as Map<String, Int>)
     1 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>!in<!> (hm as Map<String, Int>)
 
-    val a = A()
+    konst a = A()
     "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>in<!> a
     "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>!in<!> a
     1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>!in<!> a
@@ -48,7 +48,7 @@ fun main() {
     1 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>in<!> (a as Map<String, Int>)
     1 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>!in<!> (a as Map<String, Int>)
 
-    val b = B()
+    konst b = B()
     "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>in<!> b
     "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>!in<!> b
     1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>!in<!> b
@@ -63,7 +63,7 @@ fun main() {
     1 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>!in<!> (b as Map<String, Int>)
 
     // Actually, we could've allow calls here because the owner explicitly declared as operator, but semantics is still weird
-    val c = C()
+    konst c = C()
     "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>in<!> c
     "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>!in<!> c
     1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_WARNING!>!in<!> c

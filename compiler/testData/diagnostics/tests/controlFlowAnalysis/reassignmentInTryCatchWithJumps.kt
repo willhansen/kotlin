@@ -3,7 +3,7 @@ fun exc(flag: Boolean) {
 }
 
 fun f1(flag: Boolean) {
-    val n: Int
+    konst n: Int
     try {
         if (flag) {
             <!UNUSED_VALUE!>n =<!> 1
@@ -20,7 +20,7 @@ fun f1(flag: Boolean) {
 
 fun f2(flag: Boolean) {
     while (true) {
-        val n: Int
+        konst n: Int
         try {
             if (flag) {
                 <!UNUSED_VALUE!>n =<!> 1
@@ -38,7 +38,7 @@ fun f2(flag: Boolean) {
 
 fun f3(flag: Boolean) {
     while (true) {
-        val n: Int
+        konst n: Int
         try {
             if (flag) {
                 <!UNUSED_VALUE!>n =<!> 1

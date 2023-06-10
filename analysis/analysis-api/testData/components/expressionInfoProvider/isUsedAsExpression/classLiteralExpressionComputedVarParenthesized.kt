@@ -1,2 +1,2 @@
 fun test(b: Any?) {
-    val klass = <expr>(b)</expr>::
+    konst klass = <expr>(b)</expr>::

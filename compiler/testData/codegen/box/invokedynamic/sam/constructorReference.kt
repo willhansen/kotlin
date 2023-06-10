@@ -7,7 +7,7 @@
 // 0 java/lang/invoke/LambdaMetafactory
 // 1 final synthetic class ConstructorReferenceKt\$box\$1
 
-class C(val test: String)
+class C(konst test: String)
 
 fun interface MakeC {
     fun make(x: String): C

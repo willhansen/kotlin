@@ -18,24 +18,24 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrBlockBodyImpl
 import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.Name
 
-internal val typeAliasAnnotationMethodsPhase = makeIrFilePhase(
+internal konst typeAliasAnnotationMethodsPhase = makeIrFilePhase(
     ::TypeAliasAnnotationMethodsLowering,
     name = "TypeAliasAnnotationMethodsLowering",
     description = "Generate method stubs for type alias annotations"
 )
 
-class TypeAliasAnnotationMethodsLowering(val context: CommonBackendContext) :
+class TypeAliasAnnotationMethodsLowering(konst context: CommonBackendContext) :
     ClassLoweringPass {
 
     override fun lower(irClass: IrClass) {
         irClass.visitTypeAliases()
     }
 
-    private val IrTypeAlias.syntheticAnnotationMethodName
+    private konst IrTypeAlias.syntheticAnnotationMethodName
         get() = Name.identifier(JvmAbi.getSyntheticMethodNameForAnnotatedTypeAlias(name))
 
     private fun IrClass.visitTypeAliases() {
-        val annotatedAliases = declarations
+        konst annotatedAliases = declarations
             .filterIsInstance<IrTypeAlias>()
             .filter { it.annotations.isNotEmpty() }
 

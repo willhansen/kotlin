@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-class A(val x: Int, val y: String)
+class A(konst x: Int, konst y: String)
 
 fun foo(a: A) {
     a.<!UNRESOLVED_REFERENCE!>component1<!>()

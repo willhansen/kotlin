@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.config.MavenComparableVersion
 import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.tree.*
 
-class ApiVersionCallsPreprocessingMethodTransformer(private val targetApiVersion: ApiVersion) : MethodTransformer() {
-    private val constantConditionElimination = ConstantConditionEliminationMethodTransformer()
+class ApiVersionCallsPreprocessingMethodTransformer(private konst targetApiVersion: ApiVersion) : MethodTransformer() {
+    private konst constantConditionElimination = ConstantConditionEliminationMethodTransformer()
 
     override fun transform(internalClassName: String, methodNode: MethodNode) {
         var hasFoldedCalls = false
@@ -32,20 +32,20 @@ class ApiVersionCallsPreprocessingMethodTransformer(private val targetApiVersion
         for (insn in methodNode.instructions.toArray()) {
             if (!insn.isApiVersionIsAtLeastCall()) continue
 
-            val prev3 = insn.previous ?: continue
-            val minor = prev3.getIntConstValue() ?: continue
+            konst prev3 = insn.previous ?: continue
+            konst minor = prev3.getIntConstValue() ?: continue
 
-            val prev2 = prev3.previous ?: continue
-            val major = prev2.getIntConstValue() ?: continue
+            konst prev2 = prev3.previous ?: continue
+            konst major = prev2.getIntConstValue() ?: continue
 
-            val prev1 = prev2.previous ?: continue
-            val epic = prev1.getIntConstValue() ?: continue
+            konst prev1 = prev2.previous ?: continue
+            konst epic = prev1.getIntConstValue() ?: continue
 
             hasFoldedCalls = true
 
-            val atLeastVersion = MavenComparableVersion("$epic.$major.$minor")
+            konst atLeastVersion = MavenComparableVersion("$epic.$major.$minor")
 
-            val replacementInsn =
+            konst replacementInsn =
                 if (targetApiVersion.version >= atLeastVersion)
                     InsnNode(Opcodes.ICONST_1)
                 else

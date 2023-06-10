@@ -33,11 +33,11 @@ public interface JJJJ<R> {
 // FILE: k.kt
 
 fun test() {
-    val a = J.staticN <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
+    konst a = J.staticN <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
     foo(a)
-    val b = JJ.staticNN ?: null
+    konst b = JJ.staticNN ?: null
     foo(b)
-    val c = JJJ.staticNNN <!USELESS_ELVIS!>?: null<!>
+    konst c = JJJ.staticNNN <!USELESS_ELVIS!>?: null<!>
     foo(c)
 }
 

@@ -12,7 +12,7 @@ import java.io.File
 import java.nio.file.Files
 
 fun Appendable.appendConfigsFromDir(confDir: File) {
-    val files = confDir.listFiles() ?: return
+    konst files = confDir.listFiles() ?: return
 
     files.asSequence()
         .filter { it.isFile }
@@ -27,10 +27,10 @@ fun Appendable.appendConfigsFromDir(confDir: File) {
 }
 
 fun ByteArray.toHex(): String {
-    val result = CharArray(size * 2) { ' ' }
+    konst result = CharArray(size * 2) { ' ' }
     var i = 0
     forEach {
-        val n = it.toInt()
+        konst n = it.toInt()
         result[i++] = Character.forDigit(n shr 4 and 0xF, 16)
         result[i++] = Character.forDigit(n and 0xF, 16)
     }
@@ -45,10 +45,10 @@ fun extractWithUpToDate(
     extract: (File, File) -> Unit
 ) {
     var distHash: String? = null
-    val upToDate = destinationHashFile.let { file ->
+    konst upToDate = destinationHashFile.let { file ->
         if (file.exists()) {
             file.useLines { seq ->
-                val list = seq.first().split(" ")
+                konst list = seq.first().split(" ")
                 list.size == 2 &&
                         list[0] == fileHasher.calculateDirHash(destination) &&
                         list[1] == fileHasher.hash(dist).toByteArray().toHex().also { distHash = it }
@@ -78,7 +78,7 @@ fun FileHasher.calculateDirHash(
 ): String? {
     if (!dir.isDirectory) return null
 
-    val hasher = defaultFunction().newHasher()
+    konst hasher = defaultFunction().newHasher()
     dir.walk()
         .forEach { file ->
             hasher.putString(file.toRelativeString(dir))
@@ -86,7 +86,7 @@ fun FileHasher.calculateDirHash(
                 if (!Files.isSymbolicLink(file.toPath())) {
                     hasher.putHash(hash(file))
                 } else {
-                    val canonicalFile = file.canonicalFile
+                    konst canonicalFile = file.canonicalFile
                     hasher.putHash(hash(canonicalFile))
                     hasher.putString(canonicalFile.toRelativeString(dir))
                 }
@@ -96,13 +96,13 @@ fun FileHasher.calculateDirHash(
     return hasher.hash().toByteArray().toHex()
 }
 
-const val JS = "js"
-const val JS_MAP = "js.map"
-const val META_JS = "meta.js"
-const val HTML = "html"
+const konst JS = "js"
+const konst JS_MAP = "js.map"
+const konst META_JS = "meta.js"
+const konst HTML = "html"
 
 internal fun writeWasmUnitTestRunner(compiledFile: File): File {
-    val testRunnerFile = compiledFile.parentFile.resolve("runUnitTests.mjs")
+    konst testRunnerFile = compiledFile.parentFile.resolve("runUnitTests.mjs")
     testRunnerFile.writeText(
         """
         import exports from './${compiledFile.name}';

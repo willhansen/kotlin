@@ -14,27 +14,27 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
-class ModuleIndex(val module: IrModuleFragment) {
+class ModuleIndex(konst module: IrModuleFragment) {
 
     /**
      * Contains all classes declared in [module]
      */
-    val classes: Map<ClassDescriptor, IrClass>
+    konst classes: Map<ClassDescriptor, IrClass>
 
     /**
      * Contains all functions declared in [module]
      */
-    val functions: Map<FunctionDescriptor, IrFunction>
+    konst functions: Map<FunctionDescriptor, IrFunction>
 
     /**
      * Contains all properties declared in [module]
      */
-    val properties: Map<PropertyDescriptor, IrProperty>
+    konst properties: Map<PropertyDescriptor, IrProperty>
 
     /**
      * Contains all enum entries declared in [module]
      */
-    val enumEntries: Map<ClassDescriptor, IrEnumEntry>
+    konst enumEntries: Map<ClassDescriptor, IrEnumEntry>
 
     init {
         classes = mutableMapOf()

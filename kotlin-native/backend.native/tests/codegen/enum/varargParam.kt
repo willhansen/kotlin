@@ -7,7 +7,7 @@ package codegen.enum.varargParam
 
 import kotlin.test.*
 
-enum class Piece(vararg val states: Int) {
+enum class Piece(vararg konst states: Int) {
     I(3, 4, 5)
 }
 

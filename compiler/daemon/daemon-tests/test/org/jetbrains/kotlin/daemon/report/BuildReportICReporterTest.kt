@@ -17,8 +17,8 @@ class BuildReportICReporterTest {
 
     @Test
     fun testVerboseMode() {
-        val compilationResults = FakeCompilationResults()
-        val reporter = BuildReportICReporter(compilationResults, File("unusedRootDir"), isVerbose = true)
+        konst compilationResults = FakeCompilationResults()
+        konst reporter = BuildReportICReporter(compilationResults, File("unusedRootDir"), isVerbose = true)
         reporter.warn { WARNING_MESSAGE }
         reporter.info { INFO_MESSAGE }
         reporter.debug { DEBUG_MESSAGE }
@@ -32,8 +32,8 @@ class BuildReportICReporterTest {
 
     @Test
     fun testNonVerboseMode() {
-        val compilationResults = FakeCompilationResults()
-        val reporter = BuildReportICReporter(compilationResults, File("unusedRootDir"), isVerbose = false)
+        konst compilationResults = FakeCompilationResults()
+        konst reporter = BuildReportICReporter(compilationResults, File("unusedRootDir"), isVerbose = false)
         reporter.warn { WARNING_MESSAGE }
         reporter.info { INFO_MESSAGE }
         reporter.debug { DEBUG_MESSAGE }
@@ -46,6 +46,6 @@ class BuildReportICReporterTest {
     }
 }
 
-internal const val WARNING_MESSAGE = "Warning message"
-internal const val INFO_MESSAGE = "Info message"
-internal const val DEBUG_MESSAGE = "Debug message"
+internal const konst WARNING_MESSAGE = "Warning message"
+internal const konst INFO_MESSAGE = "Info message"
+internal const konst DEBUG_MESSAGE = "Debug message"

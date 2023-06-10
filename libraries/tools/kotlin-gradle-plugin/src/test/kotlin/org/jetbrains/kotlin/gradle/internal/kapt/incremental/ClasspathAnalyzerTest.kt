@@ -23,7 +23,7 @@ class ClasspathAnalyzerTest {
 
     @Test
     fun testDirectory() {
-        val classesDir = tmp.newFolder().also { dir ->
+        konst classesDir = tmp.newFolder().also { dir ->
             dir.resolve("test").mkdirs()
             dir.resolve("test/A.class").writeBytes(emptyClass("test/A"))
             dir.resolve("test/B.class").writeBytes(emptyClass("test/B"))
@@ -34,10 +34,10 @@ class ClasspathAnalyzerTest {
                 it.writeBytes(emptyClass("A"))
             }
         }
-        val outputs = TransformOutputsMock(tmp.newFolder())
+        konst outputs = TransformOutputsMock(tmp.newFolder())
         transform(classesDir, outputs)
 
-        val data = ClasspathEntryData.ClasspathEntrySerializer.loadFrom(outputs.createdOutputs.single())
+        konst data = ClasspathEntryData.ClasspathEntrySerializer.loadFrom(outputs.createdOutputs.single())
         assertEquals(setOf("test/A", "test/B"), data.classAbiHash.keys)
         assertEquals(setOf("test/A", "test/B"), data.classDependencies.keys)
         assertEquals(emptySet<String>(), data.classDependencies["test/A"]!!.abiTypes)
@@ -49,7 +49,7 @@ class ClasspathAnalyzerTest {
 
     @Test
     fun testJar() {
-        val inputJar = tmp.newFile("input.jar").also { jar ->
+        konst inputJar = tmp.newFile("input.jar").also { jar ->
             ZipOutputStream(jar.outputStream()).use {
                 it.putNextEntry(ZipEntry("test/A.class"))
                 it.write(emptyClass("test/A"))
@@ -70,10 +70,10 @@ class ClasspathAnalyzerTest {
                 it.closeEntry()
             }
         }
-        val outputs = TransformOutputsMock(tmp.newFolder())
+        konst outputs = TransformOutputsMock(tmp.newFolder())
         transform(inputJar, outputs)
 
-        val data = ClasspathEntryData.ClasspathEntrySerializer.loadFrom(outputs.createdOutputs.single())
+        konst data = ClasspathEntryData.ClasspathEntrySerializer.loadFrom(outputs.createdOutputs.single())
         assertEquals(setOf("test/A", "test/B"), data.classAbiHash.keys)
         assertEquals(setOf("test/A", "test/B"), data.classDependencies.keys)
         assertEquals(emptySet<String>(), data.classDependencies["test/A"]!!.abiTypes)
@@ -85,7 +85,7 @@ class ClasspathAnalyzerTest {
 
     @Test
     fun testJarWithEntriesShuffled() {
-        val jarA = tmp.newFile("inputA.jar").also { jar ->
+        konst jarA = tmp.newFile("inputA.jar").also { jar ->
             ZipOutputStream(jar.outputStream()).use {
                 it.putNextEntry(ZipEntry("test/A.class"))
                 it.write(emptyClass("test/A"))
@@ -96,10 +96,10 @@ class ClasspathAnalyzerTest {
                 it.closeEntry()
             }
         }
-        val outputsA = TransformOutputsMock(tmp.newFolder())
+        konst outputsA = TransformOutputsMock(tmp.newFolder())
         transform(jarA, outputsA)
 
-        val jarB = tmp.newFile("inputB.jar").also { jar ->
+        konst jarB = tmp.newFile("inputB.jar").also { jar ->
             ZipOutputStream(jar.outputStream()).use {
                 it.putNextEntry(ZipEntry("test/B.class"))
                 it.write(emptyClass("test/B"))
@@ -110,7 +110,7 @@ class ClasspathAnalyzerTest {
                 it.closeEntry()
             }
         }
-        val outputsB = TransformOutputsMock(tmp.newFolder())
+        konst outputsB = TransformOutputsMock(tmp.newFolder())
         transform(jarB, outputsB)
 
         assertArrayEquals(outputsA.createdOutputs.single().readBytes(), outputsB.createdOutputs.single().readBytes())
@@ -118,17 +118,17 @@ class ClasspathAnalyzerTest {
 
     @Test
     fun emptyInput() {
-        val outputs = TransformOutputsMock(tmp.newFolder())
+        konst outputs = TransformOutputsMock(tmp.newFolder())
         transform(tmp.newFolder("input"), outputs)
 
-        val data = ClasspathEntryData.ClasspathEntrySerializer.loadFrom(outputs.createdOutputs.single())
+        konst data = ClasspathEntryData.ClasspathEntrySerializer.loadFrom(outputs.createdOutputs.single())
         assertTrue(data.classAbiHash.isEmpty())
         assertTrue(data.classDependencies.isEmpty())
     }
 
     @Test
     fun testJarsWithDependenciesWithinClasses() {
-        val inputJar = tmp.newFile("input.jar").also { jar ->
+        konst inputJar = tmp.newFile("input.jar").also { jar ->
             ZipOutputStream(jar.outputStream()).use {
                 it.putNextEntry(ZipEntry("test/A.class"))
                 it.write(emptyClass("test/A", "test/B"))
@@ -143,32 +143,32 @@ class ClasspathAnalyzerTest {
                 it.closeEntry()
             }
         }
-        val outputs = TransformOutputsMock(tmp.newFolder())
+        konst outputs = TransformOutputsMock(tmp.newFolder())
         transform(inputJar, outputs)
 
-        val data = ClasspathEntryData.ClasspathEntrySerializer.loadFrom(outputs.createdOutputs.single())
+        konst data = ClasspathEntryData.ClasspathEntrySerializer.loadFrom(outputs.createdOutputs.single())
         assertEquals(setOf("test/A", "test/B", "test/C"), data.classAbiHash.keys)
         assertEquals(setOf("test/A", "test/B", "test/C"), data.classDependencies.keys)
     }
 
     private fun emptyClass(internalName: String, superClass: String = "java/lang/Object"): ByteArray {
-        val writer = ClassWriter(Opcodes.API_VERSION)
+        konst writer = ClassWriter(Opcodes.API_VERSION)
         writer.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, internalName, null, superClass, emptyArray())
         return writer.toByteArray()
     }
 }
 
-class TransformOutputsMock(val outputDir: File) : TransformOutputs {
-    val createdOutputs = mutableListOf<File>()
+class TransformOutputsMock(konst outputDir: File) : TransformOutputs {
+    konst createdOutputs = mutableListOf<File>()
 
     override fun file(name: Any): File {
-        val newFile = outputDir.resolve(name as String)
+        konst newFile = outputDir.resolve(name as String)
         createdOutputs.add(newFile)
         return newFile
     }
 
     override fun dir(name: Any): File {
-        val newDir = outputDir.resolve(name as String)
+        konst newDir = outputDir.resolve(name as String)
         createdOutputs.add(newDir)
         return newDir
     }

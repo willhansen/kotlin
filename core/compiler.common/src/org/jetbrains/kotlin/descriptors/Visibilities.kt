@@ -11,7 +11,7 @@ object Visibilities {
     }
 
     object PrivateToThis : Visibility("private_to_this", isPublicAPI = false) {
-        override val internalDisplayName: String
+        override konst internalDisplayName: String
             get() = "private/*private to this*/"
 
         override fun mustCheckInImports(): Boolean = true
@@ -42,7 +42,7 @@ object Visibilities {
     object InvisibleFake : Visibility("invisible_fake", isPublicAPI = false) {
         override fun mustCheckInImports(): Boolean = true
 
-        override val externalDisplayName: String
+        override konst externalDisplayName: String
             get() = "invisible (private in a supertype)"
     }
 
@@ -53,7 +53,7 @@ object Visibilities {
     }
 
     @OptIn(ExperimentalStdlibApi::class)
-    private val ORDERED_VISIBILITIES: Map<Visibility, Int> = buildMap {
+    private konst ORDERED_VISIBILITIES: Map<Visibility, Int> = buildMap {
         put(PrivateToThis, 0)
         put(Private, 0)
         put(Internal, 1)
@@ -62,11 +62,11 @@ object Visibilities {
     }
 
     fun compare(first: Visibility, second: Visibility): Int? {
-        val result = first.compareTo(second)
+        konst result = first.compareTo(second)
         if (result != null) {
             return result
         }
-        val oppositeResult = second.compareTo(first)
+        konst oppositeResult = second.compareTo(first)
         return if (oppositeResult != null) {
             -oppositeResult
         } else null
@@ -74,8 +74,8 @@ object Visibilities {
 
     internal fun compareLocal(first: Visibility, second: Visibility): Int? {
         if (first === second) return 0
-        val firstIndex = ORDERED_VISIBILITIES[first]
-        val secondIndex = ORDERED_VISIBILITIES[second]
+        konst firstIndex = ORDERED_VISIBILITIES[first]
+        konst secondIndex = ORDERED_VISIBILITIES[second]
         return if (firstIndex == null || secondIndex == null || firstIndex == secondIndex) {
             null
         } else firstIndex - secondIndex
@@ -85,5 +85,5 @@ object Visibilities {
         return visibility === Private || visibility === PrivateToThis
     }
 
-    val DEFAULT_VISIBILITY = Public
+    konst DEFAULT_VISIBILITY = Public
 }

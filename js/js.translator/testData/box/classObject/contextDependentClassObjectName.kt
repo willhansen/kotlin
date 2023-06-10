@@ -1,7 +1,7 @@
 class MyClass {
     companion object {
         fun ok(): String {
-            val okMaker = object {
+            konst okMaker = object {
                 fun getOk(): String = "OK"
             }
             return okMaker.getOk()

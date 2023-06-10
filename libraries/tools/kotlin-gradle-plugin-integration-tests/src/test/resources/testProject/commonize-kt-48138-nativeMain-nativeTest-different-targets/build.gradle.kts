@@ -6,7 +6,7 @@ operator fun KotlinSourceSet.invoke(builder: SourceSetHierarchyBuilder.() -> Uni
     return this
 }
 
-class SourceSetHierarchyBuilder(private val node: KotlinSourceSet) {
+class SourceSetHierarchyBuilder(private konst node: KotlinSourceSet) {
     operator fun KotlinSourceSet.unaryMinus() = this.dependsOn(node)
 }
 
@@ -24,22 +24,22 @@ kotlin {
     linuxArm64()
     mingwX64()
 
-    val commonMain by sourceSets.getting
-    val nativeMain by sourceSets.creating
-    val linuxX64Main by sourceSets.getting
-    val linuxArm64Main by sourceSets.getting
-    val mingwX64Main by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst nativeMain by sourceSets.creating
+    konst linuxX64Main by sourceSets.getting
+    konst linuxArm64Main by sourceSets.getting
+    konst mingwX64Main by sourceSets.getting
 
     nativeMain.dependsOn(commonMain)
     linuxX64Main.dependsOn(nativeMain)
     linuxArm64Main.dependsOn(nativeMain)
     mingwX64Main.dependsOn(nativeMain)
 
-    val commonTest by sourceSets.getting
-    val nativeTest by sourceSets.creating
-    val linuxX64Test by sourceSets.getting
-    val linuxArm64Test by sourceSets.getting
-    val mingwX64Test by sourceSets.getting
+    konst commonTest by sourceSets.getting
+    konst nativeTest by sourceSets.creating
+    konst linuxX64Test by sourceSets.getting
+    konst linuxArm64Test by sourceSets.getting
+    konst mingwX64Test by sourceSets.getting
 
     nativeTest.dependsOn(commonTest)
     linuxX64Test.dependsOn(nativeTest)

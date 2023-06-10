@@ -59,7 +59,7 @@ internal fun MemberToTransformer.add(type: IrType, name: Name, v: (IrFunctionAcc
     put(SimpleMemberKey(type, name), v)
 }
 
-internal data class SimpleMemberKey(val klass: IrType, val name: Name)
+internal data class SimpleMemberKey(konst klass: IrType, konst name: Name)
 
 enum class PrimitiveType {
     FLOATING_POINT_NUMBER,

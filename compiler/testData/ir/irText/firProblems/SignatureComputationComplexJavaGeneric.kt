@@ -30,9 +30,9 @@ public abstract class JavaClass2<T extends @Nullable Object, R extends @Nullable
 
 // FILE: test.kt
 
-class Inv<T>(val x: T)
+class Inv<T>(konst x: T)
 
-class Test_1<TT>(val x: TT) : JavaClass1<TT>() {
+class Test_1<TT>(konst x: TT) : JavaClass1<TT>() {
     fun test(b: B) { b.output(x) }
 }
 

@@ -6,20 +6,20 @@ import kotlinx.serialization.*
 
 // Serializers for classes containing themselves as properties should be cached correctly
 @Serializable
-class Plain(val p: Plain? = null)
+class Plain(konst p: Plain? = null)
 
 @Serializable
-sealed class Sealed(val p: Sealed? = null)
+sealed class Sealed(konst p: Sealed? = null)
 
 @Serializable
-open class Open(val p: Open? = null)
+open class Open(konst p: Open? = null)
 
 @Serializable
-abstract class Abstract(val p: Abstract? = null)
+abstract class Abstract(konst p: Abstract? = null)
 
 @Serializable
 class GenericHolder<T> {
-    var value: T? = null
+    var konstue: T? = null
 }
 
 @Serializable
@@ -33,13 +33,13 @@ sealed class SealedListGeneric {
 }
 
 @Serializable
-class AccessFromCompanion(@Contextual val category: Any) {
+class AccessFromCompanion(@Contextual konst category: Any) {
     companion object {
         init {
             serializer().descriptor.getElementDescriptor(0).isNullable
         }
         var isNullable = serializer().descriptor.getElementDescriptor(0).isNullable
-        val isNullable2 = serializer<AccessFromCompanion>().descriptor.getElementDescriptor(0).isNullable
+        konst isNullable2 = serializer<AccessFromCompanion>().descriptor.getElementDescriptor(0).isNullable
     }
 }
 

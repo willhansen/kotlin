@@ -9,34 +9,34 @@ import com.intellij.openapi.vfs.VirtualFile
 import java.io.InputStream
 
 class CtSymDirectoryContainer(
-    private val parent: VirtualFile?,
-    private val rootOrPackageParts: List<VirtualFile>,
-    private val packages: Map<String, Boolean>,
-    private val currentPackage: String,
-    private val moduleRoot: String,
-    private val skipPackageCheck: Boolean
+    private konst parent: VirtualFile?,
+    private konst rootOrPackageParts: List<VirtualFile>,
+    private konst packages: Map<String, Boolean>,
+    private konst currentPackage: String,
+    private konst moduleRoot: String,
+    private konst skipPackageCheck: Boolean
 ) : VirtualFile() {
 
-    private val _path by lazy { parent?.path + currentPackage + "/" }
+    private konst _path by lazy { parent?.path + currentPackage + "/" }
 
-    private val _fileSystem by lazy { parent!!.fileSystem }
+    private konst _fileSystem by lazy { parent!!.fileSystem }
 
-    private val _isValid by lazy { rootOrPackageParts.all { it.isValid } }
+    private konst _isValid by lazy { rootOrPackageParts.all { it.isValid } }
 
-    private val _children by lazy {
-        val children = rootOrPackageParts.flatMap { it.children?.toList() ?: emptyList() }
+    private konst _children by lazy {
+        konst children = rootOrPackageParts.flatMap { it.children?.toList() ?: emptyList() }
         if (children.isEmpty()) return@lazy emptyArray()
 
-        val isExported = skipPackageCheck || packages.getOrDefault(currentPackage, false)
-        val containers = mutableMapOf<String, Pair<CtSymDirectoryContainer, MutableList<VirtualFile>>>()
+        konst isExported = skipPackageCheck || packages.getOrDefault(currentPackage, false)
+        konst containers = mutableMapOf<String, Pair<CtSymDirectoryContainer, MutableList<VirtualFile>>>()
         children.mapNotNull { child ->
             when {
                 child.isDirectory -> {
-                    val childPackage = if (currentPackage.isEmpty()) child.name else currentPackage + "." + child.name
+                    konst childPackage = if (currentPackage.isEmpty()) child.name else currentPackage + "." + child.name
                     var addingEntry: CtSymDirectoryContainer? = null
                     if (skipPackageCheck || packages.contains(childPackage)) {
                         containers.getOrPut(childPackage) {
-                            val list = mutableListOf<VirtualFile>()
+                            konst list = mutableListOf<VirtualFile>()
                             CtSymDirectoryContainer(
                                 this,
                                 list,

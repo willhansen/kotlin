@@ -22,22 +22,22 @@ sealed class CDPResponse {
      *
      * [id] is a message id with which the method was invoked, [result] is the result of the invocation.
      */
-    class MethodInvocationResult(val id: Int, val result: CDPMethodInvocationResult) : CDPResponse()
+    class MethodInvocationResult(konst id: Int, konst result: CDPMethodInvocationResult) : CDPResponse()
 
     /**
      * Indicates that a CDP method invocation failed.
      *
      * [id] is a message id with which the method was invoked, [error] is the failure information.
      */
-    class Error(val id: Int, val error: CDPError) : CDPResponse()
+    class Error(konst id: Int, konst error: CDPError) : CDPResponse()
 
     /**
      * Indicates an event received from CDP. Events are not tied to any method invocations.
      */
-    class Event(val event: CDPEvent) : CDPResponse()
+    class Event(konst event: CDPEvent) : CDPResponse()
 }
 
-private val json = Json {
+private konst json = Json {
     ignoreUnknownKeys = true
 }
 
@@ -50,16 +50,16 @@ fun decodeCDPResponse(
     message: String,
     serializerForMessageId: (Int) -> CDPMethodCallEncodingInfo
 ): CDPResponse {
-    val jsonElement = json.parseToJsonElement(message)
-    return when (val id = jsonElement.jsonObject["id"]?.jsonPrimitive?.int) {
+    konst jsonElement = json.parseToJsonElement(message)
+    return when (konst id = jsonElement.jsonObject["id"]?.jsonPrimitive?.int) {
         null -> CDPResponse.Event(decodeCDPEvent(jsonElement))
         else -> {
-            val serializer = when (val encodingInfo = serializerForMessageId(id)) {
+            konst serializer = when (konst encodingInfo = serializerForMessageId(id)) {
                 is CDPMethodCallEncodingInfoImpl -> encodingInfo.serializer
                 is CDPMethodCallEncodingInfoPlainText -> null
             }
-            val result = jsonElement.jsonObject["result"]
-            val error = jsonElement.jsonObject["error"]
+            konst result = jsonElement.jsonObject["result"]
+            konst error = jsonElement.jsonObject["error"]
             if (result != null) {
                 CDPResponse.MethodInvocationResult(
                     id,
@@ -79,12 +79,12 @@ fun decodeCDPResponse(
  *
  * Depending on the method, the type of the result may be different. So, when invoking a method,
  * we save the information about how to decode its result, so that when the result is received,
- * we could decode a value of the correct type.
+ * we could decode a konstue of the correct type.
  */
 sealed interface CDPMethodCallEncodingInfo
 
 private class CDPMethodCallEncodingInfoImpl(
-    val serializer: DeserializationStrategy<out CDPMethodInvocationResult>
+    konst serializer: DeserializationStrategy<out CDPMethodInvocationResult>
 ) : CDPMethodCallEncodingInfo
 
 /**
@@ -100,7 +100,7 @@ private inline fun <reified Response : CDPMethodInvocationResult, reified Params
     methodName: String,
     params: Params?
 ): Pair<String, CDPMethodCallEncodingInfo> {
-    val request = CDPRequest(messageId, methodName, params)
+    konst request = CDPRequest(messageId, methodName, params)
     return json.encodeToString(request) to
             CDPMethodCallEncodingInfoImpl(json.serializersModule.serializer<Response>())
 }
@@ -121,7 +121,7 @@ object CDPMethodInvocationResultUnit : CDPMethodInvocationResult()
  * A special kind of method invocation result that indicates that the response contents should not be decoded from JSON,
  * and instead should be returned as-is.
  */
-class CDPMethodInvocationResultPlainText(val string: String) : CDPMethodInvocationResult()
+class CDPMethodInvocationResultPlainText(konst string: String) : CDPMethodInvocationResult()
 
 /**
  * A superclass for each kind of CDP method invocation parameters.
@@ -140,16 +140,16 @@ internal object CDPRequestParamsUnit : CDPRequestParams()
  */
 @Serializable
 class CDPRequest<Params : CDPRequestParams>(
-    val id: Int,
-    val method: String,
-    val params: Params? = null
+    konst id: Int,
+    konst method: String,
+    konst params: Params? = null
 )
 
 /**
  * A representation of a [Chrome DevTools protocol](https://chromedevtools.github.io/devtools-protocol/) error.
  */
 @Serializable
-class CDPError private constructor(val code: Int, val message: String? = null)
+class CDPError private constructor(konst code: Int, konst message: String? = null)
 
 /**
  * A superclass for each kind of CDP event.
@@ -160,11 +160,11 @@ sealed class CDPEvent
 /**
  * When we encounter a CDP event whose name we don't know, we return an instance of this class.
  */
-class UnknownCDPEvent(val name: String) : CDPEvent()
+class UnknownCDPEvent(konst name: String) : CDPEvent()
 
 private fun decodeCDPEvent(element: JsonElement): CDPEvent {
-    val method = element.jsonObject["method"]!!.jsonPrimitive.content
-    val params = element.jsonObject["params"] ?: error("missing params")
+    konst method = element.jsonObject["method"]!!.jsonPrimitive.content
+    konst params = element.jsonObject["params"] ?: error("missing params")
     return when (method) {
         "Debugger.breakpointResolved" -> json.decodeFromJsonElement(Debugger.Event.BreakpointResolved.serializer(), params)
         "Debugger.paused" -> json.decodeFromJsonElement(Debugger.Event.Paused.serializer(), params)
@@ -181,25 +181,25 @@ private fun decodeCDPEvent(element: JsonElement): CDPEvent {
  * Something capable of invoking a [Chrome DevTools protocol](https://chromedevtools.github.io/devtools-protocol/) method and returning
  * the result of the invocation.
  */
-interface CDPRequestEvaluator {
+interface CDPRequestEkonstuator {
 
     /**
      * @param encodeMethodCallWithMessageId passed a message id, expected to return the JSON-encoded CDP message
      * and some information about how to decode the response.
      */
-    suspend fun genericEvaluateRequest(
+    suspend fun genericEkonstuateRequest(
         encodeMethodCallWithMessageId: (Int) -> Pair<String, CDPMethodCallEncodingInfo>
     ): CDPMethodInvocationResult
 }
 
-private suspend inline fun <reified T : CDPMethodInvocationResult> CDPRequestEvaluator.evaluateRequest(
+private suspend inline fun <reified T : CDPMethodInvocationResult> CDPRequestEkonstuator.ekonstuateRequest(
     noinline body: (Int) -> Pair<String, CDPMethodCallEncodingInfo>
-) = genericEvaluateRequest(body) as T
+) = genericEkonstuateRequest(body) as T
 
 /**
  * The [`Runtime` domain](https://chromedevtools.github.io/devtools-protocol/tot/Runtime/) of Chrome DevTools protocol.
  */
-class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
+class Runtime(private konst requestEkonstuator: CDPRequestEkonstuator) {
 
     /**
      * Enables reporting of execution contexts creation by means of [Runtime.Event.ExecutionContextCreated] event.
@@ -208,7 +208,7 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
      * See [Runtime.enable](https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-enable)
      */
     suspend fun enable() {
-        requestEvaluator.evaluateRequest<CDPMethodInvocationResultUnit> { messageId ->
+        requestEkonstuator.ekonstuateRequest<CDPMethodInvocationResultUnit> { messageId ->
             encodeCDPMethodCall<CDPMethodInvocationResultUnit, CDPRequestParamsUnit>(messageId, "Runtime.enable", null)
         }
     }
@@ -219,41 +219,41 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
      * See [Runtime.runIfWaitingForDebugger](https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-runIfWaitingForDebugger)
      */
     suspend fun runIfWaitingForDebugger() {
-        requestEvaluator.evaluateRequest<CDPMethodInvocationResultUnit> { messageId ->
+        requestEkonstuator.ekonstuateRequest<CDPMethodInvocationResultUnit> { messageId ->
             encodeCDPMethodCall<CDPMethodInvocationResultUnit, CDPRequestParamsUnit>(messageId, "Runtime.runIfWaitingForDebugger", null)
         }
     }
 
     @Serializable
-    class EvaluationResult private constructor(
+    class EkonstuationResult private constructor(
         /**
-         * Evaluation result.
+         * Ekonstuation result.
          */
-        val result: RemoteObject,
+        konst result: RemoteObject,
         /**
          * Exception details.
          */
-        val exceptionDetails: ExceptionDetails? = null
+        konst exceptionDetails: ExceptionDetails? = null
     ) : CDPMethodInvocationResult()
 
     @Serializable
-    class EvaluateRequestParams(val expression: String, val contextId: ExecutionContextId? = null) : CDPRequestParams()
+    class EkonstuateRequestParams(konst expression: String, konst contextId: ExecutionContextId? = null) : CDPRequestParams()
 
     /**
-     * Evaluates expression on global object.
+     * Ekonstuates expression on global object.
      *
-     * See [Runtime.evaluate](https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-evaluate)
+     * See [Runtime.ekonstuate](https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-ekonstuate)
      *
-     * @param expression Expression to evaluate.
-     * @param contextId Specifies in which execution context to perform evaluation.
-     * If the parameter is omitted the evaluation will be performed in the context of the inspected page.
+     * @param expression Expression to ekonstuate.
+     * @param contextId Specifies in which execution context to perform ekonstuation.
+     * If the parameter is omitted the ekonstuation will be performed in the context of the inspected page.
      */
-    suspend fun evaluate(expression: String, contextId: ExecutionContextId? = null) =
-        requestEvaluator.evaluateRequest<EvaluationResult> { messageId ->
-            encodeCDPMethodCall<EvaluationResult, EvaluateRequestParams>(
+    suspend fun ekonstuate(expression: String, contextId: ExecutionContextId? = null) =
+        requestEkonstuator.ekonstuateRequest<EkonstuationResult> { messageId ->
+            encodeCDPMethodCall<EkonstuationResult, EkonstuateRequestParams>(
                 messageId,
-                "Runtime.evaluate",
-                EvaluateRequestParams(expression, contextId)
+                "Runtime.ekonstuate",
+                EkonstuateRequestParams(expression, contextId)
             )
         }
 
@@ -264,7 +264,7 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
      */
     @Serializable
     @JvmInline
-    value class ScriptId(val value: String)
+    konstue class ScriptId(konst konstue: String)
 
     /**
      * Id of an execution context.
@@ -273,7 +273,7 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
      */
     @Serializable
     @JvmInline
-    value class ExecutionContextId(val value: Int)
+    konstue class ExecutionContextId(konst konstue: Int)
 
     /**
      * Unique object identifier.
@@ -282,7 +282,7 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
      */
     @Serializable
     @JvmInline
-    value class RemoteObjectId(val value: String)
+    konstue class RemoteObjectId(konst konstue: String)
 
     /**
      * Object type.
@@ -376,7 +376,7 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
         @SerialName("webassemblymemory")
         WEBASSEMBLYMEMORY,
 
-        @SerialName("wasmvalue")
+        @SerialName("wasmkonstue")
         WASMVALUE
     }
 
@@ -390,27 +390,27 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
         /**
          * Object type.
          */
-        val type: ValueType,
+        konst type: ValueType,
         /**
-         * Object subtype hint. Specified for [ValueType.OBJECT] type values only.
+         * Object subtype hint. Specified for [ValueType.OBJECT] type konstues only.
          */
-        val subtype: ObjectSubtype? = null,
+        konst subtype: ObjectSubtype? = null,
         /**
-         * Object class (constructor) name. Specified for [ValueType.OBJECT] type values only.
+         * Object class (constructor) name. Specified for [ValueType.OBJECT] type konstues only.
          */
-        val className: String? = null,
+        konst className: String? = null,
         /**
-         * Remote object value in case of primitive values or JSON values (if it was requested).
+         * Remote object konstue in case of primitive konstues or JSON konstues (if it was requested).
          */
-        val value: JsonElement? = null,
+        konst konstue: JsonElement? = null,
         /**
          * String representation of the object.
          */
-        val description: String? = null,
+        konst description: String? = null,
         /**
-         * Unique object identifier (for non-primitive values).
+         * Unique object identifier (for non-primitive konstues).
          */
-        val objectId: RemoteObjectId? = null,
+        konst objectId: RemoteObjectId? = null,
     )
 
     /**
@@ -423,23 +423,23 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
         /**
          * JavaScript function name.
          */
-        val functionName: String,
+        konst functionName: String,
         /**
          * JavaScript script id.
          */
-        val scriptId: ScriptId,
+        konst scriptId: ScriptId,
         /**
          * JavaScript script name or url.
          */
-        val url: String,
+        konst url: String,
         /**
          * JavaScript script line number (0-based).
          */
-        val lineNumber: Int,
+        konst lineNumber: Int,
         /**
          * JavaScript script column number (0-based).
          */
-        val columnNumber: Int
+        konst columnNumber: Int
     )
 
     /**
@@ -452,16 +452,16 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
         /**
          * String label of this stack trace. For async traces this may be a name of the function that initiated the async call.
          */
-        val description: String? = null,
+        konst description: String? = null,
         /**
          * A list of call frames in the stack trace.
          */
-        val callFrames: List<CallFrame>,
+        konst callFrames: List<CallFrame>,
 
         /**
          * Asynchronous JavaScript stack trace that preceded this stack, if available.
          */
-        val parent: StackTrace? = null
+        konst parent: StackTrace? = null
     )
 
     /**
@@ -474,39 +474,39 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
         /**
          * Exception id.
          */
-        val exceptionId: Int,
+        konst exceptionId: Int,
         /**
          * Exception text, which should be used together with exception object when available.
          */
-        val text: String,
+        konst text: String,
         /**
          * Line number of the exception location (0-based).
          */
-        val lineNumber: Int,
+        konst lineNumber: Int,
         /**
          * Column number of the exception location (0-based).
          */
-        val columnNumber: Int,
+        konst columnNumber: Int,
         /**
          * Script ID of the exception location.
          */
-        val scriptId: ScriptId? = null,
+        konst scriptId: ScriptId? = null,
         /**
          * URL of the exception location, to be used when the script was not reported.
          */
-        val url: String? = null,
+        konst url: String? = null,
         /**
          * JavaScript stack trace if available.
          */
-        val stackTrace: StackTrace? = null,
+        konst stackTrace: StackTrace? = null,
         /**
          * Exception object if available.
          */
-        val exception: RemoteObject? = null,
+        konst exception: RemoteObject? = null,
         /**
          * Identifier of the context where exception happened.
          */
-        val executionContextId: ExecutionContextId? = null,
+        konst executionContextId: ExecutionContextId? = null,
     )
 
     /**
@@ -517,17 +517,17 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
     @Serializable
     class ExecutionContextDescription(
         /**
-         * Unique id of the execution context. It can be used to specify in which execution context script evaluation should be performed.
+         * Unique id of the execution context. It can be used to specify in which execution context script ekonstuation should be performed.
          */
-        val id: ExecutionContextId,
+        konst id: ExecutionContextId,
         /**
          * Execution context origin.
          */
-        val origin: String,
+        konst origin: String,
         /**
          * Human readable name describing given context.
          */
-        val name: String,
+        konst name: String,
     )
 
     /**
@@ -545,7 +545,7 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
             /**
              * A newly created execution context.
              */
-            val context: ExecutionContextDescription,
+            konst context: ExecutionContextDescription,
         ) : Event()
 
         /**
@@ -558,7 +558,7 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
             /**
              * Id of the destroyed context
              */
-            val executionContextId: ExecutionContextId
+            konst executionContextId: ExecutionContextId
         ) : Event()
     }
 }
@@ -566,7 +566,7 @@ class Runtime(private val requestEvaluator: CDPRequestEvaluator) {
 /**
  * The [`Debugger` domain](https://chromedevtools.github.io/devtools-protocol/tot/Debugger/) of Chrome DevTools protocol.
  */
-class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
+class Debugger(private konst requestEkonstuator: CDPRequestEkonstuator) {
 
     /**
      * Enables the debugger.
@@ -574,13 +574,13 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
      * See [Debugger.enable](https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-enable)
      */
     suspend fun enable() {
-        requestEvaluator.evaluateRequest<CDPMethodInvocationResultUnit> { messageId ->
+        requestEkonstuator.ekonstuateRequest<CDPMethodInvocationResultUnit> { messageId ->
             encodeCDPMethodCall<CDPMethodInvocationResultUnit, CDPRequestParamsUnit>(messageId, "Debugger.enable", null)
         }
     }
 
     @Serializable
-    class ResumeRequestParams private constructor(val terminateOnResume: Boolean = false) : CDPRequestParams()
+    class ResumeRequestParams private constructor(konst terminateOnResume: Boolean = false) : CDPRequestParams()
 
     /**
      * Resumes JavaScript execution.
@@ -588,7 +588,7 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
      * See [Debugger.resume](https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-resume)
      */
     suspend fun resume() {
-        requestEvaluator.evaluateRequest<CDPMethodInvocationResultUnit> { messageId ->
+        requestEkonstuator.ekonstuateRequest<CDPMethodInvocationResultUnit> { messageId ->
             encodeCDPMethodCall<CDPMethodInvocationResultUnit, ResumeRequestParams>(messageId, "Debugger.resume", null)
         }
     }
@@ -598,21 +598,21 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
         /**
          * Id of the created breakpoint for further reference.
          */
-        val breakpointId: BreakpointId,
+        konst breakpointId: BreakpointId,
 
         /**
          * List of the locations this breakpoint resolved into upon addition.
          */
-        val locations: List<Location>
+        konst locations: List<Location>
     ) : CDPMethodInvocationResult()
 
     @Serializable
     private class SetBreakpointByUrlRequestParams(
-        val lineNumber: Int,
-        val url: String,
-        val scriptHash: String? = null,
-        val columnNumber: Int? = null,
-        val condition: String? = null,
+        konst lineNumber: Int,
+        konst url: String,
+        konst scriptHash: String? = null,
+        konst columnNumber: Int? = null,
+        konst condition: String? = null,
     ) : CDPRequestParams()
 
     /**
@@ -628,7 +628,7 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
      * @param scriptHash Script hash of the resources to set breakpoint on.
      * @param columnNumber Offset in the line to set breakpoint at.
      * @param condition Expression to use as a breakpoint condition.
-     * When specified, debugger will only stop on the breakpoint if this expression evaluates to true.
+     * When specified, debugger will only stop on the breakpoint if this expression ekonstuates to true.
      */
     suspend fun setBreakpointByUrl(
         lineNumber: Int,
@@ -636,7 +636,7 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
         scriptHash: String? = null,
         columnNumber: Int? = null,
         condition: String? = null
-    ) = requestEvaluator.evaluateRequest<SetBreakpointByUrlResult> { messageId ->
+    ) = requestEkonstuator.ekonstuateRequest<SetBreakpointByUrlResult> { messageId ->
         encodeCDPMethodCall<SetBreakpointByUrlResult, SetBreakpointByUrlRequestParams>(
             messageId,
             "Debugger.setBreakpointByUrl",
@@ -655,18 +655,18 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
         /**
          * Id of the created breakpoint for further reference.
          */
-        val breakpointId: BreakpointId,
+        konst breakpointId: BreakpointId,
 
         /**
          * Location this breakpoint resolved into.
          */
-        val actualLocation: Location
+        konst actualLocation: Location
     ) : CDPMethodInvocationResult()
 
     @Serializable
     private class SetBreakpointRequestParams(
-        val location: Location,
-        val condition: String? = null,
+        konst location: Location,
+        konst condition: String? = null,
     ) : CDPRequestParams()
 
     /**
@@ -678,14 +678,14 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
      * @param lineNumber Line number in the script (0-based).
      * @param columnNumber Column number in the script (0-based).
      * @param condition Expression to use as a breakpoint condition.
-     * When specified, debugger will only stop on the breakpoint if this expression evaluates to true.
+     * When specified, debugger will only stop on the breakpoint if this expression ekonstuates to true.
      */
     suspend fun setBreakpoint(
         scriptId: Runtime.ScriptId,
         lineNumber: Int,
         columnNumber: Int? = null,
         condition: String? = null
-    ) = requestEvaluator.evaluateRequest<SetBreakpointResult> { messageId ->
+    ) = requestEkonstuator.ekonstuateRequest<SetBreakpointResult> { messageId ->
         encodeCDPMethodCall<SetBreakpointResult, SetBreakpointRequestParams>(
             messageId,
             "Debugger.setBreakpoint",
@@ -694,17 +694,17 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
     }
 
     @Serializable
-    private class SetSkipAllPausesRequestParams(val skip: Boolean) : CDPRequestParams()
+    private class SetSkipAllPausesRequestParams(konst skip: Boolean) : CDPRequestParams()
 
     /**
      * Makes page not interrupt on any pauses (breakpoint, exception, dom exception etc).
      *
      * See [Debugger.setSkipAllPauses](https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setSkipAllPauses)
      *
-     * @param skip New value for skip pauses state.
+     * @param skip New konstue for skip pauses state.
      */
     suspend fun setSkipAllPauses(skip: Boolean) {
-        requestEvaluator.evaluateRequest<CDPMethodInvocationResultUnit> { messageId ->
+        requestEkonstuator.ekonstuateRequest<CDPMethodInvocationResultUnit> { messageId ->
             encodeCDPMethodCall<CDPMethodInvocationResultUnit, SetSkipAllPausesRequestParams>(
                 messageId,
                 "Debugger.setSkipAllPauses",
@@ -719,36 +719,36 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
      * See [Debugger.stepInto](https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-stepInto)
      */
     suspend fun stepInto() {
-        requestEvaluator.evaluateRequest<CDPMethodInvocationResultUnit> { messageId ->
+        requestEkonstuator.ekonstuateRequest<CDPMethodInvocationResultUnit> { messageId ->
             encodeCDPMethodCall<CDPMethodInvocationResultUnit, CDPRequestParamsUnit>(messageId, "Debugger.stepInto", null)
         }
     }
 
     @Serializable
-    private class EvaluateOnCallFrameRequestParams(
-        val callFrameId: CallFrameId,
-        val expression: String,
-        val returnByValue: Boolean? = null,
+    private class EkonstuateOnCallFrameRequestParams(
+        konst callFrameId: CallFrameId,
+        konst expression: String,
+        konst returnByValue: Boolean? = null,
     ) : CDPRequestParams()
 
     /**
-     * Evaluates expression on a given call frame.
+     * Ekonstuates expression on a given call frame.
      *
-     * See [Debugger.evaluateOnCallFrame](https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-evaluateOnCallFrame)
+     * See [Debugger.ekonstuateOnCallFrame](https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-ekonstuateOnCallFrame)
      *
-     * @param callFrameId Call frame identifier to evaluate on.
-     * @param expression Expression to evaluate.
-     * @param returnByValue Whether the result is expected to be a JSON object that should be sent by value.
+     * @param callFrameId Call frame identifier to ekonstuate on.
+     * @param expression Expression to ekonstuate.
+     * @param returnByValue Whether the result is expected to be a JSON object that should be sent by konstue.
      */
-    suspend fun evaluateOnCallFrame(
+    suspend fun ekonstuateOnCallFrame(
         callFrameId: CallFrameId,
         expression: String,
         returnByValue: Boolean? = null,
-    ) = requestEvaluator.evaluateRequest<Runtime.EvaluationResult> { messageId ->
-        encodeCDPMethodCall<Runtime.EvaluationResult, EvaluateOnCallFrameRequestParams>(
+    ) = requestEkonstuator.ekonstuateRequest<Runtime.EkonstuationResult> { messageId ->
+        encodeCDPMethodCall<Runtime.EkonstuationResult, EkonstuateOnCallFrameRequestParams>(
             messageId,
-            "Debugger.evaluateOnCallFrame",
-            EvaluateOnCallFrameRequestParams(callFrameId, expression, returnByValue)
+            "Debugger.ekonstuateOnCallFrame",
+            EkonstuateOnCallFrameRequestParams(callFrameId, expression, returnByValue)
         )
     }
 
@@ -759,7 +759,7 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
      */
     @Serializable
     @JvmInline
-    value class BreakpointId(val value: String)
+    konstue class BreakpointId(konst konstue: String)
 
     /**
      * Location in the source code.
@@ -771,15 +771,15 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
         /**
          * Script identifier as reported in the [Debugger.Event.ScriptParsed].
          */
-        val scriptId: Runtime.ScriptId,
+        konst scriptId: Runtime.ScriptId,
         /**
          * Line number in the script (0-based).
          */
-        val lineNumber: Int,
+        konst lineNumber: Int,
         /**
          * Column number in the script (0-based).
          */
-        val columnNumber: Int? = null
+        konst columnNumber: Int? = null
     )
 
     /**
@@ -789,7 +789,7 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
      */
     @Serializable
     @JvmInline
-    value class CallFrameId(val value: String)
+    konstue class CallFrameId(konst konstue: String)
 
     /**
      * JavaScript call frame. Array of call frames form the call stack.
@@ -799,39 +799,39 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
     @Serializable
     class CallFrame private constructor(
         /**
-         * Call frame identifier. This identifier is only valid while the virtual machine is paused.
+         * Call frame identifier. This identifier is only konstid while the virtual machine is paused.
          */
-        val callFrameId: CallFrameId,
+        konst callFrameId: CallFrameId,
 
         /**
          * Name of the JavaScript function called on this call frame.
          */
-        val functionName: String,
+        konst functionName: String,
 
         /**
          * Function location in the source code.
          */
-        val functionLocation: Location? = null,
+        konst functionLocation: Location? = null,
 
         /**
          * Location in the source code.
          */
-        val location: Location,
+        konst location: Location,
 
         /**
          * Scope chain for this call frame.
          */
-        val scopeChain: List<Scope>,
+        konst scopeChain: List<Scope>,
 
         /**
          * `this` object for this call frame.
          */
-        val `this`: Runtime.RemoteObject,
+        konst `this`: Runtime.RemoteObject,
 
         /**
-         * The value being returned, if the function is at return point.
+         * The konstue being returned, if the function is at return point.
          */
-        val returnValue: Runtime.RemoteObject? = null,
+        konst returnValue: Runtime.RemoteObject? = null,
     )
 
     @Serializable
@@ -840,25 +840,25 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
         /**
          * Scope type.
          */
-        val type: ScopeType,
+        konst type: ScopeType,
 
         /**
          * Object representing the scope. For [ScopeType.GLOBAL] and [Scopetype.WITH] scopes it represents the actual object;
          * for the rest of the scopes, it is artificial transient object enumerating scope variables as its properties.
          */
-        val `object`: Runtime.RemoteObject,
+        konst `object`: Runtime.RemoteObject,
 
-        val name: String? = null,
+        konst name: String? = null,
 
         /**
          * Location in the source code where scope starts
          */
-        val startLocation: Location? = null,
+        konst startLocation: Location? = null,
 
         /**
          * Location in the source code where scope ends
          */
-        val endLocation: Location? = null,
+        konst endLocation: Location? = null,
     )
 
     @Serializable
@@ -884,7 +884,7 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
         @SerialName("script")
         SCRIPT,
 
-        @SerialName("eval")
+        @SerialName("ekonst")
         EVAL,
 
         @SerialName("module")
@@ -953,11 +953,11 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
             /**
              * Breakpoint unique identifier.
              */
-            val breakpointId: BreakpointId,
+            konst breakpointId: BreakpointId,
             /**
              * Actual breakpoint location.
              */
-            val location: Location
+            konst location: Location
         ) : Event()
 
         /**
@@ -970,16 +970,16 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
             /**
              * Call stack the virtual machine stopped on.
              */
-            val callFrames: List<CallFrame>,
+            konst callFrames: List<CallFrame>,
             /**
              * Pause reason.
              */
-            val reason: PauseReason,
+            konst reason: PauseReason,
 
             /**
              * Hit breakpoints IDs
              */
-            val hitBreakpoints: List<BreakpointId> = emptyList()
+            konst hitBreakpoints: List<BreakpointId> = emptyList()
         ) : Event()
 
         /**
@@ -1000,31 +1000,31 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
             /**
              * Identifier of the script parsed.
              */
-            val scriptId: Runtime.ScriptId,
+            konst scriptId: Runtime.ScriptId,
             /**
              * URL or name of the script parsed (if any).
              */
-            val url: String,
+            konst url: String,
             /**
              * Line offset of the script within the resource with given URL (for script tags).
              */
-            val startLine: Int,
+            konst startLine: Int,
             /**
              * Column offset of the script within the resource with given URL.
              */
-            val startColumn: Int,
+            konst startColumn: Int,
             /**
              * Last line of the script.
              */
-            val endLine: Int,
+            konst endLine: Int,
             /**
              * Length of the last line of the script.
              */
-            val endColumn: Int,
+            konst endColumn: Int,
             /**
              * URL of source map associated with script (if any).
              */
-            val sourceMapUrl: String? = null,
+            konst sourceMapUrl: String? = null,
         ) : Event()
 
         /**
@@ -1037,31 +1037,31 @@ class Debugger(private val requestEvaluator: CDPRequestEvaluator) {
             /**
              * Identifier of the script parsed.
              */
-            val scriptId: Runtime.ScriptId,
+            konst scriptId: Runtime.ScriptId,
             /**
              * URL or name of the script parsed (if any).
              */
-            val url: String,
+            konst url: String,
             /**
              * Line offset of the script within the resource with given URL (for script tags).
              */
-            val startLine: Int,
+            konst startLine: Int,
             /**
              * Column offset of the script within the resource with given URL.
              */
-            val startColumn: Int,
+            konst startColumn: Int,
             /**
              * Last line of the script.
              */
-            val endLine: Int,
+            konst endLine: Int,
             /**
              * Length of the last line of the script.
              */
-            val endColumn: Int,
+            konst endColumn: Int,
             /**
              * URL of source map associated with script (if any).
              */
-            val sourceMapUrl: String? = null,
+            konst sourceMapUrl: String? = null,
         ) : Event()
     }
 }

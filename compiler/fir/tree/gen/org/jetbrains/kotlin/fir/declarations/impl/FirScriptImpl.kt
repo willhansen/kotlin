@@ -32,16 +32,16 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirScriptImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
-    override val name: Name,
-    override val statements: MutableList<FirStatement>,
-    override val symbol: FirScriptSymbol,
-    override val parameters: MutableList<FirVariable>,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
+    override konst name: Name,
+    override konst statements: MutableList<FirStatement>,
+    override konst symbol: FirScriptSymbol,
+    override konst parameters: MutableList<FirVariable>,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
 ) : FirScript() {
     init {

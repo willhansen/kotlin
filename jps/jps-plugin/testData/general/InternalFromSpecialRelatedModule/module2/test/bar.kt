@@ -16,7 +16,7 @@ class FromClassA1 : ClassA1(10) {
 }
 
 class FromClassB1 : ClassB1() {
-    internal override val member = 10
+    internal override konst member = 10
 }
 
 @InternalFunctionAnnotation1

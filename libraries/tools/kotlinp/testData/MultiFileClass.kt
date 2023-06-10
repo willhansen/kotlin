@@ -2,4 +2,4 @@
 @file:JvmName("File")
 package test
 
-const val x = 42
+const konst x = 42

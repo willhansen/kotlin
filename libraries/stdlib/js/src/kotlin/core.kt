@@ -6,14 +6,14 @@
 package kotlin.js
 
 /**
- * The property that can be used as a placeholder for statements and values that are defined in JavaScript.
+ * The property that can be used as a placeholder for statements and konstues that are defined in JavaScript.
  *
  * This property can be used in two cases:
  *
  *   * To represent body of an external function. In most cases Kotlin does not require to provide bodies of external
  *     functions and properties, but if for some reason you want to (for example, due to limitation of your coding style guides),
  *     you should use `definedExternally`.
- *   * To represent value of default argument.
+ *   * To represent konstue of default argument.
  *
  * There's two forms of using `definedExternally`:
  *
@@ -28,10 +28,10 @@ package kotlin.js
  * external fun foo(): String = definedExternally
  * external fun bar(x: Int) { definedExternally }
  * external fun baz(z: Any = definedExternally): Array<Any>
- * external val prop: Float = definedExternally
+ * external konst prop: Float = definedExternally
  * ```
  */
-public external val definedExternally: Nothing
+public external konst definedExternally: Nothing
 
 /**
  * Puts the given piece of a JavaScript code right into the calling function.

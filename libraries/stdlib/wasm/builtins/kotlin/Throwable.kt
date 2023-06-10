@@ -15,25 +15,25 @@ import kotlin.wasm.internal.jsToKotlinStringAdapter
  * @param message the detail message string.
  * @param cause the cause of this throwable.
  */
-public open class Throwable(open val message: String?, open val cause: kotlin.Throwable?) {
+public open class Throwable(open konst message: String?, open konst cause: kotlin.Throwable?) {
     constructor(message: String?) : this(message, null)
 
     constructor(cause: Throwable?) : this(cause?.toString(), cause)
 
     constructor() : this(null, null)
 
-    internal val jsStack: ExternalInterfaceType = captureStackTrace()
+    internal konst jsStack: ExternalInterfaceType = captureStackTrace()
 
     private var _stack: String? = null
-    internal val stack: String
+    internal konst stack: String
         get() {
-            var value = _stack
-            if (value == null) {
-                value = jsToKotlinStringAdapter(jsStack).removePrefix("Error\n")
-                _stack = value
+            var konstue = _stack
+            if (konstue == null) {
+                konstue = jsToKotlinStringAdapter(jsStack).removePrefix("Error\n")
+                _stack = konstue
             }
 
-            return value
+            return konstue
         }
 
     internal var suppressedExceptionsList: MutableList<Throwable>? = null
@@ -43,7 +43,7 @@ public open class Throwable(open val message: String?, open val cause: kotlin.Th
      * followed by the exception message if it is not null.
      */
     public override fun toString(): String {
-        val s = getSimpleName(this.typeInfo)
+        konst s = getSimpleName(this.typeInfo)
         return if (message != null) s + ": " + message.toString() else s
     }
 }

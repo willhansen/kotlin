@@ -5,6 +5,6 @@ import unixHelper.unixHelper
 
 
 object UnixMain {
-    val native = nativeHelper()
-    val unix = unixHelper()
+    konst native = nativeHelper()
+    konst unix = unixHelper()
 }

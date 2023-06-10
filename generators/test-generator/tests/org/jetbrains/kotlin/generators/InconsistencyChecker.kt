@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.generators
 interface InconsistencyChecker {
     fun add(affectedFile: String)
 
-    val affectedFiles: List<String>
+    konst affectedFiles: List<String>
 
     companion object {
         fun hasDryRunArg(args: Array<String>) = args.any { it == "dryRun" }
@@ -18,13 +18,13 @@ interface InconsistencyChecker {
 }
 
 object DefaultInconsistencyChecker : InconsistencyChecker {
-    private val files = mutableListOf<String>()
+    private konst files = mutableListOf<String>()
 
     override fun add(affectedFile: String) {
         files.add(affectedFile)
     }
 
-    override val affectedFiles: List<String>
+    override konst affectedFiles: List<String>
         get() = files
 }
 
@@ -32,6 +32,6 @@ object EmptyInconsistencyChecker : InconsistencyChecker {
     override fun add(affectedFile: String) {
     }
 
-    override val affectedFiles: List<String>
+    override konst affectedFiles: List<String>
         get() = emptyList()
 }

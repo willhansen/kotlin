@@ -18,7 +18,7 @@ fun main() {
 }
 // HELPER FUNCTIONS
 fun test(expectedSum : Int, vararg data : Int) {
-    val actualSum = sum(data)
+    konst actualSum = sum(data)
     assertEquals(actualSum, expectedSum, "\ndata = ${Arrays.toString(data)}\n" +
     "sum(data) = ${actualSum}, but must be $expectedSum ")
 }

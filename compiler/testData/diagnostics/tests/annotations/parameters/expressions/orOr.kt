@@ -3,8 +3,8 @@
 package test
 
 annotation class Ann(
-        val b1: Boolean,
-        val b2: Boolean
+        konst b1: Boolean,
+        konst b2: Boolean
 )
 
 @Ann(true || false, true || true) class MyClass

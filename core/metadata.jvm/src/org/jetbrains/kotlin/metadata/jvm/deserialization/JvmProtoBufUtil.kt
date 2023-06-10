@@ -16,11 +16,11 @@ import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
 object JvmProtoBufUtil {
-    val EXTENSION_REGISTRY: ExtensionRegistryLite = ExtensionRegistryLite.newInstance().apply(JvmProtoBuf::registerAllExtensions)
+    konst EXTENSION_REGISTRY: ExtensionRegistryLite = ExtensionRegistryLite.newInstance().apply(JvmProtoBuf::registerAllExtensions)
 
-    const val PLATFORM_TYPE_ID = "kotlin.jvm.PlatformType"
+    const konst PLATFORM_TYPE_ID = "kotlin.jvm.PlatformType"
 
-    const val DEFAULT_MODULE_NAME = "main"
+    const konst DEFAULT_MODULE_NAME = "main"
 
     @JvmStatic
     fun readClassDataFrom(data: Array<String>, strings: Array<String>): Pair<JvmNameResolver, ProtoBuf.Class> =
@@ -28,7 +28,7 @@ object JvmProtoBufUtil {
 
     @JvmStatic
     fun readClassDataFrom(bytes: ByteArray, strings: Array<String>): Pair<JvmNameResolver, ProtoBuf.Class> {
-        val input = ByteArrayInputStream(bytes)
+        konst input = ByteArrayInputStream(bytes)
         return Pair(input.readNameResolver(strings), ProtoBuf.Class.parseFrom(input, EXTENSION_REGISTRY))
     }
 
@@ -38,13 +38,13 @@ object JvmProtoBufUtil {
 
     @JvmStatic
     fun readPackageDataFrom(bytes: ByteArray, strings: Array<String>): Pair<JvmNameResolver, ProtoBuf.Package> {
-        val input = ByteArrayInputStream(bytes)
+        konst input = ByteArrayInputStream(bytes)
         return Pair(input.readNameResolver(strings), ProtoBuf.Package.parseFrom(input, EXTENSION_REGISTRY))
     }
 
     @JvmStatic
     fun readFunctionDataFrom(data: Array<String>, strings: Array<String>): Pair<JvmNameResolver, ProtoBuf.Function> {
-        val input = ByteArrayInputStream(BitEncoding.decodeBytes(data))
+        konst input = ByteArrayInputStream(BitEncoding.decodeBytes(data))
         return Pair(input.readNameResolver(strings), ProtoBuf.Function.parseFrom(input, EXTENSION_REGISTRY))
     }
 
@@ -71,15 +71,15 @@ object JvmProtoBufUtil {
         nameResolver: NameResolver,
         typeTable: TypeTable
     ): JvmMemberSignature.Method? {
-        val signature = proto.getExtensionOrNull(JvmProtoBuf.methodSignature)
-        val name = if (signature != null && signature.hasName()) signature.name else proto.name
-        val desc = if (signature != null && signature.hasDesc()) {
+        konst signature = proto.getExtensionOrNull(JvmProtoBuf.methodSignature)
+        konst name = if (signature != null && signature.hasName()) signature.name else proto.name
+        konst desc = if (signature != null && signature.hasDesc()) {
             nameResolver.getString(signature.desc)
         } else {
-            val parameterTypes = listOfNotNull(proto.receiverType(typeTable)) + proto.valueParameterList.map { it.type(typeTable) }
+            konst parameterTypes = listOfNotNull(proto.receiverType(typeTable)) + proto.konstueParameterList.map { it.type(typeTable) }
 
-            val parametersDesc = parameterTypes.map { mapTypeDefault(it, nameResolver) ?: return null }
-            val returnTypeDesc = mapTypeDefault(proto.returnType(typeTable), nameResolver) ?: return null
+            konst parametersDesc = parameterTypes.map { mapTypeDefault(it, nameResolver) ?: return null }
+            konst returnTypeDesc = mapTypeDefault(proto.returnType(typeTable), nameResolver) ?: return null
 
             parametersDesc.joinToString(separator = "", prefix = "(", postfix = ")") + returnTypeDesc
         }
@@ -91,16 +91,16 @@ object JvmProtoBufUtil {
         nameResolver: NameResolver,
         typeTable: TypeTable
     ): JvmMemberSignature.Method? {
-        val signature = proto.getExtensionOrNull(JvmProtoBuf.constructorSignature)
-        val name = if (signature != null && signature.hasName()) {
+        konst signature = proto.getExtensionOrNull(JvmProtoBuf.constructorSignature)
+        konst name = if (signature != null && signature.hasName()) {
             nameResolver.getString(signature.name)
         } else {
             "<init>"
         }
-        val desc = if (signature != null && signature.hasDesc()) {
+        konst desc = if (signature != null && signature.hasDesc()) {
             nameResolver.getString(signature.desc)
         } else {
-            proto.valueParameterList.map {
+            proto.konstueParameterList.map {
                 mapTypeDefault(it.type(typeTable), nameResolver) ?: return null
             }.joinToString(separator = "", prefix = "(", postfix = ")V")
         }
@@ -113,12 +113,12 @@ object JvmProtoBufUtil {
         typeTable: TypeTable,
         requireHasFieldFlag: Boolean = true
     ): JvmMemberSignature.Field? {
-        val signature = proto.getExtensionOrNull(JvmProtoBuf.propertySignature) ?: return null
-        val field = if (signature.hasField()) signature.field else null
+        konst signature = proto.getExtensionOrNull(JvmProtoBuf.propertySignature) ?: return null
+        konst field = if (signature.hasField()) signature.field else null
         if (field == null && requireHasFieldFlag) return null
 
-        val name = if (field != null && field.hasName()) field.name else proto.name
-        val desc =
+        konst name = if (field != null && field.hasName()) field.name else proto.name
+        konst desc =
             if (field != null && field.hasDesc()) nameResolver.getString(field.desc)
             else mapTypeDefault(proto.returnType(typeTable), nameResolver) ?: return null
 

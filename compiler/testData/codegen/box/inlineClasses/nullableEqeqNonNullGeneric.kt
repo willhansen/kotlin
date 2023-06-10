@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val value: T)
+konstue class Z<T: Int>(konst konstue: T)
 
 fun eq(a: Z<Int>?, b: Z<Int>) = a == b
 

@@ -13,7 +13,7 @@ fun <T> streamCopy(from : IIterable<T>, to : IAdder<T>) {
 }
 
 class FileInput : IIterator<Byte>, JavaCloseableWrapper {
-  private val stream : InputStream
+  private konst stream : InputStream
   private var next : Int
   private var nextUsed = false
 
@@ -29,7 +29,7 @@ class FileInput : IIterator<Byte>, JavaCloseableWrapper {
     return
   }
   
-  override val hasNext
+  override konst hasNext
     get() { // implicitly throws IOException
       if (nextUsed && next != -1) {
         nextUsed = false
@@ -41,7 +41,7 @@ class FileInput : IIterator<Byte>, JavaCloseableWrapper {
 }
 
 class FileOutput : IAdder<Byte>, JavaCloseableWrapper {
-  private val stream : OutputStream
+  private konst stream : OutputStream
 
   //this(file : File) : JavaCloseableWrapper(stream) {
   //  stream = FileOutputStream(file)
@@ -54,8 +54,8 @@ class FileOutput : IAdder<Byte>, JavaCloseableWrapper {
 
 fun example() { // this does not rethrow, no appropriate parameters given
 
-  val f1 : File //= ...
-  val f2 : File //= ...
+  konst f1 : File //= ...
+  konst f2 : File //= ...
 
   streamCopy(FileInput(f1), f2) // throws IOException, you must catch or rethrow explicitly
 

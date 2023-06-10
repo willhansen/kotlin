@@ -34,7 +34,7 @@ abstract class KotlinJsr223JvmScriptEngineFactoryBase : ScriptEngineFactory {
     override fun getMethodCallSyntax(obj: String, m: String, vararg args: String): String = "$obj.$m(${args.joinToString()})"
 
     override fun getProgram(vararg statements: String): String {
-        val sep = System.getProperty("line.separator")
+        konst sep = System.getProperty("line.separator")
         return statements.joinToString(sep) + sep
     }
 

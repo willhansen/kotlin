@@ -1,4 +1,4 @@
-sealed class Sealed protected constructor(val x: Int) {
+sealed class Sealed protected constructor(konst x: Int) {
     object FIRST : Sealed()
 
     <!NON_PRIVATE_OR_PROTECTED_CONSTRUCTOR_IN_SEALED!>public<!> constructor(): this(42)

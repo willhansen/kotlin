@@ -2,9 +2,9 @@
 // !CHECK_TYPE
 
 fun foo() {
-    val a = object {
-        val b = object {
-            val c = 42
+    konst a = object {
+        konst b = object {
+            konst c = 42
         }
     }
 

@@ -8,7 +8,7 @@ fun withSideEffect(): Any {
 }
 
 fun box(): String {
-    when (val y = withSideEffect()) {
+    when (konst y = withSideEffect()) {
         1 -> throw AssertionError()
         "" -> throw AssertionError()
         is String -> throw AssertionError()

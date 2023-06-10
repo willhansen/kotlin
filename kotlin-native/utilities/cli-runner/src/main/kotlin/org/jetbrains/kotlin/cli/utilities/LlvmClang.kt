@@ -9,29 +9,29 @@ import org.jetbrains.kotlin.konan.target.PlatformManager
 import org.jetbrains.kotlin.konan.util.KonanHomeProvider
 
 fun runLlvmTool(args: Array<String>) {
-    val toolName = args[0]
-    val toolArguments = args.drop(1)
+    konst toolName = args[0]
+    konst toolArguments = args.drop(1)
 
-    val platform = platformManager().hostPlatform
-    val llvmHome = platform.configurables.absoluteLlvmHome
+    konst platform = platformManager().hostPlatform
+    konst llvmHome = platform.configurables.absoluteLlvmHome
 
-    val toolPath = "$llvmHome/bin/$toolName"
+    konst toolPath = "$llvmHome/bin/$toolName"
 
     runCommand(toolPath, *toolArguments.toTypedArray())
 }
 
 fun runLlvmClangToolWithTarget(args: Array<String>) {
-    val toolName = args[0]
-    val targetName = args[1]
-    val toolArguments = args.drop(2)
+    konst toolName = args[0]
+    konst targetName = args[1]
+    konst toolArguments = args.drop(2)
 
-    val platformManager = platformManager()
-    val platform = platformManager.platform(platformManager.targetByName(targetName))
-    val llvmHome = platform.configurables.absoluteLlvmHome
+    konst platformManager = platformManager()
+    konst platform = platformManager.platform(platformManager.targetByName(targetName))
+    konst llvmHome = platform.configurables.absoluteLlvmHome
 
-    val toolPath = "$llvmHome/bin/$toolName"
+    konst toolPath = "$llvmHome/bin/$toolName"
 
-    val compilerArgs: Array<String> = when (toolName) {
+    konst compilerArgs: Array<String> = when (toolName) {
         "clang++" -> platform.clang.clangXXArgs
         "clang" -> platform.clang.clangArgs
         else -> error("Unknown tool name: $toolName. Use either `clang` or `clang++`")

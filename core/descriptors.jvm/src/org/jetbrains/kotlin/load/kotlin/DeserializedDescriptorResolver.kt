@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.descriptors.PackageFragmentDescriptor
 import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
-import org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException
+import org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import org.jetbrains.kotlin.serialization.deserialization.ClassData
 import org.jetbrains.kotlin.serialization.deserialization.DeserializationComponents
@@ -34,7 +34,7 @@ import javax.inject.Inject
 class DeserializedDescriptorResolver {
     lateinit var components: DeserializationComponents
 
-    private val ownMetadataVersion: JvmMetadataVersion get() = components.configuration.jvmMetadataVersionOrDefault()
+    private konst ownMetadataVersion: JvmMetadataVersion get() = components.configuration.jvmMetadataVersionOrDefault()
 
     // component dependency cycle
     @Inject
@@ -42,33 +42,33 @@ class DeserializedDescriptorResolver {
         this.components = components.components
     }
 
-    private val skipMetadataVersionCheck: Boolean
+    private konst skipMetadataVersionCheck: Boolean
         get() = components.configuration.skipMetadataVersionCheck
 
     fun resolveClass(kotlinClass: KotlinJvmBinaryClass): ClassDescriptor? {
-        val classData = readClassData(kotlinClass) ?: return null
+        konst classData = readClassData(kotlinClass) ?: return null
         return components.classDeserializer.deserializeClass(kotlinClass.classId, classData)
     }
 
     internal fun readClassData(kotlinClass: KotlinJvmBinaryClass): ClassData? {
-        val data = readData(kotlinClass, KOTLIN_CLASS) ?: return null
-        val strings = kotlinClass.classHeader.strings ?: return null
-        val (nameResolver, classProto) = parseProto(kotlinClass) {
+        konst data = readData(kotlinClass, KOTLIN_CLASS) ?: return null
+        konst strings = kotlinClass.classHeader.strings ?: return null
+        konst (nameResolver, classProto) = parseProto(kotlinClass) {
             JvmProtoBufUtil.readClassDataFrom(data, strings)
         } ?: return null
-        val source = KotlinJvmBinarySourceElement(
+        konst source = KotlinJvmBinarySourceElement(
             kotlinClass, kotlinClass.incompatibility, kotlinClass.isPreReleaseInvisible, kotlinClass.abiStability
         )
         return ClassData(nameResolver, classProto, kotlinClass.classHeader.metadataVersion, source)
     }
 
     fun createKotlinPackagePartScope(descriptor: PackageFragmentDescriptor, kotlinClass: KotlinJvmBinaryClass): MemberScope? {
-        val data = readData(kotlinClass, KOTLIN_FILE_FACADE_OR_MULTIFILE_CLASS_PART) ?: return null
-        val strings = kotlinClass.classHeader.strings ?: return null
-        val (nameResolver, packageProto) = parseProto(kotlinClass) {
+        konst data = readData(kotlinClass, KOTLIN_FILE_FACADE_OR_MULTIFILE_CLASS_PART) ?: return null
+        konst strings = kotlinClass.classHeader.strings ?: return null
+        konst (nameResolver, packageProto) = parseProto(kotlinClass) {
             JvmProtoBufUtil.readPackageDataFrom(data, strings)
         } ?: return null
-        val source = JvmPackagePartSource(
+        konst source = JvmPackagePartSource(
             kotlinClass, packageProto, nameResolver, kotlinClass.incompatibility, kotlinClass.isPreReleaseInvisible,
             kotlinClass.abiStability
         )
@@ -81,7 +81,7 @@ class DeserializedDescriptorResolver {
         }
     }
 
-    private val KotlinJvmBinaryClass.incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>?
+    private konst KotlinJvmBinaryClass.incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>?
         get() {
             if (skipMetadataVersionCheck || classHeader.metadataVersion.isCompatible(ownMetadataVersion)) return null
             return IncompatibleVersionErrorData(
@@ -98,18 +98,18 @@ class DeserializedDescriptorResolver {
      * @return true if the class is invisible because it's compiled by a pre-release compiler, and this compiler is either released
      * or is run with a released language version.
      */
-    private val KotlinJvmBinaryClass.isPreReleaseInvisible: Boolean
+    private konst KotlinJvmBinaryClass.isPreReleaseInvisible: Boolean
         get() = (components.configuration.reportErrorsOnPreReleaseDependencies &&
                 (classHeader.isPreRelease || classHeader.metadataVersion == KOTLIN_1_1_EAP_METADATA_VERSION)) ||
                 isCompiledWith13M1
 
     // We report pre-release errors on .class files produced by 1.3-M1 even if this compiler is pre-release. This is needed because
     // 1.3-M1 did not mangle names of functions mentioning inline classes yet, and we don't want to support this case in the codegen
-    private val KotlinJvmBinaryClass.isCompiledWith13M1: Boolean
+    private konst KotlinJvmBinaryClass.isCompiledWith13M1: Boolean
         get() = !components.configuration.skipPrereleaseCheck &&
                 classHeader.isPreRelease && classHeader.metadataVersion == KOTLIN_1_3_M1_METADATA_VERSION
 
-    private val KotlinJvmBinaryClass.abiStability: DeserializedContainerAbiStability
+    private konst KotlinJvmBinaryClass.abiStability: DeserializedContainerAbiStability
         get() = when {
             components.configuration.allowUnstableDependencies -> DeserializedContainerAbiStability.STABLE
             classHeader.isUnstableFirBinary -> DeserializedContainerAbiStability.FIR_UNSTABLE
@@ -118,7 +118,7 @@ class DeserializedDescriptorResolver {
         }
 
     private fun readData(kotlinClass: KotlinJvmBinaryClass, expectedKinds: Set<KotlinClassHeader.Kind>): Array<String>? {
-        val header = kotlinClass.classHeader
+        konst header = kotlinClass.classHeader
         return (header.data ?: header.incompatibleData)?.takeIf { header.kind in expectedKinds }
     }
 
@@ -126,7 +126,7 @@ class DeserializedDescriptorResolver {
         try {
             try {
                 block()
-            } catch (e: InvalidProtocolBufferException) {
+            } catch (e: InkonstidProtocolBufferException) {
                 throw IllegalStateException("Could not read data from ${klass.location}", e)
             }
         } catch (e: Throwable) {
@@ -139,15 +139,15 @@ class DeserializedDescriptorResolver {
         }
 
     companion object {
-        internal val KOTLIN_CLASS = setOf(KotlinClassHeader.Kind.CLASS)
+        internal konst KOTLIN_CLASS = setOf(KotlinClassHeader.Kind.CLASS)
 
-        private val KOTLIN_FILE_FACADE_OR_MULTIFILE_CLASS_PART =
+        private konst KOTLIN_FILE_FACADE_OR_MULTIFILE_CLASS_PART =
             setOf(KotlinClassHeader.Kind.FILE_FACADE, KotlinClassHeader.Kind.MULTIFILE_CLASS_PART)
 
-        private val KOTLIN_1_1_EAP_METADATA_VERSION = JvmMetadataVersion(1, 1, 2)
+        private konst KOTLIN_1_1_EAP_METADATA_VERSION = JvmMetadataVersion(1, 1, 2)
 
-        private val KOTLIN_1_3_M1_METADATA_VERSION = JvmMetadataVersion(1, 1, 11)
+        private konst KOTLIN_1_3_M1_METADATA_VERSION = JvmMetadataVersion(1, 1, 11)
 
-        internal val KOTLIN_1_3_RC_METADATA_VERSION = JvmMetadataVersion(1, 1, 13)
+        internal konst KOTLIN_1_3_RC_METADATA_VERSION = JvmMetadataVersion(1, 1, 13)
     }
 }

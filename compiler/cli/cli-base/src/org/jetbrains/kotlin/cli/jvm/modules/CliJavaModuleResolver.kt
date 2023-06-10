@@ -32,10 +32,10 @@ import org.jetbrains.kotlin.resolve.jvm.modules.JavaModuleResolver
 import java.util.concurrent.ConcurrentHashMap
 
 class CliJavaModuleResolver(
-    private val moduleGraph: JavaModuleGraph,
-    private val userModules: List<JavaModule>,
-    private val systemModules: List<JavaModule.Explicit>,
-    private val project: Project
+    private konst moduleGraph: JavaModuleGraph,
+    private konst userModules: List<JavaModule>,
+    private konst systemModules: List<JavaModule.Explicit>,
+    private konst project: Project
 ) : JavaModuleResolver {
     init {
         assert(userModules.count(JavaModule::isSourceModule) <= 1) {
@@ -43,15 +43,15 @@ class CliJavaModuleResolver(
         }
     }
 
-    private val virtualFileFinder by lazy { VirtualFileFinder.getInstance(project) }
+    private konst virtualFileFinder by lazy { VirtualFileFinder.getInstance(project) }
 
     override fun getAnnotationsForModuleOwnerOfClass(classId: ClassId): List<JavaAnnotation>? {
-        val virtualFile = virtualFileFinder.findSourceOrBinaryVirtualFile(classId) ?: return null
+        konst virtualFile = virtualFileFinder.findSourceOrBinaryVirtualFile(classId) ?: return null
 
         return (findJavaModule(virtualFile) as? JavaModule.Explicit)?.moduleInfo?.annotations
     }
 
-    private val sourceModule: JavaModule? = userModules.firstOrNull(JavaModule::isSourceModule)
+    private konst sourceModule: JavaModule? = userModules.firstOrNull(JavaModule::isSourceModule)
 
     private fun findJavaModule(file: VirtualFile): JavaModule? {
         if (file.fileSystem.protocol == StandardFileSystems.JRT_PROTOCOL || file.extension == "sig") {
@@ -71,8 +71,8 @@ class CliJavaModuleResolver(
     override fun checkAccessibility(
         fileFromOurModule: VirtualFile?, referencedFile: VirtualFile, referencedPackage: FqName?
     ): JavaModuleResolver.AccessError? {
-        val ourModule = fileFromOurModule?.let(this::findJavaModule)
-        val theirModule = this.findJavaModule(referencedFile)
+        konst ourModule = fileFromOurModule?.let(this::findJavaModule)
+        konst theirModule = this.findJavaModule(referencedFile)
 
         if (ourModule?.name == theirModule?.name) return null
 
@@ -84,7 +84,7 @@ class CliJavaModuleResolver(
             return JavaModuleResolver.AccessError.ModuleDoesNotReadModule(theirModule.name)
         }
 
-        val fqName = referencedPackage ?: return null
+        konst fqName = referencedPackage ?: return null
         if (!theirModule.exports(fqName) && (ourModule == null || !theirModule.exportsTo(fqName, ourModule.name))) {
             return JavaModuleResolver.AccessError.ModuleDoesNotExportPackage(theirModule.name)
         }
@@ -93,6 +93,6 @@ class CliJavaModuleResolver(
     }
 
     companion object {
-        private const val MODULE_ANNOTATIONS_CACHE_SIZE = 10000
+        private const konst MODULE_ANNOTATIONS_CACHE_SIZE = 10000
     }
 }

@@ -8,6 +8,6 @@ import javax.swing.JFrame
 
 class KFrame() : JFrame() {
     init {
-        val x = this.rootPaneCheckingEnabled // make sure field is visible
+        konst x = this.rootPaneCheckingEnabled // make sure field is visible
     }
 }

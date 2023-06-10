@@ -10,15 +10,15 @@
 // with compiler built from your changes if you are not sure.
 
 fun box(): String {
-    val intRange = 1..7
+    konst intRange = 1..7
     for (i in intRange step 2) {
     }
 
     return "OK"
 }
 
-// For "step" progressions in JVM IR, a call to getProgressionLastElement() is made to compute the "last" value.
-// If "step" is called on a non-literal progression, there is a check to see if that progression's step value is < 0.
+// For "step" progressions in JVM IR, a call to getProgressionLastElement() is made to compute the "last" konstue.
+// If "step" is called on a non-literal progression, there is a check to see if that progression's step konstue is < 0.
 // However, if the progression is of type *Range (e.g., IntRange) instead of *Progression (e.g., IntProgression), this
 // check is not needed since *Range always has step == 1.
 //

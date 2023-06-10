@@ -1,7 +1,7 @@
 package test
 
 class TestPackage {
-    val OK = "OK"
+    konst OK = "OK"
 }
 
 fun box(): String = TestPackage().OK

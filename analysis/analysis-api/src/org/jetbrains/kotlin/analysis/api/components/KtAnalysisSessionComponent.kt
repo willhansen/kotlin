@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeOwner
 import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken
 
 public abstract class KtAnalysisSessionComponent {
-    protected abstract val analysisSession: KtAnalysisSession
-    protected open val token: KtLifetimeToken get() = analysisSession.token
+    protected abstract konst analysisSession: KtAnalysisSession
+    protected open konst token: KtLifetimeToken get() = analysisSession.token
 }
 

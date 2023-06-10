@@ -39,13 +39,13 @@ interface TransformableToWarning<T : KotlinCallDiagnostic> {
 }
 
 abstract class InapplicableArgumentDiagnostic : KotlinCallDiagnostic(INAPPLICABLE) {
-    abstract val argument: KotlinCallArgument
+    abstract konst argument: KotlinCallArgument
 
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgument(argument, this)
 }
 
 abstract class CallableReferenceInapplicableDiagnostic(
-    private val argument: CallableReferenceResolutionAtom,
+    private konst argument: CallableReferenceResolutionAtom,
     applicability: CandidateApplicability = INAPPLICABLE
 ) : KotlinCallDiagnostic(applicability) {
     override fun report(reporter: DiagnosticReporter) {
@@ -57,78 +57,78 @@ abstract class CallableReferenceInapplicableDiagnostic(
 }
 
 // ArgumentsToParameterMapper
-class TooManyArguments(val argument: KotlinCallArgument, val descriptor: CallableDescriptor) :
+class TooManyArguments(konst argument: KotlinCallArgument, konst descriptor: CallableDescriptor) :
     KotlinCallDiagnostic(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgument(argument, this)
 }
 
-class NonVarargSpread(val argument: KotlinCallArgument) : KotlinCallDiagnostic(INAPPLICABLE) {
+class NonVarargSpread(konst argument: KotlinCallArgument) : KotlinCallDiagnostic(INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgumentSpread(argument, this)
 }
 
 class MultiLambdaBuilderInferenceRestriction(
-    val argument: KotlinCallArgument,
-    val typeParameter: TypeParameterMarker?
+    konst argument: KotlinCallArgument,
+    konst typeParameter: TypeParameterMarker?
 ) : KotlinCallDiagnostic(RESOLVED) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgument(argument, this)
 }
 
 class StubBuilderInferenceReceiver(
-    val receiver: SimpleKotlinCallArgument,
-    val extensionReceiverParameter: ReceiverParameterDescriptor,
+    konst receiver: SimpleKotlinCallArgument,
+    konst extensionReceiverParameter: ReceiverParameterDescriptor,
 ) : KotlinCallDiagnostic(RESOLVED) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallReceiver(receiver, this)
 }
 
-class MixingNamedAndPositionArguments(override val argument: KotlinCallArgument) : InapplicableArgumentDiagnostic()
+class MixingNamedAndPositionArguments(override konst argument: KotlinCallArgument) : InapplicableArgumentDiagnostic()
 
-class NamedArgumentNotAllowed(val argument: KotlinCallArgument, val descriptor: CallableDescriptor) : KotlinCallDiagnostic(INAPPLICABLE) {
+class NamedArgumentNotAllowed(konst argument: KotlinCallArgument, konst descriptor: CallableDescriptor) : KotlinCallDiagnostic(INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgumentName(argument, this)
 }
 
-class NameNotFound(val argument: KotlinCallArgument, val descriptor: CallableDescriptor) : KotlinCallDiagnostic(INAPPLICABLE) {
+class NameNotFound(konst argument: KotlinCallArgument, konst descriptor: CallableDescriptor) : KotlinCallDiagnostic(INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgumentName(argument, this)
 }
 
 class NoValueForParameter(
-    val parameterDescriptor: ValueParameterDescriptor,
-    val descriptor: CallableDescriptor
+    konst parameterDescriptor: ValueParameterDescriptor,
+    konst descriptor: CallableDescriptor
 ) : KotlinCallDiagnostic(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCall(this)
 }
 
 class ArgumentPassedTwice(
-    val argument: KotlinCallArgument,
-    val parameterDescriptor: ValueParameterDescriptor,
-    val firstOccurrence: ResolvedCallArgument
+    konst argument: KotlinCallArgument,
+    konst parameterDescriptor: ValueParameterDescriptor,
+    konst firstOccurrence: ResolvedCallArgument
 ) : KotlinCallDiagnostic(INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgumentName(argument, this)
 }
 
 class VarargArgumentOutsideParentheses(
-    override val argument: KotlinCallArgument,
-    val parameterDescriptor: ValueParameterDescriptor
+    override konst argument: KotlinCallArgument,
+    konst parameterDescriptor: ValueParameterDescriptor
 ) : InapplicableArgumentDiagnostic()
 
 class NameForAmbiguousParameter(
-    val argument: KotlinCallArgument,
-    val parameterDescriptor: ValueParameterDescriptor,
-    val overriddenParameterWithOtherName: ValueParameterDescriptor
+    konst argument: KotlinCallArgument,
+    konst parameterDescriptor: ValueParameterDescriptor,
+    konst overriddenParameterWithOtherName: ValueParameterDescriptor
 ) : KotlinCallDiagnostic(CONVENTION_ERROR) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgumentName(argument, this)
 }
 
 class NamedArgumentReference(
-    val argument: KotlinCallArgument,
-    val parameterDescriptor: ValueParameterDescriptor
+    konst argument: KotlinCallArgument,
+    konst parameterDescriptor: ValueParameterDescriptor
 ) : KotlinCallDiagnostic(RESOLVED) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgumentName(argument, this)
 }
 
 // TypeArgumentsToParameterMapper
 class WrongCountOfTypeArguments(
-    val descriptor: CallableDescriptor,
-    val currentCount: Int
+    konst descriptor: CallableDescriptor,
+    konst currentCount: Int
 ) : KotlinCallDiagnostic(INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) = reporter.onTypeArguments(this)
 }
@@ -139,45 +139,45 @@ object TypeCheckerHasRanIntoRecursion : KotlinCallDiagnostic(INAPPLICABLE) {
 
 // supported by FE but not supported by BE now
 class CallableReferencesDefaultArgumentUsed(
-    val argument: CallableReferenceResolutionAtom,
-    val candidate: CallableDescriptor,
-    val defaultsCount: Int
+    konst argument: CallableReferenceResolutionAtom,
+    konst candidate: CallableDescriptor,
+    konst defaultsCount: Int
 ) : CallableReferenceInapplicableDiagnostic(argument)
 
 class NotCallableMemberReference(
-    val argument: CallableReferenceResolutionAtom,
-    val candidate: CallableDescriptor
+    konst argument: CallableReferenceResolutionAtom,
+    konst candidate: CallableDescriptor
 ) : CallableReferenceInapplicableDiagnostic(argument)
 
-class NoneCallableReferenceCallCandidates(val argument: CallableReferenceKotlinCallArgument) :
+class NoneCallableReferenceCallCandidates(konst argument: CallableReferenceKotlinCallArgument) :
     CallableReferenceInapplicableDiagnostic(argument)
 
 class CallableReferenceCallCandidatesAmbiguity(
-    val argument: CallableReferenceKotlinCallArgument,
-    val candidates: Collection<CallableReferenceResolutionCandidate>
+    konst argument: CallableReferenceKotlinCallArgument,
+    konst candidates: Collection<CallableReferenceResolutionCandidate>
 ) : CallableReferenceInapplicableDiagnostic(argument)
 
 class NotCallableExpectedType(
-    val argument: CallableReferenceKotlinCallArgument,
-    val expectedType: UnwrappedType,
-    val notCallableTypeConstructor: TypeConstructor
+    konst argument: CallableReferenceKotlinCallArgument,
+    konst expectedType: UnwrappedType,
+    konst notCallableTypeConstructor: TypeConstructor
 ) : CallableReferenceInapplicableDiagnostic(argument)
 
-class AdaptedCallableReferenceIsUsedWithReflection(val argument: CallableReferenceResolutionAtom) :
+class AdaptedCallableReferenceIsUsedWithReflection(konst argument: CallableReferenceResolutionAtom) :
     CallableReferenceInapplicableDiagnostic(argument, RESOLVED_WITH_ERROR)
 
 // SmartCasts
 class SmartCastDiagnostic(
-    val argument: ExpressionKotlinCallArgument,
-    val smartCastType: UnwrappedType,
-    val kotlinCall: KotlinCall?
+    konst argument: ExpressionKotlinCallArgument,
+    konst smartCastType: UnwrappedType,
+    konst kotlinCall: KotlinCall?
 ) : KotlinCallDiagnostic(RESOLVED) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgument(argument, this)
 }
 
 sealed class UnstableSmartCast(
-    val argument: ExpressionKotlinCallArgument,
-    val targetType: UnwrappedType,
+    konst argument: ExpressionKotlinCallArgument,
+    konst targetType: UnwrappedType,
     applicability: CandidateApplicability,
 ) : KotlinCallDiagnostic(applicability) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgument(argument, this)
@@ -204,8 +204,8 @@ class UnstableSmartCastDiagnosticError(
 ) : UnstableSmartCast(argument, targetType, RESOLVED_WITH_ERROR)
 
 class UnsafeCallError(
-    val receiver: SimpleKotlinCallArgument,
-    val isForImplicitInvoke: Boolean = false
+    konst receiver: SimpleKotlinCallArgument,
+    konst isForImplicitInvoke: Boolean = false
 ) : KotlinCallDiagnostic(UNSAFE_CALL) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallReceiver(receiver, this)
 }
@@ -215,7 +215,7 @@ object InstantiationOfAbstractClass : KotlinCallDiagnostic(K1_RUNTIME_ERROR) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCall(this)
 }
 
-class AbstractSuperCall(val receiver: SimpleKotlinCallArgument) : KotlinCallDiagnostic(K1_RUNTIME_ERROR) {
+class AbstractSuperCall(konst receiver: SimpleKotlinCallArgument) : KotlinCallDiagnostic(K1_RUNTIME_ERROR) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCall(this)
     }
@@ -227,7 +227,7 @@ object AbstractFakeOverrideSuperCall : KotlinCallDiagnostic(K1_RUNTIME_ERROR) {
     }
 }
 
-class SuperAsExtensionReceiver(val receiver: SimpleKotlinCallArgument) : KotlinCallDiagnostic(K1_RUNTIME_ERROR) {
+class SuperAsExtensionReceiver(konst receiver: SimpleKotlinCallArgument) : KotlinCallDiagnostic(K1_RUNTIME_ERROR) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCallReceiver(receiver, this)
     }
@@ -240,28 +240,28 @@ class NoneCandidatesCallDiagnostic : KotlinCallDiagnostic(INAPPLICABLE) {
     }
 }
 
-class ManyCandidatesCallDiagnostic(val candidates: Collection<ResolutionCandidate>) : KotlinCallDiagnostic(INAPPLICABLE) {
+class ManyCandidatesCallDiagnostic(konst candidates: Collection<ResolutionCandidate>) : KotlinCallDiagnostic(INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCall(this)
     }
 }
 
-class NonApplicableCallForBuilderInferenceDiagnostic(val kotlinCall: KotlinCall) : KotlinCallDiagnostic(CONVENTION_ERROR) {
+class NonApplicableCallForBuilderInferenceDiagnostic(konst kotlinCall: KotlinCall) : KotlinCallDiagnostic(CONVENTION_ERROR) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCall(this)
     }
 }
 
 sealed interface ArgumentNullabilityMismatchDiagnostic {
-    val expectedType: UnwrappedType
-    val actualType: UnwrappedType
-    val expressionArgument: ExpressionKotlinCallArgument
+    konst expectedType: UnwrappedType
+    konst actualType: UnwrappedType
+    konst expressionArgument: ExpressionKotlinCallArgument
 }
 
 class ArgumentNullabilityErrorDiagnostic(
-    override val expectedType: UnwrappedType,
-    override val actualType: UnwrappedType,
-    override val expressionArgument: ExpressionKotlinCallArgument
+    override konst expectedType: UnwrappedType,
+    override konst actualType: UnwrappedType,
+    override konst expressionArgument: ExpressionKotlinCallArgument
 ) : KotlinCallDiagnostic(UNSAFE_CALL), TransformableToWarning<ArgumentNullabilityWarningDiagnostic>, ArgumentNullabilityMismatchDiagnostic {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCallArgument(expressionArgument, this)
@@ -271,24 +271,24 @@ class ArgumentNullabilityErrorDiagnostic(
 }
 
 class ArgumentNullabilityWarningDiagnostic(
-    override val expectedType: UnwrappedType,
-    override val actualType: UnwrappedType,
-    override val expressionArgument: ExpressionKotlinCallArgument
+    override konst expectedType: UnwrappedType,
+    override konst actualType: UnwrappedType,
+    override konst expressionArgument: ExpressionKotlinCallArgument
 ) : KotlinCallDiagnostic(RESOLVED), ArgumentNullabilityMismatchDiagnostic {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCallArgument(expressionArgument, this)
     }
 }
 
-class ResolvedToSamWithVarargDiagnostic(val argument: KotlinCallArgument) : KotlinCallDiagnostic(K1_RESOLVED_TO_SAM_WITH_VARARG) {
+class ResolvedToSamWithVarargDiagnostic(konst argument: KotlinCallArgument) : KotlinCallDiagnostic(K1_RESOLVED_TO_SAM_WITH_VARARG) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCallArgument(argument, this)
     }
 }
 
 class NotEnoughInformationForLambdaParameter(
-    val lambdaArgument: LambdaKotlinCallArgument,
-    val parameterIndex: Int
+    konst lambdaArgument: LambdaKotlinCallArgument,
+    konst parameterIndex: Int
 ) : KotlinCallDiagnostic(RESOLVED_WITH_ERROR) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCallArgument(lambdaArgument, this)
@@ -301,41 +301,41 @@ class CandidateChosenUsingOverloadResolutionByLambdaAnnotation : KotlinCallDiagn
     }
 }
 
-class EnumEntryAmbiguityWarning(val property: PropertyDescriptor, val enumEntry: ClassDescriptor) : KotlinCallDiagnostic(RESOLVED) {
+class EnumEntryAmbiguityWarning(konst property: PropertyDescriptor, konst enumEntry: ClassDescriptor) : KotlinCallDiagnostic(RESOLVED) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCall(this)
     }
 }
 
-class CompatibilityWarning(val candidate: CallableDescriptor) : KotlinCallDiagnostic(RESOLVED) {
+class CompatibilityWarning(konst candidate: CallableDescriptor) : KotlinCallDiagnostic(RESOLVED) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCall(this)
     }
 }
 
 class CompatibilityWarningOnArgument(
-    val argument: KotlinCallArgument,
-    val candidate: CallableDescriptor
+    konst argument: KotlinCallArgument,
+    konst candidate: CallableDescriptor
 ) : KotlinCallDiagnostic(RESOLVED) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCallArgument(argument, this)
     }
 }
 
-class NoContextReceiver(val receiverDescriptor: ReceiverParameterDescriptor) : KotlinCallDiagnostic(INAPPLICABLE) {
+class NoContextReceiver(konst receiverDescriptor: ReceiverParameterDescriptor) : KotlinCallDiagnostic(INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCall(this)
     }
 }
 
-class MultipleArgumentsApplicableForContextReceiver(val receiverDescriptor: ReceiverParameterDescriptor) : KotlinCallDiagnostic(INAPPLICABLE) {
+class MultipleArgumentsApplicableForContextReceiver(konst receiverDescriptor: ReceiverParameterDescriptor) : KotlinCallDiagnostic(INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) {
         reporter.onCall(this)
     }
 }
 
 class KotlinConstraintSystemDiagnostic(
-    val error: ConstraintSystemError
+    konst error: ConstraintSystemError
 ) : KotlinCallDiagnostic(error.applicability), TransformableToWarning<KotlinConstraintSystemDiagnostic> {
     override fun report(reporter: DiagnosticReporter) = reporter.constraintError(error)
 
@@ -343,7 +343,7 @@ class KotlinConstraintSystemDiagnostic(
         if (error is NewConstraintError) KotlinConstraintSystemDiagnostic(error.transformToWarning()) else null
 }
 
-val KotlinCallDiagnostic.constraintSystemError: ConstraintSystemError?
+konst KotlinCallDiagnostic.constraintSystemError: ConstraintSystemError?
     get() = (this as? KotlinConstraintSystemDiagnostic)?.error
 
 fun ConstraintSystemError.asDiagnostic(): KotlinConstraintSystemDiagnostic = KotlinConstraintSystemDiagnostic(this)

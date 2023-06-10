@@ -10,9 +10,9 @@ import org.jetbrains.org.objectweb.asm.Type
 
 class ParametersBuilder private constructor() {
 
-    private val params = arrayListOf<ParameterInfo>()
+    private konst params = arrayListOf<ParameterInfo>()
 
-    private var valueParamFirstIndex = 0
+    private var konstueParamFirstIndex = 0
 
     var nextParameterOffset = 0
         private set
@@ -29,13 +29,13 @@ class ParametersBuilder private constructor() {
 
     fun addNextValueParameter(type: Type, skipped: Boolean, remapValue: StackValue?, parameterIndex: Int): ParameterInfo {
         return addParameter(
-            ParameterInfo(type, skipped, nextParameterOffset, remapValue, parameterIndex + valueParamFirstIndex),
+            ParameterInfo(type, skipped, nextParameterOffset, remapValue, parameterIndex + konstueParamFirstIndex),
             true
         )
     }
 
     fun addCapturedParam(original: CapturedParamInfo, newFieldName: String): CapturedParamInfo {
-        val info = CapturedParamInfo(
+        konst info = CapturedParamInfo(
             original.desc, newFieldName, original.isSkipped, nextParameterOffset, original.index, original.isSkipInConstructor
         )
         info.functionalArgument = original.functionalArgument
@@ -58,7 +58,7 @@ class ParametersBuilder private constructor() {
         skipped: Boolean,
         original: ParameterInfo?
     ): CapturedParamInfo {
-        val info = CapturedParamInfo(
+        konst info = CapturedParamInfo(
             CapturedParamDesc(containingLambdaType, fieldName, type), newFieldName, skipped, nextParameterOffset, original?.index ?: -1, false
         )
         if (original != null) {
@@ -73,7 +73,7 @@ class ParametersBuilder private constructor() {
         if (info !is CapturedParamInfo) {
             nextValueParameterIndex++
             if (!isValueParameter) {
-                valueParamFirstIndex++
+                konstueParamFirstIndex++
             }
         }
         return info

@@ -5,13 +5,13 @@ import helpers.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-class Promise<T>(private val executor: ((T) -> Unit) -> Unit) {
-    private var value: Any? = null
+class Promise<T>(private konst executor: ((T) -> Unit) -> Unit) {
+    private var konstue: Any? = null
     private var thenList: MutableList<(T) -> Unit>? = mutableListOf()
 
     init {
         executor {
-            value = it
+            konstue = it
             for (resolve in thenList!!) {
                 resolve(it)
             }
@@ -25,7 +25,7 @@ class Promise<T>(private val executor: ((T) -> Unit) -> Unit) {
                 thenList!!.add { resolve(onFulfilled(it)) }
             }
             else {
-                resolve(onFulfilled(value as T))
+                resolve(onFulfilled(konstue as T))
             }
         }
     }
@@ -33,7 +33,7 @@ class Promise<T>(private val executor: ((T) -> Unit) -> Unit) {
 
 // FILE: queue.kt
 import helpers.*
-private val queue = mutableListOf<() -> Unit>()
+private konst queue = mutableListOf<() -> Unit>()
 
 fun <T> postpone(computation: () -> T): Promise<T> {
     return Promise { resolve ->
@@ -58,22 +58,22 @@ private var log = ""
 
 private var inAwait = false
 
-suspend fun <S> await(value: Promise<S>): S = suspendCoroutine { continuation ->
+suspend fun <S> await(konstue: Promise<S>): S = suspendCoroutine { continuation ->
     if (inAwait) {
         throw IllegalStateException("Can't call await recursively")
     }
     inAwait = true
     postpone {
-        value.then { result ->
+        konstue.then { result ->
             continuation.resume(result)
         }
     }
     inAwait = false
 }
 
-suspend fun <S> awaitAndLog(value: Promise<S>): S {
+suspend fun <S> awaitAndLog(konstue: Promise<S>): S {
     log += "before await;"
-    return await(value.then { result ->
+    return await(konstue.then { result ->
         log += "after await: $result;"
         result
     })
@@ -88,7 +88,7 @@ fun <T> async(c: suspend () -> T): Promise<T> {
 fun <T> asyncOperation(resultSupplier: () -> T) = Promise<T> { resolve ->
     log += "before async;"
     postpone {
-        val result = resultSupplier()
+        konst result = resultSupplier()
         log += "after async $result;"
         resolve(result)
     }
@@ -101,13 +101,13 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 private fun test() = async<String> {
-    val o = await(asyncOperation { "O" })
-    val k = awaitAndLog(asyncOperation { "K" })
+    konst o = await(asyncOperation { "O" })
+    konst k = awaitAndLog(asyncOperation { "K" })
     return@async o + k
 }
 
 fun box(): String {
-    val resultPromise = test()
+    konst resultPromise = test()
     var result: String? = null
     resultPromise.then { result = it }
     processQueue()

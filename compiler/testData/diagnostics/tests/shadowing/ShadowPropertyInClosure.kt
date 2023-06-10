@@ -1,4 +1,4 @@
 // FIR_IDENTICAL
-val i = 17
+konst i = 17
 
-val f: () -> Int = { var i = 17; i }
+konst f: () -> Int = { var i = 17; i }

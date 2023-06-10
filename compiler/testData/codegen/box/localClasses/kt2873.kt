@@ -1,6 +1,6 @@
 fun foo() : String {
-    val u = {
-        class B(val data : String)
+    konst u = {
+        class B(konst data : String)
         B("OK").data
     }
     return u()

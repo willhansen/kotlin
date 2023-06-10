@@ -15,7 +15,7 @@ interface XdQuery<out T : XdEntity>
 fun <T : XdEntity> XdQuery<T>.firstOrNull(): T? = null
 
 object FilteringContext {
-    infix fun <T : Comparable<T>> T?.eq(value: T?): XdSearchingNode = null!!
+    infix fun <T : Comparable<T>> T?.eq(konstue: T?): XdSearchingNode = null!!
 }
 
 fun <T : XdEntity> XdEntityType<T>.filter(clause: FilteringContext.(T) -> XdSearchingNode): XdQuery<T> {
@@ -26,7 +26,7 @@ interface XdIssue
 interface XdIssueFolder
 
 fun test() {
-    val array = arrayOf<Any>(
+    konst array = arrayOf<Any>(
         "Project",
         { XdProject.filter { it.name eq "foo" }.firstOrNull() },
         { _: XdIssue, _: XdIssueFolder -> }

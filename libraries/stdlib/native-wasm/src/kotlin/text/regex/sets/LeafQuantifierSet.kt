@@ -41,11 +41,11 @@ open internal class LeafQuantifierSet(var quantifier: Quantifier,
         innerSet.next = FSet.possessiveFSet
     }
 
-    val leaf: LeafSet get() = super.innerSet as LeafSet
-    val min: Int get() = quantifier.min
-    val max: Int get() = quantifier.max
+    konst leaf: LeafSet get() = super.innerSet as LeafSet
+    konst min: Int get() = quantifier.min
+    konst max: Int get() = quantifier.max
 
-    override val consumesFixedLength: Boolean
+    override konst consumesFixedLength: Boolean
         get() = (min == max)
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
@@ -58,7 +58,7 @@ open internal class LeafQuantifierSet(var quantifier: Quantifier,
                 return -1
             }
 
-            val shift = leaf.accepts(index, testString)
+            konst shift = leaf.accepts(index, testString)
             if (shift < 1) {
                 return -1
             }
@@ -68,7 +68,7 @@ open internal class LeafQuantifierSet(var quantifier: Quantifier,
 
         // Process occurrences between min and max.
         while  ((max == Quantifier.INF || occurrences < max) && index + leaf.charCount <= testString.length) {
-            val shift = leaf.accepts(index, testString)
+            konst shift = leaf.accepts(index, testString)
             if (shift < 1) {
                 break
             }
@@ -78,7 +78,7 @@ open internal class LeafQuantifierSet(var quantifier: Quantifier,
 
         // Roll back if the next node does't match the remaining string.
         while (occurrences >= min) {
-            val shift = next.matches(index, testString, matchResult)
+            konst shift = next.matches(index, testString, matchResult)
             if (shift >= 0) {
                 return shift
             }
@@ -88,7 +88,7 @@ open internal class LeafQuantifierSet(var quantifier: Quantifier,
         return -1
     }
 
-    override val name: String
+    override konst name: String
         get() = quantifier.toString()
 
     override var innerSet: AbstractSet

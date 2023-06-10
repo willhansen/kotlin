@@ -1,1 +1,1 @@
-val p : Byte = <expr>42</expr>
+konst p : Byte = <expr>42</expr>

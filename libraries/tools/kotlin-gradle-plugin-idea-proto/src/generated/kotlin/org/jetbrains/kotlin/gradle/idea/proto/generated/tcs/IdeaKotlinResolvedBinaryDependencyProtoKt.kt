@@ -10,7 +10,7 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKotlinResolvedBinaryDependencyProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKotlinResolvedBinaryDependencyProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
       @JvmName("getCoordinates")
       get() = _builder.getCoordinates()
       @JvmName("setCoordinates")
-      set(value) {
-        _builder.setCoordinates(value)
+      set(konstue) {
+        _builder.setCoordinates(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinBinaryCoordinatesProto coordinates = 2;</code>
@@ -71,7 +71,7 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
     fun hasCoordinates(): kotlin.Boolean {
       return _builder.hasCoordinates()
     }
-    val IdeaKotlinResolvedBinaryDependencyProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinBinaryCoordinatesProto?
+    konst IdeaKotlinResolvedBinaryDependencyProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinBinaryCoordinatesProto?
       get() = _builder.coordinatesOrNull
 
     /**
@@ -81,8 +81,8 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
       @JvmName("getBinaryType")
       get() = _builder.getBinaryType()
       @JvmName("setBinaryType")
-      set(value) {
-        _builder.setBinaryType(value)
+      set(konstue) {
+        _builder.setBinaryType(konstue)
       }
     /**
      * <code>optional string binary_type = 3;</code>
@@ -105,8 +105,8 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
       @JvmName("getClasspath")
       get() = _builder.getClasspath()
       @JvmName("setClasspath")
-      set(value) {
-        _builder.setClasspath(value)
+      set(konstue) {
+        _builder.setClasspath(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinClasspathProto classpath = 4;</code>
@@ -121,7 +121,7 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
     fun hasClasspath(): kotlin.Boolean {
       return _builder.hasClasspath()
     }
-    val IdeaKotlinResolvedBinaryDependencyProtoKt.Dsl.classpathOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinClasspathProto?
+    konst IdeaKotlinResolvedBinaryDependencyProtoKt.Dsl.classpathOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinClasspathProto?
       get() = _builder.classpathOrNull
   }
 }
@@ -129,12 +129,12 @@ object IdeaKotlinResolvedBinaryDependencyProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinBinaryCoordinatesProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinBinaryCoordinatesProto?
   get() = if (hasCoordinates()) getCoordinates() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProtoOrBuilder.classpathOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinClasspathProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProtoOrBuilder.classpathOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinClasspathProto?
   get() = if (hasClasspath()) getClasspath() else null
 

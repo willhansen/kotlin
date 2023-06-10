@@ -10,8 +10,8 @@ external object O {
 }
 
 fun box(): String {
-    val a = foo(O.Foo.A)
-    val b = foo(O.Foo.B)
+    konst a = foo(O.Foo.A)
+    konst b = foo(O.Foo.B)
 
     if (a != "!") return "fail1: $a"
     if (b != "@") return "fail2: $b"

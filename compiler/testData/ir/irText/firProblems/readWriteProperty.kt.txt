@@ -5,7 +5,7 @@ class SettingType<out V : Any> {
 
   }
 
-  val type: KClass<out V>
+  konst type: KClass<out V>
     field = type
     get
 
@@ -43,7 +43,7 @@ class IdeWizard {
       return <this>.#projectTemplate$delegate.getValue(thisRef = <this>, property = IdeWizard::projectTemplate)
     }
     set(<set-?>: Int?) {
-      return <this>.#projectTemplate$delegate.setValue(thisRef = <this>, property = IdeWizard::projectTemplate, value = <set-?>)
+      return <this>.#projectTemplate$delegate.setValue(thisRef = <this>, property = IdeWizard::projectTemplate, konstue = <set-?>)
     }
 
   private fun <V : Any, T : SettingType<V>> setting(reference: SettingReference<V, T>): <no name provided><V, T> {
@@ -55,12 +55,12 @@ class IdeWizard {
 
         }
 
-        override operator fun setValue(thisRef: Any?, property: KProperty<*>, value: V?) {
+        override operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: V?) {
           when {
-            EQEQ(arg0 = value, arg1 = null) -> return Unit
+            EQEQ(arg0 = konstue, arg1 = null) -> return Unit
           }
-          reference.<set-t>(<set-?> = SettingType<V>(type = value::class) as T)
-          reference.<set-v>(<set-?> = value)
+          reference.<set-t>(<set-?> = SettingType<V>(type = konstue::class) as T)
+          reference.<set-v>(<set-?> = konstue)
         }
 
         override operator fun getValue(thisRef: Any?, property: KProperty<*>): V? {

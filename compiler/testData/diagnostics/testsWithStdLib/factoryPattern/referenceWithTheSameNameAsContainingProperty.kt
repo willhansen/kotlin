@@ -9,14 +9,14 @@ fun Foo.bar(): Int = 0
 
 fun call(f: Any) {}
 
-val String.bar
+konst String.bar
     get() = call(Foo::bar)
 
 // test from KT-39470
 
 interface Bar {
-    val serializationWhitelists: List<Foo>
+    konst serializationWhitelists: List<Foo>
 }
 
-val List<Bar>.serializationWhitelists
+konst List<Bar>.serializationWhitelists
     get() = flatMapTo(LinkedHashSet(), Bar::serializationWhitelists)

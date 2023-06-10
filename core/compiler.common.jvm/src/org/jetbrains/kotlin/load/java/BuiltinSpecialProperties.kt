@@ -12,31 +12,31 @@ import org.jetbrains.kotlin.name.FqNameUnsafe
 import org.jetbrains.kotlin.name.Name
 
 object BuiltinSpecialProperties {
-    val PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP: Map<FqName, Name> = mapOf(
+    konst PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP: Map<FqName, Name> = mapOf(
         StandardNames.FqNames._enum.childSafe("name") to StandardNames.NAME,
         StandardNames.FqNames._enum.childSafe("ordinal") to Name.identifier("ordinal"),
         StandardNames.FqNames.collection.child("size") to Name.identifier("size"),
         StandardNames.FqNames.map.child("size") to Name.identifier("size"),
         StandardNames.FqNames.charSequence.childSafe("length") to Name.identifier("length"),
         StandardNames.FqNames.map.child("keys") to Name.identifier("keySet"),
-        StandardNames.FqNames.map.child("values") to Name.identifier("values"),
+        StandardNames.FqNames.map.child("konstues") to Name.identifier("konstues"),
         StandardNames.FqNames.map.child("entries") to Name.identifier("entrySet")
     )
 
-    private val GETTER_JVM_NAME_TO_PROPERTIES_SHORT_NAME_MAP: Map<Name, List<Name>> =
+    private konst GETTER_JVM_NAME_TO_PROPERTIES_SHORT_NAME_MAP: Map<Name, List<Name>> =
         PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP.entries
-            .map { Pair(it.key.shortName(), it.value) }
+            .map { Pair(it.key.shortName(), it.konstue) }
             .groupBy({ it.second }, { it.first })
             .mapValues {
-                it.value.distinct()
+                it.konstue.distinct()
             }
 
-    val GETTER_FQ_NAMES: Set<FqName> = PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP.mapTo(mutableSetOf()) {
-        JavaToKotlinClassMap.mapKotlinToJava(it.key.parent().toUnsafe())!!.asSingleFqName().child(it.value)
+    konst GETTER_FQ_NAMES: Set<FqName> = PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP.mapTo(mutableSetOf()) {
+        JavaToKotlinClassMap.mapKotlinToJava(it.key.parent().toUnsafe())!!.asSingleFqName().child(it.konstue)
     }
 
-    val SPECIAL_FQ_NAMES: Set<FqName> = PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP.keys
-    val SPECIAL_SHORT_NAMES: Set<Name> = SPECIAL_FQ_NAMES.map(FqName::shortName).toSet()
+    konst SPECIAL_FQ_NAMES: Set<FqName> = PROPERTY_FQ_NAME_TO_JVM_GETTER_NAME_MAP.keys
+    konst SPECIAL_SHORT_NAMES: Set<Name> = SPECIAL_FQ_NAMES.map(FqName::shortName).toSet()
 
     fun getPropertyNameCandidatesBySpecialGetterName(name1: Name): List<Name> =
         GETTER_JVM_NAME_TO_PROPERTIES_SHORT_NAME_MAP[name1] ?: emptyList()

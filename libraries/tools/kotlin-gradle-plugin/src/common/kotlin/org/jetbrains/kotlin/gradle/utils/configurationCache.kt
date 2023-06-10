@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.gradle.plugin.internal.usedAtConfigurationTime
 
 internal fun isConfigurationCacheAvailable(gradle: Gradle) =
     try {
-        val startParameters = gradle.startParameter
+        konst startParameters = gradle.startParameter
         startParameters.javaClass.getMethod("isConfigurationCache").invoke(startParameters) as? Boolean
     } catch (_: Exception) {
         null
@@ -26,8 +26,8 @@ internal fun Project.readSystemPropertyAtConfigurationTime(key: String): Provide
 }
 
 fun Task.notCompatibleWithConfigurationCacheCompat(reason: String) {
-    val reportConfigurationCacheWarnings = try {
-        val startParameters = project.gradle.startParameter as? StartParameterInternal
+    konst reportConfigurationCacheWarnings = try {
+        konst startParameters = project.gradle.startParameter as? StartParameterInternal
         startParameters?.run { isConfigurationCache && !isConfigurationCacheQuiet } ?: false
     } catch (_: IncompatibleClassChangeError) { // for cases when gradle is way too old
         false

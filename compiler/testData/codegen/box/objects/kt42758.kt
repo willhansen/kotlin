@@ -8,10 +8,10 @@ object Thing : Serializable {
     private fun readResolve(): Any = Thing
 }
 
-private inline fun <reified T : Serializable> roundTrip(value: T): T {
-    val outputStream = ByteArrayOutputStream()
-    ObjectOutputStream(outputStream).use { it.writeObject(value) }
-    val inputStream = ByteArrayInputStream(outputStream.toByteArray())
+private inline fun <reified T : Serializable> roundTrip(konstue: T): T {
+    konst outputStream = ByteArrayOutputStream()
+    ObjectOutputStream(outputStream).use { it.writeObject(konstue) }
+    konst inputStream = ByteArrayInputStream(outputStream.toByteArray())
     return ObjectInputStream(inputStream).use { it.readObject() } as T
 }
 

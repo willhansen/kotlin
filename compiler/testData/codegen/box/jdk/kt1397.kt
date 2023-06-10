@@ -8,7 +8,7 @@ class IntArrayList(): ArrayList<Int>() {
 }
 
 fun box(): String {
-    val a = IntArrayList()
+    konst a = IntArrayList()
     a.add(1)
     a[0]++
     return if (a[0] == 2) "OK" else "fail"

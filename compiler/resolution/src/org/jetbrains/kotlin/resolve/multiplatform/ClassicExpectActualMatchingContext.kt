@@ -31,10 +31,10 @@ import org.jetbrains.kotlin.utils.addToStdlib.UnsafeCastFunction
 import org.jetbrains.kotlin.utils.addToStdlib.castAll
 import org.jetbrains.kotlin.utils.keysToMap
 
-class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) : ExpectActualMatchingContext<MemberDescriptor>,
+class ClassicExpectActualMatchingContext(konst platformModule: ModuleDescriptor) : ExpectActualMatchingContext<MemberDescriptor>,
     TypeSystemInferenceExtensionContext by ClassicTypeSystemContextForCS(platformModule.builtIns, KotlinTypeRefiner.Default)
 {
-    override val shouldCheckReturnTypesOfCallables: Boolean
+    override konst shouldCheckReturnTypesOfCallables: Boolean
         get() = true
 
     private fun CallableSymbolMarker.asDescriptor(): CallableDescriptor = this as CallableDescriptor
@@ -47,84 +47,84 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
     private fun TypeAliasSymbolMarker.asDescriptor(): TypeAliasDescriptor = this as TypeAliasDescriptor
     private inline fun <reified T : DeclarationDescriptor> DeclarationSymbolMarker.safeAsDescriptor(): T? = this as? T
 
-    override val RegularClassSymbolMarker.classId: ClassId
+    override konst RegularClassSymbolMarker.classId: ClassId
         get() = (this as ClassifierDescriptor).classId!!
-    override val TypeAliasSymbolMarker.classId: ClassId
+    override konst TypeAliasSymbolMarker.classId: ClassId
         get() = (this as ClassifierDescriptor).classId!!
-    override val CallableSymbolMarker.callableId: CallableId
+    override konst CallableSymbolMarker.callableId: CallableId
         get() {
-            val descriptor = asDescriptor()
-            return when (val parent = descriptor.containingDeclaration) {
+            konst descriptor = asDescriptor()
+            return when (konst parent = descriptor.containingDeclaration) {
                 is PackageFragmentDescriptor -> CallableId(parent.fqName, descriptor.name)
                 is ClassifierDescriptor -> CallableId(parent.classId!!, descriptor.name)
                 else -> error("Callable descriptor without callableId: $descriptor")
             }
         }
-    override val TypeParameterSymbolMarker.parameterName: Name
+    override konst TypeParameterSymbolMarker.parameterName: Name
         get() = asDescriptor().name
-    override val ValueParameterSymbolMarker.parameterName: Name
+    override konst ValueParameterSymbolMarker.parameterName: Name
         get() = asDescriptor().name
 
     override fun TypeAliasSymbolMarker.expandToRegularClass(): RegularClassSymbolMarker? {
         return asDescriptor().classDescriptor
     }
 
-    override val RegularClassSymbolMarker.classKind: ClassKind
+    override konst RegularClassSymbolMarker.classKind: ClassKind
         get() = asDescriptor().kind
-    override val RegularClassSymbolMarker.isCompanion: Boolean
+    override konst RegularClassSymbolMarker.isCompanion: Boolean
         get() = safeAsDescriptor<ClassDescriptor>()?.isCompanionObject == true
-    override val RegularClassSymbolMarker.isInner: Boolean
+    override konst RegularClassSymbolMarker.isInner: Boolean
         get() = asDescriptor().isInner
-    override val RegularClassSymbolMarker.isInline: Boolean
+    override konst RegularClassSymbolMarker.isInline: Boolean
         get() = safeAsDescriptor<ClassDescriptor>()?.isInline == true
-    override val RegularClassSymbolMarker.isValue: Boolean
+    override konst RegularClassSymbolMarker.isValue: Boolean
         get() = safeAsDescriptor<ClassDescriptor>()?.isValue == true
-    override val RegularClassSymbolMarker.isFun: Boolean
+    override konst RegularClassSymbolMarker.isFun: Boolean
         get() = safeAsDescriptor<ClassDescriptor>()?.isFun == true
-    override val ClassLikeSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
+    override konst ClassLikeSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
         get() = asDescriptor().declaredTypeParameters
-    override val ClassLikeSymbolMarker.modality: Modality
+    override konst ClassLikeSymbolMarker.modality: Modality
         get() = asDescriptor().modality
-    override val ClassLikeSymbolMarker.visibility: Visibility
+    override konst ClassLikeSymbolMarker.visibility: Visibility
         get() = asDescriptor().visibility.delegate
-    override val CallableSymbolMarker.modality: Modality?
+    override konst CallableSymbolMarker.modality: Modality?
         get() = safeAsDescriptor<CallableMemberDescriptor>()?.modality
-    override val CallableSymbolMarker.visibility: Visibility
+    override konst CallableSymbolMarker.visibility: Visibility
         get() = asDescriptor().visibility.delegate
-    override val RegularClassSymbolMarker.superTypes: List<KotlinTypeMarker>
+    override konst RegularClassSymbolMarker.superTypes: List<KotlinTypeMarker>
         get() = asDescriptor().typeConstructor.supertypes.toList()
-    override val CallableSymbolMarker.isExpect: Boolean
+    override konst CallableSymbolMarker.isExpect: Boolean
         get() = safeAsDescriptor<MemberDescriptor>()?.isExpect == true
 
-    override val CallableSymbolMarker.isInline: Boolean
+    override konst CallableSymbolMarker.isInline: Boolean
         get() = when (this) {
             is FunctionDescriptor -> isInline
             is PropertyDescriptor -> getter?.isInline == true
             else -> false
         }
 
-    override val CallableSymbolMarker.isSuspend: Boolean
+    override konst CallableSymbolMarker.isSuspend: Boolean
         get() = when (this) {
             is FunctionDescriptor -> isSuspend
             is PropertyDescriptor -> getter?.isSuspend == true
             else -> false
         }
 
-    override val CallableSymbolMarker.isExternal: Boolean
+    override konst CallableSymbolMarker.isExternal: Boolean
         get() = safeAsDescriptor<MemberDescriptor>()?.isExternal == true
-    override val CallableSymbolMarker.isInfix: Boolean
+    override konst CallableSymbolMarker.isInfix: Boolean
         get() = safeAsDescriptor<FunctionDescriptor>()?.isInfix == true
-    override val CallableSymbolMarker.isOperator: Boolean
+    override konst CallableSymbolMarker.isOperator: Boolean
         get() = safeAsDescriptor<FunctionDescriptor>()?.isOperator == true
-    override val CallableSymbolMarker.isTailrec: Boolean
+    override konst CallableSymbolMarker.isTailrec: Boolean
         get() = safeAsDescriptor<FunctionDescriptor>()?.isTailrec == true
-    override val PropertySymbolMarker.isVar: Boolean
+    override konst PropertySymbolMarker.isVar: Boolean
         get() = asDescriptor().isVar
-    override val PropertySymbolMarker.isLateinit: Boolean
+    override konst PropertySymbolMarker.isLateinit: Boolean
         get() = asDescriptor().isLateInit
-    override val PropertySymbolMarker.isConst: Boolean
+    override konst PropertySymbolMarker.isConst: Boolean
         get() = asDescriptor().isConst
-    override val PropertySymbolMarker.setter: FunctionSymbolMarker?
+    override konst PropertySymbolMarker.setter: FunctionSymbolMarker?
         get() = asDescriptor().setter
 
     @OptIn(UnsafeCastFunction::class)
@@ -133,9 +133,9 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
         actualTypeParameters: List<TypeParameterSymbolMarker>,
         parentSubstitutor: TypeSubstitutorMarker?,
     ): TypeSubstitutorMarker {
-        val expectParameters = expectTypeParameters.castAll<TypeParameterDescriptor>()
-        val actualParameters = actualTypeParameters.castAll<TypeParameterDescriptor>()
-        val substitutor = TypeSubstitutor.create(
+        konst expectParameters = expectTypeParameters.castAll<TypeParameterDescriptor>()
+        konst actualParameters = actualTypeParameters.castAll<TypeParameterDescriptor>()
+        konst substitutor = TypeSubstitutor.create(
             TypeConstructorSubstitution.createByParametersMap(expectParameters.keysToMap {
                 actualParameters[it.index].defaultType.asTypeProjection()
             })
@@ -156,7 +156,7 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
     }
 
     private fun ClassDescriptor.getMembers(name: Name? = null): List<MemberDescriptor> {
-        val nameFilter = if (name != null) { it -> it == name } else MemberScope.ALL_NAME_FILTER
+        konst nameFilter = if (name != null) { it -> it == name } else MemberScope.ALL_NAME_FILTER
         return defaultType.memberScope
             .getDescriptorsFiltered(nameFilter = nameFilter)
             .filterIsInstance<MemberDescriptor>()
@@ -172,35 +172,35 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
             .map { it.name }
     }
 
-    override val CallableSymbolMarker.dispatchReceiverType: KotlinTypeMarker?
+    override konst CallableSymbolMarker.dispatchReceiverType: KotlinTypeMarker?
         get() = asDescriptor().dispatchReceiverParameter?.type
-    override val CallableSymbolMarker.extensionReceiverType: KotlinTypeMarker?
+    override konst CallableSymbolMarker.extensionReceiverType: KotlinTypeMarker?
         get() = asDescriptor().extensionReceiverParameter?.type
-    override val CallableSymbolMarker.returnType: KotlinTypeMarker
+    override konst CallableSymbolMarker.returnType: KotlinTypeMarker
         get() = asDescriptor().returnType!!
-    override val CallableSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
+    override konst CallableSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
         get() = asDescriptor().typeParameters
-    override val FunctionSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
-        get() = asDescriptor().valueParameters
-    override val ValueParameterSymbolMarker.isVararg: Boolean
+    override konst FunctionSymbolMarker.konstueParameters: List<ValueParameterSymbolMarker>
+        get() = asDescriptor().konstueParameters
+    override konst ValueParameterSymbolMarker.isVararg: Boolean
         get() = asDescriptor().varargElementType != null
-    override val ValueParameterSymbolMarker.isNoinline: Boolean
+    override konst ValueParameterSymbolMarker.isNoinline: Boolean
         get() = asDescriptor().isNoinline
-    override val ValueParameterSymbolMarker.isCrossinline: Boolean
+    override konst ValueParameterSymbolMarker.isCrossinline: Boolean
         get() = asDescriptor().isCrossinline
-    override val ValueParameterSymbolMarker.hasDefaultValue: Boolean
+    override konst ValueParameterSymbolMarker.hasDefaultValue: Boolean
         get() = asDescriptor().declaresDefaultValue()
 
     override fun CallableSymbolMarker.isAnnotationConstructor(): Boolean {
-        val descriptor = safeAsDescriptor<ConstructorDescriptor>() ?: return false
+        konst descriptor = safeAsDescriptor<ConstructorDescriptor>() ?: return false
         return DescriptorUtils.isAnnotationClass(descriptor.constructedClass)
     }
 
-    override val TypeParameterSymbolMarker.bounds: List<KotlinTypeMarker>
+    override konst TypeParameterSymbolMarker.bounds: List<KotlinTypeMarker>
         get() = asDescriptor().upperBounds
-    override val TypeParameterSymbolMarker.variance: Variance
+    override konst TypeParameterSymbolMarker.variance: Variance
         get() = asDescriptor().variance
-    override val TypeParameterSymbolMarker.isReified: Boolean
+    override konst TypeParameterSymbolMarker.isReified: Boolean
         get() = asDescriptor().isReified
 
     override fun areCompatibleExpectActualTypes(expectType: KotlinTypeMarker?, actualType: KotlinTypeMarker?): Boolean {
@@ -217,7 +217,7 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
 
     @OptIn(TypeRefinement::class)
     private fun areCompatibleTypesViaTypeRefinement(a: KotlinType, b: KotlinType): Boolean {
-        val typeRefinerForPlatformModule = platformModule.getKotlinTypeRefiner().let { moduleRefiner ->
+        konst typeRefinerForPlatformModule = platformModule.getKotlinTypeRefiner().let { moduleRefiner ->
             if (moduleRefiner is KotlinTypeRefiner.Default)
                 KotlinTypeRefinerImpl.createStandaloneInstanceFor(platformModule)
             else
@@ -232,7 +232,7 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
     }
 
     private fun areCompatibleTypesViaTypeContext(a: KotlinType, b: KotlinType): Boolean {
-        val typeSystemContext = object : ClassicTypeSystemContext {
+        konst typeSystemContext = object : ClassicTypeSystemContext {
             override fun areEqualTypeConstructors(c1: TypeConstructorMarker, c2: TypeConstructorMarker): Boolean {
                 require(c1 is TypeConstructor)
                 require(c2 is TypeConstructor)
@@ -273,8 +273,8 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
         actualTypeConstructor: TypeConstructor,
         platformModule: ModuleDescriptor
     ): Boolean {
-        val expected = expectedTypeConstructor.declarationDescriptor
-        val actual = actualTypeConstructor.declarationDescriptor
+        konst expected = expectedTypeConstructor.declarationDescriptor
+        konst actual = actualTypeConstructor.declarationDescriptor
         return expected is ClassifierDescriptorWithTypeParameters &&
                 expected.isExpect &&
                 actual is ClassifierDescriptorWithTypeParameters &&
@@ -297,7 +297,7 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
             getDescriptorsFiltered(DescriptorKindFilter.CLASSIFIERS) { it == name }
                 .filterIsInstance<ClassifierDescriptorWithTypeParameters>()
 
-        val segments = classId.relativeClassName.pathSegments()
+        konst segments = classId.relativeClassName.pathSegments()
         var classifiers = module.getPackage(classId.packageFqName).memberScope.getAllClassifiers(segments.first())
         classifiers = classifiers.applyFilter(moduleFilter)
 
@@ -313,7 +313,7 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
     }
 
     override fun RegularClassSymbolMarker.isNotSamInterface(): Boolean {
-        val descriptor = asDescriptor()
+        konst descriptor = asDescriptor()
         return descriptor.isDefinitelyNotSamInterface || descriptor.defaultFunctionTypeForSamInterface == null
     }
 
@@ -321,6 +321,6 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
         return safeAsDescriptor<CallableMemberDescriptor>()?.kind?.isReal == false
     }
 
-    override val CallableSymbolMarker.hasStableParameterNames: Boolean
+    override konst CallableSymbolMarker.hasStableParameterNames: Boolean
         get() = asDescriptor().hasStableParameterNames()
 }

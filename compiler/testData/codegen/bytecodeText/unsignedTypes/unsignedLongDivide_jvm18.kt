@@ -1,12 +1,12 @@
 // JVM_TARGET: 1.8
 // WITH_STDLIB
 
-val ua = 1234UL
-val ub = 5678UL
-val u = ua * ub
+konst ua = 1234UL
+konst ub = 5678UL
+konst u = ua * ub
 
 fun box(): String {
-    val div = u / ua
+    konst div = u / ua
     if (div != ub) throw AssertionError("$div")
 
     return "OK"

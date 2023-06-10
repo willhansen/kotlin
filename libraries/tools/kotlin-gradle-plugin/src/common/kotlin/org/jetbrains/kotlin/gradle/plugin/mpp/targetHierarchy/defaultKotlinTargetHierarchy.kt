@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.plugin.mpp.targetHierarchy
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetHierarchy.SourceSetTree
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetHierarchyDescriptor
 
-internal val defaultKotlinTargetHierarchy = KotlinTargetHierarchyDescriptor {
+internal konst defaultKotlinTargetHierarchy = KotlinTargetHierarchyDescriptor {
     /* natural hierarchy is only applied to default 'main'/'test' compilations (by default) */
     withSourceSetTree(SourceSetTree.main, SourceSetTree.test)
 

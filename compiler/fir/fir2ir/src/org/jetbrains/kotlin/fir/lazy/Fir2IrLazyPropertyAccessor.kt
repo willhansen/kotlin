@@ -29,9 +29,9 @@ class Fir2IrLazyPropertyAccessor(
     startOffset: Int,
     endOffset: Int,
     origin: IrDeclarationOrigin,
-    private val firAccessor: FirPropertyAccessor?,
-    private val isSetter: Boolean,
-    private val firParentProperty: FirProperty,
+    private konst firAccessor: FirPropertyAccessor?,
+    private konst isSetter: Boolean,
+    private konst firParentProperty: FirProperty,
     firParentClass: FirRegularClass?,
     symbol: IrSimpleFunctionSymbol,
     isFakeOverride: Boolean
@@ -40,7 +40,7 @@ class Fir2IrLazyPropertyAccessor(
         symbol.bind(this)
     }
 
-    override val fir: FirCallableDeclaration
+    override konst fir: FirCallableDeclaration
         get() = firAccessor ?: firParentProperty
 
     // TODO: investigate why some deserialized properties are inline
@@ -59,7 +59,7 @@ class Fir2IrLazyPropertyAccessor(
     }
 
     override var dispatchReceiverParameter: IrValueParameter? by lazyVar(lock) {
-        val containingClass = (parent as? IrClass)?.takeUnless { it.isFacadeClass }
+        konst containingClass = (parent as? IrClass)?.takeUnless { it.isFacadeClass }
         if (containingClass != null && shouldHaveDispatchReceiver(containingClass)) {
             createThisReceiverParameter(thisType = containingClass.thisReceiver?.type ?: error("No this receiver for containing class"))
         } else null
@@ -73,7 +73,7 @@ class Fir2IrLazyPropertyAccessor(
 
     override var contextReceiverParametersCount: Int = fir.contextReceiversForFunctionOrContainingProperty().size
 
-    override var valueParameters: List<IrValueParameter> by lazyVar(lock) {
+    override var konstueParameters: List<IrValueParameter> by lazyVar(lock) {
         if (!isSetter && contextReceiverParametersCount == 0) emptyList()
         else {
             declarationStorage.enterScope(this)
@@ -86,18 +86,18 @@ class Fir2IrLazyPropertyAccessor(
                 )
 
                 if (isSetter) {
-                    val valueParameter = firAccessor?.valueParameters?.firstOrNull()
+                    konst konstueParameter = firAccessor?.konstueParameters?.firstOrNull()
                     add(
                         declarationStorage.createDefaultSetterParameter(
                             startOffset, endOffset,
-                            (valueParameter?.returnTypeRef ?: firParentProperty.returnTypeRef).toIrType(
+                            (konstueParameter?.returnTypeRef ?: firParentProperty.returnTypeRef).toIrType(
                                 typeConverter, conversionTypeContext
                             ),
                             parent = this@Fir2IrLazyPropertyAccessor,
-                            firValueParameter = valueParameter,
-                            name = valueParameter?.name,
-                            isCrossinline = valueParameter?.isCrossinline == true,
-                            isNoinline = valueParameter?.isNoinline == true
+                            firValueParameter = konstueParameter,
+                            name = konstueParameter?.name,
+                            isCrossinline = konstueParameter?.isCrossinline == true,
+                            isNoinline = konstueParameter?.isNoinline == true
                         )
                     )
                 }
@@ -112,12 +112,12 @@ class Fir2IrLazyPropertyAccessor(
         firParentProperty.generateOverriddenAccessorSymbols(firParentClass, !isSetter)
     }
 
-    override val initialSignatureFunction: IrFunction? by lazy {
+    override konst initialSignatureFunction: IrFunction? by lazy {
         (fir as? FirSyntheticPropertyAccessor)?.delegate?.let { declarationStorage.getIrFunctionSymbol(it.symbol).owner }
     }
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = firParentProperty.containerSource
 
-    private val conversionTypeContext = if (isSetter) ConversionTypeContext.IN_SETTER else ConversionTypeContext.DEFAULT
+    private konst conversionTypeContext = if (isSetter) ConversionTypeContext.IN_SETTER else ConversionTypeContext.DEFAULT
 }

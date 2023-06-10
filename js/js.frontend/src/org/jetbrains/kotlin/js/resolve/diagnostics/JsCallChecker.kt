@@ -45,39 +45,39 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant
 import org.jetbrains.kotlin.resolve.constants.StringValue
 import org.jetbrains.kotlin.resolve.constants.TypedCompileTimeConstant
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.types.TypeUtils
 
 class JsCallChecker(
-        private val constantExpressionEvaluator: ConstantExpressionEvaluator
+        private konst constantExpressionEkonstuator: ConstantExpressionEkonstuator
 ) : CallChecker {
 
     companion object {
-        private val JS_PATTERN: DescriptorPredicate = PatternBuilder.pattern("kotlin.js.js(String)")
+        private konst JS_PATTERN: DescriptorPredicate = PatternBuilder.pattern("kotlin.js.js(String)")
 
         @JvmStatic fun <F : CallableDescriptor?> ResolvedCall<F>.isJsCall(): Boolean {
-            val descriptor = resultingDescriptor
+            konst descriptor = resultingDescriptor
             return descriptor is SimpleFunctionDescriptor && JS_PATTERN.test(descriptor)
         }
 
         @JvmStatic fun extractStringValue(compileTimeConstant: CompileTimeConstant<*>?): String? {
-            return ((compileTimeConstant as? TypedCompileTimeConstant<*>)?.constantValue as? StringValue)?.value
+            return ((compileTimeConstant as? TypedCompileTimeConstant<*>)?.constantValue as? StringValue)?.konstue
         }
     }
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (context.isAnnotationContext || !resolvedCall.isJsCall()) return
 
-        val expression = resolvedCall.call.callElement
+        konst expression = resolvedCall.call.callElement
         if (expression !is KtCallExpression) return
 
-        val arguments = expression.valueArgumentList?.arguments
-        val argument = arguments?.firstOrNull()?.getArgumentExpression() ?: return
+        konst arguments = expression.konstueArgumentList?.arguments
+        konst argument = arguments?.firstOrNull()?.getArgumentExpression() ?: return
 
-        val trace = TemporaryBindingTrace.create(context.trace, "JsCallChecker")
+        konst trace = TemporaryBindingTrace.create(context.trace, "JsCallChecker")
 
-        val evaluationResult = constantExpressionEvaluator.evaluateExpression(argument, trace, TypeUtils.NO_EXPECTED_TYPE)
-        val code = extractStringValue(evaluationResult)
+        konst ekonstuationResult = constantExpressionEkonstuator.ekonstuateExpression(argument, trace, TypeUtils.NO_EXPECTED_TYPE)
+        konst code = extractStringValue(ekonstuationResult)
 
         if (code == null) {
             context.trace.report(ErrorsJs.JSCODE_ARGUMENT_SHOULD_BE_CONSTANT.on(argument))
@@ -86,11 +86,11 @@ class JsCallChecker(
 
         trace.commit()
 
-        val errorReporter = JsCodeErrorReporter(argument, code, context.trace)
+        konst errorReporter = JsCodeErrorReporter(argument, code, context.trace)
 
         try {
-            val parserScope = JsFunctionScope(JsRootScope(JsProgram()), "<js fun>")
-            val statements = parseExpressionOrStatement(
+            konst parserScope = JsFunctionScope(JsRootScope(JsProgram()), "<js fun>")
+            konst statements = parseExpressionOrStatement(
                     code, errorReporter, parserScope, CodePosition(0, 0), reportOn.containingFile?.name ?: "<unknown file>")
 
             if (statements == null || statements.isEmpty()) {
@@ -106,9 +106,9 @@ class JsCallChecker(
 }
 
 class JsCodeErrorReporter(
-        private val nodeToReport: KtExpression,
-        private val code: String,
-        private val trace: BindingTrace
+        private konst nodeToReport: KtExpression,
+        private konst code: String,
+        private konst trace: BindingTrace
 ) : ErrorReporter {
     override fun warning(message: String, startPosition: CodePosition, endPosition: CodePosition) {
         report(ErrorsJs.JSCODE_WARNING, message, startPosition, endPosition)
@@ -125,37 +125,37 @@ class JsCodeErrorReporter(
             startPosition: CodePosition,
             endPosition: CodePosition
     ) {
-        val data = when {
+        konst data = when {
             nodeToReport.isConstantStringLiteral -> {
-                val reportRange = TextRange(startPosition.absoluteOffset, endPosition.absoluteOffset)
+                konst reportRange = TextRange(startPosition.absoluteOffset, endPosition.absoluteOffset)
                 JsCallData(reportRange, message)
             }
             else -> {
-                val reportRange = nodeToReport.textRange
-                val codeRange = TextRange(code.offsetOf(startPosition), code.offsetOf(endPosition))
+                konst reportRange = nodeToReport.textRange
+                konst codeRange = TextRange(code.offsetOf(startPosition), code.offsetOf(endPosition))
                 JsCallDataWithCode(reportRange, message, code, codeRange)
             }
         }
 
-        val parametrizedDiagnostic = diagnosticFactory.on(nodeToReport, data)
+        konst parametrizedDiagnostic = diagnosticFactory.on(nodeToReport, data)
         trace.report(parametrizedDiagnostic)
     }
 
-    private val CodePosition.absoluteOffset: Int
+    private konst CodePosition.absoluteOffset: Int
         get() {
-            val quotesLength = nodeToReport.firstChild.textLength
+            konst quotesLength = nodeToReport.firstChild.textLength
             return nodeToReport.textOffset + quotesLength + code.offsetOf(this)
         }
 }
 
-private val KtExpression.isConstantStringLiteral: Boolean
+private konst KtExpression.isConstantStringLiteral: Boolean
     get() = this is KtStringTemplateExpression && entries.all { it is KtLiteralStringTemplateEntry }
 
-open class JsCallData(val reportRange: TextRange, val message: String)
+open class JsCallData(konst reportRange: TextRange, konst message: String)
 
 class JsCallDataWithCode(
         reportRange: TextRange,
         message: String,
-        val code: String,
-        val codeRange: TextRange
+        konst code: String,
+        konst codeRange: TextRange
 ) : JsCallData(reportRange, message)

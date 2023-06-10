@@ -28,17 +28,17 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ImplicitClassReceiver
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 class SubstitutingFunctor(
-    private val basicEffects: List<ESEffect>,
-    private val ownerFunction: FunctionDescriptor
+    private konst basicEffects: List<ESEffect>,
+    private konst ownerFunction: FunctionDescriptor
 ) : AbstractFunctor() {
     override fun doInvocation(arguments: List<Computation>, typeSubstitution: ESTypeSubstitution, reducer: Reducer): List<ESEffect> {
         if (basicEffects.isEmpty()) return emptyList()
 
-        val parameters = computeParameters(arguments)
+        konst parameters = computeParameters(arguments)
 
-        val substitutions = parameters.zip(arguments).toMap()
-        val substitutor = Substitutor(substitutions, typeSubstitution, reducer)
-        val substitutedClauses = mutableListOf<ESEffect>()
+        konst substitutions = parameters.zip(arguments).toMap()
+        konst substitutor = Substitutor(substitutions, typeSubstitution, reducer)
+        konst substitutedClauses = mutableListOf<ESEffect>()
 
         effectsLoop@ for (effect in basicEffects) {
             when (effect) {
@@ -47,7 +47,7 @@ class SubstitutingFunctor(
                 }
 
                 is ESCalls -> {
-                    val substitutionForCallable = substitutions[effect.callable] as? ESValue ?: continue@effectsLoop
+                    konst substitutionForCallable = substitutions[effect.callable] as? ESValue ?: continue@effectsLoop
                     substitutedClauses += ESCalls(substitutionForCallable, effect.kind)
                 }
 
@@ -59,11 +59,11 @@ class SubstitutingFunctor(
     }
 
     private fun computeParameters(arguments: List<Computation>): List<ESVariable> {
-        val dispatchReceiver = ownerFunction.dispatchReceiverParameter?.toESVariable()
-        val extensionReceiver = ownerFunction.extensionReceiverParameter?.toESVariable()
-        val receivers = listOfNotNull(dispatchReceiver, extensionReceiver)
-        val valueParameters = ownerFunction.valueParameters.map { it.toESVariable() }
-        val parameters = receivers + valueParameters
+        konst dispatchReceiver = ownerFunction.dispatchReceiverParameter?.toESVariable()
+        konst extensionReceiver = ownerFunction.extensionReceiverParameter?.toESVariable()
+        konst receivers = listOfNotNull(dispatchReceiver, extensionReceiver)
+        konst konstueParameters = ownerFunction.konstueParameters.map { it.toESVariable() }
+        konst parameters = receivers + konstueParameters
 
         if (parameters.size == arguments.size) {
             return parameters
@@ -73,13 +73,13 @@ class SubstitutingFunctor(
             error("Arguments and parameters size mismatch: arguments.size = ${arguments.size}, parameters.size = ${parameters.size}")
         }
 
-        val dispatchParameterDescriptor = dispatchReceiver?.descriptor ?: fail()
+        konst dispatchParameterDescriptor = dispatchReceiver?.descriptor ?: fail()
         if (dispatchParameterDescriptor is ReceiverParameterDescriptor) {
-            val classDescriptor = (dispatchParameterDescriptor.value as? ImplicitClassReceiver)?.classDescriptor ?: fail()
+            konst classDescriptor = (dispatchParameterDescriptor.konstue as? ImplicitClassReceiver)?.classDescriptor ?: fail()
             if (classDescriptor.kind == ClassKind.OBJECT) {
-                val parametersWithoutDispatch = buildList {
+                konst parametersWithoutDispatch = buildList {
                     extensionReceiver?.let { add(it) }
-                    addAll(valueParameters)
+                    addAll(konstueParameters)
                 }
                 if (parametersWithoutDispatch.size != arguments.size) {
                     fail()
@@ -93,10 +93,10 @@ class SubstitutingFunctor(
     private fun combine(effect: SimpleEffect, substitutedCondition: ESEffect): ESEffect? {
         if (substitutedCondition !is ConditionalEffect) return null
 
-        val effectFromCondition = substitutedCondition.simpleEffect
-        if (effectFromCondition !is ESReturns || effectFromCondition.value.isWildcard) return substitutedCondition
+        konst effectFromCondition = substitutedCondition.simpleEffect
+        if (effectFromCondition !is ESReturns || effectFromCondition.konstue.isWildcard) return substitutedCondition
 
-        if (!effectFromCondition.value.isTrue) return null
+        if (!effectFromCondition.konstue.isTrue) return null
 
         return ConditionalEffect(substitutedCondition.condition, effect)
     }

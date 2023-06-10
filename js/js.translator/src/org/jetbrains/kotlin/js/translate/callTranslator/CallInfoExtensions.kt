@@ -34,35 +34,35 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
 import org.jetbrains.kotlin.resolve.scopes.receivers.ExpressionReceiver
 
 
-val CallInfo.callableDescriptor: CallableDescriptor
+konst CallInfo.callableDescriptor: CallableDescriptor
     get() {
-        val result = resolvedCall.resultingDescriptor.original
+        konst result = resolvedCall.resultingDescriptor.original
         return if (result is TypeAliasConstructorDescriptor) result.underlyingConstructorDescriptor else result
     }
 
 fun CallInfo.isNative(): Boolean = AnnotationsUtils.isNativeObject(callableDescriptor)
 
 fun CallInfo.isSuperInvocation(): Boolean {
-    val dispatchReceiver = resolvedCall.dispatchReceiver
+    konst dispatchReceiver = resolvedCall.dispatchReceiver
     return dispatchReceiver is ExpressionReceiver && dispatchReceiver.expression is KtSuperExpression
 }
 
-val CallInfo.calleeOwner: JsExpression
+konst CallInfo.calleeOwner: JsExpression
     get() {
-        val calleeOwner = resolvedCall.resultingDescriptor.containingDeclaration
+        konst calleeOwner = resolvedCall.resultingDescriptor.containingDeclaration
         return ReferenceTranslator.translateAsValueReference(calleeOwner, context)
     }
 
-val VariableAccessInfo.variableDescriptor: VariableDescriptor
+konst VariableAccessInfo.variableDescriptor: VariableDescriptor
     get() = callableDescriptor as VariableDescriptor
 
-val VariableAccessInfo.variableName: JsName
+konst VariableAccessInfo.variableName: JsName
     get() = context.getNameForDescriptor(variableDescriptor)
 
-fun VariableAccessInfo.isGetAccess(): Boolean = value == null
+fun VariableAccessInfo.isGetAccess(): Boolean = konstue == null
 
 fun VariableAccessInfo.getAccessDescriptor(): PropertyAccessorDescriptor {
-    val property = variableDescriptor as PropertyDescriptor
+    konst property = variableDescriptor as PropertyDescriptor
     return if (isGetAccess()) property.getter!! else property.setter!!
 }
 
@@ -83,14 +83,14 @@ fun VariableAccessInfo.constructAccessExpression(ref: JsExpression): JsExpressio
     }
     else {
         // This is useful when passing AST to TemporaryAssignmentElimination. It can bring
-        // property assignment like `obj.propertyName = $tmp` to places where `$tmp` gets its value,
+        // property assignment like `obj.propertyName = $tmp` to places where `$tmp` gets its konstue,
         // but only when it's sure that no side effects possible.
         ref.sideEffects = SideEffectKind.PURE
-        JsAstUtils.assignment(ref, value!!)
+        JsAstUtils.assignment(ref, konstue!!)
     }
 }
 
-val FunctionCallInfo.functionName: JsName
+konst FunctionCallInfo.functionName: JsName
     get() = context.getNameForDescriptor(callableDescriptor)
 
 fun FunctionCallInfo.hasSpreadOperator(): Boolean = argumentsInfo.hasSpreadOperator

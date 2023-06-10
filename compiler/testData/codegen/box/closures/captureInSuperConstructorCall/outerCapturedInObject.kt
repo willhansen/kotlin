@@ -2,10 +2,10 @@ interface Callback {
     fun invoke(): String
 }
 
-open class Base(val callback: Callback)
+open class Base(konst callback: Callback)
 
 class Outer {
-    val ok = "OK"
+    konst ok = "OK"
 
     inner class Inner : Base(
             object : Callback {

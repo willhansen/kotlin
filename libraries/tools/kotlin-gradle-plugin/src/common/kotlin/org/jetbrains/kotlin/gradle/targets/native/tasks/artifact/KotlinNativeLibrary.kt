@@ -25,16 +25,16 @@ import javax.inject.Inject
 abstract class KotlinNativeLibraryConfigImpl @Inject constructor(artifactName: String) :
     KotlinNativeArtifactConfigImpl(artifactName), KotlinNativeLibraryConfig {
 
-    override fun validate() {
-        super.validate()
-        val kind = if (isStatic) NativeOutputKind.STATIC else NativeOutputKind.DYNAMIC
+    override fun konstidate() {
+        super.konstidate()
+        konst kind = if (isStatic) NativeOutputKind.STATIC else NativeOutputKind.DYNAMIC
         check(kind.availableFor(target)) {
             "Native artifact '$artifactName' wasn't configured because ${kind.description} is not available for ${target.visibleName}"
         }
     }
 
     override fun createArtifact(extensions: ExtensionAware): KotlinNativeLibraryImpl {
-        validate()
+        konstidate()
         return KotlinNativeLibraryImpl(
             artifactName = artifactName,
             modules = modules,
@@ -51,34 +51,34 @@ abstract class KotlinNativeLibraryConfigImpl @Inject constructor(artifactName: S
 }
 
 class KotlinNativeLibraryImpl(
-    override val artifactName: String,
-    override val modules: Set<Any>,
-    override val modes: Set<NativeBuildType>,
-    override val isStatic: Boolean,
-    override val linkerOptions: List<String>,
-    override val kotlinOptionsFn: KotlinCommonToolOptions.() -> Unit,
-    override val toolOptionsConfigure: KotlinCommonCompilerToolOptions.() -> Unit,
-    override val binaryOptions: Map<String, String>,
-    override val target: KonanTarget,
+    override konst artifactName: String,
+    override konst modules: Set<Any>,
+    override konst modes: Set<NativeBuildType>,
+    override konst isStatic: Boolean,
+    override konst linkerOptions: List<String>,
+    override konst kotlinOptionsFn: KotlinCommonToolOptions.() -> Unit,
+    override konst toolOptionsConfigure: KotlinCommonCompilerToolOptions.() -> Unit,
+    override konst binaryOptions: Map<String, String>,
+    override konst target: KonanTarget,
     extensions: ExtensionAware
 ) : KotlinNativeLibrary, ExtensionAware by extensions {
-    private val kind = if (isStatic) NativeOutputKind.STATIC else NativeOutputKind.DYNAMIC
+    private konst kind = if (isStatic) NativeOutputKind.STATIC else NativeOutputKind.DYNAMIC
     override fun getName() = lowerCamelCaseName(artifactName, kind.taskNameClassifier, "Library", target.presetName)
-    override val taskName = lowerCamelCaseName("assemble", name)
-    override val outDir = "out/${kind.visibleName}"
+    override konst taskName = lowerCamelCaseName("assemble", name)
+    override konst outDir = "out/${kind.visibleName}"
 
     override fun registerAssembleTask(project: Project) {
-        val resultTask = project.registerTask<Task>(taskName) { task ->
+        konst resultTask = project.registerTask<Task>(taskName) { task ->
             task.group = BasePlugin.BUILD_GROUP
             task.description = "Assemble all types of registered '$artifactName' ${kind.description} for ${target.visibleName}."
             task.enabled = target.enabledOnCurrentHost
         }
         project.tasks.named(LifecycleBasePlugin.ASSEMBLE_TASK_NAME).dependsOn(resultTask)
 
-        val librariesConfigurationName = project.registerLibsDependencies(target, artifactName, modules)
-        val exportConfigurationName = project.registerExportDependencies(target, artifactName, modules)
+        konst librariesConfigurationName = project.registerLibsDependencies(target, artifactName, modules)
+        konst exportConfigurationName = project.registerExportDependencies(target, artifactName, modules)
         modes.forEach { buildType ->
-            val targetTask = project.registerTask<KotlinNativeLinkArtifactTask>(
+            konst targetTask = project.registerTask<KotlinNativeLinkArtifactTask>(
                 lowerCamelCaseName("assemble", artifactName, buildType.visibleName, kind.taskNameClassifier, "Library", target.presetName),
                 listOf(target, kind.compilerOutputKind)
             ) { task ->

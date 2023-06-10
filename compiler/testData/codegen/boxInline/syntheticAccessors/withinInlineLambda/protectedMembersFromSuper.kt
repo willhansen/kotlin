@@ -8,7 +8,7 @@ package test
 inline fun runCrossinline(crossinline f: () -> String) = f()
 
 open class Base {
-    protected open val FOO = "O"
+    protected open konst FOO = "O"
 
     protected open fun test() = "K"
 }
@@ -26,6 +26,6 @@ open class P : Base() {
 import test.*
 
 fun box() : String {
-    val p = P()
+    konst p = P()
     return p.protectedProp { it } + p.protectedFun { it }
 }

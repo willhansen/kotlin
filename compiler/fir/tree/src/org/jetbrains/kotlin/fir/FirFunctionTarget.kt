@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 
 class FirFunctionTarget(
     labelName: String?,
-    val isLambda: Boolean
+    konst isLambda: Boolean
 ) : FirAbstractTarget<FirFunction>(labelName) {
     private lateinit var targetSymbol: FirFunctionSymbol<*>
 
     override var _labeledElement: FirFunction
         get() = targetSymbol.fir
-        set(value) {
-            targetSymbol = value.symbol
+        set(konstue) {
+            targetSymbol = konstue.symbol
         }
 }

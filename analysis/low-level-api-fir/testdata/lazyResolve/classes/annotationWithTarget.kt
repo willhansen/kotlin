@@ -1,4 +1,4 @@
 @Target(AnnotationTarget.CLASS) @Anno("string")
-annotation class Resolve<caret>Me(val value: Int)
+annotation class Resolve<caret>Me(konst konstue: Int)
 
-annotation class Anno(val s: String)
+annotation class Anno(konst s: String)

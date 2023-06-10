@@ -15,7 +15,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')
@@ -62,7 +62,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')
@@ -146,7 +146,7 @@ KtFile: SameLineStatementRecovery.kt
           PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('b2')
         PsiWhiteSpace(' ')
@@ -178,7 +178,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')
@@ -190,7 +190,7 @@ KtFile: SameLineStatementRecovery.kt
         <empty list>
       PsiWhiteSpace(' ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('b')
         PsiWhiteSpace(' ')
@@ -200,7 +200,7 @@ KtFile: SameLineStatementRecovery.kt
           PsiElement(INTEGER_LITERAL)('12')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a1')
         PsiWhiteSpace(' ')
@@ -211,7 +211,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiErrorElement:Unexpected tokens (use ';' to separate expressions on the same line)
         <empty list>
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('b1')
         PsiWhiteSpace(' ')
@@ -404,7 +404,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a1')
         PsiElement(COLON)(':')
@@ -420,7 +420,7 @@ KtFile: SameLineStatementRecovery.kt
         PsiElement(INTEGER_LITERAL)('12')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a2')
         PsiElement(COLON)(':')
@@ -436,7 +436,7 @@ KtFile: SameLineStatementRecovery.kt
         PsiElement(INTEGER_LITERAL)('12')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a3')
         PsiElement(COLON)(':')
@@ -452,7 +452,7 @@ KtFile: SameLineStatementRecovery.kt
         PsiElement(INTEGER_LITERAL)('12')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a4')
         PsiElement(COLON)(':')
@@ -468,7 +468,7 @@ KtFile: SameLineStatementRecovery.kt
         PsiElement(INTEGER_LITERAL)('12')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a5')
         PsiElement(COLON)(':')
@@ -484,7 +484,7 @@ KtFile: SameLineStatementRecovery.kt
         PsiElement(INTEGER_LITERAL)('12')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a6')
         PsiElement(COLON)(':')
@@ -500,7 +500,7 @@ KtFile: SameLineStatementRecovery.kt
         PsiElement(INTEGER_LITERAL)('12')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a7')
         PsiElement(COLON)(':')
@@ -529,7 +529,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')
@@ -546,7 +546,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('g')
     PsiElement(COLON)(':')
@@ -584,7 +584,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('l')
         PsiElement(COLON)(':')
@@ -626,7 +626,7 @@ KtFile: SameLineStatementRecovery.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('l')
         PsiElement(COLON)(':')

@@ -16,8 +16,8 @@ fun withSideEffect(): String? {
 
 @Test
 fun runTest() {
-    println("Retval is: " + withSideEffect())
-    println("Retval is: " + withSideEffect() + "!")
+    println("Retkonst is: " + withSideEffect())
+    println("Retkonst is: " + withSideEffect() + "!")
     println(withSideEffect() + withSideEffect())
     println(withSideEffect() + withSideEffect() + withSideEffect())
 }

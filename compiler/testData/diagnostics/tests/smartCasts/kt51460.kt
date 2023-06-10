@@ -2,11 +2,11 @@
 // ISSUE: KT-51460
 
 abstract class A {
-    abstract protected val a: A?
+    abstract protected konst a: A?
 
-    class B(override val a: A?) : A() {
+    class B(override konst a: A?) : A() {
         fun f(other: A) {
-            val x = if (other is C) {
+            konst x = if (other is C) {
                 other.a
             } else {
                 null
@@ -14,5 +14,5 @@ abstract class A {
         }
     }
 
-    class C(override val a: A?): A()
+    class C(override konst a: A?): A()
 }

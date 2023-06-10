@@ -32,8 +32,8 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
 class JavaSyntheticScopes(
-    private val project: Project,
-    private val moduleDescriptor: ModuleDescriptor,
+    private konst project: Project,
+    private konst moduleDescriptor: ModuleDescriptor,
     storageManager: StorageManager,
     lookupTracker: LookupTracker,
     languageVersionSettings: LanguageVersionSettings,
@@ -42,29 +42,29 @@ class JavaSyntheticScopes(
     deprecationResolver: DeprecationResolver,
     kotlinTypeRefiner: KotlinTypeRefiner,
 ) : SyntheticScopes {
-    override val scopes: Collection<SyntheticScope>
+    override konst scopes: Collection<SyntheticScope>
 
     // New Inference disables SAM-adapters scope, because it knows how to perform SAM-conversion in resolution
     // However, some outer clients (mostly in IDE) sometimes would like to look at synthetic SAM-produced descriptors
     // (e.g., completion)
-    val scopesWithForceEnabledSamAdapters: Collection<SyntheticScope>
+    konst scopesWithForceEnabledSamAdapters: Collection<SyntheticScope>
 
     init {
-        val samConversionPerArgumentIsEnabled =
+        konst samConversionPerArgumentIsEnabled =
             languageVersionSettings.supportsFeature(LanguageFeature.SamConversionPerArgument) &&
                     languageVersionSettings.supportsFeature(LanguageFeature.NewInference)
 
-        val javaSyntheticPropertiesScope =
+        konst javaSyntheticPropertiesScope =
             JavaSyntheticPropertiesScope(
                 storageManager, lookupTracker, kotlinTypeRefiner,
                 supportJavaRecords = languageVersionSettings.supportsFeature(LanguageFeature.JvmRecordSupport)
             )
-        val scopesFromExtensions = SyntheticScopeProviderExtension
+        konst scopesFromExtensions = SyntheticScopeProviderExtension
             .getInstances(project)
             .flatMap { it.getScopes(moduleDescriptor, javaSyntheticPropertiesScope) }
 
 
-        val samAdapterFunctionsScope = SamAdapterFunctionsScope(
+        konst samAdapterFunctionsScope = SamAdapterFunctionsScope(
             storageManager,
             samConventionResolver,
             samConversionOracle,
@@ -76,13 +76,13 @@ class JavaSyntheticScopes(
             )
         )
 
-        val funInterfaceConstructorsScopes =
+        konst funInterfaceConstructorsScopes =
             FunInterfaceConstructorsSyntheticScope(storageManager, lookupTracker, samConventionResolver, samConversionOracle)
 
         scopes = listOf(javaSyntheticPropertiesScope, samAdapterFunctionsScope, funInterfaceConstructorsScopes) + scopesFromExtensions
 
         if (samConversionPerArgumentIsEnabled) {
-            val forceEnabledSamAdapterFunctionsScope = SamAdapterFunctionsScope(
+            konst forceEnabledSamAdapterFunctionsScope = SamAdapterFunctionsScope(
                 storageManager,
                 samConventionResolver,
                 samConversionOracle,

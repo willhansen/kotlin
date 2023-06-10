@@ -7,7 +7,7 @@ interface IFoo {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICFoo<T: IFoo>(val t: T): IFoo {
+konstue class ICFoo<T: IFoo>(konst t: T): IFoo {
     override fun foo(): String = t.foo()
 }
 
@@ -24,8 +24,8 @@ class Test : IBar {
 }
 
 fun box(): String {
-    val test: IBar = Test()
-    val bar = test.bar()
+    konst test: IBar = Test()
+    konst bar = test.bar()
     if (bar !is ICFoo<*>) {
         throw AssertionError("bar: $bar")
     }

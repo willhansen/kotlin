@@ -7,7 +7,7 @@ open class A(var a: Int) {
         return this * 3;
     }
 
-    fun eval() = a.modify();
+    fun ekonst() = a.modify();
 }
 
 class B(a: Int) : A(a) {
@@ -17,5 +17,5 @@ class B(a: Int) : A(a) {
 }
 
 fun box(): String {
-    return if ((A(4).eval() == 12) && (A(2).eval() == 6) && (B(3).eval() == 1)) "OK" else "fail"
+    return if ((A(4).ekonst() == 12) && (A(2).ekonst() == 6) && (B(3).ekonst() == 1)) "OK" else "fail"
 }

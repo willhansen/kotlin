@@ -28,12 +28,12 @@ FILE fqName:<root> fileName:/initBlock.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test2 modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.Int declared in <root>.Test2.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.Test2) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Test2
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Int declared in <root>.Test2'
@@ -82,7 +82,7 @@ FILE fqName:<root> fileName:/initBlock.kt
     ANONYMOUS_INITIALIZER isStatic=false
       BLOCK_BODY
         CALL 'public final fun println (message: kotlin.Any?): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
-          message: CONST String type=kotlin.String value="1"
+          message: CONST String type=kotlin.String konstue="1"
     CONSTRUCTOR visibility:public <> () returnType:<root>.Test4
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
@@ -90,7 +90,7 @@ FILE fqName:<root> fileName:/initBlock.kt
     ANONYMOUS_INITIALIZER isStatic=false
       BLOCK_BODY
         CALL 'public final fun println (message: kotlin.Any?): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
-          message: CONST String type=kotlin.String value="2"
+          message: CONST String type=kotlin.String konstue="2"
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -113,7 +113,7 @@ FILE fqName:<root> fileName:/initBlock.kt
     ANONYMOUS_INITIALIZER isStatic=false
       BLOCK_BODY
         CALL 'public final fun println (message: kotlin.Any?): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
-          message: CONST String type=kotlin.String value="1"
+          message: CONST String type=kotlin.String konstue="1"
     CLASS CLASS name:TestInner modality:FINAL visibility:public [inner] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Test5.TestInner
       CONSTRUCTOR visibility:public <> ($this:<root>.Test5) returnType:<root>.Test5.TestInner [primary]
@@ -124,7 +124,7 @@ FILE fqName:<root> fileName:/initBlock.kt
       ANONYMOUS_INITIALIZER isStatic=false
         BLOCK_BODY
           CALL 'public final fun println (message: kotlin.Any?): kotlin.Unit declared in kotlin.io' type=kotlin.Unit origin=null
-            message: CONST String type=kotlin.String value="2"
+            message: CONST String type=kotlin.String konstue="2"
       FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
         overridden:
           public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any

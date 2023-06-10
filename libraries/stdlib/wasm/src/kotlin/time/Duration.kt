@@ -9,32 +9,32 @@ package kotlin.time
 
 import kotlin.math.*
 
-internal actual inline val durationAssertionsEnabled: Boolean get() = true
+internal actual inline konst durationAssertionsEnabled: Boolean get() = true
 
-private fun toFixed(value: Double, decimals: Int): String =
-    js("value.toFixed(decimals)")
+private fun toFixed(konstue: Double, decimals: Int): String =
+    js("konstue.toFixed(decimals)")
 
-private fun toPrecision(value: Double, decimals: Int): String =
-    js("value.toPrecision(decimals)")
+private fun toPrecision(konstue: Double, decimals: Int): String =
+    js("konstue.toPrecision(decimals)")
 
-internal actual fun formatToExactDecimals(value: Double, decimals: Int): String {
-    val rounded = if (decimals == 0) {
-        value
+internal actual fun formatToExactDecimals(konstue: Double, decimals: Int): String {
+    konst rounded = if (decimals == 0) {
+        konstue
     } else {
-        val pow = (10.0).pow(decimals)
-        round(abs(value) * pow) / pow * sign(value)
-        round(abs(value) * pow) / pow * sign(value)
+        konst pow = (10.0).pow(decimals)
+        round(abs(konstue) * pow) / pow * sign(konstue)
+        round(abs(konstue) * pow) / pow * sign(konstue)
     }
     return if (abs(rounded) < 1e21) {
         // toFixed switches to scientific format after 1e21
         toFixed(rounded, decimals)
     } else {
         // toPrecision outputs the specified number of digits, but only for positive numbers
-        val positive = abs(rounded)
-        val positiveString = toPrecision(positive, ceil(log10(positive)).toInt() + decimals)
+        konst positive = abs(rounded)
+        konst positiveString = toPrecision(positive, ceil(log10(positive)).toInt() + decimals)
         if (rounded < 0) "-$positiveString" else positiveString
     }
 }
 
-internal actual fun formatUpToDecimals(value: Double, decimals: Int): String =
-    js("(value, decimals) => value.toLocaleString(\"en-us\", ({\"maximumFractionDigits\": decimals}))")
+internal actual fun formatUpToDecimals(konstue: Double, decimals: Int): String =
+    js("(konstue, decimals) => konstue.toLocaleString(\"en-us\", ({\"maximumFractionDigits\": decimals}))")

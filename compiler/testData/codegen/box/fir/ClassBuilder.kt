@@ -19,7 +19,7 @@ class TestClassBuilder : ClassBuilder {
 }
 
 fun box(): String {
-    val arr = arrayOf("OK")
+    konst arr = arrayOf("OK")
     TestClassBuilder().newMethod(null)
     TestClassBuilder().newMethod(arr)
     return arr[0]

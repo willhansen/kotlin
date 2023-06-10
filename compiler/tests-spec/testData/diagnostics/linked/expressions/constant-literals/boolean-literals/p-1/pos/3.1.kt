@@ -5,7 +5,7 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, constant-literals, boolean-literals -> paragraph 1 -> sentence 3
  * NUMBER: 1
- * DESCRIPTION: Checking of type for Boolean values
+ * DESCRIPTION: Checking of type for Boolean konstues
  * HELPERS: checkType
  */
 

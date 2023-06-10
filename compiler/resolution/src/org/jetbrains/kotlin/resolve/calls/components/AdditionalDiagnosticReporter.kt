@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.types.typeUtil.expandIntersectionTypeIfNecessary
 // very initial state of component
 // todo: handle all diagnostic inside DiagnosticReporterByTrackingStrategy
 // move it to frontend module
-class AdditionalDiagnosticReporter(private val languageVersionSettings: LanguageVersionSettings) {
+class AdditionalDiagnosticReporter(private konst languageVersionSettings: LanguageVersionSettings) {
 
     fun reportAdditionalDiagnostics(
         candidate: ResolvedCallAtom,
@@ -45,10 +45,10 @@ class AdditionalDiagnosticReporter(private val languageVersionSettings: Language
     ): SmartCastDiagnostic? {
         if (argument !is ExpressionKotlinCallArgument) return null
 
-        val types = expectedResultType.expandIntersectionTypeIfNecessary()
+        konst types = expectedResultType.expandIntersectionTypeIfNecessary()
 
-        val argumentType = argument.receiver.receiverValue.type
-        val isSubtype = types.map { KotlinTypeChecker.DEFAULT.isSubtypeOf(argumentType, it) }
+        konst argumentType = argument.receiver.receiverValue.type
+        konst isSubtype = types.map { KotlinTypeChecker.DEFAULT.isSubtypeOf(argumentType, it) }
         if (isSubtype.any { it }) return null
 
         return SmartCastDiagnostic(argument, types.first().unwrap(), candidate.atom)
@@ -61,9 +61,9 @@ class AdditionalDiagnosticReporter(private val languageVersionSettings: Language
         diagnostics: Collection<KotlinCallDiagnostic>
     ): SmartCastDiagnostic? {
         if (receiver == null || parameter == null) return null
-        val expectedType = parameter.type.unwrap().let { if (receiver.isSafeCall) it.makeNullableAsSpecified(true) else it }
+        konst expectedType = parameter.type.unwrap().let { if (receiver.isSafeCall) it.makeNullableAsSpecified(true) else it }
 
-        val smartCastDiagnostic = createSmartCastDiagnostic(candidate, receiver, expectedType) ?: return null
+        konst smartCastDiagnostic = createSmartCastDiagnostic(candidate, receiver, expectedType) ?: return null
 
         // todo may be we have smart cast to Int?
         return smartCastDiagnostic.takeIf {
@@ -100,12 +100,12 @@ class AdditionalDiagnosticReporter(private val languageVersionSettings: Language
             )
         )
 
-        for (parameter in resultingDescriptor.valueParameters) {
+        for (parameter in resultingDescriptor.konstueParameters) {
             for (argument in candidate.argumentMappingByOriginal[parameter.original]?.arguments ?: continue) {
-                val effectiveExpectedType = argument.getExpectedType(parameter, languageVersionSettings)
-                val smartCastDiagnostic = createSmartCastDiagnostic(candidate, argument, effectiveExpectedType) ?: continue
+                konst effectiveExpectedType = argument.getExpectedType(parameter, languageVersionSettings)
+                konst smartCastDiagnostic = createSmartCastDiagnostic(candidate, argument, effectiveExpectedType) ?: continue
 
-                val thereIsUnstableSmartCastError = diagnostics.filterIsInstance<UnstableSmartCast>().any {
+                konst thereIsUnstableSmartCastError = diagnostics.filterIsInstance<UnstableSmartCast>().any {
                     it.argument == argument
                 }
 

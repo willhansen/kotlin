@@ -15,45 +15,45 @@ import kotlinx.cinterop.ExperimentalForeignApi
 @FreezingIsDeprecated
 
 internal class FreezeAwareLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
-    private val value_ = FreezableAtomicReference<Any?>(UNINITIALIZED)
+    private konst konstue_ = FreezableAtomicReference<Any?>(UNINITIALIZED)
     // This cannot be made atomic because of the legacy MM. See https://github.com/JetBrains/kotlin-native/pull/3944
     // So it must be protected by the lock below.
     private var initializer_: (() -> T)? = initializer
-    private val lock_ = Lock()
+    private konst lock_ = Lock()
 
     private fun getOrInit(doFreeze: Boolean): T {
-        var result = value_.value
+        var result = konstue_.konstue
         if (result !== UNINITIALIZED) {
             if (result === INITIALIZING) {
-                value_.value = UNINITIALIZED
+                konstue_.konstue = UNINITIALIZED
                 throw IllegalStateException("Recursive lazy computation")
             }
             @Suppress("UNCHECKED_CAST")
             return result as T
         }
-        // Set value_ to INITIALIZING.
-        value_.value = INITIALIZING
+        // Set konstue_ to INITIALIZING.
+        konstue_.konstue = INITIALIZING
         try {
             result = initializer_!!()
             if (doFreeze) result.freeze()
         } catch (throwable: Throwable) {
-            value_.value = UNINITIALIZED
+            konstue_.konstue = UNINITIALIZED
             throw throwable
         }
         if (!doFreeze) {
             if (this.isFrozen) {
-                value_.value = UNINITIALIZED
-                throw InvalidMutabilityException("Frozen during lazy computation")
+                konstue_.konstue = UNINITIALIZED
+                throw InkonstidMutabilityException("Frozen during lazy computation")
             }
             // Clear initializer.
             initializer_ = null
         }
-        // Set value_ to actual one.
-        value_.value = result
+        // Set konstue_ to actual one.
+        konstue_.konstue = result
         return result
     }
 
-    override val value: T
+    override konst konstue: T
         get() {
             return if (isShareable()) {
                 // TODO: This is probably a big performance problem for lazy with the new MM. Address it.
@@ -66,12 +66,12 @@ internal class FreezeAwareLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
         }
 
     /**
-     * This operation on shared objects may return value which is no longer reflect the current state of lazy.
+     * This operation on shared objects may return konstue which is no longer reflect the current state of lazy.
      */
-    override fun isInitialized(): Boolean = (value_.value !== UNINITIALIZED) && (value_.value !== INITIALIZING)
+    override fun isInitialized(): Boolean = (konstue_.konstue !== UNINITIALIZED) && (konstue_.konstue !== INITIALIZING)
 
     override fun toString(): String = if (isInitialized())
-        value.toString() else "Lazy value not initialized yet"
+        konstue.toString() else "Lazy konstue not initialized yet"
 }
 
 @OptIn(FreezingIsDeprecated::class)
@@ -94,16 +94,16 @@ internal object INITIALIZING {
 @FreezingIsDeprecated
 @Frozen
 internal class AtomicLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
-    private val initializer_ = AtomicReference<Function0<T>?>(initializer.freeze())
-    private val value_ = AtomicReference<Any?>(UNINITIALIZED)
+    private konst initializer_ = AtomicReference<Function0<T>?>(initializer.freeze())
+    private konst konstue_ = AtomicReference<Any?>(UNINITIALIZED)
 
-    override val value: T
+    override konst konstue: T
         get() {
-            if (value_.compareAndExchange(UNINITIALIZED, INITIALIZING) === UNINITIALIZED) {
+            if (konstue_.compareAndExchange(UNINITIALIZED, INITIALIZING) === UNINITIALIZED) {
                 // We execute exclusively here.
-                val ctor = initializer_.value
+                konst ctor = initializer_.konstue
                 if (ctor != null && initializer_.compareAndSet(ctor, null)) {
-                    value_.compareAndSet(INITIALIZING, ctor().freeze())
+                    konstue_.compareAndSet(INITIALIZING, ctor().freeze())
                 } else {
                     // Something wrong.
                     assert(false)
@@ -111,7 +111,7 @@ internal class AtomicLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
             }
             var result: Any?
             do {
-                result = value_.value
+                result = konstue_.konstue
             } while (result === INITIALIZING)
 
             assert(result !== UNINITIALIZED && result !== INITIALIZING)
@@ -119,10 +119,10 @@ internal class AtomicLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
             return result as T
         }
 
-    override fun isInitialized(): Boolean = value_.value !== UNINITIALIZED
+    override fun isInitialized(): Boolean = konstue_.konstue !== UNINITIALIZED
 
     override fun toString(): String = if (isInitialized())
-        value_.value.toString() else "Lazy value not initialized yet."
+        konstue_.konstue.toString() else "Lazy konstue not initialized yet."
 }
 
 /**
@@ -138,29 +138,29 @@ public fun <T> atomicLazy(initializer: () -> T): Lazy<T> = AtomicLazyImpl(initia
 @OptIn(FreezingIsDeprecated::class)
 internal class SynchronizedLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
     private var initializer = FreezableAtomicReference<(() -> T)?>(initializer)
-    private var valueRef = FreezableAtomicReference<Any?>(UNINITIALIZED)
-    private val lock = Lock()
+    private var konstueRef = FreezableAtomicReference<Any?>(UNINITIALIZED)
+    private konst lock = Lock()
 
-    override val value: T
+    override konst konstue: T
         get() {
-            val _v1 = valueRef.value
+            konst _v1 = konstueRef.konstue
             if (_v1 !== UNINITIALIZED) {
                 return _v1 as T
             }
 
             return locked(lock) {
-                val _v2 = valueRef.value
+                konst _v2 = konstueRef.konstue
                 if (_v2 === UNINITIALIZED) {
-                    val wasFrozen = this.isFrozen
-                    val typedValue = initializer.value!!()
+                    konst wasFrozen = this.isFrozen
+                    konst typedValue = initializer.konstue!!()
                     if (this.isFrozen) {
                         if (!wasFrozen) {
-                            throw InvalidMutabilityException("Frozen during lazy computation")
+                            throw InkonstidMutabilityException("Frozen during lazy computation")
                         }
                         typedValue.freeze()
                     }
-                    valueRef.value = typedValue
-                    initializer.value = null
+                    konstueRef.konstue = typedValue
+                    initializer.konstue = null
                     typedValue
                 } else {
                     _v2 as T
@@ -168,9 +168,9 @@ internal class SynchronizedLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
             }
         }
 
-    override fun isInitialized() = valueRef.value !== UNINITIALIZED
+    override fun isInitialized() = konstueRef.konstue !== UNINITIALIZED
 
-    override fun toString(): String = if (isInitialized()) value.toString() else "Lazy value not initialized yet."
+    override fun toString(): String = if (isInitialized()) konstue.toString() else "Lazy konstue not initialized yet."
 }
 
 
@@ -178,35 +178,35 @@ internal class SynchronizedLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
 @OptIn(FreezingIsDeprecated::class)
 internal class SafePublicationLazyImpl<out T>(initializer: () -> T) : Lazy<T> {
     private var initializer = FreezableAtomicReference<(() -> T)?>(initializer)
-    private var valueRef = FreezableAtomicReference<Any?>(UNINITIALIZED)
+    private var konstueRef = FreezableAtomicReference<Any?>(UNINITIALIZED)
 
-    override val value: T
+    override konst konstue: T
         get() {
-            val value = valueRef.value
-            if (value !== UNINITIALIZED) {
-                return value as T
+            konst konstue = konstueRef.konstue
+            if (konstue !== UNINITIALIZED) {
+                return konstue as T
             }
 
-            val initializerValue = initializer.value
-            // if we see null in initializer here, it means that the value is already set by another thread
+            konst initializerValue = initializer.konstue
+            // if we see null in initializer here, it means that the konstue is already set by another thread
             if (initializerValue != null) {
-                val wasFrozen = this.isFrozen
-                val newValue = initializerValue()
+                konst wasFrozen = this.isFrozen
+                konst newValue = initializerValue()
                 if (this.isFrozen) {
                     if (!wasFrozen) {
-                        throw InvalidMutabilityException("Frozen during lazy computation")
+                        throw InkonstidMutabilityException("Frozen during lazy computation")
                     }
                     newValue.freeze()
                 }
-                if (valueRef.compareAndSet(UNINITIALIZED, newValue)) {
-                    initializer.value = null
+                if (konstueRef.compareAndSet(UNINITIALIZED, newValue)) {
+                    initializer.konstue = null
                     return newValue
                 }
             }
-            return valueRef.value as T
+            return konstueRef.konstue as T
         }
 
-    override fun isInitialized(): Boolean = valueRef.value !== UNINITIALIZED
+    override fun isInitialized(): Boolean = konstueRef.konstue !== UNINITIALIZED
 
-    override fun toString(): String = if (isInitialized()) value.toString() else "Lazy value not initialized yet."
+    override fun toString(): String = if (isInitialized()) konstue.toString() else "Lazy konstue not initialized yet."
 }

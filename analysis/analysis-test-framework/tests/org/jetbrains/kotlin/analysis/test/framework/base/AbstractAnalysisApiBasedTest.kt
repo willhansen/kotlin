@@ -45,7 +45,7 @@ import kotlin.io.path.exists
 import kotlin.io.path.nameWithoutExtension
 
 abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
-    abstract val configurator: AnalysisApiTestConfigurator
+    abstract konst configurator: AnalysisApiTestConfigurator
 
     private lateinit var testInfo: KotlinTestInfo
 
@@ -65,11 +65,11 @@ abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
         extension: String = ".txt",
         testPrefix: String? = configurator.testPrefix,
     ) {
-        val expectedFile = getTestDataFileSiblingPath(extension, testPrefix = testPrefix)
+        konst expectedFile = getTestDataFileSiblingPath(extension, testPrefix = testPrefix)
         assertEqualsToFile(expectedFile, actual)
 
         if (testPrefix != null) {
-            val expectedFileWithoutPrefix = getTestDataFileSiblingPath(extension, testPrefix = null)
+            konst expectedFileWithoutPrefix = getTestDataFileSiblingPath(extension, testPrefix = null)
             if (expectedFile != expectedFileWithoutPrefix) {
                 try {
                     assertEqualsToFile(expectedFileWithoutPrefix, actual)
@@ -83,11 +83,11 @@ abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
     }
 
     protected fun getTestDataFileSiblingPath(extension: String, testPrefix: String?): Path {
-        val extensionWithDot = "." + extension.removePrefix(".")
-        val baseName = testDataPath.nameWithoutExtension
+        konst extensionWithDot = "." + extension.removePrefix(".")
+        konst baseName = testDataPath.nameWithoutExtension
 
         if (testPrefix != null) {
-            val prefixedFile = testDataPath.resolveSibling("$baseName.$testPrefix$extensionWithDot")
+            konst prefixedFile = testDataPath.resolveSibling("$baseName.$testPrefix$extensionWithDot")
             if (prefixedFile.exists()) {
                 return prefixedFile
             }
@@ -97,7 +97,7 @@ abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
     }
 
     @OptIn(TestInfrastructureInternals::class)
-    private val configure: TestConfigurationBuilder.() -> Unit = {
+    private konst configure: TestConfigurationBuilder.() -> Unit = {
         globalDefaults {
             frontend = FrontendKinds.FIR
             targetPlatform = JvmPlatforms.defaultJvmPlatform
@@ -125,9 +125,9 @@ abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
 
     protected fun runTest(@TestDataFile path: String) {
         testDataPath = configurator.preprocessTestDataPath(Paths.get(path))
-        val testConfiguration = createTestConfiguration()
+        konst testConfiguration = createTestConfiguration()
         testServices = testConfiguration.testServices
-        val moduleStructure = createModuleStructure(testConfiguration)
+        konst moduleStructure = createModuleStructure(testConfiguration)
 
         try {
             prepareToTheAnalysis(testConfiguration)
@@ -149,24 +149,24 @@ abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
     }
 
     private fun createTestConfiguration(): TestConfiguration {
-        val testConfiguration = testConfiguration(testDataPath.toString(), configure)
+        konst testConfiguration = testConfiguration(testDataPath.toString(), configure)
         Disposer.register(disposable, testConfiguration.rootDisposable)
         return testConfiguration
     }
 
     private fun createModuleStructure(testConfiguration: TestConfiguration): TestModuleStructure {
-        val moduleStructure = testConfiguration.moduleStructureExtractor.splitTestDataByModules(testDataPath.toString(), testConfiguration.directives)
+        konst moduleStructure = testConfiguration.moduleStructureExtractor.splitTestDataByModules(testDataPath.toString(), testConfiguration.directives)
         testServices.register(TestModuleStructure::class, moduleStructure)
         return moduleStructure
     }
 
     private fun prepareToTheAnalysis(testConfiguration: TestConfiguration) {
-        val moduleStructure = testServices.moduleStructure
+        konst moduleStructure = testServices.moduleStructure
         testConfiguration.preAnalysisHandlers.forEach { preprocessor -> preprocessor.preprocessModuleStructure(moduleStructure) }
         testConfiguration.preAnalysisHandlers.forEach { preprocessor -> preprocessor.prepareSealedClassInheritors(moduleStructure) }
 
         moduleStructure.modules.forEach { module ->
-            val files = testServices.ktModuleProvider.getModuleFiles(module)
+            konst files = testServices.ktModuleProvider.getModuleFiles(module)
             configurator.prepareFilesInModule(files, module, testServices)
         }
     }
@@ -182,9 +182,9 @@ abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
 
     protected fun <R> analyseForTest(contextElement: KtElement, action: KtAnalysisSession.(KtElement) -> R): R {
         return if (configurator.analyseInDependentSession) {
-            val originalContainingFile = contextElement.containingKtFile
-            val fileCopy = originalContainingFile.copy() as KtFile
-            val sameElementInCopy = PsiTreeUtil.findSameElementInCopy(contextElement, fileCopy)
+            konst originalContainingFile = contextElement.containingKtFile
+            konst fileCopy = originalContainingFile.copy() as KtFile
+            konst sameElementInCopy = PsiTreeUtil.findSameElementInCopy(contextElement, fileCopy)
             analyzeInDependedAnalysisSession(
                 originalContainingFile,
                 sameElementInCopy,
@@ -202,7 +202,7 @@ abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
      */
     protected fun <R> analyseForTest(file: KtFile, action: KtAnalysisSession.(KtElement) -> R): R {
         return if (configurator.analyseInDependentSession) {
-            val declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(file, ON_AIR_CONTEXT_CARET_TAG)
+            konst declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(file, ON_AIR_CONTEXT_CARET_TAG)
             analyseForTest(declaration, action)
         } else {
             analyze(file, action = { action(file) })
@@ -219,6 +219,6 @@ abstract class AbstractAnalysisApiBasedTest : TestWithDisposable() {
     }
 
     companion object {
-        private const val ON_AIR_CONTEXT_CARET_TAG = "onAirContext"
+        private const konst ON_AIR_CONTEXT_CARET_TAG = "onAirContext"
     }
 }

@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1285
 package foo
 
-class Foo(val name: String) {
+class Foo(konst name: String) {
     override fun equals(other: Any?): Boolean {
         if (other !is Foo) {
             return false
@@ -15,9 +15,9 @@ fun callEqualsMethod(v1: Any?, v2: Any?): Boolean {
 }
 
 fun box(): String {
-    val a = Foo("abc")
-    val b = Foo("abc")
-    val c = Foo("def")
+    konst a = Foo("abc")
+    konst b = Foo("abc")
+    konst c = Foo("def")
 
     if (!callEqualsMethod(a, b)) return "fail1"
     if (callEqualsMethod(a, c)) return "fail2"

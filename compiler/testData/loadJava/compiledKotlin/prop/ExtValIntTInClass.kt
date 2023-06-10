@@ -1,6 +1,6 @@
 package test
 
 class ExtValInClass<T> {
-    val Int.asas: T
+    konst Int.asas: T
         get() = throw Exception()
 }

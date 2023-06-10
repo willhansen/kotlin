@@ -14,7 +14,7 @@ import p.*
 fun <T : Any> T.foo() {}
 
 fun <D> test(b: Boolean) {
-    val str = if (b) Utils.str() else null
+    konst str = if (b) Utils.str() else null
 
     str?.foo()
 }

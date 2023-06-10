@@ -1,5 +1,5 @@
 class Box<T>(t: T) {
-    var value = t
+    var konstue = t
 }
 
 fun isIntBox(box: Box<out Any?>): Boolean {
@@ -8,6 +8,6 @@ fun isIntBox(box: Box<out Any?>): Boolean {
 
 
 fun box(): String {
-  val box = Box<Int>(1)
+  konst box = Box<Int>(1)
   return if (isIntBox(box)) "OK" else "fail"
 }

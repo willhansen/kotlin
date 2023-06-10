@@ -4,10 +4,10 @@ FILE: copy.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        public final val y: R|kotlin/String| = R|<local>/y|
+        public final konst y: R|kotlin/String| = R|<local>/y|
             public get(): R|kotlin/String|
 
         public final operator fun component1(): R|kotlin/Int|
@@ -18,8 +18,8 @@ FILE: copy.kt
 
     }
     public final fun test(some: R|Some|): R|kotlin/Unit| {
-        lval other: R|Some| = R|<local>/some|.R|/Some.copy|(y = String(123))
-        lval another: R|Some| = R|<local>/some|.R|/Some.copy|(x = Int(123))
-        lval same: R|Some| = R|<local>/some|.R|/Some.copy|()
-        lval different: R|Some| = R|<local>/some|.R|/Some.copy|(Int(456), String(456))
+        lkonst other: R|Some| = R|<local>/some|.R|/Some.copy|(y = String(123))
+        lkonst another: R|Some| = R|<local>/some|.R|/Some.copy|(x = Int(123))
+        lkonst same: R|Some| = R|<local>/some|.R|/Some.copy|()
+        lkonst different: R|Some| = R|<local>/some|.R|/Some.copy|(Int(456), String(456))
     }

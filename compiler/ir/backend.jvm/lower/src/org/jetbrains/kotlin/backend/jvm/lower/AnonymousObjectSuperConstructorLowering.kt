@@ -25,10 +25,10 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrTypeOperatorCallImpl
 import org.jetbrains.kotlin.ir.util.patchDeclarationParents
 import org.jetbrains.kotlin.ir.util.transformInPlace
 
-internal val anonymousObjectSuperConstructorPhase = makeIrFilePhase(
+internal konst anonymousObjectSuperConstructorPhase = makeIrFilePhase(
     ::AnonymousObjectSuperConstructorLowering,
     name = "AnonymousObjectSuperConstructor",
-    description = "Move evaluation of anonymous object super constructor arguments to call site"
+    description = "Move ekonstuation of anonymous object super constructor arguments to call site"
 )
 
 // Transform code like this:
@@ -52,11 +52,11 @@ internal val anonymousObjectSuperConstructorPhase = makeIrFilePhase(
 // The reason for doing such a transformation is the inliner: if the object is declared
 // in an inline function, `complexExpression` may be a call to a lambda, which will be
 // inlined into regenerated copies of the object. Unfortunately, if that lambda captures
-// some values, the inliner does not notice that `this` is not yet initialized, and
-// attempts to read them from fields, causing a bytecode validation error.
+// some konstues, the inliner does not notice that `this` is not yet initialized, and
+// attempts to read them from fields, causing a bytecode konstidation error.
 //
 // (TODO fix the inliner instead. Then keep this code for one more version for backwards compatibility.)
-private class AnonymousObjectSuperConstructorLowering(val context: JvmBackendContext) : IrElementTransformerVoidWithContext(),
+private class AnonymousObjectSuperConstructorLowering(konst context: JvmBackendContext) : IrElementTransformerVoidWithContext(),
     FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid()
@@ -66,17 +66,17 @@ private class AnonymousObjectSuperConstructorLowering(val context: JvmBackendCon
         if (expression.origin != IrStatementOrigin.OBJECT_LITERAL)
             return super.visitBlock(expression)
 
-        val objectConstructorCall = expression.statements.last() as? IrConstructorCall
+        konst objectConstructorCall = expression.statements.last() as? IrConstructorCall
             ?: throw AssertionError("object literal does not end in a constructor call")
-        val objectConstructor = objectConstructorCall.symbol.owner
-        val objectConstructorBody = objectConstructor.body as? IrBlockBody
+        konst objectConstructor = objectConstructorCall.symbol.owner
+        konst objectConstructorBody = objectConstructor.body as? IrBlockBody
             ?: throw AssertionError("object literal constructor body is not a block")
 
-        val newArguments = mutableListOf<IrExpression>()
-        fun addArgument(value: IrExpression): IrValueParameter {
-            newArguments.add(value)
+        konst newArguments = mutableListOf<IrExpression>()
+        fun addArgument(konstue: IrExpression): IrValueParameter {
+            newArguments.add(konstue)
             return objectConstructor.addValueParameter(
-                "\$super_call_param\$${newArguments.size}", value.type, JvmLoweredDeclarationOrigin.OBJECT_SUPER_CONSTRUCTOR_PARAMETER
+                "\$super_call_param\$${newArguments.size}", konstue.type, JvmLoweredDeclarationOrigin.OBJECT_SUPER_CONSTRUCTOR_PARAMETER
             )
         }
 
@@ -90,8 +90,8 @@ private class AnonymousObjectSuperConstructorLowering(val context: JvmBackendCon
             }
 
         fun IrDelegatingConstructorCall.transform(lift: List<IrVariable>) = apply {
-            val remapping = lift.associateWith { addArgument(it.initializer!!) }
-            for (i in symbol.owner.valueParameters.indices) {
+            konst remapping = lift.associateWith { addArgument(it.initializer!!) }
+            for (i in symbol.owner.konstueParameters.indices) {
                 putValueArgument(i, getValueArgument(i)?.transform(remapping))
             }
         }
@@ -100,11 +100,11 @@ private class AnonymousObjectSuperConstructorLowering(val context: JvmBackendCon
             when {
                 it is IrDelegatingConstructorCall -> it.transform(listOf())
                 it is IrBlock && it.origin == IrStatementOrigin.ARGUMENTS_REORDERING_FOR_CALL && it.statements.last() is IrDelegatingConstructorCall ->
-                    // If named arguments are used, the order of evaluation may not match the order of arguments,
+                    // If named arguments are used, the order of ekonstuation may not match the order of arguments,
                     // in which case IR like this is generated:
                     //
-                    //     val _tmp1 = complexExpression1
-                    //     val _tmp2 = complexExpression2
+                    //     konst _tmp1 = complexExpression1
+                    //     konst _tmp2 = complexExpression2
                     //     SuperType(_tmp2, _tmp1)
                     //
                     // So we lift all temporary variables to parameters.
@@ -113,21 +113,21 @@ private class AnonymousObjectSuperConstructorLowering(val context: JvmBackendCon
             }
         }
 
-        val classTypeParametersCount = objectConstructorCall.typeArgumentsCount - objectConstructorCall.symbol.owner.typeParameters.size
+        konst classTypeParametersCount = objectConstructorCall.typeArgumentsCount - objectConstructorCall.symbol.owner.typeParameters.size
         context.createIrBuilder(currentScope!!.scope.scopeOwnerSymbol).run {
             expression.statements[expression.statements.size - 1] = irBlock(objectConstructorCall) {
                 +IrConstructorCallImpl.fromSymbolOwner(
                     objectConstructorCall.startOffset, objectConstructorCall.endOffset, objectConstructorCall.type,
                     objectConstructorCall.symbol, classTypeParametersCount, objectConstructorCall.origin
                 ).apply {
-                    for (i in 0 until objectConstructorCall.valueArgumentsCount)
+                    for (i in 0 until objectConstructorCall.konstueArgumentsCount)
                         putValueArgument(i, objectConstructorCall.getValueArgument(i))
                     // Avoid complex expressions between `new` and `<init>`, as the inliner gets confused if
                     // an argument to `<init>` is an anonymous object. Put them in variables instead.
                     // See KT-21781 for an example; in short, it looks like `object : S({ ... })` in an inline function.
                     for ((i, argument) in newArguments.withIndex()) {
                         argument.patchDeclarationParents(currentDeclarationParent)
-                        putValueArgument(i + objectConstructorCall.valueArgumentsCount, irGet(irTemporary(argument)))
+                        putValueArgument(i + objectConstructorCall.konstueArgumentsCount, irGet(irTemporary(argument)))
                     }
                 }
             }

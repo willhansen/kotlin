@@ -4,22 +4,22 @@
 import java.util.Date
 
 fun assertGenericSuper(expected: String, function: Any?) {
-    val clazz = (function as java.lang.Object).getClass()!!
-    val genericSuper = clazz.getGenericInterfaces()[0]!!
+    konst clazz = (function as java.lang.Object).getClass()!!
+    konst genericSuper = clazz.getGenericInterfaces()[0]!!
     if ("$genericSuper" != expected)
         throw AssertionError("Fail, expected: $expected, actual: $genericSuper")
 }
 
 
-val unitFun = { }
-val intFun = { 42 }
-val stringParamFun = { x: String -> }
-val listFun = { l: List<String> -> l }
-val mutableListFun = fun (l: MutableList<Double>): MutableList<Int> = null!!
-val funWithIn = fun (x: Comparable<String>) {}
+konst unitFun = { }
+konst intFun = { 42 }
+konst stringParamFun = { x: String -> }
+konst listFun = { l: List<String> -> l }
+konst mutableListFun = fun (l: MutableList<Double>): MutableList<Int> = null!!
+konst funWithIn = fun (x: Comparable<String>) {}
 
-val extensionFun = fun Any.() {}
-val extensionWithArgFun = fun Long.(x: Any): Date = Date()
+konst extensionFun = fun Any.() {}
+konst extensionWithArgFun = fun Long.(x: Any): Date = Date()
 
 fun box(): String {
     assertGenericSuper("kotlin.jvm.functions.Function0<kotlin.Unit>", unitFun)

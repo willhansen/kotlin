@@ -26,13 +26,13 @@ import java.util.*
 open class FrameMap : FrameMapBase<DeclarationDescriptor>()
 
 open class FrameMapBase<T : Any> {
-    private val myVarIndex = TObjectIntHashMap<T>()
-    private val myVarSizes = TObjectIntHashMap<T>()
+    private konst myVarIndex = TObjectIntHashMap<T>()
+    private konst myVarSizes = TObjectIntHashMap<T>()
     var currentSize = 0
         private set
 
     open fun enter(key: T, type: Type): Int {
-        val index = currentSize
+        konst index = currentSize
         myVarIndex.put(key, index)
         currentSize += type.size
         myVarSizes.put(key, type.size)
@@ -40,10 +40,10 @@ open class FrameMapBase<T : Any> {
     }
 
     open fun leave(key: T): Int {
-        val size = myVarSizes.get(key)
+        konst size = myVarSizes.get(key)
         currentSize -= size
         myVarSizes.remove(key)
-        val oldIndex = myVarIndex.remove(key)
+        konst oldIndex = myVarIndex.remove(key)
         if (oldIndex != currentSize) {
             throw IllegalStateException("Descriptor can be left only if it is last: $key")
         }
@@ -51,7 +51,7 @@ open class FrameMapBase<T : Any> {
     }
 
     fun enterTemp(type: Type): Int {
-        val result = currentSize
+        konst result = currentSize
         currentSize += type.size
         return result
     }
@@ -75,14 +75,14 @@ open class FrameMapBase<T : Any> {
         }
     }
 
-    inner class Mark(private val myIndex: Int) {
+    inner class Mark(private konst myIndex: Int) {
 
         fun dropTo() {
-            val descriptorsToDrop = ArrayList<T>()
-            val iterator = myVarIndex.iterator()
+            konst descriptorsToDrop = ArrayList<T>()
+            konst iterator = myVarIndex.iterator()
             while (iterator.hasNext()) {
                 iterator.advance()
-                if (iterator.value() >= myIndex) {
+                if (iterator.konstue() >= myIndex) {
                     descriptorsToDrop.add(iterator.key())
                 }
             }
@@ -95,18 +95,18 @@ open class FrameMapBase<T : Any> {
     }
 
     override fun toString(): String {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
 
         if (myVarIndex.size() != myVarSizes.size()) {
             return "inconsistent"
         }
 
-        val descriptors = Lists.newArrayList<Trinity<T, Int, Int>>()
+        konst descriptors = Lists.newArrayList<Trinity<T, Int, Int>>()
 
         for (descriptor0 in myVarIndex.keys()) {
-            @Suppress("UNCHECKED_CAST") val descriptor = descriptor0 as T
-            val varIndex = myVarIndex.get(descriptor)
-            val varSize = myVarSizes.get(descriptor)
+            @Suppress("UNCHECKED_CAST") konst descriptor = descriptor0 as T
+            konst varIndex = myVarIndex.get(descriptor)
+            konst varSize = myVarSizes.get(descriptor)
             descriptors.add(Trinity.create(descriptor, varIndex, varSize))
         }
 

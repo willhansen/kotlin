@@ -13,13 +13,13 @@
 import java.util.*
 
 fun box() : String{
-    val deque1 = ArrayDeque<Any>()
-    val deque2 = ArrayDeque<Any>()
+    konst deque1 = ArrayDeque<Any>()
+    konst deque2 = ArrayDeque<Any>()
     deque1.add { throw IllegalArgumentException() }
     deque1.add { throw NullPointerException() }
     deque1.add { TODO() }
     move(deque1, deque2)
-    val v = deque2.first as () -> Nothing
+    konst v = deque2.first as () -> Nothing
     try {
         v.invoke()
     } catch (e: NotImplementedError) {

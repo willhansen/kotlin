@@ -19,7 +19,7 @@ package kotlin.collections
  */
 @SinceKotlin("1.1")
 public abstract class AbstractList<out E> protected constructor() : AbstractCollection<E>(), List<E> {
-    abstract override val size: Int
+    abstract override konst size: Int
     abstract override fun get(index: Int): E
 
     override fun iterator(): Iterator<E> = IteratorImpl()
@@ -34,7 +34,7 @@ public abstract class AbstractList<out E> protected constructor() : AbstractColl
 
     override fun subList(fromIndex: Int, toIndex: Int): List<E> = SubList(this, fromIndex, toIndex)
 
-    private class SubList<out E>(private val list: AbstractList<E>, private val fromIndex: Int, toIndex: Int) : AbstractList<E>(), RandomAccess {
+    private class SubList<out E>(private konst list: AbstractList<E>, private konst fromIndex: Int, toIndex: Int) : AbstractList<E>(), RandomAccess {
         private var _size: Int = 0
 
         init {
@@ -48,7 +48,7 @@ public abstract class AbstractList<out E> protected constructor() : AbstractColl
             return list[fromIndex + index]
         }
 
-        override val size: Int get() = _size
+        override konst size: Int get() = _size
     }
 
     /**
@@ -64,7 +64,7 @@ public abstract class AbstractList<out E> protected constructor() : AbstractColl
     }
 
     /**
-     * Returns the hash code value for this list.
+     * Returns the hash code konstue for this list.
      */
     override fun hashCode(): Int = orderedHashCode(this)
 
@@ -133,7 +133,7 @@ public abstract class AbstractList<out E> protected constructor() : AbstractColl
             }
         }
 
-        private const val maxArraySize = Int.MAX_VALUE - 8
+        private const konst maxArraySize = Int.MAX_VALUE - 8
 
         /** [oldCapacity] and [minCapacity] must be non-negative. */
         internal fun newCapacity(oldCapacity: Int, minCapacity: Int): Int {
@@ -157,9 +157,9 @@ public abstract class AbstractList<out E> protected constructor() : AbstractColl
         internal fun orderedEquals(c: Collection<*>, other: Collection<*>): Boolean {
             if (c.size != other.size) return false
 
-            val otherIterator = other.iterator()
+            konst otherIterator = other.iterator()
             for (elem in c) {
-                val elemOther = otherIterator.next()
+                konst elemOther = otherIterator.next()
                 if (elem != elemOther) {
                     return false
                 }

@@ -35,7 +35,7 @@ internal object LLFirTypeLazyResolver : LLFirLazyResolver(FirResolvePhase.TYPES)
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirTypeTargetResolver(target, lockProvider, session, scopeSession)
+        konst resolver = LLFirTypeTargetResolver(target, lockProvider, session, scopeSession)
         resolver.resolveDesignation()
     }
 
@@ -75,7 +75,7 @@ private class LLFirTypeTargetResolver(
     session: FirSession,
     scopeSession: ScopeSession,
 ) : LLFirTargetResolver(target, lockProvider, FirResolvePhase.TYPES) {
-    private val transformer = object : FirTypeResolveTransformer(session, scopeSession) {
+    private konst transformer = object : FirTypeResolveTransformer(session, scopeSession) {
         override fun transformTypeRef(typeRef: FirTypeRef, data: Any?): FirResolvedTypeRef {
             FirLazyBodiesCalculator.calculateAnnotations(typeRef, session)
             return super.transformTypeRef(typeRef, data)
@@ -107,12 +107,12 @@ private class LLFirTypeTargetResolver(
         when (target) {
             is FirConstructor -> {
                 // ConstructedTypeRef should be resolved only with type parameters, but not with nested classes and classes from supertypes
-                val scopesBeforeContainingClass = transformer.scopesBefore
+                konst scopesBeforeContainingClass = transformer.scopesBefore
                     ?: errorWithFirSpecificEntries("The containing class scope is not found", fir = target)
 
                 @OptIn(PrivateForInline::class)
                 transformer.withScopeCleanup {
-                    val clazz = transformer.classDeclarationsStack.last()
+                    konst clazz = transformer.classDeclarationsStack.last()
                     if (!transformer.removeOuterTypeParameterScope(clazz)) {
                         transformer.scopes = scopesBeforeContainingClass
                     } else {

@@ -32,7 +32,7 @@ fun box(): String {
     checkNoMethod(TestClass::class.java, "test", Any::class.java)
 
     try {
-        val test2DefaultImpls = java.lang.Class.forName("Test2\$DefaultImpls")
+        konst test2DefaultImpls = java.lang.Class.forName("Test2\$DefaultImpls")
         checkNoMethod(test2DefaultImpls, "test", Any::class.java)
         checkNoMethod(test2DefaultImpls, "test", String::class.java)
     } catch (e: ClassNotFoundException) {

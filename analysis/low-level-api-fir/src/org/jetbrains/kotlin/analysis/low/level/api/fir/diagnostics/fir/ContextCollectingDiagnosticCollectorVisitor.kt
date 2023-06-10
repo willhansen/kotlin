@@ -26,7 +26,7 @@ private class ContextCollectingDiagnosticCollectorVisitor private constructor(
 ) : AbstractDiagnosticCollectorVisitor(
     PersistentCheckerContextFactory.createEmptyPersistenceCheckerContext(sessionHolder)
 ) {
-    private val contextCollector = object : ContextByDesignationCollector<CheckerContextForProvider>(designation) {
+    private konst contextCollector = object : ContextByDesignationCollector<CheckerContextForProvider>(designation) {
         override fun getCurrentContext(): CheckerContextForProvider = context
 
         override fun goToNestedDeclaration(target: FirElementWithResolveState) {
@@ -46,7 +46,7 @@ private class ContextCollectingDiagnosticCollectorVisitor private constructor(
 
     companion object {
         fun collect(sessionHolder: SessionHolder, designation: FirDesignationWithFile): CheckerContextForProvider {
-            val visitor = ContextCollectingDiagnosticCollectorVisitor(sessionHolder, designation)
+            konst visitor = ContextCollectingDiagnosticCollectorVisitor(sessionHolder, designation)
             designation.firFile.accept(visitor, null)
             return visitor.contextCollector.getCollectedContext()
         }
@@ -59,7 +59,7 @@ internal object PersistenceContextCollector {
         firFile: FirFile,
         declaration: FirDeclaration,
     ): CheckerContextForProvider {
-        val isLocal = when (declaration) {
+        konst isLocal = when (declaration) {
             is FirClassLikeDeclaration -> declaration.symbol.classId.isLocal
             is FirCallableDeclaration -> declaration.symbol.callableId.isLocal
             is FirDanglingModifierList -> declaration.containingClass()?.classId?.isLocal == true
@@ -72,7 +72,7 @@ internal object PersistenceContextCollector {
             "Cannot collect context for local declaration ${declaration.renderWithType()}"
         }
 
-        val designation = declaration.collectDesignation(firFile)
+        konst designation = declaration.collectDesignation(firFile)
         designation.path.forEach { firClass ->
             firClass.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
         }

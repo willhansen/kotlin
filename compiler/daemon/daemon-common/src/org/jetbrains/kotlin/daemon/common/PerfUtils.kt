@@ -23,11 +23,11 @@ import java.lang.management.ThreadMXBean
 import java.util.concurrent.atomic.AtomicLong
 
 interface PerfCounters {
-    val count: Long
-    val time: Long
-    val threadTime: Long
-    val threadUserTime: Long
-    val memory: Long
+    konst count: Long
+    konst time: Long
+    konst threadTime: Long
+    konst threadUserTime: Long
+    konst memory: Long
 
     fun addMeasurement(time: Long = 0, thread: Long = 0, threadUser: Long = 0, memory: Long = 0)
 }
@@ -41,25 +41,25 @@ interface Profiler {
 }
 
 inline fun<R> Profiler.withMeasure(obj: Any?, body: () -> R): R {
-    val startState = beginMeasure(obj)
-    val res = body()
+    konst startState = beginMeasure(obj)
+    konst res = body()
     endMeasure(obj, startState)
     return res
 }
 
 
 open class SimplePerfCounters : PerfCounters {
-    private val _count: AtomicLong = AtomicLong(0L)
-    private val _time: AtomicLong = AtomicLong(0L)
-    private val _threadTime: AtomicLong = AtomicLong(0L)
-    private val _threadUserTime: AtomicLong = AtomicLong(0L)
-    private val _memory: AtomicLong = AtomicLong(0L)
+    private konst _count: AtomicLong = AtomicLong(0L)
+    private konst _time: AtomicLong = AtomicLong(0L)
+    private konst _threadTime: AtomicLong = AtomicLong(0L)
+    private konst _threadUserTime: AtomicLong = AtomicLong(0L)
+    private konst _memory: AtomicLong = AtomicLong(0L)
 
-    override val count: Long get() = _count.get()
-    override val time: Long get() = _time.get()
-    override val threadTime: Long get() = _threadTime.get()
-    override val threadUserTime: Long get() = _threadUserTime.get()
-    override val memory: Long get() = _memory.get()
+    override konst count: Long get() = _count.get()
+    override konst time: Long get() = _time.get()
+    override konst threadTime: Long get() = _threadTime.get()
+    override konst threadUserTime: Long get() = _threadUserTime.get()
+    override konst memory: Long get() = _memory.get()
 
     override fun addMeasurement(time: Long, thread: Long, threadUser: Long, memory: Long) {
         _count.incrementAndGet()
@@ -71,7 +71,7 @@ open class SimplePerfCounters : PerfCounters {
 }
 
 
-class SimplePerfCountersWithTotal(val totalRef: PerfCounters) : SimplePerfCounters() {
+class SimplePerfCountersWithTotal(konst totalRef: PerfCounters) : SimplePerfCounters() {
     override fun addMeasurement(time: Long, thread: Long, threadUser: Long, memory: Long) {
         super.addMeasurement(time, thread, threadUser, memory)
         totalRef.addMeasurement(time, thread, threadUser, memory)
@@ -90,7 +90,7 @@ inline fun usedMemory(withGC: Boolean): Long {
     if (withGC) {
         System.gc()
     }
-    val rt = Runtime.getRuntime()
+    konst rt = Runtime.getRuntime()
     return (rt.totalMemory() - rt.freeMemory())
 }
 
@@ -98,20 +98,20 @@ inline fun usedMemory(withGC: Boolean): Long {
 inline fun beginMeasureWallTime() = listOf(System.nanoTime())
 
 inline fun endMeasureWallTime(perfCounters: PerfCounters, startState: List<Long>) {
-    val (startTime) = startState
+    konst (startTime) = startState
     perfCounters.addMeasurement(time = System.nanoTime() - startTime) // TODO: add support for time wrapping
 }
 
 
 inline fun beginMeasureWallAndThreadTimes(threadMXBean: ThreadMXBean): List<Long> {
-    val startTime = System.nanoTime()
-    val startThreadTime = threadMXBean.threadCpuTime()
-    val startThreadUserTime = threadMXBean.threadUserTime()
+    konst startTime = System.nanoTime()
+    konst startThreadTime = threadMXBean.threadCpuTime()
+    konst startThreadUserTime = threadMXBean.threadUserTime()
     return listOf(startTime, startThreadTime, startThreadUserTime)
 }
 
 inline fun endMeasureWallAndThreadTimes(perfCounters: PerfCounters, threadMXBean: ThreadMXBean, startState: List<Long>) {
-    val (startTime, startThreadTime, startThreadUserTime) = startState
+    konst (startTime, startThreadTime, startThreadUserTime) = startState
 
     // TODO: add support for time wrapping
     perfCounters.addMeasurement(time = System.nanoTime() - startTime,
@@ -120,16 +120,16 @@ inline fun endMeasureWallAndThreadTimes(perfCounters: PerfCounters, threadMXBean
 }
 
 inline fun beginMeasureWallAndThreadTimesAndMemory(withGC: Boolean = false, threadMXBean: ThreadMXBean): List<Long> {
-    val startMem = usedMemory(withGC)
-    val startTime = System.nanoTime()
-    val startThreadTime = threadMXBean.threadCpuTime()
-    val startThreadUserTime = threadMXBean.threadUserTime()
+    konst startMem = usedMemory(withGC)
+    konst startTime = System.nanoTime()
+    konst startThreadTime = threadMXBean.threadCpuTime()
+    konst startThreadUserTime = threadMXBean.threadUserTime()
 
     return listOf(startMem, startTime, startThreadTime, startThreadUserTime)
 }
 
 inline fun endMeasureWallAndThreadTimesAndMemory(perfCounters: PerfCounters, withGC: Boolean = false, threadMXBean: ThreadMXBean, startState: List<Long>){
-    val (startMem, startTime, startThreadTime, startThreadUserTime) = startState
+    konst (startMem, startTime, startThreadTime, startThreadUserTime) = startState
 
     // TODO: add support for time wrapping
     perfCounters.addMeasurement(time = System.nanoTime() - startTime,
@@ -146,8 +146,8 @@ class DummyProfiler : Profiler {
 
 abstract class TotalProfiler : Profiler {
 
-    val total = SimplePerfCounters()
-    val threadMXBean = ManagementFactory.getThreadMXBean()
+    konst total = SimplePerfCounters()
+    konst threadMXBean = ManagementFactory.getThreadMXBean()
 
     override fun getCounters(): Map<Any?, PerfCounters> = mapOf()
     override fun getTotalCounters(): PerfCounters = total
@@ -170,7 +170,7 @@ class WallAndThreadTotalProfiler : TotalProfiler() {
 }
 
 
-class WallAndThreadAndMemoryTotalProfiler(val withGC: Boolean) : TotalProfiler() {
+class WallAndThreadAndMemoryTotalProfiler(konst withGC: Boolean) : TotalProfiler() {
     @Suppress("OVERRIDE_BY_INLINE")
     override inline fun beginMeasure(obj: Any?) =
         beginMeasureWallAndThreadTimesAndMemory(withGC, threadMXBean)
@@ -182,7 +182,7 @@ class WallAndThreadAndMemoryTotalProfiler(val withGC: Boolean) : TotalProfiler()
 
 class WallAndThreadByClassProfiler() : TotalProfiler() {
 
-    val counters = hashMapOf<Any?, SimplePerfCountersWithTotal>()
+    konst counters = hashMapOf<Any?, SimplePerfCountersWithTotal>()
 
     override fun getCounters(): Map<Any?, PerfCounters> = counters
 

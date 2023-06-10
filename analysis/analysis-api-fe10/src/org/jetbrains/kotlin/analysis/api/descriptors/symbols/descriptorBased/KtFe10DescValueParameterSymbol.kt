@@ -28,30 +28,30 @@ import org.jetbrains.kotlin.resolve.calls.components.isVararg
 import org.jetbrains.kotlin.resolve.source.getPsi
 
 internal class KtFe10DescValueParameterSymbol(
-    override val descriptor: ValueParameterDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: ValueParameterDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtValueParameterSymbol(), KtFe10DescSymbol<ValueParameterDescriptor> {
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion {
-            return when (val name = descriptor.name) {
-                SpecialNames.IMPLICIT_SET_PARAMETER -> Name.identifier("value")
+            return when (konst name = descriptor.name) {
+                SpecialNames.IMPLICIT_SET_PARAMETER -> Name.identifier("konstue")
                 else -> name
             }
         }
 
-    override val hasDefaultValue: Boolean
+    override konst hasDefaultValue: Boolean
         get() = withValidityAssertion { descriptor.hasDefaultValue() }
 
-    override val isVararg: Boolean
+    override konst isVararg: Boolean
         get() = withValidityAssertion { descriptor.isVararg }
 
-    override val isCrossinline: Boolean
+    override konst isCrossinline: Boolean
         get() = withValidityAssertion { descriptor.isCrossinline }
 
-    override val isNoinline: Boolean
+    override konst isNoinline: Boolean
         get() = withValidityAssertion { descriptor.isNoinline }
 
-    override val isImplicitLambdaParameter: Boolean
+    override konst isImplicitLambdaParameter: Boolean
         get() = withValidityAssertion {
             descriptor.containingDeclaration is AnonymousFunctionDescriptor &&
                     descriptor.name.identifierOrNullIfSpecial == "it" &&
@@ -63,7 +63,7 @@ internal class KtFe10DescValueParameterSymbol(
                     } == true
         }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion {
             return (descriptor.varargElementType ?: descriptor.type).toKtType(analysisContext)
         }

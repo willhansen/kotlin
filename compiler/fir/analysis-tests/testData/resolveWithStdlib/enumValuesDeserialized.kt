@@ -1,4 +1,4 @@
 fun test() {
-    val values = AnnotationTarget.values()
-    val entry = AnnotationTarget.valueOf("CLASS")
+    konst konstues = AnnotationTarget.konstues()
+    konst entry = AnnotationTarget.konstueOf("CLASS")
 }

@@ -1,7 +1,7 @@
 fun print(v: Any?) {}
 
 fun foo() {
-    val array = intArrayOf(1,2,3)
+    konst array = intArrayOf(1,2,3)
 
     var count = 0
     for (element in array) if (element > 0) count++
@@ -33,5 +33,5 @@ fun foo() {
         }
 }
 
-// 0 valueOf
+// 0 konstueOf
 // 0 GETSTATIC

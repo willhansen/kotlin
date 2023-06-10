@@ -1,4 +1,4 @@
-val test1: Int
+konst test1: Int
   field = 42
   get
 
@@ -14,7 +14,7 @@ class Host {
 
   }
 
-  val testMember1: Int
+  konst testMember1: Int
     field = 42
     get
 
@@ -32,7 +32,7 @@ class InPrimaryCtor<T : Any?> {
 
   }
 
-  val testInPrimaryCtor1: T
+  konst testInPrimaryCtor1: T
     field = testInPrimaryCtor1
     get
 

@@ -9,7 +9,7 @@ package org.jetbrains.kotlin.cli.common.messages
 class XcodeStyleMessageRenderer : MessageRenderer {
 
     override fun render(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?): String {
-        val xcodeSeverity = when (severity) {
+        konst xcodeSeverity = when (severity) {
             CompilerMessageSeverity.WARNING, CompilerMessageSeverity.STRONG_WARNING -> "warning"
             CompilerMessageSeverity.ERROR, CompilerMessageSeverity.EXCEPTION -> "error"
             CompilerMessageSeverity.LOGGING, CompilerMessageSeverity.OUTPUT, CompilerMessageSeverity.INFO -> "note"

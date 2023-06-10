@@ -1,10 +1,10 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 interface ILength {
-    val length: Int
+    konst length: Int
 }
 
-class Impl(override val length: Int) : ILength
+class Impl(override konst length: Int) : ILength
 
 fun <T> foo(a: (Int) -> T) = 0
 fun <T : ILength> bar(a: (Int) -> T) {

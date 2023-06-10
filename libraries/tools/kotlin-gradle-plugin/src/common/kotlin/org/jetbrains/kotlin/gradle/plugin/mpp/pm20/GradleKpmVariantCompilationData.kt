@@ -14,31 +14,31 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.project.model.LanguageSettings
 
 interface GradleKpmVariantCompilationData<T : KotlinCommonOptions> : GradleKpmCompilationData<T> {
-    override val owner: GradleKpmVariant
+    override konst owner: GradleKpmVariant
 
-    override val project: Project get() = owner.containingModule.project
+    override konst project: Project get() = owner.containingModule.project
 
-    override val compilationPurpose: String
+    override konst compilationPurpose: String
         get() = owner.containingModule.name
 
-    override val compilationClassifier: String
+    override konst compilationClassifier: String
         get() = owner.name
 
-    override val output: KotlinCompilationOutput
+    override konst output: KotlinCompilationOutput
         get() = owner.compilationOutputs
 
-    override val compileKotlinTaskName: String
+    override konst compileKotlinTaskName: String
 
-    override val compileAllTaskName: String
+    override konst compileAllTaskName: String
 
-    override val kotlinSourceDirectoriesByFragmentName: Map<String, SourceDirectorySet>
+    override konst kotlinSourceDirectoriesByFragmentName: Map<String, SourceDirectorySet>
 
-    override val compileDependencyFiles: FileCollection
+    override konst compileDependencyFiles: FileCollection
         get() = owner.compileDependencyFiles
 
-    override val languageSettings: LanguageSettings
+    override konst languageSettings: LanguageSettings
         get() = owner.languageSettings
 
-    override val platformType: KotlinPlatformType
+    override konst platformType: KotlinPlatformType
         get() = owner.platformType
 }

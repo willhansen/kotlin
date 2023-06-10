@@ -27,6 +27,6 @@ infix fun String.on(predicate :  (s : URI) -> Boolean) : URI {
     return URI(this)
 }
 
-class URI(val body : Any) {
+class URI(konst body : Any) {
     infix fun to(dest : String) {}
 }

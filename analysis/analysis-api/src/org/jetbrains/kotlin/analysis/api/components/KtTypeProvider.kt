@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 public abstract class KtTypeProvider : KtAnalysisSessionComponent() {
-    public abstract val builtinTypes: KtBuiltinTypes
+    public abstract konst builtinTypes: KtBuiltinTypes
 
     public abstract fun approximateToSuperPublicDenotableType(type: KtType, approximateLocalTypes: Boolean): KtType?
 
@@ -45,7 +45,7 @@ public abstract class KtTypeProvider : KtAnalysisSessionComponent() {
 }
 
 public interface KtTypeProviderMixIn : KtAnalysisSessionMixIn {
-    public val builtinTypes: KtBuiltinTypes
+    public konst builtinTypes: KtBuiltinTypes
         get() = withValidityAssertion { analysisSession.typeProvider.builtinTypes }
 
     /**
@@ -156,24 +156,24 @@ public interface KtTypeProviderMixIn : KtAnalysisSessionMixIn {
 
 @Suppress("PropertyName")
 public abstract class KtBuiltinTypes : KtLifetimeOwner {
-    public abstract val INT: KtType
-    public abstract val LONG: KtType
-    public abstract val SHORT: KtType
-    public abstract val BYTE: KtType
+    public abstract konst INT: KtType
+    public abstract konst LONG: KtType
+    public abstract konst SHORT: KtType
+    public abstract konst BYTE: KtType
 
-    public abstract val FLOAT: KtType
-    public abstract val DOUBLE: KtType
+    public abstract konst FLOAT: KtType
+    public abstract konst DOUBLE: KtType
 
-    public abstract val BOOLEAN: KtType
-    public abstract val CHAR: KtType
-    public abstract val STRING: KtType
+    public abstract konst BOOLEAN: KtType
+    public abstract konst CHAR: KtType
+    public abstract konst STRING: KtType
 
-    public abstract val UNIT: KtType
-    public abstract val NOTHING: KtType
-    public abstract val ANY: KtType
+    public abstract konst UNIT: KtType
+    public abstract konst NOTHING: KtType
+    public abstract konst ANY: KtType
 
-    public abstract val THROWABLE: KtType
+    public abstract konst THROWABLE: KtType
 
-    public abstract val NULLABLE_ANY: KtType
-    public abstract val NULLABLE_NOTHING: KtType
+    public abstract konst NULLABLE_ANY: KtType
+    public abstract konst NULLABLE_NOTHING: KtType
 }

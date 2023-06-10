@@ -4,7 +4,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X<T>(val x: T)
+konstue class X<T>(konst x: T)
 
 interface IFoo {
     fun foo(): X<String?>?
@@ -15,12 +15,12 @@ class Test : IFoo {
 }
 
 fun box(): String {
-    val t1: IFoo = Test()
-    val x1 = t1.foo()
+    konst t1: IFoo = Test()
+    konst x1 = t1.foo()
     if (x1 != X(null)) throw AssertionError("x1: $x1")
 
-    val t2 = Test()
-    val x2 = t2.foo()
+    konst t2 = Test()
+    konst x2 = t2.foo()
     if (x2 != X(null)) throw AssertionError("x2: $x2")
 
     return "OK"

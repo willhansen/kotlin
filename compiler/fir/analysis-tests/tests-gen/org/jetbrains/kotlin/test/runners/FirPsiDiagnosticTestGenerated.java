@@ -1468,9 +1468,9 @@ public class FirPsiDiagnosticTestGenerated extends AbstractFirPsiDiagnosticTest 
             }
 
             @Test
-            @TestMetadata("invalidLhsOfClassLiteral.kt")
-            public void testInvalidLhsOfClassLiteral() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolve/checkers/invalidLhsOfClassLiteral.kt");
+            @TestMetadata("inkonstidLhsOfClassLiteral.kt")
+            public void testInkonstidLhsOfClassLiteral() throws Exception {
+                runTest("compiler/fir/analysis-tests/testData/resolve/checkers/inkonstidLhsOfClassLiteral.kt");
             }
 
             @Test
@@ -1998,9 +1998,9 @@ public class FirPsiDiagnosticTestGenerated extends AbstractFirPsiDiagnosticTest 
             }
 
             @Test
-            @TestMetadata("valOnAnnotationParameter.kt")
+            @TestMetadata("konstOnAnnotationParameter.kt")
             public void testValOnAnnotationParameter() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolve/diagnostics/valOnAnnotationParameter.kt");
+                runTest("compiler/fir/analysis-tests/testData/resolve/diagnostics/konstOnAnnotationParameter.kt");
             }
 
             @Nested
@@ -2823,9 +2823,9 @@ public class FirPsiDiagnosticTestGenerated extends AbstractFirPsiDiagnosticTest 
                 }
 
                 @Test
-                @TestMetadata("invalidSubtraction.kt")
-                public void testInvalidSubtraction() throws Exception {
-                    runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/invalidSubtraction.kt");
+                @TestMetadata("inkonstidSubtraction.kt")
+                public void testInkonstidSubtraction() throws Exception {
+                    runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/inkonstidSubtraction.kt");
                 }
 
                 @Test
@@ -2895,15 +2895,15 @@ public class FirPsiDiagnosticTestGenerated extends AbstractFirPsiDiagnosticTest 
                 }
 
                 @Test
-                @TestMetadata("validAddition.kt")
+                @TestMetadata("konstidAddition.kt")
                 public void testValidAddition() throws Exception {
-                    runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/validAddition.kt");
+                    runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/konstidAddition.kt");
                 }
 
                 @Test
-                @TestMetadata("validSubtraction.kt")
+                @TestMetadata("konstidSubtraction.kt")
                 public void testValidSubtraction() throws Exception {
-                    runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/validSubtraction.kt");
+                    runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/konstidSubtraction.kt");
                 }
             }
 
@@ -3111,9 +3111,9 @@ public class FirPsiDiagnosticTestGenerated extends AbstractFirPsiDiagnosticTest 
                 }
 
                 @Test
-                @TestMetadata("valueIsNeverRead.kt")
+                @TestMetadata("konstueIsNeverRead.kt")
                 public void testValueIsNeverRead() throws Exception {
-                    runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/unused/valueIsNeverRead.kt");
+                    runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/unused/konstueIsNeverRead.kt");
                 }
             }
 
@@ -3806,9 +3806,9 @@ public class FirPsiDiagnosticTestGenerated extends AbstractFirPsiDiagnosticTest 
             }
 
             @Test
-            @TestMetadata("invalidCode.kt")
-            public void testInvalidCode() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolve/problems/invalidCode.kt");
+            @TestMetadata("inkonstidCode.kt")
+            public void testInkonstidCode() throws Exception {
+                runTest("compiler/fir/analysis-tests/testData/resolve/problems/inkonstidCode.kt");
             }
 
             @Test
@@ -4446,9 +4446,9 @@ public class FirPsiDiagnosticTestGenerated extends AbstractFirPsiDiagnosticTest 
             }
 
             @Test
-            @TestMetadata("valCapturedInLambda.kt")
+            @TestMetadata("konstCapturedInLambda.kt")
             public void testValCapturedInLambda() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolve/smartcasts/valCapturedInLambda.kt");
+                runTest("compiler/fir/analysis-tests/testData/resolve/smartcasts/konstCapturedInLambda.kt");
             }
 
             @Nested
@@ -6880,9 +6880,9 @@ public class FirPsiDiagnosticTestGenerated extends AbstractFirPsiDiagnosticTest 
             }
 
             @Test
-            @TestMetadata("valueOfOrNull.kt")
+            @TestMetadata("konstueOfOrNull.kt")
             public void testValueOfOrNull() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolveWithStdlib/problems/valueOfOrNull.kt");
+                runTest("compiler/fir/analysis-tests/testData/resolveWithStdlib/problems/konstueOfOrNull.kt");
             }
 
             @Test

@@ -33,7 +33,7 @@ interface Module {
 
     fun getJavaSourceRoots(): List<JavaRootPath>
 
-    val modularJdkRoot: String?
+    konst modularJdkRoot: String?
 }
 
-data class JavaRootPath(val path: String, val packagePrefix: String? = null)
+data class JavaRootPath(konst path: String, konst packagePrefix: String? = null)

@@ -16,12 +16,12 @@ fun test(fn: () -> Unit, r: Runnable, arr: Array<String>) {
     Test.foo1(fn, *arr)
     Test.foo1(r, *arr)
 
-    val i1 = Test({}, arr)
-    val i2 = Test({}, *arr)
-    val i3 = Test({}, {}, arr)
-    val i4 = Test(r, {}, "")
-    val i5 = Test({}, {}, *arr)
-    val i6 = Test(r, {}, *arr)
+    konst i1 = Test({}, arr)
+    konst i2 = Test({}, *arr)
+    konst i3 = Test({}, {}, arr)
+    konst i4 = Test(r, {}, "")
+    konst i5 = Test({}, {}, *arr)
+    konst i6 = Test(r, {}, *arr)
 
     i1.foo2({}, {}, arr)
     i1.foo2(r, {}, "")

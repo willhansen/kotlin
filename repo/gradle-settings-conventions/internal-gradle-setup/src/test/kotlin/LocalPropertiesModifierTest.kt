@@ -17,15 +17,15 @@ class LocalPropertiesModifierTest {
     @TempDir
     lateinit var workingDir: Path
 
-    private val localPropertiesFile by lazy {
+    private konst localPropertiesFile by lazy {
         workingDir.resolve("local.properties")
     }
 
-    private val modifier by lazy {
+    private konst modifier by lazy {
         LocalPropertiesModifier(localPropertiesFile.toFile())
     }
 
-    private val setupFile = SetupFile(
+    private konst setupFile = SetupFile(
         mapOf(
             "newProperty1" to "someValue",
             "newProperty2" to "someOtherValue",
@@ -43,8 +43,8 @@ class LocalPropertiesModifierTest {
         localPropertiesFile.propertiesFileContentAssertions { fileContents, properties ->
             assertContainsMarkersOnce(fileContents)
             assertEquals(setupFile.properties.size, properties.size)
-            for ((key, value) in setupFile.properties) {
-                assertEquals(value, properties[key])
+            for ((key, konstue) in setupFile.properties) {
+                assertEquals(konstue, properties[key])
             }
         }
     }
@@ -59,8 +59,8 @@ class LocalPropertiesModifierTest {
         localPropertiesFile.propertiesFileContentAssertions { fileContents, properties ->
             assertContainsMarkersOnce(fileContents)
             assertEquals(setupFile.properties.size, properties.size)
-            for ((key, value) in setupFile.properties) {
-                assertEquals(value, properties[key])
+            for ((key, konstue) in setupFile.properties) {
+                assertEquals(konstue, properties[key])
             }
         }
     }
@@ -86,7 +86,7 @@ class LocalPropertiesModifierTest {
     @Test
     @DisplayName("sync shouldn't remove any existing properties not managed by the sync")
     fun testSyncingIntoNonEmptyFile() {
-        val initialContent = mapOf(
+        konst initialContent = mapOf(
             "oldProperty1" to PropertyValue.Configured("oldValue1"),
             "oldProperty2" to PropertyValue.Configured("oldValue2"),
         )
@@ -96,10 +96,10 @@ class LocalPropertiesModifierTest {
 
         localPropertiesFile.propertiesFileContentAssertions { fileContents, properties ->
             assertContainsMarkersOnce(fileContents)
-            val expectedProperties = setupFile.properties + initialContent.mapValues { it.value.value }
+            konst expectedProperties = setupFile.properties + initialContent.mapValues { it.konstue.konstue }
             assertEquals(expectedProperties.size, properties.size)
-            for ((key, value) in expectedProperties) {
-                assertEquals(value, properties[key])
+            for ((key, konstue) in expectedProperties) {
+                assertEquals(konstue, properties[key])
             }
         }
     }
@@ -124,7 +124,7 @@ class LocalPropertiesModifierTest {
     @Test
     @DisplayName("sync shouldn't override properties if they already manually set")
     fun testSyncingDoesNotOverrideValues() {
-        val initialContent = mapOf(
+        konst initialContent = mapOf(
             "oldProperty1" to PropertyValue.Configured("oldValue1"),
             "oldProperty2" to PropertyValue.Configured("oldValue2"),
             "alreadySetProperty" to PropertyValue.Configured("oldValue3"),
@@ -135,10 +135,10 @@ class LocalPropertiesModifierTest {
 
         localPropertiesFile.propertiesFileContentAssertions { fileContents, properties ->
             assertContainsMarkersOnce(fileContents)
-            val expectedProperties = setupFile.properties + initialContent.mapValues { it.value.value }
+            konst expectedProperties = setupFile.properties + initialContent.mapValues { it.konstue.konstue }
             assertEquals(expectedProperties.size, properties.size)
-            for ((key, value) in expectedProperties) {
-                assertEquals(value, properties[key])
+            for ((key, konstue) in expectedProperties) {
+                assertEquals(konstue, properties[key])
             }
             assertContainsExactTimes(fileContents, "#alreadySetProperty=newValue the property is overridden by 'oldValue3'", 1)
         }
@@ -169,7 +169,7 @@ class LocalPropertiesModifierTest {
     @Test
     @DisplayName("sync should override automatically set properties")
     fun testSyncingOverrideAutomaticallySetValues() {
-        val initialContent = mapOf(
+        konst initialContent = mapOf(
             "oldProperty1" to PropertyValue.Configured("oldValue1"),
             "oldProperty2" to PropertyValue.Configured("oldValue2"),
             "alreadySetProperty" to PropertyValue.Configured("oldValue3"),
@@ -178,15 +178,15 @@ class LocalPropertiesModifierTest {
 
         modifier.applySetup(setupFile)
 
-        val newProperties = mapOf(
+        konst newProperties = mapOf(
             "newManualProperty" to PropertyValue.Configured("5"),
             "otherAlreadySetProperty" to PropertyValue.Configured("5"),
         )
         fillInitialLocalPropertiesFile(newProperties)
 
-        val anotherSetupFile = SetupFile(
+        konst anotherSetupFile = SetupFile(
             mapOf(
-                "newProperty2" to "other", // a new value
+                "newProperty2" to "other", // a new konstue
                 "newProperty3" to "someOtherValue", // a new record
                 "otherAlreadySetProperty" to "someOtherValue",
             )
@@ -196,11 +196,11 @@ class LocalPropertiesModifierTest {
 
         localPropertiesFile.propertiesFileContentAssertions { fileContents, properties ->
             assertContainsMarkersOnce(fileContents)
-            val expectedProperties =
-                anotherSetupFile.properties + initialContent.mapValues { it.value.value } + newProperties.mapValues { it.value.value }
+            konst expectedProperties =
+                anotherSetupFile.properties + initialContent.mapValues { it.konstue.konstue } + newProperties.mapValues { it.konstue.konstue }
             assertEquals(expectedProperties.size, properties.size)
-            for ((key, value) in expectedProperties) {
-                assertEquals(value, properties[key])
+            for ((key, konstue) in expectedProperties) {
+                assertEquals(konstue, properties[key])
             }
         }
     }
@@ -211,7 +211,7 @@ class LocalPropertiesModifierTest {
     }
 
     private fun fillInitialLocalPropertiesFile(content: Map<String, PropertyValue>) {
-        val localPropertiesFile = localPropertiesFile.toFile()
+        konst localPropertiesFile = localPropertiesFile.toFile()
         localPropertiesFile.appendText(
             """
             |${content.asPropertiesLines}
@@ -220,9 +220,9 @@ class LocalPropertiesModifierTest {
     }
 
     private fun Path.propertiesFileContentAssertions(assertions: (String, Properties) -> Unit) {
-        val fileContent = Files.readAllLines(this).joinToString("\n")
+        konst fileContent = Files.readAllLines(this).joinToString("\n")
         try {
-            val localProperties = Properties().apply {
+            konst localProperties = Properties().apply {
                 FileInputStream(localPropertiesFile.toFile()).use {
                     load(it)
                 }

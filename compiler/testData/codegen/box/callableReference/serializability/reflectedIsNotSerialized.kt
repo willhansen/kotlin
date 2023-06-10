@@ -7,18 +7,18 @@ import kotlin.test.*
 fun bar() {}
 
 fun box(): String {
-    val baos = ByteArrayOutputStream()
-    val oos = ObjectOutputStream(baos)
+    konst baos = ByteArrayOutputStream()
+    konst oos = ObjectOutputStream(baos)
     oos.writeObject(::bar)
     oos.close()
 
-    val bais = ByteArrayInputStream(baos.toByteArray())
-    val ois = ObjectInputStream(bais)
-    val o = ois.readObject()
+    konst bais = ByteArrayInputStream(baos.toByteArray())
+    konst ois = ObjectInputStream(bais)
+    konst o = ois.readObject()
     ois.close()
 
     // Test that we don't serialize the reflected view of the reference: it's not needed because it can be restored at runtime
-    val field = kotlin.jvm.internal.CallableReference::class.java.getDeclaredField("reflected").apply { isAccessible = true }
+    konst field = kotlin.jvm.internal.CallableReference::class.java.getDeclaredField("reflected").apply { isAccessible = true }
     assertNull(field.get(o))
 
     return "OK"

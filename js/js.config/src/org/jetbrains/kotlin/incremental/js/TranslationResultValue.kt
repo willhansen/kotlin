@@ -16,16 +16,16 @@
 
 package org.jetbrains.kotlin.incremental.js
 
-data class TranslationResultValue(val metadata: ByteArray, val binaryAst: ByteArray, val inlineData: ByteArray)
+data class TranslationResultValue(konst metadata: ByteArray, konst binaryAst: ByteArray, konst inlineData: ByteArray)
 
 
 data class IrTranslationResultValue(
-    val fileData: ByteArray,
-    val types: ByteArray,
-    val signatures: ByteArray,
-    val strings: ByteArray,
-    val declarations: ByteArray,
-    val bodies: ByteArray,
-    val fqn: ByteArray,
-    val debugInfo: ByteArray?
+    konst fileData: ByteArray,
+    konst types: ByteArray,
+    konst signatures: ByteArray,
+    konst strings: ByteArray,
+    konst declarations: ByteArray,
+    konst bodies: ByteArray,
+    konst fqn: ByteArray,
+    konst debugInfo: ByteArray?
 )

@@ -19,7 +19,7 @@ fun DiagnosticReporter.reportIfHasAnnotation(
     error: KtDiagnosticFactory0,
     context: CheckerContext
 ) {
-    val annotation = declaration.getAnnotationByClassId(annotationClassId, context.session)
+    konst annotation = declaration.getAnnotationByClassId(annotationClassId, context.session)
     if (annotation != null) {
         reportOn(annotation.source, error, context)
     }

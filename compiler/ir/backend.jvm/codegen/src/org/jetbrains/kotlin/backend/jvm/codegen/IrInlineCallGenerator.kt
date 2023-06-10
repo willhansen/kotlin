@@ -20,9 +20,9 @@ interface IrInlineCallGenerator : IrCallGenerator {
         expression: IrFunctionAccessExpression,
         isInsideIfCondition: Boolean,
     ) {
-        val element = PsiSourceManager.findPsiElement(expression, codegen.irFunction)
+        konst element = PsiSourceManager.findPsiElement(expression, codegen.irFunction)
             ?: PsiSourceManager.findPsiElement(codegen.irFunction)
-        val descriptor = expression.symbol.owner.suspendFunctionOriginal().toIrBasedDescriptor()
+        konst descriptor = expression.symbol.owner.suspendFunctionOriginal().toIrBasedDescriptor()
         if (!codegen.state.globalInlineContext.enterIntoInlining(descriptor, element)) {
             genCycleStub(expression.psiElement?.text ?: "<no source>", codegen)
             return

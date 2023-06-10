@@ -27,11 +27,11 @@ public class J {
 
 fun test(n: J?, nn: J) {
     // @NotNull platform type
-    val platformNN = J.staticNN
+    konst platformNN = J.staticNN
     // @Nullable platform type
-    val platformN = J.staticN
+    konst platformN = J.staticN
     // platform type with no annotation
-    val platformJ = J.staticJ
+    konst platformJ = J.staticJ
 
     J.staticNN = <!ASSIGNMENT_TYPE_MISMATCH!>n<!>
     J.staticNN = <!ASSIGNMENT_TYPE_MISMATCH!>platformN<!>

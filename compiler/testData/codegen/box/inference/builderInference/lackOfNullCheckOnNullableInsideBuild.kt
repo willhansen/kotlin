@@ -3,7 +3,7 @@
 
 import kotlin.experimental.ExperimentalTypeInference
 
-class Foo(val string: String? = null)
+class Foo(konst string: String? = null)
 
 class Builder<T> {
     private var resolver: ((Foo) -> T)? = null
@@ -19,7 +19,7 @@ fun <T> build(configure: Builder<T>.() -> Unit) =
     Builder<T>().apply(configure).build()
 
 fun box(): String {
-    val resolver = build {
+    konst resolver = build {
         resolve { it.string }
     }
 

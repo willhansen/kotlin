@@ -1,8 +1,8 @@
 // FIR_IDENTICAL
 
 open class A<T1, T2> {
-    open inner class A1(val a1: T1)
-    open inner class A2(val a2: T2)
+    open inner class A1(konst a1: T1)
+    open inner class A2(konst a2: T2)
 
     open fun f1(arg: T1) = arg
     open fun f2(arg: T2) = arg

@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.platform.jvm.isJvm
 
 
 public abstract class KotlinPackageProviderBase(
-    protected val
+    protected konst
     project: Project,
-    protected val searchScope: GlobalSearchScope
+    protected konst searchScope: GlobalSearchScope
 ) : KotlinPackageProvider() {
 
     override fun doesPackageExist(packageFqName: FqName, platform: TargetPlatform): Boolean {
@@ -27,9 +27,9 @@ public abstract class KotlinPackageProviderBase(
     override fun doesPlatformSpecificPackageExist(packageFqName: FqName, platform: TargetPlatform): Boolean {
         when {
             platform.isJvm() -> {
-                val fqNameString = packageFqName.asString()
+                konst fqNameString = packageFqName.asString()
                 forEachNonKotlinPsiElementFinder(project) { finder ->
-                    val psiPackage = finder.findPackage(fqNameString)
+                    konst psiPackage = finder.findPackage(fqNameString)
                     if (psiPackage != null) {
                         // we cannot easily check if some PsiPackage is in GlobalSearchScope or not
                         return true
@@ -57,12 +57,12 @@ public abstract class KotlinPackageProviderBase(
         nameFilter: (Name) -> Boolean
     ): Set<Name> = when {
         platform.isJvm() -> {
-            val fqNameString = packageFqName.asString()
+            konst fqNameString = packageFqName.asString()
             buildSet {
                 forEachNonKotlinPsiElementFinder(project) { finder ->
-                    val psiPackage = finder.findPackage(fqNameString) ?: return@forEachNonKotlinPsiElementFinder
+                    konst psiPackage = finder.findPackage(fqNameString) ?: return@forEachNonKotlinPsiElementFinder
                     for (subPackage in finder.getSubPackages(psiPackage, searchScope)) {
-                        val name = subPackage.name?.let(Name::identifierIfValid) ?: continue
+                        konst name = subPackage.name?.let(Name::identifierIfValid) ?: continue
                         if (!nameFilter(name)) continue
                         add(name)
                     }

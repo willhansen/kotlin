@@ -12,7 +12,7 @@ public class A {
 
 fun box(): String {
     try {
-        val s: String = A.foo()
+        konst s: String = A.foo()
         return "Fail: NPE should have been thrown"
     } catch (e: Throwable) {
         if (e::class != NullPointerException::class) return "Fail: exception class should be NPE: ${e::class}"

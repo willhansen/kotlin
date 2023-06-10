@@ -21,20 +21,20 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
  * Collect all regions in the module.
  * @param fileFilter filters files that should be processed.
  */
-internal class CoverageRegionCollector(private val fileFilter: (IrFile) -> Boolean) {
+internal class CoverageRegionCollector(private konst fileFilter: (IrFile) -> Boolean) {
 
     fun collectFunctionRegions(irModuleFragment: IrModuleFragment): List<FileRegionInfo> =
             irModuleFragment.files
                     .filter(fileFilter)
                     .map { file ->
-                        val collector = FunctionsCollector(file)
+                        konst collector = FunctionsCollector(file)
                         collector.visitFile(file)
                         FileRegionInfo(file, collector.functionRegions)
                     }
 
-    private inner class FunctionsCollector(val file: IrFile) : IrElementVisitorVoid {
+    private inner class FunctionsCollector(konst file: IrFile) : IrElementVisitorVoid {
 
-        val functionRegions = mutableListOf<FunctionRegions>()
+        konst functionRegions = mutableListOf<FunctionRegions>()
 
         override fun visitElement(element: IrElement) {
             element.acceptChildrenVoid(this)
@@ -42,7 +42,7 @@ internal class CoverageRegionCollector(private val fileFilter: (IrFile) -> Boole
 
         override fun visitFunction(declaration: IrFunction) {
             if (!declaration.isInline && !declaration.isExternal && !declaration.isGeneratedByCompiler) {
-                val regionsCollector = IrFunctionRegionsCollector(fileFilter, file)
+                konst regionsCollector = IrFunctionRegionsCollector(fileFilter, file)
                 declaration.acceptVoid(regionsCollector)
                 if (regionsCollector.regions.isNotEmpty()) {
                     functionRegions += FunctionRegions(declaration, regionsCollector.regions)
@@ -56,7 +56,7 @@ internal class CoverageRegionCollector(private val fileFilter: (IrFile) -> Boole
 
 // User doesn't bother about compiler-generated declarations.
 // So lets filter them.
-private val IrFunction.isGeneratedByCompiler: Boolean
+private konst IrFunction.isGeneratedByCompiler: Boolean
     get() {
         return origin != IrDeclarationOrigin.DEFINED || name.asString() == "Konan_start"
     }
@@ -68,24 +68,24 @@ private val IrFunction.isGeneratedByCompiler: Boolean
  * TODO: for now it is very inaccurate.
  */
 private class IrFunctionRegionsCollector(
-        val fileFilter: (IrFile) -> Boolean,
-        val irFile: IrFile
+        konst fileFilter: (IrFile) -> Boolean,
+        konst irFile: IrFile
 ) : IrElementVisitorVoid {
 
-    private data class StatementContext(val current: IrStatement, val next: IrStatement?)
+    private data class StatementContext(konst current: IrStatement, konst next: IrStatement?)
 
-    val regions = mutableMapOf<IrElement, Region>()
+    konst regions = mutableMapOf<IrElement, Region>()
 
-    private val irFileStack = mutableListOf(irFile)
+    private konst irFileStack = mutableListOf(irFile)
 
-    private val regionStack = mutableListOf<Region>()
+    private konst regionStack = mutableListOf<Region>()
 
-    private val irStatementsStack = mutableListOf<StatementContext>()
+    private konst irStatementsStack = mutableListOf<StatementContext>()
 
-    private val currentFile: IrFile
+    private konst currentFile: IrFile
         get() = irFileStack.last()
 
-    private val currentRegion: Region
+    private konst currentRegion: Region
         get() = regionStack.last()
 
     override fun visitElement(element: IrElement) {
@@ -101,7 +101,7 @@ private class IrFunctionRegionsCollector(
     }
 
     override fun visitConstructor(declaration: IrConstructor) {
-        val statements = declaration.body?.statements ?: return
+        konst statements = declaration.body?.statements ?: return
         visitInStatementContext(statements) { statement ->
             if (statement is IrDelegatingConstructorCall && !declaration.isPrimary
                     || statement !is IrDelegatingConstructorCall && statement !is IrReturn) {
@@ -114,10 +114,10 @@ private class IrFunctionRegionsCollector(
     override fun visitBody(body: IrBody) = visitInStatementContext(body.statements)
 
     override fun visitContainerExpression(expression: IrContainerExpression) {
-        val statements = expression.statements
+        konst statements = expression.statements
         when (expression) {
             is IrReturnableBlock -> {
-                val file = expression.sourceFileSymbol?.owner
+                konst file = expression.sourceFileSymbol?.owner
                 if (file != null && file != currentFile && fileFilter(file)) {
                     recordRegion(expression)
                     visitInFileContext(file) {
@@ -136,12 +136,12 @@ private class IrFunctionRegionsCollector(
     // }
 
     override fun visitWhen(expression: IrWhen) {
-        val branches = expression.branches
+        konst branches = expression.branches
         branches.forEach {
-            val condition = it.condition
-            val result = it.result
+            konst condition = it.condition
+            konst result = it.result
 
-            if (condition is IrConst<*> && condition.value == true && condition.endOffset == result.endOffset) {
+            if (condition is IrConst<*> && condition.konstue == true && condition.endOffset == result.endOffset) {
                 // Probably an 'else' branch.
                 // Note: can't rely on [IrElseBranch], because IR deserializer doesn't emit it.
                 recordRegion(result)
@@ -155,11 +155,11 @@ private class IrFunctionRegionsCollector(
     }
 
     override fun visitLoop(loop: IrLoop) {
-        val condition = loop.condition
+        konst condition = loop.condition
         recordRegion(condition)
         condition.acceptVoid(this)
 
-        val body = loop.body ?: return
+        konst body = loop.body ?: return
         when (loop) {
             is IrWhileLoop -> recordRegion(body, condition.endOffset, body.endOffset)
             is IrDoWhileLoop -> recordRegion(body, body.startOffset, condition.startOffset)
@@ -168,7 +168,7 @@ private class IrFunctionRegionsCollector(
     }
 
     override fun visitBreakContinue(jump: IrBreakContinue) {
-        val (current, next) = irStatementsStack.lastOrNull() ?: return
+        konst (current, next) = irStatementsStack.lastOrNull() ?: return
         recordRegion(next ?: return, current.endOffset, jump.loop.endOffset)
     }
 
@@ -176,8 +176,8 @@ private class IrFunctionRegionsCollector(
         irStatementsStack.subList(0, irStatementsStack.lastIndex)
                 .filter { (current, next) -> next != null && current.endOffset > expression.endOffset }
                 .forEach { (current, next) -> recordRegion(next!!, expression.endOffset, current.endOffset) }
-        val next = irStatementsStack.lastOrNull()?.next ?: return
-        val nextRegion = recordRegion(next, expression.endOffset, currentRegion.endOffset) ?: return
+        konst next = irStatementsStack.lastOrNull()?.next ?: return
+        konst nextRegion = recordRegion(next, expression.endOffset, currentRegion.endOffset) ?: return
         regionStack.pop()
         regionStack.push(nextRegion)
     }
@@ -199,12 +199,12 @@ private class IrFunctionRegionsCollector(
             visit: (IrStatement) -> Unit = { statement -> statement.acceptVoid(this) }
     ) {
         for (i in 0..statements.lastIndex) {
-            val current = statements[i]
+            konst current = statements[i]
             if (!current.hasValidOffsets()) {
                 continue
             }
-            val nextInContext = irStatementsStack.lastOrNull()?.next
-            val next = if (i < statements.lastIndex && statements[i + 1].hasValidOffsets()) statements[i + 1] else nextInContext
+            konst nextInContext = irStatementsStack.lastOrNull()?.next
+            konst next = if (i < statements.lastIndex && statements[i + 1].hasValidOffsets()) statements[i + 1] else nextInContext
             irStatementsStack.push(StatementContext(current, next))
             visit(current)
             irStatementsStack.pop()

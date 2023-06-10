@@ -11,7 +11,7 @@ import java.io.File
 import java.nio.file.Files
 
 private fun printToString(fn: Printer.() -> Unit): String {
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
     Printer(builder).fn()
     return builder.toString()
 }

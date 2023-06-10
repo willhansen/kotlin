@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.fir.visitors.transformInplace
 
 internal class FirArgumentListImpl(
-    override val source: KtSourceElement?,
-    override val arguments: MutableList<FirExpression>,
+    override konst source: KtSourceElement?,
+    override konst arguments: MutableList<FirExpression>,
 ) : FirArgumentList() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         arguments.forEach { it.accept(visitor, data) }

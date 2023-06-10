@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R(private val r: Long) {
+konstue class R(private konst r: Long) {
     fun test() = ok()
 
     companion object {

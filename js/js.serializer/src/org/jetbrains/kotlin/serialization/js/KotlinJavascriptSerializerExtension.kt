@@ -32,11 +32,11 @@ import org.jetbrains.kotlin.types.FlexibleType
 import org.jetbrains.kotlin.utils.JsMetadataVersion
 
 class KotlinJavascriptSerializerExtension(
-    private val fileRegistry: KotlinFileRegistry,
-    private val languageVersionSettings: LanguageVersionSettings,
-    override val metadataVersion: JsMetadataVersion
+    private konst fileRegistry: KotlinFileRegistry,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    override konst metadataVersion: JsMetadataVersion
 ) : KotlinSerializerExtensionBase(JsSerializerProtocol) {
-    override val stringTable = ApproximatingStringTable()
+    override konst stringTable = ApproximatingStringTable()
 
     override fun serializeFlexibleType(flexibleType: FlexibleType, lowerProto: ProtoBuf.Type.Builder, upperProto: ProtoBuf.Type.Builder) {
         lowerProto.flexibleTypeCapabilitiesId = stringTable.getStringIndex(DYNAMIC_TYPE_DESERIALIZER_ID)
@@ -48,7 +48,7 @@ class KotlinJavascriptSerializerExtension(
             versionRequirementTable: MutableVersionRequirementTable,
             childSerializer: DescriptorSerializer
     ) {
-        val id = getFileId(descriptor)
+        konst id = getFileId(descriptor)
         if (id != null) {
             proto.setExtension(JsProtoBuf.classContainingFileId, id)
         }
@@ -61,7 +61,7 @@ class KotlinJavascriptSerializerExtension(
             versionRequirementTable: MutableVersionRequirementTable?,
             childSerializer: DescriptorSerializer
     ) {
-        val id = getFileId(descriptor)
+        konst id = getFileId(descriptor)
         if (id != null) {
             proto.setExtension(JsProtoBuf.propertyContainingFileId, id)
         }
@@ -74,7 +74,7 @@ class KotlinJavascriptSerializerExtension(
         versionRequirementTable: MutableVersionRequirementTable?,
         childSerializer: DescriptorSerializer
     ) {
-        val id = getFileId(descriptor)
+        konst id = getFileId(descriptor)
         if (id != null) {
             proto.setExtension(JsProtoBuf.functionContainingFileId, id)
         }
@@ -84,16 +84,16 @@ class KotlinJavascriptSerializerExtension(
     private fun getFileId(descriptor: DeclarationDescriptor): Int? {
         if (!DescriptorUtils.isTopLevelDeclaration(descriptor) || descriptor !is DeclarationDescriptorWithSource) return null
 
-        val fileId = descriptor.extractFileId()
+        konst fileId = descriptor.extractFileId()
         if (fileId != null) {
             (descriptor.containingDeclaration as? KotlinJavascriptPackageFragment)?.let { packageFragment ->
                 return fileRegistry.lookup(KotlinDeserializedFileMetadata(packageFragment, fileId))
             }
         }
 
-        val file = descriptor.source.containingFile as? PsiSourceFile ?: return null
+        konst file = descriptor.source.containingFile as? PsiSourceFile ?: return null
 
-        val psiFile = file.psiFile
+        konst psiFile = file.psiFile
         return (psiFile as? KtFile)?.let { fileRegistry.lookup(KotlinPsiFileMetadata(it)) }
     }
 }

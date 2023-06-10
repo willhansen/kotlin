@@ -30,8 +30,8 @@ Do not use external references other than the Standard Library itself and JDK.
 
 - Use only the following subset of assertions:
 
-    - `assertPrints` to show any printable value,
-    - `assertTrue`/`assertFalse` to show a boolean value,
+    - `assertPrints` to show any printable konstue,
+    - `assertTrue`/`assertFalse` to show a boolean konstue,
     - `assertFails` / `assertFailsWith` to show that some invocation will fail.
   
   When a sample is compiled and run during the build, these assertions work as usual test assertions.

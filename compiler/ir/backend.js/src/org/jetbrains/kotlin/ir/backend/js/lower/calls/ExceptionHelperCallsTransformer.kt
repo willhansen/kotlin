@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.ir.util.kotlinPackageFqn
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-class ExceptionHelperCallsTransformer(private val context: JsIrBackendContext) : CallsTransformer {
+class ExceptionHelperCallsTransformer(private konst context: JsIrBackendContext) : CallsTransformer {
 
     // TODO: move symbol resolve into context
     @OptIn(ObsoleteDescriptorBasedAPI::class)
@@ -22,7 +22,7 @@ class ExceptionHelperCallsTransformer(private val context: JsIrBackendContext) :
             context.symbolTable.referenceSimpleFunction(it)
         } ?: throw AssertionError("Function not found: $fqn")
 
-    private val helperMapping = mapOf(
+    private konst helperMapping = mapOf(
         context.irBuiltIns.checkNotNullSymbol to referenceFunction(kotlinPackageFqn.child(Name.identifier("ensureNotNull"))),
         context.irBuiltIns.throwCceSymbol to referenceFunction(kotlinPackageFqn.child(Name.identifier("THROW_CCE"))),
         context.irBuiltIns.throwIseSymbol to referenceFunction(kotlinPackageFqn.child(Name.identifier("THROW_ISE"))),

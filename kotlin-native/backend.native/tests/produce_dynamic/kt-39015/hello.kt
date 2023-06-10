@@ -3,8 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-inline class Example(val number: Int) {}
+inline class Example(konst number: Int) {}
 
 object ObjectForExample {
-    val example: Example? = null
+    konst example: Example? = null
 }

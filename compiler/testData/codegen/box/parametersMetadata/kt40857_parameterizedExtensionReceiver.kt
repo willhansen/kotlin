@@ -10,8 +10,8 @@ import java.lang.reflect.ParameterizedType
 fun List<String>.bar(i: Int) = Unit
 
 fun box(): String {
-    val function = object {}.javaClass.enclosingClass.getDeclaredMethods().single { it.name == "bar" }
-    val type = function.parameters[0].parameterizedType
+    konst function = object {}.javaClass.enclosingClass.getDeclaredMethods().single { it.name == "bar" }
+    konst type = function.parameters[0].parameterizedType
     if (type !is ParameterizedType || type.toString() != "java.util.List<java.lang.String>") return "Fail: $type ${type.javaClass}"
     return "OK"
 }

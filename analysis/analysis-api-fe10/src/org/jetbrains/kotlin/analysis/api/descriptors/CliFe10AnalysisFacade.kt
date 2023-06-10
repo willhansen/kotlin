@@ -68,13 +68,13 @@ class CliFe10AnalysisFacade : Fe10AnalysisFacade {
     }
 
     private fun getHandler(useSiteElement: KtElement): KtFe10AnalysisHandlerExtension {
-        val project = useSiteElement.project
-        val ktModule = ProjectStructureProvider.getModule(project, useSiteElement, contextualModule = null)
+        konst project = useSiteElement.project
+        konst ktModule = ProjectStructureProvider.getModule(project, useSiteElement, contextualModule = null)
         return KtFe10AnalysisHandlerExtension.getInstance(project, ktModule)
     }
 }
 
-class KtFe10AnalysisHandlerExtension(private val useSiteModule: KtSourceModule) : AnalysisHandlerExtension {
+class KtFe10AnalysisHandlerExtension(private konst useSiteModule: KtSourceModule) : AnalysisHandlerExtension {
     internal companion object {
         fun getInstance(area: AreaInstance, module: KtModule): KtFe10AnalysisHandlerExtension {
             return AnalysisHandlerExtension.extensionPointName.getExtensions(area)
@@ -122,10 +122,10 @@ class KtFe10AnalysisHandlerExtension(private val useSiteModule: KtSourceModule) 
         kotlinToResolvedCallTransformer = componentProvider.get()
         kotlinTypeRefiner = componentProvider.get()
 
-        val builtIns = resolveSession!!.moduleDescriptor.builtIns
-        val typeSpecificityComparator = componentProvider.get<TypeSpecificityComparator>()
-        val platformOverloadsSpecificityComparator = componentProvider.get<PlatformOverloadsSpecificityComparator>()
-        val cancellationChecker = componentProvider.get<CancellationChecker>()
+        konst builtIns = resolveSession!!.moduleDescriptor.builtIns
+        konst typeSpecificityComparator = componentProvider.get<TypeSpecificityComparator>()
+        konst platformOverloadsSpecificityComparator = componentProvider.get<PlatformOverloadsSpecificityComparator>()
+        konst cancellationChecker = componentProvider.get<CancellationChecker>()
         overloadingConflictResolver = createOverloadingConflictResolver(
             builtIns,
             module,

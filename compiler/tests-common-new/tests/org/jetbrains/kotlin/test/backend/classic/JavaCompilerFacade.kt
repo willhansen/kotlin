@@ -20,28 +20,28 @@ import org.jetbrains.kotlin.test.services.jvm.compiledClassesManager
 import org.jetbrains.kotlin.test.util.KtTestUtil
 import java.io.File
 
-class JavaCompilerFacade(private val testServices: TestServices) {
+class JavaCompilerFacade(private konst testServices: TestServices) {
     fun compileJavaFiles(module: TestModule, configuration: CompilerConfiguration, classFileFactory: ClassFileFactory) {
         if (module.javaFiles.isEmpty()) return
-        val javaClasspath =
+        konst javaClasspath =
             listOf(testServices.compiledClassesManager.getCompiledKotlinDirForModule(module, classFileFactory).path) +
                     configuration.jvmClasspathRoots.map { it.absolutePath }
 
-        val javaClassesOutputDirectory = testServices.compiledClassesManager.getOrCreateCompiledJavaDirForModule(module)
+        konst javaClassesOutputDirectory = testServices.compiledClassesManager.getOrCreateCompiledJavaDirForModule(module)
 
-        val javacOptions = extractJavacOptions(
+        konst javacOptions = extractJavacOptions(
             module,
             configuration[JVMConfigurationKeys.JVM_TARGET],
             configuration.getBoolean(JVMConfigurationKeys.ENABLE_JVM_PREVIEW)
         )
-        val finalJavacOptions = CodegenTestUtil.prepareJavacOptions(
+        konst finalJavacOptions = CodegenTestUtil.prepareJavacOptions(
             javaClasspath,
             javacOptions,
             javaClassesOutputDirectory
         )
 
-        val javaFiles = testServices.sourceFileProvider.getRealJavaFiles(module)
-        val ignoreErrors = CodegenTestDirectives.IGNORE_JAVA_ERRORS in module.directives
+        konst javaFiles = testServices.sourceFileProvider.getRealJavaFiles(module)
+        konst ignoreErrors = CodegenTestDirectives.IGNORE_JAVA_ERRORS in module.directives
         compileJavaFiles(module, configuration[JVMConfigurationKeys.JVM_TARGET] ?: JvmTarget.DEFAULT, javaFiles, finalJavacOptions, ignoreErrors)
     }
 
@@ -74,7 +74,7 @@ class JavaCompilerFacade(private val testServices: TestServices) {
             )
             return
         }
-        val jdkHome = when (jvmTarget) {
+        konst jdkHome = when (jvmTarget) {
             JvmTarget.JVM_1_8 -> KtTestUtil.getJdk8Home()
             JvmTarget.JVM_9,
             JvmTarget.JVM_11 -> KtTestUtil.getJdk11Home()

@@ -1,30 +1,30 @@
 // !CHECK_TYPE
 interface A {
-    val x: Int
+    konst x: Int
 
-    val z: Comparable<*>
+    konst z: Comparable<*>
 }
 
 open class B {
     open var y = ""
 
-    open val z: CharSequence = ""
+    open konst z: CharSequence = ""
 }
 
 class C : B(), A {
-    override val x
+    override konst x
         get() = 1
 
     override var y
         get() = super.y
-        set(value) {
-            value checkType { _<String>() }
+        set(konstue) {
+            konstue checkType { _<String>() }
         }
 
     override var z
         get() = ""
-        set(value) {
-            value checkType { _<String>() }
+        set(konstue) {
+            konstue checkType { _<String>() }
         }
 }
 

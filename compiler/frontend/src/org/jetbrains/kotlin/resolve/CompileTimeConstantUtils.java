@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.resolve.constants.BooleanValue;
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant;
 import org.jetbrains.kotlin.resolve.constants.ConstantValue;
 import org.jetbrains.kotlin.resolve.constants.TypedCompileTimeConstant;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 import org.jetbrains.kotlin.types.KotlinType;
 import org.jetbrains.kotlin.types.KotlinTypeKt;
 import org.jetbrains.kotlin.types.TypeProjection;
@@ -119,15 +119,15 @@ public class CompileTimeConstantUtils {
 
         if (effectiveExpression == null) return false;
 
-        CompileTimeConstant<?> compileTimeConstant = ConstantExpressionEvaluator.getConstant(effectiveExpression, context);
+        CompileTimeConstant<?> compileTimeConstant = ConstantExpressionEkonstuator.getConstant(effectiveExpression, context);
         if (!(compileTimeConstant instanceof TypedCompileTimeConstant) || compileTimeConstant.getUsesVariableAsConstant()) return false;
 
         ConstantValue constantValue = ((TypedCompileTimeConstant) compileTimeConstant).getConstantValue();
 
         if (!(constantValue instanceof BooleanValue)) return false;
 
-        Boolean value = ((BooleanValue) constantValue).getValue();
-        return expectedValue == null || expectedValue.equals(value);
+        Boolean konstue = ((BooleanValue) constantValue).getValue();
+        return expectedValue == null || expectedValue.equals(konstue);
     }
 
     private CompileTimeConstantUtils() {

@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 class ResolutionCandidate<A>
 
-class ResolutionTask<B, C : B>(val candidate: ResolutionCandidate<B>)
+class ResolutionTask<B, C : B>(konst candidate: ResolutionCandidate<B>)
 
 fun <D, E : D> List<ResolutionTask<D, E>>.bar(t: ResolutionTask<D, E>) = t
 

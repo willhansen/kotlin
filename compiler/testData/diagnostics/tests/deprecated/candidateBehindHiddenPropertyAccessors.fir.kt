@@ -1,37 +1,37 @@
 class C {
-    val v1: String
+    konst v1: String
         @Deprecated("", level = DeprecationLevel.HIDDEN)
         get() = ""
 
     @Deprecated("", level = DeprecationLevel.HIDDEN)
-    val v2 = ""
+    konst v2 = ""
 
     var v3: String
         @Deprecated("", level = DeprecationLevel.HIDDEN)
         get() = ""
-        set(value) {}
+        set(konstue) {}
 
     var v4: String
         get() = ""
         @Deprecated("", level = DeprecationLevel.HIDDEN)
-        set(value) {
+        set(konstue) {
         }
 
     var v5: String
         @Deprecated("", level = DeprecationLevel.HIDDEN)
         get() = ""
         @Deprecated("", level = DeprecationLevel.HIDDEN)
-        set(value) {
+        set(konstue) {
         }
 
     @Deprecated("", level = DeprecationLevel.HIDDEN)
     var v6: String
         get() = ""
-        set(value) {}
+        set(konstue) {}
 }
 
-val v1: String = ""
-val v2: String = ""
+konst v1: String = ""
+konst v2: String = ""
 var v3: String = ""
 var v4: String = ""
 var v5: String = ""

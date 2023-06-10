@@ -15,14 +15,14 @@ class B(var a: Int) {
     var minus = false
     var minusAssign = false
 
-    operator fun minus(value: Int): B {
+    operator fun minus(konstue: Int): B {
         minus = true
-        return B(a - value)
+        return B(a - konstue)
     }
 
-    operator fun minusAssign(value: Int) {
+    operator fun minusAssign(konstue: Int) {
         minusAssign = true
-        a = a - value
+        a = a - konstue
     }
 }
 

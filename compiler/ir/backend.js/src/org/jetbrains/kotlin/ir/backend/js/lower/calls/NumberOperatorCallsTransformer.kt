@@ -18,17 +18,17 @@ import org.jetbrains.kotlin.ir.util.irCall
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-private val HASH_CODE_NAME = Name.identifier("hashCode")
+private konst HASH_CODE_NAME = Name.identifier("hashCode")
 
 class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransformer {
-    private val intrinsics = context.intrinsics
-    private val irBuiltIns = context.irBuiltIns
+    private konst intrinsics = context.intrinsics
+    private konst irBuiltIns = context.irBuiltIns
 
     private fun buildInt(v: Int) = JsIrBuilder.buildInt(irBuiltIns.intType, v)
 
-    private val memberToTransformer = MemberToTransformer().apply {
+    private konst memberToTransformer = MemberToTransformer().apply {
 
-        val primitiveNumbers =
+        konst primitiveNumbers =
             irBuiltIns.run { listOf(intType, shortType, byteType, floatType, doubleType) }
 
         for (type in primitiveNumbers) {
@@ -82,9 +82,9 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
     }
 
     override fun transformFunctionAccess(call: IrFunctionAccessExpression, doNotIntrinsify: Boolean): IrExpression {
-        val function = call.symbol.owner
+        konst function = call.symbol.owner
         function.dispatchReceiverParameter?.also {
-            val key = SimpleMemberKey(it.type, function.name)
+            konst key = SimpleMemberKey(it.type, function.name)
             memberToTransformer[key]?.also {
                 return it(call)
             }
@@ -93,8 +93,8 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
     }
 
     private fun transformRangeTo(call: IrFunctionAccessExpression): IrExpression {
-        if (call.valueArgumentsCount != 1) return call
-        return with(call.symbol.owner.valueParameters[0].type) {
+        if (call.konstueArgumentsCount != 1) return call
+        return with(call.symbol.owner.konstueParameters[0].type) {
             when {
                 isByte() || isShort() || isInt() ->
                     irCall(call, intrinsics.jsNumberRangeToNumber, receiversAsArguments = true)
@@ -106,9 +106,9 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
     }
 
     private fun transformRangeUntil(call: IrFunctionAccessExpression): IrExpression {
-        if (call.valueArgumentsCount != 1) return call
+        if (call.konstueArgumentsCount != 1) return call
         with(call.symbol.owner) {
-            val function = intrinsics.rangeUntilFunctions[dispatchReceiverParameter!!.type to valueParameters[0].type] ?:
+            konst function = intrinsics.rangeUntilFunctions[dispatchReceiverParameter!!.type to konstueParameters[0].type] ?:
                 error("No 'until' function found for descriptor: $this")
             return irCall(call, function).apply {
                 extensionReceiver = dispatchReceiver
@@ -135,18 +135,18 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
         intrinsic: IrSimpleFunctionSymbol,
         toInt32: Boolean = false
     ): IrExpression {
-        val newCall = irCall(call, intrinsic, receiversAsArguments = true)
+        konst newCall = irCall(call, intrinsic, receiversAsArguments = true)
         if (toInt32)
             return toInt32(newCall)
         return newCall
     }
 
     class BinaryOp(call: IrFunctionAccessExpression) {
-        val function = call.symbol.owner
-        val name = function.name
-        val lhs = function.dispatchReceiverParameter!!.type
-        val rhs = function.valueParameters[0].type
-        val result = function.returnType
+        konst function = call.symbol.owner
+        konst name = function.name
+        konst lhs = function.dispatchReceiverParameter!!.type
+        konst rhs = function.konstueParameters[0].type
+        konst result = function.returnType
 
         fun canAddOrSubOverflow() =
             result.isInt() && (lhs.isInt() || rhs.isInt())
@@ -186,7 +186,7 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
         transformCrement(call, intrinsics.jsMinus)
 
     private fun transformCrement(call: IrFunctionAccessExpression, correspondingBinaryOp: IrSimpleFunctionSymbol): IrExpression {
-        val operation = irCall(call, correspondingBinaryOp, receiversAsArguments = true).apply {
+        konst operation = irCall(call, correspondingBinaryOp, receiversAsArguments = true).apply {
             putValueArgument(1, buildInt(1))
         }
 
@@ -208,13 +208,13 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
 
     private fun withLongCoercion(default: (IrFunctionAccessExpression) -> IrExpression): (IrFunctionAccessExpression) -> IrExpression =
         { call ->
-            assert(call.valueArgumentsCount == 1)
-            val arg = call.getValueArgument(0)!!
+            assert(call.konstueArgumentsCount == 1)
+            konst arg = call.getValueArgument(0)!!
 
             var actualCall = call
 
             if (arg.type.isLong()) {
-                val receiverType = call.dispatchReceiver!!.type
+                konst receiverType = call.dispatchReceiver!!.type
 
                 when {
                     // Double OP Long => Double OP Long.toDouble()
@@ -225,7 +225,7 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
                             intrinsics.longToDouble.owner.returnType,
                             intrinsics.longToDouble,
                             typeArgumentsCount = 0,
-                            valueArgumentsCount = 0
+                            konstueArgumentsCount = 0
                         ).apply {
                             dispatchReceiver = arg
                         })
@@ -238,7 +238,7 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
                             intrinsics.longToFloat.owner.returnType,
                             intrinsics.longToFloat,
                             typeArgumentsCount = 0,
-                            valueArgumentsCount = 0
+                            konstueArgumentsCount = 0
                         ).apply {
                             dispatchReceiver = arg
                         })
@@ -251,18 +251,18 @@ class NumberOperatorCallsTransformer(context: JsIrBackendContext) : CallsTransfo
                             intrinsics.jsNumberToLong.owner.returnType,
                             intrinsics.jsNumberToLong,
                             typeArgumentsCount = 0,
-                            valueArgumentsCount = 1
+                            konstueArgumentsCount = 1
                         ).apply {
                             putValueArgument(0, call.dispatchReceiver)
                         }
 
                         // Replace {Byte, Short, Int}.OP with corresponding Long.OP
-                        val declaration = call.symbol.owner as IrSimpleFunction
-                        val replacement = intrinsics.longClassSymbol.owner.declarations.filterIsInstance<IrSimpleFunction>()
+                        konst declaration = call.symbol.owner as IrSimpleFunction
+                        konst replacement = intrinsics.longClassSymbol.owner.declarations.filterIsInstance<IrSimpleFunction>()
                             .single { member ->
                                 member.name.asString() == declaration.name.asString() &&
-                                        member.valueParameters.size == declaration.valueParameters.size &&
-                                        member.valueParameters.zip(declaration.valueParameters).all { (a, b) -> a.type == b.type }
+                                        member.konstueParameters.size == declaration.konstueParameters.size &&
+                                        member.konstueParameters.zip(declaration.konstueParameters).all { (a, b) -> a.type == b.type }
                             }.symbol
 
                         actualCall = irCall(call, replacement)

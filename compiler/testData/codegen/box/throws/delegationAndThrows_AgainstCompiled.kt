@@ -15,7 +15,7 @@ public interface A {
 class B(a: A) : A by a
 
 fun box(): String {
-    val method = B::class.java.declaredMethods.single { it.name == B::foo.name }
+    konst method = B::class.java.declaredMethods.single { it.name == B::foo.name }
     if (method.exceptionTypes.size != 0)
         return "Fail: ${method.exceptionTypes.toList()}"
 

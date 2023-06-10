@@ -51,8 +51,8 @@ fun test3(x: Any?) {
     p?.length // OK: p is String | Nothing? = String?
 }
 
-interface I1 { val x: Int }
-interface I2 { val y: Int }
+interface I1 { konst x: Int }
+interface I2 { konst y: Int }
 
 fun test4(x: Any?) {
     x.<!UNRESOLVED_REFERENCE!>x<!> // Bad
@@ -74,15 +74,15 @@ fun test5(x: Any?, q: String?) {
 }
 
 fun test6() {
-    val x: String
+    konst x: String
     // not necessarily initialized in second lambda (may call in any order)
     run2({ x = ""; x.length }, { <!UNINITIALIZED_VARIABLE!>x<!>.length })
     x.length // initialized here
 }
 
 fun test7() {
-    val x: Any? = ""
-    val y: Any?
+    konst x: Any? = ""
+    konst y: Any?
     run2({ y = x }, { })
     if (y is String) {
         x.length // ok - aliased

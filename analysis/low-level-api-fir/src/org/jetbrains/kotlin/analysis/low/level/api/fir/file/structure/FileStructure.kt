@@ -29,31 +29,31 @@ import org.jetbrains.kotlin.fir.correspondingProperty
 import org.jetbrains.kotlin.fir.declarations.impl.FirPrimaryConstructor
 
 internal class FileStructure private constructor(
-    private val ktFile: KtFile,
-    private val firFile: FirFile,
-    private val moduleComponents: LLFirModuleResolveComponents,
+    private konst ktFile: KtFile,
+    private konst firFile: FirFile,
+    private konst moduleComponents: LLFirModuleResolveComponents,
 ) {
     companion object {
         fun build(
             ktFile: KtFile,
             moduleComponents: LLFirModuleResolveComponents,
         ): FileStructure {
-            val firFile = moduleComponents.firFileBuilder.buildRawFirFileWithCaching(ktFile)
+            konst firFile = moduleComponents.firFileBuilder.buildRawFirFileWithCaching(ktFile)
             return FileStructure(ktFile, firFile, moduleComponents)
         }
     }
 
-    private val firProvider = firFile.moduleData.session.firProvider
+    private konst firProvider = firFile.moduleData.session.firProvider
 
-    private val structureElements = ConcurrentHashMap<KtElement, FileStructureElement>()
+    private konst structureElements = ConcurrentHashMap<KtElement, FileStructureElement>()
 
     fun getStructureElementFor(element: KtElement): FileStructureElement {
-        val declaration = getStructureKtElement(element)
-        val container: KtElement
+        konst declaration = getStructureKtElement(element)
+        konst container: KtElement
         if (declaration != null) {
             container = declaration
         } else {
-            val modifierList = PsiTreeUtil.getParentOfType(element, KtModifierList::class.java, false)
+            konst modifierList = PsiTreeUtil.getParentOfType(element, KtModifierList::class.java, false)
             container = if (modifierList != null && modifierList.nextSibling is PsiErrorElement) {
                 modifierList
             } else {
@@ -65,11 +65,11 @@ internal class FileStructure private constructor(
     }
 
     private fun getStructureKtElement(element: KtElement): KtDeclaration? {
-        val container = element.getNonLocalContainingOrThisDeclaration {
+        konst container = element.getNonLocalContainingOrThisDeclaration {
             !it.canBePartOfParentDeclaration
         }
 
-        val resultedContainer = when {
+        konst resultedContainer = when {
             container is KtClassOrObject && container.isInsideSuperClassCall(element) -> {
                 container.primaryConstructor
             }
@@ -89,7 +89,7 @@ internal class FileStructure private constructor(
 
     private fun getStructureElementForDeclaration(declaration: KtElement): FileStructureElement {
         @Suppress("CANNOT_CHECK_FOR_ERASED")
-        val structureElement = structureElements.compute(declaration) { _, structureElement ->
+        konst structureElement = structureElements.compute(declaration) { _, structureElement ->
             when {
                 structureElement == null -> createStructureElement(declaration)
                 structureElement is ReanalyzableStructureElement<KtDeclaration, *> && !structureElement.isUpToDate() -> {
@@ -103,7 +103,7 @@ internal class FileStructure private constructor(
     }
 
     fun getAllDiagnosticsForFile(diagnosticCheckerFilter: DiagnosticCheckerFilter): Collection<KtPsiDiagnostic> {
-        val structureElements = getAllStructureElements()
+        konst structureElements = getAllStructureElements()
 
         return buildList {
             collectDiagnosticsFromStructureElements(structureElements, diagnosticCheckerFilter)
@@ -122,14 +122,14 @@ internal class FileStructure private constructor(
     }
 
     fun getAllStructureElements(): Collection<FileStructureElement> {
-        val structureElements = mutableSetOf(getStructureElementFor(ktFile))
+        konst structureElements = mutableSetOf(getStructureElementFor(ktFile))
         ktFile.accept(object : KtVisitorVoid() {
             override fun visitElement(element: PsiElement) {
                 element.acceptChildren(this)
             }
 
             override fun visitDeclaration(dcl: KtDeclaration) {
-                val structureElement = getStructureElementFor(dcl)
+                konst structureElement = getStructureElementFor(dcl)
                 structureElements += structureElement
                 if (structureElement !is ReanalyzableStructureElement<*, *>) {
                     dcl.acceptChildren(this)
@@ -148,7 +148,7 @@ internal class FileStructure private constructor(
 
 
     private fun createDeclarationStructure(declaration: KtDeclaration): FileStructureElement {
-        val firDeclaration = declaration.findSourceNonLocalFirDeclaration(
+        konst firDeclaration = declaration.findSourceNonLocalFirDeclaration(
             moduleComponents.firFileBuilder,
             firProvider,
             firFile
@@ -156,7 +156,7 @@ internal class FileStructure private constructor(
 
         firDeclaration.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
         if (firDeclaration is FirPrimaryConstructor) {
-            firDeclaration.valueParameters.forEach { parameter ->
+            firDeclaration.konstueParameters.forEach { parameter ->
                 parameter.correspondingProperty?.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
             }
         }
@@ -170,7 +170,7 @@ internal class FileStructure private constructor(
     }
 
     private fun createDanglingModifierListStructure(container: KtElement): FileStructureElement {
-        val firDanglingModifierList = container.findSourceByTraversingWholeTree(
+        konst firDanglingModifierList = container.findSourceByTraversingWholeTree(
             moduleComponents.firFileBuilder,
             firFile,
         ) as? FirDanglingModifierList ?: errorWithFirSpecificEntries("No dangling modifier found", psi = container)
@@ -181,7 +181,7 @@ internal class FileStructure private constructor(
 
     private fun createStructureElement(container: KtElement): FileStructureElement = when {
         container is KtFile -> {
-            val firFile = moduleComponents.firFileBuilder.buildRawFirFileWithCaching(ktFile)
+            konst firFile = moduleComponents.firFileBuilder.buildRawFirFileWithCaching(ktFile)
             firFile.lazyResolveToPhase(FirResolvePhase.IMPORTS)
 
             moduleComponents.firModuleLazyDeclarationResolver.lazyResolve(
@@ -194,6 +194,6 @@ internal class FileStructure private constructor(
         }
         container is KtDeclaration -> createDeclarationStructure(container)
         container is KtModifierList && container.nextSibling is PsiErrorElement -> createDanglingModifierListStructure(container)
-        else -> error("Invalid container $container")
+        else -> error("Inkonstid container $container")
     }
 }

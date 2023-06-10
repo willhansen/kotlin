@@ -5,7 +5,7 @@ interface Addable {
 }
 
 class C : Addable, List<String> {
-    override val size: Int get() = null!!
+    override konst size: Int get() = null!!
     override fun isEmpty(): Boolean = null!!
     override fun contains(o: String): Boolean = null!!
     override fun iterator(): Iterator<String> = null!!
@@ -20,7 +20,7 @@ class C : Addable, List<String> {
 
 fun box(): String {
     try {
-        val a = C()
+        konst a = C()
         if (!a.add("")) return "Fail 1"
         if (!(a as Addable).add("")) return "Fail 2"
         if (!(a as java.util.List<String>).add("")) return "Fail 3"

@@ -22,13 +22,13 @@ object LLFirAnalyzerFacadeFactoryWithPreresolveInReversedOrder : LLFirAnalyzerFa
         diagnosticCheckerFilter: DiagnosticCheckerFilter
     ): LowLevelFirAnalyzerFacade = object : LowLevelFirAnalyzerFacade(firResolveSession, allFirFiles, diagnosticCheckerFilter) {
         override fun runResolution(): List<FirFile> {
-            val allDeclarations = allFirFiles.values.getDeclarationsToResolve().reversed()
+            konst allDeclarations = allFirFiles.konstues.getDeclarationsToResolve().reversed()
             for (declaration in allDeclarations) {
                 declaration.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
                 declaration.checkPhase(FirResolvePhase.BODY_RESOLVE)
             }
 
-            return allFirFiles.values.toList()
+            return allFirFiles.konstues.toList()
         }
     }
 }

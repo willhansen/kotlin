@@ -8,61 +8,61 @@ package runtime.basic.tostring3
 import kotlin.test.*
 
 fun testByte() {
-    val values = ByteArray(2)
-    values[0] = Byte.MIN_VALUE
-    values[1] = Byte.MAX_VALUE
-    for (v in values) {
+    konst konstues = ByteArray(2)
+    konstues[0] = Byte.MIN_VALUE
+    konstues[1] = Byte.MAX_VALUE
+    for (v in konstues) {
         println(v)
     }
 }
 
 fun testShort() {
-    val values = ShortArray(2)
-    values[0] = Short.MIN_VALUE
-    values[1] = Short.MAX_VALUE
-    for (v in values) {
+    konst konstues = ShortArray(2)
+    konstues[0] = Short.MIN_VALUE
+    konstues[1] = Short.MAX_VALUE
+    for (v in konstues) {
         println(v)
     }
 }
 
 fun testInt() {
-    val values = IntArray(2)
-    values[0] = Int.MIN_VALUE
-    values[1] = Int.MAX_VALUE
-    for (v in values) {
+    konst konstues = IntArray(2)
+    konstues[0] = Int.MIN_VALUE
+    konstues[1] = Int.MAX_VALUE
+    for (v in konstues) {
         println(v)
     }
 }
 
 fun testLong() {
-    val values = LongArray(2)
-    values[0] = Long.MIN_VALUE
-    values[1] = Long.MAX_VALUE
-    for (v in values) {
+    konst konstues = LongArray(2)
+    konstues[0] = Long.MIN_VALUE
+    konstues[1] = Long.MAX_VALUE
+    for (v in konstues) {
         println(v)
     }
 }
 
 fun testFloat() {
-    val values = FloatArray(5)
-    values[0] = Float.MIN_VALUE
-    values[1] = Float.MAX_VALUE
-    values[2] = Float.NEGATIVE_INFINITY
-    values[3] = Float.POSITIVE_INFINITY
-    values[4] = Float.NaN
-    for (v in values) {
+    konst konstues = FloatArray(5)
+    konstues[0] = Float.MIN_VALUE
+    konstues[1] = Float.MAX_VALUE
+    konstues[2] = Float.NEGATIVE_INFINITY
+    konstues[3] = Float.POSITIVE_INFINITY
+    konstues[4] = Float.NaN
+    for (v in konstues) {
         println(v)
     }
 }
 
 fun testDouble() {
-    val values = DoubleArray(5)
-    values[0] = Double.MIN_VALUE
-    values[1] = Double.MAX_VALUE
-    values[2] = Double.NEGATIVE_INFINITY
-    values[3] = Double.POSITIVE_INFINITY
-    values[4] = Double.NaN
-    for (v in values) {
+    konst konstues = DoubleArray(5)
+    konstues[0] = Double.MIN_VALUE
+    konstues[1] = Double.MAX_VALUE
+    konstues[2] = Double.NEGATIVE_INFINITY
+    konstues[3] = Double.POSITIVE_INFINITY
+    konstues[4] = Double.NaN
+    for (v in konstues) {
         println(v)
     }
 }

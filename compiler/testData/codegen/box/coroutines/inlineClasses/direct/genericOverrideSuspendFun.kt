@@ -4,7 +4,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 interface Base<T> {
     suspend fun generic(): T
@@ -21,7 +21,7 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var res: String? = null
     builder {
-        val base: Base<*> = Derived()
+        konst base: Base<*> = Derived()
         res = (base.generic() as IC).s
     }
     return res!!

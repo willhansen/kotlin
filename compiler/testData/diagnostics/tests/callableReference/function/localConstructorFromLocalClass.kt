@@ -5,7 +5,7 @@ fun main() {
     class A
     
     class B {
-        val x = ::A
-        val f: KFunction0<A> = x
+        konst x = ::A
+        konst f: KFunction0<A> = x
     }
 }

@@ -35,11 +35,11 @@ public interface IrValueParameterOrBuilder extends
   int getVarargElementType();
 
   /**
-   * <code>optional int32 default_value = 4;</code>
+   * <code>optional int32 default_konstue = 4;</code>
    */
   boolean hasDefaultValue();
   /**
-   * <code>optional int32 default_value = 4;</code>
+   * <code>optional int32 default_konstue = 4;</code>
    */
   int getDefaultValue();
 }

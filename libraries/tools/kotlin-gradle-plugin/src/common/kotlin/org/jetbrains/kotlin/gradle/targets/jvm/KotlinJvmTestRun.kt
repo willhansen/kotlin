@@ -14,30 +14,30 @@ import org.jetbrains.kotlin.gradle.testing.requireCompilationOfTarget
 import kotlin.properties.Delegates
 
 internal class ClasspathOnlyTestRunSource(
-    override val classpath: FileCollection,
-    override val testClassesDirs: FileCollection
+    override konst classpath: FileCollection,
+    override konst testClassesDirs: FileCollection
 ) : JvmClasspathTestRunSource
 
 internal open class JvmCompilationsTestRunSource(
-    val classpathCompilations: Iterable<KotlinJvmCompilation>,
-    val testCompilations: Iterable<KotlinJvmCompilation>
+    konst classpathCompilations: Iterable<KotlinJvmCompilation>,
+    konst testCompilations: Iterable<KotlinJvmCompilation>
 ) : JvmClasspathTestRunSource {
-    private val project get() = testCompilations.first().target.project
+    private konst project get() = testCompilations.first().target.project
 
-    override val testClassesDirs: FileCollection
+    override konst testClassesDirs: FileCollection
         get() = project.files(testCompilations.map { it.output.classesDirs })
 
-    override val classpath: FileCollection
+    override konst classpath: FileCollection
         get() = project.files(
             (testCompilations + classpathCompilations).distinct().map { it.output.allOutputs + it.runtimeDependencyFiles }
         )
 }
 
 internal class SingleJvmCompilationTestRunSource(
-    override val compilation: KotlinJvmCompilation
+    override konst compilation: KotlinJvmCompilation
 ) : JvmCompilationsTestRunSource(listOf(compilation), listOf(compilation)), CompilationExecutionSource<KotlinJvmCompilation>
 
-open class KotlinJvmTestRun(testRunName: String, override val target: KotlinJvmTarget) :
+open class KotlinJvmTestRun(testRunName: String, override konst target: KotlinJvmTarget) :
     KotlinTaskTestRun<JvmClasspathTestRunSource, KotlinJvmTest>(testRunName, target),
     CompilationExecutionSourceSupport<KotlinJvmCompilation>,
     ClasspathTestRunSourceSupport {
@@ -62,9 +62,9 @@ open class KotlinJvmTestRun(testRunName: String, override val target: KotlinJvmT
 
     final override var executionSource: JvmClasspathTestRunSource
         get() = _executionSource
-        private set(value) {
-            setTestTaskClasspathAndClassesDirs(value.classpath, value.testClassesDirs)
-            _executionSource = value
+        private set(konstue) {
+            setTestTaskClasspathAndClassesDirs(konstue.classpath, konstue.testClassesDirs)
+            _executionSource = konstue
         }
 
     private fun setTestTaskClasspathAndClassesDirs(classpath: FileCollection, testClassesDirs: FileCollection) {

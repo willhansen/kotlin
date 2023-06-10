@@ -7,7 +7,7 @@ enum class E {
     };
 }
 
-val foo: Any.() -> Unit = {}
+konst foo: Any.() -> Unit = {}
 
 fun f1() = E.FIRST.foo()
 fun f2() = E.FIRST.(foo)()

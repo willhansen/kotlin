@@ -18,16 +18,16 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirBackingFieldSymbol
 import org.jetbrains.kotlin.name.ClassId
 
 internal class KtFirAnnotationListForDeclaration private constructor(
-    val firSymbol: FirBasedSymbol<*>,
-    private val useSiteSession: FirSession,
-    override val token: KtLifetimeToken,
+    konst firSymbol: FirBasedSymbol<*>,
+    private konst useSiteSession: FirSession,
+    override konst token: KtLifetimeToken,
 ) : KtAnnotationsList() {
-    override val annotations: List<KtAnnotationApplicationWithArgumentsInfo>
+    override konst annotations: List<KtAnnotationApplicationWithArgumentsInfo>
         get() = withValidityAssertion {
             annotations(firSymbol, useSiteSession)
         }
 
-    override val annotationInfos: List<KtAnnotationApplicationInfo>
+    override konst annotationInfos: List<KtAnnotationApplicationInfo>
         get() = withValidityAssertion {
             annotationInfos(firSymbol, useSiteSession)
         }
@@ -43,7 +43,7 @@ internal class KtFirAnnotationListForDeclaration private constructor(
         annotationsByClassId(firSymbol, classId, useSiteTargetFilter, useSiteSession)
     }
 
-    override val annotationClassIds: Collection<ClassId>
+    override konst annotationClassIds: Collection<ClassId>
         get() = withValidityAssertion {
             annotationClassIds(firSymbol, useSiteSession)
         }

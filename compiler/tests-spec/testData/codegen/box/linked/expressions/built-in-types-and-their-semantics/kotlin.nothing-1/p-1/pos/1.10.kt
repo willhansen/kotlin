@@ -12,7 +12,7 @@
 
 fun box(): String {
     var name: Any? = null
-    val men = arrayListOf(Man("Phill"), Man())
+    konst men = arrayListOf(Man("Phill"), Man())
     loop@ for (i in men) {
         name = i.name ?: break@loop
     }

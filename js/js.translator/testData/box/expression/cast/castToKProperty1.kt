@@ -4,7 +4,7 @@ package foo
 import kotlin.reflect.KProperty1
 
 class A {
-    val x = 23
+    konst x = 23
 }
 
 fun box(): String {

@@ -11,7 +11,7 @@ interface IFoo
 object FooImpl : IFoo
 
 @JvmInline
-value class Test1(val x: Any) : <!VALUE_CLASS_CANNOT_IMPLEMENT_INTERFACE_BY_DELEGATION!>IFoo<!> by FooImpl
+konstue class Test1(konst x: Any) : <!VALUE_CLASS_CANNOT_IMPLEMENT_INTERFACE_BY_DELEGATION!>IFoo<!> by FooImpl
 
 @JvmInline
-value class Test2(val x: IFoo) : IFoo by x
+konstue class Test2(konst x: IFoo) : IFoo by x

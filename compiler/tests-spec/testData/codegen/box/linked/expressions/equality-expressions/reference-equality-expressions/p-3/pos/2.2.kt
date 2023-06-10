@@ -23,13 +23,13 @@ fun box(): String {
     if (null !== JavaClass.NULL_VALUE) return "NOK"
     if (JavaClass.NULL_VALUE !== null) return "NOK"
 
-    val x = null
+    konst x = null
     if (null !== x) return "NOK"
     if (x !== null) return "NOK"
 
     if (null !== null) return "NOK"
 
-    val s: String? = null
+    konst s: String? = null
     if (s !== JavaClass.NULL_VALUE) return "NOK"
     if (JavaClass.NULL_VALUE !== s) return "NOK"
 

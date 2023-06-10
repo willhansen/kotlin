@@ -5,7 +5,7 @@ class Flaf {
   // CHECK:
   //   Mangled name: Flaf{}javaName
   //   Public signature: /Flaf.javaName|-8684515170534215532[0]
-  val javaName: String
+  konst javaName: String
     // CHECK JVM_IR:
     //   Mangled name: Flaf#<get-javaName>(){}kotlin.String
     //   Public signature: /Flaf.javaName.<get-javaName>|-917464454700477406[0]
@@ -17,7 +17,7 @@ class Flaf {
   // CHECK:
   //   Mangled name: Flaf{}INSTANCES
   //   Public signature: /Flaf.INSTANCES|1897835723956041094[0]
-  private val INSTANCES: MutableMap<String, Flaf>
+  private konst INSTANCES: MutableMap<String, Flaf>
     // CHECK JVM_IR:
     //   Mangled name: Flaf#<get-INSTANCES>(){}kotlin.collections.MutableMap<kotlin.String,Flaf>
     //   Public signature: /Flaf.INSTANCES.<get-INSTANCES>|-852664816279800923[0]

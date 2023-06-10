@@ -29,14 +29,14 @@ import org.jetbrains.kotlin.utils.addToStdlib.runIf
 import org.jetbrains.kotlin.utils.addToStdlib.shouldNotBeCalled
 
 class ConeEffectExtractor(
-    private val session: FirSession,
-    private val owner: FirContractDescriptionOwner,
-    private val valueParameters: List<FirValueParameter>
+    private konst session: FirSession,
+    private konst owner: FirContractDescriptionOwner,
+    private konst konstueParameters: List<FirValueParameter>
 ) : FirDefaultVisitor<ConeContractDescriptionElement, Nothing?>() {
     companion object {
-        private val BOOLEAN_AND = FirContractsDslNames.id("kotlin", "Boolean", "and")
-        private val BOOLEAN_OR = FirContractsDslNames.id("kotlin", "Boolean", "or")
-        private val BOOLEAN_NOT = FirContractsDslNames.id("kotlin", "Boolean", "not")
+        private konst BOOLEAN_AND = FirContractsDslNames.id("kotlin", "Boolean", "and")
+        private konst BOOLEAN_OR = FirContractsDslNames.id("kotlin", "Boolean", "or")
+        private konst BOOLEAN_NOT = FirContractsDslNames.id("kotlin", "Boolean", "not")
     }
 
     private fun ConeContractDescriptionError.asElement(): KtErroneousContractElement<ConeKotlinType, ConeDiagnostic> {
@@ -52,28 +52,28 @@ class ConeEffectExtractor(
     }
 
     override fun visitFunctionCall(functionCall: FirFunctionCall, data: Nothing?): ConeContractDescriptionElement {
-        val resolvedId = functionCall.toResolvedCallableSymbol()?.callableId
+        konst resolvedId = functionCall.toResolvedCallableSymbol()?.callableId
             ?: return ConeContractDescriptionError.UnresolvedCall(functionCall.calleeReference.name).asElement()
 
         return when (resolvedId) {
             FirContractsDslNames.IMPLIES -> {
-                val effect = functionCall.explicitReceiver?.asContractElement() as? ConeEffectDeclaration ?: noReceiver(resolvedId)
-                val condition = functionCall.argument.asContractElement() as? ConeBooleanExpression ?: noArgument(resolvedId)
+                konst effect = functionCall.explicitReceiver?.asContractElement() as? ConeEffectDeclaration ?: noReceiver(resolvedId)
+                konst condition = functionCall.argument.asContractElement() as? ConeBooleanExpression ?: noArgument(resolvedId)
                 ConeConditionalEffectDeclaration(effect, condition)
             }
 
             FirContractsDslNames.RETURNS -> {
-                val argument = functionCall.arguments.firstOrNull()
-                val value = if (argument == null) {
+                konst argument = functionCall.arguments.firstOrNull()
+                konst konstue = if (argument == null) {
                     ConeContractConstantValues.WILDCARD
                 } else {
-                    when (val value = argument.asContractElement()) {
-                        is ConeConstantReference -> value
-                        else -> KtErroneousConstantReference(ConeContractDescriptionError.NotAConstant(value))
+                    when (konst konstue = argument.asContractElement()) {
+                        is ConeConstantReference -> konstue
+                        else -> KtErroneousConstantReference(ConeContractDescriptionError.NotAConstant(konstue))
                     }
                 }
                 @Suppress("UNCHECKED_CAST")
-                KtReturnsEffectDeclaration(value as ConeConstantReference)
+                KtReturnsEffectDeclaration(konstue as ConeConstantReference)
             }
 
             FirContractsDslNames.RETURNS_NOT_NULL -> {
@@ -81,10 +81,10 @@ class ConeEffectExtractor(
             }
 
             FirContractsDslNames.CALLS_IN_PLACE -> {
-                val reference = functionCall.arguments[0].asContractValueExpression()
-                when (val argument = functionCall.arguments.getOrNull(1)) {
+                konst reference = functionCall.arguments[0].asContractValueExpression()
+                when (konst argument = functionCall.arguments.getOrNull(1)) {
                     null -> ConeCallsEffectDeclaration(reference, EventOccurrencesRange.UNKNOWN)
-                    else -> when (val kind = argument.parseInvocationKind()) {
+                    else -> when (konst kind = argument.parseInvocationKind()) {
                         null -> KtErroneousCallsEffectDeclaration(reference, ConeContractDescriptionError.UnresolvedInvocationKind(argument))
                         else -> ConeCallsEffectDeclaration(reference, kind)
                     }
@@ -92,9 +92,9 @@ class ConeEffectExtractor(
             }
 
             BOOLEAN_AND, BOOLEAN_OR -> {
-                val left = functionCall.explicitReceiver?.asContractBooleanExpression() ?: noReceiver(resolvedId)
-                val right = functionCall.arguments.firstOrNull()?.asContractBooleanExpression() ?: noArgument(resolvedId)
-                val kind = when (resolvedId) {
+                konst left = functionCall.explicitReceiver?.asContractBooleanExpression() ?: noReceiver(resolvedId)
+                konst right = functionCall.arguments.firstOrNull()?.asContractBooleanExpression() ?: noArgument(resolvedId)
+                konst kind = when (resolvedId) {
                     BOOLEAN_AND -> LogicOperationKind.AND
                     BOOLEAN_OR -> LogicOperationKind.OR
                     else -> shouldNotBeCalled()
@@ -103,7 +103,7 @@ class ConeEffectExtractor(
             }
 
             BOOLEAN_NOT -> {
-                val arg = functionCall.explicitReceiver?.asContractBooleanExpression() ?: noReceiver(resolvedId)
+                konst arg = functionCall.explicitReceiver?.asContractBooleanExpression() ?: noReceiver(resolvedId)
                 ConeLogicalNot(arg)
             }
 
@@ -115,23 +115,23 @@ class ConeEffectExtractor(
         binaryLogicExpression: FirBinaryLogicExpression,
         data: Nothing?
     ): ConeContractDescriptionElement {
-        val left = binaryLogicExpression.leftOperand.asContractBooleanExpression()
-        val right = binaryLogicExpression.rightOperand.asContractBooleanExpression()
+        konst left = binaryLogicExpression.leftOperand.asContractBooleanExpression()
+        konst right = binaryLogicExpression.rightOperand.asContractBooleanExpression()
         return ConeBinaryLogicExpression(left, right, binaryLogicExpression.kind)
     }
 
     override fun visitEqualityOperatorCall(equalityOperatorCall: FirEqualityOperatorCall, data: Nothing?): ConeContractDescriptionElement {
-        val isNegated = when (val operation = equalityOperatorCall.operation) {
+        konst isNegated = when (konst operation = equalityOperatorCall.operation) {
             FirOperation.EQ -> false
             FirOperation.NOT_EQ -> true
             else -> return ConeContractDescriptionError.IllegalEqualityOperator(operation).asElement()
         }
 
-        val argument = equalityOperatorCall.arguments[1]
-        val const = argument as? FirConstExpression<*> ?: return ConeContractDescriptionError.NotAConstant(argument).asElement()
+        konst argument = equalityOperatorCall.arguments[1]
+        konst const = argument as? FirConstExpression<*> ?: return ConeContractDescriptionError.NotAConstant(argument).asElement()
         if (const.kind != ConstantValueKind.Null) return ConeContractDescriptionError.IllegalConst(const, onlyNullAllowed = true).asElement()
 
-        val arg = equalityOperatorCall.arguments[0].asContractValueExpression()
+        konst arg = equalityOperatorCall.arguments[0].asContractValueExpression()
         return ConeIsNullPredicate(arg, isNegated)
     }
 
@@ -143,21 +143,21 @@ class ConeEffectExtractor(
         qualifiedAccessExpression: FirQualifiedAccessExpression,
         data: Nothing?
     ): ConeContractDescriptionElement {
-        val symbol = qualifiedAccessExpression.toResolvedCallableSymbol()
+        konst symbol = qualifiedAccessExpression.toResolvedCallableSymbol()
             ?: run {
-                val name = (qualifiedAccessExpression.calleeReference as? FirNamedReference)?.name ?: Name.special("unresolved")
+                konst name = (qualifiedAccessExpression.calleeReference as? FirNamedReference)?.name ?: Name.special("unresolved")
                 return ConeContractDescriptionError.UnresolvedCall(name).asElement()
             }
-        val parameter = symbol.fir as? FirValueParameter
+        konst parameter = symbol.fir as? FirValueParameter
             ?: return KtErroneousValueParameterReference(
-                ConeContractDescriptionError.IllegalParameter(symbol, "$symbol is not a value parameter")
+                ConeContractDescriptionError.IllegalParameter(symbol, "$symbol is not a konstue parameter")
             )
-        val index = valueParameters.indexOf(parameter).takeUnless { it < 0 } ?: return KtErroneousValueParameterReference(
+        konst index = konstueParameters.indexOf(parameter).takeUnless { it < 0 } ?: return KtErroneousValueParameterReference(
             ConeContractDescriptionError.IllegalParameter(symbol, "Value paramter $symbol is not found in parameters of outer function")
         )
-        val type = parameter.returnTypeRef.coneType
+        konst type = parameter.returnTypeRef.coneType
 
-        val name = parameter.name.asString()
+        konst name = parameter.name.asString()
         return toValueParameterReference(type, index, name)
     }
 
@@ -188,13 +188,13 @@ class ConeEffectExtractor(
         thisReceiverExpression: FirThisReceiverExpression,
         data: Nothing?
     ): ConeContractDescriptionElement {
-        val declaration = thisReceiverExpression.calleeReference.boundSymbol?.fir
+        konst declaration = thisReceiverExpression.calleeReference.boundSymbol?.fir
             ?: return ConeContractDescriptionError.UnresolvedThis(thisReceiverExpression).asElement()
-        val callableOwner = owner as? FirCallableDeclaration
-        val ownerHasReceiver = callableOwner?.receiverParameter != null
-        val ownerIsMemberOfDeclaration = callableOwner?.getContainingClass(session) == declaration
+        konst callableOwner = owner as? FirCallableDeclaration
+        konst ownerHasReceiver = callableOwner?.receiverParameter != null
+        konst ownerIsMemberOfDeclaration = callableOwner?.getContainingClass(session) == declaration
         return if (declaration == owner || owner.isAccessorOf(declaration) || ownerIsMemberOfDeclaration && !ownerHasReceiver) {
-            val type = thisReceiverExpression.typeRef.coneType
+            konst type = thisReceiverExpression.typeRef.coneType
             toValueParameterReference(type, -1, "this")
         } else {
             ConeContractDescriptionError.IllegalThis(thisReceiverExpression).asElement()
@@ -204,7 +204,7 @@ class ConeEffectExtractor(
     override fun <T> visitConstExpression(constExpression: FirConstExpression<T>, data: Nothing?): ConeContractDescriptionElement {
         return when (constExpression.kind) {
             ConstantValueKind.Null -> ConeContractConstantValues.NULL
-            ConstantValueKind.Boolean -> when (constExpression.value as Boolean) {
+            ConstantValueKind.Boolean -> when (constExpression.konstue as Boolean) {
                 true -> ConeContractConstantValues.TRUE
                 false -> ConeContractConstantValues.FALSE
             }
@@ -213,11 +213,11 @@ class ConeEffectExtractor(
     }
 
     override fun visitTypeOperatorCall(typeOperatorCall: FirTypeOperatorCall, data: Nothing?): ConeContractDescriptionElement {
-        val arg = typeOperatorCall.argument.asContractValueExpression()
-        val type = typeOperatorCall.conversionTypeRef.coneType.fullyExpandedType(session)
-        val isNegated = typeOperatorCall.operation == FirOperation.NOT_IS
-        val diagnostic = (type.toSymbol(session) as? FirTypeParameterSymbol)?.let { typeParameterSymbol ->
-            val typeParametersOfOwner = (owner as? FirTypeParameterRefsOwner)?.typeParameters.orEmpty()
+        konst arg = typeOperatorCall.argument.asContractValueExpression()
+        konst type = typeOperatorCall.conversionTypeRef.coneType.fullyExpandedType(session)
+        konst isNegated = typeOperatorCall.operation == FirOperation.NOT_IS
+        konst diagnostic = (type.toSymbol(session) as? FirTypeParameterSymbol)?.let { typeParameterSymbol ->
+            konst typeParametersOfOwner = (owner as? FirTypeParameterRefsOwner)?.typeParameters.orEmpty()
             if (typeParametersOfOwner.none { it is FirTypeParameter && it.symbol == typeParameterSymbol }) {
                 return@let ConeContractDescriptionError.NotSelfTypeParameter(typeParameterSymbol)
             }
@@ -233,7 +233,7 @@ class ConeEffectExtractor(
 
     private fun FirExpression.parseInvocationKind(): EventOccurrencesRange? {
         if (this !is FirQualifiedAccessExpression) return null
-        val resolvedId = toResolvedCallableSymbol()?.callableId ?: return null
+        konst resolvedId = toResolvedCallableSymbol()?.callableId ?: return null
         return when (resolvedId) {
             FirContractsDslNames.EXACTLY_ONCE_KIND -> EventOccurrencesRange.EXACTLY_ONCE
             FirContractsDslNames.AT_LEAST_ONCE_KIND -> EventOccurrencesRange.AT_LEAST_ONCE
@@ -256,14 +256,14 @@ class ConeEffectExtractor(
     }
 
     private fun FirExpression.asContractBooleanExpression(): ConeBooleanExpression {
-        return when (val element = asContractElement()) {
+        return when (konst element = asContractElement()) {
             is ConeBooleanExpression -> element
             else -> ConeContractDescriptionError.NotABooleanExpression(element).asElement()
         }
     }
 
     private fun FirExpression.asContractValueExpression(): ConeValueParameterReference {
-        return when (val element = asContractElement()) {
+        return when (konst element = asContractElement()) {
             is ConeValueParameterReference -> element
             else -> KtErroneousValueParameterReference(ConeContractDescriptionError.NotAParameterReference(element))
         }

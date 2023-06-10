@@ -1,2 +1,2 @@
 
-val ok = "OK"
+konst ok = "OK"

@@ -1,6 +1,6 @@
 
 class C {
-    val length = 54
+    konst length = 54
 }
 
 fun test(): Int {

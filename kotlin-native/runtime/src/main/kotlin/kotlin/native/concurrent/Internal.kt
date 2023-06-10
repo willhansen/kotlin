@@ -42,7 +42,7 @@ external internal fun versionToken(): Int
 @ObsoleteWorkersApi
 internal fun executeImpl(worker: Worker, mode: TransferMode, producer: () -> Any?,
                          job: CPointer<CFunction<*>>): Future<Any?> =
-        Future<Any?>(executeInternal(worker.id, mode.value, producer, job))
+        Future<Any?>(executeInternal(worker.id, mode.konstue, producer, job))
 
 @GCUnsafeCall("Kotlin_Worker_startInternal")
 @ObsoleteWorkersApi
@@ -94,8 +94,8 @@ internal fun ThrowCannotTransferOwnership(): Unit =
 
 @ExportForCppRuntime
 @ObsoleteWorkersApi
-internal fun ThrowFutureInvalidState(): Unit =
-        throw IllegalStateException("Future is in an invalid state")
+internal fun ThrowFutureInkonstidState(): Unit =
+        throw IllegalStateException("Future is in an inkonstid state")
 
 @ExportForCppRuntime
 @ObsoleteWorkersApi
@@ -132,15 +132,15 @@ internal fun ThrowFreezingException(toFreeze: Any, blocker: Any): Nothing =
 @ExportForCppRuntime
 @FreezingIsDeprecated
 @OptIn(ExperimentalNativeApi::class)
-internal fun ThrowInvalidMutabilityException(where: Any): Nothing {
-    val description = debugDescription(where::class, where.identityHashCode())
-    throw InvalidMutabilityException("mutation attempt of frozen $description")
+internal fun ThrowInkonstidMutabilityException(where: Any): Nothing {
+    konst description = debugDescription(where::class, where.identityHashCode())
+    throw InkonstidMutabilityException("mutation attempt of frozen $description")
 }
 
 @ExportForCppRuntime
 @FreezingIsDeprecated
 internal fun ThrowIllegalObjectSharingException(typeInfo: NativePtr, address: NativePtr) {
-    val description = DescribeObjectForDebugging(typeInfo, address)
+    konst description = DescribeObjectForDebugging(typeInfo, address)
     throw IncorrectDereferenceException("illegal attempt to access non-shared $description from other thread")
 }
 

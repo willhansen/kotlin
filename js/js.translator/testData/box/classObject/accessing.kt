@@ -1,11 +1,11 @@
 // EXPECTED_REACHABLE_NODES: 1292
-// KT-4130 object fields are not evaluated correctly
+// KT-4130 object fields are not ekonstuated correctly
 
 package foo
 
 class Foo() {
     companion object {
-        val bar = "Foo.bar ";
+        konst bar = "Foo.bar ";
         var boo = "FAIL";
         fun baz() = "Foo.baz() "
 
@@ -19,12 +19,12 @@ class Foo() {
         }
     }
 
-    val a = bar
-    val b = Foo.bar
-    val c = baz()
-    val d = Foo.baz()
-    val e: String
-    val f: String
+    konst a = bar
+    konst b = Foo.bar
+    konst c = baz()
+    konst d = Foo.baz()
+    konst e: String
+    konst f: String
 
     init {
         e = bar
@@ -38,7 +38,7 @@ fun box(): String {
     assertEquals("Foo.baz() Foo.bar Implicit", Foo.testImplicitThis(), "testImplicitThis")
     assertEquals("Foo.baz() Foo.bar Explicit", Foo.testExplicitThis(), "testExplicitThis")
 
-    val foo = Foo()
+    konst foo = Foo()
     assertEquals("Foo.bar ", foo.a, "foo.a")
     assertEquals("Foo.bar ", foo.b, "foo.b")
     assertEquals("Foo.baz() ", foo.c, "foo.c")

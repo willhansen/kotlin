@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 abstract class Fir2IrBindableSymbol<out D : DeclarationDescriptor, B : IrDeclaration>(
-    override val signature: IdSignature,
+    override konst signature: IdSignature,
 ) : IrBindableSymbol<D, B> {
 
     private var _owner: B? = null
-    override val owner: B
+    override konst owner: B
         get() = _owner ?: throw IllegalStateException("Symbol is unbound")
 
     override fun bind(owner: B) {
@@ -30,16 +30,16 @@ abstract class Fir2IrBindableSymbol<out D : DeclarationDescriptor, B : IrDeclara
         }
     }
 
-    override val isBound: Boolean
+    override konst isBound: Boolean
         get() = _owner != null
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: D
+    override konst descriptor: D
         @Suppress("UNCHECKED_CAST")
         get() = owner.toIrBasedDescriptor() as D
 
     @ObsoleteDescriptorBasedAPI
-    override val hasDescriptor: Boolean
+    override konst hasDescriptor: Boolean
         get() = false
 
     override var privateSignature: IdSignature? = null

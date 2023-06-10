@@ -37,9 +37,9 @@ class AndroidExtensionPropertiesCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         reportOn as? KtExpression ?: return
 
-        val propertyDescriptor = resolvedCall.resultingDescriptor as? PropertyDescriptor ?: return
-        val containingPackage = propertyDescriptor.containingDeclaration as? AndroidSyntheticPackageFragmentDescriptor ?: return
-        val androidSyntheticProperty = propertyDescriptor as? AndroidSyntheticProperty ?: return
+        konst propertyDescriptor = resolvedCall.resultingDescriptor as? PropertyDescriptor ?: return
+        konst containingPackage = propertyDescriptor.containingDeclaration as? AndroidSyntheticPackageFragmentDescriptor ?: return
+        konst androidSyntheticProperty = propertyDescriptor as? AndroidSyntheticProperty ?: return
 
         with(context.trace) {
             checkUnresolvedWidgetType(reportOn, androidSyntheticProperty)
@@ -56,9 +56,9 @@ class AndroidExtensionPropertiesCallChecker : CallChecker {
 
     private fun DiagnosticSink.checkUnresolvedWidgetType(expression: KtExpression, property: AndroidSyntheticProperty) {
         if (!property.isErrorType) return
-        val type = property.errorType ?: return
+        konst type = property.errorType ?: return
 
-        val warning = if (type.contains('.')) SYNTHETIC_UNRESOLVED_WIDGET_TYPE else SYNTHETIC_INVALID_WIDGET_TYPE
+        konst warning = if (type.contains('.')) SYNTHETIC_UNRESOLVED_WIDGET_TYPE else SYNTHETIC_INVALID_WIDGET_TYPE
         report(warning.on(expression, type))
     }
 
@@ -68,16 +68,16 @@ class AndroidExtensionPropertiesCallChecker : CallChecker {
             context: CallCheckerContext
     ) {
         if (!property.resource.partiallyDefined) return
-        val calleeExpression = resolvedCall.call.calleeExpression ?: return
+        konst calleeExpression = resolvedCall.call.calleeExpression ?: return
 
-        val expectedType = context.resolutionContext.expectedType
+        konst expectedType = context.resolutionContext.expectedType
         if (!TypeUtils.noExpectedType(expectedType) && !expectedType.isMarkedNullable && !expectedType.isFlexible()) {
             report(UNSAFE_CALL_ON_PARTIALLY_DEFINED_RESOURCE.on(calleeExpression))
             return
         }
 
-        val outermostQualifiedExpression = findLeftOutermostQualifiedExpression(calleeExpression) ?: return
-        val usage = outermostQualifiedExpression.parent
+        konst outermostQualifiedExpression = findLeftOutermostQualifiedExpression(calleeExpression) ?: return
+        konst usage = outermostQualifiedExpression.parent
 
         if (usage is KtDotQualifiedExpression && usage.receiverExpression == outermostQualifiedExpression) {
             report(UNSAFE_CALL_ON_PARTIALLY_DEFINED_RESOURCE.on(calleeExpression))
@@ -85,7 +85,7 @@ class AndroidExtensionPropertiesCallChecker : CallChecker {
     }
 
     private fun findLeftOutermostQualifiedExpression(calleeExpression: KtExpression?): KtElement? {
-        val parent = calleeExpression?.parent ?: return null
+        konst parent = calleeExpression?.parent ?: return null
 
         if (parent is KtQualifiedExpression && parent.selectorExpression == calleeExpression) {
             return findLeftOutermostQualifiedExpression(parent)

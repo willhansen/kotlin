@@ -117,7 +117,7 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResult.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] fun bar(): Foo<String>? { LAZY_BLOCK }
     public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(RAW_FIR)] lval x: <implicit> = bar#()
+        [ResolvedTo(RAW_FIR)] lkonst x: <implicit> = bar#()
     }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
@@ -131,7 +131,7 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResult.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] fun bar(): Foo<String>? { LAZY_BLOCK }
     public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(RAW_FIR)] lval x: <implicit> = bar#()
+        [ResolvedTo(RAW_FIR)] lkonst x: <implicit> = bar#()
     }
 
 ANNOTATIONS_ARGUMENTS_MAPPING:
@@ -145,7 +145,7 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResult.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] fun bar(): Foo<String>? { LAZY_BLOCK }
     public final [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(RAW_FIR)] lval x: <implicit> = bar#()
+        [ResolvedTo(RAW_FIR)] lkonst x: <implicit> = bar#()
     }
 
 BODY_RESOLVE:
@@ -161,7 +161,7 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResult.kt
         ^bar Null(null)
     }
     public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(BODY_RESOLVE)] lval x: R|Foo<kotlin/String>?| = R|/bar|()
+        [ResolvedTo(BODY_RESOLVE)] lkonst x: R|Foo<kotlin/String>?| = R|/bar|()
     }
 
 FILE RAW TO BODY:
@@ -177,5 +177,5 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResult.kt
         ^bar Null(null)
     }
     public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(BODY_RESOLVE)] lval x: R|Foo<kotlin/String>?| = R|/bar|()
+        [ResolvedTo(BODY_RESOLVE)] lkonst x: R|Foo<kotlin/String>?| = R|/bar|()
     }

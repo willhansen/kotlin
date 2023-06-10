@@ -10,30 +10,30 @@ import java.io.File
 import java.io.Serializable
 
 sealed interface IdeaKpmLanguageSettings : Serializable {
-    val languageVersion: String?
-    val apiVersion: String?
-    val isProgressiveMode: Boolean
-    val enabledLanguageFeatures: Set<String>
-    val optInAnnotationsInUse: Set<String>
-    val compilerPluginArguments: List<String>
-    val compilerPluginClasspath: List<File>
-    val freeCompilerArgs: List<String>
+    konst languageVersion: String?
+    konst apiVersion: String?
+    konst isProgressiveMode: Boolean
+    konst enabledLanguageFeatures: Set<String>
+    konst optInAnnotationsInUse: Set<String>
+    konst compilerPluginArguments: List<String>
+    konst compilerPluginClasspath: List<File>
+    konst freeCompilerArgs: List<String>
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmLanguageSettingsImpl(
-    override val languageVersion: String?,
-    override val apiVersion: String?,
-    override val isProgressiveMode: Boolean,
-    override val enabledLanguageFeatures: Set<String>,
-    override val optInAnnotationsInUse: Set<String>,
-    override val compilerPluginArguments: List<String>,
-    override val compilerPluginClasspath: List<File>,
-    override val freeCompilerArgs: List<String>
+    override konst languageVersion: String?,
+    override konst apiVersion: String?,
+    override konst isProgressiveMode: Boolean,
+    override konst enabledLanguageFeatures: Set<String>,
+    override konst optInAnnotationsInUse: Set<String>,
+    override konst compilerPluginArguments: List<String>,
+    override konst compilerPluginClasspath: List<File>,
+    override konst freeCompilerArgs: List<String>
 ) : IdeaKpmLanguageSettings {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

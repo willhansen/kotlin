@@ -5,7 +5,7 @@
 package org.jetbrains.kotlin.backend.konan
 
 // Must match `RuntimeAssertsMode` in CompilerConstants.hpp
-enum class RuntimeAssertsMode(val value: Int) {
+enum class RuntimeAssertsMode(konst konstue: Int) {
     IGNORE(0),
     LOG(1),
     PANIC(2),

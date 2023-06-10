@@ -10,7 +10,7 @@ object IdeaExtrasProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,34 +29,34 @@ object IdeaExtrasProtoKt {
     @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
     class ValuesProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
-     val values: com.google.protobuf.kotlin.DslMap<kotlin.String, com.google.protobuf.ByteString, ValuesProxy>
+     konst konstues: com.google.protobuf.kotlin.DslMap<kotlin.String, com.google.protobuf.ByteString, ValuesProxy>
       @kotlin.jvm.JvmSynthetic
       @JvmName("getValuesMap")
       get() = com.google.protobuf.kotlin.DslMap(
         _builder.getValuesMap()
       )
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     @JvmName("putValues")
     fun com.google.protobuf.kotlin.DslMap<kotlin.String, com.google.protobuf.ByteString, ValuesProxy>
-      .put(key: kotlin.String, value: com.google.protobuf.ByteString) {
-         _builder.putValues(key, value)
+      .put(key: kotlin.String, konstue: com.google.protobuf.ByteString) {
+         _builder.putValues(key, konstue)
        }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     @kotlin.jvm.JvmSynthetic
     @JvmName("setValues")
     @Suppress("NOTHING_TO_INLINE")
     inline operator fun com.google.protobuf.kotlin.DslMap<kotlin.String, com.google.protobuf.ByteString, ValuesProxy>
-      .set(key: kotlin.String, value: com.google.protobuf.ByteString) {
-         put(key, value)
+      .set(key: kotlin.String, konstue: com.google.protobuf.ByteString) {
+         put(key, konstue)
        }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     @kotlin.jvm.JvmSynthetic
     @JvmName("removeValues")
@@ -65,7 +65,7 @@ object IdeaExtrasProtoKt {
          _builder.removeValues(key)
        }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     @kotlin.jvm.JvmSynthetic
     @JvmName("putAllValues")
@@ -74,7 +74,7 @@ object IdeaExtrasProtoKt {
          _builder.putAllValues(map)
        }
     /**
-     * <code>map&lt;string, bytes&gt; values = 1;</code>
+     * <code>map&lt;string, bytes&gt; konstues = 1;</code>
      */
     @kotlin.jvm.JvmSynthetic
     @JvmName("clearValues")

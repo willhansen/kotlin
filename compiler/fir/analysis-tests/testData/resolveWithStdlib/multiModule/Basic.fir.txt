@@ -7,7 +7,7 @@ FILE: base.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val msg: R|kotlin/String| = R|<local>/msg|
+        public final konst msg: R|kotlin/String| = R|<local>/msg|
             public get(): R|kotlin/String|
 
     }
@@ -16,7 +16,7 @@ FILE: base.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val set: R|java/util/Set<*>| = R|<local>/set|
+        public final konst set: R|java/util/Set<*>| = R|<local>/set|
             public get(): R|java/util/Set<*>|
 
     }

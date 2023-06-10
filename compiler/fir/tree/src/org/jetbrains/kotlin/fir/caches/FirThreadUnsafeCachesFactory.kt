@@ -31,8 +31,8 @@ object FirThreadUnsafeCachesFactory : FirCachesFactory() {
 
 @Suppress("UNCHECKED_CAST")
 private class FirThreadUnsafeCache<K : Any, V, CONTEXT>(
-    private val map: NullableMap<K, V> = NullableMap<K, V>(),
-    private val createValue: (K, CONTEXT) -> V
+    private konst map: NullableMap<K, V> = NullableMap<K, V>(),
+    private konst createValue: (K, CONTEXT) -> V
 ) : FirCache<K, V, CONTEXT>() {
 
     override fun getValue(key: K, context: CONTEXT): V =
@@ -48,14 +48,14 @@ private class FirThreadUnsafeCache<K : Any, V, CONTEXT>(
 
 
 private class FirThreadUnsafeCacheWithPostCompute<K : Any, V, CONTEXT, DATA>(
-    private val createValue: (K, CONTEXT) -> Pair<V, DATA>,
-    private val postCompute: (K, V, DATA) -> Unit
+    private konst createValue: (K, CONTEXT) -> Pair<V, DATA>,
+    private konst postCompute: (K, V, DATA) -> Unit
 ) : FirCache<K, V, CONTEXT>() {
-    private val map = NullableMap<K, V>()
+    private konst map = NullableMap<K, V>()
 
     override fun getValue(key: K, context: CONTEXT): V =
         map.getOrElse(key) {
-            val (createdValue, data) = createValue(key, context)
+            konst (createdValue, data) = createValue(key, context)
             map[key] = createdValue
             postCompute(key, createdValue, data)
             createdValue
@@ -68,6 +68,6 @@ private class FirThreadUnsafeCacheWithPostCompute<K : Any, V, CONTEXT, DATA>(
 }
 
 private class FirThreadUnsafeValue<V>(createValue: () -> V) : FirLazyValue<V>() {
-    private val lazyValue by lazy(LazyThreadSafetyMode.NONE, createValue)
+    private konst lazyValue by lazy(LazyThreadSafetyMode.NONE, createValue)
     override fun getValue(): V = lazyValue
 }

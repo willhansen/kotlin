@@ -34,7 +34,7 @@ internal object LLFirAnnotationArgumentsLazyResolver : LLFirLazyResolver(FirReso
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirAnnotationArgumentsTargetResolver(target, lockProvider, session, scopeSession)
+        konst resolver = LLFirAnnotationArgumentsTargetResolver(target, lockProvider, session, scopeSession)
         resolver.resolveDesignation()
     }
 
@@ -44,7 +44,7 @@ internal object LLFirAnnotationArgumentsLazyResolver : LLFirLazyResolver(FirReso
 
     override fun checkIsResolved(target: FirElementWithResolveState) {
         if (target !is FirAnnotationContainer) return
-        val unresolvedAnnotation = target.annotations.firstOrNull { it.annotationTypeRef !is FirResolvedTypeRef }
+        konst unresolvedAnnotation = target.annotations.firstOrNull { it.annotationTypeRef !is FirResolvedTypeRef }
         check(unresolvedAnnotation == null) {
             "Unexpected annotationTypeRef annotation, expected resolvedType but actual ${unresolvedAnnotation?.annotationTypeRef}"
         }
@@ -52,7 +52,7 @@ internal object LLFirAnnotationArgumentsLazyResolver : LLFirLazyResolver(FirReso
         target.checkPhase(resolverPhase)
 
         for (annotation in target.annotations) {
-            for (argument in annotation.argumentMapping.mapping.values) {
+            for (argument in annotation.argumentMapping.mapping.konstues) {
                 checkTypeRefIsResolved(argument.typeRef, "annotation argument", target) {
                     withFirEntry("firAnnotation", annotation)
                     withFirEntry("firArgument", argument)
@@ -75,7 +75,7 @@ private class LLFirAnnotationArgumentsTargetResolver(
     scopeSession,
     FirResolvePhase.ARGUMENTS_OF_ANNOTATIONS,
 ) {
-    override val transformer = FirAnnotationArgumentsResolveTransformer(
+    override konst transformer = FirAnnotationArgumentsResolveTransformer(
         session,
         scopeSession,
         resolverPhase,
@@ -104,7 +104,7 @@ internal fun FirAbstractBodyResolveTransformerDispatcher.transformAnnotations(ta
     }
 }
 
-internal val FirElementWithResolveState.isRegularDeclarationWithAnnotation: Boolean
+internal konst FirElementWithResolveState.isRegularDeclarationWithAnnotation: Boolean
     get() = when (this) {
         is FirCallableDeclaration,
         is FirAnonymousInitializer,

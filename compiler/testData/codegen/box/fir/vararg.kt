@@ -3,7 +3,7 @@
 // (type mismatch)
 // WITH_STDLIB
 
-fun <A : Comparable<A>> arrayData(vararg values: A): A = values.first()
+fun <A : Comparable<A>> arrayData(vararg konstues: A): A = konstues.first()
 
 fun test(b: Byte) = select(arrayData(1), b)
 
@@ -12,8 +12,8 @@ fun <S : Comparable<S>> select(a: S, b: S): S {
 }
 
 fun box(): String {
-    val res = test(-42)
-    val res2 = res.dec()
+    konst res = test(-42)
+    konst res2 = res.dec()
     res.doSomething()
     if (res == 1.toByte() && res2 == 0.toByte()) return "OK" else return res.toString()
 }

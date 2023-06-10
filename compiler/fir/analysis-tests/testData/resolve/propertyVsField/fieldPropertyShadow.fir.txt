@@ -4,13 +4,13 @@ FILE: KotlinBase.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val abcd: R|kotlin/String| = String(abcd)
+        public final konst abcd: R|kotlin/String| = String(abcd)
             public get(): R|kotlin/String|
 
     }
 FILE: KotlinProxy.kt
     public abstract interface KotlinProxy : R|kotlin/Any| {
-        public open val zyxw: R|kotlin/String|
+        public open konst zyxw: R|kotlin/String|
             public get(): R|kotlin/String| {
                 ^ String(zyxw)
             }

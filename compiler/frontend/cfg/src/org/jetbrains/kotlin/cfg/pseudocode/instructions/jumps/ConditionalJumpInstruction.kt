@@ -27,30 +27,30 @@ import org.jetbrains.kotlin.cfg.pseudocode.instructions.InstructionVisitor
 
 class ConditionalJumpInstruction(
     element: KtElement,
-    val onTrue: Boolean,
+    konst onTrue: Boolean,
     blockScope: BlockScope,
     targetLabel: Label,
-    private val conditionValue: PseudoValue?
+    private konst conditionValue: PseudoValue?
 ) : AbstractJumpInstruction(element, targetLabel, blockScope) {
     private var _nextOnTrue: Instruction? = null
     private var _nextOnFalse: Instruction? = null
 
     var nextOnTrue: Instruction
         get() = _nextOnTrue!!
-        set(value) {
-            _nextOnTrue = outgoingEdgeTo(value)
+        set(konstue) {
+            _nextOnTrue = outgoingEdgeTo(konstue)
         }
 
     var nextOnFalse: Instruction
         get() = _nextOnFalse!!
-        set(value) {
-            _nextOnFalse = outgoingEdgeTo(value)
+        set(konstue) {
+            _nextOnFalse = outgoingEdgeTo(konstue)
         }
 
-    override val nextInstructions: Collection<Instruction>
+    override konst nextInstructions: Collection<Instruction>
         get() = listOf(nextOnFalse, nextOnTrue)
 
-    override val inputValues: List<PseudoValue>
+    override konst inputValues: List<PseudoValue>
         get() = listOfNotNull(conditionValue)
 
     override fun accept(visitor: InstructionVisitor) {
@@ -62,8 +62,8 @@ class ConditionalJumpInstruction(
     }
 
     override fun toString(): String {
-        val instr = if (onTrue) "jt" else "jf"
-        val inValue = conditionValue?.let { "|" + it } ?: ""
+        konst instr = if (onTrue) "jt" else "jf"
+        konst inValue = conditionValue?.let { "|" + it } ?: ""
         return "$instr(${targetLabel.name}$inValue)"
     }
 

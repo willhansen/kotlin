@@ -54,7 +54,7 @@ import org.jetbrains.kotlin.cli.common.config.ContentRoot
 import org.jetbrains.kotlin.cli.common.config.KotlinSourceRoot
 import org.jetbrains.kotlin.cli.common.config.kotlinSourceRoots
 import org.jetbrains.kotlin.cli.common.environment.setIdeaIoUseFallback
-import org.jetbrains.kotlin.cli.common.extensions.ScriptEvaluationExtension
+import org.jetbrains.kotlin.cli.common.extensions.ScriptEkonstuationExtension
 import org.jetbrains.kotlin.cli.common.extensions.ShellExtension
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity.ERROR
@@ -106,8 +106,8 @@ import java.nio.file.FileSystems
 import java.util.zip.ZipFile
 
 class KotlinCoreEnvironment private constructor(
-    val projectEnvironment: ProjectEnvironment,
-    val configuration: CompilerConfiguration,
+    konst projectEnvironment: ProjectEnvironment,
+    konst configuration: CompilerConfiguration,
     configFiles: EnvironmentConfigFiles
 ) {
 
@@ -118,10 +118,10 @@ class KotlinCoreEnvironment private constructor(
     ) :
         KotlinCoreProjectEnvironment(disposable, applicationEnvironment) {
 
-        val jarFileSystem: VirtualFileSystem
+        konst jarFileSystem: VirtualFileSystem
 
         init {
-            val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+            konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
             setIdeaIoUseFallback()
 
@@ -137,7 +137,7 @@ class KotlinCoreEnvironment private constructor(
                     applicationEnvironment.jarFileSystem
                 }
                 configuration.getBoolean(JVMConfigurationKeys.USE_FAST_JAR_FILE_SYSTEM) || configuration.getBoolean(CommonConfigurationKeys.USE_FIR) -> {
-                    val fastJarFs = applicationEnvironment.fastJarFileSystem
+                    konst fastJarFs = applicationEnvironment.fastJarFileSystem
                     if (fastJarFs == null) {
                         messageCollector?.report(
                             CompilerMessageSeverity.STRONG_WARNING,
@@ -182,16 +182,16 @@ class KotlinCoreEnvironment private constructor(
         }
     }
 
-    private val sourceFiles = mutableListOf<KtFile>()
-    private val rootsIndex: JvmDependenciesDynamicCompoundIndex
-    private val packagePartProviders = mutableListOf<JvmPackagePartProvider>()
+    private konst sourceFiles = mutableListOf<KtFile>()
+    private konst rootsIndex: JvmDependenciesDynamicCompoundIndex
+    private konst packagePartProviders = mutableListOf<JvmPackagePartProvider>()
 
-    private val classpathRootsResolver: ClasspathRootsResolver
-    private val initialRoots = ArrayList<JavaRoot>()
+    private konst classpathRootsResolver: ClasspathRootsResolver
+    private konst initialRoots = ArrayList<JavaRoot>()
 
     init {
         projectEnvironment.configureProjectEnvironment(configuration, configFiles)
-        val project = projectEnvironment.project
+        konst project = projectEnvironment.project
         project.registerService(DeclarationProviderFactoryService::class.java, CliDeclarationProviderFactoryService(sourceFiles))
 
         sourceFiles += createSourceFilesFromSourceRoots(configuration, project, getSourceRootsCheckingForDuplicates())
@@ -200,13 +200,13 @@ class KotlinCoreEnvironment private constructor(
 
         sourceFiles.sortBy { it.virtualFile.path }
 
-        val javaFileManager = project.getService(CoreJavaFileManager::class.java) as KotlinCliJavaFileManagerImpl
+        konst javaFileManager = project.getService(CoreJavaFileManager::class.java) as KotlinCliJavaFileManagerImpl
 
-        val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
-        val jdkHome = configuration.get(JVMConfigurationKeys.JDK_HOME)
-        val releaseTarget = configuration.get(JVMConfigurationKeys.JDK_RELEASE)
-        val javaModuleFinder = CliJavaModuleFinder(
+        konst jdkHome = configuration.get(JVMConfigurationKeys.JDK_HOME)
+        konst releaseTarget = configuration.get(JVMConfigurationKeys.JDK_RELEASE)
+        konst javaModuleFinder = CliJavaModuleFinder(
             jdkHome,
             messageCollector,
             javaFileManager,
@@ -214,7 +214,7 @@ class KotlinCoreEnvironment private constructor(
             releaseTarget
         )
 
-        val outputDirectory =
+        konst outputDirectory =
             configuration.get(JVMConfigurationKeys.MODULES)?.singleOrNull()?.getOutputDirectory()
                 ?: configuration.get(JVMConfigurationKeys.OUTPUT_DIRECTORY)?.absolutePath
 
@@ -230,11 +230,11 @@ class KotlinCoreEnvironment private constructor(
             releaseTarget
         )
 
-        val (initialRoots, javaModules) =
+        konst (initialRoots, javaModules) =
             classpathRootsResolver.convertClasspathRoots(configuration.getList(CLIConfigurationKeys.CONTENT_ROOTS))
         this.initialRoots.addAll(initialRoots)
 
-        val (roots, singleJavaFileRoots) =
+        konst (roots, singleJavaFileRoots) =
             initialRoots.partition { (file) -> file.isDirectory || file.extension != JavaFileType.DEFAULT_EXTENSION }
 
         // REPL and kapt2 update classpath dynamically
@@ -255,7 +255,7 @@ class KotlinCoreEnvironment private constructor(
             CliJavaModuleResolver(classpathRootsResolver.javaModuleGraph, javaModules, javaModuleFinder.systemModules.toList(), project)
         )
 
-        val finderFactory = CliVirtualFileFinderFactory(rootsIndex, releaseTarget != null)
+        konst finderFactory = CliVirtualFileFinderFactory(rootsIndex, releaseTarget != null)
         project.registerService(MetadataFinderFactory::class.java, finderFactory)
         project.registerService(VirtualFileFinderFactory::class.java, finderFactory)
 
@@ -268,8 +268,8 @@ class KotlinCoreEnvironment private constructor(
 
     private fun collectAdditionalSources(project: MockProject) {
         var unprocessedSources: Collection<KtFile> = sourceFiles
-        val processedSources = HashSet<KtFile>()
-        val processedSourcesByExtension = HashMap<CollectAdditionalSourcesExtension, Collection<KtFile>>()
+        konst processedSources = HashSet<KtFile>()
+        konst processedSourcesByExtension = HashMap<CollectAdditionalSourcesExtension, Collection<KtFile>>()
         // repeat feeding extensions with sources while new sources a being added
         var sourceCollectionIterations = 0
         while (unprocessedSources.isNotEmpty()) {
@@ -277,11 +277,11 @@ class KotlinCoreEnvironment private constructor(
                 throw IllegalStateException("Unable to collect additional sources in reasonable number of iterations")
             }
             processedSources.addAll(unprocessedSources)
-            val allNewSources = ArrayList<KtFile>()
+            konst allNewSources = ArrayList<KtFile>()
             for (extension in CollectAdditionalSourcesExtension.getInstances(project)) {
                 // do not feed the extension with the sources it returned on the previous iteration
-                val sourcesToProcess = unprocessedSources - (processedSourcesByExtension[extension] ?: emptyList())
-                val newSources = extension.collectAdditionalSourcesAndUpdateConfiguration(sourcesToProcess, configuration, project)
+                konst sourcesToProcess = unprocessedSources - (processedSourcesByExtension[extension] ?: emptyList())
+                konst newSources = extension.collectAdditionalSourcesAndUpdateConfiguration(sourcesToProcess, configuration, project)
                 if (newSources.isNotEmpty()) {
                     allNewSources.addAll(newSources)
                     processedSourcesByExtension[extension] = newSources
@@ -293,7 +293,7 @@ class KotlinCoreEnvironment private constructor(
     }
 
     fun addKotlinSourceRoots(rootDirs: List<File>) {
-        val roots = rootDirs.map { KotlinSourceRoot(it.absolutePath, isCommon = false, hmppModuleName = null) }
+        konst roots = rootDirs.map { KotlinSourceRoot(it.absolutePath, isCommon = false, hmppModuleName = null) }
         sourceFiles += createSourceFilesFromSourceRoots(configuration, project, roots).toSet() - sourceFiles
     }
 
@@ -305,7 +305,7 @@ class KotlinCoreEnvironment private constructor(
         }
     }
 
-    private val VirtualFile.javaFiles: List<VirtualFile>
+    private konst VirtualFile.javaFiles: List<VirtualFile>
         get() = mutableListOf<VirtualFile>().apply {
             VfsUtilCore.processFilesRecursively(this@javaFiles) { file ->
                 if (file.extension == JavaFileType.DEFAULT_EXTENSION || file.fileType == JavaFileType.INSTANCE) {
@@ -315,7 +315,7 @@ class KotlinCoreEnvironment private constructor(
             }
         }
 
-    private val allJavaFiles: List<File>
+    private konst allJavaFiles: List<File>
         get() = configuration.javaSourceRoots
             .mapNotNull(this::findLocalFile)
             .flatMap { it.javaFiles }
@@ -334,15 +334,15 @@ class KotlinCoreEnvironment private constructor(
         )
     }
 
-    private val applicationEnvironment: CoreApplicationEnvironment
+    private konst applicationEnvironment: CoreApplicationEnvironment
         get() = projectEnvironment.environment
 
-    val project: Project
+    konst project: Project
         get() = projectEnvironment.project
 
     fun countLinesOfCode(sourceFiles: List<KtFile>): Int =
         sourceFiles.sumBy { sourceFile ->
-            val text = sourceFile.text
+            konst text = sourceFile.text
             StringUtil.getLineBreakCount(text) + (if (StringUtil.endsWithLineBreak(text)) 0 else 1)
         }
 
@@ -354,7 +354,7 @@ class KotlinCoreEnvironment private constructor(
 
     fun updateClasspath(contentRoots: List<ContentRoot>): List<File>? {
         // TODO: add new Java modules to CliJavaModuleResolver
-        val newRoots = classpathRootsResolver.convertClasspathRoots(contentRoots).roots - initialRoots
+        konst newRoots = classpathRootsResolver.convertClasspathRoots(contentRoots).roots - initialRoots
 
         if (packagePartProviders.isEmpty()) {
             initialRoots.addAll(newRoots)
@@ -400,8 +400,8 @@ class KotlinCoreEnvironment private constructor(
         projectEnvironment.jarFileSystem.findFileByPath("$file${URLUtil.JAR_SEPARATOR}")
 
     private fun getSourceRootsCheckingForDuplicates(): List<KotlinSourceRoot> {
-        val uniqueSourceRoots = hashSetOf<String>()
-        val result = mutableListOf<KotlinSourceRoot>()
+        konst uniqueSourceRoots = hashSetOf<String>()
+        konst result = mutableListOf<KotlinSourceRoot>()
 
         for (root in configuration.kotlinSourceRoots) {
             if (!uniqueSourceRoots.add(root.path)) {
@@ -422,10 +422,10 @@ class KotlinCoreEnvironment private constructor(
     internal fun report(severity: CompilerMessageSeverity, message: String) = configuration.report(severity, message)
 
     companion object {
-        private val LOG = Logger.getInstance(KotlinCoreEnvironment::class.java)
+        private konst LOG = Logger.getInstance(KotlinCoreEnvironment::class.java)
 
         @PublishedApi
-        internal val APPLICATION_LOCK = Object()
+        internal konst APPLICATION_LOCK = Object()
 
         private var ourApplicationEnvironment: KotlinCoreApplicationEnvironment? = null
         private var ourProjectCount = 0
@@ -438,9 +438,9 @@ class KotlinCoreEnvironment private constructor(
             parentDisposable: Disposable, configuration: CompilerConfiguration, configFiles: EnvironmentConfigFiles
         ): KotlinCoreEnvironment {
             setupIdeaStandaloneExecution()
-            val appEnv = getOrCreateApplicationEnvironmentForProduction(parentDisposable, configuration)
-            val projectEnv = ProjectEnvironment(parentDisposable, appEnv, configuration)
-            val environment = KotlinCoreEnvironment(projectEnv, configuration, configFiles)
+            konst appEnv = getOrCreateApplicationEnvironmentForProduction(parentDisposable, configuration)
+            konst projectEnv = ProjectEnvironment(parentDisposable, appEnv, configuration)
+            konst environment = KotlinCoreEnvironment(projectEnv, configuration, configFiles)
 
             return environment
         }
@@ -457,13 +457,13 @@ class KotlinCoreEnvironment private constructor(
         fun createForTests(
             parentDisposable: Disposable, initialConfiguration: CompilerConfiguration, extensionConfigs: EnvironmentConfigFiles
         ): KotlinCoreEnvironment {
-            val configuration = initialConfiguration.copy()
+            konst configuration = initialConfiguration.copy()
             // Tests are supposed to create a single project and dispose it right after use
-            val appEnv =
+            konst appEnv =
                 createApplicationEnvironment(
                     parentDisposable, configuration, unitTestMode = true
                 )
-            val projectEnv = ProjectEnvironment(parentDisposable, appEnv, configuration)
+            konst projectEnv = ProjectEnvironment(parentDisposable, appEnv, configuration)
             return KotlinCoreEnvironment(projectEnv, configuration, extensionConfigs)
         }
 
@@ -472,9 +472,9 @@ class KotlinCoreEnvironment private constructor(
         fun createForParallelTests(
             parentDisposable: Disposable, initialConfiguration: CompilerConfiguration, extensionConfigs: EnvironmentConfigFiles
         ): KotlinCoreEnvironment {
-            val configuration = initialConfiguration.copy()
-            val appEnv = getOrCreateApplicationEnvironmentForTests(parentDisposable, configuration)
-            val projectEnv = ProjectEnvironment(parentDisposable, appEnv, configuration)
+            konst configuration = initialConfiguration.copy()
+            konst appEnv = getOrCreateApplicationEnvironmentForTests(parentDisposable, configuration)
+            konst projectEnv = ProjectEnvironment(parentDisposable, appEnv, configuration)
             return KotlinCoreEnvironment(projectEnv, configuration, extensionConfigs)
         }
 
@@ -488,7 +488,7 @@ class KotlinCoreEnvironment private constructor(
 
         @TestOnly
         fun createProjectEnvironmentForTests(parentDisposable: Disposable, configuration: CompilerConfiguration): ProjectEnvironment {
-            val appEnv = createApplicationEnvironment(
+            konst appEnv = createApplicationEnvironment(
                 parentDisposable,
                 configuration,
                 unitTestMode = true
@@ -497,7 +497,7 @@ class KotlinCoreEnvironment private constructor(
         }
 
         // used in the daemon for jar cache cleanup
-        val applicationEnvironment: KotlinCoreApplicationEnvironment? get() = ourApplicationEnvironment
+        konst applicationEnvironment: KotlinCoreApplicationEnvironment? get() = ourApplicationEnvironment
 
         fun getOrCreateApplicationEnvironmentForProduction(
             parentDisposable: Disposable, configuration: CompilerConfiguration
@@ -512,7 +512,7 @@ class KotlinCoreEnvironment private constructor(
         ): KotlinCoreApplicationEnvironment {
             synchronized(APPLICATION_LOCK) {
                 if (ourApplicationEnvironment == null) {
-                    val disposable = Disposer.newDisposable("Disposable for the KotlinCoreApplicationEnvironment")
+                    konst disposable = Disposer.newDisposable("Disposable for the KotlinCoreApplicationEnvironment")
                     ourApplicationEnvironment =
                         createApplicationEnvironment(
                             disposable,
@@ -527,8 +527,8 @@ class KotlinCoreEnvironment private constructor(
                     })
                 }
                 try {
-                    val disposeAppEnv =
-                        CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.value.toBooleanLenient() != true
+                    konst disposeAppEnv =
+                        CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.konstue.toBooleanLenient() != true
                     // Disposer uses identity of passed object to deduplicate registered disposables
                     // We should everytime pass new instance to avoid un-registering from previous one
                     @Suppress("ObjectLiteralToLambda")
@@ -540,7 +540,7 @@ class KotlinCoreEnvironment private constructor(
                                 // the ApplicationEnvironment is disposed as well
                                 if (--ourProjectCount <= 0) {
                                     // Do not use this property unless you sure need it, causes Application to MEMORY LEAK
-                                    // Only valid use-case is when Application should be cached to avoid
+                                    // Only konstid use-case is when Application should be cached to avoid
                                     // initialization costs
                                     if (disposeAppEnv) {
                                         disposeApplicationEnvironment()
@@ -565,7 +565,7 @@ class KotlinCoreEnvironment private constructor(
         @JvmStatic
         fun disposeApplicationEnvironment() {
             synchronized(APPLICATION_LOCK) {
-                val environment = ourApplicationEnvironment ?: return
+                konst environment = ourApplicationEnvironment ?: return
                 ourApplicationEnvironment = null
                 Disposer.dispose(environment.parentDisposable)
                 ZipHandler.clearFileAccessorCache()
@@ -585,7 +585,7 @@ class KotlinCoreEnvironment private constructor(
             // otherwise consider that project environment is properly configured before passing to the environment
             // TODO: consider some asserts to check important extension points
 
-            val isJvm = configFiles == EnvironmentConfigFiles.JVM_CONFIG_FILES
+            konst isJvm = configFiles == EnvironmentConfigFiles.JVM_CONFIG_FILES
             project.registerService(ModuleVisibilityManager::class.java, CliModuleVisibilityManagerImpl(isJvm))
 
             registerProjectServicesForCLI(this)
@@ -600,7 +600,7 @@ class KotlinCoreEnvironment private constructor(
         private fun createApplicationEnvironment(
             parentDisposable: Disposable, configuration: CompilerConfiguration, unitTestMode: Boolean
         ): KotlinCoreApplicationEnvironment {
-            val applicationEnvironment = KotlinCoreApplicationEnvironment.create(
+            konst applicationEnvironment = KotlinCoreApplicationEnvironment.create(
                 parentDisposable, unitTestMode
             )
 
@@ -623,7 +623,7 @@ class KotlinCoreEnvironment private constructor(
                     false
                 }
 
-            val pluginRoot: File =
+            konst pluginRoot: File =
                 configuration.get(CLIConfigurationKeys.INTELLIJ_PLUGIN_ROOT)?.let(::File)
                     ?: PathUtil.getResourcePathForClass(this::class.java).takeIf { it.hasConfigFile(configFilePath) }
                     // hack for load extensions when compiler run directly from project directory (e.g. in tests)
@@ -663,7 +663,7 @@ class KotlinCoreEnvironment private constructor(
             ProcessSourcesBeforeCompilingExtension.registerExtensionPoint(project)
             ExtraImportsProviderExtension.registerExtensionPoint(project)
             IrGenerationExtension.registerExtensionPoint(project)
-            ScriptEvaluationExtension.registerExtensionPoint(project)
+            ScriptEkonstuationExtension.registerExtensionPoint(project)
             ShellExtension.registerExtensionPoint(project)
             TypeResolutionInterceptor.registerExtensionPoint(project)
             CandidateInterceptor.registerExtensionPoint(project)
@@ -678,26 +678,26 @@ class KotlinCoreEnvironment private constructor(
                 return "The provided plugin ${extension.javaClass.name} is not compatible with this version of compiler"
             }
 
-            val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+            konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
             for (registrar in configuration.getList(ComponentRegistrar.PLUGIN_COMPONENT_REGISTRARS)) {
                 try {
                     registrar.registerProjectComponents(project, configuration)
                 } catch (e: AbstractMethodError) {
-                    val message = createErrorMessage(registrar)
+                    konst message = createErrorMessage(registrar)
                     // Since the scripting plugin is often discovered in the compiler environment, it is often taken from the incompatible
                     // location, and in many cases this is not a fatal error, therefore strong warning is generated instead of exception
                     if (registrar.javaClass.simpleName == "ScriptingCompilerConfigurationComponentRegistrar") {
                         messageCollector?.report(STRONG_WARNING, "Default scripting plugin is disabled: $message")
                     } else {
-                        val errorMessageWithStackTrace = "$message.\n" +
+                        konst errorMessageWithStackTrace = "$message.\n" +
                                 e.stackTraceToString().lines().take(6).joinToString("\n")
                         messageCollector?.report(ERROR, errorMessageWithStackTrace)
                     }
                 }
             }
 
-            val extensionStorage = CompilerPluginRegistrar.ExtensionStorage()
+            konst extensionStorage = CompilerPluginRegistrar.ExtensionStorage()
             for (registrar in configuration.getList(CompilerPluginRegistrar.COMPILER_PLUGIN_REGISTRARS)) {
                 with(registrar) { extensionStorage.registerExtensions(configuration) }
             }
@@ -757,7 +757,7 @@ class KotlinCoreEnvironment private constructor(
         fun registerProjectServicesForCLI(@Suppress("UNUSED_PARAMETER") projectEnvironment: JavaCoreProjectEnvironment) {
             /**
              * Note that Kapt may restart code analysis process, and CLI services should be aware of that.
-             * Use PsiManager.getModificationTracker() to ensure that all the data you cached is still valid.
+             * Use PsiManager.getModificationTracker() to ensure that all the data you cached is still konstid.
              */
         }
 
@@ -765,9 +765,9 @@ class KotlinCoreEnvironment private constructor(
         @JvmStatic
         fun registerKotlinLightClassSupport(project: MockProject) {
             with(project) {
-                val traceHolder = CliTraceHolder()
-                val cliLightClassGenerationSupport = CliLightClassGenerationSupport(traceHolder, project)
-                val kotlinAsJavaSupport = CliKotlinAsJavaSupport(project, traceHolder)
+                konst traceHolder = CliTraceHolder()
+                konst cliLightClassGenerationSupport = CliLightClassGenerationSupport(traceHolder, project)
+                konst kotlinAsJavaSupport = CliKotlinAsJavaSupport(project, traceHolder)
                 registerService(LightClassGenerationSupport::class.java, cliLightClassGenerationSupport)
                 registerService(CliLightClassGenerationSupport::class.java, cliLightClassGenerationSupport)
                 registerService(KotlinAsJavaSupport::class.java, kotlinAsJavaSupport)

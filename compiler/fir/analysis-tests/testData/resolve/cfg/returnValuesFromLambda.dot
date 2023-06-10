@@ -88,7 +88,7 @@ digraph returnValuesFromLambda_kt {
             }
             33 [label="Postponed exit from lambda"];
             34 [label="Function call: R|kotlin/run|<R|A|>(...)" style="filled" fillcolor=yellow];
-            35 [label="Variable declaration: lval x: R|A|"];
+            35 [label="Variable declaration: lkonst x: R|A|"];
             36 [label="Exit block"];
         }
         37 [label="Exit function test_1" style="filled" fillcolor=red];
@@ -144,7 +144,7 @@ digraph returnValuesFromLambda_kt {
             }
             48 [label="Postponed exit from lambda"];
             49 [label="Function call: R|kotlin/run|<R|C|>(...)" style="filled" fillcolor=yellow];
-            50 [label="Variable declaration: lval x: R|C|"];
+            50 [label="Variable declaration: lkonst x: R|C|"];
             51 [label="Exit block"];
         }
         52 [label="Exit function test_2" style="filled" fillcolor=red];
@@ -189,7 +189,7 @@ digraph returnValuesFromLambda_kt {
             62 [label="Postponed exit from lambda" style="filled" fillcolor=gray];
             63 [label="Function call: R|kotlin/run|<R|kotlin/Nothing|>(...)" style="filled" fillcolor=gray];
             64 [label="Stub" style="filled" fillcolor=gray];
-            65 [label="Variable declaration: lval x: R|kotlin/Nothing|" style="filled" fillcolor=gray];
+            65 [label="Variable declaration: lkonst x: R|kotlin/Nothing|" style="filled" fillcolor=gray];
             66 [label="Exit block" style="filled" fillcolor=gray];
         }
         67 [label="Exit function test_3" style="filled" fillcolor=red];

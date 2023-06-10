@@ -36,14 +36,14 @@ import org.jetbrains.org.objectweb.asm.Opcodes.ACC_TRANSITIVE
 import java.io.IOException
 
 class JavaModuleInfo(
-    val moduleName: String,
-    val requires: List<Requires>,
-    val exports: List<Exports>,
-    val annotations: List<JavaAnnotation>
+    konst moduleName: String,
+    konst requires: List<Requires>,
+    konst exports: List<Exports>,
+    konst annotations: List<JavaAnnotation>
 ) {
-    data class Requires(val moduleName: String, val isTransitive: Boolean)
+    data class Requires(konst moduleName: String, konst isTransitive: Boolean)
 
-    data class Exports(val packageFqName: FqName, val toModules: List<String>)
+    data class Exports(konst packageFqName: FqName, konst toModules: List<String>)
 
     override fun toString() = "Module $moduleName (${requires.size} requires, ${exports.size} exports)"
 
@@ -68,15 +68,15 @@ class JavaModuleInfo(
         )
 
         fun read(file: VirtualFile, javaFileManager: KotlinCliJavaFileManager, searchScope: GlobalSearchScope): JavaModuleInfo? {
-            val contents = try {
+            konst contents = try {
                 file.contentsToByteArray()
             } catch (e: IOException) {
                 return null
             }
             var moduleName: String? = null
-            val requires = arrayListOf<Requires>()
-            val exports = arrayListOf<Exports>()
-            val annotations = arrayListOf<JavaAnnotation>()
+            konst requires = arrayListOf<Requires>()
+            konst exports = arrayListOf<Exports>()
+            konst annotations = arrayListOf<JavaAnnotation>()
 
             try {
                 ClassReader(contents).accept(object : ClassVisitor(Opcodes.API_VERSION) {
@@ -98,7 +98,7 @@ class JavaModuleInfo(
                     override fun visitAnnotation(descriptor: String?, visible: Boolean): AnnotationVisitor? {
                         if (descriptor == null) return null
 
-                        val (annotation, visitor) = BinaryJavaAnnotation.createAnnotationAndVisitor(
+                        konst (annotation, visitor) = BinaryJavaAnnotation.createAnnotationAndVisitor(
                             descriptor,
                             ClassifierResolutionContext { javaFileManager.findClass(JavaClassFinder.Request(it), searchScope) },
                             BinaryClassSignatureParser(),

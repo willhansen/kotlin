@@ -9,7 +9,7 @@ public class Context
                         OTHER;
                 }
 
-                public val operatingSystemType: OsType
+                public konst operatingSystemType: OsType
                         get() = OsType.OTHER
         }
 }

@@ -32,14 +32,14 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.io.File
 
 internal object AppleXcodeTasks {
-    const val embedAndSignTaskPrefix = "embedAndSign"
-    const val embedAndSignTaskPostfix = "AppleFrameworkForXcode"
+    const konst embedAndSignTaskPrefix = "embedAndSign"
+    const konst embedAndSignTaskPostfix = "AppleFrameworkForXcode"
 }
 
 private object XcodeEnvironment {
-    val buildType: NativeBuildType?
+    konst buildType: NativeBuildType?
         get() {
-            val configuration = System.getenv("CONFIGURATION") ?: return null
+            konst configuration = System.getenv("CONFIGURATION") ?: return null
 
             fun String.toNativeBuildType() = when (this.toLowerCaseAsciiOnly()) {
                 "debug" -> NativeBuildType.DEBUG
@@ -52,28 +52,28 @@ private object XcodeEnvironment {
         }
 
 
-    val targets: List<KonanTarget>
+    konst targets: List<KonanTarget>
         get() {
-            val sdk = System.getenv("SDK_NAME") ?: return emptyList()
-            val archs = System.getenv("ARCHS")?.split(" ") ?: return emptyList()
+            konst sdk = System.getenv("SDK_NAME") ?: return emptyList()
+            konst archs = System.getenv("ARCHS")?.split(" ") ?: return emptyList()
             return AppleSdk.defineNativeTargets(sdk, archs)
         }
 
-    val frameworkSearchDir: File?
+    konst frameworkSearchDir: File?
         get() {
-            val configuration = System.getenv("CONFIGURATION") ?: return null
-            val sdk = System.getenv("SDK_NAME") ?: return null
+            konst configuration = System.getenv("CONFIGURATION") ?: return null
+            konst sdk = System.getenv("SDK_NAME") ?: return null
             return File(configuration, sdk)
         }
 
-    val embeddedFrameworksDir: File?
+    konst embeddedFrameworksDir: File?
         get() {
-            val xcodeTargetBuildDir = System.getenv("TARGET_BUILD_DIR") ?: return null
-            val xcodeFrameworksFolderPath = System.getenv("FRAMEWORKS_FOLDER_PATH") ?: return null
+            konst xcodeTargetBuildDir = System.getenv("TARGET_BUILD_DIR") ?: return null
+            konst xcodeFrameworksFolderPath = System.getenv("FRAMEWORKS_FOLDER_PATH") ?: return null
             return File(xcodeTargetBuildDir, xcodeFrameworksFolderPath)
         }
 
-    val sign: String? get() = System.getenv("EXPANDED_CODE_SIGN_IDENTITY")
+    konst sign: String? get() = System.getenv("EXPANDED_CODE_SIGN_IDENTITY")
 
     override fun toString() = """
         XcodeEnvironment:
@@ -88,14 +88,14 @@ private object XcodeEnvironment {
 private fun Project.registerAssembleAppleFrameworkTask(framework: Framework): TaskProvider<out Task>? {
     if (!framework.konanTarget.family.isAppleFamily || !framework.konanTarget.enabledOnCurrentHost) return null
 
-    val envTargets = XcodeEnvironment.targets
-    val needFatFramework = envTargets.size > 1
+    konst envTargets = XcodeEnvironment.targets
+    konst needFatFramework = envTargets.size > 1
 
-    val frameworkBuildType = framework.buildType
-    val frameworkTarget = framework.target
-    val isRequestedFramework = envTargets.contains(frameworkTarget.konanTarget)
+    konst frameworkBuildType = framework.buildType
+    konst frameworkTarget = framework.target
+    konst isRequestedFramework = envTargets.contains(frameworkTarget.konanTarget)
 
-    val frameworkTaskName = lowerCamelCaseName(
+    konst frameworkTaskName = lowerCamelCaseName(
         "assemble",
         framework.namePrefix,
         frameworkBuildType.getName(),
@@ -103,11 +103,11 @@ private fun Project.registerAssembleAppleFrameworkTask(framework: Framework): Ta
         if (isRequestedFramework && needFatFramework) null else frameworkTarget.name //for fat framework we need common name
     )
 
-    val envBuildType = XcodeEnvironment.buildType
-    val envFrameworkSearchDir = XcodeEnvironment.frameworkSearchDir
+    konst envBuildType = XcodeEnvironment.buildType
+    konst envFrameworkSearchDir = XcodeEnvironment.frameworkSearchDir
 
     if (envBuildType == null || envTargets.isEmpty() || envFrameworkSearchDir == null) {
-        val envConfiguration = System.getenv("CONFIGURATION")
+        konst envConfiguration = System.getenv("CONFIGURATION")
         if (envTargets.isNotEmpty() && envConfiguration != null) {
             logger.warn(
                 "Unable to detect Kotlin framework build type for CONFIGURATION=$envConfiguration automatically. " +
@@ -143,20 +143,20 @@ private fun Project.registerAssembleAppleFrameworkTask(framework: Framework): Ta
 }
 
 internal fun Project.registerEmbedAndSignAppleFrameworkTask(framework: Framework) {
-    val envBuildType = XcodeEnvironment.buildType
-    val envTargets = XcodeEnvironment.targets
-    val envEmbeddedFrameworksDir = XcodeEnvironment.embeddedFrameworksDir
-    val envFrameworkSearchDir = XcodeEnvironment.frameworkSearchDir
-    val envSign = XcodeEnvironment.sign
+    konst envBuildType = XcodeEnvironment.buildType
+    konst envTargets = XcodeEnvironment.targets
+    konst envEmbeddedFrameworksDir = XcodeEnvironment.embeddedFrameworksDir
+    konst envFrameworkSearchDir = XcodeEnvironment.frameworkSearchDir
+    konst envSign = XcodeEnvironment.sign
 
-    val frameworkTaskName = lowerCamelCaseName(AppleXcodeTasks.embedAndSignTaskPrefix, framework.namePrefix, AppleXcodeTasks.embedAndSignTaskPostfix)
+    konst frameworkTaskName = lowerCamelCaseName(AppleXcodeTasks.embedAndSignTaskPrefix, framework.namePrefix, AppleXcodeTasks.embedAndSignTaskPostfix)
 
     if (envBuildType == null || envTargets.isEmpty() || envEmbeddedFrameworksDir == null || envFrameworkSearchDir == null) {
         locateOrRegisterTask<DefaultTask>(frameworkTaskName) { task ->
             task.group = BasePlugin.BUILD_GROUP
             task.description = "Embed and sign ${framework.namePrefix} framework as requested by Xcode's environment variables"
             task.doFirst {
-                val envConfiguration = System.getenv("CONFIGURATION")
+                konst envConfiguration = System.getenv("CONFIGURATION")
                 if (envConfiguration != null && envBuildType == null) {
                     throw IllegalStateException(
                         "Unable to detect Kotlin framework build type for CONFIGURATION=$envConfiguration automatically. " +
@@ -175,7 +175,7 @@ internal fun Project.registerEmbedAndSignAppleFrameworkTask(framework: Framework
         return
     }
 
-    val embedAndSignTask = locateOrRegisterTask<FrameworkCopy>(frameworkTaskName) { task ->
+    konst embedAndSignTask = locateOrRegisterTask<FrameworkCopy>(frameworkTaskName) { task ->
         task.group = BasePlugin.BUILD_GROUP
         task.description = "Embed and sign ${framework.namePrefix} framework as requested by Xcode's environment variables"
         task.isEnabled = !framework.isStatic
@@ -189,7 +189,7 @@ internal fun Project.registerEmbedAndSignAppleFrameworkTask(framework: Framework
         }
     }
 
-    val assembleTask = registerAssembleAppleFrameworkTask(framework) ?: return
+    konst assembleTask = registerAssembleAppleFrameworkTask(framework) ?: return
     if (framework.buildType != envBuildType || !envTargets.contains(framework.konanTarget)) return
 
     embedAndSignTask.configure { task ->
@@ -198,7 +198,7 @@ internal fun Project.registerEmbedAndSignAppleFrameworkTask(framework: Framework
         task.destDir = envEmbeddedFrameworksDir
         if (envSign != null) {
             task.doLast {
-                val binary = envEmbeddedFrameworksDir
+                konst binary = envEmbeddedFrameworksDir
                     .resolve(framework.outputFile.name)
                     .resolve(framework.outputFile.nameWithoutExtension)
                 exec {
@@ -209,7 +209,7 @@ internal fun Project.registerEmbedAndSignAppleFrameworkTask(framework: Framework
     }
 }
 
-private val Framework.namePrefix: String
+private konst Framework.namePrefix: String
     get() = KotlinNativeBinaryContainer.extractPrefixFromBinaryName(
         name,
         buildType,

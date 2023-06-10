@@ -14,7 +14,7 @@ class SimpleTextField : TextField {
 class TextFieldWrapper(textField: TextField) : TextField by textField
 
 fun box() : String {
-    val textField = TextFieldWrapper(SimpleTextField())
+    konst textField = TextFieldWrapper(SimpleTextField())
     textField.setText("OK")
     return textField.getText()
 }

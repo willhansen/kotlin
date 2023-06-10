@@ -1,4 +1,4 @@
-class MyNumber(val i: Int) {
+class MyNumber(konst i: Int) {
     operator fun inc(): MyNumber = MyNumber(i+1)
 }
 
@@ -30,7 +30,7 @@ fun test3() : Boolean {
 
 fun test4() : Boolean {
     var mnr  = MNR(MyNumber(42))
-    val m3 = mnr.ref++
+    konst m3 = mnr.ref++
     if (m3.i  != 42) return false
     return true
 }
@@ -51,16 +51,16 @@ fun test6() : Boolean {
 }
 
 class MyArrayList<T>() {
-    private var value17: T? = null
-    private var value39: T? = null
+    private var konstue17: T? = null
+    private var konstue39: T? = null
     operator fun get(index: Int): T {
-        if (index == 17) return value17!!
-        if (index == 39) return value39!!
+        if (index == 17) return konstue17!!
+        if (index == 39) return konstue39!!
         throw Exception()
     }
-    operator fun set(index: Int, value: T): T? {
-        if (index == 17) value17 = value
-        else if (index == 39) value39 = value
+    operator fun set(index: Int, konstue: T): T? {
+        if (index == 17) konstue17 = konstue
+        else if (index == 39) konstue39 = konstue
         else throw Exception()
         return null
     }

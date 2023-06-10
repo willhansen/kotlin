@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}spentTime
 //   Public signature: /spentTime|1981050075795716305[0]
-val spentTime: Column
+konst spentTime: Column
   // CHECK JVM_IR:
   //   Mangled name: #<get-spentTime>(){}Column
   //   Public signature: /spentTime.<get-spentTime>|3550920958732313011[0]
@@ -17,7 +17,7 @@ class ArgumentsBuilder {
   // CHECK:
   //   Mangled name: ArgumentsBuilder{}arguments
   //   Public signature: /ArgumentsBuilder.arguments|-8426540515456712294[0]
-  val arguments: MutableList<Expression>
+  konst arguments: MutableList<Expression>
     // CHECK JVM_IR:
     //   Mangled name: ArgumentsBuilder#<get-arguments>(){}kotlin.collections.MutableList<Expression>
     //   Public signature: /ArgumentsBuilder.arguments.<get-arguments>|7867094825942376438[0]

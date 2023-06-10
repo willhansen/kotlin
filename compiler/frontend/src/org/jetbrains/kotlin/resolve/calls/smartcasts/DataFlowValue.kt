@@ -22,26 +22,26 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
 
-private val KotlinType.immanentNullability: Nullability
+private konst KotlinType.immanentNullability: Nullability
     get() = if (TypeUtils.isNullableType(this)) Nullability.UNKNOWN else Nullability.NOT_NULL
 
 /**
- * This class describes an arbitrary object which has some value in data flow analysis.
- * In general case it's some r-value.
+ * This class describes an arbitrary object which has some konstue in data flow analysis.
+ * In general case it's some r-konstue.
  */
 class DataFlowValue(
-    val identifierInfo: IdentifierInfo,
-    val type: KotlinType,
-    val immanentNullability: Nullability = type.immanentNullability
+    konst identifierInfo: IdentifierInfo,
+    konst type: KotlinType,
+    konst immanentNullability: Nullability = type.immanentNullability
 ) {
 
-    val kind: Kind get() = identifierInfo.kind
+    konst kind: Kind get() = identifierInfo.kind
 
-    enum class Kind(private val str: String, val description: String = str) {
-        // Local value, or parameter, or private / internal member value without open / custom getter,
-        // or protected / public member value from the same module without open / custom getter
+    enum class Kind(private konst str: String, konst description: String = str) {
+        // Local konstue, or parameter, or private / internal member konstue without open / custom getter,
+        // or protected / public member konstue from the same module without open / custom getter
         // Smart casts are completely safe
-        STABLE_VALUE("stable val"),
+        STABLE_VALUE("stable konst"),
 
         // Block, or if / else, or when
         STABLE_COMPLEX_EXPRESSION("complex expression", ""),
@@ -49,22 +49,22 @@ class DataFlowValue(
         // Should be unstable, but can be used as stable with deprecation warning
         LEGACY_STABLE_LOCAL_DELEGATED_PROPERTY("local delegated property"),
 
-        // Member value with open / custom getter
+        // Member konstue with open / custom getter
         // Smart casts are not safe
         PROPERTY_WITH_GETTER("custom getter", "property that has open or custom getter"),
 
-        // Protected / public member value from derived class from another module
+        // Protected / public member konstue from derived class from another module
         // Should be unstable, but can be used as stable with deprecation warning
         LEGACY_ALIEN_BASE_PROPERTY("alien derived", "property declared in base class from different module"),
 
-        // Protected / public member value from derived class from another module, in case the derived class is non-public API
+        // Protected / public member konstue from derived class from another module, in case the derived class is non-public API
         // Should be unstable, but can be used as stable with deprecation warning
         LEGACY_ALIEN_BASE_PROPERTY_INHERITED_IN_INVISIBLE_CLASS(
             "alien inherited in invisible",
             "property declared in base class from different module inherited in non-public API class"
         ),
 
-        // Protected / public member value from another module
+        // Protected / public member konstue from another module
         // Smart casts are not safe
         ALIEN_PUBLIC_PROPERTY("alien public", "public API property declared in different module"),
 
@@ -88,17 +88,17 @@ class DataFlowValue(
     }
 
     /**
-     * Stable means here we do not expect some sudden change of their values,
+     * Stable means here we do not expect some sudden change of their konstues,
      * like accessing mutable properties in another thread, so smart casts can be used safely.
      */
-    val isStable = kind == Kind.STABLE_VALUE ||
+    konst isStable = kind == Kind.STABLE_VALUE ||
             kind == Kind.STABLE_VARIABLE ||
             kind == Kind.STABLE_COMPLEX_EXPRESSION ||
             kind == Kind.LEGACY_STABLE_LOCAL_DELEGATED_PROPERTY ||
             kind == Kind.LEGACY_ALIEN_BASE_PROPERTY ||
             kind == Kind.LEGACY_ALIEN_BASE_PROPERTY_INHERITED_IN_INVISIBLE_CLASS
 
-    val canBeBound get() = identifierInfo.canBeBound
+    konst canBeBound get() = identifierInfo.canBeBound
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -131,6 +131,6 @@ class DataFlowValue(
         fun nullValue(builtIns: KotlinBuiltIns) = DataFlowValue(IdentifierInfo.NULL, builtIns.nullableNothingType, Nullability.NULL)
 
         @JvmField
-        val ERROR = DataFlowValue(IdentifierInfo.ERROR, ErrorUtils.createErrorType(ErrorTypeKind.ERROR_DATA_FLOW_TYPE), Nullability.IMPOSSIBLE)
+        konst ERROR = DataFlowValue(IdentifierInfo.ERROR, ErrorUtils.createErrorType(ErrorTypeKind.ERROR_DATA_FLOW_TYPE), Nullability.IMPOSSIBLE)
     }
 }

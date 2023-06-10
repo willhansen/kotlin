@@ -42,14 +42,14 @@ import org.jetbrains.org.objectweb.asm.Type
 import java.util.concurrent.ConcurrentHashMap
 
 class JvmBackendContext(
-    val state: GenerationState,
-    override val irBuiltIns: IrBuiltIns,
-    val symbolTable: SymbolTable,
-    val phaseConfig: PhaseConfig,
-    val generatorExtensions: JvmGeneratorExtensions,
-    val backendExtension: JvmBackendExtension,
-    val irSerializer: JvmIrSerializer?,
-    val irPluginContext: IrPluginContext?,
+    konst state: GenerationState,
+    override konst irBuiltIns: IrBuiltIns,
+    konst symbolTable: SymbolTable,
+    konst phaseConfig: PhaseConfig,
+    konst generatorExtensions: JvmGeneratorExtensions,
+    konst backendExtension: JvmBackendExtension,
+    konst irSerializer: JvmIrSerializer?,
+    konst irPluginContext: IrPluginContext?,
 ) : CommonBackendContext {
 
     @Suppress("UNUSED_PARAMETER")
@@ -66,83 +66,83 @@ class JvmBackendContext(
     ) : this(state, irBuiltIns, symbolTable, phaseConfig, generatorExtensions, backendExtension, irSerializer, null)
 
     data class LocalFunctionData(
-        val localContext: LocalDeclarationsLowering.LocalFunctionContext,
-        val newParameterToOld: Map<IrValueParameter, IrValueParameter>,
-        val newParameterToCaptured: Map<IrValueParameter, IrValueSymbol>
+        konst localContext: LocalDeclarationsLowering.LocalFunctionContext,
+        konst newParameterToOld: Map<IrValueParameter, IrValueParameter>,
+        konst newParameterToCaptured: Map<IrValueParameter, IrValueSymbol>
     )
 
     // If not-null, this is populated by LocalDeclarationsLowering with the intermediate data
     // allowing mapping from local function captures to parameters and accurate transformation
-    // of calls to local functions from code fragments (i.e. the expression evaluator).
+    // of calls to local functions from code fragments (i.e. the expression ekonstuator).
     var localDeclarationsLoweringData: MutableMap<IrFunction, LocalFunctionData>? = null
 
     // If the JVM fqname of a class differs from what is implied by its parent, e.g. if it's a file class
     // annotated with @JvmPackageName, the correct name is recorded here.
-    val classNameOverride: MutableMap<IrClass, JvmClassName>
+    konst classNameOverride: MutableMap<IrClass, JvmClassName>
         get() = generatorExtensions.classNameOverride
 
-    override val irFactory: IrFactory = IrFactoryImpl
+    override konst irFactory: IrFactory = IrFactoryImpl
 
-    override val scriptMode: Boolean = false
+    override konst scriptMode: Boolean = false
 
-    override val builtIns = state.module.builtIns
-    override val typeSystem: IrTypeSystemContext = JvmIrTypeSystemContext(irBuiltIns)
-    val defaultTypeMapper = IrTypeMapper(this)
-    val defaultMethodSignatureMapper = MethodSignatureMapper(this, defaultTypeMapper)
+    override konst builtIns = state.module.builtIns
+    override konst typeSystem: IrTypeSystemContext = JvmIrTypeSystemContext(irBuiltIns)
+    konst defaultTypeMapper = IrTypeMapper(this)
+    konst defaultMethodSignatureMapper = MethodSignatureMapper(this, defaultTypeMapper)
 
-    val innerClassesSupport = JvmInnerClassesSupport(irFactory)
-    val cachedDeclarations = JvmCachedDeclarations(
+    konst innerClassesSupport = JvmInnerClassesSupport(irFactory)
+    konst cachedDeclarations = JvmCachedDeclarations(
         this, generatorExtensions.cachedFields
     )
 
-    override val mapping: Mapping = DefaultMapping()
+    override konst mapping: Mapping = DefaultMapping()
 
-    val ktDiagnosticReporter = KtDiagnosticReporterWithImplicitIrBasedContext(state.diagnosticReporter, state.languageVersionSettings)
+    konst ktDiagnosticReporter = KtDiagnosticReporterWithImplicitIrBasedContext(state.diagnosticReporter, state.languageVersionSettings)
 
-    override val ir = JvmIr(this.symbolTable)
+    override konst ir = JvmIr(this.symbolTable)
 
-    override val sharedVariablesManager = JvmSharedVariablesManager(state.module, ir.symbols, irBuiltIns, irFactory)
+    override konst sharedVariablesManager = JvmSharedVariablesManager(state.module, ir.symbols, irBuiltIns, irFactory)
 
     lateinit var getIntrinsic: (IrFunctionSymbol) -> IntrinsicMarker?
 
-    // Store evaluated SMAP for anonymous classes. Used only with IR inliner.
-    val typeToCachedSMAP = mutableMapOf<Type, SMAP>()
+    // Store ekonstuated SMAP for anonymous classes. Used only with IR inliner.
+    konst typeToCachedSMAP = mutableMapOf<Type, SMAP>()
 
-    private val localClassType = ConcurrentHashMap<IrAttributeContainer, Type>()
+    private konst localClassType = ConcurrentHashMap<IrAttributeContainer, Type>()
 
-    val isCompilingAgainstJdk8OrLater = state.jvmBackendClassResolver.resolveToClassDescriptors(
+    konst isCompilingAgainstJdk8OrLater = state.jvmBackendClassResolver.resolveToClassDescriptors(
         Type.getObjectType("java/lang/invoke/LambdaMetafactory")
     ).isNotEmpty()
 
     fun getLocalClassType(container: IrAttributeContainer): Type? =
         localClassType[container.attributeOwnerId]
 
-    fun putLocalClassType(container: IrAttributeContainer, value: Type) {
-        localClassType[container.attributeOwnerId] = value
+    fun putLocalClassType(container: IrAttributeContainer, konstue: Type) {
+        localClassType[container.attributeOwnerId] = konstue
     }
 
-    val isEnclosedInConstructor = ConcurrentHashMap.newKeySet<IrAttributeContainer>()
-    val enclosingMethodOverride = ConcurrentHashMap<IrFunction, IrFunction>()
+    konst isEnclosedInConstructor = ConcurrentHashMap.newKeySet<IrAttributeContainer>()
+    konst enclosingMethodOverride = ConcurrentHashMap<IrFunction, IrFunction>()
 
-    private val classCodegens = ConcurrentHashMap<IrClass, Any>()
+    private konst classCodegens = ConcurrentHashMap<IrClass, Any>()
 
     @Suppress("UNCHECKED_CAST")
     fun <ClassCodegen : Any> getOrCreateClassCodegen(klass: IrClass, create: (IrClass) -> ClassCodegen): ClassCodegen =
         classCodegens.computeIfAbsent(klass, create) as ClassCodegen
 
-    val localDelegatedProperties = ConcurrentHashMap<IrAttributeContainer, List<IrLocalDelegatedPropertySymbol>>()
+    konst localDelegatedProperties = ConcurrentHashMap<IrAttributeContainer, List<IrLocalDelegatedPropertySymbol>>()
 
-    val multifileFacadesToAdd = mutableMapOf<JvmClassName, MutableList<IrClass>>()
-    val multifileFacadeForPart = mutableMapOf<IrClass, JvmClassName>()
-    val multifileFacadeClassForPart = mutableMapOf<IrClass, IrClass>()
-    val multifileFacadeMemberToPartMember = mutableMapOf<IrSimpleFunction, IrSimpleFunction>()
+    konst multifileFacadesToAdd = mutableMapOf<JvmClassName, MutableList<IrClass>>()
+    konst multifileFacadeForPart = mutableMapOf<IrClass, JvmClassName>()
+    konst multifileFacadeClassForPart = mutableMapOf<IrClass, IrClass>()
+    konst multifileFacadeMemberToPartMember = mutableMapOf<IrSimpleFunction, IrSimpleFunction>()
 
-    val hiddenConstructorsWithMangledParams = ConcurrentHashMap<IrConstructor, IrConstructor>()
-    val hiddenConstructorsOfSealedClasses = ConcurrentHashMap<IrConstructor, IrConstructor>()
+    konst hiddenConstructorsWithMangledParams = ConcurrentHashMap<IrConstructor, IrConstructor>()
+    konst hiddenConstructorsOfSealedClasses = ConcurrentHashMap<IrConstructor, IrConstructor>()
 
-    val collectionStubComputer = CollectionStubComputer(this)
+    konst collectionStubComputer = CollectionStubComputer(this)
 
-    private val overridesWithoutStubs = HashMap<IrSimpleFunction, List<IrSimpleFunctionSymbol>>()
+    private konst overridesWithoutStubs = HashMap<IrSimpleFunction, List<IrSimpleFunctionSymbol>>()
 
     fun recordOverridesWithoutStubs(function: IrSimpleFunction) {
         overridesWithoutStubs[function] = function.overriddenSymbols.toList()
@@ -151,33 +151,33 @@ class JvmBackendContext(
     fun getOverridesWithoutStubs(function: IrSimpleFunction): List<IrSimpleFunctionSymbol> =
         overridesWithoutStubs.getOrElse(function) { function.overriddenSymbols }
 
-    val bridgeLoweringCache = BridgeLoweringCache(this)
-    val functionsWithSpecialBridges: MutableSet<IrFunction> = ConcurrentHashMap.newKeySet()
+    konst bridgeLoweringCache = BridgeLoweringCache(this)
+    konst functionsWithSpecialBridges: MutableSet<IrFunction> = ConcurrentHashMap.newKeySet()
 
     override var inVerbosePhase: Boolean = false // TODO: needs parallelizing
 
-    override val configuration get() = state.configuration
+    override konst configuration get() = state.configuration
 
-    override val internalPackageFqn = FqName("kotlin.jvm")
+    override konst internalPackageFqn = FqName("kotlin.jvm")
 
-    val suspendLambdaToOriginalFunctionMap = ConcurrentHashMap<IrAttributeContainer, IrFunction>()
-    val suspendFunctionOriginalToView = ConcurrentHashMap<IrSimpleFunction, IrSimpleFunction>()
+    konst suspendLambdaToOriginalFunctionMap = ConcurrentHashMap<IrAttributeContainer, IrFunction>()
+    konst suspendFunctionOriginalToView = ConcurrentHashMap<IrSimpleFunction, IrSimpleFunction>()
 
-    val staticDefaultStubs = ConcurrentHashMap<IrSimpleFunctionSymbol, IrSimpleFunction>()
+    konst staticDefaultStubs = ConcurrentHashMap<IrSimpleFunctionSymbol, IrSimpleFunction>()
 
-    val inlineClassReplacements = MemoizedInlineClassReplacements(state.functionsWithInlineClassReturnTypesMangled, irFactory, this)
+    konst inlineClassReplacements = MemoizedInlineClassReplacements(state.functionsWithInlineClassReturnTypesMangled, irFactory, this)
 
-    val multiFieldValueClassReplacements = MemoizedMultiFieldValueClassReplacements(irFactory, this)
+    konst multiFieldValueClassReplacements = MemoizedMultiFieldValueClassReplacements(irFactory, this)
 
-    val valueClassLoweringDispatcherSharedData = MemoizedValueClassLoweringDispatcherSharedData()
+    konst konstueClassLoweringDispatcherSharedData = MemoizedValueClassLoweringDispatcherSharedData()
 
-    val continuationClassesVarsCountByType: MutableMap<IrAttributeContainer, Map<Type, Int>> = hashMapOf()
+    konst continuationClassesVarsCountByType: MutableMap<IrAttributeContainer, Map<Type, Int>> = hashMapOf()
 
-    val inlineMethodGenerationLock = Any()
+    konst inlineMethodGenerationLock = Any()
 
-    val publicAbiSymbols = mutableSetOf<IrClassSymbol>()
+    konst publicAbiSymbols = mutableSetOf<IrClassSymbol>()
 
-    val visitedDeclarationsForRegenerationLowering: MutableSet<IrDeclaration> = ConcurrentHashMap.newKeySet()
+    konst visitedDeclarationsForRegenerationLowering: MutableSet<IrDeclaration> = ConcurrentHashMap.newKeySet()
 
     init {
         state.mapInlineClass = { descriptor ->
@@ -185,9 +185,9 @@ class JvmBackendContext(
         }
 
         state.multiFieldValueClassUnboxInfo = lambda@{ descriptor ->
-            val irClass = symbolTable.lazyWrapper.referenceClass(descriptor).owner
-            val node = multiFieldValueClassReplacements.getRootMfvcNodeOrNull(irClass) ?: return@lambda null
-            val leavesInfo =
+            konst irClass = symbolTable.lazyWrapper.referenceClass(descriptor).owner
+            konst node = multiFieldValueClassReplacements.getRootMfvcNodeOrNull(irClass) ?: return@lambda null
+            konst leavesInfo =
                 node.leaves.map { Triple(defaultTypeMapper.mapType(it.type), it.fullMethodName.asString(), it.fullFieldName.asString()) }
             GenerationState.MultiFieldValueClassUnboxInfo(leavesInfo)
         }
@@ -221,78 +221,78 @@ class JvmBackendContext(
         classSymbolMap: MutableMap<IrClassSymbol, IrClassSymbol>,
         functionSymbolMap: MutableMap<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>
     ) {
-        val oldClassesWithNameOverride = classNameOverride.keys.toList()
+        konst oldClassesWithNameOverride = classNameOverride.keys.toList()
         for (klass in oldClassesWithNameOverride) {
             classSymbolMap[klass.symbol]?.let { newSymbol ->
                 classNameOverride[newSymbol.owner] = classNameOverride[klass]!!
             }
         }
         for (multifileFacade in multifileFacadesToAdd) {
-            val oldPartClasses = multifileFacade.value
-            val newPartClasses = oldPartClasses.map { classSymbolMap[it.symbol]?.owner ?: it }
+            konst oldPartClasses = multifileFacade.konstue
+            konst newPartClasses = oldPartClasses.map { classSymbolMap[it.symbol]?.owner ?: it }
             multifileFacade.setValue(newPartClasses.toMutableList())
         }
 
         for ((staticReplacement, original) in multiFieldValueClassReplacements.originalFunctionForStaticReplacement) {
             if (staticReplacement !is IrSimpleFunction) continue
-            val newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
-            val newStaticReplacement = multiFieldValueClassReplacements.getReplacementFunction(newOriginal) ?: continue
+            konst newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
+            konst newStaticReplacement = multiFieldValueClassReplacements.getReplacementFunction(newOriginal) ?: continue
             functionSymbolMap[staticReplacement.symbol] = newStaticReplacement.symbol
         }
 
         for ((methodReplacement, original) in multiFieldValueClassReplacements.originalFunctionForMethodReplacement) {
             if (methodReplacement !is IrSimpleFunction) continue
-            val newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
-            val newMethodReplacement = multiFieldValueClassReplacements.getReplacementFunction(newOriginal) ?: continue
+            konst newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
+            konst newMethodReplacement = multiFieldValueClassReplacements.getReplacementFunction(newOriginal) ?: continue
             functionSymbolMap[methodReplacement.symbol] = newMethodReplacement.symbol
         }
 
         for ((staticReplacement, original) in inlineClassReplacements.originalFunctionForStaticReplacement) {
             if (staticReplacement !is IrSimpleFunction) continue
-            val newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
-            val newStaticReplacement = inlineClassReplacements.getReplacementFunction(newOriginal) ?: continue
+            konst newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
+            konst newStaticReplacement = inlineClassReplacements.getReplacementFunction(newOriginal) ?: continue
             functionSymbolMap[staticReplacement.symbol] = newStaticReplacement.symbol
         }
 
         for ((methodReplacement, original) in inlineClassReplacements.originalFunctionForMethodReplacement) {
             if (methodReplacement !is IrSimpleFunction) continue
-            val newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
-            val newMethodReplacement = inlineClassReplacements.getReplacementFunction(newOriginal) ?: continue
+            konst newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
+            konst newMethodReplacement = inlineClassReplacements.getReplacementFunction(newOriginal) ?: continue
             functionSymbolMap[methodReplacement.symbol] = newMethodReplacement.symbol
         }
 
         for ((original, suspendView) in suspendFunctionOriginalToView) {
-            val newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
-            val newSuspendView = suspendFunctionOriginalToView[newOriginal] ?: continue
+            konst newOriginal = functionSymbolMap[original.symbol]?.owner ?: continue
+            konst newSuspendView = suspendFunctionOriginalToView[newOriginal] ?: continue
             functionSymbolMap[suspendView.symbol] = newSuspendView.symbol
         }
 
         for ((nonStaticDefaultSymbol, staticDefault) in staticDefaultStubs) {
-            val staticDefaultSymbol = staticDefault.symbol
-            val newNonStaticDefaultSymbol = functionSymbolMap[nonStaticDefaultSymbol] ?: continue
-            val newStaticDefaultSymbol = staticDefaultStubs[newNonStaticDefaultSymbol]?.symbol ?: continue
+            konst staticDefaultSymbol = staticDefault.symbol
+            konst newNonStaticDefaultSymbol = functionSymbolMap[nonStaticDefaultSymbol] ?: continue
+            konst newStaticDefaultSymbol = staticDefaultStubs[newNonStaticDefaultSymbol]?.symbol ?: continue
             functionSymbolMap[staticDefaultSymbol] = newStaticDefaultSymbol
         }
 
         super.handleDeepCopy(fileSymbolMap, classSymbolMap, functionSymbolMap)
     }
 
-    override val preferJavaLikeCounterLoop: Boolean
+    override konst preferJavaLikeCounterLoop: Boolean
         get() = true
 
-    override val optimizeLoopsOverUnsignedArrays: Boolean
+    override konst optimizeLoopsOverUnsignedArrays: Boolean
         get() = true
 
-    override val doWhileCounterLoopOrigin: IrStatementOrigin
+    override konst doWhileCounterLoopOrigin: IrStatementOrigin
         get() = JvmLoweredStatementOrigin.DO_WHILE_COUNTER_LOOP
 
-    override val optimizeNullChecksUsingKotlinNullability: Boolean
+    override konst optimizeNullChecksUsingKotlinNullability: Boolean
         get() = false
 
     inner class JvmIr(
         symbolTable: SymbolTable
     ) : Ir<JvmBackendContext>(this) {
-        override val symbols = JvmSymbols(this@JvmBackendContext, symbolTable)
+        override konst symbols = JvmSymbols(this@JvmBackendContext, symbolTable)
 
         override fun shouldGenerateHandlerParameterForDefaultBodyFun() = true
     }
@@ -302,28 +302,28 @@ class JvmBackendContext(
         newFunction: IrFunction,
         parametersMappingOrNull: Map<IrValueParameter, IrValueParameter>?
     ) {
-        val parametersMapping = parametersMappingOrNull ?: run {
+        konst parametersMapping = parametersMappingOrNull ?: run {
             require(oldFunction.explicitParametersCount == newFunction.explicitParametersCount) {
                 "Use non-default mapping instead:\n${oldFunction.render()}\n${newFunction.render()}"
             }
             oldFunction.explicitParameters.zip(newFunction.explicitParameters).toMap()
         }
-        val oldRemappedParameters = multiFieldValueClassReplacements.bindingNewFunctionToParameterTemplateStructure[oldFunction] ?: return
-        val newRemapsFromOld = oldRemappedParameters.mapNotNull { oldRemapping ->
+        konst oldRemappedParameters = multiFieldValueClassReplacements.bindingNewFunctionToParameterTemplateStructure[oldFunction] ?: return
+        konst newRemapsFromOld = oldRemappedParameters.mapNotNull { oldRemapping ->
             when (oldRemapping) {
-                is RegularMapping -> parametersMapping[oldRemapping.valueParameter]?.let(::RegularMapping)
+                is RegularMapping -> parametersMapping[oldRemapping.konstueParameter]?.let(::RegularMapping)
                 is MultiFieldValueClassMapping -> {
-                    val newParameters = oldRemapping.valueParameters.map { parametersMapping[it] }
+                    konst newParameters = oldRemapping.konstueParameters.map { parametersMapping[it] }
                     when {
                         newParameters.all { it == null } -> null
-                        newParameters.none { it == null } -> oldRemapping.copy(valueParameters = newParameters.map { it!! })
+                        newParameters.none { it == null } -> oldRemapping.copy(konstueParameters = newParameters.map { it!! })
                         else -> error("Illegal new parameters:\n${newParameters.joinToString("\n") { it?.dump() ?: "null" }}")
                     }
                 }
             }
         }
-        val remappedParameters = newRemapsFromOld.flatMap { remap -> remap.valueParameters.map { it to remap } }.toMap()
-        val newBinding = newFunction.explicitParameters.map { remappedParameters[it] ?: RegularMapping(it) }.distinct()
+        konst remappedParameters = newRemapsFromOld.flatMap { remap -> remap.konstueParameters.map { it to remap } }.toMap()
+        konst newBinding = newFunction.explicitParameters.map { remappedParameters[it] ?: RegularMapping(it) }.distinct()
         multiFieldValueClassReplacements.bindingNewFunctionToParameterTemplateStructure[newFunction] = newBinding
     }
 }

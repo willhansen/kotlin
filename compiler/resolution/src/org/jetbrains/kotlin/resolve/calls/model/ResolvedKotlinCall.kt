@@ -18,19 +18,19 @@ package org.jetbrains.kotlin.resolve.calls.model
 
 
 sealed class ResolvedCallArgument {
-    abstract val arguments: List<KotlinCallArgument>
+    abstract konst arguments: List<KotlinCallArgument>
 
     object DefaultArgument : ResolvedCallArgument() {
-        override val arguments: List<KotlinCallArgument>
+        override konst arguments: List<KotlinCallArgument>
             get() = emptyList()
 
     }
 
-    class SimpleArgument(val callArgument: KotlinCallArgument) : ResolvedCallArgument() {
-        override val arguments: List<KotlinCallArgument>
+    class SimpleArgument(konst callArgument: KotlinCallArgument) : ResolvedCallArgument() {
+        override konst arguments: List<KotlinCallArgument>
             get() = listOf(callArgument)
 
     }
 
-    class VarargArgument(override val arguments: List<KotlinCallArgument>) : ResolvedCallArgument()
+    class VarargArgument(override konst arguments: List<KotlinCallArgument>) : ResolvedCallArgument()
 }

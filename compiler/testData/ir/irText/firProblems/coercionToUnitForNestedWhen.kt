@@ -8,7 +8,7 @@
 import java.io.Reader
 import java.io.StringReader
 
-private const val BACKSLASH = '\\'
+private const konst BACKSLASH = '\\'
 
 private fun Reader.nextChar(): Char? =
     read().takeUnless { it == -1 }?.toChar()

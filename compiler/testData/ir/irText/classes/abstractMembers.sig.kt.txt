@@ -15,7 +15,7 @@ abstract class AbstractClass {
   // CHECK:
   //   Mangled name: AbstractClass{}abstractVal
   //   Public signature: /AbstractClass.abstractVal|2000751617811374017[0]
-  abstract val abstractVal: Int
+  abstract konst abstractVal: Int
     // CHECK JVM_IR:
     //   Mangled name: AbstractClass#<get-abstractVal>(){}kotlin.Int
     //   Public signature: /AbstractClass.abstractVal.<get-abstractVal>|1560246296064696993[0]
@@ -55,7 +55,7 @@ interface Interface {
   // CHECK:
   //   Mangled name: Interface{}abstractVal
   //   Public signature: /Interface.abstractVal|2000751617811374017[0]
-  abstract val abstractVal: Int
+  abstract konst abstractVal: Int
     // CHECK JVM_IR:
     //   Mangled name: Interface#<get-abstractVal>(){}kotlin.Int
     //   Public signature: /Interface.abstractVal.<get-abstractVal>|1560246296064696993[0]

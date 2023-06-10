@@ -17,8 +17,8 @@
 package org.jetbrains.kotlin.noarg.gradle
 
 open class NoArgExtension {
-    internal val myAnnotations = mutableListOf<String>()
-    internal val myPresets = mutableListOf<String>()
+    internal konst myAnnotations = mutableListOf<String>()
+    internal konst myPresets = mutableListOf<String>()
 
     open var invokeInitializers: Boolean = false
 

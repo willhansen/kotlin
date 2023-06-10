@@ -19,12 +19,12 @@ package org.jetbrains.kotlin.js.inline.clean
 import org.jetbrains.kotlin.js.backend.ast.*
 
 fun JsNode.resolveTemporaryNames() {
-    val renamings = resolveNames()
+    konst renamings = resolveNames()
     accept(object : RecursiveJsVisitor() {
         override fun visitElement(node: JsNode) {
             super.visitElement(node)
             if (node is HasName) {
-                val name = node.name
+                konst name = node.name
                 if (name != null) {
                     renamings[name]?.let { node.name = it }
                 }
@@ -34,12 +34,12 @@ fun JsNode.resolveTemporaryNames() {
 }
 
 private fun JsNode.resolveNames(): Map<JsName, JsName> {
-    val rootScope = computeScopes().liftUsedNames()
-    val replacements = mutableMapOf<JsName, JsName>()
+    konst rootScope = computeScopes().liftUsedNames()
+    konst replacements = mutableMapOf<JsName, JsName>()
     fun traverse(scope: Scope) {
         // Don't clash with non-temporary names declared in current scope. It's for rare cases like `_` or `Kotlin` names,
         // since most of local declarations are temporary.
-        val occupiedNames = scope.declaredNames.asSequence().filter { !it.isTemporary }.map { it.ident }.toMutableSet()
+        konst occupiedNames = scope.declaredNames.asSequence().filter { !it.isTemporary }.map { it.ident }.toMutableSet()
 
         // Don't clash with non-temporary names used in current scope. It's ok to clash with unused names.
         // Don't clash with used temporary names from outer scopes that get their resolved names. For example,
@@ -79,13 +79,13 @@ private fun Scope.liftUsedNames(): Scope {
 }
 
 private fun JsNode.computeScopes(): Scope {
-    val rootScope = Scope()
+    konst rootScope = Scope()
     accept(object : RecursiveJsVisitor() {
         var currentScope: Scope = rootScope
 
         override fun visitFunction(x: JsFunction) {
             x.name?.let { currentScope.declaredNames += it }
-            val oldScope = currentScope
+            konst oldScope = currentScope
             currentScope = Scope().apply {
                 parent = currentScope
                 currentScope.children += this
@@ -107,7 +107,7 @@ private fun JsNode.computeScopes(): Scope {
 
         override fun visitNameRef(nameRef: JsNameRef) {
             if (nameRef.qualifier == null) {
-                val name = nameRef.name
+                konst name = nameRef.name
                 currentScope.usedNames += name ?: JsDynamicScope.declareName(nameRef.ident)
             }
 
@@ -124,7 +124,7 @@ private fun JsNode.computeScopes(): Scope {
 
 private class Scope {
     var parent: Scope? = null
-    val declaredNames = mutableSetOf<JsName>()
-    val usedNames = mutableSetOf<JsName>()
-    val children = mutableSetOf<Scope>()
+    konst declaredNames = mutableSetOf<JsName>()
+    konst usedNames = mutableSetOf<JsName>()
+    konst children = mutableSetOf<Scope>()
 }

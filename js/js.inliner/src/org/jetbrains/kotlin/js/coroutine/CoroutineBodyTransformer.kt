@@ -25,25 +25,25 @@ import org.jetbrains.kotlin.js.inline.util.collectBreakContinueTargets
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 import org.jetbrains.kotlin.utils.DFS
 
-class CoroutineBodyTransformer(private val context: CoroutineTransformationContext) : RecursiveJsVisitor() {
-    private val entryBlock = context.entryBlock
-    private val globalCatchBlock = context.globalCatchBlock
+class CoroutineBodyTransformer(private konst context: CoroutineTransformationContext) : RecursiveJsVisitor() {
+    private konst entryBlock = context.entryBlock
+    private konst globalCatchBlock = context.globalCatchBlock
     private var currentBlock = entryBlock
-    private val currentStatements: MutableList<JsStatement>
+    private konst currentStatements: MutableList<JsStatement>
         get() = currentBlock.statements
-    private val breakContinueTargetStatements = mutableMapOf<JsContinue, JsStatement>()
-    private val breakTargets = mutableMapOf<JsStatement, JumpTarget>()
-    private val continueTargets = mutableMapOf<JsStatement, JumpTarget>()
-    private val referencedBlocks = mutableSetOf<CoroutineBlock>()
+    private konst breakContinueTargetStatements = mutableMapOf<JsContinue, JsStatement>()
+    private konst breakTargets = mutableMapOf<JsStatement, JumpTarget>()
+    private konst continueTargets = mutableMapOf<JsStatement, JumpTarget>()
+    private konst referencedBlocks = mutableSetOf<CoroutineBlock>()
     private lateinit var nodesToSplit: Set<JsNode>
     private var currentCatchBlock = globalCatchBlock
-    private val tryStack = mutableListOf(TryBlock(globalCatchBlock, null))
+    private konst tryStack = mutableListOf(TryBlock(globalCatchBlock, null))
 
     var hasFinallyBlocks = false
         get
         private set
 
-    private val currentTryDepth: Int
+    private konst currentTryDepth: Int
         get() = tryStack.lastIndex
 
     fun preProcess(node: JsNode) {
@@ -53,8 +53,8 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
 
     fun postProcess(): List<CoroutineBlock> {
         currentBlock.statements += JsReturn()
-        val graph = entryBlock.buildGraph(globalCatchBlock)
-        val orderedBlocks = DFS.topologicalOrder(listOf(entryBlock)) { graph[it].orEmpty() }
+        konst graph = entryBlock.buildGraph(globalCatchBlock)
+        konst orderedBlocks = DFS.topologicalOrder(listOf(entryBlock)) { graph[it].orEmpty() }
         orderedBlocks.replaceCoroutineFlowStatements(context)
         return orderedBlocks
     }
@@ -66,35 +66,35 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     override fun visitIf(x: JsIf) = splitIfNecessary(x) {
-        val ifBlock = currentBlock
+        konst ifBlock = currentBlock
 
-        val thenEntryBlock = CoroutineBlock()
+        konst thenEntryBlock = CoroutineBlock()
         currentBlock = thenEntryBlock
         x.thenStatement.accept(this)
-        val thenExitBlock = currentBlock
+        konst thenExitBlock = currentBlock
 
-        val elseEntryBlock = CoroutineBlock()
+        konst elseEntryBlock = CoroutineBlock()
         currentBlock = elseEntryBlock
         x.elseStatement?.accept(this)
-        val elseExitBlock = currentBlock
+        konst elseExitBlock = currentBlock
 
         x.thenStatement = JsBlock(thenEntryBlock.statements)
         x.elseStatement = JsBlock(elseEntryBlock.statements)
         ifBlock.statements += x
 
-        val jointBlock = CoroutineBlock()
+        konst jointBlock = CoroutineBlock()
         thenExitBlock.statements += stateAndJump(jointBlock, x)
         elseExitBlock.statements += stateAndJump(jointBlock, x)
         currentBlock = jointBlock
     }
 
     override fun visit(x: JsSwitch) = splitIfNecessary(x) {
-        val switchBlock = currentBlock
-        val jointBlock = CoroutineBlock()
+        konst switchBlock = currentBlock
+        konst jointBlock = CoroutineBlock()
 
         withBreakAndContinue(x, jointBlock, null) {
             for (jsCase in x.cases) {
-                val caseBlock = CoroutineBlock()
+                konst caseBlock = CoroutineBlock()
                 currentBlock = caseBlock
 
                 jsCase.statements.forEach { accept(it) }
@@ -108,7 +108,7 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     override fun visitLabel(x: JsLabel) {
-        val inner = x.statement
+        konst inner = x.statement
         when (inner) {
             is JsWhile,
             is JsDoWhile,
@@ -122,7 +122,7 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
             }
 
             else -> splitIfNecessary(x) {
-                val successor = CoroutineBlock()
+                konst successor = CoroutineBlock()
                 withBreakAndContinue(x.statement, successor, null) {
                     accept(inner)
                 }
@@ -135,8 +135,8 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     override fun visitWhile(x: JsWhile) = splitIfNecessary(x) {
-        val successor = CoroutineBlock()
-        val bodyEntryBlock = CoroutineBlock()
+        konst successor = CoroutineBlock()
+        konst bodyEntryBlock = CoroutineBlock()
         currentStatements += stateAndJump(bodyEntryBlock, x)
 
         currentBlock = bodyEntryBlock
@@ -153,8 +153,8 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     override fun visitDoWhile(x: JsDoWhile) = splitIfNecessary(x) {
-        val successor = CoroutineBlock()
-        val bodyEntryBlock = CoroutineBlock()
+        konst successor = CoroutineBlock()
+        konst bodyEntryBlock = CoroutineBlock()
         currentStatements += stateAndJump(bodyEntryBlock, x)
 
         currentBlock = bodyEntryBlock
@@ -163,7 +163,7 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
         }
 
         if (!JsBooleanLiteral.isTrue(x.condition)) {
-            val jsIf = JsIf(JsAstUtils.notOptimized(x.condition), JsBlock(stateAndJump(successor, x))).apply { source = x.source }
+            konst jsIf = JsIf(JsAstUtils.notOptimized(x.condition), JsBlock(stateAndJump(successor, x))).apply { source = x.source }
             currentStatements.add(jsIf)
         }
         currentBlock.statements += stateAndJump(bodyEntryBlock, x)
@@ -181,9 +181,9 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
             }
         }
 
-        val increment = CoroutineBlock()
-        val successor = CoroutineBlock()
-        val bodyEntryBlock = CoroutineBlock()
+        konst increment = CoroutineBlock()
+        konst successor = CoroutineBlock()
+        konst bodyEntryBlock = CoroutineBlock()
         currentStatements += stateAndJump(bodyEntryBlock, x)
 
         currentBlock = bodyEntryBlock
@@ -205,16 +205,16 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     override fun visitBreak(x: JsBreak) {
-        val targetStatement = breakContinueTargetStatements[x]!!
-        val (targetBlock, targetTryDepth) = breakTargets[targetStatement]!!
+        konst targetStatement = breakContinueTargetStatements[x]!!
+        konst (targetBlock, targetTryDepth) = breakTargets[targetStatement]!!
         referencedBlocks += targetBlock
         jumpWithFinally(targetTryDepth + 1, targetBlock, x)
         currentStatements += jump()
     }
 
     override fun visitContinue(x: JsContinue) {
-        val targetStatement = breakContinueTargetStatements[x]!!
-        val (targetBlock, targetTryDepth) = continueTargets[targetStatement]!!
+        konst targetStatement = breakContinueTargetStatements[x]!!
+        konst (targetBlock, targetTryDepth) = continueTargets[targetStatement]!!
         referencedBlocks += targetBlock
         jumpWithFinally(targetTryDepth + 1, targetBlock, x)
         currentStatements += jump()
@@ -226,12 +226,12 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
      */
     private fun jumpWithFinally(targetTryDepth: Int, successor: CoroutineBlock, fromNode: JsNode) {
         if (targetTryDepth < tryStack.size) {
-            val tryBlock = tryStack[targetTryDepth]
+            konst tryBlock = tryStack[targetTryDepth]
             currentStatements += exceptionState(tryBlock.catchBlock, fromNode)
         }
 
-        val relativeFinallyPath = relativeFinallyPath(targetTryDepth)
-        val fullPath = relativeFinallyPath + successor
+        konst relativeFinallyPath = relativeFinallyPath(targetTryDepth)
+        konst fullPath = relativeFinallyPath + successor
         if (fullPath.size > 1) {
             currentStatements += updateFinallyPath(fullPath.drop(1))
         }
@@ -239,16 +239,16 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     override fun visitTry(x: JsTry) = splitIfNecessary(x) {
-        val catchNode = x.catches.firstOrNull()
-        val finallyNode = x.finallyBlock
-        val successor = CoroutineBlock()
+        konst catchNode = x.catches.firstOrNull()
+        konst finallyNode = x.finallyBlock
+        konst successor = CoroutineBlock()
 
-        val catchBlock = CoroutineBlock()
-        val finallyBlock = CoroutineBlock()
+        konst catchBlock = CoroutineBlock()
+        konst finallyBlock = CoroutineBlock()
 
         tryStack += TryBlock(catchBlock, if (finallyNode != null) finallyBlock else null)
 
-        val oldCatchBlock = currentCatchBlock
+        konst oldCatchBlock = currentCatchBlock
         currentCatchBlock = catchBlock
         currentStatements += exceptionState(catchBlock, x)
 
@@ -308,16 +308,16 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     // for simple `when` statement, we will need to support JsSwitch here
 
     private fun generateFinallyExit() {
-        val finallyPathRef = JsNameRef(context.metadata.finallyPathName, JsAstUtils.stateMachineReceiver())
-        val stateRef = JsNameRef(context.metadata.stateName, JsAstUtils.stateMachineReceiver())
-        val nextState = JsInvocation(JsNameRef("shift", finallyPathRef))
+        konst finallyPathRef = JsNameRef(context.metadata.finallyPathName, JsAstUtils.stateMachineReceiver())
+        konst stateRef = JsNameRef(context.metadata.stateName, JsAstUtils.stateMachineReceiver())
+        konst nextState = JsInvocation(JsNameRef("shift", finallyPathRef))
         currentStatements += JsAstUtils.assignment(stateRef, nextState).makeStmt()
         currentStatements += jump()
     }
 
     override fun visitExpressionStatement(x: JsExpressionStatement) {
-        val expression = x.expression
-        val splitExpression = handleExpression(expression)
+        konst expression = x.expression
+        konst splitExpression = handleExpression(expression)
         if (splitExpression == expression) {
             currentStatements += x
         }
@@ -331,13 +331,13 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     override fun visitReturn(x: JsReturn) {
-        val isInFinally = hasEnclosingFinallyBlock()
+        konst isInFinally = hasEnclosingFinallyBlock()
         if (isInFinally) {
-            val returnBlock = CoroutineBlock()
+            konst returnBlock = CoroutineBlock()
             jumpWithFinally(0, returnBlock, x)
-            val returnExpression = x.expression
-            val returnFieldRef = if (returnExpression != null) {
-                val ref = JsNameRef(context.returnValueFieldName, JsAstUtils.stateMachineReceiver())
+            konst returnExpression = x.expression
+            konst returnFieldRef = if (returnExpression != null) {
+                konst ref = JsNameRef(context.returnValueFieldName, JsAstUtils.stateMachineReceiver())
                 currentStatements += JsAstUtils.assignment(ref, x.expression).makeStmt()
                 ref
             }
@@ -363,9 +363,9 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     private fun handleExpression(expression: JsExpression): JsExpression? {
-        val assignment = JsAstUtils.decomposeAssignment(expression)
+        konst assignment = JsAstUtils.decomposeAssignment(expression)
         if (assignment != null) {
-            val rhs = assignment.second
+            konst rhs = assignment.second
             if (rhs.isSuspend) {
                 handleSuspend(expression, rhs)
                 return null
@@ -379,23 +379,23 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     private fun handleSuspend(invocation: JsExpression, sourceNode: JsExpression) {
-        val psi = sourceNode.source ?: invocation.source
+        konst psi = sourceNode.source ?: invocation.source
 
-        val nextBlock = CoroutineBlock()
+        konst nextBlock = CoroutineBlock()
         currentStatements += state(nextBlock, invocation)
 
-        val resultRef = JsNameRef(context.metadata.resultName, JsAstUtils.stateMachineReceiver()).apply {
+        konst resultRef = JsNameRef(context.metadata.resultName, JsAstUtils.stateMachineReceiver()).apply {
             sideEffects = SideEffectKind.DEPENDS_ON_STATE
         }
-        val invocationStatement = JsAstUtils.assignment(resultRef, invocation).makeStmt()
-        val suspendCondition = JsAstUtils.equality(resultRef.deepCopy(), context.metadata.suspendObjectRef.deepCopy()).source(psi)
-        val suspendIfNeeded = JsIf(suspendCondition, JsReturn(context.metadata.suspendObjectRef.deepCopy().source(psi)))
+        konst invocationStatement = JsAstUtils.assignment(resultRef, invocation).makeStmt()
+        konst suspendCondition = JsAstUtils.equality(resultRef.deepCopy(), context.metadata.suspendObjectRef.deepCopy()).source(psi)
+        konst suspendIfNeeded = JsIf(suspendCondition, JsReturn(context.metadata.suspendObjectRef.deepCopy().source(psi)))
         currentStatements += listOf(invocationStatement, suspendIfNeeded, JsContinue().apply { source = psi })
         currentBlock = nextBlock
     }
 
     private fun state(target: CoroutineBlock, fromExpression: JsNode): List<JsStatement> {
-        val placeholder = JsDebugger()
+        konst placeholder = JsDebugger()
         placeholder.targetBlock = target
         placeholder.source = fromExpression.source
 
@@ -409,7 +409,7 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     private fun exceptionState(target: CoroutineBlock, fromNode: JsNode): List<JsStatement> {
-        val placeholder = JsDebugger()
+        konst placeholder = JsDebugger()
         placeholder.targetExceptionBlock = target
         placeholder.source = fromNode
 
@@ -417,7 +417,7 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
     }
 
     private fun updateFinallyPath(path: List<CoroutineBlock>): List<JsStatement> {
-        val placeholder = JsDebugger()
+        konst placeholder = JsDebugger()
         placeholder.finallyPath = path
         return listOf(placeholder)
     }
@@ -455,7 +455,7 @@ class CoroutineBodyTransformer(private val context: CoroutineTransformationConte
 
     private fun hasEnclosingFinallyBlock() = tryStack.any { it.finallyBlock != null }
 
-    private data class JumpTarget(val block: CoroutineBlock, val tryDepth: Int)
+    private data class JumpTarget(konst block: CoroutineBlock, konst tryDepth: Int)
 
-    private class TryBlock(val catchBlock: CoroutineBlock, val finallyBlock: CoroutineBlock?)
+    private class TryBlock(konst catchBlock: CoroutineBlock, konst finallyBlock: CoroutineBlock?)
 }

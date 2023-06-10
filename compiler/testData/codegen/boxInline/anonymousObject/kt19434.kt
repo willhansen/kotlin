@@ -6,12 +6,12 @@ package test
 annotation class MethodAnnotation
 
 inline fun reproduceIssue(crossinline s: () -> String): String {
-    val obj = object {
+    konst obj = object {
         @MethodAnnotation fun annotatedMethod(): String {
             return s()
         }
     }
-    val annotatedMethod = obj::class.java.declaredMethods.first { it.name == "annotatedMethod" }
+    konst annotatedMethod = obj::class.java.declaredMethods.first { it.name == "annotatedMethod" }
     if (annotatedMethod.annotations.isEmpty()) return "fail: can't find annotated method"
     return obj.annotatedMethod()
 }

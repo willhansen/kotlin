@@ -21,7 +21,7 @@ import java.lang.reflect.Type
 
 internal class ComponentRegistry {
     fun buildRegistrationMap(descriptors: Collection<ComponentDescriptor>): MultiMap<Type, ComponentDescriptor> {
-        val registrationMap = MultiMap<Type, ComponentDescriptor>()
+        konst registrationMap = MultiMap<Type, ComponentDescriptor>()
         for (descriptor in descriptors) {
             for (registration in descriptor.getRegistrations()) {
                 registrationMap.putValue(registration, descriptor)
@@ -30,14 +30,14 @@ internal class ComponentRegistry {
         return registrationMap
     }
 
-    private val registrationMap = hashMapOf<Type, Any>()
+    private konst registrationMap = hashMapOf<Type, Any>()
 
     fun addAll(descriptors: Collection<ComponentDescriptor>) {
-        val newRegistrationMap = buildRegistrationMap(descriptors)
+        konst newRegistrationMap = buildRegistrationMap(descriptors)
         for (entry in newRegistrationMap.entrySet()) {
-            val oldEntries = registrationMap[entry.key]
-            if (oldEntries != null || entry.value.size > 1) {
-                val list = mutableListOf<ComponentDescriptor>()
+            konst oldEntries = registrationMap[entry.key]
+            if (oldEntries != null || entry.konstue.size > 1) {
+                konst list = mutableListOf<ComponentDescriptor>()
                 if (oldEntries is Collection<*>) {
                     @Suppress("UNCHECKED_CAST")
                     list.addAll(oldEntries as Collection<ComponentDescriptor>)
@@ -45,22 +45,22 @@ internal class ComponentRegistry {
                 else if (oldEntries != null) {
                     list.add(oldEntries as ComponentDescriptor)
                 }
-                list.addAll(entry.value)
+                list.addAll(entry.konstue)
                 registrationMap[entry.key] = list.singleOrNull() ?: list
             }
             else {
-                registrationMap[entry.key] = entry.value.single()
+                registrationMap[entry.key] = entry.konstue.single()
             }
         }
     }
 
     fun tryGetEntry(request: Type): Collection<ComponentDescriptor> {
-        val value = registrationMap[request]
+        konst konstue = registrationMap[request]
         @Suppress("UNCHECKED_CAST")
-        return when(value) {
-            is Collection<*> -> value as Collection<ComponentDescriptor>
+        return when(konstue) {
+            is Collection<*> -> konstue as Collection<ComponentDescriptor>
             null -> emptyList()
-            else -> listOf(value as ComponentDescriptor)
+            else -> listOf(konstue as ComponentDescriptor)
         }
     }
 
@@ -74,16 +74,16 @@ internal class ComponentRegistry {
     fun resolveClashesIfAny(container: ComponentContainer, clashResolvers: List<PlatformExtensionsClashResolver<*>>) {
         /*
         The idea is to create descriptor, which is very similar to other SingletonDescriptor, but instead of calling
-        constructor we call 'resolveExtensionsClash' with values of clashed components as arguments.
+        constructor we call 'resolveExtensionsClash' with konstues of clashed components as arguments.
 
-        By mimicking the usual descriptors we get lazy evaluation and consistency checks for free.
+        By mimicking the usual descriptors we get lazy ekonstuation and consistency checks for free.
          */
         for (resolver in clashResolvers) {
             @Suppress("UNCHECKED_CAST")
-            val clashedComponents = registrationMap[resolver.applicableTo] as? Collection<ComponentDescriptor> ?: continue
+            konst clashedComponents = registrationMap[resolver.applicableTo] as? Collection<ComponentDescriptor> ?: continue
             if (clashedComponents.size <= 1) continue
 
-            val substituteDescriptor = ClashResolutionDescriptor(container, resolver, clashedComponents.toList())
+            konst substituteDescriptor = ClashResolutionDescriptor(container, resolver, clashedComponents.toList())
             registrationMap[resolver.applicableTo] = substituteDescriptor
         }
     }

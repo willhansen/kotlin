@@ -22,18 +22,18 @@ import org.jetbrains.kotlin.resolve.DelegatingBindingTrace
 import org.jetbrains.kotlin.resolve.calls.results.ResolutionStatus
 
 interface VariableAsFunctionResolvedCall {
-    val functionCall: ResolvedCall<FunctionDescriptor>
-    val variableCall: ResolvedCall<VariableDescriptor>
+    konst functionCall: ResolvedCall<FunctionDescriptor>
+    konst variableCall: ResolvedCall<VariableDescriptor>
 }
 
 interface VariableAsFunctionMutableResolvedCall : VariableAsFunctionResolvedCall {
-    override val functionCall: MutableResolvedCall<FunctionDescriptor>
-    override val variableCall: MutableResolvedCall<VariableDescriptor>
+    override konst functionCall: MutableResolvedCall<FunctionDescriptor>
+    override konst variableCall: MutableResolvedCall<VariableDescriptor>
 }
 
 class VariableAsFunctionResolvedCallImpl(
-    override val functionCall: MutableResolvedCall<FunctionDescriptor>,
-    override val variableCall: MutableResolvedCall<VariableDescriptor>
+    override konst functionCall: MutableResolvedCall<FunctionDescriptor>,
+    override konst variableCall: MutableResolvedCall<VariableDescriptor>
 ) : VariableAsFunctionMutableResolvedCall, MutableResolvedCall<FunctionDescriptor> by functionCall {
 
     override fun markCallAsCompleted() {

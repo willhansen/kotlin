@@ -2,6 +2,6 @@
 
 class C {
     inner class D {
-        val `this$0`: C? = null
+        konst `this$0`: C? = null
     }
 }

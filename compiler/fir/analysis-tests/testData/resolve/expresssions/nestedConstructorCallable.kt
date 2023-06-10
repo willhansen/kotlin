@@ -2,7 +2,7 @@ class A {
     class Nested
 
     fun main() {
-        val x = ::Nested
-        val y = A::Nested
+        konst x = ::Nested
+        konst y = A::Nested
     }
 }

@@ -34,9 +34,9 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 class FirDelegatedConstructorCallBuilder : FirCallBuilder, FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     override var argumentList: FirArgumentList = FirEmptyArgumentList
-    val contextReceiverArguments: MutableList<FirExpression> = mutableListOf()
+    konst contextReceiverArguments: MutableList<FirExpression> = mutableListOf()
     lateinit var constructedTypeRef: FirTypeRef
     var dispatchReceiver: FirExpression = FirNoReceiverExpression
     lateinit var calleeReference: FirReference

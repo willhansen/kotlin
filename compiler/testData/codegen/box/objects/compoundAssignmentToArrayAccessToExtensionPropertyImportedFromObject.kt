@@ -7,7 +7,7 @@ object A {
 }
 
 object Host {
-    val A.x get() = A.xx
+    konst A.x get() = A.xx
 }
 
 fun box(): String {

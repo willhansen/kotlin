@@ -22,6 +22,6 @@ class TailInline {
 }
 
 fun box(): String {
-    val result = TailInline().test()
+    konst result = TailInline().test()
     return if (result == 4) "OK" else "Fail: $result"
 }

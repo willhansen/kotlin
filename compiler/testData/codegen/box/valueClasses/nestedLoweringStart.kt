@@ -5,7 +5,7 @@
 // FIR_IDENTICAL
 
 @JvmInline
-value class Point(val x: Double, val y: Double)
+konstue class Point(konst x: Double, konst y: Double)
 
 
 class A {
@@ -28,7 +28,7 @@ fun toA(out: A): A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     toA(a)
     require(res.toString() == Point(1.0, 2.0).toString())
     return "OK"

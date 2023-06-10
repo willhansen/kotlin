@@ -12,27 +12,27 @@ fun nullable(a: String?): String? = ""
 @Nullable fun nullableWithN(): String? = ""
 @NotNull fun nullableWithNN(): String? = ""
 
-val nullableVal: String? = { "" }()
+konst nullableVal: String? = { "" }()
 var nullableVar: String? = { "" }()
-val notNullVal: String = { "" }()
+konst notNullVal: String = { "" }()
 var notNullVar: String = { "" }()
 
-val notNullValWithGet: String
+konst notNullValWithGet: String
     @[Nullable] get() = ""
 
 var notNullVarWithGetSet: String
     @[Nullable] get() = ""
     @[Nullable] set(v) {}
 
-val nullableValWithGet: String?
+konst nullableValWithGet: String?
     @[NotNull] get() = ""
 
 var nullableVarWithGetSet: String?
     @NotNull get() = ""
     @NotNull set(v) {}
 
-private val privateNn: String = { "" }()
-private val privateN: String? = { "" }()
+private konst privateNn: String = { "" }()
+private konst privateN: String? = { "" }()
 private fun privateFun(a: String, b: String?): String? = null
 
 // FIR_COMPARISON

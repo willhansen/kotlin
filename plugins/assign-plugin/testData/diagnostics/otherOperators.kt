@@ -11,11 +11,11 @@ data class StringProperty(var v: String) {
     fun get(): String = v
 }
 
-data class Task(val input: StringProperty)
+data class Task(konst input: StringProperty)
 
 fun `should not effect error reporting for other operators`() {
-    val task = Task(StringProperty("Fail"))
-    val nullTask: Task? = null
+    konst task = Task(StringProperty("Fail"))
+    konst nullTask: Task? = null
 
     // a.b += c
     task.input <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>+=<!> StringProperty("Fail")

@@ -16,13 +16,13 @@ fun takeStrings(list: List<String>) {}
 fun getStrings(): Array<String> = null!!
 
 fun testFromKotlin() {
-    val values = getStrings()
-    val list = myListOf(*values)
+    konst konstues = getStrings()
+    konst list = myListOf(*konstues)
     takeStrings(list)
 }
 
 fun testFromJava() {
-    val values = Utils.getStrings()
-    val list = myListOf(*values)
+    konst konstues = Utils.getStrings()
+    konst list = myListOf(*konstues)
     takeStrings(list)
 }

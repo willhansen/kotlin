@@ -39,19 +39,19 @@ internal class IrProviderForCEnumAndCStructStubs(
     /**
      *  TODO: integrate this provider into [KonanIrLinker.KonanInteropModuleDeserializer]
      */
-    private val symbolTable: SymbolTable = context.symbolTable
+    private konst symbolTable: SymbolTable = context.symbolTable
 
-    private val cEnumByValueFunctionGenerator =
+    private konst cEnumByValueFunctionGenerator =
             CEnumByValueFunctionGenerator(context, symbols)
-    private val cEnumCompanionGenerator =
+    private konst cEnumCompanionGenerator =
             CEnumCompanionGenerator(context, cEnumByValueFunctionGenerator)
-    private val cEnumVarClassGenerator =
+    private konst cEnumVarClassGenerator =
             CEnumVarClassGenerator(context, symbols)
-    private val cEnumClassGenerator =
+    private konst cEnumClassGenerator =
             CEnumClassGenerator(context, cEnumCompanionGenerator, cEnumVarClassGenerator)
-    private val cStructCompanionGenerator =
+    private konst cStructCompanionGenerator =
             CStructVarCompanionGenerator(context, symbols)
-    private val cStructClassGenerator =
+    private konst cStructClassGenerator =
             CStructVarClassGenerator(context, cStructCompanionGenerator, symbols)
 
     fun isCEnumOrCStruct(declarationDescriptor: DeclarationDescriptor): Boolean =
@@ -117,6 +117,6 @@ internal class IrProviderForCEnumAndCStructStubs(
     }
 
     companion object {
-        const val cTypeDefinitionsFileName = "CTypeDefinitions"
+        const konst cTypeDefinitionsFileName = "CTypeDefinitions"
     }
 }

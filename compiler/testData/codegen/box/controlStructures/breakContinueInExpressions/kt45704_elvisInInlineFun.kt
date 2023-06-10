@@ -1,6 +1,6 @@
 inline fun inlineCall(block: (CharSequence, CharSequence) -> Unit) {
     for (i in 0..0) {
-        val s = "K".takeIf { true }
+        konst s = "K".takeIf { true }
 
         block(
             "O",

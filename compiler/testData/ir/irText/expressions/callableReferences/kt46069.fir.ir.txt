@@ -12,7 +12,7 @@ FILE fqName:<root> fileName:/kt46069.kt
       VALUE_PARAMETER name:args index:1 type:kotlin.Array<out kotlin.Any?> varargElementType:kotlin.Any? [vararg]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun describedAs (description: kotlin.String?, vararg args: kotlin.Any?): <root>.ObjectAssert<ACTUAL of <root>.ObjectAssert>? declared in <root>.ObjectAssert'
-          CONST Null type=kotlin.Nothing? value=null
+          CONST Null type=kotlin.Nothing? konstue=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -58,29 +58,29 @@ FILE fqName:<root> fileName:/kt46069.kt
     $receiver: VALUE_PARAMETER name:<this> type:T of <root>.assertNotNull?
     VALUE_PARAMETER name:description index:0 type:kotlin.String?
       EXPRESSION_BODY
-        CONST Null type=kotlin.Nothing? value=null
+        CONST Null type=kotlin.Nothing? konstue=null
     BLOCK_BODY
-      VAR name:assert type:<root>.ObjectAssert<T of <root>.assertNotNull?> [val]
+      VAR name:assert type:<root>.ObjectAssert<T of <root>.assertNotNull?> [konst]
         CALL 'public final fun assertThat <S> (actual: S of <root>.Assertions.assertThat): <root>.ObjectAssert<S of <root>.Assertions.assertThat> declared in <root>.Assertions' type=<root>.ObjectAssert<T of <root>.assertNotNull?> origin=null
           <S>: T of <root>.assertNotNull?
           $this: GET_OBJECT 'CLASS OBJECT name:Assertions modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Assertions
           actual: GET_VAR '<this>: T of <root>.assertNotNull? declared in <root>.assertNotNull' type=T of <root>.assertNotNull? origin=null
       TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
         BLOCK type=<root>.ObjectAssert<T of <root>.assertNotNull?>? origin=SAFE_CALL
-          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlin.String? [val]
+          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlin.String? [konst]
             GET_VAR 'description: kotlin.String? declared in <root>.assertNotNull' type=kotlin.String? origin=null
           WHEN type=<root>.ObjectAssert<T of <root>.assertNotNull?>? origin=null
             BRANCH
               if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                arg0: GET_VAR 'val tmp_0: kotlin.String? declared in <root>.assertNotNull' type=kotlin.String? origin=null
-                arg1: CONST Null type=kotlin.Nothing? value=null
-              then: CONST Null type=kotlin.Nothing? value=null
+                arg0: GET_VAR 'konst tmp_0: kotlin.String? declared in <root>.assertNotNull' type=kotlin.String? origin=null
+                arg1: CONST Null type=kotlin.Nothing? konstue=null
+              then: CONST Null type=kotlin.Nothing? konstue=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
+              if: CONST Boolean type=kotlin.Boolean konstue=true
               then: CALL 'public final fun let <T, R> (block: kotlin.Function1<T of kotlin.let, R of kotlin.let>): R of kotlin.let declared in kotlin' type=<root>.ObjectAssert<T of <root>.assertNotNull?>? origin=null
                 <T>: kotlin.String
                 <R>: <root>.ObjectAssert<T of <root>.assertNotNull?>?
-                $receiver: GET_VAR 'val tmp_0: kotlin.String? declared in <root>.assertNotNull' type=kotlin.String? origin=null
+                $receiver: GET_VAR 'konst tmp_0: kotlin.String? declared in <root>.assertNotNull' type=kotlin.String? origin=null
                 block: BLOCK type=kotlin.Function1<kotlin.String?, <root>.ObjectAssert<T of <root>.assertNotNull?>?> origin=ADAPTED_FUNCTION_REFERENCE
                   FUN ADAPTER_FOR_CALLABLE_REFERENCE name:describedAs visibility:local modality:FINAL <> ($receiver:<root>.ObjectAssert<T of <root>.assertNotNull?>, p0:kotlin.String?) returnType:<root>.ObjectAssert<T of <root>.assertNotNull?>?
                     $receiver: VALUE_PARAMETER ADAPTER_PARAMETER_FOR_CALLABLE_REFERENCE name:receiver type:<root>.ObjectAssert<T of <root>.assertNotNull?>
@@ -91,4 +91,4 @@ FILE fqName:<root> fileName:/kt46069.kt
                           $this: GET_VAR 'receiver: <root>.ObjectAssert<T of <root>.assertNotNull?> declared in <root>.assertNotNull.describedAs' type=<root>.ObjectAssert<T of <root>.assertNotNull?> origin=ADAPTED_FUNCTION_REFERENCE
                           description: GET_VAR 'p0: kotlin.String? declared in <root>.assertNotNull.describedAs' type=kotlin.String? origin=null
                   FUNCTION_REFERENCE 'local final fun describedAs (p0: kotlin.String?): <root>.ObjectAssert<T of <root>.assertNotNull?>? declared in <root>.assertNotNull' type=kotlin.Function1<kotlin.String?, <root>.ObjectAssert<T of <root>.assertNotNull?>?> origin=ADAPTED_FUNCTION_REFERENCE reflectionTarget=null
-                    $receiver: GET_VAR 'val assert: <root>.ObjectAssert<T of <root>.assertNotNull?> declared in <root>.assertNotNull' type=<root>.ObjectAssert<T of <root>.assertNotNull?> origin=null
+                    $receiver: GET_VAR 'konst assert: <root>.ObjectAssert<T of <root>.assertNotNull?> declared in <root>.assertNotNull' type=<root>.ObjectAssert<T of <root>.assertNotNull?> origin=null

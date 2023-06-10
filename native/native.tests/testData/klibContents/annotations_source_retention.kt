@@ -45,9 +45,9 @@ class Foo @AnnoConstructor constructor(@AnnoConstructorParameter i: Int) {
         set(@AnnoSetParam2 x: Int) { field = x*2 }
 
     @delegate:AnnoDelegatedField
-    val immutableProp by lazy { prop }
+    konst immutableProp by lazy { prop }
 }
 @AnnoFunction
 fun @receiver:AnnoFunctionExtensionReceiver Foo.extfun(@AnnoFunctionParam x: Int) {}
 @AnnoPropertyExtensionReceiver
-val Foo.extProp get() = this.prop
+konst Foo.extProp get() = this.prop

@@ -31,6 +31,6 @@ interface Identity {
 }
 
 fun box(): String {
-    val impl = JavaImpl("OK")
+    konst impl = JavaImpl("OK")
     return impl.id()
 }

@@ -5,12 +5,12 @@
 import kotlin.test.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
 fun foo(s: S) = s
 
 fun box(): String {
-    val fooRef = ::foo
+    konst fooRef = ::foo
 
     assertEquals("abc", fooRef.invoke(S("abc")).string)
     assertEquals("foo", fooRef.name)

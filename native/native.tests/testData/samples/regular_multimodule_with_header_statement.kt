@@ -1,16 +1,16 @@
 // This is a statement that should go to main.kt in the default module:
-const val TRIVIAL_PI = 3.14
+const konst TRIVIAL_PI = 3.14
 
 // MODULE: distance
 // FILE: entities.kt
-value class Length(val meters: Double)
-value class SurfaceArea(val squareMeters: Double)
-value class Volume(val cubicMeters: Double)
+konstue class Length(konst meters: Double)
+konstue class SurfaceArea(konst squareMeters: Double)
+konstue class Volume(konst cubicMeters: Double)
 
 // FILE: extensions.kt
-val Number.Meters: Length get() = Length(toDouble())
-val Number.SquareMeters: SurfaceArea get() = SurfaceArea(toDouble())
-val Number.CubicMeters: Volume get() = Volume(toDouble())
+konst Number.Meters: Length get() = Length(toDouble())
+konst Number.SquareMeters: SurfaceArea get() = SurfaceArea(toDouble())
+konst Number.CubicMeters: Volume get() = Volume(toDouble())
 
 // FILE: operators.kt
 operator fun Number.times(length: Length): Length = Length(toDouble() * length.meters)
@@ -28,22 +28,22 @@ operator fun Volume.times(factor: Number): Volume = Volume(cubicMeters * factor.
 
 // MODULE: density
 // FILE: entities.kt
-value class Density(val kilogramsPerCubicMeter: Double) {
+konstue class Density(konst kilogramsPerCubicMeter: Double) {
     companion object {
-        val AIR: Density = 1.2.KilogramsPerCubicMeter
-        val WATER: Density = 1000.KilogramsPerCubicMeter
+        konst AIR: Density = 1.2.KilogramsPerCubicMeter
+        konst WATER: Density = 1000.KilogramsPerCubicMeter
     }
 }
 
 // FILE: extensions.kt
-val Number.KilogramsPerCubicMeter: Density get() = Density(toDouble())
+konst Number.KilogramsPerCubicMeter: Density get() = Density(toDouble())
 
 // MODULE: mass(distance,density)
 // FILE: entities.kt
-value class Mass(val kilograms: Double)
+konstue class Mass(konst kilograms: Double)
 
 // FILE: extensions.kt
-val Number.Kilograms: Mass get() = Mass(toDouble())
+konst Number.Kilograms: Mass get() = Mass(toDouble())
 
 // FILE: operators.kt
 operator fun Volume.times(density: Density): Mass = Mass(cubicMeters * density.kilogramsPerCubicMeter)
@@ -51,14 +51,14 @@ operator fun Density.times(volume: Volume): Mass = Mass(kilogramsPerCubicMeter *
 
 // MODULE: shapes(mass,default)
 // FILE: default.kt
-class Ball(private val radius: Length) {
-    val surfaceArea1: SurfaceArea get() = TRIVIAL_PI * radius * radius
-    val surfaceArea2: SurfaceArea get() = radius * TRIVIAL_PI * radius
-    val surfaceArea3: SurfaceArea get() = radius * radius * TRIVIAL_PI
+class Ball(private konst radius: Length) {
+    konst surfaceArea1: SurfaceArea get() = TRIVIAL_PI * radius * radius
+    konst surfaceArea2: SurfaceArea get() = radius * TRIVIAL_PI * radius
+    konst surfaceArea3: SurfaceArea get() = radius * radius * TRIVIAL_PI
 
-    val volume1: Volume get() = 0.75 * surfaceArea1 * radius
-    val volume2: Volume get() = 0.75 * (radius * surfaceArea1)
-    val volume3: Volume get() = surfaceArea1 * radius * 0.75
+    konst volume1: Volume get() = 0.75 * surfaceArea1 * radius
+    konst volume2: Volume get() = 0.75 * (radius * surfaceArea1)
+    konst volume3: Volume get() = surfaceArea1 * radius * 0.75
 }
 
 // MODULE: assertions(shapes)

@@ -12,7 +12,7 @@ class ErrorMultipleMissingAnnotations
 @CDE @Anno(ABC::class) @ABC
 class ErrorSomeMissingAnnotations
 
-annotation class Anno(val klass: KClass<*>)
+annotation class Anno(konst klass: KClass<*>)
 
 // EXPECTED_ERROR: (kotlin:9:1) cannot find symbol
 // EXPECTED_ERROR: (kotlin:12:1) cannot find symbol

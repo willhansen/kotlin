@@ -3,14 +3,14 @@ package test
 public interface StringConstantInParam {
 
     public final annotation class Anno : kotlin.Annotation {
-        public constructor Anno(/*0*/ value: kotlin.String)
-        public final val value: kotlin.String
+        public constructor Anno(/*0*/ konstue: kotlin.String)
+        public final konst konstue: kotlin.String
     }
 
-    @test.StringConstantInParam.Anno(value = "hello") public open class Class {
+    @test.StringConstantInParam.Anno(konstue = "hello") public open class Class {
         public constructor Class()
     }
 
     // Static members
-    public const final val HEL: kotlin.String = "hel"
+    public const final konst HEL: kotlin.String = "hel"
 }

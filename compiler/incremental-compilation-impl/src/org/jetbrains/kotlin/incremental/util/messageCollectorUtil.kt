@@ -11,7 +11,7 @@ public fun MessageCollector.reportException(e: Throwable, location: ExceptionLoc
     report(severity = CompilerMessageSeverity.EXCEPTION, message = "${location.readableName} failed: ${e.message}\n${e.stackTraceToString()}")
 }
 
-public enum class ExceptionLocation(val readableName: String) {
+public enum class ExceptionLocation(konst readableName: String) {
     INCREMENTAL_COMPILATION("Incremental compilation"),
     DAEMON("Daemon compilation"),
     OUT_OF_PROCESS_COMPILATION("Out of process compilation")

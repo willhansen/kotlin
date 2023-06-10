@@ -12,15 +12,15 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 
 abstract class KtPropertyDelegationMethodsReference(element: KtPropertyDelegate) : KtMultiReference<KtPropertyDelegate>(element) {
     override fun getRangeInElement(): TextRange {
-        val byKeywordNode = expression.byKeywordNode
-        val offset = byKeywordNode.psi!!.startOffsetInParent
+        konst byKeywordNode = expression.byKeywordNode
+        konst offset = byKeywordNode.psi!!.startOffsetInParent
         return TextRange(offset, offset + byKeywordNode.textLength)
     }
 
-       override val resolvesByNames: Collection<Name> get() = NAMES
+       override konst resolvesByNames: Collection<Name> get() = NAMES
 
     companion object {
-        private val NAMES = listOf(
+        private konst NAMES = listOf(
             OperatorNameConventions.GET_VALUE,
             OperatorNameConventions.SET_VALUE,
             OperatorNameConventions.PROVIDE_DELEGATE

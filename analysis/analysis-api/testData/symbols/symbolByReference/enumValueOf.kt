@@ -5,5 +5,5 @@ enum class MyKotlinEnum {
 }
 
 fun test() {
-    MyKotlinEnum.val<caret>ueOf("")
+    MyKotlinEnum.konst<caret>ueOf("")
 }

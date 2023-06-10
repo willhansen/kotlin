@@ -4,8 +4,8 @@
 package test
 
 inline fun myValues(): String {
-    val values = enumValues<Z>()
-    return values.joinToString("")
+    konst konstues = enumValues<Z>()
+    return konstues.joinToString("")
 }
 
 enum class Z {

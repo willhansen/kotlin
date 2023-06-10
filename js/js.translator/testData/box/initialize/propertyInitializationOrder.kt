@@ -2,22 +2,22 @@
 // IGNORE_BACKEND: JS_IR_ES6
 // KJS_WITH_FULL_RUNTIME
 // SKIP_MINIFICATION
-// This test uses eval
+// This test uses ekonst
 open class A {
-    val a: Int
-    open val b: Int
-    val c = 99
-    val d: Int = 555
+    konst a: Int
+    open konst b: Int
+    konst c = 99
+    konst d: Int = 555
         get() = field
 
-    val e: Int
+    konst e: Int
         get() = field
 
     @get:JsName("getF")
-    val f: Int
+    konst f: Int
 
     @get:JsName("getG")
-    val g: Int = 777
+    konst g: Int = 777
 
     lateinit var h: String
 
@@ -33,8 +33,8 @@ open class A {
 fun foo() {}
 
 fun box(): String {
-    val aBody = eval("A").toString()
-    val expectedRegex = build {
+    konst aBody = ekonst("A").toString()
+    konst expectedRegex = build {
         property("a")
         field("b")
         property("c")
@@ -50,7 +50,7 @@ fun box(): String {
 }
 
 fun build(f: RegexBuilder.() -> Unit): Regex {
-    val builder = RegexBuilder()
+    konst builder = RegexBuilder()
     builder.f()
     return Regex(builder.string + "foo()", RegexOption.MULTILINE)
 }
@@ -67,5 +67,5 @@ class RegexBuilder {
     }
 }
 
-val ANY_CHARS = "(.|\n)+"
-val FIELD_SUFFIX = "_[a-zA-Z0-9\\\$_]+"
+konst ANY_CHARS = "(.|\n)+"
+konst FIELD_SUFFIX = "_[a-zA-Z0-9\\\$_]+"

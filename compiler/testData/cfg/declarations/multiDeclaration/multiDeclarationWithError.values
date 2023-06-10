@@ -1,6 +1,6 @@
 == foo ==
 fun foo(x: Int) {
-    val (a, b) = x
+    konst (a, b) = x
     a
 }
 ---------------------
@@ -9,5 +9,5 @@ fun foo(x: Int) {
                        <v3>: {<: [Error type: component2() return type]}   NEW: magic[UNRESOLVED_CALL](b|<v1>) -> <v3>
 x                      <v1>: *                                             NEW: r(x) -> <v1>
 a                      <v4>: *                                             NEW: r(a) -> <v4>
-{ val (a, b) = x a }   <v4>: *                                             COPY
+{ konst (a, b) = x a }   <v4>: *                                             COPY
 =====================

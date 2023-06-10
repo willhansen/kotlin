@@ -7,8 +7,8 @@ package runtime.memory.var1
 
 import kotlin.test.*
 
-class Integer(val value: Int) {
-    operator fun inc() = Integer(value + 1)
+class Integer(konst konstue: Int) {
+    operator fun inc() = Integer(konstue + 1)
 }
 
 fun foo(x: Any, y: Any) {
@@ -20,7 +20,7 @@ fun foo(x: Any, y: Any) {
     var x = Integer(0)
 
     for (i in 0..1) {
-        val c = Integer(0)
+        konst c = Integer(0)
         if (i == 0) x = c
     }
 
@@ -37,14 +37,14 @@ fun Any?.use() {
 @kotlin.native.internal.CanBePrecreated
 object CompileTime {
 
-    const val int = Int.MIN_VALUE
-    const val byte = Byte.MIN_VALUE
-    const val short = Short.MIN_VALUE
-    const val long = Long.MIN_VALUE
-    const val boolean = true
-    const val float = 1.0f
-    const val double = 1.0
-    const val char = Char.MIN_VALUE
+    const konst int = Int.MIN_VALUE
+    const konst byte = Byte.MIN_VALUE
+    const konst short = Short.MIN_VALUE
+    const konst long = Long.MIN_VALUE
+    const konst boolean = true
+    const konst float = 1.0f
+    const konst double = 1.0
+    const konst char = Char.MIN_VALUE
 }
 
 class AClass {

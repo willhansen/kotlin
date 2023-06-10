@@ -1,5 +1,5 @@
 open class T {
-    val x : Int? = null
+    konst x : Int? = null
 }
 
 class A {

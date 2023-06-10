@@ -33,10 +33,10 @@ import java.util.Map;
  * Notice the difference between two function descriptors in this class.
  * - [referencedFunction] is the function declaration which is referenced by the "::" expression. This is a real function present in code.
  * - [functionDescriptor] is a synthetically created function which has the same signature as the "invoke" of the generated callable
- *   reference subclass. Its parameters include dispatch/extension receiver parameters of the referenced function, and those value
+ *   reference subclass. Its parameters include dispatch/extension receiver parameters of the referenced function, and those konstue
  *   parameters of the referenced function which are required by the expected function type where the callable reference is passed to.
- *   In simple cases, these value parameters are all of the referenced function's value parameters. But in cases when the referenced
- *   function has parameters with default values, or a vararg parameter, functionDescriptor can take fewer parameters than
+ *   In simple cases, these konstue parameters are all of the referenced function's konstue parameters. But in cases when the referenced
+ *   function has parameters with default konstues, or a vararg parameter, functionDescriptor can take fewer parameters than
  *   referencedFunction if the expected function type takes fewer parameters as well. For example:
  *
  * fun foo(a: A, b: B = ..., c: C = ..., vararg d: D) {}
@@ -80,7 +80,7 @@ public class FunctionReferenceGenerationStrategy extends FunctionGenerationStrat
         this.receiverValue = receiverValue;
         this.isInliningStrategy = isInliningStrategy;
         assert receiverType != null || receiverValue == null
-                : "A receiver value is provided for unbound function reference. Either this is a bound reference and you forgot " +
+                : "A receiver konstue is provided for unbound function reference. Either this is a bound reference and you forgot " +
                   "to pass receiverType, or you accidentally passed some receiverValue for a reference without receiver";
     }
 
@@ -117,7 +117,7 @@ public class FunctionReferenceGenerationStrategy extends FunctionGenerationStrat
 
                         if (i == fakeArgCount) {
                             // If we've exhausted the argument list of the reference and we still have one vararg parameter left,
-                            // we should use its default value if present, or simply an empty vararg instead
+                            // we should use its default konstue if present, or simply an empty vararg instead
                             argumentMap.put(
                                     parameter,
                                     ArgumentsUtilsKt.hasDefaultValue(parameter) ? DefaultValueArgument.DEFAULT : new VarargValueArgument()
@@ -159,7 +159,7 @@ public class FunctionReferenceGenerationStrategy extends FunctionGenerationStrat
             @NotNull
             @Override
             public List<ResolvedValueArgument> getValueArgumentsByIndex() {
-                return new ArrayList<>(argumentMap.values());
+                return new ArrayList<>(argumentMap.konstues());
             }
 
             @NotNull
@@ -207,11 +207,11 @@ public class FunctionReferenceGenerationStrategy extends FunctionGenerationStrat
     private void computeAndSaveArguments(
             @NotNull List<? extends ValueArgument> fakeArguments, @NotNull ExpressionCodegen codegen, int receivers
     ) {
-        List<ValueParameterDescriptor> valueParameters = CollectionsKt.drop(functionDescriptor.getValueParameters(), receivers);
-        assert valueParameters.size() == fakeArguments.size()
-                : functionDescriptor + ": " + valueParameters.size() + " != " + fakeArguments.size();
-        for (int i = 0; i < valueParameters.size(); i++) {
-            ValueParameterDescriptor parameter = valueParameters.get(i);
+        List<ValueParameterDescriptor> konstueParameters = CollectionsKt.drop(functionDescriptor.getValueParameters(), receivers);
+        assert konstueParameters.size() == fakeArguments.size()
+                : functionDescriptor + ": " + konstueParameters.size() + " != " + fakeArguments.size();
+        for (int i = 0; i < konstueParameters.size(); i++) {
+            ValueParameterDescriptor parameter = konstueParameters.get(i);
             ValueArgument fakeArgument = fakeArguments.get(i);
 
             Type type = state.getTypeMapper().mapType(parameter);

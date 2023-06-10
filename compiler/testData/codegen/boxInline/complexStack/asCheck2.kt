@@ -5,7 +5,7 @@ package test
 object ContentTypeByExtension {
     inline fun processRecords(crossinline operation: (String) -> String) =
              {
-                val ext = B("OK")
+                konst ext = B("OK")
                 operation(ext.toLowerCase())
             }.let { it() }
 }
@@ -13,11 +13,11 @@ object ContentTypeByExtension {
 
 
 
-inline fun A.toLowerCase(): String = (this as B).value
+inline fun A.toLowerCase(): String = (this as B).konstue
 
 open class A
 
-open class B(val value: String) : A()
+open class B(konst konstue: String) : A()
 
 // FILE: 2.kt
 

@@ -32,7 +32,7 @@ object DynamicReceiverChecker : DeclarationChecker {
         // function expression
         if (declaration is KtNamedFunction && declaration.name == null) return
 
-        if (descriptor.extensionReceiverParameter?.value?.type?.isDynamic() == true) {
+        if (descriptor.extensionReceiverParameter?.konstue?.type?.isDynamic() == true) {
             context.trace.report(Errors.DYNAMIC_RECEIVER_NOT_ALLOWED.on(declaration))
         }
     }

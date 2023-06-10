@@ -16,7 +16,7 @@ kotlin {
     }
 
     sourceSets {
-        val hostMain by getting {
+        konst hostMain by getting {
             dependencies {
                 implementation("com.example:build-cache-lib:1.0")
                 api(project(":build-cache-app:lib-module"))

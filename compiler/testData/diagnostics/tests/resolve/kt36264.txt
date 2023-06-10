@@ -1,6 +1,6 @@
 package
 
-public val kotlin.String.ext: A
+public konst kotlin.String.ext: A
 public fun take(/*0*/ arg: kotlin.Any): kotlin.Unit
 
 public interface A {

@@ -3,20 +3,20 @@
 
 abstract class MostBase {
     inner class Inner(
-        val bad: String,
+        konst bad: String,
     )
 }
 
 abstract class Base : MostBase() {
     inner class Inner(
-        val name: String?,
-        val res: Int,
+        konst name: String?,
+        konst res: Int,
     )
 }
 
 class A : Base() {
     fun foo(l: List<Inner>) {
-        val m = l.groupBy(Inner::name)
+        konst m = l.groupBy(Inner::name)
         m[""]!![0].res
     }
 }

@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.psi.KtForExpression
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 
 class ArrayRangeValue(
-    private val canCacheArrayLength: Boolean,
-    private val shouldAlwaysStoreArrayInNewVar: Boolean
+    private konst canCacheArrayLength: Boolean,
+    private konst shouldAlwaysStoreArrayInNewVar: Boolean
 ) : RangeValue {
     override fun createForLoopGenerator(codegen: ExpressionCodegen, forExpression: KtForExpression) =
         ForInArrayLoopGenerator(codegen, forExpression, canCacheArrayLength, shouldAlwaysStoreArrayInNewVar)

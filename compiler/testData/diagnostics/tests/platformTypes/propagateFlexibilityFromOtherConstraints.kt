@@ -7,7 +7,7 @@
 import java.util.Comparator
 
 abstract class DataView {
-    abstract val presentationName: String
+    abstract konst presentationName: String
 }
 
 fun <A> comboBox(
@@ -18,8 +18,8 @@ fun <A> comboBox(
 class GraphProperty<B>
 
 fun test() {
-    val presentationName: (DataView) -> String = { it.presentationName }
-    val parentComboBoxModel/*: SortedComboBoxModel<DataView>*/ = SortedComboBoxModel(Comparator.comparing(presentationName))
+    konst presentationName: (DataView) -> String = { it.presentationName }
+    konst parentComboBoxModel/*: SortedComboBoxModel<DataView>*/ = SortedComboBoxModel(Comparator.comparing(presentationName))
     comboBox(parentComboBoxModel, GraphProperty<DataView>())
 }
 

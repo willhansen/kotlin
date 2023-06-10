@@ -8,18 +8,18 @@ import org.jetbrains.gradle.ext.TopLevelArtifact
 import org.jetbrains.kotlin.ideaExt.*
 
 
-val ideaPluginDir: File by extra
-val ideaSandboxDir: File by extra
-val ideaSdkPath: String
+konst ideaPluginDir: File by extra
+konst ideaSandboxDir: File by extra
+konst ideaSdkPath: String
     get() = rootProject.ideaHomePathForTests().absolutePath
 
 fun updateCompilerXml() {
-    val modulesExcludedFromJps = listOf(
+    konst modulesExcludedFromJps = listOf(
         "buildSrc",
         "native/commonizer",
         "plugins/atomicfu/atomicfu-runtime",
         "libraries/tools/atomicfu",
-        "libraries/tools/binary-compatibility-validator",
+        "libraries/tools/binary-compatibility-konstidator",
         "libraries/tools/dukat",
         "libraries/tools/gradle",
         "libraries/tools/kotlin-allopen",
@@ -80,16 +80,16 @@ fun updateCompilerXml() {
         "plugins/pill/generate-all-tests/test/org/jetbrains/kotlin/pill/generateAllTests", // KT-58111
     )
 
-    val d = '$'
-    val excludeEntries = modulesExcludedFromJps.joinToString("\n      ") {
+    konst d = '$'
+    konst excludeEntries = modulesExcludedFromJps.joinToString("\n      ") {
         """      <directory url="file://${d}PROJECT_DIR${d}/$it" includeSubdirectories="true" />"""
     }
 
-    val xmlContent = """
+    konst xmlContent = """
     <?xml version="1.0" encoding="UTF-8"?>
     <project version="4">
       <component name="CompilerConfiguration">
-        <option name="BUILD_PROCESS_HEAP_SIZE" value="2000" />
+        <option name="BUILD_PROCESS_HEAP_SIZE" konstue="2000" />
         <excludeFromCompile>
           ${excludeEntries}
         </excludeFromCompile>
@@ -130,9 +130,9 @@ fun setupGenerateAllTestsRunConfiguration() {
         """
         |<component name="ProjectRunConfigurationManager">
         | <configuration default="false" name="[JPS] Generate All Tests" type="Application" factoryName="Application">
-        |    <option name="MAIN_CLASS_NAME" value="org.jetbrains.kotlin.pill.generateAllTests.Main" />
+        |    <option name="MAIN_CLASS_NAME" konstue="org.jetbrains.kotlin.pill.generateAllTests.Main" />
         |    <module name="kotlin.pill.generate-all-tests.test" />
-        |    <option name="VM_PARAMETERS" value="&quot;-Dline.separator=&#xA;&quot;" />
+        |    <option name="VM_PARAMETERS" konstue="&quot;-Dline.separator=&#xA;&quot;" />
         |    <shortenClasspath name="CLASSPATH_FILE" />
         |    <method v="2">
         |      <option name="Make" enabled="true" />
@@ -145,7 +145,7 @@ fun setupGenerateAllTestsRunConfiguration() {
 // Needed because of idea.ext plugin doesn't allow to set TEST_SEARCH_SCOPE = moduleWithDependencies
 fun setupFirRunConfiguration() {
 
-    val junit = JUnit("_stub").apply { configureForKotlin("2048m") }
+    konst junit = JUnit("_stub").apply { configureForKotlin("2048m") }
     junit.moduleName = "kotlin.compiler.fir.fir2ir.test"
     junit.pattern = """^.*\.FirPsi\w+Test\w*Generated$"""
     junit.vmParameters = junit.vmParameters.replace(rootDir.absolutePath, "\$PROJECT_DIR\$")
@@ -156,19 +156,19 @@ fun setupFirRunConfiguration() {
             |<component name="ProjectRunConfigurationManager">
             |  <configuration default="false" name="[JPS] Fast FIR PSI tests" type="JUnit" factoryName="JUnit">
             |    <module name="${junit.moduleName}" />
-            |    <option name="MAIN_CLASS_NAME" value="" />
-            |    <option name="METHOD_NAME" value="" />
-            |    <option name="TEST_OBJECT" value="pattern" />
-            |    <option name="VM_PARAMETERS" value="${junit.vmParameters}" />
-            |    <option name="PARAMETERS" value="" />
-            |    <option name="WORKING_DIRECTORY" value="${junit.workingDirectory}" />
+            |    <option name="MAIN_CLASS_NAME" konstue="" />
+            |    <option name="METHOD_NAME" konstue="" />
+            |    <option name="TEST_OBJECT" konstue="pattern" />
+            |    <option name="VM_PARAMETERS" konstue="${junit.vmParameters}" />
+            |    <option name="PARAMETERS" konstue="" />
+            |    <option name="WORKING_DIRECTORY" konstue="${junit.workingDirectory}" />
             |    <option name="TEST_SEARCH_SCOPE">
-            |      <value defaultName="moduleWithDependencies" />
+            |      <konstue defaultName="moduleWithDependencies" />
             |    </option>
             |    <envs>
-                   ${junit.envs.entries.joinToString("\n") { (name, value) -> "|      <env name=\"$name\" value=\"$value\" />" }}
+                   ${junit.envs.entries.joinToString("\n") { (name, konstue) -> "|      <env name=\"$name\" konstue=\"$konstue\" />" }}
             |    </envs>
-            |    <dir value="${'$'}PROJECT_DIR${'$'}/compiler/fir/analysis-tests/tests-gen" />
+            |    <dir konstue="${'$'}PROJECT_DIR${'$'}/compiler/fir/analysis-tests/tests-gen" />
             |    <patterns>
             |      <pattern testClass="${junit.pattern}" />
             |    </patterns>
@@ -185,8 +185,8 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
     allprojects {
         apply(mapOf("plugin" to "idea"))
         // Make Idea import embedded configuration as transitive dependency for some configurations
-        afterEvaluate {
-            val jpsBuildTestDependencies = configurations.maybeCreate("jpsBuildTestDependencies").apply {
+        afterEkonstuate {
+            konst jpsBuildTestDependencies = configurations.maybeCreate("jpsBuildTestDependencies").apply {
                 isCanBeConsumed = false
                 isCanBeResolved = true
                 attributes {
@@ -200,13 +200,13 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
                 "testRuntime",
                 "testRuntimeOnly"
             ).forEach { configurationName ->
-                val configuration = configurations.findByName(configurationName)
+                konst configuration = configurations.findByName(configurationName)
 
                 configuration?.apply {
                     extendsFrom(jpsBuildTestDependencies)
                 }
 
-                val dependencyProjects = configuration
+                konst dependencyProjects = configuration
                     ?.dependencies
                     ?.mapNotNull { (it as? ProjectDependency)?.dependencyProject }
 
@@ -219,7 +219,7 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
         }
     }
 
-    rootProject.afterEvaluate {
+    rootProject.afterEkonstuate {
 
         writeIdeaBuildNumberForTests()
 
@@ -235,7 +235,7 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
             }
 
             if (this != rootProject) {
-                evaluationDependsOn(path)
+                ekonstuationDependsOn(path)
             }
         }
 
@@ -314,7 +314,7 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
     }
 }
 
-val jarArtifactProjects = listOf(
+konst jarArtifactProjects = listOf(
     "kotlin-compiler-client-embeddable",
     "kotlin-compiler",
     "kotlin-daemon-client",
@@ -334,7 +334,7 @@ fun NamedDomainObjectContainer<TopLevelArtifact>.kotlinCompilerClientEmbeddableJ
     jarFromProject(project(":kotlin-compiler-client-embeddable"))
 
 fun NamedDomainObjectContainer<TopLevelArtifact>.kotlinMainKtsJar() {
-    val mainKtsProject = project(":kotlin-main-kts")
+    konst mainKtsProject = project(":kotlin-main-kts")
     jarFromProject(mainKtsProject) {
         directoryContent("${mainKtsProject.rootDir}/jar-resources")
     }
@@ -350,19 +350,19 @@ fun NamedDomainObjectContainer<TopLevelArtifact>.kotlinDaemonClientJar() =
     jarFromProject(project(":kotlin-daemon-client"))
 
 fun NamedDomainObjectContainer<TopLevelArtifact>.kotlinJpsPluginJar() {
-    val jpsPluginProject = project(":kotlin-jps-plugin")
+    konst jpsPluginProject = project(":kotlin-jps-plugin")
     jarFromProject(jpsPluginProject) {
         file("${jpsPluginProject.rootDir}/resources/kotlinManifest.properties")
     }
 }
 
 fun NamedDomainObjectContainer<TopLevelArtifact>.dist() {
-    val distLibrariesProject = project(":kotlin-stdlib:jps-build")
-    val stdlibMinimal by distLibrariesProject.configurations
-    val commonStdlib by distLibrariesProject.configurations
-    val commonStdlibSources by distLibrariesProject.configurations
-    val stdlibJS by distLibrariesProject.configurations
-    val stdlibSources by distLibrariesProject.configurations
+    konst distLibrariesProject = project(":kotlin-stdlib:jps-build")
+    konst stdlibMinimal by distLibrariesProject.configurations
+    konst commonStdlib by distLibrariesProject.configurations
+    konst commonStdlibSources by distLibrariesProject.configurations
+    konst stdlibJS by distLibrariesProject.configurations
+    konst stdlibSources by distLibrariesProject.configurations
 
     create("dist") {
         file("$rootDir/build/build.txt")
@@ -408,10 +408,10 @@ fun NamedDomainObjectContainer<TopLevelArtifact>.dist() {
 }
 
 fun NamedDomainObjectContainer<TopLevelArtifact>.kotlinc() {
-    val kotlinCompilerProject = project(":kotlin-compiler")
-    val libraries by kotlinCompilerProject.configurations
-    val compilerPlugins by kotlinCompilerProject.configurations
-    val sources by kotlinCompilerProject.configurations
+    konst kotlinCompilerProject = project(":kotlin-compiler")
+    konst libraries by kotlinCompilerProject.configurations
+    konst compilerPlugins by kotlinCompilerProject.configurations
+    konst sources by kotlinCompilerProject.configurations
 
     create("kotlinc") {
         directory("bin") {
@@ -434,9 +434,9 @@ fun NamedDomainObjectContainer<TopLevelArtifact>.kotlinc() {
 }
 
 fun NamedDomainObjectContainer<TopLevelArtifact>.ideaPlugin() {
-    val ideaPluginProject = project(":prepare:idea-plugin")
-    val libraries by ideaPluginProject.configurations
-    val jpsPlugin by ideaPluginProject.configurations
+    konst ideaPluginProject = project(":prepare:idea-plugin")
+    konst libraries by ideaPluginProject.configurations
+    konst jpsPlugin by ideaPluginProject.configurations
 
     create("ideaPlugin") {
         directory("Kotlin") {
@@ -458,20 +458,20 @@ fun NamedDomainObjectContainer<TopLevelArtifact>.ideaPlugin() {
 }
 
 fun NamedDomainObjectContainer<TopLevelArtifact>.jarFromProject(project: Project, name: String? = null, configureAction: RecursiveArtifact.() -> Unit = {}) {
-    val jarName = name ?: project.name + ".jar"
+    konst jarName = name ?: project.name + ".jar"
     create(jarName) {
         archiveFromProject(project, jarName, configureAction)
     }
 }
 
 fun RecursiveArtifact.archiveFromProject(project: Project, name: String? = null, configureAction: RecursiveArtifact.() -> Unit = {}) {
-    val jarName = name ?: project.name + ".jar"
+    konst jarName = name ?: project.name + ".jar"
     archive(jarName) {
 
         var foundManifest = false
         fun extractManifest(jar: Jar) {
             if (jar.enabled && !foundManifest) {
-                val manifestPath = jar.temporaryDir.resolve("MANIFEST.MF")
+                konst manifestPath = jar.temporaryDir.resolve("MANIFEST.MF")
                 jar.manifest.writeTo(manifestPath)
                 directory("META-INF") {
                     file(manifestPath)
@@ -502,12 +502,12 @@ fun RecursiveArtifact.archiveFromProject(project: Project, name: String? = null,
 fun moduleName(projectPath: String) = rootProject.name + projectPath.replace(':', '.') + ".main"
 
 fun RecursiveArtifact.jarContentsFromEmbeddedConfiguration(project: Project) {
-    val embedded = project.configurations.findByName("embedded") ?: return
+    konst embedded = project.configurations.findByName("embedded") ?: return
     jarContentsFromConfiguration(embedded)
 }
 
 fun RecursiveArtifact.jarContentsFromConfiguration(configuration: Configuration) {
-    val resolvedArtifacts = configuration
+    konst resolvedArtifacts = configuration
         .resolvedConfiguration
         .resolvedArtifacts
 
@@ -525,7 +525,7 @@ fun RecursiveArtifact.jarContentsFromConfiguration(configuration: Configuration)
 }
 
 fun RecursiveArtifact.sourceJarsFromConfiguration(configuration: Configuration, renamer: (String) -> String = { it }) {
-    val resolvedArtifacts = configuration
+    konst resolvedArtifacts = configuration
         .resolvedConfiguration
         .resolvedArtifacts
 
@@ -535,8 +535,8 @@ fun RecursiveArtifact.sourceJarsFromConfiguration(configuration: Configuration, 
         .map { it.id.componentIdentifier }
         .filterIsInstance<ProjectComponentIdentifier>()
         .forEach {
-            val jarBaseName = project(it.projectPath).the<BasePluginConvention>().archivesBaseName
-            val renamed = renamer("$jarBaseName-sources") + ".jar"
+            konst jarBaseName = project(it.projectPath).the<BasePluginConvention>().archivesBaseName
+            konst renamed = renamer("$jarBaseName-sources") + ".jar"
             archive(renamed) {
                 project(it.projectPath)
                     .mainSourceSet
@@ -550,7 +550,7 @@ fun RecursiveArtifact.sourceJarsFromConfiguration(configuration: Configuration, 
 }
 
 fun RecursiveArtifact.jarsFromConfiguration(configuration: Configuration, renamer: (String) -> String = { it }) {
-    val resolvedArtifacts = configuration
+    konst resolvedArtifacts = configuration
         .resolvedConfiguration
         .resolvedArtifacts
 
@@ -560,8 +560,8 @@ fun RecursiveArtifact.jarsFromConfiguration(configuration: Configuration, rename
         .map { it.id.componentIdentifier }
         .filterIsInstance<ProjectComponentIdentifier>()
         .forEach {
-            val jarBaseName = project(it.projectPath).the<BasePluginConvention>().archivesBaseName
-            val artifactName = renamer(jarBaseName) + ".jar"
+            konst jarBaseName = project(it.projectPath).the<BasePluginConvention>().archivesBaseName
+            konst artifactName = renamer(jarBaseName) + ".jar"
             if (it.projectName in jarArtifactProjects) {
                 artifact(artifactName)
             } else {
@@ -574,8 +574,8 @@ fun RecursiveArtifact.jarsFromExternalModules(resolvedArtifacts: Iterable<Resolv
     // Use output-file-name property when fixed https://github.com/JetBrains/gradle-idea-ext-plugin/issues/63
     resolvedArtifacts.filter { it.id.componentIdentifier is ModuleComponentIdentifier }
         .forEach {
-            val baseName = it.file.nameWithoutExtension
-            val renamed = renamer(baseName)
+            konst baseName = it.file.nameWithoutExtension
+            konst renamed = renamer(baseName)
             if (it.file.extension == "jar" && renamed != baseName) {
                 archive("$renamed.jar") {
                     extractedDirectory(it.file)

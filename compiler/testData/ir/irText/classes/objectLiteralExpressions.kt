@@ -9,9 +9,9 @@ interface IFoo {
     fun foo()
 }
 
-val test1 = object {}
+konst test1 = object {}
 
-val test2 = object : IFoo {
+konst test2 = object : IFoo {
     override fun foo() {
         println("foo")
     }

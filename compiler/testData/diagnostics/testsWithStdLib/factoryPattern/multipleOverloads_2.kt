@@ -24,8 +24,8 @@ fun <T> Iterable<T>.myMaxOf(selector: (T) -> Float): Float = TODO()
 fun Double.pow(v: Int): Double = this
 
 fun test() {
-    val value = listOf(1, 2, 3, 4, 5, 6).myMaxOf { -2.0.pow(it) }
-    takeDouble(value)
+    konst konstue = listOf(1, 2, 3, 4, 5, 6).myMaxOf { -2.0.pow(it) }
+    takeDouble(konstue)
 }
 
-fun takeDouble(value: Double) {}
+fun takeDouble(konstue: Double) {}

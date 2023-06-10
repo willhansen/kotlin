@@ -4,5 +4,5 @@
  */
 
 expect class AppCommonClass {
-    val platform: String
+    konst platform: String
 }

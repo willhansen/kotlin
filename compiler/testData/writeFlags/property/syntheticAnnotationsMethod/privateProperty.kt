@@ -4,7 +4,7 @@ class Foo {
     annotation class Anno
 
     @Anno
-    private val prop = 42
+    private konst prop = 42
 }
 
 // TESTED_OBJECT_KIND: function

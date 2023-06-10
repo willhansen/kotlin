@@ -38,18 +38,18 @@ import org.jetbrains.kotlin.utils.addToStdlib.runIf
 import org.jetbrains.kotlin.utils.toMetadataVersion
 
 class JvmBinaryAnnotationDeserializer(
-    val session: FirSession,
+    konst session: FirSession,
     kotlinBinaryClass: KotlinJvmBinaryClass,
     kotlinClassFinder: KotlinClassFinder,
     byteContent: ByteArray?
 ) : AbstractAnnotationDeserializer(session, BuiltInSerializerProtocol) {
-    private val annotationInfo by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst annotationInfo by lazy(LazyThreadSafetyMode.PUBLICATION) {
         session.loadMemberAnnotations(kotlinBinaryClass, byteContent, kotlinClassFinder)
     }
 
-    private val annotationInfoForDefaultImpls by lazy(LazyThreadSafetyMode.PUBLICATION) {
-        val defaultImplsClassId = kotlinBinaryClass.classId.createNestedClassId(Name.identifier(JvmAbi.DEFAULT_IMPLS_CLASS_NAME))
-        val (defaultImplsClass, defaultImplsByteContent) = kotlinClassFinder.findKotlinClassOrContent(
+    private konst annotationInfoForDefaultImpls by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        konst defaultImplsClassId = kotlinBinaryClass.classId.createNestedClassId(Name.identifier(JvmAbi.DEFAULT_IMPLS_CLASS_NAME))
+        konst (defaultImplsClass, defaultImplsByteContent) = kotlinClassFinder.findKotlinClassOrContent(
             defaultImplsClassId, session.languageVersionSettings.languageVersion.toMetadataVersion()
         ) as? KotlinClassFinder.Result.KotlinClass ?: return@lazy null
         session.loadMemberAnnotations(defaultImplsClass, defaultImplsByteContent, kotlinClassFinder)
@@ -62,12 +62,12 @@ class JvmBinaryAnnotationDeserializer(
     }
 
     override fun loadTypeAnnotations(typeProto: ProtoBuf.Type, nameResolver: NameResolver): List<FirAnnotation> {
-        val annotations = typeProto.getExtension(JvmProtoBuf.typeAnnotation).orEmpty()
+        konst annotations = typeProto.getExtension(JvmProtoBuf.typeAnnotation).orEmpty()
         return annotations.map { deserializeAnnotation(it, nameResolver) }
     }
 
     override fun loadTypeParameterAnnotations(typeParameterProto: ProtoBuf.TypeParameter, nameResolver: NameResolver): List<FirAnnotation> {
-        val annotations = typeParameterProto.getExtension(JvmProtoBuf.typeParameterAnnotation).orEmpty()
+        konst annotations = typeParameterProto.getExtension(JvmProtoBuf.typeParameterAnnotation).orEmpty()
         return annotations.map { deserializeAnnotation(it, nameResolver) }
     }
 
@@ -77,7 +77,7 @@ class JvmBinaryAnnotationDeserializer(
         nameResolver: NameResolver,
         typeTable: TypeTable
     ): List<FirAnnotation> {
-        val signature = getCallableSignature(constructorProto, nameResolver, typeTable) ?: return emptyList()
+        konst signature = getCallableSignature(constructorProto, nameResolver, typeTable) ?: return emptyList()
         return findJvmBinaryClassAndLoadMemberAnnotations(signature)
     }
 
@@ -87,7 +87,7 @@ class JvmBinaryAnnotationDeserializer(
         nameResolver: NameResolver,
         typeTable: TypeTable
     ): List<FirAnnotation> {
-        val signature = getCallableSignature(functionProto, nameResolver, typeTable) ?: return emptyList()
+        konst signature = getCallableSignature(functionProto, nameResolver, typeTable) ?: return emptyList()
         return findJvmBinaryClassAndLoadMemberAnnotations(signature)
     }
 
@@ -98,12 +98,12 @@ class JvmBinaryAnnotationDeserializer(
         nameResolver: NameResolver,
         typeTable: TypeTable
     ): List<FirAnnotation> {
-        val signature = getPropertySignature(propertyProto, nameResolver, typeTable, synthetic = true) ?: return emptyList()
-        val classIsInterface = containingClassProto?.let { Flags.CLASS_KIND.get(it.flags) == ProtoBuf.Class.Kind.INTERFACE } ?: false
-        val jvmClassFlags = runIf(containingClassProto?.hasExtension(JvmProtoBuf.jvmClassFlags) == true) {
+        konst signature = getPropertySignature(propertyProto, nameResolver, typeTable, synthetic = true) ?: return emptyList()
+        konst classIsInterface = containingClassProto?.let { Flags.CLASS_KIND.get(it.flags) == ProtoBuf.Class.Kind.INTERFACE } ?: false
+        konst jvmClassFlags = runIf(containingClassProto?.hasExtension(JvmProtoBuf.jvmClassFlags) == true) {
             containingClassProto?.getExtension(JvmProtoBuf.jvmClassFlags)
         }
-        val allCompatibilityModeIsEnabled = jvmClassFlags?.let { JvmFlags.IS_COMPILED_IN_COMPATIBILITY_MODE.get(it) } ?: true
+        konst allCompatibilityModeIsEnabled = jvmClassFlags?.let { JvmFlags.IS_COMPILED_IN_COMPATIBILITY_MODE.get(it) } ?: true
         return findJvmBinaryClassAndLoadMemberAnnotations(
             signature,
             searchInDefaultImpls = classIsInterface && allCompatibilityModeIsEnabled
@@ -116,7 +116,7 @@ class JvmBinaryAnnotationDeserializer(
         }
     }
 
-    private val MemberSignature.isDelegated: Boolean
+    private konst MemberSignature.isDelegated: Boolean
         get() = JvmAbi.DELEGATED_PROPERTY_NAME_SUFFIX in this.signature
 
     override fun loadPropertyBackingFieldAnnotations(
@@ -125,7 +125,7 @@ class JvmBinaryAnnotationDeserializer(
         nameResolver: NameResolver,
         typeTable: TypeTable
     ): List<FirAnnotation> {
-        val signature = getPropertySignature(propertyProto, nameResolver, typeTable, field = true) ?: return emptyList()
+        konst signature = getPropertySignature(propertyProto, nameResolver, typeTable, field = true) ?: return emptyList()
         if (signature.isDelegated) {
             return emptyList()
         }
@@ -144,7 +144,7 @@ class JvmBinaryAnnotationDeserializer(
         nameResolver: NameResolver,
         typeTable: TypeTable
     ): List<FirAnnotation> {
-        val signature = getPropertySignature(propertyProto, nameResolver, typeTable, field = true) ?: return emptyList()
+        konst signature = getPropertySignature(propertyProto, nameResolver, typeTable, field = true) ?: return emptyList()
         if (!signature.isDelegated) {
             return emptyList()
         }
@@ -164,7 +164,7 @@ class JvmBinaryAnnotationDeserializer(
         typeTable: TypeTable,
         getterFlags: Int
     ): List<FirAnnotation> {
-        val signature = getCallableSignature(propertyProto, nameResolver, typeTable, CallableKind.PROPERTY_GETTER) ?: return emptyList()
+        konst signature = getCallableSignature(propertyProto, nameResolver, typeTable, CallableKind.PROPERTY_GETTER) ?: return emptyList()
         return findJvmBinaryClassAndLoadMemberAnnotations(signature)
     }
 
@@ -175,23 +175,23 @@ class JvmBinaryAnnotationDeserializer(
         typeTable: TypeTable,
         setterFlags: Int
     ): List<FirAnnotation> {
-        val signature = getCallableSignature(propertyProto, nameResolver, typeTable, CallableKind.PROPERTY_SETTER) ?: return emptyList()
+        konst signature = getCallableSignature(propertyProto, nameResolver, typeTable, CallableKind.PROPERTY_SETTER) ?: return emptyList()
         return findJvmBinaryClassAndLoadMemberAnnotations(signature)
     }
 
     override fun loadValueParameterAnnotations(
         containerSource: DeserializedContainerSource?,
         callableProto: MessageLite,
-        valueParameterProto: ProtoBuf.ValueParameter,
+        konstueParameterProto: ProtoBuf.ValueParameter,
         classProto: ProtoBuf.Class?,
         nameResolver: NameResolver,
         typeTable: TypeTable,
         kind: CallableKind,
         parameterIndex: Int,
     ): List<FirAnnotation> {
-        val methodSignature = getCallableSignature(callableProto, nameResolver, typeTable, kind) ?: return emptyList()
-        val index = parameterIndex + computeJvmParameterIndexShift(classProto, callableProto)
-        val paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(methodSignature, index)
+        konst methodSignature = getCallableSignature(callableProto, nameResolver, typeTable, kind) ?: return emptyList()
+        konst index = parameterIndex + computeJvmParameterIndexShift(classProto, callableProto)
+        konst paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(methodSignature, index)
         return findJvmBinaryClassAndLoadMemberAnnotations(paramSignature)
     }
 
@@ -202,8 +202,8 @@ class JvmBinaryAnnotationDeserializer(
         typeTable: TypeTable,
         kind: CallableKind
     ): List<FirAnnotation> {
-        val methodSignature = getCallableSignature(callableProto, nameResolver, typeTable, kind) ?: return emptyList()
-        val paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(methodSignature, 0)
+        konst methodSignature = getCallableSignature(callableProto, nameResolver, typeTable, kind) ?: return emptyList()
+        konst paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(methodSignature, 0)
         return findJvmBinaryClassAndLoadMemberAnnotations(paramSignature)
     }
 
@@ -214,15 +214,15 @@ class JvmBinaryAnnotationDeserializer(
         nameResolver: NameResolver,
         typeTable: TypeTable
     ): FirExpression? {
-        val signature = getCallableSignature(propertyProto, nameResolver, typeTable, CallableKind.PROPERTY_GETTER) ?: return null
-        val firExpr = annotationInfo.annotationMethodsDefaultValues[signature]
+        konst signature = getCallableSignature(propertyProto, nameResolver, typeTable, CallableKind.PROPERTY_GETTER) ?: return null
+        konst firExpr = annotationInfo.annotationMethodsDefaultValues[signature]
         return if (firExpr is FirConstExpression<*> && expectedPropertyType.coneType.isUnsignedType && firExpr.kind.isSignedNumber)
-            firExpr.value.createConstantIfAny(session, unsigned = true)
+            firExpr.konstue.createConstantIfAny(session, unsigned = true)
         else
             firExpr
     }
 
-    private val <T> ConstantValueKind<T>.isSignedNumber: Boolean
+    private konst <T> ConstantValueKind<T>.isSignedNumber: Boolean
         get() = this is ConstantValueKind.Byte || this is ConstantValueKind.Short || this is ConstantValueKind.Int || this is ConstantValueKind.Long
 
     private fun computeJvmParameterIndexShift(classProto: ProtoBuf.Class?, message: MessageLite): Int {
@@ -233,8 +233,8 @@ class JvmBinaryAnnotationDeserializer(
                 assert(classProto != null) {
                     "Constructor call without information about enclosing Class: $message"
                 }
-                val kind = Flags.CLASS_KIND.get(classProto!!.flags) ?: ProtoBuf.Class.Kind.CLASS
-                val isInner = Flags.IS_INNER.get(classProto.flags)
+                konst kind = Flags.CLASS_KIND.get(classProto!!.flags) ?: ProtoBuf.Class.Kind.CLASS
+                konst isInner = Flags.IS_INNER.get(classProto.flags)
                 when {
                     kind == ProtoBuf.Class.Kind.ENUM_CLASS -> 2
                     isInner -> 1
@@ -259,11 +259,11 @@ class JvmBinaryAnnotationDeserializer(
                 )
             }
             is ProtoBuf.Function -> {
-                val signature = JvmProtoBufUtil.getJvmMethodSignature(proto, nameResolver, typeTable) ?: return null
+                konst signature = JvmProtoBufUtil.getJvmMethodSignature(proto, nameResolver, typeTable) ?: return null
                 MemberSignature.fromJvmMemberSignature(signature)
             }
             is ProtoBuf.Property -> {
-                val signature = proto.getExtensionOrNull(JvmProtoBuf.propertySignature) ?: return null
+                konst signature = proto.getExtensionOrNull(JvmProtoBuf.propertySignature) ?: return null
                 when (kind) {
                     CallableKind.PROPERTY_GETTER ->
                         if (signature.hasGetter()) MemberSignature.fromMethod(nameResolver, signature.getter) else null
@@ -286,7 +286,7 @@ class JvmBinaryAnnotationDeserializer(
     private fun findJvmBinaryClassAndLoadMemberAnnotations(
         memberSignature: MemberSignature, searchInDefaultImpls: Boolean = false
     ): List<FirAnnotation> {
-        val info = if (searchInDefaultImpls) {
+        konst info = if (searchInDefaultImpls) {
             annotationInfoForDefaultImpls ?: return emptyList()
         } else {
             annotationInfo
@@ -297,8 +297,8 @@ class JvmBinaryAnnotationDeserializer(
 
 // TODO: Rename this once property constants are recorded as well
 private data class MemberAnnotations(
-    val memberAnnotations: MutableMap<MemberSignature, MutableList<FirAnnotation>>,
-    val annotationMethodsDefaultValues: Map<MemberSignature, FirExpression>
+    konst memberAnnotations: MutableMap<MemberSignature, MutableList<FirAnnotation>>,
+    konst annotationMethodsDefaultValues: Map<MemberSignature, FirExpression>
 )
 
 // TODO: better to be in KotlinDeserializedJvmSymbolsProvider?
@@ -307,9 +307,9 @@ private fun FirSession.loadMemberAnnotations(
     byteContent: ByteArray?,
     kotlinClassFinder: KotlinClassFinder,
 ): MemberAnnotations {
-    val memberAnnotations = hashMapOf<MemberSignature, MutableList<FirAnnotation>>()
-    val annotationsLoader = AnnotationsLoader(this, kotlinClassFinder)
-    val annotationMethodsDefaultValues = hashMapOf<MemberSignature, FirExpression>()
+    konst memberAnnotations = hashMapOf<MemberSignature, MutableList<FirAnnotation>>()
+    konst annotationsLoader = AnnotationsLoader(this, kotlinClassFinder)
+    konst annotationMethodsDefaultValues = hashMapOf<MemberSignature, FirExpression>()
 
     kotlinBinaryClass.visitMembers(object : KotlinJvmBinaryClass.MemberVisitor {
         override fun visitMethod(name: Name, desc: String): KotlinJvmBinaryClass.MethodAnnotationVisitor {
@@ -317,7 +317,7 @@ private fun FirSession.loadMemberAnnotations(
         }
 
         override fun visitField(name: Name, desc: String, initializer: Any?): KotlinJvmBinaryClass.AnnotationVisitor {
-            val signature = MemberSignature.fromFieldNameAndDesc(name.asString(), desc)
+            konst signature = MemberSignature.fromFieldNameAndDesc(name.asString(), desc)
             if (initializer != null) {
                 // TODO: load constant
                 // TODO: Given there is FirConstDeserializer, maybe this comment is obsolete?
@@ -333,7 +333,7 @@ private fun FirSession.loadMemberAnnotations(
                 classId: ClassId,
                 source: SourceElement
             ): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {
-                val paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(signature, index)
+                konst paramSignature = MemberSignature.fromMethodSignatureAndParameterIndex(signature, index)
                 var result = memberAnnotations[paramSignature]
                 if (result == null) {
                     result = arrayListOf()
@@ -347,8 +347,8 @@ private fun FirSession.loadMemberAnnotations(
             }
         }
 
-        open inner class MemberAnnotationVisitor(protected val signature: MemberSignature) : KotlinJvmBinaryClass.AnnotationVisitor {
-            private val result = arrayListOf<FirAnnotation>()
+        open inner class MemberAnnotationVisitor(protected konst signature: MemberSignature) : KotlinJvmBinaryClass.AnnotationVisitor {
+            private konst result = arrayListOf<FirAnnotation>()
 
             override fun visitAnnotation(classId: ClassId, source: SourceElement): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {
                 return annotationsLoader.loadAnnotationIfNotSpecial(classId, result)

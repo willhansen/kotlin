@@ -4,7 +4,7 @@ FILE: referenceToField.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = Int(1)
+        public final konst x: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int| {
                 ::<References to variables aren't supported yet>#
                 ^ this@R|/A|.F|/A.x|

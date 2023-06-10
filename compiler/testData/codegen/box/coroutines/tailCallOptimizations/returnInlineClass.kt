@@ -7,7 +7,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-public inline class ValueOrClosed<out T>(val holder: Any?)
+public inline class ValueOrClosed<out T>(konst holder: Any?)
 
 public interface Channel<out E> {
     public suspend fun receiveOrClosed(): ValueOrClosed<E>
@@ -31,7 +31,7 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var res = "FAIL"
     builder {
-        val channel: Channel<String> = AbstractChannel<String>()
+        konst channel: Channel<String> = AbstractChannel<String>()
         res = channel.receiveOrClosed().holder as String
     }
     TailCallOptimizationChecker.checkStateMachineIn("receiveOrClosed")

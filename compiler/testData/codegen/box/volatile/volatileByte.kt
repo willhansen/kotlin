@@ -8,10 +8,10 @@ import kotlin.concurrent.*
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 class ByteWrapper(@Volatile var x: Byte)
 
-val global = ByteWrapper(1)
+konst global = ByteWrapper(1)
 
 fun box() : String {
-    val local = ByteWrapper(2)
+    konst local = ByteWrapper(2)
     if (global.x + local.x != 3) return "FAIL"
     global.x = 5
     local.x = 6

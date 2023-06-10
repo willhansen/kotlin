@@ -2,7 +2,7 @@
 // ISSUE: KT-58332
 
 fun foo() {
-    val addNewStatusAction: suspend () -> Unit = useMemo {
+    konst addNewStatusAction: suspend () -> Unit = useMemo {
         suspend fun() {
 
         }

@@ -19,14 +19,14 @@ import kotlin.script.templates.standard.ScriptTemplateWithArgs
 
 // Legacy definition, will be obsolete soon
 // TODO: make deprecated and drop usages where possible
-open class KotlinScriptDefinition(open val template: KClass<out Any>) : UserDataHolderBase() {
+open class KotlinScriptDefinition(open konst template: KClass<out Any>) : UserDataHolderBase() {
 
-    open val name: String = KOTLIN_SCRIPT
+    open konst name: String = KOTLIN_SCRIPT
 
     // TODO: consider creating separate type (subtype? for kotlin scripts)
-    open val fileType: LanguageFileType = KotlinFileType.INSTANCE
+    open konst fileType: LanguageFileType = KotlinFileType.INSTANCE
 
-    open val annotationsForSamWithReceivers: List<String>
+    open konst annotationsForSamWithReceivers: List<String>
         get() = emptyList()
 
     open fun isScript(fileName: String): Boolean =
@@ -35,37 +35,37 @@ open class KotlinScriptDefinition(open val template: KClass<out Any>) : UserData
     open fun getScriptName(script: KtScript): Name =
         NameUtils.getScriptNameForFile(script.containingKtFile.name)
 
-    open val fileExtension: String
+    open konst fileExtension: String
         get() = "kts"
 
     // Target platform for script, ex. "JVM", "JS", "NATIVE"
-    open val platform: String
+    open konst platform: String
         get() = "JVM"
 
-    open val dependencyResolver: DependenciesResolver get() = DependenciesResolver.NoDependencies
+    open konst dependencyResolver: DependenciesResolver get() = DependenciesResolver.NoDependencies
 
-    open val acceptedAnnotations: List<KClass<out Annotation>> get() = emptyList()
+    open konst acceptedAnnotations: List<KClass<out Annotation>> get() = emptyList()
 
     @Deprecated("temporary workaround for missing functionality, will be replaced by the new API soon")
-    open val additionalCompilerArguments: Iterable<String>? = null
+    open konst additionalCompilerArguments: Iterable<String>? = null
 
     @Suppress("DEPRECATION")
-    open val scriptExpectedLocations: List<kotlin.script.experimental.location.ScriptExpectedLocation> =
+    open konst scriptExpectedLocations: List<kotlin.script.experimental.location.ScriptExpectedLocation> =
         listOf(
             kotlin.script.experimental.location.ScriptExpectedLocation.SourcesOnly,
             kotlin.script.experimental.location.ScriptExpectedLocation.TestsOnly
         )
 
-    open val implicitReceivers: List<KType> get() = emptyList()
+    open konst implicitReceivers: List<KType> get() = emptyList()
 
-    open val providedProperties: List<Pair<String, KType>> get() = emptyList()
+    open konst providedProperties: List<Pair<String, KType>> get() = emptyList()
 
-    open val targetClassAnnotations: List<Annotation> get() = emptyList()
+    open konst targetClassAnnotations: List<Annotation> get() = emptyList()
 
-    open val targetMethodAnnotations: List<Annotation> get() = emptyList()
+    open konst targetMethodAnnotations: List<Annotation> get() = emptyList()
 
     companion object {
-        val KOTLIN_SCRIPT: String get() = "Kotlin Script"
+        konst KOTLIN_SCRIPT: String get() = "Kotlin Script"
     }
 }
 

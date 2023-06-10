@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.name.Name
 
 class PreliminaryLoopVisitor {
-    private val reassignedVariablesPerElement: SetMultimap<FirStatement, Name> = setMultimapOf()
+    private konst reassignedVariablesPerElement: SetMultimap<FirStatement, Name> = setMultimapOf()
 
     fun enterCapturingStatement(statement: FirStatement): Set<Name> {
         assert(statement is FirLoop || statement is FirClass || statement is FirFunction)
@@ -37,7 +37,7 @@ class PreliminaryLoopVisitor {
     }
 
     // FirStatement -- closest statement (loop/lambda/local declaration) which may contain reassignments
-    private val visitor = object : FirVisitor<Unit, FirStatement?>() {
+    private konst visitor = object : FirVisitor<Unit, FirStatement?>() {
         override fun visitElement(element: FirElement, data: FirStatement?) {
             element.acceptChildren(this, data)
         }
@@ -49,7 +49,7 @@ class PreliminaryLoopVisitor {
             // property assignment, the smart cast will be unstable anyway.
             if (variableAssignment.explicitReceiver != null) return
 
-            val reference = variableAssignment.calleeReference as? FirNamedReference
+            konst reference = variableAssignment.calleeReference as? FirNamedReference
             if (reference != null) {
                 requireNotNull(data)
                 reassignedVariablesPerElement.put(data, reference.name)

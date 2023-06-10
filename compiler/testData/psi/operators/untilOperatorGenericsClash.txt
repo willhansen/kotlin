@@ -15,7 +15,7 @@ KtFile: untilOperatorGenericsClash.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiElement(COLON)(':')
@@ -32,7 +32,7 @@ KtFile: untilOperatorGenericsClash.kt
         PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -48,7 +48,7 @@ KtFile: untilOperatorGenericsClash.kt
         PsiElement(class)('class')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')

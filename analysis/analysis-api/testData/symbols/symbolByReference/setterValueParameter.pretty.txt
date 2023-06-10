@@ -1,1 +1,1 @@
-value: kotlin.Int
+konstue: kotlin.Int

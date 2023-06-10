@@ -8,9 +8,9 @@ open class C {
 class D : C()
 
 fun box(): String {
-    val d = D()
+    konst d = D()
 
-    val x = d.f()
+    konst x = d.f()
     if (x != "C.constructor") return "fail1: $x"
 
     if (x.asDynamic().constructor === D::class.js) return "fail2"

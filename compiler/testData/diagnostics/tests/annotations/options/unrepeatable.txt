@@ -20,13 +20,13 @@ package
 
 public final annotation class ann : kotlin.Annotation {
     public constructor ann(/*0*/ y: kotlin.Int)
-    public final val y: kotlin.Int
+    public final konst y: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@kotlin.annotation.Target(allowedTargets = {AnnotationTarget.EXPRESSION}) @kotlin.annotation.Retention(value = AnnotationRetention.SOURCE) public final annotation class annexpr : kotlin.Annotation {
+@kotlin.annotation.Target(allowedTargets = {AnnotationTarget.EXPRESSION}) @kotlin.annotation.Retention(konstue = AnnotationRetention.SOURCE) public final annotation class annexpr : kotlin.Annotation {
     public constructor annexpr()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -35,7 +35,7 @@ public final annotation class ann : kotlin.Annotation {
 
 public final annotation class unrepann : kotlin.Annotation {
     public constructor unrepann(/*0*/ x: kotlin.Int)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

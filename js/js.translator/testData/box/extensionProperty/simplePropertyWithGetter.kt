@@ -1,10 +1,10 @@
 // EXPECTED_REACHABLE_NODES: 1282
 package foo
 
-val String.prop: Int
+konst String.prop: Int
     get() = length
 
-val Int.quadruple: Int
+konst Int.quadruple: Int
     get() = this * 4
 
 fun box(): String {

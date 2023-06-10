@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext.Key
  * Base class for [CoroutineContext.Element] implementations.
  */
 @SinceKotlin("1.3")
-public abstract class AbstractCoroutineContextElement(public override val key: Key<*>) : Element
+public abstract class AbstractCoroutineContextElement(public override konst key: Key<*>) : Element
 
 /**
  * Base class for [CoroutineContext.Key] associated with polymorphic [CoroutineContext.Element] implementation.
@@ -24,7 +24,7 @@ public abstract class AbstractCoroutineContextElement(public override val key: K
  * ```
  * open class BaseElement : CoroutineContext.Element {
  *     companion object Key : CoroutineContext.Key<BaseElement>
- *     override val key: CoroutineContext.Key<*> get() = Key
+ *     override konst key: CoroutineContext.Key<*> get() = Key
  *     // It is important to use getPolymorphicKey and minusPolymorphicKey
  *     override fun <E : CoroutineContext.Element> get(key: CoroutineContext.Key<E>): E? = getPolymorphicElement(key)
  *     override fun minusKey(key: CoroutineContext.Key<*>): CoroutineContext = minusPolymorphicKey(key)
@@ -47,9 +47,9 @@ public abstract class AbstractCoroutineContextElement(public override val key: K
 @ExperimentalStdlibApi
 public abstract class AbstractCoroutineContextKey<B : Element, E : B>(
     baseKey: Key<B>,
-    private val safeCast: (element: Element) -> E?
+    private konst safeCast: (element: Element) -> E?
 ) : Key<E> {
-    private val topmostKey: Key<*> = if (baseKey is AbstractCoroutineContextKey<*, *>) baseKey.topmostKey else baseKey
+    private konst topmostKey: Key<*> = if (baseKey is AbstractCoroutineContextKey<*, *>) baseKey.topmostKey else baseKey
 
     internal fun tryCast(element: Element): E? = safeCast(element)
     internal fun isSubKey(key: Key<*>): Boolean = key === this || topmostKey === key
@@ -57,7 +57,7 @@ public abstract class AbstractCoroutineContextKey<B : Element, E : B>(
 
 /**
  * Returns the current element if it is associated with the given [key] in a polymorphic manner or `null` otherwise.
- * This method returns non-null value if either [Element.key] is equal to the given [key] or if the [key] is associated
+ * This method returns non-null konstue if either [Element.key] is equal to the given [key] or if the [key] is associated
  * with [Element.key] via [AbstractCoroutineContextKey].
  * See [AbstractCoroutineContextKey] for the example of usage.
  */
@@ -93,7 +93,7 @@ public fun Element.minusPolymorphicKey(key: Key<*>): CoroutineContext {
  */
 @SinceKotlin("1.3")
 public object EmptyCoroutineContext : CoroutineContext, Serializable {
-    private const val serialVersionUID: Long = 0
+    private const konst serialVersionUID: Long = 0
     private fun readResolve(): Any = EmptyCoroutineContext
 
     public override fun <E : Element> get(key: Key<E>): E? = null
@@ -110,15 +110,15 @@ public object EmptyCoroutineContext : CoroutineContext, Serializable {
 // this is a left-biased list, so that `plus` works naturally
 @SinceKotlin("1.3")
 internal class CombinedContext(
-    private val left: CoroutineContext,
-    private val element: Element
+    private konst left: CoroutineContext,
+    private konst element: Element
 ) : CoroutineContext, Serializable {
 
     override fun <E : Element> get(key: Key<E>): E? {
         var cur = this
         while (true) {
             cur.element[key]?.let { return it }
-            val next = cur.left
+            konst next = cur.left
             if (next is CombinedContext) {
                 cur = next
             } else {
@@ -132,7 +132,7 @@ internal class CombinedContext(
 
     public override fun minusKey(key: Key<*>): CoroutineContext {
         element[key]?.let { return left }
-        val newLeft = left.minusKey(key)
+        konst newLeft = left.minusKey(key)
         return when {
             newLeft === left -> this
             newLeft === EmptyCoroutineContext -> element
@@ -156,7 +156,7 @@ internal class CombinedContext(
         var cur = context
         while (true) {
             if (!contains(cur.element)) return false
-            val next = cur.left
+            konst next = cur.left
             if (next is CombinedContext) {
                 cur = next
             } else {
@@ -176,8 +176,8 @@ internal class CombinedContext(
         } + "]"
 
     private fun writeReplace(): Any {
-        val n = size()
-        val elements = arrayOfNulls<CoroutineContext>(n)
+        konst n = size()
+        konst elements = arrayOfNulls<CoroutineContext>(n)
         var index = 0
         fold(Unit) { _, element -> elements[index++] = element }
         check(index == n)
@@ -185,9 +185,9 @@ internal class CombinedContext(
         return Serialized(elements as Array<CoroutineContext>)
     }
 
-    private class Serialized(val elements: Array<CoroutineContext>) : Serializable {
+    private class Serialized(konst elements: Array<CoroutineContext>) : Serializable {
         companion object {
-            private const val serialVersionUID: Long = 0L
+            private const konst serialVersionUID: Long = 0L
         }
 
         private fun readResolve(): Any = elements.fold(EmptyCoroutineContext, CoroutineContext::plus)

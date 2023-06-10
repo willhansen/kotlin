@@ -15,12 +15,12 @@ KtFile: ValWithNoNameBeforeNextDeclarationWithModifiers.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')
       FUN
-        PsiComment(EOL_COMMENT)('// private is parsed as val's identifier')
+        PsiComment(EOL_COMMENT)('// private is parsed as konst's identifier')
         PsiWhiteSpace('\n    ')
         MODIFIER_LIST
           PsiElement(private)('private')
@@ -41,7 +41,7 @@ KtFile: ValWithNoNameBeforeNextDeclarationWithModifiers.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')
@@ -64,7 +64,7 @@ KtFile: ValWithNoNameBeforeNextDeclarationWithModifiers.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiErrorElement:Expecting property name or receiver type
           <empty list>
       PsiWhiteSpace('\n    ')

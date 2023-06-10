@@ -17,24 +17,24 @@ import java.io.File
 import java.io.Serializable
 
 class KotlinRootNpmResolver internal constructor(
-    val rootProjectName: String,
-    val rootProjectVersion: String,
-    val tasksRequirements: TasksRequirements,
-    val versions: NpmVersions,
-    val projectPackagesDir: File,
-    val rootProjectDir: File,
+    konst rootProjectName: String,
+    konst rootProjectVersion: String,
+    konst tasksRequirements: TasksRequirements,
+    konst versions: NpmVersions,
+    konst projectPackagesDir: File,
+    konst rootProjectDir: File,
 ) : Serializable {
 
     internal var resolution: KotlinRootNpmResolution? = null
 
-    val projectResolvers: MutableMap<String, KotlinProjectNpmResolver> = mutableMapOf()
+    konst projectResolvers: MutableMap<String, KotlinProjectNpmResolver> = mutableMapOf()
 
     fun alreadyResolvedMessage(action: String) = "Cannot $action. NodeJS projects already resolved."
 
     fun addProject(target: Project) {
         synchronized(projectResolvers) {
             check(resolution == null) { alreadyResolvedMessage("add new project: $target") }
-            val kotlinProjectNpmResolver = KotlinProjectNpmResolver(target, this)
+            konst kotlinProjectNpmResolver = KotlinProjectNpmResolver(target, this)
             projectResolvers[target.path] = kotlinProjectNpmResolver
         }
     }
@@ -42,13 +42,13 @@ class KotlinRootNpmResolver internal constructor(
     internal operator fun get(projectPath: String) =
         projectResolvers[projectPath] ?: error("$projectPath is not configured for JS usage")
 
-    val compilations: Collection<KotlinJsCompilation>
-        get() = projectResolvers.values.flatMap { it.compilationResolvers.map { it.compilation } }
+    konst compilations: Collection<KotlinJsCompilation>
+        get() = projectResolvers.konstues.flatMap { it.compilationResolvers.map { it.compilation } }
 
     internal fun findDependentResolver(src: Project, target: Project): List<KotlinCompilationNpmResolver>? {
         // todo: proper finding using KotlinTargetComponent.findUsageContext
-        val targetResolver = this[target.path]
-        val mainCompilations = targetResolver.compilationResolvers.filter { it.compilation.isMain() }
+        konst targetResolver = this[target.path]
+        konst mainCompilations = targetResolver.compilationResolvers.filter { it.compilation.isMain() }
 
         if (mainCompilations.isEmpty()) return null
 
@@ -56,12 +56,12 @@ class KotlinRootNpmResolver internal constructor(
         var containsWasm = false
         var containsIrJs = false
         var containsLegacyJs = false
-        val errorMessage = "Cannot resolve project dependency $src -> $target." +
+        konst errorMessage = "Cannot resolve project dependency $src -> $target." +
                 "Dependency to project with multiple js/wasm compilations is not supported yet."
 
         check(mainCompilations.size <= 3) { errorMessage }
         for (npmResolver in mainCompilations) {
-            when (val compilation = npmResolver.compilation) {
+            when (konst compilation = npmResolver.compilation) {
                 is KotlinJsIrCompilation -> {
                     if (compilation.platformType == KotlinPlatformType.wasm) {
                         check(!containsWasm) { errorMessage }
@@ -86,7 +86,7 @@ class KotlinRootNpmResolver internal constructor(
     internal fun close(): KotlinRootNpmResolution {
         return resolution ?: KotlinRootNpmResolution(
             projectResolvers
-                .map { (key, value) -> key to value.close() }
+                .map { (key, konstue) -> key to konstue.close() }
                 .toMap(),
             rootProjectName,
             rootProjectVersion
@@ -94,4 +94,4 @@ class KotlinRootNpmResolver internal constructor(
     }
 }
 
-const val PACKAGE_JSON_UMBRELLA_TASK_NAME = "packageJsonUmbrella"
+const konst PACKAGE_JSON_UMBRELLA_TASK_NAME = "packageJsonUmbrella"

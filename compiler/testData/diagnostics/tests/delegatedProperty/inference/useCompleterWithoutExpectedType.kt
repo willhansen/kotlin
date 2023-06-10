@@ -4,7 +4,7 @@
 import kotlin.reflect.KProperty
 
 class A {
-    val a by MyProperty()
+    konst a by MyProperty()
 
     fun test() {
         checkSubtype<Int>(a)

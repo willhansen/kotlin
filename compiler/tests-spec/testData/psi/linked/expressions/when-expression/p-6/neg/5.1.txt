@@ -19,7 +19,7 @@ KtFile: 5.1.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         REFERENCE_EXPRESSION
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
         PsiElement(RPAR)(')')
         PsiWhiteSpace(' ')
         PsiElement(LBRACE)('{')
@@ -31,7 +31,7 @@ KtFile: 5.1.kt
           PsiErrorElement:Expecting '->'
             PsiElement(MUL)('*')
           REFERENCE_EXPRESSION
-            PsiElement(IDENTIFIER)('value')
+            PsiElement(IDENTIFIER)('konstue')
         PsiWhiteSpace(' ')
         WHEN_ENTRY
           WHEN_CONDITION_WITH_EXPRESSION

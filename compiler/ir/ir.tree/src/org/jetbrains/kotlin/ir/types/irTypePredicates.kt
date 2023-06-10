@@ -20,32 +20,32 @@ import org.jetbrains.kotlin.name.Name
 
 @Suppress("ObjectPropertyName")
 object IdSignatureValues {
-    @JvmField val any = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Any")
-    @JvmField val nothing = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Nothing")
-    @JvmField val unit = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Unit")
-    @JvmField val _boolean = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Boolean")
-    @JvmField val _char = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Char")
-    @JvmField val _byte = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Byte")
-    @JvmField val _short = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Short")
-    @JvmField val _int = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Int")
-    @JvmField val _long = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Long")
-    @JvmField val _float = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Float")
-    @JvmField val _double = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Double")
-    @JvmField val number = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Number")
-    @JvmField val uByte = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "UByte")
-    @JvmField val uShort = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "UShort")
-    @JvmField val uInt = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "UInt")
-    @JvmField val uLong = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "ULong")
-    @JvmField val string = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "String")
-    @JvmField val array = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Array")
-    @JvmField val collection = getPublicSignature(StandardNames.COLLECTIONS_PACKAGE_FQ_NAME, "Collection")
-    @JvmField val kClass = getPublicSignature(StandardNames.KOTLIN_REFLECT_FQ_NAME, "KClass")
-    @JvmField val comparable = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Comparable")
-    @JvmField val charSequence = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "CharSequence")
-    @JvmField val iterable = getPublicSignature(StandardNames.COLLECTIONS_PACKAGE_FQ_NAME, "Iterable")
-    @JvmField val continuation = getPublicSignature(StandardNames.COROUTINES_PACKAGE_FQ_NAME, "Continuation")
-    @JvmField val result = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Result")
-    @JvmField val sequence = IdSignature.CommonSignature("kotlin.sequences", "Sequence", null, 0)
+    @JvmField konst any = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Any")
+    @JvmField konst nothing = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Nothing")
+    @JvmField konst unit = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Unit")
+    @JvmField konst _boolean = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Boolean")
+    @JvmField konst _char = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Char")
+    @JvmField konst _byte = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Byte")
+    @JvmField konst _short = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Short")
+    @JvmField konst _int = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Int")
+    @JvmField konst _long = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Long")
+    @JvmField konst _float = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Float")
+    @JvmField konst _double = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Double")
+    @JvmField konst number = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Number")
+    @JvmField konst uByte = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "UByte")
+    @JvmField konst uShort = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "UShort")
+    @JvmField konst uInt = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "UInt")
+    @JvmField konst uLong = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "ULong")
+    @JvmField konst string = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "String")
+    @JvmField konst array = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Array")
+    @JvmField konst collection = getPublicSignature(StandardNames.COLLECTIONS_PACKAGE_FQ_NAME, "Collection")
+    @JvmField konst kClass = getPublicSignature(StandardNames.KOTLIN_REFLECT_FQ_NAME, "KClass")
+    @JvmField konst comparable = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Comparable")
+    @JvmField konst charSequence = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "CharSequence")
+    @JvmField konst iterable = getPublicSignature(StandardNames.COLLECTIONS_PACKAGE_FQ_NAME, "Iterable")
+    @JvmField konst continuation = getPublicSignature(StandardNames.COROUTINES_PACKAGE_FQ_NAME, "Continuation")
+    @JvmField konst result = getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "Result")
+    @JvmField konst sequence = IdSignature.CommonSignature("kotlin.sequences", "Sequence", null, 0)
 }
 
 private fun IrType.isNotNullClassType(signature: IdSignature.CommonSignature) = isClassType(signature, nullable = false)
@@ -73,24 +73,24 @@ private fun classFqNameEquals(symbol: IrClassSymbol, fqName: FqNameUnsafe): Bool
     return classFqNameEquals(symbol.owner, fqName)
 }
 
-private val idSignatureToPrimitiveType: Map<IdSignature.CommonSignature, PrimitiveType> =
-    PrimitiveType.values().associateBy {
+private konst idSignatureToPrimitiveType: Map<IdSignature.CommonSignature, PrimitiveType> =
+    PrimitiveType.konstues().associateBy {
         getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, it.typeName.asString())
     }
 
-private val shortNameToPrimitiveType: Map<Name, PrimitiveType> =
-    PrimitiveType.values().associateBy(PrimitiveType::typeName)
+private konst shortNameToPrimitiveType: Map<Name, PrimitiveType> =
+    PrimitiveType.konstues().associateBy(PrimitiveType::typeName)
 
-private val idSignatureToUnsignedType: Map<IdSignature.CommonSignature, UnsignedType> =
-    UnsignedType.values().associateBy {
+private konst idSignatureToUnsignedType: Map<IdSignature.CommonSignature, UnsignedType> =
+    UnsignedType.konstues().associateBy {
         getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, it.typeName.asString())
     }
 
-private val shortNameToUnsignedType: Map<Name, UnsignedType> =
-    UnsignedType.values().associateBy(UnsignedType::typeName)
+private konst shortNameToUnsignedType: Map<Name, UnsignedType> =
+    UnsignedType.konstues().associateBy(UnsignedType::typeName)
 
-val primitiveArrayTypesSignatures: Map<PrimitiveType, IdSignature.CommonSignature> =
-    PrimitiveType.values().associateWith {
+konst primitiveArrayTypesSignatures: Map<PrimitiveType, IdSignature.CommonSignature> =
+    PrimitiveType.konstues().associateWith {
         getPublicSignature(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, "${it.typeName.asString()}Array")
     }
 
@@ -125,11 +125,11 @@ fun IrType.getUnsignedType(): UnsignedType? =
 
 fun <T : Enum<T>> IrType.getPrimitiveOrUnsignedType(byIdSignature: Map<IdSignature.CommonSignature, T>, byShortName: Map<Name, T>): T? {
     if (this !is IrSimpleType) return null
-    val symbol = classifier as? IrClassSymbol ?: return null
+    konst symbol = classifier as? IrClassSymbol ?: return null
     if (symbol.signature != null) return byIdSignature[symbol.signature]
 
-    val klass = symbol.owner
-    val parent = klass.parent
+    konst klass = symbol.owner
+    konst parent = klass.parent
     if (parent !is IrPackageFragment || parent.packageFqName != StandardNames.BUILT_INS_PACKAGE_FQ_NAME) return null
     return byShortName[klass.name]
 }

@@ -20,17 +20,17 @@ import java.io.Reader
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import javax.script.*
 
-const val KOTLIN_SCRIPT_STATE_BINDINGS_KEY = "kotlin.script.state"
-const val KOTLIN_SCRIPT_ENGINE_BINDINGS_KEY = "kotlin.script.engine"
+const konst KOTLIN_SCRIPT_STATE_BINDINGS_KEY = "kotlin.script.state"
+const konst KOTLIN_SCRIPT_ENGINE_BINDINGS_KEY = "kotlin.script.engine"
 
-abstract class KotlinJsr223JvmScriptEngineBase(protected val myFactory: ScriptEngineFactory) : AbstractScriptEngine(), ScriptEngine, Compilable {
+abstract class KotlinJsr223JvmScriptEngineBase(protected konst myFactory: ScriptEngineFactory) : AbstractScriptEngine(), ScriptEngine, Compilable {
 
-    protected abstract val replCompiler: ReplCompilerWithoutCheck
-    protected abstract val replEvaluator: ReplFullEvaluator
+    protected abstract konst replCompiler: ReplCompilerWithoutCheck
+    protected abstract konst replEkonstuator: ReplFullEkonstuator
 
-    override fun eval(script: String, context: ScriptContext): Any? = compileAndEval(script, context)
+    override fun ekonst(script: String, context: ScriptContext): Any? = compileAndEkonst(script, context)
 
-    override fun eval(script: Reader, context: ScriptContext): Any? = compileAndEval(script.readText(), context)
+    override fun ekonst(script: Reader, context: ScriptContext): Any? = compileAndEkonst(script.readText(), context)
 
     override fun compile(script: String): CompiledScript = compile(script, getContext())
 
@@ -57,20 +57,20 @@ abstract class KotlinJsr223JvmScriptEngineBase(protected val myFactory: ScriptEn
 
     open fun overrideScriptArgs(context: ScriptContext): ScriptArgsWithTypes? = null
 
-    open fun compileAndEval(script: String, context: ScriptContext): Any? {
-        val codeLine = nextCodeLine(context, script)
-        val state = getCurrentState(context)
-        return asJsr223EvalResult {
-            replEvaluator.compileAndEval(state, codeLine, overrideScriptArgs(context), getInvokeWrapper(context))
+    open fun compileAndEkonst(script: String, context: ScriptContext): Any? {
+        konst codeLine = nextCodeLine(context, script)
+        konst state = getCurrentState(context)
+        return asJsr223EkonstResult {
+            replEkonstuator.compileAndEkonst(state, codeLine, overrideScriptArgs(context), getInvokeWrapper(context))
         }
     }
 
     open fun compile(script: String, context: ScriptContext): CompiledScript {
-        val codeLine = nextCodeLine(context, script)
-        val state = getCurrentState(context)
+        konst codeLine = nextCodeLine(context, script)
+        konst state = getCurrentState(context)
 
-        val result = replCompiler.compile(state, codeLine)
-        val compiled = when (result) {
+        konst result = replCompiler.compile(state, codeLine)
+        konst compiled = when (result) {
             is ReplCompileResult.Error -> throw ScriptException("Error${result.locationString()}: ${result.message}")
             is ReplCompileResult.Incomplete -> throw ScriptException("Error: incomplete code; ${result.message}")
             is ReplCompileResult.CompiledClasses -> result
@@ -78,38 +78,38 @@ abstract class KotlinJsr223JvmScriptEngineBase(protected val myFactory: ScriptEn
         return CompiledKotlinScript(this, codeLine, compiled)
     }
 
-    open fun eval(compiledScript: CompiledKotlinScript, context: ScriptContext): Any? {
-        val state = getCurrentState(context)
-        return asJsr223EvalResult {
-            replEvaluator.eval(state, compiledScript.compiledData, overrideScriptArgs(context), getInvokeWrapper(context))
+    open fun ekonst(compiledScript: CompiledKotlinScript, context: ScriptContext): Any? {
+        konst state = getCurrentState(context)
+        return asJsr223EkonstResult {
+            replEkonstuator.ekonst(state, compiledScript.compiledData, overrideScriptArgs(context), getInvokeWrapper(context))
         }
     }
 
-    private fun asJsr223EvalResult(body: () -> ReplEvalResult): Any? {
-        val result = try {
+    private fun asJsr223EkonstResult(body: () -> ReplEkonstResult): Any? {
+        konst result = try {
             body()
         } catch (e: Exception) {
             throw ScriptException(e)
         }
 
         return when (result) {
-            is ReplEvalResult.ValueResult -> result.value
-            is ReplEvalResult.UnitResult -> null
-            is ReplEvalResult.Error ->
+            is ReplEkonstResult.ValueResult -> result.konstue
+            is ReplEkonstResult.UnitResult -> null
+            is ReplEkonstResult.Error ->
                 when {
-                    result is ReplEvalResult.Error.Runtime && result.cause != null ->
+                    result is ReplEkonstResult.Error.Runtime && result.cause != null ->
                         throw ScriptException((result.cause as? java.lang.Exception) ?: RuntimeException(result.cause))
-                    result is ReplEvalResult.Error.CompileTime && result.location != null ->
+                    result is ReplEkonstResult.Error.CompileTime && result.location != null ->
                         throw ScriptException(result.message, result.location.path, result.location.line, result.location.column)
                     else -> throw ScriptException(result.message)
                 }
-            is ReplEvalResult.Incomplete -> throw ScriptException("Error: incomplete code. ${result.message}")
-            is ReplEvalResult.HistoryMismatch -> throw ScriptException("Repl history mismatch at line: ${result.lineNo}")
+            is ReplEkonstResult.Incomplete -> throw ScriptException("Error: incomplete code. ${result.message}")
+            is ReplEkonstResult.HistoryMismatch -> throw ScriptException("Repl history mismatch at line: ${result.lineNo}")
         }
     }
 
-    class CompiledKotlinScript(val engine: KotlinJsr223JvmScriptEngineBase, val codeLine: ReplCodeLine, val compiledData: ReplCompileResult.CompiledClasses) : CompiledScript() {
-        override fun eval(context: ScriptContext): Any? = engine.eval(this, context)
+    class CompiledKotlinScript(konst engine: KotlinJsr223JvmScriptEngineBase, konst codeLine: ReplCodeLine, konst compiledData: ReplCompileResult.CompiledClasses) : CompiledScript() {
+        override fun ekonst(context: ScriptContext): Any? = engine.ekonst(this, context)
         override fun getEngine(): ScriptEngine = engine
     }
 }

@@ -8,6 +8,6 @@ public final class TypeDefinition</*0*/ KotlinType : kotlin.Any> {
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun parse(/*0*/ parser: (serializedValue: kotlin.String) -> KotlinType?): kotlin.Unit
-    public final fun serialize(/*0*/ parser: (value: KotlinType) -> kotlin.Any?): kotlin.Unit
+    public final fun serialize(/*0*/ parser: (konstue: KotlinType) -> kotlin.Any?): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }

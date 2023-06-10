@@ -2,15 +2,15 @@ package
 
 package test {
     @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public var topLevelProperty: kotlin.Int
-    @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public val kotlin.String.topLevelExtensionProperty: kotlin.Int
+    @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public konst kotlin.String.topLevelExtensionProperty: kotlin.Int
     @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public fun topLevelFun(): kotlin.Unit
     @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public fun kotlin.String.topLevelExtensionFun(): kotlin.Unit
 
     public open class A {
         public constructor A(/*0*/ p: kotlin.Int)
         @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public constructor A(/*0*/ s: kotlin.String)
-        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final val memberProperty: kotlin.Int = 1
-        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final val kotlin.String.memberExtensionProperty: kotlin.Int
+        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final konst memberProperty: kotlin.Int = 1
+        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final konst kotlin.String.memberExtensionProperty: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -22,8 +22,8 @@ package test {
 
     public final class B : test.A {
         public constructor B()
-        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final override /*1*/ /*fake_override*/ val memberProperty: kotlin.Int
-        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final override /*1*/ /*fake_override*/ val kotlin.String.memberExtensionProperty: kotlin.Int
+        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final override /*1*/ /*fake_override*/ konst memberProperty: kotlin.Int
+        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final override /*1*/ /*fake_override*/ konst kotlin.String.memberExtensionProperty: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -35,8 +35,8 @@ package test {
 
     public final class C : test.A {
         public constructor C()
-        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final override /*1*/ /*fake_override*/ val memberProperty: kotlin.Int
-        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final override /*1*/ /*fake_override*/ val kotlin.String.memberExtensionProperty: kotlin.Int
+        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final override /*1*/ /*fake_override*/ konst memberProperty: kotlin.Int
+        @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "hidden") public final override /*1*/ /*fake_override*/ konst kotlin.String.memberExtensionProperty: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final override /*1*/ /*fake_override*/ fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

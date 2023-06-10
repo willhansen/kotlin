@@ -1,7 +1,7 @@
 package bar
 
 class Test {
-    val foo: Int? = null
+    konst foo: Int? = null
     fun foo(o: Test) = foo == null && o.foo == null // ERROR warning: o.test == null is always true
 
     fun bar(a: Test, b: Test) {

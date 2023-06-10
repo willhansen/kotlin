@@ -1,7 +1,7 @@
 // MAIN_ARGS: [FR]
 
 fun main(args: Array<String>) {
-    val language = if (args.size == 0) "EN" else args[0]
+    konst language = if (args.size == 0) "EN" else args[0]
     println(when (language) {
                 "EN" -> "Hello!"
                 "FR" -> "Salut!"

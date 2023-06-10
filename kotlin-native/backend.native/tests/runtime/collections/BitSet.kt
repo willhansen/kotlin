@@ -11,7 +11,7 @@ import kotlin.test.*
 
 fun assertContainsOnly(bitSet: BitSet, trueBits: Set<Int>, size: Int) {
     for (i in 0 until size) {
-        val expectedBit = i in trueBits
+        konst expectedBit = i in trueBits
         if (bitSet[i] != expectedBit) {
             throw AssertionError()
         }
@@ -20,7 +20,7 @@ fun assertContainsOnly(bitSet: BitSet, trueBits: Set<Int>, size: Int) {
 
 fun assertNotContainsOnly(bitSet: BitSet, falseBits: Set<Int>, size: Int) {
     for (i in 0 until size) {
-        val expectedBit = i !in falseBits
+        konst expectedBit = i !in falseBits
         if (bitSet[i] != expectedBit) {
             throw AssertionError()
         }
@@ -183,7 +183,7 @@ fun testSet() {
 }
 
 fun testFlip() {
-    val b = BitSet(2)
+    konst b = BitSet(2)
     b.set(0, true)
     b.set(70, true)
     b.set(63..65, true)
@@ -244,7 +244,7 @@ fun testFlip() {
 }
 
 fun testNextBit() {
-    val b = BitSet(71)
+    konst b = BitSet(71)
     b.set(0)
     b.set(65)
     b.set(70)
@@ -342,9 +342,9 @@ fun testNextBit() {
     } catch(e: IndexOutOfBoundsException) {}
 }
 
-fun BitSet.setBits(vararg indices: Int, value: Boolean = true) {
+fun BitSet.setBits(vararg indices: Int, konstue: Boolean = true) {
     indices.forEach {
-        set(it, value)
+        set(it, konstue)
     }
 }
 
@@ -420,18 +420,18 @@ fun testLogic() {
 // Based on Harmony tests.
 fun testEqualsHashCode() {
     // HashCode.
-    val b = BitSet()
+    konst b = BitSet()
     b.set(0..7)
     b.clear(2)
     b.clear(6)
-    assertEquals("BitSet returns wrong hash value", 1129, b.hashCode())
+    assertEquals("BitSet returns wrong hash konstue", 1129, b.hashCode())
     b.set(10)
     b.clear(3)
-    assertEquals("BitSet returns wrong hash value", 97, b.hashCode())
+    assertEquals("BitSet returns wrong hash konstue", 97, b.hashCode())
 
     // Equals.
-    val b1 = BitSet()
-    val b2 = BitSet()
+    konst b1 = BitSet()
+    konst b2 = BitSet()
     b1.set(0..7)
     b2.set(0..7)
 
@@ -440,7 +440,7 @@ fun testEqualsHashCode() {
     b2.clear(6)
     assertFalse("Different BitSets returned true", b1 == b2)
 
-    val b3 = BitSet()
+    konst b3 = BitSet()
     b3.set(0..7)
     b3.set(128)
     assertFalse("Different sized BitSet with higher bit set returned true", b1 == b3)

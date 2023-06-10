@@ -15,12 +15,12 @@ import helpers.*
 // suspend calls NOT possible inside lambda matching to the parameter
 suspend inline fun test(crossinline c: () -> Unit) {
     c()
-    val o = object : Runnable {
+    konst o = object : Runnable {
         override fun run() {
             c()
         }
     }
-    val l = { c() }
+    konst l = { c() }
     c.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>startCoroutine<!>(EmptyContinuation)
 }
 

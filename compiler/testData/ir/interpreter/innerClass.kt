@@ -1,17 +1,17 @@
 @CompileTimeCalculation
 class Outer {
-    private val bar: String = "bar"
-    val num = 1
+    private konst bar: String = "bar"
+    konst num = 1
 
     fun foo() = "outer foo"
 
     inner class Middle {
-        val num = 2
+        konst num = 2
 
         fun foo() = "middle foo"
 
         inner class Inner {
-            val num = 3
+            konst num = 3
 
             fun foo() = "inner foo with outer bar = \"$bar\""
 
@@ -20,14 +20,14 @@ class Outer {
     }
 }
 
-const val a1 = <!EVALUATED: `outer foo`!>Outer().foo()<!>
-const val a2 = <!EVALUATED: `middle foo`!>Outer().Middle().foo()<!>
-const val a3 = <!EVALUATED: `inner foo with outer bar = "bar"`!>Outer().Middle().Inner().foo()<!>
+const konst a1 = <!EVALUATED: `outer foo`!>Outer().foo()<!>
+const konst a2 = <!EVALUATED: `middle foo`!>Outer().Middle().foo()<!>
+const konst a3 = <!EVALUATED: `inner foo with outer bar = "bar"`!>Outer().Middle().Inner().foo()<!>
 
-const val b = <!EVALUATED: `From inner: 3; from middle: 2; from outer: 1`!>Outer().Middle().Inner().getAllNums()<!>
+const konst b = <!EVALUATED: `From inner: 3; from middle: 2; from outer: 1`!>Outer().Middle().Inner().getAllNums()<!>
 
-open class A(val s: String) {
-    val z = s
+open class A(konst s: String) {
+    konst z = s
 
     fun test() = s
 
@@ -45,4 +45,4 @@ open class A(val s: String) {
     }
 }
 
-const val c = <!EVALUATED: `OK`!>A("Fail").B("OK").testB()<!>
+const konst c = <!EVALUATED: `OK`!>A("Fail").B("OK").testB()<!>

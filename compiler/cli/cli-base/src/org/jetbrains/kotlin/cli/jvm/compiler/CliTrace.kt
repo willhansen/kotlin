@@ -56,12 +56,12 @@ class CliTraceHolder : JvmCodeAnalyzerInitializer() {
 
 // TODO: needs better name + list of keys to skip somewhere
 class NoScopeRecordCliBindingTrace : CliBindingTrace() {
-    override fun <K, V> record(slice: WritableSlice<K, V>, key: K, value: V) {
+    override fun <K, V> record(slice: WritableSlice<K, V>, key: K, konstue: V) {
         if (slice == BindingContext.LEXICAL_SCOPE || slice == BindingContext.DATA_FLOW_INFO_BEFORE) {
             // In the compiler there's no need to keep scopes
             return
         }
-        super.record(slice, key, value)
+        super.record(slice, key, konstue)
     }
 
     override fun toString(): String {
@@ -82,9 +82,9 @@ open class CliBindingTrace @TestOnly constructor() : BindingTraceContext() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <K, V> get(slice: ReadOnlySlice<K, V>, key: K): V? {
-        val value = super.get(slice, key)
+        konst konstue = super.get(slice, key)
 
-        if (value == null) {
+        if (konstue == null) {
             if (key is KtDeclaration) {
                 // NB: intentional code duplication, see https://youtrack.jetbrains.com/issue/KT-43296
                 if (BindingContext.FUNCTION === slice) {
@@ -102,6 +102,6 @@ open class CliBindingTrace @TestOnly constructor() : BindingTraceContext() {
             }
         }
 
-        return value
+        return konstue
     }
 }

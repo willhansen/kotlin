@@ -9,30 +9,30 @@ public open class Super {
 
 public abstract class Test {
     public constructor Test()
-    public final val a: kotlin.Int
-    public final val b: kotlin.Int
-    public final val c: kotlin.Int = 1
-    public final val c1: kotlin.Int = 1
-    public final val c2: kotlin.Int
-    public final val c3: kotlin.Int
-    public final val c4: kotlin.Int
-    public final val c5: kotlin.Int
+    public final konst a: kotlin.Int
+    public final konst b: kotlin.Int
+    public final konst c: kotlin.Int = 1
+    public final konst c1: kotlin.Int = 1
+    public final konst c2: kotlin.Int
+    public final konst c3: kotlin.Int
+    public final konst c4: kotlin.Int
+    public final konst c5: kotlin.Int
     public final var v: kotlin.Int
     public final var v1: kotlin.Int
     public final var v10: kotlin.Int
-    public abstract val v11: kotlin.Int
+    public abstract konst v11: kotlin.Int
     public abstract var v12: kotlin.Int
     public final var v2: kotlin.Int
     public final var v3: kotlin.Int
     public final var v4: kotlin.Int
     public final var v5: kotlin.Int
     public final var v6: kotlin.Int
-    public abstract val v7: kotlin.Int
+    public abstract konst v7: kotlin.Int
     public abstract var v8: kotlin.Int
     public final var v9: kotlin.Int
-    public abstract val x: kotlin.Int
-    public abstract val x1: kotlin.Int
-    public abstract val x2: kotlin.Int
+    public abstract konst x: kotlin.Int
+    public abstract konst x1: kotlin.Int
+    public abstract konst x2: kotlin.Int
     public abstract var y: kotlin.Int
     public abstract var y1: kotlin.Int
     public abstract var y2: kotlin.Int
@@ -47,8 +47,8 @@ public abstract class Test {
 
 public final class TestPCParameters : Super {
     public constructor TestPCParameters(/*0*/ w: kotlin.Int, /*1*/ x: kotlin.Int, /*2*/ y: kotlin.Int, /*3*/ z: kotlin.Int)
-    public final val xx: kotlin.Int
-    public final val y: kotlin.Int
+    public final konst xx: kotlin.Int
+    public final konst y: kotlin.Int
     public final var z: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(): [Error type: Return type for function cannot be resolved]

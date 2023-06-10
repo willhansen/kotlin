@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.stubs.KotlinClassStub
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 
 open class KtClass : KtClassOrObject {
-    private val classInterfaceTokenSet = TokenSet.create(KtTokens.CLASS_KEYWORD, KtTokens.INTERFACE_KEYWORD)
+    private konst classInterfaceTokenSet = TokenSet.create(KtTokens.CLASS_KEYWORD, KtTokens.INTERFACE_KEYWORD)
 
     constructor(node: ASTNode) : super(node)
     constructor(stub: KotlinClassStub) : super(stub, KtStubElementTypes.CLASS)
@@ -22,7 +22,7 @@ open class KtClass : KtClassOrObject {
         return visitor.visitClass(this, data)
     }
 
-    private val _stub: KotlinClassStub?
+    private konst _stub: KotlinClassStub?
         get() = stub as? KotlinClassStub
 
     fun getProperties(): List<KtProperty> = body?.properties.orEmpty()
@@ -46,7 +46,7 @@ open class KtClass : KtClassOrObject {
 }
 
 fun KtClass.createPrimaryConstructorIfAbsent(): KtPrimaryConstructor {
-    val constructor = primaryConstructor
+    konst constructor = primaryConstructor
     if (constructor != null) return constructor
     var anchor: PsiElement? = typeParameterList
     if (anchor == null) anchor = nameIdentifier
@@ -55,8 +55,8 @@ fun KtClass.createPrimaryConstructorIfAbsent(): KtPrimaryConstructor {
 }
 
 fun KtClass.createPrimaryConstructorParameterListIfAbsent(): KtParameterList {
-    val constructor = createPrimaryConstructorIfAbsent()
-    val parameterList = constructor.valueParameterList
+    konst constructor = createPrimaryConstructorIfAbsent()
+    konst parameterList = constructor.konstueParameterList
     if (parameterList != null) return parameterList
     return constructor.add(KtPsiFactory(project).createParameterList("()")) as KtParameterList
 }

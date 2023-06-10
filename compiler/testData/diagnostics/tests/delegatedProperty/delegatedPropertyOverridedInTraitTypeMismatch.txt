@@ -3,7 +3,7 @@ package
 public fun foo(): kotlin.Unit
 
 public interface A {
-    public abstract val prop: kotlin.Int
+    public abstract konst prop: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -11,7 +11,7 @@ public interface A {
 
 public final class AImpl : A {
     public constructor AImpl()
-    public open override /*1*/ val prop: kotlin.String
+    public open override /*1*/ konst prop: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

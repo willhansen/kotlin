@@ -5,7 +5,7 @@ package a
 
 public var topLevel: Int = 42
 
-public val String.extension: Long
+public konst String.extension: Long
     get() = length.toLong()
 
 // MODULE: main(lib)
@@ -14,15 +14,15 @@ public val String.extension: Long
 import a.*
 
 fun box(): String {
-    val f = ::topLevel
-    val x1 = f.get()
+    konst f = ::topLevel
+    konst x1 = f.get()
     if (x1 != 42) return "Fail x1: $x1"
     f.set(239)
-    val x2 = f.get()
+    konst x2 = f.get()
     if (x2 != 239) return "Fail x2: $x2"
 
-    val g = String::extension
-    val y1 = g.get("abcde")
+    konst g = String::extension
+    konst y1 = g.get("abcde")
     if (y1 != 5L) return "Fail y1: $y1"
 
     return "OK"

@@ -11,16 +11,16 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 
 interface ModuleInfo {
-    val name: Name
-    val displayedName: String get() = name.asString()
+    konst name: Name
+    konst displayedName: String get() = name.asString()
     fun dependencies(): List<ModuleInfo>
-    val expectedBy: List<ModuleInfo> get() = emptyList()
-    val platform: TargetPlatform
-    val analyzerServices: PlatformDependentAnalyzerServices
+    konst expectedBy: List<ModuleInfo> get() = emptyList()
+    konst platform: TargetPlatform
+    konst analyzerServices: PlatformDependentAnalyzerServices
     fun modulesWhoseInternalsAreVisible(): Collection<ModuleInfo> = listOf()
-    val capabilities: Map<ModuleCapability<*>, Any?>
+    konst capabilities: Map<ModuleCapability<*>, Any?>
         get() = mapOf(Capability to this)
-    val stableName: Name?
+    konst stableName: Name?
         get() = null
 
     // For common modules, we add built-ins at the beginning of the dependencies list, after the SDK.
@@ -34,6 +34,6 @@ interface ModuleInfo {
     enum class DependencyOnBuiltIns { NONE, AFTER_SDK, LAST }
 
     companion object {
-        val Capability = ModuleCapability<ModuleInfo>("ModuleInfo")
+        konst Capability = ModuleCapability<ModuleInfo>("ModuleInfo")
     }
 }

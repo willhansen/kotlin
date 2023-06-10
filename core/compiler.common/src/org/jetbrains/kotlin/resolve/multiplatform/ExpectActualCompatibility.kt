@@ -13,8 +13,8 @@ sealed class ExpectActualCompatibility<out D> {
 
     // Note that the reason is used in the diagnostic output, see PlatformIncompatibilityDiagnosticRenderer
     sealed class Incompatible<out D>(
-        val reason: String?,
-        val kind: IncompatibilityKind = IncompatibilityKind.WEAK
+        konst reason: String?,
+        konst kind: IncompatibilityKind = IncompatibilityKind.WEAK
     ) : ExpectActualCompatibility<D>() {
         // Callables
 
@@ -28,7 +28,7 @@ sealed class ExpectActualCompatibility<out D> {
             IncompatibilityKind.STRONG
         )
 
-        object ParameterCount : Incompatible<Nothing>("number of value parameters is different", IncompatibilityKind.STRONG)
+        object ParameterCount : Incompatible<Nothing>("number of konstue parameters is different", IncompatibilityKind.STRONG)
         object TypeParameterCount : Incompatible<Nothing>("number of type parameters is different", IncompatibilityKind.STRONG)
 
         object ParameterTypes : Incompatible<Nothing>("parameter types are different", IncompatibilityKind.STRONG)
@@ -37,13 +37,13 @@ sealed class ExpectActualCompatibility<out D> {
         object ParameterNames : Incompatible<Nothing>("parameter names are different")
         object TypeParameterNames : Incompatible<Nothing>("names of type parameters are different")
 
-        object ValueParameterVararg : Incompatible<Nothing>("some value parameter is vararg in one declaration and non-vararg in the other")
+        object ValueParameterVararg : Incompatible<Nothing>("some konstue parameter is vararg in one declaration and non-vararg in the other")
         object ValueParameterNoinline : Incompatible<Nothing>(
-            "some value parameter is noinline in one declaration and not noinline in the other"
+            "some konstue parameter is noinline in one declaration and not noinline in the other"
         )
 
         object ValueParameterCrossinline : Incompatible<Nothing>(
-            "some value parameter is crossinline in one declaration and not crossinline in the other"
+            "some konstue parameter is crossinline in one declaration and not crossinline in the other"
         )
 
         // Functions
@@ -55,7 +55,7 @@ sealed class ExpectActualCompatibility<out D> {
 
         // Properties
 
-        object PropertyKind : Incompatible<Nothing>("property kinds are different (val vs var)")
+        object PropertyKind : Incompatible<Nothing>("property kinds are different (konst vs var)")
         object PropertyLateinitModifier : Incompatible<Nothing>("modifiers are different (lateinit)")
         object PropertyConstModifier : Incompatible<Nothing>("modifiers are different (const)")
         object PropertySetterVisibility : Incompatible<Nothing>("setter visibility is different")
@@ -71,7 +71,7 @@ sealed class ExpectActualCompatibility<out D> {
         object Supertypes : Incompatible<Nothing>("some supertypes are missing in the actual declaration")
 
         class ClassScopes<D>(
-            val unfulfilled: List<Pair<D, Map<Incompatible<D>, Collection<D>>>>
+            konst unfulfilled: List<Pair<D, Map<Incompatible<D>, Collection<D>>>>
         ) : Incompatible<D>("some expected members have no actual ones")
 
         object EnumEntries : Incompatible<Nothing>("some entries from expected enum are missing in the actual enum")
@@ -93,5 +93,5 @@ sealed class ExpectActualCompatibility<out D> {
     object Compatible : ExpectActualCompatibility<Nothing>()
 }
 
-val ExpectActualCompatibility<*>.compatible: Boolean
+konst ExpectActualCompatibility<*>.compatible: Boolean
     get() = this == ExpectActualCompatibility.Compatible

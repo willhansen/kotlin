@@ -1,10 +1,10 @@
 class A {
     companion object {
-        val b = 0
-        val c = b
+        konst b = 0
+        konst c = b
         
         init {
-            val d = b
+            konst d = b
         }
     }
 }

@@ -10,14 +10,14 @@ import org.jetbrains.kotlin.konan.file.File
 import org.jetbrains.kotlin.konan.library.BitcodeKotlinLibraryLayout
 import org.jetbrains.kotlin.konan.library.TargetedKotlinLibraryLayout
 
-open class TargetedWriterImpl(val targetLayout: TargetedKotlinLibraryLayout) {
+open class TargetedWriterImpl(konst targetLayout: TargetedKotlinLibraryLayout) {
     init {
         targetLayout.targetDir.mkdirs()
         targetLayout.includedDir.mkdirs()
     }
 
     fun addIncludedBinary(library: String) {
-        val basename = File(library).name
+        konst basename = File(library).name
         File(library).copyTo(File(targetLayout.includedDir, basename))
     }
 }
@@ -26,7 +26,7 @@ class BitcodeWriterImpl(
     libraryLayout: BitcodeKotlinLibraryLayout
 ) : BitcodeWriter, TargetedWriterImpl(libraryLayout) {
 
-    val bitcodeLayout = libraryLayout
+    konst bitcodeLayout = libraryLayout
 
     init {
         bitcodeLayout.kotlinDir.mkdirs()
@@ -34,7 +34,7 @@ class BitcodeWriterImpl(
     }
 
     override fun addNativeBitcode(library: String) {
-        val basename = File(library).name
+        konst basename = File(library).name
         File(library).copyTo(File(bitcodeLayout.nativeDir, basename))
     }
 }

@@ -12,7 +12,7 @@ import kotlin.io.path.deleteRecursively
 import kotlin.test.AfterTest
 
 abstract class AbstractPathTest {
-    private val cleanUpActions = mutableListOf<Pair<Path, (Path) -> Unit>>()
+    private konst cleanUpActions = mutableListOf<Pair<Path, (Path) -> Unit>>()
 
     fun Path.cleanup(): Path {
         cleanUpActions.add(this to { it.deleteIfExists() })

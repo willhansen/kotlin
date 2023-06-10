@@ -11,8 +11,8 @@ FILE fqName:<root> fileName:/implicitCastToTypeParameter.kt
             then: TYPE_OP type=T of <root>.test1 origin=IMPLICIT_CAST typeOperand=T of <root>.test1
               GET_VAR '<this>: kotlin.Any declared in <root>.test1' type=kotlin.Any origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Null type=kotlin.Nothing? value=null
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Null type=kotlin.Nothing? konstue=null
   CLASS INTERFACE name:Foo modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Foo<T of <root>.Foo>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -29,9 +29,9 @@ FILE fqName:<root> fileName:/implicitCastToTypeParameter.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-  PROPERTY name:asT visibility:public modality:FINAL [val]
+  PROPERTY name:asT visibility:public modality:FINAL [konst]
     FUN name:<get-asT> visibility:public modality:FINAL <T> ($receiver:<root>.Foo<T of <root>.<get-asT>>) returnType:T of <root>.<get-asT>? [inline]
-      correspondingProperty: PROPERTY name:asT visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:asT visibility:public modality:FINAL [konst]
       TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any] reified:true
       $receiver: VALUE_PARAMETER name:<this> type:<root>.Foo<T of <root>.<get-asT>>
       BLOCK_BODY
@@ -43,8 +43,8 @@ FILE fqName:<root> fileName:/implicitCastToTypeParameter.kt
               then: TYPE_OP type=T of <root>.<get-asT> origin=IMPLICIT_CAST typeOperand=T of <root>.<get-asT>
                 GET_VAR '<this>: <root>.Foo<T of <root>.<get-asT>> declared in <root>.<get-asT>' type=<root>.Foo<T of <root>.<get-asT>> origin=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
-              then: CONST Null type=kotlin.Nothing? value=null
+              if: CONST Boolean type=kotlin.Boolean konstue=true
+              then: CONST Null type=kotlin.Nothing? konstue=null
   CLASS CLASS name:Bar modality:FINAL visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Bar<T of <root>.Bar>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false

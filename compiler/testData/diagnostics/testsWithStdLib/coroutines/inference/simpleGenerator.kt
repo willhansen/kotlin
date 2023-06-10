@@ -14,19 +14,19 @@ class GenericController<T> {
 
 fun <S> generate(g: suspend GenericController<S>.() -> Unit): S = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     yield(4)
 }
 
-val test2 = generate {
+konst test2 = generate {
     yieldSet(setOf(1, 2, 3))
 }
 
-val test3 = generate {
+konst test3 = generate {
     yieldVararg(1, 2, 3)
 }
 
-val test4 = generate {
+konst test4 = generate {
     yieldVararg(1, 2, "")
 }
 

@@ -5,8 +5,8 @@ package test
 var result = ""
 
 inline fun <reified T : Enum<T>> renderOptions(render: (T) -> String) {
-    val values = enumValues<T>()
-    for (v in values) {
+    konst konstues = enumValues<T>()
+    for (v in konstues) {
         result += render(v)
     }
 }
@@ -14,7 +14,7 @@ inline fun <reified T : Enum<T>> renderOptions(render: (T) -> String) {
 enum class Z {
     O, K;
 
-    val myParam = name
+    konst myParam = name
 }
 
 

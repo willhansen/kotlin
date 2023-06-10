@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.pill.PillExtension
 plugins {
     id("gradle-plugin-common-configuration")
     id("jps-compatible")
-    id("org.jetbrains.kotlinx.binary-compatibility-validator")
+    id("org.jetbrains.kotlinx.binary-compatibility-konstidator")
 }
 
 repositories {
@@ -155,12 +155,12 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
 
 tasks {
     named<ProcessResources>("processCommonResources") {
-        val propertiesToExpand = mapOf(
+        konst propertiesToExpand = mapOf(
             "projectVersion" to project.version,
             "kotlinNativeVersion" to project.kotlinNativeVersion
         )
-        for ((name, value) in propertiesToExpand) {
-            inputs.property(name, value)
+        for ((name, konstue) in propertiesToExpand) {
+            inputs.property(name, konstue)
         }
         filesMatching("project.properties") {
             expand(propertiesToExpand)
@@ -185,7 +185,7 @@ tasks {
 }
 
 projectTest {
-    dependsOn(tasks.named("validatePlugins"))
+    dependsOn(tasks.named("konstidatePlugins"))
 
     workingDir = rootDir
 }
@@ -258,7 +258,7 @@ gradlePlugin {
 // Gradle plugins functional tests
 if (!kotlinBuildProperties.isInJpsBuildIdeaSync) {
 
-    val functionalTestSourceSet = sourceSets.create("functionalTest") {
+    konst functionalTestSourceSet = sourceSets.create("functionalTest") {
         compileClasspath += mainSourceSet.output
         runtimeClasspath += mainSourceSet.output
 
@@ -273,7 +273,7 @@ if (!kotlinBuildProperties.isInJpsBuildIdeaSync) {
         }
     }
 
-    val functionalTestCompilation = kotlin.target.compilations.getByName("functionalTest")
+    konst functionalTestCompilation = kotlin.target.compilations.getByName("functionalTest")
     functionalTestCompilation.associateWith(kotlin.target.compilations.getByName("main"))
     functionalTestCompilation.associateWith(kotlin.target.compilations.getByName("common"))
 
@@ -313,8 +313,8 @@ if (!kotlinBuildProperties.isInJpsBuildIdeaSync) {
     }
 
     dependencies {
-        val implementation = project.configurations.getByName(functionalTestSourceSet.implementationConfigurationName)
-        val compileOnly = project.configurations.getByName(functionalTestSourceSet.compileOnlyConfigurationName)
+        konst implementation = project.configurations.getByName(functionalTestSourceSet.implementationConfigurationName)
+        konst compileOnly = project.configurations.getByName(functionalTestSourceSet.compileOnlyConfigurationName)
 
         implementation("com.android.tools.build:gradle:7.2.1")
         implementation("com.android.tools.build:gradle-api:7.2.1")

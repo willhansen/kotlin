@@ -22,22 +22,22 @@ abstract class PodInstallTask : AbstractPodInstallTask() {
 
     @get:Optional
     @get:InputFile
-    abstract val podspec: Property<File?>
+    abstract konst podspec: Property<File?>
 
     @get:Input
-    abstract val frameworkName: Property<String>
+    abstract konst frameworkName: Property<String>
 
     @get:Nested
-    abstract val specRepos: Property<SpecRepos>
+    abstract konst specRepos: Property<SpecRepos>
 
     @get:Nested
-    abstract val pods: ListProperty<CocoapodsDependency>
+    abstract konst pods: ListProperty<CocoapodsDependency>
 
     @get:InputDirectory
-    abstract val dummyFramework: Property<File>
+    abstract konst dummyFramework: Property<File>
 
-    private val framework = project.provider { project.cocoapodsBuildDirs.framework.resolve("${frameworkName.get()}.framework") }
-    private val tmpFramework = dummyFramework.map { dummy -> dummy.parentFile.resolve("tmp.framework").also { it.deleteOnExit() } }
+    private konst framework = project.provider { project.cocoapodsBuildDirs.framework.resolve("${frameworkName.get()}.framework") }
+    private konst tmpFramework = dummyFramework.map { dummy -> dummy.parentFile.resolve("tmp.framework").also { it.deleteOnExit() } }
 
     override fun doPodInstall() {
         // We always need to execute 'pod install' with the dummy framework because the one left from a previous build
@@ -60,8 +60,8 @@ abstract class PodInstallTask : AbstractPodInstallTask() {
     }
 
     override fun handleError(retCode: Int, error: String, process: Process): String? {
-        val specReposMessages = MissingSpecReposMessage(specRepos.get()).missingMessage
-        val cocoapodsMessages = pods.get().map { MissingCocoapodsMessage(it).missingMessage }
+        konst specReposMessages = MissingSpecReposMessage(specRepos.get()).missingMessage
+        konst cocoapodsMessages = pods.get().map { MissingCocoapodsMessage(it).missingMessage }
 
         return listOfNotNull(
             "'pod install' command failed with code $retCode.",

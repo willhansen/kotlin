@@ -27,7 +27,7 @@ package kotlin.text.regex
  * Note: In Kotlin we use only the "anchoring bounds" mode when "^" matches beginning of a match region.
  * See: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html#useAnchoringBounds-boolean-
  */
-internal class SOLSet(val lt: AbstractLineTerminator, val multiline: Boolean = false) : SimpleSet() {
+internal class SOLSet(konst lt: AbstractLineTerminator, konst multiline: Boolean = false) : SimpleSet() {
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
         if (!multiline) {
@@ -45,6 +45,6 @@ internal class SOLSet(val lt: AbstractLineTerminator, val multiline: Boolean = f
     }
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean = false
-    override val name: String
+    override konst name: String
         get() = "^"
 }

@@ -53,7 +53,7 @@ fun checkCallableTypeParametersWithUpperBounds(callableRef: KCallable<*>, typePa
     }
 
 fun checkSuperTypeAnnotation(classRef: KClass<*>, superClassName: String, annotationName: String): Boolean {
-    val superType = classRef.supertypes.find { it.classifier.toString() == superClassName }
+    konst superType = classRef.supertypes.find { it.classifier.toString() == superClassName }
 
     return superType?.annotations?.find { it.annotationClass.qualifiedName == annotationName } != null
 }
@@ -81,7 +81,7 @@ fun checkTypeProperties(classRef: KClass<*>, properties: List<Pair<String, Strin
 
 fun checkPropertiesWithAnnotation(classRef: KClass<*>, properties: List<Pair<String, List<String>>>) =
     properties.all { (propertyName, propertyAnnotations) ->
-        val foundProperty = classRef.members.find { it.name == propertyName }
+        konst foundProperty = classRef.members.find { it.name == propertyName }
 
         foundProperty.let {
             it != null && propertyAnnotations.all { expectedAnnotationName: String ->

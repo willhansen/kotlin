@@ -28,49 +28,49 @@ import org.jetbrains.kotlin.descriptors.Visibility
 import org.jetbrains.kotlin.name.CallableId
 
 class KtFe10DescDefaultPropertyGetterSymbol(
-    private val propertyDescriptor: PropertyDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    private konst propertyDescriptor: PropertyDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtPropertyGetterSymbol(), KtFe10Symbol {
-    override val isDefault: Boolean
+    override konst isDefault: Boolean
         get() = withValidityAssertion { true }
 
-    override val isInline: Boolean
+    override konst isInline: Boolean
         get() = withValidityAssertion { false }
 
-    override val isOverride: Boolean
+    override konst isOverride: Boolean
         get() = withValidityAssertion { propertyDescriptor.isExplicitOverride }
 
-    override val hasBody: Boolean
+    override konst hasBody: Boolean
         get() = withValidityAssertion { false }
 
-    override val valueParameters: List<KtValueParameterSymbol>
+    override konst konstueParameters: List<KtValueParameterSymbol>
         get() = withValidityAssertion { emptyList() }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { true }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { propertyDescriptor.getterCallableIdIfNotLocal }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { propertyDescriptor.type.toKtType(analysisContext) }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { propertyDescriptor.getSymbolOrigin(analysisContext) }
 
-    override val psi: PsiElement?
+    override konst psi: PsiElement?
         get() = withValidityAssertion { null }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion { propertyDescriptor.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext) }
 
-    override val modality: Modality
+    override konst modality: Modality
         get() = withValidityAssertion { propertyDescriptor.ktModality }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion { propertyDescriptor.ktVisibility }
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion { KtEmptyAnnotationsList(token) }
 
     context(KtAnalysisSession)

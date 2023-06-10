@@ -31,7 +31,7 @@ class Test {
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         Test.contextReceiverField0
   //   Mangled name computed from Descriptor: Test{}contextReceiverField0
-  private /* final field */ val contextReceiverField0: Context
+  private /* final field */ konst contextReceiverField0: Context
 
   // CHECK:
   //   Mangled name: Test#bar(){}

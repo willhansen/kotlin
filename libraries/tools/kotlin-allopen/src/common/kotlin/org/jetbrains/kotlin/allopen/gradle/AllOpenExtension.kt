@@ -17,8 +17,8 @@
 package org.jetbrains.kotlin.allopen.gradle
 
 open class AllOpenExtension {
-    internal val myAnnotations = mutableListOf<String>()
-    internal val myPresets = mutableListOf<String>()
+    internal konst myAnnotations = mutableListOf<String>()
+    internal konst myPresets = mutableListOf<String>()
 
     open fun annotation(fqName: String) {
         myAnnotations.add(fqName)

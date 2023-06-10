@@ -10,7 +10,7 @@ object IdeaKotlinBinaryCoordinatesProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinBinaryCoordinatesProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinBinaryCoordinatesProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKotlinBinaryCoordinatesProtoKt {
       @JvmName("getGroup")
       get() = _builder.getGroup()
       @JvmName("setGroup")
-      set(value) {
-        _builder.setGroup(value)
+      set(konstue) {
+        _builder.setGroup(konstue)
       }
     /**
      * <code>optional string group = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKotlinBinaryCoordinatesProtoKt {
       @JvmName("getModule")
       get() = _builder.getModule()
       @JvmName("setModule")
-      set(value) {
-        _builder.setModule(value)
+      set(konstue) {
+        _builder.setModule(konstue)
       }
     /**
      * <code>optional string module = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKotlinBinaryCoordinatesProtoKt {
       @JvmName("getVersion")
       get() = _builder.getVersion()
       @JvmName("setVersion")
-      set(value) {
-        _builder.setVersion(value)
+      set(konstue) {
+        _builder.setVersion(konstue)
       }
     /**
      * <code>optional string version = 3;</code>
@@ -101,8 +101,8 @@ object IdeaKotlinBinaryCoordinatesProtoKt {
       @JvmName("getSourceSetName")
       get() = _builder.getSourceSetName()
       @JvmName("setSourceSetName")
-      set(value) {
-        _builder.setSourceSetName(value)
+      set(konstue) {
+        _builder.setSourceSetName(konstue)
       }
     /**
      * <code>optional string source_set_name = 4;</code>

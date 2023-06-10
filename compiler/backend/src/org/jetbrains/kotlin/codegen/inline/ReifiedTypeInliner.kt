@@ -28,7 +28,7 @@ import org.jetbrains.org.objectweb.asm.tree.*
 import kotlin.math.max
 
 class ReificationArgument(
-    val parameterName: String, val nullable: Boolean, val arrayDepth: Int
+    konst parameterName: String, konst nullable: Boolean, konst arrayDepth: Int
 ) {
     fun asString(): String =
         "[".repeat(arrayDepth) + parameterName + (if (nullable) "?" else "")
@@ -42,21 +42,21 @@ class ReificationArgument(
 }
 
 class ReifiedTypeInliner<KT : KotlinTypeMarker>(
-    private val parametersMapping: TypeParameterMappings<KT>?,
-    private val intrinsicsSupport: IntrinsicsSupport<KT>,
-    private val typeSystem: TypeSystemCommonBackendContext,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val unifiedNullChecks: Boolean,
+    private konst parametersMapping: TypeParameterMappings<KT>?,
+    private konst intrinsicsSupport: IntrinsicsSupport<KT>,
+    private konst typeSystem: TypeSystemCommonBackendContext,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst unifiedNullChecks: Boolean,
 ) {
     enum class OperationKind {
         NEW_ARRAY, AS, SAFE_AS, IS, JAVA_CLASS, ENUM_REIFIED, TYPE_OF;
 
-        val id: Int get() = ordinal
+        konst id: Int get() = ordinal
     }
 
 
     interface IntrinsicsSupport<KT : KotlinTypeMarker> {
-        val state: GenerationState
+        konst state: GenerationState
 
         fun putClassInstance(v: InstructionAdapter, type: KT)
 
@@ -79,12 +79,12 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     }
 
     companion object {
-        const val REIFIED_OPERATION_MARKER_METHOD_NAME = "reifiedOperationMarker"
-        const val NEED_CLASS_REIFICATION_MARKER_METHOD_NAME = "needClassReification"
+        const konst REIFIED_OPERATION_MARKER_METHOD_NAME = "reifiedOperationMarker"
+        const konst NEED_CLASS_REIFICATION_MARKER_METHOD_NAME = "needClassReification"
 
-        const val pluginIntrinsicsMarkerOwner = "kotlin/jvm/internal/MagicApiIntrinsics"
-        const val pluginIntrinsicsMarkerMethod = "voidMagicApiCall"
-        const val pluginIntrinsicsMarkerSignature = "(Ljava/lang/Object;)V"
+        const konst pluginIntrinsicsMarkerOwner = "kotlin/jvm/internal/MagicApiIntrinsics"
+        const konst pluginIntrinsicsMarkerMethod = "voidMagicApiCall"
+        const konst pluginIntrinsicsMarkerSignature = "(Ljava/lang/Object;)V"
 
         fun isOperationReifiedMarker(insn: AbstractInsnNode) =
             isReifiedMarker(insn) { it == REIFIED_OPERATION_MARKER_METHOD_NAME }
@@ -126,7 +126,7 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
         ) {
             with(typeSystem) {
                 if (typeParameter.isReified()) {
-                    val argument = ReificationArgument(typeParameter.getName().asString(), isNullable, 0)
+                    konst argument = ReificationArgument(typeParameter.getName().asString(), isNullable, 0)
                     putReifiedOperationMarker(operationKind, argument, v)
                 }
             }
@@ -135,7 +135,7 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
 
     private var maxStackSize = 0
 
-    private val hasReifiedParameters = parametersMapping?.hasReifiedParameters() ?: false
+    private konst hasReifiedParameters = parametersMapping?.hasReifiedParameters() ?: false
 
     /**
      * @return set of type parameters' identifiers contained in markers that should be reified further
@@ -145,12 +145,12 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     fun reifyInstructions(node: MethodNode): ReifiedTypeParametersUsages {
         if (!hasReifiedParameters) return ReifiedTypeParametersUsages()
 
-        val instructions = node.instructions
+        konst instructions = node.instructions
         maxStackSize = 0
-        val result = ReifiedTypeParametersUsages()
+        konst result = ReifiedTypeParametersUsages()
         for (insn in instructions.toArray()) {
             if (isOperationReifiedMarker(insn)) {
-                val newNames = processReifyMarker(insn as MethodInsnNode, instructions)
+                konst newNames = processReifyMarker(insn as MethodInsnNode, instructions)
                 if (newNames != null) {
                     result.mergeAll(newNames)
                 }
@@ -162,12 +162,12 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     }
 
     private fun processReifyMarker(insn: MethodInsnNode, instructions: InsnList): ReifiedTypeParametersUsages? {
-        val operationKind = insn.operationKind ?: return null
-        val reificationArgument = insn.reificationArgument ?: return null
-        val mapping = parametersMapping?.get(reificationArgument.parameterName) ?: return null
+        konst operationKind = insn.operationKind ?: return null
+        konst reificationArgument = insn.reificationArgument ?: return null
+        konst mapping = parametersMapping?.get(reificationArgument.parameterName) ?: return null
 
-        val asmType = mapping.asmType.reify(reificationArgument)
-        val type = mapping.type.reify(reificationArgument)
+        konst asmType = mapping.asmType.reify(reificationArgument)
+        konst type = mapping.type.reify(reificationArgument)
         // Runtime-available types on the JVM are:
         //  1. Array<T?> for some runtime-available type T
         //  2. C<*, ...> and C<*, ...>? for some classifier C
@@ -178,8 +178,8 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
         // Otherwise nullability on all but the innermost dimension of a multidimensional array will be lost,
         // and reified type parameters used as arguments to classifier types will never be reified.
         if (mapping.reificationArgument == null || operationKind == OperationKind.TYPE_OF) {
-            val processed = (isPluginNext(insn) && processPlugin(insn, instructions, type)) || when (operationKind) {
-                // TODO: if `process*` returns false, then the marked sequence is invalid - simply leaving the marker in place
+            konst processed = (isPluginNext(insn) && processPlugin(insn, instructions, type)) || when (operationKind) {
+                // TODO: if `process*` returns false, then the marked sequence is inkonstid - simply leaving the marker in place
                 //   will lead to an exception at runtime. What to do instead? Possible that the bytecode has been removed by
                 //   dead code elimination (e.g. result of `T::class.java` was unused) and now we only need to erase the marker.
                 OperationKind.NEW_ARRAY -> processNewArray(insn, asmType)
@@ -197,7 +197,7 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
                 instructions.remove(insn) // INVOKESTATIC marker method
             }
         } else {
-            val newReificationArgument = reificationArgument.combine(mapping.reificationArgument)
+            konst newReificationArgument = reificationArgument.combine(mapping.reificationArgument)
             instructions.set(insn.previous!!, LdcInsnNode(newReificationArgument.asString()))
         }
         return mapping.reifiedTypeParametersUsages
@@ -206,7 +206,7 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     @Suppress("UNCHECKED_CAST")
     private fun KT.reify(argument: ReificationArgument): KT =
         with(typeSystem) {
-            val withArrays = arrayOf(argument.arrayDepth)
+            konst withArrays = arrayOf(argument.arrayDepth)
             if (argument.nullable) withArrays.makeNullable() else withArrays
         } as KT
 
@@ -236,12 +236,12 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     ) = rewriteNextTypeInsn(insn, Opcodes.CHECKCAST) { stubCheckcast: AbstractInsnNode ->
         if (stubCheckcast !is TypeInsnNode) return false
 
-        val newMethodNode = MethodNode(Opcodes.API_VERSION)
+        konst newMethodNode = MethodNode(Opcodes.API_VERSION)
         generateAsCast(InstructionAdapter(newMethodNode), intrinsicsSupport.toKotlinType(type), asmType, safe, unifiedNullChecks)
 
         instructions.insert(insn, newMethodNode.instructions)
         // Keep stubCheckcast to avoid VerifyErrors on 1.8+ bytecode,
-        // it's safe to remove cast to Object as FrameMap will use it as default value for merged branches
+        // it's safe to remove cast to Object as FrameMap will use it as default konstue for merged branches
         if (stubCheckcast.desc == AsmTypes.OBJECT_TYPE.internalName) {
             instructions.remove(stubCheckcast)
         }
@@ -260,7 +260,7 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     ) = rewriteNextTypeInsn(insn, Opcodes.INSTANCEOF) { stubInstanceOf: AbstractInsnNode ->
         if (stubInstanceOf !is TypeInsnNode) return false
 
-        val newMethodNode = MethodNode(Opcodes.API_VERSION)
+        konst newMethodNode = MethodNode(Opcodes.API_VERSION)
         generateIsCheck(InstructionAdapter(newMethodNode), intrinsicsSupport.toKotlinType(type), asmType)
 
         instructions.insert(insn, newMethodNode.instructions)
@@ -276,7 +276,7 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
         instructions: InsnList,
         type: KT
     ) = rewriteNextTypeInsn(insn, Opcodes.ACONST_NULL) { stubConstNull: AbstractInsnNode ->
-        val newMethodNode = newMethodNodeWithCorrectStackSize {
+        konst newMethodNode = newMethodNodeWithCorrectStackSize {
             typeSystem.generateTypeOf(it, type, intrinsicsSupport)
         }
 
@@ -288,8 +288,8 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     }
 
     private fun processPlugin(insn: MethodInsnNode, instructions: InsnList, type: KT): Boolean {
-        val reifiedInsn = insn.next ?: return false
-        val newMethodNode = newMethodNodeWithCorrectStackSize {
+        konst reifiedInsn = insn.next ?: return false
+        konst newMethodNode = newMethodNodeWithCorrectStackSize {
             if (!intrinsicsSupport.rewritePluginDefinedOperationMarker(
                     it,
                     reifiedInsn,
@@ -311,7 +311,7 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
      *  insn.next.next.next: INVOKESTATIC voidMagicApiCall
      */
     private fun isPluginNext(insn: AbstractInsnNode): Boolean {
-        val magicInsn = insn.next?.next?.next ?: return false
+        konst magicInsn = insn.next?.next?.next ?: return false
         return magicInsn is MethodInsnNode && magicInsn.opcode == Opcodes.INVOKESTATIC
                 && magicInsn.owner == pluginIntrinsicsMarkerOwner
                 && magicInsn.name == pluginIntrinsicsMarkerMethod
@@ -324,7 +324,7 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
         expectedNextOpcode: Int,
         rewrite: (AbstractInsnNode) -> Boolean
     ): Boolean {
-        val next = marker.next ?: return false
+        konst next = marker.next ?: return false
         if (next.opcode != expectedNextOpcode) return false
         return rewrite(next)
     }
@@ -336,18 +336,18 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     }
 
     private fun processJavaClass(insn: MethodInsnNode, parameter: Type): Boolean {
-        val next = insn.next
+        konst next = insn.next
         if (next !is LdcInsnNode) return false
         next.cst = parameter
         return true
     }
 
     private fun processSpecialEnumFunction(insn: MethodInsnNode, instructions: InsnList, parameter: Type): Boolean {
-        val next1 = insn.next ?: return false
-        val next2 = next1.next ?: return false
+        konst next1 = insn.next ?: return false
+        konst next2 = next1.next ?: return false
         if (next1.opcode == Opcodes.ACONST_NULL && next2.opcode == Opcodes.ALOAD) {
-            val next3 = next2.next ?: return false
-            if (next3 is MethodInsnNode && next3.name == "valueOf") {
+            konst next3 = next2.next ?: return false
+            if (next3 is MethodInsnNode && next3.name == "konstueOf") {
                 instructions.remove(next1)
                 next3.owner = parameter.internalName
                 next3.desc = getSpecialEnumFunDescriptor(parameter, true)
@@ -356,8 +356,8 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
         } else if (next1.opcode == Opcodes.ICONST_0 && next2.opcode == Opcodes.ANEWARRAY) {
             instructions.remove(next1)
             instructions.remove(next2)
-            val desc = getSpecialEnumFunDescriptor(parameter, false)
-            instructions.insert(insn, MethodInsnNode(Opcodes.INVOKESTATIC, parameter.internalName, "values", desc, false))
+            konst desc = getSpecialEnumFunDescriptor(parameter, false)
+            instructions.insert(insn, MethodInsnNode(Opcodes.INVOKESTATIC, parameter.internalName, "konstues", desc, false))
             return true
         }
 
@@ -365,26 +365,26 @@ class ReifiedTypeInliner<KT : KotlinTypeMarker>(
     }
 }
 
-val MethodInsnNode.reificationArgument: ReificationArgument?
+konst MethodInsnNode.reificationArgument: ReificationArgument?
     get() {
-        val prev = previous!!
+        konst prev = previous!!
 
-        val reificationArgumentRaw = when (prev.opcode) {
+        konst reificationArgumentRaw = when (prev.opcode) {
             Opcodes.LDC -> (prev as LdcInsnNode).cst as String
             else -> return null
         }
 
-        val arrayDepth = reificationArgumentRaw.indexOfFirst { it != '[' }
-        val parameterName = reificationArgumentRaw.substring(arrayDepth).removeSuffix("?")
-        val nullable = reificationArgumentRaw.endsWith('?')
+        konst arrayDepth = reificationArgumentRaw.indexOfFirst { it != '[' }
+        konst parameterName = reificationArgumentRaw.substring(arrayDepth).removeSuffix("?")
+        konst nullable = reificationArgumentRaw.endsWith('?')
 
         return ReificationArgument(parameterName, nullable, arrayDepth)
     }
 
-val MethodInsnNode.operationKind: ReifiedTypeInliner.OperationKind?
+konst MethodInsnNode.operationKind: ReifiedTypeInliner.OperationKind?
     get() =
         previous?.previous?.intConstant?.let {
-            ReifiedTypeInliner.OperationKind.values().getOrNull(it)
+            ReifiedTypeInliner.OperationKind.konstues().getOrNull(it)
         }
 
 class TypeParameterMappings<KT : KotlinTypeMarker>(
@@ -393,13 +393,13 @@ class TypeParameterMappings<KT : KotlinTypeMarker>(
     allReified: Boolean,
     mapType: (KT, BothSignatureWriter) -> Type
 ) {
-    private val mappingsByName = hashMapOf<String, TypeParameterMapping<KT>>()
+    private konst mappingsByName = hashMapOf<String, TypeParameterMapping<KT>>()
 
     init {
         with(typeSystem) {
             for ((parameter, type) in typeArguments.entries) {
-                val name = parameter.getName().identifier
-                val sw = BothSignatureWriter(BothSignatureWriter.Mode.TYPE)
+                konst name = parameter.getName().identifier
+                konst sw = BothSignatureWriter(BothSignatureWriter.Mode.TYPE)
                 mappingsByName[name] = TypeParameterMapping(
                     type, mapType(type, sw), sw.toString(), allReified || parameter.isReified(),
                     typeSystem.extractReificationArgument(type)?.second,
@@ -411,23 +411,23 @@ class TypeParameterMappings<KT : KotlinTypeMarker>(
 
     operator fun get(name: String): TypeParameterMapping<KT>? = mappingsByName[name]
 
-    fun hasReifiedParameters() = mappingsByName.values.any { it.isReified }
+    fun hasReifiedParameters() = mappingsByName.konstues.any { it.isReified }
 
     internal inline fun forEach(block: (String, TypeParameterMapping<KT>) -> Unit) =
         mappingsByName.entries.forEach { (name, mapping) -> block(name, mapping) }
 }
 
 class TypeParameterMapping<KT : KotlinTypeMarker>(
-    val type: KT,
-    val asmType: Type,
-    val signature: String,
-    val isReified: Boolean,
-    val reificationArgument: ReificationArgument?,
-    val reifiedTypeParametersUsages: ReifiedTypeParametersUsages,
+    konst type: KT,
+    konst asmType: Type,
+    konst signature: String,
+    konst isReified: Boolean,
+    konst reificationArgument: ReificationArgument?,
+    konst reifiedTypeParametersUsages: ReifiedTypeParametersUsages,
 )
 
 class ReifiedTypeParametersUsages {
-    private val usedTypeParameters: MutableSet<String> = hashSetOf()
+    private konst usedTypeParameters: MutableSet<String> = hashSetOf()
 
     fun wereUsedReifiedParameters(): Boolean = usedTypeParameters.isNotEmpty()
 

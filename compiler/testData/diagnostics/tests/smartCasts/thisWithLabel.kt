@@ -1,6 +1,6 @@
 package foo
 
-class A(val i: Int?) {
+class A(konst i: Int?) {
     fun test1() {
         if (this@A.i != null) {
             useInt(<!DEBUG_INFO_SMARTCAST!>this.i<!>)

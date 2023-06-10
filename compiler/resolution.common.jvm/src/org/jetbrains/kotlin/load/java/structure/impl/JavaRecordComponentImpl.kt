@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementPsiSource
 class JavaRecordComponentImpl(
     psiRecordComponentSource: JavaElementPsiSource<PsiRecordComponent>
 ) : JavaMemberImpl<PsiRecordComponent>(psiRecordComponentSource), JavaRecordComponent {
-    override val type: JavaType
+    override konst type: JavaType
         get() = JavaTypeImpl.create(psi.type, sourceFactory.createVariableReturnTypeSource(psiElementSource))
 
-    override val isVararg: Boolean
+    override konst isVararg: Boolean
         get() = psi.isVarArgs
 }

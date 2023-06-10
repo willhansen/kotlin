@@ -10,7 +10,7 @@ import kotlin.test.*
 class A {
     fun foo(s: String, x: Int) {}
     fun bar(x: Int) {}
-    val baz = 42
+    konst baz = 42
 }
 
 fun box(): String {

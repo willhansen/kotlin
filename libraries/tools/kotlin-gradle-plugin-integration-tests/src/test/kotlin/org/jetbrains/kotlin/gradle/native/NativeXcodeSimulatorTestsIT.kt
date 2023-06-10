@@ -20,8 +20,8 @@ import kotlin.test.assertEquals
 @NativeGradlePluginTests
 @OsCondition(supportedOn = [OS.MAC], enabledOnCI = [OS.MAC])
 class NativeXcodeSimulatorTestsIT : KGPBaseTest() {
-    private val defaultIosSimulator by lazy {
-        val xcode = Xcode ?: error("XCode is expected to be defined")
+    private konst defaultIosSimulator by lazy {
+        konst xcode = Xcode ?: error("XCode is expected to be defined")
         xcode.getDefaultTestDeviceId(KonanTarget.IOS_SIMULATOR_ARM64) ?: error("No simulator found for iOS ARM64")
     }
 
@@ -52,7 +52,7 @@ class NativeXcodeSimulatorTestsIT : KGPBaseTest() {
         project("native-test-ios-https-request", gradleVersion) {
             buildAndFail("check") {
                 // that's an Apple's issue that we expect to fail the build
-                assertOutputContains("The certificate for this server is invalid. You might be connecting to a server that is pretending to be ")
+                assertOutputContains("The certificate for this server is inkonstid. You might be connecting to a server that is pretending to be ")
             }
         }
     }
@@ -78,8 +78,8 @@ class NativeXcodeSimulatorTestsIT : KGPBaseTest() {
     fun shutDownSimulators() {
         synchronized(bootedXcodeSimulators) {
             for (device in bootedXcodeSimulators) {
-                val command = listOf("/usr/bin/xcrun", "simctl", "shutdown", device)
-                val processResult = runProcess(command, File("."))
+                konst command = listOf("/usr/bin/xcrun", "simctl", "shutdown", device)
+                konst processResult = runProcess(command, File("."))
                 assertEquals(0, processResult.exitCode)
                 bootedXcodeSimulators.remove(device)
             }
@@ -87,13 +87,13 @@ class NativeXcodeSimulatorTestsIT : KGPBaseTest() {
         }
     }
 
-    private val bootedXcodeSimulators: MutableSet<String> = HashSet()
+    private konst bootedXcodeSimulators: MutableSet<String> = HashSet()
 
     private fun bootXcodeSimulator(device: String) {
         synchronized(bootedXcodeSimulators) {
             if (device !in bootedXcodeSimulators) {
-                val command = listOf("/usr/bin/xcrun", "simctl", "boot", device)
-                val processResult = runProcess(command, File("."))
+                konst command = listOf("/usr/bin/xcrun", "simctl", "boot", device)
+                konst processResult = runProcess(command, File("."))
                 assert(processResult.exitCode == 0 || "current state: Booted" in processResult.output) {
                     "Failed to boot a simulator $device and it wasn't started before, exit code = ${processResult.exitCode}"
                 }

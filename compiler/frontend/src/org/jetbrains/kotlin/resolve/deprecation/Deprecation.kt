@@ -21,17 +21,17 @@ import org.jetbrains.kotlin.resolve.deprecation.DeprecationLevelValue.*
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
 internal sealed class DeprecatedByAnnotation(
-    val annotation: AnnotationDescriptor,
-    override val target: DeclarationDescriptor,
-    override val propagatesToOverrides: Boolean
+    konst annotation: AnnotationDescriptor,
+    override konst target: DeclarationDescriptor,
+    override konst propagatesToOverrides: Boolean
 ) : DescriptorBasedDeprecationInfo() {
-    override val message: String?
-        get() = (annotation.argumentValue("message") as? StringValue)?.value
+    override konst message: String?
+        get() = (annotation.argumentValue("message") as? StringValue)?.konstue
 
-    internal val replaceWithValue: String?
+    internal konst replaceWithValue: String?
         get() {
-            val replaceWithAnnotation = (annotation.argumentValue(Deprecated::replaceWith.name) as? AnnotationValue)?.value
-            return (replaceWithAnnotation?.argumentValue(ReplaceWith::expression.name) as? StringValue)?.value
+            konst replaceWithAnnotation = (annotation.argumentValue(Deprecated::replaceWith.name) as? AnnotationValue)?.konstue
+            return (replaceWithAnnotation?.argumentValue(ReplaceWith::expression.name) as? StringValue)?.konstue
         }
 
     class StandardDeprecated(
@@ -39,7 +39,7 @@ internal sealed class DeprecatedByAnnotation(
         target: DeclarationDescriptor,
         propagatesToOverrides: Boolean
     ) : DeprecatedByAnnotation(annotation, target, propagatesToOverrides) {
-        override val deprecationLevel: DeprecationLevelValue
+        override konst deprecationLevel: DeprecationLevelValue
             get() = when ((annotation.argumentValue("level") as? EnumValue)?.enumEntryName?.asString()) {
                 "WARNING" -> WARNING
                 "ERROR" -> ERROR
@@ -70,7 +70,7 @@ internal sealed class DeprecatedByAnnotation(
         annotation: AnnotationDescriptor,
         target: DeclarationDescriptor,
         propagatesToOverrides: Boolean,
-        override val deprecationLevel: DeprecationLevelValue
+        override konst deprecationLevel: DeprecationLevelValue
     ) : DeprecatedByAnnotation(annotation, target, propagatesToOverrides) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -102,7 +102,7 @@ internal sealed class DeprecatedByAnnotation(
             apiVersion: ApiVersion
         ): DeprecatedByAnnotation? {
             if (deprecatedSinceKotlinAnnotation != null) {
-                val level = computeLevelForDeprecatedSinceKotlin(deprecatedSinceKotlinAnnotation, apiVersion) ?: return null
+                konst level = computeLevelForDeprecatedSinceKotlin(deprecatedSinceKotlinAnnotation, apiVersion) ?: return null
                 return DeprecatedSince(deprecatedAnnotation, target, propagatesToOverrides, level)
             }
             return StandardDeprecated(deprecatedAnnotation, target, propagatesToOverrides)
@@ -110,20 +110,20 @@ internal sealed class DeprecatedByAnnotation(
     }
 }
 
-internal data class DeprecatedByOverridden(private val deprecations: Collection<DescriptorBasedDeprecationInfo>) : DescriptorBasedDeprecationInfo() {
+internal data class DeprecatedByOverridden(private konst deprecations: Collection<DescriptorBasedDeprecationInfo>) : DescriptorBasedDeprecationInfo() {
     init {
         assert(deprecations.isNotEmpty())
         assert(deprecations.none { it is DeprecatedByOverridden })
     }
 
-    override val deprecationLevel: DeprecationLevelValue = deprecations.map(DescriptorBasedDeprecationInfo::deprecationLevel).minOrNull()!!
+    override konst deprecationLevel: DeprecationLevelValue = deprecations.map(DescriptorBasedDeprecationInfo::deprecationLevel).minOrNull()!!
 
-    override val target: DeclarationDescriptor
+    override konst target: DeclarationDescriptor
         get() = deprecations.first().target
 
-    override val message: String
+    override konst message: String
         get() {
-            val message = deprecations.filter { it.deprecationLevel == this.deprecationLevel }.map { it.message }.toSet().joinToString(". ")
+            konst message = deprecations.filter { it.deprecationLevel == this.deprecationLevel }.map { it.message }.toSet().joinToString(". ")
             return "${additionalMessage()}. $message"
         }
 
@@ -132,8 +132,8 @@ internal data class DeprecatedByOverridden(private val deprecations: Collection<
 }
 
 internal data class DeprecatedOperatorMod(
-    val languageVersionSettings: LanguageVersionSettings,
-    val currentDeprecation: DescriptorBasedDeprecationInfo
+    konst languageVersionSettings: LanguageVersionSettings,
+    konst currentDeprecation: DescriptorBasedDeprecationInfo
 ) : DescriptorBasedDeprecationInfo() {
     init {
         assert(shouldWarnAboutDeprecatedModFromBuiltIns(languageVersionSettings)) {
@@ -141,35 +141,35 @@ internal data class DeprecatedOperatorMod(
         }
     }
 
-    override val deprecationLevel: DeprecationLevelValue
+    override konst deprecationLevel: DeprecationLevelValue
         get() = when (languageVersionSettings.apiVersion) {
             ApiVersion.KOTLIN_1_1, ApiVersion.KOTLIN_1_2 -> WARNING
             ApiVersion.KOTLIN_1_3 -> ERROR
             else -> ERROR
         }
 
-    override val message: String?
+    override konst message: String?
         get() = currentDeprecation.message
 
-    override val target: DeclarationDescriptor
+    override konst target: DeclarationDescriptor
         get() = currentDeprecation.target
 }
 
 internal data class DeprecatedByVersionRequirement(
-    val versionRequirement: VersionRequirement,
-    override val target: DeclarationDescriptor
+    konst versionRequirement: VersionRequirement,
+    override konst target: DeclarationDescriptor
 ) : DescriptorBasedDeprecationInfo() {
-    override val deprecationLevel: DeprecationLevelValue
+    override konst deprecationLevel: DeprecationLevelValue
         get() = when (versionRequirement.level) {
             DeprecationLevel.WARNING -> WARNING
             DeprecationLevel.ERROR -> ERROR
             DeprecationLevel.HIDDEN -> HIDDEN
         }
 
-    override val message: String?
+    override konst message: String?
         get() {
-            val message = versionRequirement.message
-            val errorCode = versionRequirement.errorCode
+            konst message = versionRequirement.message
+            konst errorCode = versionRequirement.errorCode
             if (message == null && errorCode == null) return null
 
             return buildString {
@@ -186,10 +186,10 @@ internal data class DeprecatedByVersionRequirement(
 }
 
 internal data class DeprecatedTypealiasByAnnotation(
-    val typeAliasTarget: TypeAliasDescriptor,
-    val nested: DeprecatedByAnnotation
+    konst typeAliasTarget: TypeAliasDescriptor,
+    konst nested: DeprecatedByAnnotation
 ) : DescriptorBasedDeprecationInfo() {
-    override val target get() = typeAliasTarget
-    override val deprecationLevel get() = nested.deprecationLevel
-    override val message get() = nested.message
+    override konst target get() = typeAliasTarget
+    override konst deprecationLevel get() = nested.deprecationLevel
+    override konst message get() = nested.message
 }

@@ -1,5 +1,5 @@
 class A : Collection<Char> {
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun contains(element: Char): Boolean {
@@ -25,7 +25,7 @@ object MyIterator : Iterator<Char> {
 
 
 fun box(): String {
-    val it: MyIterator = A().iterator()
+    konst it: MyIterator = A().iterator()
 
     if (!it.hasNext()) return "fail 1"
     if (it.next() != 'a') return "fail 2"

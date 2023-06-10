@@ -10,8 +10,8 @@ class B : A {
 }
 
 fun box(): String {
-    val b = B::class.js
-    val c = js("""(function() {
+    konst b = B::class.js
+    konst c = js("""(function() {
     function C() {
         b.call(this);
     };

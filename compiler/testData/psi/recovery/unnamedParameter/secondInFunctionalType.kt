@@ -1,1 +1,1 @@
-val foo: (s: String, : Int) -> Int
+konst foo: (s: String, : Int) -> Int

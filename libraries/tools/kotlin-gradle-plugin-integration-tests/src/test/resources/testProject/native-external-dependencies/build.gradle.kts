@@ -17,9 +17,9 @@ kotlin {
     }
 }
 
-val buildExternalDependenciesFile = tasks.register("buildExternalDependenciesFile") {
+konst buildExternalDependenciesFile = tasks.register("buildExternalDependenciesFile") {
     doLast {
-        val externalDependenciesFile = Class.forName("org.jetbrains.kotlin.gradle.tasks.ExternalDependenciesBuilder")
+        konst externalDependenciesFile = Class.forName("org.jetbrains.kotlin.gradle.tasks.ExternalDependenciesBuilder")
             .getDeclaredMethod("buildExternalDependenciesFileForTests", Project::class.java).apply { isAccessible = true }
             .invoke(null, project)
             ?.toString().orEmpty()

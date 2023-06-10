@@ -26,7 +26,7 @@ fun <T> arbitraryToString(x: T) = " $x"
 fun <T> nullableArbitraryToString(x: T?) = " $x"
 
 fun box(): String {
-    val x = "895065487315017728"
+    konst x = "895065487315017728"
     if (" ${x.toLong()}" != " $x") return "FAIL 1"
     if (" ${x.toLong() as Comparable<Long>}" != " $x") return "FAIL 2"
     if (" ${x.toLong() as Number}" != " $x") return "FAIL 3"

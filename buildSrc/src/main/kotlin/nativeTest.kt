@@ -26,38 +26,38 @@ private enum class TestProperty(shortName: String) {
     SANITIZER("sanitizer"),
     TEAMCITY("teamcity");
 
-    val fullName = "kotlin.internal.native.test.$shortName"
+    konst fullName = "kotlin.internal.native.test.$shortName"
 }
 
 private sealed class ComputedTestProperty {
-    abstract val name: String
-    abstract val value: String?
+    abstract konst name: String
+    abstract konst konstue: String?
 
-    class Normal(override val name: String, override val value: String?) : ComputedTestProperty()
-    class Lazy(override val name: String, private val lazyValue: kotlin.Lazy<String?>) : ComputedTestProperty() {
-        override val value get() = lazyValue.value
+    class Normal(override konst name: String, override konst konstue: String?) : ComputedTestProperty()
+    class Lazy(override konst name: String, private konst lazyValue: kotlin.Lazy<String?>) : ComputedTestProperty() {
+        override konst konstue get() = lazyValue.konstue
     }
 }
 
-private class ComputedTestProperties(private val task: Test) {
-    private val computedProperties = arrayListOf<ComputedTestProperty>()
+private class ComputedTestProperties(private konst task: Test) {
+    private konst computedProperties = arrayListOf<ComputedTestProperty>()
 
     fun Project.compute(property: TestProperty, defaultValue: () -> String? = { null }) {
-        val gradleValue = readFromGradle(property)
+        konst gradleValue = readFromGradle(property)
         computedProperties += ComputedTestProperty.Normal(property.fullName, gradleValue ?: defaultValue())
     }
 
     fun Project.computeLazy(property: TestProperty, defaultLazyValue: () -> Lazy<String?>) {
-        val gradleValue = readFromGradle(property)
+        konst gradleValue = readFromGradle(property)
         computedProperties += if (gradleValue != null)
             ComputedTestProperty.Normal(property.fullName, gradleValue)
         else
             ComputedTestProperty.Lazy(property.fullName, defaultLazyValue())
     }
 
-    // Do not attempt to read the property from Gradle. Instead, set it based on the lambda return value.
-    fun computePrivate(property: TestProperty, value: () -> String) {
-        computedProperties += ComputedTestProperty.Normal(property.fullName, value())
+    // Do not attempt to read the property from Gradle. Instead, set it based on the lambda return konstue.
+    fun computePrivate(property: TestProperty, konstue: () -> String) {
+        computedProperties += ComputedTestProperty.Normal(property.fullName, konstue())
     }
 
     fun lazyClassPath(builder: MutableList<File>.() -> Unit): Lazy<String?> = lazy(LazyThreadSafetyMode.NONE) {
@@ -68,7 +68,7 @@ private class ComputedTestProperties(private val task: Test) {
 
     fun resolveAndApplyToTask() {
         computedProperties.forEach { computedProperty ->
-            task.systemProperty(computedProperty.name, computedProperty.value ?: return@forEach)
+            task.systemProperty(computedProperty.name, computedProperty.konstue ?: return@forEach)
         }
     }
 }
@@ -106,7 +106,7 @@ fun Project.nativeTest(
         // additional stack frames more compared to the old one because of another launcher, etc. and it turns out this is not enough.
         jvmArgs("-Xss2m")
 
-        val availableCpuCores: Int = Runtime.getRuntime().availableProcessors()
+        konst availableCpuCores: Int = Runtime.getRuntime().availableProcessors()
         if (!kotlinBuildProperties.isTeamcityBuild
             && minOf(kotlinBuildProperties.junit5NumberOfThreadsForParallelExecution ?: 16, availableCpuCores) > 4
         ) {
@@ -116,9 +116,9 @@ fun Project.nativeTest(
 
         // Compute test properties in advance. Make sure that the necessary dependencies are settled.
         // But do not resolve any configurations until the execution phase.
-        val computedTestProperties = ComputedTestProperties {
+        konst computedTestProperties = ComputedTestProperties {
             compute(KOTLIN_NATIVE_HOME) {
-                val testTarget = readFromGradle(TEST_TARGET)
+                konst testTarget = readFromGradle(TEST_TARGET)
                 if (testTarget != null) {
                     dependsOn(":kotlin-native:${testTarget}CrossDist")
                     if (requirePlatformLibs) dependsOn(":kotlin-native:${testTarget}PlatformLibs")
@@ -130,9 +130,9 @@ fun Project.nativeTest(
             }
 
             computeLazy(COMPILER_CLASSPATH) {
-                val customNativeHome = readFromGradle(KOTLIN_NATIVE_HOME)
+                konst customNativeHome = readFromGradle(KOTLIN_NATIVE_HOME)
 
-                val kotlinNativeCompilerEmbeddable = if (customNativeHome == null)
+                konst kotlinNativeCompilerEmbeddable = if (customNativeHome == null)
                     configurations.detachedConfiguration(
                         dependencies.project(":kotlin-native-compiler-embeddable"),
                         dependencies.module(commonDependency("org.jetbrains.intellij.deps:trove4j"))
@@ -188,8 +188,8 @@ fun Project.nativeTest(
                 buildString {
                     appendLine("$path parallel test execution parameters:")
                     append("  Available CPU cores = $availableCpuCores")
-                    systemProperties.filterKeys { it.startsWith("junit.jupiter") }.toSortedMap().forEach { (key, value) ->
-                        append("\n  $key = $value")
+                    systemProperties.filterKeys { it.startsWith("junit.jupiter") }.toSortedMap().forEach { (key, konstue) ->
+                        append("\n  $key = $konstue")
                     }
                 }
             )

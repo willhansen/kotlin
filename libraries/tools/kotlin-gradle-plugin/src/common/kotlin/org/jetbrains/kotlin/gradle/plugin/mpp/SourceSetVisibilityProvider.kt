@@ -23,21 +23,21 @@ internal data class SourceSetVisibilityResult(
     /**
      * Names of source sets that the consumer sees from the requested dependency.
      */
-    val visibleSourceSetNames: Set<String>,
+    konst visibleSourceSetNames: Set<String>,
 
     /**
      * For some of the [visibleSourceSetNames], additional artifacts may be present that
      * the consumer should read the compiled source set metadata from.
      */
-    val hostSpecificMetadataArtifactBySourceSet: Map<String, File>
+    konst hostSpecificMetadataArtifactBySourceSet: Map<String, File>
 )
 
-private val Project.allPlatformCompilationData: List<PlatformCompilationData>
+private konst Project.allPlatformCompilationData: List<PlatformCompilationData>
     get() = extraProperties
     .getOrPut("all${PlatformCompilationData::class.java.simpleName}") { collectAllPlatformCompilationData() }
 
 private fun Project.collectAllPlatformCompilationData(): List<PlatformCompilationData> {
-    val multiplatformExtension = multiplatformExtensionOrNull ?: return emptyList()
+    konst multiplatformExtension = multiplatformExtensionOrNull ?: return emptyList()
     return multiplatformExtension
         .targets
         .filter { it.platformType != KotlinPlatformType.common }
@@ -54,16 +54,16 @@ private fun KotlinCompilation<*>.toPlatformCompilationData() = PlatformCompilati
 )
 
 internal class SourceSetVisibilityProvider(
-    private val platformCompilations: List<PlatformCompilationData>,
+    private konst platformCompilations: List<PlatformCompilationData>,
 ) {
     constructor(project: Project) : this(
         platformCompilations = project.allPlatformCompilationData
     )
 
     class PlatformCompilationData(
-        val allSourceSets: Set<KotlinSourceSetName>,
-        val resolvedDependenciesConfiguration: LazyResolvedConfiguration,
-        val hostSpecificMetadataConfiguration: LazyResolvedConfiguration?
+        konst allSourceSets: Set<KotlinSourceSetName>,
+        konst resolvedDependenciesConfiguration: LazyResolvedConfiguration,
+        konst hostSpecificMetadataConfiguration: LazyResolvedConfiguration?
     )
 
     /**
@@ -84,14 +84,14 @@ internal class SourceSetVisibilityProvider(
         dependencyProjectStructureMetadata: KotlinProjectStructureMetadata,
         resolvedToOtherProject: Boolean
     ): SourceSetVisibilityResult {
-        val resolvedRootMppDependencyId = resolvedRootMppDependency.selected.id
+        konst resolvedRootMppDependencyId = resolvedRootMppDependency.selected.id
 
-        val platformCompilationsByResolvedVariantName = mutableMapOf<String, PlatformCompilationData>()
+        konst platformCompilationsByResolvedVariantName = mutableMapOf<String, PlatformCompilationData>()
 
-        val visiblePlatformVariantNames: Set<String?> = platformCompilations
+        konst visiblePlatformVariantNames: Set<String?> = platformCompilations
             .filter { visibleFromSourceSet in it.allSourceSets }
             .map { platformCompilationData ->
-                val resolvedPlatformDependency = platformCompilationData
+                konst resolvedPlatformDependency = platformCompilationData
                     .resolvedDependenciesConfiguration
                     .allResolvedDependencies
                     .find { it.selected.id == resolvedRootMppDependencyId }
@@ -108,7 +108,7 @@ internal class SourceSetVisibilityProvider(
                 more desirable than having none.
                  */ ?: return@map null
 
-                val resolvedVariant = kotlinVariantNameFromPublishedVariantName(
+                konst resolvedVariant = kotlinVariantNameFromPublishedVariantName(
                     resolvedPlatformDependency.resolvedVariant.displayName
                 )
 
@@ -123,11 +123,11 @@ internal class SourceSetVisibilityProvider(
             return SourceSetVisibilityResult(emptySet(), emptyMap())
         }
 
-        val visibleSourceSetNames = dependencyProjectStructureMetadata.sourceSetNamesByVariantName
+        konst visibleSourceSetNames = dependencyProjectStructureMetadata.sourceSetNamesByVariantName
             .filterKeys { it in visiblePlatformVariantNames }
-            .values.let { if (it.isEmpty()) emptySet() else it.reduce { acc, item -> acc intersect item } }
+            .konstues.let { if (it.isEmpty()) emptySet() else it.reduce { acc, item -> acc intersect item } }
 
-        val hostSpecificArtifactBySourceSet: Map<String, File> =
+        konst hostSpecificArtifactBySourceSet: Map<String, File> =
             if (resolvedToOtherProject) {
                 /**
                  * When a dependency resolves to a project, we don't need any artifacts from it, we can
@@ -135,7 +135,7 @@ internal class SourceSetVisibilityProvider(
                  */
                 emptyMap()
             } else {
-                val hostSpecificSourceSets = visibleSourceSetNames.intersect(dependencyProjectStructureMetadata.hostSpecificSourceSets)
+                konst hostSpecificSourceSets = visibleSourceSetNames.intersect(dependencyProjectStructureMetadata.hostSpecificSourceSets)
 
                 /**
                  * As all of the variants normally contain the same metadata for each of the relevant host-specific source sets,
@@ -144,7 +144,7 @@ internal class SourceSetVisibilityProvider(
                  *  - it contains the host-specific source set, and
                  *  - we have resolved it for some compilation
                  */
-                val someVariantByHostSpecificSourceSet =
+                konst someVariantByHostSpecificSourceSet =
                     hostSpecificSourceSets.associate { sourceSetName ->
                         sourceSetName to dependencyProjectStructureMetadata.sourceSetNamesByVariantName
                             .filterKeys { it in platformCompilationsByResolvedVariantName }
@@ -153,17 +153,17 @@ internal class SourceSetVisibilityProvider(
                     }
 
                 someVariantByHostSpecificSourceSet.entries.mapNotNull { (sourceSetName, variantName) ->
-                    val resolvedHostSpecificMetadataConfiguration = platformCompilationsByResolvedVariantName
+                    konst resolvedHostSpecificMetadataConfiguration = platformCompilationsByResolvedVariantName
                         .getValue(variantName)
                         .hostSpecificMetadataConfiguration
                         ?: return@mapNotNull null
 
-                    val dependency = resolvedHostSpecificMetadataConfiguration
+                    konst dependency = resolvedHostSpecificMetadataConfiguration
                         .allResolvedDependencies
                         .find { it.selected.id == resolvedRootMppDependencyId }
                         ?: return@mapNotNull null
 
-                    val metadataArtifact = resolvedHostSpecificMetadataConfiguration
+                    konst metadataArtifact = resolvedHostSpecificMetadataConfiguration
                         // it can happen that related host-specific metadata artifact doesn't exist
                         // for example on linux machines, then just gracefully return null
                         .dependencyArtifactsOrNull(dependency)

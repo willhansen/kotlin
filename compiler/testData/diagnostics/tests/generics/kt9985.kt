@@ -40,7 +40,7 @@ fun fooNotNull(l: A<String>) {
 }
 
 fun bar() {
-    val l = B.create<String>()
+    konst l = B.create<String>()
     foo(l?.bar()) checkType { _<String?>() }
     foo(l?.gav()) checkType { _<String?>() }
 }

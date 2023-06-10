@@ -22,7 +22,7 @@ FILE fqName:<root> fileName:/samConversionOnCallableReference.kt
     VALUE_PARAMETER name:xs index:0 type:kotlin.IntArray varargElementType:kotlin.Int [vararg]
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun foo1 (vararg xs: kotlin.Int): kotlin.Int declared in <root>'
-        CONST Int type=kotlin.Int value=1
+        CONST Int type=kotlin.Int konstue=1
   FUN name:use visibility:public modality:FINAL <> (r:<root>.KRunnable) returnType:kotlin.Unit
     VALUE_PARAMETER name:r index:0 type:<root>.KRunnable
     BLOCK_BODY

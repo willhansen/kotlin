@@ -4,27 +4,27 @@
  */
 
 // FILE: lib.kt
-class X(val s: String)
+class X(konst s: String)
 
-val x = X("zzz")
+konst x = X("zzz")
 
 // FILE: lib2.kt
 @file:OptIn(FreezingIsDeprecated::class)
 import kotlin.native.concurrent.*
 
-class Z(val x: Int)
+class Z(konst x: Int)
 
 @SharedImmutable
-val z1 = Z(42)
+konst z1 = Z(42)
 
-val z2 = Z(x.s.length)
+konst z2 = Z(x.s.length)
 
 // FILE: main.kt
 @file:OptIn(ObsoleteWorkersApi::class)
 import kotlin.native.concurrent.*
 
 fun foo() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
     worker.execute(TransferMode.SAFE, { -> }, {
         it -> println(z1.x)
     }).consume { }

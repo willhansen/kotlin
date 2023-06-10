@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.fir.caches.FirCache
 import java.util.concurrent.ConcurrentHashMap
 
 internal class FirThreadSafeCache<K : Any, V, CONTEXT>(
-    private val map: ConcurrentHashMap<K, Any> = ConcurrentHashMap<K, Any>(),
-    private val createValue: (K, CONTEXT) -> V
+    private konst map: ConcurrentHashMap<K, Any> = ConcurrentHashMap<K, Any>(),
+    private konst createValue: (K, CONTEXT) -> V
 ) : FirCache<K, V, CONTEXT>() {
 
     override fun getValue(key: K, context: CONTEXT): V =

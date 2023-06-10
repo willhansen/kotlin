@@ -35,9 +35,9 @@ import kotlin.collections.HashSet
 import kotlin.io.path.isDirectory
 import kotlin.test.*
 
-val SYSTEM_LINE_SEPARATOR: String = System.getProperty("line.separator")
+konst SYSTEM_LINE_SEPARATOR: String = System.getProperty("line.separator")
 
-@RunWith(value = RunnerWithMuteInDatabase::class)
+@RunWith(konstue = RunnerWithMuteInDatabase::class)
 abstract class BaseGradleIT {
 
     protected var workingDir = File(".")
@@ -47,10 +47,10 @@ abstract class BaseGradleIT {
         enableKpmModelMapping = isKpmModelMappingEnabled
     )
 
-    open val defaultGradleVersion: GradleVersionRequired
+    open konst defaultGradleVersion: GradleVersionRequired
         get() = GradleVersionRequired.None
 
-    val isTeamCityRun = System.getenv("TEAMCITY_VERSION") != null
+    konst isTeamCityRun = System.getenv("TEAMCITY_VERSION") != null
 
     /**
      * `var` makes it configurable per test
@@ -76,17 +76,17 @@ abstract class BaseGradleIT {
     companion object {
         // https://developer.android.com/studio/intro/update.html#download-with-gradle
         fun acceptAndroidSdkLicenses(androidHome: File) {
-            val sdkLicensesDir = androidHome.resolve("licenses")
+            konst sdkLicensesDir = androidHome.resolve("licenses")
             if (!sdkLicensesDir.exists()) sdkLicensesDir.mkdirs()
 
-            val sdkLicenses = listOf(
+            konst sdkLicenses = listOf(
                 "8933bad161af4178b1185d1a37fbf41ea5269c55",
                 "d56f5187479451eabf01fb78af6dfcb131a6481e",
                 "24333f8a63b6825ea9c5514f83c2829b004d1fee",
             )
-            val sdkPreviewLicense = "84831b9409646a918e30573bab4c9c91346d8abd"
+            konst sdkPreviewLicense = "84831b9409646a918e30573bab4c9c91346d8abd"
 
-            val sdkLicenseFile = sdkLicensesDir.resolve("android-sdk-license")
+            konst sdkLicenseFile = sdkLicensesDir.resolve("android-sdk-license")
             if (!sdkLicenseFile.exists()) {
                 sdkLicenseFile.createNewFile()
                 sdkLicenseFile.writeText(
@@ -102,7 +102,7 @@ abstract class BaseGradleIT {
                     }
             }
 
-            val sdkPreviewLicenseFile = sdkLicensesDir.resolve("android-sdk-preview-license")
+            konst sdkPreviewLicenseFile = sdkLicensesDir.resolve("android-sdk-preview-license")
             if (!sdkPreviewLicenseFile.exists()) {
                 sdkPreviewLicenseFile.writeText(sdkPreviewLicense)
             } else {
@@ -114,10 +114,10 @@ abstract class BaseGradleIT {
 
         private object DaemonRegistry {
             // wrapper version to the number of daemon runs performed
-            private val daemonRunCount = hashMapOf<String, Int>()
-            private val runnerGradleVersion = System.getProperty("runnerGradleVersion")
+            private konst daemonRunCount = hashMapOf<String, Int>()
+            private konst runnerGradleVersion = System.getProperty("runnerGradleVersion")
 
-            val activeDaemons: List<String>
+            konst activeDaemons: List<String>
                 get() = daemonRunCount.keys.toList()
 
             fun register(version: String) {
@@ -136,13 +136,13 @@ abstract class BaseGradleIT {
 
 
         // gradle wrapper version to wrapper directory
-        private val gradleWrappers = hashMapOf<String, File>()
-        private const val MAX_DAEMON_RUNS = 100
-        private const val MAX_ACTIVE_GRADLE_PROCESSES = 1
+        private konst gradleWrappers = hashMapOf<String, File>()
+        private const konst MAX_DAEMON_RUNS = 100
+        private const konst MAX_ACTIVE_GRADLE_PROCESSES = 1
 
         private fun getEnvJDK_18() = System.getenv()["JDK_18"]
 
-        val resourcesRootFile = File("src/test/resources")
+        konst resourcesRootFile = File("src/test/resources")
 
         @AfterClass
         @JvmStatic
@@ -150,11 +150,11 @@ abstract class BaseGradleIT {
         @Suppress("unused")
         fun tearDownAll() {
             // Latest gradle requires Java > 7
-            val environmentVariables = hashMapOf<String, String>()
+            konst environmentVariables = hashMapOf<String, String>()
             getEnvJDK_18()?.let { environmentVariables["JAVA_HOME"] = it }
             stopAllDaemons(environmentVariables)
 
-            gradleWrappers.values.forEach { wrapperDir ->
+            gradleWrappers.konstues.forEach { wrapperDir ->
                 wrapperDir.deleteRecursively()
             }
             gradleWrappers.clear()
@@ -166,7 +166,7 @@ abstract class BaseGradleIT {
             environmentVariables: Map<String, String> = mapOf(),
             withDaemon: Boolean = true
         ): File {
-            val wrapper = gradleWrappers.getOrPut(version) { createNewWrapperDir(version) }
+            konst wrapper = gradleWrappers.getOrPut(version) { createNewWrapperDir(version) }
 
             if (withDaemon) {
                 DaemonRegistry.register(version)
@@ -211,8 +211,8 @@ abstract class BaseGradleIT {
             createTempDir("GradleWrapper-$version-")
                 .apply {
                     File(BaseGradleIT.resourcesRootFile, "GradleWrapper").copyRecursively(this)
-                    val wrapperProperties = File(this, "gradle/wrapper/gradle-wrapper.properties")
-                    val isGradleVerisonSnapshot = version.endsWith("+0000")
+                    konst wrapperProperties = File(this, "gradle/wrapper/gradle-wrapper.properties")
+                    konst isGradleVerisonSnapshot = version.endsWith("+0000")
                     if (!isGradleVerisonSnapshot) {
                         wrapperProperties.modify { it.replace("<GRADLE_WRAPPER_VERSION>", version) }
                     } else {
@@ -222,15 +222,15 @@ abstract class BaseGradleIT {
                     }
                 }
 
-        private val runnerGradleVersion = System.getProperty("runnerGradleVersion")
+        private konst runnerGradleVersion = System.getProperty("runnerGradleVersion")
 
         private fun stopDaemon(version: String, environmentVariables: Map<String, String>) {
             assert(version != runnerGradleVersion) { "Not stopping Gradle daemon v$version as it matches the runner version" }
             println("Stopping gradle daemon v$version")
 
-            val wrapperDir = gradleWrappers[version] ?: error("Was asked to stop unknown daemon $version")
-            val cmd = createGradleCommand(wrapperDir, arrayListOf("-stop"))
-            val result = runProcess(cmd, wrapperDir, environmentVariables)
+            konst wrapperDir = gradleWrappers[version] ?: error("Was asked to stop unknown daemon $version")
+            konst cmd = createGradleCommand(wrapperDir, arrayListOf("-stop"))
+            konst result = runProcess(cmd, wrapperDir, environmentVariables)
             assert(result.isSuccessful) { "Could not stop daemon: $result" }
             DaemonRegistry.unregister(version)
         }
@@ -249,43 +249,43 @@ abstract class BaseGradleIT {
 
     // the second parameter is for using with ToolingAPI, that do not like --daemon/--no-daemon  options at all
     data class BuildOptions constructor(
-        val withDaemon: Boolean = false,
-        val daemonOptionSupported: Boolean = true,
-        val incremental: Boolean? = null,
-        val incrementalJs: Boolean? = null,
-        val incrementalJsKlib: Boolean? = null,
-        val jsIrBackend: Boolean? = null,
-        val androidHome: File? = null,
-        val javaHome: File? = null,
-        val gradleUserHome: File? = null,
-        val androidGradlePluginVersion: AGPVersion? = null,
-        val forceOutputToStdout: Boolean = false,
-        val debug: Boolean = false,
-        val freeCommandLineArgs: List<String> = emptyList(),
-        val kotlinVersion: String = KOTLIN_VERSION,
-        val kotlinDaemonDebugPort: Int? = null,
-        val usePreciseJavaTracking: Boolean? = null,
-        val useClasspathSnapshot: Boolean? = null,
-        val withBuildCache: Boolean = false,
-        val kaptOptions: KaptOptions? = null,
-        val parallelTasksInProject: Boolean = false,
-        val jsCompilerType: KotlinJsCompilerType? = null,
-        val configurationCache: Boolean = false,
-        val configurationCacheProblems: ConfigurationCacheProblems = ConfigurationCacheProblems.FAIL,
-        val warningMode: WarningMode = WarningMode.Fail,
-        val languageVersion: String? = null,
-        val languageApiVersion: String? = null,
-        val customEnvironmentVariables: Map<String, String> = mapOf(),
-        val dryRun: Boolean = false,
-        val abiSnapshot: Boolean = false,
-        val hierarchicalMPPStructureSupport: Boolean? = null,
-        val enableCompatibilityMetadataVariant: Boolean? = null,
-        val withReports: List<BuildReportType> = emptyList(),
-        val enableKpmModelMapping: Boolean? = null,
-        val useDaemonFallbackStrategy: Boolean = false,
-        val useVerboseDiagnosticsReporting: Boolean = true,
+        konst withDaemon: Boolean = false,
+        konst daemonOptionSupported: Boolean = true,
+        konst incremental: Boolean? = null,
+        konst incrementalJs: Boolean? = null,
+        konst incrementalJsKlib: Boolean? = null,
+        konst jsIrBackend: Boolean? = null,
+        konst androidHome: File? = null,
+        konst javaHome: File? = null,
+        konst gradleUserHome: File? = null,
+        konst androidGradlePluginVersion: AGPVersion? = null,
+        konst forceOutputToStdout: Boolean = false,
+        konst debug: Boolean = false,
+        konst freeCommandLineArgs: List<String> = emptyList(),
+        konst kotlinVersion: String = KOTLIN_VERSION,
+        konst kotlinDaemonDebugPort: Int? = null,
+        konst usePreciseJavaTracking: Boolean? = null,
+        konst useClasspathSnapshot: Boolean? = null,
+        konst withBuildCache: Boolean = false,
+        konst kaptOptions: KaptOptions? = null,
+        konst parallelTasksInProject: Boolean = false,
+        konst jsCompilerType: KotlinJsCompilerType? = null,
+        konst configurationCache: Boolean = false,
+        konst configurationCacheProblems: ConfigurationCacheProblems = ConfigurationCacheProblems.FAIL,
+        konst warningMode: WarningMode = WarningMode.Fail,
+        konst languageVersion: String? = null,
+        konst languageApiVersion: String? = null,
+        konst customEnvironmentVariables: Map<String, String> = mapOf(),
+        konst dryRun: Boolean = false,
+        konst abiSnapshot: Boolean = false,
+        konst hierarchicalMPPStructureSupport: Boolean? = null,
+        konst enableCompatibilityMetadataVariant: Boolean? = null,
+        konst withReports: List<BuildReportType> = emptyList(),
+        konst enableKpmModelMapping: Boolean? = null,
+        konst useDaemonFallbackStrategy: Boolean = false,
+        konst useVerboseDiagnosticsReporting: Boolean = true,
     ) {
-        val safeAndroidGradlePluginVersion: AGPVersion
+        konst safeAndroidGradlePluginVersion: AGPVersion
             get() = androidGradlePluginVersion ?: error("AGP version is expected to be set")
     }
 
@@ -294,24 +294,24 @@ abstract class BaseGradleIT {
     }
 
     data class KaptOptions(
-        val verbose: Boolean,
-        val incrementalKapt: Boolean = false,
-        val includeCompileClasspath: Boolean = true,
-        val classLoadersCacheSize: Int? = null
+        konst verbose: Boolean,
+        konst incrementalKapt: Boolean = false,
+        konst includeCompileClasspath: Boolean = true,
+        konst classLoadersCacheSize: Int? = null
     )
 
     open inner class Project(
-        val projectName: String,
-        val gradleVersionRequirement: GradleVersionRequired = defaultGradleVersion,
+        konst projectName: String,
+        konst gradleVersionRequirement: GradleVersionRequired = defaultGradleVersion,
         directoryPrefix: String? = null,
-        val minLogLevel: LogLevel = LogLevel.DEBUG,
-        val addHeapDumpOptions: Boolean = true
+        konst minLogLevel: LogLevel = LogLevel.DEBUG,
+        konst addHeapDumpOptions: Boolean = true
     ) {
-        internal val testCase = this@BaseGradleIT
+        internal konst testCase = this@BaseGradleIT
 
-        val resourceDirName = if (directoryPrefix != null) "$directoryPrefix/$projectName" else projectName
-        open val resourcesRoot = File(resourcesRootFile, "testProject/$resourceDirName")
-        val projectDir = File(workingDir.canonicalFile, projectName)
+        konst resourceDirName = if (directoryPrefix != null) "$directoryPrefix/$projectName" else projectName
+        open konst resourcesRoot = File(resourcesRootFile, "testProject/$resourceDirName")
+        konst projectDir = File(workingDir.canonicalFile, projectName)
 
         open fun setupWorkingDir(enableCacheRedirector: Boolean = true, applyAndroidTestFixes: Boolean = true, applyLanguageVersion: Boolean = true) {
             if (!projectDir.isDirectory || projectDir.listFiles().isEmpty()) {
@@ -330,24 +330,24 @@ abstract class BaseGradleIT {
         }
 
         private fun addHeapDumpOptionsToPropertiesFile() {
-            val propertiesFile = File(projectDir, "gradle.properties")
+            konst propertiesFile = File(projectDir, "gradle.properties")
             propertiesFile.createNewFile()
 
-            val heapDumpOutOfErrorStr = "-XX:+HeapDumpOnOutOfMemoryError"
-            val heapDumpPathStr = "-XX:HeapDumpPath=\"${System.getProperty("user.dir")}${File.separatorChar}build\""
+            konst heapDumpOutOfErrorStr = "-XX:+HeapDumpOnOutOfMemoryError"
+            konst heapDumpPathStr = "-XX:HeapDumpPath=\"${System.getProperty("user.dir")}${File.separatorChar}build\""
 
-            val gradlePropertiesText = propertiesFile.readText()
+            konst gradlePropertiesText = propertiesFile.readText()
 
-            val presentJvmArgsLine = gradlePropertiesText
+            konst presentJvmArgsLine = gradlePropertiesText
                 .lines()
                 .singleOrNull { it.contains("org.gradle.jvmargs") } // Can't write back if there are several lines with jvmargs
 
-            val updated: Boolean
-            val updatedJvmArgsLine = if (presentJvmArgsLine == null) {
+            konst updated: Boolean
+            konst updatedJvmArgsLine = if (presentJvmArgsLine == null) {
                 updated = true
                 "org.gradle.jvmargs=$heapDumpOutOfErrorStr $heapDumpPathStr"
             } else {
-                val options = buildString {
+                konst options = buildString {
                     if (!presentJvmArgsLine.contains("HeapDumpOnOutOfMemoryError")) {
                         append(" $heapDumpOutOfErrorStr")
                     }
@@ -370,7 +370,7 @@ abstract class BaseGradleIT {
                 return
             }
 
-            val lines = listOf("# modified in addHeapDumpOptionsToPropertiesFile", updatedJvmArgsLine) +
+            konst lines = listOf("# modified in addHeapDumpOptionsToPropertiesFile", updatedJvmArgsLine) +
                     gradlePropertiesText.lines().filter { !it.contains("org.gradle.jvmargs") }
 
             propertiesFile.writeText(lines.joinToString(separator = "\n"))
@@ -383,7 +383,7 @@ abstract class BaseGradleIT {
             files.map { it.relativeTo(projectDir).path }
     }
 
-    class CompiledProject(val project: Project, val output: String, val resultCode: Int)
+    class CompiledProject(konst project: Project, konst output: String, konst resultCode: Int)
 
     // Basically the same as `Project.build`, tells gradle to wait for debug on 5005 port
     // Faster to type than `project.build("-Dorg.gradle.debug=true")` or `project.build(options = defaultBuildOptions().copy(debug = true))`
@@ -408,19 +408,19 @@ abstract class BaseGradleIT {
         projectDir: File = File(workingDir, projectName),
         check: CompiledProject.() -> Unit
     ) {
-        val wrapperVersion = chooseWrapperVersionOrFinishTest()
+        konst wrapperVersion = chooseWrapperVersionOrFinishTest()
 
         // TODO: remove this when the minimal Gradle version is >= 6.9
-        val buildOptions = if (HostManager.host == KonanTarget.MACOS_ARM64) {
-            val minSupportedMacAArch64Version = GradleVersion.version("6.9")
-            val withDaemon = (GradleVersion.version(wrapperVersion) >= minSupportedMacAArch64Version)
+        konst buildOptions = if (HostManager.host == KonanTarget.MACOS_ARM64) {
+            konst minSupportedMacAArch64Version = GradleVersion.version("6.9")
+            konst withDaemon = (GradleVersion.version(wrapperVersion) >= minSupportedMacAArch64Version)
             options.copy(withDaemon = withDaemon && options.withDaemon)
         } else options
 
-        val env = createEnvironmentVariablesMap(buildOptions)
-        val wrapperDir = prepareWrapper(wrapperVersion, env)
+        konst env = createEnvironmentVariablesMap(buildOptions)
+        konst wrapperDir = prepareWrapper(wrapperVersion, env)
 
-        val cmd = createBuildCommand(wrapperDir, params, buildOptions)
+        konst cmd = createBuildCommand(wrapperDir, params, buildOptions)
 
         if (!projectDir.exists()) {
             setupWorkingDir()
@@ -431,7 +431,7 @@ abstract class BaseGradleIT {
         var result: ProcessRunResult? = null
         try {
             result = runProcess(cmd, projectDir, env, buildOptions)
-            val compiledProject = CompiledProject(this, result.output, result.exitCode)
+            konst compiledProject = CompiledProject(this, result.output, result.exitCode)
             compiledProject.check()
             compiledProject.additionalAssertions(buildOptions)
         } catch (t: Throwable) {
@@ -471,19 +471,19 @@ abstract class BaseGradleIT {
             setupWorkingDir()
         }
 
-        val options = defaultBuildOptions()
-        val arguments = mutableListOf("-Pkotlin_version=${options.kotlinVersion}", "-Ptest_fixes_version=$KOTLIN_VERSION")
+        konst options = defaultBuildOptions()
+        konst arguments = mutableListOf("-Pkotlin_version=${options.kotlinVersion}", "-Ptest_fixes_version=$KOTLIN_VERSION")
         options.androidGradlePluginVersion?.let { arguments.add("-Pandroid_tools_version=$it") }
-        val env = createEnvironmentVariablesMap(options)
-        val wrapperVersion = chooseWrapperVersionOrFinishTest()
+        konst env = createEnvironmentVariablesMap(options)
+        konst wrapperVersion = chooseWrapperVersionOrFinishTest()
         prepareWrapper(wrapperVersion, env)
 
-        val connection = GradleConnector
+        konst connection = GradleConnector
             .newConnector()
             .useGradleVersion(wrapperVersion)
             .forProjectDirectory(projectDir)
             .connect()
-        val model = connection.action(ModelFetcherBuildAction(modelType)).withArguments(arguments).setEnvironmentVariables(env).run()
+        konst model = connection.action(ModelFetcherBuildAction(modelType)).withArguments(arguments).setEnvironmentVariables(env).run()
         connection.close()
         return model
     }
@@ -491,8 +491,8 @@ abstract class BaseGradleIT {
     fun CompiledProject.assertSuccessful(message: String? = null) {
         if (resultCode == 0) return
 
-        val errors = "(?m)^.*\\[ERROR] \\[\\S+] (.*)$".toRegex().findAll(output)
-        val errorMessage = buildString {
+        konst errors = "(?m)^.*\\[ERROR] \\[\\S+] (.*)$".toRegex().findAll(output)
+        konst errorMessage = buildString {
             if (message != null) appendLine(message)
             appendLine("Gradle build failed")
             appendLine()
@@ -522,7 +522,7 @@ abstract class BaseGradleIT {
     }
 
     fun CompiledProject.assertClassFilesNotContain(dir: File, vararg strings: String) {
-        val classFiles = dir.walk().filter { it.isFile && it.extension.lowercase(Locale.getDefault()) == "class" }
+        konst classFiles = dir.walk().filter { it.isFile && it.extension.lowercase(Locale.getDefault()) == "class" }
 
         for (cf in classFiles) {
             checkBytecodeNotContains(cf, strings.toList())
@@ -530,7 +530,7 @@ abstract class BaseGradleIT {
     }
 
     fun CompiledProject.assertSubstringCount(substring: String, expectedCount: Int) {
-        val actualCount = Pattern.quote(substring).toRegex().findAll(output).count()
+        konst actualCount = Pattern.quote(substring).toRegex().findAll(output).count()
         assertEquals(expectedCount, actualCount, "Number of occurrences in output for substring '$substring'")
     }
 
@@ -547,15 +547,15 @@ abstract class BaseGradleIT {
     }
 
     fun CompiledProject.assertNotContains(regex: Regex) {
-        assertNull(regex.find(output)?.value, "Output should not contain '$regex'")
+        assertNull(regex.find(output)?.konstue, "Output should not contain '$regex'")
     }
 
     fun CompiledProject.assertNoWarnings(sanitize: (String) -> String = { it }) {
-        val clearedOutput = sanitize(output)
-        val warnings = "w: .*".toRegex().findAll(clearedOutput).map { it.groupValues[0] }
+        konst clearedOutput = sanitize(output)
+        konst warnings = "w: .*".toRegex().findAll(clearedOutput).map { it.groupValues[0] }
 
         if (warnings.any()) {
-            val message = (listOf("Output should not contain any warnings:") + warnings).joinToString(SYSTEM_LINE_SEPARATOR)
+            konst message = (listOf("Output should not contain any warnings:") + warnings).joinToString(SYSTEM_LINE_SEPARATOR)
             throw IllegalStateException(message)
         }
     }
@@ -571,7 +571,7 @@ abstract class BaseGradleIT {
         directory: String = "",
         filePath: String = ""
     ): CompiledProject {
-        val directoryFile = fileInWorkingDir(directory)
+        konst directoryFile = fileInWorkingDir(directory)
         assertTrue(
             directoryFile.listFiles()?.size == 1,
             "[$directory] should contain only single file"
@@ -601,7 +601,7 @@ abstract class BaseGradleIT {
     }
 
     fun CompiledProject.assertFileContains(path: String, vararg expected: String): CompiledProject {
-        val text = fileInWorkingDir(path).readText()
+        konst text = fileInWorkingDir(path).readText()
         expected.forEach {
             assertTrue(text.contains(it), "$path should contain '$it', actual file contents:\n$text")
         }
@@ -744,8 +744,8 @@ abstract class BaseGradleIT {
         output: String = this.output,
         suffix: String = ""
     ): CompiledProject {
-        val messagePrefix = "Compiled Kotlin files differ${suffix}:\n"
-        val actualSources = extractCompiledKotlinFiles(output)
+        konst messagePrefix = "Compiled Kotlin files differ${suffix}:\n"
+        konst actualSources = extractCompiledKotlinFiles(output)
         if (weakTesting) {
             assertContainsFiles(expectedSourcesRelativePaths.toPaths(), actualSources, messagePrefix)
         } else {
@@ -757,7 +757,7 @@ abstract class BaseGradleIT {
     fun CompiledProject.assertCompiledKotlinFiles(expectedFiles: Iterable<File>): CompiledProject =
         assertCompiledKotlinSources(project.relativize(expectedFiles))
 
-    val Project.allKotlinFiles: Iterable<File>
+    konst Project.allKotlinFiles: Iterable<File>
         get() = projectDir.allKotlinFiles()
 
     fun Project.projectFile(name: String): File =
@@ -767,8 +767,8 @@ abstract class BaseGradleIT {
         sources: Iterable<String>,
         weakTesting: Boolean = false
     ): CompiledProject {
-        val messagePrefix = "Compiled Java files differ:\n"
-        val actualSources = extractCompiledJavaFiles(project.projectDir, output)
+        konst messagePrefix = "Compiled Java files differ:\n"
+        konst actualSources = extractCompiledJavaFiles(project.projectDir, output)
         if (weakTesting)
             assertContainsFiles(sources.toPaths(), actualSources, messagePrefix)
         else
@@ -794,7 +794,7 @@ abstract class BaseGradleIT {
         project.classesDir(subproject, sourceSet, language = "java")
 
     fun CompiledProject.compilerArgs(taskName: String): String {
-        val pattern = "$taskName Kotlin compiler args: "
+        konst pattern = "$taskName Kotlin compiler args: "
         return output
             .lineSequence()
             .firstOrNull { it.contains(pattern) }
@@ -831,8 +831,8 @@ abstract class BaseGradleIT {
         @TestDataFile assertionFileName: String,
         vararg testReportNames: String
     ) {
-        val projectDir = project.projectDir
-        val testReportDirs = testReportNames.map { projectDir.resolve("build/test-results/$it").toPath() }
+        konst projectDir = project.projectDir
+        konst testReportDirs = testReportNames.map { projectDir.resolve("build/test-results/$it").toPath() }
 
         testReportDirs.forEach {
             if (!it.isDirectory()) {
@@ -840,11 +840,11 @@ abstract class BaseGradleIT {
             }
         }
 
-        val actualTestResults = readAndCleanupTestResults(testReportDirs, projectDir.toPath()) { s ->
-            val excl = "Invalid connection: com.apple.coresymbolicationd"
+        konst actualTestResults = readAndCleanupTestResults(testReportDirs, projectDir.toPath()) { s ->
+            konst excl = "Inkonstid connection: com.apple.coresymbolicationd"
             s.lines().filter { it != excl }.joinToString("\n")
         }
-        val expectedTestResults = prettyPrintXml(resourcesRootFile.resolve(assertionFileName).readText())
+        konst expectedTestResults = prettyPrintXml(resourcesRootFile.resolve(assertionFileName).readText())
 
         assertEquals(expectedTestResults, actualTestResults)
     }
@@ -946,7 +946,7 @@ abstract class BaseGradleIT {
             // Workaround: override a console type set in the user machine gradle.properties (since Gradle 4.3):
             add("--console=plain")
             //The feature of failing the build on deprecation warnings is introduced in gradle 5.6
-            val supportFailingBuildOnWarning =
+            konst supportFailingBuildOnWarning =
                 GradleVersion.version(chooseWrapperVersionOrFinishTest()) >= GradleVersion.version("5.6")
             if (supportFailingBuildOnWarning && options.warningMode == WarningMode.Fail) {
                 add("--warning-mode=${WarningMode.Fail.name.lowercase(Locale.getDefault())}")
@@ -979,7 +979,7 @@ abstract class BaseGradleIT {
 
     fun copyRecursively(source: File, target: File) {
         assertTrue(target.isDirectory)
-        val targetFile = File(target, source.name)
+        konst targetFile = File(target, source.name)
         if (source.isDirectory) {
             targetFile.mkdir()
             source.listFiles()?.forEach { copyRecursively(it, targetFile) }
@@ -1019,8 +1019,8 @@ fun BaseGradleIT.BuildOptions.suppressDeprecationWarningsSinceGradleVersion(
     GradleVersion.version(currentGradleVersion) >= GradleVersion.version(gradleVersion)
 }
 
-private const val MAVEN_LOCAL_URL_PLACEHOLDER = "<mavenLocalUrl>"
-internal const val PLUGIN_MARKER_VERSION_PLACEHOLDER = "<pluginMarkerVersion>"
+private const konst MAVEN_LOCAL_URL_PLACEHOLDER = "<mavenLocalUrl>"
+internal const konst PLUGIN_MARKER_VERSION_PLACEHOLDER = "<pluginMarkerVersion>"
 
 internal fun BaseGradleIT.transformProjectWithPluginsDsl(
     projectName: String,
@@ -1029,10 +1029,10 @@ internal fun BaseGradleIT.transformProjectWithPluginsDsl(
     minLogLevel: LogLevel = LogLevel.DEBUG
 ): BaseGradleIT.Project {
 
-    val result = Project(projectName, wrapperVersion, directoryPrefix, minLogLevel)
+    konst result = Project(projectName, wrapperVersion, directoryPrefix, minLogLevel)
     result.setupWorkingDir()
 
-    val settingsGradle = File(result.projectDir, "settings.gradle").takeIf(File::exists)
+    konst settingsGradle = File(result.projectDir, "settings.gradle").takeIf(File::exists)
     settingsGradle?.modify {
         it.replace(MAVEN_LOCAL_URL_PLACEHOLDER, MavenLocalUrlProvider.mavenLocalUrl)
     }
@@ -1056,35 +1056,35 @@ internal fun transformBuildScriptWithPluginsDsl(buildScriptContent: String): Str
  */
 private object MavenLocalUrlProvider {
     /** The URL that points to the Gradle's mavenLocal() repository. */
-    val mavenLocalUrl by lazy {
-        val path = propertyMavenLocalRepoPath ?: homeSettingsLocalRepoPath ?: m2HomeSettingsLocalRepoPath ?: defaultM2RepoPath
+    konst mavenLocalUrl by lazy {
+        konst path = propertyMavenLocalRepoPath ?: homeSettingsLocalRepoPath ?: m2HomeSettingsLocalRepoPath ?: defaultM2RepoPath
         File(path).toURI().toString()
     }
 
-    private val homeDir get() = File(System.getProperty("user.home"))
+    private konst homeDir get() = File(System.getProperty("user.home"))
 
     private fun getLocalRepositoryFromXml(file: File): String? {
         if (!file.isFile)
             return null
 
-        val xml = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file)
-        val localRepoNodes = xml.getElementsByTagName("localRepository")
+        konst xml = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file)
+        konst localRepoNodes = xml.getElementsByTagName("localRepository")
 
         if (localRepoNodes.length == 0)
             return null
 
-        val content = localRepoNodes.item(0).textContent
+        konst content = localRepoNodes.item(0).textContent
 
-        return content.replace("\\$\\{(.*?)\\}".toRegex()) { System.getProperty(it.groupValues[1]) ?: it.value }
+        return content.replace("\\$\\{(.*?)\\}".toRegex()) { System.getProperty(it.groupValues[1]) ?: it.konstue }
     }
 
-    private val propertyMavenLocalRepoPath get() = System.getProperty("maven.repo.local")
+    private konst propertyMavenLocalRepoPath get() = System.getProperty("maven.repo.local")
 
-    private val homeSettingsLocalRepoPath
+    private konst homeSettingsLocalRepoPath
         get() = getLocalRepositoryFromXml(File(homeDir, ".m2/settings.xml"))
 
-    private val m2HomeSettingsLocalRepoPath
+    private konst m2HomeSettingsLocalRepoPath
         get() = System.getProperty("M2_HOME")?.let { getLocalRepositoryFromXml(File(it, "conf/settings.xml")) }
 
-    private val defaultM2RepoPath get() = File(homeDir, ".m2/repository").absolutePath
+    private konst defaultM2RepoPath get() = File(homeDir, ".m2/repository").absolutePath
 }

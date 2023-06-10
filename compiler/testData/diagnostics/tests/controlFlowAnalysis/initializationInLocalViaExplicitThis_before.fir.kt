@@ -2,7 +2,7 @@
 // See KT-17479
 
 class Test {
-    val str: String
+    konst str: String
     init {
         run {
             this@Test.str = "A"

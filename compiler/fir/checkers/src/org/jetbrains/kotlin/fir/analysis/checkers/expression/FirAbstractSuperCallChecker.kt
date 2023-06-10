@@ -29,21 +29,21 @@ object FirAbstractSuperCallChecker : FirQualifiedAccessExpressionChecker() {
         // require the receiver to be the super reference
         if (expression.explicitReceiverIsNotSuperReference()) return
 
-        val closestClass = context.findClosest<FirRegularClass>()
+        konst closestClass = context.findClosest<FirRegularClass>()
             ?: return
 
         if (closestClass.classKind == ClassKind.CLASS) {
             // handles all the FirSimpleFunction/FirProperty/etc.
-            val declarationSymbol = expression.toResolvedCallableSymbol() ?: return
+            konst declarationSymbol = expression.toResolvedCallableSymbol() ?: return
 
-            val containingClassSymbol = declarationSymbol.containingClassLookupTag()?.toSymbol(context.session) as? FirRegularClassSymbol ?: return
+            konst containingClassSymbol = declarationSymbol.containingClassLookupTag()?.toSymbol(context.session) as? FirRegularClassSymbol ?: return
 
             if (containingClassSymbol.isAbstract) {
                 if (declarationSymbol.isAbstract) {
                     reporter.reportOn(expression.calleeReference.source, FirErrors.ABSTRACT_SUPER_CALL, context)
                 }
                 if (declarationSymbol is FirIntersectionCallableSymbol) {
-                    val symbolFromBaseClass = declarationSymbol.intersections.firstOrNull {
+                    konst symbolFromBaseClass = declarationSymbol.intersections.firstOrNull {
                         it.containingClassLookupTag()?.toSymbol(context.session)?.classKind != ClassKind.INTERFACE
                     }
                     if (symbolFromBaseClass?.isAbstract == true) {

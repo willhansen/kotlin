@@ -17,7 +17,7 @@ suspend fun signInFlowStepFirst(): Result<String> = try {
 
 fun box(): String {
     builder {
-        val res: Result<String> = signInFlowStepFirst()
+        konst res: Result<String> = signInFlowStepFirst()
         if (res.getOrThrow() != "OK") error("FAIL")
     }
     return "OK"

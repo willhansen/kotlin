@@ -20,11 +20,11 @@ public class JJJ {
 
 // FILE: k.kt
 fun test() {
-    val a = J.staticN <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
+    konst a = J.staticN <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
     foo(a)
-    val b = JJ.staticNN <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
+    konst b = JJ.staticNN <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
     foo(b)
-    val c = JJJ.staticNNN <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
+    konst c = JJJ.staticNNN <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
     foo(c)
 }
 

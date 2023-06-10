@@ -28,34 +28,34 @@ class SerializerForInlineClassGenerator(
         fun irThis(): IrExpression =
             IrGetValueImpl(startOffset, endOffset, saveFunc.dispatchReceiverParameter!!.symbol)
 
-        val encoderClass = compilerContext.getClassFromRuntime(SerialEntityNames.ENCODER_CLASS)
-        val descriptorGetterSymbol = irAnySerialDescProperty?.getter!!.symbol
-        val encodeInline = encoderClass.functionByName(CallingConventions.encodeInline)
-        val serialDescGetter = irGet(descriptorGetterSymbol.owner.returnType, irThis(), descriptorGetterSymbol)
+        konst encoderClass = compilerContext.getClassFromRuntime(SerialEntityNames.ENCODER_CLASS)
+        konst descriptorGetterSymbol = irAnySerialDescProperty?.getter!!.symbol
+        konst encodeInline = encoderClass.functionByName(CallingConventions.encodeInline)
+        konst serialDescGetter = irGet(descriptorGetterSymbol.owner.returnType, irThis(), descriptorGetterSymbol)
 
-        // val inlineEncoder = encoder.encodeInline()
-        val encodeInlineCall: IrExpression = irInvoke(irGet(saveFunc.valueParameters[0]), encodeInline, serialDescGetter)
-        val inlineEncoder = irTemporary(encodeInlineCall, nameHint = "inlineEncoder")
+        // konst inlineEncoder = encoder.encodeInline()
+        konst encodeInlineCall: IrExpression = irInvoke(irGet(saveFunc.konstueParameters[0]), encodeInline, serialDescGetter)
+        konst inlineEncoder = irTemporary(encodeInlineCall, nameHint = "inlineEncoder")
 
-        val property = serializableProperties.first()
-        val value = getProperty(irGet(saveFunc.valueParameters[1]), property.ir)
+        konst property = serializableProperties.first()
+        konst konstue = getProperty(irGet(saveFunc.konstueParameters[1]), property.ir)
 
         // inlineEncoder.encodeInt/String/SerializableValue
-        val elementCall = formEncodeDecodePropertyCall(irGet(inlineEncoder), saveFunc.dispatchReceiverParameter!!, property, {innerSerial, sti ->
-            val f =
+        konst elementCall = formEncodeDecodePropertyCall(irGet(inlineEncoder), saveFunc.dispatchReceiverParameter!!, property, {innerSerial, sti ->
+            konst f =
                 encoderClass.functionByName("${CallingConventions.encode}${sti.elementMethodPrefix}SerializableValue")
             f to listOf(
                 innerSerial,
-                value
+                konstue
             )
         }, {
-            val f =
+            konst f =
                 encoderClass.functionByName("${CallingConventions.encode}${it.elementMethodPrefix}")
-            val args = if (it.elementMethodPrefix != "Unit") listOf(value) else emptyList()
+            konst args = if (it.elementMethodPrefix != "Unit") listOf(konstue) else emptyList()
             f to args
         }, null)
 
-        val actualEncodeCall = irIfNull(compilerContext.irBuiltIns.unitType, irGet(inlineEncoder), irNull(), elementCall)
+        konst actualEncodeCall = irIfNull(compilerContext.irBuiltIns.unitType, irGet(inlineEncoder), irNull(), elementCall)
         +actualEncodeCall
     }
 
@@ -63,29 +63,29 @@ class SerializerForInlineClassGenerator(
         fun irThis(): IrExpression =
             IrGetValueImpl(startOffset, endOffset, loadFunc.dispatchReceiverParameter!!.symbol)
 
-        val decoderClass = compilerContext.getClassFromRuntime(SerialEntityNames.DECODER_CLASS)
-        val descriptorGetterSymbol = irAnySerialDescProperty?.getter!!.symbol
-        val decodeInline = decoderClass.functionByName(CallingConventions.decodeInline)
-        val serialDescGetter = irGet(descriptorGetterSymbol.owner.returnType, irThis(), descriptorGetterSymbol)
+        konst decoderClass = compilerContext.getClassFromRuntime(SerialEntityNames.DECODER_CLASS)
+        konst descriptorGetterSymbol = irAnySerialDescProperty?.getter!!.symbol
+        konst decodeInline = decoderClass.functionByName(CallingConventions.decodeInline)
+        konst serialDescGetter = irGet(descriptorGetterSymbol.owner.returnType, irThis(), descriptorGetterSymbol)
 
-        // val inlineDecoder = decoder.decodeInline()
-        val inlineDecoder: IrExpression = irInvoke(irGet(loadFunc.valueParameters[0]), decodeInline, serialDescGetter)
+        // konst inlineDecoder = decoder.decodeInline()
+        konst inlineDecoder: IrExpression = irInvoke(irGet(loadFunc.konstueParameters[0]), decodeInline, serialDescGetter)
 
-        val property = serializableProperties.first()
-        val inlinedType = property.type
-        val actualCall = formEncodeDecodePropertyCall(inlineDecoder, loadFunc.dispatchReceiverParameter!!, property, { innerSerial, sti ->
+        konst property = serializableProperties.first()
+        konst inlinedType = property.type
+        konst actualCall = formEncodeDecodePropertyCall(inlineDecoder, loadFunc.dispatchReceiverParameter!!, property, { innerSerial, sti ->
             decoderClass.functionByName( "${CallingConventions.decode}${sti.elementMethodPrefix}SerializableValue") to listOf(innerSerial)
         }, {
             decoderClass.functionByName("${CallingConventions.decode}${it.elementMethodPrefix}") to listOf()
         }, null, returnTypeHint = inlinedType)
-        val value = coerceToBox(actualCall, loadFunc.returnType)
-        +irReturn(value)
+        konst konstue = coerceToBox(actualCall, loadFunc.returnType)
+        +irReturn(konstue)
     }
 
-    override val serialDescImplClass: IrClassSymbol = compilerContext.getClassFromInternalSerializationPackage(SerialEntityNames.SERIAL_DESCRIPTOR_FOR_INLINE)
+    override konst serialDescImplClass: IrClassSymbol = compilerContext.getClassFromInternalSerializationPackage(SerialEntityNames.SERIAL_DESCRIPTOR_FOR_INLINE)
 
     override fun IrBlockBodyBuilder.instantiateNewDescriptor(serialDescImplClass: IrClassSymbol, correctThis: IrExpression): IrExpression {
-        val ctor = serialDescImplClass.constructors.single { it.owner.isPrimary }
+        konst ctor = serialDescImplClass.constructors.single { it.owner.isPrimary }
         return irInvoke(
             null, ctor,
             irString(serialName),

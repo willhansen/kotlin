@@ -56,7 +56,7 @@ import org.jetbrains.kotlin.resolve.BindingTrace;
 import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.resolve.bindingContextUtil.BindingContextUtilsKt;
 import org.jetbrains.kotlin.resolve.constants.*;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 import org.jetbrains.kotlin.resolve.scopes.MemberScope;
 import org.jetbrains.kotlin.serialization.js.ast.JsAstProtoBuf;
 import org.jetbrains.kotlin.types.KotlinType;
@@ -97,7 +97,7 @@ public final class Translation {
             return aliasForExpression;
         }
 
-        CompileTimeConstant<?> compileTimeValue = ConstantExpressionEvaluator.getConstant(expression, context.bindingContext());
+        CompileTimeConstant<?> compileTimeValue = ConstantExpressionEkonstuator.getConstant(expression, context.bindingContext());
         if (compileTimeValue != null && !compileTimeValue.getUsesNonConstValAsConstant()) {
             KotlinType type = context.bindingContext().getType(expression);
             if (type != null && (KotlinBuiltIns.isLong(type) || KotlinBuiltIns.isInt(type))) {
@@ -158,15 +158,15 @@ public final class Translation {
             return translateUnsignedConstant((UnsignedValueConstant<?>) constant, context);
         }
 
-        Object value = constant.getValue();
-        if (value instanceof Integer || value instanceof Short || value instanceof Byte) {
-            return new JsIntLiteral(((Number) value).intValue());
+        Object konstue = constant.getValue();
+        if (konstue instanceof Integer || konstue instanceof Short || konstue instanceof Byte) {
+            return new JsIntLiteral(((Number) konstue).intValue());
         }
-        else if (value instanceof Long) {
-            return JsAstUtils.newLong((Long) value);
+        else if (konstue instanceof Long) {
+            return JsAstUtils.newLong((Long) konstue);
         }
-        else if (value instanceof Float) {
-            float floatValue = (Float) value;
+        else if (konstue instanceof Float) {
+            float floatValue = (Float) konstue;
             double doubleValue;
             if (Float.isInfinite(floatValue) || Float.isNaN(floatValue)) {
                 doubleValue = floatValue;
@@ -176,19 +176,19 @@ public final class Translation {
             }
             return new JsDoubleLiteral(doubleValue);
         }
-        else if (value instanceof Number) {
-            return new JsDoubleLiteral(((Number) value).doubleValue());
+        else if (konstue instanceof Number) {
+            return new JsDoubleLiteral(((Number) konstue).doubleValue());
         }
-        else if (value instanceof Boolean) {
-            return new JsBooleanLiteral((Boolean) value);
+        else if (konstue instanceof Boolean) {
+            return new JsBooleanLiteral((Boolean) konstue);
         }
 
         //TODO: test
-        if (value instanceof String) {
-            return new JsStringLiteral((String) value);
+        if (konstue instanceof String) {
+            return new JsStringLiteral((String) konstue);
         }
-        if (value instanceof Character) {
-            return new JsIntLiteral(((Character) value).charValue());
+        if (konstue instanceof Character) {
+            return new JsIntLiteral(((Character) konstue).charValue());
         }
 
         return null;
@@ -209,8 +209,8 @@ public final class Translation {
             return JsAstUtils.intToUInt(((UIntValue) unsignedConstant).getValue(), context);
         }
         else if (unsignedConstant instanceof ULongValue) {
-            Long value = ((ULongValue) unsignedConstant).getValue();
-            JsExpression longExpression = JsAstUtils.newLong(value);
+            Long konstue = ((ULongValue) unsignedConstant).getValue();
+            JsExpression longExpression = JsAstUtils.newLong(konstue);
             return JsAstUtils.longToULong(longExpression, context);
         } else {
             return null;

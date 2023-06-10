@@ -26,20 +26,20 @@ import org.jetbrains.kotlin.resolve.constants.ClassLiteralValue
 import org.jetbrains.kotlin.resolve.jvm.JvmPrimitiveType
 import org.jetbrains.kotlin.utils.toMetadataVersion
 
-internal class AnnotationsLoader(private val session: FirSession, private val kotlinClassFinder: KotlinClassFinder) {
-    private abstract inner class AnnotationsLoaderVisitorImpl(val enumEntryReferenceCreator: (ClassId, Name) -> FirExpression) : KotlinJvmBinaryClass.AnnotationArgumentVisitor {
+internal class AnnotationsLoader(private konst session: FirSession, private konst kotlinClassFinder: KotlinClassFinder) {
+    private abstract inner class AnnotationsLoaderVisitorImpl(konst enumEntryReferenceCreator: (ClassId, Name) -> FirExpression) : KotlinJvmBinaryClass.AnnotationArgumentVisitor {
         abstract fun visitExpression(name: Name?, expr: FirExpression)
 
-        abstract val visitNullNames: Boolean
+        abstract konst visitNullNames: Boolean
 
         abstract fun guessArrayTypeIfNeeded(name: Name?, arrayOfElements: List<FirExpression>): FirTypeRef?
 
-        override fun visit(name: Name?, value: Any?) {
-            visitExpression(name, createConstant(value))
+        override fun visit(name: Name?, konstue: Any?) {
+            visitExpression(name, createConstant(konstue))
         }
 
         private fun ClassLiteralValue.toFirClassReferenceExpression(): FirClassReferenceExpression {
-            val resolvedClassTypeRef = classId.toLookupTag().toDefaultResolvedTypeRef()
+            konst resolvedClassTypeRef = classId.toLookupTag().toDefaultResolvedTypeRef()
             return buildClassReferenceExpression {
                 classTypeRef = resolvedClassTypeRef
                 typeRef = buildResolvedTypeRef {
@@ -48,9 +48,9 @@ internal class AnnotationsLoader(private val session: FirSession, private val ko
             }
         }
 
-        override fun visitClassLiteral(name: Name?, value: ClassLiteralValue) {
+        override fun visitClassLiteral(name: Name?, konstue: ClassLiteralValue) {
             visitExpression(name, buildGetClassCall {
-                val argument = value.toFirClassReferenceExpression()
+                konst argument = konstue.toFirClassReferenceExpression()
                 argumentList = buildUnaryArgumentList(argument)
                 typeRef = argument.typeRef
             })
@@ -64,27 +64,27 @@ internal class AnnotationsLoader(private val session: FirSession, private val ko
         override fun visitArray(name: Name?): KotlinJvmBinaryClass.AnnotationArrayArgumentVisitor? {
             if (name == null && !visitNullNames) return null
             return object : KotlinJvmBinaryClass.AnnotationArrayArgumentVisitor {
-                private val elements = mutableListOf<FirExpression>()
+                private konst elements = mutableListOf<FirExpression>()
 
-                override fun visit(value: Any?) {
-                    elements.add(createConstant(value))
+                override fun visit(konstue: Any?) {
+                    elements.add(createConstant(konstue))
                 }
 
                 override fun visitEnum(enumClassId: ClassId, enumEntryName: Name) {
                     elements.add(enumEntryReferenceCreator(enumClassId, enumEntryName))
                 }
 
-                override fun visitClassLiteral(value: ClassLiteralValue) {
+                override fun visitClassLiteral(konstue: ClassLiteralValue) {
                     elements.add(buildGetClassCall {
-                        val argument = value.toFirClassReferenceExpression()
+                        konst argument = konstue.toFirClassReferenceExpression()
                         argumentList = buildUnaryArgumentList(argument)
                         typeRef = argument.typeRef
                     })
                 }
 
                 override fun visitAnnotation(classId: ClassId): KotlinJvmBinaryClass.AnnotationArgumentVisitor {
-                    val list = mutableListOf<FirAnnotation>()
-                    val visitor = loadAnnotation(classId, list, enumEntryReferenceCreator)
+                    konst list = mutableListOf<FirAnnotation>()
+                    konst visitor = loadAnnotation(classId, list, enumEntryReferenceCreator)
                     return object : KotlinJvmBinaryClass.AnnotationArgumentVisitor by visitor {
                         override fun visitEnd() {
                             visitor.visitEnd()
@@ -106,8 +106,8 @@ internal class AnnotationsLoader(private val session: FirSession, private val ko
 
         override fun visitAnnotation(name: Name?, classId: ClassId): KotlinJvmBinaryClass.AnnotationArgumentVisitor? {
             if (name == null && !visitNullNames) return null
-            val list = mutableListOf<FirAnnotation>()
-            val visitor = loadAnnotation(classId, list, enumEntryReferenceCreator)
+            konst list = mutableListOf<FirAnnotation>()
+            konst visitor = loadAnnotation(classId, list, enumEntryReferenceCreator)
             return object : KotlinJvmBinaryClass.AnnotationArgumentVisitor by visitor {
                 override fun visitEnd() {
                     visitor.visitEnd()
@@ -116,32 +116,32 @@ internal class AnnotationsLoader(private val session: FirSession, private val ko
             }
         }
 
-        private fun createConstant(value: Any?): FirExpression {
-            return value.createConstantOrError(session)
+        private fun createConstant(konstue: Any?): FirExpression {
+            return konstue.createConstantOrError(session)
         }
     }
 
     private fun loadAnnotation(
         annotationClassId: ClassId, result: MutableList<FirAnnotation>, enumEntryReferenceCreator: (ClassId, Name) -> FirExpression
     ): KotlinJvmBinaryClass.AnnotationArgumentVisitor {
-        val lookupTag = annotationClassId.toLookupTag()
+        konst lookupTag = annotationClassId.toLookupTag()
 
         return object : AnnotationsLoaderVisitorImpl(enumEntryReferenceCreator) {
-            private val argumentMap = mutableMapOf<Name, FirExpression>()
+            private konst argumentMap = mutableMapOf<Name, FirExpression>()
 
             override fun visitExpression(name: Name?, expr: FirExpression) {
                 if (name != null) argumentMap[name] = expr
             }
 
-            override val visitNullNames: Boolean = false
+            override konst visitNullNames: Boolean = false
 
             override fun guessArrayTypeIfNeeded(name: Name?, arrayOfElements: List<FirExpression>): FirTypeRef? {
-                // Needed if we load a default value which is another annotation that has array value in it. e.g.:
-                // To instantiate Deprecated() we need a default value for ReplaceWith() that has imports: Array<String> with default value [].
+                // Needed if we load a default konstue which is another annotation that has array konstue in it. e.g.:
+                // To instantiate Deprecated() we need a default konstue for ReplaceWith() that has imports: Array<String> with default konstue [].
                 if (name == null) return null
                 // Note: generally we are not allowed to resolve anything, as this is might lead to recursive resolve problems
                 // However, K1 deserializer did exactly the same and no issues were reported.
-                val propS = session.symbolProvider.getClassDeclaredPropertySymbols(annotationClassId, name).firstOrNull()
+                konst propS = session.symbolProvider.getClassDeclaredPropertySymbols(annotationClassId, name).firstOrNull()
                 return propS?.resolvedReturnTypeRef
             }
 
@@ -172,11 +172,11 @@ internal class AnnotationsLoader(private val session: FirSession, private val ko
                 defaultValue = expr
             }
 
-            override val visitNullNames: Boolean = true
+            override konst visitNullNames: Boolean = true
 
             override fun guessArrayTypeIfNeeded(name: Name?, arrayOfElements: List<FirExpression>): FirTypeRef {
-                val descName = methodSignature.signature.substringAfterLast(')').removePrefix("[")
-                val targetClassId = JvmPrimitiveType.getByDesc(descName)?.primitiveType?.typeFqName?.let { ClassId.topLevel(it) }
+                konst descName = methodSignature.signature.substringAfterLast(')').removePrefix("[")
+                konst targetClassId = JvmPrimitiveType.getByDesc(descName)?.primitiveType?.typeFqName?.let { ClassId.topLevel(it) }
                     ?: FileBasedKotlinClass.resolveNameByInternalName(
                         descName.removePrefix("L").removeSuffix(";"),
                         // It seems that some inner classes info is required, but so far there are no problems with them (see six() in multimoduleCreation test)
@@ -194,14 +194,14 @@ internal class AnnotationsLoader(private val session: FirSession, private val ko
     private fun isRepeatableWithImplicitContainer(lookupTag: ConeClassLikeLookupTag, argumentMap: Map<Name, FirExpression>): Boolean {
         if (lookupTag.classId != SpecialJvmAnnotations.JAVA_LANG_ANNOTATION_REPEATABLE) return false
 
-        val getClassCall = argumentMap[StandardClassIds.Annotations.ParameterNames.value] as? FirGetClassCall ?: return false
-        val classReference = getClassCall.argument as? FirClassReferenceExpression ?: return false
-        val containerType = classReference.classTypeRef.coneType as? ConeClassLikeType ?: return false
-        val classId = containerType.lookupTag.classId
+        konst getClassCall = argumentMap[StandardClassIds.Annotations.ParameterNames.konstue] as? FirGetClassCall ?: return false
+        konst classReference = getClassCall.argument as? FirClassReferenceExpression ?: return false
+        konst containerType = classReference.classTypeRef.coneType as? ConeClassLikeType ?: return false
+        konst classId = containerType.lookupTag.classId
         if (classId.outerClassId == null || classId.shortClassName.asString() != JvmAbi.REPEATABLE_ANNOTATION_CONTAINER_NAME
         ) return false
 
-        val klass = kotlinClassFinder.findKotlinClass(classId, session.languageVersionSettings.languageVersion.toMetadataVersion())
+        konst klass = kotlinClassFinder.findKotlinClass(classId, session.languageVersionSettings.languageVersion.toMetadataVersion())
         return klass != null && SpecialJvmAnnotations.isAnnotatedWithContainerMetaAnnotation(klass)
     }
 

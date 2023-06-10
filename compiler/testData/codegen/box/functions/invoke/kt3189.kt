@@ -2,12 +2,12 @@
 
 fun box(): String {
 
-    val bad = Bad({ 1 })
+    konst bad = Bad({ 1 })
 
     return if (bad.test() == 1) "OK" else "fail"
 }
 
-class Bad(val a: () -> Int) {
+class Bad(konst a: () -> Int) {
 
     fun test(): Int = a()
 

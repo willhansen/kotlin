@@ -21,7 +21,7 @@ public interface KtAnalysisScopeProviderMixIn : KtAnalysisSessionMixIn {
      * Return [GlobalSearchScope] represent a scope code in which can be analysed by current [KtAnalysisSession].
      * That means [org.jetbrains.kotlin.analysis.api.symbols.KtSymbol] can be built for the declarations from this scope.
      */
-    public val analysisScope: GlobalSearchScope
+    public konst analysisScope: GlobalSearchScope
         get() = withValidityAssertion { analysisSession.analysisScopeProvider.getAnalysisScope() }
 
 

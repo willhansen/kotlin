@@ -5,13 +5,13 @@ package test
 inline fun <T> test(p: T, s: () -> () -> T = { { p } }) =
         s()
 
-val same = test("O")
+konst same = test("O")
 
 // FILE: 2.kt
 
 import test.*
 
 fun box(): String {
-    val inlined = test("K")
+    konst inlined = test("K")
     return same() + inlined()
 }

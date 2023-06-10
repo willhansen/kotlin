@@ -7,7 +7,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-const val DEBUG = false
+const konst DEBUG = false
 inline fun inlineFun(b: () -> Unit) {
     if (DEBUG) {
         inlineFunReal(b)

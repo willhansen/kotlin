@@ -30,11 +30,11 @@ abstract class AbstractResolvedConstructorDelegationCallsTests : AbstractResolve
     override fun buildCachedCallAtIndex(
         bindingContext: BindingContext, ktFile: KtFile, index: Int
     ): Pair<PsiElement?, ResolvedCall<out CallableDescriptor>?> {
-        val element = ktFile.findElementAt(index)
-        val constructor = element?.getNonStrictParentOfType<KtSecondaryConstructor>()!!
-        val delegationCall = constructor.getDelegationCall()
+        konst element = ktFile.findElementAt(index)
+        konst constructor = element?.getNonStrictParentOfType<KtSecondaryConstructor>()!!
+        konst delegationCall = constructor.getDelegationCall()
 
-        val cachedCall = delegationCall.getParentResolvedCall(bindingContext, strict = false)
+        konst cachedCall = delegationCall.getParentResolvedCall(bindingContext, strict = false)
         return Pair(delegationCall, cachedCall)
     }
 }

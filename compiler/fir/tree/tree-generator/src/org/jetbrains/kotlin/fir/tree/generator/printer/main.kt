@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.generators.util.GeneratorsFileUtil.GENERATED_MESSAGE
 import org.jetbrains.kotlin.util.SmartPrinter
 import java.io.File
 
-private val COPYRIGHT = File("license/COPYRIGHT_HEADER.txt").readText()
+private konst COPYRIGHT = File("license/COPYRIGHT_HEADER.txt").readText()
 
-const val VISITOR_PACKAGE = "org.jetbrains.kotlin.fir.visitors"
-const val BASE_PACKAGE = "org.jetbrains.kotlin.fir"
+const konst VISITOR_PACKAGE = "org.jetbrains.kotlin.fir.visitors"
+const konst BASE_PACKAGE = "org.jetbrains.kotlin.fir"
 
 fun generateElements(builder: AbstractFirTreeBuilder, generationPath: File): List<GeneratedFile> {
-    val generatedFiles = mutableListOf<GeneratedFile>()
+    konst generatedFiles = mutableListOf<GeneratedFile>()
     builder.elements.mapTo(generatedFiles) { it.generateCode(generationPath) }
     builder.elements.flatMap { it.allImplementations }.mapTo(generatedFiles) { it.generateCode(generationPath) }
     builder.elements.flatMap { it.allImplementations }.mapNotNull { it.builder }.mapTo(generatedFiles) { it.generateCode(generationPath) }

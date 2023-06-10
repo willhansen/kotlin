@@ -10,7 +10,7 @@ class Identifier() {
 
     companion object {
         fun init(isNullable : Boolean) : Identifier {
-            val id = Identifier()
+            konst id = Identifier()
             id.myNullable = isNullable
             return id
         }
@@ -18,6 +18,6 @@ class Identifier() {
 }
 
 fun box() : String {
-    val id = Identifier.init(true)
+    konst id = Identifier.init(true)
     return if (id.getValue() == false) return "OK" else "fail"
 }

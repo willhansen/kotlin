@@ -26,16 +26,16 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirDelegatedConstructorCallImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var argumentList: FirArgumentList,
     override var contextReceiverArguments: MutableOrEmptyList<FirExpression>,
     override var constructedTypeRef: FirTypeRef,
     override var dispatchReceiver: FirExpression,
     override var calleeReference: FirReference,
-    override val isThis: Boolean,
+    override konst isThis: Boolean,
 ) : FirDelegatedConstructorCall() {
-    override val isSuper: Boolean get() = !isThis
+    override konst isSuper: Boolean get() = !isThis
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotations.forEach { it.accept(visitor, data) }

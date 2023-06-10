@@ -1,6 +1,6 @@
 import kotlin.native.internal.*
 
-class C(val x: Int) {
+class C(konst x: Int) {
     fun bar(y: Int) = println(x + y)
 }
 

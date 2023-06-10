@@ -13,13 +13,13 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinTargetPreset
 import javax.inject.Inject
 
 abstract class KotlinAndroidTargetPreset @Inject constructor(
-    private val project: Project
+    private konst project: Project
 ) : KotlinTargetPreset<KotlinAndroidTarget> {
 
     override fun getName(): String = PRESET_NAME
 
     override fun createTarget(name: String): KotlinAndroidTarget {
-        val result = project.objects.newInstance(
+        konst result = project.objects.newInstance(
             KotlinAndroidTarget::class.java,
             name,
             project
@@ -39,6 +39,6 @@ abstract class KotlinAndroidTargetPreset @Inject constructor(
     internal var targetUnderConstruction: KotlinAndroidTarget? = null
 
     companion object {
-        const val PRESET_NAME = "android"
+        const konst PRESET_NAME = "android"
     }
 }

@@ -13,8 +13,8 @@ object Obj {
 }
 
 fun box() : String {
-    val klass = Obj.Inner::class.java
-    val cons = klass.getConstructors()!![0]
-    val inner = cons.newInstance(*(arrayOfNulls<String>(0) as Array<String>))
+    konst klass = Obj.Inner::class.java
+    konst cons = klass.getConstructors()!![0]
+    konst inner = cons.newInstance(*(arrayOfNulls<String>(0) as Array<String>))
     return "OK"
 }

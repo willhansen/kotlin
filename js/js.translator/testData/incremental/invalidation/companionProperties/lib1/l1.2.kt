@@ -1,7 +1,7 @@
 class MyClass {
     companion object {
-        val stringProperty = "-1"
-        val intProperty = 3
-        val pairProperty = -1 to 2
+        konst stringProperty = "-1"
+        konst intProperty = 3
+        konst pairProperty = -1 to 2
     }
 }

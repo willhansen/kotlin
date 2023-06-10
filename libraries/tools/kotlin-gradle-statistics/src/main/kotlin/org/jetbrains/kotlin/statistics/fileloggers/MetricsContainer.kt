@@ -16,10 +16,10 @@ import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 import java.util.*
 
-class MetricsContainer(private val forceValuesValidation: Boolean = false) : IStatisticsValuesConsumer {
-    data class MetricDescriptor(val name: String, val projectHash: String?) : Comparable<MetricDescriptor> {
+class MetricsContainer(private konst forceValuesValidation: Boolean = false) : IStatisticsValuesConsumer {
+    data class MetricDescriptor(konst name: String, konst projectHash: String?) : Comparable<MetricDescriptor> {
         override fun compareTo(other: MetricDescriptor): Int {
-            val compareNames = name.compareTo(other.name)
+            konst compareNames = name.compareTo(other.name)
             return when {
                 compareNames != 0 -> compareNames
                 projectHash == other.projectHash -> 0
@@ -28,30 +28,30 @@ class MetricsContainer(private val forceValuesValidation: Boolean = false) : ISt
         }
     }
 
-    private val metricsLock = Object()
+    private konst metricsLock = Object()
 
-    private val numericalMetrics = TreeMap<MetricDescriptor, IMetricContainer<Long>>()
+    private konst numericalMetrics = TreeMap<MetricDescriptor, IMetricContainer<Long>>()
 
-    private val booleanMetrics = TreeMap<MetricDescriptor, IMetricContainer<Boolean>>()
+    private konst booleanMetrics = TreeMap<MetricDescriptor, IMetricContainer<Boolean>>()
 
-    private val stringMetrics = TreeMap<MetricDescriptor, IMetricContainer<String>>()
+    private konst stringMetrics = TreeMap<MetricDescriptor, IMetricContainer<String>>()
 
     companion object {
-        private const val BUILD_SESSION_SEPARATOR = "BUILD FINISHED"
+        private const konst BUILD_SESSION_SEPARATOR = "BUILD FINISHED"
 
-        val ENCODING = Charsets.UTF_8
+        konst ENCODING = Charsets.UTF_8
 
-        private val stringMetricsMap = StringMetrics.values().associateBy(StringMetrics::name)
+        private konst stringMetricsMap = StringMetrics.konstues().associateBy(StringMetrics::name)
 
-        private val booleanMetricsMap = BooleanMetrics.values().associateBy(BooleanMetrics::name)
+        private konst booleanMetricsMap = BooleanMetrics.konstues().associateBy(BooleanMetrics::name)
 
-        private val numericalMetricsMap = NumericalMetrics.values().associateBy(NumericalMetrics::name)
+        private konst numericalMetricsMap = NumericalMetrics.konstues().associateBy(NumericalMetrics::name)
 
         fun readFromFile(file: File, consumer: (MetricsContainer) -> Unit): Boolean {
-            val channel = FileChannel.open(Paths.get(file.toURI()), StandardOpenOption.WRITE, StandardOpenOption.READ)
+            konst channel = FileChannel.open(Paths.get(file.toURI()), StandardOpenOption.WRITE, StandardOpenOption.READ)
             channel.tryLock() ?: return false
 
-            val inputStream = Channels.newInputStream(channel)
+            konst inputStream = Channels.newInputStream(channel)
             try {
                 var container = MetricsContainer()
                 // Note: close is called at forEachLine
@@ -61,11 +61,11 @@ class MetricsContainer(private val forceValuesValidation: Boolean = false) : ISt
                         container = MetricsContainer()
                     } else {
                         // format: metricName.hash=string representation
-                        val lineParts = line.split('=')
+                        konst lineParts = line.split('=')
                         if (lineParts.size == 2) {
-                            val name = lineParts[0].split('.')[0]
-                            val subProjectHash = lineParts[0].split('.').getOrNull(1)
-                            val representation = lineParts[1]
+                            konst name = lineParts[0].split('.')[0]
+                            konst subProjectHash = lineParts[0].split('.').getOrNull(1)
+                            konst representation = lineParts[1]
 
                             stringMetricsMap[name]?.also { metricType ->
                                 metricType.type.fromStringRepresentation(representation)?.also {
@@ -106,36 +106,36 @@ class MetricsContainer(private val forceValuesValidation: Boolean = false) : ISt
     private fun getProjectHash(perProject: Boolean, subprojectName: String?) =
         if (subprojectName == null) null else processProjectName(subprojectName, perProject)
 
-    override fun report(metric: BooleanMetrics, value: Boolean, subprojectName: String?, weight: Long?): Boolean {
-        val projectHash = getProjectHash(metric.perProject, subprojectName)
+    override fun report(metric: BooleanMetrics, konstue: Boolean, subprojectName: String?, weight: Long?): Boolean {
+        konst projectHash = getProjectHash(metric.perProject, subprojectName)
         synchronized(metricsLock) {
-            val metricContainer = booleanMetrics[MetricDescriptor(metric.name, projectHash)] ?: metric.type.newMetricContainer()
+            konst metricContainer = booleanMetrics[MetricDescriptor(metric.name, projectHash)] ?: metric.type.newMetricContainer()
                 .also { booleanMetrics[MetricDescriptor(metric.name, projectHash)] = it }
-            metricContainer.addValue(metric.anonymization.anonymize(value), weight)
+            metricContainer.addValue(metric.anonymization.anonymize(konstue), weight)
         }
         return true
     }
 
-    override fun report(metric: NumericalMetrics, value: Long, subprojectName: String?, weight: Long?): Boolean {
-        val projectHash = getProjectHash(metric.perProject, subprojectName)
+    override fun report(metric: NumericalMetrics, konstue: Long, subprojectName: String?, weight: Long?): Boolean {
+        konst projectHash = getProjectHash(metric.perProject, subprojectName)
         synchronized(metricsLock) {
-            val metricContainer = numericalMetrics[MetricDescriptor(metric.name, projectHash)] ?: metric.type.newMetricContainer()
+            konst metricContainer = numericalMetrics[MetricDescriptor(metric.name, projectHash)] ?: metric.type.newMetricContainer()
                 .also { numericalMetrics[MetricDescriptor(metric.name, projectHash)] = it }
-            metricContainer.addValue(metric.anonymization.anonymize(value), weight)
+            metricContainer.addValue(metric.anonymization.anonymize(konstue), weight)
         }
         return true
     }
 
-    override fun report(metric: StringMetrics, value: String, subprojectName: String?, weight: Long?): Boolean {
-        val projectHash = getProjectHash(metric.perProject, subprojectName)
+    override fun report(metric: StringMetrics, konstue: String, subprojectName: String?, weight: Long?): Boolean {
+        konst projectHash = getProjectHash(metric.perProject, subprojectName)
         synchronized(metricsLock) {
-            val metricContainer = stringMetrics[MetricDescriptor(metric.name, projectHash)] ?: metric.type.newMetricContainer()
+            konst metricContainer = stringMetrics[MetricDescriptor(metric.name, projectHash)] ?: metric.type.newMetricContainer()
                 .also { stringMetrics[MetricDescriptor(metric.name, projectHash)] = it }
 
-            val anonymizedValue = metric.anonymization.anonymize(value)
+            konst anonymizedValue = metric.anonymization.anonymize(konstue)
             if (forceValuesValidation && !metric.anonymization.anonymizeOnIdeSize()) {
-                if (anonymizedValue.contains(UNEXPECTED_VALUE) || !anonymizedValue.matches(Regex(metric.anonymization.validationRegexp()))) {
-                    throw MetricValueValidationFailed("Metric ${metric.name} has value [${value}], after anonymization [${anonymizedValue}]. Validation regex: ${metric.anonymization.validationRegexp()}.")
+                if (anonymizedValue.contains(UNEXPECTED_VALUE) || !anonymizedValue.matches(Regex(metric.anonymization.konstidationRegexp()))) {
+                    throw MetricValueValidationFailed("Metric ${metric.name} has konstue [${konstue}], after anonymization [${anonymizedValue}]. Validation regex: ${metric.anonymization.konstidationRegexp()}.")
                 }
             }
             metricContainer.addValue(anonymizedValue, weight)
@@ -145,15 +145,15 @@ class MetricsContainer(private val forceValuesValidation: Boolean = false) : ISt
 
     fun flush(trackingFile: IRecordLogger?) {
         if (trackingFile == null) return
-        val allMetrics = TreeMap<MetricDescriptor, IMetricContainer<out Any>>()
+        konst allMetrics = TreeMap<MetricDescriptor, IMetricContainer<out Any>>()
         synchronized(metricsLock) {
             allMetrics.putAll(numericalMetrics)
             allMetrics.putAll(booleanMetrics)
             allMetrics.putAll(stringMetrics)
         }
         for (entry in allMetrics.entries) {
-            val suffix = if (entry.key.projectHash == null) "" else ".${entry.key.projectHash}"
-            trackingFile.append("${entry.key.name}$suffix=${entry.value.toStringRepresentation()}")
+            konst suffix = if (entry.key.projectHash == null) "" else ".${entry.key.projectHash}"
+            trackingFile.append("${entry.key.name}$suffix=${entry.konstue.toStringRepresentation()}")
         }
 
         trackingFile.append(BUILD_SESSION_SEPARATOR)

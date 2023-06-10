@@ -45,13 +45,13 @@ interface NpmApi : Serializable {
 }
 
 data class NpmEnvironment(
-    val rootPackageDir: File,
-    val nodeExecutable: String,
-    val isWindows: Boolean,
-    val packageManager: NpmApi
+    konst rootPackageDir: File,
+    konst nodeExecutable: String,
+    konst isWindows: Boolean,
+    konst packageManager: NpmApi
 ) : Serializable
 
-internal val NodeJsEnv.asNpmEnvironment
+internal konst NodeJsEnv.asNpmEnvironment
     get() = NpmEnvironment(
         rootPackageDir,
         nodeExecutable,
@@ -60,13 +60,13 @@ internal val NodeJsEnv.asNpmEnvironment
     )
 
 data class YarnEnvironment(
-    val executable: String,
-    val standalone: Boolean,
-    val ignoreScripts: Boolean,
-    val yarnResolutions: List<YarnResolution>
+    konst executable: String,
+    konst standalone: Boolean,
+    konst ignoreScripts: Boolean,
+    konst yarnResolutions: List<YarnResolution>
 ) : Serializable
 
-internal val YarnEnv.asYarnEnvironment
+internal konst YarnEnv.asYarnEnvironment
     get() = YarnEnvironment(
         executable,
         standalone,

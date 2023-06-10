@@ -12,13 +12,13 @@
 
 // FILE: funInterfaceConstructorEquality.kt
 
-val ks1: (() -> String) -> KSupplier<String> =
+konst ks1: (() -> String) -> KSupplier<String> =
     ::KSupplier
 
-val ks2: (() -> String) -> KSupplier<String> =
+konst ks2: (() -> String) -> KSupplier<String> =
     ::KSupplier
 
-val kn1: (() -> Number) -> KSupplier<Number> =
+konst kn1: (() -> Number) -> KSupplier<Number> =
     ::KSupplier
 
 
@@ -47,7 +47,7 @@ fun box(): String {
     checkEqual("ks1 == ks3 (different file, same SAM type)", ks1, ks3)
     checkEqual("ks1 == kn1 (same file, same SAM interface, different type arguments)", ks1, kn1)
 
-    val kr: (() -> Unit) -> KRunnable = ::KRunnable
+    konst kr: (() -> Unit) -> KRunnable = ::KRunnable
     checkNotEqual("ks1 != kr (different fun interfaces)", ks1, kr)
 
     return "OK"
@@ -59,5 +59,5 @@ fun interface KSupplier<T> {
     fun get(): T
 }
 
-val ks3: (() -> String) -> KSupplier<String> =
+konst ks3: (() -> String) -> KSupplier<String> =
     ::KSupplier

@@ -28,7 +28,7 @@ class KtScriptElementType(debugName: String) : KtStubElementType<KotlinScriptStu
     }
 
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<PsiElement>): KotlinScriptStub {
-        val fqName = dataStream.readName()
+        konst fqName = dataStream.readName()
         return KotlinScriptStubImpl(parentStub, fqName)
     }
 

@@ -20,20 +20,20 @@ class X {
 // MODULE: mainLib(lib)
 // FILE: mainLib.kt
 
-val x = X()
+konst x = X()
 
 fun lib(): String {
 
-    val a = qux
-    val b = x.bar
-    qux = "new global value"
-    x.bar = "new member value"
+    konst a = qux
+    konst b = x.bar
+    qux = "new global konstue"
+    x.bar = "new member konstue"
 
     return when {
         a != "initialized global" -> "fail 1"
         b != "initialized member" -> "fail 2"
-        qux != "new global value" -> "fail 3"
-        x.bar != "new member value" -> "fail 4"
+        qux != "new global konstue" -> "fail 3"
+        x.bar != "new member konstue" -> "fail 4"
 
         else -> "OK"
     }

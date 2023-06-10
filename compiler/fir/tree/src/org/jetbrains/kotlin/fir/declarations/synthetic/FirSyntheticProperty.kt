@@ -21,16 +21,16 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 class FirSyntheticProperty(
-    override val moduleData: FirModuleData,
-    override val name: Name,
-    override val isVar: Boolean,
-    override val symbol: FirSyntheticPropertySymbol,
-    override val status: FirDeclarationStatus,
+    override konst moduleData: FirModuleData,
+    override konst name: Name,
+    override konst isVar: Boolean,
+    override konst symbol: FirSyntheticPropertySymbol,
+    override konst status: FirDeclarationStatus,
     resolvePhase: FirResolvePhase,
-    override val getter: FirSyntheticPropertyAccessor,
-    override val setter: FirSyntheticPropertyAccessor? = null,
-    override val backingField: FirBackingField? = null,
-    override val deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
+    override konst getter: FirSyntheticPropertyAccessor,
+    override konst setter: FirSyntheticPropertyAccessor? = null,
+    override konst backingField: FirBackingField? = null,
+    override konst deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
 ) : FirProperty() {
     init {
         symbol.bind(this)
@@ -41,53 +41,53 @@ class FirSyntheticProperty(
         this.resolveState = resolvePhase.asResolveState()
     }
 
-    override val returnTypeRef: FirTypeRef
+    override konst returnTypeRef: FirTypeRef
         get() = getter.returnTypeRef
 
-    override val dispatchReceiverType: ConeSimpleKotlinType?
+    override konst dispatchReceiverType: ConeSimpleKotlinType?
         get() = getter.dispatchReceiverType
 
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = null
 
-    override val origin: FirDeclarationOrigin
+    override konst origin: FirDeclarationOrigin
         get() = FirDeclarationOrigin.Synthetic
 
-    override val initializer: FirExpression?
+    override konst initializer: FirExpression?
         get() = null
 
-    override val delegate: FirExpression?
+    override konst delegate: FirExpression?
         get() = null
 
-    override val delegateFieldSymbol: FirDelegateFieldSymbol?
+    override konst delegateFieldSymbol: FirDelegateFieldSymbol?
         get() = null
 
-    override val isLocal: Boolean
+    override konst isLocal: Boolean
         get() = false
 
-    override val receiverParameter: FirReceiverParameter?
+    override konst receiverParameter: FirReceiverParameter?
         get() = null
 
-    override val isVal: Boolean
+    override konst isVal: Boolean
         get() = !isVar
 
-    override val annotations: List<FirAnnotation>
+    override konst annotations: List<FirAnnotation>
         get() = emptyList()
 
-    override val typeParameters: List<FirTypeParameter>
+    override konst typeParameters: List<FirTypeParameter>
         get() = emptyList()
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = null
 
-    override val controlFlowGraphReference: FirControlFlowGraphReference? = null
+    override konst controlFlowGraphReference: FirControlFlowGraphReference? = null
 
-    override val attributes: FirDeclarationAttributes = FirDeclarationAttributes()
+    override konst attributes: FirDeclarationAttributes = FirDeclarationAttributes()
 
-    override val bodyResolveState: FirPropertyBodyResolveState
+    override konst bodyResolveState: FirPropertyBodyResolveState
         get() = FirPropertyBodyResolveState.EVERYTHING_RESOLVED
 
-    override val contextReceivers: List<FirContextReceiver>
+    override konst contextReceivers: List<FirContextReceiver>
         get() = emptyList()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

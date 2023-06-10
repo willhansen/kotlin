@@ -1,23 +1,23 @@
-class X(val ok: String) {
+class X(konst ok: String) {
     fun y(): String = ok
 }
 
 fun box(): String {
-    val x = X("OK")
-    val y = x::y
+    konst x = X("OK")
+    konst y = x::y
     return y()
 }
 
 //fun y(): String = "OK"
 //
 //fun box(): String {
-//    val y = ::y
+//    konst y = ::y
 //    return y.invoke()
 //}
 
-//val x = "OK"
+//konst x = "OK"
 //
 //fun box(): String {
-//    val x = ::x
+//    konst x = ::x
 //    return x.get()
 //}

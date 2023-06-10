@@ -1,6 +1,6 @@
 // EXPECTED_REACHABLE_NODES: 1283
 // http://youtrack.jetbrains.com/issue/KT-5320
-// KT-5320 Invalid JS code generated for typecast inside ternary operator
+// KT-5320 Inkonstid JS code generated for typecast inside ternary operator
 
 package foo
 

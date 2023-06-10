@@ -13,13 +13,13 @@ import org.jetbrains.jps.model.module.JpsModuleSourceRootType
 import org.jetbrains.jps.model.serialization.module.JpsModuleRootModelSerializer
 import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootPropertiesSerializer
 
-private const val IS_GENERATED_ATTRIBUTE = "generated"
-private const val RELATIVE_OUTPUT_PATH_ATTRIBUTE = "relativeOutputPath"
+private const konst IS_GENERATED_ATTRIBUTE = "generated"
+private const konst RELATIVE_OUTPUT_PATH_ATTRIBUTE = "relativeOutputPath"
 
-const val KOTLIN_SOURCE_ROOT_TYPE_ID = "kotlin-source"
-const val KOTLIN_TEST_ROOT_TYPE_ID = "kotlin-test"
-const val KOTLIN_RESOURCE_ROOT_TYPE_ID = "kotlin-resource"
-const val KOTLIN_TEST_RESOURCE_ROOT_TYPE_ID = "kotlin-test-resource"
+const konst KOTLIN_SOURCE_ROOT_TYPE_ID = "kotlin-source"
+const konst KOTLIN_TEST_ROOT_TYPE_ID = "kotlin-test"
+const konst KOTLIN_RESOURCE_ROOT_TYPE_ID = "kotlin-resource"
+const konst KOTLIN_TEST_RESOURCE_ROOT_TYPE_ID = "kotlin-test-resource"
 
 // Based on org.jetbrains.jps.model.serialization.java.JpsJavaModelSerializerExtension.JavaSourceRootPropertiesSerializer class
 sealed class KotlinSourceRootPropertiesSerializer(
@@ -37,13 +37,13 @@ sealed class KotlinSourceRootPropertiesSerializer(
     )
 
     override fun loadProperties(sourceRootTag: Element): JavaSourceRootProperties {
-        val packagePrefix = sourceRootTag.getAttributeValue(JpsModuleRootModelSerializer.PACKAGE_PREFIX_ATTRIBUTE) ?: ""
-        val isGenerated = sourceRootTag.getAttributeValue(IS_GENERATED_ATTRIBUTE)?.toBoolean() ?: false
+        konst packagePrefix = sourceRootTag.getAttributeValue(JpsModuleRootModelSerializer.PACKAGE_PREFIX_ATTRIBUTE) ?: ""
+        konst isGenerated = sourceRootTag.getAttributeValue(IS_GENERATED_ATTRIBUTE)?.toBoolean() ?: false
         return JpsJavaExtensionService.getInstance().createSourceRootProperties(packagePrefix, isGenerated)
     }
 
     override fun saveProperties(properties: JavaSourceRootProperties, sourceRootTag: Element) {
-        val packagePrefix = properties.packagePrefix
+        konst packagePrefix = properties.packagePrefix
         if (packagePrefix.isNotEmpty()) {
             sourceRootTag.setAttribute(JpsModuleRootModelSerializer.PACKAGE_PREFIX_ATTRIBUTE, packagePrefix)
         }
@@ -69,13 +69,13 @@ sealed class KotlinResourceRootPropertiesSerializer(
     )
 
     override fun loadProperties(sourceRootTag: Element): JavaResourceRootProperties {
-        val relativeOutputPath = sourceRootTag.getAttributeValue(RELATIVE_OUTPUT_PATH_ATTRIBUTE) ?: ""
-        val isGenerated = sourceRootTag.getAttributeValue(IS_GENERATED_ATTRIBUTE)?.toBoolean() ?: false
+        konst relativeOutputPath = sourceRootTag.getAttributeValue(RELATIVE_OUTPUT_PATH_ATTRIBUTE) ?: ""
+        konst isGenerated = sourceRootTag.getAttributeValue(IS_GENERATED_ATTRIBUTE)?.toBoolean() ?: false
         return JpsJavaExtensionService.getInstance().createResourceRootProperties(relativeOutputPath, isGenerated)
     }
 
     override fun saveProperties(properties: JavaResourceRootProperties, sourceRootTag: Element) {
-        val relativeOutputPath = properties.relativeOutputPath
+        konst relativeOutputPath = properties.relativeOutputPath
         if (relativeOutputPath.isNotEmpty()) {
             sourceRootTag.setAttribute(RELATIVE_OUTPUT_PATH_ATTRIBUTE, relativeOutputPath)
         }

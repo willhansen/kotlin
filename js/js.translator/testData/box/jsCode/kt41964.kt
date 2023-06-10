@@ -29,10 +29,10 @@ fun keep() {
 }
 
 fun box(): String {
-    val a = test1("first")
+    konst a = test1("first")
     if (a != "first") return "fail1: $a"
 
-    val b = test2("second", 31)
+    konst b = test2("second", 31)
     if (b != "second31") return "fail2: $b"
 
     keep()

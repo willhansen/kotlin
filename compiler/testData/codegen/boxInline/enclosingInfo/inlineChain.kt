@@ -12,7 +12,7 @@ inline fun test(crossinline z: () -> String) = { z() }
 import test.*
 
 fun box(): String {
-    val res = call {
+    konst res = call {
         test { "OK" }
     }
 
@@ -22,7 +22,7 @@ fun box(): String {
     var enclosingClass = res.javaClass.enclosingClass
     if (enclosingClass?.name != "_2Kt") return "fail 2: ${enclosingClass?.name}"
 
-    val res2 = call {
+    konst res2 = call {
         call {
             test { "OK" }
         }

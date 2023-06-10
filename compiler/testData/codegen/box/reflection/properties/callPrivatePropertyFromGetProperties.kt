@@ -6,10 +6,10 @@ import kotlin.reflect.KProperty1
 import kotlin.reflect.full.*
 import kotlin.reflect.jvm.isAccessible
 
-class K(private val value: String)
+class K(private konst konstue: String)
 
 fun box(): String {
-    val p = K::class.memberProperties.single() as KProperty1<K, String>
+    konst p = K::class.memberProperties.single() as KProperty1<K, String>
 
     try {
         return p.get(K("Fail: private property should not be accessible by default"))

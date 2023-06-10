@@ -22,12 +22,12 @@ class A() {
         return 0
     }
 
-    operator fun set(i: Int, value: Int) {
+    operator fun set(i: Int, konstue: Int) {
         c2++
     }
 }
 
-val a: A = A()
+konst a: A = A()
     get() {
         c0++
         return field

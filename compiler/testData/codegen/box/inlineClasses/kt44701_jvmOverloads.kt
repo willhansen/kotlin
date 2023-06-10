@@ -5,6 +5,6 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Location @JvmOverloads constructor(val value: String? = "OK")
+konstue class Location @JvmOverloads constructor(konst konstue: String? = "OK")
 
-fun box(): String = Location().value!!
+fun box(): String = Location().konstue!!

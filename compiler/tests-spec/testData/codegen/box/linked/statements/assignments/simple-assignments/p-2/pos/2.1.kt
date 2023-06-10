@@ -10,15 +10,15 @@
  */
 
 
-val valToSet = 5
+konst konstToSet = 5
 
 class C() {
     var counter = 0
 }
 
 fun box(): String {
-    val c = C()
-    c.counter = valToSet
-    if (c.counter == valToSet) return "OK"
+    konst c = C()
+    c.counter = konstToSet
+    if (c.counter == konstToSet) return "OK"
     return "NOK"
 }

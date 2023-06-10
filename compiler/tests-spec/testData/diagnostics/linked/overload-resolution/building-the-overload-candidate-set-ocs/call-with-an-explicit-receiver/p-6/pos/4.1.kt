@@ -24,12 +24,12 @@ interface Marker {
 
 // TESTCASE NUMBER: 1
 class Case1 {
-    val foo: Int = 1
+    konst foo: Int = 1
 }
 
 fun case1() {
     Case1().<!DEBUG_INFO_CALL("fqName: tests.diag.invoke; typeCall: variable&invoke")!>foo()<!>
-    val a = Case1()
+    konst a = Case1()
     a.<!DEBUG_INFO_CALL("fqName: tests.diag.invoke; typeCall: variable&invoke")!>foo()<!>
     var b = Case1()
     b.<!DEBUG_INFO_CALL("fqName: tests.diag.invoke; typeCall: variable&invoke")!>foo()<!>
@@ -37,13 +37,13 @@ fun case1() {
 
 // TESTCASE NUMBER: 2
 class Case2 {
-    val foo: Int = 1
+    konst foo: Int = 1
     fun foo(): Int = 1
 }
 
 fun case2() {
     Case2().<!DEBUG_INFO_CALL("fqName: tests.diag.Case2.foo; typeCall: function")!>foo()<!>
-    val a = Case2()
+    konst a = Case2()
     a.<!DEBUG_INFO_CALL("fqName: tests.diag.Case2.foo; typeCall: function")!>foo()<!>
     var b = Case2()
     b.<!DEBUG_INFO_CALL("fqName: tests.diag.Case2.foo; typeCall: function")!>foo()<!>
@@ -51,7 +51,7 @@ fun case2() {
 
 // TESTCASE NUMBER: 3
 class Case3() {
-    val foo = object : Marker {}
+    konst foo = object : Marker {}
     fun foo(): Int = 1
 
     fun f() {
@@ -61,7 +61,7 @@ class Case3() {
 
 fun case3() {
     Case3().<!DEBUG_INFO_CALL("fqName: tests.diag.Case3.foo; typeCall: function")!>foo()<!>
-    val a = Case3()
+    konst a = Case3()
     a.<!DEBUG_INFO_CALL("fqName: tests.diag.Case3.foo; typeCall: function")!>foo()<!>
     var b = Case3()
     b.<!DEBUG_INFO_CALL("fqName: tests.diag.Case3.foo; typeCall: function")!>foo()<!>
@@ -69,7 +69,7 @@ fun case3() {
 
 // TESTCASE NUMBER: 4
 class Case4() {
-    val foo = object : Marker {}
+    konst foo = object : Marker {}
 
     fun f() {
        this.<!DEBUG_INFO_CALL("fqName: tests.diag.Marker.invoke; typeCall: variable&invoke")!>foo()<!>
@@ -78,7 +78,7 @@ class Case4() {
 
 fun case4() {
     Case4().<!DEBUG_INFO_CALL("fqName: tests.diag.Marker.invoke; typeCall: variable&invoke")!>foo()<!>
-    val a = Case4()
+    konst a = Case4()
     a.<!DEBUG_INFO_CALL("fqName: tests.diag.Marker.invoke; typeCall: variable&invoke")!>foo()<!>
     var b = Case4()
     b.<!DEBUG_INFO_CALL("fqName: tests.diag.Marker.invoke; typeCall: variable&invoke")!>foo()<!>
@@ -99,7 +99,7 @@ class Case5() {
 
 fun case5() {
     Case5().<!DEBUG_INFO_CALL("fqName: tests.diag.Case5.foo; typeCall: function")!>foo()<!>
-    val a = Case5()
+    konst a = Case5()
     a.<!DEBUG_INFO_CALL("fqName: tests.diag.Case5.foo; typeCall: function")!>foo()<!>
 
     var b = Case5()

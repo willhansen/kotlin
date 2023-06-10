@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.fir.symbols.ConeClassLikeLookupTag
 import org.jetbrains.kotlin.name.ClassId
 
 class ConeClassLookupTagWithFixedSymbol(
-    override val classId: ClassId,
-    val symbol: FirClassSymbol<*>
+    override konst classId: ClassId,
+    konst symbol: FirClassSymbol<*>
 ) : ConeClassLikeLookupTag() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

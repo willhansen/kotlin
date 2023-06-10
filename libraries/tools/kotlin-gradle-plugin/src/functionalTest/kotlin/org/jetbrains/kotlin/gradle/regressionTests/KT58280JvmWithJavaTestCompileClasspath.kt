@@ -33,12 +33,12 @@ class KT58280JvmWithJavaTestCompileClasspath {
      */
     @Test
     fun `test - KT58280 - jvmWithJava Target does not add main classes to test compile classpath`() {
-        val project = buildProject()
+        konst project = buildProject()
         project.plugins.apply("java-library")
         project.applyKotlinJvmPlugin()
         project.repositories.mavenLocal()
         project.repositories.mavenCentralCacheRedirector()
-        val kotlin = project.kotlinJvmExtension
+        konst kotlin = project.kotlinJvmExtension
 
         /* This kind of association is not required for java: java plugin handles this separately */
         kotlin.target.compilations.test.internal.configurations.compileDependencyConfiguration.resolvedConfiguration.files.forEach { file ->

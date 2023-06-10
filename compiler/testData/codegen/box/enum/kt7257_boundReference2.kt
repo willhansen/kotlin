@@ -1,16 +1,16 @@
 enum class X {
     B {
 
-        override val value = "OK"
+        override konst konstue = "OK"
 
-        val bmr = B::value.get()
+        konst bmr = B::konstue.get()
 
         override fun foo(): String {
             return bmr
         }
     };
 
-    abstract val value: String
+    abstract konst konstue: String
 
     abstract fun foo(): String
 }

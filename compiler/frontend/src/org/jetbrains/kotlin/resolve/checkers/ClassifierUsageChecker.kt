@@ -35,10 +35,10 @@ interface ClassifierUsageChecker {
 }
 
 class ClassifierUsageCheckerContext(
-    override val trace: BindingTrace,
-    override val languageVersionSettings: LanguageVersionSettings,
-    override val deprecationResolver: DeprecationResolver,
-    override val moduleDescriptor: ModuleDescriptor
+    override konst trace: BindingTrace,
+    override konst languageVersionSettings: LanguageVersionSettings,
+    override konst deprecationResolver: DeprecationResolver,
+    override konst moduleDescriptor: ModuleDescriptor
 ) : CheckerContext
 
 
@@ -47,7 +47,7 @@ fun checkClassifierUsages(
     checkers: Iterable<ClassifierUsageChecker>,
     context: ClassifierUsageCheckerContext
 ) {
-    val visitor = object : KtTreeVisitorVoid() {
+    konst visitor = object : KtTreeVisitorVoid() {
         override fun visitReferenceExpression(expression: KtReferenceExpression) {
             super.visitReferenceExpression(expression)
 
@@ -57,7 +57,7 @@ fun checkClassifierUsages(
                 return
             }
 
-            val targets = getReferencedClassifiers(expression)
+            konst targets = getReferencedClassifiers(expression)
             for (target in targets) {
                 runCheckersWithTarget(target, expression)
             }
@@ -66,9 +66,9 @@ fun checkClassifierUsages(
         override fun visitFunctionType(type: KtFunctionType) {
             super.visitFunctionType(type)
 
-            val kotlinType = context.trace.get(BindingContext.TYPE, type.parent as? KtTypeReference ?: return)
+            konst kotlinType = context.trace.get(BindingContext.TYPE, type.parent as? KtTypeReference ?: return)
             if (kotlinType != null) {
-                val descriptor = kotlinType.constructor.declarationDescriptor
+                konst descriptor = kotlinType.constructor.declarationDescriptor
                 if (descriptor is ClassifierDescriptor) {
                     runCheckersWithTarget(descriptor, type)
                 }
@@ -82,7 +82,7 @@ fun checkClassifierUsages(
         }
 
         private fun getReferencedClassifiers(expression: KtReferenceExpression): List<ClassifierDescriptor> {
-            val target = context.trace.get(BindingContext.REFERENCE_TARGET, expression)
+            konst target = context.trace.get(BindingContext.REFERENCE_TARGET, expression)
 
             return when (target) {
                 is ClassifierDescriptor ->
@@ -94,8 +94,8 @@ fun checkClassifierUsages(
                 is ClassConstructorDescriptor -> listOf(target.constructedClass)
 
                 is FakeCallableDescriptorForTypeAliasObject -> {
-                    val referencedObject = target.getReferencedObject()
-                    val referencedTypeAlias = target.typeAliasDescriptor
+                    konst referencedObject = target.getReferencedObject()
+                    konst referencedTypeAlias = target.typeAliasDescriptor
                     if (referencedObject != referencedTypeAlias.classDescriptor)
                         listOf(referencedObject, referencedTypeAlias)
                     else
@@ -108,9 +108,9 @@ fun checkClassifierUsages(
                     // to report if there's something wrong with the class. We characterize this case below by the following properties:
                     // 1) Exactly one of the references is a classifier
                     // 2) All references refer to the same source element, i.e. their source is the same
-                    val targets = context.trace.get(BindingContext.AMBIGUOUS_REFERENCE_TARGET, expression) ?: return emptyList()
+                    konst targets = context.trace.get(BindingContext.AMBIGUOUS_REFERENCE_TARGET, expression) ?: return emptyList()
                     if (targets.groupBy { (it as? DeclarationDescriptorWithSource)?.source }.size != 1) return emptyList()
-                    val targetClassifiers = targets.filterIsInstance<ClassifierDescriptor>()
+                    konst targetClassifiers = targets.filterIsInstance<ClassifierDescriptor>()
                     if (targetClassifiers.size == 1) targetClassifiers else emptyList()
                 }
             }

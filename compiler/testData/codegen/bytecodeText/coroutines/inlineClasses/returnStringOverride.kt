@@ -1,4 +1,4 @@
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 interface I {
     suspend fun returnAny(): Any

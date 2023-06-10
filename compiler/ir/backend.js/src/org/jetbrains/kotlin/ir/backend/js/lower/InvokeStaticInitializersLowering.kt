@@ -15,21 +15,21 @@ import org.jetbrains.kotlin.ir.expressions.IrStatementContainer
 import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
 import org.jetbrains.kotlin.ir.util.*
 
-class InvokeStaticInitializersLowering(val context: JsIrBackendContext) : BodyLoweringPass {
+class InvokeStaticInitializersLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         if (container !is IrConstructor) return
         if (container.parentClassOrNull?.isEnumClass == true) return
 
-        val irClass = container.constructedClass
+        konst irClass = container.constructedClass
         if (irClass.isEffectivelyExternal()) {
             return
         }
 
-        val companionObject = irClass.companionObject() ?: return
+        konst companionObject = irClass.companionObject() ?: return
 
-        val instance = context.mapping.objectToGetInstanceFunction[companionObject] ?: return
+        konst instance = context.mapping.objectToGetInstanceFunction[companionObject] ?: return
 
-        val getInstanceCall = IrCallImpl(
+        konst getInstanceCall = IrCallImpl(
             irClass.startOffset,
             irClass.endOffset,
             context.irBuiltIns.unitType,

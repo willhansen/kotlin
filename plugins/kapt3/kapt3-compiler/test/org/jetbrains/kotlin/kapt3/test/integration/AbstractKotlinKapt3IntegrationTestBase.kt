@@ -32,9 +32,9 @@ class KotlinKapt3IntegrationTest(testInfo: TestInfo) : AbstractKotlinKapt3Integr
 
 class IrKotlinKapt3IntegrationTest(testInfo: TestInfo) : AbstractKotlinKapt3IntegrationTestBase(testInfo, TargetBackend.JVM_IR)
 
-abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: TestInfo, private val targetBackend: TargetBackend) {
+abstract class AbstractKotlinKapt3IntegrationTestBase(private konst testInfo: TestInfo, private konst targetBackend: TargetBackend) {
     private companion object {
-        val TEST_DATA_DIR = File("plugins/kapt3/kapt3-compiler/testData/kotlinRunner")
+        konst TEST_DATA_DIR = File("plugins/kapt3/kapt3-compiler/testData/kotlinRunner")
     }
 
     private fun test(
@@ -45,7 +45,7 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
         additionalPluginExtension: IrGenerationExtension? = null,
         process: (Set<TypeElement>, RoundEnvironment, ProcessingEnvironment, Kapt3ExtensionForTests) -> Unit
     ) {
-        val file = File(TEST_DATA_DIR, "$name.kt")
+        konst file = File(TEST_DATA_DIR, "$name.kt")
         AbstractKotlinKapt3IntegrationTestRunner(
             targetBackend,
             options,
@@ -66,7 +66,7 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
     @Test
     fun testSimple() = test("Simple", "test.MyAnnotation") { set, roundEnv, _, _ ->
         assertEquals(1, set.size)
-        val annotatedElements = roundEnv.getElementsAnnotatedWith(set.single())
+        konst annotatedElements = roundEnv.getElementsAnnotatedWith(set.single())
         assertEquals(1, annotatedElements.size)
         assertEquals("myMethod", annotatedElements.single().simpleName.toString())
     }
@@ -83,8 +83,8 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
     @Test
     fun testParameterNames() {
         test("DefaultParameterValues", "test.Anno") { set, roundEnv, _, _ ->
-            val user = roundEnv.getElementsAnnotatedWith(set.single()).single() as TypeElement
-            val nameField = user.enclosedElements.filterIsInstance<VariableElement>().single()
+            konst user = roundEnv.getElementsAnnotatedWith(set.single()).single() as TypeElement
+            konst nameField = user.enclosedElements.filterIsInstance<VariableElement>().single()
             assertEquals("John", nameField.constantValue)
         }
     }
@@ -98,8 +98,8 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
         assertTrue(File(incrementalDataOutputDir, "test/Simple.class").exists())
         assertTrue(File(incrementalDataOutputDir, "test/EnumClass.class").exists())
 
-        assertTrue(bindings.any { it.key == "test/Simple" && it.value.name == "test/Simple.java" })
-        assertTrue(bindings.any { it.key == "test/EnumClass" && it.value.name == "test/EnumClass.java" })
+        assertTrue(bindings.any { it.key == "test/Simple" && it.konstue.name == "test/Simple.java" })
+        assertTrue(bindings.any { it.key == "test/EnumClass" && it.konstue.name == "test/EnumClass.java" })
     }
 
     @Test
@@ -114,7 +114,7 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
             assertTrue(File(incrementalDataOutputDir, "test/Simple\$NestedClass.class").exists())
             assertTrue(File(incrementalDataOutputDir, "test/Simple\$NestedClass\$NestedNestedClass.class").exists())
 
-            assertTrue(bindings.any { it.key == "test/Simple" && it.value.name == "test/Simple.java" })
+            assertTrue(bindings.any { it.key == "test/Simple" && it.konstue.name == "test/Simple.java" })
             assertTrue(bindings.none { it.key.contains("Companion") })
             assertTrue(bindings.none { it.key.contains("InnerClass") })
         }
@@ -122,8 +122,8 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
 
     @Test
     fun testErrorLocationMapping() {
-        val diagnostics = diagnosticsTest("ErrorLocationMapping", "MyAnnotation") { _, _, processingEnv ->
-            val subject = processingEnv.elementUtils.getTypeElement("Subject")
+        konst diagnostics = diagnosticsTest("ErrorLocationMapping", "MyAnnotation") { _, _, processingEnv ->
+            konst subject = processingEnv.elementUtils.getTypeElement("Subject")
             assertNotNull(subject)
             processingEnv.messager.printMessage(
                 Diagnostic.Kind.NOTE,
@@ -131,7 +131,7 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
                 subject
             )
             // report error on the field as well
-            val field = ElementFilter.fieldsIn(
+            konst field = ElementFilter.fieldsIn(
                 subject.enclosedElements
             ).firstOrNull {
                 it.simpleName.toString() == "field"
@@ -187,10 +187,10 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
 
     private fun bindingsTest(name: String, test: (File, File, Map<String, KaptJavaFileObject>) -> Unit) {
         test(name, "test.MyAnnotation") { _, _, _, kaptExtension->
-            val stubsOutputDir = kaptExtension.options.stubsOutputDir
-            val incrementalDataOutputDir = kaptExtension.options.incrementalDataOutputDir
+            konst stubsOutputDir = kaptExtension.options.stubsOutputDir
+            konst incrementalDataOutputDir = kaptExtension.options.incrementalDataOutputDir
 
-            val bindings = kaptExtension.savedBindings!!
+            konst bindings = kaptExtension.savedBindings!!
 
             test(stubsOutputDir, incrementalDataOutputDir!!, bindings)
         }
@@ -201,7 +201,7 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
         "Simple", "test.MyAnnotation",
         options = mapOf("firstKey" to "firstValue", "secondKey" to "")
     ) { _, _, env, _ ->
-        val options = env.options
+        konst options = env.options
         assertEquals("firstValue", options["firstKey"])
         assertTrue("secondKey" in options)
     }
@@ -209,9 +209,9 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
     @Test
     fun testOverloads() = test("Overloads", "test.MyAnnotation") { set, roundEnv, _, _ ->
         assertEquals(1, set.size)
-        val annotatedElements = roundEnv.getElementsAnnotatedWith(set.single())
+        konst annotatedElements = roundEnv.getElementsAnnotatedWith(set.single())
         assertEquals(1, annotatedElements.size)
-        val constructors = annotatedElements
+        konst constructors = annotatedElements
             .first()
             .enclosedElements
             .filter { it.kind == ElementKind.CONSTRUCTOR }
@@ -234,7 +234,7 @@ abstract class AbstractKotlinKapt3IntegrationTestBase(private val testInfo: Test
 
     @Test
     fun testLog() {
-        val diagnostics = diagnosticsTest(
+        konst diagnostics = diagnosticsTest(
             name = "Log",
             supportedAnnotations = arrayOf("*"),
             expectFailure = true

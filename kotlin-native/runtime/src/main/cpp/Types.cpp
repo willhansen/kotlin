@@ -37,7 +37,7 @@ KBoolean IsSubtype(const TypeInfo* obj_type_info, const TypeInfo* type_info) {
 }
 
 KBoolean IsSubclassFast(const TypeInfo* obj_type_info, int32_t lo, int32_t hi) {
-  // Super type's interval should contain our interval.
+  // Super type's interkonst should contain our interkonst.
   return obj_type_info->classId_ >= lo && obj_type_info->classId_ <= hi;
 }
 

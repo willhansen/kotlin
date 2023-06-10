@@ -2,26 +2,26 @@
 
 package kt352
 
-val f : (Any) -> Unit = {  <!EXPECTED_PARAMETERS_NUMBER_MISMATCH!><!>-> }  //type mismatch
+konst f : (Any) -> Unit = {  <!EXPECTED_PARAMETERS_NUMBER_MISMATCH!><!>-> }  //type mismatch
 
 fun foo() {
-    val f : (Any) -> Unit = { <!EXPECTED_PARAMETERS_NUMBER_MISMATCH!><!>-> }  //!!! no error
+    konst f : (Any) -> Unit = { <!EXPECTED_PARAMETERS_NUMBER_MISMATCH!><!>-> }  //!!! no error
 }
 
 class A() {
-    val f : (Any) -> Unit = { <!EXPECTED_PARAMETERS_NUMBER_MISMATCH!><!>-> }  //type mismatch
+    konst f : (Any) -> Unit = { <!EXPECTED_PARAMETERS_NUMBER_MISMATCH!><!>-> }  //type mismatch
 }
 
 //more tests
-val g : () -> Unit = { 42 }
-val gFunction : () -> Unit = <!TYPE_MISMATCH!>fun(): Int = 1<!>
+konst g : () -> Unit = { 42 }
+konst gFunction : () -> Unit = <!TYPE_MISMATCH!>fun(): Int = 1<!>
 
-val h : () -> Unit = { doSmth() }
+konst h : () -> Unit = { doSmth() }
 
 fun doSmth(): Int = 42
 fun doSmth(a: String) {}
 
-val testIt : (Any) -> Unit = {
+konst testIt : (Any) -> Unit = {
     if (it is String) {
         doSmth(<!DEBUG_INFO_SMARTCAST!>it<!>)
     }

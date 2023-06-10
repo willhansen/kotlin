@@ -46,7 +46,7 @@ KtFile: LinkedList.kt
             VALUE_PARAMETER
               PsiElement(var)('var')
               PsiWhiteSpace(' ')
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               PsiElement(COLON)(':')
               PsiWhiteSpace(' ')
@@ -163,7 +163,7 @@ KtFile: LinkedList.kt
           PsiElement(COMMA)(',')
           PsiWhiteSpace(' ')
           VALUE_PARAMETER
-            PsiElement(IDENTIFIER)('value')
+            PsiElement(IDENTIFIER)('konstue')
             PsiWhiteSpace(' ')
             PsiElement(COLON)(':')
             PsiWhiteSpace(' ')
@@ -193,7 +193,7 @@ KtFile: LinkedList.kt
               PsiElement(RPAR)(')')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('newItem')
             PsiWhiteSpace(' ')
@@ -206,7 +206,7 @@ KtFile: LinkedList.kt
                 PsiElement(LPAR)('(')
                 VALUE_ARGUMENT
                   REFERENCE_EXPRESSION
-                    PsiElement(IDENTIFIER)('value')
+                    PsiElement(IDENTIFIER)('konstue')
                 PsiElement(RPAR)(')')
           PsiWhiteSpace('\n    ')
           IF
@@ -489,7 +489,7 @@ KtFile: LinkedList.kt
               PsiElement(RPAR)(')')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('item')
             PsiWhiteSpace(' ')
@@ -681,7 +681,7 @@ KtFile: LinkedList.kt
                 PsiElement(IDENTIFIER)('item')
               PsiElement(DOT)('.')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
           PsiWhiteSpace('\n  ')
           PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n\n  ')
@@ -706,7 +706,7 @@ KtFile: LinkedList.kt
           PsiElement(COMMA)(',')
           PsiWhiteSpace(' ')
           VALUE_PARAMETER
-            PsiElement(IDENTIFIER)('value')
+            PsiElement(IDENTIFIER)('konstue')
             PsiWhiteSpace(' ')
             PsiElement(COLON)(':')
             PsiWhiteSpace(' ')
@@ -737,7 +737,7 @@ KtFile: LinkedList.kt
               PsiElement(RPAR)(')')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('item')
             PsiWhiteSpace(' ')
@@ -754,7 +754,7 @@ KtFile: LinkedList.kt
                 PsiElement(RPAR)(')')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('result')
             PsiWhiteSpace(' ')
@@ -765,7 +765,7 @@ KtFile: LinkedList.kt
                 PsiElement(IDENTIFIER)('item')
               PsiElement(DOT)('.')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
           PsiWhiteSpace('\n    ')
           BINARY_EXPRESSION
             DOT_QUALIFIED_EXPRESSION
@@ -773,13 +773,13 @@ KtFile: LinkedList.kt
                 PsiElement(IDENTIFIER)('item')
               PsiElement(DOT)('.')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
             PsiWhiteSpace(' ')
             OPERATION_REFERENCE
               PsiElement(EQ)('=')
             PsiWhiteSpace(' ')
             REFERENCE_EXPRESSION
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
           PsiWhiteSpace('\n    ')
           RETURN
             PsiElement(return)('return')

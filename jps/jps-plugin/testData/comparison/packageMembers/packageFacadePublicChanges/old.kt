@@ -4,9 +4,9 @@ public fun unchangedFun() {}
 
 public fun removedFun(): Int = 10
 
-public val removedVal: String = "A"
+public konst removedVal: String = "A"
 
-public val changedVal: Int = 20
+public konst changedVal: Int = 20
 
 internal fun changedFun(arg: Int) {}
 

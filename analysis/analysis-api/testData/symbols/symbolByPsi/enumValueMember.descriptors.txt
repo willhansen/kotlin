@@ -14,7 +14,7 @@ KtConstructorSymbol:
     type: Style
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -28,7 +28,7 @@ KtConstructorSymbol:
           isExtension: false
           name: field
           origin: PROPERTY_BACKING_FIELD
-          owningProperty: KtKotlinPropertySymbol(/Style.value)
+          owningProperty: KtKotlinPropertySymbol(/Style.konstue)
           receiverParameter: null
           returnType: KtUsualClassType:
             annotationsList: []
@@ -38,7 +38,7 @@ KtConstructorSymbol:
           typeParameters: []
           getContainingModule: KtSourceModule "Sources of main"
           deprecationStatus: null
-        callableIdIfNonLocal: /Style.value
+        callableIdIfNonLocal: /Style.konstue
         contextReceivers: []
         getter: KtPropertyGetterSymbol:
           annotationsList: []
@@ -59,7 +59,7 @@ KtConstructorSymbol:
             type: kotlin/String
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -80,7 +80,7 @@ KtConstructorSymbol:
         isStatic: false
         isVal: true
         modality: FINAL
-        name: value
+        name: konstue
         origin: SOURCE
         receiverParameter: null
         returnType: KtUsualClassType:
@@ -107,7 +107,7 @@ KtConstructorSymbol:
       isImplicitLambdaParameter: false
       isNoinline: false
       isVararg: false
-      name: value
+      name: konstue
       origin: SOURCE
       receiverParameter: null
       returnType: KtUsualClassType:
@@ -163,7 +163,7 @@ KtKotlinPropertySymbol:
       type: kotlin/String
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -264,7 +264,7 @@ KtKotlinPropertySymbol:
       type: kotlin/String
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []

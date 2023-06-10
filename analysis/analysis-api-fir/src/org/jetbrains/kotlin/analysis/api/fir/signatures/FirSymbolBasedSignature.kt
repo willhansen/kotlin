@@ -9,6 +9,6 @@ import org.jetbrains.kotlin.analysis.api.fir.KtSymbolByFirBuilder
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 
 internal interface FirSymbolBasedSignature {
-    val firSymbol: FirCallableSymbol<*>
-    val firSymbolBuilder: KtSymbolByFirBuilder
+    konst firSymbol: FirCallableSymbol<*>
+    konst firSymbolBuilder: KtSymbolByFirBuilder
 }

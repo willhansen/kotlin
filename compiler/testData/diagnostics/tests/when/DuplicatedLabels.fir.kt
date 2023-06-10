@@ -10,7 +10,7 @@
 
 package test
 
-const val four = 4
+const konst four = 4
 
 fun first(arg: Int) = when (arg) {
     1 -> 2

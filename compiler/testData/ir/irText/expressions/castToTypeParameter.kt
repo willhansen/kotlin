@@ -4,7 +4,7 @@ fun <T> castFun(x: Any) = x as T
 
 fun <T> Any.castExtFun() = this as T
 
-val <T> T.castExtVal
+konst <T> T.castExtVal
     get() = this as T
 
 
@@ -17,10 +17,10 @@ class Host<T> {
 
     fun <TF> Any.castGenericMemberExtFun() = this as TF
 
-    val Any.castMemberExtVal
+    konst Any.castMemberExtVal
         get() = this as T
 
-    val <TV> TV.castGenericMemberExtVal
+    konst <TV> TV.castGenericMemberExtVal
         get() = this as TV
 }
 

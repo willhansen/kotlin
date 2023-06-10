@@ -3,17 +3,17 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-value class ValueClass(val number: Int) {}
-class UsualClass(val number: UByte) {}
+konstue class ValueClass(konst number: Int) {}
+class UsualClass(konst number: UByte) {}
 class Foo<T>
 
 object ObjectForExample {
-    val nullableVal: ValueClass? = ValueClass(153)
-    val usual: UsualClass = UsualClass(128.toUByte())
-    val uByteArray: UByteArray = ubyteArrayOf(0x40.toUByte(), 0x80.toUByte())
-    val uIntArray: UIntArray = intArrayOf(0x40, 0x80).toUIntArray()
-    val fooValueClass = Foo<ValueClass>()
-    val fooUsualClass = Foo<UsualClass>()
+    konst nullableVal: ValueClass? = ValueClass(153)
+    konst usual: UsualClass = UsualClass(128.toUByte())
+    konst uByteArray: UByteArray = ubyteArrayOf(0x40.toUByte(), 0x80.toUByte())
+    konst uIntArray: UIntArray = intArrayOf(0x40, 0x80).toUIntArray()
+    konst fooValueClass = Foo<ValueClass>()
+    konst fooUsualClass = Foo<UsualClass>()
     fun fooValue(foo: ValueClass?) {
         println("ValueClass? = $foo")
     }

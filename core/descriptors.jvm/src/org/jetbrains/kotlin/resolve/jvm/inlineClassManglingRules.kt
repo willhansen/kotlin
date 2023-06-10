@@ -13,24 +13,24 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.representativeUpperBound
 
 fun shouldHideConstructorDueToValueClassTypeValueParameters(descriptor: CallableMemberDescriptor): Boolean {
-    val constructorDescriptor = descriptor as? ClassConstructorDescriptor ?: return false
+    konst constructorDescriptor = descriptor as? ClassConstructorDescriptor ?: return false
     if (DescriptorVisibilities.isPrivate(constructorDescriptor.visibility)) return false
     if (constructorDescriptor.constructedClass.isValueClass()) return false
     if (DescriptorUtils.isSealedClass(constructorDescriptor.constructedClass)) return false
 
-    return constructorDescriptor.valueParameters.any { it.type.requiresFunctionNameManglingInParameterTypes() }
+    return constructorDescriptor.konstueParameters.any { it.type.requiresFunctionNameManglingInParameterTypes() }
 }
 
 fun requiresFunctionNameManglingForParameterTypes(descriptor: CallableMemberDescriptor): Boolean {
-    val extensionReceiverType = descriptor.extensionReceiverParameter?.type
+    konst extensionReceiverType = descriptor.extensionReceiverParameter?.type
     return extensionReceiverType != null && extensionReceiverType.requiresFunctionNameManglingInParameterTypes() ||
-            descriptor.valueParameters.any { it.type.requiresFunctionNameManglingInParameterTypes() }
+            descriptor.konstueParameters.any { it.type.requiresFunctionNameManglingInParameterTypes() }
 }
 
 // NB functions returning all inline classes (including our special 'kotlin.Result') should be mangled.
 fun requiresFunctionNameManglingForReturnType(descriptor: CallableMemberDescriptor): Boolean {
     if (descriptor.containingDeclaration !is ClassDescriptor) return false
-    val returnType = descriptor.returnType ?: return false
+    konst returnType = descriptor.returnType ?: return false
     return returnType.isInlineClassType() || returnType.isTypeParameterWithUpperBoundThatRequiresMangling(includeMfvc = false)
 }
 
@@ -47,6 +47,6 @@ private fun isDontMangleClass(classDescriptor: ClassDescriptor) =
     classDescriptor.fqNameSafe == StandardNames.RESULT_FQ_NAME
 
 private fun KotlinType.isTypeParameterWithUpperBoundThatRequiresMangling(includeMfvc: Boolean): Boolean {
-    val descriptor = constructor.declarationDescriptor as? TypeParameterDescriptor ?: return false
+    konst descriptor = constructor.declarationDescriptor as? TypeParameterDescriptor ?: return false
     return (includeMfvc || !descriptor.isMultiFieldValueClass()) && descriptor.representativeUpperBound.requiresFunctionNameManglingInParameterTypes()
 }

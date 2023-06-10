@@ -35,32 +35,32 @@ import org.jetbrains.kotlin.types.model.TypeVariableMarker
  */
 
 interface ConstraintStorage {
-    val allTypeVariables: Map<TypeConstructorMarker, TypeVariableMarker>
-    val notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints>
-    val missedConstraints: List<Pair<IncorporationConstraintPosition, List<Pair<TypeVariableMarker, Constraint>>>>
-    val initialConstraints: List<InitialConstraint>
-    val maxTypeDepthFromInitialConstraints: Int
-    val errors: List<ConstraintSystemError>
-    val hasContradiction: Boolean
-    val fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
-    val postponedTypeVariables: List<TypeVariableMarker>
-    val builtFunctionalTypesForPostponedArgumentsByTopLevelTypeVariables: Map<Pair<TypeConstructorMarker, List<Pair<TypeConstructorMarker, Int>>>, KotlinTypeMarker>
-    val builtFunctionalTypesForPostponedArgumentsByExpectedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
-    val constraintsFromAllForkPoints: List<Pair<IncorporationConstraintPosition, ForkPointData>>
+    konst allTypeVariables: Map<TypeConstructorMarker, TypeVariableMarker>
+    konst notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints>
+    konst missedConstraints: List<Pair<IncorporationConstraintPosition, List<Pair<TypeVariableMarker, Constraint>>>>
+    konst initialConstraints: List<InitialConstraint>
+    konst maxTypeDepthFromInitialConstraints: Int
+    konst errors: List<ConstraintSystemError>
+    konst hasContradiction: Boolean
+    konst fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
+    konst postponedTypeVariables: List<TypeVariableMarker>
+    konst builtFunctionalTypesForPostponedArgumentsByTopLevelTypeVariables: Map<Pair<TypeConstructorMarker, List<Pair<TypeConstructorMarker, Int>>>, KotlinTypeMarker>
+    konst builtFunctionalTypesForPostponedArgumentsByExpectedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
+    konst constraintsFromAllForkPoints: List<Pair<IncorporationConstraintPosition, ForkPointData>>
 
     object Empty : ConstraintStorage {
-        override val allTypeVariables: Map<TypeConstructorMarker, TypeVariableMarker> get() = emptyMap()
-        override val notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints> get() = emptyMap()
-        override val missedConstraints: List<Pair<IncorporationConstraintPosition, List<Pair<TypeVariableMarker, Constraint>>>> get() = emptyList()
-        override val initialConstraints: List<InitialConstraint> get() = emptyList()
-        override val maxTypeDepthFromInitialConstraints: Int get() = 1
-        override val errors: List<ConstraintSystemError> get() = emptyList()
-        override val hasContradiction: Boolean get() = false
-        override val fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker> get() = emptyMap()
-        override val postponedTypeVariables: List<TypeVariableMarker> get() = emptyList()
-        override val builtFunctionalTypesForPostponedArgumentsByTopLevelTypeVariables: Map<Pair<TypeConstructorMarker, List<Pair<TypeConstructorMarker, Int>>>, KotlinTypeMarker> = emptyMap()
-        override val builtFunctionalTypesForPostponedArgumentsByExpectedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker> = emptyMap()
-        override val constraintsFromAllForkPoints: List<Pair<IncorporationConstraintPosition, ForkPointData>> = emptyList()
+        override konst allTypeVariables: Map<TypeConstructorMarker, TypeVariableMarker> get() = emptyMap()
+        override konst notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints> get() = emptyMap()
+        override konst missedConstraints: List<Pair<IncorporationConstraintPosition, List<Pair<TypeVariableMarker, Constraint>>>> get() = emptyList()
+        override konst initialConstraints: List<InitialConstraint> get() = emptyList()
+        override konst maxTypeDepthFromInitialConstraints: Int get() = 1
+        override konst errors: List<ConstraintSystemError> get() = emptyList()
+        override konst hasContradiction: Boolean get() = false
+        override konst fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker> get() = emptyMap()
+        override konst postponedTypeVariables: List<TypeVariableMarker> get() = emptyList()
+        override konst builtFunctionalTypesForPostponedArgumentsByTopLevelTypeVariables: Map<Pair<TypeConstructorMarker, List<Pair<TypeConstructorMarker, Int>>>, KotlinTypeMarker> = emptyMap()
+        override konst builtFunctionalTypesForPostponedArgumentsByExpectedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker> = emptyMap()
+        override konst constraintsFromAllForkPoints: List<Pair<IncorporationConstraintPosition, ForkPointData>> = emptyList()
     }
 }
 
@@ -81,17 +81,17 @@ enum class ConstraintKind {
 }
 
 class Constraint(
-    val kind: ConstraintKind,
-    val type: KotlinTypeMarker, // flexible types here is allowed
-    val position: IncorporationConstraintPosition,
-    val typeHashCode: Int = type.hashCode(),
-    val derivedFrom: Set<TypeVariableMarker>,
-    // This value is true for constraints of the form `Nothing? <: Tv`
+    konst kind: ConstraintKind,
+    konst type: KotlinTypeMarker, // flexible types here is allowed
+    konst position: IncorporationConstraintPosition,
+    konst typeHashCode: Int = type.hashCode(),
+    konst derivedFrom: Set<TypeVariableMarker>,
+    // This konstue is true for constraints of the form `Nothing? <: Tv`
     // that have been created during incorporation phase of the constraint of the form `Kv? <: Tv` (where `Kv` another type variable).
     // The main idea behind that parameter is that we don't consider such constraints as proper (signifying that variable is ready for completion).
     // And also, there is additional logic in K1 that doesn't allow to fix variable into `Nothing?` if we had only that kind of lower constraints
-    val isNullabilityConstraint: Boolean,
-    val inputTypePositionBeforeIncorporation: OnlyInputTypeConstraintPosition? = null
+    konst isNullabilityConstraint: Boolean,
+    konst inputTypePositionBeforeIncorporation: OnlyInputTypeConstraintPosition? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -113,20 +113,20 @@ class Constraint(
 }
 
 interface VariableWithConstraints {
-    val typeVariable: TypeVariableMarker
-    val constraints: List<Constraint>
+    konst typeVariable: TypeVariableMarker
+    konst constraints: List<Constraint>
 }
 
 class InitialConstraint(
-    val a: KotlinTypeMarker,
-    val b: KotlinTypeMarker,
-    val constraintKind: ConstraintKind, // see [checkConstraint]
-    val position: ConstraintPosition
+    konst a: KotlinTypeMarker,
+    konst b: KotlinTypeMarker,
+    konst constraintKind: ConstraintKind, // see [checkConstraint]
+    konst position: ConstraintPosition
 ) {
     override fun toString(): String = "${asStringWithoutPosition()} from $position"
 
     fun asStringWithoutPosition(): String {
-        val sign =
+        konst sign =
             when (constraintKind) {
                 ConstraintKind.EQUALITY -> "=="
                 ConstraintKind.LOWER -> ":>"
@@ -137,8 +137,8 @@ class InitialConstraint(
 }
 
 //fun InitialConstraint.checkConstraint(substitutor: TypeSubstitutor): Boolean {
-//    val newA = substitutor.substitute(a)
-//    val newB = substitutor.substitute(b)
+//    konst newA = substitutor.substitute(a)
+//    konst newB = substitutor.substitute(b)
 //    return checkConstraint(newB as KotlinTypeMarker, constraintKind, newA as KotlinTypeMarker)
 //}
 
@@ -150,7 +150,7 @@ fun checkConstraint(
 ): Boolean {
 
 
-    val typeChecker = AbstractTypeChecker
+    konst typeChecker = AbstractTypeChecker
     return when (constraintKind) {
         ConstraintKind.EQUALITY -> typeChecker.equalTypes(context, constraintType, resultType)
         ConstraintKind.LOWER -> typeChecker.isSubtypeOf(context, constraintType, resultType)

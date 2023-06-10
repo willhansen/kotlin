@@ -30,8 +30,8 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirVarargArgumentsExpressionBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    val arguments: MutableList<FirExpression> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    konst arguments: MutableList<FirExpression> = mutableListOf()
     lateinit var varargElementType: FirTypeRef
 
     override fun build(): FirVarargArgumentsExpression {

@@ -34,12 +34,12 @@ import javax.inject.Inject
  * A task executing cinterop tool with the given args and compiling the stubs produced by this tool.
  */
 
-open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: WorkerExecutor) : KonanBuildingTask(), KonanInteropSpec {
+open class KonanInteropTask @Inject constructor(@Internal konst workerExecutor: WorkerExecutor) : KonanBuildingTask(), KonanInteropSpec {
 
-    private val interopRunner = KonanCliInteropRunner(project, project.konanExtension.jvmArgs)
+    private konst interopRunner = KonanCliInteropRunner(project, project.konanExtension.jvmArgs)
 
     @get:Internal
-    override val toolRunner: KonanToolRunner = interopRunner
+    override konst toolRunner: KonanToolRunner = interopRunner
 
     override fun init(config: KonanBuildingConfig<*>, destinationDir: File, artifactName: String, target: KonanTarget) {
         super.init(config, destinationDir, artifactName, target)
@@ -48,10 +48,10 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
 
     // Output directories -----------------------------------------------------
 
-    override val artifactSuffix: String
+    override konst artifactSuffix: String
         @Internal get() = ".klib"
 
-    override val artifactPrefix: String
+    override konst artifactPrefix: String
         @Internal get() = ""
 
     // Interop stub generator parameters -------------------------------------
@@ -62,13 +62,13 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
 
     @Optional @Input var packageName: String? = null
 
-    @Input val compilerOpts   = mutableListOf<String>()
-    @Input val linkerOpts     = mutableListOf<String>()
+    @Input konst compilerOpts   = mutableListOf<String>()
+    @Input konst linkerOpts     = mutableListOf<String>()
 
-    @Nested val includeDirs = IncludeDirectoriesSpecImpl()
+    @Nested konst includeDirs = IncludeDirectoriesSpecImpl()
 
-    @InputFiles val headers   = mutableSetOf<FileCollection>()
-    @InputFiles val linkFiles = mutableSetOf<FileCollection>()
+    @InputFiles konst headers   = mutableSetOf<FileCollection>()
+    @InputFiles konst linkFiles = mutableSetOf<FileCollection>()
 
     fun buildArgs() = mutableListOf<String>().apply {
         addArg("-o", artifact.canonicalPath)
@@ -83,7 +83,7 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
             addArg("-compiler-option", it)
         }
 
-        val linkerOpts = mutableListOf<String>().apply { addAll(linkerOpts) }
+        konst linkerOpts = mutableListOf<String>().apply { addAll(linkerOpts) }
         linkFiles.forEach {
             linkerOpts.addAll(it.files.map { it.canonicalPath })
         }
@@ -109,8 +109,8 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
     // region DSL.
 
     inner class IncludeDirectoriesSpecImpl: IncludeDirectoriesSpec {
-        @Input val allHeadersDirs = mutableSetOf<File>()
-        @Input val headerFilterDirs = mutableSetOf<File>()
+        @Input konst allHeadersDirs = mutableSetOf<File>()
+        @Input konst headerFilterDirs = mutableSetOf<File>()
 
         override fun allHeaders(vararg includeDirs: Any) = allHeaders(includeDirs.toList())
         override fun allHeaders(includeDirs: Collection<Any>) {
@@ -127,12 +127,12 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
         defFile = project.file(file)
     }
 
-    override fun packageName(value: String) {
-        packageName = value
+    override fun packageName(konstue: String) {
+        packageName = konstue
     }
 
-    override fun compilerOpts(vararg values: String) {
-        compilerOpts.addAll(values)
+    override fun compilerOpts(vararg konstues: String) {
+        compilerOpts.addAll(konstues)
     }
 
     override fun header(file: Any) = headers(file)
@@ -143,15 +143,15 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
         headers.add(files)
     }
 
-    override fun includeDirs(vararg values: Any) = includeDirs.allHeaders(values.toList())
+    override fun includeDirs(vararg konstues: Any) = includeDirs.allHeaders(konstues.toList())
 
     override fun includeDirs(closure: Closure<Unit>) = includeDirs { project.configure(this, closure) }
     override fun includeDirs(action: Action<IncludeDirectoriesSpec>) = includeDirs { action.execute(this) }
     override fun includeDirs(configure: IncludeDirectoriesSpec.() -> Unit) = includeDirs.configure()
 
-    override fun linkerOpts(vararg values: String) = linkerOpts(values.toList())
-    override fun linkerOpts(values: List<String>) {
-        linkerOpts.addAll(values)
+    override fun linkerOpts(vararg konstues: String) = linkerOpts(konstues.toList())
+    override fun linkerOpts(konstues: List<String>) {
+        linkerOpts.addAll(konstues)
     }
 
     override fun link(vararg files: Any) {
@@ -170,7 +170,7 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
 
     internal abstract class RunTool @Inject constructor() : WorkAction<RunToolParameters> {
         override fun execute() {
-            val toolRunner = interchangeBox.remove(parameters.taskName) ?: error(":(")
+            konst toolRunner = interchangeBox.remove(parameters.taskName) ?: error(":(")
             toolRunner.run(parameters.args)
         }
     }
@@ -182,9 +182,9 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
         if (dumpParameters) {
             dumpProperties(this)
         }
-        val args = buildArgs()
+        konst args = buildArgs()
         if (enableParallel) {
-            val workQueue = workerExecutor.noIsolation()
+            konst workQueue = workerExecutor.noIsolation()
             interchangeBox[this.path] = toolRunner
             workQueue.submit(RunTool::class.java) {
                 taskName = path
@@ -196,4 +196,4 @@ open class KonanInteropTask @Inject constructor(@Internal val workerExecutor: Wo
     }
 }
 
-internal val interchangeBox = ConcurrentHashMap<String, KonanToolRunner>()
+internal konst interchangeBox = ConcurrentHashMap<String, KonanToolRunner>()

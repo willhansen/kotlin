@@ -6,8 +6,8 @@ import kotlin.reflect.KVariance
 import kotlin.test.assertEquals
 
 fun box(): String {
-    val ctor = J::class.constructors.single()
-    val ab = ctor.typeParameters
+    konst ctor = J::class.constructors.single()
+    konst ab = ctor.typeParameters
     assertEquals(2, ab.size, ab.toString())
 
     assertEquals("A", ab[0].name)

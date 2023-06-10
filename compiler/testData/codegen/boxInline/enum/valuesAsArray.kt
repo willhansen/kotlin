@@ -10,7 +10,7 @@ inline fun <reified T : Enum<T>> myValues(): Array<T> {
 enum class Z {
     O, K;
 
-    val myParam = name
+    konst myParam = name
 }
 
 

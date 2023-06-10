@@ -14,46 +14,46 @@ import org.jetbrains.kotlin.backend.konan.objcexport.NSNumberKind
 import org.jetbrains.kotlin.backend.konan.objcexport.ObjCExportNamer
 
 internal fun patchObjCRuntimeModule(generationState: NativeGenerationState): LLVMModuleRef? {
-    val config = generationState.config
+    konst config = generationState.config
     if (!(config.isFinalBinary && config.target.family.isAppleFamily)) return null
 
-    val patchBuilder = PatchBuilder(generationState.objCExport.namer)
+    konst patchBuilder = PatchBuilder(generationState.objCExport.namer)
     patchBuilder.addObjCPatches()
 
-    val bitcodeFile = config.objCNativeLibrary
-    val parsedModule = parseBitcodeFile(generationState.llvmContext, bitcodeFile)
+    konst bitcodeFile = config.objCNativeLibrary
+    konst parsedModule = parseBitcodeFile(generationState.llvmContext, bitcodeFile)
 
     patchBuilder.buildAndApply(parsedModule, generationState.llvm)
     return parsedModule
 }
 
-private class PatchBuilder(val objCExportNamer: ObjCExportNamer) {
-    enum class GlobalKind(val prefix: String) {
+private class PatchBuilder(konst objCExportNamer: ObjCExportNamer) {
+    enum class GlobalKind(konst prefix: String) {
         OBJC_CLASS("OBJC_CLASS_\$_"),
         OBJC_METACLASS("OBJC_METACLASS_\$_"),
         OBJC_IVAR("OBJC_IVAR_\$_"),
     }
 
-    data class GlobalPatch(val kind: GlobalKind, val suffix: String, val newSuffix: String) {
-        val globalName: String
+    data class GlobalPatch(konst kind: GlobalKind, konst suffix: String, konst newSuffix: String) {
+        konst globalName: String
             get() = "${kind.prefix}$suffix"
 
-        val newGlobalName: String
+        konst newGlobalName: String
             get() = "${kind.prefix}$newSuffix"
     }
 
     data class LiteralPatch(
-            val generator: ObjCDataGenerator.CStringLiteralsGenerator,
-            val value: String,
-            val newValue: String
+            konst generator: ObjCDataGenerator.CStringLiteralsGenerator,
+            konst konstue: String,
+            konst newValue: String
     )
 
-    val globalPatches = mutableListOf<GlobalPatch>()
-    val literalPatches = mutableListOf<LiteralPatch>()
+    konst globalPatches = mutableListOf<GlobalPatch>()
+    konst literalPatches = mutableListOf<LiteralPatch>()
 
     // Note: exported classes anyway use the same prefix,
     // so using more unique private prefix wouldn't help to prevent any clashes.
-    private val privatePrefix = objCExportNamer.topLevelNamePrefix
+    private konst privatePrefix = objCExportNamer.topLevelNamePrefix
 
     fun addProtocolImport(name: String) {
         literalPatches += LiteralPatch(ObjCDataGenerator.classNameGenerator, name, name)
@@ -121,43 +121,43 @@ private fun PatchBuilder.addObjCPatches() {
     addExportedClass(objCExportNamer.mutableMapName, "KotlinMutableDictionary", "mapHolder")
 
     addExportedClass(objCExportNamer.kotlinNumberName, "KotlinNumber")
-    NSNumberKind.values().mapNotNull { it.mappedKotlinClassId }.forEach {
-        addExportedClass(objCExportNamer.numberBoxName(it), "Kotlin${it.shortClassName}", "value_")
+    NSNumberKind.konstues().mapNotNull { it.mappedKotlinClassId }.forEach {
+        addExportedClass(objCExportNamer.numberBoxName(it), "Kotlin${it.shortClassName}", "konstue_")
     }
 }
 
 private fun PatchBuilder.buildAndApply(llvmModule: LLVMModuleRef, llvm: CodegenLlvmHelpers) {
-    val nameToGlobalPatch = globalPatches.associateNonRepeatingBy { it.globalName }
+    konst nameToGlobalPatch = globalPatches.associateNonRepeatingBy { it.globalName }
 
-    val sectionToValueToLiteralPatch = literalPatches.groupBy { it.generator.section }
+    konst sectionToValueToLiteralPatch = literalPatches.groupBy { it.generator.section }
             .mapValues { (_, patches) ->
-                patches.associateNonRepeatingBy { it.value }
+                patches.associateNonRepeatingBy { it.konstue }
             }
 
-    val unusedPatches = (globalPatches + literalPatches).toMutableSet()
+    konst unusedPatches = (globalPatches + literalPatches).toMutableSet()
 
-    val globals = generateSequence(LLVMGetFirstGlobal(llvmModule), { LLVMGetNextGlobal(it) }).toList()
+    konst globals = generateSequence(LLVMGetFirstGlobal(llvmModule), { LLVMGetNextGlobal(it) }).toList()
     for (global in globals) {
-        val initializer = LLVMGetInitializer(global) ?: continue
-        val name = LLVMGetValueName(global)?.toKString().orEmpty()
+        konst initializer = LLVMGetInitializer(global) ?: continue
+        konst name = LLVMGetValueName(global)?.toKString().orEmpty()
 
-        val globalPatch = nameToGlobalPatch[name]
+        konst globalPatch = nameToGlobalPatch[name]
         if (globalPatch != null) {
             LLVMSetValueName(global, globalPatch.newGlobalName)
             unusedPatches -= globalPatch
-        } else if (PatchBuilder.GlobalKind.values().any { name.startsWith(it.prefix) }) {
+        } else if (PatchBuilder.GlobalKind.konstues().any { name.startsWith(it.prefix) }) {
             error("Objective-C global '$name' is not patched")
         }
 
-        val section = LLVMGetSection(global)?.toKString()
-        sectionToValueToLiteralPatch[section]?.let { valueToLiteralPatch ->
-            val value = getStringValue(initializer)
-            val patch = valueToLiteralPatch[value]
+        konst section = LLVMGetSection(global)?.toKString()
+        sectionToValueToLiteralPatch[section]?.let { konstueToLiteralPatch ->
+            konst konstue = getStringValue(initializer)
+            konst patch = konstueToLiteralPatch[konstue]
             if (patch != null) {
-                if (patch.newValue != value) patchLiteral(global, llvm, patch.generator, patch.newValue)
+                if (patch.newValue != konstue) patchLiteral(global, llvm, patch.generator, patch.newValue)
                 unusedPatches -= patch
             } else if (section == ObjCDataGenerator.classNameGenerator.section) {
-                error("Objective-C class name literal is not patched: $value")
+                error("Objective-C class name literal is not patched: $konstue")
             }
         }
     }
@@ -171,11 +171,11 @@ private fun getStringValue(initializer: LLVMValueRef): String? = when (LLVMGetVa
     LLVMValueKind.LLVMConstantDataArrayValueKind -> memScoped {
         require(LLVMIsConstantString(initializer) != 0) { "not a constant string: ${llvm2string(initializer)}" }
 
-        val lengthVar = alloc<size_tVar>()
-        val bytePtr = LLVMGetAsString(initializer, lengthVar.ptr)!!
-        val length = lengthVar.value
+        konst lengthVar = alloc<size_tVar>()
+        konst bytePtr = LLVMGetAsString(initializer, lengthVar.ptr)!!
+        konst length = lengthVar.konstue
 
-        val lastByte = bytePtr[length - 1]
+        konst lastByte = bytePtr[length - 1]
         require(lastByte == 0.toByte()) {
             "${llvm2string(initializer)}:\n  expected zero terminator, found $lastByte"
         }
@@ -190,9 +190,9 @@ private fun getStringValue(initializer: LLVMValueRef): String? = when (LLVMGetVa
 
 private fun <T, K> List<T>.associateNonRepeatingBy(keySelector: (T) -> K): Map<K, T> =
         this.groupBy(keySelector)
-                .mapValues { (key, values) ->
-                    values.singleOrNull()
-                            ?: error("multiple values found for $key: ${values.joinToString()}")
+                .mapValues { (key, konstues) ->
+                    konstues.singleOrNull()
+                            ?: error("multiple konstues found for $key: ${konstues.joinToString()}")
                 }
 
 private fun patchLiteral(
@@ -201,12 +201,12 @@ private fun patchLiteral(
     generator: ObjCDataGenerator.CStringLiteralsGenerator,
     newValue: String
 ) {
-    val module = LLVMGetGlobalParent(global)!!
+    konst module = LLVMGetGlobalParent(global)!!
 
-    val newFirstCharPtr = generator.generate(module, llvm, newValue).getElementPtr(llvm, 0).llvm
+    konst newFirstCharPtr = generator.generate(module, llvm, newValue).getElementPtr(llvm, 0).llvm
 
     generateSequence(LLVMGetFirstUse(global), { LLVMGetNextUse(it) }).forEach { use ->
-        val firstCharPtr = LLVMGetUser(use)!!.also {
+        konst firstCharPtr = LLVMGetUser(use)!!.also {
             require(it.isFirstCharPtr(llvm, global)) {
                 "Unexpected literal usage: ${llvm2string(it)}"
             }

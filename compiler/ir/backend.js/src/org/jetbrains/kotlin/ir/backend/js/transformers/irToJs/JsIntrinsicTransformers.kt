@@ -27,11 +27,11 @@ import org.jetbrains.kotlin.js.backend.ast.*
 typealias IrCallTransformer = (IrCall, context: JsGenerationContext) -> JsExpression
 
 class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
-    private val transformers: Map<IrSymbol, IrCallTransformer>
-    val icUtils = backendContext.inlineClassesUtils
+    private konst transformers: Map<IrSymbol, IrCallTransformer>
+    konst icUtils = backendContext.inlineClassesUtils
 
     init {
-        val intrinsics = backendContext.intrinsics
+        konst intrinsics = backendContext.intrinsics
 
         transformers = hashMapOf()
 
@@ -88,13 +88,13 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
             prefixOp(intrinsics.jsTypeOf, JsUnaryOperator.TYPEOF)
 
             add(intrinsics.jsObjectCreateSymbol) { call, context ->
-                val classToCreate = call.getTypeArgument(0)!!.classifierOrFail.owner as IrClass
-                val className = context.getNameForClass(classToCreate)
+                konst classToCreate = call.getTypeArgument(0)!!.classifierOrFail.owner as IrClass
+                konst className = context.getNameForClass(classToCreate)
                 objectCreate(prototypeOf(className.makeRef(), context.staticContext), context.staticContext)
             }
 
             add(intrinsics.jsClass) { call, context ->
-                val typeArgument = call.getTypeArgument(0)
+                konst typeArgument = call.getTypeArgument(0)
                 typeArgument?.getClassRef(context)
                     ?: compilationException(
                         "Type argument of jsClass must be statically known class",
@@ -107,7 +107,7 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
             }
 
             add(intrinsics.jsOpenInitializerBox) { call, context ->
-                val arguments = translateCallArguments(call, context)
+                konst arguments = translateCallArguments(call, context)
 
                 JsInvocation(
                     JsNameRef("Object.assign"),
@@ -127,23 +127,23 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
             }
 
             add(intrinsics.jsArrayLength) { call, context ->
-                val args = translateCallArguments(call, context)
+                konst args = translateCallArguments(call, context)
                 JsNameRef("length", args[0])
             }
 
             add(intrinsics.jsArrayGet) { call, context ->
-                val args = translateCallArguments(call, context)
-                val array = args[0]
-                val index = args[1]
+                konst args = translateCallArguments(call, context)
+                konst array = args[0]
+                konst index = args[1]
                 JsArrayAccess(array, index)
             }
 
             add(intrinsics.jsArraySet) { call, context ->
-                val args = translateCallArguments(call, context)
-                val array = args[0]
-                val index = args[1]
-                val value = args[2]
-                JsBinaryOperation(JsBinaryOperator.ASG, JsArrayAccess(array, index), value)
+                konst args = translateCallArguments(call, context)
+                konst array = args[0]
+                konst index = args[1]
+                konst konstue = args[2]
+                JsBinaryOperation(JsBinaryOperator.ASG, JsArrayAccess(array, index), konstue)
             }
 
             add(intrinsics.arrayLiteral) { call, context ->
@@ -156,7 +156,7 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
                 intrinsics.jsSliceArrayLikeFromIndexToIndex
             )) {
                 add(intrinsic) { call, context ->
-                    val args = translateCallArguments(call, context)
+                    konst args = translateCallArguments(call, context)
                     JsInvocation(JsNameRef(Namer.CALL_FUNCTION, JsNameRef(Namer.SLICE_FUNCTION, JsArrayLiteral())), args)
                 }
             }
@@ -175,38 +175,38 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
             }
 
             add(intrinsics.jsBoxIntrinsic) { call, context ->
-                val arg = translateCallArguments(call, context).single()
-                val inlineClass = icUtils.getInlinedClass(call.getTypeArgument(0)!!)!!
-                val constructor = inlineClass.declarations.filterIsInstance<IrConstructor>().single { it.isPrimary }
+                konst arg = translateCallArguments(call, context).single()
+                konst inlineClass = icUtils.getInlinedClass(call.getTypeArgument(0)!!)!!
+                konst constructor = inlineClass.declarations.filterIsInstance<IrConstructor>().single { it.isPrimary }
                 JsNew(context.getNameForConstructor(constructor).makeRef(), listOf(arg))
             }
 
             add(intrinsics.jsUnboxIntrinsic) { call, context ->
-                val arg = translateCallArguments(call, context).single()
-                val inlineClass = icUtils.getInlinedClass(call.getTypeArgument(1)!!)!!
-                val field = getInlineClassBackingField(inlineClass)
-                val fieldName = context.getNameForField(field)
+                konst arg = translateCallArguments(call, context).single()
+                konst inlineClass = icUtils.getInlinedClass(call.getTypeArgument(1)!!)!!
+                konst field = getInlineClassBackingField(inlineClass)
+                konst fieldName = context.getNameForField(field)
                 JsNameRef(fieldName, arg)
             }
 
             add(intrinsics.jsCall) { call, context: JsGenerationContext ->
-                val args = translateCallArguments(call, context)
-                val receiver = args[0]
-                val target = args[1]
-                val varargs = args[2] as? JsArrayLiteral ?: error("Expect to have JsArrayLiteral, because of vararg with dynamic element type")
+                konst args = translateCallArguments(call, context)
+                konst receiver = args[0]
+                konst target = args[1]
+                konst varargs = args[2] as? JsArrayLiteral ?: error("Expect to have JsArrayLiteral, because of vararg with dynamic element type")
 
-                val callRef = JsNameRef(Namer.CALL_FUNCTION, target)
+                konst callRef = JsNameRef(Namer.CALL_FUNCTION, target)
                 JsInvocation(callRef, receiver, *varargs.expressions.toTypedArray())
             }
 
             add(intrinsics.jsBind) { call, context: JsGenerationContext ->
-                val receiver = call.getValueArgument(0)!!
-                val jsReceiver = receiver.accept(IrElementToJsExpressionTransformer(), context)
-                val jsBindTarget = when (val target = call.getValueArgument(1)!!) {
+                konst receiver = call.getValueArgument(0)!!
+                konst jsReceiver = receiver.accept(IrElementToJsExpressionTransformer(), context)
+                konst jsBindTarget = when (konst target = call.getValueArgument(1)!!) {
                     is IrFunctionReference -> {
-                        val superClass = call.superQualifierSymbol!!
-                        val functionName = context.getNameForMemberFunction(target.symbol.owner as IrSimpleFunction)
-                        val superName = context.getNameForClass(superClass.owner).makeRef()
+                        konst superClass = call.superQualifierSymbol!!
+                        konst functionName = context.getNameForMemberFunction(target.symbol.owner as IrSimpleFunction)
+                        konst superName = context.getNameForClass(superClass.owner).makeRef()
                         JsNameRef(functionName, prototypeOf(superName, context.staticContext))
                     }
                     is IrFunctionExpression -> target.accept(IrElementToJsExpressionTransformer(), context)
@@ -215,15 +215,15 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
                         call
                     )
                 }
-                val bindRef = JsNameRef(Namer.BIND_FUNCTION, jsBindTarget)
+                konst bindRef = JsNameRef(Namer.BIND_FUNCTION, jsBindTarget)
                 JsInvocation(bindRef, jsReceiver)
             }
 
             add(intrinsics.jsContexfulRef) { call, context: JsGenerationContext ->
-                val receiver = call.getValueArgument(0)!!
-                val jsReceiver = receiver.accept(IrElementToJsExpressionTransformer(), context)
-                val target = call.getValueArgument(1) as IrRawFunctionReference
-                val jsTarget = context.getNameForMemberFunction(target.symbol.owner as IrSimpleFunction)
+                konst receiver = call.getValueArgument(0)!!
+                konst jsReceiver = receiver.accept(IrElementToJsExpressionTransformer(), context)
+                konst target = call.getValueArgument(1) as IrRawFunctionReference
+                konst jsTarget = context.getNameForMemberFunction(target.symbol.owner as IrSimpleFunction)
 
                 JsNameRef(jsTarget, jsReceiver)
             }
@@ -233,31 +233,31 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
             }
 
             add(intrinsics.createSharedBox) { call, context: JsGenerationContext ->
-                val arg = translateCallArguments(call, context).single()
+                konst arg = translateCallArguments(call, context).single()
                 JsObjectLiteral(listOf(JsPropertyInitializer(JsNameRef(Namer.SHARED_BOX_V), arg)))
             }
 
             add(intrinsics.readSharedBox) { call, context: JsGenerationContext ->
-                val box = translateCallArguments(call, context).single()
+                konst box = translateCallArguments(call, context).single()
                 JsNameRef(Namer.SHARED_BOX_V, box)
             }
 
             add(intrinsics.writeSharedBox) { call, context: JsGenerationContext ->
-                val args = translateCallArguments(call, context)
-                val box = args[0]
-                val value = args[1]
-                jsAssignment(JsNameRef(Namer.SHARED_BOX_V, box), value)
+                konst args = translateCallArguments(call, context)
+                konst box = args[0]
+                konst konstue = args[1]
+                jsAssignment(JsNameRef(Namer.SHARED_BOX_V, box), konstue)
             }
 
-            val suspendInvokeTransform: (IrCall, JsGenerationContext) -> JsExpression = { call, context: JsGenerationContext ->
+            konst suspendInvokeTransform: (IrCall, JsGenerationContext) -> JsExpression = { call, context: JsGenerationContext ->
                 // Because it is intrinsic, we know everything about this function
                 // There is callable reference as extension receiver
-                val invokeFun = invokeFunForLambda(call)
+                konst invokeFun = invokeFunForLambda(call)
 
-                val jsInvokeFunName = context.getNameForMemberFunction(invokeFun)
+                konst jsInvokeFunName = context.getNameForMemberFunction(invokeFun)
 
-                val jsExtensionReceiver = call.extensionReceiver?.accept(IrElementToJsExpressionTransformer(), context)!!
-                val args = translateCallArguments(call, context)
+                konst jsExtensionReceiver = call.extensionReceiver?.accept(IrElementToJsExpressionTransformer(), context)!!
+                konst args = translateCallArguments(call, context)
 
                 JsInvocation(JsNameRef(jsInvokeFunName, jsExtensionReceiver), args)
             }
@@ -269,12 +269,12 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
             add(intrinsics.jsArguments) { _, _ -> Namer.ARGUMENTS }
 
             add(intrinsics.jsNewAnonymousClass) { call, context ->
-                val baseClass = translateCallArguments(call, context).single() as JsNameRef
+                konst baseClass = translateCallArguments(call, context).single() as JsNameRef
                 JsClass(baseClass = baseClass)
             }
 
             add(intrinsics.void.owner.getter!!.symbol) { _, context ->
-                val backingField = context.getNameForField(intrinsics.void.owner.backingField!!)
+                konst backingField = context.getNameForField(intrinsics.void.owner.backingField!!)
                 JsNameRef(backingField)
             }
         }

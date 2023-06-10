@@ -25,7 +25,7 @@ class MavenPluginConfiguratorG6 : MavenPluginConfigurator {
         project.pluginManager.withPlugin("maven") {
             project.tasks.withType(Upload::class.java).all { uploadTask ->
                 uploadTask.repositories.withType(MavenResolver::class.java).all { mavenResolver ->
-                    val pomRewriter = PomDependenciesRewriter(project, target.kotlinComponents.single())
+                    konst pomRewriter = PomDependenciesRewriter(project, target.kotlinComponents.single())
                     rewritePom(mavenResolver.pom, pomRewriter, shouldRewritePoms)
                 }
             }

@@ -4,7 +4,7 @@
 
 fun <T> foo(l: MutableList<T>): MutableList<T> = l
 fun test(l: MutableList<out Int>) {
-    val a: MutableList<out Int> = foo(l)
-    val b = foo(l)
+    konst a: MutableList<out Int> = foo(l)
+    konst b = foo(l)
     b checkType { _< MutableList<out Int> >() }
 }

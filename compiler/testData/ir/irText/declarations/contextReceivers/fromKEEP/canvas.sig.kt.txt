@@ -25,7 +25,7 @@ interface Canvas {
   // CHECK:
   //   Mangled name: Canvas{}suffix
   //   Public signature: /Canvas.suffix|-3301965527200666288[0]
-  abstract val suffix: String
+  abstract konst suffix: String
     // CHECK JVM_IR:
     //   Mangled name: Canvas#<get-suffix>(){}kotlin.String
     //   Public signature: /Canvas.suffix.<get-suffix>|8958072538558116778[0]
@@ -58,7 +58,7 @@ object MyCanvas : Canvas {
   // CHECK:
   //   Mangled name: MyCanvas{}suffix
   //   Public signature: /MyCanvas.suffix|-3301965527200666288[0]
-  override val suffix: String
+  override konst suffix: String
     // CHECK JVM_IR:
     //   Mangled name: MyCanvas#<get-suffix>(){}kotlin.String
     //   Public signature: /MyCanvas.suffix.<get-suffix>|8958072538558116778[0]

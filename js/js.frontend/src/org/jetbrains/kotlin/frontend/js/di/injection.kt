@@ -52,7 +52,7 @@ fun createContainerForJS(
     analyzerServices: PlatformDependentAnalyzerServices,
     platform: TargetPlatform
 ): StorageComponentContainer {
-    val storageComponentContainer = createContainer("TopDownAnalyzerForJs", analyzerServices) {
+    konst storageComponentContainer = createContainer("TopDownAnalyzerForJs", analyzerServices) {
         configureModule(
             moduleContext,
             platform,
@@ -69,8 +69,8 @@ fun createContainerForJS(
         useInstance(declarationProviderFactory)
         targetEnvironment.configure(this)
     }.apply {
-        val packagePartProviders = mutableListOf(get<KotlinCodeAnalyzer>().packageFragmentProvider)
-        val moduleDescriptor = get<ModuleDescriptorImpl>()
+        konst packagePartProviders = mutableListOf(get<KotlinCodeAnalyzer>().packageFragmentProvider)
+        konst moduleDescriptor = get<ModuleDescriptorImpl>()
         packagePartProviders += additionalPackages
         moduleDescriptor.initialize(
             CompositePackageFragmentProvider(packagePartProviders, "CompositeProvider@createContainerForJS for $moduleDescriptor")

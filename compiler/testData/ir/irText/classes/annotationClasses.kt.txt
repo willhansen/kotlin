@@ -5,7 +5,7 @@ open annotation class Test1 : Annotation {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -18,7 +18,7 @@ open annotation class Test2 : Annotation {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -31,7 +31,7 @@ open annotation class Test3 : Annotation {
 
   }
 
-  val x: Test1
+  konst x: Test1
     field = x
     get
 
@@ -44,7 +44,7 @@ open annotation class Test4 : Annotation {
 
   }
 
-  val xs: IntArray
+  konst xs: IntArray
     field = xs
     get
 

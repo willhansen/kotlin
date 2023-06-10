@@ -22,8 +22,8 @@ import org.jetbrains.benchmarksLauncher.Random
 /**
  * This class emulates matrix behaviour using a hash map as its implementation
  */
-class KMatrix internal constructor(val rows: Int, val columns: Int) {
-    private val matrix: MutableMap<Pair<Int, Int>, Double> = HashMap();
+class KMatrix internal constructor(konst rows: Int, konst columns: Int) {
+    private konst matrix: MutableMap<Pair<Int, Int>, Double> = HashMap();
 
     init {
         for (row in 0..rows-1) {
@@ -47,7 +47,7 @@ class KMatrix internal constructor(val rows: Int, val columns: Int) {
 
     operator fun plusAssign(other: KMatrix) {
         for (entry in matrix.entries) {
-            put(entry.key, entry.value + other.get(entry.key))
+            put(entry.key, entry.konstue + other.get(entry.key))
         }
     }
 }
@@ -65,8 +65,8 @@ open class MatrixMapBenchmark {
             rows /= 2
             cols *= 2
         }
-        val a = KMatrix(rows, cols)
-        val b = KMatrix(rows, cols)
+        konst a = KMatrix(rows, cols)
+        konst b = KMatrix(rows, cols)
         a += b
         return a
     }

@@ -13,7 +13,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class IC(val s: Any)
+inline class IC(konst s: Any)
 
 var c: Continuation<Any>? = null
 

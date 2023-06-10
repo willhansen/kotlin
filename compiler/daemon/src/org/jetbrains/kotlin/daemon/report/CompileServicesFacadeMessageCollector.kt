@@ -24,10 +24,10 @@ import org.jetbrains.kotlin.daemon.KotlinCompileDaemon.log
 import org.jetbrains.kotlin.daemon.common.*
 
 internal class CompileServicesFacadeMessageCollector(
-        private val servicesFacade: CompilerServicesFacadeBase,
+        private konst servicesFacade: CompilerServicesFacadeBase,
         compilationOptions: CompilationOptions
 ) : MessageCollector {
-    private val mySeverity = compilationOptions.reportSeverity
+    private konst mySeverity = compilationOptions.reportSeverity
     private var hasErrors = false
 
     override fun clear() {
@@ -44,7 +44,7 @@ internal class CompileServicesFacadeMessageCollector(
                 servicesFacade.report(ReportCategory.EXCEPTION, ReportSeverity.ERROR, message)
             }
             else -> {
-                val reportSeverity = when (severity) {
+                konst reportSeverity = when (severity) {
                     CompilerMessageSeverity.ERROR -> ReportSeverity.ERROR
                     CompilerMessageSeverity.WARNING, CompilerMessageSeverity.STRONG_WARNING -> ReportSeverity.WARNING
                     CompilerMessageSeverity.INFO -> ReportSeverity.INFO

@@ -39,19 +39,19 @@ import org.jetbrains.kotlin.types.error.ErrorTypeKind
 import org.jetbrains.kotlin.types.typeUtil.*
 import org.jetbrains.kotlin.utils.sure
 
-private val JAVA_LANG_CLASS_FQ_NAME: FqName = FqName("java.lang.Class")
+private konst JAVA_LANG_CLASS_FQ_NAME: FqName = FqName("java.lang.Class")
 
 class JavaTypeResolver(
-    private val c: LazyJavaResolverContext,
-    private val typeParameterResolver: TypeParameterResolver
+    private konst c: LazyJavaResolverContext,
+    private konst typeParameterResolver: TypeParameterResolver
 ) {
-    private val projectionComputer = RawProjectionComputer()
-    private val typeParameterUpperBoundEraser = TypeParameterUpperBoundEraser(projectionComputer)
+    private konst projectionComputer = RawProjectionComputer()
+    private konst typeParameterUpperBoundEraser = TypeParameterUpperBoundEraser(projectionComputer)
 
     fun transformJavaType(javaType: JavaType?, attr: JavaTypeAttributes): KotlinType {
         return when (javaType) {
             is JavaPrimitiveType -> {
-                val primitiveType = javaType.type
+                konst primitiveType = javaType.type
                 if (primitiveType != null) c.module.builtIns.getPrimitiveKotlinType(primitiveType)
                 else c.module.builtIns.unitType
             }
@@ -65,12 +65,12 @@ class JavaTypeResolver(
     }
 
     fun transformArrayType(arrayType: JavaArrayType, attr: JavaTypeAttributes, isVararg: Boolean = false): KotlinType {
-        val javaComponentType = arrayType.componentType
-        val primitiveType = (javaComponentType as? JavaPrimitiveType)?.type
-        val annotations = LazyJavaAnnotations(c, arrayType, areAnnotationsFreshlySupported = true)
+        konst javaComponentType = arrayType.componentType
+        konst primitiveType = (javaComponentType as? JavaPrimitiveType)?.type
+        konst annotations = LazyJavaAnnotations(c, arrayType, areAnnotationsFreshlySupported = true)
 
         if (primitiveType != null) {
-            val kotlinType = c.module.builtIns.getPrimitiveArrayKotlinType(primitiveType).let {
+            konst kotlinType = c.module.builtIns.getPrimitiveArrayKotlinType(primitiveType).let {
                 it.replaceAnnotations(CompositeAnnotations(it.annotations, annotations)) as SimpleType
             }
 
@@ -79,13 +79,13 @@ class JavaTypeResolver(
             else KotlinTypeFactory.flexibleType(kotlinType, kotlinType.makeNullableAsSpecified(true))
         }
 
-        val componentType = transformJavaType(
+        konst componentType = transformJavaType(
             javaComponentType,
             COMMON.toAttributes(attr.isForAnnotationParameter)
         )
 
         if (attr.isForAnnotationParameter) {
-            val projectionKind = if (isVararg) OUT_VARIANCE else INVARIANT
+            konst projectionKind = if (isVararg) OUT_VARIANCE else INVARIANT
             return c.module.builtIns.getArrayType(projectionKind, componentType, annotations)
         }
 
@@ -98,16 +98,16 @@ class JavaTypeResolver(
     private fun transformJavaClassifierType(javaType: JavaClassifierType, attr: JavaTypeAttributes): KotlinType {
         fun errorType() = ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_JAVA_CLASS, javaType.presentableText)
 
-        val useFlexible = !attr.isForAnnotationParameter && attr.howThisTypeIsUsed != SUPERTYPE
-        val isRaw = javaType.isRaw
+        konst useFlexible = !attr.isForAnnotationParameter && attr.howThisTypeIsUsed != SUPERTYPE
+        konst isRaw = javaType.isRaw
         if (!isRaw && !useFlexible) {
             return computeSimpleJavaClassifierType(javaType, attr, null) ?: errorType()
         }
 
-        val lower =
+        konst lower =
             computeSimpleJavaClassifierType(javaType, attr.withFlexibility(FLEXIBLE_LOWER_BOUND), lowerResult = null)
                 ?: return errorType()
-        val upper =
+        konst upper =
             computeSimpleJavaClassifierType(javaType, attr.withFlexibility(FLEXIBLE_UPPER_BOUND), lowerResult = lower)
                 ?: return errorType()
 
@@ -123,27 +123,27 @@ class JavaTypeResolver(
         attr: JavaTypeAttributes,
         lowerResult: SimpleType?
     ): SimpleType? {
-        val attributes =
+        konst attributes =
             lowerResult?.attributes ?: LazyJavaAnnotations(c, javaType).toDefaultAttributes()
-        val constructor = computeTypeConstructor(javaType, attr) ?: return null
-        val isNullable = attr.isNullable()
+        konst constructor = computeTypeConstructor(javaType, attr) ?: return null
+        konst isNullable = attr.isNullable()
 
         if (lowerResult?.constructor == constructor && !javaType.isRaw && isNullable) {
             return lowerResult.makeNullableAsSpecified(true)
         }
 
-        val arguments = computeArguments(javaType, attr, constructor)
+        konst arguments = computeArguments(javaType, attr, constructor)
 
         return KotlinTypeFactory.simpleType(attributes, constructor, arguments, isNullable)
     }
 
     private fun computeTypeConstructor(javaType: JavaClassifierType, attr: JavaTypeAttributes): TypeConstructor? {
-        val classifier = javaType.classifier ?: return createNotFoundClass(javaType)
+        konst classifier = javaType.classifier ?: return createNotFoundClass(javaType)
         return when (classifier) {
             is JavaClass -> {
-                val fqName = classifier.fqName.sure { "Class type should have a FQ name: $classifier" }
+                konst fqName = classifier.fqName.sure { "Class type should have a FQ name: $classifier" }
 
-                val classData = mapKotlinClass(javaType, attr, fqName) ?: c.components.moduleClassResolver.resolveClass(classifier)
+                konst classData = mapKotlinClass(javaType, attr, fqName) ?: c.components.moduleClassResolver.resolveClass(classifier)
                 classData?.typeConstructor ?: createNotFoundClass(javaType)
             }
             is JavaTypeParameter -> {
@@ -158,7 +158,7 @@ class JavaTypeResolver(
     // and treat the resulting qualified name as if it references a simple top-level class.
     // Note that this makes MISSING_DEPENDENCY_CLASS diagnostic messages not as precise as they could be in some corner cases.
     private fun createNotFoundClass(javaType: JavaClassifierType): TypeConstructor {
-        val classId = ClassId.topLevel(FqName(javaType.classifierQualifiedName))
+        konst classId = ClassId.topLevel(FqName(javaType.classifierQualifiedName))
         return c.components.deserializedDescriptorResolver.components.notFoundClasses.getClass(classId, listOf(0)).typeConstructor
     }
 
@@ -167,9 +167,9 @@ class JavaTypeResolver(
             return c.components.reflectionTypes.kClass
         }
 
-        val javaToKotlin = JavaToKotlinClassMapper
+        konst javaToKotlin = JavaToKotlinClassMapper
 
-        val kotlinDescriptor = javaToKotlin.mapJavaToKotlin(fqName, c.module.builtIns) ?: return null
+        konst kotlinDescriptor = javaToKotlin.mapJavaToKotlin(fqName, c.module.builtIns) ?: return null
 
         if (javaToKotlin.isReadOnly(kotlinDescriptor)) {
             if (attr.flexibility == FLEXIBLE_LOWER_BOUND ||
@@ -191,7 +191,7 @@ class JavaTypeResolver(
         readOnlyContainer: ClassDescriptor
     ): Boolean {
         if (!typeArguments.lastOrNull().isSuperWildcard()) return false
-        val mutableLastParameterVariance = JavaToKotlinClassMapper.convertReadOnlyToMutable(readOnlyContainer)
+        konst mutableLastParameterVariance = JavaToKotlinClassMapper.convertReadOnlyToMutable(readOnlyContainer)
             .typeConstructor.parameters.lastOrNull()?.variance ?: return false
 
         return mutableLastParameterVariance != OUT_VARIANCE
@@ -224,7 +224,7 @@ class JavaTypeResolver(
         // - Calculating second argument for raw upper bound of T. It depends on F, that again depends on upper bound of T,
         //   so we get A<*, *>.
         // Summary result for upper bound of T is `A<A<*, *>, A<*, *>>..A<out A<*, *>, out A<*, *>>`
-        val erasedUpperBound = LazyWrappedType(c.storageManager) {
+        konst erasedUpperBound = LazyWrappedType(c.storageManager) {
             typeParameterUpperBoundEraser.getErasedUpperBound(
                 parameter,
                 attr.withDefaultType(constructor.declarationDescriptor?.defaultType).markIsRaw(javaType.isRaw)
@@ -233,7 +233,7 @@ class JavaTypeResolver(
 
         projectionComputer.computeProjection(
             parameter,
-            // if erasure happens due to invalid arguments number, use star projections instead
+            // if erasure happens due to inkonstid arguments number, use star projections instead
             attr.markIsRaw(javaType.isRaw),
             typeParameterUpperBoundEraser,
             erasedUpperBound
@@ -245,15 +245,15 @@ class JavaTypeResolver(
         attr: JavaTypeAttributes,
         constructor: TypeConstructor
     ): List<TypeProjection> {
-        val isRaw = javaType.isRaw
-        val eraseTypeParameters =
+        konst isRaw = javaType.isRaw
+        konst eraseTypeParameters =
             isRaw ||
                     // This option is needed because sometimes we get weird versions of JDK classes in the class path,
                     // such as collections with no generics, so the Java types are not raw, formally, but they don't match with
                     // their Kotlin analogs, so we treat them as raw to avoid exceptions
                     (javaType.typeArguments.isEmpty() && constructor.parameters.isNotEmpty())
 
-        val typeParameters = constructor.parameters
+        konst typeParameters = constructor.parameters
         if (eraseTypeParameters) {
             return computeRawTypeArguments(javaType, typeParameters, constructor, attr)
         }
@@ -265,13 +265,13 @@ class JavaTypeResolver(
             }.toList()
         }
         return javaType.typeArguments.withIndex().map { indexedArgument ->
-            val (i, javaTypeArgument) = indexedArgument
+            konst (i, javaTypeArgument) = indexedArgument
 
             assert(i < typeParameters.size) {
                 "Argument index should be less then type parameters count, but $i > ${typeParameters.size}"
             }
 
-            val parameter = typeParameters[i]
+            konst parameter = typeParameters[i]
             transformToTypeProjection(javaTypeArgument, COMMON.toAttributes(), parameter)
         }.toList()
     }
@@ -283,13 +283,13 @@ class JavaTypeResolver(
     ): TypeProjection {
         return when (javaType) {
             is JavaWildcardType -> {
-                val bound = javaType.bound
-                val projectionKind = if (javaType.isExtends) OUT_VARIANCE else IN_VARIANCE
+                konst bound = javaType.bound
+                konst projectionKind = if (javaType.isExtends) OUT_VARIANCE else IN_VARIANCE
                 if (bound == null || projectionKind.isConflictingArgumentFor(typeParameter))
                     makeStarProjection(typeParameter, attr)
                 else {
-                    val nullabilityAnnotationOnWildcard = extractNullabilityAnnotationOnBoundedWildcard(c, javaType)
-                    val transformedJavaType = transformJavaType(bound, COMMON.toAttributes()).let {
+                    konst nullabilityAnnotationOnWildcard = extractNullabilityAnnotationOnBoundedWildcard(c, javaType)
+                    konst transformedJavaType = transformJavaType(bound, COMMON.toAttributes()).let {
                         if (nullabilityAnnotationOnWildcard != null) {
                             it.replaceAnnotations(Annotations.create(it.annotations + nullabilityAnnotationOnWildcard))
                         } else it

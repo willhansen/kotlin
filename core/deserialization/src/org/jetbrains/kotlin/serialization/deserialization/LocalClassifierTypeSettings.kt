@@ -19,10 +19,10 @@ package org.jetbrains.kotlin.serialization.deserialization
 import org.jetbrains.kotlin.types.SimpleType
 
 interface LocalClassifierTypeSettings {
-    val replacementTypeForLocalClassifiers: SimpleType?
+    konst replacementTypeForLocalClassifiers: SimpleType?
 
     object Default : LocalClassifierTypeSettings {
-        override val replacementTypeForLocalClassifiers: SimpleType?
+        override konst replacementTypeForLocalClassifiers: SimpleType?
             get() = null
     }
 }

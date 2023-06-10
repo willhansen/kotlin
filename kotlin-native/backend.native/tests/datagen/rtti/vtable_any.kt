@@ -12,7 +12,7 @@ fun runTest() {
     // Try to trick devirtualizer
     println(anyMethods(arrayListOf("1")))
     println(anyMethods(mapOf("2" to 1).keys))
-    println(anyMethods(mapOf("1" to 3).values))
+    println(anyMethods(mapOf("1" to 3).konstues))
     println(anyMethods(setOf("4")))
 }
 

@@ -6,11 +6,11 @@ import kotlin.reflect.KClass
 
 annotation class RunsInActiveStoreMode
 
-val w1 = ""::class.java
-val w2 = ""::class.java
+konst w1 = ""::class.java
+konst w2 = ""::class.java
 
 private fun <T : Annotation> foo(annotationClass: Class<T>) = w1.getAnnotation(annotationClass) ?: w2.getAnnotation(annotationClass)
 
 fun main() {
-    val x: Any = foo(RunsInActiveStoreMode::class.java)
+    konst x: Any = foo(RunsInActiveStoreMode::class.java)
 }

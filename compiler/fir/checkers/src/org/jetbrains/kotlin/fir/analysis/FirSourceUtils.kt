@@ -32,13 +32,13 @@ fun KtSourceElement.getChild(types: Set<IElementType>, index: Int = 0, depth: In
 }
 
 private fun KtPsiSourceElement.getChild(types: Set<IElementType>, index: Int, depth: Int, reverse: Boolean): KtSourceElement? {
-    val visitor = PsiElementFinderByType(types, index, depth, reverse)
+    konst visitor = PsiElementFinderByType(types, index, depth, reverse)
     return visitor.find(psi)?.toKtPsiSourceElement()
 }
 
 private fun KtLightSourceElement.getChild(types: Set<IElementType>, index: Int, depth: Int, reverse: Boolean): KtSourceElement? {
-    val visitor = LighterTreeElementFinderByType(treeStructure, types, index, depth, reverse)
-    val childNode = visitor.find(lighterASTNode) ?: return null
+    konst visitor = LighterTreeElementFinderByType(treeStructure, types, index, depth, reverse)
+    konst childNode = visitor.find(lighterASTNode) ?: return null
     return buildChildSourceElement(childNode)
 }
 
@@ -46,7 +46,7 @@ private fun KtLightSourceElement.getChild(types: Set<IElementType>, index: Int, 
  * Keeps 'padding' of parent node in child node
  */
 internal fun KtLightSourceElement.buildChildSourceElement(childNode: LighterASTNode): KtLightSourceElement {
-    val offsetDelta = startOffset - lighterASTNode.startOffset
+    konst offsetDelta = startOffset - lighterASTNode.startOffset
     return childNode.toKtLightSourceElement(
         treeStructure,
         startOffset = childNode.startOffset + offsetDelta,
@@ -54,7 +54,7 @@ internal fun KtLightSourceElement.buildChildSourceElement(childNode: LighterASTN
     )
 }
 
-private val IMPORT_PARENT_TOKEN_TYPES = TokenSet.create(KtNodeTypes.DOT_QUALIFIED_EXPRESSION, KtNodeTypes.REFERENCE_EXPRESSION)
+private konst IMPORT_PARENT_TOKEN_TYPES = TokenSet.create(KtNodeTypes.DOT_QUALIFIED_EXPRESSION, KtNodeTypes.REFERENCE_EXPRESSION)
 
 /**
  * Returns a source element for the import segment that is [indexFromLast]th from last.

@@ -1,5 +1,5 @@
 class A {
-    val x: Int
+    konst x: Int
     constructor() {
         if (1 == 1) {
             return

@@ -26,14 +26,14 @@ private fun decodeFromUtf8(bytes: ByteArray) = String(bytes)
 internal fun encodeToUtf8(str: String) = str.toByteArray()
 
 internal fun CPointer<ByteVar>.toKStringFromUtf8Impl(): String {
-    val nativeBytes = this
+    konst nativeBytes = this
 
     var length = 0
     while (nativeBytes[length] != 0.toByte()) {
         ++length
     }
 
-    val bytes = ByteArray(length)
+    konst bytes = ByteArray(length)
     nativeMemUtils.getByteArray(nativeBytes.pointed, bytes, length)
     return decodeFromUtf8(bytes)
 }
@@ -48,47 +48,47 @@ inline fun <reified R : Number> Byte.signExtend(): R = when (R::class.java) {
     java.lang.Short::class.java -> this.toShort() as R
     java.lang.Integer::class.java -> this.toInt() as R
     java.lang.Long::class.java -> this.toLong() as R
-    else -> this.invalidSignExtension()
+    else -> this.inkonstidSignExtension()
 }
 
 inline fun <reified R : Number> Short.signExtend(): R = when (R::class.java) {
     java.lang.Short::class.java -> this.toShort() as R
     java.lang.Integer::class.java -> this.toInt() as R
     java.lang.Long::class.java -> this.toLong() as R
-    else -> this.invalidSignExtension()
+    else -> this.inkonstidSignExtension()
 }
 
 inline fun <reified R : Number> Int.signExtend(): R = when (R::class.java) {
     java.lang.Integer::class.java -> this.toInt() as R
     java.lang.Long::class.java -> this.toLong() as R
-    else -> this.invalidSignExtension()
+    else -> this.inkonstidSignExtension()
 }
 
 inline fun <reified R : Number> Long.signExtend(): R = when (R::class.java) {
     java.lang.Long::class.java -> this.toLong() as R
-    else -> this.invalidSignExtension()
+    else -> this.inkonstidSignExtension()
 }
 
-inline fun <reified R : Number> Number.invalidSignExtension(): R {
+inline fun <reified R : Number> Number.inkonstidSignExtension(): R {
     throw Error("unable to sign extend ${this.javaClass.simpleName} \"${this}\" to ${R::class.java.simpleName}")
 }
 
 inline fun <reified R : Number> Byte.narrow(): R = when (R::class.java) {
     java.lang.Byte::class.java -> this.toByte() as R
-    else -> this.invalidNarrowing()
+    else -> this.inkonstidNarrowing()
 }
 
 inline fun <reified R : Number> Short.narrow(): R = when (R::class.java) {
     java.lang.Byte::class.java -> this.toByte() as R
     java.lang.Short::class.java -> this.toShort() as R
-    else -> this.invalidNarrowing()
+    else -> this.inkonstidNarrowing()
 }
 
 inline fun <reified R : Number> Int.narrow(): R = when (R::class.java) {
     java.lang.Byte::class.java -> this.toByte() as R
     java.lang.Short::class.java -> this.toShort() as R
     java.lang.Integer::class.java -> this.toInt() as R
-    else -> this.invalidNarrowing()
+    else -> this.inkonstidNarrowing()
 }
 
 inline fun <reified R : Number> Long.narrow(): R = when (R::class.java) {
@@ -96,10 +96,10 @@ inline fun <reified R : Number> Long.narrow(): R = when (R::class.java) {
     java.lang.Short::class.java -> this.toShort() as R
     java.lang.Integer::class.java -> this.toInt() as R
     java.lang.Long::class.java -> this.toLong() as R
-    else -> this.invalidNarrowing()
+    else -> this.inkonstidNarrowing()
 }
 
-inline fun <reified R : Number> Number.invalidNarrowing(): R {
+inline fun <reified R : Number> Number.inkonstidNarrowing(): R {
     throw Error("unable to narrow ${this.javaClass.simpleName} \"${this}\" to ${R::class.java.simpleName}")
 }
 
@@ -109,12 +109,12 @@ private fun initializePath() =
                 .split(File.pathSeparatorChar)
                 .map { if (it == "") "." else it }
 
-private val sha256 = MessageDigest.getInstance("SHA-256")
-private val systemTmpDir = System.getProperty("java.io.tmpdir")
+private konst sha256 = MessageDigest.getInstance("SHA-256")
+private konst systemTmpDir = System.getProperty("java.io.tmpdir")
 
 // TODO: File(..).deleteOnExit() does not work on Windows. May be use FILE_FLAG_DELETE_ON_CLOSE?
 private fun tryLoadKonanLibrary(dir: String, fullLibraryName: String, runFromDaemon: Boolean): Boolean {
-    val fullLibraryPath = Paths.get(dir, fullLibraryName)
+    konst fullLibraryPath = Paths.get(dir, fullLibraryName)
     if (!Files.exists(fullLibraryPath)) return false
 
     fun createTempDirWithLibrary() = if (runFromDaemon) {
@@ -127,26 +127,26 @@ private fun tryLoadKonanLibrary(dir: String, fullLibraryName: String, runFromDae
         }
     }
 
-    val defaultTempDir = if (!runFromDaemon)
+    konst defaultTempDir = if (!runFromDaemon)
         dir
     else {
         // Sometimes loading library from its original place doesn't work (it gets 'half-loaded'
         // with relocation table haven't been substituted by the system loader without reporting any error).
         // We workaround this by copying the library to some temporary place.
         // For now this behaviour have only been observed for compilations run from the Gradle daemon on Team City.
-        val hash = sha256.digest(Files.readAllBytes(fullLibraryPath))
-        val defaultTempDirName = buildString {
+        konst hash = sha256.digest(Files.readAllBytes(fullLibraryPath))
+        konst defaultTempDirName = buildString {
             append(fullLibraryName)
             append('_')
             hash.forEach {
-                val hex = it.toUByte().toString(16)
+                konst hex = it.toUByte().toString(16)
                 if (hex.length == 1)
                     append('0')
                 append(hex)
             }
         }
-        val defaultTempDir = Paths.get(systemTmpDir, defaultTempDirName).toAbsolutePath().toString()
-        val tempDir = File(createTempDirWithLibrary())
+        konst defaultTempDir = Paths.get(systemTmpDir, defaultTempDirName).toAbsolutePath().toString()
+        konst tempDir = File(createTempDirWithLibrary())
         if (tempDir.renameTo(File(defaultTempDir))) {
             File(defaultTempDir).deleteOnExit()
             File("$defaultTempDir/$fullLibraryName").deleteOnExit()
@@ -170,7 +170,7 @@ private fun tryLoadKonanLibrary(dir: String, fullLibraryName: String, runFromDae
                     |${'\t'}${e.message}
                     """.trimMargin())
         }
-        val tempDir = createTempDirWithLibrary()
+        konst tempDir = createTempDirWithLibrary()
 
         File(tempDir).deleteOnExit()
         File("$tempDir/$fullLibraryName").deleteOnExit()
@@ -181,13 +181,13 @@ private fun tryLoadKonanLibrary(dir: String, fullLibraryName: String, runFromDae
 }
 
 fun loadKonanLibrary(name: String) {
-    val runFromDaemon = System.getProperty("kotlin.native.tool.runFromDaemon") == "true"
-    val fullLibraryName = System.mapLibraryName(name)
-    val paths = initializePath()
+    konst runFromDaemon = System.getProperty("kotlin.native.tool.runFromDaemon") == "true"
+    konst fullLibraryName = System.mapLibraryName(name)
+    konst paths = initializePath()
     for (dir in paths) {
         if (tryLoadKonanLibrary(dir, fullLibraryName, runFromDaemon)) return
     }
-    val defaultNativeLibsDir = "${KonanHomeProvider.determineKonanHome()}/konan/nativelib"
+    konst defaultNativeLibsDir = "${KonanHomeProvider.determineKonanHome()}/konan/nativelib"
     if (tryLoadKonanLibrary(defaultNativeLibsDir, fullLibraryName, runFromDaemon))
         return
     error("Lib $fullLibraryName is not found in $defaultNativeLibsDir and ${paths.joinToString { it }}")

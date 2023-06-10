@@ -12,7 +12,7 @@ var x = Any()
 
 fun main() {
     Platform.isMemoryLeakCheckerActive = true
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
     worker.execute(TransferMode.SAFE, {}) {
         println(x)  // Make sure x is initialized

@@ -18,7 +18,7 @@ fun C.foo() {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     runSuspend(c::foo)
     return c.test
 }

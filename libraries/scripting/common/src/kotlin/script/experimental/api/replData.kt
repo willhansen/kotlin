@@ -9,15 +9,15 @@ import java.io.Serializable
 import kotlin.script.experimental.util.PropertiesCollection
 
 // Warning: during the transition to the new REPL infrastructure, should be kept in sync with REPL_CODE_LINE_FIRST_NO/REPL_CODE_LINE_FIRST_GEN
-const val REPL_SNIPPET_FIRST_NO = 1
-const val REPL_SNIPPET_FIRST_GEN = 1
+const konst REPL_SNIPPET_FIRST_NO = 1
+const konst REPL_SNIPPET_FIRST_GEN = 1
 
 interface ReplSnippetId : Serializable, Comparable<ReplSnippetId> {
-    val no: Int
-    val generation: Int
+    konst no: Int
+    konst generation: Int
 }
 
-data class ReplSnippetIdImpl(override val no: Int, override val generation: Int, private val codeHash: Int) : ReplSnippetId, Serializable {
+data class ReplSnippetIdImpl(override konst no: Int, override konst generation: Int, private konst codeHash: Int) : ReplSnippetId, Serializable {
 
     constructor(no: Int, generation: Int, code: SourceCode) : this(no, generation, code.text.hashCode())
 
@@ -28,7 +28,7 @@ data class ReplSnippetIdImpl(override val no: Int, override val generation: Int,
     } ?: -1
 
     companion object {
-        private val serialVersionUID: Long = 1L
+        private konst serialVersionUID: Long = 1L
     }
 }
 
@@ -39,7 +39,7 @@ open class ReplScriptCompilationConfigurationBuilder : PropertiesCollection.Buil
     companion object : ReplScriptCompilationConfigurationKeys
 }
 
-val ScriptCompilationConfigurationKeys.repl
+konst ScriptCompilationConfigurationKeys.repl
     get() = ReplScriptCompilationConfigurationBuilder()
 
 
@@ -47,14 +47,14 @@ val ScriptCompilationConfigurationKeys.repl
  * The prefix of the name of the generated script class field to assign the snipped results to, empty means disabled
  * see also ScriptCompilationConfigurationKeys.resultField
  */
-val ReplScriptCompilationConfigurationKeys.resultFieldPrefix by PropertiesCollection.key<String>("res")
+konst ReplScriptCompilationConfigurationKeys.resultFieldPrefix by PropertiesCollection.key<String>("res")
 
 typealias MakeSnippetIdentifier = (ScriptCompilationConfiguration, ReplSnippetId) -> String
 
 /**
  * The REPL snippet class identifier generation function
  */
-val ReplScriptCompilationConfigurationKeys.makeSnippetIdentifier by PropertiesCollection.key<MakeSnippetIdentifier>(
+konst ReplScriptCompilationConfigurationKeys.makeSnippetIdentifier by PropertiesCollection.key<MakeSnippetIdentifier>(
     { _, snippetId ->
         makeDefaultSnippetIdentifier(snippetId)
     })

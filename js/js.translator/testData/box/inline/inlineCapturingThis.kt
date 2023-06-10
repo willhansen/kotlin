@@ -5,7 +5,7 @@ package foo
 
 inline fun block(p: () -> Unit) = p()
 
-class A(val x: Int) {
+class A(konst x: Int) {
     fun test(): Int {
         var result: Int = 0
         block {

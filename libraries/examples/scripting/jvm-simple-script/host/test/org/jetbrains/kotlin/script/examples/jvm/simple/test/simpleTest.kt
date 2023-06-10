@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.script.examples.jvm.simple.test
 
-import org.jetbrains.kotlin.script.examples.jvm.simple.host.evalFile
+import org.jetbrains.kotlin.script.examples.jvm.simple.host.ekonstFile
 import org.junit.Assert
 import java.io.File
 import org.junit.Test
@@ -15,7 +15,7 @@ class SimpleTest {
 
     @Test
     fun testSimple() {
-        val res = evalFile(File("testData/hello.simplescript.kts"))
+        konst res = ekonstFile(File("testData/hello.simplescript.kts"))
 
         Assert.assertTrue(
             "test failed:\n  ${res.reports.joinToString("\n  ") { it.message + if (it.exception == null) "" else ": ${it.exception}" }}",
@@ -25,7 +25,7 @@ class SimpleTest {
 
     @Test
     fun testError() {
-        val res = evalFile(File("testData/error.simplescript.kts"))
+        konst res = ekonstFile(File("testData/error.simplescript.kts"))
 
         Assert.assertTrue(
             "test failed - expecting a failure with the message \"Unresolved reference: abracadabra\" but received " +

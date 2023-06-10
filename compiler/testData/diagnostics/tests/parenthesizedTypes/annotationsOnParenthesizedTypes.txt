@@ -8,11 +8,11 @@ package
 }
 
 public interface AnnotationsOnParenthesizedTypes {
-    public abstract val lambdaParameter: (@A C) -> C
-    public abstract val lambdaParameterNP: (@A C) -> C
-    public abstract val lambdaReceiver: (@A C).() -> C
-    public abstract val lambdaReturnValue: () -> @A C
-    public abstract val lambdaType: @A () -> C
+    public abstract konst lambdaParameter: (@A C) -> C
+    public abstract konst lambdaParameterNP: (@A C) -> C
+    public abstract konst lambdaReceiver: (@A C).() -> C
+    public abstract konst lambdaReturnValue: () -> @A C
+    public abstract konst lambdaType: @A () -> C
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open fun parameter(/*0*/ a: @A C): kotlin.Unit

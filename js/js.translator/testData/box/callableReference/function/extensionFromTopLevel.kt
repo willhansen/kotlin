@@ -16,8 +16,8 @@ fun A.bar(x: Int): Int {
 }
 
 fun box(): String {
-    val funRef = A::bar
-    val obj = A()
+    konst funRef = A::bar
+    konst obj = A()
     var result = funRef(obj, 25)
     if (result != 25 || obj.xx != 200) return "fail1: result = $result, expected 25; obj.xx = $obj.xx, expected 200"
 

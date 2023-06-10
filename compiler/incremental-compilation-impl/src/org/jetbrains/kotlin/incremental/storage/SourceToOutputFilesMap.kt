@@ -20,8 +20,8 @@ class SourceToOutputFilesMap(
     operator fun get(sourceFile: File): Collection<File> =
         storage[pathConverter.toPath(sourceFile)].orEmpty().map(pathConverter::toFile)
 
-    override fun dumpValue(value: Collection<String>) =
-        value.dumpCollection()
+    override fun dumpValue(konstue: Collection<String>) =
+        konstue.dumpCollection()
 
     fun remove(file: File): Collection<File> =
         get(file).also { storage.remove(pathConverter.toPath(file)) }

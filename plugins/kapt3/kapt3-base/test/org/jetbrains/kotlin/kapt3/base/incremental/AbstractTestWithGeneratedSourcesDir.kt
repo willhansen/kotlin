@@ -12,6 +12,6 @@ abstract class AbstractTestWithGeneratedSourcesDir {
     @TempDir
     private var _generatedSources: File? = null
 
-    protected val generatedSources: File
+    protected konst generatedSources: File
         get() = _generatedSources!!
 }

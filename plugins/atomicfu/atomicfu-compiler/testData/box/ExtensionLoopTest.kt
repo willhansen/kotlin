@@ -2,44 +2,44 @@ import kotlinx.atomicfu.*
 import kotlin.test.*
 
 class LoopTest {
-    val a = atomic(0)
-    val a1 = atomic(1)
-    val b = atomic(true)
-    val l = atomic(5000000000)
-    val r = atomic<A>(A("aaaa"))
-    val rs = atomic<String>("bbbb")
+    konst a = atomic(0)
+    konst a1 = atomic(1)
+    konst b = atomic(true)
+    konst l = atomic(5000000000)
+    konst r = atomic<A>(A("aaaa"))
+    konst rs = atomic<String>("bbbb")
 
-    class A(val s: String)
+    class A(konst s: String)
 
     private inline fun casLoop(to: Int): Int {
         a.loop { cur ->
-            if (a.compareAndSet(cur, to)) return a.value
+            if (a.compareAndSet(cur, to)) return a.konstue
             return 777
         }
     }
 
     private inline fun casLoopExpression(to: Int): Int = a.loop { cur ->
-        if (a.compareAndSet(cur, to)) return a.value
+        if (a.compareAndSet(cur, to)) return a.konstue
         return 777
     }
 
     private inline fun AtomicInt.extensionLoop(to: Int): Int {
         loop { cur ->
-            if (compareAndSet(cur, to)) return value
+            if (compareAndSet(cur, to)) return konstue
             return 777
         }
     }
 
     private inline fun AtomicInt.extensionLoopExpression(to: Int): Int = loop { cur ->
         lazySet(cur + 10)
-        return if (compareAndSet(cur, to)) value else incrementAndGet()
+        return if (compareAndSet(cur, to)) konstue else incrementAndGet()
     }
 
     private inline fun AtomicInt.extensionLoopMixedReceivers(first: Int, second: Int): Int {
         loop { cur ->
             compareAndSet(cur, first)
             a.compareAndSet(first, second)
-            return value
+            return konstue
         }
     }
 
@@ -47,19 +47,19 @@ class LoopTest {
         loop { cur ->
             compareAndSet(cur, to)
             a.extensionLoop(5)
-            return value
+            return konstue
         }
     }
 
     private inline fun AtomicInt.foo(to: Int): Int {
         loop { cur ->
             if (compareAndSet(cur, to)) return 777
-            else return value
+            else return konstue
         }
     }
 
     private inline fun AtomicInt.bar(delta: Int): Int {
-        return foo(value + delta)
+        return foo(konstue + delta)
     }
 
     fun testIntExtensionLoops() {
@@ -73,11 +73,11 @@ class LoopTest {
     }
 }
 
-private val ref = atomic<String>("aaa")
+private konst ref = atomic<String>("aaa")
 
 private inline fun AtomicRef<String>.topLevelExtensionLoop(to: String): String = loop { cur ->
     lazySet(cur + to)
-    return value
+    return konstue
 }
 
 fun testTopLevelExtensionLoop() {
@@ -85,7 +85,7 @@ fun testTopLevelExtensionLoop() {
 }
 
 fun box(): String {
-    val testClass = LoopTest()
+    konst testClass = LoopTest()
     testClass.testIntExtensionLoops()
     testTopLevelExtensionLoop()
     return "OK"

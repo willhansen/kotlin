@@ -3,17 +3,17 @@
 import kotlin.coroutines.*
 
 abstract class SuspendingMutableMap<K : Any, V : Any>(
-    protected val map: MutableMap<K, V>,
+    protected konst map: MutableMap<K, V>,
 ) : Map<K, V> {
     abstract suspend fun clear()
 
-    override val entries: Set<Map.Entry<K, V>>
+    override konst entries: Set<Map.Entry<K, V>>
         get() = TODO("Not yet implemented")
-    override val keys: Set<K>
+    override konst keys: Set<K>
         get() = TODO("Not yet implemented")
-    override val size: Int
+    override konst size: Int
         get() = TODO("Not yet implemented")
-    override val values: Collection<V>
+    override konst konstues: Collection<V>
         get() = TODO("Not yet implemented")
 
     override fun isEmpty(): Boolean {
@@ -24,7 +24,7 @@ abstract class SuspendingMutableMap<K : Any, V : Any>(
         TODO("Not yet implemented")
     }
 
-    override fun containsValue(value: V): Boolean {
+    override fun containsValue(konstue: V): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -41,8 +41,8 @@ fun builder(c: suspend () -> Unit) {
 
 fun box(): String {
     builder {
-        val m = mutableMapOf(1 to 1)
-        val map = object: SuspendingMutableMap<Int, Int>(m) {
+        konst m = mutableMapOf(1 to 1)
+        konst map = object: SuspendingMutableMap<Int, Int>(m) {
             override suspend fun clear() {
                 map.clear()
             }

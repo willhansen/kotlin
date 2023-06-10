@@ -16,13 +16,13 @@ import java.util.*
 
 // todo problem: intersection types in constrains: A <: Number, B <: Inv<A & Any> =>? B <: Inv<out Number & Any>
 class ConstraintIncorporator(
-    val typeApproximator: AbstractTypeApproximator,
-    val trivialConstraintTypeInferenceOracle: TrivialConstraintTypeInferenceOracle,
-    val utilContext: ConstraintSystemUtilContext
+    konst typeApproximator: AbstractTypeApproximator,
+    konst trivialConstraintTypeInferenceOracle: TrivialConstraintTypeInferenceOracle,
+    konst utilContext: ConstraintSystemUtilContext
 ) {
 
     interface Context : TypeSystemInferenceExtensionContext {
-        val allTypeVariablesWithConstraints: Collection<VariableWithConstraints>
+        konst allTypeVariablesWithConstraints: Collection<VariableWithConstraints>
 
         // if such type variable is fixed then it is error
         fun getTypeVariable(typeConstructor: TypeConstructorMarker): TypeVariableMarker?
@@ -59,7 +59,7 @@ class ConstraintIncorporator(
         typeVariable: TypeVariableMarker,
         constraint: Constraint
     ) {
-        val shouldBeTypeVariableFlexible =
+        konst shouldBeTypeVariableFlexible =
             if (useRefinedBoundsForTypeVariableInFlexiblePosition())
                 false
             else
@@ -78,7 +78,7 @@ class ConstraintIncorporator(
         if (constraint.kind != ConstraintKind.UPPER) {
             getConstraintsForVariable(typeVariable).forEach {
                 if (it.kind != ConstraintKind.LOWER) {
-                    val isFromDeclaredUpperBound =
+                    konst isFromDeclaredUpperBound =
                         it.position.from is DeclaredUpperBoundConstraintPosition<*> && !it.type.typeConstructor().isTypeVariable()
 
                     addNewIncorporatedConstraint(
@@ -97,9 +97,9 @@ class ConstraintIncorporator(
         typeVariable: TypeVariableMarker,
         constraint: Constraint
     ) {
-        val freshTypeConstructor = typeVariable.freshTypeConstructor()
+        konst freshTypeConstructor = typeVariable.freshTypeConstructor()
         for (typeVariableWithConstraint in this@insideOtherConstraint.allTypeVariablesWithConstraints) {
-            val constraintsWhichConstraintMyVariable = typeVariableWithConstraint.constraints.filter {
+            konst constraintsWhichConstraintMyVariable = typeVariableWithConstraint.constraints.filter {
                 containsTypeVariable(it.type, freshTypeConstructor)
             }
             constraintsWhichConstraintMyVariable.forEach {
@@ -116,8 +116,8 @@ class ConstraintIncorporator(
         otherConstraint: Constraint,
         needApproximation: Boolean = true
     ) {
-        val typeWithSubstitution = baseConstraint.type.substitute(this, otherVariable, type)
-        val prepareType = { toSuper: Boolean ->
+        konst typeWithSubstitution = baseConstraint.type.substitute(this, otherVariable, type)
+        konst prepareType = { toSuper: Boolean ->
             if (needApproximation) approximateCapturedTypes(typeWithSubstitution, toSuper) else typeWithSubstitution
         }
 
@@ -135,9 +135,9 @@ class ConstraintIncorporator(
         otherVariable: TypeVariableMarker,
         otherConstraint: Constraint
     ) {
-        val isBaseGenericType = baseConstraint.type.argumentsCount() != 0
-        val isBaseOrOtherCapturedType = baseConstraint.type.isCapturedType() || otherConstraint.type.isCapturedType()
-        val (type, needApproximation) = when (otherConstraint.kind) {
+        konst isBaseGenericType = baseConstraint.type.argumentsCount() != 0
+        konst isBaseOrOtherCapturedType = baseConstraint.type.isCapturedType() || otherConstraint.type.isCapturedType()
+        konst (type, needApproximation) = when (otherConstraint.kind) {
             ConstraintKind.EQUALITY -> {
                 otherConstraint.type to false
             }
@@ -202,9 +202,9 @@ class ConstraintIncorporator(
     ) {
         if (targetVariable in getNestedTypeVariables(newConstraint)) return
 
-        val isUsefulForNullabilityConstraint =
+        konst isUsefulForNullabilityConstraint =
             isPotentialUsefulNullabilityConstraint(newConstraint, otherConstraint.type, otherConstraint.kind)
-        val isFromVariableFixation = baseConstraint.position.from is FixVariableConstraintPosition<*>
+        konst isFromVariableFixation = baseConstraint.position.from is FixVariableConstraintPosition<*>
                 || otherConstraint.position.from is FixVariableConstraintPosition<*>
 
         if (!otherConstraint.kind.isEqual() &&
@@ -218,21 +218,21 @@ class ConstraintIncorporator(
             )
         ) return
 
-        val derivedFrom = SmartSet.create(baseConstraint.derivedFrom).also { it.addAll(otherConstraint.derivedFrom) }
+        konst derivedFrom = SmartSet.create(baseConstraint.derivedFrom).also { it.addAll(otherConstraint.derivedFrom) }
         if (otherVariable in derivedFrom) return
 
         derivedFrom.add(otherVariable)
 
-        val kind = if (isSubtype) ConstraintKind.LOWER else ConstraintKind.UPPER
+        konst kind = if (isSubtype) ConstraintKind.LOWER else ConstraintKind.UPPER
 
-        val inputTypePosition =
+        konst inputTypePosition =
             baseConstraint.position.from as? OnlyInputTypeConstraintPosition ?: baseConstraint.inputTypePositionBeforeIncorporation
 
-        val isNewConstraintUsefulForNullability = isUsefulForNullabilityConstraint && newConstraint.isNullableNothing()
-        val isOtherConstraintUsefulForNullability = otherConstraint.isNullabilityConstraint && otherConstraint.type.isNullableNothing()
-        val isNullabilityConstraint = isNewConstraintUsefulForNullability || isOtherConstraintUsefulForNullability
+        konst isNewConstraintUsefulForNullability = isUsefulForNullabilityConstraint && newConstraint.isNullableNothing()
+        konst isOtherConstraintUsefulForNullability = otherConstraint.isNullabilityConstraint && otherConstraint.type.isNullableNothing()
+        konst isNullabilityConstraint = isNewConstraintUsefulForNullability || isOtherConstraintUsefulForNullability
 
-        val constraintContext = ConstraintContext(kind, derivedFrom, inputTypePosition, isNullabilityConstraint)
+        konst constraintContext = ConstraintContext(kind, derivedFrom, inputTypePosition, isNullabilityConstraint)
 
         addNewIncorporatedConstraint(targetVariable, newConstraint, constraintContext)
     }
@@ -253,9 +253,9 @@ class ConstraintIncorporator(
     ): Boolean {
         if (trivialConstraintTypeInferenceOracle.isSuitableResultedType(newConstraint)) return false
 
-        val otherConstraintCanAddNullabilityToNewOne =
+        konst otherConstraintCanAddNullabilityToNewOne =
             !newConstraint.isNullableType() && otherConstraint.isNullableType() && kind == ConstraintKind.LOWER
-        val newConstraintCanAddNullabilityToOtherOne =
+        konst newConstraintCanAddNullabilityToOtherOne =
             newConstraint.isNullableType() && !otherConstraint.isNullableType() && kind == ConstraintKind.UPPER
 
         return otherConstraintCanAddNullabilityToNewOne || newConstraintCanAddNullabilityToOtherOne
@@ -266,8 +266,8 @@ class ConstraintIncorporator(
             getTypeVariable(it.getType().typeConstructor().unwrapStubTypeVariableConstructor())
         }
 
-    private fun KotlinTypeMarker.substitute(c: Context, typeVariable: TypeVariableMarker, value: KotlinTypeMarker): KotlinTypeMarker {
-        val substitutor = c.typeSubstitutorByTypeConstructor(mapOf(typeVariable.freshTypeConstructor(c) to value))
+    private fun KotlinTypeMarker.substitute(c: Context, typeVariable: TypeVariableMarker, konstue: KotlinTypeMarker): KotlinTypeMarker {
+        konst substitutor = c.typeSubstitutorByTypeConstructor(mapOf(typeVariable.freshTypeConstructor(c) to konstue))
         return substitutor.safeSubstitute(c, this)
     }
 
@@ -278,8 +278,8 @@ class ConstraintIncorporator(
 }
 
 private fun TypeSystemInferenceExtensionContext.getNestedArguments(type: KotlinTypeMarker): List<TypeArgumentMarker> {
-    val result = SmartList<TypeArgumentMarker>()
-    val stack = ArrayDeque<TypeArgumentMarker>()
+    konst result = SmartList<TypeArgumentMarker>()
+    konst stack = ArrayDeque<TypeArgumentMarker>()
 
     when (type) {
         is FlexibleTypeMarker -> {
@@ -291,19 +291,19 @@ private fun TypeSystemInferenceExtensionContext.getNestedArguments(type: KotlinT
 
     stack.push(createTypeArgument(type, TypeVariance.INV))
 
-    val addArgumentsToStack = { projectedType: KotlinTypeMarker ->
+    konst addArgumentsToStack = { projectedType: KotlinTypeMarker ->
         for (argumentIndex in 0 until projectedType.argumentsCount()) {
             stack.add(projectedType.getArgument(argumentIndex))
         }
     }
 
     while (!stack.isEmpty()) {
-        val typeProjection = stack.pop()
+        konst typeProjection = stack.pop()
         if (typeProjection.isStarProjection()) continue
 
         result.add(typeProjection)
 
-        when (val projectedType = typeProjection.getType()) {
+        when (konst projectedType = typeProjection.getType()) {
             is FlexibleTypeMarker -> {
                 addArgumentsToStack(projectedType.lowerBound())
                 addArgumentsToStack(projectedType.upperBound())

@@ -15,7 +15,7 @@ import kotlin.reflect.KProperty1
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.toScriptSource
-import kotlin.script.experimental.jvm.BasicJvmReplEvaluator
+import kotlin.script.experimental.jvm.BasicJvmReplEkonstuator
 import kotlin.script.experimental.jvm.impl.KJvmCompiledModuleInMemory
 import kotlin.script.experimental.jvm.impl.KJvmCompiledScript
 import kotlin.script.experimental.jvm.updateClasspath
@@ -28,23 +28,23 @@ class ReplTest : TestCase() {
 
     @Test
     fun testDecompiledReflection() {
-        checkEvaluateInRepl(
+        checkEkonstuateInRepl(
             sequenceOf(
-                "val x = 1",
+                "konst x = 1",
             ),
             sequenceOf(null),
             compiledSnippetChecker = { linkedSnippet ->
-                val snippet = linkedSnippet.get()
-                val module = snippet.getCompiledModule() as KJvmCompiledModuleInMemory
+                konst snippet = linkedSnippet.get()
+                konst module = snippet.getCompiledModule() as KJvmCompiledModuleInMemory
 
-                val classLoader = module.createClassLoader(ClassLoader.getSystemClassLoader())
-                val kClass = classLoader.loadClass(snippet.scriptClassFQName).kotlin
-                val constructor = kClass.constructors.single()
-                val scriptInstance = constructor.call(emptyArray<Any>())
+                konst classLoader = module.createClassLoader(ClassLoader.getSystemClassLoader())
+                konst kClass = classLoader.loadClass(snippet.scriptClassFQName).kotlin
+                konst constructor = kClass.constructors.single()
+                konst scriptInstance = constructor.call(emptyArray<Any>())
 
                 @Suppress("UNCHECKED_CAST")
-                val xProp = kClass.declaredMemberProperties.first { it.name == "x" } as KProperty1<Any, Any>
-                val xValue = xProp.get(scriptInstance)
+                konst xProp = kClass.declaredMemberProperties.first { it.name == "x" } as KProperty1<Any, Any>
+                konst xValue = xProp.get(scriptInstance)
 
                 assertEquals(1, xValue)
 
@@ -53,11 +53,11 @@ class ReplTest : TestCase() {
     }
 
     @Test
-    fun testCompileAndEval() {
-        val out = captureOut {
-            checkEvaluateInRepl(
+    fun testCompileAndEkonst() {
+        konst out = captureOut {
+            checkEkonstuateInRepl(
                 sequenceOf(
-                    "val x = 3",
+                    "konst x = 3",
                     "x + 4",
                     "println(\"x = \$x\")"
                 ),
@@ -69,14 +69,14 @@ class ReplTest : TestCase() {
 
     @Test
     fun testCaptureFromPreviousSnippets() {
-        val out = captureOut {
-            checkEvaluateInRepl(
+        konst out = captureOut {
+            checkEkonstuateInRepl(
                 sequenceOf(
-                    "val x = 3",
+                    "konst x = 3",
                     "fun b() = x",
                     "b()",
                     "println(\"b() = \${b()}\")",
-                    "val y = x + 2",
+                    "konst y = x + 2",
                     "y",
                     "class Nested { fun c() = x + 4 }",
                     "Nested().c()",
@@ -92,10 +92,10 @@ class ReplTest : TestCase() {
     }
 
     @Test
-    fun testEvalWithResult() {
-        checkEvaluateInRepl(
+    fun testEkonstWithResult() {
+        checkEkonstuateInRepl(
             sequenceOf(
-                "val x = 5",
+                "konst x = 5",
                 "x + 6",
                 "res1 * 2"
             ),
@@ -104,10 +104,10 @@ class ReplTest : TestCase() {
     }
 
     @Test
-    fun testEvalWithIfResult() {
-        checkEvaluateInRepl(
+    fun testEkonstWithIfResult() {
+        checkEkonstuateInRepl(
             sequenceOf(
-                "val x = 5",
+                "konst x = 5",
                 "x + 6",
                 "if (x < 10) res1 * 2 else x"
             ),
@@ -117,10 +117,10 @@ class ReplTest : TestCase() {
 
     @Test
     fun testImplicitReceiver() {
-        val receiver = TestReceiver()
-        checkEvaluateInRepl(
+        konst receiver = TestReceiver()
+        checkEkonstuateInRepl(
             sequenceOf(
-                "val x = 4",
+                "konst x = 4",
                 "x + prop1",
                 "res1 * 3"
             ),
@@ -128,18 +128,18 @@ class ReplTest : TestCase() {
             simpleScriptCompilationConfiguration.with {
                 implicitReceivers(TestReceiver::class)
             },
-            simpleScriptEvaluationConfiguration.with {
+            simpleScriptEkonstuationConfiguration.with {
                 implicitReceivers(receiver)
             }
         )
     }
 
     @Test
-    fun testEvalWithError() {
-        checkEvaluateInRepl(
+    fun testEkonstWithError() {
+        checkEkonstuateInRepl(
             sequenceOf(
                 "throw RuntimeException(\"abc\")",
-                "val x = 3",
+                "konst x = 3",
                 "x + 1"
             ),
             sequenceOf(RuntimeException("abc"), null, 4)
@@ -147,8 +147,8 @@ class ReplTest : TestCase() {
     }
 
     @Test
-    fun testEvalWithExceptionWithCause() {
-        checkEvaluateInRepl(
+    fun testEkonstWithExceptionWithCause() {
+        checkEkonstuateInRepl(
             sequenceOf(
                 """
                     try {
@@ -163,14 +163,14 @@ class ReplTest : TestCase() {
     }
 
     @Test
-    fun testEvalWithErrorWithLocation() {
-        checkEvaluateInReplDiags(
+    fun testEkonstWithErrorWithLocation() {
+        checkEkonstuateInReplDiags(
             sequenceOf(
                 """
-                    val foobar = 78
-                    val foobaz = "dsdsda"
-                    val ddd = ppp
-                    val ooo = foobar
+                    konst foobar = 78
+                    konst foobaz = "dsdsda"
+                    konst ddd = ppp
+                    konst ooo = foobar
                 """.trimIndent()
             ),
             sequenceOf(
@@ -185,9 +185,9 @@ class ReplTest : TestCase() {
 
     @Test
     fun testSyntaxErrors() {
-        checkEvaluateInReplDiags(
+        checkEkonstuateInReplDiags(
             sequenceOf(
-                "data class Q(val x: Int, val: String)",
+                "data class Q(konst x: Int, konst: String)",
                 "fun g(): Unit { return }}",
                 "fun f() : Int { return 1",
                 "6*7"
@@ -203,10 +203,10 @@ class ReplTest : TestCase() {
 
     @Test
     fun testCodegenErrors() {
-        checkEvaluateInReplDiags(
+        checkEkonstuateInReplDiags(
             sequenceOf(
                 """
-                    val x = 1
+                    konst x = 1
                     class C {
                         companion object {
                             fun f() = x
@@ -229,7 +229,7 @@ class ReplTest : TestCase() {
     @Test
     // TODO: make it covering more cases
     fun testIrReceiverOvewrite() {
-        checkEvaluateInRepl(
+        checkEkonstuateInRepl(
             sequenceOf(
                 "fun f(a: String) = a",
                 "f(\"x\")"
@@ -243,19 +243,19 @@ class ReplTest : TestCase() {
 
     @Test
     fun testNoErrorAfterBrokenCodegenSnippet() {
-        val errorMessage = "Platform declaration clash: The following declarations have the same JVM signature (getX()I):\n" +
+        konst errorMessage = "Platform declaration clash: The following declarations have the same JVM signature (getX()I):\n" +
                 "    fun `<get-X>`(): Int defined in Line_0_simplescript\n" +
                 "    fun `<get-x>`(): Int defined in Line_0_simplescript"
 
-        checkEvaluateInReplDiags(
+        checkEkonstuateInReplDiags(
             sequenceOf(
                 """
                     fun stack(vararg tup: Int): Int = tup.sum()
-                    val X = 1
-                    val x = stack(1, X)
+                    konst X = 1
+                    konst x = stack(1, X)
                 """.trimIndent(),
                 """
-                    val y = 42
+                    konst y = 42
                     y
                 """.trimIndent()
             ),
@@ -280,13 +280,13 @@ class ReplTest : TestCase() {
     }
 
     @Test
-    fun testLongEval() {
-        checkEvaluateInRepl(
+    fun testLongEkonst() {
+        checkEkonstuateInRepl(
             sequence {
                 var count = 0
                 while (true) {
-                    val prev = if (count == 0) "0" else "obj${count - 1}.prop${count - 1} + $count"
-                    yield("object obj$count { val prop$count = $prev }; $prev")
+                    konst prev = if (count == 0) "0" else "obj${count - 1}.prop${count - 1} + $count"
+                    yield("object obj$count { konst prop$count = $prev }; $prev")
                     count++
                 }
             },
@@ -304,26 +304,26 @@ class ReplTest : TestCase() {
 
     @Test
     fun testAddNewAnnotationHandler() {
-        val replCompiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>()
-        val replEvaluator = BasicJvmReplEvaluator()
-        val compilationConfiguration = ScriptCompilationConfiguration().with {
+        konst replCompiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>()
+        konst replEkonstuator = BasicJvmReplEkonstuator()
+        konst compilationConfiguration = ScriptCompilationConfiguration().with {
             updateClasspath(classpathFromClass<NewAnn>())
         }
-        val evaluationConfiguration = ScriptEvaluationConfiguration()
+        konst ekonstuationConfiguration = ScriptEkonstuationConfiguration()
 
-        val res0 = runBlocking {
+        konst res0 = runBlocking {
             replCompiler.compile("1".toScriptSource("Line_0.kts"), compilationConfiguration).onSuccess {
-                replEvaluator.eval(it, evaluationConfiguration)
+                replEkonstuator.ekonst(it, ekonstuationConfiguration)
             }
         }
         assertTrue(
             "Expecting 1 got $res0",
-            res0 is ResultWithDiagnostics.Success && (res0.value.get().result as ResultValue.Value).value == 1
+            res0 is ResultWithDiagnostics.Success && (res0.konstue.get().result as ResultValue.Value).konstue == 1
         )
 
         var handlerInvoked = false
 
-        val compilationConfiguration2 = compilationConfiguration.with {
+        konst compilationConfiguration2 = compilationConfiguration.with {
             refineConfiguration {
 //                defaultImports(NewAnn::class) // TODO: fix support for default imports
                 onAnnotations<NewAnn> {
@@ -333,17 +333,17 @@ class ReplTest : TestCase() {
             }
         }
 
-        val res1 = runBlocking {
+        konst res1 = runBlocking {
             replCompiler.compile(
                 "@file:kotlin.script.experimental.jvmhost.test.NewAnn()\n2".toScriptSource("Line_1.kts"),
                 compilationConfiguration2
             ).onSuccess {
-                replEvaluator.eval(it, evaluationConfiguration)
+                replEkonstuator.ekonst(it, ekonstuationConfiguration)
             }
         }
         assertTrue(
             "Expecting 2 got $res1",
-            res1 is ResultWithDiagnostics.Success && (res1.value.get().result as ResultValue.Value).value == 2
+            res1 is ResultWithDiagnostics.Success && (res1.konstue.get().result as ResultValue.Value).konstue == 2
         )
 
         assertTrue("Refinement handler on annotation is not invoked", handlerInvoked)
@@ -351,13 +351,13 @@ class ReplTest : TestCase() {
 
     @Test
     fun testDefinitionWithConstructorArgs() {
-        val scriptDef = createJvmScriptDefinitionFromTemplate<ScriptTemplateWithArgs>(
-            evaluation = {
+        konst scriptDef = createJvmScriptDefinitionFromTemplate<ScriptTemplateWithArgs>(
+            ekonstuation = {
                 constructorArgs(arrayOf("a"))
             }
         )
 
-        checkEvaluateInRepl(
+        checkEkonstuateInRepl(
             sequenceOf(
                 "args[0]",
                 "res0+args[0]",
@@ -365,29 +365,29 @@ class ReplTest : TestCase() {
             ),
             sequenceOf("a", "aa", "aaa"),
             scriptDef.compilationConfiguration,
-            scriptDef.evaluationConfiguration
+            scriptDef.ekonstuationConfiguration
         )
     }
 
     @Test
-    fun testCompileWithoutEval() {
-        val replCompiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>()
-        val replEvaluator = BasicJvmReplEvaluator()
-        val compCfg = simpleScriptCompilationConfiguration
+    fun testCompileWithoutEkonst() {
+        konst replCompiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>()
+        konst replEkonstuator = BasicJvmReplEkonstuator()
+        konst compCfg = simpleScriptCompilationConfiguration
         runBlocking {
             replCompiler.compile("false".toScriptSource(), compCfg)
             replCompiler.compile("true".toScriptSource(), compCfg).onSuccess {
-                replEvaluator.eval(it, simpleScriptEvaluationConfiguration)
+                replEkonstuator.ekonst(it, simpleScriptEkonstuationConfiguration)
             }
         }
     }
 
     @Test
     fun testKotlinPackage() {
-        val greeting = "Hello from script!"
-        val error = "Only the Kotlin standard library is allowed to use the 'kotlin' package"
-        val script = "package kotlin\n\"$greeting\""
-        checkEvaluateInReplDiags(
+        konst greeting = "Hello from script!"
+        konst error = "Only the Kotlin standard library is allowed to use the 'kotlin' package"
+        konst script = "package kotlin\n\"$greeting\""
+        checkEkonstuateInReplDiags(
             sequenceOf(script),
             sequenceOf(
                 makeFailureResult(
@@ -396,7 +396,7 @@ class ReplTest : TestCase() {
                 )
             )
         )
-        checkEvaluateInRepl(
+        checkEkonstuateInRepl(
             sequenceOf(script),
             sequenceOf(greeting),
             simpleScriptCompilationConfiguration.with {
@@ -420,24 +420,24 @@ class ReplTest : TestCase() {
             return positionsEqual(a.start, b.start) && positionsEqual(a.end, b.end)
         }
 
-        private fun evaluateInRepl(
+        private fun ekonstuateInRepl(
             snippets: Sequence<String>,
             compilationConfiguration: ScriptCompilationConfiguration = simpleScriptCompilationConfiguration,
-            evaluationConfiguration: ScriptEvaluationConfiguration? = simpleScriptEvaluationConfiguration,
+            ekonstuationConfiguration: ScriptEkonstuationConfiguration? = simpleScriptEkonstuationConfiguration,
             limit: Int = 0,
             compiledSnippetChecker: CompiledSnippetChecker = {},
-        ): Sequence<ResultWithDiagnostics<EvaluatedSnippet>> {
-            val replCompiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>()
-            val replEvaluator = BasicJvmReplEvaluator()
-            val currentEvalConfig = evaluationConfiguration ?: ScriptEvaluationConfiguration()
-            val snipetsLimited = if (limit == 0) snippets else snippets.take(limit)
+        ): Sequence<ResultWithDiagnostics<EkonstuatedSnippet>> {
+            konst replCompiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>()
+            konst replEkonstuator = BasicJvmReplEkonstuator()
+            konst currentEkonstConfig = ekonstuationConfiguration ?: ScriptEkonstuationConfiguration()
+            konst snipetsLimited = if (limit == 0) snippets else snippets.take(limit)
             return snipetsLimited.mapIndexed { snippetNo, snippetText ->
-                val snippetSource =
+                konst snippetSource =
                     snippetText.toScriptSource("Line_$snippetNo.${compilationConfiguration[ScriptCompilationConfiguration.fileExtension]}")
                 runBlocking { replCompiler.compile(snippetSource, compilationConfiguration) }
                     .onSuccess {
                         compiledSnippetChecker(it)
-                        runBlocking { replEvaluator.eval(it, currentEvalConfig) }
+                        runBlocking { replEkonstuator.ekonst(it, currentEkonstConfig) }
                     }
                     .onSuccess {
                         it.get().asSuccess()
@@ -445,28 +445,28 @@ class ReplTest : TestCase() {
             }
         }
 
-        fun checkEvaluateInReplDiags(
+        fun checkEkonstuateInReplDiags(
             snippets: Sequence<String>,
             expected: Sequence<ResultWithDiagnostics<Any?>>,
             compilationConfiguration: ScriptCompilationConfiguration = simpleScriptCompilationConfiguration,
-            evaluationConfiguration: ScriptEvaluationConfiguration? = simpleScriptEvaluationConfiguration,
+            ekonstuationConfiguration: ScriptEkonstuationConfiguration? = simpleScriptEkonstuationConfiguration,
             limit: Int = 0,
             ignoreDiagnostics: Boolean = false,
             compiledSnippetChecker: CompiledSnippetChecker = {}
         ) {
-            val expectedIter = (if (limit == 0) expected else expected.take(limit)).iterator()
-            evaluateInRepl(
+            konst expectedIter = (if (limit == 0) expected else expected.take(limit)).iterator()
+            ekonstuateInRepl(
                 snippets,
                 compilationConfiguration,
-                evaluationConfiguration,
+                ekonstuationConfiguration,
                 limit,
                 compiledSnippetChecker
             ).forEachIndexed { index, res ->
-                val expectedRes = expectedIter.next()
+                konst expectedRes = expectedIter.next()
                 when {
                     res is ResultWithDiagnostics.Failure && expectedRes is ResultWithDiagnostics.Failure -> {
 
-                        val resReports = res.reports.filter {
+                        konst resReports = res.reports.filter {
                             it.code != ScriptDiagnostic.incompleteCode
                         }
                         Assert.assertTrue(
@@ -481,13 +481,13 @@ class ReplTest : TestCase() {
                         )
                     }
                     res is ResultWithDiagnostics.Success && expectedRes is ResultWithDiagnostics.Success -> {
-                        val expectedVal = expectedRes.value
-                        val actualVal = res.value.result
+                        konst expectedVal = expectedRes.konstue
+                        konst actualVal = res.konstue.result
                         when (actualVal) {
                             is ResultValue.Value -> Assert.assertEquals(
                                 "#$index: Expected $expectedVal, got $actualVal",
                                 expectedVal,
-                                actualVal.value
+                                actualVal.konstue
                             )
                             is ResultValue.Unit -> Assert.assertNull("#$index: Expected $expectedVal, got Unit", expectedVal)
                             is ResultValue.Error -> Assert.assertTrue(
@@ -497,15 +497,15 @@ class ReplTest : TestCase() {
                                                     && it.cause?.message == actualVal.error.cause?.message
                                         }
                             )
-                            is ResultValue.NotEvaluated -> Assert.assertEquals(
-                                "#$index: Expected $expectedVal, got NotEvaluated",
+                            is ResultValue.NotEkonstuated -> Assert.assertEquals(
+                                "#$index: Expected $expectedVal, got NotEkonstuated",
                                 expectedVal, actualVal
                             )
                             else -> Assert.assertTrue("#$index: Expected $expectedVal, got unknown result $actualVal", expectedVal == null)
                         }
                         if (!ignoreDiagnostics) {
-                            val expectedDiag = expectedRes.reports
-                            val actualDiag = res.reports
+                            konst expectedDiag = expectedRes.reports
+                            konst actualDiag = res.reports
                             Assert.assertEquals(
                                 "Diagnostics should be same",
                                 expectedDiag.map { it.toString() },
@@ -523,18 +523,18 @@ class ReplTest : TestCase() {
             }
         }
 
-        fun checkEvaluateInRepl(
+        fun checkEkonstuateInRepl(
             snippets: Sequence<String>,
             expected: Sequence<Any?>,
             compilationConfiguration: ScriptCompilationConfiguration = simpleScriptCompilationConfiguration,
-            evaluationConfiguration: ScriptEvaluationConfiguration? = simpleScriptEvaluationConfiguration,
+            ekonstuationConfiguration: ScriptEkonstuationConfiguration? = simpleScriptEkonstuationConfiguration,
             limit: Int = 0,
             compiledSnippetChecker: CompiledSnippetChecker = {}
-        ) = checkEvaluateInReplDiags(
+        ) = checkEkonstuateInReplDiags(
             snippets,
             expected.map { ResultWithDiagnostics.Success(it) },
             compilationConfiguration,
-            evaluationConfiguration,
+            ekonstuationConfiguration,
             limit,
             true,
             compiledSnippetChecker
@@ -542,7 +542,7 @@ class ReplTest : TestCase() {
 
         class TestReceiver(
             @Suppress("unused")
-            val prop1: Int = 3
+            konst prop1: Int = 3
         )
     }
 }

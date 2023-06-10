@@ -5,10 +5,10 @@ private fun interface Listener {
 }
 
 private class Foo {
-    private val listener = Listener { "OK" }
-    val result = listener.onChanged()
+    private konst listener = Listener { "OK" }
+    konst result = listener.onChanged()
 }
 
-private val foo = Foo()
+private konst foo = Foo()
 
 fun box(): String = foo.result

@@ -9,10 +9,10 @@ class A<out T, in E> {
 }
 
 fun foo(x: A<String, Any?>, cs: CharSequence, ls: List<CharSequence>) {
-    val y: A<CharSequence, String> = x
+    konst y: A<CharSequence, String> = x
 
     y.foo(cs)
-    val s: String = y.foo(cs, ls)
+    konst s: String = y.foo(cs, ls)
 
-    val ls2: List<String> = y.bar()
+    konst ls2: List<String> = y.bar()
 }

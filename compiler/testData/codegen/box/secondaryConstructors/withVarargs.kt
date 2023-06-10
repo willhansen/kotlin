@@ -20,14 +20,14 @@ fun join(x: Array<out String>): String {
 }
 
 class A {
-    val prop: String
+    konst prop: String
     constructor(vararg x: String) {
         prop = join(x)
     }
 }
 
 fun box(): String {
-    val a1 = WithVarargs.foo()
+    konst a1 = WithVarargs.foo()
     if (a1 != "1#2#3#") return "fail1: ${a1}"
 
     return "OK"

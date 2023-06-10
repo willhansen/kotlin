@@ -6,7 +6,7 @@ package test
 
 import kotlin.contracts.*
 
-// this tests specifically use primitive condition (predicate/value) as the
+// this tests specifically use primitive condition (predicate/konstue) as the
 // first argument of sequence, so that it would be optimized and embedded into message
 
 fun embedVariable(x: Any, b: Boolean) {

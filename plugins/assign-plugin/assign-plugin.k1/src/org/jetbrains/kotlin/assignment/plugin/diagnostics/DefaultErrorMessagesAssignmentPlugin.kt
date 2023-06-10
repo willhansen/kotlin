@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticFactoryToRendererMap
 
 object DefaultErrorMessagesAssignmentPlugin : DefaultErrorMessages.Extension {
 
-    private val MAP = DiagnosticFactoryToRendererMap("ValueContainerAssignment")
+    private konst MAP = DiagnosticFactoryToRendererMap("ValueContainerAssignment")
 
     override fun getMap() = MAP
 

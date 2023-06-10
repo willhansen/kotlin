@@ -20,19 +20,19 @@ import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrFactory
 
 interface IrGenerator {
-    val context: IrGeneratorContext
+    konst context: IrGeneratorContext
 }
 
 interface IrGeneratorWithScope : IrGenerator {
-    val scope: Scope
+    konst scope: Scope
 }
 
 interface IrGeneratorContextInterface {
-    val irBuiltIns: IrBuiltIns
+    konst irBuiltIns: IrBuiltIns
 }
 
 interface IrGeneratorContext : IrGeneratorContextInterface {
-    val irFactory: IrFactory get() = irBuiltIns.irFactory
+    konst irFactory: IrFactory get() = irBuiltIns.irFactory
 }
 
-open class IrGeneratorContextBase(override val irBuiltIns: IrBuiltIns) : IrGeneratorContext
+open class IrGeneratorContextBase(override konst irBuiltIns: IrBuiltIns) : IrGeneratorContext

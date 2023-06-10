@@ -15,7 +15,7 @@ fun someComputation(): Int = 42
 fun report(x: Int) = Unit
 
 fun innerTryCatchFinally() {
-    val x: Int
+    konst x: Int
 
     myRun {
         try {

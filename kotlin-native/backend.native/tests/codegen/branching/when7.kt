@@ -12,6 +12,6 @@ import kotlin.test.*
 }
 
 fun main(args: Array<String>) {
-    val b = args.size < 1
-    val x = if (b) Any() else throw Error()
+    konst b = args.size < 1
+    konst x = if (b) Any() else throw Error()
 }

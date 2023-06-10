@@ -1,7 +1,7 @@
 // WITH_STDLIB
 // FILE: test.kt
 
-val strings = arrayOf("1a", "1b", "2", "3")
+konst strings = arrayOf("1a", "1b", "2", "3")
 
 fun box() {
     for (s in strings) {

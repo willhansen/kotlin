@@ -7,9 +7,9 @@ FILE fqName:<root> fileName:/abstractMembers.kt
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:AbstractClass modality:ABSTRACT visibility:public superTypes:[kotlin.Any]'
     FUN name:abstractFun visibility:public modality:ABSTRACT <> ($this:<root>.AbstractClass) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:<root>.AbstractClass
-    PROPERTY name:abstractVal visibility:public modality:ABSTRACT [val]
+    PROPERTY name:abstractVal visibility:public modality:ABSTRACT [konst]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-abstractVal> visibility:public modality:ABSTRACT <> ($this:<root>.AbstractClass) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:abstractVal visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:abstractVal visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.AbstractClass
     PROPERTY name:abstractVar visibility:public modality:ABSTRACT [var]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-abstractVar> visibility:public modality:ABSTRACT <> ($this:<root>.AbstractClass) returnType:kotlin.Int
@@ -36,9 +36,9 @@ FILE fqName:<root> fileName:/abstractMembers.kt
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Interface
     FUN name:abstractFun visibility:public modality:ABSTRACT <> ($this:<root>.Interface) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:<root>.Interface
-    PROPERTY name:abstractVal visibility:public modality:ABSTRACT [val]
+    PROPERTY name:abstractVal visibility:public modality:ABSTRACT [konst]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-abstractVal> visibility:public modality:ABSTRACT <> ($this:<root>.Interface) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:abstractVal visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:abstractVal visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Interface
     PROPERTY name:abstractVar visibility:public modality:ABSTRACT [var]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-abstractVar> visibility:public modality:ABSTRACT <> ($this:<root>.Interface) returnType:kotlin.Int

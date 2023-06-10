@@ -11,13 +11,13 @@ fun printStr(str: String?) contract [
 fun callExactlyOnce(block: () -> Int) contract [
     callsInPlace(block, InvocationKind.EXACTLY_ONCE)
 ] {
-    val num = block()
+    konst num = block()
     println(num)
 }
 
 fun calculateNumber(block: () -> Int): Int contract [
     callsInPlace(block, InvocationKind.EXACTLY_ONCE)
 ] {
-    val num = block()
+    konst num = block()
     return num
 }

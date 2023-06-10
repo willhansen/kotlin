@@ -21,25 +21,25 @@ package org.jetbrains.kotlin.backend.konan.llvm
  *
  */
 
-internal enum class DwarfTag(val value:Int) {
+internal enum class DwarfTag(konst konstue:Int) {
 #define HANDLE_DW_TAG(ID, NAME) DW_TAG_##NAME(ID),
 #include "llvm/Support/Dwarf.def"
 #undef HANDLE_DW_TAG
 }
 
-internal enum class DwarfTypeKind(val value:Byte) {
+internal enum class DwarfTypeKind(konst konstue:Byte) {
 #define HANDLE_DW_ATE(ID, NAME) DW_ATE_##NAME(ID),
 #include "llvm/Support/Dwarf.def"
 #undef HANDLE_DW_ATE
 }
 
-internal enum class DwarfOp(val value:Long) {
+internal enum class DwarfOp(konst konstue:Long) {
 #define HANDLE_DW_OP(ID, NAME) DW_OP_##NAME(ID),
 #include "llvm/Support/Dwarf.def"
 #undef HANDLE_DW_OP
 }
 
-internal enum class DwarfLanguage(val value:Int) {
+internal enum class DwarfLanguage(konst konstue:Int) {
 #define HANDLE_DW_LANG(ID, NAME) DW_LANG_##NAME(ID),
 #include "llvm/Support/Dwarf.def"
 #undef HANDLE_DW_LANG

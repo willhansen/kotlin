@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.lexer.KtTokens
 
 object FirWhenSubjectChecker : FirWhenExpressionChecker() {
     override fun check(expression: FirWhenExpression, context: CheckerContext, reporter: DiagnosticReporter) {
-        val subject = expression.subject
-        val subjectVariable = expression.subjectVariable
-        val source = (subjectVariable ?: subject)?.source ?: return
+        konst subject = expression.subject
+        konst subjectVariable = expression.subjectVariable
+        konst source = (subjectVariable ?: subject)?.source ?: return
         when {
             subject?.source?.elementType == KtNodeTypes.DESTRUCTURING_DECLARATION -> {
                 reporter.reportOn(source, FirErrors.ILLEGAL_DECLARATION_IN_WHEN_SUBJECT, "destructuring declaration", context)

@@ -21,7 +21,7 @@ FILE: localEntitytNotAllowed.kt
         public abstract interface X : R|kotlin/Any| {
         }
 
-        public final val a: R|kotlin/Any| = object : R|kotlin/Any| {
+        public final konst a: R|kotlin/Any| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -71,12 +71,12 @@ FILE: localEntitytNotAllowed.kt
             local abstract interface N : R|kotlin/Any| {
             }
 
-            lval c: R|<anonymous>| = object : R|kotlin/Any| {
+            lkonst c: R|<anonymous>| = object : R|kotlin/Any| {
                 private constructor(): R|<anonymous>| {
                     super<R|kotlin/Any|>()
                 }
 
-                public final val t: R|kotlin/String| = String(test)
+                public final konst t: R|kotlin/String| = String(test)
                     public get(): R|kotlin/String|
 
                 local abstract interface U : R|kotlin/Any| {

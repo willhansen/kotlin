@@ -17,13 +17,13 @@
 package kotlin
 
 /**
- * Represents a readable sequence of [Char] values.
+ * Represents a readable sequence of [Char] konstues.
  */
 public interface CharSequence {
     /**
      * Returns the length of this character sequence.
      */
-    public val length: Int
+    public konst length: Int
 
     /**
      * Returns the character at the specified [index] in this character sequence.

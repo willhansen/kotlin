@@ -7,11 +7,11 @@ enum class TestFinalEnum1 : Enum<TestFinalEnum1> {
 
   X1 = TestFinalEnum1()
 
-  fun values(): Array<TestFinalEnum1> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestFinalEnum1> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestFinalEnum1 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestFinalEnum1 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestFinalEnum1>
+  konst entries: EnumEntries<TestFinalEnum1>
     get(): EnumEntries<TestFinalEnum1> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -23,17 +23,17 @@ enum class TestFinalEnum2 : Enum<TestFinalEnum2> {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
   X1 = TestFinalEnum2(x = 1)
 
-  fun values(): Array<TestFinalEnum2> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestFinalEnum2> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestFinalEnum2 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestFinalEnum2 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestFinalEnum2>
+  konst entries: EnumEntries<TestFinalEnum2>
     get(): EnumEntries<TestFinalEnum2> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -50,11 +50,11 @@ enum class TestFinalEnum3 : Enum<TestFinalEnum3> {
   fun doStuff() {
   }
 
-  fun values(): Array<TestFinalEnum3> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestFinalEnum3> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestFinalEnum3 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestFinalEnum3 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestFinalEnum3>
+  konst entries: EnumEntries<TestFinalEnum3>
     get(): EnumEntries<TestFinalEnum3> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -80,11 +80,11 @@ open enum class TestOpenEnum1 : Enum<TestOpenEnum1> {
 
   }
 
-  fun values(): Array<TestOpenEnum1> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestOpenEnum1> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestOpenEnum1 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestOpenEnum1 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestOpenEnum1>
+  konst entries: EnumEntries<TestOpenEnum1>
     get(): EnumEntries<TestOpenEnum1> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -112,11 +112,11 @@ open enum class TestOpenEnum2 : Enum<TestOpenEnum2> {
   open fun foo() {
   }
 
-  fun values(): Array<TestOpenEnum2> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestOpenEnum2> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestOpenEnum2 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestOpenEnum2 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestOpenEnum2>
+  konst entries: EnumEntries<TestOpenEnum2>
     get(): EnumEntries<TestOpenEnum2> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -143,11 +143,11 @@ abstract enum class TestAbstractEnum1 : Enum<TestAbstractEnum1> {
 
   abstract fun foo()
 
-  fun values(): Array<TestAbstractEnum1> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestAbstractEnum1> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestAbstractEnum1 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestAbstractEnum1 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestAbstractEnum1>
+  konst entries: EnumEntries<TestAbstractEnum1>
     get(): EnumEntries<TestAbstractEnum1> /* Synthetic body for ENUM_ENTRIES */
 
 }
@@ -177,11 +177,11 @@ abstract enum class TestAbstractEnum2 : IFoo, Enum<TestAbstractEnum2> {
 
   }
 
-  fun values(): Array<TestAbstractEnum2> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestAbstractEnum2> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestAbstractEnum2 /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestAbstractEnum2 /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestAbstractEnum2>
+  konst entries: EnumEntries<TestAbstractEnum2>
     get(): EnumEntries<TestAbstractEnum2> /* Synthetic body for ENUM_ENTRIES */
 
 }

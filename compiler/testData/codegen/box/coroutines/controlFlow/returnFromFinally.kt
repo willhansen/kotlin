@@ -9,9 +9,9 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendAndLog(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-        result += "suspend($value);"
-        c.resume(value)
+    suspend fun <T> suspendAndLog(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+        result += "suspend($konstue);"
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 
@@ -20,13 +20,13 @@ class Controller {
         if (++count != i) throw Exception("EXPECTED $i")
     }
 
-    fun <T> log(value: T) {
-        result += "log($value);"
+    fun <T> log(konstue: T) {
+        result += "log($konstue);"
     }
 }
 
 fun builder(c: suspend Controller.() -> Int): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, handleResultContinuation {
         controller.result += "return($it);"
     })
@@ -34,7 +34,7 @@ fun builder(c: suspend Controller.() -> Int): String {
 }
 
 fun box(): String {
-    val res = builder {
+    konst res = builder {
         expect(1)
         log(1)
         try {

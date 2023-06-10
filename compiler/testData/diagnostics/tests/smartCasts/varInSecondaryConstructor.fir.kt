@@ -1,4 +1,4 @@
-class My(val z: Int) {
+class My(konst z: Int) {
     var x: Int = 0
     constructor(arg: Int?): this(arg ?: 42) {
         var y: Int?

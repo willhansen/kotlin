@@ -7,9 +7,9 @@ class Delegate {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Kla1<T: Int>(val default: T) {
+konstue class Kla1<T: Int>(konst default: T) {
     fun getValue(): String {
-        val prop by Delegate()
+        konst prop by Delegate()
         return prop
     }
 }

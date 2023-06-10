@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.codegen.ClassBuilderFactory
 import org.jetbrains.kotlin.codegen.ClassBuilderMode
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOrigin
 
-class KotlinLightClassBuilderFactory(private val javaFileStub: PsiJavaFileStub) : ClassBuilderFactory {
-    private val stubStack = Stack<StubElement<PsiElement>>().apply {
+class KotlinLightClassBuilderFactory(private konst javaFileStub: PsiJavaFileStub) : ClassBuilderFactory {
+    private konst stubStack = Stack<StubElement<PsiElement>>().apply {
         @Suppress("UNCHECKED_CAST")
         push(javaFileStub as StubElement<PsiElement>)
     }
@@ -30,7 +30,7 @@ class KotlinLightClassBuilderFactory(private val javaFileStub: PsiJavaFileStub) 
     override fun close() {}
 
     fun result(): PsiJavaFileStub {
-        val pop = stubStack.pop()
+        konst pop = stubStack.pop()
         if (pop !== javaFileStub) {
             LOG.error("Unbalanced stack operations: $pop")
         }
@@ -39,4 +39,4 @@ class KotlinLightClassBuilderFactory(private val javaFileStub: PsiJavaFileStub) 
     }
 }
 
-private val LOG = Logger.getInstance(KotlinLightClassBuilderFactory::class.java)
+private konst LOG = Logger.getInstance(KotlinLightClassBuilderFactory::class.java)

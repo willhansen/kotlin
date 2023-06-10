@@ -3,13 +3,13 @@
 package kt1680
 
 fun foo() {
-    val x = 1
+    konst x = 1
     if (<!SENSELESS_COMPARISON!>x != null<!>) {} // <-- need a warning here!
     if (<!SENSELESS_COMPARISON!>x == null<!>) {}
     if (<!SENSELESS_COMPARISON!>null != x<!>) {}
     if (<!SENSELESS_COMPARISON!>null == x<!>) {}
 
-    val y : Int? = 1
+    konst y : Int? = 1
     if (y != null) {}
     if (y == null) {}
 }

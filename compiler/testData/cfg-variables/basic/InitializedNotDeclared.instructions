@@ -3,7 +3,7 @@ class A {
     init {
         x = 1
     }
-    val x: Int
+    konst x: Int
 }
 ---------------------
 L0:
@@ -12,7 +12,7 @@ L0:
     magic[IMPLICIT_RECEIVER](x) -> <v0>
     r(1) -> <v1>                                                           USE: in: {x=ONLY_WRITTEN_NEVER_READ} out: {x=ONLY_WRITTEN_NEVER_READ}
     w(x|<v0>, <v1>)                        INIT: in: {} out: {x=I}         USE: in: {} out: {x=ONLY_WRITTEN_NEVER_READ}
-  1 v(val x: Int)                          INIT: in: {x=I} out: {x=ID}
+  1 v(konst x: Int)                          INIT: in: {x=I} out: {x=ID}
 L1:
     <END>                                  INIT: in: {x=ID} out: {x=ID}
 error:

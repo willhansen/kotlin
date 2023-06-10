@@ -5,7 +5,7 @@ open annotation class A1 : Annotation {
   // CHECK:
   //   Mangled name: A1{}xs
   //   Public signature: /A1.xs|1063330853857063704[0]
-  val xs: IntArray
+  konst xs: IntArray
     // CHECK JVM_IR:
     //   Mangled name: A1#<get-xs>(){}kotlin.IntArray
     //   Public signature: /A1.xs.<get-xs>|5887559004820637749[0]
@@ -28,7 +28,7 @@ open annotation class A2 : Annotation {
   // CHECK:
   //   Mangled name: A2{}xs
   //   Public signature: /A2.xs|1063330853857063704[0]
-  val xs: Array<out String>
+  konst xs: Array<out String>
     // CHECK JVM_IR:
     //   Mangled name: A2#<get-xs>(){}kotlin.Array<out|kotlin.String>
     //   Public signature: /A2.xs.<get-xs>|9188548163055185324[0]
@@ -51,7 +51,7 @@ open annotation class AA : Annotation {
   // CHECK:
   //   Mangled name: AA{}xs
   //   Public signature: /AA.xs|1063330853857063704[0]
-  val xs: Array<out A1>
+  konst xs: Array<out A1>
     // CHECK JVM_IR:
     //   Mangled name: AA#<get-xs>(){}kotlin.Array<out|A1>
     //   Public signature: /AA.xs.<get-xs>|-3667422235339963828[0]

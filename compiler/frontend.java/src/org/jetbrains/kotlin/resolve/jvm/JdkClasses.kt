@@ -7,4 +7,4 @@ package org.jetbrains.kotlin.resolve.jvm
 
 import org.jetbrains.kotlin.name.FqName
 
-val JAVA_LANG_RECORD_FQ_NAME = FqName("java.lang.Record")
+konst JAVA_LANG_RECORD_FQ_NAME = FqName("java.lang.Record")

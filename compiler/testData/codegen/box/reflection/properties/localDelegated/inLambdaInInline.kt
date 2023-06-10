@@ -11,7 +11,7 @@ inline operator fun String.getValue(t:Any?, p: KProperty<*>): String =
     if (p.returnType.classifier == String::class) this else "fail"
 
 inline fun foo(crossinline f: () -> String) = {
-    val x by f()
+    konst x by f()
     x
 }.let { it() }
 

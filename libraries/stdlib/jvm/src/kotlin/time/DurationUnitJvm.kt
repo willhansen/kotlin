@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 @SinceKotlin("1.6")
 @WasExperimental(ExperimentalTime::class)
-public actual enum class DurationUnit(internal val timeUnit: TimeUnit) {
+public actual enum class DurationUnit(internal konst timeUnit: TimeUnit) {
     /**
      * Time unit representing one nanosecond, which is 1/1000 of a microsecond.
      */
@@ -44,14 +44,14 @@ public actual enum class DurationUnit(internal val timeUnit: TimeUnit) {
 }
 
 /**
- * Converts this [kotlin.time.DurationUnit][DurationUnit] enum value to the corresponding [java.util.concurrent.TimeUnit][java.util.concurrent.TimeUnit] value.
+ * Converts this [kotlin.time.DurationUnit][DurationUnit] enum konstue to the corresponding [java.util.concurrent.TimeUnit][java.util.concurrent.TimeUnit] konstue.
  */
 @SinceKotlin("1.8")
 @WasExperimental(ExperimentalTime::class)
 public fun DurationUnit.toTimeUnit(): TimeUnit = timeUnit
 
 /**
- * Converts this [java.util.concurrent.TimeUnit][java.util.concurrent.TimeUnit] enum value to the corresponding [kotlin.time.DurationUnit][DurationUnit] value.
+ * Converts this [java.util.concurrent.TimeUnit][java.util.concurrent.TimeUnit] enum konstue to the corresponding [kotlin.time.DurationUnit][DurationUnit] konstue.
  */
 @SinceKotlin("1.8")
 @WasExperimental(ExperimentalTime::class)
@@ -66,21 +66,21 @@ public fun TimeUnit.toDurationUnit(): DurationUnit = when (this) {
 }
 
 @SinceKotlin("1.3")
-internal actual fun convertDurationUnit(value: Double, sourceUnit: DurationUnit, targetUnit: DurationUnit): Double {
-    val sourceInTargets = targetUnit.timeUnit.convert(1, sourceUnit.timeUnit)
+internal actual fun convertDurationUnit(konstue: Double, sourceUnit: DurationUnit, targetUnit: DurationUnit): Double {
+    konst sourceInTargets = targetUnit.timeUnit.convert(1, sourceUnit.timeUnit)
     if (sourceInTargets > 0)
-        return value * sourceInTargets
+        return konstue * sourceInTargets
 
-    val otherInThis = sourceUnit.timeUnit.convert(1, targetUnit.timeUnit)
-    return value / otherInThis
+    konst otherInThis = sourceUnit.timeUnit.convert(1, targetUnit.timeUnit)
+    return konstue / otherInThis
 }
 
 @SinceKotlin("1.5")
-internal actual fun convertDurationUnitOverflow(value: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long {
-    return targetUnit.timeUnit.convert(value, sourceUnit.timeUnit)
+internal actual fun convertDurationUnitOverflow(konstue: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long {
+    return targetUnit.timeUnit.convert(konstue, sourceUnit.timeUnit)
 }
 
 @SinceKotlin("1.5")
-internal actual fun convertDurationUnit(value: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long {
-    return targetUnit.timeUnit.convert(value, sourceUnit.timeUnit)
+internal actual fun convertDurationUnit(konstue: Long, sourceUnit: DurationUnit, targetUnit: DurationUnit): Long {
+    return targetUnit.timeUnit.convert(konstue, sourceUnit.timeUnit)
 }

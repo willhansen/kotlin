@@ -12,13 +12,13 @@ public inline fun <R> runTest(f: () -> R): R {
 
 public inline fun <R> minByTest(f: (Int) -> R): R {
     var minValue = f(1)
-    val v = f(1)
+    konst v = f(1)
     return v
 }
 // CHECK_BREAKS_COUNT: function=box count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=box name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun box(): String {
-    val result = runTest{minByTest<Int> { it }}
+    konst result = runTest{minByTest<Int> { it }}
 
     if (result != 1) return "test1: ${result}"
 

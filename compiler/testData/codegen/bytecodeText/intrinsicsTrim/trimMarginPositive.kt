@@ -5,7 +5,7 @@ fun constant(): String {
     """.trimMargin()
 }
 
-private const val HAS_MARGIN = """Hello,
+private const konst HAS_MARGIN = """Hello,
         |World"""
 fun interpolatedUsingConstant(): String {
     return """
@@ -16,9 +16,9 @@ fun interpolatedUsingConstant(): String {
 }
 
 
-private const val SPACES = "    "
-private const val HELLO = "Hello"
-private const val WORLD = "World"
+private const konst SPACES = "    "
+private const konst HELLO = "Hello"
+private const konst WORLD = "World"
 fun reliesOnNestedStringBuilderFlatteningAndConstantConcatenation(): String {
     return ("" + '\n' + SPACES + "${SPACES}|Hey" + """
         |${HELLO + HELLO},
@@ -33,7 +33,7 @@ fun constantCustomPrefix(): String {
     """.trimMargin(marginPrefix = "###")
 }
 
-private const val OCTOTHORPE = '#'
+private const konst OCTOTHORPE = '#'
 fun constantCustomPrefixInterpolatedUsingConstant(): String {
     return """
         #@#Hello,

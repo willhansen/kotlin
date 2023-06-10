@@ -3,15 +3,15 @@
 
 class MyClass {
     companion object {
-        val property = 0
+        konst property = 0
 
-        const val constProperty = 1
+        const konst constProperty = 1
 
         @JvmStatic
-        val staticProperty = 2
+        konst staticProperty = 2
 
         @JvmField
-        val fieldProperty = 3
+        konst fieldProperty = 3
 
         var variable = 4
 

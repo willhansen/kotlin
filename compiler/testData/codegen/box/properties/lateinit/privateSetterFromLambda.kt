@@ -6,7 +6,7 @@ class My {
 }
 
 fun box(): String {
-    val my = My()
+    konst my = My()
     my.init("O") { it + "K" }
     return my.x
 }

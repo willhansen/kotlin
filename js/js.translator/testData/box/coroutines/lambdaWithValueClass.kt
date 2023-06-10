@@ -5,16 +5,16 @@ package foo
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-value class Res(val value: String)
+konstue class Res(konst konstue: String)
 
 suspend fun bar(): Res {
-    val lambda: suspend () -> Res = { Res("OK") }
+    konst lambda: suspend () -> Res = { Res("OK") }
     return lambda.invoke()
 }
 
 fun builder(c: suspend () -> Unit) {
     c.startCoroutine(object : Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
 
         override fun resumeWith(result: Result<Unit>) {}
     })

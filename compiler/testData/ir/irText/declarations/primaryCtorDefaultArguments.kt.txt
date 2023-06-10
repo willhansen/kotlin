@@ -5,7 +5,7 @@ class Test {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 

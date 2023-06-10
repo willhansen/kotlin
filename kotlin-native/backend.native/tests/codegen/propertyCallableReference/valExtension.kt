@@ -3,7 +3,7 @@
  * that can be found in the LICENSE file.
  */
 
-package codegen.propertyCallableReference.valExtension
+package codegen.propertyCallableReference.konstExtension
 
 import kotlin.test.*
 
@@ -11,12 +11,12 @@ class A(y: Int) {
     var x = y
 }
 
-val A.z get() = this.x
+konst A.z get() = this.x
 
 @Test fun runTest() {
-    val p1 = A::z
+    konst p1 = A::z
     println(p1.get(A(42)))
-    val a = A(117)
-    val p2 = a::z
+    konst a = A(117)
+    konst p2 = a::z
     println(p2.get())
 }

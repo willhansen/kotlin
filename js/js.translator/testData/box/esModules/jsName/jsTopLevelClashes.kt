@@ -6,14 +6,14 @@
 package lib
 
 @JsName("test")
-external val foo: Int
+external konst foo: Int
 
 // FILE: lib2.kt
 @file:JsModule("./bar.mjs")
 package lib
 
 @JsName("test")
-external val bar: Int
+external konst bar: Int
 
 // FILE: main.kt
 package main

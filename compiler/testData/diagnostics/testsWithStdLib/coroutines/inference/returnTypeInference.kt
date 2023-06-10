@@ -5,6 +5,6 @@ class Controller
 
 fun <R> generate(g: suspend Controller.() -> R): R = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     3
 }

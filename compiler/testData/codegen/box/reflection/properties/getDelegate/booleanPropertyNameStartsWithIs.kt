@@ -10,11 +10,11 @@ object Delegate {
 }
 
 class Foo {
-    val isOK: Boolean by Delegate
+    konst isOK: Boolean by Delegate
 }
 
 fun box(): String {
-    val foo = Foo()
+    konst foo = Foo()
     assertEquals(Delegate, Foo::isOK.apply { isAccessible = true }.getDelegate(foo))
     assertEquals(Delegate, foo::isOK.apply { isAccessible = true }.getDelegate())
     return if (foo.isOK) "OK" else "Fail"

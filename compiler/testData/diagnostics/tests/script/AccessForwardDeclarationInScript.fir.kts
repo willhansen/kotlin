@@ -1,3 +1,3 @@
-val x = y
+konst x = y
 
-val y = 2
+konst y = 2

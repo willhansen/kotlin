@@ -7,8 +7,8 @@ package org.jetbrains.kotlin.jps.incremental
 
 import java.nio.file.Path
 
-private const val NORMAL_VERSION = 16
-private const val NORMAL_VERSION_FILE_NAME = "format-version.txt"
+private const konst NORMAL_VERSION = 16
+private const konst NORMAL_VERSION_FILE_NAME = "format-version.txt"
 
 fun localCacheVersionManager(dataRoot: Path, isCachesEnabled: Boolean) = CacheVersionManager(
     dataRoot.resolve(NORMAL_VERSION_FILE_NAME),

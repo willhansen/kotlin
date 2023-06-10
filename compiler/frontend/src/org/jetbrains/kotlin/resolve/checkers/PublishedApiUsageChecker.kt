@@ -37,7 +37,7 @@ object PublishedApiUsageChecker {
         if (descriptor is PropertyAccessorDescriptor) return
 
         for (entry in declaration.annotationEntries) {
-            val annotationDescriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
+            konst annotationDescriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
             if (annotationDescriptor.fqName == StandardNames.FqNames.publishedApi) {
                 trace.report(Errors.NON_INTERNAL_PUBLISHED_API.on(entry))
             }

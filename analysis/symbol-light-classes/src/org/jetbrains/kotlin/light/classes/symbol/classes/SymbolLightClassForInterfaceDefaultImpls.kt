@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.light.classes.symbol.modifierLists.InitializedModifi
 import org.jetbrains.kotlin.light.classes.symbol.modifierLists.SymbolLightClassModifierList
 import org.jetbrains.kotlin.load.java.JvmAbi
 
-internal class SymbolLightClassForInterfaceDefaultImpls(private val containingClass: SymbolLightClassForInterface) :
+internal class SymbolLightClassForInterfaceDefaultImpls(private konst containingClass: SymbolLightClassForInterface) :
     SymbolLightClassForInterface(
         containingClass.classOrObjectDeclaration,
         containingClass.classOrObjectSymbolPointer,
@@ -30,8 +30,8 @@ internal class SymbolLightClassForInterfaceDefaultImpls(private val containingCl
 
     override fun copy() = SymbolLightClassForInterfaceDefaultImpls(containingClass)
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
-        return isEquivalentToByName(another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
+        return isEquikonstentToByName(another)
     }
 
     override fun equals(other: Any?): Boolean = this === other ||

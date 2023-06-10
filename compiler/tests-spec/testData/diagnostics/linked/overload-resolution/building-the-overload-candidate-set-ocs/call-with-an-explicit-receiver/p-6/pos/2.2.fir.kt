@@ -3,7 +3,7 @@
 // TESTCASE NUMBER: 1
 class Case1 {
     fun bar() {
-        val foo: String.() -> Unit = {} // (1)
+        konst foo: String.() -> Unit = {} // (1)
         fun String.foo(): Unit {} // (2)
         "1".<!DEBUG_INFO_CALL("fqName: Case1.bar.foo; typeCall: extension function")!>foo()<!> // resolves to (2)
         with("2") {
@@ -28,11 +28,11 @@ class Case1 {
 }
 
 class B {
-    val foo: String.() -> Unit = {} // (1)
+    konst foo: String.() -> Unit = {} // (1)
     fun String.foo(): Unit {} // (2)
     fun bar() {
         "1".<!DEBUG_INFO_CALL("fqName: B.foo; typeCall: extension function")!>foo()<!> // resolves to (2)
-        val str = "1"
+        konst str = "1"
         with("2") {
             <!DEBUG_INFO_CALL("fqName: B.foo; typeCall: extension function")!>foo()<!>      //resolves to (2)
             this.<!DEBUG_INFO_CALL("fqName: B.foo; typeCall: extension function")!>foo()<!> //resolves to (2)

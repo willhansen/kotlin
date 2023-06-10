@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.analysis.utils.errors.*
 import java.util.*
 import kotlin.reflect.KClass
 
-class InvalidFirElementTypeException(
+class InkonstidFirElementTypeException(
     actualFirElement: Any?,
     ktElement: KtElement?,
     expectedFirClasses: List<KClass<*>>,
@@ -34,11 +34,11 @@ class InvalidFirElementTypeException(
         }
     }
 
-    override val message: String = buildString {
+    override konst message: String = buildString {
         if (ktElement != null) {
             append("For $ktElement with text `${ktElement.text}`, ")
         }
-        val message = when (expectedFirClasses.size) {
+        konst message = when (expectedFirClasses.size) {
             0 -> "Unexpected element of type:"
             1 -> "The element of type ${expectedFirClasses.single()} expected, but"
             else -> "One of [${expectedFirClasses.joinToString()}] element types expected, but"
@@ -58,5 +58,5 @@ fun throwUnexpectedFirElementError(
     ktElement: KtElement? = null,
     vararg expectedFirClasses: KClass<*>
 ): Nothing {
-    throw InvalidFirElementTypeException(firElement, ktElement, expectedFirClasses.toList())
+    throw InkonstidFirElementTypeException(firElement, ktElement, expectedFirClasses.toList())
 }

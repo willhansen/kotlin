@@ -2,7 +2,7 @@
 package foo
 
 fun box(): String {
-    val t = myRun {
+    konst t = myRun {
         object {
             fun boo(param: String): String {
                 return myRun { param }

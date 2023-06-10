@@ -10,13 +10,13 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
 import kotlin.test.fail
 
-val reflections = Reflections("org.jetbrains")
+konst reflections = Reflections("org.jetbrains")
 
 fun assertAllImplementationsAlsoImplement(
     baseInterface: KClass<*>,
     requiredInterface: KClass<*>
 ) {
-    val badImplementations = reflections.getSubTypesOf(baseInterface.java)
+    konst badImplementations = reflections.getSubTypesOf(baseInterface.java)
         .filter { subtype -> !subtype.isInterface }
         .filter { implementation -> !implementation.kotlin.isSubclassOf(requiredInterface) }
 

@@ -27,26 +27,26 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.resolve.annotations.JVM_STATIC_ANNOTATION_FQ_NAME
 
-internal val jvmStaticInObjectPhase = makeIrModulePhase(
+internal konst jvmStaticInObjectPhase = makeIrModulePhase(
     ::JvmStaticInObjectLowering,
     name = "JvmStaticInObject",
     description = "Make JvmStatic functions in non-companion objects static and replace all call sites in the module"
 )
 
-internal val jvmStaticInCompanionPhase = makeIrFilePhase(
+internal konst jvmStaticInCompanionPhase = makeIrFilePhase(
     ::JvmStaticInCompanionLowering,
     name = "JvmStaticInCompanion",
     description = "Synthesize static proxy functions for JvmStatic functions in companion objects"
 )
 
-private class JvmStaticInObjectLowering(val context: JvmBackendContext) : FileLoweringPass {
+private class JvmStaticInObjectLowering(konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) =
         irFile.transformChildrenVoid(
             SingletonObjectJvmStaticTransformer(context.irBuiltIns, context.cachedDeclarations.fieldsForObjectInstances)
         )
 }
 
-private class JvmStaticInCompanionLowering(val context: JvmBackendContext) : FileLoweringPass {
+private class JvmStaticInCompanionLowering(konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) =
         irFile.transformChildrenVoid(CompanionObjectJvmStaticTransformer(context))
 }
@@ -69,21 +69,21 @@ private fun IrExpression.coerceToUnit(irBuiltIns: IrBuiltIns) =
 private fun IrMemberAccessExpression<*>.makeStatic(irBuiltIns: IrBuiltIns, replaceCallee: IrSimpleFunction?) =
     dispatchReceiver?.let { receiver ->
         dispatchReceiver = null
-        val newCall = if (replaceCallee != null) irCall(this@makeStatic as IrCall, replaceCallee) else this@makeStatic
+        konst newCall = if (replaceCallee != null) irCall(this@makeStatic as IrCall, replaceCallee) else this@makeStatic
         if (receiver.isTrivial()) {
             // Receiver has no side effects (aside from maybe class initialization) so discard it.
             newCall
         } else {
             IrBlockImpl(startOffset, endOffset, newCall.type).apply {
-                statements += receiver.coerceToUnit(irBuiltIns) // evaluate for side effects
+                statements += receiver.coerceToUnit(irBuiltIns) // ekonstuate for side effects
                 statements += newCall
             }
         }
     } ?: this
 
 class SingletonObjectJvmStaticTransformer(
-    private val irBuiltIns: IrBuiltIns,
-    private val cachedFields: CachedFieldsForObjectInstances
+    private konst irBuiltIns: IrBuiltIns,
+    private konst cachedFields: CachedFieldsForObjectInstances
 ) : IrElementTransformerVoid() {
     override fun visitClass(declaration: IrClass): IrStatement {
         if (declaration.isNonCompanionObject) {
@@ -103,7 +103,7 @@ class SingletonObjectJvmStaticTransformer(
     // This lowering runs before functions references are handled, and should transform them too.
     override fun visitMemberAccess(expression: IrMemberAccessExpression<*>): IrExpression {
         expression.transformChildrenVoid(this)
-        val callee = expression.symbol.owner
+        konst callee = expression.symbol.owner
         if (callee is IrDeclaration && callee.isJvmStaticInObject()) {
             return expression.makeStatic(irBuiltIns, replaceCallee = null)
         }
@@ -111,7 +111,7 @@ class SingletonObjectJvmStaticTransformer(
     }
 }
 
-private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext) : IrElementTransformerVoid() {
+private class CompanionObjectJvmStaticTransformer(konst context: JvmBackendContext) : IrElementTransformerVoid() {
     // TODO: would be nice to add a mode that *only* leaves static versions for all annotated methods, with nothing
     //  in companions - this would reduce the number of classes if the companion only has `@JvmStatic` declarations.
     private fun IrSimpleFunction.needsStaticProxy(): Boolean = when {
@@ -132,7 +132,7 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
         super.visitClass(declaration).also {
             declaration.companionObject()?.declarations?.transformInPlace {
                 if (it is IrSimpleFunction && it.isJvmStaticDeclaration() && it.needsStaticProxy()) {
-                    val (static, companionFun) = context.cachedDeclarations.getStaticAndCompanionDeclaration(it)
+                    konst (static, companionFun) = context.cachedDeclarations.getStaticAndCompanionDeclaration(it)
                     declaration.declarations.add(static)
                     companionFun
                 } else it
@@ -143,25 +143,25 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
     // intrinsics, which do not care about accessibility rules), so only calls remain.
     override fun visitCall(expression: IrCall): IrExpression {
         expression.transformChildrenVoid(this)
-        val callee = expression.symbol.owner
+        konst callee = expression.symbol.owner
         return when {
             shouldReplaceWithStaticCall(callee) -> {
-                val (staticProxy, _) = context.cachedDeclarations.getStaticAndCompanionDeclaration(callee)
+                konst (staticProxy, _) = context.cachedDeclarations.getStaticAndCompanionDeclaration(callee)
                 expression.makeStatic(context.irBuiltIns, staticProxy)
             }
             callee.symbol == context.ir.symbols.indyLambdaMetafactoryIntrinsic -> {
-                val implFunRef = expression.getValueArgument(1) as? IrFunctionReference
+                konst implFunRef = expression.getValueArgument(1) as? IrFunctionReference
                     ?: throw AssertionError("'implMethodReference' is expected to be 'IrFunctionReference': ${expression.dump()}")
-                val implFun = implFunRef.symbol.owner
+                konst implFun = implFunRef.symbol.owner
                 if (implFunRef.dispatchReceiver != null && implFun is IrSimpleFunction && shouldReplaceWithStaticCall(implFun)) {
-                    val (staticProxy, _) = context.cachedDeclarations.getStaticAndCompanionDeclaration(implFun)
+                    konst (staticProxy, _) = context.cachedDeclarations.getStaticAndCompanionDeclaration(implFun)
                     expression.putValueArgument(
                         1,
                         IrFunctionReferenceImpl(
                             implFunRef.startOffset, implFunRef.endOffset, implFunRef.type,
                             staticProxy.symbol,
                             staticProxy.typeParameters.size,
-                            staticProxy.valueParameters.size,
+                            staticProxy.konstueParameters.size,
                             implFunRef.reflectionTarget, implFunRef.origin
                         )
                     )

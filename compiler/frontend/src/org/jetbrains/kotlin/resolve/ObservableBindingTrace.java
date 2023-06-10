@@ -30,7 +30,7 @@ import java.util.Collection;
 public class ObservableBindingTrace implements BindingTrace {
     public interface RecordHandler<K, V> {
 
-        void handleRecord(WritableSlice<K, V> slice, K key, V value);
+        void handleRecord(WritableSlice<K, V> slice, K key, V konstue);
     }
 
     private final BindingTrace originalTrace;
@@ -53,11 +53,11 @@ public class ObservableBindingTrace implements BindingTrace {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <K, V> void record(WritableSlice<K, V> slice, K key, V value) {
-        originalTrace.record(slice, key, value);
+    public <K, V> void record(WritableSlice<K, V> slice, K key, V konstue) {
+        originalTrace.record(slice, key, konstue);
         RecordHandler<K, V> recordHandler = (RecordHandler) handlers.get(slice);
         if (recordHandler != null) {
-            recordHandler.handleRecord(slice, key, value);
+            recordHandler.handleRecord(slice, key, konstue);
         }
     }
 

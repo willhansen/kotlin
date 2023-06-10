@@ -17,11 +17,11 @@ import java.nio.file.Path
 
 abstract class AbstractSymbolLightClassesByPsiTest(
     configurator: AnalysisApiTestConfigurator,
-    override val currentExtension: String,
-    override val isTestAgainstCompiledCode: Boolean,
+    override konst currentExtension: String,
+    override konst isTestAgainstCompiledCode: Boolean,
 ) : AbstractSymbolLightClassesTestBase(configurator) {
     override fun getRenderResult(ktFile: KtFile, ktFiles: List<KtFile>, testDataFile: Path, module: TestModule, project: Project): String {
-        val lightClasses = ktFiles.flatMap { getLightClassesFromFile(it) }
+        konst lightClasses = ktFiles.flatMap { getLightClassesFromFile(it) }
         if (lightClasses.isEmpty()) return LightClassTestCommon.NOT_GENERATED_DIRECTIVE
         return withExtendedTypeRenderer(testDataFile) {
             lightClasses.sortedBy { it.name }.joinToString("\n\n") { it.renderClass() }

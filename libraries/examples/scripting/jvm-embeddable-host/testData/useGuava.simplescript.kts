@@ -4,8 +4,8 @@
 // the guava embedded into compiler, then using `asList`, which should not be present in this version of the class due to proguarding
 // So, the compilation should only succeed if shaded compiler is used and `Lists` are loaded from the non-embedded guava jar
 
-val arr = com.google.common.collect.Lists.newArrayList<Int>()
-val lst = listOf("Hello", "Guava")
-val glist = com.google.common.collect.Lists.asList(lst.first(), lst[1], emptyArray())
+konst arr = com.google.common.collect.Lists.newArrayList<Int>()
+konst lst = listOf("Hello", "Guava")
+konst glist = com.google.common.collect.Lists.asList(lst.first(), lst[1], emptyArray())
 
 println(glist.joinToString(", ", "", "!"))

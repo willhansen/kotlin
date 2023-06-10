@@ -7,7 +7,7 @@ import kotlin.native.ref.WeakReference
 import kotlin.test.*
 
 class KotlinLivenessTracker {
-    val weakRefs = mutableListOf<WeakReference<Any>>()
+    konst weakRefs = mutableListOf<WeakReference<Any>>()
 
     fun add(obj: Any?) {
         assertNotNull(obj)
@@ -16,7 +16,7 @@ class KotlinLivenessTracker {
     }
 
     fun isEmpty() = weakRefs.isEmpty()
-    fun objectsAreDead() = weakRefs.all { it.value === null }
+    fun objectsAreDead() = weakRefs.all { it.konstue === null }
 }
 
 @OptIn(kotlin.native.runtime.NativeRuntimeApi::class)
@@ -44,7 +44,7 @@ interface NoAutoreleaseReceiveHelper {
     fun receiveBlock(): () -> KotlinObject
 }
 
-class NoAutoreleaseKotlinSendHelper(val kotlinLivenessTracker: KotlinLivenessTracker) : NoAutoreleaseSendHelper {
+class NoAutoreleaseKotlinSendHelper(konst kotlinLivenessTracker: KotlinLivenessTracker) : NoAutoreleaseSendHelper {
     override fun sendKotlinObject(kotlinObject: KotlinObject) = kotlinLivenessTracker.add(kotlinObject)
     override fun blockReceivingKotlinObject(): (KotlinObject) -> Unit = { kotlinLivenessTracker.add(it) }
     override fun sendSwiftObject(swiftObject: Any) = kotlinLivenessTracker.add(swiftObject)
@@ -58,13 +58,13 @@ class NoAutoreleaseKotlinSendHelper(val kotlinLivenessTracker: KotlinLivenessTra
     }
 }
 
-class NoAutoreleaseKotlinReceiveHelper(val kotlinLivenessTracker: KotlinLivenessTracker) : NoAutoreleaseReceiveHelper {
-    private val kotlinObject = KotlinObject()
+class NoAutoreleaseKotlinReceiveHelper(konst kotlinLivenessTracker: KotlinLivenessTracker) : NoAutoreleaseReceiveHelper {
+    private konst kotlinObject = KotlinObject()
     lateinit var swiftObject: Any
-    private val list = listOf(Any())
-    private val string = Any().toString()
-    private val number = createKotlinNumber()
-    private val block = createLambda(kotlinLivenessTracker)
+    private konst list = listOf(Any())
+    private konst string = Any().toString()
+    private konst number = createKotlinNumber()
+    private konst block = createLambda(kotlinLivenessTracker)
 
     override fun receiveKotlinObject(): KotlinObject = kotlinObject.also { kotlinLivenessTracker.add(it) }
     override fun receiveSwiftObject(): Any = swiftObject.also { kotlinLivenessTracker.add(it) }
@@ -75,16 +75,16 @@ class NoAutoreleaseKotlinReceiveHelper(val kotlinLivenessTracker: KotlinLiveness
 }
 
 object NoAutoreleaseSingleton {
-    val x = 1
+    konst x = 1
 }
 enum class NoAutoreleaseEnum {
     ENTRY;
 
-    val x = 2
+    konst x = 2
 }
 
 fun callSendKotlinObject(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracker) {
-    val kotlinObject = KotlinObject()
+    konst kotlinObject = KotlinObject()
 
     // Repeating twice to cover possible fast paths after caching something for an object.
     helper.sendKotlinObject(kotlinObject)
@@ -93,7 +93,7 @@ fun callSendKotlinObject(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenes
 }
 
 fun sendKotlinObjectToBlock(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracker) {
-    val kotlinObject = KotlinObject()
+    konst kotlinObject = KotlinObject()
 
     helper.blockReceivingKotlinObject()(kotlinObject)
     helper.blockReceivingKotlinObject()(kotlinObject)
@@ -107,7 +107,7 @@ fun callSendSwiftObject(helper: NoAutoreleaseSendHelper, tracker: KotlinLiveness
 }
 
 fun callSendList(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracker) {
-    val list = listOf(Any())
+    konst list = listOf(Any())
 
     helper.sendList(list)
     helper.sendList(list)
@@ -115,7 +115,7 @@ fun callSendList(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracker
 }
 
 fun callSendString(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracker) {
-    val string = Any().toString()
+    konst string = Any().toString()
 
     helper.sendString(string)
     helper.sendString(string)
@@ -123,7 +123,7 @@ fun callSendString(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTrack
 }
 
 fun callSendNumber(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracker) {
-    val number = createKotlinNumber()
+    konst number = createKotlinNumber()
 
     helper.sendNumber(number)
     helper.sendNumber(number)
@@ -131,7 +131,7 @@ fun callSendNumber(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTrack
 }
 
 fun callSendBlock(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracker) {
-    val block = createLambda()
+    konst block = createLambda()
 
     helper.sendBlock(block)
     helper.sendBlock(block)
@@ -139,12 +139,12 @@ fun callSendBlock(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracke
 }
 
 private class EmptyContinuation : Continuation<Any?> {
-    override val context: CoroutineContext = EmptyCoroutineContext
+    override konst context: CoroutineContext = EmptyCoroutineContext
     override fun resumeWith(result: Result<Any?>) { result.getOrThrow() }
 }
 
 fun callSendCompletion(helper: NoAutoreleaseSendHelper, tracker: KotlinLivenessTracker) {
-    val completion = EmptyContinuation()
+    konst completion = EmptyContinuation()
 
     suspend {
         helper.sendCompletion()
@@ -188,14 +188,14 @@ fun objc_autoreleasePoolPop(handle: NativePtr) = kotlinx.cinterop.objc_autorelea
 fun useIntArray(array: IntArray) {} // Just to make IntArray available from Swift.
 
 private fun createLambda(): () -> KotlinObject {
-    val lambdaResult = KotlinObject()
+    konst lambdaResult = KotlinObject()
     return { lambdaResult } // make it capturing thus dynamic.
 }
 
 private fun createLambda(kotlinLivenessTracker: KotlinLivenessTracker): () -> KotlinObject {
-    val lambdaResult = KotlinObject()
+    konst lambdaResult = KotlinObject()
     return {
-        val result = lambdaResult // make it capturing thus dynamic.
+        konst result = lambdaResult // make it capturing thus dynamic.
         kotlinLivenessTracker.add(result)
         result
     }

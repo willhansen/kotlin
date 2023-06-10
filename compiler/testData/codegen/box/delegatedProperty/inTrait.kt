@@ -5,11 +5,11 @@ class Delegate {
 }
 
 interface A {
-    val prop: Int
+    konst prop: Int
 }
 
 class AImpl: A  {
-  override val prop: Int by Delegate()
+  override konst prop: Int by Delegate()
 }
 
 fun box(): String {

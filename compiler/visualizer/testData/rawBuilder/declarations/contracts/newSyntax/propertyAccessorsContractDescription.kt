@@ -8,13 +8,13 @@ class MyClass {
         get() contract [returnsNotNull()] = 1
 //      Int
 //      │
-    set(value) {
+    set(konstue) {
 //      var MyClass.<set-myInt>.field: Int
-//      │       MyClass.<set-myInt>.value: Int
+//      │       MyClass.<set-myInt>.konstue: Int
 //      │       │     fun (Int).times(Int): Int
 //      │       │     │ Int
 //      │       │     │ │
-        field = value * 10
+        field = konstue * 10
     }
 }
 
@@ -27,13 +27,13 @@ class AnotherClass(multiplier: Int) {
         get() contract [returnsNotNull()] = 1
 //      Int
 //      │
-    set(value) contract [returns()] {
+    set(konstue) contract [returns()] {
 //      var AnotherClass.<set-anotherInt>.field: Int
-//      │       AnotherClass.<set-anotherInt>.value: Int
+//      │       AnotherClass.<set-anotherInt>.konstue: Int
 //      │       │     [ERROR: not resolved]
 //      │       │     │ [ERROR: not resolved]
 //      │       │     │ │
-        field = value * multiplier
+        field = konstue * multiplier
     }
 }
 
@@ -47,14 +47,14 @@ class SomeClass(multiplier: Int?) {
 //                                                EQ operator call
 //      Int                                       │  [ERROR: unknown type]
 //      │                                         │  │
-    set(value) contract [returns() implies (value != null)] {
-//      SomeClass.<set-someInt>.value: Int
+    set(konstue) contract [returns() implies (konstue != null)] {
+//      SomeClass.<set-someInt>.konstue: Int
 //      │              [ERROR: not resolved]
 //      │              │
-        value ?: throw NullArgumentException()
+        konstue ?: throw NullArgumentException()
 //      var SomeClass.<set-someInt>.field: Int
-//      │       SomeClass.<set-someInt>.value: Int
+//      │       SomeClass.<set-someInt>.konstue: Int
 //      │       │
-        field = value
+        field = konstue
     }
 }

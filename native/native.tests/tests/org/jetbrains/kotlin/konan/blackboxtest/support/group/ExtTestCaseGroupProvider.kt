@@ -39,34 +39,34 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 import java.io.File
 
 internal class ExtTestCaseGroupProvider : TestCaseGroupProvider, TestDisposable(parentDisposable = null) {
-    private val structureFactory = ExtTestDataFileStructureFactory(parentDisposable = this)
-    private val sharedModules = ThreadSafeCache<String, TestModule.Shared?>()
+    private konst structureFactory = ExtTestDataFileStructureFactory(parentDisposable = this)
+    private konst sharedModules = ThreadSafeCache<String, TestModule.Shared?>()
 
-    private val cachedTestCaseGroups = ThreadSafeCache<TestCaseGroupId.TestDataDir, TestCaseGroup?>()
+    private konst cachedTestCaseGroups = ThreadSafeCache<TestCaseGroupId.TestDataDir, TestCaseGroup?>()
 
     override fun getTestCaseGroup(testCaseGroupId: TestCaseGroupId, settings: Settings): TestCaseGroup? {
         assertNotDisposed()
         check(testCaseGroupId is TestCaseGroupId.TestDataDir)
 
         return cachedTestCaseGroups.computeIfAbsent(testCaseGroupId) {
-            val testDataDir = testCaseGroupId.dir
+            konst testDataDir = testCaseGroupId.dir
 
-            val excludes: Set<File> = settings.get<DisabledTestDataFiles>().filesAndDirectories
+            konst excludes: Set<File> = settings.get<DisabledTestDataFiles>().filesAndDirectories
             if (testDataDir in excludes)
                 return@computeIfAbsent TestCaseGroup.ALL_DISABLED
 
-            val (excludedTestDataFiles, testDataFiles) = testDataDir.listFiles()
+            konst (excludedTestDataFiles, testDataFiles) = testDataDir.listFiles()
                 ?.filter { file -> file.isFile && file.extension == "kt" }
                 ?.partition { file -> file in excludes }
                 ?: return@computeIfAbsent null
 
-            val disabledTestCaseIds = hashSetOf<TestCaseId>()
+            konst disabledTestCaseIds = hashSetOf<TestCaseId>()
             excludedTestDataFiles.mapTo(disabledTestCaseIds, TestCaseId::TestDataFile)
 
-            val testCases = mutableListOf<TestCase>()
+            konst testCases = mutableListOf<TestCase>()
 
             testDataFiles.forEach { testDataFile ->
-                val extTestDataFile = ExtTestDataFile(
+                konst extTestDataFile = ExtTestDataFile(
                     testDataFile = testDataFile,
                     structureFactory = structureFactory,
                     customSourceTransformers = settings.get<ExternalSourceTransformersProvider>().getSourceTransformers(testDataFile),
@@ -92,17 +92,17 @@ internal class ExtTestCaseGroupProvider : TestCaseGroupProvider, TestDisposable(
 }
 
 private class ExtTestDataFile(
-    private val testDataFile: File,
+    private konst testDataFile: File,
     structureFactory: ExtTestDataFileStructureFactory,
     customSourceTransformers: ExternalSourceTransformers?,
     testRoots: TestRoots,
-    private val generatedSources: GeneratedSources,
-    private val customKlibs: CustomKlibs,
-    private val pipelineType: PipelineType,
-    private val timeouts: Timeouts,
+    private konst generatedSources: GeneratedSources,
+    private konst customKlibs: CustomKlibs,
+    private konst pipelineType: PipelineType,
+    private konst timeouts: Timeouts,
 ) {
-    private val structure by lazy {
-        val allSourceTransformers: ExternalSourceTransformers = if (customSourceTransformers.isNullOrEmpty())
+    private konst structure by lazy {
+        konst allSourceTransformers: ExternalSourceTransformers = if (customSourceTransformers.isNullOrEmpty())
             MANDATORY_SOURCE_TRANSFORMERS
         else
             MANDATORY_SOURCE_TRANSFORMERS + customSourceTransformers
@@ -110,10 +110,10 @@ private class ExtTestDataFile(
         structureFactory.ExtTestDataFileStructure(testDataFile, allSourceTransformers)
     }
 
-    private val testDataFileSettings by lazy {
-        val optIns = structure.directives.multiValues(OPT_IN_DIRECTIVE)
-        val optInsForSourceCode = optIns subtract OPT_INS_PURELY_FOR_COMPILER
-        val optInsForCompiler = optIns intersect OPT_INS_PURELY_FOR_COMPILER
+    private konst testDataFileSettings by lazy {
+        konst optIns = structure.directives.multiValues(OPT_IN_DIRECTIVE)
+        konst optInsForSourceCode = optIns subtract OPT_INS_PURELY_FOR_COMPILER
+        konst optInsForCompiler = optIns intersect OPT_INS_PURELY_FOR_COMPILER
 
         ExtTestDataFileSettings(
             languageSettings = structure.directives.multiValues(LANGUAGE_DIRECTIVE) {
@@ -136,7 +136,7 @@ private class ExtTestDataFile(
         )
     }
 
-    val isRelevant: Boolean =
+    konst isRelevant: Boolean =
         isCompatibleTarget(TargetBackend.NATIVE, testDataFile) // Checks TARGET_BACKEND/DONT_TARGET_EXACT_BACKEND directives.
                 && !isIgnoredTarget(pipelineType, testDataFile, TargetBackend.NATIVE) // Checks IGNORE_BACKEND directives.
                 && testDataFileSettings.languageSettings.none { it in INCOMPATIBLE_LANGUAGE_SETTINGS }
@@ -166,7 +166,7 @@ private class ExtTestDataFile(
     }
 
     private fun assembleFreeCompilerArgs(): TestCompilerArgs {
-        val args = mutableListOf<String>()
+        konst args = mutableListOf<String>()
         testDataFileSettings.languageSettings.sorted().mapTo(args) { "-XXLanguage:$it" }
         testDataFileSettings.optInsForCompiler.sorted().mapTo(args) { "-opt-in=$it" }
         args += "-opt-in=kotlin.native.internal.InternalForKotlinNativeTests" // for ReflectionPackageName
@@ -177,11 +177,11 @@ private class ExtTestDataFile(
     fun createTestCase(settings: Settings, sharedModules: ThreadSafeCache<String, TestModule.Shared?>): TestCase {
         assertTrue(isRelevant)
 
-        val definitelyStandaloneTest = settings.get<ForcedStandaloneTestKind>().value
-        val isStandaloneTest = definitelyStandaloneTest || determineIfStandaloneTest()
+        konst definitelyStandaloneTest = settings.get<ForcedStandaloneTestKind>().konstue
+        konst isStandaloneTest = definitelyStandaloneTest || determineIfStandaloneTest()
         patchPackageNames(isStandaloneTest)
         patchFileLevelAnnotations()
-        val entryPointFunctionFQN = findEntryPoint()
+        konst entryPointFunctionFQN = findEntryPoint()
         generateTestLauncher(isStandaloneTest, entryPointFunctionFQN)
 
         return doCreateTestCase(isStandaloneTest, sharedModules)
@@ -227,7 +227,7 @@ private class ExtTestDataFile(
      *   Example: import foo.* -> import codegen.box.annotations.genericAnnotations.foo.*
      *
      * - All fully-qualified references are patched to reflect appropriate changes in "package" declarations.
-     *   Example: val x = foo.Bar() -> val x = codegen.box.annotations.genericAnnotations.foo.Bar()
+     *   Example: konst x = foo.Bar() -> konst x = codegen.box.annotations.genericAnnotations.foo.Bar()
      *
      * The "unique package prefix" is computed individually for every test file and reflects relative path to the test file.
      * Example: codegen/box/annotations/genericAnnotations.kt -> codegen.box.annotations.genericAnnotations
@@ -239,10 +239,10 @@ private class ExtTestDataFile(
     private fun patchPackageNames(isStandaloneTest: Boolean) = with(structure) {
         if (isStandaloneTest) return // Don't patch packages for standalone tests.
 
-        val basePackageName = FqName(testDataFileSettings.nominalPackageName.toString())
+        konst basePackageName = FqName(testDataFileSettings.nominalPackageName.toString())
 
-        val oldPackageNames: Set<FqName> = filesToTransform.mapToSet { it.packageFqName }
-        val oldToNewPackageNameMapping: Map<FqName, FqName> = oldPackageNames.associateWith { oldPackageName ->
+        konst oldPackageNames: Set<FqName> = filesToTransform.mapToSet { it.packageFqName }
+        konst oldToNewPackageNameMapping: Map<FqName, FqName> = oldPackageNames.associateWith { oldPackageName ->
             basePackageName.child(oldPackageName)
         }
 
@@ -256,11 +256,11 @@ private class ExtTestDataFile(
 
                 override fun visitKtFile(file: KtFile, unused: Set<Name>) {
                     // Patch package directive.
-                    val oldPackageDirective = file.packageDirective
-                    val oldPackageName = oldPackageDirective?.fqName ?: FqName.ROOT
+                    konst oldPackageDirective = file.packageDirective
+                    konst oldPackageName = oldPackageDirective?.fqName ?: FqName.ROOT
 
-                    val newPackageName = oldToNewPackageNameMapping.getValue(oldPackageName)
-                    val newPackageDirective = handler.psiFactory.createPackageDirective(newPackageName)
+                    konst newPackageName = oldToNewPackageNameMapping.getValue(oldPackageName)
+                    konst newPackageDirective = handler.psiFactory.createPackageDirective(newPackageName)
 
                     if (oldPackageDirective != null) {
                         // Replace old package directive by the new one.
@@ -271,9 +271,9 @@ private class ExtTestDataFile(
                     }
 
                     // Add @ReflectionPackageName annotation to make the compiler use original package name in the reflective information.
-                    val annotationText =
+                    konst annotationText =
                         "kotlin.native.internal.ReflectionPackageName(${oldPackageName.asString().quoteAsKotlinStringLiteral()})"
-                    val fileAnnotationList = handler.psiFactory.createFileAnnotationListWithAnnotation(annotationText)
+                    konst fileAnnotationList = handler.psiFactory.createFileAnnotationListWithAnnotation(annotationText)
                     file.addAnnotations(fileAnnotationList)
 
                     visitKtElement(file, file.collectAccessibleDeclarationNames())
@@ -283,7 +283,7 @@ private class ExtTestDataFile(
 
                 override fun visitImportDirective(importDirective: KtImportDirective, unused: Set<Name>) {
                     // Patch import directive if necessary.
-                    val importedFqName = importDirective.importedFqName
+                    konst importedFqName = importDirective.importedFqName
                     if (importedFqName == null
                         || importedFqName.startsWith(StandardNames.BUILT_INS_PACKAGE_NAME)
                         || importedFqName.startsWith(KOTLINX_PACKAGE_NAME)
@@ -292,7 +292,7 @@ private class ExtTestDataFile(
                         return
                     }
 
-                    val newImportPath = ImportPath(
+                    konst newImportPath = ImportPath(
                         fqName = basePackageName.child(importedFqName),
                         isAllUnder = importDirective.isAllUnder,
                         alias = importDirective.aliasName?.let(Name::identifier)
@@ -328,14 +328,14 @@ private class ExtTestDataFile(
                     declarationWithBody: KtDeclarationWithBody,
                     parentAccessibleDeclarationNames: Set<Name>
                 ) {
-                    val (expressions, nonExpressions) = declarationWithBody.getChildrenOfType<KtElement>().partition { it is KtExpression }
+                    konst (expressions, nonExpressions) = declarationWithBody.getChildrenOfType<KtElement>().partition { it is KtExpression }
 
-                    val accessibleDeclarationNames =
+                    konst accessibleDeclarationNames =
                         parentAccessibleDeclarationNames + declarationWithBody.collectAccessibleDeclarationNames()
                     nonExpressions.forEach { it.accept(this, accessibleDeclarationNames) }
 
-                    val bodyAccessibleDeclarationNames =
-                        accessibleDeclarationNames + declarationWithBody.valueParameters.map { it.nameAsSafeName }
+                    konst bodyAccessibleDeclarationNames =
+                        accessibleDeclarationNames + declarationWithBody.konstueParameters.map { it.nameAsSafeName }
                     expressions.forEach { it.accept(this, bodyAccessibleDeclarationNames) }
                 }
 
@@ -346,7 +346,7 @@ private class ExtTestDataFile(
                         super.visitExpression(expression, parentAccessibleDeclarationNames)
 
                 override fun visitBlockExpression(expression: KtBlockExpression, parentAccessibleDeclarationNames: Set<Name>) {
-                    val accessibleDeclarationNames = parentAccessibleDeclarationNames.toMutableSet()
+                    konst accessibleDeclarationNames = parentAccessibleDeclarationNames.toMutableSet()
                     expression.getChildrenOfType<KtElement>().forEach { child ->
                         child.accept(this, accessibleDeclarationNames)
                         accessibleDeclarationNames.addIfNotNull(child.name?.let(Name::identifier))
@@ -357,12 +357,12 @@ private class ExtTestDataFile(
                     dotQualifiedExpression: KtDotQualifiedExpression,
                     accessibleDeclarationNames: Set<Name>
                 ) {
-                    val names = dotQualifiedExpression.collectNames()
+                    konst names = dotQualifiedExpression.collectNames()
 
-                    val newDotQualifiedExpression =
+                    konst newDotQualifiedExpression =
                         visitPossiblyTypeReferenceWithFullyQualifiedName(names, accessibleDeclarationNames) { newPackageName ->
-                            val newDotQualifiedExpression = handler.psiFactory
-                                .createFile("val x = ${newPackageName.asString()}.${dotQualifiedExpression.text}")
+                            konst newDotQualifiedExpression = handler.psiFactory
+                                .createFile("konst x = ${newPackageName.asString()}.${dotQualifiedExpression.text}")
                                 .getChildOfType<KtProperty>()!!
                                 .getChildOfType<KtDotQualifiedExpression>()!!
 
@@ -373,12 +373,12 @@ private class ExtTestDataFile(
                 }
 
                 override fun visitUserType(userType: KtUserType, accessibleDeclarationNames: Set<Name>) {
-                    val names = userType.collectNames()
+                    konst names = userType.collectNames()
 
-                    val newUserType =
+                    konst newUserType =
                         visitPossiblyTypeReferenceWithFullyQualifiedName(names, accessibleDeclarationNames) { newPackageName ->
-                            val newUserType = handler.psiFactory
-                                .createFile("val x: ${newPackageName.asString()}.${userType.text}")
+                            konst newUserType = handler.psiFactory
+                                .createFile("konst x: ${newPackageName.asString()}.${userType.text}")
                                 .getChildOfType<KtProperty>()!!
                                 .getChildOfType<KtTypeReference>()!!
                                 .typeElement as KtUserType
@@ -399,8 +399,8 @@ private class ExtTestDataFile(
                     if (names.first() in accessibleDeclarationNames) return null
 
                     for (index in 1 until names.size) {
-                        val subPackageName = names.fqNameBeforeIndex(index)
-                        val newPackageName = oldToNewPackageNameMapping[subPackageName]
+                        konst subPackageName = names.fqNameBeforeIndex(index)
+                        konst newPackageName = oldToNewPackageNameMapping[subPackageName]
                         if (newPackageName != null)
                             return action(newPackageName.removeSuffix(subPackageName))
                     }
@@ -423,7 +423,7 @@ private class ExtTestDataFile(
             filesToTransform.forEach { handler ->
                 handler.accept(object : KtTreeVisitorVoid() {
                     override fun visitKtFile(file: KtFile) {
-                        val newFileAnnotationList = handler.psiFactory.createFile(buildString {
+                        konst newFileAnnotationList = handler.psiFactory.createFile(buildString {
                             testDataFileSettings.optInsForSourceCode.forEach {
                                 appendLine(getAnnotationText(it))
                             }
@@ -437,7 +437,7 @@ private class ExtTestDataFile(
     }
 
     private fun KtFile.addAnnotations(fileAnnotationList: KtFileAnnotationList) {
-        val oldFileAnnotationList = this.fileAnnotationList
+        konst oldFileAnnotationList = this.fileAnnotationList
         if (oldFileAnnotationList != null) {
             // Add new annotations to the old ones.
             fileAnnotationList.annotationEntries.forEach {
@@ -451,17 +451,17 @@ private class ExtTestDataFile(
 
     /** Finds the fully-qualified name of the entry point function (aka `fun box(): String`). */
     private fun findEntryPoint(): String = with(structure) {
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
 
         filesToTransform.forEach { handler ->
             handler.accept(object : KtTreeVisitorVoid() {
                 override fun visitKtFile(file: KtFile) {
-                    val hasBoxFunction = file.getChildrenOfType<KtNamedFunction>().any { function ->
-                        function.name == BOX_FUNCTION_NAME.asString() && function.valueParameters.isEmpty()
+                    konst hasBoxFunction = file.getChildrenOfType<KtNamedFunction>().any { function ->
+                        function.name == BOX_FUNCTION_NAME.asString() && function.konstueParameters.isEmpty()
                     }
 
                     if (hasBoxFunction) {
-                        val boxFunctionFqName = file.packageFqName.child(BOX_FUNCTION_NAME).asString()
+                        konst boxFunctionFqName = file.packageFqName.child(BOX_FUNCTION_NAME).asString()
                         result += boxFunctionFqName
 
                         handler.module.markAsMain()
@@ -479,7 +479,7 @@ private class ExtTestDataFile(
 
     /** Adds a wrapper to run it as Kotlin test. */
     private fun generateTestLauncher(isStandaloneTest: Boolean, entryPointFunctionFQN: String) {
-        val fileText = buildString {
+        konst fileText = buildString {
             if (!isStandaloneTest) {
                 append("package ").appendLine(testDataFileSettings.nominalPackageName)
                 appendLine()
@@ -495,7 +495,7 @@ private class ExtTestDataFile(
         isStandaloneTest: Boolean,
         sharedModules: ThreadSafeCache<String, TestModule.Shared?>
     ): TestCase = with(structure) {
-        val modules = generateModules(
+        konst modules = generateModules(
             testCaseDir = testDataFileSettings.generatedSourcesDir,
             findOrGenerateSharedModule = { moduleName: String, generator: SharedModuleGenerator ->
                 sharedModules.computeIfAbsent(moduleName) {
@@ -504,7 +504,7 @@ private class ExtTestDataFile(
             }
         )
 
-        val testCase = TestCase(
+        konst testCase = TestCase(
             id = TestCaseId.TestDataFile(testDataFile),
             kind = if (isStandaloneTest) TestKind.STANDALONE else TestKind.REGULAR,
             modules = modules,
@@ -522,16 +522,16 @@ private class ExtTestDataFile(
     }
 
     companion object {
-        private val INCOMPATIBLE_DIRECTIVES = setOf("FULL_JDK", "JVM_TARGET", "DIAGNOSTICS")
+        private konst INCOMPATIBLE_DIRECTIVES = setOf("FULL_JDK", "JVM_TARGET", "DIAGNOSTICS")
 
-        private const val API_VERSION_DIRECTIVE = "API_VERSION"
-        private val INCOMPATIBLE_API_VERSIONS = setOf("1.4")
+        private const konst API_VERSION_DIRECTIVE = "API_VERSION"
+        private konst INCOMPATIBLE_API_VERSIONS = setOf("1.4")
 
-        private const val LANGUAGE_VERSION_DIRECTIVE = "LANGUAGE_VERSION"
-        private val INCOMPATIBLE_LANGUAGE_VERSIONS = setOf("1.3", "1.4")
+        private const konst LANGUAGE_VERSION_DIRECTIVE = "LANGUAGE_VERSION"
+        private konst INCOMPATIBLE_LANGUAGE_VERSIONS = setOf("1.3", "1.4")
 
-        private const val LANGUAGE_DIRECTIVE = "LANGUAGE"
-        private val INCOMPATIBLE_LANGUAGE_SETTINGS = setOf(
+        private const konst LANGUAGE_DIRECTIVE = "LANGUAGE"
+        private konst INCOMPATIBLE_LANGUAGE_SETTINGS = setOf(
             "-ProperIeee754Comparisons",                            // K/N supports only proper IEEE754 comparisons
             "-ReleaseCoroutines",                                   // only release coroutines
             "-DataClassInheritance",                                // old behavior is not supported
@@ -542,62 +542,62 @@ private class ExtTestDataFile(
             "-UseCorrectExecutionOrderForVarargArguments"           // Run only correct one
         )
 
-        private const val EXPECT_ACTUAL_LINKER_DIRECTIVE = "EXPECT_ACTUAL_LINKER"
-        private const val USE_EXPERIMENTAL_DIRECTIVE = "USE_EXPERIMENTAL"
+        private const konst EXPECT_ACTUAL_LINKER_DIRECTIVE = "EXPECT_ACTUAL_LINKER"
+        private const konst USE_EXPERIMENTAL_DIRECTIVE = "USE_EXPERIMENTAL"
 
-        private const val NATIVE_STANDALONE_DIRECTIVE = "NATIVE_STANDALONE"
+        private const konst NATIVE_STANDALONE_DIRECTIVE = "NATIVE_STANDALONE"
 
-        private const val OPT_IN_DIRECTIVE = "OPT_IN"
-        private val OPT_INS_PURELY_FOR_COMPILER = setOf(
+        private const konst OPT_IN_DIRECTIVE = "OPT_IN"
+        private konst OPT_INS_PURELY_FOR_COMPILER = setOf(
             OptInNames.REQUIRES_OPT_IN_FQ_NAME.asString()
         )
 
         private fun Directives.multiValues(key: String, predicate: (String) -> Boolean = { true }): Set<String> =
             listValues(key)?.flatMap { it.split(' ') }?.filter(predicate)?.toSet().orEmpty()
 
-        private val BOX_FUNCTION_NAME = Name.identifier("box")
-        private val OPT_IN_ANNOTATION_NAME = Name.identifier("OptIn")
-        private val HELPERS_PACKAGE_NAME = Name.identifier("helpers")
-        private val KOTLINX_PACKAGE_NAME = Name.identifier("kotlinx")
+        private konst BOX_FUNCTION_NAME = Name.identifier("box")
+        private konst OPT_IN_ANNOTATION_NAME = Name.identifier("OptIn")
+        private konst HELPERS_PACKAGE_NAME = Name.identifier("helpers")
+        private konst KOTLINX_PACKAGE_NAME = Name.identifier("kotlinx")
 
-        private val MANDATORY_SOURCE_TRANSFORMERS: ExternalSourceTransformers = listOf(DiagnosticsRemovingSourceTransformer)
+        private konst MANDATORY_SOURCE_TRANSFORMERS: ExternalSourceTransformers = listOf(DiagnosticsRemovingSourceTransformer)
     }
 }
 
 private class ExtTestDataFileSettings(
-    val languageSettings: Set<String>,
-    val optInsForSourceCode: Set<String>,
-    val optInsForCompiler: Set<String>,
-    val expectActualLinker: Boolean,
-    val generatedSourcesDir: File,
-    val nominalPackageName: PackageName
+    konst languageSettings: Set<String>,
+    konst optInsForSourceCode: Set<String>,
+    konst optInsForCompiler: Set<String>,
+    konst expectActualLinker: Boolean,
+    konst generatedSourcesDir: File,
+    konst nominalPackageName: PackageName
 )
 
 private typealias SharedModuleGenerator = (sharedModulesDir: File) -> TestModule.Shared?
 private typealias SharedModuleCache = (moduleName: String, generator: SharedModuleGenerator) -> TestModule.Shared?
 
 private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : TestDisposable(parentDisposable) {
-    private val psiFactory = createPsiFactory(parentDisposable = this)
+    private konst psiFactory = createPsiFactory(parentDisposable = this)
 
     inner class ExtTestDataFileStructure(originalTestDataFile: File, sourceTransformers: ExternalSourceTransformers) {
         init {
             assertNotDisposed()
         }
 
-        private val filesAndModules = FilesAndModules(originalTestDataFile, sourceTransformers)
+        private konst filesAndModules = FilesAndModules(originalTestDataFile, sourceTransformers)
 
-        val directives: Directives get() = filesAndModules.directives
+        konst directives: Directives get() = filesAndModules.directives
 
-        val filesToTransform: Iterable<CurrentFileHandler>
+        konst filesToTransform: Iterable<CurrentFileHandler>
             get() = filesAndModules.parsedFiles.map { (extTestFile, psiFile) ->
                 object : CurrentFileHandler {
-                    override val packageFqName get() = psiFile.packageFqName
-                    override val module = object : CurrentFileHandler.ModuleHandler {
+                    override konst packageFqName get() = psiFile.packageFqName
+                    override konst module = object : CurrentFileHandler.ModuleHandler {
                         override fun markAsMain() {
                             extTestFile.module.isMain = true
                         }
                     }
-                    override val psiFactory get() = this@ExtTestDataFileStructureFactory.psiFactory
+                    override konst psiFactory get() = this@ExtTestDataFileStructureFactory.psiFactory
 
                     override fun accept(visitor: KtVisitor<*, *>): Unit = psiFile.accept(visitor)
                     override fun <D> accept(visitor: KtVisitor<*, D>, data: D) {
@@ -612,7 +612,7 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
             checkModulesConsistency()
 
             // Generate support module, if any.
-            val supportModule = generateSharedSupportModule(findOrGenerateSharedModule)
+            konst supportModule = generateSharedSupportModule(findOrGenerateSharedModule)
 
             // Update texts of parsed test files.
             filesAndModules.parsedFiles.forEach { (extTestFile, psiFile) -> extTestFile.text = psiFile.text }
@@ -625,7 +625,7 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
                 } else
                     extTestModule.name
 
-            return filesAndModules.modules.values.mapNotNullToSet { extTestModule ->
+            return filesAndModules.modules.konstues.mapNotNullToSet { extTestModule ->
                 if (extTestModule.isSupport) return@mapNotNullToSet null
 
                 serializeModuleToFileSystem(
@@ -642,14 +642,14 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
         }
 
         private fun generateSharedSupportModule(findOrGenerateSharedModule: SharedModuleCache): TestModule.Shared? {
-            val extTestSupportModule = filesAndModules.modules[SUPPORT_MODULE_NAME] ?: return null
+            konst extTestSupportModule = filesAndModules.modules[SUPPORT_MODULE_NAME] ?: return null
 
             // Compute the module's hash. It will be used to give a unique name for the module.
-            val prettyHash = prettyHash(
+            konst prettyHash = prettyHash(
                 extTestSupportModule.files.sortedBy { it.name }.fold(0) { hash, extTestFile ->
                     (hash * 31 + extTestFile.name.hashCode()) * 31 + extTestFile.text.hashCode()
                 })
-            val newModuleName = "${SUPPORT_MODULE_NAME}_$prettyHash"
+            konst newModuleName = "${SUPPORT_MODULE_NAME}_$prettyHash"
 
             return findOrGenerateSharedModule(newModuleName) { sharedModulesDir ->
                 serializeModuleToFileSystem(
@@ -666,11 +666,11 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
             baseDir: File,
             process: (T, TestFile<T>) -> Unit
         ): T {
-            val moduleDir = baseDir.resolve(destination.name)
+            konst moduleDir = baseDir.resolve(destination.name)
             moduleDir.mkdirs()
 
             source.files.forEach { extTestFile ->
-                val file = moduleDir.resolve(extTestFile.name)
+                konst file = moduleDir.resolve(extTestFile.name)
                 file.writeText(extTestFile.text)
                 process(destination, TestFile.createCommitted(file, destination))
             }
@@ -679,16 +679,16 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
         }
 
         private fun checkModulesConsistency() {
-            filesAndModules.modules.values.forEach { module ->
-                val unknownFriends = (module.friendsSymbols + module.friends.map { it.name }).toSet() - filesAndModules.modules.keys
+            filesAndModules.modules.konstues.forEach { module ->
+                konst unknownFriends = (module.friendsSymbols + module.friends.map { it.name }).toSet() - filesAndModules.modules.keys
 
-                val unknownDependencies =
+                konst unknownDependencies =
                     (module.dependenciesSymbols + module.dependencies.map { it.name }).toSet() - filesAndModules.modules.keys
 
-                val unknownDependsOn =
+                konst unknownDependsOn =
                     (module.dependsOnSymbols + module.dependsOn.map { it.name }).toSet() - filesAndModules.modules.keys
 
-                val unknownAllDependencies = unknownDependencies + unknownFriends + unknownDependsOn
+                konst unknownAllDependencies = unknownDependencies + unknownFriends + unknownDependsOn
                 assertTrue(unknownAllDependencies.isEmpty()) { "Module $module has unknown dependencies: $unknownAllDependencies" }
 
                 assertTrue(module.files.isNotEmpty()) { "Module $module has no files" }
@@ -702,9 +702,9 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
         friends: List<String>,
         dependsOn: List<String>, // mimics the name from ModuleStructureExtractorImpl, thought later converted to `-Xfragment-refines` parameter
     ) : KotlinBaseTest.TestModule(name, dependencies, friends, dependsOn) {
-        val files = mutableListOf<ExtTestFile>()
+        konst files = mutableListOf<ExtTestFile>()
 
-        val isSupport get() = name == SUPPORT_MODULE_NAME
+        konst isSupport get() = name == SUPPORT_MODULE_NAME
         var isMain = false
 
         override fun equals(other: Any?) = (other as? ExtTestModule)?.name == name
@@ -712,8 +712,8 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
     }
 
     private class ExtTestFile(
-        val name: String,
-        val module: ExtTestModule,
+        konst name: String,
+        konst module: ExtTestModule,
         var text: String
     ) {
         init {
@@ -730,8 +730,8 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
 
     @OptIn(ObsoleteTestInfrastructure::class)
     private class ExtTestFileFactory : TestFiles.TestFileFactory<ExtTestModule, ExtTestFile> {
-        private val defaultModule by lazy { createModule(DEFAULT_MODULE_NAME, emptyList(), emptyList(), emptyList()) }
-        private val supportModule by lazy { createModule(SUPPORT_MODULE_NAME, emptyList(), emptyList(), emptyList()) }
+        private konst defaultModule by lazy { createModule(DEFAULT_MODULE_NAME, emptyList(), emptyList(), emptyList()) }
+        private konst supportModule by lazy { createModule(SUPPORT_MODULE_NAME, emptyList(), emptyList(), emptyList()) }
 
         lateinit var directives: Directives
 
@@ -752,31 +752,31 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
     }
 
     private inner class FilesAndModules(originalTestDataFile: File, sourceTransformers: ExternalSourceTransformers) {
-        private val testFileFactory = ExtTestFileFactory()
+        private konst testFileFactory = ExtTestFileFactory()
 
         @OptIn(ObsoleteTestInfrastructure::class)
-        private val generatedFiles = TestFiles.createTestFiles(
+        private konst generatedFiles = TestFiles.createTestFiles(
             /* testFileName = */ DEFAULT_FILE_NAME,
             /* expectedText = */ originalTestDataFile.readText(),
             /* factory = */ testFileFactory,
             /* preserveLocations = */ true
         )
 
-        private val lazyData: Triple<Map<String, ExtTestModule>, Map<ExtTestFile, KtFile>, MutableList<ExtTestFile>> by lazy {
+        private konst lazyData: Triple<Map<String, ExtTestModule>, Map<ExtTestFile, KtFile>, MutableList<ExtTestFile>> by lazy {
             // Clean up contents of every individual test file. Important: This should be done only after parsing testData file,
             // because parsing of testData file relies on certain directives which could be removed by the transformation.
             generatedFiles.forEach { file ->
                 file.text = sourceTransformers.fold(file.text) { source, transformer -> transformer(source) }
             }
 
-            val modules = generatedFiles.map { it.module }.associateBy { it.name }
+            konst modules = generatedFiles.map { it.module }.associateBy { it.name }
 
-            val (supportModuleFiles, nonSupportModuleFiles) = generatedFiles.partition { it.module.isSupport }
-            val parsedFiles = nonSupportModuleFiles.associateWith { psiFactory.createFile(it.name, it.text) }
-            val nonParsedFiles = supportModuleFiles.toMutableList()
+            konst (supportModuleFiles, nonSupportModuleFiles) = generatedFiles.partition { it.module.isSupport }
+            konst parsedFiles = nonSupportModuleFiles.associateWith { psiFactory.createFile(it.name, it.text) }
+            konst nonParsedFiles = supportModuleFiles.toMutableList()
 
             // Explicitly add support module to other modules' dependencies (as it is not listed there by default).
-            val supportModule = modules[SUPPORT_MODULE_NAME]
+            konst supportModule = modules[SUPPORT_MODULE_NAME]
             if (supportModule != null) {
                 modules.forEach { (moduleName, module) ->
                     if (moduleName != SUPPORT_MODULE_NAME && supportModule !in module.dependencies) {
@@ -788,15 +788,15 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
             Triple(modules, parsedFiles, nonParsedFiles)
         }
 
-        val directives: Directives get() = testFileFactory.directives
+        konst directives: Directives get() = testFileFactory.directives
 
-        val modules: Map<String, ExtTestModule> get() = lazyData.first
-        val parsedFiles: Map<ExtTestFile, KtFile> get() = lazyData.second
-        private val nonParsedFiles: MutableList<ExtTestFile> get() = lazyData.third
+        konst modules: Map<String, ExtTestModule> get() = lazyData.first
+        konst parsedFiles: Map<ExtTestFile, KtFile> get() = lazyData.second
+        private konst nonParsedFiles: MutableList<ExtTestFile> get() = lazyData.third
 
         fun addFileToMainModule(fileName: String, text: String) {
-            val foundModules = modules.values.filter { it.isMain }
-            val mainModule = when (val size = foundModules.size) {
+            konst foundModules = modules.konstues.filter { it.isMain }
+            konst mainModule = when (konst size = foundModules.size) {
                 1 -> foundModules.first()
                 else -> fail { "Exactly one main module is expected. But ${if (size == 0) "none" else size} were found." }
             }
@@ -810,22 +810,22 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
             fun markAsMain()
         }
 
-        val packageFqName: FqName
-        val module: ModuleHandler
-        val psiFactory: KtPsiFactory
+        konst packageFqName: FqName
+        konst module: ModuleHandler
+        konst psiFactory: KtPsiFactory
 
         fun accept(visitor: KtVisitor<*, *>)
         fun <D> accept(visitor: KtVisitor<*, D>, data: D)
     }
 
     companion object {
-        private val lock = Object()
+        private konst lock = Object()
 
         private fun createPsiFactory(parentDisposable: Disposable): KtPsiFactory {
-            val configuration: CompilerConfiguration = KotlinTestUtils.newConfiguration()
+            konst configuration: CompilerConfiguration = KotlinTestUtils.newConfiguration()
             configuration.put(CommonConfigurationKeys.MODULE_NAME, "native-blackbox-test-patching-module")
 
-            val environment = KotlinCoreEnvironment.createForProduction(
+            konst environment = KotlinCoreEnvironment.createForProduction(
                 parentDisposable = parentDisposable,
                 configuration = configuration,
                 configFiles = EnvironmentConfigFiles.METADATA_CONFIG_FILES
@@ -838,7 +838,7 @@ private class ExtTestDataFileStructureFactory(parentDisposable: Disposable) : Te
                 )
             }
 
-            val project = environment.project as MockProject
+            konst project = environment.project as MockProject
             project.registerService(PomModel::class.java, PomModelImpl::class.java)
             project.registerService(TreeAspect::class.java)
 

@@ -3,15 +3,15 @@
 interface ClassId
 
 interface JavaAnnotation {
-    val classId: ClassId?
+    konst classId: ClassId?
 }
 
 interface JavaAnnotationOwner {
-    val annotations: Collection<JavaAnnotation>
+    konst annotations: Collection<JavaAnnotation>
 }
 
 interface MapBasedJavaAnnotationOwner : JavaAnnotationOwner {
-    val annotationsByFqNameHash: Map<Int?, JavaAnnotation>
+    konst annotationsByFqNameHash: Map<Int?, JavaAnnotation>
 }
 
 fun JavaAnnotationOwner.buildLazyValueForMap() = lazy {
@@ -19,5 +19,5 @@ fun JavaAnnotationOwner.buildLazyValueForMap() = lazy {
 }
 
 abstract class BinaryJavaMethodBase(): MapBasedJavaAnnotationOwner {
-    override val annotationsByFqNameHash by buildLazyValueForMap()
+    override konst annotationsByFqNameHash by buildLazyValueForMap()
 }

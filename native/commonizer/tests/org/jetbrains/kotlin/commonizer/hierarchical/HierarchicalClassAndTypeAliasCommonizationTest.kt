@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test commonization of typeAlias and class`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget("a", "typealias X = Int")
             simpleSingleSourceTarget("b", "class X")
@@ -21,7 +21,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test commonization of class and typeAlias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget("a", "class X")
             simpleSingleSourceTarget("b", "typealias X = Int")
@@ -31,7 +31,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test commonization of typeAlias and class hierarchically`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             registerDependency("a", "b", "c", "d", "(a, b)", "(c, d)", "(a, b, c, d)") {
                 source(
@@ -54,14 +54,14 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test following typeAliases`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                 typealias X = NotX
 
                 class NotX(constructorParameter: Int) {
-                    val property: Int = 42
+                    konst property: Int = 42
                     fun function() = 42
                 }
             """.trimIndent()
@@ -70,7 +70,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
             simpleSingleSourceTarget(
                 "b", """
                 class X(constructorParameter: Int) {
-                    val property: Int = 42
+                    konst property: Int = 42
                     fun function() = 42
                 }
             """.trimIndent()
@@ -80,7 +80,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
         result.assertCommonized(
             "(a, b)", """
             expect class X(constructorParameter: Int) {
-                val property: Int
+                konst property: Int
                 fun function(): Int
             }
         """.trimIndent()
@@ -88,14 +88,14 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test following nested typeAliases`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                 typealias X = NotX
                 typealias NotX = ReallyNotX 
                 class ReallyNotX(constructorParameter: Int) {
-                    val property: Int = 42
+                    konst property: Int = 42
                     fun function() = 42
                 }
             """.trimIndent()
@@ -104,7 +104,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
             simpleSingleSourceTarget(
                 "b", """
                 class X(constructorParameter: Int) {
-                    val property: Int = 42
+                    konst property: Int = 42
                     fun function() = 42
                 }
             """.trimIndent()
@@ -115,7 +115,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
         result.assertCommonized(
             "(a, b)", """
                 expect class X(constructorParameter: Int) {
-                val property: Int
+                konst property: Int
                 fun function(): Int
             }
         """.trimIndent()
@@ -123,12 +123,12 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test follow typeAlias on both platforms`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                 class A {
-                    val x: Int = 42
+                    konst x: Int = 42
                 }
                 typealias X = A
             """.trimIndent()
@@ -137,7 +137,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
             simpleSingleSourceTarget(
                 "b", """
                 class B {
-                    val x: Int = 42
+                    konst x: Int = 42
                 }
                 typealias X = B
                 """.trimIndent()
@@ -147,19 +147,19 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
         result.assertCommonized(
             "(a, b)", """
                 expect class X() {
-                    val x: Int
+                    konst x: Int
                 }
             """.trimIndent()
         )
     }
 
     fun `test follow exact same typeAlias on both platforms`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                 class AB {
-                    val x: Int = 42
+                    konst x: Int = 42
                 }
                 typealias X = AB
             """.trimIndent()
@@ -168,7 +168,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
             simpleSingleSourceTarget(
                 "b", """
                 class AB {
-                    val x: Int = 42
+                    konst x: Int = 42
                 }
                 typealias X = AB
                 """.trimIndent()
@@ -178,7 +178,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
         result.assertCommonized(
             "(a, b)", """
                 expect class AB() {
-                    val x: Int
+                    konst x: Int
                 }
                 typealias X = AB
             """.trimIndent()
@@ -186,7 +186,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test aliased class with companion`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -210,7 +210,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test typeAlias with nullability`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -231,7 +231,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test typeAlias chain with nullability`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -260,7 +260,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test typeAlias chain with nullability 2`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -289,7 +289,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test return types`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -317,7 +317,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test function parameters`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -345,7 +345,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test parameterized return type`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             registerDependency("a", "b", "c", "d", "(a, b)", "(c, d)", "(a, b, c, d)") {
                 source("class Box<T>")
@@ -403,7 +403,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test boxed parameter in function`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -434,7 +434,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test boxed parameter in function - TA expansion not commonized`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -466,7 +466,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test supertype from dependency`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             registerDependency("a", "b", "(a, b)") {
                 source("interface SuperClass")
@@ -494,7 +494,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test supertype from sources`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -522,7 +522,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test typealias to numbers`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             registerDependency("(a, b)", "(c, d)", "(a, b, c, d)") {
                 unsafeNumberAnnotationSource()
@@ -532,7 +532,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
                 "a", """
                     typealias Proxy = Long
                     typealias X = Proxy
-                    const val x: X = 42L
+                    const konst x: X = 42L
                 """.trimIndent()
             )
 
@@ -540,7 +540,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
                 "b", """
                     typealias Proxy = Long
                     typealias X = Proxy
-                    const val x: X = 42L
+                    const konst x: X = 42L
                 """.trimIndent()
             )
 
@@ -548,7 +548,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
                 "c", """
                     typealias Proxy = Int
                     typealias X = Proxy
-                    const val x: X = 42
+                    const konst x: X = 42
                 """.trimIndent()
             )
 
@@ -556,7 +556,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
                 "d", """
                     typealias Proxy = Short
                     typealias X = Proxy
-                    const val x: X = 42
+                    const konst x: X = 42
                 """.trimIndent()
             )
         }
@@ -565,7 +565,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
             "(a, b)", """
                 typealias Proxy = Long
                 typealias X = Proxy
-                const val x: X = 42L
+                const konst x: X = 42L
             """.trimIndent()
         )
 
@@ -576,7 +576,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
                 @UnsafeNumber(["c: kotlin.Int", "d: kotlin.Short"])
                 typealias X = Proxy
                 @UnsafeNumber(["c: kotlin.Int", "d: kotlin.Short"])
-                expect val x: X
+                expect konst x: X
             """.trimIndent()
         )
 
@@ -587,13 +587,13 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
                 @UnsafeNumber(["a: kotlin.Long", "b: kotlin.Long", "c: kotlin.Int", "d: kotlin.Short"])
                 typealias X = Proxy
                 @UnsafeNumber(["a: kotlin.Long", "b: kotlin.Long", "c: kotlin.Int", "d: kotlin.Short"])
-                expect val x: X
+                expect konst x: X
             """.trimIndent()
         )
     }
 
     fun `test supertypes being retained`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -619,7 +619,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test supertypes being retained from dependencies`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             registerDependency("a", "b", "(a, b)") {
@@ -647,7 +647,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test 'crossed' type aliases - 0`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -689,7 +689,7 @@ class HierarchicalClassAndTypeAliasCommonizationTest : AbstractInlineSourcesComm
     }
 
     fun `test 'crossed' type aliases - 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """

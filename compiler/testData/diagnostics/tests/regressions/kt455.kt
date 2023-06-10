@@ -3,7 +3,7 @@
 package kt455
 
 fun foo() {
-    val a: Int
+    konst a: Int
     doSmth(<!UNINITIALIZED_VARIABLE!>a<!>)   //error
     doSmth(a)   //no repeat error
 }

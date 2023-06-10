@@ -1,7 +1,7 @@
 // WITH_STDLIB
 // FILE: test.kt
 fun test() {
-    val result = Result.success("yes!")
+    konst result = Result.success("yes!")
     println("$result")
 }
 

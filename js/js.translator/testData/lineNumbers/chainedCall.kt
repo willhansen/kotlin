@@ -11,7 +11,7 @@ fun box(a: C, x: dynamic) {
 class C {
     fun foo(): dynamic = null
 
-    val baz: dynamic get() = null
+    konst baz: dynamic get() = null
 }
 
 // LINES(JS):      1 9 2 4 3 2 6 8 7 6 11    12 12 12 14 14 14

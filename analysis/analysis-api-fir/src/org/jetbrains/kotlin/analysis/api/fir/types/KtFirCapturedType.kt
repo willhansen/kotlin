@@ -18,16 +18,16 @@ import org.jetbrains.kotlin.fir.types.ConeCapturedType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 
 internal class KtFirCapturedType(
-    override val coneType: ConeCapturedType,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeCapturedType,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtCapturedType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst token: KtLifetimeToken get() = builder.token
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
 
-    override val projection: KtTypeProjection
+    override konst projection: KtTypeProjection
         get() = withValidityAssertion { builder.typeBuilder.buildTypeProjection(coneType.constructor.projection) }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
 

@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.asJava.classes.KtLightClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
 
 internal class KtLightEnumClassForDecompiledDeclaration(
-    private val psiConstantInitializer: PsiEnumConstantInitializer,
-    private val enumConstant: KtLightEnumEntryForDecompiledDeclaration,
+    private konst psiConstantInitializer: PsiEnumConstantInitializer,
+    private konst enumConstant: KtLightEnumEntryForDecompiledDeclaration,
     clsParent: KtLightClass,
     file: KtClsFile,
     kotlinOrigin: KtClassOrObject?

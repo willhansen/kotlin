@@ -15,13 +15,13 @@ private class Bkt41907 {
     var c: Ckt41907? = null
 }
 
-private val b = Bkt41907()
+private konst b = Bkt41907()
 
 fun escapeC(c: Ckt41907) {
     b.c = c
 }
 
 fun testKt41907(o: Ikt41907) {
-    val c = Ckt41907()
+    konst c = Ckt41907()
     o.foo(c)
 }

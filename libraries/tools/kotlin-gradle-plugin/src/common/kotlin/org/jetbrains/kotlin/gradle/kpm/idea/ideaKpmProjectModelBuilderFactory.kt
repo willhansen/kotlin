@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.tooling.core.UnsafeApi
 internal fun IdeaKpmProjectModelBuilder.Companion.default(
     extension: KotlinPm20ProjectExtension
 ) = IdeaKpmProjectModelBuilderImpl(extension).apply {
-    val fragmentMetadataResolverFactory = GradleKpmFragmentGranularMetadataResolverFactory()
+    konst fragmentMetadataResolverFactory = GradleKpmFragmentGranularMetadataResolverFactory()
 
     registerDependencyResolver(
         resolver = IdeaKpmRefinesDependencyResolver,

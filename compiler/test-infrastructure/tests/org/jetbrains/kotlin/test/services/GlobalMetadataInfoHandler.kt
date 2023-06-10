@@ -13,15 +13,15 @@ import org.jetbrains.kotlin.test.model.TestFile
 import org.jetbrains.kotlin.test.model.TestModule
 
 class GlobalMetadataInfoHandler(
-    private val testServices: TestServices,
-    private val processors: List<AdditionalMetaInfoProcessor>
+    private konst testServices: TestServices,
+    private konst processors: List<AdditionalMetaInfoProcessor>
 ) : TestService {
     private lateinit var existingInfosPerFile: Map<TestFile, List<ParsedCodeMetaInfo>>
 
-    private val infosPerFile: MutableMap<TestFile, MutableList<CodeMetaInfo>> =
+    private konst infosPerFile: MutableMap<TestFile, MutableList<CodeMetaInfo>> =
         mutableMapOf<TestFile, MutableList<CodeMetaInfo>>().withDefault { mutableListOf() }
 
-    private val existingInfosPerFilePerInfoCache = mutableMapOf<Pair<TestFile, CodeMetaInfo>, List<ParsedCodeMetaInfo>>()
+    private konst existingInfosPerFilePerInfoCache = mutableMapOf<Pair<TestFile, CodeMetaInfo>, List<ParsedCodeMetaInfo>>()
 
     @OptIn(ExperimentalStdlibApi::class)
     fun parseExistingMetadataInfosFromAllSources() {
@@ -47,33 +47,33 @@ class GlobalMetadataInfoHandler(
     }
 
     fun addMetadataInfosForFile(file: TestFile, codeMetaInfos: List<CodeMetaInfo>) {
-        val infos = infosPerFile.getOrPut(file) { mutableListOf() }
+        konst infos = infosPerFile.getOrPut(file) { mutableListOf() }
         infos += codeMetaInfos
     }
 
     fun compareAllMetaDataInfos() {
         // TODO: adapt to multiple testdata files
-        val moduleStructure = testServices.moduleStructure
-        val builder = StringBuilder()
+        konst moduleStructure = testServices.moduleStructure
+        konst builder = StringBuilder()
         for (module in moduleStructure.modules) {
             for (file in module.files) {
                 if (file.isAdditional) continue
                 processors.forEach { it.processMetaInfos(module, file) }
-                val codeMetaInfos = infosPerFile.getValue(file)
-                val fileBuilder = StringBuilder()
+                konst codeMetaInfos = infosPerFile.getValue(file)
+                konst fileBuilder = StringBuilder()
                 CodeMetaInfoRenderer.renderTagsToText(
                     fileBuilder,
                     codeMetaInfos,
                     testServices.sourceFileProvider.getContentOfSourceFile(file)
                 )
-                val reverseTransformers = testServices.sourceFileProvider.preprocessors.filterIsInstance<ReversibleSourceFilePreprocessor>()
-                val initialFileContent = fileBuilder.stripAdditionalEmptyLines(file).toString()
-                val actualFileContent =
+                konst reverseTransformers = testServices.sourceFileProvider.preprocessors.filterIsInstance<ReversibleSourceFilePreprocessor>()
+                konst initialFileContent = fileBuilder.stripAdditionalEmptyLines(file).toString()
+                konst actualFileContent =
                     reverseTransformers.foldRight(initialFileContent) { transformer, source -> transformer.revert(file, source) }
                 builder.append(actualFileContent)
             }
         }
-        val actualText = builder.toString()
+        konst actualText = builder.toString()
         testServices.assertions.assertEqualsToFile(moduleStructure.originalTestDataFiles.single(), actualText)
     }
 
@@ -86,10 +86,10 @@ class GlobalMetadataInfoHandler(
     }
 }
 
-val TestServices.globalMetadataInfoHandler: GlobalMetadataInfoHandler by TestServices.testServiceAccessor()
+konst TestServices.globalMetadataInfoHandler: GlobalMetadataInfoHandler by TestServices.testServiceAccessor()
 
-abstract class AdditionalMetaInfoProcessor(protected val testServices: TestServices) {
-    protected val globalMetadataInfoHandler: GlobalMetadataInfoHandler
+abstract class AdditionalMetaInfoProcessor(protected konst testServices: TestServices) {
+    protected konst globalMetadataInfoHandler: GlobalMetadataInfoHandler
         get() = testServices.globalMetadataInfoHandler
 
     abstract fun processMetaInfos(module: TestModule, file: TestFile)

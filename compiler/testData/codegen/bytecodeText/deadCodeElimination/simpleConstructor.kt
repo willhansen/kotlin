@@ -1,8 +1,8 @@
 class A
 fun box() {
-    val x: A? = A()
-    val z: A? = A()
-    val z1: A? = if (1 == 1) z else x
+    konst x: A? = A()
+    konst z: A? = A()
+    konst z1: A? = if (1 == 1) z else x
     
     x!!
     z!!

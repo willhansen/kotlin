@@ -28,9 +28,9 @@ class Processor : AbstractProcessor() {
         }
 
         for (element in roundEnv.getElementsAnnotatedWith(SomeAnnotation::class.java)) {
-            val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName
-            val name = "Generated${element.simpleName}"
-            val file = processingEnv.filer.createResource(
+            konst packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName
+            konst name = "Generated${element.simpleName}"
+            konst file = processingEnv.filer.createResource(
                 StandardLocation.SOURCE_OUTPUT,
                 packageName,
                 "$name.kt",

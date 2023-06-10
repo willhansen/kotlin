@@ -14,7 +14,7 @@ package kotlin
 import kotlin.internal.AccessibleLateinitPropertyLiteral
 import kotlin.reflect.KProperty0
 
-inline val @receiver:AccessibleLateinitPropertyLiteral KProperty0<*>.isInitialized: Boolean
+inline konst @receiver:AccessibleLateinitPropertyLiteral KProperty0<*>.isInitialized: Boolean
     get() = true
 
 
@@ -31,9 +31,9 @@ open class Foo : Base {
     var nonLateInit: Int = 1
 
     fun ok() {
-        val b: Boolean = this::x.isInitialized
+        konst b: Boolean = this::x.isInitialized
 
-        val otherInstance = Foo()
+        konst otherInstance = Foo()
         otherInstance::x.isInitialized
 
         (this::x).isInitialized
@@ -42,15 +42,15 @@ open class Foo : Base {
         object {
             fun local() {
                 class Local {
-                    val xx = this@Foo::x.isInitialized
-                    val yy = this@Foo::y.isInitialized
+                    konst xx = this@Foo::x.isInitialized
+                    konst yy = this@Foo::y.isInitialized
                 }
             }
         }
     }
 
     fun onLiteral() {
-        val p = this::x
+        konst p = this::x
         p.<!LATEINIT_INTRINSIC_CALL_ON_NON_LITERAL_WARNING!>isInitialized<!>
     }
 
@@ -62,7 +62,7 @@ open class Foo : Base {
         this::x.<!LATEINIT_INTRINSIC_CALL_IN_INLINE_FUNCTION_WARNING!>isInitialized<!>
 
         object {
-            val z = this@Foo::x.isInitialized
+            konst z = this@Foo::x.isInitialized
         }
     }
 

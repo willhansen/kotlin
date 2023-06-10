@@ -7,12 +7,12 @@ import android.os.Parcelable
 
 @Parcelize
 class User(
-        val a: String,
-        val b: <!PARCELABLE_TYPE_NOT_SUPPORTED!>Any<!>,
-        val c: <!PARCELABLE_TYPE_NOT_SUPPORTED!>Any?<!>,
-        val d: <!PARCELABLE_TYPE_NOT_SUPPORTED!>Map<Any, String><!>,
-        val e: @RawValue Any?,
-        val f: @RawValue Map<String, Any>,
-        val g: Map<String, @RawValue Any>,
-        val h: Map<@RawValue Any, List<@RawValue Any>>
+        konst a: String,
+        konst b: <!PARCELABLE_TYPE_NOT_SUPPORTED!>Any<!>,
+        konst c: <!PARCELABLE_TYPE_NOT_SUPPORTED!>Any?<!>,
+        konst d: <!PARCELABLE_TYPE_NOT_SUPPORTED!>Map<Any, String><!>,
+        konst e: @RawValue Any?,
+        konst f: @RawValue Map<String, Any>,
+        konst g: Map<String, @RawValue Any>,
+        konst h: Map<@RawValue Any, List<@RawValue Any>>
 ) : Parcelable

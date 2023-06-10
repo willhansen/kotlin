@@ -5,14 +5,14 @@ plugins {
     kotlin("multiplatform")
 }
 
-val sdkName: String? = System.getenv("SDK_NAME")
+konst sdkName: String? = System.getenv("SDK_NAME")
 
-enum class Target(val simulator: Boolean, val key: String) {
+enum class Target(konst simulator: Boolean, konst key: String) {
     WATCHOS_X64(true, "watchos"), WATCHOS_ARM64(false, "watchos"),
     IOS_X64(true, "ios"), IOS_ARM64(false, "ios")
 }
 
-val target = sdkName.orEmpty().let {
+konst target = sdkName.orEmpty().let {
     when {
         it.startsWith("iphoneos") -> Target.IOS_ARM64
         it.startsWith("iphonesimulator") -> Target.IOS_X64
@@ -22,8 +22,8 @@ val target = sdkName.orEmpty().let {
     }
 }
 
-val buildType = System.getenv("CONFIGURATION")?.let {
-    NativeBuildType.valueOf(it.toUpperCase())
+konst buildType = System.getenv("CONFIGURATION")?.let {
+    NativeBuildType.konstueOf(it.toUpperCase())
 } ?: NativeBuildType.DEBUG
 
 kotlin {
@@ -31,7 +31,7 @@ kotlin {
     // We declare only one target (either arm64 or x64)
     // to workaround lack of common platform libraries
     // for both device and simulator.
-    val ios = if (!target.simulator ) {
+    konst ios = if (!target.simulator ) {
         // Device.
         iosArm64("ios")
     } else {
@@ -39,7 +39,7 @@ kotlin {
         iosX64("ios")
     }
 
-    val watchos = if (!target.simulator) {
+    konst watchos = if (!target.simulator) {
         // Device.
         watchosArm64("watchos")
     } else {
@@ -58,7 +58,7 @@ kotlin {
     }
 
     // Configure dependencies.
-    val appleMain by sourceSets.creating {
+    konst appleMain by sourceSets.creating {
         dependsOn(sourceSets["commonMain"])
     }
 
@@ -73,14 +73,14 @@ kotlin {
 }
 
 // Create Xcode integration tasks.
-val targetBuildDir: String? = System.getenv("TARGET_BUILD_DIR")
-val executablePath: String? = System.getenv("EXECUTABLE_PATH")
+konst targetBuildDir: String? = System.getenv("TARGET_BUILD_DIR")
+konst executablePath: String? = System.getenv("EXECUTABLE_PATH")
 
-val currentTarget = kotlin.targets[target.key] as KotlinNativeTarget
-val kotlinBinary = currentTarget.binaries.getExecutable(buildType)
-val xcodeIntegrationGroup = "Xcode integration"
+konst currentTarget = kotlin.targets[target.key] as KotlinNativeTarget
+konst kotlinBinary = currentTarget.binaries.getExecutable(buildType)
+konst xcodeIntegrationGroup = "Xcode integration"
 
-val packForXCode = if (sdkName == null || targetBuildDir == null || executablePath == null) {
+konst packForXCode = if (sdkName == null || targetBuildDir == null || executablePath == null) {
     // The build is launched not by Xcode ->
     // We cannot create a copy task and just show a meaningful error message.
     tasks.create("packForXCode").doLast {
@@ -91,10 +91,10 @@ val packForXCode = if (sdkName == null || targetBuildDir == null || executablePa
     tasks.create("packForXCode", Copy::class.java) {
         dependsOn(kotlinBinary.linkTask)
         destinationDir = file(targetBuildDir)
-        val dsymSource = kotlinBinary.outputFile.absolutePath + ".dSYM"
-        val dsymDestination = file(executablePath).parentFile.name + ".dSYM"
-        val oldExecName = kotlinBinary.outputFile.name
-        val newExecName = file(executablePath).name
+        konst dsymSource = kotlinBinary.outputFile.absolutePath + ".dSYM"
+        konst dsymDestination = file(executablePath).parentFile.name + ".dSYM"
+        konst oldExecName = kotlinBinary.outputFile.name
+        konst newExecName = file(executablePath).name
 
         from(dsymSource) {
             into(dsymDestination)

@@ -28,7 +28,7 @@ external var x: Int
 external fun f(): Int
 external class C {
     constructor(x: String)
-    val x: String
+    konst x: String
 }
 
 @JsName("x")
@@ -41,7 +41,7 @@ external fun f2(): Int
 external class C2 {
     constructor(x: String)
     @JsName("x")
-    val x2: String
+    konst x2: String
 }
 
 // FILE: lib2.kt
@@ -58,7 +58,7 @@ external object b {
                 fun f(): Int
                 class C {
                     constructor(x: String)
-                    val x: String
+                    konst x: String
                 }
 
                 @JsName("x")
@@ -71,7 +71,7 @@ external object b {
                 class C2 {
                     constructor(x: String)
                     @JsName("x")
-                    val x2: String
+                    konst x2: String
                 }
             }
         }

@@ -2,7 +2,7 @@
 // FILE: 1.kt
 package test
 
-val ok = "OK"
+konst ok = "OK"
 
 inline fun inlineFun(lambda: () -> String = ::ok): String {
     return lambda()

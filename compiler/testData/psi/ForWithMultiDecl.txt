@@ -174,7 +174,7 @@ KtFile: ForWithMultiDecl.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           DESTRUCTURING_DECLARATION
             PsiElement(LPAR)('(')
@@ -199,7 +199,7 @@ KtFile: ForWithMultiDecl.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           DESTRUCTURING_DECLARATION
             PsiElement(LPAR)('(')
@@ -228,7 +228,7 @@ KtFile: ForWithMultiDecl.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           DESTRUCTURING_DECLARATION
             PsiElement(LPAR)('(')
@@ -269,7 +269,7 @@ KtFile: ForWithMultiDecl.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           DESTRUCTURING_DECLARATION
             PsiElement(LPAR)('(')
@@ -304,7 +304,7 @@ KtFile: ForWithMultiDecl.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           DESTRUCTURING_DECLARATION
             PsiElement(LPAR)('(')

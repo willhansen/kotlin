@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.test.util.KtTestUtil
 import java.io.File
 import kotlin.io.path.createTempDirectory
 
-enum class JavaForeignAnnotationType(val path: String) {
+enum class JavaForeignAnnotationType(konst path: String) {
     Annotations("third-party/annotations"),
     Java8Annotations("third-party/java8-annotations"),
     Java9Annotations("third-party/java9-annotations"),
@@ -40,10 +40,10 @@ enum class JavaForeignAnnotationType(val path: String) {
 
 open class JvmForeignAnnotationsConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
     companion object {
-        const val JSR_305_TEST_ANNOTATIONS_PATH = "compiler/testData/diagnostics/helpers/jsr305_test_annotations"
+        const konst JSR_305_TEST_ANNOTATIONS_PATH = "compiler/testData/diagnostics/helpers/jsr305_test_annotations"
     }
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(ForeignAnnotationsDirectives)
 
     @OptIn(ExperimentalStdlibApi::class)
@@ -51,15 +51,15 @@ open class JvmForeignAnnotationsConfigurator(testServices: TestServices) : Envir
         directives: RegisteredDirectives,
         languageVersion: LanguageVersion
     ): Map<AnalysisFlag<*>, Any?> {
-        val defaultJsr305Settings = getDefaultJsr305Settings(languageVersion.toKotlinVersion())
-        val globalState = directives.singleOrZeroValue(JSR305_GLOBAL_REPORT) ?: defaultJsr305Settings.globalLevel
-        val migrationState = directives.singleOrZeroValue(JSR305_MIGRATION_REPORT) ?: defaultJsr305Settings.migrationLevel
-        val userAnnotationsState = directives[JSR305_SPECIAL_REPORT].mapNotNull {
-            val (name, stateDescription) = it.split(":").takeIf { it.size == 2 } ?: return@mapNotNull null
-            val state = ReportLevel.findByDescription(stateDescription) ?: return@mapNotNull null
+        konst defaultJsr305Settings = getDefaultJsr305Settings(languageVersion.toKotlinVersion())
+        konst globalState = directives.singleOrZeroValue(JSR305_GLOBAL_REPORT) ?: defaultJsr305Settings.globalLevel
+        konst migrationState = directives.singleOrZeroValue(JSR305_MIGRATION_REPORT) ?: defaultJsr305Settings.migrationLevel
+        konst userAnnotationsState = directives[JSR305_SPECIAL_REPORT].mapNotNull {
+            konst (name, stateDescription) = it.split(":").takeIf { it.size == 2 } ?: return@mapNotNull null
+            konst state = ReportLevel.findByDescription(stateDescription) ?: return@mapNotNull null
             FqName(name) to state
         }.toMap()
-        val configuredReportLevels = NullabilityAnnotationStatesImpl(
+        konst configuredReportLevels = NullabilityAnnotationStatesImpl(
             buildMap<FqName, ReportLevel> {
                 directives.singleOrZeroValue(JSPECIFY_STATE)?.let { 
                     put(JSPECIFY_OLD_ANNOTATIONS_PACKAGE, it)
@@ -80,18 +80,18 @@ open class JvmForeignAnnotationsConfigurator(testServices: TestServices) : Envir
     }
 
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
-        val registeredDirectives = module.directives
-        val javaVersionToCompile = registeredDirectives[JvmEnvironmentConfigurationDirectives.COMPILE_JAVA_USING].singleOrNull()
-        val useJava11ToCompileIncludedJavaFiles = javaVersionToCompile == TestJavacVersion.JAVAC_11
-        val annotationPath = registeredDirectives[ForeignAnnotationsDirectives.ANNOTATIONS_PATH].singleOrNull()
+        konst registeredDirectives = module.directives
+        konst javaVersionToCompile = registeredDirectives[JvmEnvironmentConfigurationDirectives.COMPILE_JAVA_USING].singleOrNull()
+        konst useJava11ToCompileIncludedJavaFiles = javaVersionToCompile == TestJavacVersion.JAVAC_11
+        konst annotationPath = registeredDirectives[ForeignAnnotationsDirectives.ANNOTATIONS_PATH].singleOrNull()
             ?: JavaForeignAnnotationType.Java8Annotations
-        val javaFilesDir = createTempDirectory().toFile().also {
+        konst javaFilesDir = createTempDirectory().toFile().also {
             File(annotationPath.path).copyRecursively(it)
         }
 
-        val jsr305JarFile = createJsr305Jar(configuration)
+        konst jsr305JarFile = createJsr305Jar(configuration)
 
-        val foreignAnnotationsJar = MockLibraryUtil.compileJavaFilesLibraryToJar(
+        konst foreignAnnotationsJar = MockLibraryUtil.compileJavaFilesLibraryToJar(
             javaFilesDir.path,
             "foreign-annotations",
             assertions = JUnit5Assertions,
@@ -103,7 +103,7 @@ open class JvmForeignAnnotationsConfigurator(testServices: TestServices) : Envir
         configuration.addJvmClasspathRoot(testServices.standardLibrariesPathProvider.jvmAnnotationsForTests())
 
         if (JvmEnvironmentConfigurationDirectives.WITH_JSR305_TEST_ANNOTATIONS in registeredDirectives) {
-            val jsr305AnnotationsDir = createTempDirectory().toFile().also {
+            konst jsr305AnnotationsDir = createTempDirectory().toFile().also {
                 File(JSR_305_TEST_ANNOTATIONS_PATH).copyRecursively(it)
             }
             configuration.addJvmClasspathRoot(
@@ -119,7 +119,7 @@ open class JvmForeignAnnotationsConfigurator(testServices: TestServices) : Envir
     }
 
     private fun createJsr305Jar(configuration: CompilerConfiguration): File {
-        val jsr305FilesDir = createTempDirectory().toFile().also {
+        konst jsr305FilesDir = createTempDirectory().toFile().also {
             File(JavaForeignAnnotationType.Jsr305.path).copyRecursively(it)
         }
 

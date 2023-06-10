@@ -21,13 +21,13 @@ CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB CLASS name:AX modality:ABSTRACT visibili
     overridden:
       public abstract fun getA (): @[FlexibleNullability] <root>.X? declared in <root>.X
     $this: VALUE_PARAMETER FAKE_OVERRIDE name:<this> type:<root>.X
-  PROPERTY IR_EXTERNAL_JAVA_DECLARATION_STUB name:a visibility:public modality:OPEN [val]
+  PROPERTY IR_EXTERNAL_JAVA_DECLARATION_STUB name:a visibility:public modality:OPEN [konst]
     overridden:
-      public abstract a: <root>.A? [val]
+      public abstract a: <root>.A? [konst]
     FUN IR_EXTERNAL_DECLARATION_STUB name:<get-a> visibility:public modality:OPEN <> ($this:<root>.AX) returnType:@[EnhancedNullability] <root>.AX?
       annotations:
         Override
-      correspondingProperty: PROPERTY IR_EXTERNAL_JAVA_DECLARATION_STUB name:a visibility:public modality:OPEN [val]
+      correspondingProperty: PROPERTY IR_EXTERNAL_JAVA_DECLARATION_STUB name:a visibility:public modality:OPEN [konst]
       overridden:
         public abstract fun <get-a> (): <root>.A? declared in <root>.A
       $this: VALUE_PARAMETER IR_EXTERNAL_DECLARATION_STUB name:<this> type:<root>.AX

@@ -39,7 +39,7 @@ internal abstract class SymbolLightClassForInterfaceOrAnnotationClass : SymbolLi
         classOrObjectSymbol = classOrObjectSymbol,
         manager = manager,
     ) {
-        val classKind = classOrObjectSymbol.classKind
+        konst classKind = classOrObjectSymbol.classKind
         require(classKind == KtClassKind.INTERFACE || classKind == KtClassKind.ANNOTATION_CLASS)
     }
 
@@ -79,7 +79,7 @@ internal abstract class SymbolLightClassForInterfaceOrAnnotationClass : SymbolLi
         ),
     )
 
-    private val _modifierList: PsiModifierList? by lazyPub {
+    private konst _modifierList: PsiModifierList? by lazyPub {
         computeModifierList()
     }
 

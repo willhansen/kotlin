@@ -1,14 +1,14 @@
 // EXPECTED_REACHABLE_NODES: 1382
-class X(private val x: String) {
+class X(private konst x: String) {
     operator fun getValue(thisRef: Any?, property: Any): String = x
 }
 
 class C {
-    @JsName("a") val `;`: String by X("foo")
+    @JsName("a") konst `;`: String by X("foo")
 
-    private val `.`: String by X("bar")
+    private konst `.`: String by X("bar")
 
-    private val `@`: String by X("baz")
+    private konst `@`: String by X("baz")
 
     fun bar(): String = `.`
 
@@ -16,7 +16,7 @@ class C {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     if (c.`;` != "foo") return "fail1: ${c.`;`}"
     if (c.bar() != "bar") return "fail2: ${c.bar()}"
     if (c.baz() != "baz") return "fail3: ${c.baz()}"

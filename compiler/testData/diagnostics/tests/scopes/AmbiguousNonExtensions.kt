@@ -2,18 +2,18 @@
 // FILE: a.kt
 package a
 
-val v = 1
+konst v = 1
 fun f() = 1
 
 // FILE: b.kt
 package b
 
-val v = 1
+konst v = 1
 fun f() = 1
 
 // FILE: main.kt
 import a.*
 import b.*
 
-val vv = <!OVERLOAD_RESOLUTION_AMBIGUITY!>v<!>
-val ff = <!OVERLOAD_RESOLUTION_AMBIGUITY!>f<!>()
+konst vv = <!OVERLOAD_RESOLUTION_AMBIGUITY!>v<!>
+konst ff = <!OVERLOAD_RESOLUTION_AMBIGUITY!>f<!>()

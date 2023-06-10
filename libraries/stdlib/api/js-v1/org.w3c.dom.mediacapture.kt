@@ -1,24 +1,24 @@
-/*∆*/ public val org.w3c.dom.mediacapture.MediaDeviceKind.Companion.AUDIOINPUT: org.w3c.dom.mediacapture.MediaDeviceKind { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.MediaDeviceKind.Companion.AUDIOINPUT: org.w3c.dom.mediacapture.MediaDeviceKind { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.MediaDeviceKind.Companion.AUDIOOUTPUT: org.w3c.dom.mediacapture.MediaDeviceKind { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.MediaDeviceKind.Companion.AUDIOOUTPUT: org.w3c.dom.mediacapture.MediaDeviceKind { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.VideoResizeModeEnum.Companion.CROP_AND_SCALE: org.w3c.dom.mediacapture.VideoResizeModeEnum { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.VideoResizeModeEnum.Companion.CROP_AND_SCALE: org.w3c.dom.mediacapture.VideoResizeModeEnum { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.MediaStreamTrackState.Companion.ENDED: org.w3c.dom.mediacapture.MediaStreamTrackState { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.MediaStreamTrackState.Companion.ENDED: org.w3c.dom.mediacapture.MediaStreamTrackState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.VideoFacingModeEnum.Companion.ENVIRONMENT: org.w3c.dom.mediacapture.VideoFacingModeEnum { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.VideoFacingModeEnum.Companion.ENVIRONMENT: org.w3c.dom.mediacapture.VideoFacingModeEnum { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.VideoFacingModeEnum.Companion.LEFT: org.w3c.dom.mediacapture.VideoFacingModeEnum { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.VideoFacingModeEnum.Companion.LEFT: org.w3c.dom.mediacapture.VideoFacingModeEnum { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.MediaStreamTrackState.Companion.LIVE: org.w3c.dom.mediacapture.MediaStreamTrackState { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.MediaStreamTrackState.Companion.LIVE: org.w3c.dom.mediacapture.MediaStreamTrackState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.VideoResizeModeEnum.Companion.NONE: org.w3c.dom.mediacapture.VideoResizeModeEnum { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.VideoResizeModeEnum.Companion.NONE: org.w3c.dom.mediacapture.VideoResizeModeEnum { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.VideoFacingModeEnum.Companion.RIGHT: org.w3c.dom.mediacapture.VideoFacingModeEnum { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.VideoFacingModeEnum.Companion.RIGHT: org.w3c.dom.mediacapture.VideoFacingModeEnum { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.VideoFacingModeEnum.Companion.USER: org.w3c.dom.mediacapture.VideoFacingModeEnum { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.VideoFacingModeEnum.Companion.USER: org.w3c.dom.mediacapture.VideoFacingModeEnum { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediacapture.MediaDeviceKind.Companion.VIDEOINPUT: org.w3c.dom.mediacapture.MediaDeviceKind { get; }
+/*∆*/ public konst org.w3c.dom.mediacapture.MediaDeviceKind.Companion.VIDEOINPUT: org.w3c.dom.mediacapture.MediaDeviceKind { get; }
 /*∆*/ 
 /*∆*/ @kotlin.internal.InlineOnly
 /*∆*/ public inline fun Capabilities(): org.w3c.dom.mediacapture.Capabilities
@@ -135,13 +135,13 @@
 /*∆*/ public abstract external class MediaDeviceInfo {
 /*∆*/     public constructor MediaDeviceInfo()
 /*∆*/ 
-/*∆*/     public open val deviceId: kotlin.String { get; }
+/*∆*/     public open konst deviceId: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val groupId: kotlin.String { get; }
+/*∆*/     public open konst groupId: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val kind: org.w3c.dom.mediacapture.MediaDeviceKind { get; }
+/*∆*/     public open konst kind: org.w3c.dom.mediacapture.MediaDeviceKind { get; }
 /*∆*/ 
-/*∆*/     public open val label: kotlin.String { get; }
+/*∆*/     public open konst label: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final fun toJSON(): dynamic
 /*∆*/ }
@@ -171,9 +171,9 @@
 /*∆*/ 
 /*∆*/     public constructor MediaStream(stream: org.w3c.dom.mediacapture.MediaStream)
 /*∆*/ 
-/*∆*/     public open val active: kotlin.Boolean { get; }
+/*∆*/     public open konst active: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val id: kotlin.String { get; }
+/*∆*/     public open konst id: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final var onaddtrack: ((org.w3c.dom.mediacapture.MediaStreamTrackEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -205,13 +205,13 @@
 /*∆*/ 
 /*∆*/     public open var enabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val id: kotlin.String { get; }
+/*∆*/     public open konst id: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val kind: kotlin.String { get; }
+/*∆*/     public open konst kind: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val label: kotlin.String { get; }
+/*∆*/     public open konst label: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val muted: kotlin.Boolean { get; }
+/*∆*/     public open konst muted: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public open var onended: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -221,7 +221,7 @@
 /*∆*/ 
 /*∆*/     public open var onunmute: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val readyState: org.w3c.dom.mediacapture.MediaStreamTrackState { get; }
+/*∆*/     public open konst readyState: org.w3c.dom.mediacapture.MediaStreamTrackState { get; }
 /*∆*/ 
 /*∆*/     public final fun applyConstraints(constraints: org.w3c.dom.mediacapture.MediaTrackConstraints = ...): kotlin.js.Promise<kotlin.Unit>
 /*∆*/ 
@@ -239,16 +239,16 @@
 /*∆*/ public open external class MediaStreamTrackEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor MediaStreamTrackEvent(type: kotlin.String, eventInitDict: org.w3c.dom.mediacapture.MediaStreamTrackEventInit)
 /*∆*/ 
-/*∆*/     public open val track: org.w3c.dom.mediacapture.MediaStreamTrack { get; }
+/*∆*/     public open konst track: org.w3c.dom.mediacapture.MediaStreamTrack { get; }
 /*∆*/ 
 /*∆*/     public companion object of MediaStreamTrackEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -405,16 +405,16 @@
 /*∆*/ public open external class OverconstrainedErrorEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor OverconstrainedErrorEvent(type: kotlin.String, eventInitDict: org.w3c.dom.mediacapture.OverconstrainedErrorEventInit)
 /*∆*/ 
-/*∆*/     public open val error: dynamic { get; }
+/*∆*/     public open konst error: dynamic { get; }
 /*∆*/ 
 /*∆*/     public companion object of OverconstrainedErrorEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 

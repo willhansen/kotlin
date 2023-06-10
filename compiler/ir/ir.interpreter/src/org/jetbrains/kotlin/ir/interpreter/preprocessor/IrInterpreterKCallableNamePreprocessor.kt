@@ -13,17 +13,17 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrCompositeImpl
 import org.jetbrains.kotlin.ir.interpreter.checker.IrInterpreterNameChecker.Companion.isKCallableNameCall
 import org.jetbrains.kotlin.name.SpecialNames
 
-// Note: this class still will not allow us to evaluate things like `A()::a.name + `A()::b.name`.
+// Note: this class still will not allow us to ekonstuate things like `A()::a.name + `A()::b.name`.
 // This code will be optimized but not completely turned into "ab" result.
 class IrInterpreterKCallableNamePreprocessor : IrInterpreterPreprocessor {
     override fun visitCall(expression: IrCall, data: IrInterpreterPreprocessorData): IrElement {
-        if (!data.mode.canEvaluateFunction(expression.symbol.owner)) return super.visitCall(expression, data)
+        if (!data.mode.canEkonstuateFunction(expression.symbol.owner)) return super.visitCall(expression, data)
         if (!expression.isKCallableNameCall(data.irBuiltIns)) return super.visitCall(expression, data)
 
-        val callableReference = expression.dispatchReceiver as? IrCallableReference<*> ?: return super.visitCall(expression, data)
+        konst callableReference = expression.dispatchReceiver as? IrCallableReference<*> ?: return super.visitCall(expression, data)
 
         // receiver is needed for bound callable reference
-        val receiver = callableReference.dispatchReceiver ?: callableReference.extensionReceiver ?: return expression
+        konst receiver = callableReference.dispatchReceiver ?: callableReference.extensionReceiver ?: return expression
 
         callableReference.dispatchReceiver = null
         callableReference.extensionReceiver = null

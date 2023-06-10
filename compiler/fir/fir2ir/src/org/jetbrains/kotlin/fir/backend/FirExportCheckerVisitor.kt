@@ -27,20 +27,20 @@ abstract class FirExportCheckerVisitor : FirVisitor<Boolean, SpecialDeclarationT
         TODO("Should have not been reached")
 
     private fun <D> D.globalMemberIsExported(): Boolean where D : FirMemberDeclaration {
-        val visibility = visibility
+        konst visibility = visibility
         if (visibility.isPublicAPI || visibility === Visibilities.Internal) return true
         if (visibility === Visibilities.Local) return false
         return annotations.hasAnnotation(ClassId.topLevel(publishedApiAnnotation), moduleData.session) || isPlatformSpecificExported()
     }
 
     private fun <D> D.isExported(): Boolean where D : FirCallableDeclaration {
-        val classId = symbol.callableId.classId ?: return globalMemberIsExported()
+        konst classId = symbol.callableId.classId ?: return globalMemberIsExported()
         return visibility !== Visibilities.Local &&
                 classId.toSymbol(moduleData.session)!!.fir.accept(this@FirExportCheckerVisitor, SpecialDeclarationType.REGULAR)
     }
 
     private fun <D> D.isExported(): Boolean where D : FirClassLikeDeclaration {
-        val containingDeclaration = getContainingDeclaration(moduleData.session) ?: return globalMemberIsExported()
+        konst containingDeclaration = getContainingDeclaration(moduleData.session) ?: return globalMemberIsExported()
         return visibility !== Visibilities.Local &&
                 containingDeclaration.accept(this@FirExportCheckerVisitor, SpecialDeclarationType.REGULAR)
     }

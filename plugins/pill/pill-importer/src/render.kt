@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.pill.model.*
 import org.jetbrains.kotlin.pill.util.*
 import java.io.File
 
-class PFile(val path: File, private val text: String) {
+class PFile(konst path: File, private konst text: String) {
     constructor(path: File, xml: XmlNode) : this(path, xml.toString())
 
     fun write() {
@@ -19,7 +19,7 @@ class PFile(val path: File, private val text: String) {
 }
 
 fun render(project: PProject): List<PFile> {
-    val files = mutableListOf<PFile>()
+    konst files = mutableListOf<PFile>()
 
     files += renderModulesFile(project)
     project.modules.forEach { files += renderModule(project, it) }
@@ -33,10 +33,10 @@ private fun renderModulesFile(project: PProject) = PFile(
     xml("project", "version" to 4) {
         xml("component", "name" to "ProjectModuleManager") {
             xml("modules") {
-                val pathContext = ProjectContext(project)
+                konst pathContext = ProjectContext(project)
 
                 for (module in project.modules) {
-                    val moduleFilePath = pathContext(module.moduleFile)
+                    konst moduleFilePath = pathContext(module.moduleFile)
                     xml("module", "fileurl" to "file://$moduleFilePath", "filepath" to moduleFilePath)
                 }
             }
@@ -51,16 +51,16 @@ private fun renderModule(project: PProject, module: PModule) = PFile(
         "type" to "JAVA_MODULE",
         "version" to 4
     ) {
-        val moduleForProductionSources = module.moduleForProductionSources
+        konst moduleForProductionSources = module.moduleForProductionSources
         if (moduleForProductionSources != null) {
             xml("component", "name" to "TestModuleProperties", "production-module" to moduleForProductionSources.name)
         }
 
-        val kotlinCompileOptions = module.kotlinOptions
-        val pathContext = ModuleContext(project, module)
+        konst kotlinCompileOptions = module.kotlinOptions
+        konst pathContext = ModuleContext(project, module)
 
-        val platformVersion = (kotlinCompileOptions?.jvmTarget ?: "1.8")
-        val classesDirectory = File(project.rootDirectory, "out/production/${module.name}")
+        konst platformVersion = (kotlinCompileOptions?.jvmTarget ?: "1.8")
+        konst classesDirectory = File(project.rootDirectory, "out/production/${module.name}")
 
         if (kotlinCompileOptions != null) {
             xml("component", "name" to "FacetManager") {
@@ -70,20 +70,20 @@ private fun renderModule(project: PProject, module: PModule) = PFile(
                             xml(
                                 "option",
                                 "name" to "additionalArguments",
-                                "value" to kotlinCompileOptions.extraArguments.joinToString(" ")
+                                "konstue" to kotlinCompileOptions.extraArguments.joinToString(" ")
                             )
                         }
                         xml("compilerArguments") {
-                            xml("option", "name" to "destination", "value" to pathContext(classesDirectory))
+                            xml("option", "name" to "destination", "konstue" to pathContext(classesDirectory))
 
                             fun Any?.option(name: String) {
-                                if (this != null) xml("option", "name" to name, "value" to this.toString())
+                                if (this != null) xml("option", "name" to name, "konstue" to this.toString())
                             }
 
                             kotlinCompileOptions.noStdlib.option("noStdlib")
                             kotlinCompileOptions.noReflect.option("noReflect")
                             module.name.option("moduleName")
-                            xml("option", "name" to "jvmTarget", "value" to platformVersion)
+                            xml("option", "name" to "jvmTarget", "konstue" to platformVersion)
                             kotlinCompileOptions.languageVersion.option("languageVersion")
                             kotlinCompileOptions.apiVersion.option("apiVersion")
 
@@ -91,7 +91,7 @@ private fun renderModule(project: PProject, module: PModule) = PFile(
                             xml("option", "name" to "pluginClasspaths") {
                                 xml("array") {
                                     for (path in kotlinCompileOptions.pluginClasspath) {
-                                        xml("option", "value" to path)
+                                        xml("option", "konstue" to path)
                                     }
                                 }
                             }
@@ -130,7 +130,7 @@ private fun renderModule(project: PProject, module: PModule) = PFile(
                 }
             }
 
-            when (val javaLanguageVersion = module.javaLanguageVersion) {
+            when (konst javaLanguageVersion = module.javaLanguageVersion) {
                 null -> xml("orderEntry", "type" to "inheritedJdk")
                 else -> xml("orderEntry", "type" to "jdk", "jdkName" to javaLanguageVersion.toString(), "jdkType" to "JavaSDK")
             }
@@ -138,9 +138,9 @@ private fun renderModule(project: PProject, module: PModule) = PFile(
             xml("orderEntry", "type" to "sourceFolder", "forTests" to "false")
 
             for (orderRoot in module.orderRoots) {
-                val dependency = orderRoot.dependency
+                konst dependency = orderRoot.dependency
 
-                val args = when (dependency) {
+                konst args = when (dependency) {
                     is PDependency.ModuleLibrary -> mutableListOf(
                         "type" to "module-library"
                     )
@@ -178,10 +178,10 @@ private fun renderModule(project: PProject, module: PModule) = PFile(
 )
 
 private fun renderLibrary(project: PProject, library: PLibrary): PFile {
-    val pathContext = ProjectContext(project)
+    konst pathContext = ProjectContext(project)
 
     // TODO find how IDEA escapes library names
-    val escapedName = library.renderName().replace(" ", "_").replace(".", "_").replace("-", "_")
+    konst escapedName = library.renderName().replace(" ", "_").replace(".", "_").replace("-", "_")
 
     return PFile(
         File(project.rootDirectory, ".idea/libraries/$escapedName.xml"),
@@ -192,7 +192,7 @@ private fun renderLibrary(project: PProject, library: PLibrary): PFile {
 }
 
 private fun renderLibraryToXml(library: PLibrary, pathContext: PathContext, named: Boolean = true): XmlNode {
-    val args = if (named) arrayOf("name" to library.renderName()) else emptyArray()
+    konst args = if (named) arrayOf("name" to library.renderName()) else emptyArray()
 
     return xml("library", *args) {
         xml("CLASSES") {

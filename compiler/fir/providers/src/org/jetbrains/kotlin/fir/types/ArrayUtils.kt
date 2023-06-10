@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.fir.types
 
 import org.jetbrains.kotlin.name.StandardClassIds
 
-val ConeKotlinType.isArrayOrPrimitiveArray: Boolean
+konst ConeKotlinType.isArrayOrPrimitiveArray: Boolean
     get() = arrayElementType() != null
 
 fun ConeKotlinType.createOutArrayType(nullable: Boolean = false, createPrimitiveArrayType: Boolean = true): ConeKotlinType {
@@ -16,10 +16,10 @@ fun ConeKotlinType.createOutArrayType(nullable: Boolean = false, createPrimitive
 
 fun ConeTypeProjection.createArrayType(nullable: Boolean = false, createPrimitiveArrayTypeIfPossible: Boolean = true): ConeClassLikeType {
     if (this is ConeKotlinTypeProjection && createPrimitiveArrayTypeIfPossible) {
-        val type = type.lowerBoundIfFlexible()
+        konst type = type.lowerBoundIfFlexible()
         if (type is ConeClassLikeType && type.nullability != ConeNullability.NULLABLE) {
-            val classId = type.lookupTag.classId
-            val primitiveArrayId =
+            konst classId = type.lookupTag.classId
+            konst primitiveArrayId =
                 StandardClassIds.primitiveArrayTypeByElementType[classId] ?: StandardClassIds.unsignedArrayTypeByElementType[classId]
             if (primitiveArrayId != null) {
                 return primitiveArrayId.constructClassLikeType(emptyArray(), nullable)
@@ -31,12 +31,12 @@ fun ConeTypeProjection.createArrayType(nullable: Boolean = false, createPrimitiv
 }
 
 fun ConeKotlinType.arrayElementType(): ConeKotlinType? {
-    val type = this.lowerBoundIfFlexible()
+    konst type = this.lowerBoundIfFlexible()
     if (type !is ConeClassLikeType) return null
-    val classId = type.lookupTag.classId
+    konst classId = type.lookupTag.classId
     if (classId == StandardClassIds.Array)
         return (type.typeArguments.first() as ConeKotlinTypeProjection).type
-    val elementType = StandardClassIds.elementTypeByPrimitiveArrayType[classId] ?: StandardClassIds.elementTypeByUnsignedArrayType[classId]
+    konst elementType = StandardClassIds.elementTypeByPrimitiveArrayType[classId] ?: StandardClassIds.elementTypeByUnsignedArrayType[classId]
     if (elementType != null) {
         return elementType.constructClassLikeType(emptyArray(), isNullable = false)
     }

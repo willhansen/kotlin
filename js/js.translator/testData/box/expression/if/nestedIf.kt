@@ -5,7 +5,7 @@
 package foo
 
 fun test2(a: Boolean, b: Boolean, c: Boolean) {
-    val a =
+    konst a =
             if (a) {
                 if (b) {
                     "1"

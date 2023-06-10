@@ -19,9 +19,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirTypeProjectionWithVarianceImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var typeRef: FirTypeRef,
-    override val variance: Variance,
+    override konst variance: Variance,
 ) : FirTypeProjectionWithVariance() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         typeRef.accept(visitor, data)

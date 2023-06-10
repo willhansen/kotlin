@@ -1,19 +1,19 @@
 // WITH_STDLIB
 
 fun bar1(): String {
-    val l: List<String> = listOf("O")
-    val s = l[0].plus("K")
+    konst l: List<String> = listOf("O")
+    konst s = l[0].plus("K")
     return s
 }
 
 fun bar2(): String {
-    val l: List<String?> = listOf("O")
-    val s = l[0]?.plus("K")
+    konst l: List<String?> = listOf("O")
+    konst s = l[0]?.plus("K")
     return s!!
 }
 
 fun bar3(): String {
-    val l: List<String> = listOf("O")
+    konst l: List<String> = listOf("O")
     with(l[0]) {
         return plus("K")
     }

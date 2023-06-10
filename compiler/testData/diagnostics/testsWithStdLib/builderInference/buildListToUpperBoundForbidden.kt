@@ -4,7 +4,7 @@
 
 fun box(): String {
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>buildList<!> {
-        val foo = { first() }
+        konst foo = { first() }
         add(0, <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>foo<!>)
     }
     return "OK"

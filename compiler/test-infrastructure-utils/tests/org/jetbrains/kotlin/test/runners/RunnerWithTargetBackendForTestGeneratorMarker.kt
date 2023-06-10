@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.test.TargetBackend
  *
  * Please make sure that all abstract runners which are used in test generator
  *   have `open` modality, not `abstract`. This is required because test generator
- *   instantiates runner to get value of targetBackend and generate tests properly
+ *   instantiates runner to get konstue of targetBackend and generate tests properly
  */
 interface RunnerWithTargetBackendForTestGeneratorMarker {
-    val targetBackend: TargetBackend
+    konst targetBackend: TargetBackend
 }

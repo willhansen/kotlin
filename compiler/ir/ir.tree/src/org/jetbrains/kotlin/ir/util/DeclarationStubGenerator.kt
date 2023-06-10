@@ -36,30 +36,30 @@ import org.jetbrains.kotlin.types.KotlinType
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 abstract class DeclarationStubGenerator(
-    val moduleDescriptor: ModuleDescriptor,
-    val symbolTable: SymbolTable,
-    val irBuiltIns: IrBuiltIns,
-    val extensions: StubGeneratorExtensions = StubGeneratorExtensions.EMPTY,
+    konst moduleDescriptor: ModuleDescriptor,
+    konst symbolTable: SymbolTable,
+    konst irBuiltIns: IrBuiltIns,
+    konst extensions: StubGeneratorExtensions = StubGeneratorExtensions.EMPTY,
 ) : IrProvider {
-    protected val lazyTable = symbolTable.lazyWrapper
+    protected konst lazyTable = symbolTable.lazyWrapper
 
     init {
         extensions.registerDeclarations(symbolTable)
     }
 
-    val lock: IrLock
+    konst lock: IrLock
         get() = symbolTable.lock
 
     var unboundSymbolGeneration: Boolean
         get() = lazyTable.stubGenerator != null
-        set(value) {
-            lazyTable.stubGenerator = if (value) this else null
+        set(konstue) {
+            lazyTable.stubGenerator = if (konstue) this else null
         }
 
-    abstract val typeTranslator: TypeTranslator
-    abstract val descriptorFinder: DescriptorByIdSignatureFinder
+    abstract konst typeTranslator: TypeTranslator
+    abstract konst descriptorFinder: DescriptorByIdSignatureFinder
 
-    private val facadeClassMap = mutableMapOf<DeserializedContainerSource, IrClass?>()
+    private konst facadeClassMap = mutableMapOf<DeserializedContainerSource, IrClass?>()
 
     override fun getDeclaration(symbol: IrSymbol): IrDeclaration? {
         // Special case: generating field for an already generated property.
@@ -68,7 +68,7 @@ abstract class DeclarationStubGenerator(
 //        if (symbol is IrFieldSymbol && (symbol.descriptor as? WrappedPropertyDescriptor)?.isBound() == true) {
 //            return generateStubBySymbol(symbol, symbol.descriptor)
 //        }
-        val descriptor = if (!symbol.hasDescriptor)
+        konst descriptor = if (!symbol.hasDescriptor)
             descriptorFinder.findDescriptorBySignature(
                 symbol.signature
                     ?: error("Symbol is not public API. Expected signature for symbol: ${symbol.descriptor}")
@@ -80,7 +80,7 @@ abstract class DeclarationStubGenerator(
     }
 
     fun generateOrGetEmptyExternalPackageFragmentStub(descriptor: PackageFragmentDescriptor): IrExternalPackageFragment {
-        val referenced = symbolTable.referenceExternalPackageFragment(descriptor)
+        konst referenced = symbolTable.referenceExternalPackageFragment(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
@@ -88,12 +88,12 @@ abstract class DeclarationStubGenerator(
     }
 
     fun generateOrGetFacadeClass(descriptor: DeclarationDescriptor): IrClass? {
-        val directMember = (descriptor as? PropertyAccessorDescriptor)?.correspondingProperty ?: descriptor
-        val packageFragment = directMember.containingDeclaration as? PackageFragmentDescriptor ?: return null
-        val containerSource = extensions.getContainerSource(directMember) ?: return null
+        konst directMember = (descriptor as? PropertyAccessorDescriptor)?.correspondingProperty ?: descriptor
+        konst packageFragment = directMember.containingDeclaration as? PackageFragmentDescriptor ?: return null
+        konst containerSource = extensions.getContainerSource(directMember) ?: return null
         return facadeClassMap.getOrPut(containerSource) {
             extensions.generateFacadeClass(symbolTable.irFactory, containerSource, this)?.also { facade ->
-                val packageStub = generateOrGetEmptyExternalPackageFragmentStub(packageFragment)
+                konst packageStub = generateOrGetEmptyExternalPackageFragmentStub(packageFragment)
                 facade.parent = packageStub
                 packageStub.declarations.add(facade)
             }
@@ -135,12 +135,12 @@ abstract class DeclarationStubGenerator(
         extensions.computeExternalDeclarationOrigin(descriptor) ?: IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB
 
     fun generatePropertyStub(descriptor: PropertyDescriptor): IrProperty {
-        val referenced = symbolTable.referenceProperty(descriptor)
+        konst referenced = symbolTable.referenceProperty(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
 
-        val origin = computeOrigin(descriptor)
+        konst origin = computeOrigin(descriptor)
         return symbolTable.declareProperty(
             UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin, descriptor.original, descriptor.isDelegated
         ) {
@@ -158,7 +158,7 @@ abstract class DeclarationStubGenerator(
     }
 
     fun generateFieldStub(descriptor: PropertyDescriptor): IrField {
-        val referenced = symbolTable.referenceField(descriptor)
+        konst referenced = symbolTable.referenceField(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
@@ -179,21 +179,21 @@ abstract class DeclarationStubGenerator(
     }
 
     fun generateFunctionStub(descriptor: FunctionDescriptor, createPropertyIfNeeded: Boolean = true): IrSimpleFunction {
-        val referenced = symbolTable.referenceSimpleFunction(descriptor)
+        konst referenced = symbolTable.referenceSimpleFunction(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
 
         if (createPropertyIfNeeded && descriptor is PropertyGetterDescriptor) {
-            val property = generatePropertyStub(descriptor.correspondingProperty)
+            konst property = generatePropertyStub(descriptor.correspondingProperty)
             return property.getter!!
         }
         if (createPropertyIfNeeded && descriptor is PropertySetterDescriptor) {
-            val property = generatePropertyStub(descriptor.correspondingProperty)
+            konst property = generatePropertyStub(descriptor.correspondingProperty)
             return property.setter!!
         }
 
-        val origin =
+        konst origin =
             if (descriptor.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE)
                 IrDeclarationOrigin.FAKE_OVERRIDE
             else computeOrigin(descriptor)
@@ -211,12 +211,12 @@ abstract class DeclarationStubGenerator(
     }
 
     fun generateConstructorStub(descriptor: ClassConstructorDescriptor): IrConstructor {
-        val referenced = symbolTable.referenceConstructor(descriptor)
+        konst referenced = symbolTable.referenceConstructor(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
 
-        val origin = computeOrigin(descriptor)
+        konst origin = computeOrigin(descriptor)
         return symbolTable.declareConstructor(
             descriptor.original
         ) {
@@ -246,7 +246,7 @@ abstract class DeclarationStubGenerator(
     }
 
     // in IR Generator enums also have special handling, but here we have not enough data for it
-    // probably, that is not a problem, because you can't add new enum value to external module
+    // probably, that is not a problem, because you can't add new enum konstue to external module
     private fun getEffectiveModality(classDescriptor: ClassDescriptor): Modality =
         if (DescriptorUtils.isAnnotationClass(classDescriptor))
             Modality.OPEN
@@ -254,7 +254,7 @@ abstract class DeclarationStubGenerator(
             classDescriptor.modality
 
     fun generateClassStub(descriptor: ClassDescriptor): IrClass {
-        val irClassSymbol = symbolTable.referenceClass(descriptor)
+        konst irClassSymbol = symbolTable.referenceClass(descriptor)
         if (irClassSymbol.isBound) {
             return irClassSymbol.owner
         }
@@ -266,9 +266,9 @@ abstract class DeclarationStubGenerator(
         //
         // Note as well that not all symbols have descriptors. For example, `irClassSymbol` might be an `IrClassPublicSymbolImpl` without a
         // descriptor. For such symbols, the `descriptor` argument needs to be used.
-        val targetDescriptor = if (irClassSymbol.hasDescriptor) irClassSymbol.descriptor else descriptor
+        konst targetDescriptor = if (irClassSymbol.hasDescriptor) irClassSymbol.descriptor else descriptor
         with(targetDescriptor) {
-            val origin = computeOrigin(this)
+            konst origin = computeOrigin(this)
             return symbolTable.declareClass(this) {
                 IrLazyClass(
                     UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin,
@@ -289,11 +289,11 @@ abstract class DeclarationStubGenerator(
     }
 
     fun generateEnumEntryStub(descriptor: ClassDescriptor): IrEnumEntry {
-        val referenced = symbolTable.referenceEnumEntry(descriptor)
+        konst referenced = symbolTable.referenceEnumEntry(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
-        val origin = computeOrigin(descriptor)
+        konst origin = computeOrigin(descriptor)
         return symbolTable.declareEnumEntry(UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin, descriptor) {
             IrLazyEnumEntryImpl(
                 UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin,
@@ -304,11 +304,11 @@ abstract class DeclarationStubGenerator(
     }
 
     internal fun generateOrGetTypeParameterStub(descriptor: TypeParameterDescriptor): IrTypeParameter {
-        val referenced = symbolTable.referenceTypeParameter(descriptor)
+        konst referenced = symbolTable.referenceTypeParameter(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
-        val origin = computeOrigin(descriptor)
+        konst origin = computeOrigin(descriptor)
         return symbolTable.declareGlobalTypeParameter(UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin, descriptor) {
             IrLazyTypeParameter(
                 UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin,
@@ -323,11 +323,11 @@ abstract class DeclarationStubGenerator(
     }
 
     internal fun generateOrGetScopedTypeParameterStub(descriptor: TypeParameterDescriptor): IrTypeParameter {
-        val referenced = symbolTable.referenceScopedTypeParameter(descriptor)
+        konst referenced = symbolTable.referenceScopedTypeParameter(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
-        val origin = computeOrigin(descriptor)
+        konst origin = computeOrigin(descriptor)
         return symbolTable.declareScopedTypeParameter(UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin, descriptor) {
             IrLazyTypeParameter(
                 UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin,
@@ -342,11 +342,11 @@ abstract class DeclarationStubGenerator(
     }
 
     fun generateTypeAliasStub(descriptor: TypeAliasDescriptor): IrTypeAlias {
-        val referenced = symbolTable.referenceTypeAlias(descriptor)
+        konst referenced = symbolTable.referenceTypeAlias(descriptor)
         if (referenced.isBound) {
             return referenced.owner
         }
-        val origin = computeOrigin(descriptor)
+        konst origin = computeOrigin(descriptor)
         return symbolTable.declareTypeAlias(descriptor) {
             IrLazyTypeAlias(
                 UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin,

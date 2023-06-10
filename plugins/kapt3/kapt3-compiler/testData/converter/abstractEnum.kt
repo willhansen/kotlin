@@ -28,10 +28,10 @@ enum class E2 {
     abstract fun a()
 }
 
-enum class E3(val a: String) {
+enum class E3(konst a: String) {
     X(""), Y("")
 }
 
-enum class E4(val a: String, val b: Int, val c: Long, val d: Boolean) {
+enum class E4(konst a: String, konst b: Int, konst c: Long, konst d: Boolean) {
     X("", 4, 2L, true)
 }

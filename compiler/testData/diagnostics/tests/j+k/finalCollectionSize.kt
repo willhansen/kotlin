@@ -9,5 +9,5 @@ abstract public class A extends java.util.ArrayList<String> {
 // FILE: main.kt
 
 class B : A() {
-    <!OVERRIDING_FINAL_MEMBER!>override<!> val size: Int = 1
+    <!OVERRIDING_FINAL_MEMBER!>override<!> konst size: Int = 1
 }

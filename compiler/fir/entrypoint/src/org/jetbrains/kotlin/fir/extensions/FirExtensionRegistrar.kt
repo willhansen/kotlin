@@ -20,7 +20,7 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
             return FirExtensionRegistrarAdapter.getInstances(project) as List<FirExtensionRegistrar>
         }
 
-        internal val AVAILABLE_EXTENSIONS = listOf(
+        internal konst AVAILABLE_EXTENSIONS = listOf(
             FirStatusTransformerExtension::class,
             FirDeclarationGenerationExtension::class,
             FirAdditionalCheckersExtension::class,
@@ -35,7 +35,7 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
             FirDeclarationsForMetadataProviderExtension::class,
         )
 
-        internal val ALLOWED_EXTENSIONS_FOR_LIBRARY_SESSION = listOf(
+        internal konst ALLOWED_EXTENSIONS_FOR_LIBRARY_SESSION = listOf(
             FirTypeAttributeExtension::class,
             FirFunctionTypeKindExtension::class,
         )
@@ -171,13 +171,13 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
         // ------------------ utilities ------------------
 
         @JvmName("bindLeft")
-        fun <T, R> ((T, FirSession) -> R).bind(value: T): (FirSession) -> R {
-            return { this.invoke(value, it) }
+        fun <T, R> ((T, FirSession) -> R).bind(konstue: T): (FirSession) -> R {
+            return { this.invoke(konstue, it) }
         }
 
         @JvmName("bindRight")
-        fun <T, R> ((FirSession, T) -> R).bind(value: T): (FirSession) -> R {
-            return { this.invoke(it, value) }
+        fun <T, R> ((FirSession, T) -> R).bind(konstue: T): (FirSession) -> R {
+            return { this.invoke(it, konstue) }
         }
     }
 
@@ -186,7 +186,7 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
         return BunchOfRegisteredExtensions(configuredExtensionFactories)
     }
 
-    private val extensionFactories: Map<KClass<out FirExtension>, MutableList<FirExtension.Factory<FirExtension>>> =
+    private konst extensionFactories: Map<KClass<out FirExtension>, MutableList<FirExtension.Factory<FirExtension>>> =
         AVAILABLE_EXTENSIONS.associateWith {
             mutableListOf()
         }
@@ -202,7 +202,7 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
      * Instead, we use [lazy] to ensure that initialization happens only once, and that the
      * resulting [extensionFactories] map is visible to all possible callers, so no races occur.
      */
-    private val configuredExtensionFactories: Map<KClass<out FirExtension>, List<FirExtension.Factory<FirExtension>>> by lazy(
+    private konst configuredExtensionFactories: Map<KClass<out FirExtension>, List<FirExtension.Factory<FirExtension>>> by lazy(
         LazyThreadSafetyMode.SYNCHRONIZED
     ) {
         ExtensionRegistrarContext().configurePlugin()
@@ -211,13 +211,13 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
     }
 
     private fun <P : FirExtension> registerExtension(kClass: KClass<out P>, factory: FirExtension.Factory<P>) {
-        val registeredExtensions = extensionFactories.getValue(kClass)
+        konst registeredExtensions = extensionFactories.getValue(kClass)
         registeredExtensions += factory
     }
 }
 
 class BunchOfRegisteredExtensions @PluginServicesInitialization constructor(
-    val extensions: Map<KClass<out FirExtension>, List<FirExtension.Factory<FirExtension>>>
+    konst extensions: Map<KClass<out FirExtension>, List<FirExtension.Factory<FirExtension>>>
 ) {
     companion object {
         @OptIn(PluginServicesInitialization::class)
@@ -228,7 +228,7 @@ class BunchOfRegisteredExtensions @PluginServicesInitialization constructor(
 
     @OptIn(PluginServicesInitialization::class)
     operator fun plus(other: BunchOfRegisteredExtensions): BunchOfRegisteredExtensions {
-        val combinedExtensions = buildMap {
+        konst combinedExtensions = buildMap {
             for (extensionClass in FirExtensionRegistrar.AVAILABLE_EXTENSIONS) {
                 put(extensionClass, extensions.getValue(extensionClass) + other.extensions.getValue(extensionClass))
             }

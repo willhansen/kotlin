@@ -21,12 +21,12 @@ import org.jetbrains.kotlin.konan.file.createTempFile
 import org.jetbrains.kotlin.konan.target.CompilerOutputKind
 
 internal class ObjCExportedInterface(
-        val generatedClasses: Set<ClassDescriptor>,
-        val categoryMembers: Map<ClassDescriptor, List<CallableMemberDescriptor>>,
-        val topLevel: Map<SourceFile, List<CallableMemberDescriptor>>,
-        val headerLines: List<String>,
-        val namer: ObjCExportNamer,
-        val mapper: ObjCExportMapper
+        konst generatedClasses: Set<ClassDescriptor>,
+        konst categoryMembers: Map<ClassDescriptor, List<CallableMemberDescriptor>>,
+        konst topLevel: Map<SourceFile, List<CallableMemberDescriptor>>,
+        konst headerLines: List<String>,
+        konst namer: ObjCExportNamer,
+        konst mapper: ObjCExportMapper
 )
 
 internal fun produceObjCExportInterface(
@@ -34,23 +34,23 @@ internal fun produceObjCExportInterface(
         moduleDescriptor: ModuleDescriptor,
         frontendServices: FrontendServices,
 ): ObjCExportedInterface {
-    val config = context.config
+    konst config = context.config
     require(config.target.family.isAppleFamily)
     require(config.produce == CompilerOutputKind.FRAMEWORK)
 
-    val topLevelNamePrefix = context.objCExportTopLevelNamePrefix
+    konst topLevelNamePrefix = context.objCExportTopLevelNamePrefix
 
     // TODO: emit RTTI to the same modules as classes belong to.
     //   Not possible yet, since ObjCExport translates the entire "world" API at once
     //   and can't do this per-module, e.g. due to global name conflict resolution.
 
-    val unitSuspendFunctionExport = config.unitSuspendFunctionObjCExport
-    val mapper = ObjCExportMapper(frontendServices.deprecationResolver, unitSuspendFunctionExport = unitSuspendFunctionExport)
-    val moduleDescriptors = listOf(moduleDescriptor) + moduleDescriptor.getExportedDependencies(config)
-    val objcGenerics = config.configuration.getBoolean(KonanConfigKeys.OBJC_GENERICS)
-    val disableSwiftMemberNameMangling = config.configuration.getBoolean(BinaryOptions.objcExportDisableSwiftMemberNameMangling)
-    val ignoreInterfaceMethodCollisions = config.configuration.getBoolean(BinaryOptions.objcExportIgnoreInterfaceMethodCollisions)
-    val namer = ObjCExportNamerImpl(
+    konst unitSuspendFunctionExport = config.unitSuspendFunctionObjCExport
+    konst mapper = ObjCExportMapper(frontendServices.deprecationResolver, unitSuspendFunctionExport = unitSuspendFunctionExport)
+    konst moduleDescriptors = listOf(moduleDescriptor) + moduleDescriptor.getExportedDependencies(config)
+    konst objcGenerics = config.configuration.getBoolean(KonanConfigKeys.OBJC_GENERICS)
+    konst disableSwiftMemberNameMangling = config.configuration.getBoolean(BinaryOptions.objcExportDisableSwiftMemberNameMangling)
+    konst ignoreInterfaceMethodCollisions = config.configuration.getBoolean(BinaryOptions.objcExportIgnoreInterfaceMethodCollisions)
+    konst namer = ObjCExportNamerImpl(
             moduleDescriptors.toSet(),
             moduleDescriptor.builtIns,
             mapper,
@@ -60,7 +60,7 @@ internal fun produceObjCExportInterface(
             disableSwiftMemberNameMangling = disableSwiftMemberNameMangling,
             ignoreInterfaceMethodCollisions = ignoreInterfaceMethodCollisions,
     )
-    val headerGenerator = ObjCExportHeaderGeneratorImpl(context, moduleDescriptors, mapper, namer, objcGenerics)
+    konst headerGenerator = ObjCExportHeaderGeneratorImpl(context, moduleDescriptors, mapper, namer, objcGenerics)
     headerGenerator.translateModule()
     return headerGenerator.buildInterface()
 }
@@ -74,8 +74,8 @@ internal fun createObjCFramework(
         exportedInterface: ObjCExportedInterface,
         frameworkDirectory: File
 ) {
-    val frameworkName = frameworkDirectory.name.removeSuffix(".framework")
-    val frameworkBuilder = FrameworkBuilder(
+    konst frameworkName = frameworkDirectory.name.removeSuffix(".framework")
+    konst frameworkBuilder = FrameworkBuilder(
             config,
             infoPListBuilder = InfoPListBuilder(config),
             moduleMapBuilder = ModuleMapBuilder(),
@@ -93,14 +93,14 @@ internal fun createObjCFramework(
 
 // TODO: No need for such class in dynamic driver.
 internal class ObjCExport(
-        private val generationState: NativeGenerationState,
-        private val moduleDescriptor: ModuleDescriptor,
-        private val exportedInterface: ObjCExportedInterface?,
-        private val codeSpec: ObjCExportCodeSpec?
+        private konst generationState: NativeGenerationState,
+        private konst moduleDescriptor: ModuleDescriptor,
+        private konst exportedInterface: ObjCExportedInterface?,
+        private konst codeSpec: ObjCExportCodeSpec?
 ) {
-    private val config = generationState.config
-    private val target get() = config.target
-    private val topLevelNamePrefix get() = generationState.objCExportTopLevelNamePrefix
+    private konst config = generationState.config
+    private konst target get() = config.target
+    private konst topLevelNamePrefix get() = generationState.objCExportTopLevelNamePrefix
 
     lateinit var namer: ObjCExportNamer
 
@@ -113,7 +113,7 @@ internal class ObjCExport(
 
         if (!config.isFinalBinary) return // TODO: emit RTTI to the same modules as classes belong to.
 
-        val mapper = exportedInterface?.mapper ?: ObjCExportMapper(unitSuspendFunctionExport = config.unitSuspendFunctionObjCExport)
+        konst mapper = exportedInterface?.mapper ?: ObjCExportMapper(unitSuspendFunctionExport = config.unitSuspendFunctionObjCExport)
         namer = exportedInterface?.namer ?: ObjCExportNamerImpl(
                 setOf(moduleDescriptor),
                 moduleDescriptor.builtIns,
@@ -122,7 +122,7 @@ internal class ObjCExport(
                 local = false
         )
 
-        val objCCodeGenerator = ObjCExportCodeGenerator(codegen, namer, mapper)
+        konst objCCodeGenerator = ObjCExportCodeGenerator(codegen, namer, mapper)
 
         exportedInterface?.generateWorkaroundForSwiftSR10177(generationState)
 
@@ -137,13 +137,13 @@ private fun ObjCExportedInterface.generateWorkaroundForSwiftSR10177(generationSt
     // Objective-C protocols ABI is complicated (consider e.g. undocumented extended type encoding),
     // so the easiest way to achieve this (quickly) is to compile a stub by clang.
 
-    val protocolsStub = listOf(
+    konst protocolsStub = listOf(
             "__attribute__((used)) static void __workaroundSwiftSR10177() {",
             buildString {
                 append("    ")
                 generatedClasses.forEach {
                     if (it.isInterface) {
-                        val protocolName = namer.getClassOrProtocolName(it).objCName
+                        konst protocolName = namer.getClassOrProtocolName(it).objCName
                         append("@protocol($protocolName); ")
                     }
                 }
@@ -151,19 +151,19 @@ private fun ObjCExportedInterface.generateWorkaroundForSwiftSR10177(generationSt
             "}"
     )
 
-    val source = createTempFile("protocols", ".m").deleteOnExit()
+    konst source = createTempFile("protocols", ".m").deleteOnExit()
     source.writeLines(headerLines + protocolsStub)
 
-    val bitcode = createTempFile("protocols", ".bc").deleteOnExit()
+    konst bitcode = createTempFile("protocols", ".bc").deleteOnExit()
 
-    val clangCommand = generationState.config.clang.clangC(
+    konst clangCommand = generationState.config.clang.clangC(
             source.absolutePath,
             "-O2",
             "-emit-llvm",
             "-c", "-o", bitcode.absolutePath
     )
 
-    val result = Command(clangCommand).getResult(withErrors = true)
+    konst result = Command(clangCommand).getResult(withErrors = true)
 
     if (result.exitCode == 0) {
         generationState.llvm.additionalProducedBitcodeFiles += bitcode.absolutePath

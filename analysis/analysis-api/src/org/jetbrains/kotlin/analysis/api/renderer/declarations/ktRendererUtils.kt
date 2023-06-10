@@ -29,13 +29,13 @@ public fun <S> renderAnnotationsModifiersAndContextReceivers(
 ): Unit where S : KtAnnotated, S : KtDeclarationSymbol = printer {
     renderContextReceivers(symbol, printer)
 
-    val annotationsRendered: Boolean
-    val modifiersRendered: Boolean
+    konst annotationsRendered: Boolean
+    konst modifiersRendered: Boolean
     codeStyle.getSeparatorBetweenAnnotationAndOwner(symbol).separated(
         { annotationsRendered = checkIfPrinted { annotationRenderer.renderAnnotations(symbol, printer) } },
         { modifiersRendered = checkIfPrinted { modifiersRenderer.renderDeclarationModifiers(symbol, printer) } }
     )
-    val separator = when {
+    konst separator = when {
         annotationsRendered && !modifiersRendered -> codeStyle.getSeparatorBetweenAnnotationAndOwner(symbol)
         annotationsRendered || modifiersRendered -> codeStyle.getSeparatorBetweenModifiers()
         else -> ""

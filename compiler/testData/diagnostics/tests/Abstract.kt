@@ -1,10 +1,10 @@
 // FILE: b.kt
 package MyPackage
     //properties
-    <!MUST_BE_INITIALIZED!>val a: Int<!>
-    val a1: Int = 1
-    <!MUST_BE_INITIALIZED!><!WRONG_MODIFIER_TARGET!>abstract<!> val a2: Int<!>
-    <!WRONG_MODIFIER_TARGET!>abstract<!> val a3: Int = 1
+    <!MUST_BE_INITIALIZED!>konst a: Int<!>
+    konst a1: Int = 1
+    <!MUST_BE_INITIALIZED!><!WRONG_MODIFIER_TARGET!>abstract<!> konst a2: Int<!>
+    <!WRONG_MODIFIER_TARGET!>abstract<!> konst a3: Int = 1
 
     <!MUST_BE_INITIALIZED!>var b: Int<!>                private set
     var b1: Int = 0;                         private set
@@ -16,10 +16,10 @@ package MyPackage
     <!MUST_BE_INITIALIZED!><!WRONG_MODIFIER_TARGET!>abstract<!> var c2: Int<!>      set(v: Int) { field = v }
     <!WRONG_MODIFIER_TARGET!>abstract<!> var c3: Int = 0; set(v: Int) { field = v }
 
-    val e: Int                               get() = a
-    val e1: Int = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>;          get() = a
-    <!WRONG_MODIFIER_TARGET!>abstract<!> val e2: Int      get() = a
-    <!WRONG_MODIFIER_TARGET!>abstract<!> val e3: Int = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>; get() = a
+    konst e: Int                               get() = a
+    konst e1: Int = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>;          get() = a
+    <!WRONG_MODIFIER_TARGET!>abstract<!> konst e2: Int      get() = a
+    <!WRONG_MODIFIER_TARGET!>abstract<!> konst e3: Int = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>; get() = a
 
     //methods
     <!NON_MEMBER_FUNCTION_NO_BODY!>fun f()<!>
@@ -45,8 +45,8 @@ package MyPackage
 // FILE: c.kt
 //creating an instance
 abstract class B1(
-    val i: Int,
-    val s: String
+    konst i: Int,
+    konst s: String
 ) {
 }
 
@@ -56,6 +56,6 @@ abstract class B3(i: Int) {
 }
 
 fun foo(c: B3) {
-    val a = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>B3(1)<!>
-    val b = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>B1(2, "s")<!>
+    konst a = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>B3(1)<!>
+    konst b = <!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>B1(2, "s")<!>
 }

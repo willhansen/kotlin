@@ -3,23 +3,23 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Result<out T>(val value: Any?) {
+konstue class Result<out T>(konst konstue: Any?) {
     fun exceptionOrNull(): Throwable? =
-        when (value) {
-            is Failure -> value.exception
+        when (konstue) {
+            is Failure -> konstue.exception
             else -> null
         }
 
     public companion object {
-        public inline fun <T> success(value: T): Result<T> =
-            Result(value)
+        public inline fun <T> success(konstue: T): Result<T> =
+            Result(konstue)
 
         public inline fun <T> failure(exception: Throwable): Result<T> =
             Result(Failure(exception))
     }
 
     class Failure(
-        val exception: Throwable
+        konst exception: Throwable
     )
 }
 
@@ -33,8 +33,8 @@ inline fun <T, R> T.runCatching(block: T.() -> R): Result<R> {
 
 
 inline fun <R, T : R> Result<T>.getOrElse(onFailure: (exception: Throwable) -> R): R {
-    return when (val exception = exceptionOrNull()) {
-        null -> value as T
+    return when (konst exception = exceptionOrNull()) {
+        null -> konstue as T
         else -> onFailure(exception)
     }
 }

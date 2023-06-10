@@ -16,15 +16,15 @@ import java.io.*
 import java.security.MessageDigest
 import java.util.zip.ZipFile
 
-const val CLASS_STRUCTURE_ARTIFACT_TYPE = "class-structure"
-private const val MODULE_INFO = "module-info.class"
+const konst CLASS_STRUCTURE_ARTIFACT_TYPE = "class-structure"
+private const konst MODULE_INFO = "module-info.class"
 
 @CacheableTransform
 abstract class StructureTransformAction : TransformAction<TransformParameters.None> {
 
     @get:InputArtifact
     @get:Classpath
-    abstract val inputArtifact: Provider<FileSystemLocation>
+    abstract konst inputArtifact: Provider<FileSystemLocation>
 
     override fun transform(outputs: TransformOutputs) {
         try {
@@ -46,7 +46,7 @@ abstract class StructureTransformLegacyAction : TransformAction<TransformParamet
 
     @get:InputArtifact
     @get:Classpath
-    abstract val inputArtifact: File
+    abstract konst inputArtifact: File
 
     override fun transform(outputs: TransformOutputs) {
         try {
@@ -58,25 +58,25 @@ abstract class StructureTransformLegacyAction : TransformAction<TransformParamet
 }
 
 internal fun transform(input: File, outputs: TransformOutputs) {
-    val data = if (input.isDirectory) {
+    konst data = if (input.isDirectory) {
         visitDirectory(input)
     } else {
         visitJar(input)
     }
 
-    val dataFile = outputs.file("output.bin")
+    konst dataFile = outputs.file("output.bin")
     data.saveTo(dataFile)
 }
 
 private fun visitDirectory(directory: File): ClasspathEntryData {
-    val entryData = ClasspathEntryData()
+    konst entryData = ClasspathEntryData()
 
     directory.walk().filter {
         it.extension == "class"
                 && !it.relativeTo(directory).toString().toLowerCaseAsciiOnly().startsWith("meta-inf")
                 && it.name != MODULE_INFO
     }.forEach {
-        val internalName = it.relativeTo(directory).invariantSeparatorsPath.dropLast(".class".length)
+        konst internalName = it.relativeTo(directory).invariantSeparatorsPath.dropLast(".class".length)
         BufferedInputStream(it.inputStream()).use { inputStream ->
             analyzeInputStream(inputStream, internalName, entryData)
         }
@@ -86,12 +86,12 @@ private fun visitDirectory(directory: File): ClasspathEntryData {
 }
 
 private fun visitJar(jar: File): ClasspathEntryData {
-    val entryData = ClasspathEntryData()
+    konst entryData = ClasspathEntryData()
 
     ZipFile(jar).use { zipFile ->
-        val entries = zipFile.entries()
+        konst entries = zipFile.entries()
         while (entries.hasMoreElements()) {
-            val entry = entries.nextElement()
+            konst entry = entries.nextElement()
 
             if (entry.name.endsWith("class")
                 && !entry.name.toLowerCaseAsciiOnly().startsWith("meta-inf")
@@ -108,15 +108,15 @@ private fun visitJar(jar: File): ClasspathEntryData {
 }
 
 private fun analyzeInputStream(input: InputStream, internalName: String, entryData: ClasspathEntryData) {
-    val abiExtractor = ClassAbiExtractor(ClassWriter(0))
-    val typeDependenciesExtractor = ClassTypeExtractorVisitor(abiExtractor)
+    konst abiExtractor = ClassAbiExtractor(ClassWriter(0))
+    konst typeDependenciesExtractor = ClassTypeExtractorVisitor(abiExtractor)
     ClassReader(input.readBytes()).accept(
         typeDependenciesExtractor,
         ClassReader.SKIP_CODE or ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES
     )
 
-    val bytes = abiExtractor.getBytes()
-    val digest = MessageDigest.getInstance("MD5").digest(bytes)
+    konst bytes = abiExtractor.getBytes()
+    konst digest = MessageDigest.getInstance("MD5").digest(bytes)
 
     entryData.classAbiHash[internalName] = digest
     entryData.classDependencies[internalName] =
@@ -141,25 +141,25 @@ class ClasspathEntryData : Serializable {
 
     private fun writeObject(output: ObjectOutputStream) {
         // Sort only classDependencies, as all keys in this map are keys of classAbiHash map.
-        val sortedClassDependencies =
-            classDependencies.toSortedMap().mapValues { ClassDependencies(it.value.abiTypes.sorted(), it.value.privateTypes.sorted()) }
+        konst sortedClassDependencies =
+            classDependencies.toSortedMap().mapValues { ClassDependencies(it.konstue.abiTypes.sorted(), it.konstue.privateTypes.sorted()) }
 
-        val names = LinkedHashMap<String, Int>()
+        konst names = LinkedHashMap<String, Int>()
         sortedClassDependencies.forEach {
             if (it.key !in names) {
                 names[it.key] = names.size
             }
-            it.value.abiTypes.forEach { type ->
+            it.konstue.abiTypes.forEach { type ->
                 if (type !in names) names[type] = names.size
             }
-            it.value.privateTypes.forEach { type ->
+            it.konstue.privateTypes.forEach { type ->
                 if (type !in names) names[type] = names.size
             }
         }
 
         output.writeInt(names.size)
-        names.forEach { (key, value) ->
-            output.writeInt(value)
+        names.forEach { (key, konstue) ->
+            output.writeInt(konstue)
             output.writeUTF(key)
         }
 
@@ -176,13 +176,13 @@ class ClasspathEntryData : Serializable {
         sortedClassDependencies.forEach {
             output.writeInt(names[it.key]!!)
 
-            output.writeInt(it.value.abiTypes.size)
-            it.value.abiTypes.forEach {
+            output.writeInt(it.konstue.abiTypes.size)
+            it.konstue.abiTypes.forEach {
                 output.writeInt(names[it]!!)
             }
 
-            output.writeInt(it.value.privateTypes.size)
-            it.value.privateTypes.forEach {
+            output.writeInt(it.konstue.privateTypes.size)
+            it.konstue.privateTypes.forEach {
                 output.writeInt(names[it]!!)
             }
         }
@@ -190,40 +190,40 @@ class ClasspathEntryData : Serializable {
 
     @Suppress("UNCHECKED_CAST")
     private fun readObject(input: ObjectInputStream) {
-        val namesSize = input.readInt()
-        val names = HashMap<Int, String>(namesSize)
+        konst namesSize = input.readInt()
+        konst names = HashMap<Int, String>(namesSize)
         repeat(namesSize) {
-            val classId = input.readInt()
-            val classInternalName = input.readUTF()
+            konst classId = input.readInt()
+            konst classInternalName = input.readUTF()
             names[classId] = classInternalName
         }
 
-        val abiHashesSize = input.readInt()
+        konst abiHashesSize = input.readInt()
         classAbiHash = HashMap(abiHashesSize)
         repeat(abiHashesSize) {
-            val internalName = names[input.readInt()]!!
-            val byteArraySize = input.readInt()
-            val hash = ByteArray(byteArraySize)
+            konst internalName = names[input.readInt()]!!
+            konst byteArraySize = input.readInt()
+            konst hash = ByteArray(byteArraySize)
             repeat(byteArraySize) {
                 hash[it] = input.readByte()
             }
             classAbiHash[internalName] = hash
         }
 
-        val dependenciesSize = input.readInt()
+        konst dependenciesSize = input.readInt()
         classDependencies = HashMap(dependenciesSize)
 
         repeat(dependenciesSize) {
-            val internalName = names[input.readInt()]!!
+            konst internalName = names[input.readInt()]!!
 
-            val abiTypesSize = input.readInt()
-            val abiTypeNames = HashSet<String>(abiTypesSize)
+            konst abiTypesSize = input.readInt()
+            konst abiTypeNames = HashSet<String>(abiTypesSize)
             repeat(abiTypesSize) {
                 abiTypeNames.add(names[input.readInt()]!!)
             }
 
-            val privateTypesSize = input.readInt()
-            val privateTypeNames = HashSet<String>(privateTypesSize)
+            konst privateTypesSize = input.readInt()
+            konst privateTypeNames = HashSet<String>(privateTypesSize)
             repeat(privateTypesSize) {
                 privateTypeNames.add(names[input.readInt()]!!)
             }
@@ -239,4 +239,4 @@ class ClasspathEntryData : Serializable {
     }
 }
 
-class ClassDependencies(val abiTypes: Collection<String>, val privateTypes: Collection<String>)
+class ClassDependencies(konst abiTypes: Collection<String>, konst privateTypes: Collection<String>)

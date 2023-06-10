@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.gradle.utils.isConfigurationCacheAvailable
 import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 import java.util.concurrent.ConcurrentHashMap
 
-class TaskTime(val startTime: Long) {
+class TaskTime(konst startTime: Long) {
     var duration: Double? = null
 }
 
 class TaskTimerListener(project: Project) : TaskExecutionListener {
-    val tasksTimes = getOrRegisterStorage<String, TaskTime>(project, "org.jetbrains.kotlin.native.taskTimes")
+    konst tasksTimes = getOrRegisterStorage<String, TaskTime>(project, "org.jetbrains.kotlin.native.taskTimes")
     fun getTime(taskName: String) = tasksTimes[taskName]?.duration ?: 0.0
 
     override fun beforeExecute(task: Task) {
@@ -33,7 +33,7 @@ class TaskTimerListener(project: Project) : TaskExecutionListener {
     }
 
     override fun afterExecute(task: Task, taskState: TaskState) {
-        val taskTime = tasksTimes.getValue(task.path)
+        konst taskTime = tasksTimes.getValue(task.path)
         taskTime.duration = (System.nanoTime() - taskTime.startTime) / 1000.0
     }
 
@@ -67,10 +67,10 @@ open class KotlinPerformancePlugin : Plugin<Project> {
     private fun configureTasks(project: Project, performanceExtension: PerformanceExtension) {
         // Add time listener.
         if (!isConfigurationCacheAvailable(project.gradle)) {
-            val timeListener = TaskTimerListener(project)
+            konst timeListener = TaskTimerListener(project)
             project.gradle.addListener(timeListener)
             performanceExtension.trackedBinaries.forEach { binary ->
-                val perfReport = project.registerTask<NativePerformanceReport>(
+                konst perfReport = project.registerTask<NativePerformanceReport>(
                     binary.target.disambiguateName(
                         lowerCamelCaseName(
                             "perfReport",
@@ -91,11 +91,11 @@ open class KotlinPerformancePlugin : Plugin<Project> {
 
     override fun apply(project: Project): Unit = with(project) {
         pluginManager.withPlugin("kotlin-multiplatform") {
-            val kotlinExtension = project.multiplatformExtension
-            val performanceExtension = PerformanceExtension(this)
+            konst kotlinExtension = project.multiplatformExtension
+            konst performanceExtension = PerformanceExtension(this)
 
             kotlinExtension.addExtension(EXTENSION_NAME, performanceExtension)
-            afterEvaluate {
+            afterEkonstuate {
                 if (checkSettings(project, performanceExtension)) {
                     configureTasks(project, performanceExtension)
                 }
@@ -104,7 +104,7 @@ open class KotlinPerformancePlugin : Plugin<Project> {
     }
 
     companion object {
-        const val EXTENSION_NAME = "performance"
-        const val TASK_GROUP = "Kotlin/Native Performance"
+        const konst EXTENSION_NAME = "performance"
+        const konst TASK_GROUP = "Kotlin/Native Performance"
     }
 }

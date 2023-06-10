@@ -13,16 +13,16 @@ import org.jetbrains.kotlin.util.withIndent
 import java.io.File
 
 fun Implementation.generateCode(generationPath: File): GeneratedFile {
-    val dir = generationPath.resolve(packageName.replace(".", "/"))
-    val file = File(dir, "$type.kt")
-    val stringBuilder = StringBuilder()
+    konst dir = generationPath.resolve(packageName.replace(".", "/"))
+    konst file = File(dir, "$type.kt")
+    konst stringBuilder = StringBuilder()
     SmartPrinter(stringBuilder).apply {
         printCopyright()
         println("@file:Suppress(\"DuplicatedCode\")")
         println()
         println("package $packageName")
         println()
-        val imports = collectImports()
+        konst imports = collectImports()
         imports.forEach { println("import $it") }
         if (imports.isNotEmpty()) {
             println()
@@ -59,8 +59,8 @@ fun SmartPrinter.printImplementation(implementation: Implementation) {
         print("${kind!!.title} $type")
         print(element.typeParameters)
 
-        val isInterface = kind == Kind.Interface || kind == Kind.SealedInterface
-        val isAbstract = kind == Kind.AbstractClass || kind == Kind.SealedClass
+        konst isInterface = kind == Kind.Interface || kind == Kind.SealedInterface
+        konst isAbstract = kind == Kind.AbstractClass || kind == Kind.SealedClass
 
         fun abstract() {
             if (isAbstract) {
@@ -108,7 +108,7 @@ fun SmartPrinter.printImplementation(implementation: Implementation) {
             }
 
 
-            val bindingCalls = element.allFields.filter {
+            konst bindingCalls = element.allFields.filter {
                 it.withBindThis && it.type.contains("Symbol") && it !is FieldList && it.name != "companionObjectSymbol"
             }.takeIf {
                 it.isNotEmpty() && !isInterface && !isAbstract &&
@@ -118,7 +118,7 @@ fun SmartPrinter.printImplementation(implementation: Implementation) {
                         && !element.type.endsWith("AnnotationsContainer")
             }.orEmpty()
 
-            val customCalls = fieldsWithoutDefault.filter { it.customInitializationCall != null }
+            konst customCalls = fieldsWithoutDefault.filter { it.customInitializationCall != null }
             if (bindingCalls.isNotEmpty() || customCalls.isNotEmpty()) {
                 println("init {")
                 withIndent {
@@ -149,9 +149,9 @@ fun SmartPrinter.printImplementation(implementation: Implementation) {
                             if (field.withGetter || !field.needAcceptAndTransform) continue
                             when (field.name) {
                                 "explicitReceiver" -> {
-                                    val explicitReceiver = implementation["explicitReceiver"]!!
-                                    val dispatchReceiver = implementation["dispatchReceiver"]!!
-                                    val extensionReceiver = implementation["extensionReceiver"]!!
+                                    konst explicitReceiver = implementation["explicitReceiver"]!!
+                                    konst dispatchReceiver = implementation["dispatchReceiver"]!!
+                                    konst extensionReceiver = implementation["extensionReceiver"]!!
                                     println(
                                         """
                                     |${explicitReceiver.acceptString()}
@@ -172,7 +172,7 @@ fun SmartPrinter.printImplementation(implementation: Implementation) {
                                     if (type == "FirWhenExpressionImpl" && field.name == "subject") {
                                         println(
                                             """
-                                        |val subjectVariable_ = subjectVariable
+                                        |konst subjectVariable_ = subjectVariable
                                         |        if (subjectVariable_ != null) {
                                         |            subjectVariable_.accept(visitor, data)
                                         |        } else {
@@ -213,9 +213,9 @@ fun SmartPrinter.printImplementation(implementation: Implementation) {
                             !field.isMutable || !field.isFirType || field.withGetter || !field.needAcceptAndTransform -> {}
 
                             field.name == "explicitReceiver" -> {
-                                val explicitReceiver = implementation["explicitReceiver"]!!
-                                val dispatchReceiver = implementation["dispatchReceiver"]!!
-                                val extensionReceiver = implementation["extensionReceiver"]!!
+                                konst explicitReceiver = implementation["explicitReceiver"]!!
+                                konst dispatchReceiver = implementation["dispatchReceiver"]!!
+                                konst extensionReceiver = implementation["extensionReceiver"]!!
                                 if (explicitReceiver.isMutable) {
                                     println("explicitReceiver = explicitReceiver${explicitReceiver.call()}transform(transformer, data)")
                                 }
@@ -350,8 +350,8 @@ fun SmartPrinter.printImplementation(implementation: Implementation) {
             }
 
             for (field in allFields.filter { it.withReplace }) {
-                val capitalizedFieldName = field.name.replaceFirstChar(Char::uppercaseChar)
-                val newValue = "new$capitalizedFieldName"
+                konst capitalizedFieldName = field.name.replaceFirstChar(Char::uppercaseChar)
+                konst newValue = "new$capitalizedFieldName"
                 generateReplace(field, forceNullable = field.useNullableForReplace) {
                     when {
                         field.withGetter -> {}

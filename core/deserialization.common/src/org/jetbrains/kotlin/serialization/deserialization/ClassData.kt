@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.metadata.deserialization.BinaryVersion
 import org.jetbrains.kotlin.metadata.deserialization.NameResolver
 
 data class ClassData(
-    val nameResolver: NameResolver,
-    val classProto: ProtoBuf.Class,
-    val metadataVersion: BinaryVersion,
-    val sourceElement: SourceElement
+    konst nameResolver: NameResolver,
+    konst classProto: ProtoBuf.Class,
+    konst metadataVersion: BinaryVersion,
+    konst sourceElement: SourceElement
 )

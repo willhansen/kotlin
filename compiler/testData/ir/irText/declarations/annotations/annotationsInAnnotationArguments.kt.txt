@@ -5,7 +5,7 @@ open annotation class A1 : Annotation {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -18,7 +18,7 @@ open annotation class A2 : Annotation {
 
   }
 
-  val a: A1
+  konst a: A1
     field = a
     get
 
@@ -31,7 +31,7 @@ open annotation class AA : Annotation {
 
   }
 
-  val xs: Array<A1>
+  konst xs: Array<A1>
     field = xs
     get
 

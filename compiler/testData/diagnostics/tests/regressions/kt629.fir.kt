@@ -11,7 +11,7 @@ class A() {
 
 fun box() : Boolean {
     var c = A()
-    val d = c;
+    konst d = c;
     c %= A();
     return (c != d) && <!EXPRESSION_EXPECTED!>(c.p = "yeah")<!>
 }

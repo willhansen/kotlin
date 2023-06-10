@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.ir.util.render
 import kotlin.math.min
 
 internal abstract class ReflectionState : State {
-    override val fields: Fields = mutableMapOf()
+    override konst fields: Fields = mutableMapOf()
 
     override fun getIrFunctionByIrCall(expression: IrCall): IrFunction? = null
 
@@ -30,7 +30,7 @@ internal abstract class ReflectionState : State {
             }
 
             if (extensionReceiver != null) {
-                val addParentheses = dispatchReceiver != null
+                konst addParentheses = dispatchReceiver != null
                 if (addParentheses) append("(")
                 append(extensionReceiver.renderType()).append(".")
                 if (addParentheses) append(")")
@@ -39,41 +39,41 @@ internal abstract class ReflectionState : State {
     }
 
     protected fun renderLambda(irFunction: IrFunction): String {
-        val receiver = (irFunction.dispatchReceiverParameter?.type ?: irFunction.extensionReceiverParameter?.type)?.renderType()
-        val arguments = irFunction.valueParameters.joinToString(prefix = "(", postfix = ")") { it.type.renderType() }
-        val returnType = irFunction.returnType.renderType()
+        konst receiver = (irFunction.dispatchReceiverParameter?.type ?: irFunction.extensionReceiverParameter?.type)?.renderType()
+        konst arguments = irFunction.konstueParameters.joinToString(prefix = "(", postfix = ")") { it.type.renderType() }
+        konst returnType = irFunction.returnType.renderType()
         return ("$arguments -> $returnType").let { if (receiver != null) "$receiver.$it" else it }
     }
 
     protected fun renderFunction(irFunction: IrFunction): String {
-        val dispatchReceiver = irFunction.parentClassOrNull?.defaultType // = instanceReceiverParameter
-        val extensionReceiver = irFunction.extensionReceiverParameter?.type
-        val receivers = if (irFunction is IrConstructor) "" else renderReceivers(dispatchReceiver, extensionReceiver)
-        val arguments = irFunction.valueParameters.joinToString(prefix = "(", postfix = ")") { it.type.renderType() }
-        val returnType = irFunction.returnType.renderType()
+        konst dispatchReceiver = irFunction.parentClassOrNull?.defaultType // = instanceReceiverParameter
+        konst extensionReceiver = irFunction.extensionReceiverParameter?.type
+        konst receivers = if (irFunction is IrConstructor) "" else renderReceivers(dispatchReceiver, extensionReceiver)
+        konst arguments = irFunction.konstueParameters.joinToString(prefix = "(", postfix = ")") { it.type.renderType() }
+        konst returnType = irFunction.returnType.renderType()
         return "fun $receivers${irFunction.name}$arguments: $returnType"
     }
 
     protected fun renderProperty(property: IrProperty): String {
-        val prefix = if (property.isVar) "var" else "val"
-        val receivers = renderReceivers(property.getter?.dispatchReceiverParameter?.type, property.getter?.extensionReceiverParameter?.type)
-        val returnType = property.getter!!.returnType.renderType()
+        konst prefix = if (property.isVar) "var" else "konst"
+        konst receivers = renderReceivers(property.getter?.dispatchReceiverParameter?.type, property.getter?.extensionReceiverParameter?.type)
+        konst returnType = property.getter!!.returnType.renderType()
         return "$prefix $receivers${property.name}: $returnType"
     }
 
     protected fun IrType.renderType(): String {
         var renderedType = this.render().replace("<root>.", "")
         if (renderedType.contains("<get-")) {
-            val startIndex = renderedType.indexOf("<get-")
-            val lastTriangle = renderedType.indexOf('>', startIndex) + 1
+            konst startIndex = renderedType.indexOf("<get-")
+            konst lastTriangle = renderedType.indexOf('>', startIndex) + 1
             renderedType = renderedType.replaceRange(startIndex, lastTriangle, "get")
         }
         do {
-            val index = renderedType.indexOf(" of ")
+            konst index = renderedType.indexOf(" of ")
             if (index == -1) break
-            val replaceUntilComma = renderedType.indexOf(',', index)
-            val replaceUntilTriangle = renderedType.indexOf('>', index)
-            val replaceUntil = when {
+            konst replaceUntilComma = renderedType.indexOf(',', index)
+            konst replaceUntilTriangle = renderedType.indexOf('>', index)
+            konst replaceUntil = when {
                 replaceUntilComma == -1 && replaceUntilTriangle == -1 -> renderedType.length
                 replaceUntilComma == -1 -> replaceUntilTriangle
                 replaceUntilTriangle == -1 -> replaceUntilComma

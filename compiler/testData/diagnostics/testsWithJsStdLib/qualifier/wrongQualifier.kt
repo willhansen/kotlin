@@ -21,4 +21,4 @@
 typealias JsQ = JsQualifier
 
 // FILE: h.kt
-@file:JsQ(<!WRONG_JS_QUALIFIER!>value = "%^&"<!>)
+@file:JsQ(<!WRONG_JS_QUALIFIER!>konstue = "%^&"<!>)

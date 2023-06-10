@@ -13,6 +13,6 @@ public interface Derived extends Base {
 
 // FILE: test.kt
 fun testDerived(base: Base, derived: Derived) {
-    val test1: String = base.foo("")
-    val test2: String = derived.foo("")
+    konst test1: String = base.foo("")
+    konst test2: String = derived.foo("")
 }

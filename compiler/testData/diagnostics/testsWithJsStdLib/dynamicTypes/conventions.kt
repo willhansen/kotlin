@@ -34,7 +34,7 @@ fun test(d: dynamic) {
     <!DEBUG_INFO_DYNAMIC!>d {}<!>
 
     class C {
-        val plus: dynamic = null
+        konst plus: dynamic = null
     }
 
     C() + 5 // todo should be marked as DEBUG_INFO_DYNAMIC

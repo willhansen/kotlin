@@ -20,11 +20,11 @@ package foo.bar
 }
 
 
-/*p:foo.bar*/val x1 by /*c:foo.bar.D1(getValue) c:foo.bar.D1(provideDelegate) p:foo.bar p:foo.bar(provideDelegate) p:kotlin(provideDelegate) p:kotlin.annotation(provideDelegate) p:kotlin.collections(provideDelegate) p:kotlin.comparisons(provideDelegate) p:kotlin.io(provideDelegate) p:kotlin.js(provideDelegate) p:kotlin.ranges(provideDelegate) p:kotlin.sequences(provideDelegate) p:kotlin.text(provideDelegate)*/D1()
+/*p:foo.bar*/konst x1 by /*c:foo.bar.D1(getValue) c:foo.bar.D1(provideDelegate) p:foo.bar p:foo.bar(provideDelegate) p:kotlin(provideDelegate) p:kotlin.annotation(provideDelegate) p:kotlin.collections(provideDelegate) p:kotlin.comparisons(provideDelegate) p:kotlin.io(provideDelegate) p:kotlin.js(provideDelegate) p:kotlin.ranges(provideDelegate) p:kotlin.sequences(provideDelegate) p:kotlin.text(provideDelegate)*/D1()
 /*p:foo.bar*/var y1 by /*c:foo.bar.D1(getValue) c:foo.bar.D1(provideDelegate) c:foo.bar.D1(setValue) p:foo.bar p:foo.bar(provideDelegate) p:foo.bar(setValue) p:kotlin(provideDelegate) p:kotlin.annotation(provideDelegate) p:kotlin.collections(provideDelegate) p:kotlin.comparisons(provideDelegate) p:kotlin.io(provideDelegate) p:kotlin.js(provideDelegate) p:kotlin.ranges(provideDelegate) p:kotlin.sequences(provideDelegate) p:kotlin.text(provideDelegate)*/D1()
 
-/*p:foo.bar*/val x2 by /*c:foo.bar.D2(getValue) c:foo.bar.D2(provideDelegate) p:foo.bar p:foo.bar(getValue) p:foo.bar(provideDelegate)*/D2()
+/*p:foo.bar*/konst x2 by /*c:foo.bar.D2(getValue) c:foo.bar.D2(provideDelegate) p:foo.bar p:foo.bar(getValue) p:foo.bar(provideDelegate)*/D2()
 /*p:foo.bar*/var y2 by /*c:foo.bar.D2(getValue) c:foo.bar.D2(provideDelegate) c:foo.bar.D2(setValue) p:foo.bar p:foo.bar(getValue) p:foo.bar(provideDelegate)*/D2()
 
-/*p:foo.bar*/val x3 by /*c:foo.bar.D2(getValue) c:foo.bar.D2(provideDelegate) c:foo.bar.D3(getValue) c:foo.bar.D3(provideDelegate) p:foo.bar p:foo.bar(getValue)*/D3()
+/*p:foo.bar*/konst x3 by /*c:foo.bar.D2(getValue) c:foo.bar.D2(provideDelegate) c:foo.bar.D3(getValue) c:foo.bar.D3(provideDelegate) p:foo.bar p:foo.bar(getValue)*/D3()
 /*p:foo.bar*/var y3 by /*c:foo.bar.D2(getValue) c:foo.bar.D2(provideDelegate) c:foo.bar.D2(setValue) c:foo.bar.D3(getValue) c:foo.bar.D3(provideDelegate) c:foo.bar.D3(setValue) p:foo.bar p:foo.bar(getValue)*/D3()

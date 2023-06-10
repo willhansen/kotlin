@@ -13,17 +13,17 @@ import org.jetbrains.kotlin.analysis.api.types.KtSubstitutor
 import org.jetbrains.kotlin.analysis.api.types.KtType
 
 internal class KtFe10VariableLikeSignature<out S : KtVariableLikeSymbol>(
-    private val _symbol: S,
-    private val _returnType: KtType,
-    private val _receiverType: KtType?,
+    private konst _symbol: S,
+    private konst _returnType: KtType,
+    private konst _receiverType: KtType?,
 ) : KtVariableLikeSignature<S>() {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = _symbol.token
-    override val symbol: S
+    override konst symbol: S
         get() = withValidityAssertion { _symbol }
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { _returnType }
-    override val receiverType: KtType?
+    override konst receiverType: KtType?
         get() = withValidityAssertion { _receiverType }
 
     override fun substitute(substitutor: KtSubstitutor): KtVariableLikeSignature<S> = withValidityAssertion {

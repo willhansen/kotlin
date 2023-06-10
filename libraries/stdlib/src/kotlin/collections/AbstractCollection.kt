@@ -13,7 +13,7 @@ import kotlin.js.JsName
  */
 @SinceKotlin("1.1")
 public abstract class AbstractCollection<out E> protected constructor() : Collection<E> {
-    abstract override val size: Int
+    abstract override konst size: Int
     abstract override fun iterator(): Iterator<E>
 
     override fun contains(element: @UnsafeVariance E): Boolean = any { it == element }

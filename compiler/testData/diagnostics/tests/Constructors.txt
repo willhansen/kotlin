@@ -37,7 +37,7 @@ public final class NoC3 : WithC1 {
 
 public final class NoCPI {
     public constructor NoCPI()
-    public final val a: kotlin.Int = 1
+    public final konst a: kotlin.Int = 1
     public final var ab: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -67,8 +67,8 @@ public final class WithC2 : WithC1 {
 
 public final class WithCPI {
     public constructor WithCPI(/*0*/ x: kotlin.Int)
-    public final val a: kotlin.Int = 1
-    public final val xy: kotlin.Int
+    public final konst a: kotlin.Int = 1
+    public final konst xy: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

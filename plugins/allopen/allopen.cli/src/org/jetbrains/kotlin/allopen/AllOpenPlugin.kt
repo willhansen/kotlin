@@ -17,36 +17,36 @@ import org.jetbrains.kotlin.extensions.DeclarationAttributeAltererExtension
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 
 object AllOpenConfigurationKeys {
-    val ANNOTATION: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation qualified name")
-    val PRESET: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation preset")
+    konst ANNOTATION: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation qualified name")
+    konst PRESET: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation preset")
 }
 
 class AllOpenCommandLineProcessor : CommandLineProcessor {
     companion object {
-        val ANNOTATION_OPTION = CliOption(
+        konst ANNOTATION_OPTION = CliOption(
             ANNOTATION_OPTION_NAME, "<fqname>", "Annotation qualified names",
             required = false, allowMultipleOccurrences = true
         )
 
-        val PRESET_OPTION = CliOption(
+        konst PRESET_OPTION = CliOption(
             "preset", "<name>", "Preset name (${SUPPORTED_PRESETS.keys.joinToString()})",
             required = false, allowMultipleOccurrences = true
         )
     }
 
-    override val pluginId = AllOpenPluginNames.PLUGIN_ID
-    override val pluginOptions = listOf(ANNOTATION_OPTION, PRESET_OPTION)
+    override konst pluginId = AllOpenPluginNames.PLUGIN_ID
+    override konst pluginOptions = listOf(ANNOTATION_OPTION, PRESET_OPTION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) = when (option) {
-        ANNOTATION_OPTION -> configuration.appendList(ANNOTATION, value)
-        PRESET_OPTION -> configuration.appendList(PRESET, value)
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) = when (option) {
+        ANNOTATION_OPTION -> configuration.appendList(ANNOTATION, konstue)
+        PRESET_OPTION -> configuration.appendList(PRESET, konstue)
         else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
     }
 }
 
 class AllOpenComponentRegistrar : CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        val annotations = configuration.get(ANNOTATION)?.toMutableList() ?: mutableListOf()
+        konst annotations = configuration.get(ANNOTATION)?.toMutableList() ?: mutableListOf()
         configuration.get(PRESET)?.forEach { preset ->
             SUPPORTED_PRESETS[preset]?.let { annotations += it }
         }
@@ -56,6 +56,6 @@ class AllOpenComponentRegistrar : CompilerPluginRegistrar() {
         FirExtensionRegistrarAdapter.registerExtension(FirAllOpenExtensionRegistrar(annotations))
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 }

@@ -11,6 +11,6 @@ class A {
     }
 }
 
-val x = A().foo() as String
-val y = A.foo2() as String
-val z = pp.A.foo2() as String
+konst x = A().foo() as String
+konst y = A.foo2() as String
+konst z = pp.A.foo2() as String

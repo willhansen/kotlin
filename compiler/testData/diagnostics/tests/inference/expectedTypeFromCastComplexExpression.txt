@@ -1,9 +1,9 @@
 package
 
 package pp {
-    public val x: kotlin.String
-    public val y: kotlin.String
-    public val z: kotlin.String
+    public konst x: kotlin.String
+    public konst y: kotlin.String
+    public konst z: kotlin.String
 
     public final class A {
         public constructor A()

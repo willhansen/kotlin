@@ -10,7 +10,7 @@ class BJava : AJava, C {
     constructor(s: String) : super(s)
 }
 
-open class AKt(val s: String)
+open class AKt(konst s: String)
 
 class BKt : AKt, C {
     constructor(s: String) : super(s)

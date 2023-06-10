@@ -2,23 +2,23 @@ package
 
 public final class C : O.B {
     public constructor C()
-    public final val a: O.A? = null
-    public final val b: O.B? = null
-    public final val c: O.A.FromA? = null
-    public final val d: O.B.FromB? = null
-    public final val e: O.A.Companion.FromCompanionA? = null
-    public final val f: O.B.Companion.FromCompanionB? = null
-    public final val g: O.Alpha? = null
-    public final val h: O.Beta? = null
-    public final val i: O.Gamma? = null
-    public final val k: O.Alpha.FromAlpha? = null
-    public final val l: O.Beta.FromBeta? = null
-    public final val m: O.Gamma.FromGamma? = null
-    public final val n: C.Companion.FromCompanionC? = null
-    public final val o: O.Alpha.Companion.FromCompanionAlpha? = null
-    public final val p: O.Beta.Companion.FromCompanionBeta? = null
-    public final val q: O.Gamma.Companion.FromCompanionGamma? = null
-    public final val r: Delta.FromDelta? = null
+    public final konst a: O.A? = null
+    public final konst b: O.B? = null
+    public final konst c: O.A.FromA? = null
+    public final konst d: O.B.FromB? = null
+    public final konst e: O.A.Companion.FromCompanionA? = null
+    public final konst f: O.B.Companion.FromCompanionB? = null
+    public final konst g: O.Alpha? = null
+    public final konst h: O.Beta? = null
+    public final konst i: O.Gamma? = null
+    public final konst k: O.Alpha.FromAlpha? = null
+    public final konst l: O.Beta.FromBeta? = null
+    public final konst m: O.Gamma.FromGamma? = null
+    public final konst n: C.Companion.FromCompanionC? = null
+    public final konst o: O.Alpha.Companion.FromCompanionAlpha? = null
+    public final konst p: O.Beta.Companion.FromCompanionBeta? = null
+    public final konst q: O.Gamma.Companion.FromCompanionGamma? = null
+    public final konst r: Delta.FromDelta? = null
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

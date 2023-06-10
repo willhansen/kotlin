@@ -40,33 +40,33 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirFunctionSymbol(
-    override val firSymbol: FirNamedFunctionSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirNamedFunctionSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtFunctionSymbol(), KtFirSymbol<FirNamedFunctionSymbol> {
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
-    override val name: Name get() = withValidityAssertion { firSymbol.name }
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst name: Name get() = withValidityAssertion { firSymbol.name }
 
-    override val isBuiltinFunctionInvoke: Boolean
+    override konst isBuiltinFunctionInvoke: Boolean
         get() = withValidityAssertion { callableIdIfNonLocal in kotlinFunctionInvokeCallableIds }
 
-    override val contractEffects: List<KtContractEffectDeclaration> by cached {
+    override konst contractEffects: List<KtContractEffectDeclaration> by cached {
         firSymbol.resolvedContractDescription?.effects
             ?.map(FirEffectDeclaration::effect)
             ?.map { it.coneEffectDeclarationToAnalysisApi(builder, this) }
             .orEmpty()
     }
 
-    override val returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
-    override val receiverParameter: KtReceiverParameterSymbol? get() = withValidityAssertion { firSymbol.receiver(builder) }
-    override val contextReceivers: List<KtContextReceiver> by cached { firSymbol.createContextReceivers(builder) }
+    override konst returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
+    override konst receiverParameter: KtReceiverParameterSymbol? get() = withValidityAssertion { firSymbol.receiver(builder) }
+    override konst contextReceivers: List<KtContextReceiver> by cached { firSymbol.createContextReceivers(builder) }
 
-    override val typeParameters by cached { firSymbol.createKtTypeParameters(builder) }
-    override val valueParameters: List<KtValueParameterSymbol> by cached { firSymbol.createKtValueParameters(builder) }
+    override konst typeParameters by cached { firSymbol.createKtTypeParameters(builder) }
+    override konst konstueParameters: List<KtValueParameterSymbol> by cached { firSymbol.createKtValueParameters(builder) }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { firSymbol.fir.hasStableParameterNames }
 
-    override val annotationsList by cached {
+    override konst annotationsList by cached {
         KtFirAnnotationListForDeclaration.create(
             firSymbol,
             analysisSession.useSiteSession,
@@ -74,19 +74,19 @@ internal class KtFirFunctionSymbol(
         )
     }
 
-    override val isSuspend: Boolean get() = withValidityAssertion { firSymbol.isSuspend }
-    override val isOverride: Boolean get() = withValidityAssertion { firSymbol.isOverride }
-    override val isInfix: Boolean get() = withValidityAssertion { firSymbol.isInfix }
-    override val isStatic: Boolean get() = withValidityAssertion { firSymbol.isStatic }
+    override konst isSuspend: Boolean get() = withValidityAssertion { firSymbol.isSuspend }
+    override konst isOverride: Boolean get() = withValidityAssertion { firSymbol.isOverride }
+    override konst isInfix: Boolean get() = withValidityAssertion { firSymbol.isInfix }
+    override konst isStatic: Boolean get() = withValidityAssertion { firSymbol.isStatic }
 
 
-    override val isOperator: Boolean get() = withValidityAssertion { firSymbol.isOperator }
-    override val isExternal: Boolean get() = withValidityAssertion { firSymbol.isExternal }
-    override val isInline: Boolean get() = withValidityAssertion { firSymbol.isInline }
-    override val isExtension: Boolean get() = withValidityAssertion { firSymbol.isExtension }
-    override val callableIdIfNonLocal: CallableId? get() = withValidityAssertion { firSymbol.getCallableIdIfNonLocal() }
+    override konst isOperator: Boolean get() = withValidityAssertion { firSymbol.isOperator }
+    override konst isExternal: Boolean get() = withValidityAssertion { firSymbol.isExternal }
+    override konst isInline: Boolean get() = withValidityAssertion { firSymbol.isInline }
+    override konst isExtension: Boolean get() = withValidityAssertion { firSymbol.isExtension }
+    override konst callableIdIfNonLocal: CallableId? get() = withValidityAssertion { firSymbol.getCallableIdIfNonLocal() }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion {
             when {
                 firSymbol.isLocal -> KtSymbolKind.LOCAL
@@ -95,14 +95,14 @@ internal class KtFirFunctionSymbol(
             }
         }
 
-    override val modality: Modality get() = withValidityAssertion { firSymbol.modalityOrFinal }
-    override val visibility: Visibility get() = withValidityAssertion { firSymbol.visibility }
+    override konst modality: Modality get() = withValidityAssertion { firSymbol.modalityOrFinal }
+    override konst visibility: Visibility get() = withValidityAssertion { firSymbol.visibility }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtFunctionSymbol> = withValidityAssertion {
         KtPsiBasedSymbolPointer.createForSymbolFromSource<KtFunctionSymbol>(this)?.let { return it }
 
-        return when (val kind = symbolKind) {
+        return when (konst kind = symbolKind) {
             KtSymbolKind.TOP_LEVEL -> KtFirTopLevelFunctionSymbolPointer(
                 firSymbol.callableId,
                 FirCallableSignature.createSignature(firSymbol),

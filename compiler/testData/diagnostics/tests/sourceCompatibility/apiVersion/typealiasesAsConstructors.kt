@@ -5,15 +5,15 @@ open class C1
 
 typealias C1_Alias = <!API_NOT_AVAILABLE!>C1<!>
 
-open class C2(val x: Int) {
+open class C2(konst x: Int) {
     @SinceKotlin("1.1")
     constructor() : this(0)
 }
 
 typealias C2_Alias = C2
 
-val test1 = <!UNRESOLVED_REFERENCE!>C1_Alias<!>()
-val test2 = C2_Alias<!NO_VALUE_FOR_PARAMETER!>()<!>
+konst test1 = <!UNRESOLVED_REFERENCE!>C1_Alias<!>()
+konst test2 = C2_Alias<!NO_VALUE_FOR_PARAMETER!>()<!>
 
 class Test3 : <!API_NOT_AVAILABLE, DEBUG_INFO_UNRESOLVED_WITH_TARGET, UNRESOLVED_REFERENCE!>C1_Alias<!>()
 

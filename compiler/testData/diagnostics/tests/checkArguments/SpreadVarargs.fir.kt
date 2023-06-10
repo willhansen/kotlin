@@ -4,8 +4,8 @@
 fun <T> array1(vararg a : T) = a
 
 fun main() {
-    val a = array1("a", "b")
-    val b = array1(1, 1)
+    konst a = array1("a", "b")
+    konst b = array1(1, 1)
     join(1)
     join(1, "2")
     join(1, "2", "3")
@@ -54,28 +54,28 @@ fun main() {
     joinG(1, "4", *a, *a, "3")
     joinG(a = a, x = 1)
 
-    val x1 = joinT(1, "2")
+    konst x1 = joinT(1, "2")
     checkSubtype<String?>(x1)
-    val x2 = joinT(<!NON_VARARG_SPREAD!>*<!>1, "2")
+    konst x2 = joinT(<!NON_VARARG_SPREAD!>*<!>1, "2")
     checkSubtype<String?>(x2)
-    val x6 = joinT(1, *a)
+    konst x6 = joinT(1, *a)
     checkSubtype<String?>(x6)
-    val x7 = joinT(1, *a, "3")
+    konst x7 = joinT(1, *a, "3")
     checkSubtype<String?>(x7)
-    val x8 = joinT(1, "4", *a, "3")
+    konst x8 = joinT(1, "4", *a, "3")
     checkSubtype<String?>(x8)
-    val x9 = joinT(1, "4", *a)
+    konst x9 = joinT(1, "4", *a)
     checkSubtype<String?>(x9)
-    val x10 = joinT(1, "4", *a, *a, "3")
+    konst x10 = joinT(1, "4", *a, *a, "3")
     checkSubtype<String?>(x10)
-    val x11 = joinT(a = a, x = 1)
+    konst x11 = joinT(a = a, x = 1)
     checkSubtype<String?>(x11)
-    val x12 = joinT(x = 1, a = a)
+    konst x12 = joinT(x = 1, a = a)
     checkSubtype<String?>(x12)
 }
 
 fun join(x : Int, vararg a : String) : String {
-    val b = StringBuilder(x.toString())
+    konst b = StringBuilder(x.toString())
     for (s in a) {
         b.append(s)
     }
@@ -83,7 +83,7 @@ fun join(x : Int, vararg a : String) : String {
 }
 
 fun <T> joinG(x : Int, vararg a : T) : String {
-    val b = StringBuilder(x.toString())
+    konst b = StringBuilder(x.toString())
     for (s in a) {
         b.append(s)
     }

@@ -3,9 +3,9 @@
 // ISSUE: KT-52742
 
 annotation class AnnotationWithArray(
-    val array: Array<AnnotationWithArray>
+    konst array: Array<AnnotationWithArray>
 )
 
 annotation class AnnotationWithVararg(
-    vararg val args: AnnotationWithVararg
+    vararg konst args: AnnotationWithVararg
 )

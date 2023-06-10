@@ -7,13 +7,13 @@ fun test() {
     foo { fun(): Int {return 1} }
     foo({ fun() = 1 })
 
-    val x1 =
+    konst x1 =
         if (1 == 1)
             fun(): Int {return 1}
         else
             fun() = 1
 
-    val x2 =
+    konst x2 =
             if (1 == 1) {
                 fun(): Int {
                     return 1
@@ -22,19 +22,19 @@ fun test() {
             else
                 fun() = 1
 
-    val x3 = when (1) {
+    konst x3 = when (1) {
         0 -> fun(): Int {return 1}
         else -> fun() = 1
     }
 
-    val x31 = when (1) {
+    konst x31 = when (1) {
         0 -> {
             fun(): Int {return 1}
         }
         else -> fun() = 1
     }
 
-    val x4 = {
+    konst x4 = {
         y: Int -> fun(): Int {return 1}
     }
 

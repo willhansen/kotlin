@@ -4,21 +4,21 @@ package kotlin
 
 fun <T> assertEquals(expected: T, actual: T, message: String? = null) {
     if (expected != actual) {
-        val msg = if (message == null) "" else ", message = '$message'"
-        fail("Unexpected value: expected = '$expected', actual = '$actual'$msg")
+        konst msg = if (message == null) "" else ", message = '$message'"
+        fail("Unexpected konstue: expected = '$expected', actual = '$actual'$msg")
     }
 }
 
 fun <T> assertNotEquals(illegal: T, actual: T, message: String? = null) {
     if (illegal == actual) {
-        val msg = if (message == null) "" else ", message = '$message'"
-        fail("Illegal value: illegal = '$illegal', actual = '$actual'$msg")
+        konst msg = if (message == null) "" else ", message = '$message'"
+        fail("Illegal konstue: illegal = '$illegal', actual = '$actual'$msg")
     }
 }
 
 fun <T> assertSame(expected: T, actual: T, message: String? = null) {
     if (expected !== actual) {
-        val msg = if (message == null) "" else ", message = '$message'"
+        konst msg = if (message == null) "" else ", message = '$message'"
         fail("Expected same instances: expected = '$expected', actual = '$actual'$msg")
     }
 }

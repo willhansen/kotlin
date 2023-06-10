@@ -9,19 +9,19 @@ import Kt
 
 func testArraysEscapeAsParameter() throws {
     let array1 = ArraysConstructor(int1: 1, int2: 2)
-    try assertEquals(actual: array1.log(), expected: "size: 2, contents: [1, 2]", "Wrong array values in class ArraysConstructor.")
+    try assertEquals(actual: array1.log(), expected: "size: 2, contents: [1, 2]", "Wrong array konstues in class ArraysConstructor.")
     array1.set(int1: 3, int2: 4)
-    try assertEquals(actual: array1.log(), expected: "size: 2, contents: [3, 4]", "Wrong array values in class ArraysConstructor.")
+    try assertEquals(actual: array1.log(), expected: "size: 2, contents: [3, 4]", "Wrong array konstues in class ArraysConstructor.")
 
     let array2 = ArraysDefault(int1: 1, int2: 2)
-    try assertEquals(actual: array2.log(), expected: "size: 2, contents: [1, 2]", "Wrong array values in class ArraysDefault.")
+    try assertEquals(actual: array2.log(), expected: "size: 2, contents: [1, 2]", "Wrong array konstues in class ArraysDefault.")
     array2.set(int1: 3, int2: 4)
-    try assertEquals(actual: array2.log(), expected: "size: 2, contents: [3, 4]", "Wrong array values in class ArraysDefault.")
+    try assertEquals(actual: array2.log(), expected: "size: 2, contents: [3, 4]", "Wrong array konstues in class ArraysDefault.")
 
     let array3 = ArraysInitBlock(int1: 1, int2: 2)
-    try assertEquals(actual: array3.log(), expected: "size: 2, contents: [1, 2]", "Wrong array values in class ArraysInitBlock.")
+    try assertEquals(actual: array3.log(), expected: "size: 2, contents: [1, 2]", "Wrong array konstues in class ArraysInitBlock.")
     array3.set(int1: 3, int2: 4)
-    try assertEquals(actual: array3.log(), expected: "size: 2, contents: [3, 4]", "Wrong array values in class ArraysInitBlock.")
+    try assertEquals(actual: array3.log(), expected: "size: 2, contents: [3, 4]", "Wrong array konstues in class ArraysInitBlock.")
 }
 
 // -------- Execution of the test --------

@@ -32,10 +32,10 @@ import org.jetbrains.kotlin.utils.addToStdlib.ifFalse
 import javax.swing.Icon
 
 
-abstract class SymbolLightClassBase protected constructor(val ktModule: KtModule, manager: PsiManager) :
+abstract class SymbolLightClassBase protected constructor(konst ktModule: KtModule, manager: PsiManager) :
     LightElement(manager, KotlinLanguage.INSTANCE), PsiClass, KtExtensibleLightClass {
 
-    private val myInnersCache by lazyPub {
+    private konst myInnersCache by lazyPub {
         ClassInnerStuffCache(
             /* aClass = */ this,
             /* generateEnumMethods = */ false,
@@ -77,11 +77,11 @@ abstract class SymbolLightClassBase protected constructor(val ktModule: KtModule
     )
 
     override fun isInheritor(baseClass: PsiClass, checkDeep: Boolean): Boolean {
-        if (manager.areElementsEquivalent(baseClass, this)) return false
+        if (manager.areElementsEquikonstent(baseClass, this)) return false
         LightClassInheritanceHelper.getService(project).isInheritor(this, baseClass, checkDeep).ifSure { return it }
 
-        val thisClassOrigin = kotlinOrigin
-        val baseClassOrigin = (baseClass as? KtLightClass)?.kotlinOrigin
+        konst thisClassOrigin = kotlinOrigin
+        konst baseClassOrigin = (baseClass as? KtLightClass)?.kotlinOrigin
 
         return if (baseClassOrigin != null && thisClassOrigin != null) {
             analyzeForLightClasses(ktModule) {
@@ -93,11 +93,11 @@ abstract class SymbolLightClassBase protected constructor(val ktModule: KtModule
         }
     }
 
-    internal open val isTopLevel: Boolean get() = false
+    internal open konst isTopLevel: Boolean get() = false
 
-    private val _containingFile: PsiFile? by lazyPub {
-        val kotlinOrigin = kotlinOrigin ?: return@lazyPub null
-        val containingClass = isTopLevel.ifFalse { getOutermostClassOrObject(kotlinOrigin).toLightClass() } ?: this
+    private konst _containingFile: PsiFile? by lazyPub {
+        konst kotlinOrigin = kotlinOrigin ?: return@lazyPub null
+        konst containingClass = isTopLevel.ifFalse { getOutermostClassOrObject(kotlinOrigin).toLightClass() } ?: this
         SymbolFakeFile(kotlinOrigin, containingClass)
     }
 
@@ -109,7 +109,7 @@ abstract class SymbolLightClassBase protected constructor(val ktModule: KtModule
         visitedSupers: MutableSet<PsiClass> = mutableSetOf()
     ): Boolean {
         visitedSupers.add(this)
-        val notVisitedSupers = supers.filterNot { visitedSupers.contains(it) }
+        konst notVisitedSupers = supers.filterNot { visitedSupers.contains(it) }
         if (notVisitedSupers.any { it == baseClass }) return true
         if (!checkDeep) return false
         return notVisitedSupers.any { it.hasSuper(baseClass, true, visitedSupers) }
@@ -129,7 +129,7 @@ abstract class SymbolLightClassBase protected constructor(val ktModule: KtModule
         withClassEntry("class", this@SymbolLightClassBase)
     }
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean = PsiClassImplUtil.isClassEquivalentTo(this, another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean = PsiClassImplUtil.isClassEquikonstentTo(this, another)
 
     override fun getDocComment(): PsiDocComment? = null
 

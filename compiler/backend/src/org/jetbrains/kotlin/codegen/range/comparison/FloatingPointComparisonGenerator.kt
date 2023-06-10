@@ -20,7 +20,7 @@ import org.jetbrains.org.objectweb.asm.Label
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
-class FloatingPointComparisonGenerator(override val comparedType: Type) : ComparisonGenerator {
+class FloatingPointComparisonGenerator(override konst comparedType: Type) : ComparisonGenerator {
     override fun jumpIfGreaterOrEqual(v: InstructionAdapter, label: Label) {
         v.cmpg(comparedType)
         v.ifge(label)
@@ -42,5 +42,5 @@ class FloatingPointComparisonGenerator(override val comparedType: Type) : Compar
     }
 }
 
-val FloatComparisonGenerator = FloatingPointComparisonGenerator(Type.FLOAT_TYPE)
-val DoubleComparisonGenerator = FloatingPointComparisonGenerator(Type.DOUBLE_TYPE)
+konst FloatComparisonGenerator = FloatingPointComparisonGenerator(Type.FLOAT_TYPE)
+konst DoubleComparisonGenerator = FloatingPointComparisonGenerator(Type.DOUBLE_TYPE)

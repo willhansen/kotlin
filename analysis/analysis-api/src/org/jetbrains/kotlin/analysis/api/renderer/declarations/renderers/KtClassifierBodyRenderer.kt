@@ -48,10 +48,10 @@ public abstract class KtClassifierBodyWithMembersRenderer : KtClassifierBodyRend
 
     context(KtAnalysisSession, KtDeclarationRenderer)
     public override fun renderBody(symbol: KtSymbolWithMembers, printer: PrettyPrinter) {
-        val members = bodyMemberScopeProvider.getMemberScope(symbol).filter { it !is KtConstructorSymbol || !it.isPrimary }
+        konst members = bodyMemberScopeProvider.getMemberScope(symbol).filter { it !is KtConstructorSymbol || !it.isPrimary }
             .let { bodyMemberScopeSorter.sortMembers(it, symbol) }
-        val membersToPrint = members.mapNotNull { member ->
-            val rendered = prettyPrintWithSettingsFrom(printer) {
+        konst membersToPrint = members.mapNotNull { member ->
+            konst rendered = prettyPrintWithSettingsFrom(printer) {
                 renderDeclaration(member, this)
             }
             if (rendered.isNotEmpty()) member to rendered else null

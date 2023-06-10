@@ -9,5 +9,5 @@ import org.jetbrains.kotlin.analysis.api.KtAnalysisSession
 import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeOwner
 
 public interface KtAnalysisSessionMixIn : KtLifetimeOwner {
-    public val analysisSession: KtAnalysisSession
+    public konst analysisSession: KtAnalysisSession
 }

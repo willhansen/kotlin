@@ -63,14 +63,14 @@ constructor() : AbstractExecTask<BinaryenExec>(BinaryenExec::class.java) {
 
     @InputFile
     @NormalizeLineEndings
-    val inputFileProperty: RegularFileProperty = project.newFileProperty()
+    konst inputFileProperty: RegularFileProperty = project.newFileProperty()
 
     @OutputFile
-    val outputFileProperty: RegularFileProperty = project.newFileProperty()
+    konst outputFileProperty: RegularFileProperty = project.newFileProperty()
 
     override fun exec() {
-        val inputFile = inputFileProperty.asFile.get()
-        val newArgs = mutableListOf<String>()
+        konst inputFile = inputFileProperty.asFile.get()
+        konst newArgs = mutableListOf<String>()
         newArgs.addAll(binaryenArgs)
         newArgs.add(inputFile.canonicalPath)
         newArgs.add("-o")
@@ -86,9 +86,9 @@ constructor() : AbstractExecTask<BinaryenExec>(BinaryenExec::class.java) {
             name: String,
             configuration: BinaryenExec.() -> Unit = {}
         ): TaskProvider<BinaryenExec> {
-            val target = compilation.target
-            val project = target.project
-            val binaryen = BinaryenRootPlugin.apply(project.rootProject)
+            konst target = compilation.target
+            konst project = target.project
+            konst binaryen = BinaryenRootPlugin.apply(project.rootProject)
             return project.registerTask(
                 name,
             ) {

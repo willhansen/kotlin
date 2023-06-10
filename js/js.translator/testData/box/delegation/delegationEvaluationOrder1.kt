@@ -5,7 +5,7 @@ interface Base {
     abstract fun foo(x: String): String
 }
 
-class BaseImpl(val s: String) : Base {
+class BaseImpl(konst s: String) : Base {
     override fun foo(x: String): String = "Base: ${s}:${x}"
 }
 
@@ -36,11 +36,11 @@ class Derived1() : Base by newBase(), DerivedBase() {
 
 fun box(): String {
     var d = Derived()
-    assertEquals(":DerivedBase:newBase:Derived", global, "evaluation order")
+    assertEquals(":DerivedBase:newBase:Derived", global, "ekonstuation order")
 
     global = ""
     var d1 = Derived1()
-    assertEquals(":DerivedBase:newBase:Derived", global, "evaluation order")
+    assertEquals(":DerivedBase:newBase:Derived", global, "ekonstuation order")
 
     return "OK"
 }

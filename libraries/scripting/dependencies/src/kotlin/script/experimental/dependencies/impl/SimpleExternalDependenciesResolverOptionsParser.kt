@@ -8,19 +8,19 @@ package kotlin.script.experimental.dependencies.impl
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.dependencies.ExternalDependenciesResolver
 
-private val nameRegex = Regex("^[^\\S\\r\\n]*([a-zA-Z][a-zA-Z0-9-_]*)[^\\S\\r\\n]?")
-private val valueRegex = Regex("^[^\\S\\r\\n]*((([a-zA-Z0-9-_,/$.:])|(\\\\[\\\\ nt]))+)[^\\S\\r\\n]?")
-private val equalsRegex = Regex("^[^\\S\\r\\n]*=")
-private val escapeRegex = Regex("\\\\(.)")
+private konst nameRegex = Regex("^[^\\S\\r\\n]*([a-zA-Z][a-zA-Z0-9-_]*)[^\\S\\r\\n]?")
+private konst konstueRegex = Regex("^[^\\S\\r\\n]*((([a-zA-Z0-9-_,/$.:])|(\\\\[\\\\ nt]))+)[^\\S\\r\\n]?")
+private konst equalsRegex = Regex("^[^\\S\\r\\n]*=")
+private konst escapeRegex = Regex("\\\\(.)")
 
 private fun String.unescape(): String {
     return replace(escapeRegex) { match ->
-        when (val c = match.groups[1]!!.value.single()) {
+        when (konst c = match.groups[1]!!.konstue.single()) {
             '\\' -> "\\"
             ' ' -> " "
             'n' -> "\n"
             't' -> "\t"
-            // Impossible situation: all possible values are mentioned in the regex
+            // Impossible situation: all possible konstues are mentioned in the regex
             else -> error("Unknown escaped symbol: $c")
         }
     }
@@ -37,8 +37,8 @@ private fun String.unescape(): String {
  */
 object SimpleExternalDependenciesResolverOptionsParser {
     private sealed class Token {
-        data class Name(val name: String) : Token()
-        data class Value(val value: String) : Token()
+        data class Name(konst name: String) : Token()
+        data class Value(konst konstue: String) : Token()
         object Equals
     }
 
@@ -51,12 +51,12 @@ object SimpleExternalDependenciesResolverOptionsParser {
         private fun take(regex: Regex) = regex
             .find(remaining)
             ?.also { match ->
-                consumed += match.value
-                remaining = remaining.removePrefix(match.value)
+                consumed += match.konstue
+                remaining = remaining.removePrefix(match.konstue)
             }
 
-        fun takeName(): Token.Name? = take(nameRegex)?.let { Token.Name(it.groups[1]!!.value) }
-        fun takeValue(): Token.Value? = take(valueRegex)?.let { Token.Value(it.groups[1]!!.value.unescape()) }
+        fun takeName(): Token.Name? = take(nameRegex)?.let { Token.Name(it.groups[1]!!.konstue) }
+        fun takeValue(): Token.Value? = take(konstueRegex)?.let { Token.Value(it.groups[1]!!.konstue.unescape()) }
         fun takeEquals(): Token.Equals? = take(equalsRegex)?.let { Token.Equals }
 
         fun hasFinished(): Boolean = remaining.isBlank()
@@ -67,25 +67,25 @@ object SimpleExternalDependenciesResolverOptionsParser {
         locationWithId: SourceCode.LocationWithId? = null
     ): ResultWithDiagnostics<ExternalDependenciesResolver.Options> {
 
-        val map = mutableMapOf<String, String>()
+        konst map = mutableMapOf<String, String>()
 
         for (option in options) {
-            val scanner = Scanner(option)
+            konst scanner = Scanner(option)
 
             while (!scanner.hasFinished()) {
-                val name = scanner.takeName()?.name ?: return makeFailureResult(
-                    "Failed to parse options from annotation. Expected a valid option name but received:\n${scanner.remaining}",
+                konst name = scanner.takeName()?.name ?: return makeFailureResult(
+                    "Failed to parse options from annotation. Expected a konstid option name but received:\n${scanner.remaining}",
                     locationWithId
                 )
 
                 if (scanner.takeEquals() != null) {
                     // TODO: Consider supporting string literals
-                    val value = scanner.takeValue()?.value ?: return makeFailureResult(
-                        "Failed to parse options from annotation. Expected a valid option value but received:\n${scanner.remaining}",
+                    konst konstue = scanner.takeValue()?.konstue ?: return makeFailureResult(
+                        "Failed to parse options from annotation. Expected a konstid option konstue but received:\n${scanner.remaining}",
                         locationWithId
                     )
 
-                    map.tryToAddOption(name, value)?.let { return it }
+                    map.tryToAddOption(name, konstue)?.let { return it }
                 } else {
                     map.tryToAddOption(name, "true")?.let { return it }
                 }
@@ -98,12 +98,12 @@ object SimpleExternalDependenciesResolverOptionsParser {
 
 private fun <K, V> MutableMap<K, V>.tryToAddOption(
     key: K,
-    value: V,
+    konstue: V,
     locationWithId: SourceCode.LocationWithId? = null
-): ResultWithDiagnostics.Failure? = when (val previousValue = this[key]) {
-    null, value -> {
-        this[key] = value
+): ResultWithDiagnostics.Failure? = when (konst previousValue = this[key]) {
+    null, konstue -> {
+        this[key] = konstue
         null
     }
-    else -> makeFailureResult("Conflicting values for option $key: $previousValue and $value", locationWithId)
+    else -> makeFailureResult("Conflicting konstues for option $key: $previousValue and $konstue", locationWithId)
 }

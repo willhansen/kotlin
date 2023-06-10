@@ -37,14 +37,14 @@ private fun String.snakeCaseToUpperCamelCase() = split('_').joinToString(separat
 
 private fun fullTaskName(name: String, targetName: String, sanitizer: SanitizerKind?) = "${targetName}${name.snakeCaseToUpperCamelCase()}${sanitizer.taskSuffix}"
 
-private val SanitizerKind?.taskSuffix
+private konst SanitizerKind?.taskSuffix
     get() = when (this) {
         null -> ""
         SanitizerKind.ADDRESS -> "_ASAN"
         SanitizerKind.THREAD -> "_TSAN"
     }
 
-private val SanitizerKind?.description
+private konst SanitizerKind?.description
     get() = when (this) {
         null -> ""
         SanitizerKind.ADDRESS -> " with ASAN"
@@ -59,7 +59,7 @@ private val SanitizerKind?.description
  */
 private fun <T> NamedDomainObjectContainer<T>.getOrCreate(name: String, action: Action<in T>): T = try {
     this.create(name, action)
-} catch (e: InvalidUserDataException) {
+} catch (e: InkonstidUserDataException) {
     this.getByName(name)
 }
 
@@ -96,7 +96,7 @@ private fun Configuration.targetVariant(target: TargetWithSanitizer): Configurat
 private abstract class RunGTestSemaphore : BuildService<BuildServiceParameters.None>
 private abstract class CompileTestsSemaphore : BuildService<BuildServiceParameters.None>
 
-open class CompileToBitcodeExtension @Inject constructor(val project: Project) : TargetDomainObjectContainer<CompileToBitcodeExtension.Target>(project) {
+open class CompileToBitcodeExtension @Inject constructor(konst project: Project) : TargetDomainObjectContainer<CompileToBitcodeExtension.Target>(project) {
     init {
         this.factory = { target ->
             project.objects.newInstance<Target>(this, target)
@@ -106,12 +106,12 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
     /**
      * Outgoing configuration with `main` parts of all modules.
      */
-    val compileBitcodeMainElements = project.compileBitcodeElements(MAIN_SOURCE_SET_NAME)
+    konst compileBitcodeMainElements = project.compileBitcodeElements(MAIN_SOURCE_SET_NAME)
 
     /**
      * Outgoing configuration with `testFixtures` parts of all modules.
      */
-    val compileBitcodeTestFixturesElements = project.compileBitcodeElements(TEST_FIXTURES_SOURCE_SET_NAME) {
+    konst compileBitcodeTestFixturesElements = project.compileBitcodeElements(TEST_FIXTURES_SOURCE_SET_NAME) {
         outgoing {
             capability(CppConsumerPlugin.testFixturesCapability(project))
         }
@@ -120,14 +120,14 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
     /**
      * Outgoing configuration with `test` parts of all modules.
      */
-    val compileBitcodeTestElements = project.compileBitcodeElements(TEST_SOURCE_SET_NAME) {
+    konst compileBitcodeTestElements = project.compileBitcodeElements(TEST_SOURCE_SET_NAME) {
         outgoing {
             capability(CppConsumerPlugin.testCapability(project))
         }
     }
 
     // TODO: These should be set by the plugin users.
-    private val DEFAULT_CPP_FLAGS = listOfNotNull(
+    private konst DEFAULT_CPP_FLAGS = listOfNotNull(
             "-gdwarf-2".takeIf { project.kotlinBuildProperties.getBoolean("kotlin.native.isNativeRuntimeDebugInfoEnabled", false) },
             "-std=c++17",
             "-Werror",
@@ -138,13 +138,13 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
             "-Wno-unused-parameter",  // False positives with polymorphic functions.
     )
 
-    private val targetList = with(project) {
+    private konst targetList = with(project) {
         provider { (rootProject.project(":kotlin-native").property("targetList") as? List<*>)?.filterIsInstance<String>() ?: emptyList() } // TODO: Can we make it better?
     }
 
-    private val allTestsTasks by lazy {
-        val name = project.name.capitalized
-        targetList.get().associateBy(keySelector = { it }, valueTransform = {
+    private konst allTestsTasks by lazy {
+        konst name = project.name.capitalized
+        targetList.get().associateBy(keySelector = { it }, konstueTransform = {
             project.tasks.register("${it}${name}Tests") {
                 description = "Runs all $name tests for $it"
                 group = VERIFICATION_TASK_GROUP
@@ -158,44 +158,44 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
      * There are 3 well known source sets: `main`, `testFixtures` and `test`.
      */
     abstract class SourceSet @Inject constructor(
-            private val owner: CompileToBitcodeExtension,
-            private val module: Module,
-            private val name: String,
-            private val _target: TargetWithSanitizer,
+            private konst owner: CompileToBitcodeExtension,
+            private konst module: Module,
+            private konst name: String,
+            private konst _target: TargetWithSanitizer,
     ) : Named {
-        val target by _target::target
-        val sanitizer by _target::sanitizer
+        konst target by _target::target
+        konst sanitizer by _target::sanitizer
 
         override fun getName() = name
 
-        private val project by owner::project
+        private konst project by owner::project
 
         /**
          * Resulting single LLVM bitcode file.
          */
-        abstract val outputFile: RegularFileProperty
+        abstract konst outputFile: RegularFileProperty
 
         /**
          * Directory where LLVM bitcode files for each of the [inputFiles] is placed.
          */
-        abstract val outputDirectory: DirectoryProperty
+        abstract konst outputDirectory: DirectoryProperty
 
         /**
          * Header paths to use when compiling [inputFiles].
          */
-        abstract val headersDirs: ConfigurableFileCollection
+        abstract konst headersDirs: ConfigurableFileCollection
 
         /**
          * Source files to compile.
          */
-        abstract val inputFiles: ConfigurableFileTree
+        abstract konst inputFiles: ConfigurableFileTree
 
         /**
          * Additional task dependencies.
          */
-        abstract val dependencies: ListProperty<TaskProvider<*>>
+        abstract konst dependencies: ListProperty<TaskProvider<*>>
 
-        protected abstract val onlyIf: ListProperty<Spec<in SourceSet>>
+        protected abstract konst onlyIf: ListProperty<Spec<in SourceSet>>
 
         /**
          * Builds this source set only if [spec] is satisfied.
@@ -204,13 +204,13 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
             this.onlyIf.add(spec)
         }
 
-        private val compilationDatabase = project.extensions.getByType<CompilationDatabaseExtension>()
-        private val execClang = project.extensions.getByType<ExecClang>()
+        private konst compilationDatabase = project.extensions.getByType<CompilationDatabaseExtension>()
+        private konst execClang = project.extensions.getByType<ExecClang>()
 
         /**
          * Compiles source files into bitcode files.
          */
-        val compileTask = project.tasks.register<ClangFrontend>("clangFrontend${module.name.capitalized}${name.capitalized}${_target.toString().capitalized}").apply {
+        konst compileTask = project.tasks.register<ClangFrontend>("clangFrontend${module.name.capitalized}${name.capitalized}${_target.toString().capitalized}").apply {
             configure {
                 this.description = "Compiles '${module.name}' (${this@SourceSet.name} sources) to bitcode for $_target"
                 this.outputDirectory.set(this@SourceSet.outputDirectory)
@@ -236,8 +236,8 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
             }
             compilationDatabase.target(_target) {
                 entry {
-                    val compileTask = this@apply.get()
-                    val args = listOf(execClang.resolveExecutable(compileTask.compiler.get())) + compileTask.compilerFlags.get() + execClang.clangArgsForCppRuntime(target.name)
+                    konst compileTask = this@apply.get()
+                    konst args = listOf(execClang.resolveExecutable(compileTask.compiler.get())) + compileTask.compilerFlags.get() + execClang.clangArgsForCppRuntime(target.name)
                     directory.set(compileTask.workingDirectory)
                     files.setFrom(compileTask.inputFiles)
                     arguments.set(args)
@@ -258,7 +258,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
         /**
          * Links bitcode files together.
          */
-        val task = project.tasks.register<LlvmLink>("llvmLink${module.name.capitalized}${name.capitalized}${_target.toString().capitalized}").apply {
+        konst task = project.tasks.register<LlvmLink>("llvmLink${module.name.capitalized}${name.capitalized}${_target.toString().capitalized}").apply {
             configure {
                 this.description = "Link '${module.name}' bitcode files (${this@SourceSet.name} sources) into a single bitcode file for $_target"
                 this.inputFiles.from(compileTask)
@@ -276,25 +276,25 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
     // TODO: Consider putting each module in a gradle project of its own. Current project should be used for grouping (i.e. reexporting all
     //       compileBitcodeMainElements from subprojects under a single umbrella configuration) and integration testing.
     abstract class Module @Inject constructor(
-            private val owner: CompileToBitcodeExtension,
-            private val name: String,
-            private val _target: TargetWithSanitizer,
+            private konst owner: CompileToBitcodeExtension,
+            private konst name: String,
+            private konst _target: TargetWithSanitizer,
     ) : Named {
         /**
          * A container for [SourceSet].
          *
          * 3 source sets are well known: [main], [testFixtures] and [test].
          */
-        abstract class SourceSets @Inject constructor(private val module: Module, private val container: ExtensiblePolymorphicDomainObjectContainer<SourceSet>) : NamedDomainObjectContainer<SourceSet> by container {
-            private val project by module::project
+        abstract class SourceSets @Inject constructor(private konst module: Module, private konst container: ExtensiblePolymorphicDomainObjectContainer<SourceSet>) : NamedDomainObjectContainer<SourceSet> by container {
+            private konst project by module::project
 
             // googleTestExtension is only used if testFixtures or tests are used.
-            private val googleTestExtension by lazy { project.extensions.getByType<GoogleTestExtension>() }
+            private konst googleTestExtension by lazy { project.extensions.getByType<GoogleTestExtension>() }
 
             /**
              * Get `main` source set if it was configured.
              */
-            val main: Provider<SourceSet>
+            konst main: Provider<SourceSet>
                 get() = named(MAIN_SOURCE_SET_NAME)
 
             /**
@@ -315,7 +315,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
             /**
              * Get `testFixtures` source set if it was configured.
              */
-            val testFixtures: Provider<SourceSet>
+            konst testFixtures: Provider<SourceSet>
                 get() = named(TEST_FIXTURES_SOURCE_SET_NAME)
 
             /**
@@ -338,7 +338,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
             /**
              * Get `test` source set if it was configured.
              */
-            val test: Provider<SourceSet>
+            konst test: Provider<SourceSet>
                 get() = named(TEST_SOURCE_SET_NAME)
 
             /**
@@ -359,17 +359,17 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
             }
         }
 
-        val target by _target::target
-        val sanitizer by _target::sanitizer
+        konst target by _target::target
+        konst sanitizer by _target::sanitizer
 
         override fun getName() = name
 
-        private val project by owner::project
+        private konst project by owner::project
 
         /**
          * Outgoing configuration with `main` part of this module.
          */
-        val compileBitcodeMainElements = project.moduleCompileBitcodeElements(name, MAIN_SOURCE_SET_NAME) {
+        konst compileBitcodeMainElements = project.moduleCompileBitcodeElements(name, MAIN_SOURCE_SET_NAME) {
             outgoing {
                 capability(CppConsumerPlugin.moduleCapability(project, this@Module.name))
             }
@@ -378,7 +378,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
         /**
          * Outgoing configuration with `testFixtures` part of this module.
          */
-        val compileBitcodeTestFixturesElements = project.moduleCompileBitcodeElements(name, TEST_FIXTURES_SOURCE_SET_NAME) {
+        konst compileBitcodeTestFixturesElements = project.moduleCompileBitcodeElements(name, TEST_FIXTURES_SOURCE_SET_NAME) {
             outgoing {
                 capability(CppConsumerPlugin.moduleTestFixturesCapability(project, this@Module.name))
             }
@@ -387,7 +387,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
         /**
          * Outgoing configuration with `test` part of this module.
          */
-        val compileBitcodeTestElements = project.moduleCompileBitcodeElements(name, TEST_SOURCE_SET_NAME) {
+        konst compileBitcodeTestElements = project.moduleCompileBitcodeElements(name, TEST_SOURCE_SET_NAME) {
             outgoing {
                 capability(CppConsumerPlugin.moduleTestCapability(project, this@Module.name))
             }
@@ -396,39 +396,39 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
         /**
          * Directory where module sources are located. By default `src/<module name>`.
          */
-        abstract val srcRoot: DirectoryProperty
+        abstract konst srcRoot: DirectoryProperty
 
         // TODO: This is actually API dependency. Make it so.
         /**
          * Header directories to use for compilation of all [SourceSet]s.
          */
-        abstract val headersDirs: ConfigurableFileCollection
+        abstract konst headersDirs: ConfigurableFileCollection
 
         /**
          * Compiler to use. Either `clang` or `clang++`.
          */
-        abstract val compiler: Property<String>
+        abstract konst compiler: Property<String>
 
         /**
          * Extra arguments to `llvm-link`.
          */
-        abstract val linkerArgs: ListProperty<String>
+        abstract konst linkerArgs: ListProperty<String>
 
         /**
          * Extra arguments to [compiler].
          */
-        abstract val compilerArgs: ListProperty<String>
+        abstract konst compilerArgs: ListProperty<String>
 
         /**
-         * Directory in which [compiler] will be executed. Important for macro evaluation like `__FILE__`.
+         * Directory in which [compiler] will be executed. Important for macro ekonstuation like `__FILE__`.
          */
-        abstract val compilerWorkingDirectory: DirectoryProperty
+        abstract konst compilerWorkingDirectory: DirectoryProperty
 
         /**
          * Extra tqsk dependencies to be used for all [SourceSet]s.
          */
-        abstract val dependencies: ListProperty<TaskProvider<*>>
-        protected abstract val onlyIf: ListProperty<Spec<in Module>>
+        abstract konst dependencies: ListProperty<TaskProvider<*>>
+        protected abstract konst onlyIf: ListProperty<Spec<in Module>>
 
         /**
          * Builds this module only if [spec] is satisfied.
@@ -440,7 +440,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
         /**
          * Container for [SourceSet]s.
          */
-        val sourceSets by lazy {
+        konst sourceSets by lazy {
             project.objects.newInstance<SourceSets>(this, project.objects.polymorphicDomainObjectContainer(SourceSet::class.java).apply {
                 registerFactory(SourceSet::class.java) {
                     project.objects.newInstance<SourceSet>(owner, this@Module, it, _target).apply {
@@ -466,36 +466,36 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
     }
 
     abstract class TestsGroup @Inject constructor(
-            private val _target: TargetWithSanitizer,
+            private konst _target: TargetWithSanitizer,
     ) {
-        val target by _target::target
-        val sanitizer by _target::sanitizer
-        abstract val testedModules: ListProperty<String>
-        abstract val testSupportModules: ListProperty<String>
-        abstract val testLauncherModule: Property<String>
+        konst target by _target::target
+        konst sanitizer by _target::sanitizer
+        abstract konst testedModules: ListProperty<String>
+        abstract konst testSupportModules: ListProperty<String>
+        abstract konst testLauncherModule: Property<String>
     }
 
     abstract class Target @Inject constructor(
-            private val owner: CompileToBitcodeExtension,
-            private val _target: TargetWithSanitizer,
+            private konst owner: CompileToBitcodeExtension,
+            private konst _target: TargetWithSanitizer,
     ) {
-        val target by _target::target
-        val sanitizer by _target::sanitizer
+        konst target by _target::target
+        konst sanitizer by _target::sanitizer
 
-        private val project by owner::project
+        private konst project by owner::project
 
         // A shared service used to limit parallel execution of test binaries.
-        private val runGTestSemaphore = project.gradle.sharedServices.registerIfAbsent("runGTestSemaphore", RunGTestSemaphore::class.java) {
+        private konst runGTestSemaphore = project.gradle.sharedServices.registerIfAbsent("runGTestSemaphore", RunGTestSemaphore::class.java) {
             // Probably can be made configurable if test reporting moves away from simple gtest stdout dumping.
             maxParallelUsages.set(1)
         }
 
         // TODO: remove when tests compilation does not consume so much memory.
-        private val compileTestsSemaphore = project.gradle.sharedServices.registerIfAbsent("compileTestsSemaphore", CompileTestsSemaphore::class.java) {
+        private konst compileTestsSemaphore = project.gradle.sharedServices.registerIfAbsent("compileTestsSemaphore", CompileTestsSemaphore::class.java) {
             maxParallelUsages.set(5)
         }
 
-        private val modules: NamedDomainObjectContainer<Module> = project.objects.polymorphicDomainObjectContainer(Module::class.java).apply {
+        private konst modules: NamedDomainObjectContainer<Module> = project.objects.polymorphicDomainObjectContainer(Module::class.java).apply {
             registerFactory(Module::class.java) {
                 project.objects.newInstance<Module>(owner, it, _target).apply {
                     this.srcRoot.convention(project.layout.projectDirectory.dir("src/$name"))
@@ -520,24 +520,24 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
                 testTaskName: String,
                 action: Action<in TestsGroup>,
         ) {
-            val testsGroup = project.objects.newInstance(TestsGroup::class.java, _target).apply {
+            konst testsGroup = project.objects.newInstance(TestsGroup::class.java, _target).apply {
                 testSupportModules.set(listOf("googletest", "googlemock"))
                 testLauncherModule.convention("test_support")
                 action.execute(this)
                 testLauncherModule.finalizeValue()
             }
-            val target = testsGroup.target
-            val sanitizer = testsGroup.sanitizer
-            val testName = fullTaskName(testTaskName, target.name, sanitizer)
+            konst target = testsGroup.target
+            konst sanitizer = testsGroup.sanitizer
+            konst testName = fullTaskName(testTaskName, target.name, sanitizer)
 
-            val testLauncherConfiguration = project.configurations.create("${testTaskName}${_target.toString().capitalized}TestLauncher") {
+            konst testLauncherConfiguration = project.configurations.create("${testTaskName}${_target.toString().capitalized}TestLauncher") {
                 isCanBeConsumed = false
                 isCanBeResolved = true
                 attributes {
                     attribute(CppUsage.USAGE_ATTRIBUTE, project.objects.named(CppUsage.LLVM_BITCODE))
                 }
             }
-            val testsGroupConfiguration = project.configurations.create("${testTaskName}${_target.toString().capitalized}") {
+            konst testsGroupConfiguration = project.configurations.create("${testTaskName}${_target.toString().capitalized}") {
                 isCanBeConsumed = false
                 isCanBeResolved = true
                 attributes {
@@ -560,7 +560,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
                 }
             }
 
-            val compileTask = project.tasks.register<CompileToExecutable>("${testName}Compile") {
+            konst compileTask = project.tasks.register<CompileToExecutable>("${testName}Compile") {
                 description = "Compile tests group '$testTaskName' for $target${sanitizer.description}"
                 group = VERIFICATION_BUILD_TASK_GROUP
                 this.target.set(target)
@@ -569,11 +569,11 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
                 this.llvmLinkFirstStageOutputFile.set(project.layout.buildDirectory.file("bitcode/test/$target/$testName-firstStage.bc"))
                 this.llvmLinkOutputFile.set(project.layout.buildDirectory.file("bitcode/test/$target/$testName.bc"))
                 this.compilerOutputFile.set(project.layout.buildDirectory.file("obj/$target/$testName.o"))
-                val allModules = listOf(testsGroup.testLauncherModule.get()) + testsGroup.testSupportModules.get() + testsGroup.testedModules.get()
+                konst allModules = listOf(testsGroup.testLauncherModule.get()) + testsGroup.testSupportModules.get() + testsGroup.testedModules.get()
                 // TODO: Superwrong. Module should carry dependencies to system libraries that are passed to the linker.
-                val mimallocEnabled = allModules.contains("mimalloc")
+                konst mimallocEnabled = allModules.contains("mimalloc")
                 this.mimallocEnabled.set(mimallocEnabled)
-                val mainFileConfiguration = testLauncherConfiguration.incoming.artifactView {
+                konst mainFileConfiguration = testLauncherConfiguration.incoming.artifactView {
                     attributes {
                         attribute(TargetWithSanitizer.TARGET_ATTRIBUTE, _target)
                     }
@@ -581,7 +581,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
                 // TODO: Check if this is still required.
                 this.mainFile.set(mainFileConfiguration.singleFile)
                 dependsOn(mainFileConfiguration)
-                val inputFilesConfiguration = testsGroupConfiguration.incoming.artifactView {
+                konst inputFilesConfiguration = testsGroupConfiguration.incoming.artifactView {
                     attributes {
                         attribute(TargetWithSanitizer.TARGET_ATTRIBUTE, _target)
                     }
@@ -592,7 +592,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
                 usesService(compileTestsSemaphore)
             }
 
-            val runTask = project.tasks.register<RunGTest>(testName) {
+            konst runTask = project.tasks.register<RunGTest>(testName) {
                 description = "Runs tests group '$testTaskName' for $target${sanitizer.description}"
                 group = VERIFICATION_TASK_GROUP
                 this.testName.set(testName)
@@ -615,13 +615,13 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
     }
 
     companion object {
-        const val BUILD_TASK_GROUP = LifecycleBasePlugin.BUILD_GROUP
-        const val VERIFICATION_TASK_GROUP = LifecycleBasePlugin.VERIFICATION_GROUP
-        const val VERIFICATION_BUILD_TASK_GROUP = "verification build"
+        const konst BUILD_TASK_GROUP = LifecycleBasePlugin.BUILD_GROUP
+        const konst VERIFICATION_TASK_GROUP = LifecycleBasePlugin.VERIFICATION_GROUP
+        const konst VERIFICATION_BUILD_TASK_GROUP = "verification build"
 
-        const val MAIN_SOURCE_SET_NAME = "main"
-        const val TEST_FIXTURES_SOURCE_SET_NAME = "testFixtures"
-        const val TEST_SOURCE_SET_NAME = "test"
+        const konst MAIN_SOURCE_SET_NAME = "main"
+        const konst TEST_FIXTURES_SOURCE_SET_NAME = "testFixtures"
+        const konst TEST_SOURCE_SET_NAME = "test"
     }
 }
 
@@ -636,7 +636,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
  * * `{module}CompileBitcode{sourceSet}Elements` - like `compileBitcode{sourceSet}Elements` but for a single `module`.
  *
  * Each of the defined configuration has [Usage attribute][Usage] set to [CppUsage.LLVM_BITCODE].
- * Each `*Elements` configuration has variants with [TargetWithSanitizer.TARGET_ATTRIBUTE] values.
+ * Each `*Elements` configuration has variants with [TargetWithSanitizer.TARGET_ATTRIBUTE] konstues.
  *
  * To depend on a specific module, use [module][org.jetbrains.kotlin.cpp.module] and [moduleTestFixtures][org.jetbrains.kotlin.cpp.moduleTestFixtures].
  *

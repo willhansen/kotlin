@@ -32,7 +32,7 @@ internal object TestScopeRenderer {
 
         withIndent {
             for (implicitReceiver in scopeContext.implicitReceivers) {
-                val type = implicitReceiver.type
+                konst type = implicitReceiver.type
                 appendLine("type: ${renderType(type, printPretty)}")
                 appendLine("owner symbol: ${implicitReceiver.ownerSymbol::class.simpleName}")
                 appendLine()
@@ -86,9 +86,9 @@ internal object TestScopeRenderer {
 
     context (KtAnalysisSession)
     private fun PrettyPrinter.renderScopeMembers(scope: KtScope, printPretty: Boolean) {
-        val callables = scope.getCallableSymbols().toList()
-        val classifiers = scope.getClassifierSymbols().toList()
-        val isEmpty = callables.isEmpty() && classifiers.isEmpty()
+        konst callables = scope.getCallableSymbols().toList()
+        konst classifiers = scope.getClassifierSymbols().toList()
+        konst isEmpty = callables.isEmpty() && classifiers.isEmpty()
         if (isEmpty) {
             appendLine(", empty")
         } else {
@@ -108,14 +108,14 @@ internal object TestScopeRenderer {
         printPretty: Boolean
     ): String = if (printPretty) symbol.render(prettyPrintSymbolRenderer) else debugRenderer.render(symbol)
 
-    private val debugRenderer = DebugSymbolRenderer()
+    private konst debugRenderer = DebugSymbolRenderer()
 
-    private val prettyPrintSymbolRenderer = KtDeclarationRendererForSource.WITH_QUALIFIED_NAMES.with {
+    private konst prettyPrintSymbolRenderer = KtDeclarationRendererForSource.WITH_QUALIFIED_NAMES.with {
         annotationRenderer = annotationRenderer.with { annotationFilter = KtRendererAnnotationsFilter.NONE }
         modifiersRenderer = modifiersRenderer.with { modifierFilter = KtRendererModifierFilter.NONE }
     }
 
-    private val prettyPrintTypeRenderer = KtTypeRendererForSource.WITH_QUALIFIED_NAMES.with {
+    private konst prettyPrintTypeRenderer = KtTypeRendererForSource.WITH_QUALIFIED_NAMES.with {
         typeErrorTypeRenderer = KtTypeErrorTypeRenderer.WITH_ERROR_MESSAGE
     }
 }

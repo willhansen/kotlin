@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.fir.expressions.FirAnnotation
 
 object FirNativeObjCRefinementAnnotationChecker : FirRegularClassChecker() {
 
-    private val hidesFromObjCSupportedTargets = arrayOf(KotlinTarget.FUNCTION, KotlinTarget.PROPERTY, KotlinTarget.CLASS)
-    private val refinesInSwiftSupportedTargets = arrayOf(KotlinTarget.FUNCTION, KotlinTarget.PROPERTY)
+    private konst hidesFromObjCSupportedTargets = arrayOf(KotlinTarget.FUNCTION, KotlinTarget.PROPERTY, KotlinTarget.CLASS)
+    private konst refinesInSwiftSupportedTargets = arrayOf(KotlinTarget.FUNCTION, KotlinTarget.PROPERTY)
 
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration.classKind != ClassKind.ANNOTATION_CLASS) return
-        val session = context.session
-        val (objCAnnotation, swiftAnnotation) = declaration.annotations.findMetaAnnotations(session)
+        konst session = context.session
+        konst (objCAnnotation, swiftAnnotation) = declaration.annotations.findMetaAnnotations(session)
         if (objCAnnotation == null && swiftAnnotation == null) return
         if (objCAnnotation != null && swiftAnnotation != null) {
             reporter.reportOn(
@@ -38,7 +38,7 @@ object FirNativeObjCRefinementAnnotationChecker : FirRegularClassChecker() {
                 context
             )
         }
-        val targets = declaration.getAllowedAnnotationTargets(session)
+        konst targets = declaration.getAllowedAnnotationTargets(session)
 
         objCAnnotation?.let {
             if ((targets - hidesFromObjCSupportedTargets).isNotEmpty()) {
@@ -54,8 +54,8 @@ object FirNativeObjCRefinementAnnotationChecker : FirRegularClassChecker() {
 }
 
 internal data class ObjCExportMetaAnnotations(
-    val hidesFromObjCAnnotation: FirAnnotation?,
-    val refinesInSwiftAnnotation: FirAnnotation?,
+    konst hidesFromObjCAnnotation: FirAnnotation?,
+    konst refinesInSwiftAnnotation: FirAnnotation?,
 )
 
 internal fun List<FirAnnotation>.findMetaAnnotations(session: FirSession): ObjCExportMetaAnnotations {

@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.asJava.classes.lazyPub
 import org.jetbrains.kotlin.psi.KtCallElement
 
 internal class SymbolLightSimpleAnnotation(
-    private val fqName: String?,
+    private konst fqName: String?,
     parent: PsiElement,
-    private val arguments: List<KtNamedAnnotationValue> = listOf(),
-    override val kotlinOrigin: KtCallElement? = null,
+    private konst arguments: List<KtNamedAnnotationValue> = listOf(),
+    override konst kotlinOrigin: KtCallElement? = null,
 ) : SymbolLightAbstractAnnotation(parent) {
 
     override fun getQualifiedName(): String? = fqName
@@ -28,7 +28,7 @@ internal class SymbolLightSimpleAnnotation(
 
     override fun hashCode(): Int = fqName.hashCode()
 
-    private val _parameterList: PsiAnnotationParameterList by lazyPub {
+    private konst _parameterList: PsiAnnotationParameterList by lazyPub {
         symbolLightAnnotationParameterList(arguments)
     }
 

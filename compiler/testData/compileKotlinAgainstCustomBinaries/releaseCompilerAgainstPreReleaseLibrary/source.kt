@@ -3,13 +3,13 @@ package usage
 import a.*
 
 fun baz(param: A, nested: A.Nested) {
-    val constructor = A()
-    val nested = A.Nested()
-    val methodCall = param.method()
-    val supertype = object : A() {}
+    konst constructor = A()
+    konst nested = A.Nested()
+    konst methodCall = param.method()
+    konst supertype = object : A() {}
 
-    val x = foo()
-    val y = bar
+    konst x = foo()
+    konst y = bar
     bar = 239
-    val z: TA = ""
+    konst z: TA = ""
 }

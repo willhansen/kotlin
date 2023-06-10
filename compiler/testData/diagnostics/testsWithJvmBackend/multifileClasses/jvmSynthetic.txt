@@ -1,7 +1,7 @@
 package
 
 package test {
-    public val g: kotlin.String = ""
+    public konst g: kotlin.String = ""
     public fun f(): kotlin.Unit
     public fun h(): kotlin.Unit
     public fun z(): kotlin.Unit

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isParameterOfAnnotation
 
 class AssigningNamedArgumentToVarargChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        for ((parameterDescriptor, resolvedArgument) in resolvedCall.valueArguments) {
+        for ((parameterDescriptor, resolvedArgument) in resolvedCall.konstueArguments) {
             for (argument in resolvedArgument.arguments) {
                 checkAssignmentOfSingleElementToVararg(argument, parameterDescriptor, context.resolutionContext)
             }
@@ -37,7 +37,7 @@ class AssigningNamedArgumentToVarargChecker : CallChecker {
         if (!argument.isNamed()) return
         if (!parameterDescriptor.isVararg) return
 
-        val argumentExpression = argument.getArgumentExpression() ?: return
+        konst argumentExpression = argument.getArgumentExpression() ?: return
 
         if (isParameterOfAnnotation(parameterDescriptor)) {
             checkAssignmentOfSingleElementInAnnotation(argument, argumentExpression, context)
@@ -53,7 +53,7 @@ class AssigningNamedArgumentToVarargChecker : CallChecker {
     ) {
         if (isArrayOrArrayLiteral(argument, context.trace)) {
             if (argument.hasSpread()) {
-                // We want to make calls @Foo(value = [A]) and @Foo(value = *[A]) equivalent
+                // We want to make calls @Foo(konstue = [A]) and @Foo(konstue = *[A]) equikonstent
                 context.trace.report(Errors.REDUNDANT_SPREAD_OPERATOR_IN_NAMED_FORM_IN_ANNOTATION.on(argumentExpression))
             }
         } else {

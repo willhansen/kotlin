@@ -4,5 +4,5 @@
 fun <T : Any> nullable(): T? = null
 
 fun test() {
-    val value = nullable<Int>() ?: nullable()
+    konst konstue = nullable<Int>() ?: nullable()
 }

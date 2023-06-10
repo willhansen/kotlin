@@ -1,4 +1,4 @@
-var a = eval("true");
+var a = ekonst("true");
 
 function box() {
     var functions = [box1,  box2, box3];

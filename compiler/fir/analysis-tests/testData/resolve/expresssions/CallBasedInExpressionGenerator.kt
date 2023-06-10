@@ -11,11 +11,11 @@ interface Label
 interface InstructionAdapter
 
 class CallBasedInExpressionGenerator(
-    val codegen: ExpressionCodegen,
+    konst codegen: ExpressionCodegen,
     operatorReference: KtSimpleNameExpression
 ) : InExpressionGenerator {
-    private val resolvedCall = operatorReference.<!UNRESOLVED_REFERENCE!>getResolvedCallWithAssert<!>(codegen.<!UNRESOLVED_REFERENCE!>bindingContext<!>)
-    private val isInverted = operatorReference.<!UNRESOLVED_REFERENCE!>getReferencedNameElementType<!>() == <!UNRESOLVED_REFERENCE!>KtTokens<!>.NOT_IN
+    private konst resolvedCall = operatorReference.<!UNRESOLVED_REFERENCE!>getResolvedCallWithAssert<!>(codegen.<!UNRESOLVED_REFERENCE!>bindingContext<!>)
+    private konst isInverted = operatorReference.<!UNRESOLVED_REFERENCE!>getReferencedNameElementType<!>() == <!UNRESOLVED_REFERENCE!>KtTokens<!>.NOT_IN
 
     <!NOTHING_TO_OVERRIDE!>override<!> fun generate(argument: StackValue): BranchedValue =
         gen(argument).let { if (isInverted) <!UNRESOLVED_REFERENCE!>Invert<!>(it) else it }
@@ -33,7 +33,7 @@ class CallBasedInExpressionGenerator(
             }
 
             private fun invokeFunction(v: InstructionAdapter) {
-                val result = codegen.<!UNRESOLVED_REFERENCE!>invokeFunction<!>(resolvedCall.call, resolvedCall, <!UNRESOLVED_REFERENCE!>none<!>())
+                konst result = codegen.<!UNRESOLVED_REFERENCE!>invokeFunction<!>(resolvedCall.call, resolvedCall, <!UNRESOLVED_REFERENCE!>none<!>())
                 result.put(result.type, result.kotlinType, v)
             }
         }

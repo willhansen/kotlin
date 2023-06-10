@@ -5,56 +5,56 @@
 
 import Foundation
 
-func load(_ value: Int, _ size: Int) -> Int {
+func load(_ konstue: Int, _ size: Int) -> Int {
     var acc = 0
     for _ in 0...size {
-        acc = acc ^ value.hashValue
+        acc = acc ^ konstue.hashValue
     }
     return acc
 }
 
 @inlinable
-func loadInline(_ value: Int, _ size: Int) -> Int {
+func loadInline(_ konstue: Int, _ size: Int) -> Int {
     var acc = 0
     for _ in 0...size {
-        acc = acc ^ value.hashValue
+        acc = acc ^ konstue.hashValue
     }
     return acc
 }
 
-func loadGeneric<T: Hashable>(_ value: T, _ size: Int) -> Int {
+func loadGeneric<T: Hashable>(_ konstue: T, _ size: Int) -> Int {
     var acc = 0
     for _ in 0...size {
-        acc = acc ^ value.hashValue
+        acc = acc ^ konstue.hashValue
     }
     return acc
 }
 
 @inlinable
-func loadGenericInline<T: Hashable>(_ value: T, _ size: Int) -> Int {
+func loadGenericInline<T: Hashable>(_ konstue: T, _ size: Int) -> Int {
     var acc = 0
     for _ in 0...size {
-        acc = acc ^ value.hashValue
+        acc = acc ^ konstue.hashValue
     }
     return acc
 }
 
 open class InlineBenchmark {
-    private var value = 2138476523
+    private var konstue = 2138476523
 
     func calculate() -> Int {
-        return load(value, Constants.BENCHMARK_SIZE)
+        return load(konstue, Constants.BENCHMARK_SIZE)
     }
 
     func calculateInline() -> Int {
-        return loadInline(value, Constants.BENCHMARK_SIZE)
+        return loadInline(konstue, Constants.BENCHMARK_SIZE)
     }
 
     func calculateGeneric() -> Int {
-        return loadGeneric(value, Constants.BENCHMARK_SIZE)
+        return loadGeneric(konstue, Constants.BENCHMARK_SIZE)
     }
 
     func calculateGenericInline() -> Int {
-        return loadGenericInline(value, Constants.BENCHMARK_SIZE)
+        return loadGenericInline(konstue, Constants.BENCHMARK_SIZE)
     }
 }

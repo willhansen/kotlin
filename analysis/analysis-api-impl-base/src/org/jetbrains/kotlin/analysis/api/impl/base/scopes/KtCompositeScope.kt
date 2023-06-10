@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.name.Name
 
 @KtAnalysisApiInternals
 class KtCompositeScope private constructor(
-    private val subScopes: List<KtScope>,
-    override val token: KtLifetimeToken,
+    private konst subScopes: List<KtScope>,
+    override konst token: KtLifetimeToken,
 ) : KtScope {
 
     init {

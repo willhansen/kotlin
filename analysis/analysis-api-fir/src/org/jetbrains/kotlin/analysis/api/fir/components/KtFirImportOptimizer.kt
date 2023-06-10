@@ -46,47 +46,47 @@ import org.jetbrains.kotlin.resolve.calls.util.getCalleeExpressionIfAny
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 internal class KtFirImportOptimizer(
-    override val token: KtLifetimeToken,
-    private val firResolveSession: LLFirResolveSession
+    override konst token: KtLifetimeToken,
+    private konst firResolveSession: LLFirResolveSession
 ) : KtImportOptimizer() {
-    private val firSession: FirSession
+    private konst firSession: FirSession
         get() = firResolveSession.useSiteFirSession
 
     override fun analyseImports(file: KtFile): KtImportOptimizerResult {
-        val existingImports = file.importDirectives
+        konst existingImports = file.importDirectives
         if (existingImports.isEmpty()) return KtImportOptimizerResult(emptySet())
 
-        val firFile = file.getOrBuildFirFile(firResolveSession).apply { lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE) }
+        konst firFile = file.getOrBuildFirFile(firResolveSession).apply { lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE) }
 
-        val explicitlyImportedFqNames = existingImports
+        konst explicitlyImportedFqNames = existingImports
             .asSequence()
             .mapNotNull { it.importPath }
             .filter { !it.isAllUnder && !it.hasAlias() }
             .map { it.fqName }
             .toSet()
 
-        val (usedImports, unresolvedNames) = collectReferencedEntities(firFile)
+        konst (usedImports, unresolvedNames) = collectReferencedEntities(firFile)
 
-        val referencesEntities = usedImports
+        konst referencesEntities = usedImports
             .filterNot { (fqName, referencedByNames) ->
                 // when referenced by more than one name, we need to keep the imports with same package
                 fqName.parentOrNull() == file.packageFqName && referencedByNames.size == 1
             }
 
-        val requiredStarImports = referencesEntities.keys
+        konst requiredStarImports = referencesEntities.keys
             .asSequence()
             .filterNot { it in explicitlyImportedFqNames }
             .mapNotNull { it.parentOrNull() }
             .filterNot { it.isRoot }
             .toSet()
 
-        val unusedImports = mutableSetOf<KtImportDirective>()
-        val alreadySeenImports = mutableSetOf<ImportPath>()
+        konst unusedImports = mutableSetOf<KtImportDirective>()
+        konst alreadySeenImports = mutableSetOf<ImportPath>()
 
         for (import in existingImports) {
-            val importPath = import.importPath ?: continue
+            konst importPath = import.importPath ?: continue
 
-            val isUsed = when {
+            konst isUsed = when {
                 importPath.importedName in unresolvedNames -> true
                 !alreadySeenImports.add(importPath) -> false
                 importPath.isAllUnder -> unresolvedNames.isNotEmpty() || importPath.fqName in requiredStarImports
@@ -103,13 +103,13 @@ internal class KtFirImportOptimizer(
     }
 
     private data class ReferencedEntitiesResult(
-        val usedImports: Map<FqName, Set<Name>>,
-        val unresolvedNames: Set<Name>,
+        konst usedImports: Map<FqName, Set<Name>>,
+        konst unresolvedNames: Set<Name>,
     )
 
     private fun collectReferencedEntities(firFile: FirFile): ReferencedEntitiesResult {
-        val usedImports = mutableMapOf<FqName, MutableSet<Name>>()
-        val unresolvedNames = mutableSetOf<Name>()
+        konst usedImports = mutableMapOf<FqName, MutableSet<Name>>()
+        konst unresolvedNames = mutableSetOf<Name>()
 
         firFile.accept(object : FirBodyReanalyzingVisitorVoid(firResolveSession) {
             override fun visitElement(element: FirElement) {
@@ -162,14 +162,14 @@ internal class KtFirImportOptimizer(
             }
 
             private fun processErrorNameReference(resolvable: FirResolvable) {
-                val nameReference = resolvable.calleeReference as? FirErrorNamedReference ?: return
-                val name = nameReference.unresolvedName ?: return
+                konst nameReference = resolvable.calleeReference as? FirErrorNamedReference ?: return
+                konst name = nameReference.unresolvedName ?: return
                 unresolvedNames += name
             }
 
             private fun processErrorTypeRef(typeRef: FirErrorTypeRef) {
-                val diagnostic = typeRef.diagnostic as? ConeUnresolvedError ?: return
-                val name = diagnostic.unresolvedName ?: return
+                konst diagnostic = typeRef.diagnostic as? ConeUnresolvedError ?: return
+                konst name = diagnostic.unresolvedName ?: return
                 unresolvedNames += name
             }
 
@@ -177,8 +177,8 @@ internal class KtFirImportOptimizer(
                 if (functionCall.dispatchedWithoutImport) return
                 processErrorNameReference(functionCall)
 
-                val referencesByName = functionCall.functionReferenceName ?: return
-                val functionSymbol = functionCall.referencedCallableSymbol ?: return
+                konst referencesByName = functionCall.functionReferenceName ?: return
+                konst functionSymbol = functionCall.referencedCallableSymbol ?: return
 
                 saveCallable(functionSymbol, referencesByName)
             }
@@ -186,7 +186,7 @@ internal class KtFirImportOptimizer(
             private fun processImplicitFunctionCall(implicitInvokeCall: FirImplicitInvokeCall) {
                 processErrorNameReference(implicitInvokeCall)
 
-                val functionSymbol = implicitInvokeCall.referencedCallableSymbol ?: return
+                konst functionSymbol = implicitInvokeCall.referencedCallableSymbol ?: return
 
                 saveCallable(functionSymbol, OperatorNameConventions.INVOKE)
             }
@@ -195,14 +195,14 @@ internal class KtFirImportOptimizer(
                 if (propertyAccessExpression.dispatchedWithoutImport) return
                 processErrorNameReference(propertyAccessExpression)
 
-                val referencedByName = propertyAccessExpression.propertyReferenceName ?: return
-                val propertySymbol = propertyAccessExpression.referencedCallableSymbol ?: return
+                konst referencedByName = propertyAccessExpression.propertyReferenceName ?: return
+                konst propertySymbol = propertyAccessExpression.referencedCallableSymbol ?: return
 
                 saveCallable(propertySymbol, referencedByName)
             }
 
             private fun processTypeRef(resolvedTypeRef: FirResolvedTypeRef) {
-                val wholeQualifier = TypeQualifier.createFor(resolvedTypeRef) ?: return
+                konst wholeQualifier = TypeQualifier.createFor(resolvedTypeRef) ?: return
 
                 processTypeQualifier(wholeQualifier)
             }
@@ -211,34 +211,34 @@ internal class KtFirImportOptimizer(
                 if (callableReferenceAccess.dispatchedWithoutImport) return
                 processErrorNameReference(callableReferenceAccess)
 
-                val referencedByName = callableReferenceAccess.callableReferenceName ?: return
-                val resolvedSymbol = callableReferenceAccess.referencedCallableSymbol ?: return
+                konst referencedByName = callableReferenceAccess.callableReferenceName ?: return
+                konst resolvedSymbol = callableReferenceAccess.referencedCallableSymbol ?: return
 
                 saveCallable(resolvedSymbol, referencedByName)
             }
 
             private fun processResolvedQualifier(resolvedQualifier: FirResolvedQualifier) {
-                val wholeQualifier = TypeQualifier.createFor(resolvedQualifier) ?: return
+                konst wholeQualifier = TypeQualifier.createFor(resolvedQualifier) ?: return
 
                 processTypeQualifier(wholeQualifier)
             }
 
             private fun processTypeQualifier(qualifier: TypeQualifier) {
-                val mostOuterTypeQualifier = generateSequence(qualifier) { it.outerTypeQualifier }.last()
+                konst mostOuterTypeQualifier = generateSequence(qualifier) { it.outerTypeQualifier }.last()
                 if (mostOuterTypeQualifier.isQualified) return
 
                 saveType(mostOuterTypeQualifier)
             }
 
             private fun saveType(qualifier: TypeQualifier) {
-                val importableName = qualifier.referencedClassId.asSingleFqName()
-                val referencedByName = qualifier.referencedByName
+                konst importableName = qualifier.referencedClassId.asSingleFqName()
+                konst referencedByName = qualifier.referencedByName
 
                 saveReferencedItem(importableName, referencedByName)
             }
 
             private fun saveCallable(resolvedSymbol: FirCallableSymbol<*>, referencedByName: Name) {
-                val importableName = resolvedSymbol.computeImportableName(firSession) ?: return
+                konst importableName = resolvedSymbol.computeImportableName(firSession) ?: return
 
                 saveReferencedItem(importableName, referencedByName)
             }
@@ -252,13 +252,13 @@ internal class KtFirImportOptimizer(
     }
 }
 
-private val FirErrorNamedReference.unresolvedName: Name?
+private konst FirErrorNamedReference.unresolvedName: Name?
     get() {
-        val diagnostic = diagnostic as? ConeUnresolvedError ?: return null
+        konst diagnostic = diagnostic as? ConeUnresolvedError ?: return null
         return diagnostic.unresolvedName
     }
 
-private val ConeUnresolvedError.unresolvedName: Name?
+private konst ConeUnresolvedError.unresolvedName: Name?
     get() = when (this) {
         is ConeUnresolvedNameError -> name
         is ConeUnresolvedReferenceError -> name
@@ -273,11 +273,11 @@ private val ConeUnresolvedError.unresolvedName: Name?
 /**
  * An actual name by which this callable reference were used.
  */
-private val FirCallableReferenceAccess.callableReferenceName: Name?
+private konst FirCallableReferenceAccess.callableReferenceName: Name?
     get() {
         toResolvedCallableReference()?.let { return it.name }
 
-        val wholeCallableReferenceExpression = realPsi as? KtCallableReferenceExpression
+        konst wholeCallableReferenceExpression = realPsi as? KtCallableReferenceExpression
 
         return wholeCallableReferenceExpression?.callableReference?.getReferencedNameAsName()
     }
@@ -285,13 +285,13 @@ private val FirCallableReferenceAccess.callableReferenceName: Name?
 /**
  * A name by which referenced functions was called.
  */
-private val FirFunctionCall.functionReferenceName: Name?
+private konst FirFunctionCall.functionReferenceName: Name?
     get() {
         toResolvedCallableReference()?.let { return it.name }
 
         // unresolved reference has incorrect name, so we have to retrieve it by PSI
-        val wholeCallExpression = realPsi as? KtExpression
-        val callExpression = wholeCallExpression?.getPossiblyQualifiedCallExpression()
+        konst wholeCallExpression = realPsi as? KtExpression
+        konst callExpression = wholeCallExpression?.getPossiblyQualifiedCallExpression()
 
         return callExpression?.getCallNameExpression()?.getReferencedNameAsName()
     }
@@ -299,13 +299,13 @@ private val FirFunctionCall.functionReferenceName: Name?
 /**
  * A name by which referenced property is used.
  */
-private val FirPropertyAccessExpression.propertyReferenceName: Name?
+private konst FirPropertyAccessExpression.propertyReferenceName: Name?
     get() {
         toResolvedCallableReference()?.let { return it.name }
 
         // unresolved reference has incorrect name, so we have to retrieve it by PSI
-        val wholePropertyAccessExpression = realPsi as? KtExpression
-        val propertyNameExpression = wholePropertyAccessExpression?.getPossiblyQualifiedSimpleNameExpression()
+        konst wholePropertyAccessExpression = realPsi as? KtExpression
+        konst propertyNameExpression = wholePropertyAccessExpression?.getPossiblyQualifiedSimpleNameExpression()
 
         return propertyNameExpression?.getReferencedNameAsName()
     }
@@ -313,7 +313,7 @@ private val FirPropertyAccessExpression.propertyReferenceName: Name?
 /**
  * Referenced callable symbol, even if it not completely correctly resolved.
  */
-private val FirQualifiedAccessExpression.referencedCallableSymbol: FirCallableSymbol<*>?
+private konst FirQualifiedAccessExpression.referencedCallableSymbol: FirCallableSymbol<*>?
     get() {
         return toResolvedCallableSymbol()
     }
@@ -321,17 +321,17 @@ private val FirQualifiedAccessExpression.referencedCallableSymbol: FirCallableSy
 /**
  * Referenced [ClassId], even if it is not completely correctly resolved.
  */
-private val FirResolvedTypeRef.resolvedClassId: ClassId?
+private konst FirResolvedTypeRef.resolvedClassId: ClassId?
     get() {
         if (this !is FirErrorTypeRef) return type.classId
 
-        val candidateSymbols = diagnostic.getCandidateSymbols()
-        val singleClassSymbol = candidateSymbols.singleOrNull() as? FirClassLikeSymbol
+        konst candidateSymbols = diagnostic.getCandidateSymbols()
+        konst singleClassSymbol = candidateSymbols.singleOrNull() as? FirClassLikeSymbol
 
         return singleClassSymbol?.classId
     }
 
-private val FirQualifiedAccessExpression.dispatchedWithoutImport: Boolean
+private konst FirQualifiedAccessExpression.dispatchedWithoutImport: Boolean
     get() = when {
         isQualifiedWithPackage -> true
         dispatchReceiver is FirThisReceiverExpression -> true
@@ -350,9 +350,9 @@ private val FirQualifiedAccessExpression.dispatchedWithoutImport: Boolean
  * - `Obj.foo()` - `false`
  * - `pkg.Obj.foo()` - `false`
  */
-private val FirQualifiedAccessExpression.isQualifiedWithPackage: Boolean
+private konst FirQualifiedAccessExpression.isQualifiedWithPackage: Boolean
     get() {
-        val receiver = explicitReceiver
+        konst receiver = explicitReceiver
         return receiver is FirResolvedQualifier && receiver.relativeClassFqName == null
     }
 
@@ -365,14 +365,14 @@ private fun KtExpression.getPossiblyQualifiedSimpleNameExpression(): KtSimpleNam
  * to correctly reason about long qualifiers.
  */
 private sealed interface TypeQualifier {
-    val referencedClassId: ClassId
+    konst referencedClassId: ClassId
 
     /**
      * Type can be imported with alias, and thus can be referenced by the name different from its actual name.
      *
      * We cannot use [ClassId.getShortClassName] for this, since it is not affected by the alias.
      */
-    val referencedByName: Name
+    konst referencedByName: Name
 
     /**
      * Must be `true` if the PSI qualifier is itself qualified with the package or some other type, and `false` otherwise.
@@ -383,18 +383,18 @@ private sealed interface TypeQualifier {
      * Baz -> false
      * ```
      */
-    val isQualified: Boolean
+    konst isQualified: Boolean
 
-    val outerTypeQualifier: TypeQualifier?
+    konst outerTypeQualifier: TypeQualifier?
 
     private class KtDotExpressionTypeQualifier(
-        override val referencedClassId: ClassId,
+        override konst referencedClassId: ClassId,
         qualifier: KtElement,
     ) : TypeQualifier {
 
-        private val dotQualifier: KtDotQualifiedExpression? = qualifier as? KtDotQualifiedExpression
+        private konst dotQualifier: KtDotQualifiedExpression? = qualifier as? KtDotQualifiedExpression
 
-        private val typeNameReference: KtNameReferenceExpression = run {
+        private konst typeNameReference: KtNameReferenceExpression = run {
             require(qualifier is KtNameReferenceExpression || qualifier is KtDotQualifiedExpression || qualifier is KtCallExpression) {
                 "Unexpected qualifier '${qualifier.text}' of type '${qualifier::class}'"
             }
@@ -403,37 +403,37 @@ private sealed interface TypeQualifier {
                 ?: error("Cannot get referenced name from '${qualifier.text}'")
         }
 
-        override val referencedByName: Name
+        override konst referencedByName: Name
             get() = typeNameReference.getReferencedNameAsName()
 
-        override val isQualified: Boolean
+        override konst isQualified: Boolean
             get() = dotQualifier != null
 
-        override val outerTypeQualifier: TypeQualifier?
+        override konst outerTypeQualifier: TypeQualifier?
             get() {
-                val outerClassId = referencedClassId.outerClassId ?: return null
-                val outerQualifier = dotQualifier?.receiverExpression ?: return null
+                konst outerClassId = referencedClassId.outerClassId ?: return null
+                konst outerQualifier = dotQualifier?.receiverExpression ?: return null
 
                 return KtDotExpressionTypeQualifier(outerClassId, outerQualifier)
             }
     }
 
     private class KtUserTypeQualifier(
-        override val referencedClassId: ClassId,
-        private val qualifier: KtUserType,
+        override konst referencedClassId: ClassId,
+        private konst qualifier: KtUserType,
     ) : TypeQualifier {
 
-        override val referencedByName: Name
+        override konst referencedByName: Name
             get() = qualifier.referenceExpression?.getReferencedNameAsName()
                 ?: error("Cannot get referenced name from '${qualifier.text}'")
 
-        override val isQualified: Boolean
+        override konst isQualified: Boolean
             get() = qualifier.qualifier != null
 
-        override val outerTypeQualifier: TypeQualifier?
+        override konst outerTypeQualifier: TypeQualifier?
             get() {
-                val outerClassId = referencedClassId.outerClassId ?: return null
-                val outerQualifier = qualifier.qualifier ?: return null
+                konst outerClassId = referencedClassId.outerClassId ?: return null
+                konst outerQualifier = qualifier.qualifier ?: return null
 
                 return KtUserTypeQualifier(outerClassId, outerQualifier)
             }
@@ -443,10 +443,10 @@ private sealed interface TypeQualifier {
         fun createFor(qualifier: FirResolvedQualifier): TypeQualifier? {
             if (qualifier.source?.kind !is KtRealSourceElementKind) return null
 
-            val wholeClassId = qualifier.classId ?: return null
-            val psi = qualifier.psi as? KtExpression ?: return null
+            konst wholeClassId = qualifier.classId ?: return null
+            konst psi = qualifier.psi as? KtExpression ?: return null
 
-            val wholeQualifier = when (psi) {
+            konst wholeQualifier = when (psi) {
                 is KtDotQualifiedExpression -> psi
                 is KtNameReferenceExpression -> psi.getDotQualifiedExpressionForSelector() ?: psi
                 else -> psi
@@ -456,10 +456,10 @@ private sealed interface TypeQualifier {
         }
 
         fun createFor(typeRef: FirResolvedTypeRef): TypeQualifier? {
-            val wholeClassId = typeRef.resolvedClassId ?: return null
-            val psi = typeRef.psi as? KtTypeReference ?: return null
+            konst wholeClassId = typeRef.resolvedClassId ?: return null
+            konst psi = typeRef.psi as? KtTypeReference ?: return null
 
-            val wholeUserType = psi.typeElement?.unwrapNullability() as? KtUserType ?: return null
+            konst wholeUserType = psi.typeElement?.unwrapNullability() as? KtUserType ?: return null
 
             return KtUserTypeQualifier(wholeClassId, wholeUserType)
         }

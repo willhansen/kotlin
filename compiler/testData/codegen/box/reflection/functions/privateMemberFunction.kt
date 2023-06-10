@@ -12,7 +12,7 @@ class A {
 }
 
 fun box(): String {
-    val f = A::class.declaredFunctions.single() as KFunction<String>
+    konst f = A::class.declaredFunctions.single() as KFunction<String>
 
     try {
         f.call(A())

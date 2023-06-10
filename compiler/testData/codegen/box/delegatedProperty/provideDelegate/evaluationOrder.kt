@@ -15,7 +15,7 @@ operator fun String.provideDelegate(host: Any?, p: Any): String =
 operator fun String.getValue(receiver: Any?, p: Any): String =
         runLogged("get($this);") { this }
 
-val testO by runLogged("O;") { "O" }
+konst testO by runLogged("O;") { "O" }
 
 fun box(): String {
     return "OK"

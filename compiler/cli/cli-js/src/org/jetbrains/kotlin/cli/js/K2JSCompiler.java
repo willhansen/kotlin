@@ -137,7 +137,7 @@ public class K2JSCompiler extends CLICompiler<K2JSCompilerArguments> {
             }
             Arrays.sort(allSources);
 
-            Set<FqName> dirtyPackages = nonCompiledSources.values().stream().map(KtFile::getPackageFqName).collect(Collectors.toSet());
+            Set<FqName> dirtyPackages = nonCompiledSources.konstues().stream().map(KtFile::getPackageFqName).collect(Collectors.toSet());
             Map<FqName, byte[]> packageMetadata = new HashMap<>();
             for (Map.Entry<String, byte[]> e : incrementalDataProvider.getPackageMetadata().entrySet()) {
                 FqName name = new FqName(e.getKey());
@@ -383,7 +383,7 @@ public class K2JSCompiler extends CLICompiler<K2JSCompilerArguments> {
             }
         }
         catch (IOException e) {
-            log.report(ERROR, "IO error occurred validating source path:\n" + ExceptionUtil.getThrowableText(e), null);
+            log.report(ERROR, "IO error occurred konstidating source path:\n" + ExceptionUtil.getThrowableText(e), null);
         }
     }
 
@@ -460,7 +460,7 @@ public class K2JSCompiler extends CLICompiler<K2JSCompilerArguments> {
         ModuleKind moduleKind = moduleKindName != null ? moduleKindMap.get(moduleKindName) : ModuleKind.PLAIN;
         if (moduleKind == null) {
             messageCollector.report(
-                    ERROR, "Unknown module kind: " + moduleKindName + ". Valid values are: plain, amd, commonjs, umd", null
+                    ERROR, "Unknown module kind: " + moduleKindName + ". Valid konstues are: plain, amd, commonjs, umd", null
             );
             moduleKind = ModuleKind.PLAIN;
         }
@@ -491,7 +491,7 @@ public class K2JSCompiler extends CLICompiler<K2JSCompilerArguments> {
                                                              sourceMapContentEmbeddingMap.get(sourceMapEmbedContentString) :
                                                              SourceMapSourceEmbedding.INLINING;
         if (sourceMapContentEmbedding == null) {
-            String message = "Unknown source map source embedding mode: " + sourceMapEmbedContentString + ". Valid values are: " +
+            String message = "Unknown source map source embedding mode: " + sourceMapEmbedContentString + ". Valid konstues are: " +
                              StringUtil.join(sourceMapContentEmbeddingMap.keySet(), ", ");
             messageCollector.report(ERROR, message, null);
             sourceMapContentEmbedding = SourceMapSourceEmbedding.INLINING;

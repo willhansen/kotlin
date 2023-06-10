@@ -3,9 +3,9 @@
 // WITH_STDLIB
 
 open class A {
-    @JvmField public val publicField = "1";
-    @JvmField internal val internalField = "2";
-    @JvmField protected val protectedField = "34";
+    @JvmField public konst publicField = "1";
+    @JvmField internal konst internalField = "2";
+    @JvmField protected konst protectedField = "34";
 
     fun test(): String {
         return {

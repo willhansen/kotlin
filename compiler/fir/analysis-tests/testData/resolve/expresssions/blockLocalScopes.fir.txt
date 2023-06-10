@@ -13,13 +13,13 @@ FILE: blockLocalScopes.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val message: R|B| = R|/B.B|()
+        public final konst message: R|B| = R|/B.B|()
             public get(): R|B|
 
         public final fun foo(w: R|kotlin/Boolean|): R|kotlin/Unit| {
             when () {
                 R|<local>/w| ->  {
-                    lval message: R|kotlin/String| = String()
+                    lkonst message: R|kotlin/String| = String()
                     R|<local>/message|.R|kotlin/String.toString|()
                 }
                 else ->  {

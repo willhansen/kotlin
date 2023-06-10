@@ -8,9 +8,9 @@ fun box(): String {
     var sumInner = 0
     var sumOuter = 0
 
-    val range = 0..10
-    val skipInner = 5
-    val skipOuter = 8
+    konst range = 0..10
+    konst skipInner = 5
+    konst skipOuter = 8
 
 
     block@ for (i in range) {

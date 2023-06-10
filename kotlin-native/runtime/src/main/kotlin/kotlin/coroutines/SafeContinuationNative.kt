@@ -16,13 +16,13 @@ import kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
 @OptIn(FreezingIsDeprecated::class)
 internal actual class SafeContinuation<in T>
 internal actual constructor(
-        private val delegate: Continuation<T>,
+        private konst delegate: Continuation<T>,
         initialResult: Any?
 ) : Continuation<T> {
     @PublishedApi
     internal actual constructor(delegate: Continuation<T>) : this(delegate, UNDECIDED)
 
-    public actual override val context: CoroutineContext
+    public actual override konst context: CoroutineContext
         get() = delegate.context
 
     @Suppress("DEPRECATION")
@@ -30,9 +30,9 @@ internal actual constructor(
 
     public actual override fun resumeWith(result: Result<T>) {
         while (true) {
-            val cur = resultRef.value
+            konst cur = resultRef.konstue
             when {
-                cur === UNDECIDED -> if (resultRef.compareAndSet(UNDECIDED, result.value)) return
+                cur === UNDECIDED -> if (resultRef.compareAndSet(UNDECIDED, result.konstue)) return
                 cur === COROUTINE_SUSPENDED -> if (resultRef.compareAndSet(COROUTINE_SUSPENDED, RESUMED)) {
                     delegate.resumeWith(result)
                     return
@@ -44,10 +44,10 @@ internal actual constructor(
 
     @PublishedApi
     internal actual fun getOrThrow(): Any? {
-        var result = resultRef.value
+        var result = resultRef.konstue
         if (result === UNDECIDED) {
             if (resultRef.compareAndSet(UNDECIDED, COROUTINE_SUSPENDED)) return COROUTINE_SUSPENDED
-            result = resultRef.value
+            result = resultRef.konstue
         }
         return when {
             result === RESUMED -> COROUTINE_SUSPENDED // already called continuation, indicate COROUTINE_SUSPENDED upstream

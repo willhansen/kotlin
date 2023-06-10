@@ -1,10 +1,10 @@
-data class Box(val value: String)
+data class Box(konst konstue: String)
 
-val foo = Box("lol")
+konst foo = Box("lol")
 
 fun box(): String {
-    val property = ::foo
-    if (property.get() != Box("lol")) return "Fail value: ${property.get()}"
+    konst property = ::foo
+    if (property.get() != Box("lol")) return "Fail konstue: ${property.get()}"
     if (property.name != "foo") return "Fail name: ${property.name}"
     return "OK"
 }

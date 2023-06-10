@@ -10,7 +10,7 @@ FILE: simple.kt
         }
 
         public final fun bar(): R|kotlin/Unit| {
-            lval n: R|Owner.Nested| = R|/Owner.Nested.Nested|()
+            lkonst n: R|Owner.Nested| = R|/Owner.Nested.Nested|()
             R|<local>/n|.R|/Owner.Nested.baz|()
         }
 
@@ -25,7 +25,7 @@ FILE: simple.kt
             }
 
             public final fun gau(): R|kotlin/Unit| {
-                lval o: R|Owner| = R|/Owner.Owner|()
+                lkonst o: R|Owner| = R|/Owner.Owner|()
                 R|<local>/o|.R|/Owner.foo|()
             }
 
@@ -38,8 +38,8 @@ FILE: simple.kt
 
     }
     public final fun test(): R|kotlin/Unit| {
-        lval o: R|Owner| = R|/Owner.Owner|()
+        lkonst o: R|Owner| = R|/Owner.Owner|()
         R|<local>/o|.R|/Owner.foo|()
-        lval n: R|Owner.Nested| = Q|Owner|.R|/Owner.Nested.Nested|()
+        lkonst n: R|Owner.Nested| = Q|Owner|.R|/Owner.Nested.Nested|()
         R|<local>/n|.R|/Owner.Nested.baz|()
     }

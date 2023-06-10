@@ -15,7 +15,7 @@
 package test.lib
 
 var isFooCalled: Boolean = false
-val foo: (Int) -> Unit = { a: Int -> isFooCalled = true}
+konst foo: (Int) -> Unit = { a: Int -> isFooCalled = true}
 
 // FILE: KotlinClass.kt
 package overloadResolution

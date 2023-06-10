@@ -18,35 +18,35 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.getSuperClassOrAny
 
 class CliNoArgDeclarationChecker(
-    private val noArgAnnotationFqNames: List<String>,
+    private konst noArgAnnotationFqNames: List<String>,
     useIr: Boolean,
 ) : AbstractNoArgDeclarationChecker(useIr) {
     override fun getAnnotationFqNames(modifierListOwner: KtModifierListOwner?): List<String> = noArgAnnotationFqNames
 }
 
-abstract class AbstractNoArgDeclarationChecker(private val useIr: Boolean) : DeclarationChecker, AnnotationBasedExtension {
+abstract class AbstractNoArgDeclarationChecker(private konst useIr: Boolean) : DeclarationChecker, AnnotationBasedExtension {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is ClassDescriptor || declaration !is KtClass) return
         if (descriptor.kind != ClassKind.CLASS) return
         if (!descriptor.hasSpecialAnnotation(declaration)) return
 
         if (descriptor.isInner) {
-            val diagnostic = if (useIr) NOARG_ON_INNER_CLASS_ERROR else NOARG_ON_INNER_CLASS
+            konst diagnostic = if (useIr) NOARG_ON_INNER_CLASS_ERROR else NOARG_ON_INNER_CLASS
             context.trace.report(diagnostic.on(declaration.reportTarget))
         } else if (DescriptorUtils.isLocal(descriptor)) {
-            val diagnostic = if (useIr) NOARG_ON_LOCAL_CLASS_ERROR else NOARG_ON_LOCAL_CLASS
+            konst diagnostic = if (useIr) NOARG_ON_LOCAL_CLASS_ERROR else NOARG_ON_LOCAL_CLASS
             context.trace.report(diagnostic.on(declaration.reportTarget))
         }
 
-        val superClass = descriptor.getSuperClassOrAny()
+        konst superClass = descriptor.getSuperClassOrAny()
         if (superClass.constructors.none { it.isNoArgConstructor() } && !superClass.hasSpecialAnnotation(declaration)) {
             context.trace.report(NO_NOARG_CONSTRUCTOR_IN_SUPERCLASS.on(declaration.reportTarget))
         }
     }
 
-    private val KtClass.reportTarget: PsiElement
+    private konst KtClass.reportTarget: PsiElement
         get() = nameIdentifier ?: getClassOrInterfaceKeyword() ?: this
 
     private fun ConstructorDescriptor.isNoArgConstructor(): Boolean =
-        valueParameters.all(ValueParameterDescriptor::declaresDefaultValue)
+        konstueParameters.all(ValueParameterDescriptor::declaresDefaultValue)
 }

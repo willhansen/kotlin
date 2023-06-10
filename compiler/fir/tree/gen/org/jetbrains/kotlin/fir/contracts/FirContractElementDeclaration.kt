@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirContractElementDeclaration : FirPureAbstractElement(), FirElement {
-    abstract override val source: KtSourceElement?
-    abstract val effect: ConeContractDescriptionElement
+    abstract override konst source: KtSourceElement?
+    abstract konst effect: ConeContractDescriptionElement
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitContractElementDeclaration(this, data)
 

@@ -10,7 +10,7 @@ fun test1(s: SubInt, sWrong: SubIntWrong) {
     foo(s)
     foo(<!TYPE_MISMATCH!>sWrong<!>)
 
-    val a = "foo"
+    konst a = "foo"
     foo(<!TYPE_MISMATCH!>a<!>)
 
     a <!CAST_NEVER_SUCCEEDS!>as<!> (Int, String) -> String

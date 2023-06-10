@@ -13,17 +13,17 @@ import org.jetbrains.kotlin.spec.utils.GeneralConfiguration.SPEC_TESTDATA_PATH
 import org.jetbrains.kotlin.spec.utils.models.AbstractSpecTest
 import org.jetbrains.kotlin.spec.utils.parsers.CommonParser
 import org.jetbrains.kotlin.spec.utils.parsers.CommonPatterns.packagePattern
-import org.jetbrains.kotlin.spec.utils.validators.BlackBoxTestTypeValidator
-import org.jetbrains.kotlin.spec.utils.validators.SpecTestValidationException
+import org.jetbrains.kotlin.spec.utils.konstidators.BlackBoxTestTypeValidator
+import org.jetbrains.kotlin.spec.utils.konstidators.SpecTestValidationException
 import org.junit.Assert
 import java.io.File
 
 @OptIn(ObsoleteTestInfrastructure::class)
 abstract class AbstractBlackBoxCodegenTestSpec : AbstractBlackBoxCodegenTest() {
     companion object {
-        private const val CODEGEN_BOX_TESTDATA_PATH = "$SPEC_TESTDATA_PATH/codegen/box"
-        private const val HELPERS_PATH = "$CODEGEN_BOX_TESTDATA_PATH/helpers"
-        private const val HELPERS_PACKAGE_VARIABLE = "<!PACKAGE!>"
+        private const konst CODEGEN_BOX_TESTDATA_PATH = "$SPEC_TESTDATA_PATH/codegen/box"
+        private const konst HELPERS_PATH = "$CODEGEN_BOX_TESTDATA_PATH/helpers"
+        private const konst HELPERS_PACKAGE_VARIABLE = "<!PACKAGE!>"
     }
 
     private fun addPackageDirectiveToHelperFile(helperContent: String, packageName: String?) =
@@ -32,37 +32,37 @@ abstract class AbstractBlackBoxCodegenTestSpec : AbstractBlackBoxCodegenTest() {
     private fun includeHelpers(wholeFile: File, files: List<TestFile>, specTest: AbstractSpecTest): List<TestFile> {
         if (specTest.helpers == null) return files
 
-        val fileContent = FileUtil.loadFile(wholeFile, true)
-        val packageName = packagePattern.matcher(fileContent).let {
+        konst fileContent = FileUtil.loadFile(wholeFile, true)
+        konst packageName = packagePattern.matcher(fileContent).let {
             if (it.find()) it.group("packageName") else null
         }
 
         return files + specTest.helpers.map {
-            val filename = "$it.kt"
-            val helperContent = FileUtil.loadFile(File("$HELPERS_PATH/$filename"), true)
+            konst filename = "$it.kt"
+            konst helperContent = FileUtil.loadFile(File("$HELPERS_PATH/$filename"), true)
             TestFile(filename, addPackageDirectiveToHelperFile(helperContent, packageName))
         }
     }
 
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
-        val (specTest, testLinkedType) = CommonParser.parseSpecTest(
+        konst (specTest, testLinkedType) = CommonParser.parseSpecTest(
             wholeFile.canonicalPath,
             mapOf("main.kt" to FileUtil.loadFile(wholeFile, true))
         )
 
-        val validator = BlackBoxTestTypeValidator(wholeFile, specTest)
+        konst konstidator = BlackBoxTestTypeValidator(wholeFile, specTest)
 
         try {
-            validator.validatePathConsistency(testLinkedType)
+            konstidator.konstidatePathConsistency(testLinkedType)
         } catch (e: SpecTestValidationException) {
             Assert.fail(e.description)
         }
 
         println(specTest)
 
-        val filesWithHelpers = includeHelpers(wholeFile, files, specTest)
+        konst filesWithHelpers = includeHelpers(wholeFile, files, specTest)
 
-        val runTest = { super.doMultiFileTest(wholeFile, filesWithHelpers, specTest.unexpectedBehavior) }
+        konst runTest = { super.doMultiFileTest(wholeFile, filesWithHelpers, specTest.unexpectedBehavior) }
 
         if (specTest.exception == null) {
             runTest()

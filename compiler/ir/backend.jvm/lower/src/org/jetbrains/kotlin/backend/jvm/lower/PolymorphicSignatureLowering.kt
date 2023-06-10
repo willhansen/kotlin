@@ -24,13 +24,13 @@ import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.resolve.jvm.checkers.PolymorphicSignatureCallChecker
 
-internal val polymorphicSignaturePhase = makeIrFilePhase(
+internal konst polymorphicSignaturePhase = makeIrFilePhase(
     ::PolymorphicSignatureLowering,
     name = "PolymorphicSignature",
     description = "Replace polymorphic methods with fake ones according to types at the call site"
 )
 
-class PolymorphicSignatureLowering(val context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
+class PolymorphicSignatureLowering(konst context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
     override fun lower(irFile: IrFile) {
         if (context.state.languageVersionSettings.supportsFeature(LanguageFeature.PolymorphicSignature))
             irFile.transformChildrenVoid()
@@ -49,21 +49,21 @@ class PolymorphicSignatureLowering(val context: JvmBackendContext) : IrElementTr
         expression.transform(null) ?: super.visitCall(expression)
 
     private fun IrCall.transform(castReturnType: IrType?): IrCall? {
-        val function = symbol.owner as? IrSimpleFunction ?: return null
+        konst function = symbol.owner as? IrSimpleFunction ?: return null
         if (!function.hasAnnotation(PolymorphicSignatureCallChecker.polymorphicSignatureFqName))
             return null
-        assert(function.valueParameters.singleOrNull()?.varargElementType != null) {
+        assert(function.konstueParameters.singleOrNull()?.varargElementType != null) {
             "@PolymorphicSignature methods should only have a single vararg argument: ${dump()}"
         }
 
-        val values = (getValueArgument(0) as IrVararg?)?.elements?.map {
+        konst konstues = (getValueArgument(0) as IrVararg?)?.elements?.map {
             when (it) {
                 is IrExpression -> it
                 is IrSpreadElement -> it.expression // `*xs` acts as `xs` (for compatibility?)
                 else -> throw AssertionError("unknown IrVarargElement: $it")
             }
         } ?: listOf()
-        val fakeFunction = context.irFactory.buildFun {
+        konst fakeFunction = context.irFactory.buildFun {
             updateFrom(function)
             name = function.name
             origin = JvmLoweredDeclarationOrigin.POLYMORPHIC_SIGNATURE_INSTANTIATION
@@ -73,8 +73,8 @@ class PolymorphicSignatureLowering(val context: JvmBackendContext) : IrElementTr
             copyTypeParametersFrom(function)
             dispatchReceiverParameter = function.dispatchReceiverParameter
             extensionReceiverParameter = function.extensionReceiverParameter
-            for ((i, value) in values.withIndex()) {
-                addValueParameter("\$$i", value.type, JvmLoweredDeclarationOrigin.POLYMORPHIC_SIGNATURE_INSTANTIATION)
+            for ((i, konstue) in konstues.withIndex()) {
+                addValueParameter("\$$i", konstue.type, JvmLoweredDeclarationOrigin.POLYMORPHIC_SIGNATURE_INSTANTIATION)
             }
         }
         return IrCallImpl.fromSymbolOwner(
@@ -84,7 +84,7 @@ class PolymorphicSignatureLowering(val context: JvmBackendContext) : IrElementTr
             copyTypeArgumentsFrom(this@transform)
             dispatchReceiver = this@transform.dispatchReceiver
             extensionReceiver = this@transform.extensionReceiver
-            values.forEachIndexed(::putValueArgument)
+            konstues.forEachIndexed(::putValueArgument)
             transformChildrenVoid()
         }
     }

@@ -37,7 +37,7 @@ fun stringifyIntArray(array: Array<Int>) =
                 Array<Int>::get // $get$FUNCTION_REFERENCE$3
         )
 
-class N(val v: Int) : I {
+class N(konst v: Int) : I {
     override fun toString() = v.toString()
 }
 
@@ -45,7 +45,7 @@ class N(val v: Int) : I {
 fun <BazTP0, BazTP1> foo(p1: BazTP0, p2: BazTP1) {}
 
 fun <QuxTP> bar() {
-    val ref: KFunction2<QuxTP, QuxTP, Unit> = ::foo // $foo$FUNCTION_REFERENCE$4
+    konst ref: KFunction2<QuxTP, QuxTP, Unit> = ::foo // $foo$FUNCTION_REFERENCE$4
     println(ref)
 }
 
@@ -56,7 +56,7 @@ fun main() {
     bar<Int>()
     bar<String>()
 
-    val ref: KFunction2<Int, Int, Unit> = ::foo // $foo$FUNCTION_REFERENCE$5
+    konst ref: KFunction2<Int, Int, Unit> = ::foo // $foo$FUNCTION_REFERENCE$5
     println(ref)
 }
 

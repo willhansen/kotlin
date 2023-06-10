@@ -1,5 +1,5 @@
 class A {
-    inner class C(val m: String) {
+    inner class C(konst m: String) {
         fun test(): String {
             m.f(::C)
             return m

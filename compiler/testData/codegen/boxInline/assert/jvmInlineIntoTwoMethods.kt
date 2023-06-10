@@ -26,7 +26,7 @@ fun box(): String {
     var c = Dummy::class.java.classLoader.apply {
         setDefaultAssertionStatus(true)
     }.loadClass("Checker").newInstance() as Checker
-    val o = try { c.o() } catch (e: AssertionError) { e.message }
-    val k = try { c.k() } catch (e: AssertionError) { e.message }
+    konst o = try { c.o() } catch (e: AssertionError) { e.message }
+    konst k = try { c.k() } catch (e: AssertionError) { e.message }
     return o + k
 }

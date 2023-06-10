@@ -7,5 +7,5 @@ class X {
 }
 
 fun test(x: X?) {
-    val y = x?.foo() as Int
+    konst y = x?.foo() as Int
 }

@@ -7,10 +7,10 @@ class A(var a: Int) {
         return this * 3;
     }
 
-    fun eval() = a.modify();
+    fun ekonst() = a.modify();
 }
 
 fun box(): String {
-    val a = A(4)
-    return if (a.eval() == 12) "OK" else "fail"
+    konst a = A(4)
+    return if (a.ekonst() == 12) "OK" else "fail"
 }

@@ -17,13 +17,13 @@ import org.jetbrains.kotlin.resolve.constants.KClassValue
 import org.jetbrains.kotlin.types.TypeUtils
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
-class KtLightPsiClassObjectAccessExpression(override val kotlinOrigin: KtClassLiteralExpression, lightParent: PsiElement) :
+class KtLightPsiClassObjectAccessExpression(override konst kotlinOrigin: KtClassLiteralExpression, lightParent: PsiElement) :
     KtLightPsiLiteral(kotlinOrigin, lightParent), PsiClassObjectAccessExpression {
     override fun getType(): PsiType {
-        val bindingContext = LightClassGenerationSupport.getInstance(this.project).analyze(kotlinOrigin)
-        val (classId, arrayDimensions) = bindingContext[BindingContext.COMPILE_TIME_VALUE, kotlinOrigin]
-            ?.toConstantValue(TypeUtils.NO_EXPECTED_TYPE)?.safeAs<KClassValue>()?.value
-            ?.safeAs<KClassValue.Value.NormalClass>()?.value ?: return PsiType.VOID
+        konst bindingContext = LightClassGenerationSupport.getInstance(this.project).analyze(kotlinOrigin)
+        konst (classId, arrayDimensions) = bindingContext[BindingContext.COMPILE_TIME_VALUE, kotlinOrigin]
+            ?.toConstantValue(TypeUtils.NO_EXPECTED_TYPE)?.safeAs<KClassValue>()?.konstue
+            ?.safeAs<KClassValue.Value.NormalClass>()?.konstue ?: return PsiType.VOID
         var type = psiType(classId.asSingleFqName().asString(), kotlinOrigin, boxPrimitiveType = arrayDimensions > 0)
         repeat(arrayDimensions) {
             type = type.createArrayType()

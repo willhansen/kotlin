@@ -2,7 +2,7 @@
 abstract class KotlinClass : JavaClass(), KotlinInterface, JavaInterface {
     override fun getSomething1(): Int = 1
     override fun getSomething3(): String = ""
-    override fun setSomething4(value: String) {}
+    override fun setSomething4(konstue: String) {}
     override fun getSomething5(): String = ""
 }
 
@@ -45,8 +45,8 @@ public class JavaClass {
 // FILE: JavaInterface.java
 public interface JavaInterface {
     String getSomething4();
-    void setSomething4(String value);
+    void setSomething4(String konstue);
 
     Object getSomething5();
-    void setSomething5(Object value);
+    void setSomething5(Object konstue);
 }

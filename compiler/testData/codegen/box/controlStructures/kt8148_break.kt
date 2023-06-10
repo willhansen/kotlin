@@ -1,8 +1,8 @@
 
-class A(var value: String)
+class A(var konstue: String)
 
 fun box(): String {
-    val a = A("start")
+    konst a = A("start")
 
     try {
         test(a)
@@ -10,7 +10,7 @@ fun box(): String {
 
     }
 
-    if (a.value != "start, try, finally1, finally2") return "fail: ${a.value}"
+    if (a.konstue != "start, try, finally1, finally2") return "fail: ${a.konstue}"
 
     return "OK"
 }
@@ -19,15 +19,15 @@ fun test(a: A) : String {
     while (true) {
         try {
             try {
-                a.value += ", try"
+                a.konstue += ", try"
                 break
             }
             finally {
-                a.value += ", finally1"
+                a.konstue += ", finally1"
             }
         }
         finally {
-            a.value += ", finally2"
+            a.konstue += ", finally2"
             throw RuntimeException("fail")
         }
     }

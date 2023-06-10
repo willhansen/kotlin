@@ -18,13 +18,13 @@ open class B : A() {
     inline operator fun String.getValue(thisRef: Any?, property: KProperty<*>): String =
         property.name
 
-    inline operator fun String.setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+    inline operator fun String.setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
         result = this + property.name
     }
 }
 
 class C : B() {
-    val O by 1
+    konst O by 1
     var K by O
 }
 

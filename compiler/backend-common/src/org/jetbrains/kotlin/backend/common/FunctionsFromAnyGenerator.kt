@@ -16,11 +16,11 @@ import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.BindingContextUtils
 
-abstract class FunctionsFromAnyGenerator(protected val declaration: KtClassOrObject, protected val bindingContext: BindingContext) {
-    protected val classDescriptor: ClassDescriptor = BindingContextUtils.getNotNull(bindingContext, BindingContext.CLASS, declaration)
+abstract class FunctionsFromAnyGenerator(protected konst declaration: KtClassOrObject, protected konst bindingContext: BindingContext) {
+    protected konst classDescriptor: ClassDescriptor = BindingContextUtils.getNotNull(bindingContext, BindingContext.CLASS, declaration)
 
     open fun generate() {
-        val properties = primaryConstructorProperties
+        konst properties = primaryConstructorProperties
         generateToStringIfNeeded(properties)
         generateHashCodeIfNeeded(properties)
         generateEqualsIfNeeded(properties)
@@ -33,7 +33,7 @@ abstract class FunctionsFromAnyGenerator(protected val declaration: KtClassOrObj
     protected abstract fun generateEqualsMethod(function: FunctionDescriptor, properties: List<PropertyDescriptor>)
 
     private fun generateToStringIfNeeded(properties: List<PropertyDescriptor>) {
-        val function = CodegenUtil.getMemberToGenerate(
+        konst function = CodegenUtil.getMemberToGenerate(
             classDescriptor, "toString",
             KotlinBuiltIns::isString, List<ValueParameterDescriptor>::isEmpty
         ) ?: return
@@ -41,7 +41,7 @@ abstract class FunctionsFromAnyGenerator(protected val declaration: KtClassOrObj
     }
 
     private fun generateHashCodeIfNeeded(properties: List<PropertyDescriptor>) {
-        val function = CodegenUtil.getMemberToGenerate(
+        konst function = CodegenUtil.getMemberToGenerate(
             classDescriptor, "hashCode",
             KotlinBuiltIns::isInt, List<ValueParameterDescriptor>::isEmpty
         ) ?: return
@@ -49,7 +49,7 @@ abstract class FunctionsFromAnyGenerator(protected val declaration: KtClassOrObj
     }
 
     private fun generateEqualsIfNeeded(properties: List<PropertyDescriptor>) {
-        val function = CodegenUtil.getMemberToGenerate(
+        konst function = CodegenUtil.getMemberToGenerate(
             classDescriptor, "equals",
             KotlinBuiltIns::isBoolean
         ) { parameters ->
@@ -58,11 +58,11 @@ abstract class FunctionsFromAnyGenerator(protected val declaration: KtClassOrObj
         generateEqualsMethod(function, properties)
     }
 
-    protected val primaryConstructorProperties: List<PropertyDescriptor>
+    protected konst primaryConstructorProperties: List<PropertyDescriptor>
         get() = primaryConstructorParameters
             .filter { it.hasValOrVar() }
             .map { bindingContext.get(BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, it)!! }
 
-    protected val primaryConstructorParameters: List<KtParameter>
+    protected konst primaryConstructorParameters: List<KtParameter>
         get() = (declaration as? KtClass)?.primaryConstructorParameters.orEmpty()
 }

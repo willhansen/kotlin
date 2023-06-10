@@ -5,7 +5,7 @@ private fun </*0*/ T> lazy(/*0*/ init: () -> T): [ERROR : kotlin.Lazy<T>]<T>
 
 public object DefaultFqHttpClient : HttpClient {
     private constructor DefaultFqHttpClient()
-    public final val client: HttpClientImpl
+    public final konst client: HttpClientImpl
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -13,7 +13,7 @@ public object DefaultFqHttpClient : HttpClient {
 
 public object DefaultHttpClient : HttpClient {
     private constructor DefaultHttpClient()
-    public final val client: HttpClientImpl
+    public final konst client: HttpClientImpl
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -21,7 +21,7 @@ public object DefaultHttpClient : HttpClient {
 
 public object DefaultHttpClientWithBy : HttpClient {
     private constructor DefaultHttpClientWithBy()
-    public final val client: [ERROR : <ERROR FUNCTION RETURN TYPE>]
+    public final konst client: [ERROR : <ERROR FUNCTION RETURN TYPE>]
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -36,7 +36,7 @@ public object DefaultHttpClientWithFun : HttpClient {
 
 public object DefaultHttpClientWithGetter : HttpClient {
     private constructor DefaultHttpClientWithGetter()
-    public final val client: HttpClientImpl
+    public final konst client: HttpClientImpl
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

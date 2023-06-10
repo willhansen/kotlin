@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class IrErrorDeclarationImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
-    private val _descriptor: DeclarationDescriptor?,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
+    private konst _descriptor: DeclarationDescriptor?,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrErrorDeclaration() {
-    override val descriptor: DeclarationDescriptor
+    override konst descriptor: DeclarationDescriptor
         get() = _descriptor ?: this.toIrBasedDescriptor()
 
     override var origin: IrDeclarationOrigin = IrDeclarationOrigin.DEFINED

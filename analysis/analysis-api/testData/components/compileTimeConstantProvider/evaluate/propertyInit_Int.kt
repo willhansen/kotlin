@@ -1,1 +1,1 @@
-val p : Int = <expr>42</expr>
+konst p : Int = <expr>42</expr>

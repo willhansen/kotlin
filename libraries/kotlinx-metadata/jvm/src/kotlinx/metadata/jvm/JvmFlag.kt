@@ -28,7 +28,7 @@ object JvmFlag {
          * Has no effect if the property is not declared in a companion object of some interface.
          */
         @JvmField
-        val IS_MOVED_FROM_INTERFACE_COMPANION = booleanFlag(JF.IS_MOVED_FROM_INTERFACE_COMPANION)
+        konst IS_MOVED_FROM_INTERFACE_COMPANION = booleanFlag(JF.IS_MOVED_FROM_INTERFACE_COMPANION)
     }
 
     /**
@@ -43,7 +43,7 @@ object JvmFlag {
          * class.
          */
         @JvmField
-        val HAS_METHOD_BODIES_IN_INTERFACE = booleanFlag(JF.IS_COMPILED_IN_JVM_DEFAULT_MODE)
+        konst HAS_METHOD_BODIES_IN_INTERFACE = booleanFlag(JF.IS_COMPILED_IN_JVM_DEFAULT_MODE)
 
         /**
          * Applied to an interface compiled with -Xjvm-default=all-compatibility.
@@ -53,7 +53,7 @@ object JvmFlag {
          * clients compiled without all-compatibility.
          */
         @JvmField
-        val IS_COMPILED_IN_COMPATIBILITY_MODE = booleanFlag(JF.IS_COMPILED_IN_COMPATIBILITY_MODE)
+        konst IS_COMPILED_IN_COMPATIBILITY_MODE = booleanFlag(JF.IS_COMPILED_IN_COMPATIBILITY_MODE)
     }
 
     private fun booleanFlag(f: F.BooleanFlagField): Flag =

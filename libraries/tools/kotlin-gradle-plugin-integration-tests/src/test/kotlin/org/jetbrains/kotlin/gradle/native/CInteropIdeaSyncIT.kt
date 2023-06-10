@@ -15,13 +15,13 @@ import kotlin.io.path.writeText
 @NativeGradlePluginTests
 class CInteropIdeaSyncIT : KGPBaseTest() {
 
-    private val ideaSyncBuildOptions = defaultBuildOptions.copy(freeArgs = listOf("-Didea.sync.active=true"))
+    private konst ideaSyncBuildOptions = defaultBuildOptions.copy(freeArgs = listOf("-Didea.sync.active=true"))
 
     @DisplayName("Idea sync warning failing cinterop warning")
     @GradleTest
     fun shouldPrintWarningForCInteroperability(gradleVersion: GradleVersion) {
-        val ideaSyncWarningMessage = "Warning: Failed to generate cinterop for :cinteropSampleInteropNative"
-        val interopTaskName = ":cinteropSampleInteropNative"
+        konst ideaSyncWarningMessage = "Warning: Failed to generate cinterop for :cinteropSampleInteropNative"
+        konst interopTaskName = ":cinteropSampleInteropNative"
 
         nativeProject("cinterop-failing", gradleVersion) {
             /* Task still fails on 'normal' builds */

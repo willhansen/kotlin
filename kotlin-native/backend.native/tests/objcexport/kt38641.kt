@@ -7,7 +7,7 @@ class KT38641 {
     }
 
     class Val {
-        val description = "val"
+        konst description = "konst"
     }
 
     class Var {
@@ -15,12 +15,12 @@ class KT38641 {
     }
 
     class TwoProperties {
-        val description = "description"
-        val description_ = "description_"
+        konst description = "description"
+        konst description_ = "description_"
     }
 
     abstract class OverrideVal {
-        abstract val description: String
+        abstract konst description: String
     }
 
     interface OverrideVar {

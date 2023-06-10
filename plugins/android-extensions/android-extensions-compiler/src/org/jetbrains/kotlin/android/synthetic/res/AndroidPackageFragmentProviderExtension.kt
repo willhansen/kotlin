@@ -42,10 +42,10 @@ abstract class AndroidPackageFragmentProviderExtension : PackageFragmentProvider
 
     protected abstract fun isExperimental(moduleInfo: ModuleInfo?): Boolean
 
-    protected open fun <T : Any> createLazyValue(value: () -> T): () -> T {
+    protected open fun <T : Any> createLazyValue(konstue: () -> T): () -> T {
         // The default (CLI) implementation is not lazy
-        val evaluatedValue = value()
-        return { evaluatedValue }
+        konst ekonstuatedValue = konstue()
+        return { ekonstuatedValue }
     }
 
     override fun getPackageFragmentProvider(
@@ -56,25 +56,25 @@ abstract class AndroidPackageFragmentProviderExtension : PackageFragmentProvider
             moduleInfo: ModuleInfo?,
             lookupTracker: LookupTracker
     ): PackageFragmentProvider? {
-        val isExperimental = isExperimental(moduleInfo)
+        konst isExperimental = isExperimental(moduleInfo)
 
-        val layoutXmlFileManager = getLayoutXmlFileManager(project, moduleInfo) ?: return null
+        konst layoutXmlFileManager = getLayoutXmlFileManager(project, moduleInfo) ?: return null
 
-        val moduleData = layoutXmlFileManager.getModuleData()
+        konst moduleData = layoutXmlFileManager.getModuleData()
 
-        val lazyContext = LazySyntheticElementResolveContext(module, storageManager)
+        konst lazyContext = LazySyntheticElementResolveContext(module, storageManager)
 
-        val packages = mutableMapOf<FqName, () -> PackageFragmentDescriptor>()
-        val packagesToLookupInCompletion = mutableListOf<LazyAndroidExtensionsPackageFragmentDescriptor>()
+        konst packages = mutableMapOf<FqName, () -> PackageFragmentDescriptor>()
+        konst packagesToLookupInCompletion = mutableListOf<LazyAndroidExtensionsPackageFragmentDescriptor>()
 
         // Packages with synthetic properties
         for (variantData in moduleData.variants) {
             for ((layoutName, layouts) in variantData.layouts) {
                 fun createPackageFragment(fqNameString: String, forView: Boolean, isDeprecated: Boolean = false) {
-                    val fqName = FqName(fqNameString)
+                    konst fqName = FqName(fqNameString)
 
-                    val lazyPackageDescriptor = createLazyValue {
-                        val packageData = AndroidSyntheticPackageData(moduleData, forView, isDeprecated) {
+                    konst lazyPackageDescriptor = createLazyValue {
+                        konst packageData = AndroidSyntheticPackageData(moduleData, forView, isDeprecated) {
                             layoutXmlFileManager.extractResources(AndroidLayoutGroupData(layoutName, layouts), module)
                         }
 
@@ -87,7 +87,7 @@ abstract class AndroidPackageFragmentProviderExtension : PackageFragmentProvider
                     packagesToLookupInCompletion += LazyAndroidExtensionsPackageFragmentDescriptor(lazyPackageDescriptor, isDeprecated)
                 }
 
-                val packageFqName = AndroidConst.SYNTHETIC_PACKAGE + '.' + variantData.variant.name + '.' + layoutName
+                konst packageFqName = AndroidConst.SYNTHETIC_PACKAGE + '.' + variantData.variant.name + '.' + layoutName
 
                 createPackageFragment(packageFqName, false)
                 createPackageFragment(packageFqName + ".view", true)
@@ -96,14 +96,14 @@ abstract class AndroidPackageFragmentProviderExtension : PackageFragmentProvider
 
         // Empty middle packages
         AndroidConst.SYNTHETIC_SUBPACKAGES.forEachUntilLast { fqNameString ->
-            val fqName = FqName(fqNameString)
+            konst fqName = FqName(fqNameString)
             packages[fqName] = createLazyValue {
                 PredefinedPackageFragmentDescriptor(fqName, module, storageManager)
             }
         }
 
         for (variantData in moduleData.variants) {
-            val fqName = FqName(AndroidConst.SYNTHETIC_PACKAGE + '.' + variantData.variant.name)
+            konst fqName = FqName(AndroidConst.SYNTHETIC_PACKAGE + '.' + variantData.variant.name)
             packages[fqName] = createLazyValue {
                 PredefinedPackageFragmentDescriptor(fqName, module, storageManager)
             }
@@ -111,10 +111,10 @@ abstract class AndroidPackageFragmentProviderExtension : PackageFragmentProvider
 
         // Package with clearFindViewByIdCache()
         AndroidConst.SYNTHETIC_SUBPACKAGES.last().let { fqNameString ->
-            val fqName = FqName(fqNameString)
-            val lazyPackageDescriptor = createLazyValue {
+            konst fqName = FqName(fqNameString)
+            konst lazyPackageDescriptor = createLazyValue {
                 PredefinedPackageFragmentDescriptor(fqName, module, storageManager, packagesToLookupInCompletion) { descriptor ->
-                    val widgetReceivers = lazyContext().getWidgetReceivers(forView = false, isExperimental = isExperimental) +
+                    konst widgetReceivers = lazyContext().getWidgetReceivers(forView = false, isExperimental = isExperimental) +
                             lazyContext().getWidgetReceivers(forView = true, isExperimental = isExperimental)
 
                     widgetReceivers
@@ -132,7 +132,7 @@ abstract class AndroidPackageFragmentProviderExtension : PackageFragmentProvider
 }
 
 class AndroidSyntheticPackageFragmentProvider(
-    val packages: Map<FqName, () -> PackageFragmentDescriptor>
+    konst packages: Map<FqName, () -> PackageFragmentDescriptor>
 ) : PackageFragmentProviderOptimized {
     override fun collectPackageFragments(fqName: FqName, packageFragments: MutableCollection<PackageFragmentDescriptor>) =
         packageFragments.addIfNotNull(packages[fqName]?.invoke())

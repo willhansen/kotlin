@@ -17,9 +17,9 @@ import test.*
 
 fun box(): String {
 
-    val z = 1;
+    konst z = 1;
 
-    val p = z[2, 3]
+    konst p = z[2, 3]
     if (p != 6) return "fail 1: $p"
 
     z[2, 3] = p

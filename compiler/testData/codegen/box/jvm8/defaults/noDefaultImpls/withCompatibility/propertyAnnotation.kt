@@ -10,13 +10,13 @@ annotation class MyAnn
 @JvmDefaultWithCompatibility
 interface Test {
     @MyAnn
-    val prop: String
+    konst prop: String
         get() = "OK"
 }
 
 class TestClass : Test
 
 fun box(): String {
-    val testClass = TestClass()
+    konst testClass = TestClass()
     return testClass.prop
 }

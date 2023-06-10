@@ -25,7 +25,7 @@ internal object LLFirSealedClassInheritorsLazyResolver : LLFirLazyResolver(FirRe
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirSealedClassInheritorsDesignatedResolver(target, lockProvider)
+        konst resolver = LLFirSealedClassInheritorsDesignatedResolver(target, lockProvider)
         resolver.resolveDesignation()
     }
 

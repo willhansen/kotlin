@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.ir.util.properties
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-class PrimitiveCompanionLowering(val context: JsIrBackendContext) : BodyLoweringPass {
+class PrimitiveCompanionLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
 
     private fun getActualPrimitiveCompanion(irClass: IrClass): IrClass? {
         if (!irClass.isCompanion)
             return null
 
-        val parent = irClass.parent as IrClass
+        konst parent = irClass.parent as IrClass
         if (!parent.defaultType.isPrimitiveType() && !parent.defaultType.isString())
             return null
 
@@ -37,13 +37,13 @@ class PrimitiveCompanionLowering(val context: JsIrBackendContext) : BodyLowering
     }
 
     private fun getActualPrimitiveCompanionPropertyAccessor(function: IrSimpleFunction): IrSimpleFunction? {
-        val property = function.correspondingPropertySymbol?.owner
+        konst property = function.correspondingPropertySymbol?.owner
             ?: return null
 
-        val companion = property.parent as? IrClass
+        konst companion = property.parent as? IrClass
             ?: return null
 
-        val actualCompanion = getActualPrimitiveCompanion(companion)
+        konst actualCompanion = getActualPrimitiveCompanion(companion)
             ?: return null
 
         for (p in actualCompanion.properties) {
@@ -59,8 +59,8 @@ class PrimitiveCompanionLowering(val context: JsIrBackendContext) : BodyLowering
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitGetObjectValue(expression: IrGetObjectValue): IrExpression {
-                val irClass = expression.symbol.owner
-                val actualCompanion = getActualPrimitiveCompanion(irClass) ?: return expression
+                konst irClass = expression.symbol.owner
+                konst actualCompanion = getActualPrimitiveCompanion(irClass) ?: return expression
                 return IrGetObjectValueImpl(
                     expression.startOffset,
                     expression.endOffset,
@@ -70,9 +70,9 @@ class PrimitiveCompanionLowering(val context: JsIrBackendContext) : BodyLowering
             }
 
             override fun visitCall(expression: IrCall): IrExpression {
-                val newCall = super.visitCall(expression) as IrCall
+                konst newCall = super.visitCall(expression) as IrCall
 
-                val actualFunction = getActualPrimitiveCompanionPropertyAccessor(expression.symbol.owner)
+                konst actualFunction = getActualPrimitiveCompanionPropertyAccessor(expression.symbol.owner)
                     ?: return newCall
 
                 return irCall(newCall, actualFunction)

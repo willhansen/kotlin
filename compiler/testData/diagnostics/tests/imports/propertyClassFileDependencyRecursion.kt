@@ -8,11 +8,11 @@ import other.prop
 class PropType: <!UNRESOLVED_REFERENCE!>prop<!>
 
 // Note: this time "prop" should be resolved and type should be inferred for "checkTypeProp"
-val checkTypeProp = prop
+konst checkTypeProp = prop
 
 // FILE: propertyClassFileDependencyRecursionOther.kt
 package other
 
 import test.PropType
 
-val prop: PropType? = null
+konst prop: PropType? = null

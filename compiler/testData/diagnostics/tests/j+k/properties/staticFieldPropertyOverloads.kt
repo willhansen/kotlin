@@ -8,7 +8,7 @@ public class JClass {
 }
 // FILE: a.kt
 package b
-val foo = 42
+konst foo = 42
 
 // FILE: b.kt
 

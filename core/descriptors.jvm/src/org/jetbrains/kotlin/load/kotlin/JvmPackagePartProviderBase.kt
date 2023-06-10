@@ -14,21 +14,21 @@ import org.jetbrains.kotlin.serialization.deserialization.DeserializationConfigu
 
 abstract class JvmPackagePartProviderBase<MappingsKey> : PackageAndMetadataPartProvider {
 
-    protected data class ModuleMappingInfo<MappingsKey>(val key: MappingsKey, val mapping: ModuleMapping, val name: String)
+    protected data class ModuleMappingInfo<MappingsKey>(konst key: MappingsKey, konst mapping: ModuleMapping, konst name: String)
 
-    protected abstract val loadedModules: MutableList<ModuleMappingInfo<MappingsKey>>
+    protected abstract konst loadedModules: MutableList<ModuleMappingInfo<MappingsKey>>
 
-    abstract val deserializationConfiguration : DeserializationConfiguration
+    abstract konst deserializationConfiguration : DeserializationConfiguration
 
     override fun findPackageParts(packageFqName: String): List<String> {
-        val rootToPackageParts: Collection<PackageParts> = getPackageParts(packageFqName)
+        konst rootToPackageParts: Collection<PackageParts> = getPackageParts(packageFqName)
         if (rootToPackageParts.isEmpty()) return emptyList()
 
-        val result = linkedSetOf<String>()
-        val visitedMultifileFacades = linkedSetOf<String>()
+        konst result = linkedSetOf<String>()
+        konst visitedMultifileFacades = linkedSetOf<String>()
         for (packageParts in rootToPackageParts) {
             for (name in packageParts.parts) {
-                val facadeName = packageParts.getMultifileFacadeName(name)
+                konst facadeName = packageParts.getMultifileFacadeName(name)
                 if (facadeName == null || facadeName !in visitedMultifileFacades) {
                     result.add(name)
                 }
@@ -38,7 +38,7 @@ abstract class JvmPackagePartProviderBase<MappingsKey> : PackageAndMetadataPartP
         return result.toList()
     }
 
-    private val allPackageNames: Set<String> by lazy {
+    private konst allPackageNames: Set<String> by lazy {
         loadedModules.flatMapTo(mutableSetOf()) { it.mapping.packageFqName2Parts.keys }
     }
 
@@ -47,12 +47,12 @@ abstract class JvmPackagePartProviderBase<MappingsKey> : PackageAndMetadataPartP
         getPackageParts(packageFqName).flatMap(PackageParts::metadataParts).distinct()
 
     private fun getPackageParts(packageFqName: String): Collection<PackageParts> {
-        val result = mutableMapOf<MappingsKey, PackageParts>()
+        konst result = mutableMapOf<MappingsKey, PackageParts>()
         for ((root, mapping) in loadedModules) {
-            val newParts = mapping.findPackageParts(packageFqName) ?: continue
+            konst newParts = mapping.findPackageParts(packageFqName) ?: continue
             result[root]?.let { parts -> parts += newParts } ?: result.put(root, newParts)
         }
-        return result.values
+        return result.konstues
     }
 
     override fun getAnnotationsOnBinaryModule(moduleName: String): List<ClassId> {
@@ -73,7 +73,7 @@ abstract class JvmPackagePartProviderBase<MappingsKey> : PackageAndMetadataPartP
 
     companion object {
         fun getAllOptionalAnnotationClasses(module: ModuleMapping): List<ClassData> {
-            val data = module.moduleData
+            konst data = module.moduleData
             return data.optionalAnnotations.map { proto ->
                 ClassData(data.nameResolver, proto, module.version, SourceElement.NO_SOURCE)
             }

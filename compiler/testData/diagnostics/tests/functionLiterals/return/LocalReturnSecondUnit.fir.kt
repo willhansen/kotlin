@@ -1,6 +1,6 @@
-val flag = true
+konst flag = true
 
-val a = b@ {
+konst a = b@ {
     if (flag) return@b 4
     return@b
 }

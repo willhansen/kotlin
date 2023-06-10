@@ -56,10 +56,10 @@ class FirErrorPropertyBuilder : FirAnnotationContainerBuilder {
     var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     var containerSource: DeserializedContainerSource? = null
     var dispatchReceiverType: ConeSimpleKotlinType? = null
-    val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
     lateinit var name: Name
     var backingField: FirBackingField? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var diagnostic: ConeDiagnostic
     lateinit var symbol: FirErrorPropertySymbol
 

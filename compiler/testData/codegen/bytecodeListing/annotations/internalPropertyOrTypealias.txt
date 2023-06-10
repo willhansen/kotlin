@@ -1,6 +1,6 @@
 @kotlin.annotation.Target(allowedTargets=[PROPERTY, TYPEALIAS])
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Target(value=[])
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Target(konstue=[])
 @kotlin.Metadata
 public annotation class Anno {
     // source: 'internalPropertyOrTypealias.kt'

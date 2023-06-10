@@ -5,4 +5,4 @@
 
 package kotlinx.metadata.klib
 
-class UniqId(val index: Long)
+class UniqId(konst index: Long)

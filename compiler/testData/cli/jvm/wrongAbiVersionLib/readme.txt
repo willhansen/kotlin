@@ -7,7 +7,7 @@ To regenerate this test:
     cd compiler/testData/cli/jvm/wrongAbiVersionLib
     ../../../../../dist/kotlinc/bin/kotlinc -d bin src/*
 
-  4. Change JvmAbi.VERSION back to its old value
+  4. Change JvmAbi.VERSION back to its old konstue
   5. Run 'ant dist'
 After these steps, the test should succeed
 */

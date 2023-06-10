@@ -9,7 +9,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = A
         symbol = <constructor>(): A
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = null
     typeArgumentsMapping = {}
     argumentMapping = {}

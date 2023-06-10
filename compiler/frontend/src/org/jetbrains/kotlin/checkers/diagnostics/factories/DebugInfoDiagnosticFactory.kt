@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowValueFactory
 
 interface DebugInfoDiagnosticFactory {
-    val withExplicitDefinitionOnly: Boolean
+    konst withExplicitDefinitionOnly: Boolean
 
     fun createDiagnostic(
         element: KtElement,

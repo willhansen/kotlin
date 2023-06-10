@@ -24,7 +24,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
- * Denotes that a parameter, field or method return value can be null.
+ * Denotes that a parameter, field or method return konstue can be null.
  * <p>
  * When decorating a method call parameter, this denotes that the parameter can
  * legitimately be null and the method will gracefully deal with it. Typically

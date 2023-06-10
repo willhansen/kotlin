@@ -4,7 +4,7 @@
 package foo
 
 object A {
-    private val foo = 23
+    private konst foo = 23
 
     fun bar(): Int {
         return foo

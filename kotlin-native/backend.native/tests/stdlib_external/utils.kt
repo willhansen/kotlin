@@ -16,23 +16,23 @@ public actual fun assertTypeEquals(expected: Any?, actual: Any?) {
     }
 }
 
-public actual val TestPlatform.Companion.current: TestPlatform get() = TestPlatform.Native
+public actual konst TestPlatform.Companion.current: TestPlatform get() = TestPlatform.Native
 
-public actual val isFloat32RangeEnforced: Boolean get() = true
+public actual konst isFloat32RangeEnforced: Boolean get() = true
 
-public actual val supportsOctalLiteralInRegex: Boolean get() = true
+public actual konst supportsOctalLiteralInRegex: Boolean get() = true
 
-public actual val supportsEscapeAnyCharInRegex: Boolean get() = true
+public actual konst supportsEscapeAnyCharInRegex: Boolean get() = true
 
-public actual val regexSplitUnicodeCodePointHandling: Boolean get() = true
+public actual konst regexSplitUnicodeCodePointHandling: Boolean get() = true
 
 public actual object BackReferenceHandling {
-    actual val captureLargestValidIndex: Boolean get() = true
+    actual konst captureLargestValidIndex: Boolean get() = true
 
-    actual val notYetDefinedGroup: HandlingOption = HandlingOption.THROW
-    actual val notYetDefinedNamedGroup: HandlingOption = HandlingOption.THROW
-    actual val enclosingGroup: HandlingOption = HandlingOption.MATCH_NOTHING
-    actual val nonExistentGroup: HandlingOption = HandlingOption.THROW
-    actual val nonExistentNamedGroup: HandlingOption = HandlingOption.THROW
-    actual val groupZero: HandlingOption = HandlingOption.THROW
+    actual konst notYetDefinedGroup: HandlingOption = HandlingOption.THROW
+    actual konst notYetDefinedNamedGroup: HandlingOption = HandlingOption.THROW
+    actual konst enclosingGroup: HandlingOption = HandlingOption.MATCH_NOTHING
+    actual konst nonExistentGroup: HandlingOption = HandlingOption.THROW
+    actual konst nonExistentNamedGroup: HandlingOption = HandlingOption.THROW
+    actual konst groupZero: HandlingOption = HandlingOption.THROW
 }

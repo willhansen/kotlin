@@ -9,7 +9,7 @@ import kotlin.test.*
 
 @Suppress("Reformat") // author's formatting
 class ExceptionTest {
-    private val cause = Exception("cause")
+    private konst cause = Exception("cause")
 
     @Test fun throwable() = testCreateException(::Throwable, ::Throwable, ::Throwable, ::Throwable)
     @Test fun error() = testCreateException(::Error, ::Error, ::Error, ::Error)
@@ -70,10 +70,10 @@ class ExceptionTest {
 
     @Test
     fun suppressedExceptions() {
-        val e1 = Throwable()
+        konst e1 = Throwable()
 
-        val c1 = Exception("Suppressed 1")
-        val c2 = Exception("Suppressed 2")
+        konst c1 = Exception("Suppressed 1")
+        konst c2 = Exception("Suppressed 2")
 
         assertTrue(e1.suppressedExceptions.isEmpty())
 
@@ -99,25 +99,25 @@ class ExceptionTest {
             }
         }
 
-        val e = try {
+        konst e = try {
             induced()
         } catch (e: Throwable) {
             e.apply { addSuppressed(suppressedError(2)) }
         }
 
-        val topLevelTrace = e.stackTraceToString()
-        fun assertInTrace(value: Any) {
-            if (value.toString() !in topLevelTrace) {
-                fail("Expected top level trace: $topLevelTrace\n\nto contain: $value")
+        konst topLevelTrace = e.stackTraceToString()
+        fun assertInTrace(konstue: Any) {
+            if (konstue.toString() !in topLevelTrace) {
+                fail("Expected top level trace: $topLevelTrace\n\nto contain: $konstue")
             }
         }
 
         assertInTrace(e)
 
-        val cause = assertNotNull(e.cause, "Should have cause")
+        konst cause = assertNotNull(e.cause, "Should have cause")
         assertInTrace(cause)
 
-        val topLevelSuppressed = e.suppressedExceptions.single()
+        konst topLevelSuppressed = e.suppressedExceptions.single()
         assertInTrace(topLevelSuppressed)
         cause.suppressedExceptions.forEach {
             assertInTrace(it)
@@ -137,18 +137,18 @@ class ExceptionTest {
         //    -- suppressed: e1
         // Caused by: e3
 
-        val e3 = Exception("e3")
-        val e2 = Error("e2", e3)
-        val (e1, e0) = listOf("e1", "e0").map { msg -> RuntimeException(msg, e2.takeIf { msg == "e1" }) }
+        konst e3 = Exception("e3")
+        konst e2 = Error("e2", e3)
+        konst (e1, e0) = listOf("e1", "e0").map { msg -> RuntimeException(msg, e2.takeIf { msg == "e1" }) }
         e1.addSuppressed(e0)
         e1.addSuppressed(e3)
         e3.addSuppressed(e1)
         e2.addSuppressed(e1)
 
-        val topLevelTrace = e1.stackTraceToString()
-        fun assertAppearsInTrace(value: Any, count: Int) {
-            if (Regex.fromLiteral(value.toString()).findAll(topLevelTrace).count() != count) {
-                fail("Expected to find $value $count times in $topLevelTrace")
+        konst topLevelTrace = e1.stackTraceToString()
+        fun assertAppearsInTrace(konstue: Any, count: Int) {
+            if (Regex.fromLiteral(konstue.toString()).findAll(topLevelTrace).count() != count) {
+                fail("Expected to find $konstue $count times in $topLevelTrace")
             }
         }
         assertAppearsInTrace(e1, 3)

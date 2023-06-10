@@ -1,28 +1,28 @@
 package
 
-public fun acquireIntervals(): kotlin.collections.List<Interval>
-public fun buildTree(/*0*/ segments: kotlin.collections.List<Interval>): IntervalTree?
+public fun acquireInterkonsts(): kotlin.collections.List<Interkonst>
+public fun buildTree(/*0*/ segments: kotlin.collections.List<Interkonst>): InterkonstTree?
 public fun </*0*/ E> emptyList(): kotlin.collections.List<E>
 public fun main(): kotlin.Unit
 
-public final class Interval {
-    public constructor Interval()
+public final class Interkonst {
+    public constructor Interkonst()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-public final data class IntervalTree {
-    public constructor IntervalTree(/*0*/ left: IntervalTree?, /*1*/ right: IntervalTree?, /*2*/ intervals: kotlin.collections.List<Interval>, /*3*/ median: kotlin.Float)
-    public final val intervals: kotlin.collections.List<Interval>
-    public final val left: IntervalTree?
-    public final val median: kotlin.Float
-    public final val right: IntervalTree?
-    public final operator /*synthesized*/ fun component1(): IntervalTree?
-    public final operator /*synthesized*/ fun component2(): IntervalTree?
-    public final operator /*synthesized*/ fun component3(): kotlin.collections.List<Interval>
+public final data class InterkonstTree {
+    public constructor InterkonstTree(/*0*/ left: InterkonstTree?, /*1*/ right: InterkonstTree?, /*2*/ interkonsts: kotlin.collections.List<Interkonst>, /*3*/ median: kotlin.Float)
+    public final konst interkonsts: kotlin.collections.List<Interkonst>
+    public final konst left: InterkonstTree?
+    public final konst median: kotlin.Float
+    public final konst right: InterkonstTree?
+    public final operator /*synthesized*/ fun component1(): InterkonstTree?
+    public final operator /*synthesized*/ fun component2(): InterkonstTree?
+    public final operator /*synthesized*/ fun component3(): kotlin.collections.List<Interkonst>
     public final operator /*synthesized*/ fun component4(): kotlin.Float
-    public final /*synthesized*/ fun copy(/*0*/ left: IntervalTree? = ..., /*1*/ right: IntervalTree? = ..., /*2*/ intervals: kotlin.collections.List<Interval> = ..., /*3*/ median: kotlin.Float = ...): IntervalTree
+    public final /*synthesized*/ fun copy(/*0*/ left: InterkonstTree? = ..., /*1*/ right: InterkonstTree? = ..., /*2*/ interkonsts: kotlin.collections.List<Interkonst> = ..., /*3*/ median: kotlin.Float = ...): InterkonstTree
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String

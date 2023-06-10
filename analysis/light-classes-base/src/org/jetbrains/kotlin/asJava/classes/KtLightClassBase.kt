@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.idea.KotlinLanguage
 abstract class KtLightClassBase protected constructor(
     manager: PsiManager
 ) : AbstractLightClass(manager, KotlinLanguage.INSTANCE), KtExtensibleLightClass {
-    private val myInnersCache by lazyPub {
+    private konst myInnersCache by lazyPub {
         KotlinClassInnerStuffCache(
             myClass = this,
             dependencies = cacheDependencies(),
@@ -68,7 +68,7 @@ abstract class KtLightClassBase protected constructor(
 
     override fun getContext() = parent
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
-        return PsiClassImplUtil.isClassEquivalentTo(this, another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
+        return PsiClassImplUtil.isClassEquikonstentTo(this, another)
     }
 }

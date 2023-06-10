@@ -30,10 +30,10 @@ enum class ComponentState {
     Disposed
 }
 
-abstract class SingletonDescriptor(val container: ComponentContainer) : ComponentDescriptor, Closeable {
+abstract class SingletonDescriptor(konst container: ComponentContainer) : ComponentDescriptor, Closeable {
     private var instance: Any? = null
     protected var state: ComponentState = ComponentState.Null
-    private val disposableObjects by lazy { ArrayList<Closeable>() }
+    private konst disposableObjects by lazy { ArrayList<Closeable>() }
 
     override fun getValue(): Any {
         when {
@@ -78,7 +78,7 @@ abstract class SingletonDescriptor(val container: ComponentContainer) : Componen
     }
 
     private fun disposeImpl() {
-        val wereInstance = instance
+        konst wereInstance = instance
         state = ComponentState.Disposing
         instance = null // cannot get instance any more
         try {
@@ -112,16 +112,16 @@ abstract class SingletonDescriptor(val container: ComponentContainer) : Componen
         }
     }
 
-    override val shouldInjectProperties: Boolean
+    override konst shouldInjectProperties: Boolean
         get() = true
 }
 
-open class SingletonTypeComponentDescriptor(container: ComponentContainer, val klass: Class<*>) : SingletonDescriptor(container) {
+open class SingletonTypeComponentDescriptor(container: ComponentContainer, konst klass: Class<*>) : SingletonDescriptor(container) {
     override fun createInstance(context: ValueResolveContext): Any = createInstanceOf(klass, context)
     override fun getRegistrations(): Iterable<Type> = klass.getInfo().registrations
 
     private fun createInstanceOf(klass: Class<*>, context: ValueResolveContext): Any {
-        val binding = klass.bindToConstructor(container.containerId, context)
+        konst binding = klass.bindToConstructor(container.containerId, context)
         state = ComponentState.Initializing
         for (argumentDescriptor in binding.argumentDescriptors) {
             if (argumentDescriptor is Closeable && argumentDescriptor !is SingletonDescriptor) {
@@ -129,18 +129,18 @@ open class SingletonTypeComponentDescriptor(container: ComponentContainer, val k
             }
         }
 
-        val constructor = binding.constructor
-        val arguments = computeArguments(binding.argumentDescriptors)
+        konst constructor = binding.constructor
+        konst arguments = computeArguments(binding.argumentDescriptors)
 
-        val instance = runWithUnwrappingInvocationException { constructor.newInstance(*arguments.toTypedArray())!! }
+        konst instance = runWithUnwrappingInvocationException { constructor.newInstance(*arguments.toTypedArray())!! }
         state = ComponentState.Initialized
         return instance
     }
 
     override fun getDependencies(context: ValueResolveContext): Collection<Type> {
-        val classInfo = klass.getInfo()
-        val constructorParameters = classInfo.constructorInfo?.parameters.orEmpty()
-        val setterInfos = classInfo.setterInfos
+        konst classInfo = klass.getInfo()
+        konst constructorParameters = classInfo.constructorInfo?.parameters.orEmpty()
+        konst setterInfos = classInfo.setterInfos
 
         // In most cases, setterInfos is empty (KT-52756)
         return if (setterInfos.isEmpty())
@@ -154,15 +154,15 @@ open class SingletonTypeComponentDescriptor(container: ComponentContainer, val k
 
 internal class ClashResolutionDescriptor<E : PlatformSpecificExtension<E>>(
     container: ComponentContainer,
-    private val resolver: PlatformExtensionsClashResolver<E>,
-    private val clashedComponents: List<ComponentDescriptor>
+    private konst resolver: PlatformExtensionsClashResolver<E>,
+    private konst clashedComponents: List<ComponentDescriptor>
 ) : SingletonDescriptor(container) {
 
     override fun createInstance(context: ValueResolveContext): Any {
         state = ComponentState.Initializing
         @Suppress("UNCHECKED_CAST")
-        val extensions = computeArguments(clashedComponents) as List<E>
-        val resolution = resolver.resolveExtensionsClash(extensions)
+        konst extensions = computeArguments(clashedComponents) as List<E>
+        konst resolution = resolver.resolveExtensionsClash(extensions)
         state = ComponentState.Initialized
         return resolution
     }

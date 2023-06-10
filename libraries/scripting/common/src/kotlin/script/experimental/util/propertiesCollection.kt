@@ -16,8 +16,8 @@ import kotlin.script.experimental.api.KotlinType
 open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = emptyMap()) : Serializable {
 
     open class Key<T>(
-        val name: String,
-        @Transient val getDefaultValue: PropertiesCollection.() -> T?
+        konst name: String,
+        @Transient konst getDefaultValue: PropertiesCollection.() -> T?
     ) : Serializable {
 
         constructor(name: String, defaultValue: T? = null) : this(name, { defaultValue })
@@ -28,7 +28,7 @@ open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = em
 
         companion object {
             @JvmStatic
-            private val serialVersionUID = 0L
+            private konst serialVersionUID = 0L
         }
     }
 
@@ -43,13 +43,13 @@ open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = em
     ) : Key<T>(
         source.name,
         {
-            val sourceProperties = getSourceProperties()
+            konst sourceProperties = getSourceProperties()
             if (sourceProperties == null) source.getDefaultValue(this)
             else sourceProperties.get(source)
         }
     )
 
-    class PropertyKeyDelegate<T>(private val getDefaultValue: PropertiesCollection.() -> T?, val isTransient: Boolean = false) {
+    class PropertyKeyDelegate<T>(private konst getDefaultValue: PropertiesCollection.() -> T?, konst isTransient: Boolean = false) {
         constructor(defaultValue: T?, isTransient: Boolean = false) : this({ defaultValue }, isTransient)
 
         operator fun getValue(thisRef: Any?, property: KProperty<*>): Key<T> =
@@ -58,7 +58,7 @@ open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = em
     }
 
     class PropertyKeyCopyDelegate<T>(
-        val source: Key<T>, val getSourceProperties: PropertiesCollection.() -> PropertiesCollection? = { null }
+        konst source: Key<T>, konst getSourceProperties: PropertiesCollection.() -> PropertiesCollection? = { null }
     ) {
         operator fun getValue(thisRef: Any?, property: KProperty<*>): Key<T> = CopiedKey(source, getSourceProperties)
     }
@@ -76,8 +76,8 @@ open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = em
 
     fun entries(): Set<Map.Entry<Key<*>, Any?>> = properties.entries
 
-    val notTransientData: Map<Key<*>, Any?>
-        get() = properties.filter { (key, value) -> key !is TransientKey<*> && value is Serializable }
+    konst notTransientData: Map<Key<*>, Any?>
+        get() = properties.filter { (key, konstue) -> key !is TransientKey<*> && konstue is Serializable }
 
     fun isEmpty(): Boolean = properties.isEmpty()
 
@@ -110,14 +110,14 @@ open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = em
             PropertyKeyCopyDelegate(source, getSourceProperties)
 
         @JvmStatic
-        private val serialVersionUID = 1L
+        private konst serialVersionUID = 1L
     }
 
     // properties builder base class (DSL for building properties collection)
 
     open class Builder(baseProperties: Iterable<PropertiesCollection> = emptyList()) {
 
-        val data: MutableMap<Key<*>, Any?> = LinkedHashMap<Key<*>, Any?>().apply {
+        konst data: MutableMap<Key<*>, Any?> = LinkedHashMap<Key<*>, Any?>().apply {
             baseProperties.forEach { putAll(it.properties) }
         }
 
@@ -152,28 +152,28 @@ open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = em
 
         // generic for lists
 
-        fun <T> Key<in List<T>>.putIfAny(vals: Iterable<T>?) {
-            if (vals?.any() == true) {
-                data[this] = if (vals is List) vals else vals.toList()
+        fun <T> Key<in List<T>>.putIfAny(konsts: Iterable<T>?) {
+            if (konsts?.any() == true) {
+                data[this] = if (konsts is List) konsts else konsts.toList()
             }
         }
 
-        operator fun <T> Key<in List<T>>.invoke(vararg vals: T) {
-            append(vals.asIterable())
+        operator fun <T> Key<in List<T>>.invoke(vararg konsts: T) {
+            append(konsts.asIterable())
         }
 
         // generic for maps:
 
         @JvmName("putIfAny_map")
-        fun <K, V> Key<in Map<K, V>>.putIfAny(vals: Iterable<Pair<K, V>>?) {
-            if (vals?.any() == true) {
-                data[this] = vals.toMap()
+        fun <K, V> Key<in Map<K, V>>.putIfAny(konsts: Iterable<Pair<K, V>>?) {
+            if (konsts?.any() == true) {
+                data[this] = konsts.toMap()
             }
         }
 
-        fun <K, V> Key<in Map<K, V>>.putIfAny(vals: Map<K, V>?) {
-            if (vals?.isNotEmpty() == true) {
-                data[this] = vals
+        fun <K, V> Key<in Map<K, V>>.putIfAny(konsts: Map<K, V>?) {
+            if (konsts?.isNotEmpty() == true) {
+                data[this] = konsts
             }
         }
 
@@ -240,8 +240,8 @@ open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = em
 
         // direct manipulation - public - for usage in inline dsl methods and for extending dsl
 
-        operator fun <T> set(key: Key<in T>, value: T) {
-            data[key] = value
+        operator fun <T> set(key: Key<in T>, konstue: T) {
+            data[key] = konstue
         }
 
         fun <T> reset(key: Key<in T>) {
@@ -256,24 +256,24 @@ open class PropertiesCollection(protected var properties: Map<Key<*>, Any?> = em
         // appenders to list and map properties
 
         @JvmName("appendToList")
-        fun <V> Key<in List<V>>.append(values: Iterable<V>) {
-            val newValues = get(this)?.let { it + values } ?: values.toList()
+        fun <V> Key<in List<V>>.append(konstues: Iterable<V>) {
+            konst newValues = get(this)?.let { it + konstues } ?: konstues.toList()
             data[this] = newValues
         }
 
-        fun <V> Key<in List<V>>.append(vararg values: V) {
-            val newValues = get(this)?.let { it + values } ?: values.toList()
+        fun <V> Key<in List<V>>.append(vararg konstues: V) {
+            konst newValues = get(this)?.let { it + konstues } ?: konstues.toList()
             data[this] = newValues
         }
 
-        fun <K, V> Key<in Map<K, V>>.append(values: Map<K, V>) {
-            val newValues = get(this)?.let { it + values } ?: values
+        fun <K, V> Key<in Map<K, V>>.append(konstues: Map<K, V>) {
+            konst newValues = get(this)?.let { it + konstues } ?: konstues
             data[this] = newValues
         }
 
         @JvmName("appendToMap")
-        fun <K, V> Key<in Map<K, V>>.append(values: Iterable<Pair<K, V>>) {
-            val newValues = get(this)?.let { it + values } ?: values.toMap()
+        fun <K, V> Key<in Map<K, V>>.append(konstues: Iterable<Pair<K, V>>) {
+            konst newValues = get(this)?.let { it + konstues } ?: konstues.toMap()
             data[this] = newValues
         }
 

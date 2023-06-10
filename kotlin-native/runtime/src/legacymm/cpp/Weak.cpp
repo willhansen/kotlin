@@ -37,11 +37,11 @@ inline WeakReferenceCounter* asWeakReferenceCounter(ObjHeader* obj) {
 
 inline void lock(int32_t* address) {
     RuntimeAssert(*address == 0 || *address == 1, "Incorrect lock state");
-    while (__sync_val_compare_and_swap(address, 0, 1) == 1);
+    while (__sync_konst_compare_and_swap(address, 0, 1) == 1);
 }
 
 inline void unlock(int32_t* address) {
-    int old = __sync_val_compare_and_swap(address, 1, 0);
+    int old = __sync_konst_compare_and_swap(address, 1, 0);
     RuntimeAssert(old == 1, "Incorrect lock state");
 }
 

@@ -33,12 +33,12 @@ class ErrorNodeDiagnosticCollectorComponent(
     reporter: DiagnosticReporter,
 ) : AbstractDiagnosticCollectorComponent(session, reporter) {
     override fun visitErrorLoop(errorLoop: FirErrorLoop, data: CheckerContext) {
-        val source = errorLoop.source ?: return
+        konst source = errorLoop.source ?: return
         reportFirDiagnostic(errorLoop.diagnostic, source, data)
     }
 
     override fun visitErrorTypeRef(errorTypeRef: FirErrorTypeRef, data: CheckerContext) {
-        val source = errorTypeRef.source ?: return
+        konst source = errorTypeRef.source ?: return
         reportFirDiagnostic(errorTypeRef.diagnostic, source, data)
     }
 
@@ -49,7 +49,7 @@ class ErrorNodeDiagnosticCollectorComponent(
     }
 
     override fun visitErrorAnnotationCall(errorAnnotationCall: FirErrorAnnotationCall, data: CheckerContext) {
-        val source = errorAnnotationCall.source ?: return
+        konst source = errorAnnotationCall.source ?: return
         reportFirDiagnostic(errorAnnotationCall.diagnostic, source, data)
     }
 
@@ -63,7 +63,7 @@ class ErrorNodeDiagnosticCollectorComponent(
 
     private fun processErrorReference(reference: FirNamedReference, diagnostic: ConeDiagnostic, context: CheckerContext) {
         var source = reference.source ?: return
-        val qualifiedAccessOrAnnotationCall = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.lastOrNull()?.takeIf {
+        konst qualifiedAccessOrAnnotationCall = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.lastOrNull()?.takeIf {
             // Use the source of the enclosing FirQualifiedAccess if it is exactly the call to the erroneous callee.
             it.calleeReference == reference
         }
@@ -83,7 +83,7 @@ class ErrorNodeDiagnosticCollectorComponent(
         }
 
         if (source.kind == KtFakeSourceElementKind.DelegatedPropertyAccessor) {
-            val property = context.containingDeclarations.lastOrNull { it is FirProperty } as? FirProperty ?: return
+            konst property = context.containingDeclarations.lastOrNull { it is FirProperty } as? FirProperty ?: return
             source = property.delegate?.source?.fakeElement(KtFakeSourceElementKind.DelegatedPropertyAccessor) ?: return
         }
 
@@ -91,7 +91,7 @@ class ErrorNodeDiagnosticCollectorComponent(
     }
 
     private fun FirExpression?.cannotBeResolved(): Boolean {
-        return when (val diagnostic = (this?.typeRef as? FirErrorTypeRef)?.diagnostic) {
+        return when (konst diagnostic = (this?.typeRef as? FirErrorTypeRef)?.diagnostic) {
             is ConeUnresolvedNameError, is ConeInstanceAccessBeforeSuperCall, is ConeAmbiguousSuper -> true
             is ConeSimpleDiagnostic -> diagnostic.kind == DiagnosticKind.NotASupertype ||
                     diagnostic.kind == DiagnosticKind.SuperNotAvailable ||
@@ -101,27 +101,27 @@ class ErrorNodeDiagnosticCollectorComponent(
     }
 
     override fun visitErrorExpression(errorExpression: FirErrorExpression, data: CheckerContext) {
-        val source = errorExpression.source ?: return
+        konst source = errorExpression.source ?: return
         reportFirDiagnostic(errorExpression.diagnostic, source, data)
     }
 
     override fun visitErrorFunction(errorFunction: FirErrorFunction, data: CheckerContext) {
-        val source = errorFunction.source ?: return
+        konst source = errorFunction.source ?: return
         reportFirDiagnostic(errorFunction.diagnostic, source, data)
     }
 
     override fun visitErrorProperty(errorProperty: FirErrorProperty, data: CheckerContext) {
-        val source = errorProperty.source ?: return
+        konst source = errorProperty.source ?: return
         reportFirDiagnostic(errorProperty.diagnostic, source, data)
     }
 
     override fun visitErrorResolvedQualifier(errorResolvedQualifier: FirErrorResolvedQualifier, data: CheckerContext) {
-        val source = errorResolvedQualifier.source ?: return
+        konst source = errorResolvedQualifier.source ?: return
         reportFirDiagnostic(errorResolvedQualifier.diagnostic, source, data)
     }
 
     override fun visitErrorImport(errorImport: FirErrorImport, data: CheckerContext) {
-        val source = errorImport.source ?: return
+        konst source = errorImport.source ?: return
         reportFirDiagnostic(errorImport.diagnostic, source, data)
     }
 

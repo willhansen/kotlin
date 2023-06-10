@@ -15,38 +15,38 @@ import org.jetbrains.kotlin.test.model.*
 import org.jetbrains.kotlin.test.services.*
 
 class JvmCompilerWithKaptFacade(
-    private val testServices: TestServices,
-    private val additionalPluginExtension: IrGenerationExtension? = null,
+    private konst testServices: TestServices,
+    private konst additionalPluginExtension: IrGenerationExtension? = null,
 ) :
     AbstractTestFacade<ResultingArtifact.Source, KaptContextBinaryArtifact>() {
-    override val inputKind: TestArtifactKind<ResultingArtifact.Source>
+    override konst inputKind: TestArtifactKind<ResultingArtifact.Source>
         get() = SourcesKind
-    override val outputKind: TestArtifactKind<KaptContextBinaryArtifact>
+    override konst outputKind: TestArtifactKind<KaptContextBinaryArtifact>
         get() = KaptContextBinaryArtifact.Kind
 
-    override val additionalServices: List<ServiceRegistrationData>
+    override konst additionalServices: List<ServiceRegistrationData>
         get() = listOf(service(::KaptMessageCollectorProvider))
 
     override fun transform(module: TestModule, inputArtifact: ResultingArtifact.Source): KaptContextBinaryArtifact {
-        val configurationProvider = testServices.compilerConfigurationProvider
-        val project = configurationProvider.getProject(module)
+        konst configurationProvider = testServices.compilerConfigurationProvider
+        konst project = configurationProvider.getProject(module)
         if (additionalPluginExtension != null) {
             IrGenerationExtension.registerExtension(project, additionalPluginExtension)
         }
-        val ktFiles = testServices.sourceFileProvider.getKtFilesForSourceFiles(module.files, project, findViaVfs = true).values.toList()
-        val classBuilderFactory = OriginCollectingClassBuilderFactory(ClassBuilderMode.KAPT3)
-        val generationState = GenerationUtils.compileFiles(
+        konst ktFiles = testServices.sourceFileProvider.getKtFilesForSourceFiles(module.files, project, findViaVfs = true).konstues.toList()
+        konst classBuilderFactory = OriginCollectingClassBuilderFactory(ClassBuilderMode.KAPT3)
+        konst generationState = GenerationUtils.compileFiles(
             ktFiles,
             configurationProvider.getCompilerConfiguration(module),
             classBuilderFactory,
             configurationProvider.getPackagePartProviderFactory(module)
         )
-        val logger = MessageCollectorBackedKaptLogger(
+        konst logger = MessageCollectorBackedKaptLogger(
             isVerbose = true,
             isInfoAsWarnings = false,
             messageCollector = testServices.messageCollectorProvider.getCollector(module)
         )
-        val kaptContext = KaptContextForStubGeneration(
+        konst kaptContext = KaptContextForStubGeneration(
             testServices.kaptOptionsProvider[module],
             withJdk = true,
             logger,
@@ -62,10 +62,10 @@ class JvmCompilerWithKaptFacade(
     }
 }
 
-class KaptContextBinaryArtifact(val kaptContext: KaptContextForStubGeneration) : ResultingArtifact.Binary<KaptContextBinaryArtifact>() {
+class KaptContextBinaryArtifact(konst kaptContext: KaptContextForStubGeneration) : ResultingArtifact.Binary<KaptContextBinaryArtifact>() {
     object Kind : BinaryKind<KaptContextBinaryArtifact>("KaptArtifact")
 
-    override val kind: BinaryKind<KaptContextBinaryArtifact>
+    override konst kind: BinaryKind<KaptContextBinaryArtifact>
         get() = Kind
 }
 

@@ -4,7 +4,7 @@
 
 fun foo() {
     takeClass(run {
-        val outer: Sample<out Any>? = null
+        konst outer: Sample<out Any>? = null
         if (outer != null) outer else null
     })
 }

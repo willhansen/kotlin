@@ -397,7 +397,7 @@ public class ExpressionTypingServices {
         //
         // That immediately leads to incorrectly treatment of cases like:
         // foo {
-        //     val x = if (b) {
+        //     konst x = if (b) {
         //          ::baz <-- the problem is here
         //     } else {
         //        ....

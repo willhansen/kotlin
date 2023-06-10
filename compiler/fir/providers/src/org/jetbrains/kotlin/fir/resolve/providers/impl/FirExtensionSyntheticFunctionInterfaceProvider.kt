@@ -80,11 +80,11 @@ class FirBuiltinSyntheticFunctionInterfaceProvider(
 
 abstract class FirSyntheticFunctionInterfaceProviderBase(
     session: FirSession,
-    val moduleData: FirModuleData,
-    val kotlinScopeProvider: FirKotlinScopeProvider
+    konst moduleData: FirModuleData,
+    konst kotlinScopeProvider: FirKotlinScopeProvider
 ) : FirSymbolProvider(session) {
-    override val symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProvider() {
-        override val mayHaveSyntheticFunctionTypes: Boolean get() = true
+    override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProvider() {
+        override konst mayHaveSyntheticFunctionTypes: Boolean get() = true
 
         override fun mayHaveSyntheticFunctionType(classId: ClassId): Boolean = classId.getAcceptableFunctionTypeKind() != null
 
@@ -100,7 +100,7 @@ abstract class FirSyntheticFunctionInterfaceProviderBase(
     }
 
     override fun getClassLikeSymbolByClassId(classId: ClassId): FirRegularClassSymbol? {
-        val functionTypeKind = classId.getAcceptableFunctionTypeKind() ?: return null
+        konst functionTypeKind = classId.getAcceptableFunctionTypeKind() ?: return null
         return cache.getValue(classId, functionTypeKind)
     }
 
@@ -126,16 +126,16 @@ abstract class FirSyntheticFunctionInterfaceProviderBase(
         return fqName.takeIf { session.functionTypeService.hasKindWithSpecificPackage(it) }
     }
 
-    private val cache = moduleData.session.firCachesFactory.createCache(::createSyntheticFunctionInterface)
+    private konst cache = moduleData.session.firCachesFactory.createCache(::createSyntheticFunctionInterface)
 
     protected abstract fun FunctionTypeKind.isAcceptable(): Boolean
 
     private fun createSyntheticFunctionInterface(classId: ClassId, kind: FunctionTypeKind): FirRegularClassSymbol? {
         return with(classId) {
-            val className = relativeClassName.asString()
+            konst className = relativeClassName.asString()
             if (!kind.isAcceptable()) return null
-            val prefix = kind.classNamePrefix
-            val arity = className.substring(prefix.length).toIntOrNull() ?: return null
+            konst prefix = kind.classNamePrefix
+            konst arity = className.substring(prefix.length).toIntOrNull() ?: return null
             FirRegularClassSymbol(classId).apply symbol@{
                 buildRegularClass klass@{
                     moduleData = this@FirSyntheticFunctionInterfaceProviderBase.moduleData
@@ -178,8 +178,8 @@ abstract class FirSyntheticFunctionInterfaceProviderBase(
                             bounds += moduleData.session.builtinTypes.nullableAnyType
                         },
                     )
-                    val name = OperatorNameConventions.INVOKE
-                    val functionStatus = FirResolvedDeclarationStatusImpl(
+                    konst name = OperatorNameConventions.INVOKE
+                    konst functionStatus = FirResolvedDeclarationStatusImpl(
                         Visibilities.Public,
                         Modality.ABSTRACT,
                         EffectiveVisibility.Public
@@ -188,7 +188,7 @@ abstract class FirSyntheticFunctionInterfaceProviderBase(
                         isSuspend = kind.isSuspendOrKSuspendFunction
                         hasStableParameterNames = false
                     }
-                    val typeArguments = typeParameters.map {
+                    konst typeArguments = typeParameters.map {
                         ConeTypeParameterTypeImpl(it.symbol.toLookupTag(), false).toFirResolvedTypeRef()
                     }
 
@@ -221,8 +221,8 @@ abstract class FirSyntheticFunctionInterfaceProviderBase(
                                 CallableId(packageFqName, relativeClassName, name)
                             )
                             resolvePhase = FirResolvePhase.ANALYZED_DEPENDENCIES
-                            valueParameters += typeArguments.dropLast(1).mapIndexed { index, typeArgument ->
-                                val parameterName = Name.identifier("p${index + 1}")
+                            konstueParameters += typeArguments.dropLast(1).mapIndexed { index, typeArgument ->
+                                konst parameterName = Name.identifier("p${index + 1}")
                                 buildValueParameter {
                                     moduleData = this@FirSyntheticFunctionInterfaceProviderBase.moduleData
                                     containingFunctionSymbol = this@buildSimpleFunction.symbol

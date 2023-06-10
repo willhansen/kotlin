@@ -2,10 +2,10 @@ class Outer {
     fun foo() {
         class Local {
             fun bar() {
-                val x = y
+                konst x = y
             }
         }
     }
 
-    val y = ""
+    konst y = ""
 }

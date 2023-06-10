@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 
 /** Snapshot of a classpath. It consists of a list of [ClasspathEntrySnapshot]s. */
-class ClasspathSnapshot(val classpathEntrySnapshots: List<ClasspathEntrySnapshot>)
+class ClasspathSnapshot(konst classpathEntrySnapshots: List<ClasspathEntrySnapshot>)
 
 /**
  * Snapshot of a classpath entry (directory or jar). It consists of a list of [ClassSnapshot]s.
@@ -27,7 +27,7 @@ class ClasspathEntrySnapshot(
      * Maps (Unix-style) relative paths of classes to their snapshots. The paths are relative to the containing classpath entry (directory
      * or jar).
      */
-    val classSnapshots: LinkedHashMap<String, ClassSnapshot>
+    konst classSnapshots: LinkedHashMap<String, ClassSnapshot>
 )
 
 /**
@@ -42,10 +42,10 @@ sealed class ClassSnapshot
 
 /** [ClassSnapshot] of an accessible class. See [InaccessibleClassSnapshot] for info on the accessibility of a class. */
 sealed class AccessibleClassSnapshot : ClassSnapshot() {
-    abstract val classId: ClassId
+    abstract konst classId: ClassId
 
     /** The hash of the class's ABI. */
-    abstract val classAbiHash: Long
+    abstract konst classAbiHash: Long
 
     override fun toString() = classId.toString()
 }
@@ -54,30 +54,30 @@ sealed class AccessibleClassSnapshot : ClassSnapshot() {
 sealed class KotlinClassSnapshot : AccessibleClassSnapshot() {
 
     /** Snapshot of this class when [ClassSnapshotGranularity] == [CLASS_MEMBER_LEVEL], null otherwise. */
-    abstract val classMemberLevelSnapshot: KotlinClassInfo?
+    abstract konst classMemberLevelSnapshot: KotlinClassInfo?
 }
 
 /** [KotlinClassSnapshot] where class kind == [CLASS]. */
 class RegularKotlinClassSnapshot(
-    override val classId: ClassId,
-    override val classAbiHash: Long,
-    override val classMemberLevelSnapshot: KotlinClassInfo?,
-    val supertypes: List<JvmClassName>,
+    override konst classId: ClassId,
+    override konst classAbiHash: Long,
+    override konst classMemberLevelSnapshot: KotlinClassInfo?,
+    konst supertypes: List<JvmClassName>,
 
     /** Name of the companion object of this class (default is "Companion") iff this class HAS a companion object, or null otherwise. */
-    val companionObjectName: String?,
+    konst companionObjectName: String?,
 
     /** List of constants defined in this class iff this class IS a companion object, or null otherwise. The list could be empty. */
-    val constantsInCompanionObject: List<String>?
+    konst constantsInCompanionObject: List<String>?
 
 ) : KotlinClassSnapshot()
 
 /** [KotlinClassSnapshot] where class kind == [FILE_FACADE] or [MULTIFILE_CLASS_PART]. */
 class PackageFacadeKotlinClassSnapshot(
-    override val classId: ClassId,
-    override val classAbiHash: Long,
-    override val classMemberLevelSnapshot: KotlinClassInfo?,
-    val packageMemberNames: Set<String>
+    override konst classId: ClassId,
+    override konst classAbiHash: Long,
+    override konst classMemberLevelSnapshot: KotlinClassInfo?,
+    konst packageMemberNames: Set<String>
 ) : KotlinClassSnapshot()
 
 /**
@@ -88,46 +88,46 @@ class PackageFacadeKotlinClassSnapshot(
  * [MULTIFILE_CLASS] will have an associated change in one of its [MULTIFILE_CLASS_PART]s, so the change will be detected when we analyze
  * the [MULTIFILE_CLASS_PART]s.
  *
- * However, if there is a constant is defined in a [MULTIFILE_CLASS], that constant will have a declared value in the [MULTIFILE_CLASS] but
+ * However, if there is a constant is defined in a [MULTIFILE_CLASS], that constant will have a declared konstue in the [MULTIFILE_CLASS] but
  * not in its [MULTIFILE_CLASS_PART]s. Therefore, we'll need to track constants for [MULTIFILE_CLASS]. (We don't have to do this for inline
  * functions or other package members as those are defined in [MULTIFILE_CLASS_PART]s.)
  */
 class MultifileClassKotlinClassSnapshot(
-    override val classId: ClassId,
-    override val classAbiHash: Long,
-    override val classMemberLevelSnapshot: KotlinClassInfo?,
-    val constantNames: Set<String>
+    override konst classId: ClassId,
+    override konst classAbiHash: Long,
+    override konst classMemberLevelSnapshot: KotlinClassInfo?,
+    konst constantNames: Set<String>
 ) : KotlinClassSnapshot()
 
 /** [ClassSnapshot] of a Java class. */
 class JavaClassSnapshot(
-    override val classId: ClassId,
-    override val classAbiHash: Long,
+    override konst classId: ClassId,
+    override konst classAbiHash: Long,
     /** Snapshot of this class when [ClassSnapshotGranularity] == [CLASS_MEMBER_LEVEL], null otherwise. */
-    val classMemberLevelSnapshot: JavaClassMemberLevelSnapshot?,
-    val supertypes: List<JvmClassName>
+    konst classMemberLevelSnapshot: JavaClassMemberLevelSnapshot?,
+    konst supertypes: List<JvmClassName>
 ) : AccessibleClassSnapshot()
 
 /** Snapshot of a Java class when [ClassSnapshotGranularity] == [CLASS_MEMBER_LEVEL]. */
 class JavaClassMemberLevelSnapshot(
     /** [JavaElementSnapshot] of the class excluding its fields and methods. */
-    val classAbiExcludingMembers: JavaElementSnapshot,
+    konst classAbiExcludingMembers: JavaElementSnapshot,
 
     /** [JavaElementSnapshot]s of the class's fields. */
-    val fieldsAbi: List<JavaElementSnapshot>,
+    konst fieldsAbi: List<JavaElementSnapshot>,
 
     /** [JavaElementSnapshot]s of the class's methods. */
-    val methodsAbi: List<JavaElementSnapshot>
+    konst methodsAbi: List<JavaElementSnapshot>
 )
 
 /** Snapshot of a Java class or a Java class member (field or method). */
 class JavaElementSnapshot(
 
     /** The name of the Java element. It is part of the Java element's ABI. */
-    val name: String,
+    konst name: String,
 
     /** The hash of the Java element's ABI. */
-    val abiHash: Long
+    konst abiHash: Long
 )
 
 /**

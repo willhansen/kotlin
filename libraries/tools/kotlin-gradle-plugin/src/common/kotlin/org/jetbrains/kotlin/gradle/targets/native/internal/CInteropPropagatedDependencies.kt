@@ -29,8 +29,8 @@ import java.io.File
  * ```
  * kotlin {
  *      sourceSets {
- *          val nativeMain by sourceSets.creating
- *          val linuxX64Main by sourceSets.getting
+ *          konst nativeMain by sourceSets.creating
+ *          konst linuxX64Main by sourceSets.getting
  *          linuxX64Main.dependsOn(nativeMain)
  *      }
  * }
@@ -42,7 +42,7 @@ import java.io.File
  * to the 'nativeMain' source set (and its 'shared native' compilation) if it exists.
  */
 internal fun Project.setupCInteropPropagatedDependencies() {
-    val kotlin = this.multiplatformExtensionOrNull ?: return
+    konst kotlin = this.multiplatformExtensionOrNull ?: return
 
     kotlin.forAllSharedNativeCompilations { compilation ->
         compilation.compileDependencyFiles += getPropagatedCInteropDependenciesOrEmpty(compilation)
@@ -70,11 +70,11 @@ internal fun Project.getPlatformCinteropDependenciesOrEmpty(
         compatibility metadata variant will still register
         a 'KotlinMetadataCompilation for 'commonMain' which is irrelevant here
         */
-        val compilations = sourceSet.internal.compilations
+        konst compilations = sourceSet.internal.compilations
             .filter { compilation -> compilation !is KotlinMetadataCompilation }
 
         /* Participating in multiple compilations? -> can't propagate -> should be commonized */
-        val compilation = compilations.singleOrNull() as? KotlinNativeCompilation ?: return@files emptySet<File>()
+        konst compilation = compilations.singleOrNull() as? KotlinNativeCompilation ?: return@files emptySet<File>()
 
         (compilation.associateWith + compilation)
             .filterIsInstance<KotlinNativeCompilation>()
@@ -84,13 +84,13 @@ internal fun Project.getPlatformCinteropDependenciesOrEmpty(
 }
 
 private fun Project.getPropagatedCInteropDependenciesOrEmpty(compilation: KotlinSharedNativeCompilation) = filesProvider files@{
-    val compilations = compilation.getImplicitlyDependingNativeCompilations()
-    val platformCompilation = compilations.singleOrNull() ?: return@files emptySet<File>()
+    konst compilations = compilation.getImplicitlyDependingNativeCompilations()
+    konst platformCompilation = compilations.singleOrNull() ?: return@files emptySet<File>()
     getAllCInteropOutputFiles(platformCompilation)
 }
 
 private fun Project.getAllCInteropOutputFiles(compilation: KotlinNativeCompilation): FileCollection {
-    val cinteropTasks = compilation.cinterops.map { interop -> interop.interopProcessingTaskName }
+    konst cinteropTasks = compilation.cinterops.map { interop -> interop.interopProcessingTaskName }
         .mapNotNull { taskName -> tasks.findByName(taskName) as? CInteropProcess }
 
     return project.filesProvider { cinteropTasks.map { it.outputFile } }

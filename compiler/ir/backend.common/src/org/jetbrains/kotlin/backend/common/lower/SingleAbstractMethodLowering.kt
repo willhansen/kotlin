@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.utils.findIsInstanceAnd
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 import org.jetbrains.kotlin.utils.memoryOptimizedPlus
 
-abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
+abstract class SingleAbstractMethodLowering(konst context: CommonBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
     // SAM wrappers are cached, either in the file class (if it exists), or in a top-level enclosing class.
     // In the latter case, the names of SAM wrappers depend on the order of classes in the file. For example:
     //
@@ -57,8 +57,8 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
     // Coming from the frontend, every SAM interface is associated with exactly one function type
     // (see SamType.getKotlinFunctionType). This is why we can cache implementations just based on
     // the superType.
-    protected val cachedImplementations = mutableMapOf<IrType, IrClass>()
-    protected val inlineCachedImplementations = mutableMapOf<IrType, IrClass>()
+    protected konst cachedImplementations = mutableMapOf<IrType, IrClass>()
+    protected konst inlineCachedImplementations = mutableMapOf<IrType, IrClass>()
     protected var enclosingContainer: IrDeclarationContainer? = null
 
     abstract fun getWrapperVisibility(expression: IrTypeOperatorCall, scopes: List<ScopeWithIr>): DescriptorVisibility
@@ -75,9 +75,9 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
         setSourceRange(createFor)
     }
 
-    abstract val IrType.needEqualsHashCodeMethods: Boolean
+    abstract konst IrType.needEqualsHashCodeMethods: Boolean
 
-    open val inInlineFunctionScope get() = allScopes.any { scope -> (scope.irElement as? IrFunction)?.isInline ?: false }
+    open konst inInlineFunctionScope get() = allScopes.any { scope -> (scope.irElement as? IrFunction)?.isInline ?: false }
 
     override fun lower(irFile: IrFile) {
         cachedImplementations.clear()
@@ -85,8 +85,8 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
         enclosingContainer = irFile.declarations.findIsInstanceAnd<IrClass> { it.isFileClass } ?: irFile
         irFile.transformChildrenVoid()
 
-        for (wrapper in cachedImplementations.values + inlineCachedImplementations.values) {
-            val parentClass = wrapper.parent as IrDeclarationContainer
+        for (wrapper in cachedImplementations.konstues + inlineCachedImplementations.konstues) {
+            konst parentClass = wrapper.parent as IrDeclarationContainer
             parentClass.declarations += wrapper
         }
     }
@@ -96,7 +96,7 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
     }
 
     override fun visitClassNew(declaration: IrClass): IrStatement {
-        val prevContainer = enclosingContainer
+        konst prevContainer = enclosingContainer
         if (prevContainer == null || prevContainer is IrFile)
             enclosingContainer = declaration
         super.visitClassNew(declaration)
@@ -110,23 +110,23 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
         // TODO: there must be exactly one wrapper per Java interface; ideally, if the interface has generic
         //       parameters, so should the wrapper. Currently, we just erase them and generate something that
         //       erases to the same result at codegen time.
-        val erasedSuperType = getSuperTypeForWrapper(expression.typeOperand)
-        val superType = if (expression.typeOperand.isNullable()) erasedSuperType.makeNullable() else erasedSuperType
-        val invokable = expression.argument.transform(this, null)
+        konst erasedSuperType = getSuperTypeForWrapper(expression.typeOperand)
+        konst superType = if (expression.typeOperand.isNullable()) erasedSuperType.makeNullable() else erasedSuperType
+        konst invokable = expression.argument.transform(this, null)
         context.createIrBuilder(currentScopeSymbol()!!).apply {
             // Do not generate a wrapper class for null, it has no invoke() anyway.
             if (invokable.isNullConst())
                 return invokable
 
-            val cache = if (inInlineFunctionScope) inlineCachedImplementations else cachedImplementations
-            val implementation = cache.getOrPut(erasedSuperType) {
+            konst cache = if (inInlineFunctionScope) inlineCachedImplementations else cachedImplementations
+            konst implementation = cache.getOrPut(erasedSuperType) {
                 createObjectProxy(erasedSuperType, getWrapperVisibility(expression, allScopes), expression)
             }
 
             return if (superType.isNullable() && invokable.type.isNullable()) {
                 irBlock(invokable, null, superType) {
-                    val invokableVariable = createTmpVariable(invokable)
-                    val instance = irCall(implementation.constructors.single()).apply {
+                    konst invokableVariable = createTmpVariable(invokable)
+                    konst instance = irCall(implementation.constructors.single()).apply {
                         putValueArgument(0, irGet(invokableVariable))
                     }
                     +irIfNull(superType, irGet(invokableVariable), irNull(), instance)
@@ -137,7 +137,7 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
                 // otherwise, e.g. if the argument constructs an anonymous object, resulting in new-new-<init>-<init>.
                 // (See KT-21781 for a similar problem with anonymous object constructor arguments.)
                 irBlock(invokable, null, superType) {
-                    val invokableVariable = createTmpVariable(invokable)
+                    konst invokableVariable = createTmpVariable(invokable)
                     +irCall(implementation.constructors.single()).apply { putValueArgument(0, irGet(invokableVariable)) }
                 }
             } else {
@@ -146,33 +146,33 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
         }
     }
 
-    private val SAM_WRAPPER_SUFFIX = "$0"
-    private val FUNCTION_FIELD_NAME = "function"
+    private konst SAM_WRAPPER_SUFFIX = "$0"
+    private konst FUNCTION_FIELD_NAME = "function"
 
     // Construct a class that wraps an invokable object into an implementation of an interface:
-    //     class sam$n(private val invokable: F) : Interface { override fun method(...) = invokable(...) }
+    //     class sam$n(private konst invokable: F) : Interface { override fun method(...) = invokable(...) }
     private fun createObjectProxy(superType: IrType, wrapperVisibility: DescriptorVisibility, createFor: IrElement): IrClass {
-        val superClass = superType.classifierOrFail.owner as IrClass
+        konst superClass = superType.classifierOrFail.owner as IrClass
         // The language documentation prohibits casting lambdas to classes, but if it was allowed,
         // the `irDelegatingConstructorCall` in the constructor below would need to be modified.
         assert(superClass.kind == ClassKind.INTERFACE) { "SAM conversion to an abstract class not allowed" }
 
-        val superFqName = superClass.fqNameWhenAvailable!!.asString().replace('.', '_')
-        val inlinePrefix = if (wrapperVisibility == DescriptorVisibilities.PUBLIC) "\$i" else ""
-        val wrapperName = Name.identifier("sam$inlinePrefix\$$superFqName$SAM_WRAPPER_SUFFIX")
-        val transformedSuperMethod = superClass.functions.single { it.modality == Modality.ABSTRACT }
-        val originalSuperMethod = getSuspendFunctionWithoutContinuation(transformedSuperMethod)
-        val extensionReceiversCount = if (originalSuperMethod.extensionReceiverParameter == null) 0 else 1
+        konst superFqName = superClass.fqNameWhenAvailable!!.asString().replace('.', '_')
+        konst inlinePrefix = if (wrapperVisibility == DescriptorVisibilities.PUBLIC) "\$i" else ""
+        konst wrapperName = Name.identifier("sam$inlinePrefix\$$superFqName$SAM_WRAPPER_SUFFIX")
+        konst transformedSuperMethod = superClass.functions.single { it.modality == Modality.ABSTRACT }
+        konst originalSuperMethod = getSuspendFunctionWithoutContinuation(transformedSuperMethod)
+        konst extensionReceiversCount = if (originalSuperMethod.extensionReceiverParameter == null) 0 else 1
         // TODO: have psi2ir cast the argument to the correct function type. Also see the TODO
         //       about type parameters in `visitTypeOperator`.
-        val wrappedFunctionClass =
+        konst wrappedFunctionClass =
             if (originalSuperMethod.isSuspend)
-                context.ir.symbols.suspendFunctionN(originalSuperMethod.valueParameters.size + extensionReceiversCount).owner
+                context.ir.symbols.suspendFunctionN(originalSuperMethod.konstueParameters.size + extensionReceiversCount).owner
             else
-                context.ir.symbols.functionN(originalSuperMethod.valueParameters.size + extensionReceiversCount).owner
-        val wrappedFunctionType = getWrappedFunctionType(wrappedFunctionClass)
+                context.ir.symbols.functionN(originalSuperMethod.konstueParameters.size + extensionReceiversCount).owner
+        konst wrappedFunctionType = getWrappedFunctionType(wrappedFunctionClass)
 
-        val subclass = context.irFactory.buildClass {
+        konst subclass = context.irFactory.buildClass {
             name = wrapperName
             origin = IrDeclarationOrigin.GENERATED_SAM_IMPLEMENTATION
             visibility = wrapperVisibility
@@ -183,7 +183,7 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
             parent = enclosingContainer!!
         }
 
-        val field = subclass.addField {
+        konst field = subclass.addField {
             name = Name.identifier(FUNCTION_FIELD_NAME)
             type = wrappedFunctionType
             origin = IrDeclarationOrigin.SYNTHETIC_GENERATED_SAM_IMPLEMENTATION
@@ -198,7 +198,7 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
             visibility = wrapperVisibility
             setConstructorSourceRange(createFor)
         }.apply {
-            val parameter = addValueParameter {
+            konst parameter = addValueParameter {
                 name = field.name
                 type = field.type
                 origin = subclass.origin
@@ -223,7 +223,7 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
             overriddenSymbols = listOf(originalSuperMethod.symbol)
             dispatchReceiverParameter = subclass.thisReceiver!!.copyTo(this)
             extensionReceiverParameter = originalSuperMethod.extensionReceiverParameter?.copyTo(this)
-            valueParameters = originalSuperMethod.valueParameters.memoryOptimizedMap { it.copyTo(this) }
+            konstueParameters = originalSuperMethod.konstueParameters.memoryOptimizedMap { it.copyTo(this) }
             body = context.createIrBuilder(symbol).irBlockBody {
                 +irReturn(
                     irCall(
@@ -232,7 +232,7 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
                     ).apply {
                         dispatchReceiver = irGetField(irGet(dispatchReceiverParameter!!), field)
                         extensionReceiverParameter?.let { putValueArgument(0, irGet(it)) }
-                        valueParameters.forEachIndexed { i, parameter -> putValueArgument(extensionReceiversCount + i, irGet(parameter)) }
+                        konstueParameters.forEachIndexed { i, parameter -> putValueArgument(extensionReceiversCount + i, irGet(parameter)) }
                     })
             }
         }
@@ -270,23 +270,23 @@ abstract class SingleAbstractMethodLowering(val context: CommonBackendContext) :
  *   Note that we don't generate equals/hashCode for SAM conversion of lambdas, e.g. `FunInterface {}`, even though lambdas are represented
  *   as a local function + reference to it. The reason for this is that all lambdas are unique, so after SAM conversion they are still
  *   never equal to each other. See [FunctionReferenceLowering.FunctionReferenceBuilder.needToGenerateSamEqualsHashCodeMethods].
- * - SingleAbstractMethodLowering, which is the case of SAM conversion of any value of a functional type,
- *   e.g. `val f = {}; FunInterface(f)`.
+ * - SingleAbstractMethodLowering, which is the case of SAM conversion of any konstue of a functional type,
+ *   e.g. `konst f = {}; FunInterface(f)`.
  */
 class SamEqualsHashCodeMethodsGenerator(
-    private val context: CommonBackendContext,
-    private val klass: IrClass,
-    private val samSuperType: IrType,
-    private val obtainFunctionDelegate: IrBuilderWithScope.(receiver: IrExpression) -> IrExpression,
+    private konst context: CommonBackendContext,
+    private konst klass: IrClass,
+    private konst samSuperType: IrType,
+    private konst obtainFunctionDelegate: IrBuilderWithScope.(receiver: IrExpression) -> IrExpression,
 ) {
-    private val functionAdapterClass = context.ir.symbols.functionAdapter.owner
+    private konst functionAdapterClass = context.ir.symbols.functionAdapter.owner
 
-    private val builtIns: IrBuiltIns get() = context.irBuiltIns
-    private val getFunctionDelegate = functionAdapterClass.functions.single { it.name.asString() == "getFunctionDelegate" }
+    private konst builtIns: IrBuiltIns get() = context.irBuiltIns
+    private konst getFunctionDelegate = functionAdapterClass.functions.single { it.name.asString() == "getFunctionDelegate" }
 
     fun generate() {
         generateGetFunctionDelegate()
-        val anyGenerator = MethodsFromAnyGeneratorForLowerings(context, klass, IrDeclarationOrigin.SYNTHETIC_GENERATED_SAM_IMPLEMENTATION)
+        konst anyGenerator = MethodsFromAnyGeneratorForLowerings(context, klass, IrDeclarationOrigin.SYNTHETIC_GENERATED_SAM_IMPLEMENTATION)
         generateEquals(anyGenerator)
         generateHashCode(anyGenerator)
     }
@@ -302,7 +302,7 @@ class SamEqualsHashCodeMethodsGenerator(
 
     private fun generateEquals(anyGenerator: MethodsFromAnyGeneratorForLowerings) {
         anyGenerator.createEqualsMethodDeclaration().apply {
-            val other = valueParameters[0]
+            konst other = konstueParameters[0]
             body = context.createIrBuilder(symbol).run {
                 irExprBody(
                     irIfThenElse(
@@ -330,7 +330,7 @@ class SamEqualsHashCodeMethodsGenerator(
 
     private fun generateHashCode(anyGenerator: MethodsFromAnyGeneratorForLowerings) {
         anyGenerator.createHashCodeMethodDeclaration().apply {
-            val hashCode = context.irBuiltIns.functionClass.owner.functions.single { it.isHashCode() }.symbol
+            konst hashCode = context.irBuiltIns.functionClass.owner.functions.single { it.isHashCode() }.symbol
             body = context.createIrBuilder(symbol).run {
                 irExprBody(
                     irCall(hashCode).also {

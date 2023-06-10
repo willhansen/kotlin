@@ -14,7 +14,7 @@ package kotlin.collections
  */
 public actual open class ArrayList<E> internal constructor(private var array: Array<Any?>) : AbstractMutableList<E>(), MutableList<E>, RandomAccess {
     private companion object {
-        private val Empty = ArrayList<Nothing>(0).also { it.isReadOnly = true }
+        private konst Empty = ArrayList<Nothing>(0).also { it.isReadOnly = true }
     }
 
     private var isReadOnly: Boolean = false
@@ -60,7 +60,7 @@ public actual open class ArrayList<E> internal constructor(private var array: Ar
     /** Does nothing in this ArrayList implementation. */
     public actual fun ensureCapacity(minCapacity: Int) {}
 
-    actual override val size: Int get() = array.size
+    actual override konst size: Int get() = array.size
     @Suppress("UNCHECKED_CAST")
     actual override fun get(index: Int): E = array[rangeCheck(index)] as E
     actual override fun set(index: Int, element: E): E {
@@ -84,7 +84,7 @@ public actual open class ArrayList<E> internal constructor(private var array: Ar
     }
 
     private fun increaseLength(amount: Int): Int {
-        val previous = size
+        konst previous = size
         array.asDynamic().length = size + amount
         return previous
     }
@@ -93,7 +93,7 @@ public actual open class ArrayList<E> internal constructor(private var array: Ar
         checkIsMutable()
         if (elements.isEmpty()) return false
 
-        val offset = increaseLength(elements.size)
+        konst offset = increaseLength(elements.size)
         elements.forEachIndexed { index, element ->
             array[offset + index] = element
         }
@@ -108,10 +108,10 @@ public actual open class ArrayList<E> internal constructor(private var array: Ar
         if (index == size) return addAll(elements)
         if (elements.isEmpty()) return false
 
-        val tail = array.asDynamic().splice(index).unsafeCast<Array<E>>()
+        konst tail = array.asDynamic().splice(index).unsafeCast<Array<E>>()
         addAll(elements)
 
-        val offset = increaseLength(tail.size)
+        konst offset = increaseLength(tail.size)
         repeat(tail.size) { tailIndex ->
             array[offset + tailIndex] = tail[tailIndex]
         }

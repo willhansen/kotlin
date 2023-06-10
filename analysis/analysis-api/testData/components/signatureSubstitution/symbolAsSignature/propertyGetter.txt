@@ -7,5 +7,5 @@ KtFunctionLikeSignature:
   receiverType = null
   returnType = kotlin.Int
   symbol = <getter>(): kotlin.Int
-  valueParameters = []
+  konstueParameters = []
   callableIdIfNonLocal = null

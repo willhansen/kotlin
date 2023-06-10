@@ -21,16 +21,16 @@ import java.io.File
 
 open class MainFunctionForBlackBoxTestsSourceProvider(testServices: TestServices) : AdditionalSourceProvider(testServices) {
     companion object {
-        private val PACKAGE_REGEXP = """package ([\w.]+)""".toRegex()
-        private val START_BOX_METHOD_REGEX = """^fun box\(\)""".toRegex()
-        private val MIDDLE_BOX_METHOD_REGEX = """\nfun box\(\)""".toRegex()
-        private val START_SUSPEND_BOX_METHOD_REGEX = """^suspend fun box\(\)""".toRegex()
-        private val MIDDLE_SUSPEND_BOX_METHOD_REGEX = """\nsuspend fun box\(\)""".toRegex()
+        private konst PACKAGE_REGEXP = """package ([\w.]+)""".toRegex()
+        private konst START_BOX_METHOD_REGEX = """^fun box\(\)""".toRegex()
+        private konst MIDDLE_BOX_METHOD_REGEX = """\nfun box\(\)""".toRegex()
+        private konst START_SUSPEND_BOX_METHOD_REGEX = """^suspend fun box\(\)""".toRegex()
+        private konst MIDDLE_SUSPEND_BOX_METHOD_REGEX = """\nsuspend fun box\(\)""".toRegex()
 
-        const val BOX_MAIN_FILE_NAME = "Generated_Box_Main.kt"
+        const konst BOX_MAIN_FILE_NAME = "Generated_Box_Main.kt"
 
         fun detectPackage(file: TestFile): String? {
-            return PACKAGE_REGEXP.find(file.originalContent)?.groups?.get(1)?.value
+            return PACKAGE_REGEXP.find(file.originalContent)?.groups?.get(1)?.konstue
         }
 
         fun containsBoxMethod(file: TestFile): Boolean {
@@ -63,7 +63,7 @@ open class MainFunctionForBlackBoxTestsSourceProvider(testServices: TestServices
 
     protected open fun generateMainBody(): String {
         return """
-            val res = box()
+            konst res = box()
             if (res != "OK") throw AssertionError(res)
         """.trimIndent()
     }
@@ -73,11 +73,11 @@ open class MainFunctionForBlackBoxTestsSourceProvider(testServices: TestServices
             return emptyList()
         }
 
-        val fileWithBox = module.files.firstOrNull { containsBoxMethod(it) } ?: return emptyList()
-        val suspendModifier = if (containsSuspendBoxMethod(fileWithBox)) "suspend " else ""
-        val mainBody = generateMainBody()
+        konst fileWithBox = module.files.firstOrNull { containsBoxMethod(it) } ?: return emptyList()
+        konst suspendModifier = if (containsSuspendBoxMethod(fileWithBox)) "suspend " else ""
+        konst mainBody = generateMainBody()
 
-        val code = buildString {
+        konst code = buildString {
             detectPackage(fileWithBox)?.let {
                 appendLine("package $it")
             }
@@ -89,7 +89,7 @@ open class MainFunctionForBlackBoxTestsSourceProvider(testServices: TestServices
                 """.trimIndent()
             )
         }
-        val file = testServices.temporaryDirectoryManager.getOrCreateTempDirectory("src").resolve(BOX_MAIN_FILE_NAME)
+        konst file = testServices.temporaryDirectoryManager.getOrCreateTempDirectory("src").resolve(BOX_MAIN_FILE_NAME)
         file.writeText(code)
 
         return listOf(file.toTestFile())

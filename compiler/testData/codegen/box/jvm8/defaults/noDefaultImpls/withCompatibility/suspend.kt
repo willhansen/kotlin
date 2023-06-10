@@ -27,7 +27,7 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var result = "FAIL"
     builder {
-        val testClass = TestClass()
+        konst testClass = TestClass()
         result = testClass.suspendFun()
     }
     return result

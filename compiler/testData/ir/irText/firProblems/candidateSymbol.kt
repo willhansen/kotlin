@@ -1,4 +1,4 @@
-class Candidate(val symbol: AbstractFirBasedSymbol<*>)
+class Candidate(konst symbol: AbstractFirBasedSymbol<*>)
 
 abstract class AbstractFirBasedSymbol<E> where E : FirSymbolOwner<E>, E : FirDeclaration {
     lateinit var fir: E
@@ -7,14 +7,14 @@ abstract class AbstractFirBasedSymbol<E> where E : FirSymbolOwner<E>, E : FirDec
 interface FirDeclaration
 
 interface FirSymbolOwner<E> where E : FirSymbolOwner<E>, E : FirDeclaration {
-    val symbol: AbstractFirBasedSymbol<E>
+    konst symbol: AbstractFirBasedSymbol<E>
 }
 
 interface FirCallableMemberDeclaration<F : FirCallableMemberDeclaration<F>> : FirSymbolOwner<F>, FirDeclaration {
-    override val symbol: AbstractFirBasedSymbol<F>
+    override konst symbol: AbstractFirBasedSymbol<F>
 }
 
 fun foo(candidate: Candidate) {
-    val me = candidate.symbol.fir
+    konst me = candidate.symbol.fir
     if (me is FirCallableMemberDeclaration<*> && me.symbol != null) {}
 }

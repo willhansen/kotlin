@@ -4,11 +4,11 @@ open class A {
     var y: String = "42"
         get() = field +
                 "!"
-        set(value) {
+        set(konstue) {
             print(
                     field)
             field =
-                    value.removeSuffix("!")
+                    konstue.removeSuffix("!")
         }
 }
 

@@ -23,10 +23,10 @@ inline fun <reified `true`, reified `false`> f1() =
         else -> false
     }
 
-inline fun <reified T : D<`false`>> T.f2(value: T) = value is `false`
+inline fun <reified T : D<`false`>> T.f2(konstue: T) = konstue is `false`
 
 class A<K: List<out `true`<out String>>> {
-    val x = true
+    konst x = true
 }
 
 class B<K, T: A<List<out `true`<String>>>> {
@@ -49,7 +49,7 @@ fun f8(x1: `true`<out Any>) = false
 
 fun f9(x1: `true`<out List<`true`<*>>>) = true
 
-val x1: List<`false`?> = listOf(`false`(), null, `false`())
+konst x1: List<`false`?> = listOf(`false`(), null, `false`())
 
 lateinit var x2: List<`true`<out Number>?>
 

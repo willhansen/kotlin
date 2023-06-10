@@ -9,7 +9,7 @@ enum class Enum {
 
     companion object {
         @Ann
-        val c: Int = 1
+        konst c: Int = 1
     }
 }
 

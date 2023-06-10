@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 
 object FirEmptyContractDescription : FirContractDescription() {
-    override val source: KtSourceElement? get() = null
+    override konst source: KtSourceElement? get() = null
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

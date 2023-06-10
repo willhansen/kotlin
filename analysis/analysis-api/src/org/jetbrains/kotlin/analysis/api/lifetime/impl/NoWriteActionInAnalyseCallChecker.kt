@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.analysis.api.KtAnalysisApiInternals
 @KtAnalysisApiInternals
 public class NoWriteActionInAnalyseCallChecker(parentDisposable: Disposable) {
     init {
-        val listener = object : ApplicationListener {
+        konst listener = object : ApplicationListener {
             override fun writeActionFinished(action: Any) {
                 if (currentAnalysisContextEnteringCount.get() > 0) {
                     throw WriteActionStartInsideAnalysisContextException()
@@ -31,7 +31,7 @@ public class NoWriteActionInAnalyseCallChecker(parentDisposable: Disposable) {
         currentAnalysisContextEnteringCount.set(currentAnalysisContextEnteringCount.get() - 1)
     }
 
-    private val currentAnalysisContextEnteringCount = ThreadLocal.withInitial { 0 }
+    private konst currentAnalysisContextEnteringCount = ThreadLocal.withInitial { 0 }
 }
 
 public class WriteActionStartInsideAnalysisContextException : IllegalStateException(

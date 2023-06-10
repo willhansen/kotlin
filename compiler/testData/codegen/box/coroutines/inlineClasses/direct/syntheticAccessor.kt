@@ -6,7 +6,7 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class I(val x: Any?)
+inline class I(konst x: Any?)
 
 class C {
     private suspend fun f(): I {
@@ -16,7 +16,7 @@ class C {
     fun g() = suspend { f() }
 }
 
-val c: Continuation<Unit>? = null
+konst c: Continuation<Unit>? = null
 
 fun box(): String {
     var result = "fail"

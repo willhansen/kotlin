@@ -4,15 +4,15 @@
 		"visibility": "internal",
 		"class": "Ann",
 		"members": [
-			{"visibility": "public",	"declaration": "final val i: kotlin.Int", "name": "i", "desc": "()I"},
-			{"visibility": "public",	"declaration": "final val s: kotlin.Short", "name": "s", "desc": "()S"},
-			{"visibility": "public",	"declaration": "final val f: kotlin.Float", "name": "f", "desc": "()F"},
-			{"visibility": "public",	"declaration": "final val d: kotlin.Double", "name": "d", "desc": "()D"},
-			{"visibility": "public",	"declaration": "final val l: kotlin.Long", "name": "l", "desc": "()J"},
-			{"visibility": "public",	"declaration": "final val b: kotlin.Byte", "name": "b", "desc": "()B"},
-			{"visibility": "public",	"declaration": "final val bool: kotlin.Boolean", "name": "bool", "desc": "()Z"},
-			{"visibility": "public",	"declaration": "final val c: kotlin.Char", "name": "c", "desc": "()C"},
-			{"visibility": "public",	"declaration": "final val str: kotlin.String", "name": "str", "desc": "()Ljava/lang/String;"}
+			{"visibility": "public",	"declaration": "final konst i: kotlin.Int", "name": "i", "desc": "()I"},
+			{"visibility": "public",	"declaration": "final konst s: kotlin.Short", "name": "s", "desc": "()S"},
+			{"visibility": "public",	"declaration": "final konst f: kotlin.Float", "name": "f", "desc": "()F"},
+			{"visibility": "public",	"declaration": "final konst d: kotlin.Double", "name": "d", "desc": "()D"},
+			{"visibility": "public",	"declaration": "final konst l: kotlin.Long", "name": "l", "desc": "()J"},
+			{"visibility": "public",	"declaration": "final konst b: kotlin.Byte", "name": "b", "desc": "()B"},
+			{"visibility": "public",	"declaration": "final konst bool: kotlin.Boolean", "name": "bool", "desc": "()Z"},
+			{"visibility": "public",	"declaration": "final konst c: kotlin.Char", "name": "c", "desc": "()C"},
+			{"visibility": "public",	"declaration": "final konst str: kotlin.String", "name": "str", "desc": "()Ljava/lang/String;"}
 		]
 	}
 ]

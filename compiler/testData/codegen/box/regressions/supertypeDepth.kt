@@ -9,7 +9,7 @@ interface StubElement<T>
 interface Holder<T> : StubElement<T>
 
 fun test(a: A?, b: B) {
-    val c = a ?: b
+    konst c = a ?: b
 }
 
 fun box(): String {

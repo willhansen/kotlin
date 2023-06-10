@@ -4,15 +4,15 @@ fun getValue() : String? = null
 suspend fun computeValue() = "O"
 
 suspend fun repro() : String {
-    val value = getValue()
-    return if (value == null) {
+    konst konstue = getValue()
+    return if (konstue == null) {
         computeValue()
     } else {
-        value
+        konstue
     } + "K"
 }
 
-// This test is checking that the local variable table for `repro` is valid.
+// This test is checking that the local variable table for `repro` is konstid.
 // This is checked because the D8 dexer is run on the produced code and
-// we fail the tests on warnings because of invalid locals.
+// we fail the tests on warnings because of inkonstid locals.
 fun box() = "OK"

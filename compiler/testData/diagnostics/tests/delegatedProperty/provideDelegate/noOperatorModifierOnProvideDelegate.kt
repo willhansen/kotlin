@@ -2,7 +2,7 @@
 
 import kotlin.reflect.KProperty
 
-class StringDelegate(val s: String) {
+class StringDelegate(konst s: String) {
     operator fun getValue(a: Any?, p: KProperty<*>): Int = 42
 }
 
@@ -11,6 +11,6 @@ fun String.provideDelegate(a: Any?, p: KProperty<*>) = StringDelegate(this)
 
 operator fun String.getValue(a: Any?, p: KProperty<*>) = this
 
-val test1: String by "OK"
-val test2: Int by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE!>"OK"<!>
-val test3 by "OK"
+konst test1: String by "OK"
+konst test2: Int by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE!>"OK"<!>
+konst test3 by "OK"

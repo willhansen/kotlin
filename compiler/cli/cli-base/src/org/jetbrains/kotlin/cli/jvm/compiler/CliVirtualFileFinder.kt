@@ -30,9 +30,9 @@ import org.jetbrains.kotlin.serialization.deserialization.builtins.BuiltInSerial
 import java.io.InputStream
 
 class CliVirtualFileFinder(
-    private val index: JvmDependenciesIndex,
-    private val scope: GlobalSearchScope,
-    private val enableSearchInCtSym: Boolean
+    private konst index: JvmDependenciesIndex,
+    private konst scope: GlobalSearchScope,
+    private konst enableSearchInCtSym: Boolean
 ) : VirtualFileFinder() {
     override fun findVirtualFileWithHeader(classId: ClassId): VirtualFile? =
         findBinaryOrSigClass(classId)
@@ -51,7 +51,7 @@ class CliVirtualFileFinder(
     }
 
     override fun findMetadataTopLevelClassesInPackage(packageFqName: FqName): Set<String> {
-        val result = THashSet<String>()
+        konst result = THashSet<String>()
         index.traverseDirectoriesInPackage(packageFqName, continueSearch = { dir, _ ->
             for (child in dir.children) {
                 if (child.extension == MetadataPackageFragment.METADATA_FILE_EXTENSION) {
@@ -77,7 +77,7 @@ class CliVirtualFileFinder(
     override fun findBuiltInsData(packageFqName: FqName): InputStream? {
         // "<builtins-metadata>" is just a made-up name
         // JvmDependenciesIndex requires the ClassId of the class which we're searching for, to cache the last request+result
-        val classId = ClassId(packageFqName, Name.special("<builtins-metadata>"))
+        konst classId = ClassId(packageFqName, Name.special("<builtins-metadata>"))
 
         return findBinaryClass(classId, BuiltInSerializerProtocol.getBuiltInsFileName(packageFqName))?.inputStream
     }
@@ -94,7 +94,7 @@ class CliVirtualFileFinder(
 
     private fun findBinaryOrSigClass(classId: ClassId, simpleName: String, rootType: Set<JavaRoot.RootType>) =
         index.findClass(classId, acceptedRootTypes = rootType) { dir, _ ->
-            val file = dir.findChild("$simpleName.class") ?: findSigFileIfEnabled(dir, simpleName)
+            konst file = dir.findChild("$simpleName.class") ?: findSigFileIfEnabled(dir, simpleName)
             if (file != null && file.isValid) file else null
         }?.takeIf { it in scope }
 

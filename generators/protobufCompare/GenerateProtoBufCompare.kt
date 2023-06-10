@@ -20,7 +20,7 @@ import java.util.*
 
 class GenerateProtoBufCompare {
     companion object {
-        val DEST_FILE: File = File("build-common/src/org/jetbrains/kotlin/incremental/ProtoCompareGenerated.kt")
+        konst DEST_FILE: File = File("build-common/src/org/jetbrains/kotlin/incremental/ProtoCompareGenerated.kt")
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -35,7 +35,7 @@ class GenerateProtoBufCompare {
         }
     }
 
-    private val JAVA_TYPES_WITH_INLINED_EQUALS: EnumSet<Descriptors.FieldDescriptor.JavaType> = EnumSet.of(
+    private konst JAVA_TYPES_WITH_INLINED_EQUALS: EnumSet<Descriptors.FieldDescriptor.JavaType> = EnumSet.of(
         Descriptors.FieldDescriptor.JavaType.INT,
         Descriptors.FieldDescriptor.JavaType.LONG,
         Descriptors.FieldDescriptor.JavaType.FLOAT,
@@ -46,24 +46,24 @@ class GenerateProtoBufCompare {
 
     )
 
-    private val RESULT_NAME = "result"
-    private val STRING_INDEXES_NAME = "StringIndexes"
-    private val CLASS_ID_INDEXES_NAME = "ClassIdIndexes"
-    private val OLD_PREFIX = "old"
-    private val NEW_PREFIX = "new"
-    private val CHECK_EQUALS_NAME = "checkEquals"
-    private val CHECK_STRING_EQUALS_NAME = "checkStringEquals"
-    private val CHECK_CLASS_ID_EQUALS_NAME = "checkClassIdEquals"
-    private val HASH_CODE_NAME = "hashCode"
+    private konst RESULT_NAME = "result"
+    private konst STRING_INDEXES_NAME = "StringIndexes"
+    private konst CLASS_ID_INDEXES_NAME = "ClassIdIndexes"
+    private konst OLD_PREFIX = "old"
+    private konst NEW_PREFIX = "new"
+    private konst CHECK_EQUALS_NAME = "checkEquals"
+    private konst CHECK_STRING_EQUALS_NAME = "checkStringEquals"
+    private konst CHECK_CLASS_ID_EQUALS_NAME = "checkClassIdEquals"
+    private konst HASH_CODE_NAME = "hashCode"
 
-    private val extensions = object {
-        val jvm = DebugJvmProtoBuf.getDescriptor().extensions
-        val js = DebugJsProtoBuf.getDescriptor().extensions
-        val java = DebugJavaClassProtoBuf.getDescriptor().extensions
-        val builtIns = DebugBuiltInsProtoBuf.getDescriptor().extensions
-        val klib = DebugKlibMetadataProtoBuf.getDescriptor().extensions
+    private konst extensions = object {
+        konst jvm = DebugJvmProtoBuf.getDescriptor().extensions
+        konst js = DebugJsProtoBuf.getDescriptor().extensions
+        konst java = DebugJavaClassProtoBuf.getDescriptor().extensions
+        konst builtIns = DebugBuiltInsProtoBuf.getDescriptor().extensions
+        konst klib = DebugKlibMetadataProtoBuf.getDescriptor().extensions
 
-        private val extensionsMap = (jvm + js + java + builtIns + klib).groupBy { it.containingType }
+        private konst extensionsMap = (jvm + js + java + builtIns + klib).groupBy { it.containingType }
 
         operator fun get(desc: Descriptors.Descriptor): List<Descriptors.FieldDescriptor>? = extensionsMap[desc]
 
@@ -80,18 +80,18 @@ class GenerateProtoBufCompare {
                 }
             }
             return (extensionPrefix + fieldDescriptor.name.javaName + (if (fieldDescriptor.isRepeated) "List" else ""))
-                .replace("[A-Z]".toRegex()) { "_" + it.value }
+                .replace("[A-Z]".toRegex()) { "_" + it.konstue }
                 .uppercase()
         }
     }
 
-    private val allMessages: MutableSet<Descriptors.Descriptor> = linkedSetOf()
-    private val messagesToProcess: Queue<Descriptors.Descriptor> = LinkedList()
-    private val repeatedFields: MutableSet<Descriptors.FieldDescriptor> = linkedSetOf()
+    private konst allMessages: MutableSet<Descriptors.Descriptor> = linkedSetOf()
+    private konst messagesToProcess: Queue<Descriptors.Descriptor> = LinkedList()
+    private konst repeatedFields: MutableSet<Descriptors.FieldDescriptor> = linkedSetOf()
 
     fun generate(): String {
-        val sb = StringBuilder()
-        val p = Printer(sb)
+        konst sb = StringBuilder()
+        konst p = Printer(sb)
         p.println(File("license/COPYRIGHT_HEADER.txt").readText())
         p.println()
         p.println("@file:Suppress(\"UNUSED_PARAMETER\")")
@@ -116,35 +116,35 @@ class GenerateProtoBufCompare {
 
         p.println("open class ProtoCompareGenerated(")
         p.pushIndent()
-        p.println("val oldNameResolver: NameResolver,")
-        p.println("val newNameResolver: NameResolver,")
+        p.println("konst oldNameResolver: NameResolver,")
+        p.println("konst newNameResolver: NameResolver,")
         p.println("oldTypeTable: ProtoBuf.TypeTable?,")
         p.println("newTypeTable: ProtoBuf.TypeTable?")
         p.popIndent()
         p.println(") {")
         p.pushIndent()
 
-        p.println("private val strings = Interner<String>()")
-        p.println("val $OLD_PREFIX${STRING_INDEXES_NAME}Map: MutableMap<Int, Int> = hashMapOf()")
-        p.println("val $NEW_PREFIX${STRING_INDEXES_NAME}Map: MutableMap<Int, Int> = hashMapOf()")
-        p.println("val $OLD_PREFIX${CLASS_ID_INDEXES_NAME}Map: MutableMap<Int, Int> = hashMapOf()")
-        p.println("val $NEW_PREFIX${CLASS_ID_INDEXES_NAME}Map: MutableMap<Int, Int> = hashMapOf()")
-        p.println("val oldTypeTable: ProtoBuf.TypeTable = oldTypeTable ?: ProtoBuf.TypeTable.getDefaultInstance()")
-        p.println("val newTypeTable: ProtoBuf.TypeTable = newTypeTable ?: ProtoBuf.TypeTable.getDefaultInstance()")
+        p.println("private konst strings = Interner<String>()")
+        p.println("konst $OLD_PREFIX${STRING_INDEXES_NAME}Map: MutableMap<Int, Int> = hashMapOf()")
+        p.println("konst $NEW_PREFIX${STRING_INDEXES_NAME}Map: MutableMap<Int, Int> = hashMapOf()")
+        p.println("konst $OLD_PREFIX${CLASS_ID_INDEXES_NAME}Map: MutableMap<Int, Int> = hashMapOf()")
+        p.println("konst $NEW_PREFIX${CLASS_ID_INDEXES_NAME}Map: MutableMap<Int, Int> = hashMapOf()")
+        p.println("konst oldTypeTable: ProtoBuf.TypeTable = oldTypeTable ?: ProtoBuf.TypeTable.getDefaultInstance()")
+        p.println("konst newTypeTable: ProtoBuf.TypeTable = newTypeTable ?: ProtoBuf.TypeTable.getDefaultInstance()")
 
         p.println()
-        p.println("private val classIds = Interner<ClassId>()")
+        p.println("private konst classIds = Interner<ClassId>()")
 
-        val fileDescriptor = DebugProtoBuf.getDescriptor()
+        konst fileDescriptor = DebugProtoBuf.getDescriptor()
 
         addMessageToProcessIfNeeded(fileDescriptor.findMessageTypeByName("Package"))
         addMessageToProcessIfNeeded(fileDescriptor.findMessageTypeByName("Class"))
-        val generateDifference = allMessages.toSet()
+        konst generateDifference = allMessages.toSet()
 
         while (messagesToProcess.isNotEmpty()) {
             p.println()
 
-            val message = messagesToProcess.poll()
+            konst message = messagesToProcess.poll()
             generateForMessage(message, p)
 
             if (message in generateDifference) {
@@ -177,7 +177,7 @@ class GenerateProtoBufCompare {
         p.println("fun getIndexOfString(index: Int, map: MutableMap<Int, Int>, nameResolver: NameResolver): Int {")
         p.println("    map[index]?.let { return it }")
         p.println()
-        p.println("    val result = strings.intern(nameResolver.getString(index))")
+        p.println("    konst result = strings.intern(nameResolver.getString(index))")
         p.println("    map[index] = result")
         p.println("    return result")
         p.println("}")
@@ -190,7 +190,7 @@ class GenerateProtoBufCompare {
         p.println("fun getIndexOfClassId(index: Int, map: MutableMap<Int, Int>, nameResolver: NameResolver): Int {")
         p.println("    map[index]?.let { return it }")
         p.println()
-        p.println("    val result = classIds.intern(nameResolver.getClassId(index))")
+        p.println("    konst result = classIds.intern(nameResolver.getClassId(index))")
         p.println("    map[index] = result")
         p.println("    return result")
         p.println("}")
@@ -208,10 +208,10 @@ class GenerateProtoBufCompare {
     }
 
     fun generateHashCodeFun(descriptor: Descriptors.Descriptor, p: Printer) {
-        val typeName = descriptor.typeName
+        konst typeName = descriptor.typeName
 
-        val fields = descriptor.fields.filter { !it.shouldSkip }
-        val extFields = extensions[descriptor]?.filter { !it.shouldSkip } ?: emptyList()
+        konst fields = descriptor.fields.filter { !it.shouldSkip }
+        konst extFields = extensions[descriptor]?.filter { !it.shouldSkip } ?: emptyList()
 
         p.println()
         p.println("fun $typeName.$HASH_CODE_NAME(stringIndexes: (Int) -> Int, fqNameIndexes: (Int) -> Int, typeById: (Int) -> ProtoBuf.Type): Int {")
@@ -228,15 +228,15 @@ class GenerateProtoBufCompare {
     }
 
     fun generateHashCodeForField(field: Descriptors.FieldDescriptor, p: Printer, isExtensionField: Boolean) {
-        val fieldName = field.name.javaName
-        val capFieldName = fieldName.replaceFirstChar(Char::uppercaseChar)
-        val outerClassName = field.file.options.javaOuterClassname.removePrefix("Debug")
-        val fullFieldName = "$outerClassName.$fieldName"
+        konst fieldName = field.name.javaName
+        konst capFieldName = fieldName.replaceFirstChar(Char::uppercaseChar)
+        konst outerClassName = field.file.options.javaOuterClassname.removePrefix("Debug")
+        konst fullFieldName = "$outerClassName.$fieldName"
 
-        val upperBound = if (isExtensionField) "getExtensionCount($fullFieldName)" else "${fieldName}Count"
-        val hasMethod = if (isExtensionField) "hasExtension($fullFieldName)" else "has$capFieldName()"
-        val fieldValue = if (isExtensionField) "getExtension($fullFieldName)" else fieldName
-        val repeatedFieldValue = if (isExtensionField) "getExtension($fullFieldName, i)" else "get$capFieldName(i)"
+        konst upperBound = if (isExtensionField) "getExtensionCount($fullFieldName)" else "${fieldName}Count"
+        konst hasMethod = if (isExtensionField) "hasExtension($fullFieldName)" else "has$capFieldName()"
+        konst fieldValue = if (isExtensionField) "getExtension($fullFieldName)" else fieldName
+        konst repeatedFieldValue = if (isExtensionField) "getExtension($fullFieldName, i)" else "get$capFieldName(i)"
 
         p.println()
         if (field.isRepeated) {
@@ -254,10 +254,10 @@ class GenerateProtoBufCompare {
     }
 
     fun generateForMessage(descriptor: Descriptors.Descriptor, p: Printer) {
-        val typeName = descriptor.typeName
+        konst typeName = descriptor.typeName
 
-        val fields = descriptor.fields.filter { !it.shouldSkip }
-        val extFields = extensions[descriptor]?.filter { !it.shouldSkip } ?: emptyList()
+        konst fields = descriptor.fields.filter { !it.shouldSkip }
+        konst extFields = extensions[descriptor]?.filter { !it.shouldSkip } ?: emptyList()
 
         p.println("open fun $CHECK_EQUALS_NAME(old: $typeName, new: $typeName): Boolean {")
         p.pushIndent()
@@ -272,12 +272,12 @@ class GenerateProtoBufCompare {
     }
 
     fun generateDiffForMessage(descriptor: Descriptors.Descriptor, p: Printer) {
-        val typeName = descriptor.typeName
-        val className = typeName.replace(".", "")
+        konst typeName = descriptor.typeName
+        konst className = typeName.replace(".", "")
 
-        val fields = descriptor.fields.filter { !it.shouldSkip }
-        val extFields = extensions[descriptor]?.filter { !it.shouldSkip } ?: emptyList()
-        val allFields = fields + extFields
+        konst fields = descriptor.fields.filter { !it.shouldSkip }
+        konst extFields = extensions[descriptor]?.filter { !it.shouldSkip } ?: emptyList()
+        konst allFields = fields + extFields
 
         p.println("enum class ${className}Kind {")
         p.println(allFields.joinToString(",\n    ") { "    " + extensions.getEnumName(it) })
@@ -287,7 +287,7 @@ class GenerateProtoBufCompare {
         p.println("fun difference(old: $typeName, new: $typeName): EnumSet<${className}Kind> {")
         p.pushIndent()
 
-        p.println("val $RESULT_NAME = EnumSet.noneOf(${className}Kind::class.java)")
+        p.println("konst $RESULT_NAME = EnumSet.noneOf(${className}Kind::class.java)")
         p.println()
 
         fields.forEach { field -> FieldGeneratorForDiff(field, p).generate() }
@@ -301,10 +301,10 @@ class GenerateProtoBufCompare {
     fun generateHelperMethodForRepeatedField(field: Descriptors.FieldDescriptor, p: Printer) {
         assert(field.isRepeated) { "expected repeated field: ${field.name}" }
 
-        val typeName = field.containingType.typeName
-        val fieldName = field.name.javaName
-        val capFieldName = fieldName.replaceFirstChar(Char::uppercaseChar)
-        val methodName = field.helperMethodName()
+        konst typeName = field.containingType.typeName
+        konst fieldName = field.name.javaName
+        konst capFieldName = fieldName.replaceFirstChar(Char::uppercaseChar)
+        konst methodName = field.helperMethodName()
 
         p.println()
         p.println("open fun $methodName(old: $typeName, new: $typeName): Boolean {")
@@ -322,8 +322,8 @@ class GenerateProtoBufCompare {
         p.println("}")
     }
 
-    abstract inner class FieldGenerator(val field: Descriptors.FieldDescriptor, val p: Printer) {
-        val statement = field.getStatement()
+    abstract inner class FieldGenerator(konst field: Descriptors.FieldDescriptor, konst p: Printer) {
+        konst statement = field.getStatement()
 
         abstract fun Descriptors.FieldDescriptor.getStatement(): String
 
@@ -349,8 +349,8 @@ class GenerateProtoBufCompare {
     }
 
     open inner class FieldGeneratorImpl(field: Descriptors.FieldDescriptor, p: Printer) : FieldGenerator(field, p) {
-        val fieldName = field.name.javaName
-        val capFieldName = fieldName.replaceFirstChar(Char::uppercaseChar)
+        konst fieldName = field.name.javaName
+        konst capFieldName = fieldName.replaceFirstChar(Char::uppercaseChar)
 
         override fun printRepeatedField() {
             repeatedFields.add(field)
@@ -372,9 +372,9 @@ class GenerateProtoBufCompare {
     }
 
     open inner class ExtFieldGeneratorImpl(field: Descriptors.FieldDescriptor, p: Printer) : FieldGenerator(field, p) {
-        val outerClassName = field.file.options.javaOuterClassname.removePrefix("Debug")
-        val fieldName = field.name.javaName
-        val fullFieldName = "$outerClassName.$fieldName"
+        konst outerClassName = field.file.options.javaOuterClassname.removePrefix("Debug")
+        konst fieldName = field.name.javaName
+        konst fullFieldName = "$outerClassName.$fieldName"
 
         override fun printRepeatedField() {
             p.printlnMultiline(
@@ -413,13 +413,13 @@ class GenerateProtoBufCompare {
         override fun Descriptors.FieldDescriptor.getStatement(): String = statementForDiff
     }
 
-    private val Descriptors.FieldDescriptor.statementForDiff: String
+    private konst Descriptors.FieldDescriptor.statementForDiff: String
         get() = "$RESULT_NAME.add(${containingType.typeName.replace(".", "")}Kind.${extensions.getEnumName(this)})"
 
-    private val Descriptors.Descriptor.shouldSkip: Boolean
+    private konst Descriptors.Descriptor.shouldSkip: Boolean
         get() = options.getExtension(DebugExtOptionsProtoBuf.skipMessageInComparison)
 
-    private val Descriptors.FieldDescriptor.shouldSkip: Boolean
+    private konst Descriptors.FieldDescriptor.shouldSkip: Boolean
         get() = options.getExtension(DebugExtOptionsProtoBuf.skipInComparison)
                 || (type == Descriptors.FieldDescriptor.Type.MESSAGE && messageType.shouldSkip)
 
@@ -478,22 +478,22 @@ class GenerateProtoBufCompare {
                 "$expr.$HASH_CODE_NAME(stringIndexes, fqNameIndexes, typeById)"
         }
 
-    private val Descriptors.Descriptor.typeName: String
+    private konst Descriptors.Descriptor.typeName: String
         get() {
-            val outerClassName = file.options.javaOuterClassname.removePrefix("Debug")
-            val packageHeader = file.`package`
+            konst outerClassName = file.options.javaOuterClassname.removePrefix("Debug")
+            konst packageHeader = file.`package`
             return outerClassName + fullName.removePrefix(packageHeader)
         }
 
     private fun Descriptors.FieldDescriptor.helperMethodName(): String {
-        val packageHeader = this.file.`package`
-        val descriptor = this.containingType
-        val className = descriptor.fullName.removePrefix(packageHeader).replace(".", "")
-        val capFieldName = this.name.javaName.replaceFirstChar(Char::uppercaseChar)
+        konst packageHeader = this.file.`package`
+        konst descriptor = this.containingType
+        konst className = descriptor.fullName.removePrefix(packageHeader).replace(".", "")
+        konst capFieldName = this.name.javaName.replaceFirstChar(Char::uppercaseChar)
         return "$CHECK_EQUALS_NAME$className$capFieldName"
     }
 
-    private val String.javaName: String
+    private konst String.javaName: String
         get() = this.split("_").joinToString("") { it.replaceFirstChar(Char::uppercaseChar) }.replaceFirstChar(Char::lowercaseChar)
 }
 

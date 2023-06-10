@@ -18,14 +18,14 @@ class PreconditionsTest() {
     }
 
     @Test fun failingRequire() {
-        val error = assertFailsWith<IllegalArgumentException> {
+        konst error = assertFailsWith<IllegalArgumentException> {
             require(false)
         }
         assertNotNull(error.message)
     }
 
     @Test fun failingRequireWithLazyMessage() {
-        val error = assertFailsWith<IllegalArgumentException> {
+        konst error = assertFailsWith<IllegalArgumentException> {
             require(false) { "Hello" }
         }
         assertEquals("Hello", error.message)
@@ -40,35 +40,35 @@ class PreconditionsTest() {
     }
 
     @Test fun failingCheck() {
-        val error = assertFailsWith<IllegalStateException> {
+        konst error = assertFailsWith<IllegalStateException> {
             check(false)
         }
         assertNotNull(error.message)
     }
 
     @Test fun failingCheckWithLazyMessage() {
-        val error = assertFailsWith<IllegalStateException> {
+        konst error = assertFailsWith<IllegalStateException> {
             check(false) { "Hello" }
         }
         assertEquals("Hello", error.message)
     }
 
     @Test fun requireNotNull() {
-        val s1: String? = "S1"
-        val r1: String = requireNotNull(s1)
+        konst s1: String? = "S1"
+        konst r1: String = requireNotNull(s1)
         assertEquals("S1", r1)
     }
 
     @Test fun requireNotNullFails() {
         assertFailsWith<IllegalArgumentException> {
-            val s2: String? = null
+            konst s2: String? = null
             requireNotNull(s2)
         }
     }
 
     @Test fun requireNotNullWithLazyMessage() {
-        val error = assertFailsWith<IllegalArgumentException> {
-            val obj: Any? = null
+        konst error = assertFailsWith<IllegalArgumentException> {
+            konst obj: Any? = null
             requireNotNull(obj) { "Message" }
         }
         assertEquals("Message", error.message)
@@ -78,24 +78,24 @@ class PreconditionsTest() {
             lazyCalled = true
             "Message"
         }
-        assertFalse(lazyCalled, "Message is not evaluated if the condition is met")
+        assertFalse(lazyCalled, "Message is not ekonstuated if the condition is met")
     }
 
     @Test fun checkNotNull() {
-        val s1: String? = "S1"
-        val r1: String = checkNotNull(s1)
+        konst s1: String? = "S1"
+        konst r1: String = checkNotNull(s1)
         assertEquals("S1", r1)
     }
 
     @Test fun checkNotNullFails() {
         assertFailsWith<IllegalStateException> {
-            val s2: String? = null
+            konst s2: String? = null
             checkNotNull(s2)
         }
     }
 
     @Test fun error() {
-        val error = assertFailsWith<IllegalStateException> {
+        konst error = assertFailsWith<IllegalStateException> {
             error("There was a problem")
         }
         assertEquals("There was a problem", error.message)

@@ -41,7 +41,7 @@ class K2KotlinxSerializationIT : KGPBaseTest() {
         project("kotlinxSerializationK2AgainstK1Lib/lib", gradleVersion, localRepoDir = tempDir) {
             build(":publish") {
                 assertTasksExecuted(":publish")
-                val publishedLib = tempDir.resolve("com/example/serialization_lib/serialization_lib/1.0")
+                konst publishedLib = tempDir.resolve("com/example/serialization_lib/serialization_lib/1.0")
                 assertDirectoryExists(publishedLib)
                 assertTrue(publishedLib.listDirectoryEntries().isNotEmpty())
             }

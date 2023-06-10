@@ -2,7 +2,7 @@ package
 
 package d {
     public var r: d.M.T
-    public val y: d.M.T
+    public konst y: d.M.T
     public fun f(): kotlin.Unit
 
     public object A {

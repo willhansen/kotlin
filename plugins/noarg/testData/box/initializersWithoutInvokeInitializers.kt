@@ -2,16 +2,16 @@
 
 annotation class NoArg
 
-class Simple(val a: String)
+class Simple(konst a: String)
 
 @NoArg
-class Test(val a: String) {
-    val x = 5
-    val y: Simple? = Simple("Hello, world!")
+class Test(konst a: String) {
+    konst x = 5
+    konst y: Simple? = Simple("Hello, world!")
 }
 
 fun box(): String {
-    val test = Test::class.java.newInstance()
+    konst test = Test::class.java.newInstance()
 
     if (test.x != 0) {
         return "Bad 5"

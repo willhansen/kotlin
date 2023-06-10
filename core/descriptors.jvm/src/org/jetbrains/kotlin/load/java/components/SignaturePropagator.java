@@ -37,11 +37,11 @@ public interface SignaturePropagator {
                 @NotNull ClassDescriptor owner,
                 @NotNull KotlinType returnType,
                 @Nullable KotlinType receiverType,
-                @NotNull List<ValueParameterDescriptor> valueParameters,
+                @NotNull List<ValueParameterDescriptor> konstueParameters,
                 @NotNull List<TypeParameterDescriptor> typeParameters
         ) {
             return new PropagatedSignature(
-                    returnType, receiverType, valueParameters, typeParameters, Collections.<String>emptyList(), false
+                    returnType, receiverType, konstueParameters, typeParameters, Collections.<String>emptyList(), false
             );
         }
 
@@ -54,7 +54,7 @@ public interface SignaturePropagator {
     class PropagatedSignature {
         private final KotlinType returnType;
         private final KotlinType receiverType;
-        private final List<ValueParameterDescriptor> valueParameters;
+        private final List<ValueParameterDescriptor> konstueParameters;
         private final List<TypeParameterDescriptor> typeParameters;
         private final List<String> signatureErrors;
         private final boolean hasStableParameterNames;
@@ -62,14 +62,14 @@ public interface SignaturePropagator {
         public PropagatedSignature(
                 @NotNull KotlinType returnType,
                 @Nullable KotlinType receiverType,
-                @NotNull List<ValueParameterDescriptor> valueParameters,
+                @NotNull List<ValueParameterDescriptor> konstueParameters,
                 @NotNull List<TypeParameterDescriptor> typeParameters,
                 @NotNull List<String> signatureErrors,
                 boolean hasStableParameterNames
         ) {
             this.returnType = returnType;
             this.receiverType = receiverType;
-            this.valueParameters = valueParameters;
+            this.konstueParameters = konstueParameters;
             this.typeParameters = typeParameters;
             this.signatureErrors = signatureErrors;
             this.hasStableParameterNames = hasStableParameterNames;
@@ -87,7 +87,7 @@ public interface SignaturePropagator {
 
         @NotNull
         public List<ValueParameterDescriptor> getValueParameters() {
-            return valueParameters;
+            return konstueParameters;
         }
 
         @NotNull
@@ -111,7 +111,7 @@ public interface SignaturePropagator {
             @NotNull ClassDescriptor owner,
             @NotNull KotlinType returnType,
             @Nullable KotlinType receiverType,
-            @NotNull List<ValueParameterDescriptor> valueParameters,
+            @NotNull List<ValueParameterDescriptor> konstueParameters,
             @NotNull List<TypeParameterDescriptor> typeParameters
     );
 

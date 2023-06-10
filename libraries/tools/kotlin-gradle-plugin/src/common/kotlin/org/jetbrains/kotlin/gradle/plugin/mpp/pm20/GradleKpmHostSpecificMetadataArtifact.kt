@@ -17,15 +17,15 @@ import org.jetbrains.kotlin.library.KLIB_FILE_EXTENSION
  * Will add this jar artifact to the given configuration
  */
 
-val GradleKpmHostSpecificMetadataArtifact = GradleKpmConfigurationArtifactsSetup<GradleKpmNativeVariantInternal> artifacts@{
-    val hostSpecificMetadataElements = fragment.hostSpecificMetadataElementsConfiguration ?: return@artifacts
+konst GradleKpmHostSpecificMetadataArtifact = GradleKpmConfigurationArtifactsSetup<GradleKpmNativeVariantInternal> artifacts@{
+    konst hostSpecificMetadataElements = fragment.hostSpecificMetadataElementsConfiguration ?: return@artifacts
 
-    val hostSpecificMetadataJar = project.registerTask<Jar>(fragment.disambiguateName("hostSpecificMetadataJar")) { jar ->
+    konst hostSpecificMetadataJar = project.registerTask<Jar>(fragment.disambiguateName("hostSpecificMetadataJar")) { jar ->
         jar.archiveClassifier.set("metadata")
         jar.archiveAppendix.set(fragment.disambiguateName(""))
         project.metadataCompilationRegistryByModuleId.getValue(fragment.containingModule.moduleIdentifier)
             .withAll { metadataCompilation ->
-                val metadataFragment = metadataCompilation.fragment
+                konst metadataFragment = metadataCompilation.fragment
                 if (metadataCompilation is GradleKpmNativeFragmentMetadataCompilationData) {
                     jar.from(project.files(project.provider {
                         if (metadataFragment in fragment.withRefinesClosure && metadataFragment.isNativeHostSpecific())

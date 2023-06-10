@@ -13,14 +13,14 @@ fun <T> myRun(block: () -> T): T {
 }
 
 fun reassignmentInUsualFlow() {
-    val x: Int
+    konst x: Int
     myRun { x = 42 }
     <!VAL_REASSIGNMENT!>x<!> = 43
     x.inc()
 }
 
 fun reassignment() {
-    val x = 42
+    konst x = 42
     myRun {
         <!VAL_REASSIGNMENT!>x<!> = 43
     }

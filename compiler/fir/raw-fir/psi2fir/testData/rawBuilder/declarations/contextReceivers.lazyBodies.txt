@@ -2,7 +2,7 @@ FILE: contextReceivers.kt
     context(A, b@B)
     public? final? fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
     context(A, b@B)
-    public? final? val x: Int
+    public? final? konst x: Int
         public? get(): Int { LAZY_BLOCK }
     context(A, b@B)
     public? final? class C : R|kotlin/Any| {

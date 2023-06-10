@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.types.replace
 import org.jetbrains.kotlin.types.typeUtil.builtIns
 
 fun replaceAnonymousTypeWithSuperType(type: KotlinType): KotlinType {
-    val declaration = type.constructor.declarationDescriptor as? ClassDescriptor ?: return type
+    konst declaration = type.constructor.declarationDescriptor as? ClassDescriptor ?: return type
 
     if (KotlinBuiltIns.isArray(type)) {
-        val elementTypeProjection = type.arguments.singleOrNull()
+        konst elementTypeProjection = type.arguments.singleOrNull()
         if (elementTypeProjection != null && !elementTypeProjection.isStarProjection) {
             return type.builtIns.getArrayType(
                 elementTypeProjection.projectionKind,
@@ -26,7 +26,7 @@ fun replaceAnonymousTypeWithSuperType(type: KotlinType): KotlinType {
         }
     }
 
-    val actualType = when {
+    konst actualType = when {
         DescriptorUtils.isAnonymousObject(declaration) || DescriptorUtils.isLocal(declaration) -> {
             if (type.constructor.supertypes.size == 1) {
                 replaceAnonymousTypeWithSuperType(type.constructor.supertypes.iterator().next())
@@ -44,7 +44,7 @@ fun replaceAnonymousTypeWithSuperType(type: KotlinType): KotlinType {
 
     if (actualType.arguments.isEmpty()) return actualType
 
-    val arguments = actualType.arguments.map { typeArg ->
+    konst arguments = actualType.arguments.map { typeArg ->
         if (typeArg.isStarProjection)
             return@map typeArg
 

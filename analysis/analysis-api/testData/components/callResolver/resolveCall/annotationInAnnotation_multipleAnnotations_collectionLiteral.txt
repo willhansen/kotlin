@@ -7,7 +7,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = AnnotationArray
         symbol = <constructor>(vararg annos: Annotation): AnnotationArray
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = annos
             receiverType = null

@@ -47,11 +47,11 @@ object FirJsMultipleInheritanceChecker : FirClassChecker() {
             return
         }
 
-        val scope = unsubstitutedScope(context)
-        val overridesWithSameName = scope.getFunctions(functionToCheck)
+        konst scope = unsubstitutedScope(context)
+        konst overridesWithSameName = scope.getFunctions(functionToCheck)
 
         for (function in overridesWithSameName) {
-            val overridden = function.overriddenFunctions(symbol, context)
+            konst overridden = function.overriddenFunctions(symbol, context)
             if (
                 overridden.size > 1 &&
                 overridden.any { it.callableId.classId == supertype.classId }

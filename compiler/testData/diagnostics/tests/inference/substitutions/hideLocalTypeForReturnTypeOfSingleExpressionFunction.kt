@@ -18,15 +18,15 @@ fun main() {
 class FieldTest {
     var result = ""
 
-    private val test = object {
+    private konst test = object {
         fun bar() = object {
             fun qux() = object {
             }.also { result += "b" }
         }.also { result += "a" }
     }.also { result += "!" }
 
-    private val ttt = test.bar()
-    private val qqq = ttt.qux()
+    private konst ttt = test.bar()
+    private konst qqq = ttt.qux()
 }
 
 interface I<T>

@@ -71,7 +71,7 @@ class ConfigurationCacheIT : AbstractConfigurationCacheIT() {
     @GradleTest
     fun testMppWithMavenPublish(gradleVersion: GradleVersion) {
         project("new-mpp-lib-and-app/sample-lib", gradleVersion) {
-            val publishedTargets = listOf("kotlinMultiplatform", "jvm6", "nodeJs", "linux64", "mingw64", "mingw86")
+            konst publishedTargets = listOf("kotlinMultiplatform", "jvm6", "nodeJs", "linux64", "mingw64", "mingw86")
             testConfigurationCacheOf(
                 *(publishedTargets.map { ":publish${it.replaceFirstChar { it.uppercaseChar() }}PublicationToMavenRepository" }.toTypedArray()),
                 checkUpToDateOnRebuild = false
@@ -88,7 +88,7 @@ class ConfigurationCacheIT : AbstractConfigurationCacheIT() {
     )
     @GradleTest
     fun testNativeTasks(gradleVersion: GradleVersion) {
-        val expectedTasks = mutableListOf(
+        konst expectedTasks = mutableListOf(
             ":lib:cinteropMyCinteropLinuxX64",
             ":lib:commonizeCInterop",
             ":lib:compileKotlinLinuxX64",
@@ -144,7 +144,7 @@ class ConfigurationCacheIT : AbstractConfigurationCacheIT() {
 
             // Override kotlin native home location to be able to run clean native distribution commonization task
             // since by default it is global location on host
-            val buildOptions = defaultBuildOptions.copy(
+            konst buildOptions = defaultBuildOptions.copy(
                 freeArgs = listOf("-Porg.jetbrains.kotlin.native.home=$konanHome")
             )
             build(":cleanNativeDistributionCommonization", buildOptions = buildOptions) {
@@ -264,20 +264,20 @@ class ConfigurationCacheIT : AbstractConfigurationCacheIT() {
     @GradleTest
     fun testBuildScanReportSmokeTestForConfigurationCache(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
-            val buildOptions = defaultBuildOptions.copy(buildReport = listOf(BuildReportType.BUILD_SCAN), logLevel = LogLevel.DEBUG)
-            build("clean", "assemble", "-Pkotlin.build.report.build_scan.custom_values_limit=0", "--scan", buildOptions = buildOptions) {
-                assertOutputContains("Can't add any more custom values into build scan")
+            konst buildOptions = defaultBuildOptions.copy(buildReport = listOf(BuildReportType.BUILD_SCAN), logLevel = LogLevel.DEBUG)
+            build("clean", "assemble", "-Pkotlin.build.report.build_scan.custom_konstues_limit=0", "--scan", buildOptions = buildOptions) {
+                assertOutputContains("Can't add any more custom konstues into build scan")
             }
 
-            build("clean", "assemble", "-Pkotlin.build.report.build_scan.custom_values_limit=0", "--scan", buildOptions = buildOptions) {
-                assertOutputContains("Can't add any more custom values into build scan")
+            build("clean", "assemble", "-Pkotlin.build.report.build_scan.custom_konstues_limit=0", "--scan", buildOptions = buildOptions) {
+                assertOutputContains("Can't add any more custom konstues into build scan")
             }
         }
     }
 }
 
 abstract class AbstractConfigurationCacheIT : KGPBaseTest() {
-    override val defaultBuildOptions =
+    override konst defaultBuildOptions =
         super.defaultBuildOptions.copy(configurationCache = true)
 
     protected fun TestProject.testConfigurationCacheOf(

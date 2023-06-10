@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.KtLightSourceElement
 import org.jetbrains.kotlin.KtPsiSourceElement
 
 class SourceElementPositioningStrategy(
-    private val lightTreeStrategy: LightTreePositioningStrategy,
-    private val psiStrategy: PositioningStrategy<*>,
-    private val offsetsOnlyPositioningStrategy: OffsetsOnlyPositioningStrategy = OffsetsOnlyPositioningStrategy(),
+    private konst lightTreeStrategy: LightTreePositioningStrategy,
+    private konst psiStrategy: PositioningStrategy<*>,
+    private konst offsetsOnlyPositioningStrategy: OffsetsOnlyPositioningStrategy = OffsetsOnlyPositioningStrategy(),
 ) : AbstractSourceElementPositioningStrategy() {
     override fun markDiagnostic(diagnostic: KtDiagnostic): List<TextRange> {
-        return when (val element = diagnostic.element) {
+        return when (konst element = diagnostic.element) {
             is KtPsiSourceElement -> psiStrategy.markDiagnostic(diagnostic)
             is KtLightSourceElement -> lightTreeStrategy.markKtDiagnostic(element, diagnostic)
             else -> offsetsOnlyPositioningStrategy.markKtDiagnostic(element, diagnostic)

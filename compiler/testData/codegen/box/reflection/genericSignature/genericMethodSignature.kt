@@ -12,7 +12,7 @@ class Zout<out T> {}
 
 class Zin<in T> {}
 
-class Params(val methodIndex: Int, val paramClass: Class<*>, val expectedReturnType: String, val expecedParamType: String)
+class Params(konst methodIndex: Int, konst paramClass: Class<*>, konst expectedReturnType: String, konst expecedParamType: String)
 
 class Test<T, X, in Y>() {
 
@@ -28,9 +28,9 @@ class Test<T, X, in Y>() {
 }
 
 fun box(): String {
-    val clz = Test::class.java
+    konst clz = Test::class.java
 
-    val params = listOf(
+    konst params = listOf(
             Params(1, Any::class.java, "T", "T"),
             Params(2, Z::class.java, "test.Z<T>", "test.Z<T>"),
             Params(3, Z::class.java, "test.Z<java.lang.String>", "test.Z<java.lang.String>"),
@@ -41,7 +41,7 @@ fun box(): String {
 
     var result: String = ""
     for(p in params) {
-        val fail = test(clz, p.methodIndex, p.paramClass, p.expectedReturnType, p.expecedParamType)
+        konst fail = test(clz, p.methodIndex, p.paramClass, p.expectedReturnType, p.expecedParamType)
         if (fail != "OK") {
             result += fail + "\n";
         }
@@ -52,12 +52,12 @@ fun box(): String {
 }
 
 fun test(clazz: Class<*>, methodIndex: Int, paramClass: Class<*>, expectedReturn : String, expectedParam : String): String {
-    val method = clazz.getDeclaredMethod("test$methodIndex", paramClass)!!;
+    konst method = clazz.getDeclaredMethod("test$methodIndex", paramClass)!!;
 
     if (method.getGenericReturnType().toString() != expectedReturn)
         return "fail$methodIndex: " + method.getGenericReturnType();
 
-    val test1Param = method.getGenericParameterTypes()!![0];
+    konst test1Param = method.getGenericParameterTypes()!![0];
 
     if (test1Param.toString() != expectedParam)
         return "fail${methodIndex}_param: " + test1Param;

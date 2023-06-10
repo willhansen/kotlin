@@ -11,46 +11,46 @@ import kotlin.test.assertSame
 
 class ClosureTest {
 
-    private class Node(val value: String, var parent: Node? = null, val children: MutableList<Node> = mutableListOf()) {
-        override fun toString(): String = value
+    private class Node(konst konstue: String, var parent: Node? = null, konst children: MutableList<Node> = mutableListOf()) {
+        override fun toString(): String = konstue
     }
 
     /* 'Children' is explicitly not implementing Collection */
-    private class IterableNode(val value: String, val children: Children = Children(mutableListOf())) {
+    private class IterableNode(konst konstue: String, konst children: Children = Children(mutableListOf())) {
 
         /* Does not implement Collection */
-        class Children(private val list: MutableList<IterableNode>) : Iterable<IterableNode> {
+        class Children(private konst list: MutableList<IterableNode>) : Iterable<IterableNode> {
             override fun iterator(): Iterator<IterableNode> = list.iterator()
             fun add(node: IterableNode) = list.add(node)
         }
 
-        override fun toString(): String = value
+        override fun toString(): String = konstue
     }
 
     @Test
     fun `closure does not include root node`() {
-        val closure = Node("a", children = mutableListOf(Node("b"), Node("c"))).closure { it.children }
+        konst closure = Node("a", children = mutableListOf(Node("b"), Node("c"))).closure { it.children }
         assertEquals(
-            listOf("b", "c"), closure.map { it.value },
+            listOf("b", "c"), closure.map { it.konstue },
             "Expected closure to not include root node"
         )
     }
 
     @Test
     fun `withClosure does include root node`() {
-        val closure = Node("a", children = mutableListOf(Node("b"), Node("c"))).withClosure { it.children }
+        konst closure = Node("a", children = mutableListOf(Node("b"), Node("c"))).withClosure { it.children }
         assertEquals(
-            listOf("a", "b", "c"), closure.map { it.value },
+            listOf("a", "b", "c"), closure.map { it.konstue },
             "Expected 'withClosure' to include root node"
         )
     }
 
     @Test
     fun `closure handles loop and self references`() {
-        val nodeA = Node("a")
-        val nodeB = Node("b")
-        val nodeC = Node("c")
-        val nodeD = Node("d")
+        konst nodeA = Node("a")
+        konst nodeB = Node("b")
+        konst nodeC = Node("c")
+        konst nodeD = Node("d")
 
         // a -> b -> c -> d
         nodeA.children.add(nodeB)
@@ -63,7 +63,7 @@ class ClosureTest {
         // add loop from c -> a
         nodeC.children.add(nodeA)
 
-        val closure = nodeA.closure { it.children }
+        konst closure = nodeA.closure { it.children }
         assertEquals(
             setOf(nodeB, nodeC, nodeD), closure,
             "Expected transitiveClosure to be robust against loops and self references"
@@ -72,10 +72,10 @@ class ClosureTest {
 
     @Test
     fun `closure handles loop and self references - iterable node`() {
-        val nodeA = IterableNode("a")
-        val nodeB = IterableNode("b")
-        val nodeC = IterableNode("c")
-        val nodeD = IterableNode("d")
+        konst nodeA = IterableNode("a")
+        konst nodeB = IterableNode("b")
+        konst nodeC = IterableNode("c")
+        konst nodeD = IterableNode("d")
 
         // a -> b -> c -> d
         nodeA.children.add(nodeB)
@@ -88,7 +88,7 @@ class ClosureTest {
         // add loop from c -> a
         nodeC.children.add(nodeA)
 
-        val closure = nodeA.closure { it.children }
+        konst closure = nodeA.closure { it.children }
         assertEquals(
             setOf(nodeB, nodeC, nodeD), closure,
             "Expected transitiveClosure to be robust against loops and self references"
@@ -98,10 +98,10 @@ class ClosureTest {
 
     @Test
     fun `withClosure handles loop and self references`() {
-        val nodeA = Node("a")
-        val nodeB = Node("b")
-        val nodeC = Node("c")
-        val nodeD = Node("d")
+        konst nodeA = Node("a")
+        konst nodeB = Node("b")
+        konst nodeC = Node("c")
+        konst nodeD = Node("d")
 
         // a -> b -> c -> d
         nodeA.children.add(nodeB)
@@ -114,7 +114,7 @@ class ClosureTest {
         // add loop from c -> a
         nodeC.children.add(nodeA)
 
-        val closure = nodeA.withClosure { it.children }
+        konst closure = nodeA.withClosure { it.children }
         assertEquals(
             setOf(nodeA, nodeB, nodeC, nodeD), closure,
             "Expected transitiveClosure to be robust against loops and self references"
@@ -123,10 +123,10 @@ class ClosureTest {
 
     @Test
     fun `withClosure handles loop and self references - iterable node`() {
-        val nodeA = IterableNode("a")
-        val nodeB = IterableNode("b")
-        val nodeC = IterableNode("c")
-        val nodeD = IterableNode("d")
+        konst nodeA = IterableNode("a")
+        konst nodeB = IterableNode("b")
+        konst nodeC = IterableNode("c")
+        konst nodeD = IterableNode("d")
 
         // a -> b -> c -> d
         nodeA.children.add(nodeB)
@@ -139,7 +139,7 @@ class ClosureTest {
         // add loop from c -> a
         nodeC.children.add(nodeA)
 
-        val closure = nodeA.withClosure { it.children }
+        konst closure = nodeA.withClosure { it.children }
         assertEquals(
             setOf(nodeA, nodeB, nodeC, nodeD), closure,
             "Expected transitiveClosure to be robust against loops and self references"
@@ -157,20 +157,20 @@ class ClosureTest {
 
     @Test
     fun `closure with only self reference`() {
-        val node = Node("a")
+        konst node = Node("a")
         node.children.add(node)
         assertEquals(emptySet(), node.closure { it.children })
     }
 
     @Test
     fun `closure on List`() {
-        val a = Node("a")
-        val b = Node("b")
-        val c = Node("c")
-        val d = Node("d")
-        val e = Node("e")
-        val f = Node("f")
-        val g = Node("g")
+        konst a = Node("a")
+        konst b = Node("b")
+        konst c = Node("c")
+        konst d = Node("d")
+        konst e = Node("e")
+        konst f = Node("f")
+        konst g = Node("g")
 
         // a -> (b, c)
         // c -> (d)
@@ -185,19 +185,19 @@ class ClosureTest {
 
         assertEquals(
             listOf("b", "c", "f", "g", "d"), // <- a *is not* listed in closure!!!
-            listOf(a, e).closure<Node> { it.children }.map { it.value }
+            listOf(a, e).closure<Node> { it.children }.map { it.konstue }
         )
     }
 
     @Test
     fun `closure on List - iterable node`() {
-        val a = IterableNode("a")
-        val b = IterableNode("b")
-        val c = IterableNode("c")
-        val d = IterableNode("d")
-        val e = IterableNode("e")
-        val f = IterableNode("f")
-        val g = IterableNode("g")
+        konst a = IterableNode("a")
+        konst b = IterableNode("b")
+        konst c = IterableNode("c")
+        konst d = IterableNode("d")
+        konst e = IterableNode("e")
+        konst f = IterableNode("f")
+        konst g = IterableNode("g")
 
         // a -> (b, c)
         // c -> (d)
@@ -212,7 +212,7 @@ class ClosureTest {
 
         assertEquals(
             listOf("b", "c", "f", "g", "d"), // <- a *is not* listed in closure!!!
-            listOf(a, e).closure<IterableNode> { it.children }.map { it.value }
+            listOf(a, e).closure<IterableNode> { it.children }.map { it.konstue }
         )
     }
 
@@ -234,13 +234,13 @@ class ClosureTest {
 
     @Test
     fun `withClosure on List`() {
-        val a = Node("a")
-        val b = Node("b")
-        val c = Node("c")
-        val d = Node("d")
-        val e = Node("e")
-        val f = Node("f")
-        val g = Node("g")
+        konst a = Node("a")
+        konst b = Node("b")
+        konst c = Node("c")
+        konst d = Node("d")
+        konst e = Node("e")
+        konst f = Node("f")
+        konst g = Node("g")
 
         // a -> (b, c)
         // c -> (d)
@@ -255,7 +255,7 @@ class ClosureTest {
 
         assertEquals(
             listOf("a", "e", "b", "c", "f", "g", "d"),
-            listOf(a, e).withClosure<Node> { it.children }.map { it.value }
+            listOf(a, e).withClosure<Node> { it.children }.map { it.konstue }
         )
     }
 
@@ -270,36 +270,36 @@ class ClosureTest {
     @Test
     fun `withClosure with no further nodes`() {
         assertEquals(
-            listOf("a", "b"), listOf(Node("a"), Node("b")).withClosure<Node> { it.children }.map { it.value }
+            listOf("a", "b"), listOf(Node("a"), Node("b")).withClosure<Node> { it.children }.map { it.konstue }
         )
     }
 
     @Test
     fun linearClosure() {
-        val a = Node("a")
-        val b = Node("b")
-        val c = Node("c")
+        konst a = Node("a")
+        konst b = Node("b")
+        konst c = Node("c")
 
         c.parent = b
         b.parent = a
 
         assertEquals(
-            listOf("b", "a"), c.linearClosure { it.parent }.map { it.value },
+            listOf("b", "a"), c.linearClosure { it.parent }.map { it.konstue },
         )
     }
 
     @Test
     fun `linearClosure - loop`() {
-        val a = Node("a")
-        val b = Node("b")
-        val c = Node("c")
+        konst a = Node("a")
+        konst b = Node("b")
+        konst c = Node("c")
 
         c.parent = b
         b.parent = a
         a.parent = c
 
         assertEquals(
-            listOf("b", "a"), c.linearClosure { it.parent }.map { it.value },
+            listOf("b", "a"), c.linearClosure { it.parent }.map { it.konstue },
         )
     }
 
@@ -313,37 +313,37 @@ class ClosureTest {
 
     @Test
     fun withLinearClosure() {
-        val a = Node("a")
-        val b = Node("b")
-        val c = Node("c")
+        konst a = Node("a")
+        konst b = Node("b")
+        konst c = Node("c")
 
         c.parent = b
         b.parent = a
 
         assertEquals(
-            listOf("c", "b", "a"), c.withLinearClosure { it.parent }.map { it.value },
+            listOf("c", "b", "a"), c.withLinearClosure { it.parent }.map { it.konstue },
         )
     }
 
     @Test
     fun `withLinearClosure - loop`() {
-        val a = Node("a")
-        val b = Node("b")
-        val c = Node("c")
+        konst a = Node("a")
+        konst b = Node("b")
+        konst c = Node("c")
 
         c.parent = b
         b.parent = a
         a.parent = c
 
         assertEquals(
-            listOf("c", "b", "a"), c.withLinearClosure { it.parent }.map { it.value },
+            listOf("c", "b", "a"), c.withLinearClosure { it.parent }.map { it.konstue },
         )
     }
 
     @Test
     fun `withLinearClosure on empty`() {
         assertEquals(
-            listOf("a"), Node("a").withLinearClosure { it.parent }.map { it.value },
+            listOf("a"), Node("a").withLinearClosure { it.parent }.map { it.konstue },
         )
     }
 }

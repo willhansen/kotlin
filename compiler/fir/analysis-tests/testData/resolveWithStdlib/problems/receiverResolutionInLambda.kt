@@ -6,9 +6,9 @@
 class Case1() {
 
     fun foo() {
-        val x = sequence<String> {
+        konst x = sequence<String> {
 
-            val  y = this
+            konst  y = this
             //this is Case1 instead of SequenceScope<String>
             yield("") // UNRESOLVED_REFERENCE
 
@@ -24,9 +24,9 @@ class Case1() {
 }
 
 fun case2() {
-    val x = sequence<String> {
+    konst x = sequence<String> {
 
-        val  y = this
+        konst  y = this
         yield("") // UNRESOLVED_REFERENCE
 
         this.yield("") //UNRESOLVED_REFERENCE

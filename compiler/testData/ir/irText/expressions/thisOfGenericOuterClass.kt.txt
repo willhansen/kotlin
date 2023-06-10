@@ -5,7 +5,7 @@ class Outer<T : Any?> {
 
   }
 
-  val x: T
+  konst x: T
     field = x
     get
 
@@ -16,7 +16,7 @@ class Outer<T : Any?> {
 
     }
 
-    val y: Int
+    konst y: Int
       field = y
       get
 
@@ -33,7 +33,7 @@ fun Outer<Int>.test(): Inner<Int> {
 
       }
 
-      val xx: Int
+      konst xx: Int
         field = <this>.<get-x>().plus(other = <this>.<get-y>())
         get
 

@@ -1,4 +1,4 @@
-class Foo<out T>(val key: T)
+class Foo<out T>(konst key: T)
 class Bar()
 
 class KFlowable<T> {

@@ -1,6 +1,6 @@
 == foo ==
 fun foo(x: Int) {
-    val (a, b) = x
+    konst (a, b) = x
     a
 }
 ---------------------
@@ -9,7 +9,7 @@ L0:
     v(x: Int)
     magic[FAKE_INITIALIZER](x: Int) -> <v0>
     w(x|<v0>)
-  2 mark({ val (a, b) = x a })
+  2 mark({ konst (a, b) = x a })
     r(x) -> <v1>
     v(a)
     magic[UNRESOLVED_CALL](a|<v1>) -> <v2>

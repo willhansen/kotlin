@@ -19,32 +19,32 @@ Previously used to find a common representation for KPM and TCS.
 Not in use anymore. Can be removed/inlined into KPM later.
  */
 interface GradleKpmCompilationData<T : KotlinCommonOptions> {
-    val project: Project
-    val owner: Any?
+    konst project: Project
+    konst owner: Any?
 
-    val compilationPurpose: String
-    val compilationClassifier: String?
+    konst compilationPurpose: String
+    konst compilationClassifier: String?
 
-    val kotlinSourceDirectoriesByFragmentName: Map<String, SourceDirectorySet>
-    val compileKotlinTaskName: String
-    val compileAllTaskName: String
+    konst kotlinSourceDirectoriesByFragmentName: Map<String, SourceDirectorySet>
+    konst compileKotlinTaskName: String
+    konst compileAllTaskName: String
 
-    val compileDependencyFiles: FileCollection
-    val output: KotlinCompilationOutput
+    konst compileDependencyFiles: FileCollection
+    konst output: KotlinCompilationOutput
 
-    val languageSettings: LanguageSettings
-    val platformType: KotlinPlatformType
+    konst languageSettings: LanguageSettings
+    konst platformType: KotlinPlatformType
 
-    val moduleName: String
+    konst moduleName: String
 
     @Deprecated(
         message = "Replaced with compilerOptions.options",
         replaceWith = ReplaceWith("compilerOptions.options")
     )
-    val kotlinOptions: T
+    konst kotlinOptions: T
 
-    val compilerOptions: HasCompilerOptions<*>
+    konst compilerOptions: HasCompilerOptions<*>
 
-    val friendPaths: Iterable<FileCollection>
+    konst friendPaths: Iterable<FileCollection>
 }
 

@@ -17,7 +17,7 @@ class MyWrongClass : D() {
 }
 
 fun box() : String {
-    val clazz = MyWrongClass()
+    konst clazz = MyWrongClass()
     clazz.fieldO = "O"
     D.fieldK = "K"
     return clazz.fieldO!! + D.fieldK!!

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.test.services.assertions
 import org.jetbrains.kotlin.test.util.findElementByCommentPrefix
 
 abstract class AbstractFirOnAirResolveTest : AbstractLowLevelApiSingleFileTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
         fun fixUpAnnotations(element: KtElement): KtElement = when (element) {
@@ -29,15 +29,15 @@ abstract class AbstractFirOnAirResolveTest : AbstractLowLevelApiSingleFileTest()
             else -> element
         }
 
-        val place = (ktFile.findElementByCommentPrefix("/*PLACE*/") as KtElement).let(::fixUpAnnotations)
-        val onAir = (ktFile.findElementByCommentPrefix("/*ONAIR*/") as KtElement).let(::fixUpAnnotations)
+        konst place = (ktFile.findElementByCommentPrefix("/*PLACE*/") as KtElement).let(::fixUpAnnotations)
+        konst onAir = (ktFile.findElementByCommentPrefix("/*ONAIR*/") as KtElement).let(::fixUpAnnotations)
 
         check(place::class == onAir::class)
 
         resolveWithClearCaches(ktFile) { firResolveSession ->
             check(firResolveSession is LLFirSourceResolveSession)
-            val firElement = LowLevelFirApiFacadeForResolveOnAir.onAirResolveElement(firResolveSession, place, onAir)
-            val rendered = FirRenderer.withResolvePhase().renderElementAsString(firElement)
+            konst firElement = LowLevelFirApiFacadeForResolveOnAir.onAirResolveElement(firResolveSession, place, onAir)
+            konst rendered = FirRenderer.withResolvePhase().renderElementAsString(firElement)
             testServices.assertions.assertEqualsToTestDataFileSibling(rendered)
         }
     }

@@ -15,65 +15,65 @@ import org.jetbrains.kotlin.ir.util.isInterface
 import org.jetbrains.kotlin.wasm.ir.*
 import org.jetbrains.kotlin.wasm.ir.source.location.SourceLocation
 
-class WasmCompiledModuleFragment(val irBuiltIns: IrBuiltIns) {
-    val functions =
+class WasmCompiledModuleFragment(konst irBuiltIns: IrBuiltIns) {
+    konst functions =
         ReferencableAndDefinable<IrFunctionSymbol, WasmFunction>()
-    val globalFields =
+    konst globalFields =
         ReferencableAndDefinable<IrFieldSymbol, WasmGlobal>()
-    val globalVTables =
+    konst globalVTables =
         ReferencableAndDefinable<IrClassSymbol, WasmGlobal>()
-    val globalClassITables =
+    konst globalClassITables =
         ReferencableAndDefinable<IrClassSymbol, WasmGlobal>()
-    val functionTypes =
+    konst functionTypes =
         ReferencableAndDefinable<IrFunctionSymbol, WasmFunctionType>()
-    val gcTypes =
+    konst gcTypes =
         ReferencableAndDefinable<IrClassSymbol, WasmTypeDeclaration>()
-    val vTableGcTypes =
+    konst vTableGcTypes =
         ReferencableAndDefinable<IrClassSymbol, WasmTypeDeclaration>()
-    val classITableGcType =
+    konst classITableGcType =
         ReferencableAndDefinable<IrClassSymbol, WasmTypeDeclaration>()
-    val classITableInterfaceSlot =
+    konst classITableInterfaceSlot =
         ReferencableAndDefinable<IrClassSymbol, Int>()
-    val typeIds =
+    konst typeIds =
         ReferencableElements<IrClassSymbol, Int>()
-    val stringLiteralAddress =
+    konst stringLiteralAddress =
         ReferencableElements<String, Int>()
-    val stringLiteralPoolId =
+    konst stringLiteralPoolId =
         ReferencableElements<String, Int>()
-    val constantArrayDataSegmentId =
+    konst constantArrayDataSegmentId =
         ReferencableElements<Pair<List<Long>, WasmType>, Int>()
 
-    private val tagFuncType = WasmFunctionType(
+    private konst tagFuncType = WasmFunctionType(
         listOf(
             WasmRefNullType(WasmHeapType.Type(gcTypes.reference(irBuiltIns.throwableClass)))
         ),
         emptyList()
     )
-    val tag = WasmTag(tagFuncType)
+    konst tag = WasmTag(tagFuncType)
 
-    val typeInfo = ReferencableAndDefinable<IrClassSymbol, ConstantDataElement>()
+    konst typeInfo = ReferencableAndDefinable<IrClassSymbol, ConstantDataElement>()
 
-    val exports = mutableListOf<WasmExport<*>>()
+    konst exports = mutableListOf<WasmExport<*>>()
 
-    class JsCodeSnippet(val importName: String, val jsCode: String)
+    class JsCodeSnippet(konst importName: String, konst jsCode: String)
 
-    val jsFuns = mutableListOf<JsCodeSnippet>()
-    val jsModuleImports = mutableSetOf<String>()
+    konst jsFuns = mutableListOf<JsCodeSnippet>()
+    konst jsModuleImports = mutableSetOf<String>()
 
-    class FunWithPriority(val function: WasmFunction, val priority: String)
+    class FunWithPriority(konst function: WasmFunction, konst priority: String)
 
-    val initFunctions = mutableListOf<FunWithPriority>()
+    konst initFunctions = mutableListOf<FunWithPriority>()
 
-    val scratchMemAddr = WasmSymbol<Int>()
+    konst scratchMemAddr = WasmSymbol<Int>()
 
-    val stringPoolSize = WasmSymbol<Int>()
+    konst stringPoolSize = WasmSymbol<Int>()
 
     open class ReferencableElements<Ir, Wasm : Any> {
-        val unbound = mutableMapOf<Ir, WasmSymbol<Wasm>>()
+        konst unbound = mutableMapOf<Ir, WasmSymbol<Wasm>>()
         fun reference(ir: Ir): WasmSymbol<Wasm> {
-            val declaration = (ir as? IrSymbol)?.owner as? IrDeclarationWithName
+            konst declaration = (ir as? IrSymbol)?.owner as? IrDeclarationWithName
             if (declaration != null) {
-                val packageFragment = declaration.getPackageFragment()
+                konst packageFragment = declaration.getPackageFragment()
                 if (packageFragment is IrExternalPackageFragment) {
                     error("Referencing declaration without package fragment ${declaration.fqNameWhenAvailable}")
                 }
@@ -92,10 +92,10 @@ class WasmCompiledModuleFragment(val irBuiltIns: IrBuiltIns) {
             wasmToIr[wasm] = ir
         }
 
-        val defined = LinkedHashMap<Ir, Wasm>()
-        val elements = mutableListOf<Wasm>()
+        konst defined = LinkedHashMap<Ir, Wasm>()
+        konst elements = mutableListOf<Wasm>()
 
-        val wasmToIr = mutableMapOf<Wasm, Ir>()
+        konst wasmToIr = mutableMapOf<Wasm, Ir>()
     }
 
     fun linkWasmCompiledFragments(): WasmModule {
@@ -109,7 +109,7 @@ class WasmCompiledModuleFragment(val irBuiltIns: IrBuiltIns) {
         bind(globalClassITables.unbound, globalClassITables.defined)
 
         // Associate function types to a single canonical function type
-        val canonicalFunctionTypes =
+        konst canonicalFunctionTypes =
             functionTypes.elements.associateWithTo(LinkedHashMap()) { it }
 
         functionTypes.unbound.forEach { (irSymbol, wasmSymbol) ->
@@ -132,42 +132,42 @@ class WasmCompiledModuleFragment(val irBuiltIns: IrBuiltIns) {
         currentDataSectionAddress = alignUp(currentDataSectionAddress, INT_SIZE_BYTES)
         scratchMemAddr.bind(currentDataSectionAddress)
 
-        val stringDataSectionBytes = mutableListOf<Byte>()
+        konst stringDataSectionBytes = mutableListOf<Byte>()
         var stringDataSectionStart = 0
         var stringLiteralCount = 0
         for ((string, symbol) in stringLiteralAddress.unbound) {
             symbol.bind(stringDataSectionStart)
             stringLiteralPoolId.reference(string).bind(stringLiteralCount)
-            val constData = ConstantDataCharArray("string_literal", string.toCharArray())
+            konst constData = ConstantDataCharArray("string_literal", string.toCharArray())
             stringDataSectionBytes += constData.toBytes().toList()
             stringDataSectionStart += constData.sizeInBytes
             stringLiteralCount++
         }
         stringPoolSize.bind(stringLiteralCount)
 
-        val data = mutableListOf<WasmData>()
+        konst data = mutableListOf<WasmData>()
         data.add(WasmData(WasmDataMode.Passive, stringDataSectionBytes.toByteArray()))
         constantArrayDataSegmentId.unbound.forEach { (constantArraySegment, symbol) ->
             symbol.bind(data.size)
-            val integerSize = when (constantArraySegment.second) {
+            konst integerSize = when (constantArraySegment.second) {
                 WasmI8 -> BYTE_SIZE_BYTES
                 WasmI16 -> SHORT_SIZE_BYTES
                 WasmI32 -> INT_SIZE_BYTES
                 WasmI64 -> LONG_SIZE_BYTES
                 else -> TODO("type ${constantArraySegment.second} is not implemented")
             }
-            val constData = ConstantDataIntegerArray("constant_array", constantArraySegment.first, integerSize)
+            konst constData = ConstantDataIntegerArray("constant_array", constantArraySegment.first, integerSize)
             data.add(WasmData(WasmDataMode.Passive, constData.toBytes()))
         }
 
         typeIds.unbound.forEach { (klassSymbol, typeId) ->
             if (!klassSymbol.owner.isInterface) {
-                val instructions = mutableListOf<WasmInstr>()
+                konst instructions = mutableListOf<WasmInstr>()
                 WasmIrExpressionBuilder(instructions).buildConstI32(
                     typeId.owner,
                     SourceLocation.NoLocation("Compile time data per class")
                 )
-                val typeData = WasmData(
+                konst typeData = WasmData(
                     WasmDataMode.Active(0, instructions),
                     typeInfo.defined.getValue(klassSymbol).toBytes()
                 )
@@ -175,8 +175,8 @@ class WasmCompiledModuleFragment(val irBuiltIns: IrBuiltIns) {
             }
         }
 
-       val masterInitFunctionType = WasmFunctionType(emptyList(), emptyList())
-        val masterInitFunction = WasmFunction.Defined("__init", WasmSymbol(masterInitFunctionType))
+       konst masterInitFunctionType = WasmFunctionType(emptyList(), emptyList())
+        konst masterInitFunction = WasmFunction.Defined("__init", WasmSymbol(masterInitFunctionType))
         with(WasmIrExpressionBuilder(masterInitFunction.instructions)) {
             initFunctions.sortedBy { it.priority }.forEach {
                 buildCall(WasmSymbol(it.function), SourceLocation.NoLocation("Generated service code"))
@@ -184,15 +184,15 @@ class WasmCompiledModuleFragment(val irBuiltIns: IrBuiltIns) {
         }
         exports += WasmExport.Function("__init", masterInitFunction)
 
-        val typeInfoSize = currentDataSectionAddress
-        val memorySizeInPages = (typeInfoSize / 65_536) + 1
-        val memory = WasmMemory(WasmLimits(memorySizeInPages.toUInt(), null /* "unlimited" */))
+        konst typeInfoSize = currentDataSectionAddress
+        konst memorySizeInPages = (typeInfoSize / 65_536) + 1
+        konst memory = WasmMemory(WasmLimits(memorySizeInPages.toUInt(), null /* "unlimited" */))
 
         // Need to export the memory in order to pass complex objects to the host language.
         // Export name "memory" is a WASI ABI convention.
         exports += WasmExport.Memory("memory", memory)
 
-        val importedFunctions = functions.elements.filterIsInstance<WasmFunction.Imported>()
+        konst importedFunctions = functions.elements.filterIsInstance<WasmFunction.Imported>()
 
         fun wasmTypeDeclarationOrderKey(declaration: WasmTypeDeclaration): Int {
             return when (declaration) {
@@ -204,27 +204,27 @@ class WasmCompiledModuleFragment(val irBuiltIns: IrBuiltIns) {
             }
         }
 
-        val recGroupTypes = mutableListOf<WasmTypeDeclaration>()
+        konst recGroupTypes = mutableListOf<WasmTypeDeclaration>()
         recGroupTypes.addAll(vTableGcTypes.elements)
         recGroupTypes.addAll(this.gcTypes.elements)
         recGroupTypes.addAll(classITableGcType.elements.distinct())
         recGroupTypes.sortBy(::wasmTypeDeclarationOrderKey)
 
-        val globals = mutableListOf<WasmGlobal>()
+        konst globals = mutableListOf<WasmGlobal>()
         globals.addAll(globalFields.elements)
         globals.addAll(globalVTables.elements)
         globals.addAll(globalClassITables.elements.distinct())
 
-        val allFunctionTypes = canonicalFunctionTypes.values.toList() + tagFuncType + masterInitFunctionType
+        konst allFunctionTypes = canonicalFunctionTypes.konstues.toList() + tagFuncType + masterInitFunctionType
 
         // Partition out function types that can't be recursive,
         // we don't need to put them into a rec group
         // so that they can be matched with function types from other Wasm modules.
-        val (potentiallyRecursiveFunctionTypes, nonRecursiveFunctionTypes) =
+        konst (potentiallyRecursiveFunctionTypes, nonRecursiveFunctionTypes) =
             allFunctionTypes.partition { it.referencesTypeDeclarations() }
         recGroupTypes.addAll(potentiallyRecursiveFunctionTypes)
 
-        val module = WasmModule(
+        konst module = WasmModule(
             functionTypes = nonRecursiveFunctionTypes,
             recGroupTypes = recGroupTypes,
             importsInOrder = importedFunctions,

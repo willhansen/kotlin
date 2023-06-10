@@ -10,7 +10,7 @@ fun <T, R : Number> foo(prop: KProperty1<T, R>, p: String = "") {}
 fun <T, R> foo(prop: KProperty1<T, Inv<R>>, p: Int = 42) {}
 
 class A {
-    val prop = 42
+    konst prop = 42
 }
 
 fun test() {

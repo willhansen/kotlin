@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtScript
 
 class SymbolKotlinAsJavaSupport(project: Project) : KotlinAsJavaSupportBase<KtModule>(project) {
-    private val projectStructureProvider by lazy { ProjectStructureProvider.getInstance(project) }
+    private konst projectStructureProvider by lazy { ProjectStructureProvider.getInstance(project) }
 
     override fun findClassOrObjectDeclarationsInPackage(
         packageFqName: FqName,
@@ -94,7 +94,7 @@ class SymbolKotlinAsJavaSupport(project: Project) : KotlinAsJavaSupportBase<KtMo
             .map { fqn.child(it) }
 
     override fun createInstanceOfLightScript(script: KtScript): KtLightClass {
-        val module = ProjectStructureProvider.getModule(project, script, contextualModule = null)
+        konst module = ProjectStructureProvider.getModule(project, script, contextualModule = null)
         return SymbolLightClassForScript(script, module)
     }
 
@@ -116,7 +116,7 @@ class SymbolKotlinAsJavaSupport(project: Project) : KotlinAsJavaSupportBase<KtMo
     }
 
     override fun createInstanceOfLightClass(classOrObject: KtClassOrObject): KtLightClass? {
-        val module = projectStructureProvider.getModule(classOrObject, contextualModule = null)
+        konst module = projectStructureProvider.getModule(classOrObject, contextualModule = null)
         return createSymbolLightClassNoCache(classOrObject, module)
     }
 
@@ -137,26 +137,26 @@ class SymbolKotlinAsJavaSupport(project: Project) : KotlinAsJavaSupportBase<KtMo
     }
 
     override fun createInstanceOfLightFacade(facadeFqName: FqName, files: List<KtFile>): KtLightClassForFacade {
-        val module = projectStructureProvider.getModule(files.first(), contextualModule = null)
+        konst module = projectStructureProvider.getModule(files.first(), contextualModule = null)
         return SymbolLightClassForFacade(facadeFqName, files, module)
     }
 
-    override val KtModule.contentSearchScope: GlobalSearchScope get() = this.contentScope
+    override konst KtModule.contentSearchScope: GlobalSearchScope get() = this.contentScope
 
     override fun facadeIsApplicable(module: KtModule, file: KtFile): Boolean = module.isFromSourceOrLibraryBinary()
 
     override fun getKotlinInternalClasses(fqName: FqName, scope: GlobalSearchScope): Collection<PsiClass> {
-        val facadeKtFiles = project.createDeclarationProvider(scope, null).findInternalFilesForFacade(fqName)
+        konst facadeKtFiles = project.createDeclarationProvider(scope, null).findInternalFilesForFacade(fqName)
         if (facadeKtFiles.isEmpty()) return emptyList()
 
-        val partShortName = fqName.shortName().asString()
-        val partClassFileShortName = "$partShortName.class"
+        konst partShortName = fqName.shortName().asString()
+        konst partClassFileShortName = "$partShortName.class"
 
         return facadeKtFiles.mapNotNull { facadeKtFile ->
             if (facadeKtFile is KtClsFile) {
-                val partClassFile = facadeKtFile.virtualFile.parent.findChild(partClassFileShortName) ?: return@mapNotNull null
-                val psiFile = facadeKtFile.manager.findFile(partClassFile) as? KtClsFile ?: facadeKtFile
-                val javaClsClass = DecompiledLightClassesFactory.createClsJavaClassFromVirtualFile(
+                konst partClassFile = facadeKtFile.virtualFile.parent.findChild(partClassFileShortName) ?: return@mapNotNull null
+                konst psiFile = facadeKtFile.manager.findFile(partClassFile) as? KtClsFile ?: facadeKtFile
+                konst javaClsClass = DecompiledLightClassesFactory.createClsJavaClassFromVirtualFile(
                     mirrorFile = psiFile,
                     classFile = partClassFile,
                     correspondingClassOrObject = null,
@@ -177,7 +177,7 @@ class SymbolKotlinAsJavaSupport(project: Project) : KotlinAsJavaSupportBase<KtMo
     override fun getFakeLightClass(classOrObject: KtClassOrObject): KtFakeLightClass = SymbolBasedFakeLightClass(classOrObject)
 
     private fun KtElement.isFromSourceOrLibraryBinary(): Boolean {
-        val module = projectStructureProvider.getModule(this, contextualModule = null)
+        konst module = projectStructureProvider.getModule(this, contextualModule = null)
         return module.isFromSourceOrLibraryBinary()
     }
 

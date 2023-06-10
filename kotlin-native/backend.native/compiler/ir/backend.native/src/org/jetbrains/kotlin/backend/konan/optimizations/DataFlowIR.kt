@@ -32,13 +32,13 @@ import org.jetbrains.kotlin.name.Name
 
 internal object DataFlowIR {
 
-    abstract class Type(val isFinal: Boolean, val isAbstract: Boolean,
-                        val primitiveBinaryType: PrimitiveBinaryType?,
-                        val name: String?) {
+    abstract class Type(konst isFinal: Boolean, konst isAbstract: Boolean,
+                        konst primitiveBinaryType: PrimitiveBinaryType?,
+                        konst name: String?) {
         // Special marker type forbidding devirtualization on its instances.
         object Virtual : Declared(0, false, true, null, null, -1, null, "\$VIRTUAL")
 
-        class External(val hash: Long, isFinal: Boolean, isAbstract: Boolean,
+        class External(konst hash: Long, isFinal: Boolean, isAbstract: Boolean,
                        primitiveBinaryType: PrimitiveBinaryType?, name: String? = null)
             : Type(isFinal, isAbstract, primitiveBinaryType, name) {
             override fun equals(other: Any?): Boolean {
@@ -57,15 +57,15 @@ internal object DataFlowIR {
             }
         }
 
-        abstract class Declared(val index: Int, isFinal: Boolean, isAbstract: Boolean, primitiveBinaryType: PrimitiveBinaryType?,
-                                val module: Module?, val symbolTableIndex: Int, val irClass: IrClass?, name: String?)
+        abstract class Declared(konst index: Int, isFinal: Boolean, isAbstract: Boolean, primitiveBinaryType: PrimitiveBinaryType?,
+                                konst module: Module?, konst symbolTableIndex: Int, konst irClass: IrClass?, name: String?)
             : Type(isFinal, isAbstract, primitiveBinaryType, name) {
-            val superTypes = mutableListOf<Type>()
-            val vtable = mutableListOf<FunctionSymbol>()
-            val itable = mutableMapOf<Int, List<FunctionSymbol>>()
+            konst superTypes = mutableListOf<Type>()
+            konst vtable = mutableListOf<FunctionSymbol>()
+            konst itable = mutableMapOf<Int, List<FunctionSymbol>>()
         }
 
-        class Public(val hash: Long, index: Int, isFinal: Boolean, isAbstract: Boolean, primitiveBinaryType: PrimitiveBinaryType?,
+        class Public(konst hash: Long, index: Int, isFinal: Boolean, isAbstract: Boolean, primitiveBinaryType: PrimitiveBinaryType?,
                      module: Module, symbolTableIndex: Int, irClass: IrClass?, name: String? = null)
             : Declared(index, isFinal, isAbstract, primitiveBinaryType, module, symbolTableIndex, irClass, name) {
             override fun equals(other: Any?): Boolean {
@@ -104,36 +104,36 @@ internal object DataFlowIR {
         }
     }
 
-    class Module(val descriptor: ModuleDescriptor) {
+    class Module(konst descriptor: ModuleDescriptor) {
         var numberOfFunctions = 0
         var numberOfClasses = 0
     }
 
     object FunctionAttributes {
-        val IS_STATIC_FIELD_INITIALIZER = 1
-        val RETURNS_UNIT = 4
-        val RETURNS_NOTHING = 8
-        val EXPLICITLY_EXPORTED = 16
+        konst IS_STATIC_FIELD_INITIALIZER = 1
+        konst RETURNS_UNIT = 4
+        konst RETURNS_NOTHING = 8
+        konst EXPLICITLY_EXPORTED = 16
     }
 
-    class FunctionParameter(val type: Type, val boxFunction: FunctionSymbol?, val unboxFunction: FunctionSymbol?)
+    class FunctionParameter(konst type: Type, konst boxFunction: FunctionSymbol?, konst unboxFunction: FunctionSymbol?)
 
-    abstract class FunctionSymbol(val attributes: Int, val irDeclaration: IrDeclaration?, val name: String?) {
+    abstract class FunctionSymbol(konst attributes: Int, konst irDeclaration: IrDeclaration?, konst name: String?) {
         lateinit var parameters: Array<FunctionParameter>
         lateinit var returnParameter: FunctionParameter
 
-        val isStaticFieldInitializer = attributes.and(FunctionAttributes.IS_STATIC_FIELD_INITIALIZER) != 0
-        val returnsUnit = attributes.and(FunctionAttributes.RETURNS_UNIT) != 0
-        val returnsNothing = attributes.and(FunctionAttributes.RETURNS_NOTHING) != 0
-        val explicitlyExported = attributes.and(FunctionAttributes.EXPLICITLY_EXPORTED) != 0
+        konst isStaticFieldInitializer = attributes.and(FunctionAttributes.IS_STATIC_FIELD_INITIALIZER) != 0
+        konst returnsUnit = attributes.and(FunctionAttributes.RETURNS_UNIT) != 0
+        konst returnsNothing = attributes.and(FunctionAttributes.RETURNS_NOTHING) != 0
+        konst explicitlyExported = attributes.and(FunctionAttributes.EXPLICITLY_EXPORTED) != 0
 
-        val irFunction: IrFunction? get() = irDeclaration as? IrFunction
-        val irFile: IrFile? get() = irDeclaration?.fileOrNull
+        konst irFunction: IrFunction? get() = irDeclaration as? IrFunction
+        konst irFile: IrFile? get() = irDeclaration?.fileOrNull
 
         var escapes: Int? = null
         var pointsTo: IntArray? = null
 
-        class External(val hash: Long, attributes: Int, irDeclaration: IrDeclaration?, name: String? = null, val isExported: Boolean)
+        class External(konst hash: Long, attributes: Int, irDeclaration: IrDeclaration?, name: String? = null, konst isExported: Boolean)
             : FunctionSymbol(attributes, irDeclaration, name) {
 
             override fun equals(other: Any?): Boolean {
@@ -152,13 +152,13 @@ internal object DataFlowIR {
             }
         }
 
-        abstract class Declared(val module: Module, val symbolTableIndex: Int,
+        abstract class Declared(konst module: Module, konst symbolTableIndex: Int,
                                 attributes: Int, irDeclaration: IrDeclaration?, var bridgeTarget: FunctionSymbol?, name: String?)
             : FunctionSymbol(attributes, irDeclaration, name) {
 
         }
 
-        class Public(val hash: Long, module: Module, symbolTableIndex: Int,
+        class Public(konst hash: Long, module: Module, symbolTableIndex: Int,
                      attributes: Int, irDeclaration: IrDeclaration?, bridgeTarget: FunctionSymbol?, name: String? = null)
             : Declared(module, symbolTableIndex, attributes, irDeclaration, bridgeTarget, name) {
 
@@ -178,7 +178,7 @@ internal object DataFlowIR {
             }
         }
 
-        class Private(val index: Int, module: Module, symbolTableIndex: Int,
+        class Private(konst index: Int, module: Module, symbolTableIndex: Int,
                       attributes: Int, irDeclaration: IrDeclaration?, bridgeTarget: FunctionSymbol?, name: String? = null)
             : Declared(module, symbolTableIndex, attributes, irDeclaration, bridgeTarget, name) {
 
@@ -199,11 +199,11 @@ internal object DataFlowIR {
         }
     }
 
-    class Field(val type: Type, val index: Int, val name: String? = null) {
+    class Field(konst type: Type, konst index: Int, konst name: String? = null) {
         override fun toString() = "Field(type=$type, index=$index, name=$name)"
     }
 
-    class Edge(val castToType: Type?) {
+    class Edge(konst castToType: Type?) {
 
         lateinit var node: Node
 
@@ -219,64 +219,64 @@ internal object DataFlowIR {
     }
 
     sealed class Node {
-        class Parameter(val index: Int) : Node()
+        class Parameter(konst index: Int) : Node()
 
-        open class Const(val type: Type) : Node()
+        open class Const(konst type: Type) : Node()
 
-        class SimpleConst<T : Any>(type: Type, val value: T) : Const(type)
+        class SimpleConst<T : Any>(type: Type, konst konstue: T) : Const(type)
 
         object Null : Node()
 
-        open class Call(val callee: FunctionSymbol, val arguments: List<Edge>, val returnType: Type,
-                        open val irCallSite: IrFunctionAccessExpression?) : Node()
+        open class Call(konst callee: FunctionSymbol, konst arguments: List<Edge>, konst returnType: Type,
+                        open konst irCallSite: IrFunctionAccessExpression?) : Node()
 
         class StaticCall(callee: FunctionSymbol, arguments: List<Edge>,
-                         val receiverType: Type?, returnType: Type, irCallSite: IrFunctionAccessExpression?)
+                         konst receiverType: Type?, returnType: Type, irCallSite: IrFunctionAccessExpression?)
             : Call(callee, arguments, returnType, irCallSite)
 
         // TODO: It can be replaced with a pair(AllocInstance, constructor Call), remove.
         class NewObject(constructor: FunctionSymbol, arguments: List<Edge>,
-                        val constructedType: Type, override val irCallSite: IrConstructorCall?)
+                        konst constructedType: Type, override konst irCallSite: IrConstructorCall?)
             : Call(constructor, arguments, constructedType, irCallSite)
 
         open class VirtualCall(callee: FunctionSymbol, arguments: List<Edge>,
-                               val receiverType: Type, returnType: Type, override val irCallSite: IrCall?)
+                               konst receiverType: Type, returnType: Type, override konst irCallSite: IrCall?)
             : Call(callee, arguments, returnType, irCallSite)
 
-        class VtableCall(callee: FunctionSymbol, receiverType: Type, val calleeVtableIndex: Int,
+        class VtableCall(callee: FunctionSymbol, receiverType: Type, konst calleeVtableIndex: Int,
                          arguments: List<Edge>, returnType: Type, irCallSite: IrCall?)
             : VirtualCall(callee, arguments, receiverType, returnType, irCallSite)
 
-        class ItableCall(callee: FunctionSymbol, receiverType: Type, val interfaceId: Int, val calleeItableIndex: Int,
+        class ItableCall(callee: FunctionSymbol, receiverType: Type, konst interfaceId: Int, konst calleeItableIndex: Int,
                          arguments: List<Edge>, returnType: Type, irCallSite: IrCall?)
             : VirtualCall(callee, arguments, receiverType, returnType, irCallSite)
 
-        class Singleton(val type: Type, val constructor: FunctionSymbol?, val arguments: List<Edge>?) : Node()
+        class Singleton(konst type: Type, konst constructor: FunctionSymbol?, konst arguments: List<Edge>?) : Node()
 
-        class AllocInstance(val type: Type, val irCallSite: IrCall?) : Node()
+        class AllocInstance(konst type: Type, konst irCallSite: IrCall?) : Node()
 
-        class FunctionReference(val symbol: FunctionSymbol, val type: Type, val returnType: Type) : Node()
+        class FunctionReference(konst symbol: FunctionSymbol, konst type: Type, konst returnType: Type) : Node()
 
-        class FieldRead(val receiver: Edge?, val field: Field, val type: Type, val ir: IrGetField?) : Node()
+        class FieldRead(konst receiver: Edge?, konst field: Field, konst type: Type, konst ir: IrGetField?) : Node()
 
-        class FieldWrite(val receiver: Edge?, val field: Field, val value: Edge) : Node()
+        class FieldWrite(konst receiver: Edge?, konst field: Field, konst konstue: Edge) : Node()
 
-        class ArrayRead(val callee: FunctionSymbol, val array: Edge, val index: Edge, val type: Type, val irCallSite: IrCall?) : Node()
+        class ArrayRead(konst callee: FunctionSymbol, konst array: Edge, konst index: Edge, konst type: Type, konst irCallSite: IrCall?) : Node()
 
-        class ArrayWrite(val callee: FunctionSymbol, val array: Edge, val index: Edge, val value: Edge, val type: Type) : Node()
+        class ArrayWrite(konst callee: FunctionSymbol, konst array: Edge, konst index: Edge, konst konstue: Edge, konst type: Type) : Node()
 
-        class Variable(values: List<Edge>, val type: Type, val kind: VariableKind) : Node() {
-            val values = mutableListOf<Edge>().also { it += values }
+        class Variable(konstues: List<Edge>, konst type: Type, konst kind: VariableKind) : Node() {
+            konst konstues = mutableListOf<Edge>().also { it += konstues }
         }
 
-        class Scope(val depth: Int, nodes: List<Node>) : Node() {
-            val nodes = mutableSetOf<Node>().also { it += nodes }
+        class Scope(konst depth: Int, nodes: List<Node>) : Node() {
+            konst nodes = mutableSetOf<Node>().also { it += nodes }
         }
     }
 
     // Note: scopes form a tree.
-    class FunctionBody(val rootScope: Node.Scope, val allScopes: List<Node.Scope>,
-                       val returns: Node.Variable, val throws: Node.Variable) {
+    class FunctionBody(konst rootScope: Node.Scope, konst allScopes: List<Node.Scope>,
+                       konst returns: Node.Variable, konst throws: Node.Variable) {
         inline fun forEachNonScopeNode(block: (Node) -> Unit) {
             for (scope in allScopes)
                 for (node in scope.nodes)
@@ -285,15 +285,15 @@ internal object DataFlowIR {
         }
     }
 
-    class Function(val symbol: FunctionSymbol, val body: FunctionBody) {
+    class Function(konst symbol: FunctionSymbol, konst body: FunctionBody) {
 
         fun debugOutput() = println(debugString())
 
         fun debugString() = buildString {
             appendLine("FUNCTION $symbol")
             appendLine("Params: ${symbol.parameters.contentToString()}")
-            val nodes = listOf(body.rootScope) + body.allScopes.flatMap { it.nodes }
-            val ids = nodes.withIndex().associateBy({ it.value }, { it.index })
+            konst nodes = listOf(body.rootScope) + body.allScopes.flatMap { it.nodes }
+            konst ids = nodes.withIndex().associateBy({ it.konstue }, { it.index })
             nodes.forEach {
                 appendLine("    NODE #${ids[it]!!}")
                 appendLine(nodeToString(it, ids))
@@ -372,8 +372,8 @@ internal object DataFlowIR {
                     append("            RECEIVER #${node.receiver?.node?.let { ids[it]!! } ?: "null"}")
                     appendCastTo(node.receiver?.castToType)
                     appendLine()
-                    append("            VALUE #${ids[node.value.node]!!}")
-                    appendCastTo(node.value.castToType)
+                    append("            VALUE #${ids[node.konstue.node]!!}")
+                    appendCastTo(node.konstue.castToType)
                 }
 
                 is Node.ArrayRead -> buildString {
@@ -393,13 +393,13 @@ internal object DataFlowIR {
                     append("            INDEX #${ids[node.index.node]!!}")
                     appendCastTo(node.index.castToType)
                     appendLine()
-                    append("            VALUE #${ids[node.value.node]!!}")
-                    appendCastTo(node.value.castToType)
+                    append("            VALUE #${ids[node.konstue.node]!!}")
+                    appendCastTo(node.konstue.castToType)
                 }
 
                 is Node.Variable -> buildString {
                     append("       ${node.kind}")
-                    appendList(node.values) {
+                    appendList(node.konstues) {
                         append("            VAL #${ids[it.node]!!}")
                         appendCastTo(it.castToType)
                     }
@@ -430,26 +430,26 @@ internal object DataFlowIR {
         }
     }
 
-    class SymbolTable(val context: Context, val module: Module) {
+    class SymbolTable(konst context: Context, konst module: Module) {
 
-        private val TAKE_NAMES = true // Take fqNames for all functions and types (for debug purposes).
+        private konst TAKE_NAMES = true // Take fqNames for all functions and types (for debug purposes).
 
         private inline fun takeName(block: () -> String) = if (TAKE_NAMES) block() else null
 
-        val classMap = mutableMapOf<IrClass, Type>()
-        val primitiveMap = mutableMapOf<PrimitiveBinaryType, Type>()
-        val functionMap = mutableMapOf<IrDeclaration, FunctionSymbol>()
+        konst classMap = mutableMapOf<IrClass, Type>()
+        konst primitiveMap = mutableMapOf<PrimitiveBinaryType, Type>()
+        konst functionMap = mutableMapOf<IrDeclaration, FunctionSymbol>()
 
-        private val NAME_ESCAPES = Name.identifier("Escapes")
-        private val NAME_POINTS_TO = Name.identifier("PointsTo")
-        private val FQ_NAME_KONAN = FqName.fromSegments(listOf("kotlin", "native", "internal"))
+        private konst NAME_ESCAPES = Name.identifier("Escapes")
+        private konst NAME_POINTS_TO = Name.identifier("PointsTo")
+        private konst FQ_NAME_KONAN = FqName.fromSegments(listOf("kotlin", "native", "internal"))
 
-        private val FQ_NAME_ESCAPES = FQ_NAME_KONAN.child(NAME_ESCAPES)
-        private val FQ_NAME_POINTS_TO = FQ_NAME_KONAN.child(NAME_POINTS_TO)
+        private konst FQ_NAME_ESCAPES = FQ_NAME_KONAN.child(NAME_ESCAPES)
+        private konst FQ_NAME_POINTS_TO = FQ_NAME_KONAN.child(NAME_POINTS_TO)
 
-        private val konanPackage = context.builtIns.builtInsModule.getPackage(FQ_NAME_KONAN).memberScope
-        private val getContinuationSymbol = context.ir.symbols.getContinuation
-        private val continuationType = getContinuationSymbol.owner.returnType
+        private konst konanPackage = context.builtIns.builtInsModule.getPackage(FQ_NAME_KONAN).memberScope
+        private konst getContinuationSymbol = context.ir.symbols.getContinuation
+        private konst continuationType = getContinuationSymbol.owner.returnType
 
         var privateTypeIndex = 1 // 0 for [Virtual]
         var privateFunIndex = 0
@@ -484,14 +484,14 @@ internal object DataFlowIR {
             if (irClass.module.name == Name.special("<forward declarations>") || irClass.isObjCClass())
                 return Type.Virtual
 
-            val isFinal = irClass.isFinalClass
-            val isAbstract = irClass.isAbstract()
-            val name = irClass.fqNameForIrSerialization.asString()
+            konst isFinal = irClass.isFinalClass
+            konst isAbstract = irClass.isAbstract()
+            konst name = irClass.fqNameForIrSerialization.asString()
             classMap[irClass]?.let { return it }
 
-            val placeToClassTable = true
-            val symbolTableIndex = if (placeToClassTable) module.numberOfClasses++ else -1
-            val type = if (irClass.isExported())
+            konst placeToClassTable = true
+            konst symbolTableIndex = if (placeToClassTable) module.numberOfClasses++ else -1
+            konst type = if (irClass.isExported())
                 Type.Public(localHash(name.toByteArray()), privateTypeIndex++, isFinal, isAbstract, null,
                         module, symbolTableIndex, irClass, takeName { name })
             else
@@ -502,9 +502,9 @@ internal object DataFlowIR {
 
             type.superTypes += irClass.superTypes.map { mapClassReferenceType(it.getClass()!!) }
             if (!isAbstract) {
-                val layoutBuilder = context.getLayoutBuilder(irClass)
+                konst layoutBuilder = context.getLayoutBuilder(irClass)
                 type.vtable += layoutBuilder.vtableEntries.map {
-                    val implementation = it.getImplementation(context)
+                    konst implementation = it.getImplementation(context)
                             ?: error(
                                     irClass.getContainingFile(),
                                     irClass,
@@ -516,10 +516,10 @@ internal object DataFlowIR {
 
                     mapFunction(implementation)
                 }
-                val interfaces = irClass.implementedInterfaces.map { context.getLayoutBuilder(it) }
+                konst interfaces = irClass.implementedInterfaces.map { context.getLayoutBuilder(it) }
                 for (iface in interfaces) {
                     type.itable[iface.classId] = iface.interfaceVTableEntries.map {
-                        val implementation = layoutBuilder.overridingOf(it)
+                        konst implementation = layoutBuilder.overridingOf(it)
                                 ?: error(
                                         irClass.getContainingFile(),
                                         irClass,
@@ -562,7 +562,7 @@ internal object DataFlowIR {
                 }
 
         fun mapType(type: IrType): Type {
-            val binaryType = type.computeBinaryType()
+            konst binaryType = type.computeBinaryType()
             return when (binaryType) {
                 is BinaryType.Primitive -> mapPrimitiveBinaryType(binaryType.type)
                 is BinaryType.Reference -> mapClassReferenceType(choosePrimary(binaryType.types.toList()))
@@ -584,15 +584,15 @@ internal object DataFlowIR {
         private fun mapFunction(function: IrFunction): FunctionSymbol = function.target.let {
             functionMap[it]?.let { return it }
 
-            val parent = it.parent
+            konst parent = it.parent
 
-            val containingDeclarationPart = parent.fqNameForIrSerialization.let {
+            konst containingDeclarationPart = parent.fqNameForIrSerialization.let {
                 if (it.isRoot) "" else "$it."
             }
-            val name = "kfun:$containingDeclarationPart${it.computeFunctionName()}"
+            konst name = "kfun:$containingDeclarationPart${it.computeFunctionName()}"
 
-            val returnsUnit = it is IrConstructor || it.returnType.isUnit()
-            val returnsNothing = it.returnType.isNothing()
+            konst returnsUnit = it is IrConstructor || it.returnType.isUnit()
+            konst returnsNothing = it.returnType.isNothing()
             var attributes = 0
             if (returnsUnit)
                 attributes = attributes or FunctionAttributes.RETURNS_UNIT
@@ -603,14 +603,14 @@ internal object DataFlowIR {
                     || it.hasAnnotation(RuntimeNames.objCMethodImp)) {
                 attributes = attributes or FunctionAttributes.EXPLICITLY_EXPORTED
             }
-            val symbol = when {
+            konst symbol = when {
                 it.isExternal || it.isBuiltInOperator -> {
-                    val escapesAnnotation = it.annotations.findAnnotation(FQ_NAME_ESCAPES)
-                    val pointsToAnnotation = it.annotations.findAnnotation(FQ_NAME_POINTS_TO)
+                    konst escapesAnnotation = it.annotations.findAnnotation(FQ_NAME_ESCAPES)
+                    konst pointsToAnnotation = it.annotations.findAnnotation(FQ_NAME_POINTS_TO)
                     @Suppress("UNCHECKED_CAST")
-                    val escapesBitMask = (escapesAnnotation?.getValueArgument(0) as? IrConst<Int>)?.value
+                    konst escapesBitMask = (escapesAnnotation?.getValueArgument(0) as? IrConst<Int>)?.konstue
                     @Suppress("UNCHECKED_CAST")
-                    val pointsToBitMask = (pointsToAnnotation?.getValueArgument(0) as? IrVararg)?.elements?.map { (it as IrConst<Int>).value }
+                    konst pointsToBitMask = (pointsToAnnotation?.getValueArgument(0) as? IrVararg)?.elements?.map { (it as IrConst<Int>).konstue }
                     FunctionSymbol.External(localHash(name.toByteArray()), attributes, it, takeName { name }, it.isExported()).apply {
                         escapes  = escapesBitMask
                         pointsTo = pointsToBitMask?.toIntArray()
@@ -618,18 +618,18 @@ internal object DataFlowIR {
                 }
 
                 else -> {
-                    val isAbstract = it is IrSimpleFunction && it.modality == Modality.ABSTRACT
-                    val irClass = it.parent as? IrClass
-                    val bridgeTarget = it.bridgeTarget
-                    val isSpecialBridge = bridgeTarget.let {
+                    konst isAbstract = it is IrSimpleFunction && it.modality == Modality.ABSTRACT
+                    konst irClass = it.parent as? IrClass
+                    konst bridgeTarget = it.bridgeTarget
+                    konst isSpecialBridge = bridgeTarget.let {
                         it != null && BuiltinMethodsWithSpecialGenericSignature.getDefaultValueForOverriddenBuiltinFunction(it.descriptor) != null
                     }
-                    val bridgeTargetSymbol = if (isSpecialBridge || bridgeTarget == null) null else mapFunction(bridgeTarget)
-                    val placeToFunctionsTable = !isAbstract && it !is IrConstructor && irClass != null
+                    konst bridgeTargetSymbol = if (isSpecialBridge || bridgeTarget == null) null else mapFunction(bridgeTarget)
+                    konst placeToFunctionsTable = !isAbstract && it !is IrConstructor && irClass != null
                             && (it.isOverridableOrOverrides || bridgeTarget != null || function.isSpecial || !irClass.isFinalClass)
-                    val symbolTableIndex = if (placeToFunctionsTable) module.numberOfFunctions++ else -1
-                    val frozen = it is IrConstructor && irClass!!.isFrozen(context)
-                    val functionSymbol = if (it.isExported())
+                    konst symbolTableIndex = if (placeToFunctionsTable) module.numberOfFunctions++ else -1
+                    konst frozen = it is IrConstructor && irClass!!.isFrozen(context)
+                    konst functionSymbol = if (it.isExported())
                         FunctionSymbol.Public(localHash(name.toByteArray()), module, symbolTableIndex, attributes, it, bridgeTargetSymbol, takeName { name })
                     else
                         FunctionSymbol.Private(privateFunIndex++, module, symbolTableIndex, attributes, it, bridgeTargetSymbol, takeName { name })
@@ -649,7 +649,7 @@ internal object DataFlowIR {
             return symbol
         }
 
-        private val IrFunction.isSpecial get() =
+        private konst IrFunction.isSpecial get() =
             origin == DECLARATION_ORIGIN_INLINE_CLASS_SPECIAL_FUNCTION
                     || origin is DECLARATION_ORIGIN_BRIDGE_METHOD
 
@@ -657,8 +657,8 @@ internal object DataFlowIR {
             functionMap[irField]?.let { return it }
 
             assert(irField.isStatic) { "All local properties initializers should've been lowered" }
-            val attributes = FunctionAttributes.IS_STATIC_FIELD_INITIALIZER or FunctionAttributes.RETURNS_UNIT
-            val symbol = FunctionSymbol.Private(privateFunIndex++, module, -1, attributes, irField, null, takeName { "${irField.computeSymbolName()}_init" })
+            konst attributes = FunctionAttributes.IS_STATIC_FIELD_INITIALIZER or FunctionAttributes.RETURNS_UNIT
+            konst symbol = FunctionSymbol.Private(privateFunIndex++, module, -1, attributes, irField, null, takeName { "${irField.computeSymbolName()}_init" })
 
             functionMap[irField] = symbol
 

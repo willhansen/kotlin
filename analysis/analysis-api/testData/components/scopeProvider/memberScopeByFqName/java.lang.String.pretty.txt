@@ -1,4 +1,4 @@
-private val value: kotlin.CharArray!
+private konst konstue: kotlin.CharArray!
 
 private open var hash: kotlin.Int
 
@@ -6,7 +6,7 @@ open fun hash32(): kotlin.Int
 
 private open var hash32: kotlin.Int
 
-open val length: kotlin.Int
+open konst length: kotlin.Int
   get()
 
 open fun isEmpty(): kotlin.Boolean
@@ -124,9 +124,9 @@ constructor()
 
 constructor(original: kotlin.String!)
 
-constructor(value: kotlin.CharArray!)
+constructor(konstue: kotlin.CharArray!)
 
-constructor(value: kotlin.CharArray!, offset: kotlin.Int, count: kotlin.Int)
+constructor(konstue: kotlin.CharArray!, offset: kotlin.Int, count: kotlin.Int)
 
 constructor(codePoints: kotlin.IntArray!, offset: kotlin.Int, count: kotlin.Int)
 
@@ -152,7 +152,7 @@ constructor(buffer: java.lang.StringBuffer!)
 
 constructor(builder: java.lang.StringBuilder!)
 
-constructor(value: kotlin.CharArray!, share: kotlin.Boolean)
+constructor(konstue: kotlin.CharArray!, share: kotlin.Boolean)
 
 @kotlin.Deprecated(message = "Deprecated in Java")
-constructor(offset: kotlin.Int, count: kotlin.Int, value: kotlin.CharArray!)
+constructor(offset: kotlin.Int, count: kotlin.Int, konstue: kotlin.CharArray!)

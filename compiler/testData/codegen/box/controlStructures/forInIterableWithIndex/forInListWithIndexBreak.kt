@@ -10,7 +10,7 @@ fun test(xs: List<String>): String {
 }
 
 fun box(): String {
-    val t = test(listOf("a", "b", "c", "d", "e"))
+    konst t = test(listOf("a", "b", "c", "d", "e"))
     if (t != "0:a;1:b;") return "Failed: $t"
     return "OK"
 }

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.model.*
 
 abstract class TypeCheckerStateForConstraintSystem(
-    val extensionTypeContext: TypeSystemInferenceExtensionContext,
+    konst extensionTypeContext: TypeSystemInferenceExtensionContext,
     kotlinTypePreparator: AbstractTypePreparator,
     kotlinTypeRefiner: AbstractTypeRefiner
 ) : TypeCheckerState(
@@ -20,7 +20,7 @@ abstract class TypeCheckerStateForConstraintSystem(
     kotlinTypePreparator,
     kotlinTypeRefiner
 ) {
-    abstract val isInferenceCompatibilityEnabled: Boolean
+    abstract konst isInferenceCompatibilityEnabled: Boolean
 
     abstract fun isMyTypeVariable(type: SimpleTypeMarker): Boolean
 
@@ -39,8 +39,8 @@ abstract class TypeCheckerStateForConstraintSystem(
         with(extensionTypeContext) {
             return when {
                 isMyTypeVariable(subType) -> {
-                    val projection = superType.typeConstructorProjection()
-                    val type = projection.getType().asSimpleType()
+                    konst projection = superType.typeConstructorProjection()
+                    konst type = projection.getType().asSimpleType()
                     if (projection.getVariance() == TypeVariance.IN && type != null && isMyTypeVariable(type)) {
                         LowerCapturedTypePolicy.CHECK_ONLY_LOWER
                     } else {
@@ -56,40 +56,40 @@ abstract class TypeCheckerStateForConstraintSystem(
      * todo: possible we should override this method, because otherwise OR in subtyping transformed to AND in constraint system
      * Now we cannot do this, because sometimes we have proper intersection type as lower type and if we first supertype,
      * then we can get wrong result.
-     * override val sameConstructorPolicy get() = SeveralSupertypesWithSameConstructorPolicy.TAKE_FIRST_FOR_SUBTYPING
+     * override konst sameConstructorPolicy get() = SeveralSupertypesWithSameConstructorPolicy.TAKE_FIRST_FOR_SUBTYPING
      */
     final override fun addSubtypeConstraint(
         subType: KotlinTypeMarker,
         superType: KotlinTypeMarker,
         isFromNullabilityConstraint: Boolean
     ): Boolean? {
-        val hasNoInfer = subType.isTypeVariableWithNoInfer() || superType.isTypeVariableWithNoInfer()
+        konst hasNoInfer = subType.isTypeVariableWithNoInfer() || superType.isTypeVariableWithNoInfer()
         if (hasNoInfer) return true
 
-        val hasExact = subType.isTypeVariableWithExact() || superType.isTypeVariableWithExact()
+        konst hasExact = subType.isTypeVariableWithExact() || superType.isTypeVariableWithExact()
 
         // we should strip annotation's because we have incorporation operation and they should be not affected
-        val mySubType =
+        konst mySubType =
             if (hasExact) extractTypeForProjectedType(subType, out = true)
                 ?: with(extensionTypeContext) { subType.removeExactAnnotation() } else subType
-        val mySuperType =
+        konst mySuperType =
             if (hasExact) extractTypeForProjectedType(superType, out = false)
                 ?: with(extensionTypeContext) { superType.removeExactAnnotation() } else superType
 
-        val result = internalAddSubtypeConstraint(mySubType, mySuperType, isFromNullabilityConstraint)
+        konst result = internalAddSubtypeConstraint(mySubType, mySuperType, isFromNullabilityConstraint)
         if (!hasExact) return result
 
-        val result2 = internalAddSubtypeConstraint(mySuperType, mySubType, isFromNullabilityConstraint)
+        konst result2 = internalAddSubtypeConstraint(mySuperType, mySubType, isFromNullabilityConstraint)
 
         if (result == null && result2 == null) return null
         return (result ?: true) && (result2 ?: true)
     }
 
     private fun extractTypeForProjectedType(type: KotlinTypeMarker, out: Boolean): KotlinTypeMarker? = with(extensionTypeContext) {
-        val simpleType = type.asSimpleType()
-        val typeMarker = simpleType?.asCapturedType() ?: return null
+        konst simpleType = type.asSimpleType()
+        konst typeMarker = simpleType?.asCapturedType() ?: return null
 
-        val projection = typeMarker.typeConstructorProjection()
+        konst projection = typeMarker.typeConstructorProjection()
 
         if (projection.isStarProjection()) {
             return when (out) {
@@ -144,12 +144,12 @@ abstract class TypeCheckerStateForConstraintSystem(
     private fun extractTypeVariableForSubtype(subType: KotlinTypeMarker, superType: KotlinTypeMarker): KotlinTypeMarker? =
         with(extensionTypeContext) {
 
-            val typeMarker = subType.asSimpleType()?.asCapturedType() ?: return null
+            konst typeMarker = subType.asSimpleType()?.asCapturedType() ?: return null
 
-            val projection = typeMarker.typeConstructorProjection()
+            konst projection = typeMarker.typeConstructorProjection()
             if (projection.isStarProjection()) return null
             if (projection.getVariance() == TypeVariance.IN) {
-                val type = projection.getType().asSimpleType() ?: return null
+                konst type = projection.getType().asSimpleType() ?: return null
                 if (isMyTypeVariable(type)) {
                     simplifyLowerConstraint(type, superType)
                     if (isMyTypeVariable(superType.asSimpleType() ?: return null)) {
@@ -160,7 +160,7 @@ abstract class TypeCheckerStateForConstraintSystem(
             }
 
             return if (projection.getVariance() == TypeVariance.OUT) {
-                val type = projection.getType()
+                konst type = projection.getType()
                 when {
                     type is SimpleTypeMarker && isMyTypeVariable(type) -> type.asSimpleType()
                     type is FlexibleTypeMarker && isMyTypeVariable(type.lowerBound()) -> type.asFlexibleType()?.lowerBound()
@@ -218,7 +218,7 @@ abstract class TypeCheckerStateForConstraintSystem(
         subType: KotlinTypeMarker,
         isFromNullabilityConstraint: Boolean = false
     ): Boolean = with(extensionTypeContext) {
-        val lowerConstraint = when (typeVariable) {
+        konst lowerConstraint = when (typeVariable) {
             is SimpleTypeMarker ->
                 when {
                     // Foo? (any type which cannot be used as dispatch receiver because of nullability) <: T & Any => ERROR (for K2 only)
@@ -228,20 +228,20 @@ abstract class TypeCheckerStateForConstraintSystem(
                      * Foo <: T? (T is contained in invariant or contravariant positions of a return type) -- Foo <: T
                      *      Example:
                      *          fun <T> foo(x: T?): Inv<T> {}
-                     *          fun <K> main(z: K) { val x = foo(z) }
+                     *          fun <K> main(z: K) { konst x = foo(z) }
                      * Foo <: T? (T isn't contained there) -- Foo!! <: T
                      *      Example:
                      *          fun <T> foo(x: T?) {}
                      *          fun <K> main(z: K) { foo(z) }
                     */
                     typeVariable.isMarkedNullable() -> {
-                        val typeVariableTypeConstructor = typeVariable.typeConstructor()
-                        val subTypeConstructor = subType.typeConstructor()
-                        val needToMakeDefNotNull = subTypeConstructor.isTypeVariable() ||
+                        konst typeVariableTypeConstructor = typeVariable.typeConstructor()
+                        konst subTypeConstructor = subType.typeConstructor()
+                        konst needToMakeDefNotNull = subTypeConstructor.isTypeVariable() ||
                                 typeVariableTypeConstructor !is TypeVariableTypeConstructorMarker ||
                                 !typeVariableTypeConstructor.isContainedInInvariantOrContravariantPositions()
 
-                        val resultType = if (needToMakeDefNotNull) {
+                        konst resultType = if (needToMakeDefNotNull) {
                             subType.makeDefinitelyNotNullOrNotNull()
                         } else {
                             if (!isInferenceCompatibilityEnabled && subType is CapturedTypeMarker) {
@@ -314,9 +314,9 @@ abstract class TypeCheckerStateForConstraintSystem(
      * T & Any <: Foo <=> T <: Foo?
      */
     private fun simplifyUpperConstraint(typeVariable: KotlinTypeMarker, superType: KotlinTypeMarker): Boolean = with(extensionTypeContext) {
-        val typeVariableLowerBound = typeVariable.lowerBoundIfFlexible()
+        konst typeVariableLowerBound = typeVariable.lowerBoundIfFlexible()
 
-        val simplifiedSuperType = when {
+        konst simplifiedSuperType = when {
             typeVariable.isFlexible() && useRefinedBoundsForTypeVariableInFlexiblePosition() ->
                 createFlexibleType(
                     superType.lowerBoundIfFlexible().makeSimpleTypeDefinitelyNotNullOrNotNull(),
@@ -347,17 +347,17 @@ abstract class TypeCheckerStateForConstraintSystem(
     private fun simplifyConstraintForPossibleIntersectionSubType(subType: KotlinTypeMarker, superType: KotlinTypeMarker): Boolean? =
         with(extensionTypeContext) {
             @Suppress("NAME_SHADOWING")
-            val subType = subType.lowerBoundIfFlexible()
+            konst subType = subType.lowerBoundIfFlexible()
 
             if (!subType.typeConstructor().isIntersection()) return null
 
             assert(!subType.isMarkedNullable()) { "Intersection type should not be marked nullable!: $subType" }
 
             // TODO: may be we lose flexibility here
-            val subIntersectionTypes = (subType.typeConstructor().supertypes()).map { it.lowerBoundIfFlexible() }
+            konst subIntersectionTypes = (subType.typeConstructor().supertypes()).map { it.lowerBoundIfFlexible() }
 
-            val typeVariables = subIntersectionTypes.filter(::isMyTypeVariable).takeIf { it.isNotEmpty() } ?: return null
-            val notTypeVariables = subIntersectionTypes.filterNot(::isMyTypeVariable)
+            konst typeVariables = subIntersectionTypes.filter(::isMyTypeVariable).takeIf { it.isNotEmpty() } ?: return null
+            konst notTypeVariables = subIntersectionTypes.filterNot(::isMyTypeVariable)
 
             // todo: may be we can do better then that.
             if (notTypeVariables.isNotEmpty() &&

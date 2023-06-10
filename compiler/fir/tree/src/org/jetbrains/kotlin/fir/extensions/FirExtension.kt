@@ -22,10 +22,10 @@ typealias AnnotationFqn = FqName
  * - all declarations matching extension with predicate -> FirPredicateBasedProvider.getSymbolsByPredicate
  * - all specific extensions interested in specific declaration -> TODO with StateMachine
  */
-abstract class FirExtension(val session: FirSession) {
-    abstract val name: FirExtensionPointName
+abstract class FirExtension(konst session: FirSession) {
+    abstract konst name: FirExtensionPointName
 
-    abstract val extensionType: KClass<out FirExtension>
+    abstract konst extensionType: KClass<out FirExtension>
 
     fun interface Factory<out P : FirExtension> {
         fun create(session: FirSession): P
@@ -34,7 +34,7 @@ abstract class FirExtension(val session: FirSession) {
     open fun FirDeclarationPredicateRegistrar.registerPredicates() {}
 }
 
-data class FirExtensionPointName(val name: Name) {
+data class FirExtensionPointName(konst name: Name) {
     constructor(name: String) : this(Name.identifier(name))
 }
 

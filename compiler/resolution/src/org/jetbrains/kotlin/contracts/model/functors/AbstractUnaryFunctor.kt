@@ -35,13 +35,13 @@ abstract class AbstractUnaryFunctor : AbstractFunctor() {
     }
 
     fun invokeWithArguments(arg: Computation): List<ESEffect> {
-        val returning =
-            arg.effects.filterIsInstance<ConditionalEffect>().filter { it.simpleEffect.isReturns { !value.isWildcard } }
-        val rest = arg.effects - returning
+        konst returning =
+            arg.effects.filterIsInstance<ConditionalEffect>().filter { it.simpleEffect.isReturns { !konstue.isWildcard } }
+        konst rest = arg.effects - returning
 
-        val evaluatedByFunctor = invokeWithReturningEffects(returning)
+        konst ekonstuatedByFunctor = invokeWithReturningEffects(returning)
 
-        return rest + evaluatedByFunctor
+        return rest + ekonstuatedByFunctor
     }
 
     protected abstract fun invokeWithReturningEffects(list: List<ConditionalEffect>): List<ConditionalEffect>

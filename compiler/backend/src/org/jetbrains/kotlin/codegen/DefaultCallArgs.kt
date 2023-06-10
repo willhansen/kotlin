@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.resolve.jvm.AsmTypes
 import org.jetbrains.org.objectweb.asm.Type
 import java.util.*
 
-class DefaultCallArgs(val size: Int) {
+class DefaultCallArgs(konst size: Int) {
 
-    private val bits: BitSet = BitSet(size)
+    private konst bits: BitSet = BitSet(size)
 
     fun mark(index: Int) {
         assert (index < size) {
@@ -25,7 +25,7 @@ class DefaultCallArgs(val size: Int) {
             return emptyList()
         }
 
-        val masks = ArrayList<Int>(1)
+        konst masks = ArrayList<Int>(1)
 
         var mask = 0
         for (i in 0 until size) {
@@ -41,7 +41,7 @@ class DefaultCallArgs(val size: Int) {
     }
 
     fun generateOnStackIfNeeded(callGenerator: CallGenerator, isConstructor: Boolean): Boolean {
-        val toInts = toInts()
+        konst toInts = toInts()
         if (!toInts.isEmpty()) {
             for (mask in toInts) {
                 callGenerator.putValueIfNeeded(
@@ -49,7 +49,7 @@ class DefaultCallArgs(val size: Int) {
                 )
             }
 
-            val parameterType = if (isConstructor) AsmTypes.DEFAULT_CONSTRUCTOR_MARKER else AsmTypes.OBJECT_TYPE
+            konst parameterType = if (isConstructor) AsmTypes.DEFAULT_CONSTRUCTOR_MARKER else AsmTypes.OBJECT_TYPE
             callGenerator.putValueIfNeeded(
                 JvmKotlinType(parameterType), StackValue.constant(null, parameterType), ValueKind.METHOD_HANDLE_IN_DEFAULT
             )

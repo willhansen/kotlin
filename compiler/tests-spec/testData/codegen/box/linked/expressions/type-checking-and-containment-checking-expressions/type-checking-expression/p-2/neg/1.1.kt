@@ -11,9 +11,9 @@
  */
 
 fun box() {
-    val x = A(1)
+    konst x = A(1)
 
-    val y = x is A<Long>
+    konst y = x is A<Long>
 }
 
-class A<T>(val a: T)
+class A<T>(konst a: T)

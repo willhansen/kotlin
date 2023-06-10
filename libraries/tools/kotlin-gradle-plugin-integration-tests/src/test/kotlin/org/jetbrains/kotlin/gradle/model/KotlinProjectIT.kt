@@ -31,8 +31,8 @@ class KotlinProjectIT : KGPBaseTest() {
                     assertTrue(expectedByDependencies.isEmpty())
 
                     assertEquals(2, sourceSets.size)
-                    val mainSourceSet = sourceSets.single { it.name == "main" }
-                    val testSourceSet = sourceSets.single { it.name == "test" }
+                    konst mainSourceSet = sourceSets.single { it.name == "main" }
+                    konst testSourceSet = sourceSets.single { it.name == "test" }
 
                     mainSourceSet.assertBasics("main", SourceSet.SourceSetType.PRODUCTION, emptySet())
                     testSourceSet.assertBasics("test", SourceSet.SourceSetType.TEST, listOf("main"))
@@ -92,9 +92,9 @@ class KotlinProjectIT : KGPBaseTest() {
                     )
 
                     assertEquals(3, sourceSets.size)
-                    val mainSourceSet = sourceSets.single { it.name == "main" }
-                    val deploySourceSet = sourceSets.single { it.name == "deploy" }
-                    val testSourceSet = sourceSets.single { it.name == "test" }
+                    konst mainSourceSet = sourceSets.single { it.name == "main" }
+                    konst deploySourceSet = sourceSets.single { it.name == "deploy" }
+                    konst testSourceSet = sourceSets.single { it.name == "test" }
 
                     mainSourceSet.assertBasics("main", SourceSet.SourceSetType.PRODUCTION, emptySet())
                     deploySourceSet.assertBasics("deploy", SourceSet.SourceSetType.PRODUCTION, emptySet())
@@ -109,8 +109,8 @@ class KotlinProjectIT : KGPBaseTest() {
     fun testMultiplatformProject(gradleVersion: GradleVersion) {
         project("multiplatformProject", gradleVersion) {
             getModels<KotlinProject> {
-                val libKotlinProject = getModel(":lib")!!
-                val libJvmKotlinProject = getModel(":libJvm")!!
+                konst libKotlinProject = getModel(":lib")!!
+                konst libJvmKotlinProject = getModel(":libJvm")!!
 
                 libKotlinProject.assertBasics(
                     "lib",

@@ -1,14 +1,14 @@
 // WITH_STDLIB
 
-val b: First by lazy {
+konst b: First by lazy {
     object : First {   }
 }
 
-private val withoutType by lazy {
+private konst withoutType by lazy {
     object : First { }
 }
 
-private val withTwoSupertypes by lazy {
+private konst withTwoSupertypes by lazy {
     object : First, Second { }
 }
 

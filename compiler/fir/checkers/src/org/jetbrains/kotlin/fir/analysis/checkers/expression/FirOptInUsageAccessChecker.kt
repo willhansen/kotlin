@@ -19,28 +19,28 @@ import org.jetbrains.kotlin.fir.types.coneType
 
 object FirOptInUsageAccessChecker : FirBasicExpressionChecker() {
     override fun check(expression: FirStatement, context: CheckerContext, reporter: DiagnosticReporter) {
-        val sourceKind = expression.source?.kind
+        konst sourceKind = expression.source?.kind
         if (sourceKind is KtFakeSourceElementKind.DataClassGeneratedMembers ||
             sourceKind is KtFakeSourceElementKind.PropertyFromParameter
         ) return
 
         if (expression.isLhsOfAssignment(context)) return
 
-        val resolvedSymbol = expression.calleeReference?.toResolvedBaseSymbol() ?: return
+        konst resolvedSymbol = expression.calleeReference?.toResolvedBaseSymbol() ?: return
 
         with(FirOptInUsageBaseChecker) {
             if (expression is FirVariableAssignment) {
-                val experimentalities = resolvedSymbol.loadExperimentalities(context, fromSetter = true, null) +
+                konst experimentalities = resolvedSymbol.loadExperimentalities(context, fromSetter = true, null) +
                         loadExperimentalitiesFromTypeArguments(context, emptyList())
                 reportNotAcceptedExperimentalities(experimentalities, expression.lValue, context, reporter)
             } else if (expression is FirQualifiedAccessExpression) {
-                val dispatchReceiverType =
+                konst dispatchReceiverType =
                     expression.dispatchReceiver.takeIf { it !is FirNoReceiverExpression }?.typeRef?.coneType?.fullyExpandedType(context.session)
 
-                val experimentalities = resolvedSymbol.loadExperimentalities(context, fromSetter = false, dispatchReceiverType) +
+                konst experimentalities = resolvedSymbol.loadExperimentalities(context, fromSetter = false, dispatchReceiverType) +
                         loadExperimentalitiesFromTypeArguments(context, expression.typeArguments)
-                val source = if (expression.source?.kind == KtFakeSourceElementKind.DelegatedPropertyAccessor) {
-                    val property = context.containingDeclarations.lastOrNull { it is FirProperty } as? FirProperty ?: return
+                konst source = if (expression.source?.kind == KtFakeSourceElementKind.DelegatedPropertyAccessor) {
+                    konst property = context.containingDeclarations.lastOrNull { it is FirProperty } as? FirProperty ?: return
                     property.delegate?.source?.fakeElement(KtFakeSourceElementKind.DelegatedPropertyAccessor) ?: return
                 } else {
                     expression.source

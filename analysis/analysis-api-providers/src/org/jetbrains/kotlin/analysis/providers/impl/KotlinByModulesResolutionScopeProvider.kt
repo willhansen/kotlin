@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.analysis.providers.KotlinResolutionScopeProvider
 
 public class KotlinByModulesResolutionScopeProvider : KotlinResolutionScopeProvider() {
     override fun getResolutionScope(module: KtModule): GlobalSearchScope {
-        val allModules = buildList {
+        konst allModules = buildList {
             add(module)
             addAll(module.allDirectDependencies())
         }

@@ -1,11 +1,11 @@
 package
 
-public val a: A
-public val ab: A.B
-public val abc: A.B.C
-public val b: A.B
-public val bc: A.B.C
-public val c: A.B.C
+public konst a: A
+public konst ab: A.B
+public konst abc: A.B.C
+public konst b: A.B
+public konst bc: A.B.C
+public konst c: A.B.C
 
 public final class A {
     public constructor A()

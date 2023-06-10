@@ -1,22 +1,22 @@
 class A {
     @field:<!ELEMENT!>
-    val a: Int = ""
+    konst a: Int = ""
 
     @setparam:<!ELEMENT!>(<!ELEMENT!>)
-    val b: Int = ""
+    konst b: Int = ""
 
     @receiver:org.jetbrains.<!ELEMENT!><A<B, C>>(<!ELEMENT!>)
-    val c: Int = ""
+    konst c: Int = ""
 
     @org.jetbrains.<!ELEMENT!>
-    val c: Int = ""
+    konst c: Int = ""
 
     @<!ELEMENT!><A<B>, C>(<!ELEMENT!>, <!ELEMENT!>, <!ELEMENT!>)
-    val c: Int = ""
+    konst c: Int = ""
 
     @<!ELEMENT!>
-    val c: Int = ""
+    konst c: Int = ""
 
     @<!ELEMENT!>.<!ELEMENT!>.<!ELEMENT!><A<B>, C>(<!ELEMENT!>, <!ELEMENT!>, <!ELEMENT!>)
-    val c: Int = ""
+    konst c: Int = ""
 }

@@ -23,7 +23,7 @@ KtFunctionSymbol:
     type: test/MyClass
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -57,7 +57,7 @@ KtFunctionSymbol:
     type: kotlin/Boolean
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -114,7 +114,7 @@ KtFunctionSymbol:
     type: kotlin/Int
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -148,7 +148,7 @@ KtFunctionSymbol:
     type: kotlin/String
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -200,7 +200,7 @@ KtConstructorSymbol:
     type: test/MyClass
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

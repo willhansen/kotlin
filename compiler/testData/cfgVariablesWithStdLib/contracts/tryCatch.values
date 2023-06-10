@@ -33,7 +33,7 @@ fun someComputation(): Int = 42
 =====================
 == tryCatchInlined ==
 fun tryCatchInlined() {
-    val x: Int
+    konst x: Int
 
     myRun {
         try {
@@ -55,7 +55,7 @@ myRun { try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { /
 x                                                                                                                               <v2>: Int              NEW: r(x) -> <v2>
 inc()                                                                                                                           <v3>: *                NEW: call(inc(), inc|<v2>) -> <v3>
 x.inc()                                                                                                                         <v3>: *                COPY
-{ val x: Int myRun { try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // I? x.inc() } } // I? x.inc() }   <v3>: *                COPY
+{ konst x: Int myRun { try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // I? x.inc() } } // I? x.inc() }   <v3>: *                COPY
 =====================
 == inlined anonymous_1 ==
 {
@@ -84,7 +84,7 @@ try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // I? x.i
 =====================
 == possibleReassignmentInTryCatch ==
 fun possibleReassignmentInTryCatch() {
-    val x: Int
+    konst x: Int
 
     myRun {
         x = 42
@@ -109,7 +109,7 @@ myRun { x = 42 try { x = someComputation() x.inc() } catch (e: java.lang.Excepti
 x                                                                                                                                                                                                <v2>: Int              NEW: r(x) -> <v2>
 inc()                                                                                                                                                                                            <v3>: *                NEW: call(inc(), inc|<v2>) -> <v3>
 x.inc()                                                                                                                                                                                          <v3>: *                COPY
-{ val x: Int myRun { x = 42 try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // Possible reassignment x = 42 x.inc() } // Initialized x.inc() } // Initialized x.inc() }   <v3>: *                COPY
+{ konst x: Int myRun { x = 42 try { x = someComputation() x.inc() } catch (e: java.lang.Exception) { // Possible reassignment x = 42 x.inc() } // Initialized x.inc() } // Initialized x.inc() }   <v3>: *                COPY
 =====================
 == inlined anonymous_2 ==
 {

@@ -9,7 +9,7 @@ interface Test {
         return inlineProp
     }
 
-    private inline val inlineProp: String
+    private inline konst inlineProp: String
         get() = "OK"
 
 }

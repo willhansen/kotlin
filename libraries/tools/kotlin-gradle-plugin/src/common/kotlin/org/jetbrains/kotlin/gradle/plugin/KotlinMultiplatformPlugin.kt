@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.gradle.utils.androidPluginIds
 import org.jetbrains.kotlin.gradle.utils.getOrPut
 import java.util.concurrent.atomic.AtomicBoolean
 
-abstract class KotlinPlatformPluginBase(protected val platformName: String) : Plugin<Project> {
+abstract class KotlinPlatformPluginBase(protected konst platformName: String) : Plugin<Project> {
     companion object {
         @JvmStatic
         protected inline fun <reified T : Plugin<*>> Project.applyPlugin() {
@@ -39,14 +39,14 @@ abstract class KotlinPlatformPluginBase(protected val platformName: String) : Pl
     }
 }
 
-const val EXPECTED_BY_CONFIG_NAME = "expectedBy"
+const konst EXPECTED_BY_CONFIG_NAME = "expectedBy"
 
-const val IMPLEMENT_CONFIG_NAME = "implement"
-const val IMPLEMENT_DEPRECATION_WARNING = "The '$IMPLEMENT_CONFIG_NAME' configuration is deprecated and will be removed. " +
+const konst IMPLEMENT_CONFIG_NAME = "implement"
+const konst IMPLEMENT_DEPRECATION_WARNING = "The '$IMPLEMENT_CONFIG_NAME' configuration is deprecated and will be removed. " +
         "Use '$EXPECTED_BY_CONFIG_NAME' instead."
 
 open class KotlinPlatformImplementationPluginBase(platformName: String) : KotlinPlatformPluginBase(platformName) {
-    private val commonProjects = arrayListOf<Project>()
+    private konst commonProjects = arrayListOf<Project>()
 
     private fun configurationsForCommonModuleDependency(project: Project): List<Configuration> =
         listOf(project.configurations.getByName("api"))
@@ -54,8 +54,8 @@ open class KotlinPlatformImplementationPluginBase(platformName: String) : Kotlin
     override fun apply(project: Project) {
         warnAboutKotlin12xMppDeprecation(project)
 
-        val implementConfig = project.configurations.create(IMPLEMENT_CONFIG_NAME)
-        val expectedByConfig = project.configurations.create(EXPECTED_BY_CONFIG_NAME)
+        konst implementConfig = project.configurations.create(IMPLEMENT_CONFIG_NAME)
+        konst expectedByConfig = project.configurations.create(EXPECTED_BY_CONFIG_NAME)
 
         implementConfig.dependencies.whenObjectAdded {
             if (!implementConfigurationIsUsed) {
@@ -82,8 +82,8 @@ open class KotlinPlatformImplementationPluginBase(platformName: String) : Kotlin
             }
         }
 
-        val incrementalMultiplatform = PropertiesProvider(project).incrementalMultiplatform ?: true
-        project.afterEvaluate {
+        konst incrementalMultiplatform = PropertiesProvider(project).incrementalMultiplatform ?: true
+        project.afterEkonstuate {
             project.tasks.withType(AbstractKotlinCompile::class.java).all { task ->
                 if (task.incremental && !incrementalMultiplatform) {
                     task.logger.debug("IC is turned off for task '${task.path}' because multiplatform IC is not enabled")
@@ -98,7 +98,7 @@ open class KotlinPlatformImplementationPluginBase(platformName: String) : Kotlin
     private fun addCommonProject(commonProject: Project, platformProject: Project) {
         commonProjects.add(commonProject)
 
-        commonProject.whenEvaluated {
+        commonProject.whenEkonstuated {
             if (!commonProject.pluginManager.hasPlugin("kotlin-platform-common")) {
                 throw GradleException(
                     "Platform project $platformProject has an " +
@@ -138,13 +138,13 @@ open class KotlinPlatformImplementationPluginBase(platformName: String) : Kotlin
         containerB: NamedDomainObjectCollection<out B>,
         whenMatched: (A, B) -> Unit
     ) {
-        val matchedNames = mutableSetOf<String>()
+        konst matchedNames = mutableSetOf<String>()
 
         fun <T, R> NamedDomainObjectCollection<T>.matchAllWith(other: NamedDomainObjectCollection<R>, match: (T, R) -> Unit) {
             this@matchAllWith.all { item ->
-                val itemName = this@matchAllWith.namer.determineName(item)
+                konst itemName = this@matchAllWith.namer.determineName(item)
                 if (itemName !in matchedNames) {
-                    val otherItem = other.findByName(itemName)
+                    konst otherItem = other.findByName(itemName)
                     if (otherItem != null) {
                         matchedNames += itemName
                         match(item, otherItem)
@@ -160,13 +160,13 @@ open class KotlinPlatformImplementationPluginBase(platformName: String) : Kotlin
         project.kotlinExtension.sourceSets
 
     protected open fun addCommonSourceSetToPlatformSourceSet(commonSourceSet: Named, platformProject: Project) {
-        platformProject.whenEvaluated {
+        platformProject.whenEkonstuated {
             // At the point when the source set in the platform module is created, the task does not exist
-            val platformTasks = platformProject.tasks
+            konst platformTasks = platformProject.tasks
                 .withType(AbstractKotlinCompile::class.java)
                 .filter { it.sourceSetName.get() == commonSourceSet.name } // TODO use strict check once this code is not run in K/N
 
-            val commonSources = getKotlinSourceDirectorySetSafe(commonSourceSet)!!
+            konst commonSources = getKotlinSourceDirectorySetSafe(commonSourceSet)!!
             for (platformTask in platformTasks) {
                 platformTask.setSource(commonSources)
                 platformTask.commonSourceSet.from(commonSources)
@@ -176,15 +176,15 @@ open class KotlinPlatformImplementationPluginBase(platformName: String) : Kotlin
 
     private fun getKotlinSourceSetsSafe(project: Project): NamedDomainObjectCollection<out Named> {
         // Access through reflection, because another project's KotlinProjectExtension might be loaded by a different class loader:
-        val kotlinExt = project.extensions.getByName("kotlin")
+        konst kotlinExt = project.extensions.getByName("kotlin")
 
         @Suppress("UNCHECKED_CAST")
-        val sourceSets = kotlinExt.javaClass.getMethod("getSourceSets").invoke(kotlinExt) as NamedDomainObjectCollection<out Named>
+        konst sourceSets = kotlinExt.javaClass.getMethod("getSourceSets").invoke(kotlinExt) as NamedDomainObjectCollection<out Named>
         return sourceSets
     }
 
     protected fun getKotlinSourceDirectorySetSafe(from: Any): SourceDirectorySet? {
-        val getKotlin = from.javaClass.getMethod("getKotlin")
+        konst getKotlin = from.javaClass.getMethod("getKotlin")
         return getKotlin(from) as? SourceDirectorySet
     }
 
@@ -192,35 +192,35 @@ open class KotlinPlatformImplementationPluginBase(platformName: String) : Kotlin
     protected open fun addCommonSourceSetToPlatformSourceSet(sourceSet: SourceSet, platformProject: Project) = Unit
 
     @Deprecated("Retained for older Kotlin/Native MPP plugin binary compatibility", level = DeprecationLevel.ERROR)
-    protected val SourceSet.kotlin: SourceDirectorySet?
+    protected konst SourceSet.kotlin: SourceDirectorySet?
         get() {
             @Suppress("DEPRECATION")
             return getExtension(KOTLIN_DSL_NAME) ?: getExtension(KOTLIN_JS_DSL_NAME)
         }
 }
 
-internal fun <T> Project.whenEvaluated(fn: Project.() -> T) {
+internal fun <T> Project.whenEkonstuated(fn: Project.() -> T) {
     if (state.executed) {
         fn()
         return
     }
 
-    /** If there's already an Android plugin applied, just dispatch the action to `afterEvaluate`, it gets executed after AGP's actions */
+    /** If there's already an Android plugin applied, just dispatch the action to `afterEkonstuate`, it gets executed after AGP's actions */
     if (androidPluginIds.any { pluginManager.hasPlugin(it) }) {
-        afterEvaluate { fn() }
+        afterEkonstuate { fn() }
         return
     }
 
-    val isDispatchedAfterAndroid = AtomicBoolean(false)
+    konst isDispatchedAfterAndroid = AtomicBoolean(false)
 
     /**
-     * This queue holds all actions submitted to `whenEvaluated` in this project, waiting for one of the Android plugins to be applied.
-     * After (and if) an Android plugin gets applied, we dispatch all the actions in the queue to `afterEvaluate`, so that they are
-     * executed after what AGP scheduled to `afterEvaluate`. There are different Android plugins, so actions in the queue also need to check
+     * This queue holds all actions submitted to `whenEkonstuated` in this project, waiting for one of the Android plugins to be applied.
+     * After (and if) an Android plugin gets applied, we dispatch all the actions in the queue to `afterEkonstuate`, so that they are
+     * executed after what AGP scheduled to `afterEkonstuate`. There are different Android plugins, so actions in the queue also need to check
      * if it's the first Android plugin, using `isDispatched` (each has its own instance).
      */
-    val afterAndroidDispatchQueue = project.extensions.extraProperties.getOrPut("org.jetbrains.kotlin.whenEvaluated") {
-        val queue = mutableListOf<() -> Unit>()
+    konst afterAndroidDispatchQueue = project.extensions.extraProperties.getOrPut("org.jetbrains.kotlin.whenEkonstuated") {
+        konst queue = mutableListOf<() -> Unit>()
         // Trigger the actions on any plugin applied; the actions themselves ensure that they only dispatch the fn once.
         androidPluginIds.forEach { id ->
             pluginManager.withPlugin(id) { queue.forEach { it() } }
@@ -229,11 +229,11 @@ internal fun <T> Project.whenEvaluated(fn: Project.() -> T) {
     }
     afterAndroidDispatchQueue.add {
         if (!isDispatchedAfterAndroid.getAndSet(true)) {
-            afterEvaluate { fn() }
+            afterEkonstuate { fn() }
         }
     }
 
-    afterEvaluate {
+    afterEkonstuate {
         /** If no Android plugin was loaded, then the action was not dispatched, and we can freely execute it now */
         if (!isDispatchedAfterAndroid.getAndSet(true)) {
             fn()
@@ -241,13 +241,13 @@ internal fun <T> Project.whenEvaluated(fn: Project.() -> T) {
     }
 }
 
-internal val KOTLIN_12X_MPP_DEPRECATION_WARNING = "\n" + """
+internal konst KOTLIN_12X_MPP_DEPRECATION_WARNING = "\n" + """
     The 'org.jetbrains.kotlin.platform.*' plugins are deprecated and will no longer be available in Kotlin 1.4.
     Please migrate the project to the 'org.jetbrains.kotlin.multiplatform' plugin.
     See: https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html
     """.trimIndent()
 
-private const val KOTLIN_12X_MPP_DEPRECATION_SUPPRESS_FLAG = "kotlin.internal.mpp12x.deprecation.suppress"
+private const konst KOTLIN_12X_MPP_DEPRECATION_SUPPRESS_FLAG = "kotlin.internal.mpp12x.deprecation.suppress"
 
 internal fun warnAboutKotlin12xMppDeprecation(project: Project) {
     if (project.findProperty(KOTLIN_12X_MPP_DEPRECATION_SUPPRESS_FLAG) != "true") {

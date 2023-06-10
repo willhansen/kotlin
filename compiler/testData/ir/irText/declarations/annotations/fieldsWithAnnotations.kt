@@ -1,9 +1,9 @@
 // FIR_IDENTICAL
 
-annotation class TestAnn(val x: String)
+annotation class TestAnn(konst x: String)
 
 @field:TestAnn("testVal.field")
-val testVal = "a val"
+konst testVal = "a konst"
 
 @field:TestAnn("testVar.field")
 var testVar = "a var"

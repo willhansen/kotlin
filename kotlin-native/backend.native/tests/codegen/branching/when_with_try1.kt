@@ -13,10 +13,10 @@ import kotlin.test.*
     println(foo("42"))
 }
 
-fun foo(value: Any): Int? {
-    if (value is CharSequence) {
+fun foo(konstue: Any): Int? {
+    if (konstue is CharSequence) {
         try {
-            return value.toString().toInt()
+            return konstue.toString().toInt()
         } catch (e: NumberFormatException) {
             return null
         }

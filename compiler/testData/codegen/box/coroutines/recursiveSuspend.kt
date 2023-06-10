@@ -23,10 +23,10 @@ fun box(): String {
 
 suspend fun factorial(a: Int): Int = if (a > 0) suspendHere(factorial(a - 1) * a) else suspendHere(1)
 
-suspend fun suspendHere(value: Int): Int = suspendCoroutineUninterceptedOrReturn { x ->
+suspend fun suspendHere(konstue: Int): Int = suspendCoroutineUninterceptedOrReturn { x ->
     postponed = {
-        log += "$value;"
-        x.resume(value)
+        log += "$konstue;"
+        x.resume(konstue)
     }
     COROUTINE_SUSPENDED
 }

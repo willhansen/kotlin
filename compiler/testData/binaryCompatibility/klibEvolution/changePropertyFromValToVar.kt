@@ -2,10 +2,10 @@
 // FILE: A.kt
 // VERSION: 1
 
-val bar = "global val initialization value"
+konst bar = "global konst initialization konstue"
 
 class X {
-    val qux = "member val initialization value"
+    konst qux = "member konst initialization konstue"
 }
 
 fun foo(x: X) {
@@ -15,15 +15,15 @@ fun foo(x: X) {
 // FILE: B.kt
 // VERSION: 2
 
-var bar = "global var initialization value"
+var bar = "global var initialization konstue"
 
 class X {
-    var qux = "member var initialization value"
+    var qux = "member var initialization konstue"
 }
 
 fun foo(x: X) {
-    bar = "changed global value"
-    x.qux = "changed member value"
+    bar = "changed global konstue"
+    x.qux = "changed member konstue"
     
 }
 
@@ -31,12 +31,12 @@ fun foo(x: X) {
 // MODULE: mainLib(lib)
 // FILE: mainLib.kt
 fun lib(): String {
-    val x = X()
+    konst x = X()
     foo(x)
 
     return when {
-        bar != "changed global value" -> "fail 1"
-        x.qux != "changed member value" -> "fail 2"
+        bar != "changed global konstue" -> "fail 1"
+        x.qux != "changed member konstue" -> "fail 2"
 
         else -> "OK"
     }

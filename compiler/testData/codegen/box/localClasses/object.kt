@@ -1,6 +1,6 @@
 fun box(): String {
-    val k = object {
-        val ok = "OK"
+    konst k = object {
+        konst ok = "OK"
     }
 
     return k.ok

@@ -15,7 +15,7 @@ fun expectUoe(block: () -> Any) {
 }
 
 fun box(): String {
-    val a = A<String>() as java.util.List<String>
+    konst a = A<String>() as java.util.List<String>
     expectUoe { a.add("") }
     expectUoe { a.remove("") }
     expectUoe { a.addAll(a) }
@@ -30,7 +30,7 @@ fun box(): String {
     a.listIterator(0)
     a.subList(0, 0)
 
-    val b = B() as java.util.List<String>
+    konst b = B() as java.util.List<String>
     expectUoe { b.add("") }
     expectUoe { b.remove("") }
     expectUoe { b.addAll(b) }

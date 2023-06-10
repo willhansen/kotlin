@@ -1,5 +1,5 @@
 // See also KT-6299
-public open class Outer private constructor(val s: String) {
+public open class Outer private constructor(konst s: String) {
     inner class Inner: Outer("O") {
         fun foo(): String {
             return this.s + this@Outer.s
@@ -10,6 +10,6 @@ public open class Outer private constructor(val s: String) {
 }
 
 fun box(): String {
-    val inner = Outer.Nested().bar()
+    konst inner = Outer.Nested().bar()
     return inner.foo()
 }

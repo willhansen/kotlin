@@ -16,12 +16,12 @@
  * NOTE: right-hand side of an assignment must be expression
  */
 fun case1() {
-    val x = <!EXPRESSION_EXPECTED!>for (<!SYNTAX!><!>) { }<!>
-    val y = <!EXPRESSION_EXPECTED!>for (<!NAME_SHADOWING!>x<!> in 1..2) { }<!>
+    konst x = <!EXPRESSION_EXPECTED!>for (<!SYNTAX!><!>) { }<!>
+    konst y = <!EXPRESSION_EXPECTED!>for (<!NAME_SHADOWING!>x<!> in 1..2) { }<!>
 
-    val a = <!EXPRESSION_EXPECTED!>while (<!SYNTAX!><!>) { }<!>
-    val b = <!EXPRESSION_EXPECTED!>while (false) { }<!>
-    val c = <!EXPRESSION_EXPECTED!>while (<!SYNTAX!><!>) <!>;
+    konst a = <!EXPRESSION_EXPECTED!>while (<!SYNTAX!><!>) { }<!>
+    konst b = <!EXPRESSION_EXPECTED!>while (false) { }<!>
+    konst c = <!EXPRESSION_EXPECTED!>while (<!SYNTAX!><!>) <!>;
 }
 
 /*

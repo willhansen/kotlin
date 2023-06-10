@@ -7,23 +7,23 @@ import org.jetbrains.kotlin.compiler.plugin.*
 import org.jetbrains.kotlin.config.*
 
 object TestPluginKeys {
-    val TestOption = CompilerConfigurationKey.create<String>("test option")
+    konst TestOption = CompilerConfigurationKey.create<String>("test option")
 }
 
 class TestCommandLineProcessor : CommandLineProcessor {
     companion object {
-        val TestPluginId = "org.jetbrains.kotlin.test.test-plugin"
-        val MyTestOption = CliOption("test-option", "", "", true, false)
+        konst TestPluginId = "org.jetbrains.kotlin.test.test-plugin"
+        konst MyTestOption = CliOption("test-option", "", "", true, false)
     }
 
-    override val pluginId: String = TestPluginId
+    override konst pluginId: String = TestPluginId
 
-    override val pluginOptions: Collection<CliOption> = listOf(MyTestOption)
+    override konst pluginOptions: Collection<CliOption> = listOf(MyTestOption)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) {
         when (option) {
             MyTestOption -> {
-                configuration.put(TestPluginKeys.TestOption, value)
+                configuration.put(TestPluginKeys.TestOption, konstue)
             }
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }
@@ -32,13 +32,13 @@ class TestCommandLineProcessor : CommandLineProcessor {
 
 class TestKotlinPluginRegistrar : CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        val collector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)!!
-        val option = configuration.get(TestPluginKeys.TestOption)!!
+        konst collector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)!!
+        konst option = configuration.get(TestPluginKeys.TestOption)!!
 
         collector.report(CompilerMessageSeverity.INFO, "Plugin applied")
-        collector.report(CompilerMessageSeverity.INFO, "Option value: $option")
+        collector.report(CompilerMessageSeverity.INFO, "Option konstue: $option")
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 }

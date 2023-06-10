@@ -27,7 +27,7 @@ class Case2 {
     class catch(e: Exception) {}
 
     fun case2() {
-        val c = catch(Exception())
+        konst c = catch(Exception())
     }
 }
 
@@ -45,7 +45,7 @@ class Case4 {
     class catch() {}
 
     fun case4() {
-        val c = catch()
+        konst c = catch()
     }
 }
 
@@ -55,7 +55,7 @@ class Case5() {
     interface catch
 
     fun case5(){
-        val c = object :catch{}
+        konst c = object :catch{}
     }
 }
 

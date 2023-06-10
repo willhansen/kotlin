@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
 class C {
     @Suppress("warnings")
-    val foo: String?? = null as Nothing?
+    konst foo: String?? = null as Nothing?
 }
